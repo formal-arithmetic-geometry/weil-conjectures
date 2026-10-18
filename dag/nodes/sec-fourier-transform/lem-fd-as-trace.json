@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-fd-as-trace",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Trace function of the Artin–Schreier sheaf",
@@ -13,34 +13,165 @@
   "place": "node lem-fd-as-trace, order 2687"
  },
  "stmt_deps": [
+  "sk-def-fourier-set",
+  "sk-def-as",
   "def-fd-additive-character",
   "def-fd-artin-schreier-sheaf",
+  "def-fd-trace-function",
   "def-weil-local-frobenius-trace"
  ],
  "proof": [
   {
-   "text": "Fix a closed point $u$ of $\\mathbf A^1_{k_0}$ of degree $n$, with\n$u\\in\\kappa(u)\\subset \\overline k$ its image and geometric point\n$\\bar u$, and let $F_u$ be the local Frobenius operator of\n[def-weil-local-frobenius-trace] (the $n$-fold iterate of the\ngeometric Frobenius), which acts on functions on the fibre by pullback\nalong $y\\mapsto y^{q^n}$. By the affine-line covering\n[lem-fd-as-cover-affine-line], the fibre of\n$\\pi:Y\\to\\mathbf A^1_{k_0}$, $y\\mapsto y^p-y$, over $\\bar u$ is\nthe set\n\n$$\nY_{\\bar u}=\\{y\\in\\overline k:\\ y^p-y=au\\},\n$$\n\nwhich is an $\\mathbf F_p$-torsor (the difference of two roots is a\nroot of $X^p-X$, hence lies in $\\mathbf F_p$; the polynomial\n$T^p-T-au$ is separable). The stalk\n$(\\pi_*\\overline{\\mathbf Q}_\\ell)_{\\bar u}$ is the space of functions on\n$Y_{\\bar u}$, with $\\sigma_c$ ($c\\in\\mathbf F_p$) acting by pullback along\n$y\\mapsto y+c$, and $(\\mathcal L_{\\psi,ax})_{\\bar u}$ is the image of the\nidempotent $e_\\Psi$ of [def-fd-artin-schreier-sheaf], on which $\\sigma_c$\nacts by $\\Psi(c)$. For $y\\in Y_{\\bar u}$, induction on $j$ gives\n\n$$\ny^{p^j}=y+\\sum_{0\\leq i<j}(au)^{p^i},\n\\qquad\\text{so}\\qquad\ny^{q^n}=y^{p^m}=y+\\operatorname{Tr}_{\\kappa(u)/\\mathbf F_p}(au),\n\\quad m=[\\kappa(u):\\mathbf F_p],\n$$\n\nbecause the conjugates of $au\\in\\kappa(u)$ over $\\mathbf F_p$ are the\n$(au)^{p^i}$, $0\\le i<m$. Hence $F_u$ acts on the functions on\n$Y_{\\bar u}$ as $\\sigma_t$ with\n$t=\\operatorname{Tr}_{\\kappa(u)/\\mathbf F_p}(au)\\in\\mathbf F_p$, and so on\nthe rank-one $\\Psi$-isotypic stalk by the scalar $\\Psi(t)$. By\ntransitivity of the trace,\n$\\Psi(\\operatorname{Tr}_{\\kappa(u)/\\mathbf F_p}(au))\n=\\Psi(\\operatorname{Tr}_{k_0/\\mathbf F_p}\\operatorname{Tr}_{\\kappa(u)/k_0}(au))\n=\\psi(\\operatorname{Tr}_{\\kappa(u)/k_0}(au))$, which is the announced\nformula; for an $\\mathbf F_{q^n}$-point the same computation applies with\n$\\kappa(u)$ replaced by $\\mathbf F_{q^n}$.",
+   "text": "Work with the current $\\mathrm{AS}_q$ definition, as stated literally in [sk-def-as], and the rational adic coefficient convention [sk-def-fourier-set]. Choose its finite extension $E/\\mathbf Q_\\ell\\subset\\overline{\\mathbf Q}_\\ell$ containing $\\mu_p$, so that $\\psi$ is $E$-valued. On $A_0=\\mathbf A^1_{k_0}$ let $\\pi_0:\\mathbf A^1_{k_0}\\to A_0$ be $y\\mapsto y^q-y$. Clause 1 of [lem-a1-artin-schreier-trace-cover-map], with $X=A_0$, $f=x$ and auxiliary $b=1$, says that $\\pi_0$ is finite etale and its geometric fibres are $k_0$-torsors under translation. Let $M_E=R\\pi_*E$ on the geometric line, where $E$ has its canonical Weil structure [def-weil-constant-weil-structure]. The finite adic direct-image theorem [lem-zl-finite-adic-direct-image] makes $M_E$ a constructible sheaf in degree zero. The direct-image and automorphism equivariance of [lem-fix-weil-operations] equip it with a Weil isomorphism and make every translation $\\sigma_c^*$ an equivariant endomorphism. All operations here take place in $D^b_c(-,E)$; $E$ is a rational coefficient field, not a torsion coefficient ring.",
+   "uses": [
+    "sk-def-as",
+    "sk-def-fourier-set",
+    "lem-a1-artin-schreier-trace-cover-map",
+    "def-weil-constant-weil-structure",
+    "lem-zl-finite-adic-direct-image",
+    "lem-fix-weil-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-as-trace.proof.md",
+    "place": "Fibre-function calculation, using the current degree-q definition in sk-def-as/def-fd-artin-schreier-sheaf.md instead of the paragraph's obsolete degree-p presentation"
+   }
+  },
+  {
+   "text": "In the constructible heart [def-weil-constructible-heart] take the idempotent $e_\\psi=q^{-1}\\sum_{c\\in k_0}\\psi(-c)\\sigma_c^*$ of [sk-def-as]. By [prop-weil-heart-abelian] it splits; put $N_E=\\operatorname{im}e_\\psi$. Equivariance of each translation implies $e_\\psi\\theta=\\theta\\,g^*e_\\psi$, so restricting $\\theta$ and its inverse to the image gives an invertible Weil map on $N_E$. For the $k_0$-isomorphism $m_a:x\\mapsto ax$ put $K_E=Lm_a^*N_E$ with the pullback Weil structure of [lem-fix-weil-operations]. Pullback is exact on the constructible heart and on point fibres by [lem-a1-constructible-pullback-t-exact], so $K_E$ is again a sheaf and its stalk is the image of the pulled-back projector. This is precisely the $E$-model of $\\mathcal L_{\\psi,ax}$: [sk-def-as] defines $\\mathcal L_\\psi$ by this projector on $(\\mathrm{AS}_q)_*E$ and defines $\\mathcal L_{\\psi,ax}=m_a^*\\mathcal L_\\psi$. This is also the current blueprint_update of def-fd-artin-schreier-sheaf. No identification of a degree-$q$ cover with a degree-$p$ cover is made.",
+   "uses": [
+    "def-weil-constructible-heart",
+    "sk-def-as",
+    "prop-weil-heart-abelian",
+    "lem-fix-weil-operations",
+    "lem-a1-constructible-pullback-t-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-as-trace.proof.md",
+    "place": "Fibre-function calculation, using the current degree-q definition in sk-def-as/def-fd-artin-schreier-sheaf.md instead of the paragraph's obsolete degree-p presentation"
+   }
+  },
+  {
+   "text": "Let $n\\ge1$, let $u\\in A_0(\\mathbf F_{q^n})$ and put $b=au$, so $m_a\\bar u=\\bar z$ is the point $x=b$. Pullback composition [lem-pod-integral-pullback-composition], rationalized as in [def-weil-local-frobenius-trace], identifies the point complex of $Lm_a^*M_E$ at $\\bar u$ with that of $M_E$ at $\\bar z$. By [lem-zl-finite-adic-direct-image] the latter is $E^{P}$ in degree zero, $P$ the geometric points $\\bar y$ of the cover over $\\bar z$, identified by their coordinate $y(\\bar y)$ with $S_b=\\{y\\in k:y^q-y=b\\}$; translation acts as $(\\sigma_c^*h)(y)=h(y+c)$. Evaluate the composite defining $F_u^{(n)}$ in [def-weil-local-frobenius-trace], where $\\gamma=\\varphi_q^{-1}$ and $g$ is $g_Y$ on the cover. By the stated naturality of [lem-zl-finite-adic-direct-image] in semilinear isomorphisms, the point transport [def-weil-frobenius-point-transport] sends $h$ to $h'$ with $h'(\\bar y g_s^n)=h(\\bar y)$; the direct-image Weil map, followed by the canonical constant map [def-weil-constant-weil-structure], which keeps values in $E$, sends $h'$ to $\\bar y\\mapsto h'(g^n\\bar y)$. So $F_u^{(n)}h(\\bar y)=h(\\bar y')$ with $\\bar y'g_s^n=g^n\\bar y$. On the coordinate ring of the cover both ring maps send $c\\mapsto\\gamma^n(c)$, and $y$ to $\\gamma^n(y(\\bar y'))$, resp. $y(\\bar y)$; hence $y(\\bar y')=y(\\bar y)^{q^n}$ and the composite is $h\\mapsto(y\\mapsto h(y^{q^n}))$. The return holds since $b\\in\\mathbf F_{q^n}$, and $m_a$ is defined over $k_0$, so it commutes with $g$. Naturality of point transport [lem-weil-frobenius-point-transport-natural] carries the projector through this composite, so the local operator of $K_E$ is the restriction of this operator to $e_\\psi E^{S_b}$.",
+   "uses": [
+    "lem-pod-integral-pullback-composition",
+    "def-weil-local-frobenius-trace",
+    "lem-zl-finite-adic-direct-image",
+    "def-weil-frobenius-point-transport",
+    "def-weil-constant-weil-structure",
+    "lem-weil-frobenius-point-transport-natural"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-as-trace.proof.md",
+    "place": "Fibre-function calculation, using the current degree-q definition in sk-def-as/def-fd-artin-schreier-sheaf.md instead of the paragraph's obsolete degree-p presentation"
+   }
+  },
+  {
+   "text": "The equation $y^q=y+b$ gives, by induction, $y^{q^j}=y+\\sum_{i<j}b^{q^i}$: raise the formula to the $q$-th power and substitute $y^q=y+b$. By [lem-a1-finite-field-trace-frobenius-sum] for $k_0\\subset\\mathbf F_{q^n}$, put $t=\\operatorname{Tr}_{\\mathbf F_{q^n}/k_0}(b)=\\sum_{i<n}b^{q^i}\\in k_0$. Hence $y^{q^n}=y+t$, and the operator in step 3 is exactly $\\sigma_t^*$. The $\\psi$-isotypic space of [sk-def-as] is one-dimensional: choose $y_0\\in S_b$; the torsor assertion of [lem-a1-artin-schreier-trace-cover-map](1) gives $S_b=y_0+k_0$. A $\\psi$-eigenfunction must satisfy $h(y_0+c)=\\psi(c)h(y_0)$, so evaluation at $y_0$ identifies this space with $E$; conversely this formula defines an eigenfunction for every value in $E$. On it $\\sigma_t^*$ is multiplication by $\\psi(t)$. Its ordinary trace is consequently $\\psi(t)$, with no higher-degree contribution.",
+   "uses": [
+    "lem-a1-finite-field-trace-frobenius-sum",
+    "sk-def-as",
+    "lem-a1-artin-schreier-trace-cover-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-as-trace.proof.md",
+    "place": "Fibre-function calculation, using the current degree-q definition in sk-def-as/def-fd-artin-schreier-sheaf.md instead of the paragraph's obsolete degree-p presentation"
+   }
+  },
+  {
+   "text": "Pass from the constructed $E$-Weil pair $K_E=(M,\\theta)$ to the framework $\\overline{\\mathbf Q}_\\ell$-pair $((E,M),[E,\\theta])$ exactly as in [def-weil-weil-sheaf-complex](4), including the inverse $[E,\\theta^{-1}]$. For $X=\\mathbf A^1_k$, the equivalence $J_X$ of [lem-fd-rational-coefficient-category-comparison] sends this to the PBC pair whose underlying object is $(E,J_{X,E}M)$ and whose Weil isomorphism is the composite $Lg_X^{*,\\mathrm{pbc}}J_X(E,M)\\xrightarrow{\\sim}J_XLg_X^{*,\\mathrm{sf}}(E,M)\\xrightarrow{J_X[E,\\theta]}J_X(E,M)$. The first arrow is the inverse of that lemma's specified Frobenius comparison; its finite-stage compatibility ensures this is the entire pair corresponding to $K_E$. The hypotheses hold: the geometric affine line is noetherian, of dimension one, and $\\ell$ is invertible. By the prescription of [def-fd-trace-function], evaluate this PBC pair by the corresponding framework pair and its model $K_E$, taking the finite alternating trace in $E$ and including it into $\\overline{\\mathbf Q}_\\ell$. Step 4 therefore gives $t_{\\mathcal L_{\\psi,ax},n}(u)=\\psi(\\operatorname{Tr}_{\\mathbf F_{q^n}/k_0}(au))$. This passage retains the Weil map, rather than identifying the coefficient categories just by their underlying objects.",
+   "uses": [
+    "def-weil-weil-sheaf-complex",
+    "lem-fd-rational-coefficient-category-comparison",
+    "def-fd-trace-function"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-as-trace.proof.md",
+    "place": "Fibre-function calculation, using the current degree-q definition in sk-def-as/def-fd-artin-schreier-sheaf.md instead of the paragraph's obsolete degree-p presentation"
+   }
+  },
+  {
+   "text": "For a closed point $u$ of degree $n$, choose its residue-field embedding in $k$ and apply the preceding calculation with $\\mathbf F_{q^n}=\\kappa(u)$; its local operator is precisely $F_u$ by [def-weil-local-frobenius-trace]. To verify the second equality without an uncited trace-transitivity theorem, write $q=p^r$ and $b=au$. Apply [lem-a1-finite-field-trace-frobenius-sum] to $k_0/\\mathbf F_p$, $\\kappa(u)/k_0$ and $\\kappa(u)/\\mathbf F_p$. In $\\kappa(u)$ this gives $\\operatorname{Tr}_{k_0/\\mathbf F_p}(\\operatorname{Tr}_{\\kappa(u)/k_0}(b))=\\sum_{i<r}(\\sum_{j<n}b^{p^{rj}})^{p^i}=\\sum_{j<n}\\sum_{i<r}b^{p^{rj+i}}=\\operatorname{Tr}_{\\kappa(u)/\\mathbf F_p}(b)$. The middle equality uses additivity of Frobenius in characteristic $p$ and the bijection $(j,i)\\mapsto rj+i$ onto $\\{0,\\ldots,rn-1\\}$. Since $\\psi=\\Psi\\circ\\operatorname{Tr}_{k_0/\\mathbf F_p}$ by [def-fd-additive-character], applying $\\Psi$ gives the second displayed equality. Steps 3–5 already apply to every $\\mathbf F_{q^n}$-rational point, even one whose closed-point degree is a proper divisor of $n$, and give the final asserted formula with the $n$-fold local operator.",
    "uses": [
     "def-weil-local-frobenius-trace",
-    "lem-fd-as-cover-affine-line",
-    "def-fd-artin-schreier-sheaf"
+    "lem-a1-finite-field-trace-frobenius-sum",
+    "def-fd-additive-character"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-as-trace.proof.md",
+    "place": "Fibre-function calculation, using the current degree-q definition in sk-def-as/def-fd-artin-schreier-sheaf.md instead of the paragraph's obsolete degree-p presentation"
+   }
   }
  ],
  "proof_deps": [
+  "sk-def-as",
+  "sk-def-fourier-set",
+  "lem-a1-artin-schreier-trace-cover-map",
+  "def-weil-constant-weil-structure",
+  "lem-zl-finite-adic-direct-image",
+  "lem-fix-weil-operations",
+  "def-weil-constructible-heart",
+  "prop-weil-heart-abelian",
+  "lem-a1-constructible-pullback-t-exact",
+  "lem-pod-integral-pullback-composition",
   "def-weil-local-frobenius-trace",
-  "lem-fd-as-cover-affine-line",
-  "def-fd-artin-schreier-sheaf"
+  "def-weil-frobenius-point-transport",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-a1-finite-field-trace-frobenius-sum",
+  "def-weil-weil-sheaf-complex",
+  "lem-fd-rational-coefficient-category-comparison",
+  "def-fd-trace-function",
+  "def-fd-additive-character"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-as-trace.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-lem-as-properties/lem-fd-as-trace.proof.md",
+  "place": "Fibre-function calculation, using the current degree-q definition in sk-def-as/def-fd-artin-schreier-sheaf.md instead of the paragraph's obsolete degree-p presentation"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ArtinSchreier|artinSchreier|WeilSheaf|localFrobenius",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match: no rational adic Artin–Schreier Weil-sheaf trace formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite etale torsor pushforward constant adic sheaf geometric stalk is functions on the fibre Frobenius permutes the fibre",
+   "results": "8 hits: TopCat.Presheaf.stalkPushforward, TopCat.Presheaf.stalkPushforward_germ_apply, AlgebraicGeometry.StructureSheaf.algebraMap_pushforward_stalk, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, SheafOfModules.pushforwardSections, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, AlgebraicGeometry.Scheme.Modules.instFullPushforward, TopCat.Presheaf.stalkPushforward_germ",
+   "date": "2026-10-18",
+   "verdict": "no match: no rational adic Artin–Schreier Weil-sheaf trace formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ArtinSchreier\"",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match: no rational adic Artin–Schreier Weil-sheaf trace formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Artin Schreier q power cover pullback additive character sheaf adic rational Weil stalk local Frobenius fibre functions",
+   "results": "8 hits: arithFrobAt, WittVector.StandardOneDimIsocrystal, IsArithFrobAt.arithFrobAt, WittVector.exists_frobenius_solution_fractionRing_aux, AlgHom.IsArithFrobAt.apply_of_pow_eq_one, AlgHom.IsArithFrobAt.mk_apply, WittVector.instIsocrystalStandardOneDimIsocrystal, WittVector.exists_frobenius_solution_fractionRing",
+   "date": "2026-10-18",
+   "verdict": "no match: no rational adic Artin–Schreier Weil-sheaf trace formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite etale Galois cover over a finite field gives a permutation representation on its stalk compatible with Frobenius and character idempotents",
+   "results": "8 hits: arithFrobAt, finGaloisGroupFunctor, IsArithFrobAt.arithFrobAt, FiniteField.Extension.frob, finGaloisGroupMap, FiniteField.frobeniusAlgEquivOfAlgebraic, CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family, CategoryTheory.PreGaloisCategory.action_ext_of_isGalois",
+   "date": "2026-10-18",
+   "verdict": "no match: no rational adic Artin–Schreier Weil-sheaf trace formula"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -102,5 +233,64 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-fd-as-trace",
+  "worker": "stage1",
+  "summary": "Replaced the degree-p calculation by a direct degree-q calculation consistent with the current AS_q definition. Withdrew the unmerged duplicate helper in favor of the existing finite adic direct-image theorem, and wrote the canonical rational E-Weil model, its isotypic image and pullback, the explicit stalk operator, and transport of the entire pair through J_X to the trace-function category. Reused the existing finite-field trace Mathlib leaf. The item statement is unchanged; no unit realization is claimed.",
+  "blueprint": "Realizes only the trace clause of sk-lem-as-properties. The fibre-functions, Frobenius-translation and character-scalar argument of lem-fd-as-trace.proof.md is carried out for AS_q and e_psi, as required by the updated definition; the unit statement and the other unit clauses are not claimed realized.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-artin-schreier-trace-cover-map",
+    "why": "Only clause 1 supplies the degree-q cover and its translation torsor, with auxiliary b=1; the unit's imported cover node is still the degree-p version, so does not literally state this current-definition case."
+   },
+   {
+    "node": "lem-zl-finite-adic-direct-image",
+    "why": "Generic finite-morphism t-exactness and stalk decomposition, including naturality for semilinear isomorphisms; no Fourier-unit node gives this rational adic interface."
+   },
+   {
+    "node": "lem-fix-weil-operations",
+    "why": "Generic equivariance of finite direct image, pullback and their algebraic maps supplies canonical Weil structures; it does not supply or replace the trace calculation."
+   },
+   {
+    "node": "prop-weil-heart-abelian",
+    "why": "Generic splitting of the isotypic idempotent in the constructible heart; no Fourier-unit statement supplies the categorical splitting."
+   },
+   {
+    "node": "lem-a1-constructible-pullback-t-exact",
+    "why": "Generic exactness of pullback and point-fibre evaluation justifies images and degree-zero stalks; no Fourier-unit node gives this rational coefficient assertion."
+   },
+   {
+    "node": "lem-pod-integral-pullback-composition",
+    "why": "Generic pullback composition, rationalized by the coefficient convention, identifies the point complex of m_a^*M with that at m_a(u)."
+   },
+   {
+    "node": "lem-weil-frobenius-point-transport-natural",
+    "why": "Generic point-transport naturality allows restriction of the computed stalk operator to the equivariant projector image."
+   },
+   {
+    "node": "lem-fd-rational-coefficient-category-comparison",
+    "why": "The specified Frobenius-compatible equivalence transports the whole E-stage Weil model to the PBC pair used by the trace-function definition; no node of the AS-properties unit supplies this coefficient comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-artin-schreier-trace-cover-map",
+  "lem-zl-finite-adic-direct-image",
+  "lem-fix-weil-operations",
+  "prop-weil-heart-abelian",
+  "lem-a1-constructible-pullback-t-exact",
+  "lem-pod-integral-pullback-composition",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-fd-rational-coefficient-category-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q103-620318dd0",
+  "group": "Q103",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-620318dd0 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 18 cited statements, the main-20261015 unit sk-lem-as-properties, lem-fd-as-trace.md/.proof.md, and sk-def-as/def-fd-artin-schreier-sheaf.md. No new nodes. Statement unchanged and not weakened. The proof uses the current AS_q definition (sk-def-as, and the blueprint_update of def-fd-artin-schreier-sheaf). The statement holds under both the p-cover and q-cover readings (step 6 trace transitivity). The source error is accepted: the unit's paragraph still computes on the degree-p cover, and for F_4 the two covers have degree 2 vs 4; the maintainer should record this in HUMAN.md. Steps checked: clause 1 of lem-a1-artin-schreier-trace-cover-map with b=1; lem-zl-finite-adic-direct-image (finite morphism, separated finite-type schemes, Lambda=E); equivariance from lem-fix-weil-operations; idempotent splitting in the heart; m_a a k_0-isomorphism since a≠0; J_X hypotheses on A^1_k; def-fd-trace-function's E-model prescription; induction y^{q^j}=y+sum b^{q^i}; Mathlib trace leaf; the double-sum transitivity. Small cases checked: q=2, q=4 with u=1,omega, p=3 over F_9. Sign verified from def-weil-frobenius-detailed (gamma=phi_q^{-1}): point transport h'(ybar g_s^n)=h(ybar), then the direct-image Weil map gives F h(ybar)=h(ybar') with gamma^n(y(ybar'))=y(ybar), so F h(y)=h(y^{q^n}) and the scalar is psi(Tr), not psi(-Tr). FIX (E5): step 3 justified this with one compressed and literally inaccurate sentence about restriction; I rewrote step 3 with the explicit reindexing (same uses, 1680 chars) in fixes/dag/nodes/sec-fourier-transform/lem-fd-as-trace.json. Batch-5 check: the item's closure contains neither nt-assume-trace-formula, nt-assume-poincare-duality, sk-thm-trace-transport nor sk-thm-poincare-duality. All 75 trf/pod-chapter nodes it reaches are already in the closure of its statement deps (mostly via def-weil-local-frobenius-trace). Flagged citations accepted: sk-def-fourier-set, sk-def-as and def-fd-trace-function are general definitions; lem-fix-weil-operations, lem-a1-constructible-pullback-t-exact, lem-pod-integral-pullback-composition and lem-weil-frobenius-point-transport-natural are generic coherence/exactness infrastructure, neither stated by nor a step of the trace formula or Poincare duality. No step uses either theorem. All 8 declared tool_uses accepted as generic black boxes.; 1 file(s) fixed by the reviewer"
  }
 }
