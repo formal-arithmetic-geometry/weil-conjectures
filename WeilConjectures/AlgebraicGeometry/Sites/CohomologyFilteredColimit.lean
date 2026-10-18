@@ -197,8 +197,8 @@ lemma exists_finite_cechNerveObj_of_mem_smallEtaleTopology (V : X.Etale)
     (ofArrows_mem_smallEtaleTopology_iff g).2 hg⟩
   refine compactSpace_and_quasiSeparatedSpace_piObj _ fun l ↦ ?_
   have := hU (y l)
-  exact ⟨inferInstanceAs (CompactSpace (U (y l)).left),
-    inferInstanceAs (QuasiSeparatedSpace (U (y l)).left)⟩
+  exact ⟨Scheme.compactSpace_of_isAffine (U (y l)).left,
+    quasiSeparatedSpace_of_isAffine (U (y l)).left⟩
 
 variable {K : Type (u + 1)} [SmallCategory K] [IsFiltered K]
   {F : K ⥤ Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}} {c : Cocone F}
