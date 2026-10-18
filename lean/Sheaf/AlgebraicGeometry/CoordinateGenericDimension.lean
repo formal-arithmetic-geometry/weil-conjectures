@@ -11,15 +11,7 @@ public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Sheaf.AlgebraicGeometry.FunctionField
 public import WeilConjectures.Mathlib.Topology.KrullDimension
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
-import Mathlib.RingTheory.AlgebraicIndependent.TranscendenceBasis
-import Sheaf.AlgebraicGeometry.Morphisms.FiniteAffineTensorBaseChange
-import Sheaf.RingTheory.LocalizationPrimeResidueFieldIso
-import Sheaf.AlgebraicGeometry.ClosedIrreducibleDimensionTrdeg
+import WeilConjectures.AlgebraicGeometry.GenericFiber.CoordinateDimension
 
 /-!
 # Coordinate projections lower generic dimension
@@ -45,36 +37,17 @@ space lowers the dimension of the generic fibre by one. Empty fibres have dimens
 Source: blueprint, sec-smooth-purity, sk-prop-sf-cbc,
 lem-fin-coordinate-generic-dimension (blueprint: lem-fin-coordinate-generic-dimension).
 
-Proof:
-1. Scheme sobriety and integrality give generic points of `S` and its affine line.
-   On a nonempty affine base chart `Spec R`, the integral function-field affine-fraction
-   lemma identifies their generic residue fields with `K = Frac R` and `K(T)`.
-   Clearing coefficient denominators identifies `Frac R[T]` with `K(T)`.
-   The fibre-product universal property identifies the indicated fibre with the generic
-   fibre of the same coordinate on `X_K`; no Noetherian hypothesis on `S` is used.
-2. The composite of the open and closed immersions is an immersion. Base change preserves
-   immersions, which are locally of finite type. Affine space is locally of finite type
-   over the field, so composition and the affine-pairs criterion show every affine open
-   `Spec C` of `X_K` has a finitely generated `K`-algebra as coordinate ring.
-3. Finite affine tensor base change and the fibre-ring localization theorem identify its
-   coordinate generic fibre with `Spec D`, where `D = C ⊗[K[T]] K(T) = W⁻¹C` and
-   `W = {h(t) | h ≠ 0}`. The same generators make `D` finite type over `K(T)`.
-   The open-fibre-product lemma gives an open cover of the whole fibre by these charts.
-4. Localization prime and residue-field correspondence associates to each prime `Q` of
-   `D` a prime `p` of `C` avoiding `W`, and identifies their residue fields `E`.
-   Thus `K[T]` injects into `E`. The closed-irreducible dimension/transcendence-degree
-   theorem gives `trdeg_K E = dim V(p) ≤ dim X_K ≤ n`; the middle inequality follows
-   by taking closures of strict chains in the open chart.
-5. The transcendence-degree tower formula and the transcendence basis `{T}` of `K(T)`
-   give `trdeg_K E = trdeg_{K(T)} E + 1`. Hence the same dimension theorem over `K(T)`
-   bounds `dim V(Q)` by `n - 1`. If `n = 0`, there can be no such prime.
-6. Every finite chain of irreducible closed subsets of `Spec D` lies in its largest
-   member `V(Q)`, so has length at most `n - 1`. For a chain in the whole fibre choose
-   an affine fibre chart containing the generic point of its smallest member. Opens
-   are stable under generalization, so all generic points lie in this chart; intersection
-   preserves strictness since closures recover the original members. Taking the supremum
-   of chain lengths gives the bound, with dimension `⊥` for an empty fibre. Nilpotents
-   do not affect the prime ideals or these chains. -/
+Proof: The composite of the open immersion, closed immersion and affine-space projection
+is locally of finite type. Identify the affine line indexed by `ULift (Fin 1)` with the
+one indexed by `PUnit`, using the two constant reindexing maps. This isomorphism sends
+generic point to generic point, so the inverse images of these points in `X` agree;
+the fibre homeomorphisms therefore identify their topological Krull dimensions.
+Apply the already proved source-library theorem
+`topologicalKrullDim_fiber_genericPoint_add_one_le`, which applies to every locally
+finite type morphism over an integral base. Combine its additive bound with `hdim`
+and use the finite natural-number bound to obtain the strict inequality. The source
+theorem proves the dimension drop by extending chains using a closed specialization
+in the Jacobson generic fibre; no transcendence-degree calculation is needed here. -/
 theorem coordinate_generic_fiber_dimension_lt
     (S : Scheme.{u}) [IsIntegral S] {m n : ℕ} {X Y : Scheme.{u}}
     (i : Y ⟶ AffineSpace (ULift.{u} (Fin m)) S) [IsClosedImmersion i]
@@ -86,6 +59,48 @@ theorem coordinate_generic_fiber_dimension_lt
       ((j ≫ i ≫ AffineSpace.reindex
         (fun _ : ULift.{u} (Fin 1) ↦ (ULift.up r : ULift.{u} (Fin m))) S).fiber
           (genericPoint (AffineSpace (ULift.{u} (Fin 1)) S))) < (n : WithBot ℕ∞) := by
-  sorry
+  let e : AffineSpace (ULift.{u} (Fin 1)) S ≅ AffineSpace PUnit S :=
+    { hom := AffineSpace.reindex (fun _ : PUnit ↦ (ULift.up 0 : ULift.{u} (Fin 1))) S
+      inv := AffineSpace.reindex (fun _ : ULift.{u} (Fin 1) ↦ PUnit.unit) S
+      hom_inv_id := by
+        apply AffineSpace.hom_ext
+        · simp
+        · intro x
+          simp only [Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
+            AffineSpace.reindex_appTop_coord, Scheme.Hom.id_appTop]
+          congr 1
+          exact Subsingleton.elim _ _
+      inv_hom_id := by
+        apply AffineSpace.hom_ext
+        · simp
+        · intro x
+          simp }
+  have : IsIso e.hom := e.isIso_hom
+  let f := j ≫ i ≫ (AffineSpace (ULift.{u} (Fin m)) S ↘ S)
+  let a := j ≫ i ≫ AffineSpace.reindex
+    (fun _ : ULift.{u} (Fin 1) ↦ (ULift.up r : ULift.{u} (Fin m))) S
+  have hf : LocallyOfFiniteType f := by dsimp [f]; infer_instance
+  have h := topologicalKrullDim_fiber_genericPoint_add_one_le f (a ≫ e.hom)
+    (by simp [a, e, f])
+  have he : e.hom (genericPoint (AffineSpace (ULift.{u} (Fin 1)) S)) =
+      genericPoint (AffineSpace PUnit S) :=
+    genericPoint_eq_of_isOpenImmersion e.hom
+  have hd : topologicalKrullDim ((a ≫ e.hom).fiber
+      (genericPoint (AffineSpace PUnit S))) =
+      topologicalKrullDim (a.fiber
+        (genericPoint (AffineSpace (ULift.{u} (Fin 1)) S))) := by
+    rw [IsHomeomorph.topologicalKrullDim_eq _
+      ((a ≫ e.hom).fiberHomeo _).isHomeomorph,
+      IsHomeomorph.topologicalKrullDim_eq _ (a.fiberHomeo _).isHomeomorph]
+    have hsets : (a ≫ e.hom) ⁻¹' {genericPoint (AffineSpace PUnit S)} =
+        a ⁻¹' {genericPoint (AffineSpace (ULift.{u} (Fin 1)) S)} := by
+      ext x
+      change e.hom (a x) = _ ↔ a x = _
+      rw [← he]
+      exact e.hom.isOpenEmbedding.injective.eq_iff
+    rw [hsets]
+  rw [hd] at h
+  exact ENat.WithBot.add_one_le_natCast_iff.mp (h.trans hdim)
 
 end AlgebraicGeometry
+
