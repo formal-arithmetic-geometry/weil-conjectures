@@ -22,99 +22,53 @@
  ],
  "proof": [
   {
-   "text": "Use the finite commutative coefficient ring $\\Lambda$ fixed by [sbc-def-coefficient-conventions]. The scheme $\\operatorname{Spec}k$ is Noetherian: its only prime is $(0)$, its only ideals are $(0),k$, and it is quasi-compact. Apply [lem-weil-pbc-finite-type-over-noetherian] to $S\\to\\operatorname{Spec}k$ to obtain that $S$ is Noetherian. On each of the finitely many strata trivializing $F$ as a finite constant $\\Lambda$-module sheaf, forgetting scalars retains the same finite abelian group and the same covering. Thus the underlying abelian sheaf $F_{ab}$ is constructible in [def-weil-pbc-constructible-abelian-sheaf].",
+   "text": "The coefficient hypothesis supplies Finite Lambda. Spec k is Noetherian, and isNoetherian_of_locallyOfFiniteType applied to the quasi-compact locally finite type structure morphism gives IsNoetherian S.",
    "uses": [
     "sbc-def-coefficient-conventions",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "def-weil-pbc-etale-constructible-sheaf",
-    "def-weil-pbc-constructible-abelian-sheaf"
+    "lem-weil-pbc-finite-type-over-noetherian"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01T6, lemma-finite-type-noetherian; blueprint proof, underlying finite constructible abelian sheaf"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply [lem-weil-pbc-finite-pushforward-constructible-noetherian] to $f$ and $F_{ab}$, with the Noetherian base established in step 1. By [lem-weil-pbc-module-direct-image-left-exact](1), the underlying abelian sheaf of the module direct image $G=f_*F$ is exactly $f_*F_{ab}$. By [def-weil-pbc-constructible-abelian-sheaf], choose a finite constructible locally closed partition of $S$ on whose strata this abelian sheaf has etale trivializations $G_{ab}|_V\\cong\\underline M_V$ with $M$ a finite abelian group.",
+   "text": "Apply isConstructibleEtaleSheafOfSets_of_module to F. For its underlying abelian sheaf E, apply isConstructibleEtaleSheafOfSets_lowerStar_of_isNoetherian to f and E. Forgetting coefficients commutes definitionally with lowerStar, since all are the same precomposition on the underlying presheaves.",
    "uses": [
+    "lem-weil-pbc-constructible-module-underlying-sets",
     "lem-weil-pbc-finite-pushforward-constructible-noetherian",
-    "lem-weil-pbc-module-direct-image-left-exact",
-    "def-weil-pbc-constructible-abelian-sheaf"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-finite-morphism.md",
-    "place": "Proof: apply finite pushforward constructibility and choose the finite partition"
-   }
-  },
-  {
-   "text": "Fix one such trivialization over $V$. Write the abelian trivialization as $\\phi:G_{ab}|_V\\xrightarrow{\\sim}\\underline M_V$. For $\\lambda\\in\\Lambda$, let $a_\\lambda$ be multiplication by the constant scalar section $\\lambda$ on $G|_V$, and define the abelian sheaf endomorphism $t_\\lambda=\\phi\\circ a_\\lambda\\circ\\phi^{-1}$ of $\\underline M_V$. For each $(\\lambda,m)\\in\\Lambda\\times M$, the value $t_{\\lambda,V}(m)$ on the constant section $m$ is a section $s_{\\lambda,m}$ of $\\underline M_V$. Apply [lem-weil-pbc-constant-sheaf-sections-locally-constant] with $T=V$ and $E=M$: each $s_{\\lambda,m}$ is a Zariski-locally constant function $|V|\\to M$. Intersect their fibres to obtain a Zariski open partition of $V$ on which all these functions are simultaneously constant. There are only finitely many functions because both $\\Lambda$ and $M$ are finite; there are only finitely many possible tuples of values. Discard empty pieces. On a nonempty piece $W$, define $\\lambda\\cdot m$ to be the corresponding constant value. The transported endomorphisms are additive and satisfy the module relations, so these values satisfy all the $\\Lambda$-module axioms. Equality of constant values on nonempty $W$ is detected by their constant functions on $|W|$. Hence $M$ with this action is a finite $\\Lambda$-module. For any etale object $T\\to W$, apply the cited section theorem both to $M$ and to the additive group of $\\Lambda$. A section of $\\underline M(T)$ and a scalar section of $\\Lambda_T(T)$ are Zariski-locally constant, so on an open covering of $T$ they equal constant values $m$ and $\\lambda$. Naturality of $t_\\lambda$ gives the fixed action formula on each such open. The sheaf axiom gives equality globally for every scalar section and module section. The abelian trivialization is therefore an isomorphism of $\\Lambda$-module sheaves to the constant module sheaf with this action.",
-   "uses": [
-    "lem-weil-pbc-constant-sheaf-sections-locally-constant",
-    "def-weil-sheaf-of-modules-category",
-    "sbc-def-coefficient-conventions"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-finite-morphism.md",
-    "place": "Proof: the finite action table on M and simultaneous refinement; Stacks 03P5 (remark-constant-locally-constant-maps) supplies the section description"
-   }
-  },
-  {
-   "text": "The open pieces $W$ of step 3 refine the etale covering of each stratum (open immersions and their composites with etale morphisms are etale by clauses (1)-(2) of [lem-weil-pbc-etale-composition-cancellation]). They cover every original trivialization, and the finite constructible partition of $S$ itself is unchanged. On each stratum $G$ is now etale-locally a constant finite $\\Lambda$-module. This is precisely condition (b), with the original condition (a), of [def-weil-pbc-etale-constructible-sheaf]. Thus $f_*F$ is constructible.",
-   "uses": [
-    "def-weil-pbc-etale-constructible-sheaf",
-    "lem-weil-pbc-etale-composition-cancellation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-finite-morphism.md",
-    "place": "Proof: thus the trivialization is one of constant Lambda-modules; morphisms.tex Tags 02GP (lemma-open-immersion-etale), 02GN (lemma-composition-etale)"
-   }
-  },
-  {
-   "text": "For any short exact sequence of $\\Lambda$-module sheaves on $X$, forgetting the action gives a short exact sequence of abelian sheaves: by [def-weil-sheaf-of-modules-category], kernels are sectionwise kernels and cokernels are sheafifications of sectionwise cokernels, so forgetting scalars retains these objects. Apply the exact abelian functor of [lemma-weil-pbc-finite-direct-image-exact]. Its resulting short exact sequence is the underlying abelian sequence of module direct images by [lem-weil-pbc-module-direct-image-left-exact](1). The same kernel and cokernel descriptions show it is exact as a module sequence. Thus module $f_*$ is exact. No claim that an injective module sheaf stays injective after forgetting its action is needed.",
-   "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "lemma-weil-pbc-finite-direct-image-exact",
-    "lem-weil-pbc-module-direct-image-left-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03QP, proposition-finite-higher-direct-image-zero; sites-modules.tex Tag 03DA, lemma-abelian, kernels and cokernels"
-   }
-  },
-  {
-   "text": "Take an injective resolution $0\\to F\\to I^0\\to I^1\\to\\cdots$ in $\\operatorname{Mod}(X_{\\mathrm{et}},\\Lambda)$; existence and the computation $R^qf_*F=\\mathcal H^q(f_*I^\\bullet)$ are part of [def-weil-pbc-direct-image], module-sheaf clause. Write $Z^j=\\ker(I^j\\to I^{j+1})$. For $j>0$ the resolution gives $0\\to Z^{j-1}\\to I^{j-1}\\to Z^j\\to0$. Exactness from step 5 makes $f_*I^{j-1}\\to f_*Z^j$ surjective, while $f_*Z^j=\\ker(f_*I^j\\to f_*I^{j+1})$. Hence the image of the preceding differential equals the kernel of the next, and $\\mathcal H^j(f_*I^\\bullet)=0$ for every $j>0$. This proves the higher-direct-image clause in the module category.",
-   "uses": [
     "def-weil-pbc-direct-image"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "lemma-right-derived-exact-functor (Tag 015F), proof: exact functors transform acyclic complexes into acyclic complexes"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Apply isConstructibleSheaf_of_finite_coefficient_underlying_sets to the module direct image with I = bottom. The quotient is finite by the surjective quotient map from finite Lambda. Membership in bottom gives r = 0, so zero_smul proves the annihilation hypothesis. Convert this module constructibility to the required finite-constant-value predicate using isConstructibleEtaleModuleSheaf_iff.",
+   "uses": [
+    "lem-weil-pbc-constructible-module-of-finite-coefficient-sets",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use preservesFiniteColimits_lowerStar_of_isFinite directly with coefficients ModuleCat Lambda. For G = lowerStar and K = F[0], the Plus t-structure gives IsZero H^q(K) for q > 0. The composite of mapDerivedCategoryPlusHomologyFunctorIso with homology applied to the inverse of rightDerivedFunctorPlusIsoMapDerivedCategoryPlus identifies G(H^q(K)) with H^q(RG(K)). Map the zero object through G and transport across this isomorphism.",
+   "uses": [
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "sbc-def-coefficient-conventions",
   "lem-weil-pbc-finite-type-over-noetherian",
-  "def-weil-pbc-etale-constructible-sheaf",
-  "def-weil-pbc-constructible-abelian-sheaf",
+  "lem-weil-pbc-constructible-module-underlying-sets",
   "lem-weil-pbc-finite-pushforward-constructible-noetherian",
-  "lem-weil-pbc-module-direct-image-left-exact",
-  "lem-weil-pbc-constant-sheaf-sections-locally-constant",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-etale-composition-cancellation",
-  "lemma-weil-pbc-finite-direct-image-exact",
-  "def-weil-pbc-direct-image"
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-constructible-module-of-finite-coefficient-sets",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lemma-weil-pbc-finite-direct-image-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-finite-morphism.md",
-  "place": "Proof, expanded with Stacks Tags 01T6, 03P5, 03DA, 03QP and the injective-resolution calculation"
+  "place": "Blueprint proof, reusing existing underlying-set and finite-coefficient module refinement lemmas; exact module direct image and bounded below exact-functor comparison from the source library (C8, 2026-10-18)."
  },
  "mathlib_searches": [
   {
@@ -238,9 +192,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-module-direct-image-left-exact",
-  "lem-weil-pbc-constant-sheaf-sections-locally-constant"
+  "lem-weil-pbc-finite-type-over-noetherian"
  ],
  "reviewed": {
   "date": "2026-10-14",
@@ -267,5 +219,15 @@
   "by": "NU",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261018T062719-L-638390",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

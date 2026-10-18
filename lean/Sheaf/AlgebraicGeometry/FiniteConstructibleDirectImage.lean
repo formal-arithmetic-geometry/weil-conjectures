@@ -10,16 +10,13 @@ public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Noetherian
+import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.FinitePushforwardConstructibleNoetherian
-import Sheaf.AlgebraicGeometry.EtaleConstantModuleDirectImageLeftExact
-import Sheaf.Paper.ConstantSheafSectionsLocallyConstant
-import Sheaf.CategoryTheory.RingedSiteModules
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
+import Sheaf.AlgebraicGeometry.ConstructibleModuleUnderlyingSets
+import Sheaf.AlgebraicGeometry.ConstructibleModuleOfFiniteCoefficientSets
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.SixFunctors.Finite.Exact
-import Sheaf.AlgebraicGeometry.ConstructibleAbelianSheaf
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
 
 /-!
 # Finite direct images of constructible module sheaves
@@ -41,32 +38,22 @@ constructible module sheaves and its positive higher direct images vanish.
 Source: blueprint `sec-smooth-purity/sk-prop-sf-cbc/lem-fin-finite-morphism.md`, order 1580
 (blueprint: lem-fin-finite-morphism).
 
-Proof plan:
-1. Spec k is Noetherian; finite type makes S Noetherian
-   (`lem-weil-pbc-finite-type-over-noetherian`). Forgetting scalars makes F a finite
-   constructible abelian sheaf (`def-weil-pbc-constructible-abelian-sheaf`).
-2. Apply `lem-weil-pbc-finite-pushforward-constructible-noetherian` to that abelian sheaf.
-   The forgetful compatibility in `lem-weil-pbc-module-direct-image-left-exact` identifies
-   the result with the underlying abelian sheaf of f_*F. Choose its finite partition and
-   finite constant abelian trivializations.
-3. On a trivialization with finite fibre M, transport each scalar action to M. By
-   `lem-weil-pbc-constant-sheaf-sections-locally-constant`, its values on constant sections
-   are Zariski locally constant. The coefficient convention makes both Lambda and M finite,
-   so refine by all fibres of the finitely many action-table entries simultaneously.
-   On each nonempty piece the constant values satisfy the module relations. Applying the
-   section description again to arbitrary etale objects and using the sheaf axiom shows
-   that the abelian trivialization is a constant-module trivialization.
-4. These open refinements are etale by `lem-weil-pbc-etale-composition-cancellation`.
-   The original finite constructible stratification now gives exactly
-   `def-weil-pbc-etale-constructible-sheaf` for f_*F.
-5. Forget a short exact module sequence to abelian sheaves, use
-   `lemma-weil-pbc-finite-direct-image-exact`, and use the forgetful compatibility again.
-   Sectionwise kernels and sheafified cokernels (`def-weil-sheaf-of-modules-category`)
-   detect exactness, so module direct image is exact.
-6. Choose an injective resolution of F as in `def-weil-pbc-direct-image`. Exactness in
-   step 5 preserves the short exact sequences of cycles of the resolution. In every
-   positive degree the image of the preceding pushed-forward differential therefore
-   equals the kernel of the next differential. Its cohomology sheaf, R^q f_*F, is zero. -/
+Proof:
+1. The coefficient convention makes Λ finite. Since Spec k is Noetherian, the finite
+   type structure morphism makes S Noetherian.
+2. Forget F to abelian groups and then sets using
+   `isConstructibleEtaleSheafOfSets_of_module`. Apply the Noetherian finite-pushforward
+   constructibility theorem to its underlying abelian sheaf. Direct image is
+   precomposition, so its underlying set sheaf is definitionally that of f_*F.
+3. Apply `isConstructibleSheaf_of_finite_coefficient_underlying_sets` with the zero
+   ideal. The quotient Λ/0 is finite by surjectivity of the quotient map, and the zero
+   ideal annihilates every section. Convert the resulting module constructibility
+   with `isConstructibleEtaleModuleSheaf_iff`.
+4. The finite-direct-image exactness instance applies directly to ModuleCat Λ.
+   Its bounded below right derived functor is therefore its levelwise derived functor,
+   which commutes with homology. The degree-q homology of F[0] is zero for q > 0;
+   applying f_* preserves this zero object, and the comparison isomorphisms give
+   the required vanishing. -/
 theorem finite_directImage_constructible_and_higher_vanishing
     (k : Type u) [Field k] {X S : Scheme.{u}}
     [S.Over (Spec (.of k))]
@@ -81,6 +68,27 @@ theorem finite_directImage_constructible_and_higher_vanishing
       ((DerivedCategory.Plus.homologyFunctor _ q).obj
         ((rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) f).obj
           ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) := by
-  sorry
+  have : Finite Λ := hcoeff.2.1
+  have : IsNoetherian S := isNoetherian_of_locallyOfFiniteType (S ↘ Spec (.of k))
+  constructor
+  · apply (Scheme.isConstructibleEtaleModuleSheaf_iff _).mpr
+    have hsets := Scheme.isConstructibleEtaleSheafOfSets_of_module Λ F hF
+    let E := (sheafCompose X.smallEtaleTopology
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F
+    have hpush := Scheme.isConstructibleEtaleSheafOfSets_lowerStar_of_isNoetherian f E hsets
+    refine Scheme.isConstructibleSheaf_of_finite_coefficient_underlying_sets Λ _
+      hpush ⊥ (Finite.of_surjective (Ideal.Quotient.mk ⊥) Ideal.Quotient.mk_surjective) ?_
+    intro U r hr m
+    have : r = 0 := hr
+    subst r
+    exact zero_smul Λ m
+  · intro q hq
+    let G := lowerStar (ModuleCat.{u + 1} Λ) f
+    let K := (DerivedCategory.Plus.singleFunctor _ 0).obj F
+    have hz := DerivedCategory.Plus.isZero_homology_of_isLE K 0 q hq
+    let e := (G.mapDerivedCategoryPlusHomologyFunctorIso q).app K ≪≫
+      (DerivedCategory.Plus.homologyFunctor _ q).mapIso
+        (G.rightDerivedFunctorPlusIsoMapDerivedCategoryPlus.app K).symm
+    exact (G.map_isZero hz).of_iso e.symm
 
 end AlgebraicGeometry.Etale
