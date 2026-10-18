@@ -677,6 +677,16 @@ noncomputable def Etale.higherDirectImagePresheafToSheaf {X Y : Scheme.{u}} (h :
             (R+((h)_*[ModuleCat.{u + 1} Λ]).obj K))) :=
   Etale.higherDirectImagePresheafToHom Λ h q K ≫ Etale.freeSheafSections Λ _
 
+/-- The shift identification `H⁰((Rh_* K)[q]) ≅ Hᵠ(Rh_* K)`. -/
+noncomputable abbrev Etale.homologyShiftComparison {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
+    (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (DerivedCategory.Plus.homologyFunctor _ 0).obj (R+((h)_*[ModuleCat.{u + 1} Λ]).obj (K⟦q⟧)) ⟶
+      (DerivedCategory.Plus.homologyFunctor _ q).obj (R+((h)_*[ModuleCat.{u + 1} Λ]).obj K) :=
+  (DerivedCategory.Plus.homologyFunctor _ 0).map
+      ((R+((h)_*[ModuleCat.{u + 1} Λ]).commShiftIso q).hom.app K) ≫
+    ((DerivedCategory.Plus.homologyFunctor _ 0).isoShiftZero ℤ).inv.app _ ≫
+      ((DerivedCategory.Plus.homologyFunctor _ 0).shiftIso q 0 q (add_zero q)).hom.app _
+
 /-- The canonical map from `W ↦ Hᵠ(W ×_X Y, K|)` to `Hᵠ(Rh_* K)` is locally injective and
 locally surjective, for every morphism `h`. 
 (blueprint: sbc-lem-module-higher-image-raw-comparison-locally-bijective)
@@ -688,31 +698,21 @@ theorem Etale.isLocallyBijective_higherDirectImagePresheafToSheaf {X Y : Scheme.
         (Etale.higherDirectImagePresheafToSheaf Λ h q K) ∧
       Presheaf.IsLocallySurjective X.smallEtaleTopology
         (Etale.higherDirectImagePresheafToSheaf Λ h q K) := by
-  let L := R+((Etale.moduleLowerStar Λ h)).obj (K⟦q⟧)
-  let eH : (DerivedCategory.Plus.homologyFunctor _ 0).obj L ⟶
-      (DerivedCategory.Plus.homologyFunctor _ q).obj (R+((Etale.moduleLowerStar Λ h)).obj K) :=
-    (DerivedCategory.Plus.homologyFunctor _ 0).map
-      ((R+((Etale.moduleLowerStar Λ h)).commShiftIso q).hom.app K) ≫
-    ((DerivedCategory.Plus.homologyFunctor _ 0).isoShiftZero ℤ).inv.app _ ≫
-      ((DerivedCategory.Plus.homologyFunctor _ 0).shiftIso q 0 q (add_zero q)).hom.app _
-  have : IsIso eH := by dsimp only [eH]; infer_instance
-  have : IsIso (Etale.sectionsMap eH) := inferInstanceAs
-    (IsIso ((sheafToPresheaf _ _).map ((sheafCompose X.smallEtaleTopology
-      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).map eH)))
+  have : IsIso (Etale.sectionsMap (Etale.homologyShiftComparison Λ h q K)) :=
+    Functor.map_isIso (sheafToPresheaf _ _) ((sheafCompose X.smallEtaleTopology
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).map _)
   have hφ : Etale.higherDirectImagePresheafToSheaf Λ h q K =
       (Etale.higherDirectImagePresheafIso Λ h q K).hom ≫
-        (Etale.derivedHomToHomology L ≫
-          Etale.moduleFreeSheafSections Λ ((DerivedCategory.Plus.homologyFunctor _ 0).obj L)) ≫
-        Etale.sectionsMap eH := by
+        (Etale.derivedHomToHomology (R+((Etale.moduleLowerStar Λ h)).obj (K⟦q⟧)) ≫
+          Etale.moduleFreeSheafSections Λ _) ≫
+        Etale.sectionsMap (Etale.homologyShiftComparison Λ h q K) := by
     simp only [Etale.higherDirectImagePresheafToSheaf, Etale.higherDirectImagePresheafToHom,
       Category.assoc]
     rw [Etale.moduleFreeSheafSections_naturality]
-  obtain ⟨_, _⟩ := Etale.isLocallyBijective_derivedHomToHomology L
-  have : Presheaf.IsLocallyInjective X.smallEtaleTopology
-      (Etale.higherDirectImagePresheafToSheaf Λ h q K) := by rw [hφ]; infer_instance
-  have : Presheaf.IsLocallySurjective X.smallEtaleTopology
-      (Etale.higherDirectImagePresheafToSheaf Λ h q K) := by rw [hφ]; infer_instance
-  exact ⟨‹_›, ‹_›⟩
+  obtain ⟨_, _⟩ := Etale.isLocallyBijective_derivedHomToHomology
+    (R+((Etale.moduleLowerStar Λ h)).obj (K⟦q⟧))
+  rw [hφ]
+  constructor <;> infer_instance
 
 /-- Blueprint `lem-weil-pbc-qcqs-higher-direct-image`: Higher direct images for quasi-compact
 quasi-separated morphisms, for complexes.
@@ -782,16 +782,6 @@ noncomputable def Etale.higherDirectImagePresheafMap {X Y : Scheme.{u}} (h : Y �
     Etale.higherDirectImagePresheaf Λ h q K ⟶ Etale.higherDirectImagePresheaf Λ h q K' :=
   Functor.whiskerLeft _ (preadditiveYoneda.map ((shiftFunctor _ q).map φ))
 
-
-/-- The shift identification `H⁰((Rh_* K)[q]) ≅ Hᵠ(Rh_* K)`. -/
-noncomputable abbrev Etale.homologyShiftComparison {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
-    (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    (DerivedCategory.Plus.homologyFunctor _ 0).obj (R+((h)_*[ModuleCat.{u + 1} Λ]).obj (K⟦q⟧)) ⟶
-      (DerivedCategory.Plus.homologyFunctor _ q).obj (R+((h)_*[ModuleCat.{u + 1} Λ]).obj K) :=
-  (DerivedCategory.Plus.homologyFunctor _ 0).map
-      ((R+((h)_*[ModuleCat.{u + 1} Λ]).commShiftIso q).hom.app K) ≫
-    ((DerivedCategory.Plus.homologyFunctor _ 0).isoShiftZero ℤ).inv.app _ ≫
-      ((DerivedCategory.Plus.homologyFunctor _ 0).shiftIso q 0 q (add_zero q)).hom.app _
 
 lemma Etale.higherDirectImagePresheafToHom_app_apply {X Y : Scheme.{u}} (h : Y ⟶ X) (q : ℤ)
     (K : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
