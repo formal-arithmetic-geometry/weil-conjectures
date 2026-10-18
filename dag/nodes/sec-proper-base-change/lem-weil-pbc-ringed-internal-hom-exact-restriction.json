@@ -10,7 +10,7 @@
  "mathlib_match": null,
  "proof": [
   {
-   "text": "Choose K-flat representatives $A,B$ of $K,L$ [lem-pc-kflat-resolution] and a K-injective representative $I$ of $M$ [prop-pur-kinjective-resolutions-exist]. Write $\\mathscr H$ for the ordinary sheaf Hom complex. The existing chain-level currying isomorphism [lem-sc-derived-hom-tensor-total] is $\\mathscr H(A,\\mathscr H(B,I))\\cong\\mathscr H(\\operatorname{Tot}(A\\otimes B),I)$, natural in all three complex maps. Its left inner Hom is K-injective by [lem-pur-hom-kflat-into-kinjective]. Thus the left side computes $H(K,H(L,M))$ and the right side computes $H(K\\otimes^{\\mathbf L}L,M)$: both tensor factors were chosen K-flat, exactly as in the statement's definition of derived tensor [def-pc-tensor-complex-sheaves, def-pc-kflat-complex, def-pur-derived-internal-hom]. The representative comparisons and invariance under quasi-isomorphisms [lem-pur-rhom-well-defined] descend this natural chain isomorphism to the required natural isomorphism in $D(\\mathcal O)$.",
+   "text": "Choose K-flat representatives $A,B$ of $K,L$ [lem-pc-kflat-resolution] and a K-injective representative $I$ of $M$ [prop-pur-kinjective-resolutions-exist]. Write $\\mathscr H$ for the ordinary sheaf Hom complex. The existing chain-level currying isomorphism [lem-sc-derived-hom-tensor-total] is $\\mathscr H(A,\\mathscr H(B,I))\\cong\\mathscr H(\\operatorname{Tot}(A\\otimes B),I)$, natural in all three complex maps. Its left inner Hom is K-injective by [lem-pur-hom-kflat-into-kinjective]. Thus the left side computes $H(K,H(L,M))$ and the right side computes $H(K\\otimes^{\\mathbf L}L,M)$: both tensor factors were chosen K-flat, exactly as in the statement's definition of derived tensor [def-pc-tensor-complex-sheaves, def-pc-kflat-complex, def-pur-derived-internal-hom]. The representative comparisons and invariance under quasi-isomorphisms [lem-pur-rhom-well-defined] descend this natural chain isomorphism to the required natural isomorphism in $D(\\mathcal O)$. In Lean, use the existing concrete functorial flat resolution to show that the inclusion of the specified K-flat full subcategory followed by Q is a localization. Replace the third variable functorially by K-injectives. The existing representative comparison computes the inner Hom; quasi-isomorphism invariance computes the outer Hom because the inner Hom is K-injective. Assemble the chain currying comparison and the given tensor comparison on the product of two K-flat subcategories and all complexes. The tensor bifunctor applies its two maps successively; the total-complex map composition lemma identifies this with the simultaneous tensor map in the currying naturality equation. Fully faithful precomposition with the product localization then descends the natural isomorphism in all three variables at once.",
    "uses": [
     "lem-pc-kflat-resolution",
     "prop-pur-kinjective-resolutions-exist",
@@ -28,9 +28,8 @@
    }
   },
   {
-   "text": "Let $A$ represent $L$ and let $I$ be K-injective representing $M$. Slice restriction is exact [lem-pur-site-restriction-module-adjunction-exact], so it preserves these representatives and their quasi-isomorphisms. Over $V\\to U$, sections of $\\mathscr H(A,I)|_U$ and of $\\mathscr H(A|_U,I|_U)$ are the same families $A^p|_V\\to I^{p+n}|_V$, with the same differential $d_I f-(-1)^n f d_A$ [def-pur-hom-complex, def-pur-sheaf-hom]. This gives a chain isomorphism, and $I|_U$ is K-injective [lem-pur-kinjective-restrict-localized]. Therefore the two sides compute the two derived Homs in the statement [def-pur-derived-internal-hom]. For $W\\to U$, the composite comparison and the direct comparison agree on every such family over each $V\\to W$; this proves compatibility with successive slice restrictions. Componentwise pre- and postcomposition commute with these identity maps, proving naturality.",
+   "text": "Let $A$ represent $L$ and let $I$ be K-injective representing $M$. The six restriction instances proved in this module show directly that slice restriction is additive and preserves finite limits and finite colimits, so it preserves these representatives and their quasi-isomorphisms. For limits, forget to presheaves of abelian groups, where restriction is precomposition, and reflect limits back. For colimits, the slice functors are both continuous and cocontinuous; their pushforward on abelian sheaves is therefore also a left adjoint. The exact conservative forgetful functor from module sheaves to abelian sheaves reflects the finite colimits. Over $V\\to U$, sections of $\\mathscr H(A,I)|_U$ and of $\\mathscr H(A|_U,I|_U)$ are the same families $A^p|_V\\to I^{p+n}|_V$, with the same differential $d_I f-(-1)^n f d_A$ [def-pur-hom-complex, def-pur-sheaf-hom]. This gives a chain isomorphism, and $I|_U$ is K-injective [lem-pur-kinjective-restrict-localized]. Therefore the two sides compute the two derived Homs in the statement [def-pur-derived-internal-hom]. For $W\\to U$, the composite comparison and the direct comparison agree on every such family over each $V\\to W$; this proves compatibility with successive slice restrictions. Componentwise pre- and postcomposition commute with these identity maps, proving naturality.",
    "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
     "def-pur-hom-complex",
     "def-pur-sheaf-hom",
     "lem-pur-kinjective-restrict-localized",
@@ -113,7 +112,6 @@
   "def-pc-kflat-complex",
   "def-pur-derived-internal-hom",
   "lem-pur-rhom-well-defined",
-  "lem-pur-site-restriction-module-adjunction-exact",
   "def-pur-hom-complex",
   "def-pur-sheaf-hom",
   "lem-pur-kinjective-restrict-localized",
@@ -132,7 +130,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 08J9 (lemma-internal-hom), 08JB (lemma-restriction-RHom-to-U), 08JC (lemma-RHom-triangulated); cone closure: derived.tex Tag 090X (lemma-triangle-K-injective)."
+  "place": "Tags 08J9 (lemma-internal-hom), 08JB (lemma-restriction-RHom-to-U), 08JC (lemma-RHom-triangulated); cone closure: derived.tex Tag 090X (lemma-triangle-K-injective). The seven completed clauses use the existing chain currying theorem, concrete functorial flat and K-injective resolutions, product localization, and continuous/cocontinuous slice restriction."
  },
  "id": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
  "blueprint": {
@@ -390,5 +388,15 @@
   "date": "2026-10-17",
   "existing": false,
   "note": "§1(B): the previous module supplies only existential currying and existential CommShift structures. It does not give an evaluation-normalized external tensor--Hom adjunction or a chosen first-variable signed comparison; a choice from its bare Nonempty shift statement would not specify the required map. This module publicly imports the entire previous interface, retains every tensor/restriction/exactness assertion, and supplies the uniquely representative-normalized adjunction for the recorded derivedInternalHomOfUniverses, the ordinary K-flat monoidal tensor and its Koszul braiding, and the actual adjunction-mate sourceShift. The small Hom universe u is available for every small ringed site from its Grothendieck module category. Auxiliary additive-tensor and functorial-flat-cover facts implement this same canonical tensor construction, without additional hypotheses on the site or on derived objects."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261018T062926-L-684370",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
