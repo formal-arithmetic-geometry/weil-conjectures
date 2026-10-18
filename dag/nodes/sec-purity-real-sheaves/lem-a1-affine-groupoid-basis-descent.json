@@ -11,11 +11,95 @@
   "def-pc-scheme",
   "def-weil-affine-spectrum",
   "def-pc-fibre-product",
-  "def-weil-pbc-module-tensor-product"
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-free-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\varepsilon=e^\\sharp:B\\to A$. The identity-arrow laws give $s\\circ e=t\\circ e=\\mathrm{id}_U$: evaluate the assumed groupoid laws on the test scheme $U$ and its identity morphism. Contravariant functoriality on affine spectra gives $\\varepsilon\\sigma=\\varepsilon\\tau=\\mathrm{id}_A$, so both $\\sigma$ and $\\tau$ are injective. Also $C$ is a unital subring of $A$: the equality $\\sigma(a)=\\tau(a)$ is preserved by addition, negation and multiplication, and holds for $1$. Equip $A$ with its inclusion $C\\to A$ and $B$ with the common restriction $\\sigma|_C=\\tau|_C$.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03C8 (groupoids-lemma-basis), notation and invariant ring; identity-arrow calculation"
+   }
+  },
+  {
+   "text": "Let $P=R\\times_{s,U,t}R$. The affine fibre-product formula identifies its coordinate ring with $D=B\\otimes_{\\sigma,A,\\tau}B$, where $A$ acts on the first copy of $B$ through $\\sigma$ and on the second through $\\tau$. Write $p_0(b)=b\\otimes1$, $p_1(b)=1\\otimes b$, and $\\Delta=c^\\sharp:B\\to D$. Tensor balancing gives $p_0\\sigma=p_1\\tau$. The source and target laws for composition give $\\Delta\\sigma=p_1\\sigma$ and $\\Delta\\tau=p_0\\tau$: for a composable pair of arrows $(\\alpha,\\beta)$ with $s(\\alpha)=t(\\beta)$, the composite $\\alpha\\circ\\beta$ has source $s(\\beta)$ and target $t(\\alpha)$. These are equalities of scheme maps because the asserted pointwise laws apply to the test scheme $P$ and its pair of projections; take their pullbacks on global sections. Thus no cartesian assertion about the composition map is being assumed.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03C8 (groupoids-lemma-basis), first diagram and the formulas preceding its second diagram; composition laws of groupoids-lemma-diagram"
+   }
+  },
+  {
+   "text": "Apply the free-module base-change statement to the first copy of $B$, free over $A$ through $\\sigma$ with the given basis $(\\tau(x_j))_{j=1}^r$, along $\\tau:A\\to B$ into the second copy. Its right-tensor version says exactly that $y_j=\\tau(x_j)\\otimes1=p_0(\\tau(x_j))$ form a basis of $D$ as a module over the second copy of $B$, acting through $p_1$. In particular, if $\\sum_jp_1(b_j)y_j=\\sum_jp_1(b'_j)y_j$, then $b_j=b'_j$ for every $j$. The two copies of $B$ have different $A$-structures here, and the coefficient ring of this basis is the second copy itself.",
+   "uses": [
+    "lem-weil-pbc-free-module-base-change-free",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03C8 (groupoids-lemma-basis), second diagram: the left vertical map is an isomorphism by base change of the middle one"
+   }
+  },
+  {
+   "text": "Fix $a\\in A$, and use the assumed basis to write $\\tau(a)=\\sum_j\\sigma(a_j)\\tau(x_j)$ uniquely with $a_j\\in A$. Apply $\\Delta$ and use step 2 to obtain $p_0\\tau(a)=\\sum_jp_1\\sigma(a_j)y_j$. Applying $p_0$ to the very same expansion and using $p_0\\sigma=p_1\\tau$ instead gives $p_0\\tau(a)=\\sum_jp_1\\tau(a_j)y_j$. Uniqueness of coefficients in the basis of step 3 yields $\\sigma(a_j)=\\tau(a_j)$ for each $j$. Hence every coefficient $a_j$ belongs to $C$.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03C8 (groupoids-lemma-basis), equalizer comparison in the second diagram, written coefficientwise"
+   }
+  },
+  {
+   "text": "Apply $\\varepsilon$ to the expansion in step 4. Step 1 gives $a=\\sum_j a_jx_j$ with $a_j\\in C$, proving spanning over $C$. If $\\sum_j c_jx_j=0$ with $c_j\\in C$, apply $\\tau$ to get $\\sum_j\\sigma(c_j)\\tau(x_j)=0$, since $\\tau(c_j)=\\sigma(c_j)$. The assumed $A$-basis of $B$ says that each $c_j=0$ in $A$, hence in its subring $C$. Thus the $x_j$ are a $C$-basis of $A$.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03C8 (groupoids-lemma-basis), the right vertical isomorphism: spanning via the identity section and independence via the given basis"
+   }
+  },
+  {
+   "text": "The maps $\\sigma,\\tau:A\\to B$ agree on $C$, so the tensor-product ring universal property gives a ring map $\\phi:A\\otimes_C A\\to B$ with $\\phi(a\\otimes a_2)=\\sigma(a)\\tau(a_2)$. It is $A$-linear when the source uses the first tensor factor and the target uses $\\sigma$. Base change of the $C$-basis in step 5 gives the $A$-basis $(1\\otimes x_j)$ of $A\\otimes_C A$. The map $\\phi$ sends this basis to the assumed $A$-basis $(\\tau(x_j))$ of $B$. Explicitly, every $b=\\sum_j\\sigma(b_j)\\tau(x_j)$ is the image of $\\sum_j b_j\\otimes x_j$; and if $z=\\sum_jb_j\\otimes x_j$ maps to zero, uniqueness for the target basis gives all $b_j=0$, hence $z=0$. Therefore $\\phi$ is bijective, and is an isomorphism of rings. This proves both conclusions with the specified comparison map.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-weil-pbc-free-module-base-change-free",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03C8 (groupoids-lemma-basis), conclusion B = A tensor_C A from the descended basis"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-free-module-base-change-free",
+  "def-weil-pbc-free-module",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 03C8 (groupoids-lemma-basis), proof: its second diagram expanded coefficientwise, with the identity section supplying the spanning calculation."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,10 +128,45 @@
    "results": "[grep] OK 0 hit(s)",
    "date": "2026-10-18",
    "verdict": "no match: the hits do not state this affine groupoid result"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*basis|basis.*groupoid|HopfAlgebroid",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits do not state descent of a target-image basis for an affine groupoid"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For an affine groupoid with source and target ring maps, a basis consisting of target pullbacks descends over the equalizer ring",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AffineBasis.ind\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.Basis\", \"type\": \": AffineIndependent k b\", \"doc\": \"The affine basis $ b $ is affine independent over the ring $ k $.\"}\n  {\"name\": \"AffineBasis.ext\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.Basis\", \"type\": \"{b₁ b₂ : AffineBasis ι k P} (h : (b₁ : ι → P) = b₂) : b₁ = b₂\", \"doc\": \"Two affine bases are equal if and only if their corresponding functions from the index set $\\\\iota$ to the affine space $P$ are equal.\"}\n  {\"name\": \"AffineBasis.mk.inj\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.Basis\", \"type\": \"∀ {ι : Type u₁} {k : Type u₂} {V : Type u₃} {P : Type u₄} {inst : AddCommGroup V} {inst_1 : AddTorsor V P}\\n  {inst_2 : Ring k} {inst_3 : Module k V} {toFun : ι → P} {ind' : AffineIndependent k toFun}\\n  {tot' : affineSpan k (Set.range toFun) = ⊤} {toFun_1 : ι → P} {ind'_1 : AffineIndependent k toFun_\", \"doc\": \"Given an index type $\\\\iota$, a ring $k$, a vector space $V$ over $k$, and an affine space $P$ modeled on $V$, if two affine bases constructed from affine independent families of points with full span \"}\n  {\"name\": \"AffineBasis.basisOf_vadd\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.Basis\", \"type\": \"(v : V) (b : AffineBasis ι k P) : (v +ᵥ b).basisOf = b.basisOf\", \"doc\": \"Translating an affine basis by a vector does not affect the basis of the vector space constructed from its point differences. For any vector $ v $ and affine basis $ b $, the basis of $ V $ formed by \"}\n  {\"name\": \"AffineBasis.coe_smul\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.Basis\", \"type\": \"(a : G) (b : AffineBasis ι k V) : ⇑(a • b) = a • ⇑b\", \"doc\": \"For any group element $ a $ acting on an affine space and any affine basis $ b $, the function representation of the group-acted basis $ a \\\\cdot b $ is equal to the pointwise application of the group \"}\n  {\"name\": \"AffineBasis.noConfusion\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.Basis\", \"type\": \"{P : Sort u} →\\n  {ι : Type u₁} →\\n    {k : Type u₂} →\\n      {V : Type u₃} →\\n        {P_1 : Type u₄} →\\n          {inst : AddCommGroup V} →\\n            {inst_1 : AddTorsor V P_1} →\\n              {inst_2 : Ring k} →\\n                {inst_3 : Module k V} →\\n                  {t : AffineBasis ι k P_1} →\\n  \", \"doc\": \"A structure defining an affine basis for an affine space $ P $ over a vector space $ V $, given a commutative additive group structure on $ V $, a torsor structure of $ V $ over $ P $, a ring $ k $, a\"}\n  {\"name\": \"AffineBasis.basisOf\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.Basis\", \"type\": \"(i : ι) : Basis { j : ι // j ≠ i } k V\", \"doc\": \"For an affine basis $ b $ of an affine space $ P $ over a vector space $ V $, and for a fixed index $ i $, this definition constructs a basis for $ V $ using the vectors $ b_j - b_i $ for all indices \"}\n  {\"name\": \"AffineBasis.reindex_refl\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.Basis\", \"type\": \": b.reindex (Equiv.refl _) = b\", \"doc\": \"Reindexing an affine basis by the identity equivalence leaves the basis unchanged, i.e., for any affine basis $ b $, we have $ b.\\text{reindex}(\\text{id}) = b $.\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits do not state descent of a target-image basis for an affine groupoid"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Basis\", \"invariant\"",
+   "results": "[loogle] OK 11 hit(s)\n  {\"name\": \"InvariantBasisNumber\", \"module\": \"Mathlib.LinearAlgebra.InvariantBasisNumber\", \"type\": \" (R : Type u) [Semiring R] : Prop\", \"doc\": \"We say that `R` has the invariant basis number property if `(Fin n → R) ≃ₗ[R] (Fin m → R)`\\nimplies `n = m`. This gives rise to a well-defined notion of rank of a finitely generated free\\nmodule.\"}\n  {\"name\": \"nontrivial_of_invariantBasisNumber\", \"module\": \"Mathlib.LinearAlgebra.InvariantBasisNumber\", \"type\": \" (R : Type u) [Semiring R] [InvariantBasisNumber R] : Nontrivial R\", \"doc\": \"\"}\n  {\"name\": \"invariantBasisNumber_of_rankCondition\", \"module\": \"Mathlib.LinearAlgebra.InvariantBasisNumber\", \"type\": \" (R : Type u) [Semiring R] [RankCondition R] : InvariantBasisNumber R\", \"doc\": \"\"}\n  {\"name\": \"invariantBasisNumber_of_nontrivial_of_commRing\", \"module\": \"Mathlib.LinearAlgebra.InvariantBasisNumber\", \"type\": \" {R : Type u} [CommRing R] [Nontrivial R] : InvariantBasisNumber R\", \"doc\": \"Nontrivial commutative rings satisfy the invariant basis number property.\\n\\nThere are two stronger results in mathlib:\\n1.  `CommRing.orzechProperty` in `Mathlib.RingTheory.FiniteType`,\\n    which says t\"}\n  {\"name\": \"InvariantBasisNumber.eq_of_fin_equiv\", \"module\": \"Mathlib.LinearAlgebra.InvariantBasisNumber\", \"type\": \" {R : Type u} {inst✝ : Semiring R} [self : InvariantBasisNumber R] {n m : ℕ} : ∀ (a : (Fin n → R) ≃ₗ[R] Fin m → R), n = m\", \"doc\": \"Any linear equiv between `Rⁿ` and `Rᵐ` guarantees `m = n`.\"}\n  {\"name\": \"InvariantBasisNumber.mk\", \"module\": \"Mathlib.LinearAlgebra.InvariantBasisNumber\", \"type\": \" {R : Type u} [Semiring R] (eq_of_fin_equiv : ∀ {n m : ℕ} (a : (Fin n → R) ≃ₗ[R] Fin m → R), n = m) : InvariantBasisNumber R\", \"doc\": \"\"}\n  {\"name\": \"invariantBasisNumber_iff\", \"module\": \"Mathlib.LinearAlgebra.InvariantBasisNumber\", \"type\": \" (R : Type u) [Semiring R] : InvariantBasisNumber R ↔ ∀ {n m : ℕ} (a : (Fin n → R) ≃ₗ[R] Fin m → R), n = m\", \"doc\": \"\"}\n  {\"name\": \"instInvariantBasisNumberMulOpposite\", \"module\": \"Mathlib.LinearAlgebra.Matrix.InvariantBasisNumber\", \"type\": \" {R : Type u_1} [Semiring R] [InvariantBasisNumber R] : InvariantBasisNumber Rᵐᵒᵖ\", \"doc\": \"\"}\n  {\"name\": \"MulOpposite.invariantBasisNumber_iff\", \"module\": \"Mathlib.LinearAlgebra.Matrix.InvariantBasisNumber\", \"type\": \" {R : Type u_1} [Semiring R] : InvariantBasisNumber Rᵐᵒᵖ ↔ InvariantBasisNumber R\", \"doc\": \"Invariant basis number is left-right symmetric.\"}\n  {\"name\": \"invariantBasisNumber_iff_matrix\", \"module\": \"Mathlib.LinearAlgebra.Matrix.InvariantBasisNumber\", \"type\": \" {R : Type u_1} [Semiring R] : InvariantBasisNumber R ↔ ∀ (n m : ℕ) (f : Matrix (Fin n) (Fin m) R) (g : Matrix (Fin m) (Fin n) R), f * g = 1 → g * f = 1 → n = m\", \"doc\": \"\"}\n  {\"name\": \"Matroid.InvariantCardinalRank.forall_card_isBasis_diff\", \"module\": \"Mathlib.Combinatorics.Matroid.Rank.Cardinal\", \"type\": \" {α : Type u} {M : Matroid α} [self : M.InvariantCardinalRank] ⦃I J X : Set α⦄ : M.IsBasis I X → M.IsBasis J X → Cardinal.mk ↑(I \\\\ J) = Cardinal.mk ↑(J \\\\ I)\", \"doc\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits do not state descent of a target-image basis for an affine groupoid"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine groupoid schemes: a basis of the arrow ring consisting of target images descends to a basis of the object ring over invariant functions",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.affineBasisCover_is_basis\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme),\\n  TopologicalSpace.IsTopologicalBasis\\n    {x | ∃ a, x = Set.range ⇑(CategoryTheory.ConcreteCategory.hom (X.affineBasisCover.f a).base)}\", \"doc\": \"For any scheme $X$, the collection of subsets of its underlying topological space given by the images of the affine open immersions in the affine basis cover forms a topological basis. Specifically, t\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineBasisCoverRing\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"(X : AlgebraicGeometry.Scheme) → X.affineBasisCover.I₀ → CommRingCat\", \"doc\": \"For a scheme $X$ and an element $i$ in the zeroth component of its affine basis cover, this function constructs the commutative ring obtained by localizing the ring of the affine open subscheme corres\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineBasisCover_obj\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (i : X.affineBasisCover.I₀),\\n  X.affineBasisCover.X i = AlgebraicGeometry.Spec (X.affineBasisCoverRing i)\", \"doc\": \"For any scheme $X$ and any element $i$ in the zeroth component of its affine basis cover, the object $X.\\\\text{affineBasisCover}.X(i)$ is isomorphic to the affine scheme $\\\\operatorname{Spec}(R_i)$, whe\"}\n  {\"name\": \"AlgebraicGeometry.isBasis_basicOpen\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X], TopologicalSpace.Opens.IsBasis (Set.range X.basicOpen)\", \"doc\": \"For an affine scheme $ X $, the collection of basic open subsets $ D(f) = \\\\{ x \\\\in X \\\\mid f \\\\text{ is invertible at } x \\\\} $, where $ f $ ranges over global sections of the structure sheaf $ \\\\mathcal{\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineBasisCover_map_range\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (x : ↥X) (r : ↑⋯.choose),\\n  Set.range ⇑(CategoryTheory.ConcreteCategory.hom (X.affineBasisCover.f ⟨x, r⟩).base) =\\n    ⇑(CategoryTheory.ConcreteCategory.hom (X.affineCover.f x).base) '' (PrimeSpectrum.basicOpen r).carrier\", \"doc\": \"For any scheme $X$, point $x \\\\in X$, and element $r$ in the ring corresponding to an affine neighborhood of $x$, the image of the morphism $\\\\operatorname{Spec}(R_r) \\\\to X$ (from the affine basis cover\"}\n  {\"name\": \"AlgebraicGeometry.isBasis_preimage_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] (D : CategoryTheory.Functor I AlgebraicGeometry.Scheme)\\n  (c : CategoryTheory.Limits.Cone D) (hc : CategoryTheory.Limits.IsLimit c) [CategoryTheory.IsCofiltered I]\\n  [∀ {i j : I} (f : i ⟶ j), AlgebraicGeometry.IsAffineHom (D.map f)],\\n  Topolog\", \"doc\": \"Given a cofiltered diagram of schemes where all transition maps are affine morphisms, the collection of preimages of affine open subsets under the projection maps forms a basis for the topology on the\"}\n  {\"name\": \"AlgebraicGeometry.isBasis_affine_open\", \"module\": \"Mathlib/AlgebraicGeometry/AffineScheme\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme), TopologicalSpace.Opens.IsBasis X.affineOpens\", \"doc\": \"For any scheme $X$, the collection of affine open subsets of $X$ forms a basis for the topology of $X$.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.affineBasisCoverOfAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Cover/Open\", \"type\": \"(R : CommRingCat) → (AlgebraicGeometry.Spec R).OpenCover\", \"doc\": \"For any commutative ring $ R $, this constructs the open cover of the scheme $ \\\\operatorname{Spec}(R) $ by the standard affine open immersions $ \\\\operatorname{Spec}(R_r) \\\\to \\\\operatorname{Spec}(R) $, \"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits do not state descent of a target-image basis for an affine groupoid"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hopf algebroid invariant subring: if the target images of x_i are a basis over the source algebra, then x_i form a basis over the equalizer and the canonical tensor comparison is an isomorphism",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallyUnramified.finite_of_free_aux\", \"module\": \"Mathlib/RingTheory/Unramified/Finite\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (I : Type u_4)\\n  [inst_3 : DecidableEq I] (b : Module.Basis I R S) (f : I →₀ S) (x : S) (a : I → I →₀ R),\\n  (a = fun i => b.repr (b i * x)) →\\n    (1 ⊗ₜ[R] x * f.sum fun i y => y ⊗ₜ[R] b i) =\\n      ∑ k ∈ \", \"doc\": \"Let $R$ be a commutative ring and $S$ be a commutative $R$-algebra. Assume $S$ is a free $R$-module with a basis $B = \\\\{b_i\\\\}_{i \\\\in I}$. Let $x \\\\in S$. For each $i \\\\in I$, let the product $b_i x$ be \"}\n  {\"name\": \"HopfAlgCat.tensorObj_instRing\", \"module\": \"Mathlib/Algebra/Category/HopfAlgCat/Monoidal\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (X Y : HopfAlgCat R),\\n  (CategoryTheory.MonoidalCategoryStruct.tensorObj X Y).instRing = Algebra.TensorProduct.instRing\", \"doc\": \"For any commutative ring $ R $, the category $ \\\\text{HopfAlgCat}_R $ of Hopf algebras over $ R $ is equipped with a monoidal structure. The tensor product of two Hopf algebras $ X $ and $ Y $ is given\"}\n  {\"name\": \"Algebra.FormallyUnramified.one_tmul_mul_elem\", \"module\": \"Mathlib/RingTheory/Unramified/Finite\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : Algebra.FormallyUnramified R S] [inst_4 : Algebra.EssFiniteType R S] (s : S),\\n  1 ⊗ₜ[R] s * Algebra.FormallyUnramified.elem R S = s ⊗ₜ[R] 1 * Algebra.FormallyUnramified.elem R S\", \"doc\": \"For any element $ s $ in $ S $, the product $ (1 \\\\otimes s) \\\\cdot \\\\text{elem}(R, S) $ is equal to the product $ (s \\\\otimes 1) \\\\cdot \\\\text{elem}(R, S) $.\"}\n  {\"name\": \"Algebra.FormallyUnramified.iff_exists_tensorProduct\", \"module\": \"Mathlib/RingTheory/Unramified/Finite\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.EssFiniteType R S],\\n  Algebra.FormallyUnramified R S ↔\\n    ∃ t, (∀ (s : S), (1 ⊗ₜ[R] s - s ⊗ₜ[R] 1) * t = 0) ∧ (Algebra.TensorProduct.lmul' R) t = 1\", \"doc\": \"Let $R$ be a commutative ring and let $S$ be a finitely generated $R$-algebra. Let $\\\\mu: S \\\\otimes_R S \\\\to S$ be the multiplication map defined by $\\\\mu(s_1 \\\\otimes s_2) = s_1 s_2$. The algebra $S$ is \"}\n  {\"name\": \"Subalgebra.LinearDisjoint.basisOfBasisRight\", \"module\": \"Mathlib/RingTheory/LinearDisjoint\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommSemiring R] →\\n      [inst_1 : CommSemiring S] →\\n        [inst_2 : Algebra R S] →\\n          {A B : Subalgebra R S} →\\n            A.LinearDisjoint B → A ⊔ B = ⊤ → {ι : Type u_1} → Module.Basis ι R ↥B → Module.Basis ι (↥A) S\", \"doc\": \"Given linearly disjoint subalgebras $A$ and $B$ of an $R$-algebra $S$ such that $A + B = S$, and a basis $b$ of $B$ over $R$, this constructs a basis for $A$ over $S$ indexed by the same set as $b$. T\"}\n  {\"name\": \"TensorProduct.antipode_def\", \"module\": \"Mathlib/RingTheory/HopfAlgebra/TensorProduct\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {A : Type u_3} {B : Type u_4} [inst : CommSemiring R] [inst_1 : CommSemiring S]\\n  [inst_2 : Semiring A] [inst_3 : Semiring B] [inst_4 : Algebra R S] [inst_5 : HopfAlgebra R A]\\n  [inst_6 : HopfAlgebra S B] [inst_7 : Algebra R B] [inst_8 : IsScalarTower R S B],\\n  HopfAl\", \"doc\": \"The antipode of the tensor product of two Hopf algebras $ B \\\\otimes_R A $ is given by the tensor product of their individual antipodes, i.e., $ S_{B \\\\otimes_R A} = S_B \\\\otimes_R S_A $.\"}\n  {\"name\": \"Algebra.FormallyUnramified.elem\", \"module\": \"Mathlib/RingTheory/Unramified/Finite\", \"type\": \"(R : Type u_1) →\\n  (S : Type u_2) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] → [Algebra.FormallyUnramified R S] → [Algebra.EssFiniteType R S] → TensorProduct R S S\", \"doc\": \"An element in the tensor product $ S \\\\otimes_R S $ that arises in the characterization of formally unramified algebras. This element is constructed via an existential choice from the proof that $ S $ \"}\n  {\"name\": \"Algebra.FormallyUnramified.one_tmul_sub_tmul_one_mul_elem\", \"module\": \"Mathlib/RingTheory/Unramified/Finite\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : Algebra.FormallyUnramified R S] [inst_4 : Algebra.EssFiniteType R S] (s : S),\\n  (1 ⊗ₜ[R] s - s ⊗ₜ[R] 1) * Algebra.FormallyUnramified.elem R S = 0\", \"doc\": \"For any element $ s $ in $ S $, the product of $ (1 \\\\otimes s - s \\\\otimes 1) $ with the canonical element in the module of differentials $ \\\\Omega_{S/R} $ is zero, characterizing formally unramified al\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits do not state descent of a target-image basis for an affine groupoid"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-finite-flat-affine-relation-quotient",
@@ -68,5 +187,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-affine-groupoid-basis-descent",
+  "worker": "stage1",
+  "summary": "Checked Stacks 03C8 and wrote the coefficientwise diagram argument with the two A-structures explicit. Composition forces all expansion coefficients to be invariant; the identity section recovers the expansion in A. Reused existing Mathlib leaves for affine fibre products, base change of a basis, and the tensor-product ring universal property. No new node, statement change, Lean writing or compilation. Checked zero rings, rank one, and reduced/nonreduced pair groupoids.",
+  "blueprint": "The historical ancestry names lem-a1-affine-hc0, through the separated etale space and finite-flat affine-relation quotient nodes. This split realizes precisely the supporting Tag 03C8 basis argument in the final paragraph of groupoids-proposition-finite-flat-equivalence (03BM); it does not change the enclosing unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-0219b3cb3",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-0219b3cb3 (reviewer sub-agent of L); spot-checked: I read the whole item: statement, 6 steps, deps, searches and blueprint. I also read every cited node's statement (three Mathlib leaves: pullbackSpecIso, Basis.baseChange on both tensor sides, productMap/pushout UP; four definitions), Stacks groupoids.tex lemma-basis 03C8 in full with lemma-diagram/-pull, and the final paragraph of 03BM. The statement is the finite r>=1 case of 03C8 (B = sum of s#(A) t#(x_i)). Its map sigma(a)tau(a2) and its tau(x_j)-over-sigma orientation match the parent lem-a1-finite-flat-affine-relation-quotient steps 0 and 8. I recomputed each step. Step 1: s e = t e = id gives eps sigma = eps tau = id. Step 2: D = B (x)_{sigma,A,tau} B, balancing gives p0 sigma = p1 tau, and the source/target laws at the point (pr0,pr1) give Delta sigma = p1 sigma and Delta tau = p0 tau. Step 3: the leaf's F (x)_R A form gives the basis p0 tau(x_j) over the second B. Step 4: both expansions recomputed, and uniqueness gives sigma(a_j) = tau(a_j). Step 5: eps gives spanning, tau gives independence. Step 6: phi is A-linear and maps the base-changed basis 1(x)x_j to tau(x_j), so it is bijective. The elementary marks are justified. There are no new nodes, so nothing to drop. rg over the DAG for 03C8 and groupoid nodes finds no duplicate. Every non-definition use is a Mathlib leaf, so there is no route issue, no tool_uses and no SGA. Small cases checked: k x k pair groupoid, trivial groupoid, A = 0, k[eps]. One minor point, left unchanged: the pushout UP leaf is not in stmt_deps for the ring structure on A (x)_C A. No fixes."
  }
 }
