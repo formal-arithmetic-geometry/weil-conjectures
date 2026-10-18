@@ -15,9 +15,214 @@
   "def-weil-pbc-constructible-complexes",
   "def-kun-derived-tensor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a compactification $f=pj$. Its middle scheme is Noetherian, since $p$ is of finite type over the Noetherian scheme $Y$. A finite-type morphism between Noetherian schemes is finitely presented: on affine charts this is exactly the finite-generation-of-relations assertion of [lem-weil-pbc-finite-type-noetherian-finite-presentation], and quasi-separatedness follows from Noetherianity. Thus the proper case of [lem-per-quasi-excellent-etale-direct-image-finiteness] applies to $p$. Extension by zero $j_!$ is exact. It preserves constructible sheaves: keep their finitely many locally closed strata in $X$ and add the closed complement in the middle scheme, where the sheaf is zero. Hence the compactification formula $Rf_{!,B}=Rp_{*,B}j_!$ sends bounded constructible complexes to bounded constructible complexes.",
+   "uses": [
+    "def-amb-etale-compact-support",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "def-weil-pbc-constructible-complexes",
+    "lem-per-quasi-excellent-etale-direct-image-finiteness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Theorem 6.7.1 and compactification in Section 6.7"
+   }
+  },
+  {
+   "text": "The ambient ordinary-etale adjoint $G_B=f_B^\\times$ exists by [thm-amb-etale-exceptional-adjoint]. We check its bounded-below restriction rather than assume one from a pro-etale construction. By Step 1 and [lem-per-quasi-excellent-etale-direct-image-finiteness], $R^qp_*M=0$ for all $q>d$ with a single $d$. Sheaves of constant-ring modules form a Grothendieck abelian category [lem-weil-pbc-ring-sheaves-grothendieck]. Applying [lem-etale-derived-functor-upper-amplitude] to $p_*$ shows that $Rp_*$ sends $D^{\\le b}$ into $D^{\\le b+d}$ even on the unbounded categories. Exact $j_!$ has amplitude zero. Consequently [lem-etale-upper-shriek-bounded-below-from-amplitude] applies to $Rf_!$, and $G_B$ preserves $D^+$. Its restriction is the bounded-below right adjoint denoted $f_B^!$. The same reasoning applies to every finite coefficient field used below.",
+   "uses": [
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-per-quasi-excellent-etale-direct-image-finiteness",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-etale-derived-functor-upper-amplitude",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-etale-upper-shriek-bounded-below-from-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.18, existence assertion; bounded-below justification by finite cohomological dimension"
+   }
+  },
+  {
+   "text": "Exact inverse image preserves bounded constructibility. Indeed, pull back the finite stratification of each cohomology sheaf, then its local constant trivializations; their finite module values remain the same. This uses the actual stratification and constant-sheaf pullback assertions, not a definition of a different coefficient category. Also, for $N=\\ell$, the finite etale Tate sheaf $B_T(a)$ is locally free of rank one for every integer $a$. Tensor with it is therefore exact and preserves the finite locally constant descriptions on each stratum. In particular $K\\mapsto p_d^*K(d)[2d]$ preserves bounded constructibility for the projection $p_d:\\mathbf A^d_T\\to T$.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lemma-constructible-pullback-stratification",
+    "lemma-constructible-pullback-constant",
+    "lem-asd-etale-finite-twist-pullback",
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.18, smooth-factor calculation; finite-etale Tate line as in Stacks Kummer theory"
+   }
+  },
+  {
+   "text": "Let $i:Z\\hookrightarrow P$ be a closed immersion with $P$ Noetherian excellent and $\\ell$ invertible, and let $h:O\\hookrightarrow P$ be its open complement. For bounded constructible $M$ on $P$, Step 3 puts $h^*M$ in $D^b_c(O,B)$. The morphism $h$ is finitely presented, since it is an open immersion into a Noetherian scheme; the nonproper case of [lem-per-quasi-excellent-etale-direct-image-finiteness] applies. Thus $Rh_*h^*M$ is bounded constructible. The actual counit/unit triangle of [lem-exc-closed-support-triangle] is\n$$i_*Ri^!M\\longrightarrow M\\longrightarrow Rh_*h^*M\\longrightarrow(i_*Ri^!M)[1].$$\nIts cohomology exact sequence and the kernel, cokernel and extension closure of [thm-constructible-serre] show that $i_*Ri^!M$ is bounded constructible. Finally $i^*i_*\\cong1$ on underlying abelian sheaves by [lem-kun-04ca]; this natural counit respects every constant scalar and hence is an isomorphism of $B$-module sheaves and of their termwise complexes. Exact inverse image and Step 3 therefore give $Ri^!M=i^*(i_*Ri^!M)\\in D^b_c(Z,B)$. This proves the closed step without requiring $i$ regular.",
+   "uses": [
+    "lem-per-quasi-excellent-etale-direct-image-finiteness",
+    "lem-exc-closed-support-triangle",
+    "thm-constructible-serre",
+    "lem-kun-04ca",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.18, closed-factor localization argument; ordinary direct-image finiteness Theorem 6.7.1"
+   }
+  },
+  {
+   "text": "Cover $X$ by finitely many affine opens $U$ mapping into affine opens $V=\\operatorname{Spec}R$ of $Y$, with inclusions $u:U\\hookrightarrow X$, $v:V\\hookrightarrow Y$. Such a finite cover exists by the finite-type definition and the finite affine cover of $Y$. The coordinate algebra of $U$ is finite type over $R$, so choosing finitely many algebra generators exhibits $U$ as a closed subscheme $i:U\\hookrightarrow\\mathbf A^n_V$. Thus $fu=vp_ni$. The polynomial coordinate ring of $\\mathbf A^n_V$ is excellent by [lem-exc-finite-type-localization-excellent]; it is Noetherian, and $\\ell$ stays invertible. All these maps admit compactifications: opens and closed immersions have their evident ones, and $\\mathbf A^n_V$ is the standard open of $\\mathbf P^n_V$. Thus every compact-support composition and adjoint below is in its stated domain.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-exc-finite-type-localization-excellent",
+    "lemma-nagata-relative-affine-space-open-immersion",
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-weil-compactifications-refinements"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.18, local closed-immersion/smooth factorization, made on affine charts"
+   }
+  },
+  {
+   "text": "For $L\\in D^b_c(Y,B)$ and a test object $H\\in D^+(U,B)$, compact-support composition and the open adjunction give\n$$\\operatorname{Hom}(H,u^*f_B^!L)=\\operatorname{Hom}(R(fu)_{!,B}H,L)\n=\\operatorname{Hom}(Rp_{n!,B}i_*H,v^*L).$$\nThe last equality uses $fu=vp_ni$ and the open adjunction $v_!\\dashv v^*$. The affine-space adjunction [cor-amb-affine-space-adjunction] applies with $A=B$ and $N=\\ell$, over the Noetherian base $V$. Following it by the closed adjunction [lem-exc-closed-ambient] identifies the last Hom with\n$$\\operatorname{Hom}(H,Ri^!(p_n^*v^*L(n)[2n])).$$\nBoth represented objects belong to $D^+$: the left one by Step 2, the right one by Steps 3 and 4. Yoneda on $D^+(U,B)$ gives $u^*f_B^!L\\cong Ri^!(p_n^*v^*L(n)[2n])$. Steps 3 and 4 prove this object bounded constructible. This argument uses the ordinary etale affine-space adjunction over an arbitrary Noetherian base, not a purity statement restricted to a finite-field base.",
+   "uses": [
+    "lem-amb-etale-compact-comparisons",
+    "lem-amb-etale-adjoint-locality",
+    "cor-amb-affine-space-adjunction",
+    "lem-exc-closed-ambient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.18, factorization into closed immersion and smooth projection; affine-space adjunction follows the lecture-notes route"
+   }
+  },
+  {
+   "text": "The cover in Step 5 is finite, so take the smallest lower and largest upper cohomological bounds for the objects in Step 6. Cohomology sheaves restrict by exact inverse image; outside this common interval they vanish on a cover and hence vanish. For each remaining degree, order the affine opens $U_1,\\ldots,U_r$. Intersect each stratum on $U_j$ with $U_j\\setminus\\bigcup_{k<j}U_k$. These form a finite partition by locally closed constructible subschemes, with the same locally constant finite module descriptions. This is exactly bounded constructibility. If $X$ is empty the output is zero and no maximum is needed. Together with Step 1 this proves that both functors preserve $D^b_c$. Since these categories are full, the ambient Hom bijections, units and counits restrict to them.",
+   "uses": [
+    "def-weil-pbc-constructible-complexes",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.18, locality of the constructibility assertion; explicit finite-cover gluing"
+   }
+  },
+  {
+   "text": "Now let $B\\subset C$ be a finite extension of finite fields. Write $U_W$ for restriction of scalars on $W=X,Y$, and $T_W=C_W\\otimes^L_{B_W}-$. A $B$-basis $e_1,\\ldots,e_r$ of $C$ identifies $U_WT_WK$ with $K^{\\oplus r}$, naturally in $K$. Thus $T_W$ is exact, preserves bounded constructibility, and agrees with underived coefficient extension; $U_W$ is exact and reflects isomorphisms. The general coefficient adjunction [lem-pur-sheaf-ring-derived-coefficient-adjunction] gives $T_W\\dashv U_W$, including its unit $x\\mapsto1\\otimes x$. These functors restrict to $D^+$, since the finite free tensor is exact.",
+   "uses": [
+    "def-kun-derived-tensor",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 and 06YY, scalar adjunction; finite-free specialization"
+   }
+  },
+  {
+   "text": "For bounded-below $C$-complexes, the same compactification gives a natural identification\n$$U_YRf_{!,C}\\cong Rf_{!,B}U_X.$$\nFor $j_!$ the identification is the identity on the sheafified extension-by-zero construction: restriction of scalars changes no underlying abelian sheaf. For $Rp_*$ it is exactly [lem-sbc-canonical-restrict-scalars-functor-comparisons], which states the derived comparison, not just the underived sectionwise identity. Their composite gives the displayed identification for $Rp_*j_!$. In particular it applies to all bounded constructible inputs.",
+   "uses": [
+    "def-amb-etale-compact-support",
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GL6, remark-Rf-lower-shriek-change-of-rings, restriction square"
+   }
+  },
+  {
+   "text": "Put $F_B=Rf_{!,B}$ and $F_C=Rf_{!,C}$. For $K\\in D^+(X,B)$ let $\\eta_K:K\\to U_XT_XK$ be the unit of Step 8, $x\\mapsto1\\otimes x$, and let $g_K:F_BK\\to U_YF_CT_XK$ be $F_B(\\eta_K)$ followed by the identification $F_BU_XT_XK\\cong U_YF_CT_XK$ of Step 9. Define $c_K:T_YF_BK\\to F_CT_XK$ as the $T_Y\\dashv U_Y$ transpose of $g_K$ [lem-pur-sheaf-ring-derived-coefficient-adjunction]. It is a morphism of $D^+(Y,C)$, natural in $K$ since $\\eta$, $F_B$ and the Step 9 identification are natural, and it involves no basis. To compute it, let $e_1,\\ldots,e_r$ be a $B$-basis of $C$ and $s_{e_a}=e_a\\eta_K:K\\to U_XT_XK$, $x\\mapsto e_a\\otimes x$. The $e_a$-summand inclusion of $F_BK$ into $U_YT_YF_BK$ is $e_a\\eta_{F_BK}$. Because $c_K$ is $C$-linear, the triangle identity $U_Y(c_K)\\eta_{F_BK}=g_K$ gives $U_Y(c_K)\\,e_a\\eta_{F_BK}=e_ag_K$. The Step 9 identification is natural for the $C$-endomorphism $e_a$ of $T_XK$, and $F_C$ sends multiplication by $e_a$ to multiplication by $e_a$; hence $e_ag_K$ is $F_B(s_{e_a})$ followed by Step 9. So the basis identifies the underlying map of $c_K$ with the canonical biproduct comparison $\\bigoplus_{a=1}^rF_BK\\to F_B(\\bigoplus_{a=1}^rK)\\cong F_BU_XT_XK$. It is an isomorphism because $Rp_*j_!$ is additive. Restriction reflects isomorphisms, hence $c$ is a natural isomorphism.",
+   "uses": [
+    "def-amb-etale-compact-support",
+    "def-pc-sheaf-restrict-scalars",
+    "def-kun-derived-tensor",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GL6, extension square; finite-free basis calculation of its map"
+   }
+  },
+  {
+   "text": "Write $G_B=f_B^!$, $G_C=f_C^!$. For $H\\in D^+(X,B)$ and $N\\in D^+(Y,C)$, the adjunctions and $c$ give natural bijections\n$$\\operatorname{Hom}_B(H,U_XG_CN)\n=\\operatorname{Hom}_C(T_XH,G_CN)\n=\\operatorname{Hom}_C(F_CT_XH,N)\n=\\operatorname{Hom}_C(T_YF_BH,N)\n=\\operatorname{Hom}_B(F_BH,U_YN)\n=\\operatorname{Hom}_B(H,G_BU_YN).$$\nHere every coefficient extension remains bounded below by Step 8, and every compact support remains bounded below by its derived definition. Yoneda gives a natural isomorphism $b_N:U_XG_CN\\xrightarrow{\\sim}G_BU_YN$. The bijections fix this isomorphism and its normalization; no arbitrary identification of the exceptional adjoints is being made.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "thm-amb-etale-exceptional-adjoint"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.18, comparison of corresponding adjoint squares; finite-free field-extension version"
+   }
+  },
+  {
+   "text": "For $L\\in D^b_c(Y,B)$ define $\\alpha_L:T_XG_BL\\to G_CT_YL$ to be the $F_C\\dashv G_C$ transpose of $(T_Y\\epsilon_L)c^{-1}_{G_BL}$, exactly as in the statement. Check its invertibility on underlying $B$-complexes. Under $b_{T_YL}$ from Step 11, the composite of $U_X\\alpha_L$ with the $e_a$-summand inclusion $G_BL\\to U_XT_XG_BL$ has $F_B\\dashv G_B$ transpose $s_{e_a}\\epsilon_L$: this follows by substituting the defining transpose of $\\alpha_L$ and cancelling $c^{-1}c$, whose $e_a$ component is $F_B(s_{e_a})$ by Step 10. By the adjunction identity it is therefore $G_B(s_{e_a})$. Consequently\n$$b_{T_YL}\\,U_X\\alpha_L:\\bigoplus_{a=1}^rG_BL\\longrightarrow G_B(\\bigoplus_{a=1}^rL)$$\nis the canonical finite-biproduct comparison. It is an isomorphism: a right adjoint preserves finite products by its Hom bijections, and finite products equal finite coproducts in these additive categories. Thus $\\alpha_L$ is an isomorphism, since $b$ is and $U_X$ reflects isomorphisms. Its construction by transpose is natural in $L$ and retains exactly the exceptional counit specified in the statement. No separability trace, field cohomological-dimension bound, or change of sites is used.",
+   "uses": [
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.18, adjoint-square argument; explicit finite-free matrix check fixes the counit-defined mate"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-etale-compact-support",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "def-weil-pbc-constructible-complexes",
+  "lem-per-quasi-excellent-etale-direct-image-finiteness",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-etale-derived-functor-upper-amplitude",
+  "lem-etale-upper-shriek-bounded-below-from-amplitude",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lemma-constructible-pullback-stratification",
+  "lemma-constructible-pullback-constant",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-exc-closed-support-triangle",
+  "thm-constructible-serre",
+  "lem-kun-04ca",
+  "def-weil-finite-type-morphism",
+  "lem-exc-finite-type-localization-excellent",
+  "lemma-nagata-relative-affine-space-open-immersion",
+  "lemma-nagata-projective-space-base-change-proper",
+  "def-weil-compactifications-refinements",
+  "lem-amb-etale-compact-comparisons",
+  "lem-amb-etale-adjoint-locality",
+  "cor-amb-affine-space-adjunction",
+  "lem-exc-closed-ambient",
+  "def-kun-derived-tensor",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "def-pc-sheaf-restrict-scalars"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Theorem 6.7.1 and Lemma 6.7.18, pp.55,57–58; classical existence and preservation expanded using existing ordinary-etale adjunction, support-triangle and affine-space inputs; finite-free comparison proved explicitly"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -53,10 +258,38 @@
    "results": "[loogle] OK 0 hit(s)\n",
    "date": "2026-10-18",
    "verdict": "no match: hits concern ordinary scheme morphisms, structure sheaves, linear duals or inverse limits of schemes; none states this etale derived-sheaf assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional pullback of etale sheaves preserves bounded constructible complexes on excellent schemes",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\"], \"digest\": \"22986f0523ed2198\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern scheme morphisms, sheaf generators, or references to Gabber in t-structure documentation; none is a finiteness theorem for etale derived direct images"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional|upperShriek|compactSupport",
+   "results": "{\"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Topology/UrysohnsLemma.lean\", \"Mathlib/Topology/UrysohnsLemma.lean\", \"Mathlib/Topology/UrysohnsLemma.lean\", \"Mathlib/Topology/UrysohnsLemma.lean\", \"Mathlib/Topology/UrysohnsLemma.lean\", \"Mathlib/Topology/PartitionOfUnity.lean\", \"Mathlib/Topology/PartitionOfUnity.lean\", \"Mathlib/Topology/PartitionOfUnity.lean\"], \"digest\": \"71bd97d265707009\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern scheme morphisms, sheaf generators, or references to Gabber in t-structure documentation; none is a finiteness theorem for etale derived direct images"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite free extension of finite fields commutes with exceptional inverse image etale sheaves",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.freeFunctorCompPullbackIso\", \"FiniteField.instFieldExtension\", \"SheafOfModules.pullbackObjFreeIso\", \"FiniteField.instFiniteExtension\", \"FiniteField.instFiniteExtension_1\", \"FiniteField.Extension\", \"finiteExts\", \"FiniteField.instFiniteDimensionalZModExtension\"], \"digest\": \"67989d305365ed2e\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern scheme morphisms, sheaf generators, or references to Gabber in t-structure documentation; none is a finiteness theorem for etale derived direct images"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Constructible\", \"Adjunction\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern scheme morphisms, sheaf generators, or references to Gabber in t-structure documentation; none is a finiteness theorem for etale derived direct images"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-finite-residue-dualizing",
@@ -76,5 +309,139 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-finite-exceptional-preservation",
+  "worker": "stage1",
+  "summary": "Expanded finite exceptional preservation using the existing ambient adjoint, affine-space adjunction, closed-support triangle, finite affine charts and a single genuinely new ordinary direct-image finiteness node. Proved both finite-free comparison maps by their basis components, with the exceptional map fixed by the specified counit transpose. Statement unchanged.",
+  "blueprint": "Nearest ancestor lem-per-artin-gabber-affine-curve, proof Step 3: finite-residue Verdier duality underlying the lower perverse bound, via lem-per-qbar-arbitrary-field-duality and lem-per-finite-residue-dualizing. Steps 1–7 establish the finite exceptional restriction; Steps 8–12 establish its finite-free coefficient normalization.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic ordinary-etale geometry, sheaf or adjunction input needed in the finite-residue duality tool; the perverse unit does not replace this fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "why": "Generic ordinary-etale geometry, sheaf or adjunction input needed in the finite-residue duality tool; the perverse unit does not replace this fact."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic ordinary-etale geometry, sheaf or adjunction input needed in the finite-residue duality tool; the perverse unit does not replace this fact."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Generic ordinary-etale geometry, sheaf or adjunction input needed in the finite-residue duality tool; the perverse unit does not replace this fact."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic ordinary-etale geometry, sheaf or adjunction input needed in the finite-residue duality tool; the perverse unit does not replace this fact."
+   },
+   {
+    "node": "lem-etale-derived-functor-upper-amplitude",
+    "why": "Generic ordinary-etale geometry, sheaf or adjunction input needed in the finite-residue duality tool; the perverse unit does not replace this fact."
+   },
+   {
+    "node": "lem-etale-upper-shriek-bounded-below-from-amplitude",
+    "why": "Generic ordinary-etale geometry, sheaf or adjunction input needed in the finite-residue duality tool; the perverse unit does not replace this fact."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic ordinary-etale geometry, sheaf or adjunction input needed in the finite-residue duality tool; the perverse unit does not replace this fact."
+   },
+   {
+    "node": "lemma-constructible-pullback-stratification",
+    "why": "Generic ordinary-etale geometry, sheaf or adjunction input needed in the finite-residue duality tool; the perverse unit does not replace this fact."
+   },
+   {
+    "node": "lemma-constructible-pullback-constant",
+    "why": "Generic ordinary-etale geometry, sheaf or adjunction input needed in the finite-residue duality tool; the perverse unit does not replace this fact."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic ordinary-etale geometry, sheaf or adjunction input needed in the finite-residue duality tool; the perverse unit does not replace this fact."
+   },
+   {
+    "node": "lem-exc-closed-support-triangle",
+    "why": "The ordinary-etale counit/unit support triangle proves constructibility for the closed chart factor; the perverse unit has no ambient localization input."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "Generic ordinary-etale geometry, sheaf or adjunction input needed in the finite-residue duality tool; the perverse unit does not replace this fact."
+   },
+   {
+    "node": "lem-kun-04ca",
+    "why": "Generic ordinary-etale geometry, sheaf or adjunction input needed in the finite-residue duality tool; the perverse unit does not replace this fact."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Excellence ascends to the polynomial chart needed for Gabber finiteness, without assuming any ground field."
+   },
+   {
+    "node": "lemma-nagata-relative-affine-space-open-immersion",
+    "why": "Generic ordinary-etale geometry, sheaf or adjunction input needed in the finite-residue duality tool; the perverse unit does not replace this fact."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Generic ordinary-etale geometry, sheaf or adjunction input needed in the finite-residue duality tool; the perverse unit does not replace this fact."
+   },
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "Generic ordinary-etale geometry, sheaf or adjunction input needed in the finite-residue duality tool; the perverse unit does not replace this fact."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Generic ordinary-etale geometry, sheaf or adjunction input needed in the finite-residue duality tool; the perverse unit does not replace this fact."
+   },
+   {
+    "node": "cor-amb-affine-space-adjunction",
+    "why": "The ordinary-etale affine-space adjunction over an arbitrary Noetherian base is the explicit smooth local computation; the perverse unit supplies no such local adjunction."
+   },
+   {
+    "node": "lem-exc-closed-ambient",
+    "why": "Generic ordinary-etale geometry, sheaf or adjunction input needed in the finite-residue duality tool; the perverse unit does not replace this fact."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic ordinary-etale geometry, sheaf or adjunction input needed in the finite-residue duality tool; the perverse unit does not replace this fact."
+   },
+   {
+    "node": "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "why": "Generic ordinary-etale geometry, sheaf or adjunction input needed in the finite-residue duality tool; the perverse unit does not replace this fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-etale-derived-functor-upper-amplitude",
+  "lem-etale-upper-shriek-bounded-below-from-amplitude",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lemma-constructible-pullback-stratification",
+  "lemma-constructible-pullback-constant",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-exc-closed-support-triangle",
+  "thm-constructible-serre",
+  "lem-kun-04ca",
+  "lem-exc-finite-type-localization-excellent",
+  "lemma-nagata-relative-affine-space-open-immersion",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-amb-etale-compact-comparisons",
+  "lem-amb-etale-adjoint-locality",
+  "cor-amb-affine-space-adjunction",
+  "lem-exc-closed-ambient",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-N2-5ac9730d6",
+  "group": "N2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-5ac9730d6 (reviewer sub-agent of L); spot-checked: I read the item, the new node, all 30 proof_deps and 6 stmt_deps, and the parent's Steps 1 and 4. Sources read: BS §6.7, Thm 6.7.1 and Lemmas 6.7.2/6.7.17/6.7.18/6.7.19 (pp.55, 57-58); ILO Introduction Thm 1 and Exposé XIII 1.1.1. Statement and coefficient category are unchanged, and there is no SGA. Batch 5: lem-etale-upper-shriek-bounded-below-from-amplitude and cor-amb-affine-space-adjunction are general ordinary-étale finite-coefficient six-functor results. Neither assumption gives them (both are stated for Q̄ℓ pro-étale coefficients over a field), and neither is a step of the TF or PD proofs. The flagged endpoints (lem-pod-lisse-module-sheaves-as-module-objects, lem-pod-etale-stalk-tensor-scalar) are generic sheaf lemmas. Both nodes are already in both batch-5 closures without this delivery (via thm-sf-ambient-adjoint-class and thm-sf-ctf-stability→lem-coef-finite-dualizing, and via the statement closure of nt-assume-poincare-duality), so there is no RETURN on that ground. Steps 1-9, 11 and 12 check: I recomputed the Step 6 Hom chain (affine-space adjunction N=ℓ over Noetherian V, closed adjoint, Yoneda in D+) and the Step 12 transpose. Two repairable faults, both fixed. (1) E2/E1: the new node asserted one uniform cohomological-dimension bound for all sheaves in the nonproper quasi-excellent case, copied from BS 6.7.1's wording. ILO says that uniform bound is known only for finite-dimensional bases (Nagata's quasi-excellent examples have infinite dimension); XIII 1.1.1 gives only a bound that depends on the sheaf. The item uses the uniform bound only for proper p (Step 2). The node now states the uniform bound for proper g only, keeps D^b_c preservation in both cases, and cites ILO in source.place. (2) E5: Step 10 defined c as a map in D(Y,B) and argued it was C-linear from the matrix action, which does not give a morphism of D(Y,C). c is now defined as the T⊣U transpose of (Step 9)∘F_B(η) (lem-pur-sheaf-ring-derived-coefficient-adjunction added to the step's uses), and its components F_B(s_{e_a}) are computed from it. Off-unit tools lem-kun-04ca and lem-sbc-canonical-restrict-scalars-functor-comparisons are accepted; the other declared tool_uses are on the route. No duplicate (checked lem-per-finite-exceptional-system-adjunction, lem-coef-finite-exceptional/dualizing, lem-sf-*-direct-image-*, lem-fin-proper-bounded-constructible, thm-dg-finite-type-constructibility) and no cycle. Fixed files are under fixes/dag/nodes/sec-deligne-laumon-a1/.; 2 file(s) fixed by the reviewer"
  }
 }
