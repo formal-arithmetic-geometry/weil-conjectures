@@ -15,9 +15,169 @@
   "def-pur-etale-supported-kernel",
   "def-per-closed-support-plus-adjunction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $A(F)=(F_p)_p$ and $B=B_P$ from [lem-per-etale-point-product-acyclic]. Thus $T=BA$ is the monad of the adjunction $A\\dashv B$, with unit $\\eta$ the germ map and multiplication $B\\epsilon A$. Apply the standard adjunction construction [lem-trf-adjunction-standard-simplicial-homotopy] to opposite categories: it gives the augmented cosimplicial object $F\\to TF\\rightrightarrows T^2F\\triplearrows\\cdots$, with cofaces $T^r\\eta T^s$ and codegeneracies $T^r(B\\epsilon A)T^s$. The cosimplicial identities pair the two insertions of each pair of units with opposite signs, so the alternating coface differential squares to zero and kills the augmentation. This is exactly the complex prescribed in the statement, including its negative-degree zero terms.",
+   "uses": [
+    "lem-per-etale-point-product-acyclic",
+    "lem-trf-adjunction-standard-simplicial-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tags 08NC (lemma-standard-simplicial), 08ND (lemma-standard-simplicial-homotopy), dual construction"
+   }
+  },
+  {
+   "text": "After applying $A$, regard $AF$ as augmented degree $-1$. There is an extra codegeneracy $h_q=\\epsilon_{A T^qF}:AT^{q+1}F\\to AT^qF$ for $q\\geq0$. The triangle identity gives $h_0A\\eta_F=1$; naturality of $\\epsilon$ gives $h_{q+1}A(d^0)=1$ and $h_{q+1}A(d^r)=A(d^{r-1})h_q$ for $r>0$. Consequently $h_{q+1}A(d_q)+A(d_{q-1})h_q=1$ by cancellation of the alternating sums. Thus the augmented stalk complex is contractible. Exactness of $A$ [lem-per-etale-point-product-acyclic] identifies its homology with the stalks of the augmented sheaf homology. Since the given family $P$ is conservative, each of those sheaves is zero. Hence $F[0]\\to G^\\bullet(F)$ is a quasi-isomorphism.",
+   "uses": [
+    "lem-per-etale-point-product-acyclic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 08ND, extra-degeneracy contraction, written out on alternating cochains"
+   }
+  },
+  {
+   "text": "Let $P_Z$ be the subfamily of points whose image lies in $Z$ and let $\\widetilde p$ be the unique lift of such a point to $Z$. For an arbitrary module family $M$, restriction $B_P(M)(V)\\to B_P(M)(V\\times_XU)$ discards exactly the coordinates indexed by $p\\in P_Z$: a point outside $Z$ lifts uniquely to $U$, and a point over $Z$ has no such lift. Its kernel is therefore $\\prod_{p\\in P_Z}\\prod_{v:p\\to V}M_p$. This is $(i_*B_{P_Z}(M|_{P_Z}))(V)$, because maps $\\widetilde p\\to V\\times_XZ$ are precisely maps $p\\to V$. The support identification of [lem-pur-etale-supported-kernel-adjunction] identifies the kernel with $i_*i^!_0B_P(M)$. Since $i^!_0B_P(M)=i^{-1}$ of this kernel and the counit $i^{-1}i_*\\to\\mathrm{id}$ is an isomorphism [prop-openclosed-lowerstar-fully-faithful], applying $i^{-1}$ gives\n$$i^!_0B_P(M)\\cong B_{P_Z}(M|_{P_Z}),\\qquad \\Gamma(Z,i^!_0B_P(M))=\\prod_{p\\in P_Z}M_p.$$\nThe abelian-sheaf support identification is $R$-linear, since every map just used is a kernel inclusion or a coordinate map. On a general etale object of $Z$ the first formula is understood via this sheaf identification, not by commuting $i^{-1}$ with an infinite product.",
+   "uses": [
+    "lem-pur-etale-supported-kernel-adjunction",
+    "lem-per-etale-point-product-acyclic",
+    "prop-openclosed-lowerstar-fully-faithful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XQ (lemma-sections-with-support-acyclic), supported-sheaf identification; point-product coordinate calculation"
+   }
+  },
+  {
+   "text": "For each $M$, take the injective family resolution $M\\to J^\\bullet$ supplied by [lem-per-etale-point-product-acyclic]. It gives the injective sheaf resolution $B_P(M)\\to B_P(J^\\bullet)$. Step 3 identifies its image under $i^!_0$ with the exact augmented complex $B_{P_Z}(M|_{P_Z})\\to B_{P_Z}(J^\\bullet|_{P_Z})$, since $B_{P_Z}$ is exact. Hence $R^ai^!_0(B_P(M))=0$ for $a>0$. The same lemma, now on $Z$, says that $i^!_0B_P(M)$ is acyclic for $\\Gamma(Z,-)$. Also the functor $v(F)=\\Gamma(Z,i^!_0F)$ sends the displayed injective resolution to the exact augmented product complex $\\prod_{p\\in P_Z}J_p^\\bullet$, so $B_P(M)$ is $v$-acyclic. Every $G^q(F)$ is of this form, with $M=A(T^qF)$; these are assertions about arbitrary modules, not injectivity of the stalks $F_p$.",
+   "uses": [
+    "lem-per-etale-point-product-acyclic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 04EQ, 05V8 and 00Y8, applied to the injective family resolution and Step 3"
+   }
+  },
+  {
+   "text": "The module support adjunction [lem-per-etale-closed-sheaf-internal-adjunction] has exact left adjoint $i_*$ and sends injectives to injectives. Both module-sheaf categories have enough injectives [lem-weil-pbc-module-sheaves-enough-injectives]. Thus [lem-trf-bounded-below-derived-adjunction] identifies $Ri^!_0$, with its counit induced by the support inclusion, with the bounded-below adjoint $i^!$ fixed in [def-per-closed-support-plus-adjunction]. Apply [sk-thm-acyclicity] to the resolution of Step 2 and the $i^!_0$-acyclic terms of Step 4: its canonical comparison gives\n$$Q S_i(F)=Q(i^!_0G^\\bullet(F))\\xrightarrow{\\sim}i^!F.$$\nThe derived counit, after this comparison, is precisely $i_*S_i(F)\\hookrightarrow G^\\bullet(F)$ followed by the inverse of the localized augmentation. This is the counit formula in the bounded-below derived-adjunction statement.",
+   "uses": [
+    "lem-per-etale-closed-sheaf-internal-adjunction",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-trf-bounded-below-derived-adjunction",
+    "def-per-closed-support-plus-adjunction",
+    "sk-thm-acyclicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015E (lemma-leray-acyclicity); etale-cohomology.tex Tag 09XQ and canonical derived-adjunction counit"
+   }
+  },
+  {
+   "text": "There is an underived identification $v(F)=\\operatorname{Hom}_X(i_*R_Z,F)$: transpose by the module support adjunction, and identify $\\operatorname{Hom}_Z(R_Z,H)$ with $\\Gamma(Z,H)$ by the image of $1$. Step 4 and [sk-thm-acyclicity] therefore give $H^m(E_i(F))=R^mv(F)$ for $m\\geq0$. By [lem-weil-pbc-ext-via-injective-resolution] this is $\\operatorname{Hom}_{D(X,R)}(i_*R_Z,F[m])$; the adjunction of [def-per-closed-support-plus-adjunction] identifies it with $\\operatorname{Hom}_{D(Z,R)}(R_Z,i^!F[m])$. For $m<0$, the left side is zero because $E_i$ has no negative terms; choose a nonnegative injective resolution $F\\to I$; its existence follows from [lem-weil-pbc-left-exact-injective-resolution-degree-zero] and enough injectives as in Step 5. The complex $i^!_0I$ is nonnegative and termwise injective by the module support adjunction, hence K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective]. Injectives are $i^!_0$-acyclic, so Step 5 and [sk-thm-acyclicity] give $i^!F\\cong Q(i^!_0I)$. By [lem-weil-pbc-kinjective-hom-derived], the right side is homotopy classes of cochain maps $R_Z[0]\\to(i^!_0I)[m]$. These maps are zero because the degree-zero target term is $(i^!_0I)^m=0$.",
+   "uses": [
+    "lem-per-etale-closed-sheaf-internal-adjunction",
+    "sk-thm-acyclicity",
+    "lem-weil-pbc-ext-via-injective-resolution",
+    "def-per-closed-support-plus-adjunction",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015E, 06XR (lemma-compute-ext-resolutions) and 06XS (lemma-negative-exts); image-of-1 description"
+   }
+  },
+  {
+   "text": "For the representative assertion, the degreewise equality $\\operatorname{Hom}_Z(R_Z,S_i(F)^q)=E_i(F)^q$ sends a cocycle $z$ to the cochain map $R_Z[0]\\to S_i(F)[m]$, $1\\mapsto z$. Boundaries are exactly cochain homotopies of these maps: a degree-$(m-1)$ section gives that homotopy. Localize and compose with the comparison of Step 5. This is the isomorphism of Step 6: for an injective resolution $F\\to I$ it is the cocycle formula of [lem-weil-pbc-ext-via-injective-resolution], transposed under the support adjunction. For $G(F)$ the canonical acyclic-resolution comparison of [sk-thm-acyclicity] is natural in the comparison to $I$, so the same square of cochain maps commutes after localization. Thus the statement specifies an actual derived morphism and is independent of the representative.",
+   "uses": [
+    "lem-weil-pbc-ext-via-injective-resolution",
+    "sk-thm-acyclicity",
+    "lem-per-etale-closed-sheaf-internal-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015E and 06XR, canonical acyclic comparison and cocycle normalization"
+   }
+  },
+  {
+   "text": "For a short exact coefficient sequence, exactness of geometric stalks [prop-weil-pbc-geometric-stalks-exact] holds for the underlying abelian sheaves, hence for their $R$-module stalks. The point-product functor is exact on sections by [lem-per-etale-point-product-acyclic], so induction on $q$ shows that $T^q(F_1)\\to T^q(F_2)\\to T^q(F_3)$ is short exact on sheaves for every $q\\geq0$. In degree $q$ the supported terms are $B_{P_Z}((T^qF_a)_p)_{p\\in P_Z}$, by Step 3. The same exactness and the coordinate formula for their global sections give the two desired short exact sequences. These maps are cochain maps because germ-unit insertions are natural. Negative degrees are the zero short exact sequence.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-per-etale-point-product-acyclic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04EQ (lemma-stalk-exact-modules), coordinatewise exact products and the supported-coordinate formula"
+   }
+  },
+  {
+   "text": "Let $A\\to R$ be a homomorphism of finite commutative rings and regard an $R$-sheaf $F$ as an $A$-sheaf. Restricting scalars leaves the underlying stalks, their germ maps, products, kernels, and restrictions unchanged: all are computed on the same elements with the restricted action. Therefore every $T^q$, coface, differential, supported inclusion and supported global section complex is the same after restriction of scalars. The acyclicity argument of Step 4 works over either ring, so the canonical derived comparisons in Steps 5--7 agree under these identifications. In particular the two closed counits agree: both are represented by the identical inclusion $i_*S_i(F)\\to G(F)$ and the identical augmentation inverse. This establishes restriction-of-scalars compatibility without assuming restriction preserves injective objects.",
+   "uses": [
+    "lem-per-etale-point-product-acyclic",
+    "def-per-closed-support-plus-adjunction",
+    "lem-trf-bounded-below-derived-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 00Y8, 04EQ, 05V8, constant coefficient actions; derived-counit formula of Step 5"
+   }
+  },
+  {
+   "text": "For a rank-one locally constant line $L$, define $T(H)\\otimes_RL\\to T(H\\otimes_RL)$ on a local pure tensor by $(s_{p,v})\\otimes l\\mapsto(s_{p,v}\\otimes l_{p,v})$. This respects balancing and restriction, hence defines a sheaf map. Over an etale object $V$ trivializing $L$, both sides identify with $T(H)|_V$ and the map is the identity. Here the point-product formula on a slice has indices $(p,v:p\\to V)$: for $W\\to V$ these indices are pairs $(v,w)$ with $w:p\\to W$ over $v$, equivalently just lifts $p\\to W$. Thus no commutation of arbitrary inverse image with products is used. The map is consequently an isomorphism. Induction yields $G^q(F)\\otimes_RL\\cong G^q(F\\otimes_RL)$ in all degrees. The coordinate formula carries a germ insertion to the corresponding germ insertion, so these isomorphisms commute with every coface and with the augmentation.",
+   "uses": [
+    "lem-per-etale-point-product-acyclic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 00Y8 (lemma-point-pushforward-sheaf), coordinate formula and etale-local trivialization of L"
+   }
+  },
+  {
+   "text": "Tensoring by $L$ is exact and has inverse tensoring by $L^\\vee$: locally these functors are the identity. The same coordinate map on $U$ commutes with restriction and with the support inclusions. On etale trivializing objects it identifies their kernels, hence gives globally\n$$S_i(F)\\otimes_Ri^{-1}L\\xrightarrow{\\sim}S_i(F\\otimes_RL).$$\nTo identify its localization with the canonical exceptional tensor comparison, transpose under $i_*\\dashv i^!$. On complexes its transpose is the support inclusion tensored with $L$, followed by the augmentation inverse tensored with $L$ and the augmentation isomorphism of Step 10. By Step 5 this is the closed counit tensored with $L$. The ordinary identification $i_*(H\\otimes i^{-1}L)\\cong i_*H\\otimes L$ used here is the identity on an etale trivialization and glues, so needs no projection theorem. The derived counit formula of [lem-trf-bounded-below-derived-adjunction] now identifies this transpose with the defining transpose of the canonical comparison. This proves the final derived identification, with the claimed normalization.",
+   "uses": [
+    "def-per-closed-support-plus-adjunction",
+    "lem-trf-bounded-below-derived-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XQ, support inclusion and adjunction; coordinate tensor calculation of Step 10"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-per-closed-support-plus-adjunction",
+  "lem-per-etale-closed-sheaf-internal-adjunction",
+  "lem-per-etale-point-product-acyclic",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-trf-adjunction-standard-simplicial-homotopy",
+  "lem-trf-bounded-below-derived-adjunction",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-ext-via-injective-resolution",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "prop-openclosed-lowerstar-fully-faithful",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "sk-thm-acyclicity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI, Proposition 3.3.2, printed p.245, elementary Godement input expanded using Stacks point adjunction, standard cosimplicial contraction, supported-kernel adjunction and acyclic resolutions. This is an agent-written expansion, not a verbatim theorem of ILO."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +213,38 @@
    "results": "8 hits; CategoryTheory.Sheaf.Γ, CategoryTheory.instIsRightAdjointSheafΓ, Algebra.Etale.formallyEtale, AlgebraicGeometry.Scheme.Opens.topIso_inv, AlgebraicGeometry.LocallyRingedSpace.Γ_obj, AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeLocallyRingedSpaceΓ, AlgebraicGeometry.SheafedSpace.Γ, CategoryTheory.Sheaf.ΓRes",
    "date": "2026-10-19",
    "verdict": "no match: algebraic local cohomology of modules, global section functors, or Zariski module presentations do not give an etale supported Godement resolution, its termwise exactness and its scalar compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Godement resolution of sheaves from conservative geometric stalks computes derived sections with closed support and exact coefficient sequences",
+   "results": "{\"t\": \"2026-10-18T20:30:44Z\", \"tool\": \"leanfinder\", \"query\": \"Godement resolution of sheaves from conservative geometric stalks computes derived sections with closed support and exact coefficient sequences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.plusPlusSheaf_obj_val\", \"CategoryTheory.HasGlobalSectionsFunctor\", \"CategoryTheory.Sheaf.instIsGrothendieckAbelian\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.GrothendieckTopology.Plus.exists_rep\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"TopCat.Presheaf.app_injective_of_stalkFunctor_map_injective\"], \"digest\": \"48a038194620f8c3\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned skyscraper adjunction and sheaf cohomology definitions do not state sectionwise exactness and evaluation acyclicity of arbitrary families of geometric-point products"
+  },
+  {
+   "tool": "grep",
+   "query": "Godement|godement|sectionsWithSupport|sections_with_support",
+   "results": "{\"t\": \"2026-10-18T20:30:58Z\", \"tool\": \"grep\", \"query\": \"Godement|godement|sectionsWithSupport|sections_with_support\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned skyscraper adjunction and sheaf cohomology definitions do not state sectionwise exactness and evaluation acyclicity of arbitrary families of geometric-point products"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Godement\"",
+   "results": "{\"t\": \"2026-10-18T20:30:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"Godement\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned skyscraper adjunction and sheaf cohomology definitions do not state sectionwise exactness and evaluation acyclicity of arbitrary families of geometric-point products"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hom in the etale derived category from the constant coefficient sheaf to a complex equals cohomology of its global sections",
+   "results": "{\"t\": \"2026-10-18T20:33:34Z\", \"tool\": \"leansearch\", \"query\": \"Hom in the etale derived category from the constant coefficient sheaf to a complex equals cohomology of its global sections\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.Sheaf.ΓObjEquivHom_naturality\", \"CategoryTheory.Sheaf.coneΓ\", \"CategoryTheory.Sheaf.Γ\", \"CategoryTheory.Sheaf.ΓHomEquiv\", \"CategoryTheory.Sheaf.ΓObjEquivHom\", \"CategoryTheory.HasGlobalSectionsFunctor\", \"CategoryTheory.Sheaf.Hom\"], \"digest\": \"52f607c7973fa776\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned skyscraper adjunction and sheaf cohomology definitions do not state sectionwise exactness and evaluation acyclicity of arbitrary families of geometric-point products"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-gysin-coefficient-cone-triangles",
@@ -81,5 +269,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-etale-godement-supported-exact-model",
+  "worker": "stage1 Q21",
+  "summary": "Preserved every statement clause. Expanded the point-product adjunction into the monadic contraction, supported-coordinate identification, acyclic computation, normalized cocycle map, coefficient exactness, scalar restriction and line-tensor compatibility. One strictly smaller new lemma concerns arbitrary point-product sheaves before any resolution or support is chosen. No topological flasqueness claim is used on the etale site.",
+  "blueprint": "Proof Step 3: dimension-normalized Verdier duality, regular finite-torsion local model; pointwise purity and composition used to compare the normalized curve with the ambient regular scheme. Input: Gabber purity for a regular Noetherian closed pair. More precisely: Expose XVI, Proposition 3.3.2, printed p.245: compatible Godement cocycles for the fundamental classes and triangles C(mu) -> C(mu+nu) -> C(nu); coefficient compatibility of Proposition 3.3.1. Technical input for the Godement construction: supported exact resolution of arbitrary finite-coefficient sheaves, before any fundamental class is chosen.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-etale-supported-kernel-adjunction",
+    "why": "Generic adjunction, stalk, injective-resolution or acyclic-derived-functor tool used to justify the explicit geometric-point model; the Fourier/perverse unit does not supply this foundational fact and no step of its route is replaced."
+   },
+   {
+    "node": "lem-trf-adjunction-standard-simplicial-homotopy",
+    "why": "Generic adjunction, stalk, injective-resolution or acyclic-derived-functor tool used to justify the explicit geometric-point model; the Fourier/perverse unit does not supply this foundational fact and no step of its route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Generic adjunction, stalk, injective-resolution or acyclic-derived-functor tool used to justify the explicit geometric-point model; the Fourier/perverse unit does not supply this foundational fact and no step of its route is replaced."
+   },
+   {
+    "node": "prop-openclosed-lowerstar-fully-faithful",
+    "why": "Generic Lean-closed fact that closed direct image is fully faithful on etale sheaves (counit i^{-1}i_* -> id iso), needed to pass from the supported kernel on X to the sheaf i^!_0 on Z; added by the maintainer reader."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-trf-adjunction-standard-simplicial-homotopy",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "prop-openclosed-lowerstar-fully-faithful"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-8bac7473a",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-8bac7473a (reviewer sub-agent of L); spot-checked: Read ILO XVI 3.3.2 (p.245) and Stacks 00Y8, 05V8, 04EQ, 01DU and 09XQ. New node lem-per-etale-point-product-acyclic is true: the 00Y8 sheaf condition, the adjunction A_P ⊣ B_P, sectionwise exactness, preservation of injectives and evaluation acyclicity via the product of injective resolutions. It is not a duplicate: the existing Godement nodes are Zariski, and lem-fix-geometric-stalk-topos-point covers a single point and sets only. It is strictly smaller than the item. Steps 1, 2, 4, 5 and 7–11 check out: the cosimplicial identities and the extra codegeneracy h=εA (plus conservativity of P) give the quasi-isomorphism; i^!_0 B_P = B_{P_Z} is acyclic; the bounded-below derived adjunction and acyclicity give Q S_i ≅ i^!; coefficient exactness, restriction of scalars and the line tensor work with germs taken at each lift. Two repairs. Step 3 (C1/C4): deducing i^!_0 B_P(M) ≅ B_{P_Z} from the i_*-level identification needs i^{-1}i_* ≅ id; I now cite prop-openclosed-lowerstar-fully-faithful, which is Lean-closed and has no trf/Poincaré node in its closure. Step 6: added that i^!F ≅ Q(i^!_0 I) follows from Step 5 and sk-thm-acyclicity. Batch-5 flags accepted: lem-trf-adjunction-standard-simplicial-homotopy (generic adjunction bar construction, 3-node closure) and lem-trf-bounded-below-derived-adjunction (generic derived adjunction, accepted before) are neither statements nor steps of the trace formula or Poincaré duality, and the item's closure has no other trf/Poincaré node. tool_uses accepted, plus one added entry for prop-openclosed-lowerstar-fully-faithful.; 1 file(s) fixed by the reviewer"
  }
 }
