@@ -16552,3 +16552,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:51 L: merged deliver/Z6/Sheaf.CategoryTheory.DerivedCategory.FiniteCDDerivedUpperBound (stage 3; reviewer PASS; first push; landing 20261018T145123-L-3648003 (proof); batch 20261018T145048; modules 1; new nodes 0)
 - 14:54 L: returned deliver/F8/Sheaf.Paper.ProperUnboundedWindowIso (reviewer RETURN: (reviewer C-f8f4b, head f8f4bed50) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.ProperUnbounde)
 - 15:01 L: merged deliver/A7/Sheaf.AlgebraicGeometry.EtaleClosedSupportTriangle (stage 3; reviewer PASS; first push; landing 20261018T150143-L-3798365 (proof); batch 20261018T150141; modules 1; new nodes 4)
+- 15:01 L: merged deliver/A8/Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Kummer (stage 3; reviewer PASS; first push; landing 20261018T150144-L-3798487 (proof); batch 20261018T150141; modules 1; new nodes 0)

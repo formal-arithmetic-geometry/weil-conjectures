@@ -102,7 +102,20 @@ theorem ordinaryFiniteRootGenerator_naturality (A : Type (u + 1)) [CommRing A]
       AddCommGrpCat.ofHom (ordinaryFiniteRootGenerator A N hA T W) ≫
         ((RawModuleScalarComparison.forget A T).obj
           (Scheme.finiteEtaleTateLine T N A hA)).obj.map f := by
-  sorry
+  let r := Scheme.finiteEtaleTwistScalar N A hA
+  let F := Scheme.finiteEtaleMuModulePresheaf T N
+  let U := forget₂ (ModuleCat.{u + 1} A) AddCommGrpCat.{u + 1}
+  let U₀ := forget₂ (ModuleCat.{u + 1} (ZMod N)) AddCommGrpCat.{u + 1}
+  let η := (ModuleCat.extendRestrictScalarsAdj.{u + 1, 0, u + 1} r).unit
+  let σ := toSheafify T.smallEtaleTopology (F ⋙ ModuleCat.extendScalars r)
+  have hη := congrArg (fun g ↦ U₀.map g) (η.naturality (F.map f))
+  have hσ := congrArg (fun g ↦ U.map g) (σ.naturality f)
+  simp only [Functor.map_comp, Functor.id_map, Functor.comp_map] at hη hσ
+  change U₀.map (F.map f) ≫ U₀.map (η.app (F.obj V)) ≫ U.map (σ.app V) =
+    (U₀.map (η.app (F.obj W)) ≫ U.map (σ.app W)) ≫
+      U.map ((sheafify T.smallEtaleTopology (F ⋙ ModuleCat.extendScalars r)).map f)
+  erw [← Category.assoc, hη, Category.assoc, Category.assoc, ← hσ]
+  rw [ModuleCat.forget₂_map_restrictScalars]
 
 /-- Scalar extension of roots of unity, as an abelian sheaf map.
 Source: Stacks, Tag 03PK (blueprint: def-asd-ordinary-finite-p1-kummer-class). -/
