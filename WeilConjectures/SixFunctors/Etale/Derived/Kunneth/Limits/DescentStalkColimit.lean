@@ -35,6 +35,7 @@ section LowerStarComp
 variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
 variable {R S T : Scheme.{u}} (h₁ : T ⟶ S) (h₂ : S ⟶ R)
 
+omit [Abelian A] [IsGrothendieckAbelian.{u + 1} A] in
 /-- The components of the inverse of the composition isomorphism `(h₁)_* ⋙ (h₂)_* ≅ (h₁₂)_*`
 of étale pushforwards are the restriction maps along the inverse pullback pasting
 isomorphisms. -/
@@ -77,6 +78,7 @@ variable (hc : IsLimit c) [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)]
   (F : Sheaf c.pt.smallEtaleTopology (ModuleCat.{u + 1} Λ))
   {Ω : Type u} [Field Ω] [IsSepClosed Ω] (x : Spec (.of Ω) ⟶ c.pt)
 
+omit [∀ i, CompactSpace (D.obj i)] in
 include hc in
 /-- Every element of the stalk `F_x̄` comes from the stalk of some `pᵢ^* pᵢ_* F`. -/
 lemma exists_sheafFiber_map_counit_eq
