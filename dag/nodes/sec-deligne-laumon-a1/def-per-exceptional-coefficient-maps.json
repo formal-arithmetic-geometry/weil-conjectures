@@ -1,0 +1,115 @@
+{
+ "id": "def-per-exceptional-coefficient-maps",
+ "kind": "definition",
+ "title": "Canonical open, compact-support and exceptional coefficient maps",
+ "status": "split",
+ "statement": "Let $A,B$ be commutative rings in the coefficient universe, $\\phi:A\\to B$ a unital ring homomorphism, and work in the ordinary small-etale derived categories of module sheaves of [def-weil-pbc-derived-categories]. Write $S_T$ for the published derived scalar extension along $\\phi$, the left adjoint to exact scalar restriction [lem-pur-derived-change-of-rings]. For an open immersion $j:X\\to Z$, define $o_j:(Rj_{!,A})S_Z\\cong S_X(Rj_{!,B})$ (composition in diagrammatic order) as the unique comparison of composite left adjoints induced by the canonical inverse-image/scalar-restriction comparison [lem-sbc-canonical-restrict-scalars-functor-comparisons]. For a compactification $c=(X\\xrightarrow{j}Z\\xrightarrow{p}Y)$ of $f:X\\to Y$ [def-weil-compactifications-refinements], put $F_{A,c}=Rp_{*,A}j_{!,A}$ and $F_{B,c}=Rp_{*,B}j_{!,B}$ [def-amb-etale-compact-support]. For every $M\\in D(X_{et},A)$, define $b_{c,M}:S_Y(F_{A,c}M)\\to F_{B,c}(S_XM)$ as the canonical proper scalar mate at $j_{!,A}M$ [lem-pur-etale-scalar-mate-projection], followed by $Rp_{*,B}$ of $o_j(M)$. Define $b^{[-1]}_{c,M}$ to be $b_{c,M}^{-1}$ when $b_{c,M}$ is an isomorphism, and the zero morphism otherwise. If $A,B$ are finite and $f$ has a chosen compactification, write $F_A\\dashv G_A$ and $F_B\\dashv G_B$ for the ambient compact-support/exceptional adjunctions with counits $\\varepsilon_A,\\varepsilon_B$ [thm-amb-etale-exceptional-adjoint]. For every $K\\in D(Y_{et},A)$, define $\\alpha_{f,K}:S_X(G_AK)\\to G_B(S_YK)$ as the transpose under $F_B\\dashv G_B$ of $b^{[-1]}_{c,G_AK}$ followed by $S_Y(\\varepsilon_A(K))$, where $c$ is the chosen compactification of $f$. These are total definitions; no assertion that $b$ or $\\alpha$ is invertible is included.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "lem-pur-derived-change-of-rings",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "def-weil-compactifications-refinements",
+  "def-amb-etale-compact-support",
+  "lem-pur-etale-scalar-mate-projection",
+  "thm-amb-etale-exceptional-adjoint"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-compatibilities.proof.md",
+  "place": "(1)--(2), defining counit-transpose coefficient comparisons; open/proper compactification construction of b as in Stacks 0GL6"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "compactSupportMap|comparisonInverse|mateMap|openIso",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical scalar extension comparison for compactly supported etale cohomology and its exceptional adjunction mate",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.restrictCoextendScalarsAdj\", \"ModuleCat.ExtendRestrictScalarsAdj.homEquiv\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"ModuleCat.extendRestrictScalarsAdj\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars\", \"ModuleCat.ExtendRestrictScalarsAdj.unit\", \"LinearEquiv.extendScalarsOfIsLocalizationEquiv\", \"ModuleCat.ExtendRestrictScalarsAdj.Unit.map\"]}",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension commutes with open extension by zero and canonical compact support coefficient comparison exceptional inverse image mate",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousLinearMap.extend_zero\", \"MeasureTheory.smul_extend\", \"HasCompactSupport.extend_zero\", \"TestFunction.toBoundedContinuousFunctionCLM_eq_of_scalars\", \"ContinuousLinearMap.extend_eq\", \"ContDiffMapSupportedIn.toBoundedContinuousFunctionLM_eq_of_scalars\", \"HasCompactSupport.tsupport_extend_zero_subset\", \"HasCompactSupport.tsupport_extend_zero\"]}",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg compactSupportMap|comparisonInverse|mateMap|def openIso in WeilConjectures and lean/Sheaf; rg -l ExceptionalCoefficients.(openIso|compactSupportMap|comparisonInverse|mateMap) in dag/nodes; blueprint_refs.py search exceptional coefficient",
+   "results": "No upstream matches. Project: Sheaf.Paper.ExceptionalCoefficientComparison defines exactly openIso at line 46, compactSupportMap at 64, comparisonInverse at 79, mateMap at 94. DAG references occur in lem-pur-exceptional-coefficient-comparison and consumers; no definition node owns these four. Blueprint search returns det-prop-scalar-six-exceptional and det-sfb-coefficient-comparisons-exceptional.",
+   "date": "2026-10-18",
+   "verdict": "exact existing definitions; new ownership node, no new Lean"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-per-finite-exceptional-preservation",
+  "date": "2026-10-18",
+  "group": "Q06"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Finite exceptional preservation and finite-free coefficient comparison: canonical open/proper compact-support map and its counit transpose",
+   "via": [
+    "lem-per-finite-exceptional-preservation",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.Paper.ExceptionalCoefficientComparison",
+  "declaration": "AlgebraicGeometry.Etale.ExceptionalCoefficients.compactSupportMap",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.openIso",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.compactSupportMap",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.comparisonInverse",
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.mateMap"
+  ],
+  "statement": "def compactSupportMap {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)\n    (M : DerivedCategoryModule A X) :\n    (scalarExtension φ Y).obj\n        ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).obj M) ⟶\n      (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} B) c).obj\n        ((scalarExtension φ X).obj M)",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Ownership repair requested in the return of immutable head 6aa5671b409f: these four are existing plain definitions, not choices extracted from exceptional_coefficient_comparison. The module and its defining terms are unchanged. openIso is the canonical open comparison; compactSupportMap its proper/open composite; comparisonInverse is inverse-or-zero; mateMap is the exceptional counit transpose. No tensorIso or unitIso is used by this node."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d1ab3e7b3",
+  "group": "Q06",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d1ab3e7b3",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Re-delivery after the 6aa5671b409f H2 RETURN. Item Lean file byte-identical (sha256 c937bce5); the only item change swaps the theorem stmt_dep lem-pur-exceptional-coefficient-comparison for the new def node def-per-exceptional-coefficient-maps. That node is existing:true on the unchanged ExceptionalCoefficientComparison and lists openIso/compactSupportMap/comparisonInverse/mateMap (plain defs, no .choose of the theorem). Its statement matches the compactSupportMap signature verbatim and its TeX matches the defining terms. check_new_node passes, the id is free, no other node owns these declarations, and there is no cycle. Item clauses re-confirmed: hypotheses, D^b_c preservation, restricted adjunction, c pinned to compactSupportMap, alpha pinned to mateMap, counit equation, edge cases. nt_compile timed out twice in side override OrientedNearbyCycles at load 115-133; judged from the earlier clean 6.6 s compile of the identical file. Advisory: scalarExtension has no owner node; the new node cites lem-sbc for the plain scalarRestrictionPullbackIso used only in openIso's body."
+ }
+}
