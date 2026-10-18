@@ -344,6 +344,136 @@ theorem isCompatible_localOperatorFamily {x : Spec (.of k) ⟶ X} (hx : h ≫ x 
   operator_comm_of_comm_aux _ _ (β n) _ (stalkPullback _ hx) (stalkPullback _ hx) (hβ' n)
     (S.map (n + 1)) (F.comm (n + 1))
 
+/-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (3), global operators, for every
+`m`: the global operators `F_{c,m}(ψ_n) = F_c(ψ_n^{[m]})` of the iterated systems form compatible
+families of endomorphisms of the tower `RΓ_c(X, L_n)`, for coefficient identifications
+compatible with the compact-support base change along every pair of automorphisms. -/
+theorem isCompatible_globalOperatorFamily_iterate [IsIso g] (sq : IsPullback g aX aX h)
+    (α : ∀ n : ℕ, Sheaf.derivedRestrictScalars X.smallEtaleTopology (I.powSuccFactor n) ⋙
+        compactlySupportedGlobalSections (ModuleCat.{u + 1} (R ⧸ I ^ (n + 1 + 1))) aX ≅
+      compactlySupportedGlobalSections (ModuleCat.{u + 1} (R ⧸ I ^ (n + 1))) aX ⋙
+        ModuleCat.derivedRestrictScalars (I.powSuccFactor n))
+    (hα : ∀ n : ℕ, IsCoefficientChange (I.powSuccFactor n) _ _ (α n))
+    (hα' : ∀ (n : ℕ) (g : X ⟶ X) (h : Spec (.of k) ⟶ Spec (.of k)) (sq : IsPullback g aX aX h)
+      [IsIso h], IsCompactPullbackCompatible (I.powSuccFactor n) (α n) sq) (m : ℕ) :
+    (S.compactSupportTower aX α hα).IsCompatible
+      ((F.iterate m).globalOperatorFamily (isPullback_endIterate sq m) α hα) :=
+  (F.iterate m).isCompatible_globalOperatorFamily _ α hα fun n ↦ hα' n _ _ _
+
+/-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (3), local operators, for every `m`:
+at a point `x̄` fixed by `(g^m, h^m)` (for `X = X₀ ×_{k₀} k` and `g` the geometric Frobenius, a
+geometric point over an `𝔽_{q^m}`-point of `X₀`), the local operators `F_{x̄,m}(ψ_n)` of the
+iterated systems form compatible families of endomorphisms of the tower `(L_n)_x̄`. -/
+theorem isCompatible_localOperatorFamily_iterate {x : Spec (.of k) ⟶ X} (m : ℕ)
+    (hx : endIterate h m ≫ x = x ≫ endIterate g m)
+    (β : ∀ n : ℕ, Sheaf.derivedRestrictScalars X.smallEtaleTopology (I.powSuccFactor n) ⋙
+        geometricStalk (R ⧸ I ^ (n + 1 + 1)) x ≅
+      geometricStalk (R ⧸ I ^ (n + 1)) x ⋙ ModuleCat.derivedRestrictScalars (I.powSuccFactor n))
+    (hβ : ∀ n : ℕ, IsCoefficientChange (I.powSuccFactor n) _ _ (β n))
+    (hβ' : ∀ (n : ℕ) (g : X ⟶ X) (h : Spec (.of k) ⟶ Spec (.of k)) (hx : h ≫ x = x ≫ g)
+      [IsIso h], IsStalkPullbackCompatible (I.powSuccFactor n) (β n) hx) :
+    (S.stalkTower x β hβ).IsCompatible ((F.iterate m).localOperatorFamily hx β hβ) :=
+  (F.iterate m).isCompatible_localOperatorFamily hx β hβ fun n ↦ hβ' n _ _ _
+
+section Realization
+
+variable [IsLocalRing R] [IsAdicComplete I R] {ϖ : R} (hϖ : ϖ ∈ IsLocalRing.maximalIdeal R)
+  (hI : I = Ideal.span {ϖ})
+
+include hϖ hI in
+/-- Blueprint `sk-prop-trace-adic` (ii), equivariance for the global operators, and
+`prop-trf-adic-coefficient-morphism-systems` (2): the global Frobenius operators of a compatible
+system of Frobenius coefficient morphisms lift to an endomorphism `V` of the realization
+`P_𝒪 = R lim_n RΓ_c(X, L_n)`, for which the realization isomorphisms
+`P_𝒪 ⊗ᴸ_R A_{n+1} ≅ RΓ_c(X, L_{n+1})` are equivariant. -/
+theorem exists_isLift_globalOperatorFamily (sq : IsPullback g aX aX h)
+    (α : ∀ n : ℕ, Sheaf.derivedRestrictScalars X.smallEtaleTopology (I.powSuccFactor n) ⋙
+        compactlySupportedGlobalSections (ModuleCat.{u + 1} (R ⧸ I ^ (n + 1 + 1))) aX ≅
+      compactlySupportedGlobalSections (ModuleCat.{u + 1} (R ⧸ I ^ (n + 1))) aX ⋙
+        ModuleCat.derivedRestrictScalars (I.powSuccFactor n))
+    (hα : ∀ n : ℕ, IsCoefficientChange (I.powSuccFactor n) _ _ (α n))
+    (hα' : ∀ n : ℕ, IsCompactPullbackCompatible (I.powSuccFactor n) (α n) sq)
+    {c : Cone (S.compactSupportTower aX α hα).restrict} (hc : IsHomotopyLimit c) :
+    ∃ V : c.pt ⟶ c.pt,
+      (S.compactSupportTower aX α hα).IsLift c (F.globalOperatorFamily sq α hα) V :=
+  (S.compactSupportTower aX α hα).exists_isLift_of_isAdicComplete hϖ hI hc
+    (F.isCompatible_globalOperatorFamily sq α hα hα')
+
+include hϖ hI in
+/-- Blueprint `sk-prop-trace-adic` (ii), equivariance for the local operators, and
+`prop-trf-adic-coefficient-morphism-systems` (2): at a point `x̄` fixed by `(g, h)`, the local
+Frobenius operators of a compatible system of Frobenius coefficient morphisms lift to an
+endomorphism `V` of the realization `P_{x̄, 𝒪} = R lim_n (L_n)_x̄`, for which the realization
+isomorphisms `P_{x̄, 𝒪} ⊗ᴸ_R A_{n+1} ≅ (L_{n+1})_x̄` are equivariant. -/
+theorem exists_isLift_localOperatorFamily {x : Spec (.of k) ⟶ X} (hx : h ≫ x = x ≫ g)
+    (β : ∀ n : ℕ, Sheaf.derivedRestrictScalars X.smallEtaleTopology (I.powSuccFactor n) ⋙
+        geometricStalk (R ⧸ I ^ (n + 1 + 1)) x ≅
+      geometricStalk (R ⧸ I ^ (n + 1)) x ⋙ ModuleCat.derivedRestrictScalars (I.powSuccFactor n))
+    (hβ : ∀ n : ℕ, IsCoefficientChange (I.powSuccFactor n) _ _ (β n))
+    (hβ' : ∀ n : ℕ, IsStalkPullbackCompatible (I.powSuccFactor n) (β n) hx)
+    {c : Cone (S.stalkTower x β hβ).restrict} (hc : IsHomotopyLimit c) :
+    ∃ V : c.pt ⟶ c.pt, (S.stalkTower x β hβ).IsLift c (F.localOperatorFamily hx β hβ) V :=
+  (S.stalkTower x β hβ).exists_isLift_of_isAdicComplete hϖ hI hc
+    (F.isCompatible_localOperatorFamily hx β hβ hβ')
+
+/-! The braiding of the derived categories is the Koszul braiding
+`DerivedCategory.braidedCategory'` of the derived tensor product. The trace statements below
+hold for every choice of right duals; both are available by perfectness
+(`ModuleCat.NormalizedPerfectTower.hasRightDualPt`,
+`ModuleCat.NormalizedPerfectTower.hasRightDualObj`). -/
+
+attribute [local instance] DerivedCategory.braidedCategory'
+
+include hϖ hI in
+/-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (4), global operators: the
+categorical trace `tr_R(V ∣ P_𝒪)` of a lift `V` of the global Frobenius operators is the element
+`(tr(F_c(ψ_{n+1}) ∣ RΓ_c(X, L_{n+1})))_n` of `lim_n R ⧸ Iⁿ⁺¹ = R`; in particular it does not
+depend on the lift (`ModuleCat.NormalizedPerfectTower.trace_eq_of_isAdicComplete`). -/
+theorem exists_trace_eq_globalOperatorFamily (sq : IsPullback g aX aX h)
+    (α : ∀ n : ℕ, Sheaf.derivedRestrictScalars X.smallEtaleTopology (I.powSuccFactor n) ⋙
+        compactlySupportedGlobalSections (ModuleCat.{u + 1} (R ⧸ I ^ (n + 1 + 1))) aX ≅
+      compactlySupportedGlobalSections (ModuleCat.{u + 1} (R ⧸ I ^ (n + 1))) aX ⋙
+        ModuleCat.derivedRestrictScalars (I.powSuccFactor n))
+    (hα : ∀ n : ℕ, IsCoefficientChange (I.powSuccFactor n) _ _ (α n))
+    (hα' : ∀ n : ℕ, IsCompactPullbackCompatible (I.powSuccFactor n) (α n) sq)
+    {c : Cone (S.compactSupportTower aX α hα).restrict} (hc : IsHomotopyLimit c)
+    [HasRightDual c.pt] [∀ n, HasRightDual ((S.compactSupportTower aX α hα).obj n)]
+    {V : c.pt ⟶ c.pt}
+    (hV : (S.compactSupportTower aX α hα).IsLift c (F.globalOperatorFamily sq α hα) V) :
+    ∃ r : R,
+      MonoidalCategory.trace V =
+        algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u + 1} R)))) r ∧
+      ∀ n, MonoidalCategory.trace (F.globalOperatorFamily sq α hα n) =
+        algebraMap (R ⧸ I ^ (n + 1))
+          (End (𝟙_ (DerivedCategory (ModuleCat.{u + 1} (R ⧸ I ^ (n + 1)))))) (I.powSuccMk n r) :=
+  (S.compactSupportTower aX α hα).exists_trace_eq_of_isAdicComplete hϖ hI hc
+    (F.isCompatible_globalOperatorFamily sq α hα hα') hV
+
+include hϖ hI in
+/-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (4), local operators: the categorical
+trace `tr_R(V ∣ P_{x̄, 𝒪})` of a lift `V` of the local Frobenius operators at a point `x̄` fixed
+by `(g, h)` is the element `(tr(F_x̄(ψ_{n+1}) ∣ (L_{n+1})_x̄))_n` of `lim_n R ⧸ Iⁿ⁺¹ = R`; in
+particular it does not depend on the lift. -/
+theorem exists_trace_eq_localOperatorFamily {x : Spec (.of k) ⟶ X} (hx : h ≫ x = x ≫ g)
+    (β : ∀ n : ℕ, Sheaf.derivedRestrictScalars X.smallEtaleTopology (I.powSuccFactor n) ⋙
+        geometricStalk (R ⧸ I ^ (n + 1 + 1)) x ≅
+      geometricStalk (R ⧸ I ^ (n + 1)) x ⋙ ModuleCat.derivedRestrictScalars (I.powSuccFactor n))
+    (hβ : ∀ n : ℕ, IsCoefficientChange (I.powSuccFactor n) _ _ (β n))
+    (hβ' : ∀ n : ℕ, IsStalkPullbackCompatible (I.powSuccFactor n) (β n) hx)
+    {c : Cone (S.stalkTower x β hβ).restrict} (hc : IsHomotopyLimit c)
+    [HasRightDual c.pt] [∀ n, HasRightDual ((S.stalkTower x β hβ).obj n)]
+    {V : c.pt ⟶ c.pt} (hV : (S.stalkTower x β hβ).IsLift c (F.localOperatorFamily hx β hβ) V) :
+    ∃ r : R,
+      MonoidalCategory.trace V =
+        algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u + 1} R)))) r ∧
+      ∀ n, MonoidalCategory.trace (F.localOperatorFamily hx β hβ n) =
+        algebraMap (R ⧸ I ^ (n + 1))
+          (End (𝟙_ (DerivedCategory (ModuleCat.{u + 1} (R ⧸ I ^ (n + 1)))))) (I.powSuccMk n r) :=
+  (S.stalkTower x β hβ).exists_trace_eq_of_isAdicComplete hϖ hI hc
+    (F.isCompatible_localOperatorFamily hx β hβ hβ') hV
+
+end Realization
+
 end Geometric
 
 end FrobeniusSystem
