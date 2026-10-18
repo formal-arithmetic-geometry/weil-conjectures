@@ -12,9 +12,96 @@
   "def-weil-pbc-faithfully-flat-ring-map",
   "def-weil-pbc-finitely-presented-algebra"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-a1-fppf-integer-model] to the given faithfully flat finitely presented map $f:A\\to B$. Obtain $C,D$, $u:C\\to A$, $g:D\\to B$ and $e:A\\otimes_C D\\simeq B$, with $e(a\\otimes d)=f(a)g(d)$. In particular $C$ is finitely presented over $\\mathbf Z$ and $C\\to D$ is faithfully flat. These are exactly the hypotheses required by that model lemma; the finite type hypothesis on $R\\to B$ is not used yet.",
+   "uses": [
+    "lem-a1-fppf-integer-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0367, lemma-finite-type-local-source-fppf-algebra, first sentence, using the absolute case of Algebra 034Y."
+   }
+  },
+  {
+   "text": "Put $T=R\\otimes_{\\mathbf Z}C$. The tensor-product universal property [lem-weil-pbc-algebra-tensor-pushout-universal-property] gives $T\\to A$, $r\\otimes c\\mapsto r_Au(c)$, where $r_A$ is the image of $r$ in $A$. A finite presentation [def-weil-pbc-finitely-presented-algebra] supplies finitely many ring generators $c_1,\\ldots,c_s$ of $C$. Every $t\\in T$ is a finite sum of pure tensors by [def-weil-pbc-module-tensor-product]; writing its $C$-coefficients as integer polynomials in the $c_i$ shows that $t$ is an $R$-polynomial in $1\\otimes c_i$. Thus $T$ is finite type over $R$ by [def-weil-pbc-finite-type-algebra]. This is the elementary base-extension part of the general-base reduction in 034Y.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0367, first sentence; Algebra 034Y, final paragraph, base extension from Z to R, needing only finite type of the model base."
+   }
+  },
+  {
+   "text": "Choose $R$-algebra generators $b_1,\\ldots,b_n$ of $B$ by [def-weil-pbc-finite-type-algebra]. By [def-weil-pbc-module-tensor-product], write $e^{-1}(b_j)=\\sum_{k=1}^{m_j}a_{jk}\\otimes d_{jk}$, absorbing module coefficients into the $A$-factors. Introduce one variable $X_{jk}$ for each of these finitely many coefficients and put $P=T[X_{jk}]$. Let $\\varphi:P\\to A$ extend $T\\to A$ and send $X_{jk}$ to $a_{jk}$. The images of $1\\otimes c_i$ together with all $X_{jk}$ generate $P$ over $R$: expand the coefficients of each polynomial using the generators of $T$. Consequently $P$ is finite type over $R$ without a Noetherian assumption.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0367, sentence beginning Since R to B is of finite type: explicit finite coefficient enlargement."
+   }
+  },
+  {
+   "text": "Form $Q=P\\otimes_C D$, where $C\\to P$ factors through $T$. Since $C\\to D$ is faithfully flat, [lem-weil-pbc-faithfully-flat-base-change] gives that $P\\to Q$, $p\\mapsto p\\otimes1$, is faithfully flat. The tensor-product universal property [lem-weil-pbc-algebra-tensor-pushout-universal-property] gives $q:Q\\to B$, $p\\otimes d\\mapsto f(\\varphi(p))g(d)$. Its image contains the image of $R$ and each $b_j=q(\\sum_kX_{jk}\\otimes d_{jk})$. Since these $b_j$ generate $B$ as an $R$-algebra, writing any element as an $R$-polynomial in them proves that $q$ is surjective.",
+   "uses": [
+    "lem-weil-pbc-faithfully-flat-base-change",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0367, coefficient enlargement and the assertion that the model map to B is surjective."
+   }
+  },
+  {
+   "text": "The base change of $\\varphi:P\\to A$ along $P\\to Q$ identifies with $q$. Explicitly $\\theta:A\\otimes_P Q\\to B$ sends $a\\otimes(p\\otimes d)$ to $e(a\\varphi(p)\\otimes d)$. Its inverse sends $e(a\\otimes d)$ to $a\\otimes(1\\otimes d)$. Both maps are well defined by [lem-weil-pbc-algebra-tensor-pushout-universal-property]; the balancing relation $a\\varphi(p)\\otimes z=a\\otimes pz$ shows their composites fix every pure tensor, hence every element by [def-weil-pbc-module-tensor-product]. Moreover $\\theta(1\\otimes z)=q(z)$. Thus the complex $P\\to A\\to0$ becomes exact after tensoring with the faithfully flat $P$-module $Q$, since its first map is the surjection $q$ under this identification. By the exactness-reflection definition in [def-weil-pbc-faithfully-flat-ring-map], $P\\to A\\to0$ is exact. Its kernel at $A$ is all of $A$, so $\\varphi$ is surjective.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-faithfully-flat-ring-map"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0367, displayed tensor comparison and faithful-flat reflection of surjectivity; exactness reflection is Algebra Definition 00HB."
+   }
+  },
+  {
+   "text": "Let $p_1,\\ldots,p_N$ be the finite $R$-algebra generators of $P$ obtained in step 3. Given $a\\in A$, choose $p\\in P$ with $\\varphi(p)=a$. Express $p$ as an $R$-polynomial in the $p_i$ and apply $\\varphi$. This expresses $a$ as the same polynomial in $\\varphi(p_i)$. Hence these finitely many images generate $A$ over $R$, which is the conclusion by [def-weil-pbc-finite-type-algebra].",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0367, final sentence: a surjective image of the finite type R-algebra P is finite type."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-fppf-integer-model",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "def-weil-pbc-finitely-presented-algebra",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-weil-pbc-faithfully-flat-base-change",
+  "def-weil-pbc-faithfully-flat-ring-map"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 0367, lemma-finite-type-local-source-fppf-algebra, proof, with 034Y absolute-to-relative base extension and finite coefficient enlargement written explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -57,10 +144,45 @@
    "results": "{\"t\": \"2026-10-18T02:48:26Z\", \"tool\": \"leanfinder\", \"query\": \"Descent of finite generation in a ring tower R A B with B finite type over R and faithfully flat finitely presented over A\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.fg_trans'\", \"Algebra.EssFiniteType.of_comp\", \"Algebra.FinitePresentation.of_restrict_scalars_finitePresentation\", \"Algebra.FiniteType.trans\", \"Algebra.EssFiniteType.comp\", \"Algebra.FinitePresentation.trans\", \"Algebra.EssFiniteType.comp_iff\", \"RingHom.EssFiniteType.isStableUnderBaseChange\"], \"digest\": \"e675b34b44a4b07e\"}",
    "date": "2026-10-18",
    "verdict": "no match: finite-type tensor-product descent is base descent, not descent in a tower R to A to B. The other hits concern composition, finite presentation, or essential finite type and do not conclude A is finite type over R under these hypotheses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A ring map R to A is finite type if R to B is finite type and A to B is faithfully flat of finite presentation",
+   "results": "{\"t\": \"2026-10-18T03:03:27Z\", \"tool\": \"leanfinder\", \"query\": \"A ring map R to A is finite type if R to B is finite type and A to B is faithfully flat of finite presentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.finiteType_isStableUnderBaseChange\", \"Algebra.EssFiniteType.comp\", \"RingHom.EssFiniteType.isStableUnderBaseChange\", \"Algebra.EssFiniteType.comp_iff\", \"Algebra.FinitePresentation.of_restrict_scalars_finitePresentation\", \"RingHom.FinitePresentation.of_comp_finiteType\", \"AlgHom.FinitePresentation.of_comp_finiteType\", \"Algebra.EssFiniteType.of_comp\"], \"digest\": \"caf67d3661597927\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: tensor-product descent changes the base ring; the tower statement here descends finite type from B to its source A. Scalar restriction and essential finite type hits do not state this conclusion."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteType.*(faithfully|descent)|finite_type.*faithfully|FaithfullyFlat.*FiniteType",
+   "results": "{\"t\": \"2026-10-18T03:03:46Z\", \"tool\": \"grep\", \"query\": \"finiteType.*(faithfully|descent)|finite_type.*faithfully|FaithfullyFlat.*FiniteType\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Etale/Descent.lean\", \"Mathlib/RingTheory/Finiteness/Descent.lean\", \"Mathlib/RingTheory/Finiteness/Descent.lean\", \"Mathlib/RingTheory/Finiteness/Descent.lean\", \"Mathlib/RingTheory/Finiteness/Descent.lean\", \"Mathlib/RingTheory/Finiteness/Descent.lean\"], \"digest\": \"dc83b692778af623\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: tensor-product descent changes the base ring; the tower statement here descends finite type from B to its source A. Scalar restriction and essential finite type hits do not state this conclusion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite type descends in a tower R to A to B when B is finite type over R and faithfully flat finitely presented over A",
+   "results": "{\"t\": \"2026-10-18T03:03:47Z\", \"tool\": \"leansearch\", \"query\": \"Finite type descends in a tower R to A to B when B is finite type over R and faithfully flat finitely presented over A\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgHom.FinitePresentation.of_finiteType\", \"Algebra.FinitePresentation.baseChange\", \"Algebra.FinitePresentation.of_restrict_scalars_finitePresentation\", \"AlgHom.FiniteType.of_finitePresentation\", \"Algebra.FinitePresentation.trans\", \"AlgHom.FiniteType\", \"RingHom.finiteType_isStableUnderBaseChange\", \"Module.Flat.of_flat_tensorProduct\"], \"digest\": \"b59d84b62fac140a\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: tensor-product descent changes the base ring; the tower statement here descends finite type from B to its source A. Scalar restriction and essential finite type hits do not state this conclusion."
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FiniteType, Module.FaithfullyFlat",
+   "results": "{\"t\": \"2026-10-18T03:03:47Z\", \"tool\": \"loogle\", \"query\": \"Algebra.FiniteType, Module.FaithfullyFlat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Algebra.FiniteType.of_finiteType_tensorProduct_of_faithfullyFlat\"], \"digest\": \"742332b7a9bb67b1\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: tensor-product descent changes the base ring; the tower statement here descends finite type from B to its source A. Scalar restriction and essential finite type hits do not state this conclusion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Descent of finite generation in a ring tower R A B where B is finite type over R and faithfully flat finitely presented over A",
+   "results": "{\"t\": \"2026-10-18T03:03:58Z\", \"tool\": \"leanfinder\", \"query\": \"Descent of finite generation in a ring tower R A B where B is finite type over R and faithfully flat finitely presented over A\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.fg_trans'\", \"Algebra.EssFiniteType.of_comp\", \"Algebra.FinitePresentation.of_restrict_scalars_finitePresentation\", \"Algebra.FiniteType.trans\", \"Algebra.EssFiniteType.comp\", \"Algebra.EssFiniteType.comp_iff\", \"Algebra.FinitePresentation.trans\", \"RingHom.EssFiniteType.isStableUnderBaseChange\"], \"digest\": \"0035ff1764b3aab0\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: tensor-product descent changes the base ring; the tower statement here descends finite type from B to its source A. Scalar restriction and essential finite type hits do not state this conclusion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-lft-flat-lfp-source-descent",
@@ -93,5 +215,20 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-finite-type-fppf-source-algebra",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 0367 into the absolute integer model, elementary base extension, finite coefficient polynomial enlargement, faithfully flat base change, explicit tensor comparison and exactness reflection, and finite generation of a quotient. One supporting node records an exact proved source-library model attachment; its audit state is left for the maintainer tool. No Mathlib match for the item. Normalized TeX escaping without changing the statement.",
+  "blueprint": "Auxiliary schemehood branch below lem-a1-affine-hc0, through lem-a1-lft-flat-lfp-source-descent: the Stacks 02KL ring-theoretic finite-type input 0367. The blueprint support argument is retained; these steps supply only its already selected schemehood algebra tool."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-Codex-Q11-30680b008",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q11-30680b008 (reviewer sub-agent of L); spot-checked: Read the item, new model node, all cited statements, Stacks Tags 0367/034Y, source-library theorem, chapter/unit route, and delivery rules. Verified hypotheses, tensor comparison, faithful-flat exactness reflection, universes, edge cases, duplicate searches, and absence of SGA/route-pivot violations. Wrote review.md with step-by-step checks; no repairs or tool_uses are required."
  }
 }

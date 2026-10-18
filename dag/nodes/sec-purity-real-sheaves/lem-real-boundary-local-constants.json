@@ -19,9 +19,141 @@
   "lem-real-boundary-decomposition-landing",
   "def-wf-weil-group"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The projection $C=C_0\\times_{k_0}k\\to C_0$ is surjective by [lem-pc-field-extension-surjective] and [lem-weil-pbc-surjective-base-change]. Thus $C$ is nonempty, and its connectedness in [d-real-setup] implies connectedness of $C_0$ by taking the continuous surjective image. Both schemes have finite type over their respective fields: for $C$, tensor the finitely many generators of each chart in a finite affine cover of $C_0$. Both are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], since a field is Noetherian. By the affine characterization in [def-sbc-smooth-morphisms] and [lem-weil-pbc-smooth-ring-map-base-change-composition](1), $C$ as well as $C_0$ is smooth over its field. Their local rings are regular by [lem-weil-pbc-smooth-over-field-regular-local]. Apply [rem-pc-regular-normal](3) to each: both are irreducible; (1) also makes them normal, hence integral.",
+   "uses": [
+    "d-real-setup",
+    "lem-pc-field-extension-surjective",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-smooth-over-field-regular-local",
+    "rem-pc-regular-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-boundary/d-real-boundary.proof.md",
+    "place": "first paragraph, residue Galois surjectivity and arithmetic degree image"
+   }
+  },
+  {
+   "text": "The nonempty open $U_0$ contains the generic point of the irreducible $C_0$. A nongeneric point of this one-dimensional scheme is closed: a further strict specialization would give, after adjoining the generic point, a chain of length two. Thus $s$ is closed. By [lem-kun-closed-point-field](a), $k_s/k_0$ is finite, of degree $e_s\\geq1$, and $|k_s|=q^{e_s}$. The local ring $A=\\mathcal O_{C_0,s}$ is regular by Step 1 and has dimension exactly one: the generic point and $s$ give a chain of length one in its spectrum, and any longer chain contradicts $\\dim C_0=1$. Therefore $A$ is a DVR by [lem-sc-regular-dim1-dvr]. Also $U=U_0\\times_{k_0}k$ is a nonempty open in $C$: it contains the chosen $\\bar u$. Any two nonempty relatively open subsets intersect because $C$ is irreducible, so $U$ is irreducible and connected. Finally $U_0$ is quasi-compact since $C_0$ is Noetherian, is locally of finite type by its affine charts, and is separated by restricting the diagonal of $C_0$. Hence it is separated of finite type and geometrically connected, as required for the arithmetic-projection interface.",
+   "uses": [
+    "d-real-setup",
+    "lem-kun-closed-point-field",
+    "lem-sc-regular-dim1-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-boundary/d-real-boundary.proof.md",
+    "place": "first paragraph, residue Galois surjectivity and arithmetic degree image"
+   }
+  },
+  {
+   "text": "Write $H=A^{\\mathrm h}$ and $K=K_s$. By [def-weil-pbc-henselization-at-prime], $H$ is henselian local. Its residue field is canonically $k_s$: the field $k_s$ is henselian (idempotent lifting modulo its zero maximal ideal is the identity), so the universal property gives a local map $H\\to k_s$ extending $A\\to k_s$. The induced composite $k_s\\to\\kappa(H)\\to k_s$ is the identity. The second arrow is an injective field map whose image contains all of $k_s$, so the two arrows are inverse. Apply [lem-real-henselian-residue-galois-action] to $H\\to K\\subset\\overline K_s$. It gives the local integral closure $B$, its maximal ideal $\\mathfrak n$, the closure $\\bar\\kappa=B/\\mathfrak n$ of $k_s$, the map $r_s$, and the equivariant isomorphism $t:k'\\xrightarrow{\\sim}\\bar\\kappa$, where $k'$ is the field of constants algebraic over $k_0$ in $\\overline K_s$.",
+   "uses": [
+    "def-weil-pbc-henselization-at-prime",
+    "lem-real-henselian-residue-galois-action"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-boundary/d-real-boundary.proof.md",
+    "place": "first paragraph, residue Galois surjectivity and arithmetic degree image"
+   }
+  },
+  {
+   "text": "Apply [lem-wf-strict-henselian-fraction-inertia] to the DVR $A$ of Step 2. It gives domains $H\\subset R=A^{\\mathrm{sh}}\\subset\\Omega$, with $\\Omega$ a separable closure of $K=\\operatorname{Frac}H$, residue field $\\kappa(R)=k_s^{\\mathrm{sep}}$, and a surjection $\\mathrm{res}:\\operatorname{Gal}(\\Omega/K)\\to\\operatorname{Gal}(\\kappa(R)/k_s)$. Choose $\\Omega$ to be the separable algebraic elements of the given $\\overline K_s$. Restriction $D_s\\to\\operatorname{Gal}(\\Omega/K)$ is a bijection, including in characteristic $p$: every algebraic $x$ has $x^{p^n}\\in\\Omega$ for some $n$, by removing all powers of $T^p$ from its irreducible polynomial over $K$ until the derivative is nonzero. An automorphism $\\tau$ of $\\Omega/K$ extends uniquely by sending $x$ to the unique $p^n$-th root of $\\tau(x^{p^n})$ in $\\overline K_s$; the formulas for sums and products follow after taking a common $p$-power, and the inverse is the extension of $\\tau^{-1}$. Every finite extension of the finite field $k_s$ is separable by [lem-sfb-finite-field-galois-frobenius], so $\\kappa(R)$ is an algebraic closure, just like $\\bar\\kappa$. The surjection just cited is applied to $A$, whose DVR hypothesis was proved, rather than assuming a DVR property for $H$.",
+   "uses": [
+    "lem-wf-strict-henselian-fraction-inertia",
+    "lem-sfb-finite-field-galois-frobenius"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-boundary/d-real-boundary.proof.md",
+    "place": "first paragraph, residue Galois surjectivity and arithmetic degree image"
+   }
+  },
+  {
+   "text": "Here is the comparison of the residue fields in Step 4 with reduction in $B$. The ring $R$ is henselian local by [lem-weil-pbc-strict-henselization-local-structure]. For each $n\\geq1$, all $q^n$ roots of $T^{q^n}-T$ in the algebraically closed $\\kappa(R)$ are simple, since the derivative is $-1$. By [lem-weil-pbc-henselian-local-root-lifting] they lift to $q^n$ distinct roots in $R\\subset\\Omega$. A polynomial of degree $q^n$ has no further roots in $\\overline K_s$. Every element of $k'$ belongs to a finite field and is such a root for some $n$, so $k'\\subset R$. Reduction $u:k'\\to\\kappa(R)$ is injective, as a unital map out of a field, and surjective, since every element of $\\kappa(R)$ is algebraic over a finite field and the same lifting argument supplies its preimage in $k'$. Applying that argument in $H$, whose residue has $q^{e_s}$ elements, shows that all roots of $T^{q^{e_s}}-T$ lie in $H$. Their reductions in $B$ identify this subfield with $k_s$ via $t$, and their reductions in $R$ give the same structural $k_s$. Thus $\\beta=t\\circ u^{-1}:\\kappa(R)\\xrightarrow{\\sim}\\bar\\kappa$ is an isomorphism over $k_s$, and $\\beta(u(b))=t(b)$ for every $b\\in k'$. This chooses the compatible residue identification explicitly.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-local-structure",
+    "lem-weil-pbc-henselian-local-root-lifting",
+    "lem-real-henselian-residue-galois-action"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-boundary/d-real-boundary.proof.md",
+    "place": "first paragraph, residue Galois surjectivity and arithmetic degree image"
+   }
+  },
+  {
+   "text": "For $\\sigma\\in D_s$ put $\\tau=\\sigma|_\\Omega$. By [lem-wf-strict-henselian-fraction-inertia], $\\tau$ preserves $R$ and reduces there to $\\mathrm{res}(\\tau)$. Hence $\\mathrm{res}(\\tau)u(b)=u(\\sigma b)$ for $b\\in k'$. In $B$, [lem-real-henselian-residue-galois-action] gives $r_s(\\sigma)t(b)=t(\\sigma b)$. Since $\\beta u=t$ and $t$ is surjective, these equalities prove $\\beta\\,\\mathrm{res}(\\sigma|_\\Omega)\\,\\beta^{-1}=r_s(\\sigma)$ on all of $\\bar\\kappa$. Consequently $r_s$ is surjective, by the restriction bijection and the strict-henselian surjection in Step 4. This identifies the actual reduction in the algebraic closure, rather than merely an abstract isomorphic quotient.",
+   "uses": [
+    "lem-wf-strict-henselian-fraction-inertia",
+    "lem-real-henselian-residue-galois-action"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-boundary/d-real-boundary.proof.md",
+    "place": "first paragraph, residue Galois surjectivity and arithmetic degree image"
+   }
+  },
+  {
+   "text": "Use the chosen $k_0$-identification $\\bar\\kappa\\simeq k$ to regard $t$ as a map $k'\\to k$. Fix $\\sigma\\in D_s$ and put $g=\\iota_s(r_s(\\sigma))\\in\\operatorname{Gal}(k/k_0)$. For a finite subextension $L/k_0$ of $k/k_0$, let $P_L=U_0\\times_{k_0}\\operatorname{Spec}L$ and $\\rho=g|_L$. The extension $L/k_0$ is Galois with cyclic group generated by $q$-power Frobenius, by [lem-sfb-finite-field-galois-frobenius]; in particular $g$ preserves $L$. By [lem-real-boundary-decomposition-landing], local fibre points of $P_L$ are embeddings $\\lambda:L\\to k'$ and $a_{\\sigma,P_L}(\\lambda)=\\sigma\\circ\\lambda$. Equivariance of $t$ from [lem-real-henselian-residue-galois-action] gives $t\\sigma\\lambda=g\\,t\\lambda$. Each embedding $t\\lambda:L\\to k$ has image $L$: its elements are the roots of $T^{|L|}-T$, which already has all $|L|$ roots in $L$. Its restriction is therefore an element of the same cyclic group, so $g\\,t\\lambda=t\\lambda\\,\\rho$. Thus $a_{\\sigma,P_L}(\\lambda)=\\lambda\\rho$. This is exactly the action on the local fibre of the deck transformation $b_L=\\operatorname{id}_{U_0}\\times\\operatorname{Spec}\\rho$ of $P_L$.",
+   "uses": [
+    "lem-sfb-finite-field-galois-frobenius",
+    "lem-real-boundary-decomposition-landing",
+    "lem-real-henselian-residue-galois-action"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-boundary/d-real-boundary.proof.md",
+    "place": "first paragraph, residue Galois surjectivity and arithmetic degree image"
+   }
+  },
+  {
+   "text": "The path $\\gamma$ is natural for every morphism of covers by [def-real-boundary-decomposition-path], in particular $\\gamma_{P_L}(b_L)_{\\bar\\eta_s}=(b_L)_{\\bar u}\\gamma_{P_L}$. The formula in [lem-real-boundary-decomposition-landing] now gives $\\theta_s(\\sigma)_{P_L}=\\gamma_{P_L}a_{\\sigma,P_L}\\gamma_{P_L}^{-1}=(b_L)_{\\bar u}$. At $\\bar u$, identify the fibre with $\\operatorname{Hom}_{k_0}(L,k)$ using the constants map of $\\bar u$. The deck transformation sends $\\mu$ to $\\mu\\rho=g\\mu$, again because the finite-field Galois group is cyclic. Apply [lem-wf-arithmetic-lift-fibre-path] with $Y_0=U_0$, $K=k_0$, $L=k$: Step 2 verifies its finite-type, separated and geometrically connected hypotheses, and $k_0$ is perfect since its finite algebraic extensions are separable. Its constant-cover characterization gives $p(\\theta_s(\\sigma))|_L=g|_L$. These equalities for every finite $L$ imply $p(\\theta_s(\\sigma))=g$, as $k$ is their union. This proves the square for the given arbitrary path and identification. Surjectivity from Step 6 gives $p(\\theta_s(D_s))=\\iota_s(G_s)=\\operatorname{Gal}(k/k_s)$.",
+   "uses": [
+    "def-real-boundary-decomposition-path",
+    "lem-real-boundary-decomposition-landing",
+    "lem-sfb-finite-field-galois-frobenius",
+    "lem-wf-arithmetic-lift-fibre-path"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-boundary/d-real-boundary.proof.md",
+    "place": "first paragraph, residue Galois surjectivity and arithmetic degree image"
+   }
+  }
+ ],
+ "proof_deps": [
+  "d-real-setup",
+  "def-real-boundary-decomposition-path",
+  "def-sbc-smooth-morphisms",
+  "def-weil-pbc-henselization-at-prime",
+  "lem-kun-closed-point-field",
+  "lem-pc-field-extension-surjective",
+  "lem-real-boundary-decomposition-landing",
+  "lem-real-henselian-residue-galois-action",
+  "lem-sc-regular-dim1-dvr",
+  "lem-sfb-finite-field-galois-frobenius",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-henselian-local-root-lifting",
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-wf-arithmetic-lift-fibre-path",
+  "lem-wf-strict-henselian-fraction-inertia",
+  "rem-pc-regular-normal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-boundary/d-real-boundary.md",
+  "place": "lines 15--36: henselized boundary field, residue/inertia map, decomposition homomorphism, Frobenius action, and path-independence clause; proof expanded with the cited generic scheme, henselian-local, and finite-cover statements"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,7 +192,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-real-boundary-path-independence",
@@ -72,12 +204,86 @@
  "blueprint": {
   "from": {
    "node": "d-real-boundary",
-   "place": "d-real-boundary.proof.md, first paragraph: the local Galois group maps onto the residue Galois group, and its arithmetic image is the subgroup fixing k(s)",
+   "place": "d-real-boundary.md, lines 15--36: the boundary residue/inertia and arithmetic-image/path-independence clauses",
    "via": [
     "lem-real-boundary-path-independence"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-real-boundary-local-constants",
+  "worker": "stage1",
+  "summary": "Repaired all returned gaps without changing the statement: derived irreducibility and geometric connectedness, proved the local DVR hypothesis, cited the existing strict-henselian residue-surjectivity node, compared its separable-closure map to reduction in B by explicit constant-root Hensel lifting, and checked the arithmetic square by naturality for deck transformations on finite constant covers. No new nodes.",
+  "blueprint": "Eight steps expand d-real-boundary.md lines 15--36: finite residue degree, local-to-residue surjectivity, and the full arithmetic constants square needed for the arithmetic degree-image assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-field-extension-surjective",
+    "why": "Generic surjectivity for a field extension establishes connectedness of C_0 from C; not a replacement of the boundary route."
+   },
+   {
+    "node": "lem-weil-pbc-surjective-base-change",
+    "why": "Generic preservation of surjectivity under base change applies to C to C_0."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherian property of finite-type schemes over fields supplies the hypotheses for irreducibility."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "why": "Generic smooth ring base change proves regularity of the geometric curve."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-over-field-regular-local",
+    "why": "Generic regularity of local rings of a smooth algebra over a field, used on curve charts."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Generic irreducibility of a nonempty connected regular Noetherian scheme supplies the curve and open connectedness hypotheses."
+   },
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Generic closed-point theorem proves that the closed boundary point has finite residue degree."
+   },
+   {
+    "node": "lem-sc-regular-dim1-dvr",
+    "why": "Generic regular-local dimension-one criterion verifies the DVR hypothesis of the local inertia theorem."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-local-structure",
+    "why": "Generic strict local structure supplies henselianity needed to lift the finite constant roots inside R."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-local-root-lifting",
+    "why": "Generic simple-root Hensel lifting identifies the two residue maps on all constants."
+   },
+   {
+    "node": "lem-wf-arithmetic-lift-fibre-path",
+    "why": "Only its generic characterization of arithmetic projection on finite constant covers is used; no cohomological trace or duality theorem is invoked."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-field-extension-surjective",
+  "lem-weil-pbc-surjective-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "rem-pc-regular-normal",
+  "lem-kun-closed-point-field",
+  "lem-sc-regular-dim1-dvr",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lem-weil-pbc-henselian-local-root-lifting",
+  "lem-wf-arithmetic-lift-fibre-path"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-Codex-N1-8a3573965",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N1-8a3573965 (reviewer sub-agent of L); spot-checked: The mathematics and all eight steps pass. One citation metadata fault was found: source/proof_origin/blueprint.from claimed a nonexistent first-paragraph residue-surjectivity passage in d-real-boundary.proof.md. Corrected fields point to d-real-boundary.md lines 15–36 in fixes/dag/nodes/sec-purity-real-sheaves/lem-real-boundary-local-constants.json.; 1 file(s) fixed by the reviewer"
  }
 }
