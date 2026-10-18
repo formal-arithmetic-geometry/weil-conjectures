@@ -2,7 +2,7 @@
  "id": "lem-per-pseudo-open-strict-local-fibre",
  "kind": "statement",
  "title": "The strict-local fibre of a pseudo-open immersion",
- "statement": "Let $f:Y\\to X$ be a morphism of Noetherian schemes [def-pc-scheme, def-weil-pbc-noetherian-ring]. Assume that $|f|$ is a homeomorphism onto its image and that the natural map of sheaves of rings $f^{-1}\\mathcal O_X\\to\\mathcal O_Y$ is an isomorphism. For any geometric point $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ [def-weil-geometric-point], put $\\bar x=f\\bar y$ and form strict localizations [def-weil-pbc-strict-henselization-limit] using the same algebraically closed field $\\Omega$. The canonical map $Y_{(\\bar y)}\\to X_{(\\bar x)}$ is an isomorphism, and the natural map $Y_{(\\bar y)}\\to Y\\times_X X_{(\\bar x)}$ is an isomorphism. Equivalently, the commutative square with top arrow $Y_{(\\bar y)}\\to Y$, bottom arrow $X_{(\\bar x)}\\to X$, and right arrow $f$ is Cartesian. All arrows are the canonical maps induced by $f$ and the pointed strict localizations.",
+ "statement": "Let $f:Y\\to X$ be a morphism of Noetherian schemes [def-pc-scheme, def-weil-pbc-noetherian-ring]. Assume that $|f|$ is a homeomorphism onto its image and that the natural map of sheaves of rings $f^{-1}\\mathcal O_X\\to\\mathcal O_Y$ (the adjoint of $f^\\sharp$ for the inverse image [def-weil-pbc-topological-inverse-image]) is an isomorphism. For any geometric point $\\bar y:\\operatorname{Spec}\\Omega\\to Y$ [def-weil-geometric-point], put $\\bar x=f\\bar y$ and form strict localizations [def-weil-pbc-strict-henselization-limit] using the same algebraically closed field $\\Omega$. The canonical map $Y_{(\\bar y)}\\to X_{(\\bar x)}$ is an isomorphism, and the natural map $Y_{(\\bar y)}\\to Y\\times_X X_{(\\bar x)}$ is an isomorphism. Equivalently, the commutative square with top arrow $Y_{(\\bar y)}\\to Y$, bottom arrow $X_{(\\bar x)}\\to X$, and right arrow $f$ is Cartesian. All arrows are the canonical maps induced by $f$ and the pointed strict localizations.",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "XVII Definition 5.2.1 and proof of Proposition 5.2.2(a),(c): ordinary geometric strict-local-fibre assertion underlying the stated trivial t-exactness and the derived counit isomorphism."
@@ -11,11 +11,85 @@
   "def-pc-scheme",
   "def-weil-pbc-noetherian-ring",
   "def-weil-geometric-point",
-  "def-weil-pbc-strict-henselization-limit"
+  "def-weil-pbc-strict-henselization-limit",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-pbc-topological-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $j_Y:Y_{(\\bar y)}\\to Y$ and $j_X:X_{(\\bar x)}\\to X$. Let $y$ and $x=f(y)$ be the underlying points. Let $\\varphi:f^{-1}\\mathcal O_X\\to\\mathcal O_Y$ be the assumed isomorphism, the adjoint of $f^\\sharp$, so $f_*\\varphi\\circ\\eta=f^\\sharp$ for the unit $\\eta$ of [def-weil-pbc-topological-inverse-image]. By [lem-weil-pbc-topological-inverse-image-stalk] (commutative rings) there is a ring isomorphism $c:\\mathcal O_{X,x}\\xrightarrow{\\sim}(f^{-1}\\mathcal O_X)_y$ with $c(s_x)=(\\eta_V(s))_y$ for $s\\in\\mathcal O_X(V)$, $V\\ni x$. Put $\\alpha=\\varphi_y\\circ c:\\mathcal O_{X,x}\\xrightarrow{\\sim}\\mathcal O_{Y,y}$. Then $\\alpha(s_x)=(\\varphi_{f^{-1}V}\\eta_V(s))_y=(f^\\sharp_V(s))_y$, so $\\alpha$ is the stalk map $f^\\sharp_y$ of [def-weil-locally-ringed-space-morphism], and it is an isomorphism. Since $\\bar x=f\\bar y$, the two maps from these local rings to $\\Omega$ satisfy $\\mathrm{ev}_y\\alpha=\\mathrm{ev}_x$. Thus $\\alpha$ identifies the embedded residue fields, and their separable algebraic closures inside $\\Omega$ are the same field $K$. This is an identification through the given maps to $\\Omega$, not an arbitrary isomorphism of separable closures.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism",
+    "def-weil-pbc-topological-inverse-image",
+    "lem-weil-pbc-topological-inverse-image-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Definition 5.2.1; passing to germs in its structure-sheaf isomorphism"
+   }
+  },
+  {
+   "text": "Put $A=\\mathcal O_{X,x}$ and $B=\\mathcal O_{Y,y}$. Choose affine opens $U=\\operatorname{Spec}D\\ni x$ and $V=\\operatorname{Spec}E\\ni y$ with $V\\subseteq f^{-1}(U)$; by [lem-weil-pbc-affine-open-stalk-localization](c) the germ maps identify $D_{\\mathfrak p_x}\\cong A$ and $E_{\\mathfrak p_y}\\cong B$, so the local rings $L$ of the comparison below are $A$ and $B$ with their germ maps from $D$ and $E$. By [lem-exc-affine-strict-local-ring-comparison], the geometric strict-local rings $C_X$ and $C_Y$ identify with algebraic strict henselizations of $A$ and $B$ relative to $K$, compatibly with structural maps and geometric evaluation. In the pointed-algebra colimit definition [def-sc-ring-strict-henselization], an etale $B$-algebra $(E,\\chi:E\\to K)$ is an etale $A$-algebra by composing its structural map with $\\alpha$; the inverse operation composes an $A$-algebra structure with $\\alpha^{-1}$. They leave $E$, $\\chi$ and every morphism unchanged, and are inverse on the entire diagrams. On small representative categories as in the strict-local construction, their colimits therefore give mutually inverse maps $\\beta:C_X\\to C_Y$ and $\\gamma:C_Y\\to C_X$: on every colimit leg the composites are the identity, so the universal property [def-weil-pbc-category-colimit] makes $\\gamma\\beta$ and $\\beta\\gamma$ identities. The map $\\beta$ extends $\\alpha$ and preserves evaluation in $K$; its inverse does likewise.",
+   "uses": [
+    "lem-exc-affine-strict-local-ring-comparison",
+    "def-sc-ring-strict-henselization",
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04HX, lemma-describe-etale-local-ring, and algebra.tex Tag 04GW, lemma-strict-henselization-different; reindexing along an isomorphism of local rings"
+   }
+  },
+  {
+   "text": "Let $e=\\operatorname{Spec}\\beta:Y_{(\\bar y)}\\to X_{(\\bar x)}$. It is an isomorphism by Step 2. It satisfies $j_Xe=fj_Y$: take an affine open $U=\\operatorname{Spec}D$ containing $x$ and an affine open $V=\\operatorname{Spec}E$ containing $y$ in $f^{-1}(U)$. Both composites factor through the open $U$ (the first by the structural equation of the comparison, the second since $V\\subseteq f^{-1}(U)$), and morphisms from the affine scheme $\\operatorname{Spec}C_Y$ to $U=\\operatorname{Spec}D$ are determined by their ring maps $D\\to C_Y$ [lem-a1-locally-ringed-space-affine-adjunction]. The affine comparisons in Step 2 express the two composites to $U$ by the ring maps $D\\to A\\to C_X\\xrightarrow{\\beta}C_Y$ and $D\\to E\\to B\\to C_Y$. They agree because $\\alpha=f^\\sharp_y$ (Step 1) makes $D\\to A\\xrightarrow{\\alpha}B$ equal to $D\\to E\\to B$ (germs of $f^\\sharp$, with $D\\to E$ the ring map of $f|_V:V\\to U$ and the identifications of [lem-weil-pbc-affine-open-stalk-localization]), and $\\beta$ extends $\\alpha$. The residue map of $\\beta$ is the identity on the common $K$ by evaluation compatibility in Step 2. The uniqueness in clause (3) of [lem-weil-pbc-strict-henselization-functoriality] now identifies $\\beta$ with the canonical local ring map induced by $f$. In particular $e$ is the canonical strict-localization map in the statement, not merely some isomorphism between the two schemes.",
+   "uses": [
+    "lem-exc-affine-strict-local-ring-comparison",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-a1-locally-ringed-space-affine-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PS, definition-etale-local-rings, following functoriality paragraph; Tag 04HX, lemma-describe-etale-local-ring; algebra.tex Tag 04GU, lemma-strictly-henselian-functorial"
+   }
+  },
+  {
+   "text": "The morphism $f$ is a monomorphism directly from the hypotheses. If $a,b:T\\to Y$ satisfy $fa=fb$, injectivity of $|f|$ gives the same underlying map $a=b$ on points. On that common inverse-image sheaf, the maps to $\\mathcal O_T$ for the two composites are $a^\\sharp\\circ a^{-1}(f^\\sharp)$ and $b^\\sharp\\circ b^{-1}(f^\\sharp)$ in the inverse-image form of the composition rule in [def-weil-locally-ringed-space-morphism], obtained through the adjunction $a^{-1}\\dashv a_*$ of [def-weil-pbc-topological-inverse-image]. The last factors coincide and are isomorphisms; cancel them to get $a^\\sharp=b^\\sharp$, hence equality of scheme morphisms. Now take any $a:T\\to Y$ and $b:T\\to X_{(\\bar x)}$ with $fa=j_Xb$. Set $c=e^{-1}b$. Step 3 gives $f j_Yc=j_Xec=j_Xb=fa$; cancellation of $f$ gives $j_Yc=a$. Also $ec=b$, and the last equation determines $c$ uniquely. This is exactly the universal property [def-pc-fibre-product] for the displayed square. It follows that its canonical comparison $Y_{(\\bar y)}\\to Y\\times_X X_{(\\bar x)}$ is an isomorphism respecting both projections.",
+   "uses": [
+    "def-weil-locally-ringed-space-morphism",
+    "def-pc-fibre-product",
+    "def-weil-pbc-topological-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII Definition 5.2.1 and proof of Proposition 5.2.2(a),(c), expanded by cancellation and the fibre-product universal property"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-pbc-topological-inverse-image",
+  "lem-weil-pbc-topological-inverse-image-stalk",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "def-sc-ring-strict-henselization",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-a1-locally-ringed-space-affine-adjunction",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XVII Definition 5.2.1 and proof of Proposition 5.2.2(a),(c), printed p. 287; ordinary geometric argument supplied using Stacks 04HX/04GW and strict-local functoriality"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +125,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocalIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalIso\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For schemes $ X $ and $ Y $, a morphism $ f : X \\to Y $ is a local isomorphism if there exists an open cover $ \\\\{U_i\\\\} $ of $ X $ such that for each $ i $, the restriction $ f|_{U_i} $ is an isomorphis\"}\n  {\"name\": \"AlgebraicGeometry.isEmbedding_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] => Topology.IsEmbedding)\", \"doc\": \"The property of being a topological embedding for scheme morphisms is Zariski local at the target. Specifically, for any scheme morphism $ f $ whose underlying continuous map is an embedding, and for \"}\n  {\"name\": \"AlgebraicGeometry.SurjectiveOnStalks.isEmbedding_pullback\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/SurjectiveOnStalks\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (f : X ⟶ S) (g : Y ⟶ S) [AlgebraicGeometry.SurjectiveOnStalks g],\\n  Topology.IsEmbedding fun x =>\\n    ((CategoryTheory.ConcreteCategory.hom (CategoryTheory.Limits.pullback.fst f g).base) x,\\n      (CategoryTheory.ConcreteCategory.hom (CategoryTheory.Limits.pullbac\", \"doc\": \"Given schemes $X$, $Y$, and $S$ with morphisms $f : X \\to S$ and $g : Y \\to S$, if $g$ is surjective on stalks, then the natural morphism from the fiber product $X \\times_S Y$ to the product $X \\times Y$ \"}\n  {\"name\": \"AlgebraicGeometry.IsLocalIso.le_of_isLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalIso\", \"type\": \"∀ (P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme) [P.ContainsIdentities]\\n  [AlgebraicGeometry.IsZariskiLocalAtSource P], @AlgebraicGeometry.IsLocalIso ≤ P\", \"doc\": \"If a morphism property $ P $ on schemes contains identities and is Zariski-local at the source, then every local isomorphism satisfies $ P $. This follows from the fact that local isomorphisms are def\"}\n  {\"name\": \"AlgebraicGeometry.isLocalIso_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalIso\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsLocalIso f ↔\\n    ∀ (x : ↥X), ∃ U, x ∈ U ∧ AlgebraicGeometry.IsOpenImmersion (CategoryTheory.CategoryStruct.comp U.ι f)\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is a local isomorphism if and only if for every point $x \\\\in X$, there exists an open neighborhood $U$ of $x$ such that the restriction of $f$ to the open subscheme \"}\n  {\"name\": \"AlgebraicGeometry.isomorphisms_eq_stalkwise\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/IsIso\", \"type\": \"CategoryTheory.MorphismProperty.isomorphisms AlgebraicGeometry.Scheme =\\n  (CategoryTheory.MorphismProperty.isomorphisms TopCat).inverseImage AlgebraicGeometry.Scheme.forgetToTop ⊓\\n    AlgebraicGeometry.stalkwise fun {R S} [CommRing R] [CommRing S] f => Function.Bijective ⇑f\", \"doc\": \"A morphism of schemes is an isomorphism if and only if it induces a homeomorphism on the underlying topological spaces and the induced maps on the stalks are bijective.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalIso.instIsMultiplicativeScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalIso\", \"type\": \"CategoryTheory.MorphismProperty.IsMultiplicative @AlgebraicGeometry.IsLocalIso\", \"doc\": \"The property of being a local isomorphism between schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are local isomorphisms of schemes, then their composition $ g \\\\circ f : X \\\\\"}\n  {\"name\": \"AlgebraicGeometry.HasRingHomProperty.descendsAlong\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Descent\", \"type\": \"∀ (P P' : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme)\\n  (Q Q' : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop) [P'.IsStableUnderBaseChange]\\n  [P'.IsStableUnderComposition] [P.IsStableUnderBaseChange],\\n  @AlgebraicGeometry.IsLocalIso ⊓ @AlgebraicGeometr\", \"doc\": \"If a ring homomorphism property $ Q $ codescends along another property $ Q' $, then any property $ P $ descends along the intersection of $ P' $ and quasi-compact morphisms.\"}\n",
    "date": "2026-10-18",
    "verdict": "no match: inspected the returned signatures; ordinary derived t-structures, module local cohomology, sheaf generators without support constraints, and open immersions do not state this result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of schemes which is a topological embedding and induces isomorphisms on all stalks is a monomorphism",
+   "results": "8 hits: AlgebraicGeometry.IsPreimmersion.instMonoScheme, AlgebraicGeometry.IsOpenImmersion.mono, AlgebraicGeometry.IsOpenImmersion.le_monomorphisms, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.mono, AlgebraicGeometry.SurjectiveOnStalks.mono_of_injective, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.instMono, AlgebraicGeometry.instIsZariskiLocalAtTargetMonomorphismsScheme, AlgebraicGeometry.SheafedSpace.mono_of_base_injective_of_stalk_epi; signatures read from the search output",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: SurjectiveOnStalks.mono_of_injective and IsPreimmersion.instMonoScheme give only monomorphy; the cancellation argument is elementary and is written in Step 4"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"strictHenselization\"",
+   "results": "0 hits: none; signatures read from the search output",
+   "date": "2026-10-18",
+   "verdict": "no match: no strict-henselization construction or comparison; returned stalk, residue-field, open-immersion and local-isomorphism facts do not state the strict-localization or Cartesian assertions"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHenselization|strictLocalization|pseudo.?[Oo]pen|[Hh]enselization",
+   "results": "0 hits: none; signatures read from the search output",
+   "date": "2026-10-18",
+   "verdict": "no match: no strict-henselization construction or comparison; returned stalk, residue-field, open-immersion and local-isomorphism facts do not state the strict-localization or Cartesian assertions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict localizations of schemes with isomorphic local rings and the same geometric residue point are isomorphic",
+   "results": "8 hits: AlgebraicGeometry.Scheme.residue_residueFieldCongr_assoc, AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff, AlgebraicGeometry.Scheme.residueFieldCongr, AlgebraicGeometry.Scheme.mk.inj, AlgebraicGeometry.Spec_map_localization_isIso, AlgebraicGeometry.Scheme.residueFieldCongr.congr_simp, AlgebraicGeometry.Scheme.mk.injEq, quotMapEquivQuotMapMaximalIdealOfIsLocalization; signatures read from the search output",
+   "date": "2026-10-18",
+   "verdict": "no match: no strict-henselization construction or comparison; returned stalk, residue-field, open-immersion and local-isomorphism facts do not state the strict-localization or Cartesian assertions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict localizations at corresponding geometric points of a scheme morphism inducing isomorphisms on local rings are canonically isomorphic; for a pseudo-open immersion the square is Cartesian",
+   "results": "8 hits: AlgebraicGeometry.IsOpenImmersion.instIsIsoCommRingCatStalkMap, AlgebraicGeometry.IsLocalIso, AlgebraicGeometry.isomorphisms_eq_stalkwise, AlgebraicGeometry.Scheme.arrowStalkMapSpecIso, AlgebraicGeometry.Scheme.instIsIsoCommRingCatResidueFieldMapOfIsOpenImmersion, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.stalk_iso, AlgebraicGeometry.SpecToEquivOfLocalRing_eq_iff, AlgebraicGeometry.isIso_iff_stalk_iso; signatures read from the search output",
+   "date": "2026-10-18",
+   "verdict": "no match: no strict-henselization construction or comparison; returned stalk, residue-field, open-immersion and local-isomorphism facts do not state the strict-localization or Cartesian assertions"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-perversity-localization-calculus",
@@ -78,5 +187,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-pseudo-open-strict-local-fibre",
+  "worker": "stage1",
+  "summary": "Proved the unchanged geometric assertion in four steps: stalk and pointed-residue identification; inverse reindexings of algebraic strict-henselization diagrams; identification with the canonical functorial strict-local map; monomorphy and the Cartesian universal property by explicit cancellation. Reused the existing affine geometric/algebraic comparison instead of introducing a clause restatement. No new nodes. Searched project Lean, whole DAG and blueprint and all Mathlib search services; no exact attachment or Mathlib leaf.",
+  "blueprint": "Nearest blueprint ancestor lem-per-artin-gabber-affine-curve, proof Step 1 through the existing perversity-localization-calculus branch: supplies the ordinary strict-local identification needed for XVII 5.2.2(a) and the Cartesian fibre needed for (c). Whole-blueprint searches for pseudo-open, preimmersion and strict henselization found no duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-affine-strict-local-ring-comparison",
+    "why": "Generic Stacks 04HX geometric-to-algebraic strict-local ring comparison, preserving structure and residue maps; this unit has no such comparison and its perverse route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Generic canonical local map and its uniqueness at a pointed strict localization, used only to identify the constructed isomorphism with the arrow in the statement; the unit has no substitute."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-weil-pbc-strict-henselization-functoriality"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-19f602ec5",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-19f602ec5 (reviewer sub-agent of L); spot-checked: I read the full item and its 4 steps (it has no new nodes), every cited node's statement, ILO XVII Def 5.2.1 / Prop 5.2.2 with its proof (p. 287), the citer lem-per-perversity-localization-calculus Steps 3 and 6, and the unit route. The statement matches Def 5.2.1 and is true. It was tested on an open immersion, Spec A_p→Spec A, the generic point Spec κ(η)→X, a closed immersion (fails the hypothesis and the conclusion) and an étale double cover (fails injectivity). Steps 2–4 are mathematically correct: the pointed étale categories are reindexed along α and the inverse colimit maps follow from the colimit universal property; clause (3) of the functoriality node identifies the result with the canonical map; Step 4 is a correct monomorphism and cancellation argument. I fixed missing citations (C1/C2/B3) in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-pseudo-open-strict-local-fibre.json. (1) Step 1 was marked elementary but used, uncited, the stalk of the sheaf inverse image and the fact that f^{-1}O_X→O_Y is the adjoint of f♯. It now cites lem-weil-pbc-topological-inverse-image-stalk (Lean-closed) and def-weil-pbc-topological-inverse-image, proves α=f♯_y, and is elementary:false. The statement gains only the citation bracket for the inverse image, and stmt_deps gains def-weil-pbc-topological-inverse-image. (2) Steps 2 and 3 applied the D_p-chart comparison to O_{X,x} without the identification D_p≅O_{X,x}; they now cite the Mathlib leaf lem-weil-pbc-affine-open-stalk-localization. (3) Step 3 used maps into an affine scheme via ring maps without citation; it now cites the Mathlib leaf lem-a1-locally-ringed-space-affine-adjunction. (4) Step 4's inverse-image form of composition now cites the adjunction in def-weil-pbc-topological-inverse-image. proof_deps is the union of uses; there are no cycles and every step is under 2000 characters. I accepted the declared tool uses lem-exc-affine-strict-local-ring-comparison and lem-weil-pbc-strict-henselization-functoriality: both are generic strict-local comparisons, and the unit's route is unchanged. No SGA source is used.; 1 file(s) fixed by the reviewer"
  }
 }
