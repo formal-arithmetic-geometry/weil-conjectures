@@ -21,8 +21,8 @@ neither a finite family nor a single étale surjection.
 - `CategoryTheory.isIso_map_ev_of_isIso_ihomComparison`: a monoidal functor commuting with duals
   sends the evaluation `A ⊗ [A, 𝟙] ⟶ 𝟙` to an isomorphism when it sends `A` to an invertible
   object.
-- `AlgebraicGeometry.Etale.isIso_of_forall_isIso_leftDerivedUpperStar_map`: isomorphisms of
-  `D(X_ét, Λ)` are detected by a jointly surjective family of pullbacks.
+- `AlgebraicGeometry.Etale.isIso_of_forall_isIso_leftDerivedUpperStar_map_of_family`:
+  isomorphisms of `D(X_ét, Λ)` are detected by a jointly surjective family of pullbacks.
 - `AlgebraicGeometry.Etale.isInvertible_of_forall_isInvertible_leftDerivedUpperStar`
 -/
 
@@ -77,7 +77,7 @@ Let `a i : U i ⟶ X` be a jointly surjective family of morphisms and `φ : M �
 `D(X_ét, Λ)`. If every `La_i^* φ` is an isomorphism, then so is `φ`: the cohomology sheaves
 `ℋʳ(φ)` are isomorphisms, as `a_i^* ℋʳ(φ) ≅ ℋʳ(La_i^* φ)` and every geometric point of `X` lifts
 to some `U i`. -/
-theorem isIso_of_forall_isIso_leftDerivedUpperStar_map {X : Scheme.{u}} {ι : Type u}
+theorem isIso_of_forall_isIso_leftDerivedUpperStar_map_of_family {X : Scheme.{u}} {ι : Type u}
     {U : ι → Scheme.{u}} (a : ∀ i, U i ⟶ X) (ha : ∀ x : X, ∃ (i : ι) (y : U i), (a i).base y = x)
     {M N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
     (φ : M ⟶ N) (h : ∀ i, IsIso ((L((a i)^*[ModuleCat.{u + 1} Λ])).map φ)) : IsIso φ := by
@@ -115,7 +115,8 @@ Invertibility is local for a jointly surjective family of étale morphisms `a i 
 every `La_i^* L` is invertible, then so is `L`. The evaluation `L ⊗ᴸ RHom(L, Λ) ⟶ Λ` pulls back
 to an isomorphism along every `a i`
 (`AlgebraicGeometry.Etale.isIso_leftDerivedUpperStar_map_ev_of_etale`), and isomorphisms are
-detected by the family (`AlgebraicGeometry.Etale.isIso_of_forall_isIso_leftDerivedUpperStar_map`).
+detected by the family
+(`AlgebraicGeometry.Etale.isIso_of_forall_isIso_leftDerivedUpperStar_map_of_family`).
 -/
 theorem isInvertible_of_forall_isInvertible_leftDerivedUpperStar {X : Scheme.{u}} {ι : Type u}
     {U : ι → Scheme.{u}} (a : ∀ i, U i ⟶ X) [∀ i, Etale (a i)]
@@ -125,7 +126,7 @@ theorem isInvertible_of_forall_isInvertible_leftDerivedUpperStar {X : Scheme.{u}
     DerivedCategory.isInvertible Λ X L := by
   obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory
     (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-  have := isIso_of_forall_isIso_leftDerivedUpperStar_map Λ a ha _
+  have := isIso_of_forall_isIso_leftDerivedUpperStar_map_of_family Λ a ha _
     fun i ↦ isIso_leftDerivedUpperStar_map_ev_of_etale Λ (a i) L (h i)
   exact (isInvertible_iff_exists_derivedTensor _).1
     ((isInvertible_iff_of_braided L).2 ⟨_, ⟨asIso ((ihom.ev L).app (𝟙_ _))⟩⟩)
