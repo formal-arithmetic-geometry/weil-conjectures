@@ -81,7 +81,11 @@ theorem etaleOriginForgetfulPlus_essImage (T : Scheme.{u}) (Λ : Type (u + 1))
     [CommRing Λ] [Finite Λ] [TopologicalSpace Λ] [DiscreteTopology Λ]
     (K : FiniteCoefficientDerivedCategoryPlus T Λ) :
     (etaleOriginForgetfulPlus T Λ).essImage K ↔ Nonempty (EtaleOriginWitness T Λ K) := by
-  sorry
+  constructor
+  · rintro ⟨P, ⟨e⟩⟩
+    exact ⟨⟨P.2.L, P.2.alpha ≪≫ e⟩⟩
+  · rintro ⟨W⟩
+    exact ⟨⟨K, W⟩, ⟨Iso.refl K⟩⟩
 
 /-- Regard the witness-retaining category as a full subcategory of the unbounded
 pro-etale derived category through the bounded below inclusion.
