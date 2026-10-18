@@ -10,16 +10,7 @@ public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Sheaf.Algebra.Homology.DerivedChangeOfRings
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
-import Sheaf.RingTheory.PseudoCoherentNilpotentInvariance
-import Mathlib.Algebra.Homology.DerivedCategory.KProjective
-import Mathlib.RingTheory.TensorProduct.Basic
-import Mathlib.CategoryTheory.Triangulated.Pretriangulated
-import Mathlib.CategoryTheory.Triangulated.Triangulated
-import Sheaf.Algebra.Homology.SurjectiveModuleComplexTowerLimit
-import Sheaf.RingTheory.NilpotentMarkedFreeComplexLift
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
+import Sheaf.RingTheory.PseudoCoherentInverseRingReconstructionModels
 
 /-!
 # Pseudo-coherent reconstruction over a tower of nilpotent quotients
@@ -221,6 +212,24 @@ theorem isPseudoCoherent_inverse_ring_reconstruction
         Q.map (η n)) ∧
       (∀ n, (γ n).hom ≫ Q.map (θ n).hom ≫ (βₙ n).hom =
         (M n).map β.hom ≫ ((adjq n).homEquiv E (Eₙ n)).symm (pE ≫ Pi.π _ n)) := by
-  sorry
+  have hm := reconstruction_models (R := R) (φ := φ) (hsurj := hsurj) (hnil := hnil)
+    (A := A) (q := q) (hq := hq) (hlim := hlim) (L := L) (adjφ := adjφ) (M := M)
+    (adjq := adjq) (χ := χ) (hχ := hχ) (Eₙ := Eₙ) (t := t) (hred := hred)
+    (hpc := hpc) (E := E) (pE := pE) (δ := δ) (hE := hE)
+  obtain ⟨Pₙ, b, βₙ, uₙ, θₙ, P, β, p, θ, η, γ, hdata⟩ := hm
+  rcases hdata with ⟨hboundₙ, hfreeₙ, hsurjₙ, hθₙ, huₙ, hPbound, hPfree,
+    hproj, hlimP, hcomparison, hθ, hη, hγ, hfinal⟩
+  have hpcE : IsPseudoCoherent E := ⟨P, b, hPbound, hPfree, ⟨β⟩⟩
+  have hIso (n : ℕ) : IsIso (((adjq n).homEquiv E (Eₙ n)).symm (pE ≫ Pi.π _ n)) := by
+    let f := ((adjq n).homEquiv E (Eₙ n)).symm (pE ≫ Pi.π _ n)
+    have hi : IsIso ((M n).map β.hom ≫ f) := by
+      rw [← hfinal n]
+      infer_instance
+    set_option linter.style.haveILetI false in
+      letI : IsIso ((M n).map β.hom ≫ f) := hi
+    exact IsIso.of_isIso_comp_left ((M n).map β.hom) f
+  exact ⟨hpcE, hIso, ⟨Pₙ, b, βₙ, uₙ, θₙ, P, β, p, θ, η, γ,
+    ⟨hboundₙ, hfreeₙ, hsurjₙ, hθₙ, huₙ, hPbound, hPfree, hproj, hlimP,
+      hcomparison, hθ, hη, hγ, hfinal⟩⟩⟩
 
 end DerivedCategory

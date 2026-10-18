@@ -1,0 +1,123 @@
+{
+ "id": "lem-weil-pbc-pseudocoherent-inverse-ring-reconstruction-models",
+ "kind": "statement",
+ "title": "Compatible finite-free models for inverse-ring reconstruction",
+ "statement": "For a tower of commutative rings with surjective nilpotent transitions and compatible derived objects satisfying the marked lifting [lem-weil-pbc-nilpotent-marked-free-complex-lift], tower limit [lem-weil-pbc-surjective-module-complex-tower-limit], K-flat scalar extension [lem-pc-module-bounded-flat-kflat], and coefficient adjunction [lem-pur-sheaf-ring-derived-coefficient-adjunction] hypotheses, there exist bounded-above finite-free complexes, surjective transitions, a termwise limit complex, markings, projections, scalar-extension isomorphisms, and all corresponding chain-level compatibility equations.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0CQF, compatible finite-free model construction and projection calculations"
+ },
+ "proof": [
+  {
+   "text": "Perform the induction over nilpotent transitions using the marked finite-free lifting theorem, choose compatible bases degreewise, take the termwise inverse limit, and verify the derived-limit and scalar-extension comparison equations.",
+   "uses": [
+    "lem-weil-pbc-nilpotent-marked-free-complex-lift",
+    "lem-weil-pbc-surjective-module-complex-tower-limit",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CQF"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-nilpotent-marked-free-complex-lift",
+  "lem-weil-pbc-surjective-module-complex-tower-limit",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0CQF"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "existential finite-free model clause",
+   "via": []
+  }
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PseudoCoherentInverseRingReconstruction",
+  "date": "2026-10-18",
+  "group": "D2"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PseudoCoherentInverseRingReconstructionModels",
+  "declaration": "DerivedCategory.reconstruction_models",
+  "file": "lean/Sheaf/RingTheory/PseudoCoherentInverseRingReconstructionModels.lean",
+  "statement": "theorem reconstruction_models :\n    ∃ (Pₙ : ∀ n, CochainComplex (ModuleCat.{max u v} (R n)) ℤ)\n      (b : ℤ) (βₙ : ∀ n, Q.obj (Pₙ n) ≅ Eₙ n)\n      (uₙ : ∀ n, Pₙ (n + 1) ⟶\n        ((ModuleCat.restrictScalars (φ n)).mapHomologicalComplex (.up ℤ)).obj (Pₙ n))\n      (θₙ : ∀ n, ((ModuleCat.extendScalars (φ n)).mapHomologicalComplex (.up ℤ)).obj\n        (Pₙ (n + 1)) ≅ Pₙ n)\n      (P : CochainComplex (ModuleCat.{max u v} A) ℤ) (β : Q.obj P ≅ E)\n      (p : ∀ n, P ⟶\n        ((ModuleCat.restrictScalars (q n)).mapHomologicalComplex (.up ℤ)).obj (Pₙ n))\n      (θ : ∀ n, ((ModuleCat.extendScalars (q n)).mapHomologicalComplex (.up ℤ)).obj P ≅ Pₙ n)\n      (η : ∀ n, P ⟶ ((ModuleCat.restrictScalars (q n)).mapHomologicalComplex (.up ℤ)).obj\n        (((ModuleCat.extendScalars (q n)).mapHomologicalComplex (.up ℤ)).obj P))\n      (γ : ∀ n, (M n).obj (Q.obj P) ≅\n        Q.obj (((ModuleCat.extendScalars (q n)).mapHomologicalComplex (.up ℤ)).obj P)),\n      (∀ n, (Pₙ n).IsStrictlyLE b) ∧\n      (∀ n i, Module.Free (R n) ((Pₙ n).X i) ∧ Module.Finite (R n) ((Pₙ n).X i)) ∧\n      (∀ n i, Function.Surjective ((uₙ n).f i)) ∧\n      (∀ n i, ((ModuleCat.extendRestrictScalarsAdj (φ n)).homEquiv\n        ((Pₙ (n + 1)).X i) ((Pₙ n).X i) ((θₙ n).hom.f i)) = (uₙ n).f i) ∧\n      (∀ n, Q.map (uₙ n) = (βₙ (n + 1)).hom ≫ t n ≫\n        (ModuleCat.restrictScalars (φ n)).mapDerivedCategory.map (βₙ n).inv ≫\n        (ModuleCat.restrictScalars (φ n)).mapDerivedCategoryFactors.hom.app (Pₙ n)) ∧\n      P.IsStrictlyLE b ∧\n      (∀ i, Module.Free A (P.X i) ∧ Module.Finite A (P.X i)) ∧\n      (∀ n i (y : P.X i), (uₙ n).f i ((p (n + 1)).f i y) = (p n).f i y) ∧\n      (∀ i (x : ∀ n, (Pₙ n).X i), (∀ n, (uₙ n).f i (x (n + 1)) = x n) →\n        ∃! y : P.X i, ∀ n, (p n).f i y = x n) ∧\n      (∀ n, Q.map (p n) ≫\n        (ModuleCat.restrictScalars (q n)).mapDerivedCategoryFactors.inv.app (Pₙ n) ≫\n        (ModuleCat.restrictScalars (q n)).mapDerivedCategory.map (βₙ n).hom =\n        β.hom ≫ pE ≫ Pi.π _ n) ∧\n      (∀ n i, ((ModuleCat.extendRestrictScalarsAdj (q n)).homEquiv\n        (P.X i) ((Pₙ n).X i) ((θ n).hom.f i)) = (p n).f i) ∧\n      (∀ n i, (η n).f i = (ModuleCat.extendRestrictScalarsAdj (q n)).unit.app (P.X i)) ∧\n      (∀ n, (adjq n).unit.app (Q.obj P) ≫\n        (ModuleCat.restrictScalars (q n)).mapDerivedCategory.map (γ n).hom ≫\n        (ModuleCat.restrictScalars (q n)).mapDerivedCategoryFactors.hom.app\n          (((ModuleCat.extendScalars (q n)).mapHomologicalComplex (.up ℤ)).obj P) =\n        Q.map (η n)) ∧\n      (∀ n, (γ n).hom ≫ Q.map (θ n).hom ≫ (βₙ n).hom =\n        (M n).map β.hom ≫ ((adjq n).homEquiv E (Eₙ n)).symm (pE ≫ Pi.π _ n))",
+  "branch": "sheaf-dag",
+  "by": "D2",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "compatible finite free complexes over nilpotent quotient rings",
+   "results": "No exact match; only generic projective-resolution declarations.",
+   "verdict": "no match",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Module.Free\" \"IsStrictlyLE\" CochainComplex",
+   "results": "No exact match.",
+   "verdict": "no match",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "grep",
+   "query": "marked finite free complex lift inverse limit",
+   "results": "No Mathlib declaration of the full tower construction.",
+   "verdict": "no match",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite free nilpotent tower inverse limit complex",
+   "results": "No exact match.",
+   "verdict": "no match",
+   "date": "2026-10-18"
+  }
+ ],
+ "stmt_deps": [
+  "lem-weil-pbc-nilpotent-marked-free-complex-lift",
+  "lem-weil-pbc-surjective-module-complex-tower-limit",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261018T102813-L-4138048",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D2",
+  "result": "pass",
+  "landing": "20261018T102813-L-4138048",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
