@@ -1,0 +1,122 @@
+{
+ "id": "lem-exc-derived-open-closed-conservative",
+ "kind": "statement",
+ "title": "Derived open-closed conservativity for arbitrary coefficients",
+ "statement": "Let $\\mathcal A$ be a Grothendieck abelian coefficient category, and let $j:U\\to X$, $i:Z\\to X$ be complementary open and closed immersions of schemes [def-pc-scheme, def-weil-open-immersion, def-weil-closed-immersion]. On the ordinary unbounded derived categories of small etale $\\mathcal A$-valued sheaves [def-weil-abstract-derived-category, def-weil-pbc-etale-site], the pair $(D(j^*),D(i^*))$ jointly reflects isomorphisms.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/OpenClosed/Supported.lean",
+  "place": "mem_essImage_lowerStar_of_isZero_upperStar, jointlyReflectIsomorphisms_upperStar'; Derived.lean, jointlyReflectIsomorphisms_mapDerivedCategoryUpperStar'"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-closed-immersion",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "At the sheaf level a sheaf killed by j^* is i_*G: base change i.Etale is cover-dense and locally full and faithful; its induced-topology sheaf equivalence applies because adjoining the etale objects over U turns every induced cover into an etale cover, and the given sheaf vanishes on those objects. The source Supported.lean proves this for arbitrary Grothendieck abelian coefficients.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "If i^* also kills the sheaf, the invertible counit i^*i_*G to G makes G zero. Exact inverse images therefore detect zero kernels and cokernels, giving joint reflection of isomorphisms on sheaves.",
+   "uses": [
+    "prop-openclosed-lowerstar-fully-faithful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact inverse images commute with all homology objects. If both derived restrictions invert a map, they invert each homology map. Sheaf-level joint conservativity makes every homology map invertible, so the derived map is invertible.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "prop-openclosed-lowerstar-fully-faithful"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "A7",
+  "date": "2026-10-18",
+  "document": "lean/WeilConjectures/SixFunctors/OpenClosed/Derived.lean",
+  "place": "Existing proved library declaration; the numbered argument records its proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For complementary open and closed immersions of schemes the inverse images on unbounded derived etale sheaves jointly reflect isomorphisms and open pullback of closed direct image is zero",
+   "results": "8 hits: AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, AlgebraicGeometry.IsOpenImmersion, AlgebraicGeometry.Scheme.Hom.appIso, AlgebraicGeometry.IsOpenImmersion.ΓIsoTop, AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv, AlgebraicGeometry.Scheme.Hom.isoOpensRange, AlgebraicGeometry.Scheme.Hom.appIso_inv_app, AlgebraicGeometry.Scheme.Hom.app_appIso_inv_assoc; no exact Mathlib match; existing source-library declaration used",
+   "date": "2026-10-18",
+   "verdict": "existing library match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fully faithful derived functors and open closed conservativity give a distinguished triangle completing the counit of an adjunction with right orthogonal third vertex",
+   "results": "8 hits: CategoryTheory.Adjunction.isTriangulated_rightAdjoint, CategoryTheory.Adjunction.isTriangulated_leftAdjoint, CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism, CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle, CategoryTheory.Adjunction.IsTriangulated.mk'', CategoryTheory.Adjunction.IsTriangulated.mk', CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated, CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism; no exact Mathlib match; existing source-library declaration used",
+   "date": "2026-10-18",
+   "verdict": "existing library match"
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithful|FullyFaithful|distTriang_counit|jointlyReflectIsomorphisms",
+   "results": "6 hits: Mathlib/Algebra/Homology/DerivedCategory/Plus.lean, Mathlib/Algebra/Homology/DerivedCategory/Plus.lean, Mathlib/Algebra/Homology/DerivedCategory/Plus.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean; no exact Mathlib match; existing source-library declaration used",
+   "date": "2026-10-18",
+   "verdict": "existing library match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleClosedSupportTriangle",
+  "date": "2026-10-18",
+  "group": "A7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-closed-support-triangle",
+   "place": "Alternative formal proof of the support triangle: Derived open-closed conservativity for arbitrary coefficients",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-existence",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.OpenClosed.Derived",
+  "declaration": "AlgebraicGeometry.Etale.jointlyReflectIsomorphisms_mapDerivedCategoryUpperStar'",
+  "statement": "theorem jointlyReflectIsomorphisms_mapDerivedCategoryUpperStar' (hij : Set.range i.base = (Set.range j.base)ᶜ) : JointlyReflectIsomorphisms (pairFunctor D((j)^*[A]) D((i)^*[A]))",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-18",
+  "note": "Existing declaration only; no new Lean module or proof obligation."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261018T150143-L-3798365",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261018T150143-L-3798365",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

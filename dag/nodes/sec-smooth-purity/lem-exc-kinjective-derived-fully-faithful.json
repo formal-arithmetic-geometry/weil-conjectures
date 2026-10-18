@@ -1,0 +1,122 @@
+{
+ "id": "lem-exc-kinjective-derived-fully-faithful",
+ "kind": "statement",
+ "title": "Full faithfulness of a K-injective derived functor",
+ "statement": "Let $\\mathcal A,\\mathcal B$ be abelian categories with derived categories [def-weil-abstract-derived-category], with K-injective resolutions in $\\mathcal A$. Let $F:\\mathcal A\\to\\mathcal B$ be additive, fully faithful and preserve K-injective complexes. Then its total right derived functor $RF:D(\\mathcal A)\\to D(\\mathcal B)$ is full and faithful.",
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/FullyFaithful.lean",
+  "place": "rightDerivedFunctor_map_bijective_of_isKInjective, rightDerivedFunctor_map_bijective, full_rightDerivedFunctor and faithful_rightDerivedFunctor"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-kinjective-total-derived"
+ ],
+ "proof": [
+  {
+   "text": "For K-injective complexes I,J, compute RF(QI) and RF(QJ) by applying F termwise. The derived unit is invertible on these complexes.",
+   "uses": [
+    "lem-weil-pbc-kinjective-total-derived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The maps into QJ and Q(FJ) are the homotopy classes of complex maps. Since F is fully faithful, it is bijective on complex maps and on homotopies, hence on their homotopy classes. The comparison is exactly RF on morphisms by naturality of the derived unit.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent any two derived objects by K-injectives, conjugate the preceding bijection by their representing isomorphisms, and take its surjective and injective halves.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-kinjective-total-derived"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "A7",
+  "date": "2026-10-18",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/FullyFaithful.lean",
+  "place": "Existing proved library declaration; the numbered argument records its proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The right derived functor of a fully faithful additive functor preserving K-injective complexes is fully faithful",
+   "results": "8 hits: CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.rightDerivedToHomotopyCategory, CategoryTheory.fullyFaithfulInducedFunctor, CategoryTheory.Functor.totalRightDerived, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_id, CategoryTheory.Functor.rightDerivedDesc, CategoryTheory.Functor.Full; no exact Mathlib match; existing source-library declaration used",
+   "date": "2026-10-18",
+   "verdict": "existing library match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fully faithful derived functors and open closed conservativity give a distinguished triangle completing the counit of an adjunction with right orthogonal third vertex",
+   "results": "8 hits: CategoryTheory.Adjunction.isTriangulated_rightAdjoint, CategoryTheory.Adjunction.isTriangulated_leftAdjoint, CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism, CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle, CategoryTheory.Adjunction.IsTriangulated.mk'', CategoryTheory.Adjunction.IsTriangulated.mk', CategoryTheory.Adjunction.IsTriangulated.rightAdjoint_isTriangulated, CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism; no exact Mathlib match; existing source-library declaration used",
+   "date": "2026-10-18",
+   "verdict": "existing library match"
+  },
+  {
+   "tool": "grep",
+   "query": "fullyFaithful|FullyFaithful|distTriang_counit|jointlyReflectIsomorphisms",
+   "results": "6 hits: Mathlib/Algebra/Homology/DerivedCategory/Plus.lean, Mathlib/Algebra/Homology/DerivedCategory/Plus.lean, Mathlib/Algebra/Homology/DerivedCategory/Plus.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean; no exact Mathlib match; existing source-library declaration used",
+   "date": "2026-10-18",
+   "verdict": "existing library match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleClosedSupportTriangle",
+  "date": "2026-10-18",
+  "group": "A7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-closed-support-triangle",
+   "place": "Alternative formal proof of the support triangle: Full faithfulness of a K-injective derived functor",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-existence",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful",
+  "declaration": "CategoryTheory.Functor.full_rightDerivedFunctor",
+  "statement": "instance full_rightDerivedFunctor : F.rightDerivedFunctor.Full",
+  "branch": "sheaf-dag",
+  "by": "A7",
+  "date": "2026-10-18",
+  "note": "Existing declaration only; no new Lean module or proof obligation.",
+  "declarations": [
+   "CategoryTheory.Functor.full_rightDerivedFunctor",
+   "CategoryTheory.Functor.faithful_rightDerivedFunctor"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261018T150143-L-3798365",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261018T150143-L-3798365",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
