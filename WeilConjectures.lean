@@ -5968,7 +5968,6 @@ public import WeilConjectures.CategoryTheory.Sites.InjectiveSheafSections
 public import WeilConjectures.CategoryTheory.Sites.InjectiveSheafSmulEpi
 public import WeilConjectures.CategoryTheory.Sites.LocallyBijectiveFiniteLimit
 public import WeilConjectures.CategoryTheory.Sites.MonObj
-public import WeilConjectures.CategoryTheory.Sites.MonoidalComp
 public import WeilConjectures.CategoryTheory.Sites.NsmulSheaf
 public import WeilConjectures.CategoryTheory.Sites.Point.DiscreteModule
 public import WeilConjectures.CategoryTheory.Sites.Point.Flat

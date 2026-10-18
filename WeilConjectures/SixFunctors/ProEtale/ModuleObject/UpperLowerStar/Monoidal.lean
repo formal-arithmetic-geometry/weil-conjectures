@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
 public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
-public import WeilConjectures.CategoryTheory.Sites.MonoidalComp
+public import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
 
 /-!
@@ -113,8 +113,8 @@ instance ProEtale.isMonoidal_lowerStarComp :
   have := Scheme.ProEt.isContinuous_overPullback g
   have := Scheme.ProEt.isContinuous_overPullback f
   have := Scheme.ProEt.isContinuous_overPullback (f ≫ g)
-  exact Functor.isMonoidal_sheafPushforwardContinuousComp'_hom A (Scheme.ProEt.topology Z)
-    (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)
+  exact Functor.isMonoidal_sheafPushforwardContinuousComp'_hom (A := A)
+    (J := Scheme.ProEt.topology Z) (K := Scheme.ProEt.topology Y) (L := Scheme.ProEt.topology X)
     (MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤) f g).symm
 
 end LowerStarComp
