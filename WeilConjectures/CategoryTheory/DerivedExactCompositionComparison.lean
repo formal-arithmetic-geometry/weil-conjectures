@@ -20,8 +20,10 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory.Functor
 
-/-- The exact-right composition unit is computed by the comparison for the exact functor. -/
-theorem rightDerivedFunctorCompMapDerivedCategoryUnit_app
+/-- The exact-right composition unit is computed by the comparison for the exact functor.
+This is `rightDerivedFunctorCompMapDerivedCategoryUnit_app` without the identity composition
+isomorphism in front; the primed name avoids the clash. -/
+theorem rightDerivedFunctorCompMapDerivedCategoryUnit_app'
     {C D E : Type*} [Category* C] [Category* D] [Category* E]
     [Abelian C] [Abelian D] [Abelian E]
     [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
@@ -100,7 +102,7 @@ theorem rightDerivedFunctorCompMapDerivedCategoryIso_eq_viaRightDerived
   ext J
   simp only [NatTrans.comp_app, Functor.whiskerLeft_app]
   rw [rightDerivedFunctorCompMapDerivedCategoryIso_hom_fac,
-    rightDerivedFunctorCompMapDerivedCategoryUnit_app]
+    rightDerivedFunctorCompMapDerivedCategoryUnit_app']
   have := Functor.isRightDerivedFunctor_rightDerivedFunctor_comp_of_exact H G
   have he : (H ⋙ G).rightDerivedFunctorUnit.app J ≫
       (Functor.rightDerivedUnique (H ⋙ G).rightDerivedFunctor
