@@ -22,9 +22,195 @@
   "thm-amb-etale-exceptional-adjoint",
   "lem-per-prime-power-supported-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $F_h=Rh_!$, $G_h=h^!$, and $\\epsilon_h:F_hG_h\\to1$. The compact-support projection $\\Pi_h:F_h(A\\otimes^Lh^*Q)\\to F_hA\\otimes^LQ$ is invertible on the whole ordinary derived categories: on a compactification $h=rj$, combine the inverse open-extension tensor comparison with the proper projection isomorphism [lem-pur-etale-open-derived-tensor, lem-amb-proper-coproducts-projection]. Compactification independence and composition are those of [lem-amb-unbounded-compact-support-comparisons]. Using the ambient adjoint [thm-amb-etale-exceptional-adjoint], define $T_h(P,Q)$ as the unique adjunct of\n$$F_h(G_hP\\otimes^Lh^*Q)\\xrightarrow{\\Pi_h}F_hG_hP\\otimes^LQ\\xrightarrow{\\epsilon_h(P)\\otimes1}P\\otimes^LQ.$$\nThis fixes the map, including its direction; all these operations are available without a Tor hypothesis.",
+   "uses": [
+    "lem-pur-etale-open-derived-tensor",
+    "lem-amb-proper-coproducts-projection",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "thm-amb-etale-exceptional-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7H, 0F7I, 0F7J (section-derived-lower-shriek-compactification, lemma-shriek-well-defined, lemma-shriek-composition); etale-cohomology.tex, lemma-projection-formula-proper-mod-n; sites-cohomology.tex, Tag 0B56 (equation-projection-formula-map)"
+   }
+  },
+  {
+   "text": "For composable $h,k$, use $F_{kh}=F_kF_h$ and the right-adjoint identification $G_{kh}=G_hG_k$. The composite counit is $\\epsilon_k\\circ F_k\\epsilon_hG_k$, by [lem-weil-pbc-mate-pasting]. The inverse form of [lem-amb-shriek-tensor-composition] identifies the composite projection $\\Pi_{kh}$ with $\\Pi_k\\circ F_k\\Pi_h$. Consequently the adjunct of the proposed right-hand side is, writing $Q'=k^*Q$,\n$$F_kF_h(G_hG_kP\\otimes h^*Q')\\xrightarrow{F_k\\Pi_h}F_k(F_hG_hG_kP\\otimes Q')\\xrightarrow{F_k(\\epsilon_h(G_kP)\\otimes1)}F_k(G_kP\\otimes Q')\\xrightarrow{\\Pi_k}F_kG_kP\\otimes Q\\xrightarrow{\\epsilon_k(P)\\otimes1}P\\otimes Q.$$\nNaturality of $\\Pi_k$ moves $F_k\\epsilon_h$ through that projection, making this exactly the composite counit after $\\Pi_{kh}$. Adjunction's injectivity therefore proves $T_{kh}=h^!T_k\\circ T_h$. This uses equality of the specified projections and counits, rather than equality on a generating class.",
+   "uses": [
+    "lem-amb-shriek-tensor-composition",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48 (remark-compatible-with-diagram); more-etale.tex, Tag 0F7J (lemma-shriek-composition); agent computation of the two adjoints"
+   }
+  },
+  {
+   "text": "Naturality in $P,Q$ follows by taking adjuncts of the natural composite in Step 1. For an open immersion $a$, exact extension by zero is left adjoint to $a^*$, and $a^*h^!=(ha)^!$ [lem-amb-etale-adjoint-locality]. In Step 1 the open-extension projection restricts to the identity on the open; hence its transpose identifies $T_a$ with the ordinary restriction/tensor isomorphism. Step 2 now gives restriction of $T_h$ to source opens. For a target open $b:Y'\\hookrightarrow Y$, put $X'=X\\times_YY'$ and $a:X'\\hookrightarrow X$, $h':X'\\to Y'$. The equality $ha=bh'$ and exceptional transitivity give $a^*h^!=h'^!b^*$. Apply Step 2 to both factorizations: their $T$ maps agree by the common composite and the open $T$ identifications. This proves target-open compatibility too. Isomorphisms can be checked on a source-open cover, by exactness and conservativity of geometric stalks and the cohomology criterion, also for unbounded tensors.",
+   "uses": [
+    "lem-amb-etale-adjoint-locality",
+    "lem-pur-etale-open-derived-tensor",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-weil-pbc-mate-pasting",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7J, 0F7L (lemma-shriek-composition, lemma-base-change-shriek); source and target open specialization and adjunction"
+   }
+  },
+  {
+   "text": "Apply [lem-sf-affine-chart-factorization-gluing] to $u$. By Step 3 it suffices on each chart to consider $u=pi$ with $i:U\\hookrightarrow T=\\mathbf A^m_K$ closed and $p:T\\to\\operatorname{Spec}K$ smooth of pure relative dimension $m$. The charts, their open complements and their changes of field are Noetherian; an open of a Noetherian scheme is quasi-compact [lem-weil-pbc-noetherian-open-subscheme-noetherian]. The required compactifications exist by [thm-nagata-compactification]. Fields are excellent and so are their finite-type algebras [lem-exc-fields-excellent, lem-exc-finite-type-localization-excellent]; this is the excellence required by the supported calculus in Step 10. The prime-power smooth orientation [lem-per-noetherian-prime-power-smooth-duality] applies to $p$: it is smooth, separated, of finite type and of pure relative dimension $m$ between Noetherian schemes with $\\ell$ invertible, and compactifiable by Nagata; no excellence, perfectness or characteristic hypothesis is needed. It gives the orientation $\\gamma_{p,n}:\\Lambda_T(m)[2m]\\xrightarrow{\\sim}p^!\\Lambda$, and for every $N\\in D^+(K_{\\mathrm{et}},\\Lambda)$ the orientation followed by the counit-defined exceptional tensor map $T_p(\\Lambda,N)$ is an isomorphism $p^*N(m)[2m]\\xrightarrow{\\sim}p^!N$. No regularity of the closed subscheme $U$ is required.",
+   "uses": [
+    "lem-sf-affine-chart-factorization-gluing",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "thm-nagata-compactification",
+    "lem-exc-fields-excellent",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-per-noetherian-prime-power-smooth-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/scholze-six-functor-formalisms.pdf",
+    "place": "Theorem 7.19 (affine-space reduction and diagonal/deformation smooth purity); local factorization as in Gabber XVII, proof after Lemma 4.4.1"
+   }
+  },
+  {
+   "text": "For the open complement $j:V=T\\setminus U\\hookrightarrow T$, or its base change to any field extension of $K$, [lem-kun-0f10] gives finite relative cohomological dimension; no bound for $\\operatorname{cd}(K)$ is needed. The map $j$ is quasi-compact and quasi-separated, so [lem-kun-0f11] says $Rj_*$ preserves arbitrary coproducts. Fix any $E\\in D(V_{\\mathrm{et}},\\Lambda)$. Consider, for $M\\in D(\\Lambda)$, the canonical projection\n$$\\alpha_M:(Rj_*E)\\otimes^L M_T\\longrightarrow Rj_*(E\\otimes^LM_V).$$\nHere $M_S$ is the termwise constant complex. Constant sheafification is exact and preserves sums (equivalently it is inverse image from the point topos), and constant complexes restrict as in [lem-kun-pullback-constant]. Both functors of $M$ preserve coproducts by [lem-kun-derived-tensor-direct-sums] and the preceding bound. They are exact and $\\alpha$ respects shifts by [lem-weil-pbc-ringed-projection-mate-exact]. The isomorphism locus contains $\\Lambda[r]$ for every $r$ because $\\alpha_\\Lambda=1$; it is closed under coproducts, triangles by two-out-of-three, and retracts. By [lem-pc-derived-module-free-generation] it is all of $D(\\Lambda)$. Thus this particular projection is invertible even for unbounded $M$ and modules of infinite projective dimension.",
+   "uses": [
+    "lem-kun-0f10",
+    "lem-kun-0f11",
+    "lem-kun-pullback-constant",
+    "lem-kun-derived-tensor-direct-sums",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-sf-triangle-morphism-iso",
+    "lem-pc-derived-module-free-generation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0F10, 0F11, 0F12 (lemma-finite-cd, lemma-finite-cd-mod-n-direct-sums, lemma-pull-out-constant-mod-n); same generator argument with Rj_* replacing global sections; more-algebra.tex, Tag 09PB (remark-P-resolution)"
+   }
+  },
+  {
+   "text": "For any $B\\in D(T_{\\mathrm{et}},\\Lambda)$, tensor the closed-support triangle of [lem-exc-closed-support-triangle] by $M_T$. Compare it with the support triangle of $B\\otimes^LM_T$. The middle map is the identity, and the third map is $\\alpha_M$ of Step 5 for $E=j^*B$, using [lem-kun-pullback-constant]. The first map is $i_*T_i(B,M_T)$ after the proper projection identification for $i$ [lem-amb-proper-coproducts-projection]. Indeed its composite with the support counit is $\\epsilon_i(B)\\otimes1$; this is the defining adjoint equation of Step 1. Construct the diagram on the mapping-fibre model of the unit $B\\to Rj_*j^*B$; tensor exactness and naturality of the projection give its connecting square as well. Thus two-out-of-three gives an isomorphism on the first vertex [lem-sf-triangle-morphism-iso]. Closed direct image has left inverse $i^{-1}$ [lem-kun-04ca], hence reflects isomorphisms, so $T_i(B,M_T)$ is invertible. This is an ordinary support-triangle argument and assumes neither purity nor regularity of $i$.",
+   "uses": [
+    "lem-exc-closed-support-triangle",
+    "lem-kun-derived-tensor-triangulated",
+    "lem-kun-pullback-constant",
+    "lem-amb-proper-coproducts-projection",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-sf-triangle-morphism-iso",
+    "lem-kun-04ca"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A45 (lemma-cohomology-with-support-triangle); sites-cohomology.tex, Tag 0B56 (equation-projection-formula-map); agent tensor comparison of the two fibre triangles"
+   }
+  },
+  {
+   "text": "Let $\\Omega=K^{\\mathrm{sep}}$, and write $g:T_\\Omega\\to T$, $g_U:U_\\Omega\\to U$. The map $g$ is affine locally ind-etale: $\\Omega$ is the filtered union of its finite separable subextensions, each finite etale over $K$, and tensoring their algebras with an affine coordinate ring gives their base changes. Both source and target schemes are Noetherian finite-type schemes over their respective fields. Therefore [lem-per-ind-etale-closed-support-base-change] gives\n$$g_U^*i^!B\\cong i_\\Omega^!g^*B\\qquad(B\\in D^+(T,\\Lambda)).$$\nIt identifies the supported counits. Together with the monoidal inverse image comparison [lem-kun-inverse-image-monoidal], it identifies the pullback of $T_i(B,Q)$ with $T_{i_\\Omega}(g^*B,g^*Q)$ whenever $B,Q,B\\otimes^LQ$ are bounded below: transpose both maps after closed direct image; each is the pulled-back supported counit tensored with $1_{g^*Q}$. In this calculation the closed projection has the canonical stalk description (tensor on $U_\\Omega$, zero off it), so its pullback is the same projection. This proves compatibility of the actual maps, not just their objects. We shall apply it only with $B=p^!\\Lambda=\\Lambda_T(m)[2m]$ and $Q=p^*N$; all three required inputs are bounded below.",
+   "uses": [
+    "lem-per-ind-etale-closed-support-base-change",
+    "lem-kun-inverse-image-monoidal",
+    "lem-amb-proper-coproducts-projection",
+    "lem-kun-04ca"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q9 (theorem-higher-direct-images), Tag 0A45 (lemma-cohomology-with-support-triangle); ind-etale supported comparison and its counit normalization"
+   }
+  },
+  {
+   "text": "Over the separably closed field $\\Omega$, [lem-exc-etale-sheaves-gsets-point] has trivial Galois group. Its equivalence with sets respects products and algebraic operations, hence identifies $\\Lambda$-module sheaves with $\\Lambda$-modules. This is an exact equivalence of abelian categories and, termwise, of their derived categories. Thus $N|_\\Omega$ is the constant complex of some $M\\in D^+(\\Lambda)$, and $g^*p^*N=M_{T_\\Omega}$ by [lem-kun-pullback-constant]. Step 6 applies to $g^*B$ and this arbitrary $M$. By Step 7 the pullback of $T_i(p^!\\Lambda,p^*N)$ is invertible. Conservativity of separable-closure pullback [lem-kun-sep-closure-conservative] makes $T_i(p^!\\Lambda,p^*N)$ itself invertible over $K$. This argument trivializes coefficients after conservative base change; it does not presume that the original $N$ is lisse, constructible, or perfect.",
+   "uses": [
+    "lem-exc-etale-sheaves-gsets-point",
+    "lem-kun-pullback-constant",
+    "lem-kun-sep-closure-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QT (theorem-equivalence-sheaves-point); separable-closure conservativity and the closed-support computation"
+   }
+  },
+  {
+   "text": "Apply Step 2 with $h=i$, $k=p$, $P=\\Lambda$, $Q=N$. It gives precisely\n$$T_u(\\Lambda,N)=i^!T_p(\\Lambda,N)\\circ T_i(p^!\\Lambda,p^*N).$$\nThe second factor is invertible by Step 8. The first is invertible because $N\\in D^+$: by [lem-per-noetherian-prime-power-smooth-duality] the composite of $\\gamma_{p,n}\\otimes1:p^*N(m)[2m]\\to p^!\\Lambda\\otimes^Lp^*N$ with $T_p(\\Lambda,N)$ is an isomorphism, and $\\gamma_{p,n}\\otimes1$ is one, so $T_p(\\Lambda,N)$ is invertible. Functors preserve isomorphisms, so the composite is invertible. Step 3 then gives invertibility on all of $U$. The tensor was computed in the ambient unbounded category throughout; the resulting isomorphism places it in $D^+$, because the right adjoint on a chart is $i^!p^!$, with $p^!$ a shift-twist and $i^!$ the right derived supported functor. Thus the assertion is meaningful for every stated bounded-below $N$, even if its derived tensor with an arbitrary unrelated object would be unbounded below.",
+   "uses": [
+    "lem-per-noetherian-prime-power-smooth-duality",
+    "lem-exc-closed-support-triangle",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/scholze-six-functor-formalisms.pdf",
+    "place": "Theorem 7.19 and Lecture V counit-defined tensor comparison; agent combination with the closed-support calculation"
+   }
+  },
+  {
+   "text": "Finally use the model restrictions of [lem-per-prime-power-supported-calculus]; its schemes are excellent by Step 4 [lem-exc-fields-excellent, lem-exc-finite-type-localization-excellent]. A localization of the source pulls the already invertible $T_u(\\Lambda,N)$ back by exact monoidal inverse image [lem-kun-inverse-image-monoidal], so it remains invertible. The cited model-restriction statement gives independence of the finite-type model, pseudofunctorial composition, and compatibility with these counit-defined tensor maps. Consequently the composition equation of Step 2 and the open equations of Step 3 restrict to the localized maps, in particular to essentially finite-type maps between spectra of fields. No compact-support right adjoint for a non-finite-type map is being asserted. The empty source yields the unique isomorphism of zero objects; $m=0$ is included by the identity affine-space projection. A singular or nonreduced source is covered by exactly the same closed-support argument, which made no regular-immersion hypothesis.",
+   "uses": [
+    "lem-per-prime-power-supported-calculus",
+    "lem-kun-inverse-image-monoidal",
+    "lem-exc-fields-excellent",
+    "lem-exc-finite-type-localization-excellent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 4.4.1, restriction to a generic point and following composition paragraph; agent extension using the existing model-restriction interface"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-proper-coproducts-projection",
+  "lem-amb-shriek-tensor-composition",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-exc-closed-support-triangle",
+  "lem-exc-etale-sheaves-gsets-point",
+  "lem-exc-fields-excellent",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-kun-04ca",
+  "lem-kun-0f10",
+  "lem-kun-0f11",
+  "lem-kun-derived-tensor-direct-sums",
+  "lem-kun-derived-tensor-triangulated",
+  "lem-kun-inverse-image-monoidal",
+  "lem-kun-pullback-constant",
+  "lem-kun-sep-closure-conservative",
+  "lem-pc-derived-module-free-generation",
+  "lem-per-ind-etale-closed-support-base-change",
+  "lem-per-noetherian-prime-power-smooth-duality",
+  "lem-per-prime-power-supported-calculus",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-sf-affine-chart-factorization-gluing",
+  "lem-sf-triangle-morphism-iso",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-nagata-compactification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0F10, 0F11, 0A45, 03QT; localizing generator argument of Tag 0F12 and more-algebra.tex Tag 09PB, applied to the open complement, combined with diagonal/deformation smooth purity. Gabber XVII 4.4.1 provides context, not the arbitrary-input assertion."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -67,10 +253,45 @@
    "results": "[loogle] OK 0 hit(s) | loogle: Function expected at\n  \"CategoryTheory.Adjunction\"\nbut this term has type\n  String\n\nNote: Expected a function because this term is being applied to the argument\n  \"tensor\"\n",
    "date": "2026-10-18",
    "verdict": "invalid query; not used as evidence of absence"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*tensor|tensor.*exceptional|upperShriek|shriek",
+   "results": "{\"t\": \"2026-10-18T14:47:01Z\", \"tool\": \"grep\", \"query\": \"exceptional.*tensor|tensor.*exceptional|upperShriek|shriek\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern ordinary pullback, algebraic tensor, or abstract adjunctions, and do not assert this etale exceptional tensor isomorphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The counit defined tensor map extraordinary inverse image of constant coefficients tensor pullback is extraordinary inverse image over a field",
+   "results": "{\"t\": \"2026-10-18T14:47:01Z\", \"tool\": \"leansearch\", \"query\": \"The counit defined tensor map extraordinary inverse image of constant coefficients tensor pullback is extraordinary inverse image over a field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.counit_def\", \"CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryToUnit_mapPullbackAdj_counit_app\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"Bialgebra.TensorProduct.counit_eq_algHom_toLinearMap\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"CategoryTheory.ChosenPullbacksAlong.fst'\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"CategoryTheory.ChosenPullbacksAlong.iso_mapPullbackAdj_counit_app\"], \"digest\": \"40082042cf53f32a\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern ordinary pullback, algebraic tensor, or abstract adjunctions, and do not assert this etale exceptional tensor isomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, \"tensor\"",
+   "results": "{\"t\": \"2026-10-18T14:47:02Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor\", \"CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ\", \"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc\", \"CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc\", \"AlgCat.tensorAlgebraAdj\", \"CategoryTheory.tensorLeftAdjunction\", \"CategoryTheory.tensorRightAdjunction\", \"CategoryTheory.Types.tensorProductAdjunction\"], \"digest\": \"c9bc113c99af1028\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern ordinary pullback, algebraic tensor, or abstract adjunctions, and do not assert this etale exceptional tensor isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional inverse image of etale sheaves over a field commutes with tensor by arbitrary bounded below coefficient complexes",
+   "results": "{\"t\": \"2026-10-18T14:47:02Z\", \"tool\": \"leanfinder\", \"query\": \"Exceptional inverse image of etale sheaves over a field commutes with tensor by arbitrary bounded below coefficient complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\"], \"digest\": \"079acbc6339b7114\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern ordinary pullback, algebraic tensor, or abstract adjunctions, and do not assert this etale exceptional tensor isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor product with coefficients pulled from a field and the right adjoint to compactly supported etale cohomology",
+   "results": "{\"t\": \"2026-10-18T14:48:44Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor product with coefficients pulled from a field and the right adjoint to compactly supported etale cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"Algebra.FormallyEtale.instTensorProduct\", \"Algebra.Etale.baseChange\", \"Algebra.Extension.tensorH1Cotangent\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\", \"Algebra.Etale.exists_subalgebra_fg\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"Algebra.tensorH1CotangentOfIsLocalization\"], \"digest\": \"4f0b7cb02cb74677\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern ordinary pullback, algebraic tensor, or abstract adjunctions, and do not assert this etale exceptional tensor isomorphism"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-exceptional-costalk-gysin",
@@ -93,5 +314,164 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-field-exceptional-tensor",
+  "worker": "stage1",
+  "summary": "Proved the arbitrary-input field-base tensor map through affine smooth/closed factorization, coproduct-preserving open direct image and generation of D(Lambda), the closed-support triangle, and conservative separable-closure base change. Proved the specified counit-map composition and open identities. No new nodes or weakened hypotheses. Gabber XVII 4.4.1 alone does not state the arbitrary-input tensor formula; the extra argument is explicit.",
+  "blueprint": "Nearest ancestor lem-per-artin-gabber-affine-curve, proof Step 3: dimension-normalized Verdier duality in the lower perverse bound. This item supplies the arbitrary-input tensor comparison used in the intervening exceptional-costalk/Gysin calculation; Steps 1-3 give its canonical identities, Steps 4-9 its field-base isomorphism, Step 10 its generic/localized extension.",
+  "tool_uses": [
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Generic Etale localization of the ambient adjoint: used exactly as quoted in citations.json for the indicated step; the unit has no separate version of this tool, and its dimension-normalized duality route is retained."
+   },
+   {
+    "node": "lem-amb-proper-coproducts-projection",
+    "why": "Generic The proper projection formula on the ambient category: used exactly as quoted in citations.json for the indicated step; the unit has no separate version of this tool, and its dimension-normalized duality route is retained."
+   },
+   {
+    "node": "lem-amb-shriek-tensor-composition",
+    "why": "Generic Tensor projection maps respect compact-support composition: used exactly as quoted in citations.json for the indicated step; the unit has no separate version of this tool, and its dimension-normalized duality route is retained."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Generic Unbounded ordinary etale compact-support comparisons: used exactly as quoted in citations.json for the indicated step; the unit has no separate version of this tool, and its dimension-normalized duality route is retained."
+   },
+   {
+    "node": "lem-exc-closed-support-triangle",
+    "why": "Generic Closed-support triangle before restriction: used exactly as quoted in citations.json for the indicated step; the unit has no separate version of this tool, and its dimension-normalized duality route is retained."
+   },
+   {
+    "node": "lem-exc-etale-sheaves-gsets-point",
+    "why": "Generic Etale sheaves of sets on a field and discrete Galois sets: used exactly as quoted in citations.json for the indicated step; the unit has no separate version of this tool, and its dimension-normalized duality route is retained."
+   },
+   {
+    "node": "lem-exc-fields-excellent",
+    "why": "Generic Fields are excellent: used exactly as quoted in citations.json for the indicated step; the unit has no separate version of this tool, and its dimension-normalized duality route is retained."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic Excellence is preserved by finite type algebras and localization: used exactly as quoted in citations.json for the indicated step; the unit has no separate version of this tool, and its dimension-normalized duality route is retained."
+   },
+   {
+    "node": "lem-kun-04ca",
+    "why": "Generic Pushforward along a closed immersion: used exactly as quoted in citations.json for the indicated step; the unit has no separate version of this tool, and its dimension-normalized duality route is retained."
+   },
+   {
+    "node": "lem-kun-0f10",
+    "why": "Generic Finite cohomological dimension of finite-type morphisms: used exactly as quoted in citations.json for the indicated step; the unit has no separate version of this tool, and its dimension-normalized duality route is retained."
+   },
+   {
+    "node": "lem-kun-0f11",
+    "why": "Generic Direct sums and finite cohomological dimension: used exactly as quoted in citations.json for the indicated step; the unit has no separate version of this tool, and its dimension-normalized duality route is retained."
+   },
+   {
+    "node": "lem-kun-derived-tensor-direct-sums",
+    "why": "Generic Derived tensor products preserve direct sums: used exactly as quoted in citations.json for the indicated step; the unit has no separate version of this tool, and its dimension-normalized duality route is retained."
+   },
+   {
+    "node": "lem-kun-derived-tensor-triangulated",
+    "why": "Generic The derived tensor product is triangulated in each variable: used exactly as quoted in citations.json for the indicated step; the unit has no separate version of this tool, and its dimension-normalized duality route is retained."
+   },
+   {
+    "node": "lem-kun-inverse-image-monoidal",
+    "why": "Generic Monoidality of the derived inverse image: used exactly as quoted in citations.json for the indicated step; the unit has no separate version of this tool, and its dimension-normalized duality route is retained."
+   },
+   {
+    "node": "lem-kun-pullback-constant",
+    "why": "Generic Inverse image of a constant sheaf: used exactly as quoted in citations.json for the indicated step; the unit has no separate version of this tool, and its dimension-normalized duality route is retained."
+   },
+   {
+    "node": "lem-kun-sep-closure-conservative",
+    "why": "Generic Conservativity of base change to a separable closure: used exactly as quoted in citations.json for the indicated step; the unit has no separate version of this tool, and its dimension-normalized duality route is retained."
+   },
+   {
+    "node": "lem-pc-derived-module-free-generation",
+    "why": "Generic Generation of a module derived category by shifts of the ring: used exactly as quoted in citations.json for the indicated step; the unit has no separate version of this tool, and its dimension-normalized duality route is retained."
+   },
+   {
+    "node": "lem-pur-etale-open-derived-tensor",
+    "why": "Generic Open extension by zero and unbounded derived tensor on ordinary etale sites: used exactly as quoted in citations.json for the indicated step; the unit has no separate version of this tool, and its dimension-normalized duality route is retained."
+   },
+   {
+    "node": "lem-sf-affine-chart-factorization-gluing",
+    "why": "Generic Finite affine chart factorization and interval gluing: used exactly as quoted in citations.json for the indicated step; the unit has no separate version of this tool, and its dimension-normalized duality route is retained."
+   },
+   {
+    "node": "lem-sf-triangle-morphism-iso",
+    "why": "Generic A morphism of distinguished triangles with two isomorphic components is an isomorphism: used exactly as quoted in citations.json for the indicated step; the unit has no separate version of this tool, and its dimension-normalized duality route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic Mates of pasted squares and of conjugate-whiskered squares: used exactly as quoted in citations.json for the indicated step; the unit has no separate version of this tool, and its dimension-normalized duality route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic An open subscheme of a Noetherian scheme is Noetherian: used exactly as quoted in citations.json for the indicated step; the unit has no separate version of this tool, and its dimension-normalized duality route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic Exactness data for the ringed-topos projection mate: used exactly as quoted in citations.json for the indicated step; the unit has no separate version of this tool, and its dimension-normalized duality route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "why": "Generic Isomorphisms in the unbounded derived category detected by cohomology: used exactly as quoted in citations.json for the indicated step; the unit has no separate version of this tool, and its dimension-normalized duality route is retained."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic Conservativity of geometric stalks: used exactly as quoted in citations.json for the indicated step; the unit has no separate version of this tool, and its dimension-normalized duality route is retained."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Generic Exactness of geometric stalks: used exactly as quoted in citations.json for the indicated step; the unit has no separate version of this tool, and its dimension-normalized duality route is retained."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Generic The ordinary ambient exceptional adjoint: used exactly as quoted in citations.json for the indicated step; the unit has no separate version of this tool, and its dimension-normalized duality route is retained."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Generic Nagata compactification, [stacks-project]: used exactly as quoted in citations.json for the indicated step; the unit has no separate version of this tool, and its dimension-normalized duality route is retained."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-proper-coproducts-projection",
+  "lem-amb-shriek-tensor-composition",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-exc-closed-support-triangle",
+  "lem-exc-etale-sheaves-gsets-point",
+  "lem-exc-fields-excellent",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-kun-04ca",
+  "lem-kun-0f10",
+  "lem-kun-0f11",
+  "lem-kun-derived-tensor-direct-sums",
+  "lem-kun-derived-tensor-triangulated",
+  "lem-kun-inverse-image-monoidal",
+  "lem-kun-pullback-constant",
+  "lem-kun-sep-closure-conservative",
+  "lem-pc-derived-module-free-generation",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-sf-affine-chart-factorization-gluing",
+  "lem-sf-triangle-morphism-iso",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-nagata-compactification"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-48a6c5362",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-48a6c5362 (reviewer sub-agent of L); spot-checked: Read in full: the item, its 10 steps, the report, all 31 cited statements and the chapter/unit route. The statement and stmt_deps are unchanged; there are no new nodes; no SGA is used. Steps 1-3 check out: I recomputed the composition adjunct, which uses the composite counit from mate-pasting, the naturality of Pi_k and the inverse form of lem-amb-shriek-tensor-composition. Source and target opens are handled via ha=bh'. Steps 5-6: 0F10(1) and 0F11(1) give coproduct preservation, and the isomorphism locus contains Lambda[r] and is closed under the generation operations, so it is all of D(Lambda). The support-triangle fill-in equals i_*T_i because Hom(i_*X,Rj_*Y[-1])=0. Steps 7-8: ind-etale base change on D^+ inputs (B, p^*N, B⊗p^*N are all bounded below), the trivial-Galois equivalence and separable-closure conservativity. Step 10: regular localization in the supported calculus. Edge cases U empty, m=0, singular U, N=F_ell over Z/ell^n, cd(K)=infinity and imperfect K are all fine. Batch 5: I accepted lem-amb-shriek-tensor-composition (it reaches the generic lisse-module node) and lem-per-ind-etale-closed-support-base-change (it reaches the generic bounded-below adjunction). Both are already in the closure of the unchanged stmt_deps. One fault: Steps 4 and 9 cited lem-trf-ambient-diagonal-purity-base-change, which is on the trace-formula proof route. I fixed it by citing the existing per-chapter, same-unit node lem-per-noetherian-prime-power-smooth-duality (Z/ell^n, D^+ input, Noetherian, compactifiable, orientation plus the counit tensor map gives an iso). Its closure adds no trf/pd nodes. Step 9 now deduces that T_p(Lambda,N) is invertible from that statement. The excellence citations moved to Step 10, where the supported calculus needs them. The trf node is removed from proof_deps and tool_uses.; 1 file(s) fixed by the reviewer"
  }
 }
