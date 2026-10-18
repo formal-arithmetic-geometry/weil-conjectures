@@ -16052,3 +16052,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:28 L: merged deliver/J1/Sheaf.CategoryTheory.SmallModuleDiagramsGrothendieck (stage 3; reviewer PASS; first push; landing 20261018T062811-L-656402 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:28 L: merged deliver/J1/Sheaf.Paper.LisseAdicFiberFunctors (stage 3; reviewer PASS; first push; landing 20261018T062811-L-656636 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:28 L: merged deliver/J1/WeilConjectures.AlgebraicGeometry.ConstantGroupScheme (stage 3; reviewer PASS; first push; landing 20261018T062812-L-656774 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:28 L: merged deliver/J2/Sheaf.AlgebraicGeometry.CompactifiableOverField (stage 3; reviewer PASS; first push; landing 20261018T062812-L-656943 (proof); batch 20261018T062645; modules 1; new nodes 0)

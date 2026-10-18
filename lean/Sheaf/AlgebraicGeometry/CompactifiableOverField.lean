@@ -10,8 +10,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import WeilConjectures.Compactification.Defs
-import Mathlib.RingTheory.Noetherian.Defs
-import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.AlgebraicGeometry.Noetherian
 import WeilConjectures.Compactification.NagataCompactification
 
@@ -58,6 +56,9 @@ theorem hasCompactification_of_finiteType_over_field
     [LocallyOfFiniteType (S ↘ Spec (.of k))] [QuasiCompact (S ↘ Spec (.of k))]
     (f : X ⟶ S) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] :
     HasCompactification f := by
-  sorry
+  have : IsLocallyNoetherian S :=
+    LocallyOfFiniteType.isLocallyNoetherian (S ↘ Spec (.of k))
+  have : CompactSpace S := QuasiCompact.compactSpace_of_compactSpace (S ↘ Spec (.of k))
+  exact (NagataCompactification f).hasCompactification
 
 end AlgebraicGeometry
