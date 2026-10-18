@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "Put X=Spec R and Y=Spec S. The Hausdorff spectrum X has only maximal primes. Apply the finite affine section-cover theorem to Y -> X to obtain a finite locally free surjection a:X_prime -> X, a finite locally free W over X_prime, a closed embedding j:Y_prime -> W where Y_prime=Y times_X X_prime, and finitely many closed sections of W covering its points. Every prime of these finite affine schemes is maximal by integrality, so their spaces are compact Hausdorff and zero-dimensional.",
+   "text": "Apply exists_finite_affine_section_cover to f:Spec S → Spec R. Install the resulting affine, finite locally free and closed immersion structures. Finite affine morphisms with Hausdorff target have Hausdorff source: transport to spectra of global sections, contract each prime to a maximal prime, apply integral going up, and use Spec.profinite_of_isMaximal. All affine spaces are compact.",
    "uses": [
     "lem-weil-pbc-finite-affine-section-cover",
     "lem-weil-pbc-zero-dimensional-spectrum-profinite"
@@ -22,24 +22,24 @@
    "elementary": false
   },
   {
-   "text": "The closed embedding j is finitely presented: Y_prime -> X is finitely presented and W -> X is of finite type, so apply Mathlib RingHom.FinitePresentation.of_comp_finiteType on these affine schemes. Chevalley (Scheme.Hom.isConstructible_image) makes its image constructible, hence clopen in the zero-dimensional affine W. Each section has a clopen incidence locus with this image. The equalizer locus of two sections is also clopen, by the finitely presented closed diagonal of the finite locally free map W -> X_prime and the same constructible-image argument. Partition X_prime into the finitely many clopen Boolean atoms cut out by these incidence and equality loci. On each atom select one representative of every section-equivalence class lying in Y_prime. Their images are disjoint and cover Y_prime on that atom.",
+   "text": "For affine f and g, finite presentation of f ≫ g and finite type of g imply finite presentation of f by RingHom.FinitePresentation.of_comp_finiteType on global sections. Apply this to j ≫ p and i_k ≫ p. Chevalley makes their images constructible. Induction on constructible sets shows that they are clopen in compact Hausdorff spaces: a retrocompact open is compact and hence closed; union and complement preserve clopenness. Thus j and i_k are open embeddings on points. The clopen preimages V_k=j^(-1)(image i_k) cover Y_prime, and snd restricted to V_k is an open embedding by factoring through the inverse of the section chart i_k. These arguments are proved in the private locallyOfFinitePresentation_of_comp_affine, isClopen_of_isConstructible, isClopen_range_of_finitePresentation and openEmbedding_on_preimage_section helpers.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "The compact Hausdorff surjection a has a continuous section sigma by projectivity of the extremally disconnected compact Hausdorff space X. Pull the finite clopen partition of X_prime back along sigma. Each resulting clopen piece C of X is again extremally disconnected.",
+   "text": "Use exists_continuous_section_of_surjective to choose a continuous section sigma of a:X_prime → X. Form the closed topological pullback P={(y_prime,x) | snd(y_prime)=sigma(x)}. Its open clopen charts over V_k project bijectively and continuously onto the open subsets sigma^(-1)(snd(V_k)) of X. Compact-to-Hausdorff bijections are homeomorphisms. Open subspaces of extremally disconnected spaces are extremally disconnected, and the property is local on open covers, as proved using closure/preimage identities. Hence P is extremally disconnected, by the private extremallyDisconnected_pullback_of_sections helper.",
    "uses": [
     "lem-weil-pbc-wlocal-stalk-isomorphism-retraction-section"
    ],
    "elementary": false
   },
   {
-   "text": "For x in X, x_prime=sigma(x), and y in Y above x, the points of Y_prime over (y,x_prime) are the primes of kappa(y) tensor_(kappa(x)) kappa(x_prime), by Scheme.Pullback.carrierEquiv. The extension kappa(y)/kappa(x) is algebraic because Y -> X is finite. Since kappa(x) is separably closed, Mathlib Algebra.IsAlgebraic.isPurelyInseparable_of_isSepClosed makes it purely inseparable. Mathlib PrimeSpectrum.isHomeomorph_comap_tensorProductMap_of_isPurelyInseparable and the tensor left-unit equivalence identify the spectrum of the tensor product homeomorphically with Spec kappa(x_prime), a singleton. This calculation is already Lean-proved in the private subsingleton_primeSpectrum_tensor_of_isSepClosed helper in the new module. The selected sections restricted along sigma therefore define a continuous bijection from finitely many copies of each C onto the part of Y above C. Compactness and Hausdorffness make it a homeomorphism. The private tripletTensor_subsingleton and pullbackPoint_ext helpers additionally implement the field-tensor comparison and point uniqueness via Scheme.Pullback.carrierEquiv, under the indicated residue-integrality hypothesis.",
+   "text": "Prove P → Y bijective. Existence of scheme pullback points gives surjectivity. For injectivity, a point of P over y has x=f(y) by pullback.condition and a(sigma(x))=x. Its two scheme pullback projections are therefore determined by y. The private pullbackPoint_ext lemma identifies two such points using subsingleton tensor spectra over separably closed residue fields. Its residue-integrality hypothesis follows from finite_residueFieldMap_of_finite: every prime of S is maximal, its residue field is module-finite over S and hence over R, and restriction of scalars gives finiteness over the residue field of R; the existing AlgebraicGeometry.finite_spec_residueFieldMap from IntegralClosureDedekindSurjectiveFibres transports this calculation through the affine stalk isomorphisms. Transport separable closedness through Spec.residueFieldIso using isSepClosed_of_ringEquiv.",
    "uses": [],
    "elementary": true
   },
   {
-   "text": "Finite disjoint unions of extremally disconnected spaces are extremally disconnected (the sigma-type instance). The homeomorphisms of the preceding step therefore make Y extremally disconnected. Empty spectra and empty Boolean atoms cause no exception. No flatness or reducedness of S was used.",
+   "text": "The continuous bijection P → Y is a homeomorphism because P is compact and Y Hausdorff. Transport the proved extremal disconnectedness of P along this homeomorphism. No disjoint refinement, section equalizer locus or sigma-type decomposition is needed; empty spaces and empty charts are handled by the same constructions.",
    "uses": [],
    "elementary": true
   }
@@ -52,7 +52,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 0985, Lemma 61.11.5, finite case; expand the decomposition using the finite affine section-cover theorem (https://stacks.math.columbia.edu/tag/0985).; the source argument is expanded into the stated Lean interfaces."
+  "place": "Tag 0985, lemma-finite-finitely-presented-over-extremally-disconnected, finite case. Group A2 formalized the finite affine section-cover route, replacing Boolean partitioning with clopen section charts and locality of extremal disconnectedness. Repair: reuse the existing affine residue-field finiteness transport theorem, exported in its original module, instead of duplicating it."
  },
  "mathlib_searches": [
   {
@@ -134,14 +134,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "X-049e2",
-  "group": "E3",
+  "reviewer": "COMPILER",
+  "group": "A2",
   "result": "pass",
-  "landing": "20261015T194212-L-1174801",
+  "landing": "20261018T071131-L-1662401",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures and proofs with all four DAG records, source statements, unchanged interfaces, forced-adaptation errors, direct-importer compiles, and axiom probes."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
   "master": {

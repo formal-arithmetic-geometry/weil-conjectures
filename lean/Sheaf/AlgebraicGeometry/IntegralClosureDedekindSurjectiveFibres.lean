@@ -30,7 +30,7 @@ namespace AlgebraicGeometry
 
 set_option backward.isDefEq.respectTransparency false in
 /-- Transport finiteness along the canonical affine stalk isomorphisms. -/
-private theorem finite_spec_residueFieldMap {R S : CommRingCat.{u}}
+theorem finite_spec_residueFieldMap {R S : CommRingCat.{u}}
     (φ : R ⟶ S) (x : PrimeSpectrum S)
     (h : (Ideal.ResidueField.map (x.comap φ.hom).asIdeal x.asIdeal φ.hom rfl).Finite) :
     ((Spec.map φ).residueFieldMap x).hom.Finite := by
