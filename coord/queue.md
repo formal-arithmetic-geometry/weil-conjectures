@@ -1,6 +1,6 @@
 # Work queue
 
-1503 items; claim with `tools/claim.py next <group> [--stage N]`.
+1505 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (1503)
+## Stage 3: modules to prove (1505)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -158,6 +158,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.IntegralProperDirectSums` | 6 | 1 | proof | 1 |
 | `Sheaf.Paper.IsomorphismDerivedPullback` | 6 | 4 | proof | 1 |
 | `Sheaf.Paper.LisseEConstructibleIntegralLattice` | 6 | 1 | proof | 1 |
+| `Sheaf.Paper.LocalFrobeniusTransportNormalization` | 6 | 8 | proof | 1 |
 | `Sheaf.Paper.LocalizedTStructure` | 6 | 1 | proof | 1 |
 | `Sheaf.Paper.PbcVerdierAxioms` | 6 | 5 | proof | 1 |
 | `Sheaf.Paper.PointFdQbarCategory` | 6 | 2 | proof | 1 |
@@ -738,6 +739,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.FiniteFreeHomComparison` | 7 | 1 | proof | 3 |
 | `Sheaf.Paper.FiniteLevelRectangle` | 7 | 1 | proof | 3 |
 | `Sheaf.Paper.FiniteSystemPullbackCoherence` | 7 | 7 | proof | 3 |
+| `Sheaf.Paper.FrobeniusCoefficientReductionCoherence` | 7 | 8 | proof | 3 |
 | `Sheaf.Paper.GeometricStalkPerfect` | 7 | 4 | proof | 3 |
 | `Sheaf.Paper.IndConstructibleExtensions` | 7 | 2 | proof | 3 |
 | `Sheaf.Paper.IndHeartKernelsCokernels` | 7 | 1 | proof | 3 |
@@ -1518,7 +1520,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Algebra.Homology.SplitCellComplexKFlat` | - | 1 | proof | 21 |
 | `Sheaf.CategoryTheory.BoundedFilteredPageFunctorNormalized` | - | 1 | proof | 21 |
 
-## Stage 3: waiting for statements of dependencies (49)
+## Stage 3: waiting for statements of dependencies (48)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
@@ -1542,7 +1544,6 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.CohomologicalSmoothnessTheorem` | 6 | 1 | `fix-prop-projection-formula` |
 | `Sheaf.Paper.DualizingObjectPurity` | 6 | 1 | `lem-pur-projection-purity-agreement` |
 | `Sheaf.Paper.IntegralCompactSupportCoefficientComparison` | 6 | 35 | `lem-coef-finite-free-extension` |
-| `Sheaf.Paper.LocalFrobeniusTransportNormalization` | 6 | 8 | `lem-trf-scheme-galois-coefficient-change` |
 | `Sheaf.Paper.PurityCompositionCoherence` | 6 | 12 | `fix-prop-projection-formula` |
 | `Sheaf.Paper.PurityFiniteSetting` | 6 | 8 | `lem-pur-twist-frobenius-scalar` |
 | `Sheaf.SixFunctors.CoefDualFormulaScalarTranspose` | 6 | 8 | `lem-coef-finite-free-extension` |
@@ -1554,7 +1555,6 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.CohomologicalSmoothEtaleLocality` | 7 | 2 | `fix-prop-projection-formula` |
 | `Sheaf.Paper.DegreeZeroCompactSupportSections` | 7 | 5 | `lem-tw-lisse-rational-realization` |
 | `Sheaf.Paper.DlConstructibleFibresExact` | 7 | 1 | `lem-tw-lisse-rational-realization` |
-| `Sheaf.Paper.FrobeniusCoefficientReductionCoherence` | 7 | 8 | `lem-trf-scheme-galois-coefficient-change` |
 | `Sheaf.Paper.PurityDiagonalSectionPasting` | 7 | 15 | `fix-lem-exchanges` |
 | `Sheaf.SecSmoothPurity.FiniteEtaleDualizingNormalization` | 8 | 1 | `fix-lem-exchanges` |
 | `WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension` | 9 | 3 | `lem-trf-rational-local-frobenius-powers` |
@@ -1573,6 +1573,7 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.RationalWeilPurityNaturalityMate` | - | 4 | `det-sp-tower-gamma` |
 | `Sheaf.Paper.VerdierExchange` | - | 1 | `fix-lem-exchanges` |
 | `Sheaf.SecSmoothPurity.SmoothPurityNaturality` | - | 1 | `fix-prop-projection-formula` |
+| `Sheaf.SixFunctors.SchemeGaloisCoefficientChange` | - | 1 | `lem-trf-absolute-frobenius-coefficient-naturality` |
 
 ## Stage 3: held for an open upstream PR (14)
 
