@@ -27,84 +27,76 @@
  ],
  "proof": [
   {
-   "text": "Choose a complex $K^\\bullet$ and an isomorphism $Q(K^\\bullet)\\cong C$: a localization has the same objects as its source up to isomorphism. The cohomology functors factor through $Q$, so $H^i(K)=0$ for $i>b$. We construct directly a quasi-isomorphism $f:L\\to K$; no termwise boundedness of $K$ is assumed.",
+   "text": "The cohomology bound says C is in the standard D^{≤b}. Mathlib DerivedCategory.isLE_iff and exists_iso_Q_obj_of_isLE give a complex K strictly zero above b and an isomorphism C ≅ Q(K). This is good upper truncation of any representative.",
    "uses": [
     "def-weil-abstract-derived-category"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05T7, lemma-subcategory-left-resolution, downward fibre-product construction; Tags 0645 and 0646"
+    "place": "Tag 0645, lemma-cohomology-bounded-above; Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, isLE_iff and exists_iso_Q_obj_of_isLE"
    }
   },
   {
-   "text": "Set $L^i=0$, $f^i=0$ and $d_L^i=0$ for $i>b$. Descend through $n=b,b-1,\\ldots$ (ordinary recursion on $b-n\\in\\mathbf N$). Given the tail in degrees $>n$, with $d_L^2=0$ and $f$ commuting with differentials there, form the submodule $T^n=\\{(x,y)\\in K^n\\oplus L^{n+1}:d_K^nx=f^{n+1}y,\\ d_L^{n+1}y=0\\}$. These are linear equations, so this is an $A$-module; when $n=b$ it is $\\ker d_K^b\\oplus0$.",
-   "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05T7, lemma-subcategory-left-resolution, downward fibre-product construction; Tags 0645 and 0646"
-   }
-  },
-  {
-   "text": "Let $L^n$ be the module of finitely supported functions $T^n\\to A$, with pointwise operations. For $t\\in T^n$, let $e_t$ have value $1$ at $t$ and $0$ elsewhere; every function $a$ is uniquely $\\sum_t a(t)e_t$, so this is a free module with basis $(e_t)_{t\\in T^n}$ [def-weil-pbc-free-module]. Define the linear map $s^n:L^n\\to T^n$ by $s^n(a)=\\sum_t a(t)t$. It is surjective since $s^n(e_t)=t$. Define $f^n=\\operatorname{pr}_1s^n$ and $d_L^n=\\operatorname{pr}_2s^n$. The defining equations of $T^n$ give $d_K^nf^n=f^{n+1}d_L^n$ and $d_L^{n+1}d_L^n=0$. This extends the tail without changing any earlier choice, so recursion gives a complex and a chain map in all integer degrees.",
-   "uses": [
-    "def-weil-pbc-free-module",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05T7, lemma-subcategory-left-resolution, downward fibre-product construction; Tags 0645 and 0646"
-   }
-  },
-  {
-   "text": "For $n\\le b$, every cycle $x\\in K^n$ gives a pair $(x,0)\\in T^n$. Choose $u\\in L^n$ with $s^n(u)=(x,0)$. Then $d_L^nu=0$ and $f^nu=x$. Hence $H^n(f)$ is surjective.",
-   "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05T7, lemma-subcategory-left-resolution, downward fibre-product construction; Tags 0645 and 0646"
-   }
-  },
-  {
-   "text": "For $n\\le b$, suppose $y\\in L^n$ is a cycle and $f^ny=d_K^{n-1}x$ for some $x\\in K^{n-1}$. Then $(x,y)\\in T^{n-1}$. Surjectivity of $s^{n-1}$ gives $v\\in L^{n-1}$ with $d_L^{n-1}v=y$. Thus every class in the kernel of $H^n(f)$ is zero, proving injectivity. For $n>b$ both cohomology modules vanish, by the bound on $K$ and the zero terms of $L$. Therefore $f$ is a quasi-isomorphism.",
-   "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05T7, lemma-subcategory-left-resolution, downward fibre-product construction; Tags 0645 and 0646"
-   }
-  },
-  {
-   "text": "Every $L^n$ with $n\\le b$ is free by construction, hence projective by [lem-weil-pbc-free-module-projective]. For $n>b$, the zero module is free on the empty basis, hence also projective. The localization inverts $f$, giving $Q(L)\\xrightarrow{\\sim}Q(K)\\xrightarrow{\\sim}C$. The terms above $b$ were set to zero, which proves the exact bound required.",
+   "text": "Every module M is a quotient of the free module on its underlying set: the map sends e_m to m and is onto since m is the image of e_m. Free modules are projective, so ModuleCat A has enough projectives (Mathlib ModuleCat.enoughProjectives). Taking opposites turns projective presentations into injective presentations. Thus (ModuleCat A)ᵒᵖ has enough injectives; this uses only duality of the lifting definitions.",
    "uses": [
     "def-weil-pbc-free-module",
     "lem-weil-pbc-free-module-projective",
-    "def-weil-abstract-derived-category"
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/Algebra/Category/ModuleCat/Projective.lean",
+    "place": "ModuleCat.enoughProjectives; Mathlib/CategoryTheory/Preadditive/Injective/Basic.lean, enough injectives in the opposite of a category with enough projectives"
+   }
+  },
+  {
+   "text": "Apply CochainComplex.opEquivalence to op K, combining categorical opposite with the index reversal n ↦ -n. The result K' is strictly zero below -b. Use the exact-bound unbundled Mathlib theorem CochainComplex.Plus.modelCategoryQuillen.exists_quasiIso_injective underlying [lem-sc-bounded-below-injective-resolution-existence]: there are a complex J, an injective object J^n in every degree, and a quasi-isomorphism f:K' → J, with J strictly zero below -b.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-sc-bounded-below-injective-resolution-existence"
    ],
    "elementary": false,
    "source": {
+    "document": "Mathlib/Algebra/Homology/Factorizations/CM5a.lean",
+    "place": "exists_quasiIso_injective, lines 668 onward; dual route in Stacks derived.tex Tag 0646, lemma-projective-resolutions-exist"
+   }
+  },
+  {
+   "text": "Apply the inverse opposite equivalence to f and unop. It gives g:L → K'', where L^n = (J^{-n})ᵘⁿᵒᵖ. To check QuasiIso g, fix n and use the short complexes in degrees (n-1,n,n+1). The corresponding short-complex map is exactly unopMap of f in degrees (-(n+1),-n,-(n-1)). This is a quasi-isomorphism since f is one, and ShortComplex.quasiIso_unopMap preserves it. This is the private helper quasiIso_unop_reverse.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/Algebra/Homology/ShortComplex/QuasiIso.lean",
+    "place": "quasiIso_unopMap; Mathlib/Algebra/Homology/QuasiIso.lean, quasiIsoAt_iff'"
+   }
+  },
+  {
+   "text": "Injectivity of J^{-n} in the opposite category gives categorical projectivity of L^n. Mathlib ModuleCat.projective_of_module_projective converts it to Module.Projective A (L.X n); the required Small instance holds in max u v. If b<n then -n<-b, so J^{-n}, hence L^n, is zero. The unopped unit of CochainComplex.opEquivalence identifies K'' with K. Q inverts g, giving Q(L) ≅ Q(K'') ≅ Q(K) ≅ C. Every bound and universe is unchanged.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": true,
+   "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05T7, lemma-subcategory-left-resolution, downward fibre-product construction; Tags 0645 and 0646"
+    "place": "Tag 0646, lemma-projective-resolutions-exist; Mathlib/Algebra/Homology/CochainComplexOpposite.lean, opEquivalence; Mathlib/Algebra/Category/ModuleCat/Projective.lean, projective_of_module_projective"
    }
   }
  ],
  "proof_deps": [
   "def-weil-abstract-derived-category",
   "def-weil-pbc-free-module",
-  "lem-weil-pbc-free-module-projective"
+  "lem-weil-pbc-free-module-projective",
+  "def-weil-pbc-projective-module",
+  "lem-sc-bounded-below-injective-resolution-existence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Explicit module version of the fibre-product induction in Tag 05T7, lemma-subcategory-left-resolution; direct cohomology-bounded variant of Tags 0645 and 0646 (no termwise epimorphism asserted)."
+  "place": "Tags 0645 and 0646: use the stated duality with bounded-below injective resolutions, implemented by Mathlib exact-bound exists_quasiIso_injective and CochainComplex.opEquivalence; quasi-isomorphism transfer checked on short complexes."
  },
  "mathlib_searches": [
   {
@@ -252,5 +244,15 @@
   "by": "NR",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261018T062815-L-657890",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
