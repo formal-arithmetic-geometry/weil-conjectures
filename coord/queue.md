@@ -1500,7 +1500,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Algebra.Homology.SplitCellComplexKFlat` | - | 1 | proof | 21 |
 | `Sheaf.CategoryTheory.BoundedFilteredPageFunctorNormalized` | - | 1 | proof | 21 |
 
-## Stage 3: waiting for statements of dependencies (58)
+## Stage 3: waiting for statements of dependencies (59)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
@@ -1557,6 +1557,7 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.DualStalkFrobenius` | - | 1 | `lem-tw-lisse-rational-realization` |
 | `Sheaf.Paper.FiniteProductCompactification` | - | 2 | `fix-lem-exchanges` |
 | `Sheaf.Paper.FourierKernelConvolution` | - | 8 | `sk-thm-sf-package` |
+| `Sheaf.Paper.LocalizedTopChern` | - | 9 | `lem-pur-flag-local-comparison` |
 | `Sheaf.Paper.QuasiFiniteCompactSupportWeights` | - | 1 | `lem-a1-finite-weil-sections-decomposition` |
 | `Sheaf.Paper.RationalPurityPresentation` | - | 13 | `lem-pur-adic-purity-scalar-naturality` |
 | `Sheaf.Paper.RationalWeilPurityNaturalityMate` | - | 4 | `det-sp-tower-gamma` |
