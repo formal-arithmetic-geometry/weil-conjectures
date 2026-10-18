@@ -10,9 +10,6 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
-import Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Sheaf.AlgebraicGeometry.ClosedLimitLfpStabilization
-import Sheaf.AlgebraicGeometry.FiniteClosedFpApproximation
 
 /-!
 # Finitely presented Zariski main finite factorization
@@ -67,6 +64,22 @@ theorem Scheme.Hom.exists_qcqs_finitePresentation_factorization
       IsOpenImmersion j ∧ QuasiCompact j ∧ IsFinite p ∧
       LocallyOfFinitePresentation p ∧ QuasiCompact p ∧ QuasiSeparated p ∧
       j ≫ p = f ∧ CompactSpace T ∧ QuasiSeparatedSpace T := by
-  sorry
+  have : LocallyQuasiFinite f := by
+    apply locallyQuasiFinite_iff_isDiscrete_preimage_singleton.mpr
+    intro s
+    apply isDiscrete_iff_discreteTopology.mpr
+    apply discreteTopology_iff_isOpen_singleton.mpr
+    rintro ⟨x, hx⟩
+    change f x = s at hx
+    subst s
+    have hopen := hq.2.2 x
+    rw [← (f.fiberHomeo (f x)).isOpen_image] at hopen
+    simpa only [Set.image_singleton, Scheme.Hom.asFiber,
+      Homeomorph.apply_symm_apply] using hopen
+  obtain ⟨T, j, p, hj, hjc, hp, hpfp, hjp⟩ :=
+    f.exists_isOpenImmersion_isFinite_locallyOfFinitePresentation
+  let := hp
+  exact ⟨T, j, p, hj, hjc, hp, hpfp, inferInstance, inferInstance, hjp,
+    QuasiCompact.compactSpace_of_compactSpace p, quasiSeparatedSpace_of_quasiSeparated p⟩
 
 end AlgebraicGeometry
