@@ -212,6 +212,7 @@ attribute [local instance] Abelian.hasFiniteBiproducts
 
 variable [Abelian C] (F : ℕ ⥤ C) {P : Cofan fun n : ℕ ↦ F.obj n} (hP : IsColimit P)
 
+set_option linter.flexible false in
 /-- In an abelian category with exact colimits of shape `ℕ`, the map
 `1 - t : ∐ₙ Fₙ ⟶ ∐ₙ Fₙ` is a monomorphism. -/
 lemma mono_id_sub_sequenceShift [HasColimitsOfShape ℕ C] [HasExactColimitsOfShape ℕ C] :
