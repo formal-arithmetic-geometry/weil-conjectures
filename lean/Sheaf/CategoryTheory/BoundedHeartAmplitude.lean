@@ -6,7 +6,6 @@ Authors: SHEAF group Q61
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-public import Mathlib.CategoryTheory.Triangulated.Functor
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import WeilConjectures.CategoryTheory.TruncationTriangle
 
