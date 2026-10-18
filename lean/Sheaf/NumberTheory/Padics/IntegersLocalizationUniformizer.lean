@@ -6,6 +6,10 @@ Authors: SHEAF group NF
 module
 
 public import Sheaf.NumberTheory.Padics.CoefficientExtension
+public import Mathlib.RingTheory.Localization.Away.Basic
+public import Mathlib.LinearAlgebra.TensorProduct.Basic
+import Mathlib.LinearAlgebra.TensorProduct.Map
+import Mathlib.Algebra.Module.TransferInstance
 
 /-!
 # Inverting a coefficient-field uniformizer

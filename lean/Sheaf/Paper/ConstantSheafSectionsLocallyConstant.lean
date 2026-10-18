@@ -5,12 +5,10 @@ Authors: SHEAF groups H1 and K2
 -/
 module
 
-public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Topology.LocallyConstant.Algebra
 public import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 import Mathlib.AlgebraicGeometry.Sites.ConstantSheaf
 import Mathlib.AlgebraicGeometry.Sites.Proetale
-import Mathlib.CategoryTheory.Sites.LocallyBijective
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Etale
 
 /-!
