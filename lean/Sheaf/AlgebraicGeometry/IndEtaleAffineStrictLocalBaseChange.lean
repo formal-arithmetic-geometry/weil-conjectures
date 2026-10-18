@@ -9,10 +9,12 @@ public import Sheaf.RingTheory.IndPrincipalZariski
 public import Sheaf.Paper.StrictHenselizationFunctoriality
 public import Sheaf.Paper.StrictHenselizationPointEvaluation
 public import Mathlib.AlgebraicGeometry.Pullbacks
-import Sheaf.RingTheory.IndEtaleStability
+import WeilConjectures.AlgebraicGeometry.Morphisms.ProAffineEtale
+import Sheaf.AlgebraicGeometry.StrictHenselizationCanonicalMap
+import Sheaf.Paper.StrictHenselizationPointEvaluationProperties
+import Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility
 import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
 import WeilConjectures.RingTheory.ProEtale.HenselianLocalRing
-import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
 
 /-! # Ind-etale affine strict-local base change
 
@@ -27,6 +29,93 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
+
+private theorem pointedMap_existsUnique
+    {X S : Scheme.{u}} (f : X ⟶ S) {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (x : Spec (.of Ω) ⟶ X) (s : Spec (.of Ω) ⟶ S) (hs : s = x ≫ f) :
+    ∃! h : strictHenselizationScheme x ⟶ strictHenselizationScheme s,
+      h ≫ strictHenselizationStructuralMap s = strictHenselizationStructuralMap x ≫ f ∧
+      Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation x)) ≫ h =
+        Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation s)) := by
+  subst s
+  exact strictHenselizationMap_existsUnique f x
+
+private theorem evaluation_isLocal
+    {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (s : Spec (.of Ω) ⟶ S) [IsLocalRing (strictHenselizationRing s)] :
+    IsLocalHom (strictHenselizationPointEvaluation s) := by
+  let : Algebra (S.residueField (s (IsLocalRing.closedPoint Ω))) Ω :=
+    (descResidueField (stalkClosedPointTo s)).hom.toAlgebra
+  let ψ := strictHenselizationPointEvaluationToSep s rfl
+  have : IsLocalHom ψ := IsLocalHom.of_surjective ψ
+    (strictHenselizationPointEvaluationToSep_surjective s rfl)
+  let ι := (IntermediateField.val
+    (separableClosure (S.residueField (s (IsLocalRing.closedPoint Ω))) Ω)).toRingHom
+  have : IsLocalHom ι := inferInstance
+  exact (inferInstance : IsLocalHom (ι.comp ψ))
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem structural_proAffineEtale
+    {S : Scheme.{u}} [IsAffine S] {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (s : Spec (.of Ω) ⟶ S) : proAffineEtale (strictHenselizationStructuralMap s) := by
+  let a := Spec.preimage (strictHenselizationStructuralMap s ≫ S.isoSpec.hom)
+  have ha : Spec.map a ≫ S.isoSpec.inv = strictHenselizationStructuralMap s := by
+    simp only [a, Spec.map_preimage, Category.assoc, Iso.hom_inv_id, Category.comp_id]
+  have hR := strictHenselization_indEtale_of_affine_chart s Γ(S, ⊤) S.isoSpec.inv
+    ⟨S.isoSpec.hom (s (IsLocalRing.closedPoint Ω)), by simp⟩
+    (Iso.refl _) a.hom (by
+      change Spec.map a ≫ S.isoSpec.inv = 𝟙 _ ≫ strictHenselizationStructuralMap s
+      simpa only [Category.id_comp] using ha)
+  have hi : proAffineEtale (strictHenselizationStructuralMap s ≫ S.isoSpec.hom) := by
+    rw [← Spec.map_preimage (strictHenselizationStructuralMap s ≫ S.isoSpec.hom)]
+    exact proAffineEtale_Spec_iff.mpr hR
+  exact (proAffineEtale.cancel_right_of_respectsIso _ _).mp hi
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem pointedMap_isIso
+    {X S : Scheme.{u}} [IsAffine X] [IsAffine S] (f : X ⟶ S)
+    {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (x : Spec (.of Ω) ⟶ X) (s : Spec (.of Ω) ⟶ S)
+    (h : strictHenselizationScheme x ⟶ strictHenselizationScheme s)
+    (hf : proAffineEtale f)
+    (hb : h ≫ strictHenselizationStructuralMap s = strictHenselizationStructuralMap x ≫ f)
+    (hp : Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation x)) ≫ h =
+      Spec.map (CommRingCat.ofHom (strictHenselizationPointEvaluation s))) : IsIso h := by
+  obtain ⟨hsLocal, hsStrict⟩ := strictHenselizationLocalStructure s
+  have := hsLocal
+  have := hsStrict
+  obtain ⟨hxLocal, _⟩ := strictHenselizationLocalStructure x
+  have := hxLocal
+  have hsPro := structural_proAffineEtale s
+  have hxPro := structural_proAffineEtale x
+  have hPro : proAffineEtale h := proAffineEtale.of_postcomp h
+    (strictHenselizationStructuralMap s) hsPro
+    (hb ▸ proAffineEtale.comp_mem _ _ hxPro hf)
+  let a := Spec.preimage h
+  have ha : Spec.map a = h := Spec.map_preimage h
+  have haInd : a.hom.IndEtale := proAffineEtale_Spec_iff.mp (ha.symm ▸ hPro)
+  have heval : (strictHenselizationPointEvaluation x).comp a.hom =
+      strictHenselizationPointEvaluation s := by
+    have heq : a ≫ CommRingCat.ofHom (strictHenselizationPointEvaluation x) =
+        CommRingCat.ofHom (strictHenselizationPointEvaluation s) := by
+      apply Spec.map_injective
+      rw [Spec.map_comp, ha]
+      exact hp
+    exact congrArg CommRingCat.Hom.hom heq
+  have : IsLocalHom (strictHenselizationPointEvaluation s) := evaluation_isLocal s
+  have : IsLocalHom ((strictHenselizationPointEvaluation x).comp a.hom) := heval ▸ ‹_›
+  have : IsLocalHom a.hom := isLocalHom_of_comp a.hom (strictHenselizationPointEvaluation x)
+  let : Algebra (strictHenselizationRing s) (strictHenselizationRing x) := a.hom.toAlgebra
+  have : Algebra.WeaklyEtale (strictHenselizationRing s) (strictHenselizationRing x) :=
+    haInd.weaklyEtale
+  have hbij : Function.Bijective a.hom :=
+    Algebra.WeaklyEtale.bijective_of_isStrictlyHenselianLocalRing
+  have : IsIso a := (ConcreteCategory.isIso_iff_bijective a).mpr hbij
+  rw [← ha]
+  change IsIso (Scheme.Spec.map a.op)
+  infer_instance
 
 /-- The canonical comparison of strict localizations is an isomorphism for an ind-etale
 map on one side of an affine fibre product. The four functorial maps are specified by
@@ -96,6 +185,48 @@ theorem indEtale_affine_strictLocal_baseChange
             (strictHenselizationStructuralMap barC)
             (strictHenselizationStructuralMap barA) hu hv =
               strictHenselizationStructuralMap barY := by
-  sorry
+  classical
+  have hbarA' : barA = barC ≫ Spec.map g := by
+    rw [hbarA, hbarB, hbarC, Category.assoc, pullback.condition, Category.assoc]
+  obtain ⟨u, ⟨hu, hpu⟩, _⟩ := pointedMap_existsUnique (Spec.map f) barB barA hbarA
+  obtain ⟨v, ⟨hv, hpv⟩, _⟩ := pointedMap_existsUnique (Spec.map g) barC barA hbarA'
+  obtain ⟨l, ⟨hl, hpl⟩, _⟩ :=
+    pointedMap_existsUnique (pullback.fst (Spec.map f) (Spec.map g)) barY barB hbarB
+  obtain ⟨m, ⟨hm, hpm⟩, _⟩ :=
+    pointedMap_existsUnique (pullback.snd (Spec.map f) (Spec.map g)) barY barC hbarC
+  have hsquare : l ≫ u = m ≫ v := by
+    obtain ⟨w, _, hwuniq⟩ := pointedMap_existsUnique
+      (pullback.fst (Spec.map f) (Spec.map g) ≫ Spec.map f) barY barA
+      (by rw [hbarA, hbarB, Category.assoc])
+    have h₁ : l ≫ u = w := hwuniq _ ⟨by
+      rw [Category.assoc, hu, ← Category.assoc, hl, Category.assoc],
+      by rw [← Category.assoc, hpl, hpu]⟩
+    have h₂ : m ≫ v = w := hwuniq _ ⟨by
+      rw [Category.assoc, hv, ← Category.assoc, hm, Category.assoc, pullback.condition],
+      by rw [← Category.assoc, hpm, hpv]⟩
+    exact h₁.trans h₂.symm
+  have hfu : proAffineEtale (Spec.map f) := proAffineEtale_Spec_iff.mpr hf
+  have huIso : IsIso u := pointedMap_isIso (Spec.map f) barB barA u hfu hu hpu
+  have hmIso : IsIso m := pointedMap_isIso
+    (pullback.snd (Spec.map f) (Spec.map g)) barY barC m
+    (proAffineEtale.pullback_snd _ _ hfu) hm hpm
+  let c := pullback.lift l m hsquare
+  have hc : c ≫ pullback.snd u v = m := pullback.lift_snd _ _ _
+  have : IsIso (c ≫ pullback.snd u v) := by rw [hc]; infer_instance
+  have : IsIso c := IsIso.of_isIso_comp_right c (pullback.snd u v)
+  refine ⟨u, v, hu, hv, hpu, hpv, l, m, hl, hm, hpl, hpm, asIso c, ?_, ?_⟩
+  · refine ⟨pullback.lift_fst _ _ _, hc, ?_⟩
+    apply pullback.hom_ext
+    · change c ≫ _ ≫ _ = _
+      simp only [pullback.map, pullback.lift_fst, c, pullback.lift_fst_assoc]
+      exact hl
+    · change c ≫ _ ≫ _ = _
+      simp only [pullback.map, pullback.lift_snd, c, pullback.lift_snd_assoc]
+      exact hm
+  · intro e he
+    apply Iso.ext
+    apply pullback.hom_ext
+    · exact he.1.trans (pullback.lift_fst _ _ _).symm
+    · exact he.2.1.trans hc.symm
 
 end AlgebraicGeometry.Scheme

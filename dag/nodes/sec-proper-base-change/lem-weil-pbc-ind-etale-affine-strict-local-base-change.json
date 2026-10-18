@@ -39,67 +39,53 @@
  ],
  "proof": [
   {
-   "text": "Put $D=B\\otimes_A C$. The affine fibre-product lemma identifies $Y$ with $\\operatorname{Spec}D$, with its projections induced by the tensor inclusions. Write $H_A,H_B,H_C,H_D$ for the strict-localization coordinate rings at the four geometric points, all pointed into the same algebraically closed field $\\Xi$. Functoriality gives local ring homomorphisms $h:H_A\\to H_B$, $k:H_A\\to H_C$, $l:H_B\\to H_D$, and $m:H_C\\to H_D$, compatible with the original structural maps. They satisfy $lh=mk$: both composites are local maps associated to the same morphism $Y\\to\\operatorname{Spec}A$, and induce the same inclusion of relative separable closures inside $\\Xi$; the uniqueness clause of functoriality makes them equal. Thus the canonical comparison $c:Y_{(\\bar y)}\\to (\\operatorname{Spec}B)_{(\\bar b)}\\times_{(\\operatorname{Spec}A)_{(\\bar a)}}(\\operatorname{Spec}C)_{(\\bar c)}$ is the pair $(\\operatorname{Spec}l,\\operatorname{Spec}m)$.",
+   "text": "Use strictHenselizationMap_existsUnique, the pointed interface to strict-henselization functoriality, for the four arrows of the affine pullback. Rewrite the geometric-point equalities to identify their endpoints. Apply the same uniqueness statement to the composite map to Spec A: both composites l ≫ u and m ≫ v satisfy its structural square and pointed evaluation equation, so the square commutes.",
    "uses": [
-    "lem-weil-pbc-fibre-product-affine-spectra",
     "lem-weil-pbc-strict-henselization-functoriality",
     "def-pc-fibre-product"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0GIP, lemma-base-change-strict-henselization-quasi-finite, opening commutative square; Schemes Tag 01I4 and Algebra Tag 04GU"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply the affine-chart ind-etaleness statement with the whole affine schemes as charts (identity open immersions and the defining spectrum identifications). It makes $A\\to H_A$, $B\\to H_B$, $C\\to H_C$, and $D\\to H_D$ ind-etale. Composition with the given ind-etale map $A\\to B$ makes $H_B$ ind-etale over $A$. Hence $h$, which is an $A$-algebra map between the ind-etale $A$-algebras $H_A,H_B$, is ind-etale by the relative-map clause of ind-etale stability. Base change makes $C\\to D$ ind-etale; composing with $D\\to H_D$ makes $H_D$ ind-etale over $C$. The same relative-map clause, now for $H_C,H_D$ over $C$, makes $m$ ind-etale. In particular both $h$ and $m$ are weakly etale. No assertion of ind-etaleness is needed for $A\\to C$, $k$, or $l$.",
+   "text": "For any affine S and geometric point s, take the global affine chart S.isoSpec.inv. The affine-chart ind-etaleness theorem, with the coordinate map obtained by Spec.preimage, says that the strict-local structural map is pro-affine-etale. The equivalence proAffineEtale_Spec_iff and invariance under the affine-spectrum isomorphism translate between ring and scheme formulations. For a pointed map h over an affine pro-affine-etale f, composition and cancellation in the source-library proAffineEtale API make h pro-affine-etale: h followed by the target structural map equals the source structural map followed by f. This is precisely the ind-etale relative-map argument, expressed on affine schemes.",
    "uses": [
     "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
-    "lem-weil-pbc-ind-etale-stability"
+    "def-weil-pbc-ind-etale-algebra"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 04HX, lemma-describe-etale-local-ring, affine pointed-neighbourhood presentation; ind-etale stability and relative-map clause"
-   }
+   "elementary": false
   },
   {
-   "text": "Functoriality states that all four $H$ rings are strictly henselian local and that $h,m$ are local ring homomorphisms. Apply the weakly etale strict-local theorem first to $h:H_A\\to H_B$ and then to $m:H_C\\to H_D$, using the weak etaleness proved in step 2. Each map is a ring isomorphism. Thus $u=\\operatorname{Spec}h:(\\operatorname{Spec}B)_{(\\bar b)}\\to(\\operatorname{Spec}A)_{(\\bar a)}$ and $z=\\operatorname{Spec}m:Y_{(\\bar y)}\\to(\\operatorname{Spec}C)_{(\\bar c)}$ are isomorphisms.",
+   "text": "Equip both strict-local coordinate rings with their local structures from strictHenselizationLocalStructure. Evaluation into Ω is local: its factor through the relative separable closure is surjective, hence local, and the inclusion of that closure into Ω is a field map, hence local. The pointed evaluation equality says evaluation of the target is evaluation of the source composed with Spec.preimage h. Locality therefore cancels to give locality of the ring map. Its ind-etaleness gives weak etaleness, so Olivier gives bijectivity; full faithfulness of Spec turns this into IsIso h.",
    "uses": [
-    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-weil-pbc-strict-henselization-local-structure",
+    "lem-weil-pbc-strict-henselization-point-evaluation-properties",
+    "def-weil-pbc-ind-etale-algebra",
     "thm-weil-pbc-weak-etale-strict-local"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 092Z, theorem-olivier"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $T=(\\operatorname{Spec}B)_{(\\bar b)}\\times_{(\\operatorname{Spec}A)_{(\\bar a)}}(\\operatorname{Spec}C)_{(\\bar c)}$ and let $p_B,p_C$ be its projections. Since $u$ is an isomorphism, $p_C$ has inverse $s=(u^{-1}\\circ\\operatorname{Spec}k,\\mathrm{id})$ by the fibre-product universal property. Indeed $p_Cs=\\mathrm{id}$, and $sp_C=\\mathrm{id}$ because its second projection is $p_C$ and its first is $u^{-1}(\\operatorname{Spec}k)p_C=p_B$, using the pullback equation $up_B=(\\operatorname{Spec}k)p_C$. The canonical comparison from step 1 satisfies $p_Cc=z$. Therefore $c=sz$ and its inverse is $z^{-1}p_C$. Its first and second projections are exactly $\\operatorname{Spec}l$ and $\\operatorname{Spec}m$. Composing these with the structural maps to $\\operatorname{Spec}B$ and $\\operatorname{Spec}C$ gives the two projections of the strict-localization structural map to $Y$, by functoriality. The universal property of the original fibre product then gives compatibility with the structural map to $Y$. All uses of $\\Xi$ concerned pointings and inclusions of relative separable closures, so no algebraicity hypothesis on $\\Xi$ or finiteness hypothesis on $A\\to C$ has entered.",
+   "text": "Apply the preceding affine pointed-map argument to Spec.map f and to its base change pullback.snd. The original fibre product is affine by Mathlib pullback instances; base-change stability of proAffineEtale supplies the second input. Thus u and m are isomorphisms. Let c = pullback.lift l m of the commuting strict-local square. Its composite with pullback.snd u v is m; the second projection is an isomorphism because u is, so c is an isomorphism. Take asIso c. Its two projection equations are pullback.lift_fst and pullback.lift_snd. Pullback extensionality and the structural squares give compatibility over Y. The same extensionality, followed by Iso.ext, proves uniqueness.",
    "uses": [
     "def-pc-fibre-product",
-    "lem-weil-pbc-strict-henselization-functoriality"
+    "def-weil-pbc-ind-etale-algebra"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tag 01JP, fibre-product universal property; concluding compatibility in the strict-local square"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pc-fibre-product",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-ind-etale-stability",
+  "def-weil-pbc-ind-etale-algebra",
   "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
   "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lem-weil-pbc-strict-henselization-point-evaluation-properties",
   "thm-weil-pbc-weak-etale-strict-local"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 0GIP, ind-etale specialization; alternative proof using the ind-etale presentation of Tag 04HX and Olivier Tag 092Z, as in More on Morphisms Tag 094Z"
+  "place": "Tag 0GIP, case (2); alternative ind-etale proof using Tag 04HX and Olivier, more-algebra.tex theorem-olivier (Tag 092Z). Lean proof by F5 uses the existing proAffineEtale scheme API for affine base change and cancellation, avoiding explicit tensor-product coordinates."
  },
  "mathlib_searches": [
   {
@@ -207,5 +193,15 @@
   "date": "2026-10-15",
   "existing": false,
   "note": "The four functorial maps are existentially supplied and characterized by structural-map and canonical geometric-point evaluation equations. The unique isomorphism is characterized by its two projections and its structural-map equation. The added statement dependency is the existing landed evaluation construction; no new notion is defined."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261018T062750-L-649294",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
