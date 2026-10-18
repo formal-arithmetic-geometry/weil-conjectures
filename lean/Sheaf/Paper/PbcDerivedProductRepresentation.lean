@@ -10,11 +10,7 @@ public import Mathlib.CategoryTheory.Localization.Predicate
 public import Mathlib.Algebra.Homology.Functor
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 public import Mathlib.CategoryTheory.Limits.Shapes.Countable
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
-import Sheaf.CategoryTheory.Triangulated.DerivedLimitProducts
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitProducts
 import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
 
 /-!
@@ -53,7 +49,18 @@ an isomorphism, and a natural transformation with invertible components is inver
 theorem pbcComplexEvaluation_inverts (d : Scheme.AdicCoefficientDatum A) :
     (HomologicalComplex.quasiIso (Scheme.CompletedAdicTowers T d) (ComplexShape.up ℤ)).IsInvertedBy
       (pbcComplexEvaluation T d) := by
-  sorry
+  let : HasSheafify (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbSheafify.{u, 0} T
+  let : (Scheme.ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} T
+  intro C D f hf
+  have : QuasiIso f := hf
+  apply (NatTrans.isIso_iff_isIso_app _).mpr
+  intro n
+  change IsIso (DerivedCategory.Q.map
+    ((((evaluation ℕᵒᵖ (Scheme.CompletedAdicModules T d)).obj n).mapHomologicalComplex
+      (ComplexShape.up ℤ)).map f))
+  infer_instance
 
 /-- The canonical evaluated derived tower, obtained by the localization universal property.
 Source: blueprint order 1244 (blueprint: prop-weil-pbc-derived-product-representation). -/
@@ -100,7 +107,50 @@ theorem pbcDerivedProductRepresentation (d : Scheme.AdicCoefficientDatum A) :
       (I : CochainComplex (Scheme.CompletedAdicTowers T d) ℤ)
       (_hI : I.IsKInjective) (e : DerivedCategory.Q.obj I ≅ M),
       Nonempty (IsLimit (pbcRepresentativeProductFan T d M I e)) := by
-  sorry
+  let : HasSheafify (Scheme.ProEt.topology T) AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbSheafify.{u, 0} T
+  let : (Scheme.ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} T
+  have : HasFiniteBiproducts (Scheme.CompletedAdicModules T d) :=
+    Abelian.hasFiniteBiproducts
+  have : CountableAB4Star (Scheme.CompletedAdicModules T d) := by
+    have : (lim (J := Discrete ℕ)
+        (C := Scheme.CompletedAdicModules T d)).PreservesEpimorphisms :=
+      { preserves := by
+          intro F G f hf
+          have h := (Scheme.ProEt.countableProducts_exact.{u, u, 0} T
+            (Scheme.completedAdicCommRing T d)).2.2
+            ℕ (fun n ↦ F.obj ⟨n⟩) (fun n ↦ G.obj ⟨n⟩)
+            (fun n ↦ f.app ⟨n⟩) (fun n ↦ inferInstance)
+          have he : lim.map f = (Pi.isoLimit _).inv ≫
+              Limits.Pi.map (fun n ↦ f.app ⟨n⟩) ≫ (Pi.isoLimit _).hom := by
+            apply limit.hom_ext
+            intro ⟨n⟩
+            simp
+          rw [he]
+          infer_instance }
+    have := hasExactLimitsOfShape_of_preservesEpi
+      (Scheme.CompletedAdicModules T d) (Discrete ℕ)
+    exact CountableAB4Star.of_hasExactLimitsOfShape_nat _
+  obtain ⟨hP, hprops⟩ := derivedCategory_countableProducts_core.{0, u + 2, u + 1, u + 2}
+    (Scheme.CompletedAdicModules T d)
+  refine ⟨hP, ?_⟩
+  intro M I hI e
+  let C : ℕ → CochainComplex (Scheme.CompletedAdicModules T d) ℤ :=
+    fun n ↦ I.asFunctor.obj (op n)
+  let hc := (Fan.isLimitMapConeEquiv DerivedCategory.Q C
+    (limit.cone (Discrete.functor C))) (hprops.1 ℕ C).some
+  let α : Discrete.functor (fun n ↦ DerivedCategory.Q.obj (C n)) ≅
+      Discrete.functor (fun n : ℕ ↦ ((pbcDerivedEvaluation T d).obj M).obj (op n)) :=
+    Discrete.natIso (fun n ↦
+      ((pbcEvaluationFactors T d).symm.app I).app (op n.as) ≪≫
+        ((pbcDerivedEvaluation T d).mapIso e).app (op n.as))
+  let hc' := (IsLimit.postcomposeHomEquiv α _).symm hc
+  refine ⟨IsLimit.ofIsoLimit hc' (Fan.ext (Iso.refl _) ?_)⟩
+  intro n
+  dsimp [α, pbcRepresentativeProductFan, Fan.proj, Cone.postcompose]
+  simp only [Category.id_comp, Discrete.natIso_hom_app]
+  rfl
 
 /-- The countable-product existence part of the representation statement.
 Source: Stacks 07KC (blueprint: prop-weil-pbc-derived-product-representation). -/

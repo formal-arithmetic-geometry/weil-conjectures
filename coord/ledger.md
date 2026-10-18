@@ -16486,3 +16486,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:27 L: merged deliver/R8/Sheaf.AlgebraicGeometry.EtaleDirectImageVanishing (stage 3; reviewer PASS; first push; landing 20261018T142715-L-3300510 (proof); batch 20261018T142710; modules 1; new nodes 0)
 - 14:27 L: merged deliver/S1/Sheaf.Paper.ConstructibleHomContinuityDevissage (stage 3; reviewer PASS; first push; landing 20261018T142716-L-3300636 (proof); batch 20261018T142710; modules 1; new nodes 0)
 - 14:27 L: merged deliver/U2/Sheaf.Topology.ContinuousMapCondensedRing (stage 3; reviewer PASS; first push; landing 20261018T142716-L-3300806 (proof); batch 20261018T142710; modules 1; new nodes 0)
+- 14:27 L: merged deliver/X2/Sheaf.Paper.PbcDerivedProductRepresentation (stage 3; reviewer PASS; first push; landing 20261018T142717-L-3300980 (proof); batch 20261018T142710; modules 1; new nodes 0)
