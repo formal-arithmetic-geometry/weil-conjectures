@@ -17,9 +17,55 @@
   "pqf-def-coherent",
   "pqf-def-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "To test vanishing of $R^p j_*\\mathcal F$, it is enough to test its stalk at an arbitrary point $x\\in X$. The map from $\\operatorname{Spec}\\mathcal O_{X,x}$ to $X$ is flat: on an affine neighbourhood $V=\\operatorname{Spec}A$ of $x$, the stalk identification gives $\\mathcal O_{X,x}\\cong A_{\\mathfrak p_x}$ by [lem-weil-pbc-affine-open-stalk-localization], and this localization is flat by [lem-weil-pbc-localization-flat]. The inclusion $j$ is quasi-compact by retrocompactness and quasi-separated because its diagonal is an isomorphism. Therefore the flat base-change theorem [lem-pc-flat-base-change-cohom] identifies the stalk calculation with the higher direct images of the pulled-back open $U_x\\hookrightarrow\\operatorname{Spec}\\mathcal O_{X,x}$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-flat",
+    "lem-pc-flat-base-change-cohom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09N8, proof: \"We may check the vanishing ... at stalks\" and the appeal to Cohomology of Schemes, Lemma 02KH (flat base change)"
+   }
+  },
+  {
+   "text": "Write $A=\\mathcal O_{X,x}$ and let $\\mathfrak m$ be its closed point. The local-spectrum classification [lem-a1-local-spectrum-open-classification] applies because $A$ is Noetherian and has Krull dimension at most one. If $\\mathfrak m\\in U_x$, then $U_x=\\operatorname{Spec}A$ and the inclusion is the identity, whose higher direct images vanish. If $\\mathfrak m\\notin U_x$, then $U_x$ is an affine open with finite discrete underlying space.",
+   "uses": [
+    "lem-a1-local-spectrum-open-classification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09N8, proof: local spectrum case split at the closed point"
+   }
+  },
+  {
+   "text": "In the second case of Step 2, the morphism $U_x\\to\\operatorname{Spec}A$ is affine because both source and target are affine. Applying the affine higher-direct-image theorem [lem-pc-affine-morphism-hi] to the quasi-coherent pullback of $\\mathcal F$ gives $R^p(U_x\\to\\operatorname{Spec}A)_*\\mathcal F_x=0$ for every $p>0$. Together with the identity case, this proves the vanishing of every stalk from Step 1, hence $R^p j_*\\mathcal F=0$ for all $p>0$.",
+   "uses": [
+    "lem-pc-affine-morphism-hi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 09N8, proof: the affine-open conclusion and Cohomology of Schemes, Lemma 01XB/relative-affine vanishing"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-flat",
+  "lem-pc-flat-base-change-cohom",
+  "lem-a1-local-spectrum-open-classification",
+  "lem-pc-affine-morphism-hi"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 09N8, lemma-affine, complete proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,10 +108,80 @@
    "results": "0 hits; ; logged digest 4f53cda18c2baa0c",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct image vanishing for a retrocompact open immersion of a locally Noetherian one-dimensional scheme",
+   "results": "8 hits; AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_of_res_zero_of_qcqs; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.isLocallyNoetherian_of_isOpenImmersion; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact; AlgebraicGeometry.quasiCompact_of_noetherianSpace_source; logged digest 76574fa39aea6589",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "higherDirectImage, IsOpenImmersion",
+   "results": "0 hits; ; note: loogle: unknown identifier 'higherDirectImage'; logged digest 4f53cda18c2baa0c",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "retrocompact|Noetherian.*dimension.*higher direct|lemma-affine [Mathlib/AlgebraicGeometry]",
+   "results": "0 hits; ; logged digest 4f53cda18c2baa0c",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "higher direct images vanish for retrocompact open immersions in dimension at most one",
+   "results": "8 hits; AlgebraicGeometry.SurjectiveOnStalks.instOfIsOpenImmersion; AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion; AlgebraicGeometry.instIsOpenImmersionCommRingCatOfIsOpenImmersion; AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.mono; AlgebraicGeometry.IsOpenImmersion.ΓIsoTop; AlgebraicGeometry.Scheme.image_basicOpen; AlgebraicGeometry.IsOpenImmersion.mono; AlgebraicGeometry.IsOpenImmersion.instHasOfPostcompPropertyScheme; logged digest 1423b2004673ce1a",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme point, the canonical morphism from the spectrum of the local ring to the scheme is flat",
+   "results": "8 hits; AlgebraicGeometry.Flat.stalkMap; AlgebraicGeometry.instCanonicallyOverSpecStalkCommRingCatPresheaf; AlgebraicGeometry.Flat.iff_flat_stalkMap; AlgebraicGeometry.Flat.of_stalkMap; AlgebraicGeometry.Scheme.isLocalHom_stalkClosedPointTo'; AlgebraicGeometry.Scheme.isLocalHom_stalkClosedPointTo; AlgebraicGeometry.Flat.instHasRingHomPropertyFlat; AlgebraicGeometry.SpecToEquivOfLocalRing; logged digest cd40c2f2f3afac71",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.fromSpecStalk, Flat",
+   "results": "0 hits; ; note: loogle: unknown identifier 'Scheme.fromSpecStalk'; logged digest 4f53cda18c2baa0c",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "fromSpecStalk|Flat.*stalk|localization.*flat [Mathlib/AlgebraicGeometry]",
+   "results": "0 hits; ; logged digest 4f53cda18c2baa0c",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "localization of a commutative ring is flat",
+   "results": "8 hits; RingHom.Flat.holdsForLocalizationAway; Localization.flat; IsLocalization.flat; RingHom.Flat.ofLocalizationSpanTarget; RingHom.Flat.ofLocalizationPrime; instFlatAtPrime; RingHom.Flat.localRingHom; RingHom.Flat.propertyIsLocal; logged digest d9ce417056a10dd7",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization, Flat",
+   "results": "0 hits; ; note: loogle: unknown identifier 'Flat'; logged digest 4f53cda18c2baa0c",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "Localization.*Flat|flat.*localization [Mathlib/RingTheory]",
+   "results": "0 hits; ; logged digest 4f53cda18c2baa0c",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-affine-curve-open-affine",
@@ -84,5 +200,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-open-dimension-one-higher-image-vanishing",
+  "worker": "stage1",
+  "summary": "Split Stacks Tag 09N8 into the stalkwise flat-base-change reduction, a local-spectrum classification for a Noetherian local ring of dimension at most one, and affine higher-direct-image vanishing. Reused existing DAG nodes for stalk localization, localization flatness, flat cohomology base change, and affine morphism vanishing; created only the local-spectrum statement node. No Lean declaration exactly states the item, and Mathlib has no match.",
+  "blueprint": "Realizes the higher-direct-image vanishing input invoked in the opening paragraph of lem-a1-middle-extension-endpoints and used by lem-a1-affine-curve-open-affine.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-flat-base-change-cohom",
+    "why": "Generic flat base change for quasi-coherent higher direct images; the Deligne–Laumon endpoints unit has no replacement."
+   },
+   {
+    "node": "lem-pc-affine-morphism-hi",
+    "why": "Generic affine-morphism acyclicity for quasi-coherent modules; the endpoints unit has no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-flat-base-change-cohom",
+  "lem-pc-affine-morphism-hi"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-54c11c2eb",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-54c11c2eb (reviewer sub-agent of L); spot-checked: Full mathematical review passes against Stacks Tag 09N8, Tags 00FR/02O0, cited DAG statements, and blueprint route. Corrected JSON fixes erroneous created.item and created.group metadata; no mathematical changes.; 1 file(s) fixed by the reviewer"
  }
 }
