@@ -13,17 +13,8 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
-import Sheaf.AlgebraicGeometry.ExchangeForgetCoefficients
-import WeilConjectures.SixFunctors.BaseChange.Derived
 import Sheaf.AlgebraicGeometry.Etale.DerivedExtensionZeroBaseChange
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # Arbitrary base change for compact support on qcqs etale sites
@@ -80,6 +71,19 @@ theorem etale_compactSupport_baseChange_qcqs
         (upperStar (ModuleCat.{u + 1} Λ) (pullback.fst f g)).mapDerivedCategoryPlus ⋙
           rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} Λ)
             (c.baseChange g)) := by
-  sorry
+  let sq : IsPullback (pullback.fst f g) (pullback.snd f g) f g :=
+    IsPullback.of_hasPullback f g
+  have : IsIso (baseChange (ModuleCat.{u + 1} Λ)
+      (c.isPullback_g_ofIsPullback sq).flip.toCommSq) :=
+    isIso_baseChange_of_isProper_of_isAddTorsion_ring Λ isAddTorsion_of_finite
+      (c.isPullback_g_ofIsPullback sq).flip
+  let e := asIso (baseChange (ModuleCat.{u + 1} Λ)
+    (c.isPullback_g_ofIsPullback sq).flip.toCommSq)
+  exact ⟨Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft _ e ≪≫
+    (Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight
+      (extensionZeroBaseChangeDerivedPlusIso Λ (c.isPullback_i_ofIsPullback sq)) _ ≪≫
+    Functor.associator _ _ _⟩
 
 end AlgebraicGeometry.Etale
