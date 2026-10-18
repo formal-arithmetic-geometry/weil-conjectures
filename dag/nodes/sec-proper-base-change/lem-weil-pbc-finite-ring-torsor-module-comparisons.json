@@ -1,0 +1,130 @@
+{
+ "id": "lem-weil-pbc-finite-ring-torsor-module-comparisons",
+ "kind": "statement",
+ "title": "Pullback and unit comparisons for the associated module functor",
+ "statement": "For a scheme X, commutative coefficient ring R, finite group P and finite etale ULift(P)-torsor c:Y→X, let T_c be the concrete associated functor [def-weil-pbc-finite-ring-torsor-associated-module]. There is a natural isomorphism T_c followed by c* with the forgetful functor Rep_R(P)→Mod_R followed by the constant sheaf functor on Y [def-weil-pbc-constant-sheaf]. Moreover T_c sends the trivial representation R to the constant R-module sheaf on X. No connectedness, finite coefficient ring, or nonzero ring hypothesis is needed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0DV5 (3) and 0DV6; sites.tex Tags 04TR and 04TS, equivariant sections and descent along the given torsor"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-ring-torsor-associated-module",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Reuse the coefficient-independent graphHomeo, graphHomeo_mk, graphHomeo_action and sectionAction_one helpers of TorsorDiagonalEvaluationBijective via a proof-only import all. They identify the torsor upstairs with the coproduct of translates of the diagonal section. Equivariance determines a function by its values on the diagonal; its inverse extends t by the formula (g,w)↦g*t(w). These are inverse linear maps over the arbitrary coefficient ring, natural both in W and the representation.",
+   "uses": [
+    "def-weil-pbc-finite-ring-torsor-associated-module",
+    "lem-weil-pbc-torsor-diagonal-evaluation-bijective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify the locally constant module presheaf with the constant module sheaf. Inverse image along an etale map is localization restriction, and sheafification commutes with that localization. Whiskering the diagonal isomorphism and the locally constant comparison gives the asserted natural pullback isomorphism.",
+   "uses": [
+    "lem-weil-pbc-constant-module-locally-constant"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the trivial rank-one representation map a constant coefficient to the constant invariant function. This presheaf morphism is locally surjective by the open fibres upstairs and the translated diagonal cover, and locally injective by surjectivity of the torsor (the empty object uses the empty covering). It is therefore inverted by sheafification, giving the unit comparison.",
+   "uses": [
+    "def-weil-pbc-finite-ring-torsor-associated-module",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-finite-ring-torsor-associated-module",
+  "lem-weil-pbc-constant-module-locally-constant",
+  "lem-weil-pbc-torsor-diagonal-evaluation-bijective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H9",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0DV5 (3) and 0DV6; sites.tex Tags 04TR and 04TS, equivariant sections and descent along the given torsor",
+  "note": "Concrete Lean proof for generic coefficients; reuse the coefficient-independent private graph-splitting helpers of the existing source module via import all. No source declarations are copied or changed."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A sheaf of modules trivialized by a connected finite etale torsor is the associated sheaf of the representation on sections over the torsor",
+   "results": "Eight results about sheaves of modules over ringed sites and associated Zariski sheaves; none supplies torsor descent.",
+   "date": "2026-10-18",
+   "verdict": "No exact result; use the concrete fixed-torsor construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "module representations finite torsor associated sheaf descent equivalence arbitrary commutative ring",
+   "results": "Eight results about finite group representations; no exact fixed-torsor module-sheaf descent theorem.",
+   "date": "2026-10-18",
+   "verdict": "Use concrete equivariant locally constant sections and existing generic site APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Representation\"",
+   "results": "No matches.",
+   "date": "2026-10-18",
+   "verdict": "No exact theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "torsor.*descent|descent.*torsor",
+   "results": "No Mathlib matches. Local library search found the proved prime-coefficient torsor construction and evaluation proofs, which are generalized here.",
+   "date": "2026-10-18",
+   "verdict": "Reuse the existing construction by coefficient generalization; port only the proof steps that require it."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LisseFiniteEtaleFiltration",
+  "date": "2026-10-18",
+  "group": "H9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-lisse-finite-etale-filtration",
+   "place": "finite-ring representation and sheaf passage on each connected component"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteRingTorsorModuleComparisons",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteRingTorsorModuleComparisons.lean",
+  "declaration": "AlgebraicGeometry.Scheme.GaloisCover.associatedModuleFunctorOver_comparisons",
+  "statement": "theorem associatedModuleFunctorOver_comparisons (Λ : Type (u + 1)) [CommRing Λ] :\n    let C := ModuleCat.{u + 1} Λ\n    let T := c.associatedModuleFunctorOver Λ\n    Nonempty (T ⋙ Etale.upperStar C c.π ≅\n      forget₂ (Rep.{u + 1} Λ P) C ⋙ constantSheaf c.P.smallEtaleTopology C) ∧\n      Nonempty (T.obj (Rep.trivial Λ P Λ) ≅\n        (constantSheaf V.smallEtaleTopology C).obj (ModuleCat.of Λ Λ))",
+  "branch": "sheaf-dag",
+  "by": "H9",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261018T091404-L-3255390",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261018T091404-L-3255390",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

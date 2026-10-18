@@ -1,0 +1,96 @@
+{
+ "id": "def-weil-pbc-finite-ring-torsor-associated-module",
+ "kind": "definition",
+ "title": "Associated module sheaf functor with arbitrary commutative coefficients",
+ "statement": "Let X be a scheme, R a commutative ring, P a finite group, and c:Y→X a finite etale ULift(P)-torsor [def-sbc-normal-dominant-galois]. For an R-linear representation N of P, form the presheaf W↦{s∈LocallyConstant(W×_X Y,N) | s(g y)=g s(y)} on the small etale site [def-weil-pbc-etale-site]. Restrictions are precomposition, intertwiners act pointwise, and sheafification [def-weil-pbc-sheafification] gives an additive functor T_c:Rep_R(P)→Sheaf(X_et,Mod_R). All data are explicitly constructed. The existing ZMod construction is the specialization, followed by its original scalar transport.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 0DV5 (3) and 0DV6; sites.tex Tags 04TR and 04TS, equivariant sections and descent along the given torsor"
+ },
+ "stmt_deps": [
+  "def-sbc-normal-dominant-galois",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A sheaf of modules trivialized by a connected finite etale torsor is the associated sheaf of the representation on sections over the torsor",
+   "results": "Eight results about sheaves of modules over ringed sites and associated Zariski sheaves; none supplies torsor descent.",
+   "date": "2026-10-18",
+   "verdict": "No exact result; use the concrete fixed-torsor construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "module representations finite torsor associated sheaf descent equivalence arbitrary commutative ring",
+   "results": "Eight results about finite group representations; no exact fixed-torsor module-sheaf descent theorem.",
+   "date": "2026-10-18",
+   "verdict": "Use concrete equivariant locally constant sections and existing generic site APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"Representation\"",
+   "results": "No matches.",
+   "date": "2026-10-18",
+   "verdict": "No exact theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "torsor.*descent|descent.*torsor",
+   "results": "No Mathlib matches. Local library search found the proved prime-coefficient torsor construction and evaluation proofs, which are generalized here.",
+   "date": "2026-10-18",
+   "verdict": "Reuse the existing construction by coefficient generalization; port only the proof steps that require it."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LisseFiniteEtaleFiltration",
+  "date": "2026-10-18",
+  "group": "H9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-lisse-finite-etale-filtration",
+   "place": "finite-ring representation and sheaf passage on each connected component"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteRingTorsorAssociatedModule",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteRingTorsorAssociatedModule.lean",
+  "declaration": "AlgebraicGeometry.Scheme.GaloisCover.associatedModuleFunctorOver",
+  "statement": "def associatedModuleFunctorOver :\n    Rep.{u + 1} R P ⥤ Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} R)",
+  "branch": "sheaf-dag",
+  "by": "H9",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261018T091404-L-3255390",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H9",
+  "result": "pass",
+  "landing": "20261018T091404-L-3255390",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
