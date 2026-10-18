@@ -24,7 +24,9 @@
   "sk-def-sfb-module-derived-pushpull",
   "sk-def-sfb-derived-tensor-hom",
   "sk-def-sfb-module-lower-shriek",
-  "sk-def-sfb-qlbar-condensed"
+  "sk-def-sfb-qlbar-condensed",
+  "def-sfb-integral-model-generator-data",
+  "def-sfb-quotient-kernel-completeness"
  ],
  "proof": [
   {
@@ -303,5 +305,45 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralModels",
+  "declaration": "AlgebraicGeometry.ProEtale.integral_models",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.discreteSheaf",
+   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.discreteObj",
+   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.discreteObj_comm",
+   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.constantToContinuous",
+   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.discreteMap",
+   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.discreteMap_mon",
+   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.scalarPointMap",
+   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.scalarPointMap_mon",
+   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.scalarMap",
+   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.scalarMap_mon",
+   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.residueMap",
+   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.residueMap_mon",
+   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.restriction",
+   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.complete",
+   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.completedComplete",
+   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.constantComplete",
+   "AlgebraicGeometry.ProEtale.IntegralModelsEmbedded.stacksConstructible",
+   "AlgebraicGeometry.ProEtale.integralModelResidueEtaleOrigin",
+   "AlgebraicGeometry.ProEtale.integral_models"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralModels.lean",
+  "statement": "theorem integral_models (k : Type u) [Field k] (p ℓ : ℕ) [Fact p.Prime] [Fact ℓ.Prime] [CharP k p] (hℓp : ℓ ≠ p) (X : Scheme.{u}) [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [IsNoetherian X] (E : PadicAlgCl.FiniteIntermediateField ℓ) (π : PadicAlgCl.integers ℓ E.1) (hπ : Ideal.span {π} = IsLocalRing.maximalIdeal (PadicAlgCl.integers ℓ E.1)) : ((constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.1) X ⊓ DerivedCategory.finiteTorAmplitude _) = constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.1) X) ∧ (∃ e : ObjectProperty.FullSubcategory (IntegralModelsEmbedded.completedComplete ℓ E π X) ≌ ObjectProperty.FullSubcategory (IntegralModelsEmbedded.constantComplete ℓ E π X), Nonempty (e.functor ⋙ ObjectProperty.ι (IntegralModelsEmbedded.constantComplete ℓ E π X) ≅ ObjectProperty.ι (IntegralModelsEmbedded.completedComplete ℓ E π X) ⋙ IntegralModelsEmbedded.restriction ℓ E X)) ∧ (∀ K : DerivedCategory.{u + 1} (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (integralCoefficientObject X ℓ E)), (constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.1) X K ↔ IntegralModelsEmbedded.stacksConstructible ℓ E π X ((IntegralModelsEmbedded.restriction ℓ E X).obj K)) ∧ (constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.1) X K ↔ IntegralModelsEmbedded.completedComplete ℓ E π X K ∧ integralModelResidueEtaleOrigin X ℓ E π K)) ∧ (∀ (Y : Scheme.{u}) [Y.Over (Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] [IsNoetherian Y] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] (K : DerivedCategory.{u + 1} (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (integralCoefficientObject Y ℓ E))), constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.1) Y K → constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.1) X ((CondensedRing.moduleObjectDerivedPullback (Profinite.padicIntegersRingObj ℓ E.1) f).obj K)) ∧ (∀ K M : DerivedCategory.{u + 1} (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (integralCoefficientObject X ℓ E)), constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.1) X K → constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.1) X M → constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.1) X (((CondensedRing.derivedTensor (Profinite.padicIntegersRingObj ℓ E.1) X).obj K).obj M)) ∧ (∀ (S V : Scheme.{u}) [S.Over (Spec (.of k))] [V.Over (Spec (.of k))] [LocallyOfFiniteType (S ↘ Spec (.of k))] [QuasiCompact (S ↘ Spec (.of k))] [IsSeparated (S ↘ Spec (.of k))] [LocallyOfFiniteType (V ↘ Spec (.of k))] [QuasiCompact (V ↘ Spec (.of k))] [IsSeparated (V ↘ Spec (.of k))] [IsNoetherian S] [IsNoetherian V] (j : S ⟶ V) (i : V ⟶ X) [j.IsOver (Spec (.of k))] [i.IsOver (Spec (.of k))] [IsOpenImmersion j] [IsClosedImmersion i] (L : DerivedCategory.{u + 1} (Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (integralCoefficientObject S ℓ E))), constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.1) S L → constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.1) X ((CondensedRing.moduleObjectDerivedPushforward (Profinite.padicIntegersRingObj ℓ E.1) i).obj (((CondensedRing.openImmersionLowerShriek (Profinite.padicIntegersRingObj ℓ E.1) j).mapDerivedCategory).obj L))) ∧ (∀ K : DerivedCategory.{u + 1} (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (finiteCoefficientObject X ℓ E)), constantModelBoundedConstructible (Profinite.continuousMapRingObj E.1) X K → (sInf {P | integralModelGenerator X ℓ E ≤ P ∧ P.IsTriangulated ∧ P.IsClosedUnderIsomorphisms}) K) ∧ (∀ K : DerivedCategory.{u + 1} (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (qlbarCoefficientObject X ℓ)), constantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) X K → ∃ E' : PadicAlgCl.FiniteIntermediateField ℓ, (sInf {P | qlbarModelGenerator X ℓ E' ≤ P ∧ P.IsTriangulated ∧ P.IsClosedUnderIsomorphisms}) K) ∧ (∀ (S V : Scheme.{u}) [S.Over (Spec (.of k))] [V.Over (Spec (.of k))] [LocallyOfFiniteType (S ↘ Spec (.of k))] [QuasiCompact (S ↘ Spec (.of k))] [IsSeparated (S ↘ Spec (.of k))] [LocallyOfFiniteType (V ↘ Spec (.of k))] [QuasiCompact (V ↘ Spec (.of k))] [IsSeparated (V ↘ Spec (.of k))] [IsNoetherian S] [IsNoetherian V] (j : S ⟶ V) (i : V ⟶ X) [j.IsOver (Spec (.of k))] [i.IsOver (Spec (.of k))] [IsOpenImmersion j] [IsClosedImmersion i] (L₀ : Mod (Sheaf (Scheme.ProEt.topology S) Ab.{u + 1}) (integralCoefficientObject S ℓ E)), CondensedRing.LocallyFree (integralCoefficientObject S ℓ E) L₀ → integralReductionHasEtaleOrigin X ℓ E π j i L₀)",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "R1: preserves the landed N1 IntegralModelsStacks module and record unchanged. The embedded-coefficient helpers now belong to this item module and are all recorded here; no second Stacks theorem is introduced. The generic smallMap and smallDerivedObject are imported unchanged. R2: the two additional definition nodes record the existing generator/reduction API and local-completeness predicate; their theorems remain proof dependencies. The reviewed integral_models signature is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2aeb77121",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Re-delivery after RETURN cf994e64258d. R1 fixed: N1's det-lem-integral-models-stacks record and IntegralModelsStacks module untouched; the 17 IntegralModelsEmbedded helpers moved verbatim (only blueprint tags changed) into the item module Sheaf.Paper.IntegralModels and all 19 decls recorded; the embedded integral_models_stacks theorem removed; smallMap/smallDerivedObject reused by name. The Type-0 vs Type-u universe/presentation obstruction is genuine, so the near-duplicates are accepted. R2 fixed: stmt_deps add only def-sfb-integral-model-generator-data (existing:true, all 20 non-theorem decls of IntegralModelsGenerators, no .choose, verbatim def signature) and def-sfb-quotient-kernel-completeness (existing:true, kernelIdeal via the ∃! sections-pinned helper, plus IsComplete, verbatim); the theorems stay in proof_deps; deps exist live; no cycle. The integral_models signature is byte-identical to the one already accepted clause by clause (setting, Dctf=Dbc, restriction equivalence, both iffs for arbitrary K at π^1, every f*, uncompleted tensor, i_* j_!, finite triangulated generation, one E' per Q̄ object, all n>=1). Gates OK: no hollow defs, only sorry is the theorem, docstrings carry source and blueprint tags, statement verbatim. nt_compile --json clean in 23.0 s. Advisory: generalize N1's discrete helpers' coefficient universe later; CompletedCondensedCoefficients owner is not in stmt_deps."
  }
 }

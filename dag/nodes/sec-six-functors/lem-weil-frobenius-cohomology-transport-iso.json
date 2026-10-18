@@ -257,5 +257,58 @@
  "tool_uses": [
   "lem-trf-open-square-exchange",
   "lem-trf-frobenius-open-square"
- ]
+ ],
+ "lean": {
+  "module": "Sheaf.SixFunctors.FrobeniusCohomologyTransportIso",
+  "declaration": "WeilConjectures.frobeniusCohomologyTransport_isIso",
+  "file": "lean/Sheaf/SixFunctors/FrobeniusCohomologyTransportIso.lean",
+  "statement": "theorem frobeniusCohomologyTransport_isIso (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Y₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] [IsSeparated Y₀.hom] (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (c₀ : Compactification Y₀.hom) (K : generalAlgebraicallyClosedConstructibleCategory l Ω (D.geometricFiber Y₀).left) : ((∀ N : generalAlgebraicallyClosedConstructibleCategory l Ω (Spec (.of D.k)), IsIso ((frobeniusCohomologyCoefficientExtension.{u, v} (N.stage.val.subtype.comp (Shrink.algEquiv ℚ_[l] N.stage.val).toRingHom)).map (frobeniusPointTransportRational D l hl (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω N.stage) N.obj).hom)) ∧ (∀ (Ω' : Type u) [Field Ω'] [Algebra ℚ_[l] Ω'] [IsAlgClosure ℚ_[l] Ω'] (N : generalAlgebraicallyClosedConstructibleCategory l Ω' (Spec (.of D.k))), IsIso (frobeniusPointTransportQbar D l hl Ω' N)) ∧ IsIso ((frobeniusCohomologyQbarExchange D l hl Y₀ Ω c₀ false).app K) ∧ IsIso ((frobeniusCohomologyQbarExchange D l hl Y₀ Ω c₀ true).app K) ∧ IsIso (frobeniusCohomologyTransport D l hl Y₀ Ω c₀ K).1 ∧ IsIso (frobeniusCohomologyTransport D l hl Y₀ Ω c₀ K).2 ∧ ∀ i : ℤ, IsIso (frobeniusCohomologyMap D l hl Y₀ Ω c₀ K i).1 ∧ IsIso (frobeniusCohomologyMap D l hl Y₀ Ω c₀ K i).2) ∧ (∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (c₁ : Compactification Y₀.hom) (n : ℕ) (Kp : (intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_pos n) (Spec (.of D.k))).FullSubcategory) (K₁ : (intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_pos n) (D.geometricFiber Y₀).left).FullSubcategory), IsIso (frobeniusPointTransportFiniteConstructible D l hl E n Kp) ∧ IsIso ((frobeniusCohomologyFiniteDirectExchange D l E Y₀ n).app K₁.obj) ∧ IsIso ((frobeniusCohomologyFiniteCompactExchange D l E Y₀ c₁ n).app K₁.obj) ∧ IsIso (frobeniusCohomologyTransportFinite D l hl E Y₀ c₁ n K₁).1 ∧ IsIso (frobeniusCohomologyTransportFinite D l hl E Y₀ c₁ n K₁).2 ∧ ∀ i : ℤ, IsIso (frobeniusCohomologyMapFinite D l hl E Y₀ c₁ n K₁ i).1 ∧ IsIso (frobeniusCohomologyMapFinite D l hl E Y₀ c₁ n K₁ i).2) ∧ (∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (c₁ : Compactification Y₀.hom) (Kp : sfIntegralConstructibleCategory l E (Spec (.of D.k))) (K₁ : sfIntegralConstructibleCategory l E (D.geometricFiber Y₀).left), IsIso (frobeniusPointTransportIntegralConstructible D l hl E Kp) ∧ IsIso ((frobeniusCohomologyIntegralExchange D l hl E Y₀ c₁ false).app K₁) ∧ IsIso ((frobeniusCohomologyIntegralExchange D l hl E Y₀ c₁ true).app K₁) ∧ IsIso (frobeniusCohomologyTransportIntegral D l hl E Y₀ c₁ K₁).1 ∧ IsIso (frobeniusCohomologyTransportIntegral D l hl E Y₀ c₁ K₁).2 ∧ ∀ i : ℤ, IsIso (frobeniusCohomologyMapIntegral D l hl E Y₀ c₁ K₁ i).1 ∧ IsIso (frobeniusCohomologyMapIntegral D l hl E Y₀ c₁ K₁ i).2) ∧ (∀ (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (c₁ : Compactification Y₀.hom) (Kp : sfRationalConstructibleCategory l E (Spec (.of D.k))) (K₁ : sfRationalConstructibleCategory l E (D.geometricFiber Y₀).left), IsIso (frobeniusPointTransportRational D l hl E Kp) ∧ IsIso ((frobeniusCohomologyRationalExchange D l hl E Y₀ c₁ false).app K₁) ∧ IsIso ((frobeniusCohomologyRationalExchange D l hl E Y₀ c₁ true).app K₁) ∧ IsIso (frobeniusCohomologyTransportRational D l hl E Y₀ c₁ K₁).1 ∧ IsIso (frobeniusCohomologyTransportRational D l hl E Y₀ c₁ K₁).2 ∧ ∀ i : ℤ, IsIso (frobeniusCohomologyMapRational D l hl E Y₀ c₁ K₁ i).1 ∧ IsIso (frobeniusCohomologyMapRational D l hl E Y₀ c₁ K₁ i).2)",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": [
+   "WeilConjectures.frobeniusCoefficientLiftHom",
+   "WeilConjectures.frobeniusCoefficientModules",
+   "WeilConjectures.frobeniusCoefficientModulesTower_existsUnique",
+   "WeilConjectures.frobeniusCoefficientTower",
+   "WeilConjectures.frobeniusCohomologyRationalFunctor",
+   "WeilConjectures.frobeniusCohomologyRationalOperation",
+   "WeilConjectures.frobeniusCohomologyIntegralScalar",
+   "WeilConjectures.frobeniusCohomologyRationalOperationScalar_existsUnique",
+   "WeilConjectures.frobeniusCohomologyRationalOperationScalar",
+   "WeilConjectures.frobeniusCohomologyRationalScalar",
+   "WeilConjectures.frobeniusCohomologyStageEmbedding",
+   "WeilConjectures.frobeniusCohomologyStageEmbedding_comp",
+   "WeilConjectures.frobeniusCohomologyRealizedStage",
+   "WeilConjectures.frobeniusCohomologyRealizedComparison",
+   "WeilConjectures.frobeniusCohomologyQbarFunctor_existsUnique",
+   "WeilConjectures.frobeniusCohomologyQbarFunctor",
+   "WeilConjectures.frobeniusCohomologyQbarSourceEq",
+   "WeilConjectures.frobeniusCohomologyQbarPullback",
+   "WeilConjectures.frobeniusCohomologyQbarTargetEq",
+   "WeilConjectures.frobeniusCohomologyQbarMap",
+   "WeilConjectures.frobeniusCohomologyQbarPullbackMap",
+   "WeilConjectures.frobeniusCohomologyFiniteDirectExchange",
+   "WeilConjectures.frobeniusCohomologyFiniteCompactExchange",
+   "WeilConjectures.frobeniusCohomologyIntegralExchange",
+   "WeilConjectures.frobeniusCohomologyRationalExchange",
+   "WeilConjectures.frobeniusCohomologyQbarExchange",
+   "WeilConjectures.frobeniusCohomologyTransport_isIso",
+   "WeilConjectures.frobeniusCohomologyFiniteFunctor",
+   "WeilConjectures.frobeniusCohomologyIntegralFunctor",
+   "WeilConjectures.frobeniusCohomologyIntegralPullback",
+   "WeilConjectures.frobeniusCohomologyRationalPullback",
+   "WeilConjectures.frobeniusCohomologyTransport_natural"
+  ],
+  "note": "Includes all four point-transport and both exchange-isomorphism clauses. Naturality is the second named theorem, stated for every finite/integral/rational morphism and every morphism of the full algebraically closed Pair category. The latter square directly uses both components of frobeniusCohomologyTransport and the descended RΓ/RΓ_c functors, with the recorded commonStageDerivedPullback. Explicit equality transports preserve the exact endpoints; no universe equality is imposed. The 21 canonical realization helpers are owned by this item module; the landed transport dependency and its lean record are unchanged (R1 option b)."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-42be33672",
+  "group": "NW",
+  "result": "pass",
+  "note": "Third delivery; applies option (b) of the R1 (H13/H4) return. The 21 helpers moved into FrobeniusCohomologyTransportIso.lean with signatures and bodies byte-identical; only imports, header, module docstring and blueprint tags changed. The dependency node def-weil-frobenius-cohomology-transport is identical to live (NB record, 18 decls); in snapshot dag/nodes only the item's lean field differs from live; no Functors module. lean.declarations equals the 32 file declarations; the statement is verbatim; no name collisions. All 6 sorry are theorem proofs; definitions take data only from compositions or ∃! choose. The F1/F2 resolutions and the invertibility clauses accepted in the prior review are unchanged. nt_compile --json rc=0, 32.3 s, no errors or warnings. Advisory: FieldDerivedScalarTower public import with an owner outside stmt_deps (prescribed by option b); earlier advisories A1-A3 stand."
+ }
 }
