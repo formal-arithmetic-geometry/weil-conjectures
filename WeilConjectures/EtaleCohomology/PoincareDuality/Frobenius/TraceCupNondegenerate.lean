@@ -135,7 +135,7 @@ theorem exists_nondegenerate_traceCup
     fun y ↦ (adj.homEquiv _ _).symm (y⟦i⟧' ≫ Φ.hom)
   have key : ∀ x y, T (cupProduct _ i j x y ≫ eqToHom (by rw [hij])) = eΛ (p x ≫ q y) := by
     intro x y
-    show eΛ _ = eΛ _
+    change eΛ _ = eΛ _
     congr 1
     rw [cupProduct_eq_shiftProduct,
       MonoidalCategory.shiftProduct_eq (DerivedCategory.unitorsCommShift _)]
@@ -145,7 +145,7 @@ theorem exists_nondegenerate_traceCup
   have hpx : ∀ x, p x = adj'.homEquiv (𝟙_ (DerivedCategoryModule Λ (Spec (.of k)))) _
       (e.hom ≫ x) ≫ α.inv.app _ := by
     intro x
-    show u ≫ _ = _
+    change u ≫ _ = _
     rw [hu]
     exact unit_comp_map_comp_eq_homEquiv_comp adj' α e x
   have hp : Function.Bijective p := by

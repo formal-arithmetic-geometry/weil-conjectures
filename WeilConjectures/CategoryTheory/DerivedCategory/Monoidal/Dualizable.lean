@@ -36,6 +36,8 @@ variable {A : Type u} [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A]
 
 local instance localInstance_Dualizable_1 : HasColimitsOfSize.{0, 0} A := hasColimitsOfSizeShrink A
 
+instance : IsIso (ε (Qh : _ ⥤ DerivedCategory A)) := inferInstanceAs (IsIso (𝟙 _))
+
 /-- The lax monoidal structure `Qh K ⊗ᴸ Qh L ⟶ Qh (K ⊗ L)` is an isomorphism when `K` is
 K-flat. -/
 lemma isIso_μ_Qh_of_kFlat (K L : HomotopyCategory A (.up ℤ))

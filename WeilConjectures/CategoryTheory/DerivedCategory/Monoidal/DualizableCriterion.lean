@@ -83,15 +83,6 @@ local instance : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink C
 
 open HomotopyCategory MonoidalClosed
 
-/-- The lax monoidal structure `Qh K ⊗ᴸ Qh L ⟶ Qh (K ⊗ L)` is an isomorphism when `K` is
-K-flat. -/
-lemma isIso_μ_Qh_of_kFlat_left (K L : HomotopyCategory C (.up ℤ))
-    (hK : (quasiIso C (.up ℤ)).kFlat K) : IsIso (μ Qh K L) :=
-  have := isLeftDerivedFunctor₂CurriedTensor C
-  (MorphismProperty.kFlat_prod_id_derives_curriedTensor (quasiIso C (.up ℤ))
-    Qh).isIso_of_isLeftDerivabilityStructure (LF := curriedTensor (DerivedCategory C))
-      (μNatTrans Qh) ⟨K, hK⟩ L
-
 /-- The lax monoidal structure `Qh K ⊗ᴸ Qh L ⟶ Qh (K ⊗ L)` is an isomorphism when `L` is
 K-flat. -/
 lemma isIso_μ_Qh_of_kFlat_right (K L : HomotopyCategory C (.up ℤ))
@@ -144,7 +135,7 @@ lemma bijective_whiskerLeft_comp_μ_Qh_counit (hP : (quasiIso C (.up ℤ)).kFlat
   have hT (T' : HomotopyCategory C (.up ℤ)) :
       Function.Bijective (fun f : Qh.obj T' ⟶ Qh.obj ((internalHom P).obj Y) ↦
         Qh.obj P ◁ f ≫ E) := by
-    have := isIso_μ_Qh_of_kFlat_left P T' hP
+    have := isIso_μ_Qh_of_kFlat P T' hP
     rw [← Function.Bijective.of_comp_iff _
       (Qh_map_bijective_of_isLocal (isLocal_internalHom_obj hP hY) T')]
     have : (fun f : Qh.obj T' ⟶ Qh.obj ((internalHom P).obj Y) ↦ Qh.obj P ◁ f ≫ E) ∘
@@ -183,12 +174,6 @@ lemma isIso_curry_μ_Qh_counit_comp (hP : (quasiIso C (.up ℤ)).kFlat P)
   infer_instance
 
 end InternalHom
-
-instance : IsIso (ε (Qh (C := C))) := by
-  have : IsIso (ε (kFlatQh C)) := inferInstance
-  rw [Functor.LaxMonoidal.comp_ε, ObjectProperty.ι_ε, CategoryTheory.Functor.map_id,
-    Category.comp_id] at this
-  exact this
 
 /-- **A chain-level criterion for dualizability.** Let `P` be a K-flat complex, `u : 𝟙 ⟶ I₁` and
 `i : P ⟶ I` K-injective resolutions, `j : I₁ ⊗ P ⟶ I` with `u ▷ P ≫ j = λ ≫ i`, and

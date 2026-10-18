@@ -94,8 +94,8 @@ lemma constantIntToRing_comp_constantRingForgetMap :
     Sheaf.constantIntToRing X.smallEtaleTopology (terminalEtaleIsTerminal X) Λ' ≫
         constantRingForgetMap φ X =
       Sheaf.constantIntToRing X.smallEtaleTopology (terminalEtaleIsTerminal X) Λ := by
-  refine (Sheaf.constantIntHomEquiv _ (terminalEtaleIsTerminal X) _).injective ?_
-  rw [Sheaf.constantIntHomEquiv_comp, Sheaf.constantIntToRing, Sheaf.constantIntToRing]
+  refine (Sheaf.constantHomEquiv (terminalEtaleIsTerminal X) _).injective ?_
+  rw [Sheaf.constantHomEquiv_comp, Sheaf.constantIntToRing, Sheaf.constantIntToRing]
   erw [Equiv.apply_symm_apply, Equiv.apply_symm_apply]
   have h := Sheaf.constantRingHomEquiv_comp X.smallEtaleTopology (terminalEtaleIsTerminal X) Λ'
     (𝟙 _) (constantRingMap φ X)

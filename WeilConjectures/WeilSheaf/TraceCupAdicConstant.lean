@@ -21,10 +21,12 @@ Let `X₀` be a smooth proper geometrically connected scheme of pure dimension `
 `k₀ = 𝔽_q`, and `H^• = H^•(X₀ ⊗ k̄, ℚ̄_ℓ)` the cohomology of the constant Weil sheaf with its
 geometric Frobenius `F`. Through the identification of `Hʳ` with the pro-étale cohomology
 `Hʳ(X̄_proét, ℚ̄_ℓ)` of the geometric fibre `X̄`, on which `F` is the pullback along the geometric
-Galois Frobenius (`AlgebraicGeometry.WeilSheaf.exists_linearEquiv_adicConstantH_cohomology_adicConstantHPullback`),
-the cup product of `ℚ̄_ℓ`-cohomology (`AlgebraicGeometry.ProEtale.adicConstantHCup`, the extension of
-the étale cup products of the finite levels `ℤ/ℓᵐ`) is a Frobenius-compatible graded-commutative
-cup product on `H^•`. Given a trace `tr : H^{2d} ≅ ℚ̄_ℓ` on which `F` acts by `q^d`, the resulting
+Galois Frobenius
+(`AlgebraicGeometry.WeilSheaf.exists_linearEquiv_adicConstantH_cohomology_adicConstantHPullback`),
+the cup product of `ℚ̄_ℓ`-cohomology (`AlgebraicGeometry.ProEtale.adicConstantHCup`, the
+extension of the étale cup products of the finite levels `ℤ/ℓᵐ`) is a Frobenius-compatible
+graded-commutative cup product on `H^•`. Given a trace `tr : H^{2d} ≅ ℚ̄_ℓ` on which `F` acts by
+`q^d`, the resulting
 trace–cup structure is perfect
 (`AlgebraicGeometry.WeilSheaf.exists_traceCup_isPerfect_of_linearEquiv`): the pairings
 `⟨x, y⟩ = tr(x ⌣ y)` are perfect, by finite-level Poincaré duality for the cup product

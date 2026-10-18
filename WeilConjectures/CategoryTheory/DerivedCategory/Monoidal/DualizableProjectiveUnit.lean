@@ -162,17 +162,6 @@ lemma exists_eq_sum_ιTensorObj (hC : UnitFactorsThroughFiniteCoproducts C)
   simp only [Category.assoc]
   rfl
 
-omit [IsGrothendieckAbelian.{v} C] [MonoidalClosed C] [BraidedCategory C]
-  [HasDerivedCategory.{w} C] [Abelian.HasFunctorialFlatResolution C] [MonoidalCategory C]
-  [MonoidalPreadditive C] in
-/-- A finite direct sum of morphisms which are epimorphisms is an epimorphism. -/
-lemma epi_biproduct_map {ι : Type} [Finite ι] {X Y : ι → C} (f : ∀ i, X i ⟶ Y i)
-    [∀ i, Epi (f i)] : Epi (biproduct.map f) := by
-  have := Fintype.ofFinite ι
-  refine ⟨fun g h hgh ↦ biproduct.hom_ext' _ _ fun i ↦ ?_⟩
-  rw [← cancel_epi (f i)]
-  simpa using congrArg (fun k ↦ biproduct.ι X i ≫ k) hgh
-
 omit [HasDerivedCategory.{w} C] [Abelian.HasFunctorialFlatResolution C] in
 /-- If the terms of `F` are flat, tensoring a termwise monomorphism `f : L ⟶ M` of complexes with
 `F` gives a termwise monomorphism `L ⊗ F ⟶ M ⊗ F`: in each degree it is a coproduct of the
@@ -312,8 +301,7 @@ theorem exists_retract_of_exactPairing_of_projective_unit [Projective (𝟙_ C)]
   · have := Finset.single_le_sum (f := fun i ↦ |p i|) (fun i _ ↦ abs_nonneg _)
       (Finset.mem_univ i)
     constructor <;> linarith [le_abs_self (p i)]
-  · have := epi_biproduct_map (fun i ↦ c i k)
-    infer_instance
+  · infer_instance
 
 end DerivedCategory
 

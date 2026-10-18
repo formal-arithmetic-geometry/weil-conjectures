@@ -65,7 +65,7 @@ lemma toSheafify_comp_sheafForget₂ConstantRingIso_hom (U : X.Etaleᵒᵖ) :
   have he' := congrArg (fun k ↦ k.app U) he
   simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.constComp_hom_app,
     Category.id_comp] at he'
-  show V.map _ ≫ ((constantCommuteCompose X.smallEtaleTopology V).hom.app _).hom.app U = _
+  change V.map _ ≫ ((constantCommuteCompose X.smallEtaleTopology V).hom.app _).hom.app U = _
   rw [constantCommuteCompose_hom_app_hom]
   exact he'
 
