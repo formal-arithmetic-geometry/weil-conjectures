@@ -24,9 +24,122 @@
   "def-asd-finite-etale-tate-sheaf",
   "def-kun-derived-tensor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=\\Lambda=\\mathbf Z/\\ell^n\\mathbf Z$. First fix the support calculus used below. The adjunction and supported-sheaf identification in [lem-pur-etale-supported-kernel-adjunction] hold also for $A$-module sheaves: its natural bijection on underlying abelian-group morphisms restricts to the $A$-linear morphisms, since it intertwines multiplication by each scalar. Closed pushforward is exact on modules because it is exact on underlying abelian sheaves. Thus [lem-sp-right-adjoint-preserves-injectives] shows that the support right adjoint takes module injectives to injectives. Take a bounded-below injective representative $I$ using [lem-weil-pbc-module-sheaves-enough-injectives] and [lem-weil-pbc-dplus-injective-representative]. On this representative, one has degreewise $\\Gamma(W,a^!_0I)=\\ker(I(V)\\to I(V\\setminus W))$. Hence\n$$R\\Gamma(W,a^!K)\\cong R\\Gamma_W(V,K).$$\nFor composable closed immersions $a,b$, [lem-cat-right-adjoint-composition] gives $(ab)^!\\cong b^!a^!$: the corresponding underived identity derives on these same injective resolutions. The isomorphism preserves the pasted counits. This uses no purity or constructibility.",
+   "uses": [
+    "lem-pur-etale-supported-kernel-adjunction",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "lem-cat-right-adjoint-composition",
+    "def-pur-etale-derived-supported-sections",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Definition 1.1.1; support adjunction expanded using Stacks Tags 09XP and 09XQ"
+   }
+  },
+  {
+   "text": "For any point $z$, write $V=\\operatorname{Spec}\\mathcal O_{X,z}$ and $q:T=X_{(\\bar z)}\\to V$. Choosing an affine chart $\\operatorname{Spec}D$ at $z$, [lem-exc-affine-strict-local-ring-comparison] identifies $T$ over $V$ with the spectrum of the algebraic strict henselization of $\\mathcal O_{X,z}=D_{\\mathfrak p}$ relative to the separable closure of $\\kappa(z)$ in the geometric point. The pointed-neighbourhood construction [lem-weil-pbc-strict-henselization-triples], taken with $R=\\mathcal O_{X,z}$ and its maximal ideal, makes $q$ ind-etale and gives $\\mathfrak m_T=\\mathfrak m_V\\mathcal O_T$, so the base change of the closed point of $V$ is the spectrum $s_0$ of that separable residue closure. The schemes $V,T$ are Noetherian by [lem-weil-pbc-localization-noetherian] and [lem-sc-strict-henselization-noetherian]. Apply [lem-per-ind-etale-closed-support-base-change] to the closed point immersion of $V$. Pulling its result to the chosen geometric point identifies $C_{\\bar z}(K)$ with the geometric fibre of $s_0^!(K|_T)$. Since $s_0$ has separably closed residue field, [lem-weil-pbc-strictly-henselian-sections-stalk] identifies that fibre with its sections; that sections functor is exact by [prop-weil-pbc-geometric-stalks-exact]. Apply Step 1 to get\n$$C_{\\bar z}(K)\\cong R\\Gamma_{\\{z_0\\}}(T,K|_T).$$\nThe sections/stalk comparison is $A$-linear by naturality in scalar multiplication.",
+   "uses": [
+    "lem-exc-affine-strict-local-ring-comparison",
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-sc-strict-henselization-noetherian",
+    "lem-per-ind-etale-closed-support-base-change",
+    "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "prop-weil-pbc-geometric-stalks-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Definition 1.1.1 and footnote; geometric fibre equals strict-local cohomology with closed support"
+   }
+  },
+  {
+   "text": "Put $T=X_{(\\bar x)}$. Apply only the geometric assertions of [lem-per-codimension-one-costalk-reduction], with the same $X,\\ell,\\bar y\\rightsquigarrow\\bar x$, and with the zero complex in $D^+(X_{\\mathrm{et}},\\mathbf F_\\ell)$. Its hypotheses on $X$ and the immediate specialization are exactly ours. These assertions involve no coefficient complex: $Z$ is integral excellent strictly henselian local of dimension one, its normalization $\\nu:\\widetilde Z\\to Z$ is finite and a universal homeomorphism, $\\widetilde Z$ is a strictly henselian trait, the generic point is unchanged, and the finite closed residue degree $d$ is $1$ in characteristic zero and $p^r$ in residue characteristic $p>0$. Do not use the costalk or twist comparisons of that node for our coefficient ring. Instead, since $\\ell$ is invertible at the closed point, $p\\ne\\ell$. Thus $\\gcd(d,\\ell^n)=1$ in both characteristics, and Bezout gives integers $u,v$ with $ud+v\\ell^n=1$. Reducing this identity modulo $\\ell^n$ exhibits $\\bar u$ as the inverse of $\\bar d$ in $\\Lambda$. This includes $r=0$ and $n=1$. The unique lifting of the geometric points is the one in the cited geometric assertions.",
+   "uses": [
+    "lem-per-codimension-one-costalk-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, section 1.3 before Definition 1.3.1 and Definition 1.4.1, printed p. 262; coefficient-independent geometry and the invertibility of the residue degree for N=ell^n"
+   }
+  },
+  {
+   "text": "For $w=x$ or $y$, let $t$ be its induced point on $T$ and its point on $Z$. The structural map $T\\to X$ is locally ind-etale by [lem-weil-pbc-strict-henselization-affine-chart-ind-etale] on affine charts, so [lem-trf-ind-etale-strict-local-invariance] identifies $T_{(\\bar t)}$ with $X_{(\\bar w)}$, including their closed geometric points. Step 2 therefore identifies the costalk of $K$ on $X$ with that of $K|_T$ on $T$. For the closed immersion $i:Z\\hookrightarrow T$, localize at $t$. The map $\\operatorname{Spec}\\mathcal O_{T,t}\\to T$ is affine ind-etale: $T$ is affine and localization is the filtered colimit of principal localizations, each etale by [lem-weil-pbc-open-immersion-etale]; the local rings are Noetherian by [lem-weil-pbc-localization-noetherian]. [lem-per-ind-etale-closed-support-base-change] for the finite ring $A=\\Lambda$ identifies $L|_{\\operatorname{Spec}\\mathcal O_{Z,t}}$ with $i_t^!(K|_{\\operatorname{Spec}\\mathcal O_{T,t}})$. Composing $i_t$ with the closed point immersion of $\\operatorname{Spec}\\mathcal O_{Z,t}$ and using Step 1 identifies $C_{\\bar w}(L)$ with $C_{\\bar t}(K|_T)$. The residue fields of a closed immersion agree, so these comparisons use the same geometric fibres. Hence both $C_{\\bar w}(K)\\cong C_{\\bar w}(L)$ follow.",
+   "uses": [
+    "lem-trf-ind-etale-strict-local-invariance",
+    "lem-per-ind-etale-closed-support-base-change",
+    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Definition 1.4.1: both vertical isomorphisms of the costalk comparison square"
+   }
+  },
+  {
+   "text": "By [prop-weil-pbc-universal-homeomorphism-topos], inverse image by $\\nu$ is an equivalence of small etale topoi. It induces an equivalence on $\\Lambda$-module sheaves: inverse image takes the constant coefficient ring to the same constant ring, and transporting its action transports modules and module morphisms. On injective resolutions this exact equivalence computes derived sections and supported sections. Indeed it preserves sections on the terminal object and on the open generic point, and therefore preserves the kernel of restriction to that open, which is the supported-sections functor of [def-pur-etale-derived-supported-sections]. Thus\n$$R\\Gamma_{\\{z_0\\}}(Z,L)\\cong R\\Gamma_{\\{\\widetilde z_0\\}}(\\widetilde Z,\\nu^*L).$$\nSince $Z$ is strictly henselian local, Step 2 identifies the left side with its closed geometric costalk. At the generic point of $Z$ the local scheme is $\\operatorname{Spec}F$ and its closed point immersion is the identity, so its costalk is just the geometric stalk $L_{\\bar\\eta}$, unchanged by the identity generic map of $\\nu$. Combine with Step 4 to obtain both displayed chains in the statement.",
+   "uses": [
+    "prop-weil-pbc-universal-homeomorphism-topos",
+    "def-pur-etale-derived-supported-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Section 1.3 and the comparison square in Definition 1.4.1: passage to the normalized trait"
+   }
+  },
+  {
+   "text": "By [lem-asd-etale-finite-twist-pullback], with $m=\\ell^n$ and $A=\\Lambda$, all signed Tate sheaves in [def-asd-finite-etale-tate-sheaf] are locally free of rank one, and their inverse-image comparisons are canonical and compatible with evaluation and tensor products. Every comparison above comes from $\\Lambda$-linear operations on complexes, so commutes with cohomological shifts. For the formula at an arbitrary $\\bar z$, carry out the following argument on $X_{(\\bar z)}$. For the two specialization chains carry it out on $T=X_{(\\bar x)}$: choose a trivializing etale neighbourhood of its closed point. It has a section by [lem-sbc-strict-henselian-etale-neighbourhood-section], hence a basis pulls back to a global basis of the Tate line on $T$. Pull this basis to $Z$, $\\widetilde Z$ and the strict localizations and geometric fibres in Steps 2, 4 and 5. The signed powers and dual powers are then free rank-one constant modules. Tensoring by such a module is the identity after the chosen basis; it is exact and takes acyclic complexes to acyclic complexes, so its derived tensor agrees with ordinary tensor in [def-kun-derived-tensor]. Consequently the injective support calculations and all their comparison maps become the untwisted calculations in this basis. Changing the basis multiplies by a unit, which commutes with every $\\Lambda$-linear comparison, so the resulting compatibility is independent of the basis. The inverse-image comparisons of the cited twist lemma identify these bases with the induced roots-of-unity bases, including along $\\nu$. This proves compatibility with every integer Tate twist and every shift.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "def-asd-finite-etale-tate-sheaf",
+    "lem-sbc-strict-henselian-etale-neighbourhood-section",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Definitions 1.1.1, 1.3.1 and 1.4.1: coefficient-linear and twist/shift compatible identifications"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-asd-finite-etale-tate-sheaf",
+  "def-kun-derived-tensor",
+  "def-pur-etale-derived-supported-sections",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-cat-right-adjoint-composition",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-per-codimension-one-costalk-reduction",
+  "lem-per-ind-etale-closed-support-base-change",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-sbc-strict-henselian-etale-neighbourhood-section",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "prop-weil-pbc-universal-homeomorphism-topos"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, Definition 1.1.1 and footnote, section 1.3 and Definition 1.4.1 (printed pp. 258-262), with module-valued supported restriction made explicit; N=ell^n"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,10 +175,46 @@
    "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/Bernoulli.lean\", \"line\": \"522\", \"text\": \"/- `p`-integrality of the core even-index summand after denominator normalization. -/\"}\n  {\"file\": \"Mathlib/NumberTheory/FLT/Polynomial.lean\", \"line\": \"38\", \"text\": \"variable {k R : Type*} [Field k] [CommRing R] [IsDomain R] [NormalizationMonoid R]\"}\n  {\"file\": \"Mathlib/Topology/Category/Profinite/Nobeling/Span.lean\", \"line\": \"205\", \"text\": \"      -- normalization which preserves multiplication order (i.e. doesn't use commutativity rules)\"}\n  {\"file\": \"Mathlib/Algebra/Squarefree/Basic.lean\", \"line\": \"269\", \"text\": \"theorem squarefree_iff_nodup_normalizedFactors [NormalizationMonoid R] {x : R}\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"15\", \"text\": \"# Relative Normalization\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"17\", \"text\": \"Given a qcqs morphism `f : X ⟶ Y`, we define the relative normalization `f.normalization`,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"19\", \"text\": \"- `f.toNormalization : X ⟶ f.normalization`: a dominant morphism\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"20\", \"text\": \"- `f.fromNormalization : f.normalization ⟶ Y`: an integral morphism\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"line\": \"24\", \"text\": \"the map `X ⟶ T` factors through `f.normalization` uniquely.\"}\n  {\"file\": \"Mathlib/FieldTheory/RatFunc/Luroth.lean\", \"line\": \"130\", \"text\": \"/-- The integer normalization of `φ` as a bivariate polynomial. -/\"}\n  {\"file\": \"Mathlib/FieldTheory/RatFunc/Luroth.lean\", \"line\": \"132\", \"text\": \"  IsLocalization.integerNormalization (nonZeroDivisors K[X]) ((φ E).map (algebraMap E K⟮X⟯))\"}\n  {\"file\": \"Mathlib/FieldTheory/RatFunc/Luroth.lean\", \"line\": \"135\", \"text\": \"  IsFractionRing.integerNormalization_eq_zero_iff.not.mpr (map_ne_zero (φ_ne_zero h))\"}\n  {\"file\": \"Mathlib/FieldTheory/RatFunc/Luroth.lean\", \"line\": \"140\", \"text\": \"  (IsLocalization.integerNormalization_spec (nonZeroDivisors K[X])\"}\n  {\"file\": \"Mathlib/FieldTheory/RatFunc/Luroth.lean\", \"line\": \"144\", \"text\": \"  nonZeroDivisors.ne_zero <| (IsLocalization.integerNormalization_spec _\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"12\", \"text\": \"public import Mathlib.AlgebraicGeometry.Normalization\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"21\", \"text\": \"`f` to the relative normalization `X'` of `Y` in `X` is an open immersion.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"26\", \"text\": \"- If `f` is itself quasi-finite, then the map `f.toNormalization : X ⟶ X'` is an open immersion.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"29\", \"text\": \"  If `f` is proper and quasi-finite, then the map `f.toNormalization : X ⟶ X'` is an isomorphism,\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"line\": \"119\", \"text\": \"lemma Scheme.Hom.exists_mem_and_isIso_morphismRestrict_toNormalization\"}\n  {\"file\": \"Mathlib/Data/Vector/MapLemmas.lean\", \"line\": \"12\", \"text\": \"  This file establishes a set of normalization lemmas for `map`/`mapAccumr` operations on vectors\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/GramSchmidtOrtho.lean\", \"line\": \"12\", \"text\": \"# Gram-Schmidt Orthogonalization and Orthonormalization\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/GramSchmidtOrtho.lean\", \"line\": \"14\", \"text\": \"In this file we introduce Gram-Schmidt Orthogonalization and Orthonormalization.\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/GramSchmidtOrtho.lean\", \"line\": \"259\", \"text\": \"/-- **Gram-Schmidt Orthonormalization**:\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/GramSchmidtOrtho.lean\", \"line\": \"273\", \"text\": \"/-- **Gram-Schmidt Orthonormalization**:\"}\n  {\"file\": \"Mathlib/Analysis/InnerProductSpace/GramSchmidtOrtho.lean\", \"line\": \"317\", \"text\": \"with the orthonormal set produced by the Gram-Schmidt orthonormalization process on the elements of\"}\n",
    "date": "2026-10-18",
    "verdict": "no match: relative normalization and etale algebra loci do not state the strictly henselian curve normalization and geometric costalk comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Geometric etale costalk reduction to normalization of a strictly henselian excellent local curve with finite prime power coefficients",
+   "results": "8 hits: StandardEtalePair, StandardEtalePresentation, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Algebra.IsEtaleAt, Algebra.IsStandardEtale, Algebra.etaleLocus, Algebra.exists_etale_of_isEtaleAt, StandardEtalePair.instEtaleRing. Read returned signatures: etale algebras, ringed-space stalks or relative normalization; no supported etale costalk reduction.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"costalk\"",
+   "results": "0 hits: . No hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "costalk|supportedSections|extraordinary|StrictlyHenselian",
+   "results": "0 hits: . No hits.",
+   "date": "2026-10-18",
+   "verdict": "no match",
+   "subdirectory": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extraordinary stalks on the etale site are local cohomology of strict henselizations and invariant under universal homeomorphisms",
+   "results": "8 hits: AlgebraicGeometry.LocallyRingedSpace.instIsLocalRingCarrierStalkCommRingCatPresheaf, AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap', RingHom.Etale.propertyIsLocal, AlgebraicGeometry.LocallyRingedSpace.stalkMap_inv_hom, AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso, TopCat.Presheaf.stalk_hom_ext, AlgebraicGeometry.IsAffineOpen.isLocalization_stalk', AlgebraicGeometry.PresheafedSpace.restrictStalkIso_hom_eq_germ_apply. Read returned signatures: etale algebras, ringed-space stalks or relative normalization; no supported etale costalk reduction.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local cohomology with supports of etale module sheaves at geometric points and normalization of henselian traits",
+   "results": "8 hits: Algebra.IsEtaleAt, Algebra.etaleLocus, Algebra.exists_etale_of_isEtaleAt, RingHom.Etale.ofLocalizationSpan, Algebra.etaleLocus_eq_compl_support, RingHom.Etale.ofLocalizationSpanTarget, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, Algebra.mem_etaleLocus_iff. Read returned signatures: etale algebras, ringed-space stalks or relative normalization; no supported etale costalk reduction.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "def-per-potential-dualizing-complex",
@@ -87,5 +236,110 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-prime-power-costalk-reduction",
+  "worker": "stage1",
+  "group": "NW",
+  "summary": "Verified Gabber XVII 1.1.1, 1.3, 1.4.1 and all cited DAG statements. Wrote the finite-ring supported-restriction argument, strict-local formula, geometric normalization reduction, local costalk transitivity, topological support comparison and signed-twist compatibility. Reused only the coefficient-independent geometry of the existing F_ell reduction (specialized to the zero complex); proved invertibility of the residue degree in Z/ell^n by Bezout. No new nodes and no statement changes.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve, current proof Step 1: dimension-normalized Verdier duality, via finite-coefficient potential-dualizing pinnings; these steps realize the strict-local costalk and normalized codimension-one-trait reduction recorded in this item's ancestry (historically blueprint Step 3).",
+  "tool_uses": [
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "The generic signed finite-coefficient Tate-line and inverse-image comparison for m=ell^n supplies twist compatibility without a finite-field or F_ell restriction."
+   },
+   {
+    "node": "lem-cat-right-adjoint-composition",
+    "why": "Generic tool: Right adjoint of a composite. Used only for its stated etale support/localization conclusion; no node of sk-p-dl-a1-perverse supplies this arbitrary-excellent-scheme interface. The Gabber XVII codimension-one route is unchanged."
+   },
+   {
+    "node": "lem-exc-affine-strict-local-ring-comparison",
+    "why": "Generic tool: identifies the pointed-neighbourhood strict localization X_(z) with the algebraic strict henselization of the local ring on an affine chart, with its residue field; added by the maintainer reader for Step 2. No node of sk-p-dl-a1-perverse supplies this; the Gabber XVII route is unchanged."
+   },
+   {
+    "node": "lem-pur-etale-supported-kernel-adjunction",
+    "why": "Generic tool: Closed etale support kernel and its exact left adjoint. Used only for its stated etale support/localization conclusion; no node of sk-p-dl-a1-perverse supplies this arbitrary-excellent-scheme interface. The Gabber XVII codimension-one route is unchanged."
+   },
+   {
+    "node": "lem-sbc-strict-henselian-etale-neighbourhood-section",
+    "why": "Generic strictly henselian etale-neighbourhood section theorem: pulls a local basis of a Tate line back to a global basis on the strict local schemes, so twist compatibility is checked on the actual supported complexes. The unit has no arbitrary-strict-local etale section statement."
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Generic tool: Strict henselization preserves Noetherianity of local rings. Used only for its stated local algebra or scheme geometry conclusion; no node of sk-p-dl-a1-perverse supplies this arbitrary-excellent-scheme interface. The Gabber XVII codimension-one route is unchanged."
+   },
+   {
+    "node": "lem-sp-right-adjoint-preserves-injectives",
+    "why": "Generic tool: Right adjoints of exact functors preserve injectives. Used only for its stated etale support/localization conclusion; no node of sk-p-dl-a1-perverse supplies this arbitrary-excellent-scheme interface. The Gabber XVII codimension-one route is unchanged."
+   },
+   {
+    "node": "lem-trf-ind-etale-strict-local-invariance",
+    "why": "Generic tool: Strict localizations are invariant under ind-etale morphisms. Used only for its stated etale support/localization conclusion; no node of sk-p-dl-a1-perverse supplies this arbitrary-excellent-scheme interface. The Gabber XVII codimension-one route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Bounded-below injective models compute the support functors and their composites for arbitrary finite coefficients."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "Generic tool: Localizations of Noetherian rings are Noetherian. Used only for its stated local algebra or scheme geometry conclusion; no node of sk-p-dl-a1-perverse supplies this arbitrary-excellent-scheme interface. The Gabber XVII codimension-one route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "The arbitrary constant-ring module sheaf category has enough injectives, needed to compute supported restriction by module injective resolutions."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Principal localizations are open immersions and therefore etale, so localizing a closed-support square is an allowed ind-etale base change."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "why": "Generic tool: Strict henselization is ind-etale over an affine chart. Used only for its stated etale support/localization conclusion; no node of sk-p-dl-a1-perverse supplies this arbitrary-excellent-scheme interface. The Gabber XVII codimension-one route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Generic tool: The colimit over etale algebras with a point and a residue embedding is strictly henselian. Used only for its stated local algebra or scheme geometry conclusion; no node of sk-p-dl-a1-perverse supplies this arbitrary-excellent-scheme interface. The Gabber XVII codimension-one route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "why": "Generic tool: Global sections over a strictly henselian local scheme are the stalk at the closed point. Used only for its stated etale support/localization conclusion; no node of sk-p-dl-a1-perverse supplies this arbitrary-excellent-scheme interface. The Gabber XVII codimension-one route is unchanged."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Exactness of geometric stalks makes sections at the separably closed closed point exact, also on modules by naturality of the scalar actions."
+   },
+   {
+    "node": "prop-weil-pbc-universal-homeomorphism-topos",
+    "why": "Generic tool: Topological invariance of the small etale topos. Used only for its stated local algebra or scheme geometry conclusion; no node of sk-p-dl-a1-perverse supplies this arbitrary-excellent-scheme interface. The Gabber XVII codimension-one route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-cat-right-adjoint-composition",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-sbc-strict-henselian-etale-neighbourhood-section",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "prop-weil-pbc-universal-homeomorphism-topos"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NW-45bd4f271",
+  "group": "NW",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-45bd4f271 (reviewer sub-agent of L); spot-checked: I read Gabber XVII Déf. 1.1.1, 1.1.2, §1.3 and Déf. 1.4.1 (PDF pp. 264–268). The item says what they say with N=ℓ^n, and its statement is unchanged from the base. There are no new nodes, no cycle and no SGA citation. I opened every cited statement and checked each step against it. Step 1: support kernel adjunction, Λ-linear restriction, injectives preserved, Γ(W,a^!_0 I)=ker(I(V)→I(V∖W)), transitivity through right-adjoint composition. Step 2: the strict henselization is ind-étale with m_T=m_V O_T. V and T are Noetherian and q is affine, so the ind-étale closed-support base change applies with A=Z/ℓ^n. Sections equal the stalk on Spec K_sep and are exact. Step 3: it uses only the K-independent geometric clauses of the F_ℓ statement lem-per-codimension-one-costalk-reduction, taken at K=0, which is legitimate statement use. Degree invertibility comes from Bezout with p≠ℓ, which also holds for n>1. Step 4: ind-étale strict-local invariance plus base change to Spec O_{T,t}; Spec O_{Z,t} is the Cartesian fibre, and the residue fields agree. Step 5: 03SI topos equivalence preserves the support kernel because the generic point is open; Z_(x̄)=Z, and the generic costalk is the stalk. Step 6: the twist pullback lemma applies with m=ℓ^n, A=Λ; a global basis comes from the strict-henselian étale section, derived tensor is exact, and a change of basis is a unit. Batch-5 flags, all accepted: henselian-permanence is pure algebra (092X/09XK); lem-trf-bounded-below-derived-adjunction is the generic derivedPlus adjunction; lem-trf-ind-etale-strict-local-invariance is generic geometry (05WR). None is part of the trace formula or Poincaré duality or of their proofs. Duplicate search: the F_ℓ sibling is a pre-existing special case, and lem-per-prime-power-supported-calculus and lem-per-general-costalk-transitions are not duplicates. Edge cases checked: n=1, characteristic 0, inseparable residue field, Z already a trait, K=0, empty X. No fixes."
  }
 }
