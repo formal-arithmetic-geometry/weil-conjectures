@@ -18,9 +18,167 @@
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-sbc-canonical-restrict-scalars-functor-comparisons"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a Tor interval $[a,b]$ for $L$. By [lem-sf-etale-flat-constructible] choose a representative $F^\\bullet$ of $L$ consisting of flat constructible $A$-module sheaves, zero outside $[a,b]$; its hypotheses hold because $A$ is finite and $V$ is Noetherian. By [lem-pc-bounded-above-flat-kflat-site] this representative is K-flat. For every finitely generated $A$-module $M$, its constant sheaf is constructible: $M$ is a finite set, since it is a quotient of $A^r$. Thus $L\\otimes_A^L\\underline M_V$ is represented by $F^\\bullet\\otimes_A\\underline M_V$. Every term is constructible by [lem-fd-flat-constructible-tensor], applied to the flat constructible sheaf $F^q$ and the degree-zero constant complex $\\underline M_V$. Kernels and cokernels are constructible by [thm-constructible-serre]. Consequently this tensor has bounded constructible cohomology, confined to $[a,b]$, even when $M$ has infinite projective dimension.",
+   "uses": [
+    "lem-sf-etale-flat-constructible",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-fd-flat-constructible-tensor",
+    "thm-constructible-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03TT, lemma-when-ctf; Tags 095I, lemma-tensor-product-constructible, and 0961, lemma-tensor-c; sites-cohomology.tex Tag 06YQ, lemma-bounded-flat-K-flat"
+   }
+  },
+  {
+   "text": "The field-coefficient finiteness theorem [lem-per-quasi-excellent-etale-direct-image-finiteness] applies to $g$ with coefficient field $\\kappa=\\mathbf F_\\ell$: Noetherian schemes are qcqs, finite presentation is assumed, excellence implies quasi-excellence by [def-exc-excellent-ring], and $\\ell$ is invertible on $X$. We use only its bounded-constructibility conclusion, which imposes no uniform cohomological-dimension bound in the nonproper case. If a constructible $A$-module sheaf $G$ is given, the finite filtration $G\\supset\\ell G\\supset\\cdots\\supset\\ell^mG=0$ has constructible subquotients by [thm-constructible-serre]. Each subquotient is killed by $\\ell$ and is a constructible $\\kappa$-module sheaf: its finite constant $A$-module charts factor through $A\\to\\kappa$. Its $A$-coefficient direct image is the restriction of its $\\kappa$-coefficient direct image by [lem-sbc-canonical-restrict-scalars-functor-comparisons]. Restriction keeps the underlying sheaves and the same finite constant charts. Finite induction along this filtration, using the long exact cohomology sequences and [thm-constructible-serre], proves that $Rg_*G$ is bounded constructible.",
+   "uses": [
+    "lem-per-quasi-excellent-etale-direct-image-finiteness",
+    "def-exc-excellent-ring",
+    "thm-constructible-serre",
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Theorem 6.7.1, printed p.55, finite-field case followed by finite coefficient filtration"
+   }
+  },
+  {
+   "text": "Apply the truncation triangles [lem-sf-derived-truncation-triangle] successively to a bounded constructible $A$-complex $C$. Its finitely many factors are $\\mathcal H^q(C)[-q]$. The preceding step applies to every one of these sheaves. Right-derived direct image preserves shifts and triangles by [lem-pc-right-derived-functor-triangulated], and the cohomology long exact sequences show that the finite extension of their images is bounded constructible, using [thm-constructible-serre]. Apply this in particular to $C=L$ and to $C=L\\otimes_A^L\\underline\\kappa_V$, which are bounded constructible by Step 1. Choose integers $c,u$ such that $Rg_*L\\in D^{\\le c}$ and $Rg_*(L\\otimes_A^L\\underline\\kappa_V)\\in D^{\\le u}$. These bounds concern two fixed complexes only.",
+   "uses": [
+    "lem-sf-derived-truncation-triangle",
+    "lem-pc-right-derived-functor-triangulated",
+    "thm-constructible-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Theorem 6.7.1 and proof pattern of Lemmas 6.7.16–6.7.17; bounded-complex devissage"
+   }
+  },
+  {
+   "text": "For any finitely generated $A$-module $N$, the quotients $\\ell^rN/\\ell^{r+1}N$ are finite-dimensional $\\kappa$-vector spaces, hence finite direct sums of $\\kappa$. The constant-sheaf construction preserves the short exact sequences of this filtration: its compatibility with quasi-isomorphisms in [def-kun-constant-sheaf], applied to a three-term exact complex, says exactly this. Tensoring the resulting triangles with $L$ and applying $Rg_*$ preserves triangles by [lem-kun-derived-tensor-triangulated] and [lem-pc-right-derived-functor-triangulated]. For a quotient $\\kappa^r$ its image is a finite direct sum of $Rg_*(L\\otimes_A^L\\underline\\kappa_V)$, so it has no cohomology above $u$. In the long exact sequence an extension of two complexes with this upper bound has the same bound. Induction along the filtration proves $Rg_*(L\\otimes_A^L\\underline N_V)\\in D^{\\le u}$, with $u$ independent of $N$ and of its number of generators.",
+   "uses": [
+    "def-kun-constant-sheaf",
+    "lem-kun-derived-tensor-triangulated",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.11 proof, upper-bound input to approximation, replaced by finite residue-field filtration"
+   }
+  },
+  {
+   "text": "For a constant complex $Q$, let $\\pi_Q$ be the projection map, the adjoint transpose of $g^*(Rg_*L\\otimes_A^L\\underline Q_X)\\cong g^*Rg_*L\\otimes_A^L\\underline Q_V\\xrightarrow{\\varepsilon_L\\otimes1}L\\otimes_A^L\\underline Q_V$. The tensor identification is [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. For $Q=A[0]$ the adjunction triangle identity makes $\\pi_Q$ the identity of $Rg_*L$. For $Q=A^r$ it is the direct sum of these identities: naturality with the $r$ inclusions and projections gives each matrix entry. It remains an isomorphism after shifts, since the counit commutes with shifts by [lem-weil-pbc-derived-adjunction-shift]. Therefore it is an isomorphism for every bounded finite free complex $Q$: induct on its number of nonzero terms using the brutal-truncation short exact sequence, the corresponding cone triangle, and the long exact cohomology sequences of its projection-map diagram. Both sides preserve triangles by [lem-kun-derived-tensor-triangulated] and [lem-pc-right-derived-functor-triangulated]; the diagram commutes by the defining counit formula.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-derived-adjunction-shift",
+    "lem-kun-derived-tensor-triangulated",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.11 proof, finite free case; Lemma 6.7.17 via 6.7.16"
+   }
+  },
+  {
+   "text": "Fix a finitely generated $A$-module $M$. The finite ring $A$ is Noetherian (every ideal is a finite set, hence generated by that set). Take the finite free resolution $E^\\bullet\\to M[0]$ of [lem-weil-pbc-finite-free-resolution-noetherian], placed in nonpositive cochain degrees. For $t\\ge1$ let $Q_t$ be its brutal truncation in degrees $-t+1,\\ldots,0$, mapping to $M[0]$ by augmentation. Exactness of the resolution shows that the cone has its only cohomology in degree $-t$, equal to $N_t=\\ker(E^{-t+1}\\to E^{-t+2})$ (for $t=1$ take the kernel of augmentation). Thus the cone is $N_t[t]$ by canonical truncation [lem-sf-derived-truncation-triangle]. The module $N_t$ is finite because $E^{-t+1}$ is a finite set. Applying termwise constants gives the same triangle on either etale site by [def-kun-constant-sheaf]. Notice that $N_t$ need not be projective, and $Q_t\\to M$ is not being declared a quasi-isomorphism.",
+   "uses": [
+    "lem-weil-pbc-finite-free-resolution-noetherian",
+    "lem-sf-derived-truncation-triangle",
+    "def-kun-constant-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LP, lemma-resolution-by-finite-free, part (2); brutal truncation and cone cohomology"
+   }
+  },
+  {
+   "text": "The cone on the target-side map $Rg_*(L\\otimes_A^L\\underline Q_{t,V})\\to Rg_*(L\\otimes_A^L\\underline M_V)$ is $Rg_*(L\\otimes_A^L\\underline N_{t,V})[t]$, by exactness of tensor and direct image. Step 4 places it in $D^{\\le u-t}$. The source-side cone is $(Rg_*L\\otimes_A^L\\underline N_{t,X})[t]$, and lies in $D^{\\le c-t}$. For this last upper bound, resolve the finite module $N_t$ by finite free modules in nonpositive degrees using [lem-weil-pbc-finite-free-resolution-noetherian]. Its termwise constant resolution is K-flat by [lem-pc-bounded-above-flat-kflat-site]. Represent $Rg_*L$ by its good truncation, zero above $c$ [lem-sf-derived-truncation-triangle]. The total tensor of these two models is zero above $c$, and computes the derived tensor. For each integer $q$, choose $t$ with $\\max(c,u)-t<q-1$. Both cones then have zero cohomology in degrees $q-1,q$, so both horizontal approximation maps induce isomorphisms in degree $q$. Naturality gives the commuting square with vertical maps $\\pi_{Q_t},\\pi_M$. Step 5 makes $\\pi_{Q_t}$ invertible; hence $H^q(\\pi_M)$ is invertible. Since $q$ was arbitrary, $\\pi_M$ is an isomorphism. This argument uses no uniform bound for arbitrary sheaves.",
+   "uses": [
+    "lem-kun-derived-tensor-triangulated",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-weil-pbc-finite-free-resolution-noetherian",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-sf-derived-truncation-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.11(2), finite free approximation diagram and connectivity argument; Lemma 6.7.17"
+   }
+  },
+  {
+   "text": "Now let $P$ be the bounded complex of finite $A$-modules in the statement. Induct on its number of nonzero terms by its brutal-truncation triangles. Their factors are its terms shifted to the appropriate degrees. Step 7 proves the projection formula for each unshifted term. The counit shift comparison [lem-weil-pbc-derived-adjunction-shift] proves it for each shifted term. Tensor and $Rg_*$ carry each triangle to a triangle by [lem-kun-derived-tensor-triangulated] and [lem-pc-right-derived-functor-triangulated], and naturality of the projection transformation gives a map between them. The long exact cohomology sequences show that two invertible components force the third to be invertible. This proves precisely the counit-defined $\\pi_P$, including complexes $P$ of infinite projective dimension. The empty complex gives the map $0\\to0$.",
+   "uses": [
+    "lem-weil-pbc-derived-adjunction-shift",
+    "lem-kun-derived-tensor-triangulated",
+    "lem-pc-right-derived-functor-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.17, passage from finite modules to bounded coefficient complexes"
+   }
+  },
+  {
+   "text": "Step 3 has already proved bounded constructibility of $Rg_*L$. Step 7 with $M=\\kappa$ identifies $(Rg_*L)\\otimes_A^L\\underline\\kappa_X$ with the bounded complex $Rg_*(L\\otimes_A^L\\underline\\kappa_V)$. Choose a finite cohomological interval $[v,u']$ for this complex (choose $[0,0]$ if it is zero). Apply [lem-exc-residue-tor-test] with $E=\\mathbf Q_\\ell$, valuation ring $\\mathbf Z_\\ell$, uniformizer $\\ell$, and level $m$, so that its coefficient ring and residue field are exactly $A$ and $\\kappa$. Its hypotheses require bounded constructible $Rg_*L$, which Step 3 supplies; they impose no finite-dimensionality of $X$ and no ground field. The test gives Tor amplitude $[v,u']$ for $Rg_*L$ against every $A_X$-module sheaf, not only against constant ones. This proves $Rg_*L\\in D^b_{ctf}$.",
+   "uses": [
+    "lem-exc-residue-tor-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Residue-field Tor criterion as stated in lem-exc-residue-tor-test; Bhatt–Scholze Lemma 6.7.17 boundedness"
+   }
+  },
+  {
+   "text": "Put $B=A/(\\ell^n)$, $1\\le n\\le m$, and denote derived extension of scalars by $C_T=-\\otimes_A^LB_T$. By [lem-pur-sheaf-ring-derived-coefficient-adjunction] this is the actual derived coefficient functor with its balanced tensor normalization. Form the $B$-linear map $\\chi_{g,L}:C_XRg_{*,A}L\\to Rg_{*,B}C_VL$ by transposing $g_B^*C_XRg_{*,A}L\\cong C_Vg_A^*Rg_{*,A}L\\xrightarrow{C_V\\varepsilon_{A,L}}C_VL$; pullback/tensor balancing is [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Step 1 makes $C_VL$ bounded, so the bounded-below direct-image/restriction comparison [lem-sbc-canonical-restrict-scalars-functor-comparisons] applies. Under it the restriction of $\\chi_{g,L}$ is exactly $\\pi_{B[0]}$: the restricted counit is the $A$-counit by [lem-sbc-restrict-scalars-derived-adjunction-identities], and the balanced tensor maps are the same on representatives. Thus Step 7 makes its restriction invertible. Restriction detects isomorphisms, since it is exact and keeps every cohomology group's underlying additive sheaf. Therefore $\\chi_{g,L}$ is invertible in $D(X_{\\mathrm{et}},B)$ itself. For $n=m$ this is the identity coefficient comparison. All maps used were defined by natural counits and tensor comparisons; uniqueness of adjoint transposes proves naturality in $L$ and $P$, without choosing the finite free approximations functorially.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "lem-sbc-restrict-scalars-derived-adjunction-identities"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6, lemma-adjoint, identity-topos coefficient adjunction; Tags 07A7 and 0D6J, restriction comparisons and adjunction identities; Bhatt–Scholze Lemma 6.7.17"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-etale-flat-constructible",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-fd-flat-constructible-tensor",
+  "thm-constructible-serre",
+  "lem-per-quasi-excellent-etale-direct-image-finiteness",
+  "def-exc-excellent-ring",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sf-derived-truncation-triangle",
+  "def-kun-constant-sheaf",
+  "lem-kun-derived-tensor-triangulated",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-derived-adjunction-shift",
+  "lem-weil-pbc-finite-free-resolution-noetherian",
+  "lem-exc-residue-tor-test",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sbc-restrict-scalars-derived-adjunction-identities"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.7.17 via 6.7.16 and the finite-free approximation argument of 6.5.11(2); finite residue-field devissage supplies the upper bound without a uniform cohomological-dimension hypothesis."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -56,10 +214,45 @@
    "results": "Logged hits: Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Algebra.FormallyUnramified.isOpenImmersion_SpecMap_lmul, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, Algebra.Etale.baseChange, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, Algebra.Etale.exists_subalgebra_fg, AlgebraicGeometry.IsEtale.of_comp, Algebra.FormallyEtale.instTensorProduct",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*(tensor|projection)|coefficientReduction",
+   "results": "Actual logged hits: Mathlib/RingTheory/Etale/Finite.lean, Mathlib/RingTheory/Etale/Descent.lean, Mathlib/RingTheory/Etale/Descent.lean, Mathlib/RingTheory/Etale/Descent.lean",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image on excellent schemes preserves constructible finite Tor dimension and commutes with constant nonperfect coefficient complexes",
+   "results": "Actual logged hits: AlgebraicGeometry.Scheme.Modules.pushforwardComp, AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, AlgebraicGeometry.Scheme.Modules.instFaithfulPushforward, AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Hom.isConstructible_preimage, AlgebraicGeometry.Scheme.Modules.instFullPushforward",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projectionFormula\"",
+   "results": "Actual logged hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula for derived direct image of constructible etale torsion sheaves tensor bounded constant complexes over Z modulo prime powers",
+   "results": "Actual logged hits: LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.free_internallyProjective_iff_tensor_condition', localCohomology.diagram, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula by finite free approximations and bounded pushforward of residue field tensor products",
+   "results": "Actual logged hits: Ideal.ResidueField.exists_smul_eq_tmul_one, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, Ideal.ResidueField.liftₐ_comp_toAlgHom, PolynomialLaw.factorsThrough_toFunLifted_π, Ideal.Fiber.exists_smul_eq_one_tmul, AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype, InfiniteGalois.proj_of_le, isNilpotent_tensor_residueField_iff",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-potential-dualizing-coefficient-tower",
@@ -81,5 +274,104 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-excellent-etale-constant-projection",
+  "worker": "stage1",
+  "summary": "Proved the unchanged ordinary-etale statement by bounded flat constructible models, finite residue-field devissage, canonical finite-free projection, and finite-free approximations. Reused existing finite-field finiteness and residue Tor test nodes; retained the B-linear counit transpose. No new nodes. No uniform cohomological dimension of nonproper direct image is asserted.",
+  "blueprint": "lem-per-artin-gabber-affine-curve, Proof Step 3: normalized finite-level Verdier duality and constant-coefficient comparison for the open direct image in the closed-support triangle. This is a generic coefficient tool below that step, following the item source BS 6.7.17.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-etale-flat-constructible",
+    "why": "Bounded flat constructible models over any finite ring on a Noetherian etale site; needed for nonflat constant coefficients, not supplied by the perverse unit."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "K-flatness on a general ringed site, used to compute ordinary etale tensors; a generic resolution tool."
+   },
+   {
+    "node": "lem-fd-flat-constructible-tensor",
+    "why": "Constructibility of tensoring a constructible sheaf with a flat constructible sheaf; no Fourier construction is used."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "Kernel/cokernel/extension closure for finite-coefficient constructible sheaves; generic finite devissage tool."
+   },
+   {
+    "node": "def-exc-excellent-ring",
+    "why": "Definition of excellence implies quasi-excellence; no excellence theorem from another unit is substituted."
+   },
+   {
+    "node": "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+    "why": "Coefficient-labelled derived direct-image comparison on bounded-below inputs; generic tool, not smooth base change."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Exactness and shift compatibility of derived direct image; generic derived-category tool."
+   },
+   {
+    "node": "lem-sf-derived-truncation-triangle",
+    "why": "Canonical truncation triangles, for finite cohomological devissage and one-cohomology cones."
+   },
+   {
+    "node": "def-kun-constant-sheaf",
+    "why": "Termwise constants and their preservation of quasi-isomorphisms, needed for coefficient-resolution triangles."
+   },
+   {
+    "node": "lem-kun-derived-tensor-triangulated",
+    "why": "Exactness of ordinary etale tensor in each variable, not the Kunneth theorem."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Canonical strong tensor comparison for derived pullback on arbitrary ringed topoi."
+   },
+   {
+    "node": "lem-weil-pbc-derived-adjunction-shift",
+    "why": "Shift compatibility of the counit defining the projection transformation."
+   },
+   {
+    "node": "lem-weil-pbc-finite-free-resolution-noetherian",
+    "why": "Finite-rank free resolution of a finite module over a Noetherian ring; generic algebra tool for approximation."
+   },
+   {
+    "node": "lem-exc-residue-tor-test",
+    "why": "Residue-field test for Tor amplitude on an arbitrary scheme with Z/ell^m coefficients; its hypotheses match the bounded constructible output."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Ordinary sheaf-ring scalar extension and its balanced derived adjunction, with no flatness assumption."
+   },
+   {
+    "node": "lem-sbc-restrict-scalars-derived-adjunction-identities",
+    "why": "Counit identity under coefficient restriction, used to identify the B-linear map with the already proved A-linear projection."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-etale-flat-constructible",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-fd-flat-constructible-tensor",
+  "thm-constructible-serre",
+  "def-exc-excellent-ring",
+  "lem-sbc-canonical-restrict-scalars-functor-comparisons",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sf-derived-truncation-triangle",
+  "def-kun-constant-sheaf",
+  "lem-kun-derived-tensor-triangulated",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-derived-adjunction-shift",
+  "lem-weil-pbc-finite-free-resolution-noetherian",
+  "lem-exc-residue-tor-test",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sbc-restrict-scalars-derived-adjunction-identities"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NK-957b23c63",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-957b23c63 (reviewer sub-agent of L); spot-checked: PASS, no fixes written. I read the item, the ten steps and all 17 cited statements in full, plus Bhatt-Scholze Lemmas 6.5.11, 6.7.1, 6.7.2, 6.7.16 and 6.7.17. The statement is unchanged from the base and there are no new nodes. The delivery adapts the source proof because the source needs a uniform cohomological-dimension bound for g_*, which the existing finiteness node keeps only for proper g. Steps 3-4 replace it with bounds for the fixed L: Rg_*L lies in D^{<=c}, Rg_*(L(x)kappa) in D^{<=u}, and the ell-adic filtration then gives Rg_*(L(x)N) in D^{<=u} for every finite N. I checked this and it is valid. The Step 6 cone degrees are right: cone(Q_t->M) = N_t[t], and (ker eps)[1] for t=1. In Step 7 the cone bounds are u-t and c-t, the condition max(c,u)-t<q-1 makes both maps isomorphisms on H^q, and the square needs only plain naturality in Q. Step 9 is the residue Tor test with E=Q_ell, so A=Z/ell^m and kappa=F_ell. Step 10 uses the restriction unit/counit identities, and C_V L is bounded by Step 1. Step 2 meets the field theorem's hypotheses: F_ell is a finite field of characteristic ell, Noetherian gives qcqs, excellent gives quasi-excellent, ell is invertible. Advisory only: Steps 5 and 8 assume the projection map respects connecting maps, which is standard. Step 10's unit identity needs C_X Rg_*L bounded below, which follows from Step 9. Small cases checked: g=id, m=1, m=2 with M=Z/ell (infinite resolution), n=m, L=0, empty P. Duplicates: lem-sf-projection-finite-constant needs a uniform R^q f_* vanishing bound, lem-kun-0f0g is for proper maps only, lem-kun-0f12 is for global sections; none duplicates the item. Tool uses: all 16 are generic tools and are accepted. Batch-5: the cited lem-per-quasi-excellent-etale-direct-image-finiteness (Gabber finiteness over quasi-excellent bases) reaches lem-trf-g-ring-affine-cover (Stacks 0HA5, pure commutative algebra) through lem-per-quasi-excellent-finite-type-stability. Neither is the trace formula, Poincare duality or a step of their proofs. I recomputed the full closure: the other trf/pod nodes reached (J-2 affine cover 07R4, cone system 05RG, 02UP, 01KU base change, scalar extension, lisse-module chain, and others) are also generic. The citation is outside the assumed statements, so the flag is accepted."
  }
 }
