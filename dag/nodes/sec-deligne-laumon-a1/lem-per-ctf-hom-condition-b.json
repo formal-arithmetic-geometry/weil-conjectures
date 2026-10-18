@@ -20,9 +20,104 @@
   "def-pur-derived-internal-hom",
   "def-weil-pbc-category-colimit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-per-galois-partition-exact-refinement], the sheaves in $\\mathcal W_{\\mathcal P}(A)$ form an exact extension-closed abelian subcategory; the same is true of its constructible objects. Thus [lem-sbc-cohomology-in-weak-serre-subcategory] makes the corresponding bounded derived categories triangulated. When finitely many output partitions arise, replace them by a common refinement using the first cited lemma; membership in each old partition class then implies membership in the refined class.",
+   "uses": [
+    "lem-per-galois-partition-exact-refinement",
+    "lem-sbc-cohomology-in-weak-serre-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, 7.3.4, 7.3.8, 7.4.5 and 7.6.4."
+   }
+  },
+  {
+   "text": "Let $\\mathcal T$ be the class of objects $K\\in D^b_{ctf}(X_{\\mathrm{et}},A)$, regarded as FIRST arguments, satisfying condition (B) as defined in the statement of [lem-per-ctf-hom-localization-devissage] (ILO XVII Definition 7.6.8). It contains zero. For a triangle $K_1\\to K_2\\to K_3\\to K_1[1]$, the contravariant triangle of [lem-sf-hom-triangulated] and its long exact cohomology sequence [lem-sf-derived-homology-long-exact] imply two-out-of-three for condition (B): choose a common refinement of the two supplied partitions as in Step 1, and take the maximum of their upper bounds, increased by one if rotation of the triangle requires it. The refined partition categories are triangulated by Step 1. Shifts adjust the integer bound; constructibility is preserved in the same triangle. Hence $\\mathcal T$ is triangulated.",
+   "uses": [
+    "lem-sf-hom-triangulated",
+    "lem-sf-derived-homology-long-exact",
+    "lem-per-galois-partition-exact-refinement",
+    "lem-per-ctf-hom-localization-devissage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Proposition 7.6.9, p. 313, first sentence."
+   }
+  },
+  {
+   "text": "For $P$ of Tor amplitude $[a,b]$, [lem-per-noetherian-ctf-flat-model] supplies a bounded complex $F^\\bullet$ representing $P$, with flat constructible terms and $F^q=0$ outside $[a,b]$. The finite stupid filtration expresses $F^\\bullet$ as successive cones of the terms $F^q[-q]$. By Step 2, it therefore suffices to prove condition (B) for every flat constructible sheaf $F$. We fix $r=b$ for the eventual lower bound, since this representative also shows $P\\in D^{\\le b}$.",
+   "uses": [
+    "lem-per-noetherian-ctf-flat-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Proposition 7.6.9, p. 313, reduction to flat constructible sheaves."
+   }
+  },
+  {
+   "text": "We prove that reduction by Noetherian induction, simultaneously for every closed subscheme $T$ of $X$ and every flat constructible sheaf on $T$. The empty subscheme is the base case. The dualizing-existence hypothesis holds on every locally closed piece by [lem-per-dualizing-locally-closed-inheritance]. On nonempty $T$, choose a dense open $U$ on which the sheaf $F$ is locally constant, using its finite constructible stratification (remove the boundaries of the strata containing the generic points). Its restriction remains flat. The locally constant case [lem-per-ctf-hom-locally-constant] gives condition (B) on $U$. On the proper reduced closed complement $Z$, the induction hypothesis gives condition (B) for $F|_Z$. Apply [lem-per-ctf-hom-localization-devissage] to this closed/open pair in $T$ to obtain condition (B) for $F$. This closes the induction and, by Step 3, proves condition (B) for $P$.",
+   "uses": [
+    "lem-per-dualizing-locally-closed-inheritance",
+    "lem-per-ctf-hom-locally-constant",
+    "lem-per-ctf-hom-localization-devissage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Proposition 7.6.9 and Lemmas 7.6.10-7.6.11, pp. 313-314."
+   }
+  },
+  {
+   "text": "Fix the partition and upper bound $c$ now supplied by condition (B). For $N\\in D^{[u,v]}$, the complex $N[v]$ has no positive cohomology (the convention is $H^q(N[v])=H^{q+v}(N)$). Its cohomology belongs to the same partition class, so condition (B) and the shift compatibility of [lem-sf-hom-triangulated] give $R\\mathcal Hom_A(P,N)[v]\\in D^{\\le c}$, or $R\\mathcal Hom_A(P,N)\\in D^{\\le v+c}$. Condition (B) also supplies the output partition and its constructible clause for this same $N$.",
+   "uses": [
+    "lem-sf-hom-triangulated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Definition 7.6.8; elementary translation of its upper bound by shifts."
+   }
+  },
+  {
+   "text": "For the lower bound, represent $N\\in D^{\\ge u}$ by a complex zero below $u$, using [def-sbc-standard-tstructure-derived-category]. Module sheaves on $X_{\\mathrm{et}}$ have enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives]; [lem-weil-pbc-complex-injective-resolution-mono] gives a quasi-isomorphic injective complex $I$ still zero below $u$. It is K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective]. Compute internal Hom from the representative $F^\\bullet$ of Step 3 by [def-pur-derived-internal-hom]. In total degree $n<u-b$, every factor $\\mathcal Hom_A(F^p,I^{p+n})$ vanishes: either $p>b$ and $F^p=0$, or $p+n<u$ and $I^{p+n}=0$. Hence the Hom complex is zero below $u-b$. With $r=b$, Step 5 gives the stated interval $[u-r,v+c]$. For $P=0$ choose $r=0$, and the empty scheme is included. No step imposed finite generation on the stalks of $N$.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-complex-injective-resolution-mono",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO XVII, Definition 7.6.8; explicit Hom-complex degree calculation using Stacks 08J7, 0141 and 070G."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-per-ctf-hom-localization-devissage",
+  "lem-per-ctf-hom-locally-constant",
+  "lem-per-dualizing-locally-closed-inheritance",
+  "lem-per-galois-partition-exact-refinement",
+  "lem-per-noetherian-ctf-flat-model",
+  "lem-sbc-cohomology-in-weak-serre-subcategory",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sf-hom-triangulated",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-complex-injective-resolution-mono",
+  "lem-weil-pbc-module-sheaves-enough-injectives"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, Proposition 7.6.9 and Lemmas 7.6.10-7.6.11, pp. 313-314; source devissage expanded, and the lower endpoint proved by a Hom-complex degree calculation."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -86,10 +181,38 @@
    "results": "8 hits; top: galRestrict'_galLift, CategoryTheory.PreGaloisCategory.instFiniteHomOfIsConnected, CategoryTheory.PreGaloisCategory.IsGalois.mk, AlgebraicGeometry.Scheme.IdealSheafData.gci, InfiniteGalois.instCompactSpaceAlgEquivOfIsGalois, AlgebraicGeometry.Scheme.etalePretopology, InfiniteGalois.GaloisCoinsertionIntermediateFieldSubgroup, CategoryTheory.Localization.LeftBousfield.galoisConnection; note: ; digest: 71a6ee382baf6756",
    "date": "2026-10-18",
    "verdict": "no match: results concern underived module/sheaf Hom, general derived bounds, or scheme/ring finiteness, not the stated etale constructible theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "uniform internal Hom bounds for fixed Galois partition derived etale constructible",
+   "results": "8 hits; top: galBasis, CategoryTheory.PreGaloisCategory.toAut_surjective_isGalois_finite_family, CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen, CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_fiber, Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq, groupCohomology.exists_mul_galRestrict_of_norm_eq_one, CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_fiber_nonempty, InfiniteGalois.proj_adjoin_singleton_val; note: ; digest: 1daa93199f7be76c",
+   "date": "2026-10-18",
+   "verdict": "no match: generic category, scheme, or condensed-module infrastructure does not state this theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "RHom, Galois partition, constructible",
+   "results": "0 hits; top: ; note: loogle: unknown identifier 'RHom'; digest: 4f53cda18c2baa0c",
+   "date": "2026-10-18",
+   "verdict": "no match: generic category, scheme, or condensed-module infrastructure does not state this theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "RHom|Galois.*partition|weak.*constructible",
+   "results": "25 hits; top: Mathlib/Algebra/Colimit/DirectLimit.lean, Mathlib/Algebra/Colimit/DirectLimit.lean, Mathlib/Algebra/Colimit/DirectLimit.lean, Mathlib/Algebra/Colimit/DirectLimit.lean, Mathlib/Algebra/Colimit/DirectLimit.lean, Mathlib/Algebra/Algebra/Unitization.lean, Mathlib/Algebra/Algebra/Unitization.lean, Mathlib/Algebra/TrivSqZeroExt/Basic.lean; note: ; digest: 6ab74670f78e1d32 (subdirectory Algebra)",
+   "date": "2026-10-18",
+   "verdict": "no match: generic category, scheme, or condensed-module infrastructure does not state this theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "uniform derived internal Hom bounds under etale duality condition B",
+   "results": "8 hits; top: UniformSpaceCat.Hom, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, ContinuousAlternatingMap.instUniformSpace, UniformSpaceCat.Hom.ext, LightCondensed.ihomPoints, ContinuousMultilinearMap.instUniformSpace, UniformSpaceCat.Hom.mk.inj, UniformOnFun.edist_eval_le; note: ; digest: 43d9a5b2060060f4",
+   "date": "2026-10-18",
+   "verdict": "no match: generic category, scheme, or condensed-module infrastructure does not state this theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-ctf-hom-coefficient-comparison",
@@ -112,5 +235,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-ctf-hom-condition-b",
+  "worker": "stage1",
+  "summary": "Repaired saved split after the first dry-run citation failures. Made all four children self-contained, corrected blueprint ancestry and exact logged searches, separated Galois-partition exactness/refinement and locally closed inheritance of dualizing existence, and set up the source Noetherian induction explicitly. The lower endpoint is an explicit injective Hom-complex computation; the shift sign is N[v]. The original item statement is unchanged.",
+  "blueprint": "Proof, Step 1 of lem-per-artin-gabber-affine-curve: relative Verdier duality and the coefficient-comparison route through lem-per-qbar-arbitrary-field-duality, lem-per-finite-residue-dualizing, lem-per-potential-local-duality; the steps realize the condition-(B) subproof (ILO XVII 7.6.8-7.6.11).",
+  "tool_uses": [
+   {
+    "node": "lem-sf-hom-triangulated",
+    "why": "Generic internal-Hom triangles and shift compatibility, used only as tools in condition-(B) devissage."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic long exact cohomology sequence bounds the Hom of a cone."
+   },
+   {
+    "node": "lem-sbc-cohomology-in-weak-serre-subcategory",
+    "why": "Generic weak-Serre criterion applies after partition exactness is supplied, without replacing the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Etale module sheaves have enough injectives; generic input of the explicit lower-bound computation."
+   },
+   {
+    "node": "lem-weil-pbc-complex-injective-resolution-mono",
+    "why": "Generic injective resolution preserving the given lower bound u."
+   },
+   {
+    "node": "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "why": "Generic bounded-below injective complexes are K-injective, justifying the displayed Hom model."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-hom-triangulated",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sbc-cohomology-in-weak-serre-subcategory",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-complex-injective-resolution-mono",
+  "lem-weil-pbc-bounded-below-injectives-kinjective"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-1b3d828e4",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-1b3d828e4 (reviewer sub-agent of L); spot-checked: I read in full the item, the four new nodes, every cited statement, and ILO XVII §§7.1–7.3 and pp. 311–314 (7.6.3, 7.6.5–7.6.11). The item statement is unchanged from NH's version and matches Def 7.6.8 and Prop 7.6.9. With N[v], the upper endpoint is v+c; the lower endpoint is u−b, from the explicit Hom-complex computation over the flat model. Steps 1–5 follow ILO's proof: the triangulated first-argument class, reduction to flat constructible sheaves, then a Noetherian induction (correctly set up) using the 7.6.10 and 7.6.11 children and the locally closed inheritance of dualizing complexes, which I checked is true for both the open and the closed case. The exact-refinement child is ILO 7.3.4/7.3.6/7.3.8. I found no duplicates in the DAG or the main-20261015 blueprint. Three faults, all repaired. (1) E2/E7: the last clause of lem-per-ctf-hom-locally-constant asserted a finite étale Galois cover trivializing F on each connected component. This is false: on a nodal cubic with A=F_ℓ[t,t^{-1}], F with monodromy t along the infinite chain is étale-locally constant and flat, but is constant on no C_n. ILO's own proof of 7.6.11 has the same gap (cf. Exercise 7.2.7). The main claim stays true by first stratifying to finite monodromy. I removed the clause and stated that local constancy is étale-local; Step 4 is unaffected. (2) C4: Step 6 cited prop-pur-kinjective-resolutions-exist for enough injectives, which it does not state; I re-cited it to lem-weil-pbc-module-sheaves-enough-injectives and updated uses, proof_deps and tool_uses. (3) Step 2 named condition (B) only as 'Definition 7.6.8'; it now cites the inline definition in lem-per-ctf-hom-localization-devissage. The remaining tool uses are generic homological algebra, and I accept them.; 2 file(s) fixed by the reviewer"
  }
 }
