@@ -269,6 +269,7 @@ public import WeilConjectures.AlgebraicGeometry.AffineOpenSectionsCanonicalTrans
 public import WeilConjectures.AlgebraicGeometry.AffineOpenSectionsEventualCompatibility
 public import WeilConjectures.AlgebraicGeometry.AffineOverLimitInclusion
 public import WeilConjectures.AlgebraicGeometry.AffinePointedNeighbourhoodCofinal
+public import WeilConjectures.AlgebraicGeometry.AffinePresentation
 public import WeilConjectures.AlgebraicGeometry.AffinePushforwardBaseChange
 public import WeilConjectures.AlgebraicGeometry.AffinePushforwardBaseChangeIsIso
 public import WeilConjectures.AlgebraicGeometry.AffinePushforwardBaseChangeIsIsoOnAffine
@@ -4619,6 +4620,7 @@ public import WeilConjectures.TraceFormula.KunnethVerdier
 public import WeilConjectures.TraceFormula.LocalTerm
 public import WeilConjectures.TraceFormula.Main
 public import WeilConjectures.TraceFormula.ModelDecomposition
+public import WeilConjectures.TraceFormula.ModelExtension
 public import WeilConjectures.TraceFormula.OpenCover
 public import WeilConjectures.TraceFormula.OpenSquare
 public import WeilConjectures.TraceFormula.Product
