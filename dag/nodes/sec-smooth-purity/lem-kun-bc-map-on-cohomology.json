@@ -22,72 +22,54 @@
  ],
  "proof": [
   {
-   "text": "Choose a K-injective resolution $F[0]\\to I$ and a K-injective resolution $j:g'^{-1}I\\to J$, using [prop-weil-pbc-kinjective-resolutions-exist] with $R=\\mathbf Z$, the abelian-sheaf convention of [def-weil-pbc-kinjective-resolutions]. By [prop-weil-pbc-inverse-image-exact] and [lem-weil-pbc-exact-functor-complex-cohomology], $g'^{-1}(F[0])\\to g'^{-1}I$ is a quasi-isomorphism: its degree-$r$ cohomology is $g'^{-1}$ applied to the isomorphism on degree-$r$ cohomology of $F[0]\\to I$. Thus the composite $g'^{-1}F[0]\\to J$ resolves $g'^{-1}F[0]$. No injectivity of $g'^{-1}I$ is assumed.",
+   "text": "Use the supplied bounded below representatives I and J, source isomorphism s, and comparison j. By [lem-weil-pbc-right-derived-plus-injective], the right-derived unit for f_* at I is invertible. The composite t = Q(j) composed with the inverse-image comparison and g'^{-1}(s) is invertible because all three factors are. No resolution is chosen and no injectivity of g'^{-1}I is used.",
    "uses": [
-    "prop-weil-pbc-kinjective-resolutions-exist",
-    "def-weil-pbc-kinjective-resolutions",
-    "prop-weil-pbc-inverse-image-exact",
-    "lem-weil-pbc-exact-functor-complex-cohomology"
+    "lem-weil-pbc-right-derived-plus-injective",
+    "def-weil-pbc-derived-inverse-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0736, lemma-base-change-map-flat-case (resolution construction); Tag 07A7, remark-base-change (adjunction mate)"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-derived-exchange-termwise] to $K=F[0]$, the resolution $I$ and $j$. It supplies a chain map\n$$e=f'_*(j)\\circ\\Ex^0_{\\square,I}:g^{-1}f_*I\\longrightarrow f'_*J,$$\nand the precise equation $\\Ex_{\\square,F}\\circ\\sigma_{\\rm src}=\\sigma_{\\rm tgt}\\circ Q(e)$ under its canonical resolution identifications. Consequently applying the functor $\\mathcal H^q$ to this equation computes the map in the item by $H^q(e)$ under $H^q(\\sigma_{\\rm src})$ and $H^q(\\sigma_{\\rm tgt})$.",
+   "text": "Apply the already proved bounded resolution factorization [lemma-weil-pbc-derived-exchange-replacement] to I. Naturality of the derived exchange [def-weil-pbc-derived-exchange] along s^{-1} transports this equation to F[0]. Naturality of the right-derived unit [def-weil-pbc-direct-image] along j identifies Q(f'_*(j)) followed by the unit at J and Rf'_*(t^{-1}) with the unit at g'^{-1}I followed by Rf'_*(phi^{-1} composed with g'^{-1}(s^{-1})). This follows by cancelling Q(j) against its factor in t. Cancel the invertible source comparison to obtain exactly the displayed resolution equation before cohomology. The private Lean lemma resolution_exchange_formula proves this elementary categorical calculation for arbitrary functors and natural transformations.",
    "uses": [
-    "lem-weil-pbc-derived-exchange-termwise"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0736, lemma-base-change-map-flat-case (resolution construction); Tag 07A7, remark-base-change (adjunction mate)"
-   }
-  },
-  {
-   "text": "Identify the source of $H^q(e)$ with $g^{-1}R^qf_*F$. Indeed [prop-weil-pbc-inverse-image-exact] makes $g^{-1}$ exact, and [lem-weil-pbc-exact-functor-complex-cohomology] gives the cycle-and-boundary comparison\n$$H^q(g^{-1}f_*I)\\cong g^{-1}H^q(f_*I)=g^{-1}R^qf_*F.$$\nThe last equality is the resolution computation in [def-weil-pbc-direct-image]. The same definition, using the resolution of $g'^{-1}F$ in step 1, identifies $H^q(f'_*J)$ with $R^qf'_*g'^{-1}F$. These are the identifications in the statement, since the derived inverse image [def-weil-pbc-derived-inverse-image] is represented by termwise inverse image and its comparison is natural in complexes. For completeness, the negative-degree assertion follows from [lem-weil-pbc-dplus-injective-representative] with $n=0$, separately for $F[0]$ and $g'^{-1}F[0]$. Both have zero cohomology below zero, so each has a representative consisting of injective sheaves and zero terms below zero. By [def-weil-pbc-direct-image] their derived direct images are computed by applying the additive direct-image functor to these representatives. Those complexes are again zero below zero, hence their negative cohomology vanishes.",
-   "uses": [
-    "prop-weil-pbc-inverse-image-exact",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lemma-weil-pbc-derived-exchange-replacement",
+    "def-weil-pbc-derived-exchange",
     "def-weil-pbc-direct-image",
-    "def-weil-pbc-derived-inverse-image",
-    "lem-weil-pbc-dplus-injective-representative"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0736, lemma-base-change-map-flat-case (resolution construction); Tag 07A7, remark-base-change (adjunction mate)"
-   }
-  },
-  {
-   "text": "Write out the resulting map. In degree $q$, a local section $a$ of the cycle subsheaf of $g^{-1}f_*I$ maps to $f'_*(j^q)(\\Ex^0_{\\square,I^q}(a))$; the chain-map equation implies this is a cycle and sends every boundary to a boundary. The map therefore factors through the cokernel of the boundary-subsheaf inclusion into the cycle subsheaf, which is the cohomology sheaf. Its formula on locally represented classes is $[a]\\mapsto[f'_*(j^q)(\\Ex^0_{\\square,I^q}(a))]$. This is a statement about the quotient sheaf; it does not assert that every section of cohomology has a global cycle representative. Here [def-weil-pbc-underived-exchange] says that $\\Ex^0$ restricts sections along $X'\\times_{Y'}V\\to X\\times_YW$, followed by sheafification. Thus this quotient map is exactly the usual resolution recipe stated above: restrict by the underived exchange and then compare resolutions. Together with steps 2 and 3 this proves the asserted equality, without substituting the sheaf $\\mathcal H^q(F)$ for $F$. The formula is valid in all degrees; for $q<0$ the zero higher direct images give the unique zero-to-zero map.",
-   "uses": [
     "def-weil-pbc-underived-exchange"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0736, lemma-base-change-map-flat-case (resolution construction); Tag 07A7, remark-base-change (adjunction mate)"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Apply degree-q cohomology to the equation from step 2, precompose with the fixed exact inverse-image cohomology comparison of [lem-weil-pbc-exact-functor-complex-cohomology] and [def-weil-pbc-derived-inverse-image], and postcompose with Rf'_* applied to the single-functor comparison. Functoriality and associativity give precisely the first conjunct. The localized termwise underived exchange [def-weil-pbc-underived-exchange] in the formula is the usual resolution recipe.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-pbc-derived-inverse-image",
+    "def-weil-pbc-underived-exchange"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For q < 0 apply [lem-weil-pbc-derived-functor-negative-vanishing] with lower bound zero to f_* and F[0], and separately to f'_* and (g'^{-1}F)[0]. Single-degree objects are cohomologically nonnegative by the standard t-structure instance. These are exactly the two IsZero conclusions.",
+   "uses": [
+    "lem-weil-pbc-derived-functor-negative-vanishing"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "prop-weil-pbc-kinjective-resolutions-exist",
-  "def-weil-pbc-kinjective-resolutions",
-  "prop-weil-pbc-inverse-image-exact",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-weil-pbc-derived-exchange-termwise",
-  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-right-derived-plus-injective",
   "def-weil-pbc-derived-inverse-image",
-  "lem-weil-pbc-dplus-injective-representative",
-  "def-weil-pbc-underived-exchange"
+  "lemma-weil-pbc-derived-exchange-replacement",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-underived-exchange",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-derived-functor-negative-vanishing"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0736, lemma-base-change-map-flat-case (resolution construction); Tag 07A7, remark-base-change (adjunction mate)"
+  "place": "Tags 0736 and 07A7; bounded resolution specialization using upstream derivedBaseChangeMapPlus_fac_app, naturality, and negative vanishing; Lean proof by M3, 2026-10-18"
  },
  "mathlib_searches": [
   {
@@ -208,11 +190,7 @@
   ]
  },
  "tool_uses": [
-  "prop-weil-pbc-kinjective-resolutions-exist",
-  "prop-weil-pbc-inverse-image-exact",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-weil-pbc-derived-exchange-termwise",
-  "lem-weil-pbc-dplus-injective-representative"
+  "lem-weil-pbc-exact-functor-complex-cohomology"
  ],
  "reviewed": {
   "date": "2026-10-14",
@@ -239,5 +217,15 @@
   "by": "NG",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261018T062832-L-663303",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
