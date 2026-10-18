@@ -6,6 +6,7 @@ Authors: SHEAF group NP
 module
 
 public import Sheaf.AlgebraicGeometry.RelativeEtaleCohomology
+public import Sheaf.CategoryTheory.Sites.TorsorWithSection
 public import Sheaf.CategoryTheory.Sites.ContractedProductPresentation
 public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
