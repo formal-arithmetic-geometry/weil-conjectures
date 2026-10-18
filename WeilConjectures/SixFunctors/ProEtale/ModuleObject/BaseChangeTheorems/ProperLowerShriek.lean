@@ -125,6 +125,15 @@ noncomputable def boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl :
       (compactificationOverField f) (.ofIsProper f.left) ≪≫
     boundedConstructibleLowerShriekOfCompactificationOfIsProperIso _ ℓ f
 
+/-- Unfolding `boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl`. -/
+lemma boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_eq :
+    boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f =
+      boundedConstructibleLowerShriekOfCompactificationIso_padicAlgCl ℓ
+          (compactificationOverField f) (.ofIsProper f.left) ≪≫
+        boundedConstructibleLowerShriekOfCompactificationOfIsProperIso _ ℓ f := by
+  unfold boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl
+  rfl
+
 end Proper
 
 end AlgebraicGeometry.ProEtale.CondensedRing
