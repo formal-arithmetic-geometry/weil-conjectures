@@ -13,7 +13,8 @@
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-g-ring",
   "def-weil-pbc-mv-polynomial-ring",
-  "def-weil-etale-morphism"
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-fs-adic-completion-map-local"
  ],
  "proof": [
   {
@@ -315,5 +316,23 @@
   "group": "Q12",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-adc14c5d3 (reviewer sub-agent of L); spot-checked: I read every part of the delivery. The item statement matches Stacks 0CAR (smoothing.tex l.3347) hypothesis by hypothesis: A is Noetherian, p is any prime, f_j are in A[x], the solution is in (A_p)^, and A_p is a G-ring. The conclusion is étale A->A', a prime p' over p with trivial residue extension, a solution b, and a-b in p'^N (A'_{p'})^. The only difference is N>=1 instead of every integer N, and N<=0 is trivial. The statement was not changed. Step 1: the localization and completion Noetherian nodes, the G-ring completion-regular node and Popescu are each used with exactly their hypotheses. Step 2: the finite-presentation filtered-colimit factorization gives f(z)=0 in a smooth B. Step 3: I checked 07M7 (more-algebra l.2139). Its ideal is arbitrary and it assumes no henselianity, so lifting modulo m^N is legitimate. q_N(c)=alpha pi_N(a) and f(c)=0. Step 4: E/mE=k makes q maximal. n=mT is finitely generated, so the kernel formula 05GG applies to (T,n) without a Noetherian claim on T. The induced completion map is followed at the Nth coordinate, which gives a-c in n^N T^. Step 5: the étale-algebra model is used by its statement only (C, i, M-localization, structure equation). Step 6: an elementary clearing of the denominators s_i and the equation errors v_j. It works with zero divisors. Step 7: open immersion plus composition gives étaleness. Step 8: an elementary identification A'_{p'}=C_r=E_q as A-algebras. It carries the residue map, b_i->c_i and the canonical completion map, so the congruence is the required one. Edge cases checked: N=1, m=0, no variables or equations, non-reduced A, the zero ring. There are no new nodes. I found no duplicate by grep for 0CAR, 07QZ and Artin approximation or G-ring wording, or by blueprint_refs search. The dependency closure of 970 nodes is acyclic, and no SGA source is used. I accept all 11 declared tool_uses as generic algebra black boxes for the recorded 0CAR input. Side note, not a fault of this delivery: the existing node lem-weil-pbc-fs-adic-completion-map-local cites Tag 07ED, whose label is formally-smooth-completion. No fixes were written."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ArtinApproximationEtaleLocalMap",
+  "declaration": "AlgebraicGeometry.artin_approximation_etale_local_map",
+  "file": "lean/Sheaf/TraceFormula/ArtinApproximationEtaleLocalMap.lean",
+  "statement": "theorem artin_approximation_etale_local_map (A : Type u) [CommRing A] [IsNoetherianRing A] (p : Ideal A) [hp : p.IsPrime] (m n : ℕ) (f : Fin m → MvPolynomial (Fin n) A) (a : Fin n → AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p)) (Localization.AtPrime p)) (ha : ∀ j : Fin m, MvPolynomial.aeval a (f j) = 0) (hG : IsGRing (Localization.AtPrime p)) : ∀ N : ℕ, 1 ≤ N → ∃ (A' : CommAlgCat.{u} A), Etale (Spec.map (CommRingCat.ofHom (algebraMap A A'))) ∧ ∃ (p' : PrimeSpectrum A') (hcomp : p = p'.asIdeal.comap (algebraMap A A')), ∃ (b : Fin n → A'), (∀ j : Fin m, MvPolynomial.aeval b (f j) = 0) ∧ Function.Bijective (IsLocalRing.ResidueField.map (Localization.localRingHom p p'.asIdeal (algebraMap A A') hcomp)) ∧ (∀ i : Fin n, Classical.choose (RingHom.exists_adicCompletion_map_of_local (Localization.localRingHom p p'.asIdeal (algebraMap A A') hcomp)) (a i) - AdicCompletion.of (IsLocalRing.maximalIdeal (Localization.AtPrime p'.asIdeal)) (Localization.AtPrime p'.asIdeal) (algebraMap A' (Localization.AtPrime p'.asIdeal) (b i)) ∈ Ideal.map (algebraMap (Localization.AtPrime p'.asIdeal) (AdicCompletion (IsLocalRing.maximalIdeal (Localization.AtPrime p'.asIdeal)) (Localization.AtPrime p'.asIdeal))) ((IsLocalRing.maximalIdeal (Localization.AtPrime p'.asIdeal)) ^ N))",
+  "branch": "newtargets-dag",
+  "by": "Q77",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-387c4e8cb",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Lean statement matches Stacks 0CAR (smoothing.tex l.3347) clause by clause: Noetherian A, prime p, f : Fin m → MvPolynomial (Fin n) A, a in the completion of A_p, IsGRing A_p, ∀ N ≥ 1, étale A→A' (Mathlib Etale of Spec.map), p' over p via comap, solution b, bijective residue map of localRingHom, and a_i − b_i in (maxIdeal A'_{p'})^N times the completion via the completion map ψ. Mechanical theorem-stmt_dep finding: the statement uses Classical.choose of exists_adicCompletion_map_of_local, the object the theorem constructs. It is canonical because ψ is unique by its coordinates, and LocalMapCompletionApproximation uses the same pattern → PASS on that point. Edge cases m=0, n=0, N=1, field, zero ring all OK. Statement field verbatim, docstrings follow the 8 steps, only the proof is sorry, no new definitions. nt_compile --json clean in 5.5 s."
  }
 }
