@@ -16489,3 +16489,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:27 L: merged deliver/X2/Sheaf.Paper.PbcDerivedProductRepresentation (stage 3; reviewer PASS; first push; landing 20261018T142717-L-3300980 (proof); batch 20261018T142710; modules 1; new nodes 0)
 - 14:39 L: merged deliver/E7/Sheaf.AlgebraicGeometry.ProEtaleConstantOpenSquareExchange (stage 3; reviewer PASS; first push; landing 20261018T143924-L-3418626 (proof); batch 20261018T143920; modules 1; new nodes 0)
 - 14:43 L: merged deliver/A3/Sheaf.CategoryTheory.SequenceRelativeHomTelescope (stage 3; reviewer PASS; first push; landing 20261018T144358-L-3498171 (proof); batch 20261018T144352; modules 1; new nodes 0)
+- 14:44 L: merged deliver/A5/Sheaf.Algebra.Homology.LeftResolutionReducedClass (stage 3; reviewer PASS; first push; landing 20261018T144359-L-3498604 (proof); batch 20261018T144352; modules 1; new nodes 0)

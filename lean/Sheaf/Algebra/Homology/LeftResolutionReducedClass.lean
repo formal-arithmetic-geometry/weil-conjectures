@@ -7,6 +7,8 @@ module
 
 public import Mathlib.Algebra.Homology.LeftResolution.Reduced
 
+import Mathlib.CategoryTheory.ObjectProperty.FiniteProducts
+
 /-!
 # Reduced left-resolution datum from a class of covers
 
@@ -26,6 +28,7 @@ namespace CategoryTheory.Abelian
 
 set_option autoImplicit false
 
+set_option linter.unusedVariables false in
 /--
 Let `A` be abelian and let `F` be a class containing a zero object and closed under
 isomorphisms, finite biproducts, and retracts.  A functorial epimorphic cover by `F`
@@ -76,6 +79,31 @@ theorem leftResolution_reduced_class
         (π : @NatTrans A (inferInstance : Category.{v} A) A (inferInstance : Category.{v} A)
           (Q ⋙ ι) (𝟭 A)),
         ∀ X : A, Epi (π.app X) := by
-  sorry
+  classical
+  let : F.ContainsZero := ⟨hF_zero⟩
+  let : F.IsClosedUnderIsomorphisms := ⟨fun e h ↦ hF_iso h e⟩
+  let : F.IsClosedUnderBinaryCoproducts := .mk' (by
+    rintro _ ⟨D, hD⟩
+    exact hF_iso
+      (hF_biproduct _ _ (hD ⟨WalkingPair.left⟩) (hD ⟨WalkingPair.right⟩))
+      (biprod.isoCoprod _ _ ≪≫ (HasColimit.isoOfNatIso (diagramIsoPair D)).symm))
+  let : F.IsClosedUnderFiniteCoproducts := .mk'
+  let : IsIdempotentComplete F.FullSubcategory := ⟨by
+    intro X p hp
+    obtain ⟨Y, i, e, hie, hei⟩ :=
+      IsIdempotentComplete.idempotents_split X.obj p.hom (F.ι.congr_map hp)
+    refine ⟨⟨Y, hF_retract i e hie X.property⟩,
+      ObjectProperty.homMk i, ObjectProperty.homMk e, ?_, ?_⟩
+    · exact ObjectProperty.hom_ext _ hie
+    · exact ObjectProperty.hom_ext _ hei⟩
+  let Λ : LeftResolution F.ι :=
+    { F := F.lift P hP
+      π := ε
+      epi_π_app := hε }
+  refine ⟨F.FullSubcategory, inferInstance, inferInstance, inferInstance,
+    inferInstance, inferInstance, F.ι, inferInstance, inferInstance, inferInstance,
+    fun X ↦ X.property, Λ.reduced.F, inferInstance, Λ.reduced.π, ?_⟩
+  intro X
+  infer_instance
 
 end CategoryTheory.Abelian
