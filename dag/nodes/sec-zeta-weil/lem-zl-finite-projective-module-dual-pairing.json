@@ -1,0 +1,80 @@
+{
+ "id": "lem-zl-finite-projective-module-dual-pairing",
+ "kind": "statement",
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "title": "Finite projective module evaluation and coevaluation",
+ "statement": "Let A be a commutative ring and P a finitely generated [def-weil-finitely-generated-module] projective [def-weil-pbc-projective-module] A-module. Put P^\\vee=\\operatorname{Hom}_A(P,A). The canonical evaluation map \\operatorname{ev}:P^\\vee\\otimes_A P\\to A is given by \\phi\\otimes x\\mapsto\\phi(x), and P^\\vee is finitely generated projective. The canonical map P\\otimes_A P^\\vee\\to\\operatorname{End}_A(P) is an isomorphism; let \\operatorname{coev}:A\\to P\\otimes_A P^\\vee send 1 to the tensor corresponding to \\operatorname{id}_P. With canonical associators and unitors, (1_P\\otimes\\operatorname{ev})\\circ(\\operatorname{coev}\\otimes1_P)=1_P and (\\operatorname{ev}\\otimes1_{P^\\vee})\\circ(1_{P^\\vee}\\otimes\\operatorname{coev})=1_{P^\\vee}.",
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Tag 0FNV, Modules, Example modules-example-dual; finite-projective dual module property also Tag 0FNJ, More on Algebra, Lemma lemma-left-dual-module"
+ },
+ "stmt_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-projective-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finitely generated projective module P over a commutative ring, Hom(P,A) is finite projective and evaluation and coevaluation satisfy the two triangle identities",
+   "results": "Module.instIsReflexiveOfFiniteOfProjective, Module.dual_projective, Module.dual_finite; FGModuleCat exact pairing declarations require a field and do not state the commutative-ring result.",
+   "date": "2026-10-18",
+   "verdict": "no exact match; general module dual finiteness/projectivity only"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.dual_projective",
+   "results": "Module.dual_projective in Mathlib.LinearAlgebra.Dual.Lemmas; this gives projectivity of Dual for finite projective modules but not the canonical tensor-End isomorphism and triangle identities.",
+   "date": "2026-10-18",
+   "verdict": "generalization: dual projectivity only"
+  },
+  {
+   "tool": "grep",
+   "query": "dual_projective|dual_finite|IsReflexive, directory Mathlib/LinearAlgebra/Dual",
+   "results": "msearch grep returned no indexed hits; direct source inspection finds Module.dual_projective and Module.dual_finite in Mathlib/LinearAlgebra/Dual/Lemmas.lean, but no full pairing theorem.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite projective module dual evaluation coevaluation triangle identities",
+   "results": "CategoryTheory.ExactPairing.coevaluation_evaluation', FGModuleCat exact pairing (field-only), Module.dual_finite, Module.instIsReflexiveOfFiniteOfProjective and Module.Dual.eval; no commutative-ring tensor-End pairing statement.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "dual of finitely generated projective module with evaluation coevaluation",
+   "results": "Module.dual_projective and Module.dual_finite are returned; categorical FGModuleCat pairing is field-only and does not specialize to arbitrary commutative rings.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-bounded-projective-complex-dual-pairing",
+  "date": "2026-10-18",
+  "group": "NN"
+ },
+ "blueprint": {
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Supporting input for Lemma 4.1(2): the finite-projective terms admit the evaluation and coevaluation maps used to construct the dual pairing of a bounded complex.",
+   "via": [
+    "lem-zl-bounded-projective-complex-dual-pairing",
+    "lem-zl-ring-derived-dualizable-perfect",
+    "lem-zl-condensed-wcontractible-lisse-evaluation",
+    "lem-zl-condensed-dualizable-local-perfect-models",
+    "lem-zl-t-admissible-dualizable-truncations",
+    "lem-zl-adic-hom-tensor-lisse-criterion"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

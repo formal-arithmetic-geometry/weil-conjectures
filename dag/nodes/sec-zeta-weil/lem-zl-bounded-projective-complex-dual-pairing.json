@@ -13,11 +13,78 @@
   "def-weil-abstract-derived-category",
   "def-weil-finitely-generated-module",
   "def-weil-pbc-projective-module",
-  "def-pc-tensor-complex-sheaves"
+  "def-pc-tensor-complex-sheaves",
+  "lem-zl-finite-projective-module-dual-pairing"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each integer n, set D^n=Hom_A(P^{-n},A). Since P^m=0 for m outside [a,b], D^n=0 for n outside [-b,-a]. For n in this interval, P^{-n} is finitely generated projective, so the finite-projective module dual-pairing node gives that D^n is finitely generated projective. Thus D has the asserted support and termwise finiteness/projectivity.",
+   "uses": [
+    "lem-zl-finite-projective-module-dual-pairing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNK, lemma-left-dual-complex, converse: define N^n=Hom_R(M^{-n},R) and use the finite-projective module lemma"
+   }
+  },
+  {
+   "text": "The displayed differential squares to zero. For φ∈D^n, the composite d_D^{n+1}d_D^n is multiplication by (-1)^{n+2}(-1)^{n+1}=-1 followed by precomposition with d_P^{-n-1}d_P^{-n-2}, which is zero because P is a cochain complex. Hence (D,d_D) is a cochain complex.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNK, lemma-left-dual-complex, differential calculation following equation involving d_M and d_N"
+   }
+  },
+  {
+   "text": "Define ε on the total tensor by evaluation on the degree-zero summands D^{-n}⊗_A P^n and by zero on all other total degrees. For a homogeneous φ∈D^{-n}=Hom_A(P^n,A) and x∈P^{n-1}, the total differential of φ⊗x is d_D^{-n}φ⊗x+(-1)^{-n}φ⊗d_P^{n-1}x, and ε sends it to (-1)^{1-n}φ(d_P^{n-1}x)+(-1)^nφ(d_P^{n-1}x)=0. Since A[0] is zero outside degree 0, ε is a chain map to A[0]. Define η(1)=Σ_n c_n, where c_n∈P^n⊗_A D^{-n} is the tensor corresponding to id_{P^n} under the isomorphism of the finite-projective module dual-pairing node; the sum is finite by the bounds. Write c_n=Σ_k y_k⊗ψ_k and c_{n+1}=Σ_j z_j⊗χ_j. The two triangle identities of that node, evaluated on elements, say Σ_kψ_k(x)y_k=x for x∈P^n, Σ_jχ_j(z)z_j=z for z∈P^{n+1}, and φ=Σ_kφ(y_k)ψ_k for φ∈Hom_A(P^n,A). The component of dη(1) in total degree 1 lying in P^{n+1}⊗_A D^{-n} is (d_P^n⊗1)c_n+(-1)^{n+1}(1⊗d_D^{-n-1})c_{n+1}, by the signed differential of the tensor-complex definition. Since d_D^{-n-1}χ=(-1)^nχ∘d_P^n, we get (1⊗d_D^{-n-1})c_{n+1}=(-1)^nΣ_j z_j⊗χ_j∘d_P^n=(-1)^nΣ_jΣ_kχ_j(d_P^ny_k)z_j⊗ψ_k=(-1)^nΣ_k d_P^ny_k⊗ψ_k=(-1)^n(d_P^n⊗1)c_n, using φ=Σ_kφ(y_k)ψ_k for φ=χ_j∘d_P^n and then Σ_jχ_j(z)z_j=z for z=d_P^ny_k. Hence the component is (1+(-1)^{2n+1})(d_P^n⊗1)c_n=0 for every n, so dη(1)=0 and η:A[0]→P⊗_A D is a chain map. No use of d_P^2=0 is needed here; the relation is Stacks' displayed equation in the proof of 0FNK.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-zl-finite-projective-module-dual-pairing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNK, lemma-left-dual-complex, converse and its proof: η is a finite sum, is a map of complexes, and the displayed differential relation proves the sign rule"
+   }
+  },
+  {
+   "text": "On each homogeneous summand P^n, the composite (1_P⊗ε)∘(η⊗1_P) uses only c_n and the evaluation on D^{-n}⊗P^n, hence is the first triangle identity of the finite-projective module dual-pairing node. On each D^{-n}, the composite (ε⊗1_D)∘(1_D⊗η) similarly reduces to its second triangle identity. All mixed-degree summands vanish because ε is zero away from total degree zero. The maps 1_P⊗ε, η⊗1_P, ε⊗1_D and 1_D⊗η are tensor products of degree-zero chain maps and the associator of total complexes is defined without signs (Stacks, More on Algebra, the list preceding 0FNJ), so no Koszul sign enters. Reassembling the homogeneous components with the canonical associators and unitors gives the two asserted chain identities.",
+   "uses": [
+    "lem-zl-finite-projective-module-dual-pairing",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNK, lemma-left-dual-complex, converse: read the construction backwards from the two module dual triangle identities"
+   }
+  },
+  {
+   "text": "If P is the zero complex or a single-term complex, the same formulas reduce respectively to the zero pairing or the ordinary finite-projective module pairing; the finite sum and support assertions remain valid. Therefore no endpoint or empty-support case introduces an additional hypothesis.",
+   "uses": [
+    "lem-zl-finite-projective-module-dual-pairing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNK, converse construction with bounded complexes, including zero terms"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "lem-zl-finite-projective-module-dual-pairing"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0FNK, lemma-left-dual-complex, converse and proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,7 +123,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-ring-derived-dualizable-perfect",
@@ -77,5 +144,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-bounded-projective-complex-dual-pairing",
+  "worker": "stage1",
+  "summary": "Audited the imported statement against Stacks Tag 0FNK and split off the finite-projective module evaluation/coevaluation fact. The proof now follows the converse construction: bounded support and finite-projective dual terms, the signed Hom differential, chain-map checks for evaluation and coevaluation, and componentwise triangle identities.",
+  "blueprint": "Realizes the supporting finite-projective dual-pairing input in prop-zl-smooth-proper-relative-purity Proof Step 3, the paragraph identifying perfect complexes by bounded finite-projective models; the item itself supplies the explicit complex-level equations used by lem-zl-ring-derived-dualizable-perfect."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NN-88601cc1d",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-88601cc1d (reviewer sub-agent of L); spot-checked: Read the item, the new node lem-zl-finite-projective-module-dual-pairing, the cited definition nodes (def-weil-abstract-derived-category, def-weil-finitely-generated-module, def-weil-pbc-projective-module, def-pc-tensor-complex-sheaves), the parent lem-zl-ring-derived-dualizable-perfect and unit sk-prop-smooth-proper-purity, and the Stacks sources: more-algebra.tex Tags 0FNJ and 0FNK (converse and proof, lines 18419-18510) and modules.tex Tag 0FNV example-dual. The item's statement matches the converse of 0FNK: d_D^n=(-1)^{n+1}phi∘d_P^{-n-1}, epsilon is evaluation, eta_n(1)=id, and the tensor orders and support [-b,-a] are correct. Step 2 and the epsilon chain-map signs in step 3 were checked by hand. The eta relation is correct (it is Stacks' displayed relation with n replaced by -n-1), but step 3 justified it by d_P^2=0, which is irrelevant (E5). I rewrote step 3 with the explicit dual-basis computation from the new node's triangle identities, giving (1⊗d_D)c_{n+1}=(-1)^n(d⊗1)c_n. Step 4 gained a sentence on the sign-free associator (no Koszul signs). The new node is true (tested on A, A^2 and eA), smaller than the item, sourced to 0FNV/0FNJ, and not a duplicate: lem-ag-finite-locally-free-dual-pairing is scheme-level and the other candidates are unrelated. Mathlib's dualTensorHomEquiv (LinearAlgebra/Contraction.lean:281) gives only the isomorphism clause, and the triangle identities are proved only over a field, so unsplit is correct. Small cases tested: zero, one-term and two-term (multiplication by a) complexes. No SGA citation, no off-unit statement, no tool_uses. The fix is in fixes/dag/nodes/sec-zeta-weil/lem-zl-bounded-projective-complex-dual-pairing.json; only the texts of steps 3 and 4 changed.; 1 file(s) fixed by the reviewer"
  }
 }
