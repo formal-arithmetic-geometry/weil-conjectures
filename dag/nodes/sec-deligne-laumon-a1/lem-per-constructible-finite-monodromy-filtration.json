@@ -23,9 +23,164 @@
   "def-weil-pbc-extension-by-zero",
   "def-weil-pbc-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First replace $X$ by its reduction $r:X_{\\mathrm{red}}\\hookrightarrow X$. This is a universal homeomorphism: on an affine chart its base changes are quotients by nil ideals, which have exactly the same prime ideals. By [prop-weil-pbc-universal-homeomorphism-topos] the adjunction unit $E\\to r_*r^{-1}E$ is an isomorphism. The equivalence also identifies the constant coefficient ring sheaves and hence module sheaves, since module operations and their equations are transported through an equivalence of topoi; constants are preserved by [lemma-constructible-pullback-constant]. We will construct the partition and filtration on the reduced scheme and then push them along $r$. Reduced induced closed remainders exist by [lem-weil-pbc-reduced-induced-closed-subscheme]. They are Noetherian: in affine charts their rings are quotients of Noetherian rings. Open restrictions are likewise Noetherian, by localization and a finite affine subcover. Pullback of a local trivialization remains a local trivialization by [lemma-constructible-pullback-locally-constant] and [lemma-constructible-pullback-constant]. Thus the pullback of the given stratification supplies the required constructibility hypothesis on each remainder.",
+   "uses": [
+    "prop-weil-pbc-universal-homeomorphism-topos",
+    "lemma-constructible-pullback-constant",
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lemma-constructible-pullback-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of 7.4.1, generic refinement implicit in the sentence about an adapted Galois partition; reduction made explicit using topological invariance"
+   }
+  },
+  {
+   "text": "We prove by Noetherian induction that every reduced closed remainder $T$ has a finite ordered partition into connected strata, each open in the remainder after its predecessors, on each of which the restriction of $E$ is trivialized by a connected finite etale Galois cover. The induction is legitimate by [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal]; its base is $T=\\varnothing$. For nonempty $T$, choose an irreducible component $C$ and its generic point $\\eta$. There are finitely many components by [lem-weil-pbc-noetherian-finitely-many-components]. Remove all other components, and intersect with an open containing $\\eta$ inside the stratum containing $\\eta$. Explicitly, that stratum's image is $F\\cap O$, with $F$ closed containing $\\eta$, hence containing $C$; after removing the other components, $O$ is contained in $F\\cap O$. Choose an affine open $U$ containing $\\eta$ in this intersection. Then $U$ is nonempty, reduced and irreducible, hence connected. Its inclusion in $T$ factors through the original stratum scheme: locally where that immersion is closed, apply [lem-weil-pbc-reduced-source-factors-through-closed-subscheme], and glue the unique factorizations. Thus $E|_U$ is locally constant of finite type, by pullback of the given stratum's local trivializations.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "lemma-constructible-pullback-locally-constant",
+    "lemma-constructible-pullback-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of 7.4.1, the existence of an adapted Galois partition: Noetherian induction and selection of an open part of one stratum"
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-locally-constant-finite-type-modules], choose an etale trivializing chart over $U$ with a point above $\\eta$. Shrink the chart to an affine neighbourhood $W$ of that point. Its map $f:W\\to U$ is still etale by the etale-site finite-limit and composition properties [lem-weil-pbc-etale-base-change-finite-limits], and $f^{-1}(E|_U)\\cong M_W$ for some finitely generated $A$-module $M$. Since both $W$ and $U$ are affine, $f$ is affine (affine preimages of principal opens are localization spectra); [lem-weil-pbc-affine-morphism-permanence] makes it quasi-compact and quasi-separated. Etaleness gives local finite type and unramifiedness [def-weil-etale-morphism]. By [lem-weil-pbc-unramified-quasi-finite-at-points] and [lem-weil-pbc-lqf-qc-source-bounded-fibres], its generic fibre is finite. Apply [lem-weil-pbc-generic-finite-morphism-open-neighborhood] to obtain a nonempty open $V\\subset U$ containing $\\eta$ such that $W_V\\to V$ is finite etale. It is nonempty because it still has a point above $\\eta$.",
+   "uses": [
+    "def-weil-pbc-locally-constant-finite-type-modules",
+    "lem-weil-pbc-etale-base-change-finite-limits",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "lem-weil-pbc-lqf-qc-source-bounded-fibres",
+    "lem-weil-pbc-generic-finite-morphism-open-neighborhood"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02NW, lemma-generically-finite, (1) => (4); Tag 03JA, lemma-locally-quasi-finite-qc-source-universally-bounded; applied to a single affine trivializing chart"
+   }
+  },
+  {
+   "text": "The finite etale scheme $W_V$ is locally Noetherian by [pqf-lem-locnoeth-lft] and quasi-compact because it is finite over the Noetherian scheme $V$, hence Noetherian. Thus [lem-sfb-noetherian-connected-components-open] makes each of its finitely many connected components open and closed. Choose a nonempty component $P$; the restricted map $P\\to V$ is finite etale: on an affine open of $V$, an open-and-closed part of its finite algebra is an idempotent factor, still a finite algebra, and etaleness is preserved on an open source. Apply [lem-fet-galois-category] and [lem-galois-object-exists] to this connected object of $\\mathrm{F\\acute Et}(V)$: there is a connected finite etale Galois cover $Y\\to V$ with a $V$-map $Y\\to P\\hookrightarrow W_V$. The categorical Galois condition is the simply transitive condition of [def-galois-object], by the evaluation injectivity in [lem-galois-axioms]. Since the composite $Y\\to U$ factors through the trivializing chart, [lem-weil-pbc-inverse-image-composition] and [lemma-constructible-pullback-constant] give $E|_Y\\cong M_Y$. No fundamental-group action on the original module sheaf has been assumed. Now $V$ is connected and open in $T$, and $T\\setminus V$, with its reduced closed structure, is a proper closed remainder. Apply the induction hypothesis to it, prepend $V$, and obtain the claimed finite ordered partition. This proves the missing refinement assertion, rather than asserting finite monodromy on the original strata.",
+   "uses": [
+    "lem-sfb-noetherian-connected-components-open",
+    "lem-fet-galois-category",
+    "lem-galois-object-exists",
+    "def-galois-object",
+    "lem-galois-axioms",
+    "lem-weil-pbc-inverse-image-composition",
+    "lemma-constructible-pullback-constant",
+    "pqf-lem-locnoeth-lft"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BN2, lemma-galois; ILO XVII, proof of 7.4.1, existence of adapted partition, and 7.3.5 (directed partitions)"
+   }
+  },
+  {
+   "text": "Proceed by induction on the number of ordered pieces. For the first open piece $S$ in the current remainder $T$, let $j:S\\hookrightarrow T$ be its open immersion and let $i:Z\\hookrightarrow T$ be the complementary closed immersion. The open-closed exact sequence [lem-weil-pbc-open-closed-short-exact], applied to $E|_T$, gives $0\\to j_!L\\to E|_T\\to i_*i^{-1}(E|_T)\\to0$, where $L$ is the restriction to $S$ and is one of the locally constant finite-type sheaves from Steps 1–4. Use the reduced structure on $Z$; the remaining ordered pieces give the induction hypothesis for $i^{-1}(E|_T)$, whose filtration is supplied by induction on their number.",
+   "uses": [
+    "lem-weil-pbc-open-closed-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 7.4.2, p. 305, and the open-closed exact sequence in the proof of Proposition 7.4.3, p. 306"
+   }
+  },
+  {
+   "text": "Push the inductive filtration on $i^{-1}(E|_T)$ forward along $i_*$. This direct image is exact: at a geometric point in $Z$ its stalk is the stalk on $Z$ by [lemma-openclosed-stalk-lowerstar], and at a geometric point outside $Z$ it is zero, since the complement is an open neighbourhood and the direct-image formula evaluates on the empty pullback; exactness on the stalks in $Z$ follows from [prop-weil-pbc-geometric-stalks-exact]; [lemma-weil-pbc-geometric-stalk-conservative] then identifies exactness of sheaf sequences. Taking inverse images under the epimorphism $E|_T\\twoheadrightarrow i_*i^{-1}(E|_T)$ and prepending the kernel $j_!L$ lifts that filtration to a filtration of $E|_T$; the elementary abelian-category subquotient argument gives successive quotients $j_!L$ for the first piece and the pushed-forward successive quotients for the remaining pieces.",
+   "uses": [
+    "lemma-openclosed-stalk-lowerstar",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 7.4.2, p. 305, and the induction in the proof of Proposition 7.4.3, p. 306"
+   }
+  },
+  {
+   "text": "Comparison of the two kinds of quotient. Let $i:Z\\hookrightarrow T$ be a closed immersion, $j':V'\\hookrightarrow Z$ an open immersion and $M$ a sheaf of $A$-modules on $V'_{\\mathrm{et}}$. The set $Z\\setminus V'$ is closed in $Z$, hence in $T$; let $j'':V''\\hookrightarrow T$ be the open complement $T\\setminus(Z\\setminus V')$ [def-weil-open-immersion]. Then $V''\\cap Z=V'$ and $i'':V'\\hookrightarrow V''$, the base change of $i$ along $j''$, is a closed immersion [def-weil-closed-immersion]. We show $j''_!i''_*M\\cong i_*j'_!M$. For an object $W\\to V''$ of $V''_{\\mathrm{et}}$ one has $W\\times_TZ=W\\times_{V''}V'$, so the direct-image formula [def-weil-pbc-direct-image] gives $j''^{-1}i_*j'_!M=i''_*j'^{-1}j'_!M$ ($j''^{-1}$, $j'^{-1}$ being restriction to opens), and $j'^{-1}j'_!M\\cong M$ by the stalk formula of [def-weil-pbc-extension-by-zero] and [lemma-weil-pbc-geometric-stalk-conservative]. The adjunction $j''_!\\dashv j''^{-1}$ of [def-weil-pbc-extension-by-zero] turns this into $\\varphi:j''_!i''_*M\\to i_*j'_!M$, which restricts over $V''$ to the isomorphism just written. At a geometric point outside $V''$ the source stalk is zero by the stalk formula of extension by zero. The target stalk is zero at a point outside $Z$ (the complement of $Z$ is an open neighbourhood on which the direct-image formula evaluates on the empty pullback, as in Step 6), and at a point of $Z\\setminus V'$ it is the stalk of $j'_!M$ there by [lemma-openclosed-stalk-lowerstar], which is zero by the same stalk formula. So $\\varphi$ is an isomorphism at every geometric stalk, hence an isomorphism [lemma-weil-pbc-geometric-stalk-conservative].",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-closed-immersion",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-extension-by-zero",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lemma-openclosed-stalk-lowerstar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 7.4.2, p. 305, and the first reduction in the proof of Proposition 7.4.6, p. 307"
+   }
+  },
+  {
+   "text": "Each quotient has the stated form $k_!L$. By the induction of Steps 5–6, a quotient on the remainder $Z$ has the form $j'_!i'_*L'$ for a closed immersion $i':S'\\hookrightarrow V'$ and an open $V'\\subseteq Z$; its push-forward along $i:Z\\hookrightarrow T$ is $i_*j'_!(i'_*L')\\cong j''_!i''_*i'_*L'$ by Step 7, and $i''_*i'_*=(i''\\circ i')_*$ by [lem-weil-pbc-inverse-image-composition](1), with $i''\\circ i'$ a closed immersion. The first quotient $j_!L$ of Step 5 has this form with the identity as closed part. On each member of the ordered partition a filtration term restricts either to the restriction of $E$ or to zero: this follows directly from the inverse-image construction in Step 6, while the first kernel is $L$ on the first open member and zero on its complement. Thus all terms and quotients are locally constant of finite type on that partition. Finally push the filtration on $X_{\\mathrm{red}}$ forward along $r$. Its exactness follows by the same stalk argument as in Step 6, and $E\\cong r_*r^{-1}E$ was proved in Step 1. Every quotient $j_!i_*L$ on $X_{\\mathrm{red}}$ goes to $r_*j_!i_*L\\cong j''_!(i''\\circ i)_*L$ by Step 7 applied to the closed immersion $r$, so it is the stated $k_!L$ for a closed immersion into an open subscheme of $X$ followed by that open immersion. The same stalk restrictions show constructibility on $X$, the members of the partition being locally closed in $X$ through the closed immersion $r$. The zero sheaf, including $X=\\varnothing$, is handled by the empty filtration.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-composition",
+    "def-weil-closed-immersion",
+    "def-weil-open-immersion",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-extension-by-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 7.4.2, p. 305, and the first reduction in the proof of Proposition 7.4.6, p. 307"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-galois-object",
+  "def-weil-closed-immersion",
+  "def-weil-etale-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-locally-constant-finite-type-modules",
+  "lem-fet-galois-category",
+  "lem-galois-axioms",
+  "lem-galois-object-exists",
+  "lem-sfb-noetherian-connected-components-open",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-lqf-qc-source-bounded-fibres",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-weil-pbc-unramified-quasi-finite-at-points",
+  "lemma-constructible-pullback-constant",
+  "lemma-constructible-pullback-locally-constant",
+  "lemma-openclosed-stalk-lowerstar",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "pqf-lem-locnoeth-lft",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "prop-weil-pbc-universal-homeomorphism-topos"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XVII, proof of 7.4.1 (generic refinement expanded through Stacks 02NW and 0BN2), and 7.4.2 (open-closed filtration). This repairs the previous mistaken use of 7.2.3 for arbitrary etale-locally constant sheaves."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -64,7 +219,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-prime-field-tensor-devissage",
@@ -87,5 +242,114 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-constructible-finite-monodromy-filtration",
+  "worker": "stage1",
+  "summary": "REPAIR E1 and Step 1 route gap: dropped the false, unmerged finite-Galois-trivialization node. Expanded the existence of an adapted Galois partition by selecting an affine trivializing chart above a generic point, shrinking it to a finite etale cover using the existing 02NW node, dominating a connected component by a Galois cover, and applying Noetherian induction to the closed complement. Added explicit reduction to handle arbitrary scheme structures on the original strata. Kept the reviewed open-closed filtration argument. No new nodes; item statement unchanged.",
+  "blueprint": "Realizes the finite-monodromy filtration reduction described in the supporting proof of lem-per-artin-gabber-affine-curve, using the geometric filtration before the external tensor-algebra argument.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-universal-homeomorphism-topos",
+    "why": "Generic scheme, etale-site or finite-cover tool used in the explicit refinement of the adapted Galois partition in ILO XVII 7.4.1; the present unit has no corresponding general-purpose statement."
+   },
+   {
+    "node": "lemma-constructible-pullback-constant",
+    "why": "Generic scheme, etale-site or finite-cover tool used in the explicit refinement of the adapted Galois partition in ILO XVII 7.4.1; the present unit has no corresponding general-purpose statement."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic scheme, etale-site or finite-cover tool used in the explicit refinement of the adapted Galois partition in ILO XVII 7.4.1; the present unit has no corresponding general-purpose statement."
+   },
+   {
+    "node": "lemma-constructible-pullback-locally-constant",
+    "why": "Generic scheme, etale-site or finite-cover tool used in the explicit refinement of the adapted Galois partition in ILO XVII 7.4.1; the present unit has no corresponding general-purpose statement."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "why": "Generic scheme, etale-site or finite-cover tool used in the explicit refinement of the adapted Galois partition in ILO XVII 7.4.1; the present unit has no corresponding general-purpose statement."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finitely-many-components",
+    "why": "Generic scheme, etale-site or finite-cover tool used in the explicit refinement of the adapted Galois partition in ILO XVII 7.4.1; the present unit has no corresponding general-purpose statement."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+    "why": "Generic scheme, etale-site or finite-cover tool used in the explicit refinement of the adapted Galois partition in ILO XVII 7.4.1; the present unit has no corresponding general-purpose statement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-base-change-finite-limits",
+    "why": "Generic scheme, etale-site or finite-cover tool used in the explicit refinement of the adapted Galois partition in ILO XVII 7.4.1; the present unit has no corresponding general-purpose statement."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic scheme, etale-site or finite-cover tool used in the explicit refinement of the adapted Galois partition in ILO XVII 7.4.1; the present unit has no corresponding general-purpose statement."
+   },
+   {
+    "node": "lem-weil-pbc-unramified-quasi-finite-at-points",
+    "why": "Generic scheme, etale-site or finite-cover tool used in the explicit refinement of the adapted Galois partition in ILO XVII 7.4.1; the present unit has no corresponding general-purpose statement."
+   },
+   {
+    "node": "lem-weil-pbc-lqf-qc-source-bounded-fibres",
+    "why": "Generic scheme, etale-site or finite-cover tool used in the explicit refinement of the adapted Galois partition in ILO XVII 7.4.1; the present unit has no corresponding general-purpose statement."
+   },
+   {
+    "node": "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+    "why": "Generic scheme, etale-site or finite-cover tool used in the explicit refinement of the adapted Galois partition in ILO XVII 7.4.1; the present unit has no corresponding general-purpose statement."
+   },
+   {
+    "node": "lem-sfb-noetherian-connected-components-open",
+    "why": "Generic scheme, etale-site or finite-cover tool used in the explicit refinement of the adapted Galois partition in ILO XVII 7.4.1; the present unit has no corresponding general-purpose statement."
+   },
+   {
+    "node": "lem-fet-galois-category",
+    "why": "Generic scheme, etale-site or finite-cover tool used in the explicit refinement of the adapted Galois partition in ILO XVII 7.4.1; the present unit has no corresponding general-purpose statement."
+   },
+   {
+    "node": "lem-galois-object-exists",
+    "why": "Generic scheme, etale-site or finite-cover tool used in the explicit refinement of the adapted Galois partition in ILO XVII 7.4.1; the present unit has no corresponding general-purpose statement."
+   },
+   {
+    "node": "lem-galois-axioms",
+    "why": "Generic scheme, etale-site or finite-cover tool used in the explicit refinement of the adapted Galois partition in ILO XVII 7.4.1; the present unit has no corresponding general-purpose statement."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-composition",
+    "why": "Generic scheme, etale-site or finite-cover tool used in the explicit refinement of the adapted Galois partition in ILO XVII 7.4.1; the present unit has no corresponding general-purpose statement."
+   },
+   {
+    "node": "pqf-lem-locnoeth-lft",
+    "why": "Ensures the finite etale trivializing chart over a Noetherian open is locally Noetherian before applying the finite-open-connected-components theorem; this is a generic scheme tool absent from the unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-universal-homeomorphism-topos",
+  "lemma-constructible-pullback-constant",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lemma-constructible-pullback-locally-constant",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-weil-pbc-reduced-source-factors-through-closed-subscheme",
+  "lem-weil-pbc-etale-base-change-finite-limits",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-unramified-quasi-finite-at-points",
+  "lem-weil-pbc-lqf-qc-source-bounded-fibres",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+  "lem-sfb-noetherian-connected-components-open",
+  "lem-fet-galois-category",
+  "lem-galois-object-exists",
+  "lem-galois-axioms",
+  "lem-weil-pbc-inverse-image-composition",
+  "pqf-lem-locnoeth-lft"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q52-84a4eee47",
+  "group": "Q52",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-84a4eee47 (reviewer sub-agent of L); spot-checked: I read the whole route. The repair is correct: the false Galois-trivialization node from e691cd33 is gone and the item statement is byte-identical to that run. Steps 1–4 expand the 'évidemment' in the proof of ILO XVII 7.4.1, which I checked against the source on printed pp. 305–308. Step 1: reduction is a universal homeomorphism, so prop-weil-pbc-universal-homeomorphism-topos gives E ≅ r_*r^{-1}E. Step 2: a component's generic point η lies in a stratum F∩O, so F contains the whole component; the reduced open U factors through the stratum's immersion by the reduced-source factorization lemma. Step 3: an affine étale chart over η has finite generic fibre (unramified, quasi-finite, quasi-compact source), and the 02NW node, whose hypotheses all hold, makes it finite over an open V containing η. Step 4: a connected component of that finite étale chart is a connected object of FEt(V) and is dominated by a Galois cover (0BN2 node; simply transitive by lem-galois-axioms(6)); Noetherian induction on the proper closed complement finishes the partition. Steps 5–6 (open–closed sequence, exactness of i_* via stalks, preimage lift) match ILO 7.4.2–7.4.3 and are fine. One fault, C1/E5: the old Step 7 said i_*j'_! agrees with j''_!i''_* 'by composition', but this is a commutation of closed pushforward with extension by zero, and the final push along r needs it too. I wrote it out as a new Step 7 using the direct-image formula, the j_! adjunction and stalk formula from the def's blueprint_update, lemma-openclosed-stalk-lowerstar and stalk conservativity. The rest of the old step is now Step 8. Only the proof field changed, both steps are under 2000 characters, and there are no new nodes. The 18 tool_uses are generic black-box tools and are accepted. Edge cases checked: empty X, nonreduced X and strata, the nodal cubic of Exercise 7.2.7, and infinite A-modules. No SGA citation.; 1 file(s) fixed by the reviewer"
  }
 }
