@@ -2,13 +2,14 @@
  "id": "lem-per-galois-cover-module-descent",
  "kind": "statement",
  "title": "Module descent along a connected finite Galois cover",
- "statement": "Let $S$ be a connected scheme [def-pc-scheme], $c:Y\\to S$ a connected finite etale Galois cover [def-galois-object], $G=\\operatorname{Aut}_S(Y)$ its finite group, and $R$ any commutative ring. Use the small etale site [def-weil-pbc-etale-site], constant sheaves [def-weil-pbc-constant-sheaf], and module sheaves [def-weil-sheaf-of-modules-category]. Descent of constant sheaves on $Y$, with their $G$-descent data, gives an additive exact equivalence $T_{c,R}$ between $R$-modules with an $R$-linear $G$-action and the full subcategory of $R_S$-module sheaves $L$ for which $c^{-1}L$ [def-weil-pbc-inverse-image] is constant. It carries trivial actions to constant sheaves and carries finitely generated $R$-modules [def-weil-finitely-generated-module] exactly to the objects of that subcategory locally constant of finite type [def-weil-pbc-locally-constant-finite-type-modules]. Exact means that a sequence on either side is short exact if and only if its corresponding sequence is short exact in modules or ambient module sheaves, respectively. If $R\\to A$ is a homomorphism of commutative rings, $N$ is an $A$-module with trivial $G$-action and $V$ an $R$-module with $R$-linear $G$-action, there is a natural $A_S$-linear isomorphism\n$$T_{c,A}(N\\otimes_R V)\\ \\cong\\ N_S\\otimes_{R_S}T_{c,R}(V),$$\nwhere $g(n\\otimes v)=n\\otimes gv$, module tensors are [def-weil-pbc-module-tensor-product], and sheaf tensors are [def-pur-sheaf-tensor-product]. No finiteness of the underlying sets of $A$, $R$ or $N$ is assumed.",
+ "statement": "Let $S$ be a connected scheme [def-pc-scheme, def-weil-connected-scheme], $c:Y\\to S$ a connected finite etale Galois cover [def-galois-object], $G=\\operatorname{Aut}_S(Y)$ its finite group, and $R$ any commutative ring. Use the small etale site [def-weil-pbc-etale-site], constant sheaves [def-weil-pbc-constant-sheaf], and module sheaves [def-weil-sheaf-of-modules-category]. Descent of constant sheaves on $Y$, with their $G$-descent data, gives an additive exact equivalence $T_{c,R}$ between $R$-modules with an $R$-linear $G$-action and the full subcategory of $R_S$-module sheaves $L$ for which $c^{-1}L$ [def-weil-pbc-inverse-image] is constant. It carries trivial actions to constant sheaves and carries finitely generated $R$-modules [def-weil-finitely-generated-module] exactly to the objects of that subcategory locally constant of finite type [def-weil-pbc-locally-constant-finite-type-modules]. Exact means that a sequence on either side is short exact if and only if its corresponding sequence is short exact in modules or ambient module sheaves, respectively. If $R\\to A$ is a homomorphism of commutative rings, $N$ is an $A$-module with trivial $G$-action and $V$ an $R$-module with $R$-linear $G$-action, there is a natural $A_S$-linear isomorphism\n$$T_{c,A}(N\\otimes_R V)\\ \\cong\\ N_S\\otimes_{R_S}T_{c,R}(V),$$\nwhere $g(n\\otimes v)=n\\otimes gv$, module tensors are [def-weil-pbc-module-tensor-product], and sheaf tensors are [def-pur-sheaf-tensor-product]. No finiteness of the underlying sets of $A$, $R$ or $N$ is assumed.",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "Expose XVII, Proposition 7.2.3 and the finite quotient identification in the proof of Proposition 7.4.6, pp. 301, 307; module operations and the mixed tensor identification are the corresponding descent operations on constant sheaves."
  },
  "stmt_deps": [
   "def-pc-scheme",
+  "def-weil-connected-scheme",
   "def-galois-object",
   "def-weil-pbc-etale-site",
   "def-weil-pbc-constant-sheaf",
@@ -19,9 +20,177 @@
   "def-weil-pbc-module-tensor-product",
   "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use small representatives of the sites in the universe of [def-weil-size-convention]. Connected means nonempty [def-weil-connected-scheme]. The degree assertion of [lem-weil-pbc-finite-etale-trace-degree], clauses (a),(b), makes the number of geometric points of every fibre of $c$ the same integer $d$. Since $Y$ is nonempty, some fibre is nonempty, so $d>0$. Consequently every point of $S$ has a lift to $Y$, and the single etale map $c$ is a covering in [def-weil-pbc-etale-site]. By [lem-weil-pbc-etale-site-localization-open], restrictions to the slice over $Y$ are sheaves on $Y_{\\mathrm{et}}$, and likewise for all the overlaps. By [lem-weil-pbc-site-constant-restriction], a constant module restricts canonically to the same constant module, naturally in linear maps. These comparisons will always be used when writing restrictions of constants.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-weil-connected-scheme",
+    "lem-weil-pbc-finite-etale-trace-degree",
+    "def-weil-pbc-etale-site",
+    "lem-weil-pbc-etale-site-localization-open",
+    "lem-weil-pbc-site-constant-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03SH, constant finite etale degree; sites.tex Tag 00XZ, localization; restriction to a localization without sheafification Tag 00XR (lemma-when-shriek)"
+   }
+  },
+  {
+   "text": "Put $G=\\operatorname{Aut}_S(Y)$, with $hg=h\\circ g$. Consider $q:\\coprod_{g\\in G}Y\\to Y\\times_SY$ whose $g$-component is $(\\mathrm{id},g)$. The finite limits and colimits of finite etale covers and their compatibility with base change are [lem-fet-finite-limits]. On the chosen geometric fibre of $S$, the map $q$ is $(g,y)\\mapsto(y,gy)$; it is bijective because [def-galois-object] says that the deck group acts simply transitively. The fibre functor reflects isomorphisms by [lem-fet-galois-category] and [def-galois-category], so $q$ is an isomorphism. Thus each double overlap is a copy of the connected scheme $Y$. On a triple overlap the components can be indexed as $(y,gy,hgy)$; the three pair coordinates are $g,h,hg$. This also follows by applying $q$ successively to pairs, so specifies the actual projections, not just an abstract decomposition.",
+   "uses": [
+    "lem-fet-finite-limits",
+    "def-galois-object",
+    "lem-fet-galois-category",
+    "def-galois-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tags 0BMY, 0BNB: Galois category, exact conservative fibre functor; finite limits and colimits of finite etale covers"
+   }
+  },
+  {
+   "text": "For arbitrary $R$-modules $M,M'$, every map $M_Y\\to M'_Y$ of $R_Y$-modules comes from a unique $R$-linear map $f:M\\to M'$. Indeed, apply the sheaf map to each global constant section $m$. By [lem-weil-pbc-constant-sheaf-sections-connected] its image is the constant section of a unique element $f(m)\\in M'$. Preservation of addition and each constant scalar gives linearity. By [lem-weil-pbc-constant-module-locally-constant], every section of $M_Y$ is locally a constant section on Zariski opens. Restricting the equality on the global constants therefore determines the map on every section; conversely postcomposition by $f$ defines it. This proves full faithfulness of constants on $Y$ with no finite-generation assumption. The same argument applies to each double and triple component, since each is $Y$.",
+   "uses": [
+    "lem-weil-pbc-constant-sheaf-sections-connected",
+    "lem-weil-pbc-constant-module-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03P5, constant sections; Tags 0DV5 (3), 0DV6, locally constant model"
+   }
+  },
+  {
+   "text": "Let $V$ be an $R$-module with action $\\rho:G\\to\\operatorname{Aut}_R(V)$. On $Y$ take $V_Y$; on the component $(y,gy)$ of $Y\\times_SY$ take $\\phi_g=\\rho(g)$ as the map from the first pullback to the second, using [lem-weil-pbc-site-constant-restriction]. The cocycle equation on $(y,gy,hgy)$ is exactly $\\phi_{hg}=\\phi_h\\phi_g$, and the diagonal is $\\phi_1=1$. Conversely a module descent isomorphism between the two pullbacks of $V_Y$ gives, by Step 3, unique linear automorphisms $\\rho(g)$, and these same equations give an action. A map between two such data is a constant linear map $f$ on $Y$ satisfying $f\\rho(g)=\\rho'(g)f$ for every $g$; these are precisely the equivariant linear maps. This identifies representations with constant-module descent data, including their morphisms.",
+   "uses": [
+    "lem-weil-pbc-site-constant-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 04TR, 04TQ, gluing cocycle convention; explicit component calculation for this cover"
+   }
+  },
+  {
+   "text": "Apply [lem-pe-set-sheaf-cover-descent] to the underlying set sheaf of $V_Y$ and its cocycle. Denote the descended set sheaf by $L$. Its addition descends by the morphism-gluing clause applied to $L\\times L\\to L$: restriction evaluates the product sectionwise, so its local domain is $V_Y\\times V_Y$, and the overlap maps preserve addition. The zero and negation maps descend in the same way. For each $r\\in R$, multiplication by $r$ descends as $L\\to L$. Every abelian-group and $R$-module identity is an equality of maps from a finite power of $L$; it holds on $Y$ and hence globally by uniqueness in the morphism-gluing clause. This constructs an $R$-module sheaf, equivalently an $R_S$-module sheaf [def-weil-sheaf-of-modules-category]: for a locally constant scalar section, multiply on the open pieces where it is a constant scalar and glue; uniqueness proves independence of pieces. The ring's locally constant model is [lem-weil-pbc-constant-module-locally-constant] applied to its underlying module. The same gluing clause descends equivariant linear maps uniquely. Choose these realizations and call the resulting functor $T_{c,R}$. Uniqueness gives its identity and composition laws.",
+   "uses": [
+    "lem-pe-set-sheaf-cover-descent",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-constant-module-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 04TR (lemma-glue-sheaves), 04TQ (lemma-glue-maps); descend operations by the morphism-gluing clause"
+   }
+  },
+  {
+   "text": "Since $c$ is etale, [lem-weil-pbc-etale-inverse-image-restriction] (1) gives a natural isomorphism $c^{-1}F\\cong F|_Y$ of abelian sheaves; it commutes with each constant scalar endomorphism by naturality, so it is an isomorphism of $R_Y$-module sheaves, and below $c^{-1}$ is always read as restriction to the slice over $Y$. By construction $c^{-1}T_{c,R}(V)\\cong V_Y$. If $L$ is any $R_S$-module sheaf with $c^{-1}L$ constant, choose $L|_Y\\cong c^{-1}L\\cong V_Y$. Transport its canonical descent isomorphism along this trivialization. Step 4 recovers an action on $V$, and the identity on $V_Y$ descends by [lem-pe-set-sheaf-cover-descent] to an isomorphism $T_{c,R}(V)\\cong L$ (descend its inverse too; uniqueness gives both inverse identities). A morphism $T_{c,R}(V)\\to T_{c,R}(W)$ restricts to a unique linear $f:V\\to W$ by Step 3, and compatibility on the overlap says precisely that $f$ is equivariant. Conversely every such $f$ descends uniquely. This proves full faithfulness and essential surjectivity onto exactly the full subcategory stated in the item.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-pe-set-sheaf-cover-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 04TR, 04TQ, effectivity and uniqueness of gluing; canonical gluing datum after lemma-glue-sheaves; inverse image along the etale cover read as slice restriction (Tag 00XR, lemma-when-shriek)"
+   }
+  },
+  {
+   "text": "For equivariant maps $f,f'$, the restriction of $T(f+f')$ to $Y$ is the constant map $f+f'$, which is the sum of the restrictions of $T(f)$ and $T(f')$. Morphism uniqueness in [lem-pe-set-sheaf-cover-descent] proves $T(f+f')=T(f)+T(f')$ and $T(0)=0$; thus the equivalence is additive. For a trivial action all $\\phi_g$ are identities. The constant module $V_S$ has exactly these gluing data under [lem-weil-pbc-site-constant-restriction], so the identity of $V_Y$ and its inverse descend to $T_{c,R}(V)\\cong V_S$, naturally in $V$.",
+   "uses": [
+    "lem-pe-set-sheaf-cover-descent",
+    "lem-weil-pbc-site-constant-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 04TQ, 04TR; Tag 00XR, canonical restriction of constants"
+   }
+  },
+  {
+   "text": "Restriction along $c$ is exact on constant-coefficient module sheaves by [lem-pe-constant-left-module-inverse-image]. It also detects zero objects: if $F|_Y=0$, then for any etale $U\\to S$ every section of $F(U)$ restricts to zero on the cover $U\\times_SY\\to U$, and the uniqueness part of the sheaf axiom makes it zero. Hence restriction preserves and reflects exactness, by applying it to the kernel, middle homology and cokernel of a three-term complex. The constant module functor is exact by [lem-weil-pbc-finite-type-constant-exact], whose statement allows all modules. On the nonempty connected $Y$ it reflects zero objects by [lem-weil-pbc-constant-sheaf-sections-connected]; it therefore reflects exactness by the same kernel-homology-cokernel test. Consequently an equivariant module sequence is short exact on underlying modules if and only if its image under $T_{c,R}$ is short exact in ambient module sheaves. Finally kernels and cokernels of equivariant linear maps carry the induced actions, so short exactness in the representation category is exactly underlying-module short exactness. This proves the asserted exact equivalence, including reflection of short exactness.",
+   "uses": [
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-weil-pbc-finite-type-constant-exact",
+    "lem-weil-pbc-constant-sheaf-sections-connected"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093J (lemma-constant-exact), exact constants; sites.tex Tag 00YV, exact fixed-ring inverse image; local zero detection written out"
+   }
+  },
+  {
+   "text": "If $V$ is finitely generated, $T_{c,R}(V)|_Y\\cong V_Y$ exhibits it as locally constant of finite type [def-weil-pbc-locally-constant-finite-type-modules]; over an arbitrary object $U$ use the pulled-back cover $U\\times_SY\\to U$, on which the restriction is again $V$ constant by [lem-weil-pbc-site-constant-restriction]. Conversely suppose $T_{c,R}(V)$ is locally constant of finite type. Apply the definition to the final object $S$: there is a covering sieve on $S$ such that each member $U\\to S$ carries an $R$-module isomorphism $T_{c,R}(V)|_U\\cong M_U$ with $M$ finitely generated. Since $S$ is nonempty and the sieve is jointly surjective, some member $U$ is nonempty; since $c$ is surjective (Step 1), $W=U\\times_SY$ is nonempty. Restricting both trivializations to $W$ by [lem-weil-pbc-site-constant-restriction] gives an isomorphism of $R_W$-module sheaves $V_W\\cong M_W$. Take a geometric point $\\bar w$ of $W$. By [lem-weil-pbc-constant-sheaf-geometric-stalk], applied on $W$, the maps $V\\to(V_W)_{\\bar w}$ and $M\\to(M_W)_{\\bar w}$, $e\\mapsto$ germ of the constant section $e$, are isomorphisms of abelian groups. They are $R$-linear: multiplication by $r\\in R$ on a constant module sheaf is the constant map $r\\cdot$, which commutes with the constant sections and with germs. A sheaf isomorphism induces an $R$-linear isomorphism of stalks, so $V\\cong M$ as $R$-modules and $V$ is finitely generated. No finiteness of $R$ is used.",
+   "uses": [
+    "def-weil-pbc-locally-constant-finite-type-modules",
+    "lem-weil-pbc-site-constant-restriction",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093Q (definition-locally-constant), finite-type local systems; constant stalk identity as in etale-cohomology Tag 04FM"
+   }
+  },
+  {
+   "text": "For $R\\to A$, an $A$-module $N$, and an $R$-module $V$, apply [lem-pc-sites-module-sheafification-tensor] to the constant ring presheaf $R$ and the constant module presheaves $N,V$. Their presheaf tensor is the constant presheaf $N\\otimes_RV$, so this gives a natural isomorphism $N_Y\\otimes_{R_Y}V_Y\\cong(N\\otimes_RV)_Y$. It is $A_Y$-linear: the comparison sends each pure tensor $n\\otimes v$ to the same constant tensor, so $a(n\\otimes v)=(an)\\otimes v$ on both sides; locally constant $A$-scalars then follow by gluing. No module is required to be flat or finitely generated. By [lem-sfb-localized-site-tensor-restriction], restriction of $N_S\\otimes_{R_S}T_{c,R}(V)$ to $Y$ is the left side of this comparison. Its descent map on $(y,gy)$ sends $n\\otimes v$ to $n\\otimes\\rho(g)v$: the first factor is constant with identity descent datum, while the second has $\\phi_g=\\rho(g)$. This is exactly the action defining $T_{c,A}(N\\otimes_RV)$.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-tensor",
+    "lem-sfb-localized-site-tensor-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMW (lemma-sheafification-tensor), applied to constant presheaves; Tag 03EL (lemma-tensor-product-pullback), localized restriction"
+   }
+  },
+  {
+   "text": "The comparison of Step 10 and its inverse respect the overlap maps on every pure tensor, hence on all sections locally, since tensor sections are locally sums of pure tensors by the sheafification definition [def-pur-sheaf-tensor-product]. Apply the morphism-gluing clause of [lem-pe-set-sheaf-cover-descent] to descend them. Their composites restrict to identities on $Y$, so uniqueness makes them mutual inverses globally, and the equality with each $A$-scalar action descends too. Taking the orientation from the statement gives $T_{c,A}(N\\otimes_RV)\\cong N_S\\otimes_{R_S}T_{c,R}(V)$. For an $A$-linear map $N\\to N'$ and an equivariant $R$-linear map $V\\to V'$, naturality is the equality $(f\\otimes u)(n\\otimes v)=f(n)\\otimes u(v)$ after restriction to $Y$; the same uniqueness descends the naturality square. This proves the natural mixed tensor assertion for arbitrary underlying sets of coefficients and modules.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-pe-set-sheaf-cover-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 04TQ, 04TR; sites-modules.tex Tag 03EK, sheafified tensor and its local pure tensors"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "def-weil-connected-scheme",
+  "lem-weil-pbc-finite-etale-trace-degree",
+  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-site-constant-restriction",
+  "lem-fet-finite-limits",
+  "def-galois-object",
+  "lem-fet-galois-category",
+  "def-galois-category",
+  "lem-weil-pbc-constant-sheaf-sections-connected",
+  "lem-weil-pbc-constant-module-locally-constant",
+  "lem-pe-set-sheaf-cover-descent",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-finite-type-constant-exact",
+  "def-weil-pbc-locally-constant-finite-type-modules",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-pc-sites-module-sheafification-tensor",
+  "lem-sfb-localized-site-tensor-restriction",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII 7.2.3 and 7.4.6 motivate the finite-quotient identification; explicit arbitrary-scheme covering-descent proof from Stacks 04TR, 04TQ, 0BNB, 0GMW, 03EL, 00YV, without using the noetherian-only fundamental-group statement."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -57,10 +226,45 @@
    "results": "8 hits; top: Condensed.finFree, LightCondMod.LocallyConstant.functorIsoDiscreteAux₁, LightCondMod.LocallyConstant.functorIsoDiscreteAux₂, CondensedMod.LocallyConstant.functorIsoDiscreteAux₁, CondensedMod.LocallyConstant.functorIsoDiscreteAux₂, CompHausLike.LocallyConstantModule.functor, CompHausLike.LocallyConstantModule.functor_obj_val, CompHausLike.LocallyConstantModule.functor_map_val; note: ; digest: b9327c5921320e60",
    "date": "2026-10-18",
    "verdict": "no match: abstract finite Galois categories and site equivalences do not identify arbitrary-coefficient torsor-trivialized module sheaves with representations or provide the mixed tensor comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "Galois|torsor|descent",
+   "results": "25 hits; top: Mathlib/CategoryTheory/Sites/PrecoverageToGrothendieck.lean, Mathlib/CategoryTheory/Sites/PrecoverageToGrothendieck.lean, Mathlib/CategoryTheory/Sites/PrecoverageToGrothendieck.lean, Mathlib/CategoryTheory/Sites/PrecoverageToGrothendieck.lean, Mathlib/CategoryTheory/Sites/PrecoverageToGrothendieck.lean, Mathlib/CategoryTheory/Sites/Pretopology.lean, Mathlib/CategoryTheory/Sites/Pretopology.lean, Mathlib/CategoryTheory/Sites/MorphismProperty.lean; note: ; digest: 4c29da7e93cc1348",
+   "date": "2026-10-18",
+   "verdict": "no match: generic site equivalences, abstract Galois categories on finite sets, descent-data definitions, and condensed locally constant modules do not state this arbitrary-coefficient etale module descent theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of constant module sheaves along a finite etale torsor and representations of its deck group",
+   "results": "8 hits; top: CategoryTheory.constantSheaf, CategoryTheory.Sheaf.isConstant_of_iso, CategoryTheory.Sheaf.IsConstant.mem_essImage, CategoryTheory.Sheaf.isConstant_iff_mem_essImage, CategoryTheory.Sheaf.IsConstant.recOn, CategoryTheory.Sheaf.mem_essImage_of_isConstant, CategoryTheory.Sheaf.isConstant_congr, CategoryTheory.Sheaf.IsConstant.casesOn; note: ; digest: a4b1aca3958832f6",
+   "date": "2026-10-18",
+   "verdict": "no match: generic site equivalences, abstract Galois categories on finite sets, descent-data definitions, and condensed locally constant modules do not state this arbitrary-coefficient etale module descent theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Modules with a finite group action are equivalent to module sheaves trivialized by a connected finite etale Galois cover, preserving exact sequences and arbitrary coefficient tensor products",
+   "results": "8 hits; top: Condensed.finFree, LightCondMod.LocallyConstant.functorIsoDiscreteAux₁, TannakaDuality.FiniteGroup.forget, CategoryTheory.PreGaloisCategory.instIsEquivalenceContActionFintypeCatAutFunctorFunctorToContAction, LightCondMod.LocallyConstant.functorIsoDiscreteAux₂, CondensedMod.LocallyConstant.functorIsoDiscreteAux₁, TannakaDuality.FiniteGroup.toRightFDRepComp_in_rightRegular, CondensedMod.LocallyConstant.functorIsoDiscreteAux₂; note: ; digest: 083642021fb9627b",
+   "date": "2026-10-18",
+   "verdict": "no match: generic site equivalences, abstract Galois categories on finite sets, descent-data definitions, and condensed locally constant modules do not state this arbitrary-coefficient etale module descent theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Equivalence",
+   "results": "12 hits; top: CategoryTheory.sheafBotEquivalence, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv, CategoryTheory.Functor.sheafInducedTopologyEquivOfIsCoverDense, CategoryTheory.Equivalence.transportAndSheafify, CategoryTheory.Equivalence.sheafCongr, CategoryTheory.Equivalence.sheafCongr.functor, CategoryTheory.Equivalence.sheafCongr.inverse, CategoryTheory.Equivalence.instPreservesFiniteLimitsFunctorOppositeSheafTransportAndSheafify; note: ; digest: 9cb36259548014cd",
+   "date": "2026-10-18",
+   "verdict": "no match: generic site equivalences, abstract Galois categories on finite sets, descent-data definitions, and condensed locally constant modules do not state this arbitrary-coefficient etale module descent theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant locally constant functions on a finite etale torsor construct module sheaves and an exact descent equivalence for arbitrary modules",
+   "results": "8 hits; top: CompHausLike.LocallyConstantModule.functor, LightCondMod.LocallyConstant.functor, LightCondMod.LocallyConstant.functorIsoDiscreteAux₂, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondMod.LocallyConstant.functorIsoDiscreteAux₁, CondensedMod.LocallyConstant.functor, CompHausLike.LocallyConstantModule.functor_obj_val, LightCondMod.LocallyConstant.functorIsoDiscrete; note: ; digest: b6c2df6c6f9d7879",
+   "date": "2026-10-18",
+   "verdict": "no match: generic site equivalences, abstract Galois categories on finite sets, descent-data definitions, and condensed locally constant modules do not state this arbitrary-coefficient etale module descent theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-prime-field-tensor-devissage",
@@ -83,5 +287,94 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-galois-cover-module-descent",
+  "worker": "stage1",
+  "summary": "Q54 gives an explicit descent proof using existing generic nodes only (no new nodes). Checks cover surjectivity, the Galois overlap and cocycle orientation, effectivity of module operations and maps, ambient exactness in both directions, finite-generation detection, and arbitrary-coefficient mixed tensor descent. No Lean attachment exists. The statement is unchanged except for an explicit connectedness-definition citation. Maintainer review (Q54 reader): Step 9 now uses the generic constant-sheaf stalk lemma instead of the sec-poincare-duality lisse node; Step 6 cites the etale inverse-image/restriction identification; step source tags corrected.",
+  "blueprint": "Supports the existing ancestor chain from lem-per-artin-gabber-affine-curve through qbar/arbitrary-field duality, residue duality, potential local duality, coefficient change and prime-field tensor devissage. Realizes the arbitrary-coefficient finite-quotient descent operation used by lem-per-prime-field-tensor-devissage; no chapter or unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-etale-trace-degree",
+    "why": "Only the constant-degree and geometric-fibre cardinality clauses supply surjectivity of the cover; the trace clause is unused. This is a generic tool; no node of the perverse affine-line unit supplies this site-level fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-site-localization-open",
+    "why": "Identifies slice restrictions with small etale sheaves on the cover and overlaps. This is a generic tool; no node of the perverse affine-line unit supplies this site-level fact."
+   },
+   {
+    "node": "lem-weil-pbc-site-constant-restriction",
+    "why": "Canonical restriction of arbitrary constant modules and their linear maps. This is a generic tool; no node of the perverse affine-line unit supplies this site-level fact."
+   },
+   {
+    "node": "lem-fet-finite-limits",
+    "why": "Finite etale fibre products and coproducts used in the torsor graph comparison. This is a generic tool; no node of the perverse affine-line unit supplies this site-level fact."
+   },
+   {
+    "node": "lem-fet-galois-category",
+    "why": "Conservativity of the finite etale geometric fibre functor, unpacked using def-galois-category. This is a generic tool; no node of the perverse affine-line unit supplies this site-level fact."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-sections-connected",
+    "why": "Global sections recover an arbitrary abelian coefficient group on nonempty connected Y. This is a generic tool; no node of the perverse affine-line unit supplies this site-level fact."
+   },
+   {
+    "node": "lem-weil-pbc-constant-module-locally-constant",
+    "why": "Local constant-section model, for all modules and scalar sections. This is a generic tool; no node of the perverse affine-line unit supplies this site-level fact."
+   },
+   {
+    "node": "lem-pe-set-sheaf-cover-descent",
+    "why": "General effectivity and morphism uniqueness over a covering, then descend module operations explicitly. This is a generic tool; no node of the perverse affine-line unit supplies this site-level fact."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Exactness of module inverse image with unrestricted constant coefficients. This is a generic tool; no node of the perverse affine-line unit supplies this site-level fact."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-constant-exact",
+    "why": "Its statement gives exact constant realization for all modules despite its historical id. This is a generic tool; no node of the perverse affine-line unit supplies this site-level fact."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-tensor",
+    "why": "Tensor sheafification for arbitrary module presheaves, specialized to constants. This is a generic tool; no node of the perverse affine-line unit supplies this site-level fact."
+   },
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "Arbitrary sheaf tensor commutes with localized restriction, including its pure-tensor formula. This is a generic tool; no node of the perverse affine-line unit supplies this site-level fact."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "why": "Lean-closed generic stalk identity of a constant etale sheaf; detects finite generation in Step 9. No node of the perverse affine-line unit supplies it."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Lean-closed generic identification of inverse image along the etale cover with slice restriction (Step 6). No node of the perverse affine-line unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-etale-trace-degree",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-site-constant-restriction",
+  "lem-fet-finite-limits",
+  "lem-fet-galois-category",
+  "lem-weil-pbc-constant-sheaf-sections-connected",
+  "lem-weil-pbc-constant-module-locally-constant",
+  "lem-pe-set-sheaf-cover-descent",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-finite-type-constant-exact",
+  "lem-pc-sites-module-sheafification-tensor",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-weil-pbc-etale-inverse-image-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-d185d8a5e",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-d185d8a5e (reviewer sub-agent of L); spot-checked: Read the whole item: 11 steps, no new nodes. The only statement change adds a correct def-weil-connected-scheme citation. Read every cited statement, the parent's use, unit sk-p-dl-a1-perverse and ILO XVII 7.2.3, which is noetherian and is deliberately avoided by a direct descent proof. All steps are correct. Step 1: d>0 so c is a covering. Step 2: q is an iso because the action is simply transitive and the Galois-category fibre functor reflects isomorphisms. Step 4: the cocycle orientation rho(hg)=rho(h)rho(g) checked on the (y,gy,hgy) components. Steps 5-7: module structure, essential image and full faithfulness come from the set-sheaf cover descent. Step 8: exactness in both directions. Steps 10-11: the mixed tensor descends via pure tensors. Edge cases checked: G trivial, R=0, infinite or non-flat modules, empty S excluded. No duplicate in the DAG. Batch-5: lem-pod-lisse-tensor-and-scalar-extension clause (1) is a generic constant-stalk fact and not a step of Poincare duality or the trace formula. Its closure reaches only generic pod stalk/scalar nodes. I still replaced it in Step 9 with the Lean-closed generic lem-weil-pbc-constant-sheaf-geometric-stalk and wrote out R-linearity. After the fix the closure has no trace or Poincare node. Fixes: (1) that Step 9 swap; (2) C4: Step 6 now cites lem-weil-pbc-etale-inverse-image-restriction for c^{-1}F = F|_Y; (3) B5: step source tags corrected (093H->093J, 094H/094I->093Q, 0A3R dropped, 00XR relabelled). split_report.tool_uses updated to match; all other declared generic tool uses accepted.; 1 file(s) fixed by the reviewer"
  }
 }
