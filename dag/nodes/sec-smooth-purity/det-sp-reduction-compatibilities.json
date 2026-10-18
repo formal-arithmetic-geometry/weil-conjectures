@@ -296,5 +296,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.ReductionCompatibilities",
+  "declaration": "AlgebraicGeometry.ProEtale.reductionCompatibilities_unit",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.reductionCompatibilities_unit",
+   "AlgebraicGeometry.ProEtale.reductionCompatibilities_composition",
+   "AlgebraicGeometry.ProEtale.reductionCompatibilities_purity"
+  ],
+  "file": "lean/Sheaf/SecSmoothPurity/ReductionCompatibilities.lean",
+  "statement": "theorem reductionCompatibilities_unit (D : WeilConjectures.FiniteFieldDatum.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (_hℓ : ℓ ≠ D.p) {X Y : Scheme.{u}} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] [IsSeparated f] (d : ℕ) [SmoothOfRelativeDimension d f] (cpt : Compactification f) [cpt.Z.Over (Spec (.of D.k))] [LocallyOfFiniteType (cpt.Z ↘ Spec (.of D.k))] [QuasiCompact (cpt.Z ↘ Spec (.of D.k))] [IsSeparated (cpt.Z ↘ Spec (.of D.k))] [cpt.i.IsOver (Spec (.of D.k))] [cpt.g.IsOver (Spec (.of D.k))] {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (_hA : ∃ n : ℕ, ∀ x : A, (ℓ ^ n) • x = 0) (_hB : ∃ n : ℕ, ∀ x : B, (ℓ ^ n) • x = 0) (φ : A →+* B) (hFA : ∀ M : spFiniteConstructibleTorCategory X A, spFiniteConstructibleTor Y A ((reductionCompactSupport A cpt.i cpt.g).obj M.obj)) (hFB : ∀ M : spFiniteConstructibleTorCategory X B, spFiniteConstructibleTor Y B ((reductionCompactSupport B cpt.i cpt.g).obj M.obj)) (hSX : ∀ K : spFiniteConstructibleTorCategory X A, spFiniteConstructibleTor X B ((scalarExtensionFunctor φ X).obj K.obj)) (hSY : ∀ K : spFiniteConstructibleTorCategory Y A, spFiniteConstructibleTor Y B ((scalarExtensionFunctor φ Y).obj K.obj)) (GA : spFiniteConstructibleTorCategory Y A ⥤ spFiniteConstructibleTorCategory X A) (adjA : reductionCtfCompactSupport A cpt.i cpt.g hFA ⊣ GA) (GB : spFiniteConstructibleTorCategory Y B ⥤ spFiniteConstructibleTorCategory X B) (adjB : reductionCtfCompactSupport B cpt.i cpt.g hFB ⊣ GB) (c : GA ⋙ reductionCtfScalar φ X hSX ⟶ reductionCtfScalar φ Y hSY ⋙ GB) (hc : ∀ K : spFiniteConstructibleTorCategory Y A, (reductionDirectImageComparison φ cpt.i cpt.g).app (GA.obj K).obj ≫ (reductionCompactSupport B cpt.i cpt.g).map (c.app K).hom ≫ (adjB.counit.app ((reductionCtfScalar φ Y hSY).obj K)).hom = (scalarExtensionFunctor φ Y).map (adjA.counit.app K).hom) (M : spFiniteConstructibleTorCategory X A) : (scalarExtensionFunctor φ X).map (adjA.unit.app M).hom ≫ (c.app ((reductionCtfCompactSupport A cpt.i cpt.g hFA).obj M)).hom ≫ (GB.map (ObjectProperty.homMk ((reductionDirectImageComparison φ cpt.i cpt.g).app M.obj))).hom = (adjB.unit.app ((reductionCtfScalar φ X hSX).obj M)).hom",
+  "branch": "newtargets-dag",
+  "by": "N3",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The three named theorems state clauses (1), (2), and (3). Units and composition use the recorded intrinsic Dctf subcategories, adjunctions and counit-characterized coefficient comparison; the latter is expressed equivalently after multiplying by the canonical compact-support comparison. Purity uses precisely the fixed-coefficient presentation and diagonal/DNC-normalized orientations of finiteGeneralRingSmoothPurity, with the published source balancing proLambda and actual counit mate proCoefficientMap. All preservation witnesses and adjunction data are those supplied by the dependency nodes; no coefficient flatness or DVR presentation is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-53390de71",
+  "group": "N3",
+  "result": "pass",
+  "note": "Clauses 1-2: unit and cocycle identities in the node's order. GA/adjA/c are arguments because reductionExceptional_isIso gives them existentially; c is fixed by hc (the dependency's counit equation times b, invertible on Dctf); associators are the canonical scalarExtensionFunctor_composition. Clause 3 uses the presentation of finiteGeneralRingSmoothPurity: proGamma; proCoefficientMap, the same c the general-ring node uses; proLambda. Geometry is a Prop class, the orientations are fixed by OrientationNormalized, the CoefficientLineComparison at equal exponents is fixed, the common n>=1 is covered by exponent independence, and HasCompactification is a Prop supplied by the dependency. No flatness, nontriviality, DVR or universe restriction. Edge cases covered: zero rings, d=0, empty schemes, nonflat maps. Only the node's lean field changed; statement verbatim; docstrings with source and proof steps; lines <=100; all proofs sorry. nt_compile --json exit 0 in 6.1 s, no warnings. Advisory: clause-3 declarations owned by def-pur-finite-smooth-coefficient-arrows, canonical-maps and section-deformation nodes are not in stmt_deps (they come through det-sp-finite-general-ring, and H2 forbids adding them in stage 2); stage 3 needs a lemma identifying the two c presentations; the second reading was written by the author."
  }
 }
