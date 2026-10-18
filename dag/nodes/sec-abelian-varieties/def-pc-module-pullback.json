@@ -44,12 +44,9 @@
    }
   },
   {
-   "text": "For the explicit tensor functor, obtain the change-of-rings adjunction and its section formula from [lem-pc-module-change-of-rings-adjunction], and the inverse-image module Hom equivalence and its section formula from [lem-pc-module-inverse-image-adjunction]. The ring adjunction identity gives eta followed by the pushforward of tensorPullbackRingMap equal to g.toRingCatSheafHom. Mathlib SheafOfModules.pushforwardComp and pushforwardCongr consequently identify restriction of scalars followed by inverse-image direct image with Scheme.Modules.pushforward g. Compose the two Hom equivalences and this identification. Its evaluation on a section m is a(theta(1 tensor eta(m))). Naturality in the target follows by postcomposition. For naturality in the source, the sheafification unit commutes with the section tensor map, extension of scalars maps 1 tensor x to 1 tensor inverseImageModuleMap(a)(x), and naturality of the abelian inverse-image unit identifies the latter with eta(a(m)). SheafOfModules.hom_ext and PresheafOfModules.hom_ext turn these section calculations into morphism equalities. Adjunction.mkOfHomEquiv gives nonempty_tensorPullbackAdjunction.",
+   "text": "Apply the existing proved normalized adjunction theorem [lem-pc-module-pullback-adjunction], whose sectionwise unit is the module-sheafification unit applied to 1 tensor the abelian inverse-image unit. This is definitionally tensorPullbackSection, so it supplies existence with the required normalization. For any other normalized adjunction, SheafOfModules.hom_ext, PresheafOfModules.hom_ext and sectionwise extensionality identify its unit with the supplied unit. Mathlib CategoryTheory.Adjunction.ext then proves equality of the adjunctions.",
    "uses": [
-    "lem-pc-module-change-of-rings-adjunction",
-    "lem-pc-module-inverse-image-adjunction",
-    "def-pc-scheme",
-    "def-weil-pbc-topological-inverse-image"
+    "lem-pc-module-pullback-adjunction"
    ],
    "elementary": true,
    "source": {
@@ -58,10 +55,8 @@
    }
   },
   {
-   "text": "The identity and composition theorems are proved in this same module, realizing [lem-pc-module-pullback-identity-composition]. For identity, transport nonempty_tensorPullbackAdjunction along Mathlib Scheme.Modules.pushforwardId, then apply Adjunction.leftAdjointUniq against Adjunction.id. For composition, compose the two tensor adjunctions, transport their right adjoint along Scheme.Modules.pushforwardComp, and apply leftAdjointUniq against the tensor adjunction for the composite.",
-   "uses": [
-    "lem-pc-module-pullback-identity-composition"
-   ],
+   "text": "Construct tensorPullbackSectionId and tensorPullbackSectionComp directly from the uniquely section-normalized adjunctions just proved. For identity, transport along Mathlib Scheme.Modules.pushforwardId and apply Adjunction.leftAdjointUniq against Adjunction.id. For composition, compose the normalized adjunctions, transport their right adjoint along Scheme.Modules.pushforwardComp, and apply leftAdjointUniq against the normalized adjunction for the composite. No existence-only comparison theorem is needed.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sheaves.tex",
@@ -73,16 +68,12 @@
   "def-pc-topological-inverse-image-module",
   "def-pur-sheaf-tensor-product",
   "def-weil-sheaf-of-modules-category",
-  "lem-pc-module-change-of-rings-adjunction",
-  "lem-pc-module-inverse-image-adjunction",
-  "def-pc-scheme",
-  "def-weil-pbc-topological-inverse-image",
-  "lem-pc-module-pullback-identity-composition"
+  "lem-pc-module-pullback-adjunction"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sheaves.tex",
-  "place": "Tags 0095 (definition-pushforward), 0096 (lemma-adjoint-pullback-pushforward-modules), 0097 (lemma-push-pull-composition-modules)"
+  "place": "Tags 0095 (definition-pushforward), 0096 (lemma-adjoint-pullback-pushforward-modules), 0097 (lemma-push-pull-composition-modules); normalized existence from the proved lem-pc-module-pullback-adjunction, uniqueness by Mathlib CategoryTheory.Adjunction.ext"
  },
  "mathlib_searches": [
   {
@@ -295,13 +286,13 @@
   "note": "Reviewed immutable packet, node/dependencies, source references, both Lean modules, docstrings, edge cases, universes, route-pivot compliance, and worker compile/preflight evidence; wrote review.md. No substantive or mechanical errors found."
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "X-e6987",
-  "group": "S1",
+  "reviewer": "COMPILER",
+  "group": "K5",
   "result": "pass",
-  "landing": "20261012T023506-L-1118981",
-  "kind": "interface",
-  "note": "independent Codex review: Matched delivered tensor adjunction and identity/composition proofs with both nodes and upstream declarations; signatures and definitions unchanged, clean compilation, axioms limited to standard axioms plus documented upstream sorryAx; earlier return repaired."
+  "landing": "20261018T145106-L-3642175",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

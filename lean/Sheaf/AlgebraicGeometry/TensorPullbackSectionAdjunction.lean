@@ -6,8 +6,7 @@ Authors: SHEAF group NO
 module
 
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.ChangeOfRingsAdjunction
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TopologicalPullback
+import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 
 /-!
 # The section-normalized tensor-pullback adjunction
@@ -58,7 +57,20 @@ theorem existsUnique_tensorPullbackSectionAdjunction {X Y : Scheme.{u}} (g : X �
     ∃! adj : tensorPullback g ⊣ pushforward g,
       ∀ (M : Y.Modules) (U : Y.Opens) (m : Γ(M, U)),
         (adj.unit.app M).app U m = tensorPullbackSection g M U m := by
-  sorry
+  obtain ⟨adj, hadj⟩ := exists_tensorPullbackAdjunction g
+  have hnormalized (M : Y.Modules) (U : Y.Opens) (m : Γ(M, U)) :
+      (adj.unit.app M).app U m = tensorPullbackSection g M U m := by
+    exact hadj M (op U) m
+  refine ⟨adj, hnormalized, ?_⟩
+  intro other hother
+  apply Adjunction.ext
+  apply NatTrans.ext
+  funext M
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro V
+  ext m
+  exact (hother M V.unop m).trans (hnormalized M V.unop m).symm
 
 /-- Choose the uniquely section-normalized adjunction; only its universal-property proof
 is postponed, while the pullback functor retains the upstream tensor construction.
