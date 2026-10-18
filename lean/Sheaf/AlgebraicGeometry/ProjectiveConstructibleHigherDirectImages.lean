@@ -54,6 +54,41 @@ theorem hasConstructibleHigherDirectImages_of_isProjective
     (hX : IsSmoothBaseChangeCoefficients N Λ X)
     (hS : IsSmoothBaseChangeCoefficients N Λ S) (f : X ⟶ S) [IsProjective f] :
     HasConstructibleHigherDirectImages k N Λ hX hS f := by
-  sorry
+  classical
+  apply hasConstructibleHigherDirectImages_of_projectiveLine k N Λ ?_ hX hS f
+  intro T _ _ _ hP hT q F hF
+  by_cases hTempty : IsEmpty T
+  · let strata : Scheme.Stratification T :=
+      { n := 0
+        stratum := fun i ↦ Fin.elim0 i
+        isLocallyClosed_stratum := fun i ↦ Fin.elim0 i
+        isConstructible_stratum := fun i ↦ Fin.elim0 i
+        iUnion_stratum_eq_univ := by
+          ext t
+          exact isEmptyElim t
+        pairwise_disjoint_stratum := fun i ↦ Fin.elim0 i
+        domain := fun i ↦ Fin.elim0 i
+        immersion := fun i ↦ Fin.elim0 i
+        isImmersion := fun i ↦ Fin.elim0 i
+        range_immersion := fun i ↦ Fin.elim0 i }
+    exact ⟨strata, fun i ↦ Fin.elim0 i⟩
+  · obtain ⟨t⟩ := not_isEmpty_iff.mp hTempty
+    have hNk : (N : k) ≠ 0 := by
+      intro hNkzero
+      have hNTzero : (N : Γ(T, ⊤)) = 0 := by
+        have h := congrArg
+          (((Scheme.ΓSpecIso (.of k)).inv ≫ (T ↘ Spec (.of k)).appTop).hom) hNkzero
+        simpa only [map_natCast, map_zero] using h
+      have hunit := hT.2.2.2.map (T.presheaf.germ ⊤ t trivial).hom
+      have hzero := congrArg (T.presheaf.germ ⊤ t trivial).hom hNTzero
+      rw [map_natCast, map_zero] at hzero
+      rw [map_natCast] at hunit
+      exact hunit.ne_zero hzero
+    have hcoeff : IsSmoothBaseChangeCoefficients N Λ (Spec (.of k)) :=
+      ⟨hT.1, hT.2.1, hT.2.2.1, by
+        simpa only [map_natCast] using
+          hNk.isUnit.map (Scheme.ΓSpecIso (.of k)).inv.hom⟩
+    exact isConstructibleEtaleModuleSheaf_higherDirectImage_projectiveLine
+      k T N Λ hcoeff F hF (q : ℤ)
 
 end AlgebraicGeometry.Etale
