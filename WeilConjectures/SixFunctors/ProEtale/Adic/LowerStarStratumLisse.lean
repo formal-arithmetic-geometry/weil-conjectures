@@ -56,14 +56,17 @@ noncomputable abbrev integersTopology (E : FiniteIntermediateField l) :
   inferInstance
 
 /-- **Semilinearity of integral identifications**: for every weakly étale `p : S ⟶ S₀`, every
-`j : S₀ ⟶ Y` and every isomorphism `θ : C(-, M) ≅ (p ≫ j)^* Rⁱg_* 𝒪_{E,T}` of abelian sheaves, the
-induced maps `ψ_U : C(U, M) → (p^* j^* Rⁱg_* ℚ̄_ℓ,T)(U)` are `C(U, 𝒪_E)`-semilinear. -/
+`j : S₀ ⟶ Y`, every finite `𝒪_E`-module `M` and every isomorphism
+`θ : C(-, M) ≅ (p ≫ j)^* Rⁱg_* 𝒪_{E,T}` of abelian sheaves, `𝒪_E` carrying its `ℓ`-adic topology,
+the induced maps `ψ_U : C(U, M) → (p^* j^* Rⁱg_* ℚ̄_ℓ,T)(U)` are `C(U, 𝒪_E)`-semilinear. -/
 def IntegralLatticeSemilinear {T Y : Scheme.{u}} (g : T ⟶ Y) (i : ℕ)
     (E : FiniteIntermediateField l) : Prop :=
   ∀ ⦃S S₀ : Scheme.{u}⦄ (p : S ⟶ S₀) [WeaklyEtale p] (j : S₀ ⟶ Y) (M : Type) [AddCommGroup M]
     [TopologicalSpace M] [IsTopologicalAddGroup M] [TopologicalSpace (integers l E.1)]
-    [Module (integers l E.1) M] [ContinuousSMul (integers l E.1) M]
+    [IsTopologicalRing (integers l E.1)] [Module (integers l E.1) M]
+    [Module.Finite (integers l E.1) M] [ContinuousSMul (integers l E.1) M]
     (hι : Continuous (algebraMap (integers l E.1) (PadicAlgCl l)))
+    (_ : ‹TopologicalSpace (integers l E.1)› = integersTopology l E)
     (θ : continuousMapAddSheaf S M ⟶ (p ≫ j)^*[Ab.{u + 1}].obj
       (((g)_*[Ab.{u + 1}].rightDerived i).obj
         ((sheafCompose _ (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj (padicIntegersSheaf T l E.1))))
@@ -151,7 +154,7 @@ theorem isAdicLisseSheaf_upperStar_adicRightDerivedLowerStarUnit_of_universalCov
   have hθ (U : (Ũ.cover y).ProEt) [IsAffine U.left] (r : integers l E.1)
       (m : C(U.left, ModuleCat.towerLimit G)) :=
     integralLattice_map_smul_of_surjective g (Ũ.proj y ≫ i ≫ o) k E θ' hsurj U r m
-  have hψι' := hψι (Ũ.proj y) (i ≫ o) (ModuleCat.towerLimit G) hι θ'
+  have hψι' := hψι (Ũ.proj y) (i ≫ o) (ModuleCat.towerLimit G) hι rfl θ'
   exact IsAdicLisseSheaf.of_integralLatticeIdentification E (Ũ.proj y)
     ((AdicAbIdentification.ofUpperStar g k (i ≫ o)).upperStar (Ũ.proj y)) θ' hι hκ
     (algebraMap_integersPadicIntHom l E.1) (fun U _ r m ↦ hθ U r m) hψι'

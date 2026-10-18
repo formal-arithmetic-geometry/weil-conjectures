@@ -64,6 +64,7 @@ public import WeilConjectures.Algebra.Category.ModuleCat.StableImageTower
 public import WeilConjectures.Algebra.Category.ModuleCat.TorSymmetry
 public import WeilConjectures.Algebra.Category.ModuleCat.TowerLimitExactCoordinateMaps
 public import WeilConjectures.Algebra.Category.ModuleCat.TowerLimitFiniteOfExact
+public import WeilConjectures.Algebra.Category.ModuleCat.TowerLimitFiniteOfReduction
 public import WeilConjectures.Algebra.Category.ModuleCat.TowerLimitInducedMaps
 public import WeilConjectures.Algebra.Category.Ring.FilteredColimitsFiniteData
 public import WeilConjectures.Algebra.Central.ReducedNorm
@@ -7292,6 +7293,7 @@ public import WeilConjectures.Mathlib.Topology.Spectral.Prespectral
 public import WeilConjectures.NumberTheory.Padics.Exponential
 public import WeilConjectures.NumberTheory.Padics.Extension
 public import WeilConjectures.NumberTheory.Padics.IntegersAlgebra
+public import WeilConjectures.NumberTheory.Padics.IntegersApproximation
 public import WeilConjectures.NumberTheory.Padics.IntegersFinite
 public import WeilConjectures.NumberTheory.Padics.IntegersMap
 public import WeilConjectures.NumberTheory.Padics.IntegersModPow
@@ -8789,6 +8791,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.Third
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.Transport
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImageReduction
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ExtensionTowerLocallyConstant
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ExtensionTowerStalkLimit
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ExtensionTowerStratification
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteBoundary
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteCancellation
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteComparison
@@ -9119,6 +9124,10 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedOpenImmersion
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedOpenImmersionUnit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedSupport
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ComparisonTowerIdentification
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ComparisonTowerLowerStar
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ComparisonTowerStratum
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ComparisonTowerTopology
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantGlobalSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantModuleTower
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheaf
@@ -9143,6 +9152,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.FreeSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobeniusMate
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GlobalSectionSMul
+public import WeilConjectures.SixFunctors.ProEtale.Adic.GlobalSectionSMulUpperStar
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GlobalSectionsHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Hom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.HomCoherence
@@ -9157,8 +9167,11 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegersSheafStratumIden
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegersSheafStratumTopology
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegralLatticeApproximation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegralLatticeIdentification
+public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegralLatticeIntegrality
+public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegralLatticeKernel
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegralLatticeScalarLinear
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegralLatticeSections
+public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegralLatticeSemilinear
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegralLatticeTensorBijective
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.InternalHomEvaluation
@@ -9166,6 +9179,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.IrreducibleLisse
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IrreducibleLisseQuotients
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LatticeEvaluation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LatticeGeneration
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LatticeLocallyConstant
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LatticeSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseAbelian
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseCover.CocycleLimit
@@ -9212,6 +9226,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarConstantBounded
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarConstantFiniteness
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarConstantFinitenessStratum
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarDevissage
+public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarDevissageRegular
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarFiniteEtaleAlgClosed
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarStratumLisse
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LowerStarStratumLisseComponents
@@ -9237,6 +9252,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.UnitMatrix
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UnitSection
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UniversalCoverTowerLimit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.UpperStar
+public import WeilConjectures.SixFunctors.ProEtale.Adic.WeaklyEtaleLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.AlgClosedFieldSite
 public import WeilConjectures.SixFunctors.ProEtale.AlgClosedFieldSiteColimits
 public import WeilConjectures.SixFunctors.ProEtale.AmbientCounterexample
@@ -9245,6 +9261,7 @@ public import WeilConjectures.SixFunctors.ProEtale.BaseChange.ClosedLocalization
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtale
 public import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtaleDerived
+public import WeilConjectures.SixFunctors.ProEtale.BaseChange.WeaklyEtaleProjection
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.CohomologicalDimension
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.ConstantSheaf
