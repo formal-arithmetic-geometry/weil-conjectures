@@ -366,5 +366,49 @@
   "group": "NQ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NQ-a0130c6cd (reviewer sub-agent of L); spot-checked: I read all of it: the item and its 8 steps, the statement of every cited node, the main-20261015 def-pod-dual-tate-datum text (identical in main-20261017), the sk-thm-sf-internal-hom-pullback proof and Stacks 0GMX. The delivery adds no new nodes. The statement is unchanged and covers the parent's use (perfect K, second variable A_X); perfect means site-perfect by def-pod-perfect-complex-on-x. g_gamma = id x Spec(gamma) is a scheme automorphism that is not k-linear, and every lemma used accepts arbitrary isomorphisms. X is separated of finite type over k, which is what cor-coef-integral-internal-hom needs. Step 1: the integral adjunction is on the full D^b_c(X,O_E), via cor-coef-integral-internal-hom, preserve-constructible (1)-(2) and the completed transpose bijection. Step 2: F is an equivalence; at finite level by the ambient equivalence, at integral level by lambda for g and g^{-1} plus the relabelling clauses (1)-(3). Step 3: I matched the mate data (theta = mu^{-1}, G = G' = F). The mate formula is exactly the transpose of F(ev)mu^{-1}, and the lemma is true by the Yoneda argument. 'Canonical comparison' in thm-trf is by definition this adjoint of Lg^*ev (blueprint proof); the M-tensor-H versus H-tensor-M order is absorbed by mu's symmetry compatibility. Step 4: types and uncurrying check. Step 5: I typed r_n and b_n, with rho_M^{-1} in the contravariant slot. Integral-to-finite Hom reduction allows any first variable; between finite quotients the first variables M_m and F_mM_m are site-perfect; no flatness of A_m to A_n is used. Step 6: rationalization works on all integral pairs, so no site-perfect integral lattice is assumed. Step 7: in the monoidal-square lemma with F = G = T, U_A = F_E, U_B = F_L and h = rho^{-1}, its identity rearranges exactly to b_T T(alpha_E) = alpha_L r_T. Step 8: common-stage classes are well defined by Step 7. Checks: proof_deps equals the union of uses; no cycle (DFS over 13535 nodes); no SGA source; 15 Mathlib searches of all kinds. No duplicate among the DAG's pullback/internal-Hom nodes (lem-pur-isomorphism-inverse-image-tensor-hom, thm-sf-hom-comparison-constructible, lem-pc-perfect-internal-hom-pullback-isIso, lem-weil-pbc-etale-pullback-internal-hom). The route is kept: unit sk-def-weil names this arrow as the '(pullback)' factor. I accept all 12 declared tool_uses as generic interfaces. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.GeometricFrobeniusInternalHomComparison",
+  "declaration": "WeilConjectures.geometricFrobeniusInternalHomComparison",
+  "declarations": [
+   "WeilConjectures.finiteGeometricFrobeniusInternalHomComparison",
+   "WeilConjectures.FrobeniusHomStage",
+   "WeilConjectures.FrobeniusHomStage.pullbackPair",
+   "WeilConjectures.FrobeniusIntegralHomStage",
+   "WeilConjectures.FrobeniusRationalHomStage",
+   "WeilConjectures.FrobeniusIntegralEvaluationNormalized",
+   "WeilConjectures.frobeniusIntegralReductionPullback",
+   "WeilConjectures.frobeniusIntegralReductionHom",
+   "WeilConjectures.FrobeniusHomScalarSquare",
+   "WeilConjectures.FrobeniusFiniteHomLaws",
+   "WeilConjectures.frobeniusToStageEq",
+   "WeilConjectures.frobeniusCommonPullbackBound",
+   "WeilConjectures.frobeniusCommonPullbackAtStage",
+   "WeilConjectures.frobeniusCommonHomBound",
+   "WeilConjectures.frobeniusCommonHomAtStage",
+   "WeilConjectures.frobeniusCommonTensorBound",
+   "WeilConjectures.frobeniusCommonTensorAtStage",
+   "WeilConjectures.frobeniusCommonEvaluationAtStage",
+   "WeilConjectures.frobeniusCommonComparisonAtStage",
+   "WeilConjectures.GeometricFrobeniusInternalHomComparison",
+   "WeilConjectures.geometricFrobeniusInternalHomComparisonType",
+   "WeilConjectures.geometricFrobeniusInternalHomComparison"
+  ],
+  "file": "lean/Sheaf/Paper/GeometricFrobeniusInternalHomComparison.lean",
+  "statement": "theorem geometricFrobeniusInternalHomComparison (D : FiniteFieldDatum.{u}) (X₀ : Over (Spec (CommRingCat.of D.k₀))) [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [IsSeparated X₀.hom] (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] : Nonempty (geometricFrobeniusInternalHomComparisonType D X₀ l hl Ω)",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Repair of returned 061561247376: removed every unconstrained Prop field and the unused hollow stage. Explicit finite comparison and thm-trf identification; actual integral/rational/common-stage comparison isomorphisms, naturality, uniquely normalized evaluation, integral/quotient reduction squares, identity/tower scalar transport and field-independent common-stage representatives. The scheme model has its separatedness hypothesis. Helpers contain actual equality/canonical-comparison data; only the main theorem is postponed. Reviewer fix (cc review, 2026-10-18): removed the fields successive_reductions, integral_scalar_unit, rational_scalar_unit, integral_scalar_tower, rational_scalar_tower and the helpers FrobeniusComparisonUnit/FrobeniusComparisonTower; each was the naturality equation of a natural transformation (proved by `naturality` in a probe), hence content-free. Identity and composite embeddings remain instances of integral_scalar/rational_scalar; successive quotients remain quotient_reduction. Reviewer of 927c3b4f821b (identical re-push after the fcd1b0759 FIX's 60 s landing timeout): module-wide genInjectivity/genSizeOfSpec false and linter.all/unusedVariables false; back to back 31.0 s -> 22.5 s.",
+  "fixed_by": "NT-stage2-cc-927c3b4f8"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-927c3b4f8",
+  "group": "Q49",
+  "result": "fix",
+  "note": "927c3b4f821b is a byte-identical re-push of fcd1b0759 (item .lean sha256 cd531b40…; only coord/blueprint-index.tsv differs). The fcd1b0759 FIX was returned at landing only for a 60 s timeout (land2 batch-20261018-123745), so the group never saw its content. Substance re-read and correct: actual comparison equations with no free Prop fields; recorded integral/rational/common-stage operations; canonical reduction maps; scalar square with rho^-1 in the contravariant slot; thm-trf internalHomPullbackComparison identification; separated X0; only the main theorem is sorry, with the 8-step docstring. FIX 1 (H3/H11): re-applied the fcd1 removal of 5 tautological conjuncts and 2 helpers (FrobeniusComparisonUnit/Tower, successive_reductions, *_scalar_unit/tower); record has 22 declarations, statement verbatim in the file; report has the reviewer section. FIX 2 (mechanical, landing timeout): module-wide genInjectivity/genSizeOfSpec false and linter.all/unusedVariables false, no declaration changed. nt_compile rc=0, no errors or warnings: fixed module 24.1 s at load 100; back to back at load ~72, fcd1 fix without the options 31.0 s vs fixed module 22.5 s. Land the fixes, not the delivered file."
  }
 }

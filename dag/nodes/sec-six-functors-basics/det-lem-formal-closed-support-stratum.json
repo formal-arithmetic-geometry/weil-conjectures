@@ -329,5 +329,32 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClosedSupportStratumHom",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.closedSupport_stratum_globalHom",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.stratumGlobalRHom",
+   "AlgebraicGeometry.ProEtale.CondensedRing.stratumRGamma",
+   "AlgebraicGeometry.ProEtale.CondensedRing.stratumDual",
+   "AlgebraicGeometry.ProEtale.CondensedRing.stratumDualTensor_preservesFiniteLimits",
+   "AlgebraicGeometry.ProEtale.CondensedRing.stratumDualTensor",
+   "AlgebraicGeometry.ProEtale.CondensedRing.stratumDualTensor_derived",
+   "AlgebraicGeometry.ProEtale.CondensedRing.closedSupport_stratum_globalHom"
+  ],
+  "statement": "theorem closedSupport_stratum_globalHom {S Z V X : Scheme.{u}} (i : Z ⟶ X) (j : V ⟶ X) (uS : S ⟶ Z) [IsClosedImmersion i] [IsOpenImmersion j] [QuasiCompact j] [IsOpenImmersion uS] (hij : Set.range i.base = (Set.range j.base)ᶜ) (_hΛ : IsAdmissibleCoefficient Λ) (L : supportModules Λ S) (hL : IsFiniteLocallyProjective Λ S L) : Nonempty (stratumGlobalRHom Λ X ((lowerStar Λ i).obj ((openImmersionLowerShriek Λ uS).obj L)) ≅ (closedSupport Λ i j).rightDerivedFunctor ⋙ stratumGlobalRHom Λ Z ((openImmersionLowerShriek Λ uS).obj L)) ∧ Nonempty ((closedSupport Λ i j).rightDerivedFunctor ⋙ stratumGlobalRHom Λ Z ((openImmersionLowerShriek Λ uS).obj L) ≅ (closedSupport Λ i j).rightDerivedFunctor ⋙ (upperStar Λ uS).mapDerivedCategory ⋙ stratumGlobalRHom Λ S L) ∧ Nonempty ((closedSupport Λ i j).rightDerivedFunctor ⋙ (upperStar Λ uS).mapDerivedCategory ⋙ stratumGlobalRHom Λ S L ≅ (closedSupport Λ i j).rightDerivedFunctor ⋙ (upperStar Λ uS).mapDerivedCategory ⋙ stratumDualTensor Λ S L hL ⋙ stratumRGamma Λ S) ∧ ∀ q : ℤ, Nonempty (shiftFunctor (DerivedCategory (supportModules Λ X)) q ⋙ preadditiveCoyoneda.obj (op ((DerivedCategory.singleFunctor (supportModules Λ X) 0).obj ((lowerStar Λ i).obj ((openImmersionLowerShriek Λ uS).obj L)))) ≅ (closedSupport Λ i j).rightDerivedFunctor ⋙ (upperStar Λ uS).mapDerivedCategory ⋙ stratumDualTensor Λ S L hL ⋙ stratumRGamma Λ S ⋙ DerivedCategory.homologyFunctor Ab.{u + 1} q)",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "This node is marked same_as det-lem-formal-closed-support-stratum-hom. The landed declaration in Sheaf.AlgebraicGeometry.ClosedSupportStratumHom states the same three natural derived-Hom comparisons and the shifted Hom/H^q consequence, with the locally closed factorization a_! = i_*u_! rendered by lowerStar/openImmersionLowerShriek and the dual tensor/global-section helpers. Its quasi-compact open-complement hypothesis is automatic in the standing finite-type situation of det-lem-formal-closed-support-derived."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9cbb9af76",
+  "group": "Q07",
+  "result": "pass",
+  "note": "existing:true attachment of det-lem-formal-closed-support-stratum to Q20's landed closedSupport_stratum_globalHom (same_as sibling -hom, identical statement text). Only the lean field changed; statement, module and declarations byte-identical to the landed -hom record and verbatim to the file. Clause check: arbitrary schemes plus QuasiCompact j, which is automatic for finite type over a field (-derived proof step 1); supportModules = pulledBackModuleObjects by rfl; a_! = lowerStar i ∘ openImmersionLowerShriek uS; IsFiniteLocallyProjective is a local retract of finite free, rank 0 allowed; dual = ihom L 𝟙; RΓ_Z = closedSupport.rightDerivedFunctor (adjunction node, same_as of -derived), canonically ≅ closedModuleSectionsWithSupport; three Nonempty natural isos of functors on D(X) plus ∀ q : ℤ shifted Hom ≅ H^q. Edge cases (empty strata, rank 0, every q, unbounded K) covered. Not hollow, sorry only, docstrings with source and blueprint. nt_compile --json of the live module: 6.5 s, exit 0, clean. Advisory: (A1) IsAdmissibleCoefficient vs IsLocalizingAdmissibleCoefficient differ only at Q̄_ℓ (padicAlgClRingObj vs C(−,Q̄_ℓ)), a duplication between landed records; _hΛ unused; the only citer's Lean assumes no admissibility. (A2) closedSupport/closedModuleSectionsWithSupport landed duplicates. (A3) sibling landed after a Codex fallback, re-read in full here and correct."
  }
 }
