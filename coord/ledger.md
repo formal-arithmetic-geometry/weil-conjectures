@@ -16428,3 +16428,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:24 L: merged deliver/F2/Sheaf.AlgebraicGeometry.ProperOpenInterchangeCoherence (stage 3; reviewer PASS; first push; landing 20261018T112414-L-631734 (interface); batch 20261018T112407; modules 3; new nodes 2; change records: coord/changes/F2-proper-open-interchange-elaboration.md)
 
 - 19:32 L: batch 20261018T112407 dependency take-out
+- 11:56 L: returned deliver/C1/Sheaf.CategoryTheory.RingedCechKoszulDualLimit (reviewer RETURN: (the landing tools, head fddc7dbe2) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Cat)
