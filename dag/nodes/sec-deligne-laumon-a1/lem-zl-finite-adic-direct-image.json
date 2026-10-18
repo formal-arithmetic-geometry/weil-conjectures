@@ -19,9 +19,221 @@
   "def-pc-base-change",
   "def-weil-geometric-point"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work first over $\\mathcal O_E$. Finite-type schemes over $k$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian] and finite-dimensional by [lem-kun-dimension-finite-type], and locally Noetherian by [pqf-lem-locnoeth-lft] (a field is Noetherian since its only ideals are $0,1$), so [pqf-lem-finite-fp-locnoeth] makes $f$ finitely presented. Its base change $h:S=X\\times_Ys\\to s$, $s=\\operatorname{Spec}k$, is finite by [lem-weil-pbc-finite-morphism-permanence], hence also finitely presented. For integral constructible $K$, [lem-sf-integral-direct-image-constructible] supplies all three needed assertions: $Rf_*K$ is integral constructible and derived complete, its canonical finite-reduction maps are isomorphisms, and its finite-level direct images are constructible. The same applies to $h$. By [lem-sf-proetale-constructible-origin], each bounded constructible reduction $K_n$ has etale origin. This last assertion is a theorem about the two sites, not a consequence of the stratification definition alone.",
+   "uses": [
+    "pqf-lem-locnoeth-lft",
+    "pqf-lem-finite-fp-locnoeth",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-sf-integral-direct-image-constructible",
+    "lem-sf-proetale-constructible-origin",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A8 (finite-presentation hypothesis); integral constructibility/reduction input of lem-sf-integral-direct-image-constructible"
+   }
+  },
+  {
+   "text": "Let $F_f$ be module direct image for the completed coefficient ring sheaves, with action through the canonical ring map. [lem-zl-finite-fp-proetale-pushforward-exact] makes $F_f$ exact on ALL module sheaves, and also makes every finite-coefficient direct image exact. By [lem-weil-pbc-exact-functor-derived-functor], the latter derived functors are computed termwise on every complex. Products are sectionwise and exact by [lem-weil-proetale-countable-products-exact]. For any family $M_n$, the product comparison for $F_f$ is the identity\n$$ (F_f\\prod_nM_n)(V)=(\\prod_nM_n)(V\\times_YX)=\\prod_n(F_fM_n)(V). $$\nMoreover $F_f\\operatorname{Res}_nC=\\operatorname{Res}_nf_{*,n}C$ termwise: both evaluate to $C(V\\times_YX)$, with the same action through $\\widehat{\\mathcal O}_{E,Y}\\to(A_{E,n})_Y$. This equality also identifies the quotient transition maps. Thus [lem-cbc-exact-product-functor-strict-limit] applies to $F_f$ on the full completed module categories, with its projection-normalized comparison.",
+   "uses": [
+    "lem-zl-finite-fp-proetale-pushforward-exact",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-cbc-exact-product-functor-strict-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A8, Lemma proetale-lemma-finite; product and strict-limit comparison"
+   }
+  },
+  {
+   "text": "Use the strict reduction tower $K_n=K\\otimes^LA_{E,n}$. The constant/completed coefficient equivalence and its completion-unit assertion [lem-weil-pbc-constant-completion-equivalence] identify the canonical augmentation $K\\to R\\lim_n\\operatorname{Res}_nK_n$ as an isomorphism for these derived-complete objects. Applying Step 2, with the actual quotient maps, gives the natural isomorphisms\n$$F_{f,D}K\\simeq F_{f,D}R\\lim_n\\operatorname{Res}_nK_n\\simeq R\\lim_n\\operatorname{Res}_nf_{*,n}K_n=Rf_*K,$$\nthe last equality being [def-weil-derived-direct-image]. The normalization in [lem-cbc-exact-product-functor-strict-limit] makes this comparison carry $F_f$ of each quotient projection to the corresponding projection defining $Rf_*$. Exactness and [lem-weil-pbc-exact-functor-complex-cohomology] give $\\mathcal H^j(Rf_*K)\\cong F_f\\mathcal H^j(K)$. Therefore this constructible functor preserves both halves of the integral standard pair [def-weil-constructible-standard-tstructure]. No cohomology tower is asserted surjective; derived reductions, including their negative Tor terms, are retained throughout.",
+   "uses": [
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-cbc-exact-product-functor-strict-limit",
+    "def-weil-derived-direct-image",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-constructible-standard-tstructure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Sections 3.5 and 6.8; canonical coefficient completion, together with Stacks 09A8 as used in Step 2"
+   }
+  },
+  {
+   "text": "Write $v:S\\to X$ for the other projection. At a finite level form the usual restriction/exchange map $b_n:\\bar y_n^*f_{*,n}K_n\\to h_{*,n}v_n^*K_n$. For an etale-origin complex it is an isomorphism: [lemma-weil-pbc-finite-exchange] is the etale assertion, [lem-weil-pbc-comparison-pullback] identifies its inverse images, and [lem-weil-pbc-comparison-direct-image-canonical-mate] identifies the direct-image comparison with the actual counit mate, so the transported map is $b_n$ itself. Step 1 supplies etale origin. The same construction for $h$ gives restriction maps\n$$r_n:h_{*,n}v_n^*K_n\\longrightarrow\\bigoplus_{\\bar x\\in P_{\\bar y}}\\bar x_n^*K_n.$$\nThey are isomorphisms by [lemma-weil-pbc-finite-stalk-formula]: apply that formula to $h$ at $\\mathrm{id}_s$, and use [lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant] to identify sheaves on $s_{\\mathrm{et}}$ with their sections/stalks. Transport by the same comparison gives the pro-etale assertion. The abelian and coefficient-module structures follow since the maps preserve addition and scalar multiplication. On the etale side finite direct image is exact, so $Rh_*=h_*$ and $Rf_*=f_*$ on bounded below complexes [lemma-weil-pbc-finite-direct-image-exact]; on the pro-etale side exactness is Step 2. Hence all derived maps here are computed termwise, and the sheaf assertions apply termwise to complexes.",
+   "uses": [
+    "lemma-weil-pbc-finite-exchange",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+    "lemma-weil-pbc-finite-direct-image-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0959 (finite-pushforward-commutes-with-base-change) and 03QP (finite-higher-direct-image-zero); comparison normalization of the cited canonical-mate node"
+   }
+  },
+  {
+   "text": "The maps of Step 4 define maps of the coefficient towers, not merely unrelated isomorphisms at each level. Choose a K-flat representative $P$ of $K$ with flat terms, and its strict quotients $P_n$. Since finite pullback and finite pushforward are exact, their termwise composites compute the displayed derived functors. Define $b_n$ by pullback of the direct-image counit. For a geometric lift $i_{\\bar x}:s\\to S$, the component of $r_n$ is $i_{\\bar x,n}^*$ of the counit $h_n^*h_{*,n}v_n^*P_n\\to v_n^*P_n$, using $hi_{\\bar x}=\\mathrm{id}_s$. Restricting a local section and then applying $A_{E,n+1}\\to A_{E,n}$ gives the same section as applying that coefficient map and then restricting. Thus each component commutes with $P_{n+1}\\to P_n$, and the square for $b_n$ does too. These equalities hold before localization to derived categories and provide strict tower maps. The finite-level identifications in Step 4 show that their evaluations are quasi-isomorphisms. Derived inverse limit, an exact functor on strict tower derived categories by [lem-weil-pbc-ringed-strict-tower-homotopy-limit], consequently sends these tower maps to isomorphisms.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-zl-finite-pushforward.proof.md",
+    "place": "Explicit restriction/counit maps and quotient compatibility needed for the finite-stalk paragraph"
+   }
+  },
+  {
+   "text": "Reconstruct the first two towers over $s$, without interchanging point pullback with an arbitrary inverse limit. By [def-pur-integral-derived-operations], $L\\bar y^*Rf_*K$ is defined by $R\\lim_n\\bar y_n^*((Rf_*K)\\otimes^LA_{E,n})$. Replace the reductions by $Rf_{*,n}K_n=f_{*,n}K_n$ using the canonical comparison in [lem-sf-integral-direct-image-constructible]. On the other side, [lem-pur-integral-operations-preserve-constructible](1) gives $Lv^*K\\in D^b_c(S,\\mathcal O_E)$ with canonical reductions $v_n^*K_n$. Hence [def-weil-derived-direct-image] defines $Rh_*Lv^*K$ by $R\\lim_n h_{*,n}v_n^*K_n$. The first tower is carried to the second by exactly the $b_n$ of Step 5, with their specified projections. Taking its derived inverse limit gives a natural isomorphism\n$$b_K:L\\bar y^*Rf_*K\\xrightarrow{\\sim}Rh_*Lv^*K.$$\nThis constructs the missing finite-fibre cohomology comparison separately from the stalk-to-product formula. These tower replacements use the counit $\\mathcal R_W\\mathcal L_WN\\to N$ of [lem-coef-derived-system-evaluation-calculus]: take $N=(f_{*,n}K_n)$ on $Y$, $N=(v_n^*K_n)$ on $S$, and $N=(h_{*,n}v_n^*K_n)$ on $s$. Its components are the adjoints of the actual limit projections, exactly the canonical finite-reduction comparisons just used. The cited constructibility/reduction theorems make all these evaluations invertible, so the system counits are invertible by the same calculus. This justifies replacement in the derived system category, including transition compatibility.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "lem-sf-integral-direct-image-constructible",
+    "lem-pur-integral-operations-preserve-constructible",
+    "def-weil-derived-direct-image",
+    "lem-coef-derived-system-evaluation-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-zl-finite-pushforward.proof.md",
+    "place": "The finite geometric-stalk comparison, realized through canonical reduction towers"
+   }
+  },
+  {
+   "text": "The second tower map of Step 5 gives\n$$Rh_*Lv^*K\\xrightarrow{\\sim}R\\lim_n\\bigoplus_{\\bar x\\in P_{\\bar y}}\\operatorname{Res}_n\\bar x_n^*K_n\\cong\\bigoplus_{\\bar x\\in P_{\\bar y}}L\\bar x^*K.$$\nFor the last equality use the definition of integral pullback [def-pur-integral-derived-operations]. The interchange here is only a FINITE sum with a derived limit: in the strict Roos model [lem-weil-pbc-ringed-strict-tower-homotopy-limit], reindex $\\prod_n\\prod_{\\bar x}$ as $\\prod_{\\bar x}\\prod_n$; it carries $1-s$ to the product of the corresponding $1-s$ maps, so their shifted cones agree. Finite products are biproducts. This also proves the assertion for an empty fibre, when both sides are zero. Thus both isomorphisms are now constructed in the completed derived category over $s$. No application of $\\operatorname{Fib}_s$ to a limit comparison is being assumed.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QP applied levelwise to h, followed by the finite biproduct/Roos calculation"
+   }
+  },
+  {
+   "text": "Identify the coefficient categories before rationalizing. On our noetherian finite-dimensional schemes, [lem-weil-pbc-integral-stratified-perfect-characterization] identifies [def-weil-derived-complete-integral-detailed] with [def-weil-pbc-bounded-constructible-complete], including the same ring sheaves and reduction functors. Both [def-weil-rationalization-karoubi] and [def-weil-pbc-rational-category] are therefore the SAME raw localization: identical objects and $\\operatorname{Hom}(K,L)\\otimes_{\\mathcal O_E}E$, with no Karoubi completion. Apply [prop-weil-pbc-rational-transport] to localize the $\\mathcal O_E$-linear functor of Step 3 and the two natural isomorphisms of Steps 6--7. This is exactly the $E$-coefficient direct image prescribed by [def-weil-derived-direct-image]. The standard pair is defined by integral representatives, and [prop-weil-localized-tstructure] says localization is t-exact and every rational heart object has an integral heart representative. Hence $Rf_*$ is t-exact at $E$. Its heart restriction is exact because a short exact sequence is a triangle in the heart [lem-weil-heart-short-exact-triangles]. The uniqueness of truncation comparisons [lem-pod-texact-truncation-comparison] gives the natural isomorphisms $\\mathcal H^jRf_*\\cong f_*^c\\mathcal H^j$.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-pbc-bounded-constructible-complete",
+    "def-weil-rationalization-karoubi",
+    "def-weil-pbc-rational-category",
+    "def-weil-derived-direct-image",
+    "prop-weil-localized-tstructure",
+    "lem-weil-heart-short-exact-triangles",
+    "lem-pod-texact-truncation-comparison",
+    "prop-weil-pbc-rational-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(2); identification of the two raw rationalizations and their localized standard t-structures"
+   }
+  },
+  {
+   "text": "For a rational heart object $\\mathcal F$, apply the termwise exact sections functor on $s_{\\mathrm{proet}}$ [lem-weil-point-proetale-sections-exact] to the localized isomorphisms of Steps 6--7, and take $H^0$. Its rational version is precisely $\\operatorname{Fib}_s$ [def-weil-finite-coefficient-point]. By [lem-a1-constructible-pullback-t-exact], $L\\bar y^*Rf_*\\mathcal F$, $Lv^*\\mathcal F$, and $L\\bar x^*\\mathcal F$ have the heart interpretations used in the statement. The definition [def-weil-ordinary-compact-cohomology] identifies the middle $H^0$ with $H^0(S,\\mathcal F_S)$, while [def-weil-local-frobenius-trace] interprets the outer $H^0$ point complexes as coefficient stalks. Exact additive sections preserve the finite biproduct, yielding\n$$(f_*^c\\mathcal F)_{\\bar y}\\xrightarrow{\\sim}H^0(S,\\mathcal F_S)\\xrightarrow{\\sim}\\bigoplus_{\\bar x\\in P_{\\bar y}}\\mathcal F_{\\bar x}.$$\nThese are the restriction maps constructed above, and are $E$-linear.",
+   "uses": [
+    "lem-weil-point-proetale-sections-exact",
+    "def-weil-finite-coefficient-point",
+    "lem-a1-constructible-pullback-t-exact",
+    "def-weil-ordinary-compact-cohomology",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-zl-finite-pushforward.proof.md",
+    "place": "Restriction maps, the middle finite-fibre cohomology group, and the point-fibre convention in the parent stalk paragraph"
+   }
+  },
+  {
+   "text": "For $E\\subset L$, use the identification of categories in Step 8. The coherent comparison [prop-weil-pbc-scalar-extension] applies: our schemes are noetherian finite-dimensional with $\\ell$ invertible, and the operations preserve the constructible categories by Steps 1 and 6. Its integral ordinary direct image agrees with our tower direct image by Steps 2--3. Pullback commutes with integral scalar extension by [lem-pur-integral-operations-scalar-extension], and sections do so by [lem-weil-point-sections-scalar-extension]. On the finite quotients all components of $b_n,r_n$ send a section to its restrictions; coefficient extension sends $a\\otimes m$ to $a\\otimes m|_{\\bar x}$. Thus the coefficient comparisons identify the actual restriction maps, not only their sources and targets. Taking their strict derived limits and localizing proves compatibility with scalar extension. By [def-weil-algebraically-closed-coefficients], objects, morphisms, triangles and equalities at $\\Qlb$ are represented over a common finite extension. All the assertions, including t-exactness from the stagewise standard pair [def-weil-constructible-standard-tstructure], therefore hold over $\\Qlb$ independently of the chosen stage.",
+   "uses": [
+    "prop-weil-pbc-scalar-extension",
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-weil-point-sections-scalar-extension",
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-constructible-standard-tstructure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(1), Remark 6.8.15; coherent coefficient comparison for the actual restriction maps"
+   }
+  },
+  {
+   "text": "Finally, an isomorphism of finite-morphism diagrams takes a local section and its restriction at a geometric lift to the transported section and its restriction at the corresponding lift. Thus each component $r_{n,\\bar x}$ is taken to $r_{n,\\bar x'}$, where $\\bar x'$ is the transported point; the counit description of $b_n$ gives the same equality for $b_n$. These are equalities on the strict quotient models of Step 5. Isomorphisms induce exact equivalences of the sheaf categories, hence identify the products, transition maps and cones in those models. The pullback composition comparisons [lem-pod-integral-pullback-composition] identify the corresponding integral point complexes with precisely those finite-level composition maps. Applying sections, rationalization, and the common-stage construction preserves these equalities. This includes a diagram isomorphism semilinear over any automorphism of $k$: the coefficient ring is unchanged, and its only action on the finite index set is the indicated permutation, with the induced point/stalk transports on each summand. Naturality in sheaf morphisms follows from the same restriction equality $u(m|_{\\bar x})=u(m)|_{\\bar x}$.",
+   "uses": [
+    "lem-pod-integral-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-zl-finite-pushforward.proof.md",
+    "place": "Naturality of the restriction-of-germs construction under diagram isomorphisms, including semilinear isomorphisms"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-integral-derived-operations",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-constructible-standard-tstructure",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-direct-image",
+  "def-weil-finite-coefficient-point",
+  "def-weil-local-frobenius-trace",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-rational-category",
+  "def-weil-rationalization-karoubi",
+  "lem-a1-constructible-pullback-t-exact",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-kun-dimension-finite-type",
+  "lem-pod-integral-pullback-composition",
+  "lem-pod-texact-truncation-comparison",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-sf-proetale-constructible-origin",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-point-sections-scalar-extension",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-zl-finite-fp-proetale-pushforward-exact",
+  "lemma-weil-pbc-finite-exchange",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "pqf-lem-finite-fp-locnoeth",
+  "pqf-lem-locnoeth-lft",
+  "prop-weil-localized-tstructure",
+  "prop-weil-pbc-rational-transport",
+  "prop-weil-pbc-scalar-extension",
+  "lemma-weil-pbc-finite-direct-image-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-zl-finite-pushforward.proof.md",
+  "place": "Finite direct-image exactness and the two finite geometric-fibre restriction maps, repaired using Stacks 09A8, 03QP, 0959 and the existing canonical completed-coefficient interfaces."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,10 +276,38 @@
    "results": "Hits: Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean. Scheme structure-sheaf stalks, finite fibres, algebraic adic completion and the abstract derived functor of an already exact functor do not assert exactness or the stalk formula for constructible rational adic direct image. The ElladicCohomology file defines coefficients and cohomology, not this finite direct-image theorem.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite morphism direct image exact on constructible sheaves with finite adic coefficients and geometric stalks are finite products",
+   "results": "Hits: AlgebraicGeometry.IsFinite.finite_app; AlgebraicGeometry.IsFinite.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite; AlgebraicGeometry.Scheme.Hom.finite_app; AlgebraicGeometry.LocallyQuasiFinite; AlgebraicGeometry.Scheme.Hom.isConstructible_image; Condensed.instAB5CondensedMod; no theorem about adic constructible direct-image exactness or stalk formula.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale.lowerStarSheafFiberIsoPi, AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isFinite",
+   "results": "No hits; loogle reported unknown identifier AlgebraicGeometry.Etale.lowerStarSheafFiberIsoPi.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerStarSheafFiberIsoPi|preservesFiniteColimits_lowerStar_of_isFinite [subdirectory AlgebraicGeometry]",
+   "results": "No hits in the Mathlib AlgebraicGeometry source; these declarations are project-specific, not Mathlib declarations.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite direct image of an adic constructible sheaf is exact and its geometric stalk is a finite product of source stalks",
+   "results": "Hits: CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback; CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits; AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite; CategoryTheory.Sheaf.instHasFiniteProducts; no adic direct-image theorem.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-finite-pushforward",
@@ -79,10 +319,159 @@
  "blueprint": {
   "from": {
    "node": "lem-zl-finite-pushforward",
-   "place": "Proof, first sentence: 'g_* is exact ... hence H^j(Rg_*K)=g_*H^j(K)', and 'use the finite stalk formula': supply their rational adic coefficient versions and the natural restriction maps.",
+   "place": "Proof paragraph beginning “By [lem-zl-finite-adic-direct-image], Rg_* is t-exact ...”: finite-level exactness, the cohomology-sheaf identification, and the finite geometric-stalk formula used to push the Weil filtration.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-finite-adic-direct-image",
+  "worker": "stage1",
+  "summary": "Repair: replaced the false surjective derived-reduction argument with whole-category pro-etale exactness (new statement-only Stacks 09A8 node) and the normalized exact-functor/strict-limit comparison. Used the existing integral constructibility and finite-reduction theorem. Constructed both geometric-fibre isomorphisms from strict finite-level restriction/counit maps and completed pullback definitions before applying point sections. Identified the two integral and raw rational coefficient categories before scalar extension. Kept the statement unchanged; removed unused finite-coefficient projection and surjective-tower citations and all control characters.",
+  "blueprint": "Realizes the parent lem-zl-finite-pushforward paragraph invoking t-exactness, H^j(Rg_*K)=g_*H^j(K), and the finite geometric-stalk formula, with the middle finite-fibre cohomology term and diagram naturality made explicit.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-exact-product-functor-strict-limit",
+    "why": "Generic Canonical strict derived-limit comparison for exact product-preserving module functors: used with exactly its stated hypotheses in Steps 2, 3; the affine-line weight unit has no replacement for this coefficient, site, or category-theoretic input."
+   },
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Generic Coherent derived reduction, limit adjunction and fiberwise evaluation: used with exactly its stated hypotheses in Steps 6; the affine-line weight unit has no replacement for this coefficient, site, or category-theoretic input."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic Finiteness of the dimension of a finite type scheme: used with exactly its stated hypotheses in Steps 1; the affine-line weight unit has no replacement for this coefficient, site, or category-theoretic input."
+   },
+   {
+    "node": "lem-pod-integral-pullback-composition",
+    "why": "Generic Composition isomorphism for integral derived pullbacks: used with exactly its stated hypotheses in Steps 11; the affine-line weight unit has no replacement for this coefficient, site, or category-theoretic input."
+   },
+   {
+    "node": "lem-pod-texact-truncation-comparison",
+    "why": "Generic Canonical truncation comparisons for t-exact triangulated functors: used with exactly its stated hypotheses in Steps 8; the affine-line weight unit has no replacement for this coefficient, site, or category-theoretic input."
+   },
+   {
+    "node": "lem-pur-integral-operations-preserve-constructible",
+    "why": "Generic Integral pullback and completed tensor product preserve constructibility: used with exactly its stated hypotheses in Steps 6; the affine-line weight unit has no replacement for this coefficient, site, or category-theoretic input."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Generic Integral derived operations commute with finite scalar extension: used with exactly its stated hypotheses in Steps 10; the affine-line weight unit has no replacement for this coefficient, site, or category-theoretic input."
+   },
+   {
+    "node": "lem-sf-integral-direct-image-constructible",
+    "why": "Generic The integral derived direct image of a constructible complex along a finite-type morphism is constructible: used with exactly its stated hypotheses in Steps 1, 6; the affine-line weight unit has no replacement for this coefficient, site, or category-theoretic input."
+   },
+   {
+    "node": "lem-sf-proetale-constructible-origin",
+    "why": "Generic Constructible pro-étale coefficients are of étale origin: used with exactly its stated hypotheses in Steps 1; the affine-line weight unit has no replacement for this coefficient, site, or category-theoretic input."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Generic Short exact sequences in the heart are triangles: used with exactly its stated hypotheses in Steps 8; the affine-line weight unit has no replacement for this coefficient, site, or category-theoretic input."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Generic Canonical derived direct-image comparison is the invertible counit mate: used with exactly its stated hypotheses in Steps 4; the affine-line weight unit has no replacement for this coefficient, site, or category-theoretic input."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic Comparison inverse image commutes with scheme pullback: used with exactly its stated hypotheses in Steps 4; the affine-line weight unit has no replacement for this coefficient, site, or category-theoretic input."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Generic Constant-to-completed coefficients on derived-complete categories: used with exactly its stated hypotheses in Steps 3; the affine-line weight unit has no replacement for this coefficient, site, or category-theoretic input."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic The functor induced by an exact functor is its own right and left derived functor: used with exactly its stated hypotheses in Steps 2; the affine-line weight unit has no replacement for this coefficient, site, or category-theoretic input."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Generic Stratified perfect description of the integral completed category: used with exactly its stated hypotheses in Steps 8; the affine-line weight unit has no replacement for this coefficient, site, or category-theoretic input."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic Strict tower homotopy limit: used with exactly its stated hypotheses in Steps 5, 7; the affine-line weight unit has no replacement for this coefficient, site, or category-theoretic input."
+   },
+   {
+    "node": "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+    "why": "Generic Etale sheaves over an algebraically closed field are constant: used with exactly its stated hypotheses in Steps 4; the affine-line weight unit has no replacement for this coefficient, site, or category-theoretic input."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Generic Sections over an algebraically closed point are exact on the pro-etale site: used with exactly its stated hypotheses in Steps 9; the affine-line weight unit has no replacement for this coefficient, site, or category-theoretic input."
+   },
+   {
+    "node": "lem-weil-point-sections-scalar-extension",
+    "why": "Generic Sections over the point commute with scalar extension: used with exactly its stated hypotheses in Steps 10; the affine-line weight unit has no replacement for this coefficient, site, or category-theoretic input."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic Countable products of pro-etale modules are exact: used with exactly its stated hypotheses in Steps 2; the affine-line weight unit has no replacement for this coefficient, site, or category-theoretic input."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-exchange",
+    "why": "Generic Finite exchange isomorphism: used with exactly its stated hypotheses in Steps 4; the affine-line weight unit has no replacement for this coefficient, site, or category-theoretic input."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-stalk-formula",
+    "why": "Generic Geometric stalk formula for finite direct image: used with exactly its stated hypotheses in Steps 4; the affine-line weight unit has no replacement for this coefficient, site, or category-theoretic input."
+   },
+   {
+    "node": "pqf-lem-finite-fp-locnoeth",
+    "why": "Generic Finite over a locally Noetherian base is finitely presented: used with exactly its stated hypotheses in Steps 1; the affine-line weight unit has no replacement for this coefficient, site, or category-theoretic input."
+   },
+   {
+    "node": "prop-weil-localized-tstructure",
+    "why": "Generic The rational t-structure: used with exactly its stated hypotheses in Steps 8; the affine-line weight unit has no replacement for this coefficient, site, or category-theoretic input."
+   },
+   {
+    "node": "prop-weil-pbc-rational-transport",
+    "why": "Generic Functorial transport to a finite field: used with exactly its stated hypotheses in Steps 8; the affine-line weight unit has no replacement for this coefficient, site, or category-theoretic input."
+   },
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Generic Compatibility with finite scalar extension: used with exactly its stated hypotheses in Steps 10; the affine-line weight unit has no replacement for this coefficient, site, or category-theoretic input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-kun-dimension-finite-type",
+  "lem-pod-integral-pullback-composition",
+  "lem-pod-texact-truncation-comparison",
+  "lem-pur-integral-operations-preserve-constructible",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-sf-proetale-constructible-origin",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-point-sections-scalar-extension",
+  "lem-weil-proetale-countable-products-exact",
+  "lemma-weil-pbc-finite-exchange",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "pqf-lem-finite-fp-locnoeth",
+  "prop-weil-localized-tstructure",
+  "prop-weil-pbc-rational-transport",
+  "prop-weil-pbc-scalar-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-8f63f603b",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-8f63f603b (reviewer sub-agent of L); spot-checked: I read the item, its new node, all 43 cited statements, Stacks 09A8 (proetale.tex lemma-finite, with its proof), Bhatt-Scholze Lemma 6.7.2, Prop 6.8.14 and Rem 6.8.15, and the parent blueprint proof lem-zl-finite-pushforward. The new node lem-zl-finite-fp-proetale-pushforward-exact states 09A8 faithfully and keeps the finite-presentation hypothesis. The site matches (weakly etale objects), and the module clause follows by forgetting the module structure. It is not a duplicate: rg for 09A8 and a scan of every statement mentioning finite pro-etale exact pushforward found only special cases (lem-exc-proetale-closed-exact, and the etale-only 03QP node). It is strictly smaller than the item. Steps 1-11 check against the cited statements. Step 1: Noetherian, finite-dimensional and finite presentation are cited, and etale origin comes from origin lemma (ii). Steps 2-3: the hypotheses of lem-cbc-exact-product-functor-strict-limit hold for the completed ring sheaves. Combined with the completion unit, this gives Rf_* = F_{f,D}, and hence H^j for the integral standard pair, with no surjective tower assumed. Tested on id of Spec k with O_E/varpi. Steps 4-7: strict tower maps built from counit and restriction, and only a finite sum passes through Rlim. Step 8: the raw localizations are identified and the rational category gets a bounded t-structure. Steps 9-11: tested on f=id, an empty fibre, Spec k[e]->Spec k, and two points over k. FIX (C1): Step 4 applies the etale stalk formula and exchange termwise to etale complexes. That needs etale finite exactness (Stacks 03QP), which the step names in its source but cites through no node. I added lemma-weil-pbc-finite-direct-image-exact (the parent's own route node) to Step 4 uses and proof_deps and rewrote its last sentence. Batch-5 check: I accept all three listed citations. lem-pod-integral-pullback-composition was created for, and is cited by, def-weil-local-frobenius-trace, which is a stmt_dep of the item. lem-pod-texact-truncation-comparison is an abstract triangulated-category lemma in the closure of def-weil-constructible-heart, also a stmt_dep. lem-a1-constructible-pullback-t-exact is in the item's own unit and reaches sec-poincare-duality only through those two. None is given by the trace-formula or Poincare-duality assumption, and none is a step of either proof. No SGA source is cited. I accept the split_report tool_uses.; 1 file(s) fixed by the reviewer"
  }
 }
