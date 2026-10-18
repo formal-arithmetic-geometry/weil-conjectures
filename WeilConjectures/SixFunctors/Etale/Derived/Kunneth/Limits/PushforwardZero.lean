@@ -209,7 +209,7 @@ lemma homotopyUnit_comp_transition {α β : LimitStage B W} (φ : Hom α β)
     (((β.π)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusFactorsh.app
       (((β.g)_*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj
         (((β.w)^*[ModuleCat.{u + 1} Λ]).mapHomotopyCategoryPlus.obj K))) _ hπ0
-  simp only [Iso.app_inv, Iso.app_hom] at hπ
+  simp only [Iso.app_inv] at hπ
   -- naturality of the composition isomorphism of the bases
   have n1 := (upperStarCompDerivedPlus (ModuleCat.{u + 1} Λ) α.π φ.s β.π φ.wπ.symm).hom.naturality
     (((β.g)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusUnit.app

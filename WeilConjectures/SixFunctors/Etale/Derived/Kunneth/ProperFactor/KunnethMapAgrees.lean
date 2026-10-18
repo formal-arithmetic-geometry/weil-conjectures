@@ -112,6 +112,7 @@ lemma leftDerivedUpperStarTensorComparison_comp_derivedTensor {T S R : Scheme.{u
   rw [MonoidalCategory.tensorHom_def] at this
   exact this
 
+omit [Etale.UpperStarPreservesFlat A] in
 /-- The composite `L(a ≫ b)^* ≅ ... ≅ L(a' ≫ b')^*` of two composition isomorphisms through a
 common composite `c = a ≫ b = a' ≫ b'` does not depend on the choice of the morphism `c`. -/
 @[reassoc]
@@ -140,6 +141,7 @@ lemma leftDerivedUpperStar_map_braiding_hom_comp_tensorComparison {T R : Scheme.
 
 variable [HasSmallSiteSheafify A]
 
+omit [HasSmallSiteSheafify A] in
 /-- The base change map for a pushforward tensored with a complex
 (`AlgebraicGeometry.Etale.tensorBaseChangeMap`) of a commutative square `q ≫ a_X = r ≫ a_Y` is
 the composite

@@ -60,11 +60,13 @@ def IsRightAcyclic (M : C) : Prop :=
 
 variable {F}
 
+omit [EnoughInjectives C] in
 lemma IsRightAcyclic.of_iso {M M' : C} (e : M ≅ M') (h : F.IsRightAcyclic M') :
     F.IsRightAcyclic M := fun p hp ↦
   (h p hp).of_iso ((DerivedCategory.homologyFunctor D p).mapIso
     (F.rightDerivedFunctor.mapIso ((DerivedCategory.singleFunctor C 0).mapIso e)))
 
+omit [EnoughInjectives C] in
 lemma IsRightAcyclic.of_isZero {M : C} (hM : IsZero M) : F.IsRightAcyclic M := fun p _ ↦
   (DerivedCategory.homologyFunctor D p).map_isZero
     (F.isZero_rightDerivedFunctor_obj ((DerivedCategory.singleFunctor C 0).map_isZero hM))

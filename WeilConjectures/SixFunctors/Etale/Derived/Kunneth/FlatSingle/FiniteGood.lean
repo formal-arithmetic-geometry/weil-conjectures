@@ -51,6 +51,7 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
+omit [Finite Λ] in
 /-- The invertibility of the base change map does not depend on the way the horizontal maps are
 written. -/
 lemma isIso_tensorBaseChangeMap_congr {X' S' T Y : Scheme.{u}} (h : Y ⟶ X') {e e₀ : Y ⟶ T}
@@ -96,6 +97,7 @@ lemma isIso_tensorBaseChangeMap_degenerate_iff_kunnethMap {X' Y : Scheme.{u}} (h
   exact Iff.rfl
 
 set_option maxHeartbeats 0 in
+-- the derived-category computation unfolds large terms
 /-- The Künneth map `Rπ'_* Λ ⊗ᴸ Rh_* K ⟶ Rc_* (Lhᵢ^* Λ ⊗ᴸ Lρ^* K)` of a commutative square
 `hᵢ ≫ π' = ρ ≫ h = c` with `π'` proper is an isomorphism if the derived base change map
 `Lπ'^* Rh_* K ⟶ Rhᵢ_* Lρ^* K` is. -/

@@ -67,7 +67,7 @@ lemma smul_id_cokernel_kernel_smulLift {C : Type*} [Category C] [Abelian C] [Lin
   have hl : (x • 𝟙 F) ≫ smulLift I F = 0 := by
     ext y
     simp only [smulLift, biproduct.lift_π, zero_comp, Linear.smul_comp,
-      Category.id_comp, Linear.comp_smul, Category.comp_id, smul_smul]
+      Category.id_comp, smul_smul]
     exact hF _ (by rw [pow_succ]; exact Ideal.mul_mem_mul hx y.2)
   rw [← cancel_epi (cokernel.π (kernel.ι (smulLift I F))), comp_zero, Linear.comp_smul,
     Category.comp_id, ← Category.id_comp (cokernel.π _), ← Linear.smul_comp,

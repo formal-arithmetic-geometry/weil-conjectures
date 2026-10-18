@@ -105,6 +105,7 @@ end DerivedCategory
 
 variable {A}
 
+omit [Abelian.HasFunctorialFlatResolution A] in
 /-- Blueprint `lem-kun-kflat-criteria`: K-flat criteria for complexes of étale sheaves.
 
 1. Every bounded above complex of flat sheaves is K-flat.
@@ -156,6 +157,7 @@ lemma exists_quasiIso_flat_kFlat [Etale.UpperStarPreservesFlat A] {X : Scheme.{u
         (((g)^*[A].mapHomologicalComplex (.up ℤ)).obj K) :=
   exists_quasiIso_flat_kFlat_upperStar A G
 
+omit [Abelian.HasFunctorialFlatResolution A] in
 /-- Blueprint `lem-kun-tor-cokernel-flat`: let `𝓚•` be a complex of flat étale sheaves such that
 `H^n(𝓚• ⊗ 𝓜) = 0` for every sheaf `𝓜` and every `n < a`. Then the cokernel
 `𝓝 = coker(𝓚^{a-1} ⟶ 𝓚^a)` (the opcycles of `𝓚•` in degree `a`) is flat. Only the vanishing

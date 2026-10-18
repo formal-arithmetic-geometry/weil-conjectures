@@ -319,6 +319,7 @@ attribute [local instance 10000] Abelian.toPreadditive SymmetricCategory.toBraid
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
+omit [Finite Λ] in
 /-- Tensoring with a sheaf killed by `x` kills the multiplication by `x`. -/
 lemma whiskerRight_smul_id_eq_zero {Z : Scheme.{u}}
     (B H : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) {x : Λ} (hH : x • 𝟙 H = 0) :
@@ -326,6 +327,7 @@ lemma whiskerRight_smul_id_eq_zero {Z : Scheme.{u}}
   rw [MonoidalLinear.smul_whiskerRight, id_whiskerRight, ← MonoidalCategory.whiskerLeft_id,
     ← MonoidalLinear.whiskerLeft_smul, hH, MonoidalPreadditive.whiskerLeft_zero]
 
+omit [Finite Λ] in
 /-- A functor `Λ`-linear on morphisms kills the multiplications by elements killing an object. -/
 lemma map_smul_id_eq_zero {C D : Type*} [Category C] [Category D] [Preadditive C]
     [Preadditive D] [Linear Λ C] [Linear Λ D] (F : C ⥤ D) [F.Additive] [F.Linear Λ] {A : C}

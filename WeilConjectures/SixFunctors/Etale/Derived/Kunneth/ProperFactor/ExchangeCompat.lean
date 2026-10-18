@@ -52,10 +52,12 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 variable {S X Y U W V : Scheme.{u}}
 
+omit [HasSmallSiteSheafify A] in
 /-- The transpose of the Künneth map `κ_{E,K}` along `Lc^* ⊣ Rc_*`, written with the tensor
 comparison of `Lc^*`: it is
 `Lc^*(Rf_* E ⊗ᴸ Rg_* K) ⟶ Lc^* Rf_* E ⊗ᴸ Lc^* Rg_* K ⟶ Lp^* E ⊗ᴸ Lq^* K`, the second map being
-`Lc^* Rf_* E ≅ Lp^* Lf^* Rf_* E ⟶ Lp^* E` tensored with `Lc^* Rg_* K ≅ Lq^* Lg^* Rg_* K ⟶ Lq^* K`. -/
+`Lc^* Rf_* E ≅ Lp^* Lf^* Rf_* E ⟶ Lp^* E` tensored with
+`Lc^* Rg_* K ≅ Lq^* Lg^* Rg_* K ⟶ Lq^* K`. -/
 @[reassoc]
 lemma map_kunnethMap_comp_counit (p : W ⟶ X) (q : W ⟶ Y) (f : X ⟶ S) (g : Y ⟶ S) (c : W ⟶ S)
     (hp : p ≫ f = c) (hq : q ≫ g = c)
@@ -68,7 +70,8 @@ lemma map_kunnethMap_comp_counit (p : W ⟶ X) (q : W ⟶ Y) (f : X ⟶ S) (g : 
           L((p)^*[A]).map ((derivedUpperStarLowerStarAdjunction A f).counit.app E))).app _ ≫
         ((-⊗ᴸ-(W)[A]).obj _).map ((leftDerivedUpperStarComp A q g c hq.symm).hom.app _ ≫
           L((q)^*[A]).map ((derivedUpperStarLowerStarAdjunction A g).counit.app K)) := by
-  refine ((derivedUpperStarLowerStarAdjunction A c).homEquiv_counit (g := kunnethMap A p q f g c hp hq E K)).symm.trans ?_
+  refine ((derivedUpperStarLowerStarAdjunction A c).homEquiv_counit
+    (g := kunnethMap A p q f g c hp hq E K)).symm.trans ?_
   rw [kunnethMap, Equiv.symm_apply_apply,
     ← leftDerivedUpperStarTensorComparison_comp_derivedTensor_assoc A p f c hp.symm]
   congr 1
@@ -77,6 +80,7 @@ lemma map_kunnethMap_comp_counit (p : W ⟶ X) (q : W ⟶ Y) (f : X ⟶ S) (g : 
   rw [whisker_exchange_assoc, ← MonoidalCategory.whiskerLeft_comp_assoc, Iso.hom_inv_id_app,
     MonoidalCategory.whiskerLeft_id, Category.id_comp]
 
+omit [Etale.UpperStarPreservesFlat A] [HasSmallSiteSheafify A] in
 /-- The counit `Lr'^* Ra_{Y*} K ≅ Lc'^* Ra_{Y*} K ⟶ ...` of a composite `r' = h ≫ r`: the map
 `Lc'^* Ra_{Y*} K ≅ Lr'^* La_Y^* Ra_{Y*} K ⟶ Lr'^* K` agrees with
 `Lc'^* Ra_{Y*} K ≅ Lh^* Lc^* Ra_{Y*} K ≅ Lh^* Lr^* La_Y^* Ra_{Y*} K ⟶ Lh^* Lr^* K ≅ Lr'^* K`. -/
@@ -96,6 +100,7 @@ lemma leftDerivedUpperStarComp_hom_app_map_counit_comp (h : V ⟶ W) (r : W ⟶ 
   erw [← (leftDerivedUpperStarComp A h r r' hr'.symm).hom.naturality_assoc]
   simp
 
+omit [Etale.UpperStarPreservesFlat A] [HasSmallSiteSheafify A] in
 /-- The counit of a composite `a_U = j ≫ a_X` and the exchange map: the map
 `Lc'^* Ra_{X*} Rj_* F ≅ Lc'^* Ra_{U*} F ≅ Lp^* La_U^* Ra_{U*} F ⟶ Lp^* F` agrees with
 `Lc'^* Ra_{X*} Rj_* F ≅ Lh^* Lq^* La_X^* Ra_{X*} Rj_* F ⟶ Lh^* Lq^* Rj_* F ≅ Lp^* Lj^* Rj_* F
