@@ -81,7 +81,7 @@ noncomputable def projectiveLineCompactification (S : Scheme.{u}) :
     (IsOpenImmersion ((ProjectiveLine.affineLineIso S).hom ≫ ProjectiveLine.affineChart S))
 
 /-- The identification `Λ_{𝔸¹}(1)[2] ≅ j^* (Λ_{ℙ¹}(1)[2])` for the open chart `j`. -/
-noncomputable def affineLineTwistShiftIso (S : Scheme.{u}) [HasInvertibleExponent Λ S] :
+noncomputable def affineLineTwistShiftChartIso (S : Scheme.{u}) [HasInvertibleExponent Λ S] :
     (twistShift Λ 𝔸(ULift.{u} (Fin 1); S) 1).obj (constantComplex Λ 𝔸(ULift.{u} (Fin 1); S)) ≅
       (D(((ProjectiveLine.affineLineIso S).hom ≫
           ProjectiveLine.affineChart S)^*[ModuleCat.{u + 1} Λ])).obj
@@ -108,7 +108,7 @@ noncomputable def affineLineTrace (S : Scheme.{u}) [HasInvertibleExponent Λ S]
     (R((ProjectiveLine S ↘ S)_*[ModuleCat.{u + 1} Λ])).map
       ((D(((ProjectiveLine.affineLineIso S).hom ≫
           ProjectiveLine.affineChart S)_!open[ModuleCat.{u + 1} Λ])).map
-          (affineLineTwistShiftIso Λ S).hom ≫
+          (affineLineTwistShiftChartIso Λ S).hom ≫
         (derivedOpenImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ)
           ((ProjectiveLine.affineLineIso S).hom ≫ ProjectiveLine.affineChart S)).counit.app _) ≫
     projectiveLineTrace Λ S e

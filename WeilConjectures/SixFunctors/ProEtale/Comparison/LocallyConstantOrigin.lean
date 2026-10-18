@@ -36,7 +36,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
 
 /-- The pullback of a constant pro-étale sheaf is constant: both `constantSheaf ⋙ g^*` and
 `constantSheaf` are left adjoint to the global sections, as `Γ ∘ g_* ≅ Γ`. -/
-noncomputable def constantSheafCompUpperStarIso {Z W : Scheme.{u}} (g : Z ⟶ W) :
+private noncomputable def constantSheafCompUpperStarIso {Z W : Scheme.{u}} (g : Z ⟶ W) :
     constantSheaf (Scheme.ProEt.topology W) A ⋙ ProEtale.upperStar A g ≅
       constantSheaf (Scheme.ProEt.topology Z) A :=
   (((constantSheafΓAdj (Scheme.ProEt.topology W) A).comp

@@ -15,7 +15,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.SupportDimension
 Let `X` be a scheme of finite type over a field `K`. For `a ≥ 0` the set
 `E_a(X) = {x ∈ X | trdeg_K κ(x) ≤ a}` is `AlgebraicGeometry.Scheme.trdegLE`. The support of an
 étale sheaf `F` is the set of points `x` such that `F_x̄ ≠ 0` for some geometric point `x̄`
-over `x` (`AlgebraicGeometry.Etale.sheafSupport`), and the support of a complex is the union of
+over `x` (`AlgebraicGeometry.Etale.geometricSupport`), and the support of a complex is the union of
 the supports of its cohomology sheaves (`AlgebraicGeometry.Etale.complexSupport`). These are the
 notions of blueprint `def-kun-support`.
 -/
@@ -57,20 +57,20 @@ variable {X : Scheme.{u}} {A : Type w} [Category.{v} A] [HasColimitsOfSize.{u, u
 The *support* of an étale sheaf `F` on `X`: the set of points `x ∈ X` such that the geometric
 stalk `F_x̄` is nonzero for some geometric point `x̄ : Spec Ω ⟶ X` lying over `x` (`Ω` a
 separably closed field). -/
-def sheafSupport (F : Sheaf X.smallEtaleTopology A) : Set X :=
+def geometricSupport (F : Sheaf X.smallEtaleTopology A) : Set X :=
   {x | ∃ (Ω : Type u) (_ : Field Ω) (_ : IsSepClosed Ω) (s : Spec (.of Ω) ⟶ X),
     s (IsLocalRing.closedPoint Ω) = x ∧
       ¬ IsZero ((Scheme.pointSmallEtale s).sheafFiber.obj F)}
 
-lemma mem_sheafSupport (F : Sheaf X.smallEtaleTopology A) (x : X) :
-    x ∈ sheafSupport F ↔ ∃ (Ω : Type u) (_ : Field Ω) (_ : IsSepClosed Ω)
+lemma mem_geometricSupport (F : Sheaf X.smallEtaleTopology A) (x : X) :
+    x ∈ geometricSupport F ↔ ∃ (Ω : Type u) (_ : Field Ω) (_ : IsSepClosed Ω)
       (s : Spec (.of Ω) ⟶ X), s (IsLocalRing.closedPoint Ω) = x ∧
         ¬ IsZero ((Scheme.pointSmallEtale s).sheafFiber.obj F) :=
   Iff.rfl
 
 /-- Isomorphic sheaves have the same support. -/
-lemma sheafSupport_congr {F G : Sheaf X.smallEtaleTopology A} (e : F ≅ G) :
-    sheafSupport F = sheafSupport G := by
+lemma geometricSupport_congr {F G : Sheaf X.smallEtaleTopology A} (e : F ≅ G) :
+    geometricSupport F = geometricSupport G := by
   ext x
   refine exists_congr fun Ω ↦ exists_congr fun _ ↦ exists_congr fun _ ↦ exists_congr fun s ↦
     and_congr_right fun _ ↦ not_congr ⟨fun h ↦ h.of_iso ?_, fun h ↦ h.of_iso ?_⟩
@@ -84,13 +84,13 @@ sheaves `H^q(K)`. -/
 def complexSupport [Abelian (Sheaf X.smallEtaleTopology A)]
     [HasDerivedCategory (Sheaf X.smallEtaleTopology A)]
     (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) : Set X :=
-  ⋃ q : ℤ, sheafSupport ((DerivedCategory.homologyFunctor _ q).obj K)
+  ⋃ q : ℤ, geometricSupport ((DerivedCategory.homologyFunctor _ q).obj K)
 
 lemma mem_complexSupport [Abelian (Sheaf X.smallEtaleTopology A)]
     [HasDerivedCategory (Sheaf X.smallEtaleTopology A)]
     (K : DerivedCategory (Sheaf X.smallEtaleTopology A)) (x : X) :
     x ∈ complexSupport K ↔
-      ∃ q : ℤ, x ∈ sheafSupport ((DerivedCategory.homologyFunctor _ q).obj K) :=
+      ∃ q : ℤ, x ∈ geometricSupport ((DerivedCategory.homologyFunctor _ q).obj K) :=
   Set.mem_iUnion
 
 end Etale
