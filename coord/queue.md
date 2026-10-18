@@ -1,6 +1,6 @@
 # Work queue
 
-520 items; claim with `tools/claim.py next <group> [--stage N]`.
+521 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (520)
+## Stage 3: modules to prove (521)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -20,6 +20,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.WeilSheaf.CompactSupportFiniteCoefficientComparison` | 4 | 1 | proof | route |
 | `WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CohomologicalDimension` | 4 | 1 | proof | route |
 | `Sheaf.WeilSheaf.AffineCurveRangePositive` | 5 | 1 | proof | route |
+| `WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary` | 6 | 1 | proof | route |
 | `WeilConjectures.WeilSheaf.CurveEndpoints` | 6 | 4 | proof | route |
 | `Sheaf.AlgebraicGeometry.AdicDenseOpenImmersionFiniteness` | 7 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.AdicProjectiveSpaceFiniteness` | 7 | 1 | proof | route |
@@ -535,7 +536,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.FiniteClosedPoints` | - | 1 | proof | 17 |
 | `Sheaf.Paper.EtaleCECoherentQuotientPresentations` | - | 1 | proof | 18 |
 
-## Stage 3: waiting for statements of dependencies (22)
+## Stage 3: waiting for statements of dependencies (21)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
@@ -553,13 +554,12 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `WeilConjectures.AlgebraicGeometry.Bertini` | 5 | 1 | `def-weil-global-geometric-frobenius` |
 | `WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy` | 5 | 7 | `lem-fd-rational-coefficient-category-comparison` |
 | `WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients` | 5 | 7 | `lem-coef-finite-exceptional` |
-| `WeilConjectures.DeligneLaumon.AffineLine.LocalDuality` | 6 | 2 | `rem-dl-a1-conventions` |
-| `WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary` | 6 | 1 | `lem-wf-strict-henselian-fraction-inertia` |
+| `WeilConjectures.DeligneLaumon.AffineLine.LocalDuality` | 6 | 2 | `cor-coef-verdier-weil-equivariance` |
 | `WeilConjectures.DeligneLaumon.AffineLine.DegreeOne` | 7 | 1 | `d-real-cohom` |
-| `WeilConjectures.DeligneLaumon.AffineLine.Exactness` | 7 | 1 | `rem-dl-a1-conventions` |
+| `WeilConjectures.DeligneLaumon.AffineLine.Exactness` | 7 | 1 | `lem-dl-a1-constructible-fibres-exact` |
 | `WeilConjectures.SixFunctors.Etale.Perverse.Operations` | 7 | 6 | `cor-sf-duality-pullback` |
-| `WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension` | 8 | 4 | `rem-dl-a1-conventions` |
+| `WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension` | 8 | 4 | `lem-a1-artin-schreier-prime-character-comparison` |
 | `WeilConjectures.DeligneLaumon.AffineLine.Perverse` | 9 | 4 | `lem-a1-qbar-open-closed-cohomology` |
-| `WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension` | 9 | 3 | `rem-dl-a1-conventions` |
+| `WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension` | 9 | 3 | `lem-trf-rational-local-frobenius-powers` |
 | `WeilConjectures.WeilSheaf.FourierInversion.OtherSections` | 12 | 3 | `lem-pur-divisor-class` |
 | `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect` | - | 1 | `def-pod-conventions` |
