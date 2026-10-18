@@ -67,6 +67,9 @@ Weil objects over a model `X₀`:
 Noetherian induction on `X₀` along affine open covers, closed subschemes of affine spaces and
 projections to affine spaces of smaller dimension combines these steps.
 
+The blueprint proof follows SGA 4½, Rapport, and Varshavsky; alternative references are listed
+in blueprint `rem-trf-alternate-references`.
+
 ## Main statements
 
 - `ProEtale.CondensedRing.trace_globalOperator_eq_sum_trace_stalkFrobenius`: the

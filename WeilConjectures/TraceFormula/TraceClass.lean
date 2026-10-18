@@ -406,9 +406,10 @@ instance (v : K ⟶ K) : IsProper (fixedLocusOfEnd v).F.hom :=
   inferInstanceAs (IsProper X.hom)
 
 
-/-- **Point normalization of the pairing** (blueprint `prop-trf-pairing-point-normalization`):
-over the base point, the trace class of the diagonal correspondence of an endomorphism `v` of
-a perfect complex integrates to the categorical trace of `v`, `∫_s Tr(v) = tr(v)`. -/
+/-- **Point normalization of the pairing** (blueprint `prop-trf-pairing-point-normalization`,
+`sk-p-pairing`): over the base point, the trace class of the diagonal correspondence of an
+endomorphism `v` of a perfect complex integrates to the categorical trace of `v`,
+`∫_s Tr(v) = tr(v)`. -/
 theorem integral_traceClass_ofEnd {K : Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧}
     [HasRightDual K] (v : K ⟶ K) :
     ((ofEnd K v).traceClass (fixedLocusOfEnd v)).integral = trace v :=

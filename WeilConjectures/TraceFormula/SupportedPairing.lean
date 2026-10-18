@@ -260,7 +260,8 @@ noncomputable def pairingOfClasses (hE : IsPullback eC eD c d')
     (dualizingComplexComp ℓ (eC ≫ c)).hom
 
 /-- The **supported pairing** `⟨u, v⟩_LV : ℚ̄_ℓ,E ⟶ ω_E` of an opposite pair (blueprint
-`def-trf-supported-pairing`): for a correspondence `u` from `(X, K)` to `(Y, L)` with support
+`def-trf-supported-pairing`, `sk-d-pairing`, `rem-ptr-trf-supported-pairing-1`): for a
+correspondence `u` from `(X, K)` to `(Y, L)` with support
 `c : C ⟶ Y ⨯ X`, a correspondence `v` from `(Y, L)` to `(X, K)` with support `d : D ⟶ X ⨯ Y`
 and the cartesian square `E = C ×_{c, Y ⨯ X, d ≫ τ} D`, the Borel–Moore section
 `pairingOfClasses` of the supported classes `uc = supportedClass u` and

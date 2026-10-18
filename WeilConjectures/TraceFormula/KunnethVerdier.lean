@@ -38,6 +38,10 @@ cartesian square of the product, and the counit of `Ra_Y! ⊣ Ra_Y^!`; this is t
 invertibility is the Künneth–Verdier theorem (blueprint `thm-trf-kunneth-verdier`), recorded
 here as the sorried input `ProEtale.CondensedRing.isIso_kunnethVerdierMap`.
 
+All constructions are classical: ordinary categories and natural transformations built by
+composition, whiskering and mates from the data of the six functors (blueprint
+`rem-trf-classical-framework`).
+
 ## Main definitions
 
 - `ProEtale.CondensedRing.externalProduct`: the external product `M ⊠ N`.
