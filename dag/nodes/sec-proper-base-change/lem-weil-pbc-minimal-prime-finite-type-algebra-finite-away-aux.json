@@ -1,0 +1,121 @@
+{
+ "id": "lem-weil-pbc-minimal-prime-finite-type-algebra-finite-away-aux",
+ "kind": "statement",
+ "title": "Explicit finite spanning family after shrinking at a minimal prime",
+ "statement": "Let φ:R→S be a finite-type homomorphism of commutative rings, p a minimal prime of R, and suppose the primes of S contracting to p form a finite set. Then there are g∉p and a finite family b₁,…,bₙ in S_{φ(g)} whose R_g-span is all of S_{φ(g)}.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02ML, lemma-generically-finite; monic polynomial and monomial spanning construction"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-finitely-generated-module",
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "Choose algebra generators, use finite-dimensionality of the fibre over the minimal prime to obtain monic equations, clear denominators and annihilators after shrinking, and reduce all monomials by the resulting monic equations. The resulting bounded monomials give the displayed finite spanning family, including the empty family of generators of the zero localization.",
+   "uses": [
+    "lem-weil-pbc-fibre-ring-primes-bijection",
+    "pqf-lem-finite-type-algebra-finite-spectrum",
+    "lem-weil-pbc-fibre-ring-localization-quotient",
+    "lem-weil-pbc-minimal-prime-reduced-localization-field",
+    "lem-weil-pbc-locally-nilpotent-extension"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-ring-primes-bijection",
+  "pqf-lem-finite-type-algebra-finite-spectrum",
+  "lem-weil-pbc-fibre-ring-localization-quotient",
+  "lem-weil-pbc-minimal-prime-reduced-localization-field",
+  "lem-weil-pbc-locally-nilpotent-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 02ML, lemma-generically-finite"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite type algebra with finite fibre over a minimal prime becomes finite after principal localization",
+   "results": "No direct theorem; existing quasi-finite and Zariski-main APIs do not state the required principal finite localization for one minimal-prime fibre.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite spanning family after principal localization at a minimal prime",
+   "results": "No direct theorem; the explicit monomial spanning statement is introduced as the strict intermediate form.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Finite Localization.Away span range",
+   "results": "Submodule.fg_iff_exists_fin_generating_family",
+   "date": "2026-10-18",
+   "verdict": "used"
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*fiber.*awayMap",
+   "results": "No direct theorem in Mathlib or the library.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.MinimalPrimeFiniteTypeFiniteAway",
+  "date": "2026-10-18",
+  "group": "M5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-minimal-prime-finite-type-algebra-finite-away",
+   "place": "strict finite-spanning subargument of the generic-finiteness proof",
+   "via": [
+    "lem-weil-pbc-minimal-prime-finite-type-algebra-finite-away"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.MinimalPrimeFiniteTypeFiniteAwayAux",
+  "file": "lean/Sheaf/RingTheory/MinimalPrimeFiniteTypeFiniteAwayAux.lean",
+  "declaration": "RingHom.exists_finite_span_awayMap_of_finite_fiber_minimalPrime",
+  "statement": "theorem exists_finite_span_awayMap_of_finite_fiber_minimalPrime {R : Type u} {S : Type v} [CommRing R] [CommRing S] (φ : R →+* S) (hφ : φ.FiniteType) (p : Ideal R) (hp : p ∈ minimalPrimes R) (hfinite : {q : PrimeSpectrum S | Ideal.comap φ q.asIdeal = p}.Finite) : ∃ g : R, g ∉ p ∧ letI : Algebra (Localization.Away g) (Localization.Away (φ g)) := (Localization.awayMap φ g).toAlgebra ∃ n : ℕ, ∃ b : Fin n → Localization.Away (φ g), Submodule.span (Localization.Away g) (Set.range b) = ⊤",
+  "branch": "sheaf-dag",
+  "by": "M5",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261018T071204-L-1672258",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M5",
+  "result": "pass",
+  "landing": "20261018T071204-L-1672258",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -10,12 +10,7 @@ public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.RingTheory.Ideal.MinimalPrime.Basic
 public import Mathlib.RingTheory.Spectrum.Prime.Defs
-import Mathlib.RingTheory.LocalRing.ResidueField.Fiber
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Mathlib.RingTheory.KrullDimension.Zero
-import Mathlib.RingTheory.Ideal.Maps
-import Mathlib.RingTheory.Nilpotent.Lemmas
-import Sheaf.RingTheory.FiniteTypeAlgebraFiniteSpectrum
+import Sheaf.RingTheory.MinimalPrimeFiniteTypeFiniteAwayAux
 
 /-!
 # Finiteness near a minimal prime
@@ -68,6 +63,12 @@ theorem exists_finite_awayMap_of_finite_fiber_minimalPrime
     (φ : R →+* S) (hφ : φ.FiniteType) (p : Ideal R) (hp : p ∈ minimalPrimes R)
     (hfinite : {q : PrimeSpectrum S | Ideal.comap φ q.asIdeal = p}.Finite) :
     ∃ g : R, g ∉ p ∧ (Localization.awayMap φ g).Finite := by
-  sorry
+  obtain ⟨g, hg, n, b, hb⟩ :=
+    exists_finite_span_awayMap_of_finite_fiber_minimalPrime φ hφ p hp hfinite
+  refine ⟨g, hg, ?_⟩
+  let _ : Algebra (Localization.Away g) (Localization.Away (φ g)) :=
+    (Localization.awayMap φ g).toAlgebra
+  change Module.Finite (Localization.Away g) (Localization.Away (φ g))
+  exact ⟨Submodule.fg_iff_exists_fin_generating_family.mpr ⟨n, b, hb⟩⟩
 
 end RingHom
