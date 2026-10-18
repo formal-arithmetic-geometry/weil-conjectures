@@ -12,6 +12,31 @@ public import WeilConjectures.TraceFormula.TraceClassAdditivity
 
 # The Lefschetz–Verdier formula
 
+For `X` proper over `s = Spec k` and an endocorrespondence `c = (C, c₁, c₂, u)` of `(X, K)` with
+proper ordinary leg, the trace of the global operator is the integral of the trace class
+(blueprint `thm-trf-fixed-point-localization`, `sk-c-proper-global`):
+```
+tr(T_c(u) | RΓ_c(X, K)) = ∫_Fix(c) Tr_c(u).
+```
+Following the blueprint proof, `(a_X, a_C) : (C, c) ⟶ (s, (𝟙, 𝟙))` is a proper pushforward
+diagram (`ProEtale.CondensedRing.Correspondence.toPointDiagram`) and
+
+1. the pushed coefficient map `[a_X, a_C]_! u` is the global operator `T_c(u)`, read through
+   `Ra_{X!} ≅ Ra_{X*}` (`Correspondence.globalOperator_eq_pushforwardCoeff`): its ordinary half
+   is the unit of `Lc₂^* ⊣ Rc₂_*` by the triangle identities, and its exceptional half is the
+   composition isomorphism followed by the counit of `Rc₁_! ⊣ Rc₁^!`;
+2. the proper pushforward compatibility of the trace class
+   (`Correspondence.ProperPushforwardDiagram.traceClassPushforward_eq`) identifies
+   `(a_Fix)_* Tr_c(u) = ∫_Fix(c) Tr_c(u)` with the trace class of the pushed correspondence;
+3. the point normalization (`Correspondence.integral_traceClass_ofEnd`) gives the trace.
+
+## Main statements
+
+- `ProEtale.CondensedRing.Correspondence.trace_globalOperator_eq_integral_traceClass`: the
+  Lefschetz–Verdier formula.
+- `ProEtale.CondensedRing.Correspondence.trace_globalOperator_eq_sum_localTerm`: the
+  Lefschetz–Verdier trace comparison with the sum of the local terms.
+
 -/
 
 @[expose] public section
@@ -60,7 +85,6 @@ lemma unit_map_comp_conjugateIsoEquiv_hom_app {L R : P ⥤ P} (adj : L ⊣ R) (�
   simp only [Adjunction.id, Functor.id_map, Functor.id_obj, Category.id_comp, NatTrans.id_app]
   rw [reassoc_of% h1, reassoc_of% h2, Adjunction.counit_naturality,
     Adjunction.left_triangle_components_assoc]
-
 
 /-- Abstract form of the ordinary half of the global operator: the unit of `L_c ⊣ R_c` read
 through the lower shriek functors `S_f, S_c, S_g` (`ι : S ≅ R`) and the composition isomorphism
@@ -121,7 +145,7 @@ lemma mateEquiv_app_comp_eq_aux {Sg Rg Sg' Sg'' : C ⥤ P} {S1 U1 : P ⥤ P} {Sc
     Category.assoc]
   erw [unit_map_comp_conjugateIsoEquiv_hom_app_assoc]
   have hf := ιf.inv.naturality (adjc1.counit.app K)
-  simp only [Functor.comp_map, Functor.comp_obj, Functor.id_obj] at hf
+  simp only [Functor.comp_obj, Functor.id_obj] at hf
   simp only [Category.assoc, hκ1]
   rw [← reassoc_of% hn, Iso.inv_hom_id_app_assoc, Iso.hom_inv_id_app_assoc, hf,
     Iso.hom_inv_id_app_assoc]
@@ -216,7 +240,6 @@ lemma lowerShriek_map_unit_eq_pushforwardCoeffUnit_aux (c₂ : C ⟶ X) (f : X �
     (CategoryTheory.map_unit_comp_conjugateIsoEquiv_inv_app _ _ _ _)
     (boundedConstructibleUpperStarId _ ℓ Y) K
 
-
 variable (ℓ) in
 /-- The exceptional half of the global operator (blueprint `thm-trf-fixed-point-localization`,
 proof): for a square `g ≫ 𝟙 = c₁ ≫ f`, the exchange map `E : Rg_* Rc₁^! ⟶ R(𝟙)^! Rf_*`, read on
@@ -275,7 +298,8 @@ instance isProper_C_hom [IsProper c.c₂.left] : IsProper c.C.hom := by
 
 /-- The proper pushforward diagram `(a_X, a_C) : (C, c) ⟶ (s, (𝟙, 𝟙))` to the point
 (blueprint `thm-trf-fixed-point-localization`, proof). -/
-noncomputable abbrev toPointDiagram [IsProper c.c₂.left] : c.ProperPushforwardDiagram (point k) where
+noncomputable abbrev toPointDiagram [IsProper c.c₂.left] :
+    c.ProperPushforwardDiagram (point k) where
   f := toPoint X
   D := point k
   b₁ := 𝟙 _
@@ -335,8 +359,8 @@ lemma lowerShriek_map_unit_eq_pushforwardCoeffUnit [IsProper c.c₂.left] :
   exact lowerShriek_map_unit_eq_pushforwardCoeffUnit_aux ℓ c.c₂ (toPoint X) (toPoint c.C)
     (comp_toPoint _) K
 
--- the rewrites unify large composites of six-functor maps
 set_option maxHeartbeats 1600000 in
+-- the rewrites unify large composites of six-functor maps
 /-- **The pushed coefficient map is the global operator** (blueprint
 `thm-trf-fixed-point-localization`, proof): the coefficient pushforward `[a_X, a_C]_! u` of `u`
 along the diagram to the point is the global operator `T_c(u)`, read through
@@ -355,12 +379,81 @@ theorem globalOperator_eq_pushforwardCoeff [IsProper c.c₂.left] :
   have hu : (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint c.C)).map
       c.u = (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint c.C)).inv.app _ ≫
         (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint c.C)).map
-          c.u ≫ (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint c.C)).hom.app _ := by
+          c.u ≫
+        (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint c.C)).hom.app _ := by
     simp
   rw [globalOperator_eq, e, hu]
   simp only [Category.assoc]
   rw [reassoc_of% c.lowerShriek_map_unit_eq_pushforwardCoeffUnit,
     ← c.lowerShriekIsoLowerStar_hom_app_comp_pushforwardCoeffCounit]
+
+/-- **The Lefschetz–Verdier formula** (blueprint `thm-trf-fixed-point-localization`,
+`sk-c-proper-global`): for `X` proper over `s`, an endocorrespondence `c` with proper ordinary
+leg `c₂` and proper fixed locus,
+the trace of the global operator is the integral of the trace class,
+`tr(T_c(u) | RΓ_c(X, K)) = ∫_Fix(c) Tr_c(u)`.
+
+The proof pushes `c` forward to the point along `(a_X, a_C)`: the pushed coefficient map is the
+global operator (`globalOperator_eq_pushforwardCoeff`), the proper pushforward compatibility
+(`ProperPushforwardDiagram.traceClassPushforward_eq`) identifies the pushforward
+`(a_Fix)_* Tr_c(u)`, which is the integral, with the trace class of the pushed correspondence,
+and the point normalization (`integral_traceClass_ofEnd`) gives its trace. -/
+theorem trace_globalOperator_eq_integral_traceClass [IsProper c.c₂.left]
+    (F : c.FixedLocus) [IsProper F.F.hom]
+    [HasRightDual
+      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj K)] :
+    trace c.globalOperator = (c.traceClass F).integral := by
+  obtain ⟨T, hT⟩ : ∃ T : c.toPointDiagram.coeff ⟶ c.toPointDiagram.coeff, T =
+      (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ (point k)).inv.app
+        c.toPointDiagram.coeff ≫ c.toPointDiagram.pushforwardCoeff ≫
+        (boundedConstructibleUpperShriekId ℓ (point k)).hom.app c.toPointDiagram.coeff :=
+    ⟨_, rfl⟩
+  let : HasRightDual c.toPointDiagram.coeff :=
+    @HasRightDual.mk _ _ _ _ (HasRightDual.rightDual ((boundedConstructibleLowerShriek
+      (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj K)) (exactPairingCongrLeft
+      ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint X)).app K).symm)
+  have h₁ : trace c.globalOperator = trace T :=
+    trace_eq_of_iso ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ (toPoint X)).app K)
+      c.globalOperator T (by rw [globalOperator_eq_pushforwardCoeff, hT]; simp)
+  let Fb : c.toPointDiagram.pushforward.FixedLocus :=
+    (fixedLocusOfEnd T).withCoeff _ c.toPointDiagram.pushforwardCoeff
+  have : IsProper Fb.F.hom := inferInstanceAs (IsProper (point k).hom)
+  have h₂ := c.toPointDiagram.traceClassPushforward_eq F Fb
+  rw [ProperPushforwardDiagram.traceClassPushforward] at h₂
+  have hu : c.toPointDiagram.pushforwardCoeff = (ofEnd _ T).u := by
+    rw [hT]
+    simp [ofEnd]
+  have h₃ : c.toPointDiagram.pushforward.traceClass Fb =
+      (ofEnd _ T).traceClass (fixedLocusOfEnd T) := by
+    refine (rfl : _ = (fixedLocusOfEnd T).traceClassWithCoeff _
+      c.toPointDiagram.pushforwardCoeff).trans ?_
+    rw [hu]
+    rfl
+  rw [h₁, ← integral_traceClass_ofEnd T,
+    BorelMooreSection.integral_eq_integral_pushforward (c.traceClass F),
+    BorelMooreSection.pushforward_congr (toPoint_ext (toPoint F.F) (c.toPointDiagram.fixMap F Fb)),
+    h₂, h₃]
+
+/-- **The Lefschetz–Verdier trace comparison** (blueprint `thm-trf-lefschetz-verdier`): for `X`
+proper over `s`, an endocorrespondence with proper ordinary leg and a fixed locus which is the
+disjoint union of finitely many open and closed subschemes `j_β : B_β ⟶ Fix(c)` proper over `s`,
+the trace of the global operator is the sum of the local terms,
+`tr(T_c(u) | RΓ_c(X, K)) = ∑_β LT_β(u)`. It is the fixed-point localization
+`trace_globalOperator_eq_integral_traceClass` followed by the decomposition of the integral
+into local terms (`BorelMooreSection.integral_eq_sum_localTerm`). -/
+theorem trace_globalOperator_eq_sum_localTerm [IsProper c.c₂.left]
+    (F : c.FixedLocus) [IsProper F.F.hom]
+    [HasRightDual
+      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj K)]
+    {ι : Type*} [Fintype ι] (B : ι → Over (Spec (.of k))) [∀ i, QuasiCompact (B i).hom]
+    [∀ i, IsProper (B i).hom] (j : ∀ i, B i ⟶ F.F) [∀ i, IsOpenImmersion (j i).left]
+    [∀ i, IsClosedImmersion (j i).left]
+    (hdisj : Pairwise fun i i' ↦ Disjoint (Set.range (j i).left.base)
+      (Set.range (j i').left.base))
+    (hcover : ⋃ i, Set.range (j i).left.base = Set.univ) :
+    trace c.globalOperator = ∑ i, (c.traceClass F).localTerm (j i) := by
+  rw [c.trace_globalOperator_eq_integral_traceClass F,
+    BorelMooreSection.integral_eq_sum_localTerm B j hdisj hcover]
 end Correspondence
 
 end AlgebraicGeometry.ProEtale.CondensedRing

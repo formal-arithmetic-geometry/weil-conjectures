@@ -51,12 +51,13 @@ through the invertibility of the canonical maps; it needs no further hypothesis 
 
 ## Main statements
 
-- `ProEtale.CondensedRing.Correspondence.trace_globalOperator_eq_integral_traceClass`: the
-  Lefschetz–Verdier formula `tr(T_c(u) | RΓ_c(X, K)) = ∫_Fix(c) Tr_c(u)` for `X` proper.
 - `ProEtale.CondensedRing.Correspondence.integral_traceClass_ofEnd`: over the base point,
   `∫_s Tr(v) = tr(v)`.
 
-The local term of the Frobenius correspondence at a fixed point
+The Lefschetz–Verdier formula
+(`ProEtale.CondensedRing.Correspondence.trace_globalOperator_eq_integral_traceClass`) is in
+`WeilConjectures.TraceFormula.LefschetzVerdier`, and the local term of the Frobenius
+correspondence at a fixed point
 (`ProEtale.CondensedRing.WeilBoundedConstructible.localTerm_traceClass_graph_eq_trace`) is in
 `WeilConjectures.TraceFormula.FrobeniusLocalTerm`.
 
@@ -367,41 +368,7 @@ end Correspondence
 namespace Correspondence
 
 variable [QuasiCompact X.hom] [IsProper X.hom]
-  {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧} (c : Correspondence ℓ K)
-
-
-/-- **The Lefschetz–Verdier formula** (blueprint `thm-trf-fixed-point-localization`,
-`sk-c-proper-global`): for `X` proper over `s`, an endocorrespondence `c` with proper ordinary
-leg `c₂` and proper fixed locus,
-the trace of the global operator is the integral of the trace class,
-`tr(T_c(u) | RΓ_c(X, K)) = ∫_Fix(c) Tr_c(u)`. -/
-theorem trace_globalOperator_eq_integral_traceClass [IsProper c.c₂.left]
-    (F : c.FixedLocus) [IsProper F.F.hom]
-    [HasRightDual
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj K)] :
-    trace c.globalOperator = (c.traceClass F).integral :=
-  sorry
-
-/-- **The Lefschetz–Verdier trace comparison** (blueprint `thm-trf-lefschetz-verdier`): for `X`
-proper over `s`, an endocorrespondence with proper ordinary leg and a fixed locus which is the
-disjoint union of finitely many open and closed subschemes `j_β : B_β ⟶ Fix(c)` proper over `s`,
-the trace of the global operator is the sum of the local terms,
-`tr(T_c(u) | RΓ_c(X, K)) = ∑_β LT_β(u)`. It is the fixed-point localization
-`trace_globalOperator_eq_integral_traceClass` followed by the decomposition of the integral
-into local terms (`BorelMooreSection.integral_eq_sum_localTerm`). -/
-theorem trace_globalOperator_eq_sum_localTerm [IsProper c.c₂.left]
-    (F : c.FixedLocus) [IsProper F.F.hom]
-    [HasRightDual
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj K)]
-    {ι : Type*} [Fintype ι] (B : ι → Over (Spec (.of k))) [∀ i, QuasiCompact (B i).hom]
-    [∀ i, IsProper (B i).hom] (j : ∀ i, B i ⟶ F.F) [∀ i, IsOpenImmersion (j i).left]
-    [∀ i, IsClosedImmersion (j i).left]
-    (hdisj : Pairwise fun i i' ↦ Disjoint (Set.range (j i).left.base)
-      (Set.range (j i').left.base))
-    (hcover : ⋃ i, Set.range (j i).left.base = Set.univ) :
-    trace c.globalOperator = ∑ i, (c.traceClass F).localTerm (j i) := by
-  rw [c.trace_globalOperator_eq_integral_traceClass F,
-    BorelMooreSection.integral_eq_sum_localTerm B j hdisj hcover]
+  {K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧}
 
 instance (v : K ⟶ K) : IsProper (fixedLocusOfEnd v).F.hom :=
   inferInstanceAs (IsProper X.hom)
