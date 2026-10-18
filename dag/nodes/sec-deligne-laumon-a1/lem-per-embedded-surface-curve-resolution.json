@@ -2,12 +2,13 @@
  "id": "lem-per-embedded-surface-curve-resolution",
  "kind": "statement",
  "title": "Embedded SNC resolution on a regular surface",
- "statement": "Let $X$ be a integral regular Noetherian excellent scheme of dimension $2$, admitting an ample invertible sheaf [def-weil-pbc-ample-invertible-module], [def-pc-integral-scheme, def-weil-regular-scheme, def-weil-pbc-noetherian-ring, def-exc-excellent-ring, def-weil-pbc-krull-dimension-ring], and let $Z\\hookrightarrow X$ be a proper closed subscheme [def-weil-closed-immersion]. There is a finite sequence of blowups at closed points of the successive inverse images of $Z$ whose total inverse image of $Z$ is an effective Cartier divisor supported on a strict normal-crossing divisor. A blowup in an ideal $I$ is $\\operatorname{Proj}_X(\\bigoplus_{a\\geq0}I^a)$ [def-nagata-relative-proj]; its source is again regular. Strict normal crossing means that its reduced irreducible components are regular curves, at most two pass through each point, and two meeting components are locally defined by a regular system of parameters [def-weil-pbc-regular-system-of-parameters]. The composite is projective and is an isomorphism away from a finite set of closed points of $Z$.",
+ "statement": "Let $X$ be an integral regular Noetherian excellent scheme of dimension $2$, admitting an ample invertible sheaf [def-weil-pbc-ample-invertible-module, def-pc-integral-scheme, def-weil-regular-scheme, def-weil-pbc-noetherian-ring, def-exc-excellent-ring, def-weil-pbc-krull-dimension-ring], and let $Z\\hookrightarrow X$ be a proper closed subscheme [def-weil-closed-immersion]. There is a finite sequence of blowups at reduced closed points of the successive inverse images of $Z$ whose total inverse image of $Z$ is an effective Cartier divisor supported on a strict normal-crossing divisor. A blowup in an ideal $I$ is $\\operatorname{Proj}_X(\\bigoplus_{a\\geq0}I^a)$ [def-nagata-relative-proj]; every intermediate scheme is regular. Effective Cartier means locally defined by a nonzerodivisor [def-nagata-effective-cartier-ideal]. Strict normal crossing here means that the reduced irreducible components are regular of codimension one, at most two pass through each point, and their local defining equations are part of a regular system of parameters [def-weil-pbc-regular-system-of-parameters]. Equivalently the reduced support is locally defined by a product of distinct members of such a parameter system. The composite is projective in the finite-projective-space convention [def-kun-projective] and is an isomorphism away from a finite set of closed points of $Z$. The empty divisor and the length-zero sequence are allowed.",
  "source": {
   "document": "literature/stacks-project/resolve.tex",
   "place": "Stacks Project Tag 0BIC (resolve-lemma-embedded-resolution), including the hypotheses and the blow-up induction"
  },
  "stmt_deps": [
+  "def-weil-pbc-ample-invertible-module",
   "def-pc-integral-scheme",
   "def-weil-regular-scheme",
   "def-weil-pbc-noetherian-ring",
@@ -15,12 +16,144 @@
   "def-weil-pbc-krull-dimension-ring",
   "def-weil-closed-immersion",
   "def-nagata-relative-proj",
+  "def-nagata-effective-cartier-ideal",
   "def-weil-pbc-regular-system-of-parameters",
-  "def-weil-pbc-ample-invertible-module"
+  "def-kun-projective"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the codimension-one Cartier-part lemma to $Z$. Write $\\mathcal I_Z=\\mathcal L\\mathcal J$ with $\\mathcal L$ effective Cartier and $\\operatorname{Supp}(\\mathcal O_X/\\mathcal J)=T$ a finite set of codimension-two closed points of $Z$. This is the starting ideal factorization, before any blowup; it also covers $Z=\\varnothing$ with both ideals the unit ideal.",
+   "uses": [
+    "lem-per-surface-codimension-one-cartier-part"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BIB (lemma-turn-into-effective-Cartier), proof, using divisors.tex Tag 0AGB (lemma-codim-1-part)."
+   }
+  },
+  {
+   "text": "Principalize $\\mathcal J$ by the finite sequence of point blowups over $T$ supplied by the point-ideal principalization lemma. The point-blowup geometry lemma applies at every centre: it preserves integral regular excellent Noetherian dimension-two schemes admitting an ample sheaf. Centres over $T$ have local dimension two: they are closed on the exceptional projective line, and away from earlier centres the local ring is the old one. The extended $\\mathcal L$ stays effective Cartier by the Cartier total-transform lemma. Since $(\\mathcal L\\mathcal J)\\mathcal O= (\\mathcal L\\mathcal O)(\\mathcal J\\mathcal O)$, its final extension is generated locally by the product of two nonzerodivisors. Thus the inverse image of $Z$ is effective Cartier. This property persists under all subsequent blowups.",
+   "uses": [
+    "lem-per-surface-point-ideal-principalization",
+    "lem-per-surface-point-blowup-geometry",
+    "lemma-nagata-cartier-total-transform-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tags 0AHH (lemma-make-ideal-principal), 0BIB and 0BIC, first reduction to effective Cartier."
+   }
+  },
+  {
+   "text": "The Cartier inverse image has finitely many reduced irreducible components. Its nonzero local defining equation factors into prime factors in each regular local UFD, so these components have codimension one and dimension at most one. A zero-dimensional integral component is a single reduced closed point, hence a field and regular; it cannot meet a distinct codimension-one component, since two distinct height-one primes cannot contain one another. Every dimension-one component has finite normalization: its affine rings are quotients of excellent rings, hence excellent by finite-type stability; they are Noetherian by the quotient ideal-chain criterion. The excellent-normalization lemma now applies to this reduced integral component. For each of these finitely many original components, use the embedded-curve regularization lemma to make its successive strict transform regular by point blowups at its singular closed points. Such a point has ambient local dimension two, since its local ring on the curve has dimension one and its generic point has codimension one.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-trf-regular-local-ufd-boundary-factorization",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-per-excellent-normalization-preparation",
+    "lem-per-surface-curve-regularization-by-blowups"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BIC first paragraph; Tags 0BI4 and 0BI5 for embedded-curve regularization; excellence via Tag 07QU."
+   }
+  },
+  {
+   "text": "This finite-component procedure preserves components already regular. If a later centre lies on a regular curve, apply the intersection-blowup lemma with that curve as $Y$ and the centre as $Z$: its strict transform is isomorphic to $Y$. If the centre misses it, the blowup-complement isomorphism and the strict-transform definition leave it unchanged. Each new exceptional component is a regular projective line by point-blowup geometry. The same geometry says the new inverse-image support is exactly the strict-transform support together with that exceptional divisor. Induction on the finitely many chosen blowups therefore ends with an effective Cartier inverse image all of whose reduced codimension-one components are regular.",
+   "uses": [
+    "lem-per-surface-curve-intersection-blowup-decrease",
+    "thm-nagata-global-blowup-complement",
+    "lem-per-surface-point-blowup-geometry",
+    "def-nagata-strict-transform"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BIC first paragraph: no new singular components are introduced."
+   }
+  },
+  {
+   "text": "For distinct dimension-one components $Y_i,Y_j$, their intersection is a closed subset of each curve containing no generic point. It is zero-dimensional, so it consists of finitely many closed points: its finitely many irreducible components are singletons. At each such $p$ use $m_p(Y_i,Y_j)$ from the intersection-blowup lemma, a positive finite integer. Set $M$ to the largest such number, with $M=1$ when no intersections occur. If $M>1$, blow up a point attaining $M$. Every old pair above this point either separates or has strictly smaller multiplicity, and each new pair involving the exceptional curve has multiplicity one; pairs away from the centre are unchanged. Consequently the lexicographic pair $(M,N_M)$, where $N_M$ counts pair/point incidences of multiplicity $M$, decreases until $M$ drops. Repeating this finite descent gives only multiplicity-one intersections. Regularity and the Cartier property persist by the previous step.",
+   "uses": [
+    "lem-per-surface-curve-intersection-blowup-decrease",
+    "lem-per-surface-point-blowup-geometry",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "thm-nagata-global-blowup-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BIC second paragraph, Tag 0BI7; explicit lexicographic termination of the maximum-multiplicity procedure."
+   }
+  },
+  {
+   "text": "There are now finitely many points on at least three components. Blow up such a point $p$. A pair of its old components had multiplicity one; if their strict transforms still met above $p$, the intersection-blowup lemma would give a positive integer smaller than one. Hence all these strict transforms meet the exceptional curve at distinct points, each with multiplicity one. Above $p$ there is therefore no triple intersection. Outside $p$ nothing changes. The number of triple-or-higher points decreases strictly, so finitely many repetitions leave at most two components through any point. This uses “more than two”, correcting the source's isolated “more than 3” typo.",
+   "uses": [
+    "lem-per-surface-curve-intersection-blowup-decrease",
+    "lem-per-surface-point-blowup-geometry",
+    "thm-nagata-global-blowup-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BIC last paragraph: eliminate points with at least three components."
+   }
+  },
+  {
+   "text": "We verify the local parameter condition directly, as in Tag 0BIA. At a point of the reduced support let $A$ be the regular local ring, of dimension $d\\leq2$. UFD factorization and the height-one prime criterion give a prime local equation $f$ for each component. With one component and $d=2$, $A/(f)$ is regular local of dimension one; lift its one maximal-ideal generator $t$. Then $\\mathfrak m_A=(f,t)$, a regular parameter system by definition. For $d=1$, the component is the closed point and its prime ideal is $\\mathfrak m_A=(f)$. With two components, $d=2$ and their equations $f,g$ have $\\operatorname{length}_A A/(f,g)=1$. A nonzero length-one quotient of a local ring is its residue field, so $(f,g)=\\mathfrak m_A$, again a regular parameter system. Finally, the ideal of the reduced union is the intersection of these distinct prime principal ideals; unique factorization identifies this with their product. Thus the reduced support is locally cut out by one parameter or the product of two parameters, including the possible zero-dimensional codimension-one components.",
+   "uses": [
+    "lem-trf-regular-local-ufd-boundary-factorization",
+    "lem-trf-ufd-height-one",
+    "def-weil-pbc-regular-system-of-parameters",
+    "def-weil-pbc-module-length"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BIC conclusion and etale.tex Tag 0BIA (lemma-strict-normal-crossings), specialized to dimension at most two; local parameter lifting written explicitly."
+   }
+  },
+  {
+   "text": "Every actual centre chosen above belongs to the current inverse image of $Z$: residual principalization centres lie over $T\\subseteq Z$, component regularization centres lie on its strict-transform support, and intersection centres lie on its support. Point-blowup geometry gives H-projectivity at every stage and preserves ampleness so that this assertion can be reapplied. H-projective composition gives a projective composite. Each such morphism is proper, hence closed; therefore the image in $X$ of any of the finitely many closed centres is a closed point of $Z$. Let $F$ be this finite image set. Over $X\\setminus F$, none of the centres is encountered; induction using the blowup-complement isomorphism gives an isomorphism there. The Cartier, regularity and SNC assertions have already been established, proving all clauses.",
+   "uses": [
+    "lem-per-surface-point-blowup-geometry",
+    "lem-trf-h-projective-composition",
+    "lem-kun-projective-implies-proper",
+    "thm-nagata-global-blowup-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tags 02NS, 087S and 0BIC, projectivity and complement assertions; proper closedness for images of the finite centre set."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-strict-transform",
+  "def-weil-pbc-module-length",
+  "def-weil-pbc-regular-system-of-parameters",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-kun-projective-implies-proper",
+  "lem-per-excellent-normalization-preparation",
+  "lem-per-surface-codimension-one-cartier-part",
+  "lem-per-surface-curve-intersection-blowup-decrease",
+  "lem-per-surface-curve-regularization-by-blowups",
+  "lem-per-surface-point-blowup-geometry",
+  "lem-per-surface-point-ideal-principalization",
+  "lem-trf-h-projective-composition",
+  "lem-trf-regular-local-ufd-boundary-factorization",
+  "lem-trf-ufd-height-one",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lemma-nagata-cartier-total-transform-blowup",
+  "thm-nagata-global-blowup-complement"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0BIC (lemma-embedded-resolution), with the cited supporting lemmas, explicit termination and local parameter argument; correct the source typo more than 3 to more than 2."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,7 +192,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-surface-resolution-supported-presentation",
@@ -84,5 +217,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-embedded-surface-curve-resolution",
+  "worker": "stage1",
+  "summary": "Eight-step split of Stacks 0BIC: factor off the Cartier part, principalize the finite residual by point blowups, regularize finitely many original curve components while preserving earlier and exceptional regular components, decrease intersection multiplicities, remove triple points, verify the local parameter condition, and prove projectivity plus the finite exceptional locus. Five strictly smaller statement-only lemmas carry the supporting source results. STATEMENT-DISPUTED repair: use regular codimension-one components instead of regular curves, since a non-equicodimensional integral dimension-two scheme may have codimension-one closed points. No hypothesis is added; the source SNC conclusion is retained.",
+  "blueprint": "Refines the inherited technical input to the dimension-normalized duality construction of lem-per-artin-gabber-affine-curve, via ILO XVII 3.4.1: embedded SNC resolution on the regular surface, following Stacks 0BIC.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic Excellence is preserved by finite type algebras and localization input to the explicit surface-blowup proof of Stacks 0BIC; no statement of this unit supplies this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-kun-projective-implies-proper",
+    "why": "Generic Projective morphisms are proper input to the explicit surface-blowup proof of Stacks 0BIC; no statement of this unit supplies this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-trf-h-projective-composition",
+    "why": "Generic Composition of H-projective morphisms input to the explicit surface-blowup proof of Stacks 0BIC; no statement of this unit supplies this algebraic-geometric tool."
+   },
+   {
+    "node": "lem-trf-regular-local-ufd-boundary-factorization",
+    "why": "Generic Boundary-unit factorization in a regular local ring input to the explicit surface-blowup proof of Stacks 0BIC; no statement of this unit supplies this algebraic-geometric tool."
+   },
+   {
+    "node": "lemma-nagata-cartier-total-transform-blowup",
+    "why": "Generic Total transform of a Cartier ideal under a blow-up input to the explicit surface-blowup proof of Stacks 0BIC; no statement of this unit supplies this algebraic-geometric tool."
+   },
+   {
+    "node": "thm-nagata-global-blowup-complement",
+    "why": "Generic Complement of the center input to the explicit surface-blowup proof of Stacks 0BIC; no statement of this unit supplies this algebraic-geometric tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-finite-type-localization-excellent",
+  "lem-kun-projective-implies-proper",
+  "lem-trf-h-projective-composition",
+  "lem-trf-regular-local-ufd-boundary-factorization",
+  "lemma-nagata-cartier-total-transform-blowup",
+  "thm-nagata-global-blowup-complement"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-c03126495",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-c03126495 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and the 5 new nodes in full, against Stacks resolve.tex 0BIC, 0BIB, 0BI4, 0BI5, 0BI7, 0AHH, 0AGQ and 0AGR, and divisors.tex 0AGB and 080E. Every new node is true and strictly smaller than the item; none is a relabelled clause (D1). Changed statement ('regular codimension-one components' instead of 'regular curves', the SNC convention of Stacks 0BI9/0BIA): the report's counterexample is correct. R, the localization of k[x,y] away from (x) ∪ (x−1,y), is regular, excellent and 2-dimensional, and V(x) is one codimension-one closed point that point blowups leave unchanged. So this is an E7 correction with no hypothesis added. The proof typo 'more than 3' → 'more than 2' is also correct. Steps: the step-5 lexicographic (M, N_M) termination is set up properly; step 6 separates triple points using 0BI7(3) with multiplicity 1; step 7's local-parameter argument is a few lines from the cited UFD and height-one statements, so the elementary mark stands. Centres always have 2-dimensional local rings, and proper ⇒ closed gives the finite exceptional image set. Duplicates: I grepped all the tags and labels over the DAG and read regular-flag-blowup-geometry, excellent-surface-desingularization, the normalized-blowup nodes and snc-boundary-parameter-criterion; none duplicates a new node. Batch 5: I checked each flagged citation's own closure. lem-per-excellent-normalization-preparation reaches only the trf affine-cover excellence lemmas (G-ring, J-2, catenary); lem-trf-h-projective-composition is Segre composition; lem-trf-regular-local-ufd-boundary-factorization reaches only K0/Pic algebra; lem-trf-ufd-height-one is a Mathlib leaf. All are generic and none is part of the trace-formula or Poincaré-duality proofs, so I accept them. I accept all six declared tool_uses. Maintainer note: step 1 of the citer lem-per-surface-resolution-supported-presentation reads the conclusion as 'regular curves'. Under the corrected statement it needs the one-line dimension-formula remark that the closed fibre over a 2-dimensional excellent local base has no 0-dimensional component; its conclusion is unaffected."
  }
 }
