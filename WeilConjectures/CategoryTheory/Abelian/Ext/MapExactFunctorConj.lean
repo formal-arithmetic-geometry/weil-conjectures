@@ -91,4 +91,54 @@ lemma mapExactFunctor_mk₀CompMk₀_of_iso [EnoughInjectives C] (G₂ : C ⥤ D
   simp only [mk₀CompMk₀_mk₀CompMk₀]
   congr 1 <;> simp [← Functor.map_comp, ← Functor.map_comp_assoc]
 
+section Scalar
+
+variable {C : Type u} [Category.{v} C] [Abelian C] [HasExt.{w} C]
+
+lemma mk₀_zsmul {X Y : C} (k : ℤ) (f : X ⟶ Y) : mk₀ (k • f) = k • (mk₀ f : Ext.{w} X Y 0) :=
+  map_zsmul (AddMonoidHom.mk' (mk₀ (X := X) (Y := Y)) mk₀_add) k f
+
+lemma comp_zsmul {X Y Z : C} {a b c : ℕ} (α : Ext.{w} X Y a) (β : Ext.{w} Y Z b)
+    (h : a + b = c) (k : ℤ) : α.comp (k • β) h = k • α.comp β h :=
+  map_zsmul (AddMonoidHom.mk' (fun β : Ext.{w} Y Z b ↦ α.comp β h) fun _ _ ↦ comp_add _ _ _ _) k β
+
+lemma zsmul_comp {X Y Z : C} {a b c : ℕ} (α : Ext.{w} X Y a) (β : Ext.{w} Y Z b)
+    (h : a + b = c) (k : ℤ) : (k • α).comp β h = k • α.comp β h :=
+  map_zsmul (AddMonoidHom.mk' (fun α : Ext.{w} X Y a ↦ α.comp β h) fun _ _ ↦ add_comp _ _ _ _) k α
+
+lemma mk₀CompMk₀_zsmul_left {X' X Y Y' : C} {n : ℕ} (k : ℤ) (a : X' ⟶ X) (y : Ext.{w} X Y n)
+    (b : Y ⟶ Y') : mk₀CompMk₀ (k • a) y b = k • mk₀CompMk₀ a y b := by
+  rw [mk₀CompMk₀, mk₀_zsmul, zsmul_comp, mk₀CompMk₀]
+
+lemma mk₀CompMk₀_zsmul_right {X' X Y Y' : C} {n : ℕ} (k : ℤ) (a : X' ⟶ X) (y : Ext.{w} X Y n)
+    (b : Y ⟶ Y') : mk₀CompMk₀ a y (k • b) = k • mk₀CompMk₀ a y b := by
+  rw [mk₀CompMk₀, mk₀_zsmul, comp_zsmul, comp_zsmul, mk₀CompMk₀]
+
+end Scalar
+
+/-- **Rigidity of `Ext`-classes of an object with scalar endomorphisms.** Let `P` be an object
+all of whose endomorphisms are integer multiples of the identity, and `G₂` an exact functor
+which is full on the endomorphisms of `P`. If every morphism `I ⟶ G₂ P` factors as `U ≫ G₂ f`
+and `V : G₂ P ≅ J`, then for all `L : I ⟶ G₂ P`, `R : G₂ P ⟶ J` there is an integer `c` with
+`L ∘ G₂(y) ∘ R = c • (U ∘ G₂(y) ∘ V)` for every class `y ∈ Extⁿ(P, P)`. -/
+lemma exists_mk₀CompMk₀_mapExactFunctor_eq_zsmul (G₂ : C ⥤ D) [G₂.Additive]
+    [PreservesFiniteLimits G₂] [PreservesFiniteColimits G₂] {P : C} {I J : D}
+    (U : I ⟶ G₂.obj P) (V : G₂.obj P ≅ J) (L : I ⟶ G₂.obj P) (R : G₂.obj P ⟶ J)
+    (h0 : ∀ f : P ⟶ P, ∃ k : ℤ, f = k • 𝟙 P)
+    (hU : ∀ h : I ⟶ G₂.obj P, ∃ f : P ⟶ P, h = U ≫ G₂.map f)
+    (hfull : ∀ h : G₂.obj P ⟶ G₂.obj P, ∃ f : P ⟶ P, h = G₂.map f) :
+    ∃ c : ℤ, ∀ (n : ℕ) (y : Ext.{w} P P n),
+      mk₀CompMk₀ L (y.mapExactFunctor G₂) R = c • mk₀CompMk₀ U (y.mapExactFunctor G₂) V.hom := by
+  obtain ⟨f₁, hf₁⟩ := hU L
+  obtain ⟨k, rfl⟩ := h0 f₁
+  obtain ⟨f₂, hf₂⟩ := hfull (R ≫ V.inv)
+  obtain ⟨r, rfl⟩ := h0 f₂
+  have hL : L = k • U := by
+    rw [hf₁, Functor.map_zsmul, Functor.map_id, Preadditive.comp_zsmul, Category.comp_id]
+  have hR : R = r • V.hom := by
+    rw [← Category.comp_id R, ← V.inv_hom_id, ← Category.assoc, hf₂, Functor.map_zsmul,
+      Functor.map_id, Preadditive.zsmul_comp, Category.id_comp]
+  refine ⟨k * r, fun n y ↦ ?_⟩
+  rw [hL, hR, mk₀CompMk₀_zsmul_left, mk₀CompMk₀_zsmul_right, smul_smul]
+
 end CategoryTheory.Abelian.Ext
