@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **3809**, closure **144**, holes in definitions **9**, definitions with undetermined data **316** (closure **3**).
+Holes now: library **3798**, closure **144**, holes in definitions **9**, definitions with undetermined data **315** (closure **3**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -130,7 +130,6 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 - `Sheaf.Paper.AdicCoefficientDatum::AlgebraicGeometry.Scheme.completedReductionTower` (line 527), chosen from `AlgebraicGeometry.Scheme.completedReductionTower_exists`
 - `Sheaf.Paper.AdicCoefficientDatum::AlgebraicGeometry.Scheme.completedReductionTransition` (line 427), chosen from `AlgebraicGeometry.Scheme.completedReductionTransition_exists`
 - `Sheaf.Paper.AdicCoefficientDatum::AlgebraicGeometry.Scheme.reductionBalance` (line 572), chosen from `AlgebraicGeometry.Scheme.reductionBalance_exists`
-- `Sheaf.Paper.AdicGlobalDerivedHom::AlgebraicGeometry.Scheme.adicScalar` (line 62), chosen from `AlgebraicGeometry.Scheme.adicScalar_exists`
 - `Sheaf.Paper.AlgebraicallyClosedCoefficients::WeilConjectures.AlgebraicallyClosedCoefficients.hasShift` (line 456), chosen from `WeilConjectures.AlgebraicallyClosedCoefficients.shift_exists`
 - `Sheaf.Paper.AlgebraicallyClosedCoefficients::WeilConjectures.AlgebraicallyClosedCoefficients.homCoordinates` (line 347), chosen from `WeilConjectures.AlgebraicallyClosedCoefficients.homCoordinates_existsUnique`
 - `Sheaf.Paper.AlgebraicallyClosedCoefficients::WeilConjectures.AlgebraicallyClosedCoefficients.inclusionCommShift` (line 465), chosen from `WeilConjectures.AlgebraicallyClosedCoefficients.shift_exists`
@@ -339,20 +338,20 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 3643 | 47 |
+| Sheaf | 3632 | 47 |
 | WeilConjectures | 166 | 97 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 1808 | 3421 | -1613 | 733 | 14 |
-| 660345513 (Application of proof-dependency imports) | library | 1805 | 3420 | -1615 | 679 | 14 |
+| 889327369 (Queue at the start of stage 3) | library | 1808 | 3410 | -1602 | 733 | 14 |
+| 660345513 (Application of proof-dependency imports) | library | 1805 | 3409 | -1604 | 679 | 14 |
 | 660345513 (Application of proof-dependency imports) | closure | 1500 | 75 | 1425 | 603 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
 | landing class | count |
 |---|---:|
-| proved | 4250 |
+| proved | 4261 |
 | decomposed | 56 |
 | moved | 4161 |
 | pruned | 147 |
@@ -375,13 +374,13 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | B3 | 164 | 172 | 97 | 75 | 67/164 (40.9%) |
 | B4 | 83 | 86 | 52 | 34 | 36/83 (43.4%) |
 | B5 | 2 | 2 | 1 | 1 | 1/2 (50.0%) |
-| B6 | 3 | 3 | 1 | 2 | 1/3 (33.3%) |
+| B6 | 4 | 4 | 1 | 3 | 1/4 (25.0%) |
 | B7 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
 | B8 | 2 | 6 | 0 | 6 | 0/2 (0.0%) |
 | B9 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
 | C1 | 156 | 160 | 118 | 42 | 77/156 (49.4%) |
-| C2 | 136 | 130 | 89 | 41 | 61/136 (44.9%) |
-| C3 | 127 | 135 | 82 | 53 | 57/127 (44.9%) |
+| C2 | 137 | 131 | 89 | 42 | 61/137 (44.5%) |
+| C3 | 128 | 136 | 82 | 54 | 57/128 (44.5%) |
 | C4 | 74 | 74 | 35 | 39 | 23/74 (31.1%) |
 | C5 | 2 | 3 | 0 | 3 | 0/2 (0.0%) |
 | C6 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
@@ -390,7 +389,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | C9 | 2 | 2 | 1 | 1 | 1/2 (50.0%) |
 | D2 | 155 | 152 | 93 | 59 | 64/155 (41.3%) |
 | D3 | 124 | 141 | 74 | 67 | 53/124 (42.7%) |
-| D4 | 82 | 88 | 48 | 40 | 29/82 (35.4%) |
+| D4 | 83 | 89 | 48 | 41 | 29/83 (34.9%) |
 | D5 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
 | D6 | 2 | 2 | 1 | 1 | 1/2 (50.0%) |
 | D7 | 2 | 2 | 4 | -2 | 2/2 (100.0%) |
@@ -401,7 +400,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | E3 | 127 | 146 | 100 | 46 | 60/127 (47.2%) |
 | E4 | 62 | 69 | 33 | 36 | 22/62 (35.5%) |
 | E5 | 2 | 4 | 0 | 4 | 0/2 (0.0%) |
-| E6 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
+| E6 | 3 | 3 | 0 | 3 | 0/3 (0.0%) |
 | E7 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
 | E8 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
 | E9 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
@@ -423,7 +422,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | G7 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | G8 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | G9 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
-| H1 | 145 | 144 | 111 | 33 | 77/145 (53.1%) |
+| H1 | 146 | 145 | 111 | 34 | 77/146 (52.7%) |
 | H2 | 120 | 131 | 92 | 39 | 66/120 (55.0%) |
 | H3 | 128 | 146 | 103 | 43 | 70/128 (54.7%) |
 | H4 | 66 | 65 | 42 | 23 | 31/66 (47.0%) |
@@ -440,7 +439,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | J6 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | J7 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | J8 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
-| J9 | 1 | 1 | 2 | -1 | 1/1 (100.0%) |
+| J9 | 2 | 2 | 2 | 0 | 1/2 (50.0%) |
 | K1 | 126 | 156 | 89 | 67 | 61/126 (48.4%) |
 | K2 | 127 | 127 | 84 | 43 | 65/127 (51.2%) |
 | K3 | 113 | 113 | 79 | 34 | 57/113 (50.4%) |
@@ -456,7 +455,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | M4 | 50 | 54 | 25 | 29 | 18/50 (36.0%) |
 | M5 | 1 | 1 | 1 | 0 | 1/1 (100.0%) |
 | M6 | 2 | 4 | 0 | 4 | 0/2 (0.0%) |
-| M7 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| M7 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
 | M8 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | M9 | 1 | 1 | 1 | 0 | 1/1 (100.0%) |
 | N1 | 141 | 142 | 110 | 32 | 75/141 (53.2%) |
@@ -493,7 +492,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | S2 | 129 | 139 | 105 | 34 | 67/129 (51.9%) |
 | S3 | 110 | 107 | 63 | 44 | 48/110 (43.6%) |
 | S4 | 52 | 50 | 36 | 14 | 25/52 (48.1%) |
-| S5 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| S5 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
 | S6 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | S7 | 1 | 2 | 0 | 2 | 0/1 (0.0%) |
 | S8 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
@@ -510,11 +509,11 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | U1 | 129 | 132 | 92 | 40 | 62/129 (48.1%) |
 | U2 | 139 | 133 | 93 | 40 | 64/139 (46.0%) |
 | U3 | 103 | 106 | 70 | 36 | 50/103 (48.5%) |
-| U4 | 57 | 57 | 40 | 17 | 28/57 (49.1%) |
+| U4 | 58 | 58 | 40 | 18 | 28/58 (48.3%) |
 | U5 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | U6 | 1 | 1 | 1 | 0 | 1/1 (100.0%) |
 | U7 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
-| U8 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| U8 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
 | U9 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | V1 | 119 | 112 | 86 | 26 | 56/119 (47.1%) |
 | V2 | 130 | 133 | 90 | 43 | 62/130 (47.7%) |
