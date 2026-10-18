@@ -23,135 +23,91 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-weil-pbc-etale-restriction-injectives] to the constant ring $A$: the sum-extension functor defined in [def-weil-pbc-etale-sum-extension] is exact and satisfies $u_!\\dashv u^*$ on module sheaves. The inverse-image functor is exact by [prop-weil-pbc-inverse-image-modules-exact]. These assertions hold for every commutative ring $A$.",
+   "text": "Reuse the exact sheaf sum-extension/restriction adjunction and its existing termwise unbounded derived adjunction derivedEtaleLowerShriekUpperStarAdjunction. These are the first assertion; no reconstruction via stalks or bounded truncations is needed.",
    "uses": [
-    "lem-weil-pbc-etale-restriction-injectives",
     "def-weil-pbc-etale-sum-extension",
-    "prop-weil-pbc-inverse-image-modules-exact"
+    "lem-weil-pbc-etale-restriction-injectives",
+    "lem-weil-pbc-exact-functor-derived-factorization"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03S3 (definition-extension-zero), 03S5 (proposition-describe-jshriek)"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/lem-amb-etale-adjoint-locality.proof.md",
+    "place": "Paragraph 2, displayed Hom calculation and Yoneda; normalization of the existing left comparison"
    }
   },
   {
-   "text": "Both exact functors descend termwise to the entire unbounded derived categories by [lem-weil-pbc-exact-functor-derived-factorization]. By [lem-weil-pbc-termwise-adjunction-homotopy], their sheaf unit and counit give a complex adjunction. Descend these transformations by clause (2) of [lem-weil-pbc-localization-universal-property]. Their triangle identities hold after precomposition with localization, since they hold degreewise; clause (3) of the same node implies the identities on the derived categories. This proves $Du_!\\dashv u^*$ with no boundedness assumption.",
+   "text": "Prove that the canonical sheaf arrow from a compactification candidate to direct image is monic. For an open immersion j, the localization functor is fully faithful. At a test object V its left-Kan-extension indexing category is empty, or has a terminal object whose structure arrow is invertible: a lift of V gives V itself as an object over the open. Thus a presheaf arrow out of j-presheaf-extension is monic whenever its transpose is monic. In the empty case its source is zero; in the terminal-object case its component is the transpose composed with isomorphisms. Apply sheafification, which preserves monomorphisms, and use the sheafification adjunction to conclude the same for sheaves. The transpose of j_!F to j_*F is the inverse restriction/direct-image counit, by the triangle identity, so the comparison is monic. Direct image preserves monomorphisms; postcomposing its image with the direct-image composition isomorphism proves the assertion for every compactification.",
    "uses": [
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-weil-pbc-localization-universal-property"
+    "def-weil-pbc-extension-by-zero",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-direct-image"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/lem-amb-etale-adjoint-locality.proof.md",
-    "place": "Paragraph 1, last two sentences"
+    "place": "Paragraph 2, displayed Hom calculation and Yoneda; normalization of the existing left comparison"
    }
   },
   {
-   "text": "For the compact-support assertion assume $A$ finite, and let $f:X\\to S$ and $fu:U\\to S$ be compactifiable morphisms between Noetherian schemes, so $U$, $X$ and $S$ are Noetherian. Then $u$ is a separated etale morphism of finite type between Noetherian schemes, and [lem-asd-etale-compact-support-normalization] applies to it. For every compactification $U\\xrightarrow{j}\\overline U\\xrightarrow{r}X$ of $u$ it gives a canonical natural isomorphism $c_{u,(j,r)}:Rr_*Dj_!\\xrightarrow{\\sim}Du_!$ on all unbounded complexes. Here $Rr_*Dj_!$ is the candidate of [def-amb-etale-compact-support], and $Du_!$ is the degreewise descent of step 2. Its degree-zero sheaf map sends a section with support proper over an etale test object to its components on the etale sheets. These isomorphisms agree under the proper-refinement comparisons normalized to be the identity over $U$. They carry the compact-support adjunction of [thm-amb-etale-exceptional-adjoint] for $u$ to $Du_!\\dashv u^*$, including its sum/evaluation counit. No particular compactification of $u$ is chosen here; step 5 supplies one.",
+   "text": "For two normalization families N and Nprime, their sheafComparison arrows have the same composite with the preceding monomorphism by sheaf_normalization. Cancel it objectwise to obtain equality of the sheaf arrows. Their comparison inverses agree on every homotopy representative by derived_normalization. Precomposition with the localization Qh is faithful on natural transformations, so their inverse natural transformations, and hence their comparison isomorphisms, are equal. This establishes equality of comparisons, without choosing arbitrary data from an existence theorem.",
    "uses": [
     "lem-asd-etale-compact-support-normalization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/lem-amb-etale-adjoint-locality.proof.md",
+    "place": "Paragraph 2, displayed Hom calculation and Yoneda; normalization of the existing left comparison"
+   }
+  },
+  {
+   "text": "Use the unchanged definition etaleAmbientLeftComparison. For c compactifying f and d compactifying u followed by f, form d.ofComp c. Whisker the inverse normalized comparison for its restriction with the c candidate; compose with rightDerivedLowerShriekOfCompactificationCompIso and rightDerivedLowerShriekOfCompactificationIso. These existing unbounded constructors already implement the proper/open exchange, open-extension composition, derived direct-image composition and common-refinement comparison, so there is no bounded-below telescope argument in this module.",
+   "uses": [
     "def-amb-etale-compact-support",
-    "thm-amb-etale-exceptional-adjoint"
+    "lem-asd-etale-compact-support-normalization",
+    "lem-amb-unbounded-proper-open-interchange",
+    "lem-cbc-extension-zero-composition",
+    "lem-cbc-compactifiable-cofiltered",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/lem-amb-etale-adjoint-locality.proof.md",
-    "place": "Paragraph 1, sentences 2-4: sections on $U\\times_XV$ with support proper over $V$ are the direct sum of sections on the sheets; Stacks more-etale.tex Tag 0GKM (lemma-Rf-shriek-for-quasi-finite)"
+    "place": "Paragraph 2, displayed Hom calculation and Yoneda; normalization of the existing left comparison"
    }
   },
   {
-   "text": "Obtain unbounded refinement comparisons directly from [lem-amb-unbounded-proper-open-interchange]. Let $h:Z\\to B$ be a compactifiable morphism of Noetherian schemes, and let $q:T_1\\to T_2$ be a proper refinement of compactifications $(j_1,r_1),(j_2,r_2)$ of $h$, with $qj_1=j_2$ and $r_1=r_2q$. Use the interchange square with left proper map $\\mathrm{id}_Z$, right proper map $q$, and top and bottom opens $j_1,j_2$. It gives $Dj_{2!}\\xrightarrow{\\sim}Rq_*Dj_{1!}$. Apply $Rr_{2*}$ and [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to compare $Rr_{2*}Dj_{2!}$ with $Rr_{1*}Dj_{1!}$. Vertical pasting in the interchange node proves compatibility with composite refinements and identities. All ambient compactifications are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], as their proper maps to the Noetherian target are finite type. The cofiltered category in [lem-cbc-compactifiable-cofiltered] now identifies any two candidates canonically: choose a common refinement and compose one comparison with the inverse of the other. Two choices have a common further refinement, where the composite identities just proved make these maps equal; the same argument for three objects gives the cocycle identity. Since the left edge is $\\mathrm{id}_Z$, these are the refinement comparisons normalized to be the identity over $Z$, so for $h=u$ the isomorphisms of step 3 are compatible with them.",
-   "uses": [
-    "lem-amb-unbounded-proper-open-interchange",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-cbc-compactifiable-cofiltered"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7B case (b), 0F7C, 0F7I: proper-refinement comparisons on unbounded inputs"
-   }
-  },
-  {
-   "text": "For composable compactifiable maps $Z\\xrightarrow{h}Y\\xrightarrow{g}B$, choose compactifications $Y\\xrightarrow{i}\\overline Y\\xrightarrow{s}B$ of $g$ and $Z\\xrightarrow{a_0}W\\xrightarrow{t}B$ of $gh$. By [lem-cbc-compactifiable-compatible-tower] choose a compatible tower $Z\\xrightarrow{a}\\overline Z\\xrightarrow{p}\\overline Y$ and put $V=\\overline Z\\times_{\\overline Y}Y$, with open $b:V\\hookrightarrow\\overline Z$, proper $q:V\\to Y$, and open $j:Z\\hookrightarrow V$, so $bj=a$. The ambient schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]; $V$ is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. The proper/open isomorphism $Di_!Rq_*\\xrightarrow{\\sim}Rp_*Db_!$ of [lem-amb-unbounded-proper-open-interchange] gives\n$$Rg_!Rh_!=Rs_*Di_!Rq_*Dj_!\\xrightarrow{\\sim}Rs_*Rp_*Db_!Dj_!\\cong R(sp)_*Da_!=R(gh)_!.$$\nThe last identification uses [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] and the degreewise descent of [lem-cbc-extension-zero-composition], justified by [lem-weil-pbc-localization-universal-property]. Every arrow is defined on unbounded complexes over the finite ring $A$. Take $h=u$ and $g=f$, with $(i,s)$ the compactification of $f$ used for $f^\\times$ and $(a_0,t)$ the compactification of $fu$ used for $(fu)^\\times$. The tower supplies a proper $v:\\overline Z\\to W$ with $va=a_0$ and $tv=sp$, so step 4 identifies $R(sp)_*Da_!$ with $Rt_*Da_{0!}$. Precompose with $Rs_*Di_!$ of the inverse of $c_{u,(j,q)}$ from step 3 for the compactification $(j,q)$ of $u$ produced by the tower. This gives $c_M:Rf_!Du_!M\\xrightarrow{\\sim}R(fu)_!M$.",
-   "uses": [
-    "lem-cbc-compactifiable-compatible-tower",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "lem-amb-unbounded-proper-open-interchange",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-cbc-extension-zero-composition",
-    "lem-weil-pbc-localization-universal-property",
-    "lem-asd-etale-compact-support-normalization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7J (lemma-shriek-composition), tower calculation; Tag 0F7B case (b)"
-   }
-  },
-  {
-   "text": "The composition calculation is canonical under the comparisons of step 4. Indeed two towers have a common refining tower by [lem-cbc-compactifiable-compatible-tower]; its comparison diagram consists of proper/open squares. Vertical pasting for [lem-amb-unbounded-proper-open-interchange] says that inserting a proper refinement before the tower interchange equals inserting it after. Horizontal pasting says that combining its two open arrows agrees with their composite. These are precisely the two ways around the comparison diagram for the displayed chain in step 5, so that chain is independent of tower. For three factors, the same two pasting identities identify each parenthesized chain with the chain for the outer rectangles. The direct-image identifications [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] are the canonical ones on resolutions, and the open-extension identifications [lem-cbc-extension-zero-composition] are associative; hence composition is associative. The isomorphisms $c_{u,(j,q)}$ of step 3 agree under refinement comparisons, so the inverse inserted in step 5 is unchanged when the tower is refined; hence $c_M$ is independent of the tower. For two etale maps their iterated sheaf sum sends a nested lift and its section to the composite lift and the same section; this agrees with the composite adjunction counit, which evaluates that section. This also fixes the etale composition normalization.",
-   "uses": [
-    "lem-cbc-compactifiable-compatible-tower",
-    "lem-amb-unbounded-proper-open-interchange",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-cbc-extension-zero-composition",
-    "def-weil-pbc-etale-sum-extension",
-    "lem-asd-etale-compact-support-normalization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7C, 0F7D, 0F7J, 0F7K: independence and associativity; graph normalization from etale-cohomology.tex Tag 03S5"
-   }
-  },
-  {
-   "text": "For $M\\in D(U_{\\mathrm{et}},A)$ and $K\\in D(S_{\\mathrm{et}},A)$, step 2, [thm-amb-etale-exceptional-adjoint], and $c_M$ give natural bijections\n$$\\operatorname{Hom}_U(M,u^*f^\\times K)\\cong\\operatorname{Hom}_X(Du_!M,f^\\times K)\\cong\\operatorname{Hom}_S(Rf_!Du_!M,K)\\cong\\operatorname{Hom}_S(R(fu)_!M,K)\\cong\\operatorname{Hom}_U(M,(fu)^\\times K).$$\nSend the identity on $u^*f^\\times K$ through these bijections to define $e_K:u^*f^\\times K\\to(fu)^\\times K$. Using the inverse bijections on the other identity defines its inverse: naturality in $M$ makes both composites identities. Naturality in $K$ gives the asserted natural isomorphism. The adjoint theorem applies because $f$ and $fu$ are compactifiable between Noetherian schemes and $A$ is finite.",
+   "text": "Take a witness Nzero from nonempty_etaleCompactSupportNormalization in the theorem proof. Compose the derived sum-extension adjunction with the supplied adjF, and transport its left functor through etaleAmbientLeftComparison for Nzero. This gives an adjunction of the d candidate with F followed by derived restriction. Apply Mathlib Adjunction.rightAdjointUniq to this adjunction and adjG. Mathlib rightAdjointUniq_hom_app_counit, the formula for ofNatIsoLeft_counit and the composite-counit formula give exactly the stated normalization. Step 3 replaces Nzero by every N. For uniqueness, apply the inverse homEquiv of adjG objectwise: the stated equation at Nzero forces the same transpose and hence the same components. Natural-transformation and isomorphism extensionality give uniqueness. The construction is the displayed Hom-bijection/Yoneda argument, with its specified counit.",
    "uses": [
     "thm-amb-etale-exceptional-adjoint"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/lem-amb-etale-adjoint-locality.proof.md",
-    "place": "Paragraph 2, displayed Hom calculation and Yoneda"
-   }
-  },
-  {
-   "text": "Write $L=u^*f^\\times K$. The transpose of $e_K$ is exactly\n$$R(fu)_!L\\xrightarrow{c_L^{-1}}Rf_!Du_!L\\xrightarrow{Rf_!(\\varepsilon^u_{f^\\times K})}Rf_!f^\\times K\\xrightarrow{\\varepsilon^f_K}K.$$\nThis identifies the counit normalization; the corresponding unit is the transpose under the same Hom bijections, and its triangle identities are those of the two adjunctions. For further etale $v:W\\to U$, the composite sum-extension adjunction has counit $\\varepsilon^u\\circ Du_!(\\varepsilon^v)$. The direct and iterated Hom bijections therefore compose with the same two evaluation counits and $\\varepsilon^f$, by step 6's associativity and etale normalization. They agree for every $M$, so applying them to the identities gives the same direct and iterated locality isomorphisms.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/lem-amb-etale-adjoint-locality.proof.md",
-    "place": "Paragraph 2, compatibility with units, counits, and further etale localization"
+    "place": "Paragraph 2, displayed Hom calculation and Yoneda; normalization of the existing left comparison"
    }
   }
  ],
  "proof_deps": [
   "def-amb-etale-compact-support",
+  "def-weil-pbc-direct-image",
   "def-weil-pbc-etale-sum-extension",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-sheafification",
   "lem-amb-unbounded-proper-open-interchange",
   "lem-asd-etale-compact-support-normalization",
   "lem-cbc-compactifiable-cofiltered",
-  "lem-cbc-compactifiable-compatible-tower",
   "lem-cbc-extension-zero-composition",
   "lem-weil-pbc-etale-restriction-injectives",
   "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "prop-weil-pbc-inverse-image-modules-exact",
   "thm-amb-etale-exceptional-adjoint"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-affine-local/lem-amb-etale-adjoint-locality.proof.md",
-  "place": "Both paragraphs, expanded along Stacks 03S3, 03S5, 0GKM and 0F7B–0F7K; existing finite-ring scope retained"
+  "place": "Paragraph 2, displayed Hom calculation and Yoneda; normalization of the existing left comparison; Lean proof by C3, 2026-10-18, reusing existing unbounded comparison constructors"
  },
  "mathlib_searches": [
   {
@@ -334,48 +290,11 @@
   ]
  },
  "tool_uses": [
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-etale-inverse-image-restriction",
-  "lem-weil-pbc-etale-localization-functor-adjoint",
-  "lem-weil-pbc-etale-section-clopen-immersion",
-  "lem-weil-pbc-separated-base-change",
   "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-etale-ring-map-quasi-finite",
-  "thm-pqf-zmt-factorization",
-  "lemma-weil-pbc-finite-stalk-formula",
-  "lem-weil-pbc-extension-by-zero-stalks",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "lem-weil-pbc-section-separated-closed-immersion",
-  "lem-weil-pbc-finite-proper",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-open-immersion-base-change",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "lemma-weil-pbc-finite-direct-image-exact",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-open-section-clopen",
-  "lem-weil-pbc-proper-base-change",
-  "lem-weil-pbc-etale-sheaf-clopen-product",
-  "thm-nagata-compactification",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-pc-right-derived-functor-triangulated",
-  "lem-kun-complex-colimit-hocolim",
-  "lem-kun-functor-preserves-hocolim",
-  "lem-weil-pbc-commshift-nattrans-triangle-morphism",
-  "lem-weil-pbc-derived-cohomology-ladder",
-  "lem-fin-finite-type-fibre-dimension-bound",
-  "lem-kun-proper-torsion-cd-bound",
-  "lem-kun-unbounded-abelian-exchange-comparison",
-  "def-weil-proper-morphism",
-  "lem-exc-direct-image-coproducts",
-  "prop-weil-pbc-geometric-stalks-exact",
   "lem-amb-unbounded-proper-open-interchange",
   "lem-weil-pbc-etale-restriction-injectives",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-pbc-termwise-adjunction-homotopy"
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -396,12 +315,12 @@
    "AlgebraicGeometry.Etale.isLeftAdjoint_etaleLowerShriek"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/EtaleAmbientAdjointLocality.lean",
-  "statement": "theorem existsUnique_etaleAmbientAdjointLocalityIso (A : Type (u + 1)) [CommRing A] [Finite A] {U X S : Scheme.{u}} (u : U ⟶ X) (f : X ⟶ S) [Etale u] [IsSeparated u] [LocallyOfFiniteType u] [QuasiCompact u] [IsNoetherian U] [IsNoetherian X] [IsNoetherian S] (c : Compactification f) (d : Compactification (u ≫ f)) (F : DerivedCategoryModule A S ⥤ DerivedCategoryModule A X) (G : DerivedCategoryModule A S ⥤ DerivedCategoryModule A U) (adjF : rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ⊣ F) (adjG : rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) d ⊣ G) : ∃! e : F ⋙ (upperStar (ModuleCat.{u + 1} A) u).mapDerivedCategory ≅ G, ∀ (N : EtaleCompactSupportNormalization A) (K : DerivedCategoryModule A S), (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) d).map (e.hom.app K) ≫ adjG.counit.app K = (etaleAmbientLeftComparison A N u f c d).inv.app ((upperStar (ModuleCat.{u + 1} A) u).mapDerivedCategory.obj (F.obj K)) ≫ (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).map ((derivedEtaleLowerShriekUpperStarAdjunction A u).counit.app (F.obj K)) ≫ adjF.counit.app K",
+  "statement": "theorem existsUnique_etaleAmbientAdjointLocalityIso\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {U X S : Scheme.{u}} (u : U ⟶ X) (f : X ⟶ S)\n    [Etale u] [IsSeparated u] [LocallyOfFiniteType u] [QuasiCompact u]\n    [IsNoetherian U] [IsNoetherian X] [IsNoetherian S]\n    (c : Compactification f) (d : Compactification (u ≫ f))\n    (F : DerivedCategoryModule A S ⥤ DerivedCategoryModule A X)\n    (G : DerivedCategoryModule A S ⥤ DerivedCategoryModule A U)\n    (adjF : rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ⊣ F)\n    (adjG : rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) d ⊣ G) :\n    ∃! e : F ⋙ (upperStar (ModuleCat.{u + 1} A) u).mapDerivedCategory ≅ G,\n      ∀ (N : EtaleCompactSupportNormalization A) (K : DerivedCategoryModule A S),\n        (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) d).map\n            (e.hom.app K) ≫ adjG.counit.app K =\n          (etaleAmbientLeftComparison A N u f c d).inv.app\n              ((upperStar (ModuleCat.{u + 1} A) u).mapDerivedCategory.obj (F.obj K)) ≫\n            (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).map\n              ((derivedEtaleLowerShriekUpperStarAdjunction\n                (ModuleCat.{u + 1} A) u inferInstance).counit.app (F.obj K)) ≫\n            adjF.counit.app K",
   "branch": "newtargets-dag",
   "by": "NE",
   "date": "2026-10-15",
   "existing": false,
-  "note": "Sheaf exactness reuses the upstream finite-limit-preservation instance and left-adjoint structure (hence finite-colimit preservation). The degreewise unbounded adjunction is constructed from the existing sheaf adjunction. etaleAmbientLeftComparison constructs the specified left comparison from graph normalization, compatible-compactification composition and common-refinement comparison, without any data choice from a mere Nonempty isomorphism. The theorem uniquely characterizes the natural locality isomorphism by its counit transpose, for arbitrary compactifications and adjunctions, simultaneously for every graph-normalized comparison family (whose existence is recorded on lem-asd-etale-compact-support-normalization)."
+  "note": "Sheaf exactness reuses the upstream finite-limit-preservation instance and left-adjoint structure (hence finite-colimit preservation). The degreewise unbounded adjunction is constructed from the existing sheaf adjunction. etaleAmbientLeftComparison constructs the specified left comparison from graph normalization, compatible-compactification composition and common-refinement comparison, without any data choice from a mere Nonempty isomorphism. The theorem uniquely characterizes the natural locality isomorphism by its counit transpose, for arbitrary compactifications and adjunctions, simultaneously for every graph-normalized comparison family (whose existence is recorded on lem-asd-etale-compact-support-normalization). C3 proved the remaining theorem on 2026-10-18: private, fully proved Kan-extension helpers establish comparison uniqueness; the existing composite adjunction and Mathlib right-adjoint uniqueness supply the counit-normalized unique isomorphism. No new holes or public declarations."
  },
  "reviewed_lean": {
   "date": "2026-10-15",
@@ -430,5 +349,15 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261018T062711-L-635316",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
