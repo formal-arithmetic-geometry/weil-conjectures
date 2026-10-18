@@ -11,9 +11,165 @@
   "def-trf-fs-log-blowup",
   "def-per-fs-log-smooth-etale"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-per-tame-admissible-scheme-quotient] to the underlying $G$-scheme: admissibility supplies its invariant affine cover, and very tameness supplies its prime-to-residue-characteristic inertia hypothesis. It gives a Noetherian scheme quotient $q:X\\to Y$, finite surjective with geometric orbit fibres and $\\mathcal O_Y=(q_*\\mathcal O_X)^G$, and its categorical property. Put $N=(q_*M)^G$. This is a log structure: an invariant section whose structural image is a unit is an invariant unit, and the inverse of an invariant unit is invariant; the identification of structural units is therefore $N\\cap\\mathcal O_Y^\\times=\\mathcal O_Y^\\times$.",
+   "uses": [
+    "lem-per-tame-admissible-scheme-quotient",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI Theorem 3.2 and paragraph after Proposition 3.5, printed pp.74–75"
+   }
+  },
+  {
+   "text": "Fix $\\bar x$ and $\\bar y=q(\\bar x)$, and put $H=\\operatorname{Stab}_G(\\bar x)$, $A=\\mathcal O_{X,\\bar x}$ and $B=\\mathcal O_{Y,\\bar y}$. Apply [lem-per-finite-quotient-strict-local-invariants]: $B=A^H$, $A$ is finite over $B$, and $N_{\\bar y}=M_{\\bar x}^H$. These are strict local rings at geometric points, not invariants under the stabilizer of an ordinary point. By [lem-sc-strict-henselization-noetherian], $A$ and $B$ are Noetherian. Write $Q=\\overline M_{\\bar x}$ and $I$ for the nonunit log ideal. Log regularity gives $A/I$ regular and $\\dim A=\\dim(A/I)+\\operatorname{rank}Q^{\\rm gp}$.",
+   "uses": [
+    "lem-per-finite-quotient-strict-local-invariants",
+    "lem-sc-strict-henselization-noetherian",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI paragraph after 3.5 and proof 3.7(b), printed pp.74–75"
+   }
+  },
+  {
+   "text": "Apply [lem-per-very-tame-equivariant-sharp-chart] to obtain the $H$-equivariant sharp fs chart $a:Q\\to M$ and diagonal pairing $\\chi$ with fixed roots of unity. Its hypotheses are exactly invertibility of $n=|H|$ and triviality on $Q$. The further very-tame hypothesis is triviality on $A/I$, where $I=(a(u):u\\ne0)A$. Apply [lem-per-very-tame-local-kummer-quotient] using the finite extension of Step 2. It gives $P=Q\\cap L$ with $P$ sharp fs, $P^{\\rm gp}=L\\supset nQ^{\\rm gp}$, finite index, a pointed etale-local chart of the actual $N$, and $B/J\\simeq A/I$, where $J=(a(p):p\\ne0)B$. In particular $N$ is fs, since the neighbourhood clause supplies a chart at every $\\bar y$. Also $nu\\in P$ for every $u\\in Q$, directly from $\\chi_{nu}=\\chi_u^n=1$.",
+   "uses": [
+    "lem-per-very-tame-equivariant-sharp-chart",
+    "lem-per-very-tame-local-kummer-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 3.5(a)–(b) and 3.7(a)–(b), printed pp.74–76"
+   }
+  },
+  {
+   "text": "The finite injective extension $B\\hookrightarrow A$ is integral by [lem-weil-pbc-finite-algebra-is-integral]; [lem-weil-pbc-integral-injective-dimension-equal] gives $\\dim B=\\dim A$. The finite-index inclusion $P^{\\rm gp}=L\\subset Q^{\\rm gp}$ gives equal rational ranks, because $nQ^{\\rm gp}\\subset L$. Hence\n$$\\dim B=\\dim(A/I)+\\operatorname{rank}Q^{\\rm gp}=\\dim(B/J)+\\operatorname{rank}P^{\\rm gp}.$$\nThe quotient $B/J$ is regular by the stratum isomorphism. As $P$ identifies with the characteristic of $N$ at $\\bar y$, $J$ is precisely its nonunit log ideal. Thus the stratum and dimension conditions of [def-trf-fs-log-blowup] hold at every geometric point, proving that $(Y,N)$ is log regular. This argument does not require $X$ to be integral or to come with a preselected global pair.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-injective-dimension-equal",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI proof 3.7(c), printed p.76"
+   }
+  },
+  {
+   "text": "Set $C=B\\otimes_{\\mathbf Z[P]}\\mathbf Z[Q]$. By [lem-per-tame-diagonal-standard-closed-immersion], whose quotient, chart, fixed-root, and trivial-stratum hypotheses were checked in Steps 1–3, the comparison $C\\to A$ is surjective and is represented etale locally by a strict closed immersion. If $q_1,\\ldots,q_s$ generate $Q$, then $nq_i\\in P$. Reducing each coefficient of a monomial expression modulo $n$ shows that the finitely many $z^{\\sum r_iq_i}$, $0\\le r_i<n$, generate $C$ as a $B$-module. Thus $C$ is Noetherian by [lem-weil-pbc-finite-algebra-noetherian], and $B\\to C$ is injective since its composite with $C\\to A$ is the inclusion $B\\hookrightarrow A$.",
+   "uses": [
+    "lem-per-tame-diagonal-standard-closed-immersion",
+    "lem-weil-pbc-finite-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI proof 3.7(b), comparison (3.c), printed p.76"
+   }
+  },
+  {
+   "text": "The ring $C$ is strictly henselian local. Indeed, apply [lem-weil-pbc-finite-over-henselian-local-product] to its finite algebra over strictly henselian $B$. In the closed fibre, every nonzero monomial is nilpotent, since $(z^u)^n=z^{nu}$ with $0\\ne nu\\in P$ maps to zero in the residue field. Here $nu\\ne0$: saturation and sharpness imply that $Q^{\\rm gp}$ is torsion free, since $nv=0$ puts both $v,-v$ in $Q$, so $v$ is a unit. There are finitely many monoid generators, so the ideal of nonzero monomials in this fibre is nilpotent and the quotient is $k=B/\\mathfrak m_B$. The finite henselian product therefore has exactly one factor with residue field $k$; hence $C$ is henselian local with separably closed residue field. The standard chart $P\\to Q$ on $\\operatorname{Spec}C\\to\\operatorname{Spec}B$ is injective, is Kummer, has group cokernel killed by $n$, and has identity comparison morphism. The strict localization $\\operatorname{Spec}B\\to Y$ is ind-etale locally on source and target, so by [lem-trf-ind-etale-strict-local-invariance] its strict localization at every geometric point of $\\operatorname{Spec}B$ is the strict localization of $Y$ at the image geometric point, and the pulled-back log structure, which has the chart $P$ by Step 3, has the same stalks there; hence the stratum and dimension conditions proved for $(Y,N)$ in Step 4 hold at every geometric point of $\\operatorname{Spec}B$. Apply [lem-per-invertible-kummer-chart-log-regular] to this log regular $(\\operatorname{Spec}B,P)$: $\\operatorname{Spec}C$ with chart $Q$ is log regular.",
+   "uses": [
+    "lem-weil-pbc-finite-over-henselian-local-product",
+    "lem-trf-ind-etale-strict-local-invariance",
+    "lem-per-invertible-kummer-chart-log-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.2, 1.8 and proof 3.7(c), printed pp.70,72,76"
+   }
+  },
+  {
+   "text": "The strictly local log regular ring $C$ is a domain. To see this without assuming regularity of its underlying scheme, apply [lem-trf-log-regular-completed-chart] to its closed geometric point. Its completion is one of the sharp fs formal-monoid models specified there. Both models are domains by [lem-trf-log-regular-saturation-normality], including the mixed-characteristic quotient. The completion map $C\\to\\widehat C$ is faithfully flat by [lem-weil-pbc-local-completion-faithfully-flat] and injective by [lem-weil-pbc-faithfully-flat-universally-injective] with module $C$. Thus $C$ embeds in a domain and is itself a domain. The choice of chart in the completed-model theorem is irrelevant to this conclusion.",
+   "uses": [
+    "lem-trf-log-regular-completed-chart",
+    "lem-trf-log-regular-saturation-normality",
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-universally-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.6 and proof 3.7(c), printed pp.70,76"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-algebra-is-integral] to $B\\hookrightarrow C$ and [lem-weil-pbc-integral-injective-dimension-equal] to get $\\dim C=\\dim B=\\dim A$. These dimensions are finite because the rings are Noetherian local; this finiteness is also included in [lem-weil-pbc-completion-dimension]. The surjection $C\\to A$ of Step 5 is injective: if its kernel were nonzero, every prime containing it would be nonzero in the domain $C$. A maximal-length chain of primes in $A$ would lift to a chain in $C$ which could be extended at the bottom by $(0)$, contradicting $\\dim C=\\dim A$. Hence $C\\simeq A$. Together with strictness, this proves the required strict-local cartesian monoid chart, rather than merely a closed immersion into a standard cover.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-injective-dimension-equal",
+    "lem-weil-pbc-completion-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI proof 3.7(c), last sentence, printed p.76"
+   }
+  },
+  {
+   "text": "Use the pointed etale neighbourhood comparison which is a strict closed immersion in Step 5. By the strict-localization clause of [lem-per-tame-diagonal-standard-closed-immersion], its map on strict local rings at the selected geometric points is the map $C\\to A$, which is the isomorphism proved in Step 8; for a closed immersion this is the base-changed quotient map, by [lem-trf-closed-immersion-strict-localization-cartesian]. The ordinary local ring of the target maps faithfully flatly to its strict henselization by [lem-sc-strict-henselization-faithfully-flat]. Apply [lem-weil-pbc-faithfully-flat-universally-injective] with the ordinary local ring itself as module: its map into its strict henselization is injective. The closed-immersion formula says every element of its kernel ideal maps to zero in this strict henselization, since the base-changed quotient map is an isomorphism. Injectivity therefore makes the ordinary localized kernel zero. The target is Noetherian, so finitely many generators of the kernel are each killed by a denominator outside the selected prime; restrict to their product's principal open. On that open the comparison is an isomorphism. Consequently the neighbourhood charts have etale comparison. Their injective monoid map has finite group cokernel killed by the locally invertible $n$, and $nu\\in P$ for all $u\\in Q$. If $Q^{\\rm gp}$ has $r$ generators, this cokernel is a quotient of $(\\mathbf Z/n)^r$, so its order divides $n^r$ and is invertible as required by the chart definition. The definition [def-per-fs-log-smooth-etale] now gives log etaleness, while the characteristic maps are Kummer. This proves all local-chart clauses and Kummer etaleness of $q$.",
+   "uses": [
+    "lem-per-tame-diagonal-standard-closed-immersion",
+    "lem-trf-closed-immersion-strict-localization-cartesian",
+    "lem-sc-strict-henselization-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-universally-injective",
+    "def-per-fs-log-smooth-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.1–2.2 and Proposition 3.5(b)–(c), printed pp.71–76"
+   }
+  },
+  {
+   "text": "Let $f:(X,M)\\to(S,M_S)$ be an invariant log morphism. The categorical property of the quotient from Step 1 gives a unique underlying map $g:Y\\to S$ with $f=gq$. The map of log sheaves $M_S\\to f_*M=g_*q_*M$ takes values in $g_*(q_*M)^G=g_*N$ because $f$ is invariant, so it defines a log morphism $g$ compatible with the already descended structural map. Any competing log morphism has the same underlying $g$, and its log map has the same composite into $g_*q_*M$; the inclusion $N\\hookrightarrow q_*M$ is injective, so the two log maps agree. This proves existence and uniqueness of the factorization.",
+   "uses": [
+    "lem-per-tame-admissible-scheme-quotient",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.3 and paragraph after Proposition 3.5, printed pp.73–74"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-tame-admissible-scheme-quotient",
+  "def-trf-fs-log-blowup",
+  "lem-per-finite-quotient-strict-local-invariants",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-per-very-tame-equivariant-sharp-chart",
+  "lem-per-very-tame-local-kummer-quotient",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-integral-injective-dimension-equal",
+  "lem-per-tame-diagonal-standard-closed-immersion",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "lem-per-invertible-kummer-chart-log-regular",
+  "lem-trf-log-regular-completed-chart",
+  "lem-trf-log-regular-saturation-normality",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-universally-injective",
+  "lem-weil-pbc-completion-dimension",
+  "lem-trf-closed-immersion-strict-localization-cartesian",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "def-per-fs-log-smooth-etale",
+  "lem-trf-ind-etale-strict-local-invariance"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Exposé VI §§2.1–3.7, pp.71–76; the domain, dimension-chain and neighbourhood-kernel arguments expand the final line of 3.7(c)."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -42,10 +198,45 @@
    "results": "{\"t\": \"2026-10-18T20:36:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"Kummer\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KummerExtension.«termK[_√_]»\", \"KummerDedekind.Ideal.irreducible_map_of_irreducible_minpoly\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk\", \"KummerDedekind.quotMapEquivQuotQuotMap\", \"KummerDedekind.emultiplicity_factors_map_eq_emultiplicity\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk_symm_apply_eq_span\", \"KummerDedekind.normalizedFactors_ideal_map_eq_normalizedFactors_min_poly_mk_map\", \"KummerDedekind.quotMapEquivQuotQuotMap_symm_apply\"], \"digest\": \"716f53183e49d042\"}; Read the returned results: ordinary smoothness, projective spectra, abstract group actions, monoid representations and unrelated manifold charts do not state this logarithmic assertion.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A very tame finite group action on a fine saturated log regular scheme has a Kummer etale quotient",
+   "results": "{\"t\": \"2026-10-18T21:40:04Z\", \"tool\": \"leansearch\", \"query\": \"A very tame finite group action on a fine saturated log regular scheme has a Kummer etale quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Finite.to_properlyDiscontinuousSMul\", \"Finite.of_finite_addAction_orbitRel_quotient\", \"Finite.of_finite_mulAction_orbitRel_quotient\", \"IsGaloisGroup.fixedPoints\", \"isCoveringMapOn_quotientMk_of_properlyDiscontinuousVAdd\", \"IsQuotientCoveringMap.isCancelSMul\", \"IsGalois.of_fixed_field\", \"MulAction.orbitRel.Quotient\"], \"digest\": \"7ffc72b7de640db8\"}; Read the results: finite set quotients, topological covering maps, field Galois theory and ordinary etale morphisms do not provide the log structures, diagonal chart or very-tame quotient assertion.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A very tame finite group action on a fine saturated log regular scheme has a Kummer etale quotient",
+   "results": "{\"t\": \"2026-10-18T21:40:17Z\", \"tool\": \"leanfinder\", \"query\": \"A very tame finite group action on a fine saturated log regular scheme has a Kummer etale quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.IsEtale.of_comp\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePair.instFormallyEtaleRing\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"Algebra.Etale.iff_exists_algEquiv_prod\"], \"digest\": \"69620d2f3a4ffd2f\"}; Read the results: finite set quotients, topological covering maps, field Galois theory and ordinary etale morphisms do not provide the log structures, diagonal chart or very-tame quotient assertion.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "KummerEtale",
+   "results": "{\"t\": \"2026-10-18T21:40:17Z\", \"tool\": \"loogle\", \"query\": \"KummerEtale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'KummerEtale'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the results: finite set quotients, topological covering maps, field Galois theory and ordinary etale morphisms do not provide the log structures, diagonal chart or very-tame quotient assertion.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer|LogRegular|logRegular",
+   "results": "{\"t\": \"2026-10-18T21:40:17Z\", \"tool\": \"grep\", \"query\": \"Kummer|LogRegular|logRegular\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the results: finite set quotients, topological covering maps, field Galois theory and ordinary etale morphisms do not provide the log structures, diagonal chart or very-tame quotient assertion.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite group quotient of a log regular fine saturated scheme under a very tame action is locally a standard Kummer cover",
+   "results": "{\"t\": \"2026-10-18T21:43:19Z\", \"tool\": \"leansearch\", \"query\": \"A finite group quotient of a log regular fine saturated scheme under a very tame action is locally a standard Kummer cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"isQuotientCoveringMap_iff\", \"isCoveringMapOn_quotientMk_of_properlyDiscontinuousVAdd\", \"QuotientGroup.finite\", \"MulAction.finite_quotient_of_finite_quotient_of_finite_quotient\", \"IsQuotientCoveringMap.mk\", \"isAddQuotientCoveringMap_quotientMk_of_properlyDiscontinuousVAdd\", \"IsQuotientCoveringMap\", \"isQuotientCoveringMap_quotientMk_of_properlyDiscontinuousSMul\"], \"digest\": \"6f26e1a4f1640823\"}; Read the results: finite set quotients, topological covering maps, field Galois theory and ordinary etale morphisms do not provide the log structures, diagonal chart or very-tame quotient assertion.",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-gabber-log-smooth-equivariant-modification",
@@ -71,5 +262,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-very-tame-log-quotient",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Reused equivariant sharp-chart and invariant-log-chart/stratum nodes. Added only the generic tame scheme quotient and the non-log-regular diagonal-chart closed-immersion input. Wrote log regularity by local dimensions, then the standard cover domain/equal-dimension argument to upgrade the closed immersion to an isomorphism and spread it to etale neighbourhoods. Universal log factorization is explicit.",
+  "blueprint": "Realizes the existing ancestor proof Step 3 through the recorded equivariant log-modification branch: ILO VI 3.2 and 3.5/3.7 supply the very-tame quotient and Kummer local model. No unit or chapter route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Generic commutative-algebra input: Strict henselization preserves Noetherianity of local rings. Used for the local standard-chart argument; this unit contains no replacement, and no trace, purity or duality theorem is used."
+   },
+   {
+    "node": "lem-weil-pbc-finite-algebra-is-integral",
+    "why": "Generic commutative-algebra input: A finite algebra is integral. Used for the local standard-chart argument; this unit contains no replacement, and no trace, purity or duality theorem is used."
+   },
+   {
+    "node": "lem-weil-pbc-integral-injective-dimension-equal",
+    "why": "Generic commutative-algebra input: An injective integral extension preserves Krull dimension. Used for the local standard-chart argument; this unit contains no replacement, and no trace, purity or duality theorem is used."
+   },
+   {
+    "node": "lem-weil-pbc-finite-algebra-noetherian",
+    "why": "Generic commutative-algebra input: A module-finite algebra over a Noetherian ring is Noetherian. Used for the local standard-chart argument; this unit contains no replacement, and no trace, purity or duality theorem is used."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-henselian-local-product",
+    "why": "Generic commutative-algebra input: A finite algebra over a henselian local ring is a product of henselian local rings. Used for the local standard-chart argument; this unit contains no replacement, and no trace, purity or duality theorem is used."
+   },
+   {
+    "node": "lem-trf-log-regular-completed-chart",
+    "why": "Generic log-geometry input: Completed local charts of an fs log regular scheme. Used for the local standard-chart argument; this unit contains no replacement, and no trace, purity or duality theorem is used."
+   },
+   {
+    "node": "lem-trf-log-regular-saturation-normality",
+    "why": "Generic log-geometry input: Normality of complete saturated monoid local models. Used for the local standard-chart argument; this unit contains no replacement, and no trace, purity or duality theorem is used."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-faithfully-flat",
+    "why": "Generic commutative-algebra input: The completion of a Noetherian local ring is faithfully flat. Used for the local standard-chart argument; this unit contains no replacement, and no trace, purity or duality theorem is used."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-universally-injective",
+    "why": "Generic commutative-algebra input: A faithfully flat ring map is universally injective. Used for the local standard-chart argument; this unit contains no replacement, and no trace, purity or duality theorem is used."
+   },
+   {
+    "node": "lem-weil-pbc-completion-dimension",
+    "why": "Generic commutative-algebra input: The completion of a Noetherian local ring has the same dimension. Used for the local standard-chart argument; this unit contains no replacement, and no trace, purity or duality theorem is used."
+   },
+   {
+    "node": "lem-trf-closed-immersion-strict-localization-cartesian",
+    "why": "Generic log-geometry input: Strict localization of a closed subscheme is the base change of the ambient strict localization. Used for the local standard-chart argument; this unit contains no replacement, and no trace, purity or duality theorem is used."
+   },
+   {
+    "node": "lem-sc-strict-henselization-faithfully-flat",
+    "why": "Generic commutative-algebra input: Strict henselization is faithfully flat. Used for the local standard-chart argument; this unit contains no replacement, and no trace, purity or duality theorem is used."
+   },
+   {
+    "node": "lem-trf-ind-etale-strict-local-invariance",
+    "why": "Generic strict-localization input: strict local rings are unchanged along ind-etale maps, used in Step 6 to pass log regularity of the quotient from Step 4 to its strict localization before applying the Kummer-chart node; no node of this unit gives it, and no trace, purity or duality theorem is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-strict-henselization-noetherian",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-integral-injective-dimension-equal",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "lem-trf-log-regular-completed-chart",
+  "lem-trf-log-regular-saturation-normality",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-universally-injective",
+  "lem-weil-pbc-completion-dimension",
+  "lem-trf-closed-immersion-strict-localization-cartesian",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-trf-ind-etale-strict-local-invariance"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q145-cc4fd81cf",
+  "group": "Q145",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q145-cc4fd81cf (reviewer sub-agent of L); spot-checked: I read ILO VI §§2.2–2.3, 3.1–3.5 and proof 3.7(a)–(c), printed pp.72–76. The item's statement matches Theorem 3.2, Proposition 3.5 and §2.2: the same hypotheses (admissible, generically free, very tame), M_Y=(q_*M)^G, fs log regular, Kummer étale with the strict-local cartesian chart over Z[P]→Z[Q], and the categorical property. Steps 1–5, 7, 8 and 10 are correct. Every hypothesis of each cited node is supplied by an earlier step; C is finite over B by reducing exponents mod n; Q^gp is torsion free by saturation and sharpness, so the closed fibre of C is local; the completed-model argument shows C is a domain; the dimension-chain argument makes C→A injective. Two citation faults are repaired in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-very-tame-log-quotient.json. (1) C1/C4 in Step 6: lem-per-invertible-kummer-chart-log-regular needs (Spec B,P) log regular at every geometric point, while Step 4 proves it on Y. I added lem-trf-ind-etale-strict-local-invariance with the transfer sentence, to uses and proof_deps, and declared it in tool_uses. (2) C3 in Step 9: the identification of the comparison on strict local rings with C→A is the strict-localization clause of lem-per-tame-diagonal-standard-closed-immersion, which the step now cites. Both new nodes are true, self-contained, statement-only, strictly smaller than the item and not duplicates; I grepped the DAG for R^G/A^G/X/G and for 'strict closed immersion', and checked the quotient, torsor, local-Kummer-quotient and Q109 integral-pair nodes. lem-per-tame-admissible-scheme-quotient: tameness excludes Nagarajan's wild counterexample. With |G| invertible, A is a Noetherian A^G-module by the skew-group-ring argument (eSe≅A^G, Se≅A); a free action gives a Galois extension; the general tame case reduces étale-locally to the inertia groups. Tested on empty X, trivial G and a free Z/p action. lem-per-tame-diagonal-standard-closed-immersion is the Nakayama argument of 3.7(b), which I recomputed: A=B+I by the Reynolds operator, I^N⊂m_B·A since a(q)^n=a(nq)∈J. I checked the report's k[ε]/ε² and k[[t]] examples. Batch-5 flags: I computed the closure of each flagged citation and found no thm-trf, sk-*, nt-* or Poincaré-duality node. def-trf-fs-log-blowup and def-per-fs-log-smooth-etale are general definitions. lem-per-invertible-kummer-chart-log-regular (Q67 PASS) reaches only generic monoid, log-chart and commutative-algebra trf lemmas. lem-trf-log-regular-completed-chart (Kato structure theorem), lem-trf-log-regular-saturation-normality (normality of monoid rings) and lem-trf-closed-immersion-strict-localization-cartesian are generic; none is a step of the trace formula, so all are accepted. I accept the declared tool_uses (generic commutative algebra and log geometry). No SGA is cited. Unit and chapter unchanged.; 1 file(s) fixed by the reviewer"
  }
 }
