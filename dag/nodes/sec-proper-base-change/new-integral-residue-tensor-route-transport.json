@@ -34,11 +34,11 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "B3",
+  "group": "C2",
   "date": "2026-10-18",
-  "document": "Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15",
-  "place": "Resolving-class tensor comparison followed by derived-category descent",
-  "note": "Repaired returned delivery by removing the redundant normalization restatement and decomposing transport into the K-flat component and the independent descent step."
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Canonical tensor-route normalization",
+  "note": "STATEMENT-DISPUTED: arbitrary m changes the derived tensorator, while the displayed model map fixes the canonical m. Negating a strong monoidal structure gives an odd-residue-characteristic counterexample. Lean attachment withdrawn; canonical parent is proved directly without this node."
  },
  "mathlib_searches": [
   {
@@ -74,19 +74,6 @@
  "blueprint": null,
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
- "lean": {
-  "existing": false,
-  "module": "Sheaf.Paper.IntegralResidueTensorRouteModel",
-  "file": "lean/Sheaf/Paper/IntegralResidueTensorRouteModel.lean",
-  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue_tensorRoute_model_transport",
-  "declarations": [
-   "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue_tensorRoute_model_transport"
-  ],
-  "statement": "theorem integralResidue_tensorRoute_model_transport {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (m : (f)^*⟦integralCoeff ℓ E⟧.Monoidal)\n    (hFlat : (f)^*⟦integralCoeff ℓ E⟧.PreservesFlat)\n    (P : HomotopyCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})\n      (condensedRingObj (integralCoeff ℓ E) Y)) (.up ℤ)) :\n    letI := residueExchangePullMonoidal ℓ E f m hFlat\n    (residueExchangeUpperStar (integralCoeff ℓ E) f).map\n          ((residueExchangeTensorIso ℓ E Y).hom.app (DerivedCategory.Qh.obj P)) ≫\n        Functor.OplaxMonoidal.δ (residueExchangeUpperStar (integralCoeff ℓ E) f)\n          (DerivedCategory.Qh.obj P) (residueExchangeCoefficient ℓ E Y) ≫\n        residueExchangeTensorModelTarget ℓ E f P =\n      residueExchangeTensorModelMap ℓ E f P",
-  "branch": "sheaf-dag",
-  "by": "B4",
-  "date": "2026-10-18"
- },
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -98,13 +85,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B3",
+  "reviewer": "C-15d61",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261017T201725-L-80050",
+  "landing": "20261018T005637-L-2576920",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: integralResidue_tensorRoute_model (statement byte-identical to clone) proved sorry-free via tensorModelRoute_fac/residueDerivedMonoidal_counit/residueOrdinaryUpperStar_braiding (axioms standard); removed kFlat/transport statements matched with change record and confirmed false by the sign-flip counterexample; Lean files identical to passed 55a79 minus ScalarCounitModel; 7 delivered modules + 12 direct importers (incl. published ScalarCounitModel) compiled clean against current sheaf-dag"
  }
 }

@@ -1,0 +1,111 @@
+{
+ "id": "new-integral-residue-ordinary-braiding",
+ "kind": "statement",
+ "title": "Canonical ordinary module pullback commutes with the braiding, in oplax form",
+ "statement": "For a condensed commutative coefficient ring Λ, schemes X,Y, and f:X→Y, give ordinary module pullback F=f* its canonical residueOrdinaryUpperStarMonoidal structure. For all module sheaves M,N on Y, F(β(M,N)) followed by δ_F(N,M) equals δ_F(M,N) followed by β(FM,FN).",
+ "stmt_deps": [
+  "new-integral-residue-ordinary-monoidal"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(5), Remark 6.8.15; formal tensor and counit normalization"
+ },
+ "proof": [
+  {
+   "text": "Cancel the epimorphism from the ambient tensor product to the relative tensor product. The tensorComparison_inv_π equation reduces compatibility to ambient sheaf pullback braiding. Transport the resulting lax braided structure along the coefficient pullback isomorphism. Cancel the invertible lax tensorator to obtain the oplax equation.",
+   "uses": [
+    "new-integral-residue-ordinary-monoidal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-integral-residue-ordinary-monoidal"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "C2",
+  "date": "2026-10-18",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Canonical tensor/counit and braiding identities",
+  "note": "Fully proved API for the explicit named-functor tensor model; no new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived tensor comparison commutes with the derived functor counit and braiding",
+   "date": "2026-10-18",
+   "results": "Eight generic derived-adjunction and Tor hits; no residue route identity.",
+   "verdict": "Use the existing library comparison/counit equation and braiding normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "leftDerivedTensorComparison_app_app_comp_tensorHom",
+   "date": "2026-10-18",
+   "results": "Unknown identifier in Mathlib search. The declaration exists in the project source library.",
+   "verdict": "Use the proved source-library declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomotopyCategory_map_braiding_hom_δ|derivedTensorPresentationIso_fac|mapModComap_braided",
+   "date": "2026-10-18",
+   "results": "No Mathlib hits. Project rg finds the homotopy braiding and presentation equations.",
+   "verdict": "Compose the project equations; no new unproved ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived tensor comparison commutes with its counit and with braiding for an exact monoidal functor",
+   "date": "2026-10-18",
+   "results": "Eight hits including Functor.Monoidal.commTensorRight, Functor.Monoidal.commTensorLeft, Adjunction.IsMonoidal.instIsMonoidalCounit and Equivalence.functor_map_μ_inverse_comp_counit_app_tensor.",
+   "verdict": "Generic monoidal and adjunction equations only. The required derived tensor/counit and homotopy braiding equations are already proved in the project source and are used directly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "C2",
+  "date": "2026-10-18",
+  "item": "Sheaf.Paper.IntegralResidueTensorRouteKFlat"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-integral-residue-tensor-route-model",
+   "place": "Direct normalization of the canonical tensor route",
+   "via": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralResidueOrdinaryMonoidal",
+  "file": "lean/Sheaf/Paper/IntegralResidueOrdinaryMonoidal.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.residueOrdinaryUpperStar_braiding",
+  "statement": "theorem residueOrdinaryUpperStar_braiding\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (M N : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})\n      (condensedRingObj Λ Y)) :\n    letI := residueOrdinaryUpperStarMonoidal Λ f\n    (f)^*⟦Λ⟧.map (β_ M N).hom ≫ Functor.OplaxMonoidal.δ (f)^*⟦Λ⟧ N M =\n      Functor.OplaxMonoidal.δ (f)^*⟦Λ⟧ M N ≫\n        (β_ ((f)^*⟦Λ⟧.obj M) ((f)^*⟦Λ⟧.obj N)).hom",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-15d61",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261018T005637-L-2576920",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-15d61",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261018T005637-L-2576920",
+  "kind": "interface",
+  "note": "independent cc review: integralResidue_tensorRoute_model (statement byte-identical to clone) proved sorry-free via tensorModelRoute_fac/residueDerivedMonoidal_counit/residueOrdinaryUpperStar_braiding (axioms standard); removed kFlat/transport statements matched with change record and confirmed false by the sign-flip counterexample; Lean files identical to passed 55a79 minus ScalarCounitModel; 7 delivered modules + 12 direct importers (incl. published ScalarCounitModel) compiled clean against current sheaf-dag"
+ }
+}

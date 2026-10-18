@@ -1,0 +1,114 @@
+{
+ "id": "new-integral-residue-tensor-model-route-fac",
+ "kind": "statement",
+ "title": "For an exact additive left adjoint strong monoidal F, a functor G and counit γ satisfying the tensor/counit square, and braided compatibility of F, the canonical derived tensor route composed with tensorModelTargetWith equals tensorModelMapWith for every homotopy complex and every fixed coefficient B",
+ "statement": "Let C,D be Grothendieck abelian braided closed monoidal categories with monoidal preadditivity and functorial flat resolutions. Let F:C→D be an exact additive left adjoint strong monoidal functor, G:Derived(C)→Derived(D) an oplax monoidal functor and γ:Qh⋙G→Fh⋙Qh a natural transformation. Assume the tensor/counit square δ_G(QhK,QhL);(γK⊗γL);μ_Qh = G(μ_Qh(K,L));γ(K⊗L);Qh(δ_Fh(K,L)) and braiding compatibility F(β(X,Y));δ_F(Y,X)=δ_F(X,Y);β(FX,FY). For any coefficient B:C, functor H:Derived(C)→Derived(C) left deriving tensorLeft(B) with counit ε, and homotopy complex P, G((derivedTensorPresentationIso B H ε).hom.app(QhP));δ_G(QhP,single(B));tensorModelTargetWith F G γ B P = tensorModelMapWith F G γ B H ε P. No K-flatness of P is needed.",
+ "stmt_deps": [
+  "new-integral-residue-tensor-presentation",
+  "new-integral-residue-tensor-model"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.5.9(5), Remark 6.8.15; formal tensor and counit normalization"
+ },
+ "proof": [
+  {
+   "text": "Naturality moves the coefficient single comparison through the tensorator. The braiding equation for homotopy pullback moves the coefficient to the first factor. Apply the assumed tensor/counit square. Naturality of γ moves the braiding across its component. Normalize the derived tensor presentation using derivedTensorPresentationIso_fac. Finally apply naturality of γ to the homotopy single-tensor isomorphism. These identities give exactly tensorModelMapWith; no K-flat hypothesis is used.",
+   "uses": [
+    "new-integral-residue-tensor-presentation",
+    "new-integral-residue-tensor-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-integral-residue-tensor-presentation",
+  "new-integral-residue-tensor-model"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "group": "C2",
+  "date": "2026-10-18",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Canonical tensor/counit and braiding identities",
+  "note": "Fully proved API for the explicit named-functor tensor model; no new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived tensor comparison commutes with the derived functor counit and braiding",
+   "date": "2026-10-18",
+   "results": "Eight generic derived-adjunction and Tor hits; no residue route identity.",
+   "verdict": "Use the existing library comparison/counit equation and braiding normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "leftDerivedTensorComparison_app_app_comp_tensorHom",
+   "date": "2026-10-18",
+   "results": "Unknown identifier in Mathlib search. The declaration exists in the project source library.",
+   "verdict": "Use the proved source-library declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomotopyCategory_map_braiding_hom_δ|derivedTensorPresentationIso_fac|mapModComap_braided",
+   "date": "2026-10-18",
+   "results": "No Mathlib hits. Project rg finds the homotopy braiding and presentation equations.",
+   "verdict": "Compose the project equations; no new unproved ingredients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived tensor comparison commutes with its counit and with braiding for an exact monoidal functor",
+   "date": "2026-10-18",
+   "results": "Eight hits including Functor.Monoidal.commTensorRight, Functor.Monoidal.commTensorLeft, Adjunction.IsMonoidal.instIsMonoidalCounit and Equivalence.functor_map_μ_inverse_comp_counit_app_tensor.",
+   "verdict": "Generic monoidal and adjunction equations only. The required derived tensor/counit and homotopy braiding equations are already proved in the project source and are used directly."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "C2",
+  "date": "2026-10-18",
+  "item": "Sheaf.Paper.IntegralResidueTensorRouteKFlat"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "new-integral-residue-tensor-route-model",
+   "place": "Direct normalization of the canonical tensor route",
+   "via": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralResidueTensorModel",
+  "file": "lean/Sheaf/Paper/IntegralResidueTensorModel.lean",
+  "declaration": "CategoryTheory.Functor.tensorModelRoute_fac",
+  "statement": "theorem CategoryTheory.Functor.tensorModelRoute_fac (F : C ⥤ D) [F.Additive]\n    [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    [F.IsLeftAdjoint] [F.Monoidal]\n    (G : DerivedCategory C ⥤ DerivedCategory D)\n    (γ : DerivedCategory.Qh ⋙ G ⟶\n      F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)\n    [G.OplaxMonoidal]\n    (hδ : ∀ K L : HomotopyCategory C (.up ℤ),\n      Functor.OplaxMonoidal.δ G (DerivedCategory.Qh.obj K) (DerivedCategory.Qh.obj L) ≫\n        (γ.app K ⊗ₘ γ.app L) ≫ Functor.LaxMonoidal.μ DerivedCategory.Qh\n          ((F.mapHomotopyCategory (.up ℤ)).obj K)\n          ((F.mapHomotopyCategory (.up ℤ)).obj L) =\n        G.map (Functor.LaxMonoidal.μ DerivedCategory.Qh K L) ≫ γ.app (K ⊗ L) ≫\n          DerivedCategory.Qh.map\n            (((Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).app K).app L))\n    (hG : ∀ X Y : C, F.map (β_ X Y).hom ≫ Functor.OplaxMonoidal.δ F Y X =\n      Functor.OplaxMonoidal.δ F X Y ≫ (β_ (F.obj X) (F.obj Y)).hom)\n    (B : C) (H : DerivedCategory C ⥤ DerivedCategory C)\n    (ε : DerivedCategory.Qh ⋙ H ⟶\n      (tensorLeft B).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)\n    [H.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso C (.up ℤ))]\n    (P : HomotopyCategory C (.up ℤ))\n :\n    G.map\n          ((derivedTensorPresentationIso B H ε).hom.app (DerivedCategory.Qh.obj P)) ≫\n        Functor.OplaxMonoidal.δ G (DerivedCategory.Qh.obj P)\n          ((DerivedCategory.singleFunctor C 0).obj B) ≫\n        Functor.tensorModelTargetWith F G γ B P = Functor.tensorModelMapWith F G γ B H ε P",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-15d61",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261018T005637-L-2576920",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-15d61",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261018T005637-L-2576920",
+  "kind": "interface",
+  "note": "independent cc review: integralResidue_tensorRoute_model (statement byte-identical to clone) proved sorry-free via tensorModelRoute_fac/residueDerivedMonoidal_counit/residueOrdinaryUpperStar_braiding (axioms standard); removed kFlat/transport statements matched with change record and confirmed false by the sign-flip counterexample; Lean files identical to passed 55a79 minus ScalarCounitModel; 7 delivered modules + 12 direct importers (incl. published ScalarCounitModel) compiled clean against current sheaf-dag"
+ }
+}

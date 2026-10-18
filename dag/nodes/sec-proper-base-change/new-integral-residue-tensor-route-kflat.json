@@ -22,14 +22,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B3",
+  "reviewer": "C-15d61",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261017T201725-L-80050",
+  "landing": "20261018T005637-L-2576920",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: integralResidue_tensorRoute_model (statement byte-identical to clone) proved sorry-free via tensorModelRoute_fac/residueDerivedMonoidal_counit/residueOrdinaryUpperStar_braiding (axioms standard); removed kFlat/transport statements matched with change record and confirmed false by the sign-flip counterexample; Lean files identical to passed 55a79 minus ScalarCounitModel; 7 delivered modules + 12 direct importers (incl. published ScalarCounitModel) compiled clean against current sheaf-dag"
  },
  "lean_audit": {
   "master": {
@@ -73,24 +73,11 @@
  ],
  "proof_origin": {
   "by": "worker",
-  "group": "B3",
+  "group": "C2",
   "date": "2026-10-18",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 6.5.9(3), Remark 6.8.15",
-  "note": "Resolving-class component of the transport calculation; arbitrary P is handled by the separate descent node."
- },
- "lean": {
-  "existing": false,
-  "module": "Sheaf.Paper.IntegralResidueTensorRouteKFlat",
-  "file": "lean/Sheaf/Paper/IntegralResidueTensorRouteKFlat.lean",
-  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue_tensorRoute_kFlat",
-  "declarations": [
-   "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue_tensorRoute_kFlat"
-  ],
-  "statement": "theorem integralResidue_tensorRoute_kFlat {X Y : Scheme.{u}} (f : X ⟶ Y) (m : (f)^*⟦integralCoeff ℓ E⟧.Monoidal) (hFlat : (f)^*⟦integralCoeff ℓ E⟧.PreservesFlat) (P : HomotopyCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj (integralCoeff ℓ E) Y)) (.up ℤ)) (hP : ((f)^*⟦integralCoeff ℓ E⟧).kFlatMap P) : letI := residueExchangePullMonoidal ℓ E f m hFlat (residueExchangeUpperStar (integralCoeff ℓ E) f).map ((residueExchangeTensorIso ℓ E Y).hom.app (DerivedCategory.Qh.obj P)) ≫ Functor.OplaxMonoidal.δ (residueExchangeUpperStar (integralCoeff ℓ E) f) (DerivedCategory.Qh.obj P) (residueExchangeCoefficient ℓ E Y) ≫ residueExchangeTensorModelTarget ℓ E f P = residueExchangeTensorModelMap ℓ E f P",
-  "branch": "sheaf-dag",
-  "by": "B3",
-  "date": "2026-10-18"
+  "place": "Canonical tensor-route normalization",
+  "note": "STATEMENT-DISPUTED: arbitrary m changes the derived tensorator, while the displayed model map fixes the canonical m. Negating a strong monoidal structure gives an odd-residue-characteristic counterexample. Lean attachment withdrawn; canonical parent is proved directly without this node."
  },
  "mathlib_searches": [
   {

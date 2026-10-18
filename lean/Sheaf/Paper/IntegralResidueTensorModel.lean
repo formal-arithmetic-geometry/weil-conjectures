@@ -7,6 +7,7 @@ module
 public import Sheaf.Paper.IntegralResidueTensorPresentation
 public import Sheaf.Paper.IntegralResidueOrdinaryMonoidal
 public import Sheaf.Paper.IntegralResidueDerivedMonoidal
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Braided
 
 /-! # A common homotopy-level model for the residue tensor square
 
@@ -171,12 +172,14 @@ theorem tensorModelTarget_isIso (B : C) (P : HomotopyCategory C (.up ℤ))
 
 variable [F.IsLeftAdjoint] [F.Monoidal]
 
-/-- The common map built directly from a named derived functor and two named counits.
+/-- The common map: the tensor counit, the exact-F counit, then the ordinary
+comonoidal comparison.
 Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor comparisons.
 (blueprint: new-integral-residue-tensor-model) -/
 @[irreducible] noncomputable def tensorModelMapWith
     (G : DerivedCategory C ⥤ DerivedCategory D)
-    (γ : DerivedCategory.Qh ⋙ G ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (γ : DerivedCategory.Qh ⋙ G ⟶
+      F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
     (B : C) (H : DerivedCategory C ⥤ DerivedCategory C)
     (ε : DerivedCategory.Qh ⋙ H ⟶
       (tensorLeft B).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
@@ -192,10 +195,8 @@ Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor compariso
         ((OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).app
           (tensorModelCoefficient B)).app P)
 
-
-/-- The common map: the tensor counit, the exact-F counit, then the ordinary
-comonoidal comparison.
-Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15; explicit tensor comparisons.
+/-- The exact derived-functor specialization of the named functor/counit model.
+Source: Bhatt--Scholze, Remark 6.8.15; the same explicit tensor counit composite.
 (blueprint: new-integral-residue-tensor-model) -/
 noncomputable def tensorModelMap (B : C) (H : DerivedCategory C ⥤ DerivedCategory C)
     (ε : DerivedCategory.Qh ⋙ H ⟶
@@ -243,8 +244,8 @@ noncomputable def residueExchangeTensorModelTarget :
       DerivedCategory.Qh.obj
         (((f)^*⟦integralCoeff ℓ E⟧.mapHomotopyCategory (.up ℤ)).obj
             (Functor.tensorModelCoefficient (residueExchangeOrdinaryCoefficient ℓ E Y)) ⊗
-          ((f)^*⟦integralCoeff ℓ E⟧.mapHomotopyCategory (.up ℤ)).obj P) :=
-  Functor.tensorModelTargetWith (f)^*⟦integralCoeff ℓ E⟧
+          ((f)^*⟦integralCoeff ℓ E⟧.mapHomotopyCategory (.up ℤ)).obj P) := by
+  exact Functor.tensorModelTargetWith (f)^*⟦integralCoeff ℓ E⟧
     (residueExchangeUpperStar (integralCoeff ℓ E) f)
     (residueExchangeUpperStarCounit (integralCoeff ℓ E) f)
     (residueExchangeOrdinaryCoefficient ℓ E Y) P
@@ -259,9 +260,9 @@ noncomputable def residueExchangeTensorModelMap :
       DerivedCategory.Qh.obj
         (((f)^*⟦integralCoeff ℓ E⟧.mapHomotopyCategory (.up ℤ)).obj
             (Functor.tensorModelCoefficient (residueExchangeOrdinaryCoefficient ℓ E Y)) ⊗
-          ((f)^*⟦integralCoeff ℓ E⟧.mapHomotopyCategory (.up ℤ)).obj P) :=
-  letI := residueExchangeOrdinaryPullMonoidal ℓ E f
-  Functor.tensorModelMapWith (f)^*⟦integralCoeff ℓ E⟧
+          ((f)^*⟦integralCoeff ℓ E⟧.mapHomotopyCategory (.up ℤ)).obj P) := by
+  let := residueExchangeOrdinaryPullMonoidal ℓ E f
+  exact Functor.tensorModelMapWith (f)^*⟦integralCoeff ℓ E⟧
     (residueExchangeUpperStar (integralCoeff ℓ E) f)
     (residueExchangeUpperStarCounit (integralCoeff ℓ E) f)
     (residueExchangeOrdinaryCoefficient ℓ E Y)
@@ -269,3 +270,120 @@ noncomputable def residueExchangeTensorModelMap :
     (residueExchangeTensorCounit ℓ E Y) P
 
 end AlgebraicGeometry.ProEtale.CondensedRing
+
+noncomputable section Generic
+attribute [local irreducible] Functor.leftDerivedFunctor Functor.mapDerivedCategory
+variable {C : Type u₁} [Category.{v + 1} C] [Abelian C]
+  [IsGrothendieckAbelian.{v + 1} C] [MonoidalCategory C] [MonoidalClosed C]
+  [MonoidalPreadditive C] [BraidedCategory C] [Abelian.HasFunctorialFlatResolution C]
+  {D : Type u₂} [Category.{v + 1} D] [Abelian D]
+  [IsGrothendieckAbelian.{v + 1} D] [MonoidalCategory D] [MonoidalClosed D]
+  [MonoidalPreadditive D] [BraidedCategory D] [Abelian.HasFunctorialFlatResolution D]
+local instance : BraidedCategory (DerivedCategory C) :=
+  derivedTensorPresentationBraiding
+local instance : BraidedCategory (DerivedCategory D) :=
+  derivedTensorPresentationBraiding
+set_option maxHeartbeats 600000 in
+-- Allow elaboration of the explicitly constructed module tensor comparisons.
+/-- Normalize a tensor route by its tensor/counit square and the ordinary braiding.
+
+Naturality moves the single comparison through the tensorator. The braiding equation
+moves the coefficient to the first factor. The tensor/counit square then replaces the
+comparison by the ordinary tensor map. The tensor presentation's defining equation and
+naturality of the counit give the displayed model map.
+
+Source: Bhatt--Scholze, Remark 6.8.15; the canonical derived tensor/counit equations.
+(blueprint: new-integral-residue-tensor-model-route-fac) -/
+theorem CategoryTheory.Functor.tensorModelRoute_fac (F : C ⥤ D) [F.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [F.IsLeftAdjoint] [F.Monoidal]
+    (G : DerivedCategory C ⥤ DerivedCategory D)
+    (γ : DerivedCategory.Qh ⋙ G ⟶
+      F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    [G.OplaxMonoidal]
+    (hδ : ∀ K L : HomotopyCategory C (.up ℤ),
+      Functor.OplaxMonoidal.δ G (DerivedCategory.Qh.obj K) (DerivedCategory.Qh.obj L) ≫
+        (γ.app K ⊗ₘ γ.app L) ≫ Functor.LaxMonoidal.μ DerivedCategory.Qh
+          ((F.mapHomotopyCategory (.up ℤ)).obj K)
+          ((F.mapHomotopyCategory (.up ℤ)).obj L) =
+        G.map (Functor.LaxMonoidal.μ DerivedCategory.Qh K L) ≫ γ.app (K ⊗ L) ≫
+          DerivedCategory.Qh.map
+            (((Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).app K).app L))
+    (hG : ∀ X Y : C, F.map (β_ X Y).hom ≫ Functor.OplaxMonoidal.δ F Y X =
+      Functor.OplaxMonoidal.δ F X Y ≫ (β_ (F.obj X) (F.obj Y)).hom)
+    (B : C) (H : DerivedCategory C ⥤ DerivedCategory C)
+    (ε : DerivedCategory.Qh ⋙ H ⟶
+      (tensorLeft B).mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    [H.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso C (.up ℤ))]
+    (P : HomotopyCategory C (.up ℤ))
+ :
+    G.map
+          ((derivedTensorPresentationIso B H ε).hom.app (DerivedCategory.Qh.obj P)) ≫
+        Functor.OplaxMonoidal.δ G (DerivedCategory.Qh.obj P)
+          ((DerivedCategory.singleFunctor C 0).obj B) ≫
+        Functor.tensorModelTargetWith F G γ B P = Functor.tensorModelMapWith F G γ B H ε P := by
+  have hbr := Functor.mapHomotopyCategory_map_braiding_hom_δ F hG
+    (Functor.tensorModelCoefficient B) P
+  have hb : ((Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).app P).app
+          (Functor.tensorModelCoefficient B) ≫
+        (β_ ((F.mapHomotopyCategory (.up ℤ)).obj (Functor.tensorModelCoefficient B))
+          ((F.mapHomotopyCategory (.up ℤ)).obj P)).inv =
+      (F.mapHomotopyCategory (.up ℤ)).map
+          (β_ (Functor.tensorModelCoefficient B) P).inv ≫
+        ((Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).app
+          (Functor.tensorModelCoefficient B)).app P := by
+    rw [← cancel_epi ((F.mapHomotopyCategory (.up ℤ)).map
+      (β_ (Functor.tensorModelCoefficient B) P).hom)]
+    rw [← (F.mapHomotopyCategory (.up ℤ)).map_comp_assoc, Iso.hom_inv_id,
+      (F.mapHomotopyCategory (.up ℤ)).map_id, Category.id_comp]
+    erw [reassoc_of% hbr, Iso.hom_inv_id, Category.comp_id]
+    rfl
+  unfold Functor.tensorModelTargetWith Functor.tensorModelMapWith
+  rw [← BraidedCategory.braiding_inv_naturality_assoc]
+  rw [show (γ.app P ⊗ₘ
+      (G.map (Functor.tensorModelCoefficientIso B).hom ≫
+        γ.app (Functor.tensorModelCoefficient B))) =
+      G.obj (DerivedCategory.Qh.obj P) ◁
+        G.map (Functor.tensorModelCoefficientIso B).hom ≫
+      (γ.app P ⊗ₘ
+        γ.app (Functor.tensorModelCoefficient B)) by
+    simp only [MonoidalCategory.tensorHom_def', MonoidalCategory.whiskerLeft_comp,
+      Category.assoc]
+    rfl]
+  simp only [Category.assoc]
+  rw [Functor.OplaxMonoidal.δ_natural_right_assoc]
+  have hμ (K L : HomotopyCategory D (.up ℤ)) :
+      (β_ (DerivedCategory.Qh.obj L) (DerivedCategory.Qh.obj K)).inv ≫
+          Functor.LaxMonoidal.μ DerivedCategory.Qh L K =
+        Functor.LaxMonoidal.μ DerivedCategory.Qh K L ≫
+          DerivedCategory.Qh.map (β_ L K).inv :=
+    DerivedMonoidal.braidingInvNatTrans_fac DerivedCategory.Qh
+      (HomotopyCategory.quasiIso D (.up ℤ)) K L
+  erw [hμ ((F.mapHomotopyCategory (.up ℤ)).obj P)
+    ((F.mapHomotopyCategory (.up ℤ)).obj (Functor.tensorModelCoefficient B))]
+  rw [reassoc_of% (hδ P (Functor.tensorModelCoefficient B))]
+  rw [← DerivedCategory.Qh.map_comp, hb, DerivedCategory.Qh.map_comp]
+  have hn := γ.naturality
+    (β_ (Functor.tensorModelCoefficient B) P).inv
+  dsimp only [Functor.comp_map] at hn
+  rw [← reassoc_of% hn]
+  have hμC (K L : HomotopyCategory C (.up ℤ)) :
+      (β_ (DerivedCategory.Qh.obj L) (DerivedCategory.Qh.obj K)).inv ≫
+          Functor.LaxMonoidal.μ DerivedCategory.Qh L K =
+        Functor.LaxMonoidal.μ DerivedCategory.Qh K L ≫
+          DerivedCategory.Qh.map (β_ L K).inv :=
+    DerivedMonoidal.braidingInvNatTrans_fac DerivedCategory.Qh
+      (HomotopyCategory.quasiIso C (.up ℤ)) K L
+  simp only [← G.map_comp_assoc]
+  rw [← hμC P (Functor.tensorModelCoefficient B),
+    BraidedCategory.braiding_inv_naturality_right_assoc]
+  simp only [Functor.tensorModelCoefficientIso]
+  rw [derivedTensorPresentationIso_fac B H ε P]
+  simp only [G.map_comp, Category.assoc,
+    DerivedCategory.Qh.map_comp]
+  have hn' := γ.naturality ((homotopyTensorSingleIso B).inv.app P)
+  dsimp only [Functor.comp_map] at hn'
+  change _ ≫ γ.app (Functor.tensorModelCoefficient B ⊗ P) = _ at hn'
+  rw [reassoc_of% hn']
+
+end Generic

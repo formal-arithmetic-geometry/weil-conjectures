@@ -80,7 +80,27 @@ strong monoidal comparison. All coherence laws are descended on flat resolutions
   letI := residueDerivedOplax F
   haveI := residueDerivedOplax_isIso_δ F
   haveI := residueDerivedOplax_isIso_η F
-  exact (CoreMonoidal.ofOplaxMonoidal _).toMonoidal
+  -- Retain the original oplax fields directly, rather than reconstructing them
+  -- through the inverse tensor isomorphisms of CoreMonoidal.
+  exact { (CoreMonoidal.ofOplaxMonoidal _).toMonoidal with
+    toOplaxMonoidal := residueDerivedOplax F }
+
+/-- The derived tensorator satisfies the defining tensor/counit square.
+Source: the defining comparison equation of the exact left derived tensor functor.
+(blueprint: new-integral-residue-derived-monoidal-counit) -/
+theorem residueDerivedMonoidal_counit (P Q : HomotopyCategory C (.up ℤ)) :
+    letI := residueDerivedMonoidal F
+    OplaxMonoidal.δ F.leftDerivedFunctor (DerivedCategory.Qh.obj P)
+        (DerivedCategory.Qh.obj Q) ≫
+      (F.leftDerivedFunctorCounit.app P ⊗ₘ F.leftDerivedFunctorCounit.app Q) ≫
+      LaxMonoidal.μ DerivedCategory.Qh
+        ((F.mapHomotopyCategory (.up ℤ)).obj P)
+        ((F.mapHomotopyCategory (.up ℤ)).obj Q) =
+    F.leftDerivedFunctor.map (LaxMonoidal.μ DerivedCategory.Qh P Q) ≫
+      F.leftDerivedFunctorCounit.app (P ⊗ Q) ≫
+      DerivedCategory.Qh.map
+        (((OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).app P).app Q) := by
+  exact F.leftDerivedTensorComparison_app_app_comp_tensorHom P Q
 
 end CategoryTheory.Functor
 
@@ -93,6 +113,11 @@ local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
+
+section CanonicalPullback
+
+-- Keep the ordinary module tensor data identical to the presentation interface.
+attribute [local instance 20000] sheafBraidedCategory
 
 /-- A named copy of the existing integral derived monoidal structure.
 This keeps repeated occurrences of the large internal-module instance compact;
@@ -112,6 +137,9 @@ from an ordinary pullback structure and preservation of flat modules. -/
   letI := hFlat
   unfold residueExchangeUpperStar
   exact (f)^*⟦integralCoeff ℓ E⟧.residueDerivedMonoidal
+
+
+end CanonicalPullback
 
 end AlgebraicGeometry.ProEtale.CondensedRing
 

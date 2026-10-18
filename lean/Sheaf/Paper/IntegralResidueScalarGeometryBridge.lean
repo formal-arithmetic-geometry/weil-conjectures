@@ -33,6 +33,9 @@ local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
+-- Match the named tensor model without expanding the derived functor construction.
+attribute [local irreducible] Functor.leftDerivedFunctor Functor.mapDerivedCategory
+
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
 
 set_option linter.unusedVariables false in
@@ -89,10 +92,15 @@ theorem integralResidue_tensorGeometry_component {X Y : Scheme.{u}} (f : X ⟶ Y
   let := residueExchangePullMonoidal ℓ E f
     (residueExchangeOrdinaryPullMonoidal ℓ E f) hFlat
   have : IsIso (residueExchangeTensorModelTarget ℓ E f P) := by
-    delta residueExchangeTensorModelTarget
-    with_unfolding_all
-      exact Functor.tensorModelTarget_isIso (f)^*⟦integralCoeff ℓ E⟧
-        (residueExchangeOrdinaryCoefficient ℓ E Y) P hFP
+    let : BraidedCategory (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) :=
+      AlgebraicGeometry.ProEtale.sheafBraidedCategory Ab.{u + 1} X
+    let : BraidedCategory (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) :=
+      AlgebraicGeometry.ProEtale.sheafBraidedCategory Ab.{u + 1} Y
+    delta residueExchangeTensorModelTarget residueExchangeUpperStar
+      residueExchangeUpperStarCounit
+    simpa only [Functor.tensorModelTarget, id] using
+      Functor.tensorModelTarget_isIso (f)^*⟦integralCoeff ℓ E⟧
+      (residueExchangeOrdinaryCoefficient ℓ E Y) P hFP
   apply (cancel_mono (residueExchangeTensorModelTarget ℓ E f P)).mp
   have hscalarModel :
       (residueExchangeRestrictPullIso ℓ E f).hom.app

@@ -279,6 +279,9 @@ end CategoryTheory.Mod.ResidueOrdinary
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
+-- Use the same ambient braiding as the tensor-presentation and tensor-model interfaces.
+attribute [local instance 20000] sheafBraidedCategory
+
 /-- Ordinary pullback for any condensed commutative coefficient ring is strong monoidal. -/
 @[instance_reducible] noncomputable def residueOrdinaryUpperStarMonoidal
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
@@ -301,3 +304,98 @@ inverse image and the coefficient-pullback isomorphism. -/
   residueOrdinaryUpperStarMonoidal (integralCoeff ℓ E) f
 
 end AlgebraicGeometry.ProEtale.CondensedRing
+
+section OrdinaryBraiding
+open MonObj
+set_option backward.defeqAttrib.useBackward true
+set_option backward.isDefEq.respectTransparency false
+namespace CategoryTheory.Mod.ResidueOrdinary
+variable {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
+  [MonoidalCategory C] [SymmetricCategory C] [MonoidalClosed C]
+  {D : Type u'} [Category.{v'} D] [Abelian D] [IsGrothendieckAbelian.{v'} D]
+  [MonoidalCategory D] [SymmetricCategory D] [MonoidalClosed D]
+  {R : C} [MonObj R] [IsCommMonObj R] {S : D} [MonObj S] [IsCommMonObj S]
+  {G : C ⥤ D} [G.Braided] (ρ : S ⟶ G.obj R) [IsMonHom ρ] [IsIso ρ]
+  [PreservesColimitsOfShape WalkingParallelPair (mapModComap ρ)]
+set_option maxHeartbeats 600000 in
+-- Allow elaboration of the explicitly constructed module tensor comparisons.
+private theorem mapModComap_braided (M N : Mod C R) :
+    let := mapModComapMonoidal ρ
+    Functor.LaxMonoidal.μ (mapModComap ρ) M N ≫
+        (mapModComap ρ).map (β_ M N).hom =
+      (β_ ((mapModComap ρ).obj M) ((mapModComap ρ).obj N)).hom ≫
+        Functor.LaxMonoidal.μ (mapModComap ρ) N M := by
+  let := mapModComapMonoidal ρ
+  apply Mod.hom_ext
+  rw [← cancel_epi (tensorObjπ ((mapModComap ρ).obj M) ((mapModComap ρ).obj N))]
+  change tensorObjπ _ _ ≫ (tensorComparison ρ M N).inv.hom ≫
+      G.map (β_ M N).hom.hom =
+    tensorObjπ _ _ ≫ (β_ ((mapModComap ρ).obj M) ((mapModComap ρ).obj N)).hom.hom ≫
+      (tensorComparison ρ N M).inv.hom
+  erw [reassoc_of% tensorComparison_inv_π, ← G.map_comp]
+  erw [Mod.braiding_hom_hom, Mod.tensorObjπ_braidingHomX, G.map_comp]
+  rw [Functor.LaxBraided.braided_assoc]
+  erw [Mod.braiding_hom_hom, Mod.tensorObjπ_braidingHomX_assoc, tensorComparison_inv_π]
+  rfl
+end CategoryTheory.Mod.ResidueOrdinary
+attribute [local irreducible] Functor.leftDerivedFunctor Functor.mapDerivedCategory
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+attribute [local instance 20000] sheafBraidedCategory
+local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
+set_option maxHeartbeats 600000 in
+-- Allow elaboration of the explicitly constructed module tensor comparisons.
+@[instance_reducible] private noncomputable def ordinary_braided
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    let := residueOrdinaryUpperStarMonoidal Λ f
+    (f)^*⟦Λ⟧.LaxBraided := by
+  let G := (f)^*[Ab.{u + 1}]
+  let : G.Braided :=
+    { toMonoidal := inferInstance
+      braided X Y := Functor.LaxBraided.braided (F := G) X Y }
+  let ρ := (asIso (condensedPullbackHom Λ f)).inv
+  let : (Mod.mapModComap ρ).Monoidal := Mod.ResidueOrdinary.mapModComapMonoidal ρ
+  let : (Mod.mapModComap ρ).LaxBraided :=
+    { toLaxMonoidal := inferInstance
+      braided := Mod.ResidueOrdinary.mapModComap_braided ρ }
+  let i := Functor.isoWhiskerLeft (G.mapMod (condensedRingObj Λ Y))
+    (Mod.extendScalarsIsoComapInv (condensedPullbackHom Λ f))
+  let : (G.mapMod (condensedRingObj Λ Y) ⋙
+      Mod.extendScalars (condensedPullbackHom Λ f)).Monoidal :=
+    Functor.Monoidal.transport i.symm
+  let : NatTrans.IsMonoidal i.symm.hom :=
+    { unit := by simp [Functor.Monoidal.transport_ε]
+      tensor M N := by
+        simp [Functor.Monoidal.transport_μ] }
+  let h := Functor.LaxBraided.ofNatIso
+    (G := G.mapMod (condensedRingObj Λ Y) ⋙
+      Mod.extendScalars (condensedPullbackHom Λ f)) i.symm
+  exact
+    { toLaxMonoidal := (residueOrdinaryUpperStarMonoidal Λ f).toLaxMonoidal
+      braided := h.braided }
+/-- Canonical ordinary module pullback commutes with the braiding.
+
+The relative tensor coequalizer epimorphism reduces this to braiding compatibility
+of ambient sheaf pullback. Transport along the coefficient pullback isomorphism
+preserves that equation; invert the monoidal tensorator to obtain the oplax form.
+
+Source: Bhatt--Scholze, Lemma 6.5.9(5); ordinary symmetric monoidal pullback.
+(blueprint: new-integral-residue-ordinary-braiding) -/
+theorem residueOrdinaryUpperStar_braiding
+    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})
+    [MonObj Λ] [IsCommMonObj Λ] {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (M N : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
+      (condensedRingObj Λ Y)) :
+    letI := residueOrdinaryUpperStarMonoidal Λ f
+    (f)^*⟦Λ⟧.map (β_ M N).hom ≫ Functor.OplaxMonoidal.δ (f)^*⟦Λ⟧ N M =
+      Functor.OplaxMonoidal.δ (f)^*⟦Λ⟧ M N ≫
+        (β_ ((f)^*⟦Λ⟧.obj M) ((f)^*⟦Λ⟧.obj N)).hom := by
+  let := residueOrdinaryUpperStarMonoidal Λ f
+  have h := (ordinary_braided Λ f).braided M N
+  rw [← cancel_epi (Functor.LaxMonoidal.μ (f)^*⟦Λ⟧ M N)]
+  rw [← Category.assoc, h, Category.assoc, Functor.Monoidal.μ_δ,
+    Category.comp_id, Functor.Monoidal.μ_δ_assoc]
+
+end AlgebraicGeometry.ProEtale.CondensedRing
+
+end OrdinaryBraiding

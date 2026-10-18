@@ -15,21 +15,41 @@
  ],
  "proof": [
   {
-   "text": "Apply the explicit-ordinary-monoidal transport theorem to the canonical ordinary pullback monoidal structure.",
+   "text": "Use the canonical ordinary pullback monoidal structure and its braiding equation. Apply the canonical derived tensorator/counit square; identify its named derived functor and counit with the residue-exchange interface.",
    "uses": [
-    "new-integral-residue-tensor-route-transport"
+    "new-integral-residue-ordinary-braiding",
+    "new-integral-residue-ordinary-monoidal",
+    "new-integral-residue-derived-monoidal-counit",
+    "new-integral-residue-derived-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the generic tensor-model normalization equation to the actual category data and the fixed presentation counit of residueExchangeTensorIso. Its conclusion is exactly the canonical model equation for every homotopy complex P.",
+   "uses": [
+    "new-integral-residue-tensor-model-route-fac",
+    "new-integral-residue-tensor-model",
+    "new-integral-residue-tensor-presentation"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "new-integral-residue-tensor-route-transport"
+  "new-integral-residue-ordinary-braiding",
+  "new-integral-residue-ordinary-monoidal",
+  "new-integral-residue-derived-monoidal-counit",
+  "new-integral-residue-derived-monoidal",
+  "new-integral-residue-tensor-model-route-fac",
+  "new-integral-residue-tensor-model",
+  "new-integral-residue-tensor-presentation"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
+  "group": "C2",
+  "date": "2026-10-18",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 6.5.9(3), Proposition 6.8.11(3), Remark 6.8.15; explicit formal coefficient and adjunction argument",
-  "note": "Stage-3 proof factors through the strictly more general explicit-monoidal transport statement."
+  "place": "Lemma 6.5.9(5), Remark 6.8.15; canonical tensor/counit and braiding equations",
+  "note": "Direct canonical proof for every homotopy complex. The arbitrary-monoidal transport and K-flat/descent route are unnecessary and the transport assertion fixes incompatible monoidal data."
  },
  "mathlib_searches": [
   {
@@ -125,18 +145,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B3",
+  "reviewer": "C-15d61",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261017T201725-L-80050",
+  "landing": "20261018T005637-L-2576920",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.ProEtale.CondensedRing.integralResidue_tensorRoute_model_transport"
-  ],
-  "sorry_after": []
+  "note": "independent cc review: integralResidue_tensorRoute_model (statement byte-identical to clone) proved sorry-free via tensorModelRoute_fac/residueDerivedMonoidal_counit/residueOrdinaryUpperStar_braiding (axioms standard); removed kFlat/transport statements matched with change record and confirmed false by the sign-flip counterexample; Lean files identical to passed 55a79 minus ScalarCounitModel; 7 delivered modules + 12 direct importers (incl. published ScalarCounitModel) compiled clean against current sheaf-dag"
  },
  "lean_audit": {
   "master": {

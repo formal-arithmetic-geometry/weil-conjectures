@@ -5,57 +5,38 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.IntegralResidueTensorModel
-import Sheaf.Paper.IntegralResidueDerivedMonoidal
-import Sheaf.Paper.IntegralResidueOrdinaryMonoidal
-import Sheaf.Paper.IntegralResidueTensorPresentation
-import Sheaf.Paper.IntegralResidueTensorRouteKFlat
-import Sheaf.Paper.IntegralResidueTensorRouteDescent
 
-/-! Computation of the tensor-route in the residue tensor square.
-Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15.
+/-! Canonical tensor-route normalization, directly from the tensor/counit square.
+Source: Bhatt--Scholze, Lemma 6.5.9(5), Remark 6.8.15.
 (blueprint: new-integral-residue-tensor-route-model)
 
-The target is the explicit ordinary homotopy tensor model. -/
+STATEMENT-DISPUTED: the removed arbitrary-monoidal transport assertion used a fixed
+canonical model map on the right. Twisting the ordinary monoidal structure by -1
+changes the left side's tensor comparison but leaves that model map unchanged.
+The canonical theorem below retains its original statement. -/
 
 @[expose] public section
-
-universe v u u₁ u₂
-
+universe u
 open CategoryTheory Limits MonoidalCategory
 open scoped CategoryTheory.Obj CategoryTheory.Functor
-
-local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
-
+attribute [local irreducible] Functor.leftDerivedFunctor Functor.mapDerivedCategory
 namespace AlgebraicGeometry.ProEtale.CondensedRing
-
+attribute [local irreducible] Functor.leftDerivedTensorComparison Functor.tensorModelMap
+  DerivedCategory.monoidalClosed Mod.monoidalClosed
+  AlgebraicGeometry.ProEtale.upperStarFromPoint Mod.extendScalars
+attribute [local irreducible] Functor.residueDerivedMonoidal
+attribute [local semireducible] residueExchangeTensorModelTarget
+  residueExchangeTensorIso Mod.residueDerivedTensorIso residueExchangeUpperStar
+  residueExchangeUpperStarCounit
+  residueExchangeReduction
+local instance : EssentiallySmall.{u + 1} Profinite.{u} := essentiallySmallSelf.{0} _
 variable (ℓ : ℕ) [Fact ℓ.Prime] (E : Type) [NormedField E] [NormedAlgebra ℚ_[ℓ] E]
-
-/-- The normalized tensor-route equation for an explicit ordinary monoidal structure.
-Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15.
-(blueprint: new-integral-residue-tensor-route-transport)
-
-This strictly generalizes the target by taking the ordinary monoidal structure as
-an explicit parameter. Its proof is the transport of the generic tensor-route
-factorization through the residue exchange interface and the canonical tensor
-presentation. -/
-theorem integralResidue_tensorRoute_model_transport {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (m : (f)^*⟦integralCoeff ℓ E⟧.Monoidal)
-    (hFlat : (f)^*⟦integralCoeff ℓ E⟧.PreservesFlat)
-    (P : HomotopyCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1})
-      (condensedRingObj (integralCoeff ℓ E) Y)) (.up ℤ)) :
-    letI := residueExchangePullMonoidal ℓ E f m hFlat
-    (residueExchangeUpperStar (integralCoeff ℓ E) f).map
-          ((residueExchangeTensorIso ℓ E Y).hom.app (DerivedCategory.Qh.obj P)) ≫
-        Functor.OplaxMonoidal.δ (residueExchangeUpperStar (integralCoeff ℓ E) f)
-          (DerivedCategory.Qh.obj P) (residueExchangeCoefficient ℓ E Y) ≫
-        residueExchangeTensorModelTarget ℓ E f P =
-      residueExchangeTensorModelMap ℓ E f P := by
-  apply integralResidue_tensorRoute_descend ℓ E f m hFlat
-  intro P hP
-  exact integralResidue_tensorRoute_kFlat ℓ E f m hFlat P hP
-
+set_option linter.style.haveILetI false in
+set_option cleanup.letToHave false in
+set_option maxHeartbeats 600000 in
+-- Elaborating the concrete module tensor comparisons needs extra heartbeats.
 /-- Compute the tensor-route against the ordinary homotopy tensor model.
-Source: Bhatt--Scholze, Lemma 6.5.9(3), Remark 6.8.15.
+Source: Bhatt--Scholze, Lemma 6.5.9(5), Remark 6.8.15.
 (blueprint: new-integral-residue-tensor-route-model)
 
 Proof. Use the counit normalization of the fixed derived tensor presentation.
@@ -80,8 +61,85 @@ theorem integralResidue_tensorRoute_model {X Y : Scheme.{u}} (f : X ⟶ Y)
           M (residueExchangeCoefficient ℓ E Y) ≫
         residueExchangeTensorModelTarget ℓ E f P =
       residueExchangeTensorModelMap ℓ E f P := by
-  simpa only [] using integralResidue_tensorRoute_model_transport ℓ E f
-    (residueExchangeOrdinaryPullMonoidal ℓ E f) hFlat P
-
+  let F := (f)^*⟦integralCoeff ℓ E⟧
+  let G := residueExchangeUpperStar (integralCoeff ℓ E) f
+  let γ := residueExchangeUpperStarCounit (integralCoeff ℓ E) f
+  letI hfp : F.PreservesFlat := hFlat
+  letI hm : F.Monoidal := residueExchangeOrdinaryPullMonoidal ℓ E f
+  letI hdm : G.Monoidal := residueExchangePullMonoidal ℓ E f
+    (residueExchangeOrdinaryPullMonoidal ℓ E f) hFlat
+  have hG := residueOrdinaryUpperStar_braiding (integralCoeff ℓ E) f
+  dsimp only
+  -- Preserve the constructors' category data rather than synthesizing copies.
+  -- The kernel checks the assembled application and its conversion to this goal.
+  run_tac Lean.Elab.Tactic.withMainContext do
+    let target ← Lean.instantiateMVars (← Lean.Elab.Tactic.getMainTarget)
+    let some ty := target.find? (fun e =>
+      e.isAppOf ``residueExchangeTensorIso) | throwError "tensor presentation absent"
+    let x ← Lean.Meta.getLocalDeclFromUserName `X
+    let mut xs := ty.getAppArgs
+    xs := xs.set! (xs.size - 1) x.toExpr
+    let tx := Lean.mkAppN ty.getAppFn xs
+    let presentationArgs (e : Lean.Expr) : Lean.MetaM (Array Lean.Expr) := do
+      let some value ← Lean.Meta.withTransparency .all
+          (Lean.Meta.unfoldDefinition? e) | throwError "tensor constructor absent"
+      let mut value := value
+      for _ in [:20] do
+        match value with
+        | .letE _ _ v body _ => value := body.instantiate1 v
+        | .mdata _ body => value := body
+        | _ => pure ()
+      let some generic := value.find? (fun e =>
+        e.isAppOf ``CategoryTheory.derivedTensorPresentationIso) |
+          throwError "generic tensor constructor absent"
+      pure generic.getAppArgs
+    let cy ← presentationArgs ty
+    let dx ← presentationArgs tx
+    let localExpr (n : Lean.Name) : Lean.MetaM Lean.Expr := do
+      pure (← Lean.Meta.getLocalDeclFromUserName n).toExpr
+    let F ← localExpr `F
+    let propInstance (n : Lean.Name) : Lean.MetaM Lean.Expr := do
+      Lean.Meta.synthInstance (← Lean.Meta.mkAppM n #[F])
+    let .const _ (level :: _) := (← Lean.Meta.inferType x.toExpr).getAppFn |
+      throwError "scheme universe absent"
+    let info ← Lean.getConstInfo ``CategoryTheory.Functor.tensorModelRoute_fac
+    let levels := info.levelParams.map fun n =>
+      if n == `v then level else Lean.Level.succ (Lean.Level.succ level)
+    let hdm ← localExpr `hdm
+    let some hdv := (← Lean.Meta.getLocalDeclFromUserName `hdm).value? |
+      throwError "derived monoidal structure is not a let"
+    let some value ← Lean.Meta.withTransparency .all
+        (Lean.Meta.unfoldDefinition? hdv) | throwError "pull constructor absent"
+    let mut value := value
+    for _ in [:20] do
+      match value with
+      | .letE _ _ v body _ => value := body.instantiate1 v
+      | .mdata _ body => value := body
+      | _ => pure ()
+    let some monoidal := value.find? (fun e =>
+      e.isAppOf ``CategoryTheory.Functor.residueDerivedMonoidal) |
+        throwError "generic derived monoidal constructor absent"
+    let mi ← Lean.getConstInfo ``CategoryTheory.Functor.residueDerivedMonoidal
+    let ci ← Lean.getConstInfo ``CategoryTheory.Functor.residueDerivedMonoidal_counit
+    let parameterLevels := mi.levelParams.zip monoidal.getAppFn.constLevels!
+    let clevels := ci.levelParams.map fun n => (parameterLevels.lookup n).get!
+    let hδ := Lean.mkAppN
+      (Lean.mkConst ``CategoryTheory.Functor.residueDerivedMonoidal_counit clevels)
+      monoidal.getAppArgs
+    let fn := Lean.mkConst ``CategoryTheory.Functor.tensorModelRoute_fac levels
+    let hdmType ← Lean.Meta.inferType hdm
+    let gop := Lean.mkAppN
+      (Lean.mkConst ``CategoryTheory.Functor.Monoidal.toOplaxMonoidal
+        hdmType.getAppFn.constLevels!) (hdmType.getAppArgs.push hdm)
+    let args := cy[:9].toArray ++ dx[:9].toArray ++
+      #[F, ← propInstance ``CategoryTheory.Functor.Additive,
+        ← propInstance ``CategoryTheory.Limits.PreservesFiniteLimits,
+        ← propInstance ``CategoryTheory.Limits.PreservesFiniteColimits,
+        ← propInstance ``CategoryTheory.Functor.IsLeftAdjoint, ← localExpr `hm,
+        ← localExpr `G, ← localExpr `γ,
+        gop,
+        hδ, ← localExpr `hG,
+        cy[9]!, cy[10]!, cy[11]!, cy[12]!, ← localExpr `P]
+    (← Lean.Elab.Tactic.getMainGoal).assign (Lean.mkAppN fn args)
 
 end AlgebraicGeometry.ProEtale.CondensedRing
