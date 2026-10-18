@@ -40,7 +40,13 @@ No idempotent completion, arbitrary isomorphism, or extra coefficient flatness i
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option backward.defeqAttrib.useBackward true
+set_option genSizeOfSpec false
+set_option genInjectivity false
+set_option genSizeOf false
+set_option genCtorIdx false
 set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 
 universe u v
 
@@ -525,6 +531,10 @@ def rationalHomScalarComparison (W : Scheme.{u})
 end ScalarComparisons
 
 section CommonStage
+
+set_option allowUnsafeReducibility true in
+attribute [local reducible] GeneralAlgebraicallyClosedCoefficients.stageCategory
+
 open GeneralAlgebraicallyClosedCoefficients
 open AlgebraicallyClosedCoefficients (Index Coefficient coefficientInclusion)
 variable (l : ℕ) [Fact l.Prime]
@@ -559,7 +569,8 @@ def commonStagePullbackComparison {X Y : Scheme.{u}} (f : X ⟶ Y)
     (L : Index l Ω) (h : P.stage ≤ L) :
     (commonStagePullbackObject l Ω f P).toStage h ≅
       (rationalDerivedPullback l (Coefficient.{u} l Ω L) f).obj (P.toStage h) :=
-  (operationStageTransitionIso l Ω X P.stage L h).app _ ≪≫
+  (operationStageTransitionIso l Ω X P.stage L h).app
+      (commonStagePullbackObject l Ω f P).obj ≪≫
     (rationalPullbackScalarComparison l (Coefficient.{u} l Ω P.stage)
       (Coefficient.{u} l Ω L) (coefficientInclusion l Ω P.stage L h) f).app P.obj ≪≫
     (rationalDerivedPullback l (Coefficient.{u} l Ω L) f).mapIso
@@ -627,7 +638,8 @@ def commonStageTensorComparison (W : Scheme.{u})
         (P.toStage (((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).1.trans h),
           Q.toStage
             (((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).2.trans h)) :=
-  (operationStageTransitionIso l Ω W _ L h).app _ ≪≫
+  (operationStageTransitionIso l Ω W _ L h).app
+      (commonStageTensorObject l Ω W P Q).obj ≪≫
     (rationalTensorScalarComparison l
       (Coefficient.{u} l Ω (Padic.finiteCoefficientCompositum l Ω P.stage Q.stage))
       (Coefficient.{u} l Ω L) (coefficientInclusion l Ω _ L h) W).app
@@ -635,10 +647,14 @@ def commonStageTensorComparison (W : Scheme.{u})
         Q.toStage ((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).2) ≪≫
     (rationalDerivedTensor l (Coefficient.{u} l Ω L) W).mapIso
       (Iso.prod
-        (((operationStageTransitionIso l Ω W _ L h).app _).symm ≪≫
+        (((operationStageTransitionIso l Ω W _ L h).app
+          (P.toStage ((Padic.finiteCoefficientFields_properties l Ω).1
+            P.stage Q.stage).1)).symm ≪≫
           ((stageSystem l Ω W).assoc
             ((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).1 h).app P.obj)
-        (((operationStageTransitionIso l Ω W _ L h).app _).symm ≪≫
+        (((operationStageTransitionIso l Ω W _ L h).app
+          (Q.toStage ((Padic.finiteCoefficientFields_properties l Ω).1
+            P.stage Q.stage).2)).symm ≪≫
           ((stageSystem l Ω W).assoc
             ((Padic.finiteCoefficientFields_properties l Ω).1 P.stage Q.stage).2 h).app Q.obj))
 
@@ -775,7 +791,8 @@ def commonStageHomComparison (W : Scheme.{u})
     (commonStageHomObject l Ω W P).toStage h ≅
       (rationalDerivedInternalHom l (Coefficient.{u} l Ω L) W).obj
         (commonStageHomPairAtStage l Ω W P L h) :=
-  (operationStageTransitionIso l Ω W _ L h).app _ ≪≫
+  (operationStageTransitionIso l Ω W _ L h).app
+      (commonStageHomObject l Ω W P).obj ≪≫
     rationalHomScalarComparison l
       (Coefficient.{u} l Ω (Padic.finiteCoefficientCompositum l Ω
         P.obj.1.unop.stage P.obj.2.stage))
@@ -783,10 +800,14 @@ def commonStageHomComparison (W : Scheme.{u})
         (commonStageHomRationalPair l Ω W P) ≪≫
     (rationalDerivedInternalHom l (Coefficient.{u} l Ω L) W).mapIso
       (ObjectProperty.isoMk _ (Iso.prod
-        (((operationStageTransitionIso l Ω W _ L h).app _).symm ≪≫
+        (((operationStageTransitionIso l Ω W _ L h).app
+            (P.obj.1.unop.toStage ((Padic.finiteCoefficientFields_properties l Ω).1
+              P.obj.1.unop.stage P.obj.2.stage).1)).symm ≪≫
           ((stageSystem l Ω W).assoc ((Padic.finiteCoefficientFields_properties l Ω).1
             P.obj.1.unop.stage P.obj.2.stage).1 h).app P.obj.1.unop.obj).symm.op
-        (((operationStageTransitionIso l Ω W _ L h).app _).symm ≪≫
+        (((operationStageTransitionIso l Ω W _ L h).app
+            (P.obj.2.toStage ((Padic.finiteCoefficientFields_properties l Ω).1
+              P.obj.1.unop.stage P.obj.2.stage).2)).symm ≪≫
           ((stageSystem l Ω W).assoc ((Padic.finiteCoefficientFields_properties l Ω).1
             P.obj.1.unop.stage P.obj.2.stage).2 h).app P.obj.2.obj)))
 
@@ -833,7 +854,10 @@ theorem commonStageDerivedInternalHom_existsUnique (W : Scheme.{u}) :
               (rationalDerivedInternalHom l (Coefficient.{u} l Ω L) W).map
                 (X := commonStageHomPairAtStage l Ω W P L h)
                 (Y := commonStageHomPairAtStage l Ω W Q L h')
-                (ObjectProperty.homMk (Prod.mkHom a.op b)) ≫
+                (ObjectProperty.homMk
+                  (X := commonStageHomPairAtStage l Ω W P L h)
+                  (Y := commonStageHomPairAtStage l Ω W Q L h')
+                  (Prod.mkHom a.op b)) ≫
               (commonStageHomComparison l Ω W Q L h').inv))) := by
   sorry
 

@@ -196,10 +196,10 @@
   "file": "lean/Sheaf/Paper/SemilinearSystemModels.lean",
   "statement": "abbrev Systems",
   "branch": "newtargets-dag",
-  "by": "Q09",
+  "by": "NY",
   "date": "2026-10-18",
   "existing": false,
-  "note": "§1(B) transitive dependency compile repair: model projections in scalarExtensionSection, ScalarTensorPure, scalarEpsilonIso and ScalarTensorComparisonModel left unsolved successor universe constraints at independent site/coefficient sizes. Explicit-universe aliases ScalarData.ordinary, object_eq, counit, computesOnKFlat and the existing T alias give precisely the same model projections. No mathematical data, universe size or conditions change. Compilation profiling also required preserving internalHom as a def with the same body, locally keeping it folded after the model definitions, and disabling unused generated injectivity/size-specification lemmas for the three large structures; all mathematical fields are unchanged."
+  "note": "§1(B) repair: scalarExtensionSection, ScalarTensorPure, scalarEpsilonIso and ScalarTensorComparisonModel use the already recorded explicit-universe ScalarData.ordinary, object_eq, counit and computesOnKFlat projections instead of under-applied model projections. This resolves stuck independent coefficient/localization universe constraints without changing any mathematical notion. Current imports, instance exclusions and public aliases are preserved."
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -212,9 +212,9 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-bb0fae180",
-  "group": "Q09",
+  "reviewer": "NT-stage2-cc-c6c8c72f1",
+  "group": "NY",
   "result": "fix",
-  "note": "Item module byte-identical (sha 83355444) to the FIXed 210de/a5fe heads; substance re-checked: properOpenAlpha is canonical (ordinaryOpenExtensionBaseChangeIso beta, then the clopen projection of squareLift via unit + rightDerivedLowerStarIsoOfIsClosedRange, then the compositors), gamma = mateEquiv with the published proper adjunctions, pi = rightDerivedLowerStarProjectionMap, delta = inverse of derivedOpenImmersionLowerShriekProjectionIso; the equation's order matches the node; no Cartesian/Tor/bounded hypotheses; the system clause is an equality in System l E D with z.properOpen.gamma before evaluation; 8 steps in the docstrings; statement verbatim; sorry only. F1: the delivered SemilinearSystemModels.lean is stale against live 89b6054c (drops 2 public imports and [-instance], turns the internalHom abbrev into a def). The group rebased (blueprint-index = live but for its header), so the landing's REVERT DEPENDENCY guard that refused the a5fe fix will not fire and the stale text would overwrite live. FIX: fixes/SemilinearSystemModels.lean = live text + only the 4 recorded ScalarData aliases (sha 3a4b9817). nt_compile --json: item vs live dependencies 6.4 s clean; fixed dependency 27.6 s + item 7.2 s clean. MAINTAINER: the item needs neither the dependency edit nor the aliases; the cleanest landing is --revert-nodes def-coef-semilinear-system-models WITHOUT the fix file (revert + fix file = the 00:19 refusal). The delivered dependency record (by Q09) has an inaccurate note; its declarations contain all of NK's."
+  "note": "Re-delivery after the bd479af RETURN. F1 fixed: pull/support/red/finite-exceptional/tensor/scalar shifts are the canonical ones (fieldConstructiblePullShift, integralShifts.compactSupport via realization, reductionShift, etale+comparison rightAdjointCommShift, tensorShifts); ExactAdjunction.rightShiftCanonical; Operation pins both left shifts; reductionShift no longer existential. F2 fixed: reductionScalar is the node's square (E/L reductions, the exceptional scalar iso, finiteExceptionalScalar = transported Etale mateMap, finiteBalance at m+1=e(n+1)); ReductionComparisonEquation removed. Mechanical lem-coef-finite-dualizing: finiteDualizingGenericDerivedRestriction is mapDerivedCategorySquareIso of finiteDualizingRestriction_existsUnique.choose, a theorem-constructed object, so PASS on that point; adding a landed node to stmt_deps is allowed. Statements verbatim, docstrings present, only sorry. All 9 modules compile clean (3.5-42.4 s). FIX: the SemilinearSystemModels §1(B) edit is unneeded (the 7 item modules compile clean against the live deps) and slow (52-54 s vs live 29 s back to back), so fixes/SemilinearSystemModels.lean = live text. Maintainer: the delivered dep records replace the Q09/Q02 by/note (and Q02's fixed_by), so consider --revert-nodes def-coef-semilinear-system-models; advisory: theorem lem-pur-compact-support-integral-coefficient-comparison is cited by the scalar/composition/coherent def nodes for Ramification/ramifiedMap/tensorSquare; the second reading is a self-reread."
  }
 }

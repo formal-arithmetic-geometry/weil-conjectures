@@ -18,7 +18,19 @@
   "lem-pur-integral-operations-scalar-extension",
   "def-weil-pbc-constructible-complexes",
   "def-weil-pbc-site-comparison-morphism",
-  "def-weil-integral-scalar-extension"
+  "def-weil-integral-scalar-extension",
+  "def-per-adic-exceptional-context",
+  "def-per-adic-exceptional-operation",
+  "def-per-adic-exceptional-projection-data",
+  "def-per-adic-exceptional-scalar-data",
+  "def-per-adic-exceptional-composition-data",
+  "def-per-adic-exceptional-coherent-system",
+  "def-coef-semilinear-system-models",
+  "def-zl-field-weil-shriek-shift-data",
+  "def-pur-integral-operation-shift-data",
+  "def-pur-integral-compact-support-coefficient-data",
+  "def-per-exceptional-coefficient-maps",
+  "lem-coef-finite-dualizing"
  ],
  "proof": [
   {
@@ -564,5 +576,23 @@
   "group": "N1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-0f3ec46ba (reviewer sub-agent of L); spot-checked: I read the item, all 14 steps, the new node and every cited statement, plus Bhatt–Scholze §6.7 (6.7.1, 6.7.2, 6.7.7, 6.7.10, 6.7.11, 6.7.14, 6.7.16–6.7.19) and Remark 6.8.15. The statement is unchanged from the parent's Q05 fix and nothing is weakened. Arbitrary k is correct, since BS only needs quasi-excellent, ℓ-coprime schemes. Steps 1–8, 10, 11, 13 and 14 check out. Step 2 rightly uses the stratified-perfect characterization and the constant-completion equivalence to make the unit invertible, since the Roos-triangle definition alone does not. Steps 6–7 build f^! as BS 6.7.19's R lim f_n^!. Projection and composition are proved on systems, and joint conservativity is used only to detect isomorphisms. Two C1 faults, both fixed in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-adic-exceptional-projection.json: (1) step 9 chose compatible compactifications without a citation; it now cites lem-weil-pbc-compatible-compactification-triangle, which is in route. (2) Step 12 used G_R V_Y N without showing that restriction of scalars V preserves D^b_c; a sentence now proves it from Ŝ_T = R̂_T⊗_R S (lem-weil-finite-free-completed-scalar-comparison) and criterion (iii) of lem-weil-pbc-integral-stratified-perfect-characterization. The step is 1756 characters. New node lem-per-finite-exceptional-system-adjunction: its finite part is true (BS 6.7.18 on Dcons, which is the ctf category), and its system enhancement is honestly marked as an agent strengthening. It does not restate the item. It is not a duplicate: every system or exceptional node I found (sk-thm-existence, det-prop-scalar-six-exceptional, lem-coef-finite-adjunction-diagram-realization, lem-pur-etale-coefficient-system-adjoint, lem-sf-etale-proetale-exceptional-transport, among others) is over F̄_q or needs char p > 0. When it is split, it must use the lecture-notes purity route, not SGA. No SGA is cited. I accept all 35 tool_uses as generic tools. Batch 5: lem-etale-proper-projection-formula-finite (general proper projection formula) and sbc-thm-finiteness-finite-type (finiteness theorem) are outside both assumptions and are not steps of the trace-formula or Poincaré-duality proofs. Their closures reach those chapters only through the generic lemmas lem-pod-lisse-module-sheaves-as-module-objects and lem-trf-proper-finite-fibre-finite-near. Both accepted, with a maintainer note about where those nodes sit in the chapters.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AdicExceptionalProjection",
+  "declaration": "WeilConjectures.AdicExceptionalProjection.exists_system",
+  "file": "lean/Sheaf/Paper/AdicExceptionalProjection.lean",
+  "statement": "theorem exists_system (k : Type u) [Field k] (l : ℕ) [Fact l.Prime] [Fact (IsUnit (l : k))] : Nonempty (System (k := k) l)",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c6c8c72f1",
+  "group": "NY",
+  "result": "fix",
+  "note": "Re-delivery after the bd479af RETURN. F1 fixed: pull/support/red/finite-exceptional/tensor/scalar shifts are the canonical ones (fieldConstructiblePullShift, integralShifts.compactSupport via realization, reductionShift, etale+comparison rightAdjointCommShift, tensorShifts); ExactAdjunction.rightShiftCanonical; Operation pins both left shifts; reductionShift no longer existential. F2 fixed: reductionScalar is the node's square (E/L reductions, the exceptional scalar iso, finiteExceptionalScalar = transported Etale mateMap, finiteBalance at m+1=e(n+1)); ReductionComparisonEquation removed. Mechanical lem-coef-finite-dualizing: finiteDualizingGenericDerivedRestriction is mapDerivedCategorySquareIso of finiteDualizingRestriction_existsUnique.choose, a theorem-constructed object, so PASS on that point; adding a landed node to stmt_deps is allowed. Statements verbatim, docstrings present, only sorry. All 9 modules compile clean (3.5-42.4 s). FIX: the SemilinearSystemModels §1(B) edit is unneeded (the 7 item modules compile clean against the live deps) and slow (52-54 s vs live 29 s back to back), so fixes/SemilinearSystemModels.lean = live text. Maintainer: the delivered dep records replace the Q09/Q02 by/note (and Q02's fixed_by), so consider --revert-nodes def-coef-semilinear-system-models; advisory: theorem lem-pur-compact-support-integral-coefficient-comparison is cited by the scalar/composition/coherent def nodes for Ramification/ramifiedMap/tensorSquare; the second reading is a self-reread."
  }
 }
