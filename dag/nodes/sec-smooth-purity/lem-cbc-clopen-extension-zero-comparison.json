@@ -1,0 +1,128 @@
+{
+ "id": "lem-cbc-clopen-extension-zero-comparison",
+ "kind": "statement",
+ "title": "Extension by zero equals direct image for a clopen immersion",
+ "statement": "Let $j:U\\hookrightarrow X$ be an open immersion of schemes [def-pc-scheme, def-weil-open-immersion] with closed image. For a commutative ring $\\Lambda$ and sheaves of constant $\\Lambda$-modules on the small etale sites [def-weil-pbc-etale-sheaves], the canonical comparison $j_!\\to j_*$ from extension by zero [def-weil-pbc-extension-by-zero] to direct image [def-weil-pbc-direct-image] is a natural isomorphism. The same holds for coefficients in any Grothendieck abelian category admitting small-site sheafification.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03S5, proposition-describe-jshriek; restriction to an open and its complementary open, and Tag 0A5B, lemma-constant-smooth-statements, first proof paragraph"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Let W be the open complement of the closed image of j. The two opens j and W cover X. Restriction to this open cover detects isomorphisms by the sheaf condition. This argument applies to the stated coefficient category as well as module sheaves.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-pbc-etale-sheaves"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "On U, the comparison restricts to the identity after the fully faithful extension-by-zero unit and direct-image counit identifications. This follows from the two adjunctions and their triangle identities; it is the already proved isIso_openImmersionRestriction_map_lowerShriekToLowerStar in the source library.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "On W, both functors have zero restriction. For direct image, every relevant fibre product is empty and the empty cover makes its sections zero. For extension by zero, the adjunction turns maps to any coefficient sheaf into maps from F to the zero restriction of the other direct image, so the restriction is initial, hence zero. Thus the comparison is invertible on both covering opens and therefore globally. This is implemented in the already proved generic declaration Etale.isIso_openImmersionLowerShriekToLowerStar_of_isClosed_range.",
+   "uses": [
+    "lemma-openclosed-vanishing-lowershriek",
+    "lem-weil-pbc-extension-by-zero-adjunction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-open-immersion",
+  "def-weil-pbc-etale-sheaves",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lemma-openclosed-vanishing-lowershriek"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03S5 and 0A5B; recorded existing source-library proof via a complementary open cover"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero along an open immersion with closed range equals direct image on etale sheaves",
+   "results": "Eight hits, including Function.ExtendByZero.linearMap, ContinuousLinearMap.extend_zero and structure-sheaf open immersion APIs; none is the etale sheaf comparison.",
+   "date": "2026-10-18",
+   "verdict": "no Mathlib match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"openImmersionLowerShriekToLowerStar\"",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "no Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "openImmersionLowerShriekToLowerStar|extensionByZero.*[Cc]losed|extensionByZero.*[Cc]lopen",
+   "results": "0 Mathlib hits. Local rg found the proved source-library comparison in WeilConjectures.SixFunctors.Etale.LowerShriek.Proper.",
+   "date": "2026-10-18",
+   "verdict": "existing source-library match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OpenExtendedInjectiveProperAcyclic",
+  "date": "2026-10-18",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-finite-torsion",
+   "place": "Proof, refinement comparison paragraph: injective acyclicity of an open extension under the proper right map; clopen intermediate immersion",
+   "via": [
+    "lem-cbc-open-extended-injective-proper-acyclic",
+    "lem-cbc-proper-open-interchange-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Etale.LowerShriek.Proper",
+  "declaration": "AlgebraicGeometry.Etale.isIso_openImmersionLowerShriekToLowerStar_of_isClosed_range",
+  "statement": "theorem Etale.isIso_openImmersionLowerShriekToLowerStar_of_isClosed_range (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A] {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (hj : IsClosed (Set.range j.base)) : IsIso (Etale.openImmersionLowerShriekToLowerStar A j)",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Already proved source-library declaration; the HasSmallSiteSheafify variable is omitted by its omit command. No new Lean declaration and no sorry introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-b2db6",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261018T062933-L-686558",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-b2db6",
+  "group": "V3",
+  "result": "pass",
+  "landing": "20261018T062933-L-686558",
+  "kind": "proof",
+  "note": "independent cc review: delivered OpenExtendedInjectiveProperAcyclic.lean (signature identical to clone, sorry replaced by a proof with axioms propext/Classical.choice/Quot.sound only, compiled 53 s; importer ProperOpenInterchangeCoherence compiled against it) and its node proof/proof_deps/proof_origin/tool_uses with the Lean proof; new node lem-cbc-clopen-extension-zero-comparison with the existing proved isIso_openImmersionLowerShriekToLowerStar_of_isClosed_range; TorsionAssembly removal with unit sk-prop-sf-cbc (realized empty)"
+ }
+}
