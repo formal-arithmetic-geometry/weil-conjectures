@@ -329,6 +329,7 @@ theorem isCompatible_globalOperatorFamily (sq : IsPullback g aX aX h)
   operator_comm_of_comm_aux _ _ (α n) _ (compactPullback _ sq) (compactPullback _ sq) (hα' n)
     (S.map (n + 1)) (F.comm (n + 1))
 
+omit [∀ n, HasInvertibleExponent (R ⧸ I ^ n) (Spec (.of k))] in
 /-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (3), local operators: at a point `x̄`
 fixed by `(g, h)`, the local Frobenius operators `F_x̄(ψ_n)` of a compatible system of Frobenius
 coefficient morphisms form a compatible family of endomorphisms of the tower `(L_n)_x̄`, for
@@ -360,6 +361,7 @@ theorem isCompatible_globalOperatorFamily_iterate [IsIso g] (sq : IsPullback g a
       ((F.iterate m).globalOperatorFamily (isPullback_endIterate sq m) α hα) :=
   (F.iterate m).isCompatible_globalOperatorFamily _ α hα fun n ↦ hα' n _ _ _
 
+omit [∀ n, HasInvertibleExponent (R ⧸ I ^ n) (Spec (.of k))] in
 /-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (3), local operators, for every `m`:
 at a point `x̄` fixed by `(g^m, h^m)` (for `X = X₀ ×_{k₀} k` and `g` the geometric Frobenius, a
 geometric point over an `𝔽_{q^m}`-point of `X₀`), the local operators `F_{x̄,m}(ψ_n)` of the
@@ -399,6 +401,7 @@ theorem exists_isLift_globalOperatorFamily (sq : IsPullback g aX aX h)
   (S.compactSupportTower aX α hα).exists_isLift_of_isAdicComplete hϖ hI hc
     (F.isCompatible_globalOperatorFamily sq α hα hα')
 
+omit [∀ n, HasInvertibleExponent (R ⧸ I ^ n) (Spec (.of k))] in
 include hϖ hI in
 /-- Blueprint `sk-prop-trace-adic` (ii), equivariance for the local operators, and
 `prop-trf-adic-coefficient-morphism-systems` (2): at a point `x̄` fixed by `(g, h)`, the local
@@ -449,6 +452,7 @@ theorem exists_trace_eq_globalOperatorFamily (sq : IsPullback g aX aX h)
   (S.compactSupportTower aX α hα).exists_trace_eq_of_isAdicComplete hϖ hI hc
     (F.isCompatible_globalOperatorFamily sq α hα hα') hV
 
+omit [∀ n, HasInvertibleExponent (R ⧸ I ^ n) (Spec (.of k))] in
 include hϖ hI in
 /-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (4), local operators: the categorical
 trace `tr_R(V ∣ P_{x̄, 𝒪})` of a lift `V` of the local Frobenius operators at a point `x̄` fixed

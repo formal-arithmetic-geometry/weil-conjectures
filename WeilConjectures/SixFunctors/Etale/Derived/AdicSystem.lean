@@ -359,7 +359,7 @@ theorem compactSupportTower_realization
   ⟨(S.compactSupportTower aX α hα).exists_iso_Q_obj_of_isAdicComplete hϖ hI hc,
     (S.compactSupportTower aX α hα).isDerivedBaseChange_π_app_of_isAdicComplete hϖ hI hc⟩
 
-omit [QuasiCompact aX] [IsSeparated aX] in
+omit [QuasiCompact aX] [IsSeparated aX] [∀ n, HasInvertibleExponent (R ⧸ I ^ n) (Spec (.of k))] in
 include hϖ hI in
 /-- Blueprint `sk-prop-trace-adic` (ii) and `prop-trf-adic-coefficient-morphism-systems` (2),
 geometric stalks: the derived limit `P_{x̄, 𝒪} = R lim_n (L_n)_x̄` over `R` of the geometric
