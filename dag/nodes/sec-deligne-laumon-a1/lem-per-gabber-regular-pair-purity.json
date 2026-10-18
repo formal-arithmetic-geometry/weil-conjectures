@@ -17,9 +17,102 @@
   "def-weil-regular-scheme",
   "lem-per-regular-immersion-class-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Reduce first to coefficients $A_1=\\mathbf F_\\ell$. Fix the original pair and work where $c$ is constant. For the actual supported maps $\\eta_r$, use the cones $C_r$ of [lem-per-gysin-coefficient-cone-triangles]. Suppose $C_1=0$. Induct on $r$: for $r\\geq2$ the supplied distinguished triangle is $C_{r-1}\\to C_r\\to C_1\\to C_{r-1}[1]$. Assuming $C_{r-1}=0$, apply [lem-weil-pbc-hom-into-triangle-exact](ii) with $W=C_r$ and $a=1_{C_r}$. Its composite to $C_1=0$ vanishes, so the identity factors through $C_{r-1}=0$ and is zero. Thus $C_r$ is a zero object. By [lem-kun-distinguished-cone-zero] on the cone triangle of $\\eta_r$, this is equivalent to $\\eta_r$ being an isomorphism. The same criterion at $r=1$ starts the induction from purity over $\\mathbf F_\\ell$. This uses compatible representatives of the supported maps; it does not assume that exceptional pullback commutes with a derived change of coefficient rings.",
+   "uses": [
+    "lem-per-gysin-coefficient-cone-triangles",
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "lem-kun-distinguished-cone-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Proposition 3.3.2, p.245."
+   }
+  },
+  {
+   "text": "We now prove punctual purity over $\\mathbf F_\\ell$ for every regular Noetherian scheme with $\\ell$ invertible. By [lem-per-punctual-purity-trait-test], it suffices to treat an integral regular scheme $V$ flat and quasi-projective of finite type over a complete strictly henselian mixed-characteristic trait $S$ with $\\ell$ invertible. This reduction includes completion and the equal-characteristic case; it does not require the original $X$ or $Z$ to be excellent. Fix such $S,V$.",
+   "uses": [
+    "lem-per-punctual-purity-trait-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI section 3.7, first paragraph, p.254, with Propositions 3.2.4--3.2.5."
+   }
+  },
+  {
+   "text": "Apply [lem-per-trait-prime-to-ell-log-alteration] to $V/S$. It gives a finite trait extension $T/S$ and a projective dominant generically finite etale map $f:Y\\to V$ of degree $d>0$ prime to $\\ell$, with $Y$ integral regular and quasi-projective of finite type over $S$, carrying an fs log structure log smooth over $T$. Since $\\ell$ is a unit on $S$, it remains a unit on $T$. The log-smooth purity theorem [lem-per-log-smooth-trait-punctual-purity] therefore makes $Y$ punctually pure over $\\mathbf F_\\ell$. We use the geometric alteration theorem here, without assuming purity of $V$ or of any non-log-smooth alteration.",
+   "uses": [
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-per-log-smooth-trait-punctual-purity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI section 3.7, pp.254--255, and Theorem 3.6.2."
+   }
+  },
+  {
+   "text": "Use [lem-per-punctual-purity-proper-degree-descent] for $f:Y\\to V$ over $S$. Both schemes are integral regular, finite type and quasi-projective over $S$ by the alteration statement; its projective map is proper by [lem-pc-projective-proper], its generic degree is $d$, and $d$ is invertible in $\\mathbf F_\\ell$ since $\\ell\\nmid d$. The lemma requires no flatness of $f$. It follows that $V$ is punctually pure. This verifies the entire test family of Step 2, so [lem-per-punctual-purity-trait-test] gives punctual purity for every regular Noetherian scheme with $\\ell$ invertible.",
+   "uses": [
+    "lem-per-punctual-purity-proper-degree-descent",
+    "lem-per-punctual-purity-trait-test",
+    "lem-per-trait-prime-to-ell-log-alteration",
+    "lem-pc-projective-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI section 3.7, last paragraph, p.255; Proposition 3.5.7."
+   }
+  },
+  {
+   "text": "Return to $i:Z\\hookrightarrow X$. Step 4 applies separately to $X$ and to $Z$, so they satisfy conditions (c) and (b) of [lem-per-punctual-purity-two-of-three]. That statement gives condition (a): the actual Kummer class $\\eta_{i,1}:\\mathbf F_{\\ell,Z}\\to i_1^!\\mathbf F_{\\ell,X}(c)[2c]$ is an isomorphism. Its pointwise classes and its composition convention are exactly those of [lem-per-regular-immersion-class-calculus], the class used in the item. Step 1 now gives the desired $\\eta_{i,n}$ for the original exponent $n$. No field-of-definition or smoothness-over-a-field assumption has entered.",
+   "uses": [
+    "lem-per-punctual-purity-two-of-three",
+    "lem-per-regular-immersion-class-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Proposition 3.2.3, p.244; section 3.7, first paragraph; Proposition 3.3.2."
+   }
+  },
+  {
+   "text": "For $A=\\Lambda_n$ and $m=\\ell^n$, [lem-asd-etale-finite-twist-pullback] says the signed Tate sheaves on $Z$ are locally free of rank one, with compatible evaluation. Thus $\\Lambda_{n,Z}(c)\\otimes\\Lambda_{n,Z}(-c)\\to\\Lambda_{n,Z}$ is an isomorphism: on a trivialization it is the ordinary rank-one evaluation. Tensoring with the inverse line and shifting by $[-2c]$ gives $i_n^!\\Lambda_{n,X}\\simeq\\Lambda_{n,Z}(-c)[-2c]$. With the cochain convention, $\\mathcal H^q(K[m])=\\mathcal H^{q+m}(K)$, so the right side has only $\\mathcal H^{2c}=\\Lambda_{n,Z}(-c)$. All constructions commute with open restriction by [lem-per-regular-immersion-class-calculus], so different locally constant values of $c$ are treated on their respective components. For $c=0$ its specified class is the open-and-closed restriction map, including the identity as $1$; on the empty subscheme all assertions are vacuous.",
+   "uses": [
+    "lem-per-regular-immersion-class-calculus",
+    "def-weil-pbc-derived-categories",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Theorem 3.1.1 and Definition 2.3.1; cohomological shift convention."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-gysin-coefficient-cone-triangles",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-kun-distinguished-cone-zero",
+  "lem-per-punctual-purity-trait-test",
+  "lem-per-trait-prime-to-ell-log-alteration",
+  "lem-per-log-smooth-trait-punctual-purity",
+  "lem-per-punctual-purity-proper-degree-descent",
+  "lem-pc-projective-proper",
+  "lem-per-punctual-purity-two-of-three",
+  "lem-per-regular-immersion-class-calculus",
+  "def-weil-pbc-derived-categories",
+  "lem-asd-etale-finite-twist-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI, proof of Theorem 3.1.1, section 3.7, pp.254--255; reductions in Propositions 3.2.3 and 3.3.2."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +148,38 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.isConstant_iff_mem_essImage\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"{L : D ⥤ Sheaf J D} {T : C} (hT : IsTerminal T) (adj : L ⊣ (sheafSections J D).obj ⟨T⟩) (F : Sheaf J D) :\\n  IsConstant J F ↔ L.essImage F\", \"doc\": \"A sheaf $ F $ on a category $\\\\mathcal{C}$ with values in a category $\\\\mathcal{D}$, equipped with a Grothendieck topology $ J $, is constant if and only if $ F $ lies in the essential image of a functo\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \": (isoRestrict f).inv ≫ f = Y.ofRestrict _\", \"doc\": \"For an open immersion $ f : X ⟶ Y $ between sheafed spaces, the composition of the inverse of the isomorphism $ X ≅ Y|_U $ (where $ U $ is the image of $ f $'s base map) with $ f $ equals the canonica\"}\n  {\"name\": \"CategoryTheory.Sheaf.mem_essImage_of_isConstant\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"(F : Sheaf J D) [IsConstant J F] : (constantSheaf J D).essImage F\", \"doc\": \"If a sheaf $ F $ on a category $\\\\mathcal{C}$ with values in a category $\\\\mathcal{D}$ is constant with respect to a Grothendieck topology $ J $, then $ F $ is isomorphic to the constant sheaf associate\"}\n  {\"name\": \"CategoryTheory.Sheaf.IsConstant.mem_essImage\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"∀ {C : Type u_1} {inst : CategoryTheory.Category.{v_1, u_1} C} {J : CategoryTheory.GrothendieckTopology C}\\n  {D : Type u_2} {inst_1 : CategoryTheory.Category.{v_2, u_2} D} {inst_2 : CategoryTheory.HasWeakSheafify J D}\\n  {F : CategoryTheory.Sheaf J D} [self : CategoryTheory.Sheaf.IsConstant J F],\\n  (\", \"doc\": \"Any constant sheaf $F$ on a category $\\\\mathcal{C}$ with values in $\\\\mathcal{D}$, equipped with a Grothendieck topology $J$, is isomorphic to the image of some object in $\\\\mathcal{D}$ under the constan\"}\n  {\"name\": \"CategoryTheory.Sheaf.IsConstant.mk\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] {J : CategoryTheory.GrothendieckTopology C}\\n  {D : Type u_2} [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.HasWeakSheafify J D]\\n  {F : CategoryTheory.Sheaf J D}, (CategoryTheory.constantSheaf J D).essImage F → \", \"doc\": \"If a sheaf $ F $ on a category $\\\\mathcal{C}$ with values in a category $\\\\mathcal{D}$, equipped with a Grothendieck topology $ J $, lies in the essential image of the constant sheaf functor, then $ F $\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_apply\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X Y : AlgebraicGeometry.SheafedSpace C} (f : X ⟶ Y)\\n  [H : AlgebraicGeometry.SheafedSpace.IsOpenImmersion f] (U : TopologicalSpace.Opens ↑↑X.toPresheafedSpace)\\n  {F : C → C → Type uF} {carrier : C → Type w} {instFunLike : (X Y : C) → FunLike \", \"doc\": \"Let `C` be a concrete category, and let `f: X \\\\to Y` be an open immersion of `C`-sheafed spaces. For any open subset `U` of `X`, the natural transformation component of the morphism `f` gives an isomo\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"(U : Opens X) :\\n  H.invApp _ U ≫ f.hom.c.app (op (opensFunctor f |>.obj U)) =\\n    X.presheaf.map (eqToHom (by simp [Opens.map, Set.preimage_image_eq _ H.base_open.injective]))\", \"doc\": \"For a sheafed space morphism $ f : X \\to Y $ that is an open immersion, and for any open subset $ U $ of $ X $, the composition of the inverse presheaf component isomorphism $ H.\\text{invApp} $ at $ U $\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.ofRestrict_invApp\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"{C : Type*} [Category* C] (X : SheafedSpace C) {Y : TopCat} {f : Y ⟶ TopCat.of X.carrier} (h : IsOpenEmbedding f)\\n  (U : Opens (X.restrict h).carrier) : (SheafedSpace.IsOpenImmersion.ofRestrict X h).invApp _ U = 𝟙 _\", \"doc\": \"For each open subset $ U $ of $ X $, the inverse of the presheaf component isomorphism associated to an open immersion is the identity morphism on the corresponding presheaf data, ensuring compatibili\"}\n",
    "date": "2026-10-18",
    "verdict": "no match: returned declarations do not state this node or a one-line generalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extraordinary inverse image of constant finite torsion sheaf for a regular closed immersion of regular schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.map\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → X.IdealSheafData → (X ⟶ Y) → Y.IdealSheafData\", \"doc\": \"Given an ideal sheaf $\\\\mathcal{I}$ on a scheme $X$ and a morphism $f: X \\\\to Y$, this function constructs the ideal sheaf on $Y$ as the kernel of the composition of the canonical morphism $\\\\iota: \\\\text\"}\n  {\"name\": \"AlgebraicGeometry.liftCoborder_app\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsImmersion f]\\n  (U : (↑(AlgebraicGeometry.Scheme.Hom.coborderRange f)).Opens),\\n  AlgebraicGeometry.Scheme.Hom.app (AlgebraicGeometry.Scheme.Hom.liftCoborder f) U =\\n    CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometr\", \"doc\": \"For a scheme immersion $ f : X \\to Y $, the preimage of an open subset $ U $ of the cobord of $ f $ under the lift cobord morphism equals the preimage under $ f $ of the image of $ U $ under the canoni\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrict\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → Y.Modules → (f : X ⟶ Y) → [AlgebraicGeometry.IsOpenImmersion f] → X.Modules\", \"doc\": \"Given a sheaf of modules $ M $ over a scheme $ Y $ and an open immersion $ f : X \\\\to Y $, this function returns the restricted sheaf of modules over $ X $ obtained by applying the restriction functor \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDiagram\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Opensᵒᵖ CommRingCat\", \"doc\": \"The functor assigns to each open subset $ U $ of $ Y $ the integral closure of the ring of sections $ \\\\Gamma(Y, U) $ in $ \\\\Gamma(X, f^{-1}(U)) $, and to each inclusion $ V \\\\subseteq U $ the induced ri\"}\n  {\"name\": \"ModuleCat.Tilde.res_const\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Tilde\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) (f : ↑M) (g : R)\\n  (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (hu : ∀ x ∈ U, g ∈ x.asIdeal.primeCompl)\\n  (V : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R)) (hv : ∀ x ∈ V, g ∈ x.asIdeal.primeCompl)\\n  (i\", \"doc\": \"For an $R$-module $M$ and its associated sheaf $\\\\widetilde{M}$ over $\\\\operatorname{Spec}(R)$, if $U \\\\supseteq V$ are open subsets where $g \\\\in R$ is invertible (i.e., $g$ lies in the complement of all\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.IsOpenImmersion f] → CategoryTheory.Functor Y.Modules X.Modules\", \"doc\": \"The functor from the category of sheaves of modules over scheme $ Y $ to the category of sheaves of modules over scheme $ X $, induced by an open immersion $ f : X \\to Y $. It is constructed by composi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.ideal_comap_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Functorial\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (I : Y.IdealSheafData) (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f]\\n  (U : ↑X.affineOpens),\\n  (I.comap f).ideal U =\\n    Ideal.comap (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appIso f ↑U).inv)\\n      (I.ideal ⟨(AlgebraicGeometry.Scheme.Hom.opensF\", \"doc\": \"For a scheme $Y$ with ideal sheaf data $\\\\mathcal{I}$ and an open immersion $f: X \\\\to Y$, the ideal of the comapped ideal sheaf data $\\\\mathcal{I}.\\\\text{comap}(f)$ on an affine open subset $U \\\\subseteq \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toImage_app\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (U : ↑Y.affineOpens),\\n  AlgebraicGeometry.Scheme.Hom.app (AlgebraicGeometry.Scheme.Hom.toImage f)\\n      ((TopologicalSpace.Opens.map (AlgebraicGeometry.Scheme.Hom.imageι f).base).obj ↑U) =\\n    CategoryTheory.CategoryStruct.comp ((AlgebraicGeometry.Schem\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $\\\\tilde{f}: X \\\\to \\\\mathrm{im}(f)$ be the canonical morphism to its image subscheme. For any affine open subset $U \\\\subseteq Y$, the ring of sections \"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected actual hits; no absolute etale purity theorem for regular Noetherian pairs"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"purity\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"Lean.Compiler.LCNF.Purity\", \"module\": \"Lean.Compiler.LCNF.Basic\", \"type\": \" : Type\", \"doc\": \"This type is used to index the fundamental LCNF IR data structures. Depending on its value different\\nconstructors are available for the different semantic phases of LCNF.\\n\\nNotably in order to save mem\"}\n  {\"name\": \"Lean.Compiler.LCNF.tacticPurity_tac\", \"module\": \"Lean.Compiler.LCNF.Basic\", \"type\": \" : Lean.ParserDescr\", \"doc\": \"\"}\n  {\"name\": \"Lean.Compiler.LCNF.Purity.impure\", \"module\": \"Lean.Compiler.LCNF.Basic\", \"type\": \" : Lean.Compiler.LCNF.Purity\", \"doc\": \"The code we are acting on is to be considered generally impure, doing reorderings is potentially\\nno longer legal.\"}\n  {\"name\": \"Lean.Compiler.LCNF.Purity.pure\", \"module\": \"Lean.Compiler.LCNF.Basic\", \"type\": \" : Lean.Compiler.LCNF.Purity\", \"doc\": \"The code we are acting on is still pure, things like reordering up to value dependencies are\\nacceptable.\"}\n  {\"name\": \"Lean.Compiler.LCNF.instDecidableEqPurity\", \"module\": \"Lean.Compiler.LCNF.Basic\", \"type\": \" : DecidableEq Lean.Compiler.LCNF.Purity\", \"doc\": \"\"}\n  {\"name\": \"Lean.Compiler.LCNF.instHashablePurity\", \"module\": \"Lean.Compiler.LCNF.Basic\", \"type\": \" : Hashable Lean.Compiler.LCNF.Purity\", \"doc\": \"\"}\n  {\"name\": \"Lean.Compiler.LCNF.instInhabitedPurity\", \"module\": \"Lean.Compiler.LCNF.Basic\", \"type\": \" : Inhabited Lean.Compiler.LCNF.Purity\", \"doc\": \"\"}\n  {\"name\": \"Lean.Compiler.LCNF.instToStringPurity\", \"module\": \"Lean.Compiler.LCNF.Basic\", \"type\": \" : ToString Lean.Compiler.LCNF.Purity\", \"doc\": \"\"}\n  {\"name\": \"Lean.Compiler.LCNF.instHashablePurity.hash\", \"module\": \"Lean.Compiler.LCNF.Basic\", \"type\": \" : Lean.Compiler.LCNF.Purity → UInt64\", \"doc\": \"\"}\n  {\"name\": \"Lean.Compiler.LCNF.Decl.castPurity!\", \"module\": \"Lean.Compiler.LCNF.Basic\", \"type\": \" {pu1 : Lean.Compiler.LCNF.Purity} (decl : Lean.Compiler.LCNF.Decl pu1) (pu2 : Lean.Compiler.LCNF.Purity) : Lean.Compiler.LCNF.Decl pu2\", \"doc\": \"\"}\n  {\"name\": \"Lean.Compiler.LCNF.Purity.withAssertPurity\", \"module\": \"Lean.Compiler.LCNF.Basic\", \"type\": \" {α : Sort u_1} [Inhabited α] (is should : Lean.Compiler.LCNF.Purity) (k : is = should → α) : α\", \"doc\": \"\"}\n  {\"name\": \"Lean.Compiler.LCNF.getPurity\", \"module\": \"Lean.Compiler.LCNF.CompilerM\", \"type\": \" : Lean.Compiler.LCNF.CompilerM Lean.Compiler.LCNF.Purity\", \"doc\": \"\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected actual hits; no absolute etale purity theorem for regular Noetherian pairs"
+  },
+  {
+   "tool": "grep",
+   "query": "absolute.?purity|cohomological.?purity|Gysin",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"line\": \"17\", \"text\": \"A sieve `S` on `X` is covering for `finestTopologySingle P` iff\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"line\": \"59\", \"text\": \"def finestTopologySingle (P : Cᵒᵖ ⥤ Type w) : GrothendieckTopology C where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"line\": \"83\", \"text\": \"  sInf (finestTopologySingle '' Ps)\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected actual hits; no absolute etale purity theorem for regular Noetherian pairs"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Gabber absolute purity for regular closed pairs with prime power torsion coefficients",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsIntegralClosure.isTorsionFree\", \"module\": \"Mathlib.RingTheory.IntegralClosure.IsIntegralClosure.Basic\", \"type\": \"[Module R A] [IsScalarTower R A B] [IsTorsionFree R B] : IsTorsionFree R A\", \"doc\": \"If $ B $ is the integral closure of $ A $ over $ R $, and $ B $ is torsion-free as an $ R $-module with a compatible scalar tower structure $ R \\\\to A \\\\to B $, then $ A $ is also torsion-free as an $ R\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.instUniversallyClosed\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Integral\", \"type\": \"(f : X ⟶ Y) [IsIntegralHom f] : UniversallyClosed f\", \"doc\": \"Every integral morphism $ f: X \\to Y $ of schemes is universally closed. This instance asserts that if a morphism of schemes is integral, then it satisfies the condition that all base changes of the mo\"}\n  {\"name\": \"PerfectClosure.mk_eq_iff\", \"module\": \"Mathlib.FieldTheory.PerfectClosure\", \"type\": \"(x y : ℕ × K) : mk K p x = mk K p y ↔ ∃ z, (frobenius K p)^[y.1 + z] x.2 = (frobenius K p)^[x.1 + z] y.2\", \"doc\": \"For any two pairs $(n, a)$ and $(m, b)$ in $\\\\mathbb{N} \\\\times K$, their images in the perfect closure of a field $K$ of characteristic $p$ are equal if and only if there exists a natural number $z$ su\"}\n  {\"name\": \"PrimeSpectrum.isOpen_singleton_tfae_of_isNoetherian_of_isJacobsonRing\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Jacobson\", \"type\": \"[IsNoetherianRing R] [IsJacobsonRing R] (x : PrimeSpectrum R) :\\n  List.TFAE [IsOpen { x }, IsClopen { x }, IsClosed { x } ∧ StableUnderGeneralization { x }]\", \"doc\": \"In a Noetherian Jacobson ring $ R $, for any prime ideal $ x $ in the prime spectrum $ \\\\operatorname{Spec}(R) $, the following are equivalent: (1) the singleton set $ \\\\{x\\\\} $ is open in the Zariski to\"}\n  {\"name\": \"PerfectClosure.r_iff\", \"module\": \"Mathlib.FieldTheory.PerfectClosure\", \"type\": \"∀ (K : Type u) [inst : CommRing K] (p : ℕ) [inst_1 : Fact (Nat.Prime p)] [inst_2 : CharP K p] (a a_1 : ℕ × K),\\n  PerfectClosure.R K p a a_1 ↔ ∃ n x, a = (n, x) ∧ a_1 = (n + 1, (frobenius K p) x)\", \"doc\": \"For a commutative ring $ K $ of prime characteristic $ p $, two pairs $ (n, x) $ and $ (m, y) $ in $ \\\\mathbb{N} \\\\times K $ satisfy the perfect closure relation $ R $ if and only if there exists $ n \\\\i\"}\n  {\"name\": \"PrimeSpectrum.isHomeomorph_comap_of_isPurelyInseparable\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Homeomorph\", \"type\": \"[IsPurelyInseparable k K] : IsHomeomorph (comap <| algebraMap R (R ⊗[k] K))\", \"doc\": \"Let $ k \\\\to K $ be a purely inseparable field extension and $ R $ a commutative semiring equipped with a $ k $-algebra structure. The induced map on prime spectra given by preimage under the canonical\"}\n  {\"name\": \"IsPurelyInseparable.isPRadical\", \"module\": \"Mathlib.FieldTheory.IsPerfectClosure\", \"type\": \"[IsPurelyInseparable K L] : IsPRadical (algebraMap K L) p\", \"doc\": \"For any purely inseparable field extension $ L $ over $ K $, the canonical algebra homomorphism from $ K $ to $ L $ satisfies the $ p $-radical condition for some prime power $ p $. This means that th\"}\n  {\"name\": \"PerfectClosure.instNontrivialOfIsReduced\", \"module\": \"Mathlib.FieldTheory.PerfectClosure\", \"type\": \"[CommRing K] [IsReduced K] (p : ℕ) [Fact p.Prime] [CharP K p] [Nontrivial K] : Nontrivial (PerfectClosure K p)\", \"doc\": \"If $ K $ is a nontrivial, reduced commutative ring of prime characteristic $ p $, then its perfect closure is also nontrivial.\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected actual hits; no absolute etale purity theorem for regular Noetherian pairs"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-absolute-gysin-purity",
@@ -81,5 +202,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-gabber-regular-pair-purity",
+  "worker": "stage1",
+  "summary": "Preserved the full Noetherian regular-pair and prime-power statement. Followed ILO XVI 3.7 through six statement-only inputs: coefficient cone triangles; the two-of-three punctual criterion; complete mixed-characteristic trait testing; punctual purity for regular log-smooth trait schemes; geometric prime-to-ell log alteration; proper invertible-degree descent. Applied those inputs with every hypothesis explicit, and wrote the coefficient induction and final twist/shift calculation. No completed project Lean declaration or exact Mathlib match found. Resumption repaired explicit citations for triangle exactness, the cone-zero criterion, projective properness, and signed finite etale Tate-line evaluation. Reused all prior logged searches.",
+  "blueprint": "Proof Step 3: dimension-normalized Verdier duality, regular finite-torsion local model; pointwise purity and composition used to compare the normalized curve with the ambient regular scheme. Input: Gabber purity for a regular Noetherian closed pair. This split realizes the finite-coefficient absolute regular-pair input to that local duality model by ILO XVI 3.7. The perverse unit and chapter are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Step 4 uses only projective implies proper to satisfy the proper-degree descent hypothesis; this is a general scheme tool, not a replacement of the perverse-unit route."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Step 6 uses local rank-one signed finite etale Tate lines and evaluation to untwist; the perverse unit has no general Noetherian finite-coefficient version."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-projective-proper",
+  "lem-asd-etale-finite-twist-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-9a82e2798",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-9a82e2798 (reviewer sub-agent of L); spot-checked: I read the item, all six new nodes and every cited statement against ILO XVI pp.233-255, and made no fixes. The item is ILO Thm 3.1.1 restricted to Z/l^n (enough by 3.3.1), with the Kummer class of class-calculus (Def 2.3.1); its statement is unchanged and no excellence or field hypothesis is added. Step 1 is the 3.3.2 cone induction: the triangle C_{r-1}->C_r->C_1 with Hom-exactness (ii) and W=C_r, id=0, then cone-zero gives eta_r iso; the induction is set up correctly. Steps 2-4 follow 3.7. The alteration node gives a regular, log-smooth-over-T, projective alteration of degree [G:H] prime to l, so Y is punctually pure by 3.6.2. Proper-degree descent (3.5.7) applies: I checked every hypothesis, projective implies proper is cited and no flatness is needed. The trait test then closes the reduction, and this is not circular. Step 5 is two-of-three (3.2.3) with (b) and (c). Step 6's untwisting and shift sign are correct. The six new nodes are statement-only, self-contained, sourced to ILO 3.3.2/3.2.3/3.7+3.2.4-5/3.6.2/3.7/3.5.7, and true. None restates the item or a clause of it, and none duplicates an existing node: lem-trf-plurinodal-alteration, the uniformization and regular-cover nodes, and the absolute-purity nodes (which depend on this item) state different things. The trait test's added 'complete' strengthens the implication; it is provable by completion and Cohen structure. Accepted tool uses: lem-pc-projective-proper and lem-asd-etale-finite-twist-pullback. There is no SGA citation. Batch 5: both log nodes cite def-trf-fs-log-blowup, a pure definition (fs log structures, charts, log blowups). Its 66-node closure is only general definitions and generic module lemmas, with no step of the trace-formula or Poincare-duality proofs, so it is a general definition and accepted. Advisories: Fujiwara 2002 is not in literature/, so the trait-test split must mark it WANTED or write the argument as an agent. Later splits of the descent and log-smooth nodes must replace ILO's SGA 4 / SGA 4 1/2 inputs (3.4.4, 3.5.1, 3.5.2, 3.5.9) to keep the route lock. Step 6 implicitly uses i^!(K(c)) = (i^!K)(c) for an etale-locally trivial line, which is elementary."
  }
 }
