@@ -2,7 +2,7 @@
  "id": "lem-per-regular-pair-alteration-pullback",
  "kind": "statement",
  "title": "Regular base change preserves regular alteration pairs",
- "statement": "Let $g:S'\\to S$ be a regular morphism of Noetherian schemes, meaning flat with geometrically regular fibres, and let $\\ell$ be prime invertible on $S$. Suppose $S,S'$ are reduced and $(q_i:R_i\\to S)_i$ is a finite covering family in the topology of $\\ell'$-alterations, with every $R_i$ regular Noetherian. Suppose the usual fibre products $R'_i=R_i\\times_S S'$ are Noetherian (in particular this holds when $S'$ is Noetherian and the $q_i$ are finite type). Then the $R'_i$ are regular, are objects of $\\operatorname{alt}/S'$, and form a covering family. If a nowhere dense closed subset $Z\\subset S$ has inverse image on each $R_i$ equal to the support of a strict normal crossings boundary, the same assertion holds for $g^{-1}Z$ on each $R'_i$, allowing the empty boundary. Regular means regular local rings at all points; geometrically regular means regular after all finite residue-field extensions. A complete local ring of a local excellent Noetherian scheme is regular over that local scheme, and hence over the original scheme when formed by localization followed by completion.\n\nConventions for the notions used here: [def-pc-scheme], [def-pc-reduced-scheme], [def-weil-pbc-noetherian-ring], [def-exc-excellent-ring], [def-weil-regular-scheme], [def-trf-strict-normal-crossings-boundary], [def-per-prime-to-ell-alteration-topology], [def-pc-integral-scheme], [def-weil-proper-morphism], [def-weil-finite-type-morphism], [def-weil-finite-integral-morphism], [def-weil-flat-morphism], [def-pc-fibre-product], [def-weil-pbc-adic-completion].",
+ "statement": "Let $g:S'\\to S$ be a regular morphism of Noetherian schemes, meaning flat with geometrically regular fibres, and let $\\ell$ be prime invertible on $S$. Suppose $S,S'$ are reduced and $(q_i:R_i\\to S)_i$ is a finite covering family in the topology of $\\ell'$-alterations, with every $R_i$ regular Noetherian. Suppose the usual fibre products $R'_i=R_i\\times_S S'$ are Noetherian (in particular this holds when $S'$ is Noetherian and the $q_i$ are finite type). Then the $R'_i$ are regular, are objects of $\\operatorname{alt}/S'$, and form a covering family. If a nowhere dense closed subset $Z\\subset S$ has inverse image on each $R_i$ equal to the support of a strict normal crossings boundary, the same assertion holds for $g^{-1}Z$ on each $R'_i$, allowing the empty boundary. Regular means regular local rings at all points; geometrically regular means regular after all finite residue-field extensions. A complete local ring of a local excellent Noetherian scheme is regular over that local scheme, and hence over the original scheme when formed by localization followed by completion.\n\nConventions for the notions used here: [def-pc-scheme], [def-pc-reduced-scheme], [def-weil-pbc-noetherian-ring], [def-exc-excellent-ring], [def-weil-regular-scheme], [def-trf-strict-normal-crossings-boundary], [def-per-prime-to-ell-alteration-topology], [def-pc-integral-scheme], [def-weil-proper-morphism], [def-weil-finite-type-morphism], [def-weil-finite-integral-morphism], [def-weil-flat-morphism], [def-pc-fibre-product], [def-weil-pbc-adic-completion]. Regular ring maps and the G-ring convention are [def-weil-pbc-g-ring]; localization and residue fields are [def-weil-pbc-localization-at-prime].",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "Expose IX 1.3, printed p. 132, the sentence that base change by the regular completion morphism preserves regularity, normal crossings divisors and alteration coverings; II 2.3.4, printed p. 28. The local algebra is Stacks Tag 031E (algebra-lemma-flat-over-regular-with-regular-fibre); normal crossings follows by applying it also to all intersections and using flat preservation of their regular equations."
@@ -21,11 +21,124 @@
   "def-weil-finite-integral-morphism",
   "def-weil-flat-morphism",
   "def-pc-fibre-product",
-  "def-weil-pbc-adic-completion"
+  "def-weil-pbc-adic-completion",
+  "def-weil-pbc-g-ring",
+  "def-weil-pbc-localization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work locally on affine charts of $g$ and $q_i$. The latter maps are finite type by [def-per-prime-to-ell-alteration-topology], so [lem-weil-pbc-regular-base-change] applies to the coordinate map of $g$ and the coordinate algebra of each chart of $R_i$. It makes $p_i:R'_i\\to R_i$ regular. Localizing at a point preserves regularity by [lem-weil-pbc-regular-local-maximal]. Thus the local map $A=\\mathcal O_{R_i,x}\\to B=\\mathcal O_{R'_i,x'}$ is flat, with regular closed fibre. Both rings are Noetherian by the hypotheses. Since $A$ is regular, [lem-weil-pbc-flat-over-regular-with-regular-fibre] makes $B$ regular. This proves that every $R'_i$ is regular; no assertion that $g$ itself is of finite type has been used.",
+   "uses": [
+    "def-per-prime-to-ell-alteration-topology",
+    "lem-weil-pbc-regular-base-change",
+    "lem-weil-pbc-regular-local-maximal",
+    "lem-weil-pbc-flat-over-regular-with-regular-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07C1 (lemma-regular-base-change), Tag 07C0 (lemma-regular-local); algebra.tex Tag 031E (lemma-flat-over-regular-with-regular-fibre); ILO IX 1.3"
+   }
+  },
+  {
+   "text": "For every fibre of $g$, and after every finite residue-field extension, its local rings are regular by the hypothesis. They are domains by [lem-sc-regular-local-domain], hence reduced by [def-pc-reduced-scheme]. Therefore $g$ satisfies the flat reduced-fibre hypotheses of [lem-per-alteration-generators-reduced-base-change]. Apply that statement to obtain a functor $F:\\operatorname{alt}/S\\to\\operatorname{alt}/S'$ given by ordinary base change, preserving terminal objects and categorical fibre products and sending each of the two generating classes to generating covers. In particular each ordinary $R'_i$ is an object of $\\operatorname{alt}/S'$. Notice that products inside the alteration category are the maximal-dominant reduced parts: the cited statement supplies their compatibility, rather than falsely identifying them with all ordinary products.",
+   "uses": [
+    "lem-sc-regular-local-domain",
+    "def-pc-reduced-scheme",
+    "lem-per-alteration-generators-reduced-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II 1.1.5, 1.2.3--1.2.8 and 2.3.4, applied in IX 1.3"
+   }
+  },
+  {
+   "text": "Here is the passage from generators to covers. Let $K$ be the alteration topology on $\\operatorname{alt}/S'$, and let $J_F$ consist of sieves $V$ on $T$ for which the sieve generated by the arrows $F(v)$, $v\\in V$, is $K$-covering. The sieve axioms [def-weil-pbc-topos] show directly that $J_F$ is a topology: the maximal sieve contains the identity; for pullback along $u$, use the preserved categorical pullbacks $F(u\\times_Tv)$ to pull back the image generators; for transitivity, over an image generator $F(v)$ the images of $v^*W$ give a covering sub-sieve of the pullback of the image sieve of $W$. Apply the local-character axiom of $K$ first over these generators and then their generated covering sieve. By step 2, $J_F$ contains both classes of generators. Minimality in [def-per-prime-to-ell-alteration-topology] therefore gives $J_{\\ell'}\\subseteq J_F$. Apply this to the sieve generated by the given $q_i$. Its image generates exactly the sieve of the $F(q_i)$: each image arrow factors through one of these, and each $F(q_i)$ is present. Consequently $(R'_i\\to S')_i$ is covering.",
+   "uses": [
+    "def-weil-pbc-topos",
+    "def-per-prime-to-ell-alteration-topology",
+    "lem-per-alteration-generators-reduced-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose II 2.3.1--2.3.4; explicit verification of the generated-topology step"
+   }
+  },
+  {
+   "text": "Fix a boundary $H_i\\hookrightarrow R_i$ whose support is $q_i^{-1}Z$. At $x\\in R_i$, [lem-per-snc-boundary-parameter-criterion] gives a regular system $t_1,\\ldots,t_d$ in $A=\\mathcal O_{R_i,x}$, with local ideal $(t_1\\cdots t_r)$ for $H_i$, where $r=0$ is allowed. Fix $x'\\in R'_i$ above $x$, and use the regular local map $A\\to B$ of step 1. Choose lifts $u_1,\\ldots,u_e\\in\\mathfrak m_B$ of a regular system of parameters of its regular closed fibre $C=B/\\mathfrak m_AB$; here $e=\\dim C$. The maximal ideal of $B$ is generated by the images of all the $t_j$ and these $u_k$: subtract a combination of the $u_k$ from any element to put it in $\\mathfrak m_AB$, which is generated by the images of the $t_j$. The flat local dimension formula [lem-weil-pbc-flat-height-formula] gives $\\dim B=d+e$. Thus this ordered list is a regular system of parameters by [def-weil-pbc-regular-system-of-parameters]. This is the elementary generator-count argument of the proof of 031E, with the dimension formula cited explicitly.",
+   "uses": [
+    "lem-per-snc-boundary-parameter-criterion",
+    "lem-weil-pbc-flat-height-formula",
+    "def-weil-pbc-regular-system-of-parameters"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 031E, proof, and Tag 00ON (lemma-dimension-base-fibre-equals-total); etale.tex Tags 0BI9--0BIA"
+   }
+  },
+  {
+   "text": "Form the closed inverse image $H'_i=H_i\\times_{R_i}R'_i$. It is a closed subscheme by [lem-weil-pbc-closed-immersion-base-change]. In affine closed-immersion coordinates [def-weil-closed-immersion], pulling $\\operatorname{Spec}(A/I)$ back along $A\\to B$ gives $\\operatorname{Spec}(B/IB)$: a ring map out of $B$ factors through $B/IB$ exactly when its restriction to $A$ annihilates $I$, which is the required pushout property. Thus its ideal at $x'$ is generated by the product of the first $r$ parameters in the list of step 4. Apply [lem-per-snc-boundary-parameter-criterion] on the regular Noetherian scheme $R'_i$ to conclude that $H'_i$ is a strict normal crossings boundary. This also handles splitting of a global component into several components after base change: the criterion constructs the global boundary from its local parameter equations, without assuming an old integral component stays integral. On underlying supports the fibre-product identity [def-pc-fibre-product] gives $|H'_i|=p_i^{-1}(q_i^{-1}Z)=(q'_i)^{-1}(g^{-1}Z)$. At points off the boundary the extended ideal is the unit ideal, so the empty boundary is included.",
+   "uses": [
+    "lem-per-snc-boundary-parameter-criterion",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale.tex",
+    "place": "Tags 0BI9 and 0BIA; ILO IX 1.3 normal-crossings assertion"
+   }
+  },
+  {
+   "text": "Finally let $A$ be an excellent Noetherian local ring. By [def-exc-excellent-ring] it is a G-ring, so [def-weil-pbc-g-ring] applied at its maximal ideal says exactly that $A\\to\\widehat A$ is regular. The target is Noetherian by [lem-weil-pbc-adic-completion-noetherian]. If $A=R_{\\mathfrak p}$ is a stalk on an excellent scheme, the localization map $R\\to A$ is flat by [lem-weil-pbc-localization-flat]. Its fibre at a prime of $R$ is either zero or that prime's residue field, by the fractions description [def-weil-pbc-localization-at-prime]; after a finite field extension it is still zero or a field, hence regular. Thus $R\\to A$ is regular. The fibres of $R\\to\\widehat A$ are Noetherian by [lem-weil-pbc-fibre-ring-noetherian], so [lem-weil-pbc-regular-composition] makes this composite regular. This verifies the completion instance used by ILO IX 1.3, including the localization before completion.",
+   "uses": [
+    "def-exc-excellent-ring",
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-localization-flat",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-fibre-ring-noetherian",
+    "lem-weil-pbc-regular-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07QT (definition-excellent), 07GH (definition-G-ring), 07QI (lemma-regular-composition); ILO I 2.10 and IX 1.3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-per-prime-to-ell-alteration-topology",
+  "lem-weil-pbc-regular-base-change",
+  "lem-weil-pbc-regular-local-maximal",
+  "lem-weil-pbc-flat-over-regular-with-regular-fibre",
+  "lem-sc-regular-local-domain",
+  "def-pc-reduced-scheme",
+  "lem-per-alteration-generators-reduced-base-change",
+  "def-weil-pbc-topos",
+  "lem-per-snc-boundary-parameter-criterion",
+  "lem-weil-pbc-flat-height-formula",
+  "def-weil-pbc-regular-system-of-parameters",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-weil-closed-immersion",
+  "def-exc-excellent-ring",
+  "def-weil-pbc-g-ring",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-localization-flat",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-fibre-ring-noetherian",
+  "lem-weil-pbc-regular-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose IX 1.3 and II 2.3.4, with expanded generated-sieve and local-parameter arguments from the cited Stacks results"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +167,38 @@
    "results": "[grep] OK 0 hit(s)",
    "date": "2026-10-19",
    "verdict": "no match: read the returned types; none states this scheme-theoretic assertion or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular base change of Noetherian schemes preserves regular alteration covers and strict normal crossings boundaries",
+   "results": "Retained search log: {\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.ValuativeCriterion.Existence.stableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangeJointlySurjectivePrecoverage\", \"AlgebraicGeometry.AffineTargetMorphismProperty.IsStableUnderBaseChange\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangePrecoverageOfIsJointlySurjectivePreservingOfIsStableUnderBaseChange\"]}",
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary smooth/finite base-change and regular-sequence results do not give all clauses of the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "RingHom.IsRegular, IsRegularRing, IsReduced, strict normal crossings",
+   "results": "Retained search log: {\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'RingHom.IsRegular'\", \"top\": []}",
+   "date": "2026-10-19",
+   "verdict": "unavailable: unrecognized Loogle identifier"
+  },
+  {
+   "tool": "grep",
+   "query": "regular.*alteration|normal.?crossing|geometrically.?regular",
+   "results": "Retained search log: {\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary smooth/finite base-change and regular-sequence results do not give all clauses of the item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Regular morphism of Noetherian schemes preserves regularity of a finite type base change and alteration covering families",
+   "results": "Retained search log: {\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme\", \"RingTheory.Sequence.IsRegular.of_faithfullyFlat_of_isBaseChange\", \"IsSMulRegular.of_flat_of_isBaseChange\", \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.instIsStableUnderBaseChangePrecoverageOfIsJointlySurjectivePreservingOfIsStableUnderBaseChange\", \"AlgebraicGeometry.HasRingHomProperty.isStableUnderBaseChange\"]}",
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary smooth/finite base-change and regular-sequence results do not give all clauses of the item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-uniformization-nodal-quotient-reduction",
@@ -69,7 +210,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Expose IX 1.3, printed p. 132, the sentence that base change by the regular completion morphism preserves regularity, normal crossings divisors and alteration coverings; II 2.3.4, printed p. 28. The local algebra is Stacks Tag 031E (algebra-lemma-flat-over-regular-with-regular-fibre); normal crossings follows by applying it also to all intersections and using flat preservation of their regular equations.; supports the IX 1.1 input in the ancestor's Step 3 finiteness/duality branch.",
+   "place": "Ancestor finiteness/duality branch through the uniformization input: ILO IX 1.3, printed p.132, the sentence “Le changement de base par g préserve régularité, diviseurs à croisements normaux, et familles couvrantes pour la topologie des ℓ′-altérations.”",
    "via": [
     "lem-per-uniformization-nodal-quotient-reduction",
     "lem-per-gabber-prime-to-ell-regular-cover",
@@ -83,5 +224,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-regular-pair-alteration-pullback",
+  "worker": "stage1",
+  "summary": "Expanded ILO IX 1.3 into regular local ascent, reduced base-change generators, the generated-sieve argument, the snc parameter calculation, and G-ring completion. Two new statement-only nodes; reused all existing local algebra results. No mathematical statement correction.",
+  "blueprint": "Supplies the regular completion/base-change sentence of ILO IX 1.3 supporting the ancestor finiteness/duality branch. The enclosing unit and chapter route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-base-change",
+    "why": "Generic local algebra input for the ILO IX 1.3 regular-completion base change calculation; this perverse-sheaf unit has no alternative statement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-maximal",
+    "why": "Generic local algebra input for the ILO IX 1.3 regular-completion base change calculation; this perverse-sheaf unit has no alternative statement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-over-regular-with-regular-fibre",
+    "why": "Generic local algebra input for the ILO IX 1.3 regular-completion base change calculation; this perverse-sheaf unit has no alternative statement of this tool."
+   },
+   {
+    "node": "lem-sc-regular-local-domain",
+    "why": "Generic local algebra input for the ILO IX 1.3 regular-completion base change calculation; this perverse-sheaf unit has no alternative statement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-flat-height-formula",
+    "why": "Generic local algebra input for the ILO IX 1.3 regular-completion base change calculation; this perverse-sheaf unit has no alternative statement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic local algebra input for the ILO IX 1.3 regular-completion base change calculation; this perverse-sheaf unit has no alternative statement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-localization-flat",
+    "why": "Generic local algebra input for the ILO IX 1.3 regular-completion base change calculation; this perverse-sheaf unit has no alternative statement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-ring-noetherian",
+    "why": "Generic local algebra input for the ILO IX 1.3 regular-completion base change calculation; this perverse-sheaf unit has no alternative statement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-regular-composition",
+    "why": "Generic local algebra input for the ILO IX 1.3 regular-completion base change calculation; this perverse-sheaf unit has no alternative statement of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic scheme-theoretic base change of a closed immersion, used to form the pulled-back boundary in ILO IX 1.3; no perverse-sheaf argument is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-base-change",
+  "lem-weil-pbc-regular-local-maximal",
+  "lem-weil-pbc-flat-over-regular-with-regular-fibre",
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-flat-height-formula",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-localization-flat",
+  "lem-weil-pbc-fibre-ring-noetherian",
+  "lem-weil-pbc-regular-composition",
+  "lem-weil-pbc-closed-immersion-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q141-6ed2c288b",
+  "group": "Q141",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-6ed2c288b (reviewer sub-agent of L); spot-checked: PASS with no fixes; I read the item, both new nodes, every cited statement and the sources in full. Not superseded: the live node is still unsplit. The statement is unchanged apart from a conventions sentence and two definition stmt_deps, and no target is weakened. Sources: ILO IX 1.3 (printed p.132) is the regular base-change sentence. ILO II 1.1.5, 1.2.3 (4th bullet), 1.2.6, 1.2.7, 2.1.1 and 2.3.1-2.3.4 (pp.23-28) give the generator lemma's content. Stacks 0BI9/0BIA (etale.tex line 2419) give the snc criterion. Steps: (1) 07C1 applied to finite-type charts, then regular-local-maximal, gives a flat local map with regular closed fibre, and 031E makes the target regular. (2) Regular fibres are domains, hence reduced, which meets the generator lemma's hypothesis. (3) I verified the sieve-axiom argument: the image-covering sieves satisfy all three topology axioms, using that categorical pullbacks are preserved; the generators are covering, and minimality finishes. (4) m_B=(t,u) and dim B=d+e by the flat height formula, so (t,u) is a regular system of parameters. (5) The pulled-back ideal is (t1...tr)B, and the converse of the criterion gives an snc boundary on the right support, including the empty boundary. (6) Excellent gives G-ring, hence A->Â regular; R->R_p is regular, and composition applies because the fibres are Noetherian. New nodes: the generator lemma is true. Base change of a reduced object stays reduced (R0 by going-down, S1 ascends). Generic points go to generic points because fibres over generic points of the base are finite. The categorical product is the dominant-reduced part. The degree argument follows ILO 1.2.7. The snc criterion is true in both directions over a regular local UFD. It accepts xy, rejects xy(x+y), and rejects x^2-ay^2 with a a non-square. Neither node duplicates an existing one: the log-chart nodes give parameters only at strict local rings or over algebraically closed fields, and the cover-calculus node works inside alt/S rather than along a base change. Batch-5 flag: def-trf-strict-normal-crossings-boundary is the general snc definition, which the item's base stmt_deps already cited. It is not a step of the trace formula or Poincaré duality proofs, so I accept it. The declared tool_uses are all generic commutative algebra (07C1, 031E, 00ON, 07QI, Noetherian completion and so on); I recommend accepting them."
  }
 }
