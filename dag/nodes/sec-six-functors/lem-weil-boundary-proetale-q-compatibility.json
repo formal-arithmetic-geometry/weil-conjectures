@@ -21,7 +21,10 @@
   "def-compact-support-direct-image-detailed",
   "def-kun-projection-formula-map",
   "def-weil-pbc-projection-compactification",
-  "lem-weil-pbc-comparison-pullback"
+  "lem-weil-pbc-comparison-pullback",
+  "def-weil-boundary-q-foundation",
+  "def-weil-boundary-q-maps",
+  "def-weil-boundary-q-pairing-transport"
  ],
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-boundary-duality-discharge.md",
@@ -177,5 +180,27 @@
   "group": "Q58",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-784ea32d8 (reviewer sub-agent of L); spot-checked: I read all of the delivery's mathematics: the item, its unit and chapter, the parent cor-weil-boundary-duality-discharge (its step 14 cites the item, steps 5 and 12 discharge the new invertibility hypothesis), the main-20261015 and master proofs of the corollary (they are identical and contain no q comparison), the comparison paragraph of thm-sf-pf-proetale.proof.md, lem-weil-finite-duality-site-comparison.proof.md, and the statements of every cited node. Making the invertibility of the two projection maps an explicit hypothesis is a legitimate answer to the earlier E1/E5 return: the old text already called them isomorphisms, and the parent discharges it. Faults fixed in fixes/dag/nodes/sec-six-functors/lem-weil-boundary-proetale-q-compatibility.json: (1, E1/C8) the delivered step 1 applied sk-thm-sf-pf-proetale to G_pC_TN, which is only known to be D^b_c while the theorem needs finite Tor. It cited two theorems outside the unit's route without declaring them, and it re-proved an assumption, so I removed it. (2, E4) The definition of q had its tensor factors in an inconsistent order, so pi^{-1} followed by 1(x)mu did not type-check. q is now the transpose of (1(x)mu)∘sigma∘pi^{-1}∘F(sigma). (3, B3/C4, citations) The statement now fixes the identity compactification (F_tau=Ri_{tau,*}), says that the pro-etale pi^p is the same counit-defined composite as in def-kun-projection-formula-map, and cites lem-weil-pbc-comparison-pullback. Old step 2 is replaced by new steps 1–2, an explicit mate calculation from the assumed counit and projection equalities, monoidality and the pullback comparison: theta∘C_Z(q^e)=q^p∘(1(x)theta_N). Steps 3–4 (evaluation and double-dual transport) are kept, and I checked them against the site-comparison and duality-pairing statements. The source field now points to main-20261015. There are no new nodes and no duplicate (searched with rg over dag/nodes). After the fix every cited statement is on the unit's route, so no tool uses are needed. Edge cases Z empty, i=id and zero objects all check out. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7745c46fe",
+  "group": "N7",
+  "result": "pass",
+  "note": "Re-delivery of returned head 7011555f: all return faults repaired. H1/H2: BoundaryQExceptionalComparisonData.lean deleted; its 11 declarations moved verbatim into BoundaryQMaps (diff-verified; only tags and imports changed), retagged def-weil-boundary-q-maps and listed in its lean.declarations; 4 modules with one owner each. H11: real independent second reading by a new N7 worker. H12: foundation cites lem-weil-boundary-proetale-projection-comparison; the three new-node statements are self-contained TeX. H9: item has one import. Lean mathematics byte-identical to the head previously checked clause by clause: q in the node's tensor order with HEq-pinned Koszul symmetries; theta_N kept; IsIso hypotheses only on the two named projection components; evaluation-normalized chi; compatible dualizing square; seven finite-Tor conditions; recorded A_{E,n}, sites and predicates; no universe equality, no pro-etale substitute, no hollow defs, one sorry. stage2_delivery.read_delivery (checks a-e) on 7745c46 vs base 54c5c5c: no failures. lean.statement verbatim in all 4 records; all declarations tagged and listed. No collision on newtargets-dag tip. nt_compile clean: 17.7/6.9/8.1/5.3 s."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.BoundaryProEtaleQCompatibility",
+  "declaration": "AlgebraicGeometry.ProEtale.BoundaryComparisonOfCoefficients.boundary_proetale_q_compatibility",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonOfCoefficients.BoundaryQFiniteConclusion",
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonOfCoefficients.boundary_proetale_q_compatibility"
+  ],
+  "file": "lean/Sheaf/Paper/BoundaryProEtaleQCompatibility.lean",
+  "statement": "theorem boundary_proetale_q_compatibility (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) {Z T : Scheme.{u}} (i : Z ⟶ T) [Z.Over (Spec (.of D.k))] [T.Over (Spec (.of D.k))] [LocallyOfFiniteType (Z ↘ Spec (.of D.k))] [QuasiCompact (Z ↘ Spec (.of D.k))] [IsSeparated (Z ↘ Spec (.of D.k))] [LocallyOfFiniteType (T ↘ Spec (.of D.k))] [QuasiCompact (T ↘ Spec (.of D.k))] [IsSeparated (T ↘ Spec (.of D.k))] [i.IsOver (Spec (.of D.k))] [IsClosedImmersion i] : BoundaryQFiniteConclusion D l hl E n hn i",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

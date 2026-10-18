@@ -1,0 +1,121 @@
+{
+ "id": "def-weil-boundary-q-maps",
+ "kind": "definition",
+ "title": "Restricted pro-etale q in comparison coordinates",
+ "status": "split",
+ "statement": "Let $A$ be a finite commutative ring and $i:Z\\to T$ a proper morphism of schemes with $T$ quasi-compact. Use the ordinary constant-$A$ module derived categories $D(W_e,A)$ and $D(W_p,A)$ [def-weil-pbc-derived-categories], [def-weil-pbc-proetale-modules]. Write $C_W=\\nu_W^*$, $F_e=Ri_{e,*}$, $F_p=Ri_{p,*}$, and let $G_e=i^\\times$ use the identity-open compactification and its normalized exceptional adjunction; put $G_p=C_ZG_eR\\nu_{T,*}$ [def-weil-exceptional-inverse-image]. Use the specified direct-image mate $b$, Hom transport $h$, origin map $\\theta_N=C_ZG_e(j_N)$ induced by the comparison unit $j_N$, and counit compatibility property [def-weil-boundary-exceptional-comparison-data]. The same formulas define $h$ and $\\theta$ on ambient derived objects, without asserting bijectivity there. Presenting the scalar ring at the module-value universe leaves these functors and formulas unchanged.\n\nFor $N\\in D^+(T_e,A)$ satisfying the counit compatibility property, let $\\mu_0:F_pC_ZG_eN\\to C_TN$ be its specified arrow $C_T(\\varepsilon^e_N)\\circ b_{G_eN}^{-1}$ and define $\\mu^p_{C_TN}=\\mu_0\\circ F_p(\\theta_N^{-1})$. Use the canonical signed symmetries, maps $q^e,t^p$ and source isomorphism $s_{M,B}:C_Z(i_e^*M\\otimes_A^LB)\\cong i_p^*C_TM\\otimes_A^LC_ZB$ of [def-weil-boundary-q-foundation], and the monoidal comparison $c_{W;M,N}:C_W(M\\otimes_A^LN)\\cong C_WM\\otimes_A^LC_WN$ and projection components of [lem-weil-boundary-proetale-projection-comparison]. For bounded-below $M,N$ and invertible pro-etale projection component at $(G_pC_TN,C_TM)$, define\n$$Q^p_{M,N}=h_{i_e^*M\\otimes_A^LG_eN,\\,C_T(M\\otimes_A^LN)}\\bigl(c_{T;M,N}^{-1}\\circ t^p_{C_TM,C_TN}\\circ F_p((1\\otimes\\theta_N)\\circ s_{M,G_eN})\\bigr).$$\nFor an object predicate $P$ on $D(T_e,A)$, define the compatibility property to mean that, for every normalized presentation of the canonical signed symmetries and all $M,N\\in D^+(T_e,A)$ satisfying $P(M)$ and $P(N)$, with $G_eN$ bounded constructible, the counit and projection comparison properties and invertibility of both $\\pi^e_{G_eN,M}$ and $\\pi^p_{G_pC_TN,C_TM}$ imply\n$$\\theta_{M\\otimes_A^LN}\\circ C_Z(q^e_{M,N})=Q^p_{M,N}.$$\nThe consumer takes $P=D^b_{ctf}(T_e,A)$.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-boundary-exceptional-comparison-data",
+  "def-weil-boundary-q-foundation",
+  "lem-weil-boundary-proetale-projection-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/cor-weil-boundary-duality-discharge.proof.md",
+  "place": "Final paragraph: adjointing back through tensor-Hom and the exceptional adjunction; evaluation identities, with the explicit tensor order in lem-weil-boundary-proetale-q-compatibility."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical exceptional tensor q and site comparison transport of evaluation and its tensor Hom transpose",
+   "results": "transpose_dualTensorHom; tensorRightHomEquiv_whiskerLeft_comp_evaluation; lTensorHomEquivHomLTensor; rTensorHomEquivHomRTensor; tensorRightHomEquiv_whiskerRight_comp_evaluation; ModuleCat.monoidalClosedHomEquiv; FGModuleCatEvaluation; Monoidal.transportStruct_tensorHom",
+   "date": "2026-10-18",
+   "verdict": "No site-level exceptional q or its comparison-coordinate transpose assembly."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A monoidal comparison transports the exceptional tensor map defined using inverse projection and exceptional counit and the tensor Hom transpose of evaluation",
+   "results": "expComparison_ev; expComparison; coev_expComparison; frobeniusMorphism_iso_of_expComparison_iso; MonoidalClosedFunctor.comparison_iso; tensorLeftHomEquiv; expComparison_iso_of_frobeniusMorphism_iso; tensorRightHomEquiv",
+   "date": "2026-10-18",
+   "verdict": "Cartesian/rigid-category results do not assemble these actual site-level maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.BraidedCategory.braiding",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "BoundaryQCompatibility|exceptionalTensorQ|PairingTransposeEquality; projectionTensorMap|rightDerivedLowerStarProjectionMap; blueprint_refs.py search \"q comparison\"",
+   "results": "No exact declarations in Mathlib, slopmaster2 or published Sheaf. The generic projectionTensorMap and the actual site projection transformations and evaluation comparison exist and are reused. No blueprint node matches q comparison; the item is the only DAG node defining this q comparison.",
+   "date": "2026-10-18",
+   "verdict": "The new nodes assemble these recorded constructions; they do not replace tensor, Hom, comparison or projection definitions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-boundary-proetale-q-compatibility",
+  "date": "2026-10-18",
+  "group": "N7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-weil-boundary-duality-discharge",
+   "place": "Final proof paragraph: tensor-Hom transpose and evaluation compatibility.",
+   "via": [
+    "lem-weil-boundary-proetale-q-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.Paper.BoundaryQMaps",
+  "declaration": "AlgebraicGeometry.ProEtale.BoundaryComparisonOfCoefficients.BoundaryQCompatibility",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonOfCoefficients.coefficients",
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonOfCoefficients.etaleExceptional",
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonOfCoefficients.exceptionalAdjunction",
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonOfCoefficients.proetaleExceptional",
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonOfCoefficients.homTransport",
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonOfCoefficients.exceptionalPlus",
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonOfCoefficients.exceptionalOriginMap",
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonOfCoefficients.CounitComparison",
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonOfCoefficients.rawHomTransport",
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonOfCoefficients.rawOriginMap",
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonOfCoefficients.proCounit",
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonOfCoefficients.proQInComparisonCoordinates",
+   "AlgebraicGeometry.ProEtale.BoundaryComparisonOfCoefficients.BoundaryQCompatibility"
+  ],
+  "file": "lean/Sheaf/Paper/BoundaryQMaps.lean",
+  "statement": "def BoundaryQCompatibility (A : Type (u + 1)) [CommRing A] [Finite A] {Z T : Scheme.{u}} (i : Z ⟶ T) [IsProper i] [CompactSpace T] (P : ObjectProperty (DerivedCategory (Sheaf T.smallEtaleTopology (coefficients A)))) : Prop",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7745c46fe",
+  "group": "N7",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7745c46fe",
+  "group": "N7",
+  "result": "pass",
+  "note": "Re-delivery of returned head 7011555f: all return faults repaired. H1/H2: BoundaryQExceptionalComparisonData.lean deleted; its 11 declarations moved verbatim into BoundaryQMaps (diff-verified; only tags and imports changed), retagged def-weil-boundary-q-maps and listed in its lean.declarations; 4 modules with one owner each. H11: real independent second reading by a new N7 worker. H12: foundation cites lem-weil-boundary-proetale-projection-comparison; the three new-node statements are self-contained TeX. H9: item has one import. Lean mathematics byte-identical to the head previously checked clause by clause: q in the node's tensor order with HEq-pinned Koszul symmetries; theta_N kept; IsIso hypotheses only on the two named projection components; evaluation-normalized chi; compatible dualizing square; seven finite-Tor conditions; recorded A_{E,n}, sites and predicates; no universe equality, no pro-etale substitute, no hollow defs, one sorry. stage2_delivery.read_delivery (checks a-e) on 7745c46 vs base 54c5c5c: no failures. lean.statement verbatim in all 4 records; all declarations tagged and listed. No collision on newtargets-dag tip. nt_compile clean: 17.7/6.9/8.1/5.3 s."
+ }
+}

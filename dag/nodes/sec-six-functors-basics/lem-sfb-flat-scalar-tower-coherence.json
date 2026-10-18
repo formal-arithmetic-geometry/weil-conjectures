@@ -280,5 +280,36 @@
   "group": "Q117",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-c0e5f3577 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all 10 steps and every cited statement (lem-weil-pbc-sheaf-tensor-closed, sk-def-sfb-change-of-scalars, def-sfb-modobj-extend-restrict-adjunction, def-sfb-modobj-extension, lem-weil-pbc-conjugate-iso-unit-equation, sk-def-sfb-ring-object, sk-def-sfb-module-objects, lem-weil-pbc-exact-functor-derived-factorization, def-weil-abstract-derived-category, lem-weil-pbc-localization-universal-property, sk-def-sfb-derived-categories), plus the unit record, blueprint main-20261015 proof (4) with its cocone paragraph, and Stacks 03CZ (sites-modules.tex:933). Shape: one commit touching only the item and its report; compared with the side DAG, only split-owned fields changed and the statement, stmt_deps, source, blueprint and unit are unchanged, so the target is not weakened. Steps 2-6 hold: composite restriction is an equality; the conjugate-iso node with delta=id gives a with a∘w=u; the tensor formulas follow from the balancing relation plus C-linearity; I redid the tower equation by hand (Lv=Pv=u_{AR}, then injectivity of h↦h∘v) and both identity compatibilities (λ from module associativity, inverse u). Steps 7-9: exact factorization on unbounded complexes, degreewise chain maps, then localization clauses (2) and (3). I expanded both sides at Q_A K. On the right side the naturality move of 𝕒_{BCR} at 𝕋_{AB}Q_AK, which is not of the form Q_B(-), is compressed into 'functoriality cancels', but it is a correct two-line argument. Step 10 is elementary. Small cases checked: one-object site (Mathlib's ModuleCat.extendScalars_assoc), all identities, zero ring, complexes in one degree. Duplicates: rg over the DAG found only def-sfb-derived-extend-comp-iso and def-sfb-constructible-extend-comp-iso, which are specific E≤F⊂Q̄_ℓ comparisons with no tower equation, so not duplicates. No new nodes, no cycle, no SGA. tool_uses accepted: lem-weil-pbc-sheaf-tensor-closed as a generic black box for colimits and the braided monoidal structure; the other two declared nodes are definitions, so the declarations are harmless. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d4a0cec05",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Commit adds only the module, node copy and report; node differs from side DAG only in lean, statement verbatim. Uses canonical upstream Mod.extendScalarsComp.inv / extendScalarsId (leftAdjointUniq with identity comapComp/comapId, confirmed by probe). Both tensor formulas, four-ring equation, both identity compatibilities, derived comparisons (canonical localized mapDerivedCategory constructions, no sorry), derived tower/unit laws and full-subcategory restriction with matching components are all present. Hypotheses match the node (EssentiallySmall.{w} site, sfbSheafTensorStructure on Ab.{w}, commutative MonObj, Abelian + exactness only in derived clauses); universes independent. Docstrings and gates OK, only sorry. nt_compile clean, 3.4 s, diagnostics confirmed live. No findings beyond an author-written second reading."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FlatScalarTowerCoherence",
+  "declaration": "CategoryTheory.Mod.sheaf_flatScalarTowerCoherence",
+  "declarations": [
+   "CategoryTheory.Mod.ScalarComparisonRestricts",
+   "CategoryTheory.Mod.ScalarExtensionTensorLaws",
+   "CategoryTheory.Mod.ScalarExtensionUnitLaws",
+   "CategoryTheory.Mod.ScalarExtensionTowerLaws",
+   "CategoryTheory.Mod.flatDerivedScalarComp",
+   "CategoryTheory.Mod.flatDerivedScalarId",
+   "CategoryTheory.Mod.FlatDerivedScalarTowerLaws",
+   "CategoryTheory.Mod.FlatDerivedScalarUnitLaws",
+   "CategoryTheory.Mod.FlatScalarTowerCoherence",
+   "CategoryTheory.Mod.sheaf_flatScalarTowerCoherence"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FlatScalarTowerCoherence.lean",
+  "statement": "theorem sheaf_flatScalarTowerCoherence {S : Type uS} [Category.{vS} S] [EssentiallySmall.{w} S] (J : GrothendieckTopology S) : @FlatScalarTowerCoherence.{_, _, wA, wB, wC, wR} (Sheaf J Ab.{w}) _ (sfbSheafTensorStructure (A := Ab.{w}) J).monoidal (sfbSheafTensorStructure (A := Ab.{w}) J).symmetric.toBraidedCategory",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The main theorem specializes the fully written FlatScalarTowerCoherence predicate to the canonical sheafified tensor. Helpers package the clauses and define the specified exact-derived comparisons using existing localization functoriality. All ordinary comparisons, units, quotients and extensions are upstream declarations; no dependency is redefined."
  }
 }
