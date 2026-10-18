@@ -16,92 +16,72 @@
  ],
  "proof": [
   {
-   "text": "Work in sheaves of commutative rings. Write $L_f=f^{-1}$, $R_f=f_*$, and $\\eta_f$ for the adjunction unit of [def-weil-proetale-inverse-image]. By [prop-weil-pbc-proetale-constant-ring-map], the maps $c_f$ in the item are precisely the maps of that definition, so their adjuncts are its constant-section maps $\\rho^f:A_{\\mathrm{target}(f)}\\to R_fA_{\\mathrm{source}(f)}$. For an object $B\\to X$, the fibre-product universal property [def-pc-fibre-product] gives the isomorphism\n$$\\phi_B:Z\\times_Y(Y\\times_X B)\\xrightarrow{\\sim}Z\\times_X B,$$\nwith projections to $Z$ and $B$ unchanged. Its inverse is induced by the projection to $Z$ and the pair consisting of $h$ of that projection and the projection to $B$. Both composites preserve the two projections, hence are identities. The same uniqueness proves naturality in $B$. For a ring sheaf $G$ on $Z$, restriction $G(\\phi_B)$ therefore defines a natural ring-sheaf isomorphism\n$$d_G:R_{kh}G\\xrightarrow{\\sim}R_kR_hG.$$\nIndeed the two evaluations are $G(Z\\times_XB)$ and $G(Z\\times_Y(Y\\times_XB))$ by the direct-image definition; naturality in $G$ is naturality of a sheaf morphism.",
+   "text": "Use the published inverse-image and constant coefficient definitions [def-weil-proetale-inverse-image]. The sheafification Hom equivalence [def-weil-pbc-sheafification] gives the component equation toSheafify(Y).app(B) followed by rho_f.app(B) equals toSheafify(X).app(f^*B). This is private helper rho_unit; it uses the defining extension of the constant presheaf [def-weil-pbc-constant-sheaf], not invertibility of c_f.",
    "uses": [
     "def-weil-proetale-inverse-image",
-    "prop-weil-pbc-proetale-constant-ring-map",
-    "def-pc-fibre-product"
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-constant-sheaf"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09A5 (section-morphism), base-change direct-image formula; explicit fibre-product universal-property calculation"
+    "place": "Tag 09A5 (section-morphism), with sites.tex Tags 0H7J, 00WH and 03CB and categories.tex Tag 0DV0; explicit constant-section and mate calculations in the Lean proof."
    }
   },
   {
-   "text": "The constant coefficient sheaf $A_X$ is the sheafification of the constant ring presheaf [def-weil-pbc-constant-sheaf]. We claim\n$$d_{A_Z}\\circ\\rho^{kh}=R_k(\\rho^h)\\circ\\rho^k:A_X\\longrightarrow R_kR_hA_Z.$$\nPrecompose both sides with the constant presheaf's canonical map to $A_X$. At every $B\\to X$ and $a\\in A$, the left side first gives the constant section $a$ on $Z\\times_XB$, then restricts it along $\\phi_B$, still giving $a$. The right side first gives $a$ on $Y\\times_XB$ and then gives $a$ on $Z\\times_Y(Y\\times_XB)$, by the defining formula for $\\rho$ in [def-weil-proetale-inverse-image]. Restrictions preserve these sections because the canonical map from the constant presheaf is natural and that presheaf's restrictions are identities. The two presheaf maps agree; the uniqueness clause of [def-weil-pbc-sheafification], with target the ring sheaf $R_kR_hA_Z$, proves the claimed equality.",
+   "text": "Let beta:R_k R_h -> R_(hk) be sheafPushforwardContinuousComp′ for the published fibre-product comparison [def-pc-fibre-product, lem-weil-pbc-comparison-pullback]. In private helper rho_comp apply injectivity of the sheafification Hom equivalence [def-weil-pbc-sheafification] and then presheaf extensionality. The equation of Step 1 twice reduces the desired rho_k followed by R_k(rho_h) followed by beta equals rho_(hk) to naturality of the constant-presheaf sheafification unit along pullbackComp.hom. The constant presheaf restriction is the identity. This argument includes empty objects without distinguishing their constants.",
    "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-comparison-pullback",
+    "def-weil-pbc-sheafification",
     "def-weil-pbc-constant-sheaf",
-    "def-weil-proetale-inverse-image",
-    "def-weil-pbc-sheafification"
+    "def-weil-proetale-inverse-image"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 0H7J (example-constant-sheaf) and Tag 00WH (proposition-sheafification-adjoint), applied to rings via the cited sheafification definition"
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5 (section-morphism), with sites.tex Tags 0H7J, 00WH and 03CB and categories.tex Tag 0DV0; explicit constant-section and mate calculations in the Lean proof."
    }
   },
   {
-   "text": "Put $L=L_{kh}$, $R=R_{kh}$, $L'=L_hL_k$, and $R'=R_kR_h$. The composite adjunction [def-weil-pbc-composite-adjunction] gives $L'\\dashv R'$ with\n$$\\eta'_M=R_k(\\eta_{h,L_kM})\\circ\\eta_{k,M}.$$\nApply [lem-weil-pbc-conjugate-iso-unit-equation] with $(L_1,R_1)=(L,R)$, $(L_2,R_2)=(L',R')$ and $\\delta=d^{-1}:R'\\to R$. It characterizes the comparison $\\alpha:L\\to L'$ by\n$$R(\\alpha_M)\\circ\\eta_{kh,M}=d^{-1}_{L'M}\\circ\\eta'_M.$$\nEquivalently $d_{L'M}R(\\alpha_M)\\eta_{kh,M}=\\eta'_M$. This is the adjunction-compatible comparison specified in the item, with its direction fixed; no other isomorphism of inverse-image functors is substituted. The ring-sheaf adjunctions used here are those of [def-weil-proetale-inverse-image].",
+   "text": "For adjunctions a:L left adjoint to R and b:L′ left adjoint to R′, and beta:R′ isomorphic to R, private helper homEquiv_mate proves a.homEquiv(alpha_X followed by t) = b.homEquiv(t) followed by beta_Y, where alpha is the inverse of (conjugateIsoEquiv a b).symm beta.symm. Expand both Hom equivalences as unit followed by right-adjoint image. The unit equation [lem-weil-pbc-conjugate-iso-unit-equation] and naturality of beta give the result. For the site adjunctions this alpha is definitionally the published supportSiteProEtaleComparisonComp [lem-weil-pbc-comparison-pullback].",
    "uses": [
-    "def-weil-pbc-composite-adjunction",
     "lem-weil-pbc-conjugate-iso-unit-equation",
-    "def-weil-proetale-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 03CB (lemma-composition-morphisms-sites), uniqueness of left adjoints; categories.tex Tags 0B65 (lemma-transformation-between-functors-and-adjoints), 0DV0 (lemma-compose-counits), with the unit normalization written explicitly"
-   }
-  },
-  {
-   "text": "Set $b=c_h\\circ L_h(c_k):L'A_X\\to A_Z$. Its adjunct under the composite adjunction is $R'(b)\\eta'_{A_X}$ [def-weil-pbc-composite-adjunction]. Using functoriality and naturality of the unit $\\eta_h$ at $c_k:L_kA_X\\to A_Y$, compute\n$$\\begin{aligned}\nR'(b)\\eta'_{A_X}\n&=R_k\\bigl(R_h(c_h)R_hL_h(c_k)\\eta_{h,L_kA_X}\\bigr)\\eta_{k,A_X}\\\\\n&=R_k\\bigl(R_h(c_h)\\eta_{h,A_Y}c_k\\bigr)\\eta_{k,A_X}\\\\\n&=R_k(\\rho^h)R_k(c_k)\\eta_{k,A_X}\n=R_k(\\rho^h)\\rho^k.\n\\end{aligned}$$\nThe last line uses $R_f(c_f)\\eta_{f,A_{\\mathrm{target}(f)}}=\\rho^f$, exactly the fact that $c_f$ is adjunct to $\\rho^f$ in [def-weil-proetale-inverse-image]. Every expression is a map of ring sheaves.",
-   "uses": [
-    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-comparison-pullback",
     "def-weil-proetale-inverse-image"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0DV0 (lemma-compose-counits), composite hom bijection; explicit naturality calculation for the units"
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5 (section-morphism), with sites.tex Tags 0H7J, 00WH and 03CB and categories.tex Tag 0DV0; explicit constant-section and mate calculations in the Lean proof."
    }
   },
   {
-   "text": "The adjunct under $L\\dashv R$ of $b\\alpha_{A_X}$ is $R(b\\alpha_{A_X})\\eta_{kh,A_X}$ [def-weil-proetale-inverse-image]. Compose this adjunct with $d_{A_Z}$, use naturality of $d$ at $b$, then Step 3's unit equation, Step 4 and Step 2:\n$$\\begin{aligned}\nd_{A_Z}R(b\\alpha_{A_X})\\eta_{kh,A_X}\n&=R'(b)d_{L'A_X}R(\\alpha_{A_X})\\eta_{kh,A_X}\\\\\n&=R'(b)\\eta'_{A_X}\n=R_k(\\rho^h)\\rho^k\n=d_{A_Z}\\rho^{kh}.\n\\end{aligned}$$\nCancel the isomorphism $d_{A_Z}$. The adjunction is a bijection on ring-sheaf morphisms, so its injectivity identifies $b\\alpha_{A_X}$ with the map whose adjunct is $\\rho^{kh}$, namely $c_{kh}$. Substituting $b=c_hh^{-1}(c_k)$ gives exactly the displayed equality of the item.",
+   "text": "Apply injectivity of the adjunction Hom equivalence for h followed by k. The left side has adjunct rho_(hk) by the coefficient-map definition [def-weil-proetale-inverse-image]. Apply Step 3 to the right side. Expand the composite Hom equivalence using Adjunction.comp_homEquiv [def-weil-pbc-composite-adjunction]; naturality on its left and right variables and apply_symm_apply identify the two successive adjuncts with rho_k followed by R_k(rho_h). Step 2 finishes. No coefficient isomorphism theorem, finiteness, nonemptiness, or module/derived comparison is used.",
    "uses": [
-    "def-weil-proetale-inverse-image"
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-composite-adjunction"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 03CB (lemma-composition-morphisms-sites), comparison through adjunction; explicit equality of adjuncts"
-   }
-  },
-  {
-   "text": "No step assumes any scheme is nonempty. More explicitly, if $Z=\\varnothing$, [prop-weil-pbc-proetale-constant-ring-map] says $A_Z$ and $L_{kh}A_X$ are zero ring sheaves and $c_{kh}$ is their unique isomorphism. Both sides of the claimed equality are morphisms between these same zero ring sheaves, hence coincide. This does not assert that distinct elements of $A$ give distinct constant sections.",
-   "uses": [
-    "prop-weil-pbc-proetale-constant-ring-map"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 0H7J (example-constant-sheaf); empty-site clause already supplied by the cited constant-ring-map statement"
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A5 (section-morphism), with sites.tex Tags 0H7J, 00WH and 03CB and categories.tex Tag 0DV0; explicit constant-section and mate calculations in the Lean proof."
    }
   }
  ],
  "proof_deps": [
   "def-weil-proetale-inverse-image",
-  "prop-weil-pbc-proetale-constant-ring-map",
-  "def-pc-fibre-product",
-  "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-sheafification",
-  "def-weil-pbc-composite-adjunction",
-  "lem-weil-pbc-conjugate-iso-unit-equation"
+  "def-weil-pbc-constant-sheaf",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-weil-pbc-composite-adjunction"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/sites.tex",
-  "place": "Tags 03CB and 0H7J; direct-image formula from proetale.tex Tag 09A5 and normalized adjunction formulas from categories.tex Tags 0B65 and 0DV0. Explicit ring-sheaf adjunct calculation."
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09A5 (section-morphism), with sites.tex Tags 0H7J, 00WH and 03CB and categories.tex Tag 0DV0; explicit constant-section and mate calculations in the Lean proof."
  },
  "mathlib_searches": [
   {
@@ -207,9 +187,7 @@
    }
   ]
  },
- "tool_uses": [
-  "prop-weil-pbc-proetale-constant-ring-map"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -235,5 +213,15 @@
   "group": "Q05",
   "result": "fix",
   "note": "Lean statement matches every clause; canonical maps, dependencies, universes and edge cases checked. scompile.py passed without diagnostics. review.md records findings; fixes/lem-trf-constant-coefficient-composition.report.md replaces the placeholder second reading with a complete review."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E8",
+  "result": "pass",
+  "landing": "20261018T145058-L-3638738",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
