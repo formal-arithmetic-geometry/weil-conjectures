@@ -12,7 +12,10 @@ the branch. The server does not compile the delivery again. One cycle:
      for reviewer AUTO, the base's age, the commit of the delivery tool (`Prove <module> (<G>)`: the tool pushes only
      what it compiled), every delivered file unchanged in the library since the delivery's base, and
      tools/import_prune_check.py for every module against the library with the delivery's files in place.
-     A delivery the checks refuse goes back to its group with the message (coord/returns/<G>.md).
+     A delivery the checks refuse goes back to its group with the message (coord/returns/<G>.md). The prune check
+     reads the library through an index the lander keeps per tip (local/batch/library-index.pkl across restarts).
+     A batch takes the deliveries checked so far once no check has finished for SHEAF_BATCH_QUIET s (30), at most
+     SHEAF_BATCH_MAX (150) of them; the other checks go on and a later batch takes them (2026-10-18).
   3. Two deliveries that write the same file do not land in one batch: the later one waits for the next cycle.
   4. Under coord/.merge.lock, held only for the writes: for each delivery, the head and the library files are compared
      with what was checked (a difference: the delivery waits and is checked again), then the files are written and
@@ -67,6 +70,14 @@ def stop_checkpoint():
 
 ROUNDS = 4
 POOL = int(os.environ.get("SHEAF_BATCH_POOL", "4"))
+# 2026-10-18: one step waited for the checks of ALL candidates (459 after the queue was widened, minutes each) before
+# anything landed. Now a batch takes what is checked when no further check has finished for SHEAF_BATCH_QUIET seconds,
+# at most SHEAF_BATCH_MAX deliveries (the global build and a triage of a red build stay tractable), after at most
+# SHEAF_BATCH_MAX_WAIT seconds; the other checks go on in the pool and a later batch takes them.
+QUIET = float(os.environ.get("SHEAF_BATCH_QUIET", "30"))
+MAX_WAIT = float(os.environ.get("SHEAF_BATCH_MAX_WAIT", "900"))
+BATCH_MAX = int(os.environ.get("SHEAF_BATCH_MAX", "150"))
+INDEX_SAVE = BD / "library-index.pkl"      # the library index of the prune check, kept across restarts (tip + index)
 TRIAGE_WAIT = float(os.environ.get("SHEAF_TRIAGE_WAIT", "1500"))     # seconds for the Codex agent's verdict
 NOTE_AUTO = ("AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the "
              "group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by "
@@ -203,34 +214,99 @@ def inflight_files() -> set[str]:
     return {"lean/" + f["path"] for r in ld.records(ld.INFLIGHT) for f in r["files"]}
 
 
-def prune_check(D: dict) -> str | None:
+def index_module(text: str) -> dict:
+    """What tools/import_prune_check.py reads of a library module (li.scan, li.library_statements): its imports,
+    its declared names and its theorem statements (only those long enough to be compared, see new_stmts there)."""
+    out = {"imports": set(), "decls": set(), "stmts": {}}
+    try:
+        out["imports"] = li.imports_of(text)
+        out["decls"] = li.decls_in_text(text)
+        out["stmts"] = {q: s for q, s in li.statements_in_text(text).items() if s and len(s) >= 40}
+    except li.LexError:
+        pass        # a text the lexer refuses declares nothing for the check; the global build reads it
+    return out
+
+
+def library_module(mod: str) -> bool:
+    return mod.split(".")[0] in li.library_dirs() or mod in ("Challenge", "TargetsCheck")
+
+
+def library_index() -> dict:
+    """index_module of every module li.library_files() lists, from the working tree (what the scanners read)."""
+    out = {}
+    for p in li.library_files():
+        try:
+            text = p.read_text(errors="ignore")
+        except FileNotFoundError:
+            continue
+        out[li.module_of(p)] = index_module(text)
+    return out
+
+
+# Runs in the check process for one module: with an index file, li.scan and li.library_statements answer from the
+# lander's index of the library at its tip (plus the delivery's modules) and li.file_of reads the delivery's files
+# from the overlay; without one (a reader's pass), the old way: a symlink copy of the whole library is scanned.
+PRUNE_WORKER = r"""
+import sys, pathlib, pickle, collections
+sys.path.insert(0, sys.argv[1]); sys.path.insert(0, sys.argv[2]); import leanindex as li
+ov, index_file = pathlib.Path(sys.argv[3]), sys.argv[4]
+if not index_file:
+    li.LEAN = ov
+else:
+    from batch_land import index_module
+    with open(index_file, "rb") as f: index = pickle.load(f)
+    for p in ov.rglob("*.lean"):
+        index[".".join(p.relative_to(ov).with_suffix("").parts)] = index_module(p.read_text(errors="ignore"))
+    real_file_of = li.file_of
+    def file_of(mod):
+        p = ov / pathlib.Path(*mod.split(".")).with_suffix(".lean")
+        return p if p.is_file() else real_file_of(mod)
+    def scan():
+        decls, imports = collections.defaultdict(set), {}
+        for mod, x in index.items():
+            if mod != "Challenge":
+                for q in x["decls"]: decls[q].add(mod)
+            imports[mod] = set(x["imports"])
+        return decls, imports
+    def library_statements():
+        out = collections.defaultdict(set)
+        for mod, x in index.items():
+            if mod in ("Challenge", "TargetsCheck"): continue
+            for q, s in x["stmts"].items(): out[s].add((q, mod))
+        return out
+    li.file_of, li.scan, li.library_statements = file_of, scan, library_statements
+import import_prune_check as c
+sys.argv = ["import_prune_check.py"] + sys.argv[5:]; sys.exit(c.main())
+"""
+
+
+def prune_check(D: dict, index_file: str | None = None) -> str | None:
     """tools/import_prune_check.py for every module, against the library with the delivery's files in place (what
-    land.sh and land_set.sh check after writing). None, or the findings."""
+    land.sh and land_set.sh check after writing). None, or the findings. `index_file`: the lander's library index
+    (Pre.snapshot); without it every module's check scans the whole library (16 000 files: minutes, 2026-10-18)."""
     if os.environ.get("SHEAF_SKIP_PRUNE") == "1":
         # the human, 2026-10-13 17:55 +08: land the waiting deliveries at once and let the global build judge;
         # what breaks it is taken out and repaired (repair_queue) - faster than a per-delivery library scan
         return None
     with tempfile.TemporaryDirectory(prefix="sheaf-batch-") as td:
         td = pathlib.Path(td); ov = td / "lean"; ov.mkdir()
-        src = [str(li.LEAN / d) for d in li.library_dirs() if (li.LEAN / d).is_dir()] + [str(p) for p in li.LEAN.glob("*.lean")]
-        subprocess.run(["cp", "-as", *src, str(ov)], check=True, capture_output=True)
+        if not index_file:
+            src = [str(li.LEAN / d) for d in li.library_dirs() if (li.LEAN / d).is_dir()] + [str(p) for p in li.LEAN.glob("*.lean")]
+            subprocess.run(["cp", "-as", *src, str(ov)], check=True, capture_output=True)
         for m in D["modules"]:
             p = ov / m["file"][len("lean/"):]
             p.parent.mkdir(parents=True, exist_ok=True)
             if p.is_symlink() or p.exists():
                 p.unlink()
             p.write_text(m["text"])
-        code = ("import sys, pathlib; sys.path.insert(0, sys.argv[1]); import leanindex as li; "
-                "li.LEAN = pathlib.Path(sys.argv[2]); import import_prune_check as c; "
-                "sys.argv = ['import_prune_check.py'] + sys.argv[3:]; sys.exit(c.main())")
         for m in D["modules"]:
             old = td / "old.lean"
             if m["old"] is None:
                 oldp = "/dev/null"
             else:
                 old.write_text(m["old"]); oldp = str(old)
-            r = subprocess.run([sys.executable, "-c", code, str(ROOT / "tools"), str(ov), m["module"], oldp,
-                                str(ov / m["file"][len("lean/"):])], cwd=ROOT, capture_output=True, text=True)
+            r = subprocess.run([sys.executable, "-c", PRUNE_WORKER, str(ROOT / "tools"), str(pathlib.Path(__file__).resolve().parent), str(ov), index_file or "",
+                                m["module"], oldp, str(ov / m["file"][len("lean/"):])], cwd=ROOT, capture_output=True, text=True)
             if r.returncode != 0:
                 return f"refused by tools/import_prune_check.py for {m['file']}: " + " | ".join(
                     (r.stdout + r.stderr).strip().splitlines()[-25:])
@@ -335,7 +411,7 @@ def check(c: dict, classify: bool = True) -> dict:
         raise Refuse(str(exc)) from exc
     cycle = cycles.closing_cycle(import_graph, texts)
     if cycle: raise Refuse("import cycle: " + " -> ".join(cycle))
-    bad = prune_check(D)
+    bad = prune_check(D, c.get("_library_index_file"))
     if bad:
         raise Refuse(bad)
     paths = {m["file"] for m in D["modules"]} | {x["path"] for x in D["nodes"].values()} | set(D["changes"]) | {D["report_path"]}
@@ -363,6 +439,17 @@ class Pre:
         self.dir = pathlib.Path(tempfile.mkdtemp(prefix="sheaf-batch-"))
         self.running, self.done = {}, {}
         self.import_graph, self.graph_tip, self.graph_file = None, None, None
+        self.index, self.index_tip, self.index_file, self.index_saved = None, None, None, 0.0
+
+    @staticmethod
+    def changed(a: str, b: str) -> dict:
+        """module -> text at `b` (None: removed) for the lean/ files that differ between the commits `a` and `b`."""
+        texts = {}
+        for path in md.git('diff', '--name-only', a, b, '--', 'lean/').splitlines():
+            if path.endswith('.lean'):
+                data = recovery.blob(ROOT, b, path)
+                texts[path[5:-5].replace('/', '.')] = data.decode(errors='ignore') if data is not None else None
+        return texts
 
     def snapshot(self):
         """One graph scan, then update only modules changed at an external tip."""
@@ -370,18 +457,67 @@ class Pre:
         if self.import_graph is None:
             self.import_graph = cycles.graph(li.LEAN)
         elif tip != self.graph_tip:
-            paths = md.git('diff', '--name-only', self.graph_tip, tip, '--', 'lean/').splitlines()
-            texts = {}
-            for path in paths:
-                if path.endswith('.lean'):
-                    data = recovery.blob(ROOT, tip, path)
-                    texts[path[5:-5].replace('/', '.')] = data.decode() if data is not None else None
-            self.import_graph = cycles.overlay(self.import_graph, texts)
+            self.import_graph = cycles.overlay(self.import_graph, self.changed(self.graph_tip, tip))
         if tip != self.graph_tip or self.graph_file is None:
             self.graph_file = self.dir / (tip + '-imports.pkl')
             with self.graph_file.open('wb') as f: pickle.dump(self.import_graph, f, protocol=pickle.HIGHEST_PROTOCOL)
             self.graph_tip = tip
+        self.snapshot_index(tip)
+        for p in self.dir.glob('*.pkl'):                 # the graphs and indexes of older tips, once no check reads them
+            if p.name.endswith(('-imports.pkl', '-index.pkl')) and p not in (self.graph_file, self.index_file) \
+                    and time.time() - p.stat().st_mtime > 3600:
+                p.unlink(missing_ok=True)
         return self.import_graph
+
+    def snapshot_index(self, tip: str) -> None:
+        """The library index of the prune check (index_module per module) at `tip`: built once from the working tree
+        or taken from INDEX_SAVE, then updated for the modules changed between tips, written per tip for the check
+        processes (2026-10-18: before, every check scanned the 16 000 files of the library itself, minutes each)."""
+        if os.environ.get("SHEAF_SKIP_PRUNE") == "1":
+            return
+        if self.index is None:
+            if not self.load_index(tip):
+                self.index, self.index_tip = library_index(), tip
+            self.save_index(force=True)
+        elif tip != self.index_tip:
+            self.update_index(self.changed(self.index_tip, tip))
+            self.index_tip = tip
+        want = self.dir / (tip + '-index.pkl')
+        if self.index_file != want or not want.exists():
+            tmp = want.with_suffix('.tmp')
+            with tmp.open('wb') as f: pickle.dump(self.index, f, protocol=pickle.HIGHEST_PROTOCOL)
+            os.replace(tmp, want); self.index_file = want
+            self.save_index()
+
+    def update_index(self, texts: dict) -> None:
+        for mod, text in texts.items():
+            if text is None or not library_module(mod): self.index.pop(mod, None)
+            else: self.index[mod] = index_module(text)
+
+    def load_index(self, tip: str) -> bool:
+        """INDEX_SAVE brought to `tip`; False when there is none or its tip is not a commit of this repository."""
+        try:
+            with INDEX_SAVE.open('rb') as f: saved = pickle.load(f)
+            if not (isinstance(saved, dict) and saved.get('version') == 1 and saved.get('tip') and isinstance(saved.get('index'), dict)):
+                return False
+            self.index, self.index_tip = saved['index'], saved['tip']
+            if self.index_tip != tip:
+                self.update_index(self.changed(self.index_tip, tip))
+                self.index_tip = tip
+            return True
+        except Exception:  # noqa: BLE001
+            self.index, self.index_tip = None, None
+            return False
+
+    def save_index(self, force: bool = False) -> None:
+        if not force and time.time() - self.index_saved < 600:
+            return
+        try:
+            tmp = INDEX_SAVE.with_suffix('.tmp'); INDEX_SAVE.parent.mkdir(parents=True, exist_ok=True)
+            with tmp.open('wb') as f: pickle.dump({'version': 1, 'tip': self.index_tip, 'index': self.index}, f, protocol=pickle.HIGHEST_PROTOCOL)
+            os.replace(tmp, INDEX_SAVE); self.index_saved = time.time()
+        except OSError:
+            pass
 
     def pump(self, cands: list[dict]) -> None:
         for h, (p, out) in list(self.running.items()):
@@ -395,7 +531,9 @@ class Pre:
             out.unlink(missing_ok=True)
         if cands:
             self.snapshot()
-            for c in cands: c['_import_graph_file'] = str(self.graph_file)
+            for c in cands:
+                c['_import_graph_file'] = str(self.graph_file)
+                c['_library_index_file'] = str(self.index_file) if self.index_file else None
         live = {c["head"] for c in cands}
         for h in [h for h in self.done if h not in live]:
             del self.done[h]
@@ -412,12 +550,23 @@ class Pre:
             self.running[h] = (p, out)
 
     def results(self, cands: list[dict]) -> list[tuple]:
+        """[(candidate, result)] for the candidates whose check is done: all of them, or those done when no check
+        has finished for QUIET s, BATCH_MAX are done, or MAX_WAIT s have passed (the rest stay in the pool)."""
+        t0, last, ndone = time.time(), None, 0
         while True:
             stop_checkpoint()
             self.pump(cands)
-            if all(c["head"] in self.done for c in cands):
-                return [self.done[c["head"]] for c in cands]
+            done = [c for c in cands if c["head"] in self.done]
+            if len(done) == len(cands):
+                break
+            if len(done) != ndone:
+                ndone, last = len(done), time.time()
+            if done and (time.time() - last >= QUIET or len(done) >= BATCH_MAX):
+                break
+            if time.time() - t0 >= MAX_WAIT:
+                break
             time.sleep(0.2)
+        return [(c, self.done[c["head"]]) for c in done]
 
 
 # ---------------------------------------------------------------- the landing, under the lock
@@ -552,15 +701,19 @@ def land_batch(cache: dict, log) -> dict | None:
     # one snapshot with the workers; the in-process graph below is overlaid as
     # each delivery is accepted.
     import_graph = pre.snapshot()
-    for c in cands: c['_import_graph_file'] = str(pre.graph_file)
-    res = pre.results(cands)
+    for c in cands:
+        c['_import_graph_file'] = str(pre.graph_file)
+        c['_library_index_file'] = str(pre.index_file) if pre.index_file else None
+    pairs = pre.results(cands)
     pre.snapshot()
     base_modules = cycles.source_modules(ROOT, pre.graph_tip)
     package_roots = cycles.source_roots(li.LEAN)
-    plans, taken = [], {}
-    for c, (st, x) in zip(cands, res):
+    plans, taken, left, counts = [], {}, 0, {"refused": 0, "waiting": 0, "error": 0}
+    for c, (st, x) in pairs:
         g, item, head = c["group"], c["item"], c["head"]
         if st == "ok":
+            if len(plans) >= BATCH_MAX:
+                left += 1; continue          # checked; the next batch takes it (its result stays in the pool)
             x = dict(x)
             clash = [p for p in x["paths"] if p in taken]
             if clash:
@@ -583,18 +736,21 @@ def land_batch(cache: dict, log) -> dict | None:
                 taken[p] = key(c)
             plans.append(x)
         elif st == "refuse":
-            pre.done.pop(head, None)
+            pre.done.pop(head, None); counts["refused"] += 1
             give_back(g, item, head, x, log)
         elif st == "wait":
-            pre.done.pop(head, None)
+            pre.done.pop(head, None); counts["waiting"] += 1
             if x.startswith("class "):
                 cache[head] = "READER"
             else:
                 log("not in this batch", g, item, head[:9], "|", x[:300])
         else:
-            pre.done.pop(head, None)
+            pre.done.pop(head, None); counts["error"] += 1
             cache[head] = "ERROR"
             log("check error, left for a reader", g, item, head[:9], "|", x)
+    if pairs: log(f"checks: {len(pairs)} of {len(cands)} candidates checked in {time.time() - t0:.0f} s; {len(plans)} to land, "
+        f"{counts['refused']} refused, {counts['waiting']} waiting, {counts['error']} errors, {left} over the batch cap, "
+        f"{len(cands) - len(pairs)} still being checked")
     if not plans:
         return None
     t1 = time.time()
