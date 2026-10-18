@@ -12,11 +12,179 @@
   "def-weil-pbc-regular-sequence",
   "def-amb-finite-locally-free-module",
   "def-nagata-relative-proj",
-  "def-nagata-effective-cartier-ideal"
+  "def-nagata-effective-cartier-ideal",
+  "def-nagata-strict-transform",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-pc-module-pullback",
+  "def-trf-canonical-symmetric-graded-algebra"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a single regular immersion $W\\hookrightarrow V$, work on an affine neighbourhood on which its ideal is $J=(h_1,\\ldots,h_c)$ with $h$ regular. By [lem-weil-pbc-regular-sequence-conormal-free], the classes $[h_1],\\ldots,[h_c]$ form a basis of $J/J^2$ over $R/J$. These are local frames of the conormal sheaf, giving finite local freeness of rank $c$ by [def-amb-finite-locally-free-module]. This also covers $c=0$: the empty sequence gives $J=0$ and the zero conormal. No hypothesis that $R$ is regular is used.",
+   "uses": [
+    "lem-weil-pbc-regular-sequence-conormal-free",
+    "def-amb-finite-locally-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, 2.3.1 and proof of Lemma 2.3.3, p.234; algebra.tex Tag 00LN, lemma-regular-quasi-regular (degree one)."
+   }
+  },
+  {
+   "text": "Near a point of $Z$, choose equations $f_1,\\ldots,f_n$ for $Y\\subset X$ and lifts $g_1,\\ldots,g_m$ of regular equations for $Z\\subset Y$. Put $J=(f)$ and $H=(f,g)$ in the affine ring $R$. The concatenation $(f,g)$ is regular: the successive quotients in its first $n$ positions are those for $f$, and all later quotients are those for $\\bar g$ in $R/J$; the final quotient is nonzero at the chosen point. Apply [lem-weil-pbc-regular-sequence-conormal-free] to these three sequences. In their bases the natural conormal sequence is the inclusion of the $f$ coordinates followed by projection onto the $g$ coordinates. It is therefore short exact, locally split, and has ranks $n,m+n,m$. These maps are the maps induced by inclusions and quotients of ideals, so the local sequences are the stated global sequence.",
+   "uses": [
+    "def-weil-pbc-regular-sequence",
+    "lem-weil-pbc-regular-sequence-conormal-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, proof of Lemma 2.3.3, conormal diagram p.235, and proof of Theorem 2.3.2, short exact sequence p.237."
+   }
+  },
+  {
+   "text": "The chart computations below may use any chosen generator as the first member of a regular sequence. Here is the precise local justification. At a point of the relevant centre, [lem-weil-pbc-weakly-regular-sequence-localization-prime] makes the chosen sequence regular in the Noetherian local ring. Apply [lem-weil-pbc-regular-sequence-permutation-noetherian-local] with the finite module $M=R_{\\mathfrak p}$ to put the selected generator first. By [lem-exc-regular-sequence-principal-neighbourhood], shrink to a principal affine neighbourhood on which this ordering is regular. There are finitely many orderings used, so intersect these neighbourhoods when necessary. For $(f,g)$ in Step 2, apply this to the concatenated sequence over $R$ and also to $\\bar g$ over $R/(f)$, which is Noetherian. Away from a centre its ideal is the unit ideal and the local blowup is the identity, since the degree-zero localization of $R[T]$ at $T$ is $R$.",
+   "uses": [
+    "lem-weil-pbc-weakly-regular-sequence-localization-prime",
+    "lem-weil-pbc-regular-sequence-permutation-noetherian-local",
+    "lem-exc-regular-sequence-principal-neighbourhood",
+    "def-nagata-affine-proj"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, pp.234-237, local regular-flag geometry; algebra.tex Tag 00LJ (lemma-permute-xi) and Tag 061L (lemma-regular-sequence-in-neighbourhood)."
+   }
+  },
+  {
+   "text": "For either centre used in the statement, write its regular equations as $h_1,\\ldots,h_r$ after Step 3. The opens $C_k=R[(h)/h_k]$ cover its blowup by [prop-nagata-affine-blowup-chart-cover]. On such an open, [lem-trf-blowup-chart-regular-sequence-presentation] gives\n$$C_k=R[u_l\\mid l\\ne k]/(h_ku_l-h_l\\mid l\\ne k).$$\nWrite $t=h_k$ and $u_k=1$. Then $(h)C_k=(t)$. Multiplication by $t$ is injective, because [def-nagata-blowup-chart-ring] realizes $C_k$ as a subring of $R_t$, where $t$ is a unit. Thus the inverse image of the centre is Cartier and\n$$C_k/(t)=(R/(h))[u_l\\mid l\\ne k].$$\nThese are exactly the standard charts of $P((h)/(h)^2)$, using the conormal basis of Step 1 and the free-module case of [lem-trf-projective-bundle-quotient-geometry]. The comparison is induced by the canonical graded map from the symmetric algebra of the conormal to the associated graded: on generators it sends $[h_l]$ to its degree-one ideal class, so also commutes with changes of the regular frame. On the overlap of charts $k,q$, the coordinate change is $u_l^{(q)}=u_l^{(k)}/u_q^{(k)}$, the same fraction identity on both schemes. This proves the canonical exceptional-divisor identification for both blowups, rather than merely identifying their underlying points.",
+   "uses": [
+    "prop-nagata-affine-blowup-chart-cover",
+    "lem-trf-blowup-chart-regular-sequence-presentation",
+    "def-nagata-blowup-chart-ring",
+    "def-nagata-affine-proj",
+    "lem-trf-projective-bundle-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Lemma 2.3.3 p.234 and Theorem 2.3.2 p.236; more-algebra.tex Tag 0BIQ (lemma-blowup-regular-sequence); divisors.tex Tag 0804 (lemma-blowing-up-affine)."
+   }
+  },
+  {
+   "text": "The Cartier ideal in Step 4 is canonically $\\mathcal O_B(1)$. Indeed, by [def-weil-pbc-proj-twisting-sheaf] the degree-one twist on $D_+(h_k)$ is free with basis the degree-one homogeneous element $h_k$ of the Rees algebra: divide a degree-one fraction by $h_k$ to obtain a degree-zero fraction. Send that basis to $t\\in(t)\\subset C_k$. On a $k,q$ overlap the two bases have ratio $h_q/h_k=u_q^{(k)}$, exactly the ratio of the ideal generators. These isomorphisms therefore glue. The universal map from the pulled-back centre ideal sends $h_l$ to $tu_l$; after restriction to the exceptional divisor it induces the stated natural conormal map. Its target is $(t)/(t^2)$, freely generated by $[t]$.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, proof of Lemma 2.3.3, pp.234-235; divisors.tex Tag 02OS (lemma-blowing-up-gives-effective-Cartier-divisor), final paragraph."
+   }
+  },
+  {
+   "text": "Now use the first blowup, with centre $J=(f)$, and a chart with pivot $f_k=t$. Its exceptional chart is $(R/J)[u_l\\mid l\\ne k]$. The fibre product $P'$ is cut out there by $\\bar g_1,\\ldots,\\bar g_m$, so its ring is $(R/H)[u_l\\mid l\\ne k]$. The sequence $\\bar g$ remains regular over the polynomial ring: each successive multiplication is injective coefficient by coefficient, and its final quotient is a nonzero polynomial ring. Consequently $P'\\hookrightarrow P$ is regular of codimension $m$. In $C_k$, $(t,g_1,\\ldots,g_m)$ is regular, since $t$ is injective by Step 4 and the remaining sequence in $C_k/t$ is the one just checked. This proves regularity and codimension $m+1$ of $P'\\hookrightarrow B$.",
+   "uses": [
+    "def-weil-pbc-regular-sequence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, proof of Lemma 2.3.3, p.234: codimensions of $i\\prime$ and $j\\prime i\\prime$, with the flat-coordinate check written explicitly."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-regular-sequence-conormal-free], the conormal of $P'\\hookrightarrow P$ has the basis $[g_1],\\ldots,[g_m]$ on the charts in Step 6. The map from $p'^*N_{Y/Z}$ sends its basis $[\\bar g_j]$ to this basis, so is an isomorphism. Because the map is induced by the ideals in the fibre-product square, these local identifications agree on overlaps and give the asserted canonical identification. The same cited basis theorem applied to $(t,g)$ makes $N_{B/P'}$ free on $[t],[g_1],\\ldots,[g_m]$.",
+   "uses": [
+    "lem-weil-pbc-regular-sequence-conormal-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, proof of Lemma 2.3.3, p.235, bottom right entry and exact conormal row."
+   }
+  },
+  {
+   "text": "In the chart of Step 6 the first conormal map sends $[f_k]\\mapsto[t]$ and $[f_l]\\mapsto u_l[t]$ for $l\\ne k$. It is onto and its kernel is free on $[f_l]-u_l[f_k]$, $l\\ne k$: subtract the corresponding combination to leave only the $f_k$ coordinate. The second map, with source basis $[f_1],\\ldots,[f_n],[g_1],\\ldots,[g_m]$ over $\\mathcal O_{P'}$, has the same $f$ formulas and sends $[g_j]\\mapsto[g_j]$. Hence it is onto and its kernel has exactly the same $n-1$ basis vectors. Restricting the first kernel and then using the natural conormal map gives these identical vectors in the second kernel. This is the canonical isomorphism $i'^*K\\simeq K'$; it glues because it is the restriction of the natural ideal-induced maps, and the displayed local map is an isomorphism everywhere. For $n=1$ both bases are empty, so both kernels are zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, proof of Lemma 2.3.3, p.235, exact diagram and canonical kernel isomorphism; explicit matrices in the regular frames of Steps 1, 2 and 7."
+   }
+  },
+  {
+   "text": "For the second blowup set $n=1$, write $a=f_1$, and use the centre $H=(a,g_1,\\ldots,g_m)$. The strict transform is $\\operatorname{Bl}_{(\\bar g)}(\\operatorname{Spec}(R/a))$ as a closed subscheme of $B$ by [lemma-nagata-strict-transform-ambient-closed]. In the $a$-chart it is empty: its corresponding blowup chart on $R/a$ has pivot zero and is the zero ring (the localization at zero is zero). In a $g_k$-chart put $t=g_k$, $u=a/t$ and $v_j=g_j/t$ for $j\\ne k$. By [lem-trf-blowup-chart-regular-sequence-presentation],\n$$C=R[u,v_j\\mid j\\ne k]/(tu-a,tv_j-g_j\\mid j\\ne k).$$\nThe same presentation over $R/a$ for the regular sequence $\\bar g$ identifies $C/(u)$ with the $g_k$-chart of that blowup. This quotient is the natural closed-immersion map from the cited strict-transform theorem, since it sends every fraction to its reduced fraction. Thus the strict-transform ideal is $(u)$ on these charts.",
+   "uses": [
+    "lemma-nagata-strict-transform-ambient-closed",
+    "lem-trf-blowup-chart-regular-sequence-presentation",
+    "def-nagata-blowup-chart-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, proof of Theorem 2.3.2, p.236, strict-transform diagram; more-algebra.tex Tag 0BIQ (lemma-blowup-regular-sequence)."
+   }
+  },
+  {
+   "text": "In Step 9, $u$ is a nonzerodivisor in $C$. Indeed $a$ is a nonzerodivisor in $R$ and hence in $R_t$: if $a(b/t^d)=0$, some $t^eab=0$, whence $t^eb=0$. The chart $C$ is a subring of $R_t$, and $a=tu$ there. Thus $ux=0$ implies $ax=0$ and then $x=0$. The strict transform is consequently an effective Cartier divisor. Its intersection with $P$ has ring\n$$C/(t,u)=(R/H)[v_j\\mid j\\ne k].$$\nOn $P$, the equation $u$ is a polynomial variable in $C/t=(R/H)[u,v_j]$, so is a nonzerodivisor. On the strict transform, $t$ is a nonzerodivisor in $C/u$: by Step 9 this ring is a blowup chart over $R/a$, a subring of $(R/a)_t$ where $t$ is invertible. The intersection is therefore Cartier on each divisor. On the exceptional projective bundle its equation is the homogeneous coordinate of $a$; the remaining $g$ charts give precisely $P(N_{Y/Z})$. This proves both the scheme-theoretic equality and the asserted transverse intersection, also when $m=1$.",
+   "uses": [
+    "def-nagata-blowup-chart-ring",
+    "def-nagata-effective-cartier-ideal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, proof of Theorem 2.3.2, p.236, transverse Cartier divisors and their intersection; algebra.tex lemma-affine-blowup (injectivity read directly from the chart definition)."
+   }
+  },
+  {
+   "text": "Multiplication of ideal sheaves gives the required global factorization. On each $g_k$-chart its formula is\n$$(t)\\otimes_C(u)\\longrightarrow(a),\\qquad (bt)\\otimes(cu)\\longmapsto bc\\,a,$$\nsince $a=tu$. Both generators are nonzerodivisors, so this sends a free rank-one basis to a free rank-one basis. The module $\\pi^*I$ has basis the pullback of $a$, and its map to $(a)$ is an isomorphism by the same injectivity. On the $a$-chart the strict-transform ideal is the unit ideal, and the formula is $(a)\\otimes C\\simeq(a)$. These are restrictions of multiplication, so glue. Local principality by nonzerodivisors also gives invertibility by [lemma-nagata-effective-cartier-is-invertible]. Off $\\pi^{-1}Y$, all these ideals are unit ideals, and multiplication sends $1\\otimes1$ to $1$, proving compatibility with the canonical trivializations.",
+   "uses": [
+    "lemma-nagata-effective-cartier-is-invertible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, proof of Theorem 2.3.2, p.236, canonical isomorphism of invertible sheaves and its trivializations."
+   }
+  },
+  {
+   "text": "Restrict the canonical tautological quotient on $P=P(N_{X/Z})$ from [lem-trf-projective-bundle-quotient-geometry] to obtain $p_P^*K_0\\to\\mathcal O_P(1)$; tensor with $\\mathcal O_P(-1)$ to obtain a map to $\\mathcal O_P$. In the frame $a$ of $K_0$, and the chart frame $g_k$ of $\\mathcal O_P(1)$, this map is multiplication by $a/g_k=u$. On the $a$-chart it is multiplication by $1$. Step 10 shows its image is exactly the ideal of $P'$, and its local formulas are injective. Therefore it identifies $p_P^*K_0\\otimes\\mathcal O_P(-1)$ with that ideal. These formulas arise from the tautological map, so agree when the conormal frame or the projective chart changes; explicitly, changing the pivot from $h_k$ to $h_q$ multiplies the dual twist frame by $h_k/h_q$, the same factor changing $a/h_k$ to $a/h_q$. This verifies the sign of the twist and the canonicity of the isomorphism.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "lem-trf-projective-bundle-quotient-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, proof of Theorem 2.3.2, p.237, ideal of the projective hyperplane $P\\prime$."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-finite-locally-free-module",
+  "def-nagata-affine-proj",
+  "def-nagata-blowup-chart-ring",
+  "def-nagata-effective-cartier-ideal",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-weil-pbc-regular-sequence",
+  "lem-exc-regular-sequence-principal-neighbourhood",
+  "lem-trf-blowup-chart-regular-sequence-presentation",
+  "lem-trf-projective-bundle-quotient-geometry",
+  "lem-weil-pbc-regular-sequence-conormal-free",
+  "lem-weil-pbc-regular-sequence-permutation-noetherian-local",
+  "lem-weil-pbc-weakly-regular-sequence-localization-prime",
+  "lemma-nagata-effective-cartier-is-invertible",
+  "lemma-nagata-strict-transform-ambient-closed",
+  "prop-nagata-affine-blowup-chart-cover"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI, proof of Lemma 2.3.3 pp.234-235 and proof of Theorem 2.3.2 pp.236-237; explicit regular-sequence chart proofs of their geometric assertions, using Stacks Tags 00LN, 00LJ, 0BIQ, 0804 and 02OS."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +220,45 @@
    "results": "Recorded service result: 0 hits. . ",
    "date": "2026-10-18",
    "verdict": "no match: the returned declarations concern other objects and do not supply this etale-cohomology or blowup statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Blowup of regular closed immersions conormal exact sequences exceptional divisor strict transform",
+   "results": "Recorded 8 hits: AlgebraicGeometry.instIsClosedImmersionLiftCoborder, AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder, AlgebraicGeometry.Scheme.Hom.liftCoborder_ι, AlgebraicGeometry.Scheme.Hom.liftCoborder, AlgebraicGeometry.IsClosedImmersion.lift, AlgebraicGeometry.Scheme.Hom.liftCoborder_ι_assoc, AlgebraicGeometry.liftCoborder_app, AlgebraicGeometry.IsClosedImmersion.isIso_lift. Read returned signatures: they concern generic immersions, ideal-sheaf constructions or differential vector bundles, not regular conormal/blowup geometry.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conormal\"",
+   "results": "Recorded 0 hits: . Read returned signatures: they concern generic immersions, ideal-sheaf constructions or differential vector bundles, not regular conormal/blowup geometry.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "conormal|blowup|blowUp",
+   "results": "Recorded 0 hits: . Read returned signatures: they concern generic immersions, ideal-sheaf constructions or differential vector bundles, not regular conormal/blowup geometry.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For nested ideals generated by regular sequences compute affine blowup charts, conormal kernels, and Cartier strict transform",
+   "results": "Recorded 8 hits: AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_comp, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjι, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_comp_assoc, AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap, AlgebraicGeometry.Scheme.IdealSheafData.isOpenImmersion_glueDataObjMap. Read returned signatures: they concern generic immersions, ideal-sheaf constructions or differential vector bundles, not regular conormal/blowup geometry.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Conormal bundles of a regular flag and exceptional divisors of its blowups",
+   "results": "Recorded 8 hits: Bundle.mdifferentiableOn_zeroSection, VectorBundleCore.vectorBundle, Bundle.mdifferentiableAt_zeroSection, AlgebraicGeometry.Scheme.Hom.normalizationOpenCover, Bundle.contMDiff_zeroSection, Bundle.contMDiffOn_zeroSection, instContMDiffVectorBundleOfNatWithTopENat_1, instContMDiffVectorBundleSomeENatTopTangentSpaceOfIsManifold. Read returned signatures: they concern generic immersions, ideal-sheaf constructions or differential vector bundles, not regular conormal/blowup geometry.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-regular-immersion-class-calculus",
@@ -79,5 +282,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-regular-flag-blowup-geometry",
+  "worker": "stage1",
+  "summary": "Proved the full geometric statement by regular-sequence conormal bases and explicit blowup chart matrices. Reused existing conormal, permutation, neighbourhood and blowup-presentation nodes; no new nodes. Checked the ILO geometric assertions independently over singular Noetherian bases, the twist signs and both canonical maps. The statement is unchanged.",
+  "blueprint": "The supporting geometry at blueprint.from.place implements the regular finite-torsion local-model input to Step 3 of lem-per-artin-gabber-affine-curve through lem-per-regular-immersion-class-calculus: single-immersion conormal frames, ILO XVI 2.3.3 reduction by blowing up Y, and XVI 2.3.2 divisor case by blowing up Z. Steps 1-8 realize the conormal/excess diagram; Steps 9-12 realize the strict-transform, product and hyperplane-ideal assertions. No chapter or unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-regular-sequence-conormal-free",
+    "why": "General commutative-algebra basis theorem for an ideal generated by a regular sequence; the perverse unit supplies no algebraic replacement."
+   },
+   {
+    "node": "lem-weil-pbc-weakly-regular-sequence-localization-prime",
+    "why": "General localization tool to apply the Noetherian local permutation theorem at points of a centre."
+   },
+   {
+    "node": "lem-weil-pbc-regular-sequence-permutation-noetherian-local",
+    "why": "General algebra tool to put a chosen pivot first; used only to justify the source blowup-chart calculation."
+   },
+   {
+    "node": "lem-exc-regular-sequence-principal-neighbourhood",
+    "why": "General algebraic spreading tool to realize the permitted local reorderings on actual affine neighbourhoods."
+   },
+   {
+    "node": "prop-nagata-affine-blowup-chart-cover",
+    "why": "General blowup coordinate-cover theorem needed for the ILO regular-flag geometry."
+   },
+   {
+    "node": "lem-trf-blowup-chart-regular-sequence-presentation",
+    "why": "General algebra presentation of regular-sequence blowup charts, used as a black box in the ILO geometry, not as a trace-formula route."
+   },
+   {
+    "node": "lemma-nagata-strict-transform-ambient-closed",
+    "why": "General identification of the strict transform with the induced blowup of a closed subscheme; used in the divisor-case geometry."
+   },
+   {
+    "node": "lemma-nagata-effective-cartier-is-invertible",
+    "why": "General ideal-sheaf tool to read the locally computed Cartier ideals as invertible modules."
+   },
+   {
+    "node": "lem-trf-projective-bundle-quotient-geometry",
+    "why": "General projective-bundle tool giving the canonical quotient and the standard free-module projective charts; used to identify the local exceptional charts and the hyperplane ideal in ILO XVI."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-regular-sequence-conormal-free",
+  "lem-weil-pbc-weakly-regular-sequence-localization-prime",
+  "lem-weil-pbc-regular-sequence-permutation-noetherian-local",
+  "lem-exc-regular-sequence-principal-neighbourhood",
+  "prop-nagata-affine-blowup-chart-cover",
+  "lem-trf-blowup-chart-regular-sequence-presentation",
+  "lemma-nagata-strict-transform-ambient-closed",
+  "lemma-nagata-effective-cartier-is-invertible",
+  "lem-trf-projective-bundle-quotient-geometry"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-27ed04cda",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-27ed04cda (reviewer sub-agent of L); spot-checked: PASS. I read all 12 steps and the statements of all 15 cited nodes, and checked them against ILO XVI pp.234-237 (PDF 240-243). The item's statement matches both blowup diagrams in the source: the kernels E/E' and the canonical isomorphism i'^*E≅E', the conormal of P' in P equal to p'^*N_{Y/Z}, π^*I≅I_P⊗Ĩ compatible with the trivializations off π^{-1}Y, and the hyperplane ideal K⊗O(-1). ILO prints N_{Bl/P'} where it means N_{Bl/P}; the item uses N_{B/P}, which is correct. Step checks: the hypotheses of the localization, permutation and 061L neighbourhood lemmas hold at points of the centre and over R/(f). The 0BIQ chart presentation is applied with the pivot placed first. t is a nonzerodivisor because C_k⊂R_t, and C_k/t=(R/h)[u]. In the kernel matrices the kernel is free on e_l-u_l e_k, of rank n-1, for both maps. In the divisor case the a-chart (pivot 0) is empty, the strict-transform ideal is (u), u is a nonzerodivisor via a∈R_t, the intersection is transverse Cartier, (t)⊗(u)→(a) is an isomorphism, and the O(-1) twist is correct. Small cases tested: c=0, n=1, m=n=1, m=1, and a non-reduced base. There are no new nodes and no cycle. The existing unsplit node lem-per-cartier-blowup-polynomials is a cohomological statement that overlaps only in its n=1 geometric hypotheses, so it is not a duplicate; its geometric clauses should cite this item when it is split. Batch-5: the closure of the three trf citations (def-trf-canonical-symmetric-graded-algebra, lem-trf-blowup-chart-regular-sequence-presentation = Stacks 0BIQ, lem-trf-projective-bundle-quotient-geometry = Stacks 01OB/01OE) contains only 9 generic Proj/algebraic-space trf nodes. It contains no Poincaré-duality node, no assumption leaf and no cohomology. These are general definitions and algebra outside both assumptions, so I accept them. No SGA source is cited. The worker wrote split_report.tool_uses itself (C8). All entries are general algebra/geometry tools and I accept them, but the maintainer should confirm them at merge."
  }
 }
