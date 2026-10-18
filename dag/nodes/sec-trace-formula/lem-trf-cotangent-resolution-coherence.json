@@ -17,7 +17,7 @@
   "date": "2026-10-18",
   "group": "Q86"
  },
- "status": "unsplit",
+ "status": "split",
  "proof": [
   {
    "text": "Apply [lem-trf-adjunction-standard-simplicial-homotopy] to the adjunction $F_A:\\mathrm{Set}\\rightleftarrows A\\text{-}\\mathrm{Alg}:U$; its adjunction bijection sends an algebra map $A[E]\\to C$ to its values on the variables. This gives exactly the faces, degeneracies and augmentation in the statement, and gives a simplicial-set homotopy inverse to the underlying standard augmentation. Each term is polynomial. Each evaluation $A[UC]\\to C$ is surjective because $[c]\\mapsto c$; iterating these evaluations shows that every standard augmentation is surjective. The unit is a map of sets; no additivity of this section is asserted.",
@@ -31,30 +31,26 @@
    }
   },
   {
-   "text": "A simplicial homotopy equivalence $f:X\\to Y$ is a weak homotopy equivalence in the precise sense of [lem-cbc-realization-weak-equivalence]: precomposition on $\\pi_0^{\\mathrm e}\\operatorname{Fun}(-,W)$ for every Kan $W$ has inverse induced by a chosen homotopy inverse of $f$. Indeed composing a homotopy $H:X\\times\\Delta[1]\\to X$ with $X\\to W$ gives an edge between the corresponding maps, so the two composites induce the identity on these components. Apply this to the standard augmentation from Step 1. Regard its rings only as simplicial $\\mathbf Z$-modules. By [lem-cbc-simplicial-module-model], weak equivalences are created on underlying simplicial sets and are exactly the maps whose normalized complexes are quasi-isomorphisms. By the natural homotopy equivalence from normalized to alternating complexes in [lem-cbc-normalized-alternating-homotopy-equivalence], the alternating augmentation is therefore a quasi-isomorphism too. The alternating complex of a constant module $B$ maps quasi-isomorphically onto $B[0]$: in positive homological degrees its differentials alternate between zero and the identity. Hence the standard augmentation is a resolution in the required sense.",
+   "text": "Forget the standard augmented simplicial algebra of Step 1 to simplicial abelian groups. Its underlying simplicial-set augmentation is a homotopy equivalence, so [lem-trf-simplicial-abelian-set-homotopy-quasi-iso] applies directly and gives a quasi-isomorphism $s(P^{\\mathrm{std}})\\to s(\\operatorname{const}B)$. The map $s(\\operatorname{const}B)\\to B[0]$ is the identity in degree zero. In degree $-n$ its differential for $n>0$ is zero when $n$ is odd and the identity when $n$ is even, since it is the alternating sum of $n+1$ identity maps. Consequently its negative degrees form exact two-term identity pairs and it is a quasi-isomorphism. Composing these two maps proves that the standard augmentation is a polynomial resolution in exactly the stated sense. The homotopy inverse used here is only a map of simplicial sets; it is not asserted to be additive.",
    "uses": [
-    "lem-cbc-realization-weak-equivalence",
-    "lem-cbc-simplicial-module-model",
-    "lem-cbc-normalized-alternating-homotopy-equivalence"
+    "lem-trf-simplicial-abelian-set-homotopy-quasi-iso"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 08P2; comparison of normalized and alternating complexes; cotangent lemma-identify-L-pi-shriek"
+    "place": "Tag 08P2 (lemma-homotopy-equivalence); cotangent Tag 08PT (lemma-pi-shriek-standard), first proof, and Tag 08QI (remark-resolution)."
    }
   },
   {
-   "text": "For any polynomial resolution $Q\\to B$, its underlying simplicial abelian-group map is termwise surjective and its alternating complex map to the constant simplicial module $B$ is a quasi-isomorphism (use the constant-complex calculation in Step 2). The natural equivalence [lem-cbc-normalized-alternating-homotopy-equivalence] makes its normalized map a quasi-isomorphism. It is also surjective in each normalized degree: lift a normalized element to $x\\in Q_n$ and, for $k=n,n-1,\\ldots,1$, replace $x$ by $x-s_{k-1}d_kx$. The simplicial identities show that this kills $d_kx$ while preserving the already zero faces $d_jx$ for $j>k$; its image in $B_n$ stays the chosen normalized element. Thus [lem-cbc-simplicial-module-model] makes this a trivial fibration, and the underlying simplicial-set map a trivial fibration as well, since both fibrations and weak equivalences are created there. By [lem-coef-kan-quillen-right-proper], these are precisely the maps with the boundary lifting property, including degree zero, i.e. trivial Kan fibrations as defined in [def-weil-pbc-trivial-kan-fibration].",
+   "text": "Let $Q_\\bullet\\to B$ be any polynomial resolution in the statement. Forgetting multiplication makes its augmentation a morphism of simplicial abelian groups, termwise surjective by hypothesis. The hypothesis gives a quasi-isomorphism $s(Q)\\to B[0]$. Factor it as $s(Q)\\to s(\\operatorname{const}B)\\to B[0]$. The second map induces isomorphisms on cohomology by the constant-complex calculation of Step 2, so the first one does also: on each cohomology group its map is the inverse of the second map followed by the given isomorphism. Thus [lem-trf-simplicial-abelian-surjective-quasi-iso-boundary-lifting] applies and says that $Q\\to\\operatorname{const}B$ has every boundary lift, including dimension zero. In particular it is a trivial Kan fibration in the boundary-defined sense of [def-weil-pbc-trivial-kan-fibration]. The same applies to the standard resolution by Steps 1 and 2.",
    "uses": [
-    "lem-cbc-normalized-alternating-homotopy-equivalence",
-    "lem-cbc-simplicial-module-model",
-    "lem-coef-kan-quillen-right-proper",
+    "lem-trf-simplicial-abelian-surjective-quasi-iso-boundary-lifting",
     "def-weil-pbc-trivial-kan-fibration"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/simplicial.tex",
-    "place": "Tag 08P1 (lemma-qis-simplicial-abelian-groups); normalized-degree lifting written explicitly"
+    "place": "Tag 08P1 (lemma-qis-simplicial-abelian-groups); cotangent Tag 08QI (remark-resolution)."
    }
   },
   {
@@ -132,11 +128,9 @@
   "def-weil-pbc-kahler-differentials",
   "def-weil-pbc-trivial-kan-fibration",
   "def-weil-size-convention",
-  "lem-cbc-normalized-alternating-homotopy-equivalence",
-  "lem-cbc-realization-weak-equivalence",
-  "lem-cbc-simplicial-module-model",
-  "lem-coef-kan-quillen-right-proper",
   "lem-trf-adjunction-standard-simplicial-homotopy",
+  "lem-trf-simplicial-abelian-set-homotopy-quasi-iso",
+  "lem-trf-simplicial-abelian-surjective-quasi-iso-boundary-lifting",
   "lem-trf-simplicial-derived-colimit-computation",
   "lem-weil-pbc-trivial-kan-homotopy-equivalence"
  ],
@@ -238,28 +232,12 @@
   "date": "2026-10-18",
   "item": "lem-trf-cotangent-resolution-coherence",
   "worker": "stage1",
-  "summary": "Repair: replace unsupported algebra-resolution homotopy inverses and the incorrect free-module contraction with the source derived-colimit comparison. Reuse general simplicial-module, normalization and Kan nodes. Two generic statement-only inputs remain. Restore existing provenance from the current base; new created.item and this split_report.item name this item. Preserve the auxiliary node’s inherited historical blueprint ancestry and do not claim to realize the current zero-stalk unit.",
+  "summary": "Q13 repair of the dedicated handoff: replace Steps 2–3, which used the dropped weak-equivalence, simplicial-module model and Kan–Quillen machinery, by direct Stacks 08P2 and 08P1 inputs. Retain the standard-adjunction construction, representable generator lifts, small-category derived-colimit comparison, and explicit ring-square functoriality. Two new statement-only generic simplicial abelian-group lemmas; statement, historical provenance and maintainer-owned metadata unchanged.",
   "blueprint": "Historical support chain from the lci-cotangent-presentation auxiliary input, recorded in blueprint.from. Steps 1–6 provide standard and arbitrary polynomial-resolution comparisons; Steps 7–9 supply ring-square functoriality. This is not a replacement realization of the current sk-i-curve-zero unit, whose two steps remain owned by lem-trf-local-term-locality.",
   "tool_uses": [
    {
-    "node": "lem-cbc-normalized-alternating-homotopy-equivalence",
-    "why": "Generic simplicial homotopy, normalization, module-model or Kan tool used exactly in the cited proof step; it does not replace any geometric step of the zero-stalk unit."
-   },
-   {
-    "node": "lem-cbc-realization-weak-equivalence",
-    "why": "Generic simplicial homotopy, normalization, module-model or Kan tool used exactly in the cited proof step; it does not replace any geometric step of the zero-stalk unit."
-   },
-   {
-    "node": "lem-cbc-simplicial-module-model",
-    "why": "Generic simplicial homotopy, normalization, module-model or Kan tool used exactly in the cited proof step; it does not replace any geometric step of the zero-stalk unit."
-   },
-   {
-    "node": "lem-coef-kan-quillen-right-proper",
-    "why": "Generic simplicial homotopy, normalization, module-model or Kan tool used exactly in the cited proof step; it does not replace any geometric step of the zero-stalk unit."
-   },
-   {
     "node": "lem-weil-pbc-trivial-kan-homotopy-equivalence",
-    "why": "Generic simplicial homotopy, normalization, module-model or Kan tool used exactly in the cited proof step; it does not replace any geometric step of the zero-stalk unit."
+    "why": "Stacks 08NS supplies a simplicial homotopy inverse for a boundary-defined trivial Kan fibration. This generic tool proves contractibility of representable evaluations and does not replace any geometric unit step."
    }
   ]
  },
@@ -271,11 +249,11 @@
   "lem-weil-pbc-trivial-kan-homotopy-equivalence"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-Codex-NV-2e18d1270",
-  "group": "NV",
+  "reviewer": "NT-cc-Q13-2ea633985",
+  "group": "Q13",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NV-2e18d1270 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited statements, unit route, and cited Stacks sources in full. All nine steps are valid, under 2000 characters, correctly cited, and non-circular. New nodes are self-contained, non-duplicate, correctly sourced, and properly searched. Edge cases, universes, coefficient restriction, base-change maps, route constraints, and tool uses check out. Review written to review.md; no repairs needed."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-2ea633985 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, every cited node's statement and the sources: Stacks simplicial 08P1 (l.5836-5881), 08P2 (l.5884-5961), 019K/definition-homotopy-equivalent, 08ND; cotangent 08PT, both proofs. Steps 1-3 follow the first proof of 08PT: 08ND, then 08P2, then 08P1. The constant-complex calculation is checked: d^{-n} is 1 for even n and 0 for odd n, so s(const B) has cohomology B[0]. Steps 4-5 follow the second proof of 08PT: lifting generator by generator over constant simplices, including n=0, empty and infinite E, then 08NS. Step 6 uses only the 'natural in Q' clause of the derived-colimit node. In Steps 7-9 the recursive t_n, u(T)=T⊗A', theta and k are checked, and the cancellation c_{Q'}K(h)=K(t)c_Q is verified. New nodes: self-contained, statement-only, not restatements of the item; rg over the DAG for 08P1/08P2/simplicial abelian group finds no duplicate; blueprint from/via correct. FIX (one repair, B/C4-type): lem-trf-simplicial-abelian-set-homotopy-quasi-iso required single homotopies 'gf≃id' whose direction was ambiguous, while 08ND and the adjunction node supply only 'homotopic' in the 019K chain sense. Its hypothesis is changed to that sense, matching 08P2 exactly; the corrected file is in fixes/dag/nodes/sec-trace-formula/. The split_report tool use 08NS (lem-weil-pbc-trivial-kan-homotopy-equivalence) is accepted. The item's old maintainer tool_uses (lem-cbc-normalized-alternating-homotopy-equivalence, lem-cbc-realization-weak-equivalence, lem-cbc-simplicial-module-model, lem-coef-kan-quillen-right-proper) are unused and can be removed at landing. The dropped-machinery return is repaired.; 1 file(s) fixed by the reviewer"
  }
 }

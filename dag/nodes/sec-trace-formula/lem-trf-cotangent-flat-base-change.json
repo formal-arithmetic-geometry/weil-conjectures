@@ -11,9 +11,134 @@
   "def-weil-abstract-derived-category",
   "lem-trf-cotangent-resolution-coherence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Take the standard polynomial resolution $P_\\bullet\\to C$ of [lem-trf-cotangent-resolution-coherence], and write $S=s(P_\\bullet)$, $q:S\\to C[0]$. It is a quasi-isomorphism and $S^{-n}=P_n$, with no positive terms. Choose polynomial coordinates $P_n=A[x_i\\mid i\\in I_n]$. By [def-weil-pbc-mv-polynomial-ring], its monomials form an $A$-module basis. Tensoring a free module with a module $M$ identifies it with finitely supported families in $M$: the mutually inverse maps send $x^\\alpha\\otimes m$ to the family with entry $m$ at $\\alpha$, and a family $(m_\\alpha)$ to $\\sum_\\alpha x^\\alpha\\otimes m_\\alpha$ [def-weil-pbc-module-tensor-product]. Exactness is coordinatewise, and a preimage needs only the finitely many nonzero coordinates. Thus the $P_n$ are flat. The ordinary-module bounded-above flat criterion [lem-pc-module-bounded-flat-kflat] makes $S$ K-flat, so $q$ is a K-flat resolution of $C[0]$.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence",
+    "def-weil-pbc-mv-polynomial-ring",
+    "def-weil-pbc-module-tensor-product",
+    "lem-pc-module-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QP (lemma-flat-base-change), free resolution s(P); more-algebra.tex Tag 064K (lemma-derived-tor-quasi-isomorphism)."
+   }
+  },
+  {
+   "text": "Use the exact tensor equivalence of [lem-trf-one-point-derived-ring-identification] to interpret [lem-pur-derived-change-of-rings] and the normalized adjunction of [lem-pur-sheaf-ring-derived-coefficient-adjunction] in ordinary modules. For $A\\to A'$, computation on the K-flat resolution $q$ identifies $C\\otimes_A^{\\mathbf L}A'$ with $S\\otimes_A A'$. The canonical map $\\mu$ is represented by $\\epsilon'(p\\otimes a')=f(\\epsilon(p))a'$ in degree zero and zero in negative degrees, where $f:C\\to C'$ is the given map: this is exactly the adjunct formula $x\\otimes a'\\mapsto a'g(x)$ applied to $g=fq$. Consequently $\\epsilon'$ is a quasi-isomorphism by the hypothesis. Its degree-zero cohomology is the canonical ring homomorphism $\\alpha:C\\otimes_A A'\\to C'$, $c\\otimes a'\\mapsto f(c)a'$. Indeed $H^0(S\\otimes_A A')=\\operatorname{coker}(d_S^{-1}\\otimes1)=C\\otimes_A A'$: a bilinear map from $S^0\\times A'$ kills $\\operatorname{im}d_S^{-1}$ exactly when it factors through $C\\times A'$, which proves this cokernel identity from [def-weil-pbc-module-tensor-product]. Thus $\\alpha$ is bijective, hence an isomorphism of rings; its multiplicativity follows directly from the displayed formula. No flatness of either ring map has been inferred.",
+   "uses": [
+    "lem-trf-one-point-derived-ring-identification",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QQ hypothesis and Tag 08QP resolution computation; sites-cohomology.tex Tag 07A6 (lemma-adjoint), normalized by derived.tex Tags 0FND/09T5."
+   }
+  },
+  {
+   "text": "Put $D=C\\otimes_A A'$ with its algebra base-change structure [def-weil-module-base-change]. The canonical derived-to-ordinary map $C\\otimes_A^{\\mathbf L}A'\\to D[0]$ is $\\alpha^{-1}\\mu$: on the resolution of Step 2, both send $p\\otimes a'$ to $\\epsilon(p)\\otimes a'$. It is therefore a quasi-isomorphism. Apply [lem-trf-tor-independent-cotangent-base-change] to $P_\\bullet\\to C$ and this map. It says that $P'_\\bullet=P_\\bullet\\otimes_A A'\\to D$ is a polynomial resolution with its tensor augmentation. Composing that augmentation with the ring isomorphism $\\alpha$ gives a polynomial resolution of $C'$: termwise surjectivity and the augmentation quasi-isomorphism are preserved by an isomorphism. Its augmentation is precisely $p\\otimes a'\\mapsto f(\\epsilon(p))a'$. This verifies every condition of the polynomial-resolution convention in [lem-trf-cotangent-resolution-coherence].",
+   "uses": [
+    "def-weil-module-base-change",
+    "lem-trf-tor-independent-cotangent-base-change",
+    "lem-trf-cotangent-resolution-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tags 08QP (lemma-flat-base-change), 08QI (remark-resolution); identification of the canonical tensor augmentation."
+   }
+  },
+  {
+   "text": "Let $K=s(\\Omega^1_{P_\\bullet/A}\\otimes_{P_\\bullet}C)$, which is the standard representative of $L_{C/A}$ by [lem-trf-cotangent-resolution-coherence]. The arbitrary-variable basis theorem [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables], applied to each $P_n$, identifies $K^{-n}$ with $\\bigoplus_{i\\in I_n}C\\,\\mathrm dx_i$. This includes infinite or empty $I_n$. These modules are flat: after tensoring with $M$ they are finitely supported families in $M$, so an exact sequence remains exact by lifting each of its finitely many nonzero coordinates [def-weil-pbc-module-tensor-product]. Since $K^{j}=0$ for $j>0$, [lem-pc-module-bounded-flat-kflat] makes $K$ K-flat.",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+    "def-weil-pbc-module-tensor-product",
+    "lem-pc-module-bounded-flat-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QQ, flatness of polynomial differentials; algebra.tex Tag 00RX (lemma-differentials-polynomial-ring); more-algebra.tex Tag 064K."
+   }
+  },
+  {
+   "text": "Write $K'=s(\\Omega^1_{P'_\\bullet/A'}\\otimes_{P'_\\bullet}C')$. For each $n$ define\n$$\\theta_n:(\\Omega^1_{P_n/A}\\otimes_{P_n}C)\\otimes_C C'\\longrightarrow\\Omega^1_{P'_n/A'}\\otimes_{P'_n}C',\\qquad (\\mathrm dp\\otimes c)\\otimes b'\\longmapsto\\mathrm d(p\\otimes1)\\otimes f(c)b'.$$\nThe universal derivation [def-weil-pbc-kahler-differentials] makes this map well defined: the right-hand rule is additive, obeys Leibniz in $p$, vanishes on $A$, and is balanced for both scalar extensions [def-weil-pbc-module-tensor-product]. Coefficient and variable evaluation identify $P_n\\otimes_A A'$ with $A'[x_i\\mid i\\in I_n]$; inverse maps fix $A'$ and send $x_i$ to $x_i\\otimes1$ [def-weil-pbc-mv-polynomial-ring]. By [lem-weil-pbc-polynomial-ring-kahler-basis-any-variables], both sides of $\\theta_n$ are free $C'$-modules on the same $I_n$, and $\\theta_n$ sends $(\\mathrm dx_i\\otimes1)\\otimes1$ to $\\mathrm d(x_i\\otimes1)\\otimes1$. The inverse sends this latter basis vector back to the former, so $\\theta_n$ is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-mv-polynomial-ring",
+    "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QQ, identification of polynomial differential modules after base change; algebra.tex Tag 00RX."
+   }
+  },
+  {
+   "text": "For every face or degeneracy $v:P_n\\to P_m$, its scalar extension sends $p\\otimes1$ to $v(p)\\otimes1$. Following either route through $\\theta_n,\\theta_m$ therefore sends $(\\mathrm dp\\otimes c)\\otimes b'$ to $\\mathrm d(v(p)\\otimes1)\\otimes f(c)b'$. These elements generate the source, by the universal differential and tensor presentations [def-weil-pbc-kahler-differentials, def-weil-pbc-module-tensor-product]. Thus $\\theta$ commutes with every simplicial operator, hence with the alternating sums defining the differentials in [lem-trf-cotangent-resolution-coherence]. Taking the alternating complexes gives a chain isomorphism $\\theta:K\\otimes_C C'\\xrightarrow{\\sim}K'$, with no normalization or infinite totalization interchange.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "def-weil-pbc-module-tensor-product",
+    "lem-trf-cotangent-resolution-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QQ, the differential-module identification; section-functoriality (Tag 08QL), associated-complex convention of Tag 08QI."
+   }
+  },
+  {
+   "text": "Let $R_\\bullet=P^{\\mathrm{std}}_\\bullet(C'/A')$. The original ring square induces $t:P_\\bullet\\to R_\\bullet$ by [lem-trf-cotangent-resolution-coherence]. Its scalar extension $h:P'_\\bullet\\to R_\\bullet$ is $h(p\\otimes a')=t(p)a'$. Balancing follows from semilinearity of $t$; each face, degeneracy and augmentation commutes because it commutes with $t$ and fixes $A'$. Both $P'$ (Step 3) and $R$ are polynomial resolutions of $C'$. The comparison clause of [lem-trf-cotangent-resolution-coherence] gives isomorphisms $c_{P'}:K'\\simeq L_{C'/A'}$ and $c_R:K(R)\\simeq L_{C'/A'}$, with $c_RK(h)=c_{P'}$. In particular $K(h)$ is an isomorphism in $D(C')$. Its map on differentials sends $\\mathrm d(p\\otimes1)\\otimes b'$ to $\\mathrm d(t(p))\\otimes b'$. The final functoriality clause of that same node therefore identifies the specified map $L_{C/A}\\to\\operatorname{Res}_fL_{C'/A'}$ with $c_R\\circ Q(K(h))\\circ Q(\\theta)\\circ Q(u)$, where $u:K\\to\\operatorname{Res}_f(K\\otimes_C C')$ is $x\\mapsto x\\otimes1$. On generators both sides are $\\mathrm dp\\otimes c\\mapsto\\mathrm d(t(p))\\otimes f(c)$ [def-weil-pbc-kahler-differentials].",
+   "uses": [
+    "lem-trf-cotangent-resolution-coherence",
+    "def-weil-pbc-kahler-differentials"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QL (section-functoriality), explicit standard resolution map; Tag 08QI (remark-resolution), natural comparisons."
+   }
+  },
+  {
+   "text": "For $f:C\\to C'$, the ordinary-module counit theorem [lem-pc-kflat-scalar-extension-counit], applied to the K-flat $K$ of Step 4, gives the computation isomorphism $c_K:L_{C/A}\\otimes_C^{\\mathbf L}C'\\simeq Q(K\\otimes_C C')$. Use [lem-trf-one-point-derived-ring-identification] to transport the normalized unit and adjunct formulas of [lem-pur-sheaf-ring-derived-coefficient-adjunction] to ordinary modules. The derived unit at $QK$ is $Q(u)$ under $c_K$, and the adjunct of the generator map in Step 7 is consequently\n$$c_R\\circ Q(K(h))\\circ Q(\\theta)\\circ c_K.$$\nIndeed its adjunction transpose is the Step 7 composite, since $u(x)=x\\otimes1$; naturality in the target allows the final factor $c_R$. By the definition in the statement this adjunct is exactly $\\beta$. Each factor is an isomorphism: $c_K$ by K-flat computation, $Q(\\theta)$ by Step 6, and $c_RQ(K(h))=c_{P'}$ by Step 7. Hence the canonical $\\beta$ is an isomorphism in $D(C')$.",
+   "uses": [
+    "lem-pc-kflat-scalar-extension-counit",
+    "lem-trf-one-point-derived-ring-identification",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cotangent.tex",
+    "place": "Tag 08QQ (lemma-flat-base-change-cotangent-complex), functoriality map; more-algebra.tex Tag 06Y6 (lemma-derived-base-change); sites-cohomology.tex Tag 07A6 and derived.tex Tags 0FND/09T5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-cotangent-resolution-coherence",
+  "def-weil-pbc-mv-polynomial-ring",
+  "def-weil-pbc-module-tensor-product",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-trf-one-point-derived-ring-identification",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-weil-module-base-change",
+  "lem-trf-tor-independent-cotangent-base-change",
+  "lem-weil-pbc-polynomial-ring-kahler-basis-any-variables",
+  "def-weil-pbc-kahler-differentials",
+  "lem-pc-kflat-scalar-extension-counit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cotangent.tex",
+  "place": "Tag 08QQ (lemma-flat-base-change-cotangent-complex), using the explicit polynomial-resolution model of Tags 08QI/08QL and the resolution argument of Tag 08QP. The polynomial-module identification and canonical adjunct are written out."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +188,59 @@
    "results": "14 hits; top=['Mathlib/RingTheory/Smooth/Local.lean', 'Mathlib/RingTheory/Smooth/Local.lean', 'Mathlib/RingTheory/Smooth/Local.lean', 'Mathlib/RingTheory/Smooth/Local.lean', 'Mathlib/RingTheory/Smooth/Local.lean', 'Mathlib/RingTheory/Smooth/Fiber.lean', 'Mathlib/RingTheory/Smooth/Fiber.lean', 'Mathlib/RingTheory/Smooth/Fiber.lean']; note=; digest=584be18b110c35be. Read the returned types and Mathlib/RingTheory/Extension/Cotangent/Basic.lean:53–65, 83–114. These are linear maps for a fixed algebra presentation, their ordinary tensor base-change identities, or Kähler differential results; none states the full derived cotangent isomorphism under the canonical derived-tensor hypothesis.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived cotangent complex commutes with Tor independent base change of commutative rings",
+   "results": "8 hits; top=['Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange', 'Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex', 'KaehlerDifferential.cotangentComplexBaseChange', 'Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange', 'KaehlerDifferential.cotangentComplexBaseChange_tmul', 'Algebra.Extension.CotangentSpace.map_cotangentComplex', 'Algebra.Extension.CotangentSpace.map_comp_cotangentComplex', 'Algebra.Generators.H1Cotangent.δAux_ofComp']; note=; digest=76a818efba9f476e. Read the search hits and Extension/Cotangent/Basic.lean:53-114 or Kaehler/Polynomial.lean:31-99 as applicable. The full derived ring theorem is absent; the arbitrary-variable differential basis is already represented by lem-weil-pbc-polynomial-ring-kahler-basis-any-variables.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cotangentComplexBaseChange\"",
+   "results": "6 hits; top=['KaehlerDifferential.cotangentComplexBaseChange', 'KaehlerDifferential.cotangentComplexBaseChange_tmul', 'Algebra.Extension.cotangentComplexBaseChange_eq_lTensor_cotangentComplex', 'Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange', 'Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange', 'Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField']; note=; digest=ddff833910f89f99. Read the search hits and Extension/Cotangent/Basic.lean:53-114 or Kaehler/Polynomial.lean:31-99 as applicable. The full derived ring theorem is absent; the arbitrary-variable differential basis is already represented by lem-weil-pbc-polynomial-ring-kahler-basis-any-variables.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cotangentComplexBaseChange|lTensor_cotangentComplex [sub=RingTheory]",
+   "results": "14 hits; top=['Mathlib/RingTheory/Extension/Cotangent/Basic.lean', 'Mathlib/RingTheory/Extension/Cotangent/Basic.lean', 'Mathlib/RingTheory/Extension/Cotangent/Basic.lean', 'Mathlib/RingTheory/Extension/Cotangent/Basic.lean', 'Mathlib/RingTheory/Extension/Cotangent/Basic.lean', 'Mathlib/RingTheory/Smooth/Local.lean', 'Mathlib/RingTheory/Smooth/Local.lean', 'Mathlib/RingTheory/Smooth/Local.lean']; note=; digest=b71f1b3b5a35a596. Read the search hits and Extension/Cotangent/Basic.lean:53-114 or Kaehler/Polynomial.lean:31-99 as applicable. The full derived ring theorem is absent; the arbitrary-variable differential basis is already represented by lem-weil-pbc-polynomial-ring-kahler-basis-any-variables.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "canonical derived base change map for the full cotangent complex of commutative rings is an isomorphism if higher Tor vanishes",
+   "results": "8 hits; top=['KaehlerDifferential.cotangentComplexBaseChange', 'KaehlerDifferential.tensorKaehlerEquiv', 'Algebra.Generators.liftBaseChange_injective_of_isLocalizationAway', 'KaehlerDifferential.mapBaseChange', 'KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply', 'KaehlerDifferential.tensorKaehlerEquivBase', 'KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale.congr_simp', 'KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale']; note=; digest=c48022ae7b1168fa. Read the search hits and Extension/Cotangent/Basic.lean:53-114 or Kaehler/Polynomial.lean:31-99 as applicable. The full derived ring theorem is absent; the arbitrary-variable differential basis is already represented by lem-weil-pbc-polynomial-ring-kahler-basis-any-variables.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mvPolynomial.*(Equiv|Basis)|basis.*[Kk]aehler|[Kk]aehler.*basis [sub=RingTheory/Kaehler]",
+   "results": "7 hits; top=['Mathlib/RingTheory/Kaehler/Polynomial.lean', 'Mathlib/RingTheory/Kaehler/Polynomial.lean', 'Mathlib/RingTheory/Kaehler/Polynomial.lean', 'Mathlib/RingTheory/Kaehler/Polynomial.lean', 'Mathlib/RingTheory/Kaehler/Polynomial.lean', 'Mathlib/RingTheory/Kaehler/JacobiZariski.lean', 'Mathlib/RingTheory/Kaehler/JacobiZariski.lean']; note=; digest=108e179543eef491. Read the search hits and Extension/Cotangent/Basic.lean:53-114 or Kaehler/Polynomial.lean:31-99 as applicable. The full derived ring theorem is absent; the arbitrary-variable differential basis is already represented by lem-weil-pbc-polynomial-ring-kahler-basis-any-variables.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KaehlerDifferential\", \"MvPolynomial\"",
+   "results": "9 hits; top=['instFreeMvPolynomialKaehlerDifferential', 'KaehlerDifferential.mvPolynomialBasis', 'KaehlerDifferential.mvPolynomialEquiv', 'KaehlerDifferential.mvPolynomialBasis_apply', 'KaehlerDifferential.mvPolynomialBasis_repr_D_X', 'KaehlerDifferential.mvPolynomialBasis_repr_apply', 'KaehlerDifferential.mvPolynomialBasis_repr_symm_single', 'KaehlerDifferential.mvPolynomialBasis_repr_D']; note=; digest=0650b8572a92e9d2. Read the search hits and Extension/Cotangent/Basic.lean:53-114 or Kaehler/Polynomial.lean:31-99 as applicable. The full derived ring theorem is absent; the arbitrary-variable differential basis is already represented by lem-weil-pbc-polynomial-ring-kahler-basis-any-variables.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any set of variables the module of Kahler differentials of a polynomial algebra is free with basis the differentials of the variables",
+   "results": "8 hits; top=['instFreeMvPolynomialKaehlerDifferential', 'KaehlerDifferential.mvPolynomialBasis', 'Algebra.IsStandardSmooth.free_kaehlerDifferential', 'Algebra.SubmersivePresentation.free_kaehlerDifferential', 'KaehlerDifferential.mvPolynomialEquiv', 'KaehlerDifferential.mvPolynomialBasis_apply', 'Algebra.Generators.instFreeCotangentSpaceToExtension', 'Algebra.Generators.cotangentSpaceBasis_apply']; note=; digest=6fa3425f8439efe0. Read the search hits and Extension/Cotangent/Basic.lean:53-114 or Kaehler/Polynomial.lean:31-99 as applicable. The full derived ring theorem is absent; the arbitrary-variable differential basis is already represented by lem-weil-pbc-polynomial-ring-kahler-basis-any-variables.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-koszul-quotient-cotangent-vanishing",
@@ -96,5 +270,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-cotangent-flat-base-change",
+  "worker": "stage1",
+  "summary": "Kept the statement and its canonical morphism unchanged. Reduced the derived-tensor hypothesis to the ordinary pushout through an explicit degree-zero cokernel computation; reused the existing Tor-independent resolution theorem, arbitrary-variable differential basis, K-flat criterion and normalized derived adjunction. Eight proof steps, no new nodes. Checked the comparisons on generators and all cited statements.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Full cotangent complex of a Koszul-regular quotient. Proof of Tag 08SJ: apply Tag 08QQ using the canonical derived tensor identification, not an assumption of flatness.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-bounded-flat-kflat",
+    "why": "Ordinary-module K-flat criterion for two nonpositive flat complexes; no node of this unit supplies this general homological-algebra criterion."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Existence and K-flat computation of unbounded derived scalar extension, transported through the one-point-site equivalence; a generic tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Normalized unit and adjunct on K-flat representatives identify the actual base-change morphism; no theorem of this unit supplies the derived adjunction formula."
+   },
+   {
+    "node": "lem-pc-kflat-scalar-extension-counit",
+    "why": "The universal derived counit is invertible on the K-flat differential complex; used only as the general ordinary-module computation theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-pc-kflat-scalar-extension-counit"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-81f6cd3c0",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-81f6cd3c0 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 8 steps, and the full statement of all 13 cited nodes. Source checked: Stacks cotangent.tex Tag 08QQ (lemma-flat-base-change-cotangent-complex) with its proof, and Tag 08QP (lemma-flat-base-change) with its proof. Every other cited tag exists with the stated label (08QI, 08QL, 00RX, 064K, 06Y6, 07A6, 0FND, 09T5, 08SJ). The statement matches 08QQ hypothesis by hypothesis. It works over arbitrary commutative rings, uses the derived-tensor quasi-isomorphism hypothesis, assumes neither B'=B⊗A' nor any flatness, uses ordinary-module D(T), and takes beta as the derived adjoint of the square-induced functoriality map. It is not weakened. Step 1: S=s(P^std) has free terms and is bounded above, so it is K-flat. Step 2: the adjunction clause (2) with g=fq represents mu by p⊗a'↦a'f(ε(p)), and a right-exactness cokernel argument derives alpha: C⊗A'≅C' rather than assuming it. Step 3: the Tor-independent resolution node applies with exactly its hypothesis, and composing with alpha keeps surjectivity and the quasi-isomorphism. Step 4: the arbitrary-variable Kähler basis leaf (correctly not the finite-variable one) gives free terms, so K is K-flat. Steps 5–6: I rechecked that theta is well defined (derivation, balancing over P_n and C), bijective basis to basis, and simplicial on generators. Step 7: I recomputed that K(h)∘θ∘u equals dp⊗c↦d(tp)⊗f(c), and the naturality clause gives c_R K(h)=c_{P'}. Step 8: the adjunct of the Step 7 chain map equals K(h)∘θ under c_K, so beta is a composite of isomorphisms. The one-point transport of Res and of termwise flatness is not stated in that node but is elementary. Small cases: flat polynomial base change gives an isomorphism. For A=k[t], C=A/t, A'=C'=k the hypothesis fails (Tor_1≠0) and so would the conclusion. A=Z, C=Z[x], A'=F_p passes without flatness. Empty variable sets and zero rings are fine. No new nodes. Duplicate search (rg 08QQ/08QP, cotangent terms) found only weaker neighbours and the citers. The proof-dependency closure (1232 nodes) does not contain the item, so there is no cycle. No SGA is cited. Accepted tool_uses: lem-pc-module-bounded-flat-kflat, lem-pur-derived-change-of-rings, lem-pur-sheaf-ring-derived-coefficient-adjunction, lem-pc-kflat-scalar-extension-counit. They are generic homological algebra from sk-thm-picard-semicon and sk-def-sf-operations and do not replace the route of unit sk-i-curve-zero. No fixes."
  }
 }
