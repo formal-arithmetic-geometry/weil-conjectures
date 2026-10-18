@@ -2,7 +2,8 @@
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group Q14
-Definitions moved unchanged by the maintainer L (2026-10-18) out of IntegralCompactSupportCoefficientComparison.lean
+Definitions moved unchanged by the maintainer L (2026-10-18) out of
+IntegralCompactSupportCoefficientComparison.lean
 -/
 module
 
@@ -74,7 +75,8 @@ import Sheaf.Paper.IntegralScalarExtensionWellDefined
 
 /-! # Integral compact-support coefficient data
 
-The definitions that other statements use (moved out of `IntegralCompactSupportCoefficientComparison`,
+The definitions that other statements use
+(moved out of `IntegralCompactSupportCoefficientComparison`,
 blueprint: def-pur-integral-compact-support-coefficient-data); the lemma's theorems stay there.
 
 Source: Weil blueprint, sk-thm-purity-transport, Step 3; Bhatt--Scholze,

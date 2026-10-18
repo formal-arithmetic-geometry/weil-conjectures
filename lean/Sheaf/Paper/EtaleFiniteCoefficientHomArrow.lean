@@ -21,6 +21,8 @@ closed transposes of reduced evaluation, never choices of arbitrary arrows.
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 4096
 universe u a b w c d e f g
 open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory Opposite
@@ -474,18 +476,14 @@ def finiteHomEtaleTotalSection (n : ℕ)
     (P Q : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1}
       (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))))) ℤ)
     (p q k : ℤ) (h : p + q = k) (U : X.Etale)
-    (x : (P.X p).obj.obj (op U)) (y : (Q.X q).obj.obj (op U)) :
-    ((HomologicalComplex.tensorObj P Q).X k).obj.obj (op U) :=
+    (x : (P.X p).obj.obj (op U)) (y : (Q.X q).obj.obj (op U)) :=
   (finiteHomEtaleRepresentativeData l E X).generator ⟨n, P, Q, p, q, k, h, U, x, y⟩
 
 /-- The actual localization tensorator with the normalized closed-tensor endpoint.
 Source: Stacks 07A4 (blueprint: def-sf-etale-finite-coefficient-hom-arrow). -/
 def finiteHomEtaleTensorModel (n : ℕ)
     (P Q : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1}
-      (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))))) ℤ) :
-    (finiteHomEtaleClosed l E X n).tensor.obj
-        ((finiteHomEtaleQ l E X n).obj P, (finiteHomEtaleQ l E X n).obj Q) ⟶
-      (finiteHomEtaleQ l E X n).obj (HomologicalComplex.tensorObj P Q) :=
+      (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))))) ℤ) :=
   (finiteHomEtaleRepresentativeData l E X).model n P Q
 
 
