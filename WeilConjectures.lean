@@ -5863,6 +5863,8 @@ public import WeilConjectures.CategoryTheory.Monoidal.Mod.IsoAlgebraTensor
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Limits
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.MapIhom
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Tensor
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.TensorDualToIhom
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.TensorDualToIhomMap
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.TensorExchange
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.TensorRegular
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Transpose
@@ -9649,6 +9651,8 @@ public import WeilConjectures.WeilSheaf.ProjectionFormula.DualPullbackWeil
 public import WeilConjectures.WeilSheaf.ProjectionFormula.ExtensionByZeroAdjunction
 public import WeilConjectures.WeilSheaf.ProjectionFormula.ExtensionByZeroIhom
 public import WeilConjectures.WeilSheaf.ProjectionFormula.LisseDualPullback
+public import WeilConjectures.WeilSheaf.ProjectionFormula.LisseDualityAssembly
+public import WeilConjectures.WeilSheaf.ProjectionFormula.LisseDualityWeil
 public import WeilConjectures.WeilSheaf.ProjectionFormula.LisseTensor
 public import WeilConjectures.WeilSheaf.ProjectionFormula.LowerShriekIhom
 public import WeilConjectures.WeilSheaf.ProjectionFormula.LowerStarIhom
