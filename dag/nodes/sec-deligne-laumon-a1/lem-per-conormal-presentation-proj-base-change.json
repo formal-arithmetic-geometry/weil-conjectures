@@ -16,11 +16,217 @@
   "def-nagata-relative-proj",
   "def-pc-fibre-product",
   "def-pc-module-pullback",
-  "def-weil-pbc-proj-twisting-sheaf"
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-trf-projective-bundle-morphism",
+  "def-weil-universal-homeomorphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work locally on $X$ and then on $X'$. Write $R$ for an affine base ring, $J$ for the immersion ideal and $M$ for the module of $E$ over $R/J$. The conormal-algebra statement identifies the degree-$a$ comparison with the map $\\operatorname{Sym}^a(M)\\to J^a/J^{a+1}$. It is surjective: each element of $J^a$ is a sum of products of $a$ elements of $J$, and each class of a factor in $J/J^2$ lifts locally to $M$; changing a factor by $J^2$ changes the product by $J^{a+1}$. Degree zero is the identity of $R/J$. Thus both projections from the fibre product $C_a=J^a\\times_{J^a/J^{a+1}}\\operatorname{Sym}^a(M)$ are surjective. These calculations also hold on stalks and therefore for the sheaf projections.",
+   "uses": [
+    "lem-pur-conormal-graded-algebra",
+    "lem-weil-pbc-symmetric-algebra-graded",
+    "def-sbc-ideal-sheaf-powers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI 2.2.1.3, first two paragraphs of proof, pp. 229-230"
+   }
+  },
+  {
+   "text": "The sheaf $A_a$ is the kernel of the difference map $I^a\\oplus i_*\\operatorname{Sym}^a(E)\\to i_*(I^a/I^{a+1})$. The ideal powers and conormal pieces are quasi-coherent; the symmetric algebra is quasi-coherent, and its homogeneous summands are so on the affine symmetric-degree models. Closed pushforward, binary direct sum and kernel preserve quasi-coherence by the cited statements. Hence $A_a$ is quasi-coherent. On an affine open the sheaf direct sum $A$ is the sheaf associated to $\\bigoplus_a C_a$: localization commutes with this direct sum, because each element has finite degree support and its finitely many denominators have a common multiple. Thus $A$ is a quasi-coherent graded algebra. Multiplication of pairs preserves the fibre-product condition, since both comparison maps multiply classes in the same conormal algebra. The degree-zero identification is $R\\xrightarrow{\\sim}C_0$, $r\\mapsto(r,\\bar r)$; associativity, commutativity and the unit law are componentwise. Apply the same argument to $A'$.",
+   "uses": [
+    "def-sbc-ideal-sheaf-powers",
+    "lem-pur-conormal-graded-algebra",
+    "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+    "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+    "lem-weil-pbc-quasi-coherent-module-direct-sum",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-spec-module-tilde-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI 2.2.1, defining Cartesian square, and 2.2.1.3"
+   }
+  },
+  {
+   "text": "The kernel $K_a$ of $C_a\\to\\operatorname{Sym}^a(M)$ consists exactly of $(z,0)$ with $z\\in J^{a+1}$. Since $J$ annihilates the second coordinate, $JC_a\\subseteq K_a$. Conversely the first projection $C_a\\to J^a$ is onto by step 1; lifting the factors in a finite expression $z=\\sum_j u_j z_j$, $u_j\\in J$, $z_j\\in J^a$, gives $(z,0)=\\sum_j u_j(z_j,s_j)\\in JC_a$. Therefore $K_a=JC_a$ and\n$$A/IA\\cong i_*\\operatorname{Sym}^{\\bullet}(E)$$\nas graded algebras. Over $U=X\\setminus Y$ the second and common terms vanish and $I=\\mathcal O_U$, so $A|_U=\\mathcal O_U[t]$, with the canonical generator $t=(1,0)$ in degree one. The same statements hold for $A'$ and $U'=X'\\setminus Y'$.",
+   "uses": [
+    "def-sbc-ideal-sheaf-powers",
+    "lem-weil-pbc-closed-immersion-pushforward-annihilated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI 2.2.1.3, proof, equality K_n = I A_n and quotient identification"
+   }
+  },
+  {
+   "text": "Each $A_a$ is locally of finite type. Indeed, near any point choose an affine neighbourhood $\\operatorname{Spec}R_g$ which is a standard open of an affine open $\\operatorname{Spec}R$ from the Noetherian cover in the definition of a locally Noetherian scheme; $R_g\\cong R[x]/(gx-1)$ is of finite type over $R$, hence Noetherian by finite-type permanence. Such neighbourhoods form a basis, and the same choice is made on $X'$ in the later steps. There choose finitely many generators of $I^{a+1}$ and a finite frame for $E$ on $Y$. Degree-$a$ monomials in the frame generate $\\operatorname{Sym}^a(E)$. Locally lift these finitely many monomials along the second projection of step 1. Together with the finitely many generators $(z,0)$ of its kernel from step 3, these generate $A_a$: subtract a linear combination of the lifts to leave an element in the kernel. Now let $N_a\\subset A_a$ be the image of the multiplication $A_1^{\\otimes a}\\to A_a$. Its image modulo $I$ is all of $\\operatorname{Sym}^a(E)$, and over $U$ it is all of $\\mathcal O_U t^a$. At a point of $Y$, the finite module $A_a/N_a$ over the local ring satisfies $A_a/N_a=I(A_a/N_a)$, hence also $A_a/N_a=\\mathfrak m(A_a/N_a)$; Nakayama gives zero. Thus $N_a=A_a$ everywhere. In particular $A$ is generated in degree one by the locally finite module $A_1$. This also proves the corresponding assertions for $A'$.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring",
+    "def-amb-finite-locally-free-module",
+    "lem-weil-pbc-symmetric-algebra-graded",
+    "lem-weil-pbc-nakayama-local-generators",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI 2.2.1.3, finite type and degree-one generation"
+   }
+  },
+  {
+   "text": "For an affine base map $R\\to S$ put $J'=JS$. The base-changed immersion has precisely this ideal by the closed-immersion base-change statement. The map\n$$(J/J^2)\\otimes_R S\\longrightarrow J'/J'^2,\\qquad\\bar z\\otimes s\\longmapsto sz\\bmod J'^2$$\nis well-defined and surjective: $J'$ is generated by images of $J$, and $J^2$ maps into $J'^2$. Tensor right exactness applied to $M\\twoheadrightarrow J/J^2$, followed by this map, gives the required surjection $M'=M\\otimes_{R/J}(S/J')\\twoheadrightarrow J'/J'^2$. Pullback on affine sections is tensor product by the cited statement. Symmetric-algebra base change identifies $\\operatorname{Sym}_{S/J'}(M')$ with $(S/J')\\otimes_{R/J}\\operatorname{Sym}_{R/J}(M)$, preserving each degree, since its defining generator map preserves degree and so does its inverse. The map $S\\otimes_R C_a\\to C'_a$ sends $s\\otimes(z,m)$ to $(sz,s\\bar m)$ in these identifications. Balancedness and the fibre-product relation follow by applying the same map to $\\bar z=\\psi(m)$; products, degree and unit are preserved. The formulas commute with restrictions and therefore define $v^*A\\to A'$.",
+   "uses": [
+    "lem-pc-closed-imm-base-change",
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-symmetric-algebra-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI 2.2.1.5, first paragraph; construction of p* A -> A prime"
+   }
+  },
+  {
+   "text": "Write $D_a=S\\otimes_R C_a$. Reduction modulo $J'$ gives\n$$D_a/J'D_a\\cong(S/J')\\otimes_{R/J}(C_a/JC_a)\\cong\\operatorname{Sym}^a_{S/J'}(M')\\cong C'_a/J'C'_a.$$\nThe first identification sends $\\overline{s\\otimes c}$ to $\\bar s\\otimes\\bar c$; its inverse sends $\\bar s\\otimes\\bar c$ to $\\overline{s\\otimes c}$. The balanced relations and the killed $J'$ and $J$ make both maps well-defined. The middle identification uses step 3 and symmetric-algebra base change. Under these identifications the map of step 5 is the identity. Over $U'$ it is also the identity on $\\mathcal O_{U'}t^a$. Its cokernel $Q_a$ is finite, since $C'_a$ is finite by step 4. At a point of $Y'$ right exactness gives $Q_a/J'Q_a=0$, and Nakayama over the local ring gives $Q_a=0$. Outside $Y'$ the cokernel is already zero. Thus $v^*A_a\\to A'_a$ is surjective for every $a$, without any flatness hypothesis.",
+   "uses": [
+    "lem-weil-pbc-symmetric-algebra-base-change",
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-weil-pbc-nakayama-local-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI 2.2.1.5, Nakayama argument for each graded piece"
+   }
+  },
+  {
+   "text": "Apply arbitrary relative-Proj base change to the quasi-coherent graded algebra $A$. It identifies $T:=X'\\times_X B$ with $\\operatorname{Proj}_{X'}(v^*A)$. By surjective graded functoriality, step 6 induces a closed immersion $h:\\operatorname{Proj}_{X'}A'\\hookrightarrow T$. Over $U'$ both graded algebras are $\\mathcal O_{U'}[t]$ and the map fixes $t$, so $h$ is the identity there. The isomorphism $\\operatorname{Proj}\\mathcal O[t]\\cong U'$ is explicit: its sole chart $D_+(t)$ has degree-zero ring $\\mathcal O$, and covers. Over $Y'$ the map is the identity on the symmetric algebra by step 6. On an affine open $\\operatorname{Spec}S$ of $X'$ the pullback of $A'$ to $Y'$ has sections $C'\\otimes_S S/J'=C'/J'C'\\cong\\operatorname{Sym}_{S/J'}(M')$ by the affine-sections statement for module pullback and step 3, compatibly with restrictions; so $A'$ pulls back to $\\operatorname{Sym}(E')$, and likewise $A$ pulls back to $\\operatorname{Sym}(E)$ on $Y$. Applying arbitrary relative-Proj base change again gives\n$$B'\\times_{X'}Y'\\cong\\operatorname{Proj}_{Y'}\\operatorname{Sym}(E')=P(E')\\cong Y'\\times_Y P(E)\\cong T\\times_{X'}Y'.$$\nThese are the canonical comparisons, since the graded maps on scalars and on the generators of $E$ are exactly those of step 5.",
+   "uses": [
+    "lemma-nagata-relative-proj-base-change-arbitrary",
+    "prop-nagata-relative-proj-functoriality",
+    "prop-nagata-proj-standard-open",
+    "def-nagata-homogeneous-localization-degree-zero",
+    "def-trf-projective-bundle-morphism",
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI 2.2.1.4-2.2.1.5; Stacks 01O3, lemma-relative-proj-base-change, and 07ZI, lemma-surjective-graded-rings-map-relative-proj"
+   }
+  },
+  {
+   "text": "Every point of $T$ lies either over $U'$ or over $Y'$. In the latter case its residue-field morphism to $X'$ kills $I'$ and hence factors through $Y'$; thus it is a point of $T\\times_{X'}Y'$. Step 7 is an isomorphism on each of these inverse images. Consequently the closed immersion $h$ is surjective on underlying points. On an affine open $W=\\operatorname{Spec}H$ of $T$, write its inverse image as $\\operatorname{Spec}(H/L)$. Then $V(L)=\\operatorname{Spec}H$, and the radical/zero-locus statement gives $L\\subseteq\\sqrt{0}$. This proves that the ideal of $h$ consists locally of nilpotent elements; the next step proves the locally uniform nilpotence required in the statement.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI 2.2.1.5, last paragraph; expansion of the assertion on reduced schemes"
+   }
+  },
+  {
+   "text": "Choose an affine open $\\operatorname{Spec}S$ in $X'$ over an affine open of $X$, with $S$ Noetherian as arranged in step 4 (such opens cover $X'$), and finitely many generators $f_1,\\ldots,f_q$ of $(v^*A)_1$ there; these exist by step 4 and tensoring their generators. The degree-one generation of step 4 survives tensor product, so their standard opens cover $T$ over this affine base. On $D_+(f_i)$ the coordinate ring is the degree-zero localization $H=(S\\otimes_R C)_{(f_i),0}$. It is generated over $S$ by the finitely many fractions $f_j/f_i$: a numerator of degree $n$ is a sum of degree-$n$ monomials in the $f_j$, and division by $f_i^n$ expresses its fraction as a polynomial in these ratios. Hence $H$ is Noetherian by finite-type algebra permanence. Its immersion ideal $L$ from step 8 is finitely generated by the definition of Noetherian. Since $L\\subseteq\\sqrt0$, the finite-generated-ideal radical-power statement with zero ideal gives $L^N=0$ for some $N\\ge1$. These charts cover, so the ideal sheaf of $h$ is locally nilpotent, as claimed. The case of no degree-one generators gives empty Proj and needs no chart.",
+   "uses": [
+    "prop-nagata-proj-standard-open",
+    "def-nagata-homogeneous-localization-degree-zero",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-fg-ideal-radical-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI 2.2.1.5, last paragraph, with the Noetherian nilpotence bound made explicit"
+   }
+  },
+  {
+   "text": "For any morphism $T_1\\to T$, base change of $h$ is a closed immersion by the closed-immersion base-change statement. On affine opens over a chart $\\operatorname{Spec}H$ of step 9 its defining ideal is $LH_1$, and $(LH_1)^N=L^NH_1=0$. Every prime of $H_1$ contains this ideal, since a nilpotent element maps to zero in the integral domain $H_1/\\mathfrak p$. Hence $\\operatorname{Spec}(H_1/LH_1)\\to\\operatorname{Spec}H_1$ is a homeomorphism: primes correspond to all primes of $H_1$, and closed subsets correspond under the same quotient map. These homeomorphisms cover $T_1$. The definition of universal homeomorphism therefore applies to $h$.",
+   "uses": [
+    "lem-pc-closed-imm-base-change",
+    "def-weil-universal-homeomorphism",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI 2.2.1.5, nil-immersion conclusion; affine quotient argument"
+   }
+  },
+  {
+   "text": "On a degree-one chart $D_+(f)$ of any of the graded algebras in steps 4-9, the definition of the twist identifies $\\mathcal O(1)$ with the degree-one localization module. Multiplication by the unit $f$ gives its explicit basis: $H\\xrightarrow{\\sim}(C_f)_1$, $u\\mapsto uf$, with inverse $z\\mapsto z/f$. If a fraction $a/f^m$ has degree one, its coordinate is $a/f^{m+1}$ of degree zero. For the map $D=v^*A\\to A'$ the induced map of these free rank-one chart modules sends the basis $f$ to the basis $\\bar f$; since the pullback of a quasi-coherent module to the affine chart $D_+(\\bar f)=h^{-1}D_+(f)$ is the tensor product $(D_f)_1\\otimes_H H'$, with $H=D_{(f),0}$ and $H'=A'_{(\\bar f),0}$, by the affine-sections statement for module pullback, its pullback is an isomorphism. For scalar extension from $A$ to $v^*A$ the same argument sends $f$ to $1\\otimes f$ and gives the corresponding isomorphism under relative-Proj base change. The two comparisons compose to $h^*\\mathrm{pr}_B^*\\mathcal O_B(1)\\cong\\mathcal O_{B'}(1)$. On overlaps the bases satisfy $f=(f/g)g$; applying the graded ring map sends this exact relation to its target relation, so the isomorphisms agree and glue. Over $U$ and $U'$ the canonical bases are respectively $t=(1,0)$ and $t'=(1,0)$, and step 5 sends $t$ to $t'$. This proves preservation of the canonical trivializations as well.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "prop-nagata-proj-standard-open",
+    "lemma-nagata-relative-proj-base-change-arbitrary",
+    "lem-weil-pbc-sheaf-isomorphism-local-open-cover",
+    "lem-weil-pbc-module-pullback-affine-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI 2.2.1.3-2.2.1.5, tautological-line comparison; Stacks 01N1, lemma-surjective-graded-rings-generated-degree-1-map-proj, via explicit degree-one charts"
+   }
+  },
+  {
+   "text": "For the identity base map the formula in step 5 sends $(z,m)$ to $(z,m)$. For successive affine base maps $R\\to S\\to Q$, the direct map and the composite (using tensor associativity) both send $q\\otimes s\\otimes(z,m)$ to $(qs z,qs\\bar m)$ in the final fibre product. Such tensors generate the source module, so the graded maps agree in every degree. These equalities persist on degree-zero chart fractions $a/f^n$, whose image is always the image numerator divided by the $n$th power of the image denominator. They therefore give the identity and composition equalities for the induced Proj morphisms under the canonical fibre-product identifications. On the twisting sheaves the chart basis is always sent to its image basis, so the same equalities hold for their identifications and for $t$ on the complement. All formulas commute with restrictions, completing the identity and composition assertions globally.",
+   "uses": [
+    "def-nagata-relative-proj",
+    "def-nagata-homogeneous-localization-degree-zero",
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI 2.2.1.5, canonical construction; tensor and homogeneous-fraction formulas"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-finite-locally-free-module",
+  "def-nagata-homogeneous-localization-degree-zero",
+  "def-nagata-relative-proj",
+  "def-sbc-ideal-sheaf-powers",
+  "def-trf-projective-bundle-morphism",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "def-weil-universal-homeomorphism",
+  "lem-pc-closed-imm-base-change",
+  "lem-pur-conormal-graded-algebra",
+  "lem-weil-pbc-closed-immersion-pushforward-annihilated",
+  "lem-weil-pbc-fg-ideal-radical-power",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-weil-pbc-quasi-coherent-module-direct-sum",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+  "lem-weil-pbc-sheaf-isomorphism-local-open-cover",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-symmetric-algebra-base-change",
+  "lem-weil-pbc-symmetric-algebra-graded",
+  "lem-weil-pbc-tensor-right-exact",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "lemma-nagata-relative-proj-base-change-arbitrary",
+  "pqf-def-locnoeth",
+  "prop-nagata-proj-standard-open",
+  "prop-nagata-relative-proj-functoriality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI, 2.2.1 and Propositions 2.2.1.3-2.2.1.5, pp. 229-230; degree-one localization expansion for twisting sheaves and functoriality, Stacks 01N1 and 01O3"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +262,82 @@
    "results": "Actual service response: 0 hits; . ",
    "date": "2026-10-18",
    "verdict": "no match: these hits concern ring-level Proj, ordinary cotangent presentations, or etale morphisms, and do not state the modified graded fiber-product comparison or a supported etale class"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Arbitrary base change of a modified blowup built from a vector bundle surjecting onto the conormal sheaf is a nil immersion",
+   "results": {
+    "count": 8,
+    "hits": [
+     "AlgebraicGeometry.IsImmersion.isStableUnderBaseChange",
+     "AlgebraicGeometry.IsPreimmersion.instIsStableUnderBaseChangeScheme",
+     "AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme",
+     "AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange",
+     "AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange",
+     "AlgebraicGeometry.FormallyUnramified",
+     "AlgebraicGeometry.isSmooth_isStableUnderBaseChange",
+     "AlgebraicGeometry.Scheme.IdealSheafData.instIsPreimmersionGlueDataObjι"
+    ],
+    "digest": "1e92ac3c40474426"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary Proj charts, stability of immersions, completion or cotangent-module facts do not state the conormal-presentation fibre-product comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "conormal|nilImmersion|modifiedBlowup",
+   "results": {
+    "count": 0,
+    "hits": [],
+    "digest": "4f53cda18c2baa0c",
+    "directory": "Mathlib/AlgebraicGeometry"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary Proj charts, stability of immersions, completion or cotangent-module facts do not state the conormal-presentation fibre-product comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change of Proj of the fiber product of a Rees algebra and a symmetric conormal algebra is a nilpotent closed immersion",
+   "results": {
+    "count": 8,
+    "hits": [
+     "AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange",
+     "AlgebraicGeometry.Proj.isSeparated",
+     "AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion",
+     "AlgebraicGeometry.IsSeparated.isStableUnderBaseChange",
+     "AlgebraicGeometry.Proj.pullbackAwayιIso",
+     "AlgebraicGeometry.IsClosedImmersion.spec_of_quotient_mk",
+     "AlgebraicGeometry.IsImmersion.isStableUnderBaseChange",
+     "AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion"
+    ],
+    "digest": "88a1b5a9c7b461dc"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary Proj charts, stability of immersions, completion or cotangent-module facts do not state the conormal-presentation fibre-product comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an ideal I and a finite projective module E over R modulo I surjecting to I modulo I squared, the graded algebra I powers fiber product Sym E commutes with scalar extension up to nilpotents",
+   "results": {
+    "count": 8,
+    "hits": [
+     "AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective",
+     "AdicCompletion.ofTensorProduct_surjective_of_finite",
+     "Ideal.Fiber.exists_smul_eq_one_tmul",
+     "AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype",
+     "KaehlerDifferential.End_equiv_aux",
+     "retractionKerToTensorEquivSection",
+     "Algebra.Generators.Cotangent.exact",
+     "Algebra.Generators.CotangentSpace.exact"
+    ],
+    "digest": "3209398fd42e8cb3"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary Proj charts, stability of immersions, completion or cotangent-module facts do not state the conormal-presentation fibre-product comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-modified-blowup-generalized-class",
@@ -84,5 +362,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-conormal-presentation-proj-base-change",
+  "worker": "stage1",
+  "summary": "Expanded ILO XVI 2.2.1.3-2.2.1.5 into 12 steps, including the quotient computation, finite pieces, Nakayama generation and surjectivity, closed-fibre comparison, local nilpotence, universal homeomorphism, degree-one twist bases and composition. Reused existing DAG statements throughout; no new nodes, no statement change and no attachment. Added definition dependencies for projective bundles and universal homeomorphisms. All new search entries came from completed msearch calls.",
+  "blueprint": "Supports the inherited regular-immersion/Gysin-class input to lem-per-artin-gabber-affine-curve, specifically arbitrary base change of the modified-blowup generalized class. Steps 1-4 realize the algebra preparation ILO XVI 2.2.1.3; steps 5-10 realize Proposition 2.2.1.5; steps 11-12 spell out the line and functoriality comparison used by the parent. No chapter or unit route is replaced. Whole-blueprint searches for conormal presentation, modified blowup, conormal and Proj base change found no equivalent blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-conormal-graded-algebra",
+    "why": "Generic algebraic-geometry tool: Conormal graded algebra on a closed subscheme. Used only for its stated construction or algebraic property in the ILO XVI 2.2.1.5 argument; the curve-perversity unit provides no replacement for this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+    "why": "Generic algebraic-geometry tool: The symmetric algebra of a quasi-coherent module: universal property and sections over affine opens. Used only for its stated construction or algebraic property in the ILO XVI 2.2.1.5 argument; the curve-perversity unit provides no replacement for this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-symmetric-algebra-base-change",
+    "why": "Generic algebraic-geometry tool: The symmetric algebra commutes with base change. Used only for its stated construction or algebraic property in the ILO XVI 2.2.1.5 argument; the curve-perversity unit provides no replacement for this algebraic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-conormal-graded-algebra",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+  "lem-weil-pbc-symmetric-algebra-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-171ded943",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-171ded943 (reviewer sub-agent of L); spot-checked: I read ILO XVI 2.2.1, 2.2.1.3, 2.2.1.4 and 2.2.1.5 with their proofs (pp. 229-230) and confirmed Stacks 01N1, 01O3 and 07ZI. The statement is unchanged from base and live; the live node is still unsplit. There are no new nodes and no cycle (the 678-node closure does not contain the item). All 12 steps are correct. They follow the source: K_a = I^{a+1} x 0 = I*A_a, then A/IA = Sym E, Nakayama for degree-one generation and for surjectivity of v^*A_a -> A'_a with no flatness used, arbitrary (not flat-only) relative-Proj base change plus the surjective-to-closed-immersion clause, surjectivity on points, nilradical, a uniform nilpotence bound on finite-type Noetherian charts, universal homeomorphism, and twist bases through degree-one generation (consistent with the 07ZI(3) warning). I tested I=0, I=O, E=0, v=i and non-flat v. Three small gaps are repaired in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-conormal-presentation-proj-base-change.json. (1) Steps 4 and 9 assumed arbitrary affine rings are Noetherian, but pqf-def-locnoeth only gives a cover; the steps now use standard opens of that cover, with pqf-def-locnoeth and lem-weil-pbc-finite-type-algebra-noetherian cited. (2) Step 7's pullback of A' to Y' as Sym(E') now cites lem-weil-pbc-module-pullback-affine-sections and step 3. (3) Step 11's chart pullback of O(1) as a tensor product now cites the same node. Batch-5 flag: def-trf-projective-bundle-morphism is a general definition (P_S(E)=Proj_S Sym E in the EGA convention). Its closure reaches only one other trf definition and no trace-formula or Poincare-duality proof node, so I accepted it. I also accepted the declared tool_uses (conormal graded algebra, quasi-coherent Sym, Sym base change) as generic black-box tools.; 1 file(s) fixed by the reviewer"
  }
 }
