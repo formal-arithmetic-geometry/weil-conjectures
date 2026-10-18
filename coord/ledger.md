@@ -16061,3 +16061,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:28 L: merged deliver/J4/Sheaf.Algebra.Homology.BoundedAboveProjectiveModel (stage 3; reviewer PASS; first push; landing 20261018T062815-L-657890 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:28 L: merged deliver/J4/Sheaf.AlgebraicGeometry.DimZeroFiniteOverField (stage 3; reviewer PASS; first push; landing 20261018T062816-L-658118 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:28 L: merged deliver/J4/Sheaf.Paper.CompleteCoefficientDatum (stage 3; reviewer PASS; first push; landing 20261018T062816-L-658367 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:28 L: merged deliver/J6/Sheaf.AlgebraicGeometry.ProperReducedGlobalSectionsProduct (stage 3; reviewer PASS; first push; landing 20261018T062817-L-658496 (proof); batch 20261018T062645; modules 1; new nodes 0)

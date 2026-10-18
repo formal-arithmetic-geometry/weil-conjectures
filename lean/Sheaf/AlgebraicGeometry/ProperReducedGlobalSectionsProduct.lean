@@ -11,13 +11,8 @@ public import Mathlib.AlgebraicGeometry.Over
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Topology.Connected.Clopen
 import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.FiniteFreeComplex
-import WeilConjectures.Mathlib.AlgebraicGeometry.Scheme
-import WeilConjectures.Mathlib.RingTheory.Artinian.Ring
-import WeilConjectures.AlgebraicGeometry.Coherent
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
+import WeilConjectures.Mathlib.Topology.NoetherianSpace
 
 /-!
 # Global functions on a proper reduced scheme over an algebraically closed field
@@ -40,24 +35,19 @@ Source: Stacks Project, Varieties, Tag 0BUG, clauses (1)--(3)
 The ring equivalence commutes with the actual scalar structure map, making it a
 `k`-algebra equivalence. Its germ formula specifies the canonical constant-on-components map.
 
-Proof plan:
-1. Properness gives finite type over the Noetherian scheme `Spec k`, so `X` is Noetherian
-   (`lem-weil-pbc-finite-type-over-noetherian`, `pqf-def-locnoeth`).
-2. The structure sheaf is quasi-coherent of finite type, hence coherent by
-   `pqf-lem-coherent-ft-locnoeth`. The affine-base degree-zero clause of `lem-pc-coherent-hi`
-   makes its global sections finite-dimensional over `k`.
-3. Indicator sections of a finite nonempty clopen partition are linearly independent:
-   evaluate their germs at a point of each part. Thus partition sizes are bounded by the
-   dimension. A partition of maximal size has connected parts, since otherwise it refines.
-4. Those parts are precisely the maximal nonempty connected subsets: a connected subset
-   cannot meet both a clopen part and its complement. This proves finiteness and clopenness.
-5. Sections on a part extend by zero, so their algebra is finite-dimensional and reduced.
-   It is nonzero, and `lem-pc-scheme-connected-iff-idempotents` gives trivial idempotents.
-   `lem-pc-alg-closed-reduced-algebra-no-idempotents-dim-one` makes its scalar map bijective.
-6. Sheaf uniqueness and gluing identify global sections with the product of these algebras.
-   Invert restriction and compose with their scalar maps to obtain the specified equivalence.
-   For the empty scheme there are no components and the empty-cover sheaf axiom gives the
-   zero ring of sections; the empty product is also the zero ring. -/
+Proof:
+1. Properness gives finite type over the Noetherian scheme `Spec k`, so `X` is Noetherian.
+   The proved Noetherian-space results give finitely many clopen connected components.
+2. Each component, as an open subscheme with closed image, is proper, reduced and connected.
+   `GlobalSectionsBijective.of_isAlgClosed` identifies its scalar map with a bijection;
+   `Opens.topIso` transfers this to sections of `X` on that component.
+3. Restriction to all components is injective by equality of germs, and surjective by sheaf
+   gluing: distinct components have empty intersection. Compose its inverse with the
+   coordinate scalar equivalences. Restricting proves scalar compatibility, and taking
+   germs proves the displayed formula.
+4. If `X` is empty, its component set is empty, the function ring is subsingleton, and
+   the empty-cover sheaf axiom makes the ring of global sections subsingleton as well.
+   The same gluing construction includes the empty case. -/
 theorem proper_reduced_globalSections_product
     (k : Type u) [Field k] [IsAlgClosed k] (X : Scheme.{u})
     [X.Over (Spec (CommRingCat.of k))]
@@ -75,6 +65,97 @@ theorem proper_reduced_globalSections_product
                 ((Scheme.ΓSpecIso (CommRingCat.of k)).inv (a (ConnectedComponents.mk x))))) ∧
       (IsEmpty X → IsEmpty (ConnectedComponents X) ∧
         Subsingleton (ConnectedComponents X → k) ∧ Subsingleton Γ(X, ⊤)) := by
-  sorry
+  classical
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (CommRingCat.of k))
+  have : CompactSpace X :=
+    QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (CommRingCat.of k))
+  have : IsNoetherian X := {}
+  have hcl : ∀ x : X, IsClopen (connectedComponent x) := fun _ ↦
+    isClopen_connectedComponent
+  refine ⟨inferInstance, hcl, ?_, ?_⟩
+  · let C := ConnectedComponents X
+    let p : C → X := fun c ↦ (ConnectedComponents.surjective_coe c).choose
+    have hp (c : C) : ConnectedComponents.mk (p c) = c :=
+      (ConnectedComponents.surjective_coe c).choose_spec
+    let U : C → X.Opens := fun c ↦ ⟨connectedComponent (p c), (hcl (p c)).isOpen⟩
+    have hmem (x : X) (c : C) : x ∈ U c ↔ ConnectedComponents.mk x = c := by
+      change x ∈ connectedComponent (p c) ↔ _
+      rw [← ConnectedComponents.coe_eq_coe', hp]
+    have hU (c : C) : IsClosed (U c : Set X) := (hcl (p c)).isClosed
+    have hbij (c : C) : Function.Bijective
+        ((U c).topIso.hom.hom.comp (globalSectionsRingHom k (X := (U c).toScheme))) := by
+      have : IsClosedImmersion (U c).ι :=
+        IsClosedImmersion.of_isPreimmersion _ (by simpa using hU c)
+      have : IsProper ((U c).toScheme ↘ Spec (CommRingCat.of k)) :=
+        inferInstanceAs (IsProper ((U c).ι ≫ X ↘ Spec (CommRingCat.of k)))
+      have : ConnectedSpace (U c).toScheme :=
+        isConnected_iff_connectedSpace.mp isConnected_connectedComponent
+      exact (ConcreteCategory.bijective_of_isIso (U c).topIso.hom).comp
+        (GlobalSectionsBijective.bijective_globalSectionsRingHom (k := k))
+    let E (c : C) : k ≃+* Γ(X, U c) := RingEquiv.ofBijective _ (hbij c)
+    let res (c : C) : Γ(X, ⊤) →+* Γ(X, U c) :=
+      (X.presheaf.map (homOfLE le_top : U c ⟶ ⊤).op).hom
+    have hE (c : C) (a : k) : E c a = res c (globalSectionsRingHom k a) := by
+      change (U c).topIso.hom
+        (globalSectionsRingHom k (X := (U c).toScheme) a) = _
+      change (U c).topIso.hom
+        (((ΓSpecIso (CommRingCat.of k)).inv ≫
+          ((U c).ι ≫ X ↘ Spec (CommRingCat.of k)).appTop) a) = _
+      rw [Hom.comp_appTop]
+      change ((U c).ι.appTop ≫ (U c).topIso.hom) (globalSectionsRingHom k a) = _
+      simp only [Opens.ι_appTop, Opens.topIso_hom, ← Functor.map_comp]
+      rfl
+    let R : Γ(X, ⊤) →+* (∀ c : C, Γ(X, U c)) := RingHom.pi res
+    have hinj : Function.Injective R := by
+      intro a b hab
+      apply TopCat.Presheaf.section_ext X.sheaf ⊤ a b
+      intro x _
+      change X.presheaf.germ ⊤ x trivial a = X.presheaf.germ ⊤ x trivial b
+      let c : C := ConnectedComponents.mk x
+      have hx : x ∈ U c := (hmem x c).mpr rfl
+      have heq := congrFun hab c
+      have hg := congrArg (X.presheaf.germ (U c) x hx) heq
+      simpa only [R, RingHom.pi_apply, res,
+        TopCat.Presheaf.germ_res_apply] using hg
+    have hsurj : Function.Surjective R := by
+      intro a
+      have hcover : (⊤ : X.Opens) ≤ ⨆ c, U c := by
+        intro x _
+        exact TopologicalSpace.Opens.mem_iSup.mpr
+          ⟨ConnectedComponents.mk x, (hmem x _).mpr rfl⟩
+      have hcompat : TopCat.Presheaf.IsCompatible X.presheaf U a := by
+        intro c d
+        by_cases hcd : c = d
+        · subst d
+          rfl
+        · apply TopCat.Presheaf.section_ext X.sheaf _ _ _
+          intro x hx
+          exact (hcd ((hmem x c).mp hx.1 |>.symm.trans ((hmem x d).mp hx.2))).elim
+      obtain ⟨s, hs, _⟩ := X.sheaf.existsUnique_gluing' U ⊤
+        (fun c ↦ homOfLE le_top) hcover a hcompat
+      exact ⟨s, funext hs⟩
+    let e : (C → k) ≃+* Γ(X, ⊤) :=
+      (RingEquiv.piCongrRight E).trans (RingEquiv.ofBijective R ⟨hinj, hsurj⟩).symm
+    have he (a : C → k) (c : C) : res c (e a) = E c (a c) := by
+      exact congrFun ((RingEquiv.ofBijective R ⟨hinj, hsurj⟩).apply_symm_apply
+        ((RingEquiv.piCongrRight E) a)) c
+    refine ⟨e, ?_, ?_⟩
+    · intro a
+      apply hinj
+      funext c
+      exact (he (fun _ ↦ a) c).trans (hE c a)
+    · intro a x
+      let c : C := ConnectedComponents.mk x
+      have hx : x ∈ U c := (hmem x c).mpr rfl
+      have h := congrArg (X.presheaf.germ (U c) x hx) ((he a c).trans (hE c (a c)))
+      change X.presheaf.germ ⊤ x trivial (e a) =
+        X.presheaf.germ ⊤ x trivial (globalSectionsRingHom k (a c))
+      simpa only [res, TopCat.Presheaf.germ_res_apply] using h
+  · intro hX
+    have : IsEmpty X := hX
+    have : IsEmpty (ConnectedComponents X) :=
+      ⟨fun c ↦ isEmptyElim (ConnectedComponents.surjective_coe c).choose⟩
+    exact ⟨inferInstance, inferInstance, inferInstance⟩
 
 end AlgebraicGeometry.Scheme

@@ -34,80 +34,40 @@
  ],
  "proof": [
   {
-   "text": "The field k is Noetherian: its only ideals are 0 and k. By def-weil-affine-spectrum its spectrum is a one-point affine scheme with section ring k; this single affine chart is a locally Noetherian cover by pqf-def-locnoeth, and the one-point space is quasi-compact. Thus Spec k is Noetherian in the sense of lem-weil-pbc-finite-type-over-noetherian. Properness includes finite type, so that lemma applied to the structure morphism gives that X is Noetherian, in particular locally Noetherian.",
+   "text": "Properness gives locally finite type and quasi-compactness over Spec k. Apply LocallyOfFiniteType.isLocallyNoetherian and QuasiCompact.compactSpace_of_compactSpace to obtain IsNoetherian X. The proved NoetherianSpace.finite_connectedComponents and NoetherianSpace.locallyConnectedSpace give finitely many clopen connected components.",
    "uses": [
     "def-weil-proper-morphism",
     "def-weil-affine-spectrum",
     "pqf-def-locnoeth",
     "lem-weil-pbc-finite-type-over-noetherian"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01T6, label lemma-finite-type-noetherian; used in the finiteness argument of Tag 0BUG"
-   }
+   "elementary": false
   },
   {
-   "text": "The structure sheaf is quasi-coherent and of finite type: on an affine open Spec R it is the sheaf associated to the rank-one free R-module R, and the identity O_X -> O_X is a one-generator presentation. By pqf-lem-coherent-ft-locnoeth and step 1, O_X is coherent. Apply the affine-base clause of lem-pc-coherent-hi to X -> Spec k and F=O_X, with i=0. Thus A=Gamma(X,O_X) is a finite-dimensional k-vector space.",
-   "uses": [
-    "pqf-def-coherent",
-    "pqf-lem-coherent-ft-locnoeth",
-    "lem-pc-coherent-hi"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 01XZ, label lemma-coherent-Noetherian; Tag 02O6, label lemma-proper-over-affine-cohomology-finite; Tag 0BUG proof of (1)"
-   }
-  },
-  {
-   "text": "Suppose X is nonempty and write d=dim_k A. Any finite partition of X into r nonempty clopen subsets has r<=d: glue the section 1 on the j-th part and 0 elsewhere to obtain e_j in A. If sum a_j e_j=0, taking the germ at a point of the j-th part gives a_j=0, since the unital map from the field k to its nonzero local ring is injective. Thus the e_j are linearly independent. The possible partition sizes form a nonempty subset of {1,...,d} (the partition {X} exists); choose one of largest size. Every part is connected: a disconnection of a part into two nonempty relatively clopen subsets is a clopen refinement in X, contradicting maximal size.",
-   "uses": [
-    "def-pc-scheme",
-    "def-weil-connected-scheme"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0BUG, label lemma-proper-geometrically-reduced-global-sections, proof of (2): idempotent sections from clopen decompositions; the finite-dimensional bound spells out finiteness without a separate topological decomposition theorem"
-   }
-  },
-  {
-   "text": "Each piece U of the partition in step 3 is a maximal nonempty connected subset of X. Indeed, any connected subset meeting U and its complement would be disconnected by those two clopen sets. A connected subset containing U is therefore contained in U, so equals U; conversely any maximal connected subset meeting U is contained in U and hence equals U by maximality, since U is connected. The partition pieces are exactly C. Consequently C is finite and every member is open and closed.",
-   "uses": [
-    "def-weil-connected-scheme"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0BUG, label lemma-proper-geometrically-reduced-global-sections, proof of (2), identification with connected components"
-   }
-  },
-  {
-   "text": "For c in C let B_c=Gamma(c,O_X|_c). Restriction A -> B_c is surjective: any section on c extends by zero over X minus c, by the sheaf gluing axiom. Hence B_c is finite-dimensional over k, being a linear quotient of A. It is reduced by def-pc-reduced-scheme applied to the open c. It is nonzero since c contains a point and its section ring maps unitally to the nonzero local ring there. Since c is connected and nonempty, lem-pc-scheme-connected-iff-idempotents gives that B_c has only idempotents 0 and 1. All hypotheses of lem-pc-alg-closed-reduced-algebra-no-idempotents-dim-one now hold (k algebraically closed, B_c commutative, finite-dimensional, reduced and nonzero); its conclusion says the actual structure map rho_c:k -> B_c is bijective.",
+   "text": "Choose a representative p(c) of each component c and let U(c) be its connected component, an open subset. Membership x in U(c) is equivalent to ConnectedComponents.mk x = c. Each U(c) is nonempty and connected. Its inclusion is an open immersion with closed image, hence a closed immersion; composing with the proper structure map shows U(c) is proper over k. It is reduced as an open subscheme of X. Apply the existing general-scheme declaration GlobalSectionsBijective.of_isAlgClosed (recorded by lem-sc-global-functions, whose prose specializes it to curves). The scalar map k -> Gamma(U(c),O) is bijective. Compose with Opens.topIso to obtain E(c):k ≃+* Gamma(X,U(c)). Functoriality identifies E(c) with restriction of the actual scalar map of X.",
    "uses": [
     "def-pc-scheme",
     "def-pc-reduced-scheme",
-    "lem-pc-scheme-connected-iff-idempotents",
-    "lem-pc-alg-closed-reduced-algebra-no-idempotents-dim-one"
+    "def-weil-connected-scheme",
+    "lem-sc-global-functions"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0BUG, label lemma-proper-geometrically-reduced-global-sections, proof of (2), (3), and the finite-extension specialization over an algebraically closed field"
-   }
+   "elementary": false
   },
   {
-   "text": "Restriction gives a k-algebra isomorphism A -> product_{c in C} B_c: injectivity is sheaf uniqueness on the clopen cover, and surjectivity is sheaf gluing since distinct members have empty intersection. Composing its inverse with the coordinate structure maps rho_c of step 5 gives product_{c in C} k -> A. Its restriction on c sends (a_b) to rho_c(a_c), so it is exactly the map of constant sections in the statement, and it is an isomorphism. If X is empty, it has no nonempty connected subset, C is empty, and the sheaf axiom for the empty covering gives a unique section on X. Thus A is the zero ring, as is the empty product, and the same map is the unique isomorphism between them.",
+   "text": "Define R:Gamma(X,O) -> product_c Gamma(X,U(c)) by restriction. If R(s)=R(t), restrict at the component containing x and apply its germ map to get equal germs at every x; sheaf section_ext gives s=t. For surjectivity, glue an arbitrary family on U(c). On an overlap, a point would give mk x=c=d, so for c unequal to d the intersection is empty and compatibility follows by section_ext. For c=d it is reflexivity. The opens cover X, so existsUnique_gluing gives a global section with the required restrictions.",
    "uses": [
     "def-pc-scheme",
     "def-weil-connected-scheme"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0BUG, label lemma-proper-geometrically-reduced-global-sections, clauses (1)-(3) and their proof; the sheaf gluing description specifies the canonical algebra map and includes n=0"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Compose the coordinatewise equivalences E(c) with the inverse of R to obtain e:(C -> k) ≃+* Gamma(X,O). Its restriction to U(c) is E(c)(a(c)). For constant a this equals restriction of the actual scalar section; injectivity of R proves scalar compatibility. Taking germs on the component c=mk x and using germ_res_apply proves the specified germ formula. If X is empty then C is empty by surjectivity of mk; the function ring is subsingleton, and the sheaf empty-cover instance makes Gamma(X,O) subsingleton. The gluing construction also applies to this empty cover.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -115,19 +75,15 @@
   "def-weil-affine-spectrum",
   "pqf-def-locnoeth",
   "lem-weil-pbc-finite-type-over-noetherian",
-  "pqf-def-coherent",
-  "pqf-lem-coherent-ft-locnoeth",
-  "lem-pc-coherent-hi",
   "def-pc-scheme",
-  "def-weil-connected-scheme",
   "def-pc-reduced-scheme",
-  "lem-pc-scheme-connected-iff-idempotents",
-  "lem-pc-alg-closed-reduced-algebra-no-idempotents-dim-one"
+  "def-weil-connected-scheme",
+  "lem-sc-global-functions"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 0BUG, label lemma-proper-geometrically-reduced-global-sections, proof of (1)-(3); finite-dimensional clopen refinement replaces the Artinian decomposition and the Noetherian component argument, using the existing connected algebra lemma"
+  "place": "Tag 0BUG, proof of (2)-(3): Noetherian connected components are open; apply the proved connected-scheme scalar theorem and sheaf gluing componentwise. Lean assembly by J6, 2026-10-18."
  },
  "mathlib_searches": [
   {
@@ -268,11 +224,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "pqf-lem-coherent-ft-locnoeth",
-  "lem-pc-coherent-hi",
-  "lem-pc-scheme-connected-iff-idempotents",
-  "lem-pc-alg-closed-reduced-algebra-no-idempotents-dim-one"
+  "lem-weil-pbc-finite-type-over-noetherian"
  ],
  "reviewed": {
   "date": "2026-10-14",
@@ -311,5 +263,15 @@
   "by": "NQ",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261018T062817-L-658496",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
