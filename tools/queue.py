@@ -24,7 +24,12 @@ has a Lean statement, whatever its depth below the target):
      by its batches (coord/assumed.tsv); dag_queue.Dag.waiting/stated (the human, 2026-10-17: the prover must see what
      is available before proving). Otherwise it is listed as "waiting for statements of dependencies" until stage 2
      has stated those nodes. Exempt: a repair of a module without `sorry` (already proved, broken by an upstream change)
-     and an item already claimed (coord/claims; nothing is released here).
+     and an item already claimed (coord/claims; nothing is released here);
+  4. it is not listed in ~/upstream-pr/upstream-pending.tsv (the human, 2026-10-18: do not duplicate Orchestra's open
+     PRs): the modules an open Orchestra branch or PR of the source library proves, written hourly from GitHub by the
+     launcher's machine, outside the repository. The hold ends by itself when the module has no `sorry` left in live
+     (the sync brought the proof) or when the module leaves the file; such modules are listed as "held for an open
+     upstream PR" (STATE["pending"]), claimed or not.
 No cap. The order:
   1. modules listed in coord/repairs.txt, in file order (proof or definition repairs),
   2. modules containing `STATEMENT-DISPUTED`,
@@ -75,6 +80,24 @@ def claimed(m: str) -> bool:
 
 FAR = 10**6   # the import distance of a module the targets do not import yet (below a route sorry, parent unproved)
 
+PENDING = pathlib.Path.home() / "upstream-pr" / "upstream-pending.tsv"   # outside the repository: no commit churn
+
+
+def upstream_pending() -> dict[str, str]:
+    """module -> source branch/PR of the source library that proves it (the human, 2026-10-18: do not duplicate
+    Orchestra's open PRs). Columns module, source, date; `#` lines are comments. Absent file: nothing is held."""
+    out = {}
+    try:
+        for line in PENDING.read_text().splitlines():
+            if not line.strip() or line.startswith("#"):
+                continue
+            cols = line.split("\t")
+            if len(cols) >= 2:
+                out.setdefault(cols[0].strip(), cols[1].strip())
+    except OSError:
+        pass
+    return out
+
 
 def stage3(imports, dist, waiting: set[str], below: dict[str, dict[str, int]] | None = None):
     """items (kind rank, import distance, module, sorries, kind, route distance) and held (import distance, module, sorries).
@@ -103,6 +126,8 @@ def stage3(imports, dist, waiting: set[str], below: dict[str, dict[str, int]] | 
         STATE["off_route"] = sorted(m for m in dist if m not in keep and m not in bdist and li.file_of(m).is_file()
                                     and li.sorry_count(li.file_of(m).read_text(errors="ignore")))
     items, held = [], []
+    pending = upstream_pending()
+    STATE["pending"] = []   # (module, source): held for an open upstream PR, not items (the human, 2026-10-18)
     for m in list(dist) + sorted(m for m in bdist if m not in dist):
         if m not in keep and m not in bdist:
             continue
@@ -115,6 +140,10 @@ def stage3(imports, dist, waiting: set[str], below: dict[str, dict[str, int]] | 
             continue
         kind = "repair" if m in repairs else "disputed" if "STATEMENT-DISPUTED" in text else "proof"
         d = dist.get(m, FAR)
+        if m in pending and n > 0 and kind != "repair":
+            # the human, 2026-10-18: an open Orchestra branch or PR of the source library proves this module; the
+            # routine sync brings the proof. Held whether claimed or not; the hold ends when no sorry is left.
+            STATE["pending"].append((m, pending[m])); continue
         if m in waiting and not (kind == "repair" and n == 0) and not claimed(m):
             # the human, 2026-10-17 (supersedes the launcher's 2026-10-14 rule that worked such modules anyway): a stage-3
             # item opens only when every node of its dependencies has a Lean statement, so that the prover sees what is
@@ -166,7 +195,8 @@ def main() -> int:
             print(f"stage 3: {len(items3)} items (" + ", ".join(f"{k} {sum(1 for x in items3 if x[4] == k)}" for k in ("repair", "disputed", "proof"))
                   + f"; on the route {sum(1 for x in items3 if x[5] == 0)}, below a route sorry {sum(1 for x in items3 if x[5] > 0)}"
                   + (": " + ", ".join(f"{b} {n}" for b, n in STATE["below"].items()) if STATE.get("below") else "")
-                  + f"); {len(held)} modules waiting for statements of dependencies (not items)")
+                  + f"); {len(held)} modules waiting for statements of dependencies (not items)"
+                  + (f"; {len(STATE['pending'])} modules held for an open upstream PR (~/upstream-pr/upstream-pending.tsv, not items)" if STATE.get("pending") else ""))
             ns = sum(x[3] for x in items3) + sum(x[2] for x in held)   # held modules are not items again since 2026-10-17
             print(f"stage 3: sorries left on the route and below it {ns}, in {len(items3) + len(held)} modules (text count; "
                   "tools/target_types.sh check prints each target's axioms: a target is closed when sorryAx is not among them)")
@@ -214,6 +244,13 @@ def main() -> int:
             f.write("| module | distance to a target | sorry | waits for (first unstated node) |\n|---|---|---|---|\n")
             for d, m, n in held:
                 f.write(f"| `{m}` | {_d(d)} | {n} | `{wfor.get(m, '')}` |\n")
+        if STATE.get("pending"):
+            f.write(f"\n## Stage 3: held for an open upstream PR ({len(STATE['pending'])})\n\n"
+                    "Not items: an open Orchestra branch or PR of the source library proves the module (~/upstream-pr/upstream-pending.tsv, "
+                    "the human, 2026-10-18: do not duplicate Orchestra's open PRs); the routine sync brings the proof, and the hold ends when no sorry is left.\n\n")
+            f.write("| module | source |\n|---|---|\n")
+            for m, src in sorted(STATE["pending"]):
+                f.write(f"| `{m}` | {src} |\n")
     print(f"wrote {len(rows)} items to coord/queue.tsv and coord/queue.md (stage 3: {len(items3)}, waiting {len(held)}; stage 2: {len(s2)}; stage 1: {len(s1)})")
     if dag_queue.nodes_dir().is_dir():  # the reverse index of the blueprint references is regenerated with the queue
         import blueprint_refs
