@@ -20,7 +20,9 @@
   "lem-pur-supported-hom",
   "def-pur-supported-cup",
   "lem-pur-divisor-class",
-  "def-coefficient-twists-detailed"
+  "def-coefficient-twists-detailed",
+  "def-pc-module-pullback",
+  "def-pur-supported-class-operations"
  ],
  "proof": [
   {
@@ -344,5 +346,51 @@
   "group": "Q80",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-3ca7d051a (reviewer sub-agent of L); spot-checked: I read all of it: the main-20261015 blueprint statement and proof, unit sk-prop-an Steps 0-7, all eight new nodes, every cited statement, and Stacks 0FI5/0FI7/02UL/067M/015N at their labels. The target statement is unchanged; rank 0 is now included. The blueprint Step 3 gluing in H^{2r}_{Z(s)} is genuinely wrong for singular T. Test: on the node xy=0 with the Cartier divisor V(x+y), H^1_D(A) is nonzero, so the presheaf of degree-2 supported classes is not separated. The replacement builds a universal class u_F on the smooth zero-section pair of E(F), where lem-pur-relative-support-bottom-descent gives vanishing below 2r and the new lem-pur-supported-bottom-gluing glues it, then sets c_r(F,s) := s^*u_F. This follows unit Steps 2-4 and is recorded for coord/HUMAN.md. Checked: Step 2 hypotheses (A^r_U over U, regular sequence of variables, dimension drop); L2 via s∘g=h∘s'; L3 via an internal product on E(F)×_T E(G); L4 via nested Cartier composites, the projection formula, the Chern sign of def-pur-chern-classes against Stacks 0FI5 (rank 1 and split rank 2), the flag formula, and split injectivity from the PBF unit summand. The new nodes are true on rank 0/1/2, nonsplit and singular cases, are not duplicates (rg over dag/nodes), and are not restatements. No cycle (closure check). One fault, C4 in step 6 (L1): the class c_D of lem-amb-cartier-kummer-map was given local values 'by lem-pur-divisor-class', and L1 needs cl(Z(s)) of lem-pur-divisor-class, but no node identifies the two classes. Fixed by adding the statement-only node lem-pur-cartier-class-agreement (cl(D)=c_D under lem-pur-supported-hom, hence h^*cl(D)=cl(D') whenever D' stays Cartier; true because both use the same relative-torsor Kummer construction) and rewriting step 6. lem-amb-cartier-kummer-map leaves the item's proof_deps. Accepted tool_use: sbc-lem-affine-space-smooth (Step 2, generic smoothness of affine space). Batch 5: all four flagged citations, and the new node, reach sec-poincare-duality only through lem-pod-etale-stalk-tensor-scalar, a generic fact about stalks of sheaf tensor products that is already an accepted tool_use of lem-pur-etale-closed-constant-tensor. It is not a step of the proof of Poincaré duality or the trace formula, so all are accepted. For maintenance: update the item's source.document to main-20261015.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LocalizedTopChern",
+  "declaration": "WeilConjectures.PurityFiniteSetting.localized_top_chern",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.localizedChernDegree_succ",
+   "WeilConjectures.PurityFiniteSetting.localizedChernTensorPowerMap",
+   "WeilConjectures.PurityFiniteSetting.localizedChernTensorPowerCharacterization",
+   "WeilConjectures.PurityFiniteSetting.localizedChernTwistSucc_eq",
+   "WeilConjectures.PurityFiniteSetting.localizedChernTwistZero",
+   "WeilConjectures.PurityFiniteSetting.localizedChernTwistStep",
+   "WeilConjectures.PurityFiniteSetting.localizedChernTwistProduct",
+   "WeilConjectures.PurityFiniteSetting.localizedChernTwistMapEtaleRawCharacterization",
+   "WeilConjectures.PurityFiniteSetting.localizedChernTwistMapEtaleRaw_realization",
+   "WeilConjectures.PurityFiniteSetting.localizedChernTwistMapEtaleRaw",
+   "WeilConjectures.PurityFiniteSetting.localizedChernTwistMapEtale",
+   "WeilConjectures.PurityFiniteSetting.localizedChernClassTransport",
+   "WeilConjectures.PurityFiniteSetting.localizedChernOrdinaryCharacterization",
+   "WeilConjectures.PurityFiniteSetting.localizedChernOrdinary_realization",
+   "WeilConjectures.PurityFiniteSetting.localizedChernOrdinary",
+   "WeilConjectures.PurityFiniteSetting.LocalizedTopChernClasses",
+   "WeilConjectures.PurityFiniteSetting.LocalizedTopChernForgetSupport",
+   "WeilConjectures.PurityFiniteSetting.LocalizedTopChernLine",
+   "WeilConjectures.PurityFiniteSetting.LocalizedTopChernBaseChange",
+   "WeilConjectures.PurityFiniteSetting.LocalizedTopChernDirectSum",
+   "WeilConjectures.PurityFiniteSetting.LocalizedTopChernLaws",
+   "WeilConjectures.PurityFiniteSetting.LocalizedTopChernLaws.forget_support",
+   "WeilConjectures.PurityFiniteSetting.LocalizedTopChernLaws.line",
+   "WeilConjectures.PurityFiniteSetting.LocalizedTopChernLaws.base_change",
+   "WeilConjectures.PurityFiniteSetting.LocalizedTopChernLaws.direct_sum",
+   "WeilConjectures.PurityFiniteSetting.localized_top_chern"
+  ],
+  "file": "lean/Sheaf/Paper/LocalizedTopChern.lean",
+  "statement": "theorem localized_top_chern (P : PurityFiniteSetting.{u}) : ∃ c : P.LocalizedTopChernClasses, P.LocalizedTopChernLaws c",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-786c95f3d",
+  "group": "NM",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 3ddd8efb3d78. LocalizedTopChern.lean byte-identical (sha ae92b5ce) to the version whose statement was judged correct (L1-L4, r=0, empty and singular cases, no extra hypotheses). Only changes vs live: new item module, new existing:true def-pur-supported-class-operations on live Sheaf.Paper.SupportedCupFunctoriality (all 26 listed decls present once in live 977f4958; statement is the verbatim FunctorialCupH signature; covers every module decl the item uses; no other owner; stmt_deps exist; field set matches landed worker existing:true def nodes), and item record lean+stmt_deps (base 8 kept + def-pc-module-pullback + new node). R1 fixed: the theorem node is only a proof_dep. R2 fixed: def-pur-frame-class dropped from stmt_deps along with its module rewrite. R3 fixed: no dependency module or record rewrites. lean.statement verbatim; declarations equal the file decl set. nt_compile --json vs live: rc 0, 35.3 s, clean. Advisory: helper decls affineLinearBaseCoefficient/finiteEtaleTateSheaf owners not in stmt_deps."
  }
 }
