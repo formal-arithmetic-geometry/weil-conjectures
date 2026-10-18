@@ -2011,7 +2011,6 @@ public import WeilConjectures.CategoryTheory.Adjunction.ClopenIdempotent
 public import WeilConjectures.CategoryTheory.Adjunction.ConjugateCounit
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeMate
 public import WeilConjectures.CategoryTheory.Adjunction.FiniteProductRingFunctor
-public import WeilConjectures.CategoryTheory.Adjunction.IdentityMate
 public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap.Comp
