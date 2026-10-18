@@ -5,6 +5,8 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Line
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineSmooth
 public import WeilConjectures.TraceFormula.Fibration
 public import WeilConjectures.TraceFormula.ModelDecomposition
 public import WeilConjectures.TraceFormula.OpenSquare
@@ -527,6 +529,61 @@ theorem modelTraceFormulaOne_of_isOpenImmersion [IsAlgClosed k] {X₀ U₀ Z₀ 
   intro _ _ _
   exact WeilBoundedConstructible.traceFormulaOne_of_isOpenImmersion hcomplX sq hw
     (modelBaseChangeEndo_comp _ _ hpX hFZc) (fun L ↦ h _ Φ _ hΦ L) K
+
+variable (ℓ k₀) in
+/-- **The degree one trace formula over the projective line** `ℙ¹_{k₀}`, a proper smooth curve
+(`modelTraceFormula_of_isProper`). -/
+theorem modelTraceFormulaOne_projectiveLine [IsAlgClosed k] :
+    ModelTraceFormulaOne ℓ (k := k) (ProjectiveLine (Spec (.of k₀)) ↘ Spec (.of k₀)) :=
+  ModelTraceFormulaOne.of_modelTraceFormula (modelTraceFormula_of_isProper ℓ _)
+
+omit [Finite k₀] [Algebra k₀ k] in
+/-- The affine chart of `ℙ¹_{k₀}` and the point at infinity are complementary. -/
+lemma isCompl_range_affineChart_infinity :
+    IsCompl (Set.range (ProjectiveLine.affineChart (Spec (.of k₀))).base)
+      (Set.range (ProjectiveLine.infinity (Spec (.of k₀))).base) := by
+  have h : Set.range (ProjectiveLine.infinity (Spec (.of k₀))).base =
+      (Set.range (ProjectiveLine.affineChart (Spec (.of k₀))).base)ᶜ := by
+    simpa using ProjectiveLine.range_infinity (Spec (.of k₀))
+  rw [h]
+  exact isCompl_compl
+
+omit [Finite k₀] [Algebra k₀ k] in
+/-- The point at infinity of `ℙ¹_{k₀}`, a section, is a closed immersion. -/
+instance : IsClosedImmersion (ProjectiveLine.infinity (Spec (.of k₀))) :=
+  isClosedImmersion_of_comp_eq_id _ _ ProjectiveLine.infinity_over
+
+omit [Finite k₀] [Algebra k₀ k] in
+/-- The affine line `Spec k₀[x]` is the affine chart `𝔸(PUnit; k₀)` of `ℙ¹_{k₀}`. -/
+lemma specMvPolynomialFinOneIso_hom_comp :
+    ((specIsoOfAlgEquiv (MvPolynomial.renameEquiv k₀ (Equiv.equivPUnit.{1, u + 1} (Fin 1)).symm))
+      ≪≫ (AffineSpace.SpecIso PUnit.{u + 1} (.of k₀)).symm).hom ≫
+        ProjectiveLine.affineChart (Spec (.of k₀)) ≫
+          ProjectiveLine (Spec (.of k₀)) ↘ Spec (.of k₀) =
+      Spec.map (CommRingCat.ofHom (algebraMap k₀ (MvPolynomial (Fin 1) k₀))) := by
+  simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc, ProjectiveLine.affineChart_over,
+    AffineSpace.SpecIso_inv_over]
+  rw [← MvPolynomial.algebraMap_eq]
+  exact specIsoOfAlgEquiv_hom_comp _
+
+variable (ℓ k₀) in
+/-- **The degree one trace formula over the affine line** `𝔸¹_{k₀} = Spec k₀[x]` (blueprint
+`sk-thm-trace-formula`, second paragraph of the proof): the affine line is the complement of the
+point at infinity in `ℙ¹_{k₀}` (`modelTraceFormulaOne_of_isOpenImmersion`,
+`modelTraceFormulaOne_projectiveLine`). -/
+theorem modelTraceFormulaOne_affineLine [IsAlgClosed k] :
+    haveI : LocallyOfFiniteType
+        (Spec.map (CommRingCat.ofHom (algebraMap k₀ (MvPolynomial (Fin 1) k₀)))) :=
+      HasRingHomProperty.Spec_iff.mpr (RingHom.finiteType_algebraMap.mpr inferInstance)
+    ModelTraceFormulaOne ℓ (k := k)
+      (Spec.map (CommRingCat.ofHom (algebraMap k₀ (MvPolynomial (Fin 1) k₀)))) := by
+  have : LocallyOfFiniteType
+      (Spec.map (CommRingCat.ofHom (algebraMap k₀ (MvPolynomial (Fin 1) k₀)))) :=
+    HasRingHomProperty.Spec_iff.mpr (RingHom.finiteType_algebraMap.mpr inferInstance)
+  exact ModelTraceFormulaOne.of_iso
+    (modelTraceFormulaOne_of_isOpenImmersion ℓ _ _ _ isCompl_range_affineChart_infinity
+      (modelTraceFormulaOne_projectiveLine ℓ k₀))
+    _ specMvPolynomialFinOneIso_hom_comp
 
 end Model
 
