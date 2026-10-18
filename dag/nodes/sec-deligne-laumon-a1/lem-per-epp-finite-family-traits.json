@@ -17,9 +17,50 @@
   "def-weil-pbc-module-tensor-product",
   "def-weil-pbc-integral-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each $i\\in I$, the hypotheses of [lem-per-epp-single-trait-base-change] hold for $T=T_i$: $W_0$ is the given complete mixed-characteristic discrete valuation ring with perfect residue field, the map $W_0\\hookrightarrow T_i$ is injective and local, $T_i$ is excellent, and the perfect-core algebraicity assumption is exactly the displayed hypothesis on $\\kappa_i$. Clause (1) of that theorem gives a finite extension $W_i'$ of $W_0$ (a complete discrete valuation ring, finite over $W_0$ through an injective local map) which is good for $T_i$: every field factor $E$ of $F_i\\otimes_{K_0}\\operatorname{Frac}(W_i')$ has normalized image of $T_i\\otimes_{W_0}W_i'$ with reduced fibre modulo a uniformizer of $W_i'$.",
+   "uses": [
+    "lem-per-epp-single-trait-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IV Theorem 3.1.2 and Remark 3.1.3"
+   }
+  },
+  {
+   "text": "Because $I$ is finite, [lem-per-epp-common-finite-trait-extension] supplies one complete discrete valuation ring $W$ finite over $W_0$ and local maps $W_i'\\hookrightarrow W$ for all $i$. Its residue field is a finite extension of the perfect field $k_0$, hence perfect. Choose a uniformizer $\\pi$ of $W$ and put $K=\\operatorname{Frac}(W)$.",
+   "uses": [
+    "lem-per-epp-common-finite-trait-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IV §4.2.3, finite family and finite common base change"
+   }
+  },
+  {
+   "text": "If $I=\\varnothing$, take $W=W_0$; it is finite over itself through the identity, complete, mixed characteristic with perfect residue field, and the conclusion is vacuous. Otherwise let $W$ be as in Step 2. It is a finite extension of $W_0$ in the sense of [lem-per-epp-single-trait-base-change], and Step 2 gives a local $W_0$-algebra map $W_i'\\to W$ for each $i$. Since $W_i'$ is good for $T_i$, clause (3) of that theorem shows that $W$ is good for $T_i$. Unwinding the definition with $W'=W$, $K'=K$ and the uniformizer $\\pi$: for every field factor $E$ of $F_i\\otimes_{K_0}K$, the integral closure $B_{i,E}$ in $E$ of the image of $T_i\\otimes_{W_0}W$ satisfies that $B_{i,E}/\\pi B_{i,E}$ is reduced. This holds for every $i$ and every $E$, proving the assertion.",
+   "uses": [
+    "lem-per-epp-single-trait-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IV §4.2.3, stability under further finite base change"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-epp-single-trait-base-change",
+  "lem-per-epp-common-finite-trait-extension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose IV 3.1.2–3.1.3 and IV 4.2.3"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,7 +99,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-mixed-reduced-special-fibre-cover",
@@ -70,7 +111,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Current split of the blueprint ancestor lem-per-artin-gabber-affine-curve, Step 1: the dimension-normalized Verdier duality input, through lem-per-qbar-arbitrary-field-duality and its finite-coefficient local-duality construction; this item's partial algebraization is used in Step 4 of lem-per-gabber-local-duality-general. Supporting input: Cohen–Gabber presentations with an etale open meeting the special fibre; the finite presentation input itself: ILO IV 2.1.4–2.1.12 and IV 4.2.3–4.2.5. Supporting input: Epp cover with reduced equidimensional special fibre; supporting Simultaneous Epp base change for finitely many traits in ILO IV 4.2.3.",
+   "place": "Current split of the blueprint ancestor lem-per-artin-gabber-affine-curve, Step 1: the dimension-normalized Verdier duality input; supporting Epp cover input in Step 4 of lem-per-gabber-local-duality-general, specifically simultaneous Epp base change for finitely many traits (ILO IV 4.2.3).",
    "via": [
     "lem-per-mixed-reduced-special-fibre-cover",
     "lem-per-cohen-gabber-finite-presentations",
@@ -83,5 +124,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-epp-finite-family-traits",
+  "worker": "stage1",
+  "summary": "Split the simultaneous Epp assertion into the one-trait Epp base-change theorem and the finite common-extension algebra, then proved the item by applying Epp to each trait, taking one common finite extension, and using stability under further finite base change. Checked the ILO source, all cited node statements, edge cases including the empty family, and Mathlib searches.",
+  "blueprint": "Realizes the supporting simultaneous Epp base-change sentence in the current split of lem-per-artin-gabber-affine-curve, Step 1, and the Epp input used in Step 4 of lem-per-gabber-local-duality-general.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q128-c4ecc0c57",
+  "group": "Q128",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-c4ecc0c57 (reviewer sub-agent of L); spot-checked: Read ILO IV Thm 3.1.2 (Epp), Rem 3.1.3 (mixed-characteristic reducedness; only S needs to be complete) and the §4.2.3 sentence 'De tels idéaux p étant en nombre fini … stable par changement de base fini'. The item statement matches the finite-family use in §4.2.3: injective local = local dominant, T_i excellent (automatic for a DVR with characteristic-0 fraction field), the empty family allowed, and the conclusion independent of the uniformizer. The citer lem-per-mixed-reduced-special-fibre-cover (steps 3 and 7) uses it consistently. The split mirrors the source: the one-trait Epp theorem (the theorem ILO cites), then a common finite extension, then stability. It is not a relabelling. Both new nodes are true. Stability, checked by hand: each localization of B_E is a DVR with uniformizer π', and its residue field is separable over the perfect field k'. So (D⊗W'')/π'' = κ_D⊗_{k'}k'' is reduced and B'⊗W'' is already the normalization of T⊗W''. Common extension: take W = integral closure of W_0 in a compositum; it is finite (Nagata) and a complete DVR (unique extension of the valuation), each W_i is the integral closure of W_0 in its fraction field so W_i ⊂ W, and the residue field is finite and perfect. Duplicate search: grep of the DAG for Epp, elimination of ramification, reduced special fibre and compositum found only different facts (perfect-core nodes, trf valuation reducedness, sbc tame nodes, lem-weil-common-extension-fields); the blueprint has no Epp node. No SGA, no off-unit citations. One fault, repaired (B2/E6): the single-trait node stated stability as 'the corresponding normalized integral closures after base change to W''', which is vague and did not require a W_0-compatible local map W'→W''; it also said 'Let p>0' and left terms undefined. Rewrote it with 'finite extension', 'field factor', B_E and 'good for T' defined inline, as clauses (1) existence, (2) T⊗W' reduced, (3) stability along local W_0-maps, and added def-weil-finitely-generated-module to stmt_deps. Reworded item steps 1 and 3 to cite clauses (1) and (3); the item statement, uses and proof_deps are unchanged.; 2 file(s) fixed by the reviewer"
  }
 }
