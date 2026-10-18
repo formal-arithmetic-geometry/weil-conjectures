@@ -2,13 +2,14 @@
  "id": "lem-a1-normal-proetale-monodromy",
  "kind": "statement",
  "title": "Pro-etale lisse monodromy on a connected normal scheme",
- "statement": "Let $X$ be a nonempty connected Noetherian separated scheme [def-pc-scheme, pqf-def-locnoeth, def-weil-scheme-morphism-properties], where Noetherian means locally Noetherian and quasi-compact. Assume that every local ring of $X$ is an integral domain integrally closed in its fraction field [def-weil-pbc-normal-ring]. Fix a geometric point $\\bar x$ [def-weil-geometric-point] and let $\\Pi=\\pi_1^{\\mathrm{et}}(X,\\bar x)$ be the profinite etale fundamental group [def-galois-fibre-functor]. Let $\\ell$ be a prime invertible on $X$, let $E/\\mathbf Q_\\ell$ be finite with valuation ring $A$ and uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension], and on $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site] put $B_X=\\varprojlim_{n\\geq1}(A/\\varpi^n)_X$, the limit of the constant pro-etale sheaves of rings [def-weil-completed-integral-coefficients], and $E_X=B_X[1/\\varpi]$. A lisse module means a sheaf module [def-weil-sheaf-of-modules-category] pro-etale locally free of finite rank, allowing rank zero.\n\nThere is an $E$-linear equivalence $\\Phi_X$ from lisse $E_X$-modules to finite-dimensional $E$-vector spaces with jointly continuous $\\Pi$-action and equivariant linear maps, where the vector spaces have the product $\\ell$-adic topology in any basis. This equivalence is normalized on finite integral monodromy as follows. If $V$ is such a representation and $\\Lambda\\subset V$ is any $\\Pi$-stable finite free $A$-submodule with $E\\otimes_A\\Lambda\\cong V$ and continuous restricted action for its $\\varpi$-adic topology, let $F_n$ be the finite locally constant etale sheaf corresponding to $\\Lambda/\\varpi^n\\Lambda$ under [cor-galois-lisse-representations](1), with transitions corresponding to quotient maps. For the comparison inverse image $\\nu_X^*$ [def-weil-pbc-site-comparison-morphism], set $N_\\Lambda=\\varprojlim_n\\nu_X^*F_n$, a lisse $B_X$-module by [lem-per-lisse-completed-system-comparison]. Then $\\Phi_X(N_\\Lambda[1/\\varpi])\\cong V$ naturally in lattice-preserving equivariant maps. In particular, if $\\Phi_X(L)\\cong V$, full faithfulness gives $N_\\Lambda[1/\\varpi]\\cong L$.",
+ "statement": "Let $X$ be a nonempty connected Noetherian separated scheme [def-pc-scheme, def-weil-connected-scheme, pqf-def-locnoeth, def-weil-scheme-morphism-properties], where Noetherian means locally Noetherian and quasi-compact. Assume that every local ring of $X$ is an integral domain integrally closed in its fraction field [def-weil-pbc-normal-ring]. Fix a geometric point $\\bar x$ [def-weil-geometric-point] and let $\\Pi=\\pi_1^{\\mathrm{et}}(X,\\bar x)$ be the profinite etale fundamental group [def-galois-fibre-functor]. Let $\\ell$ be a prime invertible on $X$, let $E/\\mathbf Q_\\ell$ be finite with valuation ring $A$ and uniformizer $\\varpi$ [def-weil-l-adic-coefficient-extension], and on $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site] put $B_X=\\varprojlim_{n\\geq1}(A/\\varpi^n)_X$, the limit of the constant pro-etale sheaves of rings [def-weil-completed-integral-coefficients], and $E_X=B_X[1/\\varpi]$. A lisse module means a sheaf module [def-weil-sheaf-of-modules-category] pro-etale locally free of finite rank, allowing rank zero.\n\nThere is an $E$-linear equivalence $\\Phi_X$ from lisse $E_X$-modules to finite-dimensional $E$-vector spaces with jointly continuous $\\Pi$-action and equivariant linear maps, where the vector spaces have the product $\\ell$-adic topology in any basis. This equivalence is normalized on finite integral monodromy as follows. If $V$ is such a representation and $\\Lambda\\subset V$ is any $\\Pi$-stable finite free $A$-submodule with $E\\otimes_A\\Lambda\\cong V$ and continuous restricted action for its $\\varpi$-adic topology, let $F_n$ be the finite locally constant etale sheaf corresponding to $\\Lambda/\\varpi^n\\Lambda$ under [cor-galois-lisse-representations](1), with transitions corresponding to quotient maps. For the comparison inverse image $\\nu_X^*$ [def-weil-pbc-site-comparison-morphism], set $N_\\Lambda=\\varprojlim_n\\nu_X^*F_n$, a lisse $B_X$-module by [lem-per-lisse-completed-system-comparison]. Then $\\Phi_X(N_\\Lambda[1/\\varpi])\\cong V$ naturally in lattice-preserving equivariant maps. In particular, if $\\Phi_X(L)\\cong V$, full faithfulness gives $N_\\Lambda[1/\\varpi]\\cong L$.",
  "source": {
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Section 7.4 standing hypotheses; Lemmas 7.4.7 and 7.4.10, pp. 70–71; integral normalization from Proposition 6.8.4(1),(4), pp. 59–60 and the first sentence of the proof of Lemma 7.4.7. Normality supplies geometric unibranchness by Stacks properties.tex Tag 0BQ3, lemma-normal-geometrically-unibranch."
  },
  "stmt_deps": [
   "def-pc-scheme",
+  "def-weil-connected-scheme",
   "pqf-def-locnoeth",
   "def-weil-scheme-morphism-properties",
   "def-weil-pbc-normal-ring",
@@ -22,9 +23,146 @@
   "def-weil-pbc-site-comparison-morphism",
   "lem-per-lisse-completed-system-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First compare the coefficient conventions, rather than treating a discrete constant $A$-sheaf as completed coefficients. By [lem-sfb-integral-lisse-reduction-equivalence], the continuous-function coefficient sheaf $A_X$ is canonically $\\varprojlim_n(A/\\varpi^n)_X=B_X$, and $A_X[1/\\ell]=E_X$ in the continuous-function convention. Since $\\ell$ and $\\varpi$ are nonzero elements of the maximal ideal of the discrete valuation ring $A$, [lem-weil-l-adic-extension-integers-dvr](5) writes $\\ell=u\\varpi^e$ with $u$ a unit and $e>0$. Thus localization at either element gives the same sheaf, and the present $B_X[1/\\varpi]$ agrees with that $E_X$. All subsequent coefficient changes use these canonical isomorphisms.",
+   "uses": [
+    "lem-sfb-integral-lisse-reduction-equivalence",
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.2 and Proposition 6.8.4(1), coefficient identifications"
+   }
+  },
+  {
+   "text": "The scheme is quasi-compact by hypothesis. By [lem-weil-pbc-noetherian-scheme-closed-subsets-minimal], its closed subsets satisfy the descending-chain condition. Consequently [lem-sfb-noetherian-space-compact-subsets] makes every subset of $|X|$ quasi-compact; in particular intersections of affine opens are quasi-compact, which verifies quasi-separatedness. Apply the first assertion of [lem-sfb-etale-local-monodromy-realization] to this connected qcqs, topologically Noetherian $X$ and the specified geometric point. It gives an $E$-linear fully faithful functor $J_X$ from the required continuous representations into lisse $E_X$-modules. Its integral normalization uses precisely the finite-level equivalence in the question. It remains to prove essential surjectivity; the etale-local realization clause of that node alone would not suffice.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "lem-sfb-noetherian-space-compact-subsets",
+    "lem-sfb-etale-local-monodromy-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1),(4), and the integral case of Lemma 7.4.7"
+   }
+  },
+  {
+   "text": "Fix a lisse $E_X$-module $L$. Apply [lem-weil-pbc-lattice-sheaf-locally-constant] using step 1's coefficient identifications. Its sheaf $\\mathscr L_L$ parametrizes integral lisse lattices together with their specified rational identification with $L$. On a pro-etale trivialization $L=E^r$, this sheaf is the constant sheaf with set $\\operatorname{GL}_r(E)/\\operatorname{GL}_r(A)$. This set contains the identity coset, including for $r=0$. Thus $\\mathscr L_L$ is locally constant and has sections on a pro-etale covering. No global basis of $L$ is chosen.",
+   "uses": [
+    "lem-weil-pbc-lattice-sheaf-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(6), lattice-class sheaf and its coset trivialization"
+   }
+  },
+  {
+   "text": "Apply [lem-a1-normal-locally-constant-finite-section] to $F=\\mathscr L_L$. Its normal-local-ring, connectedness, nonemptiness and Noetherian hypotheses are exactly assumptions on $X$; local constancy and local nonemptiness were proved in step 3. We obtain a finite etale surjection $p:Y\\to X$ and a section of $\\mathscr L_L(Y)$. By the definition of that sheaf's sections, this section is an isomorphism class with a representative $(M,\\alpha)$, where $M$ is integral lisse on $Y$ and $\\alpha:M[1/\\varpi]\\simeq p^{-1}L$.",
+   "uses": [
+    "lem-a1-normal-locally-constant-finite-section"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 7.3.9 and proof of Lemma 7.4.10, applied to the lattice-class sheaf"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-lisse-lattice-finite-etale-descent] for this $p$ and $(M,\\alpha)$. The space $|X|$ is Noetherian by step 2, $p$ is finite etale and surjective by step 4, and $L,M$ are locally finite free with the specified rational identification. That theorem supplies an integral lisse $B_X$-module $M_0$ and $M_0[1/\\varpi]\\simeq L$. It does not require the specified lattice $M$ to carry descent data, and we do not assert that $M_0$ pulls back to $M$.",
+   "uses": [
+    "lem-weil-pbc-lisse-lattice-finite-etale-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.8.13, first paragraph, finite-etale lattice descent"
+   }
+  },
+  {
+   "text": "By [lem-per-lisse-completed-system-comparison], $M_0$ corresponds to a normalized tower $(F_n)$ of finite locally free $A/\\varpi^n$-module sheaves on $X_{\\mathrm{et}}$, with $M_0\\simeq\\varprojlim_n\\nu_X^*F_n$. Apply [cor-galois-lisse-representations](1) to each finite ring $A/\\varpi^n$ (finiteness is part of [def-weil-l-adic-coefficient-extension]). Let $\\Lambda_n=(F_n)_{\\bar x}$ with its finite discrete continuous $\\Pi$-action. The finite-level equivalence is compatible with coefficient extension, so normalization gives $\\Lambda_{n+1}/\\varpi^n\\Lambda_{n+1}\\simeq\\Lambda_n$, equivariantly. Each $\\Lambda_n$ is finite free, since $F_n$ is finite locally free. By [lem-pod-adic-limit-finite-modules](1), $\\Lambda=\\varprojlim_n\\Lambda_n$ is finitely generated, $\\Lambda/\\varpi^n\\Lambda\\simeq\\Lambda_n$, and its inverse-limit topology is its adic topology. The coordinatewise $\\Pi$-action is jointly continuous: each coordinate of $\\Pi\\times\\Lambda\\to\\Lambda$ factors through the continuous action on the finite discrete $\\Lambda_n$.",
+   "uses": [
+    "lem-per-lisse-completed-system-comparison",
+    "cor-galois-lisse-representations",
+    "def-weil-l-adic-coefficient-extension",
+    "lem-pod-adic-limit-finite-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1) and the integral case at the start of the proof of Lemma 7.4.7"
+   }
+  },
+  {
+   "text": "The module $\\Lambda$ is torsion-free. Indeed, if $\\varpi\\lambda=0$, its image in the free $A/\\varpi^n$-module $\\Lambda_n$ lies in $\\varpi^{n-1}\\Lambda_n$. For every fixed $k$, reducing from any $n>k$ makes that image zero in $\\Lambda_k$; hence all coordinates of $\\lambda$ vanish. Repeating this rules out $\\varpi$-power torsion, and every nonzero element of $A$ is a unit times a power of $\\varpi$ by [lem-weil-l-adic-extension-integers-dvr]. This node also says $A$ is a DVR. Apply [lem-sc-dvr-fg-torsionfree-free] to conclude that $\\Lambda$ is finite free. Put $V=E\\otimes_A\\Lambda$. A basis of $\\Lambda$ identifies $V$ with $E^r$ and $\\Lambda$ with $A^r$; the sets $\\varpi^{-k}\\Lambda$ are open and exhaust $V$. On each such set the action is the rescaled continuous action on $\\Lambda$, so the action $\\Pi\\times V\\to V$ is jointly continuous. The submodule $\\Lambda\\subset V$ is therefore an invariant finite free lattice of the kind in the question.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-sc-dvr-fg-torsionfree-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Integral representation in the proof of Lemma 7.4.7, with the torsion-free inverse-limit check written out"
+   }
+  },
+  {
+   "text": "The finite-level equivalences identify $F_n$ with the sheaf corresponding to $\\Lambda/\\varpi^n\\Lambda$, with the quotient transition maps. Thus the normalization of [lem-sfb-etale-local-monodromy-realization] gives $J_X(V)\\simeq (\\varprojlim_n\\nu_X^*F_n)[1/\\ell]\\simeq M_0[1/\\varpi]\\simeq L$. The middle isomorphism is the inverse of reduction in [lem-per-lisse-completed-system-comparison], and step 1 identifies the two localizations. This proves essential surjectivity for the same fully faithful $J_X$, rather than constructing a separate functor for each lattice.",
+   "uses": [
+    "cor-galois-lisse-representations",
+    "lem-sfb-etale-local-monodromy-realization",
+    "lem-per-lisse-completed-system-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4(1),(4), integral case of Lemma 7.4.7 and normality input of Lemma 7.4.10"
+   }
+  },
+  {
+   "text": "Construct an inverse $\\Phi_X$ explicitly: for each $L$ choose $V_L$ and $a_L:J_X(V_L)\\xrightarrow{\\sim}L$ as above, and define $\\Phi_X(f)$ to be the unique map whose image under $J_X$ is $a_{L'}^{-1}fa_L$. Full faithfulness gives uniqueness, preserves identities and composition, and makes this functor $E$-linear. The $a_L$ give one natural inverse isomorphism; full faithfulness gives the other. Hence $\\Phi_X$ is the required $E$-linear equivalence.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 7.4.7, assembling full faithfulness and essential surjectivity"
+   }
+  },
+  {
+   "text": "Finally let $(V,\\Lambda)$ be any representation and stable lattice as in the question. The normalization of [lem-sfb-etale-local-monodromy-realization] is $J_X(V)\\simeq N_\\Lambda[1/\\ell]$, naturally for lattice-preserving equivariant maps, and [lem-per-lisse-completed-system-comparison] ensures $N_\\Lambda$ is integral lisse. Step 1 replaces $1/\\ell$ by $1/\\varpi$. Applying the inverse equivalence and its unit gives $\\Phi_X(N_\\Lambda[1/\\varpi])\\simeq V$ with exactly that naturality. If $\\Phi_X(L)\\simeq V$, full faithfulness lifts this isomorphism and its inverse to mutually inverse sheaf morphisms $N_\\Lambda[1/\\varpi]\\simeq L$. All constructions include the zero module and the unique rank-zero lattice.",
+   "uses": [
+    "lem-sfb-etale-local-monodromy-realization",
+    "lem-per-lisse-completed-system-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "First sentence of proof of Lemma 7.4.7 and Proposition 6.8.4(1),(4), integral normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-integral-lisse-reduction-equivalence",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-sfb-etale-local-monodromy-realization",
+  "lem-weil-pbc-lattice-sheaf-locally-constant",
+  "lem-a1-normal-locally-constant-finite-section",
+  "lem-weil-pbc-lisse-lattice-finite-etale-descent",
+  "lem-per-lisse-completed-system-comparison",
+  "cor-galois-lisse-representations",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-pod-adic-limit-finite-modules",
+  "lem-sc-dvr-fg-torsionfree-free"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.4(1),(4),(6), finite-cover descent in Lemma 6.8.13, integral case of Lemma 7.4.7, and geometric-cover argument in Lemma 7.4.10"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -74,10 +212,38 @@
    "results": "ProfiniteGrp.toLimit_fun_continuous; ProfiniteGrp.isIso_toLimit; ProfiniteGrp; InfiniteGalois.profiniteGalGrpIsoLimit; Profinite.isoAsLimitConeLift; ProfiniteGrp.toLimit; ProfiniteGrp.continuousMulEquivLimittoFiniteQuotientFunctor; Profinite.lim",
    "date": "2026-10-17",
    "verdict": "no match: inspected hits are general sheaf constructions, locally constant functions, etale morphisms or profinite group limits; none identifies pro-etale lisse adic sheaves with etale fundamental-group representations"
+  },
+  {
+   "tool": "grep",
+   "query": "lisse|pro.?etale.*fundamental|fundamental.*pro.?etale",
+   "results": "Mathlib/Data/Rel/Separated.lean, Mathlib/Topology/MetricSpace/MetricSeparated.lean, Mathlib/Topology/MetricSpace/Cover.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern abstract finite Galois categories, profinite spaces, constant sheaves or condensed modules, not locally constant pro-etale sheaves on normal schemes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivalence between lisse sheaves and continuous representations of the etale fundamental group on a normal scheme, normalized by inverse limits of finite integral sheaves",
+   "results": "CategoryTheory.PreGaloisCategory.instIsEquivalenceContActionFintypeCatAutFunctorFunctorToContAction, ProfiniteGrp.isIso_toLimit, ProfiniteGrp.continuousMulEquivLimittoFiniteQuotientFunctor, AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv, ProfiniteGrp.isoLimittoFiniteQuotientFunctor, CategoryTheory.Functor.IsDenseSubsite.sheafEquiv, InfiniteGalois.profiniteGalGrpIsoLimit, CategoryTheory.Equivalence.sheafCongr",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern abstract finite Galois categories, profinite spaces, constant sheaves or condensed modules, not locally constant pro-etale sheaves on normal schemes"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Representation\", \"Sheaf\"",
+   "results": "No hits",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern abstract finite Galois categories, profinite spaces, constant sheaves or condensed modules, not locally constant pro-etale sheaves on normal schemes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proetale lisse E-adic sheaves on a connected normal Noetherian scheme are finite dimensional continuous representations of the profinite etale fundamental group",
+   "results": "Condensed.profiniteFree, Condensed.profiniteSolid, LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf, Condensed.finFree, CondensedMod.ofSheafProfinite, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondMod.ofSheafLightProfinite, LightCondMod.LocallyConstant.functorToPresheaves",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern abstract finite Galois categories, profinite spaces, constant sheaves or condensed modules, not locally constant pro-etale sheaves on normal schemes"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-smooth-lisse-integral-lattice",
@@ -97,5 +263,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-normal-proetale-monodromy",
+  "worker": "stage1",
+  "summary": "Construct essential surjectivity of the existing normalized fully faithful monodromy functor using the lattice-class sheaf, finite-cover sections over a normal base and finite-etale lattice descent. One new set-valued geometric lemma; no rational-monodromy restatement. All uses read against statements; finite-level inverse-limit freeness and joint continuity written explicitly.",
+  "blueprint": "Master proof of lem-a1-affine-hc0, first sentence: 'A class in H_c^0 is a global section of F whose support is proper over the base field'; the coefficient realization uses global integral lattices. Here the finite-cover section supplies the geometric normality input in the monodromy comparison used to construct those lattices.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-integral-lisse-reduction-equivalence",
+    "why": "Identifies completed and continuous-function coefficients on the same pro-etale site; no coefficient identification is supplied by this unit."
+   },
+   {
+    "node": "lem-sfb-etale-local-monodromy-realization",
+    "why": "Uses the existing normalized fully faithful representation functor, not its local conclusion, to isolate the genuinely new normal-base essential-surjectivity argument."
+   },
+   {
+    "node": "lem-weil-pbc-lattice-sheaf-locally-constant",
+    "why": "Uses the lattice-choice sheaf and its coset trivializations, valid over any scheme; the curve unit has no lattice-class theorem."
+   },
+   {
+    "node": "lem-weil-pbc-lisse-lattice-finite-etale-descent",
+    "why": "Descends existence of an integral lattice across the finite etale cover, without descent data on that lattice."
+   },
+   {
+    "node": "lem-per-lisse-completed-system-comparison",
+    "why": "Uses the existing normalized integral reduction/inverse-limit equivalence and its rational realization."
+   },
+   {
+    "node": "lem-pod-adic-limit-finite-modules",
+    "why": "Reconstructs the finite generated adic fibre from finite normalized reductions, with topology."
+   },
+   {
+    "node": "lem-sc-dvr-fg-torsionfree-free",
+    "why": "Converts the reconstructed finitely generated torsion-free integral fibre into a finite free lattice."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Supplies the DVR and unit-times-uniformizer factorization used for localization and torsion-freeness."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+    "why": "Checks topological Noetherianity from the precise ring-theoretic Noetherian hypothesis."
+   },
+   {
+    "node": "lem-sfb-noetherian-space-compact-subsets",
+    "why": "Checks quasi-separatedness via compactness of affine-open intersections."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-integral-lisse-reduction-equivalence",
+  "lem-sfb-etale-local-monodromy-realization",
+  "lem-weil-pbc-lattice-sheaf-locally-constant",
+  "lem-weil-pbc-lisse-lattice-finite-etale-descent",
+  "lem-per-lisse-completed-system-comparison",
+  "lem-pod-adic-limit-finite-modules",
+  "lem-sc-dvr-fg-torsionfree-free",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sfb-noetherian-space-compact-subsets"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NN-9789cfc89",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-9789cfc89 (reviewer sub-agent of L); spot-checked: Read in full: the item, its ten steps, the new child, every cited statement, unit sk-p-real-rankin, the chapter, and the sources BS 1309.1198 Lemma 7.3.9 (p.67), §7.4 Lemmas 7.4.3-7.4.10 and Example 7.4.9 (pp.69-71), and Stacks 0BQ3 properties.tex:1935. The item is true: it is BS 7.4.7 together with 7.4.10, since normal implies geometrically unibranch. Its statement is unchanged. Steps 1-10 are correct. Coefficients are A_X = lim A_{n,X} with ell = u*varpi^e. The first clause of the etale-local monodromy realization applies to a connected qcqs scheme with Noetherian space. The lattice sheaf is locally constant with the identity coset, rank 0 included. The child gives a section on a finite etale surjective cover, and finite-etale descent then gives a global lattice M_0. The tower from lem-per and cor-galois(1) at each finite level gives Lambda_n; the adic-limit lemma gives Lambda finitely generated, and the pi-torsion argument plus the DVR lemma make it finite free, with joint continuity on the open sets varpi^-k Lambda. J_X normalization gives essential surjectivity, followed by the elementary quasi-inverse and the normalization. The new child lem-a1-normal-locally-constant-finite-section is true and follows from 7.3.9 (Loc=Cov) and the proof of 7.4.10. I tested it on an infinite constant sheaf, a singleton sheaf, a point, the empty sheaf (excluded by its hypothesis) and the nodal curve of 7.4.9 (normality is needed). It is statement-only, has no duplicate in the DAG, and does not restate the item. There are no cycles, and I accept the ten declared tool_uses. Batch-5 check: lem-sfb-integral-lisse-reduction-equivalence, lem-sfb-etale-local-monodromy-realization and lem-pod-adic-limit-finite-modules are coefficient and commutative-algebra infrastructure. Neither assumption gives them, and none is a step of the Poincare-duality or trace-formula argument. cor-galois-lisse-representations and lem-sfb-integral-lisse-reduction-equivalence are already cited by the parent and by the item's own pre-existing statement, and cor-galois by lem-a1-affine-hc0, so all three are accepted. Fix: added the missing citation def-weil-connected-scheme to the item's statement bracket and stmt_deps (B3).; 1 file(s) fixed by the reviewer"
  }
 }
