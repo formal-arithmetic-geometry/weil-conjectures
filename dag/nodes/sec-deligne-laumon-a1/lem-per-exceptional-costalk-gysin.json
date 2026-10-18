@@ -21,9 +21,151 @@
   "lem-trf-ambient-diagonal-purity-base-change",
   "lem-per-regular-pullback-pinnings"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $t$, put $s=f(t)$, $k=\\kappa(s)$, $L=\\kappa(t)$, and $N=C_sM$. Localize $S$ at $s$ and write $F=T\\times_S\\operatorname{Spec}k$, $\\pi:F\\to\\operatorname{Spec}k$. The localization, fibre, and supported-composition comparisons of [lem-per-prime-power-supported-calculus] give\n$$C_t(f^!M)\\cong C_t(\\pi^!N)\\cong a_t^!N.$$\nThe second equality is computed by extraordinary restriction to the reduced closure of $t$ in $F$ and then restriction to its generic point. These are natural maps for every bounded-below $M$; no pinning or dualizing property has been used.",
+   "uses": [
+    "lem-per-prime-power-supported-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 4.4.1, first two sentences and fibrewise reduction"
+   }
+  },
+  {
+   "text": "Choose a nonempty regular affine open $U$ of the reduced closure of $t$ in $F$. To justify the choice, $k$ is excellent by [lem-exc-fields-excellent], so affine coordinate rings of this closure are excellent by [lem-exc-finite-type-localization-excellent]. Their regular loci are open by the J-2 clause of [def-exc-excellent-ring] and contain their generic point, whose local ring is a field and is regular by [lem-weil-pbc-field-regular-ring]. Write $u:U\\to\\operatorname{Spec}k$. The regular-scheme Gysin theorem [lem-per-prime-power-regular-gysin] gives a factorization-independent isomorphism $\\operatorname{Cl}_u:\\Lambda_U(r_t)[2r_t]\\to u^!\\Lambda_k$; its virtual dimension is $r_t$ by that theorem's field-base clause. In particular this argument does not replace regularity by smoothness over a possibly imperfect field.",
+   "uses": [
+    "lem-exc-fields-excellent",
+    "lem-exc-finite-type-localization-excellent",
+    "def-exc-excellent-ring",
+    "lem-weil-pbc-field-regular-ring",
+    "lem-per-prime-power-regular-gysin"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 4.4.1, regular-open choice; XVI, Corollary 3.1.2"
+   }
+  },
+  {
+   "text": "Extend the constant class to the actual input $N$ by the specified tensor map:\n$$\\operatorname{Cl}_u(N):u^*N(r_t)[2r_t]\\xrightarrow{\\operatorname{Cl}_u\\otimes1}u^!\\Lambda_k\\otimes^Lu^*N\\xrightarrow{T_u(\\Lambda,N)}u^!N.$$\nThe second arrow is invertible by [lem-per-field-exceptional-tensor], even for nonconstructible $N$ of infinite Tor amplitude. The first is invertible by [lem-per-prime-power-regular-gysin]. Restrict to $\\operatorname{Spec}L$, and then use the inverse of the supported comparison from Step 1. This constructs $\\beta_{f,t,M}$. It has the claimed direction, twist and shift, and is natural in $M$. Its defining map on $U$ is exactly regular-immersion Kummer class followed by the diagonal/deformation smooth comparison, with the same tensor transpose; it is therefore the required normalized map.",
+   "uses": [
+    "lem-per-field-exceptional-tensor",
+    "lem-per-prime-power-regular-gysin",
+    "lem-per-prime-power-supported-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 4.4.1, displayed Gysin comparison, with its arbitrary-input tensor extension"
+   }
+  },
+  {
+   "text": "Two regular opens of the reduced closure have a common nonempty open containing its generic point. The classes on this intersection agree by the open-restriction clause of [lem-per-prime-power-regular-gysin], including independence of the regular closed/smooth factorization and of the defining sequence. Their coefficient extensions agree by restriction and naturality of $T$ in [lem-per-field-exceptional-tensor]. The supported comparisons agree by [lem-per-prime-power-supported-calculus]. Thus the maps at $t$ agree. Source and target open restrictions give the same construction because they preserve the residue fields, restrict the chosen regular opens, and commute with each of these three specified comparisons.",
+   "uses": [
+    "lem-per-prime-power-regular-gysin",
+    "lem-per-field-exceptional-tensor",
+    "lem-per-prime-power-supported-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 4.4.1, independence of the regular open; XVI, Theorem 2.5.5"
+   }
+  },
+  {
+   "text": "For $T\\xrightarrow fS\\xrightarrow gB$, fix $t$, $s=f(t)$, $b=g(s)$ and use the field tower $\\kappa(b)\\subset\\kappa(s)\\subset\\kappa(t)$. By the compositional supported comparisons of [lem-per-prime-power-supported-calculus], both proposed maps have target $a_t^!a_s^!C_bM$ with the right-adjoint transitivity normalization. By [lem-kun-transcendence-degree-tower], their source twists and shifts add to $(r_{gf,t})[2r_{gf,t}]$. On the essentially finite-type regular field maps, [lem-per-prime-power-regular-gysin] identifies the direct constant class with $a_t^!(\\operatorname{Cl}_{a_s})\\circ\\operatorname{Cl}_{a_t}(r_{g,s})[2r_{g,s}]$. Expand each coefficient class as $T(\\Lambda,-)\\circ(\\operatorname{Cl}\\otimes1)$ as in Step 3. Naturality of $T$ moves $\\operatorname{Cl}_{a_s}$ across the inner $T$, and the identity $T_{kh}=h^!T_k\\circ T_h$ of [lem-per-field-exceptional-tensor] replaces the resulting two $T$ maps by $T_{a_sa_t}$. The result is exactly the direct coefficient class. Hence the two $\\beta$ maps compose to $\\beta_{gf,t,M}$.",
+   "uses": [
+    "lem-per-prime-power-supported-calculus",
+    "lem-kun-transcendence-degree-tower",
+    "lem-per-prime-power-regular-gysin",
+    "lem-per-field-exceptional-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, paragraph following Lemma 4.4.1; XVI, Theorem 2.5.12"
+   }
+  },
+  {
+   "text": "If $f$ is closed, the residue extension is the identity and $r_t=0$. After the fibre reduction, the reduced closure of $t$ is $\\operatorname{Spec}\\kappa(s)$ itself. Its structure map, its constant Gysin class, and its coefficient tensor map are identities. Consequently the construction of Step 3 is precisely the inverse of $C_t(f^!M)\\cong C_{f(t)}M$ from [lem-per-prime-power-supported-calculus], as required. For a finite purely inseparable field extension in characteristic $p\\ne\\ell$, [lem-per-prime-power-regular-gysin] instead gives multiplication by $[L:k]$; by tensoring, $\\beta$ acts by that same unit on arbitrary $N$. This records the scalar rather than identifying the Gysin map with the identity of the equivalent etale topoi.",
+   "uses": [
+    "lem-per-prime-power-supported-calculus",
+    "lem-per-prime-power-regular-gysin",
+    "lem-per-field-exceptional-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 2.4.3.1 and Proposition 2.4.3.3 proof; Lemma 4.4.1, following paragraph"
+   }
+  },
+  {
+   "text": "For the smooth clause put $F=T_s$, $k=\\kappa(s)$ and $c=\\dim\\mathcal O_{F,t}$. By [lem-sbc-smooth-relative-dimension-permanence], $F\\to\\operatorname{Spec}k$ is smooth of pure dimension $d$. Affine-locally its coordinate ring is a smooth $k$-algebra by [def-sbc-smooth-morphisms]; [lem-weil-pbc-smooth-over-field-regular-local] makes its local rings regular. In $\\operatorname{Spec}\\mathcal O_{F,t}$ the closed point immersion $i:\\operatorname{Spec}\\kappa(t)\\hookrightarrow\\operatorname{Spec}\\mathcal O_{F,t}$ is regular of codimension $c$: a regular system of parameters generates the maximal ideal by [def-weil-regular-scheme], and is a regular sequence by [lem-weil-pbc-regular-local-generators-regular-sequence]. Thus the localized fibre and this immersion satisfy the regular Gysin theorem's hypotheses, without a perfectness hypothesis on $k$.",
+   "uses": [
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-smooth-over-field-regular-local",
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-regular-local-generators-regular-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 4.3.1.1, regular fibre; regular closed point in the localized fibre"
+   }
+  },
+  {
+   "text": "Suppose $p_s:N=C_sM\\xrightarrow{\\sim}\\Lambda(\\delta_S(s))[2\\delta_S(s)]$ is a given pinning. By [lem-per-prime-power-supported-calculus], regular supported base change identifies the fibre restriction of $f^*M$ with the pullback of $N$. Let\n$$\\rho_t:\\Lambda(\\delta_S(s)+d-c)[2\\delta_S(s)+2d-2c]\\longrightarrow C_t(f^*M(d)[2d])$$\nbe the map formed from $p_s^{-1}$ and the absolute-purity class of $i$ in Step 7, then twisted by $(d)[2d]$. This is the inverse pinning in the fibrewise recipe specified in [lem-per-regular-pullback-pinnings]. The smooth orientation of [lem-trf-ambient-diagonal-purity-base-change] restricts to the same orientation on $F/k$. By [lem-per-prime-power-regular-gysin], the constant class of the composite of $i$ with the localized smooth map to $k$ equals $i^!\\operatorname{Cl}_{F/k}\\circ\\operatorname{Cl}_i(d)[2d]$. Extend this identity to $N$ using naturality and the tensor composition identity of [lem-per-field-exceptional-tensor]. The supported and smooth comparisons are the compatible ones specified in [lem-per-prime-power-supported-calculus], so the resulting equality of maps is\n$$C_t(\\gamma_f(M))\\circ\\rho_t=\\beta_{f,t,M}\\circ a_t^*(p_s^{-1})(r_t)[2r_t],$$\nwith the degree identification of Step 9. Taking inverses proves equality of the actual induced pinnings. This uses only the displayed fibrewise recipe, not the potentiality conclusion of the regular-pullback theorem for an arbitrary $M$.",
+   "uses": [
+    "lem-per-prime-power-regular-gysin",
+    "lem-trf-ambient-diagonal-purity-base-change",
+    "lem-per-field-exceptional-tensor",
+    "lem-per-prime-power-supported-calculus",
+    "lem-per-regular-pullback-pinnings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 4.3.1.1, regular fibre; regular closed point in the localized fibre"
+   }
+  },
+  {
+   "text": "The preceding fibre pinning on $f^*M$ has degree $\\delta_S(s)-c$; after tensoring by $(d)[2d]$ it has degree $\\delta_S(s)+d-c$. The dimension formula [lem-kun-dimension-formula] applied to the smooth pure $d$-dimensional $k$-scheme $F$ gives $d=c+\\operatorname{trdeg}_k\\kappa(t)$. Hence the degree is $\\delta_S(s)+r_t$, with twist and cohomological shift twice the same integer. This also covers closed points ($c=d$) and generic fibre points ($c=0$).",
+   "uses": [
+    "lem-kun-dimension-formula"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 4.4.1, smooth dimension normalization; Stacks Tag 02FX"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-excellent-ring",
+  "def-sbc-smooth-morphisms",
+  "def-weil-regular-scheme",
+  "lem-exc-fields-excellent",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-kun-dimension-formula",
+  "lem-kun-transcendence-degree-tower",
+  "lem-per-field-exceptional-tensor",
+  "lem-per-prime-power-regular-gysin",
+  "lem-per-prime-power-supported-calculus",
+  "lem-per-regular-pullback-pinnings",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-trf-ambient-diagonal-purity-base-change",
+  "lem-weil-pbc-field-regular-ring",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-weil-pbc-smooth-over-field-regular-local"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XVII, Lemma 4.4.1 and following paragraph, expanded for general bounded-below inputs using the three explicit tools; smooth orientation remains the blueprint diagonal/deformation construction"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +194,24 @@
    "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/Geometry/Manifold/Bordism.lean\", \"line\": \"26\", \"text\": \"This construction can be generalised one step further, to produce an extraordinary homology theory.\"}\n  {\"file\": \"Mathlib/Geometry/Manifold/Bordism.lean\", \"line\": \"88\", \"text\": \"- prove that relative unoriented bordism groups define an extraordinary homology theory\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"line\": \"17\", \"text\": \"A sieve `S` on `X` is covering for `finestTopologySingle P` iff\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"line\": \"59\", \"text\": \"def finestTopologySingle (P : Cᵒᵖ ⥤ Type w) : GrothendieckTopology C where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"line\": \"83\", \"text\": \"  sInf (finestTopologySingle '' Ps)\"}\n",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extraordinary inverse image etale sheaves costalk Gysin Tate twist transcendence degree",
+   "results": "Search log result: 8 hits; AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.IsEtale, AlgebraicGeometry.IsEtale.instFormallyUnramified, StandardEtalePair.homEquiv_symm_apply, Algebra.etaleLocus, Algebra.etaleLocus_eq_compl_support, Algebra.isOpen_etaleLocus, Algebra.Etale.of_isLocalizationAway. ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pointwise local cohomology of exceptional inverse image and Gysin purity",
+   "results": "Search log result: 8 hits; LocallyConstant.instInv, localCohomology.ofSelfLERadical, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, ModuleCat.Tilde.stalkIso_inv, AlgebraicGeometry.StructureSheaf.isLocalizedModule_toPushforwardStalkAlgHom, CategoryTheory.Functor.isPointwiseRightKanExtensionOfIsoOfIsLocalization, AlgebraicGeometry.StructureSheaf.stalkIso_inv, CategoryTheory.Functor.HasPointwiseLeftDerivedFunctorAt.mk. ",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-potential-dualizing-finite-pullback",
@@ -77,5 +233,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-exceptional-costalk-gysin",
+  "worker": "stage1",
+  "summary": "Preserved the statement, constructed beta through the reduced fibre closure and canonical exceptional tensor map, and expanded choice independence, composition, closed-immersion and smooth-pinning comparisons. Added three statement-only prime-power tools: supported/essentially-finite-type restriction, regular-scheme Gysin classes, and field-base arbitrary-input exceptional tensor comparison. Existing F_ell tools do not cover ell^n; no compiler or Lean writing.",
+  "blueprint": "Proof, Step 3: dimension-normalized Verdier duality in the lower perverse bound; finite prime-power normalization underlying the regular generic duality model. Pointwise exceptional Gysin comparison and its compositions. Steps 1–9 implement the dimension-normalized generic-duality input, without changing the perverse-unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-fields-excellent",
+    "why": "Excellence of the arbitrary residue field ensures the chosen integral fibre closure has an open regular locus."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Excellence of finite-type fibre models and their localizations, used only for the regular-open construction."
+   },
+   {
+    "node": "lem-trf-ambient-diagonal-purity-base-change",
+    "why": "The prescribed ordinary-etale smooth orientation with arbitrary inputs and its base-change equality, required for the smooth-pinning normalization."
+   },
+   {
+    "node": "lem-kun-dimension-formula",
+    "why": "The fibre local-dimension plus residue-transcendence-degree equality supplies the pinning degree."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Smoothness and the pure relative dimension persist on the residue fibre in the pinning comparison."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-over-field-regular-local",
+    "why": "Regularity of the smooth fibre over its arbitrary, possibly imperfect residue field."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "The parameters of the localized regular fibre give a regular immersion of its closed point, so absolute purity applies."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-fields-excellent",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-trf-ambient-diagonal-purity-base-change",
+  "lem-kun-dimension-formula",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "lem-weil-pbc-regular-local-generators-regular-sequence"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-204ef1332",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-204ef1332 (reviewer sub-agent of L); spot-checked: I read the item, its 9 steps and the 3 new nodes in full, every cited node's statement, and ILO XVII 2.4.3.1–2.4.3.4, Cor 4.2.3, Lemmas 4.3.1.1, 4.3.1.2 and 4.4.1 with the paragraph after it. The statement is unchanged from base. Every step is supported by what the cited statements say: fibre and model restriction, the regular open of the reduced closure via J-2, beta as T_u∘(Cl_u⊗1), independence of choices, composition via the trdeg tower and T_{kh}=h^!T_k∘T_h, identity for closed immersions and [L:K] for inseparable extensions, the smooth pinnings through the lem-trf base-change equation and the regular-pullback recipe, and the degree d−c=r_t from 02FX. Small cases (identity, closed and generic points of A^1, inseparable extensions, non-flat N) all check out. The field-tensor node is true for all of D^+ because u^!Λ is perfect and RΓ_Z has finite cd on strict localizations. The regular supported base change is exactly ILO Cor 4.2.3. There is no SGA citation, no cycle and no D1 restatement. Batch-5 flag on lem-trf-ambient-diagonal-purity-base-change: accepted. It was already in the base item's stmt_deps as the mandated smooth convention, its content (finite-coefficient étale smooth purity with base change) is given by neither assumption leaf, and its 11601-node closure contains no thm-trf, thm-pod or nt node. Maintainer notes: (1) the report missed the overlap with lem-per-absolute-gysin-purity (Q07, Z/ℓ^n). The new regular-Gysin node adds the mandated diagonal/deformation smooth normalization, the Kummer product, open restriction, regular base change, e=trdeg and the inseparable scalar, so it is needed. When it is split it should take existence and composition from the Q07 node and prove only the normalization agreement, which consumers comparing with lem-per-putative-finite-detection's quasi-finite pinnings rely on. (2) The supported-calculus and regular-Gysin nodes are Z/ℓ^n versions of the F_ℓ nodes lem-per-exceptional-costalk-calculus and lem-per-regular-gysin-calculus; this is the separate coefficient family, not a fault. (3) The generic tool_uses in split_report should be recorded at merge."
  }
 }
