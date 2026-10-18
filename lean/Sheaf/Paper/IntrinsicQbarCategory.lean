@@ -1,0 +1,121 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group NM
+-/
+module
+
+public import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
+public import Sheaf.Paper.PbcQbarCategory
+
+/-! # Scalar action on the intrinsic finite-stage pair category
+
+Source: blueprint def-weil-pbc-qbar-category, scalar-action and pair-category paragraphs
+(blueprint: def-weil-pbc-qbar-category).
+
+Retain the published legacy interface. On the current intrinsic rational stages, use
+exactly the same finite-compositum scalar construction. Objects, Hom classes, shifts and
+common-stage cone triangles are the already recorded intrinsic ones.
+-/
+
+@[expose] public noncomputable section
+set_option autoImplicit false
+set_option relaxedAutoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option synthInstance.maxSize 4096
+universe u v
+open CategoryTheory
+namespace WeilConjectures
+
+variable (l : ℕ) [Fact l.Prime]
+  (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]
+  (Y : AlgebraicGeometry.Scheme.{u})
+
+/-- The coefficient identification is normalized on integral fractions, followed
+by the fixed small-model equivalence. Source: blueprint scalar-action paragraph
+(blueprint: def-weil-pbc-qbar-category). -/
+def intrinsicQbarStageFieldEquiv (E : AlgebraicallyClosedCoefficients.Index l Ω) :
+    Localization.Away (Padic.coefficientExtensionUniformizer l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E)) ≃+* E.val :=
+  (sfRationalCoefficientEquiv l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E)).toRingEquiv.trans
+    (Shrink.algEquiv ℚ_[l] E.val).toRingEquiv
+
+/-- Cache the existing localized-ring linear structure on the named rational stage.
+Source: blueprint finite-stage scalar convention
+(blueprint: def-weil-pbc-qbar-category). -/
+instance intrinsicQbarStageLocalizedLinear (E : AlgebraicallyClosedCoefficients.Index l Ω) :
+    Linear (Localization.Away (Padic.coefficientExtensionUniformizer l
+      (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E)))
+      (GeneralAlgebraicallyClosedCoefficients.Stage l Ω Y E) :=
+  inferInstanceAs (Linear (Localization.Away (Padic.coefficientExtensionUniformizer l
+    (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E)))
+    (sfRationalConstructibleCategory l (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) Y))
+
+/-- Transport finite-field scalar action through the normalized coefficient equivalence.
+Source: blueprint finite-stage scalar convention
+(blueprint: def-weil-pbc-qbar-category). -/
+instance intrinsicQbarStageLinear (E : AlgebraicallyClosedCoefficients.Index l Ω) :
+    Linear E.val (GeneralAlgebraicallyClosedCoefficients.Stage l Ω Y E) where
+  homModule K L := Module.compHom (K ⟶ L) (intrinsicQbarStageFieldEquiv.{u} l Ω E).symm.toRingHom
+  smul_comp K L M a f g :=
+    Linear.smul_comp K L M ((intrinsicQbarStageFieldEquiv.{u} l Ω E).symm a) f g
+  comp_smul K L M f a g :=
+    Linear.comp_smul K L M f ((intrinsicQbarStageFieldEquiv.{u} l Ω E).symm a) g
+
+/-- The literal intrinsic tensor transitions respect the actual coefficient inclusions.
+Source: blueprint scalar-action paragraph
+(blueprint: def-weil-pbc-qbar-category).
+Proof: on integral tensors, extension carries multiplication by a constant to
+multiplication by its coefficient-inclusion image. Inverting the uniformizer
+preserves the equality. The integral-normalized coefficient equivalence and
+Shrink equivalence identify that map with the actual intermediate-field inclusion.
+The prescribed associators and the identity transition normalization are linear,
+so the same equation holds for the recorded stage system. -/
+theorem intrinsicQbarScalarCompatible :
+    StageSystem.QbarScalarCompatible l Ω
+      (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y) := by
+  sorry
+
+/-- Multiply the representative after adjoining its scalar to the finite stage.
+This is the existing quotient construction, applied to the intrinsic stage system.
+Source: blueprint formula alpha [M,u] = [N,alpha u_N]
+(blueprint: def-weil-pbc-qbar-category). -/
+def intrinsicQbarScalarAction (α : Ω)
+    {K L : generalAlgebraicallyClosedConstructibleCategory l Ω Y} (f : K ⟶ L) : K ⟶ L :=
+  StageSystem.qbarScalarHom l Ω (GeneralAlgebraicallyClosedCoefficients.stageSystem l Ω Y)
+    (intrinsicQbarScalarCompatible l Ω Y) α f
+
+/-- The specified scalar formula determines the linear structure uniquely, on the
+existing colimit abelian-group structures. Source: blueprint scalar-action laws
+(blueprint: def-weil-pbc-qbar-category).
+Proof: represent each finite list of arrows and scalars at one common finite field.
+The displayed action is multiplication there. Its one, product, zero and additive
+laws are the finite-stage module laws. Bilinearity of composition is the finite-stage
+linearity law. The actual Hom-colimit coordinate equivalence identifies sums with
+these representative sums, so all laws descend to the existing abelian groups.
+This constructs the linear structure. The formula fixes every scalar multiplication;
+all remaining module and linearity fields are propositions, proving uniqueness. -/
+theorem intrinsicQbarLinear_existsUnique :
+    ∃! q : Linear Ω (generalAlgebraicallyClosedConstructibleCategory l Ω Y),
+      (fun [qInst : Linear Ω (generalAlgebraicallyClosedConstructibleCategory l Ω Y)] ↦
+        ∀ (K L : generalAlgebraicallyClosedConstructibleCategory l Ω Y) (α : Ω) (f : K ⟶ L),
+          α • f = intrinsicQbarScalarAction l Ω Y α f) (qInst := q) := by
+  sorry
+
+/-- The scalar action is fixed on every morphism class, not chosen from mere existence.
+The inherited category and triangulation remain literally the recorded pair construction.
+Source: blueprint Qbar-linear category (blueprint: def-weil-pbc-qbar-category). -/
+instance intrinsicQbarLinear : Linear Ω (generalAlgebraicallyClosedConstructibleCategory l Ω Y) :=
+  (intrinsicQbarLinear_existsUnique l Ω Y).exists.choose
+
+/-- The PBC coefficient category on precisely the source's domain. It is the existing
+intrinsic finite-stage pair type, with the scalar action above and its inherited shift
+and common-stage cone triangles. Source: blueprint pair-category paragraph
+(blueprint: def-weil-pbc-qbar-category). -/
+abbrev intrinsicPbcQbarCategory [AlgebraicGeometry.IsNoetherian Y]
+    [Fact (∃ n : ℕ, topologicalKrullDim Y ≤ (n : WithBot ℕ∞))]
+    [Fact (∀ y : Y, IsUnit (l : Y.presheaf.stalk y))] :=
+  generalAlgebraicallyClosedConstructibleCategory l Ω Y
+
+end WeilConjectures
