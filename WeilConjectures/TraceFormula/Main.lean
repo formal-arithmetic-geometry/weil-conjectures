@@ -414,7 +414,7 @@ theorem trace_stalkFrobenius_weilUpperStar (hj : ΦU ≫ j = j ≫ Φ)
     (X' := (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (x ≫ j)).obj K.carrier)
     ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ x j).app
       K.carrier).symm _ _ ?_
-  rw [stalkFrobenius, stalkFrobenius, frobenius_hom, frobenius_hom]
+  rw [stalkFrobenius_eq_frobenius, stalkFrobenius_eq_frobenius, frobenius_hom, frobenius_hom]
   dsimp only [iterateStalk, weilStalk]
   rw [weilUpperStar_obj_str, weilUpperStar_obj_str, iterate_str, iterate_str]
   simp only [weilUpperStarComparison,
@@ -644,7 +644,7 @@ lemma stalkFrobenius_unit_aux {𝒞 : Type*} [Category 𝒞] {W Y : 𝒞} {DW DY
 theorem stalkFrobenius_unit (m : ℕ) (x : RationalPoint X)
     (hx : x ≫ frobeniusIterate Φ m = x) :
     (unit ℓ Φ).stalkFrobenius m x hx = 𝟙 _ := by
-  rw [stalkFrobenius, frobenius_hom]
+  rw [stalkFrobenius_eq_frobenius, frobenius_hom]
   dsimp only [iterateStalk, weilStalk]
   rw [weilUpperStar_obj_str, iterate_str]
   simp only [weilUpperStarComparison,
