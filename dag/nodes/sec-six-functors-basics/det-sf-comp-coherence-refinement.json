@@ -450,5 +450,37 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompactificationRefinementLocalizing",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.localizingRefinement_coherence",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.refinementLowerStarId_linear",
+   "AlgebraicGeometry.ProEtale.CondensedRing.refinementLowerStarId_naturality",
+   "AlgebraicGeometry.ProEtale.CondensedRing.refinementLowerStarId",
+   "AlgebraicGeometry.ProEtale.CondensedRing.refinementDerivedLowerStarId",
+   "AlgebraicGeometry.ProEtale.CondensedRing.refinementDerivedLowerStarComp",
+   "AlgebraicGeometry.ProEtale.CondensedRing.refinementOpenUnit_isIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.refinementOpenRestriction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.refinementOpenRestriction_isIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.refinementTheta",
+   "AlgebraicGeometry.ProEtale.CondensedRing.localizingRefinementMap",
+   "AlgebraicGeometry.ProEtale.CondensedRing.localizingRefinement_coherence"
+  ],
+  "file": "lean/Sheaf/Paper/CompactificationRefinementLocalizing.lean",
+  "statement": "theorem localizingRefinement_coherence (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] (p : ℕ) [CharP k p] (_hp : 0 < p) (_hpℓ : p ≠ ℓ) (_hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ) {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] : (∀ (c d : Compactification.DenseBoundaryCompactification f) (r : d ⟶ c) (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))), ∀ b : (openImmersionLowerShriek Λ c.obj.obj.obj.i).mapDerivedCategory.obj K ⟶ (lowerStar Λ r.hom.hom.hom.hom).rightDerivedFunctor.obj ((openImmersionLowerShriek Λ d.obj.obj.obj.i).mapDerivedCategory.obj K), (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ c.obj.obj.obj.i).unit.app K ≫ (upperStar Λ c.obj.obj.obj.i).mapDerivedCategory.map b ≫ (refinementTheta Λ r.hom K).hom = 𝟙 K ↔ b = localizingRefinementMap Λ r.hom K) ∧ (∀ (c d : Compactification.DenseBoundaryCompactification f) (r : d ⟶ c) (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))), localizingClosureProEtale Λ X K → IsIso (localizingRefinementMap Λ r.hom K)) ∧ (∀ (c : Compactification.DenseBoundaryCompactification f) (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))), localizingRefinementMap Λ (𝟙 c.obj) K ≫ (refinementDerivedLowerStarId Λ c.obj.obj.obj.Z).hom.app ((openImmersionLowerShriek Λ c.obj.obj.obj.i).mapDerivedCategory.obj K) = 𝟙 _) ∧ (∀ (c d e : Compactification.DenseBoundaryCompactification f) (r : d ⟶ c) (s : e ⟶ d) (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))), localizingRefinementMap Λ (s ≫ r).hom K ≫ (refinementDerivedLowerStarComp Λ s.hom.hom.hom.hom r.hom.hom.hom.hom).hom.app ((openImmersionLowerShriek Λ e.obj.obj.obj.i).mapDerivedCategory.obj K) = localizingRefinementMap Λ r.hom K ≫ (lowerStar Λ r.hom.hom.hom.hom).rightDerivedFunctor.map (localizingRefinementMap Λ s.hom K))",
+  "branch": "newtargets-dag",
+  "by": "N1",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Canonical construction helpers belong to the refinement notion of this node: the restriction is the counit mate of the recorded pullback compositor, theta is its restriction to extension by zero followed by the inverse actual open unit, and the map is its adjoint. Identity and derived-composition identifications are explicitly normalized by the existing abelian-sheaf identity compositor and K-injective right-derived units. Every definition has real data; the five named theorem proofs are postponed. No statement correction or new notion is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6bc84785f",
+  "group": "N1",
+  "result": "pass",
+  "note": "Checked every hypothesis and clause against the node: k, char p>0 with p≠ℓ, the six admissible-coefficient cases, separated finite-type k-schemes, DenseBoundaryCompactification (density, quasi-compactness and boundary equality confirmed by small Lean checks; refinement direction d⟶c gives h:Z'→Z), unbounded module-object D(X). θ is the canonical base-change mate (pullback compositor, Lh*≅D(h*), counit) followed by the inverse open unit; e = homEquiv.symm θ⁻¹. Clause 1 is an iff for every b; clause 2 needs only localizingClosureProEtale; identity and composition hold for any K, with κ oriented R(a≫h)_*≅Ra_*⋙Rh_* and (s≫r).hom = a≫h by rfl. No def has sorry data; the four sorry'd helper theorems are true and are invertibility the node already asserts. Only the lean field of the node changed, its statement is verbatim, its declaration list matches the file; lines ≤100; docstrings carry the source and all 9 proof steps; no universe restriction. nt_compile.py: clean in ~17 s, no diagnostics; axioms propext/sorryAx/choice/Quot.sound. Remarks (non-blocking): refinementLowerStarId is provably equal to the existing profinitePointModuleDirectImageIdentity (same underlying components, uniqueness), kept because citing that lemma node would need a stmt_deps change stage 2 does not allow; the maintainer can add the proof-dependency import of Sheaf.Paper.CompactificationLocalizing after the build."
  }
 }

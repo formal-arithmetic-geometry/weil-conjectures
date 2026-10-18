@@ -345,5 +345,46 @@
   "group": "Q142",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q142-85512404d (reviewer sub-agent of L); spot-checked: I read the whole item and the new node, every cited statement, the main-20261015 direct-image-tower proof paragraph (3) and Stacks sites-cohomology lemma-tor-amplitude (tag 08G1). The item statement is unchanged and keeps the general standing field. The split does not use clause 2(a) of det-sp-tower-shriek-levels, which needs a finite field; it uses only clauses 1 and 3. The finite inputs (det-proper-image-localizing-open and clause 3 of det-thm-sfb-proper-base-change-finite) have the standing-setting hypotheses, and A_n=O_E/l^n=A_{E,en} is admissible. Step 2 is correct: bounded flat P_n (new node), K-flat by lem-pc-bounded-above-flat-kflat-site and kept by pullback; good truncation and exact j_!; the acyclic-cone argument with lem-pc-kflat-resolution and the two-K-flat descent; degrees in [a+u,b+v]. Step 3: lem-coef-semilinear-derived-sections explicitly gives the counit-transpose projection map, the open adjunction maps and evaluation of transposes. Step 5: the canonical open projection isomorphism of lem-cbc-extension-zero-projection-formula is, by that node's Yoneda/unit-counit construction, the inverse of pi_j, so this is acceptable. Step 6 is conservativity applied to actual tower maps. The new node matches Stacks 08G1 exactly (any ringed site, no enough-points condition), is statement-only, and holds on small cases (zero ring; F_l over Z/l^2 fails both sides). It is not a duplicate: lem-sf-flat-model needs the finite-field datum, lem-sf-proetale-flat-model needs etale origin, and lem-sc-source-tor-amplitude-flat-model is a categorical generalization whose specialization takes several steps. Repaired fault (C1/C5/E5): step 1 said the module-object/ordinary operations and units/counits 'are identified' without citing anything, although existing nodes state this. Step 1 now cites lem-sf-module-object-ordinary-coefficient-equivalence (derived equivalence preserving tensor, Tor intervals, Dctf and Rp_*j_!) and lem-sfb-internal-module-operations-transport (pullback, pushforward and j_! with units and counits). Both are added to uses, proof_deps and tool_uses; there is no cycle and the step stays under 2000 characters. All tool_uses are accepted. The corrected item is in fixes/dag/nodes/sec-smooth-purity/; the full checks are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TowerCompactSupportProjectionFormula",
+  "declaration": "AlgebraicGeometry.ProEtale.SpTowerProjection.tower_compact_support_projection_formula",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpTowerProjection.realization",
+   "AlgebraicGeometry.ProEtale.SpTowerProjection.constructibleTor",
+   "AlgebraicGeometry.ProEtale.SpTowerProjection.properMap",
+   "AlgebraicGeometry.ProEtale.SpTowerProjection.openMap",
+   "AlgebraicGeometry.ProEtale.SpTowerProjection.source",
+   "AlgebraicGeometry.ProEtale.SpTowerProjection.middle",
+   "AlgebraicGeometry.ProEtale.SpTowerProjection.openSource",
+   "AlgebraicGeometry.ProEtale.SpTowerProjection.maps_natural",
+   "AlgebraicGeometry.ProEtale.SpTowerProjection.levelTensor",
+   "AlgebraicGeometry.ProEtale.SpTowerProjection.levelPullTensor",
+   "AlgebraicGeometry.ProEtale.SpTowerProjection.levelAdjunction",
+   "AlgebraicGeometry.ProEtale.SpTowerProjection.finiteProperMap",
+   "AlgebraicGeometry.ProEtale.SpTowerProjection.levelOpenAdjunction",
+   "AlgebraicGeometry.ProEtale.SpTowerProjection.finiteOpenMap",
+   "AlgebraicGeometry.ProEtale.SpTowerProjection.properMap_evaluation",
+   "AlgebraicGeometry.ProEtale.SpTowerProjection.openMap_evaluation",
+   "AlgebraicGeometry.ProEtale.SpTowerProjection.tower_compact_support_projection_formula",
+   "AlgebraicGeometry.ProEtale.SpTowerProjection.target",
+   "AlgebraicGeometry.ProEtale.SpTowerProjection.canonicalIso",
+   "AlgebraicGeometry.ProEtale.SpTowerProjection.canonicalIso_natural"
+  ],
+  "file": "lean/Sheaf/Paper/TowerCompactSupportProjectionFormula.lean",
+  "statement": "theorem tower_compact_support_projection_formula (b : Base l E) (o : Operations l E b) (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (_hlp : l ≠ p) (X Y : Over (Spec (CommRingCat.of k))) [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (f : X ⟶ Y) (c : Compactification f.left) (AX : SpCoefficientTowersAbelian l E X.left) (AY : SpCoefficientTowersAbelian l E Y.left) (C : D l E X.left) (B : D l E Y.left) (_hC : constructibleTor l E b X.left AX C) (_hB : constructibleTor l E b Y.left AY B) : (∃ m : ℤ, ((tensor l E b X.left).obj (C, (pull l E b (o.geometry f.left)).obj B)).IsGE m) ∧ (∃ m : ℤ, ((tensor l E b c.Z).obj ((openD l E b (o.openOp c.i)).obj C, (pull l E b (o.geometry c.g)).obj B)).IsGE m) ∧ IsIso (properMap l E b o c C B) ∧ IsIso (openMap l E b o c C B) ∧ IsIso (projection l E b o c C B)",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Uses the recorded SpTowerShriek section-site presentation and canonical adjunctions. The existing uniform Dctf predicate is transported through the exact derived realization. Helpers construct the actual proper/open projection arrows and finite counit/unit transposes; named sorry theorems state their naturality, evaluation identities and the general-field invertibility result. No normalization or etale-origin hypothesis is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4f2b563d5",
+  "group": "NW",
+  "result": "pass",
+  "note": "Read node, report, module (21 decls), SpTowerShriek (Base/Geometry/Open/Operations/projection/Laws), spConstructibleTorTowers, SemilinearSections.Data, source paragraph (3). Every hypothesis matches: arbitrary char-p field k with p≠l, separated finite-type X,Y over k, arbitrary compactification, Dctf via the recorded predicate transported through the exact derived realization, no normalization, origin or finite-field assumption. Conclusions match: D+ bounds for C⊗f^{-1}B and j_!C⊗p^{-1}B; properMap = counit transpose (same as the first factor of the recorded projection); openMap = push of openTensor.inv, which openTensor_mate fixes as the unit transpose π_j, direction checked; naturality, level evaluations against independently built finite maps, and canonicalIso = asIso of the recorded projection. Quantifying over all (b,o) is harmless: conservativity and the evaluation identities are structure fields, not Laws. Universes are inherited; nothing hollow; all proofs sorry; docstrings complete; lean.statement verbatim; node otherwise unchanged. nt_compile --json: exit 0, no errors or warnings, 8.1 s."
  }
 }

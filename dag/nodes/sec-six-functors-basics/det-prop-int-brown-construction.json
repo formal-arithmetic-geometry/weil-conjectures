@@ -361,5 +361,50 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntegralLocalizingCompactSupport",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.integralLocalizingCompactSupport",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.integralLocalizingCompactSupport",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.Ambient",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.pull",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.push",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.extend",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.image",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.generators",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.localizing",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.openAdjunction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.pullSquare",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.pushExchange",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.openExchange",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.pushComp",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.refinementRestriction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.refinementIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.baseChange",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.Spaces",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.Compactifications",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.candidate",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.baseCompactification",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.Preservation",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.Comparisons",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.Compositions",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.Coherence"
+  ],
+  "file": "lean/Sheaf/SixFunctors/IntegralLocalizingCompactSupport.lean",
+  "statement": "theorem integralLocalizingCompactSupport (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] : ∃ (h : Preservation (Profinite.padicIntegersRingObj ℓ E.val) k) (φ : Comparisons (Profinite.padicIntegersRingObj ℓ E.val) k) (μ : Compositions (Profinite.padicIntegersRingObj ℓ E.val) k), Coherence (Profinite.padicIntegersRingObj ℓ E.val) k h φ μ",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The theorem states preservation and a compatible family of natural comparison/composition isomorphisms. Canonical compactification maps are normalized by the actual proper counit and open unit; the base-change map is the actual proper exchange followed by inverse open exchange. Auxiliary declarations only abbreviate the recorded categories/functors or package these maps and the clauses of this same node. Dbc is the recorded finite-constant-model predicate, not the broader upstream predicate."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-63b0d3828",
+  "group": "NJ",
+  "result": "fix",
+  "note": "Statement matches node clause by clause: standing finite-type separated k-schemes as a full subcategory of Over Spec k; O_E = padicIntegersRingObj; Dbc = recorded constantModelBoundedConstructible; Loc = recorded generic localizingClosure with ordinary coproducts (index Type (u+2)); image = recorded rightDerivedLowerShriekOfCompactification; Preservation gives Loc, exactness, sums and Dbc; comparisons pinned by the open-unit/proper-counit normalization with identity and cocycle; compositions with compactification compatibility (existential, matching the node's wording); base change is the actual proper-exchange then inverse open-exchange mate (the open exchange iso is clause (1) of det-sf-comp-composition-base-change), compatible with comparisons; no extra hypotheses; edge cases and universes fine; node changed only in lean; statement verbatim; no hollow defs; single sorry; snapshot compiles clean via nt_compile (51.3 s / 42.8 s). Fixed H11: the Second reading section disclaimed any independent reading; replaced by a real clause-by-clause reading in fixes/det-prop-int-brown-construction.report.md (worker report kept verbatim)."
  }
 }

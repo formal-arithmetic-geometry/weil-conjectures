@@ -221,13 +221,28 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-9ee2236c1 (reviewer sub-agent of L); spot-checked: I read the whole delivery and wrote no fixes; the full review is in review.md. The delivery is the item only, with no new nodes. Every stmt_dep exists, is unmerged and is cited in the statement. The three forward pointers stay as pointers, and walking the dependencies from the item never leads back to it, so there is no cycle. Sources read: the main-20261015 blueprint and its blueprint_update, Deligne Weil II (1.1.7), (1.1.8), (1.1.13) and (1.1.14) (pp. 150-153), and the two Stacks labels the report cites. No SGA source is used. Clause 1: the transport def and clause 3 of the transport-iso lemma both cover A_{E,n}, and each Lg^*N stays in D^b_c, so all T^jM are legitimate inputs. The types of c_m^{-1} and RGamma_c(phi^[m]) match. For m=1 the operator is exactly the compact-support composite of def-weil-global-geometric-frobenius, done at A instead of E. Using naturality of tau_c and def-trf-iterated-weil-map, I showed that the delivered F^m is the m-th power of F^1, so the name 'm-th iterate' is accurate. It agrees with the blueprint's base change along g^m because exchange maps compose. That identification is left to lem-trf-frobenius-operator-compact-description, which keeps true, non-trivial content, and the target is not weakened. Clause 2: x-bar is the k-point that thm-trf-frobenius-fixed-points attaches to x, so Phi^m o x-bar = x-bar holds directly. The report is right that g^m o x-bar != x-bar, and routing through kappa^(m) is necessary, as in Deligne (1.1.14). kappa^(m) has the direction the formula needs, and A satisfies its coefficient hypothesis. x-bar is a section of a separated morphism, hence a closed immersion and separated of finite type, so lem-sf-pullback-tor-amplitude applies and Fib_s is defined. Every arrow of tau and F_{x,m} type-checks. Edge cases pass: m=1, empty X, the zero complex, n=1, and X_0=Spec F_q with phi=u (both operators equal u^m). No hypothesis is added or dropped. Neither def-weil-global-geometric-frobenius (E only) nor def-tw-frobenius-action duplicates the item. There are no tool_uses."
  },
  "lean": {
-  "branch": "master",
-  "existing": true,
-  "module": "WeilConjectures.SixFunctors.Etale.Derived.WeilFrobenius",
-  "declaration": "AlgebraicGeometry.Etale.frobeniusOperator",
+  "module": "Sheaf.Paper.TraceFormulaLocalFrobeniusOperator",
+  "declaration": "WeilConjectures.TraceFormulaCoefficientConventions.finiteLocalFrobenius",
   "declarations": [
-   "AlgebraicGeometry.Etale.frobeniusOperator"
+   "WeilConjectures.TraceFormulaCoefficientConventions.finiteLocalSections",
+   "WeilConjectures.TraceFormulaCoefficientConventions.finiteLocalFibre",
+   "WeilConjectures.TraceFormulaCoefficientConventions.finiteLocalRho",
+   "WeilConjectures.TraceFormulaCoefficientConventions.finiteLocalFrobenius"
   ],
-  "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:19 UTC (L, propagation 2026-10-18), live declaration stated, proof open in WeilConjectures.SixFunctors.Etale.Derived.WeilFrobenius: the blueprint item def-trf-frobenius-operators's upstream Lean declarations as live states them; their proofs are still `sorry` in live (stage-3 route work)"
+  "file": "lean/Sheaf/Paper/TraceFormulaLocalFrobeniusOperator.lean",
+  "statement": "def finiteLocalFrobenius (T : TraceFormulaCoefficientConventions.{u}) (K : T.strictWeilComplex) (m : ℕ) (hm : 1 ≤ m) (z : Spec (.of T.datum.k) ⟶ T.geometricBaseChange) (hz : z ≫ T.datum.schemeFrobeniusIterate T.X₀ m = z) : (T.finiteLocalFibre z).obj K.obj.carrier ⟶ (T.finiteLocalFibre z).obj K.obj.carrier",
+  "branch": "newtargets-dag",
+  "by": "Q52",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "§1(B): the recorded Etale.frobeniusOperator is a linear operator on Hom(unit,M) in an etale sheaf-derived category. It does not supply clause 2 of this node on the ordinary module complex Fib_s(Lz^*K) for the recorded intrinsic pro-etale strict Weil complex. This module publicly retains that upstream declaration and supplements it with clause 2 only: finiteLocalFibre, the canonical fixed-point rho, and the local operator using the specified kappa and iterated Weil isomorphism. Clause 1, the compact-support operator F_{c,K}^m, is not stated by this new clause-2 module and was not stated by the old Etale.frobeniusOperator either. No arbitrary transport is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-51d411585",
+  "group": "Q52",
+  "result": "pass",
+  "note": "Re-delivery fixes both RETURN findings of 4a7859e. (R1) The def-weil-proetale-geometric-stalk node file is byte-identical to side again. The three point-stalk helpers moved into LocalFrobeniusConjugacy.lean with lem-trf-local-frobenius-conjugacy blueprint docstrings and are listed in the item's lean.declarations; the separate helper module and its import were deleted. The only change in the move is an explicit HasDerivedCategory.{u+1} instance, the same localization the existing point fibre uses. (R2) The def-trf-frobenius-operators lean.note and the report say clause 1 (F_{c,K}^m) is stated by neither the new module nor the old Etale.frobeniusOperator. Re-checked: both node files differ from side only in lean; signatures verbatim; all declarations exist; no name clashes. Every item clause matches the node: d lifts and orbit Spec(sigma^i)>>z>>g^i, the exists-unique F_{q^m} point, T_0=id and the HEq cocycle for i,j>=0, conjugacy T.hom>>F0>>T.inv, trace equality with perfectness concluded, one-circuit independence. finiteLocalFrobenius = rho>>Fib(Lz^*(kappa>>phi^[m])) matches clause 2. No extra hypotheses, universe restrictions or hollow definitions; the only proofs are sorry. nt_compile.py --json on both snapshot files: exit 0, no diagnostics (4.6-4.9 s, 12.9-13.2 s). Non-blocking note: clause 1 of def-trf-frobenius-operators still has no Lean statement, as the record's note says."
  }
 }

@@ -465,5 +465,30 @@
     }
    ]
   }
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactification",
+  "statement": "def boundedConstructibleLowerShriekOfCompactification : Dᵇc(X.left)⟦Λ⟧ ⥤ Dᵇc(Y.left)⟦Λ⟧",
+  "branch": "slopmaster2",
+  "by": "NB",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "The published BoundedConstructible module defines the exact bounded-constructible lower shriek attached to a compactification as the composite of boundedConstructibleOpenImmersionLowerShriek and boundedConstructibleLowerStar, and defines the chosen compactification functor and both ambient inclusion compatibility isomorphisms. Its surrounding variables are precisely the prime/characteristic, separated finite-type k-scheme, k-morphism and IsFinitenessCoefficient hypotheses in the node statement. Reviewer fix (stage-2 cc review): the declarations list for the four clauses (the blueprint's lean names), which the report cites but the delivered record omitted.",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactification",
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleLowerShriekOfCompactificationCompatibility",
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleLowerShriek",
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleLowerShriekCompatibility"
+  ],
+  "fixed_by": "NT-stage2-cc-fa2a175a8"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fa2a175a8",
+  "group": "NB",
+  "result": "fix",
+  "note": "Existing binding to live published WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible (the side clone holds a stale pre-Over version; judged against the live one, which existing_file resolves to and whose olean contains all four declarations). Clause-by-clause match: prime/char hypotheses; Over (Spec k) with LOFT+QC+separated; Dᵇc and its inclusion ι; IsFinitenessCoefficient is a real class inductive (E, O_E, Qlbar, finite ℓ-torsion), the same scope the landed restricted-functors Rf_* needs; Rf_!^c = openImmersionLowerShriek c.overI ⋙ lowerStar c.overG (overI.left = c.i open immersion, overG.left = c.g proper); chosen Rf_! via compactificationOverField; both compatibility isos built from whiskered restriction compatibilities against the recorded rightDerivedLowerShriekOfCompactification/rightDerivedLowerShriek. Single universe u; edge cases fine; no hollow def or duplicate. check_existing passes (branch slopmaster2, statement verbatim after normalization). Finding: the report cites lean.declarations but the record lacks it; the fix lean-record.json adds the four clause declarations (the blueprint lean names) and extends the note. No mathematical fault."
  }
 }
