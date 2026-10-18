@@ -13,9 +13,101 @@
   "def-trf-valuation-ring",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $s$ for the closed point of $\\operatorname{Spec}R$ and $\\mathfrak m_R$ for its maximal ideal. The valuation-ring condition makes $R$ a local domain: its nonunits form an ideal, since for two nonzero nonunits $a,b$ either $b=at$ or $a=bt$ for some $t\\in R$, so $a+b$ is a multiple of a nonunit, and every multiple of a nonunit is a nonunit. Every element outside this proper ideal is a unit, so this is the unique maximal ideal. In particular $(0)$ is prime in $R$.",
+   "uses": [
+    "def-trf-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 089F, lemma-lift-valuation-ring-through-flat-morphism, proof, specialized to schemes"
+   }
+  },
+  {
+   "text": "Form $Z=Y\\times_T\\operatorname{Spec}R$, with projections $p:Z\\to Y$ and $h:Z\\to\\operatorname{Spec}R$. Choose $y\\in Y$ with $f(y)=b(s)=t$, using the hypothesis. The ring $D=\\kappa(y)\\otimes_{\\kappa(t)}\\kappa(s)$ is nontrivial by [lem-weil-common-extension-fields-tensor-nontrivial]. By [lem-weil-common-extension-fields-maximal-ideal] it has a maximal, hence prime, ideal $P$. The point correspondence [lem-weil-pbc-fibre-product-points] applied to $(y,s,t,P)$ produces $z\\in Z$ with $p(z)=y$ and $h(z)=s$. Thus the specified closed point remains in the image after base change; no rational point in the original fibre was assumed.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-common-extension-fields-tensor-nontrivial",
+    "lem-weil-common-extension-fields-maximal-ideal",
+    "lem-weil-pbc-fibre-product-points"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 089F, lemma-lift-valuation-ring-through-flat-morphism, proof, specialized to schemes"
+   }
+  },
+  {
+   "text": "The morphism $h$ is flat by [lem-weil-pbc-flat-morphism-base-change]. Put $B=\\mathcal O_{Z,z}$, with maximal ideal $\\mathfrak n$. By [def-weil-flat-morphism] the induced stalk map $\\mathcal O_{\\operatorname{Spec}R,s}\\to B$ is flat and local. Part (a) of [lem-weil-pbc-morphism-from-spec-local-ring] identifies $\\mathcal O_{\\operatorname{Spec}R,s}$ with $R$ by the germ isomorphism, giving a flat local homomorphism $\\alpha:R\\to B$. Locality gives $\\alpha^{-1}(\\mathfrak n)=\\mathfrak m_R$.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-base-change",
+    "def-weil-flat-morphism",
+    "lem-weil-pbc-morphism-from-spec-local-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 089F, lemma-lift-valuation-ring-through-flat-morphism, proof, specialized to schemes"
+   }
+  },
+  {
+   "text": "Since $\\alpha$ is local, the extended ideal $\\mathfrak m_RB$ is contained in the proper ideal $\\mathfrak n$. As $\\mathfrak m_R$ is the only maximal ideal of $R$, [lem-weil-pbc-flat-faithfully-flat-maximal-ideals] shows that $\\alpha$ is faithfully flat. Apply [lem-weil-pbc-faithfully-flat-surjective-spectrum] to the prime $(0)\\subset R$ to obtain a prime $\\mathfrak q\\subset B$ with $\\alpha^{-1}(\\mathfrak q)=(0)$. This is exactly the prime over zero needed for an injective extension, rather than merely a local ring map.",
+   "uses": [
+    "lem-weil-pbc-flat-faithfully-flat-maximal-ideals",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 089F, lemma-lift-valuation-ring-through-flat-morphism, proof, specialized to schemes"
+   }
+  },
+  {
+   "text": "The quotient $A=B/\\mathfrak q$ is a domain since $\\mathfrak q$ is prime, and it is local with maximal ideal $\\mathfrak n/\\mathfrak q$: every element outside this ideal has a representative outside $\\mathfrak n$ and is therefore a unit, and that ideal is proper. Let $L=\\operatorname{Frac}(A)$. Apply [lemma-nagata-local-domain-valuation-dominates] to $A\\subset L$ to obtain a valuation ring $R\\prime\\subset L$ containing $A$ and dominating it. (Its updated blueprint statement permits any local subring of $L$; here $L$ is even the fraction field.) Thus for $\\beta:B\\to A\\hookrightarrow R\\prime$ we have $\\beta^{-1}(\\mathfrak m_{R\\prime})=\\mathfrak n$.",
+   "uses": [
+    "lemma-nagata-local-domain-valuation-dominates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 089F, lemma-lift-valuation-ring-through-flat-morphism, proof, specialized to schemes"
+   }
+  },
+  {
+   "text": "Define $\\iota=\\beta\\circ\\alpha:R\\to R\\prime$. Its kernel is $\\alpha^{-1}(\\mathfrak q)=(0)$, since $A\\hookrightarrow R\\prime$ is injective. Moreover $\\iota^{-1}(\\mathfrak m_{R\\prime})=\\alpha^{-1}(\\mathfrak n)=\\mathfrak m_R$, so $\\iota$ is local. By part (b) of [lem-weil-pbc-morphism-from-spec-local-ring], the local map $\\beta:\\mathcal O_{Z,z}\\to R\\prime$ gives a morphism $d:\\operatorname{Spec}R\\prime\\to Z$ with closed point $z$ and associated stalk map $\\beta$. The two maps $h\\circ d$ and $\\operatorname{Spec}(\\iota)$ to $\\operatorname{Spec}R$ send the closed point to $s$ and induce the same local map $R\\to R\\prime$, namely $\\beta\\circ\\alpha$. Injectivity of the same correspondence, with the germ identification of part (a), gives $h\\circ d=\\operatorname{Spec}(\\iota)$. Set $c=p\\circ d$. The defining identity $f\\circ p=b\\circ h$ of the fibre product now gives $f\\circ c=b\\circ\\operatorname{Spec}(\\iota)$, as required.",
+   "uses": [
+    "lem-weil-pbc-morphism-from-spec-local-ring",
+    "def-weil-affine-spectrum",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-morphisms.tex",
+    "place": "Tag 089F, lemma-lift-valuation-ring-through-flat-morphism, proof, specialized to schemes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-valuation-ring",
+  "def-pc-fibre-product",
+  "lem-weil-common-extension-fields-tensor-nontrivial",
+  "lem-weil-common-extension-fields-maximal-ideal",
+  "lem-weil-pbc-fibre-product-points",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "def-weil-flat-morphism",
+  "lem-weil-pbc-morphism-from-spec-local-ring",
+  "lem-weil-pbc-flat-faithfully-flat-maximal-ideals",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lemma-nagata-local-domain-valuation-dominates",
+  "def-weil-affine-spectrum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-morphisms.tex",
+  "place": "Tag 089F, lemma-lift-valuation-ring-through-flat-morphism, proof, specialized to schemes"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,7 +146,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-space-fpqc-separated-valuative-descent",
@@ -74,5 +166,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-flat-valuation-lifting",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 089F for schemes using existing DAG lemmas only. Exhibited a point of the base-changed closed fibre, the faithfully flat local stalk map and a prime over zero, then valuation domination of the local-domain quotient. Checked injectivity, locality and the final scheme square separately. No new nodes or Lean changes.",
+  "blueprint": "Auxiliary representability input to lem-a1-affine-hc0 through lem-a1-proetale-local-system-representability and lem-a1-space-fpqc-separated-valuative-descent; expands exactly the flat valuation-lifting tool in the latter node, preserving the blueprint ancestry and unit binding.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-local-domain-valuation-dominates",
+    "why": "Valuation domination of the local-domain quotient in the proof of Stacks 089F; generic commutative-algebra tool, not a Rankin–Selberg step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-local-domain-valuation-dominates"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NC-93337fc4f",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-93337fc4f (reviewer sub-agent of L); spot-checked: I read the whole split, the report and every cited node's statement against Stacks 089F (spaces-morphisms.tex l.8740-8775) and the definition of an extension of valuation rings (more-algebra.tex l.37306: injective and local). The statement is the faithful scheme case with no hypothesis added or dropped. It covers what the citer lem-a1-space-fpqc-separated-valuative-descent uses. Step 1: valuation ring => local domain, the argument is correct. Step 2: tensor-nontrivial, maximal-ideal and fibre-product-points give z with p(z)=y and h(z)=s. Step 3: flat base change, the stalk map is local and flat, and the germ iso is part (a). Step 4: m_R B is contained in n, the maximal-ideal criterion gives faithful flatness, and surjectivity on Spec gives q over (0); this matches 00HQ. Step 5: B/q is a local domain; lemma-nagata-local-domain-valuation-dominates, in its updated statement and as the closed Mathlib LocalSubring.exists_le_valuationSubring (inclusion plus IsLocalHom), gives the dominating R'. Step 6: injectivity and locality are verified, and part (b)'s bijection gives h∘d = Spec ι; this is elementary. Edge cases checked: R a field, B not reduced, nontrivial residue extension, empty Y, arbitrary rank. Every cited node is a definition, a Mathlib leaf or Lean-closed, so there is no route issue. I accept the declared tool_use of the Nagata domination node. No duplicate: the only DAG hits for 089F are the item and its citer. There are no new nodes and no fixes."
  }
 }
