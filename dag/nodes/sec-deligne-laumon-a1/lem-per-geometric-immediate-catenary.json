@@ -15,9 +15,50 @@
   "def-weil-geometric-point",
   "def-weil-pbc-strict-henselization-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $Z=\\overline{\\{y\\}}_{\\mathrm{red}}$ and $R=\\mathcal O_{Z,x}$. Choose $U=\\operatorname{Spec}A$ containing $x$; it also contains every generalization of $x$, hence $y$. Write $\\mathfrak p\\subsetneq\\mathfrak q$ for their primes. Then $R=(A/\\mathfrak p)_{\\mathfrak q/\\mathfrak p}$, a nonfield local domain. Its primes correspond to primes of $A$ between $\\mathfrak p$ and $\\mathfrak q$. Thus there is no point strictly between $y$ and $x$ exactly when $R$ has only its zero and maximal primes. By the prime-chain definition of [def-weil-pbc-krull-dimension-ring], this is equivalent to $\\dim R=1$: an intermediate prime gives a chain of length two; if there is none, the zero-to-maximal chain has length one and every chain has length at most one.",
+   "uses": [
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIV, Definitions 2.1.1–2.1.2 and Proposition 2.1.4, printed pp.209–211."
+   }
+  },
+  {
+   "text": "Apply [lem-per-immediate-specialization-criterion] to the given $X,x,y$. Its hypotheses hold: $X$ is Noetherian, $x\\in\\overline{\\{y\\}}$, and universal catenarity on every affine open implies its affine-cover hypothesis. Its concluding equivalence states that $y\\rightsquigarrow x$ is an immediate geometric specialization, meaning codimension one in a strict localization at a geometric point above $x$, if and only if $\\dim\\mathcal O_{Z,x}=1$; it also states independence of that geometric point. This is precisely condition (2) equivalent to the dimension-one clause of condition (1). The cited statement already includes existence of the immediate specialization; no inference from a possibly empty set of lifts is being made. Together with Step 1 it proves the equivalence of (1) and (2).",
+   "uses": [
+    "lem-per-immediate-specialization-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIV, Definitions 2.1.1–2.1.2 and Proposition 2.1.4, printed pp.209–211."
+   }
+  },
+  {
+   "text": "For any specified immediate geometric specialization, its image in $X_{(\\bar x)}$ lies over $y$ and has one-dimensional closure. Part (b) of [lem-per-immediate-specialization-criterion] therefore gives $\\dim\\mathcal O_{Z,x}=1$. The argument of Step 1 applies on any affine neighbourhood of $x$ and excludes every prime strictly between $\\mathfrak p$ and $\\mathfrak q$, so the prime inclusion is saturated there. Universal catenarity is used only in the cited converse, and no regularity, field of definition, or coefficient assumption has entered.",
+   "uses": [
+    "lem-per-immediate-specialization-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIV, Definitions 2.1.1–2.1.2 and Proposition 2.1.4, printed pp.209–211."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-per-immediate-specialization-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XIV, Definitions 2.1.1–2.1.2 and Proposition 2.1.4, printed pp.209–211."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +94,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Ring.DimensionLEOne.isIntegralClosure\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Basic\", \"type\": \"∀ (R : Type u_1) (A : Type u_2) [inst : CommRing R] [inst_1 : CommRing A] (B : Type u_4) [inst_2 : CommRing B]\\n  [IsDomain B] [Nontrivial R] [inst_5 : Algebra R A] [inst_6 : Algebra R B] [inst_7 : Algebra B A] [IsScalarTower R B A]\\n  [IsIntegralClosure B R A] [Ring.DimensionLEOne R], Ring.DimensionL\", \"doc\": \"If $ R $ is a commutative ring with Krull dimension at most one, $ B $ is the integral closure of $ A $ over $ R $, and the necessary algebra and scalar tower conditions hold, then $ B $ also has Krul\"}\n  {\"name\": \"Ring.DimensionLEOne.localization\", \"module\": \"Mathlib/RingTheory/DedekindDomain/Dvr\", \"type\": \"∀ {R : Type u_2} (Rₘ : Type u_3) [inst : CommRing R] [IsDomain R] [inst_2 : CommRing Rₘ] [inst_3 : Algebra R Rₘ]\\n  {M : Submonoid R} [IsLocalization M Rₘ], M ≤ nonZeroDivisors R → ∀ [h : Ring.DimensionLEOne R], Ring.DimensionLEOne Rₘ\", \"doc\": \"Let $ R $ be a commutative ring that is an integral domain with Krull dimension at most one. If $ R_\\\\mathfrak{m} $ denotes the localization of $ R $ at a submonoid $ M $ consisting of non-zero divisor\"}\n  {\"name\": \"Algebra.ZariskisMainProperty.of_isIntegral\", \"module\": \"Mathlib/RingTheory/ZariskisMainTheorem\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal S)\\n  [p.IsPrime] [Algebra.IsIntegral R S], Algebra.ZariskisMainProperty R p\", \"doc\": \"If $ S $ is an integral extension of $ R $, then every prime ideal $ \\\\mathfrak{p} \\\\subseteq S $ satisfies Zariski's Main Theorem property: there exists an element $ r $ in the integral closure of $ R \"}\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [CommRing R] → Prop\", \"doc\": \"A commutative ring equipped with the property of being Henselian, meaning it satisfies Hensel's lemma for lifting roots of polynomials from its residue field.\"}\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u) [inst : CommRing R] [inst_1 : IsLocalRing R],\\n  [HenselianLocalRing R,\\n      ∀ (f : Polynomial R),\\n        f.Monic →\\n          ∀ (a₀ : IsLocalRing.ResidueField R),\\n            (Polynomial.aeval a₀) f = 0 →\\n              (Polynomial.aeval a₀) (Polynomial.derivative f) ≠ 0 → ∃ a, f.IsRo\", \"doc\": \"For a commutative local ring $ R $, the following are equivalent: \\n1. $ R $ is a Henselian local ring;\\n2. For every monic polynomial $ f \\\\in R[X] $, if $ a_0 \\\\in \\\\text{ResidueField}(R) $ satisfies $ \\\\\"}\n  {\"name\": \"HenselianLocalRing.toIsLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R], IsLocalRing R\", \"doc\": \"Every Henselian local ring is a local ring.\"}\n  {\"name\": \"Algebra.ZariskisMainProperty\", \"module\": \"Mathlib/RingTheory/ZariskisMainTheorem\", \"type\": \"(R : Type u_1) → {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Ideal S → Prop\", \"doc\": \"An ideal $\\\\mathfrak{p} \\\\subseteq S$ satisfies Zariski's Main Theorem property if there exists an element $r$ in the integral closure of $R$ in $S$ such that $r \\\\notin \\\\mathfrak{p}$ and the induced rin\"}\n  {\"name\": \"AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ {R : CommRingCat} [IsDomain ↑R], AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Spec R)\", \"doc\": \"For any commutative ring $ R $ that is a domain (i.e., has no zero divisors), the scheme $ \\\\operatorname{Spec}(R) $ constructed from the prime spectrum of $ R $ is an integral scheme. This means $ \\\\op\"}\n",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]atenary|immediate.*speciali|speciali.*immediate",
+   "results": "0 hits; no specialization-codimension equivalence.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a universally catenary Noetherian scheme geometric codimension one specializations are exactly immediate Zariski specializations",
+   "results": "Hits read: AlgebraicGeometry.Scheme.le_iff_specializes, IsLocalRing.specializes_closedPoint, PrimeSpectrum.stableUnderSpecialization_singleton, genericPoint_specializes, PrimeSpectrum.stableUnderGeneralization_singleton, AlgebraicGeometry.instOrderTopCarrierCarrierCommRingCatOfIsIntegral, AlgebraicGeometry.Scheme.instIsOverMapStalkSpecializesCommRingCatPresheaf, PrimeSpectrum.le_iff_specializes",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometric immediate specialization in a universally catenary scheme and strict henselization components of dimension one",
+   "results": "Hits read: AlgebraicGeometry.Scheme.le_iff_specializes, IsLocalRing.specializes_closedPoint, AlgebraicGeometry.AffineScheme, PrimeSpectrum.localizationMapOfSpecializes, AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk_assoc, AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk, AlgebraicGeometry.StructureSheaf.localizationToStalk_stalkSpecializes_apply, AlgebraicGeometry.StructureSheaf.toStalk_stalkSpecializes_assoc",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.le_iff_specializes, PrimeSpectrum.le_iff_specializes, ringKrullDim",
+   "results": "0 hits; no specialization-codimension equivalence.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Cc]atenary|immediate.*speciali|speciali.*immediate",
+   "results": "0 hits; no specialization-codimension equivalence.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-potential-dualizing-regular-unit",
@@ -78,5 +154,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-geometric-immediate-catenary",
+  "worker": "stage1",
+  "summary": "Reused the existing stronger immediate-specialization criterion instead of creating duplicate branch-comparison nodes. Wrote the elementary local prime-chain argument identifying its dimension-one conclusion with the saturated-inclusion clause. Item statement unchanged.",
+  "blueprint": "Nearest blueprint ancestor lem-per-artin-gabber-affine-curve, dimension-normalized duality clause in former Proof Step 3, expanded by the regular-unit ancestor: geometric immediate specializations give one-step drops of negative codimension. Steps 1 and 3 provide the prime-chain interpretation; Step 2 reuses the existing Gabber criterion."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-a1b2310a8",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-a1b2310a8 (reviewer sub-agent of L); spot-checked: I read the item, the report, the existing node it cites (lem-per-immediate-specialization-criterion), def-per-potential-dualizing, def-exc-excellent-ring, def-weil-pbc-krull-dimension-ring, the strict-henselization and geometric-point definitions, and ILO XIV §2.1 (Def. 2.1.1–2.1.2, Prop. 2.1.3–2.1.4 and Lemmas 2.1.5–2.1.6 with proofs, printed pp. 209–211). Shape: one commit, the item plus the report, no new nodes. The statement, stmt_deps and blueprint are unchanged; proof_deps equals the union of the step uses; there is no SGA citation. Both this item and the criterion are still unsplit live, so the delivery is not superseded. The item's (1)⇔(2) is ILO 2.1.4 with the x/y convention swapped, and the item's universal catenarity (on every affine open) implies the criterion's affine-cover hypothesis. Step 1 is elementary and correct: O_{Z,x}=(A/p)_{q/p}, its primes are those between p and q, and every intermediate point lies in the affine chart. Step 2 cites the criterion's final clause, which defines immediate through def-per-potential-dualizing, so it includes existence. I checked (a) myself: points over y are minimal primes of the flat strict henselization O^sh_{Z,x}, so their closures have dimension exactly 1, and the fibre over y is nonempty by faithful flatness. Step 3 applies (b) and then Step 1, which gives saturation. Edge cases: a field; a DVR; A² localized at the origin with y the generic point (both sides false); A² with y the generic point of the line {t=0} and x the origin (both sides true; this is the case that broke the X_(x̄)-component node returned in Q05). The criterion is in the same unit, has no proof, and Q05's split of it never cited this item, so there is no cycle and no tool_uses are needed. Citing an existing restatement is allowed by brief §2. Maintainer note: two nodes created on 2026-10-18 (by Q07 and N6) overlap. Consider merging them per stages/1-dag.md §2. Until then the criterion's split must not cite this item, which would create a cycle. No fixes."
  }
 }
