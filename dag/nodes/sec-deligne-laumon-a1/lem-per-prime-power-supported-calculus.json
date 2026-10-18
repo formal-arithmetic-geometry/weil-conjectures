@@ -24,9 +24,245 @@
   "def-weil-flat-morphism",
   "def-weil-regular-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First identify the two meanings of closed $i^!$. The supported-kernel adjunction gives $i_*\\dashv i^!_0$ with $i_*$ exact. It extends from abelian sheaves to constant-$\\Lambda$ modules: naturality of its Hom bijection makes a map commute with each scalar precisely when its transpose does. Exact faithful coefficient forgetting detects exactness of closed pushforward. Module sheaves have enough injectives, so the bounded-below derived-adjunction theorem gives $i_*\\dashv Ri^!_0$, with the counit induced by the supported-kernel inclusion. For a closed immersion, the compactification with identity open part computes $Ri_!=Ri_*=i_*$. Uniqueness of a right adjoint, preserving its counit, therefore identifies compact-support $i^!$ with this supported $Ri^!_0$. The ordinary adjunction $i^*\\dashv i_*$ has invertible counit by the closed-image theorem; this remains true on modules and termwise on derived categories. Consequently $i_*$ is fully faithful and reflects isomorphisms on $D^+$.",
+   "uses": [
+    "lem-pur-etale-supported-kernel-adjunction",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-trf-bounded-below-derived-adjunction",
+    "def-amb-etale-compact-support",
+    "lem-kun-04ca",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Stacks Tag 09XQ (lemma-sections-with-support-acyclic), its displayed supported Hom adjunction, and Tag 04CA (proposition-closed-immersion-pushforward); agent-explicit extension to constant-ring modules and counit-preserving derived right-adjoint identification."
+   }
+  },
+  {
+   "text": "Normalize finite-type transitivity by the compact-support compositor $Rg_!Rf_!\\cong R(gf)_!$. For a test object $A$, the successive adjunction bijections\n$$\\operatorname{Hom}(A,f^!g^!M)\\cong\\operatorname{Hom}(Rf_!A,g^!M)\\cong\\operatorname{Hom}(Rg_!Rf_!A,M)\\cong\\operatorname{Hom}(R(gf)_!A,M)$$\nidentify $f^!g^!M$ with $(gf)^!M$. The composite counit is $\\varepsilon_g\\circ Rg_!(\\varepsilon_f)$, after the compact-support compositor. Associativity and identity follow by applying the same Hom bijections to the associative compact-support compositor. The mate-pasting identities ensure that transitivity intertwines the canonical base-change comparisons, rather than merely giving an unspecified isomorphism.",
+   "uses": [
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 2.4.3.1 and Remark 2.4.3.2, exceptional-transitivity normalization; compact-support construction in Scholze, Theorem 7.15"
+   }
+  },
+  {
+   "text": "For a source open immersion $u$, etale adjoint locality gives $u^*f^!\\cong(fu)^!$. For a target open immersion $v$, with pullback $v'$ and restricted map $f'$, transitivity applied to $fv'=vf'$ gives\n$$v'^*f^!\\cong(fv')^!\\cong(vf')^!\\cong f'^!v^*,$$\nsince the right adjoint of open extension by zero is ordinary restriction. These are the counit-normalized maps of Step 2, hence are compatible with further open restrictions. All subsequent local computations of the global base-change map use these particular identifications.",
+   "uses": [
+    "lem-amb-etale-adjoint-locality",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Lemma 4.4.1: restriction to opens; Scholze, Theorem 7.15, open adjunctions"
+   }
+  },
+  {
+   "text": "Define the localization comparison $c:j'^*f^!M\\to f'^!j^*M$ by transposing the inverse compact-support exchange followed by $j^*\\varepsilon_f(M)$. To prove it invertible, use Step 3 and affine covers. For an affine finite-type piece $\\operatorname{Spec}B\\to\\operatorname{Spec}A$, choose finite algebra generators, giving a surjection $A[t_1,\\ldots,t_d]\\twoheadrightarrow B$. Thus the piece factors as a closed immersion $k$ followed by affine-space projection $p$. The projection is smooth of dimension $d$. Its purity comparison $p^*M(d)[2d]\\cong p^!M$ is compatible with arbitrary base change of excellent Noetherian schemes. For $k$, ind-etale closed-support base change gives the required comparison. Indeed an ordinary localization is the filtered colimit of its principal localizations, which are etale; a strict localization is ind-etale over an affine chart. The ambient pullback of $j$ is therefore affine ind-etale, exactly the hypothesis of that node. Compose the closed and smooth comparisons using Step 2. Mate pasting identifies this composite with $c$. A morphism of complexes is invertible when its geometric cohomology stalks are, and coefficient forgetting is exact, so these affine verifications prove the global assertion.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "sbc-lem-affine-space-smooth",
+    "lem-per-noetherian-prime-power-smooth-duality",
+    "lem-per-ind-etale-closed-support-base-change",
+    "lem-weil-pbc-localization-colimit-principal-localizations",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-derived-stalk-conservative",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, local and fibre reductions in Proposition 2.4.3.1 and Lemma 4.4.1; agent-explicit closed/smooth factorization argument using the diagonal/deformation smooth orientation"
+   }
+  },
+  {
+   "text": "These operations preserve the bounded-below domains used here. Closed $i^!$ is a right derived functor of a left exact functor, hence sends $D^{\\ge a}$ into $D^{\\ge a}$: choose an injective representative vanishing below $a$ and apply the left exact functor termwise. In the affine factorization of Step 4, $p^!M=p^*M(d)[2d]$ has lower bound $a-2d$. There are finitely many affine pieces because the schemes and the finite-type maps are quasi-compact. Taking the minimum of these finitely many lower bounds bounds $f^!M$ below. Localization is exact inverse image, so it does not change a lower bound. No assumption of finite Tor amplitude or constructibility entered this argument.",
+   "uses": [
+    "lem-trf-bounded-below-derived-adjunction",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-per-noetherian-prime-power-smooth-duality",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-dplus-injective-representative"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, D+ convention throughout; boundedness check for the closed/smooth factorization of Lemma 4.4.1"
+   }
+  },
+  {
+   "text": "Let $b:\\operatorname{Spec}\\kappa(x)\\hookrightarrow X_x$ be the closed point. There is an equality of finite-type morphisms $f_xi=b\\pi$. Transitivity gives\n$$i^!f_x^!(M|_{X_x})=(f_xi)^!(M|_{X_x})=(b\\pi)^!(M|_{X_x})=\\pi^!b^!(M|_{X_x})=\\pi^!C_xM.$$\nHere $b^!$ is the supported restriction by Step 1. The preceding localization comparison identifies the localization of $f^!M$ with $f_x^!(M|_{X_x})$. All these maps use the same composite counit of Step 2.",
+   "uses": [
+    "def-per-potential-dualizing-complex",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 2.4.3.1, displayed costalk comparison; Lemma 4.4.1, initial fibre reduction"
+   }
+  },
+  {
+   "text": "For a closed immersion $h:Z\\hookrightarrow Y$ and $z\\in Z$, localize $Y$ at $h(z)$. Its pullback closed subscheme is $\\operatorname{Spec}\\mathcal O_{Z,z}$: on affine rings $(A/I)_{\\mathfrak p/I}=A_{\\mathfrak p}/IA_{\\mathfrak p}$ by the fraction formula. The closed-point inclusion $b_z$ followed by this localized immersion is the closed-point inclusion $b_{h(z)}$, with the same residue field. Step 4 and transitivity therefore give\n$$C_z(h^!L)=b_z^!h_z^!(L|_{Y_{h(z)}})=(h_zb_z)^!(L|_{Y_{h(z)}})=C_{h(z)}L.$$\nApply this calculation to the closed fibre $i$ in Step 6. It gives $C_y(f^!M)\\cong C_y(\\pi^!C_xM)$ for each $y$ of that fibre.",
+   "uses": [
+    "def-per-potential-dualizing-complex",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 2.4.3.1; closed-support transitivity in the fibre reduction of Lemma 4.4.1"
+   }
+  },
+  {
+   "text": "Apply [lem-per-regular-supported-base-change] to the given regular $h:Y\\to X$, closed immersion $i:Z\\hookrightarrow X$, and arbitrary $M\\in D^+(X_{\\mathrm{et}},\\Lambda)$. Its coefficient ring is exactly $\\mathbf Z/\\ell^n$, and its Noetherian and invertibility hypotheses follow from the standing assumptions; it requires neither constructibility nor finite type of $h$. Step 1 identifies its supported $Ri^!_0$ with compact-support $i^!$, preserving the closed counit. Consequently the isomorphism supplied by that node is precisely the required map $h'^*i^!M\\to i'^!h^*M$: after closed pushforward its transpose is the pulled-back counit. Use its stated compatibility with open restriction, localization, composition and successive closed restrictions. This proves the regular supported assertion by the existing theorem, with the same morphism normalization.",
+   "uses": [
+    "lem-per-regular-supported-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Corollary 4.2.3 and Lemma 4.3.1.1, applied through the existing prime-power supported base-change node; identification of the two closed exceptional functors is Step 1."
+   }
+  },
+  {
+   "text": "Naturality and pasting of the supported comparisons are checked on their defining transposes. After $i'_*$ each comparison followed by the supported counit is exactly $h^*$ of $i_*i^!M\\to M$. For two base changes the two proposed transposes both apply the two pullbacks to this same counit; for two closed immersions they both use the composite counit of Step 2. The mate-pasting identities give equality. The same calculation with an open restriction or a localization inserted proves compatibility with those restrictions and with successive point costalks. Thus no equality is inferred solely from agreement of isomorphism classes of objects.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Corollary 4.2.3 and Lemma 4.3.1.1; explicit mate-pasting verification"
+   }
+  },
+  {
+   "text": "The tensor compatibility has the same normalization. For a compactification the open tensor isomorphism followed by proper projection gives an invertible compact-support projection map. Write $T_f(P,Q)$ for the transpose of $\\mathrm{PF}_f^{-1}$ followed by $\\varepsilon_f(P)\\otimes1_Q$. Compact-support projection/exchange coherence identifies the two pullbacks of $\\mathrm{PF}_f^{-1}$, and the defining counit equation for a supported comparison identifies the two pullbacks of $\\varepsilon_f$. After transposition the two resulting tensor squares are therefore equal. For compositions, the compact-support tensor-composition identity and the composite counit $\\varepsilon_g\\circ Rg_!\\varepsilon_f$ give the identical equality. This proves compatibility wherever the displayed tensors are defined; it asserts no arbitrary-coefficient invertibility of $T_f$. For closed immersions the projection is invertible on all ordinary derived complexes by the proper projection formula.",
+   "uses": [
+    "lem-asd-compact-projection-exchange",
+    "lem-amb-shriek-tensor-composition",
+    "lem-amb-proper-coproducts-projection",
+    "lem-weil-pbc-mate-pasting",
+    "lem-pur-etale-open-derived-tensor",
+    "def-amb-etale-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, fibre and composition comparisons; counit-defined tensor normalization, using ordinary compact-support projection/exchange"
+   }
+  },
+  {
+   "text": "For smooth $h$ of pure relative dimension $d$, use the diagonal/deformation orientation $\\gamma_h:h^*(-)(d)[2d]\\cong h^!(-)$ and its base-change/composition identity. Closed restriction commutes with the invertible Tate line and shifts: to see this without a Tor hypothesis on $M$, tensor the test object in $\\operatorname{Hom}(A,i^!(-))$ by the inverse line, move it through $i_*$ by the proper projection formula, and transpose back. Apply $i'^!$ to $\\gamma_h(M)$ and compose with $i'^!h^!M\\cong h'^!i^!M$. The orientation identity for the Cartesian square identifies the result, after canceling the same line and shift on both sides, with the inverse of the supported map of Step 8. This can also be checked by transposing: both maps have closed transpose $h^*(i_*i^!M\\to M)$, because $\\gamma$ intertwines the smooth counits and their base changes. Thus for the closed point of $X_x$ it is exactly $i'^!h^*M\\cong h'^*C_xM$, with the claimed smooth normalization.",
+   "uses": [
+    "lem-per-noetherian-prime-power-smooth-duality",
+    "lem-amb-proper-coproducts-projection",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 4.3.1.1 and final paragraph of Lemma 4.4.1; smooth specialization via the diagonal/deformation orientation"
+   }
+  },
+  {
+   "text": "For an affine source localization $T=\\operatorname{Spec}(S^{-1}B)$ of a finite-type $X$-model $u:U=\\operatorname{Spec}B\\to X$, put $a^!=j^*u^!$. Principal opens $U_s$ form a directed affine-transition system with limit $T$. Compare a second model $V$ with the same localized source. The target models are finitely presented over the Noetherian affine base: use the finite-type/finite-presentation lemma on their coordinate algebras. Apply finite-presentation descent to sections of $U_s\\times_XV\\to U_s$ (identity source is finitely presented); this descends $T\\to V$ to a map $\\phi:U_s\\to V$. Reversing the models gives $\\psi:V_t\\to U$. Shrinking domains by preimages of the chosen principal opens makes both composites defined. Equality descent, applied to the sections representing each composite and the corresponding inclusion, gives neighbourhoods $U_0,V_0$ of $T$ on which $\\psi\\phi=1$ and $\\phi\\psi=1$. Then $U_1=U_0\\cap\\phi^{-1}V_0$ and $V_1=V_0\\cap\\psi^{-1}U_0$ are inverse under $\\phi,\\psi$: the two displayed identities show that each map lands in the indicated intersection. Step 3 now identifies the exceptional functors on these isomorphic open neighbourhoods and hence on $T$. A third model and any two refinements are compared by the same finite descent; the identity/associativity normalization of Steps 2–3 gives the cocycle. Apply this on affine neighbourhoods for non-affine models; the same canonical open comparisons agree on overlaps.",
+   "uses": [
+    "lem-weil-pbc-localization-colimit-principal-localizations",
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-amb-etale-adjoint-locality",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "XVII, Lemma 4.4.1, independence of the open of the reduced closure; agent-explicit finite-model argument using Stacks Tag 01ZM (lemma-descend-finite-presentation)"
+   }
+  },
+  {
+   "text": "For composable essentially finite-type restrictions, spread the finite-type model of the second arrow over a principal-open neighbourhood in the first model. This is finite-presentation descent along the source-localization system. After localizing its source, the model realizes the given arrow: present its coordinate algebra by finitely many generators and relations over the localized base, and invert the finitely many denominators of these coefficients. The composite is then represented by the composite of the two finite-type models followed by localization. Move this localization across the first exceptional functor using Step 4, and apply finite-type transitivity from Step 2. This defines $(ba)^!\\cong a^!b^!$. Any two choices and any triple of arrows can be compared after one further finite refinement, again by equality descent. At that refinement the unit, associativity, and right-adjoint-normalization identities are the finite-type identities of Step 2. Restricting them proves the pseudofunctor laws. The comparisons with target localization, closed restriction and open restriction are inherited by the same construction and the mate-pasting identity of Step 9.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "XVII, Lemma 4.4.1, composition clause; agent-explicit source/target model refinement via Stacks Tag 01ZM"
+   }
+  },
+  {
+   "text": "Finally fix $y$ of the fibre $F$ and write $W=\\overline{\\{y\\}}_{\\mathrm{red}}\\hookrightarrow F$. Its generic residue field is $\\kappa(y)$, so $W\\to\\operatorname{Spec}\\kappa(x)$ is an integral finite-type model for $a:\\operatorname{Spec}\\kappa(y)\\to\\operatorname{Spec}\\kappa(x)$. Apply the closed-immersion identity of Step 7 to $W\\hookrightarrow F$ and then transitivity:\n$$C_y(\\pi^!C_xM)=C_y((\\pi|_W)^!C_xM)=((\\pi|_W)^!C_xM)|_{\\operatorname{Spec}\\kappa(y)}=a^!C_xM.$$\nThe middle equality holds because the closed-point immersion in the local scheme of $W$ at its generic point is the identity. Step 12 makes the answer independent of $W$ or of a smaller generic neighbourhood; Step 13 gives the asserted composition law for towers of residue fields. Combined with Steps 6, 7, 9 and 10 this proves all supported, fibre, open and tensor compatibilities. Every construction was on arbitrary bounded-below inputs. No pinning, constructibility or dualizing assumption was used.",
+   "uses": [
+    "def-per-potential-dualizing-complex",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 4.4.1, reduced closure and passage to its generic point; Proposition 2.4.3.1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-etale-compact-support",
+  "def-per-potential-dualizing-complex",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-proper-coproducts-projection",
+  "lem-amb-shriek-tensor-composition",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-compact-projection-exchange",
+  "lem-kun-04ca",
+  "lem-per-ind-etale-closed-support-base-change",
+  "lem-per-noetherian-prime-power-smooth-duality",
+  "lem-per-regular-supported-base-change",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-trf-bounded-below-derived-adjunction",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-derived-stalk-conservative",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-localization-colimit-principal-localizations",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "sbc-lem-affine-space-smooth",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-pd-spreading-out"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XVII, Proposition 2.4.3.1, Corollary 4.2.3 and Lemmas 4.3.1.1, 4.4.1; explicit general-input model restriction, adjunction and normalization arguments, using the blueprint diagonal/deformation purity route"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -69,10 +305,38 @@
    "results": "Search log result: 8 hits; RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange, Algebra.Etale.baseChange, IsSMulRegular.of_flat_of_isBaseChange, IsLocalizedModule.isBaseChange, IsBaseChange.finsuppPow, KaehlerDifferential.isBaseChange_of_formallyEtale, IsBaseChange.basis.congr_simp, RingHom.locally_isStableUnderBaseChange. ",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exceptional inverse image on ordinary etale bounded below torsion derived categories commutes with localization and regular supported base change",
+   "results": "{\"t\": \"2026-10-18T13:59:25Z\", \"tool\": \"leanfinder\", \"query\": \"Exceptional inverse image on ordinary etale bounded below torsion derived categories commutes with localization and regular supported base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.isHomological_of_localization\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\"], \"digest\": \"41c1e6cbea41401c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: abstract adjunction/localization and scheme etale-map hits do not provide etale exceptional localization or supported calculus"
+  },
+  {
+   "tool": "grep",
+   "query": "extraordinary|exceptionalInverse|costalk|upperShriek|regularBaseChange",
+   "results": "{\"t\": \"2026-10-18T14:21:57Z\", \"tool\": \"grep\", \"query\": \"extraordinary|exceptionalInverse|costalk|upperShriek|regularBaseChange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Manifold/Bordism.lean\", \"Mathlib/Geometry/Manifold/Bordism.lean\"], \"digest\": \"622a86a6cb8f6fc4\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: abstract adjunction/localization and scheme etale-map hits do not provide etale exceptional localization or supported calculus"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale extraordinary inverse image is invariant under localization and satisfies costalk transitivity",
+   "results": "{\"t\": \"2026-10-18T14:21:58Z\", \"tool\": \"leansearch\", \"query\": \"Etale extraordinary inverse image is invariant under localization and satisfies costalk transitivity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.of_isLocalizationAway\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.FormallyEtale.localization_base\", \"Algebra.IsEtaleAt.comp\", \"Algebra.exists_etale_of_isEtaleAt\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.Etale.of_isLocalization_Away\", \"Algebra.FormallyEtale.localization_map\"], \"digest\": \"f55dae836c314b3b\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: abstract adjunction/localization and scheme etale-map hits do not provide etale exceptional localization or supported calculus"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CategoryTheory.Adjunction.comp\"",
+   "results": "{\"t\": \"2026-10-18T14:21:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"CategoryTheory.Adjunction.comp\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.comp\", \"CategoryTheory.Adjunction.comp_map_bijective_iff\", \"CategoryTheory.Adjunction.compCoyonedaIso\", \"CategoryTheory.Adjunction.compUliftCoyonedaIso\", \"CategoryTheory.Adjunction.comp_homEquiv\", \"CategoryTheory.Adjunction.compYonedaIso\", \"CategoryTheory.Adjunction.comp_counit_app\", \"CategoryTheory.Adjunction.comp_unit_app\"], \"digest\": \"60c72035e523106f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: abstract adjunction/localization and scheme etale-map hits do not provide etale exceptional localization or supported calculus"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-exceptional-costalk-gysin",
@@ -95,5 +359,114 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-prime-power-supported-calculus",
+  "worker": "stage1",
+  "summary": "Repaired both maintainer returns without changing the statement. Steps 4, 5 and 11 now use the current per-chapter prime-power diagonal/DNC smooth-duality node instead of the trace-formula purity node. Step 8 cites the existing regular supported base-change theorem after the counit-preserving identification in Step 1; the redundant stalk argument and the unneeded new direct-image node are dropped. The fourteen retained steps give localization, costalk/fibre transitivity, normalized regular support, tensor compatibility and finite-model descent. No new nodes or Mathlib leaves.",
+  "blueprint": "Realizes lem-per-artin-gabber-affine-curve Proof Step 3, dimension-normalized duality, through its prime-power exceptional costalk expansion. Does not replace the perverse/duality unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Generic Etale localization of the ambient adjoint used for the explicit adjunction, localization, finite-model or smooth-normalization calculation; no node of this unit provides this general tool, and the perverse-duality route is retained."
+   },
+   {
+    "node": "lem-amb-proper-coproducts-projection",
+    "why": "Generic The proper projection formula on the ambient category used for the explicit adjunction, localization, finite-model or smooth-normalization calculation; no node of this unit provides this general tool, and the perverse-duality route is retained."
+   },
+   {
+    "node": "lem-amb-shriek-tensor-composition",
+    "why": "Generic Tensor projection maps respect compact-support composition used for the explicit adjunction, localization, finite-model or smooth-normalization calculation; no node of this unit provides this general tool, and the perverse-duality route is retained."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Generic Unbounded ordinary etale compact-support comparisons used for the explicit adjunction, localization, finite-model or smooth-normalization calculation; no node of this unit provides this general tool, and the perverse-duality route is retained."
+   },
+   {
+    "node": "lem-asd-compact-projection-exchange",
+    "why": "Generic Compact-support projection maps commute with etale exchange used for the explicit adjunction, localization, finite-model or smooth-normalization calculation; no node of this unit provides this general tool, and the perverse-duality route is retained."
+   },
+   {
+    "node": "lem-kun-04ca",
+    "why": "Generic Pushforward along a closed immersion used for the explicit adjunction, localization, finite-model or smooth-normalization calculation; no node of this unit provides this general tool, and the perverse-duality route is retained."
+   },
+   {
+    "node": "lem-pur-etale-supported-kernel-adjunction",
+    "why": "Generic Closed etale support kernel and its exact left adjoint used for the explicit adjunction, localization, finite-model or smooth-normalization calculation; no node of this unit provides this general tool, and the perverse-duality route is retained."
+   },
+   {
+    "node": "lem-trf-bounded-below-derived-adjunction",
+    "why": "Generic Canonical bounded-below derived adjunction and its comparison normalization used for the explicit adjunction, localization, finite-model or smooth-normalization calculation; no node of this unit provides this general tool, and the perverse-duality route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-derived-stalk-conservative",
+    "why": "Generic Conservativity of geometric stalks on the derived category used for the explicit adjunction, localization, finite-model or smooth-normalization calculation; no node of this unit provides this general tool, and the perverse-duality route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-localization-colimit-principal-localizations",
+    "why": "Generic A localization is the filtered colimit of the principal localizations used for the explicit adjunction, localization, finite-model or smooth-normalization calculation; no node of this unit provides this general tool, and the perverse-duality route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic Colimits of sheaves of modules and the forgetful functor to abelian sheaves used for the explicit adjunction, localization, finite-model or smooth-normalization calculation; no node of this unit provides this general tool, and the perverse-duality route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Generic Sheaves of modules on the small etale site have enough injectives used for the explicit adjunction, localization, finite-model or smooth-normalization calculation; no node of this unit provides this general tool, and the perverse-duality route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "why": "Generic Strict henselization is ind-etale over an affine chart used for the explicit adjunction, localization, finite-model or smooth-normalization calculation; no node of this unit provides this general tool, and the perverse-duality route is retained."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic Inverse image of etale sheaves of modules over a constant ring is exact used for the explicit adjunction, localization, finite-model or smooth-normalization calculation; no node of this unit provides this general tool, and the perverse-duality route is retained."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic Affine space is smooth used for the explicit adjunction, localization, finite-model or smooth-normalization calculation; no node of this unit provides this general tool, and the perverse-duality route is retained."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Generic The ordinary ambient exceptional adjoint used for the explicit adjunction, localization, finite-model or smooth-normalization calculation; no node of this unit provides this general tool, and the perverse-duality route is retained."
+   },
+   {
+    "node": "thm-pd-spreading-out",
+    "why": "Generic Descent of finitely presented data at a filtered limit used for the explicit adjunction, localization, finite-model or smooth-normalization calculation; no node of this unit provides this general tool, and the perverse-duality route is retained."
+   },
+   {
+    "node": "lem-pur-etale-open-derived-tensor",
+    "why": "Generic Open extension by zero and unbounded derived tensor on ordinary etale sites used for the explicit adjunction, exactness, stalk or finite-model calculation; the perverse unit has no corresponding general tool and its proof route is retained."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-proper-coproducts-projection",
+  "lem-amb-shriek-tensor-composition",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-compact-projection-exchange",
+  "lem-kun-04ca",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-trf-bounded-below-derived-adjunction",
+  "lem-weil-pbc-derived-stalk-conservative",
+  "lem-weil-pbc-localization-colimit-principal-localizations",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "sbc-lem-affine-space-smooth",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-pd-spreading-out",
+  "lem-pur-etale-open-derived-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q26-0c7e32b47",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-0c7e32b47 (reviewer sub-agent of L); spot-checked: This re-delivery follows my RETURN of e024c59e. The statement and stmt_deps are identical, so no target is weakened, and there are no new nodes. R1 is repaired: lem-trf-ambient-diagonal-purity-base-change is gone from Steps 4, 5 and 11 and from proof_deps. Those steps now cite lem-per-noetherian-prime-power-smooth-duality (NG, unsplit, same unit). It covers Z/ell^n on ordinary small-etale categories, every D^+ input, Noetherian base change (localizations are Noetherian), composition, and the diagonal/DNC orientation. Its hypotheses hold for the affine-space projection in Step 4 (smooth, separated, pure dimension d, compactifiable via P^d) and for smooth h in Step 11. R2 is repaired: Step 8 cites lem-per-regular-supported-base-change, with the same Lambda, regular h, D^+ M, supported a^! and counit, localization and composition compatibilities. Step 1 identifies that a^! with compact-support i^! while preserving the counit. The old stalk argument and the new direct-image node are dropped. All other steps are verbatim or minor rewordings of steps I checked before against ILO XVII 2.4.3.1, 4.2.3, 4.3.1.1 and 4.4.1 and Stacks 01ZM and 04CA, and they are sound. Batch 5: I computed the closure from both targets, stopping at the assumption leaves, with and without the item's proof deps. Both give 16,492 nodes, so the item adds no trf or pd node. The four flags are accepted as generic. lem-trf-bounded-below-derived-adjunction is the derived adjunction for an exact left adjoint. lem-per-ind-etale-closed-support-base-change and lem-per-regular-supported-base-change reach trf only through that adjunction. lem-amb-shriek-tensor-composition reaches pd only through a generic lisse-module node. Maintainer note: the parent lem-per-exceptional-costalk-gysin and the sibling lem-per-prime-power-regular-gysin should likewise re-cite the smooth-duality node."
  }
 }
