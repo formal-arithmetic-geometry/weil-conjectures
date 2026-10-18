@@ -8699,6 +8699,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.BidualitySupport
 public import WeilConjectures.SixFunctors.Etale.Derived.BoundaryDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.ClosedPointSupport
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChange
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeExchange
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
 public import WeilConjectures.SixFunctors.Etale.Derived.CoextendScalars

@@ -339,6 +339,79 @@ lemma rightDerivedFunctorCompIso_hom_app_comp_isoMapDerivedCategory_hom_app (F :
 
 end DerivedExact
 
+section Transport
+
+attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
+
+variable {C E : Type*} [Category C] [Category E] [Abelian C] [Abelian E] [HasDerivedCategory C]
+  [HasDerivedCategory E] {H F : C ⥤ C} {Γ S : C ⥤ E}
+  [H.Additive] [PreservesFiniteLimits H] [PreservesFiniteColimits H]
+  [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+  [Γ.Additive] [PreservesFiniteLimits Γ] [PreservesFiniteColimits Γ]
+  [S.Additive] [PreservesFiniteLimits S] [PreservesFiniteColimits S]
+
+/-- The isomorphism `S ≅ H ⋙ S` obtained from `ι : H ≅ F`, `γ : F ⋙ Γ ≅ Γ` and `e : Γ ≅ S`:
+`S ≅ Γ ≅ F ⋙ Γ ≅ F ⋙ S ≅ H ⋙ S`. -/
+noncomputable def sectionsTransportIso (ι : H ≅ F) (γ : F ⋙ Γ ≅ Γ) (e : Γ ≅ S) : S ≅ H ⋙ S :=
+  e.symm ≪≫ γ.symm ≪≫ Functor.isoWhiskerLeft F e ≪≫ Functor.isoWhiskerRight ι.symm S
+
+/-- The derived-category form of `sectionsTransportIso`, for exact functors. -/
+lemma mapDerivedCategoryCompIso_hom_app_comp_sectionsTransportIso (ι : H ≅ F)
+    (γ : F ⋙ Γ ≅ Γ) (e : Γ ≅ S) (K : DerivedCategory C) :
+    (Functor.mapDerivedCategoryCompIso F Γ).hom.app K ≫
+        (Functor.mapDerivedCategoryNatIso e).hom.app (F.mapDerivedCategory.obj K) ≫
+        S.mapDerivedCategory.map ((Functor.mapDerivedCategoryNatIso ι).inv.app K) =
+      (Functor.mapDerivedCategoryNatIso γ).hom.app K ≫
+        (Functor.mapDerivedCategoryNatIso e).hom.app K ≫
+        (Functor.mapDerivedCategoryTriangleIso (sectionsTransportIso ι γ e)).hom.app K := by
+  have h₁ : γ ≪≫ e ≪≫ sectionsTransportIso ι γ e =
+      Functor.isoWhiskerLeft F e ≪≫ Functor.isoWhiskerRight ι.symm S := by
+    ext X
+    simp [sectionsTransportIso]
+  have h₂ := congrArg (fun α ↦ NatTrans.app α K)
+    (congrArg (fun e ↦ (Functor.mapDerivedCategoryNatIso e).hom) h₁)
+  simp only [Functor.mapDerivedCategoryNatIso_trans, NatTrans.comp_app] at h₂
+  have hWL := NatTrans.congr_app (Functor.mapDerivedCategoryNatIso_isoWhiskerLeft F e) K
+  have hWR := NatTrans.congr_app (Functor.mapDerivedCategoryNatIso_isoWhiskerRight ι.symm S) K
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at hWL hWR
+  rw [Iso.trans_hom, NatTrans.comp_app, reassoc_of% h₂, hWR, reassoc_of% hWL,
+    Functor.mapDerivedCategoryNatIso_symm]
+
+variable [HasKInjectiveResolutions C] [F.PreservesKInjectiveComplexes]
+
+/-- The isomorphism `D(H) ⋙ RΓ ≅ RΓ` obtained from `ι : H ≅ F` and `γ : F ⋙ Γ ≅ Γ` corresponds,
+under identifications `RΓ ≅ D(S)` induced by `e : Γ ≅ S`, to `D(sectionsTransportIso ι γ e)`. -/
+lemma rightDerivedFunctorCompIso'_inv_app_comp_sectionsTransportIso (ι : H ≅ F)
+    (γ : F ⋙ Γ ≅ Γ) (e : Γ ≅ S) (K : DerivedCategory C) :
+    (Functor.isoWhiskerRight (H.rightDerivedFunctorIsoMapDerivedCategory.symm ≪≫
+        Functor.rightDerivedFunctorNatIso ι) Γ.rightDerivedFunctor ≪≫
+        Functor.rightDerivedFunctorCompIso' F Γ γ).inv.app K ≫
+        (Functor.rightDerivedFunctorNatIso e ≪≫ S.rightDerivedFunctorIsoMapDerivedCategory).hom.app
+          (H.mapDerivedCategory.obj K) =
+      (Functor.rightDerivedFunctorNatIso e ≪≫ S.rightDerivedFunctorIsoMapDerivedCategory).hom.app
+          K ≫ (Functor.mapDerivedCategoryTriangleIso (sectionsTransportIso ι γ e)).hom.app K := by
+  have hι : (Functor.rightDerivedFunctorNatIso ι).inv.app K ≫
+      H.rightDerivedFunctorIsoMapDerivedCategory.hom.app K =
+      F.rightDerivedFunctorIsoMapDerivedCategory.hom.app K ≫
+        (Functor.mapDerivedCategoryNatIso ι).inv.app K := by
+    rw [← cancel_epi ((Functor.rightDerivedFunctorNatIso ι).hom.app K), Iso.hom_inv_id_app_assoc,
+      rightDerivedFunctorNatIso_hom_app_comp_isoMapDerivedCategory_hom_app_assoc,
+      Iso.hom_inv_id_app, Category.comp_id]
+  have hγ := rightDerivedFunctorNatIso_hom_app_comp_isoMapDerivedCategory_hom_app γ K
+  have hFΓ := rightDerivedFunctorCompIso_hom_app_comp_isoMapDerivedCategory_hom_app F Γ K
+  have h₀ := mapDerivedCategoryCompIso_hom_app_comp_sectionsTransportIso ι γ e K
+  simp only [Iso.trans_hom, NatTrans.comp_app] at h₀
+  simp only [Iso.trans_inv, Iso.trans_hom, Iso.symm_inv, NatTrans.comp_app,
+    Functor.isoWhiskerRight_inv, Functor.whiskerRight_app, Category.assoc,
+    Functor.rightDerivedFunctorCompIso']
+  rw [rightDerivedFunctorNatIso_hom_app_comp_isoMapDerivedCategory_hom_app,
+    rightDerivedFunctorNatIso_hom_app_comp_isoMapDerivedCategory_hom_app_assoc, hι,
+    Functor.map_comp_assoc, NatTrans.naturality_assoc, reassoc_of% hFΓ,
+    (Functor.mapDerivedCategoryNatIso e).hom.naturality, h₀, ← reassoc_of% hγ,
+    Iso.inv_hom_id_app_assoc]
+
+end Transport
+
 /-- **Unfinished.** The compatibility of the coefficient comparison of `RΓ(Spec k, -)` with the
 transport along
 an automorphism `h` of `Spec k` (part of the compatibility with pullback asserted by blueprint
@@ -489,188 +562,5 @@ noncomputable def compactlySupportedGlobalSectionsRestrictScalarsIso :
   pasteTwoSquaresIso (derivedRestrictScalarsCompRightDerivedLowerShriekIso ρ aX)
     (derivedRestrictScalarsCompRightDerivedGlobalSectionsIso ρ)
 
-/-- **Unfinished.** The compatibility of the coefficient comparison of `Ra_!` with the
-compact-support exchange
-map along an automorphism pair `(g, h)`: the "compatible with pullback" clause of blueprint
-`lem-fix-compact-support-coefficient-change`. -/
-lemma derivedRestrictScalarsCompRightDerivedLowerShriekIso_baseChangeMap [QuasiCompact aX]
-    {g : X ⟶ X} {h : Spec (.of k) ⟶ Spec (.of k)} (sq : IsPullback g aX aX h)
-    (K' : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ'))) :
-    (L((h)^*[ModuleCat.{u + 1} Λ])).map
-        ((derivedRestrictScalarsCompRightDerivedLowerShriekIso ρ aX).hom.app K') ≫
-      (leftDerivedUpperStarRestrictScalarsIso ρ h).hom.app
-        ((R(aX)_![ModuleCat.{u + 1} Λ']).obj K') ≫
-      (Sheaf.derivedRestrictScalars _ ρ).map
-        ((rightDerivedLowerShriekBaseChangeMap Λ' sq).app K') =
-    (rightDerivedLowerShriekBaseChangeMap Λ sq).app
-        ((Sheaf.derivedRestrictScalars _ ρ).obj K') ≫
-      (R(aX)_![ModuleCat.{u + 1} Λ]).map
-        ((leftDerivedUpperStarRestrictScalarsIso ρ g).hom.app K') ≫
-      (derivedRestrictScalarsCompRightDerivedLowerShriekIso ρ aX).hom.app
-        ((L((g)^*[ModuleCat.{u + 1} Λ'])).obj K') :=
-  sorry
-
-omit [IsSepClosed k] in
-/-- The components of the compact-support base change `AlgebraicGeometry.Etale.compactPullback`. -/
-lemma compactPullback_app {g : X ⟶ X} {h : Spec (.of k) ⟶ Spec (.of k)} [QuasiCompact aX]
-    (sq : IsPullback g aX aX h) [IsIso h]
-    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    (compactPullback Λ sq).app K =
-      (globalSectionsTransport Λ h).hom.app ((R(aX)_![ModuleCat.{u + 1} Λ]).obj K) ≫
-        (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).map
-          ((rightDerivedLowerShriekBaseChangeMap Λ sq).app K) := by
-  simp [compactPullback]
-
-/-- The coefficient comparison of compact cohomology is compatible with the compact-support base
-change along every automorphism pair. -/
-lemma isCompactPullbackCompatible_compactlySupportedGlobalSectionsRestrictScalarsIso
-    [QuasiCompact aX] {g : X ⟶ X} {h : Spec (.of k) ⟶ Spec (.of k)}
-    (sq : IsPullback g aX aX h) [IsIso h] :
-    IsCompactPullbackCompatible ρ (compactlySupportedGlobalSectionsRestrictScalarsIso ρ aX) sq := by
-  intro K'
-  rw [compactPullback_app, compactPullback_app]
-  exact pasteTwoSquaresIso_hom_app_comp_map_of_comm
-    (α₁ := derivedRestrictScalarsCompRightDerivedLowerShriekIso ρ aX)
-    (α₂ := derivedRestrictScalarsCompRightDerivedGlobalSectionsIso ρ)
-    (εg := leftDerivedUpperStarRestrictScalarsIso ρ g)
-    (εh := leftDerivedUpperStarRestrictScalarsIso ρ h)
-    (Ex := rightDerivedLowerShriekBaseChangeMap Λ sq)
-    (Ex' := rightDerivedLowerShriekBaseChangeMap Λ' sq)
-    (T := (globalSectionsTransport Λ h).hom) (T' := (globalSectionsTransport Λ' h).hom)
-    (derivedRestrictScalarsCompRightDerivedGlobalSectionsIso_hom_app_globalSectionsTransport ρ h)
-    (derivedRestrictScalarsCompRightDerivedLowerShriekIso_baseChangeMap ρ aX sq) K'
-
-/-- Blueprint `lem-fix-compact-support-coefficient-change` (subsection
-`sk-def-sfb-coefficient-comparisons`): for a surjection `ρ : Λ →+* Λ'` of finite rings whose
-exponent is invertible on the separably closed field `k` and a separated finite-type
-`a_X : X ⟶ Spec k`, the canonical coefficient comparison
-`RΓ_c(X, K) ⊗ᴸ_Λ Λ' ⟶ RΓ_c(X, K ⊗ᴸ_Λ Λ')`
-(`AlgebraicGeometry.Etale.compactlySupportedGlobalSectionsRestrictScalarsIso`) is an
-isomorphism for every `K ∈ Dᵇctf(X, Λ)`. -/
-theorem isCoefficientChange_compactlySupportedGlobalSectionsRestrictScalarsIso [IsSeparated aX]
-    [LocallyOfFiniteType aX] [QuasiCompact aX] [HasInvertibleExponent Λ (Spec (.of k))]
-    (hρ : Function.Surjective ρ) :
-    IsCoefficientChange ρ (compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX)
-      (compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ') aX)
-      (compactlySupportedGlobalSectionsRestrictScalarsIso ρ aX) :=
-  sorry
-
-variable [LocallyOfFiniteType aX] [QuasiCompact aX] [IsSeparated aX]
-
-
-/-- Blueprint `lem-fix-compact-support-coefficient-change` (subsection
-`sk-def-sfb-coefficient-comparisons`):
-compact cohomology commutes with finite-level coefficient reduction, compatibly with pullback.
-For a surjection `ρ : Λ →+* Λ'` of finite coefficient rings whose exponent is invertible on the
-separably closed field `k` and a separated finite-type `a_X : X ⟶ Spec k`, compact cohomology
-commutes with restriction of scalars along `ρ` through a coefficient comparison `α` for which
-`RΓ_c(X, K) ⊗ᴸ_Λ Λ' ⟶ RΓ_c(X, K ⊗ᴸ_Λ Λ')` is an isomorphism for every `K ∈ Dᵇctf(X, Λ)`, and `α`
-is compatible with the compact-support base change along every pair of automorphisms
-(`AlgebraicGeometry.Etale.IsCompactPullbackCompatible`). -/
-theorem exists_isCoefficientChange_compactlySupportedGlobalSections
-    [HasInvertibleExponent Λ (Spec (.of k))] (hρ : Function.Surjective ρ) :
-    ∃ α, IsCoefficientChange ρ (compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX)
-        (compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ') aX) α ∧
-      ∀ (g : X ⟶ X) (h : Spec (.of k) ⟶ Spec (.of k)) (sq : IsPullback g aX aX h) [IsIso h],
-        IsCompactPullbackCompatible ρ α sq :=
-  ⟨compactlySupportedGlobalSectionsRestrictScalarsIso ρ aX,
-    isCoefficientChange_compactlySupportedGlobalSectionsRestrictScalarsIso ρ aX hρ,
-    fun _ _ sq _ ↦
-      isCompactPullbackCompatible_compactlySupportedGlobalSectionsRestrictScalarsIso ρ aX sq⟩
-
-/-- Blueprint `thm-trf-finite-coefficient-map` (subsection `sk-p-trace-coeff`), the pullback
-isomorphism at a geometric point: geometric stalks commute with finite-level coefficient
-reduction, compatibly with the stalk transports. For a surjection `ρ : Λ →+* Λ'` of finite
-coefficient rings whose exponent is invertible on `k` and a geometric point `x̄ : Spec k ⟶ X`,
-the geometric stalk commutes with restriction of scalars along `ρ` through a coefficient
-comparison `β` for which `K_x̄ ⊗ᴸ_Λ Λ' ⟶ (K ⊗ᴸ_Λ Λ')_x̄` is an isomorphism for every
-`K ∈ Dᵇctf(X, Λ)`, and `β` is compatible with the stalk transport at `x̄` along every pair of
-automorphisms fixing `x̄` (`AlgebraicGeometry.Etale.IsStalkPullbackCompatible`). -/
-theorem exists_isCoefficientChange_geometricStalk
-    [HasInvertibleExponent Λ (Spec (.of k))] (hρ : Function.Surjective ρ)
-    (x : Spec (.of k) ⟶ X) :
-    ∃ β, IsCoefficientChange ρ (geometricStalk Λ x) (geometricStalk Λ' x) β ∧
-      ∀ (g : X ⟶ X) (h : Spec (.of k) ⟶ Spec (.of k)) (hx : h ≫ x = x ≫ g) [IsIso h],
-        IsStalkPullbackCompatible ρ β hx :=
-  ⟨geometricStalkRestrictScalarsIso ρ x,
-    isCoefficientChange_geometricStalkRestrictScalarsIso ρ x hρ,
-    fun _ _ hx _ ↦ isStalkPullbackCompatible_geometricStalkRestrictScalarsIso ρ x hx⟩
-
-namespace AdicSystem
-
-variable {R : Type (u + 1)} [CommRing R] {I : Ideal R} (S : AdicSystem I X)
-  [∀ n, Finite (R ⧸ I ^ n)] [∀ n, HasInvertibleExponent (R ⧸ I ^ n) (Spec (.of k))]
-
-include aX in
-/-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (1), levelwise perfectness and
-normalization: each `P_n = RΓ_c(X, L_n)` and each geometric stalk `P_{x̄, n} = (L_n)_x̄` is a
-perfect complex of `A_n`-modules, and the transition `ν_n` induces, through an identification of
-`RΓ_c(X, -)` (resp. `(-)_x̄`) of a restriction of scalars with the restriction of scalars of
-`RΓ_c(X, -)` (resp. `(-)_x̄`), a map `P_{n+1} ⟶ Res P_n` exhibiting `P_n` as
-`P_{n+1} ⊗ᴸ_{A_{n+1}} A_n`, i.e. an isomorphism `P_{n+1} ⊗ᴸ_{A_{n+1}} A_n ≅ P_n`. -/
-theorem isPerfect_and_exists_isDerivedBaseChange (n : ℕ) :
-    ((compactlySupportedGlobalSections (ModuleCat.{u + 1} (R ⧸ I ^ n)) aX).obj
-        (S.obj n)).IsPerfect ∧
-      (∃ e : (compactlySupportedGlobalSections (ModuleCat.{u + 1} (R ⧸ I ^ (n + 1))) aX).obj
-          ((_root_.DerivedCategory.levelTransitionRestrictScalars _ I n.le_succ).obj (S.obj n)) ≅
-          (ModuleCat.derivedRestrictScalars
-            (Ideal.Quotient.factor (Ideal.pow_le_pow_right n.le_succ))).obj
-            ((compactlySupportedGlobalSections (ModuleCat.{u + 1} (R ⧸ I ^ n)) aX).obj
-              (S.obj n)),
-        ModuleCat.IsDerivedBaseChange
-          ((compactlySupportedGlobalSections (ModuleCat.{u + 1} (R ⧸ I ^ (n + 1))) aX).map
-            (S.map n) ≫ e.hom)) ∧
-      ∀ x : Spec (.of k) ⟶ X,
-        ((geometricStalk (R ⧸ I ^ n) x).obj (S.obj n)).IsPerfect ∧
-        ∃ e : (geometricStalk (R ⧸ I ^ (n + 1)) x).obj
-            ((_root_.DerivedCategory.levelTransitionRestrictScalars _ I n.le_succ).obj
-              (S.obj n)) ≅
-            (ModuleCat.derivedRestrictScalars
-              (Ideal.Quotient.factor (Ideal.pow_le_pow_right n.le_succ))).obj
-              ((geometricStalk (R ⧸ I ^ n) x).obj (S.obj n)),
-          ModuleCat.IsDerivedBaseChange
-            ((geometricStalk (R ⧸ I ^ (n + 1)) x).map (S.map n) ≫ e.hom) := by
-  have hsurj : Function.Surjective
-      (Ideal.Quotient.factor (Ideal.pow_le_pow_right (I := I) n.le_succ)) :=
-    Ideal.Quotient.factor_surjective _
-  refine ⟨isPerfect_compactlySupportedGlobalSections _ aX _ (S.boundedConstructibleFiniteTor n),
-    ?_, fun x ↦ ⟨isPerfect_geometricStalk _ x _ (S.boundedConstructibleFiniteTor n), ?_⟩⟩
-  · obtain ⟨α, hα, -⟩ := exists_isCoefficientChange_compactlySupportedGlobalSections _ aX hsurj
-    exact ⟨α.app _, hα _ (S.boundedConstructibleFiniteTor (n + 1)) (S.isDerivedBaseChange n)⟩
-  · obtain ⟨β, hβ, -⟩ := exists_isCoefficientChange_geometricStalk _ hsurj x
-    exact ⟨β.app _, hβ _ (S.boundedConstructibleFiniteTor (n + 1)) (S.isDerivedBaseChange n)⟩
-
-include aX in
-/-- The coefficient identifications from which
-`AlgebraicGeometry.Etale.AdicSystem.compactSupportTower` is built exist, compatibly with the
-compact-support base change along every pair of automorphisms
-(`AlgebraicGeometry.Etale.exists_isCoefficientChange_compactlySupportedGlobalSections`). -/
-lemma exists_compactSupportTower :
-    ∃ (α : ∀ n : ℕ, Sheaf.derivedRestrictScalars X.smallEtaleTopology (I.powSuccFactor n) ⋙
-        compactlySupportedGlobalSections (ModuleCat.{u + 1} (R ⧸ I ^ (n + 1 + 1))) aX ≅
-      compactlySupportedGlobalSections (ModuleCat.{u + 1} (R ⧸ I ^ (n + 1))) aX ⋙
-        ModuleCat.derivedRestrictScalars (I.powSuccFactor n)),
-      (∀ n : ℕ, IsCoefficientChange (I.powSuccFactor n) _ _ (α n)) ∧
-      ∀ (n : ℕ) (g : X ⟶ X) (h : Spec (.of k) ⟶ Spec (.of k)) (sq : IsPullback g aX aX h)
-        [IsIso h], IsCompactPullbackCompatible (I.powSuccFactor n) (α n) sq := by
-  choose α hα hα' using fun n : ℕ ↦ exists_isCoefficientChange_compactlySupportedGlobalSections
-    (I.powSuccFactor n) aX (Ideal.Quotient.factor_surjective _)
-  exact ⟨α, hα, hα'⟩
-
-/-- The coefficient identifications from which `AlgebraicGeometry.Etale.AdicSystem.stalkTower`
-is built exist, compatibly with the stalk transports
-(`AlgebraicGeometry.Etale.exists_isCoefficientChange_geometricStalk`). -/
-lemma exists_stalkTower (x : Spec (.of k) ⟶ X) :
-    ∃ (β : ∀ n : ℕ, Sheaf.derivedRestrictScalars X.smallEtaleTopology (I.powSuccFactor n) ⋙
-        geometricStalk (R ⧸ I ^ (n + 1 + 1)) x ≅
-      geometricStalk (R ⧸ I ^ (n + 1)) x ⋙ ModuleCat.derivedRestrictScalars (I.powSuccFactor n)),
-      (∀ n : ℕ, IsCoefficientChange (I.powSuccFactor n) _ _ (β n)) ∧
-      ∀ (n : ℕ) (g : X ⟶ X) (h : Spec (.of k) ⟶ Spec (.of k)) (hx : h ≫ x = x ≫ g)
-        [IsIso h], IsStalkPullbackCompatible (I.powSuccFactor n) (β n) hx := by
-  choose β hβ hβ' using fun n : ℕ ↦ exists_isCoefficientChange_geometricStalk
-    (I.powSuccFactor n) (Ideal.Quotient.factor_surjective _) x
-  exact ⟨β, hβ, hβ'⟩
-
-end AdicSystem
 
 end AlgebraicGeometry.Etale

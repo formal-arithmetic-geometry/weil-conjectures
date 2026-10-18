@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChange
+public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeExchange
 
 /-!
 # Compatible systems of Frobenius coefficient morphisms and their realizations
