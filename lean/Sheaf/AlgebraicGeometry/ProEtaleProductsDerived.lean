@@ -13,11 +13,10 @@ public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 
 import Sheaf.AlgebraicGeometry.ProEtaleProductsExact
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
-import Sheaf.Algebra.Homology.KInjectiveProductsTermwise
-
-import Sheaf.Algebra.Homology.KInjectiveProducts
+import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
+import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit
+import WeilConjectures.CategoryTheory.DerivedCategory.DegreewiseLimits
 /-!
 # Products in the derived category of pro-etale module sheaves
 
@@ -75,6 +74,19 @@ theorem products_derived
       (∀ (K' : I → CochainComplex (ringedSiteModules.{max u (t + 1)} R) ℤ)
         (f : ∀ i : I, K i ⟶ K' i), (∀ i : I, QuasiIso (f i)) →
           QuasiIso (Limits.Pi.map f)) := by
-  sorry
+  -- Exact products supply both homology preservation and the product quasi-isomorphism.
+  let := products_exact X R I
+  let := SheafOfModules.isGrothendieckAbelianOfUniverses (topology X) R
+  -- The general preservation instance uses products of K-injective resolutions.
+  refine ⟨⟨isLimitOfPreserves DerivedCategory.Q (limit.isLimit _)⟩, ?_, ?_⟩
+  · intro p
+    infer_instance
+  · intro K' f hf
+    have (i : Discrete I) : QuasiIso
+        ((Discrete.natTrans (F := Discrete.functor K) (G := Discrete.functor K')
+          fun j ↦ f j.as).app i) := hf i.as
+    exact HomologicalComplex.quasiIso_limMap
+      (Discrete.natTrans (F := Discrete.functor K) (G := Discrete.functor K')
+        fun i ↦ f i.as)
 
 end AlgebraicGeometry.Scheme.ProEt

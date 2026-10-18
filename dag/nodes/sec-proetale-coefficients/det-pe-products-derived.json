@@ -26,84 +26,56 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal A=\\Mod(X_{\\mathrm{proét}},\\mathcal R)$. Its set-indexed products exist as in [det-pe-products-exact]. Form $P^n=\\prod_iK_i^n$ and define $d_P^n$ by $\\pi_i^{n+1}d_P^n=d_i^n\\pi_i^n$. The identities $d_P^{n+1}d_P^n=0$ follow after composing with each projection. Likewise the projections are chain maps, and any family of chain maps to the $K_i$ assembles uniquely degree by degree to a chain map to $P$. Thus $P$ is the termwise product complex, with its specified projections [def-weil-category-product, def-weil-abstract-derived-category].",
+   "text": "Apply products_exact (det-pe-products-exact) to install exact limits of shape Discrete I in the given module universe. Apply isGrothendieckAbelianOfUniverses (lem-weil-pbc-ring-sheaves-grothendieck), with the independent site and coefficient universes, to obtain the Grothendieck instance. The existing K-injective resolution instance (lem-sfb-grothendieck-k-injective) then applies.",
    "uses": [
     "det-pe-products-exact",
-    "def-weil-category-product",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-products/det-pe-products-derived.proof.md",
-    "place": "Cohomology paragraph: the termwise product complex"
-   }
-  },
-  {
-   "text": "Fix $p$ and write $Z_i^p=\\ker d_i^p$, $B_i^p=\\operatorname{im}d_i^{p-1}$ and $H_i^p=Z_i^p/B_i^p$ [def-weil-abstract-derived-category]. Applying [det-pe-products-exact] to $0\\to Z_i^p\\to K_i^p\\to B_i^{p+1}\\to0$ identifies $\\ker d_P^p$ with $\\prod_i Z_i^p$: the factorization of $d_P^p$ through $\\prod_i B_i^{p+1}\\hookrightarrow\\prod_iK_i^{p+1}$ has first map epimorphic and second map monomorphic. At degree $p-1$ the same factorization identifies $\\operatorname{im}d_P^{p-1}$ with $\\prod_iB_i^p$. Applying exactness again to $0\\to B_i^p\\to Z_i^p\\to H_i^p\\to0$ identifies the quotient with $\\prod_iH_i^p$. Hence the morphism induced by the projections is $H^p(P)\\xrightarrow{\\sim}\\prod_i H^p(K_i)$. All these identifications commute with morphisms of families: their maps are characterized by the same projections, kernel inclusions and quotient maps. This proves the cohomology clause naturally in $(K_i)$.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "det-pe-products-exact"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-products/det-pe-products-derived.proof.md",
-    "place": "Cohomology paragraph: kernels, images and cokernels"
-   }
-  },
-  {
-   "text": "For a family of quasi-isomorphisms $f_i:K_i\\to K'_i$, naturality in the preceding step identifies $H^p(\\prod_i f_i)$ with $\\prod_i H^p(f_i)$. The latter is an isomorphism: the product of the inverses of $H^p(f_i)$ is its inverse, as checked after each projection [def-weil-category-product]. Therefore $\\prod_i f_i$ is a quasi-isomorphism for every such family, by the definition in [def-weil-abstract-derived-category].",
-   "uses": [
-    "def-weil-category-product",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-products/det-pe-products-derived.proof.md",
-    "place": "Cohomology paragraph: product of quasi-isomorphisms"
-   }
-  },
-  {
-   "text": "Use the small representative of the site and universes of [def-weil-size-convention]. The theorem [lem-weil-pbc-ring-sheaves-grothendieck] applies to this site and the arbitrary sheaf of rings $\\mathcal R$, so $\\mathcal A$ is Grothendieck abelian; no commutativity or constant-coefficient assumption is required. By [lem-sfb-grothendieck-k-injective], choose quasi-isomorphisms $r_i:K_i\\to J_i$ with $J_i$ K-injective. The degreewise products of the $J_i$ exist by [det-pe-products-exact]. Apply [lem-pc-ringed-space-product-kinjective] in this abelian category to obtain that $J=\\prod_i J_i$, with the degreewise projections $q_i$, is K-injective and that its image is a product of the $QJ_i$ in $D(\\mathcal A)$. Here $Q$ is the localization of [def-weil-abstract-derived-category].",
-   "uses": [
     "def-weil-size-convention",
     "lem-weil-pbc-ring-sheaves-grothendieck",
-    "lem-sfb-grothendieck-k-injective",
-    "det-pe-products-exact",
-    "lem-pc-ringed-space-product-kinjective",
-    "def-weil-abstract-derived-category"
+    "lem-sfb-grothendieck-k-injective"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Tags 079Q (remark-existence-D), 079P (theorem-K-injective-embedding-grothendieck), and 07D9 (lemma-derived-products); derived.tex Tag 0BK6 (lemma-product-K-injective)"
-   }
+   "elementary": true
   },
   {
-   "text": "Let $r=\\prod_i r_i:P\\to J$ and let $\\pi_i:P\\to K_i$ be the projections. Step 3 says $r$ is a quasi-isomorphism, hence $Qr$ and all $Qr_i$ are isomorphisms [def-weil-abstract-derived-category]. The chain-map identities are $q_i r=r_i\\pi_i$. For any object $C$ of $D(\\mathcal A)$ and arrows $f_i:C\\to QK_i$, use the product obtained in Step 4 to get the unique $g:C\\to QJ$ with $Qq_i\\,g=Qr_i\\,f_i$. Put $h=(Qr)^{-1}g$. Then $Qr_i\\,Q\\pi_i\\,h=Qq_i\\,Qr\\,h=Qr_i\\,f_i$, so $Q\\pi_i\\,h=f_i$. If $h'$ has the same components, the product property of $QJ$ gives $Qr\\,h'=g$ and hence $h'=h$. Thus the images of the actual termwise projections make $QP$ a product of the $QK_i$ [def-weil-category-product], proving the remaining clause, including uniqueness for arbitrary derived-category morphisms.",
+   "text": "Use the already proved general PreservesLimitsOfShape (Discrete I) DerivedCategory.Q instance in WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit and apply isLimitOfPreserves to limit.isLimit. Its proof is isLimitFanQ: choose K-injective resolutions, form their product in the homotopy category, use right orthogonality and the K-injective equivalence to obtain the derived product, and transport along the product quasi-isomorphism. Thus this implements the same K-injective route as the blueprint, for arbitrary I, and gives precisely Q.mapCone of the specified limit cone, including its projections.",
    "uses": [
+    "det-pe-products-exact",
+    "def-weil-category-product",
     "def-weil-abstract-derived-category",
-    "def-weil-category-product"
+    "lem-sfb-grothendieck-k-injective"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-products/det-pe-products-derived.proof.md",
-    "place": "Product in D paragraph, final sentence: transfer along the product quasi-isomorphism"
-   }
+   "elementary": true
+  },
+  {
+   "text": "The existing HomologicalComplex homologyFunctor preservation instance in WeilConjectures.CategoryTheory.DerivedCategory.DegreewiseLimits applies to exact limits of shape Discrete I. Consequently the standard piComparison for each p is an isomorphism. The general instance proves the cycles/images/cokernels calculation by applying the exact limit functor to short-complex homology; no derived-category products are assumed.",
+   "uses": [
+    "det-pe-products-exact",
+    "def-weil-category-product",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the family f, form the discrete natural transformation with components f i. Install the component QuasiIso instances using the given hypothesis, and apply the already proved HomologicalComplex.quasiIso_limMap in WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit. Its limit map is definitionally Limits.Pi.map f, so this is the third clause. The general lemma applies the exact limit functor to a complex in the diagram category and uses its preservation of homology.",
+   "uses": [
+    "det-pe-products-exact",
+    "def-weil-category-product",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "det-pe-products-exact",
-  "def-weil-category-product",
-  "def-weil-abstract-derived-category",
   "def-weil-size-convention",
   "lem-weil-pbc-ring-sheaves-grothendieck",
   "lem-sfb-grothendieck-k-injective",
-  "lem-pc-ringed-space-product-kinjective"
+  "def-weil-category-product",
+  "def-weil-abstract-derived-category"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-products/det-pe-products-derived.proof.md",
-  "place": "Cohomology and Product in D paragraphs; with supporting Stacks Tags 079Q, 079P, 0BK6 (07D9)"
+  "place": "Cohomology and Product in D paragraphs; specialized using the existing general proofs in WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit and WeilConjectures.CategoryTheory.DerivedCategory.DegreewiseLimits (V9, 2026-10-18)."
  },
  "mathlib_searches": [
   {
@@ -195,8 +167,7 @@
  },
  "tool_uses": [
   "lem-weil-pbc-ring-sheaves-grothendieck",
-  "lem-sfb-grothendieck-k-injective",
-  "lem-pc-ringed-space-product-kinjective"
+  "lem-sfb-grothendieck-k-injective"
  ],
  "reviewed": {
   "date": "2026-10-16",
@@ -235,5 +206,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261018T135942-L-2973125",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
