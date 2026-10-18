@@ -351,7 +351,7 @@ No closure delta is quoted across 660345513: proof-dependency imports changed th
 
 | landing class | count |
 |---|---:|
-| proved | 4264 |
+| proved | 4265 |
 | decomposed | 56 |
 | moved | 4161 |
 | pruned | 147 |
@@ -387,7 +387,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | C7 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
 | C8 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
 | C9 | 2 | 2 | 1 | 1 | 1/2 (50.0%) |
-| D2 | 155 | 152 | 93 | 59 | 64/155 (41.3%) |
+| D2 | 156 | 153 | 93 | 60 | 64/156 (41.0%) |
 | D3 | 124 | 141 | 74 | 67 | 53/124 (42.7%) |
 | D4 | 83 | 89 | 48 | 41 | 29/83 (34.9%) |
 | D5 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
