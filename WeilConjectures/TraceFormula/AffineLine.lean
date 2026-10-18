@@ -218,10 +218,10 @@ commutation isomorphisms `b : j_! ⋙ F_Y ≅ F_U ⋙ j_!`, `c : j^* ⋙ F_U ≅
 restriction of `b⁻¹` is `c` up to the units, the unit is an isomorphism of algebras
 `j^* (j_! K) ≅ K` for every algebra `K` with invertible structure morphism. -/
 noncomputable def IsoAlgebra.mapOfNatIsoObjMapOfNatIsoObjIso {CU CX : Type*} {_ : Category CU}
-    {_ : Category CX} {jS : CU ⥤ CX} {jU : CX ⥤ CU} (adj : jS ⊣ jU) [IsIso adj.unit] {ΦU : CU ⥤ CU}
-    {ΦY : CX ⥤ CX} (b : jS ⋙ ΦY ≅ ΦU ⋙ jS) (c : jU ⋙ ΦU ≅ ΦY ⋙ jU) (K : IsoAlgebra ΦU)
+    {_ : Category CX} {jS : CU ⥤ CX} {jU : CX ⥤ CU} {ΦU : CU ⥤ CU} {ΦY : CX ⥤ CX}
+    (b : jS ⋙ ΦY ≅ ΦU ⋙ jS) (c : jU ⋙ ΦU ≅ ΦY ⋙ jU) (K : IsoAlgebra ΦU) {adj : jS ⊣ jU}
     (hL : adj.unit.app (ΦU.obj K.carrier) ≫ jU.map (b.inv.app K.carrier) =
-      ΦU.map (adj.unit.app K.carrier) ≫ c.hom.app (jS.obj K.carrier)) :
+      ΦU.map (adj.unit.app K.carrier) ≫ c.hom.app (jS.obj K.carrier)) [IsIso adj.unit] :
     (IsoAlgebra.mapOfNatIso c).obj ((IsoAlgebra.mapOfNatIso b).obj K) ≅ K :=
   IsoAlgebra.isoMk (asIso (adj.unit.app K.carrier)).symm (by
     rw [← IsoAlgebra.str_hom, ← IsoAlgebra.str_hom, IsoAlgebra.mapOfNatIso_obj_str,
@@ -288,8 +288,10 @@ variable (ℓ) in
 noncomputable def weilUpperStarWeilOpenLowerShriekIso (sq : IsPullback ΦU j j ΦY)
     (hw : ΦU ≫ j = j ≫ ΦY) (K : WeilBoundedConstructible ℓ ΦU) :
     (weilUpperStar ℓ ΦU ΦY j hw).obj ((weilOpenLowerShriek ℓ sq).obj K) ≅ K :=
-  -- UNFINISHED: `IsoAlgebra.mapOfNatIsoObjMapOfNatIsoObjIso` applied to
-  -- `unit_comp_map_baseChangeIso_inv_of_eq`; the kernel check currently times out
+  -- UNFINISHED: `IsoAlgebra.mapOfNatIsoObjMapOfNatIsoObjIso (openSquareExchange ℓ sq)
+  -- (weilUpperStarComparison ℓ ΦU ΦY j hw) K (unit_comp_map_baseChangeIso_inv_of_eq _
+  -- (weilUpperStarComparison_eq_flip sq hw) _)` is mathematically the answer, but unifying its
+  -- type with the Weil functors times out (instance arguments differing by abstracted proofs)
   sorry
 
 end Restriction
