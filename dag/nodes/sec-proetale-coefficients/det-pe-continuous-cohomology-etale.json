@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "det-pe-continuous-cohomology-etale",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Identification with continuous étale cohomology",
@@ -12,42 +12,201 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-continuous-cohomology/sk-prop-pe-continuous-cohomology-etale.md",
   "place": "node det-pe-continuous-cohomology-etale, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-pbc-abelian-etale-sheaves",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-inverse-system",
+  "lem-weil-tower-category-levelwise-abelian",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-limit",
+  "def-weil-pbc-global-sections-functor",
+  "lem-weil-pbc-right-derived-plus-injective"
+ ],
  "proof": [
   {
-   "text": "*First isomorphism.* Write $\\Gamma_{\\mathrm{cont}}=\\varprojlim\\circ\\Gamma^{\\mathbf N}$,\nwhere $\\Gamma^{\\mathbf N}\\colon\\Sh(X_{\\Et})^{\\mathbf N}\\to\\Ab^{\\mathbf N}$ applies\n$\\Gamma(X_{\\Et},-)$ levelwise and $\\varprojlim\\colon\\Ab^{\\mathbf N}\\to\\Ab$. The\nfunctor $\\Gamma^{\\mathbf N}$ is right adjoint to the levelwise constant-sheaf\nfunctor, which is exact, so $\\Gamma^{\\mathbf N}$ preserves injectives. By the\nGrothendieck composite-functor theorem,\n$R\\Gamma_{\\mathrm{cont}}=R\\varprojlim\\circ R\\Gamma^{\\mathbf N}$. An injective object\nof $\\Sh(X_{\\Et})^{\\mathbf N}$ is levelwise injective (evaluation at $n$ has the exact left adjoint sending $G$ to the system with $G$\nin levels $m\\leq n$, identity transitions among them, and $0$ in levels $m>n$; a\nmap from this system to $(H_m)$ is determined by its level-$n$ component), so $R\\Gamma^{\\mathbf N}((G_n))$ is the system\n$(R\\Gamma(X_{\\Et},G_n))_n$ in $D(\\Ab^{\\mathbf N})$. On $D(\\Ab^{\\mathbf N})$ the\nderived functor of $\\varprojlim$ is computed by the triangle\n$R\\varprojlim K\\to\\prod_nK_n\\xrightarrow{1-\\text{shift}}\\prod_nK_n$, since this\nholds for injective systems (whose transition maps are split surjective) and\nboth sides are triangulated. This gives the first isomorphism.",
-   "uses": [],
-   "elementary": null
+   "text": "Work in a common larger universe where the sites are small. Write $\\mathcal A=\\operatorname{Ab}(X_{\\Et})$ and $\\operatorname{Tow}(\\mathcal A)=\\operatorname{Fun}(\\mathbf N_{\\ge1}^{\\mathrm{op}},\\mathcal A)$; its exactness and evaluation are levelwise [lem-weil-tower-category-levelwise-abelian]. Here is the small-site realization needed to apply the resolution theorem to this category. On $C\\times\\mathbf N_{\\ge1}$ put $\\operatorname{Hom}((U,n),(V,m))=\\operatorname{Hom}_C(U,V)$ for $n\\le m$, and no arrows otherwise; covers have constant index and are covers in $C=X_{\\Et}$. A sheaf $H$ on this site is exactly the tower $H_n(U)=H(U,n)$: the sheaf condition at $(U,n)$ is precisely that for $H_n$, and the arrows $(U,n)\\to(U,n+1)$ give its transitions. The inverse construction sends a tower to this formula on objects and composite restriction/transition on arrows. Thus the two categories are identified, with exactness levelwise. Abelian sheaves are equivalently modules over the constant integer ring sheaf: integers act by repeated addition, and locally constant integer sections act locally and glue uniquely [def-weil-sheaf-of-modules-category]. Apply [lem-sc-bounded-below-injective-resolution] on this small ringed tower site to $F_{\\bullet,\\Et}[0]$. Obtain a bounded-below injective tower resolution $F_{\\bullet,\\Et}[0]\\to I_\\bullet^\\bullet$. To see explicitly that this gives enough injectives, apply it to any object in degree zero. At the lowest negative degree, the differential is monic since negative cohomology vanishes; it splits by injectivity. Remove that contractible pair and repeat finitely to degree zero. A direct summand is injective (extend into the original object and project), so the remaining degree-zero term is injective and contains the original object. The same argument on the punctual site gives enough injectives for towers of abelian groups.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "def-weil-sheaf-of-modules-category",
+    "lem-sc-bounded-below-injective-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0940, section-derived-limits, tower-site construction; Tag 07A5, section-unbounded; Derived Categories Tag 013K, lemma-injective-resolutions-exist"
+   }
   },
   {
-   "text": "*Second isomorphism.* The cohomology comparison\n([lem-weil-pbc-comparison-global-cohomology], [sk-prop-sf-comparison]) gives\nnatural isomorphisms $R\\Gamma(X_{\\Et},F_{n,\\Et})\\simeq R\\Gamma(X_{\\Proet},F_n)$,\ncompatible with the transition maps, hence an isomorphism of the derived limits\n(the defining triangles are functorial in the system).",
+   "text": "Let $T=\\Gamma(X_{\\Et},-)^{\\operatorname{Tow}}:\\operatorname{Tow}(\\mathcal A)\\to\\operatorname{Tow}(\\operatorname{Ab})$. Its left adjoint sends $(A_n)$ to $(\\underline{A_n})$: the levelwise adjunction [def-weil-pbc-global-sections-functor] is natural in $A_n$ and the sheaf, so its bijections restrict to families commuting with transitions. This left adjoint is exact. Indeed constant presheaves preserve short exact sequences objectwise, and their sheafifications are the constant sheaves [def-weil-pbc-constant-sheaf]; sheafification is exact [lem-weil-pbc-sheafification-exact], and tower exactness is levelwise. Consequently $T$ preserves injective objects by [lem-sp-right-adjoint-preserves-injectives]. The limit functor is additive and left exact: it is the kernel of $1-s$ on products, or directly the group of compatible families. Limits of sheaves are sectionwise [lem-weil-pbc-sheafification-exact], so evaluating at the terminal object gives the actual equality $\\Gamma_{\\mathrm{cont}}=\\lim\\circ T$ on objects and maps. No assertion that $\\lim$ is exact on the étale site is used.",
    "uses": [
-    "lem-weil-pbc-comparison-global-cohomology",
-    "sk-prop-sf-comparison"
+    "def-weil-pbc-global-sections-functor",
+    "def-weil-pbc-constant-sheaf",
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-sp-right-adjoint-preserves-injectives"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CN, lemma-abelian-abelian, and 03CO, lemma-limits-colimits-abelian-sheaves; Derived Categories Tag 015M, lemma-compose-derived-functors, injective-preserving case"
+   }
   },
   {
-   "text": "*Third isomorphism.* This is [det-pe-continuous-cohomology-limit] with $W=X$,\nusing that $\\nu_X^*$ preserves epimorphisms.",
+   "text": "For each $n$, evaluation at $n$ has the exact left adjoint $L_n(G)$ with value $G$ at $m\\le n$, identity transitions there, and zero at $m>n$. A map $L_n(G)\\to H_\\bullet$ is uniquely its map $G\\to H_n$, the components below $n$ being its composites with the transitions. Exactness of $L_n$ follows from levelwise exactness [lem-weil-tower-category-levelwise-abelian]. Thus evaluation preserves injectives [lem-sp-right-adjoint-preserves-injectives]. In particular $I_n^\\bullet$ is a bounded-below injective resolution of $F_{n,\\Et}$. By [lem-weil-pbc-right-derived-plus-injective], the complex $\\Gamma(X_{\\Et},I_n^\\bullet)$ computes $R\\Gamma(X_{\\Et},F_{n,\\Et})$. Its transition maps are obtained by applying sections to $I_{n+1}^\\bullet\\to I_n^\\bullet$; the naturality of the derived comparison in the cited theorem makes them the derived transitions of $F_{\\bullet,\\Et}$. Likewise $T(I_\\bullet^\\bullet)$ computes $RT(F_{\\bullet,\\Et}[0])$. This specifies a single strict tower model for the notation $(R\\Gamma(X_{\\Et},F_{n,\\Et}))_n$.",
    "uses": [
-    "det-pe-continuous-cohomology-limit"
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "lem-weil-pbc-right-derived-plus-injective"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, exact finite-prefix left adjoint; Derived Categories Tag 05TI, lemma-enough-injectives-right-derived"
+   }
+  },
+  {
+   "text": "The resolution $I_\\bullet^\\bullet$ computes $R\\Gamma_{\\mathrm{cont}}$ by [lem-weil-pbc-right-derived-plus-injective]. By step 2, $T(I_\\bullet^\\bullet)$ is itself a bounded-below complex of injectives in $\\operatorname{Tow}(\\operatorname{Ab})$. The same theorem therefore computes $R\\lim$ on this complex by its termwise inverse limit. Both sides of the first asserted isomorphism are consequently represented by the identical complex\n$$\\Gamma_{\\mathrm{cont}}(I_\\bullet^\\bullet)=\\lim_n\\Gamma(X_{\\Et},I_n^\\bullet).$$\nTo relate this computation to the homotopy-limit notation in the statement, apply [lem-weil-pbc-ringed-strict-tower-homotopy-limit] to the punctual site with integer coefficients. The complex $T(I_\\bullet^\\bullet)$ is bounded below with injective terms, hence K-injective [lem-weil-pbc-bounded-below-injectives-kinjective], so it is its own K-injective tower resolution and the total derived inverse limit of that node is represented by the same complex $\\lim_n\\Gamma(X_{\\Et},I_n^\\bullet)$. That node gives it a distinguished Roos triangle on the tower $(\\Gamma(X_{\\Et},I_n^\\bullet))_n$, which is the tower $(R\\Gamma(X_{\\Et},F_{n,\\Et}))_n$ of step 3; transporting the triangle along that isomorphism of towers gives an isomorphic, hence distinguished, triangle, so this complex is a derived limit of $(R\\Gamma(X_{\\Et},F_{n,\\Et}))_n$ [def-weil-derived-limit]. The comparison just constructed is canonical and natural, since the resolution comparisons and uniqueness assertion in [lem-weil-pbc-right-derived-plus-injective] are natural. This proves the first isomorphism, without using the epimorphic-transition hypothesis.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "def-weil-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015M, lemma-compose-derived-functors, proof in the injective-preserving case; Tag 05TI, lemma-enough-injectives-right-derived; Sites Cohomology Tag 0941, lemma-derived-limit-is-ok"
+   }
+  },
+  {
+   "text": "The comparison geometric morphism is $\\nu_X:X_{\\Proet}\\to X_{\\Et}$ [def-weil-pbc-site-comparison-morphism]. Apply [lem-pe-constant-left-module-inverse-image] with $\\Lambda=\\mathbf Z$. Its exact inverse image, after forgetting the unique integer action, is exactly inverse image of abelian sheaves and preserves quasi-isomorphisms. Hence $F_\\bullet=\\nu_X^*F_{\\bullet,\\Et}$ is a strict tower, $\\nu_X^*I_n^\\bullet$ represents $F_n$, and every transition of $F_\\bullet$ is an epimorphism: the cokernel of its preimage is zero and exact inverse image preserves this cokernel. This also fixes the coefficient identification for applying the comparison theorem; no finite-ring hypothesis is introduced.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi; Proetale Tag 099V, lemma-relative-comparison"
+   }
+  },
+  {
+   "text": "Resolve the bounded-below complex of pro-étale towers $\\nu_X^*I_\\bullet^\\bullet$ by a bounded-below injective tower complex $J_\\bullet^\\bullet$, using the tower-site construction of step 1 and [lem-sc-bounded-below-injective-resolution]. Step 3's exact-prefix argument applies to either site, so each $J_n^\\bullet$ is termwise injective. There is a strict map of towers of group complexes\n$$a_\\bullet:\\Gamma(X_{\\Et},I_\\bullet^\\bullet)\\longrightarrow\\Gamma(X_{\\Proet},J_\\bullet^\\bullet):$$\nits first arrow to $\\Gamma(X_{\\Proet},\\nu_X^*I_\\bullet^\\bullet)$ is the ordinary comparison adjunction unit followed by sections, and its second arrow is sections of the chosen tower resolution. The unit is natural in transitions, as is the resolution map, so $a_n$ commutes with every transition as a chain map. To see that $a_n$ is a quasi-isomorphism, factor it through the étale site. The direct image $\\nu_{X,*}$ is right adjoint to the exact inverse image of abelian sheaves [lem-pe-constant-left-module-inverse-image], so it preserves injectives [lem-sp-right-adjoint-preserves-injectives], and $\\nu_{X,*}J_n^\\bullet$ is a bounded-below injective complex computing $R\\nu_{X,*}\\nu_X^*F_{n,\\Et}$ [lem-weil-pbc-right-derived-plus-injective]. The chain map $u_n:I_n^\\bullet\\to\\nu_{X,*}\\nu_X^*I_n^\\bullet\\to\\nu_{X,*}J_n^\\bullet$ (adjunction unit, then direct image of the resolution) represents the derived unit $K\\to R\\nu_{X,*}\\nu_X^*K$ for $K=F_{n,\\Et}[0]$. By [sk-prop-sf-comparison] with $\\Lambda=\\mathbf Z$ ($K$ is bounded below) this unit is an isomorphism, so $u_n$ is a quasi-isomorphism. Since $(\\nu_{X,*}G)(X)=G(X)$ [def-weil-pbc-site-comparison-morphism], $a_n=\\Gamma(X_{\\Et},u_n)$. Both ends of $u_n$ are bounded-below complexes of injectives, so by clause (2) and the naturality of $\\alpha$ in [lem-weil-pbc-right-derived-plus-injective] the class of $\\Gamma(X_{\\Et},u_n)$ is identified with $R\\Gamma(X_{\\Et},u_n)$, an isomorphism. Thus every $a_n$ is a quasi-isomorphism. By levelwise exactness [lem-weil-tower-category-levelwise-abelian], $a_\\bullet$ is a quasi-isomorphism of strict tower complexes.",
+   "uses": [
+    "lem-sc-bounded-below-injective-resolution",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-pe-constant-left-module-inverse-image",
+    "sk-prop-sf-comparison",
+    "lem-weil-tower-category-levelwise-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 099V, lemma-relative-comparison, and 099W, lemma-compare-cohomology; Sites Cohomology Tag 0940, section-derived-limits"
+   }
+  },
+  {
+   "text": "Apply total derived inverse limit on $D(\\operatorname{Tow}(\\operatorname{Ab}))$ to the isomorphism represented by $a_\\bullet$. This is a functor [lem-weil-pbc-ringed-strict-tower-homotopy-limit], so it gives an isomorphism. Its source evaluates to the tower $(R\\Gamma(X_{\\Et},F_{n,\\Et}))_n$ of step 3, and its target evaluates to $(R\\Gamma(X_{\\Proet},F_n))_n$ by the injective computations of step 6. For an explicit choice compatible with the triangles in the statement, products of abelian groups are exact [lem-pc-abelian-groups-exact-products], so [lem-weil-strict-roos-comparison] identifies both total limits naturally with $\\operatorname{Cone}(1-s:\\prod_n\\Gamma(I_n^\\bullet)\\to\\prod_n\\Gamma(I_n^\\bullet))[-1]$ and its $J$ analogue. The actual chain maps $a_n$ commute with $s$, giving the map of these cones. The cited natural comparison identifies this cone map with $R\\lim(a_\\bullet)$, so the second isomorphism respects the specified transitions and is independent of resolutions. This uses functorial strict models, rather than assuming that an arbitrary cone choice in a triangulated category is functorial.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-pc-abelian-groups-exact-products",
+    "lem-weil-strict-roos-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok; More on Algebra Tag 07KW, lemma-compute-Rlim"
+   }
+  },
+  {
+   "text": "Finally the pro-étale tower $F_\\bullet$ has epimorphic transitions by step 5. Apply [det-pe-continuous-cohomology-limit] with $W=X$ (the terminal pro-étale object). It gives\n$$R\\Gamma(X_{\\Proet},\\lim_nF_n)\\simeq R\\lim_nR\\Gamma(X_{\\Proet},F_n).$$\nHere the right side is a derived limit of the tower $(R\\Gamma(X_{\\Proet},F_n))_n$. The object obtained in step 7 is also a derived limit of this tower: its Roos triangle is on the tower $(\\Gamma(X_{\\Proet},J_n^\\bullet))_n$, which the isomorphisms $\\alpha$ of [lem-weil-pbc-right-derived-plus-injective], natural in the transitions, identify with $(R\\Gamma(X_{\\Proet},F_n))_n$, and transporting a distinguished triangle along an isomorphism gives a distinguished triangle. Any two derived limits of one tower in $D(\\operatorname{Ab})$ are isomorphic by clause 1 of [lem-weil-derived-limit-existence] (countable products exist by its clause 2, products of abelian groups being exact). So $R\\Gamma(X_{\\Proet},\\lim_nF_n)$ is isomorphic to the object of step 7. Take this isomorphism for the last arrow displayed in the statement, and compose with steps 4 and 7. Every arrow is the comparison for the original strict system. The epimorphic hypothesis is needed here, not to assert surjectivity on étale global sections or on higher cohomology.",
+   "uses": [
+    "det-pe-continuous-cohomology-limit",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-weil-derived-limit-existence",
+    "lem-pc-abelian-groups-exact-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-continuous-cohomology/sk-prop-pe-continuous-cohomology-etale.md",
+    "place": "Third isomorphism in the imported proof; Bhatt–Scholze Proposition 5.6.2, final use of repleteness"
+   }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-comparison-global-cohomology",
+  "lem-weil-tower-category-levelwise-abelian",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sc-bounded-below-injective-resolution",
+  "def-weil-pbc-global-sections-functor",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-derived-limit",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-pe-constant-left-module-inverse-image",
   "sk-prop-sf-comparison",
-  "det-pe-continuous-cohomology-limit"
+  "lem-pc-abelian-groups-exact-products",
+  "lem-weil-strict-roos-comparison",
+  "det-pe-continuous-cohomology-limit",
+  "lem-weil-derived-limit-existence"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-pe-continuous-cohomology/sk-prop-pe-continuous-cohomology-etale.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 5.6.1 and Proposition 5.6.2 (p. 41); first derived-composite identification expanded using Stacks Tags 0940, 0941 and 015M"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "continuousCohomology|continuous.cohomology|derivedInverseLimit",
+   "results": "17 hits, principally Mathlib/RepresentationTheory/Homological/ContCohomology/{Basic,LowDegree,Functoriality}.lean: continuous group cohomology, not this sheaf-system theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "continuous etale cohomology is derived inverse limit of global sections",
+   "results": "Returned CategoryTheory.Sheaf.ΓNatIsoLim, hasGlobalSectionsFunctor_of_hasLimitsOfShape, group continuousCohomology and Scheme.smallEtaleTopology; no derived tower comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "continuous etale cohomology of an inverse system equals derived inverse limit of etale cohomology",
+   "results": "Returned continuous group cohomology and condensed locally constant presheaf colimits; none states continuous etale cohomology of an inverse system.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\"",
+   "results": "Returned generic total right derived functor definitions and natural transformations in Mathlib.CategoryTheory.Functor.Derived.RightDerived; these do not state the sheaf-tower comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "totalRightDerived.*[Cc]omp|rightDerived.*[Cc]omp|lim.*[Dd]erived",
+   "results": "12 hits for composition of derived natural transformations and rightDerivedFunctorComparison, not the inverse-system sheaf theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "right derived functor of inverse limit composed with levelwise global sections on sheaves of abelian groups",
+   "results": "Returned CategoryTheory.Sheaf.ΓNatIsoLim and SheafOfModules.evaluationPreservesLimit/hasLimit/createsLimit (underived limits); no theorem identifying the derived composites.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -74,5 +233,44 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "det-pe-continuous-cohomology-etale",
+  "worker": "stage1",
+  "summary": "Retained the statement; expanded the first derived-composite comparison using one injective tower resolution, exact constant sheaves and the exact prefix adjoints to evaluation. Constructed a strict chain-level cohomology comparison and used functorial total derived inverse limits. Removed the finite-ring-only global comparison citation. No new nodes.",
+  "blueprint": "Steps 1–4 expand the imported First isomorphism and the unit paragraph on injective diagram resolutions; steps 5–7 realize Second isomorphism with coherent strict models; step 8 realizes Third isomorphism, exactly the route of Bhatt–Scholze Proposition 5.6.2.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-bounded-below-injective-resolution",
+    "why": "Generic resolution/diagram/derived-limit tool used to expand the unit's injective-system calculation or its natural comparison; it does not replace the continuous-cohomology/comparison/repleteness route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic resolution/diagram/derived-limit tool used to expand the unit's injective-system calculation or its natural comparison; it does not replace the continuous-cohomology/comparison/repleteness route."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Generic resolution/diagram/derived-limit tool used to expand the unit's injective-system calculation or its natural comparison; it does not replace the continuous-cohomology/comparison/repleteness route."
+   },
+   {
+    "node": "lem-weil-derived-limit-existence",
+    "why": "Step 8 takes only its clause that two derived limits of one tower in a triangulated category are isomorphic (and that countable products exist in D(Ab)); a generic triangulated-category tool, Lean-closed in slopmaster2, which no node of the unit states."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-strict-roos-comparison",
+  "lem-weil-derived-limit-existence"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-2490a4307",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-2490a4307 (reviewer sub-agent of L); spot-checked: I read the whole item and all 20 cited node statements. Sources checked: the main-20261015 blueprint statement and proof, Bhatt–Scholze Def. 5.6.1 and Prop. 5.6.2 (p. 41), and the unit sk-prop-pe-continuous-cohomology. The statement is unchanged and matches the source: X is arbitrary, the transitions are epimorphic, and the coefficients are Z. The delivery correctly replaces the finite-coefficient lem-weil-pbc-comparison-global-cohomology with sk-prop-sf-comparison for an arbitrary ring. I checked the tower site (its fibre products are (VxU_i,n)), the prefix left adjoint L_n including the boundary at n+1, the exact constant-sheaf left adjoint, and the strict Roos functoriality in step 7. There are no new nodes, no duplicates (other continuous-cohomology hits are Galois/group cohomology) and no cycle. The accepted tool_uses are lem-sc-bounded-below-injective-resolution, lem-weil-pbc-ringed-strict-tower-homotopy-limit, lem-weil-strict-roos-comparison and the added lem-weil-derived-limit-existence. Three repairs were missing citations (C1/E5), now in fixes/: (1) Step 4 used the total Rlim on T(I) without citing that a bounded-below injective complex is K-injective; added lem-weil-pbc-bounded-below-injectives-kinjective, the Roos transport and def-weil-derived-limit. (2) Step 6 said 'the natural resolution comparison identifies a_n' in place of an argument; it now spells out that nu_* preserves injectives, that u_n: I_n -> nu_*J_n represents the derived unit (an isomorphism by sk-prop-sf-comparison), and that a_n = Gamma(u_n) is a quasi-isomorphism. (3) Step 8 composed two different derived limits of the pro-étale tower; it now cites lem-weil-derived-limit-existence clause 1 for uniqueness up to isomorphism, with the tower identification through alpha and lem-pc-abelian-groups-exact-products for products. Also added lem-weil-tower-category-levelwise-abelian to stmt_deps, and proof_deps is now the union of all step uses.; 1 file(s) fixed by the reviewer"
  }
 }
