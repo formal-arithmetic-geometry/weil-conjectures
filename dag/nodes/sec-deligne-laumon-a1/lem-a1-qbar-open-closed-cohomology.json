@@ -19,9 +19,177 @@
   "def-weil-open-immersion",
   "def-weil-closed-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work first over a finite coefficient field $E$. Every locally closed $T$ under consideration is noetherian and finite-dimensional, with $\\ell$ invertible. Apply [lem-per-continuous-rational-derived-realization]: the raw category is equivalent, by $J_T$, to the full ambient derived category of bounded complexes with constructible continuous $E_T$-module cohomology, and its localized standard t-structure is the restriction of the ambient one. Thus its heart is precisely the constructible $E_T$-module sheaves, not an unspecified rational heart. The bounded t-structure and common-stage truncations at $\\Lambda$ are supplied by [lem-per-adic-heart-pullback-fibres] (take its morphism to be $\\mathrm{id}_T$). The realization comparison commutes with finite coefficient extension, so its cohomology is ordinary pro-etale module cohomology at each representative field. For a scheme isomorphism, the same realization identifies pullback with exact ordinary inverse image. Exact inverse image preserves the two cohomological bounds, and hence commutes with the truncations and their canonical maps by their adjunction characterizations. This proves the first paragraph, including invariance under isomorphisms.",
+   "uses": [
+    "lem-per-continuous-rational-derived-realization",
+    "lem-per-adic-heart-pullback-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-curve-perverse-heart.proof.md",
+    "place": "Step 1: ordinary constructible cohomology and restrictions; Step 3: standard cohomology convention"
+   }
+  },
+  {
+   "text": "For $f=j$ or $i$, use [lem-weil-pbc-integral-stratified-perfect-characterization] to identify the full integral category used for PBC with the completed integral category in [lem-sf-integral-direct-image-constructible]; its statement explicitly identifies both categories and their reduction functors. The finiteness theorem applies over the given field $k$, including characteristic zero: source and target are finite-type $k$-schemes and $\\ell$ is invertible. Their integral direct images are therefore bounded constructible. The canonical comparison [lem-a1-rational-direct-image-realization] identifies the localized integral direct image and its adjunction maps with ambient $Rf_*^E$ under $J$. Consequently ambient $Rj_*$ and $Ri_*$ on these realizations are constructible and are the intended rational operations. In particular the computation below takes place in an actual derived category of continuous $E_T$-modules.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-sf-integral-direct-image-constructible",
+    "lem-a1-rational-direct-image-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-curve-perverse-heart.proof.md",
+    "place": "Step 3: constructibility and meaning of Rj_*j^*K before the bottom-cohomology calculation"
+   }
+  },
+  {
+   "text": "For each locally closed immersion $a$, [lem-per-continuous-rational-derived-realization] gives $a^{-1}E_T\\cong E_S$ and identifies the completed rational pullback with exact ordinary inverse image of module sheaves. In particular $j^*$ and $i^*$ are t-exact and $\\mathcal H^r(a^*K)=a^*\\mathcal H^rK$. They preserve constructibility by pulling back the finite lisse stratification. For joint detection one can work intrinsically in these hearts: [lem-per-adic-heart-pullback-fibres] states exactness and joint conservativity of their adic geometric fibres and the formula $(a^*F)_{\\bar s}=F_{a\\bar s}$. Every geometric point of $C$ factors through either $U$ or $Z$; if both restrictions of $F$ vanish, every one of its fibres vanishes, so $F=0$. No etale abelian-sheaf conservativity is being applied to an unrelated heart.",
+   "uses": [
+    "lem-per-continuous-rational-derived-realization",
+    "lem-per-adic-heart-pullback-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-curve-perverse-heart.proof.md",
+    "place": "Step 1: t-exact restrictions and detection on the open and its closed complement"
+   }
+  },
+  {
+   "text": "Set the ring sheaf $A$ of [lem-weil-pbc-proetale-ringed-open-closed] equal to the continuous ring $E_C$; the preceding step identifies its inverse images with $E_Z,E_U$. The open is quasi-compact since $C$ is noetherian. That ringed statement gives exact $i_*$, $i^*i_*\\cong\\mathrm{id}$, $j^*i_*=0$ and $0\\to j_!j^*F\\to F\\to i_*i^*F\\to0$. The module adjunction [lem-weil-pbc-ringed-topoi-module-adjunction] and its invertible counit show full faithfulness: $\\operatorname{Hom}(i_*G,i_*H)=\\operatorname{Hom}(i^*i_*G,H)=\\operatorname{Hom}(G,H)$. If $j^*F=0$, the displayed sequence identifies $F$ with $i_*i^*F$; conversely $j^*i_*=0$. Direct image is constructible here: extend a finite lisse stratification of $Z$ by the stratum $U$ carrying the zero sheaf. This proves the exactness, full faithfulness and essential-image assertions on constructible sheaves.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-curve-perverse-heart.proof.md",
+    "place": "Steps 1 and 3: closed direct image, closed restriction and support detection"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-ringed-topoi-module-adjunction], ordinary module $j_*$ is right adjoint to the exact restriction $j^*$. It is additive and left exact: a right adjoint preserves finite limits, hence kernels. The site localization [lem-weil-proetale-weakly-etale-localization] identifies restriction with evaluation on objects over $U$. By the direct-image definition [def-weil-proetale-inverse-image], for an object $V\\to U$, direct image followed by restriction has value $F(V\\times_CU)=F(V)$, since $V\\to C$ already factors through the open monomorphism $U$. These equalities are natural and identify the counit $j^*j_*F\\to F$ with the identity. Thus $j^*j_*\\cong\\mathrm{id}$ for continuous module sheaves. Constructibility of $j_*$ on lisse sheaves follows in Step 7 from constructibility of $Rj_*$ and the bottom-degree formula.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-curve-perverse-heart.proof.md",
+    "place": "Step 3: ordinary open direct image and its unit/counit"
+   }
+  },
+  {
+   "text": "Choose small sites in the fixed universe. Applied to the ring sheaves $E_U,E_C$, [prop-pur-kinjective-resolutions-exist] gives Grothendieck abelian module categories and K-injective resolutions. Under the realization in Step 1, a bounded constructible $M$ is an object of their $D^+$, and Step 2 identifies the intended $Rj_*$ with the ambient right derived functor of the left exact $j_*$. Therefore [lem-weil-pbc-derived-functor-negative-vanishing], with $v=j_*$ and $b=m$, gives $\\mathcal H^a(Rj_*M)=0$ for $a<m$. The hypothesis is the rational ambient bound on $J_U(M)$; no lower bound on a chosen integral lattice is assumed.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-derived-functor-negative-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-curve-perverse-heart.proof.md",
+    "place": "Step 3: left exactness implies the lower cohomological bound"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-derived-bottom-unit-normalization] to the abelian module categories above, $S=j_*$ and $n=m$. Its natural isomorphism is $\\mathcal H^m(Rj_*\\tau^{\\ge m}M)\\cong j_*\\mathcal H^mM$. Since $M\\in D^{\\ge m}$, its lower-truncation projection $M\\to\\tau^{\\ge m}M$ is an isomorphism, giving $\\mathcal H^m(Rj_*M)\\cong j_*\\mathcal H^mM$. For a lisse sheaf $L[0]$, take $m=0$: $j_*L$ is $\\mathcal H^0(Rj_*L)$, which is constructible by Step 2 and the ambient heart comparison in Step 1. Hence the sheaf adjunction and the counit in Step 5 restrict to the constructible hearts.",
+   "uses": [
+    "lem-pc-derived-bottom-unit-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-curve-perverse-heart.proof.md",
+    "place": "Step 3: identification of the bottom cohomology; Step 5: constructible ordinary j_* of a lisse sheaf"
+   }
+  },
+  {
+   "text": "For the unit claim, represent $K$ by a bounded-below complex $P$ of $E_C$-modules. Restriction is exact, so $j^*K$ is represented by $j^*P$. The normalization in [lem-trf-bounded-below-derived-adjunction], with $L=j^*$ and $R=j_*$, identifies the actual derived adjunction unit with $P\\to j_*j^*P\\to Rj_*j^*P$, the termwise ordinary unit followed by the right-derived comparison. Apply the actual-unit formula of [lem-pc-derived-bottom-unit-normalization] in degree $m$, to the cycles and homology data of $j^*P$, and the induced map on cycles into $j_*j^*P$. It says that, after the lower-truncation projection and its bottom isomorphism, the latter comparison induces the canonical map to $j_*\\mathcal H^m(j^*P)$. Composing with the termwise unit therefore gives precisely the ordinary sheaf unit $\\mathcal H^mK\\to j_*j^*\\mathcal H^mK$. Here exact restriction identifies $\\mathcal H^m(j^*P)=j^*\\mathcal H^mP$, and $j^*K\\in D^{\\ge m}$ makes the lower-truncation projection invertible. No lower bound on $K$ relative to $m$ is used.",
+   "uses": [
+    "lem-trf-bounded-below-derived-adjunction",
+    "lem-pc-derived-bottom-unit-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-curve-perverse-heart.proof.md",
+    "place": "Step 3: the cohomology map is the ordinary unit, including when only j^*K has the lower bound"
+   }
+  },
+  {
+   "text": "Now suppose the immersion pair descends to $k_0$. For $f=j,i$, [lem-weil-frobenius-square-cartesian] gives isomorphisms $g_C,g_Y$ with $fg_Y=g_Cf$, where $Y=U,Z$. The site equivalence in [lem-weil-proetale-isomorphism-inverse-image] computes $g^{-1}$ by reindexing. Using [def-weil-proetale-inverse-image] for direct image, for $V\\to C$ compare the $Y$-objects $V_g\\times_CY$ and $V\\times_CY$ with the latter structure map followed by $g_Y$, where $V_g$ means $V\\xrightarrow{v}C\\xrightarrow{g_C}C$. They are isomorphic by $(v,y)\\mapsto(v,g_Yy)$. Evaluating a sheaf $F$ on this isomorphism gives a natural isomorphism $b_f:g_C^*f_*F\\xrightarrow{\\sim}f_*g_Y^*F$. The coefficient actions agree because the continuous coefficient pullback identifications are those of [lem-per-continuous-rational-derived-realization]. The units and counits are restriction/evaluation of sections; the displayed isomorphism preserves these maps. More explicitly, after the square pullback identification, $b_{f,f^*H}\\,g_C^*(\\eta_H)=\\eta_{g_C^*H}$ and $g_Y^*(\\varepsilon_F)=\\varepsilon_{g_Y^*F}\\,f^*(b_{f,F})$. These are equalities on each section, not an inference from t-exactness alone.",
+   "uses": [
+    "lem-weil-frobenius-square-cartesian",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-per-continuous-rational-derived-realization",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-curve-perverse-heart.proof.md",
+    "place": "Weil-pair convention and Step 3: explicit ordinary Frobenius base-change maps and adjunction equations"
+   }
+  },
+  {
+   "text": "The reindexing equivalences of Step 9 preserve K-injectives: maps from an acyclic complex into the reindexed resolution are identified with maps from its exact inverse image into the original K-injective complex, and hence are null-homotopic. Apply the sectionwise $b_f$ to an injective resolution, using [prop-pur-kinjective-resolutions-exist]. This constructs $g_C^*Rf_*\\cong Rf_*g_Y^*$; for $i$ it is already $g_C^*i_*\\cong i_*g_Z^*$ since $i_*$ is exact. The unit/counit equations of Step 9 remain equalities of maps of complexes and hence in the derived category, with the actual derived maps normalized by [lem-trf-bounded-below-derived-adjunction]. The comparison [lem-a1-rational-direct-image-realization] identifies these with the specified rational operations and their adjunction maps. Since reindexing is exact, it commutes with kernels, cokernels, truncations and their maps. The natural bottom comparison in [lem-pc-derived-bottom-unit-normalization] is built from those truncations and the right-derived comparison, so it commutes with the same reindexing. Given a Weil isomorphism $g_Y^*M\\to M$, its direct-image isomorphism is $Rf_*(g_Y^*M\\to M)\\circ b_f$; the displayed unit/counit equations and cohomology comparison give precisely the required equivariance.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-trf-bounded-below-derived-adjunction",
+    "lem-a1-rational-direct-image-realization",
+    "lem-pc-derived-bottom-unit-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-curve-perverse-heart.proof.md",
+    "place": "Weil-pair convention: derived Frobenius base change and compatibility with cohomology, units, counits and truncations"
+   }
+  },
+  {
+   "text": "Finally pass from finite fields of coefficients to $\\Lambda$. The scalar comparisons of [prop-weil-pbc-scalar-extension], the realization comparisons of [lem-per-continuous-rational-derived-realization] and [lem-a1-rational-direct-image-realization] identify the preceding constructions after each finite extension. At the ambient rational stage finite coefficient extension is exact: locally a basis of the finite field extension identifies it with a finite direct sum, so it commutes with kernels, cokernels and ordinary direct image. This also makes the sheaf units/counits and the section-reindexing maps scalar compatible. The canonical derived and truncation comparisons have the same compatibility by the cited comparisons and their adjunction normalization. Therefore [prop-weil-pbc-descent-functors] descends the functors, units, counits and all displayed equations to the pair categories of [def-weil-pbc-qbar-category]. Isomorphisms, the cohomological bounds and the t-exactness assertions hold at common finite stages by [lem-per-adic-heart-pullback-fibres]. Exactness on hearts follows from preservation of kernels and cokernels there; a sheaf with zero restrictions is zero by their conservative fibres. This proves every clause at $\\Lambda$, and equips the maps with Frobenius when present. All constructions were in the geometric triangulated categories; the Weil assertion uses only the given Frobenius pairs. Finally [sk-prop-sfb-qlbar-colimit-x] identifies the continuous ring sheaf $\\Lambda_T$ with $\\varinjlim_E E_T$, with the same completed/localized finite rings. A finite-stage representative is thus realized by $\\Lambda_T\\otimes_{E_T}J_TK$. This extension is an exact filtered colimit of finite scalar extensions, by the Grothendieck assertion of [prop-pur-kinjective-resolutions-exist]; its cohomology is $\\Lambda_T\\otimes_{E_T}\\mathcal H^r(J_TK)$, proving the claimed agreement also for the pro-etale $\\Lambda_T$-module representatives.",
+   "uses": [
+    "prop-weil-pbc-scalar-extension",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-a1-rational-direct-image-realization",
+    "prop-weil-pbc-descent-functors",
+    "def-weil-pbc-qbar-category",
+    "lem-per-adic-heart-pullback-fibres",
+    "sk-prop-sfb-qlbar-colimit-x",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-curve-perverse-heart.proof.md",
+    "place": "Steps 1 and 3 and Weil-pair convention: common finite coefficient fields, with all natural maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-qbar-category",
+  "def-weil-proetale-inverse-image",
+  "lem-a1-rational-direct-image-realization",
+  "lem-pc-derived-bottom-unit-normalization",
+  "lem-per-adic-heart-pullback-fibres",
+  "lem-per-continuous-rational-derived-realization",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-trf-bounded-below-derived-adjunction",
+  "lem-weil-frobenius-square-cartesian",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-proetale-weakly-etale-localization",
+  "prop-pur-kinjective-resolutions-exist",
+  "prop-weil-pbc-descent-functors",
+  "prop-weil-pbc-scalar-extension",
+  "sk-prop-sfb-qlbar-colimit-x"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/thm-a1-curve-perverse-heart.proof.md",
+  "place": "Steps 1 and 3 (ordinary cohomology and restrictions, bottom cohomology and actual unit), with explicit continuous rational realization and Frobenius site reindexing; Bhatt–Scholze §§6.7–6.8"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,7 +235,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-a1-curve-perverse-heart",
@@ -84,5 +252,104 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-qbar-open-closed-cohomology",
+  "worker": "stage1",
+  "summary": "Repaired every returned coefficient and functor gap: use the existing BS continuous rational realization and adic-heart comparison, ringed pro-etale open–closed calculus, generic bottom-unit normalization, one new direct-image realization comparison, and explicit Frobenius site reindexing. Dropped the duplicate bottom-cohomology node and the parent punctual-subsheaf argument. The item statement and prior item Mathlib searches remain unchanged.",
+  "blueprint": "Steps 1,3–5 realize blueprint Step 1 ordinary cohomology and open–closed restrictions. Steps 2,6–8 realize blueprint Step 3 constructible Rj_* and its bottom-cohomology/unit argument. Steps 9–11 provide its finite-stage/Frobenius compatibility. No part of the perverse truncation construction is moved here.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-derived-bottom-unit-normalization",
+    "why": "Existing generic bottom comparison with actual-unit normalization; replaces the duplicate new node."
+   },
+   {
+    "node": "lem-per-adic-heart-pullback-fibres",
+    "why": "Foundational bounded common-stage t-structure and adic fibre conservativity, over arbitrary fields; no etale/pro-etale conflation."
+   },
+   {
+    "node": "lem-per-continuous-rational-derived-realization",
+    "why": "Foundational BS 6.8 comparison of the actual PBC raw rationalization with continuous pro-etale module complexes, including its heart and pullbacks."
+   },
+   {
+    "node": "lem-sf-integral-direct-image-constructible",
+    "why": "Generic integral direct-image finiteness over any field, used before localization rather than applying the characteristic-p condensed-ring theorem."
+   },
+   {
+    "node": "lem-trf-bounded-below-derived-adjunction",
+    "why": "Generic actual-unit and actual-counit formulas for exact left adjoints and derived right adjoints."
+   },
+   {
+    "node": "lem-weil-frobenius-square-cartesian",
+    "why": "Identifies the Frobenius isomorphisms and their commuting squares; not a claim that ordinary t-exactness proves base change."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-negative-vanishing",
+    "why": "Generic lower-bound theorem used only after realizing the rational category inside the appropriate ambient D^+."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Identifies the PBC and framework full integral categories before using the generic direct-image finiteness tool."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Ringed pro-etale localization for arbitrary sheaves of rings supplies closed exactness and the supported-sheaf sequence."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic module adjunction used at the continuous ring sheaves."
+   },
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Generic site reindexing along isomorphisms, used to construct the Frobenius exchange explicitly."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identification of the open small site with the slice site justifies the evaluation proof of j^*j_*=id."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic Grothendieck and injective-resolution theorem for module sheaves on small ringed sites."
+   },
+   {
+    "node": "prop-weil-pbc-descent-functors",
+    "why": "Common-stage descent of compatible functors, transformations and equations."
+   },
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Canonical finite-field scalar comparisons for the actual PBC operations."
+   },
+   {
+    "node": "sk-prop-sfb-qlbar-colimit-x",
+    "why": "Only its coefficient-ring identifications, not its condensed constructible categories, identify the continuous Qbar ring with the colimit of the realized finite rings."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-derived-bottom-unit-normalization",
+  "lem-per-adic-heart-pullback-fibres",
+  "lem-per-continuous-rational-derived-realization",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-trf-bounded-below-derived-adjunction",
+  "lem-weil-frobenius-square-cartesian",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-proetale-weakly-etale-localization",
+  "prop-pur-kinjective-resolutions-exist",
+  "prop-weil-pbc-descent-functors",
+  "prop-weil-pbc-scalar-extension",
+  "sk-prop-sfb-qlbar-colimit-x"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q08-a03b6c251",
+  "group": "Q08",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-a03b6c251 (reviewer sub-agent of L); spot-checked: I read all 11 item steps and the new node lem-a1-rational-direct-image-realization in full, plus the statement of every cited node. The parent's main-20261015 proof (Steps 0–6) and the parent DAG steps that cite the item agree with what the item supplies. Batch 5: lem-per-adic-heart-pullback-fibres is in the item's own unit and reaches sec-poincare-duality only through the general definition def-pod-lisse-l-adic-sheaves. lem-trf-bounded-below-derived-adjunction is generic homological algebra (the derived adjunction of an exact left adjoint, with its unit and counit normalized), not part of the trace formula. Both are outside the two assumptions, so the citations are allowed. The statement is unchanged and not weakened. Coefficients are the def-weil-pbc-qbar-category pair category with continuous E_T and Λ_T representatives. Characteristic 0 is supported, because lem-sf-integral-direct-image-constructible holds over any field. Step checks: the open/closed ringed node applies with A=E_C because U is quasi-compact (C Noetherian). Full faithfulness of i_* and the essential image follow from the counit and the short exact sequence. j*j_*=id because V×_C U=V for the open monomorphism. Negative vanishing applies in Grothendieck categories (via prop-pur-kinjective). The bottom isomorphism and actual-unit formula combine with the derived-adjunction normalization to give the ordinary unit, assuming only j*K in D^{≥m}. Frobenius reindexing works on (v,y)↦(v,g_Y y) through the cartesian square, and K-injectives are preserved. Descent to Λ holds by scalar extension and descent, and Λ_T=colim E_T is flat. New node: Bhatt–Scholze Remark 6.8.15 (functors computed by ambient injective replacements), Lemma 6.7.2 and Proposition 6.8.14(2) back it. It is true because the ϖ-telescope commutes with Rf_* for bounded K and qcqs f. Edge cases checked: f=id, empty X, torsion K, scalar extension. It is not a duplicate: lem-weil-pbc-condensed-e-realization is the char>0 condensed special case. The closure is acyclic, uses equal proof_deps, nothing cites SGA, and all 16 off-unit tools are declared and accepted. No fixes."
  }
 }
