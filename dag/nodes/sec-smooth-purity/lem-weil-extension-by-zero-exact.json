@@ -20,40 +20,30 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-weil-proetale-weakly-etale-localization] to the open immersion $j:U\\hookrightarrow\\overline X$ and the commutative ring $A$. It identifies $U_{\\mathrm{proet}}$ with $\\overline X_{\\mathrm{proet}}/U$, including their coverings, and identifies $A_U$ with $A_{\\overline X}|_U$. Thus the source module category is the category of $A_{\\overline X}|_U$-module sheaves on this localized site. Moreover every ambient object has at most one map to $U$, and such a map exists exactly when it factors through $U$.",
+   "text": "Unfold the intrinsic extension-by-zero functor [def-weil-extension-by-zero] as the inverse canonical coefficient realization, fixed-coefficient open-immersion lower shriek, and ambient canonical coefficient realization. The exact canonical realization equivalence [def-weil-pbc-proetale-modules] is additive. Its inverse is additive by Mathlib Equivalence.inverse_additive, and both directions of an equivalence preserve finite limits and finite colimits.",
    "uses": [
-    "lem-weil-proetale-weakly-etale-localization"
+    "def-weil-extension-by-zero",
+    "def-weil-pbc-proetale-modules"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-extension-by-zero.md",
-    "place": "Localization and coefficient identifications used in the definition; made explicit by lem-weil-proetale-weakly-etale-localization."
-   }
+   "elementary": true
   },
   {
-   "text": "Apply [lem-pur-site-restriction-module-adjunction-exact] with $\\mathcal C=\\overline X_{\\mathrm{proet}}$, $\\mathcal O=A_{\\overline X}$ and the object $U$. Its extension-by-zero presheaf [def-weil-extension-by-zero-presheaf] has, on $V$, a direct sum indexed by maps $V\\to U$. By Step 1 this is the zero module if no map exists, and otherwise the single module $M(V\\to U)$; its action and restriction maps are precisely those of [def-weil-extension-by-zero]. Its module sheafification is therefore the functor $j_!$ in the statement. The cited theorem says this functor is exact. This applies to every finite commutative $A$ in the statement, hence also to each stated finite-torsion coefficient ring.",
+   "text": "Apply the existing fixed-coefficient theorem [lem-sfb-finite-extension-by-zero-exact] with coefficient category ModuleCat (ULift A). Its additive instance and finite-limit-preserving instance give the first two properties of the middle functor. The existing lower-shriek adjunction makes it a left adjoint, so it preserves finite colimits. The additive and finite-limit/finite-colimit composition instances now prove all three assertions for the defining composite.",
    "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "def-weil-extension-by-zero",
-    "def-weil-extension-by-zero-presheaf"
+    "lem-sfb-finite-extension-by-zero-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03DI (lemma-extension-by-zero) and 03DJ (lemma-extension-by-zero-exact), specialized to the open-immersion localization."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-extension-by-zero",
-  "def-weil-extension-by-zero-presheaf",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-proetale-weakly-etale-localization"
+  "def-weil-pbc-proetale-modules",
+  "lem-sfb-finite-extension-by-zero-exact"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 03DI (lemma-extension-by-zero) and 03DJ (lemma-extension-by-zero-exact), using the existing pro-etale localization and coefficient-identification lemma."
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-finite-lower-shriek/lem-sfb-finite-extension-by-zero-exact.md",
+  "place": "Existing fixed-coefficient exactness proof, transported through the canonical coefficient realization equivalences in the actual definition of sfIntrinsicExtensionByZero; U8 stage 3, 2026-10-18."
  },
  "mathlib_searches": [
   {
@@ -201,5 +191,15 @@
   "date": "2026-10-15",
   "existing": false,
   "note": "§1(B): This genuine dependency has no usable Lean record. State its exactness for the intrinsic realization of the recorded extension-by-zero functor, and expose the additive/finite-limit/finite-colimit instances needed for termwise derived descent. The sole postponed theorem is exactly this node."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U8",
+  "result": "pass",
+  "landing": "20261018T140718-L-3104919",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
