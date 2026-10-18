@@ -14,7 +14,8 @@
   "def-weil-polynomial-ring",
   "def-weil-affine-spectrum",
   "def-weil-pbc-krull-dimension-ring",
-  "def-sc-discrete-valuation-ring"
+  "def-sc-discrete-valuation-ring",
+  "def-per-monomial-trait-model"
  ],
  "proof": [
   {
@@ -267,5 +268,24 @@
   "group": "Q62",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-641e5f8e5 (reviewer sub-agent of L); spot-checked: Read the full item, both new Mathlib leaves and every cited statement. Checked against ILO XVI Lemma 3.5.13(i) (pp. 250-251), which states integral + regular + smooth generic fibre and leaves the proof as an exercise. The item statement is verbatim the base statement. No hypothesis was added and no SGA is cited. Step 3: I checked the Eisenstein hypotheses on uX^d - pi over A = R[T_i : i != j]: piA is prime, u is outside piA, pi is not in pi^2 A, and the polynomial is primitive because pi is prime in the UFD A. They match Polynomial.irreducible_of_eisenstein_criterion at Criterion.lean:175-179 (IsDomain context). The UFD leaf gives one declaration per clause, and its lines were checked (PrincipalIdealDomain.lean:371, UniqueFactorization.lean:130, Defs.lean:137, Maximal.lean:148, Quotient/Basic.lean:90). Steps 4-5 give a unit derivative T_j D_j f = a_j pi and a correct Newton square-zero lift. Step 6 uses the 07PF derivation node on K[T] for primes not containing pi. Step 7 uses the 00NR statement to show pi is not in m^2. Step 8 has two cases, r >= 2 and r = 1, the latter using the extended D_i with D_i(m^2) in m, and then applies the 00NQ hypersurface criterion. Small cases tested: (1), (p) in mixed characteristic, zero exponents, (2,2) in characteristic 0. No duplicates found for Eisenstein or polynomial UFD (lem-trf-ufd-height-one and the sbc T^n - pi root node are different statements). Batch-5: the newly cited lem-trf-polynomial-ring-regular-base is a Mathlib leaf (MvPolynomial.isRegularRing_of_isRegularRing) with no proof deps. It is generic commutative algebra, neither the trace formula nor Poincare duality nor a step of their proofs, so the citation is accepted. The three tool_uses for pbc nodes 00NR, 00NQ and 07PF are accepted. Advisory only: the def-sc-discrete-valuation-ring stmt_dep is not referenced in the statement, and the worker wrote tool_uses itself (C8). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.PrimitiveMonomialTraitGeometry",
+  "declaration": "AlgebraicGeometry.primitive_monomial_trait_geometry",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrimitiveMonomialTraitGeometry.lean",
+  "statement": "theorem primitive_monomial_trait_geometry (R : Type u) [CommRing R] [IsDomain R] [IsLocalRing R] [IsNoetherianRing R] (hdim : ringKrullDim R = 1) (π : R) (hπ : IsLocalRing.maximalIdeal R = Ideal.span {π}) (n : ℕ) (hn : 1 ≤ n) (a : Fin n → ℕ) (ha : ∃ i : Fin n, a i ≠ 0 ∧ IsUnit (a i : FractionRing R)) : IsNoetherianRing (monomialTraitAlgebra R π n a) ∧ IsDomain (monomialTraitAlgebra R π n a) ∧ IsRegularRing (monomialTraitAlgebra R π n a) ∧ Smooth (pullback.snd (Spec.map (CommRingCat.ofHom (monomialTraitAlgebraMap R π n a))) (Spec.map (CommRingCat.ofHom (algebraMap R (FractionRing R)))))",
+  "branch": "newtargets-dag",
+  "by": "Q106",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Uses def-per-monomial-trait-model, whose existing:true record binds the published literal quotient monomialTraitAlgebra and its canonical coefficient map monomialTraitAlgebraMap. The chart theorem is no longer a statement dependency. Its published module remains the source of these existing definitions; no chart theorem or log-smoothness hypothesis is used. Generic smoothness is stated for the actual pullback to Spec (FractionRing R)."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c137ce00f",
+  "group": "Q106",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN (ee9d2113). The theorem stmt_dep is replaced by new def node def-per-monomial-trait-model (ILO XVI Def 3.5.11, p.250, checked in the PDF). Its existing:true record is on the unchanged RegularLogSmoothMonomialChart module and lists monomialTraitAlgebra and monomialTraitAlgebraMap. Bodies at :41-52 match the node; there are only def stmt_deps, so no cycle; no competing owner or live node. Item differs from live only in lean and stmt_deps; the statement field is verbatim, and lean.statement occurs verbatim in the file. Hypotheses (Noetherian local domain, ringKrullDim=1, maximal ideal = span{pi}, n>=1, the same exponent nonzero and a unit in FractionRing R) and the four conclusions (Noetherian, domain, IsRegularRing, Smooth of pullback.snd to Spec K) match the node and Lemma 3.5.13(i). Edge cases and the universe were checked; docstrings and a sorry-only proof are in place. nt_compile --json is clean in 2.7 s, and a broken control fails. Advisories: def-sc-discrete-valuation-ring is unused in the statement (base-era); the public import of the chart module is heavy but is where the existing defs are recorded."
  }
 }

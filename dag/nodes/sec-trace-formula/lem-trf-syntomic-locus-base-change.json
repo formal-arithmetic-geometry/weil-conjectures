@@ -14,7 +14,8 @@
   "lem-trf-lci-pointwise-criterion",
   "def-pc-fibre-product",
   "def-weil-flat-morphism",
-  "def-sbc-locally-finite-presentation"
+  "def-sbc-locally-finite-presentation",
+  "def-trf-complete-intersection-local-algebra"
  ],
  "proof": [
   {
@@ -217,5 +218,29 @@
   "group": "Q16",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q16-c144e3051 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited DAG statements, unit/chapter route, and Stacks Tags 02V3, 01UE, and 00SI. Verified hypotheses, residue-field base change, coefficient category, proof steps, edge cases, searches, duplicates, and route constraints. No repairs needed."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.SyntomicLocusBaseChange",
+  "declaration": "AlgebraicGeometry.syntomic_locus_base_change",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.IsCompleteIntersectionAtFiberPoint",
+   "AlgebraicGeometry.Scheme.Hom.fiberCompleteIntersectionLocus",
+   "AlgebraicGeometry.Scheme.Hom.HasCompleteIntersectionFibres",
+   "AlgebraicGeometry.syntomic_locus_base_change"
+  ],
+  "file": "lean/Sheaf/TraceFormula/SyntomicLocusBaseChange.lean",
+  "statement": "theorem syntomic_locus_base_change {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] : (∀ (S' : Scheme.{u}) (g : S' ⟶ S), (pullback.snd f g).fiberCompleteIntersectionLocus = (pullback.fst f g) ⁻¹' f.fiberCompleteIntersectionLocus) ∧ (Flat f → LocallyOfFinitePresentation f → ∃ U : X.Opens, (U : Set X) = f.fiberCompleteIntersectionLocus ∧ IsGreatest {V : X.Opens | Flat (V.ι ≫ f) ∧ LocallyOfFinitePresentation (V.ι ≫ f) ∧ (V.ι ≫ f).HasCompleteIntersectionFibres} U)",
+  "branch": "newtargets-dag",
+  "by": "Q125",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6ad489abe",
+  "group": "Q125",
+  "result": "pass",
+  "note": "Read node, 8 stmt_deps (+ Fiber.lean asFiber/fiber API, CompleteIntersectionLocalAlgebra def), Stacks 02V3 (morphisms.tex 5974-5989), module, report (Worker report + Second reading present). Clauses match: LocallyOfFiniteType binder; fibre stalk over κ(s) with canonical ΓSpecIso/appLE/germ scalars; V_f via canonical f.asFiber; ∀ S' g with f'=pullback.snd, g'=pullback.fst and set equality without flat/lfp; flat→lfp→∃ U : X.Opens, ↑U = V_f ∧ IsGreatest over opens with flat, lfp, all-fibre-local-ring CI restriction. Empty cases covered, no extra hypotheses, same-universe S' standard. Helper defs are the node's own notions, real data, listed in declarations; no duplicate in side lean/Mathlib. Node diff = lean + landed def-trf-complete-intersection-local-algebra in stmt_deps (permitted); statement verbatim; imports match statement + proof_deps. nt_compile --json clean 2.5 s rc 0. Advisory: two pre-existing 00SD def nodes (def-trf-complete-intersection-local vs -algebra); stage 3 needs a bridge."
  }
 }
