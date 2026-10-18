@@ -23,6 +23,7 @@ import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
 import Sheaf.AlgebraicGeometry.ExchangeStrictLocalCohomology
 import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
+import Sheaf.AlgebraicGeometry.SmoothLocalAcyclicityCore
 import Sheaf.AlgebraicGeometry.StrictLocalGeometricFibreTest
 import Sheaf.AlgebraicGeometry.StrictlyHenselianConstantCohomology
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Theorem
@@ -38,7 +39,7 @@ Source: Stacks Project, Tag 0GJQ, proposition-smooth-locally-acyclic
 
 universe u
 
-open CategoryTheory
+open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
@@ -82,6 +83,9 @@ Hence alpha is precisely the degree-zero isomorphism above. All test points and 
 arbitrary, proving local acyclicity; step 1 gives universality. -/
 theorem smooth_localAcyclicity {X S : Scheme.{u}} (f : X ⟶ S) [Smooth f] :
     IsUniversallyLocallyAcyclic f ∧ IsLocallyAcyclic f := by
-  sorry
+  constructor
+  · intro S' g
+    exact smooth_localAcyclicity_core (pullback.snd f g)
+  · exact smooth_localAcyclicity_core f
 
 end AlgebraicGeometry.Etale
