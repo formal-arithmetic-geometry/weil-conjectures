@@ -176,7 +176,7 @@ lemma isIso_homologyFunctor_map_singleFunctorTensorToSingle_app
         (ObjectProperty.flat.ι : _ ⥤ Sheaf X.smallEtaleTopology A))
       exact ⟨_, R.π.app Y, (R.F.obj Y).property, inferInstance⟩)
     (fun S hS ↦ epi_and_exact_homologyFunctor_zero_singleFunctor_tensor B S hS)
-    (fun S hS ↦ ⟨inferInstanceAs (Epi ((tensorRight B).map S.g)),
+    (fun S hS ↦ ⟨by have := hS.epi_g; exact Functor.map_epi _ _,
       hS.exact.map_of_epi_of_preservesCokernel _ hS.epi_g inferInstance⟩) F
   dsimp [α] at key
   exact IsIso.of_isIso_comp_right _
