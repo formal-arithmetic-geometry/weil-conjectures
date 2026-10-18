@@ -56,6 +56,34 @@ theorem nagataQCOpenEqEventually
       nagataQCOpenEqualityStage D c hc i₀ p W₁ W₂ hW₁ hW₂ hEq d r ≤ j →
       pullback.fst p (D.map (homOfLE h₀).op) ⁻¹ᵁ W₁ =
         pullback.fst p (D.map (homOfLE h₀).op) ⁻¹ᵁ W₂ := by
-  sorry
+  classical
+  let B := baseChangeDiagram D p
+  let b := baseChangeCone D c p
+  let j₀ : Over (Opposite.op i₀) := Over.mk (𝟙 (Opposite.op i₀))
+  let f₀ := pullback.fst p (D.map j₀.hom)
+  let e := exists_map_preimage_eq_map_preimage B b (isLimitBaseChangeCone D c p hc)
+    (i := j₀)
+    (U := f₀ ⁻¹ᵁ W₁) (V := f₀ ⁻¹ᵁ W₂)
+    (QuasiCompact.isCompact_preimage (f := f₀) (W₁ : Set Y₀) W₁.isOpen hW₁)
+    (QuasiCompact.isCompact_preimage (f := f₀) (W₂ : Set Y₀) W₂.isOpen hW₂)
+    (by simpa [B, b, j₀, f₀, ← Scheme.Hom.comp_preimage] using hEq)
+  let k := Classical.choose e
+  obtain ⟨f, hf⟩ := Classical.choose_spec e
+  have hk : pullback.fst p (D.map k.hom) ⁻¹ᵁ W₁ =
+      pullback.fst p (D.map k.hom) ⁻¹ᵁ W₂ := by
+    simpa only [f₀, ← Scheme.Hom.comp_preimage, B, baseChangeDiagram_map_fst] using hf
+  intro j h₀ hj
+  have hkj : k.left.unop ≤ j := le_trans
+    (le_directedFiniteUpperBound i₀ d hd r
+      (Finset.mem_insert_of_mem (Finset.mem_singleton_self k.left.unop))) hj
+  let t : Over.mk ((homOfLE h₀).op) ⟶ k :=
+    Over.homMk (homOfLE hkj).op (Subsingleton.elim _ _)
+  have ht := congrArg (fun W ↦ B.map t ⁻¹ᵁ W) hk
+  rw [← Scheme.Hom.comp_preimage, ← Scheme.Hom.comp_preimage] at ht
+  rw [show B.map t ≫ pullback.fst p (D.map k.hom) =
+      pullback.fst p (D.map (homOfLE h₀).op) by
+    exact baseChangeDiagram_map_fst D p t] at ht
+  dsimp [B, baseChangeDiagram] at ht
+  exact ht
 
 end AlgebraicGeometry
