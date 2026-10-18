@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.ExtMap
+public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.ExtMapExactFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.ResolutionMap
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GlobalSectionsExt
 
@@ -66,6 +67,19 @@ lemma extFrobeniusOfResolution_extMk {n : ℕ} (f : constantIntSheaf X ⟶ R.coc
       R.extMk (resolutionFrobeniusCocycle g ψ n f) (n + 1) rfl
         (by rw [← resolutionFrobeniusCocycle_comp_d, hf, map_zero]) :=
   R.extMap_extMk _ _ _ f hf
+
+/-- **The Frobenius on `Ext` is intrinsic.** The Frobenius computed with a resolution is
+`x ↦ (ℤ ⟶ g_* ℤ) ∘ g_*(x) ∘ s`, the image of `x` under the exact functor `g_*` read through
+`ℤ ⟶ g_* ℤ` and `s : g_* B ⟶ B`. -/
+theorem extFrobeniusOfResolution_eq {n : ℕ} (x : Ext (constantIntSheaf X) B n) :
+    extFrobeniusOfResolution g ψ n x =
+      (Ext.mk₀ (constantIntSheafToLowerStar g)).comp
+        ((x.mapExactFunctor (g)_*[AddCommGrpCat.{u + 1}]).comp (Ext.mk₀ s) (add_zero n))
+        (zero_add n) := by
+  obtain ⟨f, hf, rfl⟩ := R.extMk_surjective x (n + 1) rfl
+  rw [extFrobeniusOfResolution_extMk, ← Ext.comp_assoc_of_third_deg_zero,
+    InjectiveResolution.mk₀_comp_mapExactFunctor_extMk, InjectiveResolution.extMk_comp_mk₀ _ _ _ _ ψ]
+  rfl
 
 variable {B' : Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}}
   {s' : (g)_*[AddCommGrpCat.{u + 1}].obj B' ⟶ B'} {R' : InjectiveResolution B'}
