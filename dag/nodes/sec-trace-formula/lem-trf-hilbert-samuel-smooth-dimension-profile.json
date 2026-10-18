@@ -16,9 +16,198 @@
   "def-weil-pbc-krull-dimension-ring",
   "lem-trf-hilbert-samuel-local-presentations"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The two operators are mutual inverses on all integer sequences. Indeed $\\Delta\\Lambda f(0)=f(0)$, $\\Delta\\Lambda f(n+1)=\\sum_{i\\le n+1}f(i)-\\sum_{i\\le n}f(i)=f(n+1)$, and $\\Lambda\\Delta f(n)=f(0)+\\sum_{i<n}(f(i+1)-f(i))=f(n)$. If $f,g$ first differ at $j$, their partial sums agree below $j$ and differ at $j$ by $f(j)-g(j)$; their differences also agree below $j$ and differ at $j$ by that amount. Hence every iterate of either operator preserves and reflects strict lexicographic order and equality. This holds for arbitrary integer entries, including negative finite differences.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.13, p.94; explicit synchronization argument (agent-written)."
+   }
+  },
+  {
+   "text": "First [lem-weil-pbc-finite-type-over-noetherian], applied over the field $\\mathbf Q$, makes $X$ Noetherian; the same holds on finite-type source neighbourhoods and for every reduced closed union of its components. For the local map $A=\\mathcal O_{X,x}\\to B=\\mathcal O_{Y,y}$ use [lem-trf-smooth-local-tangent-cone-extension]; smooth affine charts give its essentially smooth local hypothesis. Local rings are essentially of finite type over $\\mathbf Q$. Write $g_A(j)=\\dim_{\\kappa(x)}\\mathfrak m_A^j/\\mathfrak m_A^{j+1}$ and similarly $g_B$. The graded isomorphism says that $g_B(j)$ is the sum of $g_A(i)$ over pairs consisting of $i$ and a monomial in $s$ variables of degree $j-i$. Extension of the residue field does not alter these finite dimensions. Finite composition series of the maximal-ideal filtration, using [lem-weil-pbc-length-additive-short-exact], give $h_A=\\Lambda g_A$ and $h_B=\\Lambda g_B$. Adjoining one variable replaces $g_A$ by $\\Lambda g_A$ since its powers are indexed by all nonnegative degrees. Iterate $s$ times to get $h_y=\\Lambda^s h_x$, also for $s=0$.",
+   "uses": [
+    "lem-trf-smooth-local-tangent-cone-extension",
+    "lem-weil-pbc-length-additive-short-exact",
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.13, p.94; explicit synchronization argument (agent-written)."
+   }
+  },
+  {
+   "text": "The minimal-prime quotient formula in [lem-trf-smooth-local-tangent-cone-extension] identifies the set of local component dimensions upstairs with the downstairs set translated by $s$; irreducible components of an affine spectrum are minimal-prime vanishing sets by [lem-weil-pbc-spec-irreducible-components-minimal-primes]. Translation is injective, so $q_y=q_x+s$ and $c_y=c_x$. Step 1 and Step 2 now give $\\Delta^{q_y}h_y=\\Delta^{q_x+s}\\Lambda^s h_x=\\Delta^{q_x}h_x$. Thus $A_Y(y)=A_X(x)$. One works on finite-type open neighbourhoods of $y$ if the smooth source is not quasi-compact.",
+   "uses": [
+    "lem-trf-smooth-local-tangent-cone-extension",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.13, p.94; explicit synchronization argument (agent-written)."
+   }
+  },
+  {
+   "text": "At a regular local ring $R$ of dimension $d$, [lem-sc-regular-local-domain] gives one minimal prime, so $c=1$ and $q=d$. Choose $d$ generators of its maximal ideal. They form a regular sequence by [lem-weil-pbc-regular-local-generators-regular-sequence]. By [lem-pur-regular-sequence-graded-polynomial], the associated graded pieces have the monomial bases in $d$ variables. Applying length additivity to the filtration gives $h_R=\\Lambda^d\\mathbf1$, where $\\mathbf1=(1,1,\\ldots)$ (for $d=0$ the local ring is a field). Therefore the head is $(1,\\mathbf1)$.",
+   "uses": [
+    "lem-sc-regular-local-domain",
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-pur-regular-sequence-graded-polynomial",
+    "lem-weil-pbc-length-additive-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.13, p.94; explicit synchronization argument (agent-written)."
+   }
+  },
+  {
+   "text": "Conversely if $c>1$, the head is greater than the regular head in its first coordinate. If $c=1$, all local components have dimension $q$, so $d=\\dim R=q$. Put $e=\\dim_{\\kappa}\\mathfrak m/\\mathfrak m^2$. The exact sequence with successive factors $\\mathfrak m/\\mathfrak m^2$ and $\\kappa$ gives $h(0)=1$ and $h(1)=1+e$, by [lem-weil-pbc-length-additive-short-exact]. Repeated differences leave entry $0$ equal to $1$ and subtract $q$ from entry $1$, so $\\Delta^q h(1)=1+e-q$. By [lem-weil-pbc-regular-local-cotangent-dimension], $e\\ge d$ with equality exactly for regular $R$. Thus any nonregular point with $c=1$ has its first differing entry at $1$, strictly greater than $1$. This proves the regular-head criterion and strict lower bound.",
+   "uses": [
+    "lem-weil-pbc-length-additive-short-exact",
+    "lem-weil-pbc-regular-local-cotangent-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.13, p.94; explicit synchronization argument (agent-written)."
+   }
+  },
+  {
+   "text": "For $x\\in X$ let $P(x)=\\{\\dim Z:x\\in Z,\\ Z\\text{ an irreducible component of }X\\}$, $d_-(x)=\\min P(x)$, and $t_x=\\operatorname{trdeg}_{\\mathbf Q}\\kappa(x)$. For each such reduced component $Z$, the finite-type dimension formula gives $\\dim\\mathcal O_{Z,x}=\\dim Z-t_x$: apply [lem-weil-pbc-dimension-at-point-local-ring-trdeg] on a domain affine chart of $Z$, and [lem-weil-pbc-finite-type-domain-dimension-trdeg] to identify its topological dimension at $x$ with its function-field transcendence degree. All nonempty affine opens of $Z$ have that same function field. Hence $q_x=d_-(x)-t_x$, $c_x=|P(x)|$, and, writing $B_D$ for the modified head,\n$$B_D(x)=(|P(x)|,\\Lambda^{D-d_-(x)}H_x).$$\nAlso $q_x\\le\\dim X\\le D$, so Step 1 gives directly $\\Lambda^D\\Delta^{q_x}h_x=\\Lambda^{D-q_x}h_x$. This proves the stated conversion without discarding any initial entries of the sequences.",
+   "uses": [
+    "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+    "lem-weil-pbc-finite-type-domain-dimension-trdeg"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.13, p.94; explicit synchronization argument (agent-written)."
+   }
+  },
+  {
+   "text": "Here is the needed strictness under discarding components. If $U$ is a proper reduced union of components through $x$, set $R=\\mathcal O_{X,x}$ and $\\mathcal O_{U,x}=R/J$. A component has been omitted through $x$, so $J\\ne0$ (localizing the distinct minimal primes preserves their incomparability). By [lem-weil-pbc-krull-intersection-jacobson], choose $a\\in J$ outside some $\\mathfrak m^{n+1}$. Every quotient $R/\\mathfrak m^{r+1}\\twoheadrightarrow R/(J+\\mathfrak m^{r+1})$ is surjective, and at $r=n$ has nonzero kernel. Length additivity shows $h_{U,x}(r)\\le h_{X,x}(r)$ for all $r$, strictly for some $r$. Thus $H_{U,x}<H_{X,x}$ by Step 1, since their residue fields at $x$ are equal. This is an argument using Krull intersection, not an assumption that Hilbert--Samuel functions determine dimension profiles of arbitrary unrelated rings.",
+   "uses": [
+    "lem-weil-pbc-krull-intersection-jacobson",
+    "lem-weil-pbc-length-additive-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.13, p.94; explicit synchronization argument (agent-written)."
+   }
+  },
+  {
+   "text": "Suppose $z$ specializes to $x$. Then $P(z)\\subseteq P(x)$. Let $U$ be the reduced union of all components containing $z$. Near $z$, $U=X$, so $H_{U,z}=H_{X,z}$. Upper semicontinuity for $U$ from [lem-trf-hilbert-samuel-local-presentations] gives $H_{U,x}\\ge H_{U,z}$. If any component through $x$ is missing from $U$, Step 7 gives $H_{X,x}>H_{U,x}\\ge H_{X,z}$. Consequently equality $H_{X,x}=H_{X,z}$ forces every component through $x$ to contain $z$, and in particular $P(x)=P(z)$. The presentation theorem applies to $U$ because it is reduced, finite type over $\\mathbf Q$ and locally embeds in the same smooth ambient scheme; these hypotheses hold even if $X$ is not globally affine.",
+   "uses": [
+    "lem-trf-hilbert-samuel-local-presentations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.13, p.94; explicit synchronization argument (agent-written)."
+   }
+  },
+  {
+   "text": "Near a fixed $x$, discard the finitely many components (by [lem-weil-pbc-noetherian-finitely-many-components]) not containing $x$, and restrict further until $H_z\\le H_x$ using [lem-trf-hilbert-samuel-local-presentations]. For all remaining $z$, $P(z)\\subseteq P(x)$. If $|P(z)|<|P(x)|$, then $B_D(z)<B_D(x)$. If the cardinalities agree, the finite sets agree, their minima agree, and Step 1 applied to the formula in Step 6 gives $B_D(z)\\le B_D(x)$. This proves upper semicontinuity. Finite image follows because $H$ has finite image on a finite open cover by [lem-trf-hilbert-samuel-local-presentations], whereas $P$ takes values in subsets of the finite set of dimensions of the components of the initial $X$. Thus only finitely many pairs in the formula of Step 6 occur.",
+   "uses": [
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-weil-pbc-noetherian-finitely-many-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.13, p.94; explicit synchronization argument (agent-written)."
+   }
+  },
+  {
+   "text": "The two finite stratifications by $H$ and by $B_D$ have exactly the same equality relation on comparable points. One direction is Step 8 and Step 6. Conversely, if $z$ specializes to $x$ and $B_D(z)=B_D(x)$, inclusion $P(z)\\subseteq P(x)$ and equality of cardinalities give $P(z)=P(x)$; cancel $\\Lambda^{D-d_-}$ using Step 1 to obtain $H_z=H_x$. Their level sets are locally closed, since both maps are upper semicontinuous with finite image. Give the locally closed level sets their reduced scheme structures. They are Noetherian by Step 2; their finite component decompositions and generic points follow from [lem-weil-pbc-noetherian-finitely-many-components] and [lem-weil-pbc-scheme-sober]. Every irreducible component $S$ has a generic point $\\eta$, and all $x\\in S$ specialize from $\\eta$. The equality relation just proved places $S$ inside one component $T$ of a level set for the other map. Its generic point specializes to $\\eta$, so the reverse equality relation puts all of $T$ back in the original level set. Maximality gives $S=T$. Interchanging the two maps proves both directions of the asserted irreducible-component comparison.",
+   "uses": [
+    "lem-weil-pbc-scheme-sober",
+    "lem-weil-pbc-noetherian-finitely-many-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.13, p.94; explicit synchronization argument (agent-written)."
+   }
+  },
+  {
+   "text": "Locally at $x$, the $B_D(x)$-locus is the $H_x$-locus after shrinking. In the neighbourhood of Step 9, equality of $B_D$ forces $P=P(x)$ and hence equality of $H$. For the converse, each component of the $H_x$-locus containing $x$ has the same profile by Step 8; remove the finitely many other components of that locally closed locus. Now equality of $H$ forces equality of $B_D$. Choose the local marked-ideal presentation furnished by [lem-trf-hilbert-samuel-local-presentations] on this neighbourhood. It presents precisely this common locus. Along a smooth center in it $H$ is locally constant, so the theorem's admissible-transform and Hilbert--Samuel nonincrease clauses apply. This argument is local on the center; it does not require $H$ to have one value on disconnected center pieces with different global dimensions.",
+   "uses": [
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-weil-pbc-noetherian-finitely-many-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.13, p.94; explicit synchronization argument (agent-written)."
+   }
+  },
+  {
+   "text": "Under an admissible blowup every component of the strict transform is the closure of an open of an original component not contained in the center. Its global dimension is unchanged, by the function-field dimension formula in [lem-weil-pbc-finite-type-domain-dimension-trdeg]. Thus at $y\\mapsto x$, $P'(y)\\subseteq P(x)$, even if some components disappear. If its cardinality drops then $B'_D(y)<B_D(x)$. If cardinality is unchanged the profiles and their minima agree, and Hilbert--Samuel nonincrease from [lem-trf-hilbert-samuel-local-presentations] and Step 1 imply $B'_D(y)\\le B_D(x)$. If $H'_y=H_x$, the equality-case theorem [lem-trf-hilbert-samuel-equality-component-rigidity] gives $P'(y)=P(x)$, hence $B'_D(y)=B_D(x)$. Conversely equality of the modified heads cancels to equality of $H$. The same dimension bound $D$ applies after every strict-transform blowup, since its component dimensions form a subset of the initial dimensions.",
+   "uses": [
+    "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+    "lem-trf-hilbert-samuel-local-presentations",
+    "lem-trf-hilbert-samuel-equality-component-rigidity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.13, p.94; explicit synchronization argument (agent-written)."
+   }
+  },
+  {
+   "text": "The presentation in Step 11 therefore has the same test sequences for the modified head as for the Hilbert--Samuel stratum: after each admissible blowup Step 12 identifies equality with the previous level, so the allowed next centers coincide, and both descriptions use the same controlled ideal transform. Products with a line preserve the normalized head by Steps 2--3; in the Hilbert--Samuel test convention of [lem-trf-hilbert-samuel-local-presentations] they use the corresponding dimension shift and ordinary pullback. Blowups of intersections of exceptional divisors are the auxiliary tests specified by that same theorem, with its pullback convention; both presentations use that identical test operation and the identical exceptional history. Induction on the length of a finite test sequence proves equivalence, including every ordered exceptional history. Finally, locally where the chosen head is maximal, resolving the same marked presentation removes its $H$-stratum by [lem-trf-hilbert-samuel-local-presentations], hence removes the modified head by Step 11. Resolve all its presentations when claiming removal of that head globally.",
+   "uses": [
+    "lem-trf-hilbert-samuel-local-presentations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.13, p.94; explicit synchronization argument (agent-written)."
+   }
+  },
+  {
+   "text": "There is no infinite strictly decreasing sequence of the modified heads arising from a fixed initial $X$ under these admissible histories. Otherwise their first coordinates, nonnegative integers, are eventually constant. There are only finitely many possible global component dimensions, all inherited from the initial scheme by Step 12. Choose an infinite subsequence on which $d_-$ is constant. Its second coordinates remain strictly decreasing; cancel the same $\\Lambda^{D-d_-}$ by Step 1. This gives an infinite strictly decreasing sequence of extended Hilbert--Samuel values arising under the same admissible histories, contrary to [lem-trf-hilbert-samuel-local-presentations]. The argument uses that theorem's descending-chain assertion for values arising from the fixed initial scheme; it makes no claim about arbitrary integer sequences. Ordered exceptional divisors only restrict admissibility and change none of the numerical calculations. A finite disjoint union has finitely many components and a common dimension bound $D$, so the same proof applies, including to its maximum-head process. The empty scheme has no heads and the assertions are vacuous.",
+   "uses": [
+    "lem-trf-hilbert-samuel-local-presentations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII 2.3.13, p.94; explicit synchronization argument (agent-written)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-smooth-local-tangent-cone-extension",
+  "lem-weil-pbc-length-additive-short-exact",
+  "def-sbc-smooth-morphisms",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-pur-regular-sequence-graded-polynomial",
+  "lem-weil-pbc-regular-local-cotangent-dimension",
+  "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+  "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+  "lem-weil-pbc-krull-intersection-jacobson",
+  "lem-trf-hilbert-samuel-local-presentations",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-weil-pbc-scheme-sober",
+  "lem-trf-hilbert-samuel-equality-component-rigidity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII 2.3.13, printed p.94; explicit finite-difference synchronization reduction to local presentations. BMT arXiv:0905.3580 section 6.3 is WANTED, not read or claimed to be available."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -54,10 +243,45 @@
    "results": "{\"t\": \"2026-10-18T22:16:35Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-hilbert-samuel-smooth-dimension-profile: finite differences of the Hilbert Samuel length function cancel the dimension of a regular smooth fibre, and local component dimensions shift equally\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth.relativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Module.supportDim_add_length_eq_supportDim_of_isRegular\", \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension\"], \"digest\": \"9f5b2af3d9234dc5\"}",
    "date": "2026-10-18",
    "verdict": "no match: returned declarations concern smoothness, ideal orders, formal series or dimension identities, not the stated presentation/invariant/blowup theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "Hilbert.?Samuel|normalFlat|normal_flat|hilbertSamuel",
+   "results": "{\"t\": \"2026-10-18T22:40:39Z\", \"tool\": \"grep\", \"query\": \"Hilbert.?Samuel|normalFlat|normal_flat|hilbertSamuel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned types; smooth presentations, flatness, ranks and Krull dimension inequalities do not give the stated tangent-cone or near-point component comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HilbertSamuel\"",
+   "results": "{\"t\": \"2026-10-18T22:40:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"HilbertSamuel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned types; smooth presentations, flatness, ranks and Krull dimension inequalities do not give the stated tangent-cone or near-point component comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-hilbert-samuel-smooth-dimension-profile: smooth stable Hilbert Samuel invariant normalized by finite differences and minimum component dimension for functorial resolution",
+   "results": "{\"t\": \"2026-10-18T22:40:40Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-hilbert-samuel-smooth-dimension-profile: smooth stable Hilbert Samuel invariant normalized by finite differences and minimum component dimension for functorial resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth.relativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"RingHom.IsStandardSmoothOfRelativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension.isStandardSmooth\", \"Algebra.IsSmoothAt\", \"RingHom.IsStandardSmoothOfRelativeDimension.isStandardSmooth\", \"Algebra.SubmersivePresentation.isStandardSmoothOfRelativeDimension\"], \"digest\": \"f0670af87f4f885c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned types; smooth presentations, flatness, ranks and Krull dimension inequalities do not give the stated tangent-cone or near-point component comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hilbert Samuel functions under smooth maps finite differences minimum local component dimension desingularization",
+   "results": "{\"t\": \"2026-10-18T22:45:08Z\", \"tool\": \"leansearch\", \"query\": \"Hilbert Samuel functions under smooth maps finite differences minimum local component dimension desingularization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.IsSmooth.recOn\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.mk\", \"Algebra.smoothLocus\"], \"digest\": \"82a40d79bea934bf\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned types; smooth presentations, flatness, ranks and Krull dimension inequalities do not give the stated tangent-cone or near-point component comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "lem-trf-hilbert-samuel-smooth-dimension-profile: repeated cumulative sums and differences of length functions define smooth invariant desingularization heads with a finite descending chain condition",
+   "results": "{\"t\": \"2026-10-18T22:54:02Z\", \"tool\": \"leanfinder\", \"query\": \"lem-trf-hilbert-samuel-smooth-dimension-profile: repeated cumulative sums and differences of length functions define smooth invariant desingularization heads with a finite descending chain condition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.out\", \"Algebra.IsStandardSmooth.relativeDimension\", \"Algebra.IsStandardSmoothOfRelativeDimension\", \"PrimeSpectrum.exist_ltSeries_mem_one_of_mem_last\", \"RingHom.IsStandardSmoothOfRelativeDimension\", \"Algebra.Smooth.exists_span_eq_top_isStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.isStandardSmooth\", \"Algebra.IsStandardSmooth\"], \"digest\": \"f62bf33511c78862\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned types; smooth presentations, flatness, ranks and Krull dimension inequalities do not give the stated tangent-cone or near-point component comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-hilbert-samuel-resolution-invariant-calculus",
@@ -87,5 +311,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-hilbert-samuel-smooth-dimension-profile",
+  "worker": "stage1",
+  "summary": "Proved finite-difference cancellation and order reflection, smooth invariance from a structural tangent-cone input, regularity detection, global/local component-dimension conversion, strictness for reduced unions of components, semicontinuity, identical irreducible level components, presentation equivalence, blowup monotonicity and termination. Added only a structural smooth-local-algebra lemma and the near-point equality-case lemma; no Lean and no statement weakening. Detailed BMT source is absent and reported WANTED.",
+  "blueprint": "Historical alteration branch specified by blueprint.from, via hilbert-samuel-resolution-invariant-calculus; realizes synchronization of ordinary embedded resolution in ILO VIII 2.3.13. Does not change the current contracting-correspondence route of lem-trf-local-term-locality.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-regular-local-domain",
+    "why": "Generic commutative-algebra tool for component dimensions or regular local rings; its statement is used directly, and this trace-formula unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "why": "Generic commutative-algebra tool for component dimensions or regular local rings; its statement is used directly, and this trace-formula unit has no replacement."
+   },
+   {
+    "node": "lem-pur-regular-sequence-graded-polynomial",
+    "why": "Generic commutative-algebra tool for component dimensions or regular local rings; its statement is used directly, and this trace-formula unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+    "why": "Generic commutative-algebra tool for component dimensions or regular local rings; its statement is used directly, and this trace-formula unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-domain-dimension-trdeg",
+    "why": "Generic commutative-algebra tool for component dimensions or regular local rings; its statement is used directly, and this trace-formula unit has no replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-regular-local-domain",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-pur-regular-sequence-graded-polynomial",
+  "lem-weil-pbc-dimension-at-point-local-ring-trdeg",
+  "lem-weil-pbc-finite-type-domain-dimension-trdeg"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-503852029",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-503852029 (reviewer sub-agent of L); spot-checked: I read the item (all 14 steps), both new nodes, every cited statement and lem-trf-hilbert-samuel-local-presentations. Source check: ILO VIII 2.3.13, p.94, says BM-type algorithms are functorial only for equidimensional smooth morphisms and that [Bierstone et al. 2011 = BMT 0905.3580] §6.3 fixes the synchronization. BMT is absent from literature/, so WANTED with proof_origin agent is honest. Stacks 00ON was read and is correctly described as a chart/dimension input only. Steps 1-14 check out. I verified Δ^kh(1)=1+e-k, which gives the regular-head criterion. Step 7's Krull-intersection strictness is sound. Steps 8-11 (USC, level-set components, local locus equality via generic points) and the Step 12 blowup comparison are correct, given the rigidity node. Product with a line keeps B_D both at s=1 and at s=0 (where trdeg goes up by 1). Step 14 reduces the descending-chain claim to local-presentations' DCC through finitely many possible d_-. New node tangent-cone-extension is true. I tested A[t]_{(m,t)}, A[t]_{mA[t]} and an étale-split node: the dimension sets are equal by flat going down and the finite-type dimension formula, with no bijection of primes. New node equality-component-rigidity is consistent and not a restatement of the item. It holds for point centers (Bennett plus Step 7) and for top-dimensional components (termwise equimultiplicity plus the Dade bound). I found no counterexample. The lower-dimensional case for positive-dimensional centers is exactly the BMT input reported WANTED, so it is left to the node's own split. No duplicates in a DAG grep (Hilbert-Samuel, tangent cone, normal flatness, gr+flat). No SGA, no cycle. I accept the five generic commutative-algebra tool_uses. No fixes."
  }
 }
