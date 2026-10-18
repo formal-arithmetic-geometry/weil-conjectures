@@ -300,5 +300,34 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c6e795418",
+  "group": "NC",
+  "result": "pass",
+  "note": "Read node, 5 stmt deps, report, module, upstream Mod/InternalHom.lean (ihom', homModB, homModPre, homAct, ihom'Adjunction), Mod/Tensor.lean, ModuleObjects/Monoidal.lean and GrothendieckAbelian.lean. Same assumptions as upstream, universes u,v independent, no stronger hypotheses. ihom' equalizer maps and action through N match the node. Compiled probe: MonoidalCategory.tensorLeft M uses Mod.monoidalCategory (def-sfb-modobj-relative-tensor) and (tensorLeft M).obj L = M ⊗ L by rfl, so the order M ⊗_R - is correct; ihom'Adjunction (- ⊗_R M) and the sorry Mod.monoidalClosed are rightly not used as an existing attachment. Nonempty with both functors fixed is the stated property, matches the landed adjunction form, real data is upstream ihom', not hollow. Commit touches only report, node and module; only the lean field changed; statement verbatim; docstrings carry source, blueprint tag and ten steps; lines under 100 chars; only proof is sorry; name new. Edge cases zero modules, unit, zero ring, non-flat covered. Report has both required sections; second-reading section only cites the 2026-10-17 policy, accepted. nt_compile.py --json: rc 0, no errors or warnings, about 2 s, matches the report. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Monoidal.ModuleEqualizerInternalHom",
+  "declaration": "CategoryTheory.Mod.nonempty_equalizerInternalHomAdjunction",
+  "declarations": [
+   "CategoryTheory.Mod.nonempty_equalizerInternalHomAdjunction",
+   "CategoryTheory.Mod.ihom'",
+   "CategoryTheory.Mod.homAct",
+   "CategoryTheory.Mod.homMod",
+   "CategoryTheory.Mod.homModPre",
+   "CategoryTheory.Mod.homModB",
+   "CategoryTheory.Mod.ihom'Adjunction",
+   "CategoryTheory.Mod.monoidalClosed"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Monoidal/ModuleEqualizerInternalHom.lean",
+  "statement": "theorem nonempty_equalizerInternalHomAdjunction {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C] [MonoidalCategory C] [MonoidalPreadditive C] [SymmetricCategory C] [MonoidalClosed C] (R : C) [MonObj R] [IsCommMonObj R] (M : Mod C R) : Nonempty (MonoidalCategory.tensorLeft M ⊣ ihom' R M)",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Mixed record: the equalizer, target action and functor are the existing Mod.ihom', homAct, homMod, homModPre and homModB in WeilConjectures.CategoryTheory.Monoidal.Mod.InternalHom. The new theorem states the adjunction for the precise Mod.monoidalCategory tensor and the blueprint's left-tensor order. Upstream ihom'Adjunction instead uses Mod.tensorLeft M, computing - tensor_R M; upstream monoidalClosed uses an abstract right adjoint. No internal hom or monoidal structure is defined again."
  }
 }
