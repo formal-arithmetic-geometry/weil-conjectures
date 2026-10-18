@@ -20,7 +20,9 @@
   "lem-sf-open-tensor-normalization",
   "def-weil-pbc-adjunction-mate",
   "lem-sf-proper-open-projection-mate",
-  "def-weil-compactifications-refinements"
+  "def-weil-compactifications-refinements",
+  "def-sp-semilinear-constant-ring-operations",
+  "def-sf-semilinear-proper-open-comparisons"
  ],
  "proof": [
   {
@@ -356,5 +358,50 @@
   "group": "Q17",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q17-d872409e1 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, all ten proof steps, every cited node statement, unit/chapter route, blueprint proof, and cited Stacks passages. Checked coefficient categories, base-change and mate normalizations, finite-type/separated/proper hypotheses, vertical and horizontal pasting, identities, refinements, duplicate candidates, Mathlib searches, and edge cases. No mathematical, citation, route, or statement fault found; no fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.AmbientProperOpenPasting",
+  "declaration": "AlgebraicGeometry.ProEtale.AmbientProperOpen.ambientProperOpenPasting",
+  "file": "lean/Sheaf/SixFunctors/AmbientProperOpenPasting.lean",
+  "statement": "theorem ambientProperOpenPasting (F : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ F.p) (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) : (Laws (ordinary F (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))))) ∧ OrdinaryTensorComposition F (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1))) ∧ Laws (systems F (WeilConjectures.IntegralSystemRealization.scalarRings l E) (WeilConjectures.IntegralSystemRealization.scalarTransitions l E)) ∧ ∀ (o : WeilConjectures.IntegralSystemRealization.Operations l E) (c : WeilConjectures.IntegralSystemRealization.Compositors l E o), SystemTensorComposition F l E o c",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Repair of returned head 42365e336230 (H2): Lean unchanged, SHA-256 af74586e245d25bd48f28e96e776a6c036321af54892452ce9d316e5e7454ccd. Constant-ring operations are owned by def-sp-semilinear-constant-ring-operations; the 24 canonical compositor/open-comparison helpers are owned by the new existing:true node def-sf-semilinear-proper-open-comparisons. No dependency on the semilinear mate-pasting theorem; NB record unchanged.",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.AmbientProperOpen.Spaces",
+   "AlgebraicGeometry.ProEtale.AmbientProperOpen.geometry",
+   "AlgebraicGeometry.ProEtale.AmbientProperOpen.Calculus",
+   "AlgebraicGeometry.ProEtale.AmbientProperOpen.Calculus.sComp",
+   "AlgebraicGeometry.ProEtale.AmbientProperOpen.Calculus.jComp",
+   "AlgebraicGeometry.ProEtale.AmbientProperOpen.Calculus.sId",
+   "AlgebraicGeometry.ProEtale.AmbientProperOpen.Calculus.jId",
+   "AlgebraicGeometry.ProEtale.AmbientProperOpen.Calculus.gamma",
+   "AlgebraicGeometry.ProEtale.AmbientProperOpen.ordinary",
+   "AlgebraicGeometry.ProEtale.AmbientProperOpen.systems",
+   "AlgebraicGeometry.ProEtale.AmbientProperOpen.mappedCompositeProper",
+   "AlgebraicGeometry.ProEtale.AmbientProperOpen.mappedCompositeOpen",
+   "AlgebraicGeometry.ProEtale.AmbientProperOpen.mappedCompositeQuasiCompact",
+   "AlgebraicGeometry.ProEtale.AmbientProperOpen.mappedIdentityProper",
+   "AlgebraicGeometry.ProEtale.AmbientProperOpen.mappedIdentityOpen",
+   "AlgebraicGeometry.ProEtale.AmbientProperOpen.mappedIdentityQuasiCompact",
+   "AlgebraicGeometry.ProEtale.AmbientProperOpen.Calculus.pCongr",
+   "AlgebraicGeometry.ProEtale.AmbientProperOpen.Calculus.sCongr",
+   "AlgebraicGeometry.ProEtale.AmbientProperOpen.Calculus.jCongr",
+   "AlgebraicGeometry.ProEtale.AmbientProperOpen.Laws",
+   "AlgebraicGeometry.ProEtale.AmbientProperOpen.OrdinaryTensorComposition",
+   "AlgebraicGeometry.ProEtale.AmbientProperOpen.SystemTensorComposition",
+   "AlgebraicGeometry.ProEtale.AmbientProperOpen.positiveCoefficientFinite",
+   "AlgebraicGeometry.ProEtale.AmbientProperOpen.ambientProperOpenPasting"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-62384f5b9",
+  "group": "NV",
+  "result": "fix",
+  "note": "Re-delivery after two H2 returns; item Lean byte-identical (sha af74586e), substance as accepted before; nt_compile --json clean 5.0 s. New existing:true def-sf-semilinear-proper-open-comparisons correctly owns the 24 SemilinearProperOpen helpers (jAdj/pComp/pId/alpha + transitive helpers), no overlap with NB's def-sp node, statement verbatim (def pComp), check_existing/check_record/check_new_node clean, no theorem stmt_dep, no cycle, no duplicate owner. H12 fault fixed: the new node's bodies use exactDerivedAdjunction (owner def-weil-exact-derived-adjunction) and StrictTower.squareLift (owner def-cbc-strict-tower-proper-open-arrows), which were not cited; fixes/def-sf-semilinear-proper-open-comparisons.json adds both to stmt_deps and cites them in the TeX, no Lean change. Advisory: item statement uses IntegralSystemRealization.Operations/Compositors (def-sf-integral-system-operations) and scalarRings/scalarTransitions (def-sf-integral-system-canonical-bridge), whose owners are not in stmt_deps; under H2 the group can add only new def nodes, so maintainer may add them at landing. Prior advisories (ProperOpen* defs without def node; (b) tensor clause presentation) stand."
  }
 }
