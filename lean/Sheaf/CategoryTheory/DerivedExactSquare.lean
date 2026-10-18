@@ -6,8 +6,6 @@ Authors: SHEAF group F1
 module
 
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Sheaf.AlgebraicGeometry.DerivedCategories
-import WeilConjectures.AlgebraicGeometry.DerivedCategories
 
 /-! # Localization formula for a square of exact functors
 
@@ -142,7 +140,120 @@ theorem mapDerivedCategoryPlusSquareIso_comp
         ((mapDerivedCategoryPlusSquareIso U₀ G₀₁ F₀₁ U₁ q₀₁).hom.app K) ≫
       (mapDerivedCategoryPlusSquareIso U₁ G₁₂ F₁₂ U₂ q₁₂).hom.app
         (F₀₁.mapDerivedCategoryPlus.obj K) := by
-  sorry
+  -- The ordinary identity descends degreewise to the homotopy categories.
+  have hqh (X : HomotopyCategory.Plus C₀) :
+      (NatTrans.mapHomotopyCategoryPlus q₀₂.hom).app X ≫
+          U₂.mapHomotopyCategoryPlus.map
+            ((NatTrans.mapHomotopyCategoryPlus cF.hom).app X) =
+        (NatTrans.mapHomotopyCategoryPlus cG.hom).app
+            (U₀.mapHomotopyCategoryPlus.obj X) ≫
+          G₁₂.mapHomotopyCategoryPlus.map
+            ((NatTrans.mapHomotopyCategoryPlus q₀₁.hom).app X) ≫
+          (NatTrans.mapHomotopyCategoryPlus q₁₂.hom).app
+            (F₀₁.mapHomotopyCategoryPlus.obj X) := by
+    apply (HomotopyCategory.Plus.ι D₂).map_injective
+    obtain ⟨⟨X⟩, hX⟩ := X
+    change (HomotopyCategory.quotient D₂ (ComplexShape.up ℤ)).map _ ≫
+        (HomotopyCategory.quotient D₂ (ComplexShape.up ℤ)).map _ =
+      (HomotopyCategory.quotient D₂ (ComplexShape.up ℤ)).map _ ≫
+        (HomotopyCategory.quotient D₂ (ComplexShape.up ℤ)).map _ ≫
+        (HomotopyCategory.quotient D₂ (ComplexShape.up ℤ)).map _
+    simp only [← Functor.map_comp]
+    congr 1
+    ext n
+    exact hq (X.X n)
+  let a := mapDerivedCategoryPlusSquareIso U₀ G₀₂ F₀₂ U₂ q₀₂
+  let b := mapDerivedCategoryPlusSquareIso U₀ G₀₁ F₀₁ U₁ q₀₁
+  let c := mapDerivedCategoryPlusSquareIso U₁ G₁₂ F₁₂ U₂ q₁₂
+  let dF := mapDerivedCategoryPlusNatIso cF ≪≫ mapDerivedCategoryPlusCompIso F₀₁ F₁₂
+  let dG := mapDerivedCategoryPlusNatIso cG ≪≫ mapDerivedCategoryPlusCompIso G₀₁ G₁₂
+  let τ₁ := a.hom ≫ whiskerRight dF.hom U₂.mapDerivedCategoryPlus
+  let τ₂ := whiskerLeft U₀.mapDerivedCategoryPlus dG.hom ≫
+    (associator _ _ _).inv ≫ whiskerRight b.hom G₁₂.mapDerivedCategoryPlus ≫
+    (associator _ _ _).hom ≫ whiskerLeft F₀₁.mapDerivedCategoryPlus c.hom ≫
+    (associator _ _ _).inv
+  -- Localization detects equality; the common factors below are invertible.
+  have ht : τ₁ = τ₂ := by
+    apply Localization.natTrans_ext DerivedCategory.Plus.Qh
+      (HomotopyCategory.Plus.quasiIso C₀)
+    intro X
+    dsimp only [τ₁, τ₂, NatTrans.comp_app, whiskerLeft_app, whiskerRight_app,
+      associator_hom_app, associator_inv_app]
+    simp only [Category.id_comp, Category.comp_id]
+    apply (cancel_mono
+      (U₂.mapDerivedCategoryPlus.map
+        (F₁₂.mapDerivedCategoryPlus.map (F₀₁.mapDerivedCategoryPlusFactorsh.hom.app X)) ≫
+       U₂.mapDerivedCategoryPlus.map
+        (F₁₂.mapDerivedCategoryPlusFactorsh.hom.app (F₀₁.mapHomotopyCategoryPlus.obj X)) ≫
+       U₂.mapDerivedCategoryPlusFactorsh.hom.app
+        (F₁₂.mapHomotopyCategoryPlus.obj (F₀₁.mapHomotopyCategoryPlus.obj X)))).mp
+    -- Factor the two composition comparisons through Qh.
+    have hdF : dF.hom.app (DerivedCategory.Plus.Qh.obj X) ≫
+        F₁₂.mapDerivedCategoryPlus.map (F₀₁.mapDerivedCategoryPlusFactorsh.hom.app X) ≫
+        F₁₂.mapDerivedCategoryPlusFactorsh.hom.app (F₀₁.mapHomotopyCategoryPlus.obj X) =
+      F₀₂.mapDerivedCategoryPlusFactorsh.hom.app X ≫
+        DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus cF.hom).app X) := by
+      dsimp only [dF, Iso.trans_hom, NatTrans.comp_app]
+      rw [Category.assoc, mapDerivedCategoryPlusCompIso_hom_app_factorsh,
+        mapDerivedCategoryPlusNatIso_hom_app_factorsh]
+    have hdG : dG.hom.app (DerivedCategory.Plus.Qh.obj
+          (U₀.mapHomotopyCategoryPlus.obj X)) ≫
+        G₁₂.mapDerivedCategoryPlus.map (G₀₁.mapDerivedCategoryPlusFactorsh.hom.app
+          (U₀.mapHomotopyCategoryPlus.obj X)) ≫
+        G₁₂.mapDerivedCategoryPlusFactorsh.hom.app
+          (G₀₁.mapHomotopyCategoryPlus.obj (U₀.mapHomotopyCategoryPlus.obj X)) =
+      G₀₂.mapDerivedCategoryPlusFactorsh.hom.app (U₀.mapHomotopyCategoryPlus.obj X) ≫
+        DerivedCategory.Plus.Qh.map ((NatTrans.mapHomotopyCategoryPlus cG.hom).app
+          (U₀.mapHomotopyCategoryPlus.obj X)) := by
+      dsimp only [dG, Iso.trans_hom, NatTrans.comp_app]
+      rw [Category.assoc, mapDerivedCategoryPlusCompIso_hom_app_factorsh,
+        mapDerivedCategoryPlusNatIso_hom_app_factorsh]
+    -- Normalize the left pasted square using the factorization of q₀₂.
+    have hl : a.hom.app (DerivedCategory.Plus.Qh.obj X) ≫
+        U₂.mapDerivedCategoryPlus.map (dF.hom.app (DerivedCategory.Plus.Qh.obj X)) ≫
+        U₂.mapDerivedCategoryPlus.map
+          (F₁₂.mapDerivedCategoryPlus.map (F₀₁.mapDerivedCategoryPlusFactorsh.hom.app X)) ≫
+        U₂.mapDerivedCategoryPlus.map (F₁₂.mapDerivedCategoryPlusFactorsh.hom.app
+          (F₀₁.mapHomotopyCategoryPlus.obj X)) ≫
+        U₂.mapDerivedCategoryPlusFactorsh.hom.app
+          (F₁₂.mapHomotopyCategoryPlus.obj (F₀₁.mapHomotopyCategoryPlus.obj X)) =
+      G₀₂.mapDerivedCategoryPlus.map (U₀.mapDerivedCategoryPlusFactorsh.hom.app X) ≫
+        G₀₂.mapDerivedCategoryPlusFactorsh.hom.app (U₀.mapHomotopyCategoryPlus.obj X) ≫
+        DerivedCategory.Plus.Qh.map
+          ((NatTrans.mapHomotopyCategoryPlus q₀₂.hom).app X ≫
+            U₂.mapHomotopyCategoryPlus.map
+              ((NatTrans.mapHomotopyCategoryPlus cF.hom).app X)) := by
+      rw [← U₂.mapDerivedCategoryPlus.map_comp_assoc,
+        ← U₂.mapDerivedCategoryPlus.map_comp_assoc, Category.assoc, hdF,
+        U₂.mapDerivedCategoryPlus.map_comp_assoc]
+      erw [U₂.mapDerivedCategoryPlusFactorsh.hom.naturality]
+      simp only [Functor.comp_map]
+      erw [reassoc_of% (mapDerivedCategoryPlusSquareIso_fac U₀ G₀₂ F₀₂ U₂ q₀₂ X)]
+      simp only [Functor.map_comp]
+    simp only [Category.assoc]
+    rw [hl]
+    -- Normalize the right pasting, moving factors across the natural comparisons.
+    have hn := c.hom.naturality (F₀₁.mapDerivedCategoryPlusFactorsh.hom.app X)
+    dsimp only [Functor.comp_map] at hn
+    erw [← reassoc_of% hn]
+    erw [mapDerivedCategoryPlusSquareIso_fac U₁ G₁₂ F₁₂ U₂ q₁₂
+      (F₀₁.mapHomotopyCategoryPlus.obj X)]
+    rw [← G₁₂.mapDerivedCategoryPlus.map_comp_assoc,
+      ← G₁₂.mapDerivedCategoryPlus.map_comp_assoc, Category.assoc]
+    erw [mapDerivedCategoryPlusSquareIso_fac U₀ G₀₁ F₀₁ U₁ q₀₁ X]
+    simp only [Functor.map_comp, Category.assoc]
+    erw [reassoc_of% (G₁₂.mapDerivedCategoryPlusFactorsh.hom.naturality
+      ((NatTrans.mapHomotopyCategoryPlus q₀₁.hom).app X))]
+    have hnG := dG.hom.naturality (U₀.mapDerivedCategoryPlusFactorsh.hom.app X)
+    dsimp only [Functor.comp_map] at hnG
+    erw [← reassoc_of% hnG, reassoc_of% hdG]
+    simpa only [Functor.map_comp, Category.assoc] using congrArg
+      (fun f ↦ G₀₂.mapDerivedCategoryPlus.map (U₀.mapDerivedCategoryPlusFactorsh.hom.app X) ≫
+        G₀₂.mapDerivedCategoryPlusFactorsh.hom.app (U₀.mapHomotopyCategoryPlus.obj X) ≫
+        DerivedCategory.Plus.Qh.map f) (hqh X)
+  simpa only [τ₁, τ₂, a, b, c, dF, dG, NatTrans.comp_app, whiskerLeft_app,
+    whiskerRight_app, associator_hom_app, associator_inv_app, Category.id_comp,
+    Category.comp_id] using NatTrans.congr_app ht K
 
 end Composition
 
