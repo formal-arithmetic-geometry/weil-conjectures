@@ -27,12 +27,11 @@
  ],
  "proof": [
   {
-   "text": "Setup (Stacks 01RV, proof, first sentence). By [lem-sc-irreducible-components-cover] $X=X_1\\cup\\dots\\cup X_n$, and each $X_k$ is closed [def-weil-irreducible-components]. Since $X_i=\\overline{\\{\\eta_i\\}}$ [def-sc-generic-point, lem-sc-scheme-sober], for $j\\neq i$ we have $\\eta_i\\notin X_j$: otherwise $X_i=\\overline{\\{\\eta_i\\}}\\subseteq X_j$ as $X_j$ is closed, and maximality of the irreducible subset $X_i$ gives $X_i=X_j$, against $i\\neq j$. Put $V_i:=X\\setminus\\bigcup_{j\\neq i}X_j$. It is open (complement of a finite union of closed sets), contains $\\eta_i$, is contained in $X_i$ (a point of $V_i$ lies in some $X_k$ by the cover, and $k=i$ is the only possibility), and $V_i\\cap V_j=\\emptyset$ for $i\\neq j$ (as $V_j\\cap X_i=\\emptyset$ and $V_i\\subseteq X_i$). Finally, for an open $W\\subseteq X$: $W\\cap X_i\\neq\\emptyset$ iff $\\eta_i\\in W$; indeed if $\\eta_i\\notin W$ then $\\eta_i$ lies in the closed set $X\\setminus W$, so $X_i=\\overline{\\{\\eta_i\\}}\\subseteq X\\setminus W$.",
+   "text": "Put V_i equal to the complement of the union of all components other than X_i. The components form a finite set because components is an equivalence from Fin n. The V_i are open, and Mathlib closure_sUnion_irreducibleComponents_sdiff_singleton gives closure(V_i) = X_i, hence V_i is contained in X_i and nonempty. The generic-point open-set criterion then gives eta_i in V_i. Distinct V_i are disjoint because V_i avoids X_j for j different from i. This uses the component cover and maximality via the cited Mathlib closure theorem [lem-sc-irreducible-components-cover, def-weil-irreducible-components, def-sc-generic-point].",
    "uses": [
     "lem-sc-irreducible-components-cover",
     "def-weil-irreducible-components",
-    "def-sc-generic-point",
-    "lem-sc-scheme-sober"
+    "def-sc-generic-point"
    ],
    "elementary": false,
    "source": {
@@ -64,7 +63,7 @@
    }
   },
   {
-   "text": "Injectivity (Stacks 01RV, third equality: the dense opens of the form $U_1\\sqcup\\dots\\sqcup U_n$ with $\\eta_i\\in U_i$ are cofinal, and $\\mathcal O_X(\\bigsqcup U_i)=\\prod\\mathcal O_X(U_i)$). Let $[(U,f)]\\in\\ker\\varphi$, so $f_{\\eta_i}=0$ for all $i$. By [def-weil-pbc-module-stalk] there is for each $i$ an open $W_i$ with $\\eta_i\\in W_i\\subseteq U$ and $f|_{W_i}=0$; replacing $W_i$ by $W_i\\cap V_i$ (step 1) we may assume $W_i\\subseteq V_i$. By step 2, $W=W_1\\sqcup\\dots\\sqcup W_n\\subseteq U$ is a dense open. Since $\\mathcal O_X$ is a sheaf [def-pc-scheme] and $W$ is covered by the $W_i$, the section $f|_W$, whose restrictions to all $W_i$ vanish, is $0$ (locality axiom). Thus $f|_W=0|_W$ on the dense open $W\\subseteq U$, so $(U,f)\\sim(U,0)$ and $[(U,f)]=0$ in $R(X)$ [def-sc-rational-functions]. Hence $\\varphi$ is injective.",
+   "text": "Injectivity, following the third equality of Stacks 01RV. The dense-open diagram is filtered in the restriction direction, so every element of its ring colimit is represented by a section [def-sc-rational-functions]. For representatives s on U and t on T with equal generic germs, the stalk equality criterion [def-weil-pbc-module-stalk] supplies neighborhoods W_i of eta_i contained in both U and T on which their restrictions agree. The union D of these neighborhoods is dense by step 2. Sheaf locality [def-pc-scheme] gives equality of the two restrictions on D, and the colimit relation gives equality of the represented rational functions. Disjointness of the W_i is unnecessary for this step.",
    "uses": [
     "def-weil-pbc-module-stalk",
     "def-pc-scheme",
@@ -90,7 +89,7 @@
    }
   },
   {
-   "text": "Integral case (Stacks 01RV, last sentence of the proof: 'The final statement follows from Algebra, Lemma 00EU'). If $X$ is integral it is nonempty and irreducible [def-pc-integral-scheme], so $X$ itself is an irreducible subset, and it is maximal (no subset is larger); any irreducible component $Z$ satisfies $Z\\subseteq X$, hence $Z=X$ by maximality of $Z$ [def-weil-irreducible-components]. So $n=1$, $X_1=X$, $\\eta_1=\\eta$ the generic point of $X$, and by steps 3 to 5 $R(X)\\cong\\mathcal O_{X,\\eta}$. Since $X$ is a nonempty scheme it has a nonempty affine open $U$ [def-pc-scheme], and [lem-sc-integral-function-field-affine-fraction] applied to $U$ says that $\\mathcal O_{X,\\eta}$ is a field. (That node is the step Stacks takes through 00EU: $\\mathcal O_X(U)$ is a domain, $\\eta$ is its minimal prime $(0)$, and the localization of a reduced ring at a minimal prime is a field.)",
+   "text": "Integral case, following the final sentence of Stacks 01RV. If X is integral [def-pc-integral-scheme], it is irreducible and its irreducible components form the singleton {X} [def-weil-irreducible-components]. Thus Fin n is nonempty and subsingleton, so n = 1, and each component is X. Evaluation of the product at any index is a ring equivalence, compatible with the germ equivalence of steps 3-5. The field clause of [lem-sc-integral-function-field-affine-fraction] is available directly as Mathlib AlgebraicGeometry.isField_stalk_of_closure_mem_irreducibleComponents: reducedness and closure {eta_i} in irreducibleComponents X imply that its stalk is a field. Transport this property through the evaluation equivalence to the rational-function ring. The affine-fraction construction and the choice of an affine open need not be repeated here.",
    "uses": [
     "def-pc-integral-scheme",
     "def-weil-irreducible-components",
@@ -108,7 +107,6 @@
   "lem-sc-irreducible-components-cover",
   "def-weil-irreducible-components",
   "def-sc-generic-point",
-  "lem-sc-scheme-sober",
   "def-sc-rational-functions",
   "def-weil-pbc-module-stalk",
   "def-pc-scheme",
@@ -118,7 +116,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Lemma 01RV (label lemma-integral-scheme-rational-functions, line 12705) and its proof, the string of equalities written out elementwise; last step through Algebra Lemma 00EU (algebra.tex line 4543) as carried by lem-sc-integral-function-field-affine-fraction; Topology Lemma 004W (topology.tex line 886) for the cover by components"
+  "place": "Lemma 01RV (label lemma-integral-scheme-rational-functions, line 12705), implemented elementwise via Mathlib filtered-colimit representatives, germ_eq, and sheaf unique gluing/locality; the field clause uses AlgebraicGeometry.isField_stalk_of_closure_mem_irreducibleComponents (Properties.lean), which implements the affine-local 00EU argument. Topology Lemma 004W supplies the component cover through Mathlib closure_sUnion_irreducibleComponents_sdiff_singleton."
  },
  "mathlib_searches": [
   {
@@ -195,5 +193,15 @@
   "group": "M1",
   "result": "pass",
   "note": "X:Scheme.{u}; n+Fin n equiv irreducibleComponents; eta IsGenericPoint; dense opens contain eta (conclusion); e: rationalFunctionRing ≃+* Pi stalks with germ values on colimit.ι classes; IsIntegral (AlgebraicGeometry.IsIntegral by #check) -> n=1, X_1=univ, IsField R(X) and stalk, ei compatible; old rationalFunctions verified Scheme.{0} so rule (B) module justified"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261018T062747-L-648371",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
