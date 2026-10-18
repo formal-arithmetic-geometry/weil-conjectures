@@ -109,7 +109,7 @@ private theorem exactCompUnit_fac
   simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
     Functor.whiskerRight_app, ← Category.assoc]
   erw [Functor.rightDerivedFunctorCompMapDerivedCategoryIso_hom_fac,
-    Functor.rightDerivedFunctorCompMapDerivedCategoryUnit_app]
+    Functor.rightDerivedFunctorCompMapDerivedCategoryUnit_app']
   rw [Functor.map_comp, Category.assoc]
 
 private theorem homotopy_whiskerRight_app
