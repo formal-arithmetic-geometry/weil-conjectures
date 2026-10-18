@@ -437,5 +437,45 @@
   "group": "Q39",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-9b619c1ef (reviewer sub-agent of L); spot-checked: I read the item in full; it has no new nodes and its statement is unchanged from the base. Source: ILO XVII Prop. 5.4.1. On p.291, RHom(-,K) applied to 0->Λ->i*Λ⊕p*Λ->q*Λ->0 needs RHom(q*Λ,K)=q*q^!K, which is the unit case (Step 11). On p.293, the triangle of RHom(K,L) uses p*RHom(p^!K,p^!L) and its compatibility with g^!, which is Steps 4 and 12. I checked all 12 steps against the statements of the 29 cited nodes. Finite implies proper, so (id,f) is a compactification and Rf_!=f_* termwise. With amplitude N=0 the right adjoint keeps D^+; I checked this by hand. The hypotheses of prop-asd-internal-adjunction and its evaluation normalization hold. Shift compatibility follows from the uniquely unit/counit-compatible shift structure and the projection mate. I recomputed the Step 6 stalk map ⊕_z∏_t L -> ∏_t⊕_z L: it is invertible because T_s̄ is finite, including an infinite U-fibre and an empty fibre. The Step 7 Yoneda chain for the étale slice is valid without any Noetherian or quasi-compact hypothesis on U. Steps 9–10 give the composite counit through mate-pasting part 2, Step 11 the sign of the Hom differential, and Step 12 counit naturality. Stacks labels 03DI, 03DJ, 03QP, 08JB, 0F7J and 0F7K are correct, and nothing cites SGA. No duplicates: lem-sc-finite-duality-derived-hom is the coherent analogue, and the trf internal-Hom exchange nodes state a different c^*/c^! exchange. I accept all 21 tool_uses as generic infrastructure. Batch-5: I accept both flagged citations, lem-etale-upper-shriek-bounded-below-from-amplitude and lem-etale-lower-shriek-adjoint-from-compactification. They are general six-functor results (existence of the Rf_! right adjoint and its D^+ preservation), given by neither assumption and not steps of the trace-formula or Poincaré-duality proofs. Their path reaches sec-poincare-duality only through the generic lem-pod-lisse-module-sheaves-as-module-objects, via the proper-base-change foundations. The item's base stmt_deps (thm-amb-etale-exceptional-adjoint, prop-asd-internal-adjunction) already reach the same nodes, so the new citations add no batch-5 exposure. In Step 7 both flagged citations are used correctly but could be avoided (representability and exactness of v^*); this is not a fault."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteExceptionalInternalHom",
+  "declaration": "AlgebraicGeometry.Etale.finiteExceptionalInternalHomPlusIso",
+  "declarations": [
+   "AlgebraicGeometry.Etale.finiteExceptionalSupportIso",
+   "AlgebraicGeometry.Etale.finiteExceptionalAdjunction",
+   "AlgebraicGeometry.Etale.finiteExceptionalInternalHomIso",
+   "AlgebraicGeometry.Etale.finiteExceptionalInternalHomPlusIso",
+   "AlgebraicGeometry.Etale.finiteExceptionalInternalHom_boundedBelow",
+   "AlgebraicGeometry.Etale.finiteExceptionalInternalHom_evaluation",
+   "AlgebraicGeometry.Etale.finiteExceptionalInternalHom_commShift",
+   "AlgebraicGeometry.Etale.finiteExceptionalInternalHom_unit",
+   "AlgebraicGeometry.Etale.finiteExceptionalCompIso",
+   "AlgebraicGeometry.Etale.finiteExceptionalInternalHom_composition",
+   "AlgebraicGeometry.Etale.finiteExceptionalInternalHom_counit",
+   "AlgebraicGeometry.Etale.finiteExceptionalSourceShiftIso",
+   "AlgebraicGeometry.Etale.finiteExceptionalInternalHom_sourceShift",
+   "AlgebraicGeometry.Etale.finiteExceptionalSliceAdjunction",
+   "AlgebraicGeometry.Etale.finiteExceptionalEtaleBaseChange_isIso",
+   "AlgebraicGeometry.Etale.finiteExceptionalSliceSumExchange",
+   "AlgebraicGeometry.Etale.finiteExceptionalRestriction",
+   "AlgebraicGeometry.Etale.finiteExceptionalHomRestriction",
+   "AlgebraicGeometry.Etale.finiteExceptionalInternalHom_restriction"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteExceptionalInternalHom.lean",
+  "statement": "def finiteExceptionalInternalHomPlusIso (A : Type (u + 1)) [CommRing A] [Finite A] {T S : Scheme.{u}} (f : T ⟶ S) [IsFinite f] (M : DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat A))) (N : DerivedCategory.Plus (Sheaf S.smallEtaleTopology (ModuleCat A))) : (R((f)_*[ModuleCat A])).obj (((RHom(T)[ModuleCat A]).obj (op M.obj)).obj ((R(f)^![ModuleCat A]).obj N.obj)) ≅ ((RHom(S)[ModuleCat A]).obj (op ((R((f)_*[ModuleCat A])).obj M.obj))).obj N.obj",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-140b4ca83"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-140b4ca83",
+  "group": "N6",
+  "result": "fix",
+  "note": "Read the node, all 7 stmt_deps, ILO XVII 5.4.1 pp.291/293, the module and the report. The main iso finiteExceptionalInternalHomPlusIso is prop-asd's canonical derivedHomRightDerivedLowerShriekIsoOfFinite, transported by canonical comparisons (chosen compactification -> ofIsProper -> Rf_*); its statement is verbatim. Universe A : Type (u+1) matches the deps; every theorem assumes Noetherian schemes. Evaluation-counit, shift (both variables), restriction to arbitrary étale U, composition (conjugate compIso) and counit clauses are correct and canonical; no hollow defs, docstrings OK, no pro-étale substitute. Fault H3: the unit clause was an unnormalized Nonempty iso. FIX fixes/FiniteExceptionalInternalHom.lean makes finiteExceptionalInternalHom_unit a def (same name, record unchanged): (main iso at 𝟙)^{-1} then f_* of conjugateIsoEquiv(derivedTensorHomAdjunction 𝟙, Adjunction.id, derivedTensorLeftUnitorNatIso.symm), adding a public import of Etale.Derived.TensorStructure. nt_compile --json: delivered module clean 18.1 s, fixed module clean 19.5 s. Advisory: the left unitor's owner lem-kun-tensor-unit is not a stmt_dep (same pattern as the delivered projectionMap/derivedBaseChangeMap uses)."
  }
 }
