@@ -22,9 +22,192 @@
   "thm-amb-etale-exceptional-adjoint",
   "def-per-potential-dualizing"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First fix the transitivity comparisons, including their counits. By [thm-amb-etale-exceptional-adjoint] the ordinary compact-support right adjoints exist, and [lem-amb-unbounded-compact-support-comparisons] supplies associative composition isomorphisms on the ambient derived categories. Thus [lem-cat-right-adjoint-composition] gives $(fg)^!\\cong g^!f^!$: its Hom bijection is $\\operatorname{Hom}(Rf_!Rg_!N,M)\\cong\\operatorname{Hom}(Rg_!N,f^!M)\\cong\\operatorname{Hom}(N,g^!f^!M)$. Its counit is the pasted counit. For a closed immersion $i$, ordinary compact support is $i_*$ (take the compactification $(\\mathrm{id},i)$). The supported-kernel adjunction of [lem-pur-etale-supported-kernel-adjunction] is also valid for $\\Lambda$-linear maps: its Hom bijection preserves the scalar action because its inclusion and restriction maps do. Since $i_*$ is exact, the support right adjoint preserves injectives by [lem-sp-right-adjoint-preserves-injectives]. Applying this Hom bijection to injective resolutions identifies its right derived functor with the compact-support right adjoint, with the same counit. Consequently the $i^!$ in [def-per-potential-dualizing] and the ambient exceptional functor are canonically the same on bounded-below inputs. In particular transitivity for nested closed supports has this normalization.",
+   "uses": [
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-cat-right-adjoint-composition",
+    "def-amb-etale-compact-support",
+    "lem-pur-etale-supported-kernel-adjunction",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "def-per-potential-dualizing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Definition 1.4.1 and Remark 2.4.3.2; support adjunction: Stacks Tag 09XQ, lemma-sections-with-support-acyclic"
+   }
+  },
+  {
+   "text": "Open restriction can be proved directly by adjunction. Source restriction $u^*f^!\\cong(fu)^!$ is [lem-amb-etale-adjoint-locality], applied to an open immersion $u$. For a cartesian square with open immersions $v:V\\hookrightarrow X$ and $u:Y_V\\hookrightarrow Y$, put $f_V:Y_V\\to V$. For $N\\in D(Y_V,\\Lambda)$ the same source locality and the ordinary adjunction $v_!\\dashv v^*$ give\n$$\\operatorname{Hom}(N,u^*f^!M)\\cong\\operatorname{Hom}(Rf_!u_!N,M)\\cong\\operatorname{Hom}(v_!Rf_{V,!}N,M)\\cong\\operatorname{Hom}(N,f_V^!v^*M).$$\nThe middle equality is compact-support composition for $fu=vf_V$, supplied by [lem-amb-unbounded-compact-support-comparisons]. This proves the claimed open-base comparison by the representing Hom bijections, with their specified counits. All opens are quasi-compact because the schemes are Noetherian; their compactifications are obtained by restricting the open in a compactification of $f$.",
+   "uses": [
+    "lem-amb-etale-adjoint-locality",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Lemma 4.4.1, locality; ordinary adjunction argument spelled out"
+   }
+  },
+  {
+   "text": "Work over an affine open $V=\\operatorname{Spec}A\\subseteq X$. By [def-weil-finite-type-morphism], $f^{-1}V$ has a finite affine cover $U=\\operatorname{Spec}B$ with $B$ finite type over $A$. Choose algebra generators $b_1,\\ldots,b_d$. The surjection $A[t_1,\\ldots,t_d]\\twoheadrightarrow B$, $t_j\\mapsto b_j$, of [def-weil-pbc-finite-type-algebra] realizes $U\\to V$ as $U\\xrightarrow{c}P=\\mathbf A^d_V\\xrightarrow{p}V$, with $c$ closed by [def-weil-closed-immersion]. Here the affine description is [def-sbc-affine-space] and $p$ is smooth of relative dimension $d$ by [sbc-lem-affine-space-smooth]. Its standard projective compactification is available by [lem-weil-pbc-projective-space-standard-charts] and [lemma-nagata-projective-space-base-change-proper]. Step 1 therefore identifies the exceptional functor of $U\\to V$ with $c^!p^!$. This is an explicit polynomial presentation; no factorization theorem requiring a field as base is used.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-pbc-finite-type-algebra",
+    "def-weil-closed-immersion",
+    "def-sbc-affine-space",
+    "sbc-lem-affine-space-smooth",
+    "lem-weil-pbc-projective-space-standard-charts",
+    "lemma-nagata-projective-space-base-change-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Proposition 4.1.2 after Lemma 4.4.1: closed immersion followed by smooth morphism; polynomial presentation written out"
+   }
+  },
+  {
+   "text": "For localization at $x\\in V$, take $V'=\\operatorname{Spec}A_{\\mathfrak p}$; for strict localization take $V'=X_{(\\bar x)}$ with $x\\in V$. These are Noetherian: use [lem-weil-pbc-localization-noetherian] for $A_{\\mathfrak p}$ and [lem-exc-affine-strict-local-ring-comparison], [lem-sc-strict-henselization-noetherian] for the strict-local ring. The map $V'\\to V$ is affine ind-etale. In the local case this follows from [lem-weil-pbc-localization-colimit-principal-localizations]: $A_{\\mathfrak p}$ is the filtered colimit of $A_s$, $s\\notin\\mathfrak p$; each $A_s=A[t]/(st-1)$ is finitely presented and $\\operatorname{Spec}A_s\\hookrightarrow\\operatorname{Spec}A$ is an open immersion, hence etale by [lem-weil-pbc-open-immersion-etale]. In the strict-local case it is exactly [lem-weil-pbc-strict-henselization-affine-chart-ind-etale]. Base changing this map to $P$ preserves ind-etaleness by [lem-weil-pbc-ind-etale-stability]; it stays affine by the tensor-product presentation. The schemes $P$, $P'=P\\times_VV'$, and their closed subschemes $U,U'$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. These check every affine, ind-etale and Noetherian hypothesis needed below.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-exc-affine-strict-local-ring-comparison",
+    "lem-sc-strict-henselization-noetherian",
+    "lem-weil-pbc-localization-colimit-principal-localizations",
+    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-open-immersion-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 2.2.1, localization paragraph; Stacks Tags 00FN and 06LJ for Noetherian permanence"
+   }
+  },
+  {
+   "text": "In the base-changed factorization write $c':U'\\hookrightarrow P'$, $p':P'\\to V'$, and $h:U'\\to U$, $q:P'\\to P$, $v:V'\\to V$. The closed-support comparison [lem-per-ind-etale-closed-support-base-change] and the base-compatible smooth orientation [lem-per-ordinary-smooth-orientation] give the explicit isomorphism\n$$h^*c^!p^!M\\cong c'^!q^*\\bigl(p^*M(d)[2d]\\bigr)\\cong c'^!\\bigl(p'^*v^*M(d)[2d]\\bigr)\\cong c'^!p'^!v^*M.$$\nThe twists here are roots-of-unity twists as fixed by the orientation, so the middle equality uses its specified base-change comparison. This proves localization on every affine source chart. To fix the comparison globally, use the natural map $h^*f^!M\\to f'^!v^*M$ obtained by adjunction from $Rf'_!h^*f^!M\\cong v^*Rf_!f^!M\\to v^*M$, using [lem-amb-unbounded-compact-support-comparisons]. The closed-support comparison is normalized by its counit, and the smooth orientation is base-compatible, so the displayed local isomorphism is this map; the pasting identity [lem-weil-pbc-mate-pasting] identifies the comparison for $pc$ with the composite of the two comparisons. Step 2 restricts it to each source chart, hence it is an isomorphism everywhere. Also $c^!$ is the right derived functor of a left exact functor, and $p^!$ is inverse image followed by a fixed shift and twist. The finite affine cover therefore shows $f^!M$ is bounded below whenever $M$ is bounded below. No constructibility or dualizing hypothesis was used.",
+   "uses": [
+    "lem-per-ind-etale-closed-support-base-change",
+    "lem-per-ordinary-smooth-orientation",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 4.4.1 proof and Proposition 2.2.1 localization paragraph; smooth input follows the lecture-notes diagonal/DNC route"
+   }
+  },
+  {
+   "text": "Let $i_x:\\operatorname{Spec}\\kappa(x)\\hookrightarrow X_x$ be the closed-point inclusion. The equality of morphisms $f_xa=i_x\\pi$, followed by the normalized transitivity of Step 1, gives\n$$a^!f_x^!(M|_{X_x})\\cong(f_xa)^!(M|_{X_x})\\cong(i_x\\pi)^!(M|_{X_x})\\cong\\pi^!i_x^!(M|_{X_x})=\\pi^!R\\Gamma_xM.$$\nThe last equality is the residue-field-valued definition of $R\\Gamma_x$ in [def-per-potential-dualizing]. All these are compactifiable finite-type maps over the Noetherian local base or its residue field; the closed immersion $a$ is the base change of the closed point, and $\\pi$ has the base-changed compactification of $f$. The Hom bijections of [lem-cat-right-adjoint-composition] and the compact-support composition comparison [lem-amb-unbounded-compact-support-comparisons] make this isomorphism natural in $M$.",
+   "uses": [
+    "def-per-potential-dualizing",
+    "lem-cat-right-adjoint-composition",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 2.4.3.1 proof and Lemma 4.4.1 fibrewise reduction"
+   }
+  },
+  {
+   "text": "For a closed immersion $i:Z\\hookrightarrow Y$ and $z\\in Z$, set $T=\\operatorname{Spec}\\mathcal O_{Y,z}$, $W=Z\\times_YT=\\operatorname{Spec}\\mathcal O_{Z,z}$, and let $t:\\operatorname{Spec}\\kappa(z)\\hookrightarrow W$, $s:\\operatorname{Spec}\\kappa(z)\\hookrightarrow T$. Localization for the closed immersion: first restrict to an affine open $V\\subseteq Y$ containing $z$, by Step 2 applied to $i$ (its restriction over $V$ is the closed immersion $i^{-1}V\\hookrightarrow V$, and $\\mathcal O_{V,z}=\\mathcal O_{Y,z}$, $\\mathcal O_{i^{-1}V,z}=\\mathcal O_{Z,z}$). Then $T\\to V$ is affine ind-etale and $T$ is Noetherian by Step 4, so [lem-per-ind-etale-closed-support-base-change] applies to $T\\to V$; no affineness of $T\\to Y$ for nonseparated $Y$ is used. Thus\n$$R\\Gamma_z(i^!L)=t^!((i^!L)|_W)\\cong t^!i_T^!(L|_T)\\cong(i_Tt)^!(L|_T)=s^!(L|_T)=R\\Gamma_zL.$$\nThe local rings and residue field here are the quotient local ring and the same residue field, by the affine description in [def-weil-closed-immersion]. The middle comparison is exactly the normalized right-adjoint transitivity of Step 1, not merely an equality of supports. This proves the closed-immersion costalk assertion over the residue-field etale site, before taking geometric fibres.",
+   "uses": [
+    "def-per-potential-dualizing",
+    "lem-per-ind-etale-closed-support-base-change",
+    "def-weil-closed-immersion",
+    "lem-cat-right-adjoint-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Definition 1.4.1, the vertical costalk identifications, expanded using local closed immersions"
+   }
+  },
+  {
+   "text": "For $y\\in F$, put $x=f(y)$. The local ring of $Y_x$ at $y$ is $\\mathcal O_{Y,y}$: every base element outside the prime of $x$ is already a unit in $\\mathcal O_{Y,y}$. The residue fields also agree. Hence [def-per-potential-dualizing] identifies the costalk at $y$ of an object restricted from $Y$ to $Y_x$ with its original costalk. Step 5 therefore gives $R\\Gamma_y(f^!M)\\cong R\\Gamma_y(f_x^!(M|_{X_x}))$. Apply the closed-immersion costalk comparison of Step 7 to $a:F\\hookrightarrow Y_x$, and then apply $R\\Gamma_y$ to Step 6. Their composite is\n$$R\\Gamma_y(f^!M)\\cong R\\Gamma_y(a^!f_x^!(M|_{X_x}))\\cong R\\Gamma_y(\\pi^!R\\Gamma_xM),$$\nwhich is precisely the pointwise fibre comparison in the statement.",
+   "uses": [
+    "def-per-potential-dualizing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 4.4.1, fibrewise reduction, with the local-ring identification written out"
+   }
+  },
+  {
+   "text": "It remains to check the transition maps for $i:Z\\hookrightarrow Y$. Take an immediate geometric specialization $\\bar z'\\rightsquigarrow\\bar z$ in $Z$. After strict localization at $\\bar z$, its reduced one-dimensional closure $C$ is the same closed reduced subscheme whether formed in $Z_{(\\bar z)}$ or in $Y_{(\\bar z)}$. Write $c:C\\hookrightarrow Z_{(\\bar z)}$ and $i_{(\\bar z)}:Z_{(\\bar z)}\\hookrightarrow Y_{(\\bar z)}$. The identification $Z_{(\\bar z)}=Z\\times_YY_{(\\bar z)}$ is precisely [lem-trf-closed-immersion-strict-localization-cartesian]; [lem-per-codimension-one-costalk-reduction] supplies the strict-local interpretation of the costalks. As in Step 7, first restrict to an affine open $V\\subseteq Y$ containing the image of $\\bar z$ (Step 2); $Y_{(\\bar z)}=V_{(\\bar z)}\\to V$ is affine ind-etale with Noetherian source by Step 4. The closed-support exchange [lem-per-ind-etale-closed-support-base-change] for this map and Step 1 identify the two complexes on $C$ by\n$$c^!\\bigl((i^!L)|_{Z_{(\\bar z)}}\\bigr)\\cong c^!i_{(\\bar z)}^!(L|_{Y_{(\\bar z)}})\\cong(i_{(\\bar z)}c)^!(L|_{Y_{(\\bar z)}}).$$\nIn the definition [def-per-potential-dualizing], both transitions are therefore formed from this same complex on $C$, the same normalization $\\nu:\\widetilde C\\to C$, and the same degree $[\\kappa(\\widetilde z_0):\\kappa(z_0)]$ after strict localization. The naturality of the trait transition in [lem-per-trait-residue-model] carries this isomorphism to equality of the two normalized transitions, with identical twists and shifts. The endpoint identifications are those of Step 7 by associativity of the closed-support adjunctions. Thus this checks the transition itself, rather than just its source and target.",
+   "uses": [
+    "lem-per-codimension-one-costalk-reduction",
+    "lem-per-ind-etale-closed-support-base-change",
+    "lem-cat-right-adjoint-composition",
+    "def-per-potential-dualizing",
+    "lem-per-trait-residue-model",
+    "lem-trf-closed-immersion-strict-localization-cartesian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Definition 1.4.1, using Definitions 1.2.3.1 and 1.3.1 for the normalized trait transition"
+   }
+  },
+  {
+   "text": "Finally, all transitivity comparisons were defined by the Hom bijections with pasted counits in Step 1. Their associativity follows from the associative compact-support comparisons [lem-amb-unbounded-compact-support-comparisons] and the normalized composite adjunction [lem-cat-right-adjoint-composition]. The comparison maps of Step 5 are the counit mates of those compact-support exchanges; [lem-weil-pbc-mate-pasting] makes their horizontal and vertical pastings equal to the mate for the pasted square. The isomorphisms in Steps 6--8 are composites of exactly these transitivity and localization maps. Thus replacing $f$ by a composite or taking two successive closed supported restrictions yields the same comparisons. In Step 9 the common-complex description also respects these maps by naturality of [lem-per-trait-residue-model]. This proves the asserted composition and supported-restriction compatibilities for arbitrary bounded-below $M,L$.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-cat-right-adjoint-composition",
+    "lem-weil-pbc-mate-pasting",
+    "lem-per-trait-residue-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Remark 2.4.3.2 and Definition 1.4.1; canonical adjunction pasting argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-etale-compact-support",
+  "def-per-potential-dualizing",
+  "def-sbc-affine-space",
+  "def-weil-closed-immersion",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-cat-right-adjoint-composition",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-per-codimension-one-costalk-reduction",
+  "lem-per-ind-etale-closed-support-base-change",
+  "lem-per-ordinary-smooth-orientation",
+  "lem-per-trait-residue-model",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-trf-closed-immersion-strict-localization-cartesian",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-localization-colimit-principal-localizations",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "lemma-nagata-projective-space-base-change-proper",
+  "sbc-lem-affine-space-smooth",
+  "thm-amb-etale-exceptional-adjoint"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XVII, Definition 1.4.1, Proposition 2.2.1, Proposition 2.4.3.1, Remark 2.4.3.2, Lemma 4.4.1. Expanded ordinary-etale locality argument from existing closed-support exchange and lecture-notes smooth orientation."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,7 +246,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-potential-extraordinary-pullback",
@@ -84,5 +267,109 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-exceptional-costalk-calculus",
+  "worker": "stage1",
+  "summary": "Retained the imported statement and replaced the previous false arbitrary-base-change mate claim. Proved locality by polynomial affine factorizations, existing affine ind-etale closed-support exchange and the lecture-notes smooth orientation. Expanded residue-field transitivity, closed-immersion costalks, normalized transition compatibility and mate coherence. Reused existing DAG nodes throughout; no new nodes.",
+  "blueprint": "Nearest ancestor lem-per-artin-gabber-affine-curve, Proof Step 3: exceptional localization and costalk transitivity, through lem-per-potential-extraordinary-pullback and lem-per-finite-residue-dualizing.",
+  "tool_uses": [
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Ambient ordinary-etale right adjoints; the local unit does not construct these adjoints."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Generic composition and base-change comparisons on the ambient ordinary derived categories, needed to normalize transitivity."
+   },
+   {
+    "node": "lem-pur-etale-supported-kernel-adjunction",
+    "why": "Identifies the closed-support kernel with the right adjoint of exact closed direct image."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Generic ordinary-etale source locality and etale extension adjunction, used to restrict to affine charts."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic smoothness of polynomial affine space used in the explicit factorization."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "Provides the affine-space open in the standard projective compactification."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Provides properness of the standard projective compactification over arbitrary bases."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Checks the Noetherian hypotheses after taking source and target open charts."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "Checks the Noetherian hypothesis on point localizations."
+   },
+   {
+    "node": "lem-exc-affine-strict-local-ring-comparison",
+    "why": "Identifies the scheme strict-local ring with the algebraic strict henselization."
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Checks Noetherian strict-local schemes for closed-support base change."
+   },
+   {
+    "node": "lem-weil-pbc-localization-colimit-principal-localizations",
+    "why": "Supplies the ind-etale presentation of a point localization."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "why": "Supplies the ind-etale presentation of strict localization over an affine chart."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Preserves ind-etale maps after passage to the smooth ambient affine space."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Checks Noetherian source and smooth ambient schemes after localization."
+   },
+   {
+    "node": "lem-sp-right-adjoint-preserves-injectives",
+    "why": "Derives the support adjunction using injective resolutions."
+   },
+   {
+    "node": "lem-trf-closed-immersion-strict-localization-cartesian",
+    "why": "Identifies the strict localization of a closed subscheme with the closed base change, with nilpotents retained, so both normalized transitions use the same reduced closure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-amb-etale-adjoint-locality",
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-weil-pbc-localization-colimit-principal-localizations",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-trf-closed-immersion-strict-localization-cartesian"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-N3-f5be75c5b",
+  "group": "N3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N3-f5be75c5b (reviewer sub-agent of L); spot-checked: I read the whole item: all 10 steps and the statement of every node it cites. I checked it against ILO Exposé XVII Def. 1.3.1, Def. 1.4.1, Prop. 2.2.1 (including its localization remark), Prop. 2.4.3.1, Rem. 2.4.3.2 and Lemma 4.4.1/4.1.2. The statement is correct and follows the source (F_ell coefficients, D^+, excellent Noetherian schemes). It holds in the edge cases checked: identity map, empty fibre, generic point (where i^! = i^{-1}), d=0, closed point. The fibre formula is transitivity along f_x a = i_x pi, not a base-change formula. The worker's discarded mate lemma is false, and the item does not use it. Step 1 is correct: a bounded-below injective complex is K-injective, so closed i^! is the ambient right adjoint on D^+. Step 5 checks every hypothesis of lem-per-ind-etale-closed-support-base-change (affine ind-etale map, Noetherian schemes, K in D^+) and of the smooth orientation, and the global map is the base-change mate. Step 9 is correct: Z_(z) is closed in Y_(z), so both transitions use the same curve C, the same normalization and the same degree. There are no new nodes and no duplicates; the Z/ell^n nodes are a separate family. Route: the only off-unit citation is lem-trf-closed-immersion-strict-localization-cartesian (scheme theory), accepted as a tool use. Batch-5: all three flagged citations are outside the assumed statements and are accepted. Codim-one costalk reduction reaches only the commutative-algebra lemma on henselian integral algebras; ind-etale closed-support base change reaches only the generic derived-adjunction lemma; the strict-localization lemma is scheme theory, not trace-formula content. I fixed two faults. C1/C4: step 4 now cites lem-weil-pbc-open-immersion-etale for why A -> A_s is etale. E1: steps 7 and 9 applied the closed-support base-change lemma to Spec O_{Y,z} -> Y and Y_(z) -> Y, which are not affine when Y is nonseparated; they now restrict first to an affine open V (Step 2) and apply the lemma to the affine maps into V. The corrected item file is in fixes/dag/nodes/sec-deligne-laumon-a1/.; 1 file(s) fixed by the reviewer"
  }
 }
