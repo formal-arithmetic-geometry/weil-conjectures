@@ -16,9 +16,100 @@
   "def-weil-residue-field",
   "def-pc-geometrically-irreducible"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-pur-generic-geometrically-reduced-preparation] to $f$. Obtain a nonempty open $U\\subseteq Y$, an integral affine scheme $T$, a finite universal homeomorphism $q:T\\to U$, and $R=(X\\times_YT)_{\\mathrm{red}}$ whose generic fibre is geometrically reduced. Put $P=X\\times_YT$ and let $h:P\\to T$ be the projection. The base change $h$ is locally of finite type by [lem-weil-pbc-lft-base-change] and quasi-compact by [lem-pc-quasi-compact-base-change], hence finite type by [def-weil-finite-type-morphism]. An integral scheme is irreducible by [def-pc-integral-scheme]. Let $\\xi$ be its generic point. The homeomorphism $q$ maps $\\xi$ to $\\eta$: $q(\\xi)$ is generic in $U$, and $U$ is a nonempty open of irreducible $Y$, hence dense, so the closure of $q(\\xi)$ in $Y$ is $Y$; thus $q(\\xi)$ and $\\eta$ are generic points of the irreducible closed subset $Y$, which are equal by [lem-sc-scheme-sober]. Here the homeomorphism assertion is the identity base change in [def-weil-universal-homeomorphism].",
+   "uses": [
+    "lem-pur-generic-geometrically-reduced-preparation",
+    "lem-weil-pbc-lft-base-change",
+    "lem-pc-quasi-compact-base-change",
+    "def-weil-finite-type-morphism",
+    "def-pc-integral-scheme",
+    "def-weil-universal-homeomorphism",
+    "def-sc-generic-point",
+    "lem-sc-scheme-sober"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0577, application of Tag 0550 and its diagram"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-geometric-reduced-fibre-locus-base-change] to $f$ and the composite $T\\xrightarrow{q}U\\hookrightarrow Y$. It says that the geometric fibre of $h$ at $\\xi$ is reduced if and only if the geometric fibre of $f$ at $\\eta$ is reduced. By [lem-trf-geometric-reducedness-algebraic-closure-test], these conditions are respectively geometric reducedness of $P_\\xi$ and of $X_\\eta$. The latter fails by hypothesis. Therefore $P_\\xi$ is not geometrically reduced. This uses the algebraic-closure criterion explicitly because the fibre-locus node is stated in terms of reduced geometric fibres.",
+   "uses": [
+    "lem-trf-geometric-reduced-fibre-locus-base-change",
+    "lem-trf-geometric-reducedness-algebraic-closure-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0577, generic-fibre comparison using Tag 0576 (and Varieties 035X)"
+   }
+  },
+  {
+   "text": "By [lem-pur-reduction-generic-fibre] applied to $h:P\\to T$, the scheme $R_\\xi=(P_{\\mathrm{red}})_\\xi$ is canonically $(P_\\xi)_{\\mathrm{red}}$. If $P_\\xi$ were reduced, this reduction map would be an isomorphism: on each affine its map is the quotient by the zero nilradical [def-weil-pbc-scheme-reduction, def-pc-reduced-scheme]. But $R_\\xi$ is geometrically reduced by step 1, whereas $P_\\xi$ is not by step 2. This contradiction shows that $P_\\xi$ is not reduced.",
+   "uses": [
+    "lem-pur-reduction-generic-fibre",
+    "def-weil-pbc-scheme-reduction",
+    "def-pc-reduced-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0577, reduction morphism and nonreduced generic fibre"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-nonreduced-fibre-open] to $h:P\\to T$. Its hypotheses hold: $h$ is finite type and $T$ irreducible with generic point $\\xi$ by step 1, and $P_\\xi$ is not reduced by step 3. Obtain a nonempty open $W\\subseteq T$ such that $P_t$ is not reduced for every $t\\in W$.",
+   "uses": [
+    "lem-trf-nonreduced-fibre-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0577, application of Tag 0575"
+   }
+  },
+  {
+   "text": "Set $V=q(W)\\subseteq U$. Because $q$ is a homeomorphism [def-weil-universal-homeomorphism], $V$ is nonempty and open in $U$, hence open in $Y$. For $y\\in V$ choose $t\\in W$ with $q(t)=y$. The fibre-product universal property and [def-pc-scheme-fibre] give $P_t\\cong X_y\\times_{\\operatorname{Spec}\\kappa(y)}\\operatorname{Spec}\\kappa(t)$: both objects represent pairs of a map to $X$ and a map to $\\operatorname{Spec}\\kappa(t)$ commuting over $Y$ [def-pc-fibre-product]. If $X_y$ were geometrically reduced, this base change would be reduced by [def-pc-geometrically-irreducible], contrary to step 4. Thus $X_y$ is not geometrically reduced for every $y\\in V$, as required.",
+   "uses": [
+    "def-weil-universal-homeomorphism",
+    "def-pc-scheme-fibre",
+    "def-pc-fibre-product",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0577, last sentence: transport the nonempty open back to Y"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-generic-geometrically-reduced-preparation",
+  "lem-weil-pbc-lft-base-change",
+  "lem-pc-quasi-compact-base-change",
+  "def-weil-finite-type-morphism",
+  "def-pc-integral-scheme",
+  "def-weil-universal-homeomorphism",
+  "def-sc-generic-point",
+  "lem-sc-scheme-sober",
+  "lem-trf-geometric-reduced-fibre-locus-base-change",
+  "lem-trf-geometric-reducedness-algebraic-closure-test",
+  "lem-pur-reduction-generic-fibre",
+  "def-weil-pbc-scheme-reduction",
+  "def-pc-reduced-scheme",
+  "lem-trf-nonreduced-fibre-open",
+  "def-pc-scheme-fibre",
+  "def-pc-fibre-product",
+  "def-pc-geometrically-irreducible"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0577, lemma-not-geometrically-reduced-in-neighbourhood, proof, with Tags 0550, 054Z, 0575 and 0576"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -40,10 +131,38 @@
    "results": "0 hits in Mathlib AlgebraicGeometry source.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "GeometricallyReduced|geometricallyReduced",
+   "results": "14 hits; returned Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Integral.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean, Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean; digest bd4ac992275865b0. Read Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean:44-77 and Properties.lean reducedness definitions/open-cover criteria: no spreading result.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite type scheme morphism over an irreducible base a non geometrically reduced generic fibre implies non geometrically reduced fibres on a nonempty open subset",
+   "results": "8 hits; returned Algebra.IsGeometricallyReduced, AlgebraicGeometry.IsReduced, Algebra.isReduced_of_isGeometricallyReduced, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, AlgebraicGeometry.isReduced_of_isIntegral, Algebra.isGeometricallyReduced_iff, AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme, AlgebraicGeometry.isReduced_of_isOpenImmersion; digest 281f5117ce22eec6. Read Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean:44-77 and Properties.lean reducedness definitions/open-cover criteria: no spreading result.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Non geometrically reduced generic fibre spreads to an open subset of the base",
+   "results": "8 hits; returned AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme, Algebra.isReduced_of_isGeometricallyReduced, AlgebraicGeometry.IsReduced.of_openCover, Algebra.IsGeometricallyReduced.casesOn, Algebra.IsGeometricallyReduced.mk, AlgebraicGeometry.isReduced_of_isOpenImmersion, AlgebraicGeometry.IsReduced.casesOn, Algebra.IsGeometricallyReduced.recOn; digest a6bce763a8ff6141. Read Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean:44-77 and Properties.lean reducedness definitions/open-cover criteria: no spreading result.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.GeometricallyReduced",
+   "results": "12 hits; returned AlgebraicGeometry.instIsStableUnderBaseChangeSchemeGeometricallyReduced, AlgebraicGeometry.GeometricallyReduced, AlgebraicGeometry.GeometricallyReduced.eq_geometrically, AlgebraicGeometry.GeometricallyReduced.geometrically_isReduced, AlgebraicGeometry.GeometricallyReduced.mk, AlgebraicGeometry.geometricallyReduced_iff, AlgebraicGeometry.GeometricallyReduced.isReduced_of_flat_of_isLocallyNoetherian, AlgebraicGeometry.instIsReducedFiberOfGeometricallyReduced; digest c99c0961e49ad277. Read Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean:44-77 and Properties.lean reducedness definitions/open-cover criteria: no spreading result.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-generic-constancy-geometric-reducedness",
@@ -76,5 +195,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-generic-fibre-not-geometrically-reduced-open",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 0577 into finite universal-homeomorphism preparation, geometric generic-fibre comparison, the reduction contradiction, ordinary nonreduced spreading, and transport of the open. Reused existing 0550/054Z/0576/035X nodes; added only the statement-only ordinary 0575 input. Statement unchanged.",
+  "blueprint": "In the constructibility input, apply the generic-fibre alternative of Stacks 0579 on an irreducible closed subset; this node is the 0578 or 0577 alternative used there.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-generic-geometrically-reduced-preparation",
+    "why": "Generic geometric-reduction preparation (0550) is the black-box input explicitly used by 0577; this unit has no other statement constructing that base change."
+   },
+   {
+    "node": "lem-pur-reduction-generic-fibre",
+    "why": "Generic-fibre reduction identity (054Z), used to compare the prepared reduced family with the unreduced base change; a general scheme lemma absent from this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-generic-geometrically-reduced-preparation",
+  "lem-pur-reduction-generic-fibre"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-9da5d51e3",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-9da5d51e3 (reviewer sub-agent of L); spot-checked: Read Stacks more-morphisms 0577 (statement and full proof) and its inputs 0550, 054Z, 0575 and 0576; tags checked against tags/tags; no SGA source cited. Item statement = 0577, nothing added or dropped, not weakened. Steps: 0550-preparation node (flatness of the unreduced P not used); 01T4 + 01K5 Mathlib leaves give h finite type; 0576 node (arbitrary morphisms, applied to T->U->Y) plus the 035X algebraic-closure test turn reduced geometric fibres into geometric reducedness, so P_xi is not geometrically reduced; 054Z node at the generic point xi gives R_xi=(P_xi)_red, so P_xi is not reduced; the new 0575 node gives W; V=q(W) is open because q is a homeomorphism; P_t = X_y x_{kappa(y)} kappa(t) by pasting fibre products, so the k'=kappa(t) case of the definition gives the contradiction (elementary is justified). New node lem-trf-nonreduced-fibre-open = Stacks 0575 exactly. Its proof checked: pass to T_red, spread out a nilpotent section, generic flatness on B/Ann(h) and B/hB; valid for non-Noetherian bases. Tested on k[eps]/eps^2, k[t,eps]/eps^2, k[t,x]/(x^2,tx) (reduced generic fibre: hypothesis not met), empty fibres and a nonreduced base. It is not the item restated: a generic fibre can be reduced but not geometrically reduced, e.g. k(a^{1/p}) over imperfect k. B1-B9 hold. No duplicate of 0575 in the DAG (rg for 0575, the label and nonreduced). The transitive closure (214 nodes) does not contain the item, so no cycle. Accepted tool_uses: lem-pur-generic-geometrically-reduced-preparation (0550) and lem-pur-reduction-generic-fibre (054Z), generic scheme lemmas used as black boxes as in 0577's proof. FIX (C1): step 1 concluded q(xi)=eta without citing that generic points of a scheme are unique (def-sc-generic-point defines only 'a' generic point). Added the existing Mathlib leaf lem-sc-scheme-sober to the step 1 text, uses and proof_deps (fixes/dag/nodes/sec-trace-formula/lem-trf-generic-fibre-not-geometrically-reduced-open.json). No other change.; 1 file(s) fixed by the reviewer"
  }
 }
