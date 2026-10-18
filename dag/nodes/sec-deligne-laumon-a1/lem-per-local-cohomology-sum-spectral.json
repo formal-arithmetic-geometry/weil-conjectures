@@ -1,9 +1,91 @@
 {
  "kind": "statement",
- "status": "unsplit",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "status": "split",
+ "proof": [
+  {
+   "text": "Work in $\\mathcal M=\\operatorname{Mod}(A)$, which is Grothendieck abelian by [lem-weil-pbc-ring-modules-grothendieck-abelian]. For every ideal $K$, the functor $\\Gamma_K$ of [def-sbc-ideal-power-torsion-functor] is additive and left exact in the sense of [def-sp-left-exact-additive]: for a map $u:N\\to P$, the kernel of its restriction to $\\Gamma_K(N)$ consists precisely of the elements of $\\ker u$ killed by a power of $K$, hence is $\\Gamma_K(\\ker u)$. For a finite product, a common exponent is the maximum of the finitely many exponents, so $\\Gamma_K$ preserves finite products. Its action on maps is restriction of the original linear map.",
+   "uses": [
+    "lem-weil-pbc-ring-modules-grothendieck-abelian",
+    "def-sbc-ideal-power-torsion-functor",
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BJC (lemma-local-cohomology-ss), specialized to a module; Noetherian injective-resolution argument from Tag 0955 (lemma-local-cohomology-noetherian), using Tag 08XW (lemma-injective-module-divide)(2)."
+   }
+  },
+  {
+   "text": "Identify $\\Gamma_I(\\Gamma_J(N))$ with $\\Gamma_{I+J}(N)$ by the identity on underlying elements. The former consists of $x\\in N$ killed by both $I^a$ and $J^b$ for some $a,b\\geq1$. Expanding $(I+J)^{a+b}$ as the sum of $I^uJ^v$ for $u+v=a+b$, each summand kills $x$ because either $u\\geq a$ or $v\\geq b$. Conversely, $(I+J)^c x=0$ implies $I^c x=J^c x=0$ by inclusion of ideals, and thus gives an element of $\\Gamma_I(\\Gamma_J(N))$. These identifications commute with every module map because all maps are the restrictions specified by [def-sbc-ideal-power-torsion-functor]. This proves a natural isomorphism $\\Gamma_I\\circ\\Gamma_J\\cong\\Gamma_{I+J}$, without a separate composition lemma.",
+   "uses": [
+    "def-sbc-ideal-power-torsion-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BJC (lemma-local-cohomology-ss), specialized to a module; Noetherian injective-resolution argument from Tag 0955 (lemma-local-cohomology-noetherian), using Tag 08XW (lemma-injective-module-divide)(2)."
+   }
+  },
+  {
+   "text": "For every injective $A$-module $E$, apply [lem-per-ideal-torsion-preserves-injectives] with $K=J$. The Noetherian hypothesis gives that $\\Gamma_J(E)$ is itself an injective $A$-module. Resolve this module by itself in degree zero and zero in all positive degrees; this is an injective resolution in the sense of [def-sp-injective-resolutions]. Applying $\\Gamma_I$ therefore gives zero cohomology in every positive degree, by the right-derived-functor computation in [def-sbc-ideal-power-torsion-functor]. Thus $\\Gamma_J(E)$ is $\\Gamma_I$-acyclic by [def-sp-acyclic]. Together with Step 1 this verifies every condition of the composable pair [def-sp-composite-acyclicity], with $F=\\Gamma_J$ and $G=\\Gamma_I$ and with all three categories equal to $\\mathcal M$.",
+   "uses": [
+    "lem-per-ideal-torsion-preserves-injectives",
+    "def-sp-injective-resolutions",
+    "def-sbc-ideal-power-torsion-functor",
+    "def-sp-acyclic",
+    "def-sp-composite-acyclicity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BJC (lemma-local-cohomology-ss), specialized to a module; Noetherian injective-resolution argument from Tag 0955 (lemma-local-cohomology-noetherian), using Tag 08XW (lemma-injective-module-divide)(2)."
+   }
+  },
+  {
+   "text": "Apply [thm-sp-grothendieck] to this pair and the module $M$. Its functorial first-quadrant spectral sequence has $E_2^{p,q}=R^p\\Gamma_I(R^q\\Gamma_J(M))=H_I^p(H_J^q(M))$ and converges to $R^{p+q}(\\Gamma_I\\circ\\Gamma_J)(M)$. To identify the latter with $H_{I+J}^{p+q}(M)$, choose the same injective resolution $M\\to E^\\bullet$ for both functors. The elementwise natural isomorphism of Step 2 gives an isomorphism of complexes $\\Gamma_I(\\Gamma_J(E^\\bullet))\\cong\\Gamma_{I+J}(E^\\bullet)$, commuting with their differentials because it commutes with every linear map. Taking cohomology identifies their derived functors using [def-sbc-ideal-power-torsion-functor]. The identification is natural: on a map of resolutions each component is the identity on the same torsion elements, and independence of resolutions is [lem-sp-derived-well-defined].",
+   "uses": [
+    "thm-sp-grothendieck",
+    "def-sbc-ideal-power-torsion-functor",
+    "lem-sp-derived-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BJC (lemma-local-cohomology-ss), specialized to a module; Noetherian injective-resolution argument from Tag 0955 (lemma-local-cohomology-noetherian), using Tag 08XW (lemma-injective-module-divide)(2)."
+   }
+  },
+  {
+   "text": "Unpack the convergence just supplied by [thm-sp-grothendieck], using [def-sp-convergence] and [def-sp-filtration]. For each $n\\geq0$ the abutment has an exhaustive separated decreasing filtration $F^pH^n$ with $F^pH^n/F^{p+1}H^n\\cong E_\\infty^{p,n-p}$. The first-quadrant condition forces these quotients to be zero for $p<0$ and $p>n$. Hence the filtration is constant for $p\\leq0$ and for $p\\geq n+1$; exhaustivity makes the first constant value $H^n$ and separatedness makes the second zero. Thus $H^n=F^0H^n\\supseteq\\cdots\\supseteq F^{n+1}H^n=0$ is the required finite filtration. Transport it along the natural abutment identification of Step 4. The spectral sequence and its filtration retain the functoriality in $M$ of the cited Grothendieck construction.",
+   "uses": [
+    "thm-sp-grothendieck",
+    "def-sp-convergence",
+    "def-sp-filtration"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0BJC (lemma-local-cohomology-ss), specialized to a module; Noetherian injective-resolution argument from Tag 0955 (lemma-local-cohomology-noetherian), using Tag 08XW (lemma-injective-module-divide)(2)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-modules-grothendieck-abelian",
+  "def-sbc-ideal-power-torsion-functor",
+  "def-sp-left-exact-additive",
+  "lem-per-ideal-torsion-preserves-injectives",
+  "def-sp-injective-resolutions",
+  "def-sp-acyclic",
+  "def-sp-composite-acyclicity",
+  "thm-sp-grothendieck",
+  "lem-sp-derived-well-defined",
+  "def-sp-convergence",
+  "def-sp-filtration"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0BJC (lemma-local-cohomology-ss) and the Noetherian resolution argument of Tag 0955 (lemma-local-cohomology-noetherian); Grothendieck construction: derived.tex Tag 015N (lemma-grothendieck-spectral-sequence)."
+ },
  "mathlib_match": null,
  "created": {
   "by": "worker",
@@ -15,14 +97,16 @@
  "unit": "sk-p-dl-a1-perverse",
  "id": "lem-per-local-cohomology-sum-spectral",
  "title": "Derived-support spectral sequence for a sum of ideals",
- "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], let $I,J$ be finitely generated ideals, and let $M$ be any $A$-module. Write $H_K^n(N)=R^n\\Gamma_K(N)$ for the right derived functors of the ideal-power torsion functor [def-sbc-ideal-power-torsion-functor], for $K=I,J,I+J$. There is a natural convergent first-quadrant spectral sequence $E_2^{p,q}=H_I^p(H_J^q(M))\\Longrightarrow H_{I+J}^{p+q}(M)$, where $p,q\\geq0$. Convergence means that for each $n\\geq0$, $H_{I+J}^n(M)$ has a finite filtration whose associated graded modules are $E_\\infty^{p,n-p}$ for $0\\leq p\\leq n$.",
+ "statement": "Let $A$ be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], let $I,J$ be finitely generated ideals, and let $M$ be any $A$-module. Write $H_K^n(N)=R^n\\Gamma_K(N)$ for the right derived functors of the ideal-power torsion functor [def-sbc-ideal-power-torsion-functor], for $K=I,J,I+J$. There is a natural convergent first-quadrant spectral sequence [def-sp-spectral-sequence] $E_2^{p,q}=H_I^p(H_J^q(M))\\Longrightarrow H_{I+J}^{p+q}(M)$, where $p,q\\geq0$. Convergence means that for each $n\\geq0$, $H_{I+J}^n(M)$ has a finite filtration [def-sp-filtration] whose associated graded modules are $E_\\infty^{p,n-p}$ for $0\\leq p\\leq n$.",
  "source": {
   "document": "literature/stacks-project/dualizing.tex",
   "place": "Tag 0BJC (lemma-local-cohomology-ss), spectral sequence for a module in degree zero, with Tag 0955 (lemma-local-cohomology-noetherian)(3) identifying derived closed support with derived ideal-power torsion."
  },
  "stmt_deps": [
   "def-weil-pbc-noetherian-ring",
-  "def-sbc-ideal-power-torsion-functor"
+  "def-sbc-ideal-power-torsion-functor",
+  "def-sp-spectral-sequence",
+  "def-sp-filtration"
  ],
  "mathlib_searches": [
   {
@@ -59,6 +143,41 @@
    "results": "{\"t\": \"2026-10-18T22:29:12Z\", \"tool\": \"grep\", \"query\": \"localCohomology|[Cc]ech|[Kk]oszul|[Ss]pectral\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/SpectralObject.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/SpectralObject.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/SpectralObject.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/SpectralObject.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/SpectralObject.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\"], \"digest\": \"867cadeed43fa45c\"}",
    "date": "2026-10-18",
    "verdict": "No match: searched Algebra/Homology. LocalCohomology.lean lines 42–46 list the derived-torsion and Cech comparisons as future work; other hits are generic spectral-object infrastructure."
+  },
+  {
+   "tool": "grep",
+   "query": "localCohomology|grothendieckSpectralSequence",
+   "results": "{\"t\": \"2026-10-18T23:02:38Z\", \"tool\": \"grep\", \"query\": \"localCohomology|grothendieckSpectralSequence\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\"], \"digest\": \"1b64f7a08010717e\"}",
+   "date": "2026-10-18",
+   "verdict": "No match: Ext-colimit localCohomology and radical-comparison infrastructure do not state an ideal-sum spectral sequence; LocalCohomology.lean lines 42-46 list derived-torsion comparison as future work."
+  },
+  {
+   "tool": "loogle",
+   "query": "localCohomology",
+   "results": "{\"t\": \"2026-10-18T23:02:39Z\", \"tool\": \"loogle\", \"query\": \"localCohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"localCohomology\", \"localCohomology.isoSelfLERadical\", \"localCohomology.isoOfSameRadical\"], \"digest\": \"2281aba51a833720\"}",
+   "date": "2026-10-18",
+   "verdict": "No match: Ext-colimit localCohomology and radical-comparison infrastructure do not state an ideal-sum spectral sequence; LocalCohomology.lean lines 42-46 list derived-torsion comparison as future work."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "local cohomology spectral sequence for sum of two ideals",
+   "results": "{\"t\": \"2026-10-18T23:02:39Z\", \"tool\": \"leanfinder\", \"query\": \"local cohomology spectral sequence for sum of two ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology.diagram\", \"localCohomology.ofDiagram\", \"localCohomology.hasColimitDiagram\", \"localCohomology\", \"localCohomology.ofSelfLERadical\", \"localCohomology.isoSelfLERadical\", \"localCohomology.ideal_powers_initial\", \"localCohomology.idealPowersDiagram\"], \"digest\": \"e843d8c00ae4265a\"}",
+   "date": "2026-10-18",
+   "verdict": "No match: Ext-colimit localCohomology and radical-comparison infrastructure do not state an ideal-sum spectral sequence; LocalCohomology.lean lines 42-46 list derived-torsion comparison as future work."
+  },
+  {
+   "tool": "leansearch",
+   "query": "There is a first quadrant spectral sequence from iterated local cohomology of ideals to local cohomology for their sum",
+   "results": "{\"t\": \"2026-10-18T23:04:14Z\", \"tool\": \"leansearch\", \"query\": \"There is a first quadrant spectral sequence from iterated local cohomology of ideals to local cohomology for their sum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology\", \"localCohomology.ofSelfLERadical\", \"localCohomology.diagram\", \"localCohomology.ofDiagram\", \"localCohomology.hasColimitDiagram\", \"localCohomology.ideal_powers_initial\", \"localCohomology.isoOfFinal\", \"localCohomology.isoSelfLERadical\"], \"digest\": \"ce0509ab94e5385a\"}",
+   "date": "2026-10-18",
+   "verdict": "No match: Ext-colimit localCohomology and radical-comparison infrastructure do not state an ideal-sum spectral sequence; LocalCohomology.lean lines 42-46 list derived-torsion comparison as future work."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composite right derived ideal power torsion has a convergent first quadrant Grothendieck spectral sequence for the sum ideal",
+   "results": "{\"t\": \"2026-10-18T23:05:11Z\", \"tool\": \"leanfinder\", \"query\": \"Composite right derived ideal power torsion has a convergent first quadrant Grothendieck spectral sequence for the sum ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology.diagram\", \"localCohomology.ideal_powers_initial\", \"localCohomology.ofSelfLERadical\", \"localCohomology.ofDiagram\", \"localCohomology\", \"localCohomology.hasColimitDiagram\", \"IdealFilter.isPFilter_gabrielComposition\", \"localCohomology.idealPowersDiagram\"], \"digest\": \"b0c3fdc11b735809\"}",
+   "date": "2026-10-18",
+   "verdict": "No match: Ext-colimit localCohomology and radical-comparison infrastructure do not state an ideal-sum spectral sequence; LocalCohomology.lean lines 42-46 list derived-torsion comparison as future work."
   }
  ],
  "blueprint": {
@@ -79,5 +198,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-local-cohomology-sum-spectral",
+  "worker": "stage1",
+  "summary": "Verified Stacks 0BJC and 0955 and split the module case into left exactness, the elementwise identity of composite torsion with torsion for the sum, injective preservation, Grothendieck construction, and finite first-quadrant convergence. One new statement-only input is Stacks 08XW(2); existing generic spectral sequence and module-category nodes are reused. Added only notion citations to the statement; no mathematical hypotheses or conclusions changed.",
+  "blueprint": "Realizes the derived-support sum-ideal input in the created-item ancestry of lem-per-artin-gabber-affine-curve, proof Step 1, dimension-normalized middle t-structure: generator bound after adjoining slicing equations. Below this generic commutative-algebra input, the proof remains the Stacks Grothendieck spectral-sequence route.",
+  "tool_uses": [
+   {
+    "node": "thm-sp-grothendieck",
+    "why": "Generic spectral-sequence theorem applied to the two ideal-torsion endofunctors; no theorem in the curve-perverse unit states this categorical construction."
+   },
+   {
+    "node": "lem-sp-derived-well-defined",
+    "why": "Generic independence of the chosen injective resolution in Step 4; the unit has no replacement for the general derived-functor comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-sp-grothendieck",
+  "lem-sp-derived-well-defined"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-c3d75b631",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-c3d75b631 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-per-ideal-torsion-preserves-injectives, every cited statement and the Stacks sources. Sources: dualizing.tex 0BJC (lemma-local-cohomology-ss), 0955(3) (lemma-local-cohomology-noetherian) and 08XW(2) (lemma-injective-module-divide); tags checked in tags/tags. Item statement: same as live/base apart from two added notion citations (def-sp-spectral-sequence, def-sp-filtration). It is 0BJC for ideal-power torsion via 0955, with I and J swapped, which is harmless. Step 1: Mod(A) is Grothendieck (Mathlib leaf), and Gamma_K preserves kernels (ker = Gamma_K(ker u)) and finite products (max exponent). Step 2: (I+J)^{a+b} is the sum of I^uJ^v, and I^c, J^c lie in (I+J)^c, so Gamma_I Gamma_J = Gamma_{I+J} as sets, naturally. Step 3: the new node gives Gamma_J(E) injective, so it is Gamma_I-acyclic by the degree-0 resolution; this meets every clause of def-sp-composite-acyclicity with F=Gamma_J, G=Gamma_I. Step 4: thm-sp-grothendieck applies, and the abutment is the same subcomplex Gamma_{I+J}(E^.). Step 5: abutment under def-sp-convergence (exhaustive and separated) plus the first quadrant gives F^0=H^n and F^{n+1}=0. thm-sp-double-complex-spectral-sequences, named in the Grothendieck construction, states this directly (advisory only). New node: matches 08XW(2) hypothesis by hypothesis (Noetherian ring, any ideal, any injective module, no finite generation); statement only, self-contained, correct notion citations, three kinds of search recorded. Small cases: K=0 or nilpotent gives E, K=A gives 0, zero ring is trivial. No duplicate: no DAG node carries 08XW, 0BJC or 0EF6, the torsion+injective statement scan found only site/functional nodes, and the blueprint has no match. It is not a restatement of an item clause. Item edge cases (I=0, I=A, M=0, degree 0) are consistent. Off-unit tools thm-sp-grothendieck and lem-sp-derived-well-defined are declared; I accept them. No SGA source, no cycle. No fixes."
  }
 }
