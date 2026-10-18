@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Canonical
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Hyperplane
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TransitionUnits
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.TwistBundle
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineChern
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.VectorBundle
@@ -633,6 +634,31 @@ theorem isIso_projectiveFormulaMap_of_projectiveBundle [Fintype n] {P B : Scheme
       restrictClass ((E.chart i).inv ≫ (p ⁻¹ᵁ E.U i).ι) h = hyperplaneChernClass γ) :
     IsIso (projectiveFormulaMap p h (Fintype.card n)) := by
   sorry
+
+section TwistBundle
+
+/-! ### The hyperplane class and the Thom class of `𝒪(1)` -/
+
+variable (n S) in
+lemma isPullback_twistBundleZero :
+    IsPullback (𝟙 ℙ(n; S)) (twistBundleZero n S) (hyperplane n S) (twistBundleOpen n S).ι :=
+  (IsOpenImmersion.isPullback_lift_id _ _ _).flip
+
+variable (Λ n) in
+include aS in
+/-- The hyperplane class restricted to the total space `W ⊆ ℙ(Option n; S)` of `𝒪(1)`, a class
+with supports in the zero section. -/
+noncomputable def twistBundleHyperplaneClass [Finite n] :
+    constantComplex Λ (twistBundleOpen n S).toScheme ⟶
+      (R((twistBundle n S).zero)_![ModuleCat.{u + 1} Λ]).obj
+        ((R((twistBundle n S).zero)^![ModuleCat.{u + 1} Λ]).obj
+          ((tateObject Λ (twistBundleOpen n S).toScheme ((1 : ℕ) : ℤ))⟦2 * ((1 : ℕ) : ℤ)⟧)) :=
+  restrictSupportedClass (ModuleCat.{u + 1} Λ) (twistBundleOpen n S).ι (hyperplane n S)
+    (twistBundle n S).zero (𝟙 _) (isPullback_twistBundleZero n S)
+    (leftDerivedUpperStarConstantComplexIso Λ _).inv
+    (leftDerivedUpperStarTateShiftIso Λ _ ((1 : ℕ) : ℤ)) (hyperplaneClass Λ n aS)
+
+end TwistBundle
 
 end Etale
 
