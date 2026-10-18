@@ -20,9 +20,133 @@
   "def-sp-injective-resolutions",
   "lem-weil-pbc-injective-resolution-ses"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $A=I_G(T)$, $B=I_G(W)$ and $r:A\\to B$ for restriction. The relative definition computes the derived fibre of $r$. With the cone and shift convention of [def-weil-abstract-derived-category], its signed model is $C^q=A^q\\oplus B^{q-1}$, $D(a,b)=(da,ra-db)$; this is the functor in [lem-amb-signed-fibre-triangulated]. In degree one the cycle equations are $da=0$, $ra=db$, and the boundaries are $D(x)=(dx,rx)$ because the resolution has no negative terms. To fix the localization sign, the ordinary cone is $\\operatorname{Cone}(r)^q=B^q\\oplus A^{q+1}$ with differential $(db+ra,-da)$ and boundary $-p$. The chain isomorphism $C[1]\\to\\operatorname{Cone}(r)$ is $(a,b)\\mapsto(-b,a)$. The cone inclusion $b\\mapsto(b,0)$ therefore becomes $b\\mapsto(0,-b)$ in $C[1]$. This is exactly the localization boundary used in the statement, in every degree.",
+   "uses": [
+    "def-amb-relative-etale-cohomology",
+    "def-weil-abstract-derived-category",
+    "lem-amb-signed-fibre-triangulated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 014E (definition-cone), 014F (lemma-functorial-cone); direct signed-coordinate calculation"
+   }
+  },
+  {
+   "text": "Let $\\epsilon:G\\hookrightarrow I_G^0$ be the augmentation and write $\\iota:G\\hookrightarrow E_P$, $p:E_P\\to\\mathbf Z_T$ and $\\jmath:P\\to E_P$ for the presentation maps. The canonical short exact extension is supplied by [lem-sc-torsor-h1], and [def-sc-torsor-extension-presentation] gives $\\jmath(g+t)=\\iota(g)+\\jmath(t)$ and $p\\jmath(t)=1$. Injectivity in [def-sp-injective-resolutions] extends $\\epsilon$ along $\\iota$ to $h$. Since $dh\\iota=d\\epsilon=0$, exactness of the extension factors $dh$ uniquely as $\\bar a p$. Since $p$ is epi and $d^2h=0$, $d\\bar a=0$. Set $a=\\bar a(1)$ and $b=h\\jmath(s)$. The equation $p\\jmath(s)=1$ gives $db=ra$, so $(a,b)$ is a relative cycle by step 1.",
+   "uses": [
+    "lem-sc-torsor-h1",
+    "def-sc-torsor-extension-presentation",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ, lemma-torsors-h1: canonical pushout extension and boundary of 1"
+   }
+  },
+  {
+   "text": "Here is the relative-class identification, including the specified section. For a cycle $(a,b)$ let $P_a(U)=\\{t\\in I_G^0(U):dt=a|_U\\}$. In the present case the natural map $P\\to P_a$ is $t\\mapsto h\\jmath(t)$ and is $G$-equivariant. On any etale object admitting a section $t_0$ of $P$, every solution $x$ differs from $h\\jmath(t_0)$ by a unique section of $G$, because $\\ker(d:I_G^0\\to I_G^1)=\\epsilon(G)$ as sheaves. Thus this map is an isomorphism locally, and its local inverses agree by uniqueness, giving a sheaf isomorphism. It carries $s$ to $b$. This computes the canonical relative refinement [lem-amb-relative-torsor-cohomology] of the extension correspondence [lem-sc-torsor-h1]: the lift of $1$ has differential $a$, and its prescribed trivialization on $W$ is the nullhomotopy $b$, whose equation is $db=ra$. These are exactly the two components of a class in the derived fibre, rather than merely an absolute class together with an unspecified lift. Equivalently, the inverse construction sends $(a,b)$ to the solution torsor with specified solution $b$, and the displayed isomorphism recovers $(P,s)$. Translation by $x\\in I_G^0(T)$ carries $(P_a,b)$ to $(P_{a+dx},b+rx)$, so this description respects relative boundaries. Consequently $[(a,b)]=\\alpha(P,s)$.",
+   "uses": [
+    "def-sp-injective-resolutions",
+    "def-sc-torsor-extension-presentation",
+    "lem-sc-torsor-h1",
+    "lem-amb-relative-torsor-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ, lemma-torsors-h1: extension-to-class and solution-torsor constructions; relative nullhomotopy refinement written here"
+   }
+  },
+  {
+   "text": "If $h'$ is another extension of $\\epsilon$, the difference $h'-h$ kills $G$ and hence factors uniquely as $\\bar x p:E_P\\to I_G^0$. Put $x=\\bar x(1)\\in I_G^0(T)$. The definitions give $a'-a=dx$ and $b'-b=rx$, so their representatives differ by the boundary $D(x)$ of step 1. This proves independence of $h$ without choosing any global section of $P$.",
+   "uses": [
+    "lem-sc-torsor-h1",
+    "def-amb-relative-etale-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ, lemma-torsors-h1; difference of two injective extensions"
+   }
+  },
+  {
+   "text": "For independence of resolutions, apply [lem-amb-bounded-injective-fibre-descent] with $E=\\mathrm{id}$, $A=\\Gamma(T,-)$, $B=\\Gamma(W,-)$, $F=F'$ the signed-fibre functor of [lem-amb-signed-fibre-triangulated], and $\\tau=\\mathrm{id}$. The abelian sheaf category has enough injectives by [lem-weil-pbc-site-sheaves-enough-injectives]. The descent statement supplies a comparison $u:I_G\\to J_G$, unique for this purpose up to homotopy, and the induced canonical map on relative cohomology is $(a,b)\\mapsto(u^1a,u^0b)$. Its augmentation compatibility is strict: a homotopy from maps out of $G[0]$ into a nonnegative complex has zero component in degree $-1$. Therefore $u^0h$ is an allowed extension into $J_G^0$, and its representative is precisely $(u^1a,u^0b)$. Step 4 removes the choice of extension on $J_G$. The descent theorem removes the comparison choices. Its hypotheses require only bounded below injectives, which both given resolutions are, and its signed homotopy is $(a,b)\\mapsto(Ha,-Hb)$. Hence the claimed class and its representative are independent of the resolution under the canonical identifications.",
+   "uses": [
+    "lem-amb-bounded-injective-fibre-descent",
+    "lem-amb-signed-fibre-triangulated",
+    "lem-weil-pbc-site-sheaves-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TK, lemma-resolution-functor-quasi-inverse; signed-fibre comparison specialized to the identity"
+   }
+  },
+  {
+   "text": "For the trivial torsor $P=G$, choose its identity section $0$ on $T$. The natural family $t\\mapsto\\epsilon(t)$ is equivariant. The universal property of [def-sc-torsor-extension-presentation] gives $h:E_G\\to I_G^0$ restricting to $\\epsilon$ and satisfying $h\\jmath(t)=\\epsilon(t)$. Since $d\\epsilon=0$, the same universal property (with zero coefficient map and zero family) gives $dh=0$. Thus $a=0$ and, for the specified section $g$ on $W$, $b=\\epsilon(g)$. Step 3 gives $\\alpha_g=[(0,g)]$. Step 1 gives $\\partial_G^0(g)=[(0,-g)]$, so $\\alpha_g=-\\partial_G^0(g)$. If $g$ extends to $G(T)$, this representative is also $D(g)$ and its class vanishes, as required by translation of the specified trivial torsor.",
+   "uses": [
+    "def-sc-torsor-extension-presentation",
+    "def-amb-relative-etale-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03AJ, lemma-torsors-h1: trivial torsor extension; signed localization calculation"
+   }
+  },
+  {
+   "text": "For the coefficient sequence take the degreewise split nonnegative injective resolutions of [lem-weil-pbc-injective-resolution-ses]; the enough-injectives hypothesis is [lem-weil-pbc-site-sheaves-enough-injectives]. Applying sections on $T$ and $W$ preserves these split rows, since a sheaf splitting evaluates to a splitting; taking the two finite direct summands gives a split short exact sequence of signed relative complexes. The relative connecting map is the one in [lem-amb-relative-torsor-cohomology]. Choose a lift $r\\in I_2^0(W)$ of the augmented cocycle $g$. The image of $d_2r$ in $I_3^1(W)$ is $d_3g=0$, so there is a unique $c\\in I_1^1(W)$ mapping to $d_2r$; it is a cocycle because the degree-two inclusion is injective. The split-complex connecting formula [lem-weil-pbc-complex-ses-connecting-formula] on $W$ gives $\\delta_W(g)=[c]$. The relative cycle $(0,g)$ lifts to $(0,r)$, whose differential is $D_2(0,r)=(0,-d_2r)$. The same connecting formula on the relative complexes gives $\\delta_{T,W}(\\alpha_g)=[(0,-c)]$. By step 1, $\\partial_{G_1}^1([c])=[(0,-c)]$, proving the asserted positive equality. Identifying $I_1$ with its image writes $c=dr$, as in the statement. A different lift $r+\\iota(t)$ replaces $c$ by $c+dt$; the relative change $(0,-dt)=D_1(0,t)$ is a boundary.",
+   "uses": [
+    "lem-weil-pbc-injective-resolution-ses",
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lem-amb-relative-torsor-cohomology",
+    "lem-weil-pbc-complex-ses-connecting-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 011J (lemma-ses-termwise-split-cochain), 011K (lemma-ses-termwise-split-long-cochain); horseshoe Tag 013T in derived.tex"
+   }
+  },
+  {
+   "text": "Finally all formulas commute with etale restriction: [lem-weil-pbc-cohomology-pullback-functorial], clause 5, permits restricting an injective resolution and computes pullback by restricting its sections. Thus $h$, $a$, $b$, $r$ and $c$ restrict to the corresponding data on the new pair. Coefficient maps act componentwise on signed cones by [lem-amb-signed-fibre-triangulated]; in particular $(0,-b)$ maps to $(0,-u b)$. The canonical relative torsor bijection and the relative coefficient connecting maps are natural by the statement of [lem-amb-relative-torsor-cohomology]. For a morphism of short exact coefficient sequences, [lem-weil-pbc-complex-ses-long-exact-naturality] applies to the absolute and relative complex sequences, so the lift-and-differentiate classes in step 7 commute with the induced cohomology maps. This does not require a chosen splitting to be preserved: the connecting map is independent of that choice and is natural for any morphism of short exact complex sequences. Combined with step 5 these statements establish naturality for arbitrary choices of the resolutions used to write the representatives.",
+   "uses": [
+    "lem-weil-pbc-cohomology-pullback-functorial",
+    "lem-amb-signed-fibre-triangulated",
+    "lem-amb-relative-torsor-cohomology",
+    "lem-weil-pbc-complex-ses-long-exact-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0117, lemma-long-exact-sequence-cochain, functoriality; etale restriction Tag 03F3"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-relative-etale-cohomology",
+  "def-weil-abstract-derived-category",
+  "lem-amb-signed-fibre-triangulated",
+  "lem-sc-torsor-h1",
+  "def-sc-torsor-extension-presentation",
+  "def-sp-injective-resolutions",
+  "lem-amb-relative-torsor-cohomology",
+  "lem-amb-bounded-injective-fibre-descent",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-weil-pbc-injective-resolution-ses",
+  "lem-weil-pbc-complex-ses-connecting-formula",
+  "lem-weil-pbc-cohomology-pullback-functorial",
+  "lem-weil-pbc-complex-ses-long-exact-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03AJ canonical torsor extension, refined to signed relative cocycles; homology.tex Tags 011J/011K for connecting representatives"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +182,52 @@
    "results": "{\"t\": \"2026-10-17T09:38:19Z\", \"tool\": \"grep\", \"query\": \"relative.*cohomology|supported.*cohomology|torsor.*boundary\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "relative.*cohomology|torsor.*boundary|torsor.*cone",
+   "results": "{\"t\": \"2026-10-18T02:14:26Z\", \"tool\": \"grep\", \"query\": \"relative.*cohomology|torsor.*boundary|torsor.*cone\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Relative torsor class of a trivial torsor with specified section is the negative of the localization boundary",
+   "results": "{\"t\": \"2026-10-18T02:14:27Z\", \"tool\": \"leansearch\", \"query\": \"Relative torsor class of a trivial torsor with specified section is the negative of the localization boundary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AddLocalization.Away.negSelf\", \"AddTorsor.noConfusion\", \"LocalizedModule.mk_neg\", \"IsLocalizedModule.mk'_neg\", \"Submodule.localized'_bot\", \"Submodule.localized₀_bot\", \"Algebra.tensorH1CotangentOfIsLocalization\", \"OreLocalization.neg\"], \"digest\": \"4e11c669a0d417a4\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H, CategoryTheory.ShortComplex.ShortExact",
+   "results": "{\"t\": \"2026-10-18T02:14:27Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf.H, CategoryTheory.ShortComplex.ShortExact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H.δ\", \"CategoryTheory.Sheaf.H.longSequence_exact₁'\", \"CategoryTheory.Sheaf.H.longSequence_exact₃'\", \"CategoryTheory.Sheaf.H.longSequence_exact₂'\", \"CategoryTheory.Sheaf.H.longSequence_exact₁\", \"CategoryTheory.Sheaf.H.longSequence_exact₃\", \"CategoryTheory.Sheaf.H.longSequence_exact₂\", \"CategoryTheory.Sheaf.H.longSequence_equiv₀_exact₃\"], \"digest\": \"0e03b9ee8a015564\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A torsor with section over an open subscheme has relative cohomology representative (a,b) from an injective extension and its section; compute signs of localization and coefficient boundaries",
+   "results": "{\"t\": \"2026-10-18T02:14:31Z\", \"tool\": \"leanfinder\", \"query\": \"A torsor with section over an open subscheme has relative cohomology representative (a,b) from an injective extension and its section; compute signs of localization and coefficient boundaries\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PresheafOfGroups.OneCohomologyRelation\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"CategoryTheory.PresheafOfGroups.H1\", \"ModuleCat.Tilde.exists_const\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁\", \"CochainComplex.HomComplex.Cocycle.fromSingleMk_mem_coboundaries_iff\", \"CochainComplex.HomComplex.Cocycle.toSingleMk_mem_coboundaries_iff\"], \"digest\": \"4d288111880788d1\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping fibre of restriction for sheaf cohomology classifies torsors trivialized on an open; compatibility of relative and coefficient connecting homomorphisms",
+   "results": "{\"t\": \"2026-10-18T02:14:46Z\", \"tool\": \"leanfinder\", \"query\": \"Mapping fibre of restriction for sheaf cohomology classifies torsors trivialized on an open; compatibility of relative and coefficient connecting homomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.PresheafOfGroups.H1\", \"CategoryTheory.PresheafOfGroups.OneCohomologyRelation\", \"CategoryTheory.PresheafOfGroups.OneCocycle.class\", \"groupCohomology.cocyclesMap_cocyclesIso₀_hom_f\", \"groupCohomology.mapCocycles₁_comp_i_apply\", \"CategoryTheory.PresheafOfGroups.OneCocycle.IsCohomologous\", \"CategoryTheory.PresheafOfGroups.OneCochain.ev\", \"groupCohomology.mapCocycles₂_comp_i_apply\"], \"digest\": \"05405e279774eac4\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def H1|def H\\\\.|connecting|relative|torsor",
+   "results": "{\"t\": \"2026-10-18T02:16:39Z\", \"tool\": \"grep\", \"query\": \"def H1|def H\\\\\\\\.|connecting|relative|torsor\", \"sub\": \"CategoryTheory/Sites/SheafCohomology\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/SheafCohomology/MayerVietoris.lean\"], \"digest\": \"d88f7555db397960\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-divisor-class",
@@ -73,10 +239,49 @@
  "blueprint": {
   "from": {
    "node": "lem-pur-divisor-class",
-   "place": "Tag 03AJ, lemma-torsors-h1, canonical extension construction; its relative signed refinement used in clause (a) of literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-divisor-class.proof.md; extracted from returned step 6.",
+   "place": "Clause (a) and the final forget-support paragraph of lem-pur-divisor-class.proof.md: identify the globally constructed relative torsor Kummer class with the positive local boundary of the Kummer class.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-pur-divisor-torsor-boundary-signs",
+  "worker": "stage1",
+  "summary": "Computed the extension cocycle and prescribed-section nullhomotopy, proved choice independence, derived the localization minus sign and the positive double-boundary identity by lifting (0,g). Reused existing torsor, signed-fibre, comparison and split-connecting nodes; no new nodes. The statement is unchanged.",
+  "blueprint": "Realizes clause (a) and the final paragraph of the current lem-pur-divisor-class proof: the prescribed-section torsor construction has local class +boundary(Kummer(f)).",
+  "tool_uses": [
+   {
+    "node": "lem-amb-signed-fibre-triangulated",
+    "why": "Uses the explicit functor on signed fibres and its homotopies; this is general homological algebra, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-amb-relative-torsor-cohomology",
+    "why": "Uses the canonical relative torsor bijection and natural relative coefficient boundary, the generic interface whose signs are computed here."
+   },
+   {
+    "node": "lem-amb-bounded-injective-fibre-descent",
+    "why": "Uses resolution independence of the signed-fibre construction, a bounded derived comparison tool, not a purity theorem."
+   },
+   {
+    "node": "lem-weil-pbc-cohomology-pullback-functorial",
+    "why": "Uses clause 5 on etale restriction of injective resolutions and their section maps; the unit has no such general cohomology construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-signed-fibre-triangulated",
+  "lem-amb-relative-torsor-cohomology",
+  "lem-amb-bounded-injective-fibre-descent",
+  "lem-weil-pbc-cohomology-pullback-functorial"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-36d805ba8",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-36d805ba8 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item (statement and 8 steps), every cited statement, the proof of lem-amb-relative-torsor-cohomology, Stacks 03AJ (sites-cohomology lines 291-360), and the main-20261015 lem-pur-divisor-class proof and its use in parent steps 6-7. I recomputed every step. Step 1: the chain iso C[1]->Cone(r), (a,b)->(-b,a), is correct, so the localization boundary is b->(0,-b); this agrees with lem-pur-divisor-relative-cone. Step 2: dh=ā p, dā=0, db=ra. Step 3: t->hj(t) is an equivariant isomorphism (P,s)->(P_a,b). Step 4: the difference is D(x). Step 5: u^0 ε_I=ε_J strictly, so F(u) carries the representative. Step 6: universal property gives dh=0, so the representative is (0,g) and α_g=-∂g. Step 7: D(0,r)=(0,-dr) gives (0,-c) on both sides, and a change of lift gives D(0,t). Step 8: clause 5 of the pullback lemma plus long-exact naturality give the stated naturality. Edge cases W empty, W=T, g extending to T, G=0 and split sequences all check. There are no new nodes and no duplicates (lem-pur-divisor-relative-cone has only the sign; the relative torsor lemma has no representatives). proof_deps equals the union of uses. Four off-unit split statements are cited as tools and all four are declared in tool_uses; I accept them. No SGA is cited. Batch-5 check: lem-trf-additive-homotopy-category-triangulated is a Mathlib leaf saying K(B) is triangulated. lem-trf-filtered-localization-injective-model is reached only through the general resolution-independence lemma lem-amb-bounded-injective-fibre-descent. Neither assumption gives these and the item uses neither for the trace formula or Poincare duality. The item's unchanged stmt_dep lem-amb-relative-torsor-cohomology already cites both nodes, so the closure gains nothing. Interface remark for the maintainer: that node's statement says only 'canonical bijection'. It should name (a,b)->(P_a,b), so that the item's representative is fixed by the statement and not only by the proof. Not changed here. No fixes."
  }
 }
