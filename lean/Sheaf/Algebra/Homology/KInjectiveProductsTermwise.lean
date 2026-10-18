@@ -4,16 +4,17 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.Algebra.Homology.KInjectiveProducts
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Sheaf.CategoryTheory.KInjectiveBridge
-import WeilConjectures.CategoryTheory.KInjectiveBridge
+import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+import WeilConjectures.Algebra.Homology.HomotopyCategory.Products
+import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Products
 
-/-! # Statements of the new targets (batch 2) about `KInjectiveProducts`
+/-! # Termwise products of K-injective complexes
 
-Kept in their own module so that `Sheaf.Algebra.Homology.KInjectiveProducts`, which the first task's targets use, is unchanged.
+The degreewise product hypotheses suffice for both K-injectivity and the derived-category
+product universal property.
 -/
 
 @[expose] public section
@@ -35,30 +36,18 @@ exactly the termwise product complex, with its induced differentials and project
 K-injectivity is Mathlib's `IsKInjective` convention, and the chosen localization universe
 is that of `HasDerivedCategory`.
 
-Proof plan (Tag 0BK6; `def-sp-kinjective-bridge`, `def-weil-category-product`, and
-`lem-weil-pbc-kinjective-hom-derived`):
-1. Write `P` for the termwise product cone. For an acyclic complex `K` and a map
-   `f : K ⟶ P.pt`, each composite with a projection is null-homotopic by K-injectivity
-   of the corresponding `I t`. Choose these homotopies and assemble their components
-   using the product universal property in every degree. The homotopy identities hold
-   after every projection, hence hold in the product. Thus `f` is null-homotopic and
-   `P.pt` is K-injective. This is the bridge's K-injectivity convention; shifting `K`
-   identifies it with the acyclic Hom-complex convention in the source.
-2. The image of `P` in the homotopy category is a product: choose representatives of
-   a family of homotopy classes and assemble their chain maps using the termwise
-   products. Two maps have equal projected classes precisely when their component
-   homotopies assemble to a homotopy, as in step 1. This proves existence and uniqueness
-   of the required homotopy class. It is the degreewise-product argument underlying
-   `HomotopyCategory.isLimitFanQuotient` in the node's proof record; use the products
-   assumed here rather than requiring products of all families in `C`.
-3. Apply `CochainComplex.IsKInjective.Qh_map_bijective`, the comparison recorded by
-   `lem-weil-pbc-kinjective-hom-derived`, to `P.pt` and every `I t`. Essential
-   surjectivity of `DerivedCategory.Qh` lets one represent an arbitrary derived-category
-   cone point in the homotopy category. The Hom bijections lift its legs, transport
-   the product lift from step 2, and give uniqueness. Finally
-   `DerivedCategory.quotientCompQhIso` identifies this cone with
-   `DerivedCategory.Q.mapCone P`. This proves the second conjunct for the actual
-   localized projections, with no K-injective resolution of the cone point required.
+Proof (Tag 0BK6):
+1. `HomotopyCategory.isLimitFanQuotient` gives a product fan in the homotopy category.
+   Its degreewise preservation hypothesis follows from the assumed degreewise limits.
+   The lemma assembles chain maps and homotopies using those products.
+2. K-injective complexes are the right orthogonal of acyclic complexes in the homotopy
+   category. Right orthogonals are closed under limits, so the product is K-injective.
+3. For any derived-category fan, essential surjectivity of `DerivedCategory.Qh` gives a
+   representative of its point in the homotopy category. `IsKInjective.Qh_map_bijective`
+   lifts each leg uniquely, and the homotopy product supplies a lift. The same bijection
+   for the product, together with injectivity for each factor, proves uniqueness.
+   Finally `DerivedCategory.quotientCompQhIso` identifies the resulting fan with the
+   actual image of the termwise product cone under `DerivedCategory.Q`.
 -/
 theorem termwise_product_isKInjective_and_isLimit
     {C : Type u} [Category.{v} C] [Abelian C] [HasDerivedCategory.{w} C]
@@ -67,7 +56,60 @@ theorem termwise_product_isKInjective_and_isLimit
     IsKInjective (HomologicalComplex.coneOfHasLimitEval (Discrete.functor I)).pt ∧
       Nonempty (IsLimit (DerivedCategory.Q.mapCone
         (HomologicalComplex.coneOfHasLimitEval (Discrete.functor I)))) := by
-  sorry
+  classical
+  let P : Fan I := HomologicalComplex.coneOfHasLimitEval (Discrete.functor I)
+  let hP : IsLimit P := HomologicalComplex.isLimitConeOfHasLimitEval _
+  let q := HomotopyCategory.quotient C (ComplexShape.up ℤ)
+  let F := DerivedCategory.Qh (C := C)
+  let hK := HomotopyCategory.isLimitFanQuotient C (ComplexShape.up ℤ) hP
+  have hI : P.pt.IsKInjective := by
+    rw [isKInjective_iff_rightOrthogonal]
+    exact ObjectProperty.prop_of_isLimit _ hK fun j ↦
+      (isKInjective_iff_rightOrthogonal _).1 inferInstance
+  refine ⟨hI, ?_⟩
+  have hD : IsLimit (Fan.mk (F.obj (q.obj P.pt))
+      fun j ↦ F.map (q.map (P.proj j))) := by
+    let L (s : Fan fun j ↦ F.obj (q.obj (I j))) := F.objPreimage s.pt
+    let e (s : Fan fun j ↦ F.obj (q.obj (I j))) : F.obj (L s) ≅ s.pt :=
+      F.objObjPreimageIso s.pt
+    let a (s : Fan fun j ↦ F.obj (q.obj (I j))) (j : T) : L s ⟶ q.obj (I j) :=
+      ((IsKInjective.Qh_map_bijective (L s) (I j)).surjective
+        ((e s).hom ≫ s.proj j)).choose
+    have ha (s : Fan fun j ↦ F.obj (q.obj (I j))) (j : T) :
+        F.map (a s j) = (e s).hom ≫ s.proj j :=
+      ((IsKInjective.Qh_map_bijective (L s) (I j)).surjective
+        ((e s).hom ≫ s.proj j)).choose_spec
+    have hfac (s : Fan fun j ↦ F.obj (q.obj (I j))) (j : T) :
+        Fan.IsLimit.lift hK (a s) ≫ q.map (P.proj j) = a s j :=
+      Fan.IsLimit.fac hK (a s) j
+    refine Fan.IsLimit.mk _
+      (fun s ↦ (e s).inv ≫ F.map (Fan.IsLimit.lift hK (a s))) ?_ ?_
+    · intro s j
+      change ((e s).inv ≫ F.map _) ≫ F.map (q.map (P.proj j)) = s.proj j
+      rw [Category.assoc, ← F.map_comp, hfac, ha]
+      simp
+    · intro s m hm
+      obtain ⟨m', hm'⟩ := (IsKInjective.Qh_map_bijective (L s) P.pt).surjective
+        ((e s).hom ≫ m)
+      have heq : m' = Fan.IsLimit.lift hK (a s) := by
+        apply Fan.IsLimit.hom_ext hK
+        intro j
+        apply (IsKInjective.Qh_map_bijective (L s) (I j)).injective
+        change F.map (m' ≫ q.map (P.proj j)) =
+          F.map (Fan.IsLimit.lift hK (a s) ≫ q.map (P.proj j))
+        rw [F.map_comp, hm', Category.assoc,
+          show m ≫ F.map (q.map (P.proj j)) = s.proj j from hm j, hfac, ha]
+      rw [← heq, hm']
+      simp
+  have hQ : IsLimit (Fan.mk (DerivedCategory.Q.obj P.pt)
+      fun j ↦ DerivedCategory.Q.map (P.proj j)) := by
+    refine Fan.IsLimit.ofIsos hD
+      (fun j ↦ ((DerivedCategory.quotientCompQhIso C).app (I j)).symm)
+      ((DerivedCategory.quotientCompQhIso C).app P.pt).symm fun j ↦ ?_
+    rw [Iso.symm_hom, Iso.symm_hom, Iso.inv_comp_eq,
+      ← Category.assoc, Iso.eq_comp_inv]
+    exact (DerivedCategory.quotientCompQhIso C).hom.naturality (P.proj j)
+  exact ⟨(isLimitMapConeFanMkEquiv DerivedCategory.Q I P.proj).symm hQ⟩
 
 end CochainComplex
 
