@@ -12,9 +12,79 @@
   "def-weil-pbc-noetherian-ring",
   "def-weil-module-base-change"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-weil-pbc-noetherian-ring], choose a finite list $t_1,\\ldots,t_r$ generating $I$, allowing $r=0$ when $I=0$. Set $u_i=f(t_i)$ and $J=IB$. Then $J=(u_1,\\ldots,u_r)$: every $a\\in I$ has the form $\\sum_i a_it_i$, so $f(a)=\\sum_i f(a_i)u_i$, and each $u_i$ belongs to $f(I)$.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0ALZ (lemma-torsion-change-rings), first sentence of the proof."
+   }
+  },
+  {
+   "text": "Apply [lem-per-ideal-torsion-cech-computation] over $A$ to $M$ and over $B$ to $M\\otimes_A B$. Both rings are Noetherian, and the cited result allows arbitrary modules. Write $C=C_A(t_1,\\ldots,t_r;M)$ and $D=C_B(u_1,\\ldots,u_r;M\\otimes_A B)$ for the extended alternating complexes defined there. They are bounded in degrees $0,\\ldots,r$, and the cited natural isomorphisms give $H_I^q(M)\\cong H^q(C)$ and $H_J^q(M\\otimes_A B)\\cong H^q(D)$ for all $q\\geq0$. These are the right-derived ideal-torsion groups of the statement, rather than an identification of different definitions without a comparison theorem.",
+   "uses": [
+    "lem-per-ideal-torsion-cech-computation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0956 (lemma-compute-local-cohomology-noetherian), module assertion; this combines the closed-support computation with the Noetherian comparison of Tag 0955."
+   }
+  },
+  {
+   "text": "For a nonempty increasing index set $S$, put $t_S=\\prod_{i\\in S}t_i$ and $u_S=f(t_S)$. Apply [lem-weil-pbc-localization-tensor-over-base] with both its base and algebra equal to $A$, its module equal to $M$, its second module equal to $B$, and its multiplicative set the powers of $t_S$. Its inverse gives $(M_{t_S})\\otimes_A B\\cong(M\\otimes_A B)_{t_S}$. The latter localization is $(M\\otimes_A B)_{u_S}$ as a $B$-module: by [def-weil-pbc-module-localization], the fraction relation on the same numerator module is identical, since multiplication by $t_S^n$ is multiplication by $u_S^n$. Thus the coefficient isomorphism is $\\theta_S((m/t_S^a)\\otimes b)=(m\\otimes b)/u_S^a$. This formula proves $B$-linearity (a scalar multiplies $b$), although the quoted localization theorem only explicitly asserts linearity over $A$. It is natural in $M$ by its stated naturality or directly by applying a module map to $m$.",
+   "uses": [
+    "lem-weil-pbc-localization-tensor-over-base",
+    "def-weil-pbc-module-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00DK (lemma-tensor-localization) and 00D2 (lemma-tensor-with-bimodule), specialized to the localization coefficients in the proof of dualizing Tag 0ALZ."
+   }
+  },
+  {
+   "text": "Tensoring a finite product of modules with $B$ gives the product of their tensors: the forward map is induced by coordinate projections, and the inverse inserts each coordinate by the corresponding coordinate inclusion and sums over the finite index set. The two composites are the identity by $x=\\sum_S\\iota_S\\pi_S(x)$. Apply this in every degree of $C$, followed by the $\\theta_S$ of the preceding step; in degree zero use the identity on $M\\otimes_A B$. This gives degreewise $B$-linear isomorphisms $\\theta^p:(C^p\\otimes_A B)\\to D^p$. For $S\\subset S\\cup\\{j\\}$ the face map sends $m/t_S^a$ to $t_j^a m/(t_St_j)^a$. Following either route through $\\theta$ therefore gives $(t_j^a m\\otimes b)/(u_Su_j)^a=(m\\otimes b)/u_S^a$ in the target localization. The signs $(-1)^{a-1}$ in the alternating differentials of [lem-per-ideal-torsion-cech-computation] are unchanged. The degree-zero maps both send $m\\otimes b$ to $((m\\otimes b)/1)_i$. Hence $\\theta$ is an isomorphism of complexes $C\\otimes_A B\\cong D$. For $r=0$ both complexes consist only of $M\\otimes_A B$ in degree zero, so this construction is still the identity.",
+   "uses": [
+    "lem-per-ideal-torsion-cech-computation",
+    "def-weil-module-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0ALZ (lemma-torsion-change-rings), equality of extended alternating localization complexes, with its finite-product and differential compatibility written out."
+   }
+  },
+  {
+   "text": "Apply [lem-pc-flat-tensor-complex-cohom] to the bounded complex $C$ and the given flat ring map $A\\to B$. Combining its canonical isomorphism with the preceding complex isomorphism and the identifications of Step 2 gives $$H_I^q(M)\\otimes_A B\\cong H^q(C)\\otimes_A B\\cong H^q(C\\otimes_A B)\\xrightarrow{H^q(\\theta)}H^q(D)\\cong H_J^q(M\\otimes_A B).$$ Each arrow is $B$-linear. The flat comparison on cycle classes is $[z]\\otimes b\\mapsto[z\\otimes b]$, so it commutes with any cochain map induced by a module map $M\\to M^{\\prime}$. The coefficient formula of Step 3 has the same property, and the two comparisons from [lem-per-ideal-torsion-cech-computation] are natural. Thus the composite is natural in $M$, as required. No finiteness hypothesis on $M$ or faithful flatness is used.",
+   "uses": [
+    "lem-pc-flat-tensor-complex-cohom",
+    "lem-per-ideal-torsion-cech-computation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0ALZ (lemma-torsion-change-rings), taking cohomology in the flat case; Tag 0956 (lemma-compute-local-cohomology-noetherian); coherent.tex Tag 02KH (lemma-flat-base-change-cohomology), flatness paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "lem-per-ideal-torsion-cech-computation",
+  "lem-weil-pbc-localization-tensor-over-base",
+  "def-weil-pbc-module-localization",
+  "def-weil-module-base-change",
+  "lem-pc-flat-tensor-complex-cohom"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 0ALZ (lemma-torsion-change-rings), the localization-complex proof specialized to a module and a flat map; Tag 0956 (lemma-compute-local-cohomology-noetherian) for its right-derived ideal-torsion interpretation."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +120,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsSMulRegular.of_flat_of_isBaseChange\", \"module\": \"Mathlib.RingTheory.Flat.Basic\", \"type\": \"{f : M →ₗ[R] N} (hf : IsBaseChange S f) {x : R} (reg : IsSMulRegular M x) : IsSMulRegular N (algebraMap R S x)\", \"doc\": \"If $ M $ is a flat $ R $-module, $ N $ is obtained from $ M $ via base change along a ring homomorphism $ R \\\\to S $, and $ x \\\\in R $ has injective scalar multiplication on $ M $, then the image of $ x\"}\n  {\"name\": \"Module.Flat.isBaseChange\", \"module\": \"Mathlib.RingTheory.Flat.Stability\", \"type\": \"[Flat R M] (N : Type t) [AddCommMonoid N] [Module R N] [Module S N] [IsScalarTower R S N] {f : M →ₗ[R] N}\\n  (h : IsBaseChange S f) : Flat S N\", \"doc\": \"If $ M $ is a flat $ R $-module, $ N $ is an $ R $-module and $ S $-module equipped with a scalar tower structure $ R \\to S \\to N $, and there exists an $ R $-linear map $ f : M \\to N $ satisfying the ba\"}\n  {\"name\": \"Module.Flat.of_flat_tensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R S] [Module.Flat S (S ⊗[R] M)] : Module.Flat R M\", \"doc\": \"If $ S $ is a faithfully flat $ R $-algebra and the tensor product $ S \\\\otimes_R M $ is a flat $ S $-module, then $ M $ is a flat $ R $-module.\"}\n  {\"name\": \"Module.FaithfullyFlat.instTensorProduct\", \"module\": \"Mathlib.RingTheory.Flat.FaithfullyFlat.Basic\", \"type\": \"(S : Type*) [CommRing S] [Algebra R S] [Module.FaithfullyFlat R M] : Module.FaithfullyFlat S (S ⊗[R] M)\", \"doc\": \"Let $R$ and $S$ be commutative rings, and suppose $S$ is an $R$-algebra. If $M$ is a faithfully flat $R$-module, then the tensor product $S \\\\otimes_R M$ is a faithfully flat $S$-module.\"}\n  {\"name\": \"RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange\", \"module\": \"Mathlib.RingTheory.Regular.Flat\", \"type\": \"[Flat R S] {f : M →ₗ[R] N} (hf : IsBaseChange S f) {rs : List R} (reg : IsWeaklyRegular M rs) :\\n  IsWeaklyRegular N (rs.map (algebraMap R S))\", \"doc\": \"Let $R$ and $S$ be commutative rings, and let $\\\\phi: R \\\\to S$ be a ring homomorphism making $S$ a flat $R$-algebra. Let $M$ be an $R$-module. If a sequence of elements $(r_1, \\\\dots, r_k)$ in $R$ is a \"}\n  {\"name\": \"IsLocalizedModule.isBaseChange\", \"module\": \"Mathlib.RingTheory.Localization.BaseChange\", \"type\": \"[IsLocalizedModule S f] : IsBaseChange A f\", \"doc\": \"If $ M' $ is the localization of an $ R $-module $ M $ at a submonoid $ S $ via an $ R $-linear map $ f : M \\\\to M' $, then $ f $ satisfies the universal property of the base change (tensor product).\"}\n  {\"name\": \"RingHom.Flat.isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Flat\", \"type\": \": IsStableUnderBaseChange Flat\", \"doc\": \"For commutative rings $ R, S, R', S' $ with compatible algebra structures and scalar tower conditions, if the ring homomorphism $ R \\to S $ is flat, then the ring homomorphism $ R' \\to S' $ obtained by \"}\n  {\"name\": \"RingHom.locally_isStableUnderBaseChange\", \"module\": \"Mathlib.RingTheory.RingHom.Locally\", \"type\": \"(hPi : RespectsIso P) (hPb : IsStableUnderBaseChange P) : IsStableUnderBaseChange (Locally P)\", \"doc\": \"If a property $P$ of ring homomorphisms respects isomorphisms and is stable under base change, then the property of being locally $P$ is also stable under base change. That is, for commutative rings $\"}\n",
    "date": "2026-10-19",
    "verdict": "No match: the returned localCohomology definitions and radical reindexing isomorphisms do not prove derived-torsion base change or top-degree nonvanishing; other hits concern completion, flatness, cotangent cohomology, and Krull dimension. LocalCohomology.lean lines 40–49 explicitly list derived-torsion equivalence and long exact sequences as future work."
+  },
+  {
+   "tool": "grep",
+   "query": "localCohomology|local.cohomology.*base.change",
+   "results": "{\"t\": \"2026-10-18T23:05:14Z\", \"tool\": \"grep\", \"query\": \"localCohomology|local.cohomology.*base.change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\"], \"digest\": \"1b64f7a08010717e\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected the returned flatness, localization and completion declarations. None states flat base change for right-derived ideal torsion. LocalCohomology.lean lines 40-47 lists the derived-functor and Cech identifications as future work."
+  },
+  {
+   "tool": "loogle",
+   "query": "localCohomology, Module.Flat",
+   "results": "{\"t\": \"2026-10-18T23:05:15Z\", \"tool\": \"loogle\", \"query\": \"localCohomology, Module.Flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected the returned flatness, localization and completion declarations. None states flat base change for right-derived ideal torsion. LocalCohomology.lean lines 40-47 lists the derived-functor and Cech identifications as future work."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ideal power torsion right derived functor flat base change",
+   "results": "{\"t\": \"2026-10-18T23:05:16Z\", \"tool\": \"leansearch\", \"query\": \"Ideal power torsion right derived functor flat base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.isBaseChange\", \"Module.FaithfullyFlat.instTensorProduct\", \"IsSMulRegular.of_flat_of_isBaseChange\", \"RingHom.Flat.isStableUnderBaseChange\", \"IsBaseChange.map_smul_top_ne_top_iff_of_faithfullyFlat\", \"Module.Flat.rTensor_exact\", \"Module.Flat.of_flat_tensorProduct\", \"RingHom.FaithfullyFlat.isStableUnderBaseChange\"], \"digest\": \"620967da3cdf2194\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected the returned flatness, localization and completion declarations. None states flat base change for right-derived ideal torsion. LocalCohomology.lean lines 40-47 lists the derived-functor and Cech identifications as future work."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat ring homomorphism local cohomology defined as derived ideal torsion commutes with extension of scalars",
+   "results": "{\"t\": \"2026-10-18T23:05:17Z\", \"tool\": \"leanfinder\", \"query\": \"For a flat ring homomorphism local cohomology defined as derived ideal torsion commutes with extension of scalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.HasGoingDown.of_flat\", \"Module.flat_of_isLocalized_maximal\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"Module.FaithfullyFlat.of_flat_of_isLocalHom\", \"RingHom.Flat.ofLocalizationSpanTarget\", \"instFlatAtPrime\", \"Module.flat_of_isLocalized_span\", \"RingHom.Flat.ofLocalizationPrime\"], \"digest\": \"7840a73a4b7ff519\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected the returned flatness, localization and completion declarations. None states flat base change for right-derived ideal torsion. LocalCohomology.lean lines 40-47 lists the derived-functor and Cech identifications as future work."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology with support in an ideal commutes with flat tensor product of modules",
+   "results": "{\"t\": \"2026-10-18T23:05:59Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomology with support in an ideal commutes with flat tensor product of modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_rTensor_injective'\", \"Module.Flat.iff_lTensor_injective'\", \"Module.Flat.iff_rTensor_injective\", \"AdicCompletion.tensor_map_id_left_injective_of_injective\", \"Module.Flat.iff_lTensor_injective\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.iff_lift_lsmul_comp_subtype_injective\"], \"digest\": \"bfa55c79ec11735b\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected the returned flatness, localization and completion declarations. None states flat base change for right-derived ideal torsion. LocalCohomology.lean lines 40-47 lists the derived-functor and Cech identifications as future work."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-local-cohomology-top-nonvanishing",
@@ -81,5 +186,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-local-cohomology-flat-base-change",
+  "worker": "stage1",
+  "summary": "NK kept the statement unchanged and proved flat base change by the extended alternating localization complex, reusing the existing Noetherian derived-torsion Cech computation, localization-tensor theorem, and flat complex-cohomology comparison. The coefficient maps, their B-linearity, finite-product assembly, face maps and naturality are explicit. No new nodes were needed.",
+  "blueprint": "Proof Step 1: dimension-normalized Verdier duality and the middle t-structure; the finite-coefficient potential-dualizing construction, via the normal-local top-residue-class input (ILO XVII Lemma 3.5.8): normality of completion and connectedness of punctured principal slices. Specific input: The bound on the closed complement of an algebraized neighborhood, and the empty-puncture dimension comparison, in the complete-local connectedness input. In the isolated-intersection bound: Tag 0DXE (lemma-cd-maximal), the top-degree nonvanishing assertion. Supporting input in Tag 0DXE: the flat completion reduction preceding the dualizing argument. The five steps realize the flat completion base-change input through the localization-complex argument of Stacks 0ALZ, without changing any unit-level route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-flat-tensor-complex-cohom",
+    "why": "Generic homological-algebra tool: taking cohomology of a bounded module complex commutes with flat scalar extension. This unit has no independent statement of that generic comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-flat-tensor-complex-cohom"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NK-d7ff86a4c",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-d7ff86a4c (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes and the statement and stmt_deps are unchanged. Target source: Stacks dualizing.tex 0ALZ (lemma-torsion-change-rings, which tensors the extended alternating complex), 0956 (module RΓ_I for Noetherian A = Čech complex) and 0955. Flat f, Noetherian A and B, any module M and the extended ideal IB match the master source specialized to a module and a flat map. The coefficient category is ordinary scalar extension via def-weil-module-base-change; the target is not weakened. Step 1 is elementary: Noetherian gives finite generators t_i, and IB=(f(t_i)). Step 2 applies lem-per-ideal-torsion-cech-computation over A and over B, by its statement: any module, r=0 allowed, natural. Step 3 uses lem-weil-pbc-localization-tensor-over-base with R=A=A and N=B, plus the fraction relation of def-weil-pbc-module-localization, to identify the A-localization at t_S with the B-localization at u_S. θ_S((m/t^a)⊗b)=(m⊗b)/u^a, which gives B-linearity. Step 4 is elementary: finite products commute with tensor. I recomputed the face-map compatibility t_j^a m/(t_St_j)^a, and the signs and r=0 case are fine. Step 5 uses lem-pc-flat-tensor-complex-cohom on a bounded complex with a flat map, and naturality is shown. No cycle: the Čech node is unsplit with no proof_deps. I accept the off-unit generic tool lem-pc-flat-tensor-complex-cohom. Duplicate search: grep for 0ALZ/0956/change-rings/'local cohomology flat'. lem-per-local-cohomology-change-rings only bounds cd, and the pbc ring-complex Čech node works at site level; neither duplicates the item. Maintainer note: the existing nodes lem-per-local-cohomology-cech-bound and lem-per-ideal-torsion-cech-computation (both unsplit, same unit) duplicate each other. This predates the delivery, which cites only one. Edge cases checked: I=0, I=A, nilpotent generator, M=0, B=0, k[x]→k[x,y], and the non-flat ℤ→F_p case, which shows flatness is needed. No SGA. No fixes."
  }
 }
