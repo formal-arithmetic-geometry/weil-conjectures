@@ -45,7 +45,7 @@ theorem ringedSiteSectionLocalization_compatible
     (V W : (Over U)ᵒᵖ) (a : V ⟶ W) :
     R.obj.map a.unop.left.op (R.obj.map V.unop.hom.op f) =
       R.obj.map W.unop.hom.op f := by
-  sorry
+  rw [← RingCat.comp_apply, ← Functor.map_comp, ← op_comp, Over.w]
 
 /-- The module O_U[1/f] on the slice site. It is the colimit of the sequence
 O_U --f--> O_U --f--> ..., hence the sheafification of the sectionwise
