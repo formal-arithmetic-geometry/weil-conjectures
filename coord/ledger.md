@@ -16236,3 +16236,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:29 L: merged deliver/Z8/Sheaf.AlgebraicGeometry.QuasiFiniteLocusOpen (stage 3; reviewer PASS; first push; landing 20261018T062958-L-695575 (proof); batch 20261018T062645; modules 1; new nodes 0)
 
 - 15:07 L: batch 20261018T062645 dependency take-out
+- 07:11 L: returned deliver/A3/Sheaf.Paper.RingComplexFunctorial (reviewer RETURN: (the landing tools, head 5ce6acee3) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
