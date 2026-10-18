@@ -16,9 +16,147 @@
   "def-weil-pbc-reduced-normalization",
   "def-weil-universal-homeomorphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose the finite affine cover $U=\\operatorname{Spec}A$ supplied by the definition of finite type over $k$, omitting empty members. Each $A$ is a finite type $k$-algebra and a domain, since $X$ is integral. Write $A'$ for its integral closure in $F=\\operatorname{Frac}(A)$, $B_L=A\\otimes_k L$, $R_L=(B_L)_{\\mathrm{red}}$ and $Q_L=Q(R_L)$. For every extension $L/k$, the generators of $A$ give generators of $B_L$ and $R_L$ over $L$, so $\\operatorname{Spec}R_L$ is Noetherian by the finite-type-over-Noetherian theorem. The componentwise affine-chart theorem and the total-fractions product decomposition identify the normalization over $U_L$ with $\\operatorname{Spec}B'_L$, where $B'_L$ is the integral closure of $B_L$ in $Q_L$. Indeed the product decomposition identifies $Q_L$ with the product of the fraction fields of the reduced components; integrality in a finite product holds coordinatewise (multiply the finitely many monic annihilating polynomials). Passing from $B_L$ to its reduced quotient changes neither the integral elements in $Q_L$ nor this normalization. Over $U$, the given $X^\\nu$ is $\\operatorname{Spec}A'$ by its definition.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-pc-integral-scheme",
+    "def-sc-normalization",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-per-componentwise-normalization-affine-charts",
+    "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "def-weil-pbc-integral-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C3N, label lemma-normalization-and-change-of-fields; affine reduction and integral-closure description"
+   }
+  },
+  {
+   "text": "The map $F\\to Q_K$ given by the fraction-ring lemma sends $A'$ into $B'_K$: a monic equation over $A$ remains a monic equation over $B_K$. Since $B'_K$ is a subring, this gives\n$$\\varphi_K:A'\\otimes_k K\\longrightarrow B'_K,\\qquad a'\\otimes\\lambda\\longmapsto a'\\lambda.$$\nOn principal opens this construction agrees with restriction: both maps send a fraction to the fraction of its images, and integral closure commutes with localization. The normalizations themselves commute with open restriction. Consequently the local scheme morphisms $\\operatorname{Spec}\\varphi_K$ agree on principal refinements of overlaps and glue to a morphism $b:Y\\to X^\\nu\\times_k K$. Its composites to $X_K$ agree on the affine cover, so it is over $X_K$. This construction, using only the structural ring maps and localization, specifies the canonical comparison without any choice of component enumeration.",
+   "uses": [
+    "lem-per-reduced-total-fractions-field-extension",
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "lem-weil-pbc-reduced-algebraic-normalization-field-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C3N, label lemma-normalization-and-change-of-fields; canonical comparison and compatibility on affine overlaps"
+   }
+  },
+  {
+   "text": "Regard $A'\\otimes_k K$ as a subalgebra of $F\\otimes_k K$: tensoring the inclusion $A'\\subseteq F$ is injective because $K$ is flat over the field $k$. The composite into $Q_K$ is the map $\\theta_K$ of the fraction-ring lemma restricted to this subalgebra. Since $\\ker\\theta_K$ consists of nilpotent elements, so does $\\ker\\varphi_K$ (injectivity of the first map reflects the equation $z^m=0$). This proves the kernel condition even when $A'\\otimes_k K$ is nonreduced.",
+   "uses": [
+    "lem-weil-pbc-module-over-field-flat",
+    "lem-per-reduced-total-fractions-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C3N, label lemma-normalization-and-change-of-fields; nilpotent kernel of the affine comparison"
+   }
+  },
+  {
+   "text": "If $K/k$ is separable, apply the separable-normalization comparison to the reduced finite-type scheme $X$. Its single reduced irreducible component is $X$, so its componentwise normalization is $X^\\nu$. That comparison identifies the canonical $b$ just constructed with an isomorphism, which is a universal homeomorphism. Hence suppose $K/k$ is not separable. Its characteristic is then a prime $p>0$: in characteristic zero, every finitely generated subextension has a separating transcendence basis by the perfect-field theorem and is therefore separable by the separably-generated-implies-separable theorem, which would make $K/k$ separable by definition.",
+   "uses": [
+    "lem-weil-pbc-reduced-algebraic-normalization-field-change",
+    "def-weil-pbc-reduced-normalization",
+    "def-weil-universal-homeomorphism",
+    "lem-weil-pbc-perfect-field-separating-basis",
+    "lem-weil-pbc-separably-generated-separable",
+    "def-weil-pbc-separable-field-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C3N, label lemma-normalization-and-change-of-fields; separable case; reduction to positive characteristic"
+   }
+  },
+  {
+   "text": "Fix $b\\in B'_K$. Represent it as $c/d\\in Q_K$ with $c,d\\in R_K$ and $d$ a nonzerodivisor, and choose lifts of $c,d$ to $B_K$. Choose a monic equation $b^m+\\alpha_1b^{m-1}+\\cdots+\\alpha_m=0$, with $\\alpha_i\\in B_K$. Each lift and coefficient is a finite sum of pure tensors. Let $H\\subseteq K$ be the field generated over $k$ by their finitely many scalar coefficients. They descend to $B_H$. Their denominator is a nonzerodivisor in $R_H$: an element it annihilates maps to zero in $R_K$, hence is zero by the injectivity of $R_H\\to R_K$. Thus $b_H=c_H/d_H$ exists in $Q_H$. Injectivity of $Q_H\\to Q_K$ reflects the displayed monic equation, so $b_H$ is integral over $B_H$ and maps to $b$. This is the finite-coefficient descent in the source, with both the denominator and the equation checked.",
+   "uses": [
+    "lem-per-reduced-total-fractions-field-extension",
+    "def-weil-pbc-integral-closure",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C3N, label lemma-normalization-and-change-of-fields; finite coefficient field for one integral element"
+   }
+  },
+  {
+   "text": "Choose a finite transcendence basis $t_1,\\ldots,t_r$ of $H/k$. Put $T=k(t_1,\\ldots,t_r)$ and let $E$ be its separable algebraic closure inside the algebraic extension $H/T$. The separable-first theorem gives that $H/E$ is purely inseparable. The same $t_i$ are a transcendence basis of $E/k$, and $E/T$ is separable algebraic. Thus $E/k$ is separably generated and hence separable. For each of the finitely many scalar coefficients in lifts of $c_H,d_H,\\alpha_i$ choose a $p$-power taking it into $E$, using the pointwise conclusion of the separable-first theorem. Choose $q=p^n$, $n\\ge1$, divisible by all those powers. The Frobenius identity for finite sums shows that $c_H^q,d_H^q$ and every $\\alpha_i^q$ belong to the images of $R_E$ or $B_E$, respectively. No uniform exponent for all elements of $H$ is needed.",
+   "uses": [
+    "lem-weil-pbc-finitely-generated-field-finite-transcendence-basis",
+    "lem-weil-pbc-separable-first-purely-inseparable",
+    "def-weil-pbc-transcendence-basis",
+    "lem-weil-pbc-separably-generated-separable"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C3N, label lemma-normalization-and-change-of-fields; separable-first decomposition and a common exponent for the finite coefficient set"
+   }
+  },
+  {
+   "text": "Write $c_H^q=\\bar c$, $d_H^q=\\bar d$ for the images of elements of $R_E$. The element $\\bar d$ is a nonzerodivisor in $R_E$: if $\\bar d x=0$, inject into $R_H$, where $d_H^q$ is a nonzerodivisor, and then use injectivity again. Hence $u=\\bar c/\\bar d$ belongs to $Q_E$ and maps to $b_H^q$. Raising the monic equation of step 5 to the $q$th power gives\n$$u^m+\\alpha_1^q u^{m-1}+\\cdots+\\alpha_m^q=0$$\nin $Q_E$, because it holds after the injective map $Q_E\\to Q_H$. Thus $u\\in B'_E$. Apply the existing separable-normalization comparison to $\\operatorname{Spec}A$ and $E/k$: on these affine charts its canonical algebra map $A'\\otimes_k E\\to B'_E$ is an isomorphism. Choose a preimage of $u$. Its image in $A'\\otimes_k K$ maps under $\\varphi_K$ to $b^q$, by the tower compatibility in the fraction-ring lemma. This proves that every $b\\in B'_K$ has a positive $p$-power in the image of $\\varphi_K$.",
+   "uses": [
+    "lem-per-reduced-total-fractions-field-extension",
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-reduced-algebraic-normalization-field-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C3N, label lemma-normalization-and-change-of-fields; Frobenius of the equation and application of the separable case"
+   }
+  },
+  {
+   "text": "Apply the power-generated-spectrum criterion to $\\varphi_K$, with the prime $p$ fixed above. Step 3 gives its nil kernel; step 7 shows that every element of its target, hence in particular a set of algebra generators, has a $p^n$-power in its image. The other required element $p^n b$ is zero because the rings have characteristic $p$, and thus also belongs to the image. Therefore $\\operatorname{Spec}\\varphi_K$ is a universal homeomorphism. These are the restrictions of $b$ to an open cover of its target, from step 2. After any base change to that target the pulled-back opens still cover; on each, the induced continuous map is a homeomorphism. Their inverse maps agree on overlaps by uniqueness of an inverse, so they glue to a continuous inverse. This verifies the defining universal-homeomorphism condition for the global $b$.",
+   "uses": [
+    "lem-pur-power-generated-spectrum-homeomorphism",
+    "def-weil-universal-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C3N, label lemma-normalization-and-change-of-fields; Tag 0BRA and gluing the universal-homeomorphism property"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "def-pc-integral-scheme",
+  "def-sc-normalization",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-per-componentwise-normalization-affine-charts",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "def-weil-pbc-integral-closure",
+  "lem-per-reduced-total-fractions-field-extension",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-weil-pbc-reduced-algebraic-normalization-field-change",
+  "lem-weil-pbc-module-over-field-flat",
+  "def-weil-pbc-reduced-normalization",
+  "def-weil-universal-homeomorphism",
+  "lem-weil-pbc-perfect-field-separating-basis",
+  "lem-weil-pbc-separably-generated-separable",
+  "def-weil-pbc-separable-field-extension",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-finitely-generated-field-finite-transcendence-basis",
+  "lem-weil-pbc-separable-first-purely-inseparable",
+  "def-weil-pbc-transcendence-basis",
+  "lem-pur-power-generated-spectrum-homeomorphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0C3N, label lemma-normalization-and-change-of-fields"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +192,45 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-19",
    "verdict": "no match: the displayed hits do not state this scheme-theoretic comparison or degree theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalization after arbitrary field extension compares with scalar extension of the normalization by a universal homeomorphism",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.normalization.hom_ext, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc, AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc. ",
+   "date": "2026-10-19",
+   "verdict": "no match: relative-normalization universal properties do not give this arbitrary-field-extension universal homeomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*(baseChange|base_change)|universalHomeomorph.*normali|normali.*universalHomeomorph",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-19",
+   "verdict": "no match: relative-normalization universal properties do not give this arbitrary-field-extension universal homeomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalization\", \"IsUniversalHomeomorphism\"",
+   "results": "OK 0 hits: . ",
+   "date": "2026-10-19",
+   "verdict": "no match: relative-normalization universal properties do not give this arbitrary-field-extension universal homeomorphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalization commutes with arbitrary field extension up to universal homeomorphism",
+   "results": "OK 8 hits: Normal.of_equiv_equiv, AlgEquiv.transfer_normal, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, Polynomial.map_normalize, Normal.of_algEquiv, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, AlgebraicGeometry.Scheme.Hom.toNormalization. ",
+   "date": "2026-10-19",
+   "verdict": "no match: relative-normalization universal properties do not give this arbitrary-field-extension universal homeomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalization of a variety over an inseparable extension has the same geometric points as the base changed normalization",
+   "results": "OK 8 hits: AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp, AlgebraicGeometry.Scheme.Hom.normalizationDesc_comp_assoc, AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.normalization.hom_ext, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc. ",
+   "date": "2026-10-19",
+   "verdict": "no match: relative-normalization universal properties do not give this arbitrary-field-extension universal homeomorphism"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-sepclosed-regular-proper-curve-trace",
@@ -83,5 +256,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-normalization-field-extension-homeomorphism",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Followed Stacks 0C3N through affine integral closures, nil kernel, finite coefficient descent, separable-first fields, Frobenius powers and 0BRA. Reused existing normalization, total-fraction product, field and spectrum criteria. Added only the ambient reduced-total-fraction field-extension lemma, as an unsplit statement. No Lean writing or compiler tools.",
+  "blueprint": "Proof Step 1 of lem-per-artin-gabber-affine-curve: dimension-normalized Verdier duality and the middle t-structure, via the finite-coefficient potential-dualizing construction and the regular surface calculation in ILO XVII 3.4.1.3 (printed p.272); supplies the regular proper exceptional-curve trace used in that calculation. Normalization of the geometric curve, before applying the algebraically closed smooth-curve calculation. Realizes the normalization-of-the-geometric-curve comparison required by the regular-curve trace input under the ancestor first step.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "why": "Generic algebraic-geometric or field-theoretic tool used in the affine proof of Stacks 0C3N; supplies no perverse-sheaf or duality argument and does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-algebraic-normalization-field-change",
+    "why": "Generic algebraic-geometric or field-theoretic tool used in the affine proof of Stacks 0C3N; supplies no perverse-sheaf or duality argument and does not replace the unit route."
+   },
+   {
+    "node": "def-weil-pbc-reduced-normalization",
+    "why": "Generic algebraic-geometric or field-theoretic tool used in the affine proof of Stacks 0C3N; supplies no perverse-sheaf or duality argument and does not replace the unit route."
+   },
+   {
+    "node": "lem-pur-power-generated-spectrum-homeomorphism",
+    "why": "Generic algebraic-geometric or field-theoretic tool used in the affine proof of Stacks 0C3N; supplies no perverse-sheaf or duality argument and does not replace the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "lem-weil-pbc-reduced-algebraic-normalization-field-change",
+  "def-weil-pbc-reduced-normalization",
+  "lem-pur-power-generated-spectrum-homeomorphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-40deb90fd",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-40deb90fd (reviewer sub-agent of L); spot-checked: Read Stacks varieties 0C3N (lemma-normalization-and-change-of-fields) in full, plus 030K and 0BRA. The item statement is unchanged and is 0C3N's universal-homeomorphism clause for integral finite-type X, with the componentwise normalization of (X_K)_red; the hypotheses match. New node lem-per-reduced-total-fractions-field-extension is true. Checked by flat going-down: minimal primes of B_L and of R_L⊗M contract to minimal primes, so R_L→R_M is injective, preserves nonzerodivisors and gives an injection Q_L→Q_M; θ_L = S^{-1}(B_L→R_L) has kernel exactly nil(F⊗L); towers and principal localization are compatible. Tested on F_p(s)[u]/(u^p−s)⊗k(s^{1/p}), C⊗_R C and A=k. It is self-contained, statement-only, searched in four tools, and not a duplicate (grep for total-quotient/field-extension nodes and all 0C3N citers; the trf inseparable node needs geometric normality). Steps 1-8 are checked against the cited statements: chart and total-fraction product with coordinatewise integrality; φ_K is canonical because a B_L-algebra map A'→Q_L is unique (a'=x/s), so the separable comparison in steps 4 and 7 is φ; nil kernel via flatness; char 0 ⇒ separable; finite-coefficient descent with the nonzerodivisor and the equation reflected; separable-first for H/k(t) with E/k separably generated; Frobenius with n≥1; 0BRA hypotheses (nil kernel, p-powers, p^n x=0); gluing over the cover Spec(A'⊗K). No SGA citation. All cited statements are on the route of sk-p-dl-a1-perverse; the four declared tool_uses are generic algebra and are accepted. No cycle. No fixes."
  }
 }
