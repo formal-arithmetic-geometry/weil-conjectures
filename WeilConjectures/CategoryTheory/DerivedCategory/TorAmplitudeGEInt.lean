@@ -66,6 +66,31 @@ lemma torAmplitudeGE_of_isGE_of_flat_resolution
 end
 
 attribute [local instance] IsPrincipalIdealRing.isDedekindDomain in
+/-- Over a principal ideal domain `R`, every bounded below complex of modules vanishing in degrees
+`< b` has Tor amplitude in `[b - 1, ∞)`: every module is the quotient of a free module by a
+torsion free, hence flat, submodule. -/
+lemma torAmplitudeGE_of_isGE_of_isPrincipalIdealRing {R : Type (u + 1)} [CommRing R] [IsDomain R]
+    [IsPrincipalIdealRing R] [HasDerivedCategory.{w} (ModuleCat.{u + 1} R)]
+    (K : DerivedCategory (ModuleCat.{u + 1} R)) (b : ℤ) [K.IsGE b] :
+    torAmplitudeGE (ModuleCat.{u + 1} R) (b - 1) K := by
+  refine torAmplitudeGE_of_isGE_of_flat_resolution (fun F ↦ ?_) K b
+  let π : (F →₀ R) →ₗ[R] F := Finsupp.linearCombination R id
+  have hπ : Function.Surjective π := fun x ↦ ⟨Finsupp.single x 1, by simp [π]⟩
+  let S : ShortComplex (ModuleCat.{u + 1} R) :=
+    ShortComplex.mk (ModuleCat.ofHom (LinearMap.ker π).subtype) (ModuleCat.ofHom π) (by
+      ext x
+      simp)
+  have hS : S.ShortExact :=
+    { exact := (ShortComplex.ShortExact.moduleCat_exact_iff_function_exact _).2
+        (LinearMap.exact_subtype_ker_map π)
+      mono_f := (ModuleCat.mono_iff_injective _).2 Subtype.val_injective
+      epi_g := (ModuleCat.epi_iff_surjective _).2 hπ }
+  have : Module.IsTorsionFree R (LinearMap.ker π) :=
+    Function.Injective.moduleIsTorsionFree _ Subtype.val_injective (fun _ _ ↦ rfl)
+  exact ⟨S, hS, (ModuleCat.flat_iff_flat _).2 (inferInstanceAs (Module.Flat R (LinearMap.ker π))),
+    (ModuleCat.flat_iff_flat _).2 (inferInstanceAs (Module.Flat R (F →₀ R))), ⟨Iso.refl _⟩⟩
+
+attribute [local instance] IsPrincipalIdealRing.isDedekindDomain in
 /-- Every bounded below complex of abelian groups (modules over `ULift ℤ`) vanishing in degrees
 `< b` has Tor amplitude in `[b - 1, ∞)`: every abelian group is the quotient of a free abelian
 group by a torsion free, hence flat, subgroup. -/
