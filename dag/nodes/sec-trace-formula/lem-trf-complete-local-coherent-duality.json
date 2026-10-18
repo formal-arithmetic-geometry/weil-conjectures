@@ -11,7 +11,10 @@
   "def-weil-pbc-noetherian-ring",
   "def-weil-abstract-derived-category",
   "def-pur-derived-internal-hom",
-  "def-weil-finitely-generated-module"
+  "def-weil-finitely-generated-module",
+  "def-pc-ring-hom-extension-shared-definitions",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "def-weil-pbc-adically-complete-ring"
  ],
  "proof": [
   {
@@ -233,5 +236,28 @@
   "group": "Q61",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-e9478cc76 (reviewer sub-agent of L); spot-checked: Pass with no changes; the delivery is correct as delivered. The item keeps its statement unchanged and it matches Stacks 0BFR(2)+0A7C: existence of Omega in D^b_fg, an anti-equivalence on unbounded D_fg, the D+/D- exchange, preservation of D^b, and canonical natural biduality. That covers what the parent semidualizing-conservativity node uses, including biduality for D^- objects. Nothing is weakened. I checked each step against the statements it cites. S1: the Cohen presentation gives a complete Noetherian regular local A surjecting onto R. S2: the homothety for A[0] holds via the K-injectivity of bounded-below injective complexes and evaluation at 1, so every hypothesis of the finite-map transfer node holds. S3: the coherent-RHom node applies to unbounded K. S4: the truncations of K are pseudo-coherent by the Noetherian criterion 066E(2), and all three hypotheses of the 0A69 evaluation node hold, with RHom(Omega,Omega) isomorphic to R[0] and so of tor amplitude [0,0]. S5: the transpose description agrees with the map of Stacks lemma-evaluate-and-more, phi(x)k goes to (psi to phi(psi(k))), so the composite is the canonical biduality map. S7: I recomputed the degree bounds a-c and b-c from the bounded injective model J and the good truncations. S6 and S8 are elementary. I read the sources at dualizing.tex 0BFR/0A7C/0A7B/0AWX/0AX0/0G4H and more-algebra.tex 0A67/0A69/0A5S/definition-tor-amplitude. The four new nodes are statement-only and true, and each matches its source exactly: 0AWX (tested on a field and a DVR), 0AX0 (tested on B=A and on Z_p to F_p, which gives F_p[-1]), 0G4H, and 0A69 (its tor-dimension definition is Stacks' word for word). None of them restates a clause of the item. The 0AX0 proof needs biduality over A, but the two general new nodes can supply it, so no cycle arises. Duplicate search: I grepped the DAG for the tags and for terms such as Gorenstein, injective dimension and dualizing, and searched blueprint main-20261015; the only hits are this delivery's chain and étale dualizing complexes. Every node records searches of all three kinds; the evaluation node's failed Loogle query is recorded as unavailable and was rerun. No SGA source is cited. I accept the declared tool_uses: lem-weil-pbc-cohen-power-series-presentation, lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion and lem-weil-pbc-bounded-below-injectives-kinjective. The missing lean_audit on the new nodes is not a fault: most other recent nodes lack it too, because tools fill it."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.CompleteLocalCoherentDuality",
+  "declaration": "DerivedCategory.complete_local_coherent_duality",
+  "declarations": [
+   "DerivedCategory.completeLocalDualFunctor",
+   "DerivedCategory.completeLocalBidual",
+   "DerivedCategory.complete_local_coherent_duality"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/CompleteLocalCoherentDuality.lean",
+  "statement": "theorem complete_local_coherent_duality (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R] [IsAdicComplete (IsLocalRing.maximalIdeal R) R] [HasDerivedCategory.{u} (RingSiteModules R)] : ∃ Ω : DerivedCategory (RingSiteModules R), (∀ i : ℤ, Module.Finite R (((homologyFunctor (RingSiteModules R) i).obj Ω).val.obj (op ⟨PUnit.unit⟩))) ∧ (∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero ((homologyFunctor (RingSiteModules R) i).obj Ω)) ∧ (∃ e : (ObjectProperty.FullSubcategory (fun K : DerivedCategory (RingSiteModules R) ↦ ∀ i : ℤ, Module.Finite R (((homologyFunctor (RingSiteModules R) i).obj K).val.obj (op ⟨PUnit.unit⟩))))ᵒᵖ ≌ ObjectProperty.FullSubcategory (fun K : DerivedCategory (RingSiteModules R) ↦ ∀ i : ℤ, Module.Finite R (((homologyFunctor (RingSiteModules R) i).obj K).val.obj (op ⟨PUnit.unit⟩))), Nonempty (e.functor ⋙ ObjectProperty.ι (fun K : DerivedCategory (RingSiteModules R) ↦ ∀ i : ℤ, Module.Finite R (((homologyFunctor (RingSiteModules R) i).obj K).val.obj (op ⟨PUnit.unit⟩))) ≅ (ObjectProperty.ι (fun K : DerivedCategory (RingSiteModules R) ↦ ∀ i : ℤ, Module.Finite R (((homologyFunctor (RingSiteModules R) i).obj K).val.obj (op ⟨PUnit.unit⟩)))).op ⋙ completeLocalDualFunctor R Ω)) ∧ (∀ K : DerivedCategory (RingSiteModules R), (∀ i : ℤ, Module.Finite R (((homologyFunctor (RingSiteModules R) i).obj K).val.obj (op ⟨PUnit.unit⟩))) → IsIso (completeLocalBidual R Ω K) ∧ ((∃ a : ℤ, ∀ i : ℤ, i < a → IsZero ((homologyFunctor (RingSiteModules R) i).obj K)) ↔ ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero ((homologyFunctor (RingSiteModules R) i).obj ((completeLocalDualFunctor R Ω).obj (op K)))) ∧ ((∃ b : ℤ, ∀ i : ℤ, b < i → IsZero ((homologyFunctor (RingSiteModules R) i).obj K)) ↔ ∃ a : ℤ, ∀ i : ℤ, i < a → IsZero ((homologyFunctor (RingSiteModules R) i).obj ((completeLocalDualFunctor R Ω).obj (op K)))) ∧ ((∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero ((homologyFunctor (RingSiteModules R) i).obj K)) → ∃ a b : ℤ, ∀ i : ℤ, i < a ∨ b < i → IsZero ((homologyFunctor (RingSiteModules R) i).obj ((completeLocalDualFunctor R Ω).obj (op K))))) ∧ (∀ (K L : DerivedCategory (RingSiteModules R)) (f : K ⟶ L), (∀ i : ℤ, Module.Finite R (((homologyFunctor (RingSiteModules R) i).obj K).val.obj (op ⟨PUnit.unit⟩))) → (∀ i : ℤ, Module.Finite R (((homologyFunctor (RingSiteModules R) i).obj L).val.obj (op ⟨PUnit.unit⟩))) → f ≫ completeLocalBidual R Ω L = completeLocalBidual R Ω K ≫ (completeLocalDualFunctor R Ω).map ((completeLocalDualFunctor R Ω).map f.op).op)",
+  "branch": "newtargets-dag",
+  "by": "Q130",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-03801b873",
+  "group": "Q130",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0BFR(2)+0A7C clause by clause: Omega in D^b_fg (finite H^i, vanishing interval); exists e : D_fg^op ≌ D_fg with e.functor ⋙ ι ≅ ι.op ⋙ RHom(-,Omega) on the recorded derivedInternalHomOfUniverses; D+/D- exchange as iffs and D^b preservation for coherent K; IsIso of canonical bidual = homEquiv-transpose of braiding ≫ counit (evaluation); naturality f ≫ δ_L = δ_K ≫ D.map (D.map f.op).op. Hypotheses CommRing/IsNoetherianRing/IsLocalRing/IsAdicComplete maximalIdeal exactly; unbounded inline D_fg predicate; one universe u as in the landed parent semidualizing-rhom-conservative; no extra assumptions. Mechanical theorem-stmt_dep finding: PASS on the point, since SignedRingedHom.adjunction is the .choose of theorem normalizedAdjunction_existsUnique and derivedBraiding is Eq.mp along theorem derivedMonoidal_eq_localization, both needed for the canonical biduality clause; same dep and decls in the landed parent; no cycle in the added stmt_deps. Helpers are real defs with source/blueprint docstrings; 8-step proof docstring; sorry only; lean.statement verbatim; node statement unchanged. No D_fg/ordinary biduality duplicate (etale biduality nodes differ). nt_compile --json rc 0, clean, 2.0 s; control error compile detected. Observation: the second reading is self-declared author reread."
  }
 }

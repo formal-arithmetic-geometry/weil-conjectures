@@ -256,5 +256,23 @@
   "group": "Q69",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-dea4adc9c (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and the statement of every cited node against Stacks 0C57, 0AGX, 02GF (1)<=>(6), 01TE, 01T6 and 00FN; all seven tags are confirmed in tags/tags. The delivery has no new nodes and preserves the item statement. Small cases support the statement: x -> x^2 from G_m to A^1 in characteristic other than 2 behaves as claimed; at the generic point the hypothesis fails as it should; Spec C -> Spec R shows algebraic closedness is needed. Step 1 only unpacks definitions: étale gives flat and unramified, unramified includes locally finite type, and the flat-morphism definition makes the stalk map a flat local homomorphism. Step 2 applies the 02GF criterion with V=D. Step 3 handles both cases using the structural maps (j = alpha i), and the hypothesis of the algebraic-over-algebraically-closed leaf holds. Steps 4 and 5 use 01TE, the one-point base Spec k and the homeomorphism of the fibre onto the preimage. Step 6 gets Noetherian stalks from local Noetherianity (01T6, used twice) and localization (00FN). Step 7 checks all four hypotheses of lem-weil-pbc-flat-local-completion-iso, whose completed map is exactly the induced map in the item. I found no cycle: the item's 132-node dependency closure does not contain it. Searches for 0AGX/039M and for étale plus completion plus residue field found no duplicate. Accepted tool_use: lem-weil-pbc-flat-local-completion-iso (unit sk-thm-p1), a generic commutative-algebra result used as a black box. It is the lemma 0C57 itself cites and replaces no step of sk-i-curve-zero. Every other off-unit citation is a Mathlib leaf or a definition. No SGA source is used. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleCompletedLocalRingIso",
+  "declaration": "AlgebraicGeometry.etale_completedLocalRing_iso",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCompletedLocalRingIso.lean",
+  "statement": "theorem etale_completedLocalRing_iso {k : Type u} [Field k] [IsAlgClosed k] {C D : Scheme.{u}} (f : C ⟶ Spec (.of k)) [LocallyOfFiniteType f] (e : D ⟶ C) [Etale e] (y : D) (hres : Function.Bijective (((Scheme.ΓSpecIso (.of k)).inv ≫ f.appTop ≫ C.Γevaluation (e y)).hom) ∨ Function.Bijective (((Scheme.ΓSpecIso (.of k)).inv ≫ (e ≫ f).appTop ≫ D.Γevaluation y).hom)) : e y ∈ closedPoints C ∧ y ∈ closedPoints D ∧ IsIso (e.residueFieldMap y) ∧ ∃ (ehat : AdicCompletion (IsLocalRing.maximalIdeal (C.presheaf.stalk (e y))) (C.presheaf.stalk (e y)) →+* AdicCompletion (IsLocalRing.maximalIdeal (D.presheaf.stalk y)) (D.presheaf.stalk y)), (∀ (n : ℕ) (z : AdicCompletion (IsLocalRing.maximalIdeal (C.presheaf.stalk (e y))) (C.presheaf.stalk (e y))) (a : C.presheaf.stalk (e y)), AdicCompletion.evalₐ (IsLocalRing.maximalIdeal (C.presheaf.stalk (e y))) n z = Ideal.Quotient.mk (IsLocalRing.maximalIdeal (C.presheaf.stalk (e y)) ^ n) a → AdicCompletion.evalₐ (IsLocalRing.maximalIdeal (D.presheaf.stalk y)) n (ehat z) = Ideal.Quotient.mk (IsLocalRing.maximalIdeal (D.presheaf.stalk y) ^ n) ((e.stalkMap y).hom a)) ∧ Function.Bijective ehat",
+  "branch": "newtargets-dag",
+  "by": "Q138",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b02d771b0",
+  "group": "Q138",
+  "result": "pass",
+  "note": "The statement matches the node clause by clause. Hypotheses: k algebraically closed, LocallyOfFiniteType f, Etale e (the recorded class), and a disjunction that one of the two actual structure maps k→κ(x) or k→κ(y) (ΓSpecIso.inv ≫ appTop ≫ Γevaluation) is bijective. Conclusions: x and y in closedPoints, IsIso (e.residueFieldMap y), and a bijective ehat between the maximal-ideal AdicCompletions pinned levelwise by e.stalkMap y. A compiled probe shows that formula determines ehat uniquely, so it is not an arbitrary map. The representation is the same as RingHom.flat_local_completion_iso and the landed nodalPoint_etale_locality. All 8 stmt_deps are Mathlib leaves. The node copy equals the live node apart from lean; lean.statement is verbatim. Proof-dependency modules are plain imports per brief l.104; docstrings carry Stacks 02GL/01TE/0AGX/039M/0C57, the blueprint tag and the 7 proof steps. Proof is sorry only, no lines over 100 chars, no name clash. nt_compile --json is clean (1.7 s) and a broken control fails. Edge cases checked: empty schemes, n=0, any characteristic, one shared universe forced by Spec k. Advisory only: the second reading is the author's self-check."
  }
 }

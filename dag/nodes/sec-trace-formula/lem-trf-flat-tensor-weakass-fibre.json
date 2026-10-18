@@ -485,5 +485,24 @@
   "group": "Q63",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-5a5878ef1 (reviewer sub-agent of L); spot-checked: I read the whole split. It is Stacks 05IG (flat.tex 3750-3980) with N=S, built on 05IF, 05FP, 05ID and More on Algebra 05GM/05GN/05GP/05GQ, all checked at their labels in tags/tags. The item statement, stmt_deps and blueprint field match the base exactly. The worker's source-error note is correct: 05IG writes S'⊗κ(q') where it needs κ(p'), and WeakAss_S(M) where it needs WeakAss_R(M). Steps 1-13 hold. Step 2 (separating element g), step 4 (key observation; no inclusions among étale-fibre primes, via etale-prime-generates-maximal), steps 5-6 (regular element and universal injectivity), steps 8-9 (cancelling g_f, coordinate argument) and steps 10-13 (cyclic A/I reduction, Psi, minimal prime, forward direction reused without circularity) were each checked against the statements they cite. All three new nodes are true, smaller than the item, not duplicates and statement-only. lem-trf-etale-weakass-invariance (05FP, affine form) was tested on k->k x k and L=0. lem-trf-flat-algebra-etale-projective-neighborhood (05ID with F=O): I checked the fp permanence and that the fibre map C->C' is étale; on k->k[t] the projective module has infinite rank. lem-trf-nil-local-projective-injection-pure: a nil-maximal local ring is auto-associated, so 05GQ (1)=>(2) applies; tested on a field, k[eps], and the infinite-rank example after 05GQ is consistent. The off-unit tool_uses are generic algebra tools; I accept them. One C3 fault, repaired in fixes/dag/nodes/sec-trace-formula/lem-trf-flat-tensor-weakass-fibre.json: step 7 used lem-sc-weakass-localization (which only gives some element) to get g_f f^n z=0 for the chosen z. The repaired step argues explicitly: Ann_{S_q}(z/1)=Ann_S(z)S_q, minimality makes qS_q the only prime containing it, its radical is qS_q by lem-weil-pbc-zero-locus-eq-iff-radical-eq (a Mathlib leaf), and clearing denominators gives g_f. I updated the uses, proof_deps and tool_uses to match. No statement changed and no node dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.WeaklyAssociatedTensorFlatFinitePresentation",
+  "declaration": "Module.weakly_associated_tensor_iff_of_flat_finitePresentation",
+  "file": "lean/Sheaf/RingTheory/WeaklyAssociatedTensorFlatFinitePresentation.lean",
+  "statement": "theorem weakly_associated_tensor_iff_of_flat_finitePresentation (R : Type u) [CommRing R] (S : Type v) [CommRing S] [Algebra R S] [Algebra.FinitePresentation R S] [Module.Flat R S] (M : Type w) [AddCommGroup M] [Module R M] (p : PrimeSpectrum R) (q : {q : PrimeSpectrum S | PrimeSpectrum.comap (algebraMap R S) q = p}) : (∃ z : M ⊗[R] S, q.val.asIdeal ∈ ((⊥ : Submodule S (S ⊗[R] M)).colon {TensorProduct.comm R M S z}).minimalPrimes) ↔ (∃ m : M, p.asIdeal ∈ ((⊥ : Submodule R M).colon {m}).minimalPrimes) ∧ (PrimeSpectrum.preimageOrderIsoFiber R S p q).asIdeal ∈ RingTheory.annihilatorAssociatedPrimes (p.asIdeal.Fiber S) (p.asIdeal.Fiber S)",
+  "branch": "newtargets-dag",
+  "by": "Q148",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-8308f9e1a"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8308f9e1a",
+  "group": "Q148",
+  "result": "fix",
+  "note": "Statement matches node and Stacks 05IG (flat.tex 3748-3767, N=S) clause by clause: FinitePresentation+Module.Flat, arbitrary M (own universe), q over p via subtype, WeakAss as minimalPrimes of colon on both sides (second-factor S-action via TensorProduct.comm, verified by compiled probe), fibre p.Fiber S with preimageOrderIsoFiber prime, exact-annihilator RingTheory.annihilatorAssociatedPrimes. Edge cases M=0, empty fibre, identity map, non-Noetherian R fine; no existing duplicate (searched side/live/Mathlib); sorry-only proof, plain imports = recorded proof-dep modules, 13 proof steps in docstring, lean.statement verbatim, only lean field changed vs live. H8 fault: both docstrings name the source place as 'Stacks Project, Algebra, Tag 05IG', but 05IG is in More on Flatness (flat.tex). FIX: fixes/WeaklyAssociatedTensorFlatFinitePresentation.lean changes only that chapter name in both docstrings; signature unchanged. nt_compile --json: delivered 1.6 s and fixed 1.7 s both clean; control copy errors."
  }
 }

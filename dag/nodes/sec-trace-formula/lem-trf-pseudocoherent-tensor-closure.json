@@ -256,5 +256,27 @@
   "group": "Q31",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-4cfdaf884 (reviewer sub-agent of L); spot-checked: Read the item, all 11 cited node statements, Stacks 0DJE (more-algebra.tex:16487) and Definition definition-pseudo-coherent (line 15874), plus the parent lem-trf-local-derived-tensor-nonvanishing. The statement matches 0DJE clauses (1) and (2) exactly: arbitrary ring, upper cohomology bounds, t=max(m+a,n+b), no hypothesis added. The proof is correct. Step 1 bounds the derived tensor above using a good truncation, the bounded-flat replacement that keeps the term bound (on the one-point site), K-flatness and a total-degree count. Step 2 handles the cases n>a or m>b with the zero witness. Step 3 gets the cone bounds from the long exact sequence: H^i(C_alpha)=0 for i>=n, and H^j(Q)=0 for j>b because b>=m. Step 4 tensors the two cone triangles; I recomputed the signs of the flip: it is a chain involution. Its descent through K-flat models is terse but valid, since Q is bounded finite free and beta lifts to a chain map. Step 5 gets iso above t and surjective at t. Step 6 builds a finite basis of Tot(P⊗Q). Step 7 shows the tensor of bounded-above finite-free complexes is bounded-above finite-free (finite range k-d<=p<=c), with no perfectness or Noetherian assumption. Edge cases checked: R=0, zero objects, n=a and m=b, complexes unbounded below, and Z/4 with Z/2 (infinite Tor, still bounded above). No new nodes; rg for 0DJE, tensor-pseudo-coherent and tensor statements about pseudo-coherence found no duplicate. Accepted all three declared tool_uses (lem-pc-kflat-bounded-flat-replacement, lem-pc-module-bounded-flat-kflat, lem-pc-derived-tensor-second-factor-functor) as generic tools. No SGA cited. Nothing changed."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.PseudoCoherentTensorClosure",
+  "declaration": "DerivedCategory.isMPseudoCoherent_tensor",
+  "declarations": [
+   "DerivedCategory.isMPseudoCoherent_tensor",
+   "DerivedCategory.isPseudoCoherent_tensor"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/PseudoCoherentTensorClosure.lean",
+  "statement": "theorem isMPseudoCoherent_tensor (R : Type u) [CommRing R] [HasDerivedCategory.{w} (ModuleCat.{u} R)] (K L : DerivedCategory (ModuleCat.{u} R)) (n m a b : ℤ) (hK : IsMPseudoCoherent n K) (hKa : ∀ i : ℤ, a < i → IsZero ((homologyFunctor (ModuleCat.{u} R) i).obj K)) (hL : IsMPseudoCoherent m L) (hLb : ∀ j : ℤ, b < j → IsZero ((homologyFunctor (ModuleCat.{u} R) j).obj L)) : IsMPseudoCoherent (max (m + a) (n + b)) (K ⊗ L)",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-87d142660",
+  "group": "N8",
+  "result": "pass",
+  "note": "Statement renders Stacks 0DJE (1),(2) exactly: IsMPseudoCoherent n K, strict H^i bounds a,b, IsMPseudoCoherent m L ⊢ IsMPseudoCoherent (max (m+a) (n+b)) (K ⊗ L); pseudo⊗pseudo pseudo. K ⊗ L is the canonical FromJoel K-flat DerivedMonoidal instance (#synth: instMonoidalCategory_weilConjectures, ModuleCat.hasFunctorialFlatResolution R), the same as citer lem-trf-local-derived-tensor-nonvanishing. No extra hypotheses. Universes: R and ModuleCat share u (required by the monoidal instance), derived-category w free. Recorded dep decls IsMPseudoCoherent/IsPseudoCoherent used; no new defs or duplicates; dep nodes byte-identical to side; plain imports = proof_dep modules. Docstrings have source, blueprint id and proof steps 1-7. Lines ≤100; lean.statement verbatim; sorry only. nt_compile --json clean in 2.0 s; a broken control copy reported its errors."
  }
 }

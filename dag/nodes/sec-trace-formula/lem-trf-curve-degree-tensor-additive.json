@@ -233,5 +233,23 @@
   "group": "Q14",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-d526ff769 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and the Stacks varieties.tex places 0AYR, 0AYV, the multiplicity paragraph, 0AYW and 0AYX, plus modules.tex 01CD. The item is exactly 0AYX with both ranks equal to one. It keeps proper, dimension at most one including the empty scheme, and arbitrary invertible L and M, and it is not weakened. lem-trf-degree-weighted-irreducible-components is 0AYW with n=1, and its side claims are true: the list of components is finite, each C_i is integral, proper and of dimension one, and each m_i is at least one. lem-trf-curve-euler-tensor-generic-rank is 0AYV with n=1. I tested both new nodes on small cases: the empty scheme, an Artinian scheme, the double line P1 over k[eps] where deg O(d)=2d, a curve with an embedded point, F=0, F=O^a, a skyscraper sheaf, and P1. Neither new node restates the item or duplicates an existing node; lem-pc-degree-base-change covers only M=O(D). Step 1, the coherence argument through 01XZ and the finite-type lemma, is correct. Step 4 is correctly marked elementary. One repairable fault (C4/C5) is in steps 2 and 3. They argued inline that L tensor M and the pullbacks are invertible. Step 3 also identified (L tensor M) restricted to C_i with L_i tensor M_i through an affine formula for the pullback. The cited def-pc-module-pullback and def-pur-sheaf-tensor-product do not state that formula; it is Schemes 01I9. The DAG already has the reviewed node lem-weil-pbc-invertible-pullback-tensor (Stacks 01CD and 01CT): its clause (1) gives invertibility and its clause (2) gives j^*(L tensor M) isomorphic to j^*L tensor j^*M. In fixes/dag/nodes/sec-trace-formula/lem-trf-curve-degree-tensor-additive.json, steps 2 and 3 now cite that node. I also updated the source places of steps 2 and 3, set proof_deps to the union of all uses, and added the node to split_report.tool_uses. It is already accepted as a tool for lem-trf-fibre-degree-ample-criterion in the same unit, sk-i-curve-zero. Accepted tool uses: pqf-lem-coherent-ft-locnoeth, lem-weil-pbc-finite-type-over-noetherian (a Mathlib leaf) and lem-weil-pbc-invertible-pullback-tensor. No statement changed and no SGA source is used.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CurveDegreeTensorAdditive",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.degree_tensorObj_of_topologicalKrullDim_le_one",
+  "file": "lean/Sheaf/AlgebraicGeometry/CurveDegreeTensorAdditive.lean",
+  "statement": "theorem degree_tensorObj_of_topologicalKrullDim_le_one (k : Type u) [Field k] {X : Scheme.{u}} [X.Over (Spec (.of k))] [IsProper (X ↘ Spec (.of k))] (hdim : topologicalKrullDim X ≤ 1) (L M : X.Modules) [L.IsInvertible] [M.IsInvertible] : (L ⊗ M).degree k = L.degree k + M.degree k",
+  "branch": "newtargets-dag",
+  "by": "Q132",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-369934cb4",
+  "group": "Q132",
+  "result": "pass",
+  "note": "Item states Stacks 0AYX rank-one: Field k, X.Over Spec k, IsProper, topologicalKrullDim X ≤ 1, L M IsInvertible ⊢ (L ⊗ M).degree k = L.degree k + M.degree k; no extra hypotheses; single universe forced by the recorded degree API. L ⊗ M checked rfl-equal to the recorded cochainModulesMonoidal tensor; degree rfl-unfolds to χ(L)−χ(O_X). Upstream degree_tensorObj is smooth-only (RiemannRoch.lean:249-250), so the new decl is justified; no other general version found. Node differs from live only in lean; statement verbatim; Q54 earlier attempt was RETURNed, nothing landed. Docstrings carry 0AYX, the blueprint id and all 4 steps; imports are the recorded statement + proof-dep modules. nt_compile --json clean 1.8 s (control error surfaces). Edge cases (empty, dim 0, nonreduced, disconnected) admitted. Advisory only: second-reading section is a worker self-check."
  }
 }
