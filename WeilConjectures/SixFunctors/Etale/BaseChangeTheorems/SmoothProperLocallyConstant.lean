@@ -6,9 +6,9 @@ Authors: Claude
 module
 
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.SmoothProperSpecialization
-public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.StrictlyHenselianUnit
+
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.CospecializationSections
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.StrictlyHenselianSections
 public import WeilConjectures.ConstructibleSheaf.SpecializationCriterion
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Proper
 
@@ -113,25 +113,6 @@ lemma Etale.unit_app_comp_lowerStar_map_baseChange_app {X X' T T' : Scheme.{u}} 
     Etale.baseChangeCounitStep_app]
   exact Adjunction.unit_app_comp_map_mate_app _ _ _ _ _ M
 
-section TempInterface
-
--- TEMP: interface of `CospecializationSections` and `StrictlyHenselianSections` (in progress)
-
-variable {Λ} in
-/-- TEMP -/
-theorem Etale.isIso_globalSectionsUpperStarMap_homology_of_isIso_unit (R : Type u) [CommRing R]
-    [IsStrictlyHenselianLocalRing R] {Ω : Type u} [Field Ω] [IsSepClosed Ω]
-    (t : Spec (.of Ω) ⟶ Spec (.of R))
-    (K : DerivedCategory.Plus (Sheaf (Spec (.of R)).smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hK : IsIso (D+((closedGeometricPoint R)^*[ModuleCat.{u + 1} Λ]).map
-      ((Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) t).unit.app K)))
-    (q : ℤ) :
-    IsIso (Etale.globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) t
-      ((DerivedCategory.Plus.homologyFunctor _ q).obj K)) :=
-  sorry
-
-end TempInterface
-
 
 /-- **Units along the base from units along the source.** For a commutative square
 `h ≫ π = π' ≫ t` of schemes whose base-change morphism is an isomorphism at `M`, a functor `Φ`
@@ -157,21 +138,6 @@ lemma Etale.isIso_map_unit_app_lowerStar_of_isIso_map_lowerStar_map_unit
   exact IsIso.of_isIso_comp_right _ (Φ.map (R+((t)_*[ModuleCat.{u + 1} Λ]).map
     ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq).app M)))
 
-/-- `AlgebraicGeometry.Etale.globalSectionsUpperStarMap` is an isomorphism at a sheaf as soon as
-it is at an isomorphic sheaf. -/
-lemma Etale.isIso_globalSectionsUpperStarMap_of_iso {X Y : Scheme.{u}} (m : X ⟶ Y)
-    {G G' : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (e : G ≅ G')
-    (h : IsIso (Etale.globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) m G')) :
-    IsIso (Etale.globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) m G) := by
-  have hn := Etale.globalSectionsUpperStarMap_naturality m e.hom
-  have : IsIso (Etale.globalSectionsUpperStarMap (ModuleCat.{u + 1} Λ) m G ≫
-      (Sheaf.Γ X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).map
-        ((Etale.upperStar (ModuleCat.{u + 1} Λ) m).map e.hom)) := by
-    rw [← hn]
-    infer_instance
-  exact IsIso.of_isIso_comp_right _ ((Sheaf.Γ X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).map
-    ((Etale.upperStar (ModuleCat.{u + 1} Λ) m).map e.hom))
-
 /-- **Higher direct images of a smooth proper morphism over a strictly local base.** Let
 `π : X ⟶ Spec R` be smooth and proper over a strictly henselian local ring, `t : Spec Ω ⟶ Spec R`
 a geometric point, and `F` a locally constant sheaf of modules over a coefficient ring killed by
@@ -196,7 +162,6 @@ theorem Etale.isIso_globalSectionsUpperStarMap_homology_lowerStar_of_smooth_of_i
           ((DerivedCategory.Plus.singleFunctor _ 0).obj F)))) := by
   have := Etale.isIso_upperStar_map_lowerStar_map_unit_of_smooth_of_isProper Λ π
     (IsPullback.of_hasPullback t π) N hN₀ hN hNR (IsPullback.of_hasPullback π _) F
-    (Etale.isIso_upperStar_map_unit_constantSheaf_of_isStrictlyHenselianLocalRing Λ R t)
   have := Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring Λ
     (isAddTorsion_of_natCast_eq_zero N hN₀ hN) (IsPullback.of_hasPullback t π).flip
   exact Etale.isIso_globalSectionsUpperStarMap_homology_of_isIso_unit R t _
@@ -232,7 +197,7 @@ theorem Etale.isIso_globalSectionsUpperStarMap_upperStar_homology_of_smooth_of_i
   have := Etale.isIso_globalSectionsUpperStarMap_homology_lowerStar_of_smooth_of_isProper Λ
     (strictHenselization s) t (pullback.snd f g) N hN₀ hN (by simpa using hNY.map g.appTop.hom)
     ((pullback.fst f g)^*[ModuleCat.{u + 1} Λ].obj F) q
-  exact Etale.isIso_globalSectionsUpperStarMap_of_iso Λ t
+  exact @Etale.isIso_globalSectionsUpperStarMap_of_iso _ _ _ _ t _ _ (Iso.symm
     (((Etale.upperStar (ModuleCat.{u + 1} Λ) g).mapDerivedCategoryPlusHomologyFunctorIso q).app
         (R+((f)_*[ModuleCat.{u + 1} Λ]).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) ≪≫
       (DerivedCategory.Plus.homologyFunctor _ q).mapIso
@@ -240,7 +205,7 @@ theorem Etale.isIso_globalSectionsUpperStarMap_upperStar_homology_of_smooth_of_i
             ((DerivedCategory.Plus.singleFunctor _ 0).obj F)) ≪≫
           R+((pullback.snd f g)_*[ModuleCat.{u + 1} Λ]).mapIso
             ((((pullback.fst f g)^*[ModuleCat.{u + 1} Λ]).mapDerivedCategoryPlusSingleFunctor
-              0).app F))) this
+              0).app F)))) this
 
 /-- **Higher direct images of a smooth proper morphism are finite locally constant**
 ([SGA 4, Exp. XVI, Cor. 2.2], [SGA 4½, Arcata, V, Thm. 3.1]). Let `k` be a field, `Λ` a finite
@@ -277,8 +242,8 @@ theorem Etale.isFiniteLocallyConstantSheaf_homology_rightDerivedLowerStar_of_smo
     bijective_cospecializationMap_of_isIso_globalSectionsUpperStarMap s t _ ?_
   have := Etale.isIso_globalSectionsUpperStarMap_upperStar_homology_of_smooth_of_isProper Λ f N
     hN₀.ne' hN hNY F s t q
-  exact Etale.isIso_globalSectionsUpperStarMap_of_iso Λ t
+  exact @Etale.isIso_globalSectionsUpperStarMap_of_iso _ _ _ _ t _ _ (Iso.symm
     ((strictLocalizationToBase s)^*[ModuleCat.{u + 1} Λ].mapIso
-      (Etale.homologyRightDerivedLowerStarSingleIsoPlus f F q)) this
+      (Etale.homologyRightDerivedLowerStarSingleIsoPlus f F q))) this
 
 end AlgebraicGeometry

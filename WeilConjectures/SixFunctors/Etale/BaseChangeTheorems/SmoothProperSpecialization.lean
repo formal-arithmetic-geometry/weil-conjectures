@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.StrictlyHenselianLift
 public import WeilConjectures.ConstructibleSheaf.Pullback
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField.ClosedOpen
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
--- TEMP public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.StrictlyHenselianUnit
+public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.StrictlyHenselianUnit
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
 public import WeilConjectures.SixFunctors.OpenClosed.Conservative
 
@@ -71,6 +71,23 @@ lemma isAddTorsion_of_natCast_eq_zero {S : Type*} [Ring S] (N : ℕ) (hN₀ : N 
   isOfFinAddOrder_iff_nsmul_eq_zero.2 ⟨N, Nat.pos_of_ne_zero hN₀, by
     rw [nsmul_eq_mul, hN, zero_mul]⟩
 
+/-- In a commutative square `a ≫ b = c ≫ d` whose right-hand legs `b` and `d` are isomorphisms,
+`a` is an isomorphism if and only if `c` is. -/
+lemma _root_.CategoryTheory.isIso_iff_of_comp_eq_comp_of_isIso_right {C : Type*} [Category* C]
+    {W X Y Z : C} {a : W ⟶ X} {b : X ⟶ Z} {c : W ⟶ Y} {d : Y ⟶ Z} {e : W ⟶ Z}
+    [IsIso b] [IsIso d] (h₁ : e = a ≫ b) (h₂ : e = c ≫ d) : IsIso a ↔ IsIso c := by
+  constructor
+  · intro
+    have : IsIso (c ≫ d) := by
+      rw [← h₂, h₁]
+      infer_instance
+    exact IsIso.of_isIso_comp_right c d
+  · intro
+    have : IsIso (a ≫ b) := by
+      rw [← h₁, h₂]
+      infer_instance
+    exact IsIso.of_isIso_comp_right a b
+
 /-- **Units across a base-change isomorphism.** For a commutative square `sq` whose base-change
 morphism is an isomorphism at `f^* L`, a functor `Φ` out of `D⁺(Y'_ét)` sends the pullback along
 `g` of the unit `L ⟶ Rf_* f^* L` to an isomorphism if and only if it sends the unit
@@ -87,26 +104,9 @@ lemma Etale.isIso_map_upperStar_map_unit_iff {X' X Y' Y : Scheme.{u}} {g' : X' �
         ((derivedUpperStarLowerStarAdjunctionPlus _ f).unit.app L))) ↔
       IsIso (Φ.map ((derivedUpperStarLowerStarAdjunctionPlus _ f').unit.app
         (D+((g)^*[ModuleCat.{u + 1} Λ]).obj L))) := by
-  have h := congrArg Φ.map (Etale.upperStar_map_unit_comp_baseChange_app Λ sq L)
-  rw [Φ.map_comp, Φ.map_comp] at h
-  constructor
-  · intro
-    have : IsIso (Φ.map ((derivedUpperStarLowerStarAdjunctionPlus _ f').unit.app
-        (D+((g)^*[ModuleCat.{u + 1} Λ]).obj L)) ≫ Φ.map (R+((f')_*[ModuleCat.{u + 1} Λ]).map
-          ((pullbackSquareComparison _ sq).hom.app L))) := by
-      rw [← h]
-      infer_instance
-    exact IsIso.of_isIso_comp_right _ (Φ.map (R+((f')_*[ModuleCat.{u + 1} Λ]).map
-      ((pullbackSquareComparison _ sq).hom.app L)))
-  · intro
-    have : IsIso (Φ.map (D+((g)^*[ModuleCat.{u + 1} Λ]).map
-        ((derivedUpperStarLowerStarAdjunctionPlus _ f).unit.app L)) ≫
-          Φ.map ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq).app
-            (D+((f)^*[ModuleCat.{u + 1} Λ]).obj L))) := by
-      rw [h]
-      infer_instance
-    exact IsIso.of_isIso_comp_right _ (Φ.map ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq).app
-      (D+((f)^*[ModuleCat.{u + 1} Λ]).obj L)))
+  exact isIso_iff_of_comp_eq_comp_of_isIso_right (Φ.map_comp _ _)
+    ((congrArg Φ.map
+      (Etale.upperStar_map_unit_comp_baseChange_app Λ sq L)).trans (Φ.map_comp _ _))
 
 /-- **Pullbacks along a jointly surjective family are conservative on `D⁺`.** A morphism `φ` of
 `D⁺(X_ét)` is an isomorphism as soon as its pullbacks along a jointly surjective family of
@@ -143,11 +143,7 @@ theorem Etale.isIso_upperStar_map_unit_upperStar_constantSheaf_of_smooth
     (hNR : IsUnit (N : Γ(Spec (.of R), ⊤))) (v : V ⟶ U)
     (w : V ⟶ Spec (.of (IsLocalRing.ResidueField R)))
     (hvw : v ≫ e = w ≫ closedGeometricPoint R)
-    (M : ModuleCat.{u + 1} Λ) (hP1 : ∀ M : ModuleCat.{u + 1} Λ, IsIso
-      (D+((closedGeometricPoint R)^*[ModuleCat.{u + 1} Λ]).map
-      ((Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) t).unit.app
-        ((DerivedCategory.Plus.singleFunctor _ 0).obj
-          ((constantSheaf (Spec (.of R)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M))))) :
+    (M : ModuleCat.{u + 1} Λ) :
     IsIso (D+((v)^*[ModuleCat.{u + 1} Λ]).map
       ((Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) hU).unit.app
         (D+((e)^*[ModuleCat.{u + 1} Λ]).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj
@@ -163,7 +159,7 @@ theorem Etale.isIso_upperStar_map_unit_upperStar_constantSheaf_of_smooth
         eqToIso (by rw [hvw]) ≪≫
         Etale.upperStarPlusComp (ModuleCat.{u + 1} Λ) w (closedGeometricPoint R)),
     Functor.comp_map]
-  have := hP1 M
+  have := Etale.isIso_upperStar_map_unit_constantSheaf_of_isStrictlyHenselianLocalRing Λ R t M
   infer_instance
 
 /-- A functor `Φ` sends the component of a natural transformation `α` at `K` to an isomorphism
@@ -191,12 +187,7 @@ theorem Etale.isIso_upperStar_map_unit_of_smooth {X Xt Z : Scheme.{u}} (π : X �
     (hN₀ : N ≠ 0) (hN : (N : Λ) = 0) (hNR : IsUnit (N : Γ(Spec (.of R), ⊤))) (i : Z ⟶ X)
     (πs : Z ⟶ Spec (.of (IsLocalRing.ResidueField R)))
     (hi : i ≫ π = πs ≫ closedGeometricPoint R)
-    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsLocallyConstantSheaf F]
-    (hP1 : ∀ M : ModuleCat.{u + 1} Λ, IsIso
-      (D+((closedGeometricPoint R)^*[ModuleCat.{u + 1} Λ]).map
-      ((Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) t).unit.app
-        ((DerivedCategory.Plus.singleFunctor _ 0).obj
-          ((constantSheaf (Spec (.of R)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M))))) :
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsLocallyConstantSheaf F] :
     IsIso (D+((i)^*[ModuleCat.{u + 1} Λ]).map
       ((Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) h).unit.app
         ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) := by
@@ -244,7 +235,7 @@ theorem Etale.isIso_upperStar_map_unit_of_smooth {X Xt Z : Scheme.{u}} (π : X �
   rw [← NatTrans.isIso_map_app_iff_of_iso _ _ eK]
   refine Etale.isIso_upperStar_map_unit_upperStar_constantSheaf_of_smooth Λ (𝒰.f j ≫ π)
     ((IsPullback.of_hasPullback h (𝒰.f j)).paste_horiz sq) N hN₀ hN hNR _
-    (pullback.snd (𝒰.f j) i ≫ πs) ?_ M hP1
+    (pullback.snd (𝒰.f j) i ≫ πs) ?_ M
   rw [reassoc_of% pullback.condition, hi, Category.assoc]
 
 /-- **The specialization isomorphism over a strictly local base** (Step 1 of the blueprint proof
@@ -265,19 +256,14 @@ theorem Etale.isIso_upperStar_map_lowerStar_map_unit_of_smooth_of_isProper
     (hN₀ : N ≠ 0) (hN : (N : Λ) = 0) (hNR : IsUnit (N : Γ(Spec (.of R), ⊤))) {i : Xs ⟶ X}
     {πs : Xs ⟶ Spec (.of (IsLocalRing.ResidueField R))}
     (sqs : IsPullback i πs π (closedGeometricPoint R))
-    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsLocallyConstantSheaf F]
-    (hP1 : ∀ M : ModuleCat.{u + 1} Λ, IsIso
-      (D+((closedGeometricPoint R)^*[ModuleCat.{u + 1} Λ]).map
-      ((Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) t).unit.app
-        ((DerivedCategory.Plus.singleFunctor _ 0).obj
-          ((constantSheaf (Spec (.of R)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M))))) :
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsLocallyConstantSheaf F] :
     IsIso (D+((closedGeometricPoint R)^*[ModuleCat.{u + 1} Λ]).map
       (R+((π)_*[ModuleCat.{u + 1} Λ]).map
         ((Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) h).unit.app
           ((DerivedCategory.Plus.singleFunctor _ 0).obj F)))) := by
   have := Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring Λ
     (isAddTorsion_of_natCast_eq_zero N hN₀ hN) sqs
-  have := Etale.isIso_upperStar_map_unit_of_smooth Λ π sq N hN₀ hN hNR i πs sqs.w F hP1
+  have := Etale.isIso_upperStar_map_unit_of_smooth Λ π sq N hN₀ hN hNR i πs sqs.w F
   have hnat := (Etale.baseChange (ModuleCat.{u + 1} Λ) sqs.toCommSq).naturality
     ((Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) h).unit.app
       ((DerivedCategory.Plus.singleFunctor _ 0).obj F))
@@ -304,12 +290,7 @@ theorem Etale.isIso_upperStar_map_lowerStarPlusTransition_of_smooth_of_isProper
     {πs : Xs ⟶ Spec (.of (IsLocalRing.ResidueField R))}
     (sqs : IsPullback i πs π (closedGeometricPoint R)) (h' : Xt ⟶ Spec (.of R))
     (w : h ≫ π = h') (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [IsLocallyConstantSheaf F]
-    (hP1 : ∀ M : ModuleCat.{u + 1} Λ, IsIso
-      (D+((closedGeometricPoint R)^*[ModuleCat.{u + 1} Λ]).map
-      ((Etale.derivedUpperStarLowerStarAdjunctionPlus (ModuleCat.{u + 1} Λ) t).unit.app
-        ((DerivedCategory.Plus.singleFunctor _ 0).obj
-          ((constantSheaf (Spec (.of R)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M))))) :
+    [IsLocallyConstantSheaf F] :
     IsIso (D+((closedGeometricPoint R)^*[ModuleCat.{u + 1} Λ]).map
       (Etale.lowerStarPlusTransition Λ h π h' w
         ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) := by
@@ -320,7 +301,7 @@ theorem Etale.isIso_upperStar_map_lowerStarPlusTransition_of_smooth_of_isProper
   erw [Category.comp_id]
   rw [Functor.map_comp]
   have := Etale.isIso_upperStar_map_lowerStar_map_unit_of_smooth_of_isProper Λ π sq N hN₀ hN
-    hNR sqs F hP1
+    hNR sqs F
   infer_instance
 
 end AlgebraicGeometry
