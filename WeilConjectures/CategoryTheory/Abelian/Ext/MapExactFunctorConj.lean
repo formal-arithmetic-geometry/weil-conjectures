@@ -71,6 +71,14 @@ lemma mk₀CompMk₀_comp_mk₀_right {X' X Y Y' Y'' : C} {n : ℕ} (a : X' ⟶ 
     mk₀CompMk₀ a (y.comp (mk₀ b) (add_zero n)) b' = mk₀CompMk₀ a y (b ≫ b') := by
   simp [mk₀CompMk₀, mk₀_comp_mk₀]
 
+/-- `(a ∘ x ∘ e) ∘ (e⁻¹ ∘ y ∘ d) = a ∘ (x ∘ y) ∘ d`. -/
+lemma mk₀CompMk₀_comp_mk₀CompMk₀ {X' X Y Y' Z Z' : C} {i j k : ℕ} (a : X' ⟶ X)
+    (x : Ext.{w} X Y i) (e : Y ≅ Y') (y : Ext.{w} Y Z j) (d : Z ⟶ Z') (h : i + j = k) :
+    (mk₀CompMk₀ a x e.hom).comp (mk₀CompMk₀ e.inv y d) h = mk₀CompMk₀ a (x.comp y h) d := by
+  rw [mk₀CompMk₀, comp_assoc (mk₀ a) _ _ (zero_add i) h (by lia), comp_assoc_of_second_deg_zero,
+    mk₀CompMk₀, mk₀_comp_mk₀_assoc, e.hom_inv_id, mk₀_id_comp, mk₀CompMk₀,
+    comp_assoc_of_third_deg_zero]
+
 end Comp
 
 variable {C : Type u} [Category.{v} C] [Abelian C] {D : Type u'} [Category.{v'} D] [Abelian D]

@@ -9147,6 +9147,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.ExtFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Extension
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ExtensionByZero
 public import WeilConjectures.SixFunctors.ProEtale.Adic.FiniteAdicCup
+public import WeilConjectures.SixFunctors.ProEtale.Adic.FiniteAdicCupLift
 public import WeilConjectures.SixFunctors.ProEtale.Adic.FiniteAdicDuality
 public import WeilConjectures.SixFunctors.ProEtale.Adic.FiniteAdicEtale
 public import WeilConjectures.SixFunctors.ProEtale.Adic.FiniteAdicEtaleEquiv
