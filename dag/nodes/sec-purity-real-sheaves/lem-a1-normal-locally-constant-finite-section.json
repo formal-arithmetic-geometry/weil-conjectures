@@ -193,5 +193,23 @@
   "group": "ND",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-d151372e5 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and the unit and chapter records. Sources checked: Bhatt–Scholze Def. 7.3.1(1),(3), Lemma 7.3.9 and its proof (pp. 66–68), and Lemma 7.4.10 and its proof (p. 71); Stacks properties.tex Tag 0BQ3 (lemma-normal-geometrically-unibranch). lem-a1-proetale-local-system-representability is the Loc_X ⊂ Cov_X half of 7.3.9: locally Noetherian is a special case of the standing hypothesis, the S_i may be arbitrary sets, and the lifting is unique for all valuation rings. lem-a1-normal-geometric-cover-components is 7.4.10 plus 0BQ3. I checked its extra conclusions myself: components are open because Z is locally Noetherian, the lifting property restricts to a component because Spec R is connected, and a finite etale component maps onto connected X because its image is open and closed. Both statements hold on small cases: Spec k, a singleton or infinite constant sheaf, Z empty, and a proper open that fails lifting. Neither new node restates the item. Steps 1 and 3 check every hypothesis against what the cited statements say. Step 2 uses joint surjectivity of pro-etale covers, which follows from the covering definition in def-weil-pbc-proetale-site, and step 4 uses the etale-in-pro-etale inclusion in def-weil-pbc-site-comparison-morphism; both are genuinely elementary. Searching the DAG with rg and the blueprint with blueprint_refs.py found no duplicate. The steps cite only own-unit nodes and definitions, with no SGA and no cycle; the item statement is unchanged and no target is weakened. Batch-5 check: both flagged citations are of def-trf-valuation-ring, a status-mathlib definition depending only on def-weil-pbc-normal-ring and def-weil-field. It is not a step of the trace formula or Poincaré duality proofs, so I accepted it. No fixes, no dropped nodes, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.SecPurity.NormalLocallyConstantFiniteSection",
+  "declaration": "AlgebraicGeometry.exists_finiteEtale_section_of_normal_locallyConstant",
+  "statement": "theorem exists_finiteEtale_section_of_normal_locallyConstant (X : Scheme.{u}) [Nonempty X] [ConnectedSpace X] [IsLocallyNoetherian X] [CompactSpace X] (hnormal : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x)) (F : Sheaf (Scheme.ProEt.topology X) (Type (u + 1))) (hlocal : ∃ (𝒰 : Scheme.Cover Scheme.proetalePrecoverage X), ∀ i : 𝒰.I₀, ∃ (S : Type (u + 1)), Nonempty ((Functor.sheafPullbackConstruction.sheafPullback (MorphismProperty.Over.pullback @WeaklyEtale ⊤ (𝒰.f i)) (Type (u + 1)) (Scheme.ProEt.topology X) (Scheme.ProEt.topology (𝒰.X i))).obj F ≅ (constantSheaf (Scheme.ProEt.topology (𝒰.X i)) (Type (u + 1))).obj S)) (hnonempty : ∃ (𝒱 : Scheme.Cover Scheme.proetalePrecoverage X), ∀ j : 𝒱.I₀, Nonempty (F.obj.obj (op (MorphismProperty.Over.mk (⊤ : MorphismProperty Scheme) (𝒱.f j) (Scheme.proetalePrecoverage_le_precoverage_weaklyEtale X 𝒱.mem₀ ⟨j⟩))))) : ∃ (Y : Scheme.ProEt X), IsFinite Y.hom ∧ Etale Y.hom ∧ Surjective Y.hom ∧ Nonempty (F.obj.obj (op Y))",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-18",
+  "existing": false,
+  "file": "lean/Sheaf/SecPurity/NormalLocallyConstantFiniteSection.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d82d226ec",
+  "group": "NC",
+  "result": "pass",
+  "note": "Every clause of the node matches the Lean with nothing missing and nothing stronger: nonempty/connected/locally Noetherian/quasi-compact instances, stalkwise domain plus integrally closed, F a Type (u+1)-valued sheaf on Scheme.ProEt.topology X, local constancy via sheafPullback along Over.pullback plus constantSheaf over a proetalePrecoverage cover, local nonemptiness over a second cover, conclusion a Y : ProEt X with IsFinite, Etale and Surjective structure map and a section. The hand-written pullback is literally the body of ProEtale.upperStar, which cannot be used because it needs Abelian coefficients (checked: Abelian (Type (u+1)) does not synthesize), so it is not a duplicate notion. Supported by Bhatt-Scholze Lemma 7.3.9 and the proof of Lemma 7.4.10. lean.statement equals the file signature verbatim; source and blueprint docstrings present; proof is sorry only, axioms are sorryAx plus the standard ones; report has the Worker report and Second reading by NC sections. nt_compile.py --json compiled the file cleanly in 1.6 s. No findings."
  }
 }
