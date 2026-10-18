@@ -10,9 +10,101 @@
  "stmt_deps": [
   "def-weil-pbc-simplicial-object"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $1_a$ for the identity transformation on $T^a$, including $1_0$ on the identity functor, and write $\\star$ for horizontal composition. Thus $d_i^n=1_i\\star e\\star1_{n-i}$ and $s_i^n=1_i\\star c\\star1_{n-i}$. These are natural transformations because whiskering a naturality square by a functor again gives a naturality square. We use the interchange identity $(\\alpha'\\circ\\alpha)\\star(\\beta'\\circ\\beta)=(\\alpha'\\star\\beta')\\circ(\\alpha\\star\\beta)$. To verify it directly, define $(\\alpha\\star\\beta)_x=\\alpha_{G'x}\\circ F(\\beta_x)$ for $\\alpha:F\\to F'$ and $\\beta:G\\to G'$. Expand the right side at $x$, move $F'(\\beta'_x)$ past $\\alpha_{G'x}$ using naturality of $\\alpha$ at $\\beta'_x$, and use functoriality of $F$. The result is $(\\alpha'\\circ\\alpha)_{G''x}\\circ F((\\beta'\\circ\\beta)_x)$, the left side. Horizontal composition is associative with these component formulas, and identities compose to identities; hence parentheses can be suppressed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0G5N opening calculation; interchange of Tag 003F (categories-lemma-properties-2-cat-cats), here verified directly from naturality."
+   }
+  },
+  {
+   "text": "Face--face relations: for $n\\geq1$ and $0\\leq i<j\\leq n+1$, expand both $d_i^n\\circ d_j^{n+1}$ and $d_{j-1}^n\\circ d_i^{n+1}$ and apply interchange from step 1. Each becomes $1_i\\star e\\star1_{j-i-1}\\star e\\star1_{n+1-j}$. Thus $d_i d_j=d_{j-1}d_i$. In the boundary case $j=i+1$ the middle identity is $1_0$, so the calculation still applies.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0G5N, lemma-godement, proof; notation from Example 0G5M."
+   }
+  },
+  {
+   "text": "Mixed relations away from the duplicated factor: for $n\\geq2$ and $0\\leq i<j\\leq n-1$, both $d_i^n\\circ s_j^{n-1}$ and $s_{j-1}^{n-2}\\circ d_i^{n-1}$ reduce by interchange to $1_i\\star e\\star1_{j-i-1}\\star c\\star1_{n-j-1}$. For $0\\leq j$ and $j+1<i\\leq n$, both $d_i^n\\circ s_j^{n-1}$ and $s_j^{n-2}\\circ d_{i-1}^{n-1}$ reduce to $1_j\\star c\\star1_{i-j-2}\\star e\\star1_{n-i}$. Every displayed exponent is nonnegative in its stated range.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0G5N, lemma-godement, proof; notation from Example 0G5M."
+   }
+  },
+  {
+   "text": "Mixed relations at the duplicated factor: for $n\\geq1$ and $0\\leq j\\leq n-1$, interchange rewrites $d_j^n\\circ s_j^{n-1}$ as $1_j\\star((e\\star1_1)\\circ c)\\star1_{n-j-1}$ and $d_{j+1}^n\\circ s_j^{n-1}$ as $1_j\\star((1_1\\star e)\\circ c)\\star1_{n-j-1}$. The two counit hypotheses identify both with the identity on $T^n=B_{n-1}$. This includes $n=1$, so the two faces after the degree-zero degeneracy both give $1_{B_0}$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0G5N, lemma-godement, proof; notation from Example 0G5M."
+   }
+  },
+  {
+   "text": "Degeneracy--degeneracy relations: fix $n\\geq1$, $0\\leq i\\leq j\\leq n-1$. If $i<j$, interchange makes both $s_i^n\\circ s_j^{n-1}$ and $s_{j+1}^n\\circ s_i^{n-1}$ equal to $1_i\\star c\\star1_{j-i-1}\\star c\\star1_{n-j-1}$. If $i=j$, these composites are respectively $1_i\\star((c\\star1_1)\\circ c)\\star1_{n-i-1}$ and $1_i\\star((1_1\\star c)\\circ c)\\star1_{n-i-1}$. Coassociativity identifies them. This proves the fifth simplicial relation, including the adjacent duplication in degree zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0G5N, lemma-godement, proof; notation from Example 0G5M."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-simplicial-operators-reconstruction] to $\\mathcal D=\\operatorname{Fun}(\\mathcal C,\\mathcal C)$, $U_n=B_n$ and the specified natural transformations. Steps 2--5 establish each of its five relations in every defined degree. Its reconstruction clause gives a simplicial object with precisely these degree objects and operators. No limits, colimits, or smallness of $\\mathcal C$ are needed: functors and transformations are taken in a containing universe.",
+   "uses": [
+    "lem-trf-simplicial-operators-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tags 0G5N opening proof sentence and 016B(2), lemma-characterize-simplicial-object."
+   }
+  },
+  {
+   "text": "Define $A_n:B_n\\to\\mathrm{id}_{\\mathcal C}$ as the horizontal composite of $n+1$ copies of $e$, so $A_0=e$. For $n\\geq1$, interchange yields $A_{n-1}\\circ d_i^n=A_n$: the deleted factor contributes $e$ and every other factor contributes its existing copy of $e$. Moreover $A_{n+1}\\circ s_i^n$ is the horizontal composite of copies of $e$ with $(e\\star e)\\circ c$ in position $i$. Since $e\\star e=e\\circ(e\\star1_1)$ by interchange, the counit equation gives $(e\\star e)\\circ c=e$. Hence $A_{n+1}\\circ s_i^n=A_n$ for all $n\\geq0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0G5N, lemma-godement, proof; notation from Example 0G5M."
+   }
+  },
+  {
+   "text": "The constant simplicial object with value $\\mathrm{id}_{\\mathcal C}$ sends every operator to its identity. The face and degeneracy equations of step 7 therefore say exactly that the family $A_n$ commutes with its faces and degeneracies. The morphism clause of [lem-trf-simplicial-operators-reconstruction] gives an augmentation $B_\\bullet\\to\\operatorname{const}(\\mathrm{id}_{\\mathcal C})$, whose degree-zero component is $e$.",
+   "uses": [
+    "lem-trf-simplicial-operators-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0G5N last paragraph and Tag 016B(3), lemma-characterize-simplicial-object."
+   }
+  },
+  {
+   "text": "Evaluate the constructed functor and augmentation at $x\\in\\mathcal C$. Evaluation preserves identities and composition componentwise, so the simplicial functor laws and augmentation squares remain valid. For a morphism $f:x\\to y$, the degree maps $T^{n+1}(f)$ commute with every simplicial operator and with $A_n$ by naturality of those transformations; identities and composites of $f$ are preserved by each $T^{n+1}$. Thus the evaluated augmented simplicial object is natural in $x$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/simplicial.tex",
+    "place": "Tag 0G5N, lemma-godement, proof; notation from Example 0G5M."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-simplicial-operators-reconstruction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Tag 0G5N, lemma-godement, proof; notation from Example 0G5M."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -55,10 +147,45 @@
    "results": "{\"t\": \"2026-10-18T21:16:18Z\", \"tool\": \"leansearch\", \"query\": \"Powers of an endofunctor with a coassociative comultiplication and counit form a simplicial resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Comonad.mk\", \"CategoryTheory.ComonObj.comul_counit_assoc\", \"CategoryTheory.ComonObj.comul_assoc_assoc\", \"CategoryTheory.ComonObj.termΔ\", \"CategoryTheory.ComonObj.mk\", \"CategoryTheory.Functor.map.instIsComon_Hom\", \"CoalgebraStruct.comul\", \"CategoryTheory.Monoidal.ComonFunctorCategoryEquivalence.functorObjObj_comon_comul\"], \"digest\": \"482d9cacd621b456\"}",
    "date": "2026-10-18",
    "verdict": "no match: Comonad.mk and Adjunction.toComonad define the comonad and its equations, not its augmented simplicial object. ExtraDegeneracy defines contraction data on an already supplied augmented simplicial object; Cech nerves require pullbacks and are different constructions. Read Monad/Basic.lean:61-83, Monad/Adjunction.lean:67-78, ExtraDegeneracy.lean:72-83,126-174; no general bar construction found by two semantic phrasings and whole-source grep."
+  },
+  {
+   "tool": "grep",
+   "query": "Godement|cobar|barConstruction|Comonad.*[Ss]implicial|[Ss]implicial.*[Cc]omonad",
+   "results": "{\"t\": \"2026-10-18T22:10:11Z\", \"tool\": \"grep\", \"query\": \"Godement|cobar|barConstruction|Comonad.*[Ss]implicial|[Ss]implicial.*[Cc]omonad\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: Comonad.mk and its counit lemmas provide the input axioms only. SimplicialObject, Augmented and const provide the target categories, not this construction. Read Monad/Basic.lean:60-84 and SimplicialObject/Basic.lean. The second semantic wording and whole-source bar/comonad grep found no general comonad simplicial construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "Comonad, SimplicialObject",
+   "results": "{\"t\": \"2026-10-18T22:10:12Z\", \"tool\": \"loogle\", \"query\": \"Comonad, SimplicialObject\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Comonad'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: Comonad.mk and its counit lemmas provide the input axioms only. SimplicialObject, Augmented and const provide the target categories, not this construction. Read Monad/Basic.lean:60-84 and SimplicialObject/Basic.lean. The second semantic wording and whole-source bar/comonad grep found no general comonad simplicial construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A comonad defines an augmented simplicial object whose terms are its iterated powers",
+   "results": "{\"t\": \"2026-10-18T22:10:12Z\", \"tool\": \"leanfinder\", \"query\": \"A comonad defines an augmented simplicial object whose terms are its iterated powers\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject.Augmented\", \"CategoryTheory.CosimplicialObject.Augmented\", \"CategoryTheory.SimplicialObject.Augmented.const\", \"CategoryTheory.CosimplicialObject.Augmented.const\", \"CategoryTheory.CosimplicialObject.instCategoryAugmented\", \"CategoryTheory.SimplicialObject.instCategoryAugmented\", \"CategoryTheory.CosimplicialObject\", \"CategoryTheory.CosimplicialObject.Augmented.point\"], \"digest\": \"abee7fb2ebc33842\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: Comonad.mk and its counit lemmas provide the input axioms only. SimplicialObject, Augmented and const provide the target categories, not this construction. Read Monad/Basic.lean:60-84 and SimplicialObject/Basic.lean. The second semantic wording and whole-source bar/comonad grep found no general comonad simplicial construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Counit and comultiplication satisfying the comonad axioms define a simplicial bar resolution",
+   "results": "{\"t\": \"2026-10-18T22:10:31Z\", \"tool\": \"leansearch\", \"query\": \"Counit and comultiplication satisfying the comonad axioms define a simplicial bar resolution\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Comonad.mk\", \"CategoryTheory.Comon\", \"CategoryTheory.Comonad.left_counit_assoc\", \"CategoryTheory.Comonad.right_counit\", \"CategoryTheory.ComonObj.counit\", \"CategoryTheory.Comonad.left_counit\", \"CategoryTheory.Comonad.ε\", \"CategoryTheory.Bicategory.Comonad.comul\"], \"digest\": \"1187a4b1c33780ff\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: Comonad.mk and its counit lemmas provide the input axioms only. SimplicialObject, Augmented and const provide the target categories, not this construction. Read Monad/Basic.lean:60-84 and SimplicialObject/Basic.lean. The second semantic wording and whole-source bar/comonad grep found no general comonad simplicial construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Iterating a counital coassociative endofunctor gives face and degeneracy maps forming a simplicial object",
+   "results": "{\"t\": \"2026-10-18T22:10:32Z\", \"tool\": \"leanfinder\", \"query\": \"Iterating a counital coassociative endofunctor gives face and degeneracy maps forming a simplicial object\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.SimplicialObject\", \"CategoryTheory.CosimplicialObject\", \"CategoryTheory.SimplicialObject.σ\", \"SimplexCategory.II\", \"CategoryTheory.SimplicialObject.δ\", \"SimplicialObject.Split\", \"CategoryTheory.SimplicialObject.σ_def\", \"CategoryTheory.SimplicialObject.δ_def\"], \"digest\": \"eb2d8875c1e70dde\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: Comonad.mk and its counit lemmas provide the input axioms only. SimplicialObject, Augmented and const provide the target categories, not this construction. Read Monad/Basic.lean:60-84 and SimplicialObject/Basic.lean. The second semantic wording and whole-source bar/comonad grep found no general comonad simplicial construction."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-adjunction-standard-simplicial-homotopy",
@@ -89,5 +216,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-comonad-simplicial-object",
+  "worker": "stage1",
+  "summary": "Checked the generic comonad statement against Stacks 0G5M/0G5N; wrote the interchange calculation, all five simplicial relations, explicit augmentation components and evaluation naturality. Added only the generic operator reconstruction theorem 016B, with no proof. No statement correction; searched the full DAG, blueprint and project Lean source and audited Mathlib candidates.",
+  "blueprint": "Preserves the ancestor lem-trf-local-term-locality proof (1)--(2) nearby-cycle/cotangent-resolution support route recorded in blueprint.from; realizes the entire foundational comonad input to lem-trf-adjunction-standard-simplicial-homotopy via Stacks 0G5N, used by 08NC. Steps 1--5 give 0G5N simplicial relations, step 6 its use of 016B, steps 7--8 its augmentation, step 9 evaluation."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-faf179217",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-faf179217 (reviewer sub-agent of L); spot-checked: Read Stacks simplicial.tex 0G5M (example-godement), 0G5N (lemma-godement) with its full proof, and 016B (lemma-characterize-simplicial-object) (1)(a)-(e), (2), (3). The item statement is unchanged from live (unsplit; same stmt_deps) and matches 0G5N hypothesis by hypothesis: T,e,c are Y,d,s, the counit and coassociativity equations agree, and every degree is covered. I recomputed every step. Step 1: interchange law from naturality. Steps 2-5: all five relations by explicit words with checked index ranges; (c) uses the counits and (e) with i=j uses coassociativity. Step 6: new node applied in Fun(C,C), size handled by a containing universe. Step 7: A_n=e^{*(n+1)}, with (e*e)c=e from e*e=e(e*1_1) and the counit law. Step 8: the new node's morphism clause turns this into an augmentation. Step 9: naturality of evaluation. New node lem-trf-simplicial-operators-reconstruction: true, statement-only, self-contained, exactly 016B(2),(3), with all searches recorded. The pinned Mathlib only announces the GenRel equivalence (GeneratorsRelations/Basic.lean:18, NormalForms.lean:27), so the node is not a leaf. It is not a duplicate: simplex-presentation-faithful gives only faithfulness, godement-relations covers concrete module operators, monadic-bar-totalization is enriched/derived, and no blueprint node carries 0G5N or 016B. It is not a restatement of the item (D1). Blueprint from/via are correct. The route stays in unit sk-i-curve-zero, so no tool_uses. The parent's step 2 uses exactly the item's statement. No cycle, no SGA. Advisory: the inherited statement uses augmentation/const without a definition node; this is standard and not a split fault. No changes."
  }
 }
