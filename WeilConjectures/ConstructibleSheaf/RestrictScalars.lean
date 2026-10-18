@@ -100,6 +100,9 @@ instance : (coextendScalars K J).IsRightAdjoint :=
 
 variable {K J}
 
+-- Avoid searching for an irrelevant torsion-free instance in the counit proof.
+attribute [-simp] smul_eq_zero smul_right_inj
+  IsRegular.smul_right_inj IsRegular.smul_eq_zero_iff_right in
 /-- A sheaf of `R`-modules killed by `J` is the restriction of scalars of its coextension of
 scalars along `R ⟶ R ⧸ J`: the counit `Hom_R(R ⧸ J, F) ⟶ F` is an isomorphism. -/
 def restrictScalarsCoextendScalarsIso (F : Sheaf K (ModuleCat.{w} R))

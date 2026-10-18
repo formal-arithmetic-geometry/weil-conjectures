@@ -95,7 +95,9 @@ For `M` in `Dctf(X, Λ)` and `Q` in `Dctf(Z, Λ)` the canonical comparison
 
 `Rf_* M ⊠ Q ⟶ R(f × id_Z)_* (M ⊠ Q)`
 
-is an isomorphism. Here both external products are taken over `Spec k`.
+is an isomorphism. Here both external products are taken over `Spec k`. The hypotheses that `M`
+and `Q` lie in `Dctf` are those of the blueprint; the proof (through
+`AlgebraicGeometry.Etale.isIso_tensorBaseChangeMap`) does not use them.
 
 The base has to be a field and the exponent of `Λ` invertible: over the base `𝔸¹_k`, with
 `Z` the origin and `f` the inclusion of `𝔾_m`, the right-hand side vanishes while the

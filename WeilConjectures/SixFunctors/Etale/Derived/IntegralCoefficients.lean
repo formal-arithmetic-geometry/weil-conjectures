@@ -424,8 +424,11 @@ for the coefficient map `Λ ⟶ A_n = Λ ⧸ Iⁿ` from the integral stage to a 
 
 For `L ∈ Dᵇc(Y, Λ)` and a derived base change `L_n = L ⊗ᴸ_Λ A_n ∈ D(Y_ét, A_n)`, the exceptional
 inverse image commutes with the coefficient change:
-`(Rf^! L) ⊗ᴸ_Λ A_n ≅ Rf_n^! L_n`, read after restriction of scalars to `Λ`. (The comparison map
-of the blueprint is only asserted to exist.) -/
+`(Rf^! L) ⊗ᴸ_Λ A_n ≅ Rf_n^! L_n`, read after restriction of scalars to `Λ`.
+
+This is a known weakening of the blueprint node: the blueprint asserts that the specific
+transposed comparison map `β_{f,K}` is an isomorphism, compatibly with composition and with
+restriction to opens; here only the existence of some isomorphism is stated. -/
 theorem nonempty_iso_reductionModIdeal_rightDerivedUpperShriek {X Y : Scheme.{u}}
     (aY : Y ⟶ Spec (.of k)) [LocallyOfFiniteType aY] [QuasiCompact aY] (f : X ⟶ Y)
     [QuasiCompact f] [HasCompactification f] [(R(f)_![ModuleCat.{u + 1} Λ]).IsLeftAdjoint]

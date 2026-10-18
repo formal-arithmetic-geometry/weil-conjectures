@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekCompositionCoherence
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekInvertible
+public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarInternalHom
 
 /-!
 # The canonical maps of `Rf^!` under composition, for finite coefficients

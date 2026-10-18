@@ -8,6 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedOpenImmersion
 public import WeilConjectures.WeilSheaf.LowerShriek
+public import WeilConjectures.WeilSheaf.LowerStarComp
 public import WeilConjectures.WeilSheaf.OpenImmersion
 
 /-!
@@ -20,8 +21,6 @@ sheaves is the direct image `i_*`.
 
 - `AlgebraicGeometry.ProEtaleWeilSheaf.isIso_extensionByZeroToLowerStar`: `i_! ⟶ i_*` is an
   isomorphism.
-- `AlgebraicGeometry.ProEtaleWeilSheaf.lowerStarCongr`: pushforwards along equal morphisms are
-  isomorphic.
 -/
 
 @[expose] public section
@@ -66,15 +65,6 @@ instance ProEtaleWeilSheaf.isIso_extensionByZeroToLowerStar (i : U ⟶ X) [IsOpe
   exact isIso_of_reflects_iso _ (IsoAlgebra.forget _)
 
 attribute [local instance] Compactification.over
-
-variable (k₀ l) in
-/-- Pushforwards of pro-étale Weil sheaves along equal morphisms are isomorphic. -/
-noncomputable def ProEtaleWeilSheaf.lowerStarCongr {Y : Scheme.{u}}
-    [Y.Over (Spec (CommRingCat.of k₀))] {φ φ' : X ⟶ Y} [φ.IsOver (Spec (CommRingCat.of k₀))]
-    [φ'.IsOver (Spec (CommRingCat.of k₀))] (h : φ = φ') :
-    ProEtaleWeilSheaf.lowerStar k₀ l φ ≅ ProEtaleWeilSheaf.lowerStar k₀ l φ' := by
-  subst h
-  exact Iso.refl _
 
 variable [Fact (ringChar k₀ ≠ l)]
 

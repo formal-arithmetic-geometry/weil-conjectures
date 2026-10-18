@@ -10,6 +10,7 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.DegreewiseSplit
 public import Mathlib.CategoryTheory.Adjunction.Unique
 public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Closed
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.MapMonoidal
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.IhomComparison
 
 /-!
 # The derived internal hom is triangulated in its first variable
@@ -60,17 +61,6 @@ variable {C : Type u} [Category.{v} C] [Preadditive C] [HasZeroObject C] [Monoid
   [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
   [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
   [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄]
-
-omit [HasZeroObject C] [HasCountableProducts C] [∀ (X₁ X₂ : GradedObject ℤ C), X₁.HasTensor X₂]
-  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃]
-  [∀ (X₁ X₂ X₃ : GradedObject ℤ C), GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃]
-  [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄] in
-/-- Precomposition with a sum is the sum of the precompositions. -/
-lemma _root_.CategoryTheory.MonoidalClosed.pre_add_app {A B : C} (f g : B ⟶ A) (X : C) :
-    (pre (f + g)).app X = (pre f).app X + (pre g).app X :=
-  uncurry_injective (by
-    rw [uncurry_pre, uncurry_add, uncurry_pre, uncurry_pre, MonoidalPreadditive.add_whiskerRight,
-      Preadditive.add_comp])
 
 omit [HasCountableProducts C]
   [∀ (X₁ X₂ X₃ X₄ : GradedObject ℤ C), GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄] in

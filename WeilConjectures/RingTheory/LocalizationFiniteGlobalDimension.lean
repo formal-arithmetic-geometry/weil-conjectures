@@ -9,6 +9,7 @@ module
 public import WeilConjectures.RingTheory.GlobalDimension
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
 import Mathlib.RingTheory.LocalProperties.ProjectiveDimension
+import WeilConjectures.RingTheory.BoundedProjectiveResolutionDimension
 
 /-!
 # Localization and finite global dimension
@@ -82,11 +83,13 @@ theorem localization_preserves_projective_and_global_dimension
     let : IsScalarTower R (Localization S) M := IsScalarTower.of_algebraMap_smul
       (fun r m ↦ rfl)
     let MR := ModuleCat.of R M
-    have hMR := localized_resolution_bound R S k MR (h MR)
+    have hMR := localized_resolution_bound R S k MR
+      ((ModuleCat.hasProjectiveResolutionLE_iff_hasProjectiveDimensionLE MR k).2 (h MR))
     let := isLocalizedModule_id S M (Localization S)
-    exact resolution_bound_of_iso
-      ((IsLocalizedModule.iso S (LinearMap.id : M →ₗ[R] M)).extendScalarsOfIsLocalization
-        S (Localization S)).toModuleIso hMR
+    exact (ModuleCat.hasProjectiveResolutionLE_iff_hasProjectiveDimensionLE _ k).1
+      (resolution_bound_of_iso
+        ((IsLocalizedModule.iso S (LinearMap.id : M →ₗ[R] M)).extendScalarsOfIsLocalization
+          S (Localization S)).toModuleIso hMR)
   refine ⟨hres, hglobal n, ?_⟩
   intro h
   have hb := hglobal (globalDimension R h) (Nat.find_spec h)
