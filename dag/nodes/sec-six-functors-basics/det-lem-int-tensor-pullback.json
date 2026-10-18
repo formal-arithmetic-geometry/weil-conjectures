@@ -354,5 +354,54 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralTensorPullback",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralTensorPullback.preserves_and_completed",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralTensorPullback.augmentation_condition",
+   "AlgebraicGeometry.ProEtale.IntegralTensorPullback.augmentation",
+   "AlgebraicGeometry.ProEtale.IntegralTensorPullback.constantRing",
+   "AlgebraicGeometry.ProEtale.IntegralTensorPullback.constantRing_isCommMonObj",
+   "AlgebraicGeometry.ProEtale.IntegralTensorPullback.constantToIntegral",
+   "AlgebraicGeometry.ProEtale.IntegralTensorPullback.constantToIntegral_isMonHom",
+   "AlgebraicGeometry.ProEtale.IntegralTensorPullback.restriction",
+   "AlgebraicGeometry.ProEtale.IntegralTensorPullback.ConstantModules",
+   "AlgebraicGeometry.ProEtale.IntegralTensorPullback.tower",
+   "AlgebraicGeometry.ProEtale.IntegralTensorPullback.towerUnit_compatible",
+   "AlgebraicGeometry.ProEtale.IntegralTensorPullback.towerUnit",
+   "AlgebraicGeometry.ProEtale.IntegralTensorPullback.pulledTower",
+   "AlgebraicGeometry.ProEtale.IntegralTensorPullback.comparison",
+   "AlgebraicGeometry.ProEtale.IntegralTensorPullback.constantUnit_linear",
+   "AlgebraicGeometry.ProEtale.IntegralTensorPullback.constantUnit",
+   "AlgebraicGeometry.ProEtale.IntegralTensorPullback.constantFinite",
+   "AlgebraicGeometry.ProEtale.IntegralTensorPullback.constantLevel",
+   "AlgebraicGeometry.ProEtale.IntegralTensorPullback.constantStep",
+   "AlgebraicGeometry.ProEtale.IntegralTensorPullback.constantLevelUnit",
+   "AlgebraicGeometry.ProEtale.IntegralTensorPullback.constantTower",
+   "AlgebraicGeometry.ProEtale.IntegralTensorPullback.constantTowerUnit_compatible",
+   "AlgebraicGeometry.ProEtale.IntegralTensorPullback.constantTowerUnit",
+   "AlgebraicGeometry.ProEtale.IntegralTensorPullback.constantPulledTower",
+   "AlgebraicGeometry.ProEtale.IntegralTensorPullback.constantComparison",
+   "AlgebraicGeometry.ProEtale.IntegralTensorPullback.restrictionPullback_existsUnique",
+   "AlgebraicGeometry.ProEtale.IntegralTensorPullback.restrictionPullback",
+   "AlgebraicGeometry.ProEtale.IntegralTensorPullback.restrictionPullbackComplex",
+   "AlgebraicGeometry.ProEtale.IntegralTensorPullback.preserves_and_completed"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralTensorPullback.lean",
+  "statement": "theorem preserves_and_completed (k : Type u) [Field k] (p : ℕ) [CharP k p] (_hp : 0 < p) (_hpl : p ≠ l) {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (g : X ⟶ Y) [g.IsOver (Spec (.of k))] (K : DerivedCategory (AdicCompletion.Modules l E Y)) (_hK : constantModelBoundedConstructible (DerivedNakayama.integerRing l E) Y K) : constantModelBoundedConstructible (DerivedNakayama.integerRing l E) X (((CondensedRing.upperStar (DerivedNakayama.integerRing l E) g).mapDerivedCategory).obj K) ∧ ∀ (P : CochainComplex (AdicCompletion.Modules l E Y) ℤ) (_hP : (HomologicalComplex.quasiIso (AdicCompletion.Modules l E Y) (.up ℤ)).kFlat P) (_eP : DerivedCategory.Q.obj P ≅ K), IsIso (DerivedCategory.Q.map (comparison l E g P)) ∧ ∃ e : DerivedCategory.Q.obj (((restriction l E X).mapHomologicalComplex (.up ℤ)).obj (WeilConjectures.integralOperationsRoos (pulledTower l E g P))) ≅ DerivedCategory.Q.obj (WeilConjectures.integralOperationsRoos (constantPulledTower l E g (((restriction l E Y).mapHomologicalComplex (.up ℤ)).obj P))), DerivedCategory.Q.map (((restriction l E X).mapHomologicalComplex (.up ℤ)).map (comparison l E g P)) ≫ e.hom = DerivedCategory.Q.map (restrictionPullbackComplex l E g P).hom ≫ DerivedCategory.Q.map (constantComparison l E g (((restriction l E Y).mapHomologicalComplex (.up ℤ)).obj P))",
+  "branch": "newtargets-dag",
+  "by": "N3",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Exact inverse image is represented by upperStar.mapDerivedCategory; the imported recorded moduleObjectDerivedPullback is its total left-derived presentation. All K-flat representatives are quantified, not assumed as extra data on K. Constant scalar restriction is distinct from completed coefficients. The strict quotient towers, zero-homotopy completion units and normalized restriction-pullback comparison are explicit helpers in this owning module."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-02ef46514",
+  "group": "N3",
+  "result": "pass",
+  "note": "First S2 delivery; only change is the lean record. Statement verbatim; declarations set matches the file; nt_compile clean in 10.2 s. Hypotheses match sk-def-sfb-dc-setting (char p>0, p≠l, separated finite type, k-morphism), nothing stronger. Ambient category is internal modules over the continuous integral ring; Dbc is the stmt_dep constantModelBoundedConstructible. c_K is the canonical strict-tower quotient augmentation into the existing Roos model, quantified over all K-flat representatives. The scalar-restriction clause pins restrictionPullback by an ∃! normalization on generators; the ∃ e plus its equation makes e unique, so the clause says the restricted c_K is the Stacks 099N completion unit. No hollow defs, all proofs sorry, docstrings and nine-step proof present. Advisory: mapDerivedCategory is used in place of the recorded leftDerived pullback (canonically isomorphic, upperStar exact); integralOperationsRoos, upperStar and DerivedNakayama decls are owned by non-stmt_dep nodes (same pattern as landed det-pe-milnor-sequence and det-lem-int-tensor-product). The N3 second reading is an author reread, stated honestly."
  }
 }
