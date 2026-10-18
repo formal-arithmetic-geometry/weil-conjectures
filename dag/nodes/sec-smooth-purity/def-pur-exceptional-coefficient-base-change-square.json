@@ -1,0 +1,112 @@
+{
+ "id": "def-pur-exceptional-coefficient-base-change-square",
+ "kind": "definition",
+ "title": "Exceptional coefficient and base-change compatibility square",
+ "status": "split",
+ "statement": "Let $A,B$ be finite commutative rings in universe $u+1$ and $\\phi:A\\to B$ a unital map. For schemes $X,Y,Y'$ in universe $u$ [def-pc-scheme], work in ordinary etale derived module categories [def-weil-pbc-derived-categories], and let $S_T$ denote derived scalar extension [lem-pur-derived-change-of-rings]. Let $f:X\\to Y$ be compactifiable [def-weil-compactifications-refinements] and quasi-compact [def-weil-finite-type-morphism], let $g:Y'\\to Y$, and write $f',g'$ for the Cartesian projections [def-pc-base-change]. For $K\\in D(Y_{et},A)$, use the canonical exceptional coefficient mate $c_{f,K}$ [def-per-exceptional-coefficient-maps], exceptional base-change map $\\beta$ [def-asd-smooth-dualizing-base-change-arrows], and uniquely normalized scalar/pullback comparison $\\chi:g^*S_Y\\simeq S_{Y'}g^*$ [lem-pur-etale-scalar-mate-projection]. Define base-change compatibility to be the equality of the following two maps from $S_{X'}g'^*G_{f,A}K$ to $G_{f',B}g^*S_YK$: first apply $S_{X'}(\\beta_{A,f,g,K})$, then $c_{f',g^*K}$, then $G_{f',B}(\\chi_g^{-1}(K))$; alternatively apply $\\chi_{g'}^{-1}(G_{f,A}K)$, then $g'^*(c_{f,K})$, then $\\beta_{B,f,g,S_YK}$. This defines a proposition only and asserts neither that the square commutes nor that its arrows are isomorphisms.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-compactifications-refinements",
+  "def-weil-finite-type-morphism",
+  "def-pc-base-change",
+  "def-per-exceptional-coefficient-maps",
+  "def-asd-smooth-dualizing-base-change-arrows",
+  "lem-pur-etale-scalar-mate-projection"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+  "place": "Proof (2), coefficient independence of the deformation comparison; made precise using sk-thm-dnc/thm-pur-dnc-invariance.proof.md and prop-pur-dnc-family-constancy.proof.md"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical exceptional coefficient mate base change compatibility square for derived scalar extension",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsBaseChange.basis_repr_comp\", \"IsBaseChange.linearMapLeftRightHom.congr_simp\", \"Module.Basis.restrictScalars_repr_apply\", \"CategoryTheory.TwoSquare.lanBaseChange_app\", \"IsBaseChange.linearMapLeftRight\", \"IsBaseChange.of_comp\", \"LinearMap.baseChange_smul\", \"CategoryTheory.TwoSquare.lanBaseChange\"]}",
+   "date": "2026-10-18",
+   "verdict": "no exact Mathlib match; existing project definitions reused"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical coefficient counit mate exceptional inverse image base change and ordered affine trace right functor",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteSolidCounit\", \"AlgebraicGeometry.ΓSpec.isIso_adjunction_counit\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"AlgebraicGeometry.ΓSpec.adjunction_counit_app'\", \"AlgebraicGeometry.Scheme.kerAdjunction_counit_app\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"AlgebraicGeometry.ΓSpec.adjunction_counit_app\"]}",
+   "date": "2026-10-18",
+   "verdict": "no exact Mathlib match; existing project definitions reused"
+  },
+  {
+   "tool": "grep",
+   "query": "NoetherianSectionSpecialization|smoothDualizingBaseChangeMap|affineTraceRight|BaseChangeCompatibility",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-18",
+   "verdict": "no exact Mathlib match; existing project definitions reused"
+  },
+  {
+   "tool": "grep",
+   "query": "rg NoetherianSectionSpecialization|smoothDualizingBaseChangeMap|affineTraceRight|BaseChangeCompatibility in dag/nodes, WeilConjectures and lean/Sheaf; blueprint_refs.py search section specialization / coefficient mate / dualizing base change / affine trace",
+   "results": "Project match: ExceptionalCoefficientComparison lines 318--330. def-per-exceptional-coefficient-maps already owns mateMap and is reused, but does not list BaseChangeCompatibility. Other matches are theorem owners and consumers. No upstream matches; blueprint coefficient mate search returned zero.",
+   "date": "2026-10-18",
+   "verdict": "existing plain definitions; no definition owner for this interface"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-dnc-coefficient-transport",
+  "date": "2026-10-18",
+  "group": "NP"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-finite-general-ring",
+   "place": "Proof (2): coefficient-independent deformation maps, normalized comparisons and chart adjunctions",
+   "via": [
+    "lem-pur-dnc-coefficient-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "module": "Sheaf.Paper.ExceptionalCoefficientComparison",
+  "declaration": "AlgebraicGeometry.Etale.ExceptionalCoefficients.BaseChangeCompatibility",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ExceptionalCoefficients.BaseChangeCompatibility"
+  ],
+  "statement": "def BaseChangeCompatibility [Finite A] [Finite B] {X Y Y' : Scheme.{u}}\n    (f : X ⟶ Y) [HasCompactification f] [QuasiCompact f] (g : Y' ⟶ Y)\n    (K : DerivedCategoryModule A Y) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Definition ownership only, on the unchanged published module. These are plain constructions, not choices extracted from its main theorem. Project match: ExceptionalCoefficientComparison lines 318--330. def-per-exceptional-coefficient-maps already owns mateMap and is reused, but does not list BaseChangeCompatibility. Other matches are theorem owners and consumers. No upstream matches; blueprint coefficient mate search returned zero."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ad6acc699",
+  "group": "NP",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ad6acc699",
+  "group": "NP",
+  "result": "pass",
+  "note": "Re-delivery after the H2-only RETURN 9c67e54eb5f6. Item Lean is byte-identical apart from dropping the unused PurityDncFamilyIntrinsic/Deformation imports, so the previously accepted substance stands: actual mateMap counit transpose, independent B targets, R=ULift ZMod(ell^n), base-change/fibre/localization/chart equations, unique normalized kappa_B, delta direction; d=0, empty S, B=0 covered. The def-pur-dnc-section-family 1(B) rewrite is dropped (record identical to live). The theorem stmt_dep lem-pur-noetherian-etale-section-specialization is replaced by 4 new existing:true def nodes on unchanged live modules: noetherian-section-specialization-arrows (7 decls), exceptional-coefficient-base-change-square, smooth-dualizing-base-change-arrows, affine-trace-right-functor. Each statement is verbatim, all decls are plain defs (no .choose), no live owner collision, deps exist, no cycle. The 5 existing def nodes requested by 9c67 are cited. Prose unchanged, no statement_change; only def nodes added to stmt_deps. nt_compile --json clean, 10.0 s, exit 0. Maintainer notes: stale report paragraphs (Dependency modules, proof-dep claim); unitIso/scalarPullbackIso theorem owners not directly cited (only def nodes may be added; both are in the closure); the smooth base-change def node does not cite the compact-support base-change iso theorem."
+ }
+}

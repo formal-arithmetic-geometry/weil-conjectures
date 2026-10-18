@@ -1,0 +1,109 @@
+{
+ "id": "def-amb-affine-trace-right-functor",
+ "kind": "definition",
+ "title": "Ordered affine-space trace right functor",
+ "status": "split",
+ "statement": "Let $A$ be a commutative ring of universe $u+1$, $N\\in\\mathbf N$, and $h_A:(N:A)=0$. For a scheme $S$ of universe $u$ [def-pc-scheme], work in ordinary unbounded etale module derived categories [def-weil-pbc-derived-categories]. Let $X_0(S)=S$, $X_{d+1}(S)=\\mathbf A^1_{X_d(S)}$ be the ordered affine coordinate tower with its standard projective-line compactifications [def-amb-affine-trace-tower]. Let $G_{q_T}$ be the canonical ordinary projective-line right functor, namely inverse image followed by tensor on the right with the finite Tate line shifted by two [def-asd-ordinary-finite-p1-arrows], and let $j_T:\\mathbf A^1_T\\hookrightarrow\\mathbf P^1_T$ be the standard affine chart. Define the affine-line right functor $H_T=G_{q_T}$ followed by exact inverse image $j_T^*$ [def-weil-pbc-inverse-image]. Define $G_{0,S}=\\mathrm{Id}$ and $G_{d+1,S}=G_{d,S}$ followed by $H_{X_d(S)}$. Thus $G_{d,S}:D(S_{et},A)\\to D(X_d(S)_{et},A)$ is the ordered iterated shifted-line-twist functor. This definition chooses no adjunction, orientation or trace, and asserts no isomorphism theorem.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories",
+  "def-amb-affine-trace-tower",
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-weil-pbc-inverse-image"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+  "place": "Proof (2), coefficient independence of the deformation comparison; made precise using sk-thm-dnc/thm-pur-dnc-invariance.proof.md and prop-pur-dnc-family-constancy.proof.md"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "ordered affine space trace right functor iterated Tate twists",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.functor\", \"AlgebraicGeometry.AffineSpace.functor_obj_obj\", \"AlgebraicGeometry.AffineSpace.functor_map_app\", \"Affine.termAffineSpace\", \"CategoryTheory.TwistShiftData.hasShift\", \"LinOrd.dual\", \"AffineEquiv.constVAdd_nsmul\", \"AffineMap.ctorIdx\"]}",
+   "date": "2026-10-18",
+   "verdict": "no exact Mathlib match; existing project definitions reused"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical coefficient counit mate exceptional inverse image base change and ordered affine trace right functor",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteSolidCounit\", \"AlgebraicGeometry.ΓSpec.isIso_adjunction_counit\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"AlgebraicGeometry.ΓSpec.adjunction_counit_app'\", \"AlgebraicGeometry.Scheme.kerAdjunction_counit_app\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"AlgebraicGeometry.ΓSpec.adjunction_counit_app\"]}",
+   "date": "2026-10-18",
+   "verdict": "no exact Mathlib match; existing project definitions reused"
+  },
+  {
+   "tool": "grep",
+   "query": "NoetherianSectionSpecialization|smoothDualizingBaseChangeMap|affineTraceRight|BaseChangeCompatibility",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-18",
+   "verdict": "no exact Mathlib match; existing project definitions reused"
+  },
+  {
+   "tool": "grep",
+   "query": "rg NoetherianSectionSpecialization|smoothDualizingBaseChangeMap|affineTraceRight|BaseChangeCompatibility in dag/nodes, WeilConjectures and lean/Sheaf; blueprint_refs.py search section specialization / coefficient mate / dualizing base change / affine trace",
+   "results": "Project matches: AffineSpaceTopTrace lines 122--151. DAG matches only lem-amb-affine-space-top-trace and consumers; def-amb-affine-trace-tower owns the geometry but not these functors. No upstream matches; blueprint affine trace search returned zero.",
+   "date": "2026-10-18",
+   "verdict": "existing plain definitions; no definition owner for this interface"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-dnc-coefficient-transport",
+  "date": "2026-10-18",
+  "group": "NP"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-finite-general-ring",
+   "place": "Proof (2): coefficient-independent deformation maps, normalized comparisons and chart adjunctions",
+   "via": [
+    "lem-pur-dnc-coefficient-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineSpaceTopTrace",
+  "declaration": "AlgebraicGeometry.Etale.affineTraceRight",
+  "declarations": [
+   "AlgebraicGeometry.Etale.affineTraceLineRight",
+   "AlgebraicGeometry.Etale.affineTraceRight"
+  ],
+  "statement": "def affineTraceRight (A : Type (u + 1)) [CommRing A] (N : ℕ)\n    (hA : (N : A) = 0) (S : Scheme.{u}) :\n    (d : ℕ) → DerivedCategoryModule A S ⥤ DerivedCategoryModule A (affineTraceTower S d)",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Definition ownership only, on the unchanged published module. These are plain constructions, not choices extracted from its main theorem. Project matches: AffineSpaceTopTrace lines 122--151. DAG matches only lem-amb-affine-space-top-trace and consumers; def-amb-affine-trace-tower owns the geometry but not these functors. No upstream matches; blueprint affine trace search returned zero."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ad6acc699",
+  "group": "NP",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ad6acc699",
+  "group": "NP",
+  "result": "pass",
+  "note": "Re-delivery after the H2-only RETURN 9c67e54eb5f6. Item Lean is byte-identical apart from dropping the unused PurityDncFamilyIntrinsic/Deformation imports, so the previously accepted substance stands: actual mateMap counit transpose, independent B targets, R=ULift ZMod(ell^n), base-change/fibre/localization/chart equations, unique normalized kappa_B, delta direction; d=0, empty S, B=0 covered. The def-pur-dnc-section-family 1(B) rewrite is dropped (record identical to live). The theorem stmt_dep lem-pur-noetherian-etale-section-specialization is replaced by 4 new existing:true def nodes on unchanged live modules: noetherian-section-specialization-arrows (7 decls), exceptional-coefficient-base-change-square, smooth-dualizing-base-change-arrows, affine-trace-right-functor. Each statement is verbatim, all decls are plain defs (no .choose), no live owner collision, deps exist, no cycle. The 5 existing def nodes requested by 9c67 are cited. Prose unchanged, no statement_change; only def nodes added to stmt_deps. nt_compile --json clean, 10.0 s, exit 0. Maintainer notes: stale report paragraphs (Dependency modules, proof-dep claim); unitIso/scalarPullbackIso theorem owners not directly cited (only def nodes may be added; both are in the closure); the smooth base-change def node does not cite the compact-support base-change iso theorem."
+ }
+}

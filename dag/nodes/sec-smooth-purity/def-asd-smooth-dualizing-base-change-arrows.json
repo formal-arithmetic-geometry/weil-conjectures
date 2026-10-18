@@ -1,0 +1,112 @@
+{
+ "id": "def-asd-smooth-dualizing-base-change-arrows",
+ "kind": "definition",
+ "title": "Canonical exceptional and dualizing base-change arrows",
+ "status": "split",
+ "statement": "Let $A$ be a finite commutative ring of universe $u+1$. For schemes $X,S,S'$ of universe $u$ [def-pc-scheme], work in ordinary etale derived module categories [def-weil-pbc-derived-categories]. Let $f:X\\to S$ be quasi-compact [def-weil-finite-type-morphism] with chosen compactification [def-weil-compactifications-refinements], let $g:S'\\to S$, and form $X'=X\\times_SS'$ with projections $g':X'\\to X$ and $f':X'\\to S'$ [def-pc-base-change]. Write $P_f=Rf_!$ [def-amb-etale-compact-support] and $P_f\\dashv G_f=f^\\times$ [thm-amb-etale-exceptional-adjoint], with counit $\\varepsilon_f$, and likewise for $f'$. Inverse images mean the exact constant-coefficient inverse image extended to the derived category [def-weil-pbc-inverse-image]. Define $\\beta_{f,g,K}:g'^*G_fK\\to G_{f'}g^*K$ as the transpose of the inverse compact-support base-change comparison $P_{f'}g'^*G_fK\\to g^*P_fG_fK$, followed by $g^*\\varepsilon_f(K)$. Define the dualizing base-change map $g'^*\\omega_f\\to\\omega_{f'}$, where $\\omega_f=G_fA_S$, as $\\beta_{f,g,A_S}$ followed by $G_{f'}$ of the canonical inverse-image unit identification $g^*A_S\\simeq A_{S'}$. These definitions assert no smoothness or invertibility conclusion.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories",
+  "def-weil-finite-type-morphism",
+  "def-weil-compactifications-refinements",
+  "def-pc-base-change",
+  "def-amb-etale-compact-support",
+  "thm-amb-etale-exceptional-adjoint",
+  "def-weil-pbc-inverse-image"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity-general-ring.proof.md",
+  "place": "Proof (2), coefficient independence of the deformation comparison; made precise using sk-thm-dnc/thm-pur-dnc-invariance.proof.md and prop-pur-dnc-family-constancy.proof.md"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical dualizing complex base change morphism counit compact support",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsBaseChange.toDualBaseChange\", \"IsBaseChange.toDualBaseChange_tmul\", \"Module.Dual.baseChange\", \"IsBaseChange.dual\", \"IsBaseChange.toDual_apply\", \"IsBaseChange.toDual\", \"Module.Dual.baseChange_baseChange\", \"CompHausLike.LocallyConstant.counit\"]}",
+   "date": "2026-10-18",
+   "verdict": "no exact Mathlib match; existing project definitions reused"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical coefficient counit mate exceptional inverse image base change and ordered affine trace right functor",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteSolidCounit\", \"AlgebraicGeometry.ΓSpec.isIso_adjunction_counit\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"AlgebraicGeometry.ΓSpec.adjunction_counit_app'\", \"AlgebraicGeometry.Scheme.kerAdjunction_counit_app\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\", \"AlgebraicGeometry.ΓSpec.adjunction_counit_app\"]}",
+   "date": "2026-10-18",
+   "verdict": "no exact Mathlib match; existing project definitions reused"
+  },
+  {
+   "tool": "grep",
+   "query": "NoetherianSectionSpecialization|smoothDualizingBaseChangeMap|affineTraceRight|BaseChangeCompatibility",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-18",
+   "verdict": "no exact Mathlib match; existing project definitions reused"
+  },
+  {
+   "tool": "grep",
+   "query": "rg NoetherianSectionSpecialization|smoothDualizingBaseChangeMap|affineTraceRight|BaseChangeCompatibility in dag/nodes, WeilConjectures and lean/Sheaf; blueprint_refs.py search section specialization / coefficient mate / dualizing base change / affine trace",
+   "results": "Project matches: SmoothExceptionalBaseChange lines 97--126. Only prop-asd-smooth-base-change and consumers named these plain definitions in the DAG; no definition owner. No upstream matches; blueprint dualizing base change search returned zero.",
+   "date": "2026-10-18",
+   "verdict": "existing plain definitions; no definition owner for this interface"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-dnc-coefficient-transport",
+  "date": "2026-10-18",
+  "group": "NP"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-finite-general-ring",
+   "place": "Proof (2): coefficient-independent deformation maps, normalized comparisons and chart adjunctions",
+   "via": [
+    "lem-pur-dnc-coefficient-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-smooth-purity",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothExceptionalBaseChange",
+  "declaration": "AlgebraicGeometry.Etale.smoothDualizingBaseChangeMap",
+  "declarations": [
+   "AlgebraicGeometry.Etale.smoothExceptionalBaseChangeMap",
+   "AlgebraicGeometry.Etale.smoothDualizingBaseChangeMap"
+  ],
+  "statement": "def smoothDualizingBaseChangeMap\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X S S' : Scheme.{u}} (f : X ⟶ S) [HasCompactification f] [QuasiCompact f]\n    (g : S' ⟶ S) :\n    (upperStar (ModuleCat.{u + 1} A) (pullback.fst f g)).leftDerivedFunctor.obj\n      (dualizingComplex (ModuleCat.{u + 1} A) f) ⟶\n    dualizingComplex (ModuleCat.{u + 1} A) (pullback.snd f g)",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Definition ownership only, on the unchanged published module. These are plain constructions, not choices extracted from its main theorem. Project matches: SmoothExceptionalBaseChange lines 97--126. Only prop-asd-smooth-base-change and consumers named these plain definitions in the DAG; no definition owner. No upstream matches; blueprint dualizing base change search returned zero."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ad6acc699",
+  "group": "NP",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ad6acc699",
+  "group": "NP",
+  "result": "pass",
+  "note": "Re-delivery after the H2-only RETURN 9c67e54eb5f6. Item Lean is byte-identical apart from dropping the unused PurityDncFamilyIntrinsic/Deformation imports, so the previously accepted substance stands: actual mateMap counit transpose, independent B targets, R=ULift ZMod(ell^n), base-change/fibre/localization/chart equations, unique normalized kappa_B, delta direction; d=0, empty S, B=0 covered. The def-pur-dnc-section-family 1(B) rewrite is dropped (record identical to live). The theorem stmt_dep lem-pur-noetherian-etale-section-specialization is replaced by 4 new existing:true def nodes on unchanged live modules: noetherian-section-specialization-arrows (7 decls), exceptional-coefficient-base-change-square, smooth-dualizing-base-change-arrows, affine-trace-right-functor. Each statement is verbatim, all decls are plain defs (no .choose), no live owner collision, deps exist, no cycle. The 5 existing def nodes requested by 9c67 are cited. Prose unchanged, no statement_change; only def nodes added to stmt_deps. nt_compile --json clean, 10.0 s, exit 0. Maintainer notes: stale report paragraphs (Dependency modules, proof-dep claim); unitIso/scalarPullbackIso theorem owners not directly cited (only def nodes may be added; both are in the closure); the smooth base-change def node does not cite the compact-support base-change iso theorem."
+ }
+}

@@ -37,7 +37,16 @@
   "def-weil-pbc-site-comparison-morphism",
   "def-pur-sheaf-tensor-product",
   "def-weil-closed-immersion",
-  "def-sbc-affine-space"
+  "def-sbc-affine-space",
+  "def-pur-noetherian-section-specialization-arrows",
+  "def-per-exceptional-coefficient-maps",
+  "def-pur-exceptional-coefficient-base-change-square",
+  "def-asd-smooth-dualizing-base-change-arrows",
+  "def-amb-affine-trace-right-functor",
+  "def-sp-etale-compact-support-normalization",
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-asd-ordinary-finite-p1-data",
+  "def-amb-affine-trace-tower"
  ],
  "proof": [
   {
@@ -386,5 +395,42 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.PurityDncCoefficientTransport",
+  "declaration": "WeilConjectures.dncCoefficientTransport",
+  "file": "lean/Sheaf/SecSmoothPurity/PurityDncCoefficientTransport.lean",
+  "statement": "theorem dncCoefficientTransport (D : FiniteFieldDatum.{u}) (ell : ℕ) [Fact ell.Prime] (hell : ell ≠ D.p) (n : ℕ) (hn : 1 ≤ n) {V S : Scheme.{u}} (d : ℕ) (g : V ⟶ S) [SmoothOfRelativeDimension d g] [IsSeparated g] [QuasiCompact g] (aS : S ⟶ Spec (.of D.k)) [IsSeparated aS] [LocallyOfFiniteType aS] [QuasiCompact aS] (s : S ⟶ V) [IsClosedImmersion s] (hs : s ≫ g = 𝟙 S) {B : Type u} [CommRing B] [Finite B] (φ : DncCoefficientTransport.BaseRing.{u} ell n →+* B) : DncCoefficientTransport.Assertions D ell n g s hs (DncCoefficientTransport.geometry D d g aS s hs) φ",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": [
+   "WeilConjectures.DncCoefficientTransport.BaseRing",
+   "WeilConjectures.DncCoefficientTransport.baseRingFinite",
+   "WeilConjectures.DncCoefficientTransport.dualizingMap",
+   "WeilConjectures.DncCoefficientTransport.sectionMap",
+   "WeilConjectures.DncCoefficientTransport.sectionObject",
+   "WeilConjectures.DncCoefficientTransport.realizedSectionMap",
+   "WeilConjectures.DncCoefficientTransport.FibreCompatibility",
+   "WeilConjectures.DncCoefficientTransport.LocalizationCompatibility",
+   "WeilConjectures.DncCoefficientTransport.CoordinateNormalization",
+   "WeilConjectures.DncCoefficientTransport.NormalizedTransport",
+   "WeilConjectures.DncCoefficientTransport.MixedBaseChange",
+   "WeilConjectures.DncCoefficientTransport.ChartCompatibility",
+   "WeilConjectures.DncCoefficientTransport.Geometry",
+   "WeilConjectures.DncCoefficientTransport.geometry",
+   "WeilConjectures.DncCoefficientTransport.Assertions",
+   "WeilConjectures.dncCoefficientTransport"
+  ],
+  "note": "Repair of 9c67e54eb5f6: canonical map and assertion signatures retained; explicit definition ownership and uniquely normalized choice dependencies added. Removed unused intrinsic-family/Deformation imports and the unrelated dependency rewrite. The ordinary etale-origin equations are realized via the published reduction interfaces."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ad6acc699",
+  "group": "NP",
+  "result": "pass",
+  "note": "Re-delivery after the H2-only RETURN 9c67e54eb5f6. Item Lean is byte-identical apart from dropping the unused PurityDncFamilyIntrinsic/Deformation imports, so the previously accepted substance stands: actual mateMap counit transpose, independent B targets, R=ULift ZMod(ell^n), base-change/fibre/localization/chart equations, unique normalized kappa_B, delta direction; d=0, empty S, B=0 covered. The def-pur-dnc-section-family 1(B) rewrite is dropped (record identical to live). The theorem stmt_dep lem-pur-noetherian-etale-section-specialization is replaced by 4 new existing:true def nodes on unchanged live modules: noetherian-section-specialization-arrows (7 decls), exceptional-coefficient-base-change-square, smooth-dualizing-base-change-arrows, affine-trace-right-functor. Each statement is verbatim, all decls are plain defs (no .choose), no live owner collision, deps exist, no cycle. The 5 existing def nodes requested by 9c67 are cited. Prose unchanged, no statement_change; only def nodes added to stmt_deps. nt_compile --json clean, 10.0 s, exit 0. Maintainer notes: stale report paragraphs (Dependency modules, proof-dep claim); unitIso/scalarPullbackIso theorem owners not directly cited (only def nodes may be added; both are in the closure); the smooth base-change def node does not cite the compact-support base-change iso theorem."
  }
 }
