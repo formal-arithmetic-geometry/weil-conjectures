@@ -36,12 +36,8 @@ the coefficient-change statements
   canonical comparisons are isomorphisms on derived base changes of `Dᵇctf` complexes (blueprint
   `lem-fix-compact-support-coefficient-change` and `thm-trf-finite-coefficient-map`, nodes of
   the subsections `sk-def-sfb-coefficient-comparisons` and `sk-p-trace-coeff`).
-- `derivedRestrictScalarsCompRightDerivedGlobalSectionsIso_hom_app_globalSectionsTransport`
-  and `derivedRestrictScalarsCompRightDerivedLowerShriekIso_baseChangeMap`:
-  the compatibility of the comparisons with the transport of `RΓ(Spec k, -)` along an
-  automorphism and with the compact-support exchange map (the "compatible with pullback" clause of
-  `lem-fix-compact-support-coefficient-change`). These are coherence statements for the
-  unbounded derived functors involved; they are not proved yet.
+- The compatibility of the comparison with the compact-support exchange map is reduced, in
+  `WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeExchange`, to building blocks.
 -/
 
 @[expose] public section
@@ -412,7 +408,168 @@ lemma rightDerivedFunctorCompIso'_inv_app_comp_sectionsTransportIso (ι : H ≅ 
 
 end Transport
 
-/-- **Unfinished.** The compatibility of the coefficient comparison of `RΓ(Spec k, -)` with the
+section LeftAdjointUniq
+
+variable {C₁ C₂ C₁' C₂' : Type*} [Category C₁] [Category C₂] [Category C₁'] [Category C₂']
+  {R₁ : C₁' ⥤ C₁} {R₂ : C₂' ⥤ C₂} {L L₂ : C₁ ⥤ C₂} {G : C₂ ⥤ C₁} {L' L₂' : C₁' ⥤ C₂'}
+  {G' : C₂' ⥤ C₁'}
+
+/-- Let `L` and `L₂` be left adjoints of `G`, and `L'`, `L₂'` left adjoints of `G'`. If functors
+`R₁` and `R₂` commute with the right adjoints (by `σ`) and with the left adjoints (by `β` and
+`τ`) compatibly with the units, then the canonical isomorphisms `L ≅ L₂` and `L' ≅ L₂'` commute
+with `R₁` and `R₂`. -/
+lemma leftAdjointUniq_inv_app_comp_of_comm (adj : L ⊣ G) (adj₂ : L₂ ⊣ G) (adj' : L' ⊣ G')
+    (adj₂' : L₂' ⊣ G') (σ : G' ⋙ R₁ ≅ R₂ ⋙ G) (β : R₁ ⋙ L ≅ L' ⋙ R₂)
+    (τ : R₁ ⋙ L₂ ≅ L₂' ⋙ R₂)
+    (hβ : ∀ X, R₁.map (adj'.unit.app X) ≫ σ.hom.app (L'.obj X) =
+      adj.unit.app (R₁.obj X) ≫ G.map (β.hom.app X))
+    (hτ : ∀ X, R₁.map (adj₂'.unit.app X) ≫ σ.hom.app (L₂'.obj X) =
+      adj₂.unit.app (R₁.obj X) ≫ G.map (τ.hom.app X)) (X : C₁') :
+    τ.hom.app X ≫ R₂.map ((adj'.leftAdjointUniq adj₂').inv.app X) =
+      (adj.leftAdjointUniq adj₂).inv.app (R₁.obj X) ≫ β.hom.app X := by
+  have hu : adj₂.unit.app (R₁.obj X) ≫ G.map ((adj.leftAdjointUniq adj₂).inv.app (R₁.obj X)) =
+      adj.unit.app (R₁.obj X) := Adjunction.unit_leftAdjointUniq_hom_app adj₂ adj (R₁.obj X)
+  have hu' : adj₂'.unit.app X ≫ G'.map ((adj'.leftAdjointUniq adj₂').inv.app X) =
+      adj'.unit.app X := Adjunction.unit_leftAdjointUniq_hom_app adj₂' adj' X
+  have hσ := σ.hom.naturality ((adj'.leftAdjointUniq adj₂').inv.app X)
+  simp only [Functor.comp_map, Functor.comp_obj] at hσ
+  apply (adj₂.homEquiv _ _).injective
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit, G.map_comp, G.map_comp,
+    reassoc_of% hu, ← hβ, ← reassoc_of% (hτ X), ← hσ, ← R₁.map_comp_assoc, hu']
+
+end LeftAdjointUniq
+
+section TransportComparison
+
+variable {A A' B B' : Type*} [Category A] [Category A'] [Category B] [Category B']
+  {Res : A' ⥤ A} {res : B' ⥤ B} {RΓ DS : A ⥤ B} {RΓ' DS' : A' ⥤ B'} {Lh Dh : A ⥤ A}
+  {Lh' Dh' : A' ⥤ A'}
+
+/-- Abstract form of the compatibility of a coefficient comparison `Res ⋙ RΓ ≅ RΓ' ⋙ res`,
+obtained from identifications `e : RΓ ≅ DS`, `e' : RΓ' ≅ DS'` and a square `q`, with transports
+`RΓ ≅ Lh ⋙ RΓ` built from invariances `U : Dh ⋙ RΓ ≅ RΓ` and `l : Lh ≅ Dh`. It holds as soon
+as `U` corresponds under `e` to some `t : DS ≅ Dh ⋙ DS` (hypotheses `hU` and `hU'`) and `t` is
+compatible with `q` and with a comparison `m` of `Dh` with `Dh'` (hypothesis `hq`). -/
+lemma comparison_hom_app_comp_transport_of_comm (e : RΓ ≅ DS) (e' : RΓ' ≅ DS')
+    (U : Dh ⋙ RΓ ≅ RΓ) (U' : Dh' ⋙ RΓ' ≅ RΓ') (l : Lh ≅ Dh) (l' : Lh' ≅ Dh')
+    (q : Res ⋙ DS ≅ DS' ⋙ res) (m : Res ⋙ Dh ≅ Dh' ⋙ Res) (t : DS ≅ Dh ⋙ DS)
+    (t' : DS' ≅ Dh' ⋙ DS')
+    (hU : ∀ K, U.inv.app K ≫ e.hom.app (Dh.obj K) = e.hom.app K ≫ t.hom.app K)
+    (hU' : ∀ K, U'.inv.app K ≫ e'.hom.app (Dh'.obj K) = e'.hom.app K ≫ t'.hom.app K)
+    (hq : ∀ K, q.hom.app K ≫ res.map (t'.hom.app K) =
+      t.hom.app (Res.obj K) ≫ DS.map (m.hom.app K) ≫ q.hom.app (Dh'.obj K)) (M : A') :
+    (Functor.isoWhiskerLeft Res e ≪≫ q ≪≫ Functor.isoWhiskerRight e'.symm res).hom.app M ≫
+        res.map ((U'.symm ≪≫ Functor.isoWhiskerRight l'.symm RΓ').hom.app M) =
+      (U.symm ≪≫ Functor.isoWhiskerRight l.symm RΓ).hom.app (Res.obj M) ≫
+        RΓ.map ((Functor.isoWhiskerLeft Res l ≪≫ m ≪≫
+          Functor.isoWhiskerRight l'.symm Res).hom.app M) ≫
+        (Functor.isoWhiskerLeft Res e ≪≫ q ≪≫
+          Functor.isoWhiskerRight e'.symm res).hom.app (Lh'.obj M) := by
+  have h₁ : e'.inv.app M ≫ U'.inv.app M = t'.hom.app M ≫ e'.inv.app (Dh'.obj M) := by
+    rw [← cancel_epi (e'.hom.app M), Iso.hom_inv_id_app_assoc, ← reassoc_of% (hU' M),
+      Iso.hom_inv_id_app, Category.comp_id]
+  have h₂ := e.hom.naturality (m.hom.app M ≫ Res.map (l'.inv.app M))
+  have h₃ := q.hom.naturality (l'.inv.app M)
+  have h₄ := e'.inv.naturality (l'.inv.app M)
+  simp only [Functor.comp_obj, Functor.comp_map] at h₂ h₃ h₄
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerLeft_hom,
+    Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.map_comp, Category.assoc]
+  rw [← res.map_comp_assoc, h₁, ← RΓ.map_comp_assoc, Iso.inv_hom_id_app, RΓ.map_id,
+    Category.id_comp, ← RΓ.map_comp_assoc, reassoc_of% h₂, reassoc_of% (hU (Res.obj M)),
+    DS.map_comp_assoc, reassoc_of% h₃, ← res.map_comp]
+  simp only [Category.assoc]
+  rw [← h₄, res.map_comp, res.map_comp, reassoc_of% (hq M)]
+
+end TransportComparison
+
+/-- On a site with terminal objects `T` and `T'`, the comparison of the identifications of the
+global sections with the sections over `T` and over `T'` is the restriction map. -/
+lemma _root_.CategoryTheory.Sheaf.ΓNatIsoSheafSections_inv_app_comp_hom_app {C : Type*} [Category C]
+    (J : GrothendieckTopology C) (A : Type*) [Category A] [HasWeakSheafify J A] [HasTerminal C]
+    {T T' : C} (hT : IsTerminal T) (hT' : IsTerminal T') (F : Sheaf J A) :
+    (Sheaf.ΓNatIsoSheafSections J A hT).inv.app F ≫
+        (Sheaf.ΓNatIsoSheafSections J A hT').hom.app F = F.obj.map (hT.from T').op := by
+  have key {T₀ : C} (hT₀ : IsTerminal T₀) :
+      (Sheaf.ΓNatIsoSheafSections J A hT₀).hom.app F = F.ΓRes (op T₀) := by
+    simp only [Sheaf.ΓNatIsoSheafSections, Sheaf.ΓRes, Sheaf.coneΓ, Sheaf.ΓHomEquiv,
+      Adjunction.rightAdjointUniq, conjugateIsoEquiv_apply_hom, conjugateEquiv_apply_app]
+    dsimp
+    erw [Adjunction.homEquiv_counit]
+    erw [Adjunction.homEquiv_unit]
+    simp [constantSheafAdj, Adjunction.comp_unit_app]
+  rw [← cancel_epi ((Sheaf.ΓNatIsoSheafSections J A hT).hom.app F), Iso.hom_inv_id_app_assoc,
+    key, key, Sheaf.ΓRes_map]
+
+/-- Restriction of scalars is compatible with the identification `(e⁻¹)^* ≅ e_*` of the
+pullback along the inverse of an isomorphism with the pushforward. -/
+lemma restrictScalars_map_upperStarInvIsoLowerStarHom_inv_app {X Y : Scheme.{u}} (e : X ≅ Y)
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ')) :
+    (lowerStarCompRestrictScalarsIso ρ e.hom).inv.app F ≫
+        (Sheaf.restrictScalars Y.smallEtaleTopology ρ).map
+          ((upperStarInvIsoLowerStarHom (ModuleCat.{u + 1} Λ') e).inv.app F) =
+      (upperStarInvIsoLowerStarHom (ModuleCat.{u + 1} Λ) e).inv.app
+          ((Sheaf.restrictScalars X.smallEtaleTopology ρ).obj F) ≫
+        (upperStarRestrictScalarsIso ρ e.inv).hom.app F :=
+  leftAdjointUniq_inv_app_comp_of_comm (upperStarLowerStarAdjunction _ e.inv)
+    (lowerStarEquivalenceOfIso _ e).toAdjunction (upperStarLowerStarAdjunction _ e.inv)
+    (lowerStarEquivalenceOfIso _ e).toAdjunction (lowerStarCompRestrictScalarsIso ρ e.inv)
+    (upperStarRestrictScalarsIso ρ e.inv) (lowerStarCompRestrictScalarsIso ρ e.hom).symm
+    (fun G ↦ (Category.comp_id _).trans (restrictScalars_map_unit_app ρ e.inv G))
+    (fun G ↦ by
+      ext U : 3
+      rfl) F
+
+variable (k) in
+/-- The sections at the étale point of `Spec k` commute with restriction of scalars,
+compatibly with the transport along `inv h` of the identification with global sections. -/
+lemma restrictScalars_map_globalSections_transport (h : Spec (.of k) ⟶ Spec (.of k)) [IsIso h]
+    (F : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ')) :
+    (ModuleCat.restrictScalars ρ).map
+        ((Sheaf.ΓNatIsoSheafSections _ _ isTerminalEtalePoint).inv.app F ≫
+          (lowerStarCompGlobalSectionsIso (ModuleCat.{u + 1} Λ') (asIso h).inv).inv.app F ≫
+          (Sheaf.ΓNatIsoSheafSections _ _ isTerminalEtalePoint).hom.app
+            (((asIso h).inv)_*[ModuleCat.{u + 1} Λ'].obj F)) =
+      (Sheaf.ΓNatIsoSheafSections _ _ isTerminalEtalePoint).inv.app
+          ((Sheaf.restrictScalars _ ρ).obj F) ≫
+        (lowerStarCompGlobalSectionsIso (ModuleCat.{u + 1} Λ) (asIso h).inv).inv.app
+          ((Sheaf.restrictScalars _ ρ).obj F) ≫
+        (Sheaf.ΓNatIsoSheafSections _ _ isTerminalEtalePoint).hom.app
+          (((asIso h).inv)_*[ModuleCat.{u + 1} Λ].obj ((Sheaf.restrictScalars _ ρ).obj F)) := by
+  simp only [lowerStarCompGlobalSectionsIso, Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app,
+    Functor.isoWhiskerLeft_inv, Functor.whiskerLeft_app, Category.assoc]
+  rw [reassoc_of% Sheaf.ΓNatIsoSheafSections_inv_app_comp_hom_app,
+    Sheaf.ΓNatIsoSheafSections_inv_app_comp_hom_app,
+    reassoc_of% Sheaf.ΓNatIsoSheafSections_inv_app_comp_hom_app,
+    Sheaf.ΓNatIsoSheafSections_inv_app_comp_hom_app]
+  rfl
+
+variable (k) in
+/-- The sheaf-level transport `S ≅ h^* ⋙ S` of the sections `S` at the étale point of `Spec k`
+commutes with restriction of scalars. -/
+lemma restrictScalars_map_sectionsTransportIso_hom_app (h : Spec (.of k) ⟶ Spec (.of k))
+    [IsIso h] (F : Sheaf (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ')) :
+    (ModuleCat.restrictScalars ρ).map ((sectionsTransportIso
+        (upperStarInvIsoLowerStarHom (ModuleCat.{u + 1} Λ') (asIso h).symm)
+        (lowerStarCompGlobalSectionsIso (ModuleCat.{u + 1} Λ') (asIso h).inv)
+        (Sheaf.ΓNatIsoSheafSections _ _ isTerminalEtalePoint)).hom.app F) =
+      (sectionsTransportIso
+          (upperStarInvIsoLowerStarHom (ModuleCat.{u + 1} Λ) (asIso h).symm)
+          (lowerStarCompGlobalSectionsIso (ModuleCat.{u + 1} Λ) (asIso h).inv)
+          (Sheaf.ΓNatIsoSheafSections _ _ isTerminalEtalePoint)).hom.app
+          ((Sheaf.restrictScalars _ ρ).obj F) ≫
+        ((sheafSections (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+          (op (etalePoint k))).map ((upperStarRestrictScalarsIso ρ h).hom.app F) := by
+  simp only [sectionsTransportIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Functor.isoWhiskerLeft_hom, Functor.isoWhiskerRight_hom, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, Category.assoc]
+  rw [← Functor.map_comp]
+  erw [← restrictScalars_map_upperStarInvIsoLowerStarHom_inv_app ρ (asIso h).symm F]
+  rw [← reassoc_of% (restrictScalars_map_globalSections_transport ρ k h F)]
+  simp only [Functor.map_comp, Category.assoc]
+  rfl
+
+/-- The compatibility of the coefficient comparison of `RΓ(Spec k, -)` with the
 transport along
 an automorphism `h` of `Spec k` (part of the compatibility with pullback asserted by blueprint
 `lem-fix-compact-support-coefficient-change` and `thm-trf-finite-coefficient-map`). -/
@@ -426,8 +583,34 @@ lemma derivedRestrictScalarsCompRightDerivedGlobalSectionsIso_hom_app_globalSect
         (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).map
           ((leftDerivedUpperStarRestrictScalarsIso ρ h).hom.app M') ≫
         (derivedRestrictScalarsCompRightDerivedGlobalSectionsIso ρ).hom.app
-          ((L((h)^*[ModuleCat.{u + 1} Λ'])).obj M') :=
-  sorry
+          ((L((h)^*[ModuleCat.{u + 1} Λ'])).obj M') := by
+  have hU := rightDerivedFunctorCompIso'_inv_app_comp_sectionsTransportIso
+    (upperStarInvIsoLowerStarHom (ModuleCat.{u + 1} Λ) (asIso h).symm)
+    (lowerStarCompGlobalSectionsIso (ModuleCat.{u + 1} Λ) (asIso h).inv)
+    (Sheaf.ΓNatIsoSheafSections _ _ isTerminalEtalePoint)
+  have hU' := rightDerivedFunctorCompIso'_inv_app_comp_sectionsTransportIso
+    (upperStarInvIsoLowerStarHom (ModuleCat.{u + 1} Λ') (asIso h).symm)
+    (lowerStarCompGlobalSectionsIso (ModuleCat.{u + 1} Λ') (asIso h).inv)
+    (Sheaf.ΓNatIsoSheafSections _ _ isTerminalEtalePoint)
+  have hq := Functor.mapDerivedCategorySquareIso_hom_app_comp
+    (r₂ := ModuleCat.restrictScalars.{u + 1} ρ)
+    (P₁ := (sheafSections (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ')).obj
+      (op (etalePoint k)))
+    (P₁₂ := (sheafSections (Spec (.of k)).smallEtaleTopology (ModuleCat.{u + 1} Λ')).obj
+      (op (etalePoint k)))
+    (upperStarRestrictScalarsIso ρ h) (Iso.refl _) (Iso.refl _)
+    (sectionsTransportIso
+      (upperStarInvIsoLowerStarHom (ModuleCat.{u + 1} Λ) (asIso h).symm)
+      (lowerStarCompGlobalSectionsIso (ModuleCat.{u + 1} Λ) (asIso h).inv)
+      (Sheaf.ΓNatIsoSheafSections _ _ isTerminalEtalePoint))
+    (sectionsTransportIso
+      (upperStarInvIsoLowerStarHom (ModuleCat.{u + 1} Λ') (asIso h).symm)
+      (lowerStarCompGlobalSectionsIso (ModuleCat.{u + 1} Λ') (asIso h).inv)
+      (Sheaf.ΓNatIsoSheafSections _ _ isTerminalEtalePoint))
+    (fun F ↦ by
+      erw [Category.id_comp, Category.comp_id]
+      exact restrictScalars_map_sectionsTransportIso_hom_app ρ k h F)
+  exact comparison_hom_app_comp_transport_of_comm _ _ _ _ _ _ _ _ _ _ hU hU' hq M'
 
 end Point
 
