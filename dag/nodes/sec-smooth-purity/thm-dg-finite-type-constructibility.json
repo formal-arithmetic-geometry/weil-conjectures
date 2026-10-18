@@ -20,120 +20,43 @@
  ],
  "proof": [
   {
-   "text": "Fix $K\\in D^b_c(X,A)$. A finite-type $k$-scheme has a finite affine cover by spectra of finitely generated $k$-algebras. By [lem-wf-affine-noetherian-components] each such spectrum is Noetherian. A descending chain of closed subsets stabilizes on each member of a finite cover, hence globally. Consequently $X$ and $Y$ are Noetherian and every open is quasi-compact: otherwise successively adjoining opens to a union with no finite subcover produces a strictly increasing chain of opens. Every open of either scheme is again of finite type over $k$: cover it by finitely many distinguished affine opens in the original affine charts, whose coordinate rings are finitely generated algebras localized at one element.",
+   "text": "Extract the positive annihilator N, its vanishing in A and its invertibility on Spec k from IsSmoothBaseChangeCoefficients. These give the source library class HasInvertibleExponent A (Spec k).",
    "uses": [
-    "lem-wf-affine-noetherian-components"
+    "sbc-def-coefficient-conventions"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-dg-finite-type-constructibility.proof.md",
-    "place": "Paragraph 1: finite affine covers and quasi-compact intersections"
-   }
+   "elementary": true
   },
   {
-   "text": "Choose a bounded-below complex $J^\\bullet$ of injective $A_X$-module sheaves representing $K$, using [lem-weil-pbc-module-sheaves-enough-injectives] and clause (1) of [lem-weil-pbc-dplus-injective-representative]. Open restriction is exact: kernels are sectionwise and a local lift of a cokernel section remains a local lift on the localized site. It preserves zero maps. For an open $U$, [lem-pur-kinjective-restrict-localized-adjunction] supplies an additive left adjoint $G$ to restriction preserving finite limits and colimits, hence exact. For a monomorphism $M\\hookrightarrow N$ on $U$, a map $M\\to J^q|_U$ corresponds to $G(M)\\to J^q$, which extends across $G(M)\\hookrightarrow G(N)$; adjunction gives the desired extension. Thus $J|_U$ is still bounded below and termwise injective, and represents $K|_U$. It computes every derived direct image of this restriction by [def-weil-pbc-direct-image] and clause (2) of the injective-representative lemma.",
+   "text": "Convert each cohomology sheaf from finite-constant-value constructibility to the source constructibility predicate with lem-weil-pbc-constructible-etale-module-sheaf-comparison. The given vanishing below a and above b gives standard t-structure IsGE a and IsLE b by DerivedCategory.isGE_iff and isLE_iff. Thus K satisfies the existing source predicate boundedConstructible.",
    "uses": [
-    "lem-weil-pbc-module-sheaves-enough-injectives",
-    "lem-weil-pbc-dplus-injective-representative",
-    "lem-pur-kinjective-restrict-localized-adjunction",
-    "def-weil-pbc-direct-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-dg-finite-type-constructibility.proof.md",
-    "place": "Paragraphs 1–2: choose the injective representative and restrict it to opens"
-   }
-  },
-  {
-   "text": "For an open $V\\subseteq Y$, put $X_V=f^{-1}(V)$ and $f_V:X_V\\to V$. On an etale $W\\to V$, both $(f_*J)|_V$ and $(f_V)_*(J|_{X_V})$ have value $J(W\\times_Y X)$ by [def-weil-pbc-direct-image]. The identification respects the resolution differential, so step 2 identifies $(Rf_*K)|_V$ with $R(f_V)_*(K|_{X_V})$. Restriction of $K$ is bounded constructible by intersecting its strata with $X_V$ [def-weil-pbc-constructible-complexes]. Choose a finite affine cover $V_1,\\ldots,V_t$ of $Y$. Bounds on these opens give a global bound by taking their minimum and maximum. Constructibility glues: replace each finite stratification on $V_j$ by its intersections with $V_j\\setminus\\bigcup_{h<j}V_h$. These are finitely many disjoint locally closed constructible strata of $Y$, covering $Y$, and finite local constancy on each is unchanged. Opens are constructible by step 1. Vanishing can be checked on the cover because a sheaf locally zero is zero. It therefore suffices to handle affine $Y$.",
-   "uses": [
-    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
     "def-weil-pbc-constructible-complexes"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-dg-finite-type-constructibility.proof.md",
-    "place": "Paragraph 1: locality on Y and finite union of cohomological ranges"
-   }
+   "elementary": true
   },
   {
-   "text": "Assume $Y=\\operatorname{Spec}R$ and take a finite affine cover $X_1,\\ldots,X_r$ of $X$. The case $X=\\varnothing$ gives $K=0$ and $Rf_*K=0$, so assume $r\\geq1$. Write $X_i=\\operatorname{Spec}B_i$. Finitely many $k$-algebra generators of $B_i$ also generate it as an $R$-algebra. Thus $X_i\\to Y$ has an affine-space/projective-closure compactification by [prop-nagata-affine-compactification], [def-nagata-affine-compactification] and [def-nagata-compactification]. For each nonempty $I$ choose $i\\in I$. The intersection $X_I=\\bigcap_{j\\in I}X_j$ is an open subscheme of $X_i$, hence of this compactification $\\overline X_i$. Its inclusion $j_I$ followed by $p_i:\\overline X_i\\to Y$ is $f_I$. Both $X_I$ and $\\overline X_i$ are finite type over $k$: step 1 handles $X_I$, while $p_i$ is proper and hence finite type. Apply [cor-fin-deligne-open-finite-coefficients] to $j_I$ and [lem-fin-proper-bounded-constructible] to $p_i$. Fix any prime $\\ell\\neq\\operatorname{char}k$ (and any finite $E/\\mathbf Q_\\ell$), so that $\\ell$ is invertible on all schemes here, as the preamble of [lem-weil-derived-direct-image-composition] requires. Its clause (5), for arbitrary commutative $A$ on the small etale site, identifies $Rf_{I,*}(K|_{X_I})$ with $Rp_{i,*}Rj_{I,*}(K|_{X_I})$. Hence each belongs to $D^b_c(Y,A)$; choose bounds $a_I\\leq b_I$. Empty intersections contribute zero. This uses the same open/projective factorization as blueprint paragraph 1, with the ambient closure of $X_i$ instead of taking a second closure of $X_I$.",
-   "uses": [
-    "prop-nagata-affine-compactification",
-    "def-nagata-affine-compactification",
-    "def-nagata-compactification",
-    "cor-fin-deligne-open-finite-coefficients",
-    "lem-fin-proper-bounded-constructible",
-    "lem-weil-derived-direct-image-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-dg-finite-type-constructibility.proof.md",
-    "place": "Paragraph 1: factor the non-affine intersections as open immersions followed by proper morphisms"
-   }
+   "text": "Apply the already proved source declaration AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_locallyOfFiniteType in WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage. This is the same finite-type theorem on the same ordinary small-etale derived categories, expressed with the source constructibility predicate. It does not assume separatedness. Its proof uses finite affine-cover induction, the open/closed localization triangle and the open/proper compactification argument; it has no direct sorry. This is reuse of an existing proof of this node, not a new unproved intermediate theorem.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "For $u_I:X_I\\hookrightarrow X$, form the commuting double complex\n$$D^{p,q}=\\bigoplus_{|I|=p+1}f_{I,*}(J^q|_{X_I}),\\qquad 0\\leq p<r,$$\nwith alternating restriction differential and vertical differential induced by $J$. Its total differential is $d_h+(-1)^p d_v$ [def-sp-double-complex-total]. By [lem-dg-etale-injective-finite-cech-rows], the augmented ordered Cech row of each $J^q$ is split exact on $X$. The additive functor $f_*$ preserves the splitting equations, and finite sums and composite direct images identify its row terms with the displayed $D^{p,q}$ [def-weil-pbc-direct-image]. Thus each row augmentation $f_*J^q[0]\\to D^{\\bullet,q}$ is a quasi-isomorphism. The degreewise restriction maps define a chain map $f_*J\\to\\operatorname{Tot}(D)$: the horizontal augmentation differential is zero and the vertical differential commutes with restriction. Apply [lem-sc-finite-strip-row-augmentation] with strip width $r$ to conclude this map is a quasi-isomorphism. Therefore $\\operatorname{Tot}(D)$ represents $Rf_*K$. All diagonal sums are finite. If $J^q=0$ for $q<m$, reindex $q=t+m$ with $t\\geq0$ in the first-quadrant total definition and put $\\operatorname{Tot}(D)^n=\\operatorname{Tot}(D^{p,t+m})^{n-m}$, with the displayed differential.",
+   "text": "Convert constructible output cohomology back using lem-weil-pbc-constructible-etale-module-sheaf-comparison. If the source boundedness witnesses are a and b, use [min a b, max a b] as the output interval. A degree below min a b is below a; a degree above max a b is above b. Apply isGE_iff and isLE_iff to obtain the required vanishing. The normalized interval is ordered even for zero output, where arbitrary source witnesses need not be ordered.",
    "uses": [
-    "lem-dg-etale-injective-finite-cech-rows",
-    "def-sp-double-complex-total",
-    "def-weil-pbc-direct-image",
-    "lem-sc-finite-strip-row-augmentation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-dg-finite-type-constructibility.proof.md",
-    "place": "Paragraph 2: finite alternating Cech resolution after direct image and its total augmentation"
-   }
-  },
-  {
-   "text": "Filter $\\operatorname{Tot}(D)$ by $F^p\\operatorname{Tot}(D)^n=\\bigoplus_{s\\geq p}D^{s,n-s}$. This is a filtration by subcomplexes with $F^0=\\operatorname{Tot}(D)$ and $F^r=0$. The graded piece is the column in horizontal degree $p$, placed in total degrees $p+q$, with differential $(-1)^p d_v$ [def-sp-double-complex-total]. The maps required by [lem-sp-bounded-filtered-page-core],\n$$F^p/F^{p+t}\\longrightarrow F^{p-t+1}/F^{p+1}\\quad(t\\geq1),$$\nare induced by inclusions, since $F^{p+t}\\subseteq F^{p+1}$. That theorem gives stabilization and a finite filtration of the abutment, with\n$$E_1^{p,q}=\\bigoplus_{|I|=p+1}\\mathcal H^q(Rf_{I,*}(K|_{X_I}))\\Longrightarrow\\mathcal H^{p+q}(Rf_*K).$$\nThe column formula uses step 2: each $J|_{X_I}$ is a bounded-below injective representative, and finite sums commute with kernels and images; the sign $(-1)^p$ is a unit and changes neither. The uniform horizontal filtration is finite even when $J$ is unbounded above, so no unbounded-Cech convergence assertion is needed.",
-   "uses": [
-    "def-sp-double-complex-total",
-    "lem-sp-bounded-filtered-page-core"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-dg-finite-type-constructibility.proof.md",
-    "place": "Paragraphs 2–3: the displayed Cech spectral sequence and its finite abutment filtration"
-   }
-  },
-  {
-   "text": "Set $a=\\min_I a_I$ and $b=\\max_I b_I$. The first page vanishes outside $0\\leq p<r$, $a\\leq q\\leq b$. The same is true on all later pages, each being the cohomology of the preceding page. By [thm-constructible-serre], a finite sum of constructible sheaves is constructible, by its split short exact sequences. Kernels, images (kernels of cokernels), and their quotients are constructible by the same statement. Thus every page and every stationary term is constructible. The finite filtration of $\\mathcal H^n(Rf_*K)$ supplied in step 6 has these stationary terms as its graded pieces. Induction over the finite filtration, using extension closure, proves constructibility of the abutment. For $n<a$ or $n>b+r-1$ every graded piece is zero, so the abutment is zero. This is bounded constructibility [def-weil-pbc-constructible-complexes]. Step 3 glues the conclusion on $Y$. For $r=1$ there is one column; empty intersections and the zero complex give zero columns, so these cases cause no exception.",
-   "uses": [
-    "thm-constructible-serre",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
     "def-weil-pbc-constructible-complexes"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-dg-finite-type-constructibility.proof.md",
-    "place": "Paragraph 3: bounded rectangle, Serre closure, and finite filtration of the abutment"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-wf-affine-noetherian-components",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "lem-weil-pbc-dplus-injective-representative",
-  "lem-pur-kinjective-restrict-localized-adjunction",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-constructible-complexes",
-  "prop-nagata-affine-compactification",
-  "def-nagata-affine-compactification",
-  "def-nagata-compactification",
-  "cor-fin-deligne-open-finite-coefficients",
-  "lem-fin-proper-bounded-constructible",
-  "lem-weil-derived-direct-image-composition",
-  "lem-dg-etale-injective-finite-cech-rows",
-  "def-sp-double-complex-total",
-  "lem-sc-finite-strip-row-augmentation",
-  "lem-sp-bounded-filtered-page-core",
-  "thm-constructible-serre"
+  "sbc-def-coefficient-conventions",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "def-weil-pbc-constructible-complexes"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-dg-finite-type-constructibility.proof.md",
-  "place": "Paragraphs 1–3, with formal Cech and filtered-complex comparisons supplied by cited nodes"
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/Finiteness/DirectImage.lean",
+  "place": "boundedConstructible_rightDerivedLowerStar_of_locallyOfFiniteType (proved source theorem, lines 251–275), with finite-coefficient predicate comparison and standard t-structure bounds; source route documented at lines 236–250."
  },
  "mathlib_searches": [
   {
@@ -284,17 +207,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "lem-pur-kinjective-restrict-localized-adjunction",
-  "lem-weil-derived-direct-image-composition",
-  "lem-sp-bounded-filtered-page-core",
-  "thm-constructible-serre",
-  "lem-wf-affine-noetherian-components",
-  "prop-nagata-affine-compactification",
-  "lem-weil-pbc-dplus-injective-representative",
-  "lem-sc-finite-strip-row-augmentation"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -351,5 +264,15 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261018T062946-L-690484",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -8,19 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.SmoothBaseChangeCoefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
-import Sheaf.Algebra.Homology.LocalizedRestrictionAdjunction
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.Compactification.Affine
-import WeilConjectures.Compactification.Defs
-import Sheaf.AlgebraicGeometry.OpenDirectImageFiniteCoefficients
-import Sheaf.AlgebraicGeometry.ProperBoundedConstructible
-import Sheaf.CategoryTheory.DoubleComplexTotal
-import Sheaf.CategoryTheory.BoundedFilteredComplexPageCore
-import WeilConjectures.ConstructibleSheaf.KernelCokernel
-import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
-import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
-import Sheaf.Algebra.Homology.FiniteStripAugmentation
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 /-!
 # Bounded constructibility of finite-type direct images
@@ -93,6 +82,20 @@ theorem isBoundedConstructible_rightDerivedLowerStar_of_finiteType_over_field
     (K : DerivedCategoryModule A X) (hK : DerivedCategory.isBoundedConstructible A X K) :
     DerivedCategory.isBoundedConstructible A Y
       ((rightDerivedLowerStar (ModuleCat.{u + 1} A) f).obj K) := by
-  sorry
+  have : HasInvertibleExponent A (Spec (.of k)) :=
+    ⟨N, hA.1, hA.2.2.1, hA.2.2.2⟩
+  have hK' : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} A) X K := by
+    obtain ⟨hc, a, b, hab, hvan⟩ := hK
+    refine ⟨⟨⟨a, ?_⟩, ⟨b, ?_⟩⟩, fun q ↦
+      (Scheme.isConstructibleEtaleModuleSheaf_iff _).1 (hc q)⟩
+    · exact (_root_.DerivedCategory.isGE_iff K a).2 fun i hi ↦ hvan i (Or.inl hi)
+    · exact (_root_.DerivedCategory.isLE_iff K b).2 fun i hi ↦ hvan i (Or.inr hi)
+  obtain ⟨⟨⟨a, ha⟩, ⟨b, hb⟩⟩, hc⟩ :=
+    boundedConstructible_rightDerivedLowerStar_of_locallyOfFiniteType A f aX aY hf K hK'
+  refine ⟨fun q ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff _).2 (hc q),
+    min a b, max a b, min_le_max, fun i hi ↦ ?_⟩
+  rcases hi with hi | hi
+  · exact (_root_.DerivedCategory.isGE_iff _ a).1 ha i (lt_of_lt_of_le hi (min_le_left _ _))
+  · exact (_root_.DerivedCategory.isLE_iff _ b).1 hb i (lt_of_le_of_lt (le_max_right _ _) hi)
 
 end AlgebraicGeometry.Etale
