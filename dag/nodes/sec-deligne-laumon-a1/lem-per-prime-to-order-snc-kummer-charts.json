@@ -18,9 +18,101 @@
   "def-fin-normalization-extension",
   "def-weil-finite-integral-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $\\bar z$ above $\\bar y$. By [lem-per-regular-boundary-divisorial-chart], choose a pointed etale neighbourhood $U_0\\to Y$ with the sharp chart $P=\\mathbf N^r\\to M_Y$, whose generators have parameter images $t_1,\\ldots,t_r$. Its characteristic at the selected point is $P$, its triviality locus is $V$, and the base log scheme is log regular. Keep these particular component equations when refining $U_0$. This uses the regular Noetherian normal-crossings hypothesis and allows $r=0$.",
+   "uses": [
+    "lem-per-regular-boundary-divisorial-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.5(i) and IX 2.1 proof, p.133: the parameter chart on the regular base"
+   }
+  },
+  {
+   "text": "Apply [lem-per-snc-parameter-root-quotient] with $n=|G|$, using its last compatibility clause to refine $U_0$ with the same component equations. Its assumptions are exactly the connected etale torsor, the order invertible on all of $Y$, and the finite normalization assumed in the item. Obtain $U=\\operatorname{Spec}A$, a pointed etale neighbourhood $W\\to Z$, $\\zeta$, $H\\subseteq(\\mathbf Z/n\\mathbf Z)^r$, and $W\\cong\\operatorname{Spec}C$ over $U$, where $C=B^H$ and $B=A[x_i]/(x_i^n-t_i)$. In particular $W$ is Noetherian. The pulled-back chart $P\\to M_Y|_U$ is still the parameter chart of Step 1. The finite normalization and the passage from strict-local normal forms to actual etale neighbourhoods are part of the cited statement, not an assumption that strict localizations are etale neighbourhoods.",
+   "uses": [
+    "lem-per-snc-parameter-root-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 2.1 proof, pp.133--134: parameter-root invariant normal form, with its etale-local reduction"
+   }
+  },
+  {
+   "text": "Use [lem-per-diagonal-root-invariant-monoid-algebra] for $A,n,\\zeta,t_i,H$. Its root-of-unity and unit-separation hypotheses are provided by Step 2. It gives $Q=L\\cap(1/n)\\mathbf N^r$, fine saturated and sharp, $Q^{\\rm gp}=L$, and $h:P=\\mathbf N^r\\hookrightarrow Q$ with $nQ\\subseteq P$ and finite group cokernel killed by $n$. It also gives the specific ring isomorphism $A\\otimes_{\\mathbf Z[P]}\\mathbf Z[Q]\\cong C$ taking $z^{e_i}$ to $t_i$. Thus the invariant ring is identified with the monoid base change by a stated algebra lemma; no formation-of-invariants/base-change theorem is being assumed.",
+   "uses": [
+    "lem-per-diagonal-root-invariant-monoid-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 2.1 proof, p.133: invariant exponent lattice and monoid base change; VI 2.2--2.3"
+   }
+  },
+  {
+   "text": "On $W=\\operatorname{Spec}C$ form $N_W=L_W(Q,c)$ from the monoid homomorphism $c:Q\\to C$, $q\\mapsto c_q$. By [lem-trf-associated-log-universal-stalks] this is a log structure with chart $Q$, and it is fs because $Q$ is fs. Its universal property, applied to the maps on generators $e_i\\mapsto c_{e_i}=t_i$, supplies the morphism to $(U,M_Y|_U)$ with chart homomorphism $h$. By [lem-weil-pbc-fibre-product-affine-spectra] and the ring isomorphism of Step 3, the resulting comparison $W\\to U\\times_{\\operatorname{Spec}\\mathbf Z[P]}\\operatorname{Spec}\\mathbf Z[Q]$ is an isomorphism: both maps on its coordinate ring send $a\\otimes z^q$ to $a c_q$. In particular it is etale.",
+   "uses": [
+    "lem-trf-associated-log-universal-stalks",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.2, p.72: standard Kummer base change; IX 2.1 proof, p.133"
+   }
+  },
+  {
+   "text": "Apply [lem-per-invertible-kummer-chart-log-regular] to $(W,N_W)\\to(U,M_Y|_U)$. The schemes are locally Noetherian by Step 2; Step 1 gives a log regular base; Step 3 gives fs monoids, injectivity and finite cokernel killed by the invertible $n$; Step 4 gives the etale comparison. Hence $(W,N_W)$ is log regular. Its triviality locus is exactly $W_V=W\\times_Y V$: at a point over $V$ every $t_i$ is a unit, so $c_q^n=\\prod_i t_i^{nq_i}$ implies every $c_q$ is a unit. At a point outside $V$ some $t_i$ is not a unit, hence the chart element $e_i$ is not a unit and the characteristic is nonzero. Now [lem-trf-log-regular-divisorial-structure] identifies $N_W$ canonically, through its structure map, with $\\mathcal O_W\\cap j_{W*}\\mathcal O_{W_V}^{\\times}$. This provides compatibility on overlaps, rather than a choice of unrelated local log structures.",
+   "uses": [
+    "lem-per-invertible-kummer-chart-log-regular",
+    "lem-trf-log-regular-divisorial-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.4 and 1.8, pp.69--70; VI 2.2--2.3, pp.72--73"
+   }
+  },
+  {
+   "text": "Define globally $N=\\mathcal O_Z\\cap j_{Z*}\\mathcal O_{b^{-1}V}^{\\times}$ on the small etale site, where $j_Z:b^{-1}V\\hookrightarrow Z$. This is a sheaf of monoids and a log structure: being invertible after restriction is local for that site, and its inverse image of $\\mathcal O_Z^\\times$ is exactly $\\mathcal O_Z^\\times$. On an etale object over $W$ the defining intersection is exactly the intersection in Step 5, so $N|_W=N_W$. The pointed neighbourhoods $W$ cover $Z$, hence these fs charts make $N$ fs. Pullback of regular functions sends a section invertible on $V$ to one invertible on $b^{-1}V$, giving $b^{-1}M_Y\\to N$ compatible with structure maps. Locally this is the morphism of Step 4 since both maps send every parameter $t_i$ to $t_i$ and every unit to its pullback; the chart universal property in [lem-trf-associated-log-universal-stalks] makes them equal.",
+   "uses": [
+    "lem-trf-associated-log-universal-stalks"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.1 and 1.4: etale log structures and their divisorial identification; IX 2.1(iii)"
+   }
+  },
+  {
+   "text": "At the selected $\\bar w$ all $t_i$ lie in its maximal ideal. If $0\\ne q\\in Q$, the vector $nq\\in\\mathbf N^r$ is nonzero, so $c_q^n=\\prod_i t_i^{nq_i}$ lies in that maximal ideal; consequently $c_q$ is not a unit. Thus $c^{-1}(\\mathcal O_{W,\\bar w}^{\\times})=\\{0\\}$. The stalk pushout formula of [lem-trf-associated-log-universal-stalks] gives $(N_W)_{\\bar w}=Q\\oplus\\mathcal O_{W,\\bar w}^{\\times}$ and identifies its characteristic with $Q$. The base characteristic is $P$ by Step 1. Every $q$ has $nq\\in h(P)$, and the group cokernel is finite killed by the same $n$ invertible on $U$, as Step 3 requires. This proves all clauses at the arbitrary chosen pair. For $r=0$ the construction reads $P=Q=0$, $C=A$ and $N_W=\\mathcal O_W^\\times$, so it also covers the empty boundary.",
+   "uses": [
+    "lem-trf-associated-log-universal-stalks"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 2.1 proof, pp.133--134; VI 2.1--2.2: sharp characteristic charts and Kummer condition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-diagonal-root-invariant-monoid-algebra",
+  "lem-per-invertible-kummer-chart-log-regular",
+  "lem-per-regular-boundary-divisorial-chart",
+  "lem-per-snc-parameter-root-quotient",
+  "lem-trf-associated-log-universal-stalks",
+  "lem-trf-log-regular-divisorial-structure",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose IX Proposition 2.1 proof, printed pp.133--134; Expose VI 1.4, 1.8 and 2.1--2.3, printed pp.69--73. The scheme root-quotient and invariant-lattice arguments are stated separately; local divisorial recognition makes the global log structure canonical."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +148,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"NormalizationMonoid\", \"module\": \"Mathlib.Algebra.GCDMonoid.Basic\", \"type\": \"(α : Type u_2) → [CommMonoidWithZero α] → Type u_2\", \"doc\": \"A structure on a commutative monoid with zero that includes normalization properties, ensuring each element has a normalized form under specified conditions.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] (U : ↑Y.affineOpens) {Z : AlgebraicGeometry.Scheme}\\n  (h : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp ((TopologicalSpa\", \"doc\": \"Given a quasi-compact and quasi-separated morphism $ f: X \\to Y $ of schemes, there exists a morphism from $ X $ to the normalization of $ f $, constructed by gluing local integral closure maps over an\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalizationDesc\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(H : f = f₁ ≫ f₂) : f.normalization ⟶ T\", \"doc\": \"A morphism from the normalization of a scheme morphism $ f: X \\to Y $ to another scheme $ T $, constructed as the colimit in the category of schemes of a diagram involving the affine Zariski site of $ \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": X ⟶ f.normalization\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \": PreservesLocalization _ ((toOpensFunctor Y).op.whiskerLeft f.normalizationDiagramMap)\", \"doc\": \"For a scheme morphism $ f $, the normalization diagram functor $ F $ equipped with a natural transformation $ \\\\alpha: \\\\mathcal{O}_Y \\\\Rightarrow F $ satisfies the localization condition: for every affi\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"[IsIntegralHom f] : IsIso f.toNormalization\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.Normalization\", \"type\": \"(U : Y.affineOpens) :\\n  letI := (f.app U.1).hom.toAlgebra\\n  (f ⁻¹ᵁ U.1).ι ≫ f.toNormalization =\\n    (f ⁻¹ᵁ U.1).toSpecΓ ≫\\n      Spec.map (CommRingCat.ofHom <| integralClosure Γ(Y, U.1) Γ(X, f ⁻¹ᵁ U.1) |>.val.toRingHom) ≫\\n        f.normalizationOpenCover.f U\", \"doc\": \"For an affine open subset $U$ of a scheme $Y$, the composition of the inclusion morphism $f^{-1}(U) \\\\to X$ followed by the normalization morphism $X \\\\to \\\\overline{X}$ equals the composition of the can\"}\n  {\"name\": \"instMonoidHomClassContMDiffMonoidMorphism\", \"module\": \"Mathlib.Geometry.Manifold.Algebra.Monoid\", \"type\": \": MonoidHomClass (ContMDiffMonoidMorphism I I' n G G') G G'\", \"doc\": \"The type of smooth monoid morphisms between charted spaces with corners is equipped with a monoid homomorphism class structure, ensuring that each morphism preserves the monoid multiplication and iden\"}",
    "date": "2026-10-19",
    "verdict": "no match: read the returned signatures; ordinary smooth/etale morphisms, scheme normalization, Kummer field extensions, and regular-sequence dimension do not state this logarithmic assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale locally the finite normalization in a prime to residue characteristic torsor on a regular normal crossings complement is an invariant ring of a parameter root algebra",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePair.instAlgebraRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (P : StandardEtalePair R) → Algebra R P.Ring\", \"doc\": \"For a commutative ring $ R $ and a standard étale pair $ P $ over $ R $, the quotient ring $ P.\\\\text{Ring} $ inherits a canonical $ R $-algebra structure from the polynomial ring $ R[X,Y] $, induced b\"}\n  {\"name\": \"StandardEtalePair.hasMap_X\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {P : StandardEtalePair R}, P.HasMap P.X\", \"doc\": \"In the standard étale ring extension $ R[X,Y]/(f, Yg - 1) $, the image of the indeterminate $ X $ satisfies $ f(X) = 0 $ and $ g(X) $ is invertible (a unit) in the ring.\"}\n  {\"name\": \"StandardEtalePresentation\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_4) → (S : Type u_5) → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → Type (max u_4 u_5)\", \"doc\": \"A standard étale presentation of an algebra $ S $ over a commutative ring $ R $, providing a way to express $ S $ as a localization of a polynomial ring over $ R $ modulo an ideal, satisfying the nece\"}\n  {\"name\": \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (P : Ideal R) [inst_1 : P.IsPrime] (p : Polynomial R)\\n  (f g : Polynomial P.ResidueField),\\n  p.Monic →\\n    f.Monic →\\n      g.Monic →\\n        Polynomial.map (algebraMap R P.ResidueField) p = f * g →\\n          IsCoprime f g →\\n            ∃ R' x x_1,\\n              ∃ (\", \"doc\": \"Given a ring homomorphism $ f : A → B $ between commutative rings and prime ideals $ I ⊆ A $, $ J ⊆ B $ such that $ I $ is the preimage of $ J $ under $ f $, there exists a unique $ R $-algebra homomo\"}\n  {\"name\": \"StandardEtalePair\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_1) → [CommRing R] → Type u_1\", \"doc\": \"A structure for a commutative ring $ R $ equipped with data defining a standard étale pair, used in the context of étale morphisms in algebraic geometry.\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"StandardEtalePair.instCommRingRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (P : StandardEtalePair R) → CommRing P.Ring\", \"doc\": \"For a commutative ring $ R $ and a standard étale pair $ (f, g) $ over $ R $, the quotient ring $ R[X, Y]/(f, Yg - 1) $ forms a commutative ring. This structure establishes that the standard étale rin\"}\n  {\"name\": \"StandardEtalePair.instEtaleRing\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R), Algebra.Etale R P.Ring\", \"doc\": \"For a commutative ring $ R $ and a standard étale pair $ P $ over $ R $, the ring $ P.\\\\text{Ring} $ is an étale $ R $-algebra. This instance establishes that the standard étale ring extension, constru\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations do not give this parameter-root quotient or its invariant exponent-monoid algebra and fs lattice assertions."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"torsor\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations do not give this parameter-root quotient or its invariant exponent-monoid algebra and fs lattice assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "Abhyankar|Kummer.*[Cc]over|[Tt]ame.*[Ff]undamental|[Ss]trict.*[Nn]ormal.*[Cc]rossing",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations do not give this parameter-root quotient or its invariant exponent-monoid algebra and fs lattice assertions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite etale prime to characteristic covers of a normal crossings complement are locally quotients of covers adjoining roots of regular parameters",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[EssFiniteType K A] :\\n  FormallyEtale K A ↔\\n    ∃ (I : Type u) (_ : Finite I) (Ai : I → Type u) (_ : ∀ i, Field (Ai i)) (_ : ∀ i, Algebra K (Ai i)) (_ :\\n      A ≃ₐ[K] Π i, Ai i), ∀ i, Algebra.IsSeparable K (Ai i)\", \"doc\": \"A finitely generated algebra $ A $ over a field $ K $ is formally étale if and only if there exists a finite index set $ I $ and a family of field extensions $ \\\\{A_i\\\\}_{i \\\\in I} $, each separable over\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"Algebra.IsEtaleAt.comp\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(p : Ideal A) (P : Ideal B) [P.LiesOver p] [p.IsPrime] [P.IsPrime] [IsEtaleAt R p] [IsEtaleAt A P] : IsEtaleAt R P\", \"doc\": \"If $ A $ is étale over $ R $ at a prime ideal $ \\\\mathfrak{p} $, and $ B $ is étale over $ A $ at a prime ideal $ \\\\mathfrak{P} $ lying over $ \\\\mathfrak{p} $, then $ B $ is étale over $ R $ at $ \\\\mathfr\"}\n  {\"name\": \"Algebra.exists_etale_of_isEtaleAt\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(P : Ideal A) [P.IsPrime] [IsEtaleAt R P] : ∃ f ∉ P, Algebra.Etale R (Localization.Away f)\", \"doc\": \"If an $ R $-algebra $ A $ is étale at a prime ideal $ \\\\mathfrak{p} $, then there exists an element $ f \\\\notin \\\\mathfrak{p} $ such that the localization of $ A $ away from $ f $ is an étale $ R $-algeb\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_isSeparable\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[EssFiniteType K L] : FormallyEtale K L ↔ Algebra.IsSeparable K L\", \"doc\": \"For a commutative ring $ K $ and a $ K $-algebra $ L $ of essential finite type, $ L $ is formally étale over $ K $ if and only if $ L $ is separable over $ K $.\"}\n  {\"name\": \"Algebra.IsEtaleAt\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \"(q : Ideal A) [q.IsPrime] : Prop\", \"doc\": \"An algebra $ A $ over a commutative ring $ R $ is said to be étale at a prime ideal $ q $ if the localization of $ A $ at $ q $ is formally étale, meaning the localized algebra satisfies the infinites\"}\n  {\"name\": \"Algebra.isOpen_etaleLocus\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \": IsOpen (etaleLocus R A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ over the commutative ring $R$ is étale forms an open subset of the prime spectrum $\\\\operatorname{Spec}(A)$ under\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib.RingTheory.Etale.Locus\", \"type\": \": Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations do not give this parameter-root quotient or its invariant exponent-monoid algebra and fs lattice assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every invertible order torsor on a punctured regular strict local scheme is dominated by a simultaneous root extension along boundary parameters",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Proj.valuativeCriterion_existence_aux\", \"module\": \"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Proper\", \"type\": \"∀ {σ : Type u_1} {A : Type u_2} [inst : CommRing A] [inst_1 : SetLike σ A] [inst_2 : AddSubgroupClass σ A] (𝒜 : ℕ → σ)\\n  [inst_3 : GradedRing 𝒜] {O : Type u_3} [inst_4 : CommRing O] [inst_5 : IsDomain O] [ValuationRing O] {K : Type u_4}\\n  [inst_7 : Field K] [inst_8 : Algebra O K] [IsFractionRing O K\", \"doc\": \"Let $ O $ be a commutative valuation ring with fraction field $ K $, and let $ \\\\mathcal{A} $ be a graded $ O $-algebra. Given a finite set $ \\\\{x_i\\\\}_{i \\\\in I} $ of homogeneous elements in $ \\\\mathcal{A\"}\n  {\"name\": \"AlgebraicGeometry.exists_lift_of_germInjective_aux\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R A : CommRingCat} {U : X.Opens} {x : ↥X} (hxU : x ∈ U) (φ : A ⟶ X.presheaf.stalk x)\\n  (φRA : R ⟶ A) (φRX : R ⟶ X.presheaf.obj (Opposite.op U)),\\n  (CommRingCat.Hom.hom φRA).FiniteType →\\n    CategoryTheory.CategoryStruct.comp φRA φ = CategoryTheory.CategoryStruct.com\", \"doc\": \"Given a point $x$ in an open subset $U$ of a scheme $X$, a morphism $\\\\phi: A \\\\to \\\\mathcal{F}_x$ to the stalk of a presheaf $\\\\mathcal{F}$ at $x$, and compatible ring homomorphisms $\\\\phi_{RA}: R \\\\to A$ \"}\n  {\"name\": \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X}\\n  [X.IsGermInjectiveAt x] (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y),\\n  CategoryTheory.CategoryStruct.comp φ sY = CategoryTheory.CategoryStruct.comp (X.fromSpecStalk x) sX →\\n\", \"doc\": \"Let $X$ and $Y$ be schemes with $s_X: X \\\\to S$ and $s_Y: Y \\\\to S$ morphisms locally of finite type. For a point $x \\\\in X$ where the germ map at $x$ is injective, and a morphism $\\\\phi: \\\\operatorname{Sp\"}\n  {\"name\": \"AlgebraicGeometry.exists_lift_of_germInjective\", \"module\": \"Mathlib/AlgebraicGeometry/SpreadingOut\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {R A : CommRingCat} {x : ↥X} [X.IsGermInjectiveAt x] {U : X.Opens} (hxU : x ∈ U)\\n  (φ : A ⟶ X.presheaf.stalk x) (φRA : R ⟶ A) (φRX : R ⟶ X.presheaf.obj (Opposite.op U)),\\n  (CommRingCat.Hom.hom φRA).FiniteType →\\n    CategoryTheory.CategoryStruct.comp φRA φ = CategoryT\", \"doc\": \"Given a scheme $X$ with injective germ at a point $x$, an open subset $U$ containing $x$, and morphisms $\\\\phi: A \\\\to \\\\mathcal{F}_x$, $\\\\phi_{RA}: R \\\\to A$, and $\\\\phi_{RX}: R \\\\to \\\\Gamma(U, \\\\mathcal{F})$\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"module\": \"Mathlib/AlgebraicGeometry/StructureSheaf\", \"type\": \"∀ (R : Type u) [inst : CommRing R] (U : TopologicalSpace.Opens ↑(AlgebraicGeometry.PrimeSpectrum.Top R))\\n  (s : ↑((AlgebraicGeometry.Spec.structureSheaf R).val.obj (Opposite.op U))) {ι : Type u_1} (t : Finset ι) (a h : ι → R)\\n  (iDh : (i : ι) → PrimeSpectrum.basicOpen (h i) ⟶ U),\\n  U ≤ ⨆ i ∈ t, Prim\", \"doc\": \"Given an open set $ U $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ of a commutative ring $ R $, a section $ s $ of the structure sheaf over $ U $, and a finite cover of $ U $ by basic open sets \"}\n  {\"name\": \"AlgebraicGeometry.exists_basicOpen_le_appLE_of_appLE_of_isAffine\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/RingHomProperties\", \"type\": \"∀ {P : {R S : Type u} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop} {X Y : AlgebraicGeometry.Scheme}\\n  {f : X ⟶ Y},\\n  (RingHom.StableUnderCompositionWithLocalizationAwayTarget fun {R S} [CommRing R] [CommRing S] => P) →\\n    (RingHom.LocalizationAwayPreserves fun {R S} [CommRing R\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes, and let $P$ be a property of ring homomorphisms that is stable under composition with localization and preserved by localization. Let $x \\\\in X$ be a point.\\\\n\"}\n  {\"name\": \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) (U : X.Opens),\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (f : ↑(X.presheaf.obj (Opposite.op U))) (x : ↑(X.presheaf.obj (Opposite.op (X.basicOpen f)))),\\n      ∃ n y, TopCat.Presheaf.restrictOpen y (X.basicOpen f) ⋯ = TopCat.Presheaf.restrictOpen f (X.basicOpen f) ⋯ ^\", \"doc\": \"For any affine open subset $ U $ of a scheme $ X $, a section $ f $ over $ U $, and a section $ x $ over the basic open set $ D(f) $ defined by $ f $, there exists a natural number $ n $ and a section\"}\n  {\"name\": \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiCompact\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) {U : X.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ (x f : ↑(X.presheaf.obj (Opposite.op U))),\\n      TopCat.Presheaf.restrictOpen x (X.basicOpen f) ⋯ = 0 → ∃ n, f ^ n * x = 0\", \"doc\": \"For an affine open subset $ U $ of a scheme $ X $, if a section $ x $ of the structure sheaf $ \\\\mathcal{O}_X $ over $ U $ vanishes on the basic open set $ D(f) $ defined by a section $ f \\\\in \\\\Gamma(U,\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations do not give this parameter-root quotient or its invariant exponent-monoid algebra and fs lattice assertions."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-tame-normalization-log-regular",
@@ -85,5 +212,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-prime-to-order-snc-kummer-charts",
+  "worker": "stage1",
+  "summary": "Retained the earlier sandbox item and searches, compared it with the current repository, and completed a seven-step proof following ILO IX 2.1. Added only the underlying scheme parameter-root quotient and its invariant-lattice algebra as unsplit inputs. Constructed the global divisorial log structure explicitly, verified chart compatibility and sharpness, and reused the reviewed regular-boundary and invertible-Kummer log-regularity results. Statement unchanged.",
+  "blueprint": "Realizes the uniformization/tame-normalization input under ancestor lem-per-artin-gabber-affine-curve Step 3, through lem-per-tame-normalization-log-regular. Steps 1--4 realize ILO IX 2.1 local normal form; Steps 5--7 construct the global fs structure and check every requested chart clause. No unit or chapter route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-associated-log-universal-stalks",
+    "why": "Associated-log construction, chart universal property, restriction and stalk formula; generic log-sheaf tool not supplied by the perverse unit."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Identifies the actual scheme chart comparison with the explicit tensor-product ring isomorphism."
+   },
+   {
+    "node": "lem-trf-log-regular-divisorial-structure",
+    "why": "Recognizes each local log structure as the same canonical divisorial subsheaf, so the charts define one global log structure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-associated-log-universal-stalks",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-trf-log-regular-divisorial-structure"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-b5106d52f",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-b5106d52f (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, every cited statement, and ILO IX 1.4-2.4 (printed pp.132-134). The item statement and stmt_deps are byte-identical to the base; the live node is still unsplit. The seven steps follow IX 2.1: (1) parameter chart from the regular-boundary node; (2) etale-local root-quotient normal form; (3) invariant-lattice algebra; (4) associated log structure plus the fibre-product leaf, so the comparison is an isomorphism; (5) VI 1.8 log regularity, triviality locus = W_V, divisorial identification; (6) global N = O ∩ j_*O^x, glued (elementary); (7) characteristic Q at the selected point. Every cited statement says what the step takes from it, and r=0 is covered. New node lem-per-diagonal-root-invariant-monoid-algebra is true: H acts on the free basis x^m by characters, unit separation leaves only invariant monomials, and Z[Q] is free over Z[P] on z^rho, rho in L∩[0,1)^r. Tested on r=1,n=2,H=Z/2; H=0; r=2,H=<(1,1)> giving A[w]/(w^2-t1t2); and n=1. New node lem-per-snc-parameter-root-quotient is true: tame Abhyankar for exponent |G|, normalization commutes with etale base change, descent from the strict henselization, and 1-zeta^a units since their product is n. It is strictly smaller than the item and cites no SGA (route lock respected); its later split must use the Stacks Abhyankar lemma. Duplicate search: the sbc root nodes cover one divisor, punctured torsors only; lem-sbc-strict-local-root-invariants is the r=1 special case; lem-per-very-tame-local-kummer-quotient is strict-local log charts. None is a duplicate. Tool uses accepted: associated-log, fibre-product leaf, log-regular divisorial structure (as at Q73). Batch 5: I computed each flagged citation's own closure. All are generic log, monoid or commutative algebra (fs/SNC definitions, VI 1.8, K0/UFD, sheafification, Nizol 2.6), with no thm-trf, sk-*, trace or Poincare node and no step of either assumed proof. All accepted. No fixes."
  }
 }
