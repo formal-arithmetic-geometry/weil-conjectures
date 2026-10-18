@@ -22,9 +22,79 @@
   "def-weil-open-immersion",
   "def-weil-pbc-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a Galois partition $\\mathcal P$ of $X$. Apply [lem-per-galois-localization-uniform-bounds](2) to obtain partitions $\\mathcal P_Z,\\mathcal P_U$ and a bound $d_i\\ge0$. Thus for every $N\\in D^b_{\\mathcal P}(X,A)$, the objects $Ri^!N$ and $j^*N$ are bounded in those fixed partition categories, and remain constructible if $N$ is constructible. If $N\\in D^{\\le0}$, their upper bounds are $d_i$ and $0$, respectively. These choices depend on $\\mathcal P$, not on $N$.",
+   "uses": [
+    "lem-per-galois-localization-uniform-bounds"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Lemma 7.6.10, p. 313"
+   }
+  },
+  {
+   "text": "Use the assumed condition (B) for $i^*K$ with input partition $\\mathcal P_Z$. Choose its output partition $\\mathcal Q_Z$ and integer $c_Z$. Then $C_N=R\\mathcal Hom_A(i^*K,Ri^!N)$ is bounded with cohomology in $\\mathcal W_{\\mathcal Q_Z}(A)$ and is constructible when $N$ is. For $N\\in D^{\\le0}$, the shifted input $(Ri^!N)[d_i]$ lies in $D^{\\le0}$, so (B) puts $R\\mathcal Hom_A(i^*K,(Ri^!N)[d_i])=C_N[d_i]$ in $D^{\\le c_Z}$. The Hom-complex definition [def-pur-derived-internal-hom] identifies shifting the second variable with shifting its Hom complex. Hence $C_N\\in D^{\\le c_Z+d_i}$.",
+   "uses": [
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Lemma 7.6.10, p. 313"
+   }
+  },
+  {
+   "text": "Apply condition (B) for $j^*K$ with input partition $\\mathcal P_U$, obtaining $\\mathcal Q_U,c_U$. Then $E_N=R\\mathcal Hom_A(j^*K,j^*N)$ is bounded in $D^b_{\\mathcal Q_U}(U,A)$, constructible for constructible $N$, and in $D^{\\le c_U}$ when $N\\in D^{\\le0}$. Apply [lem-per-galois-localization-uniform-bounds](1) to the fixed partition $\\mathcal Q_U$, obtaining $\\mathcal Q_X,d_j$. It follows that $B_N=Rj_*E_N$ is bounded in $D^b_{\\mathcal Q_X}(X,A)$, constructible for constructible $N$, and in $D^{\\le c_U+d_j}$ when $N\\in D^{\\le0}$.",
+   "uses": [
+    "lem-per-galois-localization-uniform-bounds"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Lemma 7.6.10, p. 313"
+   }
+  },
+  {
+   "text": "The exact closed direct image in [lem-trf-oriented-closed-base-localization] gives $H^q(i_*C_N)=i_*H^q(C_N)$, with zero restriction to $U$ and restriction $H^q(C_N)$ to $Z$. Glue $\\mathcal Q_Z$ to the partition of $U$ by its finitely many connected reduced components with identity covers. This is a Galois partition $\\mathcal Q_0$ of $X$. The defining stratum restrictions show that $i_*C_N$ belongs to $D^b_{\\mathcal Q_0}(X,A)$; they also show constructibility when $C_N$ is constructible. Exactness preserves its degree bounds. By [lem-per-galois-partition-exact-refinement], choose a common refinement $\\mathcal R$ of $\\mathcal Q_0$ and $\\mathcal Q_X$. Both $A_N=i_*C_N$ and $B_N$ are now in $D^b_{\\mathcal R}(X,A)$.",
+   "uses": [
+    "lem-trf-oriented-closed-base-localization",
+    "lem-per-galois-partition-exact-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Lemma 7.6.10, p. 313"
+   }
+  },
+  {
+   "text": "The triangle of [lem-per-etale-internal-hom-localization] is $A_N\\to R\\mathcal Hom_A(K,N)\\to B_N\\to A_N[1]$. Its cohomology sequence [lem-sf-derived-homology-long-exact] expresses each middle cohomology sheaf as an extension of $\\operatorname{coker}(H^{q-1}B_N\\to H^qA_N)$ by $\\ker(H^qB_N\\to H^{q+1}A_N)$. The exact abelian, extension-closed category in [lem-per-galois-partition-exact-refinement] contains both, and hence the middle sheaf. Boundedness follows from the same exact sequence and boundedness of the two ends. Its constructible subcategory is closed under these kernels, cokernels and extensions, so the middle complex is constructible whenever $N$ is. If $N\\in D^{\\le0}$, both ends vanish above $c=\\max(c_Z+d_i,c_U+d_j)$; exactness gives the same upper bound for the middle. The partition $\\mathcal R$ and $c$ depend only on $\\mathcal P$ and the fixed $K,i,j$. These are all three clauses of condition (B).",
+   "uses": [
+    "lem-per-etale-internal-hom-localization",
+    "lem-sf-derived-homology-long-exact",
+    "lem-per-galois-partition-exact-refinement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Lemma 7.6.10, p. 313"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-galois-localization-uniform-bounds",
+  "def-pur-derived-internal-hom",
+  "lem-trf-oriented-closed-base-localization",
+  "lem-per-galois-partition-exact-refinement",
+  "lem-per-etale-internal-hom-localization",
+  "lem-sf-derived-homology-long-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, Lemma 7.6.10, proof p. 313, with the uniformity statements of 7.6.3-7.6.7"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,10 +130,17 @@
    "results": "8 hits; top: CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE, DerivedCategory.isGE_Q_obj_iff; note: ; digest: 33e37bb49eccf0d8",
    "date": "2026-10-18",
    "verdict": "no match: generic category, scheme, or condensed-module infrastructure does not state this theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom condition B glues across a closed subscheme and its open complement",
+   "results": "8 hits; top: AlgebraicGeometry.Scheme.IdealSheafData.subSchemeCover_map_inclusion, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_ι, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_ι_assoc, AlgebraicGeometry.liftCoborder_app, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.Scheme.IdealSheafData.opensRange_glueDataObjMap, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap, AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjMap_glueDataObjι_assoc; note: ; digest: 1d6910b7130b6614",
+   "date": "2026-10-18",
+   "verdict": "no match: only scheme immersion and restriction identities, not this condition (B) theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-ctf-hom-condition-b",
@@ -87,5 +164,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-ctf-hom-localization-devissage",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Expanded the localization proof into uniform closed and open inputs, two uses of the assumed local condition (B), explicit output partition gluing, and the long exact cohomology argument with the uniform upper bound. Created two statement-only dependencies for the actual arbitrary-coefficient etale localization results; reused exact closed support and common Galois refinement.",
+  "blueprint": "Proof, Step 1 of lem-per-artin-gabber-affine-curve: 'Relative Verdier duality, biduality ... over the same arbitrary field $k$', through lem-per-qbar-arbitrary-field-duality, lem-per-finite-residue-dualizing and lem-per-potential-local-duality; the last node's Step 2 extends finite-field coefficients.; coefficient comparison via ILO XVII 7.6.1, proof p. 314. Subargument: ILO XVII 7.6.10 closed/open devissage.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-oriented-closed-base-localization",
+    "why": "Exactness and essential image of closed direct image for arbitrary constant coefficient modules on the ordinary etale site; generic closed-topos tool, not a replacement for this unit route."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic long exact cohomology sequence of a distinguished triangle; the unit has no specialized replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-oriented-closed-base-localization",
+  "lem-sf-derived-homology-long-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-45553e2d1",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-45553e2d1 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement and ILO XVII 7.3.1-7.3.8 and 7.6.1-7.6.11 (pp. 303-314) in full. The item's statement is unchanged from the base (checked against the Q57 snapshot) and matches ILO 7.6.10 with Definition 7.6.8, all three clauses of (B) included. Step 1 takes (2) of the uniform-bounds node, which supplies partitions and bounds independent of N. Step 2 is genuinely elementary: the shift sign gives the bound c_Z+d_i. In Step 3 the partition Q_U is fixed before Rj_* is applied, and (1) gives the bound c_U+d_j. Step 4 takes exactness of i_*, i^*i_* = 1 and j^*i_* = 0 from the trf node, and Q_0 (Q_Z plus the components of U with identity covers) is a valid Galois partition. Step 5 uses the triangle and the long exact sequence; the coker/ker extension and the max bound need no rotation shift. New node lem-per-etale-internal-hom-localization is true: it is the ILO 7.6.10 triangle, restricted to bounded K and bounded-below N, and no DAG node duplicates it. New node lem-per-galois-localization-uniform-bounds combines 7.6.3 and 7.6.5-7.6.7. The word 'ouverte' in the printed 7.6.6 is correctly recorded as a typo for a closed immersion, as the proof shows. Arbitrary A is justified: Rj_* and Ri^! can be computed on the underlying Lambda-sheaves, and FCons membership depends only on the pi_1-module. Neither new node restates a clause of the item or its parent. Edge cases checked: Z or U or X empty, K = 0, A = Lambda[t]. Batch-5 check: lem-trf-oriented-closed-base-localization is already in the closure of the nt-target-weil-conjectures and nt-target-zeta-rational targets without this citation, which removes 0 nodes. Its own 228-node closure is generic topos and module infrastructure with no trace-formula or Poincare-duality statement, so it lies outside the assumed statements and is accepted. Accepted tool_uses: that trf node and lem-sf-derived-homology-long-exact. No SGA source is cited. No fixes."
  }
 }
