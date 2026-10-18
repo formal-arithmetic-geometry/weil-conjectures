@@ -22,9 +22,135 @@
   "def-weil-proper-morphism",
   "def-weil-finite-type-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $n,x$ as in the statement, put $s=\\operatorname{Spec}k$, and write $P_F=L\\bar x_F^*$, $Q_F=\\operatorname{Fib}_{s,F}$, $D_F=Q_FP_F$, $G_{F,r}=L(g_X^r)_F^*$ and $S_{F,r}=L(g_s^r)_F^*$. A superscript $T$ denotes extension from $F\\in\\{E,E'\\}$ to $L$. The point-sections comparison and the pullback/scalar comparison give the natural isomorphism $b_M:D_F(M)\\otimes_F L\\to D_L(M^T)$ specified in the statement. Naturality holds for rationalized morphisms as well: the integral naturality equation extends linearly to Hom groups tensored with $F$. All objects used here are in the constructible categories. Since $\\ell\\ne p$, $\\ell$ is invertible on $X,s$. Thus both cited comparisons apply to $\\bar x,g_X^r,g_s^r$, without restrictions on finite-reduction Tor-amplitude.",
+   "uses": [
+    "lem-weil-point-sections-scalar-extension",
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Displayed alternating-trace formula and final sentence: representative independence of the local operators in each cohomological degree"
+   }
+  },
+  {
+   "text": "Put $A=M_E^T$, $B=(M'_{E'})^T$ with their extended Weil maps $\\alpha,\\beta$, and write $G_r=G_{L,r}$. In the specified composition identifications, the Weil-pair equation implies $u\\alpha^{[r]}=\\beta^{[r]}G_r(u)$ for every $r\\geq1$. The base case is the assumed equation. If it holds for $r$, then\n$$u\\alpha^{[r+1]}=\\beta^{[r]}G_r(u)G_r(\\alpha)=\\beta^{[r]}G_r(u\\alpha)=\\beta^{[r]}G_r(\\beta)G_rG_1(u)=\\beta^{[r+1]}G_{r+1}(u).$$\nThe last equality uses naturality of the composition comparison; its associativity makes these the iterates in the local-operator definition. This is an induction on the given intertwining equation, not an assertion that an arbitrary underlying isomorphism is equivariant.",
+   "uses": [
+    "def-weil-weil-sheaf-complex",
+    "def-weil-local-frobenius-trace",
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Displayed alternating-trace formula and final sentence: representative independence of the local operators in each cohomological degree"
+   }
+  },
+  {
+   "text": "For any coefficient field $F$ in use and any morphism $v:N\\to N'$ on $s$, naturality of $\\iota$ implies\n$$Q_F(S_{F,r}v)I_N^{[r]}=I_{N'}^{[r]}Q_F(v).$$\nIndeed, before replacing repeated pullbacks by $S_{F,r}$, set $J_1(N)=\\iota_N$ and $J_{r+1}(N)=\\iota_{(Lg_s^*)^rN}J_r(N)$. The cited naturality equation, applied to $(Lg_s^*)^rv$, and the inductive equation for $J_r$ give the equation for $J_{r+1}$. Apply the natural pullback-composition comparison to obtain the displayed formula for $I^{[r]}$. This induction applies to $N=P_LA$, $N'=P_LB$ and $v=P_Lu$.",
+   "uses": [
+    "lem-weil-frobenius-point-transport-natural",
+    "def-weil-local-frobenius-trace",
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Displayed alternating-trace formula and final sentence: representative independence of the local operators in each cohomological degree"
+   }
+  },
+  {
+   "text": "For $r=n$ let $\\rho_{F,M}:S_{F,n}P_FM\\xrightarrow{\\sim}P_FG_{F,n}M$ be the return comparison from $g_X^n\\bar x=\\bar xg_s^n$. It is a composite of natural pullback-composition comparisons and the identification for this equality of scheme maps. Consequently $P_FG_{F,n}(v)\\rho_{F,M}=\\rho_{F,M'}S_{F,n}P_F(v)$. Define $R_F(M)=Q_F(\\rho_{F,M})I_{P_FM}^{[n]}$. Step 3 and this equation give $D_F(G_{F,n}v)R_F(M)=R_F(M')D_F(v)$. The defining local operator is $\\mathcal F_F(M,\\theta)=D_F(\\theta^{[n]})R_F(M)$. Hence steps 2 and 3 give, for $U=D_L(u)$,\n$$U\\mathcal F_L(A,\\alpha)=D_L(u\\alpha^{[n]})R_L(A)=D_L(\\beta^{[n]})R_L(B)U=\\mathcal F_L(B,\\beta)U.$$\nHere the return comparison uses the semilinear equality of maps displayed above; it does not identify $g_X^n\\bar x$ with $\\bar x$.",
+   "uses": [
+    "def-weil-local-frobenius-trace",
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Displayed alternating-trace formula and final sentence: representative independence of the local operators in each cohomological degree"
+   }
+  },
+  {
+   "text": "For $F=E$ or $E'$, let $a_{r,M}:(G_{F,r}M)^T\\xrightarrow{\\sim}G_{L,r}(M^T)$ be the specified scalar comparison. If $\\theta_L$ is the extended Weil map, its definition says $\\theta_La_{1,M}=(\\theta)^T$. Inductively,\n$$\\theta_L^{[r]}a_{r,M}=(\\theta^{[r]})^T.$$\nTo check the induction, the composition/scalar equation identifies $a_{r+1,M}$, after the composition identifications, with $G_{L,r}(a_{1,M})a_{r,G_{F,1}M}$. Naturality of $a_r$ for $\\theta:G_{F,1}M\\to M$ gives\n$$G_{L,r}(\\theta^T)a_{r,G_{F,1}M}=a_{r,M}(G_{F,r}\\theta)^T.$$\nSubstitute this and $\\theta_La_{1,M}=\\theta^T$ into $\\theta_L^{[r]}G_{L,r}(\\theta_L)a_{r+1,M}$. The result is $(\\theta^{[r]})^T(G_{F,r}\\theta)^T=(\\theta^{[r+1]})^T$. Thus the scalar-extended iterated Weil map is precisely the one in the local-operator definition.",
+   "uses": [
+    "def-weil-weil-sheaf-complex",
+    "def-weil-local-frobenius-trace",
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Displayed alternating-trace formula and final sentence: representative independence of the local operators in each cohomological degree"
+   }
+  },
+  {
+   "text": "The scalar compatibility in point-transport naturality (2) commutes each factor $\\iota$ with the point-sections and pullback/scalar comparisons. Compose these squares for the $n$ factors defining $J_n$ in step 3; each intermediate comparison cancels with its inverse. The composition/scalar equation identifies the remaining repeated-pullback comparison with that for $g_s^n$. Apply the same equation to the two composites $g_X^n\\bar x$ and $\\bar xg_s^n$; its compatibility with equality of scheme maps identifies their comparison squares. This gives, with $a=a_{n,M}$,\n$$D_L(a)b_{G_{F,n}M}(R_F(M)\\otimes_F L)=R_L(M^T)b_M.$$\nNaturality of $b$ for $\\theta^{[n]}$ and step 5 now yield\n$$b_M(\\mathcal F_F(M,\\theta)\\otimes_F L)=D_L((\\theta^{[n]})^T)b_{G_{F,n}M}(R_F(M)\\otimes_F L)=\\mathcal F_L(M^T,\\theta_L)b_M.$$\nThese are finite pastings of the cited squares, using the specified comparisons; no choice of an integral Weil-stable lattice is involved. Apply the equation separately to $V_E$ and $V'_{E'}$.",
+   "uses": [
+    "lem-weil-frobenius-point-transport-natural",
+    "lem-weil-point-sections-scalar-extension",
+    "lem-trf-integral-pullback-comparison-realization",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Displayed alternating-trace formula and final sentence: representative independence of the local operators in each cohomological degree"
+   }
+  },
+  {
+   "text": "Write $b=b_{M_E}$, $b'=b_{M'_{E'}}$, $f=F^{(n)}_{E,x}\\otimes_E L$ and $f'=F'^{(n)}_{E',x}\\otimes_{E'}L$. Step 6 says $bf=\\mathcal F_L(A,\\alpha)b$ and $b'f'=\\mathcal F_L(B,\\beta)b'$. Using step 4 and $\\widetilde u_x=(b')^{-1}Ub$ gives\n$$\\widetilde u_x f=(b')^{-1}U\\mathcal F_L(A,\\alpha)b=(b')^{-1}\\mathcal F_L(B,\\beta)Ub=f'\\widetilde u_x.$$\nAll three factors defining $\\widetilde u_x$ are isomorphisms, and their inverse composite is $b^{-1}U^{-1}b'$. This proves the claimed conjugacy with exactly the isomorphism in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Displayed alternating-trace formula and final sentence: representative independence of the local operators in each cohomological degree"
+   }
+  },
+  {
+   "text": "For every $j$, apply $H^j$ to the equality in step 7. Use the natural scalar-cohomology isomorphisms $h_{F,j}:H^j(C_{F,x})\\otimes_F L\\xrightarrow{\\sim}H^j(C_{F,x}\\otimes_F L)$. Naturality identifies $H^j(F^{(n)}_{F,x}\\otimes_F L)$ with $H^j(F^{(n)}_{F,x})\\otimes_F L$ through $h_{F,j}$. Thus $(h_{E',j})^{-1}H^j(\\widetilde u_x)h_{E,j}$ is an $L$-linear isomorphism intertwining the two scalar-extended cohomology endomorphisms. The spaces are finite dimensional by the point-complex assertion of the local-operator definition.",
+   "uses": [
+    "lem-weil-cohomology-commutes-scalar-extension",
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Displayed alternating-trace formula and final sentence: representative independence of the local operators in each cohomological degree"
+   }
+  },
+  {
+   "text": "Regard each finite-dimensional cohomology space as a perfect complex concentrated in degree zero. Formal trace law (4) identifies its categorical trace with its ordinary linear trace. Laws (1) and (3), applied to the conjugacy of step 8 and to $E\\hookrightarrow L$, $E'\\hookrightarrow L$, therefore give\n$$\\operatorname{incl}_{E,L}\\operatorname{Tr}_E(H^j(F^{(n)}_{E,x}))=\\operatorname{Tr}_L(H^j(F^{(n)}_{E,x})\\otimes_E L)=\\operatorname{Tr}_L(H^j(F'^{(n)}_{E',x})\\otimes_{E'}L)=\\operatorname{incl}_{E',L}\\operatorname{Tr}_{E'}(H^j(F'^{(n)}_{E',x})).$$\nThese laws allow any commutative coefficient ring, hence in particular the finite extension fields here. Compose with $L\\hookrightarrow\\Qlb$; both composites are the fixed inclusions in the statement. The assertion holds degree by degree, including the zero cohomology spaces.",
+   "uses": [
+    "prop-trf-trace-formal-laws",
+    "def-weil-endomorphism-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Displayed alternating-trace formula and final sentence: representative independence of the local operators in each cohomological degree"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-point-sections-scalar-extension",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-trf-integral-pullback-comparison-realization",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-local-frobenius-trace",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-weil-cohomology-commutes-scalar-extension",
+  "prop-trf-trace-formal-laws",
+  "def-weil-endomorphism-trace"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Agent-written expansion of numerical representative independence in def-fd-trace-function and the displayed local alternating trace, using the explicitly cited comparison statements."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -60,10 +186,59 @@
    "results": "8 hits: isConj_arithFrobAt, IsArithFrobAt.conj, IsArithFrobAt.exists_primesOver_isConj, arithFrobAt, WittVector.IsocrystalEquiv.frob_equivariant, FiniteField.frobeniusAlgEquivOfAlgebraic_symm_apply, FiniteField.frobeniusAlgEquivOfAlgebraic, WittVector.IsocrystalHom.frob_equivariant",
    "date": "2026-10-18",
    "verdict": "no match: ordinary linear trace laws and arithmetic Frobenius or isocrystal lemmas do not state the constructible Weil-pair point comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "localFrobenius|WeilComplex|trace_conj|trace_baseChange",
+   "results": "18 hits: Mathlib/RepresentationTheory/Character.lean, Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean, Mathlib/LinearAlgebra/Matrix/NonsingularInverse.lean, Mathlib/LinearAlgebra/Matrix/Trace.lean, Mathlib/LinearAlgebra/Matrix/PosDef.lean, Mathlib/LinearAlgebra/Matrix/PosDef.lean, Mathlib/LinearAlgebra/Trace.lean, Mathlib/LinearAlgebra/Trace.lean; read LinearMap.trace_conj' at Mathlib/LinearAlgebra/Trace.lean:292 and trace_baseChange at :378; ordinary linear algebra only.",
+   "date": "2026-10-18",
+   "verdict": "no match: none states the specified local Weil-pair point comparison and its scalar compatibility"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the local Frobenius operator of a constructible Weil complex and compatibility with extension of coefficient fields",
+   "results": "8 hits: LinearMap.frobenius, FiniteField.Extension.frob, WittVector.IsocrystalEquiv.frob_equivariant, Perfection.coeff_frobenius, FiniteField.frobeniusAlgEquivOfAlgebraic, WittVector.StandardOneDimIsocrystal.frobenius_apply, WittVector.verschiebung_frobenius_comm, WittVector.frobeniusFun",
+   "date": "2026-10-18",
+   "verdict": "no match: none states the specified local Weil-pair point comparison and its scalar compatibility"
+  },
+  {
+   "tool": "loogle",
+   "query": "LinearMap.trace_conj",
+   "results": "1 hits: LinearMap.trace_conj",
+   "date": "2026-10-18",
+   "verdict": "no match: none states the specified local Weil-pair point comparison and its scalar compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Isomorphic Weil complexes induce conjugate local Frobenius on their stalk complexes after finite extension of the coefficient field",
+   "results": "8 hits: isConj_arithFrobAt, WittVector.IsocrystalEquiv.frob_equivariant, WittVector.exists_frobenius_solution_fractionRing_aux, WittVector.IsocrystalEquiv.mk.inj, WittVector.frobeniusEquiv_apply, WittVector.IsocrystalEquiv.toLinearEquiv, AlgHom.IsArithFrobAt.localize, WittVector.isocrystal_classification",
+   "date": "2026-10-18",
+   "verdict": "no match: none states the specified local Weil-pair point comparison and its scalar compatibility"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation from the point fibre functor to Frobenius pullback yields conjugate local endomorphisms for isomorphic equivariant objects",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.action_ext_of_isGalois, CategoryTheory.PreGaloisCategory.endEquivSectionsFibers_π, Action.Iso.conj_ρ, CategoryTheory.PreGaloisCategory.endEquivAutGalois_π, CategoryTheory.PreGaloisCategory.endMulEquivAutGalois_pi, CategoryTheory.PreGaloisCategory.toAut_hom_app_apply, CategoryTheory.PreGaloisCategory.autIsoFibers_inv_app, CategoryTheory.PreGaloisCategory.evaluationEquivOfIsGalois_apply",
+   "date": "2026-10-18",
+   "verdict": "no match: none states the specified local Weil-pair point comparison and its scalar compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "theorem conj_ρ|lemma conj_ρ",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match: none states the specified local Weil-pair point comparison and its scalar compatibility"
+  },
+  {
+   "tool": "grep",
+   "query": "conj_ρ",
+   "results": "1 hits: Mathlib/CategoryTheory/Action/Basic.lean; Action.Iso.conj_ρ at Mathlib/CategoryTheory/Action/Basic.lean:321 concerns already constructed actions, not the point/scalar comparison of Weil pairs.",
+   "date": "2026-10-18",
+   "verdict": "no match: none states the specified local Weil-pair point comparison and its scalar compatibility"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "def-fd-trace-function",
@@ -80,5 +255,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-fd-local-weil-model-trace-independence",
+  "worker": "stage1",
+  "summary": "Preserved the complete statement and specified point scalar comparison. Gave explicit inductions on iterated Weil maps and point transports, pasted the specified composition/scalar squares at the semilinear point return, and obtained conjugacy through the stated b maps. Applied natural scalar/cohomology comparisons and field-point trace laws degreewise. No new nodes, no integral Weil lattice and no finite-reduction Tor hypothesis.",
+  "blueprint": "All steps realize representative independence of the displayed local alternating-trace formula in def-fd-trace-function (main-20261015, order 3033). Steps 1-7 prove the point-operator comparison; steps 8-9 prove the ordinary degreewise trace comparison. The parent is a definition with no separate proof file; neither chapter nor unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-point-sections-scalar-extension",
+    "why": "Natural point scalar comparison used to construct b; the trace-definition unit supplies no coefficient comparison."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Pullback/scalar isomorphism for a geometric point, rationalized; generic coefficient tool absent from this definition unit."
+   },
+   {
+    "node": "lem-trf-integral-pullback-comparison-realization",
+    "why": "Specified natural pullback composition/scalar coherence, including equality of scheme maps and finite iterations; generic comparison infrastructure, not a trace-formula argument."
+   },
+   {
+    "node": "lem-weil-frobenius-point-transport-natural",
+    "why": "Naturality and coefficient compatibility of point transport, used as a generic natural-transformation tool."
+   },
+   {
+    "node": "lem-weil-cohomology-commutes-scalar-extension",
+    "why": "Natural exact coefficient extension on ordinary vector-space complexes, used as a generic cohomological tool."
+   },
+   {
+    "node": "prop-trf-trace-formal-laws",
+    "why": "Only laws (1),(3),(4) on degree-zero finite-dimensional field complexes; generic algebraic trace laws, with no geometric trace formula."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-point-sections-scalar-extension",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-weil-cohomology-commutes-scalar-extension",
+  "prop-trf-trace-formal-laws"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-N9-78317245f",
+  "group": "N9",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-78317245f (reviewer sub-agent of L); spot-checked: I read the item, its parent def-fd-trace-function, the source (main-20261015 sk-def-trace/def-fd-trace-function.md, order 3033), the unit and chapter, and the full statements of all 13 cited nodes. The statement is correct and not weakened. It stays in the framework rational categories (raw localization, no Karoubi completion). b_M is the inverse rationalized point-sections comparison φ followed by Fib_{s,L} of the specified comparison a_{x̄}; I checked its direction and type. The point return is g_X^n x̄ = x̄ g_s^n, as in def-weil-local-frobenius-trace. The statement matches the parent's use, which needs degreewise trace agreement of two models over a common extension. Step-by-step: I re-derived the inductions of steps 2, 3 and 5. Step 5 uses the composition/scalar equation of lem-trf-integral-pullback-comparison-realization with h=g^r, k=g. I checked naturality of R_F and the conjugacy chain in step 4. In step 6 I checked that the pasting identity D_L(a_n) b(R_F⊗L) = R_L b is well typed. Its pasting uses the Qlb scalar clause of lem-weil-frobenius-point-transport-natural (2), naturality at L, and equality/iteration compatibility. Step 7 is pure cancellation. Step 8 uses naturality of H^j⊗L. Step 9 uses trace laws (1),(3),(4) on field complexes; the same equality is also elementary from def-weil-endomorphism-trace. proof_deps equals the union of the uses. Small cases I checked: n=1, E=E'=L, rank-one α, Jordan block, zero cohomology, empty point set, shifts. No new nodes. Duplicate candidates are not duplicates: lem-weil-local-frobenius-conjugacy-class and lem-trf-local-frobenius-conjugacy change the point, and lem-rp-local-frobenius-models-agree compares an integral lattice model at one field. I accept all six declared tool uses as generic comparison and trace infrastructure. There is no SGA citation and no route or chapter change. Minor and not changed: source.place's phrase 'final sentence' describes the implicit well-definedness obligation, not literal text. I made no fixes."
  }
 }

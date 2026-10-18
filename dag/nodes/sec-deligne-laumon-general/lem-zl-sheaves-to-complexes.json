@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-zl-sheaves-to-complexes",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Passage from sheaves to complexes",
@@ -13,40 +13,160 @@
   "place": "node lem-zl-sheaves-to-complexes, order 2846"
  },
  "stmt_deps": [
-  "def-weil-pbc-qbar-category"
+  "def-weil-weil-sheaf-complex",
+  "def-weil-complex-weights",
+  "def-weil-punctual-weights",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-scheme-morphism-properties",
+  "sk-d-dl-general-weights"
  ],
  "proof": [
   {
-   "text": "Apply the hypercohomology spectral sequence provided by the truncation\nconstruction of [def-weil-pbc-hypercohomology-filtrations] and the\nexact triangulated functor $Rf_!$ of [prop-functor-package]:\n\n$$\nE_2^{a,b}=R^af_!\\bigl(\\mathcal H^b(K)\\bigr)\n\\quad\\Longrightarrow\\quad \\mathcal H^{a+b}\\bigl(Rf_!K\\bigr),\n$$\n\nwith the finite image filtration of\n[lemma-weil-pbc-hypercohomology-convergence]. By\n[def-weil-complex-weights], each $\\mathcal H^b(K)$ is\n$\\iota$-mixed of weights at most $w+b$; by the hypothesis of the\nlemma every $E_2^{a,b}$ is mixed of weights at most $w+a+b$. Every\nlater page $E_{r+1}^{a,b}$ is a subquotient of $E_r^{a,b}$, and the\nabutment $\\mathcal H^n(Rf_!K)$ is filtered with graded pieces\n$E_\\infty^{a,b}$, $a+b=n$; the subquotient and extension bounds of\n[lem-a1-subquotient-extension-bounds], [lem-a1-extension-bounds]\n(stalkwise, with the\npunctual weight convention of\n[def-weil-punctual-weights]) show that $\\mathcal H^n(Rf_!K)$ is\n$\\iota$-mixed of weights at most $w+n$, i.e. $Rf_!K\\in D_{\\le w}(Y_0)$\nby [def-weil-complex-weights].",
+   "text": "Use the finite-field and coefficient conventions of [def-weil-weil-sheaf-complex], and let $K\\in D_{\\le w}(X_0)$. Write $X,Y$ for the geometric fibers of $X_0,Y_0$, and $f_k:X\\to Y$ for the base change of $f$. The finite-type hypotheses on the geometric fibers follow from [lem-sfb-finite-type-composition-base-change], and $f_k$ is separated and finite type by [lem-pod-separated-finite-type-base-change]. Both $X_0,Y_0$ are finite type over $k_0$ by the finite-field conventions, and $X,Y$ are finite type over $k$ by the preceding base-change lemma. Each field is Noetherian (its only ideals are zero and the unit ideal). Applying [lem-weil-pbc-finite-type-over-noetherian] to these four structure morphisms shows that $X_0,Y_0,X,Y$ are Noetherian. By [lem-weil-pbc-locally-noetherian-quasi-separated] all four are quasi-separated. In particular the hypothesis on the original schemes in [lem-zl-weil-shriek-shift-compatibility] is satisfied. All truncations below are in $D^b_c(X,\\Qlb)$, and $Rf_{k!}$ has bounded constructible values by [lem-zl-field-shriek-lower-bound]. Equip each output $Rf_{k!}M$ of a Weil complex $(M,\\theta_M)$ with its canonical Weil structure $Rf_{k!}(\\theta_M)\\circ\\operatorname{Ex}_{!,M}$ of [lem-fix-weil-operations], which applies on this domain because $Rf_{k!}$ preserves bounded constructibility. Thus no torsion small-etale coefficient category is substituted for the field-coefficient category.",
    "uses": [
-    "def-weil-pbc-hypercohomology-filtrations",
-    "prop-functor-package",
-    "lemma-weil-pbc-hypercohomology-convergence",
+    "def-weil-weil-sheaf-complex",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-zl-field-shriek-lower-bound",
+    "lem-fix-weil-operations",
+    "lem-zl-weil-shriek-shift-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/lem-zl-sheaves-to-complexes.proof.md",
+    "place": "Opening: the exact compact-support functor, with its field-coefficient domain made explicit"
+   }
+  },
+  {
+   "text": "By the bounded standard t-structure and constructible truncations of [prop-constructible-truncations], choose integers $A\\le B$ with $\\operatorname{For}K\\in D^{\\ge A}\\cap D^{\\le B}$. Put $K_b=\\tau^{\\le b}K$ for $A-1\\le b\\le B$. Then $K_{A-1}=0$ and $K_B\\simeq K$. For $A\\le b\\le B$, the standard truncation triangle for $K_b$ at $b-1$ is\n$$\\operatorname{For}K_{b-1}\\longrightarrow\\operatorname{For}K_b\\longrightarrow\\mathcal H^b(\\operatorname{For}K)[-b]\\longrightarrow\\operatorname{For}K_{b-1}[1].$$\nIndeed its third term is $\\tau^{\\ge b}\\tau^{\\le b}\\operatorname{For}K=\\mathcal H^b(\\operatorname{For}K)[-b]$, by the formula defining cohomology in [prop-constructible-truncations]. The Weil structures come as follows. The geometric Frobenius $g_X$ is a scheme automorphism of $X$, so by [prop-constructible-truncations] $Lg_X^*$ commutes with $\\tau^{\\le m},\\tau^{\\ge m}$; hence applying $Lg_X^*$ to the truncation triangle of any $M$ at $m$ gives a triangle with terms in $D^{\\le m}$ and $D^{\\ge m+1}$. By the uniqueness in clause (1) of [lem-weil-heart-short-exact-triangles] there is a unique isomorphism $c:Lg_X^*\\tau^{\\le m}M\\simeq\\tau^{\\le m}Lg_X^*M$ compatible with the maps to $Lg_X^*M$, and $\\theta_{\\tau^{\\le m}M}=\\tau^{\\le m}(\\theta_M)\\circ c$ is the induced Weil structure; similarly for $\\tau^{\\ge m}$. By this uniqueness and naturality of $\\tau^{\\le m}$, the three objects and the first two natural arrows are Weil objects and Weil morphisms. These are triangles in the underlying constructible category; no triangulated structure on the category of fixed pairs is assumed.",
+   "uses": [
+    "prop-constructible-truncations",
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/lem-zl-sheaves-to-complexes.proof.md",
+    "place": "Opening truncation construction, expanded as its finite tower"
+   }
+  },
+  {
+   "text": "Let $F_b=\\mathcal H^b(K)$, with its induced Weil structure. By [def-weil-complex-weights], $F_b$ is mixed of weights at most $w+b$. Apply [lem-zl-weil-shriek-shift-compatibility] with $\\Lambda=\\Qlb$, input $F_b$ and shift $r=-b$, using the quasi-separatedness of $X_0,Y_0$ checked in step 1. Its comparison intertwines the canonical exchange Weil structures. Taking $n$th cohomology and using $\\mathcal H^n(M[-b])=\\mathcal H^{n-b}(M)$ therefore gives an isomorphism of Weil sheaves\n$$\\mathcal H^n(Rf_{k!}(F_b[-b]))\\simeq\\mathcal H^{n-b}(Rf_{k!}F_b).$$\nIf $n-b\\ge0$, the hypothesis of the item, applied with $v=w+b$ and $a=n-b$, makes the right side mixed of weights at most $(w+b)+(n-b)=w+n$. If $n-b<0$, it is zero by the lower-bound assertion of [lem-zl-field-shriek-lower-bound], applied to the heart object $F_b$. The zero sheaf has the empty mixed filtration of [def-weil-punctual-weights], so it has every upper weight bound. Hence the displayed sheaf has bound $w+n$ for all $n$.",
+   "uses": [
     "def-weil-complex-weights",
-    "lem-a1-subquotient-extension-bounds",
-    "lem-a1-extension-bounds",
+    "lem-zl-weil-shriek-shift-compatibility",
+    "lem-zl-field-shriek-lower-bound",
     "def-weil-punctual-weights"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/lem-zl-sheaves-to-complexes.proof.md",
+    "place": "Middle: the bound on the cohomology-sheaf pieces, including negative higher-image indices"
+   }
+  },
+  {
+   "text": "Apply the exact triangulated functor $Rf_{k!}$ of [lem-zl-field-shriek-lower-bound] to each underlying triangle of step 2. In the target standard t-structure of [prop-constructible-truncations], clause (5) of [lem-weil-heart-short-exact-triangles] gives the exact sequence in the constructible heart\n$$\\mathcal H^n(Rf_{k!}K_{b-1})\\xrightarrow{u}\\mathcal H^n(Rf_{k!}K_b)\\xrightarrow{v}\\mathcal H^n(Rf_{k!}(F_b[-b])).$$\nThe maps $u,v$ are Weil morphisms: the truncation arrows were Weil morphisms, and for a Weil morphism $\\phi:M\\to M'$ naturality of the exchange $\\operatorname{Ex}_!$ gives $Rf_{k!}(\\phi)\\circ Rf_{k!}(\\theta_M)\\circ\\operatorname{Ex}_{!,M}=Rf_{k!}(\\theta_{M'})\\circ\\operatorname{Ex}_{!,M'}\\circ Lg_Y^*Rf_{k!}(\\phi)$, so $Rf_{k!}(\\phi)$ is a Weil morphism for the canonical structures of [lem-fix-weil-operations]. Taking cohomology commutes with Frobenius pullback by [prop-constructible-truncations]. Exactness is therefore an exactness statement for these Weil sheaves, whose kernels and images exist in the abelian category specified by [lem-a1-mixed-direct-summand]. Only this three-term segment is needed, so no boundary-map equivariance or spectral-sequence convergence is being inferred from a torsion $Rf_*$ statement.",
+   "uses": [
+    "lem-zl-field-shriek-lower-bound",
+    "prop-constructible-truncations",
+    "lem-weil-heart-short-exact-triangles",
+    "lem-fix-weil-operations",
+    "lem-a1-mixed-direct-summand"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/lem-zl-sheaves-to-complexes.proof.md",
+    "place": "Truncation construction and subquotient/extension argument; exactness is BBD 1.3.6"
+   }
+  },
+  {
+   "text": "Induct on $b=A-1,A,\\ldots,B$ to prove that $\\mathcal H^n(Rf_{k!}K_b)$ is mixed of weights at most $w+n$ for every $n$. At $b=A-1$ it is zero: an exact additive functor sends the zero object to zero, and the empty filtration gives its bound [def-weil-punctual-weights]. For the induction step fix $n$. Put $U=\\operatorname{im}u$ and $V=\\operatorname{im}v$ for the maps in step 4. Exactness gives\n$$0\\longrightarrow U\\longrightarrow\\mathcal H^n(Rf_{k!}K_b)\\longrightarrow V\\longrightarrow0.$$\nHere $U$ is a Weil quotient of $\\mathcal H^n(Rf_{k!}K_{b-1})$, which has bound $w+n$ by induction, and $V$ is a Weil subsheaf of the last term in step 4, which has that bound by step 3. Clause (1) of [lem-a1-mixed-direct-summand] gives the bound for $U,V$, and clause (2) gives it for their extension. This completes the finite induction. At $b=B$, the Weil isomorphism $K_B\\simeq K$ identifies its output with $Rf_!K$. The defining cohomological inequalities of [def-weil-complex-weights] now say $Rf_!K\\in D_{\\le w}(Y_0)$, as required.",
+   "uses": [
+    "def-weil-punctual-weights",
+    "lem-a1-mixed-direct-summand",
+    "def-weil-complex-weights"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/lem-zl-sheaves-to-complexes.proof.md",
+    "place": "Final passage from subquotients and extensions to the complex weight bound"
+   }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-hypercohomology-filtrations",
-  "prop-functor-package",
-  "lemma-weil-pbc-hypercohomology-convergence",
+  "def-weil-weil-sheaf-complex",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-zl-field-shriek-lower-bound",
+  "lem-fix-weil-operations",
+  "lem-zl-weil-shriek-shift-compatibility",
+  "prop-constructible-truncations",
+  "lem-weil-heart-short-exact-triangles",
   "def-weil-complex-weights",
-  "lem-a1-subquotient-extension-bounds",
-  "lem-a1-extension-bounds",
-  "def-weil-punctual-weights"
+  "def-weil-punctual-weights",
+  "lem-a1-mixed-direct-summand"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/lem-zl-sheaves-to-complexes.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-thm-dl-general-sheaf/lem-zl-sheaves-to-complexes.proof.md",
+  "place": "Truncation argument underlying the displayed hypercohomology spectral sequence; written out as finite induction using BBD 1.3.3–1.3.6 and the cited constructible-category interfaces"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A triangulated functor preserves upper weight bounds of bounded complexes if its higher direct images of every mixed sheaf satisfy the shifted weight bound",
+   "results": "8 hits: DerivedCategory.IsGE, CategoryTheory.Functor.IsHomological, DerivedCategory.IsLE, CategoryTheory.Functor.IsHomological.mk', CategoryTheory.Functor.mem_homologicalKernel_trW_iff, DerivedCategory.isGE_Q_obj_iff, CategoryTheory.Triangulated.TStructure.isGE_of_shift, DerivedCategory.isLE_Q_obj_iff",
+   "date": "2026-10-17",
+   "verdict": "no match: generic cohomology/support declarations do not state mixed Weil-sheaf weight bounds or compact-support field-coefficient preservation"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Triangulated, CategoryTheory.Triangulated.TStructure",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.Triangulated'",
+   "date": "2026-10-17",
+   "verdict": "invalid pattern: unknown namespace; replaced by a quoted predicate search"
+  },
+  {
+   "tool": "grep",
+   "query": "IsMixedOfWeightsAtMost|WeilComplex|WeightBound",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: generic cohomology/support declarations do not state mixed Weil-sheaf weight bounds or compact-support field-coefficient preservation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact support pushforward preserves upper mixed weights of bounded Weil complexes from its weight bound on cohomology sheaves",
+   "results": "8 hits: SheafOfModules.pushforwardComp, HasCompactSupport.comp_homeomorph, HasCompactSupport.comp_isClosedEmbedding, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward, MeasureTheory.FiniteMeasure.mapCLM, AlgebraicGeometry.Scheme.Modules.pushforwardComp, HasCompactSupport.norm, CochainComplex.isStrictlyGE_of_iso",
+   "date": "2026-10-17",
+   "verdict": "no match: generic cohomology/support declarations do not state mixed Weil-sheaf weight bounds or compact-support field-coefficient preservation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mixed weight bounds for the compactly supported direct image of a bounded constructible Weil complex from shifted bounds for sheaves",
+   "results": "8 hits: HasCompactSupport.convolution_integrand_bound_right_of_subset, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.instIsGEObjSingleFunctor, DerivedCategory.isLE_Q_obj_iff, HomologicalComplex.IsStrictlySupportedOutside.isSupportedOutside, DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, HomologicalComplex.IsStrictlySupportedOutside",
+   "date": "2026-10-17",
+   "verdict": "no match: generic cohomology/support declarations do not state mixed Weil-sheaf weight bounds or compact-support field-coefficient preservation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsMixedOfWeightsAtMost\"",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: generic cohomology/support declarations do not state mixed Weil-sheaf weight bounds or compact-support field-coefficient preservation"
+  },
+  {
+   "tool": "grep",
+   "query": "mixed.*weight|weight.*mixed|WeilSheaf|WeilComplex",
+   "results": "0 hits: ",
+   "date": "2026-10-17",
+   "verdict": "no match: generic cohomology/support declarations do not state mixed Weil-sheaf weight bounds or compact-support field-coefficient preservation"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -125,5 +245,69 @@
   ],
   "sorry_free": false,
   "note": "recorded by L at 04:46 UTC from lean_audit (stage 2, rule 2 of the human: one definition per notion; a node whose notion has a declaration in the source repository is not stated again; audit state sorry_here)"
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-sheaves-to-complexes",
+  "worker": "stage1",
+  "summary": "Replaced inappropriate torsion-etale Rf_* convergence citations by the existing constructible field-coefficient truncation, shriek exactness and Weil-shift interfaces. Expanded the argument into five steps and a finite induction with sheaf-level mixed filtration stability. The statement is unchanged; no new nodes. Repair of return 69f087ac6e: reread every cited statement against the current DAG; verified quasi-separatedness for the original finite-field schemes as well as their geometric fibers, as required by the current Weil-shift lemma, and made its specialization r=-b explicit. Restored the missing verbatim citations file; retained all earlier proof and search records.",
+  "blueprint": "The sole blueprint proof paragraph: its truncation construction is steps 1–2, its w+a+b estimate is step 3, and its finite subquotient/extension argument is steps 4–5. This is the bounded truncation argument behind that spectral sequence; no unit-level sheaf theorem is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Verifies the Noetherian hypothesis used to obtain quasi-separated geometric fibers, hence the domain of the field-coefficient compact-support tool."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Verifies the geometric fibers are finite type; a generic scheme-theoretic base-change tool, not a replacement for the unit reduction."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Verifies the geometric compact-support morphism is separated finite type."
+   },
+   {
+    "node": "lem-zl-field-shriek-lower-bound",
+    "why": "Supplies exactness, bounded constructibility and vanishing of negative images for the same field-coefficient compact-support functor; the unit gives no such interface."
+   },
+   {
+    "node": "prop-constructible-truncations",
+    "why": "Supplies the bounded standard t-structure and Frobenius-compatible truncations on constructible field-coefficient categories."
+   },
+   {
+    "node": "lem-zl-weil-shriek-shift-compatibility",
+    "why": "Supplies the explicitly Frobenius-equivariant shift comparison at field coefficients."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Generic t-structure cohomology exactness, clause (5), applied in the underlying constructible category."
+   },
+   {
+    "node": "lem-a1-mixed-direct-summand",
+    "why": "Uses clauses (1) and (2), sheaf-level stability of mixed upper bounds; vector-space stability alone would not supply a sheaf filtration."
+   },
+   {
+    "node": "lem-fix-weil-operations",
+    "why": "Supplies the canonical Weil structure Rf_!(theta)∘Ex_! on compact-support images and equivariance of exchange maps; a general six-functor tool. Replaces prop-weil-operations, whose duality/purity clauses would import the Poincare-duality and purity route into the batch-5 closure."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-zl-field-shriek-lower-bound",
+  "prop-constructible-truncations",
+  "lem-zl-weil-shriek-shift-compatibility",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-a1-mixed-direct-summand",
+  "lem-fix-weil-operations"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q155-f9e5daf30",
+  "group": "Q155",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q155-f9e5daf30 (reviewer sub-agent of L); spot-checked: Read the full mathematics of the item and checked the cited statements against the main-20261015 blueprint proof. The statement is verbatim the blueprint's. The finite truncation-tower induction correctly realizes the bounded spectral-sequence argument. The removed blueprint citations (torsion Rf_* hypercohomology filtrations; vector-space bounds) really did not apply. Step 1 checks the quasi-separated finite-type domains (via the Noetherian lemmas) for lem-zl-field-shriek-lower-bound and the shift lemma. The coefficients are Qlb common-stage and f_k = f_0 x k. In step 3 the index arithmetic (w+b)+(n-b) holds, the n-b<0 case is the lower-bound clause and the zero sheaf gets the empty filtration. Steps 4-5 use clause (5) of the heart lemma, the images of Weil maps, and clauses (1) and (2) of lem-a1-mixed-direct-summand. Edge cases tested: K=0, a single shifted sheaf, non-integral w. There are no new nodes and no duplicates (cor-zl-rfshriek-sheaf, lem-zl-complex-extension and lem-zl-complex-retract are different statements). Batch-5 check: sk-d-dl-general-weights (a general definition), lem-zl-weil-shriek-shift-compatibility (general pullback composition), lem-a1-mixed-direct-summand (local Frobenius well-definedness, already reached through def-weil-punctual-weights) and prop-constructible-truncations are accepted. prop-weil-operations is NOT accepted. Its duality and purity clauses add 1418 nodes to the closure, including the smooth-purity theorem chain, the PD pairing route (thm-pod-equivariance-of-the-twisted-pairing, prop-pod-degree-of-the-pairing) and thm-trf-frobenius-fixed-points, while the item uses only the Rf_! and truncation lifts. Fixed: steps 1 and 4 now cite lem-fix-weil-operations (canonical structure Rf_!(theta) composed with Ex_!, with naturality of Ex_! written out). Step 2 derives the truncation lifts from prop-constructible-truncations and the uniqueness in clause (1) of lem-weil-heart-short-exact-triangles. proof_deps and tool_uses are updated. After the fix the closure contains no PD, trace-formula or purity theorem and no nt-assume leaf; none is needed, because the item uses neither assumption. Details are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
