@@ -5,6 +5,7 @@ Authors: SHEAF group NE
 -/
 module
 
+public import Sheaf.AlgebraicGeometry.CoherentEtaleComparisonMorphism
 public import Sheaf.AlgebraicGeometry.EtaleZariskiQcohComparison
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
@@ -17,6 +18,8 @@ public import Mathlib.Algebra.Category.Grp.Ulift
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Sheaf.AlgebraicGeometry.CoherentEtaleEffacingSequence
+import Sheaf.AlgebraicGeometry.CoherentEtaleComparisonMorphismExists
 
 /-!
 # The normalized coherent to etale comparison
@@ -28,26 +31,29 @@ normalized by the identity on sections
 
 @[expose] public section
 
-universe u
+universe u v w u₀ v₀
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme.Modules
 noncomputable section
 set_option autoImplicit false
 
+attribute [local irreducible] tensorPullback tensorPullbackObj
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
+
 /-- The recorded tensor-section sheaf in the coefficient universe of etale inverse image.
 This is only the existing coefficient-lift functor applied to the recorded sheaf.
 Source: Stacks Project, Tag 03P2
 (blueprint: def-pbc-canonical-coherent-etale-comparison). -/
-abbrev liftedCoherentEtaleSheaf {X : Scheme.{u}} (F : X.Modules)
+abbrev liftedCoherentEtaleSheaf {X : Scheme.{u}} (F : SheafOfModules.{u} X.ringCatSheaf)
     [F.IsQuasicoherent] : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1} :=
-  (sheafCompose X.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).obj
-    (etaleTensorSectionsSheaf F)
+  CoherentEtale.Coeff F
 
 /-- The map on associated etale sheaves induced by a module morphism.
 Its components, prescribed by the comparison theorem, determine it uniquely.
 Source: Stacks Project, Tag 03P2
 (blueprint: def-pbc-canonical-coherent-etale-comparison). -/
-def coherentEtaleMap {X : Scheme.{u}} (F G : X.Modules)
+def coherentEtaleMap {X : Scheme.{u}} (F G : SheafOfModules.{u} X.ringCatSheaf)
     [F.IsQuasicoherent] [G.IsQuasicoherent] (φ : F ⟶ G) :
     liftedCoherentEtaleSheaf F ⟶ liftedCoherentEtaleSheaf G :=
   (sheafCompose X.smallEtaleTopology AddCommGrpCat.uliftFunctor.{u + 1, u}).map
@@ -59,110 +65,106 @@ the displayed connecting-map condition and normalization in degree zero are esse
 Source: Stacks Project, Tags 03P2, 03FD and 010S
 (blueprint: def-pbc-canonical-coherent-etale-comparison). -/
 def IsNormalizedCoherentEtaleComparison (X : Scheme.{u})
-    (c : ∀ (F : X.Modules) [F.IsQuasicoherent] (q : ℕ),
-      @Sheaf.H _ _ (Opens.grothendieckTopology X)
-          ((SheafOfModules.toSheaf.{u} X.ringCatSheaf).obj F)
-          inferInstance (HasExt.standard _) q ≃+
-        @Sheaf.H.{u + 1, u + 1, u, u + 1} _ _ X.smallEtaleTopology
-          (liftedCoherentEtaleSheaf F) inferInstance inferInstance q) : Prop :=
-  (∀ (F G : X.Modules) [F.IsQuasicoherent] [G.IsQuasicoherent]
-      (φ : F ⟶ G) (q : ℕ) (x : @Sheaf.H _ _
-        (Opens.grothendieckTopology X)
-        ((SheafOfModules.toSheaf.{u} X.ringCatSheaf).obj F)
-        inferInstance (HasExt.standard _) q),
-    c G q (@Sheaf.H.map _ _ _ inferInstance (HasExt.standard _) _ _
-      ((SheafOfModules.toSheaf.{u} X.ringCatSheaf).map φ) q x) =
-      @Sheaf.H.map.{u + 1, u + 1, u, u + 1} _ _ _ inferInstance inferInstance _ _
-        (coherentEtaleMap F G φ) q (c F q x)) ∧
-  (∀ (F : X.Modules) [F.IsQuasicoherent]
-      (x : @Sheaf.H _ _ (Opens.grothendieckTopology X)
-        ((SheafOfModules.toSheaf.{u} X.ringCatSheaf).obj F)
-        inferInstance (HasExt.standard _) 0),
-    @Sheaf.H.equiv₀.{u + 1, u + 1, u, u + 1} _ _ _ inferInstance inferInstance
-        (liftedCoherentEtaleSheaf F) _ terminalIsTerminal (c F 0 x) =
-      ULift.up (tensorSectionsUnit (⊤_ X.Etale).hom F
-        (@Sheaf.H.equiv₀ _ _ _ inferInstance (HasExt.standard _)
-          ((SheafOfModules.toSheaf.{u} X.ringCatSheaf).obj F) _ isTerminalTop x))) ∧
-  ∀ (S : ShortComplex (SheafOfModules.{u} X.ringCatSheaf))
-      [S.X₁.IsQuasicoherent] [S.X₂.IsQuasicoherent] [S.X₃.IsQuasicoherent]
-      (_hS : S.ShortExact)
-      (hz : coherentEtaleMap S.X₁ S.X₂ S.f ≫ coherentEtaleMap S.X₂ S.X₃ S.g = 0)
-      (ha : (S.map (SheafOfModules.toSheaf.{u} X.ringCatSheaf)).ShortExact)
-      (he : (ShortComplex.mk (coherentEtaleMap S.X₁ S.X₂ S.f)
-        (coherentEtaleMap S.X₂ S.X₃ S.g) hz).ShortExact)
-      (q : ℕ) (x : @Sheaf.H _ _ (Opens.grothendieckTopology X)
-        ((SheafOfModules.toSheaf.{u} X.ringCatSheaf).obj S.X₃)
-        inferInstance (HasExt.standard _) q),
-    c S.X₁ (q + 1)
-        (@Abelian.Ext.comp _ _ _ (HasExt.standard _) _ _ _ q 1 x
-          (@ShortComplex.ShortExact.extClass _ _ _ (HasExt.standard _) _ ha)
-          (q + 1) rfl) =
-      @Abelian.Ext.comp _ _ _ inferInstance _ _ _ q 1 (c S.X₃ q x)
-        (@ShortComplex.ShortExact.extClass _ _ _ inferInstance _ he) (q + 1) rfl
+    (c : ∀ (F : SheafOfModules.{u} X.ringCatSheaf) [F.IsQuasicoherent] (q : ℕ),
+      CoherentEtale.Source X F q ≃+ CoherentEtale.Target X F q) : Prop :=
+  CoherentEtale.IsNormalized X (fun F G _ _ φ ↦ coherentEtaleMap F G φ)
+    (fun F _ q ↦ (c F q).toAddMonoidHom)
 
 /-- Existence and uniqueness of the normalized comparison.
 Source: Stacks Project, Tags 03P2, 03FD and 010S
 (blueprint: def-pbc-canonical-coherent-etale-comparison).
 
-Proof: A proper scheme over a field is quasi-compact and separated. Quasi-coherent
-modules form an abelian category, and their cohomology is an effaceable delta functor:
-embed into quasi-coherent injectives, using a finite affine cover to identify its
-cohomology with sheaf cohomology. Etale quasi-coherent descent is exact and identifies
-sections in degree zero. The comparison theorem identifies higher cohomology on the two
-sites. Extend the identity on sections to a morphism of delta functors by universality.
-It is invertible by the comparison theorem, and uniqueness of a delta-functor extension
-proves uniqueness of the entire family, including all degrees simultaneously. -/
+Proof: Properness gives compactness and separatedness. A finite affine cover embeds each
+quasi-coherent module into an acyclic quasi-coherent module, and the fixed resolution and
+coefficient-universe comparisons transfer acyclicity to both cohomology theories. The
+normalized additive-morphism existence theorem supplies naturality, the degree-zero unit
+and all boundary squares. The terminal tensor-pullback unit is an isomorphism, proving
+bijectivity in degree zero. Dimension shifting along the acyclic embeddings proves
+bijectivity in every degree: use exactness on the quotient for injectivity and the two
+surjective boundaries for surjectivity. The same source-boundary surjectivity proves
+uniqueness by induction on the degree, simultaneously for all quasi-coherent modules. -/
 theorem exists_unique_normalizedCoherentEtaleComparison
     {k : Type u} [Field k] {X : Scheme.{u}}
     (f : X ⟶ Spec (.of k)) [IsProper f] :
-    ∃! c : ∀ (F : X.Modules) [F.IsQuasicoherent] (q : ℕ),
-      @Sheaf.H _ _ (Opens.grothendieckTopology X)
-          ((SheafOfModules.toSheaf.{u} X.ringCatSheaf).obj F)
-          inferInstance (HasExt.standard _) q ≃+
-        @Sheaf.H.{u + 1, u + 1, u, u + 1} _ _ X.smallEtaleTopology
-          (liftedCoherentEtaleSheaf F) inferInstance inferInstance q,
+    ∃! c : ∀ (F : SheafOfModules.{u} X.ringCatSheaf) [F.IsQuasicoherent] (q : ℕ),
+      CoherentEtale.Source X F q ≃+
+        CoherentEtale.Target X F q,
       IsNormalizedCoherentEtaleComparison X c := by
-  sorry
+  classical
+  let m : CoherentEtale.Maps X := fun F G _ _ φ ↦ coherentEtaleMap F G φ
+  have hm (F G : SheafOfModules.{u} X.ringCatSheaf)
+      [F.IsQuasicoherent] [G.IsQuasicoherent] (φ : F ⟶ G) (U : X.Etale) :
+      (m F G φ).hom.app (op U) =
+        AddCommGrpCat.uliftFunctor.map (((tensorPullback U.hom).map φ).app ⊤) := by
+    change AddCommGrpCat.uliftFunctor.map
+      ((Classical.choose (etale_zariski_qcoh_comparison X) F G φ).hom.app (op U)) = _
+    exact congrArg AddCommGrpCat.uliftFunctor.map
+      ((Classical.choose_spec (etale_zariski_qcoh_comparison X)).1 F G φ U)
+  have heff := CoherentEtale.exists_effacing_sequence f m hm
+  obtain ⟨c, hc⟩ := CoherentEtale.exists_normalized_map f m hm
+  have hb := CoherentEtale.normalized_bijective X m heff c hc
+    (fun F _ ↦ CoherentEtale.normalized_zero_bijective X m c hc F)
+  let e (F : SheafOfModules.{u} X.ringCatSheaf) [F.IsQuasicoherent] (q : ℕ) :=
+    AddEquiv.ofBijective (c F q) (hb F q)
+  refine ⟨e, hc, ?_⟩
+  intro d hd
+  have hd' : CoherentEtale.IsNormalized X m
+      (fun F _ q ↦ (d F q).toAddMonoidHom) := hd
+  have h := CoherentEtale.normalized_unique X m heff
+    (fun F _ q ↦ (d F q).toAddMonoidHom) c hd' hc
+  funext F hF q
+  apply AddEquiv.ext
+  intro x
+  exact congrArg (fun t : CoherentEtale.Family X ↦ t F q x) h
+
+/-- Cache the additive group underlying the recorded module cohomology object.
+This uses the existing derived functor without changing its construction.
+Source: Stacks Project, Tag 03FD
+(blueprint: def-pbc-canonical-coherent-etale-comparison). -/
+def coherentModuleGroup (X : Scheme.{u})
+    (F : SheafOfModules.{u} X.ringCatSheaf) (q : ℕ) : AddCommGrpCat.{u} :=
+  AddCommGrpCat.of ((RingedSpace.moduleCohomology X.toRingedSpace q).obj F)
 
 /-- The uniquely normalized etale comparison, rather than an arbitrary natural isomorphism.
 Source: Stacks Project, Tags 03P2 and 03FD
 (blueprint: def-pbc-canonical-coherent-etale-comparison). -/
 def normalizedCoherentEtaleComparison {k : Type u} [Field k] {X : Scheme.{u}}
-    (f : X ⟶ Spec (.of k)) [IsProper f] (F : X.Modules)
+    (f : X ⟶ Spec (.of k)) [IsProper f] (F : SheafOfModules.{u} X.ringCatSheaf)
     [F.IsQuasicoherent] (q : ℕ) :
-    @Sheaf.H _ _ (Opens.grothendieckTopology X)
-        ((SheafOfModules.toSheaf.{u} X.ringCatSheaf).obj F)
-        inferInstance (HasExt.standard _) q ≃+
-      @Sheaf.H.{u + 1, u + 1, u, u + 1} _ _ X.smallEtaleTopology
-        (liftedCoherentEtaleSheaf F) inferInstance inferInstance q :=
+    CoherentEtale.Source X F q ≃+ CoherentEtale.Target X F q :=
   Classical.choose (exists_unique_normalizedCoherentEtaleComparison f) F q
 
+/-- The canonical change of universe for an Ext presentation.
+Source: Mathlib's Ext.homAddEquiv; both sides use the same derived category.
+(blueprint: def-pbc-canonical-coherent-etale-comparison). -/
+def coherentExtUniverseEquiv {A : Type u₀} [Category.{v₀} A] [Abelian A]
+    [HasExt.{v} A] [HasExt.{w} A] (M N : A) (q : ℕ) :
+    Abelian.Ext.{v} M N q ≃+ Abelian.Ext.{w} M N q :=
+  letI := HasDerivedCategory.standard A
+  (Abelian.Ext.homAddEquiv.{max u₀ v₀, v}).trans
+    (Abelian.Ext.homAddEquiv.{max u₀ v₀, w}).symm
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The fixed resolution comparison, with only the universe of its Ext presentation changed.
 Source: Stacks Project, Tag 03FD; `moduleCohomologyExtResolutionEquiv` is the explicit
 common-resolution comparison (blueprint: def-pbc-canonical-coherent-etale-comparison). -/
-def moduleAbelianCohomologyLarge (X : Scheme.{u}) (F : X.Modules) (q : ℕ) :
-    ((RingedSpace.moduleCohomology X.toRingedSpace q).obj F) ≃+
-      @Sheaf.H _ _ (Opens.grothendieckTopology X)
-        ((SheafOfModules.toSheaf.{u} X.ringCatSheaf).obj F)
-        inferInstance (HasExt.standard _) q :=
-  letI := HasDerivedCategory.standard
-    (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})
-  letI : HasExt.{u + 1} (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u}) :=
-    HasExt.standard _
-  (moduleCohomologyExtResolutionEquiv X F q).trans
-    (Abelian.Ext.homAddEquiv.{u + 1, u}.trans
-      Abelian.Ext.homAddEquiv.{u + 1, u + 1}.symm)
+def moduleAbelianCohomologyLarge (X : Scheme.{u})
+    (F : SheafOfModules.{u} X.ringCatSheaf) (q : ℕ) :
+    coherentModuleGroup X F q ≃+ CoherentEtale.Source X F q :=
+  ((moduleCohomologyExtResolutionNatIso X q).app F).addCommGroupIsoToAddEquiv.trans
+    (@coherentExtUniverseEquiv
+      (Sheaf (Opens.grothendieckTopology X) AddCommGrpCat.{u})
+      inferInstance inferInstance (comparisonHasExt X) (HasExt.standard _) _ _ q)
 
 /-- The canonical etale-to-module comparison. Its inverse is the fixed resolution comparison
 followed by the uniquely normalized change-of-site comparison.
 Source: Stacks Project, Tags 03P2 and 03FD
 (blueprint: def-pbc-canonical-coherent-etale-comparison). -/
 def canonicalCoherentEtaleComparison {k : Type u} [Field k] {X : Scheme.{u}}
-    (f : X ⟶ Spec (.of k)) [IsProper f] (F : X.Modules)
+    (f : X ⟶ Spec (.of k)) [IsProper f] (F : SheafOfModules.{u} X.ringCatSheaf)
     [F.IsQuasicoherent] (q : ℕ) :
-    @Sheaf.H.{u + 1, u + 1, u, u + 1} _ _ X.smallEtaleTopology
-        (liftedCoherentEtaleSheaf F) inferInstance inferInstance q ≃+
-      ((RingedSpace.moduleCohomology X.toRingedSpace q).obj F) :=
+    CoherentEtale.Target X F q ≃+ coherentModuleGroup X F q :=
   ((moduleAbelianCohomologyLarge X F q).trans
     (normalizedCoherentEtaleComparison f F q)).symm
 
@@ -171,11 +173,10 @@ module/abelian resolution comparison. In particular this defines coherent Froben
 `φ` is sectionwise pth power; no module-linearity of `φ` is required.
 Source: Stacks Project, Tags 03FD and 0A3P
 (blueprint: def-pbc-canonical-coherent-etale-comparison). -/
-def coherentAdditiveEndomorphism (X : Scheme.{u}) (F : X.Modules) (q : ℕ)
+def coherentAdditiveEndomorphism (X : Scheme.{u}) (F : SheafOfModules.{u} X.ringCatSheaf) (q : ℕ)
     (φ : (SheafOfModules.toSheaf.{u} X.ringCatSheaf).obj F ⟶
       (SheafOfModules.toSheaf.{u} X.ringCatSheaf).obj F) :
-    ((RingedSpace.moduleCohomology X.toRingedSpace q).obj F) →+
-      ((RingedSpace.moduleCohomology X.toRingedSpace q).obj F) :=
+    coherentModuleGroup X F q →+ coherentModuleGroup X F q :=
   (moduleAbelianCohomologyLarge X F q).symm.toAddMonoidHom.comp
     ((@Sheaf.H.map _ _ _ inferInstance (HasExt.standard _) _ _ φ q).comp
       (moduleAbelianCohomologyLarge X F q).toAddMonoidHom)

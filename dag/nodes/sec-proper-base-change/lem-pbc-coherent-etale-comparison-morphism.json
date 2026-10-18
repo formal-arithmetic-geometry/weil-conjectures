@@ -1,0 +1,142 @@
+{
+ "id": "lem-pbc-coherent-etale-comparison-morphism",
+ "kind": "statement",
+ "title": "Dimension shifting for normalized coherent cohomology maps",
+ "status": "split",
+ "statement": "Let $X$ be a scheme [def-pc-scheme]. For a quasi-coherent $\\mathcal O_X$-module $F$, let $A(F,q)=\\operatorname{Ext}^q(\\underline{\\mathbb Z},F_{\\mathrm{ab}})$ on the Zariski site, in the standard large Ext universe [def-pc-ext], and let $B(F,q)=H^q(X_{\\mathrm{et}},\\operatorname{ULift} E_F)$, where $E_F$ is the tensor-section sheaf [def-sc-etale-qcoherent-module]. Give coefficient maps $m(\\varphi):\\operatorname{ULift}E_F\\to\\operatorname{ULift}E_G$ for every module map $\\varphi:F\\to G$. A normalized additive family $c_{F,q}:A(F,q)\\to B(F,q)$ is natural in $F$, equals the tensor-pullback unit followed by coefficient lift on degree-zero sections, and commutes with connecting homomorphisms for every short exact sequence of quasi-coherent modules that is exact on the Zariski abelian sheaves and on the coefficient sheaves under $m$. Suppose that for every $F$ and $n\\geq0$ there is such a sequence $0\\to F\\to G\\to Q\\to0$ with $A(G,n+1)=B(G,n+1)=0$. Then every normalized family is bijective in every degree, and any two normalized families coincide. The definitions Source, Target, Maps, Family, IsNormalized and Effaces spell out these groups and conditions.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sc-etale-qcoherent-module",
+  "def-pc-ext"
+ ],
+ "source": {
+  "document": "literature/stacks-project/homology.tex; coherent.tex; etale-cohomology.tex; sites-cohomology.tex",
+  "place": "Tags 010S and 010T (universal delta functors), 0BDY Lemma 30.4.3(1) (acyclic embedding), 03P2 and 03FD (cohomology comparison)"
+ },
+ "proof": [
+  {
+   "text": "Evaluate degree-zero cohomology at the terminal objects. The terminal etale structural morphism is an isomorphism, so its tensor-pullback unit is an isomorphism by adjunction uniqueness. The prescribed degree-zero map is therefore bijective, and the normalization gives equality of two families in degree zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For uniqueness, induct on the degree simultaneously for every quasi-coherent F. Choose an effacing sequence. The source connecting map is surjective by the long exact sequence and vanishing on G. Write each class as a boundary. Boundary compatibility and the induction hypothesis on Q give equality. Use the covariant Ext exact sequence, with the boundary given by composition with the short exact extension class.",
+   "uses": [
+    "lem-sc-abelian-ext-covariant-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For bijectivity, induct simultaneously on F. Surjectivity follows from the two surjective boundaries and surjectivity on Q in the preceding degree. For injectivity, lift a kernel class through the source boundary to y on Q. Its image in B(Q,n) has zero boundary, hence comes from z on G. Lift z through the preceding-degree comparison on G. Naturality and injectivity on Q show that y lies in the image from G. Source exactness then kills its boundary. Use the covariant Ext exact sequence, with the boundary given by composition with the short exact extension class.",
+   "uses": [
+    "lem-sc-abelian-ext-covariant-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-abelian-ext-covariant-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex; coherent.tex; etale-cohomology.tex",
+  "place": "Detailed specialization of the cited effacement and cohomology comparison proofs."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A normalized morphism from Zariski to etale coherent cohomology extends the identity on sections and commutes with connecting maps; acyclic quasi-coherent embeddings give uniqueness and invertibility",
+   "results": "Eight scheme-normalization declarations, unrelated to cohomology. No match.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical comparison between Zariski and etale cohomology of quasi coherent modules is the unique morphism of delta functors which is the identity on global sections",
+   "results": "No normalized coherent comparison; library has the generic effaceable delta-functor universal theorem, the acyclic quasi-coherent embedding, and a comparison without a boundary assertion.",
+   "date": "2026-10-18",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "DeltaFunctor|Effaceable; normalizedCoherentEtale|IsNormalizedCoherentEtaleComparison; tensorSectionsUnit.*[Ii]so",
+   "results": "Mathlib has no normalized coherent comparison. Source library provides universal delta functors and flat pullback exactness. The existing comparison has naturality and degree-zero normalization but no boundary clause. Its terminal-unit isomorphism lemmas are private.",
+   "date": "2026-10-18",
+   "verdict": "new specialized statements needed"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CanonicalCoherentEtaleComparison",
+  "date": "2026-10-18",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-artin-schreier",
+   "place": "Final paragraph: canonical coherent-etale comparison, including its normalization as a morphism of delta functors",
+   "via": [
+    "def-pbc-canonical-coherent-etale-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentEtaleComparisonMorphism",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentEtaleComparisonMorphism.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.CoherentEtale.normalized_bijective",
+  "statement": "theorem normalized_bijective (X : Scheme.{u}) (m : Maps X)\n    (efface : Effaces X m)\n    (c : Family X) (hc : IsNormalized X m c)\n    (hzero : ∀ (F : SheafOfModules.{u} X.ringCatSheaf) [F.IsQuasicoherent],\n      Function.Bijective (c F 0))\n    (F : SheafOfModules.{u} X.ringCatSheaf) [F.IsQuasicoherent] (q : ℕ) :\n    Function.Bijective (c F q)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-18",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.CoherentEtale.sourceGroup",
+   "AlgebraicGeometry.Scheme.Modules.CoherentEtale.Source",
+   "AlgebraicGeometry.Scheme.Modules.CoherentEtale.Coeff",
+   "AlgebraicGeometry.Scheme.Modules.CoherentEtale.targetGroup",
+   "AlgebraicGeometry.Scheme.Modules.CoherentEtale.Target",
+   "AlgebraicGeometry.Scheme.Modules.CoherentEtale.Maps",
+   "AlgebraicGeometry.Scheme.Modules.CoherentEtale.Family",
+   "AlgebraicGeometry.Scheme.Modules.CoherentEtale.sourceMap",
+   "AlgebraicGeometry.Scheme.Modules.CoherentEtale.targetMap",
+   "AlgebraicGeometry.Scheme.Modules.CoherentEtale.sourceZero",
+   "AlgebraicGeometry.Scheme.Modules.CoherentEtale.targetZero",
+   "AlgebraicGeometry.Scheme.Modules.CoherentEtale.sourceBoundary",
+   "AlgebraicGeometry.Scheme.Modules.CoherentEtale.targetBoundary",
+   "AlgebraicGeometry.Scheme.Modules.CoherentEtale.IsNormalized",
+   "AlgebraicGeometry.Scheme.Modules.CoherentEtale.source_exact",
+   "AlgebraicGeometry.Scheme.Modules.CoherentEtale.source_surjective",
+   "AlgebraicGeometry.Scheme.Modules.CoherentEtale.target_exact",
+   "AlgebraicGeometry.Scheme.Modules.CoherentEtale.target_surjective",
+   "AlgebraicGeometry.Scheme.Modules.CoherentEtale.Effaces",
+   "AlgebraicGeometry.Scheme.Modules.CoherentEtale.normalized_unique",
+   "AlgebraicGeometry.Scheme.Modules.CoherentEtale.normalized_bijective",
+   "AlgebraicGeometry.Scheme.Modules.CoherentEtale.normalized_zero_bijective"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-59152",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261018T101752-L-4010951",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-59152",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261018T101752-L-4010951",
+  "kind": "interface",
+  "note": "independent cc review: 59152ed4e5f3 vs returned 3269d5537: only the ordered H9 import deletion plus report text; all 4 delivered modules and the 9 unchanged direct importers compile cleanly; IsNormalized Iff.rfl to the old formula and #print axioms re-run on this head (sorryAx only via exists_normalized_map, true by Stacks 010T)"
+ }
+}

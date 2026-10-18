@@ -1,0 +1,132 @@
+{
+ "id": "lem-pbc-coherent-etale-normalized-additive-map",
+ "kind": "statement",
+ "title": "Existence of a normalized additive coherent comparison",
+ "status": "split",
+ "statement": "Let $X$ be a scheme proper over a field $k$ [def-pc-scheme] [def-weil-proper-morphism]. For each quasi-coherent module $F$ use the groups $A(F,q)$ and $B(F,q)$ and normalization conditions of [lem-pbc-coherent-etale-comparison-morphism]. Suppose coefficient maps $m(\\varphi)$ have, on every etale object $U\\to X$, the lifted section map $\\Gamma(U,u^*\\varphi)$ of tensor pullback of the module morphism. There exists an additive family $c_{F,q}:A(F,q)\\to B(F,q)$ satisfying naturality, the tensor-unit normalization in degree zero, and compatibility with all connecting homomorphisms. No invertibility or uniqueness of this family is asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "lem-pbc-coherent-etale-comparison-morphism"
+ ],
+ "source": {
+  "document": "literature/stacks-project/homology.tex; coherent.tex; etale-cohomology.tex; sites-cohomology.tex",
+  "place": "Tags 010S and 010T (universal delta functors), 0BDY Lemma 30.4.3(1) (acyclic embedding), 03P2 and 03FD (cohomology comparison)"
+ },
+ "proof": [
+  {
+   "text": "Quasi-coherent modules form an abelian full subcategory, using affine-local closure under kernels and cokernels and closure under finite sums. Forgetting scalars is exact. Tensor pullback along etale morphisms is exact by flatness, and its section sheaf is exact by local lifting on Zariski covers, which are etale covers. These constructions give the two cohomological delta-functors on that category.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+    "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+    "lem-sc-etale-tensor-sections-right-exact",
+    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Properness gives compactness and separatedness. Embed every quasi-coherent module into an acyclic quasi-coherent module by the finite affine cover construction. Transfer module acyclicity to the large Zariski abelian Ext presentation using the fixed resolution equivalence and canonical change of Ext universe. Thus the source delta-functor is effaceable.",
+   "uses": [
+    "lem-sc-picard-qcoh-universal-delta-embedding",
+    "new-module-cohomology-ext-resolution-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The tensor-pullback unit on sections and coefficient lift give a natural transformation in degree zero. Apply universality of the effaceable source delta-functor to extend it. Evaluate the extension at every object and degree. Its naturality, degree-zero value, and boundary condition are the three clauses of IsNormalized. The component formula determines the supplied coefficient maps, so this construction uses exactly m.",
+   "uses": [
+    "lem-weil-pbc-effaceable-delta-functor-universal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-weil-pbc-quasi-coherent-module-cokernel-closure",
+  "lem-weil-pbc-quasi-coherent-module-coproduct-closure",
+  "lem-sc-etale-tensor-sections-right-exact",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+  "lem-sc-picard-qcoh-universal-delta-embedding",
+  "new-module-cohomology-ext-resolution-naturality",
+  "lem-weil-pbc-effaceable-delta-functor-universal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex; coherent.tex; etale-cohomology.tex",
+  "place": "Detailed specialization of the cited effacement and cohomology comparison proofs."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A normalized morphism from Zariski to etale coherent cohomology extends the identity on sections and commutes with connecting maps; acyclic quasi-coherent embeddings give uniqueness and invertibility",
+   "results": "Eight scheme-normalization declarations, unrelated to cohomology. No match.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical comparison between Zariski and etale cohomology of quasi coherent modules is the unique morphism of delta functors which is the identity on global sections",
+   "results": "No normalized coherent comparison; library has the generic effaceable delta-functor universal theorem, the acyclic quasi-coherent embedding, and a comparison without a boundary assertion.",
+   "date": "2026-10-18",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "grep",
+   "query": "DeltaFunctor|Effaceable; normalizedCoherentEtale|IsNormalizedCoherentEtaleComparison; tensorSectionsUnit.*[Ii]so",
+   "results": "Mathlib has no normalized coherent comparison. Source library provides universal delta functors and flat pullback exactness. The existing comparison has naturality and degree-zero normalization but no boundary clause. Its terminal-unit isomorphism lemmas are private.",
+   "date": "2026-10-18",
+   "verdict": "new specialized statements needed"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.CanonicalCoherentEtaleComparison",
+  "date": "2026-10-18",
+  "group": "Q3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-smooth-curve-artin-schreier",
+   "place": "Final paragraph: canonical coherent-etale comparison, including its normalization as a morphism of delta functors",
+   "via": [
+    "def-pbc-canonical-coherent-etale-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-p1",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.CoherentEtaleComparisonMorphismExists",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoherentEtaleComparisonMorphismExists.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.CoherentEtale.exists_normalized_map",
+  "statement": "theorem exists_normalized_map {k : Type u} [Field k] {X : Scheme.{u}}\n    (f : X ⟶ Spec (.of k)) [IsProper f] (m : Maps X)\n    (hm : ∀ (F G : SheafOfModules.{u} X.ringCatSheaf) [F.IsQuasicoherent] [G.IsQuasicoherent]\n      (φ : F ⟶ G) (U : X.Etale),\n      (m F G φ).hom.app (op U) =\n        AddCommGrpCat.uliftFunctor.map (((tensorPullback U.hom).map φ).app ⊤)) :\n    ∃ c : Family X, IsNormalized X m c",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-59152",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261018T101752-L-4010951",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-59152",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261018T101752-L-4010951",
+  "kind": "interface",
+  "note": "independent cc review: 59152ed4e5f3 vs returned 3269d5537: only the ordered H9 import deletion plus report text; all 4 delivered modules and the 9 unchanged direct importers compile cleanly; IsNormalized Iff.rfl to the old formula and #print axioms re-run on this head (sorryAx only via exists_normalized_map, true by Stacks 010T)"
+ }
+}

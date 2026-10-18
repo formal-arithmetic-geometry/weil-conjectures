@@ -18,9 +18,31 @@
   "document": "literature/stacks-project/etale-cohomology.tex; sites-cohomology.tex; homology.tex",
   "place": "Tags 03P2 (quasi-coherent comparison), 03FD (module/abelian comparison), 010S (universal delta functors); Tag 0A3P (Frobenius application)"
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the tensor-component prescription of the existing etale comparison to identify the coefficient maps. Construct a normalized additive family. Simultaneous acyclic sequences give bijectivity in every degree and equality of any two normalized additive families. Turn the maps into additive equivalences by ofBijective. Function extensionality turns uniqueness of the underlying maps into uniqueness of the entire family. The existing definitions then choose this unique family and compose it with the fixed common-resolution comparison and the canonical Ext-universe equivalence.",
+   "uses": [
+    "lem-pbc-coherent-etale-comparison-morphism",
+    "lem-pbc-coherent-etale-normalized-additive-map",
+    "lem-pbc-coherent-etale-effacing-sequence",
+    "lem-sc-etale-zariski-qcoh-comparison",
+    "new-module-cohomology-ext-resolution-naturality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pbc-coherent-etale-comparison-morphism",
+  "lem-pbc-coherent-etale-normalized-additive-map",
+  "lem-pbc-coherent-etale-effacing-sequence",
+  "lem-sc-etale-zariski-qcoh-comparison",
+  "new-module-cohomology-ext-resolution-naturality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex; etale-cohomology.tex",
+  "place": "Tags 010T, 03P2, 03FD; explicit additive-map construction, dimension shifting, and uniqueness."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -98,10 +120,12 @@
    "AlgebraicGeometry.Scheme.Modules.structureTensorEtaleSheaf",
    "AlgebraicGeometry.Scheme.Modules.structureCoherentEtaleComparison",
    "AlgebraicGeometry.Scheme.Modules.structureCoherentEtaleComparisonOfPullback",
-   "AlgebraicGeometry.Scheme.Modules.structureCoherentFrobenius"
+   "AlgebraicGeometry.Scheme.Modules.structureCoherentFrobenius",
+   "AlgebraicGeometry.Scheme.Modules.coherentExtUniverseEquiv",
+   "AlgebraicGeometry.Scheme.Modules.coherentModuleGroup"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/CanonicalCoherentEtaleComparison.lean",
-  "statement": "def canonicalCoherentEtaleComparison {k : Type u} [Field k] {X : Scheme.{u}} (f : X ⟶ Spec (.of k)) [IsProper f] (F : X.Modules) [F.IsQuasicoherent] (q : ℕ) : @Sheaf.H.{u + 1, u + 1, u, u + 1} _ _ X.smallEtaleTopology (liftedCoherentEtaleSheaf F) inferInstance inferInstance q ≃+ ((RingedSpace.moduleCohomology X.toRingedSpace q).obj F)",
+  "statement": "def canonicalCoherentEtaleComparison {k : Type u} [Field k] {X : Scheme.{u}}\n    (f : X ⟶ Spec (.of k)) [IsProper f] (F : SheafOfModules.{u} X.ringCatSheaf)\n    [F.IsQuasicoherent] (q : ℕ) :\n    CoherentEtale.Target X F q ≃+ coherentModuleGroup X F q",
   "branch": "newtargets-dag",
   "by": "NE",
   "date": "2026-10-15",
@@ -123,5 +147,15 @@
   "group": "NE",
   "result": "pass",
   "note": "Reviewed immutable modules, dependencies, source passages, canonical constructions, all statement clauses, edge cases, docstrings, reports, and verbatim signatures. Server compiles passed at 56.1 s and 2.2 s. No project changes or global build."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-59152",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261018T101752-L-4010951",
+  "kind": "interface",
+  "note": "independent cc review: 59152ed4e5f3 vs returned 3269d5537: only the ordered H9 import deletion plus report text; all 4 delivered modules and the 9 unchanged direct importers compile cleanly; IsNormalized Iff.rfl to the old formula and #print axioms re-run on this head (sorryAx only via exists_normalized_map, true by Stacks 010T)"
  }
 }
