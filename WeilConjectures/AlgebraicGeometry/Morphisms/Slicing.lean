@@ -20,14 +20,19 @@ public import WeilConjectures.Mathlib.RingTheory.Etale.Field
 import WeilConjectures.AlgebraicGeometry.SmoothSectionComponentOpen
 
 /-!
-# Étale slices of a smooth morphism
+# Slicing a smooth morphism
 
-Ingredients of the slicing of a smooth morphism (Stacks `0EY4`), which is
-`AlgebraicGeometry.Smooth.exists_etaleCover_factorization` in
-`WeilConjectures.AlgebraicGeometry.Morphisms.SlicingSmooth`. In each fibre of a smooth morphism
-`f : X ⟶ S` the closed points with finite separable residue field are dense (Stacks `056U`), and
-through each of them passes an étale slice `ι : Z ⟶ X`, that is, `ι ≫ f` is étale (Stacks
-`057G`).
+A smooth morphism `f : X ⟶ S` becomes, after an étale covering of `X`, a smooth morphism of
+affine schemes with geometrically connected fibres and a section, over a scheme étale over `S`
+(Stacks `0EY4`).
+
+The proof follows Stacks. In each fibre of `f` the closed points with finite separable residue
+field are dense (Stacks `056U`), and through each of them passes an étale slice `ι : Z ⟶ X`,
+that is, `ι ≫ f` is étale (Stacks `057G`). The base change `X ×_S Z ⟶ Z` then has a section,
+whose relative connected component is open with geometrically irreducible fibres (Stacks `055R`).
+The projection to `X` maps connected components of fibres onto connected components, so these
+relative components cover `X`. A second slicing after shrinking to an affine open makes all the
+schemes affine.
 
 ## Main statements
 
@@ -37,11 +42,15 @@ through each of them passes an étale slice `ι : Z ⟶ X`, that is, `ι ≫ f` 
   affine space.
 - `AlgebraicGeometry.Smooth.exists_etale_comp_of_etale_residueFieldMap`: through a point with
   finite separable residue field extension passes an étale slice.
+- `AlgebraicGeometry.Smooth.exists_geometricallyIrreducible_of_section`: the relative connected
+  component of a section of a smooth morphism is open, with geometrically irreducible fibres.
+- `AlgebraicGeometry.Smooth.exists_etale_factorization_of_mem`: the slicing near one point.
+- `AlgebraicGeometry.Smooth.exists_etaleCover_factorization`: the slicing of a smooth morphism.
 
 ## References
 
 - Stacks Project, Tag `0EY4`, <https://stacks.math.columbia.edu/tag/0EY4>
-- Stacks Project, Tags `056U`, `057G`
+- Stacks Project, Tags `056U`, `057G`, `055R`
 -/
 
 @[expose] public section

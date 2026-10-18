@@ -5081,7 +5081,6 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.RootSplitStrictLocalOr
 public import WeilConjectures.AlgebraicGeometry.Morphisms.SectionFiniteEtaleGenericSplit
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Slicing
 public import WeilConjectures.AlgebraicGeometry.Morphisms.SlicingFlat
-public import WeilConjectures.AlgebraicGeometry.Morphisms.SlicingSmooth
 public import WeilConjectures.AlgebraicGeometry.Morphisms.SmoothClosedPointFiniteFlatLift
 public import WeilConjectures.AlgebraicGeometry.Morphisms.SmoothClosedPointLocalSection
 public import WeilConjectures.AlgebraicGeometry.Morphisms.SmoothConnectedGenericGeometry
@@ -6572,7 +6571,6 @@ public import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
 public import WeilConjectures.AlgebraicGeometry.Sites.AffineCohomologicalDimension
 public import WeilConjectures.AlgebraicGeometry.Sites.AffineRefinement
 public import WeilConjectures.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimension
-public import WeilConjectures.AlgebraicGeometry.Sites.AgreementLocus
 public import WeilConjectures.AlgebraicGeometry.Sites.ArtinSchreier
 public import WeilConjectures.AlgebraicGeometry.Sites.BrauerGroup
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologicalDimension
@@ -7503,8 +7501,8 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomologyZero
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingleZero
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 public import WeilConjectures.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTorPerfect
 public import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
@@ -11020,7 +11018,6 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapDelta
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapDevissage
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapEtale
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConnectedFibres
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheafEnd
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ConstantSheafMap
@@ -11047,7 +11044,6 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.MonoidalComp
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkMonoidal
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.StalkUnit
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.SixFunctors.Finite.BaseChange
@@ -11691,7 +11687,6 @@ public import WeilConjectures.WeilSheaf.UpperStarPointwise
 public import WeilConjectures.WeilSheaf.VerdierDual
 public import WeilConjectures.WeilSheaf.VerdierDualFinite
 public import WeilConjectures.WeilSheaf.VerdierDualLocalization
-public import WeilConjectures.ZZAx
 public import WeilConjectures.ZetaFunction
 public import WeilConjectures.ZetaFunction.BettiNumbers
 public import WeilConjectures.ZetaFunction.BettiSymmetry
