@@ -13,9 +13,116 @@
   "def-pur-derived-internal-hom",
   "def-weil-pbc-derived-categories"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $A=\\mathbf Z/\\ell^n\\mathbf Z$ and $B=\\mathbf Z/\\ell^m\\mathbf Z$. If $m<n$, use the nonpositive resolution $P^i=A$ for $i\\leq0$, augmented by $A\\to B$, with $d^{-1}=\\ell^m$, $d^{-2}=\\ell^{n-m}$, and alternating these maps to the left. The identities $\\ker(\\ell^m:A\\to A)=\\ell^{n-m}A$ and $\\ker(\\ell^{n-m}:A\\to A)=\\ell^mA$ prove exactness. If $m=n$, use $P=A[0]$. Thus $B$ has a degreewise finite free resolution even though it need not have finite projective dimension.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proposition 6.2.1.1, coefficient algebra for its specialization"
+   }
+  },
+  {
+   "text": "Apply locality of coinduction to $A\\to B$ and this resolution. It gives $K'=C_X(K)\\in D^+(X_{\\mathrm{et}},B)$ with its actual $B$-module structure, as well as $c_x:R\\Gamma_xK'\\simeq C_x(R\\Gamma_xK)$ and their geometric versions. For subsequent computations after forgetting to $A$, the finite-free derived-Hom model gives $C_X(K)\\simeq\\mathcal Hom_A^\\bullet(P_X,L)$ for any bounded-below representative $L$ of $K$. If $L^j=0$ for $j<a$, the degree-$q$ summands have $a-q\\leq i\\leq0$, so only finitely many contribute. These bounds justify every totalization below without an upper bound or a Tor bound on $K$.",
+   "uses": [
+    "lem-per-finite-coefficient-coinduction-locality",
+    "lem-weil-pbc-ringed-site-bounded-free-rhom-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proposition 6.2.1.1, supported comparison; Stacks Tag 08JI for the Hom model"
+   }
+  },
+  {
+   "text": "Apply the same Hom model on the point site to compute $R\\operatorname{Hom}_A(B,A)$. For $m<n$ its differential begins $A\\xrightarrow{\\ell^m}A\\xrightarrow{\\ell^{n-m}}A\\xrightarrow{\\ell^m}\\cdots$ in degrees $0,1,2,\\ldots$ (harmless alternating signs do not change kernels or images). The two kernel identities of Step 1 show that its only cohomology is $H^0=\\ell^{n-m}A$. The map $t:B\\to\\operatorname{Hom}_A(B,A)$, $t(a)(b)=\\ell^{n-m}ab$, identifies $B$ with this annihilator; it is $B$-linear, injective and surjective. For $m=n$ it is the identity identification. For every integer $r$ the twist comparison in the locality lemma identifies $C_x(A(r))$ with $B(r)$ using $t^{-1}$. Indeed locally trivialize $A(1)$; the map $\\mu_{\\ell^n}\\to\\mu_{\\ell^m}$ is $u\\mapsto u^{\\ell^{n-m}}$, which identifies $A(1)\\otimes_A B$ with $B(1)$. A change of basis multiplies by a unit whose action reduces to its image in $B$ on both sides. Tensor powers and dual powers give the identification for positive and negative $r$.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "lem-per-finite-coefficient-coinduction-locality",
+    "def-per-potential-dualizing-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proposition 6.2.1.1, coefficient identification and Tate twists"
+   }
+  },
+  {
+   "text": "Let $p_x:R\\Gamma_xK\\simeq A(\\delta(x))[2\\delta(x)]$ be the given pinnings. Define\n$$p'_x:R\\Gamma_xK'\\xrightarrow{c_x}C_x(R\\Gamma_xK)\\xrightarrow{C_x(p_x)}C_x(A(\\delta(x))[2\\delta(x)])\\xrightarrow{t^{-1}}B(\\delta(x))[2\\delta(x)].$$\nEvery arrow is a $B$-linear isomorphism by Steps 2–3. This supplies putative pinnings on residue-field etale sites, not just on their geometric fibres. It remains to check the immediate-specialization equation in the definition of potential pinnings.",
+   "uses": [
+    "lem-per-finite-coefficient-coinduction-locality",
+    "def-per-potential-dualizing-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Definitions 2.1.1–2.1.2; Proposition 6.2.1.1"
+   }
+  },
+  {
+   "text": "First check the residue map on a strictly henselian trait $T$. Use the prime-power tame model with coefficients $A$ and $B$. For a sheaf $M$ write $F_A(M)=[M_s\\to M_{\\bar\\eta}^S\\to\\operatorname{Hom}_{A[[G]]}(I_A,M_{\\bar\\eta}^S)]$; define $F_B$ likewise. Both functors are exact and compute supported cohomology on bounded-below complexes. Choose a bounded-below injective complex $I$ for the restriction of $K$ to $T$. The complex $J=\\mathcal Hom_A(B_T,I)$ represents $C_T(K)$ with its $B$-action. There is a quasi-isomorphism $J\\to\\mathcal Hom_A^\\bullet(P_T,I)$ after forgetting to $A$, induced by $P\\to B$; the Hom model identifies both sides with derived Hom. Finite presentation of $B$ makes geometric stalks of $\\mathcal Hom_A(B_T,I)$ equal to $\\operatorname{Hom}_A(B,I_{\\bar z})$: this is the kernel of the finite matrix presenting $B$, and stalks preserve that kernel. After forgetting scalars, $F_B(J)$ equals $F_A(J)$: with a fixed tame generator $\\sigma$, both final terms identify with $J_{\\bar\\eta}^S$ by evaluation on $1-\\sigma$, and both differentials are $1-\\sigma$. Exactness of $F_A$ and finite sums in each total degree therefore identify this supported complex with $\\operatorname{Hom}_A^\\bullet(P,F_A(I))$. This is the comparison of Step 2 on the trait: the maps come from the augmentation $P\\to B$ and evaluation $h\\mapsto h(1)$, so the supported comparison has the prescribed counit and hence agrees with its adjunction-mate normalization.",
+   "uses": [
+    "lem-per-prime-power-trait-residue-model",
+    "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "lem-per-finite-coefficient-coinduction-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Propositions 1.2.1.2 and 1.2.2.1; Proposition 6.2.1.1"
+   }
+  },
+  {
+   "text": "In these coordinates the trait residue map is averaging over $S$, followed by evaluation at $\\sigma$ on the negative twist and inverse evaluation at $1-\\sigma$ on the final term. Every entry of $P$ is finite free with scalar differential, so all three operations commute termwise with $\\operatorname{Hom}_A(P^i,-)$ and with the finite sums in the totalization. More explicitly the averaging sum is $|H|^{-1}\\sum_{h\\in H}h$ for a finite $p$-group quotient acting on the element; $p$ is invertible in both rings, so reduction sends its coefficient to the same inverse in $B$. Evaluation sends a function $f$ to $f(\\sigma)$ in either coefficient ring, and the augmentation generators $1-\\sigma$ correspond. The twist comparison is the reduction identification of Step 3. Thus under $c_{\\bar\\eta},c_s$ the $B$ residue transition equals the image of the $A$ transition under derived coinduction, after forgetting to $A$. This equality uses the natural, generator-independent maps furnished by the trait-model lemma, so it is independent of the chosen $\\sigma$ and representatives.",
+   "uses": [
+    "lem-per-prime-power-trait-residue-model",
+    "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "lem-per-finite-coefficient-coinduction-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Definition 1.2.3.1 and Lemma 1.2.3.2; Proposition 6.2.1.1"
+   }
+  },
+  {
+   "text": "For an immediate specialization $\\bar y\\rightsquigarrow\\bar x$ on $X$, use the prime-power costalk-reduction lemma and the definition to construct its transition by strict localization at $\\bar x$, closed extraordinary restriction to the reduced closure of $\\bar y$, and inverse image to its normalization trait, followed by multiplication by the inverse of the purely inseparable residue degree $e$. Apply the locality comparisons at each of these operations. The reduction lemma supplies the costalk identifications, the normalization equivalence, and the purely inseparable degree. Its identifications are those of localization, composed closed right adjoints, and the inverse-image equivalence. The coinduction comparisons respect their counits and composition, hence give the same supported comparisons $c_{\\bar y}$ and $c_{\\bar x}$. Step 6 gives equality of the two transitions on the trait. The scalar $e$ is prime to $\\ell$ by the definition, and the image of $e^{-1}\\in A$ is $e^{-1}\\in B$; hence the normalization factor also agrees. We obtain\n$$c_{\\bar x}(1)[2]\\circ\\operatorname{sp}^B_{\\bar y,\\bar x}=C(\\operatorname{sp}^A_{\\bar y,\\bar x})\\circ c_{\\bar y}$$\nafter forgetting to $A$, using the twist identification of Step 3. Here $C=R\\operatorname{Hom}_A(B,-)$ on the geometric coefficient modules.",
+   "uses": [
+    "lem-per-finite-coefficient-coinduction-locality",
+    "def-per-potential-dualizing-complex",
+    "lem-per-prime-power-costalk-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Definitions 1.3.1 and 1.4.1; Proposition 6.2.1.1"
+   }
+  },
+  {
+   "text": "Apply $C$ to the given equation $p_{\\bar y}=p_{\\bar x}(1)[2]\\circ\\operatorname{sp}^A_{\\bar y,\\bar x}$ and use Step 7 and the coefficient/twist identifications in Step 3. The result is $p'_{\\bar y}=p'_{\\bar x}(1)[2]\\circ\\operatorname{sp}^B_{\\bar y,\\bar x}$ after forgetting to $A$. This is also equality over $B$: by Step 4 both source and target identify with $B(\\delta(y))[2\\delta(y)]$, and maps between modules in a single common cohomological degree are ordinary module maps; forgetting scalars is injective on these maps. No faithfulness of restriction on arbitrary derived morphisms is being assumed. This is exactly the potential-pinning condition. All constructions use only $K\\in D^+$ and its given pinnings; constructibility and finite Tor amplitude have not been used.",
+   "uses": [
+    "def-per-potential-dualizing-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Definition 2.1.2; Proposition 6.2.1.1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-finite-coefficient-coinduction-locality",
+  "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+  "def-per-potential-dualizing-complex",
+  "lem-per-prime-power-trait-residue-model",
+  "lem-per-prime-power-costalk-reduction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, Proposition 6.2.1.1 (printed p. 294); explicit expansion of its brief supported-cohomology argument, including transition normalization from sections 1.2–1.4"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,7 +154,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-potential-dualizing-uniqueness",
@@ -69,5 +176,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-potential-hom-coefficient-restriction",
+  "worker": "stage1",
+  "summary": "Rebased the retained eight-step coefficient-coinduction proof onto the current DAG. Reused the already-landed prime-power trait model instead of delivering a colliding duplicate; re-read the expanded potential-dualizing definition, cited its existing prime-power costalk-reduction lemma explicitly, and refreshed verbatim citations. Preserved the periodic resolution, coefficient/Tate normalization, residue calculation, bounded-below hypotheses, and general coinduction-locality child.",
+  "blueprint": "lem-per-artin-gabber-affine-curve.proof.md Step 3, dimension-normalized duality, through the potential-dualizing-uniqueness branch. No chapter or unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-site-bounded-free-rhom-model",
+    "why": "Generic ringed-site finite-free Hom computation, applied to a bounded-above coefficient resolution and bounded-below sheaf complex; the unit has no general Hom-complex model."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-site-bounded-free-rhom-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-ddf30b7bf",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-ddf30b7bf (reviewer sub-agent of L); spot-checked: I read the item, the new node and the full statements of every cited node. Source check: Gabber XVII Prop. 6.2.1.1 (p. 294). The item is its specialization to ℓ^n, ℓ^m with D+ only and no constructibility or Tor hypothesis, so nothing is weakened. Its normalization t(a)(b)=ℓ^{n-m}ab, followed by the reduction u↦u^{ℓ^{n-m}}, agrees with the canonical identification Hom_A(B,μ_{ℓ^n})=μ_{ℓ^m} (checked on a generator). Step 1: exact periodic resolution, checked for n=2,m=1 and n=3,m=1. Step 3: RHom(B,A) has only H^0=ℓ^{n-m}A. Step 5: F_B(J)=F_A(J) because the degree-2 terms are both identified with J^S by ev_{1-σ} and both differentials are 1-σ, as the trait node states. Step 6: the twist identification is compatible with G→μ_{ℓ^n}→μ_{ℓ^m}. Step 7: d^{-1} reduces to d^{-1}. Step 8: forgetting scalars is injective on maps between objects isomorphic to B(δ)[2δ]. New node lem-per-finite-coefficient-coinduction-locality is true: the pullback comparison follows from the finite-free Hom model (Stacks 08JI); the i^! comparison follows from uniqueness of right adjoints of res∘i_*=i_*∘res; the rank-one tensor clause is local. It is statement-only, self-contained, not a restated clause of the item, and has no duplicate (lem-trf-derived-coinduction-adjunction and lem-sc-sheaf-coinduction-action lack the locality comparisons). No SGA, no cycle. The uniqueness citer uses the item with m=1 as stated. tool_use lem-weil-pbc-ringed-site-bounded-free-rhom-model accepted. Advisory: Step 7 reads the costalk-reduction node's 'natural isomorphisms' as the canonical localization, i^! and ν^* identifications, which is the evident reading."
  }
 }
