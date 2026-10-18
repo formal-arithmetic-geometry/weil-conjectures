@@ -13,7 +13,9 @@
   "def-weil-pbc-adic-completion",
   "def-weil-affine-spectrum",
   "def-pur-etale-derived-supported-sections",
-  "def-asd-finite-etale-tate-sheaf"
+  "def-asd-finite-etale-tate-sheaf",
+  "def-per-canonical-etale-supported-pullback",
+  "lem-asd-etale-finite-twist-pullback"
  ],
  "proof": [
   {
@@ -277,5 +279,33 @@
   "group": "Q22",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q22-96080c50e (reviewer sub-agent of L); spot-checked: I read the item's full 7-step split (no new nodes; statement and stmt_deps identical to live) against ILO XVII Lemma 3.6.3 (printed p. 279). The source reduces to the complete case by formal base change (Fujiwara 6.6.4). The worker proves it instead through regular base change (ILO XVII Cor. 4.2.3, lem-per-regular-supported-base-change), which is valid because A excellent makes A→Â regular. Step 2 checks this correctly: G-ring at m, A_m=A, finite-extension geometric regularity via lem-weil-pbc-geometrically-regular-finitely-generated-extensions. Step 1 (residue-field iso, cartesian closed square), Steps 3-4 (supported kernel adjunction on Λ-modules, i^!_0 keeps injectives, RΓ_Z=RΓ(Z,i^!)), Step 5 (twist pullback with modulus ℓ^n, signed m) and Step 7 are correct. Small cases (field, Artinian, henselized DVR, q<0) agree. No duplicates (searched Fujiwara/formal base change/completion invariance), no cycle, no SGA. FIX (C1) in Step 6: identifying the chain-level supported pullback with β_K needs the derived adjunction î_*⊣î^! and its termwise counit, which nothing cited. I added lem-trf-bounded-below-derived-adjunction to the Step 6 uses with that sentence, and to proof_deps and tool_uses. Batch-5 flag: I recomputed the closure; its sec-trace-formula/sec-poincare-duality members are all generic (geometric morphisms, inverse-image exactness, derived adjunction, ind-étale invariance 05WR, henselian permanence, separated finite-type base change). None is part of either assumption or of their proofs, so the flag is accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletionSupportedConstantComparison",
+  "declaration": "AlgebraicGeometry.Etale.isIso_localCompletionSupportedPullback",
+  "declarations": [
+   "AlgebraicGeometry.Etale.localCompletionSpecMap",
+   "AlgebraicGeometry.Etale.localClosedPointImmersion",
+   "AlgebraicGeometry.Etale.localClosedPointImmersion_isClosedImmersion",
+   "AlgebraicGeometry.Etale.completionTwistPullbackFamily",
+   "AlgebraicGeometry.Etale.localCompletionTwistIso",
+   "AlgebraicGeometry.Etale.localCompletionSupportedPullback",
+   "AlgebraicGeometry.Etale.isIso_localCompletionSupportedPullback"
+  ],
+  "file": "lean/Sheaf/Paper/CompletionSupportedConstantComparison.lean",
+  "statement": "theorem isIso_localCompletionSupportedPullback (A : Type u) [CommRing A] [IsNoetherianRing A] [HenselianLocalRing A] (_hA : IsExcellent A) (l : ℕ) (hl : l.Prime) (hunit : IsUnit (l : A)) (n : ℕ) (_hn : 1 ≤ n) (q m : ℤ) : IsIso (localCompletionSupportedPullback A l hl hunit n q m)",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The canonical supported pullback uses the seven generic support constructions owned by def-per-canonical-etale-supported-pullback, an existing:true definition node on Sheaf.Paper.SupportedAffineLineHomotopy. No supportedAffineLineHomotopy theorem is used. The normalized signed-twist comparison is genuinely extracted from etaleFiniteTwistPullback and gives the intrinsic target twist; support is the scheme-theoretic inverse image of the closed point, canonically the completion closed point by the recorded local-completion theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b970b0fd4",
+  "group": "NW",
+  "result": "pass",
+  "note": "Re-delivery of the 6e939c3b H2 return. Lean file byte-identical (sha256 53ee8706), substance re-read: excellent/Noetherian/henselian A, l prime and a unit, n>=1, all q,m in Z; AdicCompletion, scheme-theoretic closed-point preimage support, canonical H^q of affineSupportDerivedMap composed with the degree-0 transport and the pinned twist iso; no extra hypotheses; lean.statement verbatim. New existing:true def node def-per-canonical-etale-supported-pullback owns the 7 generic declarations of SupportedAffineLineHomotopy (all present live, statement verbatim up to :=, cites def-pur-support-cohomology, states kernel agreement with def-pur-etale-derived-supported-sections, no module change, no competing owner in live DAG) and replaces the homotopy theorem in stmt_deps, as instructed. Mechanical finding: lem-asd-etale-finite-twist-pullback is genuine (completionTwistPullbackFamily = etaleFiniteTwistPullback(...).choose_spec.choose, a theorem-constructed object) -> PASS on that point. nt_compile --json clean, 53.1 s. Advisory: owned decls' docstrings still name the homotopy node; compile time near the 60 s limit."
  }
 }

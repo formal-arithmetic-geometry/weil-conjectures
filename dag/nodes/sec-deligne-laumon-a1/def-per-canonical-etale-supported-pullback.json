@@ -1,0 +1,131 @@
+{
+ "id": "def-per-canonical-etale-supported-pullback",
+ "kind": "definition",
+ "title": "Canonical etale pullback on closed-supported sections and its derived map",
+ "status": "split",
+ "statement": "Let $A$ be a commutative ring and let $i:C\\hookrightarrow X$ be a closed immersion of schemes. On the small etale site, define $G_i(F)=\\ker(F(X)\\to F(X\\setminus C))$ for each sheaf $F$ of $A$-modules, with its kernel inclusion $\\iota_{i,F}:G_i(F)\\to F(X)$, as the module-valued specialization of the kernel-of-restriction construction of [def-pur-support-cohomology]. This is canonically the same kernel functor, with the same inclusion, as the supported-section functor of [def-pur-etale-derived-supported-sections] for the open $i^{\\mathrm c}=X\\setminus C$. Let $f:Y\\to X$ be a scheme morphism and $j:D\\hookrightarrow Y$ a closed immersion such that $f^{-1}(i^{\\mathrm c})=j^{\\mathrm c}$. Let $g_{f,F}:F(X)\\to(f^*F)(Y)$ be the usual section pullback: the unit $F\\to f_*f^*F$ evaluated on the terminal etale object, followed by its canonical base-change identification with $Y$. Define the ordinary supported pullback $\\alpha_f:G_i\\to G_j\\circ f^*$ to be the unique natural transformation satisfying $\\iota_{j,f^*F}\\circ\\alpha_f(F)=g_{f,F}\\circ\\iota_{i,F}$ for every $F$. Define its canonical bounded-below derived supported pullback $RG_i\\to RG_j\\circ f^*$ by right-derived base change of this normalized transformation, where $RG_i$ and $RG_j$ are the ordinary right derived supported-section functors of [def-pur-etale-derived-supported-sections] and the derived $f^*$ is induced by exact inverse image. In particular, for $D=Y\\times_X C$ and $j$ its projection to $Y$, the open-complement condition is the canonical equality $f^{-1}(i^{\\mathrm c})=j^{\\mathrm c}$. No regularity, finiteness, coefficient torsion or affine-line hypothesis is imposed.",
+ "stmt_deps": [
+  "def-pur-support-cohomology",
+  "def-pur-etale-derived-supported-sections"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09XP, section-cohomology-support, the kernel of restriction and its derived functor with pullback functoriality; blueprint main-20261015 sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md, shear paragraph: base change of the supported localization triangle."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "etale supported global sections canonical pullback defined by the unique map of kernels",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Limits.kernel.lift'\", \"module\": \"Mathlib.CategoryTheory.Limits.Shapes.Kernels\", \"type\": \"{W : C} (k : W ⟶ X) (h : k ≫ f = 0) : { l : W ⟶ kernel f // l ≫ kernel.ι f = k }\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism in a category with zero morphisms that has a kernel, with the canonical inclusion map $\\\\iota: \\\\ker(f) \\\\to X$. For any morphism $k: W \\\\to X$ such that $k \\\\circ f = 0$, th\"}\n  {\"name\": \"TopCat.Presheaf.stalkPullbackHom\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"(f : X ⟶ Y) (F : Y.Presheaf C) (x : X) : F.stalk (f x) ⟶ ((pullback C f).obj F).stalk x\", \"doc\": \"Given a continuous map $f: X \\\\to Y$ between topological spaces, a presheaf $\\\\mathcal{F}$ on $Y$ with values in a category $\\\\mathcal{C}$, and a point $x \\\\in X$, this defines the canonical morphism from\"}\n  {\"name\": \"Algebra.FormallyEtale.Algebra.FormallyEtale.iff_of_surjective\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u_2} {S : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Function.Surjective ⇑(algebraMap R S) → (Algebra.FormallyEtale R S ↔ IsIdempotentElem (RingHom.ker (algebraMap R S)))\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with a surjective algebra homomorphism $ R \\\\to S $. Then $ S $ is formally étale over $ R $ if and only if the kernel of this homomorphism is an idempotent ide\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Functorial\", \"type\": \"(i : Z ⟶ Y) (f : X ⟶ Y) [IsClosedImmersion i] : (pullback.fst f i).ker = i.ker.comap f\", \"doc\": \"Given a closed immersion $ i: Z \\\\to Y $ and a morphism $ f: X \\\\to Y $, the kernel of the first projection from the pullback of $ f $ and $ i $ to $ X $ is equal to the comap of the kernel of $ i $ alo\"}\n  {\"name\": \"TopCat.Sheaf.pullbackIso\", \"module\": \"Mathlib.Topology.Sheaves.Functors\", \"type\": \"(f : X ⟶ Y) : pullback A f ≅ forget A Y ⋙ Presheaf.pullback A f ⋙ presheafToSheaf _ _\", \"doc\": \"For a continuous map $ f: X \\to Y $ between topological spaces, the sheaf pullback $ f^* $ defined via left Kan extension and sheafification is naturally isomorphic to the composition of the forgetful \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.ker_toSpecΓ\", \"module\": \"Mathlib.AlgebraicGeometry.IdealSheaf.Basic\", \"type\": \"[CompactSpace X] : X.toSpecΓ.ker = ⊥\", \"doc\": \"Let $X$ be a scheme whose underlying topological space is quasi-compact. Let $\\\\Gamma(X, \\\\mathcal{O}_X)$ be the ring of global sections of its structure sheaf. There is a canonical morphism of schemes \"}\n  {\"name\": \"RingHom.Etale\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \"{R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative rings is étale if the induced algebra structure on $ S $ over $ R $ via $ f $ satisfies the étale property, meaning $ S $ is finitely presented \"}\n  {\"name\": \"Algebra.FormallyEtale.iff_of_surjective\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"{R S : Type*} [CommRing R] [CommRing S] [Algebra R S] (h : Function.Surjective (algebraMap R S)) :\\n  Algebra.FormallyEtale R S ↔ IsIdempotentElem (RingHom.ker (algebraMap R S))\", \"doc\": \"Let $ R $ and $ S $ be commutative rings with a surjective algebra map $ R \\\\to S $. Then $ S $ is formally étale over $ R $ if and only if the kernel of the algebra map is an idempotent ideal in $ R $\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no Mathlib match: results concern general kernels, other sheaf pullbacks or ring-map etaleness; reuse the published project support constructions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "etale supported cohomology pullback from the global sections adjunction unit and the derived kernel of restriction",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullbackObjUnitToUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"The hom-set equivalence of the pullback-pushforward adjunction between sheaves of modules maps the canonical morphism from the pullback of the unit sheaf to the unit sheaf to the canonical morphism fr\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous\", \"type\": \"{C : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\\n    {D : Type u₂} →\\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\\n        {J : CategoryTheory.GrothendieckTopology C} →\\n          {K : CategoryTheory.GrothendieckTopology D} →\\n            {F : CategoryTheory.Functor C D} →\\n     \", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y), (AlgebraicGeometry.Scheme.Modules.pullback f).IsLeftAdjoint\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\\n      AlgebraicGeometry.Scheme.Modules.restrictFunctor f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"Given an open immersion $ f: X \\to Y $ of schemes, there is an adjunction between the restriction functor (mapping sheaves of modules on $ Y $ to those on $ X $) and the pushforward functor (mapping sh\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullback\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → CategoryTheory.Functor Y.Modules X.Modules\", \"doc\": \"Given a morphism $ f : X \\to Y $ of schemes, this defines the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s st\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no Mathlib match: results concern general kernels, other sheaf pullbacks or ring-map etaleness; reuse the published project support constructions"
+  },
+  {
+   "tool": "grep",
+   "query": "affineSupportDerivedMap|supportedSectionsFunctor|supportedEtaleSections",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-18",
+   "verdict": "no Mathlib match: results concern general kernels, other sheaf pullbacks or ring-map etaleness; reuse the published project support constructions"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l affineSupportKernel|affineSupportUnit|affineSupportDerivedMap|affineSupportProjectionComplement dag/nodes",
+   "results": "dag/nodes/sec-smooth-purity/lem-pur-supported-affine-line-homotopy.json\n",
+   "date": "2026-10-18",
+   "verdict": "Only the homotopy theorem node lists the declarations as helpers; no definition node owns this generic canonical supported pullback. The existing declarations are in Sheaf.Paper.SupportedAffineLineHomotopy, and none are in upstream WeilConjectures. Record existing:true without moving, copying or changing the module."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n affineSupportKernel|affineSupportUnit|affineSupportDerivedMap|affineSupportProjectionComplement /home/ubuntu/weil-src-slopmaster2/WeilConjectures lean/Sheaf",
+   "results": "lean/Sheaf/Paper/SupportedAffineLineHomotopy.lean:53:abbrev affineSupportKernel (A : Type (u + 1)) [CommRing A]\nlean/Sheaf/Paper/SupportedAffineLineHomotopy.lean:87:theorem affineSupportUnit_existsUnique (A : Type (u + 1)) [CommRing A]\nlean/Sheaf/Paper/SupportedAffineLineHomotopy.lean:91:    ∃! α : affineSupportKernel A i ⟶\nlean/Sheaf/Paper/SupportedAffineLineHomotopy.lean:92:        upperStar (ModuleCat.{u + 1} A) f ⋙ affineSupportKernel A j,\nlean/Sheaf/Paper/SupportedAffineLineHomotopy.lean:103:def affineSupportUnit (A : Type (u + 1)) [CommRing A]\nlean/Sheaf/Paper/SupportedAffineLineHomotopy.lean:107:  (affineSupportUnit_existsUnique A i j f h).choose\nlean/Sheaf/Paper/SupportedAffineLineHomotopy.lean:112:def affineSupportDerivedMap (A : Type (u + 1)) [CommRing A]\nlean/Sheaf/Paper/SupportedAffineLineHomotopy.lean:116:    (affineSupportKernel A i).rightDerivedFunctorPlus ⟶\nlean/Sheaf/Paper/SupportedAffineLineHomotopy.lean:118:        (affineSupportKernel A j).rightDerivedFunctorPlus :=\nlean/Sheaf/Paper/SupportedAffineLineHomotopy.lean:124:      ((Functor.rightUnitor _).hom ≫ affineSupportUnit A i j f h)\nlean/Sheaf/Paper/SupportedAffineLineHomotopy.lean:158:theorem affineSupportUnit_existsUnique (A : Type (u + 1)) [CommRing A]\nlean/Sheaf/Paper/SupportedAffineLineHomotopy.lean:173:def affineSupportUnit (A : Type (u + 1)) [CommRing A]\nlean/Sheaf/Paper/SupportedAffineLineHomotopy.lean:177:  (affineSupportUnit_existsUnique A i j f h).choose\nlean/Sheaf/Paper/SupportedAffineLineHomotopy.lean:182:def affineSupportDerivedMap (A : Type (u + 1)) [CommRing A]\nlean/Sheaf/Paper/SupportedAffineLineHomotopy.lean:194:      ((Functor.rightUnitor _).hom ≫ affineSupportUnit A i j f h)\nlean/Sheaf/Paper/SupportedAffineLineHomotopy.lean:205:    ∃! α : Etale.affineSupportKernel A i ⟶\nlean/Sheaf/Paper/SupportedAffineLineHomotopy.lean:227:    (Etale.affineSupportKernel A i).rightDerivedFunctorPlus ⟶\nlean/Sheaf/Paper/SupportedAffineLineHomotopy.lean:272:    ((Etale.affineSupportKernel P.Coefficient i).rightDerivedFunctorPlus.obj\nlean/Sheaf/Paper/SupportedAffineLineHomotopy.lean:294:    ((Etale.affineSupportDerivedMap P.Coefficient i j f h).app\nlean/Sheaf/Paper/SupportedAffineLineHomotopy.lean:296:      (Etale.affineSupportKernel P.Coefficient j).rightDerivedFunctorPlus.map\nlean/Sheaf/Paper/SupportedAffineLineHomotopy.lean:316:    ((ProEtale.affineSupportDerivedMap P.Coefficient i j f h).app\nlean/Sheaf/Paper/SupportedAffineLineHomotopy.lean:349:theorem affineSupportProjectionComplement {C X Y : Scheme.{u}}\nlean/Sheaf/Paper/SupportedAffineLineHomotopy.lean:373:    (affineSupportProjectionComplement i f) a (f ≫ a) rfl q r\nlean/Sheaf/Paper/SupportedAffineLineHomotopy.lean:393:    (affineSupportProjectionComplement i f) a (f ≫ a) rfl q r\n",
+   "date": "2026-10-18",
+   "verdict": "Only the homotopy theorem node lists the declarations as helpers; no definition node owns this generic canonical supported pullback. The existing declarations are in Sheaf.Paper.SupportedAffineLineHomotopy, and none are in upstream WeilConjectures. Record existing:true without moving, copying or changing the module."
+  },
+  {
+   "tool": "blueprint_refs",
+   "query": "python3 tools/blueprint_refs.py search \"supported pullback\"",
+   "results": "0 blueprint nodes match 'supported pullback'\n",
+   "date": "2026-10-18",
+   "verdict": "no blueprint definition of this canonical map beyond supported cohomology and its functoriality"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-per-completion-supported-constant-comparison",
+  "date": "2026-10-18",
+  "group": "NW"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Completion reduction in ILO XVII Lemma 3.6.3, reached through the normal top-class and potential-dualizing branch: the canonical supported pullback whose invertibility is the completion comparison.",
+   "via": [
+    "lem-per-completion-supported-constant-comparison",
+    "lem-per-normal-top-residue-class",
+    "lem-per-normal-pinned-extension",
+    "lem-per-potential-dualizing-uniqueness",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.Paper.SupportedAffineLineHomotopy",
+  "declaration": "AlgebraicGeometry.Etale.affineSupportDerivedMap",
+  "declarations": [
+   "AlgebraicGeometry.Etale.affineSupportKernel",
+   "AlgebraicGeometry.Etale.affineSupportInclusion",
+   "AlgebraicGeometry.Etale.affineGlobalSectionMap",
+   "AlgebraicGeometry.Etale.affineSupportUnit_existsUnique",
+   "AlgebraicGeometry.Etale.affineSupportUnit",
+   "AlgebraicGeometry.Etale.affineSupportDerivedMap",
+   "WeilConjectures.PurityFiniteSetting.affineSupportProjectionComplement"
+  ],
+  "statement": "def affineSupportDerivedMap (A : Type (u + 1)) [CommRing A]\n    {C X D Y : Scheme.{u}} (i : C ⟶ X) (j : D ⟶ Y)\n    [IsClosedImmersion i] [IsClosedImmersion j] (f : Y ⟶ X)\n    (h : f ⁻¹ᵁ i.openComplement = j.openComplement) :\n    (affineSupportKernel A i).rightDerivedFunctorPlus ⟶\n      (upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategoryPlus ⋙\n        (affineSupportKernel A j).rightDerivedFunctorPlus",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Existing generic declarations in the published module, not the homotopy theorem. Owns the seven listed support-kernel, inclusion, ordinary section-unit, uniquely normalized supported-unit, derived-base-change and inverse-image-complement declarations. The pointwise kernel is Sheaf.supportedSectionsFunctor, canonically the same kernel and inclusion as supportedEtaleSections A X i.openComplement (the latter takes the kernel in the functor category). affineSupportUnit chooses the unique normalized natural transformation from affineSupportUnit_existsUnique. No declaration is moved, copied or changed, and no affine-line invariance theorem is used."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b970b0fd4",
+  "group": "NW",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b970b0fd4",
+  "group": "NW",
+  "result": "pass",
+  "note": "Re-delivery of the 6e939c3b H2 return. Lean file byte-identical (sha256 53ee8706), substance re-read: excellent/Noetherian/henselian A, l prime and a unit, n>=1, all q,m in Z; AdicCompletion, scheme-theoretic closed-point preimage support, canonical H^q of affineSupportDerivedMap composed with the degree-0 transport and the pinned twist iso; no extra hypotheses; lean.statement verbatim. New existing:true def node def-per-canonical-etale-supported-pullback owns the 7 generic declarations of SupportedAffineLineHomotopy (all present live, statement verbatim up to :=, cites def-pur-support-cohomology, states kernel agreement with def-pur-etale-derived-supported-sections, no module change, no competing owner in live DAG) and replaces the homotopy theorem in stmt_deps, as instructed. Mechanical finding: lem-asd-etale-finite-twist-pullback is genuine (completionTwistPullbackFamily = etaleFiniteTwistPullback(...).choose_spec.choose, a theorem-constructed object) -> PASS on that point. nt_compile --json clean, 53.1 s. Advisory: owned decls' docstrings still name the homotopy node; compile time near the 60 s limit."
+ }
+}

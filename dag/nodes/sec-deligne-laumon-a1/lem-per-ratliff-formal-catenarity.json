@@ -356,5 +356,23 @@
   "group": "Q04",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-233898bc8 (reviewer sub-agent of L); spot-checked: I read the item, all 9 new nodes and every cited statement in full, plus Stacks 0AW2-0AW6, 0ALR (statement and whole proof), 0AUG, 0AUP, 00NK and 032C. The item statement matches 0AW6/0AW2 and is unchanged. Steps 1-10 follow 0AW3/0AW5 correctly. The d=1 case holds: the q^n conormal is supported at m_B, and every isomorphism in the 0ALR proof is a B-algebra map, so the A-algebra form is justified. The residue-field and completion argument holds, and the dimension formula gives dim >= dim A > 1, against dim D_n = 1. In the d>1 case the hyperplane node is true under catenarity: components of V(q,f) have dimension d-1, prime avoidance makes them components of V(fB) and so minimal over some p_iB, and dim A/p_i = dim A - 1. The prime-quotient induction is sound. The converse holds: n' is maximal over n, the polynomial components have dimension dim C + r, the map is flat and local, and the 0AW4 descent and the 0AUG/00NK/00NJ/0AUN prime-chain steps are short enough to mark elementary. Edge cases tested: field, Artinian ring, DVR, r=0. One fault, C5 duplicate: the new node lem-per-complete-local-universally-catenary (032C) is a one-line specialization of the existing reviewed node lem-per-complete-local-excellence (same unit; excellent includes universally catenary per def-exc-excellent-ring). That node's closure does not reach the item, so there is no cycle. FIX: step 7 now cites lem-per-complete-local-excellence and def-exc-excellent-ring, and proof_deps are recomputed. I accept the generic commutative-algebra tool_uses. There is no SGA citation and no other duplicate. This is not a target node.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.RatliffFormalCatenarity",
+  "declaration": "IsUniversallyCatenary.iff_equidimensional_completed_minimal_prime_quotients",
+  "file": "lean/Sheaf/RingTheory/RatliffFormalCatenarity.lean",
+  "statement": "theorem iff_equidimensional_completed_minimal_prime_quotients (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] : IsUniversallyCatenary A ↔ ∀ p : Ideal A, p ∈ minimalPrimes A → ∃ d : ℕ, ∀ Z ∈ irreducibleComponents (AlgebraicGeometry.Spec (CommRingCat.of (AdicCompletion (IsLocalRing.maximalIdeal A) A ⧸ Ideal.map (algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A)) p))), topologicalKrullDim Z = (d : WithBot ℕ∞)",
+  "branch": "newtargets-dag",
+  "by": "Q105",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-259e41a8d",
+  "group": "Q105",
+  "result": "pass",
+  "note": "Lean matches Stacks 0AW6/0AW2 and the node clause by clause: Noetherian local A, AdicCompletion at the maximal ideal, recorded IsUniversallyCatenary, every minimal prime p, pB via Ideal.map algebraMap, Spec of B/pB, all irreducible components with one natural-number topologicalKrullDim, and d may depend on p. No extra hypotheses or universe restriction. Edge cases (field, Artinian ring, DVR, several minimal primes, zero ring, empty spectrum) are fine. Node record differs from live only in lean, and the statement is verbatim in the file. No duplicate notion found. Docstrings carry source, blueprint id and all 10 proof steps. Proof is only sorry. Per-file compile against the side overlay: clean, 2.4 s, exit 0. No findings."
  }
 }
