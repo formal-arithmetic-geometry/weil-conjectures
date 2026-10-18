@@ -12,9 +12,106 @@
   "def-per-fs-log-smooth-etale",
   "def-weil-pbc-geometric-stalks"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First identify the geometric structure-sheaf stalk $A$ with the pointed-affine-neighbourhood ring colimit of [def-weil-pbc-strict-henselization-limit]. Indeed, [def-weil-pbc-geometric-stalks] defines the stalk using all pointed etale neighbourhoods, and [lemma-weil-pbc-affine-neighbourhood-cofinal] allows restriction to the affine ones; choosing their small representative subcategory is exactly the colimit in the former definition. Thus [lem-weil-pbc-strict-henselization-local-structure] applies to $X,\\bar x$: $A$ is local and strictly henselian. In particular [def-weil-pbc-henselian-terminology] says that $A$ is henselian and $k$ is separably closed. No assertion that $k$ is the full field of the chosen geometric point is needed.",
+   "uses": [
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-geometric-stalks",
+    "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "lem-weil-pbc-strict-henselization-local-structure",
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04HX, lemma-describe-etale-local-ring, statement and affine-neighbourhood colimit in its proof; algebra.tex Tag 04GF, definition-henselian."
+   }
+  },
+  {
+   "text": "Use an fs chart $P\\to M$ near $\\bar x$, as supplied by [def-trf-fs-log-blowup]. The chart's stalk pushout says that every log element is a chart element times a unit. Consequently the images of a finite monoid generating set of $P$ generate $\\overline M_{\\bar x}$, and their classes generate $C$ as an abelian group. Their images therefore generate $D$. This uses only the fs chart definition, not the existence of a chart specially adapted to $f$.",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X proof of Proposition 1.2, pp.136--137, characteristic groups in map (1); finite generation from the fine chart definition."
+   }
+  },
+  {
+   "text": "Define the proposed $A$-linear map from the presented module $\\omega_{f,\\bar x}$ to $k\\otimes_{\\mathbf Z}D$ (with the residue $A$-action) by $du\\mapsto0$ and $d\\log m\\mapsto1\\otimes[m]$. Check every relation in the statement. Additivity and Leibniz map to zero, and multiplicativity of $d\\log$ maps to addition in the group $D$. For $d\\alpha(m)=\\alpha(m)d\\log m$, if $\\alpha(m)$ is a nonunit its residue coefficient is zero by [lem-weil-pbc-local-ring-unit-criterion]; if it is a unit, the log-structure condition of [def-trf-fs-log-blowup] gives $[m]=0$ in $C$. Thus this relation also maps to zero. The base relations vanish: a chart $Q\\to N$ identifies every base log element at $\\bar y$ with a chart element times a base unit; its image in $C$ lies in $\\operatorname{im}Q^{\\rm gp}$, since ring maps take units to units. Hence the map factors through $\\pi:k\\otimes_A\\omega_{f,\\bar x}\\to k\\otimes_{\\mathbf Z}D$. The formula extends additively to $d\\log t$ for $t\\in M_{\\bar x}^{\\rm gp}$. Every element of $D$ lifts to this group, so pure tensors, and therefore the whole target, are in the image. This proves the asserted surjection.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "lem-weil-pbc-local-ring-unit-criterion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X proof of Proposition 1.2, map (1), pp.136--137; the check of the displayed logarithmic differential relations is expanded here."
+   }
+  },
+  {
+   "text": "The finite generating family of $D$ from Step 2 gives a finite spanning family $1\\otimes d_j$ of $k\\otimes_{\\mathbf Z}D$. Traverse it in order, retaining a vector exactly when it is not in the span of the retained vectors. The retained list is independent by construction and spans the original list, hence is a basis. Lift its elements $d_j$ through $M_{\\bar x}^{\\rm gp}\\twoheadrightarrow D$ to get $t_1,\\ldots,t_r$. If the vector space is zero, the retained list is empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X proof of Proposition 1.2, p.137, choice of the t_i immediately after (2); finite spanning-set elimination written out."
+   }
+  },
+  {
+   "text": "Now fix any choice with the stated basis property, not just the one of Step 4, and put $E=C/(\\sum_i\\mathbf Z[t_i]+\\operatorname{im}Q^{\\rm gp})$. This is a finitely generated abelian group, as it is a quotient of the finitely generated group $C$. The map $D\\twoheadrightarrow E$ induces a surjection on tensors: each pure tensor $b\\otimes e$ lifts by choosing a lift of $e$, and pure tensors generate. But the spanning vectors $1\\otimes[t_i]$ all map to zero, so this tensor map is zero. Thus $k\\otimes_{\\mathbf Z}E=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X proof of Proposition 1.2, p.137, surjectivity of k(x) tensor the map u and the assertion about its cokernel; the tensor argument expanded."
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-finitely-generated-abelian-group-structure] to $E$. It is a finite direct sum of a free group $\\mathbf Z^s$ and cyclic groups of prime-power orders $q_j^{e_j}$. If $s>0$, projection onto a free coordinate defines a nonzero balanced pairing $k\\times E\\to k$, $(b,e)\\mapsto b\\,\\overline{\\operatorname{pr}(e)}$; it induces a nonzero map $k\\otimes_{\\mathbf Z}E\\to k$, contrary to Step 5. Hence $s=0$ and $E$ is finite. If $\\operatorname{char}k=p>0$, any summand of order $p^{e_j}$ with $e_j>0$ similarly gives a nonzero pairing by projection and reduction $\\mathbf Z/p^{e_j}\\to\\mathbf F_p\\subset k$. Thus there is no such summand. Take $n=\\prod_jq_j^{e_j}$, with the empty product equal to $1$. It kills $E$ and has nonzero residue in $k$: in characteristic zero every positive integer does, and in characteristic $p$ none of its factors is $p$. By [lem-weil-pbc-local-ring-unit-criterion], $n$ is invertible in $A$.",
+   "uses": [
+    "lem-sbc-finitely-generated-abelian-group-structure",
+    "lem-weil-pbc-local-ring-unit-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose X proof of Proposition 1.2, p.137, cokernel killed by m invertible in k(x); abelian structure theorem explicitly supplied by the cited Mathlib leaf."
+   }
+  },
+  {
+   "text": "Let $a>0$ be invertible in $A$ and let $u\\in A^\\times$. By Step 1, $k$ is separably closed. The polynomial $T^a-\\bar u$ has nonzero constant term, and its derivative is $\\bar aT^{a-1}$, with $\\bar a\\ne0$. These two polynomials have no common root (a root of the first is nonzero); equivalently their greatest common divisor is $1$, so the polynomial is separable. By [def-pc-separably-closed] it has a root $v_0\\in k$, necessarily nonzero, and its derivative at $v_0$ is nonzero. The simple-root implication of [lem-weil-pbc-henselian-local-root-lifting], using henselianity from Step 1, lifts $v_0$ to $v\\in A$ with $v^a=u$. Since $v$ has nonzero residue, [lem-weil-pbc-local-ring-unit-criterion] makes $v$ a unit. This proves $a$-divisibility for every permitted $a$, including $a=1$, independently of the particular $n$ in Step 6.",
+   "uses": [
+    "def-pc-separably-closed",
+    "lem-weil-pbc-henselian-local-root-lifting",
+    "lem-weil-pbc-local-ring-unit-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GF, definition-henselian, simple-root lifting and strictly henselian clause (equivalent idempotent formulation supplied by the cited node); ILO Expose X p.137, units are m-divisible before diagram (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-separably-closed",
+  "def-trf-fs-log-blowup",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-strict-henselization-limit",
+  "lem-sbc-finitely-generated-abelian-group-structure",
+  "lem-weil-pbc-henselian-local-root-lifting",
+  "lem-weil-pbc-local-ring-unit-criterion",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lemma-weil-pbc-affine-neighbourhood-cofinal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose X proof of Proposition 1.2, printed pp.136--137, map (1), basis choice, cokernel and unit divisibility before (3); elementary relation checks and tensor calculations expanded, with strict-local and Hensel inputs from Stacks Tags 04HX and 04GF."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +147,31 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.Generators.cotangentCompAwaySec\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      {ι : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : CommRing T] →\\n                [inst_4 : Algebra R T] →\\n                  [inst_5 : Algebra S T]\", \"doc\": \"A linear map on the cotangent module of a localized algebra extension, constructed using the basis generated by the Jacobian equivalence for the localization at an element $ r $. This map sends each b\"}\n  {\"name\": \"Algebra.Generators.cotangentCompLocalizationAwayEquiv\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      {ι : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : CommRing T] →\\n                [inst_4 : Algebra R T] →\\n                  [inst_5 : Algebra S T]\", \"doc\": \"Given commutative rings $ R $, $ S $, and $ T $ with $ R $-algebra structures on $ S $ and $ T $, and an $ S $-algebra structure on $ T $ satisfying the scalar tower condition $ R \\\\to S \\\\to T $, if $ \"}\n  {\"name\": \"Algebra.Generators.cMulXSubOneCotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"{R : Type u_1} →\\n  (S : Type u_2) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (r : R) → [inst_3 : IsLocalization.Away r S] → (Algebra.Generators.localizationAway S r).toExtension.Cotangent\", \"doc\": \"The element in the cotangent module of the algebra extension obtained by localizing at $ r $, represented by the polynomial $ C(r)X - 1 $ where $ C(r) $ is the constant polynomial embedding of $ r $ a\"}\n  {\"name\": \"Algebra.Generators.cMulXSubOneCotangent_eq\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (r : R)\\n  [inst_3 : IsLocalization.Away r S],\\n  Algebra.Generators.cMulXSubOneCotangent S r =\\n    Algebra.Extension.Cotangent.mk ⟨MvPolynomial.C r * MvPolynomial.X () - 1, ⋯⟩\", \"doc\": \"In the cotangent module of the algebra extension obtained by localizing at $ r $, the element represented by the polynomial $ C(r)X - 1 $ (where $ C(r) $ is the constant polynomial embedding of $ r $ \"}\n  {\"name\": \"Algebra.Extension.Cotangent.finite\", \"module\": \"Mathlib/RingTheory/Extension/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  {P : Algebra.Extension R S}, P.ker.FG → Module.Finite S P.Cotangent\", \"doc\": \"Given commutative rings $ R $ and $ S $ with an $ R $-algebra structure on $ S $, if the kernel $ \\\\ker(\\\\phi) $ of the canonical homomorphism $ \\\\phi: R \\\\to S $ is finitely generated as an ideal, then t\"}\n  {\"name\": \"Algebra.PreSubmersivePresentation.cotangentComplexAux\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {ι : Type u_3} →\\n      {σ : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [Finite σ] → (P : Algebra.PreSubmersivePresentation R S ι σ) → P.toExtension.Cotangent →ₗ[S] σ → S\", \"doc\": \"The linear map from the cotangent module of the algebra extension to the space of functions $\\\\sigma \\\\to S$, constructed as the composition of the cotangent complex map, the basis representation, a lin\"}\n  {\"name\": \"Algebra.Generators.cotangentCompAwaySec_apply\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} {ι : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] [inst_3 : CommRing T] [inst_4 : Algebra R T] [inst_5 : Algebra S T]\\n  [inst_6 : IsScalarTower R S T] (g : S) [inst_7 : IsLocalization.Away g T] (P : Algebra.Generators R S\", \"doc\": \"The linear map $\\\\text{cotangentCompAwaySec}$ on the cotangent module of the localization $ S_r $ sends the cotangent element represented by $ C(r)X - 1 $ (where $ C(r) $ is the constant polynomial emb\"}\n  {\"name\": \"Algebra.Generators.cotangentRestrict\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"{R : Type u} →\\n  {S : Type v} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {ι : Type w} →\\n            (P : Algebra.Generators R S ι) →\\n              {σ : Type u_1} → {u : σ → ι} → Function.Injective u → P.toExtension.Cotangent →ₗ[S] σ →₀ S\", \"doc\": \"The linear map from the cotangent module of an algebra extension to finite support functions on $\\\\sigma$, constructed by composing the cotangent complex map, the basis representation of the cotangent \"}\n Read the returned types: ordinary scheme smoothness, ordinary Kahler/cotangent modules and manifold charts do not state this logarithmic assertion. The ordinary algebra Jacobian criterion in Mathlib/RingTheory/Smooth/Local.lean:34 concerns a ring presentation, not a strict map of log smooth schemes.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Logarithmic differentials and relative characteristic monoids",
+   "results": "Differential.logDeriv; logDeriv_prod; logDeriv_mul; logDeriv_mul_const; logDeriv_comp; Differential.logDeriv_algebraMap; Differential.logDeriv_mul; logDeriv Read the returned hits: ordinary Kahler differentials, ring cotangent modules and scalar logarithmic derivatives do not define log structures or prove the characteristic-monoid quotient assertion.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Logarithmic differentials of log schemes surject onto residue field tensor characteristic monoid quotient",
+   "results": "AlgebraicGeometry.Scheme.residue_surjective; KaehlerDifferential.tensorProductTo_surjective; KaehlerDifferential.map_surjective; Algebra.SubmersivePresentation.cotangentComplexAux_surjective; Algebra.Extension.Cotangent.mk_surjective; KaehlerDifferential.map_surjective_of_surjective; KaehlerDifferential.range_kerCotangentToTensor; KaehlerDifferential.mapBaseChange_surjective Read the returned hits: ordinary Kahler differentials, ring cotangent modules and scalar logarithmic derivatives do not define log structures or prove the characteristic-monoid quotient assertion.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Residue log cotangent space relative characteristic group prime to residue characteristic finite cokernel Kato log smooth",
+   "results": "Algebra.H1Cotangent; IsLocalRing.finrank_CotangentSpace_eq_one; IsLocalRing.instModuleResidueFieldCotangentSpace; IsLocalRing.finrank_cotangentSpace_eq_zero; IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing; Algebra.Generators.cMulXSubOneCotangent; Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField; Algebra.Generators.cotangentCompAwaySec Read the returned hits: ordinary Kahler differentials, ring cotangent modules and scalar logarithmic derivatives do not define log structures or prove the characteristic-monoid quotient assertion.",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-equivariant-log-smooth-chart",
@@ -81,5 +199,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-log-cotangent-characteristic-quotient",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and supplied seven proof steps. Checked the logarithmic relations, chose a basis from a finite spanning set, proved the prime-to-characteristic cokernel using the existing abelian structure Mathlib leaf, and justified all invertible-exponent unit roots by strict henselianity and Hensel lifting. No new nodes or attachments.",
+  "blueprint": "Realizes the preparation argument of lem-per-equivariant-log-smooth-chart, Steps 1 and 3, under lem-per-artin-gabber-affine-curve proof Step 3: ILO X Proposition 1.2, map (1), basis choice and finite cokernel before (3), pp.136--137. The chapter and unit route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lemma-weil-pbc-affine-neighbourhood-cofinal",
+    "why": "Restricts the geometric structure-sheaf stalk colimit to affine etale neighbourhoods; a generic site tool, not an alternative purity route."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-local-structure",
+    "why": "Makes that pointed-affine ring colimit strictly henselian; no log-chart node in this unit supplies the local ring theorem."
+   },
+   {
+    "node": "lem-weil-pbc-local-ring-unit-criterion",
+    "why": "Identifies elements of nonzero residue with units, both in the relation check and for n and v; a generic local-ring fact."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-local-root-lifting",
+    "why": "The simple-root lifting implication applied to T^a-u; a generic commutative algebra tool needed to justify the source's unit divisibility."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-weil-pbc-affine-neighbourhood-cofinal",
+  "lem-weil-pbc-strict-henselization-local-structure",
+  "lem-weil-pbc-local-ring-unit-criterion",
+  "lem-weil-pbc-henselian-local-root-lifting"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q99-51d853cce",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-51d853cce (reviewer sub-agent of L); spot-checked: I read the full statement and all 7 steps against ILO Exposé X Prop 1.2 (printed pp.136-138): map (1), choice of t_i, cokernel of u killed by an invertible m, and m-divisibility of O*. D matches the source's \\bar M^gp_{X/Y}, because the chart Q→N surjects onto \\bar N_y. E is the cokernel of u. Divisibility for every invertible a includes the source's m, so nothing is weakened. All hypotheses are retained; log smoothness is unused, and the report says so. Step 1: geometric stalk = affine colimit (cofinal lemma) = strictly henselian by lem-weil-pbc-strict-henselization-local-structure (Stacks 04HX). Step 2: finite generation from the chart pushout in def-trf-fs-log-blowup. Step 3: every relation checked. dα(m) holds because a nonunit has residue 0 and a unit m has class 0 since α^{-1}(O^×)≅O^×; base sections land in im Q^gp. Steps 4-5: basis extraction, and k⊗E=0 for any basis choice. Step 6: the exact Mathlib structure leaf, with nonzero pairings ruling out free and p-primary summands; n is a unit by the unit criterion. Step 7: T^a−ū is separable with a simple nonzero root, lifted by the (ii)-direction of the henselian root-lifting node (Stacks 04GF), and the lift is a unit. Small cases checked: trivial log structure; char 0 with D=Z⊕Z/2; char p with D=Z, where t=q·gen with q≠p is a basis and p·gen is not; a=1. No new nodes and no SGA. Tool uses accepted: affine-neighbourhood cofinality, strict-henselization local structure, henselian root lifting and the unit criterion, all generic. Maintainer note: lem-per-log-smooth-differential-generators (Q50) is a stronger overlapping variant with the same proof pattern. It is not a one-line source for this item's any-basis / all-a form, so the two pre-existing nodes may later be merged."
  }
 }
