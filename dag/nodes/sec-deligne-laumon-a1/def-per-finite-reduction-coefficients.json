@@ -1,0 +1,106 @@
+{
+ "id": "def-per-finite-reduction-coefficients",
+ "kind": "definition",
+ "title": "Prime-power coefficient presentations and canonical quotient maps",
+ "status": "split",
+ "statement": "For natural numbers $\\ell,r$, write $R_{\\ell,r}=\\operatorname{ULift}_u(\\mathbf Z/\\ell^r\\mathbf Z)$ and $A_{\\ell,r}=\\operatorname{ULift}_{u+1}(R_{\\ell,r})$, with their transported commutative ring structures. Here $\\mathbf Z/0\\mathbf Z$ means $\\mathbf Z$, and the lifts only change size. For natural numbers $m\\le r$, define $q_{\\ell,r,m}:A_{\\ell,r}\\to A_{\\ell,m}$ to be the twice-lifted canonical quotient ring homomorphism induced by $\\ell^m\\mid\\ell^r$, sending the class of every integer to its class modulo $\\ell^m$. For prime $\\ell$ and positive levels these are the coefficient rings $\\Lambda_r=\\mathbf Z/\\ell^r\\mathbf Z$ and the coefficient reduction maps, expressed in the module universe.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.7.20, proof: finite coefficient levels Z/ell^n and their reduction maps; concrete size-lifted presentation in Sheaf.Paper.FiniteReductionConstructibility, Ring, Coeff and quotient."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "def castHom|abbrev Ring|def quotient",
+   "results": "{\"t\": \"2026-10-18T22:59:22Z\", \"tool\": \"grep\", \"query\": \"def castHom|abbrev Ring|def quotient\", \"sub\": \"Data/ZMod\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Data/ZMod/QuotientRing.lean\", \"Mathlib/Data/ZMod/QuotientRing.lean\", \"Mathlib/Data/ZMod/QuotientGroup.lean\", \"Mathlib/Data/ZMod/QuotientGroup.lean\", \"Mathlib/Data/ZMod/QuotientGroup.lean\", \"Mathlib/Data/ZMod/Basic.lean\"], \"digest\": \"68bdca307c0b50bb\"}",
+   "date": "2026-10-18",
+   "verdict": "ZMod.castHom gives the canonical quotient. Reuse the exact published FiniteReduction.Ring, Coeff and quotient definitions with existing:true; no duplicate construction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The coefficient rings ZMod (l^r) and the canonical quotient ring homomorphism ZMod (l^r) to ZMod (l^m) for m less than or equal to r",
+   "results": "{\"t\": \"2026-10-18T22:59:23Z\", \"tool\": \"leansearch\", \"query\": \"The coefficient rings ZMod (l^r) and the canonical quotient ring homomorphism ZMod (l^r) to ZMod (l^m) for m less than or equal to r\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.Quotient.mk\", \"Ideal.Quotient.factorPow.congr_simp\", \"Ideal.Quotient.factorPow\", \"Ideal.Quotient.factor\", \"RingCon.mk'\", \"Ideal.Quotient.factorPowSucc\", \"ZMod.castHom\", \"PadicInt.toZModPow\"], \"digest\": \"23b17e3a99c4ddc2\"}",
+   "date": "2026-10-18",
+   "verdict": "ZMod.castHom gives the canonical quotient. Reuse the exact published FiniteReduction.Ring, Coeff and quotient definitions with existing:true; no duplicate construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical quotient ring homomorphism ZMod (l^r) to ZMod (l^m) for m ≤ r with universe lifts",
+   "results": "{\"t\": \"2026-10-18T22:59:23Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical quotient ring homomorphism ZMod (l^r) to ZMod (l^m) for m ≤ r with universe lifts\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PadicInt.zmod_cast_comp_toZModPow\", \"ZMod.castHom\", \"PadicInt.toZModPow\", \"PadicInt.cast_toZModPow\", \"ZMod.cast_cast_zmod_of_le\", \"PadicInt.lift_spec\", \"WittVector.toZModPow_compat\", \"ZMod.castHom_apply\"], \"digest\": \"2471558159dfd751\"}",
+   "date": "2026-10-18",
+   "verdict": "ZMod.castHom gives the canonical quotient. Reuse the exact published FiniteReduction.Ring, Coeff and quotient definitions with existing:true; no duplicate construction."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n FiniteReduction|ZMod.castHom in WeilConjectures, lean/Sheaf/Paper/FiniteReductionConstructibility.lean and dag/lean_names_upstream.json; rg -l FiniteReduction.(Ring|Coeff|quotient) dag/nodes; blueprint_refs.py search coefficient quotient",
+   "results": "Published Ring, Coeff and quotient found at Sheaf/Paper/FiniteReductionConstructibility.lean:59,63,67. Upstream uses ZMod.castHom in ArtinSchreier, FundamentalGroup, Padics/RingHoms, FundamentalGroup/Frobenius and TorsionCharacter, but has no FiniteReduction definition. DAG name hits are only lem-pur-exceptional-coefficient-comparison and lem-pur-finite-reduction-constructibility; neither definition node owns these helpers. Blueprint search returned cor-coef-finite-verdier, def-weil-pbc-frobenius-tower-datum, def-weil-pbc-intrinsic-completion, lem-coef-integral-finite-extension and thm-sf-ctf-stability, none defining this presentation.",
+   "date": "2026-10-18",
+   "verdict": "The exact project definitions already exist, but no definition node owns them. Add only their existing:true ownership record."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-per-finite-regular-reduction-dualizing",
+  "date": "2026-10-18",
+  "group": "NR"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Finite prime-power coefficient rings and the quotient maps in the regular-reduction dualizing model and its compatible coefficient tower.",
+   "via": [
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.Paper.FiniteReductionConstructibility",
+  "declaration": "AlgebraicGeometry.FiniteReduction.quotient",
+  "declarations": [
+   "AlgebraicGeometry.FiniteReduction.Ring",
+   "AlgebraicGeometry.FiniteReduction.Coeff",
+   "AlgebraicGeometry.FiniteReduction.quotient"
+  ],
+  "statement": "def quotient (l : ℕ) {r m : ℕ} (h : m ≤ r) : Coeff.{u} l r →+* Coeff.{u} l m",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Definition-only ownership of the unchanged published Ring and Coeff abbreviations and the concrete twice-lifted ZMod.castHom quotient. These are not choices from finiteReduction_constructibility; no theorem or new construction is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-349caa7ff",
+  "group": "NR",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-349caa7ff",
+  "group": "NR",
+  "result": "pass",
+  "note": "Re-delivery of 42936c8367b4 (returned only for H2/H12). The item Lean is byte-identical (sha256 fd933b07), so the earlier clause-by-clause verification stands; re-read and agreed. Fix verified: stmt_deps now cites the new def node def-per-finite-reduction-coefficients (existing:true on the unchanged Sheaf.Paper.FiniteReductionConstructibility; Ring/Coeff/quotient; statement verbatim in the live module; prose matches the ULift/ZMod.castHom bodies with m≤r; source BS 6.7.20; no duplicate owner live or in runs/2) instead of lem-pur-finite-reduction-constructibility. Item record differs from live only in stmt_deps and lean; the other 12 dependency records are cmp-identical to live. Mechanical finding: lem-pur-exceptional-coefficient-comparison is justified because unitIso = (unitIso_existsUnique φ T).choose is used via dualizingReduction; PASS on that point. nt_compile --json 34.9 s rc 0, clean. Advisory: helper docstrings still cite the old theorem node's blueprint; the second reading is a self-reread."
+ }
+}

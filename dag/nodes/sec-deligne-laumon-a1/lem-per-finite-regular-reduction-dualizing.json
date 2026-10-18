@@ -21,7 +21,12 @@
   "def-weil-irreducible-components",
   "def-kun-topological-krull-dimension",
   "def-weil-pbc-constructible-complexes",
-  "lem-per-adic-exceptional-projection"
+  "lem-per-adic-exceptional-projection",
+  "def-weil-pbc-scheme-reduction",
+  "def-pur-finite-smooth-coefficient-arrows",
+  "def-asd-finite-etale-tate-twist",
+  "def-per-finite-reduction-coefficients",
+  "lem-pur-exceptional-coefficient-comparison"
  ],
  "proof": [
   {
@@ -315,5 +320,32 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-769edc05e (reviewer sub-agent of L); spot-checked: Read the item, all five new nodes and every cited statement, against ILO XVII Def. 1.3.1/1.4.1/2.1.1–2.1.2, Prop. 2.4.1.1/2.4.4.1, Prop. 4.1.2 + Rem. 4.1.3, Thm 5.1.1, Prop. 6.2.2.1 (proof p.294)/6.2.2.3, and BS Lemmas 6.7.18/6.7.20. The item statement is true and unchanged. Small cases checked: d=0 with a purely inseparable residue field, A^1 giving Λ(1)[2], a non-smooth regular curve over an imperfect field, and n=1. The new nodes are true theorems from those sources at the Z/ℓ^n stages. They generalize N3's F_ℓ-only def-per-potential-dualizing and lem-per-potential-extraordinary-pullback rather than duplicating them. The smooth/perfect-field purity nodes cannot replace regular-unit. No node restates a clause of the item, no SGA is cited, and the 11 tool_uses are generic infrastructure and accepted. Two E5 gaps fixed in the item. (1) Step 6: the item's a_n^! is the D^b_c adjoint of lem-per-adic-exceptional-projection, while the potential nodes compute the D^+ adjoint. Added the Yoneda identification on the full subcategory D^b_c and cited that node (same unit, already a stmt_dep). (2) Step 7: the lift of the reduction square to X through i^{-1} needed the transported comparison for a to equal the one for b, which no node states. Moved this into a new step 8: both maps are pinning-preserving isomorphisms between the same pinned potential complexes on T, so uniqueness makes them equal, and faithfulness of i^{-1} gives the square on X. All steps are under 2000 characters and proof_deps is the union of the uses. Advisory: the new nodes have no lean_audit field.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteRegularReductionDualizing",
+  "declaration": "AlgebraicGeometry.Etale.RegularReductionDualizing.finiteRegularReductionDualizing",
+  "declarations": [
+   "AlgebraicGeometry.Etale.RegularReductionDualizing.twist",
+   "AlgebraicGeometry.Etale.RegularReductionDualizing.twistComplex",
+   "AlgebraicGeometry.Etale.RegularReductionDualizing.quotient",
+   "AlgebraicGeometry.Etale.RegularReductionDualizing.dualizingReduction",
+   "AlgebraicGeometry.Etale.RegularReductionDualizing.shiftedTwistReduction",
+   "AlgebraicGeometry.Etale.RegularReductionDualizing.Model",
+   "AlgebraicGeometry.Etale.RegularReductionDualizing.finiteRegularReductionDualizing"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteRegularReductionDualizing.lean",
+  "statement": "theorem finiteRegularReductionDualizing (k : Type u) [Field k] (l : ℕ) [Fact l.Prime] [Fact (IsUnit (l : k))] (X : Scheme.{u}) [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [IrreducibleSpace X] (_hregular : IsRegularScheme X.nilradical.subscheme) : ∃ d : ℕ, topologicalKrullDim X = (d : WithBot ℕ∞) ∧ Model l (X ↘ Spec (.of k)) d",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-349caa7ff",
+  "group": "NR",
+  "result": "pass",
+  "note": "Re-delivery of 42936c8367b4 (returned only for H2/H12). The item Lean is byte-identical (sha256 fd933b07), so the earlier clause-by-clause verification stands; re-read and agreed. Fix verified: stmt_deps now cites the new def node def-per-finite-reduction-coefficients (existing:true on the unchanged Sheaf.Paper.FiniteReductionConstructibility; Ring/Coeff/quotient; statement verbatim in the live module; prose matches the ULift/ZMod.castHom bodies with m≤r; source BS 6.7.20; no duplicate owner live or in runs/2) instead of lem-pur-finite-reduction-constructibility. Item record differs from live only in stmt_deps and lean; the other 12 dependency records are cmp-identical to live. Mechanical finding: lem-pur-exceptional-coefficient-comparison is justified because unitIso = (unitIso_existsUnique φ T).choose is used via dualizingReduction; PASS on that point. nt_compile --json 34.9 s rc 0, clean. Advisory: helper docstrings still cite the old theorem node's blueprint; the second reading is a self-reread."
  }
 }
