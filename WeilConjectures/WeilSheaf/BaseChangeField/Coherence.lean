@@ -178,7 +178,8 @@ lemma adicLowerStarGeometricFiberMapCompFrobeniusIso_eq {k : Type u} [Field k] [
     {X₀ Y₀ : Scheme.{u}} {f : X₀ ⟶ Spec (.of k)} {g : Y₀ ⟶ Spec (.of k)} (φ : X₀ ⟶ Y₀)
     (h : φ ≫ g = f) :
     adicLowerStarGeometricFiberMapCompFrobeniusIso l φ h =
-      adicLowerStarSquareIso l (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv φ h) :=
+      adicLowerStarSquareIso l
+        (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv φ h) :=
   rfl
 
 lemma adicLowerStarSquareIso_hom_app_hom {Z Y Y' X : Scheme.{u}} {p : Z ⟶ Y} {q : Y ⟶ X}
