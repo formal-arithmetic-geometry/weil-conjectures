@@ -26,74 +26,76 @@
  ],
  "proof": [
   {
-   "text": "By the direct-summand characterization in [def-weil-pbc-projective-module], choose a set $S$ and maps $i:\\overline P\\to\\overline F=(A/I)^{(S)}$ and $s:\\overline F\\to\\overline P$ with $si=1$. Put $\\overline p=is$. Then $\\overline p^2=\\overline p$ and its image is $i(\\overline P)$, identified with $\\overline P$ by $s$. Set $F=A^{(S)}$.",
+   "text": "Put $F=A^{(\\overline P)}$, $K=IF$, $Q=F/K$. The canonical linear-combination map $r:F\\to\\overline P$ is surjective and kills $K$, because scalars in $I$ act as zero on $\\overline P$. It descends to a surjection $s:Q\\to\\overline P$ of $A/I$-modules. By projectivity [def-weil-pbc-projective-module], choose an $A/I$-linear section $i$ and let $\\overline p=i s$ be the corresponding idempotent, viewed as an $A$-linear endomorphism of $Q$.",
    "uses": [
     "def-weil-pbc-projective-module"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 07LV, lemma-lift-projective-module, first sentence; Tag 05CF, lemma-characterize-projective"
+    "place": "Tag 07LV, lemma-lift-projective-module"
    }
   },
   {
-   "text": "The coordinate reduction $q:F\\to\\overline F$ is surjective with kernel $IF$: every vector has finite support, its coefficients lift individually, and a vector with coefficients in $I$ is a finite sum of elements $a e_j$ with $a\\in I$. For each basis vector $e_j$, lift the finitely supported vector $\\overline p(q(e_j))$ to $v_j\\in F$. Define $p(\\sum_j a_j e_j)=\\sum_j a_jv_j$. This is an $A$-linear endomorphism with $qp=\\overline p q$. No bound on the cardinality of $S$ is used.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 07LV, lemma-lift-projective-module, choice of a lift of the projector"
-   }
-  },
-  {
-   "text": "Write $x=p^2-p$. The equality $qx=0$ implies $x(F)\\subseteq IF$. By $A$-linearity, $x(I^kF)\\subseteq I^{k+1}F$ for every $k\\geq0$, since applying $x$ to a finite sum $\\sum a_j f_j$ gives $\\sum a_jx(f_j)$. Induction gives $x^N(F)\\subseteq I^NF=0$, so $x^N=0$ in the (possibly noncommutative) ring $\\operatorname{End}_A(F)$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 07LV, lemma-lift-projective-module, nilpotence of the lifted projector defect"
-   }
-  },
-  {
-   "text": "Let $R=\\mathbf Z[t]/((t^2-t)^N)$, write $u$ for the class of $t$, and let $J=(u^2-u)\\subseteq R$. This is a commutative ring with $J^N=0$, and $u\\bmod J$ is idempotent. Apply [lem-weil-pbc-lift-idempotents-locally-nilpotent] to obtain an idempotent $v\\in R$ with $v-u\\in J$. All elements of $J$ are nilpotent because their $N$th powers lie in $J^N=0$.",
+   "text": "Every $A$-linear endomorphism of $F$ preserves $IF$, so quotienting defines a ring homomorphism $\\rho:\\operatorname{End}_A(F)\\to\\operatorname{End}_A(Q)$. Projectivity of the free module $F$ lifts $\\overline p\\circ q$ through the surjection $q:F\\to Q$. Thus $\\overline p$ belongs to the image of $\\rho$.",
    "uses": [
-    "lem-weil-pbc-lift-idempotents-locally-nilpotent"
+    "def-weil-pbc-projective-module"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 05BU, lemma-lift-idempotents-noncommutative, proof using Tag 00J9, lemma-lift-idempotents"
+    "place": "Tag 07LV, lemma-lift-projective-module"
    }
   },
   {
-   "text": "Evaluation at $p$ defines a ring homomorphism $R\\to\\operatorname{End}_A(F)$: integer scalars commute with $p$, and the defining relation evaluates to $x^N=0$. Let $e$ be the image of $v$. Then $e^2=e$. Since $v-u\\in J$, its image is a multiple of $x$ by a polynomial in $p$, hence sends $F$ into $IF$. Thus $qe=qp=\\overline p q$. This is the polynomial correction of Tag 05BU, derived from the cited commutative lifting statement rather than assuming that the endomorphism ring is commutative.",
+   "text": "For $f\\in\\ker(\\rho)$, its image is contained in $IF$. Linearity and induction give $\\operatorname{Im}(f^n)\\subseteq I^nF$: map the inductive containment through $f$, commute submodule mapping with ideal scalar multiplication, and use $\\operatorname{Im}(f)\\subseteq IF$. Since $I^N=0$, this proves $f^N=0$. The two private helpers reductionEnd and reductionEnd_ker_nilpotent implement these constructions and this induction.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 05BU, lemma-lift-idempotents-noncommutative, evaluation of the universal polynomial lift; Tag 07LV"
+    "place": "Tag 07LV, lemma-lift-projective-module"
    }
   },
   {
-   "text": "Set $P=\\operatorname{Im}(e)$. The inclusion $P\\to F$ and the map $F\\to P$, $f\\mapsto e(f)$, compose to the identity on $P$, so [def-weil-pbc-projective-module] makes $P$ projective. The restriction of $q$ maps $P$ onto $\\operatorname{Im}(\\overline p)$: for $\\overline p(\\bar f)$ choose $f$ with $q(f)=\\bar f$ and use $q(e(f))=\\overline p(\\bar f)$. Its kernel is $P\\cap IF=IP$: one inclusion is immediate, and if $y\\in P\\cap IF$, write $y=\\sum_j a_jf_j$ with $a_j\\in I$; then $y=e(y)=\\sum_j a_je(f_j)\\in IP$. Hence $[y]\\mapsto s(q(y))$ defines an $A/I$-linear bijection $P/IP\\to\\overline P$. Its inverse sends $z\\in\\overline P$ to $[e(f)]$ for any lift $f$ of $i(z)$; different lifts differ in $IF$, whose image under $e$ lies in $IP$. The first composition sends $z$ to $s(q(e(f)))=s(\\overline p(i(z)))=si(z)=z$. For $y\\in P$, choose $f=y$ as a lift of $i(s(q(y)))=\\overline p(q(y))=q(y)$; the other composition sends $[y]$ to $[e(y)]=[y]$. Linearity of $s\\circ q$ and the equality $I(P/IP)=0$ give the asserted $A/I$-linearity.",
+   "text": "Apply the noncommutative Mathlib idempotent-lifting theorem [lem-weil-pbc-noncommutative-idempotent-lift-nil-kernel] to $\\rho$ and $\\overline p$. It gives $e^2=e$ on $F$ with $\\rho(e)=\\overline p$, equivalently $q(e(y))=i(r(y))$ for every $y\\in F$.",
+   "uses": [
+    "lem-weil-pbc-noncommutative-idempotent-lift-nil-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07LV, lemma-lift-projective-module"
+   }
+  },
+  {
+   "text": "Let $P=\\operatorname{Im}(e)$ and $t:F\\to P$ be the range restriction of $e$. For $x\\in P$, idempotence gives $e(x)=x$, so $t$ splits the inclusion of $P$ into $F$. Thus $P$ is projective by [def-weil-pbc-projective-module].",
    "uses": [
     "def-weil-pbc-projective-module"
    ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07LV, lemma-lift-projective-module"
+   }
+  },
+  {
+   "text": "Restrict $r$ to $f:P\\to\\overline P$. To lift $x\\in\\overline P$, choose $y\\in F$ with $q(y)=i(x)$; then $f(t(y))=x$ by $s i=1$ and $q e=i r$. If $f(x)=0$, then $q(x)=q(e(x))=i(r(x))=0$, hence $x\\in IF$. Applying $t$ and its $A$-linearity shows $x=t(x)\\in IP$. Conversely $I$ annihilates $\\overline P$, so $IP\\subseteq\\ker(f)$. Therefore $\\ker(f)=IP$. The quotient lift of $f$ is bijective by the kernel and surjectivity computations. It is $A/I$-linear by representing each quotient scalar by an element of $A$, and LinearEquiv.ofBijective gives the required equivalence.",
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 07LV, lemma-lift-projective-module, final image construction and verification of reduction"
+    "place": "Tag 07LV, lemma-lift-projective-module"
    }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-projective-module",
-  "lem-weil-pbc-lift-idempotents-locally-nilpotent"
+  "lem-weil-pbc-noncommutative-idempotent-lift-nil-kernel"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 07LV, lemma-lift-projective-module, entire proof; Tag 05BU, lemma-lift-idempotents-noncommutative, polynomial reduction to Tag 00J9"
+  "place": "Tag 07LV, lemma-lift-projective-module; Tag 05BU, lemma-lift-idempotents-noncommutative. The N1 Lean proof applies Mathlib noncommutative lifting directly to the endomorphism-reduction homomorphism, dispensing with the universal commutative polynomial ring."
  },
  "mathlib_searches": [
   {
@@ -290,5 +292,15 @@
   "by": "NI",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261018T062836-L-665378",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

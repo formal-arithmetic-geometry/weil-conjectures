@@ -1,0 +1,105 @@
+{
+ "id": "lem-weil-pbc-noncommutative-idempotent-lift-nil-kernel",
+ "kind": "statement",
+ "title": "Idempotents lift through ring homomorphisms with nil kernel",
+ "statement": "Let $R$ and $S$ be rings, not necessarily commutative, and let $f:R\\to S$ be a unital ring homomorphism. Suppose that every element of $\\ker(f)$ is nilpotent, meaning that for each $x\\in\\ker(f)$ there exists $n\\geq 0$ with $x^n=0$. If $e\\in S$ satisfies $e^2=e$ and belongs to the image of $f$, then there exists $e^{\\prime}\\in R$ such that $(e^{\\prime})^2=e^{\\prime}$ and $f(e^{\\prime})=e$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05BU, lemma-lift-idempotents-noncommutative; its application in Tag 07LV, lemma-lift-projective-module. The ring-homomorphism formulation is Mathlib.RingTheory.Idempotents:249-253."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "This is exactly Mathlib exists_isIdempotentElem_eq_of_ker_isNilpotent, Mathlib/RingTheory/Idempotents.lean:249-253, applied to f, the nilpotent-kernel hypothesis, e, its membership in the range, and its idempotence. In the source proof, choose a preimage a of e; a squared minus a lies in the kernel, and Tag 05BU corrects a by a polynomial in that nilpotent defect without changing its image.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 05BU, lemma-lift-idempotents-noncommutative; direct existing Mathlib theorem"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Idempotents lift along a ring homomorphism whose kernel consists of nilpotent elements, for noncommutative rings",
+   "results": "{\"t\": \"2026-10-18T04:32:51Z\", \"tool\": \"leansearch\", \"query\": \"Idempotents lift along a ring homomorphism whose kernel consists of nilpotent elements, for noncommutative rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exists_isIdempotentElem_eq_of_ker_isNilpotent\", \"exists_isIdempotentElem_mul_eq_zero_of_ker_isNilpotent_aux\", \"OrthogonalIdempotents.lift_of_isNilpotent_ker\", \"CompleteOrthogonalIdempotents.lift_of_isNilpotent_ker\", \"existsUnique_isIdempotentElem_eq_of_ker_isNilpotent\", \"CompleteOrthogonalIdempotents.lift_of_isNilpotent_ker_aux\", \"CompleteOrthogonalIdempotents.of_ker_isNilpotent\", \"OrthogonalIdempotents.lift_of_isNilpotent_ker_aux\"], \"digest\": \"b33e70ace9f449d4\"}",
+   "date": "2026-10-18",
+   "verdict": "exact match: exists_isIdempotentElem_eq_of_ker_isNilpotent"
+  },
+  {
+   "tool": "loogle",
+   "query": "exists_isIdempotentElem_eq_of_ker_isNilpotent",
+   "results": "{\"t\": \"2026-10-18T04:32:51Z\", \"tool\": \"loogle\", \"query\": \"exists_isIdempotentElem_eq_of_ker_isNilpotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"exists_isIdempotentElem_eq_of_ker_isNilpotent\"], \"digest\": \"8b349aa347196e51\"}",
+   "date": "2026-10-18",
+   "verdict": "exact match: exists_isIdempotentElem_eq_of_ker_isNilpotent"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_isIdempotentElem_eq_of_ker_isNilpotent",
+   "results": "{\"t\": \"2026-10-18T04:32:51Z\", \"tool\": \"grep\", \"query\": \"exists_isIdempotentElem_eq_of_ker_isNilpotent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Idempotents.lean\", \"Mathlib/RingTheory/Idempotents.lean\"], \"digest\": \"ef114ddb57c105b9\"}",
+   "date": "2026-10-18",
+   "verdict": "exact match: exists_isIdempotentElem_eq_of_ker_isNilpotent"
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "exists_isIdempotentElem_eq_of_ker_isNilpotent",
+  "file": "Mathlib/RingTheory/Idempotents.lean",
+  "how": "Exact match, lines 249-253; the section assumes Ring R and Ring S, not CommRing. The three hypotheses and the existential conjunction coincide verbatim with the Lean signature."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.NilpotentProjectiveModuleLift",
+  "date": "2026-10-18",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (c), TOW: local models; projective-complex lifting input for pseudo-coherence across nilpotent coefficient reduction; 09AR proof: verification of hypothesis (4), lifting each projective quotient module; projective-module lift, idempotent correction in Tag 07LV",
+   "via": [
+    "lem-weil-pbc-nilpotent-projective-module-lift",
+    "lem-weil-pbc-nilpotent-projective-complex-lift",
+    "lem-weil-pbc-pseudo-coherent-nilpotent-invariance",
+    "lem-weil-pbc-pseudocoherent-normalized-algebra-tower",
+    "lem-weil-pbc-normalized-constructible-local-effectivity"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": true,
+  "module": "Mathlib.RingTheory.Idempotents",
+  "declaration": "exists_isIdempotentElem_eq_of_ker_isNilpotent",
+  "statement": "theorem exists_isIdempotentElem_eq_of_ker_isNilpotent (h : ∀ x ∈ RingHom.ker f, IsNilpotent x) (e : S) (he : e ∈ f.range) (he' : IsIdempotentElem e) : ∃ e' : R, IsIdempotentElem e' ∧ f e' = e",
+  "branch": "mathlib",
+  "by": "N1",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261018T062836-L-665378",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261018T062836-L-665378",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
