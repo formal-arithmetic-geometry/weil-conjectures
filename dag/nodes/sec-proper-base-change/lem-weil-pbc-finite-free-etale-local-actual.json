@@ -27,107 +27,81 @@
  ],
  "proof": [
   {
-   "text": "Put $R=\\underline B$ and $E=\\underline P^\\bullet$. Sheafifying the chosen bases $P^i\\cong B^{r_i}$ gives $E^i\\cong R^{\\oplus r_i}$: sheafification preserves finite coproducts, and the component maps and inverse maps still compose to the identity. It also preserves the zero terms, so $E$ has the same finite support interval. For every $i$, [lem-sc-finite-free-internal-hom-exact-sequence] gives exactness of $\\mathcal Hom_R(E^i,-)$ at the middle of any exact short complex. Apply it to the three exact short complexes $(0,S_1,S_2)$, $(S_1,S_2,S_3)$ and $(S_2,S_3,0)$ of a short exact sequence. Since $\\mathcal Hom_R(E^i,0)=0$, these give respectively injectivity, middle exactness and surjectivity. Thus each termwise internal Hom functor preserves short exact sequences, including when $r_i=0$.",
+   "text": "Put E equal to the termwise constant sheaf complex of P. Apply [lem-weil-pbc-finite-free-etale-acyclic-homotopy] whenever a map from E into an acyclic complex occurs. This theorem constructs one etale cover and an actual homotopy on each member.",
    "uses": [
-    "def-weil-pbc-constant-sheaf",
-    "lem-weil-pbc-site-module-presheaf-sheafification-exact",
-    "lem-sc-finite-free-internal-hom-exact-sequence"
+    "lem-weil-pbc-finite-free-etale-acyclic-homotopy"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08FR (lemma-local-actual), finite-free specialization; Tag 08FN (lemma-local-lift-map), basis calculation"
+    "place": "Tag 08FR, lemma-local-actual, assertions (1) and (2), specialized to the ringed small etale site with coefficient sheaf the constant ring B"
    }
   },
   {
-   "text": "Use the two-universe convention [def-weil-size-convention]: schemes and coefficients lie in $\\mathcal U\\in\\mathcal V$, the site is replaced by its $\\mathcal V$-small skeleton, and sheaves and derived categories are formed in $\\mathcal V$. On this small ringed site, apply [prop-pur-kinjective-resolutions-exist] to the sheaf of commutative rings $R$ and the arbitrary complex $\\mathcal F$, obtaining a quasi-isomorphism $q:\\mathcal F\\to I$ with $I$ K-injective. No lower or upper bound on $\\mathcal F$ is used. Set $H_M=\\mathcal Hom_R^\\bullet(E,M)$, with the differential of [def-pur-hom-complex]. The bounded source and termwise exactness proved in step 1 meet every hypothesis of [lem-pc-bounded-exact-term-hom-quasi-iso]. Hence $H_q:H_{\\mathcal F}\\to H_I$ is a quasi-isomorphism of sheaf complexes.",
+   "text": "Use the left calculus of fractions in the homotopy category to write phi as Q(beta) followed by inverse Q(q), for beta:E -> G and a quasi-isomorphism q:F -> G. In Lean this is DerivedCategory.left_fac. The cone of q is acyclic by [lem-pur-quasi-iso-cone-acyclic]. Apply step 1 to beta followed by G -> Cone(q). The resulting local homotopy says this composite vanishes in the homotopy category.",
    "uses": [
-    "def-weil-size-convention",
-    "prop-pur-kinjective-resolutions-exist",
-    "def-pur-hom-complex",
-    "lem-pc-bounded-exact-term-hom-quasi-iso"
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-pur-quasi-iso-cone-acyclic",
+    "lem-weil-pbc-finite-free-etale-acyclic-homotopy"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Section 07A5 (section-unbounded), K-injective resolutions; Section 0A8X (section-hom-complexes); Tag 08FR, construction of representatives"
+    "place": "Tag 08FR, lemma-local-actual, assertions (1) and (2), specialized to the ringed small etale site with coefficient sheaf the constant ring B"
    }
   },
   {
-   "text": "Each section group of $H_M$ is a $B$-module via the canonical constant-section map $B\\to R(V)$; restrictions commute with this action. Define a presheaf of $B$-modules $A_M(V)=H^0(H_M(V))$ on $U_{\\mathrm{et}}$. By [def-pur-hom-complex], a degree-zero cycle is precisely a chain map $E|_V\\to M|_V$; a degree-minus-one element $h$ has $d(h)=d_Mh+hd_E$. Thus $A_M(V)$ is the group of chain maps modulo chain homotopy, naturally in $V$ and $M$. The exact forgetful functor of [lem-weil-pbc-module-sheaves-colimits-forgetful] identifies cohomology in $R$-module sheaves with underlying abelian-sheaf cohomology. Apply [lem-weil-pbc-site-module-presheaf-sheafification-exact] to the presheaf complex underlying $H_M$: its termwise sheafification is itself, and exact sheafification gives $A_M^\\#\\cong H^0(H_M)$ on underlying abelian sheaves. Consequently step 2 gives an isomorphism $A_{\\mathcal F}^\\#\\to A_I^\\#$. By [lem-weil-pbc-site-sheafification-iso-locally-bijective], the presheaf map $A_{\\mathcal F}\\to A_I$ is locally surjective and locally injective. This is about homotopy classes of actual maps, not about sections of a cohomology sheaf before choosing representatives.",
+   "text": "The mapping-cone triangle is distinguished in the homotopy category, and remains so under the additive restriction functor. Exactness of Hom into this triangle gives a local homotopy-class lift of beta through q. Fullness of the homotopy quotient supplies an actual chain map alpha whose composite with restricted q is homotopic to restricted beta.",
    "uses": [
-    "def-pur-hom-complex",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-site-module-presheaf-sheafification-exact",
-    "lem-weil-pbc-site-sheafification-iso-locally-bijective"
+    "lem-trf-additive-homotopy-category-triangulated",
+    "lem-weil-pbc-hom-into-triangle-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Section 0A8X, equation cohomology-hom-complex; literature/stacks-project/sites.tex Tags 00WJ and 00WK, exact sheafification and local sections"
+    "place": "Tag 08FR, lemma-local-actual, assertions (1) and (2), specialized to the ringed small etale site with coefficient sheaf the constant ring B"
    }
   },
   {
-   "text": "For an etale object $V\\to U$, [lem-weil-pbc-etale-site-localization-open] identifies $(U_{\\mathrm{et}})/V$ with $V_{\\mathrm{et}}$, including the covering families. With the ring and its action carried along, [def-pur-localized-ringed-site] describes module restriction sectionwise. By [lem-weil-pbc-site-restriction-exact] restriction is exact on underlying abelian sheaves; applying the faithful exact forgetful functor of [lem-weil-pbc-module-sheaves-colimits-forgetful] on both sites shows that it is exact on module sheaves too. It therefore preserves kernels, images and their quotient cohomology objects, and in particular takes $q$ to a quasi-isomorphism $q|_V$. It preserves the displayed homotopy equation simply by restricting each component. Thus it induces restriction on derived categories, and $Q(q|_V)$ is invertible.",
+   "text": "Exact etale inverse image preserves quasi-isomorphisms. Cancel Q of restricted q, and use naturality and inverse identities of mapDerivedCategoryFactors to identify Q(alpha) with the exact conjugation formula in the statement.",
    "uses": [
-    "lem-weil-pbc-etale-site-localization-open",
-    "def-pur-localized-ringed-site",
-    "lem-weil-pbc-site-restriction-exact",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Definition 04IX (definition-localize-ringed-site), restriction; Lemma 03DA (lemma-abelian); Tag 0E8G (lemma-j-shriek-reflects-exactness), proof, restriction is exact; literature/stacks-project/sites.tex Section 00XZ"
-   }
-  },
-  {
-   "text": "Given $\\varphi:QE\\to Q\\mathcal F$, the surjectivity of [lem-weil-pbc-kinjective-hom-derived] supplies a chain map $\\beta:E\\to I$ with $Q\\beta=Qq\\circ\\varphi$. View its homotopy class as $[\\beta]\\in A_I(U)$. Local surjectivity in step 3 supplies an etale covering $\\{V_j\\to U\\}$ and classes $a_j\\in A_{\\mathcal F}(V_j)$ sent to $[\\beta|_{V_j}]$. Choose a chain-map representative $\\alpha_j$ of each $a_j$. The equality of classes means $q|_{V_j}\\circ\\alpha_j$ and $\\beta|_{V_j}$ differ by $d_Ih+hd_E$ for an actual degree-minus-one family $h$, so they have the same image in the derived category. Step 4 makes $Q(q|_{V_j})$ invertible; cancel it in $Q(q|_{V_j})\\circ Q\\alpha_j=Q\\beta|_{V_j}=Q(q|_{V_j})\\circ\\varphi|_{V_j}$. Hence $Q\\alpha_j=\\varphi|_{V_j}$, proving (1).",
-   "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
-    "def-pur-hom-complex",
-    "def-weil-abstract-derived-category"
+    "lem-weil-pbc-exact-functor-derived-factorization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08FR (lemma-local-actual), assertion (1); literature/stacks-project/derived.tex Tag 070I (lemma-K-injective), Hom bijection"
+    "place": "Tag 08FR, lemma-local-actual, assertions (1) and (2), specialized to the ringed small etale site with coefficient sheaf the constant ring B"
    }
   },
   {
-   "text": "Now suppose $\\alpha:E\\to\\mathcal F$ has $Q\\alpha=0$. Then $Q(q\\alpha)=0$. The injectivity of [lem-weil-pbc-kinjective-hom-derived] implies that $q\\alpha$ is null-homotopic on $U$, so $[\\alpha]$ and $0$ in $A_{\\mathcal F}(U)$ have equal images in $A_I(U)$. Local injectivity in step 3 gives an etale covering $\\{V_j\\to U\\}$ with $[\\alpha|_{V_j}]=0$ in $A_{\\mathcal F}(V_j)$. Being zero in this cohomology group means an actual boundary, not merely a zero sheaf cohomology class: choose $h_j\\in H_{\\mathcal F}^{-1}(V_j)$ with $d(h_j)=\\alpha|_{V_j}$. The degree-minus-one differential formula yields $\\alpha^i|_{V_j}=d_{\\mathcal F}^{i-1}h_j^i+h_j^{i+1}d_E^i$ for every $i$. The one element $h_j$ supplies all components simultaneously. This proves (2), including the zero source and empty scheme cases, where the equation is vacuous.",
+   "text": "For Q(alpha)=0, the right calculus of fractions gives a quasi-isomorphism q:Z -> E such that q followed by alpha is null-homotopic; the proved source-library lemma DerivedCategory.exists_quasiIso_homotopy_zero_of_Q_map_eq_zero supplies this consequence. Exactness of Hom out of the distinguished cone triangle factors alpha, up to homotopy, through E -> Cone(q). The cone is acyclic. Apply step 1 to E -> Cone(q); compose its local null-homotopies with the chain representative of Cone(q) -> F and then with the homotopy giving the factorization. This is the required local null-homotopy of alpha.",
    "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
-    "def-pur-hom-complex"
+    "lem-pc-quasi-isomorphisms-multiplicative-system",
+    "lem-trf-additive-homotopy-category-triangulated",
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "lem-pur-quasi-iso-cone-acyclic",
+    "lem-weil-pbc-finite-free-etale-acyclic-homotopy"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08FR (lemma-local-actual), assertion (2), whose omitted proof is supplied here; Section 0A8X, Hom differential"
+    "place": "Tag 08FR, lemma-local-actual, assertions (1) and (2), specialized to the ringed small etale site with coefficient sheaf the constant ring B"
    }
   }
  ],
  "proof_deps": [
-  "def-pur-hom-complex",
-  "def-pur-localized-ringed-site",
-  "def-weil-abstract-derived-category",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-size-convention",
-  "lem-pc-bounded-exact-term-hom-quasi-iso",
-  "lem-sc-finite-free-internal-hom-exact-sequence",
-  "lem-weil-pbc-etale-site-localization-open",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
-  "lem-weil-pbc-site-restriction-exact",
-  "lem-weil-pbc-site-sheafification-iso-locally-bijective",
-  "prop-pur-kinjective-resolutions-exist"
+  "lem-pc-quasi-isomorphisms-multiplicative-system",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-trf-additive-homotopy-category-triangulated",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-finite-free-etale-acyclic-homotopy",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-weil-pbc-hom-out-of-triangle-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 08FR, with the omitted second proof supplied using the independent bounded exact-term Hom theorem, exact sheafification and K-injective localization; Section 0A8X"
+  "place": "Tags 08FP, 08FQ and 08FR: finite local homotopy induction and cone lifting; the omitted proof of 08FR(2) is supplied by right fractions and Hom exactness out of the cone triangle."
  },
  "mathlib_searches": [
   {
@@ -235,14 +209,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pc-bounded-exact-term-hom-quasi-iso",
-  "lem-sc-finite-free-internal-hom-exact-sequence",
-  "lem-weil-pbc-etale-site-localization-open",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-site-restriction-exact",
-  "prop-pur-kinjective-resolutions-exist"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
@@ -268,5 +235,15 @@
   "by": "NG",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261018T062824-L-660524",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -16073,3 +16073,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:28 L: merged deliver/K2/Sheaf.Paper.ConstantSheafSectionsLocallyConstant (stage 3; reviewer PASS; first push; landing 20261018T062822-L-659855 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:28 L: merged deliver/K3/Sheaf.AlgebraicGeometry.SmoothCurvePointsDecomposition (stage 3; reviewer PASS; first push; landing 20261018T062823-L-660012 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:28 L: merged deliver/K3/Sheaf.EtaleCohomology.SepClosedFieldVanishing (stage 3; reviewer PASS; first push; landing 20261018T062823-L-660229 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:28 L: merged deliver/K4/Sheaf.Paper.FiniteFreeEtaleLocalActual (stage 3; reviewer PASS; first push; landing 20261018T062824-L-660524 (interface); batch 20261018T062645; modules 2; new nodes 1; change records: coord/changes/finite-free-etale-local-actual-public-imports.md)

@@ -10,19 +10,12 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCateg
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.Algebra.Homology.Homotopy
-public import Sheaf.CategoryTheory.RingedSiteModules
+public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
-import Sheaf.Algebra.Homology.HomComplex
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Sheaf.Algebra.Homology.BoundedExactTermHomQuasiIso
-import Sheaf.Algebra.Homology.FiniteFreeInternalHomExactSequence
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import Sheaf.Paper.SiteRestrictionExact
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import WeilConjectures.AlgebraicGeometry.SiteRestrictionExact
+import Sheaf.Paper.FiniteFreeEtaleAcyclicHomotopy
+import WeilConjectures.Algebra.Homology.DerivedCategory.ReductionDatum
+import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 
 /-!
 # Local chain representatives for finite free constant complexes
@@ -42,34 +35,60 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry.Scheme
 
 namespace AlgebraicGeometry
 
+private theorem lift_of_local_cone_homotopy
+    {C D : Type*} [Category C] [Abelian C] [Category D] [Abelian D]
+    (R : C ⥤ D) [R.Additive]
+    {E F G : CochainComplex C ℤ} (q : F ⟶ G) (β : E ⟶ G)
+    (H : Homotopy
+      ((R.mapHomologicalComplex (.up ℤ)).map (β ≫ CochainComplex.mappingCone.inr q)) 0) :
+    ∃ α : (R.mapHomologicalComplex (.up ℤ)).obj E ⟶
+        (R.mapHomologicalComplex (.up ℤ)).obj F,
+      Nonempty (Homotopy (α ≫ (R.mapHomologicalComplex (.up ℤ)).map q)
+        ((R.mapHomologicalComplex (.up ℤ)).map β)) := by
+  let K := HomotopyCategory.quotient D (.up ℤ)
+  let T := (R.mapHomotopyCategory (.up ℤ)).mapTriangle.obj
+    (CochainComplex.mappingCone.triangleh q)
+  have hT : T ∈ distTriang _ :=
+    (R.mapHomotopyCategory (.up ℤ)).map_distinguished _
+      (HomotopyCategory.mappingCone_triangleh_distinguished q)
+  have hβ : K.map ((R.mapHomologicalComplex (.up ℤ)).map β) ≫ T.mor₂ = 0 := by
+    change K.map ((R.mapHomologicalComplex (.up ℤ)).map β) ≫
+      K.map ((R.mapHomologicalComplex (.up ℤ)).map (CochainComplex.mappingCone.inr q)) = 0
+    simpa only [← Functor.map_comp, Functor.map_zero] using
+      (HomotopyCategory.eq_of_homotopy _ _ H)
+  obtain ⟨a, ha⟩ := T.coyoneda_exact₂ hT
+    (K.map ((R.mapHomologicalComplex (.up ℤ)).map β)) hβ
+  obtain ⟨α, rfl⟩ := K.map_surjective a
+  refine ⟨α, ⟨HomotopyCategory.homotopyOfEq _ _ ?_⟩⟩
+  change K.map (α ≫ (R.mapHomologicalComplex (.up ℤ)).map q) = _
+  rw [Functor.map_comp]
+  exact ha.symm
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Derived maps from a bounded finite free constant complex have local chain
 representatives, and a chain map vanishing in the derived category is locally homotopic
 to zero. Source: Stacks Project, Tag 08FR (lemma-local-actual), assertions (1) and (2)
 (blueprint: lem-weil-pbc-finite-free-etale-local-actual).
 
 Proof:
-1. Sheafify finite bases termwise. Finite coproducts and zero terms are preserved, so
-   the constant source is bounded with finite free terms. Finite-free internal Hom is
-   exact, including rank zero (lem-sc-finite-free-internal-hom-exact-sequence).
-2. Resolve the arbitrary target by a K-injective complex. Boundedness of the source and
-   exactness of its termwise Hom functors make the induced Hom-complex map a
-   quasi-isomorphism (lem-pc-bounded-exact-term-hom-quasi-iso).
-3. Degree-zero cohomology of sections of the Hom complex consists of chain maps modulo
-   homotopy. Exact sheafification identifies its associated sheaf with internal Hom
-   cohomology. The map to the resolved target is therefore locally bijective
-   (lem-weil-pbc-site-sheafification-iso-locally-bijective); the exact forgetful functor
-   compares module cohomology with abelian sheaf cohomology.
-4. Identify the site localized at an étale object with its small étale site. Exact
-   restriction preserves quasi-isomorphisms and homotopies, and induces derived
-   restriction (lem-weil-pbc-etale-site-localization-open,
-   lem-weil-pbc-site-restriction-exact).
-5. Represent a derived morphism into the K-injective resolution by a chain map.
-   Local surjectivity from step 3 gives chain representatives into the original target;
-   cancel the restricted resolution quasi-isomorphism in the derived category.
-6. If a chain map is zero after localization, its composite into the resolution is
-   null-homotopic by the K-injective Hom bijection. Local injectivity from step 3 makes
-   its original homotopy class zero locally, giving a single homotopy on every cover
-   member. Its components satisfy alpha^i = d_F h^i + h^(i+1) d_P simultaneously.
+1. A map from the bounded finite free source into an acyclic complex becomes
+   null-homotopic on an etale cover, by descending induction on its finite support
+   interval (lem-weil-pbc-finite-free-etale-acyclic-homotopy).
+2. Represent a derived morphism by a fraction E -> G <- F with F -> G a
+   quasi-isomorphism. Its cone is acyclic. Apply step 1 to E -> G -> Cone(F -> G).
+   Exactness of Hom into the restricted cone triangle gives a chain lift E -> F
+   up to homotopy on each cover member. Cancel the restricted quasi-isomorphism
+   in the derived category. Naturality of mapDerivedCategoryFactors identifies the
+   resulting map with the specified restriction of the original derived morphism.
+3. If Q(alpha) = 0, the calculus of fractions gives a quasi-isomorphism q: Z -> E
+   with q followed by alpha null-homotopic. Exactness of Hom out of its cone
+   triangle factors alpha through E -> Cone(q), up to homotopy. Apply step 1 to
+   this map into the acyclic cone, and compose its local homotopies with the
+   factor Cone(q) -> F. This makes alpha itself locally null-homotopic.
+
+Source for steps 1 and 2: Stacks Tags 08FP, 08FQ and 08FR. Step 3 supplies
+Tag 08FR's omitted proof of assertion (2) by the same cone argument.
 -/
 theorem finiteFree_etale_local_actual
     (U : Scheme.{u}) (B : Type (u + 1)) [CommRing B]
@@ -103,6 +122,68 @@ theorem finiteFree_etale_local_actual
         Nonempty (Homotopy
           (((Etale.upperStar (ModuleCat.{u + 1} B) (𝒰.f j)).mapHomologicalComplex
             (ComplexShape.up ℤ)).map α) 0)) := by
-  sorry
+  classical
+  let E := ((constantSheaf U.smallEtaleTopology (ModuleCat.{u + 1} B)).mapHomologicalComplex
+    (.up ℤ)).obj P
+  constructor
+  · intro φ
+    obtain ⟨G, β, q, hq, hφ⟩ := DerivedCategory.left_fac φ
+    have hqi : QuasiIso q := (DerivedCategory.isIso_Q_map_iff_quasiIso _ q).1 hq
+    obtain ⟨𝒰, h𝒰⟩ := finiteFree_etale_acyclic_homotopy U B P hbounded hfree
+      (CochainComplex.mappingCone q) ((CochainComplex.mappingCone.quasiIso_iff_acyclic q).1 hqi)
+      (β ≫ CochainComplex.mappingCone.inr q)
+    refine ⟨𝒰, fun j ↦ ?_⟩
+    let R := Etale.upperStar (ModuleCat.{u + 1} B) (𝒰.f j)
+    obtain ⟨H⟩ := h𝒰 j
+    obtain ⟨α, ⟨hα⟩⟩ := lift_of_local_cone_homotopy R q β H
+    refine ⟨α, ?_⟩
+    have hRq : IsIso (DerivedCategory.Q.map ((R.mapHomologicalComplex (.up ℤ)).map q)) := by
+      infer_instance
+    apply (cancel_mono (DerivedCategory.Q.map
+      ((R.mapHomologicalComplex (.up ℤ)).map q))).mp
+    rw [← DerivedCategory.Q.map_comp, DerivedCategory.Q_map_eq_of_homotopy _ hα]
+    change DerivedCategory.Q.map ((R.mapHomologicalComplex (.up ℤ)).map β) =
+      (R.mapDerivedCategoryFactors.inv.app E ≫ R.mapDerivedCategory.map φ ≫
+        R.mapDerivedCategoryFactors.hom.app F) ≫
+          DerivedCategory.Q.map ((R.mapHomologicalComplex (.up ℤ)).map q)
+    simp only [Category.assoc]
+    erw [← R.mapDerivedCategoryFactors.hom.naturality q]
+    simp only [Functor.comp_map, ← Functor.map_comp_assoc]
+    have hφq : φ ≫ DerivedCategory.Q.map q = DerivedCategory.Q.map β := by
+      rw [hφ, Category.assoc, IsIso.inv_hom_id, Category.comp_id]
+    rw [hφq]
+    erw [R.mapDerivedCategoryFactors.hom.naturality β]
+    change _ = R.mapDerivedCategoryFactors.inv.app E ≫
+      R.mapDerivedCategoryFactors.hom.app E ≫ _
+    rw [Iso.inv_hom_id_app_assoc]
+    rfl
+  · intro α hα
+    obtain ⟨Z, q, hq, ⟨H⟩⟩ :=
+      DerivedCategory.exists_quasiIso_homotopy_zero_of_Q_map_eq_zero α hα
+    let K := HomotopyCategory.quotient
+      (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} B)) (.up ℤ)
+    let T := CochainComplex.mappingCone.triangleh q
+    have hT := HomotopyCategory.mappingCone_triangleh_distinguished q
+    have hzero : T.mor₁ ≫ K.map α = 0 := by
+      change K.map q ≫ K.map α = 0
+      simpa only [← Functor.map_comp, Functor.map_zero] using
+        HomotopyCategory.eq_of_homotopy _ _ H
+    obtain ⟨b, hb⟩ := T.yoneda_exact₂ hT (K.map α) hzero
+    obtain ⟨β, rfl⟩ := K.map_surjective b
+    have Hα : Homotopy α (CochainComplex.mappingCone.inr q ≫ β) :=
+      HomotopyCategory.homotopyOfEq _ _ (by
+        change K.map α = K.map (CochainComplex.mappingCone.inr q ≫ β)
+        rw [Functor.map_comp]
+        exact hb)
+    obtain ⟨𝒰, h𝒰⟩ := finiteFree_etale_acyclic_homotopy U B P hbounded hfree
+      (CochainComplex.mappingCone q) ((CochainComplex.mappingCone.quasiIso_iff_acyclic q).1 hq)
+      (CochainComplex.mappingCone.inr q)
+    refine ⟨𝒰, fun j ↦ ?_⟩
+    let R := Etale.upperStar (ModuleCat.{u + 1} B) (𝒰.f j)
+    obtain ⟨h⟩ := h𝒰 j
+    refine ⟨(R.mapHomotopy Hα).trans ?_⟩
+    rw [Functor.map_comp]
+    exact (h.compRight ((R.mapHomologicalComplex (.up ℤ)).map β)).trans
+      (Homotopy.ofEq (by simp))
 
 end AlgebraicGeometry

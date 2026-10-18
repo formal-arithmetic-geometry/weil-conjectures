@@ -1,0 +1,170 @@
+{
+ "id": "lem-weil-pbc-finite-free-etale-acyclic-homotopy",
+ "kind": "statement",
+ "title": "Local null-homotopies from bounded finite free constant complexes into acyclic complexes",
+ "statement": "Let U be a scheme with small etale site [def-weil-pbc-etale-site], B a commutative ring, and P a cochain complex of B-modules indexed by the integers. Suppose there are integers a,b such that P^n is zero whenever n<a or b<n, and for each n there is a natural number r_n and an isomorphism P^n ≅ B^(r_n). Let E be the termwise constant sheaf complex [def-weil-pbc-constant-sheaf], F any acyclic cochain complex of sheaves of B-modules [def-weil-sheaf-of-modules-category] (acyclic means every cohomology object [def-weil-abstract-derived-category] is zero), and alpha:E -> F a chain map. There is a jointly surjective etale cover (u_j:U_j -> U)_j, indexed in the universe of U, on every member of which u_j^*(alpha) is chain homotopic to zero. No bound on F or finiteness of B is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08FP, lemma-local-homotopy, assertion (1), finite free constant specialization; local basis lifts are Tag 08FN."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Apply the additive constant sheaf functor termwise to the finite free isomorphisms and zero terms. Thus E^n is isomorphic to the constant sheaf on B^(r_n), and is zero outside [a,b]. Start with the zero degree-minus-one cochain, whose homotopy equations hold above b because those source terms are zero.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FP, lemma-local-homotopy, assertion (1), finite free constant specialization; local basis lifts are Tag 08FN."
+   }
+  },
+  {
+   "text": "Suppose a degree-minus-one cochain h satisfies alpha^n=d_E^n h^(n+1)+h^n d_F^(n-1) for n>k. Define z=alpha^k-d_E^k h^(k+1). The chain map equation and the homotopy equation at k+1 give z followed by d_F^k equal to zero. Factor z through cycles Z^k(F). Acyclicity gives an epimorphism F^(k-1) -> Z^k(F), using HomologicalComplex.ExactAt.epi_toCycles in the proved source-library API.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FP, lemma-local-homotopy, assertion (1), finite free constant specialization; local basis lifts are Tag 08FN."
+   }
+  },
+  {
+   "text": "Transport the finite free isomorphism of E^k and apply [lem-pc-finite-free-constant-local-lift] to the cycle map. On an etale cover this supplies t:E^k -> F^(k-1) with t followed by d_F equal to z. Replace the k-th component of h by t; concretely add a single-component cochain t-h^k. The homotopy equation now holds at k and remains unchanged in all larger degrees.",
+   "uses": [
+    "lem-pc-finite-free-constant-local-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FP, lemma-local-homotopy, assertion (1), finite free constant specialization; local basis lifts are Tag 08FN."
+   }
+  },
+  {
+   "text": "Repeat the preceding step max(b-a+1,0) times, using natural-number induction and binding covers. Exact inverse image preserves acyclicity and transports the finite free isomorphisms. The canonical upperStarComp natural isomorphism transports each twice-restricted cochain back to the restriction along the composite cover arrow. Its naturality proves every homotopy equation after transport. Finally all equations at n>=a hold by induction; those below a hold because E^n is zero. Cochain.equivHomotopy converts the resulting differential equation to an actual chain homotopy. If a>b the initial zero cochain already suffices. Rank zero and the empty scheme are handled by the same construction.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FP, lemma-local-homotopy, assertion (1), finite free constant specialization; local basis lifts are Tag 08FN."
+   }
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08FP: finite downward induction; explicit component construction of its local homotopies."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A map from a bounded complex of finite free constant sheaves into an acyclic complex is null homotopic on a covering",
+   "results": "Eight hits: IsKProjective.homotopyZero and nonempty_homotopy_zero, IsKInjective.nonempty_homotopy_zero and homotopyZero, Homotopy.nullHomotopicMap and nullHomotopicMap'. Read KProjective.lean:43; requires globally K-projective source.",
+   "date": "2026-10-18",
+   "verdict": "No local theorem; global K-projectivity does not hold for arbitrary finite free constant sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A map from a bounded complex of finite free constant sheaves to an acyclic complex is locally null homotopic",
+   "results": "Eight hits, including CochainComplex.IsKProjective.nonempty_homotopy_zero and IsKInjective.nonempty_homotopy_zero.",
+   "date": "2026-10-18",
+   "verdict": "No local match. A finite free constant sheaf need not be projective globally; the existing proved finiteFreeConstant_local_lift supplies the local input."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Homotopy\", \"Acyclic\"",
+   "results": "Twelve hits for the acyclic homotopy subcategory, its triangulation and derived localization; no local null-homotopy theorem.",
+   "date": "2026-10-18",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteFree.*homotopy|acyclic.*local.*homotopy|local.*homotopy.*acyclic",
+   "results": "Seven Mathlib hits concerning localization at acyclic complexes; no local finite-free theorem. Repository rg found the proved exists_finiteFreeConstant_local_lift, used in the construction.",
+   "date": "2026-10-18",
+   "verdict": "No whole theorem match; reuse the proved local lifting API."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteFreeEtaleLocalActual",
+  "date": "2026-10-18",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (c), finite etale-origin local models: local null-homotopies into acyclic cones used for actual chain representatives and detection of derived zero maps",
+   "via": [
+    "lem-weil-pbc-finite-ring-derived-local-constancy",
+    "lem-weil-pbc-normalized-constructible-local-effectivity",
+    "lem-weil-pbc-finite-free-etale-local-actual"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteFreeEtaleAcyclicHomotopy",
+  "file": "lean/Sheaf/Paper/FiniteFreeEtaleAcyclicHomotopy.lean",
+  "declaration": "AlgebraicGeometry.finiteFree_etale_acyclic_homotopy",
+  "statement": "theorem finiteFree_etale_acyclic_homotopy\n    (U : Scheme.{u}) (B : Type (u + 1)) [CommRing B]\n    (P : CochainComplex (ModuleCat.{u + 1} B) ℤ)\n    (hbounded : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (P.X n))\n    (hfree : ∀ n : ℤ, ∃ r : ℕ,\n      Nonempty (P.X n ≅ ModuleCat.of B (Fin r → B)))\n    (F : CochainComplex (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} B)) ℤ)\n    (hF : F.Acyclic)\n    (α : (((constantSheaf U.smallEtaleTopology (ModuleCat.{u + 1} B)).mapHomologicalComplex\n      (ComplexShape.up ℤ)).obj P) ⟶ F) :\n    ∃ 𝒰 : Cover.{u} etalePrecoverage U, ∀ j : 𝒰.I₀,\n      Nonempty (Homotopy\n        (((Etale.upperStar (ModuleCat.{u + 1} B) (𝒰.f j)).mapHomologicalComplex\n          (ComplexShape.up ℤ)).map α) 0)",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-18"
+ },
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-etale-site",
+  "lem-pc-finite-free-constant-local-lift"
+ ],
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261018T062824-L-660524",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261018T062824-L-660524",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
