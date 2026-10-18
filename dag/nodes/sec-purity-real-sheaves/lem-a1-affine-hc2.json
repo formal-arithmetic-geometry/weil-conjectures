@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-a1-affine-hc2",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Description of $H_c^2$ on an affine curve",
@@ -24,37 +24,55 @@
     "lem-wf-curve-normal-smooth-compactification",
     "def-pod-conventions"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-semi/lem-a1-affine-hc2.proof.md",
+    "place": "Opening compactification paragraph"
+   }
   },
   {
-   "text": "*Step 1 (compact support through $\\bar C$).* For the open immersion\n$j$ the identity of $\\bar C$ is a compactification, so the compact-support\ndirect image of [def-compact-support-direct-image-detailed] is\n$Rj_!=j_!$, the extension by zero of [def-weil-extension-by-zero]. The\ncomposition law for compact-support direct images ([fix-lem-exchanges])\ngives $Ra_{U!}\\mathcal F\\simeq Ra_{\\bar C!}\\,j_!\\mathcal F$, hence, by\n[def-weil-ordinary-compact-cohomology],\n\n$$\nR\\Gamma_c(U,\\mathcal F)\\simeq R\\Gamma_c(\\bar C,j_!\\mathcal F),\n$$\n\nwhere $j_!\\mathcal F$ is a constructible (not lisse) sheaf on the proper\ncurve $\\bar C$.",
+   "text": "*Step 1 (compact support through $\\bar C$).* For the open immersion\n$j$ the identity of $\\bar C$ is a compactification, so the compact-support\ndirect image of [def-compact-support-direct-image-detailed] is\n$Rj_!=j_!$, the extension by zero of [def-weil-extension-by-zero]. The\ncomposition law for compact-support direct images\n([prop-functor-package], clause 3: $R(gf)_!\\simeq Rg_!Rf_!$ at every\ncoefficient stage) gives $Ra_{U!}\\mathcal F\\simeq Ra_{\\bar C!}\\,j_!\\mathcal F$, hence, by\n[def-weil-ordinary-compact-cohomology],\n\n$$\nR\\Gamma_c(U,\\mathcal F)\\simeq R\\Gamma_c(\\bar C,j_!\\mathcal F),\n$$\n\nwhere $j_!\\mathcal F$ is a constructible (not lisse) sheaf on the proper\ncurve $\\bar C$.",
    "uses": [
     "def-compact-support-direct-image-detailed",
     "def-weil-extension-by-zero",
-    "fix-lem-exchanges",
+    "prop-functor-package",
     "def-weil-ordinary-compact-cohomology"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-semi/lem-a1-affine-hc2.proof.md",
+    "place": "Step 1 (compact support through the compactification)"
+   }
   },
   {
-   "text": "*Step 2 (duality on $\\bar C$).* Apply [thm-pod-global-verdier-duality]\non the proper $\\bar C$ to $K=j_!\\mathcal F$, which that theorem allows\nsince it is stated for every $K\\in D^b_{ctf}(\\bar C,\\Lambda)$:\n\n$$\nR\\Gamma_c(\\bar C,j_!\\mathcal F)^\\vee\\simeq\nR\\Gamma\\bigl(\\bar C,\\mathbb D_{\\bar C}(j_!\\mathcal F)\\bigr).\n$$\n\nThe Verdier-duality exchange [fix-cor-verdier-exchange] for $f=j$ gives\n$\\mathbb D_{\\bar C}(j_!\\mathcal F)\\simeq Rj_*\\mathbb D_U\\mathcal F$\nwith $\\mathbb D_U=R\\mathcal Hom(-,\\omega_U)$ and\n$\\omega_U\\simeq Rj^!\\omega_{\\bar C}$ (step 1 of its proof). For an open\nimmersion the right adjoint of $j_!$ is $j^*$\n([prop-exc-open-adjoint]), so $\\omega_U\\simeq j^*\\omega_{\\bar C}$, and\n$j^*\\eta_{\\bar C}$ gives $\\omega_U\\simeq E_U(1)[2]$. As $\\mathcal F$ is\nlisse, $R\\mathcal Hom(\\mathcal F,E_U)=\\mathcal F^\\vee$, so\n$\\mathbb D_U\\mathcal F\\simeq\\mathcal F^\\vee(1)[2]$. Finally\n$Ra_{\\bar C*}Rj_*\\simeq Ra_{U*}$ by the composition isomorphism\n[lem-weil-derived-direct-image-composition] for $a_U=a_{\\bar C}\\circ j$,\nwhich applies because $Rj_*\\mathbb D_U\\mathcal F\\simeq\n\\mathbb D_{\\bar C}(j_!\\mathcal F)$ is constructible. Hence\n\n$$\nR\\Gamma_c(U,\\mathcal F)^\\vee\\simeq\nR\\Gamma\\bigl(U,\\mathcal F^\\vee(1)\\bigr)[2].\n$$",
+   "text": "*Step 2 (duality on $\\bar C$).* Apply [thm-pod-global-verdier-duality]\non the proper $\\bar C$ to $K=j_!\\mathcal F$, which that theorem allows\nsince it is stated for every $K\\in D^b_{ctf}(\\bar C,\\Lambda)$:\n\n$$\nR\\Gamma_c(\\bar C,j_!\\mathcal F)^\\vee\\simeq\nR\\Gamma\\bigl(\\bar C,\\mathbb D_{\\bar C}(j_!\\mathcal F)\\bigr).\n$$\n\nThe Verdier-duality exchange [fix-cor-verdier-exchange] for $f=j$ gives\n$\\mathbb D_{\\bar C}(j_!\\mathcal F)\\simeq Rj_*\\mathbb D_U\\mathcal F$\nwith $\\mathbb D_U=R\\mathcal Hom(-,\\omega_U)$ and\n$\\omega_U=Ra_U^!\\Lambda$, as in the statement of that node. The curve\n$U_0$ itself is smooth, separated of finite type, geometrically connected\nand of pure dimension one, so it also satisfies the hypotheses of\n[def-pod-conventions] with $d=1$ (properness is not required there), and\nits canonical orientation $\\eta_U$ gives $\\omega_U\\simeq E_U(1)[2]$. As $\\mathcal F$ is\nlisse, $R\\mathcal Hom(\\mathcal F,E_U)=\\mathcal F^\\vee$, so\n$\\mathbb D_U\\mathcal F\\simeq\\mathcal F^\\vee(1)[2]$. Finally\n$Ra_{\\bar C*}Rj_*\\simeq Ra_{U*}$ by the composition isomorphism\n[lem-weil-derived-direct-image-composition] for $a_U=a_{\\bar C}\\circ j$,\nwhich applies because $Rj_*\\mathbb D_U\\mathcal F\\simeq\n\\mathbb D_{\\bar C}(j_!\\mathcal F)$ is constructible. Hence\n\n$$\nR\\Gamma_c(U,\\mathcal F)^\\vee\\simeq\nR\\Gamma\\bigl(U,\\mathcal F^\\vee(1)\\bigr)[2].\n$$",
    "uses": [
     "thm-pod-global-verdier-duality",
     "fix-cor-verdier-exchange",
-    "prop-exc-open-adjoint",
+    "def-pod-conventions",
     "lem-weil-derived-direct-image-composition"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-semi/lem-a1-affine-hc2.proof.md",
+    "place": "Step 2 (duality on the proper compactification)"
+   }
   },
   {
-   "text": "*Step 3 (degree $-2$).* Taking $H^{-2}$ (over the field $E$ or $\\Qlb$\ndualizing commutes with cohomology) gives\n$H_c^2(U,\\mathcal F)^\\vee\\simeq H^0(U,\\mathcal F^\\vee(1))$. Global\nsections of a lisse sheaf are the invariants of the geometric\nrepresentation of [def-wf-fundamental-representation] [p-real-sections],\nso $H^0(U,\\mathcal F^\\vee(1))=(V^\\vee(1))^{\\pi_1(U)}$, the geometric\nmonodromy action being that of [def-wf-monodromy-data]. Dualizing turns\ninvariants of $V^\\vee$ into coinvariants of $V$, and turns the twist\n$(1)$ into $(-1)$, which gives the displayed isomorphism. All maps above\nare canonical and $\\bar C$, $j$, $\\eta_{\\bar C}$ are base changed from\n$k_0$, so the isomorphism commutes with the Frobenius operators induced\nby the Weil structures, with the twist normalized as in\n[def-wf-tate-twist].",
+   "text": "*Step 3 (degree $-2$).* Taking $H^{-2}$ (over the field $E$ or $\\Qlb$\ndualizing commutes with cohomology, [lem-pod-cohomology-of-dual-over-field]\nat $i=2$) gives\n$H_c^2(U,\\mathcal F)^\\vee\\simeq H^0(U,\\mathcal F^\\vee(1))$. Global\nsections of a lisse sheaf are the invariants of the geometric\nrepresentation of [def-wf-fundamental-representation] [p-real-sections],\nso $H^0(U,\\mathcal F^\\vee(1))=(V^\\vee(1))^{\\pi_1(U)}$, the geometric\nmonodromy action being that of [def-wf-monodromy-data]. Dualizing turns\ninvariants of $V^\\vee$ into coinvariants of $V$, and turns the twist\n$(1)$ into $(-1)$, which gives the displayed isomorphism. All maps above\nare canonical and $\\bar C$, $j$, $\\eta_U$ are base changed from\n$k_0$; the composition, purity and duality isomorphisms used are\nmorphisms of Weil complexes and induce Frobenius-equivariant maps on\ncohomology [prop-weil-operations], so the isomorphism commutes with the\nFrobenius operators induced by the Weil structures, with the twist\nnormalized as in [def-wf-tate-twist].",
    "uses": [
+    "lem-pod-cohomology-of-dual-over-field",
     "def-wf-fundamental-representation",
     "p-real-sections",
     "def-wf-monodromy-data",
+    "prop-weil-operations",
     "def-wf-tate-twist"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-semi/lem-a1-affine-hc2.proof.md",
+    "place": "Step 3 (degree -2 and Frobenius equivariance)"
+   }
   }
  ],
  "proof_deps": [
@@ -62,25 +80,83 @@
   "def-pod-conventions",
   "def-compact-support-direct-image-detailed",
   "def-weil-extension-by-zero",
-  "fix-lem-exchanges",
+  "prop-functor-package",
   "def-weil-ordinary-compact-cohomology",
   "thm-pod-global-verdier-duality",
   "fix-cor-verdier-exchange",
-  "prop-exc-open-adjoint",
   "lem-weil-derived-direct-image-composition",
+  "lem-pod-cohomology-of-dual-over-field",
   "def-wf-fundamental-representation",
   "p-real-sections",
   "def-wf-monodromy-data",
+  "prop-weil-operations",
   "def-wf-tate-twist"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-p-real-semi/lem-a1-affine-hc2.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-p-real-semi/lem-a1-affine-hc2.proof.md",
+  "place": "complete proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "canonical Frobenius equivariant isomorphism compactly supported H^2 of a smooth geometrically connected affine curve with coinvariants of the geometric generic fiber Tate twist",
+   "results": "Rep.FiniteCyclicGroup.groupCohomologyIso₀; groupCohomology.H1ofAutOnUnitsUnique; groupCohomology.exists_mul_galRestrict_of_norm_eq_one; groupCohomology.map_id_comp_H0Iso_hom_apply; groupCohomology.map_id_comp_H0Iso_hom; groupCohomology.H0IsoOfIsTrivial_hom_apply; groupCohomology.isoShortComplexH1_hom; Rep.FiniteCyclicGroup.groupCohomologyIsoEven (generic group-cohomology hits; no exact cohomology statement)",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory, Cohomology, VerdierDuality, Representation.Coinvariants",
+   "results": "0 hits; loogle reported unknown identifier 'CategoryTheory'",
+   "date": "2026-10-18",
+   "verdict": "no match (query parser reported unknown identifier)"
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|Coinvariants|compactTopFrobenius|H_c [Mathlib]",
+   "results": "no hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "compactly supported cohomology of an affine curve is the coinvariants of the generic stalk with Tate twist",
+   "results": "Representation.toCoinvariants; Representation.Coinvariants; HomologicalComplex.coinvariantsTensorObj; Representation.FiniteCyclicGroup.coinvariantsEquiv; Representation.toCoinvariants_mk; groupCohomology.cocyclesIso₀; AlgebraicGeometry.stalkClosedPointIso; Representation.finsuppToCoinvariants_single_mk (generic coinvariant/group-cohomology hits; no exact statement)",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Poincare duality compact support top cohomology affine smooth curve lisse sheaf",
+   "results": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top; AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux; AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact; AlgebraicGeometry.exists_of_res_zero_of_qcqs; AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated (unrelated scheme-topology hits)",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Representation.Coinvariants, Representation.toCoinvariants, groupCohomology.H0Iso",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Poincare|Verdier|compact.*support|Coinvariants [Mathlib/RepresentationTheory]",
+   "results": "no hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "top compactly supported etale cohomology affine curve lisse sheaf generic stalk",
+   "results": "TopCat.Presheaf.stalk; AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso; AlgebraicGeometry.IsAffineOpen.isLocalization_stalk; TopCat.stalkToFiber; AlgebraicGeometry.StructureSheaf.toStalk; skyscraperPresheafStalkOfSpecializes; AlgebraicGeometry.Scheme.stalkClosedPointTo; AlgebraicGeometry.Scheme.fromSpecStalk (unrelated stalk/sheaf hits)",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -115,5 +191,101 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-p-real-semi"
+ "unit": "sk-p-real-semi",
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-affine-hc2",
+  "worker": "stage1",
+  "summary": "Audited the imported Verdier-duality proof against the current main-20261015 blueprint. The statement is unchanged. All four proof steps use existing DAG statements: smooth projective compactification and Poincare-duality conventions; compact-support composition and extension by zero; global Verdier duality, Verdier exchange, open-immersion adjunction, and direct-image composition; and global sections as geometric invariants followed by the elementary dual-invariants/coinvariants identification and Tate-twist duality. No new nodes are needed.",
+  "blueprint": "The opening compactification paragraph, Step 1, Step 2, and Step 3 of the current blueprint proof are realized verbatim as the four proof steps.",
+  "tool_uses": [
+   {
+    "node": "lem-wf-curve-normal-smooth-compactification",
+    "why": "Provides the smooth projective compactification of the affine curve used in the opening step."
+   },
+   {
+    "node": "def-pod-conventions",
+    "why": "Provides the dualizing complex and canonical smooth orientation used on the compactification."
+   },
+   {
+    "node": "def-compact-support-direct-image-detailed",
+    "why": "Defines compact-support direct image and its compactification formula."
+   },
+   {
+    "node": "def-weil-extension-by-zero",
+    "why": "Defines the extension-by-zero sheaf j_! used in the compactification."
+   },
+   {
+    "node": "def-weil-ordinary-compact-cohomology",
+    "why": "Identifies RΓ_c and H_c from compact-support direct images."
+   },
+   {
+    "node": "thm-pod-global-verdier-duality",
+    "why": "Supplies global Verdier duality on the smooth proper compactification."
+   },
+   {
+    "node": "fix-cor-verdier-exchange",
+    "why": "Exchanges Verdier duality with j_! and Rj_*."
+   },
+   {
+    "node": "lem-weil-derived-direct-image-composition",
+    "why": "Identifies the composite ordinary direct image with the iterated direct images."
+   },
+   {
+    "node": "def-wf-fundamental-representation",
+    "why": "Provides the geometric fundamental representation on the generic stalk."
+   },
+   {
+    "node": "p-real-sections",
+    "why": "Identifies global sections of a lisse sheaf with geometric invariants."
+   },
+   {
+    "node": "def-wf-monodromy-data",
+    "why": "Specifies that the invariants and coinvariants use the geometric monodromy action."
+   },
+   {
+    "node": "def-wf-tate-twist",
+    "why": "Defines the Tate twists and the dual inverse twist."
+   },
+   {
+    "node": "prop-functor-package",
+    "why": "Clause 3 states the compact-support composition isomorphism at every coefficient stage."
+   },
+   {
+    "node": "lem-pod-cohomology-of-dual-over-field",
+    "why": "Cohomology of the coefficient dual over a field: H^{-i}(C^vee) = H^i(C)^vee."
+   },
+   {
+    "node": "prop-weil-operations",
+    "why": "Composition, purity and duality isomorphisms are morphisms of Weil complexes (Frobenius equivariance)."
+   }
+  ],
+  "statement_change": "none; the imported statement agrees with the current blueprint statement.",
+  "review_fix": "Codex maintainer review 2026-10-18: step 2 cited fix-lem-exchanges for the compact-support composition law, which that node's statement does not state; now prop-functor-package clause 3. Step 3 took omega_U = Rj^! omega_Cbar from 'step 1 of the proof' of fix-cor-verdier-exchange; now omega_U = Ra_U^! Lambda from that node's statement and eta_U from def-pod-conventions applied to U_0 (prop-exc-open-adjoint dropped). Step 4 asserted Frobenius equivariance from 'canonical and base changed'; now cites prop-weil-operations, and the dual-over-a-field step cites lem-pod-cohomology-of-dual-over-field. Statement unchanged."
+ },
+ "tool_uses": [
+  "lem-wf-curve-normal-smooth-compactification",
+  "def-pod-conventions",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-extension-by-zero",
+  "def-weil-ordinary-compact-cohomology",
+  "thm-pod-global-verdier-duality",
+  "fix-cor-verdier-exchange",
+  "lem-weil-derived-direct-image-composition",
+  "def-wf-fundamental-representation",
+  "p-real-sections",
+  "def-wf-monodromy-data",
+  "def-wf-tate-twist",
+  "prop-functor-package",
+  "lem-pod-cohomology-of-dual-over-field",
+  "prop-weil-operations"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NS-91cd9de55",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-91cd9de55 (reviewer sub-agent of L); spot-checked: I read all of the item, the main-20261015 blueprint statement and proof (the 4 steps reproduce it verbatim), the unit sk-p-real-semi, and the statement of every cited node. The statement is unchanged and checked on small cases: A^1 with constant coefficients gives Q̄_ℓ(-1) with Frobenius q; nontrivial Kummer sheaf on G_m and Artin–Schreier sheaf on A^1 give 0; a geometrically constant sheaf with Frobenius α gives eigenvalue αq. There are no new nodes and no duplicate: lem-a1-middle-extension-endpoints is a consumer that generalizes the item. I repaired three faults in fixes/dag/nodes/sec-purity-real-sheaves/lem-a1-affine-hc2.json. (C4) Step 2 cited fix-lem-exchanges for Ra_{U!} ≃ Ra_{C̄!}j_!, but that node only mentions the composition law; it now cites prop-functor-package clause 3, which states R(gf)_! ≃ Rg_!Rf_! at every coefficient stage. (C3) Step 3 took ω_U ≃ Rj^!ω_C̄ from 'step 1 of the proof' of fix-cor-verdier-exchange, then used prop-exc-open-adjoint. It now takes ω_U = Ra_U^!Λ from that node's statement, and gets η_U: ω_U ≃ E_U(1)[2] from def-pod-conventions applied to U_0 (d=1; properness is not required); prop-exc-open-adjoint is dropped. (E5) Frobenius equivariance rested only on 'canonical and base changed from k_0', and neither duality node states Weil compatibility. Step 4 now cites prop-weil-operations: composition, purity and duality isomorphisms are morphisms of Weil complexes. It also cites lem-pod-cohomology-of-dual-over-field for H^{-2}(C^∨) = H^2(C)^∨. Other hypotheses checked: compactification hypotheses (smooth ⇒ normal; affine ⇒ separated), j_!F in D^b_ctf, the domain of lem-weil-derived-direct-image-composition, p-real-sections applied with C_0 = U_0 to the lisse Weil sheaf F^∨(1), and π_1(U) acting trivially on Q̄_ℓ(1). Accepted tool_uses: all cited units lie in the route closure except lem-wf-curve-normal-smooth-compactification (sk-i-real-compactification), a generic curve-compactification tool. The split_report tool_uses are updated to the repaired citations. No SGA source is used.; 1 file(s) fixed by the reviewer"
+ }
 }
