@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.Algebra.Category.ModuleCat.RingScalarExtension
 public import WeilConjectures.AlgebraicGeometry.ConstantEtaleSheafShortExact
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.ConstructibleSheaf.OfForget
@@ -55,10 +56,10 @@ modules, unlike the instance of `Mathlib`). -/
 instance isLeftAdjoint_restrictScalars : (restrictScalars.{v} φ).IsLeftAdjoint :=
   (restrictCoextendScalarsAdj.{v, v, v} φ).isLeftAdjoint
 
-/-- Restriction of scalars is a right adjoint (stated without raising the universe of the
-modules, unlike the instance of `Mathlib`). -/
-instance isRightAdjoint_restrictScalars : (restrictScalars.{v} φ).IsRightAdjoint :=
-  (extendRestrictScalarsAdj.{v, v, v} φ).isRightAdjoint
+/-- Restriction of scalars is a right adjoint without raising the universe of the modules
+(`ModuleCat.isRightAdjoint_restrictScalars`), registered as an instance. -/
+instance : (restrictScalars.{v} φ).IsRightAdjoint :=
+  isRightAdjoint_restrictScalars.{v, v} φ
 
 end ModuleCat
 
