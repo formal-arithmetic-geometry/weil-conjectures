@@ -33,9 +33,121 @@
   "lem-pur-adic-purity-scalar-naturality",
   "def-weil-pbc-qbar-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "At the coefficient-tower level, [det-sp-tower-gamma] supplies the diagonal orientation a_\\bullet with the stated finite-level components and defines the tower purity maps as the adjoint transposes of the projection-formula and counit composite. The derived-limit adjunction of [det-sp-integral-adjunction-bijection] identifies the integral right adjoint H_{f,\\mathcal O_E} with the derived limit of the tower right adjoint and identifies its integral purity map with R\\lim of those tower purity maps. The realization comparisons of [lem-sf-integral-compactification-system-realization] identify this derived-limit construction with the fixed compactification expressions P_E and H_{f,\\mathcal O_E}; transporting through the counit-preserving comparison gives the displayed integral map \\gamma^T_{E,K}, and its finite reductions are the prescribed finite purity maps.",
+   "uses": [
+    "det-sp-tower-gamma",
+    "det-sp-integral-adjunction-bijection",
+    "lem-sf-integral-compactification-system-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+    "place": "Proof clauses (1)-(2), diagonal orientation and tensor transpose; compare the integral-adjunction construction in sk-prop-sp-integral-adjunction"
+   }
+  },
+  {
+   "text": "The tower-derived-limit right adjoint H_{f,\\mathcal O_E} and the specified exceptional right adjoint G_E have the same compact-support functor and counit after the canonical realization comparisons. By [det-sp-unique-right-adjoint], there is a unique counit-preserving comparison \\delta_E:H_{f,\\mathcal O_E}\\xrightarrow{\\sim}G_E. Composing the derived-limit tower map with this comparison is exactly the definition of \\gamma^T_{E,K}; applying it at the unit object gives a^T_E and preserves the counit equation.",
+   "uses": [
+    "det-sp-integral-adjunction-bijection",
+    "det-sp-unique-right-adjoint",
+    "lem-sf-integral-compactification-system-realization",
+    "def-weil-exceptional-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+    "place": "Proof clause (2), tensor transpose under the tower adjunction, followed by the counit-preserving right-adjoint comparison"
+   }
+  },
+  {
+   "text": "Work at the coefficient field $0=\\mathbf Q_\\ell$, where $\\varpi_0=\\ell$, so the uniformizer levels of [thm-pur-adic-reconstruction] and the $\\ell$-power tower levels coincide. By [det-sp-unique-right-adjoint], composition with $\\delta_0^{-1}$ is a bijection $\\operatorname{Hom}(T_0,G_0\\mathbf1_{0,Y})\\to\\operatorname{Hom}(T_0,H_{f,\\mathbf Z_\\ell}\\mathbf1_{0,Y})$. [det-sp-integral-adjunction-bijection] gives a bijection $\\beta_M:\\operatorname{Hom}(M,H_{f,\\mathbf Z_\\ell}K)\\to\\operatorname{Hom}_{D(\\operatorname{Tow}(X,\\mathbf Z_\\ell))}(\\operatorname{red}_XM,f^!_\\bullet\\operatorname{red}_YK)$, natural in $M$; naturality in $M$ applied to $h=1_{H K}\\circ h$ gives $\\beta_M(h)=\\beta_{HK}(1)\\circ\\operatorname{red}_X(h)$, where $\\beta_{HK}(1):\\operatorname{red}_XH_{f,\\mathbf Z_\\ell}K\\xrightarrow{\\sim}f^!_\\bullet\\operatorname{red}_YK$ is the reduction comparison of that node. Hence, by the exact level evaluation of [det-sp-coefficient-towers-abelian] (2), the level-$n$ component of $\\beta(h)$ is the finite reduction of $h$ under the specified reduction comparisons. Take $M=T_0$, $K=\\mathbf1_{0,Y}$, and compose with the inverse of the tower orientation $a_\\bullet$ of [det-sp-tower-gamma] (1) and the shift $[-2d]$: put $u=a_\\bullet^{-1}\\circ\\beta(\\delta_0^{-1}g_0)$ and $v=a_\\bullet^{-1}\\circ\\beta(\\delta_0^{-1}a^T_0)$, endomorphisms in $D(\\operatorname{Tow}(X,\\mathbf Z_\\ell))$ of $L_\\bullet=(\\mathbf Z_\\ell/\\ell^\\bullet)_X(d)$ placed in degree zero (the reduction of $\\mathbf1_{0,X}(d)$ is this rank-one tower sheaf, $\\widehat{\\mathbf Z}_{\\ell,X}$ being flat over $\\mathbf Z_\\ell$). By hypothesis the level-$n$ component of $\\beta(\\delta_0^{-1}g_0)$ is the finite unit-object purity map $\\gamma_{f,\\mathbf Z/\\ell^n}(\\mathbf Z/\\ell^n)$ of [def-pur-smooth-purity-map]; by Step 1 ([det-sp-tower-gamma] (2) and the reduction clause of [det-sp-integral-adjunction-bijection]) so is that of $\\beta(\\delta_0^{-1}a^T_0)$. So $u_n=v_n$ in $D(X_{\\mathrm{pro\\acute et}},\\mathbf Z/\\ell^n)$ for all $n\\geq1$. $\\operatorname{Tow}(X,\\mathbf Z_\\ell)$ is abelian [det-sp-coefficient-towers-abelian], so by [lem-weil-pbc-derived-single-fully-faithful] $u,v$ are the images of tower morphisms $\\varphi,\\psi:L_\\bullet\\to L_\\bullet$; level evaluation is exact, so $u_n,v_n$ are the images of the sheaf maps $\\varphi_n,\\psi_n$, and faithfulness of the same leaf for $D(X_{\\mathrm{pro\\acute et}},\\mathbf Z/\\ell^n)$ gives $\\varphi_n=\\psi_n$. A morphism of towers is its family of components [sk-def-sp-coefficient-towers], so $\\varphi=\\psi$, $u=v$, and since $a_\\bullet$, $\\beta$ and composition with $\\delta_0^{-1}$ are bijective, $g_0=a^T_0$. Consequently the trace defined from $g_0$ is $t_0=\\epsilon_{0,\\mathbf1}\\circ P_0(a^T_0)$, with the same unit constraints as in the tower construction.",
+   "uses": [
+    "det-sp-unique-right-adjoint",
+    "det-sp-integral-adjunction-bijection",
+    "det-sp-tower-gamma",
+    "det-sp-coefficient-towers-abelian",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "sk-def-sp-coefficient-towers",
+    "def-pur-smooth-purity-map",
+    "thm-pur-adic-reconstruction",
+    "lem-sf-integral-compactification-system-realization",
+    "def-weil-exceptional-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+    "place": "Proof clause (1), rank-one uniqueness: a map of rank-one tower sheaves is determined by its levels; written out through the integral/tower Hom bijection of sk-prop-sp-integral-adjunction and the single-complex full faithfulness"
+   }
+  },
+  {
+   "text": "For a finite extension E/\\mathbf Q_\\ell, [det-sp-field-extension-towers] carries the compact-support functor, its unit and counit, and the integral purity maps from the 0-coefficient stage to the E-stage, with the stated tensor associativity. Applying its counit compatibility to t_0=\\epsilon_{0,\\mathbf1}P_0(a^T_0) gives t_E=\\epsilon_{E,\\mathbf1}\\circ P_E(a^T_E). The same coefficient comparison identifies the displayed maps c_E and \\theta_E with the canonical scalar-extension comparisons, so the formula for t_E in the statement is exactly the scalar-extended trace formula.",
+   "uses": [
+    "det-sp-field-extension-towers",
+    "def-weil-integral-rational-qbar-compact-support",
+    "det-sp-integral-adjunction-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-field-extension/sk-lem-sp-field-extension-towers.proof.md",
+    "place": "Proof clauses (2)-(3), derived-limit coefficient comparisons carry units, counits and purity maps"
+   }
+  },
+  {
+   "text": "Write $\\Pi'_{E,K}$ for the inverse projection map for $\\omega=G_E\\mathbf1_{E,Y}$ [def-exchange-projection]. By Steps 1-2, $\\gamma^T_{E,K}$ is $\\delta_E\\circ R\\lim$ of the tower maps of [det-sp-tower-gamma] (2), and the realization comparisons of [lem-sf-integral-compactification-system-realization] carry the tower projection maps, counits and their transposes to the integral ones; since $\\delta_E$ preserves counits [det-sp-unique-right-adjoint], $\\gamma^T_{E,K}$ is the $G_E$-transpose of $(1_K\\widehat\\otimes\\epsilon_{E,\\mathbf1})\\circ\\Pi'_{E,K}\\circ P_E(1\\widehat\\otimes a^T_E)$, with the twist reassociation understood. Naturality of the projection map in its second variable [def-exchange-projection] gives $\\Pi'_{E,K}\\circ P_E(1\\widehat\\otimes a^T_E)=(1_K\\widehat\\otimes P_E(a^T_E))\\circ\\Pi_{E,K}$, so this composite is $(1_K\\widehat\\otimes\\epsilon_{E,\\mathbf1}P_E(a^T_E))\\circ\\Pi_{E,K}=(1_K\\widehat\\otimes t_E)\\circ\\Pi_{E,K}$ by Step 4. The adjunction hom-bijection of $P_E\\dashv G_E$ is injective, so the two transposes agree: $\\gamma^{\\mathrm{tr}}_{E,K}=\\gamma^T_{E,K}$.",
+   "uses": [
+    "det-sp-tower-gamma",
+    "lem-sf-integral-compactification-system-realization",
+    "def-exchange-projection",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+    "place": "Proof clause (2), tensor map is the transpose of the projection-formula and counit composite"
+   }
+  },
+  {
+   "text": "Finally, scalar localization and finite coefficient-field transport carry the integral equality just proved to the rational categories. [thm-pur-rational-and-qbar-purity] identifies the rational and algebraically closed purity families with scalar extensions of the adic family, while [lem-pur-adic-purity-scalar-naturality] supplies the simultaneous natural integral family and its coefficient equations. Applying the rational part of [det-sp-field-extension-towers] gives \\gamma^{\\mathrm{rat}}_{f,Q_EK}=Q_E(\\gamma^T_{E,K}); the same comparison and the definition of the common-stage category [def-weil-pbc-qbar-category] identify the source and counit-preserving target maps, so the equality remains true after passage to common-stage images.",
+   "uses": [
+    "thm-pur-rational-and-qbar-purity",
+    "lem-pur-adic-purity-scalar-naturality",
+    "det-sp-field-extension-towers",
+    "def-weil-pbc-rational-category",
+    "def-weil-pbc-qbar-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/thm-pur-rational-and-qbar-purity.md",
+    "place": "Proof transport from adic purity by scalar localization and finite coefficient extension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-pur-smooth-purity-map",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-pbc-qbar-category",
+  "def-weil-pbc-rational-category",
+  "det-sp-coefficient-towers-abelian",
+  "det-sp-field-extension-towers",
+  "det-sp-integral-adjunction-bijection",
+  "det-sp-tower-gamma",
+  "det-sp-unique-right-adjoint",
+  "lem-pur-adic-purity-scalar-naturality",
+  "lem-sf-integral-compactification-system-realization",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "sk-def-sp-coefficient-towers",
+  "thm-pur-adic-reconstruction",
+  "thm-pur-rational-and-qbar-purity"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-tower-geometric/sk-prop-sp-tower-geometric-gamma.proof.md",
+  "place": "Clauses (1)-(2), together with sk-lem-sp-field-extension-towers clauses (2)-(3) and purity transport"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -96,7 +208,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-rational-weil-naturality-mate",
@@ -115,5 +227,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-pur-tower-trace-purity-comparison",
+  "worker": "stage1",
+  "summary": "Audited the imported comparison statement against the tower-gamma, integral-adjunction, field-extension, and purity-transport interfaces. Added one strictly smaller levelwise uniqueness lemma for degree-zero rank-one tower maps, then wrote the six-step comparison from tower orientation through the counit-preserving right-adjoint comparison, scalar trace, adjoint transpose, and rational/common-stage transport. Maintainer reader (2026-10-18): the new levelwise-uniqueness node assumed the tower-sheaf representation that the step needed and was a two-line consequence of the definitions; it is folded into Step 3, which now passes from the integral map g_0 to tower maps through the Hom bijection of det-sp-integral-adjunction-bijection and the counit-preserving comparison, and uses the single-complex full faithfulness leaf lem-weil-pbc-derived-single-fully-faithful. Step 5 now writes the projection-naturality computation and is no longer marked elementary.",
+  "blueprint": "Realizes the comparison sentence attached to prop-weil-operations, using the tower-gamma proof clauses (1)-(2), the field-extension tower proof clauses (2)-(3), and the rational purity transport proof.",
+  "tool_uses": [
+   {
+    "node": "det-sp-tower-gamma",
+    "why": "The item compares its tower orientation and tensor transpose with a reconstructed trace map; this tower construction is the generic geometric input."
+   },
+   {
+    "node": "det-sp-integral-adjunction-bijection",
+    "why": "The integral map is obtained by the derived-limit adjunction and its counit, which the finite unit sk-lem-finite does not provide."
+   },
+   {
+    "node": "det-sp-unique-right-adjoint",
+    "why": "The item explicitly compares the tower-derived right adjoint with the specified exceptional right adjoint by counit preservation."
+   },
+   {
+    "node": "det-sp-field-extension-towers",
+    "why": "The trace and purity maps are transported through finite coefficient-field extension, including units, counits and associativity."
+   },
+   {
+    "node": "thm-pur-rational-and-qbar-purity",
+    "why": "The final rational and common-stage conclusion uses the stated scalar transport of adic purity."
+   },
+   {
+    "node": "lem-pur-adic-purity-scalar-naturality",
+    "why": "The item invokes the simultaneous natural integral purity family in its trace-transpose form."
+   },
+   {
+    "node": "lem-sf-integral-compactification-system-realization",
+    "why": "Steps 1-3 and 5 identify the tower/system projection maps, counits and transposes with the integral compact-support ones; no node of sk-lem-finite gives these realizations."
+   },
+   {
+    "node": "det-sp-coefficient-towers-abelian",
+    "why": "Step 3 uses that Tow(X,Z_l) is abelian with exact level evaluation, to apply the single-complex full faithfulness; this is a tower-category fact outside sk-lem-finite."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-sp-tower-gamma",
+  "det-sp-integral-adjunction-bijection",
+  "det-sp-unique-right-adjoint",
+  "det-sp-field-extension-towers",
+  "thm-pur-rational-and-qbar-purity",
+  "lem-pur-adic-purity-scalar-naturality",
+  "lem-sf-integral-compactification-system-realization",
+  "det-sp-coefficient-towers-abelian"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NB-a9f664368",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-a9f664368 (reviewer sub-agent of L); spot-checked: I read all of it: the item, the new node, every cited statement, the tower-gamma proof clauses (1)-(3) in main-20261015, the field-extension and purity-transport sources, and unit sk-lem-finite. The item statement is unchanged from the base and is not weakened. The coefficient category throughout is the derived-complete integral one, with ordinary derived change of completed rings as in det-sp-field-extension-towers. No SGA source is cited. The claim g_0=a^T_0 is true: Hom(T_0,G_0 1) is H^0(X,Z_l^), and the lim^1 term of H^{-1}(X,Z/l^n) vanishes. Edge cases X empty, d=0 and X disconnected all hold. Steps 1, 2, 4 and 6 are correct as citations of statements. Fault 1 (C1/E5), Step 3: it treated the integral g_0 as a tower map without citing the Hom bijection of det-sp-integral-adjunction-bijection or the counit-preserving comparison of det-sp-unique-right-adjoint; the realization lemma it did cite explicitly asserts no faithfulness on morphisms. Repaired: Step 3 now goes through delta_0, uses naturality of beta to show beta(h)=beta(1)∘red(h), and finishes with Tow abelian with exact levels (det-sp-coefficient-towers-abelian), the single-complex full-faithfulness leaf lem-weil-pbc-derived-single-fully-faithful, and the fact that a tower map is its family of components. Fault 2 (D1/C1): the new node lem-pur-tower-rank-one-level-uniqueness assumed in its hypothesis the tower-sheaf representation that Step 3 needed, so it was trivial. Its useful form is a few lines from the existing leaf, so I folded it into Step 3, dropped it, and removed it from stmt_deps, where it had been listed although the statement does not use it. Fault 3 (C2): Step 5 was marked elementary while relying on the realization lemma. I wrote out the projection-naturality computation, added det-sp-unique-right-adjoint to its uses, and set elementary=false. I accepted two more tool uses: lem-sf-integral-compactification-system-realization and det-sp-coefficient-towers-abelian. The corrected item is under fixes/dag/nodes/sec-poincare-duality/.; 1 file(s) fixed by the reviewer"
  }
 }
