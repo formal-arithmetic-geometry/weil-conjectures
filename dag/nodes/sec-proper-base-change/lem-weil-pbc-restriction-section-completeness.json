@@ -1,0 +1,163 @@
+{
+ "id": "lem-weil-pbc-restriction-section-completeness",
+ "kind": "statement",
+ "title": "Completeness at a single section is invariant under restriction of scalars",
+ "statement": "For a morphism φ:R→B of commutative ring sheaves on a small site, an arbitrary unbounded M in D(B), U in C and f in R(U), the restricted complex is f-complete in the sense of [def-weil-pbc-ringed-site-complete-element] if and only if M is φ(f)-complete. Restriction is computed on Q's chosen representative as in [def-pc-sheaf-restrict-scalars]. No ideal or flatness hypothesis is used.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099C, proof, via Tags 0997 and 0998."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-site-complete-element",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Products in the derived categories exist: replace each object by a K-injective resolution, take the termwise product, and use its universal property. The multiplication-tower criterion and the Roos distinguished triangle identify completeness with invertibility of one minus the product shift.",
+   "uses": [
+    "lem-pc-ringed-space-product-kinjective",
+    "lem-weil-derived-limit-existence",
+    "lem-weil-pbc-local-hom-tower-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0997, product model for the derived inverse limit"
+   }
+  },
+  {
+   "text": "Exact restriction is a right adjoint, so it preserves derived products. It reflects isomorphisms, since under the exact derived functor cohomology is underived restriction, which is conservative. The product comparison thus preserves and reflects invertibility of one minus shift.",
+   "uses": [
+    "lem-weil-pbc-restriction-derived-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099C, scalar independence of the underlying abelian-sheaf computation"
+   }
+  },
+  {
+   "text": "The factorization isomorphisms for exact derived slice restriction identify restriction-before-slicing with slicing-before-restriction. These isomorphisms commute with multiplication: on a section the equality is precisely the naturality equation for φ. Conjugating the two product shifts and applying the preceding detection of isomorphisms proves both implications.",
+   "uses": [
+    "def-weil-pbc-ringed-site-derived-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099C, final sentence viewing f through its image in B"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-site-derived-restriction",
+  "lem-pc-ringed-space-product-kinjective",
+  "lem-weil-derived-limit-existence",
+  "lem-weil-pbc-local-hom-tower-criterion",
+  "lem-weil-pbc-restriction-derived-products"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099C, proof, via Tags 0997 and 0998."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*[Cc]omplete|[Cc]omplete.*restrictScalars",
+   "results": "Mathlib/RingTheory/AdicCompletion/Basic.lean; Mathlib/Algebra/Module/Submodule/RestrictScalars.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected the returned signatures; none states this comparison for unbounded derived categories of module sheaves on arbitrary small sites."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"IsZero\"",
+   "results": "No hits.",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected the returned signatures; none states this comparison for unbounded derived categories of module sheaves on arbitrary small sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars on sheaves of modules preserves and reflects derived completeness, vanishing derived inverse limits of scalar multiplication towers",
+   "results": "SheafOfModules.restrictScalars; CondensedMod; SheafOfModules.createsLimit; SheafOfModules.forgetPreservesLimitsOfSize; SheafOfModules.forgetPreservesLimitsOfShape; CondensedMod.IsSolid; instHasLimitsCondensedMod; PresheafOfModules.instReflectsFiniteLimitsSheafOfModulesSheafAddCommGrpCatToSheaf",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected the returned signatures; none states this comparison for unbounded derived categories of module sheaves on arbitrary small sites."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Vanishing derived internal Hom from localization of a ring sheaf is invariant under restriction of scalars",
+   "results": "PresheafOfModules.restrictScalarsObj; LinearEquiv.extendScalarsOfIsLocalizationEquiv; Submodule.restrictScalars_localized'; SheafOfModules.restrictScalars; PresheafOfModules.restrictHomEquivOfIsLocallySurjective; PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom; PresheafOfModules.sheafifyHomEquiv; Module.FinitePresentation.isLocalizedModule_mapExtendScalars",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected the returned signatures; none states this comparison for unbounded derived categories of module sheaves on arbitrary small sites."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RestrictionLocalCompleteness",
+  "date": "2026-10-18",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Final Stacks comparison: Completeness at a single section is invariant under restriction of scalars.",
+   "via": [
+    "lem-weil-pbc-restriction-local-completeness",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RestrictionSectionCompleteness",
+  "file": "lean/Sheaf/Paper/RestrictionSectionCompleteness.lean",
+  "declaration": "CategoryTheory.restrictScalars_completeElement_iff",
+  "declarations": [
+   "CategoryTheory.restrictScalars_completeElement_iff"
+  ],
+  "statement": "theorem restrictScalars_completeElement_iff\n    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)\n    (R B : Sheaf J CommRingCat.{u}) (φ : R ⟶ B)\n    [HasDerivedCategory.{w} (ringedSiteModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))]\n    [HasDerivedCategory.{w} (ringedSiteModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B))]\n    [∀ U : C, HasDerivedCategory.{w} (ringedSiteModules.{u}\n      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U))]\n    [∀ U : C, HasDerivedCategory.{w} (ringedSiteModules.{u}\n      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj B).over U))]\n    (M : DerivedCategory (ringedSiteModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B)))\n    (U : C) (f : R.obj.obj (op U)) :\n    IsRingedSiteCompleteElement J R\n      (DerivedCategory.Q.obj\n        (((SheafOfModules.restrictScalars\n          ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj (DerivedCategory.Q.objPreimage M))) U f ↔\n      IsRingedSiteCompleteElement J B M U (φ.hom.app (op U) f)",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-18"
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-weil-pbc-restriction-local-completeness",
+  "worker": "C4",
+  "summary": "Proved in Lean without any new sorry. This is a strictly smaller comparison used by the unchanged local completeness theorem.",
+  "blueprint": "Supports the coefficient-category comparison in the final Stacks comparison clause of def-weil-pbc-completed-pullback.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-ringed-space-product-kinjective",
+    "why": "Use its general categorical statement as a black box for module sheaves on a slice; it does not replace any step of the proper-base-change unit."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261018T101337-L-3972401",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261018T101337-L-3972401",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

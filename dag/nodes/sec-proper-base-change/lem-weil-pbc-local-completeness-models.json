@@ -1,0 +1,158 @@
+{
+ "id": "lem-weil-pbc-local-completeness-models",
+ "kind": "statement",
+ "title": "Fraction localization and sequential localization give the same local completeness condition",
+ "statement": "Let C be a small site, R a commutative ring sheaf, U an object, f a section over U, and K an arbitrary object of D(R). The internal Hom from the sheafification of sectionwise localization R_U[1/f] to exact derived restriction of K is zero if and only if K is f-complete in the sequential-colimit and chosen-representative convention [def-weil-pbc-ringed-site-complete-element]. Localization and restriction are those of [def-weil-pbc-ringed-section-localization], [def-weil-pbc-ringed-site-section-localization], [def-weil-pbc-ringed-derived-restriction] and [def-weil-pbc-ringed-site-derived-restriction]. No boundedness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099C, proof, via Tags 0997 and 0998."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-site-complete-element",
+  "def-weil-pbc-ringed-section-localization",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof": [
+  {
+   "text": "The cokernel of one minus the forward shift on the coproduct of the multiplication sequence is its colimit: maps annihilating one minus shift are exactly compatible cocones. Apply the free resolution of localization to identify this cokernel with the sheafified localization. The component maps send a at stage n to a/f^n. Naturality of localization maps follows from their action on coefficients and the inverse of f.",
+   "uses": [
+    "lem-weil-pbc-localization-free-resolution",
+    "def-weil-pbc-local-coefficient-localization",
+    "def-weil-pbc-ringed-site-section-localization",
+    "def-weil-pbc-ringed-section-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0997, displayed two-term free resolution and its augmentation"
+   }
+  },
+  {
+   "text": "The factorization isomorphism for the exact slice functor and Q.objObjPreimageIso identify exact derived restriction with restriction of the chosen representative. Apply derived internal Hom to the resulting isomorphisms of source and target; isomorphic objects have the same zero condition.",
+   "uses": [
+    "def-weil-pbc-ringed-derived-restriction",
+    "def-weil-pbc-ringed-site-derived-restriction",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0997, internal-Hom interpretation of the multiplication tower"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-local-coefficient-localization",
+  "def-weil-pbc-ringed-derived-restriction",
+  "def-weil-pbc-ringed-section-localization",
+  "def-weil-pbc-ringed-site-derived-restriction",
+  "def-weil-pbc-ringed-site-section-localization",
+  "lem-weil-pbc-localization-free-resolution"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099C, proof, via Tags 0997 and 0998."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The sequential colimit of multiplication by a section on a sheaf of rings is isomorphic to the sheafification of localization away from that section",
+   "results": "AlgebraicGeometry.StructureSheaf.basicOpenIso; PresheafOfModules.sheafificationCompToSheaf; AlgebraicGeometry.StructureSheaf.localization_toBasicOpen; ModuleCat.Tilde.localizationToStalk_mk; TopCat.Presheaf.SubmonoidPresheaf.toLocalizationPresheaf; TopCat.Presheaf.totalQuotientPresheaf; TopCat.Presheaf.SubmonoidPresheaf.localizationPresheaf; ModuleCat.Tilde.openToLocalization",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected the returned signatures; none states this comparison for unbounded derived categories of module sheaves on arbitrary small sites."
+  },
+  {
+   "tool": "grep",
+   "query": "(colimit.*[Ll]ocalization|[Ll]ocalization.*colimit)",
+   "results": "Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean; Mathlib/CategoryTheory/Limits/Preserves/FunctorCategory.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected the returned signatures; none states this comparison for unbounded derived categories of module sheaves on arbitrary small sites."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"colimit\", \"Localization.Away\"",
+   "results": "No hits.",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected the returned signatures; none states this comparison for unbounded derived categories of module sheaves on arbitrary small sites."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A sequential colimit of repeated multiplication by a ring element is localization away from the element",
+   "results": "IsLocalizedModule.Away; Localization.Away; IsLocalization.Away.mk; IsLocalization.Away; LocalizedModule.Away; Algebra.PreSubmersivePresentation.localizationAway; IsLocalization.Away.instAlgebraMapSubmonoidPowersOfCoeRingHomAlgebraMap; IsLocalization.Away.finitePresentation",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected the returned signatures; none states this comparison for unbounded derived categories of module sheaves on arbitrary small sites."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RestrictionLocalCompleteness",
+  "date": "2026-10-18",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Final Stacks comparison: Fraction localization and sequential localization give the same local completeness condition.",
+   "via": [
+    "lem-weil-pbc-restriction-local-completeness",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LocalCompletenessModels",
+  "file": "lean/Sheaf/Paper/LocalCompletenessModels.lean",
+  "declaration": "CategoryTheory.localCompleteness_models_iff",
+  "declarations": [
+   "CategoryTheory.localCompleteness_models_iff"
+  ],
+  "statement": "theorem localCompleteness_models_iff\n    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)\n    (R : Sheaf J CommRingCat.{u})\n    [HasDerivedCategory.{w} (ringedSiteModules.{u} (localCoefficientRings R))]\n    [∀ U : C, HasDerivedCategory.{w}\n      (ringedSiteModules.{u} ((localCoefficientRings R).over U))]\n    (K : ringedSiteDerived R) (U : C) (f : R.obj.obj (op U)) :\n    IsZero ((derivedInternalHom (J.over U) (R.over U)).obj\n      (op ((DerivedCategory.singleFunctor _ 0).obj\n        (ringedSectionLocalization (R.over U) (ringedSliceSection R U f))),\n        (ringedDerivedRestriction R U).obj K)) ↔\n      IsRingedSiteCompleteElement J R K U f",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-18"
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-weil-pbc-restriction-local-completeness",
+  "worker": "C4",
+  "summary": "Proved in Lean without any new sorry. This is a strictly smaller comparison used by the unchanged local completeness theorem.",
+  "blueprint": "Supports the coefficient-category comparison in the final Stacks comparison clause of def-weil-pbc-completed-pullback.",
+  "tool_uses": [
+   {
+    "node": "def-pur-derived-internal-hom",
+    "why": "Use its general categorical statement as a black box for module sheaves on a slice; it does not replace any step of the proper-base-change unit."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261018T101337-L-3972401",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261018T101337-L-3972401",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,191 @@
+{
+ "id": "lem-weil-pbc-restriction-derived-products",
+ "kind": "statement",
+ "title": "Exact scalar restriction on derived module sheaves is a right adjoint",
+ "statement": "For a morphism φ:R→B of commutative ring sheaves on a small site, exact restriction of scalars D(B)→D(R), constructed by the exact-functor map on derived categories [def-weil-abstract-derived-category], is a right adjoint. In particular it preserves products. Its underived functor [def-pc-sheaf-restrict-scalars] is conservative and preserves limits and colimits of the site universe. The derived categories may use any common chosen localization universe.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A6 (lemma-adjoint) for the identity of the underlying site; K-flat existence and tensor invariance in Tags 06YS and 06YT."
+ },
+ "stmt_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "The functor to abelian sheaves is conservative and preserves all limits and colimits. Under scalar restriction its underlying abelian sheaf is unchanged, so restriction is conservative, preserves limits and colimits, and is exact.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099C, cohomology in abelian sheaves"
+   }
+  },
+  {
+   "text": "Use sheafified extension of scalars and its ordinary adjunction with restriction. K-flat resolutions give a resolving class on which extension preserves quasi-isomorphisms; the resolving-class essential-constancy theorem therefore supplies the left derived functor.",
+   "uses": [
+    "def-weil-pbc-ringed-tensor-section-calculus",
+    "lem-pc-kflat-resolution",
+    "lem-pur-change-of-rings-kflat-quasi-iso",
+    "lem-pur-resolving-class-essential-constancy",
+    "lem-pur-quasi-isos-saturated-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 06YT and 06YY: K-flat resolutions and everywhere-defined derived extension."
+   }
+  },
+  {
+   "text": "For exact restriction, every denominator in the right-derived ind-diagram is inverted. The diagram is naturally isomorphic to a constant diagram (use inverses of the denominator maps); its indexing category is filtered by the calculus of fractions. Apply the general derived-adjunction theorem. Uniqueness of the right derived functor identifies its right adjoint with the exact derived restriction.",
+   "uses": [
+    "lem-pc-derived-adjoint-functors",
+    "lem-pur-quasi-isos-saturated-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5, derived-adjoint-functors; exact restriction identifies its right derived functor."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "lem-pc-derived-adjoint-functors",
+  "lem-pc-kflat-resolution",
+  "lem-pur-change-of-rings-kflat-quasi-iso",
+  "lem-pur-quasi-isos-saturated-triangulated",
+  "lem-pur-resolving-class-essential-constancy",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A6, using derived.tex Tag 09T5 and K-flat resolutions; specialized to restriction along a coefficient homomorphism."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The exact restriction of scalars on the unbounded derived categories of sheaves of modules is a right adjoint to derived extension of scalars",
+   "results": "SheafOfModules.instIsRightAdjointPushforward; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous; SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.instIsLeftAdjointPullback; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.instIsRightAdjointPushforwardIdSheafRingCat",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected the returned signatures; none states this comparison for unbounded derived categories of module sheaves on arbitrary small sites."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory.*[Rr]ightAdjoint|[Rr]ightAdjoint.*mapDerivedCategory",
+   "results": "No hits.",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected the returned signatures; none states this comparison for unbounded derived categories of module sheaves on arbitrary small sites."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapDerivedCategory\", \"IsRightAdjoint\"",
+   "results": "No hits.",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected the returned signatures; none states this comparison for unbounded derived categories of module sheaves on arbitrary small sites."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars on unbounded derived categories of sheaves of modules is a right adjoint",
+   "results": "ModuleCat.instIsRightAdjointRestrictScalars; ModuleCat.instIsRightAdjointCoextendScalars; PresheafOfModules.restrictScalars; PresheafOfModules.restrictScalarsObj; PresheafOfModules.instIsRightAdjointPushforward; ModuleCat.instIsLeftAdjointRestrictScalars; ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars; Rep.instIsRightAdjointActionModuleCatRes",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected the returned signatures; none states this comparison for unbounded derived categories of module sheaves on arbitrary small sites."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RestrictionLocalCompleteness",
+  "date": "2026-10-18",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Final Stacks comparison: Exact scalar restriction on derived module sheaves is a right adjoint.",
+   "via": [
+    "lem-weil-pbc-restriction-local-completeness",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RestrictionDerivedProducts",
+  "file": "lean/Sheaf/Paper/RestrictionDerivedProducts.lean",
+  "declaration": "CategoryTheory.scalarRestriction_derived_isRightAdjoint",
+  "declarations": [
+   "CategoryTheory.scalarRestriction_reflectsIso",
+   "CategoryTheory.scalarRestriction_preservesLimits",
+   "CategoryTheory.scalarRestriction_preservesColimits",
+   "CategoryTheory.scalarRestriction_derived_isRightAdjoint"
+  ],
+  "statement": "theorem scalarRestriction_derived_isRightAdjoint\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)\n    [HasDerivedCategory.{w} (SheafOfModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B))] :\n    Functor.IsRightAdjoint (SheafOfModules.restrictScalars.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).mapDerivedCategory",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-18"
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-weil-pbc-restriction-local-completeness",
+  "worker": "C4",
+  "summary": "Proved in Lean without any new sorry. This is a strictly smaller comparison used by the unchanged local completeness theorem.",
+  "blueprint": "Supports the coefficient-category comparison in the final Stacks comparison clause of def-weil-pbc-completed-pullback.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-derived-adjoint-functors",
+    "why": "Use its general categorical statement as a black box for module sheaves on a slice; it does not replace any step of the proper-base-change unit."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Use its general categorical statement as a black box for module sheaves on a slice; it does not replace any step of the proper-base-change unit."
+   },
+   {
+    "node": "lem-pur-change-of-rings-kflat-quasi-iso",
+    "why": "Use its general categorical statement as a black box for module sheaves on a slice; it does not replace any step of the proper-base-change unit."
+   },
+   {
+    "node": "lem-pur-quasi-isos-saturated-triangulated",
+    "why": "Use its general categorical statement as a black box for module sheaves on a slice; it does not replace any step of the proper-base-change unit."
+   },
+   {
+    "node": "lem-pur-resolving-class-essential-constancy",
+    "why": "Use its general categorical statement as a black box for module sheaves on a slice; it does not replace any step of the proper-base-change unit."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Use its general categorical statement as a black box for module sheaves on a slice; it does not replace any step of the proper-base-change unit."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261018T101337-L-3972401",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261018T101337-L-3972401",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -8,13 +8,9 @@ module
 public import Sheaf.CategoryTheory.LocallyDerivedRingedIdealComplete
 public import Sheaf.Paper.RingedSiteIdeal
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
-import Sheaf.CategoryTheory.Triangulated.DerivedLimit
-import Sheaf.Paper.LocalHomTowerCriterion
+import Sheaf.Paper.LocalCompletenessModels
+import Sheaf.Paper.RestrictionSectionCompleteness
 import Sheaf.CategoryTheory.RingedSiteCompleteElementsIdeal
-import Sheaf.Algebra.Homology.DerivedInternalHom
-import Sheaf.CategoryTheory.RingedSiteModules
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
 
 /-!
 # Restriction of scalars preserves and reflects local derived completeness
@@ -42,17 +38,17 @@ Source: Stacks Project, algebraization.tex, Tag 099C
 (blueprint: lem-weil-pbc-restriction-local-completeness).
 
 Proof:
-1. Apply lem-weil-pbc-local-hom-tower-criterion (Tag 0997) on each slice C/U.
-   It identifies the internal-Hom vanishing condition with vanishing of the derived
-   multiplication tower T(M|U,f), using def-pur-derived-internal-hom and def-weil-derived-limit.
-2. The sheaf of vanishing elements is an ideal by
-   lem-weil-pbc-ringed-derived-complete-elements-ideal (Tag 0998). Thus testing the image
-   sections of I is equivalent to testing every section of the locally generated ideal IB.
-3. By def-pc-sheaf-restrict-scalars, the underlying abelian sheaves and the multiplication
-   maps in these towers are identical. Their cohomology sheaves and derived-limit vanishing
-   are computed in abelian sheaves, independently of the scalar ring. This gives both
-   implications. Module categories and their derived categories are
-   def-weil-sheaf-of-modules-category and def-weil-abstract-derived-category. -/
+1. Compare sheafified fraction localization with the sequential-colimit model by
+   lem-weil-pbc-local-completeness-models. Exact slice restriction agrees, up to its
+   factorization isomorphism, with restriction of Q's chosen representative.
+2. Apply lem-weil-pbc-restriction-section-completeness at each section of I.
+   Its proof uses Tag 0997, derived product preservation and conservativity of
+   scalar restriction, and the naturality square for multiplication by a section.
+3. The complete elements form an ideal satisfying covering-sieve descent by
+   lem-weil-pbc-ringed-derived-complete-elements-ideal (Tag 0998). This ideal
+   contains all images of I, hence every section of the locally generated ideal IB.
+   Conversely each image belongs to IB by the maximal sieve, naturality and
+   stability of I under restriction. -/
 theorem restrictScalars_locallyDerivedComplete_iff
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (R B : Sheaf J CommRingCat.{u}) (φ : R ⟶ B)
@@ -77,6 +73,67 @@ theorem restrictScalars_locallyDerivedComplete_iff
           ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).mapHomologicalComplex
             (ComplexShape.up ℤ)).obj (DerivedCategory.Q.objPreimage M))) ↔
       IsLocallyDerivedRingedIdealComplete B IB.module IB.inclusion M := by
-  sorry
+  classical
+  let hRover : ∀ U : C, HasDerivedCategory.{w} (SheafOfModules.{u}
+      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U)) := fun U ↦
+    inferInstanceAs (HasDerivedCategory.{w} (SheafOfModules.{u}
+      ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (R.over U))))
+  let hBover : ∀ U : C, HasDerivedCategory.{w} (SheafOfModules.{u}
+      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj B).over U)) := fun U ↦
+    inferInstanceAs (HasDerivedCategory.{w} (SheafOfModules.{u}
+      ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (B.over U))))
+  let N := DerivedCategory.Q.obj
+    (((SheafOfModules.restrictScalars
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).mapHomologicalComplex
+        (ComplexShape.up ℤ)).obj (DerivedCategory.Q.objPreimage M))
+  have hR : IsLocallyDerivedRingedIdealComplete R I.module I.inclusion N ↔
+      ∀ (U : C) (f : R.obj.obj (op U)), f ∈ I.sections U →
+        IsRingedSiteCompleteElement J R N U f := by
+    constructor
+    · intro h U f hf
+      apply (localCompleteness_models_iff J R N U f).mp
+      exact h U f ⟨⟨f, hf⟩, rfl⟩
+    · intro h U f ⟨y, hy⟩
+      apply (localCompleteness_models_iff J R N U f).mpr
+      apply h U f
+      change y.val = f at hy
+      exact hy ▸ y.property
+  have hB : IsLocallyDerivedRingedIdealComplete B IB.module IB.inclusion M ↔
+      ∀ (U : C) (b : B.obj.obj (op U)), b ∈ IB.sections U →
+        IsRingedSiteCompleteElement J B M U b := by
+    constructor
+    · intro h U b hb
+      apply (localCompleteness_models_iff J B M U b).mp
+      exact h U b ⟨⟨b, hb⟩, rfl⟩
+    · intro h U b ⟨y, hy⟩
+      apply (localCompleteness_models_iff J B M U b).mpr
+      apply h U b
+      change y.val = b at hy
+      exact hy ▸ y.property
+  rw [hR, hB]
+  obtain ⟨S, hS, _, hlocal, _⟩ := ringedSite_complete_elements_ideal J B M
+  constructor
+  · intro h U b hb
+    apply (hS U b).mp
+    obtain ⟨T, hT, hmem⟩ := (hIB U b).mp hb
+    apply hlocal U T hT b
+    intro V g hg
+    have hle : Ideal.map (φ.hom.app (op V)).hom (I.sections V) ≤ S V := by
+      rw [Ideal.map_le_iff_le_comap]
+      intro f hf
+      apply (hS V (φ.hom.app (op V) f)).mpr
+      exact (restrictScalars_completeElement_iff J R B φ M V f).mp (h V f hf)
+    exact hle (hmem V g hg)
+  · intro h U f hf
+    apply (restrictScalars_completeElement_iff J R B φ M U f).mpr
+    apply h U (φ.hom.app (op U) f)
+    apply (hIB U _).mpr
+    refine ⟨⊤, J.top_mem U, ?_⟩
+    intro V g _
+    have hn : B.obj.map g.op (φ.hom.app (op U) f) =
+        φ.hom.app (op V) (R.obj.map g.op f) :=
+      (congrArg (fun k ↦ k f) (φ.hom.naturality g.op)).symm
+    rw [hn]
+    exact Ideal.mem_map_of_mem _ (I.restriction g f hf)
 
 end CategoryTheory
