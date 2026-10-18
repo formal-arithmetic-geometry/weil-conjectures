@@ -142,7 +142,7 @@ the inverse of the projection isomorphism
 `AlgebraicGeometry.Etale.derivedOpenImmersionLowerShriekProjectionIso`, which is checked after
 `Lj^*`, where it comes from the unit of `j_! ⊣ j^*`, and after the pullback to the closed
 complement, where both sides vanish. -/
-theorem nonempty_iso_derivedTensor_openImmersionLowerShriek :
+theorem nonempty_iso_derivedTensorWhiskeringLeft_openImmersionLowerShriek :
     Nonempty (derivedTensorWhiskeringLeftOpenImmersionLowerShriek (ModuleCat.{u + 1} Λ) j ≅
       (Functor.postcompose₂.obj D((j)_!open[ModuleCat.{u + 1} Λ])).obj
         (derivedTensorWhiskeringRightLeftDerivedUpperStar (ModuleCat.{u + 1} Λ) j)) :=
