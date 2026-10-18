@@ -270,5 +270,33 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-c0f3f4980 (reviewer sub-agent of L); spot-checked: I read the item, the full statement of every cited node, Milne LEC Example 16.3 (Kummer on A¹, then 'Künneth (22) implies A^m acyclic'), Remark 22.3(b), the §16 twist paragraph, and Stacks 0F1P/lemma-kunneth and 03QQ; no SGA source is used. The statement is unchanged and checked on r=0, char 0 (A¹_C simply connected), char p≠ℓ (Pic A¹=0, k^× divisible), q<0 and t<0. Step 1: the ζ-trivialization of μ_m by a clopen partition is correct; the differences ζ^a−ζ^b are units. Step 2: the r=0 case and q<0 follow from the cited module/abelian comparison, the sheaves-on-a-point node and torsion cd 0. Step 3: thm-pur-kummer-affine-line clause (1) with N=n, A=R=Λ; under the trivialization a↦ζ⊗a is the constants map; the cohomology criterion gives u₁. Step 4: induction with thm-kun-0f1p, whose hypotheses hold (finite type, k separably closed, ℓⁿ invertible), plus pullback-constant and tensor-unit; base cases u₀ and u₁. Step 5: the adjunction calculation in def-kun-kunneth-map shows κ∘(u_j⊗u₁)=u_{j+1}; the H⁰ test is valid because Λ is projective; twisting back via the pullback compatibility leaves a map independent of ζ. There are no new nodes and no duplicate: lem-pur-affine-line-ordinary-invariance assumes k=F̄_q, and the lem-fd nodes cover A¹ only. The declared tool_uses are accepted. Batch 5: the closures of thm-kun-0f1p and thm-pur-kummer-affine-line reach only generic pod/trf nodes (scalar extension, stalk of a tensor product, local constancy, separated finite type stable under base change, a localization is essentially surjective, proper with finite fibre is finite near s). Both cited nodes are already in the batch-5 closure computed without the item, and neither is part of the trace-formula or Poincaré-duality proofs, so both flags are accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricAffineSpaceAcyclicity",
+  "declaration": "AlgebraicGeometry.geometricAffineSpaceAcyclicity",
+  "declarations": [
+   "AlgebraicGeometry.geometricAffineCoefficient",
+   "AlgebraicGeometry.geometricAffineAnnihilation",
+   "AlgebraicGeometry.geometricAffineTwist",
+   "AlgebraicGeometry.geometricAffineTwistCohomology",
+   "AlgebraicGeometry.geometricAffineTwistPullback",
+   "AlgebraicGeometry.geometricAffineUnitMap",
+   "AlgebraicGeometry.geometricAffineConstantsMap",
+   "AlgebraicGeometry.geometricAffineSpaceAcyclicity"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricAffineSpaceAcyclicity.lean",
+  "statement": "theorem geometricAffineSpaceAcyclicity (k : Type u) [Field k] [IsAlgClosed k] (ℓ n : ℕ) (hℓ : ℓ.Prime) (hℓk : IsUnit (ℓ : k)) (hn : 1 ≤ n) (r : ℕ) (t : ℤ) : IsIso (geometricAffineConstantsMap k ℓ n r hℓ hℓk t) ∧ ∀ q : ℤ, q ≠ 0 → IsZero (geometricAffineTwistCohomology ℓ n (AffineSpace (ULift.{u} (Fin r)) (Spec (.of k))) t q)",
+  "branch": "newtargets-dag",
+  "by": "Q108",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-82c930cd6",
+  "group": "Q108",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node: alg. closed k : Type u with no char/trdeg restriction; ℓ prime, IsUnit ℓ in k; 1≤n; Λ=ULift(ZMod ℓ^n) in the recorded ModuleCat.{u+1} encoding; AffineSpace (ULift (Fin r)) over Spec k, so r=0 is included; signed finiteEtaleTateSheaf for every t∈ℤ; IsIso of the actual constants map (globalSectionsUpperStarMap along the structure map, then the canonical twist comparison, then inverse R⁰Γ≅Γ and H⁰ single iso), with no root choice; IsZero of Etale.cohomology for every q≠0, negatives included. The twist comparison is Classical.choose of the dependency theorem etaleFiniteTwistPullback and is uniquely pinned by its generator/constant/recursion/evaluation laws. The structured finiteEtaleTwistPullbackData is not in the published build (probe: Unknown constant), so the workaround is justified. Edge cases r=0, t≤0, q<0, n=1, char 0, char p≠ℓ and universes checked. One sorry (main theorem); defs have real data; docstrings carry source and blueprint and the five proof steps; plain imports are exactly the proof_deps modules; lean.statement is verbatim; node differs from live only in lean; no duplicate in lean/Sheaf, WeilConjectures or Mathlib; ordinary étale, not pro-étale. nt_compile --json clean in 42.9 s (limit 60 s, load ~62). Advisory: finiteEtaleTateSheaf is owned by def-asd-finite-etale-tate-sheaf, reached via the twist-pullback stmt_dep; switch to finiteEtaleTwistPullbackData.c once published; retry landing at lower load if it times out."
  }
 }
