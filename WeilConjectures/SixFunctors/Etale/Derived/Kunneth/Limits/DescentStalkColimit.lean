@@ -78,6 +78,7 @@ variable (hc : IsLimit c) [∀ {i j : I} (f : i ⟶ j), IsAffineHom (D.map f)]
   (F : Sheaf c.pt.smallEtaleTopology (ModuleCat.{u + 1} Λ))
   {Ω : Type u} [Field Ω] [IsSepClosed Ω] (x : Spec (.of Ω) ⟶ c.pt)
 
+omit [∀ i, CompactSpace (D.obj i)] in
 include hc in
 /-- Every element of the stalk `F_x̄` comes from the stalk of some `pᵢ^* pᵢ_* F`. -/
 lemma exists_sheafFiber_map_counit_eq
