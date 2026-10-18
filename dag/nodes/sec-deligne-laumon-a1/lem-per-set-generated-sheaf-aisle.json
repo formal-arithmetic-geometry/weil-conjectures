@@ -12,9 +12,141 @@
   "def-weil-abstract-derived-category",
   "def-weil-t-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-ring-sheaves-grothendieck], $\\mathcal A=\\operatorname{Mod}(R)$ is Grothendieck abelian, without requiring $R$ commutative. Choose a generator $U$. Use [lem-kun-grothendieck-derived-coproducts] for the small coproducts in $D(\\mathcal A)$; these are the images of termwise coproducts. All sets, ordinals and Hom sets below are in the fixed indexing universe. Choose a representing complex $P_G$ for each $G\\in S$, possible because derived localization has complexes as its objects [def-weil-abstract-derived-category].",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-kun-grothendieck-derived-coproducts",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Grothendieck module category and termwise coproduct setup; Stacks derived.tex Tag 07D9, via the cited nodes"
+   }
+  },
+  {
+   "text": "Choose $\\kappa$ from [lem-pur-kinjective-acyclic-quotient-complexes-bounded-size]. By [lem-pur-kinjective-set-iso-classes-bounded-size], representatives of objects having subobject-size at most $\\kappa$ form a set. Integer-indexed choices of these representatives and choices of their differentials form a set, since every Hom is a set. Taking those satisfying the complex, bounded-above and acyclicity conditions gives a set $\\mathcal M$ representing every bounded-above acyclic complex with term sizes at most $\\kappa$. The subobjects $N\\subseteq U$ likewise form a set by [lem-pur-kinjective-set-of-subobjects]. For an object $V$ define $D^n(V)$ to have $V$ in degrees $n,n+1$, differential $1_V$, and zero elsewhere. Define a set $J$ of monomorphisms of complexes consisting of $D^n(N)\\hookrightarrow D^n(U)$ for all these $N,n$, and $M\\hookrightarrow\\operatorname{Cone}(1_M)$ for $M\\in\\mathcal M$. The latter is the inclusion of the unshifted summand under the cone convention [def-weil-abstract-derived-category]. Each cokernel of a map in $J$ is acyclic: it is respectively the contractible disk $D^n(U/N)$, or $M[1]$.",
+   "uses": [
+    "lem-pur-kinjective-acyclic-quotient-complexes-bounded-size",
+    "lem-pur-kinjective-set-iso-classes-bounded-size",
+    "lem-pur-kinjective-set-of-subobjects",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tags 079K (lemma-acyclic-quotient-complexes-bounded-size), 079E (lemma-set-iso-classes-bounded-size), 0E8N (lemma-set-of-subobjects); explicit disk and cone test maps"
+   }
+  },
+  {
+   "text": "Suppose a complex $I$ has the extension property against $J$: every chain map from a domain in $J$ to $I$ extends across its codomain. A chain map $D^n(V)\\to I$ is uniquely a map $V\\to I^n$, with its degree $n+1$ component forced to be $d_I^n$ times that map. The disk tests therefore say that every $N\\to I^n$ extends to $U$. By [lem-pur-kinjective-characterize-injective], all $I^n$ are injective. The other tests make every map $M\\to I$ extend over $\\operatorname{Cone}(1_M)$, hence nullhomotopic, because the identity cone is contractible (the off-diagonal identity gives its contracting homotopy). Transporting across the chosen complex isomorphisms gives this for every bounded-above acyclic complex of term size at most $\\kappa$. Thus [lem-pur-kinjective-characterize-K-injective], with both bounded-size hypotheses supplied by the choice of $\\kappa$, makes $I$ K-injective.",
+   "uses": [
+    "lem-pur-kinjective-characterize-injective",
+    "lem-pur-kinjective-characterize-K-injective",
+    "lem-pur-kinjective-acyclic-quotient-complexes-bounded-size"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tags 079G (lemma-characterize-injective) and 079L (lemma-characterize-K-injective)"
+   }
+  },
+  {
+   "text": "Enlarge $J$ to a set $I_S$ by adjoining $P_G[k]\\hookrightarrow\\operatorname{Cone}(1_{P_G[k]})$ for every $G\\in S$ and integer $k\\geq0$. All are monomorphisms. Choose an uncountable regular cardinal $\\mu$ greater than the subobject-size of every degree of every domain in $I_S$; there are only a set of such degrees. For a continuous $\\mu$-chain of monomorphisms of complexes, [prop-pur-kinjective-objects-small] factors each component of a map from one of these domains through a stage. The supremum of the countably many stages is below $\\mu$; at a common stage the components commute with the differentials because the maps from that stage to the colimit are monic. The same monicity makes two chain maps equal at a common stage whenever they have equal colimit images. Thus Hom from every domain preserves these chain colimits. Coproducts of monomorphisms are monic: finite sums are exact, and the arbitrary sum is their filtered colimit, exact by AB5. Pushouts preserve monomorphisms in an abelian category, and AB5 preserves monomorphisms at limit stages. Consequently all $I_S$-cell chains meet this smallness hypothesis.",
+   "uses": [
+    "prop-pur-kinjective-objects-small",
+    "def-sp-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079F (proposition-objects-are-small), with componentwise chain-map argument; AB5 in the Grothendieck definition"
+   }
+  },
+  {
+   "text": "Represent the given $K$ by a complex $K_0$. Complexes have small colimits computed degreewise: take the colimit of the terms and induce the differentials from their compatible structure maps, obtaining $d^2=0$ and the colimit universal property degreewise. Hence [lem-coef-small-object-cell-factorization] applies to $I_S$ with the regular cardinal just chosen. Factor $K_0\\to0$ as $K_0\\hookrightarrow I\\to0$, with the first map an $I_S$-cell map and the second having right lifting against $I_S$. Write the cell chain as $(K_\\beta)_{\\beta\\leq\\theta}$, starting at $K_0$ and ending at $I$. All its maps are degreewise monic by the preceding step. Its successor cokernels are coproducts of the cokernels of the attached maps: pushout of a monomorphism preserves its cokernel, and coproducts preserve cokernels by their universal property. Thus they are coproducts of acyclic complexes and complexes $P_G[k+1]$, $k\\geq0$.",
+   "uses": [
+    "lem-coef-small-object-cell-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-artin-gabber-affine-curve.proof.md",
+    "place": "Small-object argument (existing Mathlib leaf) with the explicitly verified smallness and cocompleteness hypotheses"
+   }
+  },
+  {
+   "text": "Put $E_\\beta=(K_\\beta/K_0)[-1]$ as a complex. These form a continuous chain of monomorphisms with $E_0=0$; quotient by the fixed subcomplex commutes with the limit colimits since cokernels are colimits. Its successor quotients are the preceding successor cokernels shifted by $[-1]$. Their derived images lie in $\\mathcal U$: the shifted acyclic summands become zero, and $Q(P_G[k+1][-1])\\cong G[k]\\in\\mathcal U$. Termwise coproducts give derived coproducts by [lem-kun-grothendieck-derived-coproducts]. Apply [lem-per-preaisle-transfinite-monomorphism-closure] to this filtration and $\\mathcal U$, which has exactly its required zero, extension, positive-shift and coproduct closure. We get $A:=Q((I/K_0)[-1])\\in\\mathcal U$. Applying the lemma to this shifted quotient filtration is essential: it does not assume that $\\mathcal U$ is closed under $[-1]$.",
+   "uses": [
+    "lem-kun-grothendieck-derived-coproducts",
+    "lem-per-preaisle-transfinite-monomorphism-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-artin-gabber-affine-curve.proof.md",
+    "place": "Cell-filtration quotient calculation and transfinite preaisle closure; agent argument"
+   }
+  },
+  {
+   "text": "Right lifting of $I\\to0$ against $J$ is exactly the extension property of Step 3, so $I$ is K-injective. Right lifting against the additional identity-cone inclusions says every chain map $P_G[k]\\to I$ extends across its contractible identity cone, and is therefore nullhomotopic. By [lem-weil-pbc-kinjective-hom-derived], the homotopy-to-derived Hom map with target $I$ is bijective, with no boundedness hypothesis on $P_G[k]$. Thus $B:=QI$ satisfies $\\operatorname{Hom}(G[k],B)=0$ for all $G\\in S$, $k\\geq0$.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "derived.tex Tag 070I (lemma-K-injective), with the explicit cone-extension nullhomotopy test"
+   }
+  },
+  {
+   "text": "For any $B$ satisfying the generator vanishing, define $\\mathcal W_B=\\{X:\\operatorname{Hom}(X[k],B)=0\\text{ for all }k\\geq0\\}$. It contains zero and $S$, is strictly full, and is closed under $[1]$. It is closed under small coproducts since shifting commutes with coproducts (the shift has its inverse as an adjoint) and Hom out of a coproduct is the product of Hom sets. It is closed under summands by composing with the splitting maps. For a distinguished $X\\to Y\\to Z\\to X[1]$ with $X,Z\\in\\mathcal W_B$, any $Y[k]\\to B$ restricts to zero on $X[k]$, so factors through $Z[k]$ by [lem-weil-pbc-hom-out-of-triangle-exact], and is zero. Therefore $\\mathcal U\\subseteq\\mathcal W_B$ by the defining minimality of $\\mathcal U$, and $B\\in\\mathcal U^\\perp$. Conversely, $G[k]\\in\\mathcal U$ for $G\\in S$, $k\\geq0$, so every $B\\in\\mathcal U^\\perp$ satisfies the generator vanishing. This proves the full stated generator test and applies in particular to the $B$ constructed above.",
+   "uses": [
+    "lem-weil-pbc-hom-out-of-triangle-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "derived.tex Tag 0149 (lemma-representable-homological), contravariant Hom exactness; orthogonal closure argument"
+   }
+  },
+  {
+   "text": "The short exact sequence of complexes $0\\to K_0\\to I\\to I/K_0\\to0$ gives a quasi-isomorphism $\\operatorname{Cone}(K_0\\to I)\\to I/K_0$ by [lem-pc-cone-short-exact-quasi-iso]. The cone-triangle convention of [def-weil-abstract-derived-category] and its inverse rotation therefore give a distinguished triangle $A\\to K\\to B\\to A[1]$, with the $A$ of Step 6 and the $B$ of Step 7. We have proved $A\\in\\mathcal U$ and $B\\in\\mathcal U^\\perp$. Finally $\\mathcal U[1]\\subseteq\\mathcal U$ by definition, and $\\mathcal U^\\perp[-1]\\subseteq\\mathcal U^\\perp$ since $\\operatorname{Hom}(X,B[-1])\\cong\\operatorname{Hom}(X[1],B)=0$ for $X\\in\\mathcal U$. Hence $\\mathcal U^\\perp\\subseteq\\mathcal U^\\perp[1]$, the required lower-class shift condition. Orthogonality is its defining vanishing, and the constructed triangle is the remaining axiom of [def-weil-t-structure] for $(\\mathcal U,\\mathcal U^\\perp[1])$.",
+   "uses": [
+    "lem-pc-cone-short-exact-quasi-iso",
+    "def-weil-abstract-derived-category",
+    "def-weil-t-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "derived.tex Tags 0152/0949 (cone versus short exact quotient); t-structure axioms"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-kun-grothendieck-derived-coproducts",
+  "def-weil-abstract-derived-category",
+  "lem-pur-kinjective-acyclic-quotient-complexes-bounded-size",
+  "lem-pur-kinjective-set-iso-classes-bounded-size",
+  "lem-pur-kinjective-set-of-subobjects",
+  "lem-pur-kinjective-characterize-injective",
+  "lem-pur-kinjective-characterize-K-injective",
+  "prop-pur-kinjective-objects-small",
+  "def-sp-grothendieck-abelian",
+  "lem-coef-small-object-cell-factorization",
+  "lem-per-preaisle-transfinite-monomorphism-closure",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-pc-cone-short-exact-quasi-iso",
+  "def-weil-t-structure"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-artin-gabber-affine-curve.proof.md",
+  "place": "Abstract set-generated t-structure input beneath the Step 2 perverse-heart existence claim; explicit small-object/disk-and-cone construction using Stacks injectives.tex Tags 079E, 079F, 079G, 079K and 079L. ILO XVII 5.2 motivates the auxiliary theorem but contains no proof of it."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +182,38 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsGE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, if $ X $ belongs to the $ \\\\mathcal{G}_n $ family of the T-structure (i.e., is isomorphic to a coc\"}\n  {\"name\": \"CategoryTheory.OrthogonalReflection.isRightAdjoint_ι\", \"module\": \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (W : CategoryTheory.MorphismProperty C)\\n  [inst_1 : CategoryTheory.Limits.HasPushouts C]\\n  [inst_2 : ∀ (Z : C), CategoryTheory.Limits.HasCoproduct CategoryTheory.OrthogonalReflection.D₁.obj₁]\\n  [inst_3 : ∀ (Z : C), CategoryTheory.Limits.HasCop\", \"doc\": \"The inclusion functor $ \\\\iota $ from the full subcategory of objects local with respect to a morphism property $ W $ into the original category $ \\\\mathcal{C} $ admits a left adjoint. This establishes \"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ) [hX : X.IsLE n],\\n  ∃ K, ∃ (_ : K.IsStrictlyLE n), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$ that belongs to the left subcategory $\\\\mathcal{L}_n$ of the T-structure at degree $n$, there exists a cochain complex $K\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Basic\", \"type\": \"(C : Type u) → [inst : CategoryTheory.Category.{v, u} C] → [inst_1 : CategoryTheory.Abelian C] → HasDerivedCategory C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"CategoryTheory.MorphismProperty.isRightAdjoint_ι_isLocal\", \"module\": \"Mathlib/CategoryTheory/Presentable/OrthogonalReflection\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (W : CategoryTheory.MorphismProperty C) (κ : Cardinal.{w})\\n  [inst_1 : Fact κ.IsRegular] [CategoryTheory.MorphismProperty.IsSmall.{w, v, u} W]\\n  [CategoryTheory.LocallySmall.{w, v, u} C],\\n  (∀ ⦃X Y : C⦄ (f : X ⟶ Y), W f → CategoryTheory.IsCard\", \"doc\": \"Let $\\\\mathcal{C}$ be a locally small category with all colimits, and let $W$ be a small morphism property in $\\\\mathcal{C}$. Suppose $\\\\kappa$ is a regular cardinal such that every morphism in $W$ has $\"}\n  {\"name\": \"CategoryTheory.Abelian.isoModSerre_kernel_eq_leftBousfield_W_of_rightAdjoint\", \"module\": \"Mathlib/CategoryTheory/Abelian/SerreClass/Bousfield\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Abelian C]\\n  [inst_3 : CategoryTheory.Abelian D] {G : CategoryTheory.Functor D C}\\n  [inst_4 : CategoryTheory.Limits.PreservesFiniteLimits G] [inst_\", \"doc\": \"Given abelian categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, a right adjoint functor $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ preserving finite limits and colimits, and a fully faithful left adjoint $F : \\\\mathc\"}\n  {\"name\": \"CategoryTheory.ObjectProperty.isLocalization_isColocal\", \"module\": \"Mathlib/CategoryTheory/Localization/Bousfield\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C}\\n  (adj : G ⊣ F) [G.Full] [G.Faithful],\\n  F.IsLocalization (CategoryTheory.ObjectProperty.isColocal fun x =\", \"doc\": \"The functor $ F $ is a localization with respect to the colocal morphism property defined by objects in the image of the object mapping of $ G $. Specifically, a morphism $ g $ satisfies this property\"}\n",
    "date": "2026-10-18",
    "verdict": "no match: inspected the returned signatures; ordinary derived t-structures, module local cohomology, sheaf generators without support constraints, and open immersions do not state this result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A set of objects in the unbounded derived category of sheaves of modules on a small ringed site generates a t-structure by closure under positive shifts extensions coproducts and direct summands",
+   "results": "8 hits: CategoryTheory.Triangulated.TStructure.mk; DerivedCategory.TStructure.t; CategoryTheory.Triangulated.TStructure.ge; ObjectProperty triangulated closure and t-structure recursors.",
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary derived t-structures and subgroupoid generation do not state the general set-generated aisle assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.TStructure, preaisle, localizing, orthogonal",
+   "results": "0 hits; unknown identifier DerivedCategory.TStructure",
+   "date": "2026-10-19",
+   "verdict": "no match: unknown identifier in this pattern; valid TStructure search from the earlier attempt is retained."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The smallest cocomplete preaisle generated by a set in an unbounded derived category of a Grothendieck abelian category is an aisle",
+   "results": "8 hits: DerivedCategory.TStructure.t; CategoryTheory.IsGrothendieckAbelian.hasExt; DerivedCategory.IsGE; DerivedCategory.IsLE; ordinary boundedness/representative declarations.",
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary derived t-structures and subgroupoid generation do not state the general set-generated aisle assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "preaisle|aisle|set.?generated|TStructure.*generated",
+   "results": "2 hits: Mathlib/CategoryTheory/Groupoid/Subgroupoid.lean:347,369 subset_generated.",
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary derived t-structures and subgroupoid generation do not state the general set-generated aisle assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-perversity-localization-calculus",
@@ -77,5 +237,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-set-generated-sheaf-aisle",
+  "worker": "stage1",
+  "summary": "Proved the unchanged arbitrary-ring-sheaf statement by a set of disk and cone tests and the existing small-object Mathlib leaf. Verified domain smallness componentwise, K-injectivity by the existing bounded acyclic tests, and the generator orthogonal test explicitly. One new statement-only lemma isolates transfinite preaisle closure; no injective model structure, enhanced-category equivalence or SGA input is assumed. Prior work and logged searches retained.",
+  "blueprint": "Realizes the middle-t-structure input under ancestor lem-per-artin-gabber-affine-curve Step 2, along the imported via chain through ILO XVII 5.2 and perversity-localization-calculus. This auxiliary node is not the unit statement, so unit realization is unchanged. Whole-blueprint searches for preaisle, cocomplete, transfinite and set generated found no equal blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-grothendieck-derived-coproducts",
+    "why": "Generic Termwise coproducts in a Grothendieck derived category input to the explicit cellular truncation construction; no node of this perverse-curve unit supplies that general categorical fact."
+   },
+   {
+    "node": "lem-pur-kinjective-acyclic-quotient-complexes-bounded-size",
+    "why": "Generic Bounded-size generators for acyclic complexes input to the explicit cellular truncation construction; no node of this perverse-curve unit supplies that general categorical fact."
+   },
+   {
+    "node": "lem-pur-kinjective-set-iso-classes-bounded-size",
+    "why": "Generic Set of bounded-size object isomorphism classes input to the explicit cellular truncation construction; no node of this perverse-curve unit supplies that general categorical fact."
+   },
+   {
+    "node": "lem-pur-kinjective-characterize-injective",
+    "why": "Generic Baer criterion using a generator input to the explicit cellular truncation construction; no node of this perverse-curve unit supplies that general categorical fact."
+   },
+   {
+    "node": "lem-pur-kinjective-characterize-K-injective",
+    "why": "Generic Criterion for K-injectivity input to the explicit cellular truncation construction; no node of this perverse-curve unit supplies that general categorical fact."
+   },
+   {
+    "node": "prop-pur-kinjective-objects-small",
+    "why": "Generic Smallness of objects in a Grothendieck category input to the explicit cellular truncation construction; no node of this perverse-curve unit supplies that general categorical fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-grothendieck-derived-coproducts",
+  "lem-pur-kinjective-acyclic-quotient-complexes-bounded-size",
+  "lem-pur-kinjective-set-iso-classes-bounded-size",
+  "lem-pur-kinjective-characterize-injective",
+  "lem-pur-kinjective-characterize-K-injective",
+  "prop-pur-kinjective-objects-small"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-5b03af1a0",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-5b03af1a0 (reviewer sub-agent of L); spot-checked: I read the whole item and the new node, every cited statement, ILO XVII 5.2 (PDF p.293), and Step 2 of the blueprint ancestor. Item statement: unchanged from Q24 and true. It is the Alonso–Jeremías–Souto set-generated aisle theorem. I checked the t-structure sign for (U, U^⊥[1]) against all three axioms of def-weil-t-structure. Steps: (2) the test set is a set (079E, wellPowered), and the disk and identity-cone cokernels are acyclic. (3) disk tests are the Baer condition at each degree (079G). Cone extension is the same as a null-homotopy, so 079L applies with both size hypotheses from 079K. (4) componentwise 079F smallness holds at an uncountable regular μ. Monos are preserved by coproducts (AB4), pushouts and limit stages (AB5), so the hypothesis of the small-object leaf holds. (5) cell factorization; successor cokernels are acyclic complexes or P_G[k+1]. (6) shifting to E_β=(K_β/K_0)[-1] gives successor quotients ⊕G[k], k≥0, in U, and avoids needing U closed under [-1]. (7) K-injective Hom bijection with no boundedness. (8) W_B is closed under zero, S, [1], coproducts, summands and extensions (0149), so minimality applies. (9) the cone comparison (0152) and inverse rotation give the triangle. New node lem-per-preaisle-transfinite-monomorphism-closure: statement only, self-contained, with 4 kinds of search, correct blueprint from/via, and created.item set. It is true: filtered colimits in a Grothendieck category are ∞-colimits, and a subcategory closed under coproducts, [1] and extensions is closed under all ∞-colimits. Edge cases θ=0, a single successor, countable θ (telescope) and S=∅ all check. It is not a clause of the item. Duplicate search (rg over preaisle/aisle/hocolim) found only non-equal nodes: kun sequential hocolim, etale-support-aisle-generators, cotorsion smallness. Route: only lem-kun-grothendieck-derived-coproducts is outside the route, and it is declared in tool_uses; I accept it as generic. No SGA is used. Advisory: the item's inherited blueprint.from.place says 'Proof Step 1', but the middle t-structure input is Step 2 of lem-per-artin-gabber-affine-curve. This delivery did not change that field. I changed no files. Details are in review.md."
  }
 }
