@@ -3863,6 +3863,7 @@ public import WeilConjectures.AlgebraicGeometry.GeometricFibreDimension
 public import WeilConjectures.AlgebraicGeometry.GeometricFibreExchangeGerms
 public import WeilConjectures.AlgebraicGeometry.GeometricFibreExchangeRepresentative
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius
+public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.FiberMapCongr
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.FiberMapPow
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.Irreducible
 public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.Points
@@ -7738,7 +7739,9 @@ public import WeilConjectures.CategoryTheory.Monoidal.Mod.Cofree
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Curry
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Evaluation
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.EvaluationPairing
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.IhomComp
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.IhomDual
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.IhomTransport
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.InternalHom
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.Limits
 public import WeilConjectures.CategoryTheory.Monoidal.Mod.MapIhom
@@ -11126,6 +11129,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.Ring
 public import WeilConjectures.SixFunctors.ProEtale.Adic.SplitCovering
 public import WeilConjectures.SixFunctors.ProEtale.Adic.StalkEvaluation
 public import WeilConjectures.SixFunctors.ProEtale.Adic.StalkIhomDual
+public import WeilConjectures.SixFunctors.ProEtale.Adic.TensorLeftInvertible
 public import WeilConjectures.SixFunctors.ProEtale.Adic.TensorPowSection
 public import WeilConjectures.SixFunctors.ProEtale.Adic.TrivialDescent
 public import WeilConjectures.SixFunctors.ProEtale.Adic.TrivialRepresentation
@@ -11496,7 +11500,14 @@ public import WeilConjectures.WeilObject.Defs
 public import WeilConjectures.WeilSheaf.AffineLineCohomology
 public import WeilConjectures.WeilSheaf.ArtinSchreierDual
 public import WeilConjectures.WeilSheaf.ArtinSchreierFrobenius
+public import WeilConjectures.WeilSheaf.ArtinSchreierFunctions
 public import WeilConjectures.WeilSheaf.ArtinSchreierInertia
+public import WeilConjectures.WeilSheaf.ArtinSchreierIsotypic
+public import WeilConjectures.WeilSheaf.ArtinSchreierMul
+public import WeilConjectures.WeilSheaf.ArtinSchreierMulGeometric
+public import WeilConjectures.WeilSheaf.ArtinSchreierNeg
+public import WeilConjectures.WeilSheaf.ArtinSchreierPlane
+public import WeilConjectures.WeilSheaf.ArtinSchreierPullback
 public import WeilConjectures.WeilSheaf.ArtinSchreierPurity
 public import WeilConjectures.WeilSheaf.ArtinSchreierTrace
 public import WeilConjectures.WeilSheaf.ArtinSchreierTrivialization
@@ -11514,6 +11525,7 @@ public import WeilConjectures.WeilSheaf.ComplexWeights
 public import WeilConjectures.WeilSheaf.Constant
 public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 public import WeilConjectures.WeilSheaf.ConstantTwistWeight
+public import WeilConjectures.WeilSheaf.CurryIsoCriterion
 public import WeilConjectures.WeilSheaf.Curve
 public import WeilConjectures.WeilSheaf.CurveEndpoints
 public import WeilConjectures.WeilSheaf.CurveTopCohomology
@@ -11557,6 +11569,14 @@ public import WeilConjectures.WeilSheaf.GeometricallyConstant
 public import WeilConjectures.WeilSheaf.GrothendieckLefschetz
 public import WeilConjectures.WeilSheaf.HomologySequence
 public import WeilConjectures.WeilSheaf.HomologyShift
+public import WeilConjectures.WeilSheaf.IhomCurry
+public import WeilConjectures.WeilSheaf.IhomLisse.Comp
+public import WeilConjectures.WeilSheaf.IhomLisse.CompWeil
+public import WeilConjectures.WeilSheaf.IhomLisse.UpperStar
+public import WeilConjectures.WeilSheaf.IhomLisse.UpperStarComparison
+public import WeilConjectures.WeilSheaf.IhomLisse.UpperStarDual
+public import WeilConjectures.WeilSheaf.Isotypic
+public import WeilConjectures.WeilSheaf.IsotypicPullback
 public import WeilConjectures.WeilSheaf.LFunction
 public import WeilConjectures.WeilSheaf.LSeries
 public import WeilConjectures.WeilSheaf.LisseDuality
@@ -11589,6 +11609,7 @@ public import WeilConjectures.WeilSheaf.ProperCohomology.OpenImmersion
 public import WeilConjectures.WeilSheaf.RealPurity
 public import WeilConjectures.WeilSheaf.Realizable
 public import WeilConjectures.WeilSheaf.ShiftedSheaf
+public import WeilConjectures.WeilSheaf.SplitTorsor
 public import WeilConjectures.WeilSheaf.Stalk
 public import WeilConjectures.WeilSheaf.StalkCharpoly
 public import WeilConjectures.WeilSheaf.StalkConstantSheaf
@@ -11602,6 +11623,7 @@ public import WeilConjectures.WeilSheaf.StalkIso
 public import WeilConjectures.WeilSheaf.StalkMonoidal
 public import WeilConjectures.WeilSheaf.StalkOpenImmersion
 public import WeilConjectures.WeilSheaf.StalkPairing
+public import WeilConjectures.WeilSheaf.StalkRationalPoint
 public import WeilConjectures.WeilSheaf.StalkTateTwist
 public import WeilConjectures.WeilSheaf.StalkTensor
 public import WeilConjectures.WeilSheaf.StalkTensorTrace
@@ -11614,6 +11636,7 @@ public import WeilConjectures.WeilSheaf.TateTwistCohomology
 public import WeilConjectures.WeilSheaf.Tensor
 public import WeilConjectures.WeilSheaf.TensorObjPairing
 public import WeilConjectures.WeilSheaf.TensorPower
+public import WeilConjectures.WeilSheaf.TorsorPairing
 public import WeilConjectures.WeilSheaf.TraceFunction
 public import WeilConjectures.WeilSheaf.TraceFunctionCongr
 public import WeilConjectures.WeilSheaf.TraceFunctionOps
@@ -11623,7 +11646,9 @@ public import WeilConjectures.WeilSheaf.TraceIsomorphism
 public import WeilConjectures.WeilSheaf.TraceSeries
 public import WeilConjectures.WeilSheaf.Triangle
 public import WeilConjectures.WeilSheaf.UpperStarComp
+public import WeilConjectures.WeilSheaf.UpperStarConstant
 public import WeilConjectures.WeilSheaf.UpperStarExact
+public import WeilConjectures.WeilSheaf.UpperStarId
 public import WeilConjectures.WeilSheaf.UpperStarLowerStar
 public import WeilConjectures.WeilSheaf.UpperStarLowerStarAdjunction
 public import WeilConjectures.WeilSheaf.UpperStarLowerStarAdjunctionWeil
