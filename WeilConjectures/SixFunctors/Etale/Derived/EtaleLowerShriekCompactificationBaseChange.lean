@@ -42,11 +42,28 @@ namespace Compactification
 variable {X Y X' Y' : Scheme.{u}} {e : X ⟶ Y} {g : Y' ⟶ Y} {e' : X' ⟶ Y'} {g' : X' ⟶ X}
   (sq : IsPullback g' e' e g) (c : Compactification e)
 
+/-- The projection `Z' = Z ×_Y Y' ⟶ Z` of the base-changed compactification, typed with source
+the scheme of `c.ofIsPullback sq`. -/
+noncomputable abbrev ofIsPullbackFst : (c.ofIsPullback sq).Z ⟶ c.Z :=
+  pullback.fst c.g g
+
+/-- `AlgebraicGeometry.Compactification.isPullback_i_ofIsPullback`, with the projection typed by
+`AlgebraicGeometry.Compactification.ofIsPullbackFst`. -/
+lemma isPullback_i_ofIsPullback' :
+    IsPullback g' (c.ofIsPullback sq).i c.i (c.ofIsPullbackFst sq) :=
+  c.isPullback_i_ofIsPullback sq
+
+/-- The fibre product square of the base-changed compactification, with its projection typed by
+`AlgebraicGeometry.Compactification.ofIsPullbackFst`. -/
+lemma isPullback_ofIsPullbackFst :
+    IsPullback (c.ofIsPullbackFst sq) (c.ofIsPullback sq).g c.g g :=
+  IsPullback.of_hasPullback c.g g
+
 /-- The map `Z' ×_{Y'} X' ⟶ Z ×_Y X` between the fibre products attached to a compactification
 and to its base change. -/
 noncomputable def selfGraphBaseChange :
     pullback (c.ofIsPullback sq).g e' ⟶ pullback c.g e :=
-  pullback.lift (pullback.fst _ _ ≫ pullback.fst c.g g) (pullback.snd _ _ ≫ g') (by
+  pullback.lift (pullback.fst _ _ ≫ c.ofIsPullbackFst sq) (pullback.snd _ _ ≫ g') (by
     have h₁ := pullback.condition (f := (c.ofIsPullback sq).g) (g := e')
     have h₂ := pullback.condition (f := c.g) (g := g)
     simp only [ofIsPullback_g] at h₁
@@ -55,7 +72,7 @@ noncomputable def selfGraphBaseChange :
 @[reassoc (attr := simp)]
 lemma selfGraphBaseChange_fst :
     c.selfGraphBaseChange sq ≫ pullback.fst c.g e =
-      pullback.fst (c.ofIsPullback sq).g e' ≫ pullback.fst c.g g :=
+      pullback.fst (c.ofIsPullback sq).g e' ≫ c.ofIsPullbackFst sq :=
   pullback.lift_fst _ _ _
 
 @[reassoc (attr := simp)]
@@ -172,6 +189,12 @@ lemma compactificationEtaleGraphIso_hom_app
     Functor.associator_inv_app]
   erw [Category.comp_id]
 
+lemma compactificationEtaleGraphMap_app
+    (N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (compactificationEtaleGraphMap Λ e c).app N =
+      clopenTransfer Λ ((compactificationEtaleGraphIso Λ e c).hom.app N) :=
+  rfl
+
 lemma compactificationEtaleUnit_app
     (N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (compactificationEtaleUnit Λ e c).app N =
@@ -211,11 +234,11 @@ lemma compactificationEtaleGraphIso_baseChange
       L(((c.ofIsPullback sq).selfGraph)^*[ModuleCat.{u + 1} Λ]).map
         ((derivedSquareUpperStarIso _ (⟨c.selfGraphBaseChange_fst sq⟩ :
             CommSq (c.selfGraphBaseChange sq) (pullback.fst (c.ofIsPullback sq).g e')
-              (pullback.fst c.g e) (pullback.fst c.g g))).inv.app
+              (pullback.fst c.g e) (c.ofIsPullbackFst sq))).inv.app
             (D((c.i)_!open[ModuleCat.{u + 1} Λ]).obj N) ≫
           L((pullback.fst (c.ofIsPullback sq).g e')^*[ModuleCat.{u + 1} Λ]).map
             ((derivedOpenImmersionLowerShriekBaseChangeIso _
-              (c.isPullback_i_ofIsPullback sq)).inv.app N)) =
+              (c.isPullback_i_ofIsPullback' sq)).inv.app N)) =
     (compactificationEtaleGraphIso Λ e' (c.ofIsPullback sq)).hom.app
       (L((g')^*[ModuleCat.{u + 1} Λ]).obj N) := by
   have : IsOpenImmersion c.i := c.isOpenImmersion
@@ -240,23 +263,104 @@ lemma compactificationEtaleGraphIso_baseChange
     simp [derivedSquareUpperStarIso]
   -- the open immersions `j` and `j'`
   have hJ := unit_map_derivedOpenImmersionLowerShriekBaseChangeIso' Λ
-    (c.isPullback_i_ofIsPullback sq) N
+    (c.isPullback_i_ofIsPullback' sq) N
   have hpost := leftDerivedUpperStarComp_square_coherence (ModuleCat.{u + 1} Λ)
     (c.isPullback_selfGraph sq).toCommSq
     (⟨c.selfGraphBaseChange_fst sq⟩ : CommSq (c.selfGraphBaseChange sq)
-      (pullback.fst (c.ofIsPullback sq).g e') (pullback.fst c.g e) (pullback.fst c.g g))
-    (c.isPullback_i_ofIsPullback sq).toCommSq c.selfGraph_fst.symm
+      (pullback.fst (c.ofIsPullback sq).g e') (pullback.fst c.g e) (c.ofIsPullbackFst sq))
+    (c.isPullback_i_ofIsPullback' sq).toCommSq c.selfGraph_fst.symm
     (c.ofIsPullback sq).selfGraph_fst.symm (D((c.i)_!open[ModuleCat.{u + 1} Λ]).obj N)
   have hnat := (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) (c.ofIsPullback sq).selfGraph
     (pullback.fst (c.ofIsPullback sq).g e') (c.ofIsPullback sq).i
     (c.ofIsPullback sq).selfGraph_fst.symm).hom.naturality
-      ((derivedOpenImmersionLowerShriekBaseChangeIso _ (c.isPullback_i_ofIsPullback sq)).inv.app N)
+      ((derivedOpenImmersionLowerShriekBaseChangeIso _ (c.isPullback_i_ofIsPullback' sq)).inv.app N)
   rw [compactificationEtaleGraphIso_hom_app, compactificationEtaleGraphIso_hom_app]
   simp only [Functor.map_comp, Category.assoc]
   dsimp at hnat
   rw [reassoc_of% hpre', reassoc_of% hpost, ← hnat, ← reassoc_of% hJ,
     ← Functor.map_comp_assoc, Iso.hom_inv_id_app]
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
+
+/-- The "restrict to the graph and extend by zero" maps commute with base change. -/
+lemma compactificationEtaleGraphMap_baseChange
+    (N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (derivedSquareUpperStarIso _ (c.isPullback_selfGraphBaseChange sq).toCommSq).hom.app N ≫
+      L((c.selfGraphBaseChange sq)^*[ModuleCat.{u + 1} Λ]).map
+        ((compactificationEtaleGraphMap Λ e c).app N) ≫
+      (derivedSquareUpperStarIso _ (⟨c.selfGraphBaseChange_fst sq⟩ :
+          CommSq (c.selfGraphBaseChange sq) (pullback.fst (c.ofIsPullback sq).g e')
+            (pullback.fst c.g e) (c.ofIsPullbackFst sq))).inv.app
+          (D((c.i)_!open[ModuleCat.{u + 1} Λ]).obj N) ≫
+      L((pullback.fst (c.ofIsPullback sq).g e')^*[ModuleCat.{u + 1} Λ]).map
+        ((derivedOpenImmersionLowerShriekBaseChangeIso _
+          (c.isPullback_i_ofIsPullback' sq)).inv.app N) =
+    (compactificationEtaleGraphMap Λ e' (c.ofIsPullback sq)).app
+      (L((g')^*[ModuleCat.{u + 1} Λ]).obj N) := by
+  rw [compactificationEtaleGraphMap_app, compactificationEtaleGraphMap_app]
+  rw [leftDerivedUpperStar_map_clopenTransfer Λ c.selfGraph (c.isPullback_selfGraph sq),
+    ← clopenTransfer_comp]
+  congr 1
+  simp only [Category.assoc]
+  exact compactificationEtaleGraphIso_baseChange Λ sq c N
+
+/-- The compact-support base change `Ex_!(c)` at `N`, with the squares of the base-changed
+compactification typed by its scheme. -/
+lemma rightDerivedLowerShriekOfCompactificationBaseChangeMap_app_eq
+    (N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    (rightDerivedLowerShriekOfCompactificationBaseChangeMap (ModuleCat.{u + 1} Λ) sq c).app N =
+      (derivedBaseChangeMap (ModuleCat.{u + 1} Λ)
+          (c.isPullback_ofIsPullbackFst sq).toCommSq).app
+          (D((c.i)_!open[ModuleCat.{u + 1} Λ]).obj N) ≫
+        R(((c.ofIsPullback sq).g)_*[ModuleCat.{u + 1} Λ]).map
+          ((derivedOpenImmersionLowerShriekBaseChangeIso _
+            (c.isPullback_i_ofIsPullback' sq)).inv.app N) := by
+  simp only [rightDerivedLowerShriekOfCompactificationBaseChangeMap, NatTrans.comp_app,
+    Functor.associator_hom_app, Functor.associator_inv_app, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app, Category.id_comp]
+  erw [Category.comp_id]
+
+set_option maxHeartbeats 1000000 in
+-- the derived functors involved are large terms
+/-- **The candidate unit of `Rf_!(c) ⊣ Le^*` commutes with base change**: for a cartesian square
+`g' ≫ e = e' ≫ g` and the base change `c'` of the compactification `c`, the unit at
+`Lg'^* N` for `c'` is `Lg'^*` of the unit at `N` for `c`, followed by the canonical isomorphism
+`Lg'^* Le^* ≅ Le'^* Lg^*` and `Le'^*` of the compact-support base change `Ex_!(c)`. -/
+theorem compactificationEtaleUnit_baseChange
+    (N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    L((g')^*[ModuleCat.{u + 1} Λ]).map ((compactificationEtaleUnit Λ e c).app N) ≫
+      (derivedSquareUpperStarIso _ sq.toCommSq).inv.app (Rf_!(c)[ModuleCat.{u + 1} Λ].obj N) ≫
+      L((e')^*[ModuleCat.{u + 1} Λ]).map
+        ((rightDerivedLowerShriekOfCompactificationBaseChangeMap _ sq c).app N) =
+    (compactificationEtaleUnit Λ e' (c.ofIsPullback sq)).app
+      (L((g')^*[ModuleCat.{u + 1} Λ]).obj N) := by
+  have hcube := derivedBaseChangeMap_cube (ModuleCat.{u + 1} Λ)
+    (IsPullback.of_hasPullback c.g e).toCommSq (c.isPullback_ofIsPullbackFst sq).toCommSq
+    (c.isPullback_selfGraphBaseChange sq).toCommSq
+    (IsPullback.of_hasPullback (c.ofIsPullback sq).g e').toCommSq sq.toCommSq
+    (⟨c.selfGraphBaseChange_fst sq⟩ : CommSq (c.selfGraphBaseChange sq)
+      (pullback.fst (c.ofIsPullback sq).g e') (pullback.fst c.g e) (c.ofIsPullbackFst sq))
+    (D((c.i)_!open[ModuleCat.{u + 1} Λ]).obj N)
+  have n₄ := (derivedBaseChangeMap (ModuleCat.{u + 1} Λ)
+    (IsPullback.of_hasPullback (c.ofIsPullback sq).g e').toCommSq).naturality
+      ((derivedOpenImmersionLowerShriekBaseChangeIso (ModuleCat.{u + 1} Λ)
+        (c.isPullback_i_ofIsPullback' sq)).inv.app N)
+  have n₃ := (derivedBaseChangeMap (ModuleCat.{u + 1} Λ)
+    (c.isPullback_selfGraphBaseChange sq).toCommSq).naturality
+      ((compactificationEtaleGraphMap Λ e c).app N)
+  have hu := map_unit_derivedBaseChangeMap_app (ModuleCat.{u + 1} Λ)
+    (c.isPullback_selfGraphBaseChange sq).toCommSq N
+  dsimp at n₄ n₃ hu
+  rw [compactificationEtaleUnit_app, compactificationEtaleUnit_app,
+    rightDerivedLowerShriekOfCompactificationBaseChangeMap_app_eq,
+    ← cancel_mono ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ)
+      (IsPullback.of_hasPullback (c.ofIsPullback sq).g e').toCommSq).app _)]
+  simp only [Functor.map_comp, Category.assoc, IsIso.inv_hom_id, Category.comp_id,
+    Functor.comp_obj]
+  rw [n₄, ← reassoc_of% hcube, ← Functor.map_comp_assoc (L((g')^*[ModuleCat.{u + 1} Λ]))
+    (inv _), IsIso.inv_hom_id]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  rw [reassoc_of% n₃, reassoc_of% hu, ← compactificationEtaleGraphMap_baseChange Λ sq c N]
+  simp only [Functor.map_comp]
 
 end BaseChange
 

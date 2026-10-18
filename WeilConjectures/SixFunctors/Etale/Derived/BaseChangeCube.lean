@@ -131,6 +131,69 @@ theorem derivedBaseChangeMap_cube (S1 : CommSq a b p e) (S2 : CommSq gb p' p g)
   simp only [Category.assoc]
   exact derivedSquareUpperStarIso_cube A S1 S2 S3 S4 S0 S5 _
 
+section Paste
+
+variable {W₀ X₀ : Scheme.{u}} {h₀ : W₀ ⟶ W} {b₀ : W₀ ⟶ X₀} {v : X₀ ⟶ X} {a₀ : W₀ ⟶ Z}
+  {e₀ : X₀ ⟶ Y}
+
+/-- **Coherence of the square isomorphisms of two stacked squares**: the square isomorphism of
+the composite of two squares is the composite of their square isomorphisms and of the
+composition isomorphisms. -/
+lemma derivedSquareUpperStarIso_paste (S1 : CommSq a b p e) (S3 : CommSq h₀ b₀ b v)
+    (S13 : CommSq a₀ b₀ p e₀) (ha : a₀ = h₀ ≫ a) (he : e₀ = v ≫ e)
+    (K : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    L((b₀)^*[A]).map ((leftDerivedUpperStarComp A v e e₀ he).hom.app K) ≫
+        (derivedSquareUpperStarIso A S3).hom.app (L((e)^*[A]).obj K) ≫
+        L((h₀)^*[A]).map ((derivedSquareUpperStarIso A S1).hom.app K) ≫
+        (leftDerivedUpperStarComp A h₀ a a₀ ha).inv.app (L((p)^*[A]).obj K) =
+      (derivedSquareUpperStarIso A S13).hom.app K := by
+  have hm : h₀ ≫ b = b₀ ≫ v := S3.w
+  have hn : a ≫ p = b ≫ e := S1.w
+  have ht₁ : a₀ ≫ p = (b₀ ≫ v) ≫ e := by rw [S13.w, he, Category.assoc]
+  have ht₂ : a₀ ≫ p = (h₀ ≫ b) ≫ e := by rw [ht₁, hm]
+  have ht₃ : a₀ ≫ p = h₀ ≫ (a ≫ p) := by rw [ha, Category.assoc]
+  rw [← cancel_epi ((leftDerivedUpperStarComp A b₀ e₀ (a₀ ≫ p) S13.w).hom.app K)]
+  simp only [derivedSquareUpperStarIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Functor.map_comp, Category.assoc, Iso.hom_inv_id_app_assoc]
+  rw [leftDerivedUpperStarComp_assoc'_app_assoc A b₀ v e (h₀ ≫ b) e₀ (a₀ ≫ p) hm he ht₂,
+    Iso.hom_inv_id_app_assoc,
+    ← leftDerivedUpperStarComp_assoc'_app_assoc A h₀ b e (h₀ ≫ b) (a ≫ p) (a₀ ≫ p) rfl hn ht₂,
+    ← Functor.map_comp_assoc (L((h₀)^*[A])), Iso.hom_inv_id_app]
+  erw [CategoryTheory.Functor.map_id, Category.id_comp]
+  rw [leftDerivedUpperStarComp_assoc'_app_assoc A h₀ a p a₀ (a ≫ p) (a₀ ≫ p) ha rfl rfl,
+    Iso.hom_inv_id_app]
+  erw [Category.comp_id]
+
+set_option maxHeartbeats 1000000 in
+-- the derived functors involved are large terms
+/-- **The derived base change maps of two stacked squares paste**: the derived base change map
+`Ex_*` of the composite of two squares `W₀ ⟶ W ⟶ Z` over `X₀ ⟶ X ⟶ Y` is `Lv^*` of the one of
+the right square followed by the one of the left square, up to composition isomorphisms. -/
+theorem derivedBaseChangeMap_paste (S1 : CommSq a b p e) (S3 : CommSq h₀ b₀ b v)
+    (S13 : CommSq a₀ b₀ p e₀) (ha : a₀ = h₀ ≫ a) (he : e₀ = v ≫ e)
+    (M : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology A)) :
+    (leftDerivedUpperStarComp A v e e₀ he).hom.app (R((p)_*[A]).obj M) ≫
+        L((v)^*[A]).map ((derivedBaseChangeMap A S1).app M) ≫
+        (derivedBaseChangeMap A S3).app (L((a)^*[A]).obj M) ≫
+        R((b₀)_*[A]).map ((leftDerivedUpperStarComp A h₀ a a₀ ha).inv.app M) =
+      (derivedBaseChangeMap A S13).app M := by
+  apply ((derivedUpperStarLowerStarAdjunction A b₀).homEquiv _ _).symm.injective
+  simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
+  rw [Adjunction.counit_naturality, derivedUpperStar_map_derivedBaseChangeMap_app_counit_assoc,
+    derivedUpperStar_map_derivedBaseChangeMap_app_counit]
+  have n₃ := (derivedSquareUpperStarIso A S3).hom.naturality ((derivedBaseChangeMap A S1).app M)
+  have n₅ := (leftDerivedUpperStarComp A h₀ a a₀ ha).inv.naturality
+    ((derivedUpperStarLowerStarAdjunction A p).counit.app M)
+  dsimp at n₃ n₅ ⊢
+  rw [reassoc_of% n₃, ← Functor.map_comp_assoc (L((h₀)^*[A])),
+    derivedUpperStar_map_derivedBaseChangeMap_app_counit, Functor.map_comp_assoc, n₅]
+  simp only [← Category.assoc]
+  congr 1
+  simp only [Category.assoc]
+  exact derivedSquareUpperStarIso_paste A S1 S3 S13 ha he _
+
+end Paste
+
 end Etale
 
 end AlgebraicGeometry
