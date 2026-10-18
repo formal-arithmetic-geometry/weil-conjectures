@@ -1169,6 +1169,7 @@ public import WeilConjectures.AlgebraicGeometry.AffineSpace.Line
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.LinearForm
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.PolynomialMap
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.Subtraction
+public import WeilConjectures.AlgebraicGeometry.AffineSpace.ZeroLocus
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.ZeroSection
 public import WeilConjectures.AlgebraicGeometry.AffineSpaceCharts
 public import WeilConjectures.AlgebraicGeometry.AffineSpecifiedModelChainComparison
@@ -8928,6 +8929,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Limits.FunctorCategory.Basi
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.FunctorCategory.Shapes.Products
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.HasLimits
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.AbelianImages
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Kernels
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Biproducts
