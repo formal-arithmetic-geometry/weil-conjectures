@@ -6,9 +6,10 @@ Authors: SHEAF group G1
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineVanishing
 import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
+import Mathlib.Topology.Sheaves.LocallySurjective
 
 /-!
 # Closed immersions from surjective structure-sheaf stalk maps
@@ -46,6 +47,25 @@ theorem isClosedImmersion_of_isAffineHom_of_surjective_structureStalks
     (hf : ∀ y : Y, Function.Surjective
       ((TopCat.Presheaf.stalkFunctor CommRingCat y).map f.c)) :
     IsClosedImmersion f := by
-  sorry
+  let φ : SheafOfModules.unit Y.ringCatSheaf ⟶
+      (Scheme.Modules.pushforward f).obj (SheafOfModules.unit X.ringCatSheaf) :=
+    SheafOfModules.unitToPushforwardObjUnit f.toRingCatSheafHom
+  have := SheafOfModules.isQuasicoherent_unit (R := Y.ringCatSheaf)
+  have := SheafOfModules.isQuasicoherent_unit (R := X.ringCatSheaf)
+  have := Scheme.Modules.isQuasicoherent_pushforward_of_isAffineHom f
+    (SheafOfModules.unit X.ringCatSheaf)
+  have hloc : TopCat.Presheaf.IsLocallySurjective f.c :=
+    (TopCat.Presheaf.locally_surjective_iff_surjective_on_stalks f.c).mpr hf
+  have hi := Scheme.Modules.quasiCoherent_cokernel_image φ
+  refine isClosedImmersion_iff_isAffineHom.mpr ⟨inferInstance, ?_⟩
+  intro U hU s
+  have hs : s ∈ Set.range (Scheme.Modules.Hom.app (Abelian.image.ι φ) U) := by
+    apply (hi.2.2.1 U s).mpr
+    intro x hx
+    obtain ⟨V, hVU, ⟨t, ht⟩, hxV⟩ :=
+      (TopCat.Presheaf.isLocallySurjective_iff f.c).mp hloc U s x hx
+    exact ⟨V, hVU, hxV, t, ht⟩
+  rw [(hi.2.2.2.2.2.2.2.2 ⟨U, hU⟩).1] at hs
+  exact hs
 
 end AlgebraicGeometry
