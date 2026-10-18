@@ -1,0 +1,98 @@
+{
+ "id": "lem-pur-ringed-coefficient-projection-cocycle",
+ "kind": "statement",
+ "title": "Coefficient projection cocycle for ordinary derived ringed diagrams",
+ "statement": "Let $u:\\mathscr X\\to\\mathscr Y$ be a morphism of topoi presented by small sites [def-weil-pbc-ringed-topos-morphism, def-weil-size-convention]. On $\\mathscr Y$ fix composable homomorphisms $A\\xrightarrow{a}B\\xrightarrow{b}C$ of sheaves of commutative rings. On $\\mathscr X$ use their inverse images $A_X,B_X,C_X$, including the induced ring maps. Use ordinary unbounded derived categories of module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], K-flat derived scalar extension [lem-pur-derived-change-of-rings], and the canonical derived inverse-image/direct-image adjunctions [lem-weil-pbc-ringed-projection-mate-exact]. Write $S_a^T=-\\otimes^L_{A_T}B_T$, $S_b^T=-\\otimes^L_{B_T}C_T$, $S_{ba}^T=-\\otimes^L_{A_T}C_T$ for $T=X,Y$, and $G_D=Ru_{*,D}$ for $D=A,B,C$. Let $\\tau_T:S_b^TS_a^T\\xrightarrow{\\sim}S_{ba}^T$ be balanced tensor associativity [lem-sfb-successive-derived-quotient-normalization].\n\nDefine $\\chi_a:S_a^YG_A\\to G_BS_a^X$ to be the $u_B^{-1}\\dashv G_B$-adjunct of\n$$u_B^{-1}S_a^YG_AM\\xrightarrow{\\sim}S_a^Xu_A^{-1}G_AM\\xrightarrow{S_a^X\\varepsilon_{A,M}}S_a^XM,$$\nusing the canonical inverse-image/tensor comparison; define $\\chi_b,\\chi_{ba}$ in the same way. Then the following identity of natural transformations holds:\n$$\\chi_{ba}\\circ\\tau_YG_A=G_C\\tau_X\\circ(\\chi_bS_a^X)\\circ S_b^Y\\chi_a.$$\nFor an identity coefficient map $\\chi$ is the identity under multiplication by the coefficient unit. Consequently, if a commutative square of coefficient ring sheaves $A\\to B$, $A\\to C$, $B\\to D$, $C\\to D$ has equal composites $A\\to D$, the two successive projection comparisons to $D$ agree under their balanced tensor identifications. These equalities are natural in the ring maps, commute with the canonical cochain shifts, and hold in the target coefficient derived category. No flatness or invertibility of any $\\chi$ is assumed.\n\nThe same assertions hold on the ordinary derived categories of strict inverse systems of module sheaves for compatible maps of ring systems: use the ringed diagram topoi of [lem-weil-pbc-diagram-site-realization] and the operations of [lem-coef-semilinear-derived-sections]. The identities are identities there before evaluation or total inverse limit.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0E47, remark-compose-base-change-horizontal (horizontal composition of the base change maps of Tag 07A7, remark-base-change), applied to the coefficient-change morphisms of ringed topoi $(\\mathscr T,C_T)\\to(\\mathscr T,B_T)\\to(\\mathscr T,A_T)$ over $u$, whose base change maps are the $\\chi$ of the statement and whose pullback composition is balanced associativity $\\tau$; Tag 0D6E, lemma-derived-pushforward-composition, for the ordinary derived adjunctions. Stacks omits the verification; the unit clause, the diagram-topos clause and the shift clause are agent supplements. Motivation: Bhatt–Scholze 6.7.16–6.7.17."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-coef-semilinear-derived-sections"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For arbitrary sheaves of commutative rings A to B to C, derived coefficient projection for direct image has the scalar extension composition cocycle",
+   "results": "8 hits: SheafOfModules.Presentation.map_π_eq; SheafOfModules.map_ιFree_mapFree_hom_assoc; SheafOfModules.unitToPushforwardObjUnit; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pushforwardNatTrans_app_val_app; SheafOfModules.pushforwardNatTrans_app_val_app_apply; SheafOfModules.pullbackObjFreeIso_hom_naturality",
+   "date": "2026-10-18",
+   "digest": "54b9b26d8eceafa9",
+   "verdict": "no match: inspected signatures concern underived sheaf pullback, pushforward, scalar extension or unrelated cochain/condensed constructions; none states this ordinary unbounded derived coefficient-mate identity"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforwardPushforwardAdj",
+   "results": "3 hits: SheafOfModules.pushforwardPushforwardAdj; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app",
+   "date": "2026-10-18",
+   "digest": "621f4300351f7b2a",
+   "verdict": "no match: inspected signatures concern underived sheaf pullback, pushforward, scalar extension or unrelated cochain/condensed constructions; none states this ordinary unbounded derived coefficient-mate identity"
+  },
+  {
+   "tool": "grep",
+   "query": "(derived|Derived).*(scalar|Scalar).*(pushforward|Pushforward)|projection.*[Cc]ocycle",
+   "results": "2 hits: Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean; Mathlib/Algebra/Homology/HomotopyCategory/MappingCone.lean",
+   "date": "2026-10-18",
+   "digest": "ee08749a8d97e2cd",
+   "verdict": "no match: inspected signatures concern underived sheaf pullback, pushforward, scalar extension or unrelated cochain/condensed constructions; none states this ordinary unbounded derived coefficient-mate identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived extension of scalars commutes with successive coefficient projection maps for sheaf direct image",
+   "results": "8 hits: ModuleCat.ExtendScalars.map'; ModuleCat.ExtendScalars.map'_comp; AlgHom.extendScalars; AlgebraicGeometry.Scheme.Modules.pushforward; PresheafOfModules.pushforward; PresheafOfModules.Sheafify.map_smul_eq; PresheafOfModules.Sheafify.map_smul; PresheafOfModules.restrictScalarsObj",
+   "date": "2026-10-18",
+   "digest": "33189c4f8be0e168",
+   "verdict": "no match: inspected signatures concern underived sheaf pullback, pushforward, scalar extension or unrelated cochain/condensed constructions; none states this ordinary unbounded derived coefficient-mate identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Beck Chevalley mate for a commutative diagram of coefficient ring sheaves is transitive for composition without flatness",
+   "results": "8 hits: SheafOfModules.pullbackComp; SheafOfModules.pullback_assoc; PresheafOfModules.pullbackComp; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc",
+   "date": "2026-10-18",
+   "digest": "a1f63b25afd89613",
+   "verdict": "no match: inspected signatures concern underived sheaf pullback, pushforward, scalar extension or unrelated cochain/condensed constructions; none states this ordinary unbounded derived coefficient-mate identity"
+  },
+  {
+   "tool": "grep",
+   "query": "(mate|Mate|conjugate|Conjugate).*(comp|Comp)|pushforwardComp",
+   "results": "10 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
+   "date": "2026-10-18",
+   "digest": "21ca4c42aad3513b",
+   "verdict": "no match: inspected signatures concern underived sheaf pullback, pushforward, scalar extension or unrelated cochain/condensed constructions; none states this ordinary unbounded derived coefficient-mate identity"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-compact-support-condensed-realization",
+  "date": "2026-10-18",
+  "group": "NG"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "sk-thm-purity-transport Step 2, coherent quotient comparisons, and Step 3, successive coefficient extensions; isolates the proper coefficient-transpose cocycle used by the item in its reduction and integral/field comparison squares.",
+   "via": [
+    "lem-pur-compact-support-condensed-realization",
+    "lem-pur-condensed-exceptional-reconstruction",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

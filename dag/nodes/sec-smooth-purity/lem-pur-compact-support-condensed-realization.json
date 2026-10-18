@@ -35,39 +35,41 @@
  ],
  "proof": [
   {
-   "text": "Write $B_T=\\widehat R_T$ and $P^0_R=Rg_{*,R}j_{!,R}$ on completed module complexes. The schemes $X,\\overline X,Y$ are noetherian and finite dimensional: finite type over a field gives these properties, and $\\overline X$ is proper over $Y$. All the opens involved are quasi-compact and $\\ell$ is invertible. The canonical inverse-image identifications of the completed coefficient sheaves and their quotients are compatible with every quotient map. Apply [lem-cbc-integral-compact-support-uniform-restriction] to this very compactification. It gives an exact $R$-linear functor $P^0_R:\\mathcal I_X(R)\\to\\mathcal I_Y(R)$, including the common local models and compatible etale-origin witnesses. Apply the same uniform restriction statement to $j:X\\to\\overline X$, compactified by $j$ followed by $1_{\\overline X}$. Its hypotheses have just been checked, so $j_{!,R}K\\in\\mathcal I_{\\overline X}(R)$; in particular this input to $Rg_*$ is derived complete before the finite-reduction comparison in Step 2. The exact open functor here is exactly sheafified extension by zero, not a derived functor of the underived composite $g_*j_!$.",
+   "text": "Write $B_T=\\widehat R_T$ and $P_R^0=Rg_{*,R}j_{!,R}$. Finite type over $k$ gives noetherianity and finite dimension; $\\overline X$ is also finite type since $g$ is proper. Thus $j$ is quasi-compact, all three schemes are noetherian of finite dimension, and $\\ell$ is invertible. The quotients $R/t^n$ are finite and perfect over $R$ by [lem-weil-pbc-standard-quotients-perfect], so they meet the adic hypotheses used below. The coefficient inverse-image identifications commute with every quotient. Apply [lem-cbc-integral-compact-support-uniform-restriction] to $c$: it gives an exact $R$-linear $P_R^0:\\mathcal I_X(R)\\to\\mathcal I_Y(R)$. Apply it also to $j$, compactified by $j$ followed by the proper identity of $\\overline X$. Hence $j_{!,R}K\\in\\mathcal I_{\\overline X}(R)$ and is complete. Here $j_!$ is exact sheafified open extension and proper image is derived separately.",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
     "lem-kun-dimension-finite-type",
     "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "lem-weil-pbc-standard-quotients-perfect",
     "lem-cbc-integral-compact-support-uniform-restriction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "6.7.2 and 6.7.6–6.7.8; agent assembly of the cited DAG interfaces, not a literal condensed-module theorem of this paper"
+    "place": "6.7.2, 6.7.6–6.7.8; agent assembly of the cited ordinary-derived statements"
    }
   },
   {
-   "text": "Put $N_K=\\mathcal F(\\mathcal R_XK)$. Apply the geometric-operations and derived-coefficient-extension clauses of the current [lem-coef-semilinear-derived-sections] with the strict ring systems $A_{n,T}$. Their hypothesis $g^{-1}A_{n,Y}=A_{n,\\overline X}$, including transition maps, holds by Step 1, and the open localization is the one defining $j_!$. These clauses provide derived tensor, exact open extension, derived proper image, their units and counits, and the coefficient projection as its specified counit transpose, simultaneously on arbitrary semilinear sections. They construct the comparison $b_K:\\mathcal R_Y(P^0_RK)\\to N_K$ before imposing normalization on $N_K$. No fiberwise internal Hom is used in this construction, so the theorem's cartesian-first-input qualification on that separate clause is not invoked. At level $n$ it is the ordered composite\n$$ (Rg_{*,R}j_{!,R}K)\\otimes^L_{B_Y}A_{n,Y}\\longrightarrow Rg_{*,n}((j_{!,R}K)\\otimes^L_{B_{\\overline X}}A_{n,\\overline X})\\cong Rg_{*,n}j_{!,n}K_n.$$\nThe first map is the perfect-quotient projection comparison of [prop-weil-pbc-direct-image-limits]. For the second, use the slice tensor identity to move coefficient tensor through $j_!$, and the derived ring-sheaf-change adjunction to commute proper image with restriction of coefficients. These assertions apply to $B_T\\to A_{n,T}$ because the inverse-image identifications of Step 1 commute with the projections. The slice identity derives as follows: if $Q$ is K-flat on the open, then $(j_!Q)\\otimes H\\cong j_!(Q\\otimes j^*H)$; exactness of $j^*$ and $j_!$ makes this acyclic for every acyclic $H$, so $j_!Q$ is K-flat. Thus no flatness of $R/t^n\\to R/t^m$ is being assumed. Each displayed comparison is invertible. All quotient and tensor maps are constructed on the section models, where the quotient cocycle is the equality of the composite ring homomorphisms. Hence $b_K$ is an actual derived-system map, not a family lifted from its evaluations; evaluations detect isomorphisms by [lem-coef-semilinear-derived-sections]. Derived tensor reassociation makes $\\mathcal R_Y(P^0_RK)$ cartesian: its transition adjoints are $(P^0_RK\\otimes^L_{B_Y}A_{m,Y})\\otimes^L_{A_{m,Y}}A_{n,Y}\\cong P^0_RK\\otimes^L_{B_Y}A_{n,Y}$. Transport these isomorphisms through the system isomorphism $b_K$; hence $N_K$ is normalized. This establishes cartesianness after constructing the map, rather than assuming it to obtain the section models.",
+   "text": "Put $N_K=\\mathcal F(\\mathcal R_XK)$. On the ordinary derived ringed diagram sites of [lem-coef-semilinear-derived-sections], form the proper coefficient counit transpose followed by the open scalar comparison. This gives the system map $b_K:\\mathcal R_Y(P_R^0K)\\to N_K$, with evaluation\n$$ (Rg_{*,R}j_{!,R}K)\\otimes^L_{B_Y}A_{n,Y}\\longrightarrow Rg_{*,n}((j_{!,R}K)\\otimes^L_{B_{\\overline X}}A_{n,\\overline X})\\xrightarrow{\\sim}Rg_{*,n}j_{!,n}K_n.$$\nThe first map is the diagram-site projection isomorphism of [prop-weil-pbc-direct-image-limits], including all quotient transitions; its complete input was checked in Step 1. The second is [lem-sf-open-tensor-normalization], applied to the identity on schemes with ring change $B\\to A_n$, also on the ringed diagram sites. Its statement already supplies the derived comparison, so no K-flat preservation lemma is proved inline here. [lem-weil-pbc-ring-sheaf-change-adjunction] supplies the indicated proper-image coefficient restriction. Evaluation detects isomorphisms by the ordinary-system theorem, so $b_K$ is invertible. The normalization isomorphisms and their quotient cocycle for $\\mathcal R_Y(P_R^0K)$ are expressly given in [def-weil-pbc-adic-coefficient-datum]. Transporting those transition adjoints along $b_K$ proves $N_K$ normalized. No internal Hom, flatness of reduction maps, or inference of equality from evaluations is used.",
    "uses": [
     "lem-coef-semilinear-derived-sections",
     "prop-weil-pbc-direct-image-limits",
-    "lem-weil-pbc-ringed-slice-extension-tensor",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-weil-pbc-ring-sheaf-change-adjunction"
+    "lem-sf-open-tensor-normalization",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-weil-pbc-adic-coefficient-datum"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "6.7.2, 6.7.6 and 6.7.16–6.7.17; agent assembly of the cited DAG interfaces, not a literal condensed-module theorem of this paper"
+    "place": "6.7.2 and 6.7.16–6.7.17; agent assembly of the cited ordinary-derived statements"
    }
   },
   {
-   "text": "Under the semilinear lift and forgetting coefficients, $U_YN_K$ is the actual strict tower $\\mathcal T_f^c(K)$: its evaluations, quotient-induced transitions and their composites are precisely the ones specified in [lem-weil-compact-support-reduction-tower-functor]. Use the geometric-operation models and the equivalence over evaluations of the current [lem-coef-semilinear-derived-sections] to make this identification in its ordinary homotopy category $D(\\mathscr S_Y)$, then apply the actual forgetful functor $U_Y$. The common construction uses the quotient maps and the open/direct-image adjunction data, not fiberwise internal Hom or an inference of equality of tower maps from evaluations. Therefore $P_RK=\\mathcal L_YN_K$. Let $u$ and $e$ be the unit and counit of $\\mathcal R_Y\\dashv\\mathcal L_Y$ in [lem-coef-derived-system-evaluation-calculus], and set\n$$q_K=\\mathcal L_Y(b_K)\\circ u_{P^0_RK}:P^0_RK\\longrightarrow P_RK.$$\nThe unit is invertible because $P^0_RK\\in\\mathcal I_Y(R)$ is derived complete: the reduction-limit unit is the completeness map by [lem-weil-pbc-constant-completion-equivalence]. Thus $q_K$ is invertible. Define $\\alpha_K=e_{N_K}$. The adjunction triangle identity gives the equality of system maps $\\alpha_K\\circ\\mathcal R_Y(q_K)=b_K$, so $\\alpha_K$ is invertible as well. The description of the counit in the evaluation-calculus node says exactly that $\\alpha_{K,n}$ is the scalar-extension adjoint of the actual total-limit projection. The tower functor is exact and $R$-linear, and total derived limit is exact; multiplication by each $r\\in R$ commutes with the tower resolution and limit, so their composite is $R$-linear. Its outputs belong to $\\mathcal I_Y(R)$ by $q_K$ and Step 1. This proves the integral assertions including the specified, rather than arbitrarily chosen, reduction comparisons.",
+   "text": "The strict tower underlying $N_K$ is $\\mathcal T_f^c(K)$: use its defining lift, reduction followed by exact open extension, separately derived proper image, and coefficient restriction. The ordinary-system operations and the coefficient-restriction comparisons identify these same composites as derived strict-diagram functors [lem-coef-semilinear-derived-sections, lem-pur-completed-coefficient-pushforward-comparison]. This identifies constructions, rather than arbitrary towers with the same evaluations. Thus $P_RK=\\mathcal L_YN_K$. With unit $u$ and counit $e$ of $\\mathcal R_Y\\dashv\\mathcal L_Y$, set\n$$q_K=\\mathcal L_Y(b_K)u_{P_R^0K}:P_R^0K\\longrightarrow P_RK.$$\nThe unit is invertible by completeness in Step 1 and the completion-unit clause of [lem-weil-pbc-constant-completion-equivalence]. Put $\\alpha_K=e_{N_K}$. Naturality of $e$ and the adjunction triangle identity give $\\alpha_K\\mathcal R_Y(q_K)=b_K$; hence $\\alpha_K$ is invertible. The evaluation-calculus statement identifies its evaluations with the scalar adjuncts of the actual limit projections, as required. Exactness follows from the exact strict tower and exact total-limit functors. Their scalar action is the termwise constant $R$-action, so the composite is $R$-linear. Its output is in $\\mathcal I_Y(R)$ by $q_K$ and Step 1.",
    "uses": [
     "lem-weil-compact-support-reduction-tower-functor",
     "lem-coef-semilinear-derived-sections",
+    "lem-pur-completed-coefficient-pushforward-comparison",
     "lem-coef-derived-system-evaluation-calculus",
     "lem-weil-pbc-constant-completion-equivalence",
     "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
@@ -75,27 +77,25 @@
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "6.7.6–6.7.7; reduction-limit construction underlying 6.7.2; agent assembly of the cited DAG interfaces, not a literal condensed-module theorem of this paper"
+    "place": "6.7.6–6.7.7; agent assembly of the cited ordinary-derived statements"
    }
   },
   {
-   "text": "First compare open extension under $J$. The scalar extension from $B_{\\overline X}$ to $E_{\\overline X}^c$ commutes canonically with $j_!$:\n$$E_{\\overline X}^c\\otimes^L_{B_{\\overline X}}j_{!,R}K\\cong j_{!,E}(E_X^c\\otimes^L_{B_X}K).$$\nIndeed the underived map sends a coefficient tensor an open section to its extension by zero; its inverse is the same formula on the open slice, followed by sheafification. Equivalently both sides are left adjoint to restriction to the open followed by restriction of coefficients. The slice tensor identity, exact open adjunction, and K-flat argument of Step 2 derive this map on complexes. All maps send $a\\otimes s$ to the same open section, so it commutes with maps of coefficient rings and their multiplication. The functor $j_{!,R}$ preserves the uniform integral categories by [lem-cbc-integral-compact-support-uniform-restriction], applied to the compactification of $j$ with proper part identity. Rationalize its functor and comparison using [prop-weil-pbc-rational-transport]. Since $J$ is induced by this very derived scalar extension, this constructs $J_{\\overline X}(j_{!,R}K[1/t])\\cong j_{!,E}J_X(K[1/t])$, and proves preservation of $\\mathcal C_E^c$ by $j_{!,E}$ using essential surjectivity of $J_X$.",
+   "text": "Apply [lem-sf-open-tensor-normalization] to the identity on $\\overline X$ with coefficient change $B_{\\overline X}\\to E_{\\overline X}^c$. Its specified open-unit adjunct gives\n$$E_{\\overline X}^c\\otimes^L_{B_{\\overline X}}j_{!,R}K\\xrightarrow{\\sim}j_{!,E}(E_X^c\\otimes^L_{B_X}K).$$\nThe pullback coefficient maps are those of Step 1 and of the condensed coefficient category. The underlying map on the open is the identity under balanced tensor identifications. Localize $j_{!,R}$ and this comparison by [prop-weil-pbc-rational-transport]; preservation of $\\mathcal I$ was proved in Step 1. Since $J$ is precisely derived coefficient extension, this is $J_{\\overline X}(j_{!,R}K[1/t])\\cong j_{!,E}J_X(K[1/t])$. Essential surjectivity of $J_X$ then proves that $j_{!,E}$ preserves $\\mathcal C_E^c$.",
    "uses": [
-    "lem-weil-pbc-ringed-slice-extension-tensor",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "lem-cbc-integral-compact-support-uniform-restriction",
+    "lem-sf-open-tensor-normalization",
     "prop-weil-pbc-rational-transport",
-    "lem-weil-pbc-condensed-e-realization"
+    "lem-weil-pbc-condensed-e-realization",
+    "def-weil-pbc-condensed-e-module-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "6.8.14–6.8.15; open part of 6.7.6; agent assembly of the cited DAG interfaces, not a literal condensed-module theorem of this paper"
+    "place": "6.8.14–6.8.15 and 6.7.6; agent assembly of the cited ordinary-derived statements"
    }
   },
   {
-   "text": "Define $a_{f,E,K}$ to be the ordered composite\n$$J_Y(P_RK[1/t])\\xrightarrow{J_Y(q_K^{-1}[1/t])}J_Y((Rg_{*,R}j_{!,R}K)[1/t])\\xrightarrow{\\sim}Rg_{*,E}J_{\\overline X}(j_{!,R}K[1/t])\\xrightarrow{\\sim}Rg_{*,E}j_{!,E}J_X(K[1/t]).$$\nThe middle isomorphism, with its units and counits, is exactly the direct-image clause of [lem-weil-pbc-condensed-e-realization], applied to the proper map $g$. The last is Step 4. This is the stated ambient module-object composite $P_E^c$, so its restriction preserves $\\mathcal C_E^c$; every input is the image of a lattice, and its output is the image of $P_RK$. Each constituent is natural and respects the localized shift comparisons. No equivalence involving exceptional right adjoints is used.",
+   "text": "Define $a_{f,E,K}$ by the ordered composite\n$$J_Y(P_RK[1/t])\\xrightarrow{J_Y(q_K^{-1}[1/t])}J_Y((Rg_{*,R}j_{!,R}K)[1/t])\\xrightarrow{\\sim}Rg_{*,E}J_{\\overline X}(j_{!,R}K[1/t])\\xrightarrow{\\sim}Rg_{*,E}j_{!,E}J_X(K[1/t]).$$\nThe middle comparison, including its counits, is the direct-image clause of [lem-weil-pbc-condensed-e-realization] for $g$; the last is Step 4. Its source belongs to $\\mathcal C_E^c(Y)$ by Step 3. Every input is realized from a lattice, so the actual ambient composite $P_E^c$ preserves the claimed category. This also fixes the normalization of $a$ on morphisms.",
    "uses": [
     "lem-weil-pbc-condensed-e-realization",
     "prop-weil-pbc-rational-transport"
@@ -103,60 +103,118 @@
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "6.8.14–6.8.15 and 6.7.6; agent assembly of the cited DAG interfaces, not a literal condensed-module theorem of this paper"
+    "place": "6.8.14–6.8.15; agent assembly of the cited ordinary-derived statements"
    }
   },
   {
-   "text": "For finite $E\\subset F$, [lem-weil-pbc-condensed-flat-coefficient-calculus] makes $F_T^c$ finite free over $E_T^c$, with exact scalar extension. The open comparison is the tensor/open map of Step 4. Define the proper comparison to be the counit transpose for coefficient extension and $g^*\\dashv Rg_*$. To check it is invertible, choose one $E$-basis of $F$ on the profinite point and pull that basis to all three sites; then restriction of coefficient extension is a finite direct sum. Derived direct image is additive and preserves finite direct sums, so the comparison on each basis summand is the identity: the unit coefficient case of [lem-weil-pbc-ringed-projection-mate-exact] is identity by the counit triangle identity. Restriction of coefficients reflects isomorphisms by [lem-weil-pbc-ring-sheaf-change-adjunction]. Thus the ordered proper-then-open composite is the canonical isomorphism $T_{E,F}^YP_E^c\\cong P_F^cT_{E,F}^X$. The basis checks invertibility only; the map itself was defined independently as a transpose.",
+   "text": "For finite $E\\subset F$, [lem-weil-pbc-condensed-flat-coefficient-calculus] says that $F_T^c$ is finite free over $E_T^c$. Their inverse-image identifications are the coefficient-category composition identifications. Apply [lem-sp-finite-free-direct-image-coherence] to $g$: its specified counit transpose is the proper coefficient isomorphism. Follow it by the normalized open scalar isomorphism of [lem-sf-open-tensor-normalization]. The result is exactly the canonical $T_{E,F}^YP_E^c\\xrightarrow{\\sim}P_F^cT_{E,F}^X$. The finite-direct-sum invertibility argument is an input theorem here, rather than an inline lemma.",
    "uses": [
     "lem-weil-pbc-condensed-flat-coefficient-calculus",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "lem-weil-pbc-ringed-slice-extension-tensor"
+    "def-weil-pbc-condensed-e-module-category",
+    "lem-sp-finite-free-direct-image-coherence",
+    "lem-sf-open-tensor-normalization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "6.7.14 and 6.8.15; finite coefficient projection argument; agent assembly of the cited DAG interfaces, not a literal condensed-module theorem of this paper"
+    "place": "6.7.14 and 6.8.15; agent assembly of the cited ordinary-derived statements"
    }
   },
   {
-   "text": "Let $S=\\mathcal O_F$. The completed sheaf $\\widehat S_T$ is finite free over $B_T$, and the ordinary tensor $C_T=-\\otimes^L_{B_T}\\widehat S_T$ agrees, by the specified completion map of [lem-weil-finite-free-completed-scalar-comparison], with integral scalar extension $(-)_S$ as defined in the item. It preserves $\\mathcal I_T$: use the stratified-perfect characterization, tensor the finite perfect $R$-models with $S$, and use that the characterization includes the compatible etale-origin witnesses. Define $d_{S/R}:C_Y P_R^0\\to P_S^0 C_X$ by first the proper counit projection transpose and then the open tensor comparison. To prove it invertible, choose a global $B_Y$-module basis of $\\widehat S_Y$, whose finite freeness is exactly the statement of [lem-weil-finite-free-completed-scalar-comparison]. Pull this basis back to $\\overline X$ and $X$ using the coefficient inverse-image identifications of Step 1, applied also to the finite quotient system for $S$. These are compatible bases of the completed sheaves; no separate assertion about a basis of the abstract valuation ring $S$ over $R$ is used. After restriction to $B_Y$, its proper component is a map from the finite direct sum of copies of $Rg_{*,R}M$ to $Rg_{*,R}$ of that same finite direct sum. On each basis inclusion it is identity by the tensor-unit normalization of [lem-weil-pbc-ringed-projection-mate-exact]; additivity of $Rg_*$ makes it an isomorphism. Restriction of coefficients reflects isomorphisms by [lem-weil-pbc-ring-sheaf-change-adjunction]. Its open component is invertible because $(j_!Q)\\otimes H=j_!(Q\\otimes j^*H)$ for a K-flat $Q$ and the K-flatness argument of Step 2 applies. This proves $C_Y P_R^0\\cong P_S^0 C_X$ for the specified map, independently of the basis. Conjugate this by the $q$ of Step 3 for $R$ and for $S$ and the specified completion comparisons. This gives the claimed $(P_RK)_S\\cong P_SK_S$. The construction works for any positive-characteristic base field in the item; it does not use a finite-field-only coefficient theorem. The use of $S/v^m$, where $v$ is its uniformizer, is exactly the completion comparison just cited, so no identification of $R/t^n\\to S/v^n$ with a finite free map is needed.",
+   "text": "For $S=\\mathcal O_F$ put $C_T=-\\otimes^L_{B_T}\\widehat S_T$. Its identification $\\chi_T:C_TK\\xrightarrow{\\sim}K_S$ is the specified quotient-augmentation map of [lem-weil-finite-free-completed-scalar-comparison]; that statement also supplies finite freeness and completeness of $C_TK$. It preserves $\\mathcal I_T$: on a stratum with model $B_T\\otimes_R^LP$, scalar extension has model $\\widehat S_T\\otimes_S^L(S\\otimes_R^LP)$, and a bounded finite projective model stays such after scalar extension. Apply the stratified-perfect characterization, which includes the required witnesses. The coefficient inverse-image identifications for $S$ are supplied by [lem-weil-pbc-profinite-coefficient-inverse-image]. Apply [lem-sp-finite-free-direct-image-coherence] to $B\\to\\widehat S$ and $g$, then [lem-sf-open-tensor-normalization] to $j$. This gives a specified isomorphism $d_{S/R}:C_YP_R^0\\xrightarrow{\\sim}P_S^0C_X$. Conjugate it by the $q$ of Step 3 and the $\\chi_T$ to obtain $(P_RK)_S\\xrightarrow{\\sim}P_SK_S$. This does not assume that $R/t^n\\to S/v^n$ is flat.",
    "uses": [
     "lem-weil-finite-free-completed-scalar-comparison",
     "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "lem-weil-pbc-ringed-slice-extension-tensor"
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "lem-sp-finite-free-direct-image-coherence",
+    "lem-sf-open-tensor-normalization",
+    "lem-sfb-successive-derived-quotient-normalization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "6.8.14–6.8.15; integral coefficient extension in 6.8.14(1); agent assembly of the cited DAG interfaces, not a literal condensed-module theorem of this paper"
+    "place": "6.7.16–6.7.17 and 6.8.15; agent assembly of the cited ordinary-derived statements"
    }
   },
   {
-   "text": "Write $c_{F/E,L}:T_{E,F}^YP_E^cL\\to P_F^cT_{E,F}^XL$ for the ordered proper/open map. Each proper component is the transpose of counit tensor identity. Transposing two successive coefficient changes and multiplying the tensor factors gives that same counit tensor identity for the composite inclusion; [lem-weil-pbc-mate-pasting] identifies the transposes. The open components both send a pure tensor and an open section to its extension by zero. Thus, writing $\\mu_T:T_{F,G}^TT_{E,F}^T\\xrightarrow{\\sim}T_{E,G}^T$,\n$$c_{G/E,L}\\circ\\mu_{Y,P_E^cL}=P_G^c(\\mu_{X,L})\\circ c_{G/F,T_{E,F}^XL}\\circ T_{F,G}^Y(c_{F/E,L}).$$\nThe identity extension gives identity by the tensor-unit and counit triangle identities. The identical transpose calculation gives the equation for the ordinary integral maps $d_{S/R}$ of Step 7.\n\nTo compare their reductions and completion maps, account explicitly for ramification. By the valuation-ring convention [def-weil-l-adic-coefficient-extension], write $t=u v^e$ in $S$, where $u$ is a unit and $e\\geq1$. The ideals $(t^n)S=(v^{en})$ are equal, so put $D_{n,T}=(S/t^nS)_T=(S/v^{en})_T$. The quotient clause of [lem-weil-pbc-constant-completion-equivalence], applied to the valuation ring $S$, its ideal $(v)$ and exponent $en$, identifies $\\widehat S_T/v^{en}\\widehat S_T$ with $D_{n,T}$. Since $t^n=u^n v^{en}$, this is also $\\widehat S_T/t^n\\widehat S_T$. Reducing the compatible completed bases chosen in Step 7 modulo $t^n$ therefore gives compatible $A_{n,T}$-module bases of $D_{n,T}$, using $B_T/t^nB_T=A_{n,T}$ from that same quotient clause for $R$. In particular $D_{n,T}$ is finite free over $A_{n,T}$. Tensor reassociation on the section models identifies\n$$(C_TK)\\otimes^L_{\\widehat S_T}D_{n,T}\\cong K_n\\otimes^L_{A_{n,T}}D_{n,T}.$$\nThe proper comparison for these rings is the same counit transpose, and its components in this basis are identities; the open comparison is the same extension of a tensor section. Consequently the square between the $b$ maps of Step 2 and $d_{S/R}$ commutes on the simultaneous enhanced section models of the current [lem-coef-semilinear-derived-sections], for the entire $D_n$ tower. More precisely, its derived coefficient-extension clause models the ring maps $A_{n,T}\\to D_{n,T}$, and its coefficient-projection clause identifies the proper component with the counit transpose; its final preservation clause identifies composing those maps and taking the transpose with the same operations on the models. Thus this use takes only derived tensor and geometric adjunction constructions from that statement. It uses neither a fiberwise internal-Hom system on a lax first input nor the theorem's tensor-Hom clause. This is an identity of constructions using ring multiplication and the counit, including the quotient maps, rather than an inference of equality from derived evaluations. Finite free tensor commutes with total limit because it is a finite direct sum and total limit is additive [lem-weil-pbc-ringed-strict-tower-homotopy-limit].\n\nHere passing from the $v^m$ tower to its $m=en$ subsequence preserves the actual derived limit and its projection maps: restriction $V_e$ of strict towers to $(en)_n$ has the exact left adjoint $Z\\mapsto(Z_{\\lceil m/e\\rceil})_m$, and hence preserves K-injective complexes; ordinary inverse limit is unchanged by $V_e$, so computing on a K-injective tower proves the asserted canonical derived-limit identification. This few-line adjunction argument also applies to morphisms and to successive subsequences, without choosing cone maps. The isomorphism $\\chi$ in [lem-weil-finite-free-completed-scalar-comparison] is defined by these very quotient projections. Therefore applying total limit to the preceding section-model square and using the natural reduction-limit unit gives the square between $q$ and the completed scalar map of Step 7. Applying reduction and then the counit gives its compatibility with $\\alpha$, since $\\alpha\\mathcal R(q)=b$ by Step 3. For arbitrary $m$, choose $en\\geq m$ and use $S/v^{en}\\to S/v^m$: tensor reassociation and counit naturality give the same square on the full section models, including every transition. For a tower of finite extensions the ramification indices multiply, the block-restriction functors compose, and the quotient maps are the composites of the ring homomorphisms; thus the limit identifications and the completed comparisons satisfy the same composition equation as $d_{S/R}$.\n\nFor compatibility with $a$, the integral-to-field ring comparisons commute with coefficient inclusions by [lem-weil-pbc-continuous-coefficient-realizations]. Both open maps send $a\\otimes s$ to the same extended section, and $J$ carries the proper adjunction counits to the condensed counits by [lem-weil-pbc-condensed-e-realization]. The two field comparisons are therefore transposes of the same map and equal by the adjunction bijection. Together with the projection-normalized $q$ square above and the definition of $a$ in Step 5, this proves the requested mixed integral/rational/condensed compatibility.",
+   "text": "Account for ramification before comparing reductions. The coefficient maps in [def-weil-integral-scalar-extension] put $t$ in the maximal ideal of $S$. Write $t=uv^e$ in this DVR, with $u$ a unit and $e\\geq1$, using [def-weil-l-adic-coefficient-extension]. Thus $(t^n)S=(v^{en})$. The canonical quotient isomorphisms in [lem-weil-pbc-constant-completion-equivalence], applied to $S$ at exponent $en$ and to $R$ at exponent $n$, give\n$$\\widehat S_T/t^n\\widehat S_T\\cong(S/v^{en})_T=:D_{n,T},\\qquad B_T/t^nB_T\\cong A_{n,T}.$$\nReducing the finite free $B_T$-module $\\widehat S_T$ from [lem-weil-finite-free-completed-scalar-comparison] gives $D_{n,T}\\cong A_{n,T}^{\\oplus[F:E]}$ as modules. Balanced derived scalar associativity [lem-sfb-successive-derived-quotient-normalization] identifies $(C_TK)\\otimes^L_{\\widehat S_T}D_{n,T}$ with $K_n\\otimes^L_{A_{n,T}}D_{n,T}$. All maps here are the stated quotient maps; equal ideals do not identify $S/v^n$ with $S/t^n$.",
    "uses": [
+    "def-weil-integral-scalar-extension",
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-sfb-successive-derived-quotient-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "6.7.16–6.7.17; ramified quotient bookkeeping; agent assembly of the cited ordinary-derived statements"
+   }
+  },
+  {
+   "text": "The coefficient cocycles are now applications of cited identities. For finite $E\\subset F\\subset H$, the proper projection comparisons satisfy the transitivity equation of [lem-sp-finite-free-direct-image-coherence]; the same equation without a freeness assumption is [lem-pur-ringed-coefficient-projection-cocycle]. Apply the latter also to completed rings. The open comparison is its open-unit adjunct from [lem-sf-open-tensor-normalization]; balanced associativity and mate pasting give its successive-extension comparison. Therefore, with tensor associators inserted,\n$$d_{H/E}=P_H^0(\\tau_X)\\,d_{H/F}\\,C_{H/F}(d_{F/E})\\,\\tau_Y^{-1},$$\nand the identical equation holds for finite condensed coefficient comparisons. Identity extensions give identity maps. These are equations in the appropriate coefficient derived categories, not equations inferred after forgetting coefficients.",
+   "uses": [
+    "lem-sp-finite-free-direct-image-coherence",
+    "lem-pur-ringed-coefficient-projection-cocycle",
+    "lem-sf-open-tensor-normalization",
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "6.7.16–6.7.17 and 6.8.15; coefficient cocycles; agent assembly of the cited ordinary-derived statements"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-ringed-coefficient-projection-cocycle] on the ordinary ringed diagram sites to the commuting coefficient square whose two paths are\n$$\\Delta B_T\\longrightarrow\\Delta\\widehat S_T\\longrightarrow D_{\\bullet,T},\\qquad\\Delta B_T\\longrightarrow A_{\\bullet,T}\\longrightarrow D_{\\bullet,T}.$$\nBoth routes are the homomorphism $B_T\\to D_{n,T}$ at each level, as a strict ring-system equality. Thus the proper comparison for coefficient extension followed by reduction equals reduction followed by coefficient extension. The open factors have the same equation by their open-unit normalization and mate pasting. This is precisely the square between the $b_R,b_S$ of Step 2 (the latter restricted to levels $en$) and $d_{S/R}$ of Step 7 under Step 8's balanced identifications. Its equality holds on $D(\\mathscr S(D_\\bullet))$, using [lem-coef-semilinear-derived-sections], before applying the forgetful functor. It includes quotient transitions; no assertion that evaluated arrows detect equality is used.",
+   "uses": [
+    "lem-pur-ringed-coefficient-projection-cocycle",
+    "lem-sf-open-tensor-normalization",
+    "lem-sfb-successive-derived-quotient-normalization",
     "lem-weil-pbc-mate-pasting",
     "lem-coef-semilinear-derived-sections",
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-weil-pbc-continuous-coefficient-realizations",
-    "lem-weil-pbc-condensed-e-realization",
-    "lem-weil-pbc-condensed-flat-coefficient-calculus",
-    "def-weil-l-adic-coefficient-extension",
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-weil-pbc-constant-completion-equivalence"
+    "lem-weil-pbc-diagram-site-realization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "6.7.16–6.7.17 and 6.8.14–6.8.15; compatibility supplement; agent assembly of the cited DAG interfaces, not a literal condensed-module theorem of this paper"
+    "place": "6.7.16–6.7.17; coherent reduction square; agent assembly of the cited ordinary-derived statements"
    }
   },
   {
-   "text": "For $E\\subset\\Omega$, take the small filtered poset of finite intermediate extensions $H$ containing $E$. Use the simultaneous bounded-below coefficient-complex presentations of [lem-weil-pbc-condensed-coefficient-complex-presentation], with $F=E$ and this final index category. For $L\\in\\mathcal C_E^c(X)$ choose a lower cohomological bound $a$. Exactness of finite and $\\Omega$ coefficient extension gives the same bound $a$ at every stage, and exactness of $j_!$ preserves it. The open scalar comparison is again the tensor/open identification; $j_!$ preserves filtered colimits because its right adjoint is restriction. Apply [lem-weil-pbc-condensed-qcqs-pushforward-continuity] to the resulting complexes of $E_{\\overline X}^c$-modules and to $g$, which is proper, hence qcqs. Restriction of coefficients commutes with proper image by [lem-weil-pbc-ring-sheaf-change-adjunction], and is conservative. The colimit of the finite proper projection isomorphisms of Step 6 is therefore a quasi-isomorphism onto $Rg_{*,\\Omega}$ of the colimit. By the presentation node's identity for the cocone maps and adjunction transposes, this map is precisely the canonical coefficient projection transpose, not an unspecified isomorphism. Thus $T_{E,\\Omega}^YP_E^cL\\cong P_\\Omega^cT_{E,\\Omega}^XL$. The coefficient object throughout is the finite-subfield-valued function sheaf specified in the item; no assertion about the full sheaf of all continuous $\\Omega$-valued functions or about unbounded continuity has entered.",
+   "text": "To pass that square to limits, use [lem-sp-strict-tower-arithmetic-restriction] on $\\widehat S$-module towers: restriction $m=en$ preserves the canonical derived limit, its projections and strict augmentation maps. For scalar extension $C_T$, [lem-weil-proetale-countable-products-exact] supplies exact countable products in both module categories. Finite freeness makes $C_T$ exact and its canonical product comparison invertible: in a finite basis it is the identity between the same finite copies of a product. Hence [lem-cbc-exact-product-functor-strict-limit] gives its specified limit comparison, preserving augmentations. The map $\\chi$ of Step 7 is exactly that quotient augmentation. Apply these functorial comparisons to Step 10's strict-system square and use the natural reduction-limit unit. The result is the commuting square for $q_R,q_S$ and $d_{S/R}$, hence for $\\alpha$ by $\\alpha\\mathcal R(q)=b$. For the full $S/v^m$ tower use its quotient map from any $S/v^{en}$ with $en\\geq m$; the cocycle of Step 10 identifies these maps independently of the choice. Successive restrictions and units agree by the same arithmetic-restriction theorem and coefficient cocycle. This gives the asserted integral scalar coherences including all reductions.",
+   "uses": [
+    "lem-sp-strict-tower-arithmetic-restriction",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-cbc-exact-product-functor-strict-limit",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pur-ringed-coefficient-projection-cocycle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "6.7.16–6.7.17; normalized total-limit passage; agent assembly of the cited ordinary-derived statements"
+   }
+  },
+  {
+   "text": "For the mixed square with $a$, the ring square $B_T\\to\\widehat S_T$, $B_T\\to E_T^c$, $\\widehat S_T\\to F_T^c$, $E_T^c\\to F_T^c$ commutes by [lem-weil-pbc-continuous-coefficient-realizations]. Apply [lem-pur-ringed-coefficient-projection-cocycle] to it. The proper comparison in $J$ preserves the adjunction counit by [lem-weil-pbc-condensed-e-realization], so its proper factors are exactly these coefficient transposes; the open factors are the normalized comparisons of Step 4. Step 11 gives the $q$ square. Substituting these three squares in the displayed definition of $a$ in Step 5 gives compatibility of the integral comparison after rationalization with $a$ and with the condensed coefficient comparison. Localization preserves the equalities by [prop-weil-pbc-rational-transport]. This argument uses the entire commuting ring square, including ramified reductions through Step 11.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficient-realizations",
+    "lem-pur-ringed-coefficient-projection-cocycle",
+    "lem-weil-pbc-condensed-e-realization",
+    "lem-sf-open-tensor-normalization",
+    "prop-weil-pbc-rational-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "6.8.14–6.8.15; mixed realization square; agent assembly of the cited ordinary-derived statements"
+   }
+  },
+  {
+   "text": "For $E\\subset\\Omega$ use the small filtered poset of finite $H\\subset\\Omega$ containing $E$. It is final in all finite intermediate fields by taking composita. For $L\\in\\mathcal C_E^c(X)$, [lem-weil-pbc-condensed-coefficient-complex-presentation] gives simultaneous coefficient complexes and their actual cocone maps. Choose a lower cohomological bound $a$ for $L$. Exact finite and $\\Omega$ scalar extension and exact $j_!$ keep that bound. Open extension commutes with the coefficient colimit since it is a left adjoint. Apply [lem-weil-pbc-condensed-qcqs-pushforward-continuity] to $g$, which is proper and hence qcqs, in the $E^c$-module category. Coefficient restriction commutes with proper image and reflects isomorphisms by [lem-weil-pbc-ring-sheaf-change-adjunction]. Thus the colimit of Step 6's isomorphisms gives an isomorphism $T_{E,\\Omega}^YP_E^cL\\to P_\\Omega^cT_{E,\\Omega}^XL$. The presentation theorem identifies the cocone maps under coefficient transposition, so this is the canonical projection map. Throughout $\\Omega^c$ is the finite-subfield-valued coefficient ring, and only bounded-below continuity has been applied.",
    "uses": [
     "lem-weil-pbc-condensed-coefficient-complex-presentation",
     "lem-weil-pbc-condensed-flat-coefficient-calculus",
@@ -167,72 +225,128 @@
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "6.8.14(1) and 6.8.15; bounded-below filtered coefficient passage; agent assembly of the cited DAG interfaces, not a literal condensed-module theorem of this paper"
+    "place": "6.8.14(1) and 6.8.15; agent assembly of the cited ordinary-derived statements"
    }
   },
   {
-   "text": "Every object of $\\mathcal C_\\Omega^c(X)$ has a presentation $T_{E,\\Omega}^XL$ by [prop-weil-pbc-qbar-condensed-two-colimit]. Step 9 identifies its image under the actual ambient functor $Rg_{*,\\Omega}j_{!,\\Omega}$ with $T_{E,\\Omega}^Y(P_E^cL)$, which is bounded constructible by the scalar-preservation assertion of that node and Step 5. Thus $P_\\Omega^c$ restricts to the claimed category. Naturality and the composition equations from Step 8 extend to $\\Omega$: on a finite-stage input the maps are the cocone maps of Step 9, tensor multiplication is associative, and mate pasting gives the same transpose for a direct or successive extension. For an arbitrary morphism in $\\mathcal C_\\Omega^c$, descend it to a common finite field using the morphism clause of the two-colimit node and apply finite-stage naturality. Equality is independent of the choice of descent because two representatives agree after a further finite extension. This handles morphisms, identities and successive coefficient extensions, not only objects.",
+   "text": "Every $\\mathcal C_\\Omega^c(X)$ object is $T_{E,\\Omega}^XL$ by [prop-weil-pbc-qbar-condensed-two-colimit]. Step 13 identifies its image under the actual ambient composite with $T_{E,\\Omega}^YP_E^cL$, which belongs to $\\mathcal C_\\Omega^c(Y)$ by the scalar-preservation clause and Step 5. The coefficient cocycle with target $\\Omega$ is the arbitrary-ring cocycle of Step 9, so direct and successive coefficient maps agree. For arbitrary morphisms choose a common finite field using the two-colimit's morphism clause. Naturality there gives naturality of the result; independence follows because two finite representatives agree after further extension, again by that node. This also preserves identities.",
    "uses": [
     "prop-weil-pbc-qbar-condensed-two-colimit",
-    "lem-weil-pbc-condensed-flat-coefficient-calculus",
-    "lem-weil-pbc-mate-pasting"
+    "lem-pur-ringed-coefficient-projection-cocycle",
+    "lem-weil-pbc-condensed-flat-coefficient-calculus"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "6.8.14(1) and 6.8.15; descent of transformations; agent assembly of the cited DAG interfaces, not a literal condensed-module theorem of this paper"
+    "place": "6.8.14(1) and 6.8.15; descent of transformations; agent assembly of the cited ordinary-derived statements"
    }
   },
   {
-   "text": "Finally use the normalized proper/open refinement transformations of [lem-cbc-strict-tower-proper-open-calculus]. Restrict completed finite reductions to the constant $R$-coefficient tower category, so this lemma applies with its actual coefficient ring $B=R$, not with a varying ring silently substituted. Its finite levels have bounded-below etale-origin witnesses by the definition of $\\mathcal I_X(R)$; the lemma imposes no common bound for this application. Its comparison is the proper-adjunction mate of open base change followed, for a noncartesian refinement square, by projection onto the clopen section. The current [lem-coef-semilinear-derived-sections] explicitly models open-extension base-change maps, adjunction mates, and composites with proper direct-image composition. The clopen projection is a map of module sheaves, acting by identity and zero on the two pieces, so it is included in that same operations clause. Its evaluation/composition/transpose preservation clause therefore carries this precise refinement construction to the simultaneous semilinear models. This application uses no fiberwise internal-Hom or tensor-Hom evaluation clause. The statement [lem-weil-pbc-constant-completion-equivalence] identifies its completed total limits. The identities for horizontal and vertical pasting in the strict-tower node therefore give refinement composition identities after total limit. Every coefficient/open map used above commutes with the clopen projection: after restriction to its two open components the projection is respectively identity and zero. The proper part is a counit transpose, so mate pasting gives the refinement square for $b$, $q$ and $\\alpha$ as an equality on the section models. Rationalization preserves that equality; the adjunction-preserving direct-image comparison for $J$ and the explicit open comparison then give it for $a$ and for finite condensed coefficient extension. Step 9 carries the same equality to $\\Omega$ by natural colimit maps, and Step 10 removes the choice of finite field. Naturality and integer shifts are preserved at every operation: use the shift-compatible projection mate, the section-model operations, the exact total-limit functor, and localized comparisons. Thus all specified maps have the identity, tower, shift and compactification-refinement coherences asserted in the item. No faithfulness of derived evaluation functors for equality of transformations is assumed.",
+   "text": "For a proper refinement $u:c_1\\to c_2$, use the intrinsic clopen-section mate of [lem-sf-semilinear-proper-open-mate-pasting]. It defines the actual map between the semilinear compact-support systems, has identity and successive-refinement laws before evaluation, and restricts to the specified constant-$R$ tower map. Its finite inputs have bounded-below etale-origin witnesses by membership in $\\mathcal I_X(R)$, so [lem-cbc-strict-tower-proper-open-calculus] gives invertibility there. Joint conservativity of ordinary system evaluation gives invertibility on systems. Apply [lem-pur-ringed-refinement-coefficient-square] to $\\Delta B\\to A_\\bullet$, then apply $Rg_{2,*}$. Identify $Rg_{1,*}=Rg_{2,*}Ru_*$ using the adjunction-compatible composition of [lem-sfb-ringed-derived-monoidal-comparisons]. The coefficient cocycle and [lem-weil-pbc-mate-pasting] identify the pasted coefficient transpose, giving the refinement square for $b$ with its clopen normalization. The constant/completed comparison identifies the limit units. Taking total limit and using naturality of the unit in Step 3 gives the refinement square for $q$. Naturality of the reduction-limit counit gives it for $\\alpha$. All equalities are obtained from ordinary derived-system transformations.",
    "uses": [
+    "lem-sf-semilinear-proper-open-mate-pasting",
     "lem-cbc-strict-tower-proper-open-calculus",
+    "def-weil-pbc-bounded-constructible-complete",
     "lem-coef-semilinear-derived-sections",
-    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-pur-ringed-refinement-coefficient-square",
+    "lem-pur-ringed-coefficient-projection-cocycle",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
     "lem-weil-pbc-mate-pasting",
-    "lem-weil-pbc-condensed-e-realization",
-    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-weil-pbc-constant-completion-equivalence",
+    "lem-coef-derived-system-evaluation-calculus",
     "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "6.7.6–6.7.7 and 6.8.15; refinement and composition supplement; agent assembly of the cited DAG interfaces, not a literal condensed-module theorem of this paper"
+    "place": "6.7.6–6.7.7; integral refinement square; agent assembly of the cited ordinary-derived statements"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-ringed-refinement-coefficient-square] to $B\\to\\widehat S$, $B\\to E^c$ and $E^c\\to F^c$. These coefficient sheaves have exactly the inverse-image identifications already checked. It gives the refinement squares for the proper/open composites, with the same clopen projection and counit transpose used in Steps 5–7. Combine them with Step 15's $q$ square and the counit-preserving $J$ comparison. This gives refinement compatibility for completed integral scalar extension and for $a$ and finite condensed scalar extension. Rationalization preserves these equations. Step 13 takes their finite-stage cocone maps to the same equation at $\\Omega$, and Step 14 removes the finite presentation choice. Successive-refinement laws are inherited from the strict-system pasting theorem; the coefficient cocycles of Steps 9–12 give compatibility with towers of extensions.",
+   "uses": [
+    "lem-pur-ringed-refinement-coefficient-square",
+    "lem-weil-pbc-condensed-e-realization",
+    "prop-weil-pbc-rational-transport",
+    "lem-sf-semilinear-proper-open-mate-pasting",
+    "lem-pur-ringed-coefficient-projection-cocycle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "6.7.7 and 6.8.15; field refinement square; agent assembly of the cited ordinary-derived statements"
+   }
+  },
+  {
+   "text": "Finally all constructions respect the canonical shifts. Derived pullback/direct-image units and counits do so by [lem-weil-pbc-derived-adjunction-shift], and coefficient projection does so by [lem-weil-pbc-ringed-projection-mate-exact] and [lem-sp-finite-free-direct-image-coherence]. Exact open extension acts degreewise, and its normalized open-unit and clopen identity/zero maps shift to those same maps. The new coefficient and refinement statements include their shift equations. Total limit is exact; its projection-normalized units and comparisons come from ordinary derived adjunctions on the ringed diagram topoi. Rationalization and the bounded-below coefficient-colimit comparisons preserve their shift structures. Therefore the comparisons constructed above are natural exact-functor comparisons with the asserted shifts, identities, coefficient towers and refinement coherences. No exceptional right adjoint or enhanced category has been introduced.",
+   "uses": [
+    "lem-weil-pbc-derived-adjunction-shift",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-sp-finite-free-direct-image-coherence",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-pur-ringed-coefficient-projection-cocycle",
+    "lem-pur-ringed-refinement-coefficient-square",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "prop-weil-pbc-rational-transport",
+    "lem-weil-pbc-condensed-qcqs-pushforward-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "6.7.6–6.7.7 and 6.8.15; exact-functor structures; agent assembly of the cited ordinary-derived statements"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-kun-dimension-finite-type",
-  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "def-weil-integral-scalar-extension",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-bounded-constructible-complete",
+  "def-weil-pbc-condensed-e-module-category",
+  "lem-cbc-exact-product-functor-strict-limit",
   "lem-cbc-integral-compact-support-uniform-restriction",
-  "lem-coef-semilinear-derived-sections",
-  "prop-weil-pbc-direct-image-limits",
-  "lem-weil-pbc-ringed-slice-extension-tensor",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-pbc-ring-sheaf-change-adjunction",
-  "lem-weil-compact-support-reduction-tower-functor",
+  "lem-cbc-strict-tower-proper-open-calculus",
   "lem-coef-derived-system-evaluation-calculus",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "prop-weil-pbc-rational-transport",
+  "lem-coef-semilinear-derived-sections",
+  "lem-kun-dimension-finite-type",
+  "lem-pur-completed-coefficient-pushforward-comparison",
+  "lem-pur-ringed-coefficient-projection-cocycle",
+  "lem-pur-ringed-refinement-coefficient-square",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-semilinear-proper-open-mate-pasting",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-sp-finite-free-direct-image-coherence",
+  "lem-sp-strict-tower-arithmetic-restriction",
+  "lem-weil-compact-support-reduction-tower-functor",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-pbc-condensed-coefficient-complex-presentation",
   "lem-weil-pbc-condensed-e-realization",
   "lem-weil-pbc-condensed-flat-coefficient-calculus",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "lem-weil-pbc-derived-adjunction-shift",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-integral-stratified-perfect-characterization",
   "lem-weil-pbc-mate-pasting",
-  "lem-weil-pbc-continuous-coefficient-realizations",
-  "def-weil-l-adic-coefficient-extension",
-  "lem-weil-pbc-condensed-coefficient-complex-presentation",
-  "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-standard-quotients-perfect",
+  "lem-weil-proetale-countable-products-exact",
+  "prop-weil-pbc-direct-image-limits",
   "prop-weil-pbc-qbar-condensed-two-colimit",
-  "lem-cbc-strict-tower-proper-open-calculus"
+  "prop-weil-pbc-rational-transport"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "6.7.2, 6.7.6–6.7.8, 6.7.14–6.7.17 and 6.8.14–6.8.15; assembly of existing strict-system, completed-module, and condensed-module interfaces. The paper does not state the archived condensed-module comparison."
+  "place": "6.7.2, 6.7.6–6.7.17, 6.8.14–6.8.15 motivate this assembly of ordinary derived coefficient and compactification statements; the condensed realization assertion is agent-formulated."
  },
  "mathlib_searches": [
   {
@@ -386,10 +500,42 @@
    "date": "2026-10-16",
    "verdict": "No match for this completed/condensed compact-support comparison among the returned declarations.",
    "digest": "6c2f51fe54d106ad"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforwardComp",
+   "results": "7 hits: SheafOfModules.pushforwardComp; SheafOfModules.pushforward_id_comp; SheafOfModules.pushforward_comp_id; SheafOfModules.pushforward_assoc; SheafOfModules.pushforwardComp_hom_app_val_app; SheafOfModules.pushforwardComp_inv_app_val_app; SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-18",
+   "digest": "2e036dcdc856c743",
+   "verdict": "no match: inspected signatures concern underived sheaf pullback, pushforward, scalar extension or unrelated cochain/condensed constructions; none states this ordinary unbounded derived coefficient-mate identity"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.support.*realization|condensed.*compact.support",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "digest": "4f53cda18c2baa0c",
+   "verdict": "no match: inspected signatures concern underived sheaf pullback, pushforward, scalar extension or unrelated cochain/condensed constructions; none states this ordinary unbounded derived coefficient-mate identity"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Integral l adic compact support reduction tower agrees with compact support on condensed coefficient modules",
+   "results": "8 hits: CondensedMod.isDiscrete_tfae; AdicCompletion.instIsScalarTower; CondensedMod; AdicCompletion.instIsScalarTower_1; Condensed.freeForgetAdjunction; CondensedMod.LocallyConstant.adjunction; CondensedAb; CondensedMod.IsSolid.mk",
+   "date": "2026-10-18",
+   "digest": "b30424e9b0efef61",
+   "verdict": "no match: inspected signatures concern underived sheaf pullback, pushforward, scalar extension or unrelated cochain/condensed constructions; none states this ordinary unbounded derived coefficient-mate identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed compact support reduction tower realization in condensed l adic module sheaves with coefficient coherences",
+   "results": "8 hits: CondensedMod.IsSolid; IsAdicComplete.StrictMono.lift; AdicCompletion.transitionMap_comp_reduceModIdeal; AdicCompletion; IsAdicComplete.of_comp_lift; AdicCompletion.pi_apply_coe; Hausdorffification; IsAdicComplete.StrictMono.of_comp_lift",
+   "date": "2026-10-18",
+   "digest": "0887347f3f264bc0",
+   "verdict": "no match: inspected signatures concern underived sheaf pullback, pushforward, scalar extension or unrelated cochain/condensed constructions; none states this ordinary unbounded derived coefficient-mate identity"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "item": "lem-pur-condensed-exceptional-reconstruction",
   "by": "worker",
@@ -398,126 +544,161 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-thm-purity-transport",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-18",
   "item": "lem-pur-compact-support-condensed-realization",
   "worker": "stage1",
-  "summary": "Identified the actual strict compact-support tower limit with the completed proper/open composite via the reduction/limit adjunction, constructed alpha as its counit, and obtained the condensed and coefficient comparisons as specified tensor/open maps and proper counit transposes. All inputs already exist: no new nodes. Kept the arbitrary positive-characteristic base and finite-subfield-valued Omega coefficients; avoided the nearby finite-field-only and finite-Tor-only comparison lemmas. Repair of the landing refusal at fc89acba9d: compared the returned snapshot with current main, re-read the amended semilinear-sections statement, and scoped Steps 2, 3, 8 and 11 to its geometric tensor/adjunction/mate clauses. Its added cartesian-first-input restriction concerns internal Hom, which these steps never use; normalization of the output is now derived explicitly by tensor reassociation and b. Independent second reading: Steps 7–8 now choose bases only of the completed free coefficient sheaves, then reduce them using the cited canonical quotient identifications. This removes an unstated arithmetic finite-freeness input without changing any specified map.",
-  "blueprint": "Supports sk-thm-purity-transport Steps 2–3 and thm-pur-rational-and-qbar-purity Steps 1–2, through the seeded ancestry lem-pur-condensed-exceptional-reconstruction -> nt-target-smooth-purity-qbar. Blueprint search found no equivalent node; ancestor command returns None for this seeded target ancestry. The existing explicit from.place and via are retained.",
+  "summary": "Repaired all four returned long steps and re-certified the original eleven arguments. Existing open, normalized-reduction, finite-free direct-image and arithmetic-restriction statements replace inline lemmas. Two new statement-only ordinary-derived lemmas isolate arbitrary coefficient-projection cocycles and ring-sheaf/whole-system clopen refinement squares. Seventeen explicit steps preserve the original statement and all specified maps; no enhanced machinery or finite-field hypothesis is imported.",
+  "blueprint": "sk-thm-purity-transport Step 2 (coherent adic reconstruction) and Step 3 (rational and algebraic-closure coefficient transport), supporting thm-pur-rational-and-qbar-purity Steps 1–2 through the existing seeded target ancestry. Whole-blueprint searches found no equivalent node. The ancestor tool returns None, retained for both new nodes, with the complete via chain.",
   "tool_uses": [
    {
-    "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Checks noetherianity needed for the uniform compact-support and condensed comparison tools. This is a generic input to coefficient transport; the purity-transport unit does not reprove it."
-   },
-   {
-    "node": "lem-kun-dimension-finite-type",
-    "why": "Checks finite dimension needed for completed uniform categories. This is a generic input to coefficient transport; the purity-transport unit does not reprove it."
-   },
-   {
-    "node": "lem-weil-pbc-profinite-coefficient-inverse-image",
-    "why": "Identifies completed coefficient sheaves and quotient maps under the geometric morphisms. This is a generic input to coefficient transport; the purity-transport unit does not reprove it."
+    "node": "lem-cbc-exact-product-functor-strict-limit",
+    "why": "Generic ordinary derived coefficient/diagram, geometric finiteness, or uniform constructibility input used in the indicated proof step; the purity-transport unit does not reprove this tool."
    },
    {
     "node": "lem-cbc-integral-compact-support-uniform-restriction",
-    "why": "Supplies preservation of the exact uniform category, including common models and compatible etale-origin witnesses. This is a generic input to coefficient transport; the purity-transport unit does not reprove it."
-   },
-   {
-    "node": "lem-coef-semilinear-derived-sections",
-    "why": "Uses the current theorem's simultaneous geometric section models, derived coefficient tensor, and preservation of units/counits and specified mates in Steps 2, 3, 8 and 11. Its restricted internal-Hom clause is unused; the purity-transport unit does not construct these generic models."
-   },
-   {
-    "node": "prop-weil-pbc-direct-image-limits",
-    "why": "Supplies completed proper-image projection comparisons with finite reductions. This is a generic input to coefficient transport; the purity-transport unit does not reprove it."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-slice-extension-tensor",
-    "why": "Supplies the tensor identity for the specified sheafified open extension. This is a generic input to coefficient transport; the purity-transport unit does not reprove it."
-   },
-   {
-    "node": "lem-pur-site-restriction-module-adjunction-exact",
-    "why": "Supplies the exact open module adjunction used to derive coefficient/open comparisons. This is a generic input to coefficient transport; the purity-transport unit does not reprove it."
-   },
-   {
-    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "why": "Supplies conservative coefficient restriction and its normalized compatibility with derived proper image and adjunction. This is a generic input to coefficient transport; the purity-transport unit does not reprove it."
-   },
-   {
-    "node": "lem-weil-compact-support-reduction-tower-functor",
-    "why": "Identifies the specified strict tower, its morphisms and quotient transitions. This is a generic input to coefficient transport; the purity-transport unit does not reprove it."
-   },
-   {
-    "node": "lem-coef-derived-system-evaluation-calculus",
-    "why": "Supplies the reduction-limit adjunction and its projection-normalized counit. This is a generic input to coefficient transport; the purity-transport unit does not reprove it."
-   },
-   {
-    "node": "lem-weil-pbc-constant-completion-equivalence",
-    "why": "Identifies completeness with the reduction-limit unit and constant/completed strict total-limit models. This is a generic input to coefficient transport; the purity-transport unit does not reprove it."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "why": "Supplies exact functorial total limit, rather than arbitrary choices of Roos triangle maps. This is a generic input to coefficient transport; the purity-transport unit does not reprove it."
-   },
-   {
-    "node": "prop-weil-pbc-rational-transport",
-    "why": "Localizes supplied exact integral functors and transformations. This is a generic input to coefficient transport; the purity-transport unit does not reprove it."
-   },
-   {
-    "node": "lem-weil-pbc-condensed-e-realization",
-    "why": "Identifies the archived condensed categories and proper-image adjunction data with coefficient realization. This is a generic input to coefficient transport; the purity-transport unit does not reprove it."
-   },
-   {
-    "node": "lem-weil-pbc-condensed-flat-coefficient-calculus",
-    "why": "Supplies finite freeness, flatness and tensor-transitivity for exactly the archived finite and Omega coefficients. This is a generic input to coefficient transport; the purity-transport unit does not reprove it."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-projection-mate-exact",
-    "why": "Supplies the canonical counit projection mate, its unit normalization and shifts. This is a generic input to coefficient transport; the purity-transport unit does not reprove it."
-   },
-   {
-    "node": "lem-weil-finite-free-completed-scalar-comparison",
-    "why": "Identifies completed strict scalar extension with finite-free ordinary tensor, including ramified quotients. This is a generic input to coefficient transport; the purity-transport unit does not reprove it."
-   },
-   {
-    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "why": "Checks that finite-free scalar extension preserves exactly the compatible uniform integral category. This is a generic input to coefficient transport; the purity-transport unit does not reprove it."
-   },
-   {
-    "node": "lem-weil-pbc-mate-pasting",
-    "why": "Supplies identities of specified transposes under coefficient and refinement pasting. This is a generic input to coefficient transport; the purity-transport unit does not reprove it."
-   },
-   {
-    "node": "lem-weil-pbc-continuous-coefficient-realizations",
-    "why": "Checks that integral-to-field realization respects coefficient inclusions. This is a generic input to coefficient transport; the purity-transport unit does not reprove it."
-   },
-   {
-    "node": "lem-weil-pbc-condensed-coefficient-complex-presentation",
-    "why": "Supplies a simultaneous common-lower-bound diagram with the actual coefficient cocone maps. This is a generic input to coefficient transport; the purity-transport unit does not reprove it."
-   },
-   {
-    "node": "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
-    "why": "Permits the uniformly bounded-below coefficient colimit through the proper pushforward. This is a generic input to coefficient transport; the purity-transport unit does not reprove it."
-   },
-   {
-    "node": "prop-weil-pbc-qbar-condensed-two-colimit",
-    "why": "Descends actual Omega objects and morphisms and supplies scalar-preservation in the archived categories. This is a generic input to coefficient transport; the purity-transport unit does not reprove it."
+    "why": "Generic ordinary derived coefficient/diagram, geometric finiteness, or uniform constructibility input used in the indicated proof step; the purity-transport unit does not reprove this tool."
    },
    {
     "node": "lem-cbc-strict-tower-proper-open-calculus",
-    "why": "Supplies normalized refinement maps and pasting equations before derived evaluation. This is a generic input to coefficient transport; the purity-transport unit does not reprove it."
+    "why": "Generic ordinary derived coefficient/diagram, geometric finiteness, or uniform constructibility input used in the indicated proof step; the purity-transport unit does not reprove this tool."
+   },
+   {
+    "node": "lem-coef-derived-system-evaluation-calculus",
+    "why": "Generic ordinary derived coefficient/diagram, geometric finiteness, or uniform constructibility input used in the indicated proof step; the purity-transport unit does not reprove this tool."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic ordinary derived coefficient/diagram, geometric finiteness, or uniform constructibility input used in the indicated proof step; the purity-transport unit does not reprove this tool."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic ordinary derived coefficient/diagram, geometric finiteness, or uniform constructibility input used in the indicated proof step; the purity-transport unit does not reprove this tool."
+   },
+   {
+    "node": "lem-pur-completed-coefficient-pushforward-comparison",
+    "why": "Generic ordinary derived coefficient/diagram, geometric finiteness, or uniform constructibility input used in the indicated proof step; the purity-transport unit does not reprove this tool."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic ordinary derived coefficient/diagram, geometric finiteness, or uniform constructibility input used in the indicated proof step; the purity-transport unit does not reprove this tool."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic ordinary derived coefficient/diagram, geometric finiteness, or uniform constructibility input used in the indicated proof step; the purity-transport unit does not reprove this tool."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic normalized open inverse-image and scalar-extension comparisons for ring sheaves and diagram topoi; used instead of the returned inline K-flat/open argument."
+   },
+   {
+    "node": "lem-sf-semilinear-proper-open-mate-pasting",
+    "why": "Generic whole-system clopen proper/open refinement mate, its constant-tower restriction, and its pasting identities in Steps 15–16."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Ordinary ringed-topos direct-image composition is compatible with adjunction counits, allowing the primitive refinement square to be pushed through g_2 in Step 15."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Balanced derived scalar associativity and its unit/cocycle normalization, used to identify ramified quotient coefficients in Steps 8–10."
+   },
+   {
+    "node": "lem-sp-finite-free-direct-image-coherence",
+    "why": "Generic counit-normalized, coefficient-linear finite-free direct-image comparison and its coefficient cocycle, used in Steps 6, 7 and 9."
+   },
+   {
+    "node": "lem-sp-strict-tower-arithmetic-restriction",
+    "why": "General derived-limit invariance under n -> en including projections and strict augmentations, used in Step 11 rather than an inline cofinality proof."
+   },
+   {
+    "node": "lem-weil-compact-support-reduction-tower-functor",
+    "why": "Generic ordinary derived coefficient/diagram, geometric finiteness, or uniform constructibility input used in the indicated proof step; the purity-transport unit does not reprove this tool."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Generic ordinary derived coefficient/diagram, geometric finiteness, or uniform constructibility input used in the indicated proof step; the purity-transport unit does not reprove this tool."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-coefficient-complex-presentation",
+    "why": "Generic ordinary derived coefficient/diagram, geometric finiteness, or uniform constructibility input used in the indicated proof step; the purity-transport unit does not reprove this tool."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-e-realization",
+    "why": "Generic ordinary derived coefficient/diagram, geometric finiteness, or uniform constructibility input used in the indicated proof step; the purity-transport unit does not reprove this tool."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-flat-coefficient-calculus",
+    "why": "Generic ordinary derived coefficient/diagram, geometric finiteness, or uniform constructibility input used in the indicated proof step; the purity-transport unit does not reprove this tool."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
+    "why": "Generic ordinary derived coefficient/diagram, geometric finiteness, or uniform constructibility input used in the indicated proof step; the purity-transport unit does not reprove this tool."
+   },
+   {
+    "node": "lem-weil-pbc-constant-completion-equivalence",
+    "why": "Generic ordinary derived coefficient/diagram, geometric finiteness, or uniform constructibility input used in the indicated proof step; the purity-transport unit does not reprove this tool."
+   },
+   {
+    "node": "lem-weil-pbc-continuous-coefficient-realizations",
+    "why": "Generic ordinary derived coefficient/diagram, geometric finiteness, or uniform constructibility input used in the indicated proof step; the purity-transport unit does not reprove this tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-adjunction-shift",
+    "why": "Generic ordinary derived coefficient/diagram, geometric finiteness, or uniform constructibility input used in the indicated proof step; the purity-transport unit does not reprove this tool."
+   },
+   {
+    "node": "lem-weil-pbc-diagram-site-realization",
+    "why": "Generic ordinary derived coefficient/diagram, geometric finiteness, or uniform constructibility input used in the indicated proof step; the purity-transport unit does not reprove this tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic ordinary derived coefficient/diagram, geometric finiteness, or uniform constructibility input used in the indicated proof step; the purity-transport unit does not reprove this tool."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Generic ordinary derived coefficient/diagram, geometric finiteness, or uniform constructibility input used in the indicated proof step; the purity-transport unit does not reprove this tool."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Generic ordinary derived coefficient/diagram, geometric finiteness, or uniform constructibility input used in the indicated proof step; the purity-transport unit does not reprove this tool."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "why": "Generic ordinary derived coefficient/diagram, geometric finiteness, or uniform constructibility input used in the indicated proof step; the purity-transport unit does not reprove this tool."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Generic ordinary derived coefficient/diagram, geometric finiteness, or uniform constructibility input used in the indicated proof step; the purity-transport unit does not reprove this tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic ordinary derived coefficient/diagram, geometric finiteness, or uniform constructibility input used in the indicated proof step; the purity-transport unit does not reprove this tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic ordinary derived coefficient/diagram, geometric finiteness, or uniform constructibility input used in the indicated proof step; the purity-transport unit does not reprove this tool."
+   },
+   {
+    "node": "lem-weil-pbc-standard-quotients-perfect",
+    "why": "Generic ordinary derived coefficient/diagram, geometric finiteness, or uniform constructibility input used in the indicated proof step; the purity-transport unit does not reprove this tool."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic ordinary derived coefficient/diagram, geometric finiteness, or uniform constructibility input used in the indicated proof step; the purity-transport unit does not reprove this tool."
+   },
+   {
+    "node": "prop-weil-pbc-direct-image-limits",
+    "why": "Generic ordinary derived coefficient/diagram, geometric finiteness, or uniform constructibility input used in the indicated proof step; the purity-transport unit does not reprove this tool."
+   },
+   {
+    "node": "prop-weil-pbc-qbar-condensed-two-colimit",
+    "why": "Generic ordinary derived coefficient/diagram, geometric finiteness, or uniform constructibility input used in the indicated proof step; the purity-transport unit does not reprove this tool."
+   },
+   {
+    "node": "prop-weil-pbc-rational-transport",
+    "why": "Generic ordinary derived coefficient/diagram, geometric finiteness, or uniform constructibility input used in the indicated proof step; the purity-transport unit does not reprove this tool."
    }
-  ],
-  "revalidation": {
-   "returned_head": "fc89acba9d740c5aebfb3715801f801be99721fe",
-   "main_read": "212063375bb4cd325204209c5c65f9f9520155a8",
-   "changed_statement": "lem-coef-semilinear-derived-sections",
-   "statement_sha256": "5584ff0ba5054a312c8fdd703c81aabe73d67da0c80eae2574212653a30a80a4",
-   "steps": [
-    2,
-    3,
-    8,
-    11
-   ],
-   "result": "Current geometric section-model, coefficient tensor, adjunction and mate clauses suffice. Fiberwise internal Hom is not used. The only other changed dependency, def-weil-pbc-condensed-e-module-category, changed Lean attachment metadata only; its mathematical statement is unchanged."
-  }
+  ]
  },
  "tool_uses": [
   "lem-weil-pbc-finite-type-over-noetherian",
@@ -544,15 +725,28 @@
   "lem-weil-pbc-condensed-coefficient-complex-presentation",
   "lem-weil-pbc-condensed-qcqs-pushforward-continuity",
   "prop-weil-pbc-qbar-condensed-two-colimit",
-  "lem-cbc-strict-tower-proper-open-calculus"
+  "lem-cbc-strict-tower-proper-open-calculus",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-pur-completed-coefficient-pushforward-comparison",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sf-open-tensor-normalization",
+  "lem-sf-semilinear-proper-open-mate-pasting",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-sp-finite-free-direct-image-coherence",
+  "lem-sp-strict-tower-arithmetic-restriction",
+  "lem-weil-pbc-derived-adjunction-shift",
+  "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-standard-quotients-perfect",
+  "lem-weil-proetale-countable-products-exact"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-Codex-NG-58eae11c3",
+  "reviewer": "NT-cc-NG-6a75ca605",
   "group": "NG",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-58eae11c3 (reviewer sub-agent of L); spot-checked: Read all eleven steps, all 31 direct dependency statements, unit/chapter route, report, and cited source passages. Verified master coefficient categories and base-change morphism, ramified coefficient towers, canonical comparisons, and refinement coherences. Edge-case, duplicate, and cycle checks found no fault. No new nodes or repairs; all 25 declared tool uses accepted. Detailed checks written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-6a75ca605 (reviewer sub-agent of L); spot-checked: I read the item, all 17 steps, both new nodes, every cited statement (44 proof_deps and 12 stmt_deps), unit sk-thm-purity-transport, Bhatt–Scholze 6.7.2/6.7.6–6.7.8/6.7.14–6.7.17/6.8.14–6.8.15 and Stacks 0D6E/07A7/0E46/0E47. The statement and stmt_deps match the side-project base exactly, and the master BoundedConstructible.lean composite i_! ⋙ Rp_* (lines 336–341) matches P_E^c. The coefficient categories (completed Ŕ-modules versus condensed E^c-modules) are related only through J. Steps checked: complete input for the direct-image projection isomorphism; the triangle identity α R(q)=b; open normalization with g=id for B→A_n, B→E^c and E^c→F^c; ramification t=uv^e giving the S/v^{en} levels (case e=2, n=1 checked); exact-product limit and arithmetic restriction; qcqs continuity under a common lower bound; two-colimit descent; the refinement square Q=(j_1,j_2,1_X,u) with étale-origin invertibility. uses equal proof_deps, no cycle, no missing or merged citation. New nodes: the cocycle node is the horizontal composition of ringed-topos base change maps (true; identity and non-flat cases checked). The refinement-square node is true because s is clopen (q is separated) and adjuncts reduce both sides to the same map. Neither duplicates the finite-ring, étale or finite-free predecessors (lem-sp-finite-free-direct-image-coherence, lem-fix-direct-image-scalar-exchange, lem-sf-proper-open-coefficient-refinement, lem-sp-refinement-coefficient-mate), and both are needed for the non-free maps in Steps 10–16. Neither restates a clause of the item. The added generic tool uses are accepted. FIX: rewrote source.place of lem-pur-ringed-coefficient-projection-cocycle to cite Stacks Tag 0E47 (remark-compose-base-change-horizontal) with 07A7, which states its identity, instead of only 0D6E. Minor and left as is: Step 7 cites lem-sfb-successive-derived-quotient-normalization without needing it. No SGA source is used.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {
