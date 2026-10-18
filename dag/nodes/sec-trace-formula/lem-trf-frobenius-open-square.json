@@ -24,81 +24,60 @@
  ],
  "proof": [
   {
-   "text": "Write $S_0=\\operatorname{Spec}k_0$. Each structure map to $S_0$ gives a unital map $k_0\\to\\mathcal O_{Z_0}(U)$ on every open $U$, so $p\\cdot1$ maps to zero; hence $X_0,Y_0$ are of characteristic $p$, including empty opens. Identify $X_0$ with its open image in $Y_0$, with restricted structure sheaf, using [def-weil-open-immersion]. By [def-weil-absolute-frobenius-scheme], $F_{Y_0}^{am}$ is the identity on the underlying space and acts by $r\\mapsto r^{p^{am}}=r^{q^m}$ on sections. Its restriction to $X_0$ has exactly these same two components, and hence equals $F_{X_0}^{am}$. This gives $j_0\\Phi_{X_0}^m=\\Phi_{Y_0}^mj_0$ and $(\\Phi_{Y_0}^m)^{-1}(X_0)=X_0$. These maps are over $S_0$: [def-weil-frobenius-substitution] states that $c^q=c$ for $c\\in k_0$, so the section map fixes the image of $k_0$ on every open. For $m=0$ the same assertions hold with both Frobenii the identity.",
+   "text": "Use the existing unrestricted characteristic and base-linearity theorems of [def-weil-relative-frobenius-geometric-fiber] to regard the actual absolute iterates [def-weil-absolute-frobenius-scheme] as endomorphisms of the models over the finite base. Naturality is proved directly: both underlying maps are the given model morphism, and on each ring of sections the equality is the ring-homomorphism identity $f(s^{p^a})=f(s)^{p^a}$. Applying the base-change functor [def-pc-base-change] proves that the two base-changed Frobenii commute with the base-changed open immersion.",
    "uses": [
-    "def-weil-open-immersion",
+    "def-weil-relative-frobenius-geometric-fiber",
     "def-weil-absolute-frobenius-scheme",
-    "def-weil-frobenius-substitution"
+    "def-pc-base-change"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 03SM (definition-absolute-frobenius), with its restriction-of-sections description; explicit q-power iteration"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply [lem-weil-pbc-open-preimage-fibre-product] to the morphism $\\Phi_{Y_0}^m:Y_0\\to Y_0$ and the open subscheme $X_0\\subseteq Y_0$. By step 1 its inverse-image open is $X_0$ and its restricted map is $\\Phi_{X_0}^m$. The cited statement identifies this open, with exactly these restriction and inclusion maps, with the fibre product. Thus the square $(\\Phi_{X_0}^m,j_0,j_0,\\Phi_{Y_0}^m)$ is Cartesian in the category of schemes; all four arrows also commute with the maps to $S_0$.",
-   "uses": [
-    "lem-weil-pbc-open-preimage-fibre-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tag 01JR (lemma-open-fibre-product), inverse-image-open specialization"
-   }
-  },
-  {
-   "text": "First, $j$ is indeed an open immersion: apply [lem-weil-pbc-open-fibre-product] to $Y_0\\times_{S_0}s$, with open subschemes $X_0\\subseteq Y_0$, $s\\subseteq s$ and $S_0\\subseteq S_0$; the canonical map is $j$. Here is the base-change verification explicitly, using the universal property and functoriality in [def-pc-fibre-product] and the construction [def-pc-base-change]. The model projection of $j\\Phi_X^m$ and $\\Phi_Y^mj$ is $j_0\\Phi_{X_0}^mp_X=\\Phi_{Y_0}^mj_0p_X$ by step 1. Their scalar projections are both $a_X$, since $a_Yj=a_X$ and the base-changed Frobenius is the product with $\\operatorname{id}_s$; uniqueness for the product proves the square commutes. Let $p_X:X\\to X_0$, $p_Y:Y\\to Y_0$ be the model projections. Take arbitrary $u:T\\to X$ and $v:T\\to Y$ satisfying $ju=\\Phi_Y^mv$. Put $u_0=p_Xu$, $v_0=p_Yv$ and $t=a_Xu=a_Yv$; the equality of the two scalar maps follows by composing the assumed equation with $a_Y$, using $a_Yj=a_X$ and $a_Y\\Phi_Y^m=a_Y$. Step 2 gives a unique $w_0:T\\to X_0$ with $\\Phi_{X_0}^mw_0=u_0$ and $j_0w_0=v_0$. The latter equality shows that $w_0$ and $t$ have the same composite to $S_0$. Hence there is a unique $w=(w_0,t):T\\to X_0\\times_{S_0}s=X$. Its projections show $\\Phi_X^mw=u$ and $jw=v$. Conversely any such $w$ has model projection $w_0$ by step 2 and scalar projection $t$ because $\\Phi_X^m$ fixes scalars, so it is this unique morphism. This is the desired Cartesian property. The descriptions of the iterates used here follow by comparing both projections: $\\Phi_Z^m=\\Phi_{Z_0}^m\\times\\operatorname{id}_s$, including $m=0$.",
+   "text": "Apply [lem-weil-pbc-open-fibre-product] with the model inclusion, the identity on the scalar scheme and the identity on the base. Its two Mathlib clauses Scheme.pullback_map_isOpenImmersion and Scheme.Pullback.range_map prove that $j$ is open and its image is precisely the inverse image of the model open under the first projection. The first projection of the base-changed Frobenius is the first projection followed by model Frobenius, by [def-pc-fibre-product]. Model Frobenius is identity on points, so the inverse image of the image of $j$ under the base-changed Frobenius is again the image of $j$. IsOpenImmersion.isPullback, the generic open-immersion pullback criterion from [def-weil-open-immersion], now proves the square for one iterate directly on the scalar extension. This avoids constructing and then base-changing the model pullback square.",
    "uses": [
     "lem-weil-pbc-open-fibre-product",
     "def-pc-fibre-product",
-    "def-pc-base-change"
+    "def-weil-absolute-frobenius-scheme",
+    "def-weil-open-immersion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tag 01JP (definition-fibre-product); base change of the square verified directly by its universal property"
-   }
+   "elementary": false
   },
   {
-   "text": "By [def-weil-frobenius-substitution], $\\gamma$ fixes $k_0$ and has inverse $\\gamma^{-1}$. Functoriality of $\\operatorname{Spec}$ [def-weil-affine-spectrum] and of the fibre product [def-pc-fibre-product] gives $g_Z^m=\\operatorname{id}_{Z_0}\\times g_s^m$, with inverse $\\operatorname{id}_{Z_0}\\times g_s^{-m}$; both product morphisms are defined over $S_0$. Comparing the model and scalar projections proves $jg_X^m=g_Y^mj$. To verify its square is Cartesian, take $u:T\\to X$ and $v:T\\to Y$ with $ju=g_Y^mv$. Multiplying $jg_X^m=g_Y^mj$ by the two inverses gives $jg_X^{-m}=g_Y^{-m}j$. Then $w=g_X^{-m}u$ satisfies $g_X^mw=u$ and $jw=g_Y^{-m}ju=v$. It is unique because $g_X^m$ is invertible. This proves the required universal property for every $m\\geq0$.",
+   "text": "The existing coefficient-action inverse and projection identities of [def-weil-frobenius-detailed] apply to arbitrary models, without finite-type hypotheses. Compare first projections to see that both composites with $j$ fix the model and compare second projections to see that both act by the same scalar automorphism. Pullback hom-extensionality from [def-pc-fibre-product] gives commutativity. The explicit inverse identities make both coefficient actions isomorphisms, so IsPullback.of_horiz_isIso proves their Cartesian square.",
    "uses": [
-    "def-weil-frobenius-substitution",
-    "def-weil-affine-spectrum",
+    "def-weil-frobenius-detailed",
     "def-pc-fibre-product"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-frobenius-open-square.md",
-    "place": "Proof, second paragraph: product automorphisms; explicit inverse and universal-property calculation"
-   }
+   "elementary": true
   },
   {
-   "text": "For $Z=X,Y$, the second projection of the product map $g_Z^m=\\operatorname{id}_{Z_0}\\times g_s^m$ is, by the projection identity in [def-pc-fibre-product], $a_Zg_Z^m=g_s^ma_Z$. This proves both displayed structure-map equalities. It is a semilinear equality, and asserts no equality $a_Zg_Z^m=a_Z$; for $m=0$ it reduces to the identity equality.",
+   "text": "For either Cartesian square, prove the assertion for every nonnegative power by induction. At zero use the Cartesian square of identity maps. At a successor paste the one-step square horizontally with the previously proved square; End multiplication is reverse categorical composition, so the resulting composites are exactly the successor powers. This uses only pullback pasting, hence [def-pc-fibre-product].",
    "uses": [
     "def-pc-fibre-product"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-frobenius-open-square.md",
-    "place": "Proof, second paragraph, last three sentences: structure maps are second projections"
-   }
+   "elementary": true
+  },
+  {
+   "text": "For each model the second projection identity of [def-weil-frobenius-detailed] states $g_Z a_Z=a_Z g_s$ in diagrammatic composition. Induct on the power: identity compositions prove zero, and associativity with the one-step identity proves the successor. Apply this same proved helper to both models, giving exactly the two required semilinearity identities.",
+   "uses": [
+    "def-weil-frobenius-detailed"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-open-immersion",
+  "def-weil-relative-frobenius-geometric-fiber",
   "def-weil-absolute-frobenius-scheme",
-  "def-weil-frobenius-substitution",
-  "lem-weil-pbc-open-preimage-fibre-product",
+  "def-pc-base-change",
   "lem-weil-pbc-open-fibre-product",
   "def-pc-fibre-product",
-  "def-pc-base-change",
-  "def-weil-affine-spectrum"
+  "def-weil-open-immersion",
+  "def-weil-frobenius-detailed"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-frobenius-open-square.md",
-  "place": "Imported Proof, two paragraphs; expanded with the existing Tag 01JR inverse-image-open leaf and explicit universal properties. Local blueprint proof and Stacks sources checked: varieties.tex, Tag 03SM (definition-absolute-frobenius), and schemes.tex, Tags 01JR (lemma-open-fibre-product) and 01JP (definition-fibre-product)."
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil-push/lem-trf-frobenius-open-square.md",
+  "place": "Scheme square: the original restriction-of-open argument, implemented directly after base change using Stacks 01JR image formula and Mathlib IsOpenImmersion.isPullback. Naturality: varieties.tex definition-absolute-frobenius and lemma-frobenius-endomorphism-identity (03SM, 0CC7). Galois square and semilinearity: existing FrobeniusDetailed inverse and projection identities, followed by elementary isomorphism pullback and induction. C5, 2026-10-18."
  },
  "mathlib_searches": [
   {
@@ -259,5 +238,15 @@
   "date": "2026-10-16",
   "existing": false,
   "note": "Uses the landed unrestricted model_characteristic, model_frobenius_over and galoisMap interfaces. The relative Frobenius is the actual Over.pullback map of the recorded absolute Frobenius, without a finite-type assumption. Two already landed definition nodes are added to stmt_deps for these canonical interfaces."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261018T144402-L-3500046",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

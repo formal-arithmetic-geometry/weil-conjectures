@@ -9,7 +9,6 @@ public import Sheaf.AlgebraicGeometry.FrobeniusDetailed
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import Mathlib.CategoryTheory.Endomorphism
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
-import Mathlib.AlgebraicGeometry.Restrict
 import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 /-!
@@ -34,6 +33,62 @@ open CategoryTheory CategoryTheory.Limits AlgebraicGeometry
 
 namespace WeilConjectures.FiniteFieldDatum
 
+private theorem pullback_map_eq {S T : Scheme.{u}} (b : T ⟶ S)
+    {X Y : Over S} (j : X ⟶ Y) :
+    ((Over.pullback b).map j).left =
+      pullback.map X.hom b Y.hom b j.left (𝟙 T) (𝟙 S)
+        (by simp) (by simp) := by
+  apply pullback.hom_ext <;> simp [Over.pullback_map_left]
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem pullback_map_range {S T : Scheme.{u}} (b : T ⟶ S)
+    {X Y : Over S} (j : X ⟶ Y) :
+    Set.range ((Over.pullback b).map j).left =
+      pullback.fst Y.hom b ⁻¹' Set.range j.left := by
+  rw [pullback_map_eq]
+  simpa using Scheme.Pullback.range_map X.hom b Y.hom b j.left (𝟙 T) (𝟙 S)
+    (by simp) (by simp)
+
+private theorem pullback_map_open {S T : Scheme.{u}} (b : T ⟶ S)
+    {X Y : Over S} (j : X ⟶ Y) [IsOpenImmersion j.left] :
+    IsOpenImmersion ((Over.pullback b).map j).left := by
+  rw [pullback_map_eq]
+  infer_instance
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem iterateFrobenius_naturality {X Y : Scheme.{u}} (f : X ⟶ Y)
+    {p : ℕ} (hp : p.Prime) (hX : (p : Γ(X, ⊤)) = 0)
+    (hY : (p : Γ(Y, ⊤)) = 0) (n : ℕ) :
+    X.iterateFrobenius hp hX n ≫ f = f ≫ Y.iterateFrobenius hp hY n := by
+  apply Scheme.Hom.ext (by ext x; rfl)
+  intro U
+  simp only [Scheme.Hom.comp_app]
+  change f.app U ≫ (X.iterateFrobenius hp hX n).app (f ⁻¹ᵁ U) ≫
+    X.presheaf.map (𝟙 _) =
+      (Y.iterateFrobenius hp hY n).app U ≫ f.app U
+  rw [X.presheaf.map_id, Category.comp_id]
+  ext s
+  change ((f.app U).hom s) ^ p ^ n = (f.app U).hom (s ^ p ^ n)
+  exact (map_pow (f.app U).hom s _).symm
+
+private theorem isPullback_pow {X Y : Scheme.{u}} {f : X ⟶ X} {g : Y ⟶ Y}
+    {j : X ⟶ Y} (h : IsPullback f j j g) (m : ℕ) :
+    IsPullback (End.of f ^ m) j j (End.of g ^ m) := by
+  induction m with
+  | zero => exact IsPullback.of_id_fst
+  | succ m ih =>
+    simpa only [pow_succ, End.mul_def] using h.paste_horiz ih
+
+private theorem semilinear_pow {X S : Scheme.{u}} {f : X ⟶ X} {g : S ⟶ S}
+    {a : X ⟶ S} (h : f ≫ a = a ≫ g) (m : ℕ) :
+    (End.of f ^ m) ≫ a = a ≫ (End.of g ^ m) := by
+  induction m with
+  | zero => simp only [pow_zero, End.one_def, Category.id_comp, Category.comp_id]
+  | succ m ih =>
+    rw [pow_succ, pow_succ, End.mul_def, End.mul_def, Category.assoc, ih,
+      ← Category.assoc, h, Category.assoc]
+
+set_option backward.isDefEq.respectTransparency false in
 /-- The scheme-Frobenius and geometric-Galois-Frobenius squares of an open immersion
 are Cartesian for every nonnegative iterate. The last two identities give semilinearity
 of the Galois maps with respect to the projections to `Spec k`.
@@ -100,6 +155,78 @@ theorem frobenius_open_square (D : WeilConjectures.FiniteFieldDatum.{u})
         (End.of (Spec.map (CommRingCat.ofHom
           (@FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k _
             (Fintype.ofFinite D.k₀) _ _ _).toRingHom)) ^ m) :=
-  sorry
+  by
+  let b := Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))
+  let B := Over.pullback b
+  let fx : X₀ ⟶ X₀ := Over.homMk
+    (X₀.left.iterateFrobenius D.prime (D.model_characteristic X₀.hom) D.a)
+    (D.model_frobenius_over X₀.hom)
+  let fy : Y₀ ⟶ Y₀ := Over.homMk
+    (Y₀.left.iterateFrobenius D.prime (D.model_characteristic Y₀.hom) D.a)
+    (D.model_frobenius_over Y₀.hom)
+  let j := (B.map j₀).left
+  let Fx := (B.map fx).left
+  let Fy := (B.map fy).left
+  have hn : fx ≫ j₀ = j₀ ≫ fy := by
+    apply Over.OverMorphism.ext
+    exact iterateFrobenius_naturality j₀.left D.prime
+      (D.model_characteristic X₀.hom) (D.model_characteristic Y₀.hom) D.a
+  have hc : Fx ≫ j = j ≫ Fy := by
+    simpa only [Functor.map_comp, Over.comp_left] using
+      congrArg (fun t ↦ (B.map t).left) hn
+  have : IsOpenImmersion j := pullback_map_open b j₀
+  have hr : Set.range j = pullback.fst Y₀.hom b ⁻¹' Set.range j₀.left :=
+    pullback_map_range b j₀
+  have hfp (x : (B.obj Y₀).left) :
+      pullback.fst Y₀.hom b (Fy x) = pullback.fst Y₀.hom b x := by
+    have h : Fy ≫ pullback.fst Y₀.hom b = pullback.fst Y₀.hom b ≫ fy.left := by
+      simp [Fy, B, Over.pullback_map_left]
+    have hh := congrArg (fun t ↦ t.base.hom x) h
+    change pullback.fst Y₀.hom b (Fy x) =
+      Y₀.left.iterateFrobenius D.prime (D.model_characteristic Y₀.hom) D.a
+        (pullback.fst Y₀.hom b x) at hh
+    exact hh
+  have hf : IsPullback Fx j j Fy := by
+    apply IsOpenImmersion.isPullback Fx j j Fy hc.symm
+    apply TopologicalSpace.Opens.ext
+    change Fy ⁻¹' Set.range j = Set.range j
+    rw [hr]
+    ext x
+    exact Iff.of_eq (congrArg (fun z ↦ z ∈ Set.range j₀.left) (hfp x))
+  refine ⟨isPullback_pow hf m, ?_⟩
+  let σ := @FiniteField.geometricFrobeniusAlgEquivOfAlgebraic D.k₀ D.k _
+    (Fintype.ofFinite D.k₀) _ _ _
+  let gx := D.galoisMap X₀.hom σ
+  let gy := D.galoisMap Y₀.hom σ
+  have hj₁ : j ≫ pullback.fst Y₀.hom b = pullback.fst X₀.hom b ≫ j₀.left := by
+    simp [j, B, Over.pullback_map_left]
+  have hj₂ : j ≫ pullback.snd Y₀.hom b = pullback.snd X₀.hom b := by
+    simp [j, B, Over.pullback_map_left]
+  have hg : gx ≫ j = j ≫ gy := by
+    apply pullback.hom_ext
+    · calc
+        (gx ≫ j) ≫ pullback.fst Y₀.hom b =
+            gx ≫ pullback.fst X₀.hom b ≫ j₀.left := by rw [Category.assoc, hj₁]
+        _ = pullback.fst X₀.hom b ≫ j₀.left := by
+          rw [← Category.assoc, (D.galoisMap_projections X₀.hom σ).1]
+        _ = (j ≫ gy) ≫ pullback.fst Y₀.hom b := by
+          rw [Category.assoc, (D.galoisMap_projections Y₀.hom σ).1, hj₁]
+    · calc
+        (gx ≫ j) ≫ pullback.snd Y₀.hom b = gx ≫ pullback.snd X₀.hom b := by
+          rw [Category.assoc, hj₂]
+        _ = pullback.snd X₀.hom b ≫ Spec.map (CommRingCat.ofHom σ.toRingHom) :=
+          (D.galoisMap_projections X₀.hom σ).2
+        _ = (j ≫ gy) ≫ pullback.snd Y₀.hom b := by
+          rw [Category.assoc, (D.galoisMap_projections Y₀.hom σ).2,
+            ← Category.assoc, hj₂]
+  have : IsIso gx := by
+    exact ⟨⟨D.galoisMap X₀.hom σ.symm,
+      (D.galoisMap_inverse X₀.hom σ).1, (D.galoisMap_inverse X₀.hom σ).2⟩⟩
+  have : IsIso gy := by
+    exact ⟨⟨D.galoisMap Y₀.hom σ.symm,
+      (D.galoisMap_inverse Y₀.hom σ).1, (D.galoisMap_inverse Y₀.hom σ).2⟩⟩
+  refine ⟨isPullback_pow (IsPullback.of_horiz_isIso ⟨hg⟩) m, ?_, ?_⟩
+  · exact semilinear_pow (D.galoisMap_projections X₀.hom σ).2 m
+  · exact semilinear_pow (D.galoisMap_projections Y₀.hom σ).2 m
 
 end WeilConjectures.FiniteFieldDatum
