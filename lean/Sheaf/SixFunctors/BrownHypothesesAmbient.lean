@@ -13,15 +13,10 @@ public import Mathlib.CategoryTheory.Idempotents.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 
-import Sheaf.CategoryTheory.SheafTensor
-import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
-import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
-import Mathlib.Algebra.Homology.DerivedCategory.KInjective
-import Sheaf.CategoryTheory.GrothendieckDerivedCoproductsColimit
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
+import Mathlib.CategoryTheory.Limits.FullSubcategory
+import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
+import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
 import Sheaf.CategoryTheory.CountableCoproductsIdempotentComplete
 
 /-!
@@ -39,6 +34,8 @@ universe u
 
 open CategoryTheory CategoryTheory.Limits
 open AlgebraicGeometry Scheme
+open ZeroObject
+open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale
 
@@ -107,6 +104,66 @@ theorem det_brown_hypotheses_ambient
       (localizingClosureProEtale Λ X).IsTriangulated ∧
       HasCoproducts.{u + 1} (localizingClosureProEtale Λ X).FullSubcategory ∧
       IsIdempotentComplete (localizingClosureProEtale Λ X).FullSubcategory := by
-  sorry
+  classical
+  -- Apply the existing internal-module Grothendieck theorem directly, retaining Λ_X.
+  let C := CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
+    (condensedRingObj Λ X)
+  have : IsGrothendieckAbelian.{u + 1} C := Mod.isGrothendieckAbelian _
+  have : LocallySmall.{u + 1} (DerivedCategory C) := DerivedCategory.locallySmall C
+  have : HasColimitsOfSize.{u + 1, u + 1} C := inferInstance
+  have : HasCoproducts.{u + 1} C := fun I ↦
+    HasColimitsOfSize.has_colimits_of_shape (Discrete I)
+  have : HasCoproducts.{u + 1} (DerivedCategory C) := derived_hasCoproducts
+  let P := localizingClosureProEtale Λ X
+  have hPiso : P.IsClosedUnderIsomorphisms := by
+    constructor
+    intro K L e hK Q hQ hS
+    let := hQ.2.1
+    exact Q.prop_of_iso e (hK Q hQ hS)
+  let := hPiso
+  have hPtri : P.IsTriangulated := by
+    have hzero : P.ContainsZero := by
+      refine ⟨0, CategoryTheory.Limits.isZero_zero _, ?_⟩
+      intro Q hQ hS
+      let := hQ.1
+      let := hQ.2.1
+      exact Q.prop_zero
+    let := hzero
+    have hshift : P.IsStableUnderShift ℤ := by
+      constructor
+      intro n
+      constructor
+      intro K hK Q hQ hS
+      let := hQ.1
+      exact Q.le_shift n K (hK Q hQ hS)
+    let := hshift
+    have hcone : P.IsTriangulatedClosed₂ :=
+      ObjectProperty.IsTriangulatedClosed₂.mk' (by
+        intro T hT h₁ h₃ Q hQ hS
+        let := hQ.1
+        let := hQ.2.1
+        exact Q.ext_of_isTriangulatedClosed₂ T hT (h₁ Q hQ hS) (h₃ Q hQ hS))
+    exact {}
+  let := hPtri
+  -- The original closure uses the ambient object universe for its indexing sets.
+  -- Restrict its coproduct closure to u + 1 using the equivalence with a lifted index type.
+  have hclosed (I : Type (u + 2)) :
+      P.IsClosedUnderColimitsOfShape (Discrete I) := by
+    constructor
+    rintro K ⟨c⟩ Q hQ hS
+    let := hQ.2.1
+    have : HasColimit c.diag := ⟨_, c.isColimit⟩
+    exact Q.prop_of_iso ((colimit.isColimit c.diag).coconePointUniqueUpToIso c.isColimit)
+      (hQ.2.2 c.diag inferInstance (fun i ↦ c.prop_diag_obj (Discrete.mk i) Q hQ hS))
+  have hsum : HasCoproducts.{u + 1} P.FullSubcategory := by
+    intro I
+    have := hclosed (ULift.{u + 2} I)
+    have : P.IsClosedUnderColimitsOfShape (Discrete I) :=
+      ObjectProperty.IsClosedUnderColimitsOfShape.of_equivalence
+        (Discrete.equivalence Equiv.ulift)
+    exact hasColimitsOfShape_of_closedUnderColimits (Discrete I) P
+  let := hsum
+  exact ⟨locallySmall_of_faithful P.ι, hPtri, hsum,
+    isIdempotentComplete_of_countableCoproducts P.FullSubcategory⟩
 
 end AlgebraicGeometry.ProEtale
