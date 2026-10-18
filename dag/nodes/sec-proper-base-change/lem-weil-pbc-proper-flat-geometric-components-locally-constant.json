@@ -34,7 +34,7 @@
  ],
  "proof": [
   {
-   "text": "By [lem-pc-smooth-flat], the assumed smooth $f$ is flat. By [sbc-lem-smooth-geometrically-reduced], its geometric fibres are reduced. The properness and finite-presentation hypotheses are already assumed. By [lem-pc-proper-base-change](1), both $X_s$ over $\\kappa(s)$ and $X_{\\bar s}$ over $\\overline{\\kappa(s)}$ are proper. The description in [def-weil-geometric-fibre] identifies the latter with the field-extension base change of $X_s$.",
+   "text": "Smoothness gives flatness and local finite presentation by [lem-pc-smooth-flat]. The geometric fibre is the pullback along the algebraic-closure geometric point [def-weil-geometric-fibre]. Its projection to the algebraic-closure spectrum is proper by [lem-pc-proper-base-change] and smooth by the same base-change stability. A smooth scheme over a field is reduced, using the existing isReduced_of_smooth theorem underlying [sbc-lem-smooth-geometrically-reduced].",
    "uses": [
     "lem-pc-smooth-flat",
     "sbc-lem-smooth-geometrically-reduced",
@@ -48,7 +48,7 @@
    }
   },
   {
-   "text": "Apply clauses (1) and (2) of [thm-pc-semicontinuity-base-change] with $\\mathcal F=\\mathcal O_X$ and $q=0$. The module $\\mathcal O_X$ is free of rank one over itself, hence of finite presentation, and is flat over $S$: at $x$ its stalk is $\\mathcal O_{X,x}$, flat over $\\mathcal O_{S,f(x)}$ by [def-weil-flat-morphism] and Step 1. Its pullback to a fibre is that fibre's structure sheaf. Thus $A_s=H^0(X_s,\\mathcal O_{X_s})$ is finite-dimensional and $\\beta(s)=\\dim_{\\kappa(s)}A_s$ is upper semicontinuous. No reducedness of $S$ is needed: the reduced-base hypothesis belongs only to clause (3), which is not used.",
+   "text": "The structure sheaf is invertible, hence of finite presentation, and is flat over the base of a flat morphism. Apply [thm-pc-semicontinuity-base-change], clause (2), in degree zero to obtain upper semicontinuity of its hFiber. The Lean API is isFlatOver_of_isInvertible followed by upperSemicontinuous_hFiber. The finiteness clause need not be applied separately.",
    "uses": [
     "thm-pc-semicontinuity-base-change",
     "def-weil-flat-morphism"
@@ -60,14 +60,12 @@
    }
   },
   {
-   "text": "Fix $s$, put $k=\\kappa(s)$ and $K=\\overline{k}$. The morphism $\\operatorname{Spec}K\\to\\operatorname{Spec}k$ is flat by [lem-pc-field-extension-fpqc-cover]. Apply the affine-base clause of [lem-pc-flat-base-change-cohom] to $X_s\\to\\operatorname{Spec}k$. Properness includes finite type and thus quasi-compactness by [def-weil-proper-morphism] and [def-weil-pbc-scheme-conventions]. Its diagonal is a closed immersion; the inverse image of any affine open under the diagonal is affine by [def-weil-closed-immersion], hence quasi-compact, giving quasi-separatedness by [def-weil-pbc-scheme-conventions]. Its structure sheaf is quasi-coherent: on an affine chart it is the sheaf associated to the ring itself. This gives $A_s\\otimes_k K\\cong\\Gamma(X_{\\bar s},\\mathcal O_{X_{\\bar s}})$. By [lem-weil-pbc-proper-reduced-algclosed-global-sections-product], the right side is $\\prod_{c\\in C_s}K$ with $C_s$ finite, because Step 1 gives properness and reducedness. Tensoring a finite $k$-basis of $A_s$ gives a $K$-basis of $A_s\\otimes_kK$ (identify $A_s$ with $k^d$ using that basis and tensor the inverse coordinate maps); the coordinate vectors of $K^{C_s}$ form a basis indexed by $C_s$. Therefore $\\beta(s)=|C_s|=n(s)$. For an empty fibre both vector spaces are zero and both dimensions are zero.",
+   "text": "Use hFiber_pullback_of_isPullback, the already proved fibre-dimension consequence of [lem-pc-flat-base-change-cohom], on the geometric-point pullback square. The point of Spec of the algebraic closure maps to the chosen base point, and hFiber_eq_finrankH identifies the fibre dimension over this field with its cohomology dimension. Pullback preserves the unit structure sheaf. Apply [lem-weil-pbc-proper-reduced-algclosed-global-sections-product] to the proper reduced geometric fibre. Compose its scalar-compatible ring equivalence with H.zeroLinearEquiv to obtain an algebraic-closure-linear equivalence from functions on the finite connected-component set to zeroth cohomology. Compatibility is checked by writing scalar multiplication as multiplication by the constant function, using the product theorem scalar-map clause. Taking finranks gives hFiber equal to Nat.card of connected components, including the empty scheme. Properness supplies the quasi-compactness and quasi-separatedness hypotheses of the base-change result by [def-weil-proper-morphism] and [def-weil-pbc-scheme-conventions].",
    "uses": [
-    "lem-pc-field-extension-fpqc-cover",
     "lem-pc-flat-base-change-cohom",
     "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
     "def-weil-proper-morphism",
-    "def-weil-pbc-scheme-conventions",
-    "def-weil-closed-immersion"
+    "def-weil-pbc-scheme-conventions"
    ],
    "elementary": false,
    "source": {
@@ -76,7 +74,7 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-flat-proper-component-count-lower-semicontinuous] to $f$, using flatness from Step 1 and the assumed properness and finite presentation. It gives for every $s$ an open neighbourhood $V_s$ on which $n(t)\\geq n(s)$. This uses no geometric reducedness, and proves the lower-semicontinuity half of the argument.",
+   "text": "Apply [lem-weil-pbc-flat-proper-component-count-lower-semicontinuous], using smooth-implies-flat and local finite presentation. Retain its function n, its equality with Nat.card, finiteness, the empty-fibre clause, and the lower-bound neighbourhoods.",
    "uses": [
     "lem-weil-pbc-flat-proper-component-count-lower-semicontinuous"
    ],
@@ -87,7 +85,7 @@
    }
   },
   {
-   "text": "For every $s$, upper semicontinuity of $\\beta=n$ from Steps 2 and 3 gives an open neighbourhood $W_s$ on which $n(t)<n(s)+1$, hence $n(t)\\leq n(s)$ since these values are integers. On $V_s\\cap W_s$ this and Step 4 force $n(t)=n(s)$. This proves local constancy, also at $n(s)=0$. Finiteness was established in Step 3. If $S$ is empty the pointwise assertions are vacuous.",
+   "text": "Identify n with hFiber by Step 3. At s, the upper-semicontinuity open set n(t) < n(s)+1 intersects the lower-bound neighbourhood from Step 4. On the intersection, Nat.le_antisymm gives n(t)=n(s), which proves IsLocallyConstant through iff_exists_open. Transfer this along the equality of n and Nat.card. Finiteness and the zero assertion are exactly the corresponding clauses retained from Step 4.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -96,7 +94,7 @@
    }
   },
   {
-   "text": "If $X_s$ is geometrically connected, [lem-weil-geometrically-connected-algebraic-closure] makes $X_{\\bar s}$ connected and nonempty, so $n(s)=1$. Take the neighbourhood from Step 5. For every $t$ there, $n(t)=1$, so $X_{\\bar t}$ is connected: its sole connected component is the whole nonempty space. The reverse implication of [lem-weil-geometrically-connected-algebraic-closure], over $\\kappa(t)$, shows that $X_t$ is geometrically connected. Thus this is exactly the claimed open neighbourhood, and an empty fibre is never erroneously treated as connected.",
+   "text": "Use [lem-weil-geometrically-connected-algebraic-closure] on the residue fibre, and the canonical pullbackLeftPullbackSndIso, to equate geometric connectedness of the residue fibre with connectedness of the geometric fibre. For any topological space, connectedness is equivalent to Nat.card of its connected components being one: forward the quotient is nonempty and subsingleton; reverse Nat.card_eq_one_iff_unique supplies a nonempty subsingleton quotient, so every point belongs to the component of a chosen point. Hence the fibre condition is n(t)=1. For a geometrically connected fibre at s, take the open fibre n(t)=n(s) of the locally constant function n. Every t in it satisfies n(t)=1 and is geometrically connected.",
    "uses": [
     "lem-weil-geometrically-connected-algebraic-closure"
    ],
@@ -114,19 +112,17 @@
   "def-weil-geometric-fibre",
   "thm-pc-semicontinuity-base-change",
   "def-weil-flat-morphism",
-  "lem-pc-field-extension-fpqc-cover",
   "lem-pc-flat-base-change-cohom",
   "lem-weil-pbc-proper-reduced-algclosed-global-sections-product",
-  "lem-weil-pbc-flat-proper-component-count-lower-semicontinuous",
-  "lem-weil-geometrically-connected-algebraic-closure",
   "def-weil-proper-morphism",
   "def-weil-pbc-scheme-conventions",
-  "def-weil-closed-immersion"
+  "lem-weil-pbc-flat-proper-component-count-lower-semicontinuous",
+  "lem-weil-geometrically-connected-algebraic-closure"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Tag 0E0N, label lemma-proper-flat-geom-red: lower semicontinuity from 0BUI and upper semicontinuity from 0BDN after 0BUG"
+  "place": "Tag 0E0N, label lemma-proper-flat-geom-red: lower semicontinuity from 0BUI and upper semicontinuity from 0BDN after 0BUG; implemented using existing hFiber base-change invariance and the scalar-compatible product theorem, with explicit topological gluing"
  },
  "mathlib_searches": [
   {
@@ -253,7 +249,6 @@
   "lem-pc-smooth-flat",
   "lem-pc-proper-base-change",
   "thm-pc-semicontinuity-base-change",
-  "lem-pc-field-extension-fpqc-cover",
   "lem-pc-flat-base-change-cohom",
   "lem-weil-geometrically-connected-algebraic-closure"
  ],
@@ -294,5 +289,15 @@
   "by": "NZ",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T9",
+  "result": "pass",
+  "landing": "20261018T062922-L-681792",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
