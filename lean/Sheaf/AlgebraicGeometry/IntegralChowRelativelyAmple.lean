@@ -13,19 +13,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Immersion
 import WeilConjectures.AlgebraicGeometry.ChowLemma
-import Sheaf.AlgebraicGeometry.ProjectiveAmpleInvertible
-import Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardCharts
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpaceReindexImmersion
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant
-import WeilConjectures.AlgebraicGeometry.ProjectiveAmpleInvertible
-import WeilConjectures.AlgebraicGeometry.TensorPullback
-import Sheaf.AlgebraicGeometry.ProjectiveSpaceTwistGluedIdentification
-import WeilConjectures.AlgebraicGeometry.Ample
+import all Sheaf.AlgebraicGeometry.ChowRelativeAmpleTwistProperties
 import WeilConjectures.AlgebraicGeometry.AmpleIso
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 
 /-! # Integral Chow modification with relatively ample twist
 
@@ -43,6 +35,8 @@ universe u
 open CategoryTheory
 
 namespace AlgebraicGeometry
+
+attribute [local instance] MvPolynomial.gradedAlgebra
 
 /-- An integral Chow modification of a separated finite-type scheme over a field,
 with the pullback of the projective twist ample on every affine inverse image.
@@ -147,6 +141,94 @@ theorem exists_integral_chow_relatively_ample
                     ((Scheme.Modules.tensorPullback j).obj
                       (ProjectiveSpace.twist (ULift.{u} (Fin (N + 1)))
                         (Spec (.of k)) 1))) hW := by
-  sorry
+  classical
+  -- The schematic closure of the integral open repairs integrality of the Chow model.
+  have : IsLocallyNoetherian X := LocallyOfFiniteType.isLocallyNoetherian f
+  have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace f
+  let Z := ChowModification f
+  let p := ChowModification.modificationMap f
+  let j₀ := ChowModification.toProjectiveSpace f
+  obtain ⟨U, hUd, hUi⟩ := ChowModification.exists_dense_isIso_restrict f
+  have hUn : (U : Set X).Nonempty := hUd.nonempty
+  have : Nonempty U := hUn.to_subtype
+  have : IsIntegral U.toScheme := isIntegral_of_isOpenImmersion U.ι
+  let V : Z.Opens := p ⁻¹ᵁ U
+  have : IsIso (p ∣_ U) := hUi
+  have : Nonempty V := by
+    obtain ⟨x, _⟩ := (p ∣_ U).surjective (Classical.arbitrary U)
+    exact ⟨x⟩
+  have : IsIntegral V.toScheme := isIntegral_of_isOpenImmersion (p ∣_ U)
+  have : IsLocallyNoetherian Z := LocallyOfFiniteType.isLocallyNoetherian (p ≫ f)
+  have : QuasiCompact V.ι := inferInstance
+  let Y := V.ι.image
+  let c : Y ⟶ Z := V.ι.imageι
+  let π : Y ⟶ X := c ≫ p
+  have : IsReduced Y := IsSchemeTheoreticallyDominant.isReduced V.ι.toImage
+  have : IrreducibleSpace Y := by
+    rw [irreducibleSpace_def]
+    have h := (IrreducibleSpace.isIrreducible_univ V.toScheme).image V.ι.toImage.base
+      V.ι.toImage.continuous.continuousOn
+    rw [Set.image_univ] at h
+    simpa [V.ι.toImage.denseRange.closure_range] using h.closure
+  have : IsIntegral Y := isIntegral_of_irreducibleSpace_of_isReduced Y
+  have : IsProper π := inferInstance
+  have : IsDominant U.ι := ⟨by rwa [DenseRange, Scheme.Opens.range_ι]⟩
+  have hdom : IsDominant (V.ι.toImage ≫ π) := by
+    have hw : V.ι.toImage ≫ π = (p ∣_ U) ≫ U.ι := by
+      dsimp [π, c]
+      rw [← Category.assoc, Scheme.Hom.toImage_imageι, morphismRestrict_ι]
+    rw [hw]
+    infer_instance
+  have : IsDominant π := IsDominant.of_comp V.ι.toImage π
+  have : Surjective π := inferInstance
+  have hπU : IsIso (π ∣_ U) := by
+    dsimp [π]
+    rw [morphismRestrict_comp]
+    infer_instance
+  have : Nonempty (ChowModification.index f) := by
+    let x : V.toScheme := Classical.arbitrary V
+    have hx : j₀ (V.ι x) ∈ ⨆ i, ProjectiveSpace.standardOpen
+        (ChowModification.index f) (Spec (.of k)) i := by
+      rw [ProjectiveSpace.iSup_standardOpen]
+      trivial
+    obtain ⟨i, _⟩ := TopologicalSpace.Opens.mem_iSup.mp hx
+    exact ⟨i⟩
+  obtain ⟨N, j, hj, hjf⟩ := exists_reindexed_projective_immersion
+    (ChowModification.index f) (c ≫ j₀) (π ≫ f) (by
+      simp only [π, j₀, p, Category.assoc, ChowModification.toProjectiveSpace_over])
+  have : IsImmersion j := hj
+  let n := ULift.{u} (Fin (N + 1))
+  let ρ := ProjectiveSpace.toProjInt n (Spec (.of k))
+  let t := Proj.twist (MvPolynomial.homogeneousSubmodule n (ULift.{u} ℤ)) 1
+  let a := ProjectiveSpace.liftBaseChange π j hjf.symm
+  have : IsImmersion a := inferInstance
+  have : IsProper (a ≫ (ProjectiveSpace n X ↘ X)) := by
+    rw [ProjectiveSpace.liftBaseChange_over]
+    infer_instance
+  have : IsProper a := IsProper.of_comp a (ProjectiveSpace n X ↘ X)
+  have : IsClosedImmersion a :=
+    IsClosedImmersion.of_isPreimmersion a a.isClosedMap.isClosed_range
+  obtain ⟨eρ⟩ := Scheme.Modules.nonempty_tensorPullbackAdjunction ρ
+  let e := (Scheme.Modules.tensorPullback j).mapIso
+    ((eρ.leftAdjointUniq (Scheme.Modules.pullbackPushforwardAdjunction ρ)).app t)
+  -- Compare tensor pullback with the usual pullback defining the twist.
+  have ht := tensorPullback_invertible ρ t
+  have hL := tensorPullback_invertible j ((Scheme.Modules.tensorPullback ρ).obj t)
+  have htw : ((Scheme.Modules.tensorPullback j).obj
+      (ProjectiveSpace.twist n (Spec (.of k)) 1)).IsInvertible :=
+    Scheme.Modules.IsInvertible.of_iso e
+  refine ⟨N, Y, π, j, inferInstance, inferInstance, inferInstance, inferInstance,
+    inferInstance, inferInstance, hj, hjf, U, hUn, hπU, htw, ?_⟩
+  intro W hW
+  obtain ⟨hA, hample⟩ := projective_ample_affine_open N X Y π a
+    (ProjectiveSpace.liftBaseChange_over π j hjf.symm).symm W hW
+  obtain ⟨ep⟩ := tensorPullback_pair_iso j ρ a (ProjectiveSpace.toProjInt n X)
+    (ProjectiveSpace.liftBaseChange_toProjInt π j hjf.symm).symm t
+  let eW := (Scheme.Modules.tensorPullback (π ⁻¹ᵁ W).ι).mapIso (e.symm ≪≫ ep)
+  have : ((Scheme.Modules.tensorPullback (π ⁻¹ᵁ W).ι).obj
+      ((Scheme.Modules.tensorPullback a).obj
+        ((Scheme.Modules.tensorPullback (ProjectiveSpace.toProjInt n X)).obj t))).IsInvertible := hA
+  have hW' := Scheme.Modules.IsInvertible.of_iso eW.symm
+  exact ⟨hW', (Scheme.Modules.isAmple_iff_of_iso eW).mpr hample⟩
 
 end AlgebraicGeometry
