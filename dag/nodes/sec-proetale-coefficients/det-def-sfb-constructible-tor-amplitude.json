@@ -288,5 +288,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstantModelTorAmplitude",
+  "declaration": "AlgebraicGeometry.ProEtale.constantModelConstructibleFiniteTor_wellDefined",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.constantModelConstructibleFiniteTor_wellDefined"
+  ],
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Reviewer fix (existing: true -> new module). The four notions of the node are the landed declarations of Sheaf.Paper.CondensedConstantConstructibility (owned by the parent sk-def-sfb-constructible, imported, not redefined): Cons = ConstantModelConstructible (IsConstantModelConstructible, HasFiniteConstantLocalModel, IsFiniteConstantStratified), Dbc = ConstantModelBoundedConstructible (constantModelBoundedConstructible: canonical t-structure boundedness plus every homology object constructible), Tor amplitude in [a,b] = DerivedCategory.torAmplitudeIn _ a b and finite Tor amplitude = DerivedCategory.finiteTorAmplitude _ (WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude; its tensor is by Iff.rfl the recorded Layer B CondensedRing.derivedTensor Λ X of sk-def-sfb-derived-tensor-hom, tested on every module in degree 0), Dctf = ConstantModelConstructibleFiniteTor. Those definitions alone do not state the node's well-definedness assertions (repleteness, the shift rule [a-1,b-1], the extension rule, closure under direct summands, thickness), which citers (det-def-localizing-closure-ctf-equals-bc, det-prop-scalar-six-ctf, det-brown-hypotheses-small, det-thm-sf-ctf-stability-internal-hom) use; this module states them as one theorem with sorry, whose docstring carries the node's seven proof steps.",
+  "statement": "theorem constantModelConstructibleFiniteTor_wellDefined (X : Scheme.{u}) : ObjectProperty.IsClosedUnderIsomorphisms (IsConstantModelConstructible Λ X) ∧ (constantModelBoundedConstructible Λ X).IsClosedUnderIsomorphisms ∧ (∀ a b : ℤ, a ≤ b → (DerivedCategory.torAmplitudeIn (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) a b ).IsClosedUnderIsomorphisms) ∧ (DerivedCategory.finiteTorAmplitude (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ).IsClosedUnderIsomorphisms ∧ (∀ (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) (a b : ℤ), a ≤ b → DerivedCategory.torAmplitudeIn _ a b K → DerivedCategory.torAmplitudeIn _ (a - 1) (b - 1) (K⟦(1 : ℤ)⟧)) ∧ (∀ (T : Triangle (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)))) (a b : ℤ), a ≤ b → T ∈ distTriang _ → DerivedCategory.torAmplitudeIn _ a b T.obj₁ → DerivedCategory.torAmplitudeIn _ a b T.obj₃ → DerivedCategory.torAmplitudeIn _ a b T.obj₂) ∧ (∀ a b : ℤ, a ≤ b → (DerivedCategory.torAmplitudeIn (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) a b ).IsStableUnderRetracts) ∧ (DerivedCategory.finiteTorAmplitude (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ).IsTriangulated ∧ (DerivedCategory.finiteTorAmplitude (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) ).IsStableUnderRetracts",
+  "file": "lean/Sheaf/Paper/ConstantModelTorAmplitude.lean",
+  "fixed_by": "NT-stage2-cc-d863513a7"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d863513a7",
+  "group": "NQ",
+  "result": "fix",
+  "note": "Delivery records existing Sheaf.Paper.CondensedConstantConstructibility (parent sk-def-sfb-constructible's landed module). Definitions checked clause by clause: Cons via HasFiniteConstantLocalModel and upstream Scheme.Stratification (finite, locally closed, constructible strata; qcqs, else affine-local); Dbc = t.bounded plus constructible H^n; Tor amplitude = DerivedCategory.torAmplitudeIn, whose tensor is by Iff.rfl (compiled) the recorded Layer B CondensedRing.derivedTensor Λ X tested on every module in degree 0; Dctf = intersection. No extra hypotheses or universe restrictions, no duplicate; edge cases (Λ=0, empty X, zero module/complex, non-qcqs, a>b) fine; module compiles clean with nt_compile. Finding (H3): the existing record states none of the node's well-definedness assertions (iso invariance, shift rule [a-1,b-1], triangle extension, summand closure, thickness), which citers det-def-localizing-closure-ctf-equals-bc, det-prop-scalar-six-ctf, det-brown-hypotheses-small and det-thm-sf-ctf-stability-internal-hom use; the worker report wrongly says the module documents them. FIX: new module lean/Sheaf/Paper/ConstantModelTorAmplitude.lean importing the landed definitions and stating constantModelConstructibleFiniteTor_wellDefined with sorry (IsClosedUnderIsomorphisms of all four properties, K[1] shift rule, distinguished-triangle extension, retract stability, finiteTorAmplitude IsTriangulated and IsStableUnderRetracts), with the source and blueprint docstring and the seven proof steps; compiles with no errors or warnings, axioms add only sorryAx. lean-record override sets existing:false, module, file, declaration and a note; report gains a maintainer-fix section."
  }
 }

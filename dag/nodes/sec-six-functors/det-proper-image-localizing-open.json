@@ -246,5 +246,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OpenImmersionLocalizing",
+  "declaration": "AlgebraicGeometry.ProEtale.openImmersionLowerShriek_localizing",
+  "file": "lean/Sheaf/Paper/OpenImmersionLocalizing.lean",
+  "statement": "theorem openImmersionLowerShriek_localizing (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] (p : ℕ) [CharP k p] (_hp : 0 < p) (_hpℓ : p ≠ ℓ) (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (_hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ) {U X : Scheme.{u}} [U.Over (Spec (.of k))] [X.Over (Spec (.of k))] [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))] [IsSeparated (U ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] (j : U ⟶ X) [IsOpenImmersion j] [j.IsOver (Spec (.of k))] : (∀ K : ConstantModelConstructibleFiniteTor Λ U, (constantModelBoundedConstructible Λ X ⊓ fun L ↦ DerivedCategory.finiteTorAmplitude _ L) ((CondensedRing.openImmersionLowerShriek Λ j).mapDerivedCategory.obj K.obj)) ∧ (∀ I : Type (u + 1), PreservesColimitsOfShape (Discrete I) (CondensedRing.openImmersionLowerShriek Λ j).mapDerivedCategory) ∧ ∃ (_ : (localizingClosureProEtale Λ U).IsTriangulated) (_ : (localizingClosureProEtale Λ X).IsTriangulated), ∃ h : ∀ K : (localizingClosureProEtale Λ U).FullSubcategory, localizingClosureProEtale Λ X ((CondensedRing.openImmersionLowerShriek Λ j).mapDerivedCategory.obj K.obj), ((localizingClosureProEtale Λ X).lift ((localizingClosureProEtale Λ U).ι ⋙ (CondensedRing.openImmersionLowerShriek Λ j).mapDerivedCategory) h).IsTriangulated ∧ ∀ I : Type (u + 1), PreservesColimitsOfShape (Discrete I) ((localizingClosureProEtale Λ X).lift ((localizingClosureProEtale Λ U).ι ⋙ (CondensedRing.openImmersionLowerShriek Λ j).mapDerivedCategory) h)",
+  "branch": "newtargets-dag",
+  "by": "Q89",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aacfaf762",
+  "group": "Q89",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause matches node det-proper-image-localizing-open and its blueprint source (separated finite-type k-schemes, open k-immersion j, char p>0 with p≠ℓ). IsLocalizingAdmissibleCoefficient (§1(B) module for sk-def-localizing-closure) lists exactly the six admissible rings as Mon-isomorphism classes of C(-,T) condensed rings. Q̄_ℓ uses all continuous maps, as sk-def-sfb-condensed-ring prescribes; the upstream colimit object (IsFinitenessCoefficient) is rightly not used. Dctf is constantModelBoundedConstructible ⊓ finiteTorAmplitude (finite-constant-model sense), the same predicate localizingClosureProEtale closes. D(j_!) is the recorded exact module-object functor's mapDerivedCategory. Clause 2: PreservesColimitsOfShape (Discrete I) for all I : Type (u+1), the hom universe (objects u+2), empty family included. Clause 3: the canonical full-subcategory lift is IsTriangulated and sum-preserving; the closures' IsTriangulated witnesses are conclusions, not hypotheses. Universes checked by #check; no forced equalities. Edge cases (U empty, j=id, K=0, n=0 zero ring, non-regular coefficients) covered. No hollow definitions; only the theorem is sorry (#print axioms); docstrings carry source place, blueprint id and the 5 proof steps; item statement and deps unchanged; lean.statement verbatim. nt_compile.py --json on both modules: rc 0, no diagnostics (2-3 s each); probe compiles. Non-blocking remarks: (1) the §1(B) record replaces N2's closure record, so localizingClosureProEtale, localizingClosure and IsLocalizingSubcategory leave every node's lean.declarations and LocalizingClosure.lean becomes unowned; the new module still re-exports the closure, but the maintainer may want to re-add those names (a stage-2 apply-fixes cannot change a dependency record). (2) The predicate uses the Type-0 continuousMapRingObj instead of the recorded continuousCoefficientRingObj; harmless because the predicate is up to isomorphism."
  }
 }

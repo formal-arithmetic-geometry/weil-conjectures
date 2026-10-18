@@ -330,5 +330,32 @@
   "group": "Q33",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q33-dff68eb55 (reviewer sub-agent of L); spot-checked: Read the item, all ten steps, cited statements and source passages in full. Verified the canonical module exchange, translation equivariance, projector trivialization, constructibility and flatness. Small-ring checks passed; no new nodes, missing citations or oversized steps. Accepted all nine declared generic tool uses. Full findings are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.FourierTransform.ArtinSchreierFiniteLisse",
+  "declaration": "AlgebraicGeometry.Scheme.isFlat_isConstructible_isLisse_artinSchreierSheafOfNatCastEqZero",
+  "declarations": [
+   "AlgebraicGeometry.Etale.zmodRingHomOfNatCastEqZero",
+   "AlgebraicGeometry.Etale.overSpecZModOfNatCastEqZero",
+   "AlgebraicGeometry.Etale.artinSchreierSheafOfNatCastEqZero",
+   "AlgebraicGeometry.Etale.artinSchreierCoverOfNatCastEqZero",
+   "AlgebraicGeometry.Etale.artinSchreierCoverMapOfNatCastEqZero",
+   "AlgebraicGeometry.Scheme.isFlat_isConstructible_isLisse_artinSchreierSheafOfNatCastEqZero"
+  ],
+  "statement": "theorem isFlat_isConstructible_isLisse_artinSchreierSheafOfNatCastEqZero {p : ℕ} [Fact p.Prime] {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] [Invertible (p : Λ)] {X : Scheme.{u}} (h : (p : Γ(X, ⊤)) = 0) (b : Γ(X, ⊤)) (Ψ : AddChar (ZMod p) Λ) : IsFinite (AlgebraicGeometry.Etale.artinSchreierCoverMapOfNatCastEqZero h b) ∧ Etale (AlgebraicGeometry.Etale.artinSchreierCoverMapOfNatCastEqZero h b) ∧ Surjective (AlgebraicGeometry.Etale.artinSchreierCoverMapOfNatCastEqZero h b) ∧ Nonempty ((AlgebraicGeometry.Etale.upperStar (ModuleCat.{u + 1} Λ) (AlgebraicGeometry.Etale.artinSchreierCoverMapOfNatCastEqZero h b)).obj (AlgebraicGeometry.Etale.artinSchreierSheafOfNatCastEqZero h Ψ b) ≅ 𝟙_ _) ∧ IsLocallyConstantSheaf (AlgebraicGeometry.Etale.artinSchreierSheafOfNatCastEqZero h Ψ b) ∧ IsConstructibleEtaleModuleSheaf (AlgebraicGeometry.Etale.artinSchreierSheafOfNatCastEqZero h Ψ b) ∧ CategoryTheory.exactFunctor _ _ (tensorRight (AlgebraicGeometry.Etale.artinSchreierSheafOfNatCastEqZero h Ψ b))",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The helper declarations are canonical constructions required to render the current general-coefficient statement, including the zero-ring case.",
+  "file": "lean/Sheaf/FourierTransform/ArtinSchreierFiniteLisse.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-32dedd95d",
+  "group": "NR",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node: p prime; finite commutative Λ with p invertible (Type (u+1) is the recorded Sheaf (ModuleCat Λ) convention); X with (p:Γ(X,⊤))=0, not CharP, so the empty scheme is kept (checked by compile); b; Ψ : AddChar (ZMod p) Λ. L is upstream artinSchreierSheafOf (b^* of image e_Ψ), the current def-fd-artin-schreier-sheaf. q is pullback.snd of artinSchreierMap p along b, the canonical relative spectrum (checked by rfl). Conclusions: IsFinite/Etale/Surjective q, Nonempty(upperStar q L ≅ 𝟙_), IsLocallyConstantSheaf (implied, step 9), the recorded IsConstructibleEtaleModuleSheaf, and exactFunctor (tensorRight L) as def-pc-flat-sheaf-modules prescribes. No stronger hypotheses; no edge case excluded. Helpers have real data and are justified (Mathlib ZMod.castHom needs CharP); no name collisions. Gates: only sorry is the theorem; source/blueprint docstrings with all 10 steps; lines ≤100; proof-dependency modules imported; node differs only in lean, statement verbatim; report has Worker report and Second reading by NR. nt_compile --json rc 0, no diagnostics; a /tmp check module (empty-scheme h, conjunct extraction, cover rfl, deliberate error caught) behaved as expected."
  }
 }

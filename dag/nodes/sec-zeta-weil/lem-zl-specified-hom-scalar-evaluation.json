@@ -312,5 +312,34 @@
   "group": "Q75",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q75-6fdc79663 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, sources and unit route. All eight steps check: the specified chain-Hom map has the signed evaluation transpose, with correct completion variance, unit/tower compatibility and raw rationalization. No new nodes, prohibited route-pivot dependencies or repairs. Concrete checks are recorded in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SpecifiedHomScalarEvaluation",
+  "declaration": "WeilConjectures.specifiedHomScalarEvaluation",
+  "declarations": [
+   "WeilConjectures.specifiedHomIdentified",
+   "WeilConjectures.specifiedHomScalarEvaluation",
+   "WeilConjectures.specifiedHomResolutionUnit",
+   "WeilConjectures.specifiedHomScalarChain",
+   "WeilConjectures.specifiedHomScalarCoherence",
+   "WeilConjectures.specifiedHomScalarRational",
+   "WeilConjectures.specifiedHomScalarRationalCoherence",
+   "WeilConjectures.specifiedHomScalarRationalEvaluation"
+  ],
+  "file": "lean/Sheaf/Paper/SpecifiedHomScalarEvaluation.lean",
+  "statement": "theorem specifiedHomScalarEvaluation (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of D.k))] [IsSeparated (X ↘ Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (X ↘ Spec (CommRingCat.of D.k))] (M N : DerivedCategory (integralTowerModules l E X)) (hM : sfIntegralConstructible l E X M) (hN : sfIntegralConstructible l E X N) : IsSfDerivedComplete l E X ((integralDerivedInternalHom l E X).obj (op M, N)) ∧ IsIso ((scalarCompletion l E L ι X).app M) ∧ IsIso ((scalarCompletion l E L ι X).app N) ∧ IsIso ((scalarCompletion l E L ι X).app ((integralDerivedInternalHom l E X).obj (op M, N))) ∧ ((scalarCompletion l E L ι X).app ((integralDerivedInternalHom l E X).obj (op M, N)) ≫ (scalarHomCompleteInputs l E L ι X M N hM.1 hN.1).hom = scalarHomOrdinary l E L ι X M N ≫ (integralDerivedInternalHom l L X).map (Prod.mkHom ((scalarCompletionIso l E L ι X M hM.1).inv.op) ((scalarCompletionIso l E L ι X N hN.1).hom))) ∧ ((scalarIntegralClosed l L X).transpose _ ((integralOrdinaryDerivedScalar l E L ι X).obj M) ((integralOrdinaryDerivedScalar l E L ι X).obj N)).symm (specifiedHomIdentified l E L ι X M N hM.1 hN.1) = (scalarClosedTensor l E L ι X).inv.app ((integralDerivedInternalHom l E X).obj (op M, N), M) ≫ (integralOrdinaryDerivedScalar l E L ι X).map ((scalarIntegralClosed l E X).evaluation M N)",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The eight declarations together render the node: canonical completion transport and augmentation, completeness and actual-map evaluation identity, the unique normalized chain map and its localization square, integral identity/tower coherence, raw rationalized comparison/evaluation, arbitrary localized naturality and rational identity/tower coherence. No definition of tensor, Hom, scalar extension or completion is replaced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0efc31deb",
+  "group": "NK",
+  "result": "pass",
+  "note": "Read the node, all 17 dependency records, the dependency Lean (scalarHomCompleted/scalarHomCompleteInputs, scalarHomOrdinary = coefficientBaseChangeHom = transpose of μ.inv ≫ T(ev), scalarCompletion, CoefficientClosedStructure, coefficientHomResolution = kInjectiveResolutionFunctor with augmentation toKInjectiveResolution, integralHomScalarComparison, rationalHomScalarComparison) and the blueprint source. Each clause matches: Hom completeness, the three χ isomorphisms, χ_H ≫ θ = c ≫ H(χ_M⁻¹.op, χ_N) with the input directions checked, the evaluation-transpose clause (Hom-first order of the recorded API, Koszul-equivalent), the unique chain map with the node's formula and actual fixed augmentation plus its localization square, identity/tower coherence, and raw rational naturality for arbitrary localized arrows, identity/tower and evaluation clauses. No extra hypotheses; site universes u+1/u kept; coefficients in the scheme universe as in all reused interfaces. Helpers are real (a composite and the actual augmentation); theorems are sorry; docstrings carry source, blueprint tag and proof steps. lean.statement matches the file verbatim, all 8 declarations exist, the node changes only in lean, no duplicate found. nt_compile.py on the snapshot: rc=0, clean in 6.0 s, and an injected error was reported, so the file is really elaborated."
  }
 }

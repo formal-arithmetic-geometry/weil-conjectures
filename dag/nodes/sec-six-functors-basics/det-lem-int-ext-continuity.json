@@ -470,5 +470,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntegralExtHomContinuity",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralExtHomContinuous",
+  "file": "lean/Sheaf/SixFunctors/IntegralExtHomContinuity.lean",
+  "statement": "theorem integralExtHomContinuous {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] (C : DerivedCategory (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left))) (hC : constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E) X.left C) {I : Type (u + 1)} [SmallCategory I] [IsFiltered I] (K : I ⥤ CochainComplex (CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E) X.left)) ℤ) [HasColimit K] (b : ℤ) (hK : ∀ i : I, ∀ r : ℤ, r < b → IsZero ((K.obj i).X r)) (q : ℤ) : IsIso (homContinuityComparison (K ⋙ DerivedCategory.Q) (DerivedCategory.Q.mapCocone (colimit.cocone K)) C q)",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-c348f8a50"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c348f8a50",
+  "group": "Q48",
+  "result": "fix",
+  "note": "Read node, 9 stmt deps, source chain (formula lemma, devissage, constructibility modules) and compiled delivered + fixed module via nt_compile.py --json (exit 0, no errors; tool hides warnings). Fixes: F1 H3 Dbc must be sk-def-sfb-constructible's constant-model notion (constantModelBoundedConstructible), not general boundedConstructible; F2 H3 index category was Type u, now Type (u+1) SmallCategory per size convention/devissage; F3 H4 private integralExtHomDiagram/Comparison duplicated landed homContinuityComparison, replaced; F5 H8 step-by-step proof docstring; F6 unused imports replaced. F4: N2 has since landed a sk-def-sfb-module-objects record, so land with --revert-nodes sk-def-sfb-module-objects (item uses Mathlib Mod over condensedRingObj, same as N2's abbrev and siblings). Fix files: fixes/IntegralExtHomContinuity.lean, fixes/det-lem-int-ext-continuity.report.md."
  }
 }

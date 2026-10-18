@@ -431,5 +431,49 @@
     }
    ]
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CartesianCoefficients",
+  "declaration": "AlgebraicGeometry.ProEtale.cartesianCoefficients",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.cartesianCoefficientLift",
+   "AlgebraicGeometry.ProEtale.cartesianCoefficientPullbackIso",
+   "AlgebraicGeometry.ProEtale.CartesianCoefficientProperty",
+   "AlgebraicGeometry.ProEtale.cartesianFinitePointRing",
+   "AlgebraicGeometry.ProEtale.CartesianUntwistedAssertions",
+   "AlgebraicGeometry.ProEtale.cartesianSignedAb",
+   "AlgebraicGeometry.ProEtale.CartesianSignedMaps",
+   "AlgebraicGeometry.ProEtale.CartesianSignedNormalization",
+   "AlgebraicGeometry.ProEtale.cartesianSectionLine",
+   "AlgebraicGeometry.ProEtale.cartesianSectionRing",
+   "AlgebraicGeometry.ProEtale.CartesianInternalSignedMaps",
+   "AlgebraicGeometry.ProEtale.CartesianInternalSignedNormalization",
+   "AlgebraicGeometry.ProEtale.CartesianTwistMaps",
+   "AlgebraicGeometry.ProEtale.cartesianTwistMate",
+   "AlgebraicGeometry.ProEtale.cartesianUnitsBaseChange",
+   "AlgebraicGeometry.ProEtale.cartesianTwistLevelMap",
+   "AlgebraicGeometry.ProEtale.cartesianFiniteQuotientHom",
+   "AlgebraicGeometry.ProEtale.CartesianTwistNormalization",
+   "AlgebraicGeometry.ProEtale.cartesianTwistMaps_existsUnique",
+   "AlgebraicGeometry.ProEtale.cartesianTwistMaps",
+   "AlgebraicGeometry.ProEtale.CartesianTwistAssertions",
+   "AlgebraicGeometry.ProEtale.CartesianFiniteFreeAssertions",
+   "AlgebraicGeometry.ProEtale.cartesianCoefficients"
+  ],
+  "file": "lean/Sheaf/Paper/CartesianCoefficients.lean",
+  "statement": "theorem cartesianCoefficients (ℓ : ℕ) [Fact ℓ.Prime] (f : X ⟶ Y) : CartesianUntwistedAssertions ℓ f ∧ CartesianTwistAssertions ℓ f ∧ CartesianFiniteFreeAssertions ℓ X",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The complete coefficient list, normalized Tate comparisons, both finite-free clauses, exactness, and the canonical inverse-image lift. Helper data are real constructions or determined by an explicitly unique normalized family; all postponed proofs are named theorems with source and proof-plan docstrings."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c1bfe1125",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Read node, blueprint source (order 747), all 7 stmt_deps' declarations and the module. Every clause matches: full admissible coefficient list (finite A with discrete topology, Z_l, Q_l, O_E, E, finite-subextension Qbar); IsIso of condensedPullbackHom (alpha_f, ring map via isMonHom); exactness of CondensedRing.upperStar; canonical lift mapMod then comap(inv alpha) with the actual extendScalarsIsoComapInv whiskering and literal underlying-functor equality; twists for every d in Z, restricted to l invertible on X and Y and l^(r+1)A=0, as IsIso of the inverse-image mates of a uniquely normalized family (roots, finite pure tensors, limit projections, extension coequalizer, Qbar coprojections, eta in degree 0, tensor/evaluation in other degrees, semilinear). The exists-unique normalization is consistent and determining, so data are not hollow (AGENTS §5; same pattern as the landed spIntegralLevelTransition_existsUnique). Finite-free for both O_F/O_E and F/E through the actual inclusions. Edge cases ok; ULift of finite A loses no case; single universe u. lean.statement verbatim; docstrings with Source/blueprint; only sorry proofs plus a typing divisibility witness. nt_compile rc=0, no errors or warnings; test module confirmed universes and axioms. Second-reading section is the standard post-10-17 notice. No faults."
  }
 }

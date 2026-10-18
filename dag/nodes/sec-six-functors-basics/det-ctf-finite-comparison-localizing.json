@@ -30,7 +30,8 @@
   "def-weil-open-immersion",
   "def-weil-proper-morphism",
   "lem-weil-pbc-finite-discrete-condensed-ring-constant",
-  "lem-weil-pbc-finite-discrete-scheme-ring-constant"
+  "lem-weil-pbc-finite-discrete-scheme-ring-constant",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
  ],
  "proof": [
   {
@@ -305,5 +306,39 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteComparisonLocalizing",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteComparisonLocalizing",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteComparisonPresheaf",
+   "AlgebraicGeometry.ProEtale.finiteComparisonConstantRealization",
+   "AlgebraicGeometry.ProEtale.finiteComparisonRealization",
+   "AlgebraicGeometry.ProEtale.finiteComparisonRealization_exact",
+   "AlgebraicGeometry.ProEtale.finiteComparisonRealization_additive",
+   "AlgebraicGeometry.ProEtale.finiteComparisonRealization_limits",
+   "AlgebraicGeometry.ProEtale.finiteComparisonRealization_colimits",
+   "AlgebraicGeometry.ProEtale.finiteComparisonEtaleGenerators",
+   "AlgebraicGeometry.ProEtale.finiteComparisonProEtaleGenerators",
+   "AlgebraicGeometry.ProEtale.finiteComparisonEtaleClosure",
+   "AlgebraicGeometry.ProEtale.finiteComparisonProEtaleClosure",
+   "AlgebraicGeometry.ProEtale.finiteComparisonOpenIso",
+   "AlgebraicGeometry.ProEtale.finiteComparisonCompactSupportMap",
+   "AlgebraicGeometry.ProEtale.finiteComparisonLocalizing"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteComparisonLocalizing.lean",
+  "statement": "theorem finiteComparisonLocalizing (p : ℕ) [Fact p.Prime] (k : Type u) [Field k] [Algebra (ZMod p) k] [IsAlgClosure (ZMod p) k] (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : ℓ ≠ p) (hB : ∃ n : ℕ, (ℓ : B) ^ n = 0) (X : Scheme.{u}) [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] : ∃ hpres : ∀ K : Etale.DerivedCategoryModule (ULift.{u + 1} B) X, finiteComparisonEtaleClosure B X K → finiteComparisonProEtaleClosure B eR X ((comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) X).mapDerivedCategory.obj K), ((finiteComparisonProEtaleClosure B eR X).lift ((finiteComparisonEtaleClosure B X).ι ⋙ (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) X).mapDerivedCategory) (fun K ↦ hpres K.obj K.property)).IsEquivalence ∧ (∀ T : Triangle (Etale.DerivedCategoryModule (ULift.{u + 1} B) X), finiteComparisonEtaleClosure B X T.obj₁ → finiteComparisonEtaleClosure B X T.obj₂ → finiteComparisonEtaleClosure B X T.obj₃ → T ∈ distTriang _ → ((comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) X).mapDerivedCategory.mapTriangle.obj T) ∈ distTriang _) ∧ (∀ (I : Type (u + 2)) (K : I → Etale.DerivedCategoryModule (ULift.{u + 1} B) X), (∀ i : I, finiteComparisonEtaleClosure B X (K i)) → ∀ c : Cofan K, IsColimit c → finiteComparisonEtaleClosure B X c.pt ∧ Nonempty (IsColimit ((comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1} B)) X).mapDerivedCategory.mapCocone c))) ∧ (∀ (Y : Scheme.{u}) [Y.Over (Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (g : X ⟶ Y) [g.IsOver (Spec (.of k))] [LocallyOfFiniteType g] [QuasiCompact g], (∀ K : Etale.DerivedCategoryModule (ULift.{u + 1} B) Y, finiteComparisonEtaleClosure B Y K → IsIso ((unboundedDirectImagePullbackIso (ULift.{u + 1} B) g).hom.app K)) ∧ (∀ K : Etale.DerivedCategoryModule (ULift.{u + 1} B) X, finiteComparisonEtaleClosure B X K → IsIso (unboundedDirectImageComparisonMap (ULift.{u + 1} B) g K))) ∧ (∀ (U : Scheme.{u}) [U.Over (Spec (.of k))] [LocallyOfFiniteType (U ↘ Spec (.of k))] [QuasiCompact (U ↘ Spec (.of k))] (j : U ⟶ X) [j.IsOver (Spec (.of k))] [IsOpenImmersion j] (K : Etale.DerivedCategoryModule (ULift.{u + 1} B) U), finiteComparisonEtaleClosure B U K → IsIso ((finiteComparisonOpenIso B j).hom.app K)) ∧ (∀ (P Y : Scheme.{u}) [P.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (P ↘ Spec (.of k))] [QuasiCompact (P ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (j : X ⟶ P) (r : P ⟶ Y) [j.IsOver (Spec (.of k))] [r.IsOver (Spec (.of k))] [IsOpenImmersion j] [IsProper r] (K : Etale.DerivedCategoryModule (ULift.{u + 1} B) X), finiteComparisonEtaleClosure B X K → IsIso (finiteComparisonCompactSupportMap B j r K))",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-60b16935a",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Clause-by-clause check of the Lean against node det-ctf-finite-comparison-localizing. Setting (k with IsAlgClosure (ZMod p) k, l != p, finite B with l^n B = 0, finite-type k-schemes) matches. Uses the real small etale and pro-etale ordinary module-sheaf derived categories and the canonical comparisonUpperStar.mapDerivedCategory. Coefficient realization is real data (ordinaryAction, sheafified mapMod, Mod.comap of finiteDiscreteSchemeRingIso); its exactness is postponed like the landed finiteCoefficientRealization_exact. Etale Dctf = recorded isBoundedConstructible plus finiteTorAmplitude (tensor over A); pro-etale Dctf = recorded constantModelBoundedConstructible plus finiteTorAmplitude, transported; closures = recorded localizingClosure. Equivalence, exactness, sums over Type (u+2) including the empty sum, g^* and Rg_* comparisons, open j_! comparison and compactification composite all present, none weaker or stronger. No hollow definitions; docstrings carry source and blueprint tags; no proof beyond sorry; statement verbatim; Worker report and self-check second reading present. nt_compile clean (6.9 s, 5.8 s); control scratch file confirmed diagnostics are shown, universes, monoidal instance and axioms. Remarks only: g^* and open clauses are trivially true because the dependencies build those comparisons as isomorphisms; two declarations come from proof_deps nodes, which are ancestors, so there is no cycle."
  }
 }

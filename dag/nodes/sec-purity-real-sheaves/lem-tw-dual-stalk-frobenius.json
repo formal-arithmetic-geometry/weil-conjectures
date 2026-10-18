@@ -10,7 +10,9 @@
  "stmt_deps": [
   "def-weil-weil-sheaf-complex",
   "def-real-weil-representation-operations",
-  "def-weil-local-frobenius-trace"
+  "def-weil-local-frobenius-trace",
+  "def-real-common-stage-lisse",
+  "def-real-common-stage-weil-linear-dual"
  ],
  "proof": [
   {
@@ -231,5 +233,27 @@
   "group": "Q119",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-8f3289be0 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-tw-lisse-rational-realization and every cited statement in full. Sources checked: blueprint main-20261015 lem-tw-dual-negation (.md and .proof.md, first sentence of the proof), and Bhatt-Scholze section 6.8 (Lemma 6.8.2, Definition 6.8.3, Proposition 6.8.4, Lemmas 6.8.12 and 6.8.13, Proposition 6.8.14(2), Remark 6.8.15), which support the new node: the realization is fully faithful, the lisse part of the rational heart has essential image Loc(X,E_X), and the realization is compatible with tensor and pullback, for any finite-type X including nonseparated X. The node is a generic coefficient comparison, not a restatement of the item. It is not a duplicate of lem-weil-pbc-condensed-e-realization (separated, k-morphisms only), thm-sfb-extend-scalars-localization, lem-weil-pbc-lisse-e-constructible-integral-lattice, lem-per-adic-lisse-cohomology-calculus (separated, def-pod notion of lisse) or lem-sfb-integral-lisse-reduction-equivalence. Steps 1-5 check out: the common finite stage and realization; the dual-basis coevaluation is basis-independent and glues, with both triangle identities and r=0; theta^* is precomposition with theta^{-1} after the evaluation-normalized delta, with the correct variance; the induction on theta^[n] is set up with the semilinear return g^r x = x g_s^r; the ctf hypothesis of the fibre-tensor lemma holds by definition at field coefficients; the inverse of c_y is an explicit finite sum; only part 1 of the transport-iso lemma is used, via Spec k_0, so Y_0 needs no separatedness. Small cases tested: rank 0, empty base, rank 1 (dual Frobenius a^{-1}), a unipotent block (inverse transpose), degree r. Batch-5 check: the flagged citation lem-sfb-integral-lisse-reduction-equivalence (whose closure reaches lem-pod-adic-limit-finite-modules) was used only in the new node's statement, to identify the limit sheaves with continuous functions. That identification is not needed. lem-pod-adic-limit-finite-modules is general O_E-module algebra, not a step of Poincare duality. Even so, I replaced the citation (and def-weil-pbc-lisse-lattice-coefficients) with def-weil-completed-integral-coefficients and defined E_X inline as R^_X[1/varpi], so nothing in the trace-formula or Poincare-duality closure is newly cited. I also added the missing finite-type citation def-weil-scheme-morphism-properties, and reworded item step 3 to say 'coefficient ring sheaf E_Y' instead of 'continuous coefficient rings'. I accept the declared tool_uses: lem-pur-ringed-site-finite-free-dual-pullback, lem-pur-sheaf-hom-cover-gluing, lem-sf-point-fibre-derived-tensor, lem-weil-frobenius-cohomology-transport-iso (part 1 only). No SGA source is used. Corrected files are under fixes/dag/nodes/sec-purity-real-sheaves/.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DualStalkFrobenius",
+  "declaration": "WeilConjectures.dual_stalk_frobenius",
+  "declarations": [
+   "WeilConjectures.dual_stalk_frobenius"
+  ],
+  "file": "lean/Sheaf/Paper/DualStalkFrobenius.lean",
+  "statement": "theorem dual_stalk_frobenius (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Y₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (Ω : Type u) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (F : sfCommonStageWeilSheaf D l hl Y₀ Ω) (_hF : @IsCommonStageLisse l _ Ω _ _ _ (D.geometricFiber Y₀).left (sfWeilPrimeInvertible D l hl Y₀) F.obj.carrier) : (∃ Fv : sfCommonStageWeilComplex D l hl Y₀ Ω, IsCommonStageWeilLinearDual D l hl Y₀ Ω F.obj Fv) ∧ ∀ Fv : sfCommonStageWeilComplex D l hl Y₀ Ω, IsCommonStageWeilLinearDual D l hl Y₀ Ω F.obj Fv → @IsCommonStageLisse l _ Ω _ _ _ (D.geometricFiber Y₀).left (sfWeilPrimeInvertible D l hl Y₀) Fv.carrier ∧ sfCommonStageHeartProperty l (D.geometricFiber Y₀).left Ω Fv.carrier ∧ ∀ (y : {y : Y₀.left // y ∈ closedPoints Y₀.left}) (ι : Y₀.left.residueField y.val →+* D.k) (hι : ι.comp (Y₀.hom.residueFieldAlgebraMap y.val) = algebraMap D.k₀ D.k), FiniteDimensional Ω (localQbarClosedStalk l Ω D hl Y₀ F.obj y ι hι) ∧ ∃ A : localQbarClosedStalk l Ω D hl Y₀ F.obj y ι hι ≃ₗ[Ω] localQbarClosedStalk l Ω D hl Y₀ F.obj y ι hι, A.toLinearMap = (localQbarClosedFrobeniusStalk l Ω D hl Y₀ F.obj y ι hι).hom ∧ ∃ c : localQbarClosedStalk l Ω D hl Y₀ Fv y ι hι ≃ₗ[Ω] Module.Dual Ω (localQbarClosedStalk l Ω D hl Y₀ F.obj y ι hι), (∀ (φ : localQbarClosedStalk l Ω D hl Y₀ Fv y ι hι) (v : localQbarClosedStalk l Ω D hl Y₀ F.obj y ι hι), c ((localQbarClosedFrobeniusStalk l Ω D hl Y₀ Fv y ι hι).hom φ) v = c φ (A.symm v)) ∧ c.toLinearMap.comp ((localQbarClosedFrobeniusStalk l Ω D hl Y₀ Fv y ι hι).hom.comp c.symm.toLinearMap) = LinearMap.dualMap A.symm.toLinearMap",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Uses the actual fixed-pair/common-stage coefficient category. The dual is specified by the internal-Hom universal property and evaluation equivariance, hence up to its unique evaluation-preserving Weil isomorphism; existence and the assertion for every representing dual are both stated. Lisse is locally rational finite free, not a global integral lisse lattice. The closed-point operator is constructed from the published point transport and composition maps, including the semilinear return."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0b13f37ec",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Matched every clause of dual_stalk_frobenius against the node (dual exists; lisse and in the heart for every representing dual; finite-dimensional H^0 stalk; Frobenius equal to a linear automorphism A; exists c with c(F_dual phi)(v)=c(phi)(A^-1 v) and conjugacy to dualMap A^-1). No extra hypotheses; Omega : Type u is forced by the pointQbarFibre API and documented. New section 1(A) definitions IsCommonStageLisse (chart-local rational finite freeness, no global lattice) and IsCommonStageWeilLinearDual (internal-Hom universal property plus evaluation-equivariance equation, which gives the contragredient action) are real Props with correct type directions. Section 1(B) LocalFrobeniusTrace is append-only (lines 1-350 identical to side clone); the localQbar operator follows the node's composite with the semilinear return and theta iteration and introduces no arbitrary maps. Recorded statements equal the file signatures for all 4 records; new nodes have exactly the section 5 fields; the item changed only in stmt_deps and lean. The only proof is the theorem's sorry; docstrings and report sections are present. nt_compile --json on all 4 files: exit 0, no diagnostics (29.4/2.7/2.4/3.1 s). Remarks only: the worker's duplicate search omits commonStageDerivedInternalHom (not a usable duplicate: no evaluation or Weil structure); the Q11 second reading was the author's own pass."
  }
 }

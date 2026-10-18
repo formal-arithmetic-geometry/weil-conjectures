@@ -242,5 +242,23 @@
   "group": "Q44",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-9afb61adb (reviewer sub-agent of L); spot-checked: I read the item, all five steps, and the statements of all eight cited nodes. Statement: unchanged and faithful. It matches Bhatt-Scholze Def 2.2.10 (Hens_A as the colimit over factorizations A->A'->B0 with A->A' étale), Lemma 2.2.12 (reduction iso), Lemma 6.1.1, and the proof of Lemma 6.1.2, which asserts 'henselian along I' without proof. It also matches Stacks proetale.tex Tag 097P (lemma-lift-ind-etale) and the adjunction trick near line 4827 (C->C_g->C/IC gives a C-algebra map), which steps 3-4 generalize. Steps: step 1 (elementary) uses the filteredness, colimit-definition and reduction-iso statements, giving C ind-étale and theta∘rho=epsilon. Step 2: Mathlib leaf clause (1) gives E finitely presented; the one-object presentation plus composition stability give E ind-étale over A. Step 3: q=theta∘sigma satisfies q∘u=epsilon and kills IE; surjectivity of the adjunction at D=E gives tau with epsilon∘tau=q. Step 4: injectivity at D=C gives tau∘u=id, and injectivity of theta gives rho∘tau=sigma. Step 5: this is exactly the hypothesis of lem-weil-pbc-etale-section-lifting-henselian-pair (Stacks 09XI (2)=>(3)), whose conclusion is the henselian definition. I checked every equality. Only statements are used (C3/C4) and there is no relabelling (D). Edge cases I=0, I=A, A=0 and C̄=0 hold (the terminal object gives C=0), and the proof assumes nothing about finiteness or completeness. Duplicate search with rg over dag/nodes (henselian with H_A, closed-lift, 097P, right adjoint) found no existing node, so same_as=[] is correct. The dependency closure (114 nodes) has no cycle. I accept the recorded tool_uses (the shared closed-lift construction, filteredness, reduction and adjunction, the ind-étale definition and stability, and the étale-section criterion, which is Lean-closed on slopmaster2): they are generic ring tools that the purity unit does not provide. Minor wording only, not a fault: step 2 says 'etale ring map' where the cited nodes say 'Spec étale'; the two notions agree. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ProEtale.HenselianClosedLift",
+  "declaration": "Algebra.ClosedLift.henselianRing",
+  "file": "lean/Sheaf/RingTheory/ProEtale/HenselianClosedLift.lean",
+  "statement": "theorem henselianRing (A Cbar : Type u) [CommRing A] [CommRing Cbar] (I : Ideal A) [Algebra A Cbar] [Algebra (A ⧸ I) Cbar] [IsScalarTower A (A ⧸ I) Cbar] [Algebra.IndEtale (A ⧸ I) Cbar] : HenselianRing (Algebra.ClosedLift A Cbar) (I.map (algebraMap A (Algebra.ClosedLift A Cbar)))",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-469c4215f",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: A CommRing, I : Ideal A unrestricted, Cbar ind-etale over A/I (recorded Algebra.IndEtale) with induced A-structure via IsScalarTower (same binder pattern as upstream bijective_reduction), C = recorded Algebra.ClosedLift A Cbar, IC = I.map (algebraMap A C), conclusion = recorded Mathlib HenselianRing. No extra hypotheses; shared universe u comes from the recorded ClosedLift/IndEtale and loses nothing up to iso; edge cases I=0, I=A, A=0, Cbar=0 covered. No duplicate in Mathlib or side clone. Only sorry is the whole proof; docstrings give source, blueprint id and the five proof steps; node changes only in lean; lean.statement verbatim. nt_compile --json rc=0, 1.7 s, clean, and a /tmp copy with a wrong proof failed against the expected HenselianRing goal. Non-blocking: stage 3 should take v:=u in henselianRing_of_etale_section_lifting."
  }
 }

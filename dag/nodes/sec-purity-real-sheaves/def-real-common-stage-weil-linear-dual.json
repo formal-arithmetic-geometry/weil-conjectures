@@ -1,0 +1,100 @@
+{
+ "id": "def-real-common-stage-weil-linear-dual",
+ "kind": "definition",
+ "title": "Evaluation universal property of the linear dual of a common-stage Weil complex",
+ "status": "split",
+ "statement": "Fix the finite-field datum and coefficient conventions of [def-weil-weil-sheaf-complex], a finite-type $k_0$-scheme $Y_0$, its geometric fibre $Y$, and common-stage $\\Omega$-Weil complexes $F,D$. Let $G=Lg_Y^*$ and let $U=\\Omega_Y$ with its canonical Weil structure [def-weil-constant-weil-structure]. Use the derived tensor [def-weil-derived-pullback-tensor-hom] and its canonical pullback comparison $t:G(D\\otimes F)\\simeq GD\\otimes GF$ [def-pur-completed-pullback-tensor-comparison]. Define $D$ to be a linear Weil dual of $F$ if there exists $e:D\\otimes F\\to U$ such that for every $T\\in D^b_c(Y,\\Omega)$ the map $\\operatorname{Hom}(T,D)\\to\\operatorname{Hom}(T\\otimes F,U)$, $f\\mapsto e\\circ(f\\otimes1_F)$, is bijective, and $e\\circ(\\theta_D\\otimes\\theta_F)\\circ t=\\theta_U\\circ G(e)$. The first clause is the universal property of $R\\mathcal Hom(F,U)$. For lisse $F$ it is the ordinary linear sheaf dual in degree zero. The second clause specifies the contragredient Weil action (precomposition with $\\theta_F^{-1}$), intrinsically by invariance of evaluation. This defines the dual up to its unique evaluation-preserving Weil isomorphism.",
+ "stmt_deps": [
+  "def-weil-weil-sheaf-complex",
+  "def-weil-constant-weil-structure",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-completed-pullback-tensor-comparison"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-r-real-linear/lem-tw-dual-negation.proof.md",
+  "place": "First sentence: the dual representation; local finite freeness and the evaluation description of linear duality, as in Bhatt–Scholze 6.8.3 and 6.8.14(2), Remark 6.8.15, and Stacks 0FNY/0GMX."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Locally finite free l-adic common stage coefficient sheaf linear dual with Frobenius structure",
+   "results": "8 hits: SheafOfModules.ιFree, Module.dual_free, Module.finite_dual_iff, Subspace.instModuleDualFiniteDimensional, LinearMap.det_dualMap, LocallyConstant.freeOfProfinite, SheafOfModules.freeCofan, LinearEquiv.dualMap_symm.",
+   "date": "2026-10-18",
+   "verdict": "No common-stage lisse predicate or Weil-dual interface; ordinary free modules and vector duals only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom representing linear dual with invariant evaluation for a Weil sheaf",
+   "results": "8 hits: LightCondensed.ihomPoints, LightCondensed.ihom_map_val_app, LightCondensed.ihomPoints_apply, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, FGModuleCat.ihom_obj, FGModuleCat.FGModuleCatEvaluation, LightCondensed.ihomPoints_symm_apply, LightCondensed.ihomPoints_symm_comp.",
+   "date": "2026-10-18",
+   "verdict": "No match: these categories are not common-stage Weil complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "msearch grep IsCommonStageLisse|IsCommonStageWeilLinearDual|Weil.*[Dd]ual|[Ll]isse; rg IsCommonStageLisse|IsCommonStageWeilLinearDual in Mathlib, WeilConjectures, lean/Sheaf; blueprint_refs.py search lisse and dual; rg local finite free and representing internal Hom in dag/nodes",
+   "results": "msearch: 3 unrelated IsSeparated hits (Mathlib/Topology/MetricSpace/MetricSeparated.lean:47, Mathlib/Topology/MetricSpace/Cover.lean:103, Mathlib/Data/Rel/Separated.lean:45). Exact-name rg: no hits. DAG: def-a1-common-stage-lisse-lattice requires a global integral lisse lattice; lem-tw-lisse-rational-realization describes local rational freeness but has no Lean. Upstream WeilSheaf/Dual.lean uses a different coefficient category. No existing definition of these predicates.",
+   "date": "2026-10-18",
+   "verdict": "No duplicate. Reuses the recorded rationalization, completed coefficient modules, derived pullback and tensor, constant Weil structure."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-tw-dual-stalk-frobenius",
+  "date": "2026-10-18",
+  "group": "Q11"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-tw-dual-negation",
+   "place": "Proof first sentence: linear dual of a lisse Weil sheaf and its contragredient local Frobenius.",
+   "via": [
+    "lem-tw-dual-stalk-frobenius"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-r-real-linear",
+ "lean": {
+  "module": "Sheaf.Paper.CommonStageWeilLinearDual",
+  "declaration": "WeilConjectures.IsCommonStageWeilLinearDual",
+  "declarations": [
+   "WeilConjectures.IsCommonStageWeilLinearDual"
+  ],
+  "file": "lean/Sheaf/Paper/CommonStageWeilLinearDual.lean",
+  "statement": "def IsCommonStageWeilLinearDual (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Y₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (F Fv : sfCommonStageWeilComplex D l hl Y₀ Ω) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0b13f37ec",
+  "group": "Q11",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0b13f37ec",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Matched every clause of dual_stalk_frobenius against the node (dual exists; lisse and in the heart for every representing dual; finite-dimensional H^0 stalk; Frobenius equal to a linear automorphism A; exists c with c(F_dual phi)(v)=c(phi)(A^-1 v) and conjugacy to dualMap A^-1). No extra hypotheses; Omega : Type u is forced by the pointQbarFibre API and documented. New section 1(A) definitions IsCommonStageLisse (chart-local rational finite freeness, no global lattice) and IsCommonStageWeilLinearDual (internal-Hom universal property plus evaluation-equivariance equation, which gives the contragredient action) are real Props with correct type directions. Section 1(B) LocalFrobeniusTrace is append-only (lines 1-350 identical to side clone); the localQbar operator follows the node's composite with the semilinear return and theta iteration and introduces no arbitrary maps. Recorded statements equal the file signatures for all 4 records; new nodes have exactly the section 5 fields; the item changed only in stmt_deps and lean. The only proof is the theorem's sorry; docstrings and report sections are present. nt_compile --json on all 4 files: exit 0, no diagnostics (29.4/2.7/2.4/3.1 s). Remarks only: the worker's duplicate search omits commonStageDerivedInternalHom (not a usable duplicate: no evaluation or Weil structure); the Q11 second reading was the author's own pass."
+ }
+}

@@ -15,7 +15,8 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
   "def-pc-perfect-ring-complex",
-  "def-sfb-site-derived-constant-module-functor"
+  "def-sfb-site-derived-constant-module-functor",
+  "def-zl-condensed-scalar-realization"
  ],
  "proof": [
   {
@@ -282,5 +283,27 @@
   "group": "Q12",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q12-aab77293d (reviewer sub-agent of L); spot-checked: Read the item and all five new nodes in full against HRS §§3–4, BS §§2.2/6.1 and cited sources. The henselian refinement repairs the source’s closed-subscheme gap. Corrected two citation faults: derived constant realization and ind-etale-to-weakly-etale stability in Step 7. Statements unchanged; no cycles, dropped-route dependencies or long steps. Whole corrected JSON and concrete checks are in fixes/ and review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CondensedDualizableLocalPerfectModels",
+  "declaration": "AlgebraicGeometry.ProEtale.condensed_dualizable_iff_local_perfect",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.condensed_dualizable_stable",
+   "AlgebraicGeometry.ProEtale.condensed_dualizable_iff_local_perfect"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedDualizableLocalPerfectModels.lean",
+  "statement": "theorem condensed_dualizable_iff_local_perfect (_hcomponents : ∀ x : X, ∃ U : X.Opens, x ∈ U ∧ (irreducibleComponents U).Finite) (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) : Nonempty (HasRightDual K) ↔ ∃ 𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage X, ∀ i : 𝒰.I₀, ∃ P : DerivedCategory (ModuleCat.{u + 1} (condensedScalarRing Λ)), DerivedCategory.IsPerfectRingComplex P ∧ Nonempty (((CondensedRing.upperStar Λ (𝒰.f i)).mapDerivedCategory).obj K ≅ (condensedScalarRealization Λ (𝒰.X i)).obj P)",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-04a9e661e",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Read node, 9 stmt_deps, HRS Def 3.3/3.5/Thm 4.13 places, both modules, report (Worker report + Second reading by Q20 present), upstream ModuleObject.Basic/DerivedCategory, DerivedChangeOfRingsCochainModel, CommutativeSiteDerivedConstantModuleFunctor, PerfectRingComplexGeneral. Clause-by-clause match: general comm. condensed Λ, R=Γ(*,Λ), Λ_X=condensedRingObj on Scheme.ProEt, ordinary derived category with Mod.derivedMonoidalCategory (confirmed by #synth), Nonempty HasRightDual, stability (0/iso/all ℤ shifts/dist. cones) without component hypothesis, Zariski-local finite components, Scheme.Cover of proetalePrecoverage, per-member ∃ perfect P, ↔, no extra assumptions. New def node def-zl-condensed-scalar-realization is canonical: constant realization ⋙ universal derived change of rings along the constantSheafAdj counit ⋙ section-module equivalence ⋙ p_X^*. Classical.choice of the recorded universal structure is the established pattern and doesn't change the Nonempty-iso statement. No duplicates found. Statement text unchanged, lean.statement verbatim, only the two theorems sorry, docstrings have source/blueprint, edge cases ok. nt_compile --json on both files rc 0, no diagnostics, 2.7 s each. Non-blocking: global HasDerivedCategory.{u+2} helper instances could cause type mismatches downstream."
  }
 }

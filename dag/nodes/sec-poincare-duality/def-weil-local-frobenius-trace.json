@@ -168,22 +168,36 @@
    "WeilConjectures.localClosedTrace",
    "WeilConjectures.localExtensionFrobeniusCohomology",
    "WeilConjectures.localFrobeniusTrace",
-   "WeilConjectures.localClosedPointTrace"
+   "WeilConjectures.localClosedPointTrace",
+   "WeilConjectures.localQbarPullbackStageIso",
+   "WeilConjectures.localQbarPullbackComposition",
+   "WeilConjectures.localQbarDerivedStalk",
+   "WeilConjectures.localQbarPointComplex",
+   "WeilConjectures.localQbarStalk",
+   "WeilConjectures.localQbarWeilIterate",
+   "WeilConjectures.localQbarFibreObjIso",
+   "WeilConjectures.localQbarPointPullbackIso",
+   "WeilConjectures.localQbarPointTransport",
+   "WeilConjectures.localQbarPointTransportIterate",
+   "WeilConjectures.localQbarReturnComparison",
+   "WeilConjectures.localQbarClosedFrobenius",
+   "WeilConjectures.localQbarClosedFrobeniusStalk",
+   "WeilConjectures.localQbarClosedStalk"
   ],
   "file": "lean/Sheaf/Paper/LocalFrobeniusTrace.lean",
   "statement": "def localFrobeniusTrace (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum) (E : Padic.FiniteCoefficientFields c.l c.Qbar) (Y₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (K : sfWeilComplex D c.l c.different Y₀ E.val) (n : ℕ) (hn : 1 ≤ n) (x : D.extensionPoints Y₀ n hn) : E.val",
   "branch": "newtargets-dag",
-  "by": "Q103",
-  "date": "2026-10-17",
+  "by": "Q11",
+  "date": "2026-10-18",
   "existing": false,
-  "note": "Derived stalks, specified localized integral composition comparisons, iterated Weil and point transports, return comparisons, finite-extension and closed-point operators on complexes and cohomology, and finite alternating traces. Helper theorems postpone only the compatibility/return/positive-degree assertions already contained in this definition node; every definition has real data."
+  "note": "§1(B): the previous module supplied local operators only for finite coefficient fields E, while this consumer needs the same construction at algebraically closed common-stage coefficients. All original declarations are retained verbatim. Added literal-stage pullback-composition comparisons, the published Qbar point transport with its prescribed boundary identifications, its iterations, the geometric closed-point return, and the induced H^0 stalk/operator. No independent operator, isomorphism assumption, or integral stable lattice is introduced."
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-a6ca94271",
-  "group": "Q103",
+  "reviewer": "NT-stage2-cc-0b13f37ec",
+  "group": "Q11",
   "result": "pass",
-  "note": "Audited node, source, all dependencies, Lean declarations, docstrings, edge cases, route-pivot compliance, report sections, and scompile.py sandbox/library compiles; no defects found."
+  "note": "Matched every clause of dual_stalk_frobenius against the node (dual exists; lisse and in the heart for every representing dual; finite-dimensional H^0 stalk; Frobenius equal to a linear automorphism A; exists c with c(F_dual phi)(v)=c(phi)(A^-1 v) and conjugacy to dualMap A^-1). No extra hypotheses; Omega : Type u is forced by the pointQbarFibre API and documented. New section 1(A) definitions IsCommonStageLisse (chart-local rational finite freeness, no global lattice) and IsCommonStageWeilLinearDual (internal-Hom universal property plus evaluation-equivariance equation, which gives the contragredient action) are real Props with correct type directions. Section 1(B) LocalFrobeniusTrace is append-only (lines 1-350 identical to side clone); the localQbar operator follows the node's composite with the semilinear return and theta iteration and introduces no arbitrary maps. Recorded statements equal the file signatures for all 4 records; new nodes have exactly the section 5 fields; the item changed only in stmt_deps and lean. The only proof is the theorem's sorry; docstrings and report sections are present. nt_compile --json on all 4 files: exit 0, no diagnostics (29.4/2.7/2.4/3.1 s). Remarks only: the worker's duplicate search omits commonStageDerivedInternalHom (not a usable duplicate: no evaluation or Weil structure); the Q11 second reading was the author's own pass."
  }
 }

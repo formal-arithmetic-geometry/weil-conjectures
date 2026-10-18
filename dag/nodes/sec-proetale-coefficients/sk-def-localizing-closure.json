@@ -148,26 +148,25 @@
   }
  },
  "lean": {
-  "module": "Sheaf.Paper.LocalizingClosure",
-  "declaration": "AlgebraicGeometry.ProEtale.localizingClosureProEtale",
-  "declarations": [
-   "CategoryTheory.IsLocalizingSubcategory",
-   "CategoryTheory.localizingClosure",
-   "AlgebraicGeometry.ProEtale.localizingClosureProEtale"
-  ],
-  "statement": "def localizingClosureProEtale (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})",
+  "module": "Sheaf.Paper.LocalizingAdmissibleCoefficients",
+  "declaration": "AlgebraicGeometry.ProEtale.IsLocalizingAdmissibleCoefficient",
+  "file": "lean/Sheaf/Paper/LocalizingAdmissibleCoefficients.lean",
+  "statement": "def IsLocalizingAdmissibleCoefficient (ℓ : ℕ) [Fact ℓ.Prime] (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] : Prop",
   "branch": "newtargets-dag",
-  "by": "N2",
+  "by": "Q89",
   "date": "2026-10-18",
   "existing": false,
-  "file": "lean/Sheaf/Paper/LocalizingClosure.lean"
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IsLocalizingAdmissibleCoefficient"
+  ],
+  "note": "§1(B): the recorded module defines the localizing closure but exports no predicate for the admissible coefficient convention in the first paragraph of this node. The repair module publicly imports that exact closure definition unchanged and supplies the missing coefficient predicate, using existing continuous-map condensed ring constructions and isomorphisms of ring objects. It includes all six stated coefficient cases, with all continuous functions into the algebraic closure for the indicated topology, rather than the different finite-subextension-valued upstream algebraic-closure object. No existing definition of the closure is copied or altered."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-55b57197e",
-  "group": "N2",
+  "reviewer": "NT-stage2-cc-aacfaf762",
+  "group": "Q89",
   "result": "pass",
-  "note": "Statement, dependencies, source, docstrings, edge cases, route-pivot compliance, report sections, and per-file compilation verified; no findings."
+  "note": "Every hypothesis and conclusion clause matches node det-proper-image-localizing-open and its blueprint source (separated finite-type k-schemes, open k-immersion j, char p>0 with p≠ℓ). IsLocalizingAdmissibleCoefficient (§1(B) module for sk-def-localizing-closure) lists exactly the six admissible rings as Mon-isomorphism classes of C(-,T) condensed rings. Q̄_ℓ uses all continuous maps, as sk-def-sfb-condensed-ring prescribes; the upstream colimit object (IsFinitenessCoefficient) is rightly not used. Dctf is constantModelBoundedConstructible ⊓ finiteTorAmplitude (finite-constant-model sense), the same predicate localizingClosureProEtale closes. D(j_!) is the recorded exact module-object functor's mapDerivedCategory. Clause 2: PreservesColimitsOfShape (Discrete I) for all I : Type (u+1), the hom universe (objects u+2), empty family included. Clause 3: the canonical full-subcategory lift is IsTriangulated and sum-preserving; the closures' IsTriangulated witnesses are conclusions, not hypotheses. Universes checked by #check; no forced equalities. Edge cases (U empty, j=id, K=0, n=0 zero ring, non-regular coefficients) covered. No hollow definitions; only the theorem is sorry (#print axioms); docstrings carry source place, blueprint id and the 5 proof steps; item statement and deps unchanged; lean.statement verbatim. nt_compile.py --json on both modules: rc 0, no diagnostics (2-3 s each); probe compiles. Non-blocking remarks: (1) the §1(B) record replaces N2's closure record, so localizingClosureProEtale, localizingClosure and IsLocalizingSubcategory leave every node's lean.declarations and LocalizingClosure.lean becomes unowned; the new module still re-exports the closure, but the maintainer may want to re-add those names (a stage-2 apply-fixes cannot change a dependency record). (2) The predicate uses the Type-0 continuousMapRingObj instead of the recorded continuousCoefficientRingObj; harmless because the predicate is up to isomorphism."
  }
 }

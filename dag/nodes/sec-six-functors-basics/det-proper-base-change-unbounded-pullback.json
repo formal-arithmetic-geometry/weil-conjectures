@@ -318,5 +318,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.UnboundedLocalizingPullback",
+  "declaration": "AlgebraicGeometry.ProEtale.unboundedLocalizingPullback",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.unboundedLocalizingPullbackCommShift",
+   "AlgebraicGeometry.ProEtale.UnboundedLocalizingPullback",
+   "AlgebraicGeometry.ProEtale.unboundedLocalizingPullback"
+  ],
+  "file": "lean/Sheaf/Paper/UnboundedLocalizingPullback.lean",
+  "statement": "theorem unboundedLocalizingPullback (p l : ℕ) [Fact p.Prime] [Fact l.Prime] (hpl : p ≠ l) (k : Type u) [Field k] [CharP k p] {Y' Y : Scheme.{u}} [Y'.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (Y' ↘ Spec (.of k))] [QuasiCompact (Y' ↘ Spec (.of k))] [IsSeparated (Y' ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (g : Y' ⟶ Y) [g.IsOver (Spec (.of k))] : (∀ (A : Type) [CommRing A] [Finite A] [TopologicalSpace A] [DiscreteTopology A], (∃ n : ℕ, (l ^ n : A) = 0) → Nonempty (UnboundedLocalizingPullback (Profinite.continuousMapRingObj A) g)) ∧ Nonempty (UnboundedLocalizingPullback (Profinite.continuousMapRingObj ℤ_[l]) g) ∧ Nonempty (UnboundedLocalizingPullback (Profinite.continuousMapRingObj ℚ_[l]) g) ∧ (∀ E : PadicAlgCl.FiniteIntermediateField l, Nonempty (UnboundedLocalizingPullback (Profinite.padicIntegersRingObj l E) g) ∧ Nonempty (UnboundedLocalizingPullback (Profinite.continuousMapRingObj E) g)) ∧ Nonempty (UnboundedLocalizingPullback (Profinite.padicAlgClRingObj l) g)",
+  "branch": "newtargets-dag",
+  "by": "Q87",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-622bde1e7"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-622bde1e7",
+  "group": "Q87",
+  "result": "fix",
+  "note": "Read node, blueprint source, unit, all 6 stmt deps and their Lean (LocalizingClosure, CondensedConstantConstructibility, TorAmplitude, UpperLowerStar), the module, report. Hypotheses (distinct primes, char-p field k, separated finite-type Y,Y' over k, k-morphism g) and all six admissible coefficients (finite l-primary A in Type, Z_l, Q_l, O_E and E per finite subextension, padicAlgClRingObj) match; sums indexed by Type (u+2) = object universe (empty sum included); constructible clause uses constantModelBoundedConstructible ∧ finiteTorAmplitude both sides; single universe u checked with pp.universes; only sorry; docstrings and 5-step proof present. Fault F1: the structure took [commShift] on Lg^* and [restrictionCommShift] as existential data fields (no library instance exists, checked by failed inferInstance), so 'exact' was only 'triangulated for some shift', weaker than def-weil-triangulated-category and than what the unit needs. FIX: new def unboundedLocalizingPullbackCommShift = CommShift.ofIso (leftDerivedUpperStarIsoMapDerivedCategory Λ g).symm (canonical mapDerivedCategory shift), local instance; structure now a Prop with exact/sums/constructible/localizing/source+targetTriangulated, and restrictionExact/restrictionSums stated for Mathlib ObjectProperty.lift (ι ⋙ Lg^*) localizing with inherited shift. Theorem signature byte-identical (lean.statement unchanged); record adds the new declaration; report gains a maintainer-fix section. nt_compile --json: delivered clean 28.6 s, fixed clean 26.7 s, canonical-shift use verified by example."
  }
 }

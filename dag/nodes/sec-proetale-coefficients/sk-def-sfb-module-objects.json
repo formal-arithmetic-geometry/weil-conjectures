@@ -229,24 +229,19 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-55b57197e",
-  "group": "N2",
-  "result": "pass",
-  "note": "Statement, dependencies, source, docstrings, edge cases, route-pivot compliance, report sections, and per-file compilation verified; no findings."
+  "reviewer": "NT-stage2-cc-c348f8a50",
+  "group": "Q48",
+  "result": "fix",
+  "note": "Read node, 9 stmt deps, source chain (formula lemma, devissage, constructibility modules) and compiled delivered + fixed module via nt_compile.py --json (exit 0, no errors; tool hides warnings). Fixes: F1 H3 Dbc must be sk-def-sfb-constructible's constant-model notion (constantModelBoundedConstructible), not general boundedConstructible; F2 H3 index category was Type u, now Type (u+1) SmallCategory per size convention/devissage; F3 H4 private integralExtHomDiagram/Comparison duplicated landed homContinuityComparison, replaced; F5 H8 step-by-step proof docstring; F6 unused imports replaced. F4: N2 has since landed a sk-def-sfb-module-objects record, so land with --revert-nodes sk-def-sfb-module-objects (item uses Mathlib Mod over condensedRingObj, same as N2's abbrev and siblings). Fix files: fixes/IntegralExtHomContinuity.lean, fixes/det-lem-int-ext-continuity.report.md."
  },
  "lean": {
-  "module": "Sheaf.Paper.ModuleObjects",
-  "declaration": "AlgebraicGeometry.ProEtale.pulledBackModuleObjects",
-  "declarations": [
-   "CategoryTheory.moduleObjects",
-   "AlgebraicGeometry.ProEtale.pulledBackModuleObjects"
-  ],
-  "statement": "abbrev pulledBackModuleObjects (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})",
-  "branch": "newtargets-dag",
-  "by": "N2",
+  "module": "Mathlib.CategoryTheory.Monoidal.Mod",
+  "declaration": "CategoryTheory.Mod",
+  "statement": "structure Mod (A : C) [MonObj A]",
+  "branch": "mathlib",
+  "by": "Q48",
   "date": "2026-10-18",
-  "existing": false,
-  "file": "lean/Sheaf/Paper/ModuleObjects.lean",
-  "note": "§1(B): the base node had no Lean declaration. The module states its notion using Mathlib CategoryTheory.Mod: moduleObjects is the category of left modules over a bundled monoid, and pulledBackModuleObjects specializes this to coefficientRing X (Mon.mk Λ), whose underlying object is the pulled-back sheaf Λ_X. This supplies the action, module morphisms, forgetful category and regular module through Mathlib.Mod."
+  "existing": true,
+  "note": "The generic Mathlib bundled category of module objects over a monoid object is exactly the notion in this dependency: ModObj supplies the action and axioms, Mod.Hom supplies action-compatible morphisms, and Mod supplies the category and regular module. The pro-etale specialization is obtained by instantiating C and D as in the node statement."
  }
 }
