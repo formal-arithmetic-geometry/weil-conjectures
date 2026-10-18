@@ -8719,6 +8719,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ClosedPoints.GlobalGener
 public import WeilConjectures.SixFunctors.Etale.Derived.ClosedPoints.Hypercohomology
 public import WeilConjectures.SixFunctors.Etale.Derived.ClosedPoints.MinimalCohomology
 public import WeilConjectures.SixFunctors.Etale.Derived.ClosedPoints.Support
+public import WeilConjectures.SixFunctors.Etale.Derived.ClosedPoints.Unbounded
 public import WeilConjectures.SixFunctors.Etale.Derived.ClosedPoints.Vanishing
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
