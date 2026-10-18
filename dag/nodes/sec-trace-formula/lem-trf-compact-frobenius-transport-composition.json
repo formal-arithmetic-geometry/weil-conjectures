@@ -16,7 +16,9 @@
   "def-weil-frobenius-square-exchange",
   "def-weil-frobenius-cohomology-transport",
   "lem-weil-pbc-proetale-derived-pullback-composition",
-  "def-weil-compactifications-refinements"
+  "def-weil-compactifications-refinements",
+  "lem-trf-point-transport-composition",
+  "lem-trf-frobenius-open-square"
  ],
  "proof": [
   {
@@ -354,5 +356,32 @@
   "group": "Q03",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-dd746fba4 (reviewer sub-agent of L); spot-checked: I read the whole delivery against its cited statements and sources. Only steps 2 and 3, which had been returned, were repaired; the statement and steps 1 and 4-7 are unchanged and still check. Step 2 specializes lem-trf-pullback-coefficient-iterate-coherence with h=p, t=Spec(gamma) and t_W=g-bar, and the symbols match: its P_r=Q_r, its Q_r=B_r, its c_r=theta_r^{-1} (theta_r = c_{g-bar^r,p} composed with c_{p,h^r}^{-1}, from def-weil-pbc-ambient-ringed-exchange), d^X_m=t_m^{-1} and d^W_m=d_m^{-1}. Inverting its first equation gives exactly theta_{m+1}L(t_m)=(d_mL)(B_1theta_m)(theta_1Q_m), and the hypothesis p g-bar = h p comes from step 1. I accept this off-unit tool use: the lemma is a generic coherence, it is split, and it does not reach the item. Step 3 quotes the new node verbatim, with the same datum, A_{E,n} and D^b_c(s,A). The new node lem-trf-point-transport-composition is statement-only, self-contained and cites its definitions; t_m is unambiguous. I recomputed the colimit indices: the initial index is (s,h^r) with the identity, and restricting along h moves (s,h^m) to (s,h^{m+1}), so the composition law holds. Checked cases: m=1, N=0, N=A_s. It is not a clause of the item, since it has no compact support or exchange. It does not duplicate lem-weil-frobenius-point-transport-natural, which covers only r=1 because the global q is fixed. lem-trf-local-frobenius-transport-normalization and lem-trf-graph-frobenius-point-exchange state no composition law either. Sources checked: Deligne Weil II (1.1.7), printed pp. 150-151 (geometric Frobenius F is the inverse of x->x^q, acting by transport of structure), and Stacks 0D6D = lemma-derived-pullback-composition. No SGA source is used. Remarks: the item's stale top-level tool_uses is a maintainer field that the merge rewrites. searches.jsonl is not in the snapshot, so the search log was not cross-checked here. The report mentions a citations.json that was not delivered. No fixes were written."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.CompactFrobeniusTransportComposition",
+  "declaration": "WeilConjectures.compact_frobenius_transport_composition",
+  "declarations": [
+   "WeilConjectures.compactPowerPullback",
+   "WeilConjectures.compactPowerCohomology",
+   "WeilConjectures.compactPowerExchange",
+   "WeilConjectures.compactPowerTransport",
+   "WeilConjectures.compactPowerPullbackStep",
+   "WeilConjectures.compact_frobenius_transport_composition"
+  ],
+  "file": "lean/Sheaf/TraceFormula/CompactFrobeniusTransportComposition.lean",
+  "statement": "theorem compact_frobenius_transport_composition (D : FiniteFieldDatum.{u}) (X₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [IsSeparated X₀.hom] (C : D.CoefficientDatum) (F : Padic.FiniteCoefficientFields C.l C.Qbar) (c₀ : Compactification X₀.hom) (n : ℕ) (M : (intrinsicFiniteTorsionConstructible C.l (Coefficient.{u} C.l C.Qbar F) (n + 1) (Nat.succ_pos n) (D.geometricFiber X₀).left).FullSubcategory) (m : ℕ) (hm : 1 ≤ m) : compactPowerTransport D C.l C.different (Coefficient.{u} C.l C.Qbar F) X₀ c₀ n (m + 1) M.obj = compactPowerTransport D C.l C.different (Coefficient.{u} C.l C.Qbar F) X₀ c₀ n m M.obj ≫ compactPowerTransport D C.l C.different (Coefficient.{u} C.l C.Qbar F) X₀ c₀ n 1 ((compactPowerPullback D C.l (Coefficient.{u} C.l C.Qbar F) X₀ n m).obj M.obj) ≫ (compactPowerCohomology D C.l (Coefficient.{u} C.l C.Qbar F) X₀ c₀ n).map ((compactPowerPullbackStep D C.l (Coefficient.{u} C.l C.Qbar F) X₀ n m).inv.app M.obj)",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Direct finite-level power transports and the inverse canonical pullback compositor use the recorded point power maps, the fixed base-changed compactification, and the normalized ambient/open exchanges. The two added statement dependencies are already landed: their power recipe and power-square theorem are used by these explicit helpers. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1f789ae38",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Item .lean byte-identical (sha256 9f44aa48) and node identical to PASSed heads 2b97cae41f0c and c5727a1abb46; both were returned only for landing timeouts of base modules (DerivedPullbackTensorHom / WeilIndSheafCategory). Dependency changes since then are live-sync only: stage-3 reviewed_proof records and rewritten proof steps for lem-trf-frobenius-open-square; its lean record and statement are unchanged. Re-checked: every clause against the node (one c0 for all powers, finiteCompact e_r, pointPowerTransportFinite iota^(r), c_m = inverse of compactPowerPullbackStep, m>=1, level n+1, no Weil structure, composition order kept in ≫ form), statement verbatim, 6 declarations, single sorry, docstrings, both report sections. Theorem stmt_deps are genuine: pointPowerTransportFinite is the .choose of pointPowerFiniteSigma_existsUnique; frobenius_open_square .2.1/.2.2.2 type finiteCompact, and its module has no definition to move. nt_compile --json: item 10.5 s, exit 0, no errors or warnings. That run used a scratch patched copy of the side-only Sheaf/CategoryTheory/RingedSiteDualityMaps.lean: after today's global rebuild it fails with 'Unknown constant SheafOfModules.overFunctor' (lost transitive import). Maintainer: add 'public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous' to that module before re-landing; it is not part of this delivery. Advisory: c_m uses openSquareDerivedPullbackModel and the point lemma uses pointPowerPullbackModel, both the unique unit-normalized identification; tau^(1)=tau_{c,M} holds only propositionally."
  }
 }
