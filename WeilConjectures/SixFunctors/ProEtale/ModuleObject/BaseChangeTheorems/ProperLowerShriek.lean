@@ -95,7 +95,8 @@ noncomputable def boundedConstructibleOpenImmersionLowerShriekOfIsProperIso :
 /-- The lower shriek `Rf_!^c` attached to the trivial compactification `c = (X ⟶[𝟙] X ⟶[f] Y)`
 of a proper `f` (`AlgebraicGeometry.Compactification.ofIsProper`) is the derived pushforward
 `Rf_*` on bounded constructible complexes. -/
-noncomputable def boundedConstructibleLowerShriekOfCompactificationOfIsProperIso :
+noncomputable def boundedConstructibleLowerShriekOfCompactificationOfIsProperIso
+    [IsFinitenessCoefficient ℓ Λ] :
     boundedConstructibleLowerShriekOfCompactification Λ ℓ (Compactification.ofIsProper f.left) ≅
       boundedConstructibleLowerStar Λ ℓ f :=
   Functor.isoWhiskerRight (boundedConstructibleOpenImmersionLowerShriekOfIsProperIso Λ ℓ f) _ ≪≫

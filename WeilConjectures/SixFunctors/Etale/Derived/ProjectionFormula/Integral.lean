@@ -135,7 +135,7 @@ amplitude, then `ρ(PF_{f, K, L})`, the image of the projection map under the re
 `- ⊗ᴸ (𝒪_E/𝔪_E)_Y`, is an isomorphism. In the blueprint, `ρ(PF_{f, K, L})` is identified with the
 finite-level projection map `PF_{f, K₁, L₁}` by the reduction square of
 `sk-prop-sf-pf-reduction`, and the latter is an isomorphism by the finite-level projection
-formula `sk-thm-sf-pf-finite`. -/
+formula (`AlgebraicGeometry.Etale.hasProjectionFormula_of_boundedConstructible`). -/
 theorem isIso_reductionModIdeal_map_projectionMap_of_derivedCompleteIntegral (f : X ⟶ Y)
     [HasCompactification f]
     (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology 𝐌))
