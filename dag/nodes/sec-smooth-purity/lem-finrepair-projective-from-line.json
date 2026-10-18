@@ -19,100 +19,95 @@
  ],
  "proof": [
   {
-   "text": "Use the supplied closed embedding e:X→ℙ(N;S) with f=e≫p, as in [def-pc-projective-morphism]. The index N is finite and is allowed to be empty. It suffices to prove C(e) and C(p), then apply [lem-finrepair-composition-c].",
+   "text": "Use the existing recursive schemes Z_m = ProjectiveSpace.projectiveLinePow m S, with Z_0 = S and Z_(m+1) = P^1_(Z_m), and projections p_m = projectiveLinePowProj m S. The projective-space projections are proper by [lemma-nagata-projective-space-base-change-proper], hence locally of finite type and quasi-compact. Induction and composition give both finite-type conditions for p_m followed by the structure morphism S to Spec(k). Equip Z_m with exactly this structure morphism. The coefficient convention pulls back along any scheme morphism: a unit N in global sections maps to the same natural-number cast under the map on global sections; positivity, finiteness of Lambda and annihilation are unchanged.",
    "uses": [
-    "def-pc-projective-morphism",
-    "lem-finrepair-composition-c"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-projective-from-line.md",
-    "place": "Proof; source-library implementation in F1 Projective delivery"
-   }
-  },
-  {
-   "text": "The structure projection of every finite-coordinate projective space is proper by [lemma-nagata-projective-space-base-change-proper]. Thus its composites with a finite-type map to Spec k are finite type, using [def-weil-proper-morphism] and [def-weil-finite-type-morphism]. Over the Noetherian field k, [lem-weil-pbc-finite-type-over-noetherian] makes S and ℙ(N;S) Noetherian. These instances suffice for the finite-surjection cancellation and for the quasi-compactness of open complements of closed immersions.",
-   "uses": [
-    "lemma-nagata-projective-space-base-change-proper",
-    "def-weil-proper-morphism",
+    "def-nagata-projective-space-base-change",
     "def-weil-finite-type-morphism",
-    "lem-weil-pbc-finite-type-over-noetherian"
+    "lemma-nagata-projective-space-base-change-proper"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-projective-from-line.md",
-    "place": "Proof; source-library implementation in F1 Projective delivery"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-finrepair-projective-from-line.proof.md",
+    "place": "Second paragraph: the successive finite-type bases"
    }
   },
   {
-   "text": "A closed immersion into a Noetherian scheme satisfies C: by [lem-fin-closed-immersion], its underived direct image of a constructible sheaf is constructible and its positive derived images vanish. Equivalently, exactness identifies its total derived image of F[0] with (e_*F)[0]; the latter has constructible homology by [def-weil-pbc-constructible-complexes]. This proves C in [def-finrepair-property-c], and applies also to an identity and to a map from an empty scheme.",
+   "text": "For any closed immersion j:A to B in the domain of C, the finite-type structure on B makes B locally Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Thus the open complement of j is quasi-compact. Use the existing quasi-compact-complement wrapper of [lem-fin-closed-immersion] to preserve source-library constructibility under j_*. Convert between source-library constructibility and finite-constant-value constructibility by [lem-weil-pbc-constructible-etale-module-sheaf-comparison]. The closed immersion is finite by [lem-weil-pbc-closed-immersion-finite], so [lemma-weil-pbc-finite-direct-image-exact] gives exactness. The existing bounded-below comparison rightDerivedFunctorPlusIsoMapDerivedCategoryPlus and mapDerivedCategoryPlusSingleFunctor identify Rj_*(F[0]) with (j_*F)[0]. Taking homology gives constructibility in degree zero and zero in positive degrees. The zero sheaf is constructible using the trivial stratification (the existing IsConstructibleSheaf.of_isZero). Consequently C(j) holds. This is proved in the private Lean helper constructibleHigherDirectImages_closed; no intermediate hole is introduced.",
    "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
     "lem-fin-closed-immersion",
-    "def-weil-pbc-constructible-complexes",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lemma-weil-pbc-finite-direct-image-exact",
     "def-finrepair-property-c"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-projective-from-line.md",
-    "place": "Proof; source-library implementation in F1 Projective delivery"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-finrepair-projective-from-line.proof.md",
+    "place": "Last paragraph: exact constructibility-preserving closed pushforward; also the identity base case"
    }
   },
   {
-   "text": "Define Z_0=S, Z_(m+1)=ℙ¹_(Z_m), with tower projection q_m:Z_m→S, using the base-change presentation [def-nagata-projective-space-base-change]. Induction gives properness of every q_m from properness of projective-line projections [lemma-nagata-projective-space-base-change-proper]. Consequently Z_m→Spec k is finite type. The identity case of Step 3 gives C(q_0). At the successor, the universally quantified hypothesis gives C(ℙ¹_(Z_m)→Z_m), and [lem-finrepair-composition-c] composes it with C(q_m). Hence C(q_m) for every m.",
+   "text": "Prove C(p_m) by induction on m. For m = 0 the projection is the identity, which is a closed immersion, so the preceding step applies. For m+1 the first projection Z_(m+1) to Z_m satisfies C by the projective-line hypothesis with the pulled-back coefficient convention and the finite-type instances of step 1. Compose it with p_m using [lem-finrepair-composition-c]. This supplies C for every projective-line tower projection over S.",
    "uses": [
+    "def-finrepair-property-c",
+    "lem-finrepair-composition-c"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-finrepair-projective-from-line.proof.md",
+    "place": "Second paragraph: composition of projective-line projections; the n=0 sentence"
+   }
+  },
+  {
+   "text": "Choose the finite coordinate type I and global closed embedding i:X to P(I;S) from [def-pc-projective-morphism]. Projective space is finite type over k by properness of its projection followed by the given structure of S, and its coefficient convention is pulled back from S. If I is empty, P(I;S) is empty (ProjectiveSpace.instIsEmpty), so its projection to S is a closed immersion and step 2 gives C. If I is nonempty, use ProjectiveSpace.exists_isFinite_surjective_projectiveLinePow, recorded with [lem-weil-pbc-symmetric-product-finite], together with [lem-weil-pbc-symmetric-product-surjective]: there are m and a finite surjective sigma:Z_m to P(I;S) whose composite with the projective projection is p_m. This source-library theorem handles every finite nonempty coordinate type, including the single-coordinate, dimension-zero case, and needs no Noetherian-base hypothesis. Rewrite the composite using its over-base equation and apply [lem-finrepair-finite-surjection-cancellation] to step 3. This proves C for the projective-space projection.",
+   "uses": [
+    "def-pc-projective-morphism",
     "def-nagata-projective-space-base-change",
     "lemma-nagata-projective-space-base-change-proper",
-    "lem-finrepair-composition-c"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-projective-from-line.md",
-    "place": "Proof; source-library implementation in F1 Projective delivery"
-   }
-  },
-  {
-   "text": "If N is nonempty, use the source-library form of [lem-weil-pbc-symmetric-product-finite], namely ProjectiveSpace.exists_isFinite_surjective_projectiveLinePow: it supplies m and a finite surjective σ:Z_m→ℙ(N;S) with σ≫p=q_m. Unlike the older Noetherian wrapper, this existing proved declaration already handles arbitrary finite nonempty coordinate types and m=0. Apply [lem-finrepair-finite-surjection-cancellation] over the finite-type k-scheme ℙ(N;S) to the equality and Step 4, obtaining C(p). If N is empty, projective space is empty by its standard-open cover; p is then a closed immersion and Step 3 gives C(p) directly.",
-   "uses": [
     "lem-weil-pbc-symmetric-product-finite",
-    "lem-finrepair-finite-surjection-cancellation",
-    "def-nagata-projective-space-base-change"
+    "lem-weil-pbc-symmetric-product-surjective",
+    "lem-finrepair-finite-surjection-cancellation"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-projective-from-line.md",
-    "place": "Proof; source-library implementation in F1 Projective delivery"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-finrepair-projective-from-line.proof.md",
+    "place": "First paragraph: projective embedding; second paragraph: symmetric-product cover and finite-surjection cancellation"
    }
   },
   {
-   "text": "Step 3 gives C(e) and Step 5 gives C(p). Apply [lem-finrepair-composition-c], then rewrite e≫p=f. This proves the stated projective reduction without imposing any coefficient exponent beyond the original finite-ring hypothesis.",
+   "text": "Step 2 gives C(i) for the chosen closed immersion. Compose it with C for the projective-space projection from step 4 using [lem-finrepair-composition-c]. The factorization equation identifies this composite with the original f, proving precisely the unchanged theorem statement.",
    "uses": [
+    "lem-fin-closed-immersion",
     "lem-finrepair-composition-c"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-projective-from-line.md",
-    "place": "Proof; source-library implementation in F1 Projective delivery"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-finrepair-projective-from-line.proof.md",
+    "place": "Last paragraph: composition with the closed embedding"
    }
   }
  ],
  "proof_deps": [
-  "def-pc-projective-morphism",
-  "lem-finrepair-composition-c",
-  "lemma-nagata-projective-space-base-change-proper",
-  "def-weil-proper-morphism",
+  "def-nagata-projective-space-base-change",
   "def-weil-finite-type-morphism",
+  "lemma-nagata-projective-space-base-change-proper",
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-fin-closed-immersion",
-  "def-weil-pbc-constructible-complexes",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lemma-weil-pbc-finite-direct-image-exact",
   "def-finrepair-property-c",
-  "def-nagata-projective-space-base-change",
+  "lem-finrepair-composition-c",
+  "def-pc-projective-morphism",
   "lem-weil-pbc-symmetric-product-finite",
+  "lem-weil-pbc-symmetric-product-surjective",
   "lem-finrepair-finite-surjection-cancellation"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-projective-from-line.md",
-  "place": "Proof, with existing source-library tower, finite-surjection cancellation and symmetric-product declarations; F1 2026-10-18"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-finrepair-projective-from-line.proof.md",
+  "place": "Proof implemented by V2 using the existing source-library recursive symmetric-product cover; closed immersion and coefficient transport proved as private helpers."
  },
  "mathlib_searches": [
   {
@@ -245,9 +240,9 @@
   "date": "2026-10-18",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F1",
+  "group": "V2",
   "result": "pass",
-  "landing": "20261018T062743-L-647282",
+  "landing": "20261018T071234-L-1681441",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
