@@ -61,6 +61,12 @@ open Scheme
 
 variable {R S : Type (u + 1)} [CommRing R] [CommRing S] [Algebra R S] [Module.Flat R S]
 
+/-- The derived scalar extension is additive, being isomorphic to the levelwise one. -/
+instance additive_leftDerivedSheafExtendScalars (X : Scheme.{u}) :
+    (L(sheafExtendScalars (algebraMap R S) X)).Additive :=
+  Functor.additive_of_iso
+    (sheafExtendScalars (algebraMap R S) X).leftDerivedFunctorIsoMapDerivedCategory.symm
+
 section OpenImmersion
 
 variable {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
@@ -125,5 +131,32 @@ theorem nonempty_rightDerivedLowerShriek_comp_iso [HasCompactification f] :
     Nonempty (R(f)_![ModuleCat.{u + 1} R] ⋙ L(sheafExtendScalars (algebraMap R S) Y) ≅
       L(sheafExtendScalars (algebraMap R S) X) ⋙ R(f)_![ModuleCat.{u + 1} S]) :=
   ⟨rightDerivedLowerShriekOfCompactificationExtendScalarsIso _⟩
+
+/-- **Scalar-extension law for the traces of compactly supported direct images** (blueprint
+`thm-trf-finite-coefficient-map`, through item (3) of `prop-trf-trace-formal-laws`): for an
+endomorphism `v` of `K ∈ D(X_proét, R)`, for instance a Frobenius map, the trace of
+`Rf_!(v ⊗ᴸ_R S)` is the image of the trace of `Rf_! v` under the map
+`ρ_N : End(Λ_Y) → End(S_Y)` induced by the derived scalar extension `N`. The braidings of the
+derived categories and the braided monoidal structure of `N` are arguments (see the module
+docstring). -/
+theorem trace_rightDerivedLowerShriekOfCompactification_map_extendScalars
+    (c : Compactification f)
+    [BraidedCategory (DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} R)))]
+    [BraidedCategory (DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} S)))]
+    [(L(sheafExtendScalars (algebraMap R S) Y)).Braided]
+    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R))) (v : K ⟶ K)
+    [HasRightDual ((Rf_!(c)[ModuleCat.{u + 1} R]).obj K)]
+    [HasRightDual ((L(sheafExtendScalars (algebraMap R S) Y)).obj
+      ((Rf_!(c)[ModuleCat.{u + 1} R]).obj K))]
+    [HasRightDual ((Rf_!(c)[ModuleCat.{u + 1} S]).obj
+      ((L(sheafExtendScalars (algebraMap R S) X)).obj K))] :
+    trace ((Rf_!(c)[ModuleCat.{u + 1} S]).map ((L(sheafExtendScalars (algebraMap R S) X)).map v)) =
+      (L(sheafExtendScalars (algebraMap R S) Y)).unitEndRingHom
+        (trace ((Rf_!(c)[ModuleCat.{u + 1} R]).map v)) :=
+  Functor.trace_eq_unitEndRingHom_trace (L(sheafExtendScalars (algebraMap R S) Y))
+    (X' := (Rf_!(c)[ModuleCat.{u + 1} S]).obj ((L(sheafExtendScalars (algebraMap R S) X)).obj K))
+    _ _
+    ((rightDerivedLowerShriekOfCompactificationExtendScalarsIso c).app K)
+    ((rightDerivedLowerShriekOfCompactificationExtendScalarsIso c).hom.naturality v)
 
 end AlgebraicGeometry.ProEtale
