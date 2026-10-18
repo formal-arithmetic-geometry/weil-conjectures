@@ -12,6 +12,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 public import Mathlib.Algebra.Category.Grp.AB
 public import Mathlib.CategoryTheory.Comma.Arrow
 import Sheaf.AlgebraicGeometry.DerivedDirectImageComposition
+import Sheaf.AlgebraicGeometry.IntegralPushforwardBaseChangeArrowIso
+import Sheaf.AlgebraicGeometry.IntegralPushforwardBaseChangeArrowImp
 import WeilConjectures.SixFunctors.Integral.BaseChange
 import Sheaf.AlgebraicGeometry.DerivedExchangeTermwise
 import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
@@ -98,6 +100,8 @@ theorem integralPushforward_baseChange_arrow
           ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1}
             (sq.toCommSq.flip.vert_comp sqπ.toCommSq.flip)).app
             ((DerivedCategory.Plus.singleFunctor _ 0).obj F))) := by
-  sorry
+  constructor
+  · exact integralPushforward_baseChange_arrow_iso π sqπ sq q
+  · exact integralPushforward_baseChange_arrow_imp π sqπ sq q
 
 end AlgebraicGeometry.Etale
