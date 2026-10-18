@@ -25,51 +25,42 @@
  ],
  "proof": [
   {
-   "text": "Let $P\\in k[T]$ be the monic minimal polynomial of $\\alpha$ over $k$. Since $P$ is inseparable, over the algebraic closure $\\bar{k}$ it has a repeated root $\\beta\\in\\bar{k}$; write $P=(T-\\beta)^2Q$ in $\\bar{k}[T]$.",
+   "text": "Let P be the minimal polynomial of alpha and Q its coefficient extension to kbar. Integrality makes P monic, so Q is nonzero. Polynomial.separable_map shows that Q is inseparable.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 030V, field-theory calculation for an inseparable minimal polynomial"
-   }
+   "elementary": true
   },
   {
-   "text": "Put $g=P/(T-\\beta)=(T-\\beta)Q\\in\\bar{k}[T]$. The evaluation map $k[T]\\to K$, $T\\mapsto\\alpha$, induces $k[T]/(P)\\cong k(\\alpha)$ by [lem-weil-pbc-minimal-polynomial-quotient-field-iso]. After tensoring this isomorphism with $\\bar{k}$ over $k$, we identify $k(\\alpha)\\otimes_k\\bar{k}$ with $\\bar{k}[T]/(P)$. The class $\\bar g$ is nonzero, because $\\deg g<\\deg P$ so $P$ does not divide $g$, while $\\bar g^{\\,2}=0$ because $g^2=P Q$ is divisible by $P$. Thus $k(\\alpha)\\otimes_k\\bar{k}$ contains a nonzero nilpotent.",
+   "text": "Use [lem-weil-pbc-minimal-polynomial-quotient-field-iso], namely IntermediateField.adjoinRootEquivAdjoin, to embed AdjoinRoot P into K. Flatness over the field k preserves this injection after tensoring with kbar (Module.Flat.lTensor_preserves_injective_linearMap).",
    "uses": [
     "lem-weil-pbc-minimal-polynomial-quotient-field-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 030V, tensor calculation after factoring the inseparable minimal polynomial"
-   }
+   "elementary": false
   },
   {
-   "text": "The inclusion $k(\\alpha)\\hookrightarrow K$ is injective, and tensoring an injection of $k$-vector spaces with the $k$-vector space $\\bar{k}$ remains injective. Hence the induced map $k(\\alpha)\\otimes_k\\bar{k}\\to K\\otimes_k\\bar{k}$ is injective, so the nonzero nilpotent from Step 2 remains nonzero in $K\\otimes_k\\bar{k}$.",
+   "text": "AdjoinRoot.tensorAlgEquiv identifies kbar tensor_k AdjoinRoot P with AdjoinRoot of P mapped to kbar tensor_k k. AdjoinRoot.mapAlgEquiv applied to Algebra.TensorProduct.rid identifies this with AdjoinRoot Q, that is kbar[T]/(Q).",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 030V, passage from $k(\\alpha)\\otimes_k\\bar{k}$ to $K\\otimes_k\\bar{k}$"
-   }
+   "elementary": true
   },
   {
-   "text": "Therefore $K\\otimes_k\\bar{k}$ has a nonzero nilpotent element. By the definition of a reduced ring, it is not reduced.",
+   "text": "Suppose K tensor_k kbar is reduced. Commutativity of tensor products and the preceding injection imply that AdjoinRoot Q is reduced. Ideal.isRadical_iff_quotient_reduced and isRadical_iff_span_singleton make Q radical. As Q is nonzero, it is squarefree; PerfectField.separable_iff_squarefree over the algebraically closed field kbar makes Q separable, a contradiction.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Algebra, Lemma Tag 030V, conclusion"
-   }
+   "elementary": true
+  },
+  {
+   "text": "Apply exists_isNilpotent_of_not_isReduced to obtain a nonzero nilpotent, and pair its existence with the already proved failure of reducedness.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-minimal-polynomial-quotient-field-iso"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "D9",
+  "date": "2026-10-18",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Algebra, Lemma Tag 030V (algebra-lemma-geometrically-reduced-finite-purely-inseparable-extension), field-theory calculation"
+  "place": "Tags 030V and 030W; agent-written minimal-polynomial quotient argument using Mathlib radical and squarefree criteria in place of explicit repeated-root factorization"
  },
  "mathlib_searches": [
   {
@@ -156,5 +147,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261018T062729-L-641633",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
