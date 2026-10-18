@@ -1,11 +1,86 @@
 {
  "id": "lem-trf-valuation-stable-blowdown-uniqueness",
  "kind": "statement",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "An elementary contraction $h:P\\to Q$ is an epimorphism on morphisms of $k$-schemes. Indeed, if $a,b:Q\\to Z$ have $ah=bh$, their restrictions to the other pushout vertex $\\operatorname{Spec}k$ agree: precompose with the $k$-point $[1:0]\\in A\\simeq\\mathbf P^1_k$ (the ring map $k[t]\\to k$, $t\\mapsto0$, in the standard affine chart). The pushout universal property now gives $a=b$. For pointed morphisms the marking maps agree too, since the contraction's marking map is an isomorphism. Composites and isomorphisms preserve this cancellation property. The same pushout universal property gives a unique isomorphism over $P$ between two elementary contractions of the same component.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-sc-p1-standard",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Appendix B, p. 58, elementary pushout paragraph; its universal property"
+   }
+  },
+  {
+   "text": "By [lem-trf-exceptional-contraction-diamond], the noncollapse hypothesis persists after each elementary contraction. Isomorphisms also preserve it, as well as semistability, marking, and exceptionality. We prove the following strengthened claim by strong induction on $n$: if $\\pi:P\\to S$ is a sequence of exactly $n$ elementary contractions and a final isomorphism, and the induced reference map on $S$ has no exceptional component, then every single elementary contraction $h:P\\to Q$ admits a factorization $\\pi=v h$ in which $v:Q\\to S$ is a sequence of exactly $n-1$ elementary contractions and a final isomorphism. The assertion for $n=0$ means that no such $h$ exists. Isomorphisms between intermediate representatives can be absorbed by conjugating the next pushout; this uses only the pushout universal property, not an identification of topological quotients with scheme quotients.",
+   "uses": [
+    "lem-trf-exceptional-contraction-diamond",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Appendix B, Lemma B.3, p. 58; explicit length induction for elementary contractions"
+   }
+  },
+  {
+   "text": "For $n=0$, $P$ is isomorphic to $S$ over $C$, so it has no exceptional component and no elementary contraction can start. For $n>0$, write $\\pi=\\pi_Ah_A$, where $h_A$ contracts $A$ and $\\pi_A$ has length $n-1$. Let $h_B:P\\to P_B$ be the arbitrary single contraction. If $B=A$, the pushout isomorphism $e:P_B\\simeq P_A$ from Step 1 satisfies $e h_B=h_A$, and $v=\\pi_Ae$ is the required remaining sequence of length $n-1$.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Appendix B, B.3, p. 58; base case and identical first contractions"
+   }
+  },
+  {
+   "text": "Suppose $B\\ne A$. Apply [lem-trf-exceptional-contraction-diamond] to the two supplied first contractions: it gives elementary maps $j_A:P_A\\to T$ and $j_B:P_B\\to T$ with $j_Ah_A=j_Bh_B$. The induction claim at length $n-1$, applied to $\\pi_A$ and $j_A$, gives $\\pi_A=w j_A$, where $w:T\\to S$ has length $n-2$. If $n=1$ this situation is impossible, since $P_A$ would already have no exceptional component but $j_A$ contracts one. Thus in the distinct-component case $n\\ge2$, and $v=w j_B$ has length $n-1$, with $v h_B=w j_Bh_B=w j_Ah_A=\\pi_Ah_A=\\pi$. The hypotheses for the induction on $P_A$ are exactly its semistability, induced reference map and noncollapse property supplied by the diamond lemma; the terminal map on $S$ is unchanged. This proves the strengthened single-step claim.",
+   "uses": [
+    "lem-trf-exceptional-contraction-diamond"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Appendix B, B.3, p. 58; order independence, with the local diamond made explicit"
+   }
+  },
+  {
+   "text": "Write the arbitrary partial sequence as $q=e h_m\\cdots h_1$, with final isomorphism $e:Q_m\\simeq P'$. Starting with $v_0=\\pi$, apply the single-step claim successively to $v_{i-1}:Q_{i-1}\\to S$ and $h_i:Q_{i-1}\\to Q_i$. It gives $v_i:Q_i\\to S$ with $v_{i-1}=v_i h_i$ and length $n-i$. All hypotheses persist by Step 2, and $S=P^{\\mathrm{st}}$ remains terminal throughout. If $i>n$ were possible, the next $h_i$ would start at the length-zero, already terminal source, contradicting the base case; hence $m\\le n$. The map $u=v_m e^{-1}$ is a pointed $k$-morphism and satisfies $u q=\\pi$. For $m=0$ this reads $u=\\pi e^{-1}$ and covers an arbitrary final isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Appendix B, B.3, p. 58, final factorization assertion; iteration of the proved single-step claim"
+   }
+  },
+  {
+   "text": "If $u_1q=u_2q$, Step 1 cancels the composite $q$ and gives $u_1=u_2$. If $\\pi':P\\to S'$ is another terminal sequence, the factorization just proved in each direction gives $a:S'\\to S$ and $b:S\\to S'$ with $a\\pi'=\\pi$ and $b\\pi=\\pi'$. Then $ab\\pi=\\pi$ and $ba\\pi'=\\pi'$, so cancellation gives $ab=1_S$ and $ba=1_{S'}$. This is the unique isomorphism compatible with the maps from $P$. Empty markings and a zero-length sequence cause no change in these arguments, and connectedness or properness over $k$ was never used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Appendix B, Lemma B.3, p. 58, uniqueness up to unique isomorphism"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-p1-standard",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-category-colimit",
+  "lem-trf-exceptional-contraction-diamond"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Appendix B, printed p. 58, elementary exceptional-component pushouts preceding Lemma B.3 and the exceptional-tree argument in its proof. The relative noncollapse hypothesis excludes the absolute unstable cases mentioned after B.3; local diamond formulation and induction are supplied by the worker. Primary PDF read online; archival copy WANTED."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-valuation-contracted-component-inclusion",
@@ -15,7 +90,7 @@
  "chapter": "sec-trace-formula",
  "unit": "sk-i-curve-zero",
  "title": "Stable blowdown quotient and its factorization through partial exceptional contractions",
- "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $(P,M)$ be a semistable multipointed $k$-curve [def-trf-multipointed-curve, def-trf-multipointed-curve-modification], and let $r:P\\to C$ be a morphism to a $k$-scheme [def-pc-scheme]. An $r$-exceptional component is an irreducible component $A\\simeq\\mathbf P^1_k$ [def-sc-p1-standard] with singleton image in $C$ and at most two distinct points in $A\\cap(M\\cup P_{\\mathrm{sing}})$. An elementary $r$-exceptional contraction means the scheme pushout of $P\\leftarrow A\\to\\operatorname{Spec}k$, with semistable pointed quotient and marking transported isomorphically; the map to $C$ factors through that quotient. For later contractions use the induced map to $C$ and the marking and singular points of the current quotient. Suppose a finite sequence of elementary $r$-exceptional contractions, followed by an isomorphism, gives $\\pi:(P,M)\\to(P^{\\mathrm{st}},M^{\\mathrm{st}})$ whose target has no exceptional component for its induced map to $C$. Then for every finite sequence $q:(P,M)\\to(P',M')$ of elementary $r$-exceptional contractions, also allowing a final isomorphism, there is a unique morphism of pointed $k$-curves $u:(P',M')\\to(P^{\\mathrm{st}},M^{\\mathrm{st}})$ such that $\\pi=u\\circ q$. In particular the terminal quotient is unique up to unique isomorphism compatible with $\\pi$. Connectedness and properness over $k$ are not assumed; the assertion applies component by component, and the existence of $\\pi$ as a quotient which is still a curve is part of the hypothesis.",
+ "statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $(P,M)$ be a semistable multipointed $k$-curve [def-trf-multipointed-curve, def-trf-multipointed-curve-modification], and let $r:P\\to C$ be a morphism to a $k$-scheme [def-pc-scheme]. Assume that the image under $r$ of every connected component of $P$ contains more than one point; thus no whole connected component is collapsed by the reference map. An $r$-exceptional component is an irreducible component $A\\simeq\\mathbf P^1_k$ [def-sc-p1-standard] with singleton image in $C$ and at most two distinct points in $A\\cap(M\\cup P_{\\mathrm{sing}})$. An elementary $r$-exceptional contraction means the scheme pushout of $P\\leftarrow A\\to\\operatorname{Spec}k$, with semistable pointed quotient and marking transported isomorphically; the map to $C$ factors through that quotient. For later contractions use the induced map to $C$ and the marking and singular points of the current quotient. Suppose a finite sequence of elementary $r$-exceptional contractions, followed by an isomorphism, gives $\\pi:(P,M)\\to(P^{\\mathrm{st}},M^{\\mathrm{st}})$ whose target has no exceptional component for its induced map to $C$. Then for every finite sequence $q:(P,M)\\to(P',M')$ of elementary $r$-exceptional contractions, also allowing a final isomorphism, there is a unique morphism of pointed $k$-curves $u:(P',M')\\to(P^{\\mathrm{st}},M^{\\mathrm{st}})$ such that $\\pi=u\\circ q$. In particular the terminal quotient is unique up to unique isomorphism compatible with $\\pi$. Connectedness and properness over $k$ are not assumed; the noncollapse hypothesis on $r$ is required; the assertion applies component by component, and the existence of $\\pi$ as a quotient which is still a curve is part of the hypothesis.",
  "source": {
   "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
   "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf",
@@ -27,7 +102,10 @@
   "def-trf-multipointed-curve",
   "def-trf-multipointed-curve-modification",
   "def-pc-scheme",
-  "def-sc-p1-standard"
+  "def-sc-p1-standard",
+  "def-weil-pbc-category-colimit",
+  "def-weil-affine-spectrum",
+  "def-weil-connected-scheme"
  ],
  "mathlib_searches": [
   {
@@ -85,6 +163,69 @@
    "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Read returned signatures: elliptic-curve minimal models, generic rational maps and valuative criteria do not state nodal pointed-curve contraction/stabilization.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional|blowdown|projective.line.tree",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Read the returned signatures: generic valuative criteria, normalization/coproduct identities, Weierstrass coordinate changes and matroid contraction do not state this nodal pointed-curve contraction lemma. Grep is in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A stable blowdown of a semistable pointed curve is unique up to unique isomorphism and factors through every sequence of exceptional contractions",
+   "results": "8 hits; top=['AlgebraicGeometry.instSubsingletonOverTerminalScheme', 'AlgebraicGeometry.ExistsHomHomCompEqCompAux.mk.noConfusion', 'AlgebraicGeometry.sourceLocalClosure.instIsStableUnderCompositionSchemeOfIsStableUnderBaseChange', 'AlgebraicGeometry.ValuativeCriterion.eq', 'AlgebraicGeometry.Scheme.hom_unique_of_empty_source', 'AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization', 'AlgebraicGeometry.ValuativeCriterion.uniqueness', 'AlgebraicGeometry.isSmooth_isStableUnderBaseChange']; note=; digest=cf2c206e2cc6c5c0. Read the returned signatures: generic valuative criteria, normalization/coproduct identities, Weierstrass coordinate changes and matroid contraction do not state this nodal pointed-curve contraction lemma. Grep is in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.IsColimit, Scheme.Hom",
+   "results": "0 hits; top=[]; note=loogle: unknown identifier 'Scheme.Hom'; digest=4f53cda18c2baa0c. Read the returned signatures: generic valuative criteria, normalization/coproduct identities, Weierstrass coordinate changes and matroid contraction do not state this nodal pointed-curve contraction lemma. Grep is in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "stable blowdown uniqueness for semistable pointed curves contracting exceptional projective-line trees",
+   "results": "8 hits; top=['AlgebraicGeometry.ValuativeCriterion.eq', 'AlgebraicGeometry.ValuativeCriterion.Existence.eq', 'WeierstrassCurve.exists_isMinimal', 'WeierstrassCurve.minimal', 'AlgebraicGeometry.ValuativeCriterion.uniqueness', 'WeierstrassCurve.VariableChange.ext', 'WeierstrassCurve.Projective.Point.mk.inj', 'AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff']; note=; digest=88ce586b8c0d47ad. Read the returned signatures: generic valuative criteria, normalization/coproduct identities, Weierstrass coordinate changes and matroid contraction do not state this nodal pointed-curve contraction lemma. Grep is in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local confluence diamond for contracting two unstable projective line components of a semistable pointed algebraic curve",
+   "results": "8 hits; top=['WeierstrassCurve.Projective.Point.mk.noConfusion', 'WeierstrassCurve.Projective.Point.noConfusion', 'LocalSubring.noConfusion', 'AlgebraicGeometry.Scheme.Hom.instIsLocallyDirectedAffineZariskiSiteCompOppositeCommRingCatRightOpOpensOpToOpensFunctorNormalizationDiagramSpecForget', 'WeierstrassCurve.Affine.Point.some.noConfusion', 'AlgebraicGeometry.LocallyRingedSpace.noConfusion', 'AlgebraicGeometry.IsZariskiLocalAtTarget.coprodMap', 'AlgebraicGeometry.sourceLocalClosure.instIsStableUnderCompositionSchemeOfIsStableUnderBaseChange']; note=; digest=ac72a0157c4cb2f4. Read the returned signatures: generic valuative criteria, normalization/coproduct identities, Weierstrass coordinate changes and matroid contraction do not state this nodal pointed-curve contraction lemma. Grep is in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Two distinct exceptional rational components of a nodal marked curve can be contracted in either order giving canonically isomorphic scheme pushouts provided no connected component is collapsed to the reference base",
+   "results": "8 hits; top=['AlgebraicGeometry.Scheme.Hom.inr_normalizationCoprodIso_hom_fromNormalization_assoc', 'AlgebraicGeometry.Scheme.Hom.inr_toNormalization_normalizationCoprodIso_inv_assoc', 'AlgebraicGeometry.Scheme.Hom.inr_normalizationCoprodIso_hom_fromNormalization', 'AlgebraicGeometry.Scheme.Hom.inl_normalizationCoprodIso_hom_fromNormalization_assoc', 'AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom_assoc', 'AlgebraicGeometry.Scheme.Hom.inl_toNormalization_normalizationCoprodIso_inv_assoc', 'AlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom', 'AlgebraicGeometry.Scheme.Hom.inr_toNormalization_normalizationCoprodIso_inv']; note=; digest=5bfe6e53d2896588. Read the returned signatures: generic valuative criteria, normalization/coproduct identities, Weierstrass coordinate changes and matroid contraction do not state this nodal pointed-curve contraction lemma. Grep is in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowdown\"",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Read the returned signatures: generic valuative criteria, normalization/coproduct identities, Weierstrass coordinate changes and matroid contraction do not state this nodal pointed-curve contraction lemma. Grep is in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional.*component|contraction.*curve|semistable|semi.stable",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Read the returned signatures: generic valuative criteria, normalization/coproduct identities, Weierstrass coordinate changes and matroid contraction do not state this nodal pointed-curve contraction lemma. Grep is in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Commutation of two elementary contractions of exceptional P1 components in a semistable marked curve, preserving nonconstant reference maps on connected components",
+   "results": "8 hits; top=['WeierstrassCurve.Projective.comp_equiv_comp', 'WeierstrassCurve.Jacobian.comp_equiv_comp', 'WeierstrassCurve.exists_variableChange_of_j_eq', 'WeierstrassCurve.Affine.Point.map_map', 'Matroid.contract_comm', 'WeierstrassCurve.VariableChange.mul_def', 'WeierstrassCurve.VariableChange.map_map', \"WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'\"]; note=; digest=099e7dd51e899d16. Read the returned signatures: generic valuative criteria, normalization/coproduct identities, Weierstrass coordinate changes and matroid contraction do not state this nodal pointed-curve contraction lemma. Grep is in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "blueprint": {
@@ -107,5 +248,25 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-valuation-stable-blowdown-uniqueness",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED: the arbitrary-reference-map formulation admits the unmarked two-gon counterexample. Restore the necessary relative noncollapse condition, and prove factorization and uniqueness by strong induction on the supplied terminal contraction length using one strictly local two-component diamond lemma. Read Temkin Appendix B online and every cited node statement. No Lean or build commands used.",
+  "blueprint": "Makes precise the Appendix B.3 stable-blowdown input in the component-contraction branch of lem-trf-local-term-locality, through the recorded valuation-stable-modification ancestry; no chapter or unit route changed.",
+  "statement_correction": {
+   "old_statement": "Let $k$ be an algebraically closed field [def-weil-field, def-weil-algebraic-closure], let $(P,M)$ be a semistable multipointed $k$-curve [def-trf-multipointed-curve, def-trf-multipointed-curve-modification], and let $r:P\\to C$ be a morphism to a $k$-scheme [def-pc-scheme]. An $r$-exceptional component is an irreducible component $A\\simeq\\mathbf P^1_k$ [def-sc-p1-standard] with singleton image in $C$ and at most two distinct points in $A\\cap(M\\cup P_{\\mathrm{sing}})$. An elementary $r$-exceptional contraction means the scheme pushout of $P\\leftarrow A\\to\\operatorname{Spec}k$, with semistable pointed quotient and marking transported isomorphically; the map to $C$ factors through that quotient. For later contractions use the induced map to $C$ and the marking and singular points of the current quotient. Suppose a finite sequence of elementary $r$-exceptional contractions, followed by an isomorphism, gives $\\pi:(P,M)\\to(P^{\\mathrm{st}},M^{\\mathrm{st}})$ whose target has no exceptional component for its induced map to $C$. Then for every finite sequence $q:(P,M)\\to(P',M')$ of elementary $r$-exceptional contractions, also allowing a final isomorphism, there is a unique morphism of pointed $k$-curves $u:(P',M')\\to(P^{\\mathrm{st}},M^{\\mathrm{st}})$ such that $\\pi=u\\circ q$. In particular the terminal quotient is unique up to unique isomorphism compatible with $\\pi$. Connectedness and properness over $k$ are not assumed; the assertion applies component by component, and the existence of $\\pi$ as a quotient which is still a curve is part of the hypothesis.",
+   "reason": "Two unmarked projective lines meeting in two nodes, with constant reference map, give incompatible terminal contractions. Relative noncollapse is inherited from the connected proper-surjective-to-a-curve setting preceding B.3.",
+   "downstream": "lem-trf-valuation-contracted-component-inclusion must justify noncollapse for its reference fibre map before applying this corrected lemma; its current Step 3 does not supply that hypothesis. This report flags the caller; its file is outside this delivery."
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-c0df64087",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-c0df64087 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-trf-exceptional-contraction-diamond, every cited statement and the citer, and checked them against Temkin's Appendix B pp.57-58 (B.2, the contraction paragraph, B.3 and its proof, Cor 4.4.3(i)) using a local text copy of the paper. (1) Statement correction: I checked the counterexample myself. Two P^1s meeting at two points with constant r both contract to an irreducible nodal curve, and the two quotients cannot be compared, so the old statement is false. The added hypothesis, that r collapses no connected component, is Temkin's own setting before B.3 (a proper surjective map of connected curves). It is recorded in split_report.statement_correction and in the report. (2) Proof: Step 1's cancellation is correct (a k-point section of A gives c=h i s, then the colimit's unique mediator). The strong induction is set up properly. Step 4 uses only the diamond node's stated clauses (B_A exceptional, permanence, j_A h_A=j_B h_B), and the n=1 case is excluded correctly. Steps 5-6 (iteration, m<=n, uniqueness by cancellation) are correct. (3) New node: statement only, self-contained, every definition node checked, blueprint and search fields present, strictly smaller than the item, and no duplicate found. I tested it on disjoint and adjacent components (unmarked tail, marked tail, bridge, triangle with a self-node), on two components meeting twice (excluded by the new hypothesis) and on a non-separated case with a bridge between doubled origins; all are consistent. No fixes, no dropped nodes, no tool_uses. Downstream for the maintainer: the citer lem-trf-valuation-contracted-component-inclusion Step 3 must now justify noncollapse of r=f_Omega a_Omega. I believe it holds there (flatness, equidimensional fibres and Zariski connectedness), but that node needs repair."
  }
 }

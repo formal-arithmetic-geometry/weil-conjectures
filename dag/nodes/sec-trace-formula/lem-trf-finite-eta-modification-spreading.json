@@ -1,9 +1,153 @@
 {
  "kind": "statement",
- "status": "unsplit",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "status": "split",
+ "proof": [
+  {
+   "text": "Let $I$ be the set of finitely generated $R$-subalgebras $R_i\\subseteq V$, ordered by inclusion, and write $F_i=\\operatorname{Frac}R_i\\subseteq L$. This set contains $R$ and is directed: adjoining the union of two finite generating sets gives an upper bound. Every $v\\in V$ belongs to $R[v]$, so $\\varinjlim_iR_i=V$. Every $\\lambda\\in L$ has the form $v/w$ for $v,w\\in V$, $w\\ne0$, and both lie in some $R_i$; hence $\\varinjlim_iF_i=L$. These are colimits as rings because the systems consist of inclusions and their unions have the asserted elements. The affine-limit theorem gives $\\operatorname{Spec}V=\\varprojlim_i\\operatorname{Spec}R_i$. Each base scheme is qcqs by the affine-scheme lemma; transitions are affine: over an affine open $U$ of $\\operatorname{Spec}R_i$, the affine fibre-product formula makes its inverse image $\\operatorname{Spec}(R_k\\otimes_{R_i}\\Gamma(U,\\mathcal O_U))$ for $k\\ge i$.",
+   "uses": [
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tags 01YW and 01YX (lemma-directed-inverse-system-affine-schemes-has-limit and lemma-directed-inverse-system-has-limit); directed family of subalgebras constructed explicitly"
+   }
+  },
+  {
+   "text": "Apply finitely presented algebra descent to the given finitely presented $V$-algebra $B$. Obtain $a\\in I$, a finitely presented $R_a$-algebra $C_a$, and a chosen $V$-algebra isomorphism $\\alpha_a:C_a\\otimes_{R_a}V\\simeq B$. For every $i\\ge a$ put $C_i=C_a\\otimes_{R_a}R_i$ and $A_i=A\\otimes_RR_i$. Both are finitely presented over $R_i$ by finite-presentation base change. Tensor associativity identifies their further base changes with $B$ via $\\alpha_a$ and with $A_V$, respectively; on pure tensors this sends $(c\\otimes r)\\otimes v$ to $c\\otimes rv$.",
+   "uses": [
+    "lem-kun-fp-algebra-descent",
+    "lem-weil-pbc-finite-presentation-base-change-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05N9 (lemma-colimit-category-fp-algebras), part (1); Tag 05G5 (lemma-base-change-finiteness), part (4)"
+   }
+  },
+  {
+   "text": "Transfer the given structure map $u:A_V\\to B$ along $\\alpha_a$ to a map $A_a\\otimes_{R_a}V\\to C_a\\otimes_{R_a}V$. Apply map descent, clause (2) of the cited node, to these two finitely presented $R_a$-algebras and the directed upper tail of $a$. After increasing $a$ there is an $R_a$-algebra map $u_a:A_a\\to C_a$ whose base change is this transferred map. Let $u_i=u_a\\otimes_{R_a}R_i$ for all $i\\ge a$. Consequently each $\\alpha_i:C_i\\otimes_{R_i}V\\simeq B$ is an isomorphism of $A_V$-algebras for the structure $u_i$, not merely of $V$-algebras.",
+   "uses": [
+    "lem-weil-pbc-colimit-category-fp-algebras"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05N9 (lemma-colimit-category-fp-algebras), part (2)"
+   }
+  },
+  {
+   "text": "The map $u_a$ is of finite presentation. Indeed, choose presentations $A_a=R_a[x_1,\\ldots,x_n]/(f_1,\\ldots,f_m)$ and $C_a=R_a[y_1,\\ldots,y_t]/(g_1,\\ldots,g_s)$, and represent $u_a(x_j)$ by $h_j(y)$. Then\n$$C_a\\simeq A_a[y_1,\\ldots,y_t]/(g_1,\\ldots,g_s,\\ x_1-h_1(y),\\ldots,x_n-h_n(y)).$$\nTo verify the formula, substitute $x_j=h_j(y)$; the extra relations $f_k(h(y))$ already belong to $(g_1,\\ldots,g_s)$ because $u_a$ is a well-defined map. The two substitutions are inverse. This is a finite presentation, and the same formula holds after replacing $R_a$ by any $R_i$. In particular $C_a$ is of finite type over $A_a$.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Definition Tag 00F3 (definition-finite-type); explicit finite relative presentation"
+   }
+  },
+  {
+   "text": "Apply finite-map descent with base system $R_i$, initial algebras $A_a,C_a$, and map $u_a$. The limit map is the given finite $A_V\\to B$, and $C_a$ is of finite type over $A_a$ by step 4, so every hypothesis of the cited node holds. It yields $b\\ge a$ such that $C_b$ is finite as an $A_b$-module. This remains true for every $i\\ge b$: if $c_1,\\ldots,c_N$ generate $C_b$ over $A_b$, their tensors generate $C_b\\otimes_{R_b}R_i$ over $A_b\\otimes_{R_b}R_i$, by expanding a pure tensor and then a finite sum of pure tensors. No injectivity of any map into $B$ is asserted or needed.",
+   "uses": [
+    "lem-weil-pbc-colimit-finite-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 07RG (lemma-colimit-finite)"
+   }
+  },
+  {
+   "text": "Apply flat-map descent to the same base system on its upper tail, now with initial algebras $R_b$ and $C_b$ and the structure map $R_b\\to C_b$. This map is finitely presented by step 2; its limit is $V\\to B$, which is flat by hypothesis. The cited node therefore gives $c\\ge b$ such that $C_i$ is flat over $R_i$ for every $i\\ge c$. All finite-presentation statements from steps 2 and 4 and finiteness from step 5 continue to hold on this upper tail.",
+   "uses": [
+    "lem-weil-pbc-colimit-flat-ring-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 02JO (lemma-flat-finite-presentation-limit-flat), part (3), with module equal to the algebra itself"
+   }
+  },
+  {
+   "text": "For each prime $\\mathfrak p$ of $V$, apply the affine algebraic-closure criterion to $B\\otimes_V\\kappa(\\mathfrak p)$. Its tensor product with an algebraic closure of $\\kappa(\\mathfrak p)$ is reduced by the hypothesis on all maps from $V$ to algebraically closed fields. Thus every fibre ring is geometrically reduced. Let $E\\subseteq\\operatorname{Spec}R_c$ be the geometric-reducedness locus of $C_c/R_c$. The cited fibre-locus node says both that $E$ is constructible and that its inverse image under every base change is the corresponding locus. Its inverse image in $\\operatorname{Spec}V$ is therefore the whole spectrum. Apply the constructible-containment lemma to the affine inverse system of step 1 to find $d\\ge c$ such that $\\operatorname{Spec}R_i$ maps into $E$ for every $i\\ge d$. By the same base-change formula every fibre of $C_i/R_i$ is geometrically reduced. A map $R_i\\to\\Omega$ to an algebraically closed field factors through the residue field at its kernel; hence $C_i\\otimes_{R_i}\\Omega$ is reduced. This argument also covers empty fibres.",
+   "uses": [
+    "lem-trf-affine-geometric-reducedness-criterion",
+    "lem-trf-geometrically-reduced-fibre-locus",
+    "lem-weil-pbc-limit-contained-in-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tags 0579 (lemma-geometrically-reduced-constructible) and 0576 (lemma-base-change-fibres-geometrically-reduced); limits.tex Tag 05F4 (lemma-limit-contained-in-constructible); varieties.tex Tag 035X"
+   }
+  },
+  {
+   "text": "Set $\\bar A_i=A_i\\otimes_{R_i}F_i$, $\\bar C_i=C_i\\otimes_{R_i}F_i$ for $i\\ge d$. These are finitely presented $F_i$-algebras by finite-presentation base change. Since $\\varinjlim_iF_i=L$, their limit map is precisely the given generic isomorphism $u_L:A\\otimes_RL\\to B\\otimes_VL$, using $\\alpha_d$. Apply clause (2) of map descent over the field system $F_i$ to its specified inverse $u_L^{-1}$. At some $e\\ge d$ it gives $v_e:\\bar C_e\\to\\bar A_e$ with base change $u_L^{-1}$. The composites $v_eu_e$ and $u_ev_e$ become the respective identity maps over $L$. Apply clause (3) twice, then choose a common upper bound $j\\ge e$, so both composites equal the identities over $F_j$. Thus the map $A_j\\otimes_{R_j}F_j\\to C_j\\otimes_{R_j}F_j$ is an isomorphism, and its base change to $L$ is the specified $u_L$. All properties obtained on the upper tail $i\\ge d$ remain valid at $j$.",
+   "uses": [
+    "lem-weil-pbc-colimit-category-fp-algebras",
+    "lem-weil-pbc-finite-presentation-base-change-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05N9 (lemma-colimit-category-fp-algebras), parts (2) and (3), applied to the fraction-field system; Tag 05G5 for finite-presentation base change"
+   }
+  },
+  {
+   "text": "Put $R'=R_j$, $B'=C_j$, and $F'=F_j$. If $R'=R[r_1,\\ldots,r_N]$, its fraction field inside $L$ equals $F(r_1,\\ldots,r_N)$: this field contains $R'$ and inverses of its nonzero elements, and conversely its generators belong to $\\operatorname{Frac}R'$. Apply the cited finite-subextension lemma to $L/F$ with the empty transcendence basis and the elements $r_1,\\ldots,r_N$. The empty family is algebraically independent, and its generated field is $F$ over which $L$ is algebraic, so it is a transcendence basis. The finite subset of that empty index set must be empty. The conclusion gives that $F'=F(r_1,\\ldots,r_N)$ is finite separable over $F$, including $N=0$.",
+   "uses": [
+    "lem-weil-pbc-separating-transcendence-basis-finite-subextension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 030U (lemma-separable-extension-preserves-reducedness), proof, finite-subextension assertion, specialized to an empty transcendence basis"
+   }
+  },
+  {
+   "text": "The inclusion $R\\subseteq R'\\subseteq V$ gives the required factorization of spectra. The source is integral, with generic point $(0)$ and function field $F\\prime$, by clause (2) of the spectrum-of-a-domain lemma applied to the subring $R\\prime\\subseteq L$. The morphism to $\\operatorname{Spec}R$ is separated by the affine-source lemma. It is of finite type: for any affine open $U=\\operatorname{Spec}D$ of $\\operatorname{Spec}R$, the affine fibre-product formula identifies its preimage with $\\operatorname{Spec}(R'\\otimes_RD)$. This algebra is generated over $D$ by the finite list $r_1\\otimes1,\\ldots,r_N\\otimes1$, and its spectrum is quasi-compact by the affine-qcqs lemma. This verifies both clauses in the finite-type definition on every affine open of the target. Its generic point maps to $(0)$ and its function-field extension is $F'/F$, finite separable by step 9. These are exactly Temkin's integral-source, separated finite-type quasi-alteration conditions. The isomorphism $\\alpha_j:B'\\otimes_{R'}V\\simeq B$ from step 3 is $A_V$-linear, and step 8 verifies its compatibility with the specified generic identification. Steps 2, 4, 5, 6 and 7 give all remaining clauses for $B'$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-affine-source-morphism-separated",
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Affine interpretation of the preceding descent; Temkin, Stable Modification, §3 opening definitions, printed pp. 13–14; no integrality of the morphism is asserted"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-kun-fp-algebra-descent",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-colimit-category-fp-algebras",
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-weil-pbc-colimit-finite-ring-map",
+  "lem-weil-pbc-colimit-flat-ring-map",
+  "lem-trf-affine-geometric-reducedness-criterion",
+  "lem-trf-geometrically-reduced-fibre-locus",
+  "lem-weil-pbc-limit-contained-in-constructible",
+  "lem-weil-pbc-separating-transcendence-basis-finite-subextension",
+  "def-weil-affine-spectrum",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-spec-domain-stalks-function-field"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Synthesis of Tags 05N9, 05G5, 07RG and 02JO with more-morphisms.tex Tags 0579 and 0576 and limits.tex Tag 05F4, implementing Temkin Theorem 3.5.5 Step 5 and §3.1 Remark 3.1.1(i)."
+ },
  "mathlib_match": null,
  "created": {
   "by": "worker",
@@ -27,7 +171,12 @@
   "def-weil-finitely-generated-module",
   "def-weil-affine-spectrum",
   "def-weil-finite-type-morphism",
-  "def-weil-proper-morphism"
+  "def-weil-proper-morphism",
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-finite-type-algebra",
+  "def-pc-integral-scheme"
  ],
  "mathlib_searches": [
   {
@@ -85,6 +234,48 @@
    "results": "OK; 25 hits; top=['Mathlib/AlgebraicGeometry/SpreadingOut.lean', 'Mathlib/AlgebraicGeometry/SpreadingOut.lean', 'Mathlib/AlgebraicGeometry/SpreadingOut.lean', 'Mathlib/AlgebraicGeometry/SpreadingOut.lean', 'Mathlib/AlgebraicGeometry/SpreadingOut.lean', 'Mathlib/AlgebraicGeometry/Group/Smooth.lean', 'Mathlib/AlgebraicGeometry/Birational/RationalMap.lean', 'Mathlib/AlgebraicGeometry/Birational/RationalMap.lean']; note=; digest=439e7d3c17179953. Mathlib/AlgebraicGeometry/SpreadingOut.lean:16–46 spreads a morphism from a stalk to an open neighbourhood and explicitly leaves spreading of morphism properties as TODO. NoetherianDescent hits treat smooth or etale algebras. None descends this finite algebra with flatness, all reduced geometric fibres, and its specified generic identification.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "spread|descen.*flat|geometrically.*reduced",
+   "results": "25 hits; top=['Mathlib/AlgebraicGeometry/Geometrically/Integral.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Integral.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Integral.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Integral.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Integral.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean']; note=; digest=b708731d466a36f2. Smooth and etale NoetherianDescent require stronger hypotheses; spreading-out concerns maps from stalks, and geometric-reducedness hits do not assert simultaneous descent with the finite map and specified generic inverse.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite morphisms flat finitely presented algebras and reduced geometric fibres spread out from filtered unions of base subrings",
+   "results": "0 hits; top=[]; note=service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}; digest=4f53cda18c2baa0c. Smooth and etale NoetherianDescent require stronger hypotheses; spreading-out concerns maps from stalks, and geometric-reducedness hits do not assert simultaneous descent with the finite map and specified generic inverse.",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FinitePresentation, Module.Flat",
+   "results": "5 hits; top=['Algebra.Etale.of_formallyUnramified_of_flat', 'Algebra.IsEtaleAt.of_isUnramifiedAt_of_flat', 'Algebra.FormallySmooth.of_formallySmooth_residueField_tensor', 'Algebra.Smooth.of_formallySmooth_fiber', 'Algebra.IsSmoothAt.of_formallySmooth_fiber']; note=; digest=80ec4ce66ec56f40. Smooth and etale NoetherianDescent require stronger hypotheses; spreading-out concerns maps from stalks, and geometric-reducedness hits do not assert simultaneous descent with the finite map and specified generic inverse.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite algebra over a valuation ring with flat finitely presented geometrically reduced fibres and a generic isomorphism descends to a finitely generated base subalgebra",
+   "results": "8 hits; top=['Algebra.IsStandardSmoothOfRelativeDimension.exists_subalgebra_fg', 'Algebra.Smooth.exists_subalgebra_fg', 'Algebra.Smooth.exists_subalgebra_finiteType', 'Algebra.Etale.exists_subalgebra_fg', 'Algebra.IsGeometricallyReduced.of_forall_fg', 'Algebra.EssFiniteType', 'Algebra.Smooth.exists_finiteType', 'Algebra.EssFiniteType.cond']; note=; digest=3811eeb171267f18. Smooth and etale NoetherianDescent require stronger hypotheses; spreading-out concerns maps from stalks, and geometric-reducedness hits do not assert simultaneous descent with the finite map and specified generic inverse.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Spread out a finite ring homomorphism of finitely presented algebras together with a generic inverse over a filtered union of integral domains",
+   "results": "8 hits; top=['RingHom.finitePresentation_ofLocalizationSpanTarget', 'AlgHom.FinitePresentation', 'RingHom.FinitePresentation', 'Algebra.FinitePresentation.of_span_eq_top_target_aux', 'Algebra.Smooth.exists_finiteType', 'RingHom.OfLocalizationFiniteSpanTarget', 'RingHom.finitePresentation_holdsForLocalizationAway', 'Algebra.Smooth.exists_subalgebra_finiteType']; note=; digest=f1f1e4efca8b0ef3. Smooth and etale NoetherianDescent require stronger hypotheses; spreading-out concerns maps from stalks, and geometric-reducedness hits do not assert simultaneous descent with the finite map and specified generic inverse.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_subalgebra_fg|of_forall_fg",
+   "results": "9 hits; top=['Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean', 'Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean', 'Mathlib/RingTheory/Nilpotent/GeometricallyReduced.lean', 'Mathlib/RingTheory/Flat/Basic.lean', 'Mathlib/RingTheory/Smooth/NoetherianDescent.lean', 'Mathlib/RingTheory/Smooth/NoetherianDescent.lean', 'Mathlib/RingTheory/Smooth/NoetherianDescent.lean', 'Mathlib/RingTheory/Smooth/NoetherianDescent.lean']; note=; digest=d2046ec93e43e9e3. Smooth and etale NoetherianDescent require stronger hypotheses; spreading-out concerns maps from stalks, and geometric-reducedness hits do not assert simultaneous descent with the finite map and specified generic inverse.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "blueprint": {
@@ -110,5 +301,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-finite-eta-modification-spreading",
+  "worker": "stage1",
+  "summary": "Reused all existing descent results; no new nodes. Separated descent of the finite algebra, the structure map, module finiteness, base flatness, geometric reducedness, and the specified generic inverse; checked each cited statement and handled zero algebras and empty fibres. Clarified in the proof that integral quasi-alteration means integral source, not integral morphism. No change to the item statement.",
+  "blueprint": "Historical ancestor lem-trf-local-term-locality has been corrected to a contracting-correspondence result and does not assert this algebraic tool. This split supplies the finite-stage approximation needed by lem-trf-reduced-fibre-modification (Temkin Theorem 3.5.5 Step 5), through the retained historical ancestry; no current unit step is replaced. Whole-blueprint searches for modification, generic isomorphism, finite presentation and geometrically reduced found no duplicate.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "Identifies the spectrum of the union V with the inverse limit of the affine base system; this general limit tool is not a contracting-correspondence claim."
+   },
+   {
+    "node": "lem-kun-fp-algebra-descent",
+    "why": "Descends the finitely presented V-algebra B, retaining a chosen base-change isomorphism; the historical unit has no algebra-descent theorem."
+   },
+   {
+    "node": "lem-weil-pbc-finite-presentation-base-change-composition",
+    "why": "Preserves finite presentation of the models after enlargement of the base ring and passage to fraction fields."
+   },
+   {
+    "node": "lem-weil-pbc-colimit-category-fp-algebras",
+    "why": "Descends the given algebra structure and, separately over the union of fraction fields, the specified generic inverse and its two identity equations."
+   },
+   {
+    "node": "lem-weil-pbc-colimit-finite-ring-map",
+    "why": "Retains module finiteness of the descended structure map; this is general commutative algebra."
+   },
+   {
+    "node": "lem-weil-pbc-colimit-flat-ring-map",
+    "why": "Retains flatness over a sufficiently large base subalgebra without assuming the finite-type subalgebras are Noetherian."
+   },
+   {
+    "node": "lem-weil-pbc-limit-contained-in-constructible",
+    "why": "Turns the constructible geometric-reducedness locus into an eventual all-fibres statement."
+   },
+   {
+    "node": "lem-weil-pbc-separating-transcendence-basis-finite-subextension",
+    "why": "Its empty-basis specialization proves that the fraction field of a finite-type R-subalgebra of a separable algebraic extension is finite separable."
+   },
+   {
+    "node": "lem-weil-pbc-affine-source-morphism-separated",
+    "why": "Supplies separatedness of the base quasi-alteration from its affine source."
+   },
+   {
+    "node": "lem-weil-pbc-spec-domain-stalks-function-field",
+    "why": "Identifies the integral source, generic point and function field of the affine base R′; the statement explicitly supplies all three clauses."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Identifies preimages of arbitrary affine opens under morphisms of affine spectra as spectra of tensor products, to check affine transitions and the final finite-type conclusion directly."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-kun-fp-algebra-descent",
+  "lem-weil-pbc-finite-presentation-base-change-composition",
+  "lem-weil-pbc-colimit-category-fp-algebras",
+  "lem-weil-pbc-colimit-finite-ring-map",
+  "lem-weil-pbc-colimit-flat-ring-map",
+  "lem-weil-pbc-limit-contained-in-constructible",
+  "lem-weil-pbc-separating-transcendence-basis-finite-subextension",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "lem-weil-pbc-fibre-product-affine-spectra"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-d248b49e0",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-d248b49e0 (reviewer sub-agent of L); spot-checked: I read the item, all 17 cited node statements, the parent's citing step, and the unit and chapter. I checked the Stacks labels 05N9(1-3), 07RG, 02JO(3), 05F4, 0579 and 0576 in the local sources. The delivery is one commit with the item and its report and no new nodes. All cited ids exist and none is merged; no SGA is cited. Step by step: step 1 builds the directed system of finitely generated R-subalgebras of V, with colimits V and L; transitions are affine by the fibre-product formula and the spaces are qcqs. Step 2 descends B by 05N9(1) and keeps finite presentation by 05G5(4). Step 3 descends u by 05N9(2), so each alpha_i is A_V-linear. Step 4 is an elementary relative presentation; I verified that R_a[x,y]/(f,g,x-h) = R_a[y]/(g). Step 5 meets both hypotheses of 07RG (finite limit, finite-type u_a), and finiteness persists on later indices. Step 6 applies 02JO(3) to R_b->C_b and gives flatness on a whole upper tail, with no Noetherian assumption. Step 7 uses the 035X criterion, the constructible locus with its base-change compatibility, and 05F4 over the qcqs affine-transition system; a map to Omega factors through the residue field at its kernel. Step 8 descends the inverse over the system F_i by 05N9(2) and checks both identities by 05N9(3). Step 9 uses the 030U finite-subextension node with an empty transcendence basis, valid because L/F is separable algebraic, so F'/F is finite separable. Step 10 proves integral source, separated, finite type on every affine open, and dominance. Small cases check out: a field; Z inside Z_(p) inside Q; the zero algebra; L=F. The statement was already there before this delivery and is unchanged. Temkin's PDF is not in literature/ (it is listed as WANTED), so I could not check the meaning of 'quasi-alteration' against it. Every concrete property the term carries here is proved explicitly, and the parent node uses only those. The hypothesis that A is flat is never used, which is harmless. The binding to unit sk-i-curve-zero is historical; the item is a generic tool and replaces no unit step. I accept all declared tool_uses as generic black-box uses. No duplicate found. No fixes were needed."
  }
 }

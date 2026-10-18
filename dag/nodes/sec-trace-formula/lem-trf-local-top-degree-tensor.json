@@ -11,12 +11,62 @@
   "def-pc-cochain-complex-modules",
   "def-pc-tensor-complex-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
+ "proof": [
+  {
+   "text": "Because $P^i=0$ for $i>a$ and $Q^j=0$ for $j>b$, a summand $P^p\\otimes_RQ^q$ can occur in total degree $a+b$ only when $(p,q)=(a,b)$, and all terms in degrees greater than $a+b$ vanish. The outgoing differential from $P^a\\otimes_RQ^b$ is therefore zero. In degree $a+b-1$ the only summands that can map to the top term are $(P^{a-1}\\otimes_RQ^b)\\oplus(P^a\\otimes_RQ^{b-1})$, with the total differential prescribed by [def-pc-tensor-complex-sheaves].",
+   "uses": [
+    "def-pc-cochain-complex-modules",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Direct top-total-degree calculation from the direct-sum tensor convention"
+   }
+  },
+  {
+   "text": "Since the outgoing differentials $d_P^a$ and $d_Q^b$ have zero target, $H^a(P^\\bullet)=P^a/\\operatorname{im}(d_P^{a-1})$ and $H^b(Q^\\bullet)=Q^b/\\operatorname{im}(d_Q^{b-1})$. The image entering the top total term is the sum of the images of $d_P^{a-1}\\otimes1$ and $(-1)^a1\\otimes d_Q^{b-1}$; the sign does not change that image. Thus the top cohomology is the quotient of $P^a\\otimes_RQ^b$ by those two image submodules.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Direct top-total-degree calculation, identification of the incoming differential"
+   }
+  },
+  {
+   "text": "Apply tensor right exactness [lem-weil-pbc-tensor-right-exact] first to $\\operatorname{im}(d_P^{a-1})\\to P^a\\to H^a(P^\\bullet)\\to0$ and then to $\\operatorname{im}(d_Q^{b-1})\\to Q^b\\to H^b(Q^\\bullet)\\to0$. The first application identifies the quotient by $\\operatorname{im}(d_P^{a-1})\\otimes_RQ^b$ with $H^a(P^\\bullet)\\otimes_RQ^b$; the second identifies its further quotient by the image of $P^a\\otimes_R\\operatorname{im}(d_Q^{b-1})$ with $H^a(P^\\bullet)\\otimes_RH^b(Q^\\bullet)$. Equivalently, the quotient by the sum of the two incoming images is canonically $H^a(P^\\bullet)\\otimes_RH^b(Q^\\bullet)$.",
+   "uses": [
+    "lem-weil-pbc-tensor-right-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Top-degree quotient calculation using right exactness of tensor"
+   }
+  },
+  {
+   "text": "The quotient map sends a pure top-degree tensor $p\\otimes q$ to the cohomology class represented by $p\\otimes q$ in the total complex. Therefore the canonical map induced by top-degree tensor representatives is exactly the quotient identification from Step 3, and is an isomorphism.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Identification of the canonical top-degree representative map"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-cochain-complex-modules",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-tensor-right-exact"
+ ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Direct top-total-degree calculation from the direct-sum tensor convention; source document records the convention."
+  "place": "Direct top-total-degree calculation for the direct-sum tensor convention, using tensor right exactness"
  },
  "mathlib_searches": [
   {
@@ -49,7 +99,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-local-derived-tensor-nonvanishing",
@@ -61,8 +111,9 @@
  "blueprint": {
   "from": {
    "node": "lem-trf-local-term-locality",
-   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Derived Hom from a semidualizing complex detects bounded coherent isomorphisms. Complete-local step of that detection: tensor nonvanishing for bounded-above coherent complexes over a local ring; its top-cohomology calculation $H^{a+b}=H^a\\otimes H^b$.",
+   "place": "Complete-local step of the semidualizing detection: the top-cohomology calculation $H^{a+b}=H^a\\otimes H^b$ for bounded-above finite-free complexes.",
    "via": [
+    "lem-trf-local-top-degree-tensor",
     "lem-trf-local-derived-tensor-nonvanishing",
     "lem-trf-semidualizing-rhom-conservative",
     "lem-trf-algebraic-relative-dualizing-isomorphism",
@@ -82,5 +133,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-local-top-degree-tensor",
+  "worker": "stage1",
+  "summary": "Audited the imported top-degree tensor statement against the direct-sum total-complex definition and Stacks tensor right exactness. Added a four-step proof: only the (a,b) summand occurs in top degree, the incoming image is the sum of the two boundary images, right exactness identifies the quotient with the tensor of top cohomologies, and the representative map is this quotient isomorphism. No new nodes or attachments were needed.",
+  "blueprint": "Realizes the complete-local top-cohomology calculation $H^{a+b}=H^a\\otimes H^b$ named in the ancestor chain under lem-trf-local-term-locality.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-tensor-right-exact",
+    "why": "The top-degree quotient uses generic right exactness of tensor, which is a Mathlib-backed algebraic tool outside this trace-formula unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-tensor-right-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q71-9d37d8499",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-9d37d8499 (reviewer sub-agent of L); spot-checked: I read the full item, all four proof steps, the statements of all three cited nodes, the parent lem-trf-local-derived-tensor-nonvanishing (its step 5 is the only citer, and its hypotheses match), unit sk-i-curve-zero, and the Stacks more-algebra direct-sum Tot convention starting at line 14177. The statement was not changed and is true. Its finite-free hypothesis is never used, so nothing was weakened. Steps 1-2: with P^i=0 for i>a and Q^j=0 for j>b, only the (a,b) term is in top degree. The incoming terms are (a-1,b) and (a,b-1). The sign (-1)^a does not change the image. Step 3: lem-weil-pbc-tensor-right-exact (Mathlib rTensor_exact/lTensor_exact) is applied twice, with N=Q^b and then N=H^a(P). The kernels are the images of im d_P⊗Q^b and of P^a⊗im d_Q, and their sum is the incoming image. The step is correct and correctly marked non-elementary. Step 4: the map defined by representatives is the composite of the quotient maps. Small cases checked by hand over Z: Z/2⊗Z/3=0 and Z/2⊗Z/2=Z/2 match the top cohomology of Tot; P=0 and single-degree complexes also work. The pc definitions are stated for sites; using them for R-modules is the one-point-site case. A search of the DAG found no duplicate. The tool_uses entry names a Mathlib leaf; it is accurate but not needed, and I accept it. For the maintainer: blueprint.via lists the item itself first. 29 nodes in the DAG share this pattern, so I left it unchanged; it is not a mathematical fault. I made no fixes."
  }
 }
