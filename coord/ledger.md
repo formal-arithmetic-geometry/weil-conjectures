@@ -16202,3 +16202,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:29 L: merged deliver/V4/Sheaf.Topology.SpectralLimitConstructibleClosed (stage 3; reviewer PASS; first push; landing 20261018T062936-L-687358 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:29 L: merged deliver/V5/Sheaf.AlgebraicGeometry.EtaleFiniteStalkSpecializationCriterion (stage 3; reviewer PASS; first push; landing 20261018T062936-L-687508 (interface); batch 20261018T062645; modules 5; new nodes 4)
 - 06:29 L: merged deliver/V6/Sheaf.AlgebraicGeometry.FiniteSeparableBaseRefinement (stage 3; reviewer PASS; first push; landing 20261018T062937-L-687658 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:29 L: merged deliver/V9/Sheaf.AlgebraicGeometry.GeonormalDimOneSmooth (stage 3; reviewer PASS; first push; landing 20261018T062937-L-687879 (proof); batch 20261018T062645; modules 1; new nodes 0)

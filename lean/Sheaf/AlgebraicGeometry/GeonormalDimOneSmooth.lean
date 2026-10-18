@@ -11,8 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.Topology.KrullDimension
 import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.RingTheory.DiscreteValuationRing.Basic
-import Sheaf.AlgebraicGeometry.DimensionPreservedFieldExtension
+import WeilConjectures.AlgebraicGeometry.FieldBaseChangeDimension
 import WeilConjectures.AlgebraicGeometry.Regular
 import Sheaf.AlgebraicGeometry.GeometricRegularitySmoothFieldCriterion
 
@@ -80,6 +79,35 @@ theorem smooth_and_geometricallyReduced_of_geonormal_dim_le_one
           (Spec.map (CommRingCat.ofHom (algebraMap k L)))) →
         IrreducibleSpace ↥(pullback (Z ↘ Spec (CommRingCat.of k))
           (Spec.map (CommRingCat.ofHom (algebraMap k L)))) := by
-  sorry
+  have hregular (L : Type u) [Field L] [Algebra k L] :
+      IsRegular (pullback (Z ↘ Spec (CommRingCat.of k))
+        (Spec.map (CommRingCat.ofHom (algebraMap k L)))) := by
+    have := LocallyOfFiniteType.isLocallyNoetherian
+      (pullback.snd (Z ↘ Spec (CommRingCat.of k))
+        (Spec.map (CommRingCat.ofHom (algebraMap k L))))
+    exact IsRegular.of_isIntegrallyClosed_stalk (hnormal L)
+      ((topologicalKrullDim_pullback_eq_of_field (Z ↘ Spec (CommRingCat.of k))
+        (Spec.map (CommRingCat.ofHom (algebraMap k L)))).le.trans hdim)
+  have hsmooth : Smooth (Z ↘ Spec (CommRingCat.of k)) := by
+    apply (smooth_iff_regularLocalRing_finitelyGenerated_field_baseChange k _).mpr
+    intro L _ _ _ x
+    have := hregular L
+    exact IsRegular.isRegularLocalRing_stalk x
+  have hreduced : GeometricallyReduced (Z ↘ Spec (CommRingCat.of k)) := by
+    refine ⟨geometrically_iff_of_commRing_of_isClosedUnderIsomorphisms.mpr ?_⟩
+    intro L _ _
+    refine @isReduced_of_isReduced_stalk _ (fun x ↦ ?_)
+    have := (hnormal L x).1
+    infer_instance
+  refine ⟨hsmooth, hreduced, ?_⟩
+  intro L _ _ hconnected
+  have := hconnected
+  have := hregular L
+  have := LocallyOfFiniteType.isLocallyNoetherian
+    (pullback.snd (Z ↘ Spec (CommRingCat.of k))
+      (Spec.map (CommRingCat.ofHom (algebraMap k L))))
+  have := IsRegular.isIntegral (pullback (Z ↘ Spec (CommRingCat.of k))
+    (Spec.map (CommRingCat.ofHom (algebraMap k L))))
+  infer_instance
 
 end AlgebraicGeometry
