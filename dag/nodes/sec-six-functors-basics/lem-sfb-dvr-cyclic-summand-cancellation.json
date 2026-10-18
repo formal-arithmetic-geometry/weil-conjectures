@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "If $e=0$, then $\\pi^eA=A$ and the cyclic quotient is zero; the given isomorphism itself identifies $M$ with $N$. Hence suppose $e\\geq1$ and put $C=A/(\\pi^eA)$. Regard a binary direct sum as pairs with componentwise operations. Write the given isomorphism as $F(x,m)=(a(x)+b(m),c(x)+d(m))$ and its inverse as $G(x,n)=(a\\prime(x)+b\\prime(n),c\\prime(x)+d\\prime(n))$, with all component maps $A$-linear; here $a,a\\prime:C\\to C$, $b:M\\to C$, $c:C\\to N$, and $b\\prime:N\\to C$. Every element of $C$ is $t\\bar1$ for some $t\\in A$, so $a(t\\bar1)=t a(\\bar1)$ and $a\\prime(t\\bar1)=t a\\prime(\\bar1)$. Choose representatives $u,v\\in A$ of $a(\\bar1),a\\prime(\\bar1)$. Thus $a$ and $a\\prime$ are multiplication by $u$ and $v$, respectively. The first component of $GF(x,0)=(x,0)$ gives $b\\prime c=1-a\\prime a$, multiplication by $1-vu$ on $C$.",
+   "text": "Put C=A/(π^e A), including e=0. Write the upper-left blocks of F and F⁻¹ as a and a′. For any A-linear endomorphism f of C, choose u representing f(q(1)); surjectivity of q:A→C and linearity give f(q(t))=t q(u)=u q(t). Apply this to a and a′, obtaining u and v. Decompose F⁻¹(x,n) into its two linear components. The first component of F⁻¹F(x,0)=(x,0) gives b′c(x)=x-v(u x). No nonzero-quotient hypothesis is used.",
    "uses": [
     "def-weil-pbc-quotient-module",
     "def-weil-pbc-direct-sum-modules"
@@ -38,7 +38,7 @@
    }
   },
   {
-   "text": "Write $F_1(x,m)=(p(x)+q(m),r(x)+s(m))$, with $p:C\\to C$ invertible as just proved. Define $R(x,m)=(x-p^{-1}q(m),m)$ on $C\\oplus M$ and $L(x,n)=(x,n-rp^{-1}(x))$ on $C\\oplus N$. These maps are linear, and replacing each minus sign by a plus sign gives their inverses. Direct substitution gives $F_1R(x,m)=(p(x),r(x)+(s-rp^{-1}q)(m))$ and therefore $LF_1R(x,m)=(p(x),h(m))$, where $h=s-rp^{-1}q:M\\to N$. Consequently the diagonal map $D:(x,m)\\mapsto(p(x),h(m))$ is an isomorphism; its inverse is the explicitly available composite $R^{-1}F_1^{-1}L^{-1}$. This is a calculation with pairs, with no freeness or basis assumed for $M$ or $N$.",
+   "text": "For an equivalence F₁:C×M→C×N with upper-left block p:C≃C, let b(m) be its first component on (0,m). Use Mathlib LinearEquiv.skewProd, conjugated by product commutation, to precompose with the invertible shear S(x,m)=(x-p⁻¹b(m),m). The equivalence D=F₁S then has first component p(x), independently of m: expand F₁ on (x,0)+(0,m), use linearity and p p⁻¹=1. A second codomain shear is unnecessary.",
    "uses": [
     "def-weil-pbc-direct-sum-modules"
    ],
@@ -49,7 +49,7 @@
    }
   },
   {
-   "text": "Let $J=D^{-1}$ and define the linear map $t:N\\to M$ by taking the second component of $J(0,n)$. From $DJ(0,n)=(0,n)$, the second component is $h(t(n))=n$. Also $D(0,m)=(0,h(m))$, so the second component of $JD(0,m)=(0,m)$ gives $t(h(m))=m$. Thus $h$ and $t$ are inverse $A$-linear maps, proving $M\\cong N$. All computations apply to the given finitely generated modules; they in fact need no finite-generation assumption.",
+   "text": "Define the A-linear map f:M→N by f(m)=snd(D(0,m)). It is injective: equal values give equal D-images, since both first components are p(0)=0, and D is injective. It is surjective: choose (x,m) with D(x,m)=(0,n) using surjectivity of D. Its first component says p(x)=0, so x=0 by injectivity of p. Thus f(m)=n. LinearEquiv.ofBijective supplies M≃N. This works without finite generation and with C=0, hence includes e=0.",
    "uses": [
     "def-weil-pbc-direct-sum-modules"
    ],
@@ -69,7 +69,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 00E9, algebra-lemma-characterize-local-ring (unit criterion only); explicit agent block-elimination proof for the cyclic cancellation lemma extracted from the local Smith argument"
+  "place": "Tag 00E9, algebra-lemma-characterize-local-ring (unit criterion only); explicit agent block-elimination proof for the cyclic cancellation lemma extracted from the local Smith argument; Z6 Lean implementation uses one domain shear and restriction to the zero-first-component submodule in place of full diagonalization"
  },
  "mathlib_searches": [
   {
@@ -223,5 +223,15 @@
   "group": "Q21",
   "result": "pass",
   "note": "Statement matches node clause by clause: IsDiscreteValuationRing A, maximalIdeal = span{π}, e:ℕ (e=0 included), M:Type v, N:Type w with Module.Finite, A ⧸ span{π^e}, binary direct sum as product per proof step 1, Nonempty (M ≃ₗ[A] N); no stronger assumptions, universes unbound-free. Lemma true (local End of A/π^e); 4 proof steps checked; citer local-smith step 5 compatible. Only change to node is the lean record; lean.statement verbatim. One theorem, sorry only, no defs; source/blueprint docstrings with 4 steps; report sections present. No existing Mathlib/project match. nt_compile --json clean (3.5 s); broken control copy reported its error, so the clean result is real. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z6",
+  "result": "pass",
+  "landing": "20261018T142335-L-3251736",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
