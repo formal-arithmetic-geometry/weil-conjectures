@@ -16469,3 +16469,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:07 L: merged deliver/B6/Sheaf.AlgebraicGeometry.ProperHeartContinuitySections (stage 3; reviewer PASS; first push; landing 20261018T140713-L-3103316 (proof); batch 20261018T140710; modules 1; new nodes 0)
 - 14:07 L: merged deliver/C2/Sheaf.Algebra.Homology.FunctorialBoundedAboveClassResolution (stage 3; reviewer PASS; first push; landing 20261018T140714-L-3103453 (proof); batch 20261018T140710; modules 1; new nodes 0)
 - 14:07 L: merged deliver/C3/Sheaf.Compactification.BoundaryRefinement (stage 3; reviewer PASS; first push; landing 20261018T140714-L-3103617 (proof); batch 20261018T140710; modules 1; new nodes 0)
+- 14:07 L: merged deliver/D4/Sheaf.Paper.AdicGlobalDerivedHom (stage 3; reviewer PASS; first push; landing 20261018T140715-L-3103769 (proof); batch 20261018T140710; modules 1; new nodes 0)

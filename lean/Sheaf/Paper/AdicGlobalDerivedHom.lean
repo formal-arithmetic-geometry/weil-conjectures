@@ -42,6 +42,27 @@ def adicFiniteConstant (n : ℕ) (U : T.ProEtᵒᵖ) :
     (((AdicCoefficients.constants T (A ⧸ d.ideal ^ (n + 1))).app U).hom.comp
       (Ideal.Quotient.mk (d.ideal ^ (n + 1))))
 
+private theorem adicFiniteConstant_compat (U : T.ProEtᵒᵖ) (n : ℕ) :
+    CommRingCat.ofHom (adicFiniteConstant T d (n + 1) U) ≫
+        ((pbcAdicRings T d).map (homOfLE (n.le_add_right 1)).op).hom.app U =
+      CommRingCat.ofHom (adicFiniteConstant T d n U) := by
+  let : ∀ n : ℕ, Finite (A ⧸ d.ideal ^ (n + 1)) := d.quotientFinite
+  let φ := Ideal.Quotient.factorPowSucc d.ideal (n + 1)
+  have h := congr_app (toSheafify_naturality (ProEt.topology T)
+    (AdicCoefficients.functionPresheafMap T φ)) U
+  dsimp only [pbcAdicRings, AdicCoefficients.ringSystem]
+  rw [Functor.ofOpSequence_map_homOfLE_succ]
+  change CommRingCat.ofHom (Ideal.Quotient.mk (d.ideal ^ (n + 1 + 1))) ≫
+      (AdicCoefficients.constants T (A ⧸ d.ideal ^ (n + 1 + 1))).app U ≫
+      (toSheafify (ProEt.topology T) _).app U ≫
+      (sheafifyMap (ProEt.topology T) (AdicCoefficients.functionPresheafMap T φ)).app U =
+    CommRingCat.ofHom (Ideal.Quotient.mk (d.ideal ^ (n + 1))) ≫
+      (AdicCoefficients.constants T (A ⧸ d.ideal ^ (n + 1))).app U ≫
+      (toSheafify (ProEt.topology T) _).app U
+  rw [← NatTrans.comp_app, ← h, NatTrans.comp_app]
+  ext a
+  rfl
+
 /-- The canonical scalar homomorphism is uniquely specified by all its finite residues.
 Source: Bhatt--Scholze, 6.8.2(1)
 (blueprint: def-weil-pbc-adic-global-derived-hom).
@@ -54,7 +75,26 @@ theorem adicScalar_exists (U : T.ProEtᵒᵖ) :
     ∃! ρ : A →+* (pbcAdicCompletion T d).obj.obj U,
       ∀ n : ℕ, ((pbcAdicProjection T d n).hom.app U).hom.comp ρ =
         adicFiniteConstant T d n U := by
-  sorry
+  let E := sheafToPresheaf (ProEt.topology T) CommRingCat.{u + 1} ⋙
+    (CategoryTheory.evaluation T.ProEtᵒᵖ CommRingCat.{u + 1}).obj U
+  let c : Cone (pbcAdicRings T d ⋙ E) :=
+    { pt := CommRingCat.of A
+      π := NatTrans.ofOpSequence
+        (fun n ↦ CommRingCat.ofHom (adicFiniteConstant T d n U)) (by
+          intro n
+          change 𝟙 _ ≫ CommRingCat.ofHom (adicFiniteConstant T d n U) = _
+          rw [Category.id_comp]
+          exact (adicFiniteConstant_compat T d U n).symm) }
+  let hc := isLimitOfPreserves E (limit.isLimit (pbcAdicRings T d))
+  refine ⟨(hc.lift c).hom, ?_, ?_⟩
+  · intro n
+    exact congrArg CommRingCat.Hom.hom (hc.fac c (op n))
+  · intro ρ hρ
+    have h : CommRingCat.ofHom ρ = hc.lift c := by
+      apply hc.hom_ext
+      intro n
+      exact (congrArg CommRingCat.ofHom (hρ n.unop)).trans (hc.fac c n).symm
+    exact congrArg CommRingCat.Hom.hom h
 
 /-- The scalar map into completed sections, determined by its actual finite residues.
 Source: Bhatt--Scholze, 6.8.2(1)
