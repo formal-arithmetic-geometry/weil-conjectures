@@ -12,12 +12,8 @@ public import Sheaf.CategoryTheory.RingedSiteModules
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.ChangeOfRings
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 
-import Mathlib.Algebra.Category.ModuleCat.AB
 import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
-import Mathlib.Algebra.Category.CommAlgCat.Basic
-import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties
-import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 
 /-! # Continuity maps and classical pro-étale sheaves
 
@@ -91,7 +87,7 @@ theorem continuityMap_ι {X : Scheme.{u}} {I : Type (u + 1)} [SmallCategory I]
     [HasColimit (sectionDiagram P F)] (i : I) :
     colimit.ι (sectionDiagram P F) (op i) ≫ continuityMap P F =
       F.map (P.cone.π.app i).op := by
-  sorry
+  exact colimit.ι_desc (sectionCocone P F) (op i)
 
 /-- Naturality of the continuity map in the sheaf (in fact in any presheaf).
 Source: current blueprint, continuity-map detail, clause 2
@@ -106,7 +102,10 @@ theorem continuityMap_natural {X : Scheme.{u}} {I : Type (u + 1)} [SmallCategory
     colimMap (G := sectionDiagram P F) (F := sectionDiagram P G)
       (Functor.whiskerLeft P.diagram.op α) ≫ continuityMap P G =
       continuityMap P F ≫ α.app (op P.cone.pt) := by
-  sorry
+  apply colimit.hom_ext
+  intro i
+  obtain ⟨i⟩ := i
+  simp [continuityMap, sectionCocone, sectionDiagram, α.naturality]
 
 /-- A set sheaf is classical when every affine presentation gives a bijective map.
 Source: current blueprint, continuity-map detail, clause 3
@@ -125,7 +124,24 @@ same construction to its inverse to see that these identifications are bijective
 theorem isClassical_iso_iff {X : Scheme.{u}}
     {F G : Sheaf (Scheme.ProEt.topology X) (Type (u + 1))} (e : F ≅ G) :
     IsClassical F ↔ IsClassical G := by
-  sorry
+  have h {F G : Sheaf (Scheme.ProEt.topology X) (Type (u + 1))}
+      (e : F ≅ G) (hF : IsClassical F) : IsClassical G := by
+    intro I _ _ P
+    have hmap := continuityMap_natural P e.hom.hom
+    have : IsIso (continuityMap P F.obj) :=
+      (CategoryTheory.isIso_iff_bijective _).mpr (hF P)
+    have : IsIso (Functor.whiskerLeft P.diagram.op e.hom.hom) := by
+      change IsIso (Functor.isoWhiskerLeft P.diagram.op
+        ((sheafToPresheaf _ _).mapIso e)).hom
+      infer_instance
+    have : IsIso (e.hom.hom.app (op P.cone.pt)) := by infer_instance
+    have : IsIso (continuityMap P G.obj) := by
+      apply (isIso_comp_left_iff
+        (colimMap (Functor.whiskerLeft P.diagram.op e.hom.hom)) _).mp
+      rw [hmap]
+      infer_instance
+    exact (CategoryTheory.isIso_iff_bijective _).mp inferInstance
+  exact ⟨h e, h e.symm⟩
 
 section Modules
 
@@ -181,7 +197,38 @@ theorem isClassicalModule_iff :
     IsClassicalModule Λ F ↔
       IsClassical ((sheafCompose (Scheme.ProEt.topology X)
         (forget AddCommGrpCat.{u + 1})).obj ((SheafOfModules.toSheaf _).obj F)) := by
-  sorry
+  let V := forget (ModuleCat.{u + 1} (ULift.{u + 1, u} Λ))
+  have h (I : Type (u + 1)) [SmallCategory I] [IsCofiltered I]
+      (P : AffinePresentation X I) :
+      IsIso (moduleContinuityMap Λ F P) ↔
+        Function.Bijective (continuityMap P (moduleSectionPresheaf Λ F ⋙ V)) := by
+    rw [← CategoryTheory.isIso_iff_bijective]
+    have heq :
+        (preservesColimitIso V (sectionDiagram P (moduleSectionPresheaf Λ F))).inv ≫
+          V.map (moduleContinuityMap Λ F P) =
+            continuityMap P (moduleSectionPresheaf Λ F ⋙ V) := by
+      exact preservesColimitIso_inv_comp_desc V
+        (sectionDiagram P (moduleSectionPresheaf Λ F))
+        (sectionCocone P (moduleSectionPresheaf Λ F))
+    rw [← heq, isIso_comp_left_iff]
+    exact (isIso_iff_of_reflects_iso _ V).symm
+  constructor
+  · intro hF I _ _ P
+    exact (h I P).mp (hF P)
+  · intro hF I _ _ P
+    exact (h I P).mpr (hF P)
+
+private theorem isClassicalModule_iso_iff
+    (G : ringedSiteModules.{u + 1}
+      ((sheafCompose (Scheme.ProEt.topology X)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+          ((constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}).obj
+            (CommRingCat.of (ULift.{u + 1, u} Λ))))) (e : F ≅ G) :
+    IsClassicalModule Λ F ↔ IsClassicalModule Λ G := by
+  rw [isClassicalModule_iff, isClassicalModule_iff]
+  exact isClassical_iso_iff
+    ((SheafOfModules.toSheaf _ ⋙
+      sheafCompose (Scheme.ProEt.topology X) (forget AddCommGrpCat.{u + 1})).mapIso e)
 
 end Modules
 
@@ -222,7 +269,10 @@ theorem isClassicalComplex_Q_iff {X : Scheme.{u}} (Λ : Type u) [CommRing Λ]
     IsClassicalComplex Λ
       ((@DerivedCategory.Q _ _ _ (HasDerivedCategory.standard _)).obj K) ↔
         IsClassicalCochainComplex Λ K := by
-  sorry
+  apply forall_congr'
+  intro q
+  exact isClassicalModule_iso_iff Λ _ _
+    ((@DerivedCategory.homologyFunctorFactors _ _ _ (HasDerivedCategory.standard _) q).app K)
 
 /-- Classicality depends only on the derived isomorphism class.
 Source: current blueprint, continuity-map detail, clause 4
@@ -233,7 +283,10 @@ inverse linear isomorphisms, so invertibility of each continuity map is preserve
 theorem isClassicalComplex_iso_iff {X : Scheme.{u}} (Λ : Type u) [CommRing Λ]
     {K L : Scheme.proEtaleDerivedCategory X Λ} (e : K ≅ L) :
     IsClassicalComplex Λ K ↔ IsClassicalComplex Λ L := by
-  sorry
+  apply forall_congr'
+  intro q
+  exact isClassicalModule_iso_iff Λ _ _
+    ((@DerivedCategory.homologyFunctor _ _ _ (HasDerivedCategory.standard _) q).mapIso e)
 
 /-- Presentable affine site objects are exactly the affine ind-étale subsite objects.
 Source: current blueprint, continuity-map detail, final paragraph; recorded
