@@ -16,9 +16,119 @@
   "def-weil-affine-spectrum",
   "def-weil-pbc-krull-dimension-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $w\\in X$ and put $R=\\mathcal O_{X,w}$, $d=\\dim R$. Regularity and Noetherianity of $X$ mean that $R$ is Noetherian regular local; the structure map gives a prime-field subring of $R$, and $\\ell$ remains invertible. Apply [lem-per-punctual-strict-completion-test] to $R$. It supplies $B=\\widehat{R^{\\mathrm{sh}}}$, Noetherian regular local, complete, strictly henselian and of dimension $d$, and says that punctual purity for $R$ at its closed point is equivalent to that for $B$. The composite from the prime field into $B$ is injective: it is a unital map from a field to the nonzero local ring $B$. Thus $B$ still contains that prime field.",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-per-punctual-strict-completion-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Definitions 3.2.1–3.2.2, Proposition 3.2.4 and Proposition 3.2.5, printed pp.244–245; agent reconstruction of the prime-field proof using Cohen coordinates and regular supported base change."
+   }
+  },
+  {
+   "text": "Apply [lem-per-prime-field-complete-coordinate-model] to $B$. Write $F=B/\\mathfrak m_B$, $C=F[T_1,\\ldots,T_d]$, $I=(T_1,\\ldots,T_d)$ and identify $\\widehat C_I$ with $B$ by its coordinate-preserving isomorphism. Put $P=\\mathbf A^d_F=\\operatorname{Spec}C$, $S=\\operatorname{Spec}F$, let $p:P\\to S$ be the projection and $z:S\\hookrightarrow P$ the zero section. The inverse image of $z$ under $h:\\operatorname{Spec}B\\to P$ is exactly the closed point $j:S\\hookrightarrow\\operatorname{Spec}B$: the affine fibre-product formula gives its ring $B\\otimes_C C/I=B/IB=B/\\mathfrak m_B=F$, with induced map on $S$ the identity. Invertibility of $\\ell$ in $B$ implies invertibility in $F$ and hence in $C$.",
+   "uses": [
+    "lem-per-prime-field-complete-coordinate-model",
+    "def-sbc-affine-space",
+    "lem-weil-pbc-fibre-product-affine-spectra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Definitions 3.2.1–3.2.2, Proposition 3.2.4 and Proposition 3.2.5, printed pp.244–245; agent reconstruction of the prime-field proof using Cohen coordinates and regular supported base change."
+   }
+  },
+  {
+   "text": "The field $F$ is excellent by [lem-exc-fields-excellent]. The polynomial algebra $C$ is of finite type over $F$, so [lem-exc-finite-type-localization-excellent] makes $C$ excellent. By the definition of excellence it is Noetherian and a G-ring. Apply [lem-weil-pbc-g-ring-completion-regular] at the ideal $I$: $C\\to\\widehat C_I=B$ is flat and has geometrically regular Noetherian fibres. The flat affine criterion and affine fibre-product formula show that $h:\\operatorname{Spec}B\\to P$ is a regular morphism of Noetherian schemes. The fibre criterion in [lem-weil-pbc-geometrically-regular-finitely-generated-extensions] verifies that these fibres stay regular under every finite residue-field extension, as required by [lem-per-regular-supported-base-change]. This argument uses excellence only for $C$, never for $R$.",
+   "uses": [
+    "lem-exc-fields-excellent",
+    "lem-exc-finite-type-localization-excellent",
+    "def-exc-excellent-ring",
+    "lem-weil-pbc-g-ring-completion-regular",
+    "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-geometrically-regular-finitely-generated-extensions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Definitions 3.2.1–3.2.2, Proposition 3.2.4 and Proposition 3.2.5, printed pp.244–245; agent reconstruction of the prime-field proof using Cohen coordinates and regular supported base change."
+   }
+  },
+  {
+   "text": "The projection $p$ is smooth of pure relative dimension $d$ by [sbc-lem-affine-space-smooth]. It is separated and compactifiable: the standard open immersion of affine space into projective space followed by the proper projective-space projection gives its compactification; the same is true of the closed section and their identity composite. Both $P$ and $S$ are Noetherian by Step 3 and the field case. The section is regular of codimension $d$ by [lem-per-regular-lci-geometric-calculus]. At coefficient level $n=1$, [lem-per-noetherian-prime-power-smooth-duality] makes the shifted smooth orientation $a_p:A_P\\to p^!A_S(-d)[-2d]$ an isomorphism. The section identity of [lem-per-smooth-gysin-mixed-identities] says $z^?(a_p)\\circ a_z=1_{A_S}$, where $z^?=z^!(d)[2d]$ and $a_z:A_S\\to z^!A_P(d)[2d]$ is the supported Kummer class. Since a functor preserves inverse identities, $z^?(a_p)$ is invertible. Multiplying the displayed identity by its inverse proves $a_z=(z^?(a_p))^{-1}$, so $a_z$ is an isomorphism with the specified Kummer normalization.",
+   "uses": [
+    "sbc-lem-affine-space-smooth",
+    "lemma-nagata-relative-affine-space-open-immersion",
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-per-regular-lci-geometric-calculus",
+    "lem-per-noetherian-prime-power-smooth-duality",
+    "lem-per-smooth-gysin-mixed-identities"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Definitions 3.2.1–3.2.2, Proposition 3.2.4 and Proposition 3.2.5, printed pp.244–245; agent reconstruction of the prime-field proof using Cohen coordinates and regular supported base change."
+   }
+  },
+  {
+   "text": "For the closed immersions $z$ and $j$, the compactification $(1,z)$, resp. $(1,j)$, of [def-amb-etale-compact-support] gives $Rz_!=z_*$ and $Rj_!=j_*$, so the compact-support right adjoints used by [lem-per-regular-immersion-class-calculus] and the closed-support adjoints $z_*\\dashv z^!$, $j_*\\dashv j^!$ of [def-per-closed-support-plus-adjunction] are right adjoints of the same functors; we identify them by the unique comparison of right adjoints compatible with the counits. Apply [lem-per-regular-supported-base-change] with $h$, $z$, and the constant coefficient object $A_P$, where $A=\\mathbf Z/\\ell=\\mathbf F_\\ell$. Step 2 identifies the closed fibre with $j$ and its map to $S$ with the identity. The theorem, including its twist and shift compatibility, therefore gives an isomorphism $z^!A_P(d)[2d]\\xrightarrow{\\sim}j^!A_B(d)[2d]$. By flat-base-change compatibility of [lem-per-regular-immersion-class-calculus], the composite of $a_z$ with this exchange is precisely the Kummer fundamental-class map $a_j:A_F\\to j^!A_B(d)[2d]$. The codimension is $d$ on both sides: $z$ has codimension $d$, and $B$ is regular local of dimension $d$. Thus $a_j$ is an isomorphism. This proves punctual purity of $\\operatorname{Spec}B$ at its closed point.",
+   "uses": [
+    "def-amb-etale-compact-support",
+    "def-per-closed-support-plus-adjunction",
+    "lem-per-regular-supported-base-change",
+    "lem-per-regular-immersion-class-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Definitions 3.2.1–3.2.2, Proposition 3.2.4 and Proposition 3.2.5, printed pp.244–245; agent reconstruction of the prime-field proof using Cohen coordinates and regular supported base change."
+   }
+  },
+  {
+   "text": "By the equivalence of Step 1, $\\operatorname{Spec}R$ is punctually pure at its closed point. This is exactly punctual purity of $X$ at $w$. Since $w$ was arbitrary, $X$ is punctually pure. If $X$ is empty the assertion has no points to check. If $d=0$, all coordinate tuples are empty, $p=z=h=1_S$ under the coordinate model and all class maps above are the identity; no positive-dimension hypothesis entered the argument.",
+   "uses": [
+    "lem-per-punctual-strict-completion-test"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Definitions 3.2.1–3.2.2, Proposition 3.2.4 and Proposition 3.2.5, printed pp.244–245; agent reconstruction of the prime-field proof using Cohen coordinates and regular supported base change."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-regular-scheme",
+  "lem-per-punctual-strict-completion-test",
+  "lem-per-prime-field-complete-coordinate-model",
+  "def-sbc-affine-space",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-exc-fields-excellent",
+  "lem-exc-finite-type-localization-excellent",
+  "def-exc-excellent-ring",
+  "lem-weil-pbc-g-ring-completion-regular",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+  "sbc-lem-affine-space-smooth",
+  "lemma-nagata-relative-affine-space-open-immersion",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-per-regular-lci-geometric-calculus",
+  "lem-per-noetherian-prime-power-smooth-duality",
+  "lem-per-smooth-gysin-mixed-identities",
+  "lem-per-regular-supported-base-change",
+  "lem-per-regular-immersion-class-calculus",
+  "def-amb-etale-compact-support",
+  "def-per-closed-support-plus-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XVI, Definitions 3.2.1–3.2.2, Proposition 3.2.4 and Proposition 3.2.5, printed pp.244–245; agent reconstruction of the prime-field proof using Cohen coordinates and regular supported base change."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,7 +167,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-punctual-purity-trait-test",
@@ -82,5 +192,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-prime-field-punctual-purity",
+  "worker": "stage1",
+  "summary": "Replaced the unsplit imported assertion by the strict-completion/Cohen-coordinate proof. Reduced an arbitrary local ring to its completed strict henselization, proved Kummer purity for the coordinate zero section from the existing diagonal/DNC smooth orientation and section identity, and pulled it to the complete coordinate model along a regular completion map. Added one statement-only Cohen-coordinate algebra node (Stacks 0C0S), searched by two semantic phrasings, Loogle, grep and LeanSearch. The item statement is unchanged. The proof is agent reconstructed because ILO states Proposition 3.2.5 without its proof. No SGA source or excellence assumption on the original ring is used.",
+  "blueprint": "Proof Step 3: dimension-normalized Verdier duality; regular finite-torsion local-model purity input. Punctual cohomological purity over a prime field. Steps 1–6 supply the prime-field punctual purity input beneath the regular-pair purity reduction; the Cohen-coordinate child isolates only its commutative-algebra input.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic algebra, affine-space geometry or completion tool in the Cohen-coordinate local calculation; it does not replace the perverse-unit route."
+   },
+   {
+    "node": "lem-exc-fields-excellent",
+    "why": "Generic algebra, affine-space geometry or completion tool in the Cohen-coordinate local calculation; it does not replace the perverse-unit route."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic algebra, affine-space geometry or completion tool in the Cohen-coordinate local calculation; it does not replace the perverse-unit route."
+   },
+   {
+    "node": "lem-weil-pbc-g-ring-completion-regular",
+    "why": "Generic algebra, affine-space geometry or completion tool in the Cohen-coordinate local calculation; it does not replace the perverse-unit route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+    "why": "Generic algebra, affine-space geometry or completion tool in the Cohen-coordinate local calculation; it does not replace the perverse-unit route."
+   },
+   {
+    "node": "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+    "why": "Generic algebra, affine-space geometry or completion tool in the Cohen-coordinate local calculation; it does not replace the perverse-unit route."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic algebra, affine-space geometry or completion tool in the Cohen-coordinate local calculation; it does not replace the perverse-unit route."
+   },
+   {
+    "node": "lemma-nagata-relative-affine-space-open-immersion",
+    "why": "Generic algebra, affine-space geometry or completion tool in the Cohen-coordinate local calculation; it does not replace the perverse-unit route."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Generic algebra, affine-space geometry or completion tool in the Cohen-coordinate local calculation; it does not replace the perverse-unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-exc-fields-excellent",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-g-ring-completion-regular",
+  "lem-weil-pbc-flat-ring-map-iff-flat-affine",
+  "lem-weil-pbc-geometrically-regular-finitely-generated-extensions",
+  "sbc-lem-affine-space-smooth",
+  "lemma-nagata-relative-affine-space-open-immersion",
+  "lemma-nagata-projective-space-base-change-proper"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-9377c2940",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-9377c2940 (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node lem-per-prime-field-complete-coordinate-model, every cited statement, ILO XVI 3.2.1–3.2.5 (printed pp.244–245) and Stacks 0C0S (lemma-regular-complete-containing-coefficient-field). The item statement is unchanged and matches ILO 3.2.5 for F_ell, with no excellence or finite-type hypothesis. The proof route is sound. Step 1 reduces to B, the completion of the strict henselization, through lem-per-punctual-strict-completion-test (ILO 3.2.1 remark and 3.2.4). Step 2 uses Cohen coordinates; the closed fibre B/IB=F follows because the t_i generate m. Step 3 uses excellence only for C=F[T] (07QW, 07QU, 0AH2, 0381), so h is regular. Step 4 gets a_z = z^?(a_p)^{-1} from noetherian-prime-power-smooth-duality (n=1) and the section identity of smooth-gysin-mixed-identities. Step 5 transports along h with regular-supported-base-change and the flat-base-change compatibility of the class. I checked the edge cases d=0 and X empty. The new node matches 0C0S(1) plus the I-adic completion of F[T]; I tested it on d=0, d=1 and the excluded mixed-characteristic case. It is not a duplicate: lem-weil-pbc-cohen-power-series-presentation and lem-weil-pbc-cohen-structure-power-series-surjection give only a surjection with unspecified n, and a Cohen ring in characteristic p. No cycles and no SGA. Fixes: (1) C1/C4: Step 5 silently identified the compact-support i^! of the class calculus with the closed-support i^! of the base-change theorem; I added the identification through the compactification (1,z), so Rz_!=z_*, and uniqueness of right adjoints, citing def-amb-etale-compact-support and def-per-closed-support-plus-adjunction. (2) B3: the new node cited one-variable def-weil-polynomial-ring; repointed to def-weil-pbc-mv-polynomial-ring. Batch 5: lem-trf-regular-sequence-dimension-formula, lem-trf-ambient-affine-translation-trace, lem-trf-finite-ring-section-deformation and lem-trf-bounded-below-derived-adjunction, together with the four cited per nodes, are already in the batch-5 closure through non-trf paths. That closure was computed with the walk cut at the trf/pd chapters, sk-thm-trace-transport and the batch-4 targets. The delivery adds only the pure-algebra Cohen node, and none of these citations is a step of the trace formula or of Poincare duality, so I accept them. I accept the 9 generic tool_uses. Maintainer note: the commit report coord/reports/Q35/... is stale (F). It says no new nodes and empty citations, which describes an earlier version, not this 6-step proof with one new node.; 2 file(s) fixed by the reviewer"
  }
 }
