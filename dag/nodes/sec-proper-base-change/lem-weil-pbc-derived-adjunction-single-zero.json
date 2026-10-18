@@ -1,0 +1,155 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GJU, identification of the degree-zero stalk map with alpha; Tag 0GJP, equation-alpha-K"
+ },
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GJU, identification of the degree-zero stalk map with alpha; Tag 0GJP, equation-alpha-K"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LocalAcyclicityClosedFibreUnit",
+  "date": "2026-10-18",
+  "group": "B5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Proof, first paragraph: \"the sheaves $R^qf_{\\Et,*}F_{\\Et}$ are constructible and zero for $q>2e$\". Constructibility clause, via the existing 0GL0 -> 0GKW -> 0GKV case (a) -> 0GKD branch; 0GKD invokes 0GJQ, 0GJR and 0GJW. Input 0GJU (lemma-beta-is-isomorphism). Subargument: Tag 0GJU, identification of the degree-zero stalk map with alpha; Tag 0GJP, equation-alpha-K Further subargument: The derived adjunction unit on a single object induces the ordinary unit in degree zero.",
+   "via": [
+    "lem-weil-pbc-local-acyclicity-closed-fibre-unit",
+    "lem-weil-pbc-proper-locally-acyclic-specialization",
+    "lem-weil-pbc-smooth-proper-specialization-prime-to-characteristic",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-derived-adjunction-single-zero",
+ "title": "The derived adjunction unit on a single object induces the ordinary unit in degree zero",
+ "statement": "Let $\\mathcal C,\\mathcal D$ be abelian categories [def-sp-abelian] with derived categories [def-weil-abstract-derived-category], and suppose $\\mathcal D$ has enough injectives [def-sp-injective-resolutions]. Let $L:\\mathcal C\\to\\mathcal D$ and $R:\\mathcal D\\to\\mathcal C$ be additive functors with an adjunction $L\\dashv R$, with $L$ exact and $R$ left exact [def-sp-left-exact-additive, lem-weil-pbc-exact-functor-derived-factorization]. Write $L_D$ for the termwise bounded-below derived functor, $R^+R$ for the bounded-below right derived functor [def-weil-pbc-derived-categories], and $\\eta^D:\\mathrm{id}\\to(R^+R)L_D$ for the actual induced derived-adjunction unit [lem-trf-bounded-below-derived-adjunction]. For every $M\\in\\mathcal C$ there is an isomorphism $c:\\mathcal H^0((R^+R)L_D(M[0]))\\simeq R(LM)$ such that $c\\circ\\mathcal H^0(\\eta^D_{M[0]})=\\eta_M\\circ\\epsilon_M$, where $\\epsilon_M:\\mathcal H^0(M[0])\\simeq M$ is the single-complex homology isomorphism and $\\eta$ is the original adjunction unit.",
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-sp-injective-resolutions",
+  "def-sp-left-exact-additive",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-pbc-derived-categories",
+  "lem-trf-bounded-below-derived-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "Use the defining derived-unit factorization on a bounded-below homotopy single complex. The exact-functor single comparison factors through the homotopy localization comparison. Naturality of the right-derived unit along the mapped-single isomorphism reduces the formula to the ordinary adjunction unit on complexes. Check this in degree zero by naturality of the ordinary unit along singleObjXSelf, and in all other degrees by the zero source.",
+   "uses": [
+    "lem-trf-bounded-below-derived-adjunction",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJU, identification of the degree-zero stalk map with alpha; Tag 0GJP, equation-alpha-K"
+   }
+  },
+  {
+   "text": "Apply degree-zero homology. The existing proved rightDerivedPlusSingleUnitHomology_comp_comparison identifies the single right-derived unit with toRightDerivedZero. This last map is invertible because R is left exact. Compose its inverse with the exact-single and right-derived single homology comparisons. Naturality of the single-complex homology comparison gives the displayed equation.",
+   "uses": [
+    "lem-sbc-right-derived-single-unit-homology-comparison",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJU, identification of the degree-zero stalk map with alpha; Tag 0GJP, equation-alpha-K"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-right-derived-single-unit-homology-comparison",
+  "lem-trf-bounded-below-derived-adjunction",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Zeroth cohomology of the derived adjunction unit for an exact left adjoint and a left exact right adjoint is the ordinary adjunction unit",
+   "results": "8 hits, including Adjunction.derived_unit and derivedη_fac_app, but no single-object degree-zero germ formula.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.toRightDerivedZero",
+   "results": "12 hits, including toRightDerivedZero and its isomorphism instances; these supply part of the degree-zero normalization but not the geometric germ comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedPlus_unit|localAcyclicityAlpha",
+   "results": "0 hits from msearch. Local rg found the derivedPlus unit factorization and the definition of localAcyclicityAlpha, but no combined comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "localAcyclicity|closedFibre_derivedUnit|localAcyclicity_strict_fibre",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Degree zero homology of a bounded below derived adjunction unit on an object concentrated in degree zero agrees with the original adjunction unit",
+   "results": "8 hits: ProjectiveResolution.fromLeftDerivedZero_eq and Functor.leftDerivedZeroIsoSelf (Mathlib.CategoryTheory.Abelian.LeftDerived), Adjunction.CommShift.compatibilityUnit_isoZero (Mathlib.CategoryTheory.Shift.Adjunction), and unrelated degree-zero lemmas. No bounded-below single-object normalization for this actual derived adjunction.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedAdjunctionSingleZero",
+  "file": "lean/Sheaf/CategoryTheory/DerivedAdjunctionSingleZero.lean",
+  "declaration": "CategoryTheory.Adjunction.derivedPlus_unit_homology_zero",
+  "statement": "theorem derivedPlus_unit_homology_zero [PreservesFiniteLimits R] (M : C) :\n    ∃ e : (DerivedCategory.Plus.homologyFunctor C 0).obj\n          ((L.mapDerivedCategoryPlus ⋙ R.rightDerivedFunctorPlus).obj\n            ((DerivedCategory.Plus.singleFunctor C 0).obj M)) ≅ R.obj (L.obj M),\n      (DerivedCategory.Plus.homologyFunctor C 0).map\n          (adj.derivedPlus.unit.app ((DerivedCategory.Plus.singleFunctor C 0).obj M)) ≫\n        e.hom =\n      (DerivedCategory.Plus.singleFunctorCompHomologyFunctorIso 0).hom.app M ≫\n        adj.unit.app M",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261018T071137-L-1664170",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261018T071137-L-1664170",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

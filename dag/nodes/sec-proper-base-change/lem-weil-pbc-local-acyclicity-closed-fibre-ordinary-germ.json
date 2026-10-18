@@ -1,0 +1,213 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GJU, identification of the degree-zero stalk map with alpha; Tag 0GJP, equation-alpha-K"
+ },
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GJU, identification of the degree-zero stalk map with alpha; Tag 0GJP, equation-alpha-K"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LocalAcyclicityClosedFibreUnit",
+  "date": "2026-10-18",
+  "group": "B5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Proof, first paragraph: \"the sheaves $R^qf_{\\Et,*}F_{\\Et}$ are constructible and zero for $q>2e$\". Constructibility clause, via the existing 0GL0 -> 0GKW -> 0GKV case (a) -> 0GKD branch; 0GKD invokes 0GJQ, 0GJR and 0GJW. Input 0GJU (lemma-beta-is-isomorphism). Subargument: Tag 0GJU, identification of the degree-zero stalk map with alpha; Tag 0GJP, equation-alpha-K Further subargument: The ordinary closed-fibre unit germ is the canonical local-acyclicity map.",
+   "via": [
+    "lem-weil-pbc-local-acyclicity-closed-fibre-unit",
+    "lem-weil-pbc-proper-locally-acyclic-specialization",
+    "lem-weil-pbc-smooth-proper-specialization-prime-to-characteristic",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "id": "lem-weil-pbc-local-acyclicity-closed-fibre-ordinary-germ",
+ "title": "The ordinary closed-fibre unit germ is the canonical local-acyclicity map",
+ "statement": "Let $f:X\\to S$ be a scheme morphism [def-pc-scheme], $G$ an abelian etale sheaf on $X$ [def-weil-pbc-abelian-etale-sheaves], and $s:\\operatorname{Spec}\\Omega\\to S$ and $t:\\operatorname{Spec}\\Omega'\\to S_{(s)}$ geometric points [def-weil-geometric-point, def-weil-pbc-strict-henselization-limit]. Put $p:X'=X\\times_SS_{(s)}\\to X$ and let $i:X_s\\to X'$ and $h:X_t\\to X'$ be the canonical fibre projections [def-pc-fibre-product, lem-weil-pbc-strict-henselization-functoriality]. Write $K=p^{-1}G$ [def-weil-pbc-inverse-image] and let $\\beta:K\\to h_*h^{-1}K$ be the ordinary sheaf adjunction unit [def-weil-pbc-inverse-image, def-weil-pbc-direct-image]. At any geometric $z$ of $X_s$, put $x=p\\circ i\\circ z$ and let $a$ be the $z$-stalk of $i^{-1}\\beta$ [def-weil-pbc-geometric-stalks]. There exist an isomorphism $e:S_{(s)}\\simeq S_{(f\\circ x)}$, an isomorphism $A$ from the source of $a$ to $G_x$, and an isomorphism $B$ from the target of $a$ to $\\Gamma(V_{f,x,e\\circ t},G|_V)$ [def-weil-pbc-global-sections-functor], such that $B\\circ a=\\alpha_{G,x,e\\circ t}\\circ A$ [def-weil-pbc-local-acyclicity-abelian-sheaf]. Here $G|_V$ is inverse image along $V_{f,x,e\\circ t}\\to X_{(x)}\\to X$ [def-weil-pbc-inverse-image]. No local acyclicity hypothesis is imposed. This equality compares the actual morphisms, rather than merely their source and target objects.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-pc-fibre-product",
+  "def-weil-pbc-local-acyclicity-abelian-sheaf",
+  "def-weil-pbc-abelian-etale-sheaves",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-global-sections-functor",
+  "def-weil-pbc-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Choose the canonical pointed strict-local map q from the localization of iz on X' to that of x on X. The strict-base closed-point localizations theorem makes q invertible and gives e and the fibre isomorphism over X. The inverse-image stalk comparison for i, canonical strict-local restriction of K, coefficient composition along q, inverse pullback of global sections along q, and inverse canonical restriction of G define A. This choice of A avoids needing a separate naturality theorem for restriction under the morphism p.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-weil-pbc-local-acyclicity-strict-fibre-comparison",
+    "lem-weil-pbc-strict-base-closed-point-localizations",
+    "lem-weil-pbc-strict-local-germ-restriction-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJU, identification of the degree-zero stalk map with alpha; Tag 0GJP, equation-alpha-K"
+   }
+  },
+  {
+   "text": "The map t is between affine schemes, so its base change h is affine and hence qcqs. Apply the unrestricted strict-henselization stalk theorem in degree zero to h and h-inverse-image K, retaining its actual canonical restriction composite. Transport through the left-exact degree-zero comparison and the single-complex/global-sections comparison. The degree-zero adjunction-unit normalization, its naturality, and the mate formula identify this canonical composite with r_(h_*h-inverse-image K) followed by ordinary exchange on strict-local sections and the direct-image global-sections isomorphism. It is therefore invertible. The fibre isomorphism and inverse-image coefficient composition over X then define B. Mere existence of an object-level target-stalk isomorphism is not sufficient here; use the canonical map in the unrestricted theorem.",
+   "uses": [
+    "lem-weil-pbc-unrestricted-strict-henselization-stalk",
+    "lem-weil-pbc-derived-adjunction-single-zero",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "pqf-def-affine-morphism",
+    "def-weil-pbc-underived-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJU, identification of the degree-zero stalk map with alpha; Tag 0GJP, equation-alpha-K"
+   }
+  },
+  {
+   "text": "Canonical strict-local restriction is natural in the sheaf: precompose with representative affine pointed-neighbourhood germs, use strictHenselizationSectionRestriction_naturality, then use their colimit universal property. Apply this naturality to the ordinary unit. The base-change identity map_unit_baseChangeMap_app changes its pullback followed by the ordinary exchange map into the fibre-projection unit followed by the inverse-image square comparison. On global sections this is pullback to the strict-local fibre; strictLocalUnderivedMateSections_eq verifies the same formula on each pointed representative. Transport along q and the fibre isomorphism over X. Functoriality of global-sections pullback and the inverse-image composition-unit identity give exactly alpha after the chosen A. Equality on representative germs proves the displayed equality. Neither local acyclicity nor a vanishing assertion is used; zero sheaves and empty fibres are included.",
+   "uses": [
+    "lem-weil-pbc-unrestricted-strict-henselization-stalk",
+    "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-weil-pbc-inverse-image-composition",
+    "def-weil-pbc-local-acyclicity-abelian-sheaf",
+    "lem-weil-pbc-strict-local-localized-hom-germ",
+    "lem-weil-pbc-strict-local-underived-sections-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJU, identification of the degree-zero stalk map with alpha; Tag 0GJP, equation-alpha-K"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-local-acyclicity-abelian-sheaf",
+  "def-weil-pbc-underived-exchange",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-derived-adjunction-single-zero",
+  "lem-weil-pbc-inverse-image-composition",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-local-acyclicity-strict-fibre-comparison",
+  "lem-weil-pbc-strict-base-closed-point-localizations",
+  "lem-weil-pbc-strict-local-germ-restriction-iso",
+  "lem-weil-pbc-strict-local-localized-hom-germ",
+  "lem-weil-pbc-strict-local-underived-sections-mate",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "lem-weil-pbc-unrestricted-strict-henselization-stalk",
+  "pqf-def-affine-morphism"
+ ],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Zeroth cohomology of the derived adjunction unit for an exact left adjoint and a left exact right adjoint is the ordinary adjunction unit",
+   "results": "8 hits, including Adjunction.derived_unit and derivedη_fac_app, but no single-object degree-zero germ formula.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.toRightDerivedZero",
+   "results": "12 hits, including toRightDerivedZero and its isomorphism instances; these supply part of the degree-zero normalization but not the geometric germ comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedPlus_unit|localAcyclicityAlpha",
+   "results": "0 hits from msearch. Local rg found the derivedPlus unit factorization and the definition of localAcyclicityAlpha, but no combined comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zeroth cohomology of the derived adjunction unit on an etale sheaf induces the canonical local acyclicity map on a closed fibre geometric stalk",
+   "results": "8 hits: CategoryTheory.Adjunction.derivedη_fac_app_assoc (Mathlib.CategoryTheory.Functor.Derived.Adjunction), CategoryTheory.Sheaf.adjunction_unit_app_val (Mathlib.CategoryTheory.Sites.Adjunction), and topological stalk/skyscraper unit lemmas. None is the etale strict-local alpha comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "localAcyclicity|closedFibre_derivedUnit|localAcyclicity_strict_fibre",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The ordinary etale inverse image direct image adjunction unit on a closed geometric fibre stalk agrees with the canonical local acyclicity comparison map to vanishing cycle fibre sections",
+   "results": "8 hits: TopCat.Presheaf.pushforwardPullbackAdjunction_unit_pullback_map_germToPullbackStalk and related germ identities (Mathlib.Topology.Sheaves.Stalks), plus topological skyscraper units and open-immersion module restriction. These concern topological sheaves, not the small etale strict-local fibre.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The ordinary adjunction unit for etale sheaf inverse image sends a geometric stalk germ to the same section as the canonical local acyclicity comparison map on a vanishing cycle fibre",
+   "results": "8 hits: topological pullback/stalk unit identities (Mathlib/Topology/Sheaves/Stalks), skyscraper germ identities, ModuleCat.Tilde.toOpen_germ. None is the etale strict-henselization comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale.localAcyclicityAlpha",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'AlgebraicGeometry.Etale.localAcyclicityAlpha'",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocalAcyclicityClosedFibreOrdinaryGerm",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalAcyclicityClosedFibreOrdinaryGerm.lean",
+  "declaration": "AlgebraicGeometry.Etale.closedFibre_unit_stalk_comparison",
+  "statement": "theorem closedFibre_unit_stalk_comparison\n    {X S : Scheme.{u}} (f : X ⟶ S)\n    (G : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)\n    {Ω' : Type u} [Field Ω'] [IsAlgClosed Ω']\n    (t : Spec (.of Ω') ⟶ Scheme.strictHenselizationScheme s)\n    {Ξ : Type u} [Field Ξ] [IsAlgClosed Ξ]\n    (z : Spec (.of Ξ) ⟶\n      pullback (pullback.snd f (Scheme.strictHenselizationStructuralMap s))\n        (Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation s)))) :\n    let p := pullback.fst f (Scheme.strictHenselizationStructuralMap s)\n    let f' := pullback.snd f (Scheme.strictHenselizationStructuralMap s)\n    let i := pullback.fst f' (Spec.map (CommRingCat.ofHom\n      (Scheme.strictHenselizationPointEvaluation s)))\n    let h := pullback.fst f' t\n    let x := (z ≫ i) ≫ p\n    let K := (upperStar AddCommGrpCat.{u + 1} p).obj G\n    let β := (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} h).unit.app K\n    let a := (Scheme.pointSmallEtale z).sheafFiber.map\n      ((upperStar AddCommGrpCat.{u + 1} i).map β)\n    ∃ e : Scheme.strictHenselizationScheme s ≅ Scheme.strictHenselizationScheme (x ≫ f),\n      ∃ A : (Scheme.pointSmallEtale z).sheafFiber.obj\n          ((upperStar AddCommGrpCat.{u + 1} i).obj K) ≅\n          (Scheme.pointSmallEtale x).sheafFiber.obj G,\n        ∃ B : (Scheme.pointSmallEtale z).sheafFiber.obj\n            ((upperStar AddCommGrpCat.{u + 1} i).obj\n              (((upperStar AddCommGrpCat.{u + 1} h) ⋙\n                (lowerStar AddCommGrpCat.{u + 1} h)).obj K)) ≅\n            (Sheaf.Γ (localAcyclicityFiber f x (t ≫ e.hom)).smallEtaleTopology\n              AddCommGrpCat.{u + 1}).obj\n              ((upperStar AddCommGrpCat.{u + 1}\n                (pullback.fst (localAcyclicityStrictMap f x) (t ≫ e.hom) ≫\n                  Scheme.strictHenselizationStructuralMap x)).obj G),\n          a ≫ B.hom = A.hom ≫ localAcyclicityAlpha f x (t ≫ e.hom) G",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261018T071137-L-1664170",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261018T071137-L-1664170",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -8,17 +8,11 @@ module
 public import Sheaf.AlgebraicGeometry.LocalAcyclicityAbelianSheaf
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
-import Sheaf.Paper.StrictHenselizationFunctoriality
-import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
-import WeilConjectures.AlgebraicGeometry.StrictlyHenselianSectionsStalk
-import Sheaf.AlgebraicGeometry.UnrestrictedStrictHenselizationStalk
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.CategoryTheory.Abelian.RightDerived
-import Sheaf.AlgebraicGeometry.StrictBaseClosedPointLocalizations
+import Sheaf.AlgebraicGeometry.LocalAcyclicityClosedFibreStalks
+import Sheaf.AlgebraicGeometry.LocalAcyclicityClosedFibreUnitGerm
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Local acyclicity and the closed-fibre restriction of the derived unit
@@ -35,6 +29,33 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
 
+private theorem isIso_of_geometric_cohomology_stalks
+    {Y : Scheme.{u}}
+    {K L : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})}
+    (a : K ⟶ L)
+    (ha : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (z : Spec (.of Ω) ⟶ Y)
+      (q : ℤ), IsIso ((Scheme.pointSmallEtale z).sheafFiber.map
+        ((DerivedCategory.Plus.homologyFunctor _ q).map a))) : IsIso a := by
+  apply (DerivedCategory.Plus.isIso_iff a).2
+  intro q
+  apply Scheme.isIso_of_isIso_sheafFiber_map
+  intro y
+  have h := ha _ (Y.algClosurePoint y) q
+  exact (NatIso.isIso_map_iff
+    ((Scheme.pointSmallEtale (Y.algClosurePoint y)).uliftSheafFiberIso
+      AddCommGrpCat.{u + 1}) _).2 h
+
+private theorem isZero_exact_homology
+    {C D : Type*} [Category* C] [Category* D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (K : DerivedCategory.Plus C) (q : ℤ)
+    (hK : IsZero ((DerivedCategory.Plus.homologyFunctor C q).obj K)) :
+    IsZero ((DerivedCategory.Plus.homologyFunctor D q).obj
+      (F.mapDerivedCategoryPlus.obj K)) := by
+  exact (F.map_isZero hK).of_iso
+    ((F.mapDerivedCategoryPlusHomologyFunctorIso q).app K).symm
+
 /-- For a locally acyclic morphism relative to an abelian étale sheaf, the derived
 unit for any geometric fibre over the strict local base becomes an isomorphism
 on the closed geometric fibre. No properness or torsion assumption is needed.
@@ -42,35 +63,16 @@ Source: Stacks Project, Tag 0GJU, lemma-beta-is-isomorphism, specialized to `G[0
 (blueprint: lem-weil-pbc-local-acyclicity-closed-fibre-unit).
 
 Proof:
-1. The geometric-fibre projection `h` is affine: over an affine `Spec B` of `X'`,
-   its inverse image is `Spec (B ⊗[A] Ω')`. Thus `h` is quasi-compact and quasi-separated
-   (lem-weil-pbc-fibre-product-affine-spectra, pqf-def-affine-morphism,
-   lem-weil-pbc-affine-morphism-permanence).
-2. At a geometric point of the closed fibre, the strict-base closed-point localization
-   identifications identify the strict-local fibre of `h` with the variety of vanishing
-   cycles of `f`. The maps to `X` agree, so inverse-image composition identifies coefficients
-   (lem-weil-pbc-strict-base-closed-point-localizations,
-   lem-weil-pbc-inverse-image-composition).
-3. Exact inverse image and exact geometric stalks identify the degree-q target stalk with
-   the higher-direct-image stalk of `h`. The unrestricted strict-henselization stalk formula
-   computes this as cohomology of that variety. Both source and target have zero negative
-   cohomology, using a nonnegative injective resolution of the degree-zero sheaf
-   (prop-weil-pbc-geometric-stalks-exact, lem-weil-pbc-inverse-image-stalk-germ,
-   lem-weil-pbc-unrestricted-strict-henselization-stalk,
-   lem-weil-pbc-left-exact-injective-resolution-degree-zero).
-4. The derived-unit formula identifies its degree-zero map with the ordinary unit.
-   A germ represented on a pointed étale neighbourhood is sent to its pullback section
-   and then restricted to the strict-local fibre. The inverse germ isomorphism followed
-   by restriction gives the same section, precisely `localAcyclicityAlpha`
-   (prop-weil-pbc-derived-inverse-image-adjunction,
-   lem-weil-pbc-strictly-henselian-sections-stalk,
-   lem-weil-pbc-inverse-image-stalk-germ, lem-weil-pbc-inverse-image-composition).
-5. Local acyclicity makes this degree-zero map an isomorphism and kills positive
-   cohomology of the variety of vanishing cycles, also for empty fibres
-   (def-weil-pbc-local-acyclicity-abelian-sheaf).
-6. Geometric stalks are conservative, so all cohomology-sheaf maps are isomorphisms.
-   The bounded-below cohomology criterion makes the original map an isomorphism
-   (lemma-weil-pbc-geometric-stalk-conservative, lem-weil-pbc-derived-plus-iso-on-cohomology).
+1. The target-stalk comparison identifies every nonnegative cohomology stalk with
+   cohomology of the variety of vanishing cycles. Its proof uses the affine base-change
+   property, the unrestricted stalk formula, and strict-base closed-point localizations.
+2. The degree-zero unit-germ comparison conjugates the actual stalk map to
+   `localAcyclicityAlpha`. Local acyclicity makes this map invertible.
+3. In positive degrees the source vanishes because it is an exact inverse image of a
+   single complex. Local acyclicity and the target-stalk comparison kill the target.
+4. In negative degrees exact inverse images and the nonnegativity of right derived
+   functors kill both source and target. A map between zero objects is invertible.
+5. Geometric stalk conservativity and the bounded-below cohomology criterion conclude.
 -/
 theorem isIso_closedFibre_derivedUnit_of_isLocallyAcyclicRelative
     {X S : Scheme.{u}} (f : X ⟶ S)
@@ -91,6 +93,53 @@ theorem isIso_closedFibre_derivedUnit_of_isLocallyAcyclicRelative
           ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj
             ((upperStar AddCommGrpCat.{u + 1}
               (pullback.fst f (Scheme.strictHenselizationStructuralMap s))).obj G)))) := by
-  sorry
+  let p := pullback.fst f (Scheme.strictHenselizationStructuralMap s)
+  let f' := pullback.snd f (Scheme.strictHenselizationStructuralMap s)
+  let i := pullback.fst f' (Spec.map (CommRingCat.ofHom
+    (Scheme.strictHenselizationPointEvaluation s)))
+  let h := pullback.fst f' t
+  let G' := (upperStar AddCommGrpCat.{u + 1} p).obj G
+  let K := (DerivedCategory.Plus.singleFunctor _ 0).obj G'
+  let β := (Adjunction.derivedPlus
+    (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} h)).unit.app K
+  change IsIso ((upperStar AddCommGrpCat.{u + 1} i).mapDerivedCategoryPlus.map β)
+  apply isIso_of_geometric_cohomology_stalks
+  intro Ξ _ _ z q
+  by_cases hq : q = 0
+  · subst q
+    obtain ⟨e, A, B, hab⟩ := closedFibre_derivedUnit_zero_stalk_comparison f G s t z
+    have hi : IsIso (localAcyclicityAlpha f ((z ≫ i) ≫ p) (t ≫ e.hom) G) :=
+      (hG _ ((z ≫ i) ≫ p) _ (t ≫ e.hom)).1
+    have hcomp : IsIso
+        (A.hom ≫ localAcyclicityAlpha f ((z ≫ i) ≫ p) (t ≫ e.hom) G) := inferInstance
+    rw [← hab] at hcomp
+    exact IsIso.of_isIso_comp_right _ B.hom
+  · have hsource := isZero_exact_homology (upperStar AddCommGrpCat.{u + 1} i) K q
+      (by
+        rcases lt_or_gt_of_ne hq with hq | hq
+        · exact DerivedCategory.Plus.isZero_homology_of_isGE K 0 q hq
+        · exact DerivedCategory.Plus.isZero_homology_of_isLE K 0 q hq)
+    have htarget : IsZero ((Scheme.pointSmallEtale z).sheafFiber.obj
+        ((DerivedCategory.Plus.homologyFunctor _ q).obj
+          ((upperStar AddCommGrpCat.{u + 1} i).mapDerivedCategoryPlus.obj
+            (((upperStar AddCommGrpCat.{u + 1} h).mapDerivedCategoryPlus ⋙
+              (lowerStar AddCommGrpCat.{u + 1} h).rightDerivedFunctorPlus).obj K)))) := by
+      rcases lt_or_gt_of_ne hq with hq | hq
+      · let e : (upperStar AddCommGrpCat.{u + 1} h).mapDerivedCategoryPlus.obj K ≅
+            (DerivedCategory.Plus.singleFunctor _ 0).obj
+              ((upperStar AddCommGrpCat.{u + 1} h).obj G') :=
+          ((upperStar AddCommGrpCat.{u + 1} h).mapDerivedCategoryPlusSingleFunctor 0).app G'
+        have : ((upperStar AddCommGrpCat.{u + 1} h).mapDerivedCategoryPlus.obj K).IsGE 0 :=
+          DerivedCategory.Plus.TStructure.t.isGE_of_iso e.symm 0
+        exact (Scheme.pointSmallEtale z).sheafFiber.map_isZero
+          (isZero_exact_homology (upperStar AddCommGrpCat.{u + 1} i) _ q
+            (Functor.isZero_homologyFunctor_rightDerivedFunctorPlus_obj_of_isGE
+              (lowerStar AddCommGrpCat.{u + 1} h) _ 0 hq))
+      · obtain ⟨n, rfl⟩ := Int.eq_ofNat_of_zero_le (le_of_lt hq)
+        obtain ⟨e, he⟩ := closedFibre_derivedUnit_target_stalks f G s t z
+        obtain ⟨E⟩ := he n
+        exact ((hG _ ((z ≫ i) ≫ p) _ (t ≫ e.hom)).2 n (by omega)).of_iso E
+    exact ⟨⟨0, ((Scheme.pointSmallEtale z).sheafFiber.map_isZero hsource).eq_of_src _ _,
+      htarget.eq_of_src _ _⟩⟩
 
 end AlgebraicGeometry.Etale

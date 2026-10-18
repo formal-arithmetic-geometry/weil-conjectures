@@ -1,0 +1,152 @@
+{
+ "id": "lem-weil-pbc-local-acyclicity-strict-fibre-comparison",
+ "kind": "statement",
+ "title": "The closed strict-local fibre agrees over X with the vanishing-cycle fibre",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme], $s:\\operatorname{Spec}\\Omega\\to S$ a geometric point [def-weil-geometric-point], and $S'=S_{(s)}$ its strict henselization [def-weil-pbc-strict-henselization-limit]. Let $(p:X'\\to X,f':X'\\to S')$ exhibit $X'=X\\times_SS'$ [def-pc-fibre-product]. Let $x':\\operatorname{Spec}\\Xi\\to X'$ and $a:\\operatorname{Spec}\\Xi\\to\\operatorname{Spec}\\Omega$ satisfy $f'\\circ x'=\\widetilde s\\circ a$, where $\\widetilde s$ is the canonical lift of $s$ [lem-weil-pbc-strict-henselization-functoriality]. For any geometric $t:\\operatorname{Spec}\\Omega'\\to S'$, write $x=p\\circ x'$, and let $\\rho_{x'}$ and $\\rho_x$ denote the structural strict-local maps. There exist isomorphisms $e:S'\\simeq S_{(f\\circ x)}$ and $E:X'_{(x')}\\times_{S'}\\operatorname{Spec}\\Omega'\\simeq V_{f,x,e\\circ t}$ [def-weil-pbc-local-acyclicity-abelian-sheaf] such that $E$ followed by $V_{f,x,e\\circ t}\\to X_{(x)}\\xrightarrow{\\rho_x}X$ equals the projection to $X'_{(x')}$ followed by $p\\circ\\rho_{x'}$. No local acyclicity, properness, or torsion condition is assumed. Moreover the canonical pointed map $q:X'_{(x')}\\to X_{(px')}$ is invertible, and $E$ commutes with the first projections followed by $q$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GJU, proof of lemma-beta-is-isomorphism, strict-local fibre identification; Tag 0GJS"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-pc-fibre-product",
+  "def-weil-pbc-local-acyclicity-abelian-sheaf",
+  "lem-weil-pbc-strict-henselization-functoriality"
+ ],
+ "proof": [
+  {
+   "text": "Use the pullback equation to identify (x′f′)ρ_s with (x′p)f. Transport the pointed strict-local map induced by ρ_s along this equality. The canonical strict-local maps for f and p satisfy their structural and point equations by the unique characterization in the local-acyclicity definition.",
+   "uses": [
+    "def-weil-pbc-local-acyclicity-abelian-sheaf",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJU, proof of lemma-beta-is-isomorphism, strict-local fibre identification; Tag 0GJS"
+   }
+  },
+  {
+   "text": "Apply strictBaseClosedPointLocalizations to these three pointed maps. Take its isomorphism e and its final fibre isomorphism E. Compose its first projection identity with the structural map to X, and use the structural identity for the strict-local map induced by p. Retain the invertibility of q and the first-projection equation supplied by that same localization theorem.",
+   "uses": [
+    "lem-weil-pbc-strict-base-closed-point-localizations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GJU, proof of lemma-beta-is-isomorphism, strict-local fibre identification; Tag 0GJS"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-weil-pbc-local-acyclicity-abelian-sheaf",
+  "lem-weil-pbc-strict-base-closed-point-localizations",
+  "lem-weil-pbc-strict-henselization-functoriality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GJU, proof of lemma-beta-is-isomorphism, strict-local fibre identification; Tag 0GJS"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The stalk of the derived direct image from a geometric fibre above the closed point of a strict local base is the cohomology of a variety of vanishing cycles",
+   "results": "8 hits, including structure-sheaf stalkClosedPointTo lemmas; none gives this etale-sheaf strict-local fibre comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Etale.upperStarCompRightDerivedGlobalSectionsIso",
+   "results": "0 hits; unknown identifier in the search index. The existing source declaration is used directly for cohomology transport.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHenselization|localAcyclicity",
+   "results": "0 hits returned by msearch; local rg and the declared strict-base closed-point localizations supply the geometric input.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Strict localization of a fibre over the closed point of a strict henselization is the vanishing cycles fibre",
+   "results": "8 hits about local and henselian schemes; none identifies this etale strict-local fibre over the original scheme.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "localAcyclicity|closedFibre_derivedUnit|localAcyclicity_strict_fibre",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LocalAcyclicityClosedFibreUnit",
+  "date": "2026-10-18",
+  "group": "B5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Proof, first paragraph: \"the sheaves $R^qf_{\\Et,*}F_{\\Et}$ are constructible and zero for $q>2e$\". Constructibility clause, via the existing 0GL0 -> 0GKW -> 0GKV case (a) -> 0GKD branch; 0GKD invokes 0GJQ, 0GJR and 0GJW. Input 0GJU (lemma-beta-is-isomorphism). Subargument: Tag 0GJU, proof of lemma-beta-is-isomorphism, strict-local fibre identification; Tag 0GJS",
+   "via": [
+    "lem-weil-pbc-local-acyclicity-closed-fibre-unit",
+    "lem-weil-pbc-proper-locally-acyclic-specialization",
+    "lem-weil-pbc-smooth-proper-specialization-prime-to-characteristic",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.LocalAcyclicityStrictFibreComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalAcyclicityStrictFibreComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.localAcyclicity_strict_fibre_comparison",
+  "statement": "theorem localAcyclicity_strict_fibre_comparison\n    {X S X' : Scheme.{u}} (f : X ⟶ S)\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S)\n    (p : X' ⟶ X) (f' : X' ⟶ Scheme.strictHenselizationScheme s)\n    (hcart : IsPullback p f' f (Scheme.strictHenselizationStructuralMap s))\n    {Ξ : Type u} [Field Ξ] [IsAlgClosed Ξ] (x' : Spec (.of Ξ) ⟶ X')\n    (a : Spec (.of Ξ) ⟶ Spec (.of Ω))\n    (hclosed : x' ≫ f' =\n      a ≫ Spec.map (CommRingCat.ofHom (Scheme.strictHenselizationPointEvaluation s)))\n    {Ω' : Type u} [Field Ω'] [IsAlgClosed Ω']\n    (t : Spec (.of Ω') ⟶ Scheme.strictHenselizationScheme s) :\n    IsIso (localAcyclicityStrictMap p x') ∧\n    ∃ e : Scheme.strictHenselizationScheme s ≅\n        Scheme.strictHenselizationScheme ((x' ≫ p) ≫ f),\n      ∃ E : pullback (Scheme.strictHenselizationStructuralMap x' ≫ f') t ≅\n          localAcyclicityFiber f (x' ≫ p) (t ≫ e.hom),\n        E.hom ≫ pullback.fst (localAcyclicityStrictMap f (x' ≫ p)) (t ≫ e.hom) =\n          pullback.fst (Scheme.strictHenselizationStructuralMap x' ≫ f') t ≫\n            localAcyclicityStrictMap p x' ∧\n        E.hom ≫ pullback.fst (localAcyclicityStrictMap f (x' ≫ p)) (t ≫ e.hom) ≫\n            Scheme.strictHenselizationStructuralMap (x' ≫ p) =\n          pullback.fst (Scheme.strictHenselizationStructuralMap x' ≫ f') t ≫\n            Scheme.strictHenselizationStructuralMap x' ≫ p",
+  "branch": "sheaf-dag",
+  "by": "B5",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261018T071137-L-1664170",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261018T071137-L-1664170",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
