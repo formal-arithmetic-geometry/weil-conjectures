@@ -392,5 +392,23 @@
   "group": "N8",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-28780ee5b (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and all 34 cited statements in full, plus ILO XVII Lemma 3.5.7 at printed p.276 (PDF p.282). The source asserts the finite surjective normal integral cover with a dense finite étale open on which M becomes constant, using the word 'évidemment'. The item states this claim in more generality (Noetherian excellent integral X, any finite ring A). That is true and the statement is unchanged; there are no new nodes. Step checks: (1) the stratum containing η is open because η lies in the closed factor, and immersion independence moves it to the open immersion. (2) J-2 applied with A=R makes the regular locus open; (0) is in it because O_{X,η} is a field and fields are regular; so D(a) is normal by rem-pc-regular-normal (1) and connected. (3) The set monodromy torsor's fibres are nonempty by def-sbc, so P is nonempty and c surjective; module-constant-of-set-pullback gives N; N is finite via the constant-sheaf stalk, inverse-image stalk-germ, forget-naturality and module-values (2). (4) B is Noetherian, etale-normal-components plus connectedness gives one component, generic maps to generic, and the étale residue-field lemma gives L/K finite separable. (5) X is quasi-separated, normalization in L exists; R is quasi-excellent, hence Nagata, hence N-2, so the normalization is finite; finite ⇒ proper ⇒ closed image containing η ⇒ surjective. (6) Both inclusions B ⊆ closure ⊆ B hold via finite⇒integral, stalks-in-function-field and sections-glue, so f^{-1}U ≅ P over U. (7) Inverse-image composition plus forget-naturality, made A-linear by naturality. Edge cases checked: Spec K, F=0, A=0, constant F, non-normal X. I found no duplicate (perfect-closure-finite-normal-model and generic-curve-model are narrower) and no cycle. I accept the 21 declared tool_uses: all are generic algebra or étale-sheaf black boxes. No SGA is cited, and no fixes were needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GenericFiniteNormalTrivialization",
+  "declaration": "AlgebraicGeometry.Scheme.exists_generic_finite_normal_trivialization",
+  "file": "lean/Sheaf/AlgebraicGeometry/GenericFiniteNormalTrivialization.lean",
+  "statement": "theorem exists_generic_finite_normal_trivialization (X : Scheme.{u}) [IsNoetherian X] [IsIntegral X] (hExcellent : ∀ V : X.affineOpens, IsExcellent Γ(X, V)) (A : Type (u + 1)) [CommRing A] [Finite A] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) (hF : IsConstructibleEtaleModuleSheaf F) : ∃ (Y : Scheme.{u}) (f : Y ⟶ X) (U : X.Opens) (N : ModuleCat.{u + 1} A), IsFinite f ∧ Surjective f ∧ Nonempty U ∧ Finite N ∧ IsIntegral Y ∧ (∀ y : Y, IsDomain (Y.presheaf.stalk y) ∧ IsIntegrallyClosed (Y.presheaf.stalk y)) ∧ IsFinite (f ∣_ U) ∧ Etale (f ∣_ U) ∧ Nonempty ((Etale.upperStar (ModuleCat.{u + 1} A) (f ⁻¹ᵁ U).ι).obj ((Etale.upperStar (ModuleCat.{u + 1} A) f).obj F) ≅ (constantSheaf (f ⁻¹ᵁ U).toScheme.smallEtaleTopology (ModuleCat.{u + 1} A)).obj N)",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7ff84b13b",
+  "group": "NK",
+  "result": "pass",
+  "note": "Only the item lean record changes (snapshot vs side dag diff). Statement verbatim in file; each clause matches the node: IsNoetherian/IsIntegral X; excellence on all affine opens; finite CommRing A : Type (u+1), the universe fixed by the recorded IsConstructibleEtaleModuleSheaf, no restriction in substance; F on smallEtaleTopology with ModuleCat.{u+1} A; ∃ Y f U N with IsFinite, Surjective, Nonempty U, Finite N, IsIntegral Y, stalks domain+integrally closed, f∣_U finite and Etale, Nonempty iso of upperStar ι ∘ upperStar f F with constantSheaf N. No extra hypotheses; edge cases (empty X excluded, A=0, F=0, monodromy, non-normal X, dim 0) fine. Docstrings give ILO XVII 3.5.7 p.276 + Stacks 0DV5/0AVK, blueprint tag, all 7 steps. No defs, proof is sorry. No duplicate found in side lean or Mathlib; item not yet landed live. nt_compile --json on the snapshot file: 2.0 s, exit 0, clean."
  }
 }
