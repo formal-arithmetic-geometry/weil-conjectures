@@ -20,9 +20,138 @@
   "def-trf-projective-bundle-morphism",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First consider any integral Noetherian excellent scheme $T$. Its componentwise normalization is precisely its function-field normalization: on a nonempty affine $\\operatorname{Spec}A$, there is one minimal prime, namely $(0)$, so the affine-chart lemma gives $\\operatorname{Spec}\\overline A$, with $A\\subseteq\\overline A\\subseteq k(T)$. The normalization-preparation theorem gives a finite surjective map $\\nu_T:T^\\nu\\to T$, a normal Noetherian excellent source, and an isomorphism over a dense open. The source is integral: each nonempty chart $\\operatorname{Spec}\\overline A$ is integral because $\\overline A$ is a subring of a field. Its generic point is the zero prime, and these points agree on overlaps under the normalization construction; every nonempty such chart contains this point. Thus the entire source is irreducible and reduced. Moreover $\\operatorname{Frac}\\overline A=\\operatorname{Frac}A=k(T)$, since the two inclusions $A\\subseteq\\overline A\\subseteq\\operatorname{Frac}A$ give both inclusions between their fraction fields. The affine function-field lemma identifies this equality with the map on scheme function fields.",
+   "uses": [
+    "lem-per-excellent-normalization-preparation",
+    "lem-per-componentwise-normalization-affine-charts",
+    "lem-weil-pbc-spec-domain-stalks-function-field",
+    "def-sc-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 035Q, 035S and the affine description of normalization."
+   }
+  },
+  {
+   "text": "The finite map $\\nu_T$ is projective in the projective-bundle convention by the finite-projectivity lemma, hence proper by the projective-bundle properness lemma. The preceding step makes it dominant and gives a degree-one extension of function fields. Apply the closed-dominant dimension theorem (target $T$ locally Noetherian, map locally of finite type and closed because proper): its transcendence-degree term is zero, so $\\dim T^\\nu=\\dim T$. This applies to $T=X$ and will also apply to every ordinary blowup below.",
+   "uses": [
+    "lem-trf-finite-projective-bundle",
+    "lem-trf-projective-bundle-proper",
+    "lem-trf-closed-dominant-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 0B3I and 02JX; projective implies proper."
+   }
+  },
+  {
+   "text": "For later use, normalization is unchanged over any normal open $V\\subseteq T$. On a nonempty affine $W=\\operatorname{Spec}A\\subseteq V$, take $c\\in\\overline A\\subseteq\\operatorname{Frac}A$ and write $c=a/s$ with $s\\ne0$. It is a section on the dense open $D(s)\\subseteq W$, integral over $A$. Apply the integral-section extension lemma to the normal locally Noetherian scheme $W$, its affine open $W$ and dense open $D(s)$: $c$ extends to an element of $A$. Equality can be tested in the function field by the affine function-field description. Hence $\\overline A=A$. The normalization-chart lemma identifies $\\nu_T^{-1}W\\to W$ with the identity of $\\operatorname{Spec}A$. These inverse maps agree on overlaps because two inverses to a fixed morphism are equal, so they glue to an inverse over $V$. The empty open causes no exception.",
+   "uses": [
+    "lem-sbc-normal-dense-open-integral-section",
+    "lem-per-componentwise-normalization-affine-charts",
+    "lem-weil-pbc-spec-domain-stalks-function-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035K and normalization over the normal locus; the cited integral-section extension supplies the normal-ring argument."
+   }
+  },
+  {
+   "text": "We now induct on the number $j$ of chosen normalized point blowups. The induction assertion is that $X_j$ is integral, normal, Noetherian and excellent, has dimension $d$, that all normalizations so far are finite, and that the composite $X_j\\to X$ is projective and induces the identity extension of function fields. Steps 1 and 2 with $T=X$ establish all these assertions for $j=0$. Suppose they hold for $j$. A reduced closed point $x\\in X_j$ is different from the generic point, since $\\dim X_j=d\\ge1$. Therefore its ideal sheaf $\\mathcal I_x$ is nonzero (at the generic point it is the unit ideal). The closed subscheme ideal is quasi-coherent, and on each Noetherian affine open its ideal is finitely generated. Apply the ordinary-blowup geometry lemma to obtain an integral $B=\\operatorname{Bl}_{x}(X_j)$ and a projective map $b:B\\to X_j$.",
+   "uses": [
+    "lem-per-integral-blowup-projective-geometry",
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BFT, first sentence; Tags 02ND and 02NS."
+   }
+  },
+  {
+   "text": "The projective-bundle properness lemma makes $b$ proper, and hence of finite type. By the finite-type definition, over each affine $\\operatorname{Spec}A$ of $X_j$ its inverse image admits a finite affine cover by spectra of finitely generated $A$-algebras. Each coordinate ring in that cover is excellent by finite-type stability of excellence and thus Noetherian. Starting with the finite affine cover of $X_j$, these finitely many inverse-image covers give a finite affine cover of $B$. Thus $B$ is Noetherian. The excellence affine-cover theorem gives excellence on every affine open of $B$. This uses no affine-base or ample-line-bundle hypothesis on $X_j$.",
+   "uses": [
+    "lem-trf-projective-bundle-proper",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-exc-finite-type-localization-excellent",
+    "def-exc-excellent-ring",
+    "lem-trf-excellent-scheme-affine-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BFT proof: finite-type stability; more-algebra Tag 07QU (lemma-finite-type-over-excellent)."
+   }
+  },
+  {
+   "text": "The complement-of-center theorem identifies $b^{-1}(X_j\\setminus\\{x\\})\\to X_j\\setminus\\{x\\}$ with an isomorphism. This open contains the generic point, so $b$ is dominant and induces an isomorphism of function fields. The closed-dominant dimension theorem applies to the proper map $b$ between integral schemes, with locally Noetherian target $X_j$ and transcendence-degree term zero. It gives $\\dim B=\\dim X_j=d$. Apply Steps 1 and 2 to this integral Noetherian excellent $B$. Its normalization $X_{j+1}\\to B$ is finite and projective, its source is integral normal Noetherian excellent of dimension $d$, and its function field is still $k(X_j)=k(X)$.",
+   "uses": [
+    "thm-nagata-global-blowup-complement",
+    "lem-trf-closed-dominant-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 02ND, 02JX, 035Q and 035S; Tag 0BFT proof."
+   }
+  },
+  {
+   "text": "Every Noetherian scheme just obtained is quasi-compact from its finite affine cover and is quasi-separated by the locally-Noetherian quasi-separatedness lemma. Apply projective-bundle composition first over the qcqs base $X_j$ to $X_{j+1}\\to B\\to X_j$, and then over the qcqs base $X$ to $X_{j+1}\\to X_j\\to X$. Both composites are projective. Their function-field maps are compositions of the isomorphisms in Step 6 and the induction hypothesis. This completes the inductive step, so the assertions hold for each $j\\le n$.",
+   "uses": [
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-per-projective-bundle-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4P (lemma-composition-projective); projectivity refinement of 0BFT."
+   }
+  },
+  {
+   "text": "Finally suppose the chosen centers all map outside the given normal open $U\\subseteq X$. Step 3 gives $X_0\\times_XU\\simeq U$. Inductively let $V_j=X_j\\times_XU\\simeq U$. The next center is disjoint from $V_j$, so the complement-of-center theorem makes $B\\times_{X_j}V_j\\to V_j$ an isomorphism. Its source is therefore normal. Step 3 applied to the normalization $X_{j+1}\\to B$ shows that this normalization is also an isomorphism on that open of $B$. Composing gives $X_{j+1}\\times_XU\\simeq V_j\\simeq U$. Induction proves the required restriction for $j=n$, including $n=0$. This is an induction on a supplied tower; it constructs no regular endpoint.",
+   "uses": [
+    "thm-nagata-global-blowup-complement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 035K and the complement-of-center isomorphism; restriction of the chosen tower."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-excellent-ring",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sc-normalization",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-proper-morphism",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-per-componentwise-normalization-affine-charts",
+  "lem-per-excellent-normalization-preparation",
+  "lem-per-integral-blowup-projective-geometry",
+  "lem-per-projective-bundle-composition",
+  "lem-sbc-normal-dense-open-integral-section",
+  "lem-trf-closed-dominant-dimension",
+  "lem-trf-excellent-scheme-affine-cover",
+  "lem-trf-finite-projective-bundle",
+  "lem-trf-projective-bundle-proper",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "thm-nagata-global-blowup-complement"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tag 0BFT (lemma-Nagata-normalized-blowup), iterated; projectivity and dimension refined using 0B3I, 0C4P and 02JX."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -51,10 +180,38 @@
    "results": "8 hits; AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization; logged digest 518a3dc3b5d9e121",
    "date": "2026-10-18",
    "verdict": "no match: the returned signatures give relative normalization, ordinary scheme or regular-sequence facts (or unrelated projective objects), not this geometric assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An excellent integral Noetherian scheme remains integral normal excellent and the same dimension after normalization and finitely many normalized point blowups",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.normalization, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.Hom.normalizationDesc; logged digest cfbb9f7e242407d5",
+   "date": "2026-10-19",
+   "verdict": "no match: scheme normalization, ordinary Proj properness, or proper composition does not state the blowup/projective-bundle assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "blow.?up|IsProjective|IsHProjective",
+   "results": "0 hits; ; logged digest 4f53cda18c2baa0c",
+   "date": "2026-10-19",
+   "verdict": "no match: scheme normalization, ordinary Proj properness, or proper composition does not state the blowup/projective-bundle assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Blowing up a scheme along a nonzero ideal preserves integrality, and a finite type center makes the blowup projective",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Hom.isIntegral_app, AlgebraicGeometry.isIntegral_of_isOpenImmersion, AlgebraicGeometry.IsIntegralHom.instMorphismRestrict, AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced, AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsIntegralHom.mk, AlgebraicGeometry.IsIntegralHom.hasAffineProperty, AlgebraicGeometry.IsIntegralHom.instUniversallyClosed; logged digest 19a4b96d77e852f5",
+   "date": "2026-10-19",
+   "verdict": "no match: scheme normalization, ordinary Proj properness, or proper composition does not state the blowup/projective-bundle assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProjective\"",
+   "results": "12 hits; CategoryTheory.isProjective, IsProjective.iff_projective, MeasureTheory.IsProjectiveMeasureFamily, MeasureTheory.IsProjectiveLimit, MeasureTheory.IsProjectiveLimit.measure_univ_unique, MeasureTheory.IsProjectiveLimit.isFiniteMeasure, MeasureTheory.IsProjectiveLimit.isProbabilityMeasure, MeasureTheory.IsProjectiveLimit.unique; logged digest 7b54d21ffae71866",
+   "date": "2026-10-19",
+   "verdict": "no match: scheme normalization, ordinary Proj properness, or proper composition does not state the blowup/projective-bundle assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-excellent-surface-desingularization",
@@ -80,5 +237,99 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-excellent-normalized-blowup-tower",
+  "worker": "stage1",
+  "summary": "Expanded the geometry of a supplied tower into normalization preparation, projectivity and dimension, normalization over normal opens, and an explicit induction. Reused general normalization/excellence and dimension nodes, and added only ordinary-blowup geometry and general projective-bundle composition. Kept every clause and hypothesis unchanged.",
+  "blueprint": "Technical input to lem-per-artin-gabber-affine-curve, proof Step 1 (dimension-normalized Verdier duality), via the potential-dualizing surface construction; ILO Expose XVII 3.4.1, first paragraph, printed p.270: Lipman's regular birational model. Realizes the proof of Stacks 0BGP (4) implies (3). Tag 0BFT (resolve-lemma-Nagata-normalized-blowup); morphisms.tex Tags 035Q (lemma-normalization-normal), 035S (lemma-nagata-normalization), 0B3I (lemma-finite-projective), 0C4P (lemma-composition-projective), 02JX (lemma-alteration-dimension); divisors.tex Tags 02ND (lemma-blow-up-integral-scheme) and 02NS (lemma-blowing-up-projective). Normalization restricts by Tag 035K; excellence is stable by more-algebra.tex Tags 07QU and 07QV. Steps 1–8 realize this technical input by iterating the 0BFT argument, rather than asserting a resolution algorithm.",
+  "tool_uses": [
+   {
+    "node": "def-exc-excellent-ring",
+    "why": "Generic definition or affine normalization/function-field tool used with its stated hypotheses. This is a scheme/algebra tool; no perverse-sheaf argument or replacement of the unit route is involved."
+   },
+   {
+    "node": "def-sbc-closed-immersion-ideal-sheaf",
+    "why": "Generic definition or affine normalization/function-field tool used with its stated hypotheses. This is a scheme/algebra tool; no perverse-sheaf argument or replacement of the unit route is involved."
+   },
+   {
+    "node": "def-sc-normalization",
+    "why": "Generic definition or affine normalization/function-field tool used with its stated hypotheses. This is a scheme/algebra tool; no perverse-sheaf argument or replacement of the unit route is involved."
+   },
+   {
+    "node": "def-weil-finite-type-morphism",
+    "why": "Generic definition or affine normalization/function-field tool used with its stated hypotheses. This is a scheme/algebra tool; no perverse-sheaf argument or replacement of the unit route is involved."
+   },
+   {
+    "node": "def-weil-pbc-noetherian-ring",
+    "why": "Generic definition or affine normalization/function-field tool used with its stated hypotheses. This is a scheme/algebra tool; no perverse-sheaf argument or replacement of the unit route is involved."
+   },
+   {
+    "node": "def-weil-proper-morphism",
+    "why": "Generic definition or affine normalization/function-field tool used with its stated hypotheses. This is a scheme/algebra tool; no perverse-sheaf argument or replacement of the unit route is involved."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Finite-type affine blowup chart algebras preserve excellence. This is a scheme/algebra tool; no perverse-sheaf argument or replacement of the unit route is involved."
+   },
+   {
+    "node": "lem-sbc-normal-dense-open-integral-section",
+    "why": "An integral rational section on a normal open extends, proving its normalization is the identity. This is a scheme/algebra tool; no perverse-sheaf argument or replacement of the unit route is involved."
+   },
+   {
+    "node": "lem-trf-closed-dominant-dimension",
+    "why": "Proper birational maps preserve dimension with transcendence-degree term zero. This is a scheme/algebra tool; no perverse-sheaf argument or replacement of the unit route is involved."
+   },
+   {
+    "node": "lem-trf-excellent-scheme-affine-cover",
+    "why": "Excellent affine charts give excellence on every affine open. This is a scheme/algebra tool; no perverse-sheaf argument or replacement of the unit route is involved."
+   },
+   {
+    "node": "lem-trf-finite-projective-bundle",
+    "why": "Finite morphisms are projective in the required bundle convention. This is a scheme/algebra tool; no perverse-sheaf argument or replacement of the unit route is involved."
+   },
+   {
+    "node": "lem-trf-projective-bundle-proper",
+    "why": "Projective-bundle maps are proper, hence finite type and closed. This is a scheme/algebra tool; no perverse-sheaf argument or replacement of the unit route is involved."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Supplies the qcqs hypothesis for projective-bundle composition. This is a scheme/algebra tool; no perverse-sheaf argument or replacement of the unit route is involved."
+   },
+   {
+    "node": "lem-weil-pbc-spec-domain-stalks-function-field",
+    "why": "Generic definition or affine normalization/function-field tool used with its stated hypotheses. This is a scheme/algebra tool; no perverse-sheaf argument or replacement of the unit route is involved."
+   },
+   {
+    "node": "thm-nagata-global-blowup-complement",
+    "why": "The ordinary blowup is the identity away from its center. This is a scheme/algebra tool; no perverse-sheaf argument or replacement of the unit route is involved."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-exc-excellent-ring",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sc-normalization",
+  "def-weil-finite-type-morphism",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-proper-morphism",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-sbc-normal-dense-open-integral-section",
+  "lem-trf-closed-dominant-dimension",
+  "lem-trf-excellent-scheme-affine-cover",
+  "lem-trf-finite-projective-bundle",
+  "lem-trf-projective-bundle-proper",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-spec-domain-stalks-function-field",
+  "thm-nagata-global-blowup-complement"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-4785cc7ea",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-4785cc7ea (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full. The item statement and stmt_deps are identical to base (checked against the Q102 snapshot), so no target is weakened. The 8 steps iterate Stacks 0BFT (resolve.tex) and get projectivity from 0B3I, 02NS and 0C4P. Steps: (1) normalization preparation; for integral T the componentwise and function-field normalizations agree by definition, and chart integrality comes from 01HV/01ON. (2) Dimension by 02JX: closed because proper, transcendence-degree term zero. (3) Normal open: 035K, written out with lem-sbc-normal-dense-open-integral-section; D(s) is dense and A→A_s→Frac A is injective. (4) The induction is stated with its invariants. Because d≥1, the ideal of the closed point is nonzero, quasi-coherent and finitely generated. (5) Excellence and Noetherianity of the blowup via 07QU and 0HAB. (6) Complement theorem and 02JX give dim B = d. (7) Noetherian schemes are qcqs (01OY), so 0C4P applies twice. (8) The normal-open clause, checked on fibre products. New node lem-per-integral-blowup-projective-geometry is exactly 02ND + 02NS(1); tested with I=O_T, with I=0 excluded, and with the point blowup of A². New node lem-per-projective-bundle-composition is 0C4P with the qcqs target kept. Neither duplicates an existing node (rg for 02ND/02NS/0C4P; the nearest candidates, the quasiprojective normalized blowup, the smooth-centre blowup and H-projective composition, are narrower or different). Batch-5 flags: the closures of all flagged citations reach only generic trf nodes: 0HAB with its G-ring/J-2/catenary pieces, the 02JX pieces, 0B3I, 01WC and the bundle-projective definitions. No trace-formula or Poincaré proof step and no sk-thm-trace-transport is reached, so I accept the flags. No SGA is cited. Only a cosmetic slip: the Step 6 source says 02ND is in morphisms.tex; it is in divisors.tex."
  }
 }
