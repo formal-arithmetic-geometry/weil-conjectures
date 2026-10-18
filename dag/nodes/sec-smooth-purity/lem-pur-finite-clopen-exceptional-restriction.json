@@ -17,7 +17,9 @@
   "def-weil-derived-pullback-tensor-hom",
   "lem-pur-finite-clopen-derived-decomposition",
   "def-compact-support-direct-image-detailed",
-  "def-weil-exceptional-inverse-image"
+  "def-weil-exceptional-inverse-image",
+  "def-pur-clopen-strict-system-comparison",
+  "def-weil-compact-support-coefficient-action"
  ],
  "proof": [
   {
@@ -453,5 +455,40 @@
   "group": "Q110",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-ecda0e5d7 (reviewer sub-agent of L); spot-checked: I read the item (statement unchanged, 11 steps, no new nodes), the parent def-pur-section-invariant (only step 2 cites the item) against the main-20261015 blueprint, the unit sk-def-purity-conv (conventions only, no steps), all 30 cited node statements, the Stacks tags and Zheng pp. 34-37. The statement matches the parent's use at all four coefficient stages, including the empty cases, and nothing is weakened. Small cases checked: fold map Y⊔Y→Y, I empty, an empty component, nonseparated Y. Steps 1-8, 10 and 11 check against the statements they cite. Step 4's Yoneda argument stays inside D^b_c(X_i) and uses thm-sf-ambient-adjoint-class only on etale-origin inputs. Step 7 is uniqueness of right adjoints on actual system categories. Three repairs in fixes/dag/nodes/sec-smooth-purity/lem-pur-finite-clopen-exceptional-restriction.json: (1) Step 3's source said Tag 03DH, but lemma-extension-by-zero is Tag 03DI (03DH is the section); corrected. (2) E5/C4: Step 9 asserted without citation that the integral Lj_i^* agrees with restriction. It now argues this explicitly: the formula R lim Res_n j_i^{-1}(K⊗A_n) from def-weil-derived-pullback-tensor-hom, the clopen commutations, and derived completeness K≅R lim K_n from def-weil-derived-complete. Both nodes are added to the step's uses and to proof_deps. (3) Step 9 now says that T_g and T_{g_i} are formed with the compactifications (a,p) and (a_i,p) of Step 1. Duplicate check: det-sf-mate-open-restriction is a different framework; lem-sf-kv-affine-locality covers only the finite clause, which Step 4 proves directly. Neither is a merge target. Accepted all 21 declared tool_uses as generic tools; none replaces a step of the unit's route. For the maintainer: def-weil-exceptional-inverse-image does not state that its system-level functor G_{f,A} is independent of the chosen compactification; that belongs to that definition, not to this item.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-a52a918ae",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, canonical comparison data, universes, edge cases, docstrings, route-pivot compliance, and required report sections checked; immutable files unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteClopenExceptionalRestriction",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finiteClopenExceptionalRestriction",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.clopenFiniteCategory",
+   "WeilConjectures.PurityFiniteSetting.ClopenFiniteAdjointComparisonData",
+   "WeilConjectures.PurityFiniteSetting.ClopenFiniteAdjointComparisonCoherence",
+   "WeilConjectures.PurityFiniteSetting.ClopenFiniteAdjointComparison",
+   "WeilConjectures.PurityFiniteSetting.ClopenExceptionalCoefficientComparisonData",
+   "WeilConjectures.PurityFiniteSetting.ClopenExceptionalCoefficientComparisonCoherence",
+   "WeilConjectures.PurityFiniteSetting.ClopenExceptionalCoefficientComparison",
+   "WeilConjectures.PurityFiniteSetting.ClopenExceptionalAllCoefficientsData",
+   "WeilConjectures.PurityFiniteSetting.ClopenExceptionalAllCoefficientsCoherence",
+   "WeilConjectures.PurityFiniteSetting.ClopenExceptionalAllCoefficients",
+   "WeilConjectures.PurityFiniteSetting.ClopenExceptionalAllCoefficients.integralUnitComparison",
+   "WeilConjectures.PurityFiniteSetting.ClopenExceptionalAllCoefficients.rationalUnitComparison",
+   "WeilConjectures.PurityFiniteSetting.ClopenExceptionalAllCoefficients.commonStageUnitComparison",
+   "WeilConjectures.PurityFiniteSetting.ClopenExceptionalAllCoefficients.finiteUnitComparison",
+   "WeilConjectures.PurityFiniteSetting.finiteClopenExceptionalRestriction"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteClopenExceptionalRestriction.lean",
+  "statement": "theorem finiteClopenExceptionalRestriction (P : PurityFiniteSetting.{u}) (X Y : Over (Spec (.of P.field.k))) [LocallyOfFiniteType (X.left ↘ Spec (.of P.field.k))] [QuasiCompact (X.left ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Y.left ↘ Spec (.of P.field.k))] [QuasiCompact (Y.left ↘ Spec (.of P.field.k))] (g : X.left ⟶ Y.left) [g.IsOver (Spec (.of P.field.k))] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] {I : Type w} [Finite I] (Xi : I → Over (Spec (.of P.field.k))) [∀ i, LocallyOfFiniteType ((Xi i).left ↘ Spec (.of P.field.k))] [∀ i, QuasiCompact ((Xi i).left ↘ Spec (.of P.field.k))] (j : ∀ i, Xi i ⟶ X) [∀ i, IsOpenImmersion (j i).left] [∀ i, IsClosedImmersion (j i).left] (hdisjoint : ∀ i i', i ≠ i' → Disjoint (Set.range (j i).left) (Set.range (j i').left)) (hcover : (⋃ i, Set.range (j i).left) = Set.univ) : (∀ (n : ℕ) (c : Compactification g), Nonempty (clopenFiniteInclusion P.coefficients.l P.extension X.left n ⋙ Scheme.sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing P.coefficients.l P.extension (n + 1)) ≅ clopenFiniteInclusion P.coefficients.l P.extension X.left n ⋙ finiteBiproductFunctor (fun i ↦ finiteDerivedPullback P.coefficients.l P.extension n (j i).left ⋙ Scheme.sfIntrinsicCompactSupport (c.precomp (j i).left) (Padic.coefficientExtensionRing P.coefficients.l P.extension (n + 1))))) ∧ (∀ (c : Compactification g) (i : I), Nonempty (ClopenExceptionalAllCoefficients P X Y (Xi i) g c (j i)))",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
