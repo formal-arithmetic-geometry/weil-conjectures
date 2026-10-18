@@ -1,0 +1,106 @@
+{
+ "id": "lem-cbc-extension-zero-composition-canonical-comparison",
+ "blueprint": {
+  "is": null,
+  "from": "lem-cbc-extension-zero-composition"
+ },
+ "kind": "lemma",
+ "title": "Canonical comparison equals the left-adjoint comparison",
+ "statement": "For every pair of composable open immersions, the inverse of the canonical extension-by-zero composition isomorphism, with the identity and associativity transports made explicit, is the hom component of the generic left-adjoint comparison induced by upperStarComp.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-cbc-extension-zero-composition.md",
+  "place": "Proof steps 1 and 2, mate identification"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-extension-by-zero"
+ ],
+ "proof": [
+  {
+   "text": "Unfold openImmersionLowerShriekComp and the definition of leftAdjointCompIso. Both are mates of the same upperStarComp isomorphism, so their components agree; rewrite the identity and associativity equalities before comparing dependent scheme-indexed functors.",
+   "uses": [
+    "def-weil-pbc-extension-by-zero"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-extension-by-zero"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-cbc-extension-zero-composition.md",
+  "place": "Proof steps 1 and 2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical left adjoint comparison induced by right adjoint natural isomorphism",
+   "results": "service unavailable; generic CompositionIso declarations checked directly",
+   "date": "2026-10-18",
+   "verdict": "no direct etale match; generic categorical lemma used"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "left adjoint comparison from a natural isomorphism of right adjoints",
+   "results": "CategoryTheory.Adjunction.leftAdjointCompIso; no direct etale extension match",
+   "date": "2026-10-18",
+   "verdict": "no direct match; generic lemma used"
+  },
+  {
+   "tool": "loogle",
+   "query": "leftAdjointCompIso",
+   "results": "CategoryTheory.Adjunction.leftAdjointCompIso_id_comp; leftAdjointCompIso_comp_id; leftAdjointCompIso_assoc",
+   "date": "2026-10-18",
+   "verdict": "generic categorical lemmas used"
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointCompIso|openImmersionLowerShriekComp",
+   "results": "Mathlib CategoryTheory.Adjunction.CompositionIso and source Comp definition",
+   "date": "2026-10-18",
+   "verdict": "source comparison unfolds to the same mate construction"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence",
+  "date": "2026-10-18",
+  "group": "E4"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCompCanonical",
+  "file": "lean/Sheaf/AlgebraicGeometry/Etale/OpenImmersionLowerShriekCompCanonical.lean",
+  "declaration": "AlgebraicGeometry.Etale.openImmersionLowerShriekComp_canonical",
+  "statement": "theorem Etale.openImmersionLowerShriekComp_canonical\n    (Λ : Type (u + 1)) [CommRing Λ] :\n    (∀ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]\n      (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)),\n      (openImmersionLowerShriekComp (ModuleCat.{u + 1} Λ) (𝟙 U) j).inv.app F ≫\n        eqToHom (by simp only [Category.id_comp]) =\n      (Adjunction.leftAdjointCompIso\n        (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) (𝟙 U))\n        (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j)\n        (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j)\n        (upperStarComp (ModuleCat.{u + 1} Λ) (𝟙 U) j j\n          (Category.id_comp j).symm).symm).hom.app F) ∧\n    (∀ {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]\n      (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)),\n      (openImmersionLowerShriekComp (ModuleCat.{u + 1} Λ) j (𝟙 X)).inv.app F ≫\n        eqToHom (by simp only [Category.comp_id]) =\n      (Adjunction.leftAdjointCompIso\n        (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j)\n        (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) (𝟙 X))\n        (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j)\n        (upperStarComp (ModuleCat.{u + 1} Λ) j (𝟙 X) j\n          (Category.comp_id j).symm).symm).hom.app F) ∧\n    (∀ {U V W : Scheme.{u}} (j₁ : U ⟶ V) (j₂ : V ⟶ W)\n      [IsOpenImmersion j₁] [IsOpenImmersion j₂]\n      (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)),\n      (openImmersionLowerShriekComp (ModuleCat.{u + 1} Λ) j₁ j₂).inv.app F =\n      (Adjunction.leftAdjointCompIso\n        (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j₁)\n        (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j₂)\n        (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) (j₁ ≫ j₂))\n        (upperStarComp (ModuleCat.{u + 1} Λ) j₁ j₂).symm).hom.app F) ∧\n    (∀ {U V W X : Scheme.{u}} (j₁ : U ⟶ V) (j₂ : V ⟶ W) (j₃ : W ⟶ X)\n      [IsOpenImmersion j₁] [IsOpenImmersion j₂] [IsOpenImmersion j₃]\n      (F : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)),\n      (openImmersionLowerShriekComp (ModuleCat.{u + 1} Λ) (j₁ ≫ j₂) j₃).inv.app F ≫\n        eqToHom (by simp only [Category.assoc]) =\n      (Adjunction.leftAdjointCompIso\n        (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) (j₁ ≫ j₂))\n        (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) j₃)\n        (openImmersionLowerShriekUpperStarAdjunction\n          (ModuleCat.{u + 1} Λ) (j₁ ≫ j₂ ≫ j₃))\n        (upperStarComp (ModuleCat.{u + 1} Λ) (j₁ ≫ j₂) j₃\n          (j₁ ≫ j₂ ≫ j₃) (by simp [Category.assoc])).symm).hom.app F)",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261018T071147-L-1666770",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261018T071147-L-1666770",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

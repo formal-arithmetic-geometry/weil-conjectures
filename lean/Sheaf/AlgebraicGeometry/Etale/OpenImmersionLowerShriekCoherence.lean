@@ -9,6 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Comp
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import Mathlib.CategoryTheory.Adjunction.CompositionIso
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCompCanonical
 
 /-!
 # Coherence of composition of étale extension by zero
@@ -77,6 +78,56 @@ theorem Etale.openImmersionLowerShriekComp_coherence
       (openImmersionLowerShriekComp (ModuleCat.{u + 1} Λ) j₂ j₃).inv.app
           (((j₁)_!open[ModuleCat.{u + 1} Λ]).obj F) ≫
         (openImmersionLowerShriekComp (ModuleCat.{u + 1} Λ) j₁ (j₂ ≫ j₃)).inv.app F) := by
-  sorry
+  let A := ModuleCat.{u + 1} Λ
+  rcases Etale.openImmersionLowerShriekComp_canonical Λ with
+    ⟨hleft, hright, hcomp, hassoc⟩
+  constructor
+  · intro U X j hj F
+    rw [hleft j F]
+    have hu := Etale.upperStarComp_id_left A j
+    have hgen := Adjunction.leftAdjointCompIso_id_comp
+      (openImmersionLowerShriekUpperStarAdjunction A (𝟙 U))
+      (openImmersionLowerShriekUpperStarAdjunction A j)
+      (upperStarComp A (𝟙 U) j j (Category.id_comp j).symm).symm
+      (upperStarId A U) (by
+        have hu' := congrArg Iso.inv hu
+        apply Iso.ext
+        simpa using hu')
+    have happ := NatTrans.congr_app (congrArg Iso.hom hgen) F
+    simpa [Category.id_comp, Functor.id_obj] using happ
+  · constructor
+    · intro U X j hj F
+      rw [hright j F]
+      have hu := Etale.upperStarComp_id_right A j
+      have hgen := Adjunction.leftAdjointCompIso_comp_id
+        (openImmersionLowerShriekUpperStarAdjunction A j)
+        (openImmersionLowerShriekUpperStarAdjunction A (𝟙 X))
+        (upperStarComp A j (𝟙 X) j (Category.comp_id j).symm).symm
+        (upperStarId A X) (by
+          have hu' := congrArg Iso.inv hu
+          apply Iso.ext
+          simpa using hu')
+      have happ := NatTrans.congr_app (congrArg Iso.hom hgen) F
+      simpa [Category.comp_id, Functor.id_obj] using happ
+    · intro U V W X j₁ j₂ j₃ hj₁ hj₂ hj₃ F
+      rw [hcomp j₁ j₂ F, hassoc j₁ j₂ j₃ F,
+        hcomp j₂ j₃ (((j₁)_!open[A]).obj F), hcomp j₁ (j₂ ≫ j₃) F]
+      have hu := Etale.upperStarComp_assoc A j₁ j₂ j₃
+      have hgen := Adjunction.leftAdjointCompIso_assoc
+        (openImmersionLowerShriekUpperStarAdjunction A j₁)
+        (openImmersionLowerShriekUpperStarAdjunction A j₂)
+        (openImmersionLowerShriekUpperStarAdjunction A j₃)
+        (openImmersionLowerShriekUpperStarAdjunction A (j₁ ≫ j₂))
+        (openImmersionLowerShriekUpperStarAdjunction A (j₂ ≫ j₃))
+        (openImmersionLowerShriekUpperStarAdjunction A (j₁ ≫ j₂ ≫ j₃))
+        (upperStarComp A j₁ j₂).symm
+        (upperStarComp A j₂ j₃).symm
+        (upperStarComp A j₁ (j₂ ≫ j₃)).symm
+        (upperStarComp A (j₁ ≫ j₂) j₃ (j₁ ≫ j₂ ≫ j₃) (by simp [Category.assoc])).symm (by
+          have hu' := congrArg Iso.inv hu
+          apply Iso.ext
+          simpa [Category.assoc] using hu'.symm)
+      have happ := NatTrans.congr_app (congrArg Iso.hom hgen) F
+      simpa [Category.assoc, Functor.map_comp] using happ.symm
 
 end AlgebraicGeometry
