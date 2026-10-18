@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-free-complex-residue-tensor-exact",
+ "kind": "statement",
+ "title": "Residue exactness of finite free complexes is universally tensor exact in one degree",
+ "statement": "Let $R$ be a commutative ring and $P^\\bullet$ a cochain complex of $R$-modules [def-weil-abstract-derived-category], with every $P^j$ finite free [def-weil-pbc-free-module]. Fix an integer $i$. Assume $H^i(P^\\bullet\\otimes_R R/\\mathfrak m)=0$ for every maximal ideal $\\mathfrak m$ of $R$, where tensor is ordinary termwise tensor [def-weil-pbc-module-tensor-product]. Then $H^i(P^\\bullet\\otimes_R M)=0$ for every $R$-module $M$. No boundedness or flatness hypothesis on $M$ is imposed.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 068U, lemma-cut-complex-in-two, direct matrix proof; Tag 068V, lemma-check-perfect-pointwise, implication (3) to (1)"
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "For every maximal ideal m, restrict ordinary extension of scalars back to R and use ModuleCat.extendScalarsCompRestrictScalarsIso to identify its cochain complex with termwise tensor by R/m. The exact faithful restriction functor detects exactness. Regard R/m as a field, and tensor the exact short complex with Frac(R/m), which is a free and hence flat R/m-module. Reassociate scalar extension using ModuleCat.extendScalarsComp. This gives precisely the residue hypothesis of the cancellation theorem. All comparisons are explicit natural isomorphisms mapped to complexes.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-weil-pbc-free-complex-residue-degree-cancellation] at degree i and each maximal m. Obtain f outside m and a homotopy equivalence between P_f and Q with Q.X i zero. The strong monoidal scalar-extension functor gives the explicit cochain isomorphism (P tensor M)_f isomorphic to P_f tensor M_f (Functor.Monoidal.commTensorRight). Map the homotopy equivalence by tensorRight M_f and apply HomotopyEquiv.toHomologyIso. The tensor of the zero middle object is zero, so (P tensor M)_f is exact at i. This is valid for every M, without flatness.",
+   "uses": [
+    "lem-weil-pbc-free-complex-residue-degree-cancellation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Let s be the set of f for which (P tensor M)_f is exact at i. Its span is top: otherwise [lem-weil-pbc-proper-ideal-contained-in-maximal] gives a maximal m containing the span, but the f constructed for that m belongs to s and is outside m. This contradiction also handles the zero ring without choosing a maximal ideal.",
+   "uses": [
+    "lem-weil-pbc-proper-ideal-contained-in-maximal"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the proved Mathlib exact_of_isLocalized_span to the three linear maps of (P tensor M).sc i. For each f in s use the concrete localization module R_f tensor N and map x to 1 tensor x. IsLocalization.tensorProduct_isLocalizedModule supplies its universal property. IsLocalizedModule.linearMap_ext and map_apply identify the localized differential with tensorLeft R_f of the differential. Restrict scalar extension and use the explicit identity linear isomorphism from its induced scalar action to the canonical localization action; the symmetry of tensor identifies it with tensorLeft R_f. Local exactness therefore gives global exactness. Finally ExactAt.isZero_homology proves the conclusion. These are already proved generic Mathlib tools; no new unproved localization fact is used.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-free-complex-residue-degree-cancellation",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 068U, lemma-cut-complex-in-two, direct matrix proof; Tag 068V, lemma-check-perfect-pointwise, implication (3) to (1)"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "residue.*[Ee]xact|[Ee]xact.*residue|tensor.*[Ee]xact",
+   "date": "2026-10-18",
+   "results": "25 hits: Mathlib/Algebra/Module/SpanRankOperations.lean, Mathlib/NumberTheory/LSeries/RiemannZeta.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/NumberTheory/LSeries/PrimesInAP.lean, Mathlib/NumberTheory/LSeries/PrimesInAP.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaEven.lean, Mathlib/AlgebraicGeometry/Fiber.lean",
+   "verdict": "No duplicate single-degree residue criterion; general flat tensor exactness and faithfully flat descent tools only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a finite free cochain complex, exactness in a fixed degree after tensoring with every maximal residue field implies exactness in that degree after tensoring with every module",
+   "date": "2026-10-18",
+   "results": "8 hits: Module.Flat.lTensor_shortComplex_exact, Module.Flat.lTensor_exact, Module.Flat.rTensor_shortComplex_exact, Module.FaithfullyFlat.iff_exact_iff_rTensor_exact, lTensor_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.rTensor_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact",
+   "verdict": "No duplicate single-degree residue criterion; general flat tensor exactness and faithfully flat descent tools only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exactness in one degree of all residue fibres of a finite free complex implies universal tensor exactness in that degree",
+   "date": "2026-10-18",
+   "results": "8 hits: rTensor_exact, lTensor_injective_of_exact_of_exact_of_rTensor_injective, Module.Flat.iff_rTensor_exact', Module.FaithfullyFlat.rTensor_exact_iff_exact, Module.Flat.iff_rTensor_exact, Module.FaithfullyFlat.iff_exact_iff_rTensor_exact, lTensor_exact, Module.Flat.rTensor_shortComplex_exact",
+   "verdict": "No duplicate single-degree residue criterion; general flat tensor exactness and faithfully flat descent tools only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.PseudoCoherentMaximalFibrePerfect",
+  "date": "2026-10-18",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof, first sentence: choose an integral lattice; single-degree residue cancellation detects its uniform Tor bounds in the algebraic perfectness test",
+   "via": [
+    "lem-weil-pbc-pseudocoherent-maximal-fibre-perfect",
+    "lem-weil-pbc-rlim-perfect-complete",
+    "lem-weil-pbc-residue-lisse-perfect-lift",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.FreeComplexResidueTensorExact",
+  "file": "lean/Sheaf/Algebra/Homology/FreeComplexResidueTensorExact.lean",
+  "declaration": "CochainComplex.isZero_homology_tensor_of_residue",
+  "statement": "theorem isZero_homology_tensor_of_residue\n    {R : Type u} [CommRing R] (P : CochainComplex (ModuleCat.{u} R) ℤ)\n    (hfree : ∀ j : ℤ, Module.Free R (P.X j))\n    (hfinite : ∀ j : ℤ, Module.Finite R (P.X j)) (i : ℤ)\n    (hresidue : ∀ (m : Ideal R), m.IsMaximal → IsZero\n      ((((tensorRight (ModuleCat.of R (R ⧸ m))).mapHomologicalComplex (.up ℤ)).obj P).homology\n        i)) (M : ModuleCat.{u} R) :\n    IsZero ((((tensorRight M).mapHomologicalComplex (.up ℤ)).obj P).homology i)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261018T062707-L-633788",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261018T062707-L-633788",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

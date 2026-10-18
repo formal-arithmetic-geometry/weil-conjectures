@@ -15938,3 +15938,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:27 L: merged deliver/B9/Sheaf.AlgebraicGeometry.EtaleCompactSupportBaseChangeQcqs (stage 3; reviewer PASS; first push; landing 20261018T062706-L-633053 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:27 L: merged deliver/B9/Sheaf.AlgebraicGeometry.NagataMorphismEqEventually (stage 3; reviewer PASS; first push; landing 20261018T062706-L-633262 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:27 L: merged deliver/C1/Sheaf.AlgebraicGeometry.AffineSupportVanishing (stage 3; reviewer PASS; first push; landing 20261018T062707-L-633556 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:27 L: merged deliver/C1/Sheaf.RingTheory.PseudoCoherentMaximalFibrePerfect (stage 3; reviewer PASS; first push; landing 20261018T062707-L-633788 (interface); batch 20261018T062645; modules 2; new nodes 1; change records: coord/changes/C1-maximal-fibre-import-pruning.md)
