@@ -46,7 +46,7 @@
    }
   },
   {
-   "text": "Set $V=D/\\operatorname{im}(1-\\sigma)$, an abelian-group quotient, with quotient map $\\pi$. The maps $v_n=\\pi e_n:A_n\\to V$ satisfy $v_{n+1}t_n=v_n$, since $e_nf-e_{n+1}t_n(f)=(1-\\sigma)e_nf$. Induction extends this successor relation to every transition $n\\leq m$. This cocone is colimiting [def-weil-pbc-category-colimit]: for any compatible family $c_n:A_n\\to G$ of homomorphisms into an abelian group, define $c:D\\to G$ by $c(\\sum_ne_nf_n)=\\sum_nc_n(f_n)$. Compatibility says $c(1-\\sigma)e_n=0$ on every summand, so $c$ kills the image of $1-\\sigma$. It therefore factors through the quotient by $\\bar c(\\pi d)=c(d)$. This is well defined because representatives differ by an element of that image. Factorization and uniqueness follow because $\\pi$ is surjective and every $d$ is a finite sum of summand elements. Thus $V$ realizes $\\varinjlim_n A_n$ with its specified transition maps.",
+   "text": "Write $F_n=\\operatorname{Hom}(K,X_n)$ and $L=\\varinjlim_n F_n$. The equation $p(1-s)=0$ gives $p\\iota_{n+1}u_n=p\\iota_n$. Induction on $n\\leq m$ extends this successor compatibility to every arrow of the indexing category. Thus $f\\mapsto p\\iota_n f$ is a cocone and induces $\\phi:L\\to\\operatorname{Hom}(K,H)$ by [def-weil-pbc-category-colimit]. Let $\\ell:D\\to L$ be the sum of the canonical colimit maps and put $g=\\ell\\beta^{-1}:\\operatorname{Hom}(K,B)\\to L$. Then $g(\\iota_n f)=[f]$. On a summand, $g((1-s)\\iota_n f)=[f]-[u_nf]=0$ by colimit compatibility. Direct-sum induction and surjectivity of $\\beta$ give $g\\circ(1-s)_*=0$. By exactness from Step 3, $\\ker p_*\\subseteq\\ker g$. Therefore the surjective homomorphism $p_*$ admits a unique descended homomorphism $\\psi:\\operatorname{Hom}(K,H)\\to L$ with $\\psi(p b)=g(b)$. Mathlib's AddMonoidHom.liftOfSurjective implements this factorization; its uniqueness determines the map independently of the chosen preimage.",
    "uses": [
     "def-weil-pbc-category-colimit"
    ],
@@ -57,7 +57,7 @@
    }
   },
   {
-   "text": "Since $\\ker\\gamma=\\operatorname{im}(1-\\sigma)$, the formula $\\bar\\gamma(\\pi d)=\\gamma(d)$ defines an injective homomorphism $V\\to\\operatorname{Hom}(K,H)$: if its value is zero, $d$ lies in the subgroup by which we quotient. It is surjective by Step 3. On each stage it satisfies\n$$\\bar\\gamma(v_n(f))=\\gamma(e_nf)=p\\iota_nf.$$\nStep 4 and the uniqueness of the colimit map [def-weil-pbc-category-colimit] identify this bijection with exactly the canonical map in the statement. Both comparison hypotheses were used only for the families $X_n$ and $X_n[1]$, in Steps 1 and 2; no other coproduct or compactness assumption enters.",
+   "text": "For each stage element, $\\psi\\phi([f])=\\psi(p\\iota_nf)=g(\\iota_nf)=[f]$. The colimit hom-extensionality principle of [def-weil-pbc-category-colimit] gives $\\psi\\phi=1_L$, so $\\phi$ is injective. Conversely $\\phi g\\beta(e_nf)=p\\iota_nf=p_*\\beta(e_nf)$ on every summand; direct-sum induction and surjectivity of $\\beta$ give $\\phi g=p_*$. Since $p_*$ is surjective, every $h=pb$ equals $\\phi(gb)$, so $\\phi$ is surjective. Its stage formula is the defining formula for the colimit descendant. This is the quotient argument of the source expressed through the universal factorization of a surjective group homomorphism, without introducing an explicit quotient object. No additional comparison or compactness assumption is used.",
    "uses": [
     "def-weil-pbc-category-colimit"
    ],
@@ -76,7 +76,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tags 0CRK (lemma-cohomology-of-hocolim), 094A (lemma-commutes-with-countable-sums) and 093W (lemma-compute-colimit). Sequence-relative adaptation: the two supplied comparison isomorphisms replace global coproduct preservation, and the elementary group calculations are written explicitly."
+  "place": "Tags 0CRK (lemma-cohomology-of-hocolim), 094A (lemma-commutes-with-countable-sums) and 093W (lemma-compute-colimit). Sequence-relative adaptation: the two supplied comparison isomorphisms replace global coproduct preservation, and the elementary group calculations are written explicitly. Lean proof by A3 uses the equivalent universal factorization through the surjective p_* in Steps 4–5, rather than constructing an explicit quotient."
  },
  "mathlib_searches": [
   {
@@ -220,5 +220,15 @@
   "group": "Q156",
   "result": "pass",
   "note": "Statement matches node lem-weil-pbc-sequence-relative-hom-telescope clause by clause: Pretriangulated+IsTriangulated with independent u/v universes; X : ℕ ⥤ C with u_n = X.map (homOfLE (Nat.le_succ n)); IsColimit (Cofan.mk B iota) assumes only this coproduct; hs; hT = Triangle.mk (𝟙 B - s) p q distinguished; hcomp/hcompShift are DirectSum.toAddMonoid of rightComp K (iota n) and of (iota n)⟦1⟧' (direction checked by rfl); conclusion ∃ group hom from colimit (X ⋙ preadditiveCoyoneda.obj (op K)) with stage formula f ≫ iota n ≫ p (uniquely determines the canonical map) and Bijective. No extra assumptions; edge cases K=0, X_n=0, u_n=0/id, non-injective u_n, n=0 fine. Agrees with Stacks 093W/0CRK/094A and the citer lisse-e-constructible-integral-lattice step 3. No duplicate (compact_hom_hocolim, brownTelescopeAssembly, compactGenerator_telescope_isIso differ). lean.statement verbatim; node differs only in lean. No definitions, sorry only, source/blueprint docstrings with 5 proof steps, Mathlib imports only. Worker report real; second-reading section is the standard 2026-10-17 direct-delivery note, accepted. nt_compile.py --json on the snapshot file: EXIT 0, no errors or warnings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261018T144358-L-3498171",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
