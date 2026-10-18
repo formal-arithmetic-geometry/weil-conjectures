@@ -116,5 +116,30 @@
    "missing": [],
    "open": []
   }
+ },
+ "lean": {
+  "module": "WeilConjectures.Mathlib.NumberTheory.LegendreSymbol.AddCharacter",
+  "declaration": "AddChar.compTrace",
+  "declarations": [
+   "AddChar.compTrace",
+   "AddChar.compTrace_ne_one",
+   "AddChar.isPrimitive_compTrace",
+   "AddChar.compTrace_compTrace",
+   "AddChar.FiniteField.primitiveChar"
+  ],
+  "statement": "noncomputable def compTrace (ψ : AddChar K R) : AddChar L R",
+  "branch": "slopmaster2",
+  "by": "Q14",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "This sketch had no lean record. The published source module defines psi_n by trace composition, proves nontriviality/primitive scalings and transitivity, and imports Mathlib primitiveChar for the cyclotomic prime-field construction. The full source was read with scompile.py --source because its older local file is absent. No character is redefined."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e83b6cb66",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Read the item, the 3 stmt_deps, the dependency module and all declarations used (LocalFrobeniusTrace, SfWeilSheafComplex, the common-stage pair category, FiniteFieldFiber, FourierSetting, FiniteField.fourierTransform, AddChar.compTrace and primitiveChar), the old slopmaster2 records and the citers. Node diffs: only lean records changed; the statements are verbatim in the files. Item: the classical transform reuses FiniteField.fourierTransform on the canonical extensionSubfield (psi_n = psi∘Tr); the trace clause is the repaired def-fd-trace-function weilTraceFunction. That is a uniquely specified scalar equal to the existing localExtensionTrace on every finite-stage Weil model; well-definedness is a named sorry theorem with a proof docstring (the same pattern as the landed *_existsUnique), not a hollow def. The §1(B) repair is justified (the old WeilSheaf.traceFunction is sheaves-only, old framework; no Lean-recorded citers). sk-def-char reuses the existing compTrace/primitiveChar, and sk-def-fourier-set reuses FourierSetting (same text as def-fourier-set). No added hypotheses; universes u and v are independent; edge cases (empty X0, zero complex, shift, n=1, n=0 excluded by convention, p=2) are fine. nt_compile.py --json of both files: rc 0, no errors or warnings (sanity check with an injected error confirmed real elaboration). Minor: two unneeded imports; the two recorded Qbar pair categories are pre-existing."
  }
 }

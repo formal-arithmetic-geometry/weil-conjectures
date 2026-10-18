@@ -103,5 +103,28 @@
   "group": "Q116",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-efc76a514 (reviewer sub-agent of L); spot-checked: I read the item in full: it is a definition only, with no new nodes. Its statement is word for word the current blueprint (main-20261015 sk-def-trace/_section.md, order 3032): the trace-function clause t_K(x)=Tr(F_x^(n)|K_xbar)=sum_j (-1)^j Tr(F_x^(n)|H^j(K)_xbar) for a Weil complex at an F_{q^n}-point, plus the classical transform fhat(y)=sum_x f(x) psi_n(xy). No hypothesis was added or dropped. Its three citations each say what the item takes from them: def-fd-trace-function (the blueprint child, order 3033) states the trace clause exactly; sk-def-char defines psi_n = psi∘Tr; sk-def-fourier-set fixes k_0=F_q, E, and separated finite-type schemes. I tested small cases: with q=2, n=1, the transform of delta_0 is the constant 1 and the transform of the constant 1 is 2·delta_0; the zero complex has trace 0; a shift flips the sign; n=1 is the first Frobenius iterate. A search of dag/nodes finds no other definition of the classical transform, and the item does not depend on itself. lean_audit closed_part is right: FiniteField.fourierTransform and WeilComplex.traceFunction each cover only one clause, and LAdicWeilSheaf.traceFunction is missing. One cosmetic point: the report's Classical.lean line numbers (50–56) differ from the current checkout (41–42). Batch-5 flag: the citation adds only def-fd-trace-function and def-weil-local-frobenius-trace to the item's closure; the lem-pod nodes were already reached through sk-def-fourier-set. def-weil-local-frobenius-trace is a general definition of the local Frobenius and its alternating trace. The same notion appears in the statement of nt-assume-trace-formula, and it is not a step in the proof of the trace formula or of Poincaré duality, so it is outside the assumed statements and is not a reason to return. No fixes, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FourierTraceFunctions",
+  "declaration": "WeilConjectures.classicalFiniteFieldFourierTransform",
+  "declarations": [
+   "WeilConjectures.fourierTraceExtensionFintype",
+   "WeilConjectures.classicalFiniteFieldFourierTransform"
+  ],
+  "file": "lean/Sheaf/Paper/FourierTraceFunctions.lean",
+  "statement": "def classicalFiniteFieldFourierTransform (F : FourierSetting.{u}) (ψ : AddChar F.field.k₀ F.coefficients.Qbar) (n : ℕ) (hn : 1 ≤ n) (f : F.field.extensionSubfield n hn → F.coefficients.Qbar) (y : F.field.extensionSubfield n hn) : F.coefficients.Qbar",
+  "branch": "newtargets-dag",
+  "by": "Q14",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The trace clause is the public dependency WeilConjectures.weilTraceFunction (def-fd-trace-function), repaired in this delivery. The classical clause specializes existing FiniteField.fourierTransform to the canonical extensionSubfield; no second formula is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e83b6cb66",
+  "group": "Q14",
+  "result": "pass",
+  "note": "Read the item, the 3 stmt_deps, the dependency module and all declarations used (LocalFrobeniusTrace, SfWeilSheafComplex, the common-stage pair category, FiniteFieldFiber, FourierSetting, FiniteField.fourierTransform, AddChar.compTrace and primitiveChar), the old slopmaster2 records and the citers. Node diffs: only lean records changed; the statements are verbatim in the files. Item: the classical transform reuses FiniteField.fourierTransform on the canonical extensionSubfield (psi_n = psi∘Tr); the trace clause is the repaired def-fd-trace-function weilTraceFunction. That is a uniquely specified scalar equal to the existing localExtensionTrace on every finite-stage Weil model; well-definedness is a named sorry theorem with a proof docstring (the same pattern as the landed *_existsUnique), not a hollow def. The §1(B) repair is justified (the old WeilSheaf.traceFunction is sheaves-only, old framework; no Lean-recorded citers). sk-def-char reuses the existing compTrace/primitiveChar, and sk-def-fourier-set reuses FourierSetting (same text as def-fourier-set). No added hypotheses; universes u and v are independent; edge cases (empty X0, zero complex, shift, n=1, n=0 excluded by convention, p=2) are fine. nt_compile.py --json of both files: rc 0, no errors or warnings (sanity check with an injected error confirmed real elaboration). Minor: two unneeded imports; the two recorded Qbar pair categories are pre-existing."
  }
 }

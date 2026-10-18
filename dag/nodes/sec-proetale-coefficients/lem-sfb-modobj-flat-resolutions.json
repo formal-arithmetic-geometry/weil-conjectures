@@ -201,5 +201,23 @@
    "missing": [],
    "open": []
   }
+ },
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian",
+  "declaration": "CategoryTheory.Mod.hasFunctorialFlatResolution",
+  "statement": "instance hasFunctorialFlatResolution [Abelian.HasFunctorialFlatResolution C] :\n    Abelian.HasFunctorialFlatResolution (Mod C R) :=",
+  "branch": "slopmaster2",
+  "by": "NF",
+  "date": "2026-10-18",
+  "note": "The current published source, read with scompile.py --source, defines this exact instance in namespace CategoryTheory.Mod. Its closed symmetric monoidal Grothendieck abelian assumptions and the free-module resolution construction are documented in the declaration docstring; no second declaration is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c0677fd96",
+  "group": "NF",
+  "result": "pass",
+  "note": "Existing match: the item's lean field is set to CategoryTheory.Mod.hasFunctorialFlatResolution in WeilConjectures.CategoryTheory.ModuleObjects.GrothendieckAbelian; the signature is verbatim the same in the side clone and the live source; only the lean field differs from the base node. Hypotheses are one-to-one: MonoidalClosed, Symmetric, Abelian with IsGrothendieckAbelian.{v}, MonoidalPreadditive, MonObj with IsCommMonObj, plus the HasFunctorialFlatResolution C hypothesis. flat means exactness of tensorLeft and tensorRight; HasFunctorialFlatResolution is a Mathlib LeftResolution with epi components; the Mod C R tensor is the relative one (Mod.monoidalCategory, Mod.symmetricCategory). The construction clause is in the docstrings, and the live proof uses free R and the counit, i.e. gamma_M after R tensor pi_M. nt_compile check file is clean in 1.5 s; the axioms are only propext, Classical.choice and Quot.sound (no sorry in live); the example with the node's hypotheses gets the instance by inferInstance. The report has real Worker report and Second reading sections. No findings."
  }
 }

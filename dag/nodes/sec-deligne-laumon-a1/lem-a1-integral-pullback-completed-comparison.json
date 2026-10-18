@@ -29,7 +29,8 @@
   "def-weil-derived-complete",
   "def-weil-pbc-intrinsic-completion",
   "prop-weil-pbc-proetale-constant-exact",
-  "lem-cbc-completed-pullback-triangles"
+  "lem-cbc-completed-pullback-triangles",
+  "def-a1-integral-completed-pullback-interfaces"
  ],
  "proof": [
   {
@@ -392,5 +393,54 @@
   "group": "Q33",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q33-7ae7caafd (reviewer sub-agent of L); spot-checked: The theorem and route are mathematically correct, with hypotheses, coefficient categories, base-change map, projections, shifts, sources, and edge cases checked. Two steps are misclassified as elementary: step 10 uses normalized Roos projection and derived-limit functoriality; step 11 uses explicit cone-sign and K-injective shift compatibility. Both are repaired by setting elementary=false in the full corrected DAG JSON at fixes/dag/nodes/sec-deligne-laumon-a1/lem-a1-integral-pullback-completed-comparison.json. Review written to review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralPullbackCompletedComparison",
+  "declaration": "WeilConjectures.IntegralCompletedComparison.integralPullback_completedComparison",
+  "declarations": [
+   "WeilConjectures.IntegralCompletedComparison.modules",
+   "WeilConjectures.IntegralCompletedComparison.complexes",
+   "WeilConjectures.IntegralCompletedComparison.derived",
+   "WeilConjectures.IntegralCompletedComparison.derived_commShift",
+   "WeilConjectures.IntegralCompletedComparison.products",
+   "WeilConjectures.IntegralCompletedComparison.complexProducts",
+   "WeilConjectures.IntegralCompletedComparison.finiteIntegral",
+   "WeilConjectures.IntegralCompletedComparison.finiteIntegral_additive",
+   "WeilConjectures.IntegralCompletedComparison.finiteCompleted",
+   "WeilConjectures.IntegralCompletedComparison.finiteCompleted_additive",
+   "WeilConjectures.IntegralCompletedComparison.finiteComplexComparison",
+   "WeilConjectures.IntegralCompletedComparison.FiniteNormalization",
+   "WeilConjectures.IntegralCompletedComparison.integralComputation",
+   "WeilConjectures.IntegralCompletedComparison.integralProjection",
+   "WeilConjectures.IntegralCompletedComparison.towerIso",
+   "WeilConjectures.IntegralCompletedComparison.completedProjection",
+   "WeilConjectures.IntegralCompletedComparison.finiteComputation",
+   "WeilConjectures.IntegralCompletedComparison.levelShift",
+   "WeilConjectures.IntegralCompletedComparison.productShift",
+   "WeilConjectures.IntegralCompletedComparison.roosEnd",
+   "WeilConjectures.IntegralCompletedComparison.ShiftCoordinates",
+   "WeilConjectures.IntegralCompletedComparison.ShiftDescent",
+   "WeilConjectures.IntegralCompletedComparison.integral",
+   "WeilConjectures.IntegralCompletedComparison.completed",
+   "WeilConjectures.IntegralCompletedComparison.Complete",
+   "WeilConjectures.IntegralCompletedComparison.Comparison",
+   "WeilConjectures.IntegralCompletedComparison.integralPullback_completedComparison"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralPullbackCompletedComparison.lean",
+  "statement": "theorem integralPullback_completedComparison (g : X ⟶ Y) (_hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (_hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) : Nonempty (Comparison l E g)",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Comparison of the specified integral Roos and strict-tower pullbacks, using the existing projection-normalized completed-ring identification. The clause package includes intrinsic completeness, finite generator normalization, naturality, defining projection equations on every K-flat representative, and all integer shifts with explicit signed Roos coordinates. The coefficient transport and normalized finite evaluation helpers (existing declarations in Sheaf.Paper.SfImmersionCompletedPullbackComparison and Sheaf.Paper.CompletedPullbackReduction) are cited through the new definition node def-a1-integral-completed-pullback-interfaces; no theorem node is added to stmt_deps.",
+  "fixed_by": "NT-stage2-cc-6b792bf6d"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6b792bf6d",
+  "group": "NY",
+  "result": "fix",
+  "note": "Statement checked clause by clause against the node and Stacks 099N(5); correct. Hypotheses: ell invertible on X and Y; K complete in the recorded IntegralOnSlice.IsComplete sense. Conclusions: intrinsic completeness; gamma natural iso on complete objects; projection clause over all good K-flat representatives with generator-normalized finite comparison and canonical finiteComputation; shifts pinned by ShiftCoordinates and ShiftDescent (integralDerivedPullback has no CommShift instance); completed shift checked by rfl to be pbcActualCompletedPullShift composed with derived_commShift. The common universe for E and the schemes comes from the recorded pbcIntegralDatum and is documented. The previous return is resolved: the item's stmt_deps add only the new existing:true definition node, whose recorded declarations all exist. Gates pass: sorry only in the theorem proof, no hollow definitions, docstrings with source and blueprint and the 11 proof steps, lean.statement verbatim, all 27 declarations present, no live write, no global build, no pro-etale substitute. nt_compile clean in 31.8 s, plus a check file for axioms, universes and shift instances. Fixes: (1) the item lean.note still described the removed theorem-node dependencies; rewritten in the lean-record.json, record otherwise unchanged; (2) the new node's source.document named a directory; now the blueprint file lem-a1-finite-map-purity.proof.md with the place and 099N(5)."
  }
 }
