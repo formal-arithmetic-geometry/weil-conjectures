@@ -17,9 +17,163 @@
   "def-trf-geometric-morphism",
   "lem-weil-pbc-profinite-point-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "An affine scheme is quasi-compact and quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]; hence its underlying space is spectral by [lem-weil-pbc-qcqs-scheme-spectral]. Apply [lem-pe-spectral-components-profinite] to obtain the required profinite space $S$. The same argument applies to every affine test scheme $W$ used below, so $\\pi_0(W)$ is profinite as well. All partitions, diagrams and test spaces are taken in the universes of the statement.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "lem-pe-spectral-components-profinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Paragraph preceding (4.1); Stacks properties.tex Tag 094L, lemma-quasi-compact-quasi-separated-spectral; topology.tex Tag 0906, lemma-spectral-pi0"
+   }
+  },
+  {
+   "text": "Write $E=S^{\\prime}$ and $f:E\\to S$. Apply [lem-sfb-finite-quotient-fiber-product] to the profinite span $E\\xrightarrow f S\\xleftarrow{\\mathrm{id}}S$. Use its triples of compatible finite clopen partitions as index set $I$, and denote the finite block sets by $A_i,C_i,D_i$, with maps $A_i\\to C_i\\leftarrow D_i$. Set $E_i=S\\times_{C_i}A_i$. This is a finite disjoint union of clopen subsets of $S$, and its map to $S$ is the pullback of the finite-set map $A_i\\to C_i$ along the quotient $S\\to C_i$. Simultaneous intersections of partitions give a common refinement of any two indices; the coarsest compatible partitions give an index, including when a source is empty. Refinement defines the transition maps of a small cofiltered system over $S$.",
+   "uses": [
+    "lem-sfb-finite-quotient-fiber-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 2.2.8 proof, relative presentations; Lemma 2.1.13; explicit compatible finite partitions as in lem-sfb-finite-quotient-fiber-product"
+   }
+  },
+  {
+   "text": "The preceding system has limit $E$ over $S$. Indeed a compatible tuple in the $E_i$ has one common $s\\in S$ and compatible blocks $a_i\\in A_i$ above its blocks in $C_i$. Pairing $a_i$ with the block of $s$ in $D_i$ gives a compatible tuple in $A_i\\times_{C_i}D_i$. The homeomorphism in [lem-sfb-finite-quotient-fiber-product] gives a unique pair $(e,s)$ with $f(e)=s$. Its second coordinate is indeed $s$: applying the same cited homeomorphism to the span $(\\mathrm{id}_S,\\mathrm{id}_S)$ shows that all finite clopen block coordinates determine a point of $S$. Conversely such a pair gives exactly those tuples. These constructions are continuous: the maps into each finite coordinate are the partition projections, and the inverse is the cited homeomorphism followed by projection to $E$. They are inverse by their coordinates. Thus the required type of presentation exists; the empty space gives the empty limit too.",
+   "uses": [
+    "lem-sfb-finite-quotient-fiber-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 2.2.8 proof; the compatible-partition limit homeomorphism applied to the span (f,id)"
+   }
+  },
+  {
+   "text": "Use [lem-zl-affine-component-site-projection] for this affine $T$. For every profinite $E\\to S$ it supplies an affine ind-etale $T$-scheme $V(E)$ with locally ringed space $|T|\\times_S E$ and structure sheaf $r^{-1}\\mathcal O_T$, where $r$ is the first projection. It also supplies the functor on maps of profinite spaces over $S$. By [lem-weil-pbc-ind-etale-stability] each $V(E)\\to T$ is weakly etale. For $E_i=S\\times_{C_i}A_i$, its ringed-space description is precisely the disjoint union, indexed by $a\\in A_i$, of the clopen subschemes of $T$ above the block in $C_i$ containing the image of $a$, with their restricted structure sheaves. Repeated blocks give repeated copies. Both source and target of every transition map are affine, so [lem-weil-pbc-morphism-affine-schemes-affine] makes each transition affine.",
+   "uses": [
+    "lem-zl-affine-component-site-projection",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-weil-pbc-morphism-affine-schemes-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Construction before (4.1), with Bhatt-Scholze Lemma 2.2.8 (more precise statement); Stacks proetale.tex Tag 097N, lemma-ind-etale-implies; morphisms.tex Tag 01SH, lemma-morphism-affines-affine"
+   }
+  },
+  {
+   "text": "Unpack the ringed-space description from [lem-zl-affine-component-site-projection]. For any affine $W\\to T$, a continuous map $g:\\pi_0(W)\\to E$ over $S$ determines the underlying map $w\\mapsto(f_W(w),g([w]))$ to $V(E)$. The sheaf map is the map induced by $f_W^{-1}\\mathcal O_T\\to\\mathcal O_W$; it is local on stalks because the stalk of $r^{-1}\\mathcal O_T$ at $(t,e)$ is $\\mathcal O_{T,t}$. It is the unique sheaf map compatible with $W\\to T$, by the inverse-image adjunction. Conversely a $T$-morphism to $V(E)$ gives a continuous map to $E$, constant on each connected component since $E$ is totally disconnected; the quotient topology makes the descended map continuous. These operations are inverse and natural. Thus $\\operatorname{Hom}_T(W,V(E))=\\operatorname{Hom}_S(\\pi_0(W),E)$. This is only the universal-property calculation for the displayed pullback ringed space.",
+   "uses": [
+    "lem-zl-affine-component-site-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "More precise statement following Lemma 2.2.8: explicit verification of the right-adjoint universal property from the locally ringed-space description"
+   }
+  },
+  {
+   "text": "Now take any small cofiltered presentation $E=\\varprojlim_i E_i$ of the kind in the statement. For each affine $W\\to T$, step 5 and the given profinite limit yield $\\operatorname{Hom}_T(W,V(E))=\\operatorname{Hom}_S(\\pi_0(W),E)=\\varprojlim_i\\operatorname{Hom}_S(\\pi_0(W),E_i)=\\varprojlim_i\\operatorname{Hom}_T(W,V(E_i))$. Hence every cone from an affine $W$ has a unique lift to $V(E)$. For a general $T$-scheme, make these lifts on an affine open cover; on overlaps they agree after restriction to affine opens by uniqueness, so they glue to a unique scheme morphism. Therefore $V(E)$, with the displayed projections, is the limit in $T$-schemes. This proves existence and affineness of the limit required in the statement, with affine transitions as checked in step 4, and weak etaleness from that step. The argument uses that $\\pi_0(W)$ is profinite, established in step 1; no smallness assumption beyond the stipulated universes is added.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 2.2.8, limit preservation; the displayed Hom calculation and gluing verify the inverse-limit construction before Hemo-Richarz-Scholbach (4.1)"
+   }
+  },
+  {
+   "text": "The unique isomorphism between any two limits compatible with their projections identifies each presentation with $V(E)$. Under these identifications a map $E\\to F$ acts by the map $V(E)\\to V(F)$ from step 4, characterized in step 5 by postcomposition on the continuous-map coordinate. Thus the identifications are canonical and natural, and identity and composition laws follow either from that coordinate or from uniqueness. This proves presentation independence and functoriality without making a choice of presentation part of the resulting functor.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Paragraph preceding (4.1): identification of the presentation construction with the canonical component pullback"
+   }
+  },
+  {
+   "text": "The functor now obtained is, by steps 4-7, the functor of [lem-zl-affine-component-site-projection]. Its statement gives finite-limit preservation, preservation of the stated covering families and the induced geometric morphism $\\pi_T$ on sheaves of sets. These are precisely the relative profinite and small pro-etale sites of the item; in particular the coverings on the target scheme site are its pro-etale coverings, not merely surjective maps of spaces. The affine and universe hypotheses are exactly those already checked.",
+   "uses": [
+    "lem-zl-affine-component-site-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Paragraph preceding (4.1); Bhatt-Scholze paragraph preceding Lemma 4.2.13"
+   }
+  },
+  {
+   "text": "For a finite family $(E_a\\to S)_a$, the space $|T|\\times_S(\\coprod_a E_a)$ is the disjoint union of the spaces $|T|\\times_S E_a$. The inverse-image structure sheaf restricts on its $a$-th open-and-closed component to the inverse-image structure sheaf defining $V(E_a)$. Consequently the ringed spaces, hence the schemes and their inclusion maps, identify as $V(\\coprod_a E_a)=\\coprod_a V(E_a)$. This includes the empty family, for which both sides are the empty scheme. Together with step 8 it proves all the preservation assertions.",
+   "uses": [
+    "lem-zl-affine-component-site-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Locally ringed-space description following Lemma 2.2.8, applied to finite disjoint unions"
+   }
+  },
+  {
+   "text": "For an absolute profinite space $K$, the test scheme $T[K]$ is the inverse limit of the finite disjoint unions $\\coprod_{K_j}T$ for finite quotients $K_j$ of $K$, by [lem-weil-pbc-profinite-test-object-functor]. Apply the universal-property calculation in steps 5-6 to the profinite limit $S\\times K=\\varprojlim_j(S\\times K_j)$ over $S$. Here $V(S\\times K_j)=\\coprod_{K_j}T$ by the finite description in step 4. Thus it gives a canonical isomorphism $V(S\\times K)\\cong T[K]$. On maps $K\\to L$ this isomorphism commutes with precomposition on the continuous-map coordinate of step 5, so it is natural, independently of the finite quotients used.",
+   "uses": [
+    "lem-weil-pbc-profinite-test-object-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Factorization sentence immediately after (4.1); absolute point test objects in Section 3; Bhatt-Scholze Lemma 2.2.8"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-slice-subtopos-site-presentation] to the profinite site and its object $S$. Its localized site is exactly the site of profinite spaces over $S$ with the stated finite jointly surjective coverings. It gives $(q_{S,*}H)(K)=H(S\\times K\\to S)$. On the other hand [lem-weil-pbc-profinite-point-pullback] defines $p_T$ as the composite of the structure-morphism inverse image with the absolute point inverse image. The set-sheaf direct image in [def-weil-proetale-inverse-image] is evaluation on base change. Together with the definition of the test objects [def-sfb-profinite-test-objects], this gives $(p_{T,*}G)(K)=G(T[K])$: first evaluate the structure-morphism direct image at $\\operatorname{Spec}\\operatorname{LC}(K,\\mathbf Z)$ and then use $T\\times_{\\operatorname{Spec}\\mathbf Z}\\operatorname{Spec}\\operatorname{LC}(K,\\mathbf Z)=T[K]$. This computation is on sheaves of sets throughout.",
+   "uses": [
+    "lem-trf-slice-subtopos-site-presentation",
+    "lem-weil-pbc-profinite-point-pullback",
+    "def-weil-proetale-inverse-image",
+    "def-sfb-profinite-test-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Factorization after (4.1); Stacks sites.tex Tag 03CE, lemma-localize-given-products; absolute-point and scheme-base-change direct-image definitions"
+   }
+  },
+  {
+   "text": "For every sheaf of sets $G$ on $T_{\\mathrm{proet}}$ and every profinite $K$, the direct image along the relative test functor gives $(q_{S,*}\\pi_{T,*}G)(K)=G(V(S\\times K))\\cong G(T[K])=(p_{T,*}G)(K)$. The isomorphism is natural in $K$ by step 10 and in $G$ by evaluation. Thus the two direct-image functors are naturally isomorphic. By the composition and mate conventions of [def-trf-geometric-morphism], its adjoint mate identifies the inverse images and gives the claimed geometric-morphism isomorphism $p_T\\cong q_S\\pi_T$.",
+   "uses": [
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Factorization sentence following equation (4.1), verified on direct images"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-profinite-test-objects",
+  "def-trf-geometric-morphism",
+  "def-weil-proetale-inverse-image",
+  "lem-pe-spectral-components-profinite",
+  "lem-sfb-finite-quotient-fiber-product",
+  "lem-trf-slice-subtopos-site-presentation",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-weil-pbc-profinite-test-object-functor",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-zl-affine-component-site-projection"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Paragraph preceding and sentence following equation (4.1), using Bhatt-Scholze Lemma 2.2.8 and its more precise ringed-space formulation; compatible-partition and universal-property details written out."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +209,38 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Profinite.lim\", \"module\": \"Mathlib.Topology.Category.Profinite.AsLimit\", \"type\": \": Limits.LimitCone X.diagram\", \"doc\": \"The profinite space $ X $ is canonically isomorphic to the projective limit of its discrete quotient spaces in the category of profinite spaces, established by showing its limit cone is isomorphic to \"}\n  {\"name\": \"Profinite\", \"module\": \"Mathlib.Topology.Category.Profinite.Basic\", \"type\": \"Type (u_1 + 1)\", \"doc\": \"The category of compact Hausdorff totally disconnected topological spaces, constructed as a subtype of the category of topological spaces. A profinite space is a topological space that is both compact\"}\n  {\"name\": \"Profinite.asLimit\", \"module\": \"Mathlib.Topology.Category.Profinite.AsLimit\", \"type\": \": CategoryTheory.Limits.IsLimit X.asLimitCone\", \"doc\": \"The profinite space $X$ is canonically isomorphic to the projective limit of its discrete quotient spaces in the category of profinite spaces, established by showing its limit cone is isomorphic to th\"}\n  {\"name\": \"Profinite.isoAsLimitConeLift\", \"module\": \"Mathlib.Topology.Category.Profinite.AsLimit\", \"type\": \": X ≅ (limitCone.{u, u} X.diagram).pt\", \"doc\": \"For any profinite space $X$, there exists a canonical isomorphism between $X$ and the inverse limit of its discrete quotients in the category of profinite spaces. This establishes that every profinite\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"Profinite.asLimitConeIso\", \"module\": \"Mathlib.Topology.Category.Profinite.AsLimit\", \"type\": \": X.asLimitCone ≅ limitCone.{u, u} _\", \"doc\": \"The isomorphism between the limit cone of a profinite space $X$ and the canonical inverse limit construction of its discrete quotients in the category of profinite spaces, establishing that $X$ is can\"}\n  {\"name\": \"Profinite.hasColimits\", \"module\": \"Mathlib.Topology.Category.Profinite.Basic\", \"type\": \": Limits.HasColimits Profinite\", \"doc\": \"The category of compact Hausdorff totally disconnected topological spaces (profinite spaces) has all colimits, meaning that any diagram in this category admits a colimit object within the category.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"module\": \"Mathlib.AlgebraicGeometry.Sites.Etale\", \"type\": \"(X : Scheme.{u}) : GrothendieckTopology X.Etale\", \"doc\": \"For a scheme $X$, the Grothendieck topology on the category of étale morphisms to $X$, constructed by inducing the standard Grothendieck topology on the over category via the forgetful functor. Coveri\"}",
    "date": "2026-10-18",
    "verdict": "no match: affine-transition limits, absolute profinite presentations, the etale site and component homeomorphisms do not construct this relative pro-etale site morphism"
+  },
+  {
+   "tool": "grep",
+   "query": "(ConnectedComponents|connectedComponents).*(proetale|proEtale|ProEtale)|(proetale|proEtale|ProEtale).*(ConnectedComponents|connectedComponents)",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern absolute profinite limits, affine scheme limits or unrelated component formulas, not the relative site construction and factorization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A profinite set over the connected components of an affine scheme induces a geometric morphism of pro etale topoi",
+   "results": "8 hits: Profinite, Profinite.lim, Profinite.asLimit, Profinite.asLimitConeIso, Profinite.diagram, Profinite.isoAsLimitConeLift, profiniteToCondensed, Profinite.hasColimits",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern absolute profinite limits, affine scheme limits or unrelated component formulas, not the relative site construction and factorization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An affine scheme admits a relative profinite connected-component test functor preserving limits and coverings and factoring its condensed-point morphism",
+   "results": "8 hits: Condensed.ofSheafForgetProfinite, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, Condensed.isSheafProfinite, profiniteToCondensed, CondensedSet.ofSheafProfinite, Condensed.ofSheafProfinite, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_map_eq_top",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern absolute profinite limits, affine scheme limits or unrelated component formulas, not the relative site construction and factorization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Relative profinite component pullbacks of affine schemes preserve finite limits coproducts and surjective covers",
+   "results": "8 hits: AlgebraicGeometry.instFinitaryExtensiveScheme, AlgebraicGeometry.Scheme.Pullback.left_affine_comp_pullback_hasPullback, AlgebraicGeometry.AffineScheme.hasLimits, AlgebraicGeometry.instHasFiniteLimitsScheme, AlgebraicGeometry.ExistsHomHomCompEqCompAux.hc', AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.IsFinite.instSndScheme, AlgebraicGeometry.IsFinite.instFstScheme",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern absolute profinite limits, affine scheme limits or unrelated component formulas, not the relative site construction and factorization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-zl-condensed-wcontractible-lisse-evaluation",
@@ -68,7 +250,7 @@
  "blueprint": {
   "from": {
    "node": "prop-zl-smooth-proper-relative-purity",
-   "place": "Proof Step 3, paragraph beginning “The field-stage projection formula”: continuous-coefficient realization in lem-zl-adic-hom-tensor-lisse-criterion uses the dualizable truncation and heart theorem. This lemma supplies Section 3 equations (3.1)-(3.2), Remark 3.2; Lemma 4.1(1)-(2) and Proposition 4.3(3). Specifically: Proposition 4.3(3): the geometric site morphism in equation (4.1) underlying the comparison of scalar realizations.",
+   "place": "Proof Step 3, relative Verdier duality and the finite-projective/lisse coefficient identification; the existing subordinate chain through lem-zl-adic-hom-tensor-lisse-criterion, lem-zl-t-admissible-dualizable-truncations, lem-zl-condensed-dualizable-local-perfect-models and lem-zl-condensed-wcontractible-lisse-evaluation requires the component-space geometric morphism in Hemo-Richarz-Scholbach equation (4.1).",
    "via": [
     "lem-zl-condensed-wcontractible-lisse-evaluation",
     "lem-zl-condensed-dualizable-local-perfect-models",
@@ -78,5 +260,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-component-relative-profinite-site",
+  "worker": "stage1",
+  "summary": "Preserved the full statement. Reused the stronger existing affine component-site projection instead of duplicating it. Wrote the relative finite-clopen presentation, the locally ringed-space mapping calculation, presentation independence, finite coproducts and the factorization on set-sheaf direct images. No new nodes or Mathlib leaves.",
+  "blueprint": "Proof Step 3, relative Verdier duality and the finite-projective/lisse coefficient identification; the existing subordinate chain through lem-zl-adic-hom-tensor-lisse-criterion, lem-zl-t-admissible-dualizable-truncations, lem-zl-condensed-dualizable-local-perfect-models and lem-zl-condensed-wcontractible-lisse-evaluation requires the component-space geometric morphism in Hemo-Richarz-Scholbach equation (4.1).",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-finite-quotient-fiber-product",
+    "why": "Generic compatible finite-partition limit theorem, applied to the span (Sprime -> S <- S), supplies the relative presentations; it does not replace the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Generic implication ind-etale implies weakly etale; the unit has no different algebraic version of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-morphism-affine-schemes-affine",
+    "why": "Generic affine-morphism criterion applied only to the transition maps of the specified relative construction."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-test-object-functor",
+    "why": "Existing absolute profinite test construction identifies the composite relative test functor with the same condensed-point test functor."
+   },
+   {
+    "node": "lem-trf-slice-subtopos-site-presentation",
+    "why": "General explicit formula for the direct image of a slice projection; the unit does not supply a substitute for this site-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-profinite-point-pullback",
+    "why": "The existing condensed-point geometric morphism appearing in the statement, used with its specified scheme-base-change definition."
+   },
+   {
+    "node": "lem-pe-spectral-components-profinite",
+    "why": "Generic spectral-space component theorem, used for T and affine tests to ensure the domain of the profinite universal property."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic affine qcqs fact checks the hypotheses of the spectral-space theorem."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-scheme-spectral",
+    "why": "Generic spectrality theorem checks that the component quotient of each affine test is profinite."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-finite-quotient-fiber-product",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-profinite-test-object-functor",
+  "lem-trf-slice-subtopos-site-presentation",
+  "lem-weil-pbc-profinite-point-pullback",
+  "lem-pe-spectral-components-profinite",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-scheme-spectral"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NN-efb3d7315",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-efb3d7315 (reviewer sub-agent of L); spot-checked: I read the item, all 12 steps and every cited statement in full, and checked them against Hemo-Richarz-Scholbach arXiv 2305.18131, the paragraph before (4.1) (presentation via BS15 proof of Lemma 2.2.8, the limit X x_{pi0X} S, the map of sites pi_X factoring p_X). The item restricts HRS's qcqs X to affine T, which covers the parent's w-contractible affine use. The statement is unchanged; it is not a target, and no SGA is cited. Steps 2-3: I checked the triples of lem-sfb-finite-quotient-fiber-product for the span E->S<-S; (alpha,{S},{S}) is cofinal, and E_i = S x_{C_i} A_i is a finite disjoint union of clopens with limit E. Steps 4-7: V(E) = |T| x_S E with r^{-1}O_T comes from lem-zl-affine-component-site-projection; ind-etale implies weakly etale; transitions are affine; the Hom identification Hom_T(W,V(E)) = Hom_S(pi0 W,E) is the elementary universal property, and the limit glues over affine covers. Steps 8-9: finite limits, coverings and the geometric morphism are clauses of the cited node; finite coproducts, including the empty family, are clopen decompositions. Steps 10-12: V(S x K) = T[K]; the slice formula q_{S,*}H(K) = H(S x K -> S); p_{T,*}G(K) = G(T[K]) on set sheaves; then the mate. Cases tested: T empty, E empty, E = S, repeated blocks, S a point. No new nodes. The overlap with lem-zl-affine-component-site-projection is reuse with no cycle, and the item adds the presentation, independence, coproducts and the factorization, so it is not a restatement. Batch-5 flag on lem-trf-slice-subtopos-site-presentation: it is the general Stacks 03CE/00Y2 slice-site localization lemma. Its whole 120-node closure contains only general definitions and generic sheaf/homological algebra, with no trace-formula, Poincare-duality, trace-transport or batch-4 node. It is therefore outside both assumptions and not a step of their proofs, so I accept it. All nine split_report.tool_uses are generic black boxes and I accept them. No fixes."
  }
 }
