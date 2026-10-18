@@ -2023,6 +2023,7 @@ public import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSeque
 public import WeilConjectures.CategoryTheory.Abelian.RightDerived.ResolutionNaturality
 public import WeilConjectures.CategoryTheory.AbutmentFinitePageComparison
 public import WeilConjectures.CategoryTheory.AbutmentImageFiltration
+public import WeilConjectures.CategoryTheory.Adjunction.ConjugatePaste
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeMate
 public import WeilConjectures.CategoryTheory.Adjunction.FiniteProductRingFunctor
 public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
@@ -2168,6 +2169,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoidal
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.SingleFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryAdjunctionShift
+public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryCocycle
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 public import WeilConjectures.CategoryTheory.DerivedCategory.ModuleCatFiniteResolution
 public import WeilConjectures.CategoryTheory.DerivedCategory.ModuleCatGeneration
@@ -2252,6 +2254,7 @@ public import WeilConjectures.CategoryTheory.EffacingSequenceComparison
 public import WeilConjectures.CategoryTheory.EffacingSequencePushout
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebra
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraAdjunction
+public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraCompIso
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraFullyFaithful
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraTwist
 public import WeilConjectures.CategoryTheory.Endofunctor.Shift
@@ -2524,6 +2527,7 @@ public import WeilConjectures.CategoryTheory.SpectralSequence.Vanishing
 public import WeilConjectures.CategoryTheory.StageSectionFunctorFromTransitions
 public import WeilConjectures.CategoryTheory.StageSectionTransitionExistence
 public import WeilConjectures.CategoryTheory.StageSystem.Basic
+public import WeilConjectures.CategoryTheory.StageSystem.Const
 public import WeilConjectures.CategoryTheory.StageSystem.Functor
 public import WeilConjectures.CategoryTheory.SubobjectHomologyStep
 public import WeilConjectures.CategoryTheory.TowerSplitEnvelope
@@ -4512,6 +4516,9 @@ public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.Abelian
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ConstructibleHeart
+public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ExtendScalars
+public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ExtendScalarsComp
+public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ExtendScalarsConstructible
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.Extension
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.GeometricFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.Hom
@@ -4765,6 +4772,8 @@ public import WeilConjectures.WeilSheaf.ExtensionByZero
 public import WeilConjectures.WeilSheaf.FieldCoefficient
 public import WeilConjectures.WeilSheaf.FieldCoefficientCohomology
 public import WeilConjectures.WeilSheaf.FieldCoefficientExtendScalars
+public import WeilConjectures.WeilSheaf.FieldCoefficientTransition
+public import WeilConjectures.WeilSheaf.FieldCoefficientTwoColimit
 public import WeilConjectures.WeilSheaf.FiniteEtale
 public import WeilConjectures.WeilSheaf.FiniteEtaleLisse
 public import WeilConjectures.WeilSheaf.FiniteLength
