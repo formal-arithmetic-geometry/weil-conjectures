@@ -26,64 +26,43 @@
  ],
  "proof": [
   {
-   "text": "By [lem-pc-scheme-dimension-local-rings] the Krull dimension of the underlying topological space of Y [def-kun-topological-krull-dimension] equals $\\sup_{y\\in Y}\\dim\\mathcal O_{Y,y}$, which is $\\dim Y$ in the sense of [def-pc-dimension] (both are $-\\infty$ if Y is empty); so the topological dimension of Y is at most 0. Apply [lem-weil-pbc-finite-type-dim-zero-artinian] to the finite-type morphism Y to Spec k and this topological hypothesis. It gives that the underlying topological space of Y is finite and discrete.",
+   "text": "Use [lem-pc-scheme-dimension-local-rings] to rewrite dim Y <= 0 as topologicalKrullDim Y <= 0. Apply the Mathlib declarations of [lem-weil-pbc-finite-type-dim-zero-artinian]: locally finite type over Spec k gives IsLocallyNoetherian Y, hence the dimension bound gives IsLocallyArtinian Y. Quasi-compactness over the compact Spec k gives CompactSpace Y. Local Artinianity supplies DiscreteTopology Y, and compactness plus discreteness gives Finite Y.",
    "uses": [
     "lem-pc-scheme-dimension-local-rings",
     "lem-weil-pbc-finite-type-dim-zero-artinian"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00KH (lemma-Noetherian-dimension-0)"
-   }
+   "elementary": false
   },
   {
-   "text": "A scheme with finite discrete underlying space is affine by [lem-weil-pbc-finite-discrete-scheme-affine]. Thus Y is affine; write Y = Spec B with B = Gamma(Y, O_Y).",
+   "text": "Apply the finite-discrete affineness instance recorded in [lem-weil-pbc-finite-discrete-scheme-affine] to obtain IsAffine Y.",
    "uses": [
     "lem-weil-pbc-finite-discrete-scheme-affine"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 03J6 proof, using Properties Lemma 01ZV"
-   }
+   "elementary": false
   },
   {
-   "text": "Since the original structure morphism $Y\\to\\operatorname{Spec}k$ is of finite type and Y is affine, [lem-pc-affine-finite-type-algebra] says that the induced k-algebra B is of finite type. If Y is empty then B = 0 has no primes. Otherwise apply [lem-pc-dimension-affine-open-cover] to the one-member cover of Y by Y = Spec B: the Krull dimension of the ring B equals dim Y <= 0, so there is no strict inclusion of primes of B, i.e. every prime of B is maximal.",
-   "uses": [
-    "lem-pc-affine-finite-type-algebra",
-    "lem-pc-dimension-affine-open-cover"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 06LH, algebraic case"
-   }
+   "text": "Write R = Gamma(Spec k, O) and B = Gamma(Y, O), with the algebra structure induced by the structure morphism on global sections. The affine-pair criterion HasRingHomProperty.iff_of_isAffine for LocallyOfFiniteType gives Algebra.FiniteType R B directly (Stacks Tag 01T2). Local Artinianity and affineness give IsArtinianRing B, and Spec k is Artinian so IsArtinianRing R. In particular Ring.KrullDimLE 0 B. This avoids a separate dimension computation from an affine cover and avoids transporting the algebra structure across Gamma(Spec k) = k.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Apply [lem-weil-pbc-finite-type-algebra-dim-zero-finite] to B. It gives that B is finite-dimensional over k. Therefore the affine structure morphism $\\operatorname{Spec}B\\to\\operatorname{Spec}k$ is finite, since a finite-dimensional k-algebra is a finite k-algebra.",
+   "text": "Apply the Mathlib declaration Module.finite_iff_krullDimLE_zero recorded in [lem-weil-pbc-finite-type-algebra-dim-zero-finite], with Artinian base ring R, to obtain Module.Finite R B. The affine criterion HasAffineProperty.iff_of_isAffine for IsFinite identifies this with finiteness of Y -> Spec k. The zero ring B and the empty scheme are included throughout.",
    "uses": [
     "lem-weil-pbc-finite-type-algebra-dim-zero-finite"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0ALW, implication (1) => (5), and Tag 01WH"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-pc-scheme-dimension-local-rings",
   "lem-weil-pbc-finite-type-dim-zero-artinian",
   "lem-weil-pbc-finite-discrete-scheme-affine",
-  "lem-pc-affine-finite-type-algebra",
-  "lem-pc-dimension-affine-open-cover",
   "lem-weil-pbc-finite-type-algebra-dim-zero-finite"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/varieties.tex",
-  "place": "Tag 06LH (lemma-algebraic-scheme-dim-0), algebraic case"
+  "place": "Tag 06LH (lemma-algebraic-scheme-dim-0), algebraic case; formalized by J4 using the Artinian coordinate-ring criterion and the Artinian-base generality of Mathlib Module.finite_iff_krullDimLE_zero."
  },
  "mathlib_searches": [
   {
@@ -171,5 +150,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261018T062816-L-658118",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
