@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "thm-sfb-dc-open-base-change-iso",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Base change for extension by zero",
@@ -17,32 +17,101 @@
  ],
  "proof": [
   {
-   "text": "Apply the cartesian extension-by-zero left-inverse subclaim to obtain a morphism β whose composite with the exchange morphism is the identity.",
+   "text": "Put $A=j'_!\\circ Lg'^*$, $B=Lg^*\\circ j_!$, and let $\\alpha:A\\to B$ be the exchange of the current [def-sfb-dc-open-base-change-morphism]. Explicitly its component is $\\alpha_K=\\varepsilon'_{Lg^*j_!K}\\circ j'_!(\\theta_{j_!K})\\circ j'_!Lg'^*(\\eta_K)$, where $\\theta$ is $Lg'^*Lj^*\\xrightarrow{c_{g',j}^{-1}}L(j\\circ g')^*=L(g\\circ j')^*\\xrightarrow{c_{j',g}}Lj'^*Lg^*$. This is the comparison for the square with $j'$ on top and $g',g$ vertical, as specified in that definition; no derived-pushforward preservation hypothesis is needed. The setting supplies a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, separated finite-type $k$-schemes and $k$-morphisms, and any commutative condensed ring $\\Lambda$. The square is cartesian and both vertical arrows are open immersions. Thus [stage3-sfb-open-base-change-component-mono] applies to this exact unit-square-counit transformation: its equality hypothesis is reflexivity after using the displayed formula (diagrammatic $g'^*\\mathbin{\\gg}j'_!$ means $j'_!\\circ Lg'^*$). It gives that $\\alpha_K:A(K)\\to B(K)$ is monic for every $K\\in D_{\\mathrm{cons}}(X,\\Lambda)$.",
    "uses": [
-    "stage3-sfb-open-base-change-left-inverse"
+    "def-sfb-dc-open-base-change-morphism",
+    "stage3-sfb-open-base-change-component-mono"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-open-base-change/thm-sfb-dc-open-base-change-iso.md",
+    "place": "Theorem thm-sfb-dc-open-base-change-iso. The blueprint proof (thm-sfb-dc-open-base-change-iso.proof.md: reduction to the underived exchange j'_!g'^*M -> g^*j_!M and its mate j^*g_* -> g'_*j'^*, via units outside this unit's uses) is not followed; this step follows the landed Lean argument (MorphismDefs.lean, boundedConstructibleOpenImmersionLowerShriekBaseChange_leftInverse) through the same-unit component-mono and component-section statements (agent argument)."
+   }
   },
   {
-   "text": "Apply the corresponding right-inverse subclaim to obtain γ. Associativity and the two inverse equations identify β and γ, and CategoryTheory.IsIso.mk constructs the IsIso instance for the exchange morphism.",
+   "text": "Under the same hypotheses, [stage3-sfb-open-base-change-component-section] gives for each $K$ a map $\\beta_K:B(K)\\to A(K)$ with $\\alpha_K\\circ\\beta_K=1_{B(K)}$ (the statement's $\\beta_K\\gg\\alpha_K=1$ uses diagrammatic composition). Hence $\\alpha_K\\circ(\\beta_K\\circ\\alpha_K)=(\\alpha_K\\circ\\beta_K)\\circ\\alpha_K=\\alpha_K=\\alpha_K\\circ1_{A(K)}$. Cancel the monomorphism $\\alpha_K$ from step 1 to obtain $\\beta_K\\circ\\alpha_K=1_{A(K)}$. Thus $\\beta_K$ is a two-sided inverse. It is unique: if $\\gamma_K$ is another such inverse, then $\\gamma_K=\\gamma_K\\circ(\\alpha_K\\circ\\beta_K)=(\\gamma_K\\circ\\alpha_K)\\circ\\beta_K=\\beta_K$. No assumption about naturality of the sections has been used.",
    "uses": [
-    "stage3-sfb-open-base-change-right-inverse"
+    "stage3-sfb-open-base-change-component-section"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-open-base-change/thm-sfb-dc-open-base-change-iso.md",
+    "place": "Theorem thm-sfb-dc-open-base-change-iso. The blueprint proof (thm-sfb-dc-open-base-change-iso.proof.md: reduction to the underived exchange j'_!g'^*M -> g^*j_!M and its mate j^*g_* -> g'_*j'^*, via units outside this unit's uses) is not followed; this step follows the landed Lean argument (MorphismDefs.lean, boundedConstructibleOpenImmersionLowerShriekBaseChange_leftInverse) through the same-unit component-mono and component-section statements (agent argument)."
+   }
+  },
+  {
+   "text": "Take the unique inverses $\\beta_K$ from step 2. For a morphism $u:K\\to L$, naturality of $\\alpha$ gives $B(u)\\circ\\alpha_K=\\alpha_L\\circ A(u)$. Multiply this equality on the left by $\\beta_L$ and on the right by $\\beta_K$; the two inverse equations reduce it to $\\beta_L\\circ B(u)=A(u)\\circ\\beta_K$. These are exactly the naturality equations for $\\beta:B\\to A$. Both composites $\\alpha\\circ\\beta$ and $\\beta\\circ\\alpha$ are identities because their components are the identities proved in step 2. Therefore the specified exchange $\\alpha=\\mathrm{Ex}^{j}_{sq}$ is a natural isomorphism, for every $\\Lambda$ in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-open-base-change/thm-sfb-dc-open-base-change-iso.md",
+    "place": "Theorem thm-sfb-dc-open-base-change-iso. The blueprint proof (thm-sfb-dc-open-base-change-iso.proof.md: reduction to the underived exchange j'_!g'^*M -> g^*j_!M and its mate j^*g_* -> g'_*j'^*, via units outside this unit's uses) is not followed; this step follows the landed Lean argument (MorphismDefs.lean, boundedConstructibleOpenImmersionLowerShriekBaseChange_leftInverse) through the same-unit component-mono and component-section statements (agent argument)."
+   }
   }
  ],
  "proof_deps": [
-  "stage3-sfb-open-base-change-left-inverse",
-  "stage3-sfb-open-base-change-right-inverse"
+  "def-sfb-dc-open-base-change-morphism",
+  "stage3-sfb-open-base-change-component-mono",
+  "stage3-sfb-open-base-change-component-section"
  ],
  "proof_origin": {
-  "by": "H3",
+  "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-open-base-change/thm-sfb-dc-open-base-change-iso.md",
-  "place": "Stage 3 proof: assemble the two inverse equations with CategoryTheory.IsIso.mk"
+  "place": "Blueprint proof file thm-sfb-dc-open-base-change-iso.proof.md exists (underived reduction and pushforward mate), but is not followed: the explicit cancellation and inverse-naturality argument from the two existing same-unit component statements, as in the landed Lean proof (leftInverse/rightInverse/isIso in MorphismDefs.lean)."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a cartesian square of schemes with open vertical immersions, extension by zero commutes with pullback on bounded constructible complexes of modules over a condensed coefficient ring",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp; AlgebraicGeometry.Scheme.Modules.pullbackComp; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "date": "2026-10-18",
+   "verdict": "no match: structure-sheaf modules and restriction/pullback on Zariski ringed spaces, not bounded constructible pro-etale modules over condensed coefficients"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans.isIso_iff_isIso_app",
+   "results": "CategoryTheory.NatTrans.isIso_iff_isIso_app",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: generic natural-isomorphism assembly only; no geometric pro-etale module-object exchange theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "openImmersionLowerShriek.*BaseChange|BaseChange.*openImmersionLowerShriek|boundedConstructibleOpen",
+   "results": "none",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural transformation whose components are monomorphisms and admit right inverses is an isomorphism",
+   "results": "CategoryTheory.NatTrans.isIso_iff_isIso_app; CategoryTheory.IsSplitMono.of_iso; CategoryTheory.NatTrans.mono_iff_mono_app; CategoryTheory.Cat.Hom.instIsIsoFunctorαCategoryToNatTransHomHom; CategoryTheory.NatIso.isIso_app_of_isIso; CategoryTheory.isIso_of_regularEpi_of_mono; CategoryTheory.NatIso.hom_app_isIso; CategoryTheory.Subfunctor.instIsIsoFunctorTypeToRangeOfMono",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: generic natural-isomorphism assembly only; no geometric pro-etale module-object exchange theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of sheaves of modules commutes with extension by zero along an open immersion after arbitrary cartesian base change",
+   "results": "AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_apply; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_assoc; AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.ofRestrict_invApp_apply; AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_inv_app'",
+   "date": "2026-10-18",
+   "verdict": "no match: structure-sheaf modules and restriction/pullback on Zariski ringed spaces, not bounded constructible pro-etale modules over condensed coefficients"
+  },
+  {
+   "tool": "grep",
+   "query": "extension[Bb]y[Zz]ero|extension by zero|lowerShriek|LowerShriek",
+   "results": "Mathlib/NumberTheory/MulChar/Basic.lean",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: generic categorical component criterion or unrelated multiplicative-character extension by zero"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictFunctorIsoPullback|isIso_iff_isIso_app",
+   "results": "Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean; Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean; Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean; Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean; Mathlib/AlgebraicTopology/SimplicialSet/NerveAdjunction.lean; Mathlib/AlgebraicTopology/SimplicialSet/Subcomplex.lean; Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: generic categorical component criterion or unrelated multiplicative-character extension by zero"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -78,5 +147,20 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "thm-sfb-dc-open-base-change-iso",
+  "worker": "stage1",
+  "summary": "Reuse the existing same-unit component monicity and component section statements, check their full hypotheses and equality with the specified exchange formula, cancel to obtain two-sided component inverses, and prove their naturality explicitly. Remove the cyclic left/right-inverse dependencies. No new node, no changed statement, no coefficient-category identification, no Lean edits or builds. Repair after landing refusal: re-read the current exchange definition and both cited component statements; specify the composition-comparison orientation and component formula in step 1, and revalidate all citation excerpts against the current DAG. The definition now isolates the comparison from unnecessary pushforward preservation; the theorem and its categorical assembly keep the same hypotheses.",
+  "blueprint": "Realizes the cartesian-isomorphism clause of sk-def-sfb-open-base-change, carried by thm-sfb-dc-open-base-change-iso. The current blueprint has a proof file for the theorem (reduction to the underived exchange and its pushforward mate); the steps do not realize it but assemble the two existing same-unit component substatements (stage-3 splits of this theorem, Lean-proved), matching the landed Lean proof. Corrected by the maintainer reader: the delivery claimed the blueprint supplies no proof. Re-applied on the post-refusal re-delivery (285dc2a1e50d), whose fix from 045eb478aa54 was lost at landing."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NH-285dc2a1e",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-285dc2a1e (reviewer sub-agent of L); spot-checked: This is a re-delivery after the landing was refused because def-sfb-dc-open-base-change-morphism changed its statement. I compared the item with both the earlier snapshot and the earlier FIX at 045eb478aa54. NH changed only the step-1 text and split_report.summary. The statement, stmt_deps, steps 2-3 and the searches are unchanged, and the delivery adds no new nodes. The earlier FIX content was lost: the places again say the blueprint has no proof. I checked step 1 against the current def node. It copies the component formula ε'∘j'_!(θ)∘j'_!Lg'^*(η) exactly, and θ=c_{j',g}∘c_{g',j}^{-1}. I matched this against det-def-sfb-base-change-morphism-comparison with the square read with j' on top (top j', left g', right g, bottom j), and the orientation agrees. Every hypothesis of component-mono holds (ℓ, char p≠ℓ, any commutative condensed Λ, separated finite-type schemes, cartesian square, j and j' open, same α direction), and its equality premise holds by reflexivity. Step 2 cancels the monomorphism α to turn the section into a two-sided, unique inverse, and step 3 proves the inverse natural by elementary algebra. Both steps are correct. Edge cases: identity immersions, empty X', and a non-cartesian square (where the hypothesis is needed). On the current snapshot no stmt+proof closure of the def, component-mono or component-section reaches the item, so there is no cycle. The component nodes are existing nodes of the same unit and are proved in Lean, and the route follows the landed Lean proof. No duplicates and no SGA. FIX: the three step source.place fields, proof_origin.place and split_report.blueprint (and the report) falsely say the main-20261015 blueprint supplies no proof, but thm-sfb-dc-open-base-change-iso.proof.md exists (underived reduction and pushforward mate, using units outside this unit). I restored the earlier FIX wording for these fields on top of the delivered item in fixes/dag/nodes/sec-six-functors-basics/thm-sfb-dc-open-base-change-iso.json, keeping NH's new step-1 text. No other change and no tool_uses.; 1 file(s) fixed by the reviewer"
  }
 }
