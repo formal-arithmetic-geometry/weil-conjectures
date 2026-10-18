@@ -12,9 +12,110 @@
   "pqf-def-locnoeth",
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a geometric point $\\bar z$ of $Z$, its image $\\bar y$ in $Y$, and chart neighbourhoods as in the statement. All rings below refer to this choice. Set $A=\\mathcal O^{\\rm sh}_{Y,\\bar y}$ with maximal ideal $\\mathfrak m$, and let $\\alpha:P\\to A$ be the target chart. It is Noetherian by [lem-sc-strict-henselization-noetherian]. Form $W=\\operatorname{Spec}A\\times_{\\operatorname{Spec}\\mathbf Z[P]}\\operatorname{Spec}\\mathbf Z[Q]$ and $Z_A=Z\\times_Y\\operatorname{Spec}A$. The fibre-product universal properties identify $Z_A\\to W$ with the base change of the given etale comparison. The chosen geometric point lifts to $Z_A$ and has an image $\\bar w$ in $W$. The affine fibre-product formula identifies $W=\\operatorname{Spec}C$ for $C=A\\otimes_{\\mathbf Z[P]}\\mathbf Z[Q]$. Let $\\mathfrak q$ be the prime of $\\bar w$ and $B=C_{\\mathfrak q}$; its contraction in $A$ is $\\mathfrak m$. Choose finite monoid generators $q_1,\\ldots,q_s$ of $Q$. The monomials $1\\otimes z^{q_i}$ generate $C$ over $A$ by expanding each monomial, so the finite-type and localization Noetherianity nodes make $B$ Noetherian.",
+   "uses": [
+    "lem-sc-strict-henselization-noetherian",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.2--2.3, pp.72--73; affine base change and Noetherian permanence, Stacks Tags 01I4, 00FN, 06LJ."
+   }
+  },
+  {
+   "text": "The strict local ring $B^{\\rm sh}$ at $\\bar w$ identifies canonically with $\\mathcal O_{Z,\\bar z}$. Indeed the strict-local-invariance theorem applies first to $Z_A\\to Z$, the base change of the structural map of the strict localization of $Y$ (explicitly included in its statement). It also applies to $Z_A\\to W$, the base change of the etale chart comparison: an etale map is in particular locally a filtered colimit consisting of one etale algebra. Thus their strict localizations at the chosen geometric points are isomorphic. These are functorial identifications over the chart schemes, so they preserve the image of every $Q$-monomial. This argument also applies to the initial etale chart neighbourhoods and therefore does not assume that the given charts were global.",
+   "uses": [
+    "lem-trf-ind-etale-strict-local-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.2, p.72: etale-local chart reduction; strict-local invariance of etale and strict-local structural base changes."
+   }
+  },
+  {
+   "text": "Put $G=\\alpha^{-1}(A^\\times)$, $F=\\{q\\in Q:z^q\\in B^\\times\\}$, $S=P_G/G^{\\rm gp}$ and $T=Q_F/F^{\\rm gp}$. Products in a local ring are units exactly when both factors are units, so $G,F$ are faces and $h^{-1}(F)=G$, since $A\\to B$ is local. The face-sharpening node makes $S,T$ sharp fs with finite free group completions. The associated-chart stalk formula identifies $S$ with $\\overline M_{\\bar y}$ and $T$ with $\\overline N_{\\bar z}$ under Step 2; adjoining local units and then quotienting by them identifies precisely elements differing by $G^{\\rm gp}$ or $F^{\\rm gp}$. In particular the nonunit log ideal in $B^{\\rm sh}$ is $JB^{\\rm sh}$, where $J=(z^q:q\\notin F)B$. Apply the sharp-chart and completed-chart theorems to the log regular target at $\\bar y$. After their permitted replacement of the sharp chart, they give $a:S\\to A$ and a presentation $\\widehat A=k[[S]][[t_1,\\ldots,t_d]]$ or $V[[S]][[t_1,\\ldots,t_d]]/(\\theta)$ with $\\theta-p\\in(S\\setminus\\{0\\},t_1,\\ldots,t_d)$. Here $V$ is a Cohen ring. The original chart $\\alpha$ and $a$ induce the same characteristic. Their lifts in the integral log monoid differ by a unique unit: cancellation proves uniqueness, and multiplying proves these units define a character $\\epsilon:P^{\\rm gp}\\to A^\\times$ with $\\alpha(r)=\\epsilon(r)a(\\bar r)$ for $r\\in P_G$. This retains arbitrary chart units rather than assuming sharp original charts.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "lem-trf-fs-face-sharpening",
+    "lem-trf-log-regular-sharp-chart",
+    "lem-trf-log-regular-completed-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.1--1.2 and 1.6, pp.69--70; VI 2.3, p.73, reduction to sharp completed charts."
+   }
+  },
+  {
+   "text": "Apply [lem-per-completed-invertible-kummer-monoid-extension] with its $R=P$, its $Q$ equal to our $Q$, and its local rings $A,B$ as above. The hypothesis on positive multiples is exactly its Kummer hypothesis, and its injective group map and finite cokernel are assumed in the item. The annihilating positive integer is invertible in $A$, because it is invertible on the target neighbourhood. Step 3 gives its sharp chart $a$, unit character $\\epsilon$ and monomial-compatible completed presentation. It follows that, with this same $T$ and $J$, there are a nonzero complete regular Noetherian local ring $D$ and pair isomorphisms $(\\widehat B,J\\widehat B)\\cong(H,L)$ in equal characteristic or $(H/(\\eta),L(H/(\\eta)))$ in mixed characteristic. Here $H=D[[T]]$ and $L$ is generated by the nonzero $T$-monomials; in the second case the reduction $\\bar\\eta\\in D$ lies in $\\mathfrak m_D\\setminus\\mathfrak m_D^2$. This is a ring-and-ideal normal form, not a citation of log-regularity preservation.",
+   "uses": [
+    "lem-per-completed-invertible-kummer-monoid-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 2.3, p.73, the two completed local ring formulas, including the stratum ideal."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-formal-monoid-ring-dimension] to the complete regular coefficient ring $D$ and the sharp fs monoid $T$. In equal characteristic it gives $H/L\\cong D$ and $\\dim H=\\dim D+\\operatorname{rank}T^{\\rm gp}$. In mixed characteristic its parameter clause gives that $D/(\\bar\\eta)$ is regular local and $\\dim(H/(\\eta))=\\dim D+\\operatorname{rank}T^{\\rm gp}-1$, while $\\dim(D/(\\bar\\eta))=\\dim D-1$. Therefore in both cases $\\widehat B/J\\widehat B$ is regular and $\\dim\\widehat B=\\dim(\\widehat B/J\\widehat B)+\\operatorname{rank}T^{\\rm gp}$.",
+   "uses": [
+    "lem-trf-formal-monoid-ring-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.2 and 2.3, pp.69,73: stratum quotient and dimension calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-local-completion-quotient] to $B\\to B/J$. It identifies $\\widehat B/J\\widehat B$ with the completion of $B/J$. Both $B$ and $B/J$ are Noetherian local. Completion detects regularity and preserves dimension by the two cited completion nodes, so Step 5 yields regularity of $B/J$ and $\\dim B=\\dim(B/J)+\\operatorname{rank}T^{\\rm gp}$. Apply the closed-immersion strict-localization theorem to $\\operatorname{Spec}(B/J)\\to\\operatorname{Spec}B$. It gives $B^{\\rm sh}/JB^{\\rm sh}\\cong(B/J)^{\\rm sh}$. Strict henselization preserves regularity and dimension by the cited nodes, so this quotient is regular and $\\dim B^{\\rm sh}=\\dim(B^{\\rm sh}/JB^{\\rm sh})+\\operatorname{rank}T^{\\rm gp}$. Using the monomial-preserving identification in Step 2 and the characteristic and ideal calculation in Step 3, these are exactly the two defining conditions for log regularity of $(Z,N)$ at $\\bar z$. Every geometric point has been treated. If $Z$ is empty, the pointwise condition is vacuous. No ordinary regularity of $Z$ or torsion-freeness of the chart cokernel has been used.",
+   "uses": [
+    "lem-weil-pbc-local-completion-quotient",
+    "lem-weil-pbc-completion-regular-local",
+    "lem-weil-pbc-completion-dimension",
+    "lem-trf-closed-immersion-strict-localization-cartesian",
+    "lem-sc-strict-henselization-regular",
+    "lem-sc-strict-henselization-dimension",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.2 and 2.3, pp.69,73; Stacks Tags 05WS, 06LN, 06LK and completion invariance."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-strict-henselization-noetherian",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "def-trf-fs-log-blowup",
+  "lem-trf-fs-face-sharpening",
+  "lem-trf-log-regular-sharp-chart",
+  "lem-trf-log-regular-completed-chart",
+  "lem-per-completed-invertible-kummer-monoid-extension",
+  "lem-trf-formal-monoid-ring-dimension",
+  "lem-weil-pbc-local-completion-quotient",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-completion-dimension",
+  "lem-trf-closed-immersion-strict-localization-cartesian",
+  "lem-sc-strict-henselization-regular",
+  "lem-sc-strict-henselization-dimension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.6 and 2.3, pp.70,73: formal monoid normal forms, followed by regularity and dimension descent. The ring normal-form comparison is isolated as a statement-only node. The log-smooth theorem cannot be cited because its landed proof depends on this item."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +151,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.FormallyEtale.localization_map\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R S] : FormallyEtale Rₘ Sₘ\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra, then the localization of $ S $ at a submonoid $ M $ is a formally étale algebra over the localization of $ R $ at $ M $. Formally, given $ \\\\text{FormallyÉta\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"RingHom.Etale\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \"{R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative rings is étale if the induced algebra structure on $ S $ over $ R $ via $ f $ satisfies the étale property, meaning $ S $ is finitely presented \"}\n  {\"name\": \"Algebra.FormallyEtale.localization_base\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R Sₘ] : FormallyEtale Rₘ Sₘ\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra, then the localization of $ S $ at a multiplicative set $ m $ is a formally étale $ R_m $-algebra. This asserts that the property of formal étaleness is pres\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": MorphismProperty.HasOfPostcompProperty @IsEtale @IsEtale\", \"doc\": \"The composition of two étale morphisms of schemes is also an étale morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}",
    "date": "2026-10-19",
    "verdict": "no match: read the returned signatures; ordinary smooth/etale morphisms, scheme normalization, Kummer field extensions, and regular-sequence dimension do not state this logarithmic assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invertible Kummer monoid charts with etale comparison preserve log regularity of fine saturated logarithmic schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"CategoryTheory.MorphismProperty.HasOfPostcompProperty (@AlgebraicGeometry.IsEtale)\\n  (@AlgebraicGeometry.LocallyOfFiniteType ⊓ @AlgebraicGeometry.FormallyUnramified)\", \"doc\": \"For any category of schemes, the composition of a morphism that is locally of finite type and a morphism that is formally unramified results in an étale morphism. This instance asserts that the proper\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.of_comp\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : AlgebraicGeometry.Scheme} (g : Y ⟶ Z)\\n  [AlgebraicGeometry.IsEtale (CategoryTheory.CategoryStruct.comp f g)] [AlgebraicGeometry.LocallyOfFiniteType g]\\n  [AlgebraicGeometry.FormallyUnramified g], AlgebraicGeometry.IsEtale f\", \"doc\": \"If the composition of a morphism $ f: X \\to Y $ with a morphism $ g: Y \\to Z $ is étale, and $ g $ is locally of finite type and formally unramified, then $ f $ is an étale morphism.\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected returned signatures; ordinary etale/smooth scheme and ring morphisms do not state logarithmic regularity or fs chart preservation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Log smooth morphisms over log regular schemes have log regular source with finite invertible torsion cokernel",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [hf : AlgebraicGeometry.IsSmooth f],\\n  AlgebraicGeometry.LocallyOfFinitePresentation f\", \"doc\": \"Every smooth morphism of schemes is locally of finite presentation.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.isSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsSmoothOfRelativeDimension n f],\\n  AlgebraicGeometry.IsSmooth f\", \"doc\": \"If a morphism $ f: X \\\\to Y $ of schemes is smooth of relative dimension $ n $, then $ f $ is smooth.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ) {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmoothOfRelativeDimension n f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          RingHom.IsStandardSmoothOfRelativeDimension n\\n            (CommRingCat.Ho\", \"doc\": \"Let $n$ be a natural number and let $f: X \\\\to Y$ be a morphism of schemes. The morphism $f$ is smooth of relative dimension $n$ if and only if for every point $x \\\\in X$, there exist an open neighborho\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected returned signatures; ordinary etale/smooth scheme and ring morphisms do not state logarithmic regularity or fs chart preservation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogRegular\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected returned signatures; ordinary etale/smooth scheme and ring morphisms do not state logarithmic regularity or fs chart preservation."
+  },
+  {
+   "tool": "grep",
+   "query": "LogRegular|log_regular|logarithmic.*regular|Kummer.*chart",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected returned signatures; ordinary etale/smooth scheme and ring morphisms do not state logarithmic regularity or fs chart preservation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Log regularity of a fine saturated log scheme is preserved by invertible Kummer etale charts",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"Algebra.FormallyEtale.of_isLocalization\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \": FormallyEtale R Rₘ\", \"doc\": \"If $ S $ is a localization of a commutative ring $ R $ at a multiplicative set, then the algebra structure map $ R \\\\to S $ is formally étale, meaning it satisfies the infinitesimal lifting property ch\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \": IsStableUnderBaseChange @IsEtale\", \"doc\": \"The property of being an étale morphism is stable under base change. That is, if a morphism of schemes is étale, then any base change (pullback) of this morphism is also étale.\"}\n  {\"name\": \"Algebra.FormallyEtale.localization_base\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R Sₘ] : FormallyEtale Rₘ Sₘ\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra, then the localization of $ S $ at a multiplicative set $ m $ is a formally étale $ R_m $-algebra. This asserts that the property of formal étaleness is pres\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : IsSmooth f\", \"doc\": \"Every étale morphism of schemes is a smooth morphism. Specifically, if a morphism $ f: X \\to Y $ of schemes is étale (i.e., smooth of relative dimension 0), then it satisfies the conditions of being a \"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"[IsEtale f] : FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Kaehler\", \"type\": \"[Algebra.FormallyEtale S T] : IsBaseChange T (map R R S T)\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra and $ T $ is an $ S $-algebra, then the module of Kähler differentials $ \\\\Omega_{T/S} $ is a base change of $ \\\\Omega_{S/R} $ via the algebra homomorphism $ S\"}\n  {\"name\": \"Algebra.FormallyEtale.iff_isSeparable\", \"module\": \"Mathlib.RingTheory.Etale.Field\", \"type\": \"[EssFiniteType K L] : FormallyEtale K L ↔ Algebra.IsSeparable K L\", \"doc\": \"For a commutative ring $ K $ and a $ K $-algebra $ L $ of essential finite type, $ L $ is formally étale over $ K $ if and only if $ L $ is separable over $ K $.\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected returned signatures; ordinary etale/smooth scheme and ring morphisms do not state logarithmic regularity or fs chart preservation."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-tame-normalization-log-regular",
@@ -79,5 +215,104 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-invertible-kummer-chart-log-regular",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Avoid the newly landed cyclic dependency through general log-smooth preservation. Use the target completed sharp chart and retain the unit-character twist; isolate one algebraic Kummer completed base-change normal-form node. Deduce the two log-regularity conditions using existing formal monoid dimension, completion, and strict-henselization results. One new unsplit node; no Mathlib leaves.",
+  "blueprint": "Realizes the local log-regularity input to ancestor lem-per-artin-gabber-affine-curve Step 3 through lem-per-tame-normalization-log-regular and the ILO IX uniformization route, at the unchanged blueprint.from.place. No change to the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Generic local algebra or logarithmic chart tool used for the explicit completed-local-ring proof; no trace-formula or other unit route replaces a step of this unit."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic local algebra or logarithmic chart tool used for the explicit completed-local-ring proof; no trace-formula or other unit route replaces a step of this unit."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Generic local algebra or logarithmic chart tool used for the explicit completed-local-ring proof; no trace-formula or other unit route replaces a step of this unit."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "Generic local algebra or logarithmic chart tool used for the explicit completed-local-ring proof; no trace-formula or other unit route replaces a step of this unit."
+   },
+   {
+    "node": "lem-trf-ind-etale-strict-local-invariance",
+    "why": "Generic local algebra or logarithmic chart tool used for the explicit completed-local-ring proof; no trace-formula or other unit route replaces a step of this unit."
+   },
+   {
+    "node": "def-trf-fs-log-blowup",
+    "why": "Generic local algebra or logarithmic chart tool used for the explicit completed-local-ring proof; no trace-formula or other unit route replaces a step of this unit."
+   },
+   {
+    "node": "lem-trf-fs-face-sharpening",
+    "why": "Generic local algebra or logarithmic chart tool used for the explicit completed-local-ring proof; no trace-formula or other unit route replaces a step of this unit."
+   },
+   {
+    "node": "lem-trf-log-regular-sharp-chart",
+    "why": "Generic local algebra or logarithmic chart tool used for the explicit completed-local-ring proof; no trace-formula or other unit route replaces a step of this unit."
+   },
+   {
+    "node": "lem-trf-log-regular-completed-chart",
+    "why": "Generic local algebra or logarithmic chart tool used for the explicit completed-local-ring proof; no trace-formula or other unit route replaces a step of this unit."
+   },
+   {
+    "node": "lem-trf-formal-monoid-ring-dimension",
+    "why": "Generic local algebra or logarithmic chart tool used for the explicit completed-local-ring proof; no trace-formula or other unit route replaces a step of this unit."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-quotient",
+    "why": "Generic local algebra or logarithmic chart tool used for the explicit completed-local-ring proof; no trace-formula or other unit route replaces a step of this unit."
+   },
+   {
+    "node": "lem-weil-pbc-completion-regular-local",
+    "why": "Generic local algebra or logarithmic chart tool used for the explicit completed-local-ring proof; no trace-formula or other unit route replaces a step of this unit."
+   },
+   {
+    "node": "lem-weil-pbc-completion-dimension",
+    "why": "Generic local algebra or logarithmic chart tool used for the explicit completed-local-ring proof; no trace-formula or other unit route replaces a step of this unit."
+   },
+   {
+    "node": "lem-trf-closed-immersion-strict-localization-cartesian",
+    "why": "Generic local algebra or logarithmic chart tool used for the explicit completed-local-ring proof; no trace-formula or other unit route replaces a step of this unit."
+   },
+   {
+    "node": "lem-sc-strict-henselization-regular",
+    "why": "Generic local algebra or logarithmic chart tool used for the explicit completed-local-ring proof; no trace-formula or other unit route replaces a step of this unit."
+   },
+   {
+    "node": "lem-sc-strict-henselization-dimension",
+    "why": "Generic local algebra or logarithmic chart tool used for the explicit completed-local-ring proof; no trace-formula or other unit route replaces a step of this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-strict-henselization-noetherian",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "def-trf-fs-log-blowup",
+  "lem-trf-fs-face-sharpening",
+  "lem-trf-log-regular-sharp-chart",
+  "lem-trf-log-regular-completed-chart",
+  "lem-trf-formal-monoid-ring-dimension",
+  "lem-weil-pbc-local-completion-quotient",
+  "lem-weil-pbc-completion-regular-local",
+  "lem-weil-pbc-completion-dimension",
+  "lem-trf-closed-immersion-strict-localization-cartesian",
+  "lem-sc-strict-henselization-regular",
+  "lem-sc-strict-henselization-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q67-577bf0ff7",
+  "group": "Q67",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-577bf0ff7 (reviewer sub-agent of L); spot-checked: Read the item's 6 steps, the new node lem-per-completed-invertible-kummer-monoid-extension, every cited statement, and ILO VI 1.6–1.8 and 2.2–2.3 (PDF pp. 75–79). The item is unchanged and is VI 1.8 in the Kummer log-étale case that VI 2.2–2.3 describe, explicitly including 'Y log régulier, de sorte que X l'est également'. The split follows steps 4–7 of the existing lem-trf-log-smooth-log-regular. S1: noetherianity of A=O^sh and of B=C_q, finite type via the generators of Q. S2: 05WR invariance applied to Z_A→Z (base change of the structural map, explicitly covered) and to Z_A→W (étale); monomials preserved. S3: faces with h^{-1}F=G because A→B is local; the chart condition gives S≅M̄_ȳ, T≅N̄_z̄ and the log ideal J·B^sh; sharp and completed chart; ε checked by cancellation in the integral M_ȳ. S4: every hypothesis of the new node checked (N invertible on the neighbourhood, so in A). S5: formal-monoid-ring-dimension gives regularity and dim difference rk T^gp in both characteristics. S6: completion of the quotient, completion regularity and dimension, closed-immersion strict localization, strict-henselization regularity and dimension. The new node generalizes the trf extension model from an isomorphism on group completions to Kummer with invertible-order cokernel. It is not a duplicate and not a restatement of the item. Tested: A=Q[[s]] with twist −1 (absorbed, since only the ring and ideal pair are identified), unit R=Z with u not a square (étale, T=0), Z_p with y^m=p, and the excluded case Z/p in characteristic p. Advisory: 'complete' cites no adically-complete definition, the same omission as the trf model; no change made. No cycle (closure 631; the old log-smooth citation is gone). No SGA. Cross-unit tool_uses accepted. Batch 5: the closures of def-trf-fs-log-blowup, ind-etale-strict-local-invariance (05WR), fs-face-sharpening, log-regular-sharp-chart, log-regular-completed-chart, formal-monoid-ring-dimension and closed-immersion-strict-localization-cartesian (05WS) contain only general log-geometry and commutative-algebra trf nodes and no thm-trf, sk-thm-trace, nt-assume or Poincaré node. They are outside both assumptions, so accepted."
  }
 }
