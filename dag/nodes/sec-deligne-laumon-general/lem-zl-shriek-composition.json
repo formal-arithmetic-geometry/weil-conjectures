@@ -25,7 +25,8 @@
   "def-zl-weil-compact-support-cohomology",
   "lem-a1-adic-middle-extension-constructible",
   "def-weil-algebraically-closed-coefficients",
-  "lem-zl-immersion-weil-local-behavior"
+  "lem-zl-immersion-weil-local-behavior",
+  "def-zl-frobenius-compact-support-comparison"
  ],
  "proof": [
   {
@@ -184,40 +185,24 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-4a5d11516 (reviewer sub-agent of L); spot-checked: I read all of it: the item, the blueprint text in master, main-20261015 and main-20261017 (one sentence: item (3) of prop-functor-package), the unit sk-l-dl-general-composition and its cited unit sk-thm-sf-comp-composition (thm-sf-comp-composition is finite-level A_{E,n} only, so it cannot give the Qbar stage), the full statements of prop-functor-package, lem-fix-weil-operations (including blueprint_update), def-weil-weil-sheaf-complex, the Mathlib leaf lem-pod-separated-finite-type-base-change, every stmt_dep, def-fix-six-functor-datum and the coefficient definitions. Step 1 is sound. X, Y, Z, f, g are separated finite type over k=Fbar_q by the leaf, since f is the base change of f_0 along Y->Y_0. Package clause (3) gives R(gf)_! ~ Rg_!Rf_!, and the package's opening clause makes Rf_! preserve D^b_c. Step 2 is sound. lem-fix-weil-operations explicitly makes composition comparisons equivariant, and beta θ_A = θ_B F^*(beta) is exactly the morphism condition u θ = θ' Lg^*(u) of def-weil-weil-sheaf-complex. I checked the inverse identity, and naturality restricts to Weil morphisms. Small cases f=id, X empty, open-then-proper and point target all hold. There are no new nodes, nothing restates a clause, and nothing is circular. An rg search found no duplicate: the other composition nodes are finite-level, coefficient-change, shift or condensed-framework versions. I accept both tool_uses, prop-functor-package and lem-fix-weil-operations: the unit route has no Qbar composition theorem and no Weil-equivariance theorem. One fault, repaired (E6): stmt_deps name two separately defined Qbar categories, def-weil-pbc-qbar-category (P_T over the pbc integral category with étale-origin witnesses) and C_Y of def-weil-algebraically-closed-coefficients, which the functor and Weil-category deps use. Step 1 had only said 'the category specified in the statement dependencies'. The fix names C_Y in step 1, cites def-weil-algebraically-closed-coefficients, says the pbc notation is not identified with C_Y anywhere in the proof, and notes gf is the fiber of g_0 f_0. proof_deps is again the union of the step uses. Corrected file: fixes/dag/nodes/sec-deligne-laumon-general/lem-zl-shriek-composition.json; full checks in review.md.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
-  "module": "Sheaf.Paper.ShriekComposition",
-  "declaration": "WeilConjectures.shriekComposition_frobenius",
+  "module": "Sheaf.Paper.ZlShriekComposition",
+  "declaration": "WeilConjectures.zlShriekComposition",
   "declarations": [
-   "WeilConjectures.shriekAutomorphismPullSquare",
-   "WeilConjectures.shriekAutomorphismProperMap",
-   "WeilConjectures.shriekAutomorphismOpenMap",
-   "WeilConjectures.shriekAutomorphismMates_isIso",
-   "WeilConjectures.shriekAutomorphismAmbient",
-   "WeilConjectures.shriekAutomorphismIntegral_existsUnique",
-   "WeilConjectures.shriekAutomorphismIntegral",
-   "WeilConjectures.shriekAutomorphismQbar_existsUnique",
-   "WeilConjectures.shriekAutomorphismQbar",
-   "WeilConjectures.shriekModelProper_isProper",
-   "WeilConjectures.shriekModelOpen_isOpenImmersion",
-   "WeilConjectures.shriekModel_comp",
-   "WeilConjectures.shriekGeometricCompactification",
-   "WeilConjectures.ShriekGeometricAction",
-   "WeilConjectures.shriekGeometricFrobeniusComparison",
-   "WeilConjectures.shriekComposition_frobenius"
+   "WeilConjectures.zlShriekComposition"
   ],
-  "file": "lean/Sheaf/Paper/ShriekComposition.lean",
-  "statement": "theorem shriekComposition_frobenius (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (X₀ Y₀ Z₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [IsSeparated X₀.hom] [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] [IsSeparated Y₀.hom] [LocallyOfFiniteType Z₀.hom] [QuasiCompact Z₀.hom] [IsSeparated Z₀.hom] (f₀ : X₀ ⟶ Y₀) [IsSeparated f₀.left] [LocallyOfFiniteType f₀.left] [QuasiCompact f₀.left] (g₀ : Y₀ ⟶ Z₀) [IsSeparated g₀.left] [LocallyOfFiniteType g₀.left] [QuasiCompact g₀.left] (cf : Compactification f₀.left) (cg : Compactification g₀.left) (cfg : Compactification (f₀ ≫ g₀).left) : letI : IsSeparated (f₀ ≫ g₀).left := inferInstanceAs (IsSeparated (f₀.left ≫ g₀.left)); letI : LocallyOfFiniteType (f₀ ≫ g₀).left := inferInstanceAs (LocallyOfFiniteType (f₀.left ≫ g₀.left)); letI : QuasiCompact (f₀ ≫ g₀).left := inferInstanceAs (QuasiCompact (f₀.left ≫ g₀.left)); ∃ (Sf : ShriekGeometricAction D f₀ cf l hl Ω) (Sg : ShriekGeometricAction D g₀ cg l hl Ω) (Sfg : ShriekGeometricAction D (f₀ ≫ g₀) cfg l hl Ω), ∃ β : Sfg.system.functor ≅ Sf.system.functor ⋙ Sg.system.functor, ∀ K : generalAlgebraicallyClosedConstructibleCategory l Ω (D.geometricFiber X₀).left, (shriekGeometricFrobeniusComparison D (f₀ ≫ g₀) cfg l hl Ω Sfg).hom.app K ≫ β.hom.app ((sfCommonStageWeilFrobeniusPullback D l hl X₀ Ω).obj K) = (sfCommonStageWeilFrobeniusPullback D l hl Z₀ Ω).map (β.hom.app K) ≫ (shriekGeometricFrobeniusComparison D g₀ cg l hl Ω Sg).hom.app (Sf.system.functor.obj K) ≫ Sg.system.functor.map ((shriekGeometricFrobeniusComparison D f₀ cf l hl Ω Sf).hom.app K)",
+  "file": "lean/Sheaf/Paper/ZlShriekComposition.lean",
+  "statement": "theorem zlShriekComposition (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] {X₀ Y₀ Z₀ : Over (Spec (.of D.k₀))} [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [IsSeparated X₀.hom] [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] [IsSeparated Y₀.hom] [LocallyOfFiniteType Z₀.hom] [QuasiCompact Z₀.hom] [IsSeparated Z₀.hom] (f₀ : X₀ ⟶ Y₀) (g₀ : Y₀ ⟶ Z₀) [IsSeparated f₀.left] [LocallyOfFiniteType f₀.left] [QuasiCompact f₀.left] [IsSeparated g₀.left] [LocallyOfFiniteType g₀.left] [QuasiCompact g₀.left] (cf₀ : Compactification f₀.left) (cg₀ : Compactification g₀.left) (cfg₀ : Compactification (f₀ ≫ g₀).left) (Sf : SfCompactSupportCoefficientAction l D.k (coefficientPrimeUnit l D hl) Ω (zlGeometricCompactification D f₀ cf₀)) (Sg : SfCompactSupportCoefficientAction l D.k (coefficientPrimeUnit l D hl) Ω (zlGeometricCompactification D g₀ cg₀)) (Sfg : SfCompactSupportCoefficientAction l D.k (coefficientPrimeUnit l D hl) Ω (zlGeometricCompositeCompactification D f₀ g₀ cfg₀)) : (∃ β : Sfg.system.functor ≅ Sf.system.functor ⋙ Sg.system.functor, ∀ (L : Padic.FiniteCoefficientFields l Ω) (K : Stage l Ω (D.geometricFiber X₀).left L), HEq (β.inv.app ⟨L, K⟩) ((inclusion (l := l) (Ω := Ω) (Y := (D.geometricFiber Z₀).left) L).map ((sfFieldShriekCompositionRational D l hl (zlGeometricCompactification D f₀ cf₀) (zlGeometricCompactification D g₀ cg₀) (zlGeometricCompositeCompactification D f₀ g₀ cfg₀) (AlgebraicallyClosedCoefficients.Coefficient l Ω L)).hom.app K))) ∧ ∀ (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (K : sfIntegralConstructibleCategory l E (D.geometricFiber X₀).left), (zlAmbientFrobenius D l E Z₀).map (zlCompletedShriekCompositor D f₀ cf₀ l E hl g₀ cg₀ cfg₀ K).hom ≫ (zlCompactSupportFrobenius D (f₀ ≫ g₀) cfg₀ l E).hom.app K.obj = (zlCompactSupportFrobenius D g₀ cg₀ l E).hom.app ((image (completed l E) (zlGeometricCompactification D f₀ cf₀)).obj K.obj) ≫ (image (completed l E) (zlGeometricCompactification D g₀ cg₀)).map ((zlCompactSupportFrobenius D f₀ cf₀ l E).hom.app K.obj) ≫ (zlCompletedShriekCompositor D f₀ cf₀ l E hl g₀ cg₀ cfg₀ ⟨(zlAmbientFrobenius D l E X₀).obj K.obj, zlAmbientFrobenius_constructible D l E hl X₀ K⟩).hom",
   "branch": "newtargets-dag",
-  "by": "Q144",
+  "by": "Q73",
   "date": "2026-10-18",
-  "existing": false,
-  "note": "Composition on the recorded common-stage category, with the actual counit/unit Frobenius comparison normalized on every integral and finite-field representative. Helpers in the owning module construct the geometric compactification and canonical comparisons; no arbitrary isomorphism is selected from mere existence. The displayed square is exactly the fixed-pair equivariance condition after composing with the input Weil structure."
+  "existing": false
  },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-c28f6aeca",
-  "group": "Q144",
-  "result": "pass",
-  "note": "Clause-by-clause match: D/l/hl/Ω (universe v kept), X₀ Y₀ Z₀ and f₀ g₀ separated finite type over k₀, compactifications universally quantified (exist by Nagata). β is a natural iso R(gf)! ≅ Rf! ⋙ Rg! on the recorded common-stage category, with a Frobenius square that reduces exactly to the Weil-morphism condition. ∃ over the normalized actions loses nothing, since the action functor is fixed by finite_eq and rationalBeta/integralBeta_spec. Helpers are real: counit/unit mates from mateEquiv, ∃!-characterized integral/Qbar comparisons with well-posed HEq types, base-changed compactification with real data. No sorry in any def. Node fields: only lean and stmt_deps changed; 12 landed deps, no cycle. check_lean_text and check_report found nothing; statement verbatim. nt_compile of ShriekComposition.lean: 8.9 s, exit 0, no errors or warnings; axioms are sorryAx only. Notes: def-weil-frobenius-square-exchange (no Lean yet) should reuse shriekGeometricFrobeniusComparison; the import of the superseded ImmersionWeilLocalBehavior module is needed for its Over.pullback instances (checked by compile)."
+  "reviewer": "NT-stage2-cc-fd85be2c1",
+  "group": "Q73",
+  "result": "fix",
+  "note": "Read node, blueprint source (order 2820 + proof), all 6 stmt_deps + new node def-zl-frobenius-compact-support-comparison, both modules, report, and the used declarations (SfCompactSupportCoefficientAction, sfFieldShriekComposition{Integral,Rational,Qbar_existsUnique}, PurCompactSupport image/pull/push/openDerivedAdjunction/geometricPullComposition/completedPull_comp, sfWeilFrobeniusPullback, zlFrobenius_naturality). Hypotheses exact; conjunct 1 is the normalized natural iso R(gf)!≅Rg!Rf! on C_Y; conjunct 2 is the Frobenius cocycle square of the canonical mate-defined comparisons with the realization-conjugated integral compositor, equivalent to the Weil-pair condition, not weaker. New node satisfies §5 fields, cites exactly its 8 landed deps, has no hollow data and no duplicate. Statements verbatim, universes bound, line width ok. nt_compile --json: rc=0 clean for delivered and fixed files. Single fix: the docstring of zlGeometricCompactification_isProper cites Stacks 01W6 (image of proper is closed); corrected to 01W4 (base change of proper) in fixes/ZlFrobeniusCompactSupportComparison.lean."
  }
 }
