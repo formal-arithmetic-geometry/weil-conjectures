@@ -16281,3 +16281,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:11 L: merged deliver/C9/Sheaf.AlgebraicGeometry.PerfectCutComplexDegreeZero (stage 3; reviewer PASS; first push; landing 20261018T071140-L-1664922 (interface); batch 20261018T071125; modules 5; new nodes 4)
 - 07:11 L: merged deliver/D2/Sheaf.AlgebraicGeometry.AffineFormallySmooth (stage 3; reviewer PASS; after a return; landing 20261018T071141-L-1665154 (proof); batch 20261018T071125; modules 1; new nodes 0)
 - 07:11 L: merged deliver/D4/Sheaf.AlgebraicGeometry.Morphisms.LocallyOfFiniteTypeOfFpqcCover (stage 3; reviewer PASS; first push; landing 20261018T071141-L-1665290 (proof); batch 20261018T071125; modules 1; new nodes 0)
+- 07:11 L: merged deliver/D6/Sheaf.AlgebraicGeometry.SpecializationCospecializationCompatibility (stage 3; reviewer PASS; first push; landing 20261018T071142-L-1665432 (interface); batch 20261018T071125; modules 2; new nodes 1)

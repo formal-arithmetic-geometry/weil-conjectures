@@ -50,105 +50,29 @@
  ],
  "proof": [
   {
-   "text": "Put $K=G[0]$, $K'=p^{-1}K$ and $A=(Rf_*K)_{\\bar s}$. Form the canonical map $a:A\\to R\\Gamma(X',K')$: first apply the representative-neighbourhood restriction $r$ to the complex $Rf_*K$, then the derived exchange for $S'\\to S$, and finally Leray. Exactness of strict-local global sections makes the termwise $r$ a derived map. The germ-restriction isomorphism and the strict-local global-homology comparison show that $a$ induces isomorphisms in all degrees. This is precisely the canonical strict-henselization identification used in the source. In what follows we use the map $a$ itself, so no replacement of $Rf_*K$ by $Rf'_*K'$ as a sheaf on $S'$ is asserted.",
+   "text": "Apply the strict-local fibre-map factorization to obtain a comparison a whose specialization and closed-lift composites are the two derived restrictions.",
    "uses": [
-    "def-weil-pbc-strict-henselization-restriction",
-    "lem-weil-pbc-strict-local-germ-restriction-iso",
-    "lem-weil-pbc-strict-local-base-change-global-homology",
-    "def-weil-pbc-derived-exchange",
-    "lem-weil-pbc-cohomology-pullback-derived-unit"
+    "lem-weil-pbc-strict-base-fibre-map-factorization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJV, lemma-specialization-cospecialization, proof; K=G[0]"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $g:S'\\to S$ and $M=g^{-1}Rf_*K$. Under $r$, the map $sp$ is restriction from $\\Gamma(S',M)$ to the geometric point $\\bar t$; the corresponding restriction to the canonical lift of $\\bar s$ is the original germ at $\\bar s$. Indeed, in each degree represent a germ by $(V,\\bar v,\\sigma)$. The limit leg $S'\\to V$ used in $r$ sends $\\bar t$ to the pointed lift defining $sp$, and sends the closed geometric point to $\\bar v$. Both descriptions therefore send the germ to the same restriction of $\\sigma$. The colimit defining the stalk gives equality of these maps of complexes. Global sections at the geometric points identify these restrictions with the stated derived stalk maps.",
+   "text": "Expand cospecialization as inverse Leray, restriction, and the inverse closed-fibre unit. Naturality of derived restriction moves the derived unit across restriction; the unit and its inverse cancel, leaving the closed-lift composite, which is the closed strict-base fibre map by the factorization.",
    "uses": [
-    "def-weil-pbc-geometric-stalks",
-    "def-weil-pbc-strict-henselization-restriction",
-    "lem-weil-pbc-strict-henselization-functoriality",
-    "lem-weil-pbc-geometric-point-pullback-stalk"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJV, lemma-specialization-cospecialization, proof; K=G[0]"
-   }
-  },
-  {
-   "text": "For $v=i,h$ write $v^*$ for pullback on derived global sections. Then $\\rho_{\\bar s}=i^*a$ and $\\rho_{\\bar t}sp=h^*a$. To check the canonical arrows, write $z:\\operatorname{Spec}\\Omega_u\\to S'$ for the corresponding geometric point and $f_u:X_u\\to\\operatorname{Spec}\\Omega_u$. Horizontal coherence says that the outer exchange is $\\Ex_z\\circ z^{-1}\\Ex_g$. Restriction of sections to $z$ is natural in the complex on $S'$, hence it commutes with $\\Ex_g$. Step 2 identifies restriction before $\\Ex_g$ with $sp$ for $u=\\bar t$ and with the identity germ for $u=\\bar s$. It remains to identify restriction followed by $\\Ex_z$ with $v^*$ after Leray. Choose a bounded below K-injective representative $I$ of $K$, a K-injective resolution $j:p^{-1}I\\to J$, and a K-injective resolution $k:v^{-1}J\\to L$. The termwise exchange theorem represents $\\Ex_g$ by $f'_*(j)\\Ex^0_{g,I}$ and $\\Ex_z$ by $f_{u,*}(k)\\Ex^0_{z,J}$. The underived global-germ/exchange identity for $f'$ and $z$ identifies the composite from $\\Gamma(X',J)$, through the germ of $f'_*J$ and $\\Ex^0_{z,J}$, with restriction $\\Gamma(X',J)\\to\\Gamma(X_u,v^{-1}J)$. Postcompose both sides with $\\Gamma(X_u,k)$. By the derived-unit description the resulting map $\\Gamma(X',J)\\to\\Gamma(X_u,L)$ represents $v^*$. These equalities hold for complexes before localization. The termwise comparison theorem and the uniqueness of comparison homotopy classes into K-injectives identify these representatives with the specified derived arrows. Thus both equations hold in $D^+(\\operatorname{Ab})$, rather than merely on cohomology groups.",
-   "uses": [
-    "lemma-weil-pbc-derived-exchange-coherence",
-    "def-weil-pbc-underived-exchange",
-    "lem-weil-pbc-underived-global-germ-exchange",
-    "lem-weil-pbc-derived-exchange-termwise",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-cohomology-pullback-derived-unit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJV, lemma-specialization-cospecialization, proof; K=G[0]"
-   }
-  },
-  {
-   "text": "Set $B=Rh_*h^{-1}K'$ and let $\\lambda:R\\Gamma(X',B)\\xrightarrow{\\sim}R\\Gamma(X_{\\bar t},h^{-1}K')$ be Leray. The derived-unit formula gives $h^*=\\lambda\\circ R\\Gamma(X',\\beta)$. Local acyclicity gives the isomorphism $\\delta=i^{-1}\\beta:i^{-1}K'\\xrightarrow{\\sim}i^{-1}B$. Its hypotheses are exactly the original local acyclicity of $f$ relative to $G$ and the two chosen geometric points; neither properness nor torsion is used.",
-   "uses": [
-    "lem-weil-pbc-cohomology-pullback-derived-unit",
+    "lem-weil-pbc-strict-base-fibre-map-factorization",
     "lem-weil-pbc-local-acyclicity-closed-fibre-unit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJV, lemma-specialization-cospecialization, proof; K=G[0]"
-   }
-  },
-  {
-   "text": "Naturality of pullback along $i$ for the derived arrow $\\beta:K'\\to B$ gives $i_B^*\\circ R\\Gamma(X',\\beta)=R\\Gamma(X_{\\bar s},\\delta)\\circ i_{K'}^*$. Explicitly, the unit of $i^{-1}\\dashv Ri_*$ satisfies $Ri_*i^{-1}\\beta\\circ\\eta^D_{i,K'}=\\eta^D_{i,B}\\circ\\beta$. Apply $R\\Gamma(X',-)$ and then the natural Leray identification. By the derived-unit formula the two resulting composites are exactly the two sides of the displayed equality. This is unit naturality followed by functoriality, so it applies to $B$ even though $B$ need not be a sheaf in degree zero.",
-   "uses": [
-    "prop-weil-pbc-derived-inverse-image-adjunction",
-    "lem-weil-pbc-cohomology-pullback-derived-unit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJV, lemma-specialization-cospecialization, proof; K=G[0]"
-   }
-  },
-  {
-   "text": "Using the definition of $cosp$ and steps 3--5, calculate in $D^+(\\operatorname{Ab})$:\n$$\\begin{aligned}\ncosp\\,\\rho_{\\bar t}\\,sp\n&=R\\Gamma(X_{\\bar s},\\delta^{-1})\\,i_B^*\\,\\lambda^{-1}\\,h^*\\,a\\\\\n&=R\\Gamma(X_{\\bar s},\\delta^{-1})\\,i_B^*\\,R\\Gamma(X',\\beta)\\,a\\\\\n&=R\\Gamma(X_{\\bar s},\\delta^{-1})\\,R\\Gamma(X_{\\bar s},\\delta)\\,i_{K'}^*\\,a\\\\\n&=i_{K'}^*a=\\rho_{\\bar s}.\n\\end{aligned}$$\nThe cancellation uses only functoriality and $\\delta^{-1}\\delta=\\mathrm{id}$. No cancellation of $a$, $sp$, either fibre map, or $i_B^*$ is used.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJV, lemma-specialization-cospecialization, proof; K=G[0]"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-strict-henselization-restriction",
-  "lem-weil-pbc-strict-local-germ-restriction-iso",
-  "lem-weil-pbc-strict-local-base-change-global-homology",
-  "def-weil-pbc-derived-exchange",
-  "lem-weil-pbc-cohomology-pullback-derived-unit",
-  "def-weil-pbc-geometric-stalks",
-  "lem-weil-pbc-strict-henselization-functoriality",
-  "lem-weil-pbc-geometric-point-pullback-stalk",
-  "lemma-weil-pbc-derived-exchange-coherence",
-  "def-weil-pbc-underived-exchange",
-  "lem-weil-pbc-underived-global-germ-exchange",
-  "lem-weil-pbc-derived-exchange-termwise",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-local-acyclicity-closed-fibre-unit",
-  "prop-weil-pbc-derived-inverse-image-adjunction"
+  "lem-weil-pbc-strict-base-fibre-map-factorization",
+  "lem-weil-pbc-local-acyclicity-closed-fibre-unit"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0GJV, lemma-specialization-cospecialization, proof; K=G[0]"
+  "place": "Tag 0GJV, proof of lemma-specialization-cospecialization; formal route compressed through strict-local factorization"
  },
  "mathlib_searches": [
   {
@@ -330,5 +254,15 @@
   "group": "NH",
   "result": "pass",
   "note": "Wrote review.md. Checked immutable statements, all dependencies, canonical arrows, source clauses, universes, edge cases, docstrings, and verbatim signatures. All five modules compiled cleanly through scompile.py’s local side overlay. No findings or repository changes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261018T071142-L-1665432",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
