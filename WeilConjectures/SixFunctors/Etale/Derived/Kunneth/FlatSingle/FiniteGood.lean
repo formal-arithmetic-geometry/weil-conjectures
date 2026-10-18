@@ -96,16 +96,6 @@ lemma isIso_tensorBaseChangeMap_degenerate_iff_kunnethMap {X' Y : Scheme.{u}} (h
   exact Iff.rfl
 
 set_option maxHeartbeats 0 in
-/-- The base change map at the unit of a commutative square `hᵢ ≫ π' = ρ ≫ h` is an isomorphism
-if the derived base change map `Lπ'^* Rh_* K ⟶ Rhᵢ_* Lρ^* K` is. -/
-lemma isIso_tensorBaseChangeMap_tensorUnit {X' Y X'ᵢ Yᵢ : Scheme.{u}} (h : Y ⟶ X')
-    (π' : X'ᵢ ⟶ X') (hᵢ : Yᵢ ⟶ X'ᵢ) (ρ : Yᵢ ⟶ Y) (w : hᵢ ≫ π' = ρ ≫ h)
-    (K : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (hBC : IsIso ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ) (CommSq.mk w.symm)).app K)) :
-    IsIso (tensorBaseChangeMap (ModuleCat.{u + 1} Λ) hᵢ ρ π' h w (𝟙_ _) K) := by
-  have hu := tensorBaseChangeMap_tensorUnit (ModuleCat.{u + 1} Λ) hᵢ ρ π' h w K
-  exact IsIso.of_isIso_fac_right hu
-
 /-- The Künneth map `Rπ'_* Λ ⊗ᴸ Rh_* K ⟶ Rc_* (Lhᵢ^* Λ ⊗ᴸ Lρ^* K)` of a commutative square
 `hᵢ ≫ π' = ρ ≫ h = c` with `π'` proper is an isomorphism if the derived base change map
 `Lπ'^* Rh_* K ⟶ Rhᵢ_* Lρ^* K` is. -/
@@ -115,7 +105,7 @@ lemma isIso_kunnethMap_tensorUnit {X' Y X'ᵢ Yᵢ : Scheme.{u}} (h : Y ⟶ X') 
     (hBC : IsIso ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ) (CommSq.mk w.symm)).app K)) :
     IsIso (kunnethMap (ModuleCat.{u + 1} Λ) hᵢ ρ π' h (ρ ≫ h) w rfl (𝟙_ _) K) := by
   have := isIso_rightDerivedLowerStarProjectionMap_of_isProper Λ isAddTorsion_of_finite π'
-  have := isIso_tensorBaseChangeMap_tensorUnit Λ h π' hᵢ ρ w K hBC
+  have := isIso_tensorBaseChangeMap_tensorUnit (ModuleCat.{u + 1} Λ) hᵢ ρ π' h w K hBC
   rw [kunnethMap_eq]
   infer_instance
 

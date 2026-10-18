@@ -97,6 +97,20 @@ lemma tensorBaseChangeMap_tensorUnit {X' S' T Y : Scheme.{u}} (h : Y ⟶ X') (e 
     ← reassoc_of% (leftDerivedUpperStarTensorComparison_leftUnitor_hom A h _)]
   rfl
 
+/-- The base change map at the unit is an isomorphism if the derived base change map is. -/
+lemma isIso_tensorBaseChangeMap_tensorUnit {X' S' T Y : Scheme.{u}} (h : Y ⟶ X') (e : Y ⟶ T)
+    (f' : X' ⟶ S') (g : T ⟶ S') (w : h ≫ f' = e ≫ g)
+    (F : DerivedCategory (Sheaf T.smallEtaleTopology A))
+    (hBC : IsIso ((derivedBaseChangeMap A (CommSq.mk w.symm)).app F)) :
+    IsIso (tensorBaseChangeMap A h e f' g w (𝟙_ _) F) := by
+  have : IsIso (tensorBaseChangeMap A h e f' g w (𝟙_ _) F ≫
+      R((h)_*[A]).map ((leftDerivedUpperStarUnitIso A h).hom ▷ L((e)^*[A]).obj F ≫
+        (λ_ _).hom)) := by
+    rw [tensorBaseChangeMap_tensorUnit]
+    infer_instance
+  exact IsIso.of_isIso_comp_right _ (R((h)_*[A]).map
+    ((leftDerivedUpperStarUnitIso A h).hom ▷ L((e)^*[A]).obj F ≫ (λ_ _).hom))
+
 set_option maxHeartbeats 1000000 in
 /-- **Pasting of base change maps**: for two commutative squares pasted horizontally,
 

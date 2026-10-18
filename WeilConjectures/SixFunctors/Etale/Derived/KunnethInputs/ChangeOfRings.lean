@@ -119,7 +119,7 @@ noncomputable def changeOfRingsTensorIso (M : ModuleCat.{u} R) [Module.Flat R M]
       (Functor.mapHomologicalComplexCompIso (ModuleCat.restrictScalarsCompTensorLeftIso f M) _).app
         N ≪≫
       ((Functor.mapHomologicalComplexCompIso (Iso.refl (tensorLeft _ ⋙ res)) _).app N).symm ≪≫
-      res.mapHomologicalComplex _ |>.mapIso
+      (res.mapHomologicalComplex _).mapIso
         ((CochainComplex.map₂HomologicalComplexObjSingleIso (curriedTensor _) _).app N).symm) ≪≫
     (res.mapDerivedCategoryFactors.app _).symm ≪≫
     res.mapDerivedCategory.mapIso (QObjTensorQObjIsoOfKFlatLeft _ _ hM').symm
