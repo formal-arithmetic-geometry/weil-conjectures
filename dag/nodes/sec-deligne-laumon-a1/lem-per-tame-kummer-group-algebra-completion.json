@@ -295,5 +295,30 @@
   "group": "Q125",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q125-e52eec360 (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps in full; there are no new nodes. I checked the statement of each of the 16 cited nodes, ILO VI 2.2 p.72 and the parent's use of this item. The statement is unchanged from the Q89 base except for added definition citations. The mathematics is correct: (1) coset basis with the balancing check; (2) d_j divides N, so u_j is a unit; (3) A_{j-1}[T]/(T^{d_j}-u_j) ≅ A_j, by comparing explicit bases and representatives h+a m_j; (4) a standard étale presentation, since Q'=d_j t^{d_j-1} is a unit, then étale composition; (5) Stacks 0325, with both completeness definitions meaning the same; (6) product-spectrum open immersions at h=1, plus maximal-ideal indexing by idempotents; (7) maximal ideals contract to m, so the residue extension is finite, and separable by the étale residue lemma. Small cases checked: L=M; Z/2 and Z/4 over Z_3, where the factors have residue fields F_3, F_3, F_9; E=0. The DAG search found no duplicate (the cyclotomic group-algebra, tame-root-product and tame-root-extension nodes differ). I accept the declared tool_uses of Stacks 0325 and the finite-product principal open. One B3/C1 fault, fixed: the ring structure of U and the ring maps A_{j-1}→A_j were used without a citation. I cited lem-weil-pbc-algebra-tensor-pushout-universal-property in the statement (as a citation only), in stmt_deps and proof_deps, and in steps 2 and 3, adding sentences for the algebra map and for the well-definedness of T↦1⊗[m_j].; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.TameKummerGroupAlgebraCompletion",
+  "declaration": "MonoidAlgebra.tame_group_algebra_baseChange",
+  "declarations": [
+   "MonoidAlgebra.characterBaseChange",
+   "MonoidAlgebra.characterBaseChangeCommRing",
+   "MonoidAlgebra.characterBaseChangeAlgebra",
+   "MonoidAlgebra.tame_group_algebra_baseChange"
+  ],
+  "file": "lean/Sheaf/RingTheory/TameKummerGroupAlgebraCompletion.lean",
+  "statement": "theorem tame_group_algebra_baseChange (E : Type u) (L : Type v) (M : Type w) [CommRing E] [CommGroup L] [CommGroup M] [Group.FG L] [Group.FG M] (f : L →* M) (_hf : Function.Injective f) [Finite (M ⧸ f.range)] (N : ℕ) (_hN : 0 < N) (_hkill : ∀ m : M, m ^ N ∈ f.range) (_hunit : IsUnit (N : E)) (ρ : L →* Eˣ) : Nonempty (Module.Basis (M ⧸ f.range) E (characterBaseChange E L M f ρ)) ∧ Algebra.Etale E (characterBaseChange E L M f ρ) ∧ (∀ [Nontrivial E] [IsNoetherianRing E] [IsLocalRing E] [IsAdicComplete (IsLocalRing.maximalIdeal E) E], Finite {m : Ideal (characterBaseChange E L M f ρ) // m.IsMaximal} ∧ ∃ (A : {m : Ideal (characterBaseChange E L M f ρ) // m.IsMaximal} → CommRingCat.{max u w}) (algebras : ∀ i, Algebra E (A i)) (locals : ∀ i, IsLocalRing (A i)) (localMaps : ∀ i, IsLocalHom (algebraMap E (A i))) (e : characterBaseChange E L M f ρ ≃ₐ[E] (∀ i, A i)), (∀ i, Nontrivial (A i)) ∧ (∀ i, IsNoetherianRing (A i)) ∧ (∀ i, IsAdicComplete (IsLocalRing.maximalIdeal (A i)) (A i)) ∧ (∀ i, Module.Finite E (A i) ∧ Algebra.Etale E (A i)) ∧ (∀ i, (IsLocalRing.maximalIdeal (A i)).comap ((Pi.evalRingHom (fun i ↦ A i) i).comp e.toRingHom) = i.1) ∧ (∀ i, Module.Finite (IsLocalRing.ResidueField E) (IsLocalRing.ResidueField (A i)) ∧ Algebra.IsSeparable (IsLocalRing.ResidueField E) (IsLocalRing.ResidueField (A i))))",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Abelian groups written multiplicatively. Canonical character tensor product helpers have real Mathlib data. Basis indexed by the finite quotient gives precisely the finite free rank claim, including E=0. Complete-local product is indexed by maximal ideals with the projection-preimage identification; residue algebras are induced by the coefficient maps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2f7335a7e",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Clause-by-clause match with node (multiplicative CommGroup FG, injective f, Finite quotient, N>0 kills cokernel, IsUnit N, ρ:L→*Eˣ; Basis indexed by M⧸f.range; Algebra.Etale; conditional nontrivial Noetherian local adic-complete clause with maximal-ideal-indexed CommRingCat factors, E-algebra equiv, comap pinning, finite étale factors, finite separable residue extensions). Only lean field changed; lean.statement verbatim. Probe: CommRing instance = Algebra.TensorProduct.instCommRing by rfl, algebraMap a = a⊗1 by rfl, balancing aρ(l)⊗x = a⊗[f l]x proved. Universes independent (carrier max u w). nt_compile --json clean (2.6 s, exit 0). Advisory: Algebra.Etale for scheme étale via affine equivalence; parallel helper Algebra.monoidChartTensor in trf theorem module (not H4); unused Mathlib proof-plan imports (AdjoinRoot, StandardEtale, GoingUp)."
  }
 }
