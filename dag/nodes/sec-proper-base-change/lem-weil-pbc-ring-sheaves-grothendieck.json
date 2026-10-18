@@ -22,9 +22,29 @@
   "def-weil-sheaf-of-modules-category",
   "def-sp-grothendieck-abelian"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "Work directly on the given site, in the common universe w = max(c,h,r,s). Abelian sheafification and its locally bijective characterization are transported from the small model by the existing siteAbelianHasSheafify and siteAbelianWEqualsLocallyBijective instances. Mathlib gives abelianness and colimits of module sheaves. The proved preservesColimitsOfShape_toSheaf instance, preservation of finite limits and reflection of isomorphisms transfer exact filtered colimits from abelian sheaves by HasExactColimitsOfShape.domain_of_functor. This is the first two local instances in the Lean proof.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "For each object A construct the module presheaf L_A whose value at X is the finitely supported functions from ULift(Hom(X,A)) to R(X). A restriction along f sends the basis vector at a with coefficient b to the basis vector at f followed by a with coefficient R(f)(b). The private freeObj construction proves the functor laws on basis vectors using Finsupp.lhom_ext′ and linearCombination_single. For every section x of M over A, freeDesc sends the basis vector a to M(a)(x). Its naturality follows from the presheaf composition law; freeDesc_single computes its value, in particular giving x on the identity basis vector. This construction keeps the rings in their original universe and works for noncommutative rings.",
+   "uses": [],
+   "elementary": false
+  },
+  {
+   "text": "Sheafify each L_A using the existing module sheafification adjunction. Suppose f,g:M to N agree after every map from each sheafified L_A. For any section x of M over A apply this equality to the adjoint of freeDesc(x); naturality of the adjunction gives equality after the underlying free-presheaf map. Evaluating at the identity basis vector gives f_A(x)=g_A(x). Extensionality and faithfulness of forgetting modules and restricting scalars give f=g. Thus the sheafified L_A form a separating family. Their coproduct exists since the object type of the site is small in w; ObjectProperty.IsSeparating.isSeparator_coproduct gives a separator. Together with the exact filtered colimits above this constructs IsGrothendieckAbelian. For an empty site separation is vacuous and the coproduct is the zero object.",
+   "uses": [],
+   "elementary": false
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/injectives.tex",
+  "place": "Tag 079Q (remark-existence-D), ringed-site example, and Tag 079B (definition-grothendieck-conditions). Direct common-universe implementation of the free-representable generator and exact-colimit proof in WeilConjectures/Mathlib/Algebra/Category/ModuleCat/Sheaf/Abelian.lean, using ULift-indexed Finsupp as in the proved RingedHypercoverInjectiveAugmentationRing construction; no module-sheaf equivalence or ring-universe lift is required."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -133,5 +153,15 @@
   "date": "2026-10-17",
   "existing": false,
   "note": "The recorded upstream theorem requires C : Type u with SmallCategory C and R : Sheaf J RingCat.{u}, so it cannot be applied to the pro-etale site with object universe t+1, morphism universe t and independent ring universe u. This equivalent small-site interface uses the common module universe max c h r s. Existing small-model sheafification transport supplies the abelian structure without additional hypotheses. It states the same Grothendieck property for arbitrary (possibly noncommutative) ring sheaves. No site or coefficient universes are equated."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261018T145105-L-3641632",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
