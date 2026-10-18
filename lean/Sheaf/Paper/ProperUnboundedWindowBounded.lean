@@ -17,20 +17,9 @@ public import Mathlib.CategoryTheory.ObjectProperty.Ind
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import Sheaf.CategoryTheory.GrothendieckDerivedCoproductsColimit
-import Sheaf.AlgebraicGeometry.ProperHeartContinuityDirectImage
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
+import Sheaf.AlgebraicGeometry.EllAdicProperBoundedBelowCoproducts
+import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
-import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
-import WeilConjectures.CategoryTheory.TruncationTriangle
-import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 
 /-!
 # Proper pushforward and uniformly bounded coproducts
@@ -127,7 +116,32 @@ theorem properUnboundedWindowBounded
         (fun i ↦ (CondensedRing.lowerStar
           (Profinite.continuousMapRingObj E) p).rightDerivedFunctor.map
           (c.inj i)))) := by
-  sorry
+  classical
+  -- The existing qcqs theorem only needs the common lower cohomology bound.
+  have _ := hM
+  let C := pulledBackModuleObjects (Profinite.continuousMapRingObj E) X
+  let F := (CondensedRing.lowerStar (Profinite.continuousMapRingObj E) p).rightDerivedFunctor
+  have : HasColimitsOfSize.{u + 1, u + 1} C :=
+    IsGrothendieckAbelian.hasColimits C
+  have : HasCoproducts.{u + 1} C := fun J ↦
+    HasColimitsOfSize.has_colimits_of_shape (Discrete J)
+  have : HasCoproducts.{u + 1} (DerivedCategory C) := derived_hasCoproducts
+  have hN (i : I) : (M i).IsGE a :=
+    (DerivedCategory.isGE_iff (M i) a).2 (fun r hr ↦ hbound i r (Or.inl hr))
+  have : PreservesColimit (Discrete.functor M) F :=
+    CondensedRing.condensed_boundedBelow_preservesCoproduct
+      (Profinite.continuousMapRingObj E) p I a M hN
+  let c : Cofan M := Cofan.mk (∐ M) (Sigma.ι M)
+  let d : Cofan (fun i ↦ F.obj (M i)) :=
+    Cofan.mk (F.obj c.pt) (fun i ↦ F.map (c.inj i))
+  have hd : IsColimit d :=
+    (isColimitMapCoconeCofanMkEquiv F M c.inj).1
+      (isColimitOfPreserves F (coproductIsCoproduct M))
+  refine ⟨c, coproductIsCoproduct M, d, hd, ?_⟩
+  change IsIso (hd.desc d)
+  have hid : hd.desc d = 𝟙 d.pt := hd.hom_ext (by simp)
+  rw [hid]
+  infer_instance
 
 /-- Proper derived module pushforward commutes with sums of ind-constructible complexes
 in a common integer interval, for the finite-subextension-valued condensed algebraic closure.
@@ -194,6 +208,31 @@ theorem properUnboundedWindowBounded_padicAlgCl
         ((CondensedRing.lowerStar (Profinite.padicAlgClRingObj ℓ) p).rightDerivedFunctor.obj c.pt)
         (fun i ↦ (CondensedRing.lowerStar (Profinite.padicAlgClRingObj ℓ) p).rightDerivedFunctor.map
           (c.inj i)))) := by
-  sorry
+  classical
+  -- The existing qcqs theorem only needs the common lower cohomology bound.
+  have _ := hM
+  let C := pulledBackModuleObjects (Profinite.padicAlgClRingObj ℓ) X
+  let F := (CondensedRing.lowerStar (Profinite.padicAlgClRingObj ℓ) p).rightDerivedFunctor
+  have : HasColimitsOfSize.{u + 1, u + 1} C :=
+    IsGrothendieckAbelian.hasColimits C
+  have : HasCoproducts.{u + 1} C := fun J ↦
+    HasColimitsOfSize.has_colimits_of_shape (Discrete J)
+  have : HasCoproducts.{u + 1} (DerivedCategory C) := derived_hasCoproducts
+  have hN (i : I) : (M i).IsGE a :=
+    (DerivedCategory.isGE_iff (M i) a).2 (fun r hr ↦ hbound i r (Or.inl hr))
+  have : PreservesColimit (Discrete.functor M) F :=
+    CondensedRing.condensed_boundedBelow_preservesCoproduct
+      (Profinite.padicAlgClRingObj ℓ) p I a M hN
+  let c : Cofan M := Cofan.mk (∐ M) (Sigma.ι M)
+  let d : Cofan (fun i ↦ F.obj (M i)) :=
+    Cofan.mk (F.obj c.pt) (fun i ↦ F.map (c.inj i))
+  have hd : IsColimit d :=
+    (isColimitMapCoconeCofanMkEquiv F M c.inj).1
+      (isColimitOfPreserves F (coproductIsCoproduct M))
+  refine ⟨c, coproductIsCoproduct M, d, hd, ?_⟩
+  change IsIso (hd.desc d)
+  have hid : hd.desc d = 𝟙 d.pt := hd.hom_ext (by simp)
+  rw [hid]
+  infer_instance
 
 end AlgebraicGeometry.ProEtale
