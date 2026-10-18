@@ -16417,3 +16417,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:52 L: batch 20261018T103522 dependency take-out
 - 11:03 L: returned deliver/D3/Sheaf.CategoryTheory.RingedCechKoszulDualKFlat (reviewer RETURN: (the landing tools, head 09c51b8d1) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Cat)
 - 11:03 L: returned deliver/H3/Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalBounded (reviewer RETURN: (the landing tools, head dd86fa917) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 11:03 L: merged deliver/B4/Sheaf.AlgebraicGeometry.AffineFiniteModuleFreeLocus (stage 3; reviewer PASS; first push; landing 20261018T110335-L-341842 (proof); batch 20261018T110332; modules 1; new nodes 0)

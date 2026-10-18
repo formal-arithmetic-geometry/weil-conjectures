@@ -29,62 +29,53 @@
  ],
  "proof": [
   {
-   "text": "Because $A$ is Noetherian and $M$ is finite, $M$ is finitely presented by [lem-sc-noetherian-finite-module-finite-presentation].",
+   "text": "By [lem-sc-noetherian-finite-module-finite-presentation], M is finitely presented. The free-locus hypothesis then makes M projective by [lem-trf-finite-projective-local-free], implemented by Mathlib Module.freeLocus_eq_univ_iff (Stacks 00NX (4) implies (2)).",
    "uses": [
-    "lem-sc-noetherian-finite-module-finite-presentation"
+    "lem-sc-noetherian-finite-module-finite-presentation",
+    "lem-trf-finite-projective-local-free"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0517, Noetherian finite modules are finitely presented"
-   }
+   "elementary": false
   },
   {
-   "text": "For every prime $\\mathfrak p\\subset A$, the hypothesis gives that $M_{\\mathfrak p}$ is finite free. Applying [lem-sc-finitely-presented-free-at-prime-principal] yields an element $f_{\\mathfrak p}\\notin\\mathfrak p$ for which $M_{f_{\\mathfrak p}}$ is finite free; thus the principal opens $D(f_{\\mathfrak p})$ cover $\\operatorname{Spec}(A)$.",
+   "text": "Apply the already proved [lem-weil-pbc-finite-projective-standard-free-cover] to M. Its finite family generates the unit ideal, and each localization is finite and free. Swap the two conjuncts to obtain Module.finite_free_at_primes_localized_cover. This reuses the existing proof of the pointwise spreading and quasi-compact extraction instead of repeating them.",
    "uses": [
-    "lem-sc-finitely-presented-free-at-prime-principal",
+    "lem-weil-pbc-finite-projective-standard-free-cover"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the sheaf assertion let F = tilde M and P = Gamma(Spec A,F). The unit isomorphism tilde.isoTop identifies P with M by [lem-weil-pbc-affine-tilde-gamma-adjunction](2). Transport finiteness and the free locus along it and apply the preceding finite-cover theorem to P. For each cover element choose a finite basis of its free localization, using [def-weil-pbc-free-module].",
+   "uses": [
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
     "def-weil-pbc-free-module"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 0GWM, pointwise localization-free criterion"
-   }
+   "elementary": false
   },
   {
-   "text": "The spectrum of $A$ is quasi-compact, so finitely many of these principal opens cover it. By [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact](i), their defining elements $f_1,\\ldots,f_n$ generate the unit ideal. Each corresponding localization $M_{f_i}$ is finite free by construction.",
+   "text": "The unit-ideal condition makes the localized spectra cover by [lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact](i). Lift the finite index type to the universe of the scheme. On each localized spectrum, [lem-weil-pbc-spec-module-tilde-sections] and the affine quasi-coherent equivalence identify F with the free sheaf on the chosen finite basis; this is the proved source theorem Scheme.Modules.nonempty_restrict_iso_free_of_localizedModule. Scheme.Modules.isFiniteLocallyFree_of_restrict_iso_free combines these restrictions into finite local freeness, allowing the ranks to vary.",
    "uses": [
-    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact"
+    "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "def-sc-finite-locally-free-sheaf"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00E0 and 00E8, Zariski topology and quasi-compactness of Spec"
-   }
-  },
-  {
-   "text": "On $\\operatorname{Spec}(A)$, the module sheaf $\\widetilde M$ has sections $M_f$ on each principal open $D(f)$ by [lem-weil-pbc-spec-module-tilde-sections]. Therefore the finite principal cover above trivializes $\\widetilde M$ by finite free modules, which is exactly finite local freeness.",
-   "uses": [
-    "lem-weil-pbc-spec-module-tilde-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tags 01I1 and 01I2, module sheaves on affine schemes"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-sc-noetherian-finite-module-finite-presentation",
-  "lem-sc-finitely-presented-free-at-prime-principal",
+  "lem-trf-finite-projective-local-free",
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
   "def-weil-pbc-free-module",
   "lem-weil-pbc-spec-basic-opens-unit-ideal-quasi-compact",
-  "lem-weil-pbc-spec-module-tilde-sections"
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "def-sc-finite-locally-free-sheaf"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tag 0GWM, algebra-lemma-finitely-presented-localization-free"
+  "place": "Tag 00NX (4) implies (2), then the already proved finite standard-cover theorem, followed by the affine module-sheaf dictionary (schemes.tex, Tags 01HV and 01IB) and modules.tex Definition 01C6; implemented by B4 on 2026-10-18"
  },
  "mathlib_searches": [
   {
@@ -177,5 +168,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B4",
+  "result": "pass",
+  "landing": "20261018T110335-L-341842",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

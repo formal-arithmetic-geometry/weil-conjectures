@@ -8,6 +8,8 @@ public import Mathlib.RingTheory.Localization.Free
 public import Mathlib.RingTheory.Spectrum.Prime.FreeLocus
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
+import WeilConjectures.RingTheory.FiniteProjectiveStandardFreeCover
+import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-!
 # Finite modules free at all primes are locally free on an affine cover
@@ -57,7 +59,10 @@ theorem finite_free_at_primes_localized_cover
             (LocalizedModule.Away (f i) M) ∧
           Module.Finite (Localization.Away (f i))
             (LocalizedModule.Away (f i) M) := by
-  sorry
+  have : Module.FinitePresentation A M := Module.finitePresentation_of_finite A M
+  have : Module.Projective A M := Module.freeLocus_eq_univ_iff.mp hfree
+  obtain ⟨n, f, hf, hloc⟩ := Module.exists_standardFreeCover_of_finite_projective A M
+  exact ⟨n, f, hf, fun i ↦ ⟨(hloc i).2, (hloc i).1⟩⟩
 
 end Module
 
@@ -85,6 +90,33 @@ theorem isFiniteLocallyFree_tilde_of_free_at_primes
     (hfree : Module.freeLocus A M = Set.univ) :
     SheafOfModules.IsFiniteLocallyFree.{u, u, u}
       (tilde (R := CommRingCat.of A) (ModuleCat.of A M)) := by
-  sorry
+  classical
+  let F := tilde (R := CommRingCat.of A) (ModuleCat.of A M)
+  let P := (moduleSpecΓFunctor (R := CommRingCat.of A)).obj F
+  let e := tilde.isoTop (R := CommRingCat.of A) (ModuleCat.of A M)
+  have : Module.Finite A P := Module.Finite.equiv e.toLinearEquiv
+  have hP : Module.freeLocus A P = Set.univ := by
+    exact (Module.freeLocus_congr e.toLinearEquiv).symm.trans hfree
+  obtain ⟨n, f, hf, hloc⟩ := Module.finite_free_at_primes_localized_cover hP
+  have (i : Fin n) : Module.Free (Localization.Away (f i))
+      (LocalizedModule.Away (f i) P) := (hloc i).1
+  have (i : Fin n) : Module.Finite (Localization.Away (f i))
+      (LocalizedModule.Away (f i) P) := (hloc i).2
+  let κ (i : ULift.{u} (Fin n)) :=
+    Module.Free.ChooseBasisIndex (Localization.Away (f i.down))
+      (LocalizedModule.Away (f i.down) P)
+  let j (i : ULift.{u} (Fin n)) := Spec.map (show CommRingCat.of A ⟶
+      CommRingCat.of (Localization.Away (f i.down)) from
+    CommRingCat.ofHom (algebraMap A (Localization.Away (f i.down))))
+  have hj (i : ULift.{u} (Fin n)) : (j i).opensRange =
+      PrimeSpectrum.basicOpen (f i.down) :=
+    Scheme.Hom.opensRange_localizationAway (R := CommRingCat.of A) (f i.down)
+  refine Scheme.Modules.isFiniteLocallyFree_of_restrict_iso_free F j ?_ κ ?_
+  · simpa only [hj, iSup_ulift] using
+      (PrimeSpectrum.iSup_basicOpen_eq_top_iff.mpr hf)
+  · intro i
+    exact Scheme.Modules.nonempty_restrict_iso_free_of_localizedModule F (f i.down)
+      (Module.Free.chooseBasis (Localization.Away (f i.down))
+        (LocalizedModule.Away (f i.down) P)).repr
 
 end AlgebraicGeometry
