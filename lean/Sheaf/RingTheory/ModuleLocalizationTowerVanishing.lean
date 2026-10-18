@@ -161,7 +161,7 @@ private lemma scalarTelescopeDifferential_mono {A : Type u} [CommRing A] (f : A)
   exact congrArg ULift.down (hx' n)
 
 set_option backward.isDefEq.respectTransparency false in
-private lemma telescope_shortExact {C : Type*} [Category C] [Abelian C]
+lemma telescope_shortExact {C : Type*} [Category C] [Abelian C]
     (E : ℕ ⥤ C) [HasColimit E] (c : Cofan E.obj) (hc : IsColimit c)
     (d : c.pt ⟶ c.pt) [Mono d]
     (hd : ∀ n, c.inj n ≫ d =

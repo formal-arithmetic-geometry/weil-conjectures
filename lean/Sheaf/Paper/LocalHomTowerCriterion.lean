@@ -8,16 +8,11 @@ module
 public import Sheaf.CategoryTheory.LocalCoefficientLocalization
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
+import Sheaf.Algebra.Homology.LocalCoefficientTelescopeDual
+import Sheaf.CategoryTheory.SequentialTelescopeMono
+import Sheaf.RingTheory.ModuleLocalizationTowerVanishing
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
-import Sheaf.Algebra.Homology.HomComplex
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-import Sheaf.Algebra.Homology.KInjectiveProductsTermwise
 import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
-import Sheaf.CategoryTheory.SliceAwayLocalizationFreeResolution
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 
 /-!
 # Localization internal Hom and the multiplication tower
@@ -41,20 +36,20 @@ Source: Stacks Project, algebraization.tex, Tag 0997, lemma-hom-from-Af,
 equivalence of (1) and (3) (blueprint: lem-weil-pbc-local-hom-tower-criterion).
 
 Proof:
-1. Work on the small slice site and choose a degreewise injective K-injective replacement
-   of the restricted complex (prop-pur-kinjective-resolutions-exist). The derived internal
-   Hom definition computes RHom into this replacement.
-2. The free resolution of the localization (lem-weil-pbc-localization-free-resolution)
-   gives a distinguished triangle (lem-weil-pbc-complex-ses-triangle). Apply contravariant
-   derived internal Hom and rotate (lem-weil-pbc-ringed-internal-hom-exact-restriction).
-3. Hom from the countable free sum is the product of copies of the replacement, and
-   precomposition with the resolution map sends (x_n) to (x_n - f*x_(n+1))
-   (def-pur-sheaf-hom and def-pur-hom-complex).
-4. Products of K-injectives represent derived products
-   (lem-pc-ringed-space-product-kinjective), so the triangle obtained is the Roos triangle
-   of the multiplication tower (def-weil-derived-limit). Reindex n ≥ 0 as n+1 ≥ 1.
-5. Any chosen derived limit is isomorphic to this one (lem-weil-derived-limit-existence).
-   Isomorphic objects vanish simultaneously. No exactness of products of sheaves is assumed. -/
+1. The coefficient localization is the sequential colimit of repeated multiplication
+   on the unit sheaf. The countable free telescope map is monic by the sequential
+   telescope theorem in a Grothendieck abelian category. The colimit universal
+   property identifies its cokernel with the coefficient localization.
+2. Embed this short exact sequence in degree zero and apply the distinguished-triangle
+   construction. Contravariant derived internal Hom gives a distinguished triangle
+   whose first object is the internal Hom in the statement.
+3. The free coefficient telescope duality calculation identifies the middle map with
+   the Roos endomorphism on the product of restricted copies of K, including the
+   specified derived local-section multiplication.
+4. In a distinguished triangle the first object vanishes exactly when the middle
+   map is invertible. Apply this both to the Hom triangle and to the triangle in the
+   supplied derived-limit witness. Conjugation by the product isomorphism preserves
+   invertibility. No choice or uniqueness theorem for derived limits is needed. -/
 theorem localHom_zero_iff_multiplicationTower_zero
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
     (R : Sheaf J CommRingCat.{u}) (U : C) (f : R.obj.obj (op U))
@@ -69,6 +64,78 @@ theorem localHom_zero_iff_multiplicationTower_zero
     IsZero ((derivedInternalHom (J.over U) (R.over U)).obj
       (op ((DerivedCategory.singleFunctor _ 0).obj (localCoefficientLocalization R U f)),
         (localCoefficientDerivedRestriction R U).obj K)) ↔ IsZero T := by
-  sorry
+  classical
+  let A := ringedSiteModules.{u} ((localCoefficientRings R).over U)
+  -- Keep the opposite structures local to this proof, for both slice presentations.
+  let : HasShift (DerivedCategory A)ᵒᵖ ℤ :=
+    open scoped CategoryTheory.Pretriangulated.Opposite in inferInstance
+  let : ∀ n : ℤ, (shiftFunctor (DerivedCategory A)ᵒᵖ n).Additive :=
+    open scoped CategoryTheory.Pretriangulated.Opposite in inferInstance
+  let : Pretriangulated (DerivedCategory A)ᵒᵖ :=
+    open scoped CategoryTheory.Pretriangulated.Opposite in inferInstance
+  let A' := SheafOfModules.{u}
+    ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (R.over U))
+  let : HasShift (DerivedCategory A')ᵒᵖ ℤ :=
+    open scoped CategoryTheory.Pretriangulated.Opposite in inferInstance
+  let : ∀ n : ℤ, (shiftFunctor (DerivedCategory A')ᵒᵖ n).Additive :=
+    open scoped CategoryTheory.Pretriangulated.Opposite in inferInstance
+  let : Pretriangulated (DerivedCategory A')ᵒᵖ :=
+    open scoped CategoryTheory.Pretriangulated.Opposite in inferInstance
+  let E := Functor.ofSequence
+    (X := fun _ : ℕ ↦ SheafOfModules.unit ((localCoefficientRings R).over U))
+    (fun _ ↦ localSectionMultiplication R U f _)
+  let B : Cofan E.obj := Cofan.mk (localCoefficientFree R U) (fun n ↦ Sigma.ι _ n)
+  have hB : IsColimit B := coproductIsCoproduct _
+  let d := localCoefficientTelescopeMap R U f
+  have hd (n : ℕ) : B.inj n ≫ d =
+      B.inj n - E.map (homOfLE (Nat.le_succ n)) ≫ B.inj (n + 1) := by
+    change Sigma.ι _ n ≫ d = Sigma.ι _ n -
+      E.map (homOfLE (Nat.le_succ n)) ≫ Sigma.ι _ (n + 1)
+    rw [show E.map (homOfLE (Nat.le_succ n)) = localSectionMultiplication R U f _ from
+      Functor.ofSequence_map_homOfLE_succ _ n]
+    exact Sigma.ι_desc _ n
+  have : IsGrothendieckAbelian.{u} A := SheafOfModules.isGrothendieckAbelian _
+  have : AB5OfSize.{0, 0} A := AB5OfSize_shrink _
+  have : Mono d := sequentialTelescope_mono E B hB d hd
+  obtain ⟨q, hz, hs⟩ := telescope_shortExact E B hB d hd
+  let F := HomologicalComplex.single A (.up ℤ) 0
+  have hS := hs.map_of_exact F
+  let D := DerivedCategory.triangleOfSES hS
+  have hD := DerivedCategory.triangleOfSES_distinguished hS
+  let L := (localCoefficientDerivedRestriction R U).obj K
+  let H := (Functor.curry.obj (derivedInternalHom (J.over U) (R.over U))).flip.obj L
+  obtain ⟨hshift, htri⟩ := (ringedInternalHom_exact (J.over U) (R.over U)).2 L
+  let := hshift
+  let := htri
+  let Dop := (Pretriangulated.triangleOpEquivalence _).functor.obj (op D)
+  have hDop : Dop ∈ distTriang _ := by
+    apply (Pretriangulated.Opposite.mem_distinguishedTriangles_iff' _).mpr
+    exact ⟨D, hD, ⟨Iso.refl _⟩⟩
+  have hleft := Pretriangulated.Triangle.isZero₁_iff_isIso₂
+    (H.mapTriangle.obj Dop) (H.map_distinguished Dop hDop)
+  obtain ⟨e, he⟩ := localCoefficientTelescope_rhom_product J R U f K
+  have hmiddle : IsIso (H.map ((DerivedCategory.singleFunctor A 0).map d).op) ↔
+      IsIso (towerTransitionEndomorphism
+        (K := fun _ : ℕ ↦ L) (fun _ ↦ (localSectionDerivedMultiplication R U f).app K)) := by
+    constructor
+    · intro hi
+      let := hi
+      have : IsIso (H.map ((DerivedCategory.singleFunctor A 0).map d).op ≫ e.hom) :=
+        inferInstance
+      rw [he] at this
+      exact (isIso_comp_left_iff e.hom _).mp this
+    · intro hi
+      let := hi
+      have : IsIso (e.hom ≫ towerTransitionEndomorphism
+          (K := fun _ : ℕ ↦ L) (fun _ ↦ (localSectionDerivedMultiplication R U f).app K)) :=
+        inferInstance
+      rw [← he] at this
+      exact (isIso_comp_right_iff _ e.hom).mp this
+  obtain ⟨p, δ, hT⟩ := _hT
+  have hright := Pretriangulated.Triangle.isZero₁_iff_isIso₂
+    (Pretriangulated.Triangle.mk p
+      (towerTransitionEndomorphism
+        (K := fun _ : ℕ ↦ L) (fun _ ↦ (localSectionDerivedMultiplication R U f).app K)) δ) hT
+  exact hleft.trans (hmiddle.trans hright.symm)
 
 end CategoryTheory

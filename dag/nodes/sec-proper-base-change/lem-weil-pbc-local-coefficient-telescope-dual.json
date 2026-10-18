@@ -1,0 +1,192 @@
+{
+ "id": "lem-weil-pbc-local-coefficient-telescope-dual",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form, final Stacks comparison: preservation and reflection of the local Stacks condition; the free-telescope internal-Hom calculation used in the proof of 099I.",
+   "via": [
+    "lem-weil-pbc-local-hom-tower-criterion"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Derived internal Hom dualizes the free local coefficient telescope",
+ "statement": "Let $\\mathcal C$ be a small category with Grothendieck topology $J$, let $R$ be a sheaf of commutative rings, and let $U\\in\\mathcal C$. Write $\\mathcal A=\\operatorname{Mod}(R|_U)$ for module sheaves on the slice ringed site [def-weil-sheaf-of-modules-category, def-weil-pbc-local-coefficient-localization]. For $f\\in R(U)$ put $P=\\bigoplus_{n\\ge0}R|_U$ with inclusions $\\iota_n$, and define $d:P\\to P$ by $\\iota_n d=\\iota_n-f\\iota_{n+1}$, where $f$ acts by local section multiplication. Assume the global and slice derived categories exist [def-weil-abstract-derived-category]. For $K\\in D(R)$ let $L=K|_U$. If $\\prod_{n\\ge0}L$ exists, there is an isomorphism $e:R\\mathcal Hom(P[0],L)\\xrightarrow\\sim\\prod_{n\\ge0}L$ [def-pur-derived-internal-hom] such that $e\\circ R\\mathcal Hom(d,L)=(1-s_f)\\circ e$, where $s_f$ has coordinate maps $\\pi_{n+1}$ followed by the specified local section derived multiplication on $L$ [def-weil-tower-transition-endomorphism, def-weil-pbc-local-coefficient-localization].",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0997, lemma-hom-from-Af, proof of the equivalence of (1) and (3)."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-local-coefficient-localization",
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-weil-tower-transition-endomorphism"
+ ],
+ "proof": [
+  {
+   "text": "Choose a complex M representing the restricted target L and the functorial K-injective replacement I of M. The natural comparison for derived internal Hom identifies RHom(P[0],L) with Q(Hom-complex(P[0],I)), naturally in P. Use the actual projection specification of the chosen Hom complex, not an arbitrary objectwise isomorphism.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-sc-hom-complex-projections",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-pur-kinjective-degreewise-existence",
+    "def-pur-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0997, lemma-hom-from-Af, proof of the equivalence of (1) and (3)."
+   }
+  },
+  {
+   "text": "For a source in degree zero all factors of the degree-n Hom product except source degree zero vanish. The surviving projection is invertible. Evaluation at one identifies Hom from the coefficient unit with the target, and its compatibility with the differential supplies a chain isomorphism. Internal Hom takes the countable coproduct of units to the product fan, with legs given by precomposition with the summand inclusions followed by evaluation. The projection-map identity proves the precise coordinate formula.",
+   "uses": [
+    "lem-sc-hom-complex-projections",
+    "lem-sc-hom-complex-unit-evaluation-is-iso",
+    "lem-sc-hom-complex-unit-evaluation-comm",
+    "lem-sc-internal-hom-coproduct-fan",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0997, lemma-hom-from-Af, proof of the equivalence of (1) and (3)."
+   }
+  },
+  {
+   "text": "Apply the termwise product theorem to the constant family of K-injectives I. It proves that Q sends the product fan of complexes, with its actual projections, to a product fan in the derived category. Transport the factors through Q(I) isomorphic to L and the point through the natural derived-Hom comparison. The uniqueness of product cones gives the required product isomorphism.",
+   "uses": [
+    "lem-pc-ringed-space-product-kinjective",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0997, lemma-hom-from-Af, proof of the equivalence of (1) and (3)."
+   }
+  },
+  {
+   "text": "Precomposition on the unit by multiplication by f becomes multiplication on I under evaluation: a local linear map phi satisfies phi(f times 1)=f times phi(1). The section multiplication commutes with every chain map, hence with the resolution map M to I. The formula for the localized natural transformation and its naturality along the chosen representative isomorphism identify Q of the chain scalar on I with the specified derived multiplication on the restricted K.",
+   "uses": [
+    "def-weil-pbc-local-coefficient-localization",
+    "lem-sc-hom-complex-projections",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0997, lemma-hom-from-Af, proof of the equivalence of (1) and (3)."
+   }
+  },
+  {
+   "text": "The telescope satisfies inclusion_n followed by d = inclusion_n minus f followed by inclusion_(n+1). Additivity and contravariant functoriality of derived internal Hom convert this to projection_n minus projection_(n+1) followed by the derived scalar. Product extensionality identifies the conjugated map with the tower transition endomorphism 1 minus the shift.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "def-weil-tower-transition-endomorphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0997, lemma-hom-from-Af, proof of the equivalence of (1) and (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-pur-sheaf-hom",
+  "def-weil-pbc-local-coefficient-localization",
+  "def-weil-tower-transition-endomorphism",
+  "lem-pc-ringed-space-product-kinjective",
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-sc-hom-complex-projections",
+  "lem-sc-hom-complex-unit-evaluation-comm",
+  "lem-sc-hom-complex-unit-evaluation-is-iso",
+  "lem-sc-internal-hom-coproduct-fan",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0997, lemma-hom-from-Af, proof of the equivalence of (1) and (3)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom from a countable coproduct of unit sheaves gives the product, naturally for the identity minus scalar forward shift",
+   "results": "Eight hits concerning condensed monoidal closed structures and unitHomEquiv_comp_apply; no derived telescope comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.towerTransitionEndomorphism",
+   "results": "Unknown identifier; zero hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homComplex.*(coproduct|product)|derivedInternalHom.*product",
+   "results": "Zero hits in the search service; repository search found the proved internalHomCoproductFanIsLimit, used in step 2, but no telescope duality statement.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom from a countable coproduct of unit sheaves is the product, compatibly with multiplication and the telescope shift",
+   "results": "Eight hits: CategoryTheory.Pi.ihom and ihom_obj, condensed monoidal closed instances, Pi.monoidHomMulEquiv, Pi.closedCounit, Pi.closedUnit and HasCountableProducts.mk. None states derived internal Hom of the free sheaf coproduct or the telescope comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocalHomTowerCriterion",
+  "date": "2026-10-18",
+  "group": "C1"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.LocalCoefficientTelescopeDual",
+  "file": "lean/Sheaf/Algebra/Homology/LocalCoefficientTelescopeDual.lean",
+  "declaration": "CategoryTheory.localCoefficientTelescope_rhom_product",
+  "declarations": [
+   "CategoryTheory.localCoefficientFree",
+   "CategoryTheory.localCoefficientTelescopeMap",
+   "CategoryTheory.localCoefficientTelescope_rhom_product"
+  ],
+  "statement": "theorem localCoefficientTelescope_rhom_product\n    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)\n    (R : Sheaf J CommRingCat.{u}) (U : C) (f : R.obj.obj (op U))\n    [HasDerivedCategory.{w} (ringedSiteModules.{u} (localCoefficientRings R))]\n    [HasDerivedCategory.{wSlice} (ringedSiteModules.{u} ((localCoefficientRings R).over U))]\n    (K : DerivedCategory (ringedSiteModules.{u} (localCoefficientRings R)))\n    [HasProduct (fun _ : ℕ ↦ (localCoefficientDerivedRestriction R U).obj K)] :\n    let L := (localCoefficientDerivedRestriction R U).obj K\n    let S := DerivedCategory.singleFunctor\n      (ringedSiteModules.{u} ((localCoefficientRings R).over U)) 0\n    let H := (Functor.curry.obj (derivedInternalHom (J.over U) (R.over U))).flip.obj L\n    ∃ e : H.obj (op (S.obj (localCoefficientFree R U))) ≅ ∏ᶜ (fun _ : ℕ ↦ L),\n      H.map (S.map (localCoefficientTelescopeMap R U f)).op ≫ e.hom =\n        e.hom ≫ towerTransitionEndomorphism\n          (K := fun _ : ℕ ↦ L) (fun _ ↦ (localSectionDerivedMultiplication R U f).app K)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261018T103142-L-4174555",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261018T103142-L-4174555",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

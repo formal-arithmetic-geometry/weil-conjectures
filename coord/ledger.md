@@ -16408,3 +16408,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:23 L: merged deliver/D4/Sheaf.Paper.AdicCompletionReduction (stage 3; reviewer PASS; first push; landing 20261018T102313-L-4076185 (interface); batch 20261018T102309; modules 1; new nodes 0; change records: coord/changes/D4-adic-reduction-adjunction-proof-scope.md)
 - 10:28 L: merged deliver/D2/Sheaf.RingTheory.PseudoCoherentInverseRingReconstruction (stage 3; reviewer PASS; first push; landing 20261018T102813-L-4138048 (interface); batch 20261018T102810; modules 2; new nodes 1)
 - 10:31 L: merged deliver/A3/Sheaf.Paper.ProjectionFormulaTotalization (stage 3; reviewer PASS; first push; landing 20261018T103141-L-4174414 (interface); batch 20261018T103138; modules 3; new nodes 2)
+- 10:31 L: merged deliver/C1/Sheaf.Paper.LocalHomTowerCriterion (stage 3; reviewer PASS; after a return; landing 20261018T103142-L-4174555 (interface); batch 20261018T103138; modules 3; new nodes 1)
