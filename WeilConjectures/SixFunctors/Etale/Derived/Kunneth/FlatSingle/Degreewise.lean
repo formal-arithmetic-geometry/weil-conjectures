@@ -15,6 +15,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.SingleReduction
 public import WeilConjectures.ConstructibleSheaf.FilteredColimit
 public import WeilConjectures.ConstructibleSheaf.FiniteMorphism
 public import WeilConjectures.ConstructibleSheaf.Monoidal
+public import WeilConjectures.ConstructibleSheaf.FiniteDirectImageKunneth
 public import WeilConjectures.CategoryTheory.DerivedCategory.ConstructibleTorsion
 
 /-!
@@ -60,8 +61,9 @@ variable {C D : Type*} [Category C] [Category D]
 /-- A natural transformation between additive functors which is an isomorphism at finitely many
 objects is an isomorphism at their biproduct. -/
 lemma CategoryTheory.NatTrans.isIso_app_biproduct [Preadditive C] [Preadditive D]
-    [HasFiniteBiproducts C] [HasFiniteBiproducts D] {S T : C ⥤ D} [S.Additive] [T.Additive]
-    (τ : S ⟶ T) {ι : Type} [Finite ι] (f : ι → C) [∀ i, IsIso (τ.app (f i))] :
+    [HasFiniteBiproducts D] {S T : C ⥤ D} [S.Additive] [T.Additive]
+    (τ : S ⟶ T) {ι : Type} [Finite ι] (f : ι → C) {_ : HasBiproduct f}
+    (hf : ∀ i, IsIso (τ.app (f i))) :
     IsIso (τ.app (⨁ f)) := by
   have : τ.app (⨁ f) = (S.mapBiproduct f ≪≫ biproduct.mapIso (fun i ↦ asIso (τ.app (f i))) ≪≫
       (T.mapBiproduct f).symm).hom := by
@@ -73,6 +75,16 @@ lemma CategoryTheory.NatTrans.isIso_app_biproduct [Preadditive C] [Preadditive D
     exact (τ.naturality _).symm
   rw [this]
   infer_instance
+
+/-- A natural transformation between additive functors which is an isomorphism at an object is an
+isomorphism at the retracts of the finite sums of copies of it. The biproduct is taken with the
+given `HasBiproduct` instance, so that no instance comparison is needed. -/
+lemma CategoryTheory.NatTrans.isIso_app_of_retract_biproduct [Preadditive C] [Preadditive D]
+    [HasFiniteBiproducts D] {S T : C ⥤ D} [S.Additive] [T.Additive] (τ : S ⟶ T) {A Z : C}
+    {m : ℕ} {_ : HasBiproduct (fun _ : Fin m ↦ Z)} (r : Retract A (⨁ fun _ : Fin m ↦ Z))
+    (hZ : IsIso (τ.app Z)) : IsIso (τ.app A) :=
+  have := NatTrans.isIso_app_biproduct τ (fun _ : Fin m ↦ Z) fun _ ↦ hZ
+  NatTrans.isIso_app_of_retract τ r
 
 /-- A natural transformation between functors preserving a colimit, which is an isomorphism on
 the diagram, is an isomorphism at the colimit. -/
@@ -109,15 +121,14 @@ open Scheme
 
 namespace Etale
 
-attribute [local instance] Abelian.hasFiniteBiproducts
-
 section Smul
 
 variable {Λ : Type (u + 1)} [CommRing Λ] {C D : Type*} [Category C] [Category D]
 
 /-- The cokernel of `AlgebraicGeometry.Etale.smulDesc I A`, the quotient `A / I A`, is killed by
 `I`. -/
-lemma smul_id_cokernel_smulDesc [Abelian C] [Linear Λ C] (I : Ideal Λ) [Finite I] (A : C)
+lemma smul_id_cokernel_smulDesc [Abelian C] [HasFiniteBiproducts C] [Linear Λ C] (I : Ideal Λ)
+    [Finite I] (A : C)
     {x : Λ} (hx : x ∈ I) : x • 𝟙 (cokernel (smulDesc I A)) = 0 := by
   rw [← cancel_epi (cokernel.π (smulDesc I A)), comp_zero, Linear.comp_smul, Category.comp_id,
     ← Category.id_comp (cokernel.π _), ← Linear.smul_comp]
@@ -146,7 +157,7 @@ lemma smul_id_eq_zero_of_retract [Preadditive C] [Linear Λ C] {A B : C} (r : Re
 
 /-- A biproduct of objects killed by `x` is killed by `x`. -/
 lemma smul_id_biproduct_eq_zero [Preadditive C] [Linear Λ C] {ι : Type} [Finite ι]
-    [HasFiniteBiproducts C] (f : ι → C) {x : Λ} (hf : ∀ i, x • 𝟙 (f i) = 0) :
+    (f : ι → C) [HasBiproduct f] {x : Λ} (hf : ∀ i, x • 𝟙 (f i) = 0) :
     x • 𝟙 (⨁ f) = 0 := by
   refine biproduct.hom_ext _ _ fun i ↦ ?_
   rw [zero_comp, Linear.smul_comp, Category.id_comp, ← Category.comp_id (biproduct.π f i),
@@ -154,7 +165,7 @@ lemma smul_id_biproduct_eq_zero [Preadditive C] [Linear Λ C] {ι : Type} [Finit
 
 /-- A functor sending the multiplications by the elements of `I` on `A` to zero sends
 `AlgebraicGeometry.Etale.smulDesc I A` to zero. -/
-lemma Functor.map_smulDesc_eq_zero [Preadditive C] [Preadditive D] [Linear Λ C]
+lemma map_smulDesc_eq_zero [Preadditive C] [Preadditive D] [Linear Λ C]
     [HasFiniteBiproducts C] (Φ : C ⥤ D) [Φ.Additive] (I : Ideal Λ) [Finite I] (A : C)
     (hΦ : ∀ x ∈ I, Φ.map (x • 𝟙 A) = 0) : Φ.map (smulDesc I A) = 0 := by
   rw [← cancel_epi (Φ.mapBiproduct (fun _ : I ↦ A)).inv, comp_zero]
@@ -238,6 +249,17 @@ lemma isZero_tensorBaseChangeHomologyTarget_obj {q : ℤ} (hq : q < 0)
   exact (R((h)_*[A]).obj ((DerivedCategory.singleFunctor _ 0).obj
       ((tensorBaseChangeHomologyTargetSheaf A p h e 𝓕).obj 𝓖))).isZero_of_isGE 0 q hq
 
+omit [Abelian.HasFunctorialFlatResolution A] in
+/-- The functor `𝓖 ↦ p^* 𝓖 ⊗ H` is additive. -/
+instance additive_upperStar_comp_tensorRight (H : Sheaf X'.smallEtaleTopology A) :
+    ((p)^*[A] ⋙ tensorRight H).Additive :=
+  inferInstance
+
+instance additive_tensorBaseChangeHomologyTarget (q : ℤ) :
+    (tensorBaseChangeHomologyTarget A p h e 𝓕 q).Additive :=
+  inferInstanceAs (tensorBaseChangeHomologyTargetSheaf A p h e 𝓕 ⋙
+    higherDirectImageFunctor A h q).Additive
+
 variable [Etale.UpperStarPreservesFlat A]
 
 /-- The degree-`q` base change map with the source `p^* 𝓖 ⊗ Hᵠ(τ^{≤q} N)`. -/
@@ -251,6 +273,15 @@ lemma isIso_tensorBaseChangeHomologyMap'_app_iff (q : ℤ) (𝓖 : Sheaf X.small
     IsIso ((tensorBaseChangeHomologyMap' A p h e f' g w 𝓕 q).app 𝓖) ↔
       IsIso ((tensorBaseChangeHomologyMap A p h e f' g w 𝓕 q).app 𝓖) := by
   rw [tensorBaseChangeHomologyMap', NatTrans.comp_app, isIso_comp_left_iff]
+
+/-- The degree-wise base change maps are isomorphisms at finite sums of sheaves at which they are
+isomorphisms. -/
+lemma isIso_tensorBaseChangeHomologyMap'_app_biproduct (q : ℤ) {r : ℕ}
+    (F : Fin r → Sheaf X.smallEtaleTopology A) {_ : HasBiproduct F}
+    (hF : ∀ i, IsIso ((tensorBaseChangeHomologyMap' A p h e f' g w 𝓕 q).app (F i))) :
+    IsIso ((tensorBaseChangeHomologyMap' A p h e f' g w 𝓕 q).app (⨁ F)) := by
+  have : HasFiniteBiproducts (Sheaf X'.smallEtaleTopology A) := Abelian.hasFiniteBiproducts
+  exact NatTrans.isIso_app_biproduct _ _ hF
 
 /-- The degree-wise base change map is an isomorphism in negative degrees. -/
 lemma isIso_tensorBaseChangeHomologyMap'_app_of_neg {q : ℤ} (hq : q < 0)
@@ -277,6 +308,271 @@ lemma exists_δ_tensorBaseChangeHomologyTarget (S : ShortComplex (Sheaf X.smallE
     DerivedCategory.HomologySequence.exact₁ T hT (q - 1) q (by lia)⟩
 
 end Generic
+section ModuleCat
+
+/-! ### Coefficients in a finite ring -/
+
+-- The generic constructions above use the preadditive structure of `A` coming from `Abelian A`;
+-- using the same one for `ModuleCat Λ` avoids expensive comparisons of the two.
+attribute [local instance 10000] Abelian.toPreadditive
+
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+
+/-- Tensoring with a sheaf killed by `x` kills the multiplication by `x`. -/
+lemma whiskerRight_smul_id_eq_zero {Z : Scheme.{u}}
+    (B H : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) {x : Λ} (hH : x • 𝟙 H = 0) :
+    (x • 𝟙 B) ▷ H = 0 := by
+  rw [MonoidalLinear.smul_whiskerRight, id_whiskerRight, ← MonoidalCategory.whiskerLeft_id,
+    ← MonoidalLinear.whiskerLeft_smul, hH, MonoidalPreadditive.whiskerLeft_zero]
+
+/-- A functor `Λ`-linear on morphisms kills the multiplications by elements killing an object. -/
+lemma map_smul_id_eq_zero {C D : Type*} [Category C] [Category D] [Preadditive C]
+    [Preadditive D] [Linear Λ C] [Linear Λ D] (F : C ⥤ D) [F.Additive] [F.Linear Λ] {A : C}
+    {x : Λ} (hA : x • 𝟙 A = 0) : x • 𝟙 (F.obj A) = 0 := by
+  rw [← CategoryTheory.Functor.map_id, ← Functor.map_smul, hA, Functor.map_zero]
+
+variable {X X' S' T Y : Scheme.{u}} (p : X' ⟶ X) (h : Y ⟶ X') (e : Y ⟶ T) (f' : X' ⟶ S')
+  (g : T ⟶ S') (w : h ≫ f' = e ≫ g) (𝓕 : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+
+variable {𝓕} in
+/-- The sheaf `Hᵠ(τ^{≤q} N)` is killed by every element killing `𝓕`. -/
+lemma smul_id_tensorBaseChangeHomologySheaf {x : Λ} (hx : x • 𝟙 𝓕 = 0) (q : ℤ) :
+    x • 𝟙 (tensorBaseChangeHomologySheaf (ModuleCat.{u + 1} Λ) f' g 𝓕 q) = 0 := by
+  have hN : x • 𝟙 (tensorBaseChangeComplex (ModuleCat.{u + 1} Λ) f' g 𝓕) = 0 :=
+    map_smul_id_eq_zero Λ L((f')^*[ModuleCat.{u + 1} Λ])
+      (map_smul_id_eq_zero Λ R((g)_*[ModuleCat.{u + 1} Λ])
+        (map_smul_id_eq_zero Λ (DerivedCategory.singleFunctor _ 0) hx))
+  exact smul_id_eq_zero_of_mono
+    (tensorBaseChangeHomologySheafIso (ModuleCat.{u + 1} Λ) f' g 𝓕 q).hom
+    (map_smul_id_eq_zero Λ (DerivedCategory.homologyFunctor _ q) hN)
+
+/-- On short exact sequences of sheaves on `X` whose middle term is killed by the Jacobson radical,
+the functor `𝓖 ↦ p^* 𝓖 ⊗ H` is exact, for any sheaf `H` on `X'`. -/
+lemma exact_upperStar_tensorRight (H : Sheaf X'.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (hS : S.ShortExact)
+    (hS₂ : ∀ x ∈ Ring.jacobson Λ, x • 𝟙 S.X₂ = 0) :
+    Mono (((p)^*[ModuleCat.{u + 1} Λ] ⋙ tensorRight H).map S.f) ∧
+      Epi (((p)^*[ModuleCat.{u + 1} Λ] ⋙ tensorRight H).map S.g) ∧
+      (S.map ((p)^*[ModuleCat.{u + 1} Λ] ⋙ tensorRight H)).Exact := by
+  have := hS.mono_f
+  have := hS.epi_g
+  have := preservesFiniteColimits_tensorRight H
+  refine ⟨?_, inferInstance, hS.exact.map_of_epi_of_preservesCokernel _ hS.epi_g inferInstance⟩
+  exact Sheaf.mono_whiskerRight_of_smul_eq_zero_of_ideal (Ring.jacobson Λ)
+    ((p)^*[ModuleCat.{u + 1} Λ].map S.f) (fun x hx ↦ map_smul_id_eq_zero Λ _ (hS₂ x hx)) H
+
+/-- On short exact sequences of sheaves on `X` whose middle term is killed by the Jacobson radical,
+the functor `𝓖 ↦ h^* p^* 𝓖 ⊗ e^* 𝓕` is exact. -/
+lemma shortExact_map_tensorBaseChangeHomologyTargetSheaf
+    (S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (hS : S.ShortExact)
+    (hS₂ : ∀ x ∈ Ring.jacobson Λ, x • 𝟙 S.X₂ = 0) :
+    (S.map (tensorBaseChangeHomologyTargetSheaf (ModuleCat.{u + 1} Λ) p h e 𝓕)).ShortExact := by
+  have := hS.mono_f
+  have := hS.epi_g
+  have := preservesFiniteColimits_tensorRight ((e)^*[ModuleCat.{u + 1} Λ].obj 𝓕)
+  have : Mono (S.map (tensorBaseChangeHomologyTargetSheaf (ModuleCat.{u + 1} Λ) p h e 𝓕)).f :=
+    Sheaf.mono_whiskerRight_of_smul_eq_zero_of_ideal (Ring.jacobson Λ)
+      ((h)^*[ModuleCat.{u + 1} Λ].map ((p)^*[ModuleCat.{u + 1} Λ].map S.f))
+      (fun x hx ↦ map_smul_id_eq_zero Λ _ (map_smul_id_eq_zero Λ _ (hS₂ x hx))) _
+  have : Epi (S.map (tensorBaseChangeHomologyTargetSheaf (ModuleCat.{u + 1} Λ) p h e 𝓕)).g :=
+    inferInstanceAs (Epi ((tensorBaseChangeHomologyTargetSheaf (ModuleCat.{u + 1} Λ) p h e 𝓕).map
+      S.g))
+  exact ⟨hS.exact.map_of_epi_of_preservesCokernel _ hS.epi_g inferInstance⟩
+/-- The degree-`q` base change map at a sheaf `𝓖` is an isomorphism if and only if it is one at
+`𝓖 / J 𝓖`: both sides are right exact in `𝓖` and kill the Jacobson radical `J`. -/
+lemma isIso_tensorBaseChangeHomologyMap_app_iff_cokernel_smulDesc
+    (h𝓕 : ∀ x ∈ Ring.jacobson Λ, x • 𝟙 𝓕 = 0) (q : ℤ)
+    (𝓖 : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    IsIso ((tensorBaseChangeHomologyMap (ModuleCat.{u + 1} Λ) p h e f' g w 𝓕 q).app 𝓖) ↔
+      IsIso ((tensorBaseChangeHomologyMap (ModuleCat.{u + 1} Λ) p h e f' g w 𝓕 q).app
+        (cokernel (smulDesc (Ring.jacobson Λ) 𝓖))) := by
+  rw [← isIso_tensorBaseChangeHomologyMap'_app_iff, ← isIso_tensorBaseChangeHomologyMap'_app_iff]
+  let τ := tensorBaseChangeHomologyMap' (ModuleCat.{u + 1} Λ) p h e f' g w 𝓕 q
+  let π := cokernel.π (smulDesc (Ring.jacobson Λ) 𝓖)
+  let Φ := (p)^*[ModuleCat.{u + 1} Λ] ⋙
+    tensorRight (tensorBaseChangeHomologySheaf (ModuleCat.{u + 1} Λ) f' g 𝓕 q)
+  let Ψ := tensorBaseChangeHomologyTargetSheaf (ModuleCat.{u + 1} Λ) p h e 𝓕
+  have := preservesFiniteColimits_tensorRight
+    (tensorBaseChangeHomologySheaf (ModuleCat.{u + 1} Λ) f' g 𝓕 q)
+  have := preservesFiniteColimits_tensorRight ((e)^*[ModuleCat.{u + 1} Λ].obj 𝓕)
+  have hΦ : IsIso (Φ.map π) := Functor.isIso_map_cokernel_π_of_map_eq_zero Φ _
+    (map_smulDesc_eq_zero Φ _ _ fun x hx ↦ by
+      change (p)^*[ModuleCat.{u + 1} Λ].map (x • 𝟙 𝓖) ▷ _ = 0
+      rw [Functor.map_smul, CategoryTheory.Functor.map_id]
+      exact whiskerRight_smul_id_eq_zero Λ _ _
+        (smul_id_tensorBaseChangeHomologySheaf Λ f' g (h𝓕 x hx) q))
+  have hΨ : IsIso (Ψ.map π) := Functor.isIso_map_cokernel_π_of_map_eq_zero Ψ _
+    (map_smulDesc_eq_zero Ψ _ _ fun x hx ↦ by
+      change (h)^*[ModuleCat.{u + 1} Λ].map ((p)^*[ModuleCat.{u + 1} Λ].map (x • 𝟙 𝓖)) ▷ _ = 0
+      rw [Functor.map_smul, CategoryTheory.Functor.map_id, Functor.map_smul,
+        CategoryTheory.Functor.map_id]
+      exact whiskerRight_smul_id_eq_zero Λ _ _ (map_smul_id_eq_zero Λ _ (h𝓕 x hx)))
+  have hT : IsIso ((tensorBaseChangeHomologyTarget (ModuleCat.{u + 1} Λ) p h e 𝓕 q).map π) :=
+    inferInstanceAs (IsIso ((higherDirectImageFunctor (ModuleCat.{u + 1} Λ) h q).map (Ψ.map π)))
+  have hn := τ.naturality π
+  constructor
+  · intro _
+    have : IsIso (Φ.map π ≫ τ.app _) := by rw [hn]; infer_instance
+    exact IsIso.of_isIso_comp_left (Φ.map π) _
+  · intro _
+    have : IsIso (τ.app 𝓖 ≫
+        (tensorBaseChangeHomologyTarget (ModuleCat.{u + 1} Λ) p h e 𝓕 q).map π) := by
+      rw [← hn]; infer_instance
+    exact IsIso.of_isIso_comp_right _
+      ((tensorBaseChangeHomologyTarget (ModuleCat.{u + 1} Λ) p h e 𝓕 q).map π)
+
+variable {Λ} in
+/-- A sheaf `π_* M`, for `π` finite and `M` finite killed by the Jacobson radical `J`, is killed by
+`J`. -/
+lemma smul_id_lowerStar_constantSheaf {Z : Scheme.{u}} (π : Z ⟶ X) [IsFinite π]
+    (M : ModuleCat.{u + 1} Λ) [Finite M] (hM : ∀ x ∈ Ring.jacobson Λ, x • 𝟙 M = 0) {x : Λ}
+    (hx : x ∈ Ring.jacobson Λ) :
+    x • 𝟙 ((π)_*[ModuleCat.{u + 1} Λ].obj
+      ((constantSheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)) = 0 := by
+  obtain ⟨m, ⟨r⟩⟩ := exists_retract_lowerStar_constantSheaf_of_smul_eq_zero Λ π M hM
+  exact smul_id_eq_zero_of_retract r
+    (smul_id_biproduct_eq_zero _ fun _ ↦ smul_id_cokernel_smulDesc _ _ hx)
+
+/-- If the degree-wise base change map is an isomorphism at `π_* Λ / J π_* Λ`, it is an
+isomorphism at `π_* M` for every finite module `M` killed by `J`. -/
+lemma isIso_tensorBaseChangeHomologyMap'_app_lowerStar_constantSheaf {Z : Scheme.{u}}
+    (π : Z ⟶ X) [IsFinite π] (q : ℤ)
+    (hgood : IsIso ((tensorBaseChangeHomologyMap (ModuleCat.{u + 1} Λ) p h e f' g w 𝓕 q).app
+        (cokernel (smulDesc (Ring.jacobson Λ) ((π)_*[ModuleCat.{u + 1} Λ].obj (𝟙_ _))))))
+    (M : ModuleCat.{u + 1} Λ) [Finite M] (hM : ∀ x ∈ Ring.jacobson Λ, x • 𝟙 M = 0) :
+    IsIso ((tensorBaseChangeHomologyMap' (ModuleCat.{u + 1} Λ) p h e f' g w 𝓕 q).app
+      ((π)_*[ModuleCat.{u + 1} Λ].obj
+        ((constantSheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M))) := by
+  obtain ⟨m, ⟨r⟩⟩ := exists_retract_lowerStar_constantSheaf_of_smul_eq_zero Λ π M hM
+  have := (isIso_tensorBaseChangeHomologyMap'_app_iff (ModuleCat.{u + 1} Λ) p h e f' g w 𝓕 q
+    _).2 hgood
+  exact NatTrans.isIso_app_of_retract_biproduct _ r this
+
+variable {Λ} in
+/-- A finite sum of sheaves `πᵢ_* Mᵢ`, `πᵢ` finite and `Mᵢ` finite killed by `J`, is killed by `J`.
+-/
+lemma smul_id_biproduct_lowerStar_constantSheaf {r : ℕ} {Z : Fin r → Scheme.{u}}
+    (π : ∀ i, Z i ⟶ X) [∀ i, IsFinite (π i)] (M : Fin r → ModuleCat.{u + 1} Λ)
+    [∀ i, Finite (M i)] (hM : ∀ i, ∀ x ∈ Ring.jacobson Λ, x • 𝟙 (M i) = 0) {x : Λ}
+    (hx : x ∈ Ring.jacobson Λ) :
+    x • 𝟙 (⨁ fun i ↦ (π i)_*[ModuleCat.{u + 1} Λ].obj
+      ((constantSheaf (Z i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M i))) = 0 :=
+  smul_id_biproduct_eq_zero _ fun i ↦ smul_id_lowerStar_constantSheaf (π i) (M i) (hM i) hx
+
+/-- The degree-wise base change maps are isomorphisms at finite sums of sheaves `πᵢ_* Mᵢ`. -/
+lemma isIso_tensorBaseChangeHomologyMap'_app_biproduct_lowerStar_constantSheaf {r : ℕ}
+    {Z : Fin r → Scheme.{u}} (π : ∀ i, Z i ⟶ X) [∀ i, IsFinite (π i)] (q : ℤ)
+    (hgood : ∀ i, IsIso ((tensorBaseChangeHomologyMap (ModuleCat.{u + 1} Λ) p h e f' g w 𝓕 q).app
+        (cokernel (smulDesc (Ring.jacobson Λ) ((π i)_*[ModuleCat.{u + 1} Λ].obj (𝟙_ _))))))
+    (M : Fin r → ModuleCat.{u + 1} Λ) [∀ i, Finite (M i)]
+    (hM : ∀ i, ∀ x ∈ Ring.jacobson Λ, x • 𝟙 (M i) = 0) :
+    IsIso ((tensorBaseChangeHomologyMap' (ModuleCat.{u + 1} Λ) p h e f' g w 𝓕 q).app
+      (⨁ fun i ↦ (π i)_*[ModuleCat.{u + 1} Λ].obj
+        ((constantSheaf (Z i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M i)))) := by
+  exact isIso_tensorBaseChangeHomologyMap'_app_biproduct (ModuleCat.{u + 1} Λ) p h e f' g w 𝓕 q
+    (fun i ↦ (π i)_*[ModuleCat.{u + 1} Λ].obj
+      ((constantSheaf (Z i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M i))) fun i ↦
+    isIso_tensorBaseChangeHomologyMap'_app_lowerStar_constantSheaf Λ p h e f' g w 𝓕 (π i) q
+      (hgood i) (M i) (hM i)
+
+variable {Λ} in
+/-- A finite sum of sheaves `πᵢ_* Mᵢ`, `πᵢ` finite and `Mᵢ` finite, on a Noetherian scheme, is
+constructible. -/
+lemma isConstructibleSheaf_biproduct_lowerStar_constantSheaf [IsNoetherian X] {r : ℕ}
+    {Z : Fin r → Scheme.{u}} (π : ∀ i, Z i ⟶ X) [∀ i, IsFinite (π i)]
+    (M : Fin r → ModuleCat.{u + 1} Λ) [∀ i, Finite (M i)] :
+    IsConstructibleSheaf (⨁ fun i ↦ (π i)_*[ModuleCat.{u + 1} Λ].obj
+      ((constantSheaf (Z i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M i))) := by
+  have (i : Fin r) : IsConstructibleSheaf ((π i)_*[ModuleCat.{u + 1} Λ].obj
+      ((constantSheaf (Z i).smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (M i))) := by
+    have : Module.Finite Λ (M i) := Module.Finite.of_finite
+    have := Scheme.isConstructibleSheaf_constantSheaf (X := Z i) (M i)
+    exact Scheme.IsConstructibleSheaf.lowerStar_of_isFinite (π i) _
+  exact IsConstructibleSheaf.biproduct _
+
+/-- Dimension shifting: if the degree-wise base change maps are isomorphisms at the sheaves
+`π_* Λ / J π_* Λ` for finite morphisms `π`, they are isomorphisms at every constructible sheaf
+killed by the Jacobson radical `J`, on `X` of finite type over a field. -/
+theorem isIso_tensorBaseChangeHomologyMap_app_of_isConstructibleSheaf {K : Type u} [Field K]
+    (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a]
+    (hgood : ∀ {Xᵢ : Scheme.{u}} (π : Xᵢ ⟶ X) [IsFinite π] (q : ℤ),
+      IsIso ((tensorBaseChangeHomologyMap (ModuleCat.{u + 1} Λ) p h e f' g w 𝓕 q).app
+        (cokernel (smulDesc (Ring.jacobson Λ) ((π)_*[ModuleCat.{u + 1} Λ].obj (𝟙_ _))))))
+    (q : ℤ) (B : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf B]
+    (hB : ∀ x ∈ Ring.jacobson Λ, x • 𝟙 B = 0) :
+    IsIso ((tensorBaseChangeHomologyMap (ModuleCat.{u + 1} Λ) p h e f' g w 𝓕 q).app B) := by
+  have := QuasiCompact.compactSpace_of_compactSpace a
+  have : IsNoetherian X := { __ := LocallyOfFiniteType.isLocallyNoetherian a }
+  refine (isIso_tensorBaseChangeHomologyMap'_app_iff _ p h e f' g w 𝓕 q B).1 ?_
+  refine isIso_app_of_dimensionShift (D := Sheaf X'.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (fun A ↦ IsConstructibleSheaf A ∧ ∀ x ∈ Ring.jacobson Λ, x • 𝟙 A = 0)
+    (fun A ↦ (∀ x ∈ Ring.jacobson Λ, x • 𝟙 A = 0) ∧ ∀ q, IsIso
+      ((tensorBaseChangeHomologyMap' (ModuleCat.{u + 1} Λ) p h e f' g w 𝓕 q).app A))
+    (fun q ↦ (p)^*[ModuleCat.{u + 1} Λ] ⋙
+      tensorRight (tensorBaseChangeHomologySheaf (ModuleCat.{u + 1} Λ) f' g 𝓕 q))
+    (fun q ↦ tensorBaseChangeHomologyTarget (ModuleCat.{u + 1} Λ) p h e 𝓕 q)
+    (tensorBaseChangeHomologyMap' (ModuleCat.{u + 1} Λ) p h e f' g w 𝓕)
+    (fun q hq A _ ↦ isIso_tensorBaseChangeHomologyMap'_app_of_neg _ p h e f' g w 𝓕 hq A)
+    (fun q A hA ↦ hA.2 q) ?_ q B ⟨inferInstance, hB⟩
+  rintro A ⟨hAc, hAJ⟩
+  obtain ⟨r, Y, π, hπfin, M, hMfin, hMJ, φ, hφ⟩ :=
+    exists_mono_biproduct_lowerStar_of_smul_eq_zero Λ a A hAJ
+  have hBJ := fun x (hx : x ∈ Ring.jacobson Λ) ↦
+    smul_id_biproduct_lowerStar_constantSheaf π M hMJ hx
+  have hBτ := fun q ↦ isIso_tensorBaseChangeHomologyMap'_app_biproduct_lowerStar_constantSheaf Λ p
+    h e f' g w 𝓕 π q (fun i ↦ hgood (π i) q) M hMJ
+  have := isConstructibleSheaf_biproduct_lowerStar_constantSheaf π M
+  have : IsConstructibleSheaf (cokernel φ) := IsConstructibleSheaf.cokernel φ
+  let S := ShortComplex.mk φ (cokernel.π φ) (cokernel.condition φ)
+  have hS : S.ShortExact := ShortComplex.ShortExact.mk'
+    (ShortComplex.exact_of_g_is_cokernel _ (cokernelIsCokernel φ)) inferInstance inferInstance
+  refine ⟨_, cokernel φ, φ, cokernel.π φ, cokernel.condition φ, ⟨hBJ, hBτ⟩,
+    ⟨inferInstance, fun x hx ↦ smul_id_eq_zero_of_epi (cokernel.π φ) (hBJ x hx)⟩, fun q ↦ ?_⟩
+  obtain ⟨h₁, h₂, h₃⟩ := exact_upperStar_tensorRight Λ p
+    (tensorBaseChangeHomologySheaf (ModuleCat.{u + 1} Λ) f' g 𝓕 q) S hS hBJ
+  obtain ⟨δ, hδ, h₄, h₅⟩ := exists_δ_tensorBaseChangeHomologyTarget _ p h e 𝓕 S
+    (shortExact_map_tensorBaseChangeHomologyTargetSheaf Λ p h e 𝓕 S hS hBJ) q
+  exact ⟨h₁, h₂, h₃, δ, hδ, h₄, h₅⟩
+
+/-- If the degree-wise base change maps are isomorphisms at the sheaves `π_* Λ / J π_* Λ` for
+finite morphisms `π`, they are isomorphisms at every sheaf, on `X` of finite type over a field
+and for `h` quasi-compact and quasi-separated. -/
+theorem isIso_tensorBaseChangeHomologyMap_app_of_cokernel_lowerStar [QuasiCompact h]
+    [QuasiSeparated h] {K : Type u} [Field K]
+    (a : X ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a]
+    (h𝓕 : ∀ x ∈ Ring.jacobson Λ, x • 𝟙 𝓕 = 0)
+    (hgood : ∀ {Xᵢ : Scheme.{u}} (π : Xᵢ ⟶ X) [IsFinite π] (q : ℤ),
+      IsIso ((tensorBaseChangeHomologyMap (ModuleCat.{u + 1} Λ) p h e f' g w 𝓕 q).app
+        (cokernel (smulDesc (Ring.jacobson Λ) ((π)_*[ModuleCat.{u + 1} Λ].obj (𝟙_ _))))))
+    (q : ℤ) (𝓖 : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    IsIso ((tensorBaseChangeHomologyMap (ModuleCat.{u + 1} Λ) p h e f' g w 𝓕 q).app 𝓖) := by
+  have := QuasiCompact.compactSpace_of_compactSpace a
+  have : IsNoetherian X := { __ := LocallyOfFiniteType.isLocallyNoetherian a }
+  rw [isIso_tensorBaseChangeHomologyMap_app_iff_cokernel_smulDesc Λ p h e f' g w 𝓕 h𝓕,
+    ← isIso_tensorBaseChangeHomologyMap'_app_iff]
+  let Q := cokernel (smulDesc (Ring.jacobson Λ) 𝓖)
+  have hQ : ∀ x ∈ Ring.jacobson Λ, x • 𝟙 Q = 0 := fun x hx ↦ smul_id_cokernel_smulDesc _ _ hx
+  obtain ⟨I, _, _, D, c, hc, hD, hmono, ⟨hcol⟩⟩ := exists_isColimit_isConstructibleSheaf Q
+  have : PreservesColimitsOfShape I ((p)^*[ModuleCat.{u + 1} Λ] ⋙
+      tensorRight (tensorBaseChangeHomologySheaf (ModuleCat.{u + 1} Λ) f' g 𝓕 q)) :=
+    inferInstance
+  have := preservesColimitsOfShape_singleFunctor_rightDerivedLowerStar Λ h q I
+  have : PreservesColimitsOfShape I
+      (tensorBaseChangeHomologyTarget (ModuleCat.{u + 1} Λ) p h e 𝓕 q) :=
+    inferInstanceAs (PreservesColimitsOfShape I
+      (tensorBaseChangeHomologyTargetSheaf (ModuleCat.{u + 1} Λ) p h e 𝓕 ⋙
+        higherDirectImageFunctor (ModuleCat.{u + 1} Λ) h q))
+  have key := NatTrans.isIso_app_of_isColimit
+    (tensorBaseChangeHomologyMap' (ModuleCat.{u + 1} Λ) p h e f' g w 𝓕 q) hcol fun j ↦ by
+      have := hD j
+      rw [isIso_tensorBaseChangeHomologyMap'_app_iff]
+      exact isIso_tensorBaseChangeHomologyMap_app_of_isConstructibleSheaf Λ p h e f' g w 𝓕 a
+        hgood q (D.obj j) fun x hx ↦ by
+          have := hmono j
+          exact smul_id_eq_zero_of_mono (c.ι.app j) (hc ▸ hQ x hx)
+  rwa [hc] at key
+
+end ModuleCat
 
 end Etale
 
