@@ -1,6 +1,6 @@
 # Work queue
 
-950 items; claim with `tools/claim.py next <group> [--stage N]`.
+949 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (950)
+## Stage 3: modules to prove (949)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -491,7 +491,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.UnboundedProperOpenInterchange` | - | 1 | proof | 3 |
 | `Sheaf.RepresentationTheory.ContinuousCoefficientSubquotients` | - | 1 | proof | 3 |
 | `Sheaf.RingTheory.DerivedCompleteModuleFinite` | - | 1 | proof | 3 |
-| `Sheaf.RingTheory.DvrCyclicSummandCancellation` | - | 1 | proof | 3 |
 | `Sheaf.RingTheory.HenselianFiniteGaloisLift` | - | 1 | proof | 3 |
 | `Sheaf.RingTheory.HenselianResidueGaloisAction` | - | 1 | proof | 3 |
 | `Sheaf.RingTheory.PolynomialDistinctLinearCRT` | - | 1 | proof | 3 |
