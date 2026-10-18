@@ -17,10 +17,13 @@ Proving this once for arbitrary `S` and `T` keeps the kernel from unfolding conc
 subalgebras such as `Algebra.adjoin R s` when it checks the tower.
 -/
 
-@[expose] public section
+public section
 
 /-- For subalgebras `S ≤ T` of `A`, with `T` made an `S`-algebra via `Subalgebra.inclusion`,
-the algebras `S → T → A` form a scalar tower. -/
+the algebras `S → T → A` form a scalar tower.
+
+This is the `.toAlgebra` form of the scoped instance `Subalgebra.inclusion.isScalarTower_right`
+(with `X := A`), which is stated for `(Subalgebra.inclusion h).toModule`. -/
 theorem Subalgebra.isScalarTower_inclusion {R A : Type*} [CommSemiring R] [CommSemiring A]
     [Algebra R A] {S T : Subalgebra R A} (h : S ≤ T) :
     letI := (Subalgebra.inclusion h).toAlgebra
