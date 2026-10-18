@@ -16077,3 +16077,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:28 L: merged deliver/K4/Sheaf.RepresentationTheory.CoinducedContinuousAcyclic (stage 3; reviewer PASS; first push; landing 20261018T062824-L-660680 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:28 L: merged deliver/K6/Sheaf.Paper.FiniteGeometricPointCoproductCohomology (stage 3; reviewer PASS; first push; landing 20261018T062825-L-660808 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:28 L: merged deliver/K7/Sheaf.Paper.IntegralEtaleCoverDisjointRefinement (stage 3; reviewer PASS; first push; landing 20261018T062825-L-660973 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:28 L: merged deliver/K8/Sheaf.Paper.SheavesKilledByNZmodModules (stage 3; reviewer PASS; first push; landing 20261018T062826-L-661140 (proof); batch 20261018T062645; modules 1; new nodes 0)
