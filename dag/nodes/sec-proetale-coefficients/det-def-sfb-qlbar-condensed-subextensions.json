@@ -20,19 +20,16 @@
  ],
  "proof": [
   {
-   "text": "For two finite subextensions $E,F\\subseteq\\Qlb$, apply [lem-weil-pbc-compositum-degree-bound] with ambient field $\\Qlb$, base field $k$, and its fields $K=F$, $M=E$. Its hypothesis $K/k$ finite is exactly the finiteness of $F/k$, so the compositum $EF$ is finite over $E$ and $[EF:E]\\le[F:k]$. Since also $E/k$ is finite, [lem-weil-pbc-field-degree-multiplicativity] applied to $k\\subseteq E\\subseteq EF$ proves that $EF/k$ is finite and gives\n$$[EF:k]=[EF:E]\\,[E:k]\\le[F:k]\\,[E:k]=[E:k]\\,[F:k].$$\nThe field $EF$ contains $E$ and $F$ by the defining property of the compositum. No separability, disjointness or completeness hypothesis is used.",
-   "uses": [
-    "lem-weil-pbc-compositum-degree-bound",
-    "lem-weil-pbc-field-degree-multiplicativity"
-   ],
-   "elementary": false,
+   "text": "Use Mathlib IntermediateField.finiteDimensional_sup and IntermediateField.finrank_sup_le (Mathlib/FieldTheory/IntermediateField/Adjoin/Basic.lean, lines 78 and 99) for the binary compositum directly. They give finiteness over the base and [EF:k] ≤ [E:k][F:k], avoiding the relative-degree conversion and tower multiplication. The two inclusions are le_sup_left and le_sup_right.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-qlbar-condensed/det-def-sfb-qlbar-condensed-subextensions.md",
     "place": "statement clause 1; binary case, using Stacks fields.tex Tag 09ID (definition-compositum) and Tag 09G9 (lemma-multiplicativity-degrees)"
    }
   },
   {
-   "text": "Induct on $j$ to prove that $C_j=E_1\\cdots E_j$ is finite over $k$, contains every $E_i$ for $i\\le j$, and has $[C_j:k]\\le\\prod_{i=1}^j[E_i:k]$. For $j=0$, $C_0=k$, whose basis over itself is $\\{1\\}$, so its degree and the empty product are both $1$. If the assertion holds for $j$, the binary result in step 1 makes $C_{j+1}=C_jE_{j+1}$ finite, containing all the required fields, and gives\n$$[C_{j+1}:k]\\le[C_j:k][E_{j+1}:k]\\le\\left(\\prod_{i=1}^j[E_i:k]\\right)[E_{j+1}:k].$$\nThis recursively defined $C_{j+1}$ is the compositum of all $j+1$ fields: any subfield containing them contains $C_j$ by induction and hence contains $C_jE_{j+1}$. This proves the finite-family assertion including the empty case. Inclusion is a partial order by the ordinary subset laws; $k$ is one finite subextension, and step 1 supplies the common upper bound $EF$ for any pair. Thus this poset is nonempty and directed.",
+   "text": "For finiteness of a Fin n-indexed compositum use the Mathlib instance IntermediateField.finiteDimensional_iSup_of_finite. Each field is included by le_iSup. For the degree bound induct on n. At n=0, iSup_of_empty and IntermediateField.finrank_bot give degree one, equal to the empty product. At n+1, split Fin (n+1) into zero and successors using Fin.cases: the supremum equals E(0) sup the supremum of E(i.succ), by the two lattice inequalities. Apply the binary bound from step 1, multiply the induction inequality by the nonnegative natural number [E(0):k], and rewrite the product with Fin.prod_univ_succ. Nonemptiness is the existing PadicAlgCl.FiniteIntermediateField instance (bottom field). For E,F choose the actual supremum E sup F with its finite-dimensional instance; le_sup_left and le_sup_right are the common-upper-bound witnesses.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -41,7 +38,7 @@
    }
   },
   {
-   "text": "By [def-weil-algebraic-closure], every $x\\in\\Qlb$ is algebraic over $k$. Applying [lem-weil-pbc-algebraic-generators-finite-extension] to the one-element list $(x)$ gives the finite subextension $k(x)\\subseteq\\Qlb$, which contains $x$ by the definition of the generated subfield. For a finite subset $S=\\{x_1,\\dots,x_r\\}\\subseteq\\Qlb$, step 2 applied to $k(x_1),\\dots,k(x_r)$ produces a finite compositum containing every $x_i$, hence containing $S$. If $S$ is empty, use $k$. All fields are subfields of the same chosen $\\Qlb$, so this is a compositum inside the specified ambient field.",
+   "text": "By [def-weil-algebraic-closure], each element of PadicAlgCl is algebraic and hence integral over the base. For a finite subset S, apply [lem-weil-pbc-algebraic-generators-finite-extension] directly to S, using its Mathlib declaration IntermediateField.finiteDimensional_adjoin. Construct the witness as the actual intermediate field IntermediateField.adjoin k S, paired with that finiteness proof. IntermediateField.subset_adjoin proves every x in S belongs to it. This includes S empty and avoids choosing arbitrary witnesses or passing through singleton composita.",
    "uses": [
     "def-weil-algebraic-closure",
     "lem-weil-pbc-algebraic-generators-finite-extension"
@@ -53,7 +50,7 @@
    }
   },
   {
-   "text": "Every finite subextension is a subset of $\\Qlb$, so their union is contained in $\\Qlb$. Conversely, for $x\\in\\Qlb$, step 3 applied to $\\{x\\}$ puts $x$ in a finite subextension, hence in that union. The two inclusions prove $\\Qlb=\\bigcup_{E/k\\text{ finite},\\ E\\subseteq\\Qlb}E$.",
+   "text": "Apply the finite-subset assertion of step 3 to {x}. Finset.mem_singleton_self puts x into the constructed finite intermediate field. Every such field is already an intermediate field of PadicAlgCl, so this existential membership is exactly the remaining inclusion in the union assertion.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -63,15 +60,13 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-compositum-degree-bound",
-  "lem-weil-pbc-field-degree-multiplicativity",
   "def-weil-algebraic-closure",
   "lem-weil-pbc-algebraic-generators-finite-extension"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-qlbar-condensed/det-def-sfb-qlbar-condensed-subextensions.md",
-  "place": "clauses 1–2; expanded argument of the imported proof (the current source markdown contains the statement only)"
+  "place": "clauses 1–2; V8 Lean proof uses direct Mathlib binary bound, induction on Fin n, and finite adjunction of S (2026-10-18)"
  },
  "mathlib_searches": [
   {
@@ -181,5 +176,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V8",
+  "result": "pass",
+  "landing": "20261018T145120-L-3647045",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -8,7 +8,6 @@ module
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
 public import Mathlib.LinearAlgebra.Dimension.Finrank
-import Mathlib.LinearAlgebra.Dimension.Free
 
 /-!
 # Finite subextensions of `ℚ̄_ℓ`
@@ -77,6 +76,44 @@ theorem finiteSubextensions_directed :
         ∃ E : FiniteIntermediateField ℓ, ∀ x, x ∈ S → x ∈ E.1) ∧
       (∀ x : PadicAlgCl ℓ,
         ∃ E : FiniteIntermediateField ℓ, x ∈ E.1) := by
-  sorry
+  classical
+  have hfamily : ∀ (n : ℕ) (E : Fin n → FiniteIntermediateField ℓ),
+      Module.finrank ℚ_[ℓ]
+        (⨆ i, (E i).1 : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ)) ≤
+        ∏ i, Module.finrank ℚ_[ℓ] (E i).1 := by
+    intro n
+    induction n with
+    | zero =>
+        intro E
+        rw [iSup_of_empty, IntermediateField.finrank_bot]
+        simp
+    | succ n ih =>
+        intro E
+        have hs : (⨆ i, (E i).1 : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ)) =
+            (E 0).1 ⊔ ⨆ i : Fin n, (E i.succ).1 := by
+          apply le_antisymm
+          · refine iSup_le (Fin.cases le_sup_left (fun i ↦ ?_))
+            exact (le_iSup (fun j : Fin n ↦ (E j.succ).1) i).trans le_sup_right
+          · exact sup_le (le_iSup (fun j ↦ (E j).1) 0)
+              (iSup_le fun i ↦ le_iSup (fun j ↦ (E j).1) i.succ)
+        rw [hs, Fin.prod_univ_succ]
+        exact (IntermediateField.finrank_sup_le _ _).trans
+          (Nat.mul_le_mul_left _ (ih (fun i ↦ E i.succ)))
+  have hsubset : ∀ S : Finset (PadicAlgCl ℓ),
+      ∃ E : FiniteIntermediateField ℓ, ∀ x, x ∈ S → x ∈ E.1 := by
+    intro S
+    refine ⟨⟨IntermediateField.adjoin ℚ_[ℓ] (S : Set (PadicAlgCl ℓ)), ?_⟩, ?_⟩
+    · exact IntermediateField.finiteDimensional_adjoin
+        (fun x _ ↦ Algebra.IsIntegral.isIntegral x)
+    · intro x hx
+      exact IntermediateField.subset_adjoin ℚ_[ℓ] (S : Set (PadicAlgCl ℓ)) hx
+  refine ⟨?_, inferInstance, ?_, hsubset, ?_⟩
+  · intro n E
+    exact ⟨inferInstance, fun i ↦ le_iSup (fun j ↦ (E j).1) i, hfamily n E⟩
+  · intro E F
+    exact ⟨⟨E.1 ⊔ F.1, inferInstance⟩, le_sup_left, le_sup_right⟩
+  · intro x
+    obtain ⟨E, hE⟩ := hsubset {x}
+    exact ⟨E, hE x (Finset.mem_singleton_self x)⟩
 
 end PadicAlgCl
