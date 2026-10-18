@@ -9,14 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
-import Sheaf.AlgebraicGeometry.Sites.SeparablyClosedTorsionCohomologicalDimension
-import Sheaf.AlgebraicGeometry.Sites.CohomologicalDimension
 import WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafSections
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import Mathlib.CategoryTheory.Abelian.RightDerived
-import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Sheaf.AlgebraicGeometry.Sites.AffineTorsionCohomologicalDimensionOfAffine
-import WeilConjectures.AlgebraicGeometry.EtaleSheaves
+import Sheaf.AlgebraicGeometry.Sites.ArbitraryCurveCohomologicalDimension
+import Sheaf.CategoryTheory.RightDerivedSingleZeroUnit
 
 /-!
 # Cohomology of a smooth affine curve
@@ -83,7 +78,59 @@ theorem affineCurve_constantZMod_cohomology
     (∀ (q : ℕ), 1 < q →
       Subsingleton ((Etale.cohomology AddCommGrpCat.{u + 1} C q).obj
         ((DerivedCategory.singleFunctor _ 0).obj (C.constantZMod d)))) ∧
-    (ConnectedSpace C → IsIso (C.constantZModToDerivedCohomologyZero d)) :=
-  sorry
+    (ConnectedSpace C → IsIso (C.constantZModToDerivedCohomologyZero d)) := by
+  have _ := hchar
+  constructor
+  · obtain ⟨_, hC⟩ | ⟨hC, _⟩ :=
+      torsionEtaleCohomologicalDimensionLE_of_dim_le_one f
+        (IsCurve.krullDim_le_one (f := f))
+    · exact hC _ (C.isTorsion_constantZMod (Nat.ne_of_gt hd))
+    · exact (hC inferInstance).elim
+  · intro hC
+    let A := AddCommGrpCat.of (ULift.{u + 1} (ZMod d))
+    let F := C.constantZMod d
+    let Γ := Sheaf.Γ C.smallEtaleTopology AddCommGrpCat.{u + 1}
+    let T : C.Etale := Scheme.Etale.mk (𝟙 C)
+    let hT : Limits.IsTerminal T := MorphismProperty.Over.mkIdTerminal @AlgebraicGeometry.Etale _
+    have hsec := C.bijective_toSheafify_app_terminal A
+    have hunit : IsIso ((constantSheafΓAdj C.smallEtaleTopology
+        AddCommGrpCat.{u + 1}).unit.app A) := by
+      have hc : Function.Bijective ((constantSheafAdj C.smallEtaleTopology
+          AddCommGrpCat.{u + 1} hT).unit.app A).hom := by
+        change Function.Bijective ((toSheafify C.smallEtaleTopology
+          ((Functor.const C.Etaleᵒᵖ).obj A)).app (Opposite.op T))
+        exact hsec
+      have hc' : IsIso ((constantSheafAdj C.smallEtaleTopology
+          AddCommGrpCat.{u + 1} hT).unit.app A) :=
+        (ConcreteCategory.isIso_iff_bijective _).2 hc
+      have hn := Adjunction.unit_rightAdjointUniq_hom_app
+        (constantSheafΓAdj C.smallEtaleTopology AddCommGrpCat.{u + 1})
+        (constantSheafAdj C.smallEtaleTopology AddCommGrpCat.{u + 1} hT) A
+      have : IsIso ((Sheaf.ΓNatIsoSheafSections C.smallEtaleTopology
+          AddCommGrpCat.{u + 1} hT).hom.app F) := inferInstance
+      rw [← hn] at hc'
+      let : IsIso ((constantSheafΓAdj C.smallEtaleTopology
+          AddCommGrpCat.{u + 1}).unit.app A ≫
+            (Sheaf.ΓNatIsoSheafSections C.smallEtaleTopology
+              AddCommGrpCat.{u + 1} hT).hom.app F) := hc'
+      exact IsIso.of_isIso_comp_right _ ((Sheaf.ΓNatIsoSheafSections
+        C.smallEtaleTopology AddCommGrpCat.{u + 1} hT).hom.app F)
+    let e := Γ.homologyRightDerivedFunctorObjSingleFunctorIso F 0 ≪≫
+      Γ.rightDerivedZeroIsoSelf.app F
+    have hz : IsIso ((DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} 0).map
+        (Γ.rightDerivedSingleUnit F)) := by
+      have he := Γ.rightDerivedSingleUnit_zero F
+      have : IsIso ((DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} 0).map
+          (Γ.rightDerivedSingleUnit F) ≫ e.hom) := by
+        rw [he]
+        infer_instance
+      exact IsIso.of_isIso_comp_right _ e.hom
+    change IsIso (_ ≫ _ ≫ _ ≫ _)
+    rw [← Functor.map_comp]
+    change IsIso ((constantSheafΓAdj C.smallEtaleTopology
+      AddCommGrpCat.{u + 1}).unit.app A ≫ _ ≫
+        (DerivedCategory.homologyFunctor AddCommGrpCat.{u + 1} 0).map
+          (Γ.rightDerivedSingleUnit F))
+    infer_instance
 
 end AlgebraicGeometry
