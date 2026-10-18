@@ -837,7 +837,16 @@ lemma AffineSpace.zeroSection_comp_over (n : Type u) (S : Scheme.{u}) :
     AffineSpace.zeroSection n S ≫ 𝔸(n; S) ↘ S = 𝟙 S :=
   AffineSpace.homOfVector_over _ _
 
-/-- The unit section `S ⟶ 𝔸(n; S)` of relative affine space: the morphism over `S` all of
+/-- Blueprint `pur9-def-affine-line`: The affine line over a base.
+
+The affine line `𝔸¹_Y` over `Y` is `𝔸(ULift (Fin 1); Y)`, with coordinate
+`AffineSpace.coord Y 0`, projection `𝔸(ULift (Fin 1); Y) ↘ Y`, zero section
+`AffineSpace.zeroSection` (`t = 0`) and unit section `AffineSpace.oneSection` (`t = 1`, this
+declaration); the open complement `𝔾_{m,Y}` of the zero section is
+`AlgebraicGeometry.Scheme.Hom.puncturedLine Y`, through which the unit section factors
+(`AlgebraicGeometry.Scheme.Hom.oneSectionToPuncturedLine`).
+
+The unit section `S ⟶ 𝔸(n; S)` of relative affine space: the morphism over `S` all of
 whose coordinates are `1`, i.e. the section `t = 1`. It is the normalization point of weak
 `𝔸¹`-invariance, where a comparison on `𝔸(n; S)` is pinned down by its restriction to
 `t = 1`; this is why it sits here alongside `AffineSpace.zeroSection`. -/
