@@ -13,9 +13,116 @@
   "def-sc-finitely-presented-module",
   "def-pc-module-kflat-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We first record explicitly how filtered colimits preserve acyclicity. Let $(C_i^\\bullet)$ be a diagram of acyclic module complexes indexed by a small nonempty directed set, and form its degreewise module colimit $C^\\bullet$ with differential induced by the $d_{C_i}$. By [lem-weil-pbc-filtered-colimit-modules-elementwise], a cycle $z\\in C^r$ has a representative $x\\in C_i^r$. The equality $dz=0$ means that the image of $d x$ is zero at some later stage $j\\ge i$. Thus the image $x_j$ is a cycle in $C_j^r$, hence $x_j=d y_j$ for some $y_j\\in C_j^{r-1}$. The image of $y_j$ is a primitive for $z$. Every cycle is therefore a boundary, in every integer degree; no boundedness is used.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-modules-elementwise",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0E8F, filtered-colimit reductions; elementary cycle proof of Tag 00DB using Tags 00D6 and 00D7"
+   }
+  },
+  {
+   "text": "For the rest of the proof write $T(N^\\bullet)=\\operatorname{Tot}(N^\\bullet\\otimes_A E^\\bullet)$, with the direct sums and differential of [def-pc-tensor-complex-sheaves]. This functor commutes with degreewise colimits over any small directed set. Indeed [lem-weil-pbc-tensor-commutes-with-colimits] gives the comparison in each bidegree $(p,q)$. Direct sums commute with colimits: giving a map from either iterated colimit to a module $B$ is exactly giving maps $N_i^p\\otimes_A E^q\\to B$ compatible in $i$, one for each $p+q=r$. This proves the comparison isomorphism in total degree $r$. On a pure tensor $x\\otimes e$ it sends the class to $[x]\\otimes e$, so the two differential terms are sent to $[d x]\\otimes e+(-1)^p[x]\\otimes d e$. Thus these degreewise isomorphisms are isomorphisms of complexes, natural in the diagram.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-tensor-commutes-with-colimits"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0E8F, repeated tensor-colimit comparisons; Tag 00DD, lemma-tensor-products-commute-with-limits"
+   }
+  },
+  {
+   "text": "Let $M$ be any $A$-module. Apply [lem-trf-module-finitely-presented-directed-colimit] with $R=A$ to write $M=\\varinjlim_i M_i$ over a small nonempty directed partially ordered set, with all $M_i$ finitely presented. The hypothesis says that $\\operatorname{Tot}(E^\\bullet\\otimes_A M_i[0])$ is acyclic. The ordinary module interchange $m\\otimes e\\mapsto e\\otimes m$ identifies $T(M_i[0])$ with that complex: the degree of $m$ is zero, so both differentials are $m\\otimes e\\mapsto m\\otimes d e$. Step 2 gives $T(M[0])=\\varinjlim_i T(M_i[0])$, and step 1 makes this acyclic. In particular the tensor test now holds for every module, without requiring that the modules themselves be flat.",
+   "uses": [
+    "lem-trf-module-finitely-presented-directed-colimit",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0E8F, first paragraph, using Tag 00HA, lemma-module-colimit-fp"
+   }
+  },
+  {
+   "text": "We prove the stronger intermediate claim that $T(N^\\bullet)$ is acyclic for every bounded complex $N^\\bullet$, whether or not $N^\\bullet$ is acyclic. For a complex supported only in degree $a$, write its unique module as $M$ (the notation is $M[-a]$). Its total tensor with $E$ has degree-$r$ term $M\\otimes_A E^{r-a}$ and differential $(-1)^a(1\\otimes d_E)$. Multiplication of a differential by the unit $(-1)^a$ changes neither its kernel nor its image. Its cohomology therefore vanishes by step 3. The zero complex has zero total tensor as well. These give the zero-term and one-term base cases for induction on the number of degrees in a supporting interval $[a,b]$.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0E8F, bounded-complex induction, base cases made explicit"
+   }
+  },
+  {
+   "text": "For the induction step let $N^r=0$ outside $[a,b]$, where $a<b$, and put $N_{>a}^r=N^r$ for $r>a$ and zero otherwise, with inherited differentials. The inclusion and the projection onto $N^a[-a]$ are chain maps and give $0\\to N_{>a}\\to N\\to N^a[-a]\\to0$, split in each degree. Tensoring its degree-$p$ row with $E^q$ preserves the splitting: the row is the inclusion/projection sequence for a direct sum, and the inverse direct-sum maps on tensors follow from bilinearity. Taking the direct sum over $p+q=r$ gives a split exact row in every total degree $r$. The tensor differential commutes with the inclusion and projection by the formula in [def-pc-tensor-complex-sheaves]. Apply [lem-weil-pbc-complex-ses-homology-long-exact] to this short exact sequence of total complexes. Induction makes $T(N_{>a})$ acyclic, and step 4 makes $T(N^a[-a])$ acyclic. Exactness of $0=H^rT(N_{>a})\\to H^rT(N)\\to H^rT(N^a[-a])=0$ gives $H^rT(N)=0$. This proves the bounded-complex claim for every finite supporting interval.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0E8F, final induction using the degreewise split truncation sequence; homology.tex Tag 0117"
+   }
+  },
+  {
+   "text": "Now let $L^\\bullet$ be bounded above, with $L^r=0$ for $r>b$. For $n\\in\\mathbf N$ define $B_n^r=L^r$ when $r\\ge b-n$ and $B_n^r=0$ otherwise, with the inherited differentials. These are subcomplexes with chain inclusions $B_n\\to B_{n+1}\\to L$, and each is supported in $[b-n,b]$. For fixed $r$, the diagram of terms is eventually the constant module $L^r$ with identity transition maps. Its colimit is $L^r$: compatible maps out of the terms are uniquely determined by that eventual value. The differentials also become those of $L$, so $L=\\varinjlim_{n\\in\\mathbf N} B_n$ degreewise. Step 5 gives acyclicity of every $T(B_n)$, step 2 identifies their colimit with $T(L)$, and step 1 proves that $T(L)$ is acyclic. No acyclicity of the brutal truncations $B_n$ was assumed.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0E8F, second reduction to bounded complexes; homology.tex Tag 0118, stupid truncations"
+   }
+  },
+  {
+   "text": "Finally let $F^\\bullet$ be arbitrary. For $n\\in\\mathbf N$, define $U_n^r=F^r$ for $r<n$, $U_n^n=\\ker(d_F^n)$, and $U_n^r=0$ for $r>n$. The differential into degree $n$ lands in this kernel because $d_F^n d_F^{n-1}=0$; the differential out of it is zero. Inclusions $U_n\\to U_{n+1}\\to F$ are chain maps, by that same kernel equation. Each $U_n$ is bounded above. At any fixed degree $r$, once $n>r$ the term and differential agree with those of $F$ and the transition maps are identities. The same eventual-value universal-property argument as in step 6 gives $F=\\varinjlim_{n\\in\\mathbf N}U_n$ degreewise. Step 6 makes each $T(U_n)$ acyclic. Steps 2 and 1 now make $T(F)$ acyclic. This establishes the stronger conclusion for every complex $F$, including every acyclic test complex.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0E8F, canonical upper-truncation reduction; homology.tex Tag 0118, canonical cochain truncations"
+   }
+  },
+  {
+   "text": "For every acyclic complex $F$ of $A$-modules, step 7 proves that $\\operatorname{Tot}(F\\otimes_A E)$ is acyclic. This is precisely the defining test for K-flatness in [def-pc-module-kflat-complex]. Thus $E$ is K-flat, with no restriction on its bounds or on the flatness of its individual terms.",
+   "uses": [
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0E8F, conclusion via Tag 06XZ, definition-K-flat"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-module-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "lem-trf-module-finitely-presented-directed-colimit",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-filtered-colimit-modules-elementwise",
+  "lem-weil-pbc-tensor-commutes-with-colimits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0E8F, lemma-universally-acyclic-K-flat; filtered-colimit and bounded-complex arguments expanded using algebra.tex Tags 00HA, 00DD, 00D6, 00D7 and homology.tex Tags 0117, 0118."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +158,45 @@
    "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.iff_lTensor_exact'\", \"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.iff_rTensor_exact\", \"Module.Flat.iff_lTensor_exact\"], \"sub\": \"\"}",
    "date": "2026-10-18",
    "verdict": "no match: inspected hits concern ordinary flatness, module presentations, or homological notions without this site-local or unbounded K-flat assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|IsKFlat|kFlat|universally.acyclic",
+   "results": "{\"t\": \"2026-10-18T03:29:32Z\", \"tool\": \"grep\", \"query\": \"KFlat|IsKFlat|kFlat|universally.acyclic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits describe ordinary flat modules or the definition of acyclicity, not universal tensor acyclicity of an arbitrary complex; grep finds no K-flat identifier"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An unbounded universally acyclic complex of modules is K-flat",
+   "results": "{\"t\": \"2026-10-18T03:29:32Z\", \"tool\": \"leansearch\", \"query\": \"An unbounded universally acyclic complex of modules is K-flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.Acyclic\", \"HomologicalComplex.acyclic_iff\", \"Module.Flat.of_forall_isTrivialRelation\", \"HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic\", \"Module.Flat.of_free\", \"Module.Flat.of_projective\", \"Module.FaithfullyFlat.toFlat\", \"CochainComplex.IsKProjective.nonempty_homotopy_zero\"], \"digest\": \"d50a33809e17e418\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits describe ordinary flat modules or the definition of acyclicity, not universal tensor acyclicity of an arbitrary complex; grep finds no K-flat identifier"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex, Module.FinitePresentation",
+   "results": "{\"t\": \"2026-10-18T03:29:32Z\", \"tool\": \"loogle\", \"query\": \"CochainComplex, Module.FinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits describe ordinary flat modules or the definition of acyclicity, not universal tensor acyclicity of an arbitrary complex; grep finds no K-flat identifier"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex whose tensor with each finitely presented module is acyclic is K-flat",
+   "results": "{\"t\": \"2026-10-18T03:29:33Z\", \"tool\": \"leanfinder\", \"query\": \"A complex whose tensor with each finitely presented module is acyclic is K-flat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.iff_lTensor_exact'\", \"Module.Flat.iff_rTensor_exact\", \"Module.Flat.iff_lTensor_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\"], \"digest\": \"f41672d512def500\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits describe ordinary flat modules or the definition of acyclicity, not universal tensor acyclicity of an arbitrary complex; grep finds no K-flat identifier"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor acyclicity for finitely presented modules implies tensoring any acyclic complex is acyclic",
+   "results": "{\"t\": \"2026-10-18T03:29:35Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor acyclicity for finitely presented modules implies tensoring any acyclic complex is acyclic\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_exact\", \"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.iff_lTensor_exact\", \"Module.Flat.iff_lTensor_exact'\"], \"digest\": \"d68aa99634980d10\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits describe ordinary flat modules or the definition of acyclicity, not universal tensor acyclicity of an arbitrary complex; grep finds no K-flat identifier"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-ringed-site-kflat-stalk-criterion",
@@ -82,5 +224,29 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-sfb-universal-acyclic-module-kflat",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 0E8F into the finite-module filtered-colimit reduction, explicit bounded-complex induction and the two truncation-colimit reductions. All supporting results already have DAG nodes; no new nodes. The statement is unchanged. No finished project declaration or Mathlib statement matched the item.",
+  "blueprint": "Realizes the module tensor-acyclicity test used in the forward stalk criterion beneath lem-sfb-module-mapmod-pullback-kflat (the current blueprint node supplies the preservation statement; its stalk proof was expanded by Q63).",
+  "tool_uses": [
+   {
+    "node": "lem-trf-module-finitely-presented-directed-colimit",
+    "why": "Ordinary modules are small directed colimits of finitely presented modules; no node of this sheaf pullback unit supplies this generic algebra theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-module-finitely-presented-directed-colimit"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-Codex-Q27-504bda60d",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q27-504bda60d (reviewer sub-agent of L); spot-checked: Reviewed the item, all cited nodes, Stacks Tags 0E8F/00HA/00DD/00DB/00D6/00D7/0117 and truncation section 0118, unit/chapter route, edge cases, and tool searches. The expanded proof correctly establishes K-flatness for arbitrary complexes using direct-sum totalization and filtered colimits; no new nodes or route-pivot machinery appear. Existing node lem-trf-module-finitely-presented-directed-colimit has stale source metadata naming 058G instead of 00HA, recorded in review.md; the delivery itself uses the correct 00HA result."
  }
 }
