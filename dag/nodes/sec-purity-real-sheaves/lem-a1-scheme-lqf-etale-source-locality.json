@@ -12,9 +12,128 @@
   "def-weil-etale-morphism",
   "pqf-def-quasifinite"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Open restrictions of the etale map $p$ remain etale: let $A\\subseteq U$, $B\\subseteq V$ be opens with $p(A)\\subseteq B$, and $x\\in A$. Flatness at $x$ is unchanged, since the local-ring map $\\mathcal O_{V,p(x)}\\to\\mathcal O_{U,x}$ is the same for $A\\to B$. For local finite presentation, [def-sbc-locally-finite-presentation] for $p$ gives affine opens $x\\in U'=\\operatorname{Spec}A'$, $V'=\\operatorname{Spec}R$ with $p(U')\\subseteq V'$ and $R\\to A'$ of finite presentation. Choose $r\\in R$ with $p(x)\\in D(r)\\subseteq V'\\cap B$ and $a\\in A'$ with $x\\in D(a)\\subseteq U'\\cap A\\cap p^{-1}(D(r))$. Then $A'_a\\cong A'[t]/(at-1)$ is finitely presented over $R$; the image of $r$ is a unit in $A'_a$, so $A'_a=A'_a\\otimes_RR_r$ is the base change of $R\\to A'_a$ along $R\\to R_r$, hence finitely presented over $R_r$. These affine opens $D(a)\\subseteq A$, $D(r)\\subseteq B$ witness finite presentation of $A\\to B$ at $x$; a finite presentation has finitely many generators, so $A\\to B$ is also locally of finite type. The diagonal of $A\\to B$ is the restriction of the diagonal of $p$ to the open $A\\times_B A=A\\times_VA\\subseteq U\\times_VU$, so it is an open immersion [def-weil-open-immersion]. Thus [def-weil-unramified-morphism] and [def-weil-etale-morphism] apply to $A\\to B$. In particular $p^{-1}(B)\\to B$ is etale; if $p$ is surjective it is surjective on points, since a preimage of a point of $B$ automatically belongs to $p^{-1}(B)$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "def-weil-unramified-morphism",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GI (definition-etale), open restriction; the point-local definitions and restricted diagonal give the argument explicitly."
+   }
+  },
+  {
+   "text": "Suppose $g$ is locally quasi-finite and fix $u\\in U$. Choose an affine open $Z\\subseteq T$ containing $g(p(u))$, an affine open $W\\subseteq g^{-1}(Z)$ containing $p(u)$, and an affine open $A\\subseteq p^{-1}(W)$ containing $u$. By [lem-a1-scheme-lqf-affine-criterion], the ring map $\\mathcal O_T(Z)\\to\\mathcal O_V(W)$ is of finite type and quasi-finite at every target prime. By Step 1, $A\\to W$ is etale, so [lem-weil-pbc-etale-ring-map-quasi-finite] gives the same two properties for $\\mathcal O_V(W)\\to\\mathcal O_U(A)$. Apply [lem-trf-quasi-finite-composition] to these two ring maps. Functoriality of structure-sheaf pullback identifies their composite with the map for $A\\to Z$. It is therefore of finite type and quasi-finite at the prime representing $u$. These affine neighbourhoods witness quasi-finiteness of $g\\circ p$ at $u$ in [pqf-def-quasifinite]; doing this at every $u$ proves the first assertion.",
+   "uses": [
+    "lem-a1-scheme-lqf-affine-criterion",
+    "lem-weil-pbc-etale-ring-map-quasi-finite",
+    "lem-trf-quasi-finite-composition",
+    "pqf-def-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03X4, precomposition paragraph; its ring-map composition argument is Tag 00PO, using the affine characterization Tag 01TK."
+   }
+  },
+  {
+   "text": "For the converse assume $p$ is surjective and $g\\circ p$ is locally quasi-finite. By [lem-weil-pbc-lqf-locally-finite-type], $g\\circ p$ is locally of finite type. The definition [def-weil-etale-morphism] supplies flatness and local finite presentation of $p$. Hence [lem-a1-lft-flat-lfp-source-descent], applied to the triangle $U\\xrightarrow{p}V\\xrightarrow{g}T$, shows that $g$ is locally of finite type. This use does not require $p$ to be quasi-compact.",
+   "uses": [
+    "lem-weil-pbc-lqf-locally-finite-type",
+    "def-weil-etale-morphism",
+    "lem-a1-lft-flat-lfp-source-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03X4, finite-type descent; Tag 02KL (lemma-flat-finitely-presented-permanence), locally-of-finite-type alternative, packages the same Tag 0367 affine descent and finite affine refinement for non-affine source covers."
+   }
+  },
+  {
+   "text": "Fix an affine open $Z\\subseteq T$ and an affine open $W\\subseteq V$ with $g(W)\\subseteq Z$. Step 1 gives a surjective etale map $p^{-1}(W)\\to W$. Apply [lem-weil-pbc-etale-covering-affine-refinement] to this singleton covering of the affine scheme $W$. Obtain finitely many affine open subschemes $A_1,\\ldots,A_m\\subseteq p^{-1}(W)$ whose images under $p$ cover $W$. Each $A_j$ is also an open subscheme of $U$. By [lem-weil-pbc-lqf-restriction-to-opens], $A_j\\to Z$, the restriction of $g\\circ p$, is locally quasi-finite.",
+   "uses": [
+    "lem-weil-pbc-etale-covering-affine-refinement",
+    "lem-weil-pbc-lqf-restriction-to-opens"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03X4, affine reduction expanded using Topologies Tag 0218 (lemma-etale-affine); Morphisms Tag 01TK, restriction to opens."
+   }
+  },
+  {
+   "text": "For each $j$, both $A_j$ and $Z$ are affine, so [lem-weil-pbc-morphism-affine-schemes-affine] says that $A_j\\to Z$ is affine; [lem-weil-pbc-affine-morphism-permanence], clause (3), makes it quasi-compact. With its local quasi-finiteness from Step 4, [pqf-lem-qf-locqf-qc] implies that $A_j\\to Z$ is quasi-finite. By [pqf-lem-qf-finitefibres], every set $(g\\circ p)|_{A_j}^{-1}(t)$, for $t\\in Z$, is finite.",
+   "uses": [
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "pqf-lem-qf-locqf-qc",
+    "pqf-lem-qf-finitefibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03X4, finite-fibres paragraph; Morphisms Tags 01SH, 01S7, 02NH and lemma-quasi-finite-locally-quasi-compact."
+   }
+  },
+  {
+   "text": "For $t\\in Z$, the set $\\{w\\in W:g(w)=t\\}$ is the union, over $1\\le j\\le m$, of the images under $p$ of $\\{a\\in A_j:g(p(a))=t\\}$. Indeed, the image is contained in that set, and conversely the covering of $W$ by the $p(A_j)$ supplies a preimage of every such $w$, which necessarily maps to $t$. Each source set is finite by Step 5, so its image is finite and the finite union is finite. Thus $W\\to Z$ has finite fibres. The same argument covers $m=0$: then $W$ is empty and every fibre is empty.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03X4, finite fibres descend through the surjection; the finite affine refinement replaces its single affine source."
+   }
+  },
+  {
+   "text": "The restriction $g|_W:W\\to Z$ is locally of finite type: [lem-weil-pbc-lft-affine-pairs] for $g$ from Step 3 gives the finite-type ring map for every pair of affine opens inside $W,Z$, so the reverse direction of that criterion applies to $g|_W$. Since $W,Z$ are affine, [lem-weil-pbc-morphism-affine-schemes-affine] and [lem-weil-pbc-affine-morphism-permanence](3) also make $g|_W$ quasi-compact. It is of finite type by [def-weil-finite-type-morphism]. Now [pqf-lem-qf-finitefibres], using Step 6, makes $g|_W$ quasi-finite, and [pqf-lem-qf-locqf-qc] makes it locally quasi-finite. Take an affine open cover of $T$ and, over each member $Z$, an affine open cover by such $W$ of $g^{-1}(Z)$. Condition (3) of [lem-a1-scheme-lqf-affine-criterion] proves that $g$ is locally quasi-finite. All finiteness was used only on these affine charts, so there is no global quasi-compactness or separation requirement.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-weil-finite-type-morphism",
+    "pqf-lem-qf-finitefibres",
+    "pqf-lem-qf-locqf-qc",
+    "lem-a1-scheme-lqf-affine-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 03X4, conclusion using Morphisms Tag 02NH; Zariski gluing is Morphisms Tag 01TK, condition (3)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-locally-finite-presentation",
+  "def-weil-etale-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-flat-morphism",
+  "def-weil-open-immersion",
+  "def-weil-unramified-morphism",
+  "lem-a1-lft-flat-lfp-source-descent",
+  "lem-a1-scheme-lqf-affine-criterion",
+  "lem-trf-quasi-finite-composition",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-etale-covering-affine-refinement",
+  "lem-weil-pbc-etale-ring-map-quasi-finite",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-lqf-locally-finite-type",
+  "lem-weil-pbc-lqf-restriction-to-opens",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "pqf-def-quasifinite",
+  "pqf-lem-qf-finitefibres",
+  "pqf-lem-qf-locqf-qc"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 03X4 (lemma-locally-quasi-finite-etale-local-source); the affine reduction is expanded with Topologies Tag 0218 and Descent Tag 02KL, using the same Tag 0367 finite-type descent."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -64,10 +183,45 @@
    "results": "{\"t\": \"2026-10-18T02:22:27Z\", \"tool\": \"leanfinder\", \"query\": \"Local quasi finiteness descends along a surjective etale cover of the domain, and is preserved by etale precomposition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite.of_comp\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\"], \"digest\": \"2b31f2ca1dc6204a\"}",
    "date": "2026-10-18",
    "verdict": "no match: composition and cancellation results concern Mathlib.LocallyQuasiFinite, which does not impose local finite type (QuasiFinite.lean:19-24,55-60); none gives descent along a surjective etale map on the source in the Stacks scheme sense. Read the source, not the misleading semantic descriptions."
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyQuasiFinite.*(Etale|Surjective)|[Ee]tale.*[Ll]ocal.*[Ss]ource",
+   "results": "{\"t\": \"2026-10-18T02:35:38Z\", \"tool\": \"grep\", \"query\": \"LocallyQuasiFinite.*(Etale|Surjective)|[Ee]tale.*[Ll]ocal.*[Ss]ource\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the whole statement: Mathlib LocallyQuasiFinite does not include finite type; composition proves only the forward fibrewise part, of_comp cancels the second arrow and does not descend through a surjective source cover."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scheme local quasi finiteness preserved by etale precomposition and descends through surjective etale source maps",
+   "results": "{\"t\": \"2026-10-18T02:35:39Z\", \"tool\": \"leansearch\", \"query\": \"Scheme local quasi finiteness preserved by etale precomposition and descends through surjective etale source maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.instLocallyQuasiFiniteCompScheme\", \"AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict\", \"Algebra.QuasiFiniteAt.comap_algEquiv\", \"RingHom.QuasiFinite.propertyIsLocal\"], \"digest\": \"59306b5d9ea9c9be\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the whole statement: Mathlib LocallyQuasiFinite does not include finite type; composition proves only the forward fibrewise part, of_comp cancels the second arrow and does not descend through a surjective source cover."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LocallyQuasiFinite\", \"Etale\"",
+   "results": "{\"t\": \"2026-10-18T02:35:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"LocallyQuasiFinite\\\", \\\"Etale\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the whole statement: Mathlib LocallyQuasiFinite does not include finite type; composition proves only the forward fibrewise part, of_comp cancels the second arrow and does not descend through a surjective source cover."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local quasi finiteness descends under a surjective etale map on the source of a scheme morphism",
+   "results": "{\"t\": \"2026-10-18T02:35:41Z\", \"tool\": \"leanfinder\", \"query\": \"Local quasi finiteness descends under a surjective etale map on the source of a scheme morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.LocallyQuasiFinite.of_comp\", \"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"AlgebraicGeometry.instLocallyQuasiFiniteCompScheme\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget\"], \"digest\": \"4dbf608af4fd9fb4\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the whole statement: Mathlib LocallyQuasiFinite does not include finite type; composition proves only the forward fibrewise part, of_comp cancels the second arrow and does not descend through a surjective source cover."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an etale surjection U to V, a morphism V to T is locally quasi finite in the Stacks finite type sense exactly when U to T is locally quasi finite",
+   "results": "{\"t\": \"2026-10-18T02:35:49Z\", \"tool\": \"leanfinder\", \"query\": \"For an etale surjection U to V, a morphism V to T is locally quasi finite in the Stacks finite type sense exactly when U to T is locally quasi finite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsStableUnderCompositionSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.instIsMultiplicativeSchemeLocallyQuasiFinite\", \"AlgebraicGeometry.LocallyQuasiFinite\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.LocallyQuasiFinite.of_comp\", \"AlgebraicGeometry.locallyQuasiFinite_iff\", \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\"], \"digest\": \"05fdf046b23c5a74\"}",
+   "date": "2026-10-18",
+   "verdict": "no match for the whole statement: Mathlib LocallyQuasiFinite does not include finite type; composition proves only the forward fibrewise part, of_comp cancels the second arrow and does not descend through a surjective source cover."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-space-separated-lqf-permanence",
@@ -89,5 +243,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-scheme-lqf-etale-source-locality",
+  "worker": "stage1",
+  "summary": "Expanded Stacks 03X4 into seven steps. Proved etale precomposition on affine charts using the existing ring composition theorem. For descent, descend local finite type, refine over each affine source chart by finitely many affine etale pieces, descend finite fibres as finite images, and glue. Created only the general 01TK affine criterion and 02KL local finite-type source descent, both statement-only unsplit nodes; reused all existing finite-fibre and affine-permanence results. Statement unchanged.",
+  "blueprint": "Auxiliary schemehood branch of lem-a1-affine-hc0, through lem-a1-separated-etale-space-scheme and lem-a1-space-separated-lqf-permanence: the scheme-source-locality input for chart comparisons (Stacks 03X4). The current main-20261015 hc0 proof states the lisse-support argument; this is its inherited auxiliary representability branch, not a replacement of the Rankin–Selberg unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-quasi-finite-composition",
+    "why": "Generic scheme/ring geometry input in the Stacks 03X4 affine proof: Composition of quasi-finite ring maps. The Rankin–Selberg unit contains no replacement for this auxiliary schemehood tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-ring-map-quasi-finite",
+    "why": "Generic scheme/ring geometry input in the Stacks 03X4 affine proof: An etale ring map is quasi-finite at every prime (Stacks 00U5). The Rankin–Selberg unit contains no replacement for this auxiliary schemehood tool."
+   },
+   {
+    "node": "lem-weil-pbc-lqf-locally-finite-type",
+    "why": "Generic scheme/ring geometry input in the Stacks 03X4 affine proof: A locally quasi-finite morphism is locally of finite type (Stacks, remark after 01TD). The Rankin–Selberg unit contains no replacement for this auxiliary schemehood tool."
+   },
+   {
+    "node": "lem-weil-pbc-lqf-restriction-to-opens",
+    "why": "Generic scheme/ring geometry input in the Stacks 03X4 affine proof: Restriction of a locally quasi-finite morphism to open subschemes is locally quasi-finite (Stacks 01TH (4)). The Rankin–Selberg unit contains no replacement for this auxiliary schemehood tool."
+   },
+   {
+    "node": "pqf-lem-qf-locqf-qc",
+    "why": "Generic scheme/ring geometry input in the Stacks 03X4 affine proof: Quasi-finite = locally quasi-finite + quasi-compact. The Rankin–Selberg unit contains no replacement for this auxiliary schemehood tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-quasi-finite-composition",
+  "lem-weil-pbc-etale-ring-map-quasi-finite",
+  "lem-weil-pbc-lqf-locally-finite-type",
+  "lem-weil-pbc-lqf-restriction-to-opens",
+  "pqf-lem-qf-locqf-qc"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-N1-54b7fdc65",
+  "group": "N1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-54b7fdc65 (reviewer sub-agent of L); spot-checked: I read the whole delivery against Stacks Descent 03X4 (l.6964), 02KL (l.4385) and 0367 (l.4352), and Morphisms 01TK (l.3839), 02NH and 01TJ, and checked the candidates in Mathlib's QuasiFinite.lean and LocalFlatDescent.lean. The item statement is unchanged and agrees with 03X4. New node lem-a1-scheme-lqf-affine-criterion is 01TK (1)<=>(2)<=>(3), with Stacks' quasi-finite ring map correctly written out (Mathlib's LocallyQuasiFinite omits finite type, so it is not a leaf). New node lem-a1-lft-flat-lfp-source-descent is exactly the locally-of-finite-type alternative of 02KL. Both are statement-only and self-contained, neither restates a clause of the item, and an rg search of the DAG for these tags and statements found no duplicates. Steps 2 to 7 are correct, and every cited statement says what the step takes from it (00U5, 00PO, 0218, 01TH(4), 01SH, 01S7, 01TJ, 02NH, 01T2, 01TK(3)). FIX: step 1 claimed the same affine presentations witness local finite presentation of the restriction A->B, but they need not lie inside A and B. I rewrote it with the standard-open shrinking D(r) and D(a), using that A'_a = A'_a tensor_R R_r is finitely presented over R_r; the uses, proof_deps and statement are unchanged. I accept all five declared tool_uses as generic black boxes. Batch-5 check: lem-trf-quasi-finite-composition is Stacks 00PO, pure commutative algebra. Its whole closure is 9 nodes (defs plus lem-weil-pbc-fibre-ring-primes-bijection) and none is a trace-formula or Poincare-duality step. Neither assumption leaf states it and there is no other 00PO node to repoint to, so it is genuinely outside the assumed statements and not a RETURN cause. Edge cases tested: empty U (m=0), an open immersion that is not surjective, an infinite disjoint union of identities (p not quasi-compact), and A^1_k. Details are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
