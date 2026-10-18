@@ -19,7 +19,7 @@
  ],
  "proof": [
   {
-   "text": "Suppose $\\mathrm{BC}(f,n,q)$ fails universally. The hypothesis supplies the universal cumulative lower-degree assumption of [sbc-lem-bc-universal-test], and $q\\geq1$: its phrase \"all $q'\\leq q-1$\" ranges over the nonnegative degrees on which [sbc-def-base-change-property] defines $\\mathrm{BC}$. That lemma gives two Cartesian squares $X\\leftarrow X'\\leftarrow Y$ above $S\\leftarrow S'\\leftarrow\\operatorname{Spec}K$, with $f':X'\\to S'$ a base change of $f$, $S'$ affine, integral and normal with algebraically closed function field $L$, $K$ algebraically closed, $\\operatorname{Spec}K\\to S'$ dominant, and an integer $d\\mid n$ with $R^qh_*(\\mathbf Z/d\\mathbf Z)\\ne0$ for the horizontal map $h:Y\\to X'$, while $e:Y\\to\\operatorname{Spec}K$ is the vertical map in the corrected diagram of the cited statement. Write $S'=\\operatorname{Spec}A$. Dominance means that $A\\to K$ is injective: its kernel is the prime giving the image point, which is the generic point $(0)$ of the integral scheme $S'$. Thus it extends to the inclusion $L=\\operatorname{Frac}A\\to K$, and the bottom arrow is the composite $\\operatorname{Spec}K\\to\\operatorname{Spec}L\\to\\operatorname{Spec}A$.",
+   "text": "Suppose $\\mathrm{BC}(f,n,q)$ fails universally. The hypothesis supplies the universal cumulative lower-degree assumption of [sbc-lem-bc-universal-test], and $q\\geq1$: its phrase \"all $q'\\leq q-1$\" ranges over the nonnegative degrees on which [sbc-def-base-change-property] defines $\\mathrm{BC}$. That lemma gives two Cartesian squares $X\\leftarrow X'\\leftarrow Y$ above $S\\leftarrow S'\\leftarrow\\operatorname{Spec}K$, with $f':X'\\to S'$ a base change of $f$, $S'$ affine, integral and normal with algebraically closed function field $L$, $K$ algebraically closed, $\\operatorname{Spec}K\\to S'$ dominant, and an integer $d\\mid n$ with $R^qh_*(\\mathbf Z/d\\mathbf Z)\\ne0$ for the horizontal map $h:Y\\to X'$, while $e:Y\\to\\operatorname{Spec}K$ is the vertical map in the corrected diagram of the cited statement. Write $S'=\\operatorname{Spec}A$. Dominance means that $A\\to K$ is injective: its kernel is the prime giving the image point, which is the generic point $(0)$ of the integral scheme $S'$. Thus it extends to the inclusion $L=\\operatorname{Frac}A\\to K$, and the bottom arrow is the composite $\\operatorname{Spec}K\\to\\operatorname{Spec}L\\to\\operatorname{Spec}A$. In the stated Lean interface, the embedding i from the function field into K and the factorization of the bottom map are already part of the failure witness, so no separate extension construction is necessary.",
    "uses": [
     "sbc-lem-bc-universal-test",
     "sbc-def-base-change-property"
@@ -54,7 +54,7 @@
    }
   },
   {
-   "text": "Apply [sbc-thm-universal-test-vanishing] to the second Cartesian square, with $X'$ in place of $X$, $S'$ in place of $S$, the inclusions $A\\subset L\\subset K$ of step 1, and the integer $d$. Step 1 supplies normality, the algebraically closed function field and extension; step 2 supplies affine smooth relative dimension one and the affine source; step 3 supplies invertibility of $d$. As $q\\geq1$, the theorem gives $R^qh_*(\\mathbf Z/d\\mathbf Z)=0$, contradicting its nonvanishing in step 1.",
+   "text": "Apply [sbc-thm-universal-test-vanishing] to the second Cartesian square, with $X'$ in place of $X$, $S'$ in place of $S$, the inclusions $A\\subset L\\subset K$ of step 1, and the integer $d$. Step 1 supplies normality, the algebraically closed function field and extension; step 2 supplies affine smooth relative dimension one and the affine source; step 3 supplies invertibility of $d$. As $q\\geq1$, the theorem gives $R^qh_*(\\mathbf Z/d\\mathbf Z)=0$, contradicting its nonvanishing in step 1. To apply the ring-based Lean theorem, set A = Γ(S′, O) and L = S′.functionField. Mathlib identifies L as the fraction field of A. Transport the normal stalks across S′ ≅ Spec A using the stalk ring isomorphisms, and postcompose the square by this base isomorphism. The identity fromSpecStalk_toSpecΓ identifies the bottom arrow with the two Spec maps of the algebra maps A → L → K. Apply the vanishing theorem with the integer cast of the natural divisor d; its absolute value is d, and rightDerivedLowerStarPlus unfolds to the derived pushforward in the failure witness.",
    "uses": [
     "sbc-thm-universal-test-vanishing"
    ],
@@ -242,5 +242,15 @@
   "by": "NN",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261018T062846-L-668500",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
