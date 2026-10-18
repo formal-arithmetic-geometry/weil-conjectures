@@ -13,22 +13,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.Data.ZMod.Basic
 public import WeilConjectures.ConstructibleSheaf.FinitePushforward
 import Mathlib.AlgebraicGeometry.Noetherian
-import WeilConjectures.ConstructibleSheaf.Pullback
-import Sheaf.AlgebraicGeometry.ConstructibleFieldFiniteSeparableConstant
-import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
-import Mathlib.AlgebraicGeometry.Properties
-import WeilConjectures.AlgebraicGeometry.WeilPbcNormalizationInResidueFieldExtension
-import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
-import Sheaf.AlgebraicGeometry.NormalGenericConstant
-import Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
-import WeilConjectures.ConstructibleSheaf.Defs
-import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
-import WeilConjectures.SixFunctors.Finite.Stalk
-import Sheaf.AlgebraicGeometry.ConstructibleFiniteSelection
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModuleAdjunction
-import Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import Mathlib.RingTheory.Finiteness.Cardinality
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 /-!
 # Finite-pushforward embeddings over a field
@@ -95,6 +81,18 @@ theorem exists_mono_finite_pushforward_of_finiteType_field
           (lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod N))) (h i)).obj
             ((constantSheaf (Y i).smallEtaleTopology
               (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod N)))).obj (M i))), Mono φ := by
-  sorry
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (CommRingCat.of k))
+  have : CompactSpace X :=
+    QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (CommRingCat.of k))
+  have : IsNoetherian X := ⟨⟩
+  have : Scheme.IsConstructibleSheaf F :=
+    (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf F).mp hF
+  obtain ⟨n, Y, h, hh, M, hM, φ, hφ⟩ :=
+    exists_mono_biproduct_lowerStar_of_isNoetherian (ULift.{u + 1} (ZMod N)) F
+  refine ⟨n, Y, h, hh, M, ?_, φ, hφ⟩
+  intro i
+  have := hM i
+  exact Module.finite_of_finite (ULift.{u + 1} (ZMod N))
 
 end AlgebraicGeometry.Etale

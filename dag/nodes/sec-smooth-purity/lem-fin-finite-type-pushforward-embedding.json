@@ -20,123 +20,37 @@
  ],
  "proof": [
   {
-   "text": "Put $\\Lambda=\\mathbf Z/N$. The field spectrum is locally Noetherian (a field has only the ideals $0$ and $1$). Since $X$ is locally of finite type over it, [pqf-lem-locnoeth-lft] makes $X$ locally Noetherian. Finite type includes quasi-compactness [def-weil-pbc-scheme-conventions], so $X$ is Noetherian, meaning locally Noetherian and quasi-compact. By [lem-weil-pbc-locally-noetherian-quasi-separated], $X$ is also quasi-separated. No separatedness of $X$ is assumed.",
+   "text": "The spectrum of a field is locally Noetherian. Apply [pqf-lem-locnoeth-lft] to the structure map to make $X$ locally Noetherian. Its quasi-compactness, supplied by finite type in [def-weil-pbc-scheme-conventions], and compactness of the field spectrum make $X$ compact. Thus $X$ is Noetherian.",
    "uses": [
-    "pqf-lem-locnoeth-lft",
-    "def-weil-pbc-scheme-conventions",
-    "lem-weil-pbc-locally-noetherian-quasi-separated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01T6, lemma-finite-type-noetherian; Properties Tag 01OY, lemma-locally-Noetherian-quasi-separated"
-   }
-  },
-  {
-   "text": "Fix $x\\in X$, and write $b:\\operatorname{Spec}\\kappa(x)\\to X$. By [prop-constructible-pullback], $b^{-1}F$ is constructible. Apply [lem-weil-pbc-constructible-field-finite-separable-constant] with $k=\\kappa(x)$ and the finite ring $\\Lambda$. It gives a finite separable extension $K/\\kappa(x)$, a finite $\\Lambda$-module $M$, and a module-sheaf isomorphism $\\theta:a^{-1}F\\xrightarrow{\\sim}\\underline M_K$, where $a:\\operatorname{Spec}K\\to X$ is the composite through $b$. The underlying additive group of $M$ is finite abelian and $NM=0$, since $N\\cdot1=0$ in $\\Lambda$.",
-   "uses": [
-    "prop-constructible-pullback",
-    "lem-weil-pbc-constructible-field-finite-separable-constant"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 095G, lemma-pullback-constructible; Tag 09Z6, lemma-constructible-maps-into-constant, proof first construction and part (3)"
-   }
-  },
-  {
-   "text": "Let $Z$ be the reduced induced closed subscheme on $\\overline{\\{x\\}}$, supplied by [lem-weil-pbc-reduced-induced-closed-subscheme]. Its underlying space is irreducible: two opens meeting that closure both contain its generic point $x$. Thus reducedness makes $Z$ integral [def-pc-integral-scheme]. Choose a finite affine cover $\\operatorname{Spec}R_j$ of $X$ with each $R_j$ a finitely generated algebra over the base field, as in [def-weil-pbc-scheme-conventions]. Its intersections with $Z$ are $\\operatorname{Spec}(R_j/I_j)$, a finite cover by finite-type field algebras, so $Z$ is of finite type over that field. The generic point of $Z$ is $x$, and its residue field is $\\kappa(x)$: on an affine containing $x$, the closure has prime ideal $\\mathfrak p_x$, and the generic local ring of $R/\\mathfrak p_x$ is $\\operatorname{Frac}(R/\\mathfrak p_x)=\\kappa(x)$. Thus $K$ is a finite extension of the function field of $Z$, as required by the normalization-finiteness theorem. Use [lem-weil-pbc-normalization-in-residue-field-extension] for $X,x,K$: take its stated normalization of $Z$ in $K$. It gives a normal integral $Y$ and generic inclusion $e:\\operatorname{Spec}K\\to Y$, with function field $K$ and $a=he$. The morphism $Y\\to Z$ is finite by [lem-fin-normalization-extension-finite]. On an affine $\\operatorname{Spec}R\\subseteq X$, its inverse image is the spectrum of an algebra finite as an $R/I$-module, where $R/I$ is the ring of $Z$ there. The same generators generate it as an $R$-module; hence $h:Y\\to X$ is finite by [def-weil-finite-integral-morphism]. Over the chosen finite affine cover $\\operatorname{Spec}R_j$, these finite algebras are generated as field algebras by the generators of $R_j$ and their finite module generators. Their spectra form a finite affine cover of $Y$, hence $Y$ is quasi-compact and locally of finite type over the field. Thus $Y$ is of finite type over the field and locally Noetherian by [pqf-lem-locnoeth-lft]; in particular it is Noetherian.",
-   "uses": [
-    "lem-weil-pbc-reduced-induced-closed-subscheme",
-    "def-pc-integral-scheme",
-    "lem-weil-pbc-normalization-in-residue-field-extension",
-    "lem-fin-normalization-extension-finite",
-    "def-weil-finite-integral-morphism",
     "pqf-lem-locnoeth-lft",
     "def-weil-pbc-scheme-conventions"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09Z6, lemma-constructible-maps-into-constant, normalization construction and Nagata footnote; Morphisms Tags 035H, 035I, 035L and 01T6"
-   }
+   "elementary": true
   },
   {
-   "text": "The natural map $u:\\underline M_Y\\to e_*\\underline M_K$ is an isomorphism by [lem-fin-normal-generic-constant], applied to this normal integral Noetherian $Y$. It is $\\Lambda$-linear: naturality with respect to multiplication by each scalar on $M$ says exactly that $u$ commutes with that scalar, and its inverse does too. Identify $e^{-1}h^{-1}F$ with $a^{-1}F$ by [lem-weil-pbc-inverse-image-composition-module-linear]. Under the module adjunction [lem-weil-pbc-inverse-image-module-adjunction], $\\theta$ has an adjoint $\\beta:h^{-1}F\\to e_*\\underline M_K$. Put $\\alpha=u^{-1}\\beta:h^{-1}F\\to\\underline M_Y$, and take its adjoint $\\phi_x:F\\to h_*\\underline M_Y$. These are all maps of $\\Lambda$-module sheaves.",
+   "text": "Put $\\Lambda=\\operatorname{ULift}(\\mathbf Z/N)$. Since $N\\ne 0$, this is a finite commutative ring and hence Noetherian. Apply [lem-weil-pbc-constructible-etale-module-sheaf-comparison] to the given finite-value constructibility witness, obtaining the source-library IsConstructibleSheaf instance for $F$. Apply [lem-weil-pbc-constructible-finite-pushforward-noetherian] to $X,F,\\Lambda$. It gives a finite family of finite maps, finitely generated $\\Lambda$-modules and the required monomorphism of module sheaves.",
    "uses": [
-    "lem-fin-normal-generic-constant",
-    "lem-weil-pbc-inverse-image-composition-module-linear",
-    "lem-weil-pbc-inverse-image-module-adjunction"
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "lem-weil-pbc-constructible-finite-pushforward-noetherian"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09Z6, lemma-constructible-maps-into-constant, the two adjunctions; Tag 09Z5, lemma-push-constant-sheaf-from-open; Modules on Sites Tags 03D3 and 03D8"
-   }
+   "elementary": false
   },
   {
-   "text": "The pullback $e^{-1}\\alpha$ is an isomorphism. To see the precise map, let $v:e^{-1}\\underline M_Y\\xrightarrow{\\sim}\\underline M_K$ be the canonical constant-pullback isomorphism [lemma-constructible-pullback-constant]. The natural map $u$ in step 4 is adjoint to $v$, so $\\varepsilon_{e,\\underline M_K}\\,e^{-1}u=v$. The defining adjunction equation for $\\beta$ says $\\varepsilon_{e,\\underline M_K}\\,e^{-1}\\beta=\\theta$. Since $\\beta=u\\alpha$, these identities give $v\\,e^{-1}\\alpha=\\theta$. Both $v$ and $\\theta$ are isomorphisms, hence so is $e^{-1}\\alpha$. These equations are the unit-counit identities for [def-weil-pbc-inverse-image], in the module adjunction of [lem-weil-pbc-inverse-image-module-adjunction].",
-   "uses": [
-    "lemma-constructible-pullback-constant",
-    "def-weil-pbc-inverse-image",
-    "lem-weil-pbc-inverse-image-module-adjunction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09Z6, lemma-constructible-maps-into-constant, the commutative stalk diagram; Tag 09Z5, natural constant-unit map"
-   }
-  },
-  {
-   "text": "Let $\\bar x:\\operatorname{Spec}\\Omega\\to X$ be any geometric point with image $x$. Embed $K$ into $\\Omega$ over $\\kappa(x)$: choose finitely many algebraic generators of $K$, and extend the embedding successively by choosing a root in the algebraically closed field $\\Omega$ of each generator's minimal polynomial. This gives $\\bar y:\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}K\\xrightarrow{e}Y$ with $h\\bar y=\\bar x$. The stalk identification [lem-weil-pbc-inverse-image-stalk-germ] for $e$ and the isomorphism $e^{-1}\\alpha$ of step 5 imply that $\\alpha_{\\bar y}$ is an isomorphism. Write $r:(h_*\\underline M_Y)_{\\bar x}\\to(\\underline M_Y)_{\\bar y}$ for the germ restriction of [lem-weil-pbc-finite-stalk-formula-restriction]. Since $\\phi_x=h_*\\alpha\\,\\eta_{h,F}$, its composition with $r$ is $\\alpha_{\\bar y}$ after the canonical identification $F_{\\bar x}\\cong(h^{-1}F)_{\\bar y}$. Indeed a representative section $s\\in F(U)$ goes by the unit to its pullback on $U\\times_XY$, then by $\\alpha$ to its image there, and $r$ takes its germ at $(\\bar u,\\bar y)$; the unit-germ identity in [lem-weil-pbc-inverse-image-stalk-germ] identifies the first germ with $s_{\\bar x}$. Therefore $r(\\phi_x)_{\\bar x}$ is an isomorphism, and $(\\phi_x)_{\\bar x}$ is injective.",
-   "uses": [
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "lem-weil-pbc-finite-stalk-formula-restriction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 09Z6, lemma-constructible-maps-into-constant, geometric-point lift and commutative diagram; Tags 03Q1 and 03QP, stalk identifications"
-   }
-  },
-  {
-   "text": "Choose this construction for each point $x$ of $X$. At every geometric point over $x$, the associated $\\phi_x$ is injective by step 6. Forgetting the module actions, $F$ is a constructible abelian sheaf: its finite locally constant module restrictions remain finite locally constant abelian restrictions [def-weil-pbc-etale-constructible-sheaf]. Apply [lem-weil-pbc-constructible-noetherian-finite-selection] to the family of these maps on the Noetherian scheme $X$. It gives finitely many of them with a monomorphism $F\\to\\bigoplus_i(h_i)_*\\underline M_i$. The finite-sum map is still $\\Lambda$-linear because every component is linear. It is injective as a module-sheaf map: cancellation against it follows from cancellation on the underlying abelian-sheaf maps, whose equality is equality of the module-sheaf maps. Each $h_i$ is finite by step 3, and each $M_i$ is finite abelian and killed by $N$ by step 2. If $X$ is empty or $F=0$, the empty finite family gives the map to the zero sheaf, which is a monomorphism.",
-   "uses": [
-    "def-weil-pbc-etale-constructible-sheaf",
-    "lem-weil-pbc-constructible-noetherian-finite-selection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-weil-pbc-constructible-noetherian-finite-selection.md",
-    "place": "Statement and Proof; finite-selection paragraph of the item, corresponding to Stacks Tag 09Z6"
-   }
+   "text": "For each index, a finitely generated module over the finite ring $\\Lambda$ is finite as a set (Mathlib Module.finite_of_finite). Retain exactly the same finite maps, modules, monomorphism and Mono proof, replacing only the module-finiteness witnesses by set-finiteness witnesses. The empty index family and zero ring $N=1$ are allowed without a case restriction.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "pqf-lem-locnoeth-lft",
   "def-weil-pbc-scheme-conventions",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "prop-constructible-pullback",
-  "lem-weil-pbc-constructible-field-finite-separable-constant",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "def-pc-integral-scheme",
-  "lem-weil-pbc-normalization-in-residue-field-extension",
-  "lem-fin-normalization-extension-finite",
-  "def-weil-finite-integral-morphism",
-  "lem-fin-normal-generic-constant",
-  "lem-weil-pbc-inverse-image-composition-module-linear",
-  "lem-weil-pbc-inverse-image-module-adjunction",
-  "lemma-constructible-pullback-constant",
-  "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-weil-pbc-finite-stalk-formula-restriction",
-  "def-weil-pbc-etale-constructible-sheaf",
-  "lem-weil-pbc-constructible-noetherian-finite-selection"
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-weil-pbc-constructible-finite-pushforward-noetherian"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-finite-type-pushforward-embedding.md",
-  "place": "Proof, both paragraphs, checked against Stacks 09Z6; finite-type Nagata specialization without approximation"
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09Z6 (3), lemma-constructible-maps-into-constant; specialize the existing Noetherian module embedding using the finite ring Z/N. D5, 2026-10-18."
  },
  "mathlib_searches": [
   {
@@ -277,16 +191,7 @@
    }
   ]
  },
- "tool_uses": [
-  "prop-constructible-pullback",
-  "lem-weil-pbc-constructible-field-finite-separable-constant",
-  "lem-weil-pbc-reduced-induced-closed-subscheme",
-  "lem-weil-pbc-normalization-in-residue-field-extension",
-  "lem-weil-pbc-inverse-image-composition-module-linear",
-  "lem-weil-pbc-inverse-image-module-adjunction",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-weil-pbc-finite-stalk-formula-restriction"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
@@ -312,5 +217,15 @@
   "by": "NV",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261018T062726-L-640851",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
