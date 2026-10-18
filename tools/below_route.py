@@ -13,9 +13,10 @@ its stage-3 (b). Every node of that set is "below a route sorry" of the batch, a
 steps from a root (0 for a root); a module is below a route sorry at the distance of its nearest node. Stated nodes
 whose Lean the route does not reach yet are therefore work as soon as their module is in live with a `sorry` (the
 parent's proof is not written, so the Lean walk cannot see them); nodes in no root's closure are bypassed by the Lean
-route and are not work. The walk does descend from a node whose live module is proved but not closed on the done
-branch: what its proof uses is on the route only once its parent is proved, so the sorries below it stay work
-(a sorry its proof does not use is pruned when the route is recomputed after the parent's proof lands).
+route and are not work. The walk does not descend from a node whose Lean is proved either: finished, or a live module
+without `sorry` (stage-3 rule: prove from the targets downward and prune; what a proved module uses is settled by its
+proof, and the plan below it is not work until the route reaches it) -- the stop of batch_report's stage-3 (b), except
+that a sorried live module is descended from (its proof is not written, so its plan still stands).
 
 The batches' target NODES are read from the new-targets project (NEWTARGETS/coord/batchN-targets.txt; the open batch
 without such a file, batch 2, is the rest of that project's SHEAF_TARGET_LIST), because the live coord/batchN-targets.txt
@@ -117,12 +118,34 @@ def below(g, dq, batch: str, route: dict, targets_of: dict[str, set[str]], assum
         if i in dist:
             continue
         dist[i] = k
-        if i not in roots and dq.finished(g.live[i]):
+        if i not in roots and proved(g.live[i], dq):
             continue
         for c in g.deps(i, "all"):
             if c in g.live and c not in dist and c not in A and c not in other:
                 q.append((c, k + 1))
     return {i: k for i, k in dist.items() if i in w1}, roots
+
+
+_SORRIES: dict[str, int] = {}
+
+
+def sorries(module: str, dq, root: pathlib.Path = R) -> int:
+    """the `sorry`/`admit` count of the live module's text, -1 when the module is not in live"""
+    if module not in _SORRIES:
+        p = root / "lean" / (module.replace(".", "/") + ".lean")
+        try:
+            _SORRIES[module] = dq.li.sorry_count(p.read_text(errors="ignore")) if p.is_file() else -1
+        except OSError:
+            _SORRIES[module] = -1
+    return _SORRIES[module]
+
+
+def proved(d: dict, dq) -> bool:
+    """the node's Lean is proved: finished (dag_queue), or its recorded module is in live without `sorry`"""
+    if dq.finished(d):
+        return True
+    m = dq.module_of(d)
+    return bool(m) and sorries(m, dq) == 0
 
 
 def modules_of(g, dq, nodes: dict[str, int]) -> dict[str, int]:
