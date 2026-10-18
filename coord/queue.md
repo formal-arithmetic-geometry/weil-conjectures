@@ -1,6 +1,6 @@
 # Work queue
 
-50 items; claim with `tools/claim.py next <group> [--stage N]`.
+49 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (50)
+## Stage 3: modules to prove (49)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -45,7 +45,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.FieldDiscreteModules` | - | 1 | proof | 4 |
 | `Sheaf.AlgebraicGeometry.ProjectiveMorphismChartPreimage` | - | 1 | proof | 4 |
 | `Sheaf.CategoryTheory.DiscreteModulesAbelian` | - | 1 | proof | 4 |
-| `Sheaf.CategoryTheory.RingedCechKoszulDualKFlat` | - | 1 | proof | 4 |
 | `Sheaf.Paper.AffineProjectiveComplexDerivedHom` | - | 1 | proof | 4 |
 | `Sheaf.AlgebraicGeometry.FiniteDenseNormalOpen` | - | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.Sites.EtaleSheavesGsetsPoint` | - | 1 | proof | 5 |
