@@ -126,7 +126,7 @@ lemma ext_of_isColimit {s s' : ToType (G.obj.obj (op Z))}
     (fun i ↦ ((sheafCompose X.smallEtaleTopology (CategoryTheory.forget A)).obj G).obj.map
       (c i).op s') (by
       intro i j W a b hab
-      simp only [← FunctorToTypes.map_comp_apply, ← op_comp, hab])
+      simp only [← Functor.map_comp_apply, ← op_comp, hab])
   exact (ht s h).trans (ht s' fun _ ↦ rfl).symm
 
 end AlgebraicGeometry.Scheme.Etale

@@ -287,6 +287,7 @@ variable {A : Type*} [Category A] [Abelian A] [HasColimitsOfShape I A]
   [HasExactColimitsOfShape I A] {H : DerivedCategory 𝒜 ⥤ A} [H.IsHomological]
   [H.ShiftSequence ℤ]
 
+omit [Abelian A] [HasExactColimitsOfShape I A] [H.IsHomological] in
 /-- Continuity on cocones concentrated in a single degree `m` follows from continuity on the
 images under `singleFunctor 𝒜 m` of colimit cocones in `𝒜`. -/
 lemma isContinuousOn_of_isGE_of_isLE

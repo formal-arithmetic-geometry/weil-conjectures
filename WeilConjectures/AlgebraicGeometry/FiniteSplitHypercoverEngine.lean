@@ -118,6 +118,7 @@ variable (hY : HasLocalLifts Y) (S : ∀ m : ℕ, Sieve (Y _⦋m⦌))
   (hS : ∀ m, S m ∈ X.smallEtaleTopology (Y _⦋m⦌))
 
 include hY hS in
+omit [QuasiSeparatedSpace ↥X] in
 lemma exists_good (m : ℕ) (W : SimplicialObject X.Etale) (ℓ : W ⟶ Y)
     (hW : ∀ k, IsQcqs (W.obj k)) : ∃ d : StepData W ℓ m, d.Good S := by
   have : CompactSpace (matchingObj W m).left :=
@@ -154,8 +155,10 @@ def step (m : ℕ) (W : SimplicialObject X.Etale) (ℓ : W ⟶ Y) : AttachStep �
 abbrev data (m : ℕ) : StepData (obj (step hY S hS) m) (objToY (step hY S hS) m) m :=
   chosen hY S hS m (obj (step hY S hS) m) (objToY (step hY S hS) m)
 
+omit [QuasiSeparatedSpace ↥X] in
 lemma cells_eq (m : ℕ) : cells (step hY S hS) m = (data hY S hS m).toAttachStep := rfl
 
+omit [QuasiSeparatedSpace ↥X] in
 lemma data_good_of_isQcqs (m : ℕ) (h : ∀ k, IsQcqs ((obj (step hY S hS) m).obj k)) :
     (data hY S hS m).Good S := by
   classical
@@ -181,6 +184,7 @@ lemma data_good (m : ℕ) : (data hY S hS m).Good S :=
 abbrev cone (n : ℕ) : BoundaryCone (W (step hY S hS)) n (matchingObj (obj (step hY S hS) n) n) :=
   (matchingObjCone (obj (step hY S hS) n) n).postcomp (ι (step hY S hS) n)
 
+omit [QuasiSeparatedSpace ↥X] in
 lemma isMatchingCone_cone (n : ℕ) : IsMatchingCone _ n (cone hY S hS n) :=
   (isMatchingCone_matchingObjCone _ n).postcomp _
     (fun k hk ↦ isIso_ι_app (step hY S hS) n (op k) hk)

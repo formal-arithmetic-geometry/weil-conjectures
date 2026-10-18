@@ -283,7 +283,7 @@ theorem etale_finite_data_descent
     (∀ (A : Type v) [Finite A] [Quiver.{v} A]
       [Finite (Σ a b : A, Quiver.Hom a b)]
       (i : Iᵒᵖ) (G : Paths A ⥤ Over (D.obj i)) (F : Paths A ⥤ Over c.pt)
-      (α : G ⋙ Over.pullback (c.π.app i) ≅ F),
+      (_α : G ⋙ Over.pullback (c.π.app i) ≅ F),
       (∀ a, Etale (G.obj a).hom ∧ LocallyOfFinitePresentation (G.obj a).hom ∧
         QuasiCompact (G.obj a).hom ∧ QuasiSeparated (G.obj a).hom) →
       ∀ (b : A) (B : Finset (Σ a : A, Quiver.Hom a b)),

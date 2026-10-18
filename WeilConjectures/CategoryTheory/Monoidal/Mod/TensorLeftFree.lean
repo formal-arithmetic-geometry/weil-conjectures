@@ -42,6 +42,7 @@ noncomputable def tensorLeftMapAddHom (M M' : Mod C A) :
     rwa [add_zero, left_eq_add] at h
   map_add' := tensorLeftMap_add
 
+omit [∀ (X : C), PreservesColimitsOfSize.{v, v, v, v, u, u} (MonoidalCategory.tensorRight X)] in
 lemma sum_tensorLeftMap_π_comp_tensorLeftMap_ι {n : ℕ} (M : Fin n → Mod C A) :
     ∑ i, tensorLeftMap (biproduct.π M i) ≫ tensorLeftMap (biproduct.ι M i) =
       𝟙 (tensorLeft (⨁ M)) := by
@@ -51,6 +52,7 @@ lemma sum_tensorLeftMap_π_comp_tensorLeftMap_ι {n : ℕ} (M : Fin n → Mod C 
         rw [map_sum]; rfl
     _ = 𝟙 _ := by rw [biproduct.total]; exact tensorLeftMap_id _
 
+omit [∀ (X : C), PreservesColimitsOfSize.{v, v, v, v, u, u} (MonoidalCategory.tensorRight X)] in
 /-- `- ⊗_A ⨁ᵢ Mᵢ` preserves monomorphisms if each `- ⊗_A Mᵢ` does. -/
 lemma mono_tensorLeft_biproduct_map {n : ℕ} (M : Fin n → Mod C A) {N N' : Mod C A}
     (f : N ⟶ N') (h : ∀ i, Mono ((tensorLeft (M i)).map f)) :
@@ -93,6 +95,7 @@ def leftActHom : (tensorRight A M.X).obj (regular A) ⟶ M :=
       A ◁ act (A := A) M.X ≫ act (A := A) M.X
     rw [Category.assoc, mul_act, Iso.inv_hom_id_assoc])
 
+omit [Abelian C] [MonoidalPreadditive C] [IsGrothendieckAbelian.{v, v, u} C] [∀ (X : C), PreservesColimitsOfSize.{v, v, v, v, u, u} (MonoidalCategory.tensorLeft X)] [∀ (X : C), PreservesColimitsOfSize.{v, v, v, v, u, u} (MonoidalCategory.tensorRight X)] in
 lemma tensorRightMap_act_comp_leftActHom :
     (tensorRightMap A (act (A := A) M.X)).app (regular A) ≫ leftActHom M =
       (tensorRightRightAct A M.X).app (regular A) ≫ leftActHom M := by
@@ -154,6 +157,7 @@ end RegularLeft
 
 section IhomFree
 
+omit [∀ (X : C), PreservesColimitsOfSize.{v, v, v, v, u, u} (MonoidalCategory.tensorRight X)] in
 lemma tensorLeftMap_ι_comp_tensorLeftMap_π {n : ℕ} (M : Fin n → Mod C A) (i j : Fin n) :
     tensorLeftMap (biproduct.ι M i) ≫ tensorLeftMap (biproduct.π M j) =
       if h : i = j then eqToHom (by subst h; rfl) else 0 := by

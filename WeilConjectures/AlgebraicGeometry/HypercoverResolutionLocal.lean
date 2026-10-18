@@ -34,6 +34,7 @@ variable {X : Scheme.{u}}
 
 include hA
 
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] in
 /-- Sections of a kernel of sheaves are the kernel of the sections. -/
 lemma exists_kernel_elem {K G H : Sheaf X.smallEtaleTopology A} {i : K ⟶ G} {g : G ⟶ H}
     {w : i ≫ g = 0} (hk : IsLimit (KernelFork.ofι i w)) (T : X.Etale)

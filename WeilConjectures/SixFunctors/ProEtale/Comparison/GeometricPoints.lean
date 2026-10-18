@@ -52,7 +52,8 @@ theorem isIso_iff_forall_isIso_mapDerivedCategoryPlus_upperStar_map
   refine Etale.isIso_of_isIso_upperStar_map_of_jointlySurjective (ModuleCat.{u + 1} Λ)
     (fun s : X ↦ X.algClosurePoint s) (fun s ↦ ⟨s, default, by simp⟩) _ fun s ↦ ?_
   exact (NatIso.isIso_map_iff ((Etale.upperStar (ModuleCat.{u + 1} Λ)
-    (X.algClosurePoint s)).mapDerivedCategoryPlusHomologyFunctorIso n) φ).2 (Functor.map_isIso (DerivedCategory.Plus.homologyFunctor _ n) _)
+    (X.algClosurePoint s)).mapDerivedCategoryPlusHomologyFunctorIso n) φ).2
+      (Functor.map_isIso (DerivedCategory.Plus.homologyFunctor _ n) _)
 
 /-- Blueprint `lem-cbc-proetale-stalk-conservative` (3): *complexes of étale origin*.
 

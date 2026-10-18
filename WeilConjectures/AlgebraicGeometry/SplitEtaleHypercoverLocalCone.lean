@@ -177,7 +177,7 @@ private lemma exists_cone_succ (k : ℕ) {T₁ : X.Etale} (π₁ : T₁ ⟶ T)
             hc₁ k (Nat.lt_succ_self k) _ (hcl k τ hτ j)]
         | succ i =>
           induction j using Fin.cases with
-          | zero => exact absurd hij (by simp [Fin.le_iff_val_le_val])
+          | zero => exact absurd hij (by simp)
           | succ j =>
             have hij' : i ≤ j := Fin.succ_le_succ_iff.mp hij
             rw [← Fin.succ_castSucc]

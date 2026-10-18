@@ -65,7 +65,7 @@ lemma prism_apply {m n : ℕ} (θ : ⦋m⦌ ⟶ ⦋n⦌) (k : Fin (m + 1)) (i : 
 lemma prism_id {m : ℕ} (k : Fin (m + 1)) : prism (𝟙 ⦋m⦌) k = 𝟙 _ := by
   ext i : 3
   rw [prism_apply, prismFun]
-  split_ifs with h <;> (apply Fin.ext; simp) <;> omega
+  split_ifs with h <;> (apply Fin.ext; simp); omega
 
 lemma prismFun_of_le {m n : ℕ} (θ : ⦋m⦌ ⟶ ⦋n⦌) (k : Fin (m + 1)) (i : Fin (m + 2))
     (h : i.val ≤ k.val) :
@@ -95,7 +95,7 @@ lemma prism_comp {l m n : ℕ} (θ' : ⦋l⦌ ⟶ ⦋m⦌) (θ : ⦋m⦌ ⟶ ⦋
     rfl
   · have h1 : (θ'.toOrderHom k).val ≤ (θ'.toOrderHom ⟨i.val - 1, by simp at *; omega⟩).val :=
       toOrderHom_val_mono θ' (by simp only; omega)
-    rw [prismFun_of_lt θ' k i (by omega), prismFun_of_lt _ _ _ (by simp <;> omega),
+    rw [prismFun_of_lt θ' k i (by omega), prismFun_of_lt _ _ _ (by simp; omega),
       prismFun_of_lt _ k i (by omega)]
     simp only [comp_toOrderHom, OrderHom.comp_coe, Function.comp_apply]
     congr 2
@@ -140,7 +140,7 @@ lemma δ_zero_comp_prism_zero {m n : ℕ} (θ : ⦋m⦌ ⟶ ⦋n⦌) :
   apply Fin.ext
   rw [Fin.val_succ, δ_val, if_neg (by simp)]
   congr 1
-  exact congrArg Fin.val (toOrderHom_congr θ (by simp <;> omega))
+  exact congrArg Fin.val (toOrderHom_congr θ (by simp; omega))
 
 lemma δ_last_comp_prism_last {m n : ℕ} (θ : ⦋m⦌ ⟶ ⦋n⦌) :
     δ (Fin.last (m + 1)) ≫ prism θ (Fin.last m) = θ ≫ δ (Fin.last (n + 1)) := by
@@ -149,11 +149,11 @@ lemma δ_last_comp_prism_last {m n : ℕ} (θ : ⦋m⦌ ⟶ ⦋n⦌) :
   generalize hy : (δ (Fin.last (m + 1))).toOrderHom x = y
   have hx := x.isLt
   simp only [len_mk] at hx
-  have hyv : y.val = x.val := by rw [← hy, δ_val, if_pos (by simp <;> omega)]
+  have hyv : y.val = x.val := by rw [← hy, δ_val, if_pos (by simp)]
   rw [prismFun_of_le _ _ _ (by rw [hyv, Fin.val_last]; omega)]
   apply Fin.ext
-  rw [Fin.val_castSucc, δ_val, if_pos (by simp <;> omega)]
-  exact congrArg Fin.val (toOrderHom_congr θ (by simp <;> omega))
+  rw [Fin.val_castSucc, δ_val, if_pos (by simp)]
+  exact congrArg Fin.val (toOrderHom_congr θ (by simp; omega))
 
 lemma prism_δ_of_le {n : ℕ} (i : Fin (n + 2)) (j : Fin (n + 1)) (h : i.val ≤ j.val) :
     prism (δ i) j = δ i.castSucc := by
@@ -289,14 +289,14 @@ lemma isPathFamily_pathMap {T : C} {m n : ℕ} (θ : ⦋m⦌ ⟶ ⦋n⦌)
   simp only [Fin.val_castSucc, Fin.val_succ] at hyv
   by_cases hxj : x.val ≤ j.val
   · rw [if_pos (by omega)] at hyv
-    rw [prismFun_of_le _ _ _ (by simp <;> omega)] at hx₁
+    rw [prismFun_of_le _ _ _ (by simp; omega)] at hx₁
     have := θ.toOrderHom.monotone (show (⟨y.val, by simp; omega⟩ : Fin (m + 1)) ≤ j.castSucc
       from by rw [Fin.le_def]; simp; omega)
     rw [Fin.le_def] at this
     simp at hx₁
     omega
   · rw [if_neg (by omega)] at hyv
-    rw [prismFun_of_lt _ _ _ (by simp <;> omega)] at hx₂
+    rw [prismFun_of_lt _ _ _ (by simp; omega)] at hx₂
     have := θ.toOrderHom.monotone (show j.succ ≤ (⟨y.val - 1, by simp; omega⟩ : Fin (m + 1))
       from by rw [Fin.le_def]; simp; omega)
     rw [Fin.le_def] at this
@@ -336,7 +336,7 @@ lemma pathMap_last_δ_last {T : C} {m n : ℕ} (θ : ⦋m⦌ ⟶ ⦋n⦌)
     δ_last_comp_prism_last]
   refine (hh.map_eq _ _ (Fin.le_last _) _ fun x ⟨hx₁, hx₂⟩ ↦ ?_).symm
   simp only [comp_toOrderHom, OrderHom.comp_coe, Function.comp_apply] at hx₁ hx₂
-  rw [δ_val, if_pos (by simp <;> omega)] at hx₁
+  rw [δ_val, if_pos (by simp)] at hx₁
   have := θ.toOrderHom.monotone (Fin.le_last x)
   rw [Fin.le_def] at this
   simp at hx₁ this

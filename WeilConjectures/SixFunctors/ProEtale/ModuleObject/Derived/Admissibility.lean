@@ -65,6 +65,7 @@ vanish outside `[a, b]`. -/
 def boundedConstructibleInterval (a b : ℤ) : ObjectProperty (Dᵇc(X)⟦Λ⟧) :=
   fun K ↦ DerivedCategory.homologyConcentratedIn a b K.obj
 
+omit [IsCommMonObj Λ] in
 lemma boundedConstructibleInterval_iff (a b : ℤ) (K : Dᵇc(X)⟦Λ⟧) :
     boundedConstructibleInterval Λ X a b K ↔
       ∀ i : ℤ, (i < a ∨ b < i) → IsZero ((DerivedCategory.homologyFunctor _ i).obj K.obj) := by

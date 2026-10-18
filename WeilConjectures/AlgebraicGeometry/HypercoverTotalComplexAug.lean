@@ -39,10 +39,13 @@ section Elem
 
 include hA
 
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] hA in
+omit [(X : A) → AddCommGroup (CA X)] in
 lemma totπ_totι_self (p r n : ℕ) (h : p + r = n) (y : ToType (U.dObj L p r)) :
     U.totπ L p r n h (U.totι L p r n h y) = y := by
   rw [← ConcreteCategory.comp_apply, totι_totπ, ConcreteCategory.id_apply]
 
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] in
 lemma totπ_totι_ne (p r p' r' n : ℕ) (h : p + r = n) (h' : p' + r' = n) (hp : p ≠ p')
     (y : ToType (U.dObj L p r)) : U.totπ L p' r' n h' (U.totι L p r n h y) = 0 := by
   rw [← ConcreteCategory.comp_apply, U.totι_totπ_of_ne L p r p' r' n h h' hp]
@@ -69,11 +72,15 @@ lemma totD_totι_apply (a b n : ℕ) (h : a + b = n) (w : ToType (U.dObj L a b))
   rw [← ConcreteCategory.comp_apply, totι_totD, hA.add_apply, hA.zsmul_apply,
     ConcreteCategory.comp_apply, ConcreteCategory.comp_apply]
 
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] hA in
+omit [(X : A) → AddCommGroup (CA X)] in
 lemma totπ_totD_zero_apply (r : ℕ) (x : ToType (U.totObj L r)) :
     U.totπ L 0 (r + 1) (r + 1) (by omega) (U.totD L r x) =
       U.dVert L 0 r (U.totπ L 0 r r (by omega) x) := by
   rw [← ConcreteCategory.comp_apply, U.totD_totπ_zero L r r rfl, ConcreteCategory.comp_apply]
 
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] hA in
+omit [(X : A) → AddCommGroup (CA X)] in
 lemma totπ_totD_succ_zero_apply (p : ℕ) (x : ToType (U.totObj L p)) :
     U.totπ L (p + 1) 0 (p + 1) (by omega) (U.totD L p x) =
       U.dHor L p 0 (U.totπ L p 0 p (by omega) x) := by
@@ -91,6 +98,7 @@ def SuppLE (n k : ℕ) (x : ToType (U.totObj L n)) : Prop :=
   ∀ p r (hpr : p + r = n), k < p → U.totπ L p r n hpr x = 0
 
 omit hA in
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] in
 lemma suppLE_of_le (n : ℕ) (x : ToType (U.totObj L n)) : U.SuppLE L n n x :=
   fun p r hpr hp ↦ absurd hpr (by omega)
 
@@ -109,6 +117,7 @@ lemma totπ_totD_of_suppLE (n k r : ℕ) (hkr : k + 1 + r = n + 1) (x : ToType (
       hx (k + 2) s (by omega) (by omega), map_zero, smul_zero, add_zero]
 
 
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] in
 lemma totD_totD_apply (n : ℕ) (y : ToType (U.totObj L n)) :
     U.totD L (n + 1) (U.totD L n y) = 0 := by
   rw [← ConcreteCategory.comp_apply, totD_totD]
@@ -164,11 +173,15 @@ section Aug
 
 include hA
 
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] hA in
+omit [(X : A) → AddCommGroup (CA X)] in
 lemma totAug_f_apply (n : ℕ) (z : ToType ((L.X n).obj.obj (op (⊤_ X.Etale)))) :
     (U.totAug L).f n z = U.totι L 0 n n (zero_add n) (U.resTop (L.X n) 0 z) :=
   ConcreteCategory.comp_apply _ _ _
 
 omit hA in
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] in
+omit [(X : A) → AddCommGroup (CA X)] in
 lemma resTop_dVert_apply (r : ℕ) (z : ToType ((L.X r).obj.obj (op (⊤_ X.Etale)))) :
     U.dVert L 0 r (U.resTop (L.X r) 0 z) =
       U.resTop (L.X (r + 1)) 0 ((L.d r (r + 1)).hom.app (op (⊤_ X.Etale)) z) := by

@@ -77,6 +77,7 @@ instance : IsIso (ProEtaleWeilSheaf.upperStarLeftAdjointAdjunction k₀ l j).uni
   IsoAlgebra.isIso_mapOfNatIsoAdjunction_unit _ _ _ (IsoAlgebra.mateEquiv_leftMateIso_inv _ _)
 
 omit [IsOpenImmersion j] in
+omit [Finite k₀] in
 /-- The ranges of the base changes to `k̄` of morphisms with disjoint ranges are disjoint. -/
 lemma Scheme.Hom.inter_range_geometricFiberMap_eq_empty {W : Scheme.{u}}
     [W.Over (Spec (CommRingCat.of k₀))] (φ : W ⟶ X) [φ.IsOver (Spec (CommRingCat.of k₀))]

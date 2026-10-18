@@ -50,15 +50,18 @@ namespace ElementwiseAbelian
 variable (hA : ElementwiseAbelian A)
 include hA
 
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] in
 lemma zero_apply {X Y : A} (x : ToType X) : (0 : X ⟶ Y) x = 0 := by
   have := hA.sub_apply (0 : X ⟶ Y) 0 x
   rwa [sub_zero, sub_self] at this
 
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] in
 lemma add_apply {X Y : A} (f g : X ⟶ Y) (x : ToType X) : (f + g) x = f x + g x := by
   have h : f + g = f - (0 - g) := by abel
   rw [h, hA.sub_apply, hA.sub_apply, hA.zero_apply]
   abel
 
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] in
 lemma neg_apply {X Y : A} (f : X ⟶ Y) (x : ToType X) : (-f) x = -f x := by
   have h : -f = 0 - f := by abel
   rw [h, hA.sub_apply, hA.zero_apply, zero_sub]
@@ -90,21 +93,25 @@ def IsCls (i : ι) [K.HasHomology i] (y : ToType (K.homology i)) (x : ToType (K.
 
 include hA
 
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] in
 lemma exists_cycles_elem (i j : ι) (hj : c.next i = j) (x : ToType (K.X i))
     (hx : K.d i j x = 0) : ∃ z : ToType (K.cycles i), K.iCycles i z = x := by
   have hS : (ShortComplex.mk (K.iCycles i) (K.d i j) (K.iCycles_d i j)).Exact :=
     ShortComplex.exact_of_f_is_kernel _ (K.cyclesIsKernel i j hj)
   exact hA.elem_of_exact _ hS x hx
 
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] in
 lemma exists_isCls_of_d_eq_zero (i j : ι) (hj : c.next i = j) (x : ToType (K.X i))
     (hx : K.d i j x = 0) : ∃ y, K.IsCls i y x := by
   obtain ⟨z, hz⟩ := K.exists_cycles_elem hA i j hj x hx
   exact ⟨_, z, hz, rfl⟩
 
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] in
 lemma exists_isCls (i : ι) (y : ToType (K.homology i)) : ∃ x, K.IsCls i y x := by
   obtain ⟨z, rfl⟩ := hA.surjective_of_epi (K.homologyπ i) y
   exact ⟨_, z, rfl, rfl⟩
 
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] in
 lemma IsCls.d_eq_zero {i : ι} (j : ι) {y : ToType (K.homology i)} {x : ToType (K.X i)}
     (h : K.IsCls i y x) : K.d i j x = 0 := by
   obtain ⟨z, rfl, -⟩ := h
@@ -121,6 +128,7 @@ lemma IsCls.sub {i : ι} {y y' : ToType (K.homology i)} {x x' : ToType (K.X i)}
 omit hA in
 lemma isCls_zero (i : ι) : K.IsCls i 0 0 := ⟨0, map_zero _, map_zero _⟩
 
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] in
 lemma IsCls.eq_zero_iff (h i : ι) (hi : c.prev i = h) {y : ToType (K.homology i)}
     {x : ToType (K.X i)} (hyx : K.IsCls i y x) : y = 0 ↔ ∃ w, K.d h i w = x := by
   obtain ⟨z, rfl, rfl⟩ := hyx
@@ -147,6 +155,8 @@ lemma IsCls.eq_iff (h i : ι) (hi : c.prev i = h) {y y' : ToType (K.homology i)}
   exact IsCls.eq_zero_iff hA K h i hi (IsCls.sub K hyx hyx')
 
 omit hA in
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] in
+omit [(X : A) → AddCommGroup (CA X)] in
 lemma IsCls.map {L : HomologicalComplex A c} (φ : K ⟶ L) {i : ι} {y : ToType (K.homology i)}
     {x : ToType (K.X i)} (h : K.IsCls i y x) :
     L.IsCls i (HomologicalComplex.homologyMap φ i y) (φ.f i x) := by

@@ -151,6 +151,8 @@ section Transport
 variable {B : Type*} [Category B] [HasColimitsOfShape I B]
 
 omit [HasColimitsOfShape I A] [HasExactColimitsOfShape I A] in
+omit [HasZeroObject C] [∀ (n : ℤ), (shiftFunctor C n).Additive] [Pretriangulated C] in
+omit [HasShift C ℤ] [Preadditive C] in
 /-- The comparison map `colim_i K(G i) ⟶ K(s.pt)` is an isomorphism for one cocone if and only if
 it is for an isomorphic cocone over an isomorphic diagram. -/
 lemma isIso_colimitDesc_iff_of_iso {G G' : I ⥤ C} (α : G ≅ G') {s : Cocone G}
@@ -179,6 +181,8 @@ lemma isIso_colimitDesc_iff_of_iso {G G' : I ⥤ C} (α : G ≅ G') {s : Cocone 
     infer_instance
 
 omit [HasColimitsOfShape I A] [HasExactColimitsOfShape I A] in
+omit [HasZeroObject C] [∀ (n : ℤ), (shiftFunctor C n).Additive] [Pretriangulated C] in
+omit [HasShift C ℤ] [Preadditive C] in
 /-- The comparison map for `K` is an isomorphism if and only if it is for an isomorphic
 functor `K'`. -/
 lemma isIso_colimitDesc_iff_of_natIso {G : I ⥤ C} (s : Cocone G) {K K' : C ⥤ B} (e : K ≅ K') :
@@ -202,6 +206,8 @@ lemma isIso_colimitDesc_iff_of_natIso {G : I ⥤ C} (s : Cocone G) {K K' : C ⥤
 end Transport
 
 omit [HasExactColimitsOfShape I A] in
+omit [Abelian A] [F.IsHomological] in
+omit [HasZeroObject C] [∀ (n : ℤ), (shiftFunctor C n).Additive] [Pretriangulated C] in
 /-- Continuity on a cocone implies continuity on its shifts. -/
 lemma IsContinuousOn.shift {G : I ⥤ C} {s : Cocone G} (hs : F.IsContinuousOn s) (a : ℤ) :
     F.IsContinuousOn ((shiftFunctor C a).mapCocone s) := by
@@ -220,6 +226,8 @@ lemma IsContinuousOn.of_triangle₁ (h₂ : F.IsContinuousOn (Triangle.π₂.map
     (inv_rot_of_distTriang _ hs) (h₃.shift (-1)) h₂
 
 omit [HasExactColimitsOfShape I A] in
+omit [Abelian A] [F.IsHomological] in
+omit [HasZeroObject C] [∀ (n : ℤ), (shiftFunctor C n).Additive] [Pretriangulated C] in
 /-- Continuity is invariant under isomorphism of the functors along which a cocone is mapped. -/
 lemma isContinuousOn_mapCocone_iff_of_iso {D : Type*} [Category D] {Φ Φ' : D ⥤ C} (e : Φ ≅ Φ')
     {G : I ⥤ D} (s : Cocone G) :
@@ -252,6 +260,8 @@ variable {C D : Type*} [Category.{v} C] [Category.{v} D]
 
 open Opposite
 
+omit [HasZeroObject C] [∀ (n : ℤ), (shiftFunctor C n).Additive] [Pretriangulated C] in
+omit [HasZeroObject D] [∀ (n : ℤ), (shiftFunctor D n).Additive] [Pretriangulated D] in
 /-- Transport of continuity of `Hom(P, -)` along an adjunction `L ⊣ R`:
 `Hom(L P, -) ≅ Hom(P, R -)`. -/
 lemma isContinuousOn_preadditiveCoyoneda_of_adjunction {L : C ⥤ D} {R : D ⥤ C} (adj : L ⊣ R)
@@ -269,6 +279,7 @@ lemma isContinuousOn_preadditiveCoyoneda_of_adjunction {L : C ⥤ D} {R : D ⥤ 
       Functor.isoWhiskerRight (R.commShiftIso n) _ ≪≫ Functor.associator _ _ _
   exact (Functor.isIso_colimitDesc_iff_of_natIso s e).2 (h n)
 
+omit [HasZeroObject C] [∀ (n : ℤ), (shiftFunctor C n).Additive] [Pretriangulated C] in
 /-- Continuity of `Hom(P, -)` only depends on `P` up to isomorphism. -/
 lemma isContinuousOn_preadditiveCoyoneda_of_iso {P P' : C} (e : P ≅ P') {G : I ⥤ C}
     (s : Cocone G) (h : (preadditiveCoyoneda.obj (op P)).IsContinuousOn s) :

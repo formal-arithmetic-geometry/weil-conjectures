@@ -48,15 +48,18 @@ variable {F : Sheaf X.smallEtaleTopology A} (I : InjectiveResolution F)
 /-- The coaugmentation `F ⟶ L^0` of an injective resolution. -/
 noncomputable abbrev resι : F ⟶ I.cocomplex.X 0 := I.ι.f 0
 
+omit [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] in
 lemma resι_d : resι I ≫ I.cocomplex.d 0 1 = 0 := I.ι_f_zero_comp_complex_d
 
 include hA in
+omit [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] [X.smallEtaleTopology.WEqualsLocallyBijective A] [X.smallEtaleTopology.HasSheafCompose (forget A)] [ConcreteCategory.HasFunctorialSurjectiveInjectiveFactorization A] in
 lemma resι_glob (T : X.Etale) (s : ToType ((I.cocomplex.X 0).obj.obj (op T)))
     (hs : (I.cocomplex.d 0 1).hom.app (op T) s = 0) :
     ∃ w, (resι I).hom.app (op T) w = s :=
   exists_kernel_elem hA (w := I.ι_f_zero_comp_complex_d) I.isLimitKernelFork T s hs
 
 include hA in
+omit [CompactSpace ↥X] [QuasiSeparatedSpace ↥X] [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] [X.smallEtaleTopology.WEqualsLocallyBijective A] [X.smallEtaleTopology.HasSheafCompose (forget A)] [ConcreteCategory.HasFunctorialSurjectiveInjectiveFactorization A] in
 lemma resι_inj (T : X.Etale) : Function.Injective ((resι I).hom.app (op T)) := by
   have : Mono (resι I) := Fork.IsLimit.mono I.isLimitKernelFork
   have : Mono (resι I).hom := (sheafToPresheaf X.smallEtaleTopology A).map_mono (resι I)
@@ -82,6 +85,7 @@ variable (Free : Type (u + 1) ⥤ A) (adj : Free ⊣ CategoryTheory.forget A)
 
 include hA adj hfin
 
+omit [ConcreteCategory.HasFunctorialSurjectiveInjectiveFactorization A] in
 lemma rows_of_injective (U : SplitEtaleHypercover X)
     (L : CochainComplex (Sheaf X.smallEtaleTopology A) ℕ)
     [∀ r, Injective (L.X r)] :
@@ -139,6 +143,7 @@ noncomputable def cmap (U : FiniteSplitEtaleHypercover X) (F : Sheaf X.smallEtal
     (augIso hA Free adj hfin U.toSplitEtaleHypercover (injectiveResolution F).cocomplex q).inv ≫
       ((injectiveResolution F).isoRightDerivedObj Γ' q).inv
 
+omit [HasInjectiveResolutions (Sheaf X.smallEtaleTopology A)] in
 lemma cmap_naturality_aux (U : SplitEtaleHypercover X) {F G : Sheaf X.smallEtaleTopology A}
     (g : F ⟶ G) (I : InjectiveResolution F) (J : InjectiveResolution G)
     (φ : I.cocomplex ⟶ J.cocomplex) (hφ : I.ι.f 0 ≫ φ.f 0 = g ≫ J.ι.f 0) :
@@ -180,6 +185,7 @@ noncomputable def cnat (U : FiniteSplitEtaleHypercover X) :
     simp only [← Category.assoc] at key ⊢
     rw [key]
 
+omit [HasInjectiveResolutions (Sheaf X.smallEtaleTopology A)] in
 lemma cmap_refinement_aux {U V : SplitEtaleHypercover X} (f : U.simplicial ⟶ V.simplicial)
     {F : Sheaf X.smallEtaleTopology A} (I : InjectiveResolution F) :
     HomologicalComplex.homologyMap (secMap f F) q ≫
@@ -207,6 +213,7 @@ omit [HasSheafify X.smallEtaleTopology A] [X.smallEtaleTopology.WEqualsLocallyBi
   [(presheafToSheaf X.smallEtaleTopology A).PreservesHomology]
   [(CategoryTheory.forget A).PreservesMonomorphisms]
   [HasInjectiveResolutions (Sheaf X.smallEtaleTopology A)] adj hfin in
+omit [Abelian A] [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] hA in
 lemma iso_inv_hom_apply {Y Z : A} (e : Y ≅ Z) (y : ToType Y) : e.inv (e.hom y) = y := by
   rw [← ConcreteCategory.comp_apply, e.hom_inv_id, ConcreteCategory.id_apply]
 

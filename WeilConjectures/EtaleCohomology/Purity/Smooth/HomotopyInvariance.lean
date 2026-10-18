@@ -66,73 +66,21 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] [HasTateTwist Λ]
 
 /-- `Λ_X(m)[2m] ≅ Λ_X` for `m = 0`. -/
 noncomputable def tateObjectShiftIsoOfEqZero (X : Scheme.{u}) [HasInvertibleExponent Λ X]
-    (m : ℤ) (hm : m = 0) : (tateObject Λ X m)⟦2 * m⟧ ≅ constantComplex Λ X :=
-  (shiftFunctorZero' _ (2 * m) (by simp [hm])).app _ ≪≫
-    eqToIso (by subst hm; simp [tateObject]) ≪≫ HasTateTwist.twistObjectZeroIso X
+    (m : ℤ) (hm : m = 0) : (tateObject Λ X m)⟦2 * m⟧ ≅ constantComplex Λ X := by
+  subst hm
+  exact (shiftFunctorZero' _ (2 * (0 : ℤ)) (by simp)).app _ ≪≫ HasTateTwist.twistObjectZeroIso X
+
+/-- test -/
+noncomputable def tateObjectShiftTensorIso (X : Scheme.{u}) [HasInvertibleExponent Λ X]
+    (m m' : ℤ) (h : m + m' = 0) :
+    ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj ((tateObject Λ X m)⟦2 * m⟧)).obj
+        ((tateObject Λ X m')⟦2 * m'⟧) ≅ constantComplex Λ X :=
+  shiftTateObjectAddIso Λ X m m' ≪≫ tateObjectShiftIsoOfEqZero Λ X _ h
 
 /-- `Λ_X(-m)[-2m]` is a left dual of `Λ_X(m)[2m]`. -/
 noncomputable def tateObjectShiftExactPairing (X : Scheme.{u}) [HasInvertibleExponent Λ X]
     (m : ℤ) : ExactPairing ((tateObject Λ X (-m))⟦2 * (-m)⟧) ((tateObject Λ X m)⟦2 * m⟧) :=
-  exactPairingOfTensorIso
-    (shiftTateObjectAddIso Λ X (-m) m ≪≫ tateObjectShiftIsoOfEqZero Λ X _ (by ring))
-    (shiftTateObjectAddIso Λ X m (-m) ≪≫ tateObjectShiftIsoOfEqZero Λ X _ (by ring))
-
-/-- `RHom(Λ(m)[2m], Λ(m)[2m]) ≅ Λ`: the twisting objects are invertible. -/
-lemma nonempty_iso_derivedHom_tateObjectShift (X : Scheme.{u}) [HasInvertibleExponent Λ X]
-    (m : ℤ) :
-    Nonempty ((RHom(X)[ModuleCat.{u + 1} Λ].obj (op ((tateObject Λ X m)⟦2 * m⟧))).obj
-      ((tateObject Λ X m)⟦2 * m⟧) ≅ constantComplex Λ X) := by
-  letI := tateObjectShiftExactPairing Λ X m
-  exact ⟨ihomObjIsoTensor _ _ _ ≪≫ shiftTateObjectAddIso Λ X (-m) m ≪≫
-    tateObjectShiftIsoOfEqZero Λ X _ (by ring)⟩
-
-/-- `RHom(Λ, K) ≅ K`. -/
-lemma nonempty_iso_derivedHom_constantComplex {X : Scheme.{u}}
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    Nonempty ((RHom(X)[ModuleCat.{u + 1} Λ].obj (op (constantComplex Λ X))).obj K ≅ K) :=
-  ⟨ihomObjIsoTensor (𝟙_ _) (𝟙_ _) K ≪≫ λ_ K⟩
-
-variable [HasTateTwist.IsNormalized Λ]
-
-/-- Blueprint-free step of homotopy invariance: for relative affine space
-`p : 𝔸^d_Y ⟶ Y` over a separated scheme of finite type over a field, `Rp_* Λ ≅ Λ_Y`. -/
-theorem nonempty_iso_rightDerivedLowerStar_constantComplex_affineSpace
-    {k : Type u} [Field k] (d : ℕ)
-    (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY]
-    [HasInvertibleExponent Λ Y] :
-    Nonempty ((R((𝔸(ULift.{u} (Fin d); Y) ↘ Y)_*[ModuleCat.{u + 1} Λ])).obj
-      (constantComplex Λ 𝔸(ULift.{u} (Fin d); Y)) ≅ constantComplex Λ Y) := by
-  set p := 𝔸(ULift.{u} (Fin d); Y) ↘ Y
-  set A := ModuleCat.{u + 1} Λ
-  set X := 𝔸(ULift.{u} (Fin d); Y)
-  have : HasInvertibleExponent Λ X := .of_hom p
-  let M := (twistShift Λ X d).obj (constantComplex Λ X)
-  let P := (tateObject Λ X d)⟦2 * (d : ℤ)⟧
-  let eM : M ≅ P := (shiftFunctor _ (2 * (d : ℤ))).mapIso (λ_ _)
-  obtain ⟨th⟩ := nonempty_iso_derivedHom_rightDerivedLowerShriek Λ p M (constantComplex Λ Y)
-  obtain ⟨ω⟩ := nonempty_iso_dualizingComplex_affineSpace Λ d Y aY
-  obtain ⟨tr⟩ := nonempty_iso_rightDerivedLowerShriek_twistShift_affineSpace_fin Λ d Y
-  obtain ⟨hP⟩ := nonempty_iso_derivedHom_tateObjectShift Λ X d
-  obtain ⟨hΛ⟩ := nonempty_iso_derivedHom_constantComplex Λ (constantComplex Λ Y)
-  -- `RHom(M, Rp^! Λ) ≅ RHom(P, P) ≅ Λ`
-  let e₁ : (RHom(X)[A].obj (op M)).obj ((R(p)^![A]).obj (constantComplex Λ Y)) ≅
-      constantComplex Λ X :=
-    (RHom(X)[A].obj (op M)).mapIso (ω ≪≫ eM) ≪≫ (RHom(X)[A].mapIso eM.symm.op).app P ≪≫ hP
-  exact ⟨(R((p)_*[A])).mapIso e₁.symm ≪≫ th ≪≫ (RHom(Y)[A].mapIso tr.symm.op).app _ ≪≫ hΛ⟩
-
-/-- **Homotopy invariance** for relative affine space: the unit `Λ_Y ⟶ Rp_* Λ_{𝔸^d_Y}` is an
-isomorphism. -/
-theorem isIso_constantComplexUnit_affineSpace
-    {k : Type u} [Field k] (d : ℕ)
-    (Y : Scheme.{u}) (aY : Y ⟶ Spec (.of k)) [IsSeparated aY] [LocallyOfFiniteType aY]
-    [HasInvertibleExponent Λ Y] :
-    IsIso (constantComplexUnit Λ (𝔸(ULift.{u} (Fin d); Y) ↘ Y)) := by
-  obtain ⟨ψ⟩ := nonempty_iso_rightDerivedLowerStar_constantComplex_affineSpace Λ d Y aY
-  let z : Y ⟶ 𝔸(ULift.{u} (Fin d); Y) := AffineSpace.homOfVector (𝟙 Y) 0
-  have hz : z ≫ 𝔸(ULift.{u} (Fin d); Y) ↘ Y = 𝟙 Y := AffineSpace.homOfVector_over _ _
-  have h := isIso_constantComplexUnit_comp_map_unit Λ _ z hz
-  refine isIso_of_comp_eq_id_of_iso _ _ (IsIso.comp_inv_eq.mp ?_ ▸ IsIso.hom_inv_id _) ψ
-    (MonoidalCategory.endUnit_comm (C := _root_.DerivedCategory _))
-  sorry
+  exactPairingOfTensorIso (tateObjectShiftTensorIso Λ X (-m) m (by ring))
+    (tateObjectShiftTensorIso Λ X m (-m) (by ring))
 
 end AlgebraicGeometry.Etale

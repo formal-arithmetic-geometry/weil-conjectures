@@ -73,7 +73,12 @@ lemma secCxMap_eq {U V : FiniteSplitEtaleHypercover X} (f : U.Refinement V)
           (((SimplicialObject.whiskering _ _).obj F.obj.rightOp).map f)).op ≫
       (opComplexIso A U F).hom := by
   ext n
-  simp [opComplexIso]
+  simp only [AlgebraicTopology.alternatingCofaceMapComplex_map,
+    AlgebraicTopology.AlternatingCofaceMapComplex.map, whiskerRight_app, rightOp_obj,
+    NatTrans.rightOp_app, HomologicalComplex.comp_f, HomologicalComplex.unopFunctor_map_f,
+    AlgebraicTopology.alternatingFaceMapComplex_obj_X, comp_obj, Quiver.Hom.unop_op,
+    AlgebraicTopology.alternatingFaceMapComplex_map_f,
+    SimplicialObject.whiskering_obj_map_app, rightOp_map]
   erw [Category.id_comp, Category.comp_id]
 
 variable [CategoryWithHomology A]

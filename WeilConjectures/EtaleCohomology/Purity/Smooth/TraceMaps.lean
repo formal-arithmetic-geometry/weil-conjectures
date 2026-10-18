@@ -117,6 +117,7 @@ section AffineSpace
 
 variable [HasTateTwist.IsNormalized Λ]
 
+omit [HasTateTwist.IsNormalized Λ] in
 /-- The chosen identification
 `Rp_{d+1,!} Λ(d + 1)[2(d + 1)] ≅ Rp_{d!}((Rq_! Λ(1)[2])(d)[2d])` along
 `𝔸^{d+1}_S ≅ 𝔸¹_{𝔸^d_S}`, from the composition of compactly supported direct images and the

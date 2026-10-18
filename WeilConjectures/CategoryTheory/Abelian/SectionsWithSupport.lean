@@ -59,6 +59,8 @@ variable {𝒳 𝒵 𝒱 : Type*} [Category 𝒳] [Category 𝒵] [Category 𝒱
 
 section Sheaves
 
+omit [Abelian 𝒳] [Abelian 𝒱] [jUp.Additive] [jLow.Additive] [PreservesFiniteLimits jUp]
+  [PreservesFiniteColimits jUp] in
 /-- If the counit of `j^* ⊣ j_*` is invertible, `j^*` inverts the unit `M ⟶ j_* j^* M`. -/
 lemma isIso_map_unit_app (M : 𝒳) : IsIso (jUp.map (adjJ.unit.app M)) := by
   have : IsIso (jUp.map (adjJ.unit.app M) ≫ adjJ.counit.app (jUp.obj M)) := by
@@ -67,7 +69,7 @@ lemma isIso_map_unit_app (M : 𝒳) : IsIso (jUp.map (adjJ.unit.app M)) := by
   exact IsIso.of_isIso_comp_right _ (adjJ.counit.app _)
 
 variable {adjJ} in
-include adjI in
+omit [iLow.Additive] [IsIso adjI.counit] in
 /-- A morphism of `𝒳` inverted by `i^*` and `j^*` is an isomorphism, when `i^*` and `j^*` are
 exact and jointly detect zero objects. -/
 lemma isIso_of_isIso_map (hdet : ∀ F, IsZero (iUp.obj F) → IsZero (jUp.obj F) → IsZero F)
@@ -82,7 +84,7 @@ lemma isIso_of_isIso_map (hdet : ∀ F, IsZero (iUp.obj F) → IsZero (jUp.obj F
   have := Preadditive.epi_of_isZero_cokernel u hc
   exact isIso_of_mono_of_epi u
 
-include adjJ in
+omit [jLow.Additive] [IsIso adjJ.counit] [iLow.Additive] in
 /-- An object `N` with `j^* N = 0` is `i_*` of `i^* N`: the unit `N ⟶ i_* i^* N` is an
 isomorphism. -/
 lemma isIso_unit_app_of_isZero (h₀ : ∀ A, IsZero (jUp.obj (iLow.obj A)))
@@ -95,14 +97,17 @@ lemma isIso_unit_app_of_isZero (h₀ : ∀ A, IsZero (jUp.obj (iLow.obj A)))
     exact IsIso.of_isIso_comp_right _ (adjI.counit.app _)
   have : IsIso (jUp.map (adjI.unit.app N)) :=
     isIso_of_source_target_iso_zero _ hN.isoZero (h₀ _).isoZero
-  exact isIso_of_isIso_map adjI hdet _
+  exact isIso_of_isIso_map hdet _
 
+omit [jLow.Additive] [PreservesFiniteColimits jUp] in
 /-- `j^*` kills the kernel of the unit `M ⟶ j_* j^* M`. -/
 lemma isZero_upperStar_kernel (M : 𝒳) : IsZero (jUp.obj (kernel (adjJ.unit.app M))) :=
   have := isIso_map_unit_app adjJ M
   (isZero_kernel_of_mono (jUp.map (adjJ.unit.app M))).of_iso (PreservesKernel.iso jUp _)
 
-include adjI in
+omit [Abelian 𝒵] [iUp.Additive] [iLow.Additive] [jUp.Additive] [PreservesFiniteLimits iUp]
+  [PreservesFiniteColimits iUp] [PreservesFiniteLimits jUp] [PreservesFiniteColimits jUp]
+  [IsIso adjI.counit] [IsIso adjJ.counit] in
 /-- A morphism `i_* A ⟶ M` composes to zero with the unit `M ⟶ j_* j^* M`. -/
 lemma comp_unit_app_eq_zero (h₀ : ∀ A, IsZero (jUp.obj (iLow.obj A))) {A : 𝒵} {M : 𝒳}
     (f : iLow.obj A ⟶ M) : f ≫ adjJ.unit.app M = 0 := by
@@ -115,9 +120,9 @@ variable (h₀ : ∀ A, IsZero (jUp.obj (iLow.obj A)))
 /-- The bijection `Hom(i_* A, M) ≃ Hom(A, i^* ker(M ⟶ j_* j^* M))`. -/
 noncomputable def homEquiv (A : 𝒵) (M : 𝒳) :
     (iLow.obj A ⟶ M) ≃ (A ⟶ iUp.obj (kernel (adjJ.unit.app M))) :=
-  have := isIso_unit_app_of_isZero adjI adjJ h₀ hdet (isZero_upperStar_kernel adjJ M)
+  have := isIso_unit_app_of_isZero adjI h₀ hdet (isZero_upperStar_kernel adjJ M)
   { toFun f := adjI.fullyFaithfulROfIsIsoCounit.preimage
-      (kernel.lift _ f (comp_unit_app_eq_zero adjI adjJ h₀ f) ≫
+      (kernel.lift _ f (comp_unit_app_eq_zero adjJ h₀ f) ≫
         adjI.unit.app (kernel (adjJ.unit.app M)))
     invFun g := iLow.map g ≫ inv (adjI.unit.app (kernel (adjJ.unit.app M))) ≫ kernel.ι _
     left_inv f := by simp
@@ -140,8 +145,8 @@ noncomputable def functor : 𝒳 ⥤ 𝒵 :=
       apply adjI.fullyFaithfulROfIsIsoCounit.map_injective
       simp only [homEquiv, Equiv.coe_fn_mk, Functor.FullyFaithful.map_preimage, Functor.map_comp]
       have : kernel.lift (adjJ.unit.app M) (iLow.map f ≫ g)
-          (comp_unit_app_eq_zero adjI adjJ h₀ _) =
-          iLow.map f ≫ kernel.lift _ g (comp_unit_app_eq_zero adjI adjJ h₀ g) := by
+          (comp_unit_app_eq_zero adjJ h₀ _) =
+          iLow.map f ≫ kernel.lift _ g (comp_unit_app_eq_zero adjJ h₀ g) := by
         ext; simp
       simp [this])
 
@@ -163,7 +168,7 @@ lemma preservesFiniteLimits_functor : PreservesFiniteLimits (functor adjI adjJ h
 (1)). -/
 noncomputable def kernelIso (M : 𝒳) :
     kernel (adjJ.unit.app M) ≅ iLow.obj ((functor adjI adjJ h₀ hdet).obj M) :=
-  have := isIso_unit_app_of_isZero adjI adjJ h₀ hdet (isZero_upperStar_kernel adjJ M)
+  have := isIso_unit_app_of_isZero adjI h₀ hdet (isZero_upperStar_kernel adjJ M)
   asIso (adjI.unit.app (kernel (adjJ.unit.app M)))
 
 /-- `Γ_Z` is additive, being right adjoint to an additive functor. -/
@@ -174,7 +179,8 @@ section Injective
 
 variable {jShriek : 𝒱 ⥤ 𝒳} (adjS : jShriek ⊣ jUp) [IsIso adjS.unit]
 
-include adjI h₀ hdet in
+include hdet in
+omit [iLow.Additive] [jLow.Additive] [PreservesFiniteColimits jUp] [IsIso adjI.counit] in
 /-- The comparison `j_! V ⟶ j_* V`, adjoint to the inverse of the counit `j^* j_* V ≅ V`, is a
 monomorphism when `j_!` is exact, `i^* j_! = 0`, and `i^*`, `j^*` jointly detect zero objects. -/
 lemma mono_comparison [PreservesFiniteLimits jShriek] [jShriek.Additive]
@@ -201,7 +207,7 @@ lemma epi_unit_app_of_injective [PreservesFiniteLimits jShriek] [jShriek.Additiv
     Epi (adjJ.unit.app I) := by
   set V := jUp.obj I
   set m := (adjS.homEquiv _ _).symm (inv (adjJ.counit.app V))
-  have := mono_comparison adjI adjJ h₀ hdet adjS h₁ V
+  have := mono_comparison adjJ hdet adjS h₁ V
   let c : jShriek.obj V ⟶ I := adjS.counit.app I
   let s : jLow.obj V ⟶ I := Injective.factorThru c m
   have hs : m ≫ s = adjS.counit.app I := Injective.comp_factorThru c m
@@ -263,6 +269,8 @@ instance isIso_derivedAdjunctionJ_counit : IsIso (derivedAdjunctionJ adjJ).couni
   adjJ.mapDerivedCategoryRightDerivedAdjunction.counit_isIso_of_R_fully_faithful
 
 include h₀ in
+omit [HasKInjectiveResolutions 𝒳] [HasKInjectiveResolutions 𝒵]
+  [HasKInjectiveResolutions 𝒱] in
 lemma isZero_mapDerivedCategory_jUp_iLow (M : DerivedCategory 𝒵) :
     IsZero (jUp.mapDerivedCategory.obj (iLow.mapDerivedCategory.obj M)) :=
   have : PreservesFiniteLimits (iLow ⋙ jUp) := comp_preservesFiniteLimits _ _
@@ -270,7 +278,10 @@ lemma isZero_mapDerivedCategory_jUp_iLow (M : DerivedCategory 𝒵) :
   (Functor.isZero_mapDerivedCategory_obj (iLow ⋙ jUp) M fun _ ↦ h₀ _).of_iso
     ((iLow.mapDerivedCategoryCompIso jUp).symm.app M)
 
-include adjI hdet in
+include hdet in
+omit [iLow.Additive] [IsIso adjI.counit] [HasKInjectiveResolutions 𝒳]
+  [HasKInjectiveResolutions 𝒵] [HasKInjectiveResolutions 𝒱] [PreservesFiniteColimits iLow]
+  [PreservesFiniteLimits iLow] in
 lemma isZero_of_isZero_mapDerivedCategory {K : DerivedCategory 𝒳}
     (hi : IsZero (iUp.mapDerivedCategory.obj K)) (hj : IsZero (jUp.mapDerivedCategory.obj K)) :
     IsZero K :=
@@ -281,6 +292,7 @@ lemma isZero_of_isZero_mapDerivedCategory {K : DerivedCategory 𝒳}
       ((jUp.mapDerivedCategoryHomologyFunctorIso n).app K))
 
 include adjI h₀ hdet in
+omit [HasKInjectiveResolutions 𝒳] [HasKInjectiveResolutions 𝒱] in
 /-- A complex `K` with `j^* K = 0` lies in the essential image of `D(i_*)`. -/
 lemma mapDerivedCategory_essImage_of_isZero {K : DerivedCategory 𝒳}
     (hK : IsZero (jUp.mapDerivedCategory.obj K)) : iLow.mapDerivedCategory.essImage K := by
@@ -296,7 +308,7 @@ lemma mapDerivedCategory_essImage_of_isZero {K : DerivedCategory 𝒳}
   have hju : IsIso (jUp.mapDerivedCategory.map (adj.unit.app K)) :=
     isIso_of_source_target_iso_zero _ hK.isoZero
       (isZero_mapDerivedCategory_jUp_iLow h₀ _).isoZero
-  have hW : IsZero W := isZero_of_isZero_mapDerivedCategory adjI hdet
+  have hW : IsZero W := isZero_of_isZero_mapDerivedCategory hdet
     ((Triangle.isZero₃_iff_isIso₁ _ (iUp.mapDerivedCategory.map_distinguished _ h₁)).2 hiu)
     ((Triangle.isZero₃_iff_isIso₁ _ (jUp.mapDerivedCategory.map_distinguished _ h₁)).2 hju)
   exact ⟨_, ⟨(@asIso _ _ _ _ (adj.unit.app K) ((Triangle.isZero₃_iff_isIso₁ _ h₁).1 hW)).symm⟩⟩

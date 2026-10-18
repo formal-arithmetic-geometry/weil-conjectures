@@ -47,6 +47,7 @@ def LocallyExactPos : Prop :=
     (L.d (b + 1) (b + 2)).hom.app (op T) s = 0 →
       Presheaf.imageSieve (L.d b (b + 1)).hom s ∈ X.smallEtaleTopology T
 
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] in
 /-- A cocycle of positive degree on a term of a hypercover becomes a coboundary after
 refinement. -/
 lemma exists_refinement_dVert_eq (hL : LocallyExactPos L) (U : FiniteSplitEtaleHypercover X)
@@ -84,6 +85,7 @@ section Elem
 variable (hA : ElementwiseAbelian A)
 include hA
 
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] [X.smallEtaleTopology.HasSheafCompose (forget A)] hA in
 lemma totπ_totMapF_apply {U V : SplitEtaleHypercover X} (f : V.simplicial ⟶ U.simplicial)
     (p r n : ℕ) (h : p + r = n) (x : ToType (U.totObj L n)) :
     V.totπ L p r n h (totMapF L f n x) = resMap f (L.X r) p (U.totπ L p r n h x) := by
@@ -103,11 +105,13 @@ lemma totMapF_comp {U V W : SplitEtaleHypercover X} (f : V.simplicial ⟶ U.simp
   rw [← Functor.map_comp, ← op_comp]
   rfl
 
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] [X.smallEtaleTopology.HasSheafCompose (forget A)] hA in
 lemma totMapF_comp_apply {U V W : SplitEtaleHypercover X} (f : V.simplicial ⟶ U.simplicial)
     (g : W.simplicial ⟶ V.simplicial) (n : ℕ) (x : ToType (U.totObj L n)) :
     totMapF L (g ≫ f) n x = totMapF L g n (totMapF L f n x) := by
   rw [totMapF_comp, ConcreteCategory.comp_apply]
 
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] [X.smallEtaleTopology.HasSheafCompose (forget A)] hA in
 lemma totD_totMapF_apply {U V : SplitEtaleHypercover X} (f : V.simplicial ⟶ U.simplicial)
     (n : ℕ) (x : ToType (U.totObj L n)) :
     V.totD L n (totMapF L f n x) = totMapF L f (n + 1) (U.totD L n x) := by
@@ -187,6 +191,7 @@ lemma ι_dHor (U : SplitEtaleHypercover X) (n : ℕ) :
   ((AlgebraicTopology.alternatingCofaceMapComplex A).map
     (Functor.whiskerLeft U.simplicial.rightOp ι.hom)).comm n (n + 1)
 
+omit [∀ (X Y : A), AddMonoidHomClass (FA X Y) (CA X) (CA Y)] [X.smallEtaleTopology.HasSheafCompose (forget A)] hA in
 lemma totRow_f_apply (U : SplitEtaleHypercover X) (n : ℕ) (w : ToType ((U.secComplex F).X n)) :
     (U.totRow ι hι).f n w = U.totι L n 0 n (add_zero n) (ι.hom.app _ w) := by
   rw [show (U.totRow ι hι).f n = ι.hom.app (op (U.simplicial _⦋n⦌)) ≫
@@ -267,6 +272,7 @@ lemma exists_refinement_totRow_eq (hL : LocallyExactPos L) (U : FiniteSplitEtale
   exact ⟨V, f, w, y, hw, hwx⟩
 
 include hglob hinj in
+omit hglob in
 /-- Injectivity on cohomology in degree `0`. -/
 lemma eq_zero_of_totRow_eq_zero (U : SplitEtaleHypercover X) (w : ToType ((U.secComplex F).X 0))
     (hw : (U.totRow ι hι).f 0 w = 0) : w = 0 := by

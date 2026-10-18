@@ -121,7 +121,6 @@ noncomputable def overPullbackStageIso {i j : I} (h : j ⟶ i) :
     eqToIso (congrArg (fun f : c.pt ⟶ D.obj i ↦ Over.pullback f) (c.w h))
 
 omit [Category.{u} I] in
-set_option linter.flexible false in
 private lemma pullbackComp_eqToHom_left_fst {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
     (f' : X ⟶ Z) (hf : f ≫ g = f') (U : Over Z) :
     ((Over.pullbackComp f g).inv.app U ≫
@@ -129,8 +128,8 @@ private lemma pullbackComp_eqToHom_left_fst {X Y Z : Scheme.{u}} (f : X ⟶ Y) (
       pullback.fst U.hom f' = pullback.fst _ f ≫ pullback.fst U.hom g := by
   subst hf
   simp only [eqToHom_refl, NatTrans.id_app, Category.comp_id]
-  simp [Over.pullbackComp, Over.mapComp, conjugateIsoEquiv, conjugateEquiv]
-  exact Category.id_comp (pullback.fst (pullback.snd U.hom g) f ≫ pullback.fst U.hom g)
+  simpa [Over.pullbackComp, Over.mapComp, conjugateIsoEquiv, conjugateEquiv] using
+    Category.id_comp (pullback.fst (pullback.snd U.hom g) f ≫ pullback.fst U.hom g)
 
 @[reassoc (attr := simp)]
 lemma overPullbackStageIso_hom_app_left_fst {i j : I} (h : j ⟶ i) (U : Over (D.obj i)) :

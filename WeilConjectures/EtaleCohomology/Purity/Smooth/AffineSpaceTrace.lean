@@ -111,6 +111,7 @@ lemma nonempty_leftDerivedUpperStar_id_iso (S : Scheme.{u}) (h : S ⟶ S) (hh : 
   exact ⟨Functor.leftDerivedFunctorNatIso _ (Etale.upperStarId _ _) ≪≫
     (𝟭 _).leftDerivedFunctorIsoMapDerivedCategory ≪≫ Functor.mapDerivedCategoryIdIso _⟩
 
+omit [Finite Λ] [HasTateTwist Λ] in
 /-- For a section `i : S ⟶ X` of `q : X ⟶ S` which is a closed immersion, the unit
 `Λ_S ⟶ Rq_* Λ_X` followed by `Rq_*` of the unit `Λ_X ⟶ Ri_* i^* Λ_X` is an isomorphism: it is
 the unit of the composite adjunction `Lq^* ⋙ i^* ⊣ Ri_* ⋙ Rq_*`, whose left adjoint is
