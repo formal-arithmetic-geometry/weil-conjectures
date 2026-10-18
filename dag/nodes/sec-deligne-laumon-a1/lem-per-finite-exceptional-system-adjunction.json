@@ -16,9 +16,321 @@
   "def-kun-tor-amplitude",
   "lem-coef-semilinear-derived-sections"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The valuation-ring and finite-quotient statements give a DVR $R$ with finite residue field $\\kappa$ and finite local rings $A_n$. The absolute value extends the $\\ell$-adic one, so $\\ell$ has positive valuation; DVR factorization then gives, for each $n$, an $r$ with $\\ell^r\\in(t^n)$. Thus $A_n$ is annihilated by an integer invertible on every scheme in question. A field is Noetherian (its ideals are $0$ and $k$), so finite-type-over-Noetherian makes $X,Y,\\overline X$ Noetherian. All their open subschemes are quasi-compact and quasi-separated. In particular the finite-ring and Noetherian hypotheses in the ordinary etale results below hold; no algebraic closedness or finite cohomological dimension of $k$ is used.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients",
+    "lem-weil-l-adic-extension-absolute-value",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.18, hypotheses; coefficient verification"
+   }
+  },
+  {
+   "text": "Construct $\\mathcal F=Rp_{*,\\bullet}j_{!,\\bullet}$ on the whole $D(\\mathscr S_X)$. The semilinear calculus supplies actual derived functors and natural identifications $e_n\\mathcal F\\cong F_ne_n$. Extension by zero is exact; the triangulated derived-functor statements make $\\mathcal F$ exact. The system category is Grothendieck and its derived coproducts are evaluated componentwise. Extension by zero preserves coproducts as a left adjoint and each finite-coefficient proper $Rp_{*,n}$ preserves coproducts. Evaluating the canonical coproduct comparison for $\\mathcal F$ therefore makes it invertible at every $n$, hence invertible in the system category. Brown representability now gives an actual ambient adjunction $\\mathcal F\\dashv H$ on these ordinary derived categories. Its unit and counit, and both triangle identities, already live there.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-system-level-left-extension",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-amb-proper-coproducts",
+    "lem-grothendieck-derived-brown-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 0F5Y, injectives-proposition-brown; agent application to simultaneous systems"
+   }
+  },
+  {
+   "text": "For a finite quotient $C\\to D$ of the coefficient rings, let $T_W=-\\otimes_C^LD$ and $U_W$ be restriction of scalars. Derived ring change gives $T_W\\dashv U_W$. Derived direct-image composition identifies $U_YRp_{*,D}=Rp_{*,C}U_{\\overline X}$; the same equality for $j_!$ is termwise. Define $q:T_YF_C\\to F_DT_X$ by transposing $F_C$ of the scalar unit. After $U_Y$ it is the proper projection comparison for the constant module $D$, combined with the open tensor isomorphism. Both are invertible on unbounded inputs, and restriction of scalars detects quasi-isomorphisms. Thus $q$ is invertible as a $D$-linear map. The same construction works for a proper map or an open immersion separately. For two quotients its composite agrees with the direct construction: on a K-flat representative the scalar units give $x\\mapsto(x\\otimes1)\\otimes1$ and $x\\mapsto x\\otimes1$, identified by the canonical tensor associator. This proves the identity and quotient-cocycle equations for the specified $q$, without asserting flatness of the quotient.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-pc-pre-derived-adjoint-functors-general",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-amb-proper-coproducts-projection",
+    "lem-pur-etale-open-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.16; construction of the coefficient square by projection and scalar adjunction"
+   }
+  },
+  {
+   "text": "Finite compact-support finiteness gives $F_nK\\in D^b_c(Y,A_n)$ for $K\\in D^b_{ctf}(X,A_n)$. To test its Tor amplitude, use the bounded flat constructible model of $K$. Tensoring this model with $\\kappa$ is bounded, flat, and constructible: on a common finite stratification each term becomes a finite constant module, and its tensor with the finite ring $\\kappa$ is still finite constant. Thus $K\\otimes^L_{A_n}\\kappa$ is bounded constructible over $\\kappa$. The projection comparison of the preceding step identifies $(F_nK)\\otimes^L_{A_n}\\kappa$ with $F_{\\kappa}(K\\otimes^L_{A_n}\\kappa)$, which is bounded by finite compact-support finiteness. The residue Tor test now proves finite Tor amplitude of $F_nK$. The same bounded-model argument shows that every quotient $Q_T$ preserves $D^b_{ctf}$: the reduced model is bounded flat over the quotient with constructible terms. This also verifies that all finite comparison functors used below have the stated domains.",
+   "uses": [
+    "lem-fd-finite-ring-compact-support-finiteness",
+    "lem-sf-flat-model",
+    "lem-sf-reduction-flat-model",
+    "lem-exc-residue-tor-test",
+    "thm-constructible-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 6.7.2 and 6.7.16; finite constructible compact support and residue Tor test"
+   }
+  },
+  {
+   "text": "Let $\\widetilde G_n$ be the ambient right adjoint to $F_n$ supplied by the ordinary etale adjoint theorem. The adjunction supplies its $A_n$-linear structure by transposition of scalar multiplication on $F_n$: additivity and the scalar equations follow from the natural Hom bijection. Give $\\widetilde G_n$ the unique shift structure compatible with the unit and counit; the triangulated-right-adjoint lemma makes it exact. Define\n$$b_{m,n}:Q_X\\widetilde G_m\\longrightarrow\\widetilde G_nQ_Y$$\nto be the transpose of $Q_Y\\epsilon_m\\circ q_{m,n,\\widetilde G_m}^{-1}$. This is a natural transformation on the ambient categories. It satisfies exactly the counit equation in the item. We prove its invertibility only on the finite-Tor constructible inputs, by the following local calculation.",
+   "uses": [
+    "thm-amb-etale-exceptional-adjoint",
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-sf-triangulated-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.18, exceptional adjoint and natural coefficient map"
+   }
+  },
+  {
+   "text": "First calculate the coefficient normalization of affine-space adjunctions. Choose one integer $N=\\ell^r$ annihilating both $C$ and its quotient $D$. In the projective-line decomposition of the ordinary finite $\\mathbf P^1$ adjunction, $b_C=(\\text{twisted unit},h_C)$, the class $h_C$ is explicitly the scalar extension from $\\mathbf Z/N$ of the Kummer class of $\\mathcal O(1)$. Consequently the proper coefficient comparison carries $T(b_C)$ to $b_D$: it carries the unit to the unit, and $T(h_C)$ to the same scalar-extended Kummer class $h_D$. Since the trace is $\\operatorname{pr}_2b_C^{-1}$, it carries the coefficient extension of this trace to $\\operatorname{pr}_2b_D^{-1}$. The displayed formula for the projective-line counit, projection inverse followed by tensor with that trace, therefore commutes with coefficient change. Restrict the projective-line adjunction through the exact open adjunction to get the same assertion for the affine line. The stated construction of the affine-space adjunction is its ordered composite in the coordinates; the composite-counit formula and mate pasting give the same assertion in every dimension, including dimension zero. This is a calculation with the two specified components of a decomposition, rather than an additional purity theorem.",
+   "uses": [
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "lem-amb-affine-space-top-trace",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.18, smooth factor; explicit projective-line/Kummer normalization of the affine-space factor"
+   }
+  },
+  {
+   "text": "For $p_d:\\mathbf A^d_V\\to V$, the affine-space adjunction identifies $\\widetilde G_{p_d,C}$ with $p_d^*(-)(d)[2d]$, preserving the counit. A bounded flat constructible model remains bounded flat under $p_d^*$: exact inverse image preserves the model quasi-isomorphism and flat pullback preserves its flat terms. Constructibility follows by inverse image of the finite stratification and its finite constant local trivializations; constructible inverse images of the strata are supplied by the constructible-preimage lemma. Tensor with the locally free rank-one Tate sheaf preserves these properties. Hence this right adjoint preserves $D^b_{ctf}$. The canonical tensor reassociation and the definition $C(1)=\\mu_N\\otimes_{\\mathbf Z/N}C$ identify\n$$T_Xp_d^*L(d)[2d]\\cong p_d^*T_YL(d)[2d].$$\nThe preceding counit calculation shows that this isomorphism has transpose $T_Y\\epsilon_C\\circ q^{-1}$, so by uniqueness of transposition it is precisely $b_{p_d}$. In particular the specified exceptional coefficient map is invertible, not merely an unspecified isomorphism between its objects.",
+   "uses": [
+    "cor-amb-affine-space-adjunction",
+    "lem-sf-flat-model",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "lem-pur-scheme-constructible-preimage",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.18, affine-space smooth factor; use the existing Kummer affine-space adjunction"
+   }
+  },
+  {
+   "text": "For a closed immersion $i:Z\\hookrightarrow P$ between finite-type $k$-schemes let $j:U\\hookrightarrow P$ be its open complement. The open cohomological-dimension result gives an integer $c\\geq0$ with $R^qj_*M=0$ for $q>c$ for every $A_n$-module sheaf $M$. Open direct-image finiteness says $Rj_*L$ is bounded constructible for bounded constructible $L$; applied to a sheaf in degree zero, it gives constructibility of each $R^qj_*$. These are exactly the two hypotheses of the closed Tor theorem. Thus $Ri_n^!$ sends a bounded constructible input of Tor amplitude $[a,b]$ to a bounded constructible output of amplitude $[a,b+c+1]$. The complement is quasi-compact since $P$ is Noetherian. Neither a smoothness condition on $Z$ nor a regularity condition on $i$ is used.",
+   "uses": [
+    "det-geo-open-finiteness-ii-amplitude",
+    "cor-fin-deligne-open-finite-coefficients",
+    "prop-exc-closed-tor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.18, closed factor; Lemma 6.7.17 and the open-complement support triangle"
+   }
+  },
+  {
+   "text": "For this same complement, the finite cohomological dimension and qcqs hypotheses imply that unbounded $Rj_*$ preserves coproducts. Its constant-tensor comparison with the finite module $A_n$ over $A_m$ is therefore invertible. Derived direct-image composition with exact scalar restriction identifies this comparison with the $A_n$-linear coefficient map for $Rj_*$. Compare the closed support triangles\n$$i_*Ri_m^!L\\longrightarrow L\\longrightarrow Rj_*j^*L\\longrightarrow(i_*Ri_m^!L)[1]$$\nafter derived coefficient extension and over $A_n$ on $Q_PL$. Use the proper coefficient comparison to identify $Q_Pi_*$ with $i_*Q_Z$. The middle-to-third square commutes by the ordinary adjunction-unit equation. Rotate and use (TR3) to complete it to a morphism of triangles. Its first-square equation determines its first map uniquely: under $i_*\\dashv Ri_n^!$ and $i^*i_*=1$, composition with the lower counit is the Hom adjunction bijection. It is therefore exactly $i_*b_i$. Derived tensor and projection maps respect shifts and the connecting maps. The identity on the middle terms and the invertible $Rj_*$ comparison make the first map invertible by the two-isomorphisms lemma for triangles. Closed direct image is conservative, since its restriction back to $Z$ is the identity, so $b_i$ is invertible.",
+   "uses": [
+    "lem-exc-direct-image-coproducts",
+    "lem-exc-constant-tensor",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-exc-closed-support-triangle",
+    "lem-amb-proper-coproducts-projection",
+    "lem-kun-derived-tensor-triangulated",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-sf-triangle-morphism-iso",
+    "lemma-weil-pbc-finite-stalk-formula",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proof of Lemma 6.7.18, closed-immersion reduction through the open support triangle"
+   }
+  },
+  {
+   "text": "Use the finite affine-chart factorization: over finitely many affine $V\\subset Y$, each inverse image is covered by finitely many $U$ with $h=f|_U=p_di$, where $i:U\\hookrightarrow\\mathbf A^d_V$ is closed. Compact-support base change for $V\\hookrightarrow Y$, composition, and the open adjunction identify the local exceptional functor with $Ri^!p_d^*(-)(d)[2d]$ applied to $L|_V$. Explicitly, the left-adjoint identities are $Rf_!u_!\\cong v_!Rh_!$ for these two open inclusions; their right-adjoint conjugate is $u^*\\widetilde G_f\\cong\\widetilde G_hv^*$. The compactifications exist for these restricted maps, since $i$ is proper and affine space has its projective compactification. The preceding affine-space and closed calculations show that these local outputs are bounded constructible of finite Tor amplitude. The finite-cover descent clause of the chart lemma supplies global finite intervals, and handles the empty source by the zero object. Hence $\\widetilde G_f$ preserves $D^b_{ctf}$. Call its restriction $G_n$; fullness makes $F_n\\dashv G_n$ the restricted ambient adjunction with the same units and counits.",
+   "uses": [
+    "lem-sf-affine-chart-factorization-gluing",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-amb-etale-adjoint-locality",
+    "det-sp-unique-right-adjoint",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proof of Lemma 6.7.18, local closed-immersion/affine-space factorization and finite-cover descent"
+   }
+  },
+  {
+   "text": "Under these local identifications the coefficient map $b_f$ is the composite of $b_{p_d}$ and $b_i$, together with the ordinary open restriction/coefficient identification. This assertion is about the specified maps: take its transpose, substitute the counit equations for $b_i$ and $b_{p_d}$, and use the composite counit $\\epsilon_{p_d}\\circ Rp_{d!}(\\epsilon_i)$. The result is $Q\\epsilon_f\\circ q_f^{-1}$ because the compact-support coefficient comparisons paste as in step 3. Mate pasting therefore identifies it with the previously defined $b_f$. Both local factors are invertible, so the cone of $b_f$ restricts to zero on the finite open cover; its cohomology sheaves, being zero locally, are zero. Thus $b_f$ is invertible. This proves the finite coefficient square without using an assertion over an algebraic closure of a finite field for the arbitrary field $k$.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "lem-sf-affine-chart-factorization-gluing",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proof of Lemma 6.7.18, recomposition of the local coefficient comparisons"
+   }
+  },
+  {
+   "text": "The identity and quotient-cocycle equations for $b$ follow by mate pasting from those of $q^{-1}$; the identity mate is the identity. The defining transpose gives\n$$\\epsilon_nF_n(b_{m,n})q_{m,n,G_m}=Q_Y\\epsilon_m.$$\nFor the unit equation substitute $b=G_n(Q_Y\\epsilon_m)G_n(q^{-1}_{G_m})\\eta_{n,Q_XG_m}$ and apply naturality and the two triangle identities. The resulting equation is\n$$G_n(q_{m,n,K})b_{m,n,F_mK}Q_X(\\eta_{m,K})=\\eta_{n,Q_XK}.$$\nThese calculations are equalities of natural transformations. Shifts cause no new choices: coefficient extension and the compact-support projection commute with shifts, and uniqueness of the adjunction-compatible right-adjoint shift makes the transposed $b$ commute with them too.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.18, canonical adjunction-square normalization and its coherence"
+   }
+  },
+  {
+   "text": "Identify the evaluations of the system adjoint $H$, rather than choosing lifts of finite right adjoints. Let $L^T_n\\dashv e_n$ be the system left extensions. Define a natural map\n$$\\theta_n:L^Y_nF_n\\longrightarrow\\mathcal F L^X_n$$\nas the $L^Y_n\\dashv e_n$ adjunct of the canonical identity $F_n\\cong e_n\\mathcal FL^X_n$. At level $q\\leq n$, the transition formula in the semilinear calculus identifies $e_q\\theta_n$ with $q_{n,q}:F_n(-)\\otimes^L_{A_n}A_q\\to F_q((- )\\otimes^L_{A_n}A_q)$; at $q>n$ both sides are zero. This follows directly by transposing the scalar unit in the definition of $\\theta_n$, which is also the definition of $q$ in step 3. Every component is invertible, so $\\theta_n$ is an isomorphism. Its naturality and the equality with the truncation maps $\\sigma_{mn}:L_nQ\\to L_m$ are identities before evaluation: transpose along $L_n\\dashv e_n$ and both composites become the same scalar-unit map, using the quotient cocycle from step 3.",
+   "uses": [
+    "lem-pur-system-level-left-extension",
+    "lem-pur-coefficient-evaluation-derived-left-adjoint",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-artin-gabber-affine-curve.md",
+    "place": "Agent construction realizing finite exceptional adjunction in derived systems: evaluation left extensions"
+   }
+  },
+  {
+   "text": "For $P\\in D(X_{\\mathrm{et}},A_n)$ and $M\\in D(\\mathscr S_Y)$ compose the natural bijections\n$$\\operatorname{Hom}(P,e_nHM)\\cong\\operatorname{Hom}(L_n^XP,HM)\\cong\\operatorname{Hom}(\\mathcal FL_n^XP,M)\\cong\\operatorname{Hom}(L_n^YF_nP,M)\\cong\\operatorname{Hom}(F_nP,e_nM)\\cong\\operatorname{Hom}(P,\\widetilde G_ne_nM).$$\nSend identities through these bijections in the two directions. Naturality shows that the resulting maps are inverse, giving canonical natural $e_nH\\cong\\widetilde G_ne_n$. Their construction identifies evaluated system units and counits with the ambient finite ones. To compute transitions, precompose this Hom chain with $\\sigma_{mn}$. The left-extension lemma says this precomposition represents the actual transition-adjoint of a derived system. Its compatibility with $\\theta$ and the counit equation for $b$ give precisely\n$$Q_Xe_mHM\\xrightarrow{b_{m,n}}\\widetilde G_nQ_YM_m\\xrightarrow{\\widetilde G_n(t^M_{m,n})}\\widetilde G_nM_n.$$\nEquivalently, transpose both sides: both become the input transition composed with $Q_Y\\epsilon_m$ and $q^{-1}$. This proves the transition identity for actual derived-system maps; it does not infer equality of morphisms from evaluated equality.",
+   "uses": [
+    "lem-pur-coefficient-evaluation-derived-left-adjoint",
+    "lem-coef-semilinear-derived-sections",
+    "thm-amb-etale-exceptional-adjoint",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-artin-gabber-affine-curve.md",
+    "place": "Agent construction realizing finite exceptional adjunction in derived systems: evaluation Hom chains and transition mates"
+   }
+  },
+  {
+   "text": "If $M\\in\\mathscr N_Y$, the evaluated outputs of $HM$ are $G_nM_n\\in D^b_{ctf}$. Its adjoint transition is the composite just calculated. Here $b_{m,n}$ is invertible by the finite calculation and $t^M_{m,n}$ is invertible by normalization. Thus $HM$ is normalized. Similarly the transition of $\\mathcal FK$ is $F_n(t^K_{m,n})q_{m,n}$, so $\\mathcal F$ preserves $\\mathscr N_X$ by step 4 and the invertibility of $q$. Restrict the ambient adjunction to these full subcategories and set $\\mathcal G_f=H|_{\\mathscr N_Y}$. This gives the claimed adjunction, with both triangle identities inherited as identities in $D(\\mathscr S_T)$. The subcategories are closed under shifts and cones, since evaluation and reduction are exact and bounded constructibility and finite Tor amplitude are stable under triangles. Scalar multiplication by $r\\in R$ on $H$ is its adjoint transpose from $\\mathcal F$; the adjunction bijection verifies addition, multiplication and naturality. The unique shift-compatible right-adjoint structure makes $H$ and its restriction exact and $R$-linear. No common bound on the levels was used.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-system-level-left-extension",
+    "lem-kun-derived-tensor-triangulated",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-sf-triangulated-right-adjoint",
+    "def-kun-tor-amplitude",
+    "def-weil-pbc-constructible-complexes",
+    "thm-constructible-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-artin-gabber-affine-curve.md",
+    "place": "Agent construction: restriction to normalized finite-Tor constructible systems, without a uniform bound"
+   }
+  },
+  {
+   "text": "Finally construct refinement comparisons on systems using the actual proper/open adjunction maps in the semilinear calculus. For a proper refinement $r:\\overline X'\\to\\overline X$ with $rj'=j$, its comparison $j_!\\to Rr_*j'_!$ is the open-adjunction transpose of the inverse proper open-restriction comparison; apply $Rp_*$ and the direct-image compositor. Its evaluations are exactly the normalized ordinary comparisons of the unbounded compactification-comparison theorem. They are invertible, hence the system comparison is invertible. For two refinements, transposing the pasted proper/open word gives the word for their composite; mate pasting and the direct-image/open compositors give equality on systems. The same normalization through a common refinement gives the ordinary compactification cocycle by these identical mate words. Conjugate the ambient system adjunction along this isomorphism of left functors: its right-adjoint comparison is the counit-preserving isomorphism, with inverse supplied by conjugating back. Uniqueness of this comparison gives its refinement cocycle and compatibility with system units and counits. Restriction and evaluation then give the finite refinement comparisons and $e_n\\mathcal G_f\\cong G_ne_n$ already constructed. Everything takes place in derived system categories; no inverse limit or integral exceptional adjunction has been introduced.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-weil-pbc-mate-pasting",
+    "det-sp-unique-right-adjoint",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-p-dl-a1-perverse/lem-per-artin-gabber-affine-curve.md",
+    "place": "Agent construction: compactification refinements and adjunction conjugation in the system category"
+   }
+  }
+ ],
+ "proof_deps": [
+  "cor-amb-affine-space-adjunction",
+  "cor-fin-deligne-open-finite-coefficients",
+  "def-kun-tor-amplitude",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-triangulated-category",
+  "det-geo-open-finiteness-ii-amplitude",
+  "det-sp-unique-right-adjoint",
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-proper-coproducts",
+  "lem-amb-proper-coproducts-projection",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-coef-semilinear-derived-sections",
+  "lem-exc-closed-support-triangle",
+  "lem-exc-constant-tensor",
+  "lem-exc-direct-image-coproducts",
+  "lem-exc-residue-tor-test",
+  "lem-fd-finite-ring-compact-support-finiteness",
+  "lem-grothendieck-derived-brown-right-adjoint",
+  "lem-kun-derived-tensor-triangulated",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pur-coefficient-evaluation-derived-left-adjoint",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-etale-open-derived-tensor",
+  "lem-pur-scheme-constructible-preimage",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-pur-system-level-left-extension",
+  "lem-sf-affine-chart-factorization-gluing",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sf-flat-model",
+  "lem-sf-reduction-flat-model",
+  "lem-sf-triangle-morphism-iso",
+  "lem-sf-triangulated-right-adjoint",
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lemma-weil-pbc-finite-stalk-formula",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-exc-closed-tor",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-constructible-serre"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.7.18, finite closed/smooth argument; the coherent system strengthening is proved here by Brown representability, derived evaluation left extensions and their truncation maps, not claimed as a statement of Bhatt-Scholze."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -54,10 +366,66 @@
    "results": "{\"t\": \"2026-10-18T10:59:56Z\", \"tool\": \"leanfinder\", \"query\": \"Compatible finite coefficient shriek adjunctions on derived systems of sheaves with enriched Hom adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.PullbackConstruction.adjunction\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val\", \"CategoryTheory.Sheaf.adjunction\", \"SheafOfModules.instIsRightAdjointPushforward\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\"], \"digest\": \"a53706af85d71964\"}",
    "date": "2026-10-18",
    "verdict": "no match: the hits concern ordinary sheaf pullback adjunctions, locally constant condensed modules, or algebraic etaleness, not finite constructible exceptional coefficient systems"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right adjoint to etale compactly supported direct image on normalized systems of torsion coefficients",
+   "results": "{\"t\": \"2026-10-18T11:18:28Z\", \"tool\": \"leanfinder\", \"query\": \"Right adjoint to etale compactly supported direct image on normalized systems of torsion coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"CondensedMod.LocallyConstant.adjunction\", \"LightCondMod.LocallyConstant.adjunction\", \"Condensed.profiniteSolidification\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\", \"SheafOfModules.instIsRightAdjointPushforward\", \"Condensed.profiniteSolidCounit\"], \"digest\": \"0c68b89911fdce32\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected results concern ordinary module-sheaf adjunctions, ring-theoretic traces or etale algebras; none states the finite exceptional or derived normalized-system assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "upperShriek|exceptional.*adjoint|normalized.*system",
+   "results": "{\"t\": \"2026-10-18T11:18:40Z\", \"tool\": \"grep\", \"query\": \"upperShriek|exceptional.*adjoint|normalized.*system\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected results concern ordinary module-sheaf adjunctions, ring-theoretic traces or etale algebras; none states the finite exceptional or derived normalized-system assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale exceptional inverse image right adjoint compact support normalized coefficient tower",
+   "results": "{\"t\": \"2026-10-18T11:18:50Z\", \"tool\": \"leansearch\", \"query\": \"Etale exceptional inverse image right adjoint compact support normalized coefficient tower\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondSet.LocallyConstant.adjunction\", \"CompHausLike.LocallyConstant.adjunction\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"CompHausLike.LocallyConstant.counit\", \"CompHausLike.LocallyConstant.counit_app_val\", \"RingHom.Etale\", \"Algebra.Etale.comp\"], \"digest\": \"831c1e796f5a8b11\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected results concern ordinary module-sheaf adjunctions, ring-theoretic traces or etale algebras; none states the finite exceptional or derived normalized-system assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The compact support trace for affine space with finite etale coefficients commutes with a quotient of coefficient rings",
+   "results": "{\"t\": \"2026-10-18T11:20:01Z\", \"tool\": \"leanfinder\", \"query\": \"The compact support trace for affine space with finite etale coefficients commutes with a quotient of coefficient rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"trace_quotient_eq_trace_localization_quotient\", \"Algebra.trace_quotient_mk\", \"Algebra.trace_quotient_eq_of_isDedekindDomain\", \"Algebra.trace_localization\", \"Algebra.trace_comp_trace\", \"StandardEtalePresentation.toPresentation_σ'\", \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"Algebra.etaleLocus_eq_compl_support\"], \"digest\": \"a13b6c8606872bd5\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected results concern ordinary module-sheaf adjunctions, ring-theoretic traces or etale algebras; none states the finite exceptional or derived normalized-system assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*trace|trace.*affine|trace.*coefficient",
+   "results": "{\"t\": \"2026-10-18T11:20:01Z\", \"tool\": \"grep\", \"query\": \"affine.*trace|trace.*affine|trace.*coefficient\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected results concern ordinary module-sheaf adjunctions, ring-theoretic traces or etale algebras; none states the finite exceptional or derived normalized-system assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine space etale integration counit compatible with extension of finite coefficient rings",
+   "results": "{\"t\": \"2026-10-18T11:20:02Z\", \"tool\": \"leansearch\", \"query\": \"Affine space etale integration counit compatible with extension of finite coefficient rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"CoalgebraStruct.counit\", \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"ModuleCat.RestrictionCoextensionAdj.counit'_app\", \"Coalgebra.counitCoalgHom\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"CoalgHomClass.counit_comp_apply\", \"Condensed.profiniteSolidCounit\"], \"digest\": \"4ae7d2b88953c947\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected results concern ordinary module-sheaf adjunctions, ring-theoretic traces or etale algebras; none states the finite exceptional or derived normalized-system assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology integration trace on affine space natural in the finite coefficient ring",
+   "results": "{\"t\": \"2026-10-18T11:20:09Z\", \"tool\": \"leanfinder\", \"query\": \"Etale cohomology integration trace on affine space natural in the finite coefficient ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.intTraceAux\", \"Algebra.etaleLocus_eq_compl_support\", \"Algebra.H1Cotangent\", \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"trace_quotient_eq_trace_localization_quotient\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.FormallyEtale.subsingleton_h1Cotangent\", \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\"], \"digest\": \"0ad1c0e3b19b686c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected results concern ordinary module-sheaf adjunctions, ring-theoretic traces or etale algebras; none states the finite exceptional or derived normalized-system assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"trace\", \"coefficient\"",
+   "results": "{\"t\": \"2026-10-18T11:20:11Z\", \"tool\": \"loogle\", \"query\": \"\\\"trace\\\", \\\"coefficient\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected results concern ordinary module-sheaf adjunctions, ring-theoretic traces or etale algebras; none states the finite exceptional or derived normalized-system assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-adic-exceptional-projection",
@@ -77,5 +445,194 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-finite-exceptional-system-adjunction",
+  "worker": "stage1",
+  "summary": "Constructed the exceptional adjunction on actual derived strict systems by Brown representability and identified evaluations by derived left extensions. Proved finite preservation and the specified quotient mate through affine Kummer adjunctions and the closed support triangle. Reused existing general nodes; no new nodes, no finite-field specialization to an arbitrary field, no inverse limit and no faithfulness claim for evaluation.",
+  "blueprint": "Ancestral lem-per-artin-gabber-affine-curve, historical proof Step 3 (Verdier duality and exceptional adjunction), via lem-per-qbar-arbitrary-field-duality and lem-per-adic-exceptional-projection: supplies exactly the finite-system adjunction obligation extracted there. Current blueprint ancestor has no proof text; no claim that it already proves the coherent strengthening.",
+  "tool_uses": [
+   {
+    "node": "cor-amb-affine-space-adjunction",
+    "why": "Generic coefficient, ordinary-etale, categorical or finite-geometry tool used at steps 7; the perverse affine-curve unit has no statement supplying this ingredient. It supports the extracted exceptional adjunction, without replacing a perverse/Fourier unit step."
+   },
+   {
+    "node": "cor-fin-deligne-open-finite-coefficients",
+    "why": "Generic coefficient, ordinary-etale, categorical or finite-geometry tool used at steps 8; the perverse affine-curve unit has no statement supplying this ingredient. It supports the extracted exceptional adjunction, without replacing a perverse/Fourier unit step."
+   },
+   {
+    "node": "def-kun-tor-amplitude",
+    "why": "Generic coefficient, ordinary-etale, categorical or finite-geometry tool used at steps 15; the perverse affine-curve unit has no statement supplying this ingredient. It supports the extracted exceptional adjunction, without replacing a perverse/Fourier unit step."
+   },
+   {
+    "node": "def-weil-pbc-etale-constructible-sheaf",
+    "why": "Generic coefficient, ordinary-etale, categorical or finite-geometry tool used at steps 7; the perverse affine-curve unit has no statement supplying this ingredient. It supports the extracted exceptional adjunction, without replacing a perverse/Fourier unit step."
+   },
+   {
+    "node": "det-geo-open-finiteness-ii-amplitude",
+    "why": "Generic coefficient, ordinary-etale, categorical or finite-geometry tool used at steps 8; the perverse affine-curve unit has no statement supplying this ingredient. It supports the extracted exceptional adjunction, without replacing a perverse/Fourier unit step."
+   },
+   {
+    "node": "lem-amb-affine-space-top-trace",
+    "why": "Generic coefficient, ordinary-etale, categorical or finite-geometry tool used at steps 6; the perverse affine-curve unit has no statement supplying this ingredient. It supports the extracted exceptional adjunction, without replacing a perverse/Fourier unit step."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Generic coefficient, ordinary-etale, categorical or finite-geometry tool used at steps 10; the perverse affine-curve unit has no statement supplying this ingredient. It supports the extracted exceptional adjunction, without replacing a perverse/Fourier unit step."
+   },
+   {
+    "node": "lem-amb-proper-coproducts",
+    "why": "Generic coefficient, ordinary-etale, categorical or finite-geometry tool used at steps 2; the perverse affine-curve unit has no statement supplying this ingredient. It supports the extracted exceptional adjunction, without replacing a perverse/Fourier unit step."
+   },
+   {
+    "node": "lem-amb-proper-coproducts-projection",
+    "why": "Generic coefficient, ordinary-etale, categorical or finite-geometry tool used at steps 3, 9; the perverse affine-curve unit has no statement supplying this ingredient. It supports the extracted exceptional adjunction, without replacing a perverse/Fourier unit step."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Generic coefficient, ordinary-etale, categorical or finite-geometry tool used at steps 10, 11, 16; the perverse affine-curve unit has no statement supplying this ingredient. It supports the extracted exceptional adjunction, without replacing a perverse/Fourier unit step."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic coefficient, ordinary-etale, categorical or finite-geometry tool used at steps 7; the perverse affine-curve unit has no statement supplying this ingredient. It supports the extracted exceptional adjunction, without replacing a perverse/Fourier unit step."
+   },
+   {
+    "node": "lem-asd-ordinary-finite-p1-adjunction",
+    "why": "Generic coefficient, ordinary-etale, categorical or finite-geometry tool used at steps 6; the perverse affine-curve unit has no statement supplying this ingredient. It supports the extracted exceptional adjunction, without replacing a perverse/Fourier unit step."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Generic coefficient, ordinary-etale, categorical or finite-geometry tool used at steps 2, 13, 14, 15, 16; the perverse affine-curve unit has no statement supplying this ingredient. It supports the extracted exceptional adjunction, without replacing a perverse/Fourier unit step."
+   },
+   {
+    "node": "lem-exc-closed-support-triangle",
+    "why": "Generic coefficient, ordinary-etale, categorical or finite-geometry tool used at steps 9; the perverse affine-curve unit has no statement supplying this ingredient. It supports the extracted exceptional adjunction, without replacing a perverse/Fourier unit step."
+   },
+   {
+    "node": "lem-exc-constant-tensor",
+    "why": "Generic coefficient, ordinary-etale, categorical or finite-geometry tool used at steps 9; the perverse affine-curve unit has no statement supplying this ingredient. It supports the extracted exceptional adjunction, without replacing a perverse/Fourier unit step."
+   },
+   {
+    "node": "lem-exc-direct-image-coproducts",
+    "why": "Generic coefficient, ordinary-etale, categorical or finite-geometry tool used at steps 9; the perverse affine-curve unit has no statement supplying this ingredient. It supports the extracted exceptional adjunction, without replacing a perverse/Fourier unit step."
+   },
+   {
+    "node": "lem-exc-residue-tor-test",
+    "why": "Generic coefficient, ordinary-etale, categorical or finite-geometry tool used at steps 4; the perverse affine-curve unit has no statement supplying this ingredient. It supports the extracted exceptional adjunction, without replacing a perverse/Fourier unit step."
+   },
+   {
+    "node": "lem-fd-finite-ring-compact-support-finiteness",
+    "why": "Generic coefficient, ordinary-etale, categorical or finite-geometry tool used at steps 4; the perverse affine-curve unit has no statement supplying this ingredient. It supports the extracted exceptional adjunction, without replacing a perverse/Fourier unit step."
+   },
+   {
+    "node": "lem-grothendieck-derived-brown-right-adjoint",
+    "why": "Generic coefficient, ordinary-etale, categorical or finite-geometry tool used at steps 2; the perverse affine-curve unit has no statement supplying this ingredient. It supports the extracted exceptional adjunction, without replacing a perverse/Fourier unit step."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Generic coefficient, ordinary-etale, categorical or finite-geometry tool used at steps 3; the perverse affine-curve unit has no statement supplying this ingredient. It supports the extracted exceptional adjunction, without replacing a perverse/Fourier unit step."
+   },
+   {
+    "node": "lem-pur-coefficient-evaluation-derived-left-adjoint",
+    "why": "Generic coefficient, ordinary-etale, categorical or finite-geometry tool used at steps 13, 14; the perverse affine-curve unit has no statement supplying this ingredient. It supports the extracted exceptional adjunction, without replacing a perverse/Fourier unit step."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic coefficient, ordinary-etale, categorical or finite-geometry tool used at steps 3; the perverse affine-curve unit has no statement supplying this ingredient. It supports the extracted exceptional adjunction, without replacing a perverse/Fourier unit step."
+   },
+   {
+    "node": "lem-pur-system-level-left-extension",
+    "why": "Generic coefficient, ordinary-etale, categorical or finite-geometry tool used at steps 2, 13, 15; the perverse affine-curve unit has no statement supplying this ingredient. It supports the extracted exceptional adjunction, without replacing a perverse/Fourier unit step."
+   },
+   {
+    "node": "lem-sf-affine-chart-factorization-gluing",
+    "why": "Generic coefficient, ordinary-etale, categorical or finite-geometry tool used at steps 10, 11; the perverse affine-curve unit has no statement supplying this ingredient. It supports the extracted exceptional adjunction, without replacing a perverse/Fourier unit step."
+   },
+   {
+    "node": "lem-sf-flat-model",
+    "why": "Generic coefficient, ordinary-etale, categorical or finite-geometry tool used at steps 4, 7; the perverse affine-curve unit has no statement supplying this ingredient. It supports the extracted exceptional adjunction, without replacing a perverse/Fourier unit step."
+   },
+   {
+    "node": "lem-sf-reduction-flat-model",
+    "why": "Generic coefficient, ordinary-etale, categorical or finite-geometry tool used at steps 4; the perverse affine-curve unit has no statement supplying this ingredient. It supports the extracted exceptional adjunction, without replacing a perverse/Fourier unit step."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic coefficient, ordinary-etale, categorical or finite-geometry tool used at steps 1; the perverse affine-curve unit has no statement supplying this ingredient. It supports the extracted exceptional adjunction, without replacing a perverse/Fourier unit step."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic coefficient, ordinary-etale, categorical or finite-geometry tool used at steps 9, 12; the perverse affine-curve unit has no statement supplying this ingredient. It supports the extracted exceptional adjunction, without replacing a perverse/Fourier unit step."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic coefficient, ordinary-etale, categorical or finite-geometry tool used at steps 3, 9, 16; the perverse affine-curve unit has no statement supplying this ingredient. It supports the extracted exceptional adjunction, without replacing a perverse/Fourier unit step."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic coefficient, ordinary-etale, categorical or finite-geometry tool used at steps 7; the perverse affine-curve unit has no statement supplying this ingredient. It supports the extracted exceptional adjunction, without replacing a perverse/Fourier unit step."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic coefficient, ordinary-etale, categorical or finite-geometry tool used at steps 3; the perverse affine-curve unit has no statement supplying this ingredient. It supports the extracted exceptional adjunction, without replacing a perverse/Fourier unit step."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "why": "Generic coefficient, ordinary-etale, categorical or finite-geometry tool used at steps 7; the perverse affine-curve unit has no statement supplying this ingredient. It supports the extracted exceptional adjunction, without replacing a perverse/Fourier unit step."
+   },
+   {
+    "node": "prop-exc-closed-tor",
+    "why": "Generic coefficient, ordinary-etale, categorical or finite-geometry tool used at steps 8; the perverse affine-curve unit has no statement supplying this ingredient. It supports the extracted exceptional adjunction, without replacing a perverse/Fourier unit step."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Generic coefficient, ordinary-etale, categorical or finite-geometry tool used at steps 5, 14; the perverse affine-curve unit has no statement supplying this ingredient. It supports the extracted exceptional adjunction, without replacing a perverse/Fourier unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "cor-amb-affine-space-adjunction",
+  "cor-fin-deligne-open-finite-coefficients",
+  "def-kun-tor-amplitude",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "det-geo-open-finiteness-ii-amplitude",
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-proper-coproducts",
+  "lem-amb-proper-coproducts-projection",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-coef-semilinear-derived-sections",
+  "lem-exc-closed-support-triangle",
+  "lem-exc-constant-tensor",
+  "lem-exc-direct-image-coproducts",
+  "lem-exc-residue-tor-test",
+  "lem-fd-finite-ring-compact-support-finiteness",
+  "lem-grothendieck-derived-brown-right-adjoint",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-pur-coefficient-evaluation-derived-left-adjoint",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-system-level-left-extension",
+  "lem-sf-affine-chart-factorization-gluing",
+  "lem-sf-flat-model",
+  "lem-sf-reduction-flat-model",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "prop-exc-closed-tor",
+  "thm-amb-etale-exceptional-adjoint"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-N8-d13a1c9e1",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-d13a1c9e1 (reviewer sub-agent of L); spot-checked: I read all 16 steps and the full statements of all 57 proof_deps and 7 stmt_deps, and checked them against Bhatt–Scholze Lemmas 6.7.17–6.7.19 (pp. 57–58). The finite part follows BS 6.7.18: projection-formula square (step 3); local factorization into a closed immersion and affine space (step 10); g^! = g^*(d)[2d] through cor-amb-affine-space-adjunction with the explicit Kummer trace (steps 6–7); the closed case through the support triangle and the Rj_* constant-tensor isomorphism (step 9). The TR3 filler there is unique because i_* is fully faithful. Constructibility and finite Tor amplitude are proved, not assumed: by prop-exc-closed-tor with the hypotheses from det-geo-open-finiteness-ii-amplitude and cor-fin-deligne (step 8), and by the residue Tor test plus compact-support finiteness (step 4). The system part is sound. Brown representability applies to the Grothendieck category of systems because coproducts are computed levelwise. θ_n: L_nF_n ≅ F L_n holds because e_qθ_n = q_{n,q}, which step 3 makes invertible on unbounded inputs. The Hom chain gives e_nH ≅ G̃_n e_n, and its transition is G̃_n(t)∘b through σ_mn, an identity of actual maps. Normalized ctf systems are preserved without a uniform bound, and refinements are handled by conjugation. lem-sf-flat-model's constructible variant needs only a finite ring and a Noetherian scheme, so it holds over arbitrary k. I checked the unit equation in step 12 and small cases (id, empty X, A^1→pt, n=1, m=n, char 0). I accept the elementary mark on step 6. There are no new nodes. The candidates lem-pur-etale-coefficient-system-adjoint and lem-coef-finite-exceptional are F̄_q-only, so neither duplicates the item. There is no SGA citation. The only off-route citations are det-geo-open-finiteness-ii-amplitude and lem-fd-finite-ring-compact-support-finiteness, both declared generic tools. The undeclared lem-kun-derived-tensor-triangulated is Lean-closed. Batch 5: all three flagged citations are outside the assumptions. cor-amb-affine-space-adjunction is a finite-coefficient étale purity adjunction; the Poincaré-duality assumption takes pur_p as stmt_dep data, so this is not part of its proof, and batch 5 already reaches the node via thm-pur-finite-coefficient-smooth-purity. lem-amb-proper-coproducts is general coproduct preservation, already reached via thm-amb-etale-exceptional-adjoint. lem-fd-finite-ring-compact-support-finiteness is finiteness of H_c, a hypothesis of the trace formula, already reached via thm-fd-transform-well-defined. None is a step of the trace formula or Poincaré duality. No fixes."
  }
 }
