@@ -9,8 +9,7 @@ public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.Mathlib.Topology.KrullDimension
-import Sheaf.AlgebraicGeometry.QuasiFinitePolynomialChart.CoordinateFibreDimension
-import Sheaf.AlgebraicGeometry.FibreDimensionBoundedOpenUpstairs
+import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
 
 /-!
 # Openness of the bounded local fibre dimension locus
@@ -54,6 +53,31 @@ open neighbourhoods. An empty locus is the empty union and is also open. -/
 theorem isOpen_localFibreDimension_le {X S : Scheme.{u}} (f : X ⟶ S)
     [LocallyOfFiniteType f] (n : ℕ) :
     IsOpen {x : X | topologicalKrullDimAt (f.asFiber x) ≤ (n : WithBot ℕ∞)} := by
-  sorry
+  rw [isOpen_iff_mem_nhds]
+  intro x hx
+  have hfinite : ∃ d : ℕ,
+      topologicalKrullDimAt (f.asFiber x) = (d : WithBot ℕ∞) := by
+    have hnonneg : 0 ≤ topologicalKrullDimAt (f.asFiber x) := by
+      refine le_iInf₂ fun U hxU ↦ ?_
+      apply Order.krullDim_nonneg_iff.mpr
+      exact ⟨⟨closure {⟨f.asFiber x, hxU⟩}, isIrreducible_singleton.closure,
+        isClosed_closure⟩⟩
+    have hle : topologicalKrullDimAt (f.asFiber x) ≤ (n : WithBot ℕ∞) := hx
+    generalize topologicalKrullDimAt (f.asFiber x) = e at hle hnonneg ⊢
+    induction e using WithBot.recBotCoe with
+    | bot => exact False.elim ((not_le_of_gt (by decide : (⊥ : WithBot ℕ∞) < 0)) hnonneg)
+    | coe e =>
+      induction e using ENat.recTopCoe with
+      | top =>
+        exact False.elim ((not_le_of_gt
+          (WithBot.coe_lt_coe.mpr (ENat.natCast_lt_top n))) hle)
+      | coe e => exact ⟨e, rfl⟩
+  obtain ⟨d, hd⟩ := hfinite
+  obtain ⟨W, hxW, hW⟩ := exists_bounded_fibre_dimension_neighbourhood f x d hd
+  refine mem_nhds_iff.mpr ⟨W, ?_, W.isOpen, hxW⟩
+  intro y hy
+  have hdn : (d : WithBot ℕ∞) ≤ (n : WithBot ℕ∞) := by
+    exact hd ▸ hx
+  exact (hW y hy).trans hdn
 
 end AlgebraicGeometry

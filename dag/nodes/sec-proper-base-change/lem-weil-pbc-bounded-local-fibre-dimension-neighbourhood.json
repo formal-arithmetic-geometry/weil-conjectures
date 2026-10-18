@@ -1,0 +1,167 @@
+{
+ "id": "lem-weil-pbc-bounded-local-fibre-dimension-neighbourhood",
+ "kind": "statement",
+ "title": "A finite local fibre dimension bounds a neighbourhood",
+ "statement": "Let f : X → Y be a morphism of schemes [def-pc-scheme], locally of finite type [def-weil-finite-type-morphism]. Let x ∈ X and d ∈ ℕ. Assume that the local topological Krull dimension [def-kun-topological-dimension-at-point] at the point of the scheme-theoretic fibre [def-pc-scheme-fibre] over f(x) corresponding to x equals d. Then there exists an open neighbourhood W of x in X such that the local dimension of the fibre of f at every z ∈ W is at most d. No quasi-compactness, properness, Noetherian, flatness or finite-presentation hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02FZ, affine reduction to Algebra Tag 00QH"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-pc-scheme-fibre",
+  "def-kun-topological-dimension-at-point"
+ ],
+ "proof": [
+  {
+   "text": "Choose an affine open T = Spec R of Y containing f(x) and an affine open W = Spec B of its inverse image containing x. The restriction h : W → T is locally of finite type, so its coordinate map R → B is finite type, by the affine characterization of def-weil-finite-type-morphism and def-weil-affine-spectrum.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FZ, affine reduction; Tag 01T2, label lemma-locally-finite-type-characterize, affine-cover condition (4)"
+   }
+  },
+  {
+   "text": "For every $y\\in W$, put $s=f(y)$. The fibre homeomorphisms in [def-pc-scheme-fibre] identify the fibre of $h$ over $s$ with the open subspace $W\\cap f^{-1}(s)$ of $f^{-1}(s)$, the underlying space of $X_s$. Thus [lem-weil-pbc-dimension-at-point-open-subspace] identifies its local dimension at the point over $y$ with $\\dim_{\\widetilde y}X_s$. Apply [lem-sbc-affine-coordinate-fibre-dimension] to $h$: if $\\mathfrak q_y\\subset B$ corresponds to $y$ and $\\mathfrak p_y$ is its contraction to $R$, this common dimension is $\\dim_{\\mathfrak q_y}(B/R)$, measured on $\\operatorname{Spec}(B\\otimes_R\\kappa(\\mathfrak p_y))$. The affine comparison writes the tensor factors in the opposite order; the swap $b\\otimes a\\mapsto a\\otimes b$ has its own inverse and carries the kernel of $b\\otimes a\\mapsto\\bar b\\bar a$ to the same distinguished prime. Its spectrum homeomorphism carries open neighbourhoods and chains of irreducible closed subsets bijectively, so preserves the defining minimum of dimensions.",
+   "uses": [
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-dimension-at-point-open-subspace",
+    "lem-sbc-affine-coordinate-fibre-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FZ, affine reduction; Schemes Tag 01K1, label lemma-fibre-topological; Algebra Tag 00E6, label remark-fundamental-diagram; Topology Tag 0055, label definition-Krull, item (4)"
+   }
+  },
+  {
+   "text": "The assumed equality says that the local fibre dimension at x is d. By the affine comparison of step 2, apply lem-weil-pbc-fibre-dimension-bounded-open-upstairs to the coordinate prime of x and d. Obtain an open neighbourhood V in the coordinate spectrum on which all local fibre dimensions are at most d.",
+   "uses": [
+    "lem-weil-pbc-fibre-dimension-bounded-open-upstairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00QH, label lemma-dimension-fibres-bounded-open-upstairs; relative dimension defined in Tag 00QD, label definition-relative-dimension"
+   }
+  },
+  {
+   "text": "Pull V back along the affine isomorphism of W with its coordinate spectrum and include the resulting open into X. This gives an open neighbourhood N of x. For each y in N, the open-subspace and coordinate comparisons of step 2 identify its local fibre dimension with a coordinate local fibre dimension bounded by d, proving the required bound.",
+   "uses": [
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02FZ, conclusion of the affine-local proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "def-weil-affine-spectrum",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-dimension-at-point-open-subspace",
+  "lem-sbc-affine-coordinate-fibre-dimension",
+  "lem-weil-pbc-fibre-dimension-bounded-open-upstairs"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 02FZ and Algebra Tag 00QH; the existing neighbourhood helper of FiniteTypeFibreDimensionBound is made public, with its proof unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite local dimension of the fibre of a locally finite type morphism bounds local fibre dimensions on an open neighbourhood of the point",
+   "results": "Finite-fibre and finite-type class declarations only; no local dimension neighbourhood theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type scheme morphism has an open neighbourhood of each point on which local fibre dimension is bounded by its finite value at that point",
+   "results": "LocallyOfFiniteType, LocallyQuasiFinite, restriction instances and finiteType_appLE; no local fibre dimension bound.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"topologicalKrullDimAt\", \"LocallyOfFiniteType\"",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDimAt.*(fiber|asFiber)|exists_bounded_fibre_dimension_neighbourhood|bounded.*fibre.*neighbou in Mathlib/AlgebraicGeometry and Mathlib/Topology",
+   "results": "No Mathlib hits. Project search found the existing private helper AlgebraicGeometry.exists_bounded_fibre_dimension_neighbourhood in Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound. Blueprint search and DAG declaration search found no node for that helper.",
+   "date": "2026-10-18",
+   "verdict": "use the existing project theorem; expose it in place"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LocalFibreDimensionOpen",
+  "date": "2026-10-18",
+  "group": "Q7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Tag 02FZ local neighbourhood construction in the proof of bounded local fibre dimension openness; steps 1, 2, and 4 of lem-weil-pbc-local-fibre-dimension-open, with finite dimension fixed in step 3.",
+   "via": [
+    "lem-weil-pbc-local-fibre-dimension-open",
+    "lem-weil-pbc-proper-fibre-dimension-upper-semicontinuous",
+    "lem-weil-pbc-good-curves-generic-diagram",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteTypeFibreDimensionBound.lean",
+  "declaration": "AlgebraicGeometry.exists_bounded_fibre_dimension_neighbourhood",
+  "statement": "theorem exists_bounded_fibre_dimension_neighbourhood\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFiniteType f]\n    (x : X) (d : ℕ) (hd : topologicalKrullDimAt (f.asFiber x) = (d : WithBot ℕ∞)) :\n    ∃ W : X.Opens, x ∈ W ∧\n      ∀ z ∈ W, topologicalKrullDimAt (f.asFiber z) ≤ (d : WithBot ℕ∞)",
+  "branch": "sheaf-dag",
+  "by": "Q7",
+  "date": "2026-10-18",
+  "note": "The existing private theorem is promoted in place; no new theorem body or hole is added."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261018T071215-L-1675333",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261018T071215-L-1675333",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

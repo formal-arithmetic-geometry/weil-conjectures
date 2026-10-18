@@ -32,67 +32,34 @@
  ],
  "proof": [
   {
-   "text": "Fix $n\\geq0$ and $x\\in U_n$. Choose an affine open $T=\\operatorname{Spec}R\\subset S$ containing $f(x)$. By the affine-cover definition of locally of finite type [def-weil-finite-type-morphism], choose an affine open $W=\\operatorname{Spec}B\\subset f^{-1}(T)$ containing $x$, with $B$ a finite type $R$-algebra. Write $h:W\\to T$ for the restriction of $f$. This uses a member of the cover supplied by that definition, rather than asserting finite type for arbitrary affine opens.",
+   "text": "Fix n and a point x of the bounded local fibre dimension locus. The local dimension is nonnegative: each open neighbourhood of the fibre point contains its singleton closure, a nonempty irreducible closed subset. Its assumed upper bound by n excludes infinity; nonnegativity excludes bottom. Case analysis in WithBot ℕ∞ therefore gives a natural number d equal to this local dimension, and d ≤ n.",
    "uses": [
-    "def-weil-finite-type-morphism",
-    "def-weil-affine-spectrum"
+    "def-kun-topological-dimension-at-point"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 02FZ, affine reduction; Tag 01T2, label lemma-locally-finite-type-characterize, affine-cover condition (4)"
-   }
+   "elementary": true
   },
   {
-   "text": "For every $y\\in W$, put $s=f(y)$. The fibre homeomorphisms in [def-pc-scheme-fibre] identify the fibre of $h$ over $s$ with the open subspace $W\\cap f^{-1}(s)$ of $f^{-1}(s)$, the underlying space of $X_s$. Thus [lem-weil-pbc-dimension-at-point-open-subspace] identifies its local dimension at the point over $y$ with $\\dim_{\\widetilde y}X_s$. Apply [lem-sbc-affine-coordinate-fibre-dimension] to $h$: if $\\mathfrak q_y\\subset B$ corresponds to $y$ and $\\mathfrak p_y$ is its contraction to $R$, this common dimension is $\\dim_{\\mathfrak q_y}(B/R)$, measured on $\\operatorname{Spec}(B\\otimes_R\\kappa(\\mathfrak p_y))$. The affine comparison writes the tensor factors in the opposite order; the swap $b\\otimes a\\mapsto a\\otimes b$ has its own inverse and carries the kernel of $b\\otimes a\\mapsto\\bar b\\bar a$ to the same distinguished prime. Its spectrum homeomorphism carries open neighbourhoods and chains of irreducible closed subsets bijectively, so preserves the defining minimum of dimensions.",
+   "text": "Apply the existing theorem AlgebraicGeometry.exists_bounded_fibre_dimension_neighbourhood, promoted to public in its original module Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound, to x, d and the equality. It gives an open neighbourhood W of x with all local fibre dimensions bounded by d. This is exactly the affine-local argument of the original plan, reused without duplicate restriction or coordinate-comparison proofs.",
    "uses": [
-    "def-pc-scheme-fibre",
-    "lem-weil-pbc-dimension-at-point-open-subspace",
-    "lem-sbc-affine-coordinate-fibre-dimension"
+    "lem-weil-pbc-bounded-local-fibre-dimension-neighbourhood"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 02FZ, affine reduction; Schemes Tag 01K1, label lemma-fibre-topological; Algebra Tag 00E6, label remark-fundamental-diagram; Topology Tag 0055, label definition-Krull, item (4)"
-   }
+   "elementary": false
   },
   {
-   "text": "By [def-kun-topological-dimension-at-point], the local dimension at a point is a nonnegative integer or infinity. Since $x\\in U_n$, it is therefore an integer $d$ with $0\\leq d\\leq n$. Step 2 identifies $\\dim_{\\mathfrak q_x}(B/R)=d$. Apply [lem-weil-pbc-fibre-dimension-bounded-open-upstairs] to the finite type ring map $R\\to B$ and this prime: there is an open $V\\subset\\operatorname{Spec}B$ containing $\\mathfrak q_x$ such that $\\dim_{\\mathfrak q}(B/R)\\leq d$ for every $\\mathfrak q\\in V$. All its hypotheses are now in force; in particular no Noetherian or finite-presentation assumption is used.",
-   "uses": [
-    "def-kun-topological-dimension-at-point",
-    "lem-weil-pbc-fibre-dimension-bounded-open-upstairs"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00QH, label lemma-dimension-fibres-bounded-open-upstairs; relative dimension defined in Tag 00QD, label definition-relative-dimension"
-   }
-  },
-  {
-   "text": "Pull $V$ back along the affine identification $W\\simeq\\operatorname{Spec}B$ from [def-weil-affine-spectrum] and the choice of $W$. This gives an open neighbourhood $N_x$ of $x$ in $W$, hence in $X$ because $W$ is open. For $y\\in N_x$, steps 2 and 3 give $\\dim_{\\widetilde y}X_{f(y)}=\\dim_{\\mathfrak q_y}(B/R)\\leq d\\leq n$, so $N_x\\subset U_n$. Consequently $U_n=\\bigcup_{x\\in U_n}N_x$ is open. If $U_n$ is empty this is the empty union, also open.",
-   "uses": [
-    "def-weil-affine-spectrum"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 02FZ, conclusion of the affine-local proof"
-   }
+   "text": "For y in W the neighbourhood bound and d ≤ n give the defining inequality of the locus. Thus W is contained in the locus. Apply isOpen_iff_mem_nhds and mem_nhds_iff to these open neighbourhoods. This also covers the empty locus because no point requires a neighbourhood.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-finite-type-morphism",
-  "def-weil-affine-spectrum",
-  "def-pc-scheme-fibre",
-  "lem-weil-pbc-dimension-at-point-open-subspace",
-  "lem-sbc-affine-coordinate-fibre-dimension",
   "def-kun-topological-dimension-at-point",
-  "lem-weil-pbc-fibre-dimension-bounded-open-upstairs"
+  "lem-weil-pbc-bounded-local-fibre-dimension-neighbourhood"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tag 02FZ, label lemma-openness-bounded-dimension-fibres: affine-local reduction to Algebra Tag 00QH"
+  "place": "Tag 02FZ, label lemma-openness-bounded-dimension-fibres: affine-local reduction to Algebra Tag 00QH",
+  "note": "Q7 repair: reuse the existing neighbourhood theorem in FiniteTypeFibreDimensionBound instead of reproducing its private helpers. The same affine-local Stacks argument remains in that theorem."
  },
  "mathlib_searches": [
   {
@@ -217,11 +184,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-dimension-at-point-open-subspace",
-  "lem-sbc-affine-coordinate-fibre-dimension",
-  "lem-weil-pbc-fibre-dimension-bounded-open-upstairs"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
@@ -259,5 +222,15 @@
   "by": "NN",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261018T071215-L-1675333",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

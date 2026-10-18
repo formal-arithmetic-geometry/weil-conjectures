@@ -11,6 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.Topology.Defs.Filter
 public import Mathlib.Topology.KrullDimension
+public import WeilConjectures.Mathlib.Topology.KrullDimension
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Sheaf.AlgebraicGeometry.QuasiFinitePolynomialChart.CoordinateFibreDimension
 import Sheaf.AlgebraicGeometry.FibreDimensionBoundedOpenUpstairs
@@ -106,7 +107,19 @@ private theorem fibre_dimension_resLE
     simpa only [Scheme.Hom.comp_apply, Scheme.Hom.fiberι_asFiber] using hh
   exact (dimensionAt_openEmbedding q.isOpenEmbedding _).trans (congrArg _ hpoint)
 
-private theorem exists_bounded_fibre_dimension_neighbourhood
+/-- A finite local fibre dimension bounds the local fibre dimension on a neighbourhood.
+
+Source: Stacks Project, Morphisms, Tag 02FZ, affine reduction to Algebra Tag 00QH.
+(blueprint: lem-weil-pbc-bounded-local-fibre-dimension-neighbourhood)
+
+Proof: choose affine neighbourhoods of `f x` and `x` and restrict `f` to them. The
+restricted coordinate-ring map is finite type. Open immersions on source and target
+preserve local fibre dimension, so the affine coordinate fibre comparison identifies
+the dimension at the coordinate prime of `x` with `d`. Apply the bounded-open-upstairs
+lemma to that prime. Pull its open neighbourhood back along the affine isomorphism
+and include it into `X`. At every point of this neighbourhood the same restriction
+and affine comparisons transport the coordinate bound to the required fibre bound. -/
+theorem exists_bounded_fibre_dimension_neighbourhood
     {X Y : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFiniteType f]
     (x : X) (d : ℕ) (hd : topologicalKrullDimAt (f.asFiber x) = (d : WithBot ℕ∞)) :
     ∃ W : X.Opens, x ∈ W ∧
