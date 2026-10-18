@@ -51,7 +51,20 @@ theorem isSheaf_lisseContinuousCommRingPresheafSized (X : Scheme.{u})
     (T : Type (u + 1)) [TopologicalSpace T] [CommRing T] [IsTopologicalRing T] :
     Presheaf.IsSheaf (Scheme.ProEt.topology X)
       (lisseContinuousCommRingPresheafSized X T) := by
-  sorry
+  rw [Presheaf.isSheaf_iff_isSheaf_comp (Scheme.ProEt.topology X)
+    (lisseContinuousCommRingPresheafSized X T) (forget CommRingCat.{u + 1})]
+  let e : lisseContinuousCommRingPresheafSized X T ⋙ forget CommRingCat.{u + 1} ≅
+      (Scheme.ProEt.forget X ⋙ Over.forget X).op ⋙
+        continuousMapPresheaf T ⋙ uliftFunctor.{u + 1} :=
+    NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ rfl)
+  rw [Presheaf.isSheaf_of_iso_iff e]
+  refine Functor.op_comp_isSheaf_of_isSheaf
+    (F := Scheme.ProEt.forget X ⋙ Over.forget X)
+    (J := Scheme.ProEt.topology X) (K := Scheme.proetaleTopology) _ ?_
+  rw [isSheaf_iff_isSheaf_of_type, Presieve.isSheaf_comp_uliftFunctor_iff,
+    ← isSheaf_iff_isSheaf_of_type]
+  exact (isSheaf_fpqcTopology_continuousMapPresheaf T).of_le
+    Scheme.proetaleTopology_le_fpqcTopology
 
 /-- The continuous coefficient sheaf in the module-value universe.
 Source: Bhatt--Scholze, Definition 6.8.1
