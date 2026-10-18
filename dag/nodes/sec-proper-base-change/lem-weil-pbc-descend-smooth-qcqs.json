@@ -34,96 +34,68 @@
  ],
  "proof": [
   {
-   "text": "Write $0=i_0$. For every $x\\in X_0$, choose an affine open $W_x\\subseteq S_0$ containing its image, an affine open $V_x\\subseteq Y_0$ containing $f_0(x)$ and contained in the inverse image of $W_x$, and an affine open $U_x\\subseteq X_0$ containing $x$ and contained in $f_0^{-1}(V_x)$. The affine-basis statement supplies each choice inside the specified open. The $U_x$ cover $X_0$, so quasi-compactness gives a finite subcover. Relabel its triples $(W_a,V_a,U_a)$ for $a\\in A$, with $A$ finite. If $X_0$ is empty take $A$ empty. No assertion that intersections of affine opens are affine is needed.",
+   "text": "Base change the original diagram along the structure map Y₀ → S₀ and restrict its index to Over i₀. The diagram has terms Y₀ ×_{S₀} S_j and limit Y₀ ×_{S₀} S. This follows directly by the fibre-product universal property and initiality of Over i₀. Its transitions are affine by base change. The identity-stage term is canonically isomorphic to Y₀, so it is compact and quasi-separated. Lift f₀ to this term and identify its limit pullback with the stated base change of f₀ by pullback pasting. In Lean these are baseChangeDiagram, isLimitBaseChangeCone, and the private helper exists_smooth_over_pullback.",
    "uses": [
-    "lem-weil-pbc-affine-opens-basis",
-    "def-weil-pbc-quasi-compact-scheme"
+    "def-pc-fibre-product",
+    "lem-weil-pbc-affine-morphism-permanence"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/limits.tex",
-    "place": "Tag 0C0C, label lemma-descend-smooth, proof: affine-local reduction and Tag 0C0B"
+    "place": "Tag 0C0C, label lemma-descend-smooth, affine-local reduction; Situation 081D"
    }
   },
   {
-   "text": "For a fixed triple and $k\\geq0$, put $W_k=S_k\\times_{S_0}W_0$, $V_k=V_0\\times_{W_0}W_k$, and $U_k=U_0\\times_{W_0}W_k$; use analogous notation without subscripts over $S$. A morphism to $X_k$ whose image lies in the inverse image of $U_0$ factors uniquely through that open; its component to $X_0$ factors uniquely through $U_0$. The fibre-product universal property therefore identifies that open with $U_0\\times_{S_0}S_k$, and likewise for $V_0$ and over $S$. The last two are precisely the inverse images of $V_0$ and $U_0$ in $Y_k$ and $X_k$: in both descriptions a test scheme gives the same pair of maps to the original open and to $S_k$, agreeing in $S_0$. The restricted morphism is $h_k:U_k\\to V_k$. Projections $S_k\\to S_0$ and $S\\to S_0$ are affine. Affine permanence under base change makes $W_k,W,V_k,V,U_k,U$ affine, and their transition maps affine. The original ring map $B_0=\\Gamma(V_0,\\mathcal O)\\to C_0=\\Gamma(U_0,\\mathcal O)$ is finitely presented by the affine-open finite-presentation lemma applied to $f_0$.",
+   "text": "For the resulting finite-presentation map p : P → X_i, cover the compact quasi-separated target X_i by finitely many affine opens B_a. Since P is compact and X_i is quasi-separated, p is quasi-compact; hence the inverse image of each B_a is compact. Cover each inverse image by finitely many affine opens and bind these covers to a finite source cover U. The restriction a : U_k → B_a is locally of finite presentation by cancellation of the open immersion B_a → X_i. Restrict limit smoothness by source open immersion and cancel the target open immersion, using the canonical iterated-pullback comparison. No Noetherian hypothesis and no affine-intersection hypothesis is used.",
    "uses": [
-    "def-pc-fibre-product",
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-affine-opens-basis",
+    "def-weil-pbc-quasi-compact-scheme",
     "lem-weil-pbc-lfp-affine-opens-finite-presentation",
-    "lem-weil-pbc-morphism-factors-through-open-subscheme"
+    "lem-weil-pbc-smooth-restrict-open-subschemes"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/limits.tex",
-    "place": "Tag 0C0C, label lemma-descend-smooth, proof: affine-local reduction and Tag 0C0B"
+    "place": "Tag 0C0C, label lemma-descend-smooth, affine-local reduction; Situation 081D"
    }
   },
   {
-   "text": "The restricted diagram $(W_k)_{k\\geq0}$ has limit $W$, by the open-limit clause of the affine-transition theorem. The diagram $(V_k)$ has limit $V$: a compatible cone $T\\to V_k$ gives a single $T\\to V_0$ and a compatible cone $T\\to W_k$ agreeing over $W_0$; the latter gives a unique $T\\to W$, hence a unique $T\\to V_0\\times_{W_0}W=V$. Conversely the two projections of this fibre product give the cone. Apply the affine limit formula to get $B=\\Gamma(V,\\mathcal O)=\\varinjlim_{k\\geq0}B_k$, where $B_k=\\Gamma(V_k,\\mathcal O)$, with the canonical ring coprojections. Pullback pasting gives $U_k=U_0\\times_{V_0}V_k$ and $U=U_0\\times_{V_0}V$: both pairs of maps agree in $V_0$, and their composite agreement in $W_0$ is exactly the defining agreement for the original fibre products. The affine-spectra fibre-product statement therefore identifies their rings, compatibly with both projections, as $C_k=C_0\\otimes_{B_0}B_k$ and $C=C_0\\otimes_{B_0}B$. Thus the diagram used in ring descent is the directed system of the $B_k$, not an unspecified system of rings.",
+   "text": "Base change the system to B_a. Its terms are affine because its projections to the affine scheme B_a are base changes of affine transition maps. Its limit is the pullback to B_a by the same universal property. Apply the already proved Scheme.exists_smooth_stage_of_affine_diagram to a : U_k → B_a, its finite-presentation instance, and the smooth limit pullback. This theorem translates global sections to a filtered colimit and applies the approved fixed-map ring pushout descent theorem; it is exactly steps 3–4 of the original plan packaged in a reusable proved declaration. It gives a smooth stage for each chart.",
    "uses": [
     "def-pc-fibre-product",
-    "lem-weil-pbc-limit-affine-transition",
-    "lem-weil-pbc-fibre-product-affine-spectra"
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-sbc-affine-diagram-smooth-stage"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/limits.tex",
-    "place": "Tag 0C0C, label lemma-descend-smooth, proof: affine-local reduction and Tag 0C0B"
+    "place": "Tag 0C0C, label lemma-descend-smooth, affine-local reduction; Situation 081D"
    }
   },
   {
-   "text": "The limit restriction $h:U\\to V$ is smooth: $U,V$ are open subschemes of $X,Y$ and $f(U)\\subseteq V$, so apply smooth restriction. Identify $h$ with the spectrum of $B\\to C$ using the induced-ring-map spectrum square and the canonical affine-open isomorphisms; the smooth ring-map/affine-scheme equivalence gives smoothness of $B\\to C$. Apply the fixed-map smooth-pushout descent theorem with its $A=B_0$, its $B=C_0$, diagram $F_k=B_k$, and pushouts $C_k=C_0\\otimes_{B_0}B_k$, $L=C_0\\otimes_{B_0}B$. Its finite-presentation hypothesis is exactly the one verified in step 2, and its smoothness hypothesis is the preceding equivalence. It gives an index $k_a\\geq0$ where $B_{k_a}\\to C_{k_a}$ is smooth. No Noetherian or faithful-flatness hypothesis occurs in this ring theorem.",
-   "uses": [
-    "lem-weil-pbc-smooth-restrict-open-subschemes",
-    "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
-    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
-    "lem-sbc-smooth-pushout-filtered-colimit-stage"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Tag 0C0C, label lemma-descend-smooth, proof: affine-local reduction and Tag 0C0B"
-   }
-  },
-  {
-   "text": "By directedness choose an upper bound $i$ for the finite set consisting of $0$ and the indices $k_a$. This follows by induction on the finite set using a common upper bound for each pair; including $0$ handles $A=\\varnothing$. For each $a$, the ring map $B_i\\to C_i$ is the base change of $B_{k_a}\\to C_{k_a}$: $U_{k_a}\\times_{V_{k_a}}V_i$ and $U_i$ are both canonically $U_0\\times_{V_0}V_i$. On test schemes this identifies the common map to $U_0$ and the map to $V_i$ agreeing in $V_0$, and preserves the projection to $V_i$. Affine fibre products thus identify the map with $B_i\\to C_{k_a}\\otimes_{B_{k_a}}B_i$. Smooth ring maps are stable under base change, so it is smooth. The affine-scheme equivalence, the spectrum square, and invariance under affine comparison isomorphisms give smoothness of $h_{a,i}:U_{a,i}\\to V_{a,i}$. Composing with the open inclusion $V_{a,i}\\to Y_i$ is smooth by clause (b) of smooth restriction.",
-   "uses": [
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-smooth-ring-map-base-change-composition",
-    "lem-weil-pbc-smooth-ring-map-iff-smooth-affine",
-    "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
-    "lem-weil-pbc-smooth-restrict-open-subschemes",
-    "def-pc-fibre-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Tag 0C0C, label lemma-descend-smooth, proof: affine-local reduction and Tag 0C0B"
-   }
-  },
-  {
-   "text": "The opens $U_{a,i}$ cover $X_i$: their union is the inverse image of $\\bigcup_aU_{a,0}=X_0$ under $X_i\\to X_0$. Each restricted composite to $Y_i$ was proved smooth in step 5. The source-local smoothness criterion now gives smoothness of $f_i$. The criterion also covers the empty family when $X_i=\\varnothing$.",
-   "uses": [
-    "lem-weil-pbc-smooth-local-on-source"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Tag 0C0C, label lemma-descend-smooth, proof: affine-local reduction and Tag 0C0B"
-   }
-  },
-  {
-   "text": "For every $j\\geq i$, the canonical square from $f_j$ to $f_i$ is cartesian: $X_j=X_i\\times_{Y_i}Y_j$, since both sides represent the pair of maps to $X_0$ and $S_j$ agreeing in $S_0$. Thus $f_j$ is the base change of $f_i$ along $Y_j\\to Y_i$, and clause (2) of proper-and-smooth base change makes it smooth. This gives the all-later conclusion.",
+   "text": "Choose a common refinement of the finitely many chart stages in Over i. Pullback pasting and smooth base-change stability transport each chart to that refinement. The pulled-back U_k cover its source. Compose each restricted chart map with the target open inclusion and use source locality to obtain smoothness of the full pullback of p. IsCofiltered.inf_objs_exists also applies to the empty finite set, so this proves the empty-source case as well. This is the private helper descend_smooth_to_stage.",
    "uses": [
     "def-pc-fibre-product",
+    "lem-weil-pbc-smooth-restrict-open-subschemes",
+    "lem-weil-pbc-smooth-local-on-source",
     "lem-pc-proper-base-change"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01VB, label lemma-base-change-smooth; applied to the cartesian square identified by the fibre-product universal property"
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0C0C, label lemma-descend-smooth, affine-local reduction; Situation 081D"
+   }
+  },
+  {
+   "text": "For any still later object, the pullback of p is the further base change of the smooth stage. The iterated-pullback isomorphism preserves its projection, so smoothness persists. Compare this pullback with the original Over.pullback map by the unique isomorphism between two pullback squares for f₀.left over Y₀; the equations on both projections prove that the morphisms correspond. Finally take opposite indices: an arrow op i → op i₀ is i₀ ≤ i, and the arrow for i ≤ j gives exactly the composite in the unchanged conclusion.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-pc-proper-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 0C0C, label lemma-descend-smooth, affine-local reduction; Situation 081D"
    }
   }
  ],
@@ -131,23 +103,20 @@
   "def-pc-fibre-product",
   "def-weil-pbc-quasi-compact-scheme",
   "lem-pc-proper-base-change",
-  "lem-sbc-smooth-pushout-filtered-colimit-stage",
+  "lem-sbc-affine-diagram-smooth-stage",
   "lem-weil-pbc-affine-morphism-permanence",
   "lem-weil-pbc-affine-opens-basis",
-  "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
-  "lem-weil-pbc-fibre-product-affine-spectra",
   "lem-weil-pbc-lfp-affine-opens-finite-presentation",
-  "lem-weil-pbc-limit-affine-transition",
-  "lem-weil-pbc-morphism-factors-through-open-subscheme",
   "lem-weil-pbc-smooth-local-on-source",
-  "lem-weil-pbc-smooth-restrict-open-subschemes",
-  "lem-weil-pbc-smooth-ring-map-base-change-composition",
-  "lem-weil-pbc-smooth-ring-map-iff-smooth-affine"
+  "lem-weil-pbc-smooth-restrict-open-subschemes"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "E4",
+  "date": "2026-10-18",
   "document": "literature/stacks-project/limits.tex",
-  "place": "Tag 0C0C, label lemma-descend-smooth; omitted affine-local reduction written out, with Tag 0C0B in algebra.tex and persistence Tag 01VB in morphisms.tex"
+  "place": "Tag 0C0C, label lemma-descend-smooth, affine-local reduction; Situation 081D",
+  "note": "Lean proof of affine-local reduction, common stage and persistence; reuses the proved affine-diagram algebra-to-schemes bridge. No new holes."
  },
  "mathlib_searches": [
   {
@@ -295,5 +264,15 @@
   "by": "NY",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261018T062734-L-643547",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
