@@ -8,7 +8,6 @@ module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 
 /-!
 # Projective morphisms are proper
@@ -50,6 +49,18 @@ theorem hProjective_properness :
     (∀ {X Y : Scheme.{u}} (i : X ⟶ Y), IsClosedImmersion i → IsProper i) ∧
     (∀ {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z),
       IsProper f → IsProper g → IsProper (f ≫ g)) := by
-  sorry
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · intro X Y f hf
+    have := hf
+    exact IsHProjective.isProper f
+  · intro N Y
+    infer_instance
+  · intro X Y i hi
+    have := hi
+    infer_instance
+  · intro X Y Z f g hf hg
+    have := hf
+    have := hg
+    infer_instance
 
 end AlgebraicGeometry

@@ -26,7 +26,7 @@
  ],
  "proof": [
   {
-   "text": "Let $f:X\\to Y$ be projective. By [def-kun-projective] choose $N\\geq0$ and a closed immersion $i:X\\to\\mathbf P^N_Y$ such that $f=q\\circ i$, where $q:\\mathbf P^N_Y\\to Y$ is the structural projection. By [def-nagata-projective-space-base-change], $\\mathbf P^N_Y$ with its structural projection is $\\mathbf P(\\{0,\\ldots,N\\};Y)$ with its first projection. Use the finite homogeneous-coordinate set $\\{0,\\ldots,N\\}$ in [lemma-nagata-projective-space-base-change-proper] with $S=Y$; this gives that $q$ is proper. By clause (a) of [lem-weil-pbc-closed-immersion-proper], $i$ is proper. Applying [lem-weil-pbc-proper-composition] to $i$ and $q$ proves that $f$ is proper. The same cited statements give each of the three properness facts in the parenthetical clause of the item.",
+   "text": "Use the already proved library instance IsHProjective.isProper for the first conjunct. Its proof extracts the finite homogeneous-coordinate type n and closed immersion i from IsHProjective.exists_isClosedImmersion (def-kun-projective), uses properness of the relative projective-space projection (def-nagata-projective-space-base-change and lemma-nagata-projective-space-base-change-proper), and composes with the proper closed immersion (lem-weil-pbc-closed-immersion-proper and lem-weil-pbc-proper-composition). For the second conjunct, apply ProjectiveSpace.instIsProper to ULift (Fin (N + 1)), which is finite also when N = 0. For the third conjunct use the Mathlib instances that closed immersions are finite and finite morphisms are proper, as recorded in lem-weil-pbc-closed-immersion-proper. For the fourth conjunct install the two given properness proofs as local instances and use IsProper.instCompScheme. These four proofs give the required conjunction without any new intermediate theorem.",
    "uses": [
     "def-kun-projective",
     "def-nagata-projective-space-base-change",
@@ -51,7 +51,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-projective-implies-proper.md",
-  "place": "## Proof"
+  "place": "Proof paragraph, realized using the existing IsHProjective.isProper instance and Mathlib properness instances; R2, 2026-10-18"
  },
  "mathlib_searches": [
   {
@@ -172,5 +172,15 @@
   "by": "NN",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261018T062858-L-671970",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
