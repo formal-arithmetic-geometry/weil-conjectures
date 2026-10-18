@@ -256,5 +256,30 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PadicIntegersInvertEll",
+  "declaration": "AlgebraicGeometry.ProEtale.padicIntegers_invertEll",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.padicIntegersRegularModule",
+   "AlgebraicGeometry.ProEtale.padicSubfieldIntegralModule",
+   "AlgebraicGeometry.ProEtale.padicIntegersEllSequence",
+   "AlgebraicGeometry.ProEtale.padicIntegers_invertEll"
+  ],
+  "file": "lean/Sheaf/Paper/PadicIntegersInvertEll.lean",
+  "statement": "theorem padicIntegers_invertEll (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) : ∃ j : padicIntegersRegularModule X ℓ E ⟶ padicSubfieldIntegralModule X ℓ E, j.hom = padicIntegersToPadicSubfield X ℓ E ∧ ∃ t : End (padicSubfieldIntegralModule X ℓ E), (ℓ • 𝟙 (padicSubfieldIntegralModule X ℓ E)) ≫ t = 𝟙 _ ∧ t ≫ (ℓ • 𝟙 (padicSubfieldIntegralModule X ℓ E)) = 𝟙 _ ∧ ∃ α : padicIntegersEllSequence X ℓ E ⟶ (Functor.const ℕ).obj (padicSubfieldIntegralModule X ℓ E), (∀ m : ℕ, α.app m = j ≫ t ^ m) ∧ Nonempty (IsColimit ({ pt := padicSubfieldIntegralModule X ℓ E, ι := α } : Cocone (padicIntegersEllSequence X ℓ E))) ∧ (∀ (c : Cocone (padicIntegersEllSequence X ℓ E)), IsColimit c → ∀ [MonObj c.pt.X] [IsCommMonObj c.pt.X], IsMonHom (@id (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X ⟶ c.pt.X) (c.ι.app 0).hom) → ∃ e : Mon.mk c.pt.X ≅ Mon.mk (condensedRingObj (Profinite.continuousMapRingObj E.1) X), ∀ m : ℕ, (c.ι.app m).hom ≫ e.hom.hom = (α.app m).hom) ∧ PreservesFiniteLimits (Mod.extendScalars (padicIntegersToPadicSubfield X ℓ E))",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The theorem gives the specified fraction cocone with vertex the published E_X as a module colimit and gives its canonical ring-isomorphism comparison for every colimit representative with its localization ring structure. The inverse of multiplication by ell is specified by both inverse equations; every cocone leg is j followed by its mth power, with j underlying exactly the recorded inclusion. The three helper abbreviations only specialize existing regular-module, scalar-restriction, and sequence constructors. No coefficient ring is redefined."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5b73667f0",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Node unchanged except lean (diff vs side clone); lean.statement verbatim. Clauses checked: X:Scheme.{u} arbitrary, E finite intermediate field with Fact ℓ.Prime (same binders as recorded φ), site Scheme.ProEt.topology X with Ab.{u+1}, modules = Mod over condensedRingObj O_E (project convention), sequence ofSequence with ℓ•𝟙 (rfl/simp probe), j.hom = recorded padicIntegersToPadicSubfield, t two-sided inverse of ℓ, legs j≫t^m, IsColimit in Mod, ring clause over all comm ring structures with ι0 a ring map (uniquely the localization structure, so equivalent; Mon iso with prescribed legs), flatness as PreservesFiniteLimits (Mod.extendScalars φ) (equivalent since comap preserves/reflects finite limits; same as integralScalarExtension_exact convention). Edge cases X=∅, m=0, E=Q_ℓ, ℓ=2, universes ok. Helpers are real abbrevs; no duplicates; docstrings with source+blueprint; only sorry; report sections present. nt_compile --json clean (3.2 s); axioms propext/sorryAx/choice/Quot.sound. No findings."
  }
 }

@@ -230,5 +230,23 @@
   "group": "Q06",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-1e25f9153 (reviewer sub-agent of L); spot-checked: I read the whole item and checked it against Stacks algebra.tex Tag 03C1 (lemma-semi-local-module-basis-in-submodule, l.19311) and Tag 02M9 (lemma-locally-free-semi-local-free, l.19291); labels for 00DV/05G8/00HN were checked in tags/tags. The statement is 03C1 with 'finite free' replaced by 'finite locally free of constant rank r>=1', which 02M9 makes equivalent. It is not weakened, and r>=1 is the imported statement that the citer lem-a1-finite-flat-affine-relation-quotient step 8 uses. Step 1: mE in q_i makes k->k_i injective. Step 2: q_i is in some D(f) of the cover, and the explicit fraction maps give P_q = E_q^r. Step 3: the residue isomorphism is well defined and the inverse is correct, so dim F_i = r. Step 4: a finite list x_l from N and a k-linear T_i whose k_i-span is F_i. Step 5: an explicit induction (base t=0) using lem-pc-finite-linear-avoidance, whose hypotheses hold: k infinite, V=k^L finite-dimensional, H_{i,t} proper. The coefficients lift to D, so n_{t+1} is in N. That node is closed in slopmaster2 by Subspace.iUnion_ne_univ_of_ne_top (sorry-free), so it counts as a tool and needs no tool_uses entry. Step 6: local Nakayama applied to E_q (local) and P_q (finitely generated). Step 7: the surjective endomorphism of E_q^r is bijective by the Orzech leaf. Step 8: bijective at every maximal localization implies bijective. Edge cases checked: E=0 (s=0, P=0), E a field, a product of two fields, r=1. There are no new nodes, and the DAG has no duplicate (grep for 03C1/02M9/semilocal finds only this item and its citer). The Mathlib searches cover all three kinds. One cosmetic point, left unchanged: D names both the ring and the principal opens D(f_j). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SemilocalSubmoduleBasis",
+  "declaration": "Module.exists_basis_mem_submodule_of_semilocal",
+  "file": "lean/Sheaf/RingTheory/SemilocalSubmoduleBasis.lean",
+  "statement": "theorem exists_basis_mem_submodule_of_semilocal {D : Type u} [CommRing D] [IsLocalRing D] [Infinite (IsLocalRing.ResidueField D)] {E : Type v} [CommRing E] [Algebra D E] [Finite (MaximalSpectrum E)] (hjac : Ideal.map (algebraMap D E) (IsLocalRing.maximalIdeal D) ≤ Ideal.jacobson (⊥ : Ideal E)) {P : Type w} [AddCommGroup P] [Module E P] [Module D P] [IsScalarTower D E P] (r : ℕ) (hr : 1 ≤ r) (hfree : ∃ s : Finset E, (∀ p : PrimeSpectrum E, ∃ f ∈ s, f ∉ p.asIdeal) ∧ ∀ f ∈ s, Nonempty (Module.Basis (Fin r) (Localization.Away f) (LocalizedModule.Away f P))) (N : Submodule D P) (hspan : Submodule.span E (N : Set P) = ⊤) : ∃ b : Module.Basis (Fin r) E P, ∀ i : Fin r, b i ∈ N",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b9813bc6b",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Only change: new module Sheaf.RingTheory.SemilocalSubmoduleBasis and the node's lean field; lean.statement is verbatim the file's signature. Every clause matches the node and Stacks 03C1/02M9 (algebra.tex l.19291/19311): IsLocalRing D with infinite residue field; Algebra D E; Finite (MaximalSpectrum E); map m <= jacobson bot; Module D P with IsScalarTower (restricted action, nothing extra); 1 <= r; a finite Finset cover of PrimeSpectrum E by basic opens with Basis (Fin r) over Localization.Away f of LocalizedModule.Away f P; span E N = top; conclusion: exists Basis (Fin r) E P with every vector in N. No stronger assumptions; universes u v w independent. Edge cases: E=0 holds (empty cover, P=0); r=0 excluded as in the node; fields and products of fields allowed. Gates: no definitions, sorry only, source and blueprint docstrings, all 8 proof steps in the docstring, report has Worker report and Second reading by Q21, no pro-etale content. No duplicate: Mathlib's 02M9 lemma gives a basis not inside N, nothing in Mathlib is tagged 03C1, no copy in the side clone. nt_compile.py --json on the snapshot file: 1.7 s, no errors. Only finding is cosmetic: D names both the ring and the opens D(f_j) in the node prose."
  }
 }

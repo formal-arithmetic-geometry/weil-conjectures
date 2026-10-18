@@ -269,25 +269,39 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-c98348d0e",
-  "group": "Q27",
-  "result": "fix",
-  "note": "Conclusion was weaker than the node (H3): the delivered Lean only asserted some short exact 0→B_T^a→B_T^b→L→0 with arbitrary maps, dropping the node's exact scalar sequence 0→A^a→A^b→P→0 and the maps 1⊗u, 1⊗v. The complete fix in fixes/ adds point-level u:Λ^a⟶Λ^b and v:Λ^b⟶P (matrices over Λ(*)=A) with a short exact point sequence, ties K.d(-1)0 to p_T^*u and the augmentation to p_T^*v through em/e0 to p_T^*Λ^n, states that p_T^*Λ^n is finite free and the pulled-back sequence is short exact, and keeps QuasiIso ε and the field clause. The fixed module, record statement (normalized signature) and report are in fixes/. Hypotheses match the HasFiniteConstantLocalModel convention; the wrappers use the upstream continuousMapRingObjOfUniverse (real data, no duplicate); universes, docstrings and sorry-only proof are fine. nt_compile: delivered 2.8 s clean, fixed 4.1 s clean."
+  "reviewer": "NT-stage2-cc-fed03c9c9",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Shape OK (3 files; only the node's lean record changed; record complete, statement verbatim, all 17 declarations listed; both report sections present). Every node clause matched: l prime, finite E, O_E and the coefficient topology via the recorded declarations; B_T = condensedRingObj on Scheme.ProEt T; canonical constant-to-continuous map via the sheafification transpose; L = upperStarFromPoint.mapMod of extendScalars of the constant module (canonically B_T tensor P, same shape as HasFiniteConstantLocalModel); scalar SES with injective/exact/surjective; ShortExact of the functorial images; finite-free identifications; K.d(-1)0 and ε.f 0 pinned; QuasiIso ε; rational case a=0 and L finite free; no hypothesis on T or P. Edge cases P=0, free, torsion, empty T and universes checked. No hollow defs, theorems are sorry only, docstrings and imports OK. nt_compile --json clean (3.5 s); probe confirms the ring MonObj and axioms propext/sorryAx/choice/Quot.sound. No faults."
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.Paper.FiniteConstantModelTwoTermFreeResolution",
-  "declaration": "AlgebraicGeometry.ProEtale.finite_constant_model_two_term_free_resolution",
+  "module": "Sheaf.Paper.FiniteConstantModelResolution",
+  "declaration": "AlgebraicGeometry.ProEtale.FiniteConstantModel.finite_constant_model_two_term_free_resolution",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.finiteExtensionCondensedField",
-   "AlgebraicGeometry.ProEtale.finiteExtensionCondensedIntegers",
-   "AlgebraicGeometry.ProEtale.finite_constant_model_two_term_free_resolution"
+   "AlgebraicGeometry.ProEtale.FiniteConstantModel.scalarAction",
+   "AlgebraicGeometry.ProEtale.FiniteConstantModel.scalarAction_laws",
+   "AlgebraicGeometry.ProEtale.FiniteConstantModel.scalarModule",
+   "AlgebraicGeometry.ProEtale.FiniteConstantModel.scalarMap_linear",
+   "AlgebraicGeometry.ProEtale.FiniteConstantModel.scalarModules",
+   "AlgebraicGeometry.ProEtale.FiniteConstantModel.constantFunctions",
+   "AlgebraicGeometry.ProEtale.FiniteConstantModel.scalarToContinuous",
+   "AlgebraicGeometry.ProEtale.FiniteConstantModel.scalarToContinuous_isMonHom",
+   "AlgebraicGeometry.ProEtale.FiniteConstantModel.constantScalars_commutative",
+   "AlgebraicGeometry.ProEtale.FiniteConstantModel.modelFunctor",
+   "AlgebraicGeometry.ProEtale.FiniteConstantModel.freeScalars",
+   "AlgebraicGeometry.ProEtale.FiniteConstantModel.HasResolution",
+   "AlgebraicGeometry.ProEtale.FiniteConstantModel.integralCoefficients",
+   "AlgebraicGeometry.ProEtale.FiniteConstantModel.rationalCoefficients",
+   "AlgebraicGeometry.ProEtale.FiniteConstantModel.integralModel",
+   "AlgebraicGeometry.ProEtale.FiniteConstantModel.rationalModel",
+   "AlgebraicGeometry.ProEtale.FiniteConstantModel.finite_constant_model_two_term_free_resolution"
   ],
-  "file": "lean/Sheaf/Paper/FiniteConstantModelTwoTermFreeResolution.lean",
-  "statement": "theorem finite_constant_model_two_term_free_resolution (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (T : Scheme.{u}) (Λ : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})) (hΛ : Λ = finiteExtensionCondensedIntegers l E ∨ Λ = finiteExtensionCondensedField l E) (P : Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) Λ.X) (hP : Mod.IsFinitelyPresented Λ.X P) : ∃ (a b : ℕ) (u : Mod.finiteFree Λ.X a ⟶ Mod.finiteFree Λ.X b) (v : Mod.finiteFree Λ.X b ⟶ P) (huv : u ≫ v = 0) (K : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology T) Ab) ((upperStarFromPoint T).obj Λ.X)) ℤ) (em : K.X (-1) ≅ ((upperStarFromPoint T).mapMod Λ.X).obj (Mod.finiteFree Λ.X a)) (e0 : K.X 0 ≅ ((upperStarFromPoint T).mapMod Λ.X).obj (Mod.finiteFree Λ.X b)) (ε : K ⟶ (CochainComplex.singleFunctor (Mod (Sheaf (Scheme.ProEt.topology T) Ab) ((upperStarFromPoint T).obj Λ.X)) 0).obj (((upperStarFromPoint T).mapMod Λ.X).obj P)), (ShortComplex.mk u v huv).ShortExact ∧ Nonempty (((upperStarFromPoint T).mapMod Λ.X).obj (Mod.finiteFree Λ.X a) ≅ Mod.finiteFree ((upperStarFromPoint T).obj Λ.X) a) ∧ Nonempty (((upperStarFromPoint T).mapMod Λ.X).obj (Mod.finiteFree Λ.X b) ≅ Mod.finiteFree ((upperStarFromPoint T).obj Λ.X) b) ∧ (∀ i : ℤ, i ≠ -1 → i ≠ 0 → IsZero (K.X i)) ∧ K.d (-1) 0 = em.hom ≫ ((upperStarFromPoint T).mapMod Λ.X).map u ≫ e0.inv ∧ ε.f 0 ≫ (HomologicalComplex.singleObjXSelf (.up ℤ) 0 (((upperStarFromPoint T).mapMod Λ.X).obj P)).hom = e0.hom ≫ ((upperStarFromPoint T).mapMod Λ.X).map v ∧ (∃ hB : ((upperStarFromPoint T).mapMod Λ.X).map u ≫ ((upperStarFromPoint T).mapMod Λ.X).map v = 0, (ShortComplex.mk (((upperStarFromPoint T).mapMod Λ.X).map u) (((upperStarFromPoint T).mapMod Λ.X).map v) hB).ShortExact) ∧ QuasiIso ε ∧ (Λ = finiteExtensionCondensedField l E → a = 0 ∧ ∃ n : ℕ, Nonempty (((upperStarFromPoint T).mapMod Λ.X).obj P ≅ Mod.finiteFree ((upperStarFromPoint T).obj Λ.X) n))",
+  "file": "lean/Sheaf/Paper/FiniteConstantModelResolution.lean",
+  "statement": "theorem finite_constant_model_two_term_free_resolution (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (T : Scheme.{u}) : (∀ (P : ModuleCat.{u + 1} (Padic.coefficientExtensionIntegers l E)) [Module.FinitePresentation (Padic.coefficientExtensionIntegers l E) P], HasResolution (integralModel l E T) (Mod.finiteFree (condensedRingObj (integralCoefficients l E) T)) P false) ∧ (∀ (P : ModuleCat.{u + 1} E) [Module.FinitePresentation E P], HasResolution (rationalModel l E T) (Mod.finiteFree (condensedRingObj (rationalCoefficients l E) T)) P true)",
   "branch": "newtargets-dag",
-  "by": "Q27",
+  "by": "Q37",
   "date": "2026-10-18",
-  "fixed_by": "NT-stage2-cc-c98348d0e"
+  "existing": false,
+  "note": "The integral and rational cases are the two conjuncts. Canonical constant-module and scalar-extension helpers belong to this local-model resolution and contain real data. HasResolution records the scalar sequence, its actual functorial image, both finite-free identifications, the component-normalized augmented complex, and QuasiIso of that augmentation. The rational case records a=0 and finite freeness of the final model explicitly."
  }
 }

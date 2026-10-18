@@ -122,5 +122,23 @@
   "group": "N4",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N4-1fb11e0cc (reviewer sub-agent of L); spot-checked: I read the whole item. Its statement is exactly the scheme special case of Stacks 03H4 (spaces-properties lemma-points-cartesian), with the point relation of 03BU (spaces-properties lines ~222-247); tags checked in tags/tags. The case E=S=Spec R, C=U=Spec C shows why the common field extension is needed; the empty-C and surjective-u cases also hold. Step 1: the diagonal of E is representable (def-trf-algebraic-space) and is pulled back along C x_S U -> E x E, so C x_E U is a scheme (a Yoneda check). Step 2: the common-field relation gives a compatible pair over Spec M, hence a point projecting to x and y; surjectivity then follows from def-weil-surjective-morphism. This is the Stacks proof written out and every cited statement says what is used. There are no new nodes. lem-trf-space-fibre-products-etale-covers and lem-weil-pbc-fibre-product-points are not duplicates. Batch-5 check: def-trf-algebraic-space-jointly-surjective-family is a general definition (point classes / joint surjectivity) whose dependencies are only definitions. It is not a step of the trace-formula or Poincare-duality proofs, so I accepted the citation. One B4 fault, repaired in fixes/: the statement JSON had single-escaped \\to and \\times, which decoded to TAB characters ('C<TAB>o E', 'C<TAB>imes_EU'). I rewrote it with correct escapes and inline citations of the point-set, field and surjectivity definitions. 'Scheme fibre product C x_E U' became 'sheaf fibre product, represented by a scheme', and def-pc-fibre-product was removed from stmt_deps but kept in the proof. The meaning of the statement is unchanged. No tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceFibreProductPoint",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_scheme_fibreProduct_point",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceFibreProductPoint.lean",
+  "statement": "theorem exists_scheme_fibreProduct_point {S : Scheme.{u}} (E : AlgebraicSpace S) (C U : Over S) (c : yoneda.obj C ⟶ E.obj.obj) (f : yoneda.obj U ⟶ E.obj.obj) : ∃ (P : Over S) (p : P ⟶ C) (q : P ⟶ U), IsPullback (yoneda.map p) (yoneda.map q) c f ∧ (∀ (x : C.left) (y : U.left), (∃ (K : Type u) (_ : Field K) (s : Spec (CommRingCat.of K) ⟶ S) (a : Over.mk s ⟶ C) (b : Over.mk s ⟶ U) (t : Spec (CommRingCat.of K)), a.left t = x ∧ b.left t = y ∧ c.app (op (Over.mk s)) a = f.app (op (Over.mk s)) b) → ∃ z : P.left, p.left z = x ∧ q.left z = y) ∧ ((∀ x : C.left, ∃ (y : U.left) (K : Type u) (_ : Field K) (s : Spec (CommRingCat.of K) ⟶ S) (a : Over.mk s ⟶ C) (b : Over.mk s ⟶ U) (t : Spec (CommRingCat.of K)), a.left t = x ∧ b.left t = y ∧ c.app (op (Over.mk s)) a = f.app (op (Over.mk s)) b) → Surjective p.left)",
+  "branch": "newtargets-dag",
+  "by": "N4",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f59eaefac",
+  "group": "N4",
+  "result": "pass",
+  "note": "Read the node, all 5 stmt_deps (AlgebraicSpace, IsJointlySurjective, Field, Surjective, Scheme) and Stacks spaces-properties 03BU/03H4 with proof. The Lean matches every clause: the IsPullback square represents C x_E U by a scheme P over S; 'same image in |E|' is the common field-valued representative in Type u, equivalent to the 03BU relation and the same encoding as IsJointlySurjective; the pointwise lift and the surjectivity conjunct (AlgebraicGeometry.Surjective, for every x there is a y) are correct. Edge cases (empty C/U, E a scheme, arbitrary fields, universes) are fine; no extra assumptions; no duplicate in Mathlib or the side tree. Docstrings carry source, blueprint and proof steps; the proof is sorry only; lean.statement is verbatim; the node's only change is the lean field. nt_compile.py --json on the snapshot file exited 0 with no messages (sorry warnings are off in the live lakefile); #print axioms shows sorryAx. The second-reading section is the accepted post-2026-10-17 note. No findings."
  }
 }

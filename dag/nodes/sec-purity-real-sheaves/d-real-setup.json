@@ -118,12 +118,12 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-c51f28c8a (reviewer sub-agent of L); spot-checked: Read the main-20261015 source d-real-setup.md (order 2920) and _section.md, identical in main-20261017; macros \\Fq and \\Qlb are at blueprint.toml:54/96. Read the unit and chapter records, the report, and the statements of all 17 cited nodes. Every source clause is kept: nonempty, separated (def-weil-proper-morphism, separated clause only), smooth (def-sbc-smooth-morphisms), finite type, pure dimension one (def-weil-pure-dimension, which admits the empty scheme, hence the kept nonempty clause), and connected base change to k (def-pc-base-change, def-weil-connected-scheme). e_x and q_x come from def-weil-closed-point-degree; finite type gives deg>=1. Geometric Frobenius is phi_q^{-1} by def-weil-frobenius-substitution. Local F_x is the same node applied to kappa(x), a field with q_x elements; no scheme Frobenius or path is introduced. iota is a plain field embedding. Affine open 'over k_0' is equivalent to the source wording for opens of a finite-type k_0-scheme, since Gamma of an affine open is finitely generated over k_0. The added 'p prime' is a faithful clarification matching def-weil-finite-field-q-elements: p=4, a=1, ell=2 shows the need. It is not a weakening. Edge cases: P^1 and A^1 are admitted. Empty, Spec F_q, P^1 disjoint union Spec F_q, A^1 over F_{q^2} viewed over F_q, A^1 disjoint union A^1, and non-reduced curves are excluded. Duplicate search: sk-d-real-setup is the identical sketch twin, correctly recorded as same_as; d-curve-pieces and def-weil-smooth-proper-datum are different data. No new nodes. Six searches of all three kinds are recorded, and a split rather than a Mathlib leaf is right. The unit realized fields are correct. Definition with no proof, no tool_uses, no SGA, not a target. No fixes."
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-ca258303b",
-  "group": "Q158",
+  "reviewer": "NT-stage2-cc-3abdb970c",
+  "group": "Q14",
   "result": "pass",
-  "note": "Read node, source d-real-setup.md (main-20261015, order 2920), all 17 dep records, module and report. Every clause is rendered with the recorded declarations: p prime, a>=1, Fintype field k0 with card p^a, IsAlgClosure k0 k, prime l != p, IsAlgClosure Q_l Qbar, iota : Qbar ->+* C; IsCurve = Nonempty, IsSeparated, Smooth, LocallyOfFiniteType and QuasiCompact, IsPureDimension 1, ConnectedSpace of pullback along Spec k -> Spec k0; e_x = residueDegree, q_x = q^e_x; F = existing geometricFrobeniusAlgEquivOfAlgebraic (exponent card k0 = q); F_x uses the same construction on kappa(x), finite via existing finite_residueField_of_isClosed (exponent q_x); IsAffineOpen = nonempty open immersion over k0, iso over k0 to Spec A with A finite type. Edge cases correct. Universes u/v/w are independent; k in u is forced by Scheme.{u} and harmless. No sorry, no hollow data, docstrings carry source and blueprint tag, lean.statement 'structure Setup' matches the file, no duplicate found. nt_compile --json at Sheaf/Paper/RealSheavesSetup.lean: clean, 20.0 s, no warnings. Second-reading section is the standard post-2026-10-17 note. No findings requiring change."
+  "note": "Read the node, all 5 stmt_deps with their recorded Lean, both delivered modules, the report and the exact upstream declarations (fiberAutBaseChange, weilGroup/weilGroupDeg bodies, geometricFiber, IsAdicLisseSheaf, adicUpperStarLowerStarAdjunction, WeilSheaf.IsLisse/IsIrreducibleLisse, IsConstructibleEtaleModuleSheaf). Clause (1): connected Noetherian stalkwise-normal V (no regularity), dense open immersion, surjectivity of the canonical fiberAutBaseChange on Aut(fiber s), the node's own pi1, plus the connected-cover form; the model API would need an unassumed connectedness. Clause (2): verbatim bodies of the weilGroup/weilGroupDeg abbrevs, avoiding derivable GeometricallyConnected binders; rho fixed by its pair formula; degree, geometric-kernel and full surjectivity. Clause (3): actual finite-level and adic units; pro-etale AdicSheaf is the chapter's recorded qbar framework (WeilSheaf, curveWeilMiddleExtension), not a substitute; regularity and QuasiCompact j correctly dropped. Clause (4): full D.IsCurve; lisse preserved, Hom bijection, irreducibility preserved, for Weil and geometric versions. Clause (5): constructibility of ordinary lowerStar for every finite Lambda and FLC F. The d-real-setup §1(B) repair only appends ringChar_eq (sorry) and a Fact instance; without it the item fails to compile. Node diffs are lean only; statement verbatim; 8 sorry proofs; docstrings, line lengths, names and report sections OK. nt_compile --json on both files: rc 0, clean (2.6 s / 3.6 s); diagnostics confirmed visible by an error probe. Edge cases: empty V, identity j, singular normal V, zero ring, zero sheaves, U=C. Non-blocking: plan imports of the upstream-only prop-wf-weil-sheaf-representation-equivalence and Mathlib leaves absent."
  },
  "lean": {
   "module": "Sheaf.Paper.RealSheavesSetup",
@@ -137,14 +137,16 @@
    "RealSheaves.Setup.closedPointCardinality",
    "RealSheaves.Setup.frobenius",
    "RealSheaves.Setup.localFrobenius",
-   "RealSheaves.Setup.IsAffineOpen"
+   "RealSheaves.Setup.IsAffineOpen",
+   "RealSheaves.Setup.ringChar_eq",
+   "RealSheaves.Setup.coefficientCharFact"
   ],
   "file": "lean/Sheaf/Paper/RealSheavesSetup.lean",
   "statement": "structure Setup",
   "branch": "newtargets-dag",
-  "by": "Q158",
-  "date": "2026-10-17",
+  "by": "Q14",
+  "date": "2026-10-18",
   "existing": false,
-  "note": "The structure packages exactly the field choices; the same module supplies the chapter curve convention, e_x and q_x, the existing geometric Frobenius specialized globally and locally, and the nonempty finite-type affine-open convention. All data are explicit, with no sorry."
+  "note": "Section 1(B) interface repair: the recorded Setup supplies card_eq = p^a, p prime, a positive, and l != p, but exposes neither its stated characteristic p nor the Fact (ringChar k0 != l) required by the recorded WeilSheaf pullback API. Preserve the entire existing module and Setup interface. Add the named characteristic theorem (the first paragraph of this node), with its proof postponed, and a real-data Fact instance obtained from that theorem and the existing l_ne_p. The consumer now uses the original datum alone, with no additional characteristic hypothesis."
  }
 }

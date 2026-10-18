@@ -278,5 +278,36 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-80e6ddc06 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, its 8 steps, the statement of all 23 cited nodes, and the proofs of lem-weil-isomorphism-derived-pullback, lem-weil-constant-coefficient-objects-constructible, lem-pur-integral-operations-scalar-extension and lem-weil-finite-free-completed-scalar-comparison. Source checked: blueprint main-20261015 def-weil-ordinary-compact-cohomology, coefficient-object paragraph (lines 51-64), against the master copy. No SGA source, no new nodes, no duplicate (lem-zl-constant-weil-datum and lem-fix-weil-operations state different things). Step checks: step 2's square c_S F j = j c_R recomputed through the projections using naturality for iota_m, with no identification of uniformizers. Step 3: chi mu^{-1}(s) = (pi^L_m(s)) with zero shifted component, which is the map phi of the constant-coefficient lemma's step 9. Step 4: the surjective-tower lemma is used only for maps out of degree-0 sheaves. Step 5: the multiplication identity holds on pure tensors and descends through sheafification. Step 6: hypotheses of the scalar-extension lemma (f an isomorphism, ell invertible, R in D^b_c) hold. Step 7: rationalization formulas and the inverse condition are correct. Step 8: the representative psi^{-1} alpha_{Ql,E} matches the constant-coefficient lemma's u, so the For claim holds. Edge cases checked: E=L, empty Y, Y_0=Spec F_{q^2} (Frobenius swaps the components), ramified extension, tower Q_l in E in L. One fault, fixed: clause 1 cited 'the canonical isomorphism of [lem-weil-constant-coefficient-objects-constructible]', whose statement only says an isomorphism exists. Clause 1 is false for other isomorphisms: for Y_0=Spec F_{q^2}, (a,b)*alpha with a != b is not equivariant. I pinned alpha in the statement as the image of beta_{E,L}, the map whose inverse has strict-cone components pi^L_m and zero shifted component. stmt_deps gains def-weil-integral-scalar-extension and def-weil-completed-integral-coefficients. Step 3 gains the identifying computation and cites clause 3 of lem-weil-proetale-surjective-tower-derived-limit. The 3 declared tool uses are accepted (the unit has no steps or uses). Upstream note for the maintainer: lem-weil-isomorphism-derived-pullback (lambda) and lem-pur-integral-operations-scalar-extension (the pullback/scalar-extension comparison) state only natural isomorphisms but are used as data. Steps 4 and 6 depend on their constructions, which I verified match. Their statements should record these normalizations.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstantWeilStructureStageIndependence",
+  "declaration": "WeilConjectures.constantWeilStructure_stageIndependent",
+  "declarations": [
+   "WeilConjectures.constantWeilScalarPullbackComparison",
+   "WeilConjectures.constantWeilScalarComplex",
+   "WeilConjectures.constantWeilScalar_mem_heart",
+   "WeilConjectures.constantWeilScalarSheaf",
+   "WeilConjectures.constantWeilRationalScalar_equivariant",
+   "WeilConjectures.constantWeilStage_mem_heart",
+   "WeilConjectures.constantWeilStageSheaf",
+   "WeilConjectures.constantWeilStageScalarIso",
+   "WeilConjectures.constantWeilStageComparison",
+   "WeilConjectures.constantWeilStructure_stageIndependent"
+  ],
+  "file": "lean/Sheaf/Paper/ConstantWeilStructureStageIndependence.lean",
+  "statement": "theorem constantWeilStructure_stageIndependent (A : AlgebraicallyClosedCoefficients.Index l Ω) : ∃ φ : constantWeilStageSheaf D l hl Y₀ Ω A ≅ constantWeilAlgebraicallyClosedSheaf l D hl Y₀ Ω, (sfCommonStageWeilForget D l hl Y₀ Ω).map φ.inv.hom = constantWeilStageComparison D l hl Y₀ Ω A",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Clause 1 is constantWeilRationalScalar_equivariant; clause 2 is constantWeilStructure_stageIndependent. Both resulting isomorphisms are in the full constructible Weil-sheaf subcategories, with explicit forgetful-map normalization. Helper definitions only name the recorded pullback/scalar comparison, its fixed pair, the heart restrictions and the common-stage representative."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4f19764f8",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Both delivered modules compile clean via nt_compile.py --json on the side overlay (ScalarNormalization 12.8 s/8.3 s, StageIndependence 9.0 s/9.2 s), no warnings. Clause-by-clause match: D, l, hl (invertibility derived), finite-type Y0 (LocallyOfFiniteType+QuasiCompact), geometricFrobenius as scheme iso, Omega in an independent universe, Index A<=B with coefficientInclusion. beta = recorded integralScalarExtensionComparisonOfUniverses at R[0] itself then Q(eta)^-1, eta uniquely fixed (1|->1(x)1 at every quotient and V, zero shifted component) by module maps out of the regular module over the completed ring, hence s|->pi^L_m(s). alpha = unique iso whose hom is HEq the localized beta (propositional object formula, so meaningful). Clause 1: pullback.map alpha >> theta_L = (comparison.symm >> scalar theta_E) >> alpha, direction checked, plus the Weil-sheaf iso forgetting to alpha. Clause 2: common-stage Weil-sheaf iso whose inverse forgets to ofHom of alpha_{Ql,A} with the recorded associator, self-transition and stage-transition equality. Edge cases: empty Y, E=L, E=Ql, ramified, Spec F_{q^2}, universes. Section 1(B) wrapper justified (old records only Nonempty, older category). Only lean changed in both node copies; the old Parts 1-3 are re-exported (checked by #check). Statements verbatim; docstrings carry source and blueprint id; sorry-only; no stronger assumptions; no hollow defs. Minor observation, not a fault: the dependency record's main declaration is a def whose spec is in the listed _existsUnique theorem."
  }
 }

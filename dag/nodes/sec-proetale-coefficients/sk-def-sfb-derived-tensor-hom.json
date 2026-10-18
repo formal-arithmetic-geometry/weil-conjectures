@@ -693,5 +693,40 @@
     }
    ]
   }
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.derivedHom",
+  "declarations": [
+   "DerivedCategory.hasDerivedMonoidalCategory",
+   "DerivedCategory.monoidalClosed",
+   "CategoryTheory.Mod.derivedMonoidalCategory",
+   "CategoryTheory.Mod.isLeftDerivedFunctor₂_curriedTensor",
+   "AlgebraicGeometry.ProEtale.CondensedRing.derivedTensor",
+   "AlgebraicGeometry.ProEtale.CondensedRing.isLeftDerivedFunctor₂_derivedTensor",
+   "AlgebraicGeometry.ProEtale.CondensedRing.laxMonoidal_Q",
+   "AlgebraicGeometry.ProEtale.CondensedRing.derivedHom",
+   "AlgebraicGeometry.ProEtale.CondensedRing.derivedTensorHomAdjunction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.derivedTensorHomAdjunction₂",
+   "DerivedCategory.exists_kFlat_iso",
+   "DerivedCategory.tensorLeftCounit",
+   "DerivedCategory.tensorRightCounit",
+   "DerivedCategory.isIso_tensorLeftCounit",
+   "DerivedCategory.isIso_tensorRightCounit"
+  ],
+  "statement": "noncomputable def derivedHom :\n    (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj Λ X)))ᵒᵖ ⥤\n      DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n        (condensedRingObj Λ X)) ⥤\n        DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n          (condensedRingObj Λ X))",
+  "branch": "slopmaster2",
+  "by": "NH",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Existing multi-component convention binding, matching the blueprint unit's own existing interfaces. The primary module and lean.declarations export the Layer B relative derived tensor, its two-variable derived property, lax Q, closed internal Hom, and parameter/unary adjunctions, with the general K-flat machinery. Layer A is the existing AlgebraicGeometry.ProEtale.derivedTensor, isLeftDerivedFunctor₂_derivedTensor and laxMonoidal_Q in WeilConjectures.SixFunctors.ProEtale.Derived.Tensor, and AlgebraicGeometry.ProEtale.derivedHom, derivedTensorHomAdjunction and derivedTensorHomAdjunction₂ in WeilConjectures.SixFunctors.ProEtale.Derived.Hom; import that Hom module as well to use both layers. These Layer A components are recorded here rather than in lean.declarations because the primary Layer B Hom module does not export them. Both tensors are curriedTensor on the specified K-flat derived monoidal structures; both Homs are MonoidalClosed.internalHom. General module monoidality is in WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory, and K-flat comparisons are in WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.Shift. No duplicate definition, arbitrary tensor or post-derived balancing is introduced. Sources confirmed through scompile.py --source and a joint consumer checked cleanly through scompile.py. The slopmaster2 label denotes the published WeilConjectures source root, including the side framework."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a68ce710e",
+  "group": "NH",
+  "result": "pass",
+  "note": "Existing-match delivery. The node diff adds only the lean field. The record binds CondensedRing.derivedHom (side ModuleObject/Derived/Hom.lean:61-73, statement verbatim) plus 15 Layer B and generic declarations. Layer A (ProEtale.derivedTensor/derivedHom and adjunctions) is named in the note and also recorded by the landed stmt_deps def-sfb-derived-tensor-sheaves and def-sfb-derived-hom-sheaves. These are exactly the declarations the blueprint section lists. Every hypothesis matches (Grothendieck abelian, MonoidalPreadditive, Symmetric, MonoidalClosed, HasFunctorialFlatResolution, arbitrary commutative condensed Λ through condensedRingObj) with nothing stronger. Every clause matches: K-flat two-variable derived tensors in both layers; Layer B derives the balanced relative tensor; one-sided K-flat computation via tensorLeft/RightCounit isos; lax Q; closedness from the real monoidalClosed construction; Homs = MonoidalClosed.internalHom of type Dᵒᵖ⥤D⥤D; the parameter adjunction ⊣₂ gives naturality in K. Edge cases (empty scheme, zero ring, unbounded) and universes (u' free, u+1 Hom convention as in the landed deps) are fine. def-sfb-derived-hom-modules is a Mathlib leaf whose specialization is the primary declaration. nt_compile probes are clean: all 15 declarations resolve from the primary module alone, derivedHom=internalHom and derivedTensor=curriedTensor hold by rfl, axioms are standard, and the Layer A names check through the second import. The report has a Worker report and a Second reading by NH. No findings."
  }
 }

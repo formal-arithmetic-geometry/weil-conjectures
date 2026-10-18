@@ -369,5 +369,23 @@
     }
    ]
   }
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+  "declaration": "AlgebraicGeometry.ProEtale.profiniteToProEt",
+  "statement": "noncomputable def profiniteToProEt : Profinite.{u} ⥤ specZ.{u}.ProEt where",
+  "branch": "slopmaster2",
+  "by": "NJ",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "The published pro-etale framework defines exactly this functor. Its object map is ProEt.mk (toSpecZ (profiniteToScheme.obj S)), where profiniteToScheme.obj S is Spec (LocallyConstant S ℤ); its morphism map is induced by LocallyConstant.comapRingHom on precomposition, and comp_toSpecZ proves the morphisms lie over Spec ℤ. The declaration therefore matches the node construction and variance, including the small pro-etale target."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0d7d3ee5b",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Existing record AlgebraicGeometry.ProEtale.profiniteToProEt (WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic, branch slopmaster2 as in the other landed framework records). The statement is verbatim with side l.186 and live l.206, and only the lean field changed. Clause check: obj = ProEt.mk (toSpecZ (Spec LC(S,ℤ))), structure map = Spec of the constant-function map (checked by terminality), weakly étale via the lem-sfb-lc-weakly-etale instance, map = Spec.map (comapRingHom g) by rfl (contravariant), over Spec ℤ by comp_toSpecZ, functor laws present. Universes Profinite.{u}/Scheme.{u} with no extra constraint, target is Mathlib Scheme.ProEt, and the empty, point and finite cases are fine. The landed parent sk-def-sfb-pullback-from-point uses the same functor. The nt_compile check file passed in 2.5 s and print axioms shows no sorryAx. Worker report and Second reading by NJ are present. No findings."
  }
 }

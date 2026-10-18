@@ -188,5 +188,23 @@
   "group": "NX",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-ed47a903a (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all 4 steps, every cited statement, the unit sk-p-real-rankin and the citer lem-a1-qc-map-affine-etale-neighbourhood. I checked the sources against Stacks spaces-properties.tex Tag 03FZ (lemma-separated-cover, l.774-819) and schemes.tex 01KV and 01KU. The statement matches the base in substance and is faithful to the first assertion of 03FZ. The changes only make U's S-structure, its absolute separatedness and c:h_C->E explicit, and add def-weil-closed-immersion to stmt_deps. No hypothesis was added or dropped. Step 1: clause (b) of the cancellation leaf applied to U->S->Spec Z gives U->S separated, so delta is a closed immersion. Step 2 is elementary: I verified that the square d/delta/id/j is cartesian, since U x_P R(T) = {z}. Step 3: the closed-immersion base-change leaf gives d closed, and also every scheme base change of d, which is the representable separatedness as the statement defines it. Step 4: I verified that the square Delta_{W/C}/d/pr2/k is cartesian, so W->C is separated. Etaleness is retained but not needed, which is correct. There are no new nodes. The rg duplicate search found no node stating the item (I checked lem-a1-separated-etale-space-scheme, lem-a1-space-separated-lqf-permanence, lem-trf-affine-etale-relation-separated-lqf and the scheme-only base-change nodes). Edge cases: empty U or C; the doubled-origin line E with two A^1 charts shows separatedness of E is not needed; a doubled-origin U over A^1 shows absolute separatedness of U is needed. No SGA, no cycle, no tool_uses, no fixes. One maintainer issue: the item's source.place still cites Morphisms Tag 01UA, which is lemma-fppf-open and so wrong, even though the report says it was corrected. source is maintainer-owned, so I could not fix it; review.md gives a suggested corrected value."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SeparatedEtaleChart",
+  "file": "lean/Sheaf/AlgebraicGeometry/SeparatedEtaleChart.lean",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.separated_etale_chart",
+  "statement": "theorem separated_etale_chart {S : Scheme.{u}} (E : AlgebraicSpace S) (U : Over S) [Scheme.IsSeparated U.left] (u : yoneda.obj U ⟶ E.obj.obj) (hu : IsEtale u) : AlgebraicSpace.IsRepresentableWith (fun _ _ p ↦ IsClosedImmersion p.left) (CategoryTheory.Limits.pullback.lift (𝟙 (yoneda.obj U)) (𝟙 (yoneda.obj U)) (by simp) : yoneda.obj U ⟶ CategoryTheory.Limits.pullback u u) ∧ ∀ (C : Over S) (c : yoneda.obj C ⟶ E.obj.obj), ∃ (W : Over S) (p : W ⟶ C) (q : yoneda.obj W ⟶ yoneda.obj U), IsPullback q (yoneda.map p) u c ∧ IsSeparated p.left",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-18"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-533b47560",
+  "group": "N9",
+  "result": "pass",
+  "note": "Only the module, the node's lean record and the report changed; the node is otherwise identical to the base and lean.statement matches the file verbatim. Each clause matches the node and Stacks 03FZ (spaces-properties l.774-780): S a scheme; E : AlgebraicSpace S; U : Over S with Mathlib Scheme.IsSeparated (absolute); u : h_U -> E with AlgebraicSpace.IsEtale (representable, built on Mathlib Etale); the canonical diagonal pullback.lift (1)(1) is a closed immersion after every scheme base change via IsRepresentableWith; for all C and c, a pullback square representing C x_E U with IsSeparated p.left. No extra hypotheses or universe restriction; empty U or C covered. Name resolution confirmed by printing the signature with full names; axioms include sorryAx. No new definitions. The first clause is IsSeparatedPresheafMap written out using the recorded def-trf-algebraic-space declarations: not a second definition. Docstrings have source, blueprint tag and proof steps; lines within 100 characters; imports used. nt_compile.py --json: rc 0, no errors or warnings; a deliberately broken copy errors, so the file is really elaborated. Informational only: the node's maintainer-owned source field still cites Morphisms 01UA."
  }
 }

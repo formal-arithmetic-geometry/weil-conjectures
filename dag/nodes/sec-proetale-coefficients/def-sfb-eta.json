@@ -256,5 +256,23 @@
     }
    ]
   }
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+  "declaration": "AlgebraicGeometry.ProEtale.condensedPushforwardHom",
+  "statement": "noncomputable def condensedPushforwardHom :\n    condensedRingObj Λ Y ⟶ (f)_*[Ab.{u + 1}].obj (condensedRingObj Λ X)",
+  "branch": "slopmaster2",
+  "by": "Q09",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Exact existing declaration in the published upstream pro-etale module-object framework, confirmed by scompile.py --source. In the section Λ is a sheaf on coherentTopology Profinite.{u} with values in Ab.{u + 1}, with ring structure [MonObj Λ], and f : X ⟶ Y is arbitrary for X Y : Scheme.{u}. Its body is (upperStarLowerStarAdjunction Ab.{u + 1} f).unitAlgHom (condensedRingObj Λ Y) followed by lowerStar.map (condensedPullbackHom Λ f). Adjunction.unitAlgHom is an abbreviation of adj.unit.app, so this is exactly the required unit followed by pushforward of alpha_f, equivalently its adjunction mate. No finiteness, commutativity, or morphism-property hypothesis is imposed. The branch label denotes the published WeilConjectures source root, resolved by the side overlay rather than the older local source checkout."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6d0c8d436",
+  "group": "Q09",
+  "result": "pass",
+  "note": "Existing binding def-sfb-eta -> AlgebraicGeometry.ProEtale.condensedPushforwardHom (side ModuleObject/Basic.lean:415-420); the delivery commit changes only the node lean field and the report, and the rest of the node is identical to the repo. Body is upperStarLowerStarAdjunction.unitAlgHom (an abbrev for unit.app) at condensedRingObj Λ Y followed by lowerStar.map (condensedPullbackHom Λ f), exactly the recorded adjunction, α_f and pulled-back coefficients. Any f in Scheme.{u}, coefficients Ab.{u+1}, no extra hypotheses; [MonObj] is not even needed. Statement field verbatim. nt_compile --json probe: rfl to unit≫f_*α_f and equality with adj.homEquiv (mate) accepted, axioms propext/Classical.choice/Quot.sound only, no errors. Edge cases (identity, empty schemes, zero/noncommutative Λ, universes) covered. Worker report is real; the second-reading section is the disclosed post-2026-10-17 note. No findings."
  }
 }

@@ -179,5 +179,26 @@
   "group": "Q123",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q123-3b78234b1 (reviewer sub-agent of L); spot-checked: The delivered proof cites old def-fd/thm-fd nodes outside sk-cor-plancherel’s current route and omits required source places on both steps. Corrected DAG JSON uses sk-thm-fourier-trace-formula, sk-lem-orthogonality, sk-def-trace, adds explicit handling of the Fourier sign, and preserves the exact target statement.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.WeilFourierPlancherel",
+  "declaration": "WeilConjectures.weilFourierTrace_plancherel",
+  "declarations": [
+   "WeilConjectures.weilFourierTrace_plancherel"
+  ],
+  "file": "lean/Sheaf/Paper/WeilFourierPlancherel.lean",
+  "statement": "theorem weilFourierTrace_plancherel (F : FourierSetting.{u}) (Ψ : AddChar (ZMod F.field.p) F.coefficients.Qbar) (hΨ : Ψ ≠ 1) (ι : F.coefficients.Qbar →+* ℂ) (c : Compactification (sfFourierSnd F).left) (K : sfCommonStageWeilComplex F.field F.coefficients.l F.coefficients.different (sfFourierLine F) F.coefficients.Qbar) (n : ℕ) (hn : 1 ≤ n) : (∑ᶠ y : F.field.extensionPoints (sfFourierLine F) n hn, ‖ι (weilTraceFunction F.field F.coefficients.l F.coefficients.different F.coefficients.Qbar (sfFourierLine F) (sfWeilFourierTransformObj F Ψ c K) n hn y)‖ ^ 2) = (F.field.q : ℝ) ^ n * ∑ᶠ x : F.field.extensionPoints (sfFourierLine F) n hn, ‖ι (weilTraceFunction F.field F.coefficients.l F.coefficients.different F.coefficients.Qbar (sfFourierLine F) K n hn x)‖ ^ 2",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fcc0bfc53",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node (FourierSetting, Ψ≠1 per sk-def-char, ι:Qbar→+*ℂ, K in sfCommonStageWeilComplex on A¹ as used by the recorded weilTraceFunction, n≥1, finsum over extensionPoints = F_{q^n}, q^n in ℝ); no added hypotheses; compactification c is the data Rp₂! requires. sk-def-ft §1(B) record justified: upstream Etale.fourierTransform is ordinary-étale only and stays in declarations; the new sfWeilFourierTransformObj is built only from existing pieces (p₁* with its existing Frobenius compatibility; the landed Artin–Schreier kernel of xy shifted by 1, definitionally fourierAdicKernel, with canonical Frobenius structure from the k₀-model via galoisMap_projections; the canonical tensor comparison; zlComplexShriek). Only stmt citer of sk-def-ft is this item. Only lean fields changed in both nodes; statements verbatim. nt_compile --json of both files: rc 0, no errors or warnings (6.0 s/4.0 s); an injected error confirmed real elaboration; #print axioms shows only sorryAx beyond the standard axioms. Report has Worker report and a substantive Second reading by Q25. Edge cases fine (n=0 excluded, trivial Ψ excluded as required, char 2, zero complex). Minor notes only: kernel rebuilt by hand instead of reusing fourierAdicKernel, two unused imports, and sk-thm-fourier-trace-formula should be stated on sfWeilFourierTransformObj/weilTraceFunction so the Plancherel proof can use it."
  }
 }
