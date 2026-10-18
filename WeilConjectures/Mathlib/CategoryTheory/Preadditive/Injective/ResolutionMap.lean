@@ -40,4 +40,14 @@ lemma map_cocomplex_d {Z : C} (R : InjectiveResolution Z) (i j : ℕ) :
     (R.map F).cocomplex.d i j = F.map (R.cocomplex.d i j) :=
   rfl
 
+variable {F} in
+/-- A natural endomorphism `τ` of `F` induces an endomorphism of the image `F(R)` of an injective
+resolution `R` of `Z`, over `τ_Z`. -/
+@[simps]
+noncomputable def mapHomOfNatTrans (τ : F ⟶ F) {Z : C} (R : InjectiveResolution Z) :
+    InjectiveResolution.Hom (R.map F) (R.map F) (τ.app Z) where
+  hom := (NatTrans.mapHomologicalComplex τ _).app R.cocomplex
+  ι_f_zero_comp_hom_f_zero := by
+    simp [HomologicalComplex.singleMapHomologicalComplex, HomologicalComplex.single_map_f_self]
+
 end CategoryTheory.InjectiveResolution

@@ -2513,6 +2513,7 @@ public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyRightDerived
 public import WeilConjectures.CategoryTheory.Sites.SheafCohomologyTorsion
 public import WeilConjectures.CategoryTheory.Sites.SheafComposeMonoidal
 public import WeilConjectures.CategoryTheory.Sites.SheafComposePushforwardMonoidal
+public import WeilConjectures.CategoryTheory.Sites.SheafSmul
 public import WeilConjectures.CategoryTheory.Sites.SheafifyGrp
 public import WeilConjectures.CategoryTheory.Sites.SigmaPresheaf
 public import WeilConjectures.CategoryTheory.Sites.SingletonSheaf
