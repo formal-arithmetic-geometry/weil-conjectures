@@ -88,6 +88,11 @@ variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra ℚ_[l] E]
 
 variable {X Y : Scheme.{u}}
 
+-- `𝐌` is elaborated with the ring structure `CommRing.toRing` of `Shrink 𝒪_E`, as in the
+-- lemmas over a general commutative ring `Λ` used here: comparing it with `Shrink.instRing` in
+-- the kernel is very expensive.
+attribute [-instance] Shrink.instRing
+
 /-- **The reconstruction step of the projection formula at the integral stage.** If both sides
 `Rf_! K ⊗ᴸ L` and `Rf_!(K ⊗ᴸ Lf^* L)` of the projection map are derived complete for `𝔪_E`, and
 the reduction of the projection map modulo `𝔪_E` is an isomorphism, then the projection formula
@@ -137,15 +142,6 @@ lemma exists_natCast_mem_maximalIdealShrink_pow (n : ℕ) :
   have := Ideal.mem_map_of_mem (PadicAlgCl.shrinkRingEquiv.{w, u} l E) hmem
   rwa [map_natCast] at this
 
-/-- The reduction modulo an ideal only depends on the ideal: transport of invertibility along an
-equality of ideals. -/
-lemma isIso_reductionModIdeal_map_of_eq {Λ : Type (u + 1)} [CommRing Λ] {Z : Scheme.{u}}
-    {J J' : Ideal Λ} (hJ : J = J')
-    {A B : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
-    {g : A ⟶ B} (h : IsIso ((reductionModIdeal Λ Z J').map g)) :
-    IsIso ((reductionModIdeal Λ Z J).map g) :=
-  hJ ▸ h
-
 /-- Blueprint `thm-sf-pf-field`: the compatibility with finite reduction, and Steps 1 and 2 of
 `sk-thm-sf-pf-adic`.
 
@@ -168,11 +164,8 @@ theorem isIso_reductionModIdeal_pow_map_projectionMap_of_boundedConstructible
   obtain ⟨ϖ, hϖ, hI⟩ :=
     PadicAlgCl.exists_mem_nonZeroDivisors_maximalIdealShrink_eq_span.{w, u} l E
   obtain ⟨N, hN, hNJ⟩ := exists_natCast_mem_maximalIdealShrink_pow l E n
-  rw [hI] at hNJ
-  have h := isIso_reductionModIdeal_map_projectionMap_of_nsmul hϖ n hN hNJ f K L hKc.1 hKt hLc
-  refine isIso_reductionModIdeal_map_of_eq (congrArg (· ^ n) hI) ?_
-  set_option pp.explicit true in trace_state
-  all_goals sorry
+  exact isIso_reductionModIdeal_map_projectionMap_of_eq_span_pow hϖ n (by rw [hI]) hN hNJ f K L
+    hKc.1 hKt hLc
 
 /-- Steps 1 and 2 of blueprint `sk-thm-sf-pf-adic`: the reduction of the projection map modulo
 `𝔪_E` is an isomorphism.

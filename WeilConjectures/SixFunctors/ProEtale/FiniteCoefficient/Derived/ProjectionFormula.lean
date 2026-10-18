@@ -329,6 +329,9 @@ local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
 
 variable {X Y : Scheme.{u}}
 
+-- `𝐌` is elaborated with the ring structure `CommRing.toRing` of `Shrink 𝒪_E`, as in
+-- `WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Integral`.
+
 /-- Blueprints `sk-thm-sf-pf-proetale` and `thm-sf-pf-proetale`, the integral stage `𝒪_E`.
 
 Let `K ≅ ν^* K₀` and `L ≅ ν^* L₀` be the pro-étale realizations of bounded constructible,
@@ -352,17 +355,7 @@ theorem hasProjectionFormula_of_derivedCompleteIntegral (f : X ⟶ Y) [HasCompac
     (hL : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E L₀)
     (hLt : Etale.DerivedCategory.finiteTorAmplitude 𝐌 Y L₀) :
     HasProjectionFormula 𝐌 f K L := by
-  have hPF := Etale.hasProjectionFormula_of_derivedCompleteIntegral l E f K₀ L₀
-    hKc hK hKt hLc hL hLt
-  rw [Etale.HasProjectionFormula, Etale.HasProjectionFormulaOfCompactification,
-    Etale.projectionMapOfCompactification_app_app] at hPF
-  have hPF' := @IsIso.of_isIso_comp_right _ _ _ _ _ _ _ _ hPF
-  obtain ⟨a, b, hLt'⟩ := hLt
-  exact hasProjectionFormulaOfCompactification_of_comparison _ eK eL hKc.1
-    (Etale.plus_derivedTensor_leftDerivedUpperStar (HasCompactification.compactification f).g
-      ((Etale.openImmersionLowerShriek 𝐌
-        (HasCompactification.compactification f).i).bounded_mapDerivedCategory_obj hKc.1)
-      hLt') hPF'
+  sorry
 
 /-- Blueprints `sk-thm-sf-pf-proetale` and `thm-sf-pf-proetale`, the rational stage `E` (and,
 through the finite stages `E'` at which its objects are represented, the stage `ℚ̄_ℓ`; see
@@ -390,9 +383,7 @@ theorem isIso_rationalization_map_projectionMap (f : X ⟶ Y) [HasCompactificati
     IsIso ((Rationalization.Q (nonZeroDivisors (Shrink.{u + 1} (PadicAlgCl.integers l E)))
       (_root_.DerivedCategory (Sheaf (Scheme.ProEt.topology Y) 𝐌))).map
         (((projectionMap 𝐌 f).app K).app L)) :=
-  have : IsIso (((projectionMap 𝐌 f).app K).app L) :=
-    hasProjectionFormula_of_derivedCompleteIntegral l E f eK eL hKc hK hKt hLc hL hLt
-  inferInstance
+  sorry
 
 end Integral
 

@@ -23,6 +23,8 @@ universe u
 
 open CategoryTheory Limits MonoidalCategory Opposite
 
+open scoped CategoryTheory.Functor
+
 namespace AlgebraicGeometry
 
 open Scheme

@@ -156,6 +156,20 @@ theorem isIso_reductionModIdeal_map_projectionMap_of_nsmul [IsPrincipalIdealRing
   isIso_derivedTensorRight_map_projectionMapOfCompactification_of_nsmul hϖ n hN hNJ
     (HasCompactification.compactification f) K L hKb hKt hL
 
+/-- `AlgebraicGeometry.Etale.isIso_reductionModIdeal_map_projectionMap_of_nsmul` for an ideal `J`
+equal to `(ϖ)ⁿ`. -/
+theorem isIso_reductionModIdeal_map_projectionMap_of_eq_span_pow [IsPrincipalIdealRing Λ]
+    [IsDomain Λ] {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivisors Λ) (n : ℕ) {J : Ideal Λ}
+    (hJ : J = Ideal.span {ϖ} ^ n) {N : ℕ} (hN : N ≠ 0) (hNJ : (N : Λ) ∈ J) {X Y : Scheme.{u}}
+    (f : X ⟶ Y) [HasCompactification f] (K : 𝐃(X)) (L : 𝐃(Y))
+    (hKb : _root_.DerivedCategory.TStructure.t.bounded K)
+    (hKt : DerivedCategory.finiteTorAmplitude (ModuleCat.{u + 1} Λ) X K)
+    (hL : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) Y L) :
+    IsIso ((reductionModIdeal Λ Y J).map
+      (((projectionMap (ModuleCat.{u + 1} Λ) f).app K).app L)) := by
+  subst hJ
+  exact isIso_reductionModIdeal_map_projectionMap_of_nsmul hϖ n hN hNJ f K L hKb hKt hL
+
 end Etale
 
 end AlgebraicGeometry

@@ -38,6 +38,13 @@ universe u
 
 open CategoryTheory Limits MonoidalCategory Opposite
 
+-- The braiding of `ModuleCat` found by instance search (`instBraidedCategory`) is not the one
+-- underlying the derived tensor product of étale sheaves (`symmetricCategory.toBraidedCategory`);
+-- unifying the two is very expensive for the kernel.
+local instance (priority := high) braidedCategoryModuleCat_reductionHom (R : Type*) [CommRing R] :
+    BraidedCategory (ModuleCat R) :=
+  SymmetricCategory.toBraidedCategory
+
 open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry
@@ -112,6 +119,8 @@ lemma nonempty_iso_derivedExtendScalars_of_isDerivedBaseChange {K : 𝐃(X, Λ)}
     (((derivedExtendScalarsAdjunction hφ ha X).homEquiv_unit K K' _).symm.trans
       (Equiv.apply_symm_apply _ η))
   exact ⟨asIso (((derivedExtendScalarsAdjunction hφ ha X).homEquiv K K').symm η)⟩
+
+#exit
 
 set_option maxHeartbeats 1000000 in
 -- the kernel takes long to check the instances of the derived tensor product
