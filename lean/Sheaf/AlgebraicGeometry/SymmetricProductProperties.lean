@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.SymmetricProductSections
 public import Sheaf.AlgebraicGeometry.SymmetricProductPolynomial
 public import Sheaf.AlgebraicGeometry.ProjectiveSpaceHomOfGeneratingSections
+public import WeilConjectures.AlgebraicGeometry.Ample
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 import Sheaf.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 import Sheaf.AlgebraicGeometry.ProjectiveSpaceFunctorOfPoints

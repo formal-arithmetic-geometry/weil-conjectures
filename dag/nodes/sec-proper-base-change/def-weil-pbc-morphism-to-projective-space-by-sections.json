@@ -27,9 +27,47 @@
   "lem-weil-pbc-projective-space-functor-of-points",
   "lem-weil-pbc-spec-z-terminal"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "At each point, transport the stalk span criterion through the invertible stalk linear equivalence. If every section germ lay in the maximal-ideal multiple, the span would force 1 into the maximal ideal, contradiction. The complements of the zero-locus supports therefore form a cover, and the native `isFreeGenerator_app_one_of_le` lemma gives a free generator on each member.",
+   "uses": [
+    "lem-weil-pbc-generating-sections-stalk-span",
+    "lem-weil-pbc-invertible-stalk-linear-equiv",
+    "lem-weil-pbc-section-nonvanishing-zero-locus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the source-library native chart construction `homOfIsFreeGenerator` to the section family and its free-generator cover. Its `twistRestrictHom` is an isomorphism sending each universal coordinate section to the chosen section, yielding the integral morphism and the pullback module isomorphism. The tensor-pullback adjunction is related to ordinary pullback by left-adjoint uniqueness, and this transfers the section equations to the exact tensor-pullback formulation in the statement.",
+   "uses": [
+    "lem-weil-pbc-generating-sections-stalk-span",
+    "lem-weil-pbc-section-nonvanishing-zero-locus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For uniqueness, the generating loci identify the inverse images of the standard opens. The open cover and the coordinate-ratio equations imply equality on every chart; `hom_ext_of_preimage_standardOpen_eq_top` and terminality of Spec ℤ finish equality. Pairing with the base morphism is `pullback.lift`, whose projection identities and hom-extensionality prove the remaining declarations.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "lem-weil-pbc-spec-z-terminal"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-generating-sections-stalk-span",
+  "lem-weil-pbc-invertible-stalk-linear-equiv",
+  "lem-weil-pbc-section-nonvanishing-zero-locus",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-spec-z-terminal"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Constructions, Lemma 01NE and Definition 01NF; implemented through the source-library chart construction homOfIsFreeGenerator and its twistRestrictHom, with the pullback pairing of Definition 01NF."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -154,5 +192,15 @@
   "group": "C1",
   "result": "fix",
   "note": "S,Y,g; finite index I (any finite set, n>=0, empty case); P(I;S) recorded ProjectiveSpace, q_n = over, pr_2 = toProjInt; L IsInvertible; s generating = recorded Epi freeHomEquiv form; psi = unique classified map of functor-of-points (exists_tensorPullbackAdjunction unit), composed with toProjInt to raw Proj; phi = pullback.lift g psi; spec: pr1=g, pr2=psi, uniqueness for any chi. Fixed: expanded file-local notations Z/pb in statements, removed unneeded local instance"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W2",
+  "result": "pass",
+  "landing": "20261018T062938-L-688019",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

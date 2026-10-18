@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.SchemeTangentSpace
 public import Sheaf.AlgebraicGeometry.ProjectiveSpaceHomOfGeneratingSections
 public import WeilConjectures.AlgebraicGeometry.Modules.Ample
+public import WeilConjectures.AlgebraicGeometry.Ample
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 import Sheaf.AlgebraicGeometry.ClosedFibreSingleton
 import Sheaf.AlgebraicGeometry.CotangentSurjectiveOfTangentInjective
