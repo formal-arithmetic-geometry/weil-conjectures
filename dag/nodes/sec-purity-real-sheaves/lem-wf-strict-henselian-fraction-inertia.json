@@ -14,9 +14,151 @@
   "def-weil-pbc-strict-henselization-limit",
   "def-pd-separable-closure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "A DVR is a valuation ring by the equivalence explicitly included in [def-sc-discrete-valuation-ring]; hence [lem-weil-pbc-valuation-ring-normal] makes $A$ a normal domain. By [lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions], $A$ is also a normal ring: a domain is reduced, has the single minimal prime $(0)$, and its total ring of fractions is its fraction field. Apply [lem-trf-henselization-prime-ind-etale] at the maximal ideal, using $A_{\\mathfrak m_A}=A$ and the universal-property convention [def-weil-pbc-henselization-at-prime]. Thus $H$ is ind-etale, that is, a filtered colimit of etale $A$-algebras [def-weil-pbc-ind-etale-algebra]. It is local by the henselization setup. Therefore [lem-weil-pbc-etale-colimit-normal-local-domain] gives that $H$ is a normal domain and $A\\to H$ is injective.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-valuation-ring-normal",
+    "lem-trf-henselization-prime-ind-etale",
+    "def-weil-pbc-henselization-at-prime",
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-etale-colimit-normal-local-domain",
+    "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BSD (section-ramification), normality of the henselization; algebra.tex Tags 00PD, 00IC and 04GN; more-algebra.tex Tag 06DI; algebra.tex Tag 030C (lemma-characterize-reduced-ring-normal), (2) implies (1), specialized to a domain"
+   }
+  },
+  {
+   "text": "By [lem-wf-strict-henselization-finite-lifts], $R$ is the local colimit of the finite local etale $H$-algebras $B_e$ indexed by finite Galois subextensions $e/\\kappa$ in $\\kappa^{\\mathrm{sep}}$, with residue field $\\kappa^{\\mathrm{sep}}$. The conclusion of this comparison includes the pointed-neighbourhood convention of the item as well as the ring-theoretic construction. In particular this is a comparison of actual colimits over $A$ and $H$, not an inference from the definition of finite-etale reduction. The normal domain $H$ is also a normal ring by [lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions], again using that a domain is reduced with the single minimal prime $(0)$ and has total ring of fractions equal to its fraction field. Applying [lem-weil-pbc-etale-colimit-normal-local-domain] over $H$ gives that $R$ is a normal domain and $H\\to R$ is injective. For every $e$, [lem-wf-henselian-finite-galois-lift] supplies the normal domain $B_e$, the finite Galois field $E_e=K\\otimes_HB_e=\\operatorname{Frac}(B_e)$, and its integral-closure description.",
+   "uses": [
+    "lem-wf-strict-henselization-finite-lifts",
+    "lem-weil-pbc-etale-colimit-normal-local-domain",
+    "lem-wf-henselian-finite-galois-lift",
+    "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BSW (lemma-identify-inertia), finite-etale-lift paragraph; algebra.tex Tag 0BSL (remark-construct-sh-from-h); more-algebra.tex Tag 06DI; algebra.tex Tag 030C (lemma-characterize-reduced-ring-normal), (2) implies (1), specialized to a domain"
+   }
+  },
+  {
+   "text": "The map $B_e\\to R$ is injective: after inverting the nonzero elements of $H$ it gives a unital map from the field $E_e$ to the field $\\operatorname{Frac}(R)$, hence is injective, and $B_e\\subset E_e$. Every fraction of elements of $R$ is represented by two elements at a common finite stage, so $L=\\operatorname{Frac}(R)=\\bigcup_e E_e$. In particular $L/K$ is separable algebraic. Each $K$-minimal polynomial of an element of $L$ is separable and splits in the chosen separable closure $\\Omega$, by [lem-weil-pbc-separable-closure-exists-galois] and [def-pd-separable-closure]. Apply [lem-exc-etale-embedding-extension-sepclosed] with base $K$, extension field $L$, starting intermediate field $K$, and target $\\Omega$. Its integrality and splitting hypotheses have just been verified. This embeds $L$ into $\\Omega$, and hence embeds $H\\subset R\\subset\\Omega$. The residue identification remains the specified one on the abstract $R$ under this embedding.",
+   "uses": [
+    "lem-weil-pbc-separable-closure-exists-galois",
+    "def-pd-separable-closure",
+    "lem-exc-etale-embedding-extension-sepclosed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BSD, compatible embedding into a separable closure; Tag 0BSW, the finite lifts and their fraction fields"
+   }
+  },
+  {
+   "text": "Let $\\sigma\\in G$. Each embedded $E_e/K$ is finite Galois, so $\\sigma(E_e)=E_e$. By the integral-closure assertion of [lem-wf-henselian-finite-galois-lift], its subring $B_e$ is preserved: a monic relation over $H$ remains such after applying $\\sigma$ or $\\sigma^{-1}$. Thus $\\sigma(R)=R$ and $\\sigma(L)=L$. An automorphism of the local ring $R$ preserves its unique maximal ideal, so it induces a residue automorphism fixing $\\kappa$. Define $\\mathrm{res}(\\sigma)(\\bar r)=\\overline{\\sigma(r)}$ under $R/\\mathfrak m_R=\\kappa^{\\mathrm{sep}}$. This is well defined and respects composition because reduction does, giving the residue homomorphism in the statement.",
+   "uses": [
+    "lem-wf-henselian-finite-galois-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BSW, preservation and residue action; normality and finite-stage integral-closure calculation"
+   }
+  },
+  {
+   "text": "Let $\\tau\\in\\operatorname{Gal}(\\kappa^{\\mathrm{sep}}/\\kappa)$. Each finite Galois residue subfield $e$ is preserved by $\\tau$. Full faithfulness in [lem-weil-pbc-henselian-finite-etale-equivalence] gives a unique $H$-automorphism $t_e$ of $B_e$ reducing to $\\tau|_e$. For $e\\subset f$, the composites $B_e\\to B_f$ obtained by first $t_e$ or last $t_f$ have the same residue map $\\tau|_e:e\\to f$, so full faithfulness makes them equal. They induce an automorphism $t$ of $R$, with inverse built from $\\tau^{-1}$, and an automorphism $t_L$ of $L$ over $K$. To extend $t_L$ to $\\Omega$, use [lem-exc-etale-embedding-extension-sepclosed] with base $K$, extension $\\Omega$, intermediate field $L$ and target $\\Omega$. By [lem-weil-pbc-separable-closure-exists-galois], every element is algebraic and every $K$-minimal polynomial splits there. The resulting $K$-embedding $u:\\Omega\\to\\Omega$ is onto: for any $a\\in\\Omega$, $u$ injects the finite set of roots in $\\Omega$ of its $K$-minimal polynomial into itself, hence permutes that set, so $a$ is in its image. Thus $u\\in G$, with residue $\\tau$, proving surjectivity of $\\mathrm{res}$.",
+   "uses": [
+    "lem-weil-pbc-henselian-finite-etale-equivalence",
+    "lem-exc-etale-embedding-extension-sepclosed",
+    "lem-weil-pbc-separable-closure-exists-galois"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BSW, the finite Galois residue lifts and surjectivity; finite-stage maps are lifted using algebra.tex Tag 04GK"
+   }
+  },
+  {
+   "text": "If $\\sigma\\in I=\\ker(\\mathrm{res})$, Step 4 makes its restriction to every $B_e$ an $H$-automorphism with identity reduction on $e$. Full faithfulness in [lem-weil-pbc-henselian-finite-etale-equivalence] forces that restriction to be the identity. Thus $\\sigma$ fixes $R$ and its fraction field $L$. Conversely, an element of $G$ fixing $L$ fixes $R$, hence its entire residue field $\\kappa^{\\mathrm{sep}}$, and belongs to $I$. This proves $I=\\operatorname{Gal}(\\Omega/L)$.",
+   "uses": [
+    "lem-weil-pbc-henselian-finite-etale-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BSW, kernel of the residue action"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-separable-closure-exists-galois], $\\Omega/K$ is Galois and for the intermediate field $L$, $\\Omega/L$ is separable algebraic and normal. The fixed-field theorem [lem-exc-etale-galois-fixed-field-subgroup] applied to the subgroup fixing $L$, identified with $I$ in Step 6, gives $\\Omega^I=L$. The field $\\Omega$ is separably closed by [def-pd-separable-closure], and separable algebraic over $L$, so it is a separable closure of $L$. Explicitly, the $L$-minimal polynomial of any $a\\in\\Omega$ divides its separable $K$-minimal polynomial in $L[T]$; it is therefore separable. This does not treat an arbitrary polynomial in $L[T]$ as a polynomial in $K[T]$. Thus the equality in Step 6 identifies $I$ with the absolute Galois group of $L$.",
+   "uses": [
+    "lem-weil-pbc-separable-closure-exists-galois",
+    "lem-exc-etale-galois-fixed-field-subgroup",
+    "def-pd-separable-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BSW, fixed field and absolute Galois group of the strict-henselian fraction field"
+   }
+  },
+  {
+   "text": "This identification respects the Krull topologies. By definition a neighbourhood basis of the identity in the automorphism group of an algebraic extension is given by pointwise stabilizers of finite subsets of the extension field. For a finite subset $S\\subset\\Omega$, the subgroup fixing $S$ in $\\operatorname{Gal}(\\Omega/L)$ is exactly $I\\cap\\{\\sigma\\in G:\\sigma|_S=\\mathrm{id}\\}$. Both Krull neighbourhood bases are therefore the same after intersection with $I$. No finiteness hypothesis on $L/K$ is needed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BSW, profinite subgroup identification; elementary comparison of the defining finite-subset stabilizer bases"
+   }
+  },
+  {
+   "text": "Every $K$-embedding $v:L\\to\\Omega$ extends to a $K$-embedding $\\Omega\\to\\Omega$ by [lem-exc-etale-embedding-extension-sepclosed], with the splitting hypotheses as in Step 5. The finite-root-set argument there makes the extension an element of $G$, so Step 4 gives $v(L)=L$. This proves normality explicitly: if $a\\in L$ and $b\\in\\Omega$ is any root of its irreducible polynomial over $K$, the isomorphism $K(a)\\to K(b)$ sending $a$ to $b$ extends to an element of $G$ by the same lemma; hence $b\\in L$. Those polynomials split in $\\Omega$ by [lem-weil-pbc-separable-closure-exists-galois], so they split in $L$. Since Step 3 already established separability and algebraicity, $L/K$ is Galois. In particular every $K$-automorphism of $L$ extends to $G$ and consequently preserves $R$.",
+   "uses": [
+    "lem-exc-etale-embedding-extension-sepclosed",
+    "lem-weil-pbc-separable-closure-exists-galois"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BSW, normality of the strict-henselian fraction extension and extension of its automorphisms"
+   }
+  },
+  {
+   "text": "Extension to fractions injects $\\operatorname{Aut}_H(R)$ into $\\operatorname{Gal}(L/K)$; conversely every $K$-automorphism of $L$ preserves $R$ by Step 9, so restriction is its inverse. The map $G\\to\\operatorname{Gal}(L/K)$ is onto by Step 9 and has kernel $I$ by Step 6; explicitly $\\sigma I\\mapsto\\sigma|_L$ is a bijective homomorphism. Reduction $\\operatorname{Aut}_H(R)\\to\\operatorname{Gal}(\\kappa^{\\mathrm{sep}}/\\kappa)$ is onto by Step 5. If an automorphism of $R$ has trivial reduction, extend it to $L$ and then to $G$ as in Step 9; the extension belongs to $I$ and fixes $L$ by Step 6, so the original automorphism is the identity. Thus reduction is also injective. These maps give precisely all three displayed isomorphisms. Step 4 already proves the final preservation and residue-action formula for every $\\sigma\\in G$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BSW, final automorphism/residue identifications; elementary fractions and explicit quotient bijection using Steps 4-6 and 9"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pd-separable-closure",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-pbc-henselization-at-prime",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-exc-etale-embedding-extension-sepclosed",
+  "lem-exc-etale-galois-fixed-field-subgroup",
+  "lem-trf-henselization-prime-ind-etale",
+  "lem-weil-pbc-etale-colimit-normal-local-domain",
+  "lem-weil-pbc-henselian-finite-etale-equivalence",
+  "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+  "lem-weil-pbc-separable-closure-exists-galois",
+  "lem-weil-pbc-valuation-ring-normal",
+  "lem-wf-henselian-finite-galois-lift",
+  "lem-wf-strict-henselization-finite-lifts"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BSW (lemma-identify-inertia) and setup Tag 0BSD, with the finite-stage construction explicitly supplied by algebra.tex Tag 0BSL (remark-construct-sh-from-h), the finite residue equivalence Tag 04GK, and normality Tag 06DI."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -69,7 +211,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-wf-boundary-stalk-invariants",
@@ -86,5 +228,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-wf-strict-henselian-fraction-inertia",
+  "worker": "stage1",
+  "summary": "Repair of returned head d8fd6a08276f: supply the finite-stage/base-replacement comparison and the separate finite Galois lift calculation; cite actual normality and henselization construction results; use Galois residue stages; extend embeddings explicitly; repair separable-closure transfer, Krull subgroup topology and normality of L/K; correct the C[[t]] edge case. Statement unchanged. Two new statement-only nodes, no new Mathlib leaves. Existing item search history retained. Maintainer-reader repair: explicitly cite the existing reduced-normal/total-fractions equivalence in Steps 1 and 2 to discharge the normal-ring hypothesis of the colimit theorem.",
+  "blueprint": "Realizes lem-wf-boundary-stalk-invariants proof paragraph 1 (punctured strict-henselian trait has absolute Galois group inertia) and paragraph 2 (strict-henselian fraction field is inertia-fixed and residue automorphisms act on it).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-valuation-ring-normal",
+    "why": "Normality of the base DVR via its valuation-ring characterization; generic local algebra, with no replacement of the boundary-stalk route."
+   },
+   {
+    "node": "lem-trf-henselization-prime-ind-etale",
+    "why": "Ind-etaleness of the ordinary henselization is needed before the normal-colimit theorem applies; the boundary unit has no such construction theorem."
+   },
+   {
+    "node": "lem-weil-pbc-etale-colimit-normal-local-domain",
+    "why": "Normality and injectivity for the local ind-etale henselization and the finite-lift colimit; a generic local-algebra tool absent from the boundary unit."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-finite-etale-equivalence",
+    "why": "Full faithfulness lifts residue automorphisms and proves compatibility and uniqueness on finite stages; the boundary unit relies on but does not prove this algebraic tool."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+    "why": "Normal domains A and H must be normal rings to meet the exact hypothesis of the etale-colimit theorem; specialize (2) implies (1) to a domain, with unique minimal prime (0) and total fractions equal to its fraction field. This is local algebra, not a change of boundary route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-valuation-ring-normal",
+  "lem-trf-henselization-prime-ind-etale",
+  "lem-weil-pbc-etale-colimit-normal-local-domain",
+  "lem-weil-pbc-henselian-finite-etale-equivalence",
+  "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-Codex-Q42-d51514182",
+  "group": "Q42",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q42-d51514182 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. Repaired one repeated C1/C4 citation gap: Steps 1–2 now explicitly derive normal-ring hypotheses from normal-domain conclusions using existing Stacks 030C node. Both new lemmas are valid and nonduplicate; no cycles, long steps, forbidden SGA citations or dropped pivot dependencies found. Corrected JSON and detailed review.md written.; 1 file(s) fixed by the reviewer"
  }
 }

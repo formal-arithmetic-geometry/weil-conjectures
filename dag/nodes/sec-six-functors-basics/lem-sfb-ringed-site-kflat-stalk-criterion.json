@@ -14,9 +14,118 @@
   "def-pc-kflat-complex",
   "def-pc-module-kflat-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For any point $p$, exact transported module inverse image preserves kernels and cokernels. Thus, using $H^n=\\ker(d^n)/\\operatorname{im}(d^{n-1})$ and $\\operatorname{im}(d)=\\ker(\\operatorname{coker}(d))$, it gives $H^n(K_p)\\cong p^{-1}H^n(K)$ and preserves acyclic complexes. Apply the ordinary total-tensor comparison to the ringed-topos map $(\\mathbf{Set},R_p)\\to(\\operatorname{Sh}(C),R)$ with identity coefficient map. Tensor extension along that identity is removed by $a\\otimes m\\mapsto am$. Consequently $(\\operatorname{Tot}(F\\otimes_RK))_p\\cong\\operatorname{Tot}(F_p\\otimes_{R_p}K_p)$ for all unbounded complexes. The cited comparison is already an isomorphism of signed total complexes, so no boundedness or interchange of infinite products is being asserted.",
+   "uses": [
+    "lem-trf-geometric-inverse-image-exact",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0DEN, proof of (2), stalk exactness and total tensor comparison; sites-modules.tex Tag 05V3 and sites-cohomology.tex Tag 07A4"
+   }
+  },
+  {
+   "text": "For the forward direction only, replace $\\operatorname{Sh}(C)$ by a finite-limit subcanonical site presentation using the presentation theorem with the terminal sheaf as its specified object. Transport $R$, $K$, and $p$ along the topos equivalence. The inverse-image functors of this equivalence and its inverse give inverse equivalences on module sheaves: their composites preserve each addition and scalar action through the finite-product comparisons, so the topos inverse equations are module-linear. Both functors are exact by the inverse-image theorem and commute with total tensor by the ordinary cochain comparison. Hence K-flatness is preserved and reflected: every acyclic test complex on one side is the image, up to the inverse equations, of an acyclic test complex on the other, and its total tensor is the image of the corresponding total tensor. The composite point gives the same stalk ring and stalk complex by these inverse equations. We may therefore assume $C$ has finite limits without assuming this in the item.",
+   "uses": [
+    "lem-trf-topos-localization-site-presentation",
+    "lem-trf-geometric-inverse-image-exact",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "def-trf-geometric-morphism",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0DEN, proof of (1), replacement by a good site; sites.tex Tag 03CI"
+   }
+  },
+  {
+   "text": "Assume $K$ is K-flat. Choose a quasi-isomorphism $a:L\\to K$ with $L$ K-flat and all $L^n$ flat, using the site resolution theorem. Put $E=C(a)$. The quasi-isomorphism--cone criterion says $E$ is acyclic. For every acyclic $A$, the two tensors with $L$ and $K$ are acyclic, so the tensor-cone two-out-of-three theorem implies the tensor with $E$ is acyclic; this is exactly K-flatness of $E$. The flat-term pullback theorem, applied to the point with coefficient map $p^{-1}R\\xrightarrow{\\mathrm{id}}R_p$, proves $L_p$ K-flat. Its flat-term hypothesis is used only for this chosen resolution, not for $K$ or $E$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-quasi-iso-cone-acyclic",
+    "lem-pc-kflat-tensor-cone-two-out-of-three",
+    "def-pc-kflat-complex",
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0DEN, proof of (1), first paragraph: resolution, cone, and flat-term pullback"
+   }
+  },
+  {
+   "text": "We now handle an arbitrary acyclic K-flat $E$ on this finite-limit site. Fix a finitely presented $R_p$-module $M$. The local realization theorem gives a pointed object $(U,x)$, its lifted point $q$ of $C/U$, and an $R_U$-module sheaf $F$ with $F_q\\cong M$ and $(E|_U)_q\\cong E_p$. Exact restriction makes $E|_U$ acyclic, and the restriction K-flat theorem makes it K-flat. The universal tensor-acyclicity theorem therefore makes $\\operatorname{Tot}(F[0]\\otimes_{R_U}E|_U)$ acyclic. Take its $q$-stalk: exactness and the ordinary signed cochain tensor comparison identify this acyclic complex with $\\operatorname{Tot}(M[0]\\otimes_{R_p}E_p)$. The signed symmetry from the same cochain comparison theorem changes the factor order to $\\operatorname{Tot}(E_p\\otimes_{R_p}M[0])$; here the sign is $1$ because $M$ has degree zero.",
+   "uses": [
+    "lem-sfb-site-fp-stalk-realization",
+    "lem-sfb-ringed-site-restriction-kflat",
+    "lem-pur-acyclic-kflat-tensor-arbitrary",
+    "lem-trf-geometric-inverse-image-exact",
+    "lem-pur-cochain-pullback-tensor-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0DEN, proof of (1), paragraphs beginning Assume K is acyclic and Let M be finitely presented"
+   }
+  },
+  {
+   "text": "The preceding construction applies to every finitely presented $M$, so the universal-acyclicity criterion for ordinary modules shows $E_p$ is K-flat. Return to $E=C(a)$ from step 3. Exact additive inverse image commutes with the cone matrix: $p^{-1}(K^n\\oplus L^{n+1})=K_p^n\\oplus L_p^{n+1}$ and its differential is still $(d_K,a;0,-d_L)$. Thus $E_p\\cong C(a_p)$. For any acyclic $R_p$-module complex $B$, the tensors with $L_p$ and $E_p$ are acyclic. Apply the tensor-cone two-out-of-three theorem on the one-object ringed site presenting ordinary $R_p$-modules to obtain acyclicity of $\\operatorname{Tot}(B\\otimes_{R_p}K_p)$. This is the module definition of K-flatness, proving the forward direction for every point.",
+   "uses": [
+    "lem-sfb-universal-acyclic-module-kflat",
+    "lem-trf-geometric-inverse-image-exact",
+    "def-weil-abstract-derived-category",
+    "lem-pc-kflat-tensor-cone-two-out-of-three",
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0DEN, proof of (1), universal-acyclic module test and return through the cone"
+   }
+  },
+  {
+   "text": "For the converse, let $F$ be any acyclic complex of $R$-module sheaves and put $T=\\operatorname{Tot}(F\\otimes_RK)$. Exact inverse image makes each $F_{p_i}$ acyclic. K-flatness of $K_{p_i}$ makes $\\operatorname{Tot}(F_{p_i}\\otimes_{R_{p_i}}K_{p_i})$ acyclic, and the ordinary cochain comparison identifies this with $T_{p_i}$. Hence $p_i^{-1}H^n(T)=0$ for all $i,n$. The underlying set-sheaf map $H^n(T)\\to0$ becomes an isomorphism at every $p_i$, so conservativity makes it an isomorphism. Its inverse is module-linear, since the only inverse section is zero. Therefore all $H^n(T)$ vanish and $T$ is acyclic. Since $F$ was arbitrary, $K$ is K-flat. This uses precisely the given family, including an empty family when its conservativity forces the topos to be degenerate.",
+   "uses": [
+    "lem-trf-geometric-inverse-image-exact",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "def-weil-abstract-derived-category",
+    "def-pc-module-kflat-complex",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0DEN, proof of (2); sites-modules.tex Tag 05V3 (conservative-family exactness)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "def-pc-module-kflat-complex",
+  "def-trf-geometric-morphism",
+  "def-weil-abstract-derived-category",
+  "lem-pc-kflat-resolution",
+  "lem-pc-kflat-tensor-cone-two-out-of-three",
+  "lem-pur-acyclic-kflat-tensor-arbitrary",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-sfb-ringed-site-restriction-kflat",
+  "lem-sfb-site-fp-stalk-realization",
+  "lem-sfb-universal-acyclic-module-kflat",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-trf-topos-localization-site-presentation",
+  "lem-weil-pbc-ringed-topos-kflat-pullback"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0DEN, lemma-check-K-flat-stalks, both directions. Expanded with the existing good-site presentation, exact inverse image, tensor-cone and signed cochain tensor comparisons; the converse is written for the conservative family used by the proof."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +161,45 @@
    "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"CategoryTheory.compatiblePreservingOfFlat\", \"Module.Flat.iff_lTensor_exact'\", \"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.iff_rTensor_exact\", \"Module.Flat.iff_lTensor_exact\", \"Module.Flat.lTensor_shortComplex_exact\"], \"sub\": \"\"}",
    "date": "2026-10-18",
    "verdict": "no match: hits give ordinary module flatness, sheaf pullback constructions, or points of topological/etale sites, not this assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-flat complexes of module sheaves on a ringed site are K-flat at every topos point, and K-flatness is detected by a conservative family of points",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"RingHom.Flat.propertyIsLocal\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"CategoryTheory.compatiblePreservingOfFlat\", \"Module.FaithfullyFlat.toFlat\", \"Module.Flat.iff_flat_tensorProduct\", \"Module.flat_of_isLocalized_span\", \"Module.Flat.of_flat_tensorProduct\"], \"sub\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary flatness and sheaf colimit hits do not state K-flatness at arbitrary topos points"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat|K.flat|universally.acyclic",
+   "results": "{\"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Computability/TuringMachine/Tape.lean\", \"Mathlib/Computability/TuringMachine/Tape.lean\", \"Mathlib/Computability/TuringMachine/Tape.lean\"], \"sub\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary flatness and sheaf colimit hits do not state K-flatness at arbitrary topos points"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complex of module sheaves is K-flat if and only if its stalks at a conservative family of topos points are K-flat",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.iff_flat_stalkMap\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"SheafOfModules.instHasColimitsOfShapeOfPresheafOfModulesValRingCat\", \"AlgebraicGeometry.Flat.stalkMap\", \"Module.FaithfullyFlat.toFlat\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\"], \"sub\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary flatness and sheaf colimit hits do not state K-flatness at arbitrary topos points"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KFlat\"",
+   "results": "{\"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Lean.mkFlatCtorOfStructCtorName\"], \"sub\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary flatness and sheaf colimit hits do not state K-flatness at arbitrary topos points"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring with a K-flat complex of sheaves preserves acyclicity on every stalk of a ringed site",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_rTensor_exact'\", \"Module.Flat.iff_lTensor_exact'\", \"Module.Flat.iff_lTensor_exact\", \"Module.Flat.iff_rTensor_exact\"], \"sub\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: ordinary flatness and sheaf colimit hits do not state K-flatness at arbitrary topos points"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-module-mapmod-pullback-kflat",
@@ -72,5 +216,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-sfb-ringed-site-kflat-stalk-criterion",
+  "worker": "stage1",
+  "summary": "Follows Stacks 0DEN in six steps, with finite-limit site replacement, a flat-term K-flat replacement and its acyclic K-flat cone, local finite-presentation tests on a slice site, and conservative-family detection. Reused the existing signed cochain pullback tensor comparison instead of creating a stalk comparison lemma. Three new statement-only supporting nodes. No statement change.",
+  "blueprint": "Supports lem-sfb-module-mapmod-pullback-kflat, proof testing arbitrary target acyclic complexes, by the stalk criterion used in its Q32 split; both clauses of Stacks 0DEN are proved.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic ringed-site or homological tool: Existence of K-flat resolutions on a ringed site. It supplies the indicated proof ingredient; this unit contains no equivalent general statement."
+   },
+   {
+    "node": "lem-pc-kflat-tensor-cone-two-out-of-three",
+    "why": "Generic ringed-site or homological tool: Tensor-triangle two-out-of-three for acyclicity. It supplies the indicated proof ingredient; this unit contains no equivalent general statement."
+   },
+   {
+    "node": "lem-pur-acyclic-kflat-tensor-arbitrary",
+    "why": "Generic ringed-site or homological tool: An acyclic K-flat complex tensors acyclically with every complex. It supplies the indicated proof ingredient; this unit contains no equivalent general statement."
+   },
+   {
+    "node": "lem-pur-cochain-pullback-tensor-coherence",
+    "why": "Generic ringed-site or homological tool: Signed tensor comparison and composition on cochain sheaf pullbacks. It supplies the indicated proof ingredient; this unit contains no equivalent general statement."
+   },
+   {
+    "node": "lem-pur-quasi-iso-cone-acyclic",
+    "why": "Generic ringed-site or homological tool: A morphism is a quasi-isomorphism exactly when its mapping cone is acyclic. It supplies the indicated proof ingredient; this unit contains no equivalent general statement."
+   },
+   {
+    "node": "lem-trf-geometric-inverse-image-exact",
+    "why": "Generic ringed-site or homological tool: Exactness of inverse image on abelian sheaves and modules. It supplies the indicated proof ingredient; this unit contains no equivalent general statement."
+   },
+   {
+    "node": "lem-trf-topos-localization-site-presentation",
+    "why": "Generic ringed-site or homological tool: A small presenting site representing a prescribed topos object and its slice. It supplies the indicated proof ingredient; this unit contains no equivalent general statement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "why": "Generic ringed-site or homological tool: Ringed-topos pullback preserves flat-term K-flat complexes. It supplies the indicated proof ingredient; this unit contains no equivalent general statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pc-kflat-tensor-cone-two-out-of-three",
+  "lem-pur-acyclic-kflat-tensor-arbitrary",
+  "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-trf-topos-localization-site-presentation",
+  "lem-weil-pbc-ringed-topos-kflat-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-Codex-Q63-24352a37f",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q63-24352a37f (reviewer sub-agent of L); spot-checked: Read all six proof steps, all three new nodes, cited statements and source passages. Stacks 0DEN supports the argument without boundedness or flat-term assumptions on the original complex. Added required metadata defaults in three corrected JSON files; mathematics unchanged. Detailed checks and unavailable git-only pivot-record limitations are documented in review.md.; 3 file(s) fixed by the reviewer"
  }
 }
