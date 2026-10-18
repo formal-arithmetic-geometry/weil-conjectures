@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group Q02
+Authors: SHEAF groups Q02 and V2
 -/
 module
 
@@ -9,9 +9,7 @@ public import Mathlib.CategoryTheory.Abelian.Basic
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 
-import Mathlib.Algebra.Homology.HomologySequence
-import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Kernels
-import Sheaf.Algebra.Homology.SubcategoryRightResolution
+import WeilConjectures.Algebra.Homology.KernelShiftedMappingCone
 
 /-!
 # Replacement of complexes by objects of degree zero
@@ -26,8 +24,125 @@ the uniformly bounded finite-degree specialization
 universe u v
 
 open CategoryTheory CategoryTheory.Limits
+open scoped ZeroObject
 
 namespace CochainComplex
+
+private theorem degree_zero_object
+    {C : Type u} [Category.{v} C] [Abelian C] (d : C → ℕ)
+    (hembed : ∀ A : C, ∃ (I : C) (j : A ⟶ I), Mono j ∧ d I = 0)
+    (hshort : ∀ S : ShortComplex C, S.ShortExact →
+      d S.X₃ ≤ max (d S.X₁ - 1) (d S.X₂)) : d (0 : C) = 0 := by
+  obtain ⟨I, _, _, hI⟩ := hembed 0
+  let S := ShortComplex.mk (𝟙 I) (0 : I ⟶ 0) (by simp)
+  have hS : S.ShortExact :=
+    { exact := (S.exact_iff_epi rfl).2 inferInstance }
+  have h := hshort S hS
+  simpa [S, hI] using h
+
+private theorem degree_iso
+    {C : Type u} [Category.{v} C] [Abelian C] (d : C → ℕ)
+    (hzero : d (0 : C) = 0)
+    (hshort : ∀ S : ShortComplex C, S.ShortExact →
+      d S.X₃ ≤ max (d S.X₁ - 1) (d S.X₂))
+    {A B : C} (e : A ≅ B) : d A = d B := by
+  have le_of_iso {A B : C} (e : A ≅ B) : d B ≤ d A := by
+    let S := ShortComplex.mk (0 : (0 : C) ⟶ A) e.hom (by simp)
+    have hS : S.ShortExact :=
+      { exact := (S.exact_iff_mono rfl).2 inferInstance }
+    simpa [S, hzero] using hshort S hS
+  exact Nat.le_antisymm (le_of_iso e.symm) (le_of_iso e)
+
+private theorem exists_mono_complex_degree_zero
+    {C : Type u} [Category.{v} C] [Abelian C] (d : C → ℕ)
+    (hembed : ∀ A : C, ∃ (I : C) (j : A ⟶ I), Mono j ∧ d I = 0)
+    (hsum : ∀ A B : C, d (biprod A B) ≤ max (d A) (d B))
+    (K : CochainComplex C ℤ) :
+    ∃ (I : CochainComplex C ℤ) (j : K ⟶ I),
+      (∀ n : ℤ, Mono (j.f n)) ∧ ∀ n : ℤ, d (I.X n) = 0 := by
+  classical
+  choose E e he hE using fun n : ℤ ↦ hembed (K.X n)
+  let I : CochainComplex C ℤ := CochainComplex.of
+    (fun n ↦ biprod (E n) (E (n + 1)))
+    (fun n ↦ biprod.snd ≫ biprod.inl)
+    (fun n ↦ by simp [Category.assoc])
+  let j : K ⟶ I := CochainComplex.ofHom
+    (fun n ↦ biprod.lift (e n) (K.d n (n + 1) ≫ e (n + 1))) (by
+      intro n
+      dsimp [I]
+      simp only [CochainComplex.of_d]
+      apply biprod.hom_ext <;> simp [Category.assoc])
+  refine ⟨I, j, ?_, ?_⟩
+  · intro n
+    have : Mono (e n) := he n
+    exact mono_of_mono_fac (show j.f n ≫ biprod.fst = e n by simp [j])
+  · intro n
+    apply Nat.eq_zero_of_le_zero
+    simpa [I, hE] using hsum (E n) (E (n + 1))
+
+private theorem exists_quasiIso_degree_pred
+    {C : Type u} [Category.{v} C] [Abelian C] (d : C → ℕ)
+    (hzero : d (0 : C) = 0)
+    (hembed : ∀ A : C, ∃ (I : C) (j : A ⟶ I), Mono j ∧ d I = 0)
+    (hsum : ∀ A B : C, d (biprod A B) ≤ max (d A) (d B))
+    (hshort : ∀ S : ShortComplex C, S.ShortExact →
+      d S.X₃ ≤ max (d S.X₁ - 1) (d S.X₂))
+    (N : ℕ) (K : CochainComplex C ℤ) (hK : ∀ n : ℤ, d (K.X n) ≤ N + 1) :
+    ∃ (L : CochainComplex C ℤ) (f : K ⟶ L),
+      QuasiIso f ∧ ∀ n : ℤ, d (L.X n) ≤ N := by
+  let _ := HasDerivedCategory.standard C
+  obtain ⟨I, j, hmono, hI⟩ := exists_mono_complex_degree_zero d hembed hsum K
+  have : Mono j := HomologicalComplex.mono_of_mono_f j hmono
+  let S := ShortComplex.cokernelSequence j
+  have : Mono S.f := by
+    change Mono j
+    infer_instance
+  have hS : S.ShortExact := { exact := ShortComplex.cokernelSequence_exact j }
+  let Q := cokernel j
+  let p : I ⟶ Q := cokernel.π j
+  have hp (n : ℤ) : Epi (p.f n) :=
+    (hS.map (HomologicalComplex.eval C (.up ℤ) n)).epi_g
+  have hQ (n : ℤ) : d (Q.X n) ≤ N := by
+    have h := hshort (S.map (HomologicalComplex.eval C (.up ℤ) n))
+      (hS.map (HomologicalComplex.eval C (.up ℤ) n))
+    change d (Q.X n) ≤ max (d (K.X n) - 1) (d (I.X n)) at h
+    rw [hI n, max_eq_left (Nat.zero_le _)] at h
+    exact h.trans (by have := hK n; omega)
+  let e : K ≅ kernel p :=
+    IsLimit.conePointUniqueUpToIso hS.fIsKernel (limit.isLimit _)
+  obtain ⟨κ, _, hκ, _⟩ := exists_kernel_to_shifted_mappingCone_of_degreewise_epi p hp
+  have : QuasiIso κ := hκ
+  refine ⟨(mappingCone p)⟦(-1 : ℤ)⟧, e.hom ≫ κ, inferInstance, ?_⟩
+  intro n
+  let eX := ((mappingCone p).shiftFunctorObjXIso (-1) n (n - 1) (by omega)) ≪≫
+    HomologicalComplex.homotopyCofiber.XIsoBiprod p (n - 1) n (by
+      change n - 1 + 1 = n
+      omega)
+  calc
+    d (((mappingCone p)⟦(-1 : ℤ)⟧).X n) =
+        d (biprod (I.X n) (Q.X (n - 1))) := degree_iso d hzero hshort eX
+    _ ≤ max (d (I.X n)) (d (Q.X (n - 1))) := hsum _ _
+    _ ≤ N := max_le (by rw [hI n]; exact Nat.zero_le _) (hQ (n - 1))
+
+private theorem exists_quasiIso_degree_zero_of_term_bound
+    {C : Type u} [Category.{v} C] [Abelian C] (d : C → ℕ)
+    (hzero : d (0 : C) = 0)
+    (hembed : ∀ A : C, ∃ (I : C) (j : A ⟶ I), Mono j ∧ d I = 0)
+    (hsum : ∀ A B : C, d (biprod A B) ≤ max (d A) (d B))
+    (hshort : ∀ S : ShortComplex C, S.ShortExact →
+      d S.X₃ ≤ max (d S.X₁ - 1) (d S.X₂))
+    (N : ℕ) (K : CochainComplex C ℤ) (hK : ∀ n : ℤ, d (K.X n) ≤ N) :
+    ∃ (L : CochainComplex C ℤ) (f : K ⟶ L),
+      QuasiIso f ∧ ∀ n : ℤ, d (L.X n) = 0 := by
+  induction N generalizing K with
+  | zero =>
+    exact ⟨K, 𝟙 K, inferInstance, fun n ↦ Nat.eq_zero_of_le_zero (hK n)⟩
+  | succ N ih =>
+    obtain ⟨M, f, hf, hM⟩ := exists_quasiIso_degree_pred d hzero hembed hsum hshort N K hK
+    obtain ⟨L, g, hg, hL⟩ := ih M hM
+    have : QuasiIso f := hf
+    have : QuasiIso g := hg
+    exact ⟨L, f ≫ g, inferInstance, hL⟩
 
 /-- A uniformly bounded nonnegative degree function admitting embeddings into degree-zero
 objects, bounded on binary direct sums by the maximum, and decreasing on cokernels as
@@ -36,54 +151,29 @@ specified below admits a degree-zero replacement of every integer-indexed cochai
 Source: Stacks Project, Derived Categories, Tag 07K6, `lemma-replace-resolution`
 (blueprint: lem-sf-degree-zero-complex-replacement).
 
-Proof:
-1. Embed the zero object in a degree-zero object I. Apply the short-exact inequality
-   to I → I → 0 to get d(0) = 0. Applying it to 0 → A → B for an isomorphism and its
-   inverse shows that d is invariant under isomorphisms. If D = 0, use the identity
-   of K. Otherwise let the prescribed class consist of the objects of degree zero.
-2. Apply `lem-weil-pbc-subcategory-right-resolution-05T6` to the brutal lower truncation
-   of K at zero. It gives a termwise monomorphic quasi-isomorphism σ to a complex M
-   supported in nonnegative degrees with degree-zero terms. Splice M to the negative
-   part of K, using d_K followed by σ at the boundary, obtaining α : K → J. The chain
-   map equation follows from that for σ. Cohomology below degree -1 is unchanged;
-   in degree -1 use that σ is mono; in degree zero its isomorphism on kernels identifies
-   the incoming images; above zero use its quasi-isomorphism. Thus α is a quasi-isomorphism,
-   and J has degree-zero terms in nonnegative degrees and degree at most D everywhere.
-3. For a current complex C, choose a bad index n and an embedding j : Cⁿ → E with d(E) = 0.
-   Set P = coker((j, -d_C) : Cⁿ → E ⊕ Cⁿ⁺¹), with projection q and maps u, v from the
-   two summands. The relation j ≫ u = d_C ≫ v makes P the pushout of j and d_C.
-   Replace terms n, n+1 by E, P; the changed differentials are d_C ≫ j, u, and the
-   descended map g with q ≫ g = (0, d_C). The cokernel relation and cancellation of
-   the epi q prove that consecutive differentials compose to zero. Components j, v
-   and identities elsewhere define a chain map f : C → C'.
-4. By `lem-weil-pbc-abelian-pushout-mono`, v is mono, so f is termwise mono.
-   By `lem-weil-pbc-pushout-cokernel-iso`, its quotient complex has only two possibly
-   nonzero terms, coker(j), coker(v), with an isomorphism as their differential.
-   It is acyclic. The long exact sequence of
-   `lem-weil-pbc-complex-ses-homology-long-exact` makes every Hʳ(f) an isomorphism.
-5. The map (j, -d_C) is mono. The two degree inequalities yield
-   d(P) ≤ max(d(Cⁿ) - 1, d(Cⁿ⁺¹)). Thus replacement makes term n degree zero,
-   changes only term n+1 otherwise, and preserves the uniform bound D.
-6. Give each bad index r weight r + d(Cʳ). Initially these weights are bounded above
-   by D-1. At maximum weight ξ the attaining indices form a finite set I contained
-   in [ξ-D, ξ-1]. Replace its smallest index n. No weight increases above ξ; n leaves
-   I and only n+1 may enter it. Therefore the positive integer sum of ξ-r over r in I
-   drops at least by one until no index attains ξ. This removes each maximum in
-   finitely many replacements, after which either no bad terms remain or it decreases.
-7. Organize these finite operations into rounds. Stop if no bad terms remain, including
-   before the first round. Otherwise the maxima ξ_s satisfy ξ_s ≤ ξ_0-s. All changes
-   during round s occur in terms and differential sources at most ξ_s, and transition
-   components above ξ_s are identities. For every m, eventually ξ_s < m, so every
-   right-hand tail is literally unchanged. No infinite colimit is used.
-8. Take the eventual terms and differentials as L. Their square-zero equations hold
-   in a common late round. The eventual components of the finite composites from J
-   give a chain map β : J → L. A positive-degree stabilized term in degree r would
-   have weight at least r+1, contradicting a late maximum below r+1. Hence all terms
-   of L have degree zero. In the stopping case take the last complex and finite composite.
-9. Fix r and choose a round after stabilization in degrees r-1, r, r+1. Both Hʳ(L)
-   and Hʳ(β) are computed in that finite round, whose composite from J is a
-   quasi-isomorphism by step 4. In the stopping case use the finite composite or identity.
-   Thus β is a quasi-isomorphism. Compose α and β to obtain the required map from K.
+Proof (finite induction for the uniformly bounded specialization):
+1. Embed zero in an object E of degree zero. The inequality for E → E → 0 gives
+   d(0) = 0. Applying the inequality to 0 → A → B for an isomorphism and its inverse
+   shows that d is invariant under isomorphisms.
+2. Choose embeddings eⁿ : Kⁿ → Eⁿ with d(Eⁿ) = 0. Define Iⁿ = Eⁿ ⊕ Eⁿ⁺¹ and
+   d_I(a, b) = (b, 0). Its differential squares to zero. The components
+   jⁿ = (eⁿ, d_Kⁿ ≫ eⁿ⁺¹) define a chain map K → I, since d_K² = 0.
+   Projection onto the first summand proves jⁿ mono. The direct-sum inequality
+   gives d(Iⁿ) = 0. This construction uses only binary sums, even for unbounded K.
+3. If every d(Kⁿ) ≤ N + 1, take the cokernel p : I → Q of j in the abelian
+   category of complexes. Evaluating its short exact sequence in each degree gives
+   d(Qⁿ) ≤ max(d(Kⁿ) - 1, d(Iⁿ)) ≤ N. The map p is degreewise epic, and the
+   kernel universal property gives an isomorphism K ≅ ker(p).
+4. Apply `lem-weil-degreewise-epi-kernel-cocone-qis` to p. It gives a quasi-isomorphism
+   ker(p) → Cone(p)[-1], hence one from K. The term in degree n of the shifted cone
+   is isomorphic to Iⁿ ⊕ Qⁿ⁻¹. Isomorphism invariance and the direct-sum inequality
+   bound its degree by N. Thus a finite cone construction lowers the term bound by one.
+5. Induct on the bound. At zero take the identity. At N + 1 apply step 4, then the
+   induction hypothesis at N, and compose the quasi-isomorphisms. Finally apply the
+   termwise result with the given global bound D.
+
+The explicit finite argument is written by V2 using the kernel/cone comparison of
+Stacks Tags 070M and 014Q; the statement is the uniformly bounded case of Tag 07K6.
 -/
 theorem exists_quasiIso_degree_zero_of_bounded_degree
     (C : Type u) [Category.{v} C] [Abelian C]
@@ -95,6 +185,7 @@ theorem exists_quasiIso_degree_zero_of_bounded_degree
     (K : CochainComplex C ℤ) :
     ∃ (L : CochainComplex C ℤ) (f : K ⟶ L),
       QuasiIso f ∧ ∀ r : ℤ, d (L.X r) = 0 := by
-  sorry
+  exact exists_quasiIso_degree_zero_of_term_bound d
+    (degree_zero_object d hembed hshort) hembed hsum hshort D K (fun n ↦ hbound (K.X n))
 
 end CochainComplex

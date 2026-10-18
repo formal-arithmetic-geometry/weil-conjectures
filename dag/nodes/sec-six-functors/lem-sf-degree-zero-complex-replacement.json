@@ -24,122 +24,75 @@
  ],
  "proof": [
   {
-   "text": "First $d(0)=0$: choose a degree-zero object $I$ using the embedding hypothesis for the zero object and apply the short-exact-sequence inequality to $0\\to I\\xrightarrow{1}I\\to0\\to0$. If $A\\cong B$, apply that inequality to $0\\to0\\to A\\to B\\to0$ and to the inverse isomorphism to obtain $d(B)\\leq d(A)$ and $d(A)\\leq d(B)$. Thus $d$ is invariant under isomorphism, in particular on all zero objects. If $D=0$, every term already has degree zero, and the identity of $K$ is the required quasi-isomorphism. Henceforth suppose $D>0$ and set $\\mathcal I=\\{A:d(A)=0\\}$. It contains the zero object and every object embeds into a member.",
+   "text": "Choose a degree-zero object $E$ using the embedding hypothesis on zero. Apply the short-exact inequality to $E\\xrightarrow{1}E\\to0$ to obtain $d(0)=0$. For an isomorphism $A\\cong B$, the short exact sequences $0\\to A\\to B$ and $0\\to B\\to A$ give both inequalities, hence $d(A)=d(B)$. These are degree_zero_object and degree_iso.",
    "uses": [
     "def-sp-abelian"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 07K6 (lemma-replace-resolution), hypotheses and the class of degree-zero objects; preliminary consequences of the short-exact inequality."
+    "place": "Tag 07K6 (lemma-replace-resolution), uniformly bounded specialization; finite cone proof written by V2."
    }
   },
   {
-   "text": "Let $T$ be the brutal lower truncation of $K$ at zero: $T^r=0$ for $r<0$, $T^r=K^r$ for $r\\geq0$, with the inherited differentials in nonnegative degrees. Apply [lem-weil-pbc-subcategory-right-resolution-05T6] with $a=0$ and the class $\\mathcal I$ from Step 1. It supplies a termwise monomorphic quasi-isomorphism $\\sigma:T\\to M$ with $M^r=0$ for $r<0$ and $d(M^r)=0$ for every $r$. Form $J$ by retaining $K^r$ for $r<0$, taking $M^r$ for $r\\geq0$, and using $\\sigma^0d_K^{-1}$ for the differential from degree $-1$ to degree $0$. The identity below zero and $\\sigma$ above it give $\\alpha:K\\to J$. This is a chain map, since $d_M^0\\sigma^0d_K^{-1}=\\sigma^1d_K^0d_K^{-1}=0$. For $r\\leq-2$ the cohomology is unchanged; for $r=-1$ it is unchanged because $\\sigma^0$ is mono. At $r=0$, the map $\\ker d_K^0\\to\\ker d_M^0$ induced by $\\sigma^0$ is an isomorphism, since it is $H^0(\\sigma)$ for the lower-truncated complexes; it identifies the images of the incoming degree $-1$ differentials and therefore induces an isomorphism on their quotients. For $r\\geq1$, $H^r(\\alpha)=H^r(\\sigma)$. Hence $\\alpha$ is a quasi-isomorphism. We have $d(J^r)=0$ for $r\\geq0$, and still $d(J^r)\\leq D$ for all $r$.",
-   "uses": [
-    "lem-weil-pbc-subcategory-right-resolution-05T6",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 07K6 (lemma-replace-resolution), first proof paragraph; Tag 05T6 (lemma-subcategory-right-resolution), part (1)."
-   }
-  },
-  {
-   "text": "We now give the elementary replacement used on any current complex $C$. Choose an index $n$ with $d(C^n)>0$, and a monomorphism $j:C^n\\to E$ with $d(E)=0$. Put $P=\\operatorname{Coker}((j,-d_C^n):C^n\\to E\\oplus C^{n+1})$ and write $q:E\\oplus C^{n+1}\\to P$ for its projection, $u=q\\iota_E$ and $v=q\\iota_{C^{n+1}}$. The relation is $uj=vd_C^n$. The cokernel universal property says precisely that $P$, with maps $u,v$, is the pushout of $j$ and $d_C^n$: a pair of maps out of $E,C^{n+1}$ descends exactly when it kills $(j,-d_C^n)$. Replace terms $C^n,C^{n+1}$ by $E,P$. The new differentials in degrees $n-1,n,n+1$ are $jd_C^{n-1}$, $u$, and the unique $g:P\\to C^{n+2}$ satisfying $gq=(0,d_C^{n+1})$. This last map exists because $(0,d_C^{n+1})(j,-d_C^n)=0$. Their consecutive composites are zero: $ujd_C^{n-1}=vd_C^nd_C^{n-1}=0$, $gu=0$, and $d_C^{n+2}gq=(0,d_C^{n+2}d_C^{n+1})=0$; cancel the epi $q$ in the last identity. All other terms and arrows are retained. This defines a complex $C'$ and a chain map $f:C\\to C'$ with components $j,v$ at $n,n+1$ and identities elsewhere, since $uj=vd_C^n$ and $gv=d_C^{n+1}$.",
+   "text": "For any current complex $K$, choose embeddings $e^n:K^n\\to E^n$ with $d(E^n)=0$. Define $I^n=E^n\\oplus E^{n+1}$ with differential $(a,b)\\mapsto(b,0)$, using only binary direct sums. It squares to zero. Define $j^n=(e^n,d_K^ne^{n+1}):K^n\\to I^n$. The chain-map equation follows by composing with the two biproduct projections and using $d_K^nd_K^{n+1}=0$. Projection onto $E^n$ gives $e^n$, so $j^n$ is mono. The sum inequality gives $d(I^n)=0$. Lean constructs I explicitly with CochainComplex.of and j with CochainComplex.ofHom; this is exists_mono_complex_degree_zero.",
    "uses": [
     "def-sp-abelian",
     "def-weil-abstract-derived-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 07K6 (lemma-replace-resolution), elementary replacement diagram and its cokernel; the finite pushout description is homology.tex, Tag 05PJ (example-fibre-product-pushouts)."
-   }
-  },
-  {
-   "text": "The map $v$ of Step 3 is mono by [lem-weil-pbc-abelian-pushout-mono], applied to the pushout of the monomorphism $j$ along $d_C^n$. Thus $f$ is termwise mono. Apply [lem-weil-pbc-pushout-cokernel-iso] to the same square: the map $\\theta:\\operatorname{Coker}(j)\\to\\operatorname{Coker}(v)$ induced by $u$ is an isomorphism. Taking the componentwise cokernels of $f$ gives a quotient complex $Q$: its only possibly nonzero terms are $Q^n=\\operatorname{Coker}(j)$ and $Q^{n+1}=\\operatorname{Coker}(v)$, and its differential between them is exactly $\\theta$ (this follows by composing with the cokernel projections). Therefore $H^r(Q)=0$ for every $r$: at $n$ the kernel of $\\theta$ is zero, at $n+1$ its cokernel is zero, and elsewhere all terms are zero. The sequence $0\\to C\\xrightarrow f C'\\to Q\\to0$ is short exact in every degree. By [lem-weil-pbc-complex-ses-homology-long-exact], the adjacent zero terms $H^{r-1}(Q),H^r(Q)$ show that $H^r(f)$ is mono and epi, hence an isomorphism in the abelian category, for every $r$. Thus each elementary replacement is a quasi-isomorphism.",
-   "uses": [
-    "lem-weil-pbc-abelian-pushout-mono",
-    "lem-weil-pbc-pushout-cokernel-iso",
-    "lem-weil-pbc-complex-ses-homology-long-exact",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 07K6 (lemma-replace-resolution), justification of the elementary replacement quasi-isomorphism; homology.tex Tags 08N4 (lemma-cartesian-cocartesian), 08N3 (lemma-cartesian-kernel), and 0117 (lemma-long-exact-sequence-cochain)."
-   }
-  },
-  {
-   "text": "The map $(j,-d_C^n)$ is mono because its first projection is mono. Apply the degree inequality to its short exact cokernel sequence to obtain $d(P)\\leq\\max\\{d(C^n)-1,d(E\\oplus C^{n+1})\\}\\leq\\max\\{d(C^n)-1,d(C^{n+1})\\}$. Hence replacement makes degree $n$ zero, changes no other degree except $n+1$, and preserves the bound $d(C^r)\\leq D$. Subtraction here is truncated, so the estimate also holds when $d(C^n)=1$ or $d(C^{n+1})=0$.",
-   "uses": [
-    "def-sp-abelian"
-   ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 07K6 (lemma-replace-resolution), numerical inequality after the elementary replacement diagram."
+    "place": "Tag 07K6 (lemma-replace-resolution), uniformly bounded specialization; finite cone proof written by V2."
    }
   },
   {
-   "text": "For a complex $C$ reached from $J$, call an index bad if $d(C^n)>0$ and assign it weight $n+d(C^n)$. Initially bad indices lie below zero, and their weights are at most $D-1$. If there are bad indices, the nonempty set of their integer weights is bounded above and therefore has a largest element $\\xi$. The indices $I$ attaining $\\xi$ lie in the finite interval $[\\xi-D,\\xi-1]$. Make a replacement at the smallest index $n\\in I$. Step 5 shows that every new bad weight is at most $\\xi$: only $n+1$ can acquire a new one, and its new weight is at most $\\max\\{n+d(C^n),(n+1)+d(C^{n+1})\\}$; if the old degree at $n+1$ is zero, use $n+1\\leq\\xi$ for the second term instead. The index $n$ leaves $I$, and only $n+1$ may enter it. Consequently, as long as the maximum stays $\\xi$, the positive integer $\\Phi=\\sum_{r\\in I}(\\xi-r)$ drops by at least one: the removed contribution is $\\xi-n$, and the only possible added contribution is $\\xi-n-1$. After finitely many replacements there are no bad indices at weight $\\xi$. Either none remain at all, or the maximum strictly decreases. This argument can be repeated at each new maximum; no maximum increases and the uniform bound $D$ is preserved.",
+   "text": "Suppose $d(K^n)\\leq N+1$ for all $n$. In the abelian category of complexes take $Q=\\operatorname{coker}(j)$ and $p:I\\to Q$. The short complex $K\\xrightarrow j I\\xrightarrow p Q$ is short exact, since $j$ is monic. Evaluation is exact, hence its evaluated sequence is short exact and each $p^n$ is epic. Apply the degree inequality to get $d(Q^n)\\leq\\max\\{d(K^n)-1,d(I^n)\\}=d(K^n)-1\\leq N$. The universal property of kernels yields an isomorphism $K\\cong\\ker(p)$. This uses ShortComplex.cokernelSequence_exact, ShortExact.map for evaluation, and the uniqueness isomorphism between limiting kernel forks.",
    "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 07K6 (lemma-replace-resolution), last proof paragraph, maximum weight and finite elimination of its attaining set; explicit decreasing integer for the source's termination argument."
-   }
-  },
-  {
-   "text": "If $J$ has no bad indices, stop before the first round and take $L=J$ and $\\beta=1_J$. Otherwise organize Step 6 into rounds, each consisting of the finitely many replacements that remove the current maximum weight. If a round leaves no bad terms, stop and retain that complex. Otherwise write $C_0=J,C_1,C_2,\\ldots$ for the complexes at the beginnings of rounds and $\\xi_s$ for their maximum weights. The finite composite $C_s\\to C_{s+1}$ is a quasi-isomorphism by Step 4 and functoriality of cohomology, and $\\xi_s\\leq\\xi_0-s$. A replacement within round $s$ has $n+d(C^n)=\\xi_s$ with $d(C^n)\\geq1$, so $n\\leq\\xi_s-1$. Its only changed terms are at $n,n+1\\leq\\xi_s$, its only changed differential sources are $n-1,n,n+1\\leq\\xi_s$, and its map is the identity outside those two terms. For any integer $m$, choose $s$ with $\\xi_s<m$. No round from then on changes any term in degree $r\\geq m$, any differential whose source has degree $r\\geq m$, or any transition component in those degrees. Thus every right-hand tail is eventually literally unchanged; this uses finitely many rounds above any bound, not existence or exactness of an infinite colimit.",
-   "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 07K6 (lemma-replace-resolution), last proof paragraph: ordering replacements so every brutal lower truncation changes only finitely often."
-   }
-  },
-  {
-   "text": "In the infinite case define $L^r$ and $d_L^r$ to be the eventual values of the terms and arrows in Step 7. For any pair of consecutive arrows choose a round after which the three involved terms and these arrows are unchanged. Their composite is zero in that round, so it is zero in $L$. Hence $L$ is a cochain complex. The components of the composites $J\\to C_s$ are eventually constant in every degree, since subsequent transition components there are identities; call the resulting family $\\beta^r:J^r\\to L^r$. Choose a common late round for degrees $r,r+1$ to see that $d_L^r\\beta^r=\\beta^{r+1}d_J^r$, so $\\beta$ is a chain map. For fixed $r$, choose a round after stabilization in degree $r$ and with $\\xi_s<r+1$. If the stabilized object $L^r=C_s^r$ had positive degree, its bad weight $r+d(C_s^r)\\geq r+1$ would exceed $\\xi_s$. Therefore $d(L^r)=0$. In the finite stopping case take the last complex and the finite composite as $L,\\beta$; the same degree-zero conclusion holds by the stopping condition.",
-   "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 07K6 (lemma-replace-resolution), conclusion of the locally finite sequence of elementary replacements; explicit construction from the stabilized terms."
-   }
-  },
-  {
-   "text": "Fix $r\\in\\mathbf Z$. In the infinite case choose a round $s$ after which the terms in degrees $r-1,r,r+1$ and their intervening differentials have stabilized. Under their eventual identifications, $H^r(L)=H^r(C_s)$, since both are the kernel of the same outgoing differential modulo the image of the same incoming one. The map $H^r(\\beta)$ is exactly that of the finite composite $J\\to C_s$, because the components in these three degrees have stabilized as well. It is an isomorphism by Step 4. In the finite stopping case $\\beta$ is a finite composite of the quasi-isomorphisms of Step 4, or $1_J$ if there were no bad indices initially, so $H^r(\\beta)$ is again an isomorphism. Thus $\\beta$ is a quasi-isomorphism. Finally $K\\xrightarrow\\alpha J\\xrightarrow\\beta L$ is a quasi-isomorphism, since its map on each cohomology is the composite of two isomorphisms, and every term of $L$ has degree zero as required.",
-   "uses": [
+    "def-sp-abelian",
     "def-weil-abstract-derived-category"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 07K6 (lemma-replace-resolution), final quasi-isomorphism, using the degreewise finite stabilization just proved."
+    "place": "Tag 07K6 (lemma-replace-resolution), uniformly bounded specialization; finite cone proof written by V2."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-degreewise-epi-kernel-cocone-qis] to the degreewise epimorphism $p:I\\to Q$. It gives a quasi-isomorphism $\\ker(p)\\to\\operatorname{Cone}(p)[-1]$. Precompose with the isomorphism of Step 3 to obtain a quasi-isomorphism from $K$. The term in degree $n$ of this shifted cone is isomorphic to $I^n\\oplus Q^{n-1}$. By Step 1, the sum bound, and Step 3 its degree is at most $N$. Thus exists_quasiIso_degree_pred lowers a bound of $N+1$ on the current complex to $N$.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-abstract-derived-category",
+    "lem-weil-degreewise-epi-kernel-cocone-qis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070M (lemma-difficulty-K-injectives) and 014Q (cone and shift), through the proved kernel-to-shifted-cone comparison; finite lowering argument for Tag 07K6 written by V2."
+   }
+  },
+  {
+   "text": "Induct on a termwise natural-number bound $N$. If $N=0$, every term has degree zero and the identity suffices. For $N+1$, Step 4 gives $K\\to M$ quasi-isomorphic with term degrees at most $N$; the induction hypothesis gives $M\\to L$ with degree-zero terms. Their composite is a quasi-isomorphism. This is exists_quasiIso_degree_zero_of_term_bound. Apply it with $N=D$, since the global object bound implies the required termwise bound. This finite induction replaces the original bounded-below splicing, elementary pushouts, weighted rounds, and eventual stabilization argument.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 07K6 (lemma-replace-resolution), uniformly bounded specialization; finite cone proof written by V2."
    }
   }
  ],
  "proof_deps": [
   "def-sp-abelian",
   "def-weil-abstract-derived-category",
-  "lem-weil-pbc-abelian-pushout-mono",
-  "lem-weil-pbc-complex-ses-homology-long-exact",
-  "lem-weil-pbc-pushout-cokernel-iso",
-  "lem-weil-pbc-subcategory-right-resolution-05T6"
+  "lem-weil-degreewise-epi-kernel-cocone-qis"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 07K6 (lemma-replace-resolution), all three proof paragraphs; bounded-degree case. The cokernel/pushout comparison and the integer decreasing measure are written out."
+  "place": "Finite induction proof of the uniformly bounded specialization of Tag 07K6, written by V2. Explicit disk envelope, cokernel dimension lowering, and the existing kernel/shifted-cone comparison of Tags 070M and 014Q. Unlike the more general source statement, the uniform finite bound permits a finite number of cone replacements."
  },
  "mathlib_searches": [
   {
@@ -296,9 +249,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-subcategory-right-resolution-05T6"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-16",
   "by": "L",
@@ -324,5 +275,15 @@
   "by": "Q02",
   "date": "2026-10-16",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261018T144425-L-3507107",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
