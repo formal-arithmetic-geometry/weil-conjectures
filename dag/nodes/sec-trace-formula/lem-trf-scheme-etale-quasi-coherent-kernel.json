@@ -36,41 +36,156 @@
   "def-weil-sheaf-of-modules-category",
   "def-trf-space-quasi-coherent-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence], choose quasi-coherent Zariski $\\mathcal O_T$-modules $F,G$ and isomorphisms $F_{\\mathrm{et}}\\simeq M$, $G_{\\mathrm{et}}\\simeq N$. Full faithfulness gives a morphism $\\psi:F\\to G$ whose associated morphism corresponds to $\\varphi$. The morphism formula in [lem-trf-zariski-etale-tensor-sections] identifies its component at $u:U\\to T$ with $\\Gamma(U,u^*\\psi)$. Thus it suffices to identify the kernel of $\\psi_{\\mathrm{et}}$; conjugating by the chosen isomorphisms gives the kernel of $\\varphi$.",
+   "uses": [
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+    "lem-trf-zariski-etale-tensor-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0GNB (lemma-properties-quasi-coherent), proof of (3): write a = b^a; Tag 03DX (proposition-equivalence-quasi-coherent), (2), and Tag 03FH (remark-change-topologies-ringed-sites)."
+   }
+  },
+  {
+   "text": "Form the Zariski module kernel $i:K=\\ker\\psi\\to F$. By [lem-weil-pbc-quasi-coherent-module-kernel], $K$ is quasi-coherent. The same equivalence [lem-trf-scheme-zariski-etale-quasi-coherent-equivalence] therefore makes $K_{\\mathrm{et}}$ a quasi-coherent module on $T_{\\mathrm{et}}$. Applying the association to $i$ gives a morphism $i_{\\mathrm{et}}:K_{\\mathrm{et}}\\to F_{\\mathrm{et}}$.",
+   "uses": [
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0GNB (lemma-properties-quasi-coherent), proof of (3); Zariski kernel closure is schemes.tex Tag 01LB (item-kernel), affine case Tag 01IC (lemma-kernel-cokernel-quasi-coherent)."
+   }
+  },
+  {
+   "text": "Fix any object $u:U\\to T$ of the small etale site. By [def-weil-etale-morphism] it is flat; by [def-weil-flat-morphism] every stalk map $\\mathcal O_{T,u(x)}\\to\\mathcal O_{U,x}$ is flat. Use the tensor pullback $P=u^*$ of [lem-pc-module-pullback-adjunction], with its specified action $h\\mapsto 1\\otimes u^{-1}h$. This action is additive: on a local tensor $b\\otimes m$, the map for $h+h'$ sends it to $b\\otimes(h(m)+h'(m))=b\\otimes h(m)+b\\otimes h'(m)$, and the map for zero is zero. The object and map formulas are exactly those required by [lem-sc-stalk-flat-tensor-pullback-kernels], which shows that $u^*i$ is a kernel of $u^*\\psi$. Now [lem-sc-global-sections-left-exact], applied to the scheme $U$, shows that $\\Gamma(U,u^*i)$ identifies $\\Gamma(U,u^*K)$ with $\\ker(\\Gamma(U,u^*\\psi))$. This uses preservation of kernels only; global sections need not preserve epimorphisms.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-flat-morphism",
+    "lem-pc-module-pullback-adjunction",
+    "lem-sc-stalk-flat-tensor-pullback-kernels",
+    "lem-sc-global-sections-left-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 06VE (lemma-equivalence-quasi-coherent-limits), proof of (5), left exactness because etale morphisms are flat; morphisms.tex lemma-etale-flat; modules.tex Tag 01AH (lemma-limits-colimits), (1)."
+   }
+  },
+  {
+   "text": "By Step 1 and the same morphism formula applied to $i$, the component of $i_{\\mathrm{et}}$ at $U$ is precisely the map $\\Gamma(U,u^*i)$ of Step 3. Hence $i_{\\mathrm{et}}$ is injective on each object and its image there is $\\ker((\\psi_{\\mathrm{et}})_U)$. The sectionwise module-limit statement [lem-weil-pbc-module-sheaves-limits-sectionwise], for the finite diagram $(\\psi_{\\mathrm{et}},0)$, identifies these kernels with a module sheaf and the categorical kernel. Explicitly, the factorization $K_{\\mathrm{et}}\\to\\ker\\psi_{\\mathrm{et}}$ has at $U$ the bijection induced by $\\Gamma(U,u^*i)$; it commutes with restrictions because $i_{\\mathrm{et}}$ does, and the inverse bijections commute with restrictions by uniqueness of preimages. It is therefore an isomorphism of module sheaves. Since $K_{\\mathrm{et}}$ is quasi-coherent by Step 2, so is $\\ker\\psi_{\\mathrm{et}}$ and thus $\\ker\\varphi$. The same cited sectionwise-limit statement gives the formula $(\\ker\\varphi)(U)=\\ker\\varphi_U$ in the item.",
+   "uses": [
+    "lem-trf-zariski-etale-tensor-sections",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 0GNB (lemma-properties-quasi-coherent), proof of (3): Ker(a) = Ker(b)^a; sites-modules.tex Tag 03DB (lemma-limits-colimits), limits paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "lem-trf-zariski-etale-tensor-sections",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "def-weil-etale-morphism",
+  "def-weil-flat-morphism",
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-stalk-flat-tensor-pullback-kernels",
+  "lem-sc-global-sections-left-exact",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 0GNB (lemma-properties-quasi-coherent), proof of (3), with the kernel-preservation argument of Tag 06VE (lemma-equivalence-quasi-coherent-limits), proof of (5), expanded objectwise."
+ },
  "mathlib_searches": [
   {
-   "tool": "grep",
-   "query": "rg -il 'quasicoherent|IsQuasicoherent' Mathlib/",
-   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean",
+   "tool": "leanfinder",
+   "query": "The kernel of a morphism of quasi coherent modules on the small etale site of a scheme is quasi coherent",
+   "results": "8 hits: AlgebraicGeometry.Scheme.kerFunctor, AlgebraicGeometry.Scheme.Modules.instAbelian, AlgebraicGeometry.Scheme.Hom.ker, AlgebraicGeometry.Scheme.kerFunctor_obj, AlgebraicGeometry.Scheme.Hom.ker_apply, SheafOfModules.QuasicoherentData.I, SheafOfModules.QuasicoherentData.X, SheafOfModules.IsQuasicoherent.nonempty_quasicoherentData",
    "date": "2026-10-18",
-   "verdict": "no match: generic quasi-coherent sheaf predicate and Zariski tilde; nothing on kernels on the small etale site"
-  },
-  {
-   "tool": "grep",
-   "query": "rg -n 'isQuasicoherent.*ker|ker.*IsQuasicoherent|kernel.*[Qq]uasicoherent' Mathlib/",
-   "results": "none",
-   "date": "2026-10-18",
-   "verdict": "no match"
-  },
-  {
-   "tool": "leansearch",
-   "query": "kernel of a morphism of quasi-coherent modules on the small etale site of a scheme is quasi-coherent",
-   "results": "not run: the search services are not reachable from the review machine",
-   "date": "2026-10-18",
-   "verdict": "unavailable"
+   "verdict": "no match: generic sheaf/module/category infrastructure, not etale quasi-coherent kernel closure or the association comparison"
   },
   {
    "tool": "loogle",
    "query": "SheafOfModules.IsQuasicoherent, kernel",
-   "results": "not run: the search services are not reachable from the review machine",
+   "results": "0 hits: none; loogle: unknown identifier 'kernel'",
    "date": "2026-10-18",
-   "verdict": "unavailable"
+   "verdict": "inconclusive: loogle: unknown identifier 'kernel'"
+  },
+  {
+   "tool": "grep",
+   "query": "isQuasicoherent.*ker|ker.*IsQuasicoherent|kernel.*quasicoherent",
+   "results": "0 hits: none",
+   "date": "2026-10-18",
+   "verdict": "no match: no etale quasicoherent kernel or association-exactness declaration"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Kernels of quasicoherent sheaves on the etale site of a scheme",
+   "results": "8 hits: SheafOfModules.IsQuasicoherent.mk, SheafOfModules.isQuasicoherent, SheafOfModules.IsQuasicoherent, SheafOfModules.QuasicoherentData.I, SheafOfModules.QuasicoherentData.ctorIdx, SheafOfModules.QuasicoherentData.presentation, AlgebraicGeometry.Scheme.smallEtaleTopology, SheafOfModules.QuasicoherentData",
+   "date": "2026-10-18",
+   "verdict": "no match: generic sheaf/module/category infrastructure, not etale quasi-coherent kernel closure or the association comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The functor from quasicoherent modules on a scheme to modules on its small etale site preserves kernels and is exact",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instAbelian, instAbelianCondensedMod, SheafOfModules.isQuasicoherent, SheafOfModules.Finite.forgetPreservesFiniteLimits, SheafOfModules.QuasicoherentData.I, Condensed.instAB4StarCondensedMod, LightCondensed.instIsGrothendieckAbelianLightCondMod, SheafOfModules.instAbelian",
+   "date": "2026-10-18",
+   "verdict": "no match: generic sheaf/module/category infrastructure, not etale quasi-coherent kernel closure or the association comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsQuasicoherent, CategoryTheory.Limits.kernel",
+   "results": "0 hits: none",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*(quasicoherent|exact)|quasicoherent.*(exact|kernel)",
+   "results": "0 hits: none",
+   "date": "2026-10-18",
+   "verdict": "no match: no etale quasicoherent kernel or association-exactness declaration"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The associated sheaf functor from quasi coherent modules on a scheme to modules on the small etale site is exact and preserves kernels",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instAbelian, AlgebraicGeometry.Scheme.Modules.instCategory, AlgebraicGeometry.Scheme.Modules.instHasLimits, SheafOfModules.QuasicoherentData.X, AlgebraicGeometry.Scheme.Modules.instPreservesLimitsPresheafAbCarrierCommRingCatToPresheaf, SheafOfModules.isQuasicoherent, SheafOfModules.QuasicoherentData.I, instAbelianCondensedMod",
+   "date": "2026-10-18",
+   "verdict": "no match: generic sheaf/module/category infrastructure, not etale quasi-coherent kernel closure or the association comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsQuasicoherent, PreservesFiniteLimits",
+   "results": "0 hits: none; loogle: unknown identifier 'PreservesFiniteLimits'",
+   "date": "2026-10-18",
+   "verdict": "inconclusive: loogle: unknown identifier 'PreservesFiniteLimits'"
+  },
+  {
+   "tool": "grep",
+   "query": "preserves.*kernel|exact.*quasi.?coherent|quasi.?coherent.*exact",
+   "results": "0 hits: none; Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-18",
+   "verdict": "no match: no etale quasicoherent kernel or association-exactness declaration"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exactness of the functor associating to a quasi coherent scheme module its sheaf on the small etale site",
+   "results": "8 hits: AlgebraicGeometry.Scheme.smallEtaleTopology, SheafOfModules.isQuasicoherent, SheafOfModules.QuasicoherentData, SheafOfModules.QuasicoherentData.I, SheafOfModules.IsQuasicoherent.mk, AlgebraicGeometry.Scheme.Modules.toPresheafOfModules, SheafOfModules.QuasicoherentData.ctorIdx, AlgebraicGeometry.Scheme.smallEtalePretopology",
+   "date": "2026-10-18",
+   "verdict": "no match: generic sheaf/module/category infrastructure, not etale quasi-coherent kernel closure or the association comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "merged_into": null,
  "created": {
   "by": "worker",
@@ -87,5 +202,44 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-scheme-etale-quasi-coherent-kernel",
+  "worker": "stage1",
+  "summary": "Expanded the transfer proof of Stacks 0GNB(3): lift the morphism through the existing Zariski-etale equivalence, take its quasi-coherent Zariski kernel, prove that every etale test pullback and global sections preserve this kernel, and identify the resulting sectionwise etale kernel. Reused existing nodes throughout; no statement change and no new nodes. Replaced inherited unrun search entries by actual logged searches.",
+  "blueprint": "Historical lem-trf-local-term-locality ancestry retained: the descendant ampleness/pushforward input uses Stacks 03M9, whose final affine-target paragraph needs kernel closure (03M1(3)); this item realizes its scheme case 0GNB(3). Steps 1-2 realize a=b^a and the Zariski kernel; Steps 3-4 supply 06VE(5) and Ker(a)=Ker(b)^a. No unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-module-pullback-adjunction",
+    "why": "Generic tensor-pullback object and map formulas verify the input functor for the stalkwise-flat kernel theorem; the unit supplies no replacement."
+   },
+   {
+    "node": "lem-sc-stalk-flat-tensor-pullback-kernels",
+    "why": "Generic ringed-space kernel preservation for stalkwise-flat tensor pullback supplies the exactness argument of Stacks 06VE(5), without changing the unit route."
+   },
+   {
+    "node": "lem-sc-global-sections-left-exact",
+    "why": "Generic preservation of module kernels by global sections computes the component on each etale test scheme; no node of this unit replaces this tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "why": "Generic site-module limits computed on sections identify the objectwise kernel with the categorical module-sheaf kernel."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-module-pullback-adjunction",
+  "lem-sc-stalk-flat-tensor-pullback-kernels",
+  "lem-sc-global-sections-left-exact",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q40-3526e6fff",
+  "group": "Q40",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-3526e6fff (reviewer sub-agent of L); spot-checked: Read the item, all 9 proof_deps and 4 stmt_deps statements, and descent.tex 0GNB(3) and 06VE(1),(5) with their proofs, plus tags 03DX, 03FH, 01LB, 01IC, 01AH, 03DB and lemma-etale-flat. Step 1: the equivalence node gives F, G and psi; the tensor-sections node gives the component Gamma(U,u^*psi), and the presheaf is already a sheaf for quasi-coherent F. Step 2: the Zariski kernel node (closed in slopmaster2, so a tool) gives K quasi-coherent, then K_et. Step 3: etale implies flat stalks; P_u from the pullback-adjunction node matches def-pc-module-pullback and is additive; the stalk-flat kernel node and global-sections left exactness give Gamma(U,u^*K) = ker. Step 4: the sectionwise-limits Mathlib leaf and the naturality of the bijections give K_et iso to ker psi_et, hence ker phi is quasi-coherent. Only flatness is used, exactly as in 06VE(5); the big-site counterexample 06VE(6) is excluded. Edge cases checked: 0, id, empty T, affine. No new nodes; no duplicate found in a DAG grep for 0GNB/06VE/03M1 and for etale kernel/exactness statements. Accepted tool_uses: lem-pc-module-pullback-adjunction, lem-sc-stalk-flat-tensor-pullback-kernels, lem-sc-global-sections-left-exact, lem-weil-pbc-module-sheaves-limits-sectionwise. No SGA. Not a target node. No fixes."
  }
 }

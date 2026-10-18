@@ -12,9 +12,102 @@
   "def-weil-weil-sheaf-complex",
   "prop-trf-rational-frobenius-integral-model"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply only clause (1) of [lem-trf-local-frobenius-conjugacy], with the zero strict Weil complex over $A_1$ (zero complex, unique isomorphism $Lg^*0\\cong0$, as in [def-trf-strict-weil-complex]). This clause concerns the lifts alone: there are exactly $e$ of them, $z_i=G^iz_0$, with $G(v)=gv\\operatorname{Spec}(\\sigma)$ and $z_{i+e}=z_i$; for $e\\mid m$ each is the lift of the specified $y_{i,m}$. No reduction of $\\varphi_E$ is used here. The affine formulas in [def-trf-scheme-frobenius] give, for $v^*(a\\otimes b)=v_0^*(a)b$,\n$$(Gv)^*(a\\otimes b)=\\sigma(v_0^*(a)\\gamma(b))=v_0^*(a)^q b=(\\Phi v)^*(a\\otimes b).$$\nThus $\\Phi v=Gv$ for every $k$-point $v$, and $\\Phi^m z_i=z_i$ for $e\\mid m$. Also $g^mz_i=z_i\\operatorname{Spec}(\\gamma^m)$, as an equality of scheme morphisms; the unreparametrized map $g^mz_i$ is not identified with $z_i$.",
+   "uses": [
+    "lem-trf-local-frobenius-conjugacy",
+    "def-trf-strict-weil-complex",
+    "def-trf-scheme-frobenius"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+    "place": "Step 1, Local powers, with the orbit comparison and cyclic-product argument written explicitly"
+   }
+  },
+  {
+   "text": "Use [lem-trf-completed-stalk-reparametrization-coherence] over $E$. For any $k$-point $v$ and $i\\ge0$ define the natural isomorphism\n$$Q_i^v(M)=c_{g^i,v,M}^{-1}r_{g^iv,\\sigma^i,M}^{-1}:M_{G^iv}\\longrightarrow(L(g^i)^*M)_v.$$\nThe identity equations give $Q_0^v=1$. Its composition and reparametrization equations give, under the specified pullback comparison,\n$$Q_{i+j}^v(M)=Q_i^v(L(g^j)^*M)Q_j^{G^iv}(M).$$\nIndeed the two inverse $r$ maps remove the source automorphisms $\\operatorname{Spec}(\\sigma^j)$ and $\\operatorname{Spec}(\\sigma^i)$; these commute and compose to $\\operatorname{Spec}(\\sigma^{i+j})$. Move the first reparametrization across the pullback comparison by the displayed $r$–$c$ square of the cited lemma, and combine the two inverse $c$ maps by its composition equation. The resulting map is precisely $c_{g^{i+j},v,M}^{-1}r_{g^{i+j}v,\\sigma^{i+j},M}^{-1}$.",
+   "uses": [
+    "lem-trf-completed-stalk-reparametrization-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+    "place": "Step 1, Local powers, with the orbit comparison and cyclic-product argument written explicitly"
+   }
+  },
+  {
+   "text": "Put $P_i=L(g^i)^*$ and $\\varphi^{[0]}=1$. The $E$-stage definition in [prop-trf-rational-frobenius-integral-model] is the ordered composite $\\varphi^{[n]}=\\varphi_E P_1(\\varphi_E)\\cdots P_{n-1}(\\varphi_E)$. The composition comparisons are associative and unital by [lem-trf-integral-pullback-comparison-realization], also after rationalization. Splitting this ordered list after its first $i$ factors therefore gives\n$$\\varphi^{[i+j]}=\\varphi^{[i]}P_i(\\varphi^{[j]})\\quad(i,j\\ge0).$$\nMore explicitly, the $j=0$ case uses the identity comparison; adjoining $P_{i+j}(\\varphi_E)$ to both sides of the identity for $j$ gives the identity for $j+1$, since functoriality identifies the last factors with $P_i(\\varphi^{[j+1]})$. This induction uses no finite-coefficient Weil structure. Each factor is invertible because $\\varphi_E$ is invertible in [def-weil-weil-sheaf-complex].",
+   "uses": [
+    "prop-trf-rational-frobenius-integral-model",
+    "lem-trf-integral-pullback-comparison-realization",
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+    "place": "Step 1, Local powers, with the orbit comparison and cyclic-product argument written explicitly"
+   }
+  },
+  {
+   "text": "Define $T_i^v=\\varphi^{[i]}_vQ_i^v(K_E):K_{E,G^iv}\\xrightarrow{\\sim}K_{E,v}$ for every $i\\ge0$. Steps 2–3 give $T_0^v=1$. Naturality from [lem-trf-completed-stalk-reparametrization-coherence], applied to $\\varphi^{[j]}:P_jK_E\\to K_E$, says\n$$Q_i^v(K_E)\\varphi^{[j]}_{G^iv}=(P_i\\varphi^{[j]})_vQ_i^v(P_jK_E).$$\nConsequently\n$$T_i^vT_j^{G^iv}=\\varphi^{[i]}_v(P_i\\varphi^{[j]})_vQ_i^v(P_jK_E)Q_j^{G^iv}(K_E)=\\varphi^{[i+j]}_vQ_{i+j}^v(K_E)=T_{i+j}^v.$$\nAll arrows in this equation go from $K_{E,G^{i+j}v}$ to $K_{E,v}$. The zero-index cases follow from the identity comparisons. These transports are indexed by integers and are not asserted to be periodic.",
+   "uses": [
+    "lem-trf-completed-stalk-reparametrization-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+    "place": "Step 1, Local powers, with the orbit comparison and cyclic-product argument written explicitly"
+   }
+  },
+  {
+   "text": "Fix $v=z_i$, $e\\mid m$, and $y=y_{i,m}$. The normalization theorem [lem-trf-local-frobenius-transport-normalization] identifies the actual normalized $\\tau_{y,m}$ with the $m$ successive point transports along $h=\\operatorname{Spec}(\\gamma)$ on $Lv^*K_E$, followed by the composition comparison for $g^mv=vh^m$. Apply the source-automorphism equation $c_{\\delta,\\mathrm{id},N}j_{\\delta,N}=r_{\\mathrm{id},\\alpha,N}$ of [lem-trf-completed-stalk-reparametrization-coherence] successively to these $m$ maps, and use its compatibility with $v$ and composition. It gives\n$$c_{g^m,v,K_E}\\tau_{y,m}=r_{v,\\gamma^m,K_E}:K_{E,v}\\longrightarrow K_{E,g^mv}.$$\nSince $g^mv=v\\operatorname{Spec}(\\gamma^m)$, the $r$ composition equation identifies this right-hand side with $r_{g^mv,\\sigma^m,K_E}^{-1}$. Therefore $\\tau_{y,m}=Q_m^v(K_E)$. The $E$-stage operator formula in [prop-trf-rational-frobenius-integral-model] now gives\n$$F_{y,m}=\\varphi^{[m]}_v\\tau_{y,m}=T_m^v.$$\nThe normalization theorem applies to the actual rationalized comparisons and assumes no integral Weil isomorphism. Its fixed-point equality is valid here by step 1, and its coefficient datum agrees with the given one.",
+   "uses": [
+    "lem-trf-local-frobenius-transport-normalization",
+    "lem-trf-completed-stalk-reparametrization-coherence",
+    "prop-trf-rational-frobenius-integral-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+    "place": "Step 1, Local powers, with the orbit comparison and cyclic-product argument written explicitly"
+   }
+  },
+  {
+   "text": "For each $v=z_i$, step 1 gives $G^ev=v$. Step 4 with indices $e$ and $(r-1)e$ therefore gives $T_{re}^v=T_e^vT_{(r-1)e}^v$. Starting at $r=1$ and inducting yields $T_{re}^v=(T_e^v)^r$ for every $r\\ge1$. By step 5, $T_e^{z_0}=F_{y_{0,e},e}=F_x$ and $F_{y_{0,er},er}=F_x^r$. This is a product identity of endomorphisms of the rational stalk complex, before passing to cohomology or traces.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+    "place": "Step 1, Local powers, with the orbit comparison and cyclic-product argument written explicitly"
+   }
+  },
+  {
+   "text": "Set $T_i=T_i^{z_0}$ for $0\\le i<e$. For $m=er$, the two decompositions from step 4, together with $G^mz_0=z_0$ and $G^iz_0=z_i$, give\n$$T_iT_m^{z_i}=T_{i+m}^{z_0}=T_{m+i}^{z_0}=T_m^{z_0}T_i.$$\nSteps 5–6 replace the two $T_m$ maps by $F_{y_{i,er},er}$ and $F_x^r$. Multiplying on the left by the inverse of $T_i$ gives exactly $F_{y_{i,er},er}=T_i^{-1}F_x^rT_i$, and $T_0=1$. For $r=1$ every other starting lift is one of the $z_i$ by step 1, so its one-circuit operator is conjugate to $F_x$. All inverses used are rational stalk isomorphisms from step 4; nothing requires an invertible map on an integral lattice.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+    "place": "Step 1, Local powers, with the orbit comparison and cyclic-product argument written explicitly"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-local-frobenius-conjugacy",
+  "def-trf-strict-weil-complex",
+  "def-trf-scheme-frobenius",
+  "lem-trf-completed-stalk-reparametrization-coherence",
+  "prop-trf-rational-frobenius-integral-model",
+  "lem-trf-integral-pullback-comparison-realization",
+  "def-weil-weil-sheaf-complex",
+  "lem-trf-local-frobenius-transport-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/thm-trf-l-function-euler-product.proof.md",
+  "place": "Step 1, Local powers, with the orbit comparison and cyclic-product argument written explicitly"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +143,66 @@
    "results": "Only RingTheory/Frobenius.lean:258 (arithmetic Frobenius over primes) and WittVector/FrobeniusFractionField.lean:217; no rational stalk-complex Frobenius statement.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local Frobenius operators on rational constructible Weil stalk complexes along a closed point orbit are conjugate to powers of one circuit monodromy",
+   "results": "8 hits: WittVector.exists_frobenius_solution_fractionRing_aux, WittVector.StandardOneDimIsocrystal.frobenius_apply, WittVector.instIsocrystalStandardOneDimIsocrystal, WittVector.exists_frobenius_solution_fractionRing, WittVector.Isocrystal.frob, WittVector.Isocrystal.frobenius, IsArithFrobAt.arithFrobAt, WittVector.isocrystal_classification. No rational constructible stalk-complex operator statement; matches concern Witt isocrystals, arithmetic Frobenius, site fiber functors or topological coverings.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Frobenius\", \"stalk\"",
+   "results": "0 hits: none. No rational constructible stalk-complex operator statement; matches concern Witt isocrystals, arithmetic Frobenius, site fiber functors or topological coverings.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "frobenius.*stalk|stalk.*frobenius|[Cc]yclic.*monodromy",
+   "results": "0 hits: none. No rational constructible stalk-complex operator statement; matches concern Witt isocrystals, arithmetic Frobenius, site fiber functors or topological coverings.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivariant sheaf fiber functors at a periodic orbit have conjugate monodromy powers",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.Point.sheafFiber, IsCoveringMap.monodromyFunctor, CategoryTheory.GrothendieckTopology.Point.Hom.sheafFiber_id, IsCoveringMap.monodromyFunctor_obj, CategoryTheory.PreGaloisCategory.FiberFunctor.comp_right, IsCoveringMap.monodromy, IsCoveringMap.monodromyFunctor_map, CategoryTheory.PreGaloisCategory.toAutMulEquiv_apply. No rational constructible stalk-complex operator statement; matches concern Witt isocrystals, arithmetic Frobenius, site fiber functors or topological coverings.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local Frobenius operators on rational constructible Weil stalk complexes along a closed point orbit are conjugate to powers of one circuit monodromy",
+   "results": "8 hits: WittVector.exists_frobenius_solution_fractionRing_aux, WittVector.StandardOneDimIsocrystal.frobenius_apply, WittVector.instIsocrystalStandardOneDimIsocrystal, WittVector.exists_frobenius_solution_fractionRing, WittVector.Isocrystal.frob, WittVector.Isocrystal.frobenius, IsArithFrobAt.arithFrobAt, WittVector.isocrystal_classification. No rational constructible stalk-complex operator statement; matches concern Witt isocrystals, arithmetic Frobenius, site fiber functors or topological coverings.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Frobenius\", \"stalk\"",
+   "results": "0 hits: none. No rational constructible stalk-complex operator statement; matches concern Witt isocrystals, arithmetic Frobenius, site fiber functors or topological coverings.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "frobenius.*stalk|stalk.*frobenius|[Cc]yclic.*monodromy",
+   "results": "0 hits: none. No rational constructible stalk-complex operator statement; matches concern Witt isocrystals, arithmetic Frobenius, site fiber functors or topological coverings.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Equivariant sheaf fiber functors at a periodic orbit have conjugate monodromy powers",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.Point.sheafFiber, IsCoveringMap.monodromyFunctor, CategoryTheory.GrothendieckTopology.Point.Hom.sheafFiber_id, IsCoveringMap.monodromyFunctor_obj, CategoryTheory.PreGaloisCategory.FiberFunctor.comp_right, IsCoveringMap.monodromy, IsCoveringMap.monodromyFunctor_map, CategoryTheory.PreGaloisCategory.toAutMulEquiv_apply. No rational constructible stalk-complex operator statement; matches concern Witt isocrystals, arithmetic Frobenius, site fiber functors or topological coverings.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-trf-l-function-euler-product",
@@ -70,5 +219,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-rational-local-frobenius-powers",
+  "worker": "stage1",
+  "summary": "Expanded the rational-stage local-powers argument without applying finite-coefficient Weil results to a rational structure. One statement-only auxiliary node isolates completed stalk/reparametrization coherence, independently of any Weil map. Explicitly constructed Q_i and T_i, proved their composition identities, identified the specified normalized operators, and calculated powers and conjugacy. No statement change and no integral Weil isomorphism hypothesis.",
+  "blueprint": "Realizes thm-trf-l-function-euler-product.proof.md Step 1, Local powers: (a) is the explicit regrouping in step 3; (b) is the auxiliary coherence node with the existing all-stage normalization used in steps 2 and 5; (c) supplies invertibility in steps 3–4. The conjugacy-of-operators assertion is proved directly in steps 6–7; trace invariance (d) is unnecessary for this stronger operator assertion.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-local-frobenius-conjugacy",
+    "why": "Only coefficient-independent clause (1), instantiated with the zero finite Weil complex, supplies the closed-point orbit; none of its finite Weil operator clauses is used."
+   },
+   {
+    "node": "prop-trf-rational-frobenius-integral-model",
+    "why": "Supplies the actual rational iterates and normalized stalk operator formulas; it assumes an arbitrary rational morphism and does not impose integral invertibility."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-local-frobenius-conjugacy",
+  "prop-trf-rational-frobenius-integral-model"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-ND-8b093f45e",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-8b093f45e (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement, blueprint Step 1 (Local powers) and Stacks 05V1, 0F4F and 0993 in full; the item statement is unchanged. Batch-5 check: the item is the Euler-product local-powers regrouping, not a step of the trace formula. I computed the dependency closures of the four newly cited nodes. None reaches the trace-formula theorems (finite-ring, E, Qlb or local-term), either assumption leaf or any Poincaré-duality theorem. lem-trf-local-frobenius-conjugacy is used only for clause (1), the lifts of a closed point; its closure adds general categorical-trace algebra and finiteness of H_c, which is a hypothesis of the assumption, not a conclusion. The completed-stalk coherence node, the pullback-comparison realization and the transport normalization are comparison and operator-normalization coherence that neither assumption gives. Math: Φv=Gv rechecked on rings; Q_{i+j} rederived from the r–c square, the r composition law (Spec is contravariant) and the c composition law; the cocycle follows by naturality for rational morphisms; c∘τ=r_{v,γ^m}=r^{-1}_{g^mv,σ^m} gives τ=Q_m^v and F_{y,m}=T_m^v; powers and conjugacy have correct orientation. The new node is statement-only and self-contained, its equations are germ-level true, it is not a clause of the item, and grep for 'reparametri' found no duplicate (the existing coherence node is finite-ring only). One sentence in it ('compatible with any finite succession...') is vague, but everything step 5 needs follows from its displayed equations, so I left it. Edge cases checked: e=1, e=2, a non-integral φ_E, K=0 and empty X_0. Both declared tool_uses lie inside the unit route, so neither is needed and I accept none. No SGA. No changes."
  }
 }
