@@ -133,5 +133,32 @@
   "group": "Q38",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-3e2680e45 (reviewer sub-agent of L); spot-checked: I read the item in full. Its statement matches the current blueprint main-20261015 sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/def-trf-correspondence.md (order 2430) character for character; the old master copy (order 2086) differs only in its order number and the 'recorded in advance' note. I opened all six cited dependencies; each exists, is split and reviewed, and none is merged. C and X are separated finite-type k-schemes, so c1 is a separated finite-type k-morphism between finite-type k-schemes. That is exactly the setting where def-weil-exceptional-inverse-image constructs Rc1^! and def-trf-admissibility defines admissibility. Lc2^* is the derived pullback of def-weil-derived-pullback-tensor-hom, which applies because ell is not p. So u lives in D(C_proet,A) with A=A_{E,n} and n>=1, and K is in the pro-etale category D^b_ctf. No other coefficient category is substituted. The admissibility predicate is the fixed-stage notion; its base-change exchange is Rg'_*Rf'^! -> Rf^!Rg_*, and I checked that this direction is correct. The item only names the predicate and claims no exchange of its own. I tested the small cases: K=0; X=C=Spec k with both legs the identity, where u is any endomorphism; empty C; and empty X. There is no dependency cycle (12010 nodes walked). def-trf-correspondence-between-pairs generalizes this item but cites it, and sk-d-corr is a different ambient notion, so same_as=[] is correct. There are no new nodes and no tool_uses, I made no fixes, and the Lean attachment was rightly declined."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TraceCohomologicalCorrespondence",
+  "declaration": "WeilConjectures.TrfCohomologicalCorrespondence",
+  "declarations": [
+   "WeilConjectures.trfCorrespondenceCompactifiable",
+   "WeilConjectures.trfCorrespondenceExceptional",
+   "WeilConjectures.trfCorrespondenceLegAdmissible",
+   "WeilConjectures.TrfCohomologicalCorrespondence",
+   "WeilConjectures.TrfCohomologicalCorrespondence.toProduct",
+   "WeilConjectures.TrfCohomologicalCorrespondence.IsAdmissible"
+  ],
+  "file": "lean/Sheaf/Paper/TraceCohomologicalCorrespondence.lean",
+  "statement": "structure TrfCohomologicalCorrespondence (hl : l ≠ F.p) (X : Over (Spec (.of F.k))) [IsSeparated X.hom] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] (K : (trfFiniteTorFixed l E n X.left).FullSubcategory)",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Uses the canonical fixed-scalar realization trfFiniteTorFixed and the specified trfExceptional of the recorded admissibility dependency. Positive levels are indexed by n+1. The support and both legs are over Spec k, with separated finite-type support; the coefficient map uses ordinary leg 2 and exceptional leg 1. IsAdmissible requires fixed-stage admissibility for leg 1 and its Cartesian base changes in the separated finite-type k-scheme setting. The helpers only expose existing geometric properties and canonical operations; no additional geometric or ambient-adjoint assumption is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1d7ed96df",
+  "group": "NV",
+  "result": "fix",
+  "note": "Lean matches node/source (main-20261015 order 2430) clause by clause: F, l≠p, A_{E,n+1} for all n≥1, X and C separated finite type over k, legs c₁,c₂ with toProduct = pullback.lift c₁ c₂, K in recorded trfFiniteTorFixed (D^b_ctf), u : derived upperStar(c₂)K → trfExceptional(c₁)K (= sfFiniteExceptionalAt), IsAdmissible = IsExceptionallyAdmissibleAt(c₁) plus all Cartesian base changes at fixed A (square orientation correct). Helpers only derive leg properties, compactification is a Prop instance shared with the dependency; no sorry, no hollow data, no extra assumptions or universe restrictions; upstream ProEtale.Correspondence uses the excluded ambient rightDerivedUpperShriek, so not a duplicate. Node changes only lean, statement verbatim. nt_compile --json 10.0 s rc 0, no diagnostics. Only finding H11: Second reading was the placeholder; fixed by fixes/def-trf-correspondence.report.md (Worker report verbatim plus real clause-by-clause second reading). No Lean or record change."
  }
 }
