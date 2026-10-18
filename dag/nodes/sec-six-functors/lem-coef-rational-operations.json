@@ -21,7 +21,8 @@
   "def-weil-derived-pullback-tensor-hom",
   "def-weil-integral-rational-qbar-compact-support",
   "def-weil-exceptional-inverse-image",
-  "thm-coef-rational-verdier"
+  "thm-coef-rational-verdier",
+  "lem-weil-constant-coefficient-objects-constructible"
  ],
  "proof": [
   {
@@ -709,5 +710,43 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-42dbb0dd7",
+  "group": "NM",
+  "result": "pass",
+  "note": "Re-delivery after return 070596bbadf3; the Lean module is byte-identical to that reviewed version. H2 repaired by the allowed §1(B) alternative: def-weil-exceptional-inverse-image is now existing:true, recording Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients System (statement verbatim with line 812) plus FieldStage/RingSystem/FieldSystem/Operation/Comparison etc., and keeps sfFiniteExceptionalAt (public import). The item dropped the theorem node lem-sf-constructible-exceptional-adjunction-coefficients from stmt_deps. System fixes the rational G (finiteRight étale-origin, rationalLeft = actual compact support, scalar normalizations), so it is not an arbitrary choice. Mechanical finding: lem-weil-constant-coefficient-objects-constructible is a genuine dependency, since coefficientUnit uses (integralConstantCoefficient_constructible …).2.1, the sfIntegralConstructible membership needed to type Ra^!E; PASS on that point. Re-read all clauses (internal Hom closure and adjunction with completed-tensor evaluation, D=RHom(-,ω) with evaluation, Rf^!≅D_X f* D_Y, Rf_!⊣Rf^! with unit/counit, ω≅Ra^!E, finite-scalar Hom and exceptional mate squares): all conclusions, no extra hypotheses, one universe u. Edge cases ok. lean.statement verbatim; node statement unchanged. nt_compile clean in 21.1 s with no diagnostics. Not blocking: the def and theorem nodes share a module that has a proof-only non-public import with a DAG back-edge (det-sp-unique-adjoint-coefficients), no Lean cycle; docstrings cite the main-20261015 source copy; the second reading is the author's own."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.RationalOperations",
+  "declaration": "WeilConjectures.coef_rational_operations",
+  "declarations": [
+   "WeilConjectures.RationalOperations.homPair",
+   "WeilConjectures.RationalOperations.tensorLeft",
+   "WeilConjectures.RationalOperations.homRight",
+   "WeilConjectures.RationalOperations.homDual",
+   "WeilConjectures.RationalOperations.HomIdentification",
+   "WeilConjectures.RationalOperations.coefficientUnit",
+   "WeilConjectures.RationalOperations.dualFormula",
+   "WeilConjectures.RationalOperations.ExceptionalIdentification",
+   "WeilConjectures.RationalOperations.Identification",
+   "WeilConjectures.RationalOperations.dualScalar",
+   "WeilConjectures.RationalOperations.ScalarCompatibility",
+   "WeilConjectures.RationalOperations.HomScalarCompatibility",
+   "WeilConjectures.RationalOperations.structureIsOverSpec",
+   "WeilConjectures.RationalOperations.structureSystem",
+   "WeilConjectures.RationalOperations.DualizingIdentification",
+   "WeilConjectures.RationalOperations.Conclusion",
+   "WeilConjectures.coef_rational_operations"
+  ],
+  "file": "lean/Sheaf/SixFunctors/RationalOperations.lean",
+  "statement": "theorem coef_rational_operations (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (X Y : Scheme.{u}) [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] [IsSeparated (Y ↘ Spec (.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) : RationalOperations.Conclusion D l hl Ω X Y f c",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Identifies the recorded full rational internal Hom and etale-origin coefficient-system exceptional functors, retaining completed integral evaluation, actual adjunction units/counits and both finite-scalar squares. Section 1(B) repairs def-weil-exceptional-inverse-image to record the published integral/rational System and related definition records. Conclusion existentially asserts its own System; exists_system and its theorem node are not statement dependencies. The constant-coefficient theorem supplies the actual unit object membership proof."
  }
 }
