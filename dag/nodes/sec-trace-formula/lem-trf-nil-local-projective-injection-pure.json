@@ -11,9 +11,97 @@
   "def-weil-pbc-projective-module",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The maximal ideal is proper, so $A\\ne0$. Apply [lem-trf-projective-over-local-free] separately to $P$ and $Q$: its statement permits arbitrary projective modules over a commutative local ring, so choose bases $(e_i)_{i\\in I}$ of $P$ and $(q_b)_{b\\in B}$ of $Q$ in the sense of [def-weil-pbc-free-module]. We will prove by induction that every injection from a finite free module into any free $A$-module has an $A$-linear retraction, and then apply this to finite subsets of the basis of $P$. No global retraction for $u$ will be needed.",
+   "uses": [
+    "lem-trf-projective-over-local-free",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0593, theorem-projective-free-over-local-ring; the free-module reduction at the beginning of Tag 05GP, lemma-P-universally-injective"
+   }
+  },
+  {
+   "text": "For any finite list $a_1,\\ldots,a_s\\in\\mathfrak m$, there is a nonzero $y\\in A$ with $ya_j=0$ for every $j$. Indeed, choose $d_j\\ge1$ with $a_j^{d_j}=0$ and put $J=(a_1,\\ldots,a_s)$. For $D=1+\\sum_j(d_j-1)$ every product of $D$ generators contains $a_j^{d_j}$ for some $j$, so $J^D=0$. Let $r\\ge1$ be least with $J^r=0$ and choose $0\\ne y\\in J^{r-1}$; this is possible because $J^0=A\\ne0$. Then $yJ=0$. For the empty list, take $y=1$. This proves directly the specialization of property (P) used in the source, without assuming that $\\mathfrak m$ itself is nilpotent.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 05GN, lemma-auto-ass-implies-P, property (P), specialized to finitely many nilpotent elements; elementary expansion of powers of the finitely generated ideal"
+   }
+  },
+  {
+   "text": "Set up the induction simultaneously for every free target $F$: if $v:A^n\\to F$ is injective, construct $r_v:F\\to A^n$ with $r_vv=1$. For $n=0$ use the zero map. Let $n\\ge1$ and assume the assertion for $n-1$ and all free targets. Choose a basis $(q_b)_{b\\in B}$ of $F$ and write the finite basis expansion $v(e_1)=\\sum_b a_bq_b$ using [def-weil-pbc-free-module]. If all its coefficients lay in $\\mathfrak m$, step 2 would give $y\\ne0$ killing them all; then $v(ye_1)=0$ contradicts injectivity. Thus some coefficient $a=a_{b_0}$ is outside $\\mathfrak m$ and hence is a unit by [lem-weil-pbc-local-ring-unit-criterion]. Define $\\lambda:F\\to A$ by $\\lambda(\\sum_bx_bq_b)=a^{-1}x_{b_0}$. It is $A$-linear and $\\lambda(v(e_1))=1$.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "lem-weil-pbc-local-ring-unit-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 05GP, lemma-P-universally-injective, induction on the rank of the source and splitting of its first basis vector; local specialization using Tag 00E9, lemma-characterize-local-ring"
+   }
+  },
+  {
+   "text": "Continue this induction step. Put $H=\\ker\\lambda$ and $\\pi(x)=x-v(e_1)\\lambda(x)$. The equality $\\lambda\\pi=0$ and the identity $\\pi|_H=1_H$ follow by substitution. Since $a^{-1}$ is a unit, $H$ is exactly the submodule of vectors with zero $b_0$-coordinate, so $(q_b)_{b\\ne b_0}$ is a basis of $H$ by uniqueness of the expansions in [def-weil-pbc-free-module]. For $i=2,\\ldots,n$ put $c_i=\\lambda(v(e_i))$ and define $w:A^{n-1}\\to H$ by $w(e_i)=\\pi(v(e_i))$. If $w((x_i)_{i=2}^n)=0$, then $v(\\sum_{i=2}^nx_ie_i-(\\sum_{i=2}^nc_ix_i)e_1)=0$. Injectivity of $v$ and comparison of source coordinates give every $x_i=0$. Thus $w$ is injective with a free target, exactly the case covered by the induction hypothesis.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 05GP, lemma-P-universally-injective, the right vertical arrow in the split-row diagram; explicit free complement and kernel calculation in the local case"
+   }
+  },
+  {
+   "text": "By the induction hypothesis choose $s:H\\to A^{n-1}$ with $sw=1$. For $x\\in F$ write $z=s(\\pi(x))$ and define $r_v(x)=(\\lambda(x)-\\sum_{i=2}^nc_iz_i,z_2,\\ldots,z_n)$. This is $A$-linear. On $v(e_1)$ one has $\\pi(v(e_1))=0$ and $\\lambda(v(e_1))=1$, so $r_vv(e_1)=e_1$. On $v(e_i)$ for $i\\ge2$ one has $s\\pi v(e_i)=e_i$ and $\\lambda v(e_i)=c_i$, so $r_vv(e_i)=e_i$. Equality on the basis [def-weil-pbc-free-module] proves $r_vv=1$. This completes the induction, including its base case, for all free targets, without any restriction on their ranks.",
+   "uses": [
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 05GP, lemma-P-universally-injective, conclusion from the split-row diagram; explicit retraction in the local free-target case"
+   }
+  },
+  {
+   "text": "Fix any $A$-module $T$ and $z\\in T\\otimes_AP$ with $(1_T\\otimes u)(z)=0$. The generating and bilinearity properties of [def-weil-pbc-module-tensor-product] express $z$ as a finite sum $\\sum_{k=1}^dt_k\\otimes p_k$. Each $p_k$ has finite basis support by [def-weil-pbc-free-module]; let $E\\subset I$ be their finite union. Let $j_E:A^E\\to P$ take coordinate vectors to the corresponding basis vectors, write $p_k=j_E(\\widetilde p_k)$, and set $z_E=\\sum_kt_k\\otimes\\widetilde p_k$. Then $z=(1_T\\otimes j_E)(z_E)$. The composite $v=u j_E:A^E\\to Q$ is injective, so the completed induction gives $r_E:Q\\to A^E$ with $r_Ev=1$. By tensor functoriality, $(1_T\\otimes r_E)(1_T\\otimes v)=1_{T\\otimes_AA^E}$. Since $(1_T\\otimes v)(z_E)=(1_T\\otimes u)(z)=0$, it follows that $z_E=0$ and therefore $z=0$. The tensor functoriality here is the identity on generators $t\\otimes x\\mapsto t\\otimes r_Ev(x)$, so it holds on the whole tensor product. This proves injectivity for every $T$.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 05GP, lemma-P-universally-injective, directed finite-free-source reduction; written elementwise using finite basis support instead of invoking a colimit theorem"
+   }
+  },
+  {
+   "text": "Take $T=A/\\mathfrak m$ in the preceding conclusion. The maps interchanging tensor factors, $x\\otimes t\\mapsto t\\otimes x$, are inverse $A$-linear isomorphisms: they are defined by the bilinear universal property of [def-weil-pbc-module-tensor-product], and their composites are the identity on generators. On generators they identify $u\\otimes1_{A/\\mathfrak m}$ with $1_{A/\\mathfrak m}\\otimes u$. Thus the stated right-tensor residue-field map is injective as well.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 05GP, lemma-P-universally-injective, universal injectivity specialized to the module A/m"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-projective-over-local-free",
+  "def-weil-pbc-free-module",
+  "lem-weil-pbc-local-ring-unit-criterion",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 05GP, lemma-P-universally-injective, proof by finite-source induction; property (P) from 05GN proved directly for a nil maximal ideal, and local projective freeness from algebra.tex, Tag 0593."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -56,10 +144,52 @@
    "results": "{\"t\": \"2026-10-17T23:54:26Z\", \"tool\": \"leanfinder\", \"query\": \"An injective homomorphism of free modules over a zero dimensional local ring remains injective over the residue field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.free_of_lTensor_residueField_injective\", \"IsLocalRing.split_injective_iff_lTensor_residueField_injective\", \"Module.exists_basis_of_basis_baseChange\", \"Module.free_of_maximalIdeal_rTensor_injective\", \"injective_of_localized_maximal\", \"Ideal.injective_algebraMap_quotient_residueField\", \"Algebra.FormallyUnramified.comp_injective\", \"Algebra.FormallySmooth.iff_injective_lTensor_residueField\"], \"digest\": \"50878ae9f3773007\"}; Read LocalRing/Module.lean:329-365: split_injective_iff_lTensor_residueField_injective assumes finite modules and a split injection on the relevant side; ordinary injectivity does not supply the split map. Flatness preserves injections when tensoring with a flat module, whereas the residue field need not be flat. The grep hit SimpleModule/InjectiveProjective.lean concerns semisimple rings. No auto-associated/projective-injection purity theorem was found.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "auto.?associ|universally.?inject|injective.*projective|projective.*injective",
+   "results": "{\"t\": \"2026-10-18T23:05:20Z\", \"tool\": \"grep\", \"query\": \"auto.?associ|universally.?inject|injective.*projective|projective.*injective\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/SimpleModule/InjectiveProjective.lean\"], \"digest\": \"7046d6a2fa8da7af\"}; No match: the broad RingTheory search only finds the semisimple-module file. The targeted Module.lean search identifies the residue-field criterion at line 334, which needs the missing residue-field injectivity hypothesis. The wrapper parsed a single-file rg result as file names 33/334; source was read directly at LocalRing/Module.lean:329--365.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Projective\", \"lTensor\", \"Injective\"",
+   "results": "{\"t\": \"2026-10-18T23:05:21Z\", \"tool\": \"loogle\", \"query\": \"\\\"Projective\\\", \\\"lTensor\\\", \\\"Injective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; No match: zero hits.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Over a commutative local ring with nil maximal ideal every injective map of projective modules remains injective after tensoring with any module",
+   "results": "{\"t\": \"2026-10-18T23:05:22Z\", \"tool\": \"leanfinder\", \"query\": \"Over a commutative local ring with nil maximal ideal every injective map of projective modules remains injective after tensoring with any module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.split_injective_iff_lTensor_residueField_injective\", \"Module.free_of_lTensor_residueField_injective\", \"Module.free_of_maximalIdeal_rTensor_injective\", \"Module.Invertible.rTensor_injective_iff\", \"Module.Invertible.lTensor_injective_iff\", \"AdicCompletion.tensor_map_id_left_injective_of_injective\", \"Module.Flat.iff_rTensor_preserves_injective_linearMap\", \"Module.Flat.iff_rTensor_preserves_injective_linearMap'\"], \"digest\": \"0e630a2edf665a70\"}; No match: the local residue-field criterion requires residue-field injectivity and finite modules; invertible/flat tensor factors do not cover arbitrary T; the second phrasing gives finite-presentation/flatness basis criteria, not this assertion.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An injective homomorphism between free modules over a local ring whose maximal ideal is nil is universally injective",
+   "results": "{\"t\": \"2026-10-18T23:05:25Z\", \"tool\": \"leansearch\", \"query\": \"An injective homomorphism between free modules over a local ring whose maximal ideal is nil is universally injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"injective_of_isLocalized_maximal\", \"injective_of_isLocalization_of_span_eq_top\", \"injective_of_localized_maximal\", \"injective_of_isLocalization_isMaximal\", \"Module.free_of_maximalIdeal_rTensor_injective\", \"injective_of_localized_span\", \"IsLocalRing.split_injective_iff_lTensor_residueField_injective\", \"ModuleCat.mono_iff_injective\"], \"digest\": \"4b34d155fe055e87\"}; No match: localization detection and the local residue-field splitting criterion do not derive residue-field injectivity from injectivity over a nil local ring.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsNilpotent|nilpotent|split_injective_iff",
+   "results": "{\"t\": \"2026-10-18T23:06:15Z\", \"tool\": \"grep\", \"query\": \"IsNilpotent|nilpotent|split_injective_iff\", \"sub\": \"RingTheory/LocalRing/Module.lean\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"33\", \"334\"], \"digest\": \"89ec0ffb1c88093f\"}; No match: the broad RingTheory search only finds the semisimple-module file. The targeted Module.lean search identifies the residue-field criterion at line 334, which needs the missing residue-field injectivity hypothesis. The wrapper parsed a single-file rg result as file names 33/334; source was read directly at LocalRing/Module.lean:329--365.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a local ring has nilpotent nonunits then every finite linearly independent family in a free module admits a linear retraction",
+   "results": "{\"t\": \"2026-10-18T23:06:17Z\", \"tool\": \"leanfinder\", \"query\": \"If a local ring has nilpotent nonunits then every finite linearly independent family in a free module admits a linear retraction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"strongRankCondition_of_orzechProperty\", \"Module.exists_basis_of_span_of_maximalIdeal_rTensor_injective\", \"Module.exists_basis_of_basis_baseChange\", \"Module.free_of_flat_of_isLocalRing\", \"Module.exists_basis_of_span_of_flat\", \"Module.free_of_lTensor_residueField_injective\", \"invariantBasisNumber_of_nontrivial_of_commRing\", \"Module.free_of_maximalIdeal_rTensor_injective\"], \"digest\": \"a9b2bd647e5fa900\"}; No match: the local residue-field criterion requires residue-field injectivity and finite modules; invertible/flat tensor factors do not cover arbitrary T; the second phrasing gives finite-presentation/flatness basis criteria, not this assertion.",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-flat-tensor-weakass-fibre",
@@ -92,5 +222,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-nil-local-projective-injection-pure",
+  "worker": "stage1",
+  "summary": "Preserved the arbitrary-rank statement. Read Stacks 05GM--05GQ and reused local projective freeness (0593), the free-module definition, and the local-unit criterion (00E9). Wrote the common-annihilator argument, the complete finite-source retraction induction, and the elementwise finite-support tensor reduction. No new nodes; no finite-generation, Noetherian, or nilpotent-maximal-ideal assumption added.",
+  "blueprint": "Supports the existing historical nearby-cycle/semistable-alteration ancestry recorded in blueprint.from: the flat-tensor weak-assassin argument uses universal injectivity after passage to a local ring with nil maximal ideal. This is a supporting commutative-algebra split, not a change to sk-i-curve-zero or its current contracting-correspondence route."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q57-b580c3387",
+  "group": "Q57",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-b580c3387 (reviewer sub-agent of L); spot-checked: I read Stacks 05GM/05GN/05GP/05GQ and 05GR. The item correctly specialises 05GP to a local ring whose maximal ideal is nil; step 2 proves property (P) directly by pigeonhole. Cited nodes checked: the local-projective-free node (arbitrary rank) for step 1, the unit criterion for step 3, and the free-module and tensor definitions. I verified by substitution the rank induction (pivot unit, H = ker λ free on q_b, b≠b0, w injective, the retraction formula with the c_i correction), the elementwise finite-support tensor reduction with no flatness of T, and the factor swap. Small cases checked: a field, k[ε]/ε², the 05GR infinite-rank map, rank 0. There is no cycle, no duplicate (05GP is cited only by the item and its citer), no SGA, and no new nodes; the citer's use (residue-field clause on projective B/IB) is consistent. Two small repairs: added 05GP to source.place (the report says it was added, but it was only in proof_origin), and step 3 now chooses a basis (q_b) of the arbitrary free target F before using it.; 1 file(s) fixed by the reviewer"
  }
 }
