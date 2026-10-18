@@ -47,6 +47,13 @@ noncomputable def artinSchreierOf (ψ : AddChar k₀ (PadicAlgCl l)) (a : Γ(X, 
     WeilSheaf k₀ l X :=
   (WeilSheaf.upperStar (affineLine.homOfSection k₀ a)).obj (artinSchreier ψ 1)
 
+/-- Unfolding `AlgebraicGeometry.artinSchreierOf`. Rewriting with this equation (rather than
+unfolding the definition) keeps the kernel from unfolding the pullback functor. -/
+theorem artinSchreierOf_eq (ψ : AddChar k₀ (PadicAlgCl l)) (a : Γ(X, ⊤)) :
+    artinSchreierOf ψ a =
+      (WeilSheaf.upperStar (affineLine.homOfSection k₀ a)).obj (artinSchreier ψ 1) :=
+  rfl
+
 /-- The Artin–Schreier sheaf of a function is lisse, as a pullback of a lisse sheaf. -/
 theorem isLisse_artinSchreierOf (ψ : AddChar k₀ (PadicAlgCl l)) (a : Γ(X, ⊤)) :
     (artinSchreierOf ψ a).IsLisse :=

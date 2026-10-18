@@ -52,8 +52,9 @@ theorem nonempty_iso_upperStar_artinSchreierOf {X Y : Scheme.{u}}
     [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] (φ : Y ⟶ X)
     [φ.IsOver (Spec (CommRingCat.of k₀))] (ψ : AddChar k₀ (PadicAlgCl l)) (a : Γ(X, ⊤)) :
     Nonempty ((WeilSheaf.upperStar φ).obj (artinSchreierOf ψ a) ≅
-      artinSchreierOf ψ (φ.appTop a)) :=
-  sorry
-
+      artinSchreierOf ψ (φ.appTop a)) := by
+  rw [artinSchreierOf_eq, artinSchreierOf_eq]
+  exact WeilSheaf.nonempty_iso_upperStar_obj_upperStar_obj φ _ _
+    (affineLine.comp_homOfSection φ a) _
 
 end AlgebraicGeometry

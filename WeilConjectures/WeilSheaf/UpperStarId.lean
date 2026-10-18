@@ -109,6 +109,18 @@ noncomputable def WeilSheaf.upperStarCompIso {X Y Z : Scheme.{u}}
   ObjectProperty.liftFullSubcategoryCompIso _ _ _
     (ProEtaleWeilSheaf.upperStarCompIso k₀ l f g) _ _ _
 
+/-- `φ^* g^* F ≅ g'^* F` for `φ ≫ g = g'`, from the composition and congruence isomorphisms. -/
+theorem WeilSheaf.nonempty_iso_upperStar_obj_upperStar_obj {X Y Z : Scheme.{u}}
+    [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
+    [Z.Over (Spec (CommRingCat.of k₀))] (φ : Y ⟶ X) (g : X ⟶ Z) (g' : Y ⟶ Z)
+    [φ.IsOver (Spec (CommRingCat.of k₀))] [g.IsOver (Spec (CommRingCat.of k₀))]
+    [g'.IsOver (Spec (CommRingCat.of k₀))] (h : φ ≫ g = g') (F : WeilSheaf k₀ l Z) :
+    Nonempty ((WeilSheaf.upperStar φ).obj ((WeilSheaf.upperStar g).obj F) ≅
+      (WeilSheaf.upperStar g').obj F) := by
+  rw [← Functor.comp_obj]
+  exact ⟨((WeilSheaf.upperStarCompIso φ g).app F).symm ≪≫
+    (WeilSheaf.upperStarCongrIso h).app F⟩
+
 /-- Pullback of Weil sheaves along the identity is the identity. -/
 noncomputable def WeilSheaf.upperStarIdIso (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] :
     WeilSheaf.upperStar (k₀ := k₀) (l := l) (𝟙 X) ≅ 𝟭 _ :=
