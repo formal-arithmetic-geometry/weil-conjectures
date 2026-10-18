@@ -20,7 +20,10 @@
   "prop-weil-localized-tstructure",
   "def-weil-pbc-completed-pullback",
   "lem-pur-derived-change-of-rings",
-  "def-weil-proetale-inverse-image"
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-continuous-constructible-module",
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "prop-weil-pbc-scalar-extension"
  ],
  "proof": [
   {
@@ -547,5 +550,55 @@
   "group": "Q133",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q133-4064494db (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, all 17 steps, the statements of all 38 proof dependencies and 13 statement dependencies, the unit sk-p-dl-a1-perverse, the ancestor and via-nodes, sk-def-sfb-constructible, and Bhatt–Scholze §6.8 pp. 58–62 (Lemma 6.8.2, Defs 6.8.3/6.8.6/6.8.8/6.8.10, Prop 6.8.11(3), Lemmas 6.8.12/6.8.13, Prop 6.8.14(2), Remark 6.8.15). The statement is unchanged and matches BS 6.8.14(2) for finite E with B_X=lim(A/ϖ^n)_X and E_X=B_X[1/ϖ]. The source category is the raw localization of the completed integral category with étale-origin witnesses, with no Karoubi envelope. Pullback uses the actual c_g and the completion unit of def-weil-pbc-completed-pullback, matching BS Remark 6.8.15. Replacing def-weil-derived-tensor by lem-pur-derived-change-of-rings in stmt_deps is correct, since the coefficient rings are not constant. The steps check out. Full faithfulness: I verified that the Hom/countable-sum hypothesis of the scalar-localization Hom lemma follows from bounded-below compactness, H^0 of RHom, and exact countable sums. Essential surjectivity: the lisse-lattice lemma, the finite-model stratum filtration (noetherian |X|; E totally disconnected, so the condensed ring is C(-,E)), open-closed assembly with qcqs V_k, and truncation induction. Both t-structure directions are proved, the converse by acyclicity plus full faithfulness. The integrality of Lg^*_B K via pulled-back strata and covers and characterization (ii) is correct, and gamma is invertible because Koszul and quotient units agree. Finite extension and associators go through prop-weil-pbc-scalar-extension. Edge cases tested: empty X, zero rank, torsion N (killed, no flatness assumed), g=id, open immersion, E=L, ramified L/E. There are no new nodes, so nothing to check for duplicates or restated clauses; lem-weil-pbc-condensed-e-realization is narrower (finite-type over a field, condensed target) and not a duplicate. I accept all 29 declared tool_uses as generic black boxes that the unit does not supply. No SGA is used. Two small faults are repaired in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-continuous-rational-derived-realization.json, changing only proof and proof_deps. (1) C1/C4, Step 3: restricting to a stratum used h^{-1}E_X≅E_S without citing it; I added lem-weil-pbc-continuous-coefficients-immersion-restriction and the sentence. (2) E5, Step 17: g^{-1} as defined in def-weil-proetale-inverse-image was identified with slice restriction without an argument; I added it ((U→X,(s,id)) is initial in I_U, so (u_{g,p}F)(U)=F(U)) and cited def-weil-proetale-inverse-image. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-7343347d2",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Full statement, dependencies, source alignment, edge cases, route-pivot compliance, docstrings, and declarations checked; scompile.py server compilation passed for sandbox and library."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ContinuousRationalDerivedRealization",
+  "declaration": "AlgebraicGeometry.Scheme.ContinuousRational.continuous_rational_derived_realization",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ContinuousRational.Base",
+   "AlgebraicGeometry.Scheme.ContinuousRational.baseDimension",
+   "AlgebraicGeometry.Scheme.ContinuousRational.basePrimeUnit",
+   "AlgebraicGeometry.Scheme.ContinuousRational.scalarSections",
+   "AlgebraicGeometry.Scheme.ContinuousRational.moduleLinear",
+   "AlgebraicGeometry.Scheme.ContinuousRational.derivedLinear",
+   "AlgebraicGeometry.Scheme.ContinuousRational.IsConstructible",
+   "AlgebraicGeometry.Scheme.ContinuousRational.IsDerivedConstructible",
+   "AlgebraicGeometry.Scheme.ContinuousRational.localizedT",
+   "AlgebraicGeometry.Scheme.ContinuousRational.localizedCohomology",
+   "AlgebraicGeometry.Scheme.ContinuousRational.At",
+   "AlgebraicGeometry.Scheme.ContinuousRational.modulePull",
+   "AlgebraicGeometry.Scheme.ContinuousRational.moduleUnit",
+   "AlgebraicGeometry.Scheme.ContinuousRational.derivedPull",
+   "AlgebraicGeometry.Scheme.ContinuousRational.IsNormalizedPullCounit",
+   "AlgebraicGeometry.Scheme.ContinuousRational.integralPull",
+   "AlgebraicGeometry.Scheme.ContinuousRational.rawPull",
+   "AlgebraicGeometry.Scheme.ContinuousRational.Along",
+   "AlgebraicGeometry.Scheme.ContinuousRational.Along.raw",
+   "AlgebraicGeometry.Scheme.ContinuousRational.Composition",
+   "AlgebraicGeometry.Scheme.ContinuousRational.Identity",
+   "AlgebraicGeometry.Scheme.ContinuousRational.FieldChange",
+   "AlgebraicGeometry.Scheme.ContinuousRational.FieldComposition",
+   "AlgebraicGeometry.Scheme.ContinuousRational.Mixed",
+   "AlgebraicGeometry.Scheme.ContinuousRational.siteInclude",
+   "AlgebraicGeometry.Scheme.ContinuousRational.siteCounit",
+   "AlgebraicGeometry.Scheme.ContinuousRational.SiteRestriction",
+   "AlgebraicGeometry.Scheme.ContinuousRational.Family",
+   "AlgebraicGeometry.Scheme.ContinuousRational.continuous_rational_derived_realization"
+  ],
+  "file": "lean/Sheaf/Paper/ContinuousRationalDerivedRealization.lean",
+  "statement": "theorem continuous_rational_derived_realization (l : ℕ) [Fact l.Prime] : Nonempty (Family.{u} l)",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "One normalized compatible family: the raw category, completed integral representatives, existing continuous constructibility predicate and actual derived module inverse images are retained. Helper structures unpack the clauses of this node; no independent notion or dependency interface is replaced."
  }
 }

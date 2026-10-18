@@ -23,7 +23,8 @@
   "sk-def-sfb-module-objects",
   "def-pur-localized-ringed-site",
   "sk-def-sfb-change-of-scalars",
-  "def-weil-quasi-separated-morphism"
+  "def-weil-quasi-separated-morphism",
+  "def-sfb-lisse-coefficient-module"
  ],
  "proof": [
   {
@@ -308,5 +309,31 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1d081d7fe",
+  "group": "Q77",
+  "result": "fix",
+  "note": "Mathematics, canonical helpers, dependencies, universes, edge cases and verbatim signature checked; per-file scompile passed. Complete replacement report under fixes repairs the H11/H1 second-reading placeholder. Review recorded in review.md; branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientFiniteDescentLisse",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficient_finite_descent_lisse",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.coefficientDescentScalarComp",
+   "AlgebraicGeometry.ProEtale.coefficientDescentHomMap",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientHomToAlgCl",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientHomTransition",
+   "AlgebraicGeometry.ProEtale.coefficient_finite_descent_lisse"
+  ],
+  "file": "lean/Sheaf/Paper/CoefficientFiniteDescentLisse.lean",
+  "statement": "theorem coefficient_finite_descent_lisse (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (ℓ : ℕ) [Fact ℓ.Prime] : (∀ L : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicAlgClRingObj X ℓ), IsLisseCoefficientModule (Profinite.padicAlgClRingObj ℓ) L → ∃ (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) (L_E : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)), IsLisseCoefficientModule (Profinite.continuousMapRingObj E) L_E ∧ Nonempty ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ E)).obj L_E ≅ L)) ∧ (∀ (E : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) (M N : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)), IsLisseCoefficientModule (Profinite.continuousMapRingObj E) M → IsLisseCoefficientModule (Profinite.continuousMapRingObj E) N → (∀ ψ : (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ E)).obj M ⟶ (Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ E)).obj N, ∃ (F : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) (h : E ≤ F) (f : (Mod.extendScalars (padicSubfieldRingObjMap X ℓ h)).obj M ⟶ (Mod.extendScalars (padicSubfieldRingObjMap X ℓ h)).obj N), finiteCoefficientHomToAlgCl X ℓ h f = ψ) ∧ (∀ (F G : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) (h : E ≤ F) (k : E ≤ G) (f : (Mod.extendScalars (padicSubfieldRingObjMap X ℓ h)).obj M ⟶ (Mod.extendScalars (padicSubfieldRingObjMap X ℓ h)).obj N) (g : (Mod.extendScalars (padicSubfieldRingObjMap X ℓ k)).obj M ⟶ (Mod.extendScalars (padicSubfieldRingObjMap X ℓ k)).obj N), finiteCoefficientHomToAlgCl X ℓ h f = finiteCoefficientHomToAlgCl X ℓ k g → ∃ (H : Padic.FiniteCoefficientFields ℓ (PadicAlgCl ℓ)) (a : F ≤ H) (b : G ≤ H), finiteCoefficientHomTransition X ℓ h a f = finiteCoefficientHomTransition X ℓ k b g))",
+  "branch": "newtargets-dag",
+  "by": "Q77",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The set-colimit bijection is expressed equivalently by surjectivity on finite-field representatives and eventual equality of representatives at different fields with equal algebraic-closure images. All evaluation and transition maps are constructed from the existing canonical ordinary scalar-extension transitivity. Reuses the landed IsLisseCoefficientModule definition, bound by the new definition node def-sfb-lisse-coefficient-module; no second definition of lisse is introduced."
  }
 }

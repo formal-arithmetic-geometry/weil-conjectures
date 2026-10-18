@@ -11,7 +11,8 @@
   "def-weil-finite-integral-morphism",
   "def-sbc-locally-finite-presentation",
   "def-weil-pbc-proetale-site",
-  "lem-weil-pbc-ringed-topoi-module-adjunction"
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-weil-proetale-inverse-image"
  ],
  "proof": [
   {
@@ -244,5 +245,23 @@
   "group": "Q33",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-defb52375 (reviewer sub-agent of L); spot-checked: I read Stacks 09A8 (proetale.tex lemma-finite, l.4762-4784) and 0986 (l.2027 ff.) in full, together with the item, every cited node, the unit sk-thm-dl-a1-upper and the parent lem-zl-finite-pushforward. The statement matches 09A8 hypothesis by hypothesis, the module clause is correct, nothing is weakened, and there is no duplicate in the DAG. Batch-5 citation lem-trf-finite-morphism-finite-presentation: it is a general scheme fact (finite + lfp => fp) whose closure stays in elementary scheme definitions and never reaches the trace-formula or Poincare-duality proofs. It was still the wrong citation, because step 1 needs the ring map on affine charts to be finitely presented (Morphisms 01TQ), which it does not state. I replaced it with the Mathlib leaf lem-weil-pbc-lfp-affine-opens-finite-presentation, and the corrected proof_deps closure no longer reaches sec-trace-formula, sec-poincare-duality or sk-thm-trace-transport. Repaired 3 faults in fixes/dag/nodes/sec-deligne-laumon-a1/lem-zl-finite-fp-proetale-pushforward-exact.json: (1) C4/batch-5: the step-1 citation above; (2) E5/D5: steps 1 and 4 built the w-contractible covers only over affine opens of Y, but the epi criterion needs a lifting covering for every object W of Y_proet; the localization now covers each W by affine W' over affine opens of Y (cited lem-weil-pbc-weakly-etale-source-locality), C = D tensor_A B is written out as finite and finitely presented over D, and the composite covering is checked directly; (3) C4: 'ind-etale => weakly etale' is now cited to lem-weil-pbc-ind-etale-stability instead of the definition, the Ab epi <=> locally surjective step to lem-weil-pbc-site-abelian-sheaf-epi-locally-surjective, and the sectionwise kernels to lem-weil-pbc-module-sheaves-colimits-forgetful. Removed unused deps: def-weil-pbc-ind-etale-algebra, lem-weil-pbc-finite-morphism-permanence, lem-weil-pbc-site-sheaf-sets-epi-locally-surjective. Edge cases checked: identity, empty X (C = 0), split finite cover, nonreduced B. Accepted tool_uses: source-wcontractible-extension, ind-etale-stability, ce-finite-finitely-presented-wcontractible, source-affine-wcontractible-evaluation, module-sheaves-colimits-forgetful. No new nodes, no SGA, no cycle.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-d564b1701",
+  "group": "NH",
+  "result": "pass",
+  "note": "Wrote review.md. Verified immutable files, all statement clauses and dependencies, sources, universes, edge cases, docstrings, verbatim signature, and route-pivot compliance. Per-file scompile passed without diagnostics: sandbox 5.4 s, library 7.0 s. No fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteFpProEtalePushforwardExact",
+  "declaration": "AlgebraicGeometry.Scheme.finite_fp_proEtale_pushforward_exact",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteFpProEtalePushforwardExact.lean",
+  "statement": "theorem finite_fp_proEtale_pushforward_exact {X Y : Scheme.{u}} (f : X ⟶ Y) [IsFinite f] [LocallyOfFinitePresentation f] : PreservesFiniteLimits (proEtaleSheafDirectImage f AddCommGrpCat.{u + 1}) ∧ PreservesFiniteColimits (proEtaleSheafDirectImage f AddCommGrpCat.{u + 1}) ∧ ∀ (R_Y : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) (R_X : Sheaf (ProEt.topology X) CommRingCat.{u + 1}) (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R_Y ⟶ R_X), PreservesFiniteLimits (SheafOfModules.pushforward.{u + 1} (F := proEtaleBaseChange f) (J := ProEt.topology Y) (K := ProEt.topology X) (S := (sheafCompose (ProEt.topology Y) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R_Y) (R := (sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R_X) ((sheafCompose (ProEt.topology Y) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map ((proEtaleSheafAdjunction f CommRingCat.{u + 1}).homEquiv R_Y R_X c))) ∧ PreservesFiniteColimits (SheafOfModules.pushforward.{u + 1} (F := proEtaleBaseChange f) (J := ProEt.topology Y) (K := ProEt.topology X) (S := (sheafCompose (ProEt.topology Y) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R_Y) (R := (sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R_X) ((sheafCompose (ProEt.topology Y) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map ((proEtaleSheafAdjunction f CommRingCat.{u + 1}).homEquiv R_Y R_X c)))",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

@@ -242,5 +242,28 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-f173c10a4 (reviewer sub-agent of L); spot-checked: I read all seven steps in full against Stacks 0AP6 (with the separatedness paragraph after it), 0F1U, 0AP7 and 01SM (morphisms.tex). The item statement is unchanged; its P is exactly condition (2) of 0F1U. Step 2 is the 0F1U (3)=>(4) argument and nowhere assumes V∩U_i is affine. Step 3 encloses p(L) in a quasi-compact open W, does not assume W is affine, and factors L through W because W is open. Step 5 uses the statement of the 01P9 node, which asserts separatedness. Steps 6-7 cover the target of the absolute diagonal by the opens W×W and check the closed-immersion conditions locally. One fix: step 4 only proved L->V_b quasi-affine, but P quantifies over every affine open V' of V_b. I added the one-line completion (L is a quasi-affine scheme, so L->V' is quasi-affine by the converse in Step 1) in fixes/dag/nodes/sec-purity-real-sheaves/lem-a1-ind-quasi-affine-permanence.json. Only that step's text changed. New node lem-a1-quasi-affine-target-locality states 01SM (1)<=>(2) for a given affine cover. It is true, statement-only and self-contained, and I tested it on an empty base, a single affine cover and the doubled-origin line. Mathlib has only the absolute IsQuasiAffine, so the node is correctly unsplit. It does not duplicate lem-trf-quasi-affine-relative-spec-embedding, which is (1)<=>(3), and it is strictly smaller than item clause (2). No cycles. Batch-5 check: lem-trf-quasi-affine-base-change (01SO) has a closure of 135 nodes and lem-trf-quasi-affine-canonical-affine-embedding (01P9, a Mathlib leaf) has 59. Both closures contain only general scheme foundations: their only trace-formula-chapter nodes are the three quasi-affine nodes, with no Poincaré or cohomological node and no nt-assume leaf. Neither assumption gives these results, so they are genuinely outside the assumed statements and are accepted. The existing reviewed node lem-a1-etale-quasi-affine-image-scheme already cites 01SO. I accept the declared tool use of lem-trf-quasi-affine-base-change. No SGA source is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-2efa39d0c",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Wrote review.md. Immutable statements, dependencies, sources, universes, edge cases and pilot gates checked; per-file scompile.py passed. No delivery defects found. Context clone advanced externally during review; no branch mutation was performed by this reviewer."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IndQuasiAffinePermanence",
+  "declaration": "AlgebraicGeometry.indQuasiAffineProperty_permanence",
+  "declarations": [
+   "AlgebraicGeometry.indQuasiAffineProperty",
+   "AlgebraicGeometry.indQuasiAffineProperty_permanence"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/IndQuasiAffinePermanence.lean",
+  "statement": "theorem indQuasiAffineProperty_permanence {X Y : Scheme.{u}} (f : X ⟶ Y) : (∀ (T : Scheme.{u}) (g : T ⟶ Y), indQuasiAffineProperty f → indQuasiAffineProperty (Limits.pullback.snd f g)) ∧ (∀ {I : Type v} (U : I → Y.Opens), (∀ i, IsAffineOpen (U i)) → iSup U = ⊤ → (indQuasiAffineProperty f ↔ ∀ i, indQuasiAffineProperty (Limits.pullback.snd f (U i).ι))) ∧ (∀ (_hY : IsAffine Y), indQuasiAffineProperty f → (∀ (K : X.Opens), IsCompact (K : Set X) → K.toScheme.IsQuasiAffine) ∧ Scheme.IsSeparated X ∧ QuasiSeparatedSpace X)",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The helper predicate indQuasiAffineProperty is the exact P condition stated in the node; the theorem gives all three clauses. The pullback presentation is the canonical scheme model of the inverse image over an affine open."
  }
 }

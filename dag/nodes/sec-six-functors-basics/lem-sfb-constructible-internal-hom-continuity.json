@@ -23,7 +23,8 @@
   "sk-def-sfb-constructible",
   "sk-def-sfb-derived-tensor-hom",
   "def-weil-pbc-category-colimit",
-  "def-pc-cochain-complex-modules"
+  "def-pc-cochain-complex-modules",
+  "lem-sfb-finite-constant-model-two-term-free-resolution"
  ],
  "proof": [
   {
@@ -422,5 +423,24 @@
   "group": "Q26",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q26-6b9497bb6 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item's 7 steps, both new nodes, the statement of every cited node, the parent lem-sfb-dc-hom-preserves (steps 7 and 10) and the unit. Sources checked at the cited places: Bhatt–Scholze 6.3.14/6.3.15/6.8.2/6.8.11(3)/6.8.12, Stacks 093J, 093M, 08J9, 08JB. No SGA is cited. The item statement is unchanged and not weakened: it keeps the common lower bound, on ordinary layer-B D(Mod_{Λ_X}) for O_E or E. Step 1: the T_c truncation is a quasi-isomorphism when H^{<c}=0 and commutes with filtered colimits. Step 2: the bounded-free model on [B^a→B^b] gives terms N^n⊕N^{n-1}, a finite sum vanishing below c, so d_L=0 (checked on O_E/π^n); the cover hypothesis of the local-isomorphism lemma holds. Steps 3–7: the recollement is used on D^+ only; qcqs follows from the Noetherian space; Ri^! agrees with RΓ_Z as right adjoints of i_*; d_{A[n]}=d_A+n; the filtration plus truncation triangles finish. New node lem-sfb-finite-constant-model-two-term-free-resolution is true (PID kernel; B_T=lim(O_E/π^n)_T is flat over the constant sheaf by 093M; a=0 rationally; checked P=0, P=A, P=O_E/π^n, empty T), is not a duplicate, and does not restate the item. One fault, C5: new node lem-sfb-module-object-ringed-site-derived-comparison re-defined the existing equivalence def-weil-pbc-internal-abelian-sheaf-module-equivalence and re-asserted the monoidal/K-flat clauses of the existing lem-pe-internal-section-tensor-comparison without citing either; the report's not-duplicates list missed both. Fixed in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-module-object-ringed-site-derived-comparison.json: the node now cites both, adds them to stmt_deps (no cycle), and states only the new derived internal-Hom comparison with evaluation and slice compatibility. The item file is unchanged and step 1 still reads correctly. I accept all 17 declared tool_uses as generic infrastructure.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e44087add",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable files, all statement dependencies, source passages, exact declarations, universes, edge cases, canonical comparison, and route-pivot compliance. Signature matches verbatim; scompile.py reproduction passed both checks without diagnostics. No defects found."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstructibleInternalHomContinuity",
+  "declaration": "AlgebraicGeometry.ProEtale.constructible_internalHom_continuity",
+  "file": "lean/Sheaf/Paper/ConstructibleInternalHomContinuity.lean",
+  "statement": "theorem constructible_internalHom_continuity (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) [TopologicalSpace.NoetherianSpace X] (Λ : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})) [IsCommMonObj Λ.X] (_hΛ : Λ = Mon.mk (FiniteConstantModel.integralCoefficients l E) ∨ Λ = Mon.mk (FiniteConstantModel.rationalCoefficients l E)) (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ.X X))) (_hK : constantModelBoundedConstructible Λ.X X K) {I : Type (u + 1)} [SmallCategory I] [IsFiltered I] (M : I ⥤ CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ.X X)) ℤ) (c : ℤ) (_hM : ∀ (i : I) (r : ℤ), r < c → IsZero ((M.obj i).X r)) : ∀ n : ℤ, Nonempty (IsColimit ((DerivedCategory.Q ⋙ (CondensedRing.derivedHom Λ.X X).obj (Opposite.op K) ⋙ DerivedCategory.homologyFunctor _ n).mapCocone (colimit.cocone M)))",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Equivalent cohomology-sheaf formulation expressly allowed by the node: for each degree the image of the termwise-colimit cocone under Q, the recorded closed internal Hom, and cohomology is a colimit cocone. Its legs are the canonical evaluation-induced maps; Nonempty IsColimit says their canonical comparison is an isomorphism. The added landed statement dependency supplies the already defined integral and rational condensed coefficient rings, including their spectral topologies and ring structures."
  }
 }

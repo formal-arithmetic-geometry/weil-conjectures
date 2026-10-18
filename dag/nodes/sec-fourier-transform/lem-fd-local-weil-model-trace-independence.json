@@ -308,10 +308,10 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-a21643f0f",
-  "group": "Q08",
-  "result": "pass",
-  "note": "Every hypothesis and conclusion clause matches the node, none stronger: separated finite type (LOFT+QC+IsSeparated, no properness), finite subfields of c.Qbar with E,E' ≤ L, recorded sfWeilComplex pairs, u an IsoAlgebra iso of the extended pairs, n≥1. Helper directions checked against the declarations they use: localWeilModelScalar gives θ_L = ext θ ∘ a₁⁻¹ (node step 5); b_M = pointRationalFibreScalarIso⁻¹ then Fib_L of rationalPullbackScalarComparison at x̄ (normalized by the cited sections comparison and scalarPullbackCompleted); ũ_x = b ≫ Fib(x̄*u) ≫ b'⁻¹ as in the node; the cohomology conjugacy uses fieldDerivedHomologyIso for every j∈ℤ; ordinary LinearMap.trace equal in L and in Qbar (equivalent forms). Edge cases n=1, empty X₀, zero cohomology, negative j, E=E'=L checked; single universe u, nothing unbound. No hollow defs, the main theorem's sorry is the only one, docstrings carry source and blueprint tags, lean.statement verbatim, node differs from the side clone only in its lean field, no duplicate. Report has the Worker report and an author's own Second reading by Q08. nt_compile --json: exit 0, no diagnostics, 8 s. No fixes."
+  "reviewer": "NT-stage2-Codex-7f0d18cac",
+  "group": "N1",
+  "result": "fix",
+  "note": "Wrote review.md and complete replacement module/report under fixes/. Corrected the proof-plan citation to existing Mathlib field-trace lemmas; definitions and theorem signature are unchanged. Original and replacement passed scompile.py with no diagnostics."
  },
  "lean": {
   "module": "Sheaf.Paper.LocalWeilModelTraceIndependence",
@@ -327,7 +327,7 @@
   "file": "lean/Sheaf/Paper/LocalWeilModelTraceIndependence.lean",
   "statement": "theorem localWeilModelTraceIndependence (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum) (X₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [IsSeparated X₀.hom] (E E' L : Padic.FiniteCoefficientFields c.l c.Qbar) (hEL : E ≤ L) (hE'L : E' ≤ L) (V : sfWeilComplex D c.l c.different X₀ E.val) (V' : sfWeilComplex D c.l c.different X₀ E'.val) (u : localWeilModelScalar D c X₀ E L hEL V ≅ localWeilModelScalar D c X₀ E' L hE'L V') (n : ℕ) (hn : 1 ≤ n) (x : D.extensionPoints X₀ n hn) : (localWeilModelPointIso D c X₀ E L hEL E' hE'L V V' u (localExtensionPoint D X₀ n hn x)).hom ≫ (DerivedCategory.pointFdScalarExtension (IntermediateField.inclusion hE'L).toRingHom).map (localExtensionFrobenius c.l E'.val D c.different X₀ V' n hn x) = (DerivedCategory.pointFdScalarExtension (IntermediateField.inclusion hEL).toRingHom).map (localExtensionFrobenius c.l E.val D c.different X₀ V n hn x) ≫ (localWeilModelPointIso D c X₀ E L hEL E' hE'L V V' u (localExtensionPoint D X₀ n hn x)).hom ∧ ∀ j : ℤ, (localWeilModelCohomologyIso D c X₀ E L hEL E' hE'L V V' u (localExtensionPoint D X₀ n hn x) j).hom ≫ (ModuleCat.extendScalars (IntermediateField.inclusion hE'L).toRingHom).map (localExtensionFrobeniusCohomology c.l E'.val D c.different X₀ V' n hn x j) = (ModuleCat.extendScalars (IntermediateField.inclusion hEL).toRingHom).map (localExtensionFrobeniusCohomology c.l E.val D c.different X₀ V n hn x j) ≫ (localWeilModelCohomologyIso D c X₀ E L hEL E' hE'L V V' u (localExtensionPoint D X₀ n hn x) j).hom ∧ (IntermediateField.inclusion hEL) (localWeilModelDegreeTrace D c X₀ E V n hn x j) = (IntermediateField.inclusion hE'L) (localWeilModelDegreeTrace D c X₀ E' V' n hn x j) ∧ E.val.subtype (localWeilModelDegreeTrace D c X₀ E V n hn x j) = E'.val.subtype (localWeilModelDegreeTrace D c X₀ E' V' n hn x j)",
   "branch": "newtargets-dag",
-  "by": "Q08",
+  "by": "N1",
   "date": "2026-10-18",
   "existing": false
  }

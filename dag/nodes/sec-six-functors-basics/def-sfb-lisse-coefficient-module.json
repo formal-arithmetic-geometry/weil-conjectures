@@ -1,0 +1,103 @@
+{
+ "id": "def-sfb-lisse-coefficient-module",
+ "kind": "definition",
+ "title": "Lisse internal modules over pulled-back condensed coefficients",
+ "status": "split",
+ "statement": "Let $X$ be a scheme with small pro-etale site $X_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], and let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring]. Put $\\Lambda_X=p_X^*\\Lambda$ [sk-def-sfb-pulled-back-coefficients]. A $\\Lambda_X$-module object $M$ [sk-def-sfb-module-objects] is lisse if there exists a pro-etale covering $\\{U_i\\to X\\}$ such that, on each slice site [def-pur-localized-ringed-site], $M|_{U_i}$ is isomorphic to $(\\Lambda_X|_{U_i})^{r_i}$ for some $r_i\\in\\mathbf N$. The exponent denotes the finite direct sum of copies of the regular module, with $r_i=0$ allowed. The ranks may vary with $i$; no connectedness or Noetherian hypothesis is imposed.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-pur-localized-ringed-site"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/_section.md",
+  "place": "introductory paragraph: lisse means locally free of finite rank for the pro-etale topology; the coefficient-finite-descent-lisse statement and its conventions use exactly this notion"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A lisse module object on the pro etale site is locally free of finite rank over a pulled back condensed coefficient ring",
+   "results": "8 hits: CondensedMod, Condensed.free, CondensedMod.isDiscrete_tfae, SheafOfModules.QuasicoherentData.IsFinitePresentation, CondensedMod.ofSheafProfinite, SheafOfModules.quasicoherentDataOfIsFinitePresentation, LightCondensed.free, LightCondensed.instIsGrothendieckAbelianLightCondMod",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib match: these are discrete condensed modules or sectionwise locally free sheaves with arbitrary rank; reuse the exact landed internal-module finite-rank predicate instead."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pro etale sheaf of modules is lisse if locally isomorphic to a finite direct sum of its condensed coefficient ring",
+   "results": "8 hits: LightCondMod, CondensedMod.isDiscrete_tfae, LightCondMod.ofSheafLightProfinite, SheafOfModules.IsFinitePresentation, SheafOfModules.isFinitePresentation, CondensedMod.ofSheafProfinite, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondMod.isDiscrete_tfae",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib match: these are discrete condensed modules or sectionwise locally free sheaves with arbitrary rank; reuse the exact landed internal-module finite-rank predicate instead."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.IsLocallyFree",
+   "results": "6 hits: SheafOfModules.IsLocallyFree, SheafOfModules.LocalGeneratorsData.isLocallyFree, SheafOfModules.IsLocallyFree.exists_isLocallyFreeData, SheafOfModules.IsLocallyFree.mk, SheafOfModules.instIsQuasicoherentOfIsLocallyFree, SheafOfModules.instIsLocallyFreeFree",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib match: these are discrete condensed modules or sectionwise locally free sheaves with arbitrary rank; reuse the exact landed internal-module finite-rank predicate instead."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n IsLisseCoefficientModule|IsLocallyFree in lean/Sheaf/Paper/CoefficientHeartCommonStratification.lean and Mathlib/Algebra/Category/ModuleCat/Sheaf/LocallyFree.lean; rg -n def.*[Ll]isse|def.*LocallyFree in upstream and side WeilConjectures/ConstructibleSheaf; rg -l lisse|locally-free in dag/nodes; tools/blueprint_refs.py search lisse module",
+   "results": "lean/Sheaf/Paper/CoefficientHeartCommonStratification.lean:53:def IsLisseCoefficientModule; uses at lines 86,87,95. Mathlib has SheafOfModules.IsLocallyFree (LocallyFree.lean:61), allowing arbitrary free ranks and using a different encoding. No corresponding definition in either WeilConjectures/ConstructibleSheaf tree. DAG definition-node search found no standalone definition node for finite-rank lisse internal modules over pulled-back condensed rings. Blueprint search returned 54 lisse/module nodes, including the item and the coefficient-heart/common-stratification statements; none is a definition node of this predicate.",
+   "date": "2026-10-18",
+   "verdict": "Exact existing project declaration found; bind it with existing: true and introduce no duplicate Lean definition."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "det-lem-coefficient-finite-descent-lisse",
+  "date": "2026-10-18",
+  "group": "Q77"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-coefficient-finite-descent-lisse",
+   "place": "clauses (1) and (2), lisse hypotheses and the lisse finite-field model; the opening trivializing-cover paragraph of the proof",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-qlbar-two-colimit",
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientHeartCommonStratification",
+  "declaration": "AlgebraicGeometry.ProEtale.IsLisseCoefficientModule",
+  "statement": "def IsLisseCoefficientModule\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] {X : Scheme.{u}}\n    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q77",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Exact existing predicate at lean/Sheaf/Paper/CoefficientHeartCommonStratification.lean:53. This definition-node binding supplies the notion formerly present only among a theorem node's supporting declarations; the dry run disallows a theorem node in stmt_deps. Its cover members use the canonically coefficient-identified weakly-etale inverse image, equivalent to slice restriction. Mod.IsFree means a finite direct sum, including zero; no restriction on local rank or the base scheme. No new Lean construction is made."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1d081d7fe",
+  "group": "Q77",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1d081d7fe",
+  "group": "Q77",
+  "result": "fix",
+  "note": "Mathematics, canonical helpers, dependencies, universes, edge cases and verbatim signature checked; per-file scompile passed. Complete replacement report under fixes repairs the H11/H1 second-reading placeholder. Review recorded in review.md; branch unchanged."
+ }
+}
