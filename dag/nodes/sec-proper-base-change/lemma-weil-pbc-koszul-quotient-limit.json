@@ -22,66 +22,51 @@
  ],
  "proof": [
   {
-   "text": "Set $A=\\Lambda$ and $a_j=f_j$ in [lem-weil-pbc-noetherian-koszul-augmentation-pro-zero]. Its augmentation is $\\epsilon_m:Q_m\\to\\Lambda/I^m[0]=P_m[0]$, not the augmentation to $\\Lambda/J_m$. It exists because $f_j^m\\in I^m$, so the degree-zero quotient kills every differential into degree zero. The transition squares commute because every degree-zero Koszul transition is the identity and $P_{m+1}\\to P_m$ is the quotient. The cited statement therefore gives, for each $m$, some $k\\ge m$ with $C_k\\to C_m$ zero in $D(\\Lambda)$, where $C_m=\\operatorname{Cone}(\\epsilon_m)$. No assertion about the proof of that node is used.",
+   "text": "Apply the strict tensor augmentation statement to obtain all v_n, their unit and zero-summand formulas and their strict transition squares.",
    "uses": [
-    "lem-weil-pbc-noetherian-koszul-augmentation-pro-zero"
+    "new-s3-koszul-quotient-tensor-augmentation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tags 0921 (lemma-sequence-Koszul-complexes), 0922 (proposition-noetherian-naive-completion-is-completion); the existing node includes the cofinal-power comparison"
-   }
+   "elementary": false
   },
   {
-   "text": "The constant-presheaf functor on $X_{\\mathrm{proet}}$ preserves kernels and cokernels sectionwise. By [lem-weil-pbc-sheafification-exact] and [lem-pc-sites-module-sheafification-interface], its module sheafification is an exact additive functor $M\\mapsto M_X$ from $\\Lambda$-modules to $\\Lambda_X$-modules. Termwise it consequently preserves quasi-isomorphisms, shifts and cones (the cone differential is the block matrix of the original differentials and map), so it induces a functor on derived categories that sends zero morphisms to zero morphisms. Apply it to $C_k\\to C_m$: the strict sheafified cone tower $(C_m)_X$ has zero transitions at the same indices.",
+   "text": "The canonical map from the ring unit to the constant module sheaf on Λ is an isomorphism. Construct its inverse by the module sheafification adjunction applied to the section 1 of the restricted ring-unit module. To prove the two inverse equations, test maps from the unit on 1, and test maps from the sheafification using the adjunction and the same generator. The exterior degree-zero equivalence and the reindexing isomorphism then make koszulSheafUnitZero invertible. Naturality of the monoidal right unitor and whisker exchange prove naturality of the Koszul tensor unit. For any compatible g and σ, test the proposed levelwise naturality equation on every total tensor summand: nonzero Koszul degrees vanish on both sides; on degree zero cancel the invertible unitor followed by tensoring the Koszul unit, and use the assumed augmentation square. Thus naturality follows from the unit and zero-summand properties and is proved here, not left in the augmentation intermediate theorem.",
    "uses": [
-    "lem-weil-pbc-sheafification-exact",
     "lem-pc-sites-module-sheafification-interface"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00WJ (sites-lemma-sheafification-exact), Tag 03CO (sites-modules-lemma-limits-colimits-abelian-sheaves), and Tag 03CY (sites-modules-lemma-sheafification-presheaf-modules)"
-   }
+   "elementary": true
   },
   {
-   "text": "Choose one K-flat resolution $F\\to K$ with flat terms by [lem-pc-kflat-resolution], and compute derived tensor using [def-weil-derived-tensor]. Ordinary total tensor with $F$ gives a strict map $v_m:F\\otimes_{\\Lambda_X}(Q_m)_X\\to F\\otimes_{\\Lambda_X}(P_m)_X$ and its transition squares. Its cone identifies with $F\\otimes_{\\Lambda_X}(C_m)_X$: tensor distributes over the two cone summands, and the identification of the shifted source summand uses the sign $(-1)^p$ on a tensor with an element in degree $p$ of $F$. Since $F$ is K-flat, tensoring sends an acyclic cone to an acyclic complex; it thus sends quasi-isomorphisms to quasi-isomorphisms and induces an additive functor on the derived category, sending the zero transitions from step 2 to zero. The cone tower of $v$ is therefore pro-zero in $D(X_{\\mathrm{proet}},\\Lambda)$. These are strict models for the two derived-tensor towers, with no flatness assumption on $K$ or the quotient modules.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "def-weil-derived-tensor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YS (lemma-K-flat-resolution) and Tag 06YU (definition-derived-tor); tensor-cone identity written explicitly"
-   }
+   "text": "For each model set V=product(v_n). Check (1-shift_Koszul) V=V (1-shift_quotient) by composing with every product projection and using the transition equation. Define w by the mapping-cocone lift with first coordinate fst composed with V and degree-minus-one coordinate snd composed with V. The differential identity δ(snd)=-ofHom(fst composed with (1-shift)) proves the lift equation. The mapping-cocone lift identities give both required coordinates.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Apply [lem-weil-pbc-ringed-strict-tower-homotopy-limit] to $v$ on the ringed site $(X_{\\mathrm{proet}},\\Lambda_X)$. Step 3 verifies exactly its zero-cone-transition hypothesis, hence $c_K=R\\lim(v)$ is an isomorphism. For each quotient, specialize [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to the identity morphism of the pro-etale topos and the ring map $\\Lambda_X\\to(P_m)_X$. Its total left derived module-pullback functor is the quotient derived tensor, computed on K-flat resolutions with flat terms. The quotient maps define natural transformations of the ordinary tensor functors by $1\\otimes(P_b\\to P_a)$; their squares with maps of resolutions commute before localization and hence after taking the left derived functors. For the Koszul tower, each $(Q_m)_X$ is a bounded finite free complex; filter it by degrees, so the graded tensor complexes are finite sums of shifts of the input complex. Tensoring a quasi-isomorphism with $(Q_m)_X$ is therefore a quasi-isomorphism, by induction on this finite filtration. A map between K-flat representatives commutes with $1_F\\otimes\\epsilon_m$ and with all transitions. These squares consequently descend to the derived categories, independently of the representatives, and applying the strict-tower derived-limit functor proves naturality in $K$. At each level the composite $\\Lambda\\to Q_m\\xrightarrow{\\epsilon_m}P_m$ is the quotient $\\Lambda\\to P_m$: on degree zero it sends $a$ to its residue class, and the source has no other degrees. Thus the two strict maps from the constant tower $F$ satisfy $v\\circ u_{\\mathrm{Kos}}=u_{\\mathrm{quot}}$. Apply the functor $R\\lim$ and precompose with the canonical map $K\\to R\\lim(\\operatorname{const}K)$ used in the strict-tower units. Functoriality gives $c_K\\circ\\kappa_K=\\operatorname{comp}_K$. This uses no choice of fillers between unrelated product-cone triangles.",
+   "text": "Apply invertibility of the explicit quotient cone comparison to these v and w and use asIso(Q(w)) for c. Its hom is definitionally Q(w).",
    "uses": [
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "new-s3-koszul-quotient-cone-is-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941 (lemma-derived-limit-is-ok), with the strict derived functor in section-derived-limits"
-   }
+   "elementary": false
+  },
+  {
+   "text": "The Koszul completion unit has first coordinate product(koszulTensorUnit) and second coordinate zero. The levelwise unit formula therefore proves that its composite with w is the quotient completion chain map, by the two-coordinate extensionality of the mapping cocone. Localize this chain-map equality and precompose with the inverse of the model realization to get the required derived unit equation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The levelwise naturality equation implies V_M product(σ)=product(τ) V_N by product extensionality. Compose w_M b and a w_N with both mapping-cocone coordinates. The assumed formulas for a and b and this product equation make both coordinates agree. The identity decomposition into the two mapping-cocone summands proves the chain maps equal. Localize this equality to get the final naturality equation.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-noetherian-koszul-augmentation-pro-zero",
-  "lem-weil-pbc-sheafification-exact",
+  "new-s3-koszul-quotient-tensor-augmentation",
   "lem-pc-sites-module-sheafification-interface",
-  "lem-pc-kflat-resolution",
-  "def-weil-derived-tensor",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "new-s3-koszul-quotient-cone-is-iso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-koszul-quotient-limit.md",
-  "place": "Proof, both paragraphs: direct I-power augmentation, strict sheafified tensor towers, functorial derived limit and equality of units"
+  "place": "Y2 stage 3: explicit tensor augmentation and pro-zero invertibility separated; mapping-cocone construction, coordinate extensionality, equality of units and strict naturality proved in Lean; rank-one constant unit isomorphism and levelwise naturality derived from the unit and zero-summand formulas"
  },
  "mathlib_searches": [
   {
@@ -206,5 +191,15 @@
   "by": "NH",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261018T071243-L-1683621",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
