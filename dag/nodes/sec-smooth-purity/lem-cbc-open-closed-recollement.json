@@ -22,77 +22,72 @@
  ],
  "proof": [
   {
-   "text": "The closed immersion $i$ is finite by [lem-weil-pbc-closed-immersion-finite], so its direct image on abelian etale sheaves is exact by [lemma-weil-pbc-finite-direct-image-exact]. It is also exact on $\\Lambda$-module sheaves: the direct-image formula has the same underlying abelian sheaf, and [lem-weil-pbc-module-sheaves-colimits-forgetful] says that forgetting coefficients preserves kernels and cokernels and is faithful. It therefore reflects exactness: the underlying homology of a sequence is zero only if its module homology is zero (faithfulness reflects a zero identity). Both inverse images are exact on constant-coefficient modules by [prop-weil-pbc-inverse-image-modules-exact], and $j_!$ is exact by [lem-weil-pbc-extension-by-zero-exact]. Thus all four operations can be applied termwise to complexes and compute their derived functors by [lem-weil-pbc-exact-functor-derived-functor]; in particular $Ri_*=i_*$.",
+   "text": "Use the four exact sheaf functors and their levelwise functors on D⁺. The closed immersion is finite, so its direct image is exact; inverse image and extension by zero have the exactness instances already used in the theorem signature. The source mapDerivedCategoryPlusAdjunction restricts the levelwise derived adjunction, with its specified unit and counit, along the fully faithful inclusion D⁺ → D. The open sheaf unit and closed sheaf counit are isomorphisms. Their levelwise derived versions are isomorphisms, as are their restrictions to D⁺.",
    "uses": [
     "lem-weil-pbc-closed-immersion-finite",
     "lemma-weil-pbc-finite-direct-image-exact",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "prop-weil-pbc-inverse-image-modules-exact",
     "lem-weil-pbc-extension-by-zero-exact",
-    "lem-weil-pbc-exact-functor-derived-functor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F, lemma-right-derived-exact-functor; exactness inputs: morphisms.tex Tag 035C, sites-modules.tex Tags 03DA, 03DJ, 04JC"
-   }
-  },
-  {
-   "text": "For a cochain complex $C$ of $\\Lambda$-module sheaves on $X_{\\Et}$ put $A^r=j_!j^{-1}C^r$ and $B^r=i_*i^{-1}C^r$. In each degree apply [lem-weil-pbc-open-closed-short-exact], with its module-coefficient clause, to obtain $0\\to A^r\\xrightarrow{\\varepsilon^r}C^r\\xrightarrow{\\eta^r}B^r\\to0$. Naturality of the counit and unit applied to $d_C^r$ gives $d_C^r\\varepsilon^r=\\varepsilon^{r+1}d_A^r$ and $d_B^r\\eta^r=\\eta^{r+1}d_C^r$. Thus these are maps of complexes and form a degreewise short exact sequence $0\\to A\\to C\\to B\\to0$. This sequence is natural in $C$: a chain map $v:C\\to C'$ gives the three maps $j_!j^{-1}v,v,i_*i^{-1}v$, and naturality gives $v^r\\varepsilon^r=\\varepsilon'{}^r(j_!j^{-1}v)^r$ and $(i_*i^{-1}v)^r\\eta^r=\\eta'{}^rv^r$ in every degree, giving both commuting squares. No claim about pro-etale sheaves is used.",
-   "uses": [
-    "lem-weil-pbc-open-closed-short-exact"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 095L, lemma-ses-associated-to-open, applied degreewise; module clause of the cited node"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-complex-ses-triangle] to this short exact sequence of complexes in the abelian category $\\Mod(X_{\\Et},\\Lambda)$. It gives a distinguished triangle $Q(A)\\xrightarrow{Q(\\varepsilon)}Q(C)\\xrightarrow{Q(\\eta)}Q(B)\\xrightarrow{\\delta_C}Q(A)[1]$. Its naturality clause gives, for every chain map $v:C\\to C'$, $Q(j_!j^{-1}v)[1]\\circ\\delta_C=\\delta_{C'}\\circ Q(i_*i^{-1}v)$. The first two arrows remain the specified adjunction maps, not merely maps with isomorphic cones.",
-   "uses": [
-    "lem-weil-pbc-complex-ses-triangle"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0152, lemma-derived-canonical-delta-functor, including the proof of naturality"
-   }
-  },
-  {
-   "text": "The preceding naturality identity descends to the derived category. Indeed all the termwise operations preserve quasi-isomorphisms and factor through $Q$ by [lem-weil-pbc-exact-functor-derived-functor]. For a quasi-isomorphism $s$, both outer maps in the identity of step 3 are invertible; multiplying that identity by their inverses proves the same naturality identity for $Q(s)^{-1}$. Every morphism in the localization is a composite of images of chain maps and such inverses, so the identity holds for every derived morphism and is independent of the representative. In particular quasi-isomorphic representatives give isomorphic triangles with exactly the three prescribed components. The unit and counit descend in the same way; their triangle identities hold termwise, hence after $Q$, and therefore give the induced derived adjunctions. On modules the sheaf adjunctions are [lem-weil-pbc-extension-by-zero-adjunction] and the adjunction clause of [prop-weil-pbc-inverse-image-modules-exact]. Finally [lem-weil-pbc-exact-functor-bounded-below] shows that for $K\\in D^+$ both outer terms are bounded below with the same lower cohomological bound as $K$. Since $D^+$ is the full triangulated subcategory specified by [def-weil-pbc-derived-categories], the triangle and all its naturality squares lie there. This is the claimed functorial triangle with its counit and unit.",
-   "uses": [
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "lem-weil-pbc-complex-ses-triangle",
     "lem-weil-pbc-extension-by-zero-adjunction",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-exact-functor-bounded-below",
-    "def-weil-pbc-derived-categories"
+    "lem-weil-pbc-extension-by-zero-unit-iso",
+    "prop-openclosed-lowerstar-fully-faithful",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-bounded-below"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 0152 and 015F (canonical delta-functor and termwise exact derived functors); localization argument written out from these"
-   }
+   "elementary": false
+  },
+  {
+   "text": "The sheaf vanishings i^* j_! = 0 and j^* i_* = 0 pass to D⁺: exact functors commute with every homology object, so the composite levelwise derived functor has zero homology in every degree. The fully faithful inclusion of D⁺ reflects zero objects.",
+   "uses": [
+    "lemma-openclosed-vanishing-lowershriek",
+    "lemma-openclosed-vanishing-lowerstar",
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The sheaf short exact sequence is natural: a sheaf map f supplies the three components j_! j^* f, f, i_* i^* f, and the two squares are naturality of the counit and unit. If j^* f and i^* f are invertible, both outer components are invertible. The short five lemma therefore makes f invertible. Since exact functors commute with homology, the same joint reflection of isomorphisms holds on D, hence on D⁺. This uses the unit’s own sheaf short exact sequence; no independent conservativity assumption is introduced.",
+   "uses": [
+    "lem-weil-pbc-open-closed-short-exact",
+    "lem-weil-pbc-short-five-lemma",
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Write J=j^*, L=j_!, I=i^*, R=i_* for the exact functors on D⁺. Complete the open counit L J K → K to a distinguished triangle L J K → K →[g] C → L J K[1]. Applying J makes the first arrow invertible by the open triangle identity and invertible unit, hence J C=0. Applying I kills the first object by step 2, hence I g is invertible. The unit C → R I C becomes invertible after J (both sides vanish by step 2) and after I (it is inverse to the invertible closed counit). Step 3 makes that unit invertible. Thus e:C ≅ R I K is the unit at C followed by R((I g)⁻¹). Naturality and cancellation give g ≫ e.hom = unit_K. Transport the cone triangle along the identity on its first two objects and e on its third object. Its first two arrows are exactly the required counit and unit.",
+   "uses": [
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the connecting maps from step 4. For K,K′, the closed adjunction identifies Hom((L J K)[1], R I K′) with Hom(I((L J K)[1]), I K′); the source of the latter is zero by step 2 and shift compatibility. Consequently this Hom is a singleton. Apply the triangle-morphism extension theorem to f:K → K′ and the prescribed components L J f and R I f. Their first two squares are counit and unit naturality. The extension theorem supplies the third square with exactly these components, namely R I f ≫ δ(K′) = δ(K) ≫ (L J f)[1]. This proves functoriality for every derived morphism directly.",
+   "uses": [
+    "lem-weil-pbc-triangle-morphism-extension"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-closed-immersion-finite",
   "lemma-weil-pbc-finite-direct-image-exact",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "prop-weil-pbc-inverse-image-modules-exact",
   "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-weil-pbc-open-closed-short-exact",
-  "lem-weil-pbc-complex-ses-triangle",
   "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-unit-iso",
+  "prop-openclosed-lowerstar-fully-faithful",
+  "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-weil-pbc-exact-functor-bounded-below",
-  "def-weil-pbc-derived-categories"
+  "lemma-openclosed-vanishing-lowershriek",
+  "lemma-openclosed-vanishing-lowerstar",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-weil-pbc-short-five-lemma",
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-triangle-morphism-extension"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 095L, lemma-ses-associated-to-open; passage to derived categories: derived.tex Tags 0152 and 015F"
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/OpenClosed/Derived.lean",
+  "place": "AlgebraicGeometry.Etale.exists_distTriang_openClosed, adapted directly to D⁺ with exact closed direct image; functoriality by the BBD triangle-morphism extension lemma. Written and compiled by V2, 2026-10-18."
  },
  "mathlib_searches": [
   {
@@ -192,11 +187,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-exact-functor-derived-functor"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
@@ -222,5 +213,15 @@
   "group": "NQ",
   "result": "pass",
   "note": "Wrote review.md. Checked immutable files, all six statement dependencies, sources, exact declarations, naturality, edge cases, and maintainer gates. Server-only compilation reproduced successfully with no diagnostics. No findings or fixes; no repository mutations performed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261018T062932-L-686231",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
