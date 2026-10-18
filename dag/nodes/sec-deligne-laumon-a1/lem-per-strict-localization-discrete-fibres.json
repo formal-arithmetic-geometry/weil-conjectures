@@ -2,7 +2,7 @@
  "id": "lem-per-strict-localization-discrete-fibres",
  "kind": "statement",
  "title": "Discrete nonempty generization fibres of strict localization",
- "statement": "Let $X$ be a Noetherian scheme [def-pc-scheme, def-weil-pbc-noetherian-ring], let $x,y\\in X$ with $x\\in\\overline{\\{y\\}}$, and let $\\bar x$ be a geometric point over $x$ [def-weil-geometric-point]. The canonical strict-localization morphism $X_{(\\bar x)}\\to X$ [def-weil-pbc-strict-henselization-limit] has discrete fibres. Its fibre over $y$ is nonempty.",
+ "statement": "Let $X$ be a Noetherian scheme [def-pc-scheme, def-weil-pbc-noetherian-ring], let $x,y\\in X$ with $x\\in\\overline{\\{y\\}}$, and let $\\bar x$ be a geometric point over $x$ [def-weil-geometric-point]. The canonical strict-localization morphism $X_{(\\bar x)}\\to X$ [def-weil-pbc-strict-henselization-limit, def-weil-pbc-strict-henselization-structural-map] has discrete fibres. Its fibre over $y$ is nonempty.",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "Expose XIV, Proposition 2.1.4 proof (the strict-localization map is pro-etale/flat with discrete fibres)"
@@ -11,11 +11,107 @@
   "def-pc-scheme",
   "def-weil-pbc-noetherian-ring",
   "def-weil-geometric-point",
-  "def-weil-pbc-strict-henselization-limit"
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose an affine open $U=\\operatorname{Spec}A$ containing $x$ from a Noetherian affine cover of $X$, and write $\\mathfrak p$ for the prime of $x$. Let $H$ be the coordinate ring of $X_{(\\bar x)}$. In [lem-weil-pbc-etale-local-ring-triples], take $Y=X$ and the chosen $U$. Its initiality and diagram equivalence identify $H$ with the filtered colimit of the etale $A$-algebras in the residue-triple category for $(A,\\mathfrak p,K)$, where $K$ is the separable closure of $\\kappa(\\mathfrak p)$ inside the field of $\\bar x$. Use the small representatives fixed in [def-weil-pbc-strict-henselization-limit]; passing to the corresponding equivalent diagram of triples keeps its index small and filtered. The structural maps $A\\to B\\to H$ agree by the cocone equations; call their common value $b:A\\to H$. Since the neighbourhoods over $U$ have the same colimit and the comparison preserves their legs, the structural map factors as $\\operatorname{Spec}H\\xrightarrow{\\operatorname{Spec}b}U\\hookrightarrow X$. In particular its fibres outside $U$ are empty.",
+   "uses": [
+    "lem-weil-pbc-etale-local-ring-triples",
+    "def-weil-pbc-strict-henselization-limit",
+    "def-weil-pbc-strict-henselization-structural-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04HX (lemma-describe-etale-local-ring), affine neighbourhood and triple-colimit comparison"
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-etale-triples-localized-strict-henselization] to the universal triple cocone of Step 1, its comparison with $H$, and $b$. This gives a compatible $A_{\\mathfrak p}$-algebra structure on $H$, with $A\\to A_{\\mathfrak p}\\to H=b$, and makes $H$ the algebraic strict henselization of $A_{\\mathfrak p}$ relative to a separable closure of its residue field. Write $\\mathfrak m=\\mathfrak pA_{\\mathfrak p}$ and $L$ for this separable closure. The pair category of [def-sc-ring-strict-henselization] for $(A_{\\mathfrak p},L)$ is isomorphic to the triple category of [lem-weil-pbc-strict-henselization-triples] for $(A_{\\mathfrak p},\\mathfrak m,L)$, compatibly with the forgetful diagrams: an $A_{\\mathfrak p}$-algebra map $\\chi:S\\to L$ has prime kernel $\\mathfrak q$, which lies over $\\mathfrak m$ because $A_{\\mathfrak p}\\to L$ factors through the residue field, and $\\chi$ induces a $\\kappa(\\mathfrak m)$-algebra map $\\phi:\\kappa(\\mathfrak q)\\to L$; conversely $(S,\\mathfrak q,\\phi)$ gives $\\chi=S\\to\\kappa(\\mathfrak q)\\xrightarrow{\\phi}L$, and the two morphism conditions $\\chi'\\circ\\beta=\\chi$ and $\\beta^{-1}(\\mathfrak q')=\\mathfrak q,\\ \\phi'\\circ\\kappa(\\beta)=\\phi$ agree. Hence $H$ is $A_{\\mathfrak p}$-isomorphic to the colimit $(A_{\\mathfrak p})^{\\mathrm{sh}}$ of that lemma, the strict henselization meant in [lem-sc-strict-henselization-noetherian] and in the faithful-flatness lemma of Step 6, and Noetherianity and faithful flatness transfer along this isomorphism. The ring $A_{\\mathfrak p}$ is Noetherian by [lem-weil-pbc-localization-noetherian], since $A$ is Noetherian and we localize at $A\\setminus\\mathfrak p$. Hence [lem-sc-strict-henselization-noetherian] shows that $H$ is Noetherian. The explicit prime $\\mathfrak p$ here is the prime of $x$, not an unspecified prime supplied by an existential local-presentation assertion.",
+   "uses": [
+    "lem-sbc-etale-triples-localized-strict-henselization",
+    "def-sc-ring-strict-henselization",
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-sc-strict-henselization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 06LJ (lemma-henselization-noetherian); algebra.tex Tag 04GW (lemma-strict-henselization-different) for the compatible local-base presentation; algebra.tex Tag 04GW again for the pair/triple description of $(R_{\\mathfrak p})^{sh}$ at the maximal ideal"
+   }
+  },
+  {
+   "text": "For any $z\\in U$, let $\\mathfrak r\\subset A$ be its prime and put $C=\\kappa(\\mathfrak r)\\otimes_A H$. Apply [lem-weil-pbc-filtered-etale-fiber-structure] to the small filtered diagram of etale $A$-algebras obtained in Step 1. It says that every prime of $C$ is maximal, so $\\operatorname{Spec}C$ has dimension at most zero. No finite-type hypothesis on $A\\to H$ is needed.",
+   "uses": [
+    "lem-weil-pbc-filtered-etale-fiber-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AH1 (lemma-filtered-colimit-etale-noetherian-fibres), proof: no nontrivial specializations in the fibre"
+   }
+  },
+  {
+   "text": "The fibre ring has the concrete presentation $C\\simeq S^{-1}(H/\\mathfrak rH)$, where $S$ is the image of $A\\setminus\\mathfrak r$. The maps send $\\bar h/s$ to $s^{-1}\\otimes h$ and $a/t\\otimes h$ to $\\overline{b(a)h}/b(t)$; the fraction and tensor relations make them well-defined and their composites fix the displayed generators. The quotient $H/\\mathfrak rH$ is Noetherian directly: lift an ideal to an ideal of $H$, take finitely many generators there, and take their images. By [lem-weil-pbc-localization-noetherian] its localization $C$ is Noetherian. This includes the zero ring and the case that the localization kills the quotient.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN (lemma-Noetherian-permanence), quotient argument in the proof and localization assertion"
+   }
+  },
+  {
+   "text": "By Steps 3 and 4, $\\operatorname{Spec}C$ is a Noetherian scheme of dimension at most zero (its single affine chart has Noetherian ring). Thus [lem-sc-zero-dim-noetherian-finite-discrete] makes its underlying space finite and discrete. The tensor-factor exchange $\\lambda\\otimes h\\mapsto h\\otimes\\lambda$, with inverse given by the same formula, identifies $C$ with $H\\otimes_A\\kappa(\\mathfrak r)$. Now [lem-weil-pbc-fibre-spec-homeomorphism] identifies this spectrum homeomorphically with the topological fibre of $\\operatorname{Spec}b$ over $z$. Consequently that fibre is discrete. Step 1 identifies it with the fibre in $X$, and gives empty, hence discrete, fibres outside $U$. This proves discreteness of every fibre.",
+   "uses": [
+    "lem-sc-zero-dim-noetherian-finite-discrete",
+    "lem-weil-pbc-fibre-spec-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0AAX (lemma-locally-Noetherian-dimension-0); algebra.tex Tag 00E6 (remark-fundamental-diagram) for the fibre homeomorphism"
+   }
+  },
+  {
+   "text": "Since $x\\in\\overline{\\{y\\}}$, the open set $U$ containing $x$ also contains $y$. Write $\\mathfrak r$ for the prime of $y$ in $A$. The Zariski closure condition says $\\mathfrak r\\subseteq\\mathfrak p$: the closure of the point $\\mathfrak r$ is $V(\\mathfrak r)$. Therefore $\\mathfrak r$ avoids $A\\setminus\\mathfrak p$ and [lem-weil-pbc-localization-spectrum-embedding] supplies a prime $\\mathfrak r_{\\mathfrak p}$ of $A_{\\mathfrak p}$ contracting to $\\mathfrak r$. By the identification in Step 2, [lem-sc-strict-henselization-faithfully-flat] makes $A_{\\mathfrak p}\\to H$ faithfully flat. Apply [lem-weil-pbc-faithfully-flat-surjective-spectrum] to obtain a prime $Q\\subset H$ over $\\mathfrak r_{\\mathfrak p}$. The equality $A\\to A_{\\mathfrak p}\\to H=b$ implies $b^{-1}(Q)=\\mathfrak r$. Hence $Q$ is a point of the fibre over $y$, proving nonemptiness, also when $y=x$.",
+   "uses": [
+    "lem-weil-pbc-localization-spectrum-embedding",
+    "lem-sc-strict-henselization-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07QM (lemma-dumb-properties-henselization), part (1); algebra.tex Tags 00E3 (lemma-spec-localization) and 00HQ (lemma-ff-rings)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-local-ring-triples",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "lem-sbc-etale-triples-localized-strict-henselization",
+  "lem-weil-pbc-strict-henselization-triples",
+  "def-sc-ring-strict-henselization",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-weil-pbc-filtered-etale-fiber-structure",
+  "lem-sc-zero-dim-noetherian-finite-discrete",
+  "lem-weil-pbc-fibre-spec-homeomorphism",
+  "lem-weil-pbc-localization-spectrum-embedding",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 06LJ, 0AH1 and 07QM, expanding the discrete/nonempty-fibre argument of ILO Expose XIV, Proposition 2.1.4, printed p.210"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +154,45 @@
    "results": "Retained search hits: AlgebraicGeometry.Scheme.Hom.discrete_fiber, RingHom.Flat, AlgebraicGeometry.Flat.mk, AlgebraicGeometry.Flat, AlgebraicGeometry.FormallyUnramified.recOn, AlgebraicGeometry.FormallyUnramified.casesOn, AlgebraicGeometry.Flat.casesOn, AlgebraicGeometry.Scheme.Hom.flat_appLE. None states the strict-localization component/fibre comparison.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.discrete_fiber, Henselization",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry.Scheme.Hom.discrete_fiber'. Read hits: no strict-henselization fibre theorem. Finite/quasi-finite fibre results require finiteness hypotheses absent here.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict localization of a Noetherian scheme has discrete fibres and a nonempty fibre at every generization of its centre",
+   "results": "AlgebraicGeometry.IsLocallyArtinian.iff_isLocallyNoetherian_and_discreteTopology; AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian; AlgebraicGeometry.IsLocallyArtinian.of_isLocallyNoetherian_of_discreteTopology; AlgebraicGeometry.IsLocallyArtinian; AlgebraicGeometry.IsLocallyNoetherian; AlgebraicGeometry.instIsNoetherianRingCarrierStalkCommRingCatPresheafOfIsLocallyNoetherian; AlgebraicGeometry.instIsLocallyNoetherianSpecOfIsNoetherianRingCarrier; AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatFiberOfLocallyOfFiniteType. Read hits: no strict-henselization fibre theorem. Finite/quasi-finite fibre results require finiteness hypotheses absent here.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A strict henselization map has discrete fibres for a Noetherian ring and its spectrum covers the local spectrum",
+   "results": "AlgebraicGeometry.Scheme.Hom.discrete_fiber; PrimeSpectrum.discreteTopology_of_toLocalization_surjective; Algebra.QuasiFinite.isDiscrete_comap_preimage_singleton; PrimeSpectrum.discreteTopology_iff_toPiLocalization_bijective; HenselianLocalRing.casesOn; instHenselianRingMaximalIdeal; Algebra.QuasiFinite.discreteTopology_primeSpectrum; IsCoveringMapOn.mk. Read hits: no strict-henselization fibre theorem. Finite/quasi-finite fibre results require finiteness hypotheses absent here.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Henselization|strictHensel|discrete_fiber",
+   "results": "Mathlib/AlgebraicGeometry/Fiber.lean. Read hits: no strict-henselization fibre theorem. Finite/quasi-finite fibre results require finiteness hypotheses absent here.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fibres of the strict henselization of a noetherian local ring are zero dimensional and nonempty",
+   "results": "instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing; IsLocalRing.instFiniteDimensionalResidueFieldCotangentSpaceOfIsNoetherianRing; HenselianLocalRing; instHenselianRingMaximalIdeal; IsLocalRing.subsingleton_cotangentSpace_iff; Field.henselian; HenselianLocalRing.toIsLocalRing; IsLocalRing.finrank_cotangentSpace_eq_zero_iff. Read hits: no strict-henselization fibre theorem. Finite/quasi-finite fibre results require finiteness hypotheses absent here.",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-immediate-specialization-criterion",
@@ -83,5 +214,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-strict-localization-discrete-fibres",
+  "worker": "stage1",
+  "summary": "Expanded the ILO XIV discrete/nonempty-fibre argument using only existing DAG nodes. Kept the statement and original metadata. Distinguished the prescribed prime of x from unspecified-prime local presentations, verified the small filtered index, wrote the quotient/localization calculation, and used faithful flatness only over the local base. No new nodes or Mathlib leaves.",
+  "blueprint": "Nearest ancestor lem-per-artin-gabber-affine-curve: proof Step 3 dimension-function normalization through lem-per-immediate-specialization-criterion; realizes the nonempty discrete-fibre input in the forward local-closure argument of ILO XIV Proposition 2.1.4. Current main-20261015 ancestor statement and perverse unit read; this is a generic local-geometric ingredient below the unit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-local-ring-triples",
+    "why": "Affine/triple comparison identifies the actual geometric strict-localization colimit and its structural maps; a generic construction tool needed to interpret this local-geometric statement."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Its triple colimit at the maximal ideal of the local ring A_p is the strict henselization to which the Noetherian and faithful-flatness lemmas refer; used only to identify the pair-category strict henselization of Step 2 with it (review fix)."
+   },
+   {
+    "node": "lem-sbc-etale-triples-localized-strict-henselization",
+    "why": "Keeps the specified prime of x and the A-linear structural-map equation when passing from neighbourhood triples to the algebraic strict henselization; not a replacement of the perverse-unit route."
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Noetherian permanence is a generic local-algebra input to the discrete-fibre assertion explicitly used in ILO XIV 2.1.4."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-etale-fiber-structure",
+    "why": "The zero-dimensionality of an ind-etale fibre is the local-algebra content needed before Noetherianity can give discreteness."
+   },
+   {
+    "node": "lem-sc-zero-dim-noetherian-finite-discrete",
+    "why": "Generic zero-dimensional Noetherian topology converts the calculated fibre-ring properties into discreteness."
+   },
+   {
+    "node": "lem-sc-strict-henselization-faithfully-flat",
+    "why": "Faithful flatness of the algebraic strict henselization supplies nonempty fibres over the local spectrum; no perverse argument is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-sbc-etale-triples-localized-strict-henselization",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-weil-pbc-filtered-etale-fiber-structure",
+  "lem-sc-zero-dim-noetherian-finite-discrete",
+  "lem-sc-strict-henselization-faithfully-flat"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q54-d1cd87cd5",
+  "group": "Q54",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-d1cd87cd5 (reviewer sub-agent of L); spot-checked: I read the item, all 15 cited statements, ILO XIV 2.1.3–2.1.4 (pp. 209–210) and Stacks 0AH1, 06LJ and 04GW. No SGA source is used. The statement is true and unchanged apart from the added reference to the structural-map node. I checked it on a field, the closed point of a Noetherian curve, fibres outside U, y=x, a nonreduced X, and A² at the origin with y the generic point of a line. There are no new nodes and no duplicate or cycle. Steps 1 and 3–6 match the cited statements. The ind-étale fibre is zero-dimensional without Noetherianity, the fibre ring S⁻¹(H/rH) is Noetherian (elementary step), the fibre is finite and discrete, and nonemptiness follows from r⊆p, faithful flatness over A_p and b⁻¹(Q)=r. One fault (C3/C4) is fixed. Step 2 gets H as a strict henselization in the sense of def-sc-ring-strict-henselization (the category of pairs), but lem-sc-strict-henselization-noetherian and, in Step 6, lem-sc-strict-henselization-faithfully-flat are about the triple colimit of lem-weil-pbc-strict-henselization-triples. The step never connected the two. The fix adds the pair↔triple isomorphism at the maximal ideal of A_p (ker χ lies over m; φ gives χ; the morphism conditions agree) and the A_p-isomorphism of H with that colimit. It cites both nodes in Step 2 and proof_deps, and adds a tool_uses entry for the triples lemma. I accept the other generic tool_uses: the triples comparison, the sbc localized henselization, the sc Noetherian and faithfully-flat lemmas, the filtered-étale fibre lemma and the zero-dimensional Noetherian lemma.; 1 file(s) fixed by the reviewer"
  }
 }
