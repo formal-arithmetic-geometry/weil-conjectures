@@ -1,0 +1,85 @@
+{
+ "id": "lem-per-regular-strict-local-model",
+ "kind": "statement",
+ "title": "Compatible strict localizations of a regular morphism",
+ "statement": "Let $h:Y\\to X$ be a regular morphism between Noetherian excellent schemes [def-exc-excellent-ring]: it is flat with fibres remaining regular after every finite extension of their residue fields [def-weil-flat-morphism, def-weil-regular-scheme, def-pc-scheme-fibre]. For a geometric point $\\bar y$ over $\\bar x$, with the specified map of geometric points over $h$, let $Y_{(\\bar y)}$ and $X_{(\\bar x)}$ be the strict localizations [def-weil-geometric-point, def-weil-pbc-strict-henselization-limit]. The induced local morphism\n$$h_{(\\bar y,\\bar x)}:Y_{(\\bar y)}\\longrightarrow X_{(\\bar x)}$$\nis regular and both schemes are Noetherian excellent. For any point $v$ of $Y_{(\\bar y)}$ with image $u$ in $X_{(\\bar x)}$ and images $y\\in Y$, $x\\in X$, the local fibre dimensions agree:\n$$\\dim\\mathcal O_{(Y_{(\\bar y)})_u,v}=\\dim\\mathcal O_{Y_x,y}.$$\nDimension means local-ring Krull dimension [def-weil-pbc-krull-dimension-ring]. The analogous assertions hold for ordinary localizations at compatible points. If $C\\hookrightarrow X_{(\\bar x)}$ is a closed subscheme, then $Y_{(\\bar y)}\\times_{X_{(\\bar x)}}C\\to C$ is regular and its source and target are Noetherian excellent.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, reductions at the start of Lemma 4.3.2.1 and Lemmas 4.3.2.3–4.3.2.4; algebraic local inputs: Stacks more-algebra.tex Tags 07C0 (lemma-regular-local), 07C1 (lemma-regular-base-change), 06LJ (lemma-henselization-noetherian), 06LN (lemma-henselization-regular). The compatible strict-local fibre-dimension assertion is the local-model formulation used in those reductions."
+ },
+ "stmt_deps": [
+  "def-exc-excellent-ring",
+  "def-weil-flat-morphism",
+  "def-weil-regular-scheme",
+  "def-pc-scheme-fibre",
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-krull-dimension-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Regular morphism induces regular map on compatible strict henselizations of local rings",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePair.HasMap.map\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {T : Type u_3} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : CommRing T]\\n  [inst_3 : Algebra R S] [inst_4 : Algebra R T] {P : StandardEtalePair R} {x : S},\\n  P.HasMap x → ∀ (f : S →ₐ[R] T), P.HasMap (f x)\", \"doc\": \"For any $ R $-algebra homomorphism $ \\\\phi: S \\\\to T $, if $ x \\\\in S $ satisfies $ f(x) = 0 $ and $ g(x) $ is a unit in $ S $, then $ \\\\phi(x) $ satisfies $ f(\\\\phi(x)) = 0 $ and $ g(\\\\phi(x)) $ is a unit \"}\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"(R : Type u_1) → [CommRing R] → Prop\", \"doc\": \"A commutative ring equipped with the property of being Henselian, meaning it satisfies Hensel's lemma for lifting roots of polynomials from its residue field.\"}\n  {\"name\": \"PerfectionMap.map\", \"module\": \"Mathlib/RingTheory/Perfection\", \"type\": \"(p : ℕ) →\\n  [inst : Fact (Nat.Prime p)] →\\n    {R : Type u₁} →\\n      [inst_1 : CommSemiring R] →\\n        [inst_2 : CharP R p] →\\n          {P : Type u₃} →\\n            [inst_3 : CommSemiring P] →\\n              [inst_4 : CharP P p] →\\n                [inst_5 : PerfectRing P p] →\\n                  {S : Ty\", \"doc\": \"Given a prime $ p $, perfect rings $ P $ and $ Q $, and commutative semirings $ R $ and $ S $ with characteristic $ p $, if $ \\\\pi: P \\\\to R $ and $ \\\\sigma: Q \\\\to S $ are perfection maps and $ \\\\varphi: \"}\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u) [inst : CommRing R] [inst_1 : IsLocalRing R],\\n  [HenselianLocalRing R,\\n      ∀ (f : Polynomial R),\\n        f.Monic →\\n          ∀ (a₀ : IsLocalRing.ResidueField R),\\n            (Polynomial.aeval a₀) f = 0 →\\n              (Polynomial.aeval a₀) (Polynomial.derivative f) ≠ 0 → ∃ a, f.IsRo\", \"doc\": \"For a commutative local ring $ R $, the following are equivalent: \\n1. $ R $ is a Henselian local ring;\\n2. For every monic polynomial $ f \\\\in R[X] $, if $ a_0 \\\\in \\\\text{ResidueField}(R) $ satisfies $ \\\\\"}\n  {\"name\": \"HenselianLocalRing.toIsLocalRing\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R], IsLocalRing R\", \"doc\": \"Every Henselian local ring is a local ring.\"}\n  {\"name\": \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem\", \"module\": \"Mathlib/RingTheory/Regular/Flat\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal R)\\n  [inst_3 : p.IsPrime] [IsLocalization.AtPrime S p] {rs : List R},\\n  RingTheory.Sequence.IsWeaklyRegular R rs →\\n    (∀ r ∈ rs, r ∈ p) → RingTheory.Sequence.IsRegular S (List.map (⇑(algebraM\", \"doc\": \"Let $ R $ be a commutative ring, $ S $ its localization at the complement of a prime ideal $ p $, and $ rs $ a list of elements in $ R $. If $ rs $ forms a weakly regular sequence in $ R $ and every e\"}\n  {\"name\": \"instHenselianRingMaximalIdeal\", \"module\": \"Mathlib/RingTheory/Henselian\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [hR : HenselianLocalRing R], HenselianRing R (IsLocalRing.maximalIdeal R)\", \"doc\": \"Every Henselian local ring $ R $ is Henselian with respect to its maximal ideal, which is the unique maximal ideal consisting of all non-units in $ R $.\"}\n  {\"name\": \"RingHom.Etale\", \"module\": \"Mathlib/RingTheory/RingHom/Etale\", \"type\": \"{R : Type u_3} → {S : Type u_4} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative rings is étale if the induced algebra structure on $ S $ over $ R $ via $ f $ satisfies the étale property, meaning $ S $ is finitely presented \"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"regular\", \"hensel\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "[Rr]egular.*[Hh]ensel|[Hh]ensel.*[Rr]egular",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Geometrically regular fibers preserved under simultaneous strict localization of source and base",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.StableUnderCompositionWithLocalizationAway\", \"module\": \"Mathlib.RingTheory.LocalProperties.Basic\", \"type\": \": Prop\", \"doc\": \"A property $P$ of ring homomorphisms is stable under composition with both the canonical algebra map from a ring to its localization at an element and the canonical localization map from a ring to its\"}\n  {\"name\": \"RingHom.FormallySmooth.holdsForLocalizationAway\", \"module\": \"Mathlib.RingTheory.RingHom.Smooth\", \"type\": \": HoldsForLocalizationAway @FormallySmooth\", \"doc\": \"If a ring homomorphism $ f : R \\\\to S $ between commutative semirings is formally smooth, then the canonical homomorphism from $ R $ to the localization of $ S $ at any element $ r $ also satisfies for\"}\n  {\"name\": \"Algebra.FormallyEtale.localization_base\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"[FormallyEtale R Sₘ] : FormallyEtale Rₘ Sₘ\", \"doc\": \"If $ S $ is a formally étale $ R $-algebra, then the localization of $ S $ at a multiplicative set $ m $ is a formally étale $ R_m $-algebra. This asserts that the property of formal étaleness is pres\"}\n  {\"name\": \"AlgebraicGeometry.sourceLocalClosure.instIsStableUnderBaseChangeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalClosure\", \"type\": \"[P.IsStableUnderBaseChange] : (sourceLocalClosure W P).IsStableUnderBaseChange\", \"doc\": \"If a morphism property $ P $ on schemes is stable under base change, then its source-local closure (the property of being locally $ P $ with respect to coverings of the source scheme) is also stable u\"}\n  {\"name\": \"Algebra.FormallySmooth.localization_base\", \"module\": \"Mathlib.RingTheory.Smooth.Basic\", \"type\": \"[FormallySmooth R Sₘ] : FormallySmooth Rₘ Sₘ\", \"doc\": \"If $ S $ is a formally smooth $ R $-algebra, then the localization $ S_m $ is a formally smooth $ R_m $-algebra, where $ R_m $ and $ S_m $ denote the localizations of $ R $ and $ S $ at a multiplicati\"}\n  {\"name\": \"Algebra.smoothLocus\", \"module\": \"Mathlib.RingTheory.Smooth.Locus\", \"type\": \": Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ where the algebra $A$ is formally smooth over the base commutative ring $R$. This means the localization $A_{\\\\mathfrak{p}}$ satisfies \"}\n  {\"name\": \"Algebra.FormallyUnramified.instLocalization\", \"module\": \"Mathlib.RingTheory.Unramified.Basic\", \"type\": \"[FormallyUnramified R S] (M : Submonoid S) : FormallyUnramified R (Localization M)\", \"doc\": \"If $ S $ is a commutative ring that is formally unramified over a base commutative ring $ R $, and $ M $ is a submonoid of $ S $, then the localization of $ S $ at $ M $ is also formally unramified ov\"}\n  {\"name\": \"IsLocalization.isRegular_mk'\", \"module\": \"Mathlib.RingTheory.Localization.Defs\", \"type\": \"(hM : ∀ m ∈ M, IsRegular m) {r : R} {m : M} : IsRegular (IsLocalization.mk' S r m) ↔ IsRegular r\", \"doc\": \"In the localization $ S $ of a commutative semiring $ R $ at a submonoid $ M $ where all elements of $ M $ are regular, an element $ \\\\frac{r}{m} $ (for $ r \\\\in R $ and $ m \\\\in M $) is regular in $ S $\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatible strict local schemes of a regular map remain noetherian excellent with regular fibers",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFiniteType f]\\n  [AlgebraicGeometry.IsLocallyNoetherian Y], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If $ Y $ is a locally Noetherian scheme and $ f: X \\\\to Y $ is a morphism locally of finite type, then $ X $ is also a locally Noetherian scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A scheme is locally Noetherian if it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"AlgebraicGeometry.Scheme → Prop\", \"doc\": \"A predicate indicating that a scheme is Noetherian.\"}\n  {\"name\": \"AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : AlgebraicGeometry.IsNoetherian X], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If a scheme $X$ is Noetherian, then it is locally Noetherian, meaning it admits an open cover by Noetherian schemes.\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Noetherian\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f]\\n  [AlgebraicGeometry.IsLocallyNoetherian Y], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"If $ X $ is an open subscheme of a locally Noetherian scheme $ Y $, then $ X $ is locally Noetherian. This follows because an open immersion $ f: X \\\\to Y $ ensures $ X $ inherits the local Noetherian \"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.IsLocallyArtinian.isLocallyNoetherian\", \"module\": \"Mathlib/AlgebraicGeometry/Artinian\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [h : AlgebraicGeometry.IsLocallyArtinian X], AlgebraicGeometry.IsLocallyNoetherian X\", \"doc\": \"Every locally Artinian scheme is a locally Noetherian scheme. That is, if every point of a scheme has an open neighborhood whose coordinate ring is Artinian, then the scheme admits an open cover by No\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-regular-codimension-one-residues",
+  "date": "2026-10-18",
+  "group": "Q44"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 1: dimension-normalized duality; finite prime-power regular pullback, XVII 4.3.2.1 initial strict-local reduction, before normalization of the one-dimensional integral base.",
+   "via": [
+    "lem-per-regular-codimension-one-residues",
+    "lem-per-regular-pullback-pinnings",
+    "lem-per-potential-dualizing-finite-pullback",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
