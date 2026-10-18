@@ -33,105 +33,55 @@
  ],
  "proof": [
   {
-   "text": "Choose an affine open $U=\\operatorname{Spec}R$ containing $s$. The point $t$ also belongs to $U$, since every open containing a specialization contains its generizations. Write $\\mathfrak m,\\mathfrak r\\subset R$ for $s,t$; then $\\mathfrak r\\subseteq\\mathfrak m$. For every affine pointed neighbourhood $(V,\\bar v)$ of $\\bar s$ over $S$, shrink inside the open inverse image of $U$ using the affine-shrinking lemma. Thus it receives a pointed map from an affine neighbourhood whose structural map factors through $U$. The full subcategory of these neighbourhoods is cofiltered and has the same opposite-indexed ring colimit by the initial-full-subcategory lemma. Its objects and arrows are exactly the affine pointed neighbourhoods of $\\bar s$ considered as a point of $U$: factorization through an open subscheme is unique. Consequently the same colimit ring $H$ represents both strict local schemes, and compatibility of the coprojections identifies $p$ with $\\operatorname{Spec}H\\to U\\hookrightarrow S$. In particular $H$ is an ind-etale $R$-algebra: it is the filtered colimit of the etale affine coordinate algebras of those neighbourhoods.",
+   "text": "Apply strictHenselizationResidue, using the residue-field embedding determined by the geometric point, to give H its local-ring structure and identify the image of its closed point with s. Choose an affine open chart i:Spec R→S containing s. Every point of Spec H generalizes its closed point; continuity and stability of open subsets under generalization show that the entire structural map p factors through i. The factorization g is IsOpenImmersion.lift, and Spec full faithfulness supplies its ring map b:R→H.",
    "uses": [
-    "def-weil-pbc-strict-henselization-limit",
-    "def-weil-pbc-strict-henselization-structural-map",
-    "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
-    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-    "lem-weil-pbc-colimit-initial-full-subcategory",
-    "def-weil-open-immersion",
-    "def-weil-etale-morphism",
-    "def-weil-pbc-ind-etale-algebra"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJ5, remark-can-lift; affine-neighbourhood reduction, expanded using Tag 04HX, lemma-describe-etale-local-ring"
-   }
-  },
-  {
-   "text": "Apply the geometric strict-henselization local-presentation lemma to $U$, its geometric point $\\bar s$, and the structural map $R\\to H$ from step 1. It gives a prime $\\mathfrak q\\subset R$, $A=R_{\\mathfrak q}$, a separable closure $K$ of its residue field, and an $A$-algebra structure making $H$ an algebraic strict henselization of $A$, with $R\\to A\\to H$ equal to the structural map. The triples-presentation lemma expresses this as a universal colimit of etale residue triples over the maximal ideal of $A$, with the prescribed structural map. The strict-henselization-triples theorem identifies the unique maximal ideal of $H$ and shows its contraction to $A$ is the maximal ideal of $A$; its contraction to $R$ is therefore $\\mathfrak q$. Apply clause (1) of strict-henselization functoriality with $g=\\mathrm{id}_U$: the geometric structural map sends the closed point of $\\operatorname{Spec}H$ to $s$, so that same contraction is $\\mathfrak m$. Hence $\\mathfrak q=\\mathfrak m$, and the faithfully-flat strict-henselization lemma now gives faithful flatness of the compatible map $R_{\\mathfrak m}\\to H$.",
-   "uses": [
-    "lem-sbc-geometric-strict-henselization-local-presentation",
-    "lem-sc-strict-henselization-triples-presentation",
-    "lem-weil-pbc-strict-henselization-triples",
     "lem-weil-pbc-strict-henselization-functoriality",
-    "lem-sc-strict-henselization-faithfully-flat",
-    "def-weil-pbc-localization-at-prime"
+    "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
+    "def-weil-open-immersion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJ5, remark-can-lift; faithfully flat local-ring map, using Tags 04HX, 04GW, 04GP and 07QM(1)"
-   }
+   "elementary": false
   },
   {
-   "text": "The prime $\\mathfrak r\\subseteq\\mathfrak m$ defines the prime $\\mathfrak rR_{\\mathfrak m}$ of $R_{\\mathfrak m}$, with contraction $\\mathfrak r$: a fraction $x/u$ with $u\\notin\\mathfrak m$ lies in this ideal exactly when $x\\in\\mathfrak r$. Indeed the localized quotient is $(R\\setminus\\mathfrak m)^{-1}(R/\\mathfrak r)$, a nonzero domain since $\\mathfrak r\\subseteq\\mathfrak m$. If $x/u$ maps to zero, some $v\\notin\\mathfrak m$ has $vx\\in\\mathfrak r$; primality and $v\\notin\\mathfrak r$ give $x\\in\\mathfrak r$. Apply faithful-flat surjectivity of spectra to $R_{\\mathfrak m}\\to H$. We obtain a prime $P\\subset H$ contracting to $\\mathfrak rR_{\\mathfrak m}$, and therefore to $\\mathfrak r$ in $R$. Let $t^{\\prime}$ be the corresponding point of $\\operatorname{Spec}H$; the map $p$ sends it to $t$.",
+   "text": "Apply strictHenselization_indEtale_of_affine_chart to b, the identity identification of Spec H with the strict local scheme, and the factorization g≫i=p. Thus H is ind-etale over R. The existing Algebra.IndEtale.weaklyEtale instance makes b weakly etale, and weaklyEtale_SpecMap_algebraMap makes g weakly etale. The open immersion i is weakly etale; stability under composition therefore makes p weakly etale, hence flat.",
    "uses": [
-    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJ5, remark-can-lift; lifting the ordinary point, using Tag 00HQ, lemma-ff-rings"
-   }
-  },
-  {
-   "text": "Put $k=\\kappa(\\mathfrak r)=\\kappa(t)$ and $B=H\\otimes_R k$. By ind-etale stability, the ind-etale $R$-algebra $H$ gives an ind-etale, hence weakly etale, $k$-algebra $B$. The fibre-ring identification gives $B= (R\\setminus\\mathfrak r)^{-1}H/\\mathfrak r(R\\setminus\\mathfrak r)^{-1}H$. Since $P\\cap R=\\mathfrak r$, localizing $P$ and then quotienting defines a prime $Q$ of $B$. Its local ring is $H_P/\\mathfrak rH_P$ and its residue field is $H_P/PH_P=\\kappa(t^{\\prime})$: localizing first at $R\\setminus\\mathfrak r$ and then at $Q$ inverts precisely the remaining elements outside $P$, and quotienting by $\\mathfrak r$ does not change the final residue quotient. These identifications respect the map $k\\to\\kappa(t^{\\prime})$. Apply the weakly-etale-over-a-field lemma to $B/k$; its residue field at $Q$, hence $\\kappa(t^{\\prime})$, is separable algebraic over $k$.",
-   "uses": [
+    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
     "lem-weil-pbc-ind-etale-stability",
-    "lem-weil-pbc-weak-etale-field",
-    "def-weil-pbc-localization-at-prime",
-    "def-weil-residue-field"
+    "def-weil-weakly-etale-morphism"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJ5, remark-can-lift; algebraic residue-field extension, expanded via more-algebra.tex, Tag 092Q, lemma-absolutely-flat-over-field"
-   }
+   "elementary": false
   },
   {
-   "text": "The given $\\bar t$ determines the embedding $\\iota:k\\to\\Omega_t$. Since $\\kappa(t^{\\prime})/k$ is algebraic and $\\Omega_t$ is algebraically closed, the algebraic-extension embedding lemma gives $j:\\kappa(t^{\\prime})\\to\\Omega_t$ extending $\\iota$. The composite $H_P\\to H_P/PH_P=\\kappa(t^{\\prime})\\xrightarrow{j}\\Omega_t$ has kernel $PH_P$, because $j$ is an injective field homomorphism; the maximal ideal of $\\Omega_t$ is zero, so this is a local homomorphism. The morphism-from-a-local-spectrum bijection, applied to $\\operatorname{Spec}H$ and the local ring $\\Omega_t$, gives $a:\\operatorname{Spec}\\Omega_t\\to\\operatorname{Spec}H=S_{(\\bar s)}$ with image $t^{\\prime}$ and this local-ring map. The composite $p\\circ a$ has image $t$ and residue-field map $j|_k=\\iota$; its local-ring map is thus $\\mathcal O_{S,t}\\to k\\xrightarrow{\\iota}\\Omega_t$, the one of $\\bar t$. Injectivity of the same local-spectrum bijection for $S$ gives $p\\circ a=\\bar t$.",
+   "text": "Since t specializes to s=p(closedPoint H), apply Flat.generalizingMap to p and the closed point. It yields x in Spec H with p(x)=t. Apply Scheme.Pullback.exists_preimage_pullback to x and the unique point of Spec Ωt to obtain a point v of the pullback of p along the prescribed barT; their images agree by hbarT.",
    "uses": [
-    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
-    "lem-weil-pbc-morphism-from-spec-local-ring",
-    "def-weil-residue-field"
+    "lem-weil-pbc-flat-generalizations-lift",
+    "lem-weil-pbc-base-change-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJ5, remark-can-lift; embedding and equality of geometric morphisms, using Tag 09GU and Tag 01J6"
-   }
+   "elementary": false
+  },
+  {
+   "text": "The projection q from this pullback to Spec Ωt is weakly etale by base change. Apply exists_comp_eq_id_of_weaklyEtale to q and v, obtaining a section σ. Define a as σ followed by the other pullback projection. Associativity, the pullback commutativity equation and σ≫q=id give a≫p=barT. No choices of geometric embeddings or residue-field identifications are needed in this final combination.",
+   "uses": [
+    "def-weil-weakly-etale-morphism",
+    "lem-fix-weakly-etale-algclosed-section"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-strict-henselization-limit",
-  "def-weil-pbc-strict-henselization-structural-map",
-  "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
-  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-  "lem-weil-pbc-colimit-initial-full-subcategory",
-  "def-weil-open-immersion",
-  "def-weil-etale-morphism",
-  "def-weil-pbc-ind-etale-algebra",
-  "lem-sbc-geometric-strict-henselization-local-presentation",
-  "lem-sc-strict-henselization-triples-presentation",
-  "lem-weil-pbc-strict-henselization-triples",
   "lem-weil-pbc-strict-henselization-functoriality",
-  "lem-sc-strict-henselization-faithfully-flat",
-  "def-weil-pbc-localization-at-prime",
-  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
   "lem-weil-pbc-ind-etale-stability",
-  "lem-weil-pbc-weak-etale-field",
-  "def-weil-residue-field",
-  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
-  "lem-weil-pbc-morphism-from-spec-local-ring"
+  "def-weil-weakly-etale-morphism",
+  "lem-weil-pbc-flat-generalizations-lift",
+  "lem-weil-pbc-base-change-image",
+  "lem-fix-weakly-etale-algclosed-section"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0GJ5, remark-can-lift; affine reduction and residue-field calculation expanded with 04HX, 04GW, 07QM, 00HQ and 092Q"
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/morphisms.tex; literature/stacks-project/proetale.tex",
+  "place": "Tag 0GJ5, remark-can-lift, shortened using the existing strict-henselization affine-chart ind-etale theorem, Tag 03HV generalization lifting for flat morphisms, and the existing algebraically closed weakly-etale section theorem (Tag 0F6C proof). X9, 2026-10-18."
  },
  "mathlib_searches": [
   {
@@ -299,11 +249,7 @@
   ]
  },
  "tool_uses": [
-  "lem-sbc-geometric-strict-henselization-local-presentation",
-  "lem-sc-strict-henselization-triples-presentation",
-  "lem-weil-pbc-strict-henselization-triples",
-  "lem-weil-pbc-strict-henselization-functoriality",
-  "lem-sc-strict-henselization-faithfully-flat"
+  "lem-weil-pbc-strict-henselization-functoriality"
  ],
  "reviewed": {
   "date": "2026-10-14",
@@ -331,5 +277,15 @@
   "date": "2026-10-15",
   "existing": false,
   "fixed_by": "NT-stage2-Codex-6a816b772"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X9",
+  "result": "pass",
+  "landing": "20261018T062951-L-692645",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

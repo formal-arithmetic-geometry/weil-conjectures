@@ -8,22 +8,12 @@ module
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import Sheaf.RingTheory.IndPrincipalZariski
-import Sheaf.AlgebraicGeometry.StrictHenselizationLocalPresentation
-import Sheaf.RingTheory.StrictHenselizationTriplesPresentation
-import Sheaf.RingTheory.StrictHenselizationTriples
-import Sheaf.AlgebraicGeometry.StrictHenselizationCanonicalMap
-import Sheaf.RingTheory.StrictHenselizationFaithfullyFlat
-import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Sheaf.RingTheory.IndEtaleStability
-import Sheaf.RingTheory.WeaklyEtaleField
-import Mathlib.AlgebraicGeometry.Stalk
-import Sheaf.AlgebraicGeometry.StrictHenselization
-import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
-import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
+import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
 import Sheaf.Paper.StrictHenselizationFunctoriality
+import WeilConjectures.RingTheory.ProEtale.IndWeaklyEtale
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
+import Mathlib.AlgebraicGeometry.PullbackCarrier
+import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 
 /-!
 # Lifting geometric specializations to strict local schemes
@@ -40,33 +30,27 @@ open CategoryTheory
 
 namespace AlgebraicGeometry.Scheme
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- A prescribed geometric generization lifts through the structural map of the strict
 henselization at the specialized geometric point.
 Source: Stacks Project, Tag 0GJ5, remark-can-lift
 (blueprint: lem-weil-pbc-geometric-specialization-strict-local-lift).
 
 Proof:
-1. Choose an affine open U = Spec R containing s; specialization implies t lies in U.
-Shrink affine pointed neighbourhoods into U, using
-`lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink`. Cofilteredness and
-`lem-weil-pbc-colimit-initial-full-subcategory` identify their coordinate-ring colimit H
-with the original one, compatibly with the structural map. H is ind-etale over R.
-2. Apply `lem-sbc-geometric-strict-henselization-local-presentation` and
-`lem-sc-strict-henselization-triples-presentation`. The maximal-ideal contraction from
-`lem-weil-pbc-strict-henselization-triples` and the closed-point description in
-`lem-weil-pbc-strict-henselization-functoriality` identify the localization prime with s.
-Then `lem-sc-strict-henselization-faithfully-flat` gives faithful flatness over R_s.
-3. The prime of t localizes to a prime of R_s with the same contraction in R.
-By `lem-weil-pbc-faithfully-flat-surjective-spectrum` it lifts to P in H, giving a point
- t' of Spec H over t.
-4. The fibre H tensor_R kappa(t) is ind-etale, hence weakly etale, by
-`lem-weil-pbc-ind-etale-stability`. Its prime induced by P has residue field kappa(t').
-`lem-weil-pbc-weak-etale-field` shows this is separable algebraic over kappa(t).
-5. By `lem-weil-pbc-algebraic-extension-embeds-algebraically-closed`, embed kappa(t')
-into Ωt extending the residue embedding of barT. The resulting local map H_P to Ωt
-produces a by `lem-weil-pbc-morphism-from-spec-local-ring`. The same bijection for S
-shows that its composite to S equals the prescribed barT, since their point and
-residue-field embedding agree. -/
+1. The strict henselization is local and its closed point maps to s, by
+`strictHenselizationResidue`. Choose an affine open chart containing s. Every point
+of a local spectrum generalizes its closed point, so the structural morphism factors
+through this chart.
+2. `strictHenselization_indEtale_of_affine_chart` makes the resulting chart ring map
+ind-etale, hence weakly etale. Composing with the open immersion shows that the
+structural morphism is weakly etale and in particular flat.
+3. Flat morphisms lift generalizations. Lift t along the structural morphism starting
+at its closed point, obtaining an ordinary point x above t.
+4. The fibre product with barT has a point above x and the unique point of Spec Ωt.
+Its projection to Spec Ωt is weakly etale by base change, hence has a section by
+`exists_comp_eq_id_of_weaklyEtale`. Compose this section with the other projection.
+The pullback identity and section equation give exactly the prescribed barT. -/
 theorem exists_geometricPoint_strictHenselization_lift
     {S : Scheme.{u}} (t s : S) (hts : t ⤳ s)
     {Ωt Ωs : Type u} [Field Ωt] [IsAlgClosed Ωt] [Field Ωs] [IsAlgClosed Ωs]
@@ -75,6 +59,47 @@ theorem exists_geometricPoint_strictHenselization_lift
     (hbarS : barS (IsLocalRing.closedPoint Ωs) = s) :
     ∃ a : Spec (.of Ωt) ⟶ strictHenselizationScheme barS,
       a ≫ strictHenselizationStructuralMap barS = barT := by
-  sorry
+  classical
+  let : Algebra (S.residueField (barS (IsLocalRing.closedPoint Ωs))) Ωs :=
+    (descResidueField (stalkClosedPointTo barS)).hom.toAlgebra
+  obtain ⟨hlocal, -, hclosed, -⟩ := strictHenselizationResidue barS rfl
+  let := hlocal
+  let H := strictHenselizationRing barS
+  let p := strictHenselizationStructuralMap barS
+  have hpclosed : p (IsLocalRing.closedPoint H) = s := hclosed.trans hbarS
+  obtain ⟨R, i, hi, hs, -⟩ :=
+    exists_affine_mem_range_and_range_subset (x := s) (U := ⊤) (by trivial)
+  let := hi
+  have hp : Set.range p ⊆ Set.range i := by
+    rintro _ ⟨x, rfl⟩
+    exact ((IsLocalRing.specializes_closedPoint x).map p.continuous).mem_open
+      i.opensRange.isOpen (by
+        change p (IsLocalRing.closedPoint H) ∈ Set.range i
+        rw [hpclosed]
+        exact hs)
+  let g : strictHenselizationScheme barS ⟶ Spec R := IsOpenImmersion.lift i p hp
+  have hg : g ≫ i = p := IsOpenImmersion.lift_fac i p hp
+  let b : R →+* H := (Spec.preimage g).hom
+  have hb : Spec.map (CommRingCat.ofHom b) = g := Spec.map_preimage g
+  let : Algebra R H := b.toAlgebra
+  have : Algebra.IndEtale R H :=
+    strictHenselization_indEtale_of_affine_chart barS R i
+      (by simpa only [hbarS] using hs) (Iso.refl _) b
+      (by simpa only [hb, Iso.refl_hom, Category.id_comp] using hg)
+  have : Algebra.WeaklyEtale R H := inferInstance
+  have hw : WeaklyEtale g := by
+    rw [← hb]
+    exact weaklyEtale_SpecMap_algebraMap
+  have : WeaklyEtale p := by
+    rw [← hg]
+    infer_instance
+  have hspec : t ⤳ p (IsLocalRing.closedPoint H) := hpclosed.symm ▸ hts
+  obtain ⟨x, -, hpt⟩ := Flat.generalizingMap p hspec
+  obtain ⟨v, -, -⟩ := Scheme.Pullback.exists_preimage_pullback (f := p) (g := barT) x
+    (IsLocalRing.closedPoint Ωt) (hpt.trans hbarT.symm)
+  obtain ⟨σ, hσ⟩ := exists_comp_eq_id_of_weaklyEtale
+    (Limits.pullback.snd p barT) v
+  refine ⟨σ ≫ Limits.pullback.fst p barT, ?_⟩
+  rw [Category.assoc, Limits.pullback.condition, ← Category.assoc, hσ, Category.id_comp]
 
 end AlgebraicGeometry.Scheme
