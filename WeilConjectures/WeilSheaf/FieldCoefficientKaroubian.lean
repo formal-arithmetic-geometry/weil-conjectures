@@ -84,20 +84,18 @@ namespace WeilComplexTwoColimit
 variable (k₀ : Type u) [Field k₀] [Finite k₀] (l : ℕ) [Fact l.Prime] (X : Scheme.{u})
   [X.Over (Spec (CommRingCat.of k₀))]
 
-/-- Blueprint `lem-weil-weil-complex-qbar-idempotent-complete`: Idempotent completeness of the
-common-stage Weil category, for the `2`-colimit model.
+/-- The idempotent completeness part of blueprint
+`lem-weil-weil-complex-qbar-idempotent-complete`, for the `2`-colimit model.
 
 `D^b_{c,W}(X, ℚ̄_ℓ) = 2-colim_E D^b_{c,W}(X, E)` (`AlgebraicGeometry.WeilComplexTwoColimit`) is
 idempotent complete, and the canonical functor into its Karoubi envelope is an equivalence: every
 stage `D^b_{c,W}(X, E)` is idempotent complete
 (`AlgebraicGeometry.FieldWeilComplex.isIdempotentComplete`), and an idempotent of the
 `2`-colimit is represented, and splits, at a finite stage
-(`CategoryTheory.StageSystem.isIdempotentComplete_pairCategory`). The repository does not equip
-the `2`-colimit with a triangulated structure, so the exactness of this equivalence is stated
-only for the stages
-(`AlgebraicGeometry.FieldWeilComplex.isEquivalence_toKaroubi_and_isTriangulated`)
-and for the direct model `AlgebraicGeometry.WeilComplex`
-(`AlgebraicGeometry.WeilComplex.isEquivalence_toKaroubi_and_isTriangulated`). -/
+(`CategoryTheory.StageSystem.isIdempotentComplete_pairCategory`). The exactness of this
+equivalence, for the triangulated structure of the `2`-colimit, is
+`WeilComplexTwoColimit.isIdempotentComplete_and_isEquivalence_toKaroubi_and_isTriangulated`
+(in `WeilConjectures.WeilSheaf.FieldCoefficientTriangulated`). -/
 theorem isIdempotentComplete_and_isEquivalence_toKaroubi
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
     IsIdempotentComplete (WeilComplexTwoColimit k₀ l X) ∧

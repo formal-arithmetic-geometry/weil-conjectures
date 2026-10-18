@@ -77,11 +77,20 @@ instance toWeilComplex_isTriangulated (E : IntermediateField ℚ_[l] (PadicAlgCl
   dsimp only [FieldWeilComplex.toWeilComplex]
   infer_instance
 
+noncomputable instance cocone_T_commShift {E F : FiniteIntermediateField l} (h : E ≤ F) :
+    ((FieldWeilComplex.cocone k₀ X).T h).CommShift ℤ :=
+  inferInstanceAs (((stageSystem (l := l) k₀ X).T h).CommShift ℤ)
+
+noncomputable instance cocone_Φ_commShift (E : FiniteIntermediateField l) :
+    ((FieldWeilComplex.cocone k₀ X).Φ E).CommShift ℤ :=
+  inferInstanceAs ((FieldWeilComplex.toWeilComplex k₀ X E.1).CommShift ℤ)
+
 instance cocone_iso_commShift {E F : FiniteIntermediateField l} (h : E ≤ F) :
     NatTrans.CommShift ((FieldWeilComplex.cocone k₀ X).iso h).hom ℤ :=
-  extendScalarsCompExtendScalarsToAdicIso_commShift k₀ X
-    (continuous_inclusion_finiteIntermediateField h) (continuous_algebraMap_intermediateField _)
-    continuous_subtype_val (continuous_algebraMap_intermediateField _)
+  extendScalarsCompExtendScalarsToAdicIso_commShift k₀ X (e' := F.1.val)
+    (he := continuous_inclusion_finiteIntermediateField h)
+    (hc := continuous_algebraMap_intermediateField _) (he' := continuous_subtype_val)
+    (hc' := continuous_algebraMap_intermediateField _)
 
 end FieldWeilComplex
 
@@ -106,6 +115,7 @@ noncomputable def forgetBoundedConstructibleAdic :
       (X ↘ Spec (CommRingCat.of k₀)).geometricFiber).FullSubcategory :=
   toWeilComplex (l := l) k₀ X ⋙ WeilComplex.forgetBoundedConstructibleAdic k₀ l X
 
+omit [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] in
 lemma forgetBoundedConstructibleAdic_comp_ι :
     forgetBoundedConstructibleAdic k₀ X ⋙ ObjectProperty.ι _ =
       WeilComplexTwoColimit.forget (k₀ := k₀) (l := l) (X := X) :=

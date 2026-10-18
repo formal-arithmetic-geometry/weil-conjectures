@@ -91,15 +91,18 @@ noncomputable def descFunctorCommShiftIso (a : ℤ) :
             ((ι hX).inv.app X.obj ≫ (Φ n).map u ≫ (ι hY).hom.app Y.obj)⟦a⟧' := by
         simp only [Functor.map_comp, Category.assoc]
         rw [← A]
-        simp only [← Functor.map_comp_assoc, Category.assoc, Functor.comp_obj, Iso.inv_hom_id_app,
+        simp only [← Functor.map_comp_assoc, Functor.comp_obj, Iso.inv_hom_id_app,
           Category.comp_id]
         rw [Functor.map_comp, Category.assoc, reassoc_of% B,
           reassoc_of% (ι_inv_shift_comm Φ ι hX a X.obj)]
+        simp only [Functor.map_comp, Category.assoc]
       simp only [Functor.comp_map, Iso.app_hom]
-      erw [Morphism.functor_map_mkHom]
+      erw [Morphism.functor_map_mkHom, descFunctor_map_mkHom, descFunctor_map_mkHom]
+      dsimp only [shiftFunctor_eq, Morphism.functor_obj, shiftMorphism_Φ]
+      simp only [Category.assoc]
       exact key)
 
-omit [∀ {i j : I} (h : i ≤ j), NatTrans.CommShift (ι h).hom ℤ] in
+set_option linter.unusedSectionVars false in
 lemma descFunctorCommShiftIso_hom_app (a : ℤ) (X : S.PairCategory) :
     (descFunctorCommShiftIso Φ ι coh a).hom.app X = ((Φ X.stage).commShiftIso a).hom.app X.obj :=
   rfl
@@ -120,7 +123,7 @@ noncomputable instance descFunctor_commShift : (descFunctor Φ ι coh).CommShift
       Functor.CommShift.isoAdd_hom_app]
     rfl
 
-omit [∀ {i j : I} (h : i ≤ j), NatTrans.CommShift (ι h).hom ℤ] in
+set_option linter.unusedSectionVars false in
 lemma descFunctor_commShiftIso_hom_app (a : ℤ) (X : S.PairCategory) :
     ((descFunctor Φ ι coh).commShiftIso a).hom.app X =
       ((Φ X.stage).commShiftIso a).hom.app X.obj :=
@@ -134,7 +137,8 @@ instance (i : I) : NatTrans.CommShift (ιCompDescFunctorIso Φ ι coh i).hom ℤ
     rw [NatTrans.comp_app, NatTrans.comp_app, Functor.whiskerRight_app,
       Functor.whiskerLeft_app, Functor.commShiftIso_comp_hom_app]
     rw [ι_commShiftIso_hom_app, descFunctor_commShiftIso_hom_app]
-    erw [Functor.map_id, Functor.map_id, Category.id_comp, Category.comp_id]
+    dsimp [ιCompDescFunctorIso, ι_obj]
+    simp
 
 variable [∀ i, Preadditive (C i)] [∀ i, HasZeroObject (C i)]
   [∀ i (n : ℤ), (shiftFunctor (C i) n).Additive] [∀ i, Pretriangulated (C i)]
