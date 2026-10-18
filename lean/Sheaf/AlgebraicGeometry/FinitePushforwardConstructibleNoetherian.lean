@@ -33,7 +33,7 @@ open CategoryTheory
 namespace AlgebraicGeometry.Scheme
 
 /-- Lissity of set sheaves is invariant under isomorphism. -/
-private theorem lisse_of_iso {T : Scheme.{u}}
+theorem lisse_of_iso {T : Scheme.{u}}
     {F G : Sheaf T.smallEtaleTopology (Type (u + 1))}
     (e : F ≅ G) (hF : IsLisseEtaleSheafOfSets F) : IsLisseEtaleSheafOfSets G := by
   obtain ⟨⟨𝒰, h𝒰⟩, hfin⟩ := hF

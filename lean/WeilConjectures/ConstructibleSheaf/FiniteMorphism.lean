@@ -9,6 +9,14 @@ public import WeilConjectures.ConstructibleSheaf.Noetherian
 public import WeilConjectures.SixFunctors.Finite.BaseChange
 public import WeilConjectures.SixFunctors.Finite.Counit
 
+import Sheaf.AlgebraicGeometry.GenericFinitePushforward
+import Sheaf.AlgebraicGeometry.FinitePushforwardConstructibleNoetherian
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import Sheaf.AlgebraicGeometry.ConstructibleModuleUnderlyingSets
+import WeilConjectures.ConstructibleSheaf.OfForget
+import WeilConjectures.AlgebraicGeometry.EtalePullbackForgetModules
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
+
 /-!
 # Finite direct images of constructible sheaves on Noetherian schemes
 
@@ -39,6 +47,22 @@ namespace AlgebraicGeometry
 
 open Scheme
 
+private theorem finiteLocallyConstant_of_setPullback
+    {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {X Y : Scheme.{u}} (g : Y ⟶ X)
+    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+    (hF : IsLisseEtaleSheafOfSets ((etaleSetPullback g).obj
+      ((sheafCompose X.smallEtaleTopology (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj
+        ((sheafCompose X.smallEtaleTopology
+          (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F)))) :
+    IsFiniteLocallyConstantSheaf ((g)^*[ModuleCat.{u + 1} Λ].obj F) := by
+  obtain ⟨em⟩ := pullback_forget_modules_iso Λ g F
+  let ea := (etaleInverseImageAlgebraicStructures Y X g).2.choose
+  let e := (sheafCompose Y.smallEtaleTopology
+    (CategoryTheory.forget AddCommGrpCat.{u + 1})).mapIso em ≪≫
+      ea.app ((sheafCompose X.smallEtaleTopology
+        (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj F)
+  exact IsFiniteLocallyConstantSheaf.of_forget _ (Scheme.lisse_of_iso e.symm hF)
+
 variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
 
 /-- Blueprint `lem-weil-pbc-finite-pushforward-generic-constructible`: Generic finite pushforward
@@ -52,8 +76,14 @@ theorem Etale.exists_dense_isFiniteLocallyConstantSheaf_lowerStar {S Z : Scheme.
     (E : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf E] :
     ∃ U : S.Opens, Dense (U : Set S) ∧
       IsFiniteLocallyConstantSheaf
-        ((U.ι)^*[ModuleCat.{u + 1} Λ].obj ((g)_*[ModuleCat.{u + 1} Λ].obj E)) :=
-  sorry
+        ((U.ι)^*[ModuleCat.{u + 1} Λ].obj ((g)_*[ModuleCat.{u + 1} Λ].obj E)) := by
+  let Eab := (sheafCompose Z.smallEtaleTopology
+    (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj E
+  have hE := isConstructibleEtaleSheafOfSets_of_module Λ E
+    ((isConstructibleEtaleModuleSheaf_iff E).mpr inferInstance)
+  obtain ⟨U, hU, hL⟩ := exists_dense_open_lisse_finite_directImage S g Eab hE
+  exact ⟨U, hU, finiteLocallyConstant_of_setPullback U.ι
+    ((g)_*[ModuleCat.{u + 1} Λ].obj E) hL⟩
 
 /-- Blueprint `lem-weil-pbc-finite-pushforward-constructible-noetherian`: Finite pushforward
 preserves constructibility on Noetherian schemes.
@@ -62,8 +92,14 @@ Let `U` be Noetherian, `h : V ⟶ U` finite and `E` a constructible sheaf of `Λ
 `V_ét`. Then its direct image `h_* E` is constructible on `U_ét`. -/
 theorem Scheme.IsConstructibleSheaf.lowerStar_of_isFinite {U V : Scheme.{u}} [IsNoetherian U]
     (h : V ⟶ U) [IsFinite h] (E : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ))
-    [IsConstructibleSheaf E] : IsConstructibleSheaf ((h)_*[ModuleCat.{u + 1} Λ].obj E) :=
-  sorry
+    [IsConstructibleSheaf E] : IsConstructibleSheaf ((h)_*[ModuleCat.{u + 1} Λ].obj E) := by
+  let Eab := (sheafCompose V.smallEtaleTopology
+    (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj E
+  have hE := isConstructibleEtaleSheafOfSets_of_module Λ E
+    ((isConstructibleEtaleModuleSheaf_iff E).mpr inferInstance)
+  obtain ⟨S, hS⟩ := isConstructibleEtaleSheafOfSets_lowerStar_of_isNoetherian h Eab hE
+  exact ⟨S, fun i ↦ finiteLocallyConstant_of_setPullback (S.immersion i)
+    ((h)_*[ModuleCat.{u + 1} Λ].obj E) (hS i)⟩
 
 /-- Blueprint `lem-fin-finite-reflects-constructibility`: Finite direct image reflects
 constructibility.
