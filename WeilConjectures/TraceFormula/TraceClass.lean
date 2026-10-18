@@ -55,9 +55,10 @@ through the invertibility of the canonical maps; it needs no further hypothesis 
   Lefschetz–Verdier formula `tr(T_c(u) | RΓ_c(X, K)) = ∫_Fix(c) Tr_c(u)` for `X` proper.
 - `ProEtale.CondensedRing.Correspondence.integral_traceClass_ofEnd`: over the base point,
   `∫_s Tr(v) = tr(v)`.
-- `ProEtale.CondensedRing.WeilBoundedConstructible.localTerm_traceClass_graph_eq_trace`: on a
-  smooth curve, the local term of the Frobenius correspondence at a fixed point is the trace of
-  the local Frobenius.
+
+The local term of the Frobenius correspondence at a fixed point
+(`ProEtale.CondensedRing.WeilBoundedConstructible.localTerm_traceClass_graph_eq_trace`) is in
+`WeilConjectures.TraceFormula.FrobeniusLocalTerm`.
 
 -/
 
@@ -416,35 +417,5 @@ theorem integral_traceClass_ofEnd {K : Dᵇc((point k).left)⟦Profinite.padicAl
   sorry
 
 end Correspondence
-
-variable [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
-
-namespace WeilBoundedConstructible
-
-variable {Φ : X ⟶ X}
-
-
-/-- **The local term of the Frobenius correspondence on a curve** (blueprint
-`thm-trf-frobenius-local-term`): let `X` be smooth of relative dimension one over `s` with the
-model Frobenius `Φ` of a model `X₀` over a finite field, let `x` be a rational point fixed by
-`Φ_m` and let `j : B ⟶ Fix(c_m)` be an open and closed subscheme of the fixed locus of the graph
-correspondence, proper over `s`, whose underlying set is the point `x`. Then the local term of
-the trace class of `φ_m` along `B` is the trace of the local Frobenius `F_{x,m}` on the
-geometric stalk `K_x̄`. No local constancy of `K` at `x` is assumed. -/
-theorem localTerm_traceClass_graph_eq_trace [SmoothOfRelativeDimension 1 X.hom]
-    {k₀ : Type u} [Field k₀] [Finite k₀] [Algebra k₀ k] {X₀ : Scheme.{u}}
-    {f₀ : X₀ ⟶ Spec (.of k₀)} {p : X.left ⟶ X₀} (hΦ : IsModelFrobenius Φ f₀ p)
-    (K : WeilBoundedConstructible ℓ Φ) {m : ℕ} (hm : 1 ≤ m) (F : (K.graph m).FixedLocus)
-    [IsProper F.F.hom] (x : RationalPoint X) (hx : x ≫ frobeniusIterate Φ m = x)
-    {B : Over (Spec (.of k))} [QuasiCompact B.hom] [IsProper B.hom] (j : B ⟶ F.F)
-    [IsOpenImmersion j.left] [IsClosedImmersion j.left]
-    (hB : Set.range j.left.base =
-      {(K.fixedLocusPoint m F x hx).left.base (default : Spec (.of k))})
-    [HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj
-      K.carrier)] :
-    ((K.graph m).traceClass F).localTerm j = trace (K.stalkFrobenius m x hx) :=
-  sorry
-
-end WeilBoundedConstructible
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -10899,6 +10899,7 @@ public import WeilConjectures.TraceFormula.FibreCoherence
 public import WeilConjectures.TraceFormula.FixedPoint
 public import WeilConjectures.TraceFormula.FixedPointScheme
 public import WeilConjectures.TraceFormula.Frobenius
+public import WeilConjectures.TraceFormula.FrobeniusLocalTerm
 public import WeilConjectures.TraceFormula.Induction
 public import WeilConjectures.TraceFormula.KunnethVerdier
 public import WeilConjectures.TraceFormula.LocalTerm

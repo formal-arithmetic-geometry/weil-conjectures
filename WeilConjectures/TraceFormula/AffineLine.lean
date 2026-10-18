@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.LineSmooth
 public import WeilConjectures.TraceFormula.Fibration
 public import WeilConjectures.TraceFormula.ModelDecomposition
 public import WeilConjectures.TraceFormula.OpenSquare
+public import WeilConjectures.TraceFormula.FrobeniusLocalTerm
 public import WeilConjectures.TraceFormula.TraceClass
 
 /-!
