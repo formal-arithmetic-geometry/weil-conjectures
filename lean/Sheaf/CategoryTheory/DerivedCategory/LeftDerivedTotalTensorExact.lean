@@ -77,6 +77,6 @@ theorem leftDerivedFunctorFromTotalTensorIsoMapDerivedCategory_hom_fac :
         F.mapDerivedCategoryFactorsh.hom =
       F.leftDerivedFunctorFromTotalTensorCounit
         (hF := F.preservesTotalTensorKFlatQuasiIso_of_exact) := by
-  sorry
+  simp [leftDerivedFunctorFromTotalTensorIsoMapDerivedCategory]
 
 end CategoryTheory.Functor
