@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Derived
 public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnboundedPlus
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.ChangeOfBase
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.ChangeOfBase
 
 /-!
 # Base change towards spectra of fields on the unbounded derived category
@@ -100,6 +101,30 @@ lemma isIso_derivedBaseChangeMap_app_upperStar_singleFunctor_of_isFinite {K : Ty
     _).2 h₂
   exact (NatTrans.isIso_app_iff_of_iso _
     ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) e).app _)).2 h₃
+/-- Blueprint `lem-kun-0f1i` for a scheme finite over `X`, combined with the case of `X`: for a
+finite `π : Xᵢ ⟶ X` with base changes `π' : X'ᵢ ⟶ X'` and `ρ : Yᵢ ⟶ Y`, the derived base change map
+`Lπ'^* Rh_* Le^* F ⟶ Rhᵢ_* Lρ^* Le^* F` is an isomorphism at every sheaf `F` placed in degree `0`:
+pasted with the base change map of `Y` over `X'` it gives the base change map of `Yᵢ` over `X'ᵢ`,
+and both are isomorphisms. -/
+lemma isIso_derivedBaseChangeMap_app_upperStar_singleFunctor_of_isFinite {K : Type u} [Field K]
+    [HasInvertibleExponent Λ (Spec (.of K))] {X X' S' T Y Xᵢ X'ᵢ Yᵢ : Scheme.{u}}
+    (a : X ⟶ Spec (.of K)) (b : S' ⟶ Spec (.of K)) [LocallyOfFiniteType a] [QuasiCompact a]
+    (p : X' ⟶ X) (f' : X' ⟶ S') (h : Y ⟶ X') (e : Y ⟶ T) (g : T ⟶ S') [QuasiCompact g]
+    [QuasiSeparated g] (sq₁ : IsPullback p f' a b) (sq₂ : IsPullback h e f' g)
+    (π : Xᵢ ⟶ X) [IsFinite π] (pᵢ : X'ᵢ ⟶ Xᵢ) (π' : X'ᵢ ⟶ X') (sqπ : IsPullback pᵢ π' π p)
+    (hᵢ : Yᵢ ⟶ X'ᵢ) (ρ : Yᵢ ⟶ Y) (sq : IsPullback hᵢ ρ π' h)
+    (𝓕 : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
+    IsIso ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ) (CommSq.mk sq.w.symm)).app
+      (L((e)^*[ModuleCat.{u + 1} Λ]).obj ((DerivedCategory.singleFunctor _ 0).obj 𝓕))) := by
+  have hrect := isIso_derivedBaseChangeMapPlus_app_singleFunctor Λ (π ≫ a) b pᵢ (π' ≫ f') hᵢ
+    (ρ ≫ e) g (sqπ.paste_vert sq₁) (sq.paste_vert sq₂) 𝓕
+  have h₁ := isIso_derivedBaseChangeMapPlus_app_singleFunctor Λ a b p f' h e g sq₁ sq₂ 𝓕
+  have hΠ := isIso_derivedBaseChangeMapPlus_app_of_paste_horiz Λ sq₂.flip.toCommSq
+    sq.flip.toCommSq (sq.paste_vert sq₂).flip.toCommSq _ inferInstance hrect
+  have hu := (isIso_derivedBaseChangeMap_app_ι_obj_iff (ModuleCat.{u + 1} Λ) sq.flip.toCommSq
+    _).2 hΠ
+  exact (NatTrans.isIso_app_iff_of_iso _
+    ((leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} Λ) e).app _)).2 hu
 
 end Etale
 
