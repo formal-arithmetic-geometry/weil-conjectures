@@ -1,0 +1,113 @@
+{
+ "id": "def-per-dominant-reduced-part",
+ "kind": "definition",
+ "title": "Reduced dominant part over an integral base",
+ "status": "split",
+ "statement": "Let $f:X\\to S$ be a morphism of schemes [def-pc-scheme] with $S$ integral [def-pc-integral-scheme]. Form the union of the irreducible components [def-weil-irreducible-components] $Z$ of $X$ whose image is dense in $S$ (dominance as in [def-sbc-normal-dominant-galois]), and take its closure. The reduced dominant part of $X$ over $S$ is this closed subset with its reduced induced scheme structure [def-pc-reduced-scheme], defined by its vanishing ideal sheaf, with the canonical closed immersion into $X$. When $X$ is Noetherian and $S$ integral this is the reduced union of the components dominating $S$, denoted $X_{\\mathrm{md}}$ in ILO II 1.2.5.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-irreducible-components",
+  "def-sbc-normal-dominant-galois",
+  "def-pc-reduced-scheme",
+  "def-pc-integral-scheme"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose II 1.2.5--1.2.8, printed pp. 25--26; for integral S the maximally dominant components are precisely the components with dense image."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "reduced induced closed subscheme union of irreducible components dominating base scheme",
+   "results": "{\"t\": \"2026-10-18T22:51:41Z\", \"tool\": \"leansearch\", \"query\": \"reduced induced closed subscheme union of irreducible components dominating base scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"irreducibleComponents\", \"AlgebraicGeometry.instIsMultiplicativeSchemeIsDominant\", \"AlgebraicGeometry.IsReduced.mk\", \"AlgebraicGeometry.IsReduced\", \"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"AlgebraicGeometry.isIntegral_of_irreducibleSpace_of_isReduced\", \"AlgebraicGeometry.isReduced_of_isReduced_stalk\", \"AlgebraicGeometry.isIso_of_isClosedImmersion_of_surjective\"], \"digest\": \"4f18c27abb568760\"}",
+   "date": "2026-10-18",
+   "verdict": "No exact dominant-part construction; only its scheme/topological ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "dominantReducedPart|dominantPart|dominant.*[Cc]omponent",
+   "results": "{\"t\": \"2026-10-18T22:54:50Z\", \"tool\": \"grep\", \"query\": \"dominantReducedPart|dominantPart|dominant.*[Cc]omponent\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Birational/Composition.lean\"], \"digest\": \"228b6a714b4d3463\"}",
+   "date": "2026-10-18",
+   "verdict": "No exact dominant-part construction; only its scheme/topological ingredients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "reduced induced union of irreducible components of a scheme dominating a base scheme",
+   "results": "{\"t\": \"2026-10-18T22:54:51Z\", \"tool\": \"leanfinder\", \"query\": \"reduced induced union of irreducible components of a scheme dominating a base scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.instQuasiSoberCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instIsDominantιCoborderRange\", \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"AlgebraicGeometry.Scheme.instIsDominantToImageOfQuasiCompact\", \"AlgebraicGeometry.Scheme.Hom.normalizationOpenCover\", \"AlgebraicGeometry.Scheme.RationalMap.domain\", \"AlgebraicGeometry.QuasiSeparated\"], \"digest\": \"5d85a31239e84e43\"}",
+   "date": "2026-10-18",
+   "verdict": "No exact dominant-part construction; only its scheme/topological ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n dominantPart|dominant.*[Pp]art|[Rr]educed.*[Dd]ominant lean/Sheaf/AlgebraicGeometry and WeilConjectures/Mathlib/AlgebraicGeometry; rg -l dominant.*reduced|reduced.*dominant dag/nodes --glob def-*.json; blueprint_refs.py search dominant product",
+   "results": "Side/upstream search found only assertions about reduced dominant maps. DAG matches: def-per-prime-to-ell-alteration-topology, def-sbc-normal-dominant-galois, def-trf-proper-hypercover and an unrelated torsor-associated-module definition; none defines the reduced dominant part. Blueprint search: 0 blueprint nodes match dominant product. Mathlib vanishingIdeal defines the reduced structure on a supplied closed subset and is reused directly.",
+   "date": "2026-10-18",
+   "verdict": "No existing definition of the required reduced dominant part."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-per-nodal-quotient-normalized-base-refinement",
+  "date": "2026-10-18",
+  "group": "Q144"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "IX 1.4 normalized base refinement: the quotient comparison to the reduced dominant part of the pullback.",
+   "via": [
+    "lem-per-nodal-quotient-normalized-base-refinement",
+    "lem-per-uniformization-nodal-quotient-reduction",
+    "lem-per-gabber-prime-to-ell-regular-cover",
+    "lem-per-prime-to-ell-uniformization-standard-form",
+    "lem-per-gabber-open-immersion-sheaf-finiteness",
+    "lem-per-quasi-excellent-etale-direct-image-finiteness",
+    "lem-per-finite-exceptional-preservation",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DominantReducedPart",
+  "declaration": "AlgebraicGeometry.dominantReducedPartIdeal",
+  "file": "lean/Sheaf/AlgebraicGeometry/DominantReducedPart.lean",
+  "statement": "def dominantReducedPartIdeal {X S : Scheme.{u}} [IsIntegral S] (f : X ⟶ S) : X.IdealSheafData",
+  "branch": "newtargets-dag",
+  "by": "Q144",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-010d8ecc1",
+  "group": "Q144",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-010d8ecc1",
+  "group": "Q144",
+  "result": "pass",
+  "note": "Every node hypothesis and conclusion is matched by the input/output records; outputs are canonical or pinned by equations (decomposition stabiliser, normalization in the function field with the algebra pinned, connected torsor, proper birational comparison into the new dominantReducedPartIdeal = vanishingIdeal of the closure of dense-image components). Covering clause: dominance and finite type of members come from maximally dominant Alt objects over integral Y; X Noetherian is existential. Closed-T' correction follows ILO IX 1.4; the citer uniformization-nodal-quotient-reduction holds. All 25 stmt_dep records match; both statements verbatim; nt_compile --json clean (1.5 s, 3.8 s). Advisories: input quotient uses the categorical universal property (equivalent, weaker hypothesis, consistent with the chart lemma); redundant [IsNoetherian Y] binder."
+ }
+}
