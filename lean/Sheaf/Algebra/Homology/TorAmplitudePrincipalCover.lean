@@ -9,13 +9,11 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.RingTheory.Localization.Away.Basic
-public import Sheaf.Algebra.Homology.DerivedChangeOfRings
-import Sheaf.Algebra.Homology.KFlatResolution
 import Mathlib.RingTheory.Flat.Localization
-import Mathlib.RingTheory.Flat.Basic
+import Mathlib.Algebra.Category.ModuleCat.Monoidal.Adjunction
+import Mathlib.Algebra.Category.ModuleCat.Descent
 import Sheaf.Algebra.Homology.KFlatModuleBaseChange
 import Sheaf.RingTheory.HomologyVanishingLocalizationSpan
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 
 /-!
 # Tor amplitude descends from a finite principal cover
@@ -28,9 +26,33 @@ Source: Stacks Project, More on Algebra, Tag 066N, lemma-glue-tor-amplitude
 
 universe w₁ w₂ u
 
-open CategoryTheory CategoryTheory.Limits
+open CategoryTheory CategoryTheory.Limits MonoidalCategory
 
 namespace DerivedCategory
+
+private theorem kFlat_extendScalars
+    {A B : Type u} [CommRing A] [CommRing B] (ρ : A →+* B)
+    (P : CochainComplex (ModuleCat.{u} A) ℤ)
+    (hP : (HomologicalComplex.quasiIso (ModuleCat.{u} A) (.up ℤ)).kFlat P) :
+    (HomologicalComplex.quasiIso (ModuleCat.{u} B) (.up ℤ)).kFlat
+      (((ModuleCat.extendScalars ρ).mapHomologicalComplex (.up ℤ)).obj P) := by
+  have hacyclic (L : CochainComplex (ModuleCat.{u} A) ℤ) (hL : L.Acyclic) :
+      (CochainComplex.mapBifunctor L P (curriedTensor _)).Acyclic := by
+    have hk := (HomotopyCategory.kFlat_quotient_obj_iff P).2 hP
+    have h := (HomotopyCategory.kFlat_iff_preserves_acyclic _).1 hk
+      ((HomotopyCategory.quotient _ _).obj L)
+      ((HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic L).2 hL)
+    exact (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).1 h.2
+  have hbase := CochainComplex.acyclic_mapBifunctor_extendScalars_of_kFlat ρ P hacyclic
+  rw [← HomotopyCategory.kFlat_quotient_obj_iff,
+    HomotopyCategory.kFlat_iff_preserves_acyclic]
+  intro N hN
+  obtain ⟨N, rfl⟩ := N.quotient_obj_surjective
+  rw [HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic] at hN
+  have hr := (HomotopyCategory.quotient_obj_mem_subcategoryAcyclic_iff_acyclic _).2
+    (hbase N hN)
+  refine ⟨?_, hr⟩
+  exact (HomotopyCategory.subcategoryAcyclic _).prop_of_iso (β_ _ _) hr
 
 /-- Tor amplitude in a fixed interval descends from a finite principal localization cover.
 Source: Stacks Project, More on Algebra, Tag 066N, lemma-glue-tor-amplitude.
@@ -67,6 +89,58 @@ theorem torAmplitudeIn_of_principal_cover
           (ModuleCat.extendScalars (algebraMap R (Localization.Away (f i))))
           (ComplexShape.up ℤ)).obj K))) :
     torAmplitudeIn (ModuleCat.{u} R) a b (Q.obj K) := by
-  sorry
+  classical
+  obtain ⟨P, π, hπ, _, hP⟩ := CochainComplex.exists_quasiIso_flat_kFlat K
+  have : QuasiIso π := hπ
+  have : IsIso (Q.map π) := (isIso_Q_map_iff_quasiIso _ π).2 hπ
+  intro M
+  let C := ((tensorRight M).mapHomologicalComplex (.up ℤ)).obj P
+  let e : Q.obj K ⊗ (singleFunctor (ModuleCat.{u} R) 0).obj M ≅ Q.obj C :=
+    whiskerRightIso (asIso (Q.map π)).symm _ ≪≫ QObjTensorSingleFunctorObjIso P hP M
+  -- On each localization, the extended K-flat model computes the local derived tensor.
+  have hlocal (i : Fin r) : homologyConcentratedIn a b
+      (Q.obj ((Functor.mapHomologicalComplex
+        (ModuleCat.extendScalars (algebraMap R (Localization.Away (f i)))) (.up ℤ)).obj C)) := by
+    let S := Localization.Away (f i)
+    let F : ModuleCat.{u} R ⥤ ModuleCat.{u} S :=
+      ModuleCat.extendScalars (algebraMap R S)
+    let FC := F.mapHomologicalComplex (.up ℤ)
+    have : F.Additive := (ModuleCat.extendRestrictScalarsAdj _).left_adjoint_additive
+    have : PreservesFiniteLimits F := ModuleCat.preservesFiniteLimits_extendScalars_of_flat
+      (RingHom.flat_algebraMap_iff.mpr (IsLocalization.flat S (Submonoid.powers (f i))))
+    have : F.PreservesHomology := inferInstance
+    have : QuasiIso (FC.map π) := inferInstance
+    have : IsIso (Q.map (FC.map π)) := (isIso_Q_map_iff_quasiIso _ _).2 inferInstance
+    let ep : Q.obj (FC.obj P) ≅ Q.obj (FC.obj K) := asIso (Q.map (FC.map π))
+    let ec : FC.obj C ≅
+        ((tensorRight (F.obj M)).mapHomologicalComplex (.up ℤ)).obj (FC.obj P) :=
+      ((NatIso.mapHomologicalComplex (Functor.Monoidal.commTensorRight F M)
+        (.up ℤ)).app P).symm
+    let et : Q.obj (FC.obj C) ≅
+        Q.obj (FC.obj K) ⊗ (singleFunctor (ModuleCat.{u} S) 0).obj (F.obj M) :=
+      Q.mapIso ec ≪≫
+        (QObjTensorSingleFunctorObjIso (FC.obj P)
+          (kFlat_extendScalars (algebraMap R S) P hP) (F.obj M)).symm ≪≫
+        whiskerRightIso ep _
+    have ht := _hlocal i (F.obj M)
+    have := ht.1
+    have := ht.2
+    exact ⟨TStructure.t.isGE_of_iso et.symm a,
+      TStructure.t.isLE_of_iso et.symm b⟩
+  -- Vanishing of the localized tensor complexes descends degree by degree.
+  have hv (n : ℤ) (hn : n < a ∨ b < n) :
+      IsZero ((homologyFunctor (ModuleCat.{u} R) n).obj (Q.obj C)) := by
+    apply homology_vanishes_of_localization_span C r f _hf n
+    intro i
+    rcases hn with hn | hn
+    · exact (isGE_iff _ a).1 (hlocal i).1 n hn
+    · exact (isLE_iff _ b).1 (hlocal i).2 n hn
+  have hc : homologyConcentratedIn a b (Q.obj C) :=
+    ⟨(isGE_iff _ a).2 (fun n hn ↦ hv n (Or.inl hn)),
+      (isLE_iff _ b).2 (fun n hn ↦ hv n (Or.inr hn))⟩
+  have := hc.1
+  have := hc.2
+  exact ⟨TStructure.t.isGE_of_iso e.symm a,
+    TStructure.t.isLE_of_iso e.symm b⟩
 
 end DerivedCategory
