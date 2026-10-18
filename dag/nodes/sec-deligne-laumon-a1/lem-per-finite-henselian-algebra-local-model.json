@@ -21,9 +21,158 @@
   "def-weil-affine-spectrum",
   "def-weil-pbc-strict-henselization-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=(R_0)_{\\mathfrak q}$ and $k=\\kappa(\\mathfrak q)$. First identify the residue field of $H$ with $k$, including its structural embedding. The field $k$ is henselian: its maximal ideal is zero, so the idempotent-lifting condition is the identity map for every finite $k$-algebra [def-weil-pbc-henselian-terminology]. The universal property [def-weil-pbc-henselization-at-prime] applied to the local residue map $A\\to k$ gives a local map $H\\to k$. On residue fields the composite $k\\to\\kappa(H)\\to k$ is the identity. The second map is an injective field homomorphism whose image already contains all of $k$, hence both maps are inverse isomorphisms. Thus $H$ is henselian with separably closed residue field $k$.",
+   "uses": [
+    "def-weil-pbc-henselian-terminology",
+    "def-weil-pbc-henselization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 04GN (lemma-henselization), 04GQ (definition-henselization); elementary universal-property argument for the residue identification."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-finite-type-algebra-noetherian] $R_0$ is Noetherian, and by [lem-weil-pbc-localization-noetherian] so is $A$. Apply [lem-wf-strict-henselization-finite-lifts] to $A$, its henselization $H$, and the separable closure $k/k$. There is only the trivial finite separable subextension. Its finite local etale lift is $H$ itself, by the uniqueness clause, so this identifies $H$ with the algebraic strict henselization of $A$. By [lem-weil-pbc-etale-local-ring-triples](3), applied to $Y=U=\\operatorname{Spec}A$ at its closed point with the residue closure $k$, this pointed-etale colimit is canonically the triples colimit of $(A,\\mathfrak m_A,k)$ in [lem-weil-pbc-strict-henselization-triples], the ring called $A^{\\mathrm{sh}}$ in [lem-sc-strict-henselization-noetherian]. Consequently [lem-sc-strict-henselization-noetherian] makes $H$ Noetherian. Choose an algebraic closure $\\Omega_0$ of $k$ and the corresponding geometric point $\\bar q$ of $\\operatorname{Spec}R_0$. Its separable residue closure inside $\\Omega_0$ is $k$. The affine comparison [lem-exc-affine-strict-local-ring-comparison], with affine open the whole scheme, identifies $H$ with $\\mathcal O^{\\mathrm{sh}}_{\\operatorname{Spec}R_0,\\bar q}$, as an $R_0$-algebra with the prescribed residue map.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-wf-strict-henselization-finite-lifts",
+    "lem-weil-pbc-etale-local-ring-triples",
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-sc-strict-henselization-noetherian",
+    "lem-exc-affine-strict-local-ring-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00FN (lemma-Noetherian-permanence), 0BSL (remark-construct-sh-from-h); more-algebra.tex Tag 06LJ (lemma-henselization-noetherian); etale-cohomology.tex Tag 04HX (lemma-describe-etale-local-ring)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-local-completion-faithfully-flat] $H\\to\\widehat H$ is faithfully flat. Applying [lem-weil-pbc-faithfully-flat-universally-injective] to the $H$-module $C$ gives an injection $C\\to\\widehat H\\otimes_H C$. By [lem-weil-pbc-finite-over-henselian-local-product], write $C\\cong\\prod_{i=1}^r C_i$ with each $C_i$ a nonzero henselian local finite $H$-algebra, local over $H$. The hypothesis that the completed tensor is nonzero rules out $C=0$ and thus $r=0$. If $r\\geq2$, the element $(1,0,\\ldots,0)$ gives an idempotent of $C$ different from zero and one, and its image under the injection is still such an idempotent. A local ring has no such element: $e(1-e)=0$ and one of $e,1-e$ is a unit, since their sum is one. This contradicts the assumed locality of the completed tensor. Hence $r=1$, so $C$ is henselian local and $H\\to C$ is local.",
+   "uses": [
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-universally-injective",
+    "lem-weil-pbc-finite-over-henselian-local-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00MC (lemma-completion-faithfully-flat), 05CK (lemma-faithfully-flat-universally-injective), 04GH (lemma-finite-over-henselian)."
+   }
+  },
+  {
+   "text": "Write $\\mathfrak n$ for the maximal ideal of $C$ and $L=C/\\mathfrak n$. The residue-field clause of [lem-weil-pbc-finite-over-henselian-local-product] gives a finite extension $L/k$. By [lem-kun-sep-closed-finite-extension-sep-closed], $L$ is separably closed, so $C$ is strictly henselian. A finite set of $H$-module generators of $C$ also generates it as an $H$-algebra, since every element is an $H$-linear combination of them. Thus [lem-weil-pbc-finite-type-algebra-noetherian] makes $C$ Noetherian, and [lem-weil-pbc-finite-type-noetherian-finite-presentation] makes it finitely presented over $H$.",
+   "uses": [
+    "lem-weil-pbc-finite-over-henselian-local-product",
+    "lem-kun-sep-closed-finite-extension-sep-closed",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-finite-type-noetherian-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 04GH (lemma-finite-over-henselian), 00FN (lemma-Noetherian-permanence), 00FP (lemma-Noetherian-finite-type-is-finite-presentation); fields.tex Tag 030K (lemma-separable-first)."
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-strict-henselization-triples] with $R=R_0$, prime $\\mathfrak q$, and separable closure $k/k$. By [lem-weil-pbc-etale-local-ring-triples](3), applied to $Y=U=\\operatorname{Spec}R_0$ and the geometric point $\\bar q$ of Step 2 (whose separable residue closure is $k$), this triples colimit is canonically $\\mathcal O^{\\mathrm{sh}}_{\\operatorname{Spec}R_0,\\bar q}$, compatibly with the maps from each $S$; with Step 2 this presents the ring $H$ of Step 2, as an $R_0$-algebra, as a filtered colimit of etale $R_0$-algebras $S$ pointed by primes $\\mathfrak p$ over $\\mathfrak q$ and $k$-embeddings $\\kappa(\\mathfrak p)\\to k$. Work with a small representative diagram of these finite-presentation algebras and their point data. Apply [lem-kun-fp-algebra-descent] to this filtered diagram and the finitely presented $H$-algebra $C$. We obtain one such $(S,\\mathfrak p)$, a finitely presented $S$-algebra $F$, and an $H$-algebra isomorphism $H\\otimes_S F\\cong C$. By [lem-weil-pbc-etale-algebra-finite-presentation-localization], $S$ is finitely presented over $R_0$, hence finite type. Finite presentations give finite algebra generating sets, so the union of generators of $S/R_0$ and $F/S$ generates $F/R_0$. In particular $F$ is finite type over $R_0$.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-weil-pbc-etale-local-ring-triples",
+    "lem-kun-fp-algebra-descent",
+    "lem-weil-pbc-etale-algebra-finite-presentation-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GW (lemma-strict-henselization-different), Tag 05N9 (lemma-colimit-category-fp-algebras), part (1), and Tag 00U1 (definition-etale); ILO Expose V 2.2.7 finite-presentation descent."
+   }
+  },
+  {
+   "text": "The embedding $\\kappa(\\mathfrak p)\\to k$ in the selected triple is a $k$-embedding, so it identifies $\\kappa(\\mathfrak p)$ with $k$; $S/\\mathfrak p$ also equals $k$, since it contains the image of $R_0/\\mathfrak q=k$. Let $\\bar p:\\operatorname{Spec}\\Omega_0\\to\\operatorname{Spec}S$ be this residue point. The etale map $\\operatorname{Spec}S\\to\\operatorname{Spec}R_0$ is ind-etale by the constant diagram in [def-weil-pbc-ind-etale-algebra], using finite presentation from [lem-weil-pbc-etale-algebra-finite-presentation-localization]. By [lem-trf-ind-etale-strict-local-invariance], its map of strict localizations identifies $\\mathcal O^{\\mathrm{sh}}_{\\operatorname{Spec}S,\\bar p}$ with $H$, compatibly with the chosen colimit leg $S\\to H$: by [lem-weil-pbc-strict-henselization-functoriality](4) with $V=W=\\operatorname{Spec}S$ and $w$ the identity, the functorial map $h$ carries the leg of $(\\operatorname{Spec}S,\\bar p)$ in $\\mathcal O^{\\mathrm{sh}}_{\\operatorname{Spec}R_0,\\bar q}$ to the structural map of $\\mathcal O^{\\mathrm{sh}}_{\\operatorname{Spec}S,\\bar p}$, and by [lem-weil-pbc-etale-local-ring-triples](3) (Step 5) that leg is the triples leg $S\\to H$. Let $H_p=(S_{\\mathfrak p})^h$. The elementary residue argument of Step 1 gives $\\kappa(H_p)=k$. Apply [lem-wf-strict-henselization-finite-lifts] again with the trivial separable closure $k/k$, and [lem-exc-affine-strict-local-ring-comparison] to $\\operatorname{Spec}S$. It identifies $H_p$ with this same strict local ring. All identifications are over $S$. Thus the map $S\\to H$ is an ordinary henselization at $\\mathfrak p$.",
+   "uses": [
+    "def-weil-pbc-ind-etale-algebra",
+    "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+    "lem-trf-ind-etale-strict-local-invariance",
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "lem-weil-pbc-etale-local-ring-triples",
+    "def-weil-pbc-henselization-at-prime",
+    "def-weil-pbc-henselian-terminology",
+    "lem-wf-strict-henselization-finite-lifts",
+    "lem-exc-affine-strict-local-ring-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 04GW, 0BSL, 04HX; invariance under an etale neighbourhood, as in algebra.tex Tag 05WR (lemma-quasi-finite-strict-henselization), etale case."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-henselization-prime-ind-etale] to $S$ and $\\mathfrak p$, using the $S$-algebra identification of Step 6. It says precisely that $S\\to H$ is ind-etale. The equality $C\\cong H\\otimes_S F$ of Step 5 identifies $\\operatorname{Spec}C\\to\\operatorname{Spec}F$ with the base change of $\\operatorname{Spec}H\\to\\operatorname{Spec}S$. Hence the base-change assertion of [lem-trf-ind-etale-strict-local-invariance] applies to this morphism and identifies its strict localizations at every geometric point, compatibly with the map to $\\operatorname{Spec}F$.",
+   "uses": [
+    "lem-trf-henselization-prime-ind-etale",
+    "lem-trf-ind-etale-strict-local-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GN (lemma-henselization), property (2), and Tag 04GV (lemma-henselization-different); Tag 0GIP (lemma-base-change-strict-henselization-quasi-finite), filtered-colimit argument."
+   }
+  },
+  {
+   "text": "Let $\\mathfrak z\\subset F$ be the preimage of $\\mathfrak n$ under $F\\to C$. It is prime, and its preimage in $R_0$ is $\\mathfrak q$, since $H\\to C$ and $A\\to H$ are local. The injection $F/\\mathfrak z\\hookrightarrow L$ is an injection of $k$-algebras. Because $L/k$ is finite (Step 4), $F/\\mathfrak z$ is a finite-dimensional $k$-vector space. For each nonzero $b$ in this domain, multiplication by $b$ is an injective linear endomorphism of a finite-dimensional space, hence surjective; in particular $b$ has an inverse. Therefore $F/\\mathfrak z$ is a field and $\\mathfrak z$ is maximal. Choose an algebraic closure $\\Omega$ of $L$. The residue map $C\\to L\\to\\Omega$ gives a closed geometric point $\\bar t$ of $\\operatorname{Spec}C$, whose image $\\bar z$ in $Z=\\operatorname{Spec}F$ is supported at $\\mathfrak z$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Elementary contraction and finite-dimensional-domain argument; the finite extension L/k was proved in Step 4."
+   }
+  },
+  {
+   "text": "The identity $C\\to C$ is a henselization of the henselian local ring $C$, by the universal property [def-weil-pbc-henselization-at-prime]. Since $L$ is separably closed, apply [lem-wf-strict-henselization-finite-lifts] to $C$ and the trivial separable closure $L/L$: its only finite local etale lift is $C$ itself. Thus $\\mathcal O^{\\mathrm{sh}}_{\\operatorname{Spec}C,\\bar t}\\cong C$, using [lem-exc-affine-strict-local-ring-comparison] for the geometric formulation. Combine this with the strict-localization isomorphism in Step 7 at $\\bar t$. It gives $C\\cong\\mathcal O^{\\mathrm{sh}}_{Z,\\bar z}$ over $F$, hence over $R_0$. Finally $F$ is finite type over $D$: adjoining the finitely many generators of $R_0/D$ and those of $F/R_0$ generates $F/D$. Thus $Z\\to\\operatorname{Spec}D$ is finite type, with the required specified closed image $\\mathfrak q$.",
+   "uses": [
+    "def-weil-pbc-henselization-at-prime",
+    "lem-wf-strict-henselization-finite-lifts",
+    "lem-exc-affine-strict-local-ring-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BSL (remark-construct-sh-from-h), trivial residue extension; etale-cohomology.tex Tag 04HX; ILO Expose XVII final paragraph 6.5, strict-local form."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-henselization-at-prime",
+  "def-weil-pbc-ind-etale-algebra",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-kun-fp-algebra-descent",
+  "lem-kun-sep-closed-finite-extension-sep-closed",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-trf-henselization-prime-ind-etale",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-faithfully-flat-universally-injective",
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-wf-strict-henselization-finite-lifts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Combination of Tags 0BSL, 04GH, 04GW, 05N9, 00MC, 05CK, 0GIP, with more-algebra.tex 06LJ and etale-cohomology.tex 04HX; expands ILO V 2.2.7 into a strict-local model argument."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +208,52 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"HenselianLocalRing.TFAE\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type u) [CommRing R] [IsLocalRing R] :\\n  TFAE\\n    [HenselianLocalRing R,\\n      ∀ f : R[X],\\n        f.Monic →\\n          ∀ a₀ : ResidueField R, aeval a₀ f = 0 → aeval a₀ (derivative f) ≠ 0 → ∃ a : R, f.IsRoot a ∧ residue R a = a₀,\\n      ∀ {K : Type u} [Field K],\\n        ∀ (φ : R →+* K),\\n         \", \"doc\": \"For a commutative local ring $ R $, the following are equivalent: \\n1. $ R $ is a Henselian local ring;\\n2. For every monic polynomial $ f \\\\in R[X] $, if $ a_0 \\\\in \\\\text{ResidueField}(R) $ satisfies $ \\\\\"}\n  {\"name\": \"HenselianLocalRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type u_1) → [CommRing R] → Prop\", \"doc\": \"A commutative ring equipped with the property of being Henselian, meaning it satisfies Hensel's lemma for lifting roots of polynomials from its residue field.\"}\n  {\"name\": \"Algebra.QuasiFinite.casesOn\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          {motive : Algebra.QuasiFinite R S → Sort u} →\\n            (t : Algebra.QuasiFinite R S) →\\n              ((finite_fiber : ∀ (P : Ideal R) [inst_3 : P.IsPrime], Module\", \"doc\": \"A quasi-finite algebra over a commutative ring $ R $ is a commutative ring $ S $ equipped with an $ R $-algebra structure such that for every prime ideal $ P $ in $ R $, the tensor product of the resi\"}\n  {\"name\": \"IsLocalRing.finite_residueField_of_compactSpace\", \"module\": \"Mathlib.Topology.Algebra.Ring.Compact\", \"type\": \": Finite (ResidueField R)\", \"doc\": \"If $ R $ is a compact local ring, then its residue field (the quotient of $ R $ by its unique maximal ideal) is a finite field.\"}\n  {\"name\": \"RingHom.EssFiniteType.residueFieldMap\", \"module\": \"Mathlib.RingTheory.RingHom.EssFiniteType\", \"type\": \"{f : R →+* S} [IsLocalRing R] [IsLocalRing S] [IsLocalHom f] (hf : f.EssFiniteType) :\\n  (IsLocalRing.ResidueField.map f).EssFiniteType\", \"doc\": \"If $ f : R \\\\to S $ is a local homomorphism between commutative local rings such that $ S $ is essentially of finite type over $ R $, then the induced homomorphism between their residue fields is also \"}\n  {\"name\": \"instHenselianRingMaximalIdeal\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"(R : Type*) [CommRing R] [hR : HenselianLocalRing R] : HenselianRing R (maximalIdeal R)\", \"doc\": \"Every Henselian local ring $ R $ is Henselian with respect to its maximal ideal, which is the unique maximal ideal consisting of all non-units in $ R $.\"}\n  {\"name\": \"HenselianLocalRing.toIsLocalRing\", \"module\": \"Mathlib.RingTheory.Henselian\", \"type\": \"∀ {R : Type u_1} {inst : CommRing R} [self : HenselianLocalRing R], IsLocalRing R\", \"doc\": \"Every Henselian local ring is a local ring.\"}\n  {\"name\": \"IsLocalRing.ResidueField.finite_of_finite\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Basic\", \"type\": \"[Module.Finite R S] (hfin : Finite (ResidueField R)) : Finite (ResidueField S)\", \"doc\": \"Let $ R $ and $ S $ be local rings with $ S $ being a finite $ R $-module. If the residue field of $ R $ is finite, then the residue field of $ S $ is also finite.\"}",
    "date": "2026-10-19",
    "verdict": "no match: the hits give henselian root lifting and local etale properties; none descends a finite algebra over a henselization to a finite-type strict local model"
+  },
+  {
+   "tool": "grep",
+   "query": "henseli.*finite|finite.*henseli|strictHenseli|henselization",
+   "results": "hits: ",
+   "date": "2026-10-19",
+   "verdict": "no match: no hit states the strict-local-model conclusion; finite-presentation and henselian definitions are supporting inputs only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite algebra over henselization of a Noetherian local ring has a finite type algebra whose strict henselization is that algebra",
+   "results": "hits: AlgHom.FinitePresentation.of_finiteType, AlgHom.FiniteType, RingHom.FiniteType, Algebra.FiniteType.isNoetherianRing, AlgHom.Finite.finiteType, AlgHom.Finite, Algebra.FiniteType.mk, RingHom.FiniteType.of_finite",
+   "date": "2026-10-19",
+   "verdict": "no match: no hit states the strict-local-model conclusion; finite-presentation and henselian definitions are supporting inputs only"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"HenselianLocalRing\", \"Module.Finite\"",
+   "results": "hits: ",
+   "date": "2026-10-19",
+   "verdict": "no match: no hit states the strict-local-model conclusion; finite-presentation and henselian definitions are supporting inputs only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite local algebra over a henselization is the strict henselization of a finite type algebra at a geometric point",
+   "results": "hits: HenselianLocalRing, IsLocalRing.ResidueField.finite_of_finite, RingHom.EssFiniteType.residueFieldMap, Algebra.QuasiFiniteAt, Algebra.instFiniteResidueFieldOfFormallyUnramified, HenselianLocalRing.toIsLocalRing, Algebra.instFiniteResidueFieldOfQuasiFiniteAt, HenselianLocalRing.TFAE",
+   "date": "2026-10-19",
+   "verdict": "no match: no hit states the strict-local-model conclusion; finite-presentation and henselian definitions are supporting inputs only"
+  },
+  {
+   "tool": "grep",
+   "query": "Henselian",
+   "results": "hits: Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/Henselian.lean, Mathlib/RingTheory/Henselian.lean; subdirectory RingTheory",
+   "date": "2026-10-19",
+   "verdict": "no match: no hit states the strict-local-model conclusion; finite-presentation and henselian definitions are supporting inputs only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite module algebra over a henselian local ring with separably closed residue field is a product of strictly henselian local rings and descends to an etale finite presentation model",
+   "results": "hits: StandardEtalePresentation, Algebra.FormallyEtale.iff_exists_algEquiv_prod, Algebra.Etale.iff_exists_algEquiv_prod, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, HenselianLocalRing.TFAE, Algebra.Etale.finitePresentation, Algebra.Etale, HenselianLocalRing",
+   "date": "2026-10-19",
+   "verdict": "no match: no hit states the strict-local-model conclusion; finite-presentation and henselian definitions are supporting inputs only"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-gabber-partial-algebraization",
@@ -85,5 +276,109 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-finite-henselian-algebra-local-model",
+  "worker": "stage1",
+  "summary": "Proved locality by injecting into the local completed tensor and ruling out multiple henselian factors. Descended the finite presentation to a pointed etale stage and used ind-etale invariance to obtain the actual strict local ring. All inputs already exist; no new nodes or altered statement.",
+  "blueprint": "Current split of the blueprint ancestor lem-per-artin-gabber-affine-curve, Step 1: the dimension-normalized Verdier duality input, through lem-per-qbar-arbitrary-field-duality and its finite-coefficient local-duality construction; this item's partial algebraization is used in Step 4 of lem-per-gabber-local-duality-general. Supporting input: Finite algebras over a local henselization have finite-type strict local models",
+  "tool_uses": [
+   {
+    "node": "lem-exc-affine-strict-local-ring-comparison",
+    "why": "Generic commutative-algebra or strict-localization input used in the indicated proof step; no node of the perverse-sheaf unit supplies this statement."
+   },
+   {
+    "node": "lem-kun-fp-algebra-descent",
+    "why": "Generic commutative-algebra or strict-localization input used in the indicated proof step; no node of the perverse-sheaf unit supplies this statement."
+   },
+   {
+    "node": "lem-kun-sep-closed-finite-extension-sep-closed",
+    "why": "Generic commutative-algebra or strict-localization input used in the indicated proof step; no node of the perverse-sheaf unit supplies this statement."
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Generic commutative-algebra or strict-localization input used in the indicated proof step; no node of the perverse-sheaf unit supplies this statement."
+   },
+   {
+    "node": "lem-trf-henselization-prime-ind-etale",
+    "why": "Generic commutative-algebra or strict-localization input used in the indicated proof step; no node of the perverse-sheaf unit supplies this statement."
+   },
+   {
+    "node": "lem-trf-ind-etale-strict-local-invariance",
+    "why": "Generic commutative-algebra or strict-localization input used in the indicated proof step; no node of the perverse-sheaf unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+    "why": "Generic commutative-algebra or strict-localization input used in the indicated proof step; no node of the perverse-sheaf unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-faithfully-flat-universally-injective",
+    "why": "Generic commutative-algebra or strict-localization input used in the indicated proof step; no node of the perverse-sheaf unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-henselian-local-product",
+    "why": "Generic commutative-algebra or strict-localization input used in the indicated proof step; no node of the perverse-sheaf unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Generic commutative-algebra or strict-localization input used in the indicated proof step; no node of the perverse-sheaf unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+    "why": "Generic commutative-algebra or strict-localization input used in the indicated proof step; no node of the perverse-sheaf unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-faithfully-flat",
+    "why": "Generic commutative-algebra or strict-localization input used in the indicated proof step; no node of the perverse-sheaf unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "Generic commutative-algebra or strict-localization input used in the indicated proof step; no node of the perverse-sheaf unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Generic commutative-algebra or strict-localization input used in the indicated proof step; no node of the perverse-sheaf unit supplies this statement."
+   },
+   {
+    "node": "lem-wf-strict-henselization-finite-lifts",
+    "why": "Generic commutative-algebra or strict-localization input used in the indicated proof step; no node of the perverse-sheaf unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-local-ring-triples",
+    "why": "Generic commutative-algebra or strict-localization input used in the indicated proof step; no node of the perverse-sheaf unit supplies this statement."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Generic commutative-algebra or strict-localization input used in the indicated proof step; no node of the perverse-sheaf unit supplies this statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-kun-fp-algebra-descent",
+  "lem-kun-sep-closed-finite-extension-sep-closed",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-trf-henselization-prime-ind-etale",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-weil-pbc-etale-algebra-finite-presentation-localization",
+  "lem-weil-pbc-faithfully-flat-universally-injective",
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-finite-type-noetherian-finite-presentation",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-wf-strict-henselization-finite-lifts",
+  "lem-weil-pbc-etale-local-ring-triples",
+  "lem-weil-pbc-strict-henselization-functoriality"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-N3-4ae512a35",
+  "group": "N3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N3-4ae512a35 (reviewer sub-agent of L); spot-checked: I read the item, all 9 steps and every cited node statement, plus ILO V 2.2.6–2.2.8 (finite over the henselization ⇒ finitely presented ⇒ descends along the colimit). The statement is correct; it has no new nodes and is not changed. Small cases checked: R0=k, C=H×H (excluded by locality), imperfect C=H[u]/(u^p−a) where κ(z)=L, and nonreduced C. Steps 1, 3, 4, 7, 8 and 9 are correct as written. Two C3/C4 citation gaps are repaired in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-finite-henselian-algebra-local-model.json. (1) Steps 2 and 5 identified H, which is only known to be the pointed-étale strict henselization, with the triples colimit. That identification is needed both for lem-sc-strict-henselization-noetherian and for the descent diagram, and no cited statement gave it; I added lem-weil-pbc-etale-local-ring-triples(3). (2) In Step 6, the invariance node gives the isomorphism only over R0, but the step claimed it was compatible with the colimit leg S→H; I added lem-weil-pbc-strict-henselization-functoriality(4) with V=W=Spec S and w=id, together with triples(3). proof_deps and split_report.tool_uses were updated; no cycle, and all steps are under 2000 characters. Batch-5 flags: lem-trf-henselization-prime-ind-etale (Stacks 04GN, pure algebra), lem-trf-ind-etale-strict-local-invariance (Stacks 05WR, generic, accepted before) and def-weil-pbc-henselization-at-prime (a definition, already in the base stmt_deps) are all outside the trace-formula and Poincaré-duality assumptions, so I accepted them. The new closure contains no other trace-formula or Poincaré node.; 1 file(s) fixed by the reviewer"
  }
 }
