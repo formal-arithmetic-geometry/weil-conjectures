@@ -457,5 +457,35 @@
   "group": "N6",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-429c321e6 (reviewer sub-agent of L); spot-checked: I read all 11 steps and the statement of every cited node; the mathematics is correct and the statement is verbatim and true. Steps: (1) j and j' are qcqs: Noetherian open subscheme, and the diagonal of an open immersion is an isomorphism. (2) i_* is left adjoint to i^!_0 on A-modules, by A-linearity of the natural bijection. The bounded-below derived-adjunction node applies because Mod(T,A) has enough injectives and i_* is exact. (3) The restriction-kernel node gives surjectivity for injective modules, which yields the 0A45 triangle; this matches etale-cohomology.tex lemma-cohomology-with-support-triangle. (4) c is checked by stalks (04CA support, 03Q1 germ), and the localized exact adjunction makes i'_* fully faithful. (6) The strict-local invariance hypothesis holds because g is affine and ind-etale. (7) The 03Q9-type global-homology node applies to the qcqs j and j', and gives closed stalks. (8) I checked the cube instantiation (T,U,T',U') / (C,U_C,B,U_B) with g s' = s v. It gives E_v∘v*P = Q∘s'*E, and forget-coefficients moves the result to A-modules. (9-10) TR3, plus full faithfulness, forces lambda = i'_*(beta)∘c; then the five lemma and the left inverse finish. Small cases: Z empty, Z=T, A=0, g=id. The parent's uses (A=F_l, strict localization, Spec O_{T,t}) satisfy the hypotheses. Batch-5: lem-trf-bounded-below-derived-adjunction is pure homological algebra; its 14-node closure has no trace-formula or Poincare-duality statement and is already cited outside trf. lem-trf-ind-etale-strict-local-invariance is Olivier-type strict-henselization invariance; neither assumption gives it, and the parent already cites it. Both are genuinely outside the assumed statements, so I accepted them. tool_uses are all generic and accepted; I found no duplicate. FIX (B5): two step source labels. Step 1 now gives 01KK as schemes.tex definition-separated; Step 8's document is now etale-cohomology.tex for 03Q9, with 0E47 named in sites-cohomology.tex. Nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IndEtaleClosedSupportBaseChange",
+  "declaration": "AlgebraicGeometry.Etale.indEtale_closedSupport_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.Etale.closedSupportPlus_isLeftAdjoint",
+   "AlgebraicGeometry.Etale.closedSupportPlus",
+   "AlgebraicGeometry.Etale.closedSupportPlusAdjunction",
+   "AlgebraicGeometry.Etale.closedSupportPlusCommShift",
+   "AlgebraicGeometry.Etale.closedSupportExchangeInverse",
+   "AlgebraicGeometry.Etale.closedSupportBaseChangePlus",
+   "AlgebraicGeometry.Etale.indEtale_closedSupport_baseChange",
+   "AlgebraicGeometry.Etale.indEtale_closedSupport_baseChange_comp",
+   "AlgebraicGeometry.Etale.closedSupport_baseChange_id"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/IndEtaleClosedSupportBaseChange.lean",
+  "statement": "theorem indEtale_closedSupport_baseChange {Z' Z T' T : Scheme.{u}} {h : Z' ⟶ Z} {i' : Z' ⟶ T'} {i : Z ⟶ T} {g : T' ⟶ T} [IsNoetherian T] [IsNoetherian T'] [IsClosedImmersion i] [IsClosedImmersion i'] [IsAffineHom g] (hg : ∀ t : T', ∃ (V : T'.Opens) (U : T.Opens), t ∈ V ∧ IsAffine V.toScheme ∧ IsAffine U.toScheme ∧ ∃ e : V.toScheme ⟶ U.toScheme, e ≫ U.ι = V.ι ≫ g ∧ RingHom.IndEtaleAcrossUniverses e.appTop.hom) (sq : IsPullback h i' i g) : IsIso (derivedBaseChangeMapPlus (ModuleCat.{u + 1} A) sq.toCommSq) ∧ IsIso (closedSupportBaseChangePlus A sq.toCommSq) ∧ NatTrans.CommShift (closedSupportBaseChangePlus A sq.toCommSq) ℤ ∧ ∀ K : _root_.DerivedCategory.Plus (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)), (derivedBaseChangeMapPlus (ModuleCat.{u + 1} A) sq.toCommSq).app ((closedSupportPlus A i).obj K) ≫ (lowerStar (ModuleCat.{u + 1} A) i').rightDerivedFunctorPlus.map ((closedSupportBaseChangePlus A sq.toCommSq).app K) ≫ (closedSupportPlusAdjunction A i').counit.app ((upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategoryPlus.obj K) = (upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategoryPlus.map ((closedSupportPlusAdjunction A i).counit.app K)",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "D+ support is the right adjoint of exact closed direct image. The helper closedSupportPlus_isLeftAdjoint derives the supported-kernel adjunction on module sheaves, fixing its universal-property interpretation. The canonical exchange is the mate of the inverse of derivedBaseChangeMapPlus; the main statement records invertibility, shift compatibility and its counit equation, and the further declarations record composition and identity coherence. No constructibility assumption."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9c6267722",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Read node, 9 stmt_dep records, report, module. Only the lean field differs from live; first stage-2 delivery. All clauses match: A finite comm ring (u+1 convention), IsAffineHom g, IsNoetherian T/T', local-chart IndEtaleAcrossUniverses hg (no stronger than node), IsPullback square, D+ ModuleCat sheaves, i^! = right adjoint of D+ closed direct image (existence as named sorry theorem = node Step 2, Q04 landed convention), beta = mateEquiv of inverse derivedBaseChangeMapPlus, IsIso, counit equation exactly as node, CommShift Z, composition via upperStarCompDerivedPlus, identity lemma, no constructibility. Edge cases Z empty, T' empty, A=0, g=id covered. Docstrings with source and blueprint, 11 steps in main docstring, all proofs sorry, no hollow defs: dite inverse is canonical since closed immersions are integral (proved isIso_derivedBaseChangeMapPlus_of_isIntegralHom). nt_compile --json exit 0, module 3.6 s, no diagnostics. Advisories only: asIso would be tidier than dite-0, and the first conjunct restates the existing theorem."
  }
 }
