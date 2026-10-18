@@ -8,9 +8,7 @@ module
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Defs
 public import Mathlib.CategoryTheory.Shift.CommShift
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs
-import Sheaf.AlgebraicGeometry.DerivedCategories
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import WeilConjectures.AlgebraicGeometry.DerivedCategories
 
 /-!
 # Shift compatibility of the derived square isomorphism
@@ -23,9 +21,87 @@ Source: literature/stacks-project/derived.tex, Definition 014V and Lemma 05SU
 
 universe u
 
-open CategoryTheory
+open CategoryTheory Limits Functor
+
+section ExactFunctorComparisons
+
+attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
+
+variable {C D E : Type*} [Category C] [Category D] [Category E]
+  [Abelian C] [Abelian D] [Abelian E]
+  [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
+
+-- On the localization image, a lifted comparison is conjugate to the termwise one.
+private theorem commShift_derivedPlusNatIso {F G : C ⥤ D} [F.Additive] [G.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G] (e : F ≅ G) :
+    NatTrans.CommShift (Functor.mapDerivedCategoryPlusNatIso e).hom ℤ := by
+  have he : Functor.whiskerLeft DerivedCategory.Plus.Qh
+      (Functor.mapDerivedCategoryPlusNatIso e).hom =
+      F.mapDerivedCategoryPlusFactorsh.hom ≫
+        Functor.whiskerRight (NatTrans.mapHomotopyCategoryPlus e.hom)
+          DerivedCategory.Plus.Qh ≫ G.mapDerivedCategoryPlusFactorsh.inv := by
+    apply NatTrans.ext
+    funext K
+    apply (cancel_mono (G.mapDerivedCategoryPlusFactorsh.hom.app K)).1
+    simpa only [Functor.whiskerLeft_app, NatTrans.comp_app, Functor.whiskerRight_app,
+      Category.assoc, Iso.inv_hom_id_app, Category.comp_id] using
+      Functor.mapDerivedCategoryPlusNatIso_hom_app_factorsh e K
+  have : NatTrans.CommShift (Functor.whiskerLeft DerivedCategory.Plus.Qh
+      (Functor.mapDerivedCategoryPlusNatIso e).hom) ℤ := by
+    rw [he]
+    infer_instance
+  exact NatTrans.CommShift.of_whiskerLeft _ DerivedCategory.Plus.Qh fun X ↦
+    ⟨_, (DerivedCategory.Plus.Qh.objObjPreimageIso X).inv, inferInstance⟩
+
+-- The composite factorization identifies the composition comparison after localization.
+private theorem commShift_derivedPlusCompIso (F : C ⥤ D) (G : D ⥤ E)
+    [F.Additive] [G.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    [PreservesFiniteLimits G] [PreservesFiniteColimits G] :
+    NatTrans.CommShift (Functor.mapDerivedCategoryPlusCompIso F G).hom ℤ := by
+  let e := (Functor.associator DerivedCategory.Plus.Qh
+      F.mapDerivedCategoryPlus G.mapDerivedCategoryPlus).symm ≪≫
+    isoWhiskerRight F.mapDerivedCategoryPlusFactorsh G.mapDerivedCategoryPlus ≪≫
+    Functor.associator _ _ _ ≪≫
+    isoWhiskerLeft F.mapHomotopyCategoryPlus G.mapDerivedCategoryPlusFactorsh ≪≫
+    (Functor.associator _ _ _).symm ≪≫
+    isoWhiskerRight (Functor.mapHomotopyCategoryPlusCompIso (Iso.refl (F ⋙ G)))
+      DerivedCategory.Plus.Qh
+  have he : isoWhiskerLeft DerivedCategory.Plus.Qh
+      (Functor.mapDerivedCategoryPlusCompIso F G) ≪≫ e =
+      (F ⋙ G).mapDerivedCategoryPlusFactorsh :=
+    (Functor.mapDerivedCategoryPlusFactorsh_comp F G).symm
+  have : NatTrans.CommShift e.hom ℤ := by
+    dsimp [e]
+    infer_instance
+  have he' : Functor.whiskerLeft DerivedCategory.Plus.Qh
+      (Functor.mapDerivedCategoryPlusCompIso F G).hom =
+      (F ⋙ G).mapDerivedCategoryPlusFactorsh.hom ≫ e.inv := by
+    rw [← he]
+    simp
+  have : NatTrans.CommShift (Functor.whiskerLeft DerivedCategory.Plus.Qh
+      (Functor.mapDerivedCategoryPlusCompIso F G).hom) ℤ := by
+    rw [he']
+    infer_instance
+  exact NatTrans.CommShift.of_whiskerLeft _ DerivedCategory.Plus.Qh fun X ↦
+    ⟨_, (DerivedCategory.Plus.Qh.objObjPreimageIso X).inv, inferInstance⟩
+
+end ExactFunctorComparisons
+
+attribute [local instance] commShift_derivedPlusNatIso commShift_derivedPlusCompIso
 
 namespace AlgebraicGeometry
+
+private theorem commShift_upperStarPlusEq {X Y : Scheme.{u}} (f g : X ⟶ Y)
+    (h : f = g) :
+    NatTrans.CommShift
+      (eqToIso (show (Etale.upperStar AddCommGrpCat.{u + 1} f).mapDerivedCategoryPlus =
+          (Etale.upperStar AddCommGrpCat.{u + 1} g).mapDerivedCategoryPlus by rw [h])).hom
+      ℤ := by
+  subst g
+  change NatTrans.CommShift (𝟙 _) ℤ
+  infer_instance
 
 /-- The derived square comparison for a cartesian square is compatible with all shifts.
 Source: literature/stacks-project/derived.tex, Definition 014V and Lemma 05SU
@@ -71,6 +147,22 @@ theorem derivedSquareIso_commShift
     (sq : IsPullback g' f' f g) :
     NatTrans.CommShift
       (Etale.pullbackSquareComparison (AddCommGrpCat.{u + 1}) sq.toCommSq).hom ℤ := by
-  sorry
+  have : NatTrans.CommShift
+      (eqToIso (show
+        (Etale.upperStar AddCommGrpCat.{u + 1} (f' ≫ g)).mapDerivedCategoryPlus =
+          (Etale.upperStar AddCommGrpCat.{u + 1} (g' ≫ f)).mapDerivedCategoryPlus by
+            rw [← sq.w])).hom ℤ :=
+    commShift_upperStarPlusEq _ _ sq.w.symm
+  have h₁ : NatTrans.CommShift
+      (Etale.upperStarPlusComp AddCommGrpCat.{u + 1} f' g).hom ℤ := by
+    dsimp only [Etale.upperStarPlusComp, Iso.trans_hom]
+    infer_instance
+  have h₂ : NatTrans.CommShift
+      (Etale.upperStarPlusComp AddCommGrpCat.{u + 1} g' f).hom ℤ := by
+    dsimp only [Etale.upperStarPlusComp, Iso.trans_hom]
+    infer_instance
+  rw [Etale.pullbackSquareComparison_def]
+  dsimp only [Iso.trans_hom, Iso.symm_hom]
+  infer_instance
 
 end AlgebraicGeometry
