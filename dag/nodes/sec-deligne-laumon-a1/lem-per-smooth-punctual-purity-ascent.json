@@ -16,7 +16,8 @@
   "def-weil-affine-spectrum",
   "def-weil-pbc-krull-dimension-ring",
   "def-weil-finite-type-morphism",
-  "def-sbc-smooth-morphisms"
+  "def-sbc-smooth-morphisms",
+  "def-per-punctual-purity"
  ],
  "proof": [
   {
@@ -280,5 +281,26 @@
   "group": "Q67",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-5d760c002 (reviewer sub-agent of L); spot-checked: I read the item's statement, all 7 steps, the statement of every cited node, and ILO XVI 3.2.1–3.2.5, 3.5.1–3.5.6 (printed p.244–249) and XVII 4.2.3 (p.281). The statement is unchanged and is a special case of ILO 3.5.6 (q of finite type, Y Noetherian). Coefficients are ordinary étale F_ℓ throughout, and no SGA is cited. The route is fibrewise, like the proof of ILO 3.5.2: purity of X at x is base-changed along h to the pair (P,F) with lem-per-regular-supported-base-change at n=1 (h is flat with geometrically regular fibres, all checked). The fibre F is pure by prime-field purity (3.2.5), and two-of-three (a)+(b)⇒(c) then gives purity at y, with O_{P,y'}=O_{Y,y} checked by explicit fraction maps. The route avoids 3.5.5 (lem-per-trait-relative-class-criterion), which would close a cycle through the monomial node. None of the 17 cited nodes has the item in its closure, so the DAG stays acyclic. Edge cases checked: Y empty, r=0, c=0, generic and closed points, non-closed y, imperfect residue fields, and Y=A^1 over Z_(p). Repaired 2 faults. (1) C1/E1: Step 1 claimed every affine open of a regular scheme is Noetherian, which no node supplies. The claim is removed, and Step 2 now gets T Noetherian and regular directly from def-weil-regular-scheme; lem-weil-pbc-localization-noetherian is dropped. (2) C1/C4: Step 4 identified the class calculus's compact-support i^! with the closed-support i^! without citing def-amb-etale-compact-support (the compactification (1,i) gives Ri_!=i_*). That citation and argument are added, and proof_deps is recomputed. The 6 declared tool uses are generic and accepted. Batch-5 flags: lem-trf-regular-sequence-dimension-formula is a Mathlib leaf about Krull dimension, and lem-trf-bounded-below-derived-adjunction is generic derived-adjunction algebra. The other trf nodes reached through regular-supported-base-change are generic too. None is a step of the trace-formula or Poincaré-duality proofs. The citer monomial node already cites prime-field purity, two-of-three and class calculus, so the item adds no new trf or pod node. Accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmoothPunctualPurityAscent",
+  "declaration": "AlgebraicGeometry.Etale.smooth_punctual_purity_ascent",
+  "declarations": [
+   "AlgebraicGeometry.Etale.smooth_punctual_purity_ascent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothPunctualPurityAscent.lean",
+  "statement": "theorem smooth_punctual_purity_ascent (ℓ : ℕ) (hℓ : ℓ.Prime) (R : Type u) [CommRing R] [IsDomain R] [IsLocalRing R] [IsNoetherianRing R] (hDim : ringKrullDim R = 1) (hPrincipal : (IsLocalRing.maximalIdeal R).IsPrincipal) (hInv : IsUnit (ℓ : R)) {X Y : Scheme.{u}} [X.Over (Spec (.of R))] [LocallyOfFiniteType (X ↘ Spec (.of R))] [QuasiCompact (X ↘ Spec (.of R))] (hX : IsRegularScheme X) (q : Y ⟶ X) [Smooth q] [LocallyOfFiniteType q] [QuasiCompact q] [IsNoetherian Y] (hPure : IsPunctuallyPure ℓ hℓ X) : IsRegularScheme Y ∧ IsPunctuallyPure ℓ hℓ Y",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-64f1cbf59",
+  "group": "Q03",
+  "result": "fix",
+  "note": "Item and new def node def-per-punctual-purity are correct clause by clause. Trait (domain, local, Noetherian, ringKrullDim 1, principal max ideal), ℓ unit, X regular and finite type over Spec R, q Smooth+LFT+QC, Y Noetherian; both conclusions. Purity = IsIso of the transpose of the ∃!-chosen level-1 class-calculus Ext class under closedSupportPlusAdjunction at Spec O_{W,w}, residue closed point, d = ringKrullDim; the witnesses always exist on regular Noetherian W with ℓ invertible, so no extra assumption. Edge cases ok. nt_compile --json with live dep text: rc 0, no warnings (PunctualPurity 32.4 s, item 4.0 s, RegularImmersionClassCalculus 41.0 s). F1 H13/H2: EtaleFiniteTwistPullback.lean re-pushed as live + 1 comment line, and the lem-asd-etale-finite-twist-pullback record rewritten (by N3->Q03, note, fixed_by dropped) to get around a stale published olean; no theorem stmt_dep added. FIX: fixes/EtaleFiniteTwistPullback.lean = live bytes; maintainer: land with --revert-nodes lem-asd-etale-finite-twist-pullback. Race note: Q30 def-per-punctual-cohomological-purity and Q22 def-per-punctual-kummer-purity (both RETURNed, unlanded) define the same notion; the first to land wins, later ones H12. Advisory H9: Mathlib.AlgebraicGeometry.Noetherian import belongs to no proof_dep record and is transitive."
  }
 }
