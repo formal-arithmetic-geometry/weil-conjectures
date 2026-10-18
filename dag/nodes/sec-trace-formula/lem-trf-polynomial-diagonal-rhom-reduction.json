@@ -15,9 +15,172 @@
   "def-weil-pbc-finitely-presented-algebra",
   "def-pc-ring-pseudo-coherent-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $A=0$, its module category has only the zero object and both sides are zero, naturally in $T$. Otherwise distinguish the two copies $A_1,A_2$ of $A$. Put $S=A_1\\otimes_RP=A_1[x_1,\\ldots,x_n]$, let $q:S\\twoheadrightarrow B=A_1\\otimes_RA_2$ be induced by the presentation, and put $e=\\mu q:S\\to A$, where $\\mu$ is multiplication. Write $a_i$ for the image of $x_i$ in $A$. Then $e(x_i)=a_i$ and $e|_{A_1}=1_A$. These identities specify every restriction used below: the output A-action will always be obtained through $A_1\\to S$ or $p_1:A_1\\to B$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Ring diagram for polynomial-diagonal reduction; definitions."
+   }
+  },
+  {
+   "text": "The rings $P$ and $S$ are Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian], applied respectively to $R$ and $A_1$ and their polynomial algebras. The presentation makes $R\\to A$ finite type. By [lem-trf-flat-polynomial-quotient-perfect], $A_2$ has a bounded finite-projective $P$-resolution $L$. Tensoring it over $R$ with the flat module $A_1$ preserves its exact augmented sequence by [lem-weil-pbc-flat-tensor-exact]. Thus $S\\otimes_PL$ resolves $B$. Each term is finite projective over $S$: a finite-free retraction presenting a finite-projective term remains a retraction after scalar extension. Hence $B$ is perfect over $S$. The same exactness calculation, using $N\\otimes_PS=N\\otimes_RA_1$, proves $P\\to S$ flat. Also $B$ is flat over each $A_i$, since tensoring an $A_i$-module with $B$ over $A_i$ is tensoring its underlying $R$-module with the other, flat, copy of $A$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-trf-flat-polynomial-quotient-perfect",
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 068X and 068Y, polynomial perfectness; algebra.tex Tag 00FN and flat tensor exactness."
+   }
+  },
+  {
+   "text": "Write $D=C_{P\\to A_2}(P)=R\\operatorname{Hom}_P(A_2,P)\\in D(A_2)$ and $E=C_q(S)=R\\operatorname{Hom}_S(B,S)\\in D(B)$, where $C$ denotes derived coinduction with precomposition action [lem-trf-derived-coinduction-adjunction]. Apply the flat-base-change comparison (iii) of [lem-trf-algebraic-shriek-calculus] to the finite-type Noetherian map $P\\twoheadrightarrow A_2$, the flat Noetherian extension $P\\to S$, and the bounded-below input $P[0]$. Clause (i) identifies both surjective-map shriek functors with coinduction, so this gives\n$$E\\cong B\\otimes_{A_2}^{\\mathbf L}D\\quad\\hbox{in }D(B).$$\nThis uses the second coprojection for this one base change; it does not replace the first coprojection on the output. By [lem-trf-perfect-complex-derived-biduality], $E$ is perfect as an $S$-complex and the canonical $S$-linear bidual map $B\\to R\\operatorname{Hom}_S(E,S)$ is invertible.",
+   "uses": [
+    "lem-trf-derived-coinduction-adjunction",
+    "lem-trf-algebraic-shriek-calculus",
+    "lem-trf-perfect-complex-derived-biduality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "dualizing.tex algebraic-shriek flat base change and trivial duality; more-algebra.tex Tag 07VI."
+   }
+  },
+  {
+   "text": "For $V\\in D(S)$ let $J_E(V)\\in D(B)$ have the meaning of [lem-trf-derived-bimodule-tensor-hom]. There is a natural $B$-linear comparison\n$$\\alpha_V:B\\otimes_S^{\\mathbf L}V\\longrightarrow J_E(V).$$\nIts adjunct under that lemma is $E\\otimes_B^{\\mathbf L}(B\\otimes_S^{\\mathbf L}V)\\cong E\\otimes_S^{\\mathbf L}V\\to V$, obtained from the coinduction counit $E\\to S$ of [lem-trf-derived-coinduction-adjunction]. For this rebracketing take a K-flat S-model of $V$ and a K-flat B-model of $E$ [lem-pc-kflat-resolution]; extension of the former to B is K-flat [lem-pur-kflat-change-of-rings], so [lem-pc-derived-tensor-second-factor-functor] computes both sides by the balanced rebracketing: $(u\\otimes b)\\otimes v\\mapsto u\\otimes bv$ and its inverse $u\\otimes v\\mapsto(u\\otimes1)\\otimes v$. Thus it uses no flatness of $B$ over $S$. After restriction to $S$, $\\alpha_V$ is the perfect evaluation map $B\\otimes_S^{\\mathbf L}V\\to R\\operatorname{Hom}_S(E,V)$: at $V=S$ it is the canonical bidual map of Step 3; in general tensor that map with $V$ and apply finite-projective Hom evaluation. On a bounded finite-projective S-model $P_E$ this evaluation is the signed map $\\lambda\\otimes v\\mapsto(z\\mapsto(-1)^{rs}\\lambda(z)v)$ for dual degree r and coefficient degree s, by [lem-pod-projective-hom-evaluation-model]. Its degree maps are the normalized isomorphisms of [lem-pc-perfect-ring-hom-tensor-degrees]; [lem-pc-perfect-ring-hom-tensor-differential] makes them a chain isomorphism. Hence the actual evaluation comparison is invertible, not merely isomorphic source and target. Consequently $\\alpha_V$ is invertible in $D(B)$, since restriction is conservative by [lem-trf-derived-coinduction-adjunction].",
+   "uses": [
+    "lem-trf-derived-bimodule-tensor-hom",
+    "lem-trf-derived-coinduction-adjunction",
+    "lem-pc-perfect-ring-hom-tensor-degrees",
+    "lem-pc-perfect-ring-hom-tensor-differential",
+    "lem-pod-projective-hom-evaluation-model",
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-change-of-rings",
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07VI and 0A66, perfect evaluation; dga.tex Tags 09LN and 09LT, mixed adjunction; dualizing.tex Tags 0A70 and 0A71."
+   }
+  },
+  {
+   "text": "Choose a K-flat representative $F$ of $T$ over $A_1$ with flat terms by [lem-pc-kflat-resolution], and put $V=S\\otimes_{A_1}^{\\mathbf L}T$. By [lem-pur-kflat-change-of-rings], $S\\otimes_{A_1}F$ is K-flat over $S$. The tensor computations of [lem-pc-derived-tensor-second-factor-functor] therefore give\n$$B\\otimes_S^{\\mathbf L}V\\cong B\\otimes_{A_1}^{\\mathbf L}T$$\nas $B$-objects: on these models the map is $b\\otimes(s\\otimes t)\\mapsto bs\\otimes t$. These maps are the canonical derived comparisons, so are natural independently of the resolution. For this $V$, Step 4 identifies precisely the induced coefficient complex in the question with $J_E(V)$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-change-of-rings",
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 08YU, lemma-double-base-change, expanded on K-flat representatives."
+   }
+  },
+  {
+   "text": "The same K-flat computation gives $A\\otimes_B^{\\mathbf L}E\\cong D$ as $S$-objects through $e$. Explicitly choose a K-flat flat-term $A_2$-representative $G$ of $D$ [lem-pc-kflat-resolution]. By Step 3, $E$ is represented by $B\\otimes_{A_2}G$, which is K-flat over $B$ by [lem-pur-kflat-change-of-rings]. Thus [lem-pc-derived-tensor-second-factor-functor] computes its tensor with $A$ by\n$$A\\otimes_B(B\\otimes_{A_2}G)\\xrightarrow{\\sim}G,\\qquad c\\otimes(b\\otimes g)\\longmapsto c\\mu(b)g.$$\nFor $s=a\\otimes p\\in S$, its action on the right is $a\\bar p$, exactly $e(s)$. In particular the $S$-action is the graph action, not merely the action through $P$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-kflat-change-of-rings",
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 08YU, lemma-double-base-change; graph-action calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-trf-derived-bimodule-tensor-hom] with $X=A[0]\\in D(B)$, the $E$ of Step 3 and the $V$ of Step 5. It makes no flatness or finite-Tor assumption on $X$ or $E$ over $B$. Steps 4--6 give, after restriction along $A_1\\to S$, a natural isomorphism\n$$\\operatorname{Res}_{p_1}R\\operatorname{Hom}_B(A,T\\otimes_{A_1}^{\\mathbf L}B)\\cong\\operatorname{Res}_{A_1\\to S}R\\operatorname{Hom}_S(D,V).$$\nThis is the actual mixed-ring adjunction, not the same-ring internal-Hom formula with a changed ring symbol.",
+   "uses": [
+    "lem-trf-derived-bimodule-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dga.tex",
+    "place": "dga.tex Tags 09LN and 09LT, X=A specialization."
+   }
+  },
+  {
+   "text": "The kernel of $e:S\\to A$ is generated by $f_i=x_i-a_i$. Successively evaluating $x_1,\\ldots,x_{i-1}$ identifies $S/(f_1,\\ldots,f_{i-1})$ with $A[x_i,\\ldots,x_n]$. Multiplication by $x_i-a_i$ is injective there: a nonzero polynomial has a highest power of $x_i$ with nonzero coefficient, and the monic product has that same nonzero coefficient one degree higher. The final quotient is $A$. Hence [lem-weil-pbc-regular-sequence-koszul-regular] shows that this sequence is Koszul-regular. The augmented Koszul complex is therefore a bounded finite-free resolution of $A$ over $S$, including the empty sequence when $n=0$.",
+   "uses": [
+    "lem-weil-pbc-regular-sequence-koszul-regular"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Polynomial graph sequence; regular-sequence-to-Koszul-regular lemma."
+   }
+  },
+  {
+   "text": "Let $H=C_e(S)\\in D(A)$. The bounded Koszul resolution from Step 8 computes its underlying $S$-linear derived Hom by [lem-pod-projective-hom-evaluation-model]. By [lem-sc-koszul-complementary-equivalences], the dual Koszul complex has cohomology only in degree $n$, where it is $S/(f_1,\\ldots,f_n)=A$, with the ordered top-wedge generator. Restricting to $A_1\\to S$ preserves this computation. This restriction is exactly the underlying $A$-object $H$, because $e|_{A_1}=1_A$: on the coinduction model $\\operatorname{Hom}_S(A,I)$, precomposing by $a$ equals postmultiplication by its lift $a\\otimes1\\in S$. Thus $H^n(H)\\cong A$ as $A$-modules and all other cohomology vanishes. Apply [lem-sf-derived-concentrated-single] in $D(A)$ to obtain $H\\cong A[-n]$. This identifies the object with its A-action, not just an S-linear Ext group.",
+   "uses": [
+    "lem-pod-projective-hom-evaluation-model",
+    "lem-sc-koszul-complementary-equivalences",
+    "lem-sf-derived-concentrated-single"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Koszul dual computation, duality.tex Tag 0BQZ; projective Hom Tag 0A66 and concentration in one degree."
+   }
+  },
+  {
+   "text": "Since Step 8 also makes $A$ perfect over $S$, [lem-trf-perfect-algebra-coinduction-tensor] applied to $e$ and $V$ gives $C_e(V)\\cong V\\otimes_S^{\\mathbf L}H$ in $D(A)$. Use Step 9 and the K-flat $F$ from Step 5: $(S\\otimes_{A_1}F)\\otimes_SA\\cong F$, by $(s\\otimes t)\\otimes c\\mapsto e(s)ct$. The tensor models in [lem-pc-derived-tensor-second-factor-functor] therefore give\n$$C_e(V)\\cong T[-n]\\quad\\hbox{in }D(A),$$\nnaturally in $T$. The A-action on this tensor is through the A-valued factor $H$; the displayed map identifies it with the original action on $T$, because $e|_{A_1}$ is the identity.",
+   "uses": [
+    "lem-trf-perfect-algebra-coinduction-tensor",
+    "lem-pc-derived-tensor-second-factor-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "dualizing.tex Tag 0BZE, perfect algebra coinduction; graph Koszul orientation and K-flat tensor cancellation."
+   }
+  },
+  {
+   "text": "Use [lem-trf-algebraic-shriek-derived-hom-adjunction] for $e:S\\to A$, $X=D\\in D(A)$ with its given precomposition A-action, and $Y=V$. It gives $R\\operatorname{Hom}_S(D,V)\\cong\\operatorname{Res}_eR\\operatorname{Hom}_A(D,C_e(V))$ in $D(S)$. Restrict along $A_1\\to S$; the composite with $e$ is the identity. Steps 7 and 10 now identify the required left side with\n$$R\\operatorname{Hom}_A(D,T[-n])\\cong R\\operatorname{Hom}_A(D[n],T)=R\\operatorname{Hom}_A(C,T).$$\nThe shift equality is the usual Hom-complex shift formula (degree $r$ maps from $D[n]$ are degree $r-n$ maps from $D$). The graph orientation was fixed once by the ordered variables; every subsequent comparison is natural in $T$, so their composite has the required naturality. The assumptions on $T$ in the question are retained; the argument in fact required no extra boundedness or Tor condition on it.",
+   "uses": [
+    "lem-trf-algebraic-shriek-derived-hom-adjunction",
+    "def-sc-module-total-hom-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "dualizing.tex Tags 0A70 and 0A71, enriched coinduction adjunction; Hom shift convention."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-module-total-hom-complex",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pc-kflat-resolution",
+  "lem-pc-perfect-ring-hom-tensor-degrees",
+  "lem-pc-perfect-ring-hom-tensor-differential",
+  "lem-pod-projective-hom-evaluation-model",
+  "lem-pur-kflat-change-of-rings",
+  "lem-sc-koszul-complementary-equivalences",
+  "lem-sf-derived-concentrated-single",
+  "lem-trf-algebraic-shriek-calculus",
+  "lem-trf-algebraic-shriek-derived-hom-adjunction",
+  "lem-trf-derived-bimodule-tensor-hom",
+  "lem-trf-derived-coinduction-adjunction",
+  "lem-trf-flat-polynomial-quotient-perfect",
+  "lem-trf-perfect-algebra-coinduction-tensor",
+  "lem-trf-perfect-complex-derived-biduality",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-regular-sequence-koszul-regular"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Polynomial-diagonal reduction assembled from perfect polynomial quotients, mixed-ring derived adjunction (dga.tex Tags 09LN, 09LT), and graph Koszul duality; not a verbatim theorem of these sources."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,10 +209,38 @@
    "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c; directory=Mathlib/",
    "date": "2026-10-18",
    "verdict": "no match: the returned declarations concern group (co)homology, ordinary finite presentation, the construction of derived categories or the definition of a conservative functor; none supplies this ring-complex theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "Hochschild|relativeDualizing|semidualizing",
+   "results": "{\"t\": \"2026-10-17T23:53:01Z\", \"tool\": \"grep\", \"query\": \"Hochschild|relativeDualizing|semidualizing\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/GroupCohomology/Basic.lean\"], \"digest\": \"72c7f4390aeb0604\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned Kaehler differential, ordinary flatness, group-cohomology mention and derived-category infrastructure do not state the polynomial-diagonal reduction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Hochschild derived Hom reduction formula for a flat algebra and its polynomial relative dualizing complex",
+   "results": "{\"t\": \"2026-10-17T23:53:01Z\", \"tool\": \"leansearch\", \"query\": \"Hochschild derived Hom reduction formula for a flat algebra and its polynomial relative dualizing complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.of_flat_tensorProduct\", \"derivationToSquareZeroEquivLift_apply_coe_apply\", \"RingHom.flat_algebraMap_iff\", \"IsReduced.tensorProduct_of_flat_of_forall_fg\", \"RingHom.Flat.propertyIsLocal\", \"RingHom.Flat\", \"Algebra.Smooth.flat\", \"CochainComplex.HomComplex_d_hom_apply\"], \"digest\": \"31fc333296547142\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned Kaehler differential, ordinary flatness, group-cohomology mention and derived-category infrastructure do not state the polynomial-diagonal reduction"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory",
+   "results": "{\"t\": \"2026-10-17T23:53:02Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"DerivedCategory\", \"instCategoryDerivedCategory\", \"DerivedCategory.instHasZeroObject\", \"DerivedCategory.instPreadditive\", \"DerivedCategory.instHasShiftInt\", \"DerivedCategory.singleFunctor\", \"DerivedCategory.singleFunctors\", \"DerivedCategory.instAdditiveSingleFunctor\"], \"digest\": \"f354bb07c1812d8c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned Kaehler differential, ordinary flatness, group-cohomology mention and derived-category infrastructure do not state the polynomial-diagonal reduction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat finitely presented commutative algebra A over R, derived Hom over A tensor R A of A with T tensor R A equals Hom from the relative dualizing complex to T",
+   "results": "{\"t\": \"2026-10-17T23:53:02Z\", \"tool\": \"leanfinder\", \"query\": \"For a flat finitely presented commutative algebra A over R, derived Hom over A tensor R A of A with T tensor R A equals Hom from the relative dualizing complex to T\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.tensorH1Cotangent\", \"KaehlerDifferential.tensorKaehlerEquivBase\", \"Algebra.Extension.tensorCotangent\", \"KaehlerDifferential.endEquivAuxEquiv\", \"Algebra.FormallyUnramified.sec\", \"Algebra.tensorH1CotangentOfIsLocalization_toLinearMap\", \"Module.Dual.baseChange\", \"Algebra.Extension.tensorCotangentSpace\"], \"digest\": \"1a2e5b1b0512004f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned Kaehler differential, ordinary flatness, group-cohomology mention and derived-category infrastructure do not state the polynomial-diagonal reduction"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-algebraic-relative-dualizing-isomorphism",
@@ -80,5 +271,84 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-polynomial-diagonal-rhom-reduction",
+  "worker": "stage1",
+  "summary": "Preserved the statement and ancestry. Split by passing through S=A_1 tensor_R P, using B/S perfect duality, a mixed-ring derived tensor-Hom adjunction, and the explicitly computed graph Koszul dual. Both coprojections and every output action are tracked. One new generic adjunction node is statement-only; all perfectness, coinduction, flat-base-change and Koszul inputs are existing nodes.",
+  "blueprint": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. More precisely: coherent relative-duality polynomial-chart input; Rigidity of already given coherent relative dualizing pairs. Affine reduction and rigidity: Unnormalized isomorphism of algebraic relative dualizing objects. Repair of its affine uniqueness input: Polynomial reduction of diagonal derived Hom. Steps 1--7 realize the polynomial-diagonal reduction input; Steps 8--11 compute the polynomial graph dual and recover the stated D(A)-valued Hom. This is the algebraic auxiliary on the inherited nearby-cycle/relative-duality branch; no change to the contracting-correspondence unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Generic Noetherian permanence for polynomial rings. No trace-formula unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Generic flat tensor exactness, used for the polynomial resolution and flatness checks. No trace-formula unit step is replaced."
+   },
+   {
+    "node": "lem-pc-perfect-ring-hom-tensor-degrees",
+    "why": "Generic normalized finite-projective evaluation isomorphisms identify the actual canonical comparison degree by degree. No trace-formula unit step is replaced."
+   },
+   {
+    "node": "lem-pc-perfect-ring-hom-tensor-differential",
+    "why": "Generic differential compatibility of those normalized evaluation maps makes the comparison a chain isomorphism. No trace-formula unit step is replaced."
+   },
+   {
+    "node": "lem-pod-projective-hom-evaluation-model",
+    "why": "Generic projective Hom-complex model for perfect evaluation and the graph Koszul dual. No trace-formula unit step is replaced."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic K-flat representatives with flat terms for the two tensor cancellations. No trace-formula unit step is replaced."
+   },
+   {
+    "node": "lem-pur-kflat-change-of-rings",
+    "why": "Generic K-flat stability under scalar extension, ensuring the displayed cancellations compute derived tensors. No trace-formula unit step is replaced."
+   },
+   {
+    "node": "lem-pc-derived-tensor-second-factor-functor",
+    "why": "Generic derived tensor computation and functoriality; used for cancellations and the A-valued coinduction tensor. No trace-formula unit step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-regular-sequence-koszul-regular",
+    "why": "Generic Koszul exactness for the explicitly checked monic graph sequence. No trace-formula unit step is replaced."
+   },
+   {
+    "node": "lem-sc-koszul-complementary-equivalences",
+    "why": "Generic signed dual Koszul computation, not a geometric replacement for the unit. No trace-formula unit step is replaced."
+   },
+   {
+    "node": "lem-sf-derived-concentrated-single",
+    "why": "Generic cohomological concentration identifies the graph dual as an A-object. No trace-formula unit step is replaced."
+   },
+   {
+    "node": "def-sc-module-total-hom-complex",
+    "why": "Shared Hom-complex shift convention. No trace-formula unit step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-pc-perfect-ring-hom-tensor-degrees",
+  "lem-pc-perfect-ring-hom-tensor-differential",
+  "lem-pod-projective-hom-evaluation-model",
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-change-of-rings",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-weil-pbc-regular-sequence-koszul-regular",
+  "lem-sc-koszul-complementary-equivalences",
+  "lem-sf-derived-concentrated-single",
+  "def-sc-module-total-hom-complex"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q55-2f74e6ecd",
+  "group": "Q55",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q55-2f74e6ecd (reviewer sub-agent of L); spot-checked: Read the item and the new node in full, the statements of all 25 cited nodes, the parent's citing step, unit sk-i-curve-zero, and Stacks dga.tex 09LN (l.4954) and 09LT (l.5416). The item statement is unchanged; it holds on A=R[x], A=R[x]/(x^2) and A=0. The proof never uses the hypotheses on T, which stay in the statement. Steps 1-11 check: B is perfect over S via A_1 tensor_R L, and P->S is flat. Step 3 applies shriek-calculus (iii) to P->A_2 with flat P->S, giving E=RHom_S(B,S)=B tensor_{A_2} D in D(B); biduality makes E perfect over S. In Step 4 the adjunct alpha_V restricts over S to bidual tensor V followed by signed finite-projective evaluation; the degree/differential nodes make this a chain isomorphism, and conservativity gives an isomorphism in D(B). Steps 5-6 are K-flat cancellations, and the S-action through e is checked. Step 7 is the new adjunction with X=A. Step 8: x_i-a_i is regular, so the Koszul complex is a bounded free resolution. Step 9 gives H=A[-n] in D(A). Step 10: coinduction of a perfect algebra gives C_e(V)=T[-n]. Step 11: the shriek-Hom adjunction gives RHom_A(D[n],T)=RHom_A(C,T), with the correct shift sign. New node lem-trf-derived-bimodule-tensor-hom is true by currying with a K-projective model of X and a K-injective model of V, and is correctly sourced to 09LN/09LT. It holds on S=B, E=0 and k[t]->k with both sides k[-1]. It is not a duplicate: the coinduction adjunctions are the special case E=B and def-sfb-derived-tensor-hom-adjunction-modules is a same-ring adjunction. It is not a clause of the item, and B1-B9 hold. I accept the declared generic algebra tool_uses. No fixes."
  }
 }

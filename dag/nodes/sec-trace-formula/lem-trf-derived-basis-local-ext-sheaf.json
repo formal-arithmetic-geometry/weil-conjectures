@@ -13,9 +13,94 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-sites-and-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=R\\mathcal Hom_{\\mathcal O_X}(K,L)$ [def-pur-derived-internal-hom]. The category of opens of each space is small in a universe containing its underlying set, and its structure sheaf is commutative, as required by the ringed-site tools below. For any open $U\\subseteq X$, [lem-weil-pbc-ringed-internal-hom-exact-restriction] identifies $A|_U$ with $R\\mathcal Hom_{\\mathcal O_U}(K|_U,L|_U)$, compatibly with successive restrictions. By the closed adjunction of [lem-sf-ringed-derived-closed-symmetric-monoidal], this internal Hom is a right adjoint to $K|_U\\otimes^{\\mathbf L}-$ (using the tensor symmetry to put the fixed argument first). Thus clause (2) of [lem-sfb-derived-internal-hom-sections-model], applied on $U$, gives for every integer $i$:\n$$H^i(U,A|_U)\\cong\\operatorname{Hom}_{D(\\mathcal O_U)}(K|_U,L|_U[i]).$$\nHere $H^i(U,-)$ is derived evaluation at the whole space $U$. By [lem-sfb-unbounded-sections-localization], it is also derived evaluation of $A$ at the open $U$ of $X$. These are comparisons of abelian groups. They commute with restrictions: on a complex representative of $K$ and a K-injective representative of $L$, the comparison sends the class of a degree-$i$ cocycle of the global Hom complex to its derived morphism; the restricted target remains K-injective by [lem-pur-kinjective-restrict-localized], and restricting that cocycle restricts precisely the same local module maps, and the internal-Hom restriction comparison is compatible with successive restrictions. No boundedness is needed.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sfb-derived-internal-hom-sections-model",
+    "lem-sfb-unbounded-sections-localization",
+    "lem-pur-kinjective-restrict-localized"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D66 (2): translate with Tags 08DK and 08DL; ringed-site versions 08JA and 08JB"
+   }
+  },
+  {
+   "text": "Put $B=Rf_*A$. By [lem-trf-unbounded-direct-image-section-presheaf], for every integer $i$ the presheaf $P_i(V)=H^i(f^{-1}V,A)$ is canonically isomorphic to $V\\mapsto H^i(V,B)$, and $P_i^\\#$ is the underlying abelian sheaf of $\\mathcal H^i(B)$. For $i<0$, Step 1 and the hypothesis say $P_i(V)=0$ for all $V\\in\\mathcal B$. Every map from $P_i$ to an abelian sheaf $F$ is zero: for any open $W$ and $s\\in P_i(W)$, its image restricts to zero on the covering of $W$ by basis members contained in $W$, so the sheaf equalizer axiom [def-weil-pbc-sites-and-cohomology] makes its image zero on $W$. By the universal property [def-weil-pbc-sheafification], maps from $P_i^\\#$ to $F$ are therefore unique. Set $F=P_i^\\#$; its identity equals its zero endomorphism, so $P_i^\\#=0$. Consequently $\\mathcal H^i(B)=0$ for all $i<0$.",
+   "uses": [
+    "lem-trf-unbounded-direct-image-section-presheaf",
+    "def-weil-pbc-sites-and-cohomology",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D66 (1), first two sentences of proof: Tag 0D5X and vanishing of the sheafified presheaf"
+   }
+  },
+  {
+   "text": "Step 2 places $B$ in $D^+(\\mathcal O_Y)$, since this full subcategory consists of objects with cohomology vanishing below some degree [def-weil-pbc-bounded-derived-subcategories]. The category of $\\mathcal O_Y$-modules is abelian with enough injectives by [lem-sc-ringed-space-module-sheaves-enough-injectives]. Apply [lem-weil-pbc-dplus-injective-representative] with lower bound $0$ to obtain $B\\cong QJ$, where every $J^n$ is injective, $J^n=0$ for $n<0$, and $J$ is K-injective. For each open $V$, the K-injective computation of the unbounded right derived functor [def-sfb-right-derived-functor] applied to evaluation at $V$ identifies $H^i(V,B)$ with $H^i(\\Gamma(V,J))$.",
+   "uses": [
+    "def-weil-pbc-bounded-derived-subcategories",
+    "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D66 (1), third sentence of proof; Tags 013K and 070J for the nonnegative injective model"
+   }
+  },
+  {
+   "text": "The section complex $\\Gamma(V,J)$ is zero below degree $0$, hence has zero cohomology for $i<0$. In degree $0$, since $J^{-1}=0$, its cohomology is $\\ker(\\Gamma(V,J^0)\\to\\Gamma(V,J^1))$. Kernels in the category of module sheaves are computed sectionwise [def-weil-sheaf-of-modules-category], so this is $\\Gamma(V,\\ker(J^0\\to J^1))=\\Gamma(V,\\mathcal H^0(B))$. For $V'\\subseteq V$, both maps restrict the same section of $J^0$ whose differential is zero. These identifications therefore give an isomorphism of abelian presheaves $V\\mapsto H^0(V,B)$ with the underlying abelian sheaf of $\\mathcal H^0(B)$, rather than merely unrelated isomorphisms of groups at each open.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D66 (1), third and fourth sentences of proof: degree-zero section calculation"
+   }
+  },
+  {
+   "text": "For every open $V\\subseteq Y$, combine the comparisons of Steps 1 and 2 with Step 4:\n$$\\operatorname{Hom}(K|_{f^{-1}V},L|_{f^{-1}V}[i])\\cong H^i(f^{-1}V,A)\\cong H^i(V,B).$$\nThe right side is zero for $i<0$. In degree $0$ these comparisons commute with restriction, and identify the Hom presheaf in the statement with $V\\mapsto\\Gamma(V,\\mathcal H^0(B))$. It is therefore a sheaf of abelian groups. This also handles $V=\\varnothing$: module sheaves have the zero group of sections there by the empty-cover equalizer axiom [def-weil-pbc-sites-and-cohomology], so the sheaf condition includes the empty cover. No closure of $\\mathcal B$ under intersections is needed: all uses of the basis were its coverings of each open by basis members contained in it.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0D66 (2), conclusion after applying (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-sfb-right-derived-functor",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-derived-internal-hom-sections-model",
+  "lem-sfb-unbounded-sections-localization",
+  "lem-trf-unbounded-direct-image-section-presheaf",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0D66 (cohomology-lemma-vanishing-and-glueing), part (2), using the proof of part (1)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +136,52 @@
    "results": "0 hits; top=[]; note=",
    "date": "2026-10-18",
    "verdict": "no match: no derived Hom sheaf criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For unbounded derived module sheaves negative Ext vanishing on a topological basis implies vanishing on all opens and Hom is a sheaf",
+   "results": "{\"t\": \"2026-10-17T23:50:46Z\", \"tool\": \"leanfinder\", \"query\": \"For unbounded derived module sheaves negative Ext vanishing on a topological basis implies vanishing on all opens and Hom is a sheaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.hasExt_iff\", \"DerivedCategory.isLE_iff\", \"DerivedCategory.isGE_iff\", \"DerivedCategory.isZero_of_isLE\", \"CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE\", \"DerivedCategory.isZero_of_isGE\", \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\"], \"digest\": \"97cd3b5891bae028\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no ringed-space local-negative-Ext sheaf criterion; generic t-structure Hom vanishing and ordinary sheaf gluing do not supply it"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived morphisms between sheaf complexes form a sheaf when negative local Ext groups vanish",
+   "results": "{\"t\": \"2026-10-17T23:50:46Z\", \"tool\": \"leansearch\", \"query\": \"Derived morphisms between sheaf complexes form a sheaf when negative local Ext groups vanish\", \"sub\": \"\", \"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"sheaf\"",
+   "results": "{\"t\": \"2026-10-17T23:50:47Z\", \"tool\": \"loogle\", \"query\": \"\\\"DerivedCategory\\\", \\\"sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no ringed-space local-negative-Ext sheaf criterion; generic t-structure Hom vanishing and ordinary sheaf gluing do not supply it"
+  },
+  {
+   "tool": "grep",
+   "query": "vanishing.and.glu|negative.*Ext|Ext.*negative|derived.*[Hh]om.*[Ss]heaf",
+   "results": "{\"t\": \"2026-10-17T23:50:47Z\", \"tool\": \"grep\", \"query\": \"vanishing.and.glu|negative.*Ext|Ext.*negative|derived.*[Hh]om.*[Ss]heaf\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Chebyshev.lean\", \"Mathlib/NumberTheory/Chebyshev.lean\", \"Mathlib/InformationTheory/KullbackLeibler/KLFun.lean\", \"Mathlib/NumberTheory/EllipticDivisibilitySequence.lean\", \"Mathlib/NumberTheory/EllipticDivisibilitySequence.lean\", \"Mathlib/NumberTheory/ArithmeticFunction/VonMangoldt.lean\", \"Mathlib/NumberTheory/Height/Projectivization.lean\", \"Mathlib/NumberTheory/Height/Basic.lean\"], \"digest\": \"0211c8cffefb1d9d\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no ringed-space local-negative-Ext sheaf criterion; generic t-structure Hom vanishing and ordinary sheaf gluing do not supply it"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local morphisms in derived categories of ringed spaces glue uniquely if all negative shifted Hom groups vanish locally",
+   "results": "{\"t\": \"2026-10-17T23:53:20Z\", \"tool\": \"leanfinder\", \"query\": \"Local morphisms in derived categories of ringed spaces glue uniquely if all negative shifted Hom groups vanish locally\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.LocalGeneratorsData.mk.inj\", \"PresheafOfModules.homEquivOfIsLocallyBijective\", \"TopCat.Sheaf.existsUnique_gluing'\", \"DerivedCategory.subsingleton_hom_of_isStrictlyLE_of_isStrictlyGE\", \"TopCat.Sheaf.existsUnique_gluing\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"SheafOfModules.QuasicoherentData.mk.inj\", \"PresheafOfModules.homEquivOfIsLocallyBijective_apply\"], \"digest\": \"771b27e0364dc399\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no ringed-space local-negative-Ext sheaf criterion; generic t-structure Hom vanishing and ordinary sheaf gluing do not supply it"
+  },
+  {
+   "tool": "grep",
+   "query": "negative.*[Ee]xt|[Ee]xt.*negative|[Dd]erived.*[Hh]om.*[Ss]heaf",
+   "results": "{\"t\": \"2026-10-17T23:53:23Z\", \"tool\": \"grep\", \"query\": \"negative.*[Ee]xt|[Ee]xt.*negative|[Dd]erived.*[Hh]om.*[Ss]heaf\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no ringed-space local-negative-Ext sheaf criterion; generic t-structure Hom vanishing and ordinary sheaf gluing do not supply it"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-derived-basis-local-hom-glue",
@@ -85,5 +212,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-derived-basis-local-ext-sheaf",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0D66(2) through its internal-Hom reduction to (1). Reused existing restriction, derived-section and bounded-below injective-model nodes. Added only the genuinely more general unbounded ringed-space direct-image/sheafification comparison 0D5X. Wrote out basis vanishing using the sheafification universal property and the degree-zero section calculation, including restriction compatibility and empty opens. The item statement is unchanged.",
+  "blueprint": "Realizes the supporting BBD descent component of lem-trf-local-term-locality via lem-trf-derived-basis-local-hom-glue: 0D66(2) on the quotient ringed-space map. No chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-kinjective-restrict-localized",
+    "why": "Ensures that the same K-injective representative restricts to a valid local model for the cocycle comparison. This is a generic homological/sheaf tool, not a replacement for a unit step; this unit has no version with these general ringed-space hypotheses."
+   },
+   {
+    "node": "def-pur-derived-internal-hom",
+    "why": "Defines the generic internal Hom object used in the Stacks reduction. This is a generic homological/sheaf tool, not a replacement for a unit step; this unit has no version with these general ringed-space hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Supplies unbounded internal Hom restriction compatible with successive localizations. This is a generic homological/sheaf tool, not a replacement for a unit step; this unit has no version with these general ringed-space hypotheses."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Supplies the tensor-Hom right adjunction required by the existing section-model lemma. This is a generic homological/sheaf tool, not a replacement for a unit step; this unit has no version with these general ringed-space hypotheses."
+   },
+   {
+    "node": "lem-sfb-derived-internal-hom-sections-model",
+    "why": "Identifies all-degree derived sections of internal Hom with shifted derived morphisms. This is a generic homological/sheaf tool, not a replacement for a unit step; this unit has no version with these general ringed-space hypotheses."
+   },
+   {
+    "node": "lem-sfb-unbounded-sections-localization",
+    "why": "Identifies derived evaluation at an open with derived global sections on that open. This is a generic homological/sheaf tool, not a replacement for a unit step; this unit has no version with these general ringed-space hypotheses."
+   },
+   {
+    "node": "def-weil-pbc-sites-and-cohomology",
+    "why": "Supplies the sheaf equalizer axiom, including the empty cover. This is a generic homological/sheaf tool, not a replacement for a unit step; this unit has no version with these general ringed-space hypotheses."
+   },
+   {
+    "node": "def-weil-pbc-sheafification",
+    "why": "Its universal property proves that a presheaf zero on a basis sheafifies to zero. This is a generic homological/sheaf tool, not a replacement for a unit step; this unit has no version with these general ringed-space hypotheses."
+   },
+   {
+    "node": "def-weil-pbc-bounded-derived-subcategories",
+    "why": "Recognizes vanishing in negative degrees as bounded-below membership. This is a generic homological/sheaf tool, not a replacement for a unit step; this unit has no version with these general ringed-space hypotheses."
+   },
+   {
+    "node": "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "why": "Supplies enough injectives on the arbitrary target ringed space. This is a generic homological/sheaf tool, not a replacement for a unit step; this unit has no version with these general ringed-space hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Provides the nonnegative injective representative and its K-injectivity. This is a generic homological/sheaf tool, not a replacement for a unit step; this unit has no version with these general ringed-space hypotheses."
+   },
+   {
+    "node": "def-sfb-right-derived-functor",
+    "why": "Supplies the termwise K-injective computation of derived evaluation. This is a generic homological/sheaf tool, not a replacement for a unit step; this unit has no version with these general ringed-space hypotheses."
+   },
+   {
+    "node": "def-weil-sheaf-of-modules-category",
+    "why": "Supplies sectionwise kernels and the underlying abelian sheaf. This is a generic homological/sheaf tool, not a replacement for a unit step; this unit has no version with these general ringed-space hypotheses."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-kinjective-restrict-localized",
+  "def-pur-derived-internal-hom",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-derived-internal-hom-sections-model",
+  "lem-sfb-unbounded-sections-localization",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-weil-pbc-dplus-injective-representative",
+  "def-sfb-right-derived-functor",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-9e8730d95",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-9e8730d95 (reviewer sub-agent of L); spot-checked: I read every step and every cited statement, and made no changes. Item: its statement is Stacks 0D66(2) exactly (cohomology.tex lemma-vanishing-and-glueing, read in full): arbitrary ringed spaces, arbitrary basis, unbounded K and L, nothing weakened. It is a real lemma used by the parent's Step 3, not a restated clause of the parent. Step 1 makes 08DK precise: the internal-Hom restriction node, the closed adjunction plus the symmetry, clause (2) of the derived-internal-Hom sections-model node, the slice-localization node and K-injective restriction. Together these give an isomorphism of presheaves with H^i(f^-1V, RHom(K,L)). Step 2 is the vanishing-on-a-basis argument: equalizer axiom plus the sheafification universal property, so P_i^#=0. It needs neither intersections of basis opens nor a basis on X. Step 3 uses D^+ membership, enough injectives on Y and the dplus representative with n=0 and K-injective J, so H^i(V,B)=H^i(J(V)). Step 4: J^-1=0 and kernels are sectionwise, so H^0(V,B)=Gamma(V,H^0 B), compatibly with restriction. Step 5 chains these; the empty open is covered. New node lem-trf-unbounded-direct-image-section-presheaf: exactly Stacks 0D5X together with the 0D5W Leray comparison (read at cohomology.tex 7917-7956), with the same hypotheses. Tested on a point and on f=id, including negative q. It is statement-only and self-contained, and has LeanFinder, LeanSearch, Loogle and grep searches. My own rg over the DAG (0D5X, 0D5W, 0D6I, 0BKJ, Leray, sheafification and direct image) and over the main and master blueprints found only scheme, pro-etale, qcoh or single-sheaf versions, so the node is not a duplicate. The off-unit generic tools declared in split_report.tool_uses are accepted. No SGA source. Not a target node, so base-change and coefficient checks do not apply."
  }
 }
