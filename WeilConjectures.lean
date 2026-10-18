@@ -2104,7 +2104,6 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedC
 public import WeilConjectures.CategoryTheory.DerivedCategory.HomSingleProjective
 public import WeilConjectures.CategoryTheory.DerivedCategory.HomologyAmplitude
 public import WeilConjectures.CategoryTheory.DerivedCategory.HomologyCoproducts
-public import WeilConjectures.CategoryTheory.DerivedCategory.HomotopyColimit
 public import WeilConjectures.CategoryTheory.DerivedCategory.InjectiveCoseparator
 public import WeilConjectures.CategoryTheory.DerivedCategory.IsoOfSyzygies
 public import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
@@ -3903,7 +3902,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Adjunctions
 public import WeilConjectures.SixFunctors.Etale.Derived.AlgClosedField
 public import WeilConjectures.SixFunctors.Etale.Derived.BidualitySupport
 public import WeilConjectures.SixFunctors.Etale.Derived.BoundaryDuality
-public import WeilConjectures.SixFunctors.Etale.Derived.BoundedFlatReplacement
 public import WeilConjectures.SixFunctors.Etale.Derived.ClosedPointSupport
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.CoefficientsShift
@@ -3996,7 +3994,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDim
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Comparisons
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Coproducts
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExceptionalSmooth
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Formal
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.OrdinaryCompactSupport
@@ -4069,12 +4066,10 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Ration
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Reduction
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.ReductionLeft
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Torsion
-public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.TorsionReduction
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormulaAssoc
 public import WeilConjectures.SixFunctors.Etale.Derived.PullbackIntTensorFamily
 public import WeilConjectures.SixFunctors.Etale.Derived.RationalStage
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
-public import WeilConjectures.SixFunctors.Etale.Derived.ReductionHom
 public import WeilConjectures.SixFunctors.Etale.Derived.RefinementLowerShriekBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.RefinementLowerShriekProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.RestrictScalars

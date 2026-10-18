@@ -6,7 +6,6 @@ Authors: Nailin Guan
 module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
-public import WeilConjectures.CategoryTheory.DerivedCategory.KFlatAcyclic
 public import WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
 
@@ -38,15 +37,19 @@ S ⊗ᴸ_R - ⊣ D(comap φ)
 ```
 (`Mod.derivedExtendRestrictAdjunction`, `Mod.derivedExtendMapDerivedCategoryAdjunction`).
 
-## The key input
+## Sorried input
 
-`Mod.preservesKFlatQuasiIso`: if `f : K ⟶ L` is a quasi-isomorphism between K-flat complexes of
-`R`-modules, then `S ⊗_R f` is a quasi-isomorphism. It suffices that `S ⊗_R P` is acyclic for
-every acyclic K-flat complex `P` (`Functor.PreservesKFlatQuasiIso.mk'`). Restricted to `R`,
-`S ⊗_R P` is the relative tensor product of the `R`-module `S` with `P`
-(`Mod.extendScalarsCompComapIso`), which is acyclic since `P` is K-flat and acyclic
-(`CochainComplex.acyclic_tensorRight_of_kFlat`); restriction of scalars is exact and faithful,
-hence detects acyclicity.
+* `Mod.preservesKFlatQuasiIso`: if `f : K ⟶ L` is a quasi-isomorphism between K-flat complexes
+  of `R`-modules, then `S ⊗_R f` is a quasi-isomorphism. Indeed, the cone `P` of `f` is acyclic
+  and K-flat, and `S ⊗_R P` is acyclic: choosing a K-flat resolution `Q ⟶ S` of `S` as an
+  `R`-module, `Q ⊗_R P ⟶ S ⊗_R P` is a quasi-isomorphism since `P` is K-flat, and `Q ⊗_R P` is
+  acyclic since `Q` is K-flat and `P` is acyclic. Finally the underlying complex of `S ⊗_R P`
+  in `Mod C R` is `S ⊗_R P` with `S` regarded as an `R`-module through `φ`, and restriction of
+  scalars is exact, hence detects acyclicity.
+
+The remaining `sorry`s of this file are inherited from
+`WeilConjectures.CategoryTheory.ModuleObjects.DerivedCategory` and
+`WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution`.
 
 -/
 
@@ -89,80 +92,6 @@ instance preservesFiniteColimits_comap :
 
 end Exact
 
-/-! ### Restricted extension of scalars as a tensor product -/
-
-section TensorRegular
-
-variable {C : Type u} [Category.{v} C] [MonoidalCategory C] [BraidedCategory C]
-  [HasCoequalizers C] [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorLeft X)]
-  [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorRight X)]
-  {R S : C} [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S] (φ : R ⟶ S) [IsMonHom φ]
-
-omit [HasCoequalizers C] [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorLeft X)]
-  [∀ X : C, PreservesColimitsOfSize.{0, 0} (tensorRight X)] [IsCommMonObj R] in
-/-- The right action of `R` on `S` through `φ`, written with the braiding, is
-`s ⊗ r ↦ s φ(r)` since `S` is commutative. -/
-lemma braiding_comap_regular_smul :
-    (β_ ((comap φ).obj (regular S)).X R).hom ≫ γ[R, ((comap φ).obj (regular S)).X] =
-      S ◁ φ ≫ μ[S] := by
-  change (β_ S R).hom ≫ φ ▷ S ≫ μ[S] = _
-  rw [← braiding_naturality_right_assoc, IsCommMonObj.mul_comm]
-
-variable (M : Mod C R)
-
-/-- The underlying objects of `S ⊗_R M` (extension of scalars) and of the relative tensor
-product of `R`-modules `S ⊗_R M` agree: both are coequalizers of the same parallel pair. -/
-noncomputable def extendScalarsObjIsoTensorX :
-    ((comap φ).obj (extendScalarsObj φ M)).X ≅ ((comap φ).obj (regular S) ⊗ M).X where
-  hom := extendDescHom φ (tensorObjπ ((comap φ).obj (regular S)) M) (by
-    have h := tensorObjπ_condition ((comap φ).obj (regular S)) M
-    rw [braiding_comap_regular_smul] at h
-    exact h)
-  inv := Cofork.IsColimit.desc (isColimitTensorπ ((comap φ).obj (regular S)) M) (extendπ φ M) (by
-    rw [braiding_comap_regular_smul]
-    exact extendπ_condition φ M)
-  hom_inv_id := by
-    rw [← cancel_epi (extendπ φ M)]
-    erw [extendπ_extendDescHom_assoc, Cofork.IsColimit.π_desc']
-    rw [Category.comp_id]
-  inv_hom_id := by
-    rw [← cancel_epi (tensorObjπ ((comap φ).obj (regular S)) M)]
-    erw [Cofork.IsColimit.π_desc'_assoc, extendπ_extendDescHom]
-    rw [Category.comp_id]
-
-@[reassoc (attr := simp)]
-lemma extendπ_extendScalarsObjIsoTensorX_hom :
-    extendπ φ M ≫ (extendScalarsObjIsoTensorX φ M).hom =
-      tensorObjπ ((comap φ).obj (regular S)) M :=
-  extendπ_extendDescHom _ _ _
-
-lemma extendScalarsObjIsoTensorX_linear :
-    γ[R, ((comap φ).obj (extendScalarsObj φ M)).X] ≫ (extendScalarsObjIsoTensorX φ M).hom =
-      R ◁ (extendScalarsObjIsoTensorX φ M).hom ≫ γ[R, ((comap φ).obj (regular S) ⊗ M).X] := by
-  rw [← cancel_epi (R ◁ extendπ φ M), ← MonoidalCategory.whiskerLeft_comp_assoc,
-    extendπ_extendScalarsObjIsoTensorX_hom, whiskerLeft_tensorπ_smul]
-  change R ◁ extendπ φ M ≫ φ ▷ _ ≫ γ[S, (extendScalarsObj φ M).X] ≫ _ =
-    (α_ R S M.X).inv ≫ (φ ▷ S ≫ μ[S]) ▷ M.X ≫ tensorObjπ ((comap φ).obj (regular S)) M
-  rw [whisker_exchange_assoc, whiskerLeft_extendπ_smul_assoc,
-    extendπ_extendScalarsObjIsoTensorX_hom, associator_inv_naturality_left_assoc,
-    comp_whiskerRight_assoc]
-
-/-- **Restricted extension of scalars is a tensor product**: the restriction to `R` of
-`S ⊗_R M` is the relative tensor product of the `R`-modules `S` and `M`. -/
-noncomputable def extendScalarsCompComapIso :
-    extendScalars φ ⋙ comap φ ≅ MonoidalCategory.tensorLeft ((comap φ).obj (regular S)) :=
-  NatIso.ofComponents
-    (fun M ↦ isoMk (extendScalarsObjIsoTensorX φ M) (extendScalarsObjIsoTensorX_linear φ M))
-    fun {M N} f ↦ by
-      refine Mod.hom_ext _ _ ?_
-      rw [Mod.comp_hom', Mod.comp_hom', ← cancel_epi (extendπ φ M)]
-      change extendπ φ M ≫ (extendScalarsMap φ f).hom ≫ _ = _
-      simp only [extendπ_extendScalarsMap_assoc, isoMk_hom, homMk_hom,
-        extendπ_extendScalarsObjIsoTensorX_hom, extendπ_extendScalarsObjIsoTensorX_hom_assoc]
-      exact (tensorObjπ_whiskerLeft f).symm
-
-end TensorRegular
-
 /-! ### The derived extension of scalars -/
 
 variable {C : Type u} [Category.{v} C] [Abelian C] [MonoidalCategory C] [MonoidalPreadditive C]
@@ -177,22 +106,8 @@ instance hasExactColimitsOfShape_int : HasExactColimitsOfShape ℤ (Mod C R) :=
 
 /-- Extension of scalars sends quasi-isomorphisms between K-flat complexes of `R`-modules to
 quasi-isomorphisms; see the module docstring for the argument. -/
-/-- Extension of scalars sends acyclic K-flat complexes to acyclic complexes. -/
-lemma acyclic_extendScalars_of_kFlat (K : CochainComplex (Mod C R) ℤ)
-    (hK : (HomologicalComplex.quasiIso (Mod C R) (.up ℤ)).kFlat K) (hK' : K.Acyclic) :
-    (((extendScalars φ).mapHomologicalComplex _).obj K).Acyclic := by
-  let := HasDerivedCategory.standard (Mod C R)
-  have h := CochainComplex.acyclic_tensorRight_of_kFlat K hK hK' ((comap φ).obj (regular S))
-  intro i
-  have hi : (((extendScalars φ ⋙ comap φ).mapHomologicalComplex _).obj K).ExactAt i :=
-    (h i).of_iso ((NatIso.mapHomologicalComplex (extendScalarsCompComapIso φ ≪≫
-      BraidedCategory.tensorLeftIsoTensorRight _) _).app K).symm
-  rw [HomologicalComplex.exactAt_iff] at hi ⊢
-  exact (ShortComplex.exact_map_iff_of_faithful
-    ((((extendScalars φ).mapHomologicalComplex _).obj K).sc i) (comap φ)).1 hi
-
 instance preservesKFlatQuasiIso : (extendScalars φ).PreservesKFlatQuasiIso :=
-  Functor.PreservesKFlatQuasiIso.mk' _ (acyclic_extendScalars_of_kFlat φ)
+  sorry
 
 open scoped CategoryTheory.Functor in
 /-- The derived extension of scalars `S ⊗ᴸ_R - : D(Mod_R(C)) ⥤ D(Mod_S(C))`, the total left
