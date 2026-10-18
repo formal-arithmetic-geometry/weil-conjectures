@@ -2011,6 +2011,7 @@ public import WeilConjectures.CategoryTheory.Adjunction.ClopenIdempotent
 public import WeilConjectures.CategoryTheory.Adjunction.ConjugateCounit
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeMate
 public import WeilConjectures.CategoryTheory.Adjunction.FiniteProductRingFunctor
+public import WeilConjectures.CategoryTheory.Adjunction.IdentityMate
 public import WeilConjectures.CategoryTheory.Adjunction.LiftedCommRingBranch
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap.Comp
@@ -4606,6 +4607,7 @@ public import WeilConjectures.Topology.SpectralSpace.WLocal.Pullback
 public import WeilConjectures.Topology.Stratification
 public import WeilConjectures.Topology.StratificationDense
 public import WeilConjectures.Topology.TopologicalFilteredCohomology
+public import WeilConjectures.TraceFormula.Additivity
 public import WeilConjectures.TraceFormula.BaseChangeCoherence
 public import WeilConjectures.TraceFormula.Basic
 public import WeilConjectures.TraceFormula.BorelMoore
@@ -4618,8 +4620,8 @@ public import WeilConjectures.TraceFormula.DegreeOne
 public import WeilConjectures.TraceFormula.Dualizing
 public import WeilConjectures.TraceFormula.Fibration
 public import WeilConjectures.TraceFormula.FixedPoint
-public import WeilConjectures.TraceFormula.Induction
 public import WeilConjectures.TraceFormula.Frobenius
+public import WeilConjectures.TraceFormula.Induction
 public import WeilConjectures.TraceFormula.KunnethVerdier
 public import WeilConjectures.TraceFormula.LocalTerm
 public import WeilConjectures.TraceFormula.Main
