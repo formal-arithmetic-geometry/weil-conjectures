@@ -15,8 +15,8 @@ Local linearity pulls back along morphisms over a base map
 (`AlgebraicGeometry.Scheme.Hom.IsLocallyLinear.pullback`). Transporting the relation `linear j i`
 of a linear atlas across the symmetry `Vⱼ ×_Z Vᵢ ≅ Vᵢ ×_Z Vⱼ`, the coordinates of the chart `i` are
 locally linear in those of the chart `j` over the overlap; hence the locally linear functions for
-the two charts contain each other's coordinate spans
-(`AlgebraicGeometry.Scheme.Hom.VectorBundleAtlas.span_chart_coord_le_locallyLinear_and_symm`).
+the two charts coincide
+(`AlgebraicGeometry.Scheme.Hom.VectorBundleAtlas.locallyLinearSubmodule_overlap_eq`).
 -/
 
 @[expose] public section
@@ -40,6 +40,33 @@ lemma IsLocallyLinear.pullback {T N P Y : Scheme.{u}} (F : T ⟶ N) (q : T ⟶ P
   have hT : F.appTop = F.appLE ⊤ ⊤ (by simp) := by simp [Scheme.Hom.appLE]
   simp only [hT]
   exact Scheme.Modules.appLE_relation' F q g t hF W le_top le_top σ s β h _ _
+
+/-- Local linearity is transitive. -/
+lemma IsLocallyLinear.trans {T P : Scheme.{u}} {q : T ⟶ P} {σ τ : Fin c → Γ(T, ⊤)}
+    {s : Γ(T, ⊤)} (hs : IsLocallyLinear q σ s) (hσ : ∀ l, IsLocallyLinear q τ (σ l)) :
+    IsLocallyLinear q τ s := by
+  intro y
+  obtain ⟨U₀, hy₀, a, h⟩ := hs y
+  choose U hy b hb using fun l ↦ hσ l y
+  let V := U₀ ⊓ Finset.univ.inf U
+  have hV₀ : V ≤ U₀ := inf_le_left
+  have hV (l : Fin c) : V ≤ U l := inf_le_right.trans (Finset.inf_le (Finset.mem_univ l))
+  have hyV : y ∈ V := by
+    refine ⟨hy₀, ?_⟩
+    rw [TopologicalSpace.Opens.coe_finset_inf, Finset.inf_eq_iInf]
+    simp only [Set.iInf_eq_iInter, Set.mem_iInter, Function.comp_apply, SetLike.mem_coe]
+    exact fun l _ ↦ hy l
+  refine ⟨V, hyV, fun m ↦ ∑ l, P.presheaf.map (homOfLE hV₀).op (a l) *
+    P.presheaf.map (homOfLE (hV l)).op (b l m), ?_⟩
+  rw [linearRelation_restrict hV₀ s a h]
+  simp_rw [fun l ↦ linearRelation_restrict (hV l) (σ l) (b l) (hb l)]
+  simp only [map_sum, map_mul, Finset.mul_sum, Finset.sum_mul, mul_assoc]
+  exact Finset.sum_comm
+
+lemma locallyLinearSubmodule_le {T P : Scheme.{u}} {q : T ⟶ P} {σ τ : Fin c → Γ(T, ⊤)}
+    (hσ : ∀ l, IsLocallyLinear q τ (σ l)) :
+    locallyLinearSubmodule q σ ≤ locallyLinearSubmodule q τ :=
+  fun _ hs ↦ IsLocallyLinear.trans hs hσ
 
 namespace VectorBundleAtlas
 
@@ -92,6 +119,19 @@ theorem span_chart_coord_le_locallyLinear_and_symm (A : VectorBundleAtlas c p z)
           (A.overlapCoordSnd i j) :=
   ⟨A.span_chart_coord_le_locallyLinear i j,
     span_le_locallyLinearSubmodule _ (A.isLocallyLinear_overlapCoordFst i j)⟩
+
+/-- Blueprint `def-pur-vector-bundle-zero-section`: Vector bundle with zero section
+
+**The fibrewise linear functions do not depend on the chart.** Over `Vᵢ ×_Z Vⱼ`, the functions
+locally linear in the coordinates of the chart `i` are exactly those locally linear in the
+coordinates of the chart `j`. -/
+theorem locallyLinearSubmodule_overlap_eq (A : VectorBundleAtlas c p z) (i j : A.ι) :
+    locallyLinearSubmodule (pullback.snd p (pullback.fst (A.v i) (A.v j) ≫ A.v i))
+        (A.overlapCoordFst i j) =
+      locallyLinearSubmodule (pullback.snd p (pullback.fst (A.v i) (A.v j) ≫ A.v i))
+        (A.overlapCoordSnd i j) :=
+  le_antisymm (locallyLinearSubmodule_le (A.isLocallyLinear_overlapCoordFst i j))
+    (locallyLinearSubmodule_le (A.isLocallyLinear_overlapCoordSnd i j))
 
 end VectorBundleAtlas
 
