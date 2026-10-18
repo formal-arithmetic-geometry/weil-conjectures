@@ -17,11 +17,97 @@
   "def-weil-finitely-generated-module",
   "def-weil-pbc-constructible-complexes",
   "def-kun-derived-tensor",
-  "def-pc-cochain-complex-modules"
+  "def-pc-cochain-complex-modules",
+  "def-weil-connected-scheme",
+  "def-pc-reduced-scheme",
+  "def-galois-object",
+  "def-weil-pbc-inverse-image",
+  "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $T$ be the class of constructible $A_X$-module sheaves and $S$ its subclass of flat sheaves. Apply [lem-sfb-discrete-noetherian-constructible-serre] on the small etale site: $T$ contains zero, is invariant under isomorphisms, and is closed under kernels, cokernels and extensions. Its local finite-presentation convention agrees with the finite-type convention here: over the Noetherian ring $A$, a finite generating surjection $A^n\\to M$ has finitely generated kernel by [lem-weil-pbc-noetherian-submodule-finite], and hence gives a finite presentation. To compare the local and global partition conventions, choose the finite affine cover $X=\\bigcup_{i=1}^r U_i$ in the hypothesis and put $W_i=U_i\\setminus\\bigcup_{j<i}U_j$. These are disjoint locally closed subschemes covering $X$. Intersect $W_i$ with each stratum of the finite partition on $U_i$. The resulting finite collection of locally closed pieces is a global partition with the same local module values. Conversely a global partition restricts to one on every affine open.",
+   "uses": [
+    "lem-sfb-discrete-noetherian-constructible-serre",
+    "lem-weil-pbc-noetherian-submodule-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03RZ, lemma-constructible-abelian (3); Noetherian coefficient convention in section-ctf"
+   }
+  },
+  {
+   "text": "The class $S$ contains zero and is invariant under isomorphisms. If $E,E\\prime$ are in $S$, their biproduct is constructible since $0\\to E\\to E\\oplus E\\prime\\to E\\prime\\to0$ is an extension of constructibles. Its tensor functor is the direct sum of the exact tensor functors of $E$ and $E\\prime$, and is exact; thus $S$ is closed under binary biproducts. Every $S$-object is, by definition, flat and in $T$. Finally [lem-per-noetherian-constructible-flat-lifting], with $R=A$, gives precisely lifting of epimorphisms onto $T$ by objects of $S$: for $p:B\\twoheadrightarrow C$ and $g:G\\to C$, it supplies $E\\in S$, $e:E\\twoheadrightarrow G$, and $h:E\\to B$ with $ph=ge$.",
+   "uses": [
+    "lem-per-noetherian-constructible-flat-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03TT, proof, affine-free covers lifting through an epimorphism; class hypotheses written out"
+   }
+  },
+  {
+   "text": "Apply [lem-sf-flat-model-class-resolution] to these $S,T$ in the category of $A_X$-module sheaves. Its cohomology hypothesis holds because $K\\in D^b_c$, and its Tor-vanishing hypothesis is exactly the specified amplitude $[a,b]$ against every degree-zero module sheaf. The class hypotheses were verified in Steps 1 and 2. We obtain a complex $F^\\bullet$ representing $K$, zero outside $[a,b]$, with every term flat and in $T$. This uses the bounded-above lifting-class resolution followed by the cokernel truncation at $a$; it does not assert that flat sheaves are projective objects of the sheaf category.",
+   "uses": [
+    "lem-sf-flat-model-class-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WeilConjectures/CategoryTheory/DerivedCategory/FlatModelOfClass.lean",
+    "place": "exists_iso_Q_obj_flat_of_torAmplitudeIn_of_liftsAlongEpi, lines 72-124 (declaration at 72); generic lifting-class refinement of Stacks 08CI"
+   }
+  },
+  {
+   "text": "Only the finitely many degrees $a\\le q\\le b$ occur. Apply [lem-per-noetherian-constructible-galois-partition] to the family $(F^q)_{a\\le q\\le b}$. It supplies one finite stratification by connected reduced $S_i$, one connected finite etale Galois cover $V_i\\to S_i$ for each stratum, and finitely presented $A$-modules $M_{iq}$ with $F^q$ constant of value $M_{iq}$ after this restriction. Thus the covers are simultaneous for every term, without requiring simultaneous trivialization of infinitely many terms.",
+   "uses": [
+    "lem-per-noetherian-constructible-galois-partition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 095N and 03S0, finite presentations and simultaneous stratification; ILO XVII 7.3.1 and proof of 7.6.1, p. 314"
+   }
+  },
+  {
+   "text": "Fix $i,q$ and put $H=c_i^{-1}(F^q|_{S_i})$. Apply [lem-weil-pbc-ringed-topos-flat-module-pullback] to the two restriction morphisms of constant-$A$ ringed topoi: $H$ is flat on $V_i$. Choose a geometric point $v$ of the nonempty scheme $V_i$. Apply the same node to the point morphism $(\\mathbf{Set},A)\\to(V_{i,\\mathrm{et}},A_{V_i})$: $H_v$ is a flat $A$-module. By Step 4, $H$ is the constant module sheaf of value $M_{iq}$. The constant-sheaf stalk identification [lem-weil-pbc-constant-sheaf-geometric-stalk] gives $M_{iq}\\cong H_v$. It is $A$-linear: for each scalar $r$, the germ map carries a constant section $rm$ to $r$ times the germ of $m$. Thus $M_{iq}$ is flat and, by Step 4, finitely presented. Now [lem-weil-pbc-finitely-presented-flat-module-projective] makes it finite projective. Explicitly, choose a finite generating epimorphism $A^n\\twoheadrightarrow M_{iq}$. Projectivity lifts its identity to a section, so $A^n\\cong M_{iq}\\oplus\\ker(A^n\\to M_{iq})$, giving the required direct summand.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "lem-weil-pbc-finitely-presented-flat-module-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 05VD, lemma-pullback-flat, applied to restrictions and a point; etale-cohomology.tex remark-projective-each-degree after Tag 03TT; algebra.tex Tag 00NX, lemma-finite-projective"
+   }
+  },
+  {
+   "text": "If $X$ is empty, take the zero complex and the empty stratification. Every module sheaf on the empty scheme is zero (the sheaf axiom for the empty covering forces its sections to be the zero module), hence every derived object is zero and this complex represents $K$. All term and stratum conditions are vacuous. A zero term in the nonempty case has value the zero projective module.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03TT, amplitude-zero base case and the empty-scheme convention"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-discrete-noetherian-constructible-serre",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-per-noetherian-constructible-flat-lifting",
+  "lem-sf-flat-model-class-resolution",
+  "lem-per-noetherian-constructible-galois-partition",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-weil-pbc-finitely-presented-flat-module-projective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03TT and remark-projective-each-degree, using the existing lifting-class resolution theorem instead of the source cone reconstruction; simultaneous Galois partition from finite presentations and ILO XVII 7.3.1 / proof of 7.6.1."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -64,10 +150,52 @@
    "results": "10 hits; top: Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; note: ; digest: dd986695cc468c23; directory: Algebra/Category/ModuleCat/Sheaf",
    "date": "2026-10-18",
    "verdict": "no match: results concern underived module/sheaf Hom, general derived bounds, or scheme/ring finiteness, not the stated etale constructible theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded above constructible etale complex over a Noetherian ring has a bounded above resolution by finite sums of free etale sheaves",
+   "results": "{\"t\": \"2026-10-18T16:13:02Z\", \"tool\": \"leansearch\", \"query\": \"A bounded above constructible etale complex over a Noetherian ring has a bounded above resolution by finite sums of free etale sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.free\", \"SheafOfModules.ιFree\", \"Algebra.Etale.finitePresentation\", \"Algebra.Etale.formallyEtale\", \"RingHom.Etale\", \"Algebra.instEtaleOfIsStandardEtale\", \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"AlgebraicGeometry.Scheme.Etale\"], \"digest\": \"c7aed8f7d2e5165d\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: general bounds and local generators do not give the Noetherian-coefficient flat constructible model with simultaneous Galois strata"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded above etale complex with constructible cohomology over a Noetherian ring is represented by a bounded above complex of constructible flat sheaves",
+   "results": "{\"t\": \"2026-10-18T16:14:54Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded above etale complex with constructible cohomology over a Noetherian ring is represented by a bounded above complex of constructible flat sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"DerivedCategory.isGE_Q_obj_iff\", \"SheafOfModules.IsFiniteType\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"SheafOfModules.isFinitePresentation\"], \"digest\": \"bc56cb4db10897ed\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: general bounds and local generators do not give the Noetherian-coefficient flat constructible model with simultaneous Galois strata"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, CochainComplex",
+   "results": "{\"t\": \"2026-10-18T16:14:57Z\", \"tool\": \"loogle\", \"query\": \"DerivedCategory, CochainComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"DerivedCategory.Q\", \"DerivedCategory.instEssSurjCochainComplexIntQ\", \"DerivedCategory.instCommShiftCochainComplexIntQ\", \"DerivedCategory.instAdditiveCochainComplexIntQ\", \"DerivedCategory.singleFunctorIsoCompQ\", \"DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp\", \"DerivedCategory.singleFunctorsPostcompQIso\", \"DerivedCategory.Q_obj_single_obj\"], \"digest\": \"279cd3356f4a36e4\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: general bounds and local generators do not give the Noetherian-coefficient flat constructible model with simultaneous Galois strata"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|IsConstructible|flatResolution",
+   "results": "{\"t\": \"2026-10-18T16:14:57Z\", \"tool\": \"grep\", \"query\": \"constructible|IsConstructible|flatResolution\", \"sub\": \"Algebra/Category\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: general bounds and local generators do not give the Noetherian-coefficient flat constructible model with simultaneous Galois strata"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite type constructible sheaf cohomology admits a resolution by finite sums of extension by zero of the constant coefficient ring on affine etale schemes",
+   "results": "{\"t\": \"2026-10-18T16:21:43Z\", \"tool\": \"leanfinder\", \"query\": \"Finite type constructible sheaf cohomology admits a resolution by finite sums of extension by zero of the constant coefficient ring on affine etale schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.localGeneratorsDataOfIsFiniteType\", \"SheafOfModules.IsFiniteType.exists_localGeneratorsData\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"SheafOfModules.IsFiniteType\", \"SheafOfModules.GeneratingSections.IsFiniteType.finite\", \"SheafOfModules.GeneratingSections.IsFiniteType\", \"SheafOfModules.isFinitePresentation\"], \"digest\": \"19721e99b0ddcb37\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: general bounds and local generators do not give the Noetherian-coefficient flat constructible model with simultaneous Galois strata"
+  },
+  {
+   "tool": "grep",
+   "query": "Constructible|constructible|LiftsAlongEpi",
+   "results": "{\"t\": \"2026-10-18T16:21:44Z\", \"tool\": \"grep\", \"query\": \"Constructible|constructible|LiftsAlongEpi\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: general bounds and local generators do not give the Noetherian-coefficient flat constructible model with simultaneous Galois strata"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-ctf-hom-coefficient-comparison",
@@ -90,5 +218,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-noetherian-ctf-flat-model",
+  "worker": "stage1",
+  "summary": "Kept the statement; checked Stacks 03TT and ILO XVII. Verified lifting-class resolution hypotheses using Noetherian constructible Serre closure, added the Noetherian-coefficient lifting and finite-family Galois-partition inputs, and deduced projective stalk values via flat pullback and 00NX. Finite-coefficient project declarations do not attach this item.",
+  "blueprint": "Realizes the arbitrary-coefficient flat-model input in the Step 1 relative-duality chain of lem-per-artin-gabber-affine-curve, through lem-per-ctf-hom-coefficient-comparison; preserves the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-discrete-noetherian-constructible-serre",
+    "why": "Generic Noetherian-coefficient Serre closure needed for the lifting-class resolution; this unit has no such closure theorem."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-submodule-finite",
+    "why": "Generic module finiteness converts finite type to finite presentation; this unit has no such algebra lemma."
+   },
+   {
+    "node": "lem-sf-flat-model-class-resolution",
+    "why": "Generic lifting-class flat resolution gives the bounded representative once its hypotheses are checked; does not replace any unit-level duality step."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "why": "Generic flat pullback to a point proves flatness of the constant module values."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "why": "Generic constant stalk identification reads the values on the Galois covers."
+   },
+   {
+    "node": "lem-weil-pbc-finitely-presented-flat-module-projective",
+    "why": "Generic module flat/projective criterion, already a Mathlib leaf."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-discrete-noetherian-constructible-serre",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-sf-flat-model-class-resolution",
+  "lem-weil-pbc-ringed-topos-flat-module-pullback",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-weil-pbc-finitely-presented-flat-module-projective"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q59-904d92dfe",
+  "group": "Q59",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-904d92dfe (reviewer sub-agent of L); spot-checked: Read the item, both new nodes and every cited node in full. Sources: Stacks 03TT with its proof and remark-projective-each-degree, 095N, 03S0, 03S8(3) and 03SF (pione.tex); ILO XVII Def 7.3.1, Lemma 7.6.11 and the proof of 7.6.1 (pp. 303, 313-314). The item statement is unchanged and matches 03TT plus the ILO Galois partition, with no l-invertibility needed. Step 1: the Noetherian constructible Serre node gives closure under kernels, cokernels and extensions; the affine-local partitions are converted to a global one by disjointing the affine cover, and finite type to finite presentation by the Mathlib leaf. Step 2: biproduct closure and the lifting square are exactly the flat-lifting node with R=A. Step 3: every hypothesis of lem-sf-flat-model-class-resolution is verified; the node is Lean-closed and has no finite-ring hypothesis. Step 4: the Galois-partition node is applied to the finite family of terms. Step 5: flat pullback to a point and the constant stalk give flat finitely presented values, hence projective by 00NX; V_i is nonempty because it is connected. Step 6: the empty case is elementary. New nodes, both true and statement-only. Flat-lifting follows the 095N affine-free quotient argument (local lifts refined to finitely many affines, flat by free stalks, constructible by 03S8(3)). Galois-partition holds for any Noetherian X: a finite affine trivializing cover, 03S0 to make it finite etale on strata, connected components, then the Galois closure. Stratifying is necessary because infinite monodromy is possible on a nodal curve with A=F_l[t], and the node allows it. Neither node restates a clause of the item. Not duplicates: lem-sf-etale-flat-constructible-lifting needs finite Lambda, which the new node generalizes; lem-per-constructible-finite-monodromy-filtration trivializes only the graded pieces of a filtration. B1-B9 hold and all three kinds of search are recorded. The declared tool_uses are accepted as generic black boxes. No SGA, no cycle. Maintainer notes: lem-sf-etale-flat-constructible-lifting could cite the new flat-lifting node when split; the Galois-partition node's source.document says etale-cohomology.tex while its place names pione.tex for 03SF (cosmetic)."
  }
 }
