@@ -13,9 +13,102 @@
   "def-pc-fibre-product",
   "def-pc-finite-locally-free"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-finite-locally-free-degree-locally-constant] to $s:R\\to U$. Write $d(u)=\\dim_{\\kappa(u)}\\Gamma(R\\times_{s,U}\\operatorname{Spec}\\kappa(u),\\mathcal O)$. It gives pairwise disjoint open-and-closed subschemes $U_r=d^{-1}(r)$, for $r\\geq0$, covering $U$, with $s:s^{-1}(U_r)\\to U_r$ finite locally free of degree $r$.",
+   "uses": [
+    "lem-weil-pbc-finite-locally-free-degree-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BI, lemma-finite-locally-free-disjoint-free, first sentence of proof; Morphisms Tag 04MH (lemma-finite-locally-free)."
+   }
+  },
+  {
+   "text": "The identity satisfies $s\\circ e=\\mathrm{id}_U$. Thus each fibre of $s$ has a $\\kappa(u)$-point: $e$ base-changes to a section of that fibre over $\\operatorname{Spec}\\kappa(u)$. Evaluation at this point gives a unital algebra map from its coordinate algebra to $\\kappa(u)$, whose composite with the scalar inclusion is the identity. Its coordinate algebra therefore contains a one-dimensional copy of $\\kappa(u)$, so its dimension is at least one. Consequently $U_0=\\varnothing$. This uses precisely the fibre-algebra meaning of degree in [def-pc-finite-locally-free].",
+   "uses": [
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BI, lemma-finite-locally-free-disjoint-free, proof: s is surjective, hence U_0 is empty."
+   }
+  },
+  {
+   "text": "Write $P=R\\times_{s,U,t}R$ and $Q=R\\times_{s,U,s}R$, with second projections to $R$. Here $c(a,b)=a\\circ b$. The maps $F:P\\to Q$, $(a,b)\\mapsto(c(a,b),b)$, and $G:Q\\to P$, $(d,b)\\mapsto(c(d,i(b)),b)$, are scheme morphisms by [def-pc-fibre-product]: the required equalities are $s(c(a,b))=s(b)$ for $F$, and for $G$ first $s(d)=s(b)=t(i(b))$, so that $c(d,i(b))$ is defined, and then $s(c(d,i(b)))=s(i(b))=t(b)$, so that $(c(d,i(b)),b)$ lies in $P$. The groupoid identities give $G F(a,b)=((a\\circ b)\\circ b^{-1},b)=(a,b)$ and $F G(d,b)=((d\\circ b^{-1})\\circ b,b)=(d,b)$. These are identities of morphisms, since they follow from the associativity, inverse and identity identities of the given structure maps. Thus $P\\cong Q$ over $R$. This is the two lower cartesian squares of the source, with their comparison map and inverse written out.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 02YE (lemma-diagram), the two lower squares; the direct groupoid-axiom verification omitted in that source."
+   }
+  },
+  {
+   "text": "The projection $P\\to R$ is the base change of $s$ along $t$, whereas $Q\\to R$ is the base change of $s$ along $s$. Clause (2) of [lem-weil-pbc-finite-flat-rank-iso] therefore gives their ranks at $z\\in R$ as $d(t(z))$ and $d(s(z))$. The isomorphism over $R$ in step 3 identifies their fibres and hence their coordinate algebras, so these dimensions are equal. Thus $s^{-1}(U_r)=t^{-1}(U_r)$ as open subsets, hence as open subschemes. Set this common open subscheme equal to $R_r$. The restriction $s_r:R_r\\to U_r$ already has degree $r$ by step 1.",
+   "uses": [
+    "lem-weil-pbc-finite-flat-rank-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BI, lemma-finite-locally-free-disjoint-free, comparison of the two base changes over Spec(kappa(z)); Tag 02YE (lemma-diagram)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-affine-scheme-qcqs], $U$ is quasi-compact. Its open cover by the $U_r$ has a finite subcover. Since the $U_r$ are pairwise disjoint, every stratum outside that subcover is empty. The set $I=\\{r\\geq1:U_r\\ne\\varnothing\\}$ is therefore finite, and $U=\\coprod_{r\\in I}U_r$. If $U=\\varnothing$, this definition gives $I=\\varnothing$.",
+   "uses": [
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BI (lemma-integral-over-invariants), first paragraph, quasi-compactness reduction; Algebra Tag 00E8 (lemma-quasi-compact)."
+   }
+  },
+  {
+   "text": "For each $r\\in I$, [lem-weil-pbc-spec-clopen-idempotent] applied to $U_r\\subseteq\\operatorname{Spec}A$ gives an idempotent $a_r\\in A$ with $U_r=D(a_r)$. Clause (0) of [lem-weil-pbc-affine-ideals-closed-subscheme] says that this principal open is an affine open subscheme, proving the required affineness of $U_r$. The subset $R_r=s^{-1}(U_r)$ is open and closed in $R=\\operatorname{Spec}B$, since $s$ is continuous; applying the same two cited statements to $B$ shows that $R_r$ is affine as well.",
+   "uses": [
+    "lem-weil-pbc-spec-clopen-idempotent",
+    "lem-weil-pbc-affine-ideals-closed-subscheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I3 (lemma-standard-open-affine), with Algebra Tag 00EE (lemma-disjoint-decomposition); affine specialization of groupoids Tag 03BI."
+   }
+  },
+  {
+   "text": "The maps restrict to the indicated open subschemes: $s\\circ e=\\mathrm{id}$ puts $e(U_r)$ in $R_r$; $s\\circ i=t$ and the equality of the two inverse images put $i(R_r)$ in $R_r$; and $s(c(a,b))=s(b)$, the source of the second factor $b$ (step 3), puts the image of $R_r\\times_{s_r,U_r,t_r}R_r$ under $c$ in $R_r$. Factoring through these open subschemes is restriction of the continuous map and its structure-sheaf map, as in [def-weil-open-immersion]. All groupoid identities restrict because the open inclusions are injective on morphisms. The restricted inverse is involutive and satisfies $s_r\\circ i_r=t_r$, so it is an isomorphism from $t_r$ to $s_r$ over $U_r$. Its fibre algebra isomorphisms preserve dimensions, and its isomorphism of morphisms preserves the finite, flat and locally finitely presented conditions defining [def-pc-finite-locally-free]. Hence $t_r$ too is finite locally free of degree $r$.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-pc-finite-locally-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BI, lemma-finite-locally-free-disjoint-free, last two sentences; restriction of the groupoid structure to the invariant opens."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+  "def-pc-finite-locally-free",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-finite-flat-rank-iso",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-spec-clopen-idempotent",
+  "lem-weil-pbc-affine-ideals-closed-subscheme",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 03BI (lemma-finite-locally-free-disjoint-free), with the affine quasi-compact reduction at the start of lemma-integral-over-invariants; the elementary comparison from Tag 02YE is written explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,10 +137,38 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"StructureGroupoid.mem_of_eqOnSource\", \"module\": \"Mathlib.Geometry.Manifold.StructureGroupoid\", \"type\": \"(G : StructureGroupoid H) {e e' : OpenPartialHomeomorph H H} (he : e ∈ G) (h : e' ≈ e) : e' ∈ G\", \"doc\": \"If a partial homeomorphism $ e $ belongs to a structure groupoid $ G $ on a topological space $ H $, and another partial homeomorphism $ e' $ is equivalent to $ e $ in the sense that they have the sam\"}\n  {\"name\": \"AddGroup.rank_congr\", \"module\": \"Mathlib.GroupTheory.Rank\", \"type\": \"∀ {G : Type u_1} {H : Type u_2} [inst : AddGroup G] [inst_1 : AddGroup H] [inst_2 : AddGroup.FG G]\\n  [inst_3 : AddGroup.FG H] (e : G ≃+ H), AddGroup.rank G = AddGroup.rank H\", \"doc\": \"For any two finitely generated additive groups $ G $ and $ H $, if there exists an additive group isomorphism $ e : G \\to H $, then the rank of $ G $ equals the rank of $ H $. This means the rank is a \"}\n  {\"name\": \"StructureGroupoid.mem_of_eqOnSource'\", \"module\": \"Mathlib.Geometry.Manifold.StructureGroupoid\", \"type\": \"∀ {H : Type u_2} [inst : TopologicalSpace H] (self : StructureGroupoid H) (e e' : OpenPartialHomeomorph H H),\\n  e ∈ self.members → e' ≈ e → e' ∈ self.members\", \"doc\": \"If a partial homeomorphism $ e $ between open subsets of a topological space $ H $ belongs to the structure groupoid $ \\\\mathcal{G} $, and another partial homeomorphism $ e' $ is equivalent to $ e $ un\"}\n  {\"name\": \"Module.isLocallyConstant_rankAtStalk\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \"[Module.FinitePresentation R M] [Module.Flat R M] : IsLocallyConstant (rankAtStalk (R := R) M)\", \"doc\": \"If $ M $ is a finitely presented and flat module over a commutative semiring $ R $, then the function assigning to each prime ideal $ \\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(R) $ the rank of the localiza\"}\n  {\"name\": \"StructureGroupoid.LocalInvariantProp\", \"module\": \"Mathlib.Geometry.Manifold.LocalInvariantProperties\", \"type\": \"{H : Type u_1} →\\n  {H' : Type u_3} →\\n    [inst : TopologicalSpace H] →\\n      [inst_1 : TopologicalSpace H'] → StructureGroupoid H → StructureGroupoid H' → ((H → H') → Set H → H → Prop) → Prop\", \"doc\": \"A proposition asserting a condition on a continuous map between topological spaces $H$ and $H'$, a subset of $H$, and an element of $H$, which must hold under the structure groupoids of $H$ and $H'$. \"}\n  {\"name\": \"StructureGroupoid.isLocalStructomorphWithinAt_localInvariantProp\", \"module\": \"Mathlib.Geometry.Manifold.LocalInvariantProperties\", \"type\": \"[ClosedUnderRestriction G] : LocalInvariantProp G G (IsLocalStructomorphWithinAt G)\", \"doc\": \"If a structure groupoid $ G $ is closed under restriction, then the property of a function being a local structomorphism within a set at a point is a local invariant property with respect to $ G $. Th\"}\n  {\"name\": \"Module.isLocallyConstant_rankAtStalk_freeLocus\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.FreeLocus\", \"type\": \"[Module.FinitePresentation R M] : IsLocallyConstant (fun x : freeLocus R M ↦ rankAtStalk M x.1)\", \"doc\": \"For a finitely presented module $M$ over a commutative ring $R$, the function assigning to each prime ideal $\\\\mathfrak{p}$ in the free locus of $M$ the rank of the localized module $M_{\\\\mathfrak{p}}$ \"}\n  {\"name\": \"Subgroup.rank_congr\", \"module\": \"Mathlib.GroupTheory.Rank\", \"type\": \"{H K : Subgroup G} [Group.FG H] [Group.FG K] (h : H = K) : rank H = rank K\", \"doc\": \"If $H$ and $K$ are finitely generated subgroups of a group $G$ and $H = K$, then the rank of $H$ equals the rank of $K$.\"}",
    "date": "2026-10-18",
    "verdict": "no match: Module.isLocallyConstant_rankAtStalk gives local constancy only, not invariance under groupoid arrows"
+  },
+  {
+   "tool": "grep",
+   "query": "Groupoid.*[Ff]initeLocallyFree|[Ff]initeLocallyFree.*[Gg]roupoid",
+   "results": "No hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally free groupoid scheme decomposes into invariant clopen constant degree strata",
+   "results": "CategoryTheory.PreGaloisCategory.has_decomp_connected_components'; CategoryTheory.PreGaloisCategory.has_decomp_connected_components; AlgebraicGeometry.sigmaOpenCover_I₀; AlgebraicGeometry.Scheme.Hom.discrete_fiber; AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat; CategoryTheory.PreGaloisCategory.exists_set_ker_evaluation_subset_of_isOpen; CategoryTheory.PreGaloisCategory.fiber_in_connected_component; AlgebraicGeometry.sigmaOpenCover; the hits concern Galois-category decompositions, coproduct schemes and discrete finite fibres, not invariant groupoid degree strata.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Groupoid\", \"rank\"",
+   "results": "No hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The source and target of a finite locally free groupoid preserve each constant degree open and closed stratum of the object scheme",
+   "results": "CategoryTheory.Grpd; StructureGroupoid.locality; AlgebraicGeometry.instLocallyOfFinitePresentationMorphismRestrict; Topology.IsOpenEmbedding.singleton_hasGroupoid; continuousGroupoid; CategoryTheory.Grpd.str'; TopologicalSpace.Opens.instHasGroupoid; StructureGroupoid.mk; the hits concern abstract groupoids, manifold structure groupoids, and restriction of locally finite presentation; none gives the statement.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-affine-groupoid-integral-invariants",
@@ -69,5 +190,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-affine-groupoid-invariant-rank-strata",
+  "worker": "stage1",
+  "summary": "Followed Stacks 03BI: used existing rank strata and base-change rank lemmas, wrote the composition/inverse comparison of the two pullbacks explicitly, excluded rank zero by the identity section, and checked finite support, affineness and all restricted groupoid maps. No new nodes or statement changes.",
+  "blueprint": "Supporting invariant-rank reduction in the ancestor lem-a1-affine-hc0 fourth-paragraph affine-quotient route, through lem-a1-affine-groupoid-integral-invariants. Steps 1-4 and 7 realize groupoids lemma-finite-locally-free-disjoint-free; steps 5-6 justify its affine quasi-compact use in lemma-integral-over-invariants.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+    "why": "Generic rank-stratification theorem for a finite locally free morphism, used exactly as in Stacks 03BI; no corresponding theorem is stated by this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-locally-free-degree-locally-constant"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-902cdaf14",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-902cdaf14 (reviewer sub-agent of L); spot-checked: I read the whole item against Stacks groupoids.tex: definition-groupoid, 02YE lemma-diagram, 03BI lemma-finite-locally-free-disjoint-free with its proof, and the first paragraph of 03BJ lemma-integral-over-invariants. I also read the statement of every cited node. The statement is 03BI specialised to affine U and R. No hypothesis is dropped and groupoids are not reduced to equivalence relations. The added clauses (I finite, nonempty affine strata, affine R_r, the groupoid restricting to each stratum, I empty when U is empty) are all proved and are what the parent's step 1 uses. Step by step: step 1 uses the degree-locally-constant node exactly as stated. Step 2 rules out rank 0 through the identity section. Step 3 is the 02YE comparison P≅Q over R, written out and checked with Stacks' convention. Step 4 applies clause (2) of finite-flat-rank-iso to the base changes of s along t and along s, giving d∘t=d∘s. Steps 5 and 6 use qcqs and then the clopen-idempotent node with clause (0) of affine-ideals-closed-subscheme, over A and over B. Step 7 restricts the structure maps and gets t_r≅s_r through the inverse. Small cases checked: A=0; the trivial groupoid; Z/2⊔Z/3, giving I={2,3}; nonreduced mu_p; isotropy. There are no new nodes. The DAG search found no duplicate (the parent, grandparent and invariant-norm nodes say different things). The route is fine. I accept the declared tool use of lem-weil-pbc-finite-locally-free-degree-locally-constant (Morphisms 04MH, Lean-closed). Two text fixes, both in the item file: (a) step 3 now also checks that G lands in P, s(c(d,i(b)))=s(i(b))=t(b). (b) Step 7 wrote 's∘c=s∘pr_1' without saying which projection pr_1 is; in the item's own 1-indexed language this reads as false. It now says s(c(a,b))=s(b), the source of the second factor. No other field changed.; 1 file(s) fixed by the reviewer"
  }
 }
