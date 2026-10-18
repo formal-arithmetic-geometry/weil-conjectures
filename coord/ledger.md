@@ -16251,3 +16251,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:11 L: returned deliver/K3/Sheaf.Algebra.Homology.RingedSiteBoundedFreeRHomModel (reviewer RETURN: (the landing tools, head 9e5db492b) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 07:11 L: returned deliver/K4/Sheaf.AlgebraicGeometry.ClosedSupportHom (reviewer RETURN: (the landing tools, head 9cef3f555) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
 - 07:11 L: returned deliver/N1/Sheaf.AlgebraicGeometry.EtaleLocalityBaseChange (reviewer RETURN: (the landing tools, head ee4e52a9d) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 07:11 L: returned deliver/N1/Sheaf.Paper.LocallyConstantTensor (reviewer RETURN: (the landing tools, head c9e75d2d9) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
