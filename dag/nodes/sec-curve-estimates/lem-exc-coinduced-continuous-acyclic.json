@@ -1,156 +1,147 @@
 {
- "id": "lem-exc-coinduced-continuous-acyclic",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "def-exc-continuous-cohomology",
-   "place": "The final continuous-cochain comparison clause: vanishing on the coinduced object used for effaceability",
-   "via": [
-    "lem-exc-cochains-derived-invariants"
-   ]
+  "id": "lem-exc-coinduced-continuous-acyclic",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "def-exc-continuous-cohomology",
+      "place": "The final continuous-cochain comparison clause: vanishing on the coinduced object used for effaceability",
+      "via": [
+        "lem-exc-cochains-derived-invariants"
+      ]
+    },
+    "same_as": []
   },
-  "same_as": []
- },
- "kind": "statement",
- "title": "Coinduced discrete modules are acyclic for continuous cochains",
- "statement": "Let $G$ be a profinite group, $A$ a finite ring, and $M$ a left $A$-module with a continuous $A$-linear $G$-action when $M$ has the discrete topology [lem-exc-discrete-modules-abelian]. Let $D(M)=\\operatorname{Cont}(G,M)$ carry the discrete topology and the action $(h\\cdot f)(x)=f(xh)$; it is a discrete continuous $G$-module [lem-exc-coinduced-discrete-embedding]. Form the inhomogeneous complex $C^n(G,D(M))=\\operatorname{Cont}(G^n,D(M))$ with $d^0v(g)=g v-v$ and $d^nF(g_1,\\ldots,g_{n+1})=g_1F(g_2,\\ldots,g_{n+1})+\\sum_{j=1}^n(-1)^jF(g_1,\\ldots,g_jg_{j+1},\\ldots,g_{n+1})+(-1)^{n+1}F(g_1,\\ldots,g_n)$ for $n\\geq1$. Then $H^q(C^\\bullet(G,D(M)))=0$ for every $q>0$.",
- "source": {
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0DVG, label section-continuous-group-cohomology, final profinite comparison (coinduced acyclicity is an agent-written proof ingredient, not proved there)"
- },
- "stmt_deps": [
-  "lem-exc-discrete-modules-abelian",
-  "lem-exc-coinduced-discrete-embedding"
- ],
- "proof": [
-  {
-   "text": "Apply [lem-exc-coinduced-homotopy-identity] to obtain continuous linear differentials $d^n$ and contractions $h_{n+1}$ on $\\operatorname{LocallyConstant}(G^n,\\operatorname{LocallyConstant}(G,M))$, with their pointwise formulas and $d^nh_{n+1}+h_{n+2}d^{n+1}=1$. This statement already includes the continuous contractions, so no separate application of the continuity lemma is needed.",
-   "uses": [
-    "lem-exc-coinduced-homotopy-identity"
-   ],
-   "elementary": false,
-   "source": {
+  "kind": "statement",
+  "title": "Coinduced discrete modules are acyclic for continuous cochains",
+  "statement": "Let $G$ be a profinite group, $A$ a finite ring, and $M$ a left $A$-module with a continuous $A$-linear $G$-action when $M$ has the discrete topology [lem-exc-discrete-modules-abelian]. Let $D(M)=\\operatorname{Cont}(G,M)$ carry the discrete topology and the action $(h\\cdot f)(x)=f(xh)$; it is a discrete continuous $G$-module [lem-exc-coinduced-discrete-embedding]. Form the inhomogeneous complex $C^n(G,D(M))=\\operatorname{Cont}(G^n,D(M))$ with $d^0v(g)=g v-v$ and $d^nF(g_1,\\ldots,g_{n+1})=g_1F(g_2,\\ldots,g_{n+1})+\\sum_{j=1}^n(-1)^jF(g_1,\\ldots,g_jg_{j+1},\\ldots,g_{n+1})+(-1)^{n+1}F(g_1,\\ldots,g_n)$ for $n\\geq1$. Then $H^q(C^\\bullet(G,D(M)))=0$ for every $q>0$.",
+  "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0DVG, label section-continuous-group-cohomology, final profinite comparison"
-   }
+    "place": "Tag 0DVG, label section-continuous-group-cohomology, final profinite comparison (coinduced acyclicity is an agent-written proof ingredient, not proved there)"
   },
-  {
-   "text": "Postcompose cochains with the given coefficient equivalence $e_D$, and compose with $e_K$ to obtain linear equivalences $e_n:K^n\\simeq\\operatorname{LocallyConstant}(G^n,\\operatorname{LocallyConstant}(G,M))$. Evaluate the displayed differential formulas on a tuple and at $x\\in G$. The action compatibility $e_D(gf)(x)=e_D(f)(xg)$ identifies the leading terms, and linearity and evaluation commute with each alternating sum. Hence $e_{n+1}d_K^n=d^ne_n$. The homotopy of [lem-exc-coinduced-homotopy-identity] therefore applies to this realization of the cochain complex.",
-   "uses": [
+  "stmt_deps": [
+    "lem-exc-discrete-modules-abelian",
+    "lem-exc-coinduced-discrete-embedding"
+  ],
+  "proof": [
+    {
+      "text": "For each $n\\geq1$ define $h_n$ on an $n$-cochain $F$ by $h_n(F)(g_1,\\ldots,g_{n-1})(x)=F(x,g_1,\\ldots,g_{n-1})(1)$. Evaluation at $1$ and product precomposition preserve $A$-linearity; [lem-exc-coinduced-homotopy-continuous] proves that this formula is a continuous $(n-1)$-cochain with values in the discrete module $D(M)$.",
+      "uses": [
+        "lem-exc-coinduced-homotopy-continuous"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Tag 0DVG, label section-continuous-group-cohomology, final profinite comparison"
+      }
+    },
+    {
+      "text": "Expand $d^{n-1}h_nF$ and $h_{n+1}d^nF$ at $(g_1,\\ldots,g_n)$ and then at $x$. The term $(x\\cdot F(g_1,\\ldots,g_n))(1)=F(g_1,\\ldots,g_n)(x)$ survives and all others cancel in pairs, including the terms $F(xg_1,g_2,\\ldots,g_n)(1)$ and the final terms. Thus $d^{n-1}h_nF+h_{n+1}d^nF=F$ in $C^n(G,D(M))$ by [lem-exc-coinduced-homotopy-identity].",
+      "uses": [
+        "lem-exc-coinduced-homotopy-identity"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Tag 0DVG, label section-continuous-group-cohomology, final profinite comparison"
+      }
+    },
+    {
+      "text": "If $q>0$ and $F$ is a $q$-cocycle, then $d^qF=0$. The homotopy identity in degree $q$ gives $F=d^{q-1}(h_qF)$, so $F$ is a coboundary. Therefore $H^q(C^\\bullet(G,D(M)))=0$ for every $q>0$.",
+      "uses": [
+        "lem-exc-coinduced-homotopy-identity"
+      ],
+      "elementary": true,
+      "source": {
+        "document": "literature/stacks-project/etale-cohomology.tex",
+        "place": "Tag 0DVG, label section-continuous-group-cohomology, final profinite comparison"
+      }
+    }
+  ],
+  "proof_deps": [
+    "lem-exc-coinduced-homotopy-continuous",
     "lem-exc-coinduced-homotopy-identity"
-   ],
-   "elementary": true,
-   "source": {
+  ],
+  "proof_origin": {
+    "by": "agent",
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0DVG, label section-continuous-group-cohomology, final profinite comparison"
-   }
+    "place": "Tag 0DVG; explicit coinduced contracting homotopy"
   },
-  {
-   "text": "Write $q=p+1>0$. If $z\\in K^{p+1}$ satisfies $d_Kz=0$, the differential compatibility gives $d^{p+1}e_{p+1}(z)=0$. Apply [lem-exc-coinduced-homotopy-identity] to obtain $d^ph_{p+1}e_{p+1}(z)=e_{p+1}(z)$. Differential compatibility and injectivity of $e_{p+1}$ show that $e_p^{-1}h_{p+1}e_{p+1}(z)$ is a preimage of $z$ under $d_K^p$. Mathlib ShortComplex.moduleCat_exact_iff proves exactness at $q$, and HomologicalComplex.exactAt_iff_isZero_homology gives the desired zero homology.",
-   "uses": [
-    "lem-exc-coinduced-homotopy-identity"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0DVG, label section-continuous-group-cohomology, final profinite comparison"
-   }
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "continuous cohomology of coinduced discrete profinite group module vanishes",
+      "results": "HTTP 500 from LeanSearch on 2026-10-10.",
+      "date": "2026-10-10",
+      "verdict": "service unavailable; no match established"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Positive continuous cohomology of coinduced module continuous maps from profinite group vanishes by contracting homotopy",
+      "results": "continuousCohomology and homogeneousCochains in Mathlib.Algebra.Category.ContinuousCohomology.Basic (v4.28 index) for topological modules, but no coinduced discrete acyclicity theorem.",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "rg 'coinduc|coinduced|continuousCohomology.*zero' Mathlib/RepresentationTheory/Homological/ContCohomology Mathlib/RepresentationTheory/Continuous",
+      "results": "No coinduced acyclicity in ContCohomology; Continuous/Basic.lean:527-561 defines a compact-open coinduced representation, not a vanishing theorem for this discrete object.",
+      "date": "2026-10-10",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "item": "lem-exc-cochains-derived-invariants",
+    "by": "worker",
+    "date": "2026-10-10"
+  },
+  "chapter": "sec-curve-estimates",
+  "unit": "sk-prop-h2",
+  "split_report": {
+    "date": "2026-10-10",
+    "item": "lem-exc-coinduced-continuous-acyclic",
+    "worker": "stage1",
+    "summary": "Split the agent-written coinduced acyclicity claim into continuity of the explicit evaluation homotopy and its direct cochain identity, then used the identity to prove vanishing in every positive degree. Checked the exact inhomogeneous differential, endpoint cancellation, and continuity into the discrete coinduced module; no matching Lean or Mathlib declaration exists.",
+    "blueprint": "Realizes the final continuous-cochain comparison clause of def-exc-continuous-cohomology via the item route from lem-exc-cochains-derived-invariants.",
+    "tool_uses": []
+  },
+  "reviewed": {
+    "date": "2026-10-10",
+    "by": "L",
+    "reviewer": "R-cc2",
+    "group": "F1",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cc2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 14:48 return; all three points repaired: (1) lem-exc-coinduced-homotopy-continuous now self-contained (G profinite, A finite ring, M with open stabilizers, D(M)=Cont(G,M) discrete with right translation, C^n=Cont(G^n,D(M))), stmt_deps lem-exc-discrete-modules-abelian and lem-exc-coinduced-discrete-embedding, no citation of the item; (2) lem-exc-coinduced-homotopy-identity restates all objects, writes d^0 and d^n in full and h_n, cites the continuity node only for continuity of h_nF, does not cite the item; (3) both statements and the item's three steps in TeX, step 2 sentence replaced by the surviving term (x.F(g_1..g_n))(1)=F(g_1..g_n)(x). Source: Stacks 0DVG section-continuous-group-cohomology gives the inhomogeneous differential the item uses; contraction is agent-written as recorded. Read statements of lem-exc-discrete-modules-abelian (category of A-modules with open-stabilizer G-action) and lem-exc-coinduced-discrete-embedding (D(M) with (h.f)(x)=f(xh) is again such a module): they give the objects the three statements use. Step 1 carried by homotopy-continuous (A-linearity pointwise); step 2 by homotopy-identity; step 3 elementary from the identity with d^qF=0. Item diff vs sheaf-dag: only proof, proof_deps, proof_origin, split_report, status changed. Tested identity at n=1 by hand: d^0h_1F(g)(x)=F(xg)(1)-F(x)(1), h_2d^1F(g)(x)=F(g)(x)-F(xg)(1)+F(x)(1), sum F(g)(x); continuity: F locally constant on compact G^n factors through G^n/U^n for open normal U, so h_nF does. No Mathlib leaf; no coinduced declaration in slopmaster2 WeilConjectures (B10). Start Sat Oct 10 02:55:46 PM UTC 2026, end Sat Oct 10 02:56:09 PM UTC 2026."
+  },
+  "lean": {
+    "module": "Sheaf.RepresentationTheory.CoinducedContinuousAcyclic",
+    "declaration": "Rep.coinducedContinuousCochains_isZero",
+    "file": "lean/Sheaf/RepresentationTheory/CoinducedContinuousAcyclic.lean",
+    "statement": "theorem coinducedContinuousCochains_isZero (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] (A : Type v) [Ring A] [Finite A] (M : DiscreteContinuousRep.{v, u, w} A G) (D : DiscreteContinuousRep.{v, u, max u w} A G) (eD : D.obj.V ≃ₗ[A] LocallyConstant G M.obj.V) (hD : ∀ (h : G) (f : D.obj.V) (x : G), eD (D.obj.ρ h f) x = eD f (x * h)) (K : CochainComplex (ModuleCat.{max u w} A) ℕ) (eK : ∀ n : ℕ, K.X n ≃ₗ[A] LocallyConstant (Fin n → G) D.obj.V) (hd : ∀ (n : ℕ) (f : K.X n) (g : Fin (n + 1) → G), eK (n + 1) (K.d n (n + 1) f) g = D.obj.ρ (g 0) (eK n f (fun k ↦ g k.succ)) + ∑ k : Fin (n + 1), (-1 : ℤ) ^ (k.val + 1) • eK n f (Fin.contractNth k (· * ·) g)) : ∀ q : ℕ, 0 < q → IsZero ((HomologicalComplex.homologyFunctor (ModuleCat.{max u w} A) (ComplexShape.up ℕ) q).obj K)",
+    "branch": "sheaf-dag",
+    "by": "F1",
+    "date": "2026-10-11",
+    "existing": false
+  },
+  "reviewed_lean": {
+    "date": "2026-10-11",
+    "by": "L",
+    "reviewer": "AUTO",
+    "group": "F1",
+    "result": "pass",
+    "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
+  },
+  "lean_audit": {
+    "master": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    },
+    "slopmaster2": {
+      "state": "none",
+      "decls": [],
+      "missing": []
+    }
   }
- ],
- "proof_deps": [
-  "lem-exc-coinduced-homotopy-identity"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0DVG, label section-continuous-group-cohomology; K4 stage-3 Lean proof transports the stated coinduced homotopy to K and applies the module exactness criterion (2026-10-18)"
- },
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "continuous cohomology of coinduced discrete profinite group module vanishes",
-   "results": "HTTP 500 from LeanSearch on 2026-10-10.",
-   "date": "2026-10-10",
-   "verdict": "service unavailable; no match established"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Positive continuous cohomology of coinduced module continuous maps from profinite group vanishes by contracting homotopy",
-   "results": "continuousCohomology and homogeneousCochains in Mathlib.Algebra.Category.ContinuousCohomology.Basic (v4.28 index) for topological modules, but no coinduced discrete acyclicity theorem.",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "rg 'coinduc|coinduced|continuousCohomology.*zero' Mathlib/RepresentationTheory/Homological/ContCohomology Mathlib/RepresentationTheory/Continuous",
-   "results": "No coinduced acyclicity in ContCohomology; Continuous/Basic.lean:527-561 defines a compact-open coinduced representation, not a vanishing theorem for this discrete object.",
-   "date": "2026-10-10",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "item": "lem-exc-cochains-derived-invariants",
-  "by": "worker",
-  "date": "2026-10-10"
- },
- "chapter": "sec-curve-estimates",
- "unit": "sk-prop-h2",
- "split_report": {
-  "date": "2026-10-10",
-  "item": "lem-exc-coinduced-continuous-acyclic",
-  "worker": "stage1",
-  "summary": "Split the agent-written coinduced acyclicity claim into continuity of the explicit evaluation homotopy and its direct cochain identity, then used the identity to prove vanishing in every positive degree. Checked the exact inhomogeneous differential, endpoint cancellation, and continuity into the discrete coinduced module; no matching Lean or Mathlib declaration exists.",
-  "blueprint": "Realizes the final continuous-cochain comparison clause of def-exc-continuous-cohomology via the item route from lem-exc-cochains-derived-invariants.",
-  "tool_uses": []
- },
- "reviewed": {
-  "date": "2026-10-10",
-  "by": "L",
-  "reviewer": "R-cc2",
-  "group": "F1",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-cc2 (reviewer sub-agent of L); spot-checked: Repaired re-push after the 14:48 return; all three points repaired: (1) lem-exc-coinduced-homotopy-continuous now self-contained (G profinite, A finite ring, M with open stabilizers, D(M)=Cont(G,M) discrete with right translation, C^n=Cont(G^n,D(M))), stmt_deps lem-exc-discrete-modules-abelian and lem-exc-coinduced-discrete-embedding, no citation of the item; (2) lem-exc-coinduced-homotopy-identity restates all objects, writes d^0 and d^n in full and h_n, cites the continuity node only for continuity of h_nF, does not cite the item; (3) both statements and the item's three steps in TeX, step 2 sentence replaced by the surviving term (x.F(g_1..g_n))(1)=F(g_1..g_n)(x). Source: Stacks 0DVG section-continuous-group-cohomology gives the inhomogeneous differential the item uses; contraction is agent-written as recorded. Read statements of lem-exc-discrete-modules-abelian (category of A-modules with open-stabilizer G-action) and lem-exc-coinduced-discrete-embedding (D(M) with (h.f)(x)=f(xh) is again such a module): they give the objects the three statements use. Step 1 carried by homotopy-continuous (A-linearity pointwise); step 2 by homotopy-identity; step 3 elementary from the identity with d^qF=0. Item diff vs sheaf-dag: only proof, proof_deps, proof_origin, split_report, status changed. Tested identity at n=1 by hand: d^0h_1F(g)(x)=F(xg)(1)-F(x)(1), h_2d^1F(g)(x)=F(g)(x)-F(xg)(1)+F(x)(1), sum F(g)(x); continuity: F locally constant on compact G^n factors through G^n/U^n for open normal U, so h_nF does. No Mathlib leaf; no coinduced declaration in slopmaster2 WeilConjectures (B10). Start Sat Oct 10 02:55:46 PM UTC 2026, end Sat Oct 10 02:56:09 PM UTC 2026."
- },
- "lean": {
-  "module": "Sheaf.RepresentationTheory.CoinducedContinuousAcyclic",
-  "declaration": "Rep.coinducedContinuousCochains_isZero",
-  "file": "lean/Sheaf/RepresentationTheory/CoinducedContinuousAcyclic.lean",
-  "statement": "theorem coinducedContinuousCochains_isZero (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] (A : Type v) [Ring A] [Finite A] (M : DiscreteContinuousRep.{v, u, w} A G) (D : DiscreteContinuousRep.{v, u, max u w} A G) (eD : D.obj.V ≃ₗ[A] LocallyConstant G M.obj.V) (hD : ∀ (h : G) (f : D.obj.V) (x : G), eD (D.obj.ρ h f) x = eD f (x * h)) (K : CochainComplex (ModuleCat.{max u w} A) ℕ) (eK : ∀ n : ℕ, K.X n ≃ₗ[A] LocallyConstant (Fin n → G) D.obj.V) (hd : ∀ (n : ℕ) (f : K.X n) (g : Fin (n + 1) → G), eK (n + 1) (K.d n (n + 1) f) g = D.obj.ρ (g 0) (eK n f (fun k ↦ g k.succ)) + ∑ k : Fin (n + 1), (-1 : ℤ) ^ (k.val + 1) • eK n f (Fin.contractNth k (· * ·) g)) : ∀ q : ℕ, 0 < q → IsZero ((HomologicalComplex.homologyFunctor (ModuleCat.{max u w} A) (ComplexShape.up ℕ) q).obj K)",
-  "branch": "sheaf-dag",
-  "by": "F1",
-  "date": "2026-10-11",
-  "existing": false
- },
- "reviewed_lean": {
-  "date": "2026-10-11",
-  "by": "L",
-  "reviewer": "AUTO",
-  "group": "F1",
-  "result": "pass",
-  "note": "AUTO: landed after the second Codex reading and the tool's mechanical checks and compile; not read by a reviewer (tiered review, decision of the human 2026-10-11)"
- },
- "lean_audit": {
-  "master": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  },
-  "slopmaster2": {
-   "state": "none",
-   "decls": [],
-   "missing": []
-  }
- },
- "reviewed_proof": {
-  "date": "2026-10-18",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K4",
-  "result": "pass",
-  "landing": "20261018T062824-L-660680",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
 }
