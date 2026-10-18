@@ -67,6 +67,11 @@ theorem discreteModules_abelian
     (A : Type v) [Ring A] [Finite A] :
     ∃ (h : Abelian (Rep.DiscreteContinuousRep.{v, u, w} A G)),
       discreteModuleActionProperties.{u, v, w} A G h := by
-  sorry
+  obtain ⟨h, hF⟩ := Rep.discreteRep_abelian_structure.{v, u, w} A G
+  let := h
+  obtain ⟨hadd, hlim, hcolim, hexact⟩ := hF
+  let := hadd
+  refine ⟨h, inferInstance, ?_, hlim, hcolim, hexact⟩
+  exact (Rep.discreteContinuousRep_functorialInjectiveEmbeddings.{v, u, w} A G).2
 
 end CategoryTheory
