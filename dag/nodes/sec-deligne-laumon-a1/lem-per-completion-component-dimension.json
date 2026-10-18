@@ -237,5 +237,23 @@
   "group": "Q28",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-308d1f133 (reviewer sub-agent of L); spot-checked: I read the item, the new node, all 15 cited statements, ILO XIV 2.1.6 (pp. 210-211) and XIV 1.2.1-1.2.2 (p. 208), and Stacks 0AW2 (definition-formally-catenary), 0AW6 (proposition-ratliff) and topology definition-equidimensional. Statement: it matches ILO 2.1.6 exactly (forward implication with no extra hypothesis, converse under universal catenarity). Compared with the earlier unsplit version, the statement, stmt_deps, source and blueprint are unchanged; the only changes are the proof, proof_deps, status, split_report and appended searches. Steps: Step 1 identifies C_p with B/pB through the 00MA node and gets Noetherian, local and faithfully flat from the completion nodes. Step 2 is correct: by going down, a minimal q of B contracts to a minimal p, and q/pB is minimal in C_p. Step 3 is correct: by going down for A/p to C_p, a minimal prime of C_p contracts to 0, then the 00E0 node gives q0 = q. Step 4 uses Spec(R/I) = V(I) with the 00ES node and the topological = ring dimension node. Step 5 (forward) uses 07NV for A/p; a minimal prime of a 1-dimensional local ring is not its maximal ideal, so that component has dimension exactly 1, and no catenarity is used. Step 6 (converse) applies Ratliff to A, so Spec(B/pB) is equidimensional of dimension 1, hence dim C_p = 1, hence dim A/p = 1 by 07NV. The universal-catenarity hypothesis is used exactly there. New node lem-per-ratliff-formal-catenarity is a correct statement of Stacks 0AW6 with 0AW2 expanded inline ('finite' is automatic). It is statement-only, self-contained, cites its definition nodes, has logged searches, and its from/via are right. I found no duplicate after an rg for ratliff, formally catenary, 0AW2/0AW3/0AW6 and equidimensional and reading all 29 universally-catenary nodes; the closest is Greco's weakly-etale lemma, which is about a different map. Small cases tested: a field, an Artinian ring, a DVR, k[[x,y,z]]/(xy,xz), Nagata's non-universally-catenary domain (consistent with the converse needing the hypothesis) and analytically reducible domains (no bijection between components is claimed). Accepted tool_uses: three generic sk-thm-p1 completion nodes. No SGA 4 citation; the ILO SGA 1 reference is replaced by Stacks 00MA. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CompletionComponentDimension",
+  "declaration": "AlgebraicGeometry.completion_component_dimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompletionComponentDimension.lean",
+  "statement": "theorem completion_component_dimension (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] : ((∃ Z : Set (Spec (CommRingCat.of A)), Z ∈ irreducibleComponents (Spec (CommRingCat.of A)) ∧ topologicalKrullDim Z = (1 : WithBot ℕ∞)) → ∃ Z : Set (Spec (CommRingCat.of (AdicCompletion (IsLocalRing.maximalIdeal A) A))), Z ∈ irreducibleComponents (Spec (CommRingCat.of (AdicCompletion (IsLocalRing.maximalIdeal A) A))) ∧ topologicalKrullDim Z = (1 : WithBot ℕ∞)) ∧ (IsUniversallyCatenary A → ((∃ Z : Set (Spec (CommRingCat.of (AdicCompletion (IsLocalRing.maximalIdeal A) A))), Z ∈ irreducibleComponents (Spec (CommRingCat.of (AdicCompletion (IsLocalRing.maximalIdeal A) A))) ∧ topologicalKrullDim Z = (1 : WithBot ℕ∞)) → ∃ Z : Set (Spec (CommRingCat.of A)), Z ∈ irreducibleComponents (Spec (CommRingCat.of A)) ∧ topologicalKrullDim Z = (1 : WithBot ℕ∞)))",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6a77c1daa",
+  "group": "NB",
+  "result": "pass",
+  "note": "Statement matches ILO XIV 2.1.6 and the node clause by clause: forward implication with no extra hypothesis; converse under IsUniversallyCatenary A (def-exc-excellent-ring record); Noetherian local A in an arbitrary universe; completion is AdicCompletion (maximalIdeal A) A; components are irreducibleComponents with topologicalKrullDim of the subspace = 1. Only the item lean record is added; stmt_dep records are unchanged vs side. Public imports are what the statement uses, and every stated proof_dep module is a plain import (the Ratliff node has no lean record). Docstrings carry the source, blueprint tag and all six steps; lean.statement is verbatim; lines <=100; body is sorry only. nt_compile --json: clean in 2.4 s; a control with a broken identifier errors. No findings."
  }
 }
