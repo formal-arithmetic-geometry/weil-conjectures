@@ -1,11 +1,281 @@
 {
  "id": "lem-per-qbar-dual-recollement",
  "kind": "statement",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work first at a finite coefficient field $E$, with $R=\\mathcal O_E$, $A_n=R/\\varpi^n$, $B_W=\\varprojlim_n(A_n)_W$ and $\\mathcal I_W=D^b_c(W,R)$. A field is Noetherian (its only ideals are zero and one), so [lem-weil-pbc-finite-type-over-noetherian] makes $X$ Noetherian. A closed affine piece of $Z$ is a quotient of a finite-type $k$-algebra, hence has the images of its generators as generators; thus $Z$ is finite type over $k$ and Noetherian by the same lemma. By [lem-weil-pbc-noetherian-open-subscheme-noetherian], $U$ and its intersection with each affine open are Noetherian and quasi-compact. Hence $j$ is quasi-compact and is finite type by [lem-weil-pbc-qc-open-immersion-finite-type]; composing finite-type presentations gives $U$ finite type over $k$. By [lem-weil-pbc-separated-cancellation] the immersions $i,j$ are separated. Hence $Z$ and $U$ are separated over $k$: for $u=i,j$ with source $W$, $\\Delta_{W/k}$ is $\\Delta_{W/X}$ (an isomorphism, $u$ being a monomorphism) followed by $W\\times_XW\\to W\\times_kW$, the base change of the closed immersion $\\Delta_{X/k}$. So all later nodes requiring separated finite-type $k$-schemes and morphisms apply to $X,Z,U,i,j$. Apply [lem-fin-finite-type-fibre-dimension-bound] to the structure maps to obtain finite dimension, including dimension bound zero for the empty scheme. The characterization [lem-weil-pbc-integral-stratified-perfect-characterization] identifies the integral category used in the raw rational and common-stage definitions with the completed integral category of the operations, including its etale-origin witnesses and closure under cones. For $u=i,j$, [lem-sf-immersion-completed-pullback-comparison] identifies the specified completed pullback with exact ordinary module inverse image over $B_W$, preserving this integral category and its reduction maps. Thus ringed recollement can be applied over $B_X$, with the prescribed coefficients on $Z,U$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-fin-finite-type-fibre-dimension-bound",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-sf-immersion-completed-pullback-comparison",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "lem-weil-pbc-separated-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Sections 6.1 and 6.5, especially Remark 6.5.10; Proposition 6.6.11; Stacks Tags 01T6 and 0A3V for the geometric hypotheses"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-proetale-ringed-open-closed] to $B_X$. On module sheaves it gives exact $j_!,i_*$, the adjunction $j_!\\dashv j^*$, and the isomorphisms and zero composites $j^*j_!=1$, $i^*i_*=1$, $j^*i_*=0$, $i^*j_!=0$. Exact inverse image is already available in Step 1. By [lem-weil-pbc-exact-functor-derived-factorization] these four exact sheaf functors induce triangulated functors termwise on ordinary derived categories. The termwise adjunction and its unit and counit are given by [lem-weil-pbc-termwise-adjunction-homotopy]; [lem-sfb-adjunction-localization] descends this adjunction through quasi-isomorphism localization. The four displayed identities also descend, with the same units and counits, by [lem-weil-pbc-localization-universal-property]. The sheaf adjunction $i^*\\dashv i_*$ is [lem-weil-pbc-ringed-topoi-module-adjunction] applied to the coefficient isomorphism of Step 1; the same termwise and localization argument descends its unit and counit.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-termwise-adjunction-homotopy",
+    "lem-sfb-adjunction-localization",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 6.1.8–6.1.12; Stacks proetale.tex Tags 09AA (lemma-closed-immersion), 09BM (lemma-closed-immersion-complement-retrocompact-exact), 09BN (lemma-open-immersion), 09AG (lemma-jshriek-zero)"
+   }
+  },
+  {
+   "text": "The termwise $j_!$ just constructed is the compact-support operation in the statement. For an open immersion choose the compactification $(j,\\operatorname{id}_X)$; for a closed immersion choose $(\\operatorname{id}_Z,i)$. These give finite-level $j_!$ and $i_*$ respectively by [def-weil-integral-rational-qbar-compact-support]. The finite reductions have etale-origin witnesses by Step 1, so the comparisons with any other chosen compactification are available on exactly these objects by [prop-compactification-coherence-detailed]. By [det-sf-open-closed-extension-zero-limits], termwise $j_!$ commutes with sequential derived limits. Consequently its value on $L\\in\\mathcal I_U$ is the derived limit of the specified finite-level extension-by-zero tower, hence the integral $Rj_!L$. This belongs to $\\mathcal I_X$ by [lem-sf-integral-compact-support-constructible]. For $i$, the finite compact-support tower is literally the finite direct-image tower, so their integral derived limits agree: $Ri_!=Ri_*$. The latter belongs to $\\mathcal I_X$ by [lem-sf-integral-direct-image-constructible]. These comparisons use the tower transition maps of the compact-support definition, not an arbitrary choice of isomorphisms between cones. Moreover $i_*$ preserves countable products by its sheaf adjunction and [lem-weil-pbc-right-adjoint-preserves-limits]. Exactness makes its termwise derived functor triangulated (Step 2), so applying it to the reconstruction Roos triangle gives $i_*L\\cong R\\varprojlim_n i_*L_n$. This identifies the termwise $i_*$ of Step 2 with the adic $Ri_*$, preserving the projections and the ordinary adjunction maps. The needed derived products are termwise by [lem-weil-proetale-countable-products-exact] and clause 2 of [lem-weil-derived-limit-existence].",
+   "uses": [
+    "def-weil-integral-rational-qbar-compact-support",
+    "prop-compactification-coherence-detailed",
+    "det-sf-open-closed-extension-zero-limits",
+    "lem-sf-integral-compact-support-constructible",
+    "lem-sf-integral-direct-image-constructible",
+    "lem-weil-pbc-right-adjoint-preserves-limits",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-limit-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 6.1.13, 6.7.2, Definition 6.7.6 and Lemma 6.7.7; open and proper compactifications"
+   }
+  },
+  {
+   "text": "For a complex $M$ representing $K\\in\\mathcal I_X$, apply the short exact sequence of [lem-weil-pbc-proetale-ringed-open-closed] degree by degree. It gives a short exact sequence of complexes $0\\to j_!j^*M\\to M\\to i_*i^*M\\to0$. By [lem-weil-pbc-complex-ses-triangle] its counit and unit extend to a distinguished triangle. All vertices lie in the same integral constructible category by Steps 1–3; that full subcategory is closed under cones by [lem-weil-pbc-integral-stratified-perfect-characterization]. Thus this is a triangle in $\\mathcal I_X$. In the same way the four identities from Step 2 restrict to $\\mathcal I$, and the adjunction restricts because these are full subcategories and both of its functors preserve them.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-weil-pbc-integral-stratified-perfect-characterization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.1.12 and its proof, with completed ring coefficients; Stacks Tag 09AH (lemma-ses-associated-to-open) and derived-category short-exact-sequence triangles"
+   }
+  },
+  {
+   "text": "Pass to raw rationalization [def-weil-pbc-rational-category]. Every integral Hom bijection of Step 4 is $R$-linear, so tensoring it and its inverse with $E$ gives the adjunction on rational Hom groups; its unit and counit are the images of the integral ones. All the identities survive with their inverses. Triangles and triangulated exactness pass through the exact scalar localization [lem-weil-linear-scalar-localization-triangulated]. The same is true for the equality of compact and ordinary closed pushforward in Step 3, since the integral functors have the identical finite towers. No idempotent completion is inserted.",
+   "uses": [
+    "def-weil-pbc-rational-category",
+    "lem-weil-linear-scalar-localization-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(2): scalar localization of the integral operations and their adjunction maps"
+   }
+  },
+  {
+   "text": "For a finite extension $E\\subset F$, [lem-per-adic-exceptional-projection] supplies coherent scalar comparisons for pullback and both direct images, preserving the units and counits; in particular it supplies the comparison for $j_!$. The scalar functors and associators are exact by [prop-weil-pbc-scalar-extension]. Apply [lem-sbc-coherent-pair-functor-descent] to descend $j_!$ and the compatible maps of Steps 2–5 to the pair categories [def-weil-pbc-qbar-category]. The identity and tower equations required there are those in the two cited coefficient statements. Each distinguished triangle has a common-stage representative, so its image under $j_!$ is distinguished because the rational functor at that stage is exact. The first triangle of the item and the four identities from Step 2 therefore hold in $\\mathcal C$. The closed compact and ordinary pushforwards still agree, since their comparison is the identity of the same finite towers at every representing field.",
+   "uses": [
+    "lem-per-adic-exceptional-projection",
+    "prop-weil-pbc-scalar-extension",
+    "lem-sbc-coherent-pair-functor-descent",
+    "def-weil-pbc-qbar-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(1)–(2), Remark 6.8.15: passage to common finite coefficient stages"
+   }
+  },
+  {
+   "text": "For $L=(E,L_E)$ on $U$ and $K=(F,K_F)$ on $X$, the adjunction bijections of Step 5 at fields $M\\supset E,F$ intertwine the Hom transition maps: those maps are conjugation by the coherent scalar comparisons, and the units and counits are preserved by Step 6. By [lem-coef-qbar-adjunction-hom-descent] these bijections and their inverses induce inverse bijections on the filtered Hom colimits. These are exactly the Hom groups of [def-weil-pbc-qbar-category]. Their naturality on representatives gives a natural bijection $\\operatorname{Hom}_X(j_!L,K)\\cong\\operatorname{Hom}_U(L,j^*K)$. By [lem-weil-pbc-adjunction-of-natural-bijection] this defines $j_!\\dashv j^*$ with the descended unit and counit. Hence the first triangle in Step 6 has the required adjunction maps, not just maps isomorphic to them.",
+   "uses": [
+    "lem-coef-qbar-adjunction-hom-descent",
+    "def-weil-pbc-qbar-category",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14: explicit Hom-colimit verification of the open adjunction"
+   }
+  },
+  {
+   "text": "Apply [lem-per-qbar-ordinary-adjunction] to $i$ and $j$. It supplies $i^*\\dashv Ri_*$ and $j^*\\dashv Rj_*$ on exactly $\\mathcal C$, and proves that these four functors are exact triangulated and preserve bounded constructibility. Apply [lem-per-qbar-arbitrary-field-duality] to $i,j$: its dual functors are exact anti-equivalences, its evaluation bidual maps $\\delta_W:1\\xrightarrow{\\sim}D_W^2$ are natural, and its exchanges give $D_Xj_!\\cong Rj_*D_U$ and, by $Ri_!=Ri_*$ from Step 6, $D_XRi_*\\cong Ri_*D_Z$. Thus $i^!=D_Zi^*D_X$ also preserves bounded constructibility and is exact triangulated (two contravariant exact functors reverse shifts twice). In subsequent formulas use the given evaluation bidual maps for every double-dual identification. From now on $\\eta,\\varepsilon$ denote the unit and counit of this cited $i^*\\dashv Ri_*$. The middle arrow $\\eta^0_K$ of the first triangle of Step 6 is the descended sheaf unit; by the cited bijection $\\eta^0_K=Ri_*(\\gamma_K)\\circ\\eta_K$ with $\\gamma_K=\\varepsilon_{i^*K}\\circ i^*\\eta^0_K$. Step 12 shows that $\\gamma_K$ is invertible, so the triangle with middle arrow $\\eta_K$ and third arrow precomposed with $Ri_*\\gamma_K$ is isomorphic to it, hence distinguished. This is the first triangle meant below.",
+   "uses": [
+    "lem-per-qbar-ordinary-adjunction",
+    "lem-per-qbar-arbitrary-field-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 6.7.19–6.7.20 and Remark 6.8.15, with the relative arbitrary-field normalization fixed by the cited duality node"
+   }
+  },
+  {
+   "text": "For $M\\in\\mathcal C_U$ and $K\\in\\mathcal C_X$ there are natural bijections\n$$\\operatorname{Hom}_U(M,j^*D_XK)\\cong\\operatorname{Hom}_X(j_!M,D_XK)\\cong\\operatorname{Hom}_X(K,D_Xj_!M)\\cong\\operatorname{Hom}_X(K,Rj_*D_UM)\\cong\\operatorname{Hom}_U(j^*K,D_UM)\\cong\\operatorname{Hom}_U(M,D_Uj^*K).$$\nUse Step 7, the anti-equivalence and evaluation biduality of [lem-per-qbar-arbitrary-field-duality], its open exchange, and [lem-per-qbar-ordinary-adjunction], in that order. The duality bijection sends $a:A\\to DB$ to $D(a)\\delta_B:B\\to DA$ and is invertible because $D$ is fully faithful and $\\delta_B$ is invertible. The displayed natural Hom bijection defines $j^*D_XK\\cong D_Uj^*K$: apply it to the identity of the first representing object and apply its inverse to the identity of the second; naturality makes the two composites identities. This also fixes the comparison as the adjoint mate of the open exchange.",
+   "uses": [
+    "lem-per-qbar-arbitrary-field-duality",
+    "lem-per-qbar-ordinary-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent mate argument from the exchanges of Lemmas 6.7.19–6.7.20; open restriction of duality"
+   }
+  },
+  {
+   "text": "Similarly for $L\\in\\mathcal C_Z$ and $K\\in\\mathcal C_X$, [lem-per-qbar-arbitrary-field-duality] and [lem-per-qbar-ordinary-adjunction] give\n$$\\operatorname{Hom}_X(Ri_*L,K)\\cong\\operatorname{Hom}_X(D_XK,D_XRi_*L)\\cong\\operatorname{Hom}_X(D_XK,Ri_*D_ZL)\\cong\\operatorname{Hom}_Z(i^*D_XK,D_ZL)\\cong\\operatorname{Hom}_Z(L,D_Zi^*D_XK).$$\nThese bijections are natural, so [lem-weil-pbc-adjunction-of-natural-bijection] gives $Ri_*\\dashv i^!$ for exactly the defined functor $i^!$. Define its unit and counit by the identity-image formulas in that node. In particular the closed exchange used here identifies the dual of the unit $K\\to Ri_*i^*K$ with the counit $Ri_*i^!D_XK\\to D_XK$: both transpose to the identity after these same bijections.",
+   "uses": [
+    "lem-per-qbar-arbitrary-field-duality",
+    "lem-per-qbar-ordinary-adjunction",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Agent Hom-adjunction argument from the closed exchange and biduality; Lemmas 6.7.19–6.7.20"
+   }
+  },
+  {
+   "text": "By definition $D_Zi^!K=D_ZD_Zi^*D_XK$. The bidual map of [lem-per-qbar-arbitrary-field-duality], applied to $i^*D_XK$, is therefore the required natural isomorphism $i^*D_XK\\xrightarrow{\\sim}D_Zi^!K$. Equivalently, the definition also gives $i^!D_XK\\cong D_Zi^*K$ after cancelling $D_X^2$. These identifications will identify the closed term after dualizing the first triangle.",
+   "uses": [
+    "lem-per-qbar-arbitrary-field-duality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Evaluation biduality in Lemma 6.7.20, applied to the definition of exceptional restriction"
+   }
+  },
+  {
+   "text": "Let $L\\dashv R$ have unit $\\eta$, counit $\\varepsilon$, and let $\\phi:T=RL\\xrightarrow{\\sim}1$ be any natural isomorphism; put $\\mu=R\\varepsilon L$. Naturality of $\\phi$ gives $Tf=\\phi^{-1}f\\phi$, so $T\\phi_X=\\phi_{TX}$ and $T\\eta_X=\\phi_{TX}^{-1}\\eta_X\\phi_X$. Naturality of $\\eta$ along $\\phi_X$ gives $\\eta_X\\phi_X=\\phi_{TX}\\eta_{TX}$, hence $\\eta_{TX}=T\\eta_X$. A triangle identity of [lem-weil-pbc-adjunction-of-natural-bijection] gives $\\mu_X\\eta_{TX}=1$, and naturality of $\\eta$ along $\\mu_X$ gives $\\eta_{TX}\\mu_X=T\\mu_X\\,\\eta_{TTX}=T\\mu_X\\,T\\eta_{TX}=1$. Thus $T\\eta_X$ is invertible, and so is $\\eta_X=\\phi_{TX}(T\\eta_X)\\phi_X^{-1}$. Dually, any natural isomorphism $LR\\cong1$ makes $\\varepsilon$ invertible. Apply this to $j_!\\dashv j^*$ of Step 7 with $j^*j_!\\cong1$ of Step 6: its unit is invertible. Apply the dual to $i^*\\dashv Ri_*$ of [lem-per-qbar-ordinary-adjunction] (Step 8) with $i^*Ri_*\\cong1$ of Step 6: its counit $\\varepsilon$ is invertible. Applying the exact $i^*$ to the first triangle of Step 6, its first vertex is $i^*j_!j^*K=0$, so $i^*\\eta^0_K$ is invertible; hence $\\gamma_K=\\varepsilon_{i^*K}\\,i^*\\eta^0_K$ of Step 8 is invertible. So the identities $j^*j_!\\cong1$ and $i^*Ri_*\\cong1$ are given by the adjunction maps.",
+   "uses": [
+    "lem-per-qbar-ordinary-adjunction",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.1.12(1) (identities as adjunction maps); agent-written categorical argument"
+   }
+  },
+  {
+   "text": "First $j_!$ is fully faithful: Step 7 identifies $\\operatorname{Hom}_X(j_!L,j_!M)$ with $\\operatorname{Hom}_U(L,j^*j_!M)=\\operatorname{Hom}_U(L,M)$, using the unit isomorphism from Step 12. The exchange and biduality of [lem-per-qbar-arbitrary-field-duality] give $Rj_*\\cong D_Xj_!D_U$, so $Rj_*$ is fully faithful too. For every $M$, [lem-per-qbar-ordinary-adjunction] now identifies $\\operatorname{Hom}_U(j^*Rj_*L,M)$ with $\\operatorname{Hom}_X(Rj_*L,Rj_*M)=\\operatorname{Hom}_U(L,M)$. Precomposition with the actual counit $j^*Rj_*L\\to L$ is this bijection, since its adjunction transpose sends $h:L\\to M$ to $Rj_*h$. Applying the bijection and its inverse to identities gives an inverse of that counit. Thus $j^*Rj_*\\cong1$ by the adjunction map. The identities $j^*j_!\\cong1$, $i^*Ri_*\\cong1$, $j^*Ri_*=0$ and $i^*j_!=0$ were obtained in Steps 2–7, as adjunction maps in Step 12.",
+   "uses": [
+    "lem-per-qbar-arbitrary-field-duality",
+    "lem-per-qbar-ordinary-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.1.12(1); full faithfulness through the Verdier exchange of Lemmas 6.7.19–6.7.20"
+   }
+  },
+  {
+   "text": "To check the exceptional unit $L\\to i^!Ri_*L$, first note that $Ri_*$ is fully faithful: for $M,L$, [lem-per-qbar-ordinary-adjunction] identifies $\\operatorname{Hom}_X(Ri_*M,Ri_*L)$ with $\\operatorname{Hom}_Z(i^*Ri_*M,L)=\\operatorname{Hom}_Z(M,L)$, using the ordinary counit isomorphism of Step 12. The right adjunction of Step 10 now identifies $\\operatorname{Hom}_Z(M,i^!Ri_*L)$ with $\\operatorname{Hom}_X(Ri_*M,Ri_*L)=\\operatorname{Hom}_Z(M,L)$. Under these bijections postcomposition with the actual unit $L\\to i^!Ri_*L$ is the fully faithful map on Hom groups: its transpose sends $h:M\\to L$ to $Ri_*h$. The identity-image inverse argument of Step 9 shows that this unit is an isomorphism. Its inverse gives the displayed $i^!Ri_*\\cong1$. This proves the assertion about the adjunction map, as well as the object isomorphism obtained by cancelling the double dual in the closed exchange.",
+   "uses": [
+    "lem-per-qbar-ordinary-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.1.16: full faithfulness and the right-adjunction unit"
+   }
+  },
+  {
+   "text": "For $M\\in\\mathcal C_Z$ and $L\\in\\mathcal C_U$, the two right adjunctions give\n$$\\operatorname{Hom}_Z(M,i^!Rj_*L)\\cong\\operatorname{Hom}_X(Ri_*M,Rj_*L)\\cong\\operatorname{Hom}_U(j^*Ri_*M,L)=0.$$\nHere use Step 10, [lem-per-qbar-ordinary-adjunction] and $j^*Ri_*=0$ from Step 6. Taking $M=i^!Rj_*L$ makes its identity zero, so $i^!Rj_*L$ is a zero object. Naturality of the adjunctions gives the asserted zero functor.",
+   "uses": [
+    "lem-per-qbar-ordinary-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.1.16: orthogonality of closed support and open direct image"
+   }
+  },
+  {
+   "text": "Apply the exact contravariant functor $D_X$ of [lem-per-qbar-arbitrary-field-duality] to the first triangle for $D_XK$ from Steps 6 and 8. Reverse its order with the signed dual-triangle convention. Its terms identify as\n$$D_XRi_*i^*D_XK\\cong Ri_*D_Zi^*D_XK=Ri_*i^!K,\\quad D_X^2K\\cong K,$$\n$$D_Xj_!j^*D_XK\\cong Rj_*D_Uj^*D_XK\\cong Rj_*j^*K.$$\nThe last identification uses Step 9 and biduality. Hence one obtains the second distinguished triangle of the item. The first arrow is the counit of Step 10, as checked there with the unit of the original triangle. The second arrow is the unit for $j^*\\dashv Rj_*$: the mate comparison in Step 9 was defined using that very adjunction, so its transpose is the identity of $j^*K$, as was the transpose of the original open counit. Thus both triangles use the required adjunction maps.",
+   "uses": [
+    "lem-per-qbar-arbitrary-field-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 6.1.12, 6.1.16 and 6.7.20: dual of the open–closed triangle, with its adjunction-map normalization"
+   }
+  },
+  {
+   "text": "All comparisons in Steps 8–16 commute with shifts and finite coefficient extension. Indeed [lem-per-qbar-arbitrary-field-duality] supplies this for biduality and exchange, [lem-per-qbar-ordinary-adjunction] for ordinary adjunctions, and Step 7 for the open adjunction. Each new comparison was defined by composing these Hom bijections or by evaluating $\\delta$, so applying a coefficient transition or the signed shift identification gives the same composite bijection. Its values on identities agree; the identity-image inverse construction then makes the induced representing-object isomorphisms agree as well. This verifies the stated compatibility for the two dual restriction isomorphisms and the defined exceptional functor, rather than selecting unrelated objectwise isomorphisms.",
+   "uses": [
+    "lem-per-qbar-arbitrary-field-duality",
+    "lem-per-qbar-ordinary-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14, Remark 6.8.15, and naturality of evaluation and adjunction mates"
+   }
+  },
+  {
+   "text": "Finally [lem-per-adic-heart-pullback-fibres] says that $i^*,j^*$ are exact triangulated and preserve the standard heart, and that the standard t-structures are bounded. Thus they are t-exact: build an object in either bounded half from its finitely many shifted cohomology objects using truncation triangles; the images of those shifts remain in the same half, which is extension closed. Applying pullback to a truncation triangle gives the truncation triangle of the pulled-back object, by its defining bounds and orthogonality. Consequently $u^*\\mathcal H^rK\\cong\\mathcal H^r(u^*K)$ for $u=i,j$. On a geometric point $\\bar w$ of $Z$ or $U$, the fibre comparison in that same cited node is $(u^*\\mathcal F)_{\\bar w}\\cong\\mathcal F_{u\\bar w}$. This is precisely restriction of the geometric fibres, and it is compatible with the common finite coefficient stages as stated there. Empty $U$ or $Z$ gives the zero category and the identity triangle on the other piece, so no nonempty-stratum assumption has entered the proof.",
+   "uses": [
+    "lem-per-adic-heart-pullback-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14 and Remark 6.8.15: standard cohomology and restricted geometric fibres"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-sf-immersion-completed-pullback-comparison",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-sfb-adjunction-localization",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-weil-integral-rational-qbar-compact-support",
+  "prop-compactification-coherence-detailed",
+  "det-sf-open-closed-extension-zero-limits",
+  "lem-sf-integral-compact-support-constructible",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-weil-pbc-right-adjoint-preserves-limits",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-existence",
+  "lem-weil-pbc-complex-ses-triangle",
+  "def-weil-pbc-rational-category",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "lem-per-adic-exceptional-projection",
+  "prop-weil-pbc-scalar-extension",
+  "lem-sbc-coherent-pair-functor-descent",
+  "def-weil-pbc-qbar-category",
+  "lem-coef-qbar-adjunction-hom-descent",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-per-qbar-ordinary-adjunction",
+  "lem-per-qbar-arbitrary-field-duality",
+  "lem-per-adic-heart-pullback-fibres",
+  "lem-weil-pbc-separated-cancellation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 6.1.8–6.1.16, Remark 6.5.10, Sections 6.7–6.8; agent synthesis on the exact common-stage categories, using canonical adjunction mates for the dual identities."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-qbar-middle-tstructure",
@@ -66,17 +336,146 @@
    "results": "AlgebraicGeometry.Scheme.Modules.instFullPushforward; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; SheafOfModules.pushforwardPushforwardAdj; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; CategoryTheory.Functor.complete_distinguished_essImageDistTriang_morphism; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open closed recollement in bounded constructible adic derived categories with Verdier duality and extraordinary inverse image",
+   "results": "{\"t\": \"2026-10-18T10:57:21Z\", \"tool\": \"leanfinder\", \"query\": \"Open closed recollement in bounded constructible adic derived categories with Verdier duality and extraordinary inverse image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"localCohomology.diagram\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\", \"DerivedCategory.exists_iso_Q_obj_of_isLE\", \"DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE\", \"DerivedCategory.instIsGEObjSingleFunctor\"], \"digest\": \"d4d66af0a7d11ade\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: results are generic triangulated localization or structure-sheaf module restriction, not constructible adic recollement or Verdier duality"
+  },
+  {
+   "tool": "grep",
+   "query": "recollement|Recollement|Verdier|exceptionalPullback",
+   "results": "{\"t\": \"2026-10-18T10:57:30Z\", \"tool\": \"grep\", \"query\": \"recollement|Recollement|Verdier|exceptionalPullback\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean\", \"Mathlib/CategoryTheory/Shift/CommShift.lean\", \"Mathlib/CategoryTheory/Shift/CommShift.lean\", \"Mathlib/Algebra/Homology/SpectralObject/Page.lean\", \"Mathlib/Algebra/Homology/SpectralObject/Basic.lean\", \"Mathlib/Algebra/Homology/SpectralObject/Cycles.lean\", \"Mathlib/Algebra/Homology/SpectralObject/EpiMono.lean\"], \"digest\": \"220506d5f5aa8927\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: results are generic triangulated localization or structure-sheaf module restriction, not constructible adic recollement or Verdier duality"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"recollement\"",
+   "results": "{\"t\": \"2026-10-18T10:57:31Z\", \"tool\": \"loogle\", \"query\": \"\\\"recollement\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: results are generic triangulated localization or structure-sheaf module restriction, not constructible adic recollement or Verdier duality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Verdier duality localization triangle open closed constructible adic sheaves",
+   "results": "{\"t\": \"2026-10-18T10:57:31Z\", \"tool\": \"leansearch\", \"query\": \"Verdier duality localization triangle open closed constructible adic sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Triangulated.Localization.isTriangulated\", \"CategoryTheory.Triangulated.Localization.isTriangulated_functor\", \"CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization\", \"CategoryTheory.Triangulated.Localization.pretriangulated\", \"CategoryTheory.Triangulated.Localization.instIsTriangulatedLocalization'\", \"CompHausLike.LocallyConstant.adjunction_left_triangle\", \"CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle\", \"CategoryTheory.Triangulated.Localization.instPretriangulatedLocalization\"], \"digest\": \"71bba86f374702b1\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: results are generic triangulated localization or structure-sheaf module restriction, not constructible adic recollement or Verdier duality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fully faithful extension by zero and closed pushforward for constructible ell adic sheaves, inverse image commutes with Verdier duality on an open subscheme",
+   "results": "{\"t\": \"2026-10-18T10:57:50Z\", \"tool\": \"leanfinder\", \"query\": \"Fully faithful extension by zero and closed pushforward for constructible ell adic sheaves, inverse image commutes with Verdier duality on an open subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\"], \"digest\": \"01276628fab80d3d\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: results are generic triangulated localization or structure-sheaf module restriction, not constructible adic recollement or Verdier duality"
   }
  ],
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Blueprint Step 2: the perverse truncation functors and extension closure; the open/closed gluing underlying their construction in BBD 1.4.10.",
+   "place": "Step 2, middle perverse truncation functors and extension closure, and Step 3, boundary contribution via the open–closed recollement triangle; the supporting open/closed gluing and duality identities on the exact common-stage categories.",
    "via": [
     "lem-per-qbar-middle-tstructure"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-qbar-dual-recollement",
+  "worker": "stage1",
+  "summary": "Separated the completed integral recollement construction, rationalization and coherent common-stage descent from the formal duality argument. Reused existing ringed recollement, immersion comparison, limit, scalar, adjunction and relative duality nodes. No new nodes and no statement change. Checked actual units/counits in both triangles and the exceptional identities.",
+  "blueprint": "Realizes the open/closed gluing behind Step 2 (middle perverse truncations and extension closure), and the boundary recollement named in Step 3 of lem-per-artin-gabber-affine-curve.proof.md. The current unit record provides the ordinary-cohomology truncation construction; no unit or chapter route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-fin-finite-type-fibre-dimension-bound",
+    "why": "Generic Uniform dimension bound for fibres of a finite-type morphism: used only for the completed integral or categorical infrastructure of open/closed gluing; the perverse unit has no separate statement providing this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Generic Stratified perfect description of the integral completed category: used only for the completed integral or categorical infrastructure of open/closed gluing; the perverse unit has no separate statement providing this ingredient."
+   },
+   {
+    "node": "lem-sf-immersion-completed-pullback-comparison",
+    "why": "Generic Ordinary immersion pullback agrees with quotient-tower completed pullback: used only for the completed integral or categorical infrastructure of open/closed gluing; the perverse unit has no separate statement providing this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic Ringed pro-etale open-closed localization: used only for the completed integral or categorical infrastructure of open/closed gluing; the perverse unit has no separate statement providing this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Generic An adjunction of additive functors induces an adjunction on the homotopy categories of complexes, termwise: used only for the completed integral or categorical infrastructure of open/closed gluing; the perverse unit has no separate statement providing this ingredient."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic Module pullback and pushforward adjunction on arbitrary ringed topoi: used only for the completed integral or categorical infrastructure of open/closed gluing; the perverse unit has no separate statement providing this ingredient."
+   },
+   {
+    "node": "prop-compactification-coherence-detailed",
+    "why": "Generic Compactification coherence: used only for the completed integral or categorical infrastructure of open/closed gluing; the perverse unit has no separate statement providing this ingredient."
+   },
+   {
+    "node": "det-sf-open-closed-extension-zero-limits",
+    "why": "Generic Extension by zero preserves products and derived limits: used only for the completed integral or categorical infrastructure of open/closed gluing; the perverse unit has no separate statement providing this ingredient."
+   },
+   {
+    "node": "lem-sf-integral-compact-support-constructible",
+    "why": "Generic The integral compact-support direct image of a constructible complex is constructible: used only for the completed integral or categorical infrastructure of open/closed gluing; the perverse unit has no separate statement providing this ingredient."
+   },
+   {
+    "node": "lem-sf-integral-direct-image-constructible",
+    "why": "Generic The integral derived direct image of a constructible complex along a finite-type morphism is constructible: used only for the completed integral or categorical infrastructure of open/closed gluing; the perverse unit has no separate statement providing this ingredient."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic Countable products of pro-etale modules are exact: used only for the completed integral or categorical infrastructure of open/closed gluing; the perverse unit has no separate statement providing this ingredient."
+   },
+   {
+    "node": "lem-weil-derived-limit-existence",
+    "why": "Generic Existence and computation of derived limits: used only for the completed integral or categorical infrastructure of open/closed gluing; the perverse unit has no separate statement providing this ingredient."
+   },
+   {
+    "node": "lem-weil-linear-scalar-localization-triangulated",
+    "why": "Generic The scalar localization of a linear triangulated category is triangulated: used only for the completed integral or categorical infrastructure of open/closed gluing; the perverse unit has no separate statement providing this ingredient."
+   },
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Generic Compatibility with finite scalar extension: used only for the completed integral or categorical infrastructure of open/closed gluing; the perverse unit has no separate statement providing this ingredient."
+   },
+   {
+    "node": "lem-sbc-coherent-pair-functor-descent",
+    "why": "Generic Coherent functors and transformations on common-stage pair categories: used only for the completed integral or categorical infrastructure of open/closed gluing; the perverse unit has no separate statement providing this ingredient."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-sf-immersion-completed-pullback-comparison",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "prop-compactification-coherence-detailed",
+  "det-sf-open-closed-extension-zero-limits",
+  "lem-sf-integral-compact-support-constructible",
+  "lem-sf-integral-direct-image-constructible",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-existence",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "prop-weil-pbc-scalar-extension",
+  "lem-sbc-coherent-pair-functor-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-N6-980a30ac4",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-980a30ac4 (reviewer sub-agent of L); spot-checked: Read in full: the item, all 32 dependency statements, unit sk-p-dl-a1-perverse, the main-20261015 blueprint text of lem-per-artin-gabber-affine-curve (Steps 2 and 3, the correct from.place), and Bhatt-Scholze Lemmas 6.1.9-6.1.16, 6.7.19 and 6.7.20. The statement is unchanged and true. Small cases checked: U or Z empty, clopen X, K=j_!L or Ri_*L, X=Spec k. No cycle, no new nodes, no SGA. The off-unit tool uses are generic infrastructure and I accept them. prop-sf-open-closed-triangle-all-stages is not a duplicate: it is over the finite-field datum and gives only the first triangle. Three repairs, all in the item's proof (fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-qbar-dual-recollement.json; only proof and proof_deps changed). (1) E1/C1, Step 1: separatedness of Z, U, i and j is required by the duality, ordinary-adjunction, exceptional-projection and heart-fibre nodes but was never shown. I added [lem-weil-pbc-separated-cancellation] and the diagonal factorization. (2) C4/E5: the statement says the adjunction maps give j^*j_!≅1 and i^*Ri_*≅1, but the cited nodes (and BS 6.1.12) give only abstract isomorphisms, and the old Steps 12-13 called them the unit and counit. New Step 12 writes out the standard argument that an abstract RL≅1 makes the unit invertible (dually for the counit). (3) Steps 8 and 12: the first triangle used the descended sheaf unit, while Steps 10, 14 and 16 used the existence-only adjunction of lem-per-qbar-ordinary-adjunction. Step 8 now writes the descended unit as Ri_*(γ) composed with the cited unit, and Step 12 proves γ invertible, so the triangle with the cited unit is distinguished. Cross-references renumbered in Steps 13, 15, 16 and 17; every step is at most 2000 characters and proof_deps equals the union of uses. Advisory only: Step 7 assumes the scalar comparisons for j_! and j^* carry the termwise unit and counit. I accept this as the canonical identification j^!=j^* (restriction commutes strictly with tensoring by O_L).; 1 file(s) fixed by the reviewer"
  }
 }
