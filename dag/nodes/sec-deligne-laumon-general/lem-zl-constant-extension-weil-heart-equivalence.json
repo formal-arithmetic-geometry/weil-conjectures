@@ -15,9 +15,157 @@
   "def-weil-punctual-weights",
   "def-weil-frobenius-detailed"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $Y=X_{0,m}\\times_{k_0}k$ and $H=\\operatorname{id}_{X_{0,m}}\\times\\operatorname{Spec}(\\gamma)$. The extension $k_m/k_0$ is Galois with cyclic Frobenius group of order $m$. Apply the finite Galois tensor decomposition with $E=k_m$, $L=k_0$, and then extend its first factor from $k_m$ to $k$. It gives $k_m\\otimes_{k_0}k\\simeq\\prod_{\\sigma:k_m\\hookrightarrow k}k$. Base changing $X_0$ therefore decomposes $Y$ into $m$ open-and-closed sheets. Let $j_0:X\\to Y$ denote the inclusion corresponding to $k_m\\subset k$, and put $h_i=H^i j_0$ for $0\\leq i<m$. Frobenius acts transitively on the embeddings, so these are precisely the sheets. Directly on tensor coordinates, $H^m j_0=j_0 g_X^m$. The latter map is geometric Frobenius for the $k_m$-model. The maps $h_i$ are isomorphisms onto their sheets as schemes; for $i>0$ they need not be $k$-linear.",
+   "uses": [
+    "def-weil-finite-field-fiber",
+    "def-weil-frobenius-detailed",
+    "lem-sfb-finite-field-galois-frobenius",
+    "lem-exc-finite-galois-algebra-tensor-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.7), pp.150–151; paragraph following (1.1.10), p.152: change of finite base field and geometric disjoint union"
+   }
+  },
+  {
+   "text": "Restriction to the sheets decomposes the bounded constructible categories and their cohomology componentwise, including at $\\Qlb$ coefficients, by the finite-clopen decomposition. Pullback by each sheet isomorphism and its inverse is an exact inverse-image equivalence at finite and integral coefficients. Its derived pullback is that inverse image. Rationalization extends these functors and their inverse identities, and the common-stage construction extends them to $\\Qlb$. Consequently these identifications preserve the standard heart and its kernels and cokernels. This applies also to the semilinear automorphism $g_X$; write $P=Lg_X^*$ on the heart. Thus $P$ and every $h_i^*$ used below are exact equivalences. No assertion of $k$-linearity of $h_i$ is needed.",
+   "uses": [
+    "lem-pur-finite-clopen-derived-decomposition",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-weil-isomorphism-derived-pullback",
+    "lem-pur-semilinear-scalar-localization",
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-constructible-heart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 04TS, sites-lemma-mapping-property-glue; coefficient and derived enhancements are the cited finite-clopen and isomorphism-pullback statements"
+   }
+  },
+  {
+   "text": "For $(N,\\eta)$ in $W_{k_0}(X_{0,m})$, set $A_i=h_i^*N$. The canonical pullback-composition comparisons and step 1 identify its Weil map with arrows $a_i:A_{i+1}\\xrightarrow{\\sim}A_i$ for $i<m-1$ and $a_{m-1}:P^m A_0\\xrightarrow{\\sim}A_{m-1}$. Send this tuple to $(A_0,\\phi)$, where $\\phi=a_0\\circ\\cdots\\circ a_{m-1}:P^m A_0\\xrightarrow{\\sim}A_0$; on morphisms use the component on sheet zero. This is a $k_m$-Weil sheaf because its geometric Frobenius is $g_X^m$. Conversely, from $(A,\\phi)$ form the tuple $A_i=A$, $a_i=\\operatorname{id}$ for $i<m-1$, $a_{m-1}=\\phi$, and glue it by the inverse of the clopen equivalence in step 2. On the actual sheets these are the successive Frobenius translates of $A$. A morphism $u$ commuting with the return map gives the componentwise morphism $u_i=u$ of these tuples, including the last arrow by $u\\phi=\\phi'P^m(u)$. This defines the inverse functor explicitly.",
+   "uses": [
+    "def-weil-weil-sheaf-complex",
+    "lem-pod-integral-pullback-composition",
+    "lem-pur-semilinear-scalar-localization",
+    "lem-pur-finite-clopen-derived-decomposition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "p.152, paragraph following (1.1.10): invariance of Weil sheaves under changing the finite base field, expanded into transition arrows"
+   }
+  },
+  {
+   "text": "The return functor followed by this construction is the identity on $(A,\\phi)$. For an arbitrary cyclic tuple, define $r_0=\\operatorname{id}$ and $r_i=a_0\\circ\\cdots\\circ a_{i-1}:A_i\\xrightarrow{\\sim}A_0$ for $1\\leq i<m$. These give an isomorphism from the tuple to the normalized tuple of its return: $r_i a_i=r_{i+1}$ for $i<m-1$, while $r_{m-1}a_{m-1}=\\phi P^m(r_0)$. If $u_i$ is a morphism of tuples, its commuting squares imply $r_i' u_i=u_0 r_i$ by induction on $i$, proving naturality. Hence the two functors are quasi-inverse. For $m=1$ there are no intermediate arrows and both functors are the identity.",
+   "uses": [
+    "def-weil-weil-sheaf-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "p.152, change-of-base-field paragraph: explicit unit, counit and naturality calculation"
+   }
+  },
+  {
+   "text": "The underlying constructible hearts are abelian. Because $P$ is exact, kernels and cokernels of commuting Weil morphisms inherit invertible Weil maps: apply $P$ to the kernel (respectively cokernel) universal diagram and use the two original invertible structure maps to identify its universal object. Their universal properties then hold in the category of pairs, since the underlying factorization is unique and the commuting equation follows after composing with the kernel inclusion or cokernel projection. Thus exactness of a Weil sequence is detected on its underlying sheaves. The restriction and normalized inverse above are componentwise exact by step 2, so the equivalence is exact. It carries monomorphisms, their quotients, and finite chains to the corresponding ones; using the inverse gives all subobjects and filtrations in either direction.",
+   "uses": [
+    "prop-weil-heart-abelian",
+    "def-weil-weil-sheaf-complex",
+    "def-weil-constructible-heart"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraphs 1 and 5: constant-field restriction and descent; explicit cyclic-sheet calculation"
+   }
+  },
+  {
+   "text": "Let $z$ be a closed point of $X_{0,m}$, and put $r=[\\kappa(z):k_m]$. Its residue field is finite and has cardinality $q^{mr}$. For the $k_0$-interpretation the local operator uses $mr$ transitions of $H$; for the $k_m$-interpretation it uses $r$ return transitions of $H^m$. Expanding the latter return maps gives exactly the same $mr$ factors of $\\eta$, in the same order. The point transports also agree: finite-level composition identifies the transport for $\\gamma^m$ with the block of $m$ transports for $\\gamma$; the whole-tower power identity and its specified integral realization give this identity before rationalization, rather than merely after separate reductions. Rationalizing preserves the equality, and naturality and coefficient compatibility give it on the common-stage $\\Qlb$ category. Repeating $r$ blocks therefore gives precisely the point transport used in the $k_0$ local operator. On the chosen sheet the two operators are equal under the canonical stalk identification; another choice conjugates this identification. This proves the local-operator assertion in (b), with the same absolute residue size $q^{mr}$ in both interpretations.",
+   "uses": [
+    "lem-kun-closed-point-field",
+    "def-weil-local-frobenius-trace",
+    "lem-trf-point-transport-composition",
+    "lem-trf-integral-point-transport-tower-powers",
+    "lem-pur-semilinear-scalar-localization",
+    "lem-weil-frobenius-point-transport-natural",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.7)–(1.1.10), pp.150–152; compatibility with the specified point transports is supplied by the cited composition and whole-tower identities"
+   }
+  },
+  {
+   "text": "Define restriction in (a) by $(M,\\theta)\\mapsto(M,\\theta^{[m]})$. Pullback composition identifies $L(g_X^m)^*$ with $P^m$. Multiplying the $m$ pullbacks of the commuting equation for a morphism proves that it commutes with $\\theta^{[m]}$, so this is a functor; it is exact because its underlying functor is the identity and exactness is detected there by step 5. Let $\\pi:Y\\to X$ be the geometric base change of $g_m$. It satisfies $\\pi H=g_X\\pi$ and $\\pi j_0=\\operatorname{id}_X$. Hence the restriction of $\\pi^*(M,\\theta)$ to sheet zero is $M$, and the product of its $m$ Weil transitions is exactly $\\theta^{[m]}$, by composing the pullbacks of $\\theta$. The equivalence of (b) therefore sends $g_m^*\\mathcal F$ to this restriction. Its inverse recovers $g_m^*\\mathcal F$ canonically up to the natural isomorphism of step 4; this assertion is made before any direct image.",
+   "uses": [
+    "def-weil-weil-sheaf-complex",
+    "def-weil-frobenius-detailed",
+    "lem-pod-integral-pullback-composition",
+    "lem-pur-semilinear-scalar-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraphs 1 and 5: constant-field restriction and descent; explicit cyclic-sheet calculation"
+   }
+  },
+  {
+   "text": "Apply the constructible Weil pullback/local-Frobenius theorem to the $k_0$-morphism $g_m:X_{0,m}\\to X_0$. Its source is separated and of finite type over $k_0$, since $k_m/k_0$ is finite. For $x=g_m(z)$, that theorem gives the compatible-stalk identity $F_{z,g_m^*\\mathcal F}=F_x^f$ up to conjugacy, and $q_z=q_x^f$, where $f=[\\kappa(z):\\kappa(x)]$. Steps 6–7 identify its left side with the local operator of the restriction in (a), proving the required assertion without lissity or semisimplicity.\nFor the stated formula, write $d=[\\kappa(x):k_0]$ and $R=[\\kappa(z):k_0]$. The finite field $\\kappa(z)$ is the quotient of $\\kappa(x)\\otimes_{k_0}k_m$ by the prime specifying $z$, and is generated by the images of its two factors. Thus $d\\mid R$ and $m\\mid R$. Its $q$-power automorphism has order $R$. The power $\\operatorname{lcm}(d,m)$ fixes both generating fields, so is the identity; hence $R\\mid\\operatorname{lcm}(d,m)$. Conversely the two divisibilities imply $\\operatorname{lcm}(d,m)\\mid R$, giving $R=\\operatorname{lcm}(d,m)$. Therefore $f=R/d=m/\\gcd(d,m)$.",
+   "uses": [
+    "lem-fd-weil-pullback-local-frobenius",
+    "lem-sfb-finite-field-galois-frobenius"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "(1.1.8), p.151: Frobenius raised to the residue extension degree; finite-field degree computation spelled out"
+   }
+  },
+  {
+   "text": "For corresponding subquotients under (b), step 6 identifies the local eigenvalues up to conjugacy at every closed point, and leaves $q_z=\\#\\kappa(z)$ unchanged. Thus the equations $|\\iota(\\alpha)|=q_z^{w/2}$ agree for every real $w$. Exactness identifies the successive quotients of any finite filtration, so purity of each quotient, its weight and any specified upper weight bound agree. Applying the inverse functor proves the converse. The argument includes zero stalks (whose purity condition is vacuous), zero objects and the empty scheme.",
+   "uses": [
+    "def-weil-punctual-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/thm-zl-real-mixed-by-curves.proof.md",
+    "place": "Paragraphs 1 and 5: constant-field restriction and descent; explicit cyclic-sheet calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-constructible-heart",
+  "def-weil-finite-field-fiber",
+  "def-weil-frobenius-detailed",
+  "def-weil-local-frobenius-trace",
+  "def-weil-punctual-weights",
+  "def-weil-weil-sheaf-complex",
+  "lem-exc-finite-galois-algebra-tensor-decomposition",
+  "lem-fd-weil-pullback-local-frobenius",
+  "lem-kun-closed-point-field",
+  "lem-pod-integral-pullback-composition",
+  "lem-pur-finite-clopen-derived-decomposition",
+  "lem-pur-semilinear-scalar-localization",
+  "lem-sfb-finite-field-galois-frobenius",
+  "lem-trf-integral-point-transport-tower-powers",
+  "lem-trf-point-transport-composition",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-weil-isomorphism-derived-pullback",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "prop-weil-heart-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.7)–(1.1.10), pp.150–152, especially the change-of-finite-base-field paragraph on p.152; explicit argument implements blueprint paragraphs 1 and 5 with the project coefficient and point-transport comparisons"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -88,10 +236,38 @@
    "results": "iterateFrobeniusEquiv_symm_add; frobeniusEquiv_apply; coe_frobenius_comp_coe_frobeniusEquiv_symm; IsArithFrobAt.arithFrobAt; LightCondMod.LocallyConstant.functorIsoDiscreteComponents; CompHausLike.LocallyConstant.sigmaComparison_comp_sigmaIso; CategoryTheory.Presheaf.coherentExtensiveEquivalence; WittVector.IsocrystalEquiv.frob_equivariant",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Weil sheaves cyclic Frobenius equivariant objects finite constant field extension exact equivalence",
+   "results": "FiniteField.Extension.frob; WittVector.IsocrystalEquiv.frob_equivariant; FiniteField.instIsCyclicAlgEquivOfFinite; FiniteField.frobeniusAlgEquiv; FiniteField.coe_frobeniusAlgEquivOfAlgebraic; FiniteField.frobeniusAlgEquivOfAlgebraic; FiniteField.frobeniusAlgEquiv_apply; FiniteField.frobeniusAlgEquivOfAlgebraic.congr_simp",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Equivalence, CategoryTheory.Functor",
+   "results": "CategoryTheory.Equivalence.functor; CategoryTheory.Equivalence.inverse; CategoryTheory.Functor.asEquivalence; CategoryTheory.Equivalence.functorFunctor; CategoryTheory.Equivalence.symm_functor; CategoryTheory.Equivalence.symm_inverse; CategoryTheory.Equivalence.congrLeft; CategoryTheory.Equivalence.congrRight",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible Weil sheaves on a finite constant extension: cyclic Frobenius descent on disjoint sheets is equivalent to the return-iterate Weil heart",
+   "results": "IsArithFrobAt.arithFrobAt; WittVector.isocrystal_classification; WittVector.instIsocrystalStandardOneDimIsocrystal; WittVector.StandardOneDimIsocrystal.frobenius_apply; WittVector.IsocrystalEquiv.frob_equivariant; iterateFrobeniusEquiv_symm_add; WittVector.Isocrystal.frob; WittVector.Isocrystal.frobenius",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivariant sheaves for an infinite cyclic action permuting a finite collection of components transitively are determined by one component and the stabilizer return map",
+   "results": "CategoryTheory.PreGaloisCategory.toAut_surjective_of_isPretransitive; CategoryTheory.PreGaloisCategory.action_ext_of_isGalois; CategoryTheory.PreGaloisCategory.fiberIsoQuotientStabilizer; CategoryTheory.FintypeCat.isoQuotientStabilizerOfIsConnected; CategoryTheory.PreGaloisCategory.IsFundamentalGroup.transitive_of_isGalois; CategoryTheory.PreGaloisCategory.isPretransitive_of_surjective; CategoryTheory.FintypeCat.instPreGaloisCategoryActionFintypeCat; CategoryTheory.PreGaloisCategory.autMulFiber",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-zl-real-mixed-by-curves",
@@ -108,5 +284,84 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-zl-constant-extension-weil-heart-equivalence",
+  "worker": "stage1",
+  "summary": "Constructed the cyclic-sheet equivalence and its natural inverse explicitly; checked exactness and the absolute-residue local operators using the specified transport comparisons. Derived restriction and the residue-degree formula from this equivalence and existing constructible pullback functoriality. No new nodes or statement changes.",
+  "blueprint": "thm-zl-real-mixed-by-curves proof paragraphs 1 and 5: finite constant restriction, cyclic-sheet comparison before finite pushforward, and residue-degree Frobenius operators.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-finite-galois-algebra-tensor-decomposition",
+    "why": "Generic finite Galois tensor splitting gives the geometric sheets; the unit has no competing tensor-splitting lemma."
+   },
+   {
+    "node": "lem-pur-finite-clopen-derived-decomposition",
+    "why": "Generic componentwise equivalence already includes the rational/common-stage categories; the unit does not reprove coefficient-category gluing."
+   },
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Generic exact inverse image under a scheme isomorphism applies to the semilinear sheet coordinates."
+   },
+   {
+    "node": "lem-weil-isomorphism-derived-pullback",
+    "why": "Identifies derived pullback with exact inverse image for sheet isomorphisms at integral coefficients."
+   },
+   {
+    "node": "lem-pur-semilinear-scalar-localization",
+    "why": "Generic localization preserves the inverse identities and comparison equations at rational coefficients."
+   },
+   {
+    "node": "lem-pod-integral-pullback-composition",
+    "why": "Generic coherent pullback compositor supplies the transition-arrow and return identifications."
+   },
+   {
+    "node": "prop-weil-heart-abelian",
+    "why": "Generic abelianness supplies kernels and cokernels in the underlying constructible heart."
+   },
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Generic closed-point residue finiteness supplies the degrees in the local calculation."
+   },
+   {
+    "node": "lem-trf-point-transport-composition",
+    "why": "Generic finite-coefficient transport composition identifies blocks of Frobenius point transports."
+   },
+   {
+    "node": "lem-trf-integral-point-transport-tower-powers",
+    "why": "Generic whole-system composition and realization identifies the specified integral transports for powers; no argument from individual reductions is used."
+   },
+   {
+    "node": "lem-weil-frobenius-point-transport-natural",
+    "why": "Generic naturality and common-stage scalar compatibility makes the stalk comparison valid at the fixed coefficient convention."
+   },
+   {
+    "node": "lem-fd-weil-pullback-local-frobenius",
+    "why": "Generic constructible Weil pullback theorem gives the residue-degree local operator after the cyclic-sheet comparison; the unit has no replacement for this functoriality theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-finite-galois-algebra-tensor-decomposition",
+  "lem-pur-finite-clopen-derived-decomposition",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-isomorphism-derived-pullback",
+  "lem-pur-semilinear-scalar-localization",
+  "lem-pod-integral-pullback-composition",
+  "prop-weil-heart-abelian",
+  "lem-kun-closed-point-field",
+  "lem-trf-point-transport-composition",
+  "lem-trf-integral-point-transport-tower-powers",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-fd-weil-pullback-local-frobenius"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-Codex-NU-2f7ffcad0",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-2f7ffcad0 (reviewer sub-agent of L); spot-checked: Reviewed the item, unit, blueprint, Deligne source, every cited node statement, coefficient and transport comparisons, all nine steps, hypotheses, edge cases, route constraints, and tool uses. No mathematical or delivery fault requires repair."
  }
 }
