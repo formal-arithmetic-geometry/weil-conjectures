@@ -82,5 +82,30 @@
   "group": "Q85",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q85-cf2c5e785 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item plus the full statements of def-trf-strict-weil-complex, prop-trf-scheme-galois-comparison, def-trf-scheme-frobenius, def-trf-coefficient-conventions, lem-trf-iterated-weil-cocycle and lem-weil-pbc-proetale-derived-pullback-composition, including any blueprint_update. Statement: it matches main-20261015 sk-d-weil/def-trf-iterated-weil-map.md (order 2639). The two displays are identical to master (order 2295). The only difference is master's last sentence, a forward pointer to the cocycle lemma, which is kept in pointers and is not a dependency, so there is no cycle. Typing: phi^[m] = phi o Lg^*phi o ... o L(g^{m-1})^*phi runs L(g^m)^*K -> ... -> K. Every factor is invertible. The composition order agrees with the cocycle lemma phi^[m+n] = phi^[m] o Lg^{m*}phi^[n] and with the recursion in def-trf-frobenius-coefficient-morphism. Hypotheses of kappa^(m): X_0 separated of finite type, A = O_E/varpi^n finite and killed by a power of l, with l != p from the coefficient conventions. So u_m = phi^[m] o kappa^(m)_K : LPhi^{m*}K -> K is well typed and an isomorphism. Range m >= 1 as in the source. Small cases: over Spec F_q, Phi = id and a matrix M gives phi^[m] = u_m = M^m; for m = 1, u_1 = phi o kappa_K; K = 0 and the empty scheme are trivial. Duplicates: there is no new node. def-trf-frobenius-coefficient-morphism (an arbitrary psi along Phi, with no kappa) and def-trf-frobenius-operators only use this item; same_as [] is confirmed. Lean: slopmaster2 Frobenius.lean lines 234-240 has coeffIterate, which has no kappa and no g_gamma, so it is not an attachment, as the report says. Fix: I added lem-weil-pbc-proetale-derived-pullback-composition to stmt_deps. The domain Lg^{m*}K and the composability of the factors L(g^j)^*phi rest on its isomorphisms L(kh)^* = Lh^*Lk^*. The report overlooked this, while the sibling def-trf-frobenius-coefficient-morphism cites the same lemma and the Lean uses leftDerivedUpperStarComp for the same step. The statement text is unchanged. A cycle check over the lemma's 224 transitive dependencies found no cycle. There are no tool_uses. The source field still points to master; it is the maintainer's field and is left for them.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IteratedWeilMap",
+  "declaration": "WeilConjectures.TraceFormulaCoefficientConventions.iteratedWeilIsomorphism",
+  "declarations": [
+   "WeilConjectures.TraceFormulaCoefficientConventions.iteratedWeilPullbackModel",
+   "WeilConjectures.TraceFormulaCoefficientConventions.iteratedWeilPullbackIso",
+   "WeilConjectures.TraceFormulaCoefficientConventions.iteratedWeilIsomorphismSucc",
+   "WeilConjectures.TraceFormulaCoefficientConventions.iteratedWeilIsomorphism",
+   "WeilConjectures.TraceFormulaCoefficientConventions.iteratedWeilSchemeFrobenius"
+  ],
+  "file": "lean/Sheaf/Paper/IteratedWeilMap.lean",
+  "statement": "def iteratedWeilIsomorphism (T : TraceFormulaCoefficientConventions.{u}) (K : T.strictWeilComplex) (m : ℕ) (hm : 1 ≤ m) : (proEtaleConstantRingDerivedPullback T.coefficientRing ((End.of (T.datum.geometricGaloisFrobenius T.X₀)) ^ m)).obj K.obj.carrier ≅ K.obj.carrier",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7e5a91d3c",
+  "group": "NS",
+  "result": "pass",
+  "note": "Compiles clean (nt_compile --json, IteratedWeilMap.lean 33.3 s, no diagnostics; matches recorded ~30.5 s). phi^[m] recursion = eqToIso(pow_succ: g^(n+2)=g≫g^(n+1)) ≫ canonical c_{g,g^(n+1)} (proEtaleConstantRingPullbackComposition.symm) ≫ Lg^*phi^[n+1] ≫ phi, i.e. exactly phi∘Lg^*phi∘…∘L(g^{m-1})^*phi on powers of the real scheme map; m>=1 via hm. u_m = landed selectedSchemeGaloisComparison.app K ≫ phi^[m] with source LPhi^{m*}K, target K. phi transported by existing unit-normalized pointPowerPullbackModel (no arbitrary map; earlier duplicate kappa/presentation removed). No extra hypotheses/universes, no sorry, no hollow data, source/blueprint docstrings, lean-only node diff, verbatim lean.statement, Worker report and Second reading sections present. Edge cases m=1, m=2, point, zero complex, empty scheme OK. No findings."
  }
 }
