@@ -293,20 +293,21 @@
  },
  "lean": {
   "module": "Sheaf.TraceFormula.ValuationReducedFibreNormalization",
-  "declaration": "WeilConjectures.valuation_reduced_fibre_normalization",
+  "declaration": "valuation_reduced_fibre_normalization",
   "file": "lean/Sheaf/TraceFormula/ValuationReducedFibreNormalization.lean",
-  "statement": "theorem valuation_reduced_fibre_normalization (K : Type u) [Field K] [IsSepClosed K] (V : ValuationSubring K) (A : Type v) [CommRing A] [Algebra V A] [Module.Flat V A] [Algebra.FinitePresentation V A] (hgeom : @Algebra.IsGeometricallyReduced K (A ⊗[V] K) _ _ (Algebra.TensorProduct.rightAlgebra (R := V) (A := A) (B := K))) : Module.Finite A (integralClosure A (A ⊗[V] K)) ∧ Module.Flat V (integralClosure A (A ⊗[V] K)) ∧ Algebra.FinitePresentation V (integralClosure A (A ⊗[V] K)) ∧ Function.Bijective (Algebra.TensorProduct.lift ((integralClosure A (A ⊗[V] K)).val.restrictScalars V) (Algebra.TensorProduct.includeRight : K →ₐ[V] A ⊗[V] K) (fun _ _ ↦ Commute.all _ _)) ∧ ∀ (Ω : Type (max u v w)) [Field Ω] [IsAlgClosed Ω] [Algebra V Ω], IsReduced ((integralClosure A (A ⊗[V] K)) ⊗[V] Ω)",
+  "statement": "theorem valuation_reduced_fibre_normalization (K V A : Type u) [Field K] [CommRing V] [CommRing A] [Algebra V K] [Algebra V A] [IsDomain V] [ValuationRing V] [IsFractionRing V K] [IsSepClosed K] [Module.Flat V A] [Algebra.FinitePresentation V A] (hgeom : ∀ (E : Type u) [Field E] [Algebra K E], letI : Algebra K (A ⊗[V] K) := Algebra.TensorProduct.rightAlgebra IsReduced (TensorProduct K (A ⊗[V] K) E)) : let AK := A ⊗[V] K let B := integralClosure A AK let canonical : B ⊗[V] K →ₐ[V] AK := Algebra.TensorProduct.lift ((Subalgebra.val B).restrictScalars V) Algebra.TensorProduct.includeRight (fun _ _ => Commute.all _ _) Module.Finite A B ∧ Function.Bijective canonical.toRingHom ∧ RingHom.Flat (algebraMap V B) ∧ Algebra.FinitePresentation V B ∧ (∀ (Ω : Type v) [Field Ω] [Algebra V Ω] [IsAlgClosed Ω], IsReduced (TensorProduct V B Ω))",
   "branch": "newtargets-dag",
-  "by": "Q30",
-  "date": "2026-10-17",
-  "existing": false
+  "by": "Q67",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-e15839761"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-516812305",
-  "group": "Q30",
-  "result": "pass",
-  "note": "Only the node's lean field differs from the side clone, and lean.statement is verbatim equal to the file signature. Clause by clause: IsSepClosed K; ValuationSubring K (fraction field K, V=K allowed); CommRing A with Module.Flat and Algebra.FinitePresentation over V; IsGeometricallyReduced under the canonical rightAlgebra, which for a field is reducedness after base change to the algebraic closure and so equals the node's every-extension condition (Stacks 030V); B = integralClosure A (A⊗K) under the default leftAlgebra. Conclusions: Module.Finite A B, Module.Flat V B, Algebra.FinitePresentation V B, bijectivity of the canonical TensorProduct.lift, and IsReduced (B⊗Ω) for every algebraically closed Ω with an arbitrary V-algebra structure. Instance rfl/simp checks in a scratch copy confirm a↦a⊗1, k↦1⊗k, the restricted V-action on B and b⊗k↦b*(1⊗k). The Ω universe max u v w with w free covers all sizes via ULift. No height, Noetherian or nontriviality assumption; A=0 and V=K are covered. No defs, proof is sorry only, docstrings carry the source place, blueprint tag and all 11 steps, lines at most 98 characters, proof-prerequisite imports non-public, and the report has both sections. nt_compile.py --json: clean in 3.5-3.7 s with no warnings. Temkin is not available locally, so the source check rests on the stage-1 review. No findings."
+  "reviewer": "NT-stage2-cc-e15839761",
+  "group": "Q67",
+  "result": "fix",
+  "note": "Read node (only lean changed vs base), Temkin 3.5.5 source place, 4 stmt deps (IsSepClosed, RingHom.Flat/Module.Flat, Algebra.FinitePresentation, Module.Finite), module, report (Worker report + Second reading by Q67 present). All hypotheses/conclusion clauses match: canonical lift map bijective, integralClosure A (A⊗K), Module.Finite, RingHom.Flat, FinitePresentation, reduced fibres for all Ω; A=0, V=K, arbitrary height allowed; no defs, sorry only. F1 (H3 universe too small): hgeom quantified E : Type v sharing v with Ω; at .{1,0} with K larger than every Type 0 type, hgeom is vacuous and the statement is false (A=V[x]/(x^2), B=V⊕Kx not finite). Fixed to E : Type u (contains AlgebraicClosure K; node hypothesis implies it). F2 (H8): docstring now carries the node's 11 proof steps. Delivered and fixed files compile clean via nt_compile --json (~2 s); .{1,0} probes confirm. Fixes: fixes/ValuationReducedFibreNormalization.lean (record statement re-read by refit_record, checked with stage2_delivery.declarations), fixes/lem-trf-valuation-reduced-fibre-normalization.report.md."
  }
 }

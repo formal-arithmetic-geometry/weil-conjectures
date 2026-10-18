@@ -13,7 +13,8 @@
   "def-sbc-smooth-morphisms",
   "def-weil-derived-cohomology-sheaves",
   "def-weil-scheme-morphism-properties",
-  "def-weil-pbc-completed-pullback"
+  "def-weil-pbc-completed-pullback",
+  "lem-per-adic-heart-pullback-fibres"
  ],
  "proof": [
   {
@@ -277,5 +278,26 @@
   "group": "Q95",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q95-dd27d6a27 (reviewer sub-agent of L); spot-checked: I read the item, all three new nodes, every cited statement, the blueprint proof of lem-per-smooth-pullback-t-exact (first paragraph), Stacks 0AFF (morphisms.tex lemma-smoothness-dimension), Stacks 00OT (algebra.tex) and Bhatt–Scholze 6.8.2–6.8.15. Batch-5 check: lem-per-adic-heart-pullback-fibres -> def-pod-lisse-l-adic-sheaves is allowed. That node is a general definition of Weil II lisse sheaves, not a step of either assumed proof. Its 103-node closure reaches only one other sec-poincare-duality node, the definition def-pod-ring-scalar-extension, plus generic algebra lemmas, and no nt-assume leaf, sk-thm-trace node or batch-4 target. I fixed three repairable faults. (1) E2: lem-per-adic-heart-pullback-fibres described the E and Qlbar heart as the objects whose ordinary cohomology vanishes outside degree 0. This is false and not closed under isomorphism: A/varpi in degree 1 is zero rationally. The node now uses the existing prop-weil-localized-tstructure and prop-weil-pbc-integral-tstructure, with classes defined up to isomorphism and cohomology equal to Q of the ambient sheaves. (2) C1/C4: Step 1 used extension closure, the long exact cohomology sequence and uniqueness of truncation triangles while citing only def-weil-t-structure. It now cites lem-weil-heart-short-exact-triangles (clauses 1, 2, 5), declared as a tool use. (3) C4/E6: Step 3 identified Supp with the nonzero-fibre locus without saying how it reads def-per-support-condition, which leaves rational support undefined; the sibling lem-per-tate-twist-support-condition uses closures. Step 3 now states its reading, and Step 6 also proves the bound under the closure reading using the new closure lemma, so it is no longer marked elementary. The statement and coefficient category are unchanged. The new nodes lem-per-smooth-local-dimension (exactly 0AFF) and lem-per-constructible-subset-closure-dimension (true over a field; the DVR generic point shows a broader version would fail) are correct and not duplicates. Steps 2, 4 and 5 check out, including the shift sign, empty supports, the nonclosed support handled via its reduced closure, and the Noetherian hypotheses. I accept all six declared tool uses.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SmoothPullbackSupportDimension",
+  "declaration": "AlgebraicGeometry.Scheme.pbcSmoothPullbackSupportDimension",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.pbcSmoothPullbackSupportDimension"
+  ],
+  "file": "lean/Sheaf/Paper/SmoothPullbackSupportDimension.lean",
+  "statement": "theorem pbcSmoothPullbackSupportDimension {k : Type u} [Field k] (l : ℕ) [Fact l.Prime] (Ω : Type w) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (X Y : PerAdic.Base k) [iX : Fact (∀ x : X.scheme, IsUnit (l : X.scheme.presheaf.stalk x))] [iY : Fact (∀ y : Y.scheme, IsUnit (l : Y.scheme.presheaf.stalk y))] (f : X.scheme ⟶ Y.scheme) (d : ℕ) [SmoothOfRelativeDimension d f] : (∀ (n : ℤ) (K : pbcQbarCategory l Ω Y.scheme), ((pbcQbarStandardT l Ω Y.scheme).le n K → (pbcQbarStandardT l Ω X.scheme).le n ((pbcQbarCompletedPull l Ω f).obj K)) ∧ ((pbcQbarStandardT l Ω Y.scheme).ge n K → (pbcQbarStandardT l Ω X.scheme).ge n ((pbcQbarCompletedPull l Ω f).obj K))) ∧ (∀ i : ℤ, Nonempty (pbcQbarCompletedPull l Ω f ⋙ shiftFunctor (pbcQbarCategory l Ω X.scheme) (d : ℤ) ⋙ pbcQbarCohomology l Ω X.scheme (-i) ≅ pbcQbarCohomology l Ω Y.scheme (-i + (d : ℤ)) ⋙ pbcQbarCompletedPull l Ω f)) ∧ (∀ (K : pbcQbarCategory l Ω Y.scheme) (i : ℤ), topologicalKrullDim (pbcQbarCohomologySupport l Ω X.scheme ((shiftFunctor (pbcQbarCategory l Ω X.scheme) (d : ℤ)).obj ((pbcQbarCompletedPull l Ω f).obj K)) (-i)) ≤ topologicalKrullDim (pbcQbarCohomologySupport l Ω Y.scheme K (-i + (d : ℤ))) + (d : WithBot ℕ∞))",
+  "branch": "newtargets-dag",
+  "by": "Q99",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4de831828",
+  "group": "Q99",
+  "result": "fix",
+  "note": "Lean and mathematics correct. Every hypothesis is matched and none is stronger: PerAdic.Base gives separated finite type over k with no nonemptiness; l is invertible on the schemes only; d : ℕ with SmoothOfRelativeDimension. Conjunct 1 is t-exactness, conjunct 2 is the natural iso with the correct -i+d sign, conjunct 3 is the support-dimension inequality with ⊥ for -∞. The statement field is verbatim. The item node changes only in lean plus the landed stmt_dep lem-per-adic-heart-pullback-fibres; the two dependency nodes change only in lean, with notes. The §1(B) modules are correct and canonical: strictly full integral image classes with a unique t-structure, and the unique descended family with stage functors pbcDescentPullback and β fixed by PbcPullbackBetaSpec. They generalize PerAdic.commonT/commonPull without IsUnit (l:k) (observation only). Edge cases checked: empty schemes, char l, d=0, K=0, f not surjective, non-closed support, negative i, independent universes u and w. nt_compile of all 3 files: exit 0, no errors or warnings. Fault: delivery-errors A11, the Second reading by Q99 was the worker's self-check; fixed by fixes/lem-per-smooth-pullback-support-dimension.report.md (full report, that section replaced by an independent reading)."
  }
 }

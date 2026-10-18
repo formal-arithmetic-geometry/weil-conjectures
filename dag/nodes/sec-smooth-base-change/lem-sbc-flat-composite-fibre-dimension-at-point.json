@@ -215,17 +215,17 @@
   "file": "lean/Sheaf/AlgebraicGeometry/FlatCompositeFibreDimensionAtPoint.lean",
   "statement": "theorem flat_composite_fibre_dimension_at_point {U X S : Scheme.{u}} (a : U ⟶ X) (f : X ⟶ S) (u : U) [LocallyOfFiniteType a] [LocallyOfFiniteType f] (hflat : (a.stalkMap u).hom.Flat) : topologicalKrullDimAt ((a ≫ f).asFiber u) = topologicalKrullDimAt (a.asFiber u) + topologicalKrullDimAt (f.asFiber (a u))",
   "branch": "newtargets-dag",
-  "by": "NG",
-  "date": "2026-10-15",
+  "by": "Q134",
+  "date": "2026-10-17",
   "existing": false,
-  "fixed_by": "NT-stage2-Codex-991a530bf"
+  "note": "The recorded declaration is in a legacy non-module file, so a module file importing this proof dependency fails with cannot import non-module. Preserve its statement and proof docstring verbatim, adding module, public imports and an exposed public section so the declaration can be imported."
  },
  "reviewed_lean": {
-  "date": "2026-10-15",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-991a530bf",
-  "group": "NG",
-  "result": "fix",
-  "note": "H8 proof docstring expanded step by step; statement, dependencies and server per-file compiles reviewed."
+  "reviewer": "NT-stage2-cc-c8cbbd09a",
+  "group": "Q134",
+  "result": "pass",
+  "note": "Etale.of_comp_of_surjective_etale {T X Y : Scheme.{u}} (h : X ⟶ T) (p : Y ⟶ X) [Surjective p] [Etale p] [Etale (p ≫ h)] : Etale h matches the node clause by clause, with no QC, finite-type, separation or Noetherian hypotheses; the single universe is the standard Mathlib one; lean.statement is verbatim. Source: Stacks 036W (descent.tex:6950) for the singleton cover; 02K6 cross-checked. Edge cases (empty X/Y/T, p = id, non-QC p) covered. No duplicate: Mathlib Etale.of_comp cancels the other arrow; DescendsAlong @Etale is target base change and needs QC; rg over side and slopmaster2 found no match. The dependency module FlatCompositeFibreDimensionAtPoint only becomes a module (header, imports, public section); its statement and docstrings are unchanged and it has no importers; its node changes only in lean, with a note. Sorry-only, docstrings with source, blueprint tag and all 4 proof steps, lines <= 100. nt_compile --json: both files clean (exit 0); a probe confirmed both signatures and that the tool reports errors. The Second reading section holds the standard direct-delivery text. Minor: lean.fixed_by dropped from the dependency node."
  }
 }

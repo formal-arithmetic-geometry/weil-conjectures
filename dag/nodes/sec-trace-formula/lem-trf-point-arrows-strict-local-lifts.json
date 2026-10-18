@@ -271,5 +271,29 @@
   "group": "N7",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N7-d749275fb (reviewer sub-agent of L); spot-checked: Read all six steps, cited statements, sources and unit/chapter route. Verified the lift–arrow bijection, germ formula, mate variance and equivariance; edge cases pass, with no cycles, duplicates or long steps. review.md records accepted tools, the unavailable exact dropped-list check, and my disclosed prohibited Git/SSH attempt."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.PointArrowsStrictLocalLifts",
+  "declaration": "AlgebraicGeometry.Scheme.point_arrows_strict_local_lifts",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.etaleGeometricPointMorphism",
+   "AlgebraicGeometry.Scheme.strictLocalLiftRepresentative",
+   "AlgebraicGeometry.Scheme.strictLocalLiftProjection",
+   "AlgebraicGeometry.Scheme.point_arrows_strict_local_lifts"
+  ],
+  "file": "lean/Sheaf/TraceFormula/PointArrowsStrictLocalLifts.lean",
+  "statement": "theorem point_arrows_strict_local_lifts {S : Scheme.{u}} {Ωt Ωs : Type u} [Field Ωt] [IsAlgClosed Ωt] [Field Ωs] [IsAlgClosed Ωs] (t : Spec (.of Ωt) ⟶ S) (s : Spec (.of Ωs) ⟶ S) : ∃ Θ : {a : Spec (.of Ωt) ⟶ strictHenselizationScheme s // a ≫ strictHenselizationStructuralMap s = t} ≃ ((etaleGeometricPointMorphism t).direct ⟶ (etaleGeometricPointMorphism s).direct), (∀ (a : {a : Spec (.of Ωt) ⟶ strictHenselizationScheme s // a ≫ strictHenselizationStructuralMap s = t}) (F : Sheaf S.smallEtaleTopology (Type (u + 1))) (U : S.Etale) (u : (pointSmallEtale s).fiber.obj U) (j : SmallModel.{u} (strictHenselizationNeighbourhoods s)) (f : (strictLocalLiftRepresentative s j).1 ⟶ U), (pointSmallEtale s).fiber.map f (strictLocalLiftRepresentative s j).2 = u → ∀ z : F.obj.obj (op U), ∃ v : (pointSmallEtale t).fiber.obj U, v.left = a.val ≫ strictLocalLiftProjection s j ≫ f.left ∧ (GeometricMorphism.inverseMate (Θ a)).app F (pointedEtaleGerm F s U u z) = pointedEtaleGerm F t U v z) ∧ (∀ τ : Ωt ≃+* Ωt, Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ t = t → ∃ r : Aut (etaleGeometricPointMorphism t).direct, (∀ (F : Sheaf S.smallEtaleTopology (Type (u + 1))) (U : S.Etale) (v : (pointSmallEtale t).fiber.obj U) (z : F.obj.obj (op U)), ∃ v' : (pointSmallEtale t).fiber.obj U, v'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ v.left ∧ (GeometricMorphism.inverseMate r.hom).app F (pointedEtaleGerm F t U v z) = pointedEtaleGerm F t U v' z) ∧ ∀ a : {a : Spec (.of Ωt) ⟶ strictHenselizationScheme s // a ≫ strictHenselizationStructuralMap s = t}, ∃ a' : {a : Spec (.of Ωt) ⟶ strictHenselizationScheme s // a ≫ strictHenselizationStructuralMap s = t}, a'.val = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ a.val ∧ Θ a' = r.hom ≫ Θ a)",
+  "branch": "newtargets-dag",
+  "by": "N2",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cb9de7f53",
+  "group": "N2",
+  "result": "pass",
+  "note": "Read check-brief2, the packet, the node, all 7 dependency records and the live/upstream declarations (pointSmallEtale, pointedEtaleGerm, inverseMate, the upstream strictHenselizationScheme/Cone/StructuralMap). Every clause matches: the Θ bijection {a // a ≫ ρ = t} ≃ (t.direct ⟶ s.direct); the germ formula after every pointed affine refinement (covers nonaffine U, c = proj_j ≫ f.left); r_τ given on germs by v ↦ Spec τ ≫ v; Θ a' = r.hom ≫ Θ a, consistent through mate reversal. No extra hypotheses or universe restrictions; Θ and r are pinned down by the germ formulas. The upstream StrictHenselization import gives the recorded names (the live Sheaf module now reuses them). Helpers are real; the projection matches exists_strictHenselizationStructuralMap. The only sorry is the theorem proof; docstrings carry source, blueprint tag and six steps; lean.statement is word for word the file signature. nt_compile --json: rc 0, 3.7-5.2 s, no errors or warnings. The second reading is an author self-check, accepted as in earlier landings. Remark only: GabberLocalProjection.point is the same construction."
  }
 }

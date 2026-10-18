@@ -238,5 +238,24 @@
   "group": "Q05",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q05-0d15d312d (reviewer sub-agent of L); spot-checked: Reviewed the item, all five new nodes, every cited statement and source, all nine proof steps, edge cases, duplicate searches, and route constraints. The split matches Hübner–Schmidt Theorem 6.3 and introduces no SGA or dropped route machinery. Detailed review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ArtinJoinTheorem63",
+  "declaration": "artin_join_theorem_6_3",
+  "file": "lean/Sheaf/AlgebraicGeometry/ArtinJoinTheorem63.lean",
+  "statement": "theorem artin_join_theorem_6_3 (A : Type u) [CommRing A] (p₁ p₂ : Ideal A) [p₁.IsPrime] [p₂.IsPrime] (H₁ : Type v₁) (H₂ : Type v₂) [CommRing H₁] [CommRing H₂] [Algebra (Localization.AtPrime p₁) H₁] [Algebra (Localization.AtPrime p₂) H₂] [Algebra A H₁] [Algebra A H₂] [IsScalarTower A (Localization.AtPrime p₁) H₁] [IsScalarTower A (Localization.AtPrime p₂) H₂] [HenselianLocalRing H₁] [HenselianLocalRing H₂] (hH₁ : Algebra.IsHenselizationAtPrime' A p₁ H₁) (hH₂ : Algebra.IsHenselizationAtPrime' A p₂ H₂) (D₁ : Type w₁) (D₂ : Type w₂) [CommRing D₁] [CommRing D₂] [Algebra H₁ D₁] [Algebra H₂ D₂] [Algebra A D₁] [Algebra A D₂] [IsScalarTower A H₁ D₁] [IsScalarTower A H₂ D₂] [IsLocalRing D₁] [IsLocalRing D₂] [Algebra.IsIntegral H₁ D₁] [Algebra.IsIntegral H₂ D₂] : let E := TensorProduct A D₁ D₂ (∀ x : PrimeSpectrum E, HenselianLocalRing (AlgebraicGeometry.componentRing E x)) ∧ ∀ x : PrimeSpectrum E, ∃ hC : HenselianLocalRing (AlgebraicGeometry.componentRing E x), letI := hC let C := AlgebraicGeometry.componentRing E x let f₁ := (Ideal.Quotient.mk (AlgebraicGeometry.componentIdeal E x)).comp (Algebra.TensorProduct.includeLeft : D₁ →ₐ[A] E).toRingHom let f₂ := (Ideal.Quotient.mk (AlgebraicGeometry.componentIdeal E x)).comp (Algebra.TensorProduct.includeRight : D₂ →ₐ[A] E).toRingHom letI : Field (C ⧸ IsLocalRing.maximalIdeal C) := Ideal.Quotient.field (IsLocalRing.maximalIdeal C) letI : Field (D₁ ⧸ IsLocalRing.maximalIdeal D₁) := Ideal.Quotient.field (IsLocalRing.maximalIdeal D₁) letI : Field (D₂ ⧸ IsLocalRing.maximalIdeal D₂) := Ideal.Quotient.field (IsLocalRing.maximalIdeal D₂) (¬ IsLocalHom f₁ → ¬ IsLocalHom f₂ → IsSepClosed (C ⧸ IsLocalRing.maximalIdeal C)) ∧ (IsLocalHom f₁ → RingHom.IsIntegral f₁ ∧ ∃ g : (D₁ ⧸ IsLocalRing.maximalIdeal D₁) →+* (C ⧸ IsLocalRing.maximalIdeal C), g.comp (Ideal.Quotient.mk (IsLocalRing.maximalIdeal D₁)) = (Ideal.Quotient.mk (IsLocalRing.maximalIdeal C)).comp f₁ ∧ @Algebra.IsAlgebraic (D₁ ⧸ IsLocalRing.maximalIdeal D₁) (C ⧸ IsLocalRing.maximalIdeal C) _ _ g.toAlgebra) ∧ (IsLocalHom f₂ → RingHom.IsIntegral f₂ ∧ ∃ g : (D₂ ⧸ IsLocalRing.maximalIdeal D₂) →+* (C ⧸ IsLocalRing.maximalIdeal C), g.comp (Ideal.Quotient.mk (IsLocalRing.maximalIdeal D₂)) = (Ideal.Quotient.mk (IsLocalRing.maximalIdeal C)).comp f₂ ∧ @Algebra.IsAlgebraic (D₂ ⧸ IsLocalRing.maximalIdeal D₂) (C ⧸ IsLocalRing.maximalIdeal C) _ _ g.toAlgebra)",
+  "branch": "newtargets-dag",
+  "by": "Q108",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-03900e10a"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-03900e10a",
+  "group": "Q108",
+  "result": "fix",
+  "note": "Read node (Hübner–Schmidt Thm 6.3), all 5 stmt_deps, IsHenselizationAtPrime', componentIdeal/componentRing, normalTensorComponentJoinModel, report (Worker report + Second reading by Q108 present). H3 fault: delivered signature has [Algebra A Hᵢ] independent of [Algebra (Localization.AtPrime pᵢ) Hᵢ] with no IsScalarTower, so the A-structure on Hᵢ/Dᵢ/E is arbitrary and the statement is false (A=ℚ[X], p=⊥, Hᵢ=Dᵢ=ℚ(X), A acting via X↦0 gives E≅ℚ(X)⊗_ℚℚ(X), a connected non-local domain). Fixed by adding IsScalarTower A (Localization.AtPrime pᵢ) Hᵢ for i=1,2, as the proof's dependency normalTensorComponentJoinModel assumes. Also removed the unstated single-universe restriction (Hᵢ : Type vᵢ, Dᵢ : Type wᵢ; the only citer is all-Type-u, a specialization) and expanded the docstring to the node's nine proof steps (H8). All conclusion clauses, IsLocalHom, component-ring convention and edge cases (E=0, p₁=p₂, mixed local/nonlocal) checked; no hollow definitions, no extra assumptions, only sorry. nt_compile: delivered and fixed modules both clean (control error file confirms the tool reports errors). fixes/: ArtinJoinTheorem63.lean (complete module), lem-trf-artin-join-theorem-6-3.report.md."
  }
 }

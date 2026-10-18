@@ -260,5 +260,28 @@
   "group": "N8",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N8-b9065b8df (reviewer sub-agent of L); spot-checked: Read the item, all new and cited nodes, unit/chapter route, delivery rules, and source mathematics. The eight-step proof is correct, hypotheses and edge cases check out, the completion-branch node matches Swanson–Huneke Lemma 4.8.3/Corollary 2.1.13, and the Mathlib leaf matches the cited fraction-field instance. Review written to review.md; no fixes needed."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.AlmostFiniteResidueFieldDegree",
+  "declaration": "RingTheory.almostFinite_residueField_fractionDegree",
+  "declarations": [
+   "RingTheory.quotientFractionRingMap",
+   "RingTheory.almostFinite_residueField_fractionDegree"
+  ],
+  "file": "lean/Sheaf/TraceFormula/AlmostFiniteResidueFieldDegree.lean",
+  "statement": "theorem almostFinite_residueField_fractionDegree (R : Type u) (F : Type v) [CommRing R] [IsNoetherianRing R] [IsDomain R] [Field F] [Algebra R F] [Algebra (FractionRing R) F] [IsScalarTower R (FractionRing R) F] [FiniteDimensional (FractionRing R) F] (C : Subalgebra R F) (hC : C ≤ integralClosure R F) (Q : Ideal C) [Q.IsPrime] : @FiniteDimensional (FractionRing (R ⧸ Q.comap (algebraMap R C))) (FractionRing (C ⧸ Q)) _ _ (Module.compHom (FractionRing (C ⧸ Q)) (quotientFractionRingMap R C Q))",
+  "branch": "newtargets-dag",
+  "by": "Q150",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The helper constructs the canonical fraction-field map of the injective prime quotient map using IsFractionRing.lift; the conclusion uses its explicit scalar action via Module.compHom. C is a Subalgebra R F with C ≤ integralClosure R F, with no module-finite hypothesis."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-683968df8",
+  "group": "Q150",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node (Swanson-Huneke Prop 4.8.5): Noetherian domain R, FractionRing R, finite F with an R->Frac R->F scalar tower, C : Subalgebra R F with C <= integralClosure R F, arbitrary prime Q, P = comap, FiniteDimensional of Frac(C/Q) over Frac(R/P) via the canonical quotientFractionRingMap (IsFractionRing.lift; probe-verified on generators; Mathlib liftAlgebra needs a FaithfulSMul instance that is not inferred, so the helper is justified). No extra hypotheses, independent universes, edge cases Q=0, R a field and F=Frac R covered. Docstrings carry source, blueprint and 8 proof steps; only the theorem proof is sorry; lean.statement verbatim; no duplicate declaration. nt_compile.py clean in 5.2 s. Worker's disclosed stray lake env lean probe has no effect on the delivery."
  }
 }

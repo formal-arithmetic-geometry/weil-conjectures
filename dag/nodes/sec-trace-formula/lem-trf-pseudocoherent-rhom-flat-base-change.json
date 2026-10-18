@@ -14,7 +14,8 @@
   "lem-pur-derived-change-of-rings",
   "def-pc-ring-pseudo-coherent-complex",
   "lem-sfb-dc-hom-scalar-adjunction",
-  "lem-weil-pbc-singleton-site-module-comparison"
+  "lem-weil-pbc-singleton-site-module-comparison",
+  "def-pc-ring-hom-extension-shared-definitions"
  ],
  "proof": [
   {
@@ -308,28 +309,21 @@
  },
  "lean": {
   "module": "Sheaf.Algebra.Homology.PseudoCoherentRHomFlatBaseChange",
-  "declaration": "CategoryTheory.pseudoCoherentRHom_flat_base_change",
-  "declarations": [
-   "CategoryTheory.pseudoCoherentRHomModuleDerived",
-   "CategoryTheory.pseudoCoherentRHomSingletonDerived",
-   "CategoryTheory.pseudoCoherentRHomEvaluation",
-   "CategoryTheory.pseudoCoherentRHomScalarMap",
-   "CategoryTheory.pseudoCoherentRHom_flat_base_change"
-  ],
+  "declaration": "CategoryTheory.exists_pseudoCoherentRHomFlatBaseChange",
   "file": "lean/Sheaf/Algebra/Homology/PseudoCoherentRHomFlatBaseChange.lean",
-  "statement": "theorem pseudoCoherentRHom_flat_base_change (M : ScalarHomModels.{0, 0, u, u + 1} singletonTopology) {R S : Type u} [CommRing R] [CommRing S] (φ : R →+* S) (μ : ScalarHomTensorComparison.{0, 0, u, u + 1} M (singletonRingMap φ)) (e : singletonModuleCategory R ≌ ModuleCat.{u} R) (he : e.functor = singletonEvaluation R) (hφ : RingHom.Flat φ) : ∃ β : derivedInternalHomOfUniverses.{0, 0, u, u + 1} singletonTopology (singletonRingSheaf R) ⋙ (M.scalar (singletonRingMap φ)).derived ⟶ (((M.scalar (singletonRingMap φ)).derived).op.prod (M.scalar (singletonRingMap φ)).derived) ⋙ derivedInternalHomOfUniverses.{0, 0, u, u + 1} singletonTopology (singletonRingSheaf S), (∀ E L : DerivedCategory (singletonModuleCategory R), β.app (op E, L) = pseudoCoherentRHomScalarMap M φ μ E L) ∧ (∀ (E L : DerivedCategory (singletonModuleCategory R)), DerivedCategory.IsPseudoCoherent ((pseudoCoherentRHomEvaluation e he).obj E) → (∃ a : ℤ, L.IsGE a) → IsIso (β.app (op E, L)))",
+  "statement": "theorem exists_pseudoCoherentRHomFlatBaseChange [∀ O : Sheaf (⊥ : GrothendieckTopology (Discrete PUnit.{u + 1})) CommRingCat.{u}, HasDerivedCategory.{w} (scalarModules ⊥ O)] (M : ScalarHomModels.{u, u, u, w} (⊥ : GrothendieckTopology (Discrete PUnit.{u + 1}))) (μ : ∀ {O T : Sheaf (⊥ : GrothendieckTopology (Discrete PUnit.{u + 1})) CommRingCat.{u}} (a : O ⟶ T), ScalarHomTensorComparison.{u, u, u, w} M a) (α : ScalarInternalHomAdjunction.{u, u, u, w} M μ) {R S : Type u} [CommRing R] [CommRing S] [HasDerivedCategory.{m} (ModuleCat.{u} R)] (φ : R →+* S) (hφ : φ.Flat) : ∃ χ : derivedInternalHomOfUniverses.{u, u, u, w} ⊥ (CochainComplex.onePointRingSheaf R) ⋙ (M.scalar (ringSiteMap.{u} φ)).derived ⟶ (((M.scalar (ringSiteMap.{u} φ)).derived.op).prod (M.scalar (ringSiteMap.{u} φ)).derived) ⋙ derivedInternalHomOfUniverses.{u, u, u, w} ⊥ (CochainComplex.onePointRingSheaf S), (∀ E L : DerivedCategory (RingSiteModules R), χ.app (op E, L) = ((M.scalar (ringSiteMap.{u} φ)).adjunction.homEquiv _ _).symm ((derivedInternalHomOfUniverses.{u, u, u, w} ⊥ (CochainComplex.onePointRingSheaf R)).map (Prod.mkHom (𝟙 (op E)) ((M.scalar (ringSiteMap.{u} φ)).adjunction.unit.app L)) ≫ (α.iso (ringSiteMap.{u} φ)).inv.app (op E, (M.scalar (ringSiteMap.{u} φ)).derived.obj L))) ∧ (∀ E L : DerivedCategory (RingSiteModules R), (∃ P : CochainComplex (RingSiteModules R) ℤ, Nonempty (DerivedCategory.Q.obj P ≅ E) ∧ DerivedCategory.IsPseudoCoherent (A := R) ((DerivedCategory.Q (C := ModuleCat.{u} R)).obj (((SheafOfModules.evaluation (R := (sheafCompose ⊥ (forget₂ CommRingCat.{u} RingCat.{u})).obj (CochainComplex.onePointRingSheaf R)) (op ⟨PUnit.unit⟩)).mapHomologicalComplex (.up ℤ)).obj P))) → (∃ a : ℤ, ∀ i : ℤ, i < a → IsZero ((DerivedCategory.homologyFunctor (RingSiteModules R) i).obj L)) → IsIso (χ.app (op E, L)))",
   "branch": "newtargets-dag",
-  "by": "N7",
-  "date": "2026-10-17",
+  "by": "NZ",
+  "date": "2026-10-18",
   "existing": false,
-  "note": "The one-object-site encoding uses the recorded punctual evaluation equivalence. Pseudo-coherence is the existing ordinary-module predicate applied through this exact equivalence. The canonical component is constructed from RHom of the scalar unit, the inverse of the five normalized representing Hom bijections, and scalar adjunction. The theorem packages these exact components into a natural transformation and asserts invertibility on pseudo-coherent/bounded-below pairs. Model and equivalence parameters are existing normalized presentations, available from the two added landed statement dependencies; they impose no extra mathematical condition. Standard localization size u+1 is constructed, not assumed."
+  "note": "The canonical comparison is a natural transformation whose component at every pair is fixed by the scalar-adjunction transpose of Hom applied to the unit, using the existing evaluation-normalized scalar internal-Hom isomorphism. The isomorphism conclusion uses exactly flatness, the recorded ordinary-module pseudo-coherence predicate on an evaluated representative, and eventual negative cohomology vanishing. The two added dependencies are already landed interfaces, not new or restated notions."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-3de8acb17",
-  "group": "N7",
+  "reviewer": "NT-stage2-cc-d87227183",
+  "group": "NZ",
   "result": "pass",
-  "note": "Read node, 7 stmt deps, Stacks more-algebra 0A6A(3)/0E1X/0E1W, delivered module, report, and the dependency Lean (ScalarInternalHomAdjunction ScalarDerivedPair/ScalarHomModels/scalarHomBijection, SingletonSiteModuleComparison, RingPseudoCoherent). Hypotheses: RingHom.Flat φ; IsPseudoCoherent via punctual evaluation pinned by he; ∃ a, L.IsGE a (cohomological D+). Conclusion: natural β on Dᵒᵖ×D with components equal to the constructed canonical map (RHom(E,unit), inverse 0E1W bijection, scalar adjoint = 0E1X), IsIso on pseudo-coherent/D+ pairs; no perfectness, Noetherian or extra universe condition; M, μ, e are recorded normalized presentations whose existence is landed. Edge cases (zero rings/objects, identity map, unbounded-left E, any integer bound, non-Noetherian) covered. lean.statement verbatim; declarations list exact; only lean and two landed stmt_deps changed; docstrings with source/blueprint and 7-step proof; only sorry. nt_compile rc 0, no diagnostics (control error confirmed elaboration). Minor: stock Second-reading sentence (accepted process since 2026-10-17); unused DerivedChangeOfRingsCochainModel import."
+  "note": "I read the node, all 7 statement dependencies, Stacks 0E1X/0A6A(3)/0E1W in more-algebra.tex, the delivered module, the report and the node diff. The node changed only in lean and in two added landed stmt_deps; lean.statement is verbatim. Clause-by-clause match: RingHom.Flat; RingSiteModules on Discrete PUnit with the bottom topology; recorded derivedInternalHomOfUniverses; scalar extension pinned by ScalarDerivedPair (sheafified changeOfRings objects and maps, left-derived universal property, normalized unit and adjunction); pseudo-coherence via the recorded IsPseudoCoherent on the evaluated representative, equivalent since evaluation is an exact equivalence; D+ as cohomological vanishing below some a; naturality as a NatTrans on all of D(R)^op x D(R). Each component is fixed as the homEquiv.symm of RHom_R.map(id, unit L) followed by (alpha.iso a).inv, which is exactly Stacks 0E1X via 0E1W; I checked the direction against scalarHomSource/scalarHomTarget. M, mu, alpha are canonical normalized presentations whose existence is scalarInternalHomAdjunction_exists; no extra hypotheses, no universe restriction, edge cases covered. No existing clause-(3) declaration and no name clash. Docstrings carry source, blueprint and the 7 proof steps; every proof_dep is imported; one sorry; no hollow defs. nt_compile.py on the snapshot file: rc=0, clean, 3.7 s; the negative control fails as expected. Minor: the second reading was the author's own pass, but it is a real reading."
  }
 }

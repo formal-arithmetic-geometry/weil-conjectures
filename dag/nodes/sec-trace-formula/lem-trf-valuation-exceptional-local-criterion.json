@@ -25,7 +25,9 @@
   "def-weil-pbc-multivariate-power-series",
   "def-pc-reduced-scheme",
   "def-weil-connected-scheme",
-  "def-sc-p1-standard"
+  "def-sc-p1-standard",
+  "def-trf-semistable-marked-point",
+  "def-trf-projective-line-tree"
  ],
  "proof": [
   {
@@ -240,5 +242,28 @@
   "group": "Q61",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q61-8ad02ed21 (reviewer sub-agent of L); spot-checked: The mathematics and citation route pass review: all six steps, the new proper marked contraction node, Temkin Lemma 4.4.2/Lemma 5.1(i)/Appendix B Corollary B.2, cited-node hypotheses, edge cases, Mathlib searches, no-SGA rule, and route-pivot lock were checked. The item JSON has stale created metadata (`lem-trf-valuation-exceptional-blowdown`, group Q80); corrected whole JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-valuation-exceptional-local-criterion.json with the proper Q61 item metadata. No nodes dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ValuationExceptionalLocalCriterion",
+  "declaration": "AlgebraicGeometry.valuation_exceptional_local_criterion",
+  "declarations": [
+   "AlgebraicGeometry.MultipointedCurve.Hom.exceptionalFiberScalar",
+   "AlgebraicGeometry.MultipointedCurve.Hom.exceptionalGeometricFiberι",
+   "AlgebraicGeometry.valuation_exceptional_local_criterion"
+  ],
+  "file": "lean/Sheaf/TraceFormula/ValuationExceptionalLocalCriterion.lean",
+  "statement": "theorem valuation_exceptional_local_criterion (K : Type u) [Field K] [IsSepClosed K] (V : ValuationSubring K) [Finite (PrimeSpectrum V)] (P Q : MultipointedCurve (Spec (.of V))) (hgenericSmooth : Smooth (pullback.snd Q.x (Spec.map (CommRingCat.ofHom V.subtype)))) (hgenericEtale : Etale (pullback.snd Q.d (Spec.map (CommRingCat.ofHom V.subtype)))) (q : P.Hom Q) (hq : q.IsEtaModification (Spec.map (CommRingCat.ofHom V.subtype))) (x : Q.X) (hx : IsClosed ({Q.x.asFiber x} : Set (Q.x.fiber (Q.x x)))) (hnormal : ∀ c : Q.X, IsDomain (Q.X.presheaf.stalk c) ∧ IsIntegrallyClosed (Q.X.presheaf.stalk c)) (hdim : topologicalKrullDim (q.curve.fiber x) = 1) (hsemi : ∀ z : q.curve.fiber x, (MultipointedPair.ofCurve P).IsSemistableAt (q.curve.fiberι x z)) : (MultipointedPair.ofCurve Q).IsSemistableAt x ↔ IsProjectiveLineTree (pullback.snd (q.exceptionalFiberScalar x) (Spec.map (CommRingCat.ofHom (algebraMap ((Spec (.of V)).residueField (Q.x x)) (AlgebraicClosure ((Spec (.of V)).residueField (Q.x x))))))) ∧ (Set.range (q.exceptionalGeometricFiberι x) ∩ closure ((Set.range (q.exceptionalGeometricFiberι x))ᶜ)).encard + (Set.range (P.markingBaseChange (Orgogozo.geometricPoint (Spec (.of V)) (Q.x x))) ∩ Set.range (q.exceptionalGeometricFiberι x)).encard ≤ 2",
+  "branch": "newtargets-dag",
+  "by": "Q138",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0c103e9c3",
+  "group": "Q138",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause of the node matches the Lean: IsSepClosed field; ValuationSubring with Finite PrimeSpectrum for the finite chain; T=Spec V and eta=Spec.map V.subtype; MultipointedCurve P,Q; generic smooth/etale pullbacks; IsEtaModification; s=Q.x x and closedness in the actual fibre; stalkwise normality, not the stronger IsNormalScheme; Z=q.curve.fiber x with topologicalKrullDim 1; hsemi via IsSemistableAt; iff with IsProjectiveLineTree of Z base-changed over kappa(s) to its algebraic closure, plus encard boundary (closure of the complement) and marking counts <=2 in the geometric Y fibre, which equals the node's geometric-point count because the base change is universally open. Both helpers are canonical, not hollow, with source/blueprint docstrings. lean.statement verbatim; sorry-only proof (#print axioms); stmt_deps gain two landed definition nodes, allowed and acyclic; proof-dependency imports are nonpublic; single universe u. nt_compile --json is clean in 3.2 s, and a control with a deliberate error confirmed the compile is real. Temkin PDF not available locally; checked against the stage-1-reviewed node. Second-reading section is the standard direct-delivery line. No findings."
  }
 }

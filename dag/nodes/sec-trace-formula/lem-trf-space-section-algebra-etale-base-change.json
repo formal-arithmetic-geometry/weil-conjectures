@@ -16,7 +16,8 @@
   "def-pc-module-pullback",
   "def-sc-invertible-module",
   "def-pur-sheaf-tensor-product",
-  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence"
+  "lem-trf-scheme-zariski-etale-quasi-coherent-equivalence",
+  "def-trf-space-line-module-proj-input"
  ],
  "proof": [
   {
@@ -227,5 +228,34 @@
   "group": "N3",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N3-3fae54682 (reviewer sub-agent of L); spot-checked: Step 1 is mathematically invalid as delivered: 0→O→O→0 presents the zero module, not F_d. I supplied a corrected whole item JSON using 0→0→O≅F_d→0. All statements, sources, hypotheses, edge cases, route restrictions, citations, searches, and proof steps were checked; no other faults found.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.SpaceSectionAlgebraEtaleBaseChange",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.space_section_algebra_etale_base_change",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.sectionAlgebraPullSection",
+   "AlgebraicGeometry.AlgebraicSpace.sectionAlgebraImage",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceSectionAlgebra",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceSectionAlgebra.image",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceSectionAlgebraBaseChange",
+   "AlgebraicGeometry.AlgebraicSpace.SpaceSectionAlgebra.AgreesWithSchemes",
+   "AlgebraicGeometry.AlgebraicSpace.space_section_algebra_etale_base_change"
+  ],
+  "file": "lean/Sheaf/TraceFormula/SpaceSectionAlgebraEtaleBaseChange.lean",
+  "statement": "theorem space_section_algebra_etale_base_change (S : Scheme.{u}) (T : Over S) (X : AlgebraicSpace S) (f : X.obj.obj ⟶ yoneda.obj T) (hqc : IsQuasiCompactPresheafMap f) (hsep : IsSeparatedPresheafMap f) (L : X.Modules) (hL : X.IsLineModule L) : ∃ A : SpaceSectionAlgebra f (lineTestFamily X L hL), A.AgreesWithSchemes ∧ ∀ (T' : Over S) (g : T' ⟶ T) (_ : Etale g.left) (F' : (Over S)ᵒᵖ ⥤ Type u) (h : F' ⟶ X.obj.obj) (f' : F' ⟶ yoneda.obj T') (_ : IsPullback h f' f (yoneda.map g)), ∃ A' : SpaceSectionAlgebra f' ((lineTestFamily X L hL).pullback h), Nonempty (SpaceSectionAlgebraBaseChange h g A A') ∧ A'.AgreesWithSchemes",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The actual cartesian scheme-test realization of the given small-etale line module is reused. SpaceSectionAlgebra bundles the compatible-section limit universal property, homogeneous products, sheaf coproduct, and tensor-adjunction evaluation. Base change is fixed on every local tensor generator, with explicit graded multiplication/unit and total-sum comparison. The final predicate identifies ordinary Zariski direct image by the section-normalized counit. These are helpers of this same section-algebra statement, not freely chosen maps or a substitute line module.",
+  "fixed_by": "NT-stage2-cc-ac098321d"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ac098321d",
+  "group": "Q16",
+  "result": "fix",
+  "note": "Statement matches node clause by clause (qc/separated presheaf predicates of the recorded dependency, line module via landed lineTestFamily, section-limit direct images, GradedSheafAlgebra/QuasiCoherentAlgebra/sheaf coproduct, scheme tensorPullback base change normalized on generators, AgreesWithSchemes via tensorPullbackSectionAdjunction counit); edge cases n=0, empty, g=id, non-scheme X/X' covered; one sorry; docstrings ok. F1: SpaceSectionAlgebra.evaluation was constrained only through sectionAlgebraImage (charts over a single open), so it could be arbitrary (e.g. 0 on P^1xA^1 -> P^1 for L=O(-1)) despite the docstring claiming adjunction counits. Fixed by adding field evaluation_cartesian (compatibility with test pullbacks via tensorPullbackCompositionIso, boundaryPullbackPowIso, boundaryTensorPowIso of L.pullbackIso), updated docstrings, signature verbatim unchanged; fixed module compiles clean via nt_compile.py (13.8 s), delivered one also clean (14.4 s). F2: second-reading section is an author self-reread (noted). Fix files: fixes/SpaceSectionAlgebraEtaleBaseChange.lean, fixes/lem-trf-space-section-algebra-etale-base-change.report.md."
  }
 }

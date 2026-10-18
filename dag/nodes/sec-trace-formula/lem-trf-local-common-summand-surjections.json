@@ -250,21 +250,22 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NX-588fd2fa0 (reviewer sub-agent of L); spot-checked: Read all eight steps, both new nodes, cited statements and source locations. The common-complement construction and residue-field lift are correct, including rank zero and characteristic two. Mathlib leaves match; no duplicates, cycles, long-step violations or dropped-route dependencies found. Accepted the local finite-free isomorphism-reflection tool use. Full checks recorded in review.md; no fixes needed."
  },
  "lean": {
-  "module": "Sheaf.RingTheory.LocalCommonSummandSurjections",
-  "declaration": "LinearMap.exists_common_summand_of_surjective_of_isLocalRing",
-  "file": "lean/Sheaf/RingTheory/LocalCommonSummandSurjections.lean",
-  "statement": "theorem exists_common_summand_of_surjective_of_isLocalRing {R : Type u} [CommRing R] [IsLocalRing R] (m n : ℕ) (α β : (Fin n → R) →ₗ[R] (Fin m → R)) (hα : Function.Surjective α) (hβ : Function.Surjective β) : ∃ U : Submodule R (Fin n → R), Function.Bijective (α.comp U.subtype) ∧ Function.Bijective (β.comp U.subtype) ∧ IsCompl (LinearMap.ker α) U ∧ IsCompl (LinearMap.ker β) U",
+  "module": "Sheaf.TraceFormula.LocalCommonSummandSurjections",
+  "file": "lean/Sheaf/TraceFormula/LocalCommonSummandSurjections.lean",
+  "declaration": "exists_common_summand_surjections",
+  "statement": "theorem exists_common_summand_surjections {R : Type u} [CommRing R] [IsLocalRing R] (m n : ℕ) (α β : (Fin n → R) →ₗ[R] (Fin m → R)) (hα : Function.Surjective α) (hβ : Function.Surjective β) : ∃ U : Submodule R (Fin n → R), Function.Bijective (α.domRestrict U) ∧ Function.Bijective (β.domRestrict U) ∧ IsCompl (LinearMap.ker α) U ∧ IsCompl (LinearMap.ker β) U",
   "branch": "newtargets-dag",
-  "by": "NE",
+  "by": "Q36",
   "date": "2026-10-17",
-  "existing": false
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-75674e42a"
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-5d4221270",
-  "group": "NE",
-  "result": "pass",
-  "note": "Statement matches node and Stacks 0FJK final paragraph clause by clause (IsLocalRing incl. nontriviality = exactly one maximal ideal; Fin t → R tuple modules; two surjectivity hyps; one U with α∘U.subtype, β∘U.subtype bijective; IsCompl with both kernels keeps the 'in particular' clause). No extra assumptions, universe u free, lean.statement verbatim. Edge cases m=0, n=0, m=n, char 2, zero ring checked. No existing Mathlib/project declaration. Docstrings have source place, blueprint tag and 8 proof steps; no definitions; sorry only; Worker report and Second reading by NE present (the latter is an author self-reading, acceptable). nt_compile --json on snapshot text: clean 1.3 s (warn.sorry=false); #check of the theorem and of isIso_of_isIso_extendScalars_of_finite_free elaborates. Cosmetic only: lean.date 2026-10-17 vs created 2026-10-18."
+  "reviewer": "NT-stage2-cc-75674e42a",
+  "group": "Q36",
+  "result": "fix",
+  "note": "Statement exists_common_summand_surjections matches node and Stacks 0FJK final paragraph clause by clause: CommRing+IsLocalRing, m n : ℕ, linear maps Fin n → R to Fin m → R, both surjective; ∃ U with both domRestrict bijective and IsCompl with both kernels. No extra hypotheses or universe restriction; n=0/m=0 covered; reuses Module.Free; no name clash; lean.statement verbatim. Fixes: (H8) theorem docstring lacked the source place and the node's 8 proof steps with their nodes (added); (H9/rule 7) missing non-public import of stated proof dep Sheaf.AlgebraicGeometry.LocalFreeBaseChangeReflectsIso, FiniteDimensional.Basic demoted from public import, TensorProduct.Tower added for def-weil-module-base-change, unused open scoped BigOperators removed. Signature unchanged, so the lean record is unchanged. nt_compile --json: delivered 2.3 s clean, fixed 2.9 s clean; error reporting checked with a broken copy. Complete replacement in fixes/LocalCommonSummandSurjections.lean."
  }
 }

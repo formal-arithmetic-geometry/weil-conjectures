@@ -11,7 +11,10 @@
   "def-pc-scheme",
   "def-pc-derived-category",
   "lem-pc-affine-qcoh-derived-equivalence",
-  "def-pc-finite-tor-dimension-over"
+  "def-pc-finite-tor-dimension-over",
+  "def-trf-ringed-complex-derived-tensor-vanishing",
+  "def-pc-topological-inverse-image-module",
+  "lem-pc-affine-model-coherent-object-comparisons"
  ],
  "proof": [
   {
@@ -279,5 +282,31 @@
   "group": "NJ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-239327967 (reviewer sub-agent of L); spot-checked: Read both nodes fully; checked all six steps, cited statements, Stacks 0DHY/0B67/09U9, edge cases, duplicates and route closure. No repairs needed. review.md records accepted tool uses and the unavailable pivot-list/history verification limitation."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineRelativeTorAmplitudeCriterion",
+  "declaration": "AlgebraicGeometry.affine_relative_torAmplitude_iff",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineRelativeTorAmplitudeCriterion.lean",
+  "statement": "theorem affine_relative_torAmplitude_iff {R A : Type u} [CommRing R] [CommRing A] (φ : R →+* A) [HasDerivedCategory.{wR} (ModuleCat.{u} R)] (M : CochainComplex (ModuleCat.{u} A) ℤ) (a b : ℤ) (_hab : a ≤ b) : (∀ (F : SheafOfModules.{u} ((sheafCompose (Opens.grothendieckTopology (Spec (.of A))) (forget₂ CommRingCat.{u} RingCat.{u})).obj (TopCat.Sheaf.inverseImageRing (Spec.map (CommRingCat.ofHom φ)).base (Spec (.of R)).sheaf))) (i : ℤ), i < a ∨ b < i → CochainComplex.sheafDerivedTensorVanishes (TopCat.Sheaf.inverseImageRing (Spec.map (CommRingCat.ofHom φ)).base (Spec (.of R)).sheaf) (affineRelativeTorComplex φ M) F i) ↔ DerivedCategory.torAmplitudeIn (ModuleCat.{u} R) a b (DerivedCategory.Q.obj (((ModuleCat.restrictScalars φ).mapHomologicalComplex (.up ℤ)).obj M))",
+  "branch": "newtargets-dag",
+  "by": "Q102",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.affineRelativeTorComplex",
+   "AlgebraicGeometry.affineTorOpenTildeComplex",
+   "AlgebraicGeometry.affine_relative_torAmplitude_iff",
+   "AlgebraicGeometry.affine_relative_torAmplitude_inverseImage_test",
+   "AlgebraicGeometry.affine_relative_locallyFiniteTor_iff"
+  ],
+  "fixed_by": "NT-stage2-cc-8b2d140a8"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8b2d140a8",
+  "group": "Q102",
+  "result": "fix",
+  "note": "Read node, Stacks 0DHY (perfect.tex 2334-2380), both delivered modules, new node def-trf-ringed-complex-derived-tensor-vanishing and the declarations used (HasFiniteTorDimensionOver, torAmplitudeIn, affineModelTildeComplex, tensorPullbackRingMap, inverseImageRing/Module, overEquiv, IsKFlat). Every hypothesis and clause matches: arbitrary R->A, unbounded M, canonical tilde complex restricted along the canonical f^-1 O_V -> O_U map, clause (1) via a K-flat existential predicate (equivalent to derived vanishing by 06YS/06YU), clause (2) relative torAmplitudeIn over R, inverse-image test with arbitrary G, local finite Tor via HasFiniteTorDimensionOver on opens <-> exists a<=b. No extra assumptions; edge cases (empty Spec, M=0, id, a=b) covered. New predicate is genuinely new (existing ones are tied to a scheme's structure sheaf) and not hollow; stmt_deps and verbatim lean.statement fields are correct; no statement_change; sorry-only theorems; docstrings present. nt_compile.py: both files clean, verified genuine with an injected error. Fix: removed the unused [HasDerivedCategory.{wX} (SheafOfModules (moduleRings (Spec A)))] binder (and the universe wX) from affine_relative_locallyFiniteTor_iff; complete module in fixes/AffineRelativeTorAmplitudeCriterion.lean, compiles clean; item record unaffected."
  }
 }

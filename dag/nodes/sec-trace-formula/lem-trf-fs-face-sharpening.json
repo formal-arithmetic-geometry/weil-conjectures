@@ -176,28 +176,21 @@
  },
  "lean": {
   "module": "Sheaf.TraceFormula.FsFaceSharpening",
-  "declaration": "AlgebraicGeometry.fs_face_sharpening",
-  "declarations": [
-   "Algebra.faceGeneratedSubgroup",
-   "Algebra.faceLocalizationQuotientMap",
-   "Algebra.faceSharpening",
-   "Algebra.faceSharpeningMap",
-   "Algebra.faceSharpeningGroupMap",
-   "AlgebraicGeometry.fs_face_sharpening"
-  ],
+  "declaration": "AlgebraicGeometry.face_sharpening",
   "file": "lean/Sheaf/TraceFormula/FsFaceSharpening.lean",
-  "statement": "theorem fs_face_sharpening {Q : Type u} [CommMonoid Q] (hQ : IsFineSaturatedMonoid Q) (F : Submonoid Q) (hF : ∀ a b : Q, a * b ∈ F → a ∈ F ∧ b ∈ F) : IsFineSaturatedMonoid (Algebra.faceLocalization Q F) ∧ (IsUnit.submonoid (Algebra.faceLocalization Q F)).map (Algebra.faceLocalization Q F).subtype = (Algebra.faceGeneratedSubgroup F).toSubmonoid ∧ IsFineSaturatedMonoid (Algebra.faceSharpening F) ∧ (∀ r : Algebra.faceSharpening F, IsUnit r → r = 1) ∧ Function.Injective (Algebra.faceSharpeningMap F) ∧ Function.Bijective (Algebra.faceSharpeningGroupMap F) ∧ (∃ r : ℕ, Nonempty (Module.Basis (Fin r) ℤ (Additive (Algebra.GrothendieckGroup (Algebra.faceSharpening F)))))",
+  "statement": "theorem face_sharpening (Q : Type u) [CommMonoid Q] (hQ : IsFineSaturatedMonoid Q) (F : Submonoid Q) (hF : ∀ a b : Q, a * b ∈ F → a ∈ F ∧ b ∈ F) : let R := Associates (Algebra.faceLocalization Q F) let H := Subgroup.closure (Algebra.GrothendieckGroup.of '' (F : Set Q)) IsFineSaturatedMonoid (Algebra.faceLocalization Q F) ∧ (∀ x : Algebra.faceLocalization Q F, IsUnit x ↔ (x : Algebra.GrothendieckGroup Q) ∈ H) ∧ IsFineSaturatedMonoid R ∧ (∀ r : R, IsUnit r → r = 1) ∧ ∃ φ : R →* (Algebra.GrothendieckGroup Q ⧸ H), (∀ x : Algebra.faceLocalization Q F, φ (Associates.mk x) = QuotientGroup.mk' H (Algebra.faceLocalizationGroupMap F (Algebra.GrothendieckGroup.of x))) ∧ Function.Injective φ ∧ (∃ e : Algebra.GrothendieckGroup R ≃* (Algebra.GrothendieckGroup Q ⧸ H), ∀ r : R, e (Algebra.GrothendieckGroup.of r) = φ r) ∧ (∃ n : ℕ, Nonempty (Module.Basis (Fin n) ℤ (Additive (Algebra.GrothendieckGroup R))))",
   "branch": "newtargets-dag",
-  "by": "Q88",
-  "date": "2026-10-17",
-  "existing": false
+  "by": "Q131",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-fa9a420bd"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-d96ee7fc8",
-  "group": "Q88",
-  "result": "pass",
-  "note": "Read the node, both stmt_deps (IsFineSaturatedMonoid at LogRegularPair.lean:141; the landed FaceLocalizationFs), the proof-dep modules, the citer LogRegularSharpChart, the module and the report. The node changed only in lean and stmt_deps; the added stmt_dep lem-trf-face-localization-fs is a landed node, which stage2_delivery.py allows, and it is needed to reuse Algebra.faceLocalization. lean.statement is verbatim in the file. Every clause matches: Q_F fs; units of Q_F = F^gp as an equality of submonoids of Q^gp; R as the real kernel quotient by F^gp; R fs and sharp; the canonical kerLift is injective; its GrothendieckGroup.lift is bijective; a Fin r Z-basis of R^gp. No extra hypotheses, one universe u. The statement is true; edge cases checked: trivial Q, F=Q, Q a group, sharp Q with trivial face, N^2 with a coordinate face, (Z/2)xN with its unit face. Helpers are real constructions; the only sorry is the theorem proof; docstrings give source and blueprint and the six proof steps; no line over 100 characters; proof imports follow the rule-7 plan; no duplicate notion. nt_compile --json on the snapshot file: clean, 3.9 s; a broken control copy reported its error. Report has Worker report and Second reading sections; the second reading is the author's self-check, noted. No fixes."
+  "reviewer": "NT-stage2-cc-fa9a420bd",
+  "group": "Q131",
+  "result": "fix",
+  "note": "Read node, def-trf-fs-log-blowup and IsFineSaturatedMonoid (LogRegularPair.lean:141), faceLocalization/faceLocalizationGroupMap (FaceLocalizationFs), the proof-dep modules, the report (Worker report and Second reading by Q131 both present), and six citers. All conclusion clauses match except one: the node's 'Q_F is fine saturated and its group of units is exactly F^gp' was missing (H3), and citers lem-trf-log-regular-sharp-chart and lem-trf-log-chart-face-tor-comparison use (Q_F)^x = F^gp. fixes/ adds the conjuncts IsFineSaturatedMonoid (faceLocalization Q F) and (∀ x, IsUnit x ↔ (x : Q^gp) ∈ H), with the updated lean-record statement (verbatim) and an amended report. No extra hypotheses, single universe u, canonical φ fixed by its representative formula, no defs, sorry only, docstrings carry source and blueprint. Edge cases F=Q, F={1}, Q={1}, Z/2xN pass. nt_compile.py: delivered and fixed files both clean (~3 s); probe confirmed diagnostics are reported. Merge tool not run here."
  }
 }

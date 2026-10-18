@@ -287,19 +287,24 @@
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.ValuationExceptionalBlowdown",
   "declaration": "AlgebraicGeometry.Temkin.valuation_exceptional_blowdown",
+  "declarations": [
+   "AlgebraicGeometry.Temkin.valuation_exceptional_blowdown"
+  ],
   "file": "lean/Sheaf/AlgebraicGeometry/ValuationExceptionalBlowdown.lean",
-  "statement": "theorem valuation_exceptional_blowdown (K : Type u) [Field K] [IsSepClosed K] (V : ValuationSubring K) [Finite (PrimeSpectrum V)] (X Y : MultipointedCurve (Spec (.of V))) (hX : Smooth (pullback.snd X.x (Spec.map (CommRingCat.ofHom V.toSubring.subtype)))) (hD : Etale (pullback.snd X.d (Spec.map (CommRingCat.ofHom V.toSubring.subtype)))) (f : Y.Hom X) (hf : f.IsEtaModification (Spec.map (CommRingCat.ofHom V.toSubring.subtype))) (hY : Y.IsSemistable) (z : Y.X) (hz : z ∈ f.closedImageFiberGenericPoints) (hze : f.IsExceptionalFiberGenericPoint z) : ∃ (Y₁ : MultipointedCurve (Spec (.of V))) (f₁ : Y₁.Hom X) (h : Y.Hom Y₁), f₁.IsEtaModification (Spec.map (CommRingCat.ofHom V.toSubring.subtype)) ∧ Y₁.IsSemistable ∧ h.IsEtaModification (Spec.map (CommRingCat.ofHom V.toSubring.subtype)) ∧ h.curve ≫ f₁.curve = f.curve ∧ h.marking ≫ f₁.marking = f.marking ∧ (h.curve '' closure ({z} : Set Y.X)).Subsingleton ∧ Set.BijOn h.curve (f.closedImageFiberGenericPoints \\ {z}) f₁.closedImageFiberGenericPoints",
+  "statement": "theorem valuation_exceptional_blowdown (K : Type u) [Field K] [IsSepClosed K] (V : ValuationSubring K) [Finite (PrimeSpectrum V)] (X Y : MultipointedCurve (Spec (.of V))) (hX : Smooth (pullback.snd X.x (Spec.map (CommRingCat.ofHom V.toSubring.subtype)))) (hD : Etale (pullback.snd X.d (Spec.map (CommRingCat.ofHom V.toSubring.subtype)))) (f : Y.Hom X) (hf : f.IsEtaModification (Spec.map (CommRingCat.ofHom V.toSubring.subtype))) (hY : Y.IsSemistable) (t : Spec (.of V)) (C : Set (Y.x.fiber t)) (hC : C ∈ irreducibleComponents (Y.x.fiber t)) (z : Y.x.fiber t) (hz : IsGenericPoint z C) (hclosed : IsClosed ({f.curve (Y.x.fiberι t z)} : Set X.X)) (hexceptional : f.IsExceptionalFiberGenericPoint (Y.x.fiberι t z)) : ∃ (Y₁ : MultipointedCurve (Spec (.of V))) (f₁ : Y₁.Hom X) (h : Y.Hom Y₁), f₁.IsEtaModification (Spec.map (CommRingCat.ofHom V.toSubring.subtype)) ∧ Y₁.IsSemistable ∧ h.IsEtaModification (Spec.map (CommRingCat.ofHom V.toSubring.subtype)) ∧ h.curve ≫ f₁.curve = f.curve ∧ h.marking ≫ f₁.marking = f.marking ∧ (h.curve '' (Y.x.fiberι t '' C)).Subsingleton ∧ Set.BijOn h.curve (f.closedImageFiberGenericPoints \\ {Y.x.fiberι t z}) f₁.closedImageFiberGenericPoints",
   "branch": "newtargets-dag",
-  "by": "Q24",
+  "by": "Q61",
   "date": "2026-10-17",
-  "existing": false
+  "existing": false,
+  "note": "Reviewer fix (H4): the delivered helper MultipointedCurve.Hom.closedImageFibreGenerics duplicated the landed MultipointedCurve.Hom.closedImageFiberGenericPoints of lem-trf-valuation-exceptional-closed-image-criterion (Q73), whose node defines B_f and exceptionality by the same text as this node; the helper is removed, B_f is that landed set, and the inline exceptional hypothesis is replaced by the landed MultipointedCurve.Hom.IsExceptionalFiberGenericPoint at the same point, so the criterion's output feeds this lemma directly. The item statement is unchanged.",
+  "fixed_by": "NT-stage2-cc-fc24119b8"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-62fd39b64",
-  "group": "Q24",
-  "result": "pass",
-  "note": "Item node changes only by an added lean record and three landed stmt_deps (multipointed curve, modification, closed-image criterion), which brief l.140 allows; statement, proof and proof_deps unchanged. Every hypothesis and conclusion clause matches the node: Finite PrimeSpectrum is equivalent to a finite chain for a valuation ring; B_f and exceptionality reuse the landed criterion definitions; f1∘h=f is checked on curve and marking; the contraction clause on the closure of z equals C_z because f(z) is closed and f lies over T; Set.BijOn uses the actual point map of h with the same rule against the unchanged X. Edge cases checked: empty marking, height zero, B_f={z}, nonproper curves; single universe u, no extra restriction. One sorry, no new definitions, source and blueprint docstrings with the 8-step plan, imports per brief l.104, lines at most 100, lean.statement verbatim, report has both sections. nt_compile --json is clean (3.1 s, exit 0); a deliberately broken copy errors, so the tool reports failures. Non-blocking stage-3 note: proof step 6 gives only the reduced support of the contracted fibre, while the local-criterion lemma needs the scheme-theoretic fibre, so step 7 must also prove reducedness."
+  "reviewer": "NT-stage2-cc-fc24119b8",
+  "group": "Q61",
+  "result": "fix",
+  "note": "Statement matches the node and Temkin L4.4.5/P4.4.6 clause by clause; no extra hypotheses or universe restriction; edge cases (height 0, empty curve or fibre, empty marking, B_f={z}, char p) covered; sorry only; docstrings carry source, blueprint and 8 proof steps; imports = statement uses + stated proof deps; only lean changed, plus landed stmt_deps (allowed); statement verbatim; report sections present; nt_compile rc 0 clean for delivered and fixed modules, probe confirmed error reporting. F1 (H4): helper MultipointedCurve.Hom.closedImageFibreGenerics duplicates Q73's landed closedImageFiberGenericPoints (same node text). Fixed: helper removed, ValuationExceptionalClosedImageCriterion imported publicly, B_f = closedImageFiberGenericPoints, inline exceptional hypothesis replaced by the equivalent landed IsExceptionalFiberGenericPoint at fiberι t z; record declarations and note updated (fixes/ValuationExceptionalBlowdown.lean, fixes/lem-trf-valuation-exceptional-blowdown.lean-record.json)."
  }
 }

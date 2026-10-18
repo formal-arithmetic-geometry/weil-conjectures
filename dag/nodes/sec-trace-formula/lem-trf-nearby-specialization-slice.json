@@ -13,7 +13,9 @@
   "def-trf-oriented-nearby-cycles",
   "def-weil-geometric-point",
   "def-weil-pbc-strict-henselization-limit",
-  "def-pc-fibre-product"
+  "def-pc-fibre-product",
+  "def-trf-specialization-slice-data",
+  "lem-trf-oriented-proper-fibre-exchange"
  ],
  "proof": [
   {
@@ -388,5 +390,47 @@
   "group": "NO",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NO-71d280447 (reviewer sub-agent of L); spot-checked: Mathematics and all eleven proof steps checked against cited nodes and ILO/Stacks sources. The immutable item has an A4 metadata fault: created.item is lem-trf-nearby-proper-source-exchange instead of lem-trf-nearby-specialization-slice. Corrected full DAG JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-nearby-specialization-slice.json; review.md records the detailed checks. No nodes dropped.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NearbySpecializationSlice",
+  "declaration": "AlgebraicGeometry.OrientedNearbyCycles.SpecializationSlice.nearbySpecializationSlice",
+  "declarations": [
+   "AlgebraicGeometry.OrientedNearbyCycles.SpecializationSlice.sliceOrientation",
+   "AlgebraicGeometry.OrientedNearbyCycles.SpecializationSlice.sliceLift",
+   "AlgebraicGeometry.OrientedNearbyCycles.SpecializationSlice.canonicalSlices",
+   "AlgebraicGeometry.OrientedNearbyCycles.SpecializationSlice.canonicalSlices_points",
+   "AlgebraicGeometry.OrientedNearbyCycles.SpecializationSlice.restricted",
+   "AlgebraicGeometry.OrientedNearbyCycles.SpecializationSlice.squareFirstLeft",
+   "AlgebraicGeometry.OrientedNearbyCycles.SpecializationSlice.squareFirstRight",
+   "AlgebraicGeometry.OrientedNearbyCycles.SpecializationSlice.pointExtension_liftOver",
+   "AlgebraicGeometry.OrientedNearbyCycles.SpecializationSlice.pointExtension_existsUnique",
+   "AlgebraicGeometry.OrientedNearbyCycles.SpecializationSlice.pointExtension",
+   "AlgebraicGeometry.OrientedNearbyCycles.SpecializationSlice.globalSquare_existsUnique",
+   "AlgebraicGeometry.OrientedNearbyCycles.SpecializationSlice.globalSquare",
+   "AlgebraicGeometry.OrientedNearbyCycles.SpecializationSlice.squareSecond",
+   "AlgebraicGeometry.OrientedNearbyCycles.SpecializationSlice.sliceSquare_existsUnique",
+   "AlgebraicGeometry.OrientedNearbyCycles.SpecializationSlice.sliceSquare",
+   "AlgebraicGeometry.OrientedNearbyCycles.SpecializationSlice.rho",
+   "AlgebraicGeometry.OrientedNearbyCycles.SpecializationSlice.ComparisonFamily",
+   "AlgebraicGeometry.OrientedNearbyCycles.SpecializationSlice.Compatible",
+   "AlgebraicGeometry.OrientedNearbyCycles.SpecializationSlice.SuccessiveCompatible",
+   "AlgebraicGeometry.OrientedNearbyCycles.SpecializationSlice.slice_exact",
+   "AlgebraicGeometry.OrientedNearbyCycles.SpecializationSlice.nearbySpecializationSlice"
+  ],
+  "file": "lean/Sheaf/Paper/NearbySpecializationSlice.lean",
+  "statement": "theorem nearbySpecializationSlice (Λ : Type v) [CommRing Λ] (m : ℕ) (hm : 1 ≤ m) (hΛ : ∀ a : Λ, (m : Λ) * a = 0) : (∃ α : ComparisonFamily.{u, v} Λ, (∀ {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] (s : SliceSpecialization S) (K : EtaleDerived.{u, v} X Λ), ProperFibre.IsBoundedBelow (etaleDatum.{u, v} X) (Coeff.{u, v} Λ) K → IsIso ((α f s).app K)) ∧ Compatible.{u, v} Λ α ∧ SuccessiveCompatible.{u, v} Λ α) ∧ (∀ {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] [QuasiCompact f] (A : VanishingDerived.{u, v} f Λ) (r₀ : ℤ), sliceVanishing (vanishingDatum.{u, v} f) (Coeff.{u, v} Λ) r₀ A ↔ ∀ s : SliceSpecialization S, sliceVanishing (etaleDatum.{u, v} (s.fibre f)) (Coeff.{u, v} Λ) r₀ (((sliceModules canonicalSlices.{u, v} f s).pull (Coeff.{u, v} Λ)).obj A))",
+  "branch": "newtargets-dag",
+  "by": "Q91",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Canonical universal slice and its oriented-point characterization; normalized field-extension, global-section and both-projection slice squares; exact module inverse image; natural comparison invertible on D-plus, specified counit-mate and successive compatibility, and all-slices detection for arbitrary unbounded objects. Reuses the independent definitions registered by def-trf-specialization-slice-data from their existing module; no theorem of GeneralNearbySliceTest is used. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6362d5041",
+  "group": "Q91",
+  "result": "pass",
+  "note": "All node clauses match the Lean: finite type as LocallyOfFiniteType+QuasiCompact; Λ killed by m≥1 with no extra assumptions; D+ via t.plus; the slice e is the universal lift with the c-orientation (specializationDirect, fibreFactor), point formula and exactness as named theorems; natural comparison invertible on D+; Compatible over all Cartesian squares and SliceChanges with the β/ρ/γ equation correctly typed; SuccessiveCompatible; detection for unbounded A, every r and all slices. Reused GeneralNearbySliceTest definitions read in full and recorded by the existing:true node def-trf-specialization-slice-data, whose fields follow §5. The stmt_deps addition of a landed node is allowed; DAG BFS finds no cycle. The three helper choices come from uniqueness theorems that are mathematically sound; no hollow definition; 7 theorems, all sorry. Statement verbatim; no line over 100 characters; autoImplicit false. nt_compile --json on the snapshot module: rc 0, 5.4 s, no errors or warnings. Remarks only: α is an existence witness determined only up to compatible automorphisms (follows from the node's wording); naturality on unbounded complexes is true by the node's construction; stage 3 must move general_nearby_slice_test out of its module (import cycle, handled by add_proof_imports); inherited created.item metadata error left untouched as the rules require."
  }
 }

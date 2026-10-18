@@ -298,23 +298,20 @@
  "lean": {
   "module": "Sheaf.TraceFormula.LciPointwiseCriterion",
   "declaration": "AlgebraicGeometry.lci_pointwise_criterion",
+  "statement": "theorem lci_pointwise_criterion (k : Type u) [Field k] (X : Scheme.{u}) (s : X ⟶ Spec (.of k)) [LocallyOfFiniteType s] : ( (∃ (I : Type u) (C : I → CommRingCat.{u}) (aC : ∀ i, Algebra k (C i)) (ftC : ∀ i, Algebra.FiniteType k (C i)) (φ : ∀ i, Spec (C i) ⟶ X), (∀ i, IsOpenImmersion (φ i)) ∧ (∀ i, φ i ≫ s = Spec.map (CommRingCat.ofHom (algebraMap k (C i)))) ∧ (∀ z : X, ∃ i, ∃ x : Spec (C i), φ i x = z) ∧ (∀ i, @Algebra.IsLocalCompleteIntersection k (C i) _ _ (aC i) (ftC i))) ↔ (∀ (x : X), ∃ (R : Type u) (_ : CommRing R) (_ : Algebra k R) (_ : IsLocalRing R) (_ : IsNoetherianRing R), IsRegularLocalRing R ∧ Algebra.EssFiniteType k R ∧ ∃ (rs : List R), RingTheory.Sequence.IsRegular R rs ∧ Nonempty (@AlgEquiv k (R ⧸ Ideal.span (Set.range (fun i : Fin rs.length => rs.get i))) (X.presheaf.stalk x) _ _ _ _ (((Scheme.ΓSpecIso (.of k)).inv ≫ s.appLE ⊤ ⊤ le_top ≫ X.presheaf.germ ⊤ x trivial).hom.toAlgebra))) ) ∧ ( (∀ (x : X), ∃ (R : CommRingCat.{u}) (aR : Algebra k R) (φ : Spec R ⟶ X), IsOpenImmersion φ ∧ (∃ y : Spec R, φ y = x) ∧ φ ≫ s = Spec.map (CommRingCat.ofHom (algebraMap k R)) ∧ @Algebra.IsGlobalCompleteIntersection k R _ _ aR) ↔ (∀ (x : X), ∃ (R : Type u) (_ : CommRing R) (_ : Algebra k R) (_ : IsLocalRing R) (_ : IsNoetherianRing R), IsRegularLocalRing R ∧ Algebra.EssFiniteType k R ∧ ∃ (rs : List R), RingTheory.Sequence.IsRegular R rs ∧ Nonempty (@AlgEquiv k (R ⧸ Ideal.span (Set.range (fun i : Fin rs.length => rs.get i))) (X.presheaf.stalk x) _ _ _ _ (((Scheme.ΓSpecIso (.of k)).inv ≫ s.appLE ⊤ ⊤ le_top ≫ X.presheaf.germ ⊤ x trivial).hom.toAlgebra)))) ∧ (∀ (S : Type v) (_ : CommRing S) (_ : Algebra k S) (_ : Algebra.FiniteType k S), (@Algebra.IsLocalCompleteIntersection k S _ _ ‹_› ‹_› ↔ ∀ (p : Ideal S) (_ : p.IsPrime), ∃ (R : Type u) (_ : CommRing R) (_ : Algebra k R) (_ : IsLocalRing R) (_ : IsNoetherianRing R), IsRegularLocalRing R ∧ Algebra.EssFiniteType k R ∧ ∃ (rs : List R), RingTheory.Sequence.IsRegular R rs ∧ Nonempty ((R ⧸ Ideal.span (Set.range (fun i : Fin rs.length => rs.get i))) ≃ₐ[k] (Localization.AtPrime p))))",
+  "by": "Q133",
+  "date": "2026-10-18",
   "file": "lean/Sheaf/TraceFormula/LciPointwiseCriterion.lean",
-  "statement": "theorem lci_pointwise_criterion (k : Type u) [Field k] (X : Scheme.{u}) (s : X ⟶ Spec (.of k)) [LocallyOfFiniteType s] : List.TFAE [ (∃ (I : Type u) (U : I → X.affineOpens), (∀ x : X, ∃ i, x ∈ (U i).1) ∧ ∀ i, ∃ ft : @Algebra.FiniteType k Γ(X, (U i).1) _ _ (((Scheme.ΓSpecIso (.of k)).inv ≫ s.appLE ⊤ (U i).1 le_top).hom.toAlgebra), @Algebra.IsLocalCompleteIntersection k Γ(X, (U i).1) _ _ (((Scheme.ΓSpecIso (.of k)).inv ≫ s.appLE ⊤ (U i).1 le_top).hom.toAlgebra) ft), (∀ x : X, ∃ U : X.affineOpens, x ∈ U.1 ∧ @Algebra.IsGlobalCompleteIntersection k Γ(X, U.1) _ _ (((Scheme.ΓSpecIso (.of k)).inv ≫ s.appLE ⊤ U.1 le_top).hom.toAlgebra)), (∀ x : X, @Algebra.IsCompleteIntersectionLocalAlgebra k (X.presheaf.stalk x) _ _ (((Scheme.ΓSpecIso (.of k)).inv ≫ s.appLE ⊤ ⊤ le_top ≫ X.presheaf.germ ⊤ x trivial).hom.toAlgebra))]",
   "branch": "newtargets-dag",
-  "by": "Q90",
-  "date": "2026-10-17",
   "existing": false,
-  "declarations": [
-   "Algebra.isLocalCompleteIntersection_iff_localizations",
-   "AlgebraicGeometry.lci_pointwise_criterion"
-  ]
+  "fixed_by": "NT-stage2-cc-08eaaba51"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-a2ad176d1",
-  "group": "Q90",
-  "result": "pass",
-  "note": "Read the item node, all 8 statement dependencies, Stacks 01UG/00SD/00SH, both delivered modules, the new node and the report. The item node changes only in lean plus the permitted (A) stmt_deps addition; lean.statement strings match the files word for word; the new definition node has exactly the §5 fields. IsCompleteIntersectionLocalAlgebra covers every 00SD clause (local, essentially finite type, regular local presenting ring, list regular sequence in m_R, k-algebra isomorphism); the max u v universe for R loses no case. lci_pointwise_criterion: field, explicit s with LocallyOfFiniteType, conditions (1)/(2)/(3) with the structure-map scalars and stalk germ, as TFAE. The algebra iff is stated for every prime with FiniteType S. Edge cases (empty scheme, zero ring, empty sequence, any characteristic) are covered. No hollow definition, only sorry proofs, docstrings carry the source, blueprint id and proof steps, imports correct. nt_compile --json on both files in dependency order is clean (3.1 s, 2.9 s, rc 0). The second reading is by the author (direct-delivery mode); not a return fault."
+  "reviewer": "NT-stage2-cc-08eaaba51",
+  "group": "Q133",
+  "result": "fix",
+  "note": "Read the node, 7 stmt deps, Stacks 01UG/00SD/00SH, the module and the report. All hypotheses and clauses match: (1) LCI affine cover with k-structure compatible with s; (2) global-complete-intersection affine neighbourhoods; (3) stalk ≅ R/(rs) as k-algebras via s, with R regular local and essentially of finite type, rs regular (entries in the maximal ideal by properness); the algebra criterion. Edge cases (empty scheme, zero ring, empty sequence) are fine; R's witness universe u is correct and necessary. No hollow definitions, sorry only, docstrings and report sections present. Fixed in fixes/LciPointwiseCriterion.lean: (1) silent universe restriction ∀ S : Type u in the algebra criterion, generalized to Type v; (2) proof docstring expanded to the node's nine steps. nt_compile: delivered 2.5 s clean, fixed 1.9 s clean."
  }
 }

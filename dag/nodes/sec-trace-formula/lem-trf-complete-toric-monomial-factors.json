@@ -135,20 +135,20 @@
  },
  "lean": {
   "module": "Sheaf.TraceFormula.CompleteToricMonomialFactors",
-  "declaration": "complete_toric_monomial_factors",
+  "declaration": "complete_toric_monomial_factor",
   "file": "lean/Sheaf/TraceFormula/CompleteToricMonomialFactors.lean",
-  "statement": "theorem complete_toric_monomial_factors (P : Type u) [AddCommMonoid P] (hP : IsFineSaturatedMonoid (Multiplicative P)) (hsharp : ∀ q : P, IsAddUnit q → q = 0) (n : ℕ) : (∀ (k : Type v) [Field k] (q : P) (b c : CompletedLocalModel k P n), b * c = completeToricChart k P n q → ∃ (r : P) (u : CompletedLocalModel k P n), IsUnit u ∧ b = u * completeToricChart k P n r) ∧ (∀ (C : Type v) [CommRing C] [IsLocalRing C] (p : ℕ), IsCohenRing p C → ∀ θ : CompletedLocalModel C P n, θ - (p : CompletedLocalModel C P n) ∈ completedLocalModelBoundaryIdeal C P n → ∀ (q : P) (b c : cohenCompleteToricRing C P n θ), b * c = cohenCompleteToricChart C P n θ q → ∃ (r : P) (u : cohenCompleteToricRing C P n θ), IsUnit u ∧ b = u * cohenCompleteToricChart C P n θ r)",
+  "statement": "theorem complete_toric_monomial_factor (P : Type u) [AddCommMonoid P] (hP : IsFineSaturatedMonoid (Multiplicative P)) (hsharp : ∀ q : P, IsAddUnit q → q = 0) (n : ℕ) : (∀ (k : Type v) [Field k] (q : P) (b c : CompletedLocalModel k P n), b * c = completeToricChart k P n ((q : Multiplicative P)) → ∃ (r : P) (u : (CompletedLocalModel k P n)ˣ), b = (u : CompletedLocalModel k P n) * completeToricChart k P n ((r : Multiplicative P))) ∧ (∀ (C : Type v) [CommRing C] [IsLocalRing C] (p : ℕ), IsCohenRing p C → ∀ (θ : CompletedLocalModel C P n), θ - (p : CompletedLocalModel C P n) ∈ completedLocalModelBoundaryIdeal C P n → ∀ (q : P) (b c : cohenCompleteToricRing C P n θ), b * c = cohenCompleteToricChart C P n θ ((q : Multiplicative P)) → ∃ (r : P) (u : (cohenCompleteToricRing C P n θ)ˣ), b = (u : cohenCompleteToricRing C P n θ) * cohenCompleteToricChart C P n θ ((r : Multiplicative P)))",
   "branch": "newtargets-dag",
-  "by": "Q120",
+  "by": "Q21",
   "date": "2026-10-18",
   "existing": false
  },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-cf6079e2b",
-  "group": "Q120",
+  "reviewer": "NT-stage2-cc-992adc359",
+  "group": "Q21",
   "result": "pass",
-  "note": "Clause-by-clause match with the node: fs+sharp P, n, B_L(P,n) as the published CompletedLocalModel (adic completion at m_L + monomials q≠0 + variables), field case (i), Cohen case (ii) via IsCohenRing (includes Nat.Prime p, no perfectness), θ−p in completedLocalModelBoundaryIdeal, R=B_C/(θ), chart z^q from the published completeToricChart/cohenCompleteToricChart, conclusion ∀q b c, bc=z^q → ∃ r u, IsUnit u ∧ b=u z^r, same quantifier order. No new or hollow definitions; encoding consistent with the landed complete_toric_kato_recognition. Node copy differs from the clone only in lean; lean.statement verbatim in the file. Edge cases q=0, P={0}, n=0 and universes (P:u; k,C:v, polymorphic) ok. Docstrings carry source ILO VI 1.4/1.6 pp. 69-70 and blueprint tag; proof is sorry only; report has Worker report and the standard Second reading section. nt_compile.py --json on the snapshot file: clean in 3.0 s; a probe confirmed the tool reports diagnostics and the elaborated type. No findings; note a parallel Q149 delivery of the same item exists."
+  "note": "Read the node, its three stmt_deps and their Lean (IsFineSaturatedMonoid, the completed model and its boundary ideal, IsCohenRing), the kato-recognition module that supplies the charts and Cohen quotient, and the delivered module and report. Every hypothesis and conclusion clause matches with the same quantifier order and no extra assumptions or universe restriction. q=0, P={0}, n=0 and the Cohen case with no variables are covered. Nothing new is defined: canonical declarations are reused and no hollow definition exists. The import of the kato-recognition module matches proof_deps, with no cycle. lean.statement is verbatim (checked by script). Docstrings carry the source place, the blueprint tag and the proof steps, and the proof is sorry only. Both report sections are present. nt_compile.py on the snapshot file: 3.8 s, exit 0, no errors or warnings. No findings in the delivery; outside it, the item's maintainer-owned source.place and blueprint.from.place still mention the nonexistent 'Algebraic sublemma'."
  }
 }

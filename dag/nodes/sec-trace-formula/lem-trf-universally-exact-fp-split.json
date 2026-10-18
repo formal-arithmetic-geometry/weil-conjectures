@@ -156,22 +156,21 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q129-950f41418 (reviewer sub-agent of L); spot-checked: Reviewed item, cited nodes, unit/chapter route, Stacks Tags 058K/058L, edge cases, dependencies, searches, and repaired relation-map orientation. The proof is complete, hypotheses are preserved, and no route or duplication fault remains. Review written to review.md."
  },
  "lean": {
-  "module": "Sheaf.SecTraceFormula.UniversallyExactFPSplit",
-  "declaration": "Module.universally_exact_finitely_presented_quotient_split",
-  "statement": "theorem universally_exact_finitely_presented_quotient_split {R : Type u} [CommRing R] {A : Type v} [AddCommGroup A] [Module R A] {B : Type w} [AddCommGroup B] [Module R B] {C : Type z} [AddCommGroup C] [Module R C] (i : A →ₗ[R] B) (p : B →ₗ[R] C) (hi : Function.Injective i) (hp : Function.Surjective p) (hip : LinearMap.ker p = LinearMap.range i) [Module.FinitePresentation R C] (h_exact : ∀ (Q : Type (max u t)) [AddCommGroup Q] [Module R Q], Function.Injective (i.rTensor Q) ∧ Function.Exact (i.rTensor Q) (p.rTensor Q) ∧ Function.Surjective (p.rTensor Q)) : ∃ r : B →ₗ[R] A, r.comp i = LinearMap.id",
+  "module": "Sheaf.SecTraceFormula.UniversallyExactFpSplit",
+  "declaration": "LinearMap.universallyExactFpSplit",
+  "file": "lean/Sheaf/SecTraceFormula/UniversallyExactFpSplit.lean",
+  "statement": "theorem universallyExactFpSplit (R : Type uR) [CommRing R] (A : Type uA) [AddCommGroup A] [Module R A] (B : Type uB) [AddCommGroup B] [Module R B] (C : Type uC) [AddCommGroup C] [Module R C] (i : A →ₗ[R] B) (p : B →ₗ[R] C) (hi : Function.Injective i) (hp : Function.Surjective p) (hex : Function.Exact i p) [Module.FinitePresentation R C] (hTensor : ∀ (Q : Type (max uR uA uB uC t)) [AddCommGroup Q] [Module R Q], Function.Injective (i.rTensor Q) ∧ Function.Surjective (p.rTensor Q) ∧ Function.Exact (i.rTensor Q) (p.rTensor Q)) : ∃ r : B →ₗ[R] A, r.comp i = LinearMap.id",
   "branch": "newtargets-dag",
-  "by": "Q21",
-  "date": "2026-10-18",
-  "existing": false,
-  "file": "lean/Sheaf/SecTraceFormula/UniversallyExactFPSplit.lean",
-  "fixed_by": "NT-stage2-cc-509f6cdf0"
+  "by": "Q57",
+  "date": "2026-10-17",
+  "existing": false
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-509f6cdf0",
-  "group": "Q21",
-  "result": "fix",
-  "note": "Statement verified clause by clause against the node and Stacks 058L/058K: R CommRing; A,B,C in independent universes; hi, hp, hip (ker=range); Module.FinitePresentation R C; for every Q : Type (max u t), rTensor injective, exact and surjective (non-vacuous because it contains universe u, weaker than the node's hypothesis, still true via the fp Q=coker t); conclusion is exactly a linear retraction. Node changed only in lean; statement verbatim; dependencies use their recorded Mathlib declarations; no defs, sorry only, lines <=100, report sections present. H8 fault: the theorem docstring lacked the node's proof step by step with the nodes used. fixes/UniversallyExactFPSplit.lean is the complete replacement with steps 1-3 (058K (1)=>(2), (2)=>(5) with P=C, phi=id; 058L section to retraction) naming lem-trf-universal-injective-finite-test, lem-weil-pbc-tensor-right-exact, def-weil-pbc-module-tensor-product, def-sc-finitely-presented-module. Signature byte-identical, no JSON change. nt_compile: snapshot and fixed file both clean in 1.2 s."
+  "reviewer": "NT-stage2-cc-342141e13",
+  "group": "Q57",
+  "result": "pass",
+  "note": "Statement matches node and Stacks Tag 058L (universally exact ⇒ split direction) clause by clause: CommRing R; modules A,B,C in separate universes with no extra instances; i,p linear; injective i, surjective p, Function.Exact i p for ker p = i(A); Module.FinitePresentation R C (recorded dependency); tensor test over all Q : Type (max uR uA uB uC t) with rTensor injective, surjective and exact (A⊗Q orientation); conclusion ∃ r, r.comp i = id. The universe form is not a restriction: the only Q the proof needs is the finitely presented cokernel in Type uR, which lifts into the test universe. Edge cases covered: zero ring, C=0, A=0, already split sequences, Q=0 or not finitely presented. lean.statement matches the signature verbatim (script check); no definitions; proof only sorry; docstrings give the source place and blueprint tag; report has real Worker report and Second reading by Q57 sections. No duplicate found in Mathlib, the side clone or slopmaster2. nt_compile.py --json on the delivered file: exit 0 in about 2 s with no diagnostics; a deliberately broken copy compiled in /tmp printed errors and exited 1, so empty output means clean. No findings."
  }
 }

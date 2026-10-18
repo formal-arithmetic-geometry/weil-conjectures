@@ -258,5 +258,24 @@
   "group": "Q27",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q27-46b3bc470 (reviewer sub-agent of L); spot-checked: Read the item, all eight steps, cited statements and source passages in full. Projection maps, abelian coefficients, hypotheses, local sheafification arguments and repaired unit binding check out. No new nodes, long steps, cycles, forbidden batch-5 dependencies or dropped machinery. review.md records the checks and a nonblocking report discrepancy concerning inherited creation provenance."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ComparisonEqualizerClassKilling",
+  "declaration": "CategoryTheory.RefinedTopologyComparison.comparisonEqualizerClassKilling",
+  "file": "lean/Sheaf/TraceFormula/ComparisonEqualizerClassKilling.lean",
+  "statement": "theorem comparisonEqualizerClassKilling {C : Type u} [SmallCategory C] (τ τ' : Precoverage C) (hτsite : τ.IsSiteForCoverings) (hτ'site : τ'.IsSiteForCoverings) (hτ : τ' ≤ τ) (P : ∀ ⦃X Y : C⦄, (X ⟶ Y) → Prop) (A' : ∀ X : C, Sheaf (τ'.toGrothendieck.over X) AddCommGrpCat.{u} → Prop) (hzero : ∀ X : C, A' X 0) (hiso : ∀ (X : C) (H K : Sheaf (τ'.toGrothendieck.over X) AddCommGrpCat.{u}), Nonempty (H ≅ K) → A' X H → A' X K) (hkernel : ∀ (X : C) (H K : Sheaf (τ'.toGrothendieck.over X) AddCommGrpCat.{u}) (g : H ⟶ K), A' X H → A' X K → A' X (kernel g)) (hcokernel : ∀ (X : C) (H K : Sheaf (τ'.toGrothendieck.over X) AddCommGrpCat.{u}) (g : H ⟶ K), A' X H → A' X K → A' X (cokernel g)) (hextension : ∀ (X : C) (S : ShortComplex (Sheaf (τ'.toGrothendieck.over X) AddCommGrpCat.{u})), S.ShortExact → A' X S.X₁ → A' X S.X₃ → A' X S.X₂) (hbaseChange : ∀ (X Y Y' : C) (f : X ⟶ Y), P f → ∀ g : Y' ⟶ Y, ∃ h : HasPullback f g, letI := h; P (pullback.snd f g)) (hrelocalization : ∀ (X Y : C) (f : X ⟶ Y) (H : Sheaf (τ'.toGrothendieck.over Y) AddCommGrpCat.{u}), A' Y H → A' X ((relocalization τ'.toGrothendieck f).inverse.obj H)) (htauSheaf : ∀ (X : C) (H : Sheaf (τ'.toGrothendieck.over X) AddCommGrpCat.{u}), A' X H → Presheaf.IsSheaf (τ.toGrothendieck.over X) H.obj) [hExt : ∀ X : C, HasExt (Sheaf (τ'.toGrothendieck.over X) AddCommGrpCat.{u})] (hderivedImage : ∀ (X Y : C) (f : X ⟶ Y), P f → ∀ (H : Sheaf (τ'.toGrothendieck.over X) AddCommGrpCat.{u}), A' X H → ∀ i : ℕ, A' Y (((relocalization τ'.toGrothendieck f).direct.rightDerived i).obj H)) {X Y : C} (f : X ⟶ Y) (hf : P f) (hsingle : Presieve.singleton f ∈ τ Y) (hff : HasPullback f f) (H' : Sheaf (τ'.toGrothendieck.over Y) AddCommGrpCat.{u}) (hH' : A' Y H') (q : ℕ) (hq : 1 ≤ q) (θ : Sheaf.H' H' q (Over.mk f)) (heq : ((H'.cohomologyPresheaf q).map (Over.homMk (@pullback.fst C _ X X Y f f hff) : Over.mk (@pullback.fst C _ X X Y f f hff ≫ f) ⟶ Over.mk f).op) θ = ((H'.cohomologyPresheaf q).map (Over.homMk (@pullback.snd C _ X X Y f f hff) (by simp [pullback.condition]) : Over.mk (@pullback.fst C _ X X Y f f hff ≫ f) ⟶ Over.mk f).op) θ) : ∃ (I : Type u) (Yj : I → C) (a : ∀ j, Yj j ⟶ Y), Presieve.ofArrows Yj a ∈ τ' Y ∧ ∀ j, ∃ hj : HasPullback f (a j), ((H'.cohomologyPresheaf q).map (Over.homMk (@pullback.fst C _ X (Yj j) Y f (a j) hj) : Over.mk (@pullback.fst C _ X (Yj j) Y f (a j) hj ≫ f) ⟶ Over.mk f).op) θ = 0",
+  "branch": "newtargets-dag",
+  "by": "Q114",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-8a34759ee"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8a34759ee",
+  "group": "Q114",
+  "result": "fix",
+  "note": "Every clause matches the node and Stacks 0EZD; theta is rendered as Sheaf.H' H' q (Over.mk f) on the slice over Y, the source's form (canonically equal to H^q(X,H'|_X) via 03F3, node Step 1). Equalizer maps along pullback.fst/snd with pullback.condition; conclusion: a tau'-covering ofArrows with theta mapping to 0 along pullback.fst f (a j). (1)-(4) and weak Serre match sibling comparisonInductionStep, using its relocalization. The hExt instance is a true Prop in the intended universe (hasExt_of_enoughInjectives), not a stronger assumption. No hollow defs, sorry only, statement verbatim, imports used, lines <=100, searches recorded, required report sections present. Edge cases q=0 and empty index set checked. Only fault, H8: the docstring paraphrased the proof instead of giving the node's 8 steps. fixes/lean/Sheaf/TraceFormula/ComparisonEqualizerClassKilling.lean replaces only that docstring with the 8 steps; signature byte-identical. nt_compile: delivered and fixed files clean, no errors or warnings."
  }
 }

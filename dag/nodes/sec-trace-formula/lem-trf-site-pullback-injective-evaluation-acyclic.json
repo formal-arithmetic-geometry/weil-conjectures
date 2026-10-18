@@ -227,20 +227,21 @@
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.Sites.PullbackInjectiveEvaluationAcyclic",
-  "declaration": "CategoryTheory.sitePullback_injective_evaluation_isZero",
+  "declaration": "CategoryTheory.isZero_rightDerived_evaluation_pullback_injective",
   "file": "lean/Sheaf/CategoryTheory/Sites/PullbackInjectiveEvaluationAcyclic.lean",
-  "statement": "theorem sitePullback_injective_evaluation_isZero {C D : Type u} [SmallCategory C] [SmallCategory D] (J : Precoverage C) (K : Precoverage D) (hJ : J.IsSiteForCoverings) (hK : K.IsSiteForCoverings) (f : C ⥤ D) (hcover : ∀ (X : C) (S : Presieve X), S ∈ J X → S.map f ∈ K (f.obj X)) (hpullback : ∀ (X Y Z : C) (S : Presieve X), S ∈ J X → ∀ (a : Y ⟶ X) (b : Z ⟶ X), S a → PreservesLimit (cospan a b) f) [f.IsContinuous J.toGrothendieck K.toGrothendieck] [f.IsCocontinuous J.toGrothendieck K.toGrothendieck] (I : Sheaf K.toGrothendieck AddCommGrpCat.{u}) [Injective I] (U : C) (p : ℕ) (hp : 0 < p) : IsZero (((sheafToPresheaf J.toGrothendieck AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)).rightDerived p).obj ((f.sheafPushforwardContinuous AddCommGrpCat.{u} J.toGrothendieck K.toGrothendieck).obj I))",
+  "statement": "theorem isZero_rightDerived_evaluation_pullback_injective {C : Type u} [SmallCategory C] {D : Type u} [SmallCategory D] (J : Precoverage C) (K : Precoverage D) (_hJ : J.IsSiteForCoverings) (_hK : K.IsSiteForCoverings) (f : C ⥤ D) (_hcover : ∀ (X : C) (S : Presieve X), S ∈ J X → S.map f ∈ K (f.obj X)) (_hpullback : ∀ (X Y Z : C) (S : Presieve X), S ∈ J X → ∀ (a : Y ⟶ X) (b : Z ⟶ X), S a → PreservesLimit (cospan a b) f) [f.IsCocontinuous J.toGrothendieck K.toGrothendieck] (I : Sheaf K.toGrothendieck AddCommGrpCat.{u}) [Injective I] (U : C) (p : ℕ) (_hp : 0 < p) : IsZero (((sheafToPresheaf J.toGrothendieck AddCommGrpCat.{u} ⋙ (evaluation Cᵒᵖ AddCommGrpCat.{u}).obj (op U)).rightDerived p).obj ((presheafToSheaf J.toGrothendieck AddCommGrpCat.{u}).obj (f.op ⋙ I.obj)))",
   "branch": "newtargets-dag",
-  "by": "Q12",
-  "date": "2026-10-17",
-  "existing": false
+  "by": "Q48",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The canonical cocontinuous inverse image is written directly as sheafification of precomposition, (presheafToSheaf J.toGrothendieck AddCommGrpCat).obj (f.op ⋙ I.obj), as in Sites 00XO/00XR. The cohomology is the ordinary rightDerived of evaluation, not a substitute Ext or arbitrary functor. The site hypotheses are IsSiteForCoverings; no global pullbacks or strict indexed-composition hypothesis is imposed."
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-fced4d30c",
-  "group": "Q12",
+  "reviewer": "NT-stage2-cc-c8b0e80d7",
+  "group": "Q48",
   "result": "pass",
-  "note": "Read node, Stacks 0D6X source, all 5 statement deps and the adjunction proof-dep Lean. Every clause matches with nothing weaker or stronger: small sites in common universe u, continuity as hcover/hpullback (same form as the dependency records), cocontinuity alone via Mathlib IsCocontinuous, injective I in Sheaf K AddCommGrpCat.{u}, all U, p : Nat with 0 < p, IsZero of rightDerived p of sheafToPresheaf composed with evaluation at op U. Inverse image is f.sheafPushforwardContinuous = precomposition, the canonical g^-1 by 00XR, correct direction. The IsContinuous instance is implied by 00WW (remark only). Statement field unchanged; only lean changed; lean.statement verbatim. No hollow definitions, sorry only, docstrings with source/blueprint and proof steps, no duplicate, no pro-etale substitute; Worker report and Second reading present. nt_compile.py --json rc=0 with no messages (warn.sorry=false); an injected unknown identifier gave the expected error, so the file is really elaborated."
+  "note": "Matched every clause of the node and Stacks 0D6X: small sites in one universe u via IsSiteForCoverings; continuity as the two recorded conjuncts, same shape as IsSpecialCocontinuousForCoverings and the topos-adjunction dependency; cocontinuity clause (1) only, as f.IsCocontinuous; g^{-1}I as the sheafification of f.op ⋙ I.obj, Stacks 00XO's formula, on the source site; ordinary rightDerived of evaluation at U; p:ℕ with 0<p; IsZero. No stronger hypotheses and no unbound universes. Edge cases checked: empty category, empty covering, p=0 excluded, zero sheaf, non-terminal U. No duplicate declaration found. No definitions, proof is sorry, source/blueprint docstrings with all four proof steps, node unchanged apart from the lean field, lean.statement verbatim in the module, report has Worker report and Second reading by Q48. nt_compile.py --json on the snapshot module exited 0 in 2.9 s with no errors or warnings."
  }
 }

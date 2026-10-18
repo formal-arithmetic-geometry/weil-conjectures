@@ -279,18 +279,18 @@
   "file": "lean/Sheaf/CategoryTheory/DgAbcConeHomotopy.lean",
   "statement": "theorem dg_abc_cone_homotopy (A : IntegralDGCategory.{u, v}) (S : Shifts A) (hA : AxiomA A) (hC : ∀ (x y : A.Obj) (f : Closed A x y), Nonempty (Cone S f)) : (∀ (x y z : A.Obj) (E : Admissible A x y z) (δ : Closed A z (S.obj 1 x)) (hδ : HEq ((S.homShift 1 z x).hom.f 0 δ.val) (boundary E)) (K : Cone S E.a), ∃ (e : Closed A K.obj z) (t : Closed A z K.obj) (H : (A.hom K.obj K.obj).X (-1)), e.val = compZero E.b.val K.sequence.π ∧ t.val = compZero K.sequence.a.val E.s - compZero K.sequence.s δ.val ∧ compZero e.val t.val = A.unit z ∧ compZero t.val e.val - A.unit K.obj = (A.hom K.obj K.obj).d (-1) 0 H ∧ compZero e.val K.sequence.a.val = E.b.val ∧ ∃ (J : (A.hom K.obj (S.obj 1 x)).X (-1)), (A.hom K.obj (S.obj 1 x)).d (-1) 0 J = compZero δ.val e.val + K.sequence.b.val) ∧ (∀ (x₁ x₂ y₁ y₂ : A.Obj) (f₁ : Closed A x₁ y₁) (f₂ : Closed A x₂ y₂) (a : Closed A x₁ x₂) (b : Closed A y₁ y₂) (h : (A.hom x₁ y₂).X (-1)), (A.hom x₁ y₂).d (-1) 0 h = compZero b.val f₁.val - compZero f₂.val a.val → ∀ (K₁ : Cone S f₁) (K₂ : Cone S f₂), ∃ (c : Closed A K₁.obj K₂.obj), (∃ (H₁ : (A.hom y₁ K₂.obj).X (-1)), (A.hom y₁ K₂.obj).d (-1) 0 H₁ = compZero c.val K₁.sequence.a.val - compZero K₂.sequence.a.val b.val) ∧ (∃ (H₂ : (A.hom K₁.obj (S.obj 1 x₂)).X (-1)), (A.hom K₁.obj (S.obj 1 x₂)).d (-1) 0 H₂ = compZero K₂.sequence.b.val c.val - compZero ((S.map 1 x₁ x₂).f 0 a.val) K₁.sequence.b.val) ∧ (((∃ (a' : Closed A x₂ x₁) (U : (A.hom x₁ x₁).X (-1)) (V : (A.hom x₂ x₂).X (-1)), (A.hom x₂ x₁).d 0 1 a'.val = 0 ∧ (A.hom x₁ x₁).d (-1) 0 U = compZero a'.val a.val - A.unit x₁ ∧ (A.hom x₂ x₂).d (-1) 0 V = compZero a.val a'.val - A.unit x₂) ∧ (∃ (b' : Closed A y₂ y₁) (U : (A.hom y₁ y₁).X (-1)) (V : (A.hom y₂ y₂).X (-1)), (A.hom y₂ y₁).d 0 1 b'.val = 0 ∧ (A.hom y₁ y₁).d (-1) 0 U = compZero b'.val b.val - A.unit y₁ ∧ (A.hom y₂ y₂).d (-1) 0 V = compZero b.val b'.val - A.unit y₂)) → ∃ (c' : Closed A K₂.obj K₁.obj) (U : (A.hom K₁.obj K₁.obj).X (-1)) (V : (A.hom K₂.obj K₂.obj).X (-1)), (A.hom K₂.obj K₁.obj).d 0 1 c'.val = 0 ∧ (A.hom K₁.obj K₁.obj).d (-1) 0 U = compZero c'.val c.val - A.unit K₁.obj ∧ (A.hom K₂.obj K₂.obj).d (-1) 0 V = compZero c.val c'.val - A.unit K₂.obj))",
   "branch": "newtargets-dag",
-  "by": "Q98",
-  "date": "2026-10-18",
+  "by": "Q141",
+  "date": "2026-10-17",
   "existing": false,
   "note": "The theorem is not present in Mathlib or upstream; the module states the arbitrary dg-category cone comparison with explicit degree-minus-one boundary witnesses.",
-  "fixed_by": "NT-stage2-cc-0f0bebf4a"
+  "fixed_by": "NT-stage2-cc-4e6cfe66a"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-0f0bebf4a",
-  "group": "Q98",
+  "reviewer": "NT-stage2-cc-4e6cfe66a",
+  "group": "Q141",
   "result": "fix",
-  "note": "Statement matches node lem-coef-dg-abc-cone-homotopy clause by clause: IntegralDGCategory over Z, Shifts (B), AxiomA (A), Cone existence (C); (i) e=b rho, t=i s - sigma delta closed, et=1, te-1=dH, e i=b, [-p]=[delta e] via degree -1 witness; (ii) closed cone map with both class equalities and homotopy-equivalence invariance, quantifiers as in node; no extra hypotheses, universes free; identities recomputed (dH, dc=0, null-product). compZero is a canonical XIsoOfEq transport, not hollow, no clash. Compiles clean via nt_compile --json (3.0 s). Fault H8: the theorem docstring lacked the node's proof steps; fixes/DgAbcConeHomotopy.lean is a full replacement adding the nine steps, with a byte-identical signature (lean.statement unchanged), compiled clean (2.2 s). Note: stmt_deps [] though the module uses def-coef-dg-abc-data declarations (per the 2026-10-18 route pivot); not a fault."
+  "note": "Statement matches node and Stacks 09P7/09QT/09QU clause by clause: IntegralDGCategory, Shifts (B), AxiomA (A), Cone existence (C). (i): e=b rho, t=i_a s - sigma delta closed, et=1, te-1=dH, e i_a=b, [-p_a]=[delta e] via a degree -1 witness. (ii): closed cone map c with both H0 class equalities, and homotopy equivalences a,b imply one for c. No stronger hypotheses, universes u,v free and bound, edge cases covered. compZero is a real canonical helper with docstring and is listed in declarations. Landed DgAbcData/SmallDgCategory reused, no private copy. Record statement verbatim. Report has Worker report and Second reading by Q141. Fault H8: theorem docstring lacked the node's proof step by step. fixes/DgAbcConeHomotopy.lean is a complete replacement adding the nine proof steps with Stacks places; signature and record statement unchanged. nt_compile --json: delivered and fixed modules compile clean, exit 0. Observation for the lead: stmt_deps empty after the route pivot although the module uses def-coef-dg-abc-data declarations; H2 bars the delivery from adding it."
  }
 }

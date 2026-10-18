@@ -21,7 +21,8 @@
   "def-weil-pbc-multivariate-power-series",
   "def-weil-proper-morphism",
   "def-weil-pure-dimension",
-  "lem-weil-pbc-reduced-induced-closed-subscheme"
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-trf-orgogozo-induction-data"
  ],
  "proof": [
   {
@@ -293,5 +294,23 @@
   "group": "Q43",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q43-2a31496e1 (reviewer sub-agent of L); spot-checked: The proof and hypotheses check out across all nine steps, cited DAG statements, Temkin/Stacks sources, edge cases, and search records. One source-location repair is required: Tag 02OG was mislabeled as coherent.tex; it belongs to Cohomology of Schemes. Corrected DAG JSON is under fixes/dag/nodes/sec-trace-formula/lem-trf-nodal-contraction-normalization-branches.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.NodalContractionNormalizationBranches",
+  "declaration": "AlgebraicGeometry.nodal_contraction_normalization_branches",
+  "file": "lean/Sheaf/TraceFormula/NodalContractionNormalizationBranches.lean",
+  "statement": "theorem nodal_contraction_normalization_branches (k : Type u) [Field k] [IsAlgClosed k] {X Y : Scheme.{u}} (pX : X ⟶ Spec (.of k)) (pY : Y ⟶ Spec (.of k)) [IsProper pX] [IsProper pY] [IsReduced X] [IsReduced Y] (hX : X.IsPureDimension 1) (hY : Y.IsPureDimension 1) (f : Y ⟶ X) [IsProper f] [Surjective f] (hf : f ≫ pX = pY) (x : X) (hx : IsClosed ({x} : Set X)) (B : Scheme.{u}) [IsReduced B] (iB : B ⟶ Y) [IsClosedImmersion iB] (hB : Set.range iB = f ⁻¹' {x}) [ConnectedSpace B] (hpureB : B.IsPureDimension 1) (hoff : IsIso (pullback.snd f (Scheme.Opens.ι (X := X) ⟨{x}ᶜ, hx.isOpen_compl⟩))) (hnodal : ∃ U : Y.Opens, Set.range iB ⊆ U ∧ ∀ y : Y, y ∈ U → IsClosed ({y} : Set Y) → (¬ ∃ V : Y.Opens, y ∈ V ∧ Smooth (V.ι ≫ pY)) → Orgogozo.IsOrdinaryDoublePoint pY y) {I J : Type u} (CX : I → Scheme.{u}) (CY : J → Scheme.{u}) [∀ i : I, IsIntegral (CX i)] [∀ j : J, IsIntegral (CY j)] (a : ∀ i : I, CX i ⟶ X) (b : ∀ j : J, CY j ⟶ Y) [∀ i : I, IsClosedImmersion (a i)] [∀ j : J, IsClosedImmersion (b j)] (ha : ∀ i : I, Set.range (a i) ∈ irreducibleComponents X) (hb : ∀ j : J, Set.range (b j) ∈ irreducibleComponents Y) (haindex : Function.Bijective (fun i : I ↦ (⟨Set.range (a i), ha i⟩ : irreducibleComponents X))) (hbindex : Function.Bijective (fun j : J ↦ (⟨Set.range (b j), hb j⟩ : irreducibleComponents Y))) (N : Scheme.{u}) (ι : ∀ i : I, (CX i).normalization ⟶ N) (hN : IsColimit (Cofan.mk N ι)) (ν : N ⟶ X) (hν : ∀ i : I, ι i ≫ ν = (CX i).fromNormalization ≫ a i) : (∃ e : {j : J // ¬ Set.range (b j) ⊆ Set.range iB} ≃ I, (∀ j : {j : J // ¬ Set.range (b j) ⊆ Set.range iB}, closure (f '' Set.range (b j.1)) = Set.range (a (e j))) ∧ ∃ c : ∀ j : {j : J // ¬ Set.range (b j) ⊆ Set.range iB}, (CY j.1).normalization ≅ (CX (e j)).normalization, (∀ j : {j : J // ¬ Set.range (b j) ⊆ Set.range iB}, (c j).hom ≫ (CX (e j)).fromNormalization ≫ a (e j) = (CY j.1).fromNormalization ≫ b j.1 ≫ f) ∧ (∀ j : {j : J // ¬ Set.range (b j) ⊆ Set.range iB}, Smooth ((CY j.1).fromNormalization ≫ b j.1 ≫ pY) ∧ IsProper ((CY j.1).fromNormalization ≫ b j.1 ≫ pY) ∧ Smooth ((CX (e j)).fromNormalization ≫ a (e j) ≫ pX) ∧ IsProper ((CX (e j)).fromNormalization ≫ a (e j) ≫ pX)) ∧ ∃ h : N ⟶ Y, h ≫ f = ν ∧ (∀ j : {j : J // ¬ Set.range (b j) ⊆ Set.range iB}, ι (e j) ≫ h = (c j).inv ≫ (CY j.1).fromNormalization ≫ b j.1) ∧ Set.BijOn h (ν ⁻¹' {x}) (Set.range iB ∩ closure ((Set.range iB)ᶜ))) ∧ (Set.range iB ∩ closure ((Set.range iB)ᶜ)).Nonempty ∧ (∀ y : Y, y ∈ Set.range iB ∩ closure ((Set.range iB)ᶜ) → Orgogozo.IsOrdinaryDoublePoint pY y ∧ (∃! j : J, y ∈ Set.range (b j) ∧ Set.range (b j) ⊆ Set.range iB) ∧ (∃! j : J, y ∈ Set.range (b j) ∧ ¬ Set.range (b j) ⊆ Set.range iB) ∧ ∀ j : J, y ∈ Set.range (b j) → ∃! z : (CY j).normalization, ((CY j).fromNormalization ≫ b j) z = y) ∧ (∀ n : ℕ, 1 ≤ n → (∃ e : AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x) ≃+* (MvPowerSeries (Fin n) k ⧸ Ideal.span {g | ∃ i j : Fin n, i ≠ j ∧ g = MvPowerSeries.X i * MvPowerSeries.X j}), ∀ r : k, e (AdicCompletion.of (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x) (Orgogozo.localScalar pX x r)) = Ideal.Quotient.mk _ (MvPowerSeries.C r)) → IsReduced (f.fiber x) ∧ ∃ eB : f.fiber x ≅ B, eB.hom ≫ iB = f.fiberι x)",
+  "branch": "newtargets-dag",
+  "by": "Q114",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5aa069a92",
+  "group": "Q114",
+  "result": "fix",
+  "note": "Lean statement matches the node clause by clause: k alg. closed; X,Y proper reduced pure dim 1; f proper surjective over k; closed x; actual fibre f.fiber x; B pinned down by reduced + closed immersion + hB; ConnectedSpace (nonempty); hoff = base change to {x}ᶜ; nodal neighbourhood via Orgogozo.IsOrdinaryDoublePoint; component and normalization inputs are general descriptions of canonical objects; conclusions e, c over X, smooth/proper, h with BijOn onto B ∩ closure Bᶜ, boundary nonempty, node with exactly one B-branch and one outside, ordinary n-fold (n>=1) gives reduced fibre and f.fiber x ≅ B over Y. Edge cases, universes and no-hollow/sorry-only/docstring gates OK. lean.statement verbatim. Added stmt_dep def-trf-orgogozo-induction-data is landed, no cycle. No existing statement found. nt_compile --json: clean, rc 0, 3.1 s; control copy shows errors are reported. Only finding H11: the second reading was a non-independent self-check, so a complete replacement report is in fixes/lem-trf-nodal-contraction-normalization-branches.report.md (worker report unchanged; no Lean or node change)."
  }
 }

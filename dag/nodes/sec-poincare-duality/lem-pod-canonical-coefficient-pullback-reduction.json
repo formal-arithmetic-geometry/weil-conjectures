@@ -324,5 +324,49 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-57540748f (reviewer sub-agent of L); spot-checked: I read the whole item: statement unchanged, nine steps, no new nodes. I read the statement of every cited node, the parent lem-pod-frobenius-fixes-unit-section, the proof of lem-weil-isomorphism-derived-pullback (Steps 2, 7, 8), unit sk-lem-finite, and main-20261015 prop-cohomological-finiteness Step 7, last sentence. Stacks tags checked: 03D6 (sites-modules-definition-pushforward), 08TC (derived-definition-derived-limit, derived.tex l.10442) and 07KC (derived-lemma-products); the correction of 08U1 to 07KC is right. Step checks: S2: I recomputed balancing, the inverse, and R_X-linearity from the square pi_{n,X}c_R=c_n g^{-1}pi_{n,Y}. S3: the transition square follows from inverse-image clause (3) with tau_n semilinear over r_n, and the cone sign d(b,a)=(-db-(1-s)a,da) matches def-weil-abstract-derived-category with the [-1] shift. S5: (1-s)a=0 strictly; finite-free-scalar-comparison at L=E (S=R, v=t) composed with P=P(x)R is exactly a, and R_Y is derived complete by constant-coefficient clause (2), so eta is invertible. S6: L theta~=F(a), so L kappa=F(eta), and lambda_R=F(eta)^{-1}L gives both inverse identities by cancellation. lambda_R is the lambda of Step 8 of the proof of lem-weil-isomorphism-derived-pullback. S7: R_Y[0] is K-flat and the tower lemma (1)-(2) applies to q and to id; the remark that h_n=[q(x)1] is a two-line naturality fact and is not needed. S8: Res(lambda_n)rho_n=F(h_n e_n)L=F(pi)lambda_R, then the theta_R formula; tower compatibility is checked on strict chain maps. Small cases: g=id with P=R_Y[0], the empty scheme, n=1, adjacent levels. Coefficient categories are kept distinct. No SGA. proof_deps equals the union of uses; no cycle. Not a duplicate of lem-weil-isomorphism-derived-pullback (existence only), lem-trf-integral-pullback-comparison-realization or lem-a1-integral-pullback-completed-comparison. All ten declared tool_uses are accepted as generic black-box tools. Maintainer note, not a fault of this delivery: def-weil-constant-weil-structure(3) takes lambda from an existence-only statement, so the Step 9 identification holds by the item's stipulated normalization; stage 2 should bind that lambda to the explicit comparison, as the parent's reviewer already noted. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CanonicalCoefficientPullbackReduction",
+  "declaration": "WeilConjectures.canonicalCoefficientPullbackReduction",
+  "declarations": [
+   "WeilConjectures.canonicalCoefficientIntegralUnit",
+   "WeilConjectures.canonicalCoefficientFiniteUnit",
+   "WeilConjectures.canonicalCoefficientReduction",
+   "WeilConjectures.canonicalCoefficientReductionComplex",
+   "WeilConjectures.canonicalCoefficientFiniteComplex",
+   "WeilConjectures.canonicalCoefficientFiniteKappaComplex",
+   "WeilConjectures.canonicalCoefficientModelMaps_isIso",
+   "WeilConjectures.canonicalCoefficientIntegralComparison",
+   "WeilConjectures.canonicalCoefficientInverseImageTransport",
+   "WeilConjectures.canonicalCoefficientLambda",
+   "WeilConjectures.canonicalCoefficientKappa",
+   "WeilConjectures.canonicalCoefficientLambdaFinite",
+   "WeilConjectures.canonicalCoefficientFiniteComparison",
+   "WeilConjectures.canonicalCoefficientRes",
+   "WeilConjectures.canonicalCoefficientPullbackReductionIso",
+   "WeilConjectures.canonicalCoefficientRho",
+   "WeilConjectures.canonicalCoefficientProjection",
+   "WeilConjectures.canonicalCoefficientInverseProjection",
+   "WeilConjectures.canonicalCoefficientTheta",
+   "WeilConjectures.canonicalCoefficientPullbackTransition",
+   "WeilConjectures.canonicalCoefficientTransition",
+   "WeilConjectures.canonicalCoefficientInverseTransition",
+   "WeilConjectures.canonicalCoefficientPullbackReduction"
+  ],
+  "file": "lean/Sheaf/Paper/CanonicalCoefficientPullbackReduction.lean",
+  "statement": "theorem canonicalCoefficientPullbackReduction (D : FiniteFieldDatum.{u}) (_hl : l ≠ D.p) {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g] (hX : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (hY : ∀ y : Y, IsUnit (l : Y.presheaf.stalk y)) : canonicalCoefficientKappa l E g hX hY ≫ (canonicalCoefficientLambda l E g).hom = 𝟙 _ ∧ (canonicalCoefficientLambda l E g).hom ≫ canonicalCoefficientKappa l E g hX hY = 𝟙 _ ∧ (∀ n : ℕ, canonicalCoefficientRho l E g n ≫ DerivedCategory.Q.map ((canonicalCoefficientRes l E X n).map (canonicalCoefficientLambdaFinite l E g n).hom) = (canonicalCoefficientLambda l E g).hom ≫ canonicalCoefficientInverseProjection l E g n) ∧ (∀ n : ℕ, (canonicalCoefficientTheta l E g).hom ≫ canonicalCoefficientProjection l E X n = canonicalCoefficientRho l E g n ≫ DerivedCategory.Q.map ((canonicalCoefficientRes l E X n).map ((canonicalCoefficientLambdaFinite l E g n).hom ≫ (canonicalCoefficientFiniteComparison l E g n).hom))) ∧ (∀ n : ℕ, canonicalCoefficientPullbackTransition l E g n ≫ (canonicalCoefficientRes l E X n).map (canonicalCoefficientLambdaFinite l E g n).hom = (canonicalCoefficientRes l E X (n + 1)).map (canonicalCoefficientLambdaFinite l E g (n + 1)).hom ≫ canonicalCoefficientInverseTransition l E g n) ∧ (∀ n : ℕ, canonicalCoefficientRho l E g (n + 1) ≫ DerivedCategory.Q.map (canonicalCoefficientPullbackTransition l E g n) = canonicalCoefficientRho l E g n) ∧ canonicalCoefficientTheta l E g = constantWeilIntegralTheta l E g",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Returned-delivery repair: kappa is the recorded inverseImagePullbackComparison with both invertibility hypotheses; lambda is the independently normalized ConstantWeilStructure comparison transported through the actual regular coefficient maps. Finite multiplication, real Roos projections, both derived projection identities and strict quotient-transition compatibility are explicit. All helper definitions have real data; their required isomorphism proofs are the named coefficient-map clauses of this node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-480880b7f",
+  "group": "NG",
+  "result": "pass",
+  "note": "Re-delivery fixes all four RETURN points of 4c430c8051a4. kappa is exactly the recorded inverseImagePullbackComparison with hX/hY, on constantWeilIntegralGood with 𝟙. lambda is the published normalized constantWeilIntegralLambda (exists-unique Roos chain unit, inverse completeness), transported only by the coefficient maps c_R, with no Nonempty choice. lambda_n is the inverse of the exists-unique x↦x⊗1 chain map. rho_n is the actual mappingCocone.fst then Pi.π n, followed by the pulled canonical reduction h_n; the adjunction choose is unit-normalized, so it is unique. Seven conjuncts: kappa∘lambda=id, lambda∘kappa=id, Res(lambda_n)∘rho_n=g^-1(pi_n)∘lambda (g^-1 pi via the recorded coefficient square), pi_X∘theta=Res(c_n∘lambda_n)∘rho_n, strict chain-level transition square, rho transition compatibility in D (true up to cone homotopy), theta=constantWeilIntegralTheta. Checked by hand on the unit section. Edge cases g=id, empty scheme, n=0 (A_1), adjacent levels OK. No hollow definitions; two sorry theorems with proof docstrings; 24 blueprint tags; lines ≤100; node diff is only the lean record; statement verbatim; declarations list exact. nt_compile --json: rc 0, 13.2 s, no errors; dependency sources byte-identical to the delivery head."
  }
 }

@@ -210,5 +210,23 @@
   "group": "Q63",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q63-3940657d0 (reviewer sub-agent of L); spot-checked: The proof and six steps are mathematically sound, with hypotheses, cited statements, edge cases, route, and tool uses checked. Repair the item source citation: it says Tag 05WR, but the ordinary quasi-finite henselization theorem is Tag 05WP; 05WR is the strict-henselization theorem. Corrected full JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-henselization-quasi-finite-ring.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.HenselizationQuasiFiniteRing",
+  "declaration": "Algebra.henselization_quasiFinite_ring",
+  "file": "lean/Sheaf/TraceFormula/HenselizationQuasiFiniteRing.lean",
+  "statement": "theorem henselization_quasiFinite_ring (A : Type u) (B : Type v) [CommRing A] [CommRing B] [Algebra A B] [Algebra.FiniteType A B] (p : Ideal A) [p.IsPrime] (q : PrimeSpectrum B) [q.asIdeal.LiesOver p] (hq : Algebra.IsQuasiFiniteAtPrime A B q) (H : Type w) [CommRing H] [Algebra (Localization.AtPrime p) H] [HenselianLocalRing H] (hH : Algebra.IsHenselizationAtPrime' A p H) (K : Type z) [CommRing K] [Algebra (Localization.AtPrime q.asIdeal) K] [HenselianLocalRing K] (hK : Algebra.IsHenselizationAtPrime' B q.asIdeal K) [Algebra (Localization.AtPrime p) (Localization.AtPrime q.asIdeal)] [Localization.AtPrime.IsLiesOverAlgebra p q.asIdeal] : ∃ (h : H →+* K), IsLocalHom h ∧ h.comp ((algebraMap (Localization.AtPrime p) H).comp (algebraMap A (Localization.AtPrime p))) = (algebraMap (Localization.AtPrime q.asIdeal) K).comp ((algebraMap B (Localization.AtPrime q.asIdeal)).comp (algebraMap A B)) ∧ @Module.Finite H K _ _ h.toModule ∧ ∃ (n : Ideal (TensorProduct (Localization.AtPrime p) H (Localization.AtPrime q.asIdeal))) (hn : n.IsPrime), ∃ e : K ≃+* @Localization.AtPrime _ _ n hn, n.comap ((Algebra.TensorProduct.includeLeft : H →ₐ[Localization.AtPrime p] TensorProduct (Localization.AtPrime p) H (Localization.AtPrime q.asIdeal)).toRingHom) = IsLocalRing.maximalIdeal H ∧ n.comap ((Algebra.TensorProduct.includeRight : Localization.AtPrime q.asIdeal →ₐ[ Localization.AtPrime p] TensorProduct (Localization.AtPrime p) H (Localization.AtPrime q.asIdeal)).toRingHom) = IsLocalRing.maximalIdeal (Localization.AtPrime q.asIdeal) ∧ (∀ x : H, e (h x) = @algebraMap (TensorProduct (Localization.AtPrime p) H (Localization.AtPrime q.asIdeal)) (@Localization.AtPrime _ _ n hn) _ _ _ ((Algebra.TensorProduct.includeLeft : H →ₐ[Localization.AtPrime p] TensorProduct (Localization.AtPrime p) H (Localization.AtPrime q.asIdeal)) x)) ∧ (∀ y : Localization.AtPrime q.asIdeal, e (algebraMap (Localization.AtPrime q.asIdeal) K y) = @algebraMap (TensorProduct (Localization.AtPrime p) H (Localization.AtPrime q.asIdeal)) (@Localization.AtPrime _ _ n hn) _ _ _ ((Algebra.TensorProduct.includeRight : Localization.AtPrime q.asIdeal →ₐ[ Localization.AtPrime p] TensorProduct (Localization.AtPrime p) H (Localization.AtPrime q.asIdeal)) y))",
+  "branch": "newtargets-dag",
+  "by": "Q159",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a680a4eb2",
+  "group": "Q159",
+  "result": "pass",
+  "note": "Every node clause is rendered (finite type, lies over, IsQuasiFiniteAtPrime, IsHenselizationAtPrime' for H and K with independent universes, canonical A_p algebra on B_q via IsLiesOverAlgebra); the conclusion has a local and finite h compatible over A->B (unique, so canonical), a prime n of H⊗_{A_p}B_q fixed by both maximal-ideal contractions, and e : K ≃ (H⊗B_q)_n compatible with both factors. No extra hypotheses; universes bound; lean.statement verbatim; source/blueprint docstrings with the 6-step proof; only sorry; no duplicate found; nt_compile rc=0 with no diagnostics, and a control error was reported. Not this delivery: the item node's source.place still says Tag 05WR and should be 05WP (the Lean docstrings already say 05WP)."
  }
 }

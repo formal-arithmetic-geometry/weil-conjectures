@@ -24,7 +24,10 @@
   "def-pur-derived-internal-hom",
   "prop-coef-integral-dualizing",
   "thm-coef-integral-verdier",
-  "def-weil-integral-derived-reduction"
+  "def-weil-integral-derived-reduction",
+  "lem-coef-integral-hom-reduction",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-pur-compact-support-integral-coefficient-comparison"
  ],
  "proof": [
   {
@@ -362,5 +365,48 @@
   "group": "Q25",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-a3f326bb9 (reviewer sub-agent of L); spot-checked: Read the item, report, chapter/unit route, current blueprint statement and proof, every cited node statement, and cited Stacks/Mathlib sources. All nine steps are mathematically supported; coefficient categories and base-change maps are correctly distinguished; finite and ramified quotient cases, coherence, evaluation, and double-dual compatibility check out. No new nodes, duplicates, cycles, SGA 4 citations, or remaining faults. Full review: review.md."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.CoefIntegralFiniteExtension",
+  "declaration": "WeilConjectures.coef_integral_finite_extension",
+  "declarations": [
+   "WeilConjectures.IntegralFiniteExtension.tensorModel",
+   "WeilConjectures.IntegralFiniteExtension.homMap",
+   "WeilConjectures.IntegralFiniteExtension.completion_isIso",
+   "WeilConjectures.IntegralFiniteExtension.completion",
+   "WeilConjectures.IntegralFiniteExtension.quotient",
+   "WeilConjectures.IntegralFiniteExtension.v",
+   "WeilConjectures.IntegralFiniteExtension.finiteRealizationRestriction",
+   "WeilConjectures.IntegralFiniteExtension.finiteEtaleU",
+   "WeilConjectures.IntegralFiniteExtension.finiteU",
+   "WeilConjectures.IntegralFiniteExtension.DualizingDatum",
+   "WeilConjectures.IntegralFiniteExtension.dualizingDatum_nonempty",
+   "WeilConjectures.IntegralFiniteExtension.u_existsUnique",
+   "WeilConjectures.IntegralFiniteExtension.u",
+   "WeilConjectures.IntegralFiniteExtension.beta",
+   "WeilConjectures.IntegralFiniteExtension.extension_complete",
+   "WeilConjectures.IntegralFiniteExtension.unit",
+   "WeilConjectures.IntegralFiniteExtension.comp",
+   "WeilConjectures.IntegralFiniteExtension.extendedEvaluation",
+   "WeilConjectures.IntegralFiniteExtension.Conclusion",
+   "WeilConjectures.IntegralFiniteExtension.IdentityConclusion",
+   "WeilConjectures.IntegralFiniteExtension.CompositionConclusion",
+   "WeilConjectures.coef_integral_finite_extension"
+  ],
+  "file": "lean/Sheaf/SixFunctors/CoefIntegralFiniteExtension.lean",
+  "statement": "theorem coef_integral_finite_extension (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (L : Type u) [Field L] [Algebra (Padic l) L] [FiniteDimensional (Padic l) L] (ι : E →ₐ[Padic l] L) (X : Scheme.{u}) (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) [X.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] (wE : DualizingDatum l X D hl E) (wL : DualizingDatum l X D hl L) : ∃ (a : IntegralHom.TensorPresentation.{u, u} X (completedIntegralCommRingSheafUnrestricted l E X)) (b : IntegralHom.TensorPresentation.{u, u} X (completedIntegralCommRingSheafUnrestricted l L X)) (sE : IntegralVerdier.SignedSymmetry X _ a) (sL : IntegralVerdier.SignedSymmetry X _ b) (mE : ∀ n : ℕ, IntegralHom.ReductionPresentation l E X D hl a n) (mL : ∀ n : ℕ, IntegralHom.ReductionPresentation l L X D hl b n), Conclusion l E L ι X D hl wE wL a b sE sL mE mL ∧ IdentityConclusion l E X D hl wE a ∧ IdentityConclusion l L X D hl wL b ∧ (∀ (F : Type u) [Field F] [Algebra (Padic l) F] [FiniteDimensional (Padic l) F] (j : L →ₐ[Padic l] F) (wF : DualizingDatum l X D hl F) (c : IntegralHom.TensorPresentation.{u, u} X (completedIntegralCommRingSheafUnrestricted l F X)), CompositionConclusion l E L ι X D hl wE wL a b F j wF c)",
+  "branch": "newtargets-dag",
+  "by": "NM",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Repair of dd3317667dc5: canonical evaluation/counit maps, actual delta and quotient equations, triangulated exactness and constructible-domain invertibility. DualizingDatum bundles the coherent normalized reductions of the recorded integral dualizing proposition; its existence is stated separately. No arbitrary comparison isomorphisms are chosen."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b5c163eb7",
+  "group": "NM",
+  "result": "pass",
+  "note": "Independent reading of b5c163eb764e against the node, the current blueprint statement (order 2494) and every dependency declaration. Every node clause is rendered: triangulated exactness; preservation of D^b_c; canonical u (unique finite-counit characterization via finiteU/finiteEtaleU transposes, no arbitrary iso); v as the evaluation transpose, invertible only on constructible inputs; beta = v then RHom(TK,u); evaluation equations; the double-dual square with IntegralVerdier.delta; quotient equations for u, v and beta at every exponent including intermediate ramified levels; identity and composition with associators and pentagon. Earlier return points F1-F7 are repaired. Hypotheses: FiniteFieldDatum, l prime with l != p, locally finite type + quasi-compact + separated over k; no extra assumptions; single universe u as forced by the dependencies. No hollow defs; only sorry in 5 theorems with proof docstrings; source and blueprint docstrings on all 22 declarations; lean.statement verbatim; three added stmt_deps are landed and acyclic (DAG traversal). Snapshot matches the branch head; 3 files changed. nt_compile --json: rc 0, 38.2 s, no diagnostics; control with exact 0 gives rc 1. Observations only: SignedSymmetry swap non-naturality is an upstream thm-coef-integral-verdier gap; comparisonInverse zero fallback is upstream and unused here; DualizingDatum is a local helper, no duplicate found."
  }
 }

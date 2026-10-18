@@ -166,5 +166,30 @@
   "group": "Q96",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q96-a71c01fcc (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements, unit/chapter route, and Stacks 059W, 059E, 059M and 059X. Repaired malformed TeX and made Step 3’s countable directed enlargement explicit. Mathematics and edge cases check; no new nodes or target changes. Proof-only corrected JSON and detailed review.md written.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SecTraceFormula.MLCountableColimit",
+  "declaration": "Module.exists_countable_directed_colimit_of_isMittagLeffler",
+  "file": "lean/Sheaf/SecTraceFormula/MLCountableColimit.lean",
+  "statement": "theorem exists_countable_directed_colimit_of_isMittagLeffler (R : Type u) [CommRing R] {I : Type v} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)] (F : I ⥤ ModuleCat.{max u v w} R) [∀ i : I, Module.FinitePresentation R (F.obj i)] (c : Cocone F) (hc : IsColimit c) (hM : Module.IsMittagLeffler.{u, max u v w, max u v w, 0} R c.pt) (hcountable : ∃ E : Set c.pt, E.Countable ∧ Submodule.span R E = ⊤) : ∃ J : Set I, J.Countable ∧ ∃ (hJ : J.Nonempty) (dJ : IsDirected J (· ≤ ·)), IsIso (restrictedColimitMap c J hJ dJ)",
+  "branch": "newtargets-dag",
+  "by": "Q112",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": [
+   "Module.exists_countable_directed_colimit_of_isMittagLeffler",
+   "Module.restrictedDiagram",
+   "Module.restrictedCocone",
+   "Module.restrictedColimitMap"
+  ],
+  "fixed_by": "NT-stage2-cc-833b09770"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-833b09770",
+  "group": "Q112",
+  "result": "fix",
+  "note": "Statement matches node and Stacks 059W clause by clause (R comm ring; nonempty directed poset I; F : I ⥤ ModuleCat.{max u v w} R with FinitePresentation stages; IsColimit cocone; IsMittagLeffler.{u,max u v w,max u v w,0} c.pt matching the landed hom-systems lemma; countable spanning set; ∃ countable nonempty directed J with IsIso of the canonical colimit.desc map). Helpers are real (rfl/simp checks), universes bound and consistent, edge cases (M=0, empty/finite E, J=I) covered, docstrings/source/blueprint/proof steps present, sorry only, statement verbatim, compiles clean via nt_compile --json. Only finding: lean.declarations missing for the helpers restrictedDiagram/restrictedCocone/restrictedColimitMap; fixed in fixes/lem-trf-ml-countable-colimit.lean-record.json. Second-reading section is the standard post-2026-10-17 notice, accepted."
  }
 }

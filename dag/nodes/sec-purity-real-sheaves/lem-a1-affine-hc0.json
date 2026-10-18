@@ -236,5 +236,22 @@
   "group": "Q128",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q128-246b2c54f (reviewer sub-agent of L); spot-checked: Full source, DAG, route, hypothesis, coefficient-model, edge-case, duplicate, and cycle checks passed. Review written to review.md; no repairs needed."
+ },
+ "lean": {
+  "module": "WeilConjectures.WeilSheaf.Curve",
+  "declaration": "AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_zero",
+  "statement": "theorem subsingleton_compactlySupportedCohomology_zero [IsAffine U]\n    [SmoothOfRelativeDimension 1 (U ↘ Spec (CommRingCat.of k₀))]\n    [GeometricallyConnected (U ↘ Spec (CommRingCat.of k₀))] (F : WeilSheaf k₀ l U)\n    (hF : F.IsLisse) :\n    Subsingleton (F.compactlySupportedCohomology 0).carrier :=",
+  "branch": "slopmaster2",
+  "by": "Q44",
+  "date": "2026-10-18",
+  "existing": true
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b466d801d",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Existing-record delivery: only lean changed. It binds the upstream AlgebraicGeometry.WeilSheaf.subsingleton_compactlySupportedCohomology_zero (WeilConjectures.WeilSheaf.Curve; statement verbatim up to ':='). Every clause matches node lem-a1-affine-hc0 and the blueprint source (order 2659): finite k0 with ringChar != l prime; separated, finite type, SmoothOfRelativeDimension 1, GeometricallyConnected, IsAffine U; F : WeilSheaf k0 l U with IsLisse (pro-etale locally Qbar_l^n); H_c^0 = F.compactlySupportedCohomology 0, which is .2 of the recorded Q43 dependency ordinaryCompactWeilSheafCohomology; '= 0' as Subsingleton carrier. No extra hypotheses or universe restriction; edge cases (zero sheaf, proper case excluded by affine, any p != l) fine. Upstream WeilSheaf/IsLisse are forced by the recorded cohomology interface and agree with the node's notions; no duplicate in lean/Sheaf. nt_compile.py rejects files outside the side tree, so the check was run with lcompile.py against the live build: exit 0, signature matches exactly, axioms include sorryAx (acceptable at stage 2). Report has Worker report and the standard Second reading note. Non-blocking: the report's list of consulted dependency declarations is inaccurate."
  }
 }

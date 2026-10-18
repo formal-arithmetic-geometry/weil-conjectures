@@ -308,21 +308,21 @@
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceCoproduct",
-  "declaration": "AlgebraicGeometry.AlgebraicSpace.isAlgebraicSpace_coproduct",
+  "declaration": "AlgebraicGeometry.algebraicSpace_coproduct",
+  "statement": "theorem algebraicSpace_coproduct {S : Scheme.{u}} (I : Type u) (F : I → AlgebraicSpace S) (U : I → Over S) (p : ∀ i, yoneda.obj (U i) ⟶ (F i).obj.obj) (hp : ∀ i, AlgebraicSpace.IsEtale (p i) ∧ AlgebraicSpace.IsSurjective (p i)) (Ucoprod : Over S) (ι : ∀ i, U i ⟶ Ucoprod) (hU : Nonempty (IsColimit (Cofan.mk Ucoprod ι))) (C : Sheaf (Scheme.fppfTopology.over S) (Type u)) (c : ∀ i, (F i).obj ⟶ C) (hC : IsColimit (Cofan.mk C c)) : AlgebraicSpace.IsAlgebraicSpace C",
   "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceCoproduct.lean",
-  "statement": "theorem isAlgebraicSpace_coproduct {S : Scheme.{u}} {I : Type u} (F : I → AlgebraicSpace S) (U : I → Over S) (p : ∀ i, yoneda.obj (U i) ⟶ (F i).obj.obj) (hp : ∀ i, IsEtale (p i) ∧ IsSurjective (p i)) (V : Over S) (ι : ∀ i, U i ⟶ V) (hV : IsColimit (Cofan.mk V.left (fun i ↦ (ι i).left))) : (∃ (C : Sheaf (Scheme.fppfTopology.over S) (Type u)) (c : ∀ i, (F i).obj ⟶ C), Nonempty (IsColimit (Cofan.mk C c)) ∧ IsAlgebraicSpace C) ∧ (∀ (C : Sheaf (Scheme.fppfTopology.over S) (Type u)) (c : ∀ i, (F i).obj ⟶ C), IsColimit (Cofan.mk C c) → IsAlgebraicSpace C)",
   "branch": "newtargets-dag",
-  "by": "Q106",
-  "date": "2026-10-17",
+  "by": "Q149",
+  "date": "2026-10-18",
   "existing": false,
-  "note": "Uses the recorded AlgebraicSpace full subcategory and IsAlgebraicSpace predicate. The size hypothesis is witnessed by a scheme V over S and a cofan that is a coproduct in schemes. The conclusion gives an algebraic sheaf coproduct and applies to every colimit cofan, without assuming a big-site sheafification instance."
+  "fixed_by": "NT-stage2-cc-b860fb9e6"
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-6b25d3357",
-  "group": "Q106",
-  "result": "pass",
-  "note": "Read Stacks Tag 02WQ, the item node (unchanged apart from its lean field; lean.statement appears verbatim in the file), the AlgebraicSpace.lean definitions and the recorded partition and scheme-coproduct dependencies. Every clause matches: S, I : Type u (project convention, stated in the report), F : I → AlgebraicSpace S, atlases p_i with the representable IsEtale/IsSurjective, the size condition as an actual scheme-coproduct cofan V in Over S, and the conclusion (an algebraic coproduct exists in fppf sheaves, and every coproduct cofan is algebraic). No extra assumptions; empty, infinite and empty-summand cases are allowed. No hollow definitions, the only proof is sorry, the docstrings carry source, blueprint and the five proof steps, and the report has Worker report and Second reading sections. nt_compile.py on the snapshot is clean in 1.8 s; a control file with a deliberate error did show it. No findings."
+  "reviewer": "NT-stage2-cc-b860fb9e6",
+  "group": "Q149",
+  "result": "fix",
+  "note": "Statement matches node/Stacks 02WQ clause by clause: S : Scheme.{u}; I : Type u (project set convention, as in the partition lemma at v=0); F : I → AlgebraicSpace S; atlases p i with representable IsEtale ∧ IsSurjective; size hypothesis as an IsColimit cofan in Over S (Over.forget creates colimits, so this is the scheme coproduct); conclusion IsAlgebraicSpace for every colimit cofan C (equivalent to 'the' coproduct, iso-invariant). No extra assumptions; empty/singleton/infinite/empty-summand cases covered; lean.statement verbatim; sorry-only, no hollow defs, source/blueprint docstrings present. Fixed H8: the theorem docstring only summarized the proof; fixes/AlgebraicSpaceCoproduct.lean is the complete replacement with the 5 node proof steps and their nodes, same signature. Stale worker-written reviewed_lean (Q106, 2026-10-17) is overwritten by merge_delivery. nt_compile --json: delivered clean 4.5 s, fixed clean 2.1 s, control error detected."
  }
 }

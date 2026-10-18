@@ -16,7 +16,9 @@
   "def-weil-abstract-derived-category",
   "def-weil-pbc-bounded-derived-subcategories",
   "def-trf-topos-derived-base-change-map",
-  "def-weil-pbc-derived-exchange"
+  "def-weil-pbc-derived-exchange",
+  "lem-trf-big-small-etale-pullback-formula",
+  "lem-weil-pbc-derived-exact-square-factorization"
  ],
  "proof": [
   {
@@ -388,5 +390,61 @@
   "group": "Q70",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q70-3458244dc (reviewer sub-agent of L); spot-checked: Reviewed the item, new node, unit/chapter route, cited statements and sources, proof steps, hypotheses, coefficient categories, base-change normalization, edge cases, duplicates, searches, and route-pivot compliance. No mathematical or mechanical faults found; review.md records the checks."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.BigSmallEtaleLocalizationDerivedPushforward",
+  "declaration": "AlgebraicGeometry.bigSmallEtaleLocalizationDerivedPushforward",
+  "declarations": [
+   "AlgebraicGeometry.smallEtaleRestriction",
+   "AlgebraicGeometry.bigEtaleDirectImage",
+   "AlgebraicGeometry.etaleLocalizationFibreMap",
+   "AlgebraicGeometry.BigSmallEtaleLocalizationSites",
+   "AlgebraicGeometry.BigSmallEtaleLocalizationSites.inverseSquare",
+   "AlgebraicGeometry.BigSmallEtaleLocalizationSites.bigInverse",
+   "AlgebraicGeometry.BigSmallEtaleLocalizationSites.smallRestriction",
+   "AlgebraicGeometry.BigSmallEtaleLocalizationSites.bigDirect",
+   "AlgebraicGeometry.BigSmallEtaleLocalizationSites.smallInverse",
+   "AlgebraicGeometry.BigSmallEtaleLocalizationSites.smallDirect",
+   "AlgebraicGeometry.BigSmallEtaleLocalizationSites.extension",
+   "AlgebraicGeometry.BigSmallEtaleLocalizationSites.derivedInverseSquare",
+   "AlgebraicGeometry.BigSmallEtaleLocalizationSites.beta",
+   "AlgebraicGeometry.BigSmallEtaleLocalizationSites.restrictionSquare",
+   "AlgebraicGeometry.BigSmallEtaleLocalizationSites.localizationSquare",
+   "AlgebraicGeometry.BigSmallEtaleLocalizationSites.localizationComparison",
+   "AlgebraicGeometry.BigSmallEtaleLocalizationSites.derivedRestrictionInverse",
+   "AlgebraicGeometry.BigSmallEtaleLocalizationSites.restrictionHomotopySquare",
+   "AlgebraicGeometry.BigSmallEtaleLocalizationSites.restrictionComparison",
+   "AlgebraicGeometry.BigSmallEtaleLocalizationSites.localizationModel",
+   "AlgebraicGeometry.BigSmallEtaleLocalizationSites.restrictionMate",
+   "AlgebraicGeometry.BigSmallEtaleLocalizationSites.smallExchange",
+   "AlgebraicGeometry.BigSmallEtaleLocalizationSites.restrictedBetaExchange",
+   "AlgebraicGeometry.BigSmallEtaleLocalizationSites.smallExchangeTransport",
+   "AlgebraicGeometry.BigSmallEtaleLocalizationSites.EtaFamily",
+   "AlgebraicGeometry.BigSmallEtaleLocalizationSites.SigmaFamily",
+   "AlgebraicGeometry.BigSmallEtaleLocalizationSites.IsEtaUnit",
+   "AlgebraicGeometry.BigSmallEtaleLocalizationSites.IsSigmaFactorization",
+   "AlgebraicGeometry.BigSmallEtaleLocalizationSites.IsRestrictionIso",
+   "AlgebraicGeometry.BigSmallEtaleLocalizationSites.IsRestrictionMate",
+   "AlgebraicGeometry.BigSmallEtaleLocalizationSites.IsLocalizationIso",
+   "AlgebraicGeometry.BigSmallEtaleLocalizationSites.IsLocalizationModel",
+   "AlgebraicGeometry.BigSmallEtaleLocalizationSites.IsExchangeCompatible",
+   "AlgebraicGeometry.BigSmallEtaleLocalizationSites.IsJointlyConservative",
+   "AlgebraicGeometry.BigSmallEtaleLocalizationDerivedData",
+   "AlgebraicGeometry.bigSmallEtaleLocalizationDerivedPushforward"
+  ],
+  "file": "lean/Sheaf/TraceFormula/BigSmallEtaleLocalizationDerivedPushforward.lean",
+  "statement": "theorem bigSmallEtaleLocalizationDerivedPushforward : Nonempty BigSmallEtaleLocalizationDerivedData.{u}",
+  "branch": "newtargets-dag",
+  "by": "Q109",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8a2509ad0",
+  "group": "Q109",
+  "result": "pass",
+  "note": "Read node, all 11 stmt deps, Stacks places, the module, report and dependency Lean (retraction data, pullback formula, PlusBaseChange, Etale.derivedBaseChangeMapPlus, Mathlib Sites/Over). Node diff: only lean plus two landed lean-recorded stmt_deps (pullback-formula, derived-exact-square), no cycle; lean.statement verbatim; 36 declarations listed. Every clause matches: sites/universes same as landed deps; c = canonical rightDerivedFunctorPlusBaseChange of the sectionwise c and = derived mate of sigma (sigma pinned to descent of the inverse mate of c, not assumed iso); ell = derived mate of the canonical localization square = base change of ell; beta = mateEquiv of the conjugate of the pinned directSquare; arrow = eta/c/beta vs eta/derivedBaseChangeMapPlus with correct CommSq; conservativity over all S', g, z. Existential package not hollow: bigAdj, c, ell, restrictionFactor, directSquare, eta, sigma all pinned; instance fields are true conclusions; no hypotheses. No duplicate notions found; no extra assumptions; edge cases and universes fine; docstrings/blueprint/proof steps present; only sorry. nt_compile.py --json on the snapshot module: exit 0, clean, 11.1 s/9.6 s; a broken copy gave an error. Non-blocking: unused instance arg on six derived helpers; the second reading was by the same worker."
  }
 }

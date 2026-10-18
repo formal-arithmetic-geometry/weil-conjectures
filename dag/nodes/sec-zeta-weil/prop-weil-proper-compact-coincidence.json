@@ -16,7 +16,9 @@
   "def-weil-ordinary-compact-cohomology",
   "def-weil-derived-direct-image",
   "def-compact-support-direct-image-detailed",
-  "def-weil-proper-morphism"
+  "def-weil-proper-morphism",
+  "def-weil-compact-support-finite-action",
+  "def-weil-compact-support-coefficient-action"
  ],
  "proof": [
   {
@@ -201,5 +203,29 @@
   "group": "NE",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NE-4150efe88 (reviewer sub-agent of L); spot-checked: I read the item, the cited node statements, the unit and the main-20261015 source in full; no changes. The statement matches main-20261015 prop-weil-proper-compact-coincidence.md verbatim; only the master parenthetical was dropped, with no weakening. Step 1: (id_Y, a_Y) is a compactification (def-weil-proper-morphism, def-weil-compactifications-refinements); j_! along the identity is sheafification of M itself (def-weil-extension-by-zero); Rf_{!,n}^{c0}=Ra_{Y*,n}; constructible-origin (ii) puts D^b_c inside the coherence domain of prop-compactification-coherence-detailed. Removing cor-cbc-proper-coincidence was correct, since it assumes the identification. Step 2: the integral towers have equal terms and equal transitions (lem-sf-compact-support-restriction-of-scalars = j_!Res identity followed by the same direct-image Res lemma). The integral definition fixes c and says independence of c is a separate statement, so using c0 is a legitimate instance; the DAG has no integral independence node. Step 3: localization (same objects, Hom tensor E) and common-stage representatives. I cross-checked against lem-pur-compact-support-integral-coefficient-comparison that with j=id the coefficient comparison reduces to the direct-image one. Step 4: Fib_s and H^i, elementary. All statement dependencies are in the transitive route of sk-input-weights; no tool uses. No new nodes; no duplicates found in a DAG-wide search. Edge cases: empty Y, Spec k, K=0, P^1; A^1 shows properness is needed. Source field still names the master copy, which is the import convention."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProperCompactCoincidence",
+  "declaration": "WeilConjectures.properCompactCoincidence",
+  "statement": "theorem properCompactCoincidence (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (E₀ : Padic.FiniteCoefficientFields l Ω) (Y : Scheme.{u}) [Y.Over (Spec (CommRingCat.of D.k))] [IsProper (Y ↘ Spec (CommRingCat.of D.k))] (c : Compactification (Y ↘ Spec (CommRingCat.of D.k))) (n : ℕ) (hn : 1 ≤ n) : Nonempty ((intrinsicFiniteTorsionConstructible l (Coefficient.{u} l Ω E₀) n hn Y).ι ⋙ @sfIntrinsicCompactSupport Y (Spec (CommRingCat.of D.k)) (Y ↘ Spec (CommRingCat.of D.k)) c (Padic.coefficientExtensionRing l (Coefficient.{u} l Ω E₀) n) _ (Padic.finite_coefficientExtensionRing l (Coefficient.{u} l Ω E₀) n hn) ≅ (intrinsicFiniteTorsionConstructible l (Coefficient.{u} l Ω E₀) n hn Y).ι ⋙ proEtaleConstantDerivedDirectImage (Y ↘ Spec (CommRingCat.of D.k)) (Padic.coefficientExtensionRing l (Coefficient.{u} l Ω E₀) n)) ∧ Nonempty (sfCompactSupportFiniteIntegralFunctor l D.k (finiteFieldDatumPrimeUnit D l hl) c (Coefficient.{u} l Ω E₀) ⋙ (sfIntegralConstructible l (Coefficient.{u} l Ω E₀) (Spec (.of D.k))).ι ≅ (sfIntegralConstructible l (Coefficient.{u} l Ω E₀) Y).ι ⋙ sfCompletedDerivedDirectImage l (Coefficient.{u} l Ω E₀) (Y ↘ Spec (.of D.k))) ∧ Nonempty (sfCompactSupportFiniteFunctor l D.k (finiteFieldDatumPrimeUnit D l hl) c (Coefficient.{u} l Ω E₀) ≅ sfCompactSupportFiniteFunctor l D.k (finiteFieldDatumPrimeUnit D l hl) (Compactification.ofIsProper (Y ↘ Spec (.of D.k))) (Coefficient.{u} l Ω E₀)) ∧ (∀ S : SfCompactSupportCoefficientAction l D.k (finiteFieldDatumPrimeUnit D l hl) Ω c, ∀ S₀ : SfCompactSupportCoefficientAction l D.k (finiteFieldDatumPrimeUnit D l hl) Ω (Compactification.ofIsProper (Y ↘ Spec (.of D.k))), Nonempty (S.system.functor ≅ S₀.system.functor)) ∧ (∀ K : (intrinsicFiniteTorsionConstructible l (Coefficient.{u} l Ω E₀) n hn Y).FullSubcategory, Nonempty (finiteCompactSections D l (Coefficient.{u} l Ω E₀) Y c n hn K.obj ≅ finiteOrdinarySections D l (Coefficient.{u} l Ω E₀) Y n hn K.obj) ∧ ∀ i : ℤ, Nonempty (finiteCompactCohomology D l (Coefficient.{u} l Ω E₀) Y c n hn K.obj i ≅ finiteOrdinaryCohomology D l (Coefficient.{u} l Ω E₀) Y n hn K.obj i)) ∧ (∀ K : sfIntegralConstructibleCategory l (Coefficient.{u} l Ω E₀) Y, Nonempty (sfIntegralCompactSupportValue l (Coefficient.{u} l Ω E₀) D.k (finiteFieldDatumPrimeUnit D l hl) c K ≅ integralImage D l hl (Coefficient.{u} l Ω E₀) Y K) ∧ Nonempty (integralCompactSections D l hl (Coefficient.{u} l Ω E₀) Y c K ≅ integralOrdinarySections D l hl (Coefficient.{u} l Ω E₀) Y K) ∧ ∀ i : ℤ, Nonempty (integralCompactCohomology D l hl (Coefficient.{u} l Ω E₀) Y c K i ≅ integralOrdinaryCohomology D l hl (Coefficient.{u} l Ω E₀) Y K i)) ∧ (∀ K : sfRationalConstructibleCategory l (Coefficient.{u} l Ω E₀) Y, Nonempty (sfRationalCompactSupportValue l (Coefficient.{u} l Ω E₀) D.k (finiteFieldDatumPrimeUnit D l hl) c K.obj ≅ rationalImage D l hl (Coefficient.{u} l Ω E₀) Y K) ∧ Nonempty (rationalCompactSections D l hl (Coefficient.{u} l Ω E₀) Y c K ≅ rationalOrdinarySections D l hl (Coefficient.{u} l Ω E₀) Y K) ∧ ∀ i : ℤ, Nonempty (rationalCompactCohomology D l hl (Coefficient.{u} l Ω E₀) Y c K i ≅ rationalOrdinaryCohomology D l hl (Coefficient.{u} l Ω E₀) Y K i)) ∧ (∀ K : generalAlgebraicallyClosedConstructibleCategory l Ω Y, Nonempty (sfQbarCompactSupportValue l D.k (finiteFieldDatumPrimeUnit D l hl) Ω c K.stage K.obj.obj ≅ qbarImage D l hl Y Ω K) ∧ Nonempty (qbarCompactSections D l hl Y Ω c K ≅ qbarOrdinarySections D l hl Y Ω K) ∧ ∀ i : ℤ, Nonempty (qbarCompactCohomology D l hl Y Ω c K i ≅ qbarOrdinaryCohomology D l hl Y Ω K i))",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-17",
+  "existing": false,
+  "file": "lean/Sheaf/Paper/ProperCompactCoincidence.lean",
+  "declarations": [
+   "WeilConjectures.properCompactPointOver",
+   "WeilConjectures.properCompactCoincidence"
+  ],
+  "note": "The rational and algebraically closed ordinary functors use the same direct-image construction at Compactification.ofIsProper (identity open immersion); the final clauses identify the actual ordinary image, section and cohomology declarations. The two added landed statement dependencies supply the normalized functor actions.",
+  "fixed_by": "NT-stage2-cc-3c5be6468"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3c5be6468",
+  "group": "NP",
+  "result": "fix",
+  "note": "Read node, 6 stmt_deps (nodes and Lean), source, module, report. Clauses 1-2 are natural isos of recorded finite/integral functors (sfIntrinsicCompactSupport vs proEtaleConstantDerivedDirectImage; F^c vs sfCompletedDerivedDirectImage); clauses 5-8 give sections and H^i isos for every K and i at all four coefficient levels; the rational/Qbar ordinary Ra_* exists only objectwise (rationalImage/qbarImage), so the functor comparison at Compactification.ofIsProper plus objectwise isos is accepted. Only hypothesis is IsProper; no extra assumptions or universe restriction; added stmt_deps acyclic; point Over instance is real data with no conflict; docstrings and gates ok; statement verbatim. Finding: clause 4 used ∃ S ∃ S₀ over SfCompactSupportCoefficientAction, weaker than the node and the project convention (sfFieldShriekCompositionQbar_existsUnique quantifies over all actions; actions are not evidently unique). Fixed to ∀ S ∀ S₀ in fixes/ProperCompactCoincidence.lean, the lean-record statement and the report. nt_compile --json: delivered 11.6 s clean, fixed 9.0 s clean, error-injection control rejected."
  }
 }

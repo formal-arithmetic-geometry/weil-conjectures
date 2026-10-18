@@ -309,5 +309,43 @@
   "group": "Q85",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q85-2389e8ed7 (reviewer sub-agent of L); spot-checked: Read the full item, all nine proof steps, cited DAG statements, unit/chapter route, Stacks sources, report, and delivery instructions. The canonical comparison, coefficient category, base-change square, spectral-sequence induction, endpoint transgression, edge cases, searches, and route restrictions check out. No new nodes or repairs are needed."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ComparisonTruncatedDirectImages",
+  "declaration": "CategoryTheory.RefinedTopologyComparison.comparisonTruncatedDirectImages",
+  "declarations": [
+   "CategoryTheory.RefinedTopologyComparison.geometricDirectRightAdjoint",
+   "CategoryTheory.RefinedTopologyComparison.geometricDirectFiniteLimits",
+   "CategoryTheory.RefinedTopologyComparison.geometricDirectInjectives",
+   "CategoryTheory.RefinedTopologyComparison.geometricInverseLeftAdjoint",
+   "CategoryTheory.RefinedTopologyComparison.geometricInverseFiniteLimits",
+   "CategoryTheory.RefinedTopologyComparison.geometricInverseFiniteColimits",
+   "CategoryTheory.RefinedTopologyComparison.geometricInverseAdditive",
+   "CategoryTheory.RefinedTopologyComparison.sheafDerivedAugmentation",
+   "CategoryTheory.RefinedTopologyComparison.relocalizationComparisonMate",
+   "CategoryTheory.RefinedTopologyComparison.isIso_relocalizationComparisonMate",
+   "CategoryTheory.RefinedTopologyComparison.relocalizationComparisonIso",
+   "CategoryTheory.RefinedTopologyComparison.derivedRelocalizationComparisonIso",
+   "CategoryTheory.RefinedTopologyComparison.derivedDirectImageComparison",
+   "CategoryTheory.RefinedTopologyComparison.adjointDerivedDirectImageComparison",
+   "CategoryTheory.RefinedTopologyComparison.comparisonBottom",
+   "CategoryTheory.RefinedTopologyComparison.comparisonLeft",
+   "CategoryTheory.RefinedTopologyComparison.truncatedDirectImageComparison",
+   "CategoryTheory.RefinedTopologyComparison.comparisonTruncatedDirectImages"
+  ],
+  "file": "lean/Sheaf/TraceFormula/ComparisonTruncatedDirectImages.lean",
+  "statement": "theorem comparisonTruncatedDirectImages {C : Type u} [SmallCategory C] (τ τ' : Precoverage C) (hτsite : τ.IsSiteForCoverings) (hτ'site : τ'.IsSiteForCoverings) (hτ : τ' ≤ τ) [∀ Z : C, HasDerivedCategory.{d} (Sheaf (τ.toGrothendieck.over Z) AddCommGrpCat.{u})] [∀ Z : C, HasDerivedCategory.{d} (Sheaf (τ'.toGrothendieck.over Z) AddCommGrpCat.{u})] (P : ∀ ⦃X Y : C⦄, (X ⟶ Y) → Prop) (A' : ∀ X : C, Sheaf (τ'.toGrothendieck.over X) AddCommGrpCat.{u} → Prop) (hzero : ∀ X : C, A' X 0) (hiso : ∀ (X : C) (H K : Sheaf (τ'.toGrothendieck.over X) AddCommGrpCat.{u}), Nonempty (H ≅ K) → A' X H → A' X K) (hkernel : ∀ (X : C) (H K : Sheaf (τ'.toGrothendieck.over X) AddCommGrpCat.{u}) (f : H ⟶ K), A' X H → A' X K → A' X (kernel f)) (hcokernel : ∀ (X : C) (H K : Sheaf (τ'.toGrothendieck.over X) AddCommGrpCat.{u}) (f : H ⟶ K), A' X H → A' X K → A' X (cokernel f)) (hextension : ∀ (X : C) (S : ShortComplex (Sheaf (τ'.toGrothendieck.over X) AddCommGrpCat.{u})), S.ShortExact → A' X S.X₁ → A' X S.X₃ → A' X S.X₂) (hbaseChange : ∀ (X Y Y' : C) (f : X ⟶ Y), P f → ∀ g : Y' ⟶ Y, ∃ (T : C) (p : T ⟶ X) (q : T ⟶ Y'), IsPullback p q f g ∧ P q) (hrelocalization : ∀ (X Y : C) (f : X ⟶ Y) (H : Sheaf (τ'.toGrothendieck.over Y) AddCommGrpCat.{u}), A' Y H → A' X ((relocalization τ'.toGrothendieck f).inverse.obj H)) (htauSheaf : ∀ (X : C) (H : Sheaf (τ'.toGrothendieck.over X) AddCommGrpCat.{u}), A' X H → Presheaf.IsSheaf (τ.toGrothendieck.over X) H.obj) (hderivedImage : ∀ (X Y : C) (f : X ⟶ Y), P f → ∀ (H : Sheaf (τ'.toGrothendieck.over X) AddCommGrpCat.{u}), A' X H → ∀ i : ℕ, A' Y (((relocalization τ'.toGrothendieck f).direct.rightDerived i).obj H)) (r : ℕ) (hr : ∀ (X : C) (H : Sheaf (τ.toGrothendieck.over X) AddCommGrpCat.{u}), (∃ H' : Sheaf (τ'.toGrothendieck.over X) AddCommGrpCat.{u}, A' X H' ∧ Nonempty (H ≅ (sliceComparison τ τ' hτ X).inverse.obj H')) → ∀ i : ℕ, 1 ≤ i → i ≤ r → IsZero (((sliceComparison τ τ' hτ X).direct.rightDerived i).obj H)) (X Y : C) (f : X ⟶ Y) (hf : P f) (H : Sheaf (τ.toGrothendieck.over X) AddCommGrpCat.{u}) (hH : ∃ H' : Sheaf (τ'.toGrothendieck.over X) AddCommGrpCat.{u}, A' X H' ∧ Nonempty (H ≅ (sliceComparison τ τ' hτ X).inverse.obj H')) (i : ℕ) (hi : i ≤ r) : IsIso ((truncatedDirectImageComparison τ τ' hτ f i).app H) ∧ IsIso ((comparisonLeft τ τ' hτ f i).app H)",
+  "branch": "newtargets-dag",
+  "by": "Q160",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4003438d2",
+  "group": "Q160",
+  "result": "pass",
+  "note": "Read node, Stacks 0EZA/situation-compare, report, module and the used declarations (sliceComparison, relocalization, GeometricMorphism, Grothendieck edge maps, slice_site_localization). All hypotheses (weak Serre, (1)-(4), A_X essential image, V_r) and both conclusion clauses (comparison and Leray edge iso for 0<=i<=r) match; a_H/b_H and the counit mate are canonical; the mate-invertibility helper is a true named sorry theorem required by the node's square. Exactly two sorry proofs, no hollow defs, docstrings present, no extra assumptions or universe restriction, statement verbatim, node differs only in lean. nt_compile --json clean (rc=0, 13.3 s). Stage-3 note only: identify comparisonBottom with H^i(a_H)."
  }
 }

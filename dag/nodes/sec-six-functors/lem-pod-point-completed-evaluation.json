@@ -316,5 +316,50 @@
   "group": "Q19",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q19-a69a30852 (reviewer sub-agent of L); spot-checked: Audited the full item, all eight proof steps, cited node statements, blueprint route, coefficient category, strict-cone maps, sources, hypotheses, and edge cases. Step 7 was incorrectly marked elementary; its strict-tower cone compatibility and identification with completed evaluation are a substantive argument. Corrected DAG JSON is under fixes/dag/nodes/sec-six-functors/lem-pod-point-completed-evaluation.json. No new nodes, duplicate, cycle, or statement error found.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointCompletedEvaluation",
+  "declaration": "WeilConjectures.PointCompletedEvaluation.point_completed_evaluation",
+  "declarations": [
+   "WeilConjectures.PointCompletedEvaluation.R",
+   "WeilConjectures.PointCompletedEvaluation.B",
+   "WeilConjectures.PointCompletedEvaluation.sheafQ",
+   "WeilConjectures.PointCompletedEvaluation.moduleQ",
+   "WeilConjectures.PointCompletedEvaluation.alpha",
+   "WeilConjectures.PointCompletedEvaluation.ringComplex",
+   "WeilConjectures.PointCompletedEvaluation.coefficient",
+   "WeilConjectures.PointCompletedEvaluation.extension_existsUnique",
+   "WeilConjectures.PointCompletedEvaluation.extension",
+   "WeilConjectures.PointCompletedEvaluation.extension_additive",
+   "WeilConjectures.PointCompletedEvaluation.extensionComplex",
+   "WeilConjectures.PointCompletedEvaluation.generator",
+   "WeilConjectures.PointCompletedEvaluation.dual",
+   "WeilConjectures.PointCompletedEvaluation.total",
+   "WeilConjectures.PointCompletedEvaluation.towerBalancing_existsUnique",
+   "WeilConjectures.PointCompletedEvaluation.towerBalancing",
+   "WeilConjectures.PointCompletedEvaluation.roosBalancing",
+   "WeilConjectures.PointCompletedEvaluation.completedEvaluation",
+   "WeilConjectures.PointCompletedEvaluation.moduleValue",
+   "WeilConjectures.PointCompletedEvaluation.sheafValue",
+   "WeilConjectures.PointCompletedEvaluation.model",
+   "WeilConjectures.PointCompletedEvaluation.tau",
+   "WeilConjectures.PointCompletedEvaluation.Result",
+   "WeilConjectures.PointCompletedEvaluation.point_completed_evaluation"
+  ],
+  "file": "lean/Sheaf/Paper/PointCompletedEvaluation.lean",
+  "statement": "theorem point_completed_evaluation (hl : l ≠ D.p) : ∃ S : PointIntegralTensorData D l hl E, Nonempty (PointIntegralTensorCanonical D l hl E S) ∧ ∀ (P : CochainComplex (ModuleCat.{u + 1} (R l E)) ℤ) (a b : ℤ), P.IsStrictlyGE a → P.IsStrictlyLE b → (∀ i : ℤ, Module.Projective (R l E) (P.X i) ∧ Module.Finite (R l E) (P.X i)) → Result D l E hl S P",
+  "branch": "newtargets-dag",
+  "by": "N4",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Perfect-model statement with the existing constant/change-of-rings objects, Hom complex, ambient derived Hom model map, completed tensor descent and canonical point tensorator. Owning-node helpers uniquely specify extension on objects/maps and the strict tower balancing isomorphism; completed evaluation is the functorial Roos image of ordinary evaluation followed by the inverse specified coefficient completion unit. Every helper is recorded here; no independent notion or dependency statement is replaced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1f6796be7",
+  "group": "N4",
+  "result": "pass",
+  "note": "Read all 12 statement dependencies and their Lean (PointDerivedHom Statement/EvaluationCompatible, IntegralHom.homModelMap, PointIntegralTensorData/Canonical with First/Second/Comparison/UnitModel, completedScalarIdentityUnit_existsUnique, finiteTorConstructibleIntegral, integralOperationsGoodComplex, moduleHomComplex). Every clause matches: bounded finite-projective P with no extra assumptions; rigid extension functor equal to the dependency's L; canonical J->RHom iso via homIso normalized b(x)f |-> bb'f(x) and homModelMap; constructibility of C, J and the tensor; chi_Q fixed to completedScalarIdentityUnit (both cone coordinates); q_P and unit P->Gamma(C) normalized on 1(x)x; tau pinned by PointIntegralTensorCanonical on the good models; final equality of derived morphisms. Koszul sign (-1)^{pj} verified to give a chain map under Mathlib conventions. Edge cases covered. Only the item's lean field changed; statement verbatim; 24 declarations match; docstrings and blueprint tags present; 3 sorrys, all named theorems; nothing hollow. nt_compile: exit 0, no diagnostics, 21.0 s. Non-blocking: completedEvaluation is a canonical local helper (completion of ordinary evaluation then chi_B inverse), since no integral evaluation declaration exists in the dependency; the second-reading section was written by the delivering worker."
  }
 }

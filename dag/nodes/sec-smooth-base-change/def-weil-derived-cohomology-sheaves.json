@@ -99,37 +99,28 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-rem-rest",
  "lean": {
-  "module": "Sheaf.Paper.PbcCohomologySheaves",
-  "declaration": "AlgebraicGeometry.Scheme.pbcRationalCohomology",
+  "module": "Sheaf.Paper.PbcQbarStandardCohomology",
+  "declaration": "AlgebraicGeometry.Scheme.pbcQbarCohomology",
   "declarations": [
-   "AlgebraicGeometry.Scheme.pbcStageModules",
-   "AlgebraicGeometry.Scheme.pbcStageCohomology",
-   "AlgebraicGeometry.Scheme.pbcStageCohomology_linear",
-   "AlgebraicGeometry.Scheme.pbcStageCohomology_additive",
-   "AlgebraicGeometry.Scheme.pbcStageCohomology_linearInstance",
-   "AlgebraicGeometry.Scheme.pbcStageRationalSheaves",
-   "AlgebraicGeometry.Scheme.pbcRationalCohomology",
-   "AlgebraicGeometry.Scheme.pbcFibreCoefficient",
-   "AlgebraicGeometry.Scheme.pbcStageCohomologyFibre",
-   "AlgebraicGeometry.Scheme.pbcFibreFraction",
-   "AlgebraicGeometry.Scheme.pbcRationalCohomologyFibre_exists",
-   "AlgebraicGeometry.Scheme.pbcRationalCohomologyFibre",
-   "AlgebraicGeometry.Scheme.pbcQbarCohomologyFibre"
+   "AlgebraicGeometry.Scheme.pbcQbarStandardClass",
+   "AlgebraicGeometry.Scheme.pbcQbarStandardT_existsUnique",
+   "AlgebraicGeometry.Scheme.pbcQbarStandardT",
+   "AlgebraicGeometry.Scheme.pbcQbarCohomology"
   ],
-  "file": "lean/Sheaf/Paper/PbcCohomologySheaves.lean",
-  "statement": "def pbcRationalCohomology (E : Padic.FiniteCoefficientFields l Ω) (a : ℤ) : pbcStageCategory l Ω X E ⥤ pbcStageRationalSheaves l Ω X E",
+  "file": "lean/Sheaf/Paper/PbcQbarStandardCohomology.lean",
+  "statement": "def pbcQbarCohomology (n : ℤ) : pbcQbarCategory l Ω X ⥤ pbcQbarCategory l Ω X",
   "branch": "newtargets-dag",
-  "by": "Q151",
+  "by": "Q99",
   "date": "2026-10-17",
   "existing": false,
-  "note": "Section 1(B): retain the recorded DerivedCategory.homologyFunctor (publicly imported and used verbatim). It is an ambient integral cohomology functor and cannot be applied to the raw rational finite-stage pair object pbcQbarCategory. This module supplies its exact integral full-subcategory specialization, literal scalar-localized rational cohomology, and completed geometric cohomology fibres with the actual fraction-normalized scalar action. No discrete Qbar coefficient sheaf is substituted."
+  "note": "The recorded ambient and rational-stage cohomology declarations remain publicly imported and are used without change. They do not supply cohomology objects on the common-finite-stage Qbar pair category. This generalized interface supplies the same standard t-structure, uniquely specified by the strictly full images of integral bounds at finite stages, and its cohomology objects. Unlike the PerAdic.Base specialization in the proof dependency, it requires invertibility only on the scheme and so also covers empty schemes over characteristic-l fields."
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-793ebb6fb",
-  "group": "Q151",
+  "reviewer": "NT-stage2-cc-4de831828",
+  "group": "Q99",
   "result": "fix",
-  "note": "Mathematics and Lean correct. Read the node, its source (main-20261015 lem-per-smooth-pullback-t-exact proof, 2nd paragraph), the 4 stmt deps and the 4 delivered modules against the upstream decls (coefficientTwistLine/integralSheafTwist, purCoefficientIso, pbcConditionalRational, pointCompletedDerivedSections, algClosurePoint, qbarStageFieldEquiv). Hypotheses are exactly pbcQbarCategory's parameters plus separated finite type over k, nothing stronger. Twist = exact derived tensor with the signed root line (m=0 unit, m<0 dual). Membership is in the codomain via pbcTateAmbient_mem. The cohomology comparison is canonical (mapDerivedCategoryHomologyFunctorIso + transportNat). Fibre clause natural; line finrank 1. Support = closure of the nonzero adic fibre locus; PbcSupportCondition encodes dim(empty) = -inf exactly. Edge cases m=0, m<0, zero object, empty scheme, torsion and universes pass. Node files change only in lean; statements verbatim; all decls present. nt_compile of all 4 files: exit 0, no errors or warnings. Finding: H11, the Second reading section was the author's self-audit; fixed by fixes/lem-per-tate-twist-support-condition.report.md (full report, section replaced by an independent reading). Observation: the def-per-support-condition record covers only the Qbar support half (CosuppCon needs an absent Verdier dual; unused here; old etale decls stay imported)."
+  "note": "Lean and mathematics correct. Every hypothesis is matched and none is stronger: PerAdic.Base gives separated finite type over k with no nonemptiness; l is invertible on the schemes only; d : ℕ with SmoothOfRelativeDimension. Conjunct 1 is t-exactness, conjunct 2 is the natural iso with the correct -i+d sign, conjunct 3 is the support-dimension inequality with ⊥ for -∞. The statement field is verbatim. The item node changes only in lean plus the landed stmt_dep lem-per-adic-heart-pullback-fibres; the two dependency nodes change only in lean, with notes. The §1(B) modules are correct and canonical: strictly full integral image classes with a unique t-structure, and the unique descended family with stage functors pbcDescentPullback and β fixed by PbcPullbackBetaSpec. They generalize PerAdic.commonT/commonPull without IsUnit (l:k) (observation only). Edge cases checked: empty schemes, char l, d=0, K=0, f not surjective, non-closed support, negative i, independent universes u and w. nt_compile of all 3 files: exit 0, no errors or warnings. Fault: delivery-errors A11, the Second reading by Q99 was the worker's self-check; fixed by fixes/lem-per-smooth-pullback-support-dimension.report.md (full report, that section replaced by an independent reading)."
  }
 }

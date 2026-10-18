@@ -2,7 +2,7 @@
  "id": "lem-trf-perfect-complex-derived-biduality",
  "kind": "statement",
  "title": "Derived duality for perfect complexes",
- "statement": "Let $B$ be a commutative ring and let $C\\in D(B)$ [def-weil-abstract-derived-category] be perfect [def-pc-perfect-ring-complex], meaning represented by a bounded complex of finitely generated projective $B$-modules [def-weil-pbc-projective-module]. Then $R\\operatorname{Hom}_B(C,B)$ [def-pur-derived-internal-hom] is perfect, and the canonical evaluation map $C\\to R\\operatorname{Hom}_B(R\\operatorname{Hom}_B(C,B),B)$ is an isomorphism in $D(B).$",
+ "statement": "Let $B$ be a commutative ring and let $C\\in D(B)$ [def-weil-abstract-derived-category], formed with localization universe equal to the coefficient universe and equipped with a braided monoidal structure. Assume that $C$ is perfect [def-pc-perfect-ring-complex], meaning represented by a bounded complex of finitely generated projective $B$-modules [def-weil-pbc-projective-module]. Then $R\\operatorname{Hom}_B(C,B)$ [def-pur-derived-internal-hom] is perfect, and the canonical evaluation map $C\\to R\\operatorname{Hom}_B(R\\operatorname{Hom}_B(C,B),B)$ is an isomorphism in $D(B)$.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Tag 07VI, lemma-dual-perfect-complex (the bounded finite-projective Hom model and signed double-dual evaluation)."
@@ -233,5 +233,46 @@
   "group": "Q63",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q63-09d289f6a (reviewer sub-agent of L); spot-checked: Read the item, unit/chapter route, all cited node statements, and Stacks sources (Tags 07VI, 0A66, 0A97 and Hom/sign sections). Verified hypotheses, coefficient category, identity base-change specialization, signed chain-map calculation, naturality, edge cases, searches, route compliance, and absence of duplicates/cycles/long hidden lemmas. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DerivedCategory.PerfectComplexDerivedBiduality",
+  "file": "lean/Sheaf/CategoryTheory/DerivedCategory/PerfectComplexDerivedBiduality.lean",
+  "declaration": "DerivedCategory.perfectComplexDerivedBiduality",
+  "statement": "theorem perfectComplexDerivedBiduality {B : Type u} [CommRing B] [HasDerivedCategory.{u} (ModuleCat.{u} B)] [BraidedCategory (DerivedCategory (ModuleCat.{u} B))] {C : DerivedCategory (ModuleCat.{u} B)} (hC : IsPerfectRingComplex C) : IsPerfectRingComplex ((ihom C).obj (𝟙_ (DerivedCategory (ModuleCat.{u} B)))) ∧ IsIso (MonoidalClosed.toIhomIhomUnit C)",
+  "branch": "newtargets-dag",
+  "by": "Q118",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1a16278f3",
+  "group": "Q118",
+  "result": "fix",
+  "note": "Statement correct against the corrected node and Stacks 07VI (more-algebra.tex l.19176): CommRing B, HasDerivedCategory.{u}, an arbitrary braiding instance (a braiding always exists; the theorem covers the Koszul one), recorded IsPerfectRingComplex predicate, ihom into the unit, IsIso toIhomIhomUnit. statement_change audited: old_statement verbatim; adds only the ambient braiding and universe identification; the 2 citers are exactly the grep result and both hold. Edge cases covered (zero ring, zero complex, empty degree range, odd shift). Upstream IsPerfect.ihom_unit and IsPerfect.isIso_toIhomIhomUnit close the delivered signature exactly (scratch nt_compile); module kept because the item must use the dependency's IsPerfectRingComplex binding. No hollow def, proof is sorry, imports and lines ok, lean.statement verbatim. Delivered file and fixed file each compile clean via nt_compile.py (2.7 s / 2.6 s). Finding H8: theorem docstring lacked the node's proof step by step; fixes/PerfectComplexDerivedBiduality.lean gives the complete replacement with Steps 1-5 and an identical signature. Worker report misstates why upstream was not attached (noted, no change needed).",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-18",
+  "by": "Q118 stage 2",
+  "old_statement": "Let $B$ be a commutative ring and let $C\\in D(B)$ [def-weil-abstract-derived-category] be perfect [def-pc-perfect-ring-complex], meaning represented by a bounded complex of finitely generated projective $B$-modules [def-weil-pbc-projective-module]. Then $R\\operatorname{Hom}_B(C,B)$ [def-pur-derived-internal-hom] is perfect, and the canonical evaluation map $C\\to R\\operatorname{Hom}_B(R\\operatorname{Hom}_B(C,B),B)$ is an isomorphism in $D(B).$",
+  "what": "The original statement omits the braided monoidal structure needed to type its canonical biduality map in the available derived-category interface. It also leaves the localization universe unspecified, while the monoidal derived-category construction and the canonical map are available here with the coefficient and localization universes identified. The correction records these necessary ambient structures and leaves the perfectness and biduality conclusions unchanged.",
+  "source": {
+   "document": "literature/stacks-project/more-algebra.tex",
+   "place": "Tag 07VI, lemma-dual-perfect-complex; the canonical evaluation map is the braided derived internal-Hom biduality map"
+  },
+  "citers": [
+   {
+    "id": "lem-trf-algebraic-shriek-relative-perfect",
+    "holds": true,
+    "note": "Its use supplies the derived monoidal and canonical-evaluation context for the perfect P-complex; the corrected ambient assumptions are available in that route."
+   },
+   {
+    "id": "lem-trf-polynomial-diagonal-rhom-reduction",
+    "holds": true,
+    "note": "Its proof uses the corrected canonical biduality conclusion for the polynomial dualizing complex in the ordinary ring derived category."
+   }
+  ]
  }
 }

@@ -1,0 +1,123 @@
+{
+ "id": "def-zl-common-stage-weil-shriek",
+ "kind": "definition",
+ "title": "Common-stage compact support with canonical Weil structures",
+ "status": "split",
+ "statement": "Fix the finite-field datum $D=(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, and an algebraic closure $\\Omega$ of $\\mathbf Q_\\ell$, with no equality imposed between the scheme and coefficient universes. For finite-type $k_0$-schemes use the actual common-stage constructible categories and the categories of geometric-Frobenius fixed pairs [def-weil-weil-sheaf-complex]. Use the geometric-fibre inverse image $P_f=f^*$ and its normalized Frobenius square $P_fF_X\\simeq F_YP_f$ of [def-zl-weil-ind-sheaf-category].\n\nFor a proper morphism $p_0:X_0\\to Y_0$, $P_p$ has a right adjoint $R_p$ on these common-stage constructible categories; choose it together with its adjunction. Define $e_p:R_pF_Y\\to F_XR_p$ to be the right mate of the inverse normalized pullback square under $P_p\\dashv R_p$. This mate is invertible. For an open immersion $j_0:X_0\\to Y_0$, $P_j$ has a left adjoint $J_j$, chosen with its adjunction. Define $d_j:F_XJ_j\\to J_jF_Y$ to be the left mate of the normalized pullback square under $J_j\\dashv P_j$; it is invertible, and put $e_j=d_j^{-1}$. These adjunction universal properties determine the chosen operations up to unique compatible natural isomorphism; no arbitrary comparison is chosen.\n\nFor $f_0:X_0\\to Y_0$ and a compactification $c=(j_0,p_0)$, use the middle $k_0$-scheme and the two $k_0$-arrows constructed in [def-zl-weil-compact-support-cohomology]. Define $H_{f,c}=J_jR_p$ in diagrammatic functor order (first $J_j$, then $R_p$). Its Frobenius comparison $e_{f,c}:H_{f,c}F_Y\\simeq F_XH_{f,c}$ is $J_j(e_p)$ followed by $e_jR_p$, with the ordinary associators. Define its functor on Weil fixed pairs by $(K,\\theta)\\mapsto(H_{f,c}K,e_{f,c,K};H_{f,c}(\\theta))$ and by $H_{f,c}$ on underlying morphisms. For a separated finite-type $f_0$, for every geometric compactification $c_g$ and every normalized coefficient action $S$ [def-weil-compact-support-coefficient-action] on that compactification, $H_{f,c}$ is naturally isomorphic, on every object and morphism, to $S$'s common-stage functor of [def-weil-integral-rational-qbar-compact-support]. Finally, for composable maps and chosen compactifications, define the Frobenius comparison of the iterated functor $H_fH_g$ by $H_f(e_g)$ followed by $e_fH_g$, with the associators.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-weil-sheaf-complex",
+  "def-zl-weil-ind-sheaf-category",
+  "def-zl-weil-compact-support-cohomology",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-compact-support-coefficient-action"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/lem-fix-weil-operations.proof.md",
+  "place": "First two paragraphs: proper image and compact support Weil structures from invertible automorphism-square exchanges; together with SGA 4 XVII §5–6 proper/open construction"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Exceptional direct image functor on Frobenius fixed pairs is open extension followed by the proper pushforward adjoint to inverse image",
+   "results": "8 hits. AlgebraicGeometry.Scheme.Modules.restrictAdjunction, TopCat.Sheaf.pullback, TopCat.Presheaf.pushforwardPullbackAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Hom.opensFunctor, IsOpenMap.functor. ",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module/sheaf adjunctions, not this common-stage Weil compact-support construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Right adjoint and open immersion left adjoint of pullback on constructible Weil complexes fixed pairs",
+   "results": "8 hits. AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, TopCat.Sheaf.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj. ",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module/sheaf adjunctions, not this common-stage Weil compact-support construction"
+  },
+  {
+   "tool": "grep",
+   "query": "Weil|IsoAlgebra|[Ss]hriek in AlgebraicGeometry",
+   "results": "0 hits. . ",
+   "date": "2026-10-17",
+   "verdict": "no match: ordinary module/sheaf adjunctions, not this common-stage Weil compact-support construction"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n \"zlComplexPull|zlComplexShriek|zlWeilShriekComposition\" in Mathlib, WeilConjectures, lean/Sheaf and dag/lean_names_upstream.json; rg -n \"commonStageDerivedPullback.*IsLeftAdjoint|commonStageDerivedPullback.*rightAdjoint|commonStageDerivedPullback.*leftAdjoint|zlPull.*rightAdjoint|zlCommonStage.*Push\" lean/Sheaf/Paper; blueprint_refs.py search \"Weil compact support\"; DAG searches for adjoint/fixed-pair/Weil compact-support functors",
+   "results": "No declaration-name hits and no common-stage proper/open adjoint hits. blueprint_refs.py: 0 blueprint nodes match. DAG and source reading found def-zl-weil-ind-sheaf-category and def-zl-weil-compact-support-cohomology, which supply normalized pullback squares, ind-heart operations, higher images and geometric helpers; neither defines the full common-stage complex functor. CompactSupportCoefficientAction supplies the underlying normalized coefficient action, reused in the comparison. Upstream WeilComplex is the different derived-of-Weil-sheaves construction. Finite-level shriek composition is not the Qbar operation.",
+   "date": "2026-10-17",
+   "verdict": "no exact match; reuse all existing components"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-shriek-composition",
+  "date": "2026-10-18",
+  "group": "Q36"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-shriek-composition",
+   "place": "The operations Rf!, Rg!, R(gf)! and their canonical Frobenius comparisons in the statement and proof steps 1–2",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-composition",
+ "lean": {
+  "module": "Sheaf.Paper.CommonStageWeilShriek",
+  "declaration": "WeilConjectures.zlCommonStageShriek",
+  "declarations": [
+   "WeilConjectures.zlPull_proper_isLeftAdjoint",
+   "WeilConjectures.zlCommonStageProperPush",
+   "WeilConjectures.zlCommonStageProperAdjunction",
+   "WeilConjectures.zlProperFrobeniusMap",
+   "WeilConjectures.zlProperFrobeniusMap_isIso",
+   "WeilConjectures.zlProperFrobenius",
+   "WeilConjectures.zlPull_open_isRightAdjoint",
+   "WeilConjectures.zlCommonStageOpenShriek",
+   "WeilConjectures.zlCommonStageOpenAdjunction",
+   "WeilConjectures.zlOpenFrobeniusInverseMap",
+   "WeilConjectures.zlOpenFrobeniusInverseMap_isIso",
+   "WeilConjectures.zlOpenFrobenius",
+   "WeilConjectures.zlCommonStageShriek",
+   "WeilConjectures.zlShriekFrobenius",
+   "WeilConjectures.zlComplexShriek",
+   "WeilConjectures.zlCommonStageShriek_recorded",
+   "WeilConjectures.zlShriekCompositeFrobenius"
+  ],
+  "file": "lean/Sheaf/Paper/CommonStageWeilShriek.lean",
+  "statement": "def zlCommonStageShriek",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f2664620a",
+  "group": "Q36",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f2664620a",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Item zlWeilShriekComposition matches the node exactly: separated and finite-type hypotheses on X0, Y0, Z0, f0 and g0 with nothing stronger; independent universes u and v; compactifications are inputs it must hold for, not assumptions. The conclusion is a natural iso R(gf)! ≅ Rf! ⋙ Rg! on the full common-stage categories plus a Frobenius equation that is exactly the hypothesis of IsoAlgebra.mapOfNatIsoIsoOfIso, so it also gives the iso of functors on Weil pairs. The statement field is verbatim. The new node def-zl-common-stage-weil-shriek is genuinely missing (FieldShriekCompositionQcqs has no Frobenius, the finite-level and pbc versions are separate notions, lem-fix-weil-operations has no Lean). Adjoints are selected by their universal properties in the right directions; the mate types were checked against mateEquiv and match the source's exchange maps (lem-fix-weil-operations proof); the claim of agreement with the recorded normalized action is true. No hollow definitions, only sorry proofs, source and blueprint docstrings, dependency records consistent, no pro-etale substitute. nt_compile --json on both files, run twice: exit 0, no errors or warnings (CommonStageWeilShriek 10.6/13.9 s, WeilShriekComposition 3.4/3.3 s). No findings."
+ }
+}

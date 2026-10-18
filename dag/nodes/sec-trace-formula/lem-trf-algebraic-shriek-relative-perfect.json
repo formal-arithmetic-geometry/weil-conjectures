@@ -171,23 +171,24 @@
   "module": "Sheaf.TraceFormula.AlgebraicShriekRelativePerfect",
   "declaration": "AlgebraicGeometry.algebraicShriek_relative_perfect",
   "declarations": [
-   "AlgebraicGeometry.algebraicShriekRelativeComplex",
+   "AlgebraicGeometry.algebraicShriekPolynomialComplex",
+   "AlgebraicGeometry.algebraicShriekScalarMap",
    "AlgebraicGeometry.algebraicShriek_relative_perfect"
   ],
   "file": "lean/Sheaf/TraceFormula/AlgebraicShriekRelativePerfect.lean",
-  "statement": "theorem algebraicShriek_relative_perfect (S : AlgebraicShriekCalculus.{u}) {R A : CommRingCat.{u}} [IsNoetherianRing R] [IsNoetherianRing A] (φ : R →+* A) (hφflat : RingHom.Flat φ) (hφfinite : RingHom.FiniteType φ) (n : ℕ) (p : MvPolynomial (Fin n) R →+* A) (hp : Function.Surjective p) (hc : p.comp (MvPolynomial.C : R →+* MvPolynomial (Fin n) R) = φ) : DerivedCategory.IsPseudoCoherent (algebraicShriekRelativeComplex S n p) ∧ ((∃ c d : ℤ, c ≤ d ∧ ∀ i : ℤ, i < c ∨ d < i → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} A) i).obj (algebraicShriekRelativeComplex S n p))) ∧ ∀ i : ℤ, Module.Finite A ((DerivedCategory.homologyFunctor (ModuleCat.{u} A) i).obj (algebraicShriekRelativeComplex S n p))) ∧ (∃ a b : ℤ, a ≤ b ∧ DerivedCategory.torAmplitudeIn (ModuleCat.{u} R) a b ((algebraicShriekRestriction φ).obj (algebraicShriekRelativeComplex S n p))) ∧ (∀ E I : CochainComplex (ModuleCat.{u} A) ℤ, Nonempty (DerivedCategory.Q.obj E ≅ algebraicShriekRelativeComplex S n p) → I.IsKInjective → ∀ η : E ⟶ I, QuasiIso η → ∃ α : (CochainComplex.singleFunctor (ModuleCat.{u} A) 0).obj (ModuleCat.of A A) ⟶ CochainComplex.moduleHomComplex E I, (HomologicalComplex.singleObjXSelf (.up ℤ) (0 : ℤ) (ModuleCat.of A A)).inv ≫ α.f 0 = ModuleCat.ofHom ((LinearMap.id : A →ₗ[A] A).smulRight (CochainComplex.HomComplex.Cochain.ofHom η)) ∧ QuasiIso α)",
+  "statement": "theorem algebraicShriek_relative_perfect {R A : Type u} [CommRing R] [CommRing A] [IsNoetherianRing R] [IsNoetherianRing A] [HasDerivedCategory.{u} (ModuleCat.{u} R)] [HasDerivedCategory.{u} (ModuleCat.{u} A)] (φ : R →+* A) (hflat : RingHom.Flat φ) (hfinite : RingHom.FiniteType φ) (n : ℕ) (p : MvPolynomial (Fin n) R →+* A) (hp : Function.Surjective p) (hcomp : p.comp (MvPolynomial.C : R →+* MvPolynomial (Fin n) R) = φ) : DerivedCategory.IsPseudoCoherent (DerivedCategory.Q.obj (algebraicShriekPolynomialComplex n p)) ∧ (∃ a b : ℤ, a ≤ b ∧ ∀ i : ℤ, i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} A) i).obj (DerivedCategory.Q.obj (algebraicShriekPolynomialComplex n p)))) ∧ (∀ i : ℤ, Module.Finite A ((DerivedCategory.homologyFunctor (ModuleCat.{u} A) i).obj (DerivedCategory.Q.obj (algebraicShriekPolynomialComplex n p)))) ∧ (∃ a b : ℤ, a ≤ b ∧ DerivedCategory.torAmplitudeIn (ModuleCat.{u} R) a b ((ModuleCat.restrictScalars φ).mapDerivedCategory.obj (DerivedCategory.Q.obj (algebraicShriekPolynomialComplex n p)))) ∧ IsIso (algebraicShriekScalarMap (DerivedCategory.Q.obj (algebraicShriekPolynomialComplex n p)))",
   "branch": "newtargets-dag",
-  "by": "Q105",
-  "date": "2026-10-17",
+  "by": "Q148",
+  "date": "2026-10-18",
   "existing": false,
-  "note": "Every normalized calculus and every polynomial presentation are covered. The scalar isomorphism is expressed on every K-injective ordinary-module Hom-complex model: the unique scalar chain map sends 1 to the resolution cocycle. This avoids the upstream closed-derived-Hom localization-size specialization while specifying the actual scalar map, not mere isomorphism of objects. No data are chosen from a postponed existence theorem."
+  "note": "The polynomial complex is literal coinduction of the canonical K-injective resolution of P[0], with multiplication action, followed by shift n. The scalar map is curry of the identity for the existing derived closed module tensor structure. Helpers are real constructions owned by this node. HasDerivedCategory at universe u is the existing Grothendieck module localization, with no site universe restriction."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-9a7b7433d",
-  "group": "Q105",
+  "reviewer": "NT-stage2-cc-7a2f5145d",
+  "group": "Q148",
   "result": "pass",
-  "note": "Statement matches node and Stacks 0BZW (1)(a)-(c),(2)(a): Noetherian R and A, RingHom.Flat/FiniteType, arbitrary surjective polynomial presentation with p∘C=φ; K = coinduction_p(P[0])[n] via the calculus (right adjoint of exact restriction, so unique up to iso; every clause is iso-invariant, so the S parameter adds no assumption); IsPseudoCoherent; bounded and finite cohomology as separate clauses; ∃a≤b torAmplitudeIn over R after restriction along φ (derived tensor, all degree-0 modules); scalar map pinned on every K-injective Hom-complex model with 1↦η, and α quasi-iso, equivalent to A→RHom_A(K,K) iso. lean.statement verbatim. Edge cases n=0, zero rings, identity presentation, non-lci covered; single universe u as in the calculus. No ring-level Tor node exists (upstream generic torAmplitudeIn matches the inline notion); RHom via existing moduleHomComplex plus K-injective, as the def-pur node text defines it. Added stmt_deps all used and acyclic; all proof_deps exist. Real definition, source and blueprint docstrings, 4-step proof docstring, proof sorry only. nt_compile --json rc 0, no messages; probe: #print axioms has sorryAx only, rfl confirms the same HasDerivedCategory instance as the calculus."
+  "note": "Read the node, its 8 stmt deps, Stacks 0BZW (1)(a-c),(2)(a), the module, the report and the upstream declarations (kInjectiveResolutionFunctor, coextendScalars smul_apply, torAmplitudeIn, DerivedCategory.monoidalClosed, singleFunctorObjUnitIso, curry'). K is real coinduction of the K-injective resolution of P[0] with shift n, matching the AlgebraicShriekCalculus coinduction model. Every hypothesis matches and none is stronger. Clauses: IsPseudoCoherent (recorded), bounded and finite cohomology as separate clauses, torAmplitudeIn over R after exact restriction, IsIso of the canonical scalar map curry'(id). Edge cases n=0, A=0, R=0, K=0 covered. Statement field verbatim unchanged; lean.statement equals the file signature. Helpers are not hollow; source and blueprint docstrings present; one sorry. nt_compile clean (rc=0); the error-detection test works. Observation only: the A-side HasDerivedCategory.{u} is forced by the closed instance (a generic universe fails), while the R side could be generic (that variant compiles); this is a harmless localization-size convention, so no change."
  }
 }

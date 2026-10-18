@@ -292,21 +292,21 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q104-c1ccc5b60 (reviewer sub-agent of L); spot-checked: Read the full item, both new nodes, cited statements, unit route, and Stacks sources 055A, 0556, and 0554. All hypotheses, component-count comparisons, base changes, edge cases, duplicate checks, and route constraints pass; no long-step or repair issue found. Review written to review.md."
  },
  "lean": {
+  "existing": false,
   "module": "Sheaf.TraceFormula.GeometricComponentCountGenericConstancy",
-  "declaration": "AlgebraicGeometry.geometricFibreComponentCount_genericConstancy",
   "file": "lean/Sheaf/TraceFormula/GeometricComponentCountGenericConstancy.lean",
-  "statement": "theorem geometricFibreComponentCount_genericConstancy {X Y : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFiniteType f] [QuasiCompact f] (y : Y) : ∃ V : TopologicalSpace.Opens ↥(closure ({y} : Set Y)), (V : Set ↥(closure ({y} : Set Y))).Nonempty ∧ ∃ n : ℕ, ∀ (t : ↥(closure ({y} : Set Y))), t ∈ V → ∀ (K : Type u) [Field K] [Algebra (Y.residueField t.val) K] [IsSepClosure (Y.residueField t.val) K], ENat.card (irreducibleComponents ↥(pullback (f.fiberToSpecResidueField t.val) (Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField t.val) K))))) = (n : ℕ∞)",
-  "branch": "newtargets-dag",
-  "by": "Q154",
+  "declaration": "AlgebraicGeometry.geometricComponentCount_genericConstancy",
+  "statement": "theorem geometricComponentCount_genericConstancy {X Y : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFiniteType f] [QuasiCompact f] : ∀ y : Y, ∃ V : Set Y, IsOpen V ∧ y ∈ V ∧ ∃ n : ℕ, ∀ t : Y, t ∈ V ∩ closure {y} → ∀ (K : Type u) [Field K] [Algebra (Y.residueField t) K] [IsSepClosure (Y.residueField t) K], ENat.card (irreducibleComponents ↥(pullback f (Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField t) K)) ≫ Y.fromSpecResidueField t))) = n",
+  "by": "Q24",
   "date": "2026-10-17",
-  "existing": false
+  "branch": "newtargets-dag"
  },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-ce2797673",
-  "group": "Q154",
+  "reviewer": "NT-stage2-cc-b3dc2c078",
+  "group": "Q24",
   "result": "pass",
-  "note": "Statement matches node and Stacks 055A clause by clause: f finite type = LocallyOfFiniteType+QuasiCompact (no stronger), V is a nonempty open of the closure-of-y subtype, ∃ n : ℕ, then ∀ t ∈ V and ∀ separable closure K : Type u, ENat.card of the irreducible components of X_t ×_{Spec κ(t)} Spec K equals n. Quantifier order gives choice-independence; Type u loses no separable closure up to isomorphism; edge cases (empty source, fibre, base; non-Noetherian base; Spec ℂ/ℝ) all handled. Same ENat.card convention as the 0556 sibling. Only proof is one sorry; docstrings carry source, blueprint tag and 7-step proof; lean.statement verbatim; node changed only in lean; no duplicate found. nt_compile.py --json against the side overlay: rc=0, no diagnostics. No findings."
+  "note": "Read the node, all 8 stmt_deps records, Stacks 055A/0556 (more-morphisms.tex l.7741, l.7453), the module and the report. Hypotheses: LocallyOfFiniteType+QuasiCompact = finite type per the dep record; nothing stronger. Fibre: pullback f (Spec.map(algebraMap κ(t) K) ≫ fromSpecResidueField t), canonically isomorphic to X_t ×_κ(t) Spec K and the same encoding as the landed 0556 sibling. Count: ENat.card irreducibleComponents = ↑n, n:ℕ (finite, n=0 allowed). ∀ K : Type u with IsSepClosure covers any choice, no universe loss. Open V with y∈V intersected with closure{y} is equivalent to a nonempty relatively open subset (y is generic); quantifier order matches. Edge cases checked: empty fibre/X, empty Y, closed y. lean.statement verbatim; node differs from live only in the lean field; docstrings carry source, blueprint and the 7-step proof; sorry only; no hollow defs. nt_compile --json on the snapshot: rc=0, no warnings. Notes: Second reading section is the standard post-2026-10-17 placeholder; def-weil-irreducible-components has lean:null (pre-existing)."
  }
 }

@@ -215,5 +215,23 @@
   "group": "Q27",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q27-4f5abc80e (reviewer sub-agent of L); spot-checked: Read the full item, new node, cited DAG statements, Stacks Tags 01SO and 01SM, and supporting source clauses. All four steps are mathematically sound; arbitrary base change, openness, quasi-compactness, relative-spectrum identification, directions, and hypotheses check correctly. No duplicates, hidden long-step lemmas, route-pivot machinery, SGA citations, cycles, or source mismatches found. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiAffineBaseChange",
+  "declaration": "AlgebraicGeometry.isQuasiAffineHom_baseChange",
+  "statement": "theorem isQuasiAffineHom_baseChange {X S S' : Scheme.{u}} (f : X ⟶ S) (g : S' ⟶ S) (hf : IsQuasiAffineHom f) : IsQuasiAffineHom (pullback.snd f g)",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-18",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiAffineBaseChange.lean"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-40b33f71d",
+  "group": "N0",
+  "result": "pass",
+  "note": "Statement clause-by-clause matches node and Stacks Tag 01SO: IsQuasiAffineHom f (recorded decl of def-nagata-quasi-affine-morphism) for arbitrary g : S' ⟶ S gives IsQuasiAffineHom (pullback.snd f g); no finite-presentation, QC or QS assumption; single universe u, forced by pullback; empty schemes covered. Not a duplicate: upstream IsQuasiAffineHom.of_isPullback and its pullback.snd instance need extra [QuasiCompact] [QuasiSeparated], and no Lean lemma derives these from IsQuasiAffineHom. Node changed only in lean, statement verbatim. Docstrings carry source place, blueprint marker and the four proof steps. Imports per brief (RelativeSpecBaseChange is a proof-dependency module). No line over 100. Proof is sorry. Report has both sections (second reading is the post-2026-10-17 policy note). nt_compile --json: rc=0, 4.7 s, no diagnostics; a broken copy fails, so the clean result is meaningful."
  }
 }

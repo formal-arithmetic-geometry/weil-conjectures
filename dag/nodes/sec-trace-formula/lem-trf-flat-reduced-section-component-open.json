@@ -166,5 +166,23 @@
   "group": "Q79",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q79-8235c60b5 (reviewer sub-agent of L); spot-checked: Read the required instructions, packet/report, item, new nodes, unit/chapter route, cited DAG statements, Stacks Tags 055P/055Q/055R/00I0, and exact Mathlib source. Hypotheses, component locus, affine restriction, generalization stability, constructibility, and openness checks all pass; edge cases and route-pivot exclusions checked. Review written to review.md. Accepted the recorded generic tool use of lem-sbc-section-component-locally-constructible."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatReducedSectionComponentOpen",
+  "declaration": "AlgebraicGeometry.isOpen_section_component_of_flat_of_geometricallyReduced_fibers",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatReducedSectionComponentOpen.lean",
+  "statement": "theorem isOpen_section_component_of_flat_of_geometricallyReduced_fibers {P T : Scheme.{u}} (g : P ⟶ T) [Flat g] [LocallyOfFinitePresentation g] [QuasiCompact g] [QuasiSeparated g] (σ : T ⟶ P) (hσ : σ ≫ g = 𝟙 T) (hred : ∀ t : T, GeometricallyReduced (g.fiberToSpecResidueField t)) : IsOpen {p : P | p ∈ connectedComponentIn (g ⁻¹' {g p}) (σ (g p))}",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4c51ebf44",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 055R clause by clause: Flat, LocallyOfFinitePresentation+QuasiCompact+QuasiSeparated (convention 01TP), section with σ≫g=𝟙, GeometricallyReduced (g.fiberToSpecResidueField t) for all t, locus {p | p ∈ connectedComponentIn (g⁻¹'{g p}) (σ (g p))} identical to landed 055P/smooth statements (one definition per notion), conclusion IsOpen; no extra assumptions or universe restriction; edge cases (empty T, identity, disconnected fibres) fine; only sorry, docstrings with source and blueprint tag, lean.statement verbatim, only the node's lean field changed; nt_compile --json on the snapshot file: rc=0, 2.0 s, no errors or warnings."
  }
 }

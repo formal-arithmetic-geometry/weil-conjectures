@@ -150,21 +150,21 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-99335b35b (reviewer sub-agent of L); spot-checked: Read the item, unit, chapter, cited DAG nodes, and Stacks 00SD/00SF/00SG sources. The four proof steps match the hypotheses and conclusions, including localization, regularity, presentation invariance, and principal-neighbourhood globalization. Edge cases and route constraints pass; review.md records the checks."
  },
  "lean": {
-  "module": "Sheaf.RingTheory.CompleteIntersectionLocalRingPrincipalNeighbourhood",
-  "declaration": "Algebra.exists_globalCompleteIntersection_of_regularLocalQuotient",
-  "file": "lean/Sheaf/RingTheory/CompleteIntersectionLocalRingPrincipalNeighbourhood.lean",
-  "statement": "theorem exists_globalCompleteIntersection_of_regularLocalQuotient (k : Type u) [Field k] (F : Type v) [CommRing F] [Algebra k F] (hF : (algebraMap k F).FiniteType) (Q : Ideal F) [Q.IsPrime] (A : Type w) [CommRing A] [Algebra k A] [IsRegularLocalRing A] [Algebra.EssFiniteType k A] (a : List A) (ha : RingTheory.Sequence.IsRegular A a) (ham : ∀ x ∈ a, x ∈ IsLocalRing.maximalIdeal A) (e : Localization.AtPrime Q ≃ₐ[k] A ⧸ Ideal.ofList a) : ∃ h : F, h ∉ Q ∧ IsGlobalCompleteIntersection k (Localization.Away h)",
+  "module": "Sheaf.TraceFormula.CILocalRingPrincipalNeighbourhood",
+  "declaration": "TraceFormula.ciLocalRingPrincipalNeighbourhood",
+  "file": "lean/Sheaf/TraceFormula/CILocalRingPrincipalNeighbourhood.lean",
+  "statement": "theorem ciLocalRingPrincipalNeighbourhood (k : Type u) [Field k] (F : Type v) [CommRing F] [Algebra k F] (hfinite : RingHom.FiniteType (algebraMap k F)) (Q : Ideal F) [Q.IsPrime] (A : Type w) [CommRing A] [Algebra k A] [IsRegularLocalRing A] [Algebra.EssFiniteType k A] (a : List A) (hregular : RingTheory.Sequence.IsRegular A a) (hmaximal : ∀ x ∈ a, x ∈ IsLocalRing.maximalIdeal A) (e : Localization.AtPrime Q ≃ₐ[k] (A ⧸ Ideal.ofList a)) : ∃ h : F, h ∉ Q ∧ Algebra.IsGlobalCompleteIntersection k (Localization.Away h)",
   "branch": "newtargets-dag",
-  "by": "Q110",
-  "date": "2026-10-17",
+  "by": "Q153",
+  "date": "2026-10-18",
   "existing": false
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-d06136af9",
-  "group": "Q110",
+  "reviewer": "NT-stage2-cc-0a9bc2f4e",
+  "group": "Q153",
   "result": "pass",
-  "note": "Read the node, all 7 stmt_deps, Stacks 00SD (36013-36026) and 00SG (36159-36175), and the delivered module and report. Clause-by-clause: field k; F finite type via the recorded RingHom.FiniteType; Q prime; Localization.AtPrime Q; A IsRegularLocalRing plus EssFiniteType (independent universe w, supplied witness); List A with Sequence.IsRegular and every element in the maximal ideal; k-algebra equivalence F_Q ≃ A/ofList a; conclusion ∃ h ∉ Q with IsGlobalCompleteIntersection k (Localization.Away h). No extra assumptions; c=0, A a field and F=0 are covered. lean.statement matches the file verbatim. Non-public proof-plan imports match the recorded proof deps and mathlib_match entries. No definitions, sorry only, docstrings carry source, blueprint tag and the 4 proof steps, lines ≤100, no name collision. nt_compile --json clean (rc 0, 1.5 s). Report has both sections. No findings."
+  "note": "Every clause of the node matches the Lean statement: field k; RingHom.FiniteType (algebraMap k F); prime Q; Localization.AtPrime Q; IsRegularLocalRing A plus Algebra.EssFiniteType k A, with A in an independent universe w; a List A with RingTheory.Sequence.IsRegular and entries in the maximal ideal; e : F_Q ≃ₐ[k] A ⧸ Ideal.ofList a; conclusion ∃ h ∉ Q with Algebra.IsGlobalCompleteIntersection k (Localization.Away h). Agrees with Stacks 00SG (1)=>(3) and 00SD; no stronger assumptions. Edge cases checked (empty list, zero ring vacuous, Q not maximal, any characteristic, h = 1). Docstrings give the source place and blueprint id; all four proof steps are present; the proof is sorry only; the node record differs only by its lean field; lean.statement is verbatim. No duplicate in side lean/Sheaf or Mathlib. nt_compile.py --json on the snapshot file: 2.2 s, exit 0, no messages. No findings."
  }
 }
