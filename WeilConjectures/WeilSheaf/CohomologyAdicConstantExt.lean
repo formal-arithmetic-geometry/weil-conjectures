@@ -9,6 +9,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.ExtHomolo
 public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.ResolutionMap
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GlobalSectionsExt
 public import WeilConjectures.WeilSheaf.CohomologyResolution
+public import WeilConjectures.WeilSheaf.Constant
 
 /-!
 # Weil cohomology of the constant sheaf as pro-étale `Ext`
@@ -182,6 +183,56 @@ lemma cocycleFrobenius_comp_d (n m : ℕ)
   simp only [ConcreteCategory.comp_apply] at h
   exact h
 
+/-- The Frobenius on `Ext(ℤ, K)` induced by the Frobenius of the global sections of the terms of
+an injective resolution of `K`. -/
+noncomputable def extFrobenius :
+    Ext (constantIntSheaf _) ((forgetAb k₀ l Y).obj K) r →+
+      Ext (constantIntSheaf _) ((forgetAb k₀ l Y).obj K) r :=
+  InjectiveResolution.extMap (I.map (forgetAb k₀ l Y)) (cocycleFrobenius I)
+    (cocycleFrobenius_comp_d I) r
+
+set_option maxRecDepth 4000 in
+/-- Through `extAddEquivHomology`, the Frobenius `extFrobenius` is the map induced on homology by
+the Frobenius of the global sections. -/
+lemma extAddEquivHomology_extFrobenius (x : Ext (constantIntSheaf _) ((forgetAb k₀ l Y).obj K) r) :
+    extAddEquivHomology I r (extFrobenius I r x) =
+      ShortComplex.homologyMap ((I.cocomplex.sc r).mapNatTrans
+        (globalSectionsFrobeniusNatTrans k₀ l Y)) (extAddEquivHomology I r x) :=
+  InjectiveResolution.extAddEquivHomology_extMap (sc_g_sectionsAddEquiv I r)
+    (extMk_eq_zero_iff_sectionsAddEquiv I r) (sc_g_sectionsAddEquiv I r)
+    (extMk_eq_zero_iff_sectionsAddEquiv I r) (cocycleFrobenius I) (cocycleFrobenius_comp_d I)
+    ((I.cocomplex.sc r).mapNatTrans (globalSectionsFrobeniusNatTrans k₀ l Y))
+    (fun f ↦ (sectionsAddEquiv_cocycleFrobenius I r f).symm) x
+
 end ProEtaleWeilSheaf
+
+namespace WeilSheaf
+
+variable [Fact (ringChar k₀ ≠ l)] {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+
+set_option maxHeartbeats 1600000 in
+-- the carriers of the homology of global sections are only definitionally equal
+/-- **Weil cohomology of `ℚ̄_ℓ` is pro-étale cohomology, with its Frobenius.** For an injective
+resolution `I` of the constant Weil sheaf, `Hʳ(Ȳ_proét, ℚ̄_ℓ) ≅ Hʳ(Y ⊗ k̄, ℚ̄_ℓ)`, the geometric
+Frobenius corresponding to the Frobenius `ProEtaleWeilSheaf.extFrobenius I r` induced by the
+Frobenius of the global sections of the terms of `I`. -/
+theorem exists_addEquiv_adicConstantH_cohomology
+    (I : InjectiveResolution (WeilSheaf.adicConstant k₀ l Y).obj) (r : ℕ) :
+    ∃ Θ : Abelian.Ext (ProEtale.constantIntSheaf _)
+        ((ProEtaleWeilSheaf.forgetAb k₀ l Y).obj (WeilSheaf.adicConstant k₀ l Y).obj) r ≃+
+        ((WeilSheaf.adicConstant k₀ l Y).cohomology r).carrier,
+      ∀ x, Θ (ProEtaleWeilSheaf.extFrobenius I r x) =
+        ((WeilSheaf.adicConstant k₀ l Y).cohomology r).frobenius (Θ x) := by
+  obtain ⟨Θ, hΘ⟩ := exists_linearEquiv_cohomology_resolution (WeilSheaf.adicConstant k₀ l Y) I r
+  refine ⟨(ProEtaleWeilSheaf.extAddEquivHomology I r).trans Θ.toAddEquiv.symm, fun x ↦ ?_⟩
+  apply Θ.injective
+  rw [AddEquiv.trans_apply, AddEquiv.trans_apply, hΘ]
+  rw [ProEtaleWeilSheaf.extAddEquivHomology_extFrobenius]
+  erw [LinearEquiv.apply_symm_apply, LinearEquiv.apply_symm_apply]
+  rfl
+
+end WeilSheaf
 
 end AlgebraicGeometry

@@ -4409,6 +4409,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.FiniteEtaleLisse
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetCoherence
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobeniusMate
+public import WeilConjectures.SixFunctors.ProEtale.Adic.GlobalSectionsExt
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GlobalSectionsHom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Hom
 public import WeilConjectures.SixFunctors.ProEtale.Adic.HomCoherence
@@ -4712,6 +4713,7 @@ public import WeilConjectures.WeilSheaf.Category
 public import WeilConjectures.WeilSheaf.CohomologicalRange
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.CohomologyAdicConstant
+public import WeilConjectures.WeilSheaf.CohomologyAdicConstantExt
 public import WeilConjectures.WeilSheaf.CohomologyDegreeZero
 public import WeilConjectures.WeilSheaf.CohomologyExact
 public import WeilConjectures.WeilSheaf.CohomologyNonneg
