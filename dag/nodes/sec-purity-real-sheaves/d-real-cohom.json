@@ -141,5 +141,30 @@
   "group": "Q37",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-d58804313 (reviewer sub-agent of L); spot-checked: Read in full: the item, the unit sk-d-real-cohom, the master (order 2603) and main-20261015 (order 2947) blueprint texts, the five cited nodes, sk-d-real-weil, def-wf-weil-group, def-weil-frobenius-detailed and LFunction.lean:90-136. Not attaching eulerSeries is right: it covers only one Weil representation. The new Tate clause Qlb(n)=B_{q^{-n}} is the 'Tate convention fixed above' of the unit (main sk-d-real-operations, last sentence). Sign check: geometric Frobenius has degree 1, so F_x acts by q_x^{-1}; n=0 gives the trivial line. Euler series checked: each factor is 1+O(T^{e_x}) and finitely many points have bounded degree. Small cases: zero sheaf gives 1; constant sheaf on A^1 gives 1/(1-qT); Tate twist has the expected sign. The ι embedding versus isomorphism difference is harmless. Route covers all five unit uses; no new nodes, proof steps, tool_uses or SGA. FIX (B3/C4): the statement used three DAG notions without citing them. (1) R^iΓ of abelian étale sheaves → def-weil-pbc-etale-cohomology. (2) H^i, H^i_c of Weil complexes → def-weil-ordinary-compact-cohomology, which works in the same D^b_c(Y,Λ) and on For(K). (3) Frobenius on cohomology → def-weil-global-geometric-frobenius, since d-real-setup defines F only on k and F_x. The corrected item adds these as bracket citations and stmt_deps, with no change to the mathematics and no cycles. Details in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RealSheavesCohomologyEulerSeries",
+  "declaration": "RealSheaves.eulerSeries",
+  "declarations": [
+   "RealSheaves.Setup.finiteFieldDatum",
+   "RealSheaves.eulerFactor",
+   "RealSheaves.eulerSeries",
+   "RealSheaves.eulerSeries_spec"
+  ],
+  "file": "lean/Sheaf/Paper/RealSheavesCohomologyEulerSeries.lean",
+  "statement": "def eulerSeries (hC : D.IsCurve C₀.left) (F : @WeilConjectures.sfCommonStageWeilSheaf D.finiteFieldDatum D.l _ D.l_ne_p C₀ hC.2.2.2.1 hC.2.2.2.2.1 D.Qbar _ _ _) : PowerSeries ℂ",
+  "branch": "newtargets-dag",
+  "by": "Q106",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The ordinary, compact, finite-level derived-limit, rationalized and extended coefficient cohomologies, their geometric Frobenius, and the constant Weil/Tate conventions are imported from the recorded dependencies, not defined twice. The new Euler series applies to the actual common-stage constructible Weil heart, including sheaves with proper support; the upstream Euler series instead accepts a Weil representation."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c50051c41",
+  "group": "Q106",
+  "result": "pass",
+  "note": "Item eulerSeries/eulerFactor/eulerSeries_spec match every clause of d-real-cohom: cohomology, adic, Frobenius and twist conventions reused from the recorded deps; product over closedPoints with T^{e_x}, e_x=[κ(x):k0], iota-mapped P_x inverted; spec gives bounded-degree finiteness, local finiteness, HasProd and constant coeff 1 (sorry with step docstring). No stronger hypotheses (extra instances on spec are implied by hC). The def-wf-iota-real §1(B) rebind from the auto-recorded upstream WeilSheaf.IsRealizable to the sf common-stage heart (sfLocalCharacteristicFactor = .choose of an ∃! over finite presentations, SfIsReal, SfIsRealizable) matches the node, has a lean.note, no race; it follows the ND/NX migration of the sibling defs, so not H13. Both files compile clean via nt_compile --json (6.2 s, 5.7 s). Maintainer notes: landed old-framework citers (Q06 EvenTensorPositivity, Q42 RealSemisimplification, N6 RealPushforward); HasCommonStageLisseLattice node is not a stmt_dep of def-wf-iota-real; twist/Tate records still on the old framework; a bridge to wfSheafClosedFrobenius would help."
  }
 }
