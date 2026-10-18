@@ -13,9 +13,159 @@
   "def-weil-pbc-constructible-complexes",
   "def-pur-derived-internal-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First work with $\\Lambda=\\mathbf F_\\ell$. The constructibility assertion of potential-complex uniqueness gives $K\\in D^b_c(X_{\\mathrm{et}},\\Lambda)$ for the given pinned complex, not merely for an unspecified isomorphic object. No biduality is used. Fix an interval $[a,b]$ outside which its cohomology vanishes.",
+   "uses": [
+    "lem-per-potential-dualizing-uniqueness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 6.2.2.1 and beginning of proof of Proposition 6.2.3.1"
+   }
+  },
+  {
+   "text": "If $L$ is a lisse $\\mathbf F_\\ell$-sheaf on an open $U\\subseteq X$, it is etale locally a finite-dimensional vector space, hence a finite free constant module. Thus it is site-perfect in degree zero. The Ext constructibility statement, with $E=\\mathbf Q_\\ell$, $n=1$, says that every cohomology sheaf of $R\\mathcal Hom(L,K|_U)$ is constructible. Internal Hom commutes with etale slice restriction. On a trivializing slice where $L\\cong\\Lambda^t$, that Hom is $(K|_U)^{\\oplus t}$, so its cohomology vanishes outside $[a,b]$. Exact and conservative geometric stalks detect this vanishing globally. Consequently $R\\mathcal Hom(L,K|_U)$ is bounded constructible. The interval is independent of the local rank; no uniform rank or global trivialization is needed.",
+   "uses": [
+    "def-weil-pbc-constructible-complexes",
+    "lem-sf-ext-sheaf-constructible",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Proposition 6.2.3.1, locally constant case"
+   }
+  },
+  {
+   "text": "Prove preservation for ordinary constructible $\\mathbf F_\\ell$-sheaves by noetherian induction on closed subsets, simultaneously for every dimension function and every potential complex on each reduced closed subscheme. The empty scheme is immediate. Given $M$ on a nonempty scheme, its finite constructible stratification gives a dense open $U$ on which it is lisse. Indeed remove the closures of all strata containing no generic point and the boundaries of the strata that contain generic points. These finitely many closed subsets miss every generic point. On the complementary open each surviving stratum is both closed and open, and the sheaf is lisse on each. Write $j:U\\hookrightarrow X$, and let $i:Z\\hookrightarrow X$ be the reduced complement, which is proper as a closed subset. Restricting the original finite strata to $Z$ shows directly that $i^*M$ is constructible. The affine coordinate rings of $Z$ are quotients of excellent rings and those of an affine open cover of $U$ are localizations of such rings; they are excellent. Quotients of Noetherian rings are Noetherian, and open subschemes of a Noetherian scheme are Noetherian.",
+   "uses": [
+    "def-weil-pbc-constructible-complexes",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Proposition 6.2.3.1, noetherian induction"
+   }
+  },
+  {
+   "text": "The closed immersion $i$ is proper, so it is compactifiable by the identity open immersion followed by $i$. The exceptional-pullback theorem therefore makes $i^!K$ potential on $Z$ for the restricted dimension function: the residue-field transcendence degree of a closed immersion is zero. The induction hypothesis applies to $i^*M$ and $i^!K$, yielding $B=R\\mathcal Hom(i^*M,i^!K)\\in D^b_c(Z,\\mathbf F_\\ell)$. The stratum internal-adjunction theorem, with $s=i$, identifies $D_K(i_*i^*M)$ with $i_*B$. Closed direct image is exact. Its cohomology sheaves are constructible: use their finite strata inside $Z$, viewed as locally closed constructible subsets of $X$, and add the open complement where the sheaf is zero. It preserves the cohomological bounds, so this outside dual is bounded constructible on $X$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-per-potential-dualizing-finite-pullback",
+    "lem-weil-stratum-ambient-hom",
+    "lem-cbc-open-closed-recollement",
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Proposition 6.2.3.1, closed part of the noetherian induction"
+   }
+  },
+  {
+   "text": "For the open term, the same stratum adjunction, with $s=j$, gives $D_K(j_!j^*M)\\cong Rj_*A$, where $A=R\\mathcal Hom(j^*M,j^*K)$. This $A$ is bounded constructible by step 2. Since $U$ is Noetherian, the open immersion is quasi-compact; it is of finite type by the quasi-compact-open lemma and locally of finite presentation by the locally-Noetherian-base lemma. Together these give finite presentation. The excellent Noetherian target is quasi-excellent, and both schemes are quasi-compact and quasi-separated. Direct-image finiteness therefore applies with the finite field $B=\\mathbf F_\\ell$ and proves $Rj_*A\\in D^b_c(X,\\mathbf F_\\ell)$.",
+   "uses": [
+    "lem-weil-stratum-ambient-hom",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-qc-open-immersion-finite-type",
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-per-quasi-excellent-etale-direct-image-finiteness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 6.2.2.2 and proof of Proposition 6.2.3.1"
+   }
+  },
+  {
+   "text": "Apply the contravariantly triangulated internal Hom functor to the open--closed triangle $j_!j^*M\\to M\\to i_*i^*M\\to j_!j^*M[1]$. Steps 4 and 5 show that its two outside duals are bounded constructible. Triangulated closure of the constructible derived subcategory gives the same for $D_KM$. Equivalently, the long exact cohomology sequence gives a finite cohomological interval from the two outside intervals and constructible cohomology. This completes the noetherian induction for ordinary field-coefficient sheaves.",
+   "uses": [
+    "lem-cbc-open-closed-recollement",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "prop-constructible-derived-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, end of proof of Proposition 6.2.3.1"
+   }
+  },
+  {
+   "text": "Now let $\\Lambda=\\mathbf Z/\\ell^r\\mathbf Z$. Set $K_1=R\\mathcal Hom_\\Lambda(\\mathbf F_{\\ell,X},K)$. Coefficient restriction makes $K_1$ a pinned potential complex over $\\mathbf F_\\ell$ for the same dimension function. For every ordinary constructible $\\mathbf F_\\ell$-sheaf $Q$, the restriction--coinduction comparison gives $R\\mathcal Hom_\\Lambda(Q,K)\\cong R\\mathcal Hom_{\\mathbf F_\\ell}(Q,K_1)$ after forgetting scalars. Steps 1--6 applied to $K_1$ show that the latter is bounded constructible. Forgetting its field action preserves its underlying sheaves and cohomology, its finite strata and its finite stalks, so it is bounded constructible over $\\Lambda$ as well.",
+   "uses": [
+    "lem-per-potential-hom-coefficient-restriction",
+    "lem-per-potential-coinduction",
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 6.2.1.1 and first sentence of proof of Proposition 6.2.3.1"
+   }
+  },
+  {
+   "text": "For an ordinary constructible $\\Lambda$-sheaf $M$, use the finite filtration $M\\supseteq\\ell M\\supseteq\\cdots\\supseteq\\ell^rM=0$. Images and quotients of constructible sheaves are constructible by the Serre property. Every quotient $Q_t=\\ell^tM/\\ell^{t+1}M$ is killed by $\\ell$ and, on its finite strata, is a finite constant vector space, so is constructible over $\\mathbf F_\\ell$. Each short exact sequence $0\\to\\ell^{t+1}M\\to\\ell^tM\\to Q_t\\to0$ yields a distinguished triangle. Its dual is a distinguished triangle and $D_KQ_t$ is bounded constructible by step 7. Starting at $\\ell^rM=0$, finite induction and triangulated closure give $D_KM\\in D^b_c(X,\\Lambda)$.",
+   "uses": [
+    "thm-constructible-serre",
+    "def-weil-pbc-constructible-complexes",
+    "lem-weil-heart-short-exact-triangles",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "prop-constructible-derived-subcategory"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, coefficient reduction in proof of Proposition 6.2.3.1"
+   }
+  },
+  {
+   "text": "Finally let $M\\in D^b_c(X,\\Lambda)$ have cohomology only in $[u,v]$. The ordinary truncation triangles have successive terms $\\mathcal H^q(M)[-q]$ for $u\\leq q\\leq v$. Their duals are bounded constructible by step 8 and the shift compatibility of derived internal Hom. Starting with $\\tau_{\\leq u-1}M=0$, apply the contravariant internal-Hom triangle and triangulated closure successively to obtain bounded constructibility of $D_K\\tau_{\\leq q}M$ for all $q\\leq v$. Since $\\tau_{\\leq v}M\\cong M$, the desired assertion follows. No evaluation map has been assumed invertible at any stage.",
+   "uses": [
+    "lem-weil-pbc-truncation-triangle",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "prop-constructible-derived-subcategory"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Proposition 6.2.3.1, reduction to ordinary sheaves"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constructible-complexes",
+  "lem-cbc-open-closed-recollement",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-per-potential-coinduction",
+  "lem-per-potential-dualizing-finite-pullback",
+  "lem-per-potential-dualizing-uniqueness",
+  "lem-per-potential-hom-coefficient-restriction",
+  "lem-per-quasi-excellent-etale-direct-image-finiteness",
+  "lem-sf-ext-sheaf-constructible",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-stratum-ambient-hom",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "pqf-lem-lft-fp-locnoeth",
+  "prop-constructible-derived-subcategory",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "thm-constructible-serre"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, Propositions 6.2.1.1, 6.2.2.1, 6.2.2.2, and proof of Proposition 6.2.3.1, printed pp.294–296"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +201,45 @@
    "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\"], \"digest\": \"218ed2abb8e3c36f\"}",
    "date": "2026-10-18",
    "verdict": "no match: the logged hits concern ordinary linear duals, generic derived-category bounds, ordinary sheaf adjunctions or etale morphisms, not the asserted potential-complex theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "potential.?dual|constructible.*[dD]ual|[dD]ual.*constructible",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern derived-category bounds, ordinary sheaf cohomology or etale site infrastructure, not potential-complex constructibility preservation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale Verdier dual of a constructible sheaf with a potential dualizing complex is bounded constructible",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"BddOrd.dualEquiv_inverse\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"BddLat.dualEquiv_inverse\", \"FinBddDistLat.dualEquiv_functor\"], \"digest\": \"0f0318ffb229aca7\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern derived-category bounds, ordinary sheaf cohomology or etale site infrastructure, not potential-complex constructibility preservation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern derived-category bounds, ordinary sheaf cohomology or etale site infrastructure, not potential-complex constructibility preservation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom into a potential dualizing complex preserves bounded constructible etale complexes on excellent schemes",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.IsGE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"DerivedCategory.left_fac_of_isStrictlyGE\", \"DerivedCategory.exists_iso_Q_obj_of_isGE\"], \"digest\": \"46cbb11956f27489\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern derived-category bounds, ordinary sheaf cohomology or etale site infrastructure, not potential-complex constructibility preservation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived sheaf Hom into an etale potential dualizing complex is constructible and bounded without assuming biduality",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"SheafOfModules.isFinitePresentation\", \"DerivedCategory.IsGE\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.isGE_Q_obj_iff\", \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\"], \"digest\": \"9a370de386d345b7\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern derived-category bounds, ordinary sheaf cohomology or etale site infrastructure, not potential-complex constructibility preservation"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-biduality-finite-type-propagation",
@@ -77,5 +262,99 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-potential-dual-constructible-preservation",
+  "worker": "stage1",
+  "summary": "Split the preservation assertion independently of biduality, following ILO XVII 6.2.3.1. Reuse existing potential constructibility, exceptional pullback, stratum adjunction, etale finiteness, coefficient coinduction and triangulated closure. No new nodes. Record the existing duplicate preservation node for maintainer consolidation.",
+  "blueprint": "lem-per-artin-gabber-affine-curve, proof Step 3: bounded constructibility of the Verdier dual, via the existing potential-duality chain. No change to the perverse unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-open-closed-recollement",
+    "why": "Generic Open-closed recollement used for the explicit etale sheaf devissage; the perverse unit has no replacement for this ambient tool."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic Excellence is preserved by finite type algebras and localization used for the explicit etale sheaf devissage; the perverse unit has no replacement for this ambient tool."
+   },
+   {
+    "node": "lem-sf-ext-sheaf-constructible",
+    "why": "Generic Constructible internal Hom with a site-perfect first variable used for the explicit etale sheaf devissage; the perverse unit has no replacement for this ambient tool."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "Generic Short exact sequences in the heart are triangles used for the explicit etale sheaf devissage; the perverse unit has no replacement for this ambient tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Generic Closed immersions are proper used for the explicit etale sheaf devissage; the perverse unit has no replacement for this ambient tool."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic An open subscheme of a Noetherian scheme is Noetherian used for the explicit etale sheaf devissage; the perverse unit has no replacement for this ambient tool."
+   },
+   {
+    "node": "lem-weil-pbc-qc-open-immersion-finite-type",
+    "why": "Generic A quasi-compact open immersion is of finite type used for the explicit etale sheaf devissage; the perverse unit has no replacement for this ambient tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic Derived internal Hom calculus on small ringed sites used for the explicit etale sheaf devissage; the perverse unit has no replacement for this ambient tool."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Generic The truncation triangle tau_{<=q-1}K -> tau_{<=q}K -> H^q(K)[-q] is distinguished used for the explicit etale sheaf devissage; the perverse unit has no replacement for this ambient tool."
+   },
+   {
+    "node": "lem-weil-stratum-ambient-hom",
+    "why": "Generic Internal Hom from extension along a stratum used for the explicit etale sheaf devissage; the perverse unit has no replacement for this ambient tool."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic Conservativity of geometric stalks used for the explicit etale sheaf devissage; the perverse unit has no replacement for this ambient tool."
+   },
+   {
+    "node": "pqf-lem-lft-fp-locnoeth",
+    "why": "Generic Locally finite type over a locally Noetherian target is locally finitely presented used for the explicit etale sheaf devissage; the perverse unit has no replacement for this ambient tool."
+   },
+   {
+    "node": "prop-constructible-derived-subcategory",
+    "why": "Generic The constructible derived category used for the explicit etale sheaf devissage; the perverse unit has no replacement for this ambient tool."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Generic Exactness of geometric stalks used for the explicit etale sheaf devissage; the perverse unit has no replacement for this ambient tool."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "Generic Constructible sheaves form a weak Serre subcategory used for the explicit etale sheaf devissage; the perverse unit has no replacement for this ambient tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-open-closed-recollement",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-sf-ext-sheaf-constructible",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-qc-open-immersion-finite-type",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-stratum-ambient-hom",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "pqf-lem-lft-fp-locnoeth",
+  "prop-constructible-derived-subcategory",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "thm-constructible-serre"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NL-1f722a455",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-1f722a455 (reviewer sub-agent of L); spot-checked: I read ILO XVII 6.2.1.1, 6.2.2.1–6.2.2.2 and 6.2.3.1 (pp.294–296). The item statement matches 6.2.3.1 and is unchanged from base (only status, proof_origin, proof, proof_deps and split_report differ). No new nodes. The 9 steps follow the source: K in D^b_c via the uniqueness node (6.2.2.1); the lisse case via Ext constructibility (E=Q_ell, n=1), slice restriction and stalk detection; Noetherian induction with an explicit dense open (checked: constructible strata contain the generic points of their closure); i^!K potential via finite-pullback for id∘i with trdeg 0; stratum adjunctions for s=i and s=j; Rj_* finiteness (j has finite presentation, X quasi-excellent, ell invertible); the open–closed triangle with D^b_c triangulated; Z/ell^r via coefficient restriction plus coinduction with m=s=1; the ell-adic filtration with Serre closure; truncation triangles. All hypotheses checked. Edge cases checked: empty X, M=0, rank 0, r=1, nonfree M, nonreduced X. No cycle and no SGA. Existing duplicate lem-per-potential-dual-constructibility (unsplit, Q50): maintainer should merge it into this item. Accepted tool_uses: 15 generic sheaf/commutative-algebra tools. Batch-5: the closure is identical with or without the item's dependencies (16615 nodes, difference empty). The four flagged citations are Gabber potential-duality inputs whose trf ancestors are generic (excellent/G-ring affine cover, ind-étale strict-local invariance, purity inside finite-pullback), not steps of the trace formula or Poincaré duality, so accepted."
  }
 }
