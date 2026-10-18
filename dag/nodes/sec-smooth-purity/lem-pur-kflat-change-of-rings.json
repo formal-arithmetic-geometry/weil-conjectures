@@ -37,11 +37,9 @@
    }
   },
   {
-   "text": "For any $R$-module sheaf $M$ and $S$-module sheaf $N$, construct an isomorphism of $R$-module sheaves $U(N\\otimes_S(M\\otimes_R S))\\cong UN\\otimes_R M$. On local tensor generators send $n\\otimes(m\\otimes s)$ to $sn\\otimes m$ and send $n\\otimes m$ back to $n\\otimes(m\\otimes1)$. The first formula respects the inner $R$-balancing since $s\\varphi(r)n\\otimes m=sn\\otimes rm$, and the outer $S$-balancing since $tn\\otimes(m\\otimes s)$ and $n\\otimes(m\\otimes ts)$ both map to $tsn\\otimes m$. The second formula is $R$-balanced because $\\varphi(r)n\\otimes(m\\otimes1)=n\\otimes(m\\otimes\\varphi(r))=n\\otimes(rm\\otimes1)$. Give $UN\\otimes_R M$ its $S$-action on the $N$ factor: on presheaf tensors $t(n\\otimes m)=tn\\otimes m$, and module sheafification extends this action. To construct the first sheaf map, first extend the $R$-bilinear map $N\\times(M\\otimes_{p,R}S)\\to UN\\otimes_R M$ by the cited bilinear-extension theorem over $R$. Its $S$-balancing and $S$-linearity hold on the presheaf tensors by the displayed formulas and therefore on the sheafifications by uniqueness of extension (also on each localized site to test a local section of $S$). The tensor and sheafification universal properties over $S$ then give the first map. The second formula is an $R$-bilinear map into the restricted left-hand sheaf, so the tensor and sheafification universal properties over $R$ give the inverse map. Their composites are the identity: $sn\\otimes(m\\otimes1)=n\\otimes(m\\otimes s)$, and $1n\\otimes m=n\\otimes m$. Uniqueness of extension makes these identities identities of sheaf maps. Both maps are natural in $M$ and $N$.",
+   "text": "Apply the natural tensor cancellation theorem [lem-pur-change-of-rings-tensor-cancellation]. It constructs U(N tensor_S (M tensor_R S)) ≅ UN tensor_R M, natural in both variables, directly from the sectionwise balanced equivalence and monoidal sheafification. No bilinear-extension theorem is needed.",
    "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification",
-    "lem-pc-sites-module-sheafification-bilinear-extension"
+    "lem-pur-change-of-rings-tensor-cancellation"
    ],
    "elementary": true,
    "source": {
@@ -50,13 +48,11 @@
    }
   },
   {
-   "text": "Fix $p$ and a short exact sequence of $S$-module sheaves. By step 1 its restriction to $R$ is exact. Apply the exact functor $-\\otimes_R K^p$, exact by the termwise flatness hypothesis, and then identify the resulting sequence with the restriction of its tensor product over $S$ with $K^p\\otimes_R S$ using the natural maps of step 2. Reflection of exactness in step 1 proves that $-\\otimes_S(K^p\\otimes_R S)$ is exact. This proves flatness of each changed term.",
+   "text": "Fix p and write TR = - tensor_R K^p and TS = - tensor_S E(K^p). Step 2 and the identity law for changeOfRingsHom give a natural isomorphism TS followed by U ≅ U followed by TR. The right-hand composite preserves finite limits and finite colimits by the flatness hypothesis and step 1. Restriction is conservative and preserves finite limits and colimits, so it reflects them. Transport along the natural isomorphism and reflection prove exactness of TS.",
    "uses": [
     "def-pc-sheaf-restrict-scalars",
     "def-weil-sheaf-of-modules-category",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-presheaf-modules-sheafification",
-    "lem-pc-sites-module-sheafification-bilinear-extension"
+    "lem-pur-change-of-rings-tensor-cancellation"
    ],
    "elementary": true,
    "source": {
@@ -65,11 +61,12 @@
    }
   },
   {
-   "text": "For an arbitrary complex $F$ of $S$-module sheaves, apply step 2 to $N=F^a$, $M=K^b$, and take direct sums over $a+b=n$. Restriction of scalars commutes with these sums: the underlying sheaf is the sheafification of sectionwise finite-support tuples; scalar action is componentwise through $\\varphi$, so sheafifying and restricting in either order gives the same sheaf. The sheafification adjunction verifies its coproduct universal property by maps from each summand. We obtain $U\\operatorname{Tot}(F\\otimes_S(K\\otimes_R S))\\cong\\operatorname{Tot}(UF\\otimes_R K)$. This is a chain isomorphism: the formula $f\\otimes(k\\otimes s)\\mapsto sf\\otimes k$ sends the two differential terms to $s\\,d_Ff\\otimes k$ and $(-1)^a sf\\otimes d_Kk$, respectively, exactly the total differential on the right. Every sum here uses finite-support representatives locally; no boundedness hypothesis is needed.",
+   "text": "Restriction of scalars preserves the coproducts used in totalization: composing it with the conservative underlying-abelian-sheaf functor is the underlying-abelian-sheaf functor over S, and that functor preserves these coproducts. Apply the isomorphisms of step 2 in each bidegree. Their naturality in the second variable gives compatibility with the vertical differential, and their naturality in the first variable gives compatibility with the horizontal differential. They therefore give a bicomplex isomorphism. The additive mapTotalIso comparison and totalization of this bicomplex isomorphism identify U Tot(F tensor_S E(K)) with Tot(UF tensor_R K), including the standard total-complex signs.",
    "uses": [
     "def-pc-tensor-complex-sheaves",
     "def-pc-sheaf-restrict-scalars",
-    "def-weil-presheaf-modules-sheafification"
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pur-change-of-rings-tensor-cancellation"
    ],
    "elementary": true,
    "source": {
@@ -96,16 +93,15 @@
  "proof_deps": [
   "def-pc-sheaf-restrict-scalars",
   "def-weil-sheaf-of-modules-category",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-presheaf-modules-sheafification",
-  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-pur-change-of-rings-tensor-cancellation",
   "def-pc-tensor-complex-sheaves",
+  "def-weil-presheaf-modules-sheafification",
   "def-pc-kflat-complex"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Direct coefficient-change proof of the special case of Tag 0G7E (lemma-pullback-K-flat), using the tensor identity of Tag 05V4 (sites-modules-lemma-flat-change-of-rings); avoids the general inverse-image resolution argument."
+  "place": "Direct identity-topos coefficient-change proof of Tag 0G7E via the tensor identity of sites-modules Tag 05V4. Lean constructs restriction exactness and conservativity, a natural tensor cancellation, the bicomplex and total-complex comparison, and transport of exact tensor functors."
  },
  "mathlib_searches": [
   {
@@ -200,9 +196,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pc-sites-module-sheafification-bilinear-extension"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
@@ -228,5 +222,15 @@
   "by": "NK",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261018T062841-L-667205",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
