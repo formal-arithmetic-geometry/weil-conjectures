@@ -172,6 +172,17 @@ lemma map_unit_app_comp_boundedConstructibleLowerShriekBaseChange_padicAlgCl_app
   rw [hU]
   erw [← reassoc_of% hn, Iso.inv_hom_id_app, Category.comp_id]
 
+/-- The compact-support base changes of squares with equal sides agree up to the casts. -/
+lemma boundedConstructibleLowerShriekBaseChange_padicAlgCl_congr_app
+    {g'₁ g'₂ : X' ⟶ X} {f'₁ f'₂ : X' ⟶ Y'} {f₁ f₂ : X ⟶ Y} {g₁ g₂ : Y' ⟶ Y}
+    (sq₁ : IsPullback g'₁ f'₁ f₁ g₁) (sq₂ : IsPullback g'₂ f'₂ f₂ g₂) (h₁ : g'₁ = g'₂)
+    (h₂ : f'₁ = f'₂) (h₃ : f₁ = f₂) (h₄ : g₁ = g₂) (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq₁).app K =
+      eqToHom (by subst h₃ h₄; rfl) ≫
+        (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq₂).app K ≫
+        eqToHom (by subst h₁ h₂; rfl) := by
+  subst h₁ h₂ h₃ h₄
+  simp
 end Proper
 
 end AlgebraicGeometry.ProEtale.CondensedRing
