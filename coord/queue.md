@@ -15,6 +15,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | module | distance to a target | sorry | kind | route / steps to the nearest route sorry |
 |---|---|---|---|---|
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 3 | repair | route |
+| `Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphGeometricBaseChange` | 12 | 1 | repair | route |
 | `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalBounded` | 3 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructibleCohomology` | 3 | 1 | proof | route |
 | `Sheaf.PoincareDuality.ProperProjectionFormulaBounded` | 3 | 1 | proof | route |
@@ -25,7 +26,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.AdicDenseOpenImmersionFiniteness` | 7 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.AdicProjectiveSpaceFiniteness` | 7 | 1 | proof | route |
 | `WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension` | 8 | 4 | proof | route |
-| `Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphGeometricBaseChange` | 12 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction` | 3 | 1 | proof | 1 |
 | `Sheaf.AlgebraicGeometry.BoundedBelowDerivedSmoothBaseChange` | 5 | 1 | proof | 1 |
 | `Sheaf.CategoryTheory.Galois.GaloisTransitive` | 5 | 1 | proof | 1 |
