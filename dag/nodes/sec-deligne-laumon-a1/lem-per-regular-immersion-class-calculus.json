@@ -14,7 +14,10 @@
   "def-weil-pbc-regular-sequence",
   "def-amb-etale-compact-support",
   "thm-amb-etale-exceptional-adjoint",
-  "lem-asd-ordinary-supported-kummer"
+  "lem-asd-ordinary-supported-kummer",
+  "def-per-stalk-regular-closed-immersion",
+  "lem-asd-etale-finite-twist-pullback",
+  "def-asd-ordinary-supported-kummer-boundary"
  ],
  "proof": [
   {
@@ -329,5 +332,47 @@
   "group": "Q65",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-d80deaee4 (reviewer sub-agent of L); spot-checked: FIX: I read the item, all four new nodes, every cited statement and ILO Exposé XVI pp. 225–237 (§1, §2.1–2.3). The item follows ILO Def. 2.3.1 and Thm 2.3.2. The coefficients are ordinary étale Z/ℓ^n with μ twists and the exceptional functor is the right adjoint of Ri_*; nothing is weakened. The Kummer sign is consistent: γ_D = −e(I,1) = e(O(D),1) = c_{D,Λ}, whose composite with the unit is +c_1. I recomputed Q_H = (c_1(K)−ξ)S_F + (−1)^{m+1}c_m(F) = α̃+β̃, ξQ_E = (−1)^r c_r and the excess/base-change chain of Lemma 2.3.3, and checked the blowup geometry on A² ⊃ V(y) ⊃ 0. Three repairable faults, fixed in the new-node statements only: (1) C4: Step 1 took conormal local freeness from lem-per-regular-flag-blowup-geometry, which only covered a flag with m,n>0; a single-immersion clause is added. (2) C4: Step 6 needs forget-support of G_{L,s}(x|_C) = x·c_1(L); added to lem-per-noetherian-supported-product-calculus. (3) B2: the excess formula in lem-per-modified-blowup-generalized-class now says γ_{i,E'} uses the composite surjection E'↠E↠I/I², and ℓ is declared prime in two nodes. Batch-5 flags accepted: lem-pod-etale-stalk-tensor-scalar (stalks of tensor and scalar extension; lem-asd-ordinary-supported-kummer was already in the item's base stmt_deps) and lem-trf-bounded-below-derived-adjunction (a generic D^+ adjunction) are generic, not steps of trace-formula or Poincaré-duality proofs. No SGA is cited. tool_uses accepted as generic black boxes. Maintainer note: the new Z/ℓ^n nodes generalize Q49's F_ℓ lem-per-generalized-blowup-class and lem-per-cartier-blowup-polynomials, which the report did not mention; same-family overlap, not a duplicate; consider repointing or merging.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RegularImmersionClassCalculus",
+  "declaration": "AlgebraicGeometry.Etale.regular_immersion_class_calculus",
+  "declarations": [
+   "AlgebraicGeometry.Etale.regularClassCoefficients",
+   "AlgebraicGeometry.Etale.regularClassAnnihilation",
+   "AlgebraicGeometry.Etale.regularClassTwist",
+   "AlgebraicGeometry.Etale.regularClassTwistPullback",
+   "AlgebraicGeometry.Etale.regularClassTwistProduct",
+   "AlgebraicGeometry.Etale.regularClassTwistTensorRightExact",
+   "AlgebraicGeometry.Etale.RegularImmersionClassFamily",
+   "AlgebraicGeometry.Etale.regularClassTwistUnit",
+   "AlgebraicGeometry.Etale.regularClassProjection",
+   "AlgebraicGeometry.Etale.regularClassExchange",
+   "AlgebraicGeometry.Etale.regularClassTensorMap",
+   "AlgebraicGeometry.Etale.RegularClassTensorNormalization",
+   "AlgebraicGeometry.Etale.RegularClassNormalization",
+   "AlgebraicGeometry.Etale.RegularClassComposition",
+   "AlgebraicGeometry.Etale.RegularClassFlatBaseChange",
+   "AlgebraicGeometry.Etale.regularClassReduction",
+   "AlgebraicGeometry.Etale.regularClassConstantGenerator",
+   "AlgebraicGeometry.Etale.regularClassTwistMultiply",
+   "AlgebraicGeometry.Etale.RegularClassReductionComparisons",
+   "AlgebraicGeometry.Etale.RegularClassCoefficientReduction",
+   "AlgebraicGeometry.Etale.RegularImmersionClassLaws",
+   "AlgebraicGeometry.Etale.regular_immersion_class_calculus"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RegularImmersionClassCalculus.lean",
+  "statement": "theorem regular_immersion_class_calculus (ℓ : ℕ) (hℓ : ℓ.Prime) : ∃! classes : RegularImmersionClassFamily.{u} ℓ, RegularImmersionClassLaws ℓ hℓ classes",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fe0cb8814",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Re-delivery after RETURN of dfbd1782: H13/H2 fixed (NJ's EtaleFiniteTwistPullback.lean prefix byte-identical to live; FiniteEtaleTwistPullbackData/nonempty_/finiteEtaleTwistPullbackData appended in the same module; record main declaration/statement/module unchanged, superset declarations + lean.note, by=Q02 per preflight); H9 fixed (4 unused imports dropped); def-asd-ordinary-supported-kummer-boundary added to stmt_deps. Item statement, signature and new node def-per-stalk-regular-closed-immersion unchanged from the head read in full earlier (Ext from i_*, SupportedKummerBoundary sign, clopen c=0, composition, flat base change, normalised reduction, tensor normalisation; edge cases fine). Theorem stmt_dep lem-asd-etale-finite-twist-pullback is genuine: .c/.p of the Classical.choice of that node's theorem, pinned by the laws -> PASS on that point. nt_compile --json clean: 2.1/17.9/51.8 s at load ~54. Maintainer notes: the ∃! uniqueness is flagged STATEMENT-DISPUTED (ILO proves uniqueness only with the blowup image; the laws have no non-flat base change; no semi-purity on singular X) - node-level, Lean follows the node; item compile is close to the 60 s limit."
  }
 }
