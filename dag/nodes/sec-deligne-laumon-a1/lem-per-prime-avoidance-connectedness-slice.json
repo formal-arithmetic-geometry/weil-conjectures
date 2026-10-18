@@ -12,9 +12,115 @@
   "def-weil-affine-spectrum",
   "def-kun-topological-krull-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-spec-irreducible-closed-subsets-primes], the closed subsets of the spectrum are exactly the sets $V(I)$. The radical formula in [lem-weil-pbc-zero-locus-eq-iff-radical-eq] identifies its ideal of vanishing elements with $\\sqrt I$ and reverses inclusion. An ascending chain of ideals stabilizes: its union is an ideal, whose finite generators, by [def-weil-pbc-noetherian-ring], all occur at one stage. Thus descending chains of closed subsets of $X$ stabilize, and the same holds in every closed subspace of $X$. These spaces are Noetherian in the topological sense (equivalently every nonempty collection of closed subsets has a minimal member).",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0ECR, lemma-punctured-still-connected, second half of proof: inductive prime-avoidance slicing; details expanded by Q72."
+   }
+  },
+  {
+   "text": "The open subset $U\\setminus T$ of $U$ has the property that a locally closed subset of it is locally closed in $U$: write its closed part as the intersection with a closed subset of $U$, and intersect its open part with $U\\setminus T$. Apply [lem-per-punctured-local-closed-points] to each $W_j$ and choose $w_j\\in W_j$ closed in $U$. Write $\\mathfrak p_j$ for its prime ideal. By [lem-weil-pbc-spec-irreducible-closed-subsets-primes], $V(\\mathfrak p_j)\\cap U=\\{w_j\\}$, and $\\mathfrak p_j\\subsetneq\\mathfrak m$ gives $V(\\mathfrak p_j)=\\{w_j,\\mathfrak m\\}$. When $s=0$ no choices are made.",
+   "uses": [
+    "lem-per-punctured-local-closed-points",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0ECR, lemma-punctured-still-connected, second half of proof: inductive prime-avoidance slicing; details expanded by Q72."
+   }
+  },
+  {
+   "text": "We construct, for $0\\leq n\\leq e$, elements $f_1,\\ldots,f_n\\in\\mathfrak m$ belonging to every $\\mathfrak p_j$, with $T_n=T\\cap V(f_1,\\ldots,f_n)$ satisfying $\\dim T_n\\leq e-n$. Every nonempty closed subset of the local spectrum contains $\\mathfrak m$: it contains a prime $\\mathfrak q$, hence contains $V(\\mathfrak q)\\ni\\mathfrak m$ by [lem-weil-pbc-spec-irreducible-closed-subsets-primes]. Thus all these cuts are nonempty. The base case is $T_0=T$ and the empty list. Fix $n<e$ and assume the invariant.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0ECR, lemma-punctured-still-connected, second half of proof: inductive prime-avoidance slicing; details expanded by Q72."
+   }
+  },
+  {
+   "text": "By Step 1 and [lem-sc-noetherian-finite-irreducible-components], $T_n$ has finitely many irreducible components. They cover $T_n$: the closure of each point is irreducible, and successive strict enlargements to irreducible closed subsets must terminate, since by [def-kun-topological-krull-dimension] each enlargement extends a chain and $\\dim T_n\\leq e-n<\\infty$. By [lem-weil-pbc-spec-irreducible-closed-subsets-primes], each component is $V(\\mathfrak q)$ for a prime $\\mathfrak q$ of $A$. Keep only those components of positive dimension. Their primes satisfy $\\mathfrak q\\ne\\mathfrak m$. For every $j$, $\\mathfrak p_j\\not\\subseteq\\mathfrak q$: otherwise $\\mathfrak q\\in V(\\mathfrak p_j)=\\{w_j,\\mathfrak m\\}$, contradicting $w_j\\notin T$ and $\\mathfrak q\\ne\\mathfrak m$.",
+   "uses": [
+    "lem-sc-noetherian-finite-irreducible-components",
+    "def-kun-topological-krull-dimension",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0ECR, lemma-punctured-still-connected, second half of proof: inductive prime-avoidance slicing; details expanded by Q72."
+   }
+  },
+  {
+   "text": "Put $J=\\mathfrak m\\cap\\bigcap_{j=1}^s\\mathfrak p_j$, interpreting the empty intersection as $A$, so $J=\\mathfrak m$ when $s=0$. For each positive-dimensional component prime $\\mathfrak q$, choose $a\\in\\mathfrak m\\setminus\\mathfrak q$ and $b_j\\in\\mathfrak p_j\\setminus\\mathfrak q$. This is possible by Step 4 and $\\mathfrak q\\subsetneq\\mathfrak m$. Then $a\\prod_j b_j\\in J\\setminus\\mathfrak q$: every factor avoids the prime $\\mathfrak q$, and the product belongs to $\\mathfrak m$ and to every $\\mathfrak p_j$. Thus $J$ is contained in none of the finitely many component primes to avoid.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0ECR, lemma-punctured-still-connected, second half of proof: inductive prime-avoidance slicing; details expanded by Q72."
+   }
+  },
+  {
+   "text": "If there is at least one positive-dimensional component, apply [lem-weil-pbc-prime-avoidance] with ideal $J$ and exactly their finite list of prime ideals to choose $f_{n+1}\\in J$ outside every one of them. All the avoided ideals are prime, as required by that lemma. If the list is empty, take $f_{n+1}=0$. In either case $f_{n+1}\\in\\mathfrak m\\cap\\bigcap_j\\mathfrak p_j$ and no positive-dimensional component of $T_n$ is contained in $V(f_{n+1})$.",
+   "uses": [
+    "lem-weil-pbc-prime-avoidance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0ECR, lemma-punctured-still-connected, second half of proof: inductive prime-avoidance slicing; details expanded by Q72."
+   }
+  },
+  {
+   "text": "Let $k=e-n\\geq1$ and consider any strict chain $Z_0\\subsetneq\\cdots\\subsetneq Z_r$ of irreducible closed subsets of $T_{n+1}=T_n\\cap V(f_{n+1})$. Its top member lies in a component $C$ of $T_n$, by Step 4: an irreducible set contained in a finite union of closed sets is contained in one of them, by induction on the number of sets using the definition of irreducibility. If $\\dim C=0$, the dimension definition gives $r=0\\leq k-1$. Otherwise $C\\not\\subseteq V(f_{n+1})$, so $Z_r\\subsetneq C$. Appending $C$ gives a chain of length $r+1$ in $T_n$; hence $r+1\\leq\\dim T_n\\leq k$. This proves $\\dim T_{n+1}\\leq e-(n+1)$ directly from [def-kun-topological-krull-dimension], and closes the induction. No equality in the dimension drop, catenarity, or purity of dimension is needed.",
+   "uses": [
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0ECR, lemma-punctured-still-connected, second half of proof: inductive prime-avoidance slicing; details expanded by Q72."
+   }
+  },
+  {
+   "text": "At $n=e$, $T_e$ contains $\\mathfrak m$ and has dimension at most zero. If it contained a prime $\\mathfrak q\\ne\\mathfrak m$, closedness would give $\\{\\mathfrak m\\}\\subsetneq V(\\mathfrak q)\\subseteq T_e$, a length-one chain of irreducible closed subsets by [lem-weil-pbc-spec-irreducible-closed-subsets-primes], contradicting [def-kun-topological-krull-dimension]. Thus $T_e=\\{\\mathfrak m\\}$. Every $f_i$ belongs to every $\\mathfrak p_j$, so $w_j\\in W_j\\cap V(f_1,\\ldots,f_e)$. When $e=0$ the same dimension argument already gives $T=\\{\\mathfrak m\\}$ and the empty list has zero locus $X$; when $s=0$ the meeting conditions are vacuous.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0ECR, lemma-punctured-still-connected, second half of proof: inductive prime-avoidance slicing; details expanded by Q72."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "def-weil-pbc-noetherian-ring",
+  "lem-per-punctured-local-closed-points",
+  "def-kun-topological-krull-dimension",
+  "lem-sc-noetherian-finite-irreducible-components",
+  "lem-weil-pbc-prime-avoidance"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0ECR, lemma-punctured-still-connected, second half of proof: inductive prime-avoidance slicing; details expanded by Q72."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +156,73 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"IsLocalRing.closedPoint\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \": PrimeSpectrum R\", \"doc\": \"In a commutative semiring $ R $ that is a local ring, the maximal ideal consisting of all non-units is a prime ideal. This defines a closed point in the prime spectrum of $ R $, corresponding to the u\"}\n  {\"name\": \"IsLocalRing.closedPoint.congr_simp\", \"module\": \"Mathlib.RingTheory.KrullDimension.Module\", \"type\": \"∀ (R : Type u) [inst : CommSemiring R] [inst_1 : IsLocalRing R], IsLocalRing.closedPoint R = IsLocalRing.closedPoint R\", \"doc\": \"In a commutative semiring $ R $ that is a local ring, the maximal ideal consisting of all non-units is a prime ideal, thereby defining a closed point in the prime spectrum of $ R $.\"}\n  {\"name\": \"IsLocalRing.specializes_closedPoint\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"(x : PrimeSpectrum R) : x ⤳ closedPoint R\", \"doc\": \"In the Zariski topology on the prime spectrum of a local ring $ R $, every prime ideal specializes to the unique closed point corresponding to the maximal ideal of $ R $.\"}\n  {\"name\": \"IsLocalRing.isClosed_singleton_closedPoint\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \": IsClosed {closedPoint R}\", \"doc\": \"In the prime spectrum of a local ring equipped with the Zariski topology, the singleton set containing the unique closed point (the maximal ideal) is a closed set. This follows because the maximal ide\"}\n  {\"name\": \"PrimeSpectrum.zeroLocus\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Basic\", \"type\": \"(s : Set R) : Set (PrimeSpectrum R)\", \"doc\": \"The zero locus of a subset $ S $ of a commutative semiring $ R $ is the set of all prime ideals in the prime spectrum of $ R $ that contain $ S $ as a subset of their underlying ideal.\"}\n  {\"name\": \"IsLocalRing.closedPoint_mem_iff\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"(U : TopologicalSpace.Opens <| PrimeSpectrum R) : closedPoint R ∈ U ↔ U = ⊤\", \"doc\": \"For a local ring $ R $, the closed point of $ R $ is contained in an open subset $ U $ of the prime spectrum $ \\\\operatorname{Spec}(R) $ if and only if $ U $ is the entire space $ \\\\operatorname{Spec}(R\"}\n  {\"name\": \"IsLocalRing.closed_point_mem_iff\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"{U : TopologicalSpace.Opens (PrimeSpectrum R)} : closedPoint R ∈ U ↔ U = ⊤\", \"doc\": \"For a local ring $ R $, the closed point $ \\\\mathfrak{m} $ in the prime spectrum $ \\\\operatorname{Spec}(R) $ is contained in an open set $ U $ if and only if $ U $ is the entire space $ \\\\operatorname{Sp\"}\n  {\"name\": \"IsLocalRing.comap_closedPoint\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"{S : Type v} [CommSemiring S] [IsLocalRing S] (f : R →+* S) [IsLocalHom f] :\\n  PrimeSpectrum.comap f (closedPoint S) = closedPoint R\", \"doc\": \"Given commutative semirings $ R $ and $ S $, where $ S $ is a local ring, and a local homomorphism $ f : R \\\\to S $, the preimage of the closed point (maximal ideal) in the prime spectrum of $ S $ unde\"}\n",
    "date": "2026-10-19",
    "verdict": "No match: spectrum closed-point and prime-chain results do not supply simultaneous parameter cutting with prescribed locally closed pieces."
+  },
+  {
+   "tool": "grep",
+   "query": "punctured|complement.*closedPoint|closedPoint.*(compl|[Jj]acobson)",
+   "results": "Logged actual response: 25 hits; Mathlib/AlgebraicGeometry/Group/Smooth.lean, Mathlib/Topology/NhdsWithin.lean, Mathlib/Topology/NhdsWithin.lean, Mathlib/Topology/NhdsWithin.lean, Mathlib/Topology/NhdsWithin.lean, Mathlib/AlgebraicGeometry/Stalk.lean, Mathlib/Topology/Order/LeftRightNhds.lean, Mathlib/Topology/Order/LeftRightNhds.lean",
+   "date": "2026-10-19",
+   "verdict": "No match: prime-chain insertion and the height-parameter existence result do not preserve the prescribed locally closed subsets; local-ring and adic-intersection results do not state the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If A is a Noetherian local ring and f is in its maximal ideal, the localization A[1/f] is Jacobson; the complement of the closed point in Spec A has dense closed points in every closed subset",
+   "results": "Logged actual response: 8 hits; isJacobsonRing_localization, PrimeSpectrum.exist_mem_one_of_mem_maximal_ideal, Polynomial.jacobson_bot_of_integral_localization, instIsHausdorffMaximalIdeal, IsJacobsonRing, IsLocalization.isMaximal_of_isMaximal_disjoint, IsLocalRing.maximalIdeal_le_jacobson, IsLocalization.isMaximal_iff_isMaximal_disjoint",
+   "date": "2026-10-19",
+   "verdict": "No match: prime-chain insertion and the height-parameter existence result do not preserve the prescribed locally closed subsets; local-ring and adic-intersection results do not state the item."
+  },
+  {
+   "tool": "grep",
+   "query": "parameter|avoid|slice",
+   "results": "Logged actual response: 0 hits;  (subdirectory RingTheory/Ideal/KrullsHeightTheorem.lean)",
+   "date": "2026-10-19",
+   "verdict": "No match: prime-chain insertion and the height-parameter existence result do not preserve the prescribed locally closed subsets; local-ring and adic-intersection results do not state the item."
+  },
+  {
+   "tool": "grep",
+   "query": "(theorem|lemma|instance).*([Jj]acobson|[Ll]ocal)",
+   "results": "Logged actual response: 5 hits; 63, 67, 73, 87, 93 (subdirectory RingTheory/Jacobson/Ring.lean)",
+   "date": "2026-10-19",
+   "verdict": "No match: prime-chain insertion and the height-parameter existence result do not preserve the prescribed locally closed subsets; local-ring and adic-intersection results do not state the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Choose e elements of the maximal ideal of a Noetherian local ring cutting a dimension e closed subset to the closed point while their common zero locus meets finitely many prescribed locally closed subsets outside it",
+   "results": "Logged actual response: 8 hits; ringKrullDim_le_ringKrullDim_add_card, PrimeSpectrum.exist_mem_one_of_mem_maximal_ideal, instIsHausdorffMaximalIdeal, Ideal.exists_finset_card_eq_height_of_isNoetherianRing, PrimeSpectrum.exist_ltSeries_mem_one_of_mem_last, IsHausdorff.of_isLocalRing, Algebra.QuasiFiniteAt.exists_basicOpen_eq_singleton, IsNoetherianRing.exists_relSeries_isQuotientEquivQuotientPrime",
+   "date": "2026-10-19",
+   "verdict": "No match: prime-chain insertion and the height-parameter existence result do not preserve the prescribed locally closed subsets; local-ring and adic-intersection results do not state the item."
+  },
+  {
+   "tool": "grep",
+   "query": "([Jj]acobson.*[Nn]oetherian|[Nn]oetherian.*[Jj]acobson|[Jj]acobson.*[Ll]ocalRing|[Ll]ocalRing.*[Jj]acobson|[Jj]acobson.*[Pp]unctur)",
+   "results": "Logged actual response: 25 hits; Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean, Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean, Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean, Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean, Mathlib/RingTheory/Spectrum/Prime/Jacobson.lean, Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean, Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean, Mathlib/RingTheory/Ideal/KrullsHeightTheorem.lean (subdirectory RingTheory)",
+   "date": "2026-10-19",
+   "verdict": "No match: prime-chain insertion and the height-parameter existence result do not preserve the prescribed locally closed subsets; local-ring and adic-intersection results do not state the item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A system of parameters for a closed subset can be chosen to vanish at finitely many closed points of a punctured local spectrum",
+   "results": "Logged actual response: 8 hits; IsLocalRing.closedPoint, IsLocalRing.closedPoint.congr_simp, IsLocalRing.specializes_closedPoint, IsLocalRing.isClosed_singleton_closedPoint, IsLocalRing.closedPoint_mem_iff, MaximalSpectrum.toPrimeSpectrum_range, AlgebraicGeometry.Scheme.IdealSheafData.coe_support_vanishingIdeal, AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal",
+   "date": "2026-10-19",
+   "verdict": "No match: prime-chain insertion and the height-parameter existence result do not preserve the prescribed locally closed subsets; local-ring and adic-intersection results do not state the item."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing, Ideal, IsNoetherianRing",
+   "results": "Logged actual response: 12 hits; Ideal.isIdempotentElem_iff_eq_bot_or_top_of_isLocalRing, Ideal.iInf_pow_eq_bot_of_isLocalRing, Ideal.iInf_pow_smul_eq_bot_of_isLocalRing, IsLocalRing.CotangentSpace.map_eq_top_iff, IsLocalRing.CotangentSpace.span_image_eq_top_iff, exists_maximalIdeal_pow_eq_of_principal, IsDiscreteValuationRing.TFAE, tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain",
+   "date": "2026-10-19",
+   "verdict": "No match: prime-chain insertion and the height-parameter existence result do not preserve the prescribed locally closed subsets; local-ring and adic-intersection results do not state the item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A local Noetherian ring admits parameters of a given closed subset in the intersection of prescribed prime ideals defining points closed in its punctured complement",
+   "results": "Logged actual response: 8 hits; PrimeSpectrum.exist_mem_one_of_mem_maximal_ideal, PrimeSpectrum.exist_ltSeries_mem_one_of_mem_last, PrimeSpectrum.exist_mem_one_of_mem_two, IsHausdorff.of_isLocalRing, Algebra.QuasiFiniteAt.exists_basicOpen_eq_singleton, tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain, IsHausdorff.of_isDomain, Ideal.exists_finset_card_eq_height_of_isNoetherianRing",
+   "date": "2026-10-19",
+   "verdict": "No match: prime-chain insertion and the height-parameter existence result do not preserve the prescribed locally closed subsets; local-ring and adic-intersection results do not state the item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-complete-local-connectedness-bound",
@@ -79,5 +248,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-prime-avoidance-connectedness-slice",
+  "worker": "stage1",
+  "summary": "Statement retained. Expanded the prime-avoidance slicing argument of Stacks 0ECR for arbitrary finite prescribed locally closed pieces. Chose points closed in the puncture, used their primes to constrain every equation, and proved only the upper dimension bound by extending chains. Zero-dimensional and empty-family cases are explicit. One new statement-only node records 02J6(4); existing Mathlib leaves supply prime avoidance, finite components and spectrum topology.",
+  "blueprint": "Proof Step 1: dimension-normalized Verdier duality and the middle t-structure; the finite-coefficient potential-dualizing construction, via the normal-local top-residue-class input (ILO XVII Lemma 3.5.8): normality of completion and connectedness of punctured principal slices. Specific input: The prime-avoidance slicing construction in the complete-local connectedness input, retaining points in the two clopen pieces; the zero-piece case treats an empty complement. Steps 1–8 give the prime-avoidance input to the complete-local connectedness bound, hence the dimension-normalized duality construction; the node-level route is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-43b0b53e1",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-43b0b53e1 (reviewer sub-agent of L); spot-checked: I read the item, its 8 steps and the new node lem-per-punctured-local-closed-points in full, together with Stacks 0ECR (proof, second half, lines 4420-4445), 02J6(4), 02IM(1) and the remark after 005U. The item statement is unchanged from Q11's version. The new node is statement-only and self-contained, and it is exactly 02J6(4) plus the 005U locally-closed characterization (points closed in U, not in X; I tested it on a field, an Artinian ring, a DVR and k[x,y]_(x,y)). Searching the DAG statements for Jacobson, prime avoidance and punctured closed points found no duplicate. Step checks: Step 2 shows a locally closed subset of U\\T is locally closed in U, and V(p_j)={w_j,m}. Step 4 shows p_j is not inside q, using q in T and w_j not in T. Step 6 meets prime avoidance's hypotheses (r>=1, all ideals prime) and takes f=0 when the list is empty. Step 7 proves the dimension upper bound by extending chains through a component, without catenarity. Step 8 ends with T_e={m}. The cases e=0 and s=0 are handled. All off-unit nodes are Mathlib leaves or definitions, so no tool_uses are needed. There is no cycle and no SGA source. No changes."
  }
 }
