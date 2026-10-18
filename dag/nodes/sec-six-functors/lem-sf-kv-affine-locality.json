@@ -2,7 +2,7 @@
  "id": "lem-sf-kv-affine-locality",
  "kind": "statement",
  "title": "Open restriction and finite-cover preservation for exceptional comparisons",
- "statement": "Use the finite-field datum, finite coefficients $A=A_{E,n}$ and the actual ordinary-etale and transported constructible operations of [sk-def-sf-operations]. Let $f:X\\to Y$ be separated of finite type between finite-type $k$-schemes; the schemes need not be separated over $k$. For open immersions $u:W\\hookrightarrow X$, $v:V\\hookrightarrow Y$ and $f':W\\to V$ with $fu=vf'$, there is a canonical isomorphism $u^*Rf^!K\\cong Rf'^!v^*K$, initially defined by the ordinary-etale adjoints and transported at finite constructible coefficients. For an additional open $w:Z'\\hookrightarrow Z$, restriction along $u\\times w$ carries the Ku_!–counit transpose $\\alpha_{f,\\mathrm{id}_Z}(K,Q)$ of [sk-def-sf-kv-maps] to $\\alpha_{f',\\mathrm{id}_{Z'}}(v^*K,w^*Q)$ under these isomorphisms. No invertibility of either comparison is assumed or concluded.\nMoreover, if the restrictions of $Rf^!K$ to a finite open cover of $X$ have bounded constructible cohomology and finite Tor amplitude, then $Rf^!K$ does also. An interval containing the finitely many local cohomology intervals, and an interval containing the finitely many local Tor intervals, are global bounds. The same assertion holds with uniform finite-reduction bounds for the normalized integral construction of [sk-def-sf-operations](vi).",
+ "statement": "Use the finite-field datum, finite coefficients $A=A_{E,n}$ and the actual ordinary-etale and transported constructible operations of [sk-def-sf-operations]. Let $f:X\\to Y$ be separated of finite type between finite-type $k$-schemes; the schemes need not be separated over $k$. Let $K\\in\\Dctf(Y,A)$ and $Q\\in\\Dctf(Z,A)$, where $Z$ is a finite-type $k$-scheme. For open immersions $u:W\\hookrightarrow X$, $v:V\\hookrightarrow Y$ and $f':W\\to V$ with $fu=vf'$, there is a canonical isomorphism $u^*Rf^!K\\cong Rf'^!v^*K$, initially defined by the ordinary-etale adjoints and transported at finite constructible coefficients. For an additional open $w:Z'\\hookrightarrow Z$, restriction along $u\\times w$ carries the Ku_!–counit transpose $\\alpha_{f,\\mathrm{id}_Z}(K,Q)$ of [sk-def-sf-kv-maps] to $\\alpha_{f',\\mathrm{id}_{Z'}}(v^*K,w^*Q)$ under these isomorphisms. No invertibility of either $\\alpha$-map is assumed or concluded. Here, also when $Y$ or $Z$ is not separated, the specified $\\mathrm{Ku}_{!,f,\\mathrm{id}_Z}$ is read by its compactification formula: with $F=f\\times\\mathrm{id}_Z$, projections $r:X\\times Z\\to X$, $q:Y\\times Z\\to Y$ and $s:Y\\times Z\\to Z$, for $B\\in\\Dctf(X,A)$ it is $(\\operatorname{Ex}_{!,f,q}^{-1}\\otimes1)\\operatorname{PF}_{F,r^*B,s^*Q}^{-1}$ on $RF_!(B\\boxtimes Q)$. The projection map is the actual finite compact-support map of [fix-prop-projection-formula], and exchange is the arbitrary-base-change map of [thm-cbc-finite-torsion]; this is the same formula used in [sk-def-sf-kv-maps](i), without importing a separatedness assumption on the product base.\nMoreover, if the restrictions of $Rf^!K$ to a finite open cover of $X$ have bounded constructible cohomology and finite Tor amplitude, then $Rf^!K$ does also. An interval containing the finitely many local cohomology intervals, and an interval containing the finitely many local Tor intervals, are global bounds. The same assertion holds with uniform finite-reduction bounds for the normalized integral construction of [sk-def-sf-operations](vi).",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
   "place": "alpha: invertibility is etale-local and the affine factorization gives the map locally"
@@ -10,11 +10,194 @@
  "stmt_deps": [
   "sk-def-sf-operations",
   "sk-def-sf-kv-maps",
-  "def-weil-finite-tor-amplitude"
+  "def-weil-finite-tor-amplitude",
+  "fix-prop-projection-formula",
+  "thm-cbc-finite-torsion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work first on the ordinary etale sites. Write $P_h=Rh^{\\mathrm{et}}_!$, $G_h=h^\\times$ and $J_a=a_!$ for an open $a$. The schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian] (a field is Noetherian). By [lem-weil-pbc-noetherian-open-subscheme-noetherian], every open is quasi-compact. It is locally of finite type, hence finite type by [def-weil-finite-type-morphism]; restrictions of $f$ stay separated. Thus all the maps in the statement, their open factorizations and product base changes are compactifiable, and the ordinary adjoints exist, by [thm-nagata-compactification] and [thm-amb-etale-exceptional-adjoint]. The bounded-below typing of these adjoints on the inputs used here is part of the finite construction in [sk-def-sf-operations](vi). No right adjoint on the whole pro-etale category is used.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "def-weil-finite-type-morphism",
+    "thm-nagata-compactification",
+    "thm-amb-etale-exceptional-adjoint",
+    "sk-def-sf-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "alpha: open/etale locality and affine-factorization paragraph"
+   }
+  },
+  {
+   "text": "The open derived adjunction $J_u\\dashv u^*$ on the whole unbounded categories is [lem-amb-etale-adjoint-locality], and $P_h\\dashv G_h$ is [thm-amb-etale-exceptional-adjoint]. The unbounded compact-support composition of [lem-amb-unbounded-compact-support-comparisons], with compact support along an open identified with $J$ through the compactification $(u,\\mathrm{id})$, identifies $P_fJ_u=P_{fu}=P_{vf'}=J_vP_{f'}$ on every complex; on bounded-below inputs it restricts to the composition of [lem-amb-etale-compact-comparisons]. Therefore for every $M\\in D(W_{\\mathrm{et}},A)$, with no boundedness condition,\n$$\\operatorname{Hom}(M,u^*G_fK)=\\operatorname{Hom}(J_uM,G_fK)=\\operatorname{Hom}(P_fJ_uM,K)=\\operatorname{Hom}(J_vP_{f'}M,K)=\\operatorname{Hom}(P_{f'}M,v^*K)=\\operatorname{Hom}(M,G_{f'}v^*K).$$\nThese are natural bijections on the whole category, so Yoneda gives the canonical isomorphism $\\rho:u^*G_fK\\simeq G_{f'}v^*K$. Equivalently it is the comparison of right adjoints to the two composite left adjoints; [lem-cat-right-adjoint-composition] fixes its pasted units and counits. This works for a commuting square, not just a Cartesian one. More explicitly, the adjunct under $J_v\\dashv v^*$ of $\\varepsilon_{f'}P_{f'}(\\rho)$ is $\\varepsilon_fP_f(c_u)$, where $c_u:J_uu^*G_fK\\to G_fK$ is the open counit and $P_fJ_u=J_vP_{f'}$ is inserted. This equation follows by following the identity of $u^*G_fK$ through the displayed bijections and specifies the counit normalization used below.",
+   "uses": [
+    "lem-amb-etale-adjoint-locality",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-amb-etale-compact-comparisons",
+    "thm-amb-etale-exceptional-adjoint",
+    "lem-cat-right-adjoint-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "alpha: open/etale locality and affine-factorization paragraph"
+   }
+  },
+  {
+   "text": "Put $F=f\\times\\mathrm{id}_Z$, $r:X\\times Z\\to X$, $q:Y\\times Z\\to Y$, $s:Y\\times Z\\to Z$. Denote the compactification-defined map in the statement by $t_f(B,Q)$. Expanding the relative-product definition in [sk-def-sf-kv-maps](i), the second factor is the identity, so its composition, projection and symmetry factors cancel, leaving\n$$t_f(B,Q)=(\\operatorname{Ex}_{!,f,q}^{-1}\\otimes1)\\operatorname{PF}_{F,r^*B,s^*Q}^{-1}.$$\nExchange exists for this arbitrary projection $q$ by [thm-cbc-finite-torsion]; in particular $q$ need not be separated. Projection is the concrete finite map of [fix-prop-projection-formula]. Its finite-Tor second argument is legitimate: a bounded flat model for $Q$ [lem-sf-flat-model] pulls back to a bounded flat model of the same length by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Constructibility of pullbacks follows by pulling back the finite strata and their locally constant finite modules [lemma-constructible-pullback-stratification, lemma-constructible-pullback-constant]. Thus this formula defines exactly the required left comparison on the nonseparated-scheme domain as well; no separated-base relative Kunneth theorem is being applied there.",
+   "uses": [
+    "sk-def-sf-kv-maps",
+    "thm-cbc-finite-torsion",
+    "fix-prop-projection-formula",
+    "lem-sf-flat-model",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lemma-constructible-pullback-stratification",
+    "lemma-constructible-pullback-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "alpha: open/etale locality and affine-factorization paragraph"
+   }
+  },
+  {
+   "text": "Here is the base-change calculation for the projection factor, without an axiom about a six-functor package. Choose $f=pj$. Write $e$ for proper exchange, $\\beta$ for open base change, $\\pi_p$ for proper projection and $\\gamma_j$ for open tensor. Then $\\operatorname{Ex}_f=P_{p'}(\\beta)e$ and $\\operatorname{PF}_f=P_p(\\gamma_j)\\pi_p$. In the base-changed composite, replace $e\\,g^*\\pi_p$ by $\\pi_{p'}(e\\otimes1)$ using [lem-weil-pbc-ringed-exchange-tensor-coherence], and replace $\\beta\\,\\bar g^*\\gamma_j$ by $\\gamma_{j'}(\\beta\\otimes1)$ using [lem-asd-open-projection-exchange]. Naturality of $e$ moves $\\gamma_j$ past $e$. Substitution gives\n$$\\operatorname{Ex}_{M\\otimes f^*N}\\,g^*\\operatorname{PF}_{f,M,N}=\\operatorname{PF}_{f',g'^*M,g^*N}(\\operatorname{Ex}_M\\otimes1).$$\nAll pullback/tensor comparisons in these two cited equations are the canonical ones. This is a paste of their two equations, valid for arbitrary base change and nonseparated schemes. Inverting its invertible factors and using the horizontal pasting equation of [thm-cbc-finite-torsion] in the formula of step 3 shows that target-open restriction $(v,w)$ carries $t_f$ to $t_{f_V}$, where $X_V=X\\times_YV$ and $f_V:X_V\\to V$.",
+   "uses": [
+    "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "lem-asd-open-projection-exchange",
+    "thm-cbc-finite-torsion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "alpha: open/etale locality and affine-factorization paragraph"
+   }
+  },
+  {
+   "text": "We also need the source-open identity for $t$. For an open $a:T\\hookrightarrow X$, the unit-normalized open base change and tensor comparisons give\n$$(a\\times\\mathrm{id}_Z)_!(M\\boxtimes Q)\\simeq (J_aM)\\boxtimes Q.$$\nIndeed pull $J_aM$ back along $r$ using open base change, and then use the open tensor map; after restriction to $T\\times Z$ both component maps are identities. These are precisely the normalizations of [lem-sf-open-tensor-normalization]; the ordinary etale versions agree under [lem-sf-comparison-open-tensor-coherence]. Here $J_aM$ remains bounded constructible: extend the finite strata from $T$ and add its closed complement with the zero sheaf. It has the same Tor interval, since the displayed open tensor comparison expresses tensor by $J_aM$ as exact open extension of tensor by $M$ after exact restriction [lem-pur-site-restriction-module-adjunction-exact]. In the formula of step 3 for $fa$, substitute the projection-composition identity of [fix-prop-projection-formula] for $F(a\\times\\mathrm{id})$ and the vertical exchange-pasting identity of [thm-cbc-finite-torsion] for the square of $fa$ against $q$. The open projection and exchange factors cancel against the displayed identification. What remains is\n$$t_{fa}(M,Q)=t_f(J_aM,Q)$$\nunder $P_{fa}=P_fJ_a$ and $P_{(fa)\\times\\mathrm{id}}=P_FP_{a\\times\\mathrm{id}}$. This uses composition for an open followed by a separated finite-type map, not a structure map of $Z$.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-sf-comparison-open-tensor-coherence",
+    "fix-prop-projection-formula",
+    "thm-cbc-finite-torsion",
+    "lem-amb-etale-compact-comparisons",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "alpha: open/etale locality and affine-factorization paragraph"
+   }
+  },
+  {
+   "text": "First restrict only the source, so $v=\\mathrm{id}_Y$, $w=\\mathrm{id}_Z$. Set $B=G_fK$, $M=a^*B$, $c:J_aM\\to B$ the open counit. The transpose of $\\alpha_{f,\\mathrm{id}_Z}$ is\n$$m_f=(\\varepsilon_f\\boxtimes1_Q)t_f(B,Q)$$\nby [sk-def-sf-kv-maps](ii), with the identity counit inserted. Under the composite open/product adjunctions, the transpose of its source restriction is $m_fP_F(c\\boxtimes1_Q)$. Naturality of $t_f$ changes this to\n$$((\\varepsilon_fP_f(c))\\boxtimes1_Q)t_f(J_aM,Q).$$\nStep 5 changes the last factor to $t_{fa}(M,Q)$, and the counit equation of step 2 changes the first factor to $\\varepsilon_{fa}\\boxtimes1_Q$, after $M\\simeq G_{fa}K$. This is precisely the defining transpose of $\\alpha_{fa,\\mathrm{id}_Z}$. The adjunction bijections are injective; hence the two alpha maps agree. The compatibility of taking these successive transposes is the composite-adjunction pasting equation of [lem-weil-pbc-mate-pasting](2).",
+   "uses": [
+    "sk-def-sf-kv-maps",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "alpha: open/etale locality and affine-factorization paragraph"
+   }
+  },
+  {
+   "text": "Now let $a:X_V\\times Z'\\hookrightarrow X\\times Z$ and $b=v\\times w:V\\times Z'\\hookrightarrow Y\\times Z$ be the Cartesian target-open restriction of $F$. Write $F_V=f_V\\times\\mathrm{id}_{Z'}$ and let $\\xi:b^*P_F\\simeq P_{F_V}a^*$ be compact-support exchange. The normalization of step 2 gives, for every $L$,\n$$\\varepsilon_{F_V}P_{F_V}(\\rho_L)=b^*\\varepsilon_F\\,\\xi_{G_FL}^{-1}.$$\nTo check it, take the $J_b\\dashv b^*$ adjunct. On the left, step 2 gives $\\varepsilon_FP_F(c_a)\\delta^{-1}$, with $\\delta:P_FJ_a\\simeq J_bP_{F_V}$ the composition comparison. On the right the adjunct is $\\varepsilon_F\\circ\\varepsilon_{b,P_FG_FL}\\circ J_b(\\xi^{-1})$, and [lem-amb-shriek-open-exchange-adjoint] (its morphisms $f,u,v$ being $F,b,a$, and its input $G_FL$) states exactly $\\varepsilon_b\\circ J_b(\\xi^{-1})=P_F(c_a)\\delta^{-1}$; its exchange restricts on bounded-below inputs to that of [thm-cbc-finite-torsion] by [lem-amb-unbounded-compact-support-comparisons]. Consequently the transpose of the restricted alpha map is $b^*m_f\\,\\xi^{-1}$. Step 4 identifies its $t_f$ factor with $t_{f_V}$; the same displayed counit equation for $f$ identifies its $\\varepsilon_f$ factor with $\\varepsilon_{f_V}$, while $w^*$ sends $1_Q$ to $1_{w^*Q}$. Thus the transpose is $(\\varepsilon_{f_V}\\boxtimes1)t_{f_V}$, the defining transpose of $\\alpha_{f_V,\\mathrm{id}_{Z'}}(v^*K,w^*Q)$. Injectivity of the adjunction bijection proves the target-open equality. Exchange naturality is part of [thm-cbc-finite-torsion], and pasting the transposes is [lem-weil-pbc-mate-pasting].",
+   "uses": [
+    "thm-cbc-finite-torsion",
+    "lem-amb-shriek-open-exchange-adjoint",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-weil-pbc-mate-pasting",
+    "sk-def-sf-kv-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "alpha: open/etale locality and affine-factorization paragraph"
+   }
+  },
+  {
+   "text": "For the original commuting open square, $u$ factors as $W\\hookrightarrow X_V\\hookrightarrow X$: the first map is open because $W$ is open in $X$ and its image lies in $X_V$. Apply step 7 to $(v,w)$ and then step 6 to this remaining source open. Associativity of compact-support composition and the pasted adjunction units/counits identify their composite restriction isomorphism with the one constructed in step 2 [lem-amb-unbounded-compact-support-comparisons, lem-cat-right-adjoint-composition]. Finally apply the exact comparison inverse images to these equations. The actual finite constructible $Rf^!$ and its adjunction are the ordinary etale construction transported in [sk-def-sf-operations](vi). The pro-etale exchange is by definition the transported etale exchange [thm-cbc-finite-level-proetale]. The pro-etale open/tensor factor is identified with the transported etale one by the equality of [lem-sf-comparison-open-tensor-coherence]. For the proper projection factor, $(\\nu_{\\bar X},\\nu_Y)$ and the two copies of $p$ form a commuting square of ringed topoi, whose exchange is the comparison $\\nu_Y^*Rp_*\\to Rp_*\\nu_{\\bar X}^*$; [lem-weil-pbc-ringed-exchange-tensor-coherence], which assumes no Cartesian square, carries $\\nu_Y^*$ of the etale projection map to the pro-etale one under this comparison. Therefore these are equalities of the specified transported maps, not merely an existence of some comparison. At no point was either alpha map inverted.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-cat-right-adjoint-composition",
+    "sk-def-sf-operations",
+    "thm-cbc-finite-level-proetale",
+    "lem-sf-comparison-open-tensor-coherence",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "alpha: open/etale locality and affine-factorization paragraph"
+   }
+  },
+  {
+   "text": "For the finite-cover assertion, put $H=Rf^!K$, and choose a cohomological interval $[c,d]$ containing every local cohomological interval and a Tor interval $[a,b]$ containing every local Tor interval. The topology of $X$ is Noetherian: every open is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian], so an increasing chain of opens stabilizes, since its union is quasi-compact and hence is covered by finitely many terms. Apply [lem-sf-finite-cover-ctf-locality] to $H$, the given finite cover and $[a,b]$. It gives global constructibility and the identical Tor interval, not a bound depending on the number of charts. Separately, exact open restriction [lem-pur-site-restriction-module-adjunction-exact] identifies $\\mathcal H^t(H)|_{U_i}$ with $\\mathcal H^t(H|_{U_i})$. For $t\\notin[c,d]$ these are zero for every $i$, so the sheaf axiom on this covering forces $\\mathcal H^t(H)=0$. Thus $[c,d]$ remains the independent cohomological bound. On the empty scheme every module sheaf is zero, so an empty cover needs no minimum or maximum.",
+   "uses": [
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-sf-finite-cover-ctf-locality",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "alpha: open/etale locality and affine-factorization paragraph"
+   }
+  },
+  {
+   "text": "For the last assertion take the already normalized integral output of [sk-def-sf-operations](vi) and write its reductions as $H_n=Rf_n^!K_n$. On each of the finitely many opens the hypothesis supplies cohomological and Tor intervals independent of $n$. Choose containing intervals by taking the minimum of the finitely many lower endpoints and the maximum of the upper endpoints; these choices are still independent of $n$. Apply step 9 to each $H_n$. Every reduction is globally constructible with those same two intervals. By [def-weil-derived-complete-integral-detailed] the cohomological conclusion is exactly the required uniform bounded-constructible reduction condition; by [def-weil-finite-tor-amplitude] the Tor conclusion is exactly the uniform finite-Tor condition. Normalization and derived completeness belong to the specified construction, not to an attempt to lift a diagram of maps chosen separately at each level. This proves the asserted preservation of uniform finite-reduction bounds.",
+   "uses": [
+    "sk-def-sf-operations",
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+    "place": "alpha: open/etale locality and affine-factorization paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-tor-amplitude",
+  "def-weil-finite-type-morphism",
+  "fix-prop-projection-formula",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-etale-compact-comparisons",
+  "lem-amb-shriek-open-exchange-adjoint",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-open-projection-exchange",
+  "lem-cat-right-adjoint-composition",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-comparison-open-tensor-coherence",
+  "lem-sf-finite-cover-ctf-locality",
+  "lem-sf-flat-model",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lemma-constructible-pullback-constant",
+  "lemma-constructible-pullback-stratification",
+  "sk-def-sf-kv-maps",
+  "sk-def-sf-operations",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-cbc-finite-level-proetale",
+  "thm-cbc-finite-torsion",
+  "thm-nagata-compactification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-verdier/sk-thm-sf-kunneth-verdier.proof.md",
+  "place": "alpha paragraph: affine-factorization locality; explicit open-adjoint Hom calculation and normalized Ku_! transpose calculation"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -78,10 +261,45 @@
    "results": "8 hits: CategoryTheory.Localization.Monoidal.triangle_aux₃, CategoryTheory.Localization.Monoidal.triangle_aux₂, CategoryTheory.Localization.Monoidal.triangle_aux₁, CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp_εIso_hom, CategoryTheory.Localization.Monoidal.triangle, CategoryTheory.Localization.Monoidal.ε', CategoryTheory.Triangulated.Localization.complete_distinguished_triangle_morphism, CategoryTheory.Localization.Monoidal.functorCoreMonoidalOfComp_εIso_inv.  Read candidate Mathlib Mates.lean 425-436, Monoidal/Closed/Functor.lean 45-116, Monoidal/Functor.lean 947-975 and Triangulated/Pretriangulated.lean 189-203: conjugacy, Cartesian exponential maps, right-adjoint lax monoidality, or generic triangle completion; none states this comparison for the geometric derived sheaf operations.",
    "date": "2026-10-17",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exceptional|Kunneth|constructible.*cover|Tor.*cover",
+   "results": " Read hits: none. These are scheme structure-sheaf restriction comparisons, topological constructibility, or generic adjoint conjugacy; none constructs compact-support exceptional restriction together with the specified Ku_! transpose and uniform finite-reduction bounds.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite open cover locality of bounded constructible complexes with a uniform Tor amplitude",
+   "results": " Read hits: Topology.IsLocallyConstructible.of_isOpenCover, Topology.IsLocallyConstructible.of_isOpenCover', Topology.IsLocallyConstructible.iff_of_isOpenCover, Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover, AlgebraicGeometry.Scheme.OpenCover.compactSpace, Topology.IsLocallyConstructible, IsRetrocompact.isLocallyConstructible, AlgebraicGeometry.Scheme.OpenCover.finiteSubcover. These are scheme structure-sheaf restriction comparisons, topological constructibility, or generic adjoint conjugacy; none constructs compact-support exceptional restriction together with the specified Ku_! transpose and uniform finite-reduction bounds.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction.comp, exceptional inverse image",
+   "results": "Loogle rejected the query: Unknown identifier exceptional. No conclusion of absence is drawn; the valid replacement query CategoryTheory.conjugateIsoEquiv returned generic adjoint conjugacy only.",
+   "date": "2026-10-18",
+   "verdict": "invalid query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical exceptional inverse image restriction to source and target opens and compatibility with Kunneth counit transpose",
+   "results": " Read hits: AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, AlgebraicGeometry.IsOpenImmersion.ΓIso_inv, AlgebraicGeometry.Scheme.restrictFunctorΓ_inv_app, AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.ofRestrict_invApp_apply, AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv_apply, AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv_apply, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app. These are scheme structure-sheaf restriction comparisons, topological constructibility, or generic adjoint conjugacy; none constructs compact-support exceptional restriction together with the specified Ku_! transpose and uniform finite-reduction bounds.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "compact support projection formula commutes with open restriction and extension by zero for derived etale sheaves",
+   "results": " Read hits: AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, ModuleCat.Tilde.toOpen_res, AlgebraicGeometry.Γ_map_morphismRestrict, AlgebraicGeometry.morphismRestrict_appTop, TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd, TopCat.Sheaf.extend_hom_app, TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst. These are scheme structure-sheaf restriction comparisons, topological constructibility, or generic adjoint conjugacy; none constructs compact-support exceptional restriction together with the specified Ku_! transpose and uniform finite-reduction bounds.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-thm-sf-kunneth-verdier",
@@ -98,5 +316,119 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-sf-kv-affine-locality",
+  "worker": "stage1",
+  "summary": "Expanded the arbitrary commuting open square as a Hom comparison of composite ordinary-etale adjunctions, with its counit equation. Calculated source- and target-open compatibility of the specified alpha map from its Ku_! counit transpose, using actual compact-support projection/exchange formulas on the nonseparated-scheme domain. Reused finite-cover locality and retained independent cohomological/Tor intervals and uniform reduction bounds. No new nodes. Clarified input typing and the compactification formula where the imported relative-Kunneth reference has a narrower separated-base domain. Maintainer reader repair: unbounded composition for the Hom chain, explicit open exchange/counit pairing, and the proper-projection transport across the site comparison.",
+  "blueprint": "Steps 1-8 realize the alpha paragraph: affine-factorization localization, exceptional restriction and compatibility with the specified alpha transpose. Steps 9-10 supply its finite-cover preservation and uniform finite-reduction bound justification.",
+  "tool_uses": [
+   {
+    "node": "fix-prop-projection-formula",
+    "why": "The actual compact-support projection map and its composition coherence, used for the identity-factor Ku_! formula; the unit does not state a nonseparated-base coherence theorem."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "The ordinary-etale derived open adjunction before constructible preservation is asserted."
+   },
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "Canonical associative composition of ordinary-etale compact-support functors, needed for a square which need only commute."
+   },
+   {
+    "node": "lem-asd-open-projection-exchange",
+    "why": "The explicit ordinary-etale open exchange/tensor equation, valid for arbitrary base change."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exact restriction gives the independent cohomological bound from sheafwise local vanishing."
+   },
+   {
+    "node": "lem-sf-comparison-open-tensor-coherence",
+    "why": "The stated equality transporting the actual etale open tensor maps to pro-etale maps."
+   },
+   {
+    "node": "lem-sf-finite-cover-ctf-locality",
+    "why": "Generic finite-open-cover constructibility and same-interval Tor gluing; separate cohomology bounds are checked directly."
+   },
+   {
+    "node": "lem-sf-flat-model",
+    "why": "Bounded flat representatives certify the finite-Tor input to the projection map, including for a nonseparated product projection."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Canonical open base-change/tensor maps normalized by their restriction identities."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "The explicit proper exchange/projection equation pasted with the open equation; avoids assuming a six-functor axiom package."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Pullback preserves flat K-flat models and has the canonical monoidal comparison."
+   },
+   {
+    "node": "lemma-constructible-pullback-constant",
+    "why": "Pullback preserves the constant finite modules on the pulled-back strata."
+   },
+   {
+    "node": "lemma-constructible-pullback-stratification",
+    "why": "Pullback of the finite constructible stratification used to type the tensor factors."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "Existence of the actual ordinary-etale right adjoints, without a pro-etale ambient adjoint datum."
+   },
+   {
+    "node": "thm-cbc-finite-torsion",
+    "why": "Arbitrary-base-change compact-support exchange, with identity and two pasting laws, used for product projections even when they are nonseparated."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Compactifiability of the separated finite-type maps used by the ordinary-etale construction."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Compact-support composition and exchange on unbounded etale complexes, so the restriction Hom chain is a Yoneda argument on the whole category (added by the maintainer reader)."
+   },
+   {
+    "node": "lem-amb-shriek-open-exchange-adjoint",
+    "why": "Pairs the Hom-chain restriction isomorphism with the specific open compact-support exchange; used for the target-open counit equation (added by the maintainer reader)."
+   },
+   {
+    "node": "thm-cbc-finite-level-proetale",
+    "why": "The pro-etale exchange is the transported etale exchange; used to transport the etale calculations (added by the maintainer reader)."
+   }
+  ]
+ },
+ "tool_uses": [
+  "fix-prop-projection-formula",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-etale-compact-comparisons",
+  "lem-asd-open-projection-exchange",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-comparison-open-tensor-coherence",
+  "lem-sf-finite-cover-ctf-locality",
+  "lem-sf-flat-model",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lemma-constructible-pullback-constant",
+  "lemma-constructible-pullback-stratification",
+  "thm-amb-etale-exceptional-adjoint",
+  "thm-cbc-finite-torsion",
+  "thm-nagata-compactification",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-amb-shriek-open-exchange-adjoint",
+  "thm-cbc-finite-level-proetale"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-86f05fb40",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-86f05fb40 (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, all 10 steps, every cited statement, the parent's uses (sk-thm-sf-kunneth-verdier steps 9, 10, 19) and the blueprint α paragraph in main-20261015 (affine factorization gives α locally; Rf^! commutes with étale pullback compatibly with α). The statement is correct and not weakened. The reading of Ku_! by its compactification formula is right: on a separated base it agrees with sk-def-sf-kv-maps(i) through sk-thm-sf-kunneth-relative(iv) (PF^-1 when g=id) composed with the Cartesian exchange. The STATEMENT-DISPUTED note about the separated base is correct. Three places used more than the cited statements say (C3/C4), and I repaired them in fixes/dag/nodes/sec-six-functors/lem-sf-kv-affine-locality.json. (1) Step 2 ran its Hom chain only over bounded-below M, using composition on D^+, but it never showed that u^*G_fK and G_{f'}v^*K are bounded below on possibly nonseparated X. It now uses lem-amb-unbounded-compact-support-comparisons, so the chain and the Yoneda argument hold on all of D(W_et). (2) Step 7's identity ε_{F_V}P_{F_V}(ρ)=b^*ε_F ξ^{-1} needs the open compact-support exchange to be paired with the Hom-chain restriction isomorphism. thm-cbc-finite-torsion does not state this, but lem-amb-shriek-open-exchange-adjoint does exactly (κ=Rf_!(ε_v)δ^{-1}=ε_u Du_!(C^{-1})), and the step now cites it. (3) Step 8 carried the open/tensor factor over to pro-étale but not the proper projection factor or the exchange. It now cites thm-cbc-finite-level-proetale (the pro-étale exchange is the transported étale one) and lem-weil-pbc-ringed-exchange-tensor-coherence for the non-Cartesian square of ringed topoi (ν, p). Other checks passed: f' is separated and of finite type; Noetherianity and Nagata apply; exchange needs no hypothesis on the nonseparated projection q; PF Tor domains are met through flat models and constructible pullback; step 4 is a correct paste of the two cited equations; the steps 5/6 source-open calculation holds; the factorization W⊂X_V⊂X is correct; step 9 meets the Noetherian-topology hypothesis of lem-sf-finite-cover-ctf-locality, with the cohomological interval taken separately by exact restriction and the sheaf axiom; empty and singleton covers work; step 10's uniform bounds match the definitions exactly. Small cases: identity square, W or Z' empty, f=id on the line with doubled origin. No new nodes and no duplicates (I compared lem-trf-exceptional-tensor-open-restriction, lem-pur-finite-clopen-exceptional-restriction and cor-exc-base-change-open-immersion-general). No SGA, and the four newly cited nodes create no cycle. I accept all 16 declared tool_uses, plus the three generic ones added by the repair (now listed in split_report.tool_uses).; 1 file(s) fixed by the reviewer"
  }
 }
