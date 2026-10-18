@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **1261**, closure **285**, holes in definitions **14**, definitions with undetermined data **28** (closure **8**).
+Holes now: library **1261**, closure **285**, holes in definitions **13**, definitions with undetermined data **28** (closure **8**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -12,7 +12,6 @@ Definitions with holes (def/instance/structure field):
 - `Sheaf.CategoryTheory.FilteredHomologyExactCouple::CategoryTheory.filteredHomologyEIso` (def, line 36)
 - `Sheaf.CategoryTheory.FilteredHomologyExactCouple::CategoryTheory.filteredHomologyExactCouple` (def, line 29)
 - `WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization::AlgebraicGeometry.ProEtale.isLocalization_boundedConstructibleExtendScalars` (instance, line 175)
-- `WeilConjectures.PoincareDuality.ProjectionFormula::AlgebraicGeometry.ProEtale.CondensedRing.isIso_boundedConstructibleExceptionalProjectionMorphism` (instance, line 770)
 - `WeilConjectures.SixFunctors.Etale.Derived.UpperShriek::AlgebraicGeometry.Etale.hasBoundedBelowUpperShriek` (instance, line 177)
 - `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible::AlgebraicGeometry.ProEtale.CondensedRing.isMonoidalClosed_boundedConstructible` (instance, line 438)
 - `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible::AlgebraicGeometry.ProEtale.CondensedRing.isMonoidal_boundedConstructible` (instance, line 429)
@@ -56,8 +55,8 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 1083 | 194 |
-| WeilConjectures | 178 | 91 |
+| Sheaf | 1084 | 195 |
+| WeilConjectures | 177 | 90 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
@@ -71,7 +70,7 @@ No closure delta is quoted across 660345513: proof-dependency imports changed th
 |---|---:|
 | proved | 3812 |
 | decomposed | 52 |
-| moved | 4063 |
+| moved | 4065 |
 | pruned | 136 |
 | other | 631 |
 
@@ -84,8 +83,8 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | A3 | 135 | 131 | 85 | 46 | 59/135 (43.7%) |
 | A4 | 84 | 89 | 54 | 35 | 41/84 (48.8%) |
 | B2 | 136 | 142 | 88 | 54 | 55/136 (40.4%) |
-| B3 | 157 | 164 | 93 | 71 | 64/157 (40.8%) |
-| B4 | 76 | 78 | 49 | 29 | 34/76 (44.7%) |
+| B3 | 158 | 165 | 94 | 71 | 65/158 (41.1%) |
+| B4 | 77 | 79 | 50 | 29 | 35/77 (45.5%) |
 | C1 | 151 | 155 | 114 | 41 | 76/151 (50.3%) |
 | C2 | 128 | 123 | 86 | 37 | 59/128 (46.1%) |
 | C3 | 123 | 131 | 82 | 49 | 57/123 (46.3%) |
@@ -188,11 +187,11 @@ Nearest targets (claims from the scanned git tree; live leases may differ):
 |---|---:|---:|---|
 | WeilConjectures.PoincareDuality.Poincare | 0 | 1 | A4 |
 | Sheaf.SmoothPurity.NormalizedWitness | 1 | 1 | — |
-| WeilConjectures.PoincareDuality.ProjectionFormula | 2 | 1 | B3 |
 | WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible | 2 | 3 | B2 |
 | WeilConjectures.ZetaFunction.TraceFormula | 2 | 1 | — |
 | Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalBounded | 3 | 1 | — |
 | Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructibleCohomology | 3 | 1 | — |
+| Sheaf.PoincareDuality.ProperProjectionFormulaBounded | 3 | 1 | — |
 | WeilConjectures.WeilSheaf.PoincareDuality | 3 | 1 | — |
 | Sheaf.WeilSheaf.AdicFiniteCoefficientBound | 4 | 1 | — |
 | Sheaf.WeilSheaf.CohomologyGeometricConjugacy | 4 | 1 | — |
