@@ -13,7 +13,6 @@ public import Mathlib.CategoryTheory.Preadditive.LeftExact
 public import Mathlib.Algebra.Homology.ShortComplex.Exact
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
-import Sheaf.CategoryTheory.RingedSiteModules
 
 /-!
 # Direct image of modules over the constant ring on the small étale site
@@ -30,6 +29,8 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Etale
 
+set_option maxHeartbeats 400000 in
+-- The universal-property uniqueness check compares the expanded pushforward functors.
 /-- The canonical scalar map and the additive left exact module direct image.
 Source: Stacks Project, sites-modules, Tags 03CV, 03D9--03DC; sites-cohomology,
 Section 071J (blueprint: lem-weil-pbc-module-direct-image-left-exact).
@@ -98,6 +99,42 @@ theorem existsUnique_constantModuleDirectImage_leftExact
             (ShortComplex.mk ((SheafOfModules.pushforward.{max u v + 1} ρ).map S.f)
               ((SheafOfModules.pushforward.{max u v + 1} ρ).map S.g) h).Exact ∧
               Mono ((SheafOfModules.pushforward.{max u v + 1} ρ).map S.f)) := by
-  sorry
+  let B := MorphismProperty.Over.pullback @Etale ⊤ u
+  let JV := V.smallGrothendieckTopology (Q := @Etale) @Etale
+  let JU := U.smallGrothendieckTopology (Q := @Etale) @Etale
+  let A := RingCat.of (ULift.{max u v + 1} R)
+  let RU := (constantSheaf JU RingCat.{max u v + 1}).obj A
+  let T := (B.sheafPushforwardContinuous RingCat.{max u v + 1} JV JU).obj RU
+  let η : (Functor.const V.Etaleᵒᵖ).obj A ⟶ T.obj :=
+    B.op.whiskerLeft (toSheafify JU ((Functor.const U.Etaleᵒᵖ).obj A))
+  let ρ : (constantSheaf JV RingCat.{max u v + 1}).obj A ⟶ T :=
+    ⟨sheafifyLift JV η T.property⟩
+  let F := SheafOfModules.pushforward.{max u v + 1} ρ
+  let RV := (constantSheaf JV RingCat.{max u v + 1}).obj A
+  let G := SheafOfModules.toSheaf.{max u v + 1} RV
+  have : PreservesFiniteLimits (F ⋙ G) :=
+    inferInstanceAs (PreservesFiniteLimits
+      (SheafOfModules.toSheaf.{max u v + 1} RU ⋙
+        B.sheafPushforwardContinuous AddCommGrpCat.{max u v + 1} JV JU))
+  have : PreservesFiniteLimits F := preservesFiniteLimits_of_reflects_of_preserves F G
+  have : F.Additive := Functor.additive_of_preserves_binary_products F
+  refine ⟨ρ, ?_, ?_⟩
+  · refine ⟨?_, ?_, ?_, ?_, ?_, ?_⟩
+    · exact toSheafify_sheafifyLift JV η T.property
+    · rfl
+    · exact inferInstanceAs F.Additive
+    · infer_instance
+    · intros
+      infer_instance
+    · intro S hS hmono
+      have : Mono S.f := hmono
+      refine ⟨(S.map F).zero, ?_, ?_⟩
+      · exact hS.map_of_mono_of_preservesKernel F hmono inferInstance
+      · infer_instance
+  · intro σ hσ
+    apply ObjectProperty.hom_ext
+    dsimp only [ρ]
+    apply sheafifyLift_unique
+    exact hσ.1
 
 end AlgebraicGeometry.Etale

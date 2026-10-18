@@ -53,29 +53,30 @@
    }
   },
   {
-   "text": "Addition of module-sheaf morphisms is componentwise, since the sum of two linear maps is linear and its restrictions commute. Consequently (u_*(\\varphi+\\psi))_W=(\\varphi+\\psi)_{B(W)}=\\varphi_{B(W)}+\\psi_{B(W)}=(u_*\\varphi+u_*\\psi)_W, and u_*0=0. This proves additivity on morphisms.",
+   "text": "Forget a module sheaf to its underlying abelian sheaf. Mathlib SheafOfModules.toSheaf preserves finite limits (from sectionwise module-sheaf limits) and reflects them. After this forgetful functor, the module pushforward is definitionally the underlying-abelian-sheaf functor followed by the continuous sheaf pushforward. That continuous pushforward is precomposition on presheaves, and hence preserves finite limits, since sheafToPresheaf creates limits. Reflection therefore proves that the module pushforward preserves finite limits, in particular finite products and the parallel-pair limits defining kernels.",
    "uses": [
+    "lem-weil-pbc-module-sheaves-limits-sectionwise",
     "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D9, section-kernels, paragraph defining addition on morphisms"
-   }
-  },
-  {
-   "text": "Apply the sectionwise module-sheaf limits lemma on U_Et with O=R_U and on V_Et with O=R_V. For a finite family (F_i), its product has sections \\prod_i F_i(B(W)) and componentwise scalar action. The canonical comparison u_*(\\prod_i F_i)\\to\\prod_i u_*F_i is therefore the identity on these tuples at W, and both R_V(W)-actions send (s_i)_i to (\\rho_W(a)s_i)_i. It is an isomorphism of module sheaves, including for the empty product, whose sections are zero. For \\varphi:F\\to F^{\\prime}, the same lemma computes its kernel sectionwise: both u_*(\\ker\\varphi)(W) and (\\ker u_*\\varphi)(W) are {s\\in F(B(W)): \\varphi_{B(W)}(s)=0}, with the same restrictions and scalar action. The canonical kernel comparison is thus an isomorphism of module sheaves. This proves preservation of finite products and kernels.",
-   "uses": [
-    "lem-weil-pbc-module-sheaves-limits-sectionwise"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03DA (lemma-abelian), 03DB (lemma-limits-colimits), and 03DC (lemma-exactness-pushforward-pullback), clause (1)"
+    "place": "Tags 03DB (lemma-limits-colimits), 03DC (lemma-exactness-pushforward-pullback), clause (1); Mathlib sectionwise module-sheaf limits and continuous presheaf precomposition"
    }
   },
   {
-   "text": "By the definition of left exact additive functor, step 4 gives left exactness. Explicitly, an exact sequence $0\\to F_1\\xrightarrow{a}F_2\\xrightarrow{b}F_3$ identifies $a$ with a kernel of $b$: the induced map $F_1\\to\\ker b$ is an isomorphism. A functor sends an isomorphism and its inverse to inverse maps. Applying $u_*$ to this identification and composing with the canonical kernel comparison isomorphism of step 4 therefore identifies $u_*a$ with the kernel inclusion of $u_*b$. This is precisely exactness of $0\\to u_*F_1\\to u_*F_2\\to u_*F_3$.",
+   "text": "A functor between preadditive categories preserving binary products is additive, by Mathlib Functor.additive_of_preserves_binary_products (the equivalence recorded by def-sp-left-exact-additive). Apply this to the finite-product preservation proved in the preceding step. Preservation of zero morphisms follows from additivity.",
+   "uses": [
+    "def-sp-left-exact-additive"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D9 (section-kernels), additive structure and finite direct sums; the finite-product characterization of additive functors in def-sp-left-exact-additive"
+   }
+  },
+  {
+   "text": "For a short complex S which is exact and whose first map is mono, its first map exhibits a kernel of its second map. Apply the module pushforward and its preservation of kernels from step 3. Mathlib ShortComplex.Exact.map_of_mono_of_preservesKernel gives exactness of S.map F, and finite-limit preservation gives Mono (F.map S.f). The witness for the displayed composite being zero is (S.map F).zero. Finally, any scalar map satisfying the displayed factorization equals the constructed scalar map by sheafifyLift_unique; forgetting from ring sheaves to presheaves is faithful.",
    "uses": [
     "def-sp-left-exact-additive"
    ],
@@ -97,7 +98,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tags 03CV (definition-sheaf-modules), 03D9 (section-kernels), 03DA (lemma-abelian), 03DB (lemma-limits-colimits), 03DC (lemma-exactness-pushforward-pullback); direct sectionwise proof for the constant-ring specialization"
+  "place": "Tags 03CV, 03D9--03DC; direct sectionwise finite-limit proof, then the finite-product criterion for additivity and preservation of the kernel description of a left exact sequence. Implemented using Mathlib sheafifyLift, toSheaf, Functor.additive_of_preserves_binary_products and ShortComplex.Exact.map_of_mono_of_preservesKernel."
  },
  "mathlib_searches": [
   {
@@ -225,5 +226,15 @@
   "by": "ND",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E1",
+  "result": "pass",
+  "landing": "20261018T062729-L-641807",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

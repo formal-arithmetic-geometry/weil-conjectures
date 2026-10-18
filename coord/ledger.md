@@ -15976,3 +15976,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:27 L: merged deliver/D8/Sheaf.AlgebraicGeometry.IntegralSurjectiveTargetBaseChange (stage 3; reviewer PASS; first push; landing 20261018T062728-L-641268 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:27 L: merged deliver/D8/Sheaf.FieldTheory.FiniteInseparableElement (stage 3; reviewer PASS; first push; landing 20261018T062728-L-641444 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:27 L: merged deliver/D9/Sheaf.FieldTheory.InseparableTensorNilpotent (stage 3; reviewer PASS; first push; landing 20261018T062729-L-641633 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:27 L: merged deliver/E1/Sheaf.AlgebraicGeometry.EtaleConstantModuleDirectImageLeftExact (stage 3; reviewer PASS; first push; landing 20261018T062729-L-641807 (proof); batch 20261018T062645; modules 1; new nodes 0)
