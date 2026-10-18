@@ -16,9 +16,218 @@
   "def-weil-pbc-henselian-terminology",
   "lem-per-finite-residue-gysin-naturality"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First record the geometry needed to compare factorizations. For a finite map $f:Y\\to X$, a specified geometric specialization $\\bar y\\rightsquigarrow\\bar x$ and a geometric point $\\bar y'$ above its general point, strict-localize at $\\bar x$. The finite-base decomposition writes the pullback of $Y$ as a disjoint union of strictly local schemes. The map from the local scheme $X_{(\\bar y)}$ with its chosen lift lands in exactly one summand; its closed geometric point determines $\\bar x'$ and the lifted specialization. The Cartesian strict-local comparison makes this lift unique up to the isomorphisms respecting the specified geometric-point maps. Apply this successively to a factorization. Uniqueness ensures the composite is the chosen lifted specialization; conversely projection recovers the factorization below. Codimensions are preserved: locally choose a dimension function on $X$; its finite-type pullback has no transcendence-degree term because the residue extensions for a finite map are finite. The dimension-function difference formula on source and target therefore gives the same codimension for each arrow. Thus the correspondence preserves arrows of codimension zero or one, including the intervening geometric isomorphisms.",
+   "uses": [
+    "lem-trf-finite-base-strict-localization",
+    "lem-per-local-dimension-function-calculus",
+    "lem-per-finite-type-dimension-function"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Propositions 2.3.2–2.3.3 and Proposition 3.5.4 proof"
+   }
+  },
+  {
+   "text": "For an immediate lifted arrow, use exactly the commuting square of finite-residue Gysin naturality, with the isomorphisms $B_{f,\\bar z,M}$. For codimension zero the same square is the natural transport of the residue-field-valued costalk under the specified field embeddings: the supported-composition identification and field Gysin tensor map defining $B$ are natural in these embeddings. The chain composite applies the $i$-th factor to $M(i)$, while the square for that factor is stated for the complex $M(i)$ and has target $B_{f,\\cdot,M(i)}(1)$; to chain the squares, identify $B_{f,z,M(i)}(1)$ with $B_{f,z,M(i+1)}$. Use the pullback, tensor and evaluation identifications of the Tate lines in [lem-asd-etale-finite-twist-pullback], so that $f^!(M(i))(1)\\cong f^!(M(i+1))$ and $a_z^*(C_wM(i))(1)\\cong a_z^*C_w(M(i+1))$. After an etale-local trivialization of $\\Lambda(1)$, the three $\\Lambda$-linear factors of $B$ (Gysin class, field tensor map, supported comparison) are natural in the complex. Therefore $B_{M(i+1)}=B_{M(i)}\\otimes1$, and a change of trivialization multiplies both sides by the same unit. Negative twists use evaluation. Multiplying these squares in chain order then cancels the intervening $B$'s and yields\n$$T_{\\gamma'}^a(f^!M)\\,H^a(B_{f,\\bar y',M})=H^{a+2r}(B_{f,\\bar x',M}(r))\\,T_\\gamma^a(M),$$\nwhere $r$ is the common codimension and the twist at each stage is included. The two endpoint $B$'s are isomorphisms. By the correspondence of step 1, equality for all factorizations below is therefore equivalent to equality for all factorizations of the fixed lift. This proves the finite preserved-and-reflected clause without using higher residue transitivity.",
+   "uses": [
+    "lem-per-finite-residue-gysin-naturality",
+    "lem-per-prime-power-supported-calculus",
+    "lem-per-field-exceptional-tensor",
+    "def-per-potential-dualizing-complex",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proposition 3.5.4, including the commuting diagram"
+   }
+  },
+  {
+   "text": "Fix a geometric composite $\\bar y\\rightsquigarrow\\bar x$ of codimension $r\\le c$. Its specified map to $X_{(\\bar x)}$ places every intermediate point and specialization in that strict localization. The costalk identification there and ind-etale supported base change identify the input and output groups and each immediate transition with the original ones: the definition computes that transition after strict localization, reduction to the one-dimensional closure and normalization, so uses the same trait map and degree factor. Here each intermediate geometric point $\\bar x_i$, through its map $X_{(\\bar x_i)}\\to X_{(\\bar x)}$, gives a geometric point of $X_{(\\bar x)}$. The strict localization of $X_{(\\bar x)}$ at that point is identified over $X$ with $X_{(\\bar x_i)}$ by [lem-trf-ind-etale-strict-local-invariance], since $X_{(\\bar x)}\\to X$ is ind-etale on the affine chart. Hence the specified maps of strict localizations, and with them the reduced closures that define codimensions, are the same in $X$ and in $X_{(\\bar x)}$. The corresponding identifications for codimension-zero arrows are transport along the same maps of geometric points. Consequently chain equality is unchanged. The strict localization is Noetherian by the strict-henselization theorem; it is excellent because it is Noetherian and ind-etale over an excellent affine chart, hence weakly etale. It is strictly henselian by its construction.",
+   "uses": [
+    "lem-per-prime-power-costalk-reduction",
+    "lem-per-ind-etale-closed-support-base-change",
+    "lem-trf-ind-etale-strict-local-invariance",
+    "def-per-potential-dualizing-complex",
+    "lem-sc-strict-henselization-noetherian",
+    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-exc-weakly-etale-excellent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Definition 1.4.1, etale locality in 2.2, and Lemma 3.5.5 proof"
+   }
+  },
+  {
+   "text": "In the strictly local scheme of step 3 let $i:Z\\hookrightarrow X_{(\\bar x)}$ be the reduced closure of the image of $\\bar y$. It is integral, local with the same closed point, and of dimension $r$ by the definition of codimension. A quotient of a henselian local ring is henselian, and its residue field is unchanged, so $Z$ is strictly henselian; it is excellent as a finite-type quotient of an excellent ring. The closed immersion is finite. Apply step 2 to $i$, with coefficient complex $i^!M$: the supported-composition identifications identify its endpoint costalks with those of $M$. All intermediate points of the specified specialization belong to this closure. Hence the assertion is tested on $Z$ with $i^!M$, whose bounded-below exceptional restriction is part of the cited supported calculus. It suffices now to prove the local integral assertion in every dimension $r\\le c$.",
+   "uses": [
+    "lem-weil-pbc-quotient-henselian-pair",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-per-prime-power-supported-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Lemma 3.5.5 proof"
+   }
+  },
+  {
+   "text": "For dimension zero an integral strictly local scheme is the spectrum of a separably closed field. Every arrow under consideration is codimension-zero transport, so composition is the functorial composition along the specified geometric maps. This proves the local assertion in dimension zero for every complex, and also the claimed dense-open and truncation tests in that case. In the following steps assume $r\\ge1$.",
+   "uses": [
+    "def-per-potential-dualizing-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Remark 1.4.2 and the dimension-zero case of Definitions 3.5.1–3.5.3"
+   }
+  },
+  {
+   "text": "Let $S$ be integral strictly local of dimension $r$, with geometric generic point $\\bar\\eta$ and closed point $s$. Naturality of each immediate transition, hence of its composite, gives a commutative square for $\\tau_{\\le0}K\\to K$. At $\\bar\\eta$ the costalk is just the exact geometric fibre, so the induced map on $H^0$ is an isomorphism. Equality of the two composites for $\\tau_{\\le0}K$ therefore implies equality for $K$; no isomorphism on the target is needed for this implication.",
+   "uses": [
+    "def-per-potential-dualizing-complex",
+    "prop-weil-pbc-geometric-stalks-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Lemma 3.5.6(a)"
+   }
+  },
+  {
+   "text": "Apply the ordinary truncation triangle\n$$\\tau_{\\le-1}K\\longrightarrow\\tau_{\\le0}K\\longrightarrow\\mathcal H^0K\\longrightarrow(\\tau_{\\le-1}K)[1].$$\nThe supported-cohomology bound is $2r$ on sheaves. The upper-amplitude lemma therefore puts $R\\Gamma_s(\\tau_{\\le-1}K(r))$ in degrees at most $2r-1$. Both its $H^{2r}$ and $H^{2r+1}$ vanish. The long exact sequence gives an isomorphism on $H^{2r}_s$ between the middle and right terms. At the geometric generic point the map also induces an isomorphism on $H^0$. The naturality square for either chain thus shows that equality for $\\tau_{\\le0}K$ is equivalent to equality for $\\mathcal H^0K$. The twist is an invertible rank-one locally constant coefficient sheaf, so does not change the cohomology bounds.",
+   "uses": [
+    "lem-sf-derived-truncation-triangle",
+    "lem-per-strict-local-etale-dimension-bounds",
+    "lem-etale-derived-functor-upper-amplitude",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-weil-pbc-derived-cohomology-ladder",
+    "def-per-potential-dualizing-complex",
+    "lem-asd-finite-etale-twist-line"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Lemma 3.5.6(b), using Proposition 3.2.1"
+   }
+  },
+  {
+   "text": "Let $j:V\\hookrightarrow S$ be dense open and $F$ a sheaf. Write $C=i_*i^*F$ for the quotient in $0\\to j_!j^*F\\to F\\to C\\to0$. Its generic fibre is zero. On $S-\\{s\\}$ every point of its support has closure of dimension at most $r-1$: a strict chain in its proper closed support can be extended by the generic point of the integral scheme $S$. The support-dimension bound gives $H^q(S-\\{s\\},C(r))=0$ for $q\\ge2r-2$. On strictly local $S$, positive-degree cohomology of any sheaf vanishes. Localization consequently gives $H^{2r-1}_s(C(r))=H^{2r}_s(C(r))=0$ if $r\\ge2$. If $r=1$, $C$ is supported at $s$, and exactness of global sections on $S$ makes all its positive supported cohomology zero, giving the same two vanishings. The long exact sequence now shows that $j_!j^*F\\to F$ is an isomorphism on $H^{2r}_s$, and it is plainly an isomorphism on the generic fibre. Naturality proves the equivalence of chain tests. Apply this also to any $G$ with $j^*F\\cong j^*G$ to obtain the dense-open clause.",
+   "uses": [
+    "lem-weil-pbc-open-closed-short-exact",
+    "lem-per-strict-local-etale-dimension-bounds",
+    "lem-weil-pbc-strictly-henselian-etale-acyclic",
+    "lem-exc-closed-support-triangle",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-weil-pbc-derived-cohomology-ladder",
+    "def-per-potential-dualizing-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Lemma 3.5.6(c), using Proposition 3.2.1"
+   }
+  },
+  {
+   "text": "It suffices to prove the local test for constructible sheaves. Indeed, express any sheaf $F$ as a filtered colimit of constructible sheaves. Its geometric generic fibre is the colimit of their fibres: geometric inverse image is a left adjoint. Thus each input element comes from some constructible $F_\\alpha$ and an element of $(F_\\alpha)_{\\bar\\eta}$. Naturality of the chain composites shows their difference on that input is the image of the difference for $F_\\alpha$, hence zero if every constructible test holds. There is no need to assert that costalk cohomology commutes with this colimit.",
+   "uses": [
+    "lem-weil-pbc-module-sheaf-colimit-constructible",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-per-potential-dualizing-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Lemma 3.5.7, sentence reducing to constructible M"
+   }
+  },
+  {
+   "text": "For constructible $F$ on integral strictly local $S$, take the finite normal trivializing cover $f:Y\\to S$ and its dense etale open $V$. Because $Y$ is integral and finite over henselian local $S$, the integral-component permanence theorem makes $Y$ strictly henselian local. Excellence is preserved by finite type, and the dimension is $r$: on coordinate rings the integral injective map has equal dimension. Thus $Y$ satisfies the hypotheses occurring in $Q_c$. Over $f^{-1}V$ the finite map is etale, so its normalized exceptional restriction is ordinary inverse image (the relative-dimension-zero smooth comparison); supported calculus identifies the restriction of $f^!F$ there with the constant sheaf $\\underline N$. Lift the given geometric generic-to-closed specialization by step 1. The two lifted chains have this same composite.",
+   "uses": [
+    "lem-per-generic-finite-normal-trivialization",
+    "lem-trf-integral-component-henselian-permanence",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-weil-pbc-integral-injective-dimension-equal",
+    "lem-per-prime-power-supported-calculus",
+    "lem-per-noetherian-prime-power-smooth-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Lemma 3.5.7, finite cover and generic exceptional restriction"
+   }
+  },
+  {
+   "text": "Assume $Q_c$. On the normal strictly local $Y$ of step 10 it gives equality of the two chain maps for $\\Lambda$. This implies equality for every constant module $\\underline N$: for each $n\\in N$ use the sheaf map $\\Lambda_Y\\to\\underline N_Y$ sending $1$ to $n$; its naturality square sends the equality on $1$ to equality on $n$, and these are all elements of the geometric generic fibre. By step 8 the same equality holds for $\\mathcal H^0(f^!F)$, since it restricts to $\\underline N$ on the dense etale open. By steps 6–7 it holds for $f^!F$. Step 2 reflects it to $F$. Steps 9 and 6–7 give the assertion for every bounded-below complex on $S$. Steps 3–4 give it on the original arbitrary excellent scheme. This proves $Q_c\\Rightarrow P_c$ in degree zero.",
+   "uses": [
+    "def-per-potential-dualizing-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Lemma 3.5.7, final half of proof"
+   }
+  },
+  {
+   "text": "Conversely $P_c$ gives $Q_c$ by taking precisely its normal strictly local schemes, constant coefficient complex and degree zero. Finally for an arbitrary initial degree $a$, apply the degree-zero conclusion to $K[a]$: by the cohomological convention $H^0(C_{\\bar y}K[a])=H^a(C_{\\bar y}K)$ and $H^{2r}(C_{\\bar x}K[a](r))=H^{a+2r}(C_{\\bar x}K(r))$. Supported derived functors commute with shifts, and the trait construction of the normalized immediate transition is applied termwise and totalized, so the degree-zero chain composite for $K[a]$ is the degree-$a$ composite for $K$, with the same twists. This proves the full equivalence and all reductions stated.",
+   "uses": [
+    "lem-pc-right-derived-functor-triangulated",
+    "def-per-potential-dualizing-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Definitions 3.5.1–3.5.3 and Lemmas 3.5.5–3.5.7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-per-potential-dualizing-complex",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-asd-finite-etale-twist-line",
+  "lem-etale-derived-functor-upper-amplitude",
+  "lem-exc-closed-support-triangle",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-exc-weakly-etale-excellent",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-per-field-exceptional-tensor",
+  "lem-per-finite-residue-gysin-naturality",
+  "lem-per-finite-type-dimension-function",
+  "lem-per-generic-finite-normal-trivialization",
+  "lem-per-ind-etale-closed-support-base-change",
+  "lem-per-local-dimension-function-calculus",
+  "lem-per-noetherian-prime-power-smooth-duality",
+  "lem-per-prime-power-costalk-reduction",
+  "lem-per-prime-power-supported-calculus",
+  "lem-per-strict-local-etale-dimension-bounds",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-sf-derived-truncation-triangle",
+  "lem-trf-finite-base-strict-localization",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-trf-integral-component-henselian-permanence",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-derived-cohomology-ladder",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-integral-injective-dimension-equal",
+  "lem-weil-pbc-module-sheaf-colimit-constructible",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-weil-pbc-quotient-henselian-pair",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "lem-weil-pbc-strictly-henselian-etale-acyclic",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, Proposition 3.5.4 and Lemmas 3.5.5–3.5.7, printed pp.275–276; definitions and finite lifting in 1.4, 2.3"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +260,38 @@
    "exit": 0,
    "date": "2026-10-18",
    "verdict": "no match: the returned declarations do not state this etale residue or connectedness assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "Costalk, residue map, finite morphism, strict henselian, constructible sheaf, chain independence",
+   "results": "loogle: unknown identifier 'Costalk'",
+   "date": "2026-10-18",
+   "verdict": "no match: none of the returned declarations states etale residue-chain independence or its reductions"
+  },
+  {
+   "tool": "grep",
+   "query": "residue.*chain|specialization.*costalk|strict.*henselian",
+   "results": "no hits",
+   "date": "2026-10-18",
+   "verdict": "no match: none of the returned declarations states etale residue-chain independence or its reductions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "independence of iterated etale residue maps under finite maps and reduction to normal strictly local constant coefficients",
+   "results": "AlgebraicGeometry.Scheme.residue; IsLocalRing.residue; AlgebraicGeometry.LocallyRingedSpace.residue_comp_residueFieldMap_eq_stalkMap_comp_residue; IsLocalRing.isLocalHom_residue; AlgebraicGeometry.Scheme.Hom.residueFieldMap; IsLocalRing.ResidueField.map_residue; AlgebraicGeometry.Scheme.residue_descResidueField; IsLocalRing.ResidueField.map_comp",
+   "date": "2026-10-18",
+   "verdict": "no match: none of the returned declarations states etale residue-chain independence or its reductions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Residue chain independence for arbitrary etale complexes reduces to the constant sheaf on normal strictly henselian excellent local schemes",
+   "results": "Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime; AlgebraicGeometry.IsEtale.instFormallyUnramified; Algebra.instFormallyUnramifiedResidueField; Algebra.IsEtaleAt; Algebra.Etale.formallyEtale; Algebra.FormallySmooth.iff_injective_cotangentComplexBaseChange_residueField; Algebra.instEtaleOfIsStandardEtale; Algebra.exists_etale_of_isEtaleAt",
+   "date": "2026-10-18",
+   "verdict": "no match: none of the returned declarations states etale residue-chain independence or its reductions"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-normal-top-residue-class",
@@ -78,5 +315,119 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-residue-chain-reductions",
+  "worker": "stage1",
+  "summary": "Wrote the chain-by-chain finite comparison and the local, truncation, dense-open and generic monodromy reductions from ILO XVII. Reused prime-power coefficient inputs throughout and separated the dimension-zero and one-dimensional support cases. One new statement-only geometric trivialization lemma; no changes to the item statement.",
+  "blueprint": "The dimension-normalized duality input in the ancestor lem-per-artin-gabber-affine-curve, through the potential-dualizing generic model named in blueprint.from.place; realizes ILO XVII 3.5.4–3.5.7 under that input.",
+  "tool_uses": [
+   {
+    "node": "lem-asd-finite-etale-twist-line",
+    "why": "Generic ordinary-etale algebraic or cohomological tool used in the ILO XVII reduction; the unit has no separate statement providing this input."
+   },
+   {
+    "node": "lem-etale-derived-functor-upper-amplitude",
+    "why": "Generic ordinary-etale algebraic or cohomological tool used in the ILO XVII reduction; the unit has no separate statement providing this input."
+   },
+   {
+    "node": "lem-exc-closed-support-triangle",
+    "why": "Generic ordinary-etale algebraic or cohomological tool used in the ILO XVII reduction; the unit has no separate statement providing this input."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic ordinary-etale algebraic or cohomological tool used in the ILO XVII reduction; the unit has no separate statement providing this input."
+   },
+   {
+    "node": "lem-exc-weakly-etale-excellent",
+    "why": "Generic ordinary-etale algebraic or cohomological tool used in the ILO XVII reduction; the unit has no separate statement providing this input."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic ordinary-etale algebraic or cohomological tool used in the ILO XVII reduction; the unit has no separate statement providing this input."
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Generic ordinary-etale algebraic or cohomological tool used in the ILO XVII reduction; the unit has no separate statement providing this input."
+   },
+   {
+    "node": "lem-trf-finite-base-strict-localization",
+    "why": "Generic ordinary-etale algebraic or cohomological tool used in the ILO XVII reduction; the unit has no separate statement providing this input."
+   },
+   {
+    "node": "lem-trf-integral-component-henselian-permanence",
+    "why": "Generic ordinary-etale algebraic or cohomological tool used in the ILO XVII reduction; the unit has no separate statement providing this input."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Generic ordinary-etale algebraic or cohomological tool used in the ILO XVII reduction; the unit has no separate statement providing this input."
+   },
+   {
+    "node": "lem-weil-pbc-integral-injective-dimension-equal",
+    "why": "Generic ordinary-etale algebraic or cohomological tool used in the ILO XVII reduction; the unit has no separate statement providing this input."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaf-colimit-constructible",
+    "why": "Generic ordinary-etale algebraic or cohomological tool used in the ILO XVII reduction; the unit has no separate statement providing this input."
+   },
+   {
+    "node": "lem-weil-pbc-open-closed-short-exact",
+    "why": "Generic ordinary-etale algebraic or cohomological tool used in the ILO XVII reduction; the unit has no separate statement providing this input."
+   },
+   {
+    "node": "lem-weil-pbc-quotient-henselian-pair",
+    "why": "Generic ordinary-etale algebraic or cohomological tool used in the ILO XVII reduction; the unit has no separate statement providing this input."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "why": "Generic ordinary-etale algebraic or cohomological tool used in the ILO XVII reduction; the unit has no separate statement providing this input."
+   },
+   {
+    "node": "lem-weil-pbc-strictly-henselian-etale-acyclic",
+    "why": "Generic ordinary-etale algebraic or cohomological tool used in the ILO XVII reduction; the unit has no separate statement providing this input."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic ordinary-etale algebraic or cohomological tool used in the ILO XVII reduction; the unit has no separate statement providing this input."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Step 2: pullback/tensor/evaluation identifications of the Tate lines, needed to chain the twisted finite-residue squares (B of M(i+1) = B of M(i) tensor 1); generic etale tool, no unit node gives it."
+   },
+   {
+    "node": "lem-trf-ind-etale-strict-local-invariance",
+    "why": "Step 3: strict localization of X_(x) at an intermediate geometric point is X_(x_i) (Stacks 05WR); generic strict-henselization algebra, no unit node gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-asd-finite-etale-twist-line",
+  "lem-etale-derived-functor-upper-amplitude",
+  "lem-exc-closed-support-triangle",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-exc-weakly-etale-excellent",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-trf-finite-base-strict-localization",
+  "lem-trf-integral-component-henselian-permanence",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-integral-injective-dimension-equal",
+  "lem-weil-pbc-module-sheaf-colimit-constructible",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-weil-pbc-quotient-henselian-pair",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "lem-weil-pbc-strictly-henselian-etale-acyclic",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-trf-ind-etale-strict-local-invariance"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-b2b19bc64",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-b2b19bc64 (reviewer sub-agent of L); spot-checked: I read the item, all 12 steps, the new node and every cited statement in full, against ILO XVII Defs 3.5.1–3.5.3, Prop 3.5.4 and Lemmas 3.5.5–3.5.7 (printed pp.275–276, local PDF). The statement is the source's (C)^{<=c} <=> (C)^{<=c}_{loc,normal,Lambda} for Z/l^n, unchanged and not weakened; it is extended to every initial degree by the shift in Step 12. Steps 1 (05WR finite-base lifting; codimension preserved by dimension functions with trdeg 0), 4 (closed immersion), 5 (r=0) and 6–12 are correct. In Step 8 I re-derived the punctured bound with e=r-1, which gives H^{2r-1}_s=H^{2r}_s=0 for r>=2; the r=1 case is right. In Step 10, R->B is injective (f is closed and surjective), so dim Y=r and Y is strictly henselian; f^!=f^* on the etale locus comes from the relative-dimension-zero clause of the smooth-duality node. Two C1 faults are repaired in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-residue-chain-reductions.json. (1) Step 2 cancelled intermediate B maps across twists without B_{M(i+1)}=B_{M(i)} tensor 1; it now gives that argument citing lem-asd-etale-finite-twist-pullback, as the PASSed 3.5.4 node does. (2) Step 3 used (X_(x))_(x_i) = X_(x_i) without citing lem-trf-ind-etale-strict-local-invariance; it now cites it. proof_deps and tool_uses are updated. The new node lem-per-generic-finite-normal-trivialization is true (lisse locus, finite monodromy cover, Nagata normalization, equality over U), is the cover ILO p.276 asserts, and is statement-only with no duplicate in the DAG. Citing lem-per-finite-gysin-residue-covariance instead would close a cycle through higher-residue-transitivity, so the chain-level reproof is not a duplicate. There is no cycle. Batch-5: the target closure with and without the item's proof_deps differs only by the new node, so every flagged citation (field-exceptional-tensor, the dimension-function nodes, ind-etale closed-support base change, smooth-duality used at relative dimension 0, costalk-reduction, supported-calculus, trf finite-base strict localization, trf henselian permanence) is already reachable. Each is generic strict-localization algebra or a derived adjunction, not part of the trace formula or Poincare duality, so all are accepted. I accept the 17 declared tool_uses. No SGA is used.; 1 file(s) fixed by the reviewer"
  }
 }
