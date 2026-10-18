@@ -40,6 +40,7 @@ No idempotent completion, arbitrary isomorphism, or extra coefficient flatness i
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
 
 universe u v
 

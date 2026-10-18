@@ -304,11 +304,10 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-2bfad5113",
-  "group": "NE",
+  "reviewer": "NT-stage2-cc-c40dcb222",
+  "group": "NV",
   "result": "pass",
-  "note": "Re-push of the PASSed 4c33fc20260f: both Lean files byte-identical (sha 0fcce5a6, 47f44c4a), all node records identical; only the report (dry-run validation section) and blueprint-index differ. Landing returned 4c33 only because the library pass of SupportedCupFunctoriality hit the 60 s limit; the preliminary (37.2 s) and sandbox passes were clean, so the cause was load. Rechecked against live: the §1(C) old_statement/old_stmt_deps/old_proof/old_proof_deps equal the live node; the 6 citers equal the live direct citers; the cup-functoriality dep record is still Q67's 67 decls, kept as a superset of 79. Local clauses keep -frameBoundary/-frameBoundaryProduct, Chern clause positive. Theorem stmt_dep finding: PASS on point, since functorialCupPullback/ChangeSupport/Compare rest on .choose of that module's existsUnique theorems, and supported-hom is cited for its Hom model only. nt_compile --json at load ~60: pair clean, 35.9 s and 18.5 s; with the live importer ClosedSupportedCupVanishing, 27.6 s and 8.3 s. The profile shows kernel checks dominate (functorialCupKummerExt 13 s, FunctorialCupAlgebraLaws 17 s, ComparisonLaws 8 s); genInjectivity/linters off gave no gain back to back (32.1 vs 31.6 s), so no FIX. Maintainer: retry landing at lower load; whichever of this delivery and Q10's unlanded cup refactor (aceb9bacc30d) lands second must be rebased.",
-  "statement_corrected": true
+  "note": "Re-delivery fixes the 7de57 H13/H4 return: the lem-pur-divisor-class record keeps live module/declaration divisor_class and the seven live declarations first, with three appended same-module declarations (existsUnique_generalDivisorEtaleClasses, generalDivisorEtaleClasses = .choose, generalDivisorClass) and a lean.note. PurityDivisorClass.lean is live verbatim plus those three; PurityDivisorClassGeneral is removed and the import re-pointed. Item statement re-checked clause by clause: P gives A and N = ell^n with n >= 1; T separated finite type; Cartier = IsClosedImmersion + ker.IsInvertible; cl(D) = generalDivisorClass in the supported-Hom model; c_D = functorialCupCompare of the cartier_kummer_map etale witness at n-1/n-1. CartierEtaleKummerNormalization is the same SupportedKummerBoundary predicate, so no sign conflict. Pullback clause has a k-morphism, ChosenCartesianSquare and Cartier i'; no smoothness. Theorem stmt_deps genuine (.choose). Edge cases OK; signatures verbatim; lines <= 100. PurityFrameClass Nat.rec and DerivedPullbackTensorHom one-option speed-ups are interface-preserving. nt_compile --json clean at load ~50: DerivedPullbackTensorHom 46.4 s, PurityFrameClass 45.5 s, PurityDivisorClass 17.4 s, CartierClassAgreement 12.7 s; importer PurityFrameIndependence clean 18.6 s. Advisory: second reading is an author self-reading; the def-weil-derived-pullback-tensor-hom record is not visible in the snapshot; retry landing at lower load if it times out."
  },
  "statement_change": {
   "date": "2026-10-18",
@@ -500,14 +499,17 @@
    "WeilConjectures.PurityFiniteSetting.DivisorLocalEquations",
    "WeilConjectures.PurityFiniteSetting.DivisorAdditive",
    "WeilConjectures.PurityFiniteSetting.DivisorChern",
-   "WeilConjectures.PurityFiniteSetting.divisor_class"
+   "WeilConjectures.PurityFiniteSetting.divisor_class",
+   "WeilConjectures.PurityFiniteSetting.existsUnique_generalDivisorEtaleClasses",
+   "WeilConjectures.PurityFiniteSetting.generalDivisorEtaleClasses",
+   "WeilConjectures.PurityFiniteSetting.generalDivisorClass"
   ],
   "file": "lean/Sheaf/Paper/PurityDivisorClass.lean",
   "statement": "theorem divisor_class (P : PurityFiniteSetting.{u}) {B T D : Scheme.{u}} (b : B ⟶ Spec (.of P.field.k)) [IsSeparated b] [LocallyOfFiniteType b] [QuasiCompact b] (v : T ⟶ B) (d : ℕ) [SmoothOfRelativeDimension d v] [IsSeparated (v ≫ b)] [LocallyOfFiniteType (v ≫ b)] [QuasiCompact (v ≫ b)] (i : D ⟶ T) [IsClosedImmersion i] [Smooth (i ≫ v)] (hcodim : ∀ z : D, ringKrullDim (T.presheaf.stalk (i z)) = ringKrullDim (D.presheaf.stalk z) + (1 : WithBot ℕ∞)) : ∃ C : P.DivisorEtaleClasses T, P.DivisorEtaleNormalized T (v ≫ b) C ∧ (∀ C' : P.DivisorEtaleClasses T, P.DivisorEtaleNormalized T (v ≫ b) C' → C' = C) ∧ ∃ hI : i.ker.IsInvertible, P.DivisorLocalEquations (v ≫ b) C i hI ∧ P.DivisorAdditive T C ∧ P.DivisorChern (v ≫ b) C i hI",
   "branch": "newtargets-dag",
-  "by": "NE",
+  "by": "NV",
   "date": "2026-10-18",
   "existing": false,
-  "note": "Canonical relative Kummer normalization at ell^n, with a unique etale Ext family and its actual pro-etale supported-Hom image. Includes Cartierness of the smooth divisor, arbitrary etale local equations, the recorded rank-one frame product, product-ideal additivity after canonical support enlargement, and the ordinary torsor Kummer Chern normalization. Helper definitions have real data. Three already-landed nodes are added to stmt_deps for their canonical boundary specification, maps, and supported-Hom model. HEq records equality of the identical published Ext/Hom realizations and the singleton/range support transport, avoiding costly kernel normalization without introducing a comparison choice. Returned H3 repaired: both local equations are negative frame boundaries in the fixed Yoneda convention; ordinary Chern normalization remains positive. Source-based statement_change and all six citing nodes audited."
+  "note": "The landed PurityDivisorClass module and divisor_class declaration are retained unchanged. Its existence theorem is restricted to the smooth-pair setup and does not expose the general construction in the node's second paragraph. This same-module superset appends the general unique normalized family and its canonical class required by the Cartier-agreement statement. The definitions have real data, selected from the uniquely determining existsUnique theorem. The original seven declarations and all local-equation, additivity and Chern clauses remain available."
  }
 }

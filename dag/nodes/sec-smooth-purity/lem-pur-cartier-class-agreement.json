@@ -323,5 +323,28 @@
   "group": "Q14",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-8575b0383 (reviewer sub-agent of L); spot-checked: I read the item, all 21 cited node statements, lem-amb-cartier-kummer-map's full proof (steps 1-13), the parent thm-pur-localized-top-chern's use of the item, the blueprint sources (L1 of the parent's proof, lem-pur-divisor-class) and Stacks 03PL (etale-cohomology.tex l.2842) and 07A6 (sites-cohomology.tex l.3990). STATEMENT-DISPUTED correction is valid: for D=V(t) on Spec k[t], D->T is not flat, so the smooth-subfamily clause cannot be applied over B=T; the second paragraph of lem-pur-divisor-class covers every effective Cartier divisor (take B=T, identity). The parent still gets h^*cl(D)=cl(D'). The c_D normalization in the statement is exactly lem-amb-cartier-kummer-map's own construction (its proof steps 1-5, 8-10: c=q[2]∘nu^*(c~)∘a_T^{-1}, with q^{-1}(x⊗a)=p_r(x)⊗a), so it is a convention, not a C3 use of a proof. Steps 1-7 checked against the cited statements: same pair (P_D,s_D); cl(D)=t_*nu^*beta_D; cone identification; Ri_*=i_* via finite direct image; mu_N flat and K-flat, so B sits in degree 0; unit x->x⊗1; q nu^{-1}u=sigma rho; site comparison on bounded-below B[0]; pullback via lem-amb-cartier-kummer-map plus lem-pur-supported-hom-pullback, cancelled because chi is an isomorphism. Edge cases: D empty, T' empty, h landing in D (correctly excluded), non-reduced D, ramified h, e not dividing n. No new nodes and no cycle. All proof deps are on the sk-prop-an route, so the declared tool_uses are redundant; accepted tool_uses: none. No SGA source. Batch 5: def-pur-frame-class, lem-amb-relative-torsor-cohomology and lem-asd-ordinary-supported-kummer were already in the item's closure through its existing citation of lem-pur-divisor-class, so nothing new enters. The nodes reached in those chapters are lem-pod-etale-stalk-tensor-scalar (stalks commute with tensor and scalar extension) and lem-trf-filtered-localization-injective-model (filtered-injective models of DF^+). Both are generic foundations that neither nt-assume leaf gives; no trace-formula or Poincare-duality theorem, nt-assume leaf or batch-4 target is anywhere in the item's closure, so no RETURN."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CartierClassAgreement",
+  "declaration": "WeilConjectures.PurityFiniteSetting.cartier_class_agreement",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.agreementCartierEtale",
+   "WeilConjectures.PurityFiniteSetting.agreementCartierMap",
+   "WeilConjectures.PurityFiniteSetting.cartier_class_agreement"
+  ],
+  "file": "lean/Sheaf/Paper/CartierClassAgreement.lean",
+  "statement": "theorem cartier_class_agreement (P : PurityFiniteSetting.{u}) {T D : Scheme.{u}} (a : T ⟶ Spec (.of P.field.k)) [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a] (i : D ⟶ T) [IsClosedImmersion i] (hI : i.ker.IsInvertible) : P.generalDivisorClass a i hI = P.agreementCartierMap a i hI ∧ ∀ {T' D' : Scheme.{u}} (a' : T' ⟶ Spec (.of P.field.k)) [IsSeparated a'] [LocallyOfFiniteType a'] [QuasiCompact a'] (h : T' ⟶ T) (_ha : h ≫ a = a') (i' : D' ⟶ T') [IsClosedImmersion i'] (w : D' ⟶ D) (sq : ChosenCartesianSquare w i' i h) (hI' : i'.ker.IsInvertible), P.functorialCupPullback true i i' h w sq a 2 1 (P.generalDivisorClass a i hI) = P.generalDivisorClass a' i' hI'",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c40dcb222",
+  "group": "NV",
+  "result": "pass",
+  "note": "Re-delivery fixes the 7de57 H13/H4 return: the lem-pur-divisor-class record keeps live module/declaration divisor_class and the seven live declarations first, with three appended same-module declarations (existsUnique_generalDivisorEtaleClasses, generalDivisorEtaleClasses = .choose, generalDivisorClass) and a lean.note. PurityDivisorClass.lean is live verbatim plus those three; PurityDivisorClassGeneral is removed and the import re-pointed. Item statement re-checked clause by clause: P gives A and N = ell^n with n >= 1; T separated finite type; Cartier = IsClosedImmersion + ker.IsInvertible; cl(D) = generalDivisorClass in the supported-Hom model; c_D = functorialCupCompare of the cartier_kummer_map etale witness at n-1/n-1. CartierEtaleKummerNormalization is the same SupportedKummerBoundary predicate, so no sign conflict. Pullback clause has a k-morphism, ChosenCartesianSquare and Cartier i'; no smoothness. Theorem stmt_deps genuine (.choose). Edge cases OK; signatures verbatim; lines <= 100. PurityFrameClass Nat.rec and DerivedPullbackTensorHom one-option speed-ups are interface-preserving. nt_compile --json clean at load ~50: DerivedPullbackTensorHom 46.4 s, PurityFrameClass 45.5 s, PurityDivisorClass 17.4 s, CartierClassAgreement 12.7 s; importer PurityFrameIndependence clean 18.6 s. Advisory: second reading is an author self-reading; the def-weil-derived-pullback-tensor-hom record is not visible in the snapshot; retry landing at lower load if it times out."
  }
 }

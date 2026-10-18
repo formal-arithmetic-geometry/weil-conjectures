@@ -163,10 +163,10 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-7be9f89c8",
-  "group": "NZ",
-  "result": "fix",
-  "note": "Mathematics correct and FIX supplied. All 15 node clauses checked against the 3 modules. Reuses the existing EtaleFrame, kummerδ₀, the finite root-line twist, ordinaryFiniteRootMap and the recorded supportedCup; l^n needs no e|n. Each factor has its own support, the cup is ordered and left-associated, and c=0 gives the unit. Records verbatim; declaration lists exact. Both new nodes justified and their cited dependency nodes exist. Six true sorry obligations with proof docstrings, no hollow data. Edge cases and universes ok. nt_compile rc 0, no warnings (32.6/23.8/43.5 s). F1 (H11): the Second reading by NZ was a self-check; fixes/def-pur-frame-class.report.md replaces it with a real clause-by-clause reading. Observations: the node reuses n for level and relative dimension, followed verbatim and unused; the boundary sign is the Ext convention, not fixed by the existential dependency."
+  "reviewer": "NT-stage2-cc-c40dcb222",
+  "group": "NV",
+  "result": "pass",
+  "note": "Re-delivery fixes the 7de57 H13/H4 return: the lem-pur-divisor-class record keeps live module/declaration divisor_class and the seven live declarations first, with three appended same-module declarations (existsUnique_generalDivisorEtaleClasses, generalDivisorEtaleClasses = .choose, generalDivisorClass) and a lean.note. PurityDivisorClass.lean is live verbatim plus those three; PurityDivisorClassGeneral is removed and the import re-pointed. Item statement re-checked clause by clause: P gives A and N = ell^n with n >= 1; T separated finite type; Cartier = IsClosedImmersion + ker.IsInvertible; cl(D) = generalDivisorClass in the supported-Hom model; c_D = functorialCupCompare of the cartier_kummer_map etale witness at n-1/n-1. CartierEtaleKummerNormalization is the same SupportedKummerBoundary predicate, so no sign conflict. Pullback clause has a k-morphism, ChosenCartesianSquare and Cartier i'; no smoothness. Theorem stmt_deps genuine (.choose). Edge cases OK; signatures verbatim; lines <= 100. PurityFrameClass Nat.rec and DerivedPullbackTensorHom one-option speed-ups are interface-preserving. nt_compile --json clean at load ~50: DerivedPullbackTensorHom 46.4 s, PurityFrameClass 45.5 s, PurityDivisorClass 17.4 s, CartierClassAgreement 12.7 s; importer PurityFrameIndependence clean 18.6 s. Advisory: second reading is an author self-reading; the def-weil-derived-pullback-tensor-hom record is not visible in the snapshot; retry landing at lower load if it times out."
  },
  "lean": {
   "module": "Sheaf.Paper.PurityFrameClass",
@@ -191,8 +191,9 @@
   "file": "lean/Sheaf/Paper/PurityFrameClass.lean",
   "statement": "def frameClass (P : PurityFiniteSetting.{u}) {B V Z : Scheme.{u}} (b : B ⟶ Spec (.of P.field.k)) (v : V ⟶ B) [SmoothOfRelativeDimension P.level v] (i : Z ⟶ V) [IsClosedImmersion i] [Smooth (i ≫ v)] (c : ℕ) (_hcodim : ∀ z : Z, ringKrullDim (V.presheaf.stalk (i z)) = ringKrullDim (Z.presheaf.stalk z) + (c : WithBot ℕ∞)) (F : i.EtaleFrame c) : cupSupportedHom P (F.U.zeroLocusSubschemeι (Set.range F.f)) ((cupSingle P F.U).obj (P.frameTwist F.U c)) (2 * (c : ℤ))",
   "branch": "newtargets-dag",
-  "by": "NZ",
+  "by": "NV",
   "date": "2026-10-18",
-  "existing": false
+  "existing": false,
+  "note": "The recorded module timed out at 60 s in both overlay and server confirmation. Profiling identified generated recursive frameBoundaryProduct wrappers and a 51 s private-module linter pass. This interface-preserving repair writes the identical dependent left fold directly with Nat.rec, avoiding generated recursive wrappers; all public signatures and canonical constructions are retained."
  }
 }

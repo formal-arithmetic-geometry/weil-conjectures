@@ -205,9 +205,9 @@ def frameBoundaryProduct (P : PurityFiniteSetting.{u}) (X : Scheme.{u})
     (c : ℕ) → (f : Fin c → Γ(X, ⊤)) →
       cupSupportedHom P (X.zeroLocusSubschemeι (Set.range f))
         ((cupSingle P X).obj (P.frameTwist X c)) (2 * (c : ℤ))
-  | 0, f => P.frameEmptyClass X f
-  | d + 1, f => P.frameCupNext X a d f
-      (P.frameBoundaryProduct X a d (fun k : Fin d ↦ f k.castSucc))
+  := Nat.rec (fun f ↦ P.frameEmptyClass X f)
+    (fun d previous f ↦ P.frameCupNext X a d f
+      (previous (fun k : Fin d ↦ f k.castSucc)))
 
 /-- The class of the existing scheme-theoretic etale frame. The isPullback field
 identifies the displayed zero subscheme with Z times_V U; e is merely etale and
