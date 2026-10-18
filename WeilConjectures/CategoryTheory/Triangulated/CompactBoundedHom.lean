@@ -7,7 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.ObjectProperty.Retract
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
-public import WeilConjectures.CategoryTheory.Triangulated.BrownRepresentability.Telescope
+public import WeilConjectures.CategoryTheory.Triangulated.CompactObjExtension
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-!
@@ -43,19 +43,6 @@ namespace CategoryTheory.BrownRepresentability
 
 variable {C : Type u} [Category.{v} C] [Preadditive C]
 
-/-- In a preadditive category, if a finite sum `∑ⱼ gⱼ ≫ c.inj j` of morphisms into the point of
-a colimit cofan vanishes, then each `gⱼ` with `j` in the sum vanishes. -/
-lemma eq_zero_of_sum_comp_inj_eq_zero {J : Type*} {X : J → C} {c : Cofan X} (hc : IsColimit c)
-    {s : C} (T : Finset J) (g : ∀ j, s ⟶ X j) (h : ∑ j ∈ T, g j ≫ c.inj j = 0) {j : J}
-    (hj : j ∈ T) : g j = 0 := by
-  classical
-  have := h =≫ Cofan.IsColimit.desc hc (Pi.single (M := fun k ↦ X k ⟶ X j) j (𝟙 (X j)))
-  rw [Preadditive.sum_comp, Finset.sum_eq_single j] at this
-  · simpa using this
-  · intro b _ hb
-    rw [assoc, Cofan.IsColimit.fac, Pi.single_eq_of_ne hb, comp_zero]
-  · exact fun h ↦ (h hj).elim
-
 /-- A retract of a compact object is compact. -/
 lemma IsCompactObj.of_retract {s s' : C} (hs : IsCompactObj s') (h : Retract s s') :
     IsCompactObj s := by
@@ -79,39 +66,6 @@ lemma IsCompactObj.of_adjunction {D : Type u'} [Category.{v} D] [Preadditive D] 
 
 variable [HasZeroObject C] [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive]
   [Pretriangulated C]
-
-/-- Compact objects are stable under extensions: if `T₁ ⟶ T₂ ⟶ T₃ ⟶ T₁⟦1⟧` is distinguished with
-`T₁` and `T₃` compact, then `T₂` is compact. -/
-lemma IsCompactObj.of_distTriang (T : Triangle C) (hT : T ∈ distTriang C)
-    (h₁ : IsCompactObj T.obj₁) (h₃ : IsCompactObj T.obj₃) : IsCompactObj T.obj₂ := by
-  classical
-  intro J X c hc f
-  obtain ⟨S₁, a, ha⟩ := h₁ c hc (T.mor₁ ≫ f)
-  have hT' := inv_rot_of_distTriang _ hT
-  -- the components `aⱼ` extend along `T.mor₁`
-  have hb (j : J) (hj : j ∈ S₁) : ∃ b : T.obj₂ ⟶ X j, a j = T.mor₁ ≫ b := by
-    refine Triangle.yoneda_exact₂ _ hT' (a j) ?_
-    refine eq_zero_of_sum_comp_inj_eq_zero hc S₁ (fun j ↦ T.invRotate.mor₁ ≫ a j) ?_ hj
-    have h0 : T.invRotate.mor₁ ≫ T.mor₁ = 0 := comp_distTriang_mor_zero₁₂ _ hT'
-    simp only [assoc, ← comp_sum, ← ha]
-    rw [← assoc, h0, zero_comp]
-  choose b hb using hb
-  let b' (j : J) : T.obj₂ ⟶ X j := if hj : j ∈ S₁ then b j hj else 0
-  have hb' : ∑ j ∈ S₁, a j ≫ c.inj j = T.mor₁ ≫ ∑ j ∈ S₁, b' j ≫ c.inj j := by
-    rw [comp_sum]
-    refine Finset.sum_congr rfl fun j hj ↦ ?_
-    simp only [b', dif_pos hj, ← assoc, ← hb j hj]
-  obtain ⟨h, hh⟩ := Triangle.yoneda_exact₂ _ hT (f - ∑ j ∈ S₁, b' j ≫ c.inj j)
-    (by rw [comp_sub, ha, hb', sub_self])
-  obtain ⟨S₃, d, hd⟩ := h₃ c hc h
-  let d' (j : J) : T.obj₂ ⟶ X j := if j ∈ S₃ then T.mor₂ ≫ d j else 0
-  refine ⟨S₁ ∪ S₃, fun j ↦ b' j + d' j, ?_⟩
-  have e₁ : ∑ j ∈ S₁ ∪ S₃, b' j ≫ c.inj j = ∑ j ∈ S₁, b' j ≫ c.inj j :=
-    (Finset.sum_subset Finset.subset_union_left fun j _ hj ↦ by simp [b', hj]).symm
-  have e₃ : ∑ j ∈ S₁ ∪ S₃, d' j ≫ c.inj j = T.mor₂ ≫ h := by
-    rw [hd, comp_sum, ← Finset.sum_subset Finset.subset_union_right fun j _ hj ↦ by simp [d', hj]]
-    exact Finset.sum_congr rfl fun j hj ↦ by simp [d', hj]
-  simp only [add_comp, Finset.sum_add_distrib, e₁, e₃, ← hh, add_sub_cancel]
 
 end CategoryTheory.BrownRepresentability
 

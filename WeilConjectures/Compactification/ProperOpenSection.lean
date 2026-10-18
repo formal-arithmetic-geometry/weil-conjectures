@@ -45,13 +45,6 @@ theorem Scheme.Hom.isClopen_range_of_comp_eq_id {V S : Scheme.{u}} (p : V ⟶ S)
   have : IsProper s := .of_comp s p
   exact Scheme.Hom.isClopen_range s
 
-/-- An open immersion which is a section of a separated morphism is a closed immersion. -/
-theorem Scheme.Hom.isClosedImmersion_of_comp_eq_id {V S : Scheme.{u}} (p : V ⟶ S) (s : S ⟶ V)
-    [IsSeparated p] [IsOpenImmersion s] (h : s ≫ p = 𝟙 S) : IsClosedImmersion s := by
-  have : IsProper (s ≫ p) := h ▸ inferInstance
-  have : IsProper s := .of_comp s p
-  exact .of_isOpenImmersion_of_universallyClosed s
-
 /-- Blueprint `lem-weil-pbc-proper-open-p-proper`: Properness of the projection of the
 comparison square. For `u : T₁ ⟶ T₂` proper and any `j₂ : X ⟶ T₂` (in the blueprint an open
 immersion), the projection `p : T₁ ×_{T₂} X ⟶ X` is the base change of `u` along `j₂`, hence
@@ -133,8 +126,10 @@ theorem section_spec :
 lemma isClopen_range_section : IsClopen (Set.range D.section.base) :=
   Scheme.Hom.isClopen_range_of_comp_eq_id D.p D.section D.section_p
 
-instance isClosedImmersion_section : IsClosedImmersion D.section :=
-  Scheme.Hom.isClosedImmersion_of_comp_eq_id D.p D.section D.section_p
+instance isClosedImmersion_section : IsClosedImmersion D.section := by
+  have : IsProper (D.section ≫ D.p) := D.section_p ▸ inferInstance
+  have : IsProper D.section := .of_comp D.section D.p
+  exact .of_isOpenImmersion_of_universallyClosed D.section
 
 end ProperOpenDatum
 
