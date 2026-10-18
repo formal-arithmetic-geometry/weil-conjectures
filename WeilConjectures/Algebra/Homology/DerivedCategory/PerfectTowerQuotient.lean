@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.Algebra.Homology.DerivedCategory.PerfectTower
 public import WeilConjectures.Mathlib.RingTheory.AdicCompletion.Basic
+public import Mathlib.Algebra.Category.ModuleCat.AB
+public import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsExistence
+public import WeilConjectures.CategoryTheory.Triangulated.HomotopyLimit.Basic
 
 /-!
 # Normalized towers of perfect complexes over the quotients of a complete local ring
@@ -87,6 +90,15 @@ include hϖ hI in
 lemma isLocalRing_quotient_pow_succ_of_mem (n : ℕ) : IsLocalRing (R ⧸ I ^ (n + 1)) :=
   Ideal.isLocalRing_quotient_pow_succ
     (by rw [hI, Ideal.span_le, Set.singleton_subset_iff]; exact hϖ) n
+
+omit [IsLocalRing R] [IsAdicComplete I R] in
+/-- The derived limit `R lim_n Res Q_n` of a normalized tower of perfect complexes exists: the
+derived category of `R`-modules has countable products, products of modules being exact
+(`CategoryTheory.derivedCategory_hasCountableProducts`). -/
+lemma exists_isHomotopyLimit_restrict : ∃ c : Cone T.restrict, IsHomotopyLimit c :=
+  have : AB4StarOfSize.{0} (ModuleCat.{u + 1} R) := AB4StarOfSize_shrink.{0, u + 1} _
+  have := derivedCategory_hasCountableProducts (ModuleCat.{u + 1} R)
+  exists_isHomotopyLimit _
 
 include hϖ hI hc in
 /-- Blueprint `prop-trf-adic-coefficient-morphism-systems` (2), Stacks Tag 09AW, over the rings

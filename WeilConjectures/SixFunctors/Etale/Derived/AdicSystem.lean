@@ -513,6 +513,17 @@ theorem realization {c : Cone (S.restrict ⋙
   ProEtale.derivedComplete_and_exists_iso_of_isNormalizedTower hϖ hI
     S.isNormalizedTower_restrict hc
 
+/-- The realization `R lim_n ν^* Res L_n` of a normalized system exists: the derived category of
+pro-étale sheaves of `R`-modules has countable products, countable products of pro-étale
+sheaves being exact (`CategoryTheory.derivedCategory_hasCountableProducts`). -/
+lemma exists_isHomotopyLimit_realization :
+    ∃ c : Cone (S.restrict ⋙
+      (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} R) X).mapDerivedCategory),
+      IsHomotopyLimit c :=
+  have := derivedCategory_hasCountableProducts
+    (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} R))
+  exists_isHomotopyLimit _
+
 end AdicSystem
 
 end AlgebraicGeometry.Etale
