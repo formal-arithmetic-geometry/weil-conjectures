@@ -18,9 +18,259 @@
   "def-asd-finite-etale-tate-twist",
   "def-per-potential-dualizing-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $U=X\\setminus Z$ and $U'=Y\\setminus Z'$ with inclusions $j,j'$, and let $q:U'\\to U$ be the projection. Base change preserves the two immersion types. The open complement is indeed $U'$: a point belongs to the inverse image of $U$ precisely when it does not belong to the inverse image of $Z$. The morphism $j$ is quasi-compact, since its inverse image over an affine open of the Noetherian $X$ is an open subscheme of that Noetherian affine and hence quasi-compact. It is quasi-separated: $U\\times_XU\\cong U$ and its diagonal is the identity, so inverse images of quasi-compact opens under the diagonal are themselves quasi-compact. Thus the direct-image theorem will apply to $j$.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "def-weil-quasi-separated-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Corollary 4.2.3: use the complementary open immersion; qcqs hypotheses of Proposition 4.2.1"
+   }
+  },
+  {
+   "text": "Write $a^!_0F=a^{-1}\\ker(F\\to j_*j^*F)$. The support-kernel adjunction identifies $a_*a^!_0F$ with this kernel and gives $a_*\\dashv a^!_0$, with $a_*$ exact. Its abelian-sheaf Hom bijection restricts to $\\Lambda$-linear maps: for each scalar $t\\in\\Lambda$, naturality in source and target carries the equation $ft=tf$ to the same equation for the transpose. Kernels and all these maps retain their induced scalar actions, and exact coefficient forgetting detects exactness. Module sheaves have enough injectives. The bounded-below derived-adjunction theorem therefore gives $a_*\\dashv a^!=Ra^!_0$ on $D^+$; its counit on an injective representative is the kernel inclusion. The same argument applies to $a'$. This uses the supported functor of the statement, without compactifiability, excellence, or constructibility.",
+   "uses": [
+    "lem-pur-etale-supported-kernel-adjunction",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-trf-bounded-below-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 09XQ (lemma-sections-with-support-acyclic), support adjunction, and bounded-below derivation"
+   }
+  },
+  {
+   "text": "Closed pushforward is fully faithful on abelian sheaves, with exact left inverse $a^{-1}$ and counit $a^{-1}a_*\\cong1$. The preceding exactness of $a_*$ and exactness of inverse image give the same assertions on $\\Lambda$-module sheaves, by forgetting scalars and retaining the scalar action. Localizing this specified exact adjunction termwise gives $a^*\\dashv a_*$ on $D^+$ with invertible counit. Its Hom bijection shows that $a_*$ is fully faithful there and reflects isomorphisms. These assertions also hold for $a'_*$. The vanishing $j^*a_*=0$ holds termwise and hence on $D^+$, as does $j'^*a'_*=0$.",
+   "uses": [
+    "lem-kun-04ca",
+    "lem-trf-geometric-inverse-image-exact",
+    "def-weil-exact-derived-adjunction",
+    "lemma-openclosed-vanishing-lowerstar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04CA (proposition-closed-immersion-pushforward), exact adjunction and open-complement vanishing"
+   }
+  },
+  {
+   "text": "The canonical closed direct-image exchange $c:h^*a_*\\to a'_*h'^*$ is invertible. At a geometric point of $Y$ outside $Z'$ both stalks vanish; at a geometric point $z'$ in $Z'$ both stalks identify with the stalk on $Z$ at its image. The inverse-image germ formula and the representative-section description of underived exchange show that the canonical map sends each representative germ to that same germ, so it is the identity under these identifications. Geometric stalk conservativity proves the claim. The identifications are $\\Lambda$-linear; applying the exact functors termwise gives $c$ on $D^+$.",
+   "uses": [
+    "lem-kun-04ca",
+    "lemma-openclosed-stalk-lowerstar",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "def-weil-pbc-underived-exchange",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 04CA (proposition-closed-immersion-pushforward) and 03Q1 (lemma-stalk-pullback); canonical map on germs"
+   }
+  },
+  {
+   "text": "Choose a bounded-below complex $I$ of injective $\\Lambda$-module sheaves representing $M$. For every etale $V\\to X$, the restriction-kernel lemma applied to $V\\times_XU\\hookrightarrow V$ gives surjectivity $I^r(V)\\to I^r(V\\times_XU)$. Hence $0\\to a_*a^!_0I\\to I\\to j_*j^*I\\to0$ is a degreewise short exact sequence. The open immersion $j$ is etale, so $j^*I$ has injective terms. The right-derived injective comparison computes $a^!M$ by $a^!_0I$ and $Rj_*j^*M$ by $j_*j^*I$. The short-exact-complex triangle gives\n$$S_M:=a_*a^!M\\xrightarrow{\\varepsilon_M}M\\xrightarrow{\\eta_M}Rj_*j^*M\\longrightarrow S_M[1].$$\nIts arrows are the supported counit and open unit, with the normalization in Step 2. Comparison maps between injective resolutions and naturality of the short-exact-complex triangle make it independent of the resolution and natural in $M$. The identical construction gives the triangle on $Y$.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-pur-module-restriction-kernel-comparison",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-weil-pbc-etale-restriction-injectives",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A45 (lemma-cohomology-with-support-triangle), injective-resolution argument, for bounded-below module complexes"
+   }
+  },
+  {
+   "text": "Define $\\beta_M:h'^*a^!M\\to a'^!h^*M$ to be the transpose under $a'_*\\dashv a'^!$ of\n$$a'_*h'^*a^!M\\xrightarrow{c^{-1}}h^*a_*a^!M\\xrightarrow{h^*\\varepsilon_M}h^*M.$$\nThe adjunction bijection gives precisely\n$$\\varepsilon'_{h^*M}\\circ a'_*(\\beta_M)\\circ c_{a^!M}=h^*\\varepsilon_M.$$\nThus this is the prescribed canonical supported exchange, not an arbitrarily chosen isomorphism. The same formula proves naturality in $M$.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Corollary 4.2.3: the evident morphism, made explicit by its transpose"
+   }
+  },
+  {
+   "text": "Apply regular direct-image base change to $g=j$ and $K=j^*M$. Step 1 checked qcqs of $j$; $h$ is regular between Noetherian schemes and $\\ell^n$ is invertible there. It gives an isomorphism\n$$E:h^*Rj_*j^*M\\xrightarrow{\\sim}Rj'_*q^*j^*M\\cong Rj'_*j'^*h^*M.$$\nThe last identification is inverse-image composition for the complementary Cartesian square. No constructibility or finite-type condition on $h$ has been introduced.",
+   "uses": [
+    "lem-per-regular-etale-direct-image-base-change",
+    "lem-weil-pbc-derived-inverse-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 4.2.1 and proof of Corollary 4.2.3, printed p. 281"
+   }
+  },
+  {
+   "text": "Apply exact $h^*$ to the triangle of Step 5, obtaining a distinguished triangle $A\\to h^*M\\to C\\to A[1]$, where $A=h^*a_*a^!M$ and $C=h^*Rj_*j^*M$. Compare it with the supported triangle $A'\\to h^*M\\to C'\\to A'[1]$ on $Y$. Step 4 identifies $A$ with $a'_*h'^*a^!M$, so Step 3 gives $j'^*A=0$. The derived adjunction $j'^*\\dashv Rj'_*$, obtained by bounded-below derivation of the exact inverse image, gives\n$$\\operatorname{Hom}(A[k],C')=\\operatorname{Hom}(j'^*A[k],j'^*h^*M)=0\\quad(k\\in\\mathbf Z).$$\nHere exactness of open inverse image gives its commutation with shifts. The same adjunction applies to module sheaves with transported constant coefficients.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-trf-geometric-inverse-image-exact",
+    "lem-trf-bounded-below-derived-adjunction",
+    "lem-weil-pbc-module-sheaves-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, localization-triangle proof of Corollary 4.2.3; open adjunction supplies support/open orthogonality"
+   }
+  },
+  {
+   "text": "Use $\\mathrm{id}_{h^*M}$ for the middle comparison, $E$ for the last, and $f=a'_*(\\beta_M)c$ for the first. The first square commutes by Step 6. The second square commutes by the definition of derived open exchange as a mate: after transposing under $j'^*\\dashv Rj'_*$, the equality $E(h^*\\eta_M)=\\eta'_{h^*M}$ is the triangle identity $\\varepsilon_j\\,j^*\\eta_j=1$, with inverse-image composition inserted. The coefficient-exchange node specifies that module exchange is formed by these same module adjunctions, so this triangle-identity calculation holds in the module derived category itself. The triangle-extension lemma, applied using $\\operatorname{Hom}(A[1],C')=0$ from Step 8, now proves that these specified outer maps form a morphism of distinguished triangles. In particular the connecting square commutes, rather than being inferred from an unspecified cone comparison.",
+   "uses": [
+    "def-weil-pbc-derived-exchange",
+    "lem-weil-pbc-exchange-forget-coefficients",
+    "lem-weil-pbc-triangle-morphism-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Corollary 4.2.3; BBD Proposition 1.1.9 for the normalized comparison of support triangles"
+   }
+  },
+  {
+   "text": "The middle and last maps of this triangle comparison are isomorphisms (the identity and Step 7). The triangle two-out-of-three lemma makes $f$ an isomorphism. Since $c$ is invertible, $a'_*(\\beta_M)$ is invertible. Full faithfulness of $a'_*$ from Step 3 reflects invertibility, proving that $\\beta_M$ itself is an isomorphism.",
+   "uses": [
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Corollary 4.2.3: comparison of the two localization triangles"
+   }
+  },
+  {
+   "text": "For composition of base changes, the two closed direct-image exchanges send a representative section successively to its restriction twice; this is its restriction along the composite. Thus their composite is the closed exchange of the composite square. Mate pasting along the base-change functors identifies the corresponding composite of $\\beta$ with the single composite-square $\\beta$. For successive closed immersions $b:W\\hookrightarrow Z$ and $a:Z\\hookrightarrow X$, direct-image composition identifies $(ab)_*$ with $a_*b_*$, termwise by the fibre-product formula for sections. Right-adjoint composition therefore identifies $(ab)^!$ with $b^!a^!$, with pasted counit. Mate pasting along these adjunctions proves that supported exchange for $ab$ is the successive exchange for $a$ then $b$. The closed counit identity is already Step 6. All these identifications use specified adjunctions, hence their coherence is the pasting identity itself.",
+   "uses": [
+    "lem-weil-pbc-direct-image-composition-coherence",
+    "lem-cat-right-adjoint-composition",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Corollary 4.2.3 and Lemma 4.3.1.1, canonical comparisons; explicit mate-pasting verification"
+   }
+  },
+  {
+   "text": "For an etale map $v:V\\to X$, inverse image is restriction to objects etale over $V$. Thus $v^*j_*F\\cong j_{V,*}v_U^*F$: evaluated on $W\\to V$, both are $F(W\\times_XU)$. Restricting the supported kernel therefore gives the kernel for the pulled-back closed immersion. Etale restriction preserves injective module sheaves, so the same identity on an injective complex proves etale locality of $a^!$, with its counit normalization. This includes arbitrary open restriction. For localization first work in an affine neighbourhood of the point. The map $\\operatorname{Spec}A_{\\mathfrak p}\\to\\operatorname{Spec}A$ is affine ind-etale because $A_{\\mathfrak p}$ is a filtered colimit of principal localizations; it is Noetherian. Apply ind-etale closed-support base change. Its pullbacks are again affine ind-etale. Together with the open locality just proved, this gives localization for a general ambient $X$. The resulting comparison has the transposed counit of Step 6. Mate pasting in Step 11 proves that these restriction comparisons commute with regular exchange.",
+   "uses": [
+    "lem-weil-pbc-etale-inverse-image-restriction",
+    "lem-weil-pbc-etale-restriction-injectives",
+    "lem-per-ind-etale-closed-support-base-change",
+    "lem-weil-pbc-localization-colimit-principal-localizations",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-ind-etale-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 4.3.1.1, localization before the closed-fibre comparison; Tags 03Q9, 09XQ and 0A45 for the ind-etale tool"
+   }
+  },
+  {
+   "text": "Give exact inverse images and closed pushforwards their termwise shift comparisons. The right-adjoint shift theorem supplies the unique compatible shift comparison for $a^!$ and $a'^!$; on shifted injective complexes it is the usual derived comparison, because the degreewise supported counit is unchanged by shifting. In the transpose formula of Step 6, $c^{-1}$ and $h^*\\varepsilon$ commute with these comparisons. Transposing proves $\\beta_{M[k]}=\\beta_M[k]$ under them, for every integer $k$. This also identifies the shift appearing in the connecting square of Step 9 with the standard cohomological shift.",
+   "uses": [
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Corollary 4.2.3, derived comparison; shift verification from the adjunction normalization"
+   }
+  },
+  {
+   "text": "The finite Tate sheaf $L=\\Lambda(t)$ is etale locally free of rank one, with dual $L^\\vee$ and inverse-image identifications respecting tensor, evaluation and all integer twists. Tensoring with $L$ and $L^\\vee$ are inverse exact functors: their evaluation identifications and exactness can be checked on an etale cover where both are the coefficient sheaf. Closed direct image has the sheaf comparison $a_*(N\\otimes a^*L)\\cong a_*N\\otimes L$, which is the identity on such a trivializing cover and whose overlap changes on both sides are multiplication by the same unit. This is an identity of sheaf functors and therefore also of their termwise exact derived functors. Conjugating $a_*\\dashv a^!$ by these tensor autoequivalences gives, by right-adjoint uniqueness, $a^!(M\\otimes L)\\cong a^!M\\otimes a^*L$, normalized by its counit. Do the same for the pulled-back closed immersion. In the transpose formula of Step 6 the closed sheaf exchange respects these tensor comparisons, since it restricts representative sections. The two transposes are consequently equal, so the two supported exchanges are equal. This proves twist compatibility globally, including negative twists, with the specified roots-of-unity pullback identifications.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-cat-right-adjoint-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Corollary 4.2.3, twist compatibility; Tag 03PK (section-kummer), and conjugation of adjunctions by invertible tensor"
+   }
+  },
+  {
+   "text": "Finally take $z\\in Z$. On an affine neighbourhood $X=\\operatorname{Spec}A$ with $Z=\\operatorname{Spec}(A/I)$ and prime $\\mathfrak p\\supset I$, one has\n$$Z\\times_X\\operatorname{Spec}A_{\\mathfrak p}=\\operatorname{Spec}(A/I)_{\\mathfrak p/I}=\\operatorname{Spec}\\mathcal O_{Z,z}.$$\nIndeed both rings are $A_{\\mathfrak p}/IA_{\\mathfrak p}$, by the localization tensor formula. Denote this closed map to $X_z=\\operatorname{Spec}\\mathcal O_{X,z}$ by $a_z$ and its closed point inclusion by $b_z$; their composite $a_zb_z$ is the closed point inclusion of $X_z$, with the same residue field. Step 12 gives $(a^!M)|_{Z_z}\\cong a_z^!(M|_{X_z})$. Apply $b_z^!$ and then the right-adjoint composition comparison of Step 11:\n$$R\\Gamma_z^Z(a^!M)=b_z^!((a^!M)|_{Z_z})\\cong b_z^!a_z^!(M|_{X_z})\\cong(a_zb_z)^!(M|_{X_z})=R\\Gamma_z^XM.$$\nThese are exactly the local-then-supported costalks of the statement. This calculation uses only that costalk recipe, not the excellence or dualizing hypotheses used for the other notions in its definition node. Its normalization is by the successive counits, as required.",
+   "uses": [
+    "lem-weil-pbc-localization-base-change",
+    "lem-cat-right-adjoint-composition",
+    "def-per-potential-dualizing-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 4.3.1.1, successive supported restrictions; costalk definition in Definition 1.1.1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "def-weil-quasi-separated-morphism",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-trf-bounded-below-derived-adjunction",
+  "lem-kun-04ca",
+  "lem-trf-geometric-inverse-image-exact",
+  "def-weil-exact-derived-adjunction",
+  "lemma-openclosed-vanishing-lowerstar",
+  "lemma-openclosed-stalk-lowerstar",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "def-weil-pbc-underived-exchange",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-pur-module-restriction-kernel-comparison",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-pbc-adjunction-mate",
+  "lem-per-regular-etale-direct-image-base-change",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-pbc-derived-exchange",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-weil-pbc-triangle-morphism-extension",
+  "lem-sf-triangle-morphism-iso",
+  "lem-weil-pbc-direct-image-composition-coherence",
+  "lem-cat-right-adjoint-composition",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-per-ind-etale-closed-support-base-change",
+  "lem-weil-pbc-localization-colimit-principal-localizations",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-weil-pbc-localization-base-change",
+  "def-per-potential-dualizing-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XVII, Corollary 4.2.3 via Proposition 4.2.1 and the open-complement support triangle; Lemma 4.3.1.1 for localization and costalks. Coherence arguments expanded explicitly using the cited general interfaces."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +299,73 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.pullbackRestrictIsoRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Restrict\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens) : pullback f U.ι ≅ f ⁻¹ᵁ U\", \"doc\": \"Let $X$ and $Y$ be schemes, $f: X \\\\to Y$ be a morphism between them, and $U$ be an open subset of $Y$. Let $\\\\iota : U \\\\to Y$ be the canonical inclusion morphism of the corresponding open subscheme. Th\"}\n  {\"name\": \"AlgebraicGeometry.Flat.stalkMap\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"[Flat f] (x : X) : (f.stalkMap x).hom.Flat\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. Then for any point $x \\\\in X$, the induced ring homomorphism on stalks, $f_x^\\\\sharp: \\\\mathcal{O}_{Y, f(x)} \\\\to \\\\mathcal{O}_{X, x}$, is a flat ring homomo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \": restrictFunctor f ≅ pullback f\", \"doc\": \"Given an open immersion $ f : X \\\\to Y $ of schemes, the restriction functor from the category of sheaves of modules over $ Y $'s structure sheaf to those over $ X $'s structure sheaf is naturally isom\"}\n  {\"name\": \"AlgebraicGeometry.Flat.instSndScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"(f : X ⟶ Z) (g : Y ⟶ Z) [Flat f] : Flat (pullback.snd f g)\", \"doc\": \"In the category of schemes, for any pair of morphisms $ f : X \\\\to Z $ and $ g : Y \\\\to Z $, the pullback of $ f $ and $ g $ exists. This asserts that the category of schemes admits pullbacks for all co\"}\n  {\"name\": \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"If $ f : X \\\\to Y $ is a flat morphism of schemes, then for any affine open subset $ U \\\\subseteq Y $ and affine open subset $ V \\\\subseteq X $ satisfying $ V \\\\subseteq f^{-1}(U) $, the induced ring homo\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \"(I : Type u) : (pullback φ).obj (free I) ≅ free I\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Flat\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.Flat f] {U : Y.Opens},\\n  AlgebraicGeometry.IsAffineOpen U →\\n    ∀ {V : X.Opens},\\n      AlgebraicGeometry.IsAffineOpen V →\\n        ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n          (CommRingCat.Hom.hom (AlgebraicG\", \"doc\": \"Let $f: X \\\\to Y$ be a flat morphism of schemes. For any affine open subset $U \\\\subseteq Y$ and any affine open subset $V \\\\subseteq f^{-1}(U)$, the corresponding ring homomorphism $\\\\mathcal{O}_Y(U) \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Etale\", \"type\": \"(X : Scheme.{u}) : Type _\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "regular.*baseChange|baseChange.*regular|regularBaseChange|geometricallyRegular",
+   "results": "{\"t\": \"2026-10-18T14:42:54Z\", \"tool\": \"grep\", \"query\": \"regular.*baseChange|baseChange.*regular|regularBaseChange|geometricallyRegular\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/RegularCategory/Basic.lean\", \"Mathlib/CategoryTheory/RegularCategory/Basic.lean\", \"Mathlib/CategoryTheory/RegularCategory/Basic.lean\", \"Mathlib/CategoryTheory/RegularCategory/Basic.lean\", \"Mathlib/CategoryTheory/RegularCategory/Basic.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\", \"Mathlib/RingTheory/Regular/Flat.lean\", \"Mathlib/RingTheory/Regular/Flat.lean\"], \"digest\": \"84ebdf51d8c4f9e2\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern regular sequences, regular categories, scheme morphisms, or structure-sheaf modules; none states etale derived direct-image or closed-support regular base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image of etale torsion sheaves commutes with pullback along a flat geometrically regular morphism of Noetherian schemes",
+   "results": "{\"t\": \"2026-10-18T14:42:55Z\", \"tool\": \"leansearch\", \"query\": \"Derived direct image of etale torsion sheaves commutes with pullback along a flat geometrically regular morphism of Noetherian schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pullback\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePullback\", \"SheafOfModules.sheafificationCompPullback\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Scheme.Modules.instAdditivePushforward\"], \"digest\": \"15949aa93f026f55\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern regular sequences, regular categories, scheme morphisms, or structure-sheaf modules; none states etale derived direct-image or closed-support regular base change"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"regular\"",
+   "results": "{\"t\": \"2026-10-18T14:42:55Z\", \"tool\": \"loogle\", \"query\": \"\\\"baseChange\\\", \\\"regular\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"IsSMulRegular.of_flat_of_isBaseChange\", \"CategoryTheory.Regular.regularEpiIsStableUnderBaseChange\", \"RingTheory.Sequence.IsRegular.of_faithfullyFlat_of_isBaseChange\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange\"], \"digest\": \"9b343ef9928d37c3\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern regular sequences, regular categories, scheme morphisms, or structure-sheaf modules; none states etale derived direct-image or closed-support regular base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular base change for higher direct images of bounded below etale torsion complexes along a quasi compact quasi separated morphism",
+   "results": "{\"t\": \"2026-10-18T14:42:56Z\", \"tool\": \"leanfinder\", \"query\": \"Regular base change for higher direct images of bounded below etale torsion complexes along a quasi compact quasi separated morphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.locallyOfFiniteType_isStableUnderBaseChange\", \"AlgebraicGeometry.instIsStableUnderBaseChangeSchemeLocallyQuasiFinite\", \"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"Algebra.Etale.baseChange\"], \"digest\": \"ea4ff5b4e8565fff\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern regular sequences, regular categories, scheme morphisms, or structure-sheaf modules; none states etale derived direct-image or closed-support regular base change"
+  },
+  {
+   "tool": "grep",
+   "query": "extraordinary|costalk|supportedLocalization|regularBaseChange",
+   "results": "{\"t\": \"2026-10-18T14:43:18Z\", \"tool\": \"grep\", \"query\": \"extraordinary|costalk|supportedLocalization|regularBaseChange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Manifold/Bordism.lean\", \"Mathlib/Geometry/Manifold/Bordism.lean\"], \"digest\": \"622a86a6cb8f6fc4\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern regular sequences, regular categories, scheme morphisms, or structure-sheaf modules; none states etale derived direct-image or closed-support regular base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Local cohomology with closed support commutes with flat geometrically regular pullback of etale sheaves",
+   "results": "{\"t\": \"2026-10-18T14:43:19Z\", \"tool\": \"leansearch\", \"query\": \"Local cohomology with closed support commutes with flat geometrically regular pullback of etale sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"SheafOfModules.sheafificationCompPullback\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"RingHom.Etale.propertyIsLocal\"], \"digest\": \"5bb3a8c367cdb075\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern regular sequences, regular categories, scheme morphisms, or structure-sheaf modules; none states etale derived direct-image or closed-support regular base change"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"baseChange\"",
+   "results": "{\"t\": \"2026-10-18T14:43:19Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"baseChange\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"CategoryTheory.Precoverage.isSheaf_toGrothendieck_iff_of_isStableUnderBaseChange_of_small\", \"CategoryTheory.Precoverage.isSheaf_toGrothendieck_iff_of_isStableUnderBaseChange\"], \"digest\": \"b16df769ac229669\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern regular sequences, regular categories, scheme morphisms, or structure-sheaf modules; none states etale derived direct-image or closed-support regular base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersion extraordinary inverse image commutes with regular pullback and canonical localization triangles for etale torsion complexes",
+   "results": "{\"t\": \"2026-10-18T14:43:20Z\", \"tool\": \"leanfinder\", \"query\": \"Closed immersion extraordinary inverse image commutes with regular pullback and canonical localization triangles for etale torsion complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.isPullback_of_isClosedImmersion\", \"AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd\", \"AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_fst_assoc\", \"AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder\", \"AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_snd_assoc\", \"AlgebraicGeometry.Scheme.IdealSheafData.comapIso_inv_subschemeι_assoc\", \"AlgebraicGeometry.Scheme.IdealSheafData.comapIso_hom_fst\"], \"digest\": \"59d30f7adf41fd32\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern regular sequences, regular categories, scheme morphisms, or structure-sheaf modules; none states etale derived direct-image or closed-support regular base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback along a regular scheme morphism commutes with the right derived direct image on the small etale site for prime power torsion coefficients",
+   "results": "{\"t\": \"2026-10-18T14:43:21Z\", \"tool\": \"leanfinder\", \"query\": \"Pullback along a regular scheme morphism commutes with the right derived direct image on the small etale site for prime power torsion coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackComp\"], \"digest\": \"7bb559f8448b9faf\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern regular sequences, regular categories, scheme morphisms, or structure-sheaf modules; none states etale derived direct-image or closed-support regular base change"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-regular-pullback-pinnings",
@@ -75,5 +388,139 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-regular-supported-base-change",
+  "worker": "stage1",
+  "summary": "Follows the regular direct-image theorem for the complementary qcqs open immersion, constructs the bounded-below module support triangle and its normalized mate comparison, and proves the counit, boundary, pasting, localization, shift, Tate and successive-costalk clauses without constructibility, excellence or finite type on h. One new unsplit direct-image input; reuses the ind-etale support comparison and all general tools.",
+  "blueprint": "The ancestor lem-per-artin-gabber-affine-curve, dimension-normalized duality and the lower perverse bound, as routed through the recorded generic duality and finite-pullback chain: supported exchange for the fibrewise costalk pinnings. No change to the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-etale-supported-kernel-adjunction",
+    "why": "Generic Closed etale support kernel and its exact left adjoint tool for the explicitly written supported-triangle argument; no node of the perverse unit supplies this general interface, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic Colimits of sheaves of modules and the forgetful functor to abelian sheaves tool for the explicitly written supported-triangle argument; no node of the perverse unit supplies this general interface, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Generic Sheaves of modules on the small etale site have enough injectives tool for the explicitly written supported-triangle argument; no node of the perverse unit supplies this general interface, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "lem-trf-bounded-below-derived-adjunction",
+    "why": "Generic Canonical bounded-below derived adjunction and its comparison normalization tool for the explicitly written supported-triangle argument; no node of the perverse unit supplies this general interface, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "lem-kun-04ca",
+    "why": "Generic Pushforward along a closed immersion tool for the explicitly written supported-triangle argument; no node of the perverse unit supplies this general interface, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "lem-trf-geometric-inverse-image-exact",
+    "why": "Generic Exactness of inverse image on abelian sheaves and modules tool for the explicitly written supported-triangle argument; no node of the perverse unit supplies this general interface, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "def-weil-exact-derived-adjunction",
+    "why": "Generic Localization of an exact adjunction to derived categories tool for the explicitly written supported-triangle argument; no node of the perverse unit supplies this general interface, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "lemma-openclosed-vanishing-lowerstar",
+    "why": "Generic $j^*i_*$ vanishes tool for the explicitly written supported-triangle argument; no node of the perverse unit supplies this general interface, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "lemma-openclosed-stalk-lowerstar",
+    "why": "Generic Stalks of $i_*$ on $Z$ tool for the explicitly written supported-triangle argument; no node of the perverse unit supplies this general interface, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Generic Stalk of an inverse image, compatible with germs of pulled-back sections tool for the explicitly written supported-triangle argument; no node of the perverse unit supplies this general interface, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "def-weil-pbc-underived-exchange",
+    "why": "Generic Underived exchange map: corrected categorical construction tool for the explicitly written supported-triangle argument; no node of the perverse unit supplies this general interface, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic Conservativity of geometric stalks tool for the explicitly written supported-triangle argument; no node of the perverse unit supplies this general interface, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "lem-pur-module-restriction-kernel-comparison",
+    "why": "Generic Forgetting constant module coefficients compares derived restriction kernels tool for the explicitly written supported-triangle argument; no node of the perverse unit supplies this general interface, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-etale-restriction-injectives",
+    "why": "Generic Etale restriction preserves injectives tool for the explicitly written supported-triangle argument; no node of the perverse unit supplies this general interface, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-derived-inverse-image-composition",
+    "why": "Generic Composition isomorphisms of derived inverse images and their coherence tool for the explicitly written supported-triangle argument; no node of the perverse unit supplies this general interface, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "def-weil-pbc-derived-exchange",
+    "why": "Generic Derived exchange map tool for the explicitly written supported-triangle argument; no node of the perverse unit supplies this general interface, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-forget-coefficients",
+    "why": "Generic The derived exchange morphism commutes with forgetting the coefficient ring tool for the explicitly written supported-triangle argument; no node of the perverse unit supplies this general interface, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-triangle-morphism-extension",
+    "why": "Generic Extending a morphism of the middle terms to distinguished triangles; uniqueness when Hom(X[1],Z')=0 tool for the explicitly written supported-triangle argument; no node of the perverse unit supplies this general interface, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-direct-image-composition-coherence",
+    "why": "Generic Associativity and unit laws of the composition isomorphisms of direct images tool for the explicitly written supported-triangle argument; no node of the perverse unit supplies this general interface, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Generic Inverse image along an etale morphism is restriction tool for the explicitly written supported-triangle argument; no node of the perverse unit supplies this general interface, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-localization-colimit-principal-localizations",
+    "why": "Generic A localization is the filtered colimit of the principal localizations tool for the explicitly written supported-triangle argument; no node of the perverse unit supplies this general interface, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Generic Stability and diagonal of an ind-etale algebra tool for the explicitly written supported-triangle argument; no node of the perverse unit supplies this general interface, and no unit-level proof step is replaced."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic Finite Tate lines on the small etale site and their pullback tool for the explicitly written supported-triangle argument; no node of the perverse unit supplies this general interface, and no unit-level proof step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-trf-bounded-below-derived-adjunction",
+  "lem-kun-04ca",
+  "lem-trf-geometric-inverse-image-exact",
+  "def-weil-exact-derived-adjunction",
+  "lemma-openclosed-vanishing-lowerstar",
+  "lemma-openclosed-stalk-lowerstar",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "def-weil-pbc-underived-exchange",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-pur-module-restriction-kernel-comparison",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "def-weil-pbc-derived-exchange",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-weil-pbc-triangle-morphism-extension",
+  "lem-weil-pbc-direct-image-composition-coherence",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-localization-colimit-principal-localizations",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-asd-etale-finite-twist-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-ed231d1e9",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-ed231d1e9 (reviewer sub-agent of L); spot-checked: I read ILO XVII 4.2.1 and 4.2.3 (printed p. 281) and Lemma 4.3.1.1. The item statement is unchanged and agrees with Corollary 4.2.3: Z/l^n coefficients, D+, any closed immersion, regular h without finite type or excellence, the canonical mate exchange. The new node lem-per-regular-etale-direct-image-base-change is Proposition 4.2.1 restricted to Noetherian X and Y, with no condition on V and nothing weakened. It is the open-complement input that ILO itself uses, not a clause of the item. A DAG grep found no duplicate: the existing nodes cover only the smooth special case, or 4.2.2 (RHom on excellent schemes, lem-per-potential-regular-base-change). Small cases checked: V empty, g = id, h etale, h a strict localization (not of finite type), Z empty, Z = X, n = 1. All 15 steps check against the statements they cite. Step 5: the module restriction-kernel lemma gives the degreewise short exact supported triangle. Step 9: triangle-extension (2) with Hom(A[1],C') = 0 from Step 8 gives the connecting square. Step 10: two-out-of-three, then a'_* reflects isomorphisms. Step 12: localization goes through an affine open, then ind-etale Spec A_p -> Spec A, so a nonseparated X is handled. Step 15: the costalk matches the R Gamma_x recipe of def-per-potential-dualizing-complex. No SGA citation. Batch-5 flags: lem-trf-bounded-below-derived-adjunction is the generic derivedPlus adjunction; lem-trf-geometric-inverse-image-exact is Stacks 04JC, a topos fact; lem-per-ind-etale-closed-support-base-change reaches sec-trace-formula only through those two and lem-trf-ind-etale-strict-local-invariance (Stacks 05WR, algebra). None is a statement assumed by batch 5 or a step of its proofs, so all three are accepted, consistent with earlier acceptances. The 23 declared tool_uses are generic interfaces and all are accepted. No fixes."
  }
 }
