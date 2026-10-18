@@ -32,7 +32,7 @@
 | `WeilConjectures.WeilSheaf.FourierInversion.Delta` | 11 | 1 | proof |
 | `WeilConjectures.WeilSheaf.FourierInversion.UpperStar` | 12 | 3 | proof |
 
-## Stage 3: waiting for statements of proof dependencies (16)
+## Stage 3: waiting for statements of proof dependencies (18)
 
 Not items: a node in the proof dependencies has no Lean statement yet (the human, 2026-10-17).
 
@@ -52,5 +52,7 @@ Not items: a node in the proof dependencies has no Lean statement yet (the human
 | `WeilConjectures.DeligneLaumon.AffineLine.DegreeOne` | 7 | 1 | `d-real-cohom` |
 | `WeilConjectures.DeligneLaumon.AffineLine.Exactness` | 7 | 1 | `lem-dl-a1-constructible-fibres-exact` |
 | `WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension` | 8 | 4 | `lem-a1-qbar-open-closed-cohomology` |
+| `WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary` | 8 | 1 | `lem-wf-strict-henselian-fraction-inertia` |
 | `WeilConjectures.DeligneLaumon.AffineLine.Perverse` | 9 | 4 | `lem-a1-qbar-open-closed-cohomology` |
 | `WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension` | 9 | 3 | `lem-trf-rational-local-frobenius-powers` |
+| `WeilConjectures.WeilSheaf.FourierInversion.OtherSections` | 12 | 3 | `lem-pur-divisor-class` |
