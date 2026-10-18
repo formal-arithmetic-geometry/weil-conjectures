@@ -1,6 +1,6 @@
 # Work queue
 
-951 items; claim with `tools/claim.py next <group> [--stage N]`.
+950 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (951)
+## Stage 3: modules to prove (950)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -521,7 +521,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.AffineStrictLocalRingComparison` | - | 1 | proof | 4 |
 | `Sheaf.AlgebraicGeometry.BertiniIndependentFunctions` | - | 1 | proof | 4 |
 | `Sheaf.AlgebraicGeometry.BertiniSingularLocusDimension` | - | 1 | proof | 4 |
-| `Sheaf.AlgebraicGeometry.BoundedContinuityDirectImage` | - | 1 | proof | 4 |
 | `Sheaf.AlgebraicGeometry.ClosedSupportStratumHom` | - | 3 | proof | 4 |
 | `Sheaf.AlgebraicGeometry.CompactSupportActionBaseChange` | - | 3 | proof | 4 |
 | `Sheaf.AlgebraicGeometry.CompactificationProjectionExchangeCoherence` | - | 1 | proof | 4 |
