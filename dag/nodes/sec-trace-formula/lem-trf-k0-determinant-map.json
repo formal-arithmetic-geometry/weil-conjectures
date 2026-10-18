@@ -15,9 +15,81 @@
   "def-trf-k0-group",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $M$ be a finitely generated projective $S$-module [def-weil-finitely-generated-module] [def-weil-pbc-projective-module]. Choosing generators gives a surjection $S^n\\to M$, which splits because $M$ is projective, so $M$ is a direct summand of a finite free module and the determinant module $\\det_S(M)$ of [lem-trf-projective-determinant-exact-sequence] is defined. That statement says $\\det_S(M)$ is a finite projective module, free of rank one on the members $D(f_i)$ of a cover of $\\operatorname{Spec}S$ by standard opens; for a prime $\\mathfrak p\\in D(f_i)$ the localization $\\det_S(M)_{\\mathfrak p}$ [def-weil-pbc-module-localization] is the localization at $\\mathfrak p$ of a free rank-one $S_{f_i}$-module, hence free of rank one over $S_{\\mathfrak p}$ [def-weil-pbc-free-module]. Thus $\\det_S(M)$ is one of the modules whose isomorphism classes form the set $\\operatorname{Pic}(S)$ of the statement. If $\\varphi:M_1\\to M_2$ is an isomorphism, the exact sequence $0\\to M_1\\xrightarrow{\\varphi}M_2\\to0\\to0$ and the cited statement, which sets $\\det_S(0)=S$, give $\\det_S(M_1)\\cong\\det_S(M_1)\\otimes_SS\\cong\\det_S(M_2)$; so the class of $\\det_S(M)$ depends only on the isomorphism class of $M$. For finite projective $Q',Q''$ the split exact sequence $0\\to Q'\\to Q'\\oplus Q''\\to Q''\\to0$ gives, again by the cited statement, $\\det_S(Q')\\otimes_S\\det_S(Q'')\\cong\\det_S(Q'\\oplus Q'')$ [def-weil-pbc-module-tensor-product].",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-projective-module",
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-module-tensor-product",
+    "lem-trf-projective-determinant-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Section Determinants (section-determinants, line 36228): the construction of det(M), its invertibility, and det(φ) for an isomorphism φ; Lemma 0FJB (lemma-det-ses)"
+   }
+  },
+  {
+   "text": "Let $Q$ be finitely generated projective with $Q_{\\mathfrak p}$ free of rank one for every prime $\\mathfrak p$. On a member $D(f)$ of the cover used in [lem-trf-projective-determinant-exact-sequence], $Q_f$ is finite free, say with basis of size $n$; if $S_f\\ne0$, then for a prime $\\mathfrak p\\in D(f)$ the module $Q_{\\mathfrak p}=(Q_f)_{\\mathfrak p}$ is free of rank $n$ and of rank one over the nonzero ring $S_{\\mathfrak p}$, so $n=1$; if $S_f=0$ all modules over it are zero. So the top exterior power on $D(f)$ is $\\wedge^1_{S_f}(Q_f)$, and $\\iota:Q_f\\to\\wedge^1_{S_f}(Q_f)$ is an isomorphism [lem-weil-pbc-exterior-power-free-basis]. On overlaps the gluing maps are $\\wedge^1$ of change-of-basis maps, i.e. under $\\iota$ the identity transition maps of the localizations of $Q$; hence the glued module $\\det_S(Q)$ is isomorphic to $Q$. In particular $\\det_S(S)\\cong S$. For $n\\ge1$ the split exact sequence $0\\to S^{n-1}\\to S^n\\to S\\to0$ and the cited statement give $\\det_S(S^n)\\cong\\det_S(S^{n-1})\\otimes_S\\det_S(S)\\cong\\det_S(S^{n-1})\\otimes_SS\\cong\\det_S(S^{n-1})$, so by induction from $\\det_S(S^0)=\\det_S(0)=S$ we get $\\det_S(S^n)\\cong S$ for all $n\\ge0$.",
+   "uses": [
+    "lem-trf-projective-determinant-exact-sequence",
+    "lem-weil-pbc-exterior-power-free-basis",
+    "def-weil-pbc-module-localization",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma 0AFX (more-algebra-lemma-det), line 36463: det[M] is the class of wedge^n(M) for M finite locally free of rank n, specialized to rank one; Lemma 0FJB for S^n"
+   }
+  },
+  {
+   "text": "The set $\\operatorname{Pic}(S)$ of the statement is an abelian group under $\\otimes_S$ with identity the class of $S$. Closure: if $L_1,L_2$ are in it, choose complements with $L_1\\oplus L_1'\\cong S^a$ and $L_2\\oplus L_2'\\cong S^b$ (Step 1); since tensor product distributes over finite direct sums, $L_1\\otimes_SL_2$ is a direct summand of $S^a\\otimes_SS^b\\cong S^{ab}$, hence finitely generated projective; and for every prime $\\mathfrak p$, $(L_1\\otimes_SL_2)_{\\mathfrak p}\\cong(L_1)_{\\mathfrak p}\\otimes_{S_{\\mathfrak p}}(L_2)_{\\mathfrak p}\\cong S_{\\mathfrak p}\\otimes_{S_{\\mathfrak p}}S_{\\mathfrak p}\\cong S_{\\mathfrak p}$ by [lem-weil-pbc-localization-tensor-product]. The class of $L_1\\otimes_SL_2$ depends only on the classes of $L_1,L_2$ by the functoriality $f\\otimes\\mathrm{id}$ of [def-weil-pbc-module-tensor-product], and the canonical associativity, commutativity and unit isomorphisms $S\\otimes_SL\\cong L$ of the tensor product give a commutative monoid with identity $[S]$. Inverses: for $L$ in $\\operatorname{Pic}(S)$ choose $L'$ with $L\\oplus L'\\cong S^n$ (Step 1). By Steps 1 and 2, $L\\otimes_S\\det_S(L')\\cong\\det_S(L)\\otimes_S\\det_S(L')\\cong\\det_S(L\\oplus L')\\cong\\det_S(S^n)\\cong S$, and $\\det_S(L')$ lies in $\\operatorname{Pic}(S)$ by Step 1; so its class is an inverse of the class of $L$.",
+   "uses": [
+    "lem-trf-projective-determinant-exact-sequence",
+    "lem-weil-pbc-localization-tensor-product",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Section Picard groups of rings (section-picard), Lemma 0B8I (lemma-invertible), lines 36118-36168, and the Picard-group paragraph, lines 36170-36181; here the inverse is obtained from Lemma 0FJB instead of the evaluation map whose details the source omits"
+   }
+  },
+  {
+   "text": "Send the generator of [def-trf-k0-group] indexed by the isomorphism class of a finite projective $Q$ to the class of $\\det_S(Q)$ in the abelian group $\\operatorname{Pic}(S)$ of Step 3; this is well defined on isomorphism classes by Step 1. It extends uniquely to a homomorphism from the free abelian group $\\mathbf Z^{(I_S)}$ of [def-trf-abelian-group-presentation], and by the direct-sum isomorphism of Step 1 it kills every relation $e_a+e_b-e_{a\\oplus b}$; hence it descends to a group homomorphism $\\det:K_0(S)=G(I_S,I_S\\times I_S,r)\\to\\operatorname{Pic}(S)$ with $\\det([Q])=[\\det_S(Q)]$. By Step 2, $\\det([Q])$ is the class of $Q$ when every $Q_{\\mathfrak p}$ is free of rank one, and $\\det([S])=[S]$, the identity of $\\operatorname{Pic}(S)$ by Step 3.",
+   "uses": [
+    "def-trf-k0-group",
+    "def-trf-abelian-group-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Lemma 0AFX (more-algebra-lemma-det), proof: 'the relations are mapped to 0', with the K_0 presentation at lines 36458-36461"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-projective-module",
+  "def-weil-pbc-module-localization",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-tensor-product",
+  "lem-trf-projective-determinant-exact-sequence",
+  "lem-weil-pbc-exterior-power-free-basis",
+  "lem-weil-pbc-localization-tensor-product",
+  "def-trf-k0-group",
+  "def-trf-abelian-group-presentation"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Lemma 0AFX (more-algebra-lemma-det), line 36463, with the determinant-module construction and Lemma 0FJB (lemma-det-ses)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,7 +128,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-k0-class-trivial-invertible",
@@ -81,5 +153,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-k0-determinant-map",
+  "worker": "stage1",
+  "summary": "Split the determinant-map statement directly from Stacks Lemma 0AFX. The existing determinant exact-sequence node supplies the determinant module and its tensor multiplicativity on the split sequence defining direct sums, so the generator assignment descends through the explicit K_0 presentation. The rank-one and free-rank-one specializations are the first-exterior-power cases. No new node was needed.",
+  "blueprint": "Realizes the Tag 0AFZ proof sentence invoking Lemma 0AFX: construct the determinant homomorphism on K_0, then identify the determinant of a rank-one module with that module and the determinant of S with the Picard identity.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-275d9d621",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-275d9d621 (reviewer sub-agent of L); spot-checked: Read Stacks more-algebra.tex (section-picard: 0B8I lemma-invertible, lines 36118-36181; section-determinants from line 36228 with det(phi) and 0FJB lemma-det-ses; the K_0 sentence at 36458-36461; 0AFX lemma-det at 36463-36475). Also read every cited node's statement, the citer lem-trf-k0-class-trivial-invertible and unit sk-i-curve-zero. The statement matches 0AFX specialized to rank one and to S; nothing is weakened, and it is not a restatement of its parent. Three repairable faults, all fixed in fixes/dag/nodes/sec-trace-formula/lem-trf-k0-determinant-map.json (proof and proof_deps only). (1) The proof used the abelian-group law on Pic(S) but never justified it. No ring-level DAG node states it, and Mathlib's CommRing.Pic rests on Module.Invertible, which is not a one-line match. A new Step 3 proves the group law: closure via the Mathlib leaf lem-weil-pbc-localization-tensor-product, the monoid axioms from the canonical tensor isomorphisms, and inverses as L tensor det(L') ≅ det(S^n) ≅ S, from the determinant exact-sequence node with L ⊕ L' ≅ S^n. (2) Well-definedness of det on isomorphism classes was not stated; Step 1 now derives it from the exact sequence 0->M1->M2->0->0 and det(0)=S. (3) Missing bridges: f.g. projective to direct summand of finite free, and locally free of rank one to free of rank one at each prime. Step 2 now forces local rank 1 on each D(f), cites lem-weil-pbc-exterior-power-free-basis for the first exterior power, and proves det(S^n) ≅ S by induction. The descent through def-trf-abelian-group-presentation is now explicit (Step 4). Checked edge cases: a field, k×k, a Dedekind domain, the zero ring, Q=S. No duplicates, no cycle, no off-unit statements, no tool_uses, no SGA. Not a target node, so the base-change/coefficient check does not apply.; 1 file(s) fixed by the reviewer"
  }
 }
