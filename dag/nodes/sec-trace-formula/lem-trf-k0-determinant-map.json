@@ -169,5 +169,23 @@
   "group": "Q04",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-275d9d621 (reviewer sub-agent of L); spot-checked: Read Stacks more-algebra.tex (section-picard: 0B8I lemma-invertible, lines 36118-36181; section-determinants from line 36228 with det(phi) and 0FJB lemma-det-ses; the K_0 sentence at 36458-36461; 0AFX lemma-det at 36463-36475). Also read every cited node's statement, the citer lem-trf-k0-class-trivial-invertible and unit sk-i-curve-zero. The statement matches 0AFX specialized to rank one and to S; nothing is weakened, and it is not a restatement of its parent. Three repairable faults, all fixed in fixes/dag/nodes/sec-trace-formula/lem-trf-k0-determinant-map.json (proof and proof_deps only). (1) The proof used the abelian-group law on Pic(S) but never justified it. No ring-level DAG node states it, and Mathlib's CommRing.Pic rests on Module.Invertible, which is not a one-line match. A new Step 3 proves the group law: closure via the Mathlib leaf lem-weil-pbc-localization-tensor-product, the monoid axioms from the canonical tensor isomorphisms, and inverses as L tensor det(L') ≅ det(S^n) ≅ S, from the determinant exact-sequence node with L ⊕ L' ≅ S^n. (2) Well-definedness of det on isomorphism classes was not stated; Step 1 now derives it from the exact sequence 0->M1->M2->0->0 and det(0)=S. (3) Missing bridges: f.g. projective to direct summand of finite free, and locally free of rank one to free of rank one at each prime. Step 2 now forces local rank 1 on each D(f), cites lem-weil-pbc-exterior-power-free-basis for the first exterior power, and proves det(S^n) ≅ S by induction. The descent through def-trf-abelian-group-presentation is now explicit (Step 4). Checked edge cases: a field, k×k, a Dedekind domain, the zero ring, Q=S. No duplicates, no cycle, no off-unit statements, no tool_uses, no SGA. Not a target node, so the base-change/coefficient check does not apply.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.K0DeterminantMap",
+  "declaration": "Module.FiniteProjectiveK0.exists_determinantMap",
+  "file": "lean/Sheaf/RingTheory/K0DeterminantMap.lean",
+  "statement": "theorem exists_determinantMap (S : Type u) [CommRing S] : ∃ det : Module.FiniteProjectiveK0 S →+ Additive (CommRing.Pic S), (∀ (Q : Type v) [AddCommGroup Q] [Module S Q] [Module.Finite S Q] [Module.Projective S Q], (∀ (p : Ideal S) [p.IsPrime], Nonempty (LocalizedModule p.primeCompl Q ≃ₗ[Localization p.primeCompl] Localization p.primeCompl)) → Nonempty (CommRing.Pic.AsModule (det (mk S Q)).toMul ≃ₗ[S] Q)) ∧ det (mk S S) = Additive.ofMul (1 : CommRing.Pic S)",
+  "branch": "newtargets-dag",
+  "by": "Q80",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-89a46abde",
+  "group": "Q80",
+  "result": "pass",
+  "note": "Only the K0DeterminantMap module and the node's lean record were delivered; the rest of the node equals the live node. Clauses match: CommRing.Pic is the node's Pic (0B8I). Rank one at each prime is an isomorphism with Localization p.primeCompl. det[Q]=[Q] is an isomorphism between AsModule(det[Q]) and Q (equivalent via Pic.mk_eq_iff). det[S]=1. Universes u and v are independent. lean.statement is verbatim. Not hollow; proof is sorry only. Imports: statement deps public, proof deps plain, consistent with the brief. Docstrings carry the source, blueprint id and proof steps 1-4. No existing Mathlib or project duplicate. Edge cases (zero ring, Q=S, field, k×k, Dedekind) checked. nt_compile --json is clean in 1.9 s. No findings."
  }
 }
