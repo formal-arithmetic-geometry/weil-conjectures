@@ -318,6 +318,19 @@ lemma unit_comp_map_openSquareExchange_inv_weil (sq : IsPullback ΦU j j ΦY)
         ((boundedConstructibleOpenImmersionLowerShriek _ ℓ j).obj M) :=
   unit_comp_map_baseChangeIso_inv_of_eq _ (weilUpperStarComparison_eq_flip sq hw) M
 
+noncomputable def testA (sq : IsPullback ΦU j j ΦY)
+    (hw : ΦU ≫ j = j ≫ ΦY) (K : WeilBoundedConstructible ℓ ΦU) :=
+  IsoAlgebra.mapOfNatIsoObjMapOfNatIsoObjIso
+    (adj := boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j)
+    (openSquareExchange ℓ sq) (weilUpperStarComparison ℓ ΦU ΦY j hw) K
+    (unit_comp_map_openSquareExchange_inv_weil sq hw K.carrier)
+
+set_option maxHeartbeats 400000 in
+noncomputable def testB (sq : IsPullback ΦU j j ΦY)
+    (hw : ΦU ≫ j = j ≫ ΦY) (K : WeilBoundedConstructible ℓ ΦU) :
+    (weilUpperStar ℓ ΦU ΦY j hw).obj ((weilOpenLowerShriek ℓ sq).obj K) ≅ K :=
+  testA sq hw K
+
 /-- **The restriction of the Weil extension by zero** (blueprint `def-trf-weil-extension-zero`):
 the unit of `j_! ⊣ Lj^*` is an isomorphism of Weil objects `j^* (j_! K) ≅ K`. -/
 noncomputable def weilUpperStarWeilOpenLowerShriekIso (sq : IsPullback ΦU j j ΦY)
