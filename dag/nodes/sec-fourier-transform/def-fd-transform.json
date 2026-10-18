@@ -3,11 +3,13 @@
  "blueprint": {
   "is": "def-fd-transform",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "sk-def-ft"
+  ]
  },
  "kind": "definition",
  "title": "The Fourier–Deligne transform",
- "statement": "For $K\\in D^b_c(V,E)$, $V_0\\to S_0$ being the rank-$r$ vector\nbundle of [def-fd-kernel], the *Fourier–Deligne transform*\nof $K$ is\n\n$$\n\\operatorname{FT}_\\psi(K):=p_{2,!}\\bigl(p_1^*K\\otimes^L_E\\mathcal K_\\psi\\bigr)[r],\n\\qquad p_1:V\\times_SV^\\vee\\to V,\\ p_2:V\\times_SV^\\vee\\to V^\\vee,\n$$\n\nin Laumon's normalization (the shift $[r]$ – the relative dimension\nof $V_0/S_0$ – is part of the definition; it is the\nnormalization for which the transform of a perverse object is\nperverse, and for which the inversion formula below holds without an\nadditional shift, up to the twist $(-r)$). It is an exact\ntriangulated functor on the ambient derived categories; on the bounded\nconstructible domains its well-definedness is asserted in the\nwell-definedness theorem below.",
+ "statement": "Let $\\Lambda$ be a commutative ring, let $p$ be a prime invertible in $\\Lambda$, and let $\\pi:V\\to S$ and $\\pi':V'\\to S$ be morphisms of schemes. Put $W=V\\times_SV'$, with projections $p_1:W\\to V$ and $p_2:W\\to V'$. Assume $p=0$ in $\\Gamma(W,\\mathcal O_W)$, and fix $b\\in\\Gamma(W,\\mathcal O_W)$ and an additive character $\\Psi:(\\mathbf F_p,+)\\to\\Lambda^\\times$. Let $\\mathcal K_\\psi=\\mathcal L_{\\Psi,b}$ be the Fourier kernel of [def-fd-kernel] (with the data and general coefficient convention of its current blueprint statement).\n\nUse the unbounded derived categories of sheaves of $\\Lambda$-modules on the small etale sites [def-weil-pbc-derived-categories]. Regard $\\mathcal K_\\psi$ as the complex $\\mathcal K_\\psi[0]$ concentrated in degree zero. The pullback $p_1^*$ means the functor on these derived categories induced by termwise inverse image of module sheaves: the inverse image identifies the constant ring sheaves and is exact by [prop-weil-pbc-inverse-image-modules-exact], so it descends by [lem-weil-pbc-exact-functor-derived-factorization]. The symbol $\\otimes^L_\\Lambda$ means the derived tensor product of [def-kun-derived-tensor].\n\nAssume $p_2$ admits a compactification [def-nagata-compactification], and choose one, written $c=(j,q)$ with $W\\xrightarrow{j}\\overline W\\xrightarrow{q}V'$, $j$ an open immersion, $q$ proper, and $qj=p_2$. Here compactification has the current blueprint meaning: the open immersion need not be quasi-compact. Write\n$$\n Rp_{2,!}=Rq_*\\circ D(j_!):D(W_{\\mathrm{\\acute et}},\\Lambda)\\longrightarrow D(V'_{\\mathrm{\\acute et}},\\Lambda)\n$$\nfor the functor computed using this chosen compactification. Here $j_!$ is etale extension by zero [def-weil-pbc-extension-by-zero]; its termwise application preserves quasi-isomorphisms by [lem-weil-pbc-extension-by-zero-exact], and $D(j_!)$ is the induced functor of [lem-weil-pbc-exact-functor-derived-factorization]. The functor $Rq_*$ is the unbounded total right derived functor of the sheaf direct image $q_*$ of [def-weil-pbc-direct-image], constructed by [lem-weil-pbc-kinjective-total-derived] using the K-injective resolutions of [def-weil-pbc-kinjective-resolutions], which exist for these module-sheaf categories by [prop-weil-pbc-kinjective-resolutions-exist]. Thus it is the total derived functor of $Qq_*$ on the homotopy category; this functor is exact because termwise application of the additive functor $q_*$ respects shifts and cone differentials. For a complex $L$ on $W$, it sends $QL$ to $Qq_*I$ after a K-injective resolution $j_!L\\to I$ on $\\overline W$.\n\nFor $r\\in\\mathbf Z$, the *Fourier–Deligne transform* is the composite functor\n$$\n \\operatorname{FT}_\\psi:D(V_{\\mathrm{\\acute et}},\\Lambda)\\longrightarrow D(V'_{\\mathrm{\\acute et}},\\Lambda),\\qquad\n \\operatorname{FT}_\\psi(K):=Rp_{2,!}\\bigl(p_1^*K\\otimes^L_\\Lambda\\mathcal K_\\psi[0]\\bigr)[r].\n$$\nIts value on a morphism $a:K\\to L$ is $\\bigl(Rp_{2,!}(p_1^*a\\otimes^L\\mathrm{id}_{\\mathcal K_\\psi[0]})\\bigr)[r]$. The cohomological shift has $(C[r])^i=C^{i+r}$ and differential $(-1)^r d_C^{i+r}$, and shifts morphisms degreewise (the cochain shift of [def-weil-abstract-derived-category], which induces the shift $[1]$ of the triangulated category $D(V'_{\\mathrm{\\acute et}},\\Lambda)$ and its integer powers $[r]$ [def-weil-triangulated-category]). In the vector-bundle application of [def-fd-kernel], $V=V_0\\to S_0$ has rank $r$, $V'=V_0^\\vee$ is its dual, and $b$ is evaluation; the shift by the rank is Laumon's normalization. On the affine line $r=1$. The transform $\\operatorname{FT}_{\\psi^{-1}}$ is the same construction, using $\\Psi^{-1}$ in place of $\\Psi$.\n\nThis defines the composite for the chosen compactification; comparison with another compactification and preservation of bounded constructible objects are separate properties.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-def-ft/def-fd-transform.md",
   "place": "node def-fd-transform, order 2693",
@@ -20,15 +22,69 @@
  },
  "stmt_deps": [
   "def-fd-kernel",
-  "def-weil-pbc-qbar-category",
-  "def-weil-pbc-scheme-conventions"
+  "def-weil-pbc-derived-categories",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-kun-derived-tensor",
+  "def-nagata-compactification",
+  "def-weil-pbc-extension-by-zero",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-kinjective-total-derived",
+  "def-weil-pbc-kinjective-resolutions",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Fourier Deligne transform on derived categories of etale sheaves as pullback tensor Artin Schreier kernel compact support pushforward and shift",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pseudofunctor, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackObjUnitToUnit, AlgebraicGeometry.Scheme.Modules.pushforward, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern analytic Fourier transforms or structure-sheaf pullback, not this etale kernel transform"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fourierTransform\"",
+   "results": "12 hits: FourierTransform.«term𝐞», FourierTransform.term𝓕, FourierTransform.«term𝓕⁻», FourierTransform, FourierTransformInv, FourierTransform.fourier, FourierTransform.mk, FourierTransformInv.fourierInv",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern analytic Fourier transforms or structure-sheaf pullback, not this etale kernel transform"
+  },
+  {
+   "tool": "grep",
+   "query": "fourierTransform|Fourier.Deligne|kernelTransform",
+   "results": "25 hits: Mathlib/NumberTheory/LSeries/DirichletContinuation.lean, Mathlib/Probability/Distributions/Gaussian/Real.lean, Mathlib/MeasureTheory/Measure/CharacteristicFunction.lean, Mathlib/MeasureTheory/Measure/CharacteristicFunction/Basic.lean, Mathlib/MeasureTheory/Measure/CharacteristicFunction/TaylorExpansion.lean, Mathlib/Analysis/MellinInversion.lean, Mathlib/Analysis/SpecialFunctions/Gaussian/PoissonSummation.lean, Mathlib/Analysis/SpecialFunctions/Gaussian/PoissonSummation.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern analytic Fourier transforms or structure-sheaf pullback, not this etale kernel transform"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Fourier Deligne transform of etale sheaves via an Artin Schreier kernel",
+   "results": "8 hits: FourierTransform, FourierTransform.mk, FourierTransform.fourier, FourierTransform.fourierₗ, FourierPair, Real.fourierIntegral, FourierAdd.fourier_add, FourierTransform.recOn",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern analytic Fourier transforms or structure-sheaf pullback, not this etale kernel transform"
+  },
+  {
+   "tool": "grep",
+   "query": "kernelTransform|[Ff]ourier.?[Dd]eligne|[Aa]rtin[Ss]chreierSheaf",
+   "results": "0 hits: . Subdirectory: AlgebraicGeometry",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern analytic Fourier transforms or structure-sheaf pullback, not this etale kernel transform"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral transform of complexes of sheaves on a scheme obtained from a kernel on a fiber product by derived tensor and proper support direct image",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.pushforward, AlgebraicGeometry.Scheme.Modules.pseudofunctor, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pullback, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r, AlgebraicGeometry.Scheme.Modules.instAdditivePushforward",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern analytic Fourier transforms or structure-sheaf pullback, not this etale kernel transform"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -128,5 +184,20 @@
   "group": "Q05",
   "result": "fix",
   "note": "Read the item node, the def-wf-tate-twist and def-fd-transform records, the blueprint source, the report and both modules. Statements: FT_{psi^-1} after FT_psi ~ tateTwist(-card n) and FT_psi after FT_psi ~ upperStar(AffineSpace.neg) then tateTwist(-card n), as functor isomorphisms on WeilComplex over AffineSpace n (Spec k0) with Fintype n (rank 0 allowed). Hypotheses: Fact l.Prime, ringChar k0 != l, psi != 1 (the chapter's standing nontriviality). Composition order and twist sign checked against Laumon 1.2.2.1, TateTwist.lean and the upstream rank-one nonempty_iso_fourierTransform_comp_inv. Edge cases rank 0, rank 1, char 2 and zero complex are fine; no universe restriction. The section 1(B) dependency module for def-fd-transform is justified (the recorded transform is ordinary-etale; the upstream Weil transform is rank one) and has real data and canonical instances. FINDING H4/H13: WeilSheaf.fourierPairingKernel duplicated the existing upstream artinSchreierOf (WeilSheaf/FourierInversion/Defs.lean); fixes/WeilFourierTransform.lean uses artinSchreierOf and isLisse_artinSchreierOf and imports FourierInversion.Defs, with no signature change. Fixed report adds a reviewer section: the worker's searches missed WeilSheaf/FourierInversion.lean (rank-one first formula only, so the item is not existing). The merge refit will drop Etale.fourierTransform from def-fd-transform lean.declarations; it stays publicly imported and in blueprint_lean. nt_compile.py: delivered pair 4.0 s and 3.6 s, fixed pair 3.7 s and 3.6 s, exit 0, no messages (the tool sets warn.sorry=false). Axiom probe: sorryAx in the defs comes from upstream functors; no sorry outside the two theorem proofs."
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "def-fd-transform",
+  "worker": "stage1",
+  "summary": "Followed the main-20261015 blueprint_update: ordinary unbounded etale module categories, general coefficient ring and arbitrary shift. Definition split into existing kernel, derived categories, exact pullback, derived tensor, compactification, extension by zero, K-injective total direct image and shift notions. Expanded the chosen-compactification construction without importing restricted pro-etale or Noetherian statements. No new nodes. Retained the empty fiber product and all coefficient/shift cases. The previous proposed Lean attachment is narrower by CharP.",
+  "blueprint": "main-20261015/blueprint/sec-fourier-transform/sk-def-ft/def-fd-transform.md, all paragraphs; sk-def-ft/_section.md, defining formula, rank normalization, inverse character and affine-line specialization. This is a definition, with no proof steps."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NR-2482ad30b",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-2482ad30b (reviewer sub-agent of L); spot-checked: I read the whole item. It is a definition split with no new nodes. Its statement matches its stored blueprint_update and the main-20261015 text (sk-def-ft/def-fd-transform.md and _section.md) clause by clause: any commutative Lambda with p invertible, arbitrary V->S and V'->S, p=0 on W, b in Gamma(W), Psi on F_p, one chosen compactification of p2 whose open immersion need not be quasi-compact (I checked the BU of def-nagata-compactification), FT(K)=Rp2!(p1^*K (x)^L K_psi[0])[r] with r in Z, plus the vector-bundle rank, A^1 and Psi^-1 remarks. It drops the old D^b_c(V,E) and qbar category as the BU requires, and the report names that change. Laumon (1.2.1.1), PDF pp. 10-11, has the same order: pullback, tensor, R!, then [r]. The slopmaster2 FourierTransform/Defs.lean lines 229-273 build the same composite. Checks of each cited node: prop-weil-pbc-inverse-image-modules-exact (1)-(3) plus lem-weil-pbc-exact-functor-derived-factorization give exact p1^* on unbounded D for any u and any R. def-kun-derived-tensor covers any Lambda and any T on the small etale site. def-weil-pbc-extension-by-zero and lem-weil-pbc-extension-by-zero-exact cover any open immersion. The module q_* of def-weil-pbc-direct-image, the K-injectives of prop-weil-pbc-kinjective-resolutions-exist and lem-weil-pbc-kinjective-total-derived give Rq_*; the exactness of Q o K(q_*) is elementary (cones and shifts are preserved termwise), the same pattern as def-sfb-right-derived-functor. def-fd-kernel is cited through its BU (Lambda-module AS sheaf, valid by def-fd-artin-schreier-sheaf's BU). Edge cases: W empty (p=0 holds, which is why the Lean's CharP is rightly not required), Lambda=0, p=2, trivial Psi, r<=0, and FT(delta_0)=Lambda[1] on A^1. No cycle, no SGA, Mathlib searches recorded, same_as=[sk-def-ft] correct, unit record untouched, no tool_uses needed. FIX: the item attributed the cochain shift convention to def-weil-triangulated-category, which defines only an abstract shift. The corrected file now cites def-weil-abstract-derived-category for the cochain shift and adds it to stmt_deps. For the maintainer: the base's stage-2 lean record (WeilComplex.fourierTransformOfPairing, PadicAlgCl coefficients) no longer matches the ordinary-etale definition, and adic/Weil citers (lem-fd-base-change, cor-fd-origin-stationary-phase) rely on reading the formula with adic operations; stage 2 should reopen both.; 1 file(s) fixed by the reviewer"
  }
 }
