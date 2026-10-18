@@ -8,6 +8,7 @@ module
 public import WeilConjectures.WeilSheaf.ProjectionFormula.LowerStarIhom
 public import WeilConjectures.WeilSheaf.LowerShriek
 public import WeilConjectures.WeilSheaf.FourierTateTwist.ConstantTwist
+public import WeilConjectures.WeilSheaf.ProjectionFormula.DualPullbackWeil
 
 /-!
 # Direct image with compact support and internal homs out of lisse sheaves
@@ -171,5 +172,33 @@ theorem nonempty_iso_derivedLowerShriek_tensorLisse_of_nonempty {X Y : Scheme.{u
   exact ObjectProperty.nonempty_liftFullSubcategory_comp_iso _ _ _ _
     (E ≪≫ Functor.isoWhiskerRight
       (Functor.rightDerivedFunctorNatIso (ihomFunctorMapIsoLeft (φ.symm ≪≫ ψ))) _)
+
+/-- **The projection formula for Weil complexes, from the compatibility of extension by zero
+with internal homs**: `Rf₀!(K) ⊗ G ≅ Rf₀!(K ⊗ f^* G)` for a lisse Weil sheaf `G`, assuming that
+the extension by zero along open immersions commutes with internal homs out of lisse sheaves
+(`hU2`). The dual of `G` commutes with the pullback along `f`
+(`AlgebraicGeometry.ProEtaleWeilSheaf.nonempty_upperStar_obj_dual_iso`). -/
+theorem nonempty_iso_derivedLowerShriek_tensorLisse_of_extensionByZero {X Y : Scheme.{u}}
+    [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Y)
+    [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
+    [QuasiCompact f] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] (G : WeilSheaf k₀ l Y) (hG : G.IsLisse)
+    (hU2 : ∀ {U Z : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
+      [Z.Over (Spec (CommRingCat.of k₀))] (j : U ⟶ Z) [IsOpenImmersion j]
+      [j.IsOver (Spec (CommRingCat.of k₀))] (M : ProEtaleWeilSheaf k₀ l Z),
+      ProEtale.IsAdicLisseSheaf M.carrier →
+        Nonempty (extensionByZero k₀ l j ⋙ ihomFunctor k₀ l Z M ≅
+          ihomFunctor k₀ l U ((ProEtaleWeilSheaf.upperStar k₀ l j).obj M) ⋙
+            extensionByZero k₀ l j)) :
+    Nonempty (derivedLowerShriek k₀ l f ⋙ tensorLisse G hG ≅
+      tensorLisse ((WeilSheaf.upperStar f).obj G) (ProEtale.IsAdicLisseSheaf.upperStar _ hG) ⋙
+        derivedLowerShriek k₀ l f) := by
+  have : QuasiCompact (X ↘ Spec (CommRingCat.of k₀)) := by
+    rw [← comp_over f (Spec (CommRingCat.of k₀))]
+    infer_instance
+  exact nonempty_iso_derivedLowerShriek_tensorLisse_of_nonempty f G hG hU2
+    (nonempty_upperStar_obj_dual_iso f G hG)
 
 end AlgebraicGeometry.WeilComplex
