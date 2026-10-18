@@ -11,17 +11,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.RingTheory.RingHom.Flat
-public import Sheaf.Topology.PresheafModuleStalkFunctor
 
-import Sheaf.RingTheory.FibreLocalRingNaturalIso
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.RingTheory.FiniteType
-import Mathlib.RingTheory.Localization.Submodule
-import Mathlib.RingTheory.Flat.Stability
-import Mathlib.LinearAlgebra.TensorProduct.Quotient
+import Mathlib.AlgebraicGeometry.Noetherian
+import Sheaf.AlgebraicGeometry.FibreStalkQuotient
 
 /-! # Local models of the fibres of a composite
 
@@ -31,12 +23,113 @@ Source: Stacks Project, Tags 0HA1, 01T3, 01T4, 01T6, 01U8, 02FX
 
 @[expose] public section
 
-open CategoryTheory
+open CategoryTheory Limits
 open AlgebraicGeometry
 
 universe u
 
 namespace AlgebraicGeometry
+
+private theorem fibre_neighbourhood {Y T : Scheme.{u}} (g : Y ⟶ T)
+    [LocallyOfFiniteType g] (y : Y) :
+    ∃ V : (g.fiber (g y)).Opens, IsAffineOpen V ∧
+      LocallyOfFiniteType (V.ι ≫ g.fiberToSpecResidueField (g y)) ∧
+      QuasiCompact (V.ι ≫ g.fiberToSpecResidueField (g y)) ∧
+      ∃ v : V, V.ι v = g.asFiber y ∧ IsIso (V.ι.stalkMap v) ∧
+        IsIso (V.ι.residueFieldMap v) ∧
+        IsIso ((g.fiberι (g y)).residueFieldMap (V.ι v)) ∧
+        IsIso ((V.ι ≫ g.fiberι (g y)).residueFieldMap v) := by
+  obtain ⟨V, hV, hy, -⟩ := exists_isAffineOpen_mem_and_subset
+    (x := g.asFiber y) (U := ⊤) trivial
+  have : IsAffine V := hV
+  have : LocallyOfFiniteType (g.fiberToSpecResidueField (g y)) :=
+    MorphismProperty.pullback_snd _ _ inferInstance
+  let v : V := ⟨g.asFiber y, hy⟩
+  have hres : IsIso ((g.fiberι (g y)).residueFieldMap (V.ι v)) := by
+    apply (ConcreteCategory.isIso_iff_bijective _).mpr
+    refine ⟨RingHom.injective _, ?_⟩
+    intro z
+    obtain ⟨z, rfl⟩ := IsLocalRing.residue_surjective z
+    obtain ⟨w, hw⟩ := (g.fiberι (g y)).stalkMap_surjective (V.ι v) z
+    refine ⟨IsLocalRing.residue _ w, ?_⟩
+    change IsLocalRing.residue _ ((g.fiberι (g y)).stalkMap (V.ι v) w) = _
+    rw [hw]
+  refine ⟨V, hV, inferInstance, inferInstance, v, rfl, inferInstance, inferInstance,
+    hres, ?_⟩
+  rw [Scheme.residueFieldMap_comp]
+  infer_instance
+
+private theorem residue_square {Y Z U X : Scheme.{u}} (b : Y ⟶ Z) (i : Y ⟶ U)
+    (j : Z ⟶ X) (a : U ⟶ X) (h : b ≫ j = i ≫ a)
+    (p : Y) (q : Z) (v : U) (hb : b p = q) (hi : i p = v) (hj : j q = a v) :
+    (X.residueFieldCongr hj).inv ≫ j.residueFieldMap q ≫
+      (Z.residueFieldCongr hb).inv ≫ b.residueFieldMap p =
+      a.residueFieldMap v ≫ (U.residueFieldCongr hi).inv ≫ i.residueFieldMap p := by
+  subst q v
+  have hh := Scheme.Hom.residueFieldMap_congr h p
+  simp only [Scheme.residueFieldMap_comp] at hh
+  simpa using congrArg (fun k ↦ (X.residueFieldCongr hj).inv ≫ k) hh
+
+private theorem stalk_square {Y Z U X : Scheme.{u}} (b : Y ⟶ Z) (i : Y ⟶ U)
+    (j : Z ⟶ X) (a : U ⟶ X) (h : b ≫ j = i ≫ a)
+    (p : Y) (q : Z) (v : U) (hb : b p = q) (hi : i p = v) (hj : j q = a v) :
+    (X.presheaf.stalkCongr (.of_eq hj)).inv ≫ j.stalkMap q ≫
+      (Z.presheaf.stalkCongr (.of_eq hb)).inv ≫ b.stalkMap p =
+      a.stalkMap v ≫ (U.presheaf.stalkCongr (.of_eq hi)).inv ≫ i.stalkMap p := by
+  subst q v
+  have hh := Scheme.Hom.stalkMap_congr_hom _ _ h p
+  simp only [Scheme.Hom.stalkMap_comp] at hh
+  simpa using congrArg (fun k ↦ (X.presheaf.stalkCongr (.of_eq hj)).inv ≫ k) hh
+
+private theorem quotient_common_source {E B C : Type u}
+    [CommRing E] [CommRing B] [CommRing C]
+    (ρ : E →+* B) (σ : E →+* C) (hρ : Function.Surjective ρ)
+    (hσ : Function.Surjective σ) (J : Ideal B)
+    (hk : RingHom.ker σ = J.comap ρ) :
+    ∃ e : (B ⧸ J) ≃+* C, ∀ z, e (Ideal.Quotient.mk J (ρ z)) = σ z := by
+  let τ := (Ideal.Quotient.mk J).comp ρ
+  have hτ : Function.Surjective τ := Ideal.Quotient.mk_surjective.comp hρ
+  have hk' : RingHom.ker τ = RingHom.ker σ := by
+    rw [← RingHom.comap_ker, Ideal.mk_ker, hk]
+  let e := (τ.quotientKerEquivOfSurjective hτ).symm.trans
+    ((Ideal.quotEquivOfEq hk').trans (σ.quotientKerEquivOfSurjective hσ))
+  refine ⟨e, ?_⟩
+  intro z
+  change e (τ z) = σ z
+  simp [e]
+
+private theorem surjective_square_pushout {D E A B : CommRingCat.{u}}
+    (d : D ⟶ E) (π : D ⟶ A) (ρ : E ⟶ B) (φ : A ⟶ B)
+    (hπ : Function.Surjective π) (hρ : Function.Surjective ρ)
+    (hw : π ≫ φ = d ≫ ρ) (hk : RingHom.ker ρ.hom = (RingHom.ker π.hom).map d.hom) :
+    IsPushout d π ρ φ := by
+  let s := PushoutCocone.mk ρ φ hw.symm
+  apply IsPushout.of_isColimit (c := s)
+  apply PushoutCocone.isColimitAux'
+  intro t
+  have hkill : RingHom.ker ρ.hom ≤ RingHom.ker t.inl.hom := by
+    rw [hk, Ideal.map_le_iff_le_comap]
+    intro z hz
+    have he := congrArg (fun k ↦ k z) t.condition
+    change t.inl.hom (d.hom z) = 0
+    simpa [RingHom.mem_ker.mp hz] using he
+  let l := ρ.hom.liftOfSurjective hρ ⟨t.inl.hom, hkill⟩
+  have hl (z : E) : l (ρ z) = t.inl z := ρ.hom.liftOfSurjective_comp_apply hρ _ z
+  refine ⟨CommRingCat.ofHom l, ?_, ?_, ?_⟩
+  · ext z
+    exact hl z
+  · ext z
+    obtain ⟨z, rfl⟩ := hπ z
+    have he := congrArg (fun k ↦ k z) hw
+    change l (φ (π z)) = t.inr (π z)
+    rw [show φ (π z) = ρ (d z) from he, hl]
+    exact congrArg (fun k ↦ k z) t.condition
+  · intro m hm _
+    ext z
+    obtain ⟨z, rfl⟩ := hρ z
+    change m.hom (ρ z) = l (ρ z)
+    rw [hl]
+    exact congrArg (fun k ↦ k z) hm
 
 /-- Local models for the three pointed fibres, including their canonical maps.
 
@@ -191,6 +284,75 @@ theorem composite_fibre_local_models
           IsIso ((T.ι ≫ a.fiberι (a u₀)).residueFieldMap v)) ∧
       (f.residueFieldMap (a u₀) ≫ a.residueFieldMap u₀ =
         (a ≫ f).residueFieldMap u₀) := by
-  sorry
+  classical
+  have hf : LocallyOfFiniteType (f.fiberToSpecResidueField (f (a u₀))) :=
+    MorphismProperty.pullback_snd _ _ inferInstance
+  have haf : LocallyOfFiniteType ((a ≫ f).fiberToSpecResidueField (f (a u₀))) :=
+    MorphismProperty.pullback_snd _ _ inferInstance
+  have ha : LocallyOfFiniteType (a.fiberToSpecResidueField (a u₀)) :=
+    MorphismProperty.pullback_snd _ _ inferInstance
+  have hfn := LocallyOfFiniteType.isLocallyNoetherian
+    (f.fiberToSpecResidueField (f (a u₀)))
+  have hafn := LocallyOfFiniteType.isLocallyNoetherian
+    ((a ≫ f).fiberToSpecResidueField (f (a u₀)))
+  have han := LocallyOfFiniteType.isLocallyNoetherian (a.fiberToSpecResidueField (a u₀))
+  refine ⟨inferInstance, inferInstance, inferInstance, ?_, ?_, ?_, ?_, ?_⟩
+  · let b : (a ≫ f).fiber (f (a u₀)) ⟶ f.fiber (f (a u₀)) :=
+      pullback.lift ((a ≫ f).fiberι _ ≫ a)
+        ((a ≫ f).fiberToSpecResidueField _) (by simp [Category.assoc, Scheme.Hom.fiber_fac])
+    have hb₁ : b ≫ f.fiberι _ = (a ≫ f).fiberι _ ≫ a := pullback.lift_fst ..
+    have hb₂ : b ≫ f.fiberToSpecResidueField _ =
+        (a ≫ f).fiberToSpecResidueField _ := pullback.lift_snd ..
+    have hb : b ((a ≫ f).asFiber u₀) = f.asFiber (a u₀) := by
+      apply (f.fiberι _).isEmbedding.injective
+      rw [← Scheme.Hom.comp_apply, hb₁]
+      change a ((a ≫ f).fiberι _ ((a ≫ f).asFiber u₀)) = _
+      rw [Scheme.Hom.fiberι_asFiber, Scheme.Hom.fiberι_asFiber]
+    let φ := (((f.fiber (f (a u₀))).presheaf.stalkCongr (.of_eq hb)).inv ≫
+      b.stalkMap ((a ≫ f).asFiber u₀)).hom
+    let π := f.fiberStalkMap (a u₀)
+    let ρ := (a ≫ f).fiberStalkMap u₀
+    let σ := a.fiberStalkMap u₀
+    obtain ⟨hπ, hkπ, -⟩ := f.fiberStalkMap_surjective_ker_quotientEquiv (a u₀)
+    obtain ⟨hρ, hkρ, -⟩ := (a ≫ f).fiberStalkMap_surjective_ker_quotientEquiv u₀
+    obtain ⟨hσ, hkσ, -⟩ := a.fiberStalkMap_surjective_ker_quotientEquiv u₀
+    have hw : π ≫ CommRingCat.ofHom φ = a.stalkMap u₀ ≫ ρ := by
+      exact stalk_square b ((a ≫ f).fiberι _) (f.fiberι _) a hb₁
+        ((a ≫ f).asFiber u₀) (f.asFiber (a u₀)) u₀ hb
+        ((a ≫ f).fiberι_asFiber u₀) (f.fiberι_asFiber (a u₀))
+    have hw' : φ.comp π.hom = ρ.hom.comp (a.stalkMap u₀).hom :=
+      congrArg CommRingCat.Hom.hom hw
+    have hkρ' : RingHom.ker ρ.hom =
+        (RingHom.ker π.hom).map (a.stalkMap u₀).hom := by
+      rw [hkρ, hkπ, Ideal.map_map, Scheme.Hom.stalkMap_comp]
+      rfl
+    refine ⟨b, hb₁, hb₂, hb, φ, rfl, ?_, ?_, ?_, ?_⟩
+    · dsimp [φ]
+      infer_instance
+    · let J := (IsLocalRing.maximalIdeal _).map φ
+      have hJ : J = (RingHom.ker σ.hom).map ρ.hom := by
+        dsimp only [J]
+        rw [← IsLocalRing.map_maximalIdeal_of_surjective π.hom hπ,
+          Ideal.map_map, hw', ← Ideal.map_map, hkσ]
+      have hle : RingHom.ker ρ.hom ≤ RingHom.ker σ.hom := by
+        rw [hkρ', hkσ]
+        apply Ideal.map_mono
+        exact IsLocalRing.le_maximalIdeal (RingHom.ker_ne_top π.hom)
+      have hker : RingHom.ker σ.hom = J.comap ρ.hom := by
+        rw [hJ, Ideal.comap_map_of_surjective _ hρ]
+        exact (sup_eq_left.mpr hle).symm
+      exact quotient_common_source ρ.hom σ.hom hρ hσ J hker
+    · exact residue_square b ((a ≫ f).fiberι _) (f.fiberι _) a hb₁
+        ((a ≫ f).asFiber u₀) (f.asFiber (a u₀)) u₀ hb
+        ((a ≫ f).fiberι_asFiber u₀) (f.fiberι_asFiber (a u₀))
+    · intro hflat
+      exact MorphismProperty.of_isPushout
+        (P := CommRingCat.flat)
+        (surjective_square_pushout (a.stalkMap u₀) π ρ (CommRingCat.ofHom φ)
+          hπ hρ hw hkρ').flip hflat
+  · exact fibre_neighbourhood f (a u₀)
+  · exact fibre_neighbourhood (a ≫ f) u₀
+  · exact fibre_neighbourhood a u₀
+  · exact (Scheme.residueFieldMap_comp a f u₀).symm
 
 end AlgebraicGeometry
