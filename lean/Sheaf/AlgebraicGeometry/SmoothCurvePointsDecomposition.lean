@@ -11,16 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
-import Mathlib.Topology.KrullDimension
-import Mathlib.Topology.Irreducible
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.RingTheory.RegularLocalRing.Defs
 import WeilConjectures.AlgebraicGeometry.Regular
-import WeilConjectures.AlgebraicGeometry.Modules.VeryAmple
 import Sheaf.AlgebraicGeometry.ZeroDimIntegralPoint
 
 /-!
@@ -106,6 +97,132 @@ theorem smooth_curve_points_decomposition
               | Sum.inl i => D i
               | Sum.inr _ => Spec (.of k)) s))
  := by
-  sorry
+  classical
+  have : IsLocallyNoetherian C := LocallyOfFiniteType.isLocallyNoetherian f
+  have : CompactSpace C := QuasiCompact.compactSpace_of_compactSpace f
+  have : IsNoetherian C := {}
+  let A := ConnectedComponents C
+  let : Fintype A := Fintype.ofFinite A
+  let V : A → C.Opens := fun a ↦ ⟨ConnectedComponents.mk ⁻¹' {a}, by
+    obtain ⟨x, rfl⟩ := ConnectedComponents.surjective_coe a
+    rw [connectedComponents_preimage_singleton]
+    exact TopologicalSpace.NoetherianSpace.isOpen_connectedComponent _⟩
+  have hcl (a : A) : IsClosed (V a : Set C) :=
+    isClosed_singleton.preimage ConnectedComponents.continuous_coe
+  have hconn (a : A) : ConnectedSpace (V a).toScheme := by
+    obtain ⟨x, rfl⟩ := ConnectedComponents.surjective_coe a
+    have h : (V (ConnectedComponents.mk x) : Set C) = connectedComponent x :=
+      connectedComponents_preimage_singleton
+    exact isConnected_iff_connectedSpace.mp (h ▸ isConnected_connectedComponent)
+  let g : ∀ a : A, (V a).toScheme ⟶ Spec (.of k) := fun a ↦ (V a).ι ≫ f
+  have hgsm (a : A) : Smooth (g a) := by dsimp [g]; infer_instance
+  have hgin (a : A) : IsIntegral (V a).toScheme := by
+    have := hgsm a
+    have := IsRegular.of_smooth (g a)
+    have := hconn a
+    exact IsRegular.isIntegral (V a).toScheme
+  have hgcl (a : A) : IsClosedImmersion (V a).ι :=
+    .of_isPreimmersion _ ((V a).range_ι ▸ hcl a)
+  have hgdim (a : A) : topologicalKrullDim (V a).toScheme ≤ 1 :=
+    (topologicalKrullDim_subspace_le C (V a)).trans (IsCurve.krullDim_le_one (f := f))
+  have hgcurve (a : A) : IsCurve (g a) := by
+    have := hgcl a
+    dsimp [g]
+    exact { krullDim_le_one := hgdim a }
+  have hdim (a : A) : topologicalKrullDim (V a).toScheme = 0 ∨
+      topologicalKrullDim (V a).toScheme = 1 := by
+    have := hgin a
+    have : Nonempty (TopologicalSpace.IrreducibleCloseds (V a).toScheme) :=
+      ⟨⟨Set.univ, IrreducibleSpace.isIrreducible_univ _, isClosed_univ⟩⟩
+    have hnonneg : 0 ≤ topologicalKrullDim (V a).toScheme := Order.krullDim_nonneg
+    have hle := hgdim a
+    generalize topologicalKrullDim (V a).toScheme = t at hnonneg hle ⊢
+    cases t with
+    | bot => simp at hnonneg
+    | coe t =>
+      have ht : t ≤ 1 := by exact_mod_cast hle
+      rcases Order.le_one_iff.mp ht with ht | ht <;> simp [ht]
+  let I := {a : A // topologicalKrullDim (V a).toScheme = 1}
+  let J := {a : A // topologicalKrullDim (V a).toScheme ≠ 1}
+  let D : I → Scheme.{u} := fun i ↦ (V i.val).toScheme
+  let d : ∀ i : I, D i ⟶ Spec (.of k) := fun i ↦ g i.val
+  have hdcurve (i : I) : IsConnectedCurve (d i) := by
+    have := hgin i.val
+    have := hgcurve i.val
+    exact { connectedSpace := inferInstance, krullDim_eq_one := i.property }
+  have hdsm (i : I) : Smooth (d i) := hgsm i.val
+  have hjiso (j : J) : IsIso (g j.val) := by
+    let : (V j.val).toScheme.Over (Spec (.of k)) := ⟨g j.val⟩
+    have := hgin j.val
+    have : LocallyOfFiniteType ((V j.val).toScheme ↘ Spec (.of k)) :=
+      (hgcurve j.val).toLocallyOfFiniteType
+    have : QuasiCompact ((V j.val).toScheme ↘ Spec (.of k)) :=
+      (hgcurve j.val).toQuasiCompact
+    exact isIso_structure_of_integral_zero_dim (V j.val).toScheme
+      ((hdim j.val).resolve_right j.property)
+  let E : Sum I J → Scheme.{u} := fun s ↦ match s with
+    | Sum.inl i => D i
+    | Sum.inr _ => Spec (.of k)
+  let r : Sum I J ≃ A := Equiv.sumCompl fun a ↦ topologicalKrullDim (V a).toScheme = 1
+  let α : ∀ s, E s ⟶ C := fun s ↦ match s with
+    | Sum.inl i => (V i.val).ι
+    | Sum.inr j => (asIso (g j.val)).inv ≫ (V j.val).ι
+  have hαopen (s) : IsOpenImmersion (α s) := by
+    cases s with
+    | inl i => dsimp [α]; infer_instance
+    | inr j => have := hjiso j; dsimp [α]; infer_instance
+  have hαclosed (s) : IsClosedImmersion (α s) := by
+    cases s with
+    | inl i => exact hgcl i.val
+    | inr j =>
+      have := hjiso j
+      have := hgcl j.val
+      dsimp [α]
+      infer_instance
+  have hrange (s) : (α s).opensRange = V (r s) := by
+    cases s with
+    | inl i => exact (V i.val).opensRange_ι
+    | inr j =>
+      have := hjiso j
+      dsimp [α, r]
+      rw [Scheme.Hom.opensRange_comp_of_isIso, Scheme.Opens.opensRange_ι]
+      rfl
+  have hαcov : ⨆ s, (α s).opensRange = ⊤ := by
+    simp only [hrange]
+    rw [r.surjective.iSup_comp]
+    apply top_unique
+    intro x _
+    exact TopologicalSpace.Opens.mem_iSup.mpr ⟨ConnectedComponents.mk x, rfl⟩
+  have hαdisj : Pairwise (fun s t ↦ Disjoint (α s).opensRange (α t).opensRange) := by
+    intro s t hst
+    rw [hrange, hrange]
+    rw [← TopologicalSpace.Opens.coe_disjoint]
+    exact (Set.disjoint_singleton.mpr (r.injective.ne hst)).preimage _
+  have hcolim := nonempty_isColimit_cofanMk_of α hαcov hαdisj
+  have hdesc : IsIso (Sigma.desc α) := by
+    simpa only [Cofan.nonempty_isColimit_iff_isIso_sigmaDesc,
+      cofan_mk_inj, Cofan.mk_pt] using hcolim
+  let e : C ≅ ∐ E := (asIso (Sigma.desc α)).symm
+  let q : (∐ E) ⟶ Spec (.of k) := Sigma.desc α ≫ f
+  refine ⟨I, J, inferInstance, inferInstance, D, d, hdcurve, hdsm, q, ?_, ?_, e, ?_,
+    ?_, ?_⟩
+  · intro i
+    change Sigma.ι E (Sum.inl i) ≫ (Sigma.desc α ≫ f) = d i
+    rw [← Category.assoc, Sigma.ι_desc]
+  · intro j
+    change Sigma.ι E (Sum.inr j) ≫ (Sigma.desc α ≫ f) = 𝟙 _
+    rw [← Category.assoc, Sigma.ι_desc]
+    change ((asIso (g j.val)).inv ≫ (V j.val).ι) ≫ f = 𝟙 _
+    rw [Category.assoc]
+    exact (asIso (g j.val)).inv_hom_id
+  · change (asIso (Sigma.desc α)).inv ≫ ((asIso (Sigma.desc α)).hom ≫ f) = f
+    simp
+  · intro s
+    exact inferInstanceAs (IsOpenImmersion (Sigma.ι E s))
+  · intro s
+    have : IsClosedImmersion (Sigma.ι E s ≫ Sigma.desc α) := by
+      rw [Sigma.ι_desc]
+      exact hαclosed s
+    exact IsClosedImmersion.of_comp (Sigma.ι E s) (Sigma.desc α)
 
 end AlgebraicGeometry
