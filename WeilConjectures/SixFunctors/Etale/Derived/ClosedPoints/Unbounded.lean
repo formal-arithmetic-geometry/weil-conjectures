@@ -278,4 +278,94 @@ lemma preservesLimitsOfShape_discrete_nat_rightDerivedFunctor (F : C ⥤ ModuleC
 
 end Products
 
+section Truncation
+
+variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+  [HasDerivedCategory C] [HasDerivedCategory D]
+  (F : C ⥤ D) [F.Additive] [EnoughInjectives C] [Abelian.HasKInjectiveResolutions C]
+
+/-- Let `K ∈ D(C)` with `H^{-n-1}(K)` acyclic for the left exact functor `F`. Then the
+transition `τ^{≥ -n-1} K ⟶ τ^{≥ -n} K` induces isomorphisms on `Hᵐ(RF(-))` for `m ≥ -n`: its
+fiber is `H^{-n-1}(K)` placed in degree `-n-1`, whose image under `RF` is concentrated in degree
+`-n-1`. -/
+lemma isIso_homology_rightDerivedFunctor_map_truncGETower_map_succ [PreservesFiniteLimits F]
+    (K : DerivedCategory C) (n : ℕ)
+    (hK : F.IsRightAcyclic ((DerivedCategory.homologyFunctor C (-(n : ℤ) - 1)).obj K))
+    (m : ℤ) (hm : -(n : ℤ) ≤ m) :
+    IsIso ((DerivedCategory.homologyFunctor D m).map
+      (F.rightDerivedFunctor.map ((DerivedCategory.truncGETower K).map (homOfLE n.le_succ).op))) := by
+  let t := DerivedCategory.TStructure.t (C := C)
+  let RF := F.rightDerivedFunctor
+  let L := (DerivedCategory.truncGETower K).obj (op (n + 1))
+  let g := (DerivedCategory.truncGETower K).map (homOfLE n.le_succ).op
+  have hg : g = (t.natTransTruncGEOfLE (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ)) (by lia)).app K :=
+    DerivedCategory.truncGETower_map_succ K n
+  let T := (t.triangleLTGE (-(n : ℤ))).obj L
+  have hT : T ∈ distTriang _ := t.triangleLTGE_distinguished (-(n : ℤ)) L
+  have hRT := RF.map_distinguished T hT
+  -- `T.obj₁ = τ^{< -n} L` is `H^{-n-1}(K)` placed in degree `-n-1`
+  have : L.IsGE (-((n + 1 : ℕ) : ℤ)) := inferInstance
+  have h₁ : T.obj₁.IsGE (-(n : ℤ) - 1 + 1 - (1 : ℕ)) := by
+    have : ((t.truncLT (-(n : ℤ))).obj L).IsGE (-((n + 1 : ℕ) : ℤ)) := inferInstance
+    exact t.isGE_of_ge _ _ (-((n + 1 : ℕ) : ℤ)) (by lia)
+  have h₂ : T.obj₁.IsLE (-(n : ℤ) - 1) := t.isLE_of_le _ (-(n : ℤ) - 1) (-(n : ℤ) - 1) le_rfl
+  have hac (q : ℤ) : F.IsRightAcyclic ((DerivedCategory.homologyFunctor C q).obj T.obj₁) := by
+    rcases lt_trichotomy q (-(n : ℤ) - 1) with hq | rfl | hq
+    · exact IsRightAcyclic.of_isZero (DerivedCategory.isZero_of_isGE _ _ q (by lia) (hX := h₁))
+    · have : IsIso ((DerivedCategory.homologyFunctor C (-(n : ℤ) - 1)).map T.mor₁) :=
+        DerivedCategory.isIso_homologyFunctor_map_truncLTι_app L (-(n : ℤ)) _ (by lia)
+      have : IsIso ((DerivedCategory.homologyFunctor C (-(n : ℤ) - 1)).map
+          ((DerivedCategory.truncGETowerCone K).π.app (op (n + 1)))) :=
+        DerivedCategory.isIso_homologyFunctor_map_truncGEπ_app K _ _ (by lia)
+      exact hK.of_iso (asIso ((DerivedCategory.homologyFunctor C _).map T.mor₁) ≪≫
+        (asIso ((DerivedCategory.homologyFunctor C (-(n : ℤ) - 1)).map
+          ((DerivedCategory.truncGETowerCone K).π.app (op (n + 1))))).symm)
+    · exact IsRightAcyclic.of_isZero (DerivedCategory.isZero_of_isLE _ _ q hq (hX := h₂))
+  have hz := F.isZero_homology_rightDerivedFunctor_obj_of_isLE 1 T.obj₁ (-(n : ℤ) - 1) h₁ h₂ hac
+  -- `RF(τ^{≥ -n} L ⟵ L)` is an isomorphism on `Hᵐ`
+  have hiso₁ : IsIso ((DerivedCategory.homologyFunctor D m).map (RF.map T.mor₂)) := by
+    have hmono : Mono ((DerivedCategory.homologyFunctor D m).map (RF.map T.mor₂)) :=
+      (DerivedCategory.HomologySequence.mono_homologyMap_mor₂_iff _ hRT m).2
+        ((hz m (by lia)).eq_of_src _ _)
+    have hepi : Epi ((DerivedCategory.homologyFunctor D m).map (RF.map T.mor₂)) :=
+      (DerivedCategory.HomologySequence.epi_homologyMap_mor₂_iff _ hRT m (m + 1) rfl).2
+        ((hz (m + 1) (by lia)).eq_of_tgt _ _)
+    exact isIso_of_mono_of_epi _
+  -- `τ^{≥ -n} L ≅ τ^{≥ -n} K`
+  let h := t.descTruncGE g (-(n : ℤ))
+  have hπh : T.mor₂ ≫ h = g := t.π_descTruncGE g _
+  have hh : IsIso h := by
+    rw [DerivedCategory.isIso_iff]
+    intro q
+    rcases lt_or_ge q (-(n : ℤ)) with hq | hq
+    · have h0 : IsZero ((DerivedCategory.homologyFunctor C q).obj T.obj₃) :=
+        DerivedCategory.isZero_of_isGE _ (-(n : ℤ)) q hq
+      have h0' : IsZero ((DerivedCategory.homologyFunctor C q).obj
+          ((DerivedCategory.truncGETower K).obj (op n))) :=
+        DerivedCategory.isZero_of_isGE _ (-(n : ℤ)) q hq
+      exact ⟨0, h0.eq_of_src _ _, h0'.eq_of_src _ _⟩
+    · have : IsIso ((DerivedCategory.homologyFunctor C q).map T.mor₂) :=
+        DerivedCategory.isIso_homologyFunctor_map_truncGEπ_app L _ _ hq
+      have : IsIso ((DerivedCategory.homologyFunctor C q).map
+          ((DerivedCategory.truncGETowerCone K).π.app (op (n + 1)))) :=
+        DerivedCategory.isIso_homologyFunctor_map_truncGEπ_app K _ _ (by lia)
+      have : IsIso ((DerivedCategory.homologyFunctor C q).map
+          ((DerivedCategory.truncGETowerCone K).π.app (op n))) :=
+        DerivedCategory.isIso_homologyFunctor_map_truncGEπ_app K _ _ (by lia)
+      have hg' : IsIso ((DerivedCategory.homologyFunctor C q).map g) := by
+        have e := (DerivedCategory.homologyFunctor C q).congr_map
+          (t.π_natTransTruncGEOfLE_app (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ)) (by lia) K)
+        rw [Functor.map_comp, ← hg] at e
+        exact IsIso.of_isIso_comp_left
+          ((DerivedCategory.homologyFunctor C q).map
+            ((DerivedCategory.truncGETowerCone K).π.app (op (n + 1)))) _ (hfg := e ▸ inferInstance)
+      have e := (DerivedCategory.homologyFunctor C q).congr_map hπh
+      rw [Functor.map_comp] at e
+      exact IsIso.of_isIso_comp_left ((DerivedCategory.homologyFunctor C q).map T.mor₂) _
+        (hfg := e ▸ hg')
+  rw [← hπh, RF.map_comp, Functor.map_comp]
+  infer_instance
+
+end Truncation
+
 end CategoryTheory.Functor
