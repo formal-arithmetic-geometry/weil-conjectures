@@ -13,6 +13,8 @@ import Sheaf.Paper.IntegralLfpLocallyFreeResolution
 import Sheaf.AlgebraicGeometry.BoundedConstructibleLocalizingClosure
 import Sheaf.AlgebraicGeometry.EllAdicCondensedCoefficient
 import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
+import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 
 /-! # Constructibility of the cohomology of the localizing exceptional object
 (blueprint: lem-sfb-adic-localizing-exceptional-cohomology)

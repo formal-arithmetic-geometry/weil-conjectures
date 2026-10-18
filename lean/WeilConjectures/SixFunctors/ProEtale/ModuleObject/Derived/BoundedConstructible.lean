@@ -17,6 +17,25 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionLowerShriek
 import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructibleExtensionByZero
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.AlgebraicGeometry.ComparisonDirectImage
+import Sheaf.AlgebraicGeometry.FiniteTypeDirectImageConstructibility
+import Sheaf.AlgebraicGeometry.NoetherianStratumDetection
+import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
+import Sheaf.CategoryTheory.LocallyDerivedRingedIdealComplete
+import Sheaf.CategoryTheory.SitePullbackAbelianExact
+import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
+import Sheaf.Paper.CondensedQcqsPushforwardContinuity
+import WeilConjectures.AlgebraicGeometry.EtaleStratificationLocalGluingCore
+import WeilConjectures.CategoryTheory.DerivedCategory.Rationalization
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+import WeilConjectures.CategoryTheory.Monoidal.Mod.Abelian
+import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
+import WeilConjectures.ConstructibleSheaf.Pullback
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
+import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
 
 /-!
 

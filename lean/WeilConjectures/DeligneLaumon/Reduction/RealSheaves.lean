@@ -23,6 +23,10 @@ import WeilConjectures.RepresentationTheory.Clifford
 import WeilConjectures.RepresentationTheory.FiniteMatrixWitness
 import WeilConjectures.WeilSheaf.Stalk
 import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+import Sheaf.AlgebraicGeometry.ClosedPointField
+import Sheaf.RingTheory.SmoothPushoutFilteredColimitStage
+import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Purity
+import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Triangularizable
 
 /-!
 # Real Weil sheaves on an arbitrary base are mixed

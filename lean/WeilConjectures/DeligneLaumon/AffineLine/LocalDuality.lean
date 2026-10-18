@@ -15,6 +15,9 @@ import WeilConjectures.SixFunctors.Etale.Perverse.Operations
 import WeilConjectures.WeilSheaf.Cohomology
 import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
 import WeilConjectures.WeilSheaf.TateTwist
+import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
+import WeilConjectures.EtaleCohomology.Purity.Smooth.Rational
+import WeilConjectures.SixFunctors.Etale.Derived.WeilFrobenius
 
 /-!
 # Local boundary duality on a curve

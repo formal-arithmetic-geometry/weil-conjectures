@@ -18,6 +18,12 @@ import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
 import WeilConjectures.Compactification.NagataCompactification
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Proper
+import WeilConjectures.CategoryTheory.Monoidal.Closed.InvertibleDualizing
+import WeilConjectures.EtaleCohomology.Purity.Smooth.Adic
+import WeilConjectures.EtaleCohomology.Purity.Smooth.Rational
+import WeilConjectures.EtaleCohomology.Purity.Smooth.Reduction
+import WeilConjectures.SixFunctors.Etale.Derived.Exchange
+import WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients
 
 /-!
 # Functoriality of the direct image with compact support of Weil complexes

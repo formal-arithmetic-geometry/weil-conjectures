@@ -14,6 +14,7 @@ import WeilConjectures.DeligneLaumon.AffineLine.DegreeOne
 import WeilConjectures.DeligneLaumon.AffineLine.LocalDuality
 import WeilConjectures.Mathlib.LinearAlgebra.Charpoly.Basic
 import WeilConjectures.Mathlib.LinearAlgebra.Eigenspace.Triangularizable
+import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Operations
 
 /-!
 # Exactness of the ordinary direct image at a fixed pure weight

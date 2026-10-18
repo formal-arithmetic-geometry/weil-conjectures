@@ -12,6 +12,13 @@ public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Weights
 public import WeilConjectures.Mathlib.Topology.JacobsonSpace
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FullyFaithful
 public import WeilConjectures.SixFunctors.OpenClosed.Conservative
+import Sheaf.AlgebraicGeometry.AbelianSheavesGModules
+import Sheaf.AlgebraicGeometry.GeometricPointCanonicalGerm
+import Sheaf.AlgebraicGeometry.PureDimension
+import Sheaf.AlgebraicGeometry.StrictHenselizationDVR
+import Sheaf.AlgebraicGeometry.StrictHenselizationStalkFormula
+import WeilConjectures.AlgebraicGeometry.Regular
+import WeilConjectures.Mathlib.RingTheory.RegularLocalRing.Defs
 
 /-!
 # Boundary extension of a lisse Weil sheaf on a curve

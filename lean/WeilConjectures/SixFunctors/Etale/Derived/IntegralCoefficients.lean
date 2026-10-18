@@ -11,6 +11,11 @@ public import WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect
 public import WeilConjectures.SixFunctors.Etale.Derived.CoextendScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
+import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
+import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
+import WeilConjectures.Compactification.NagataCompactification
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
 
 /-!
 # Integral coefficients: internal hom, exceptional adjoint and normalized towers

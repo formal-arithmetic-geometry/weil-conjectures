@@ -29,6 +29,9 @@ import WeilConjectures.PointCount
 import WeilConjectures.PointCountBound
 import WeilConjectures.WeilSheaf.Stalk
 import WeilConjectures.ZetaLinearAlgebra.DetTrace
+import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary
+import WeilConjectures.EtaleCohomology.Purity.RealSheaves.Chebotarev
+import WeilConjectures.EtaleCohomology.Purity.RealSheaves.LinearAlgebra
 
 /-!
 # Detecting a weight from the growth of the squared trace sums

@@ -8,6 +8,17 @@ module
 public import WeilConjectures.WeilSheaf.FourierInversion.Defs
 public import WeilConjectures.WeilSheaf.LowerShriekOperations
 public import WeilConjectures.WeilSheaf.TateTwist
+import Sheaf.AlgebraicGeometry.CompactSupportFiniteTorsion
+import Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback
+import Sheaf.AlgebraicGeometry.GeometricPointCohomology
+import Sheaf.AlgebraicGeometry.OpenClosedRecollement
+import Sheaf.CategoryTheory.MateIsoAlongEquivalences
+import WeilConjectures.AlgebraicGeometry.EffectiveCartier
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
+import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
+import WeilConjectures.SixFunctors.Etale.Derived.WeilFrobenius
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Fourier inversion: inputs from other sections
