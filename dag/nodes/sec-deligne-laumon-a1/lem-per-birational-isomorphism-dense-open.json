@@ -15,9 +15,56 @@
   "def-sc-generic-point",
   "def-weil-locally-ringed-space-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-per-birational-common-dense-opens] to $f$. Its finite-component, locally-finite-presentation and generic-local-ring hypotheses are exactly the hypotheses here; it requires no reducedness. Obtain dense open subschemes $U\\subseteq Y$ and $V\\subseteq X$ for which $g=f|_U:U\\xrightarrow{\\sim}V$. Put $W=f^{-1}(V)$ with its open subscheme structure. Since $f(U)\\subseteq V$, the inclusion of $U$ in $Y$ factors as the open inclusion $j:U\\hookrightarrow W$ followed by $W\\hookrightarrow Y$.",
+   "uses": [
+    "lem-per-birational-common-dense-opens",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAC, lemma-birational-birational, alternative (2); formation of the restricted target"
+   }
+  },
+  {
+   "text": "The restriction $p=f|_W:W\\to V$ is the base change of $f$ along $V\\hookrightarrow X$, so it is separated by [lem-weil-pbc-separated-lqf-base-change](1). Define $s=j\\circ g^{-1}:V\\to W$. Then $p\\circ s=g\\circ g^{-1}=\\mathrm{id}_V$. By [lem-weil-pbc-section-separated-closed-immersion], this section is a closed immersion. Its underlying image is exactly $U$, since $g^{-1}$ is an isomorphism onto $U$. By [def-weil-closed-immersion], $U$ is therefore closed in $W$.",
+   "uses": [
+    "lem-weil-pbc-separated-lqf-base-change",
+    "lem-weil-pbc-section-separated-closed-immersion",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01KU (lemma-separated-permanence), 01KT (lemma-section-immersion); separated-case shortening of the argument in Morphisms 0BAJ"
+   }
+  },
+  {
+   "text": "The subset $U$ is dense in $W$: any nonempty open subset of $W$ is a nonempty open subset of $Y$, since $W$ is open in $Y$, and hence meets the dense subset $U$. Since Step 2 makes $U$ closed in $W$, its closure is both $U$ and $W$, so $U=W$ as open subsets of $Y$. The associated open subschemes are identical, by [def-weil-open-immersion]. Consequently $f^{-1}(V)\\to V$ is precisely $g:U\\xrightarrow{\\sim}V$. The open $V$ was dense in $X$, which proves the assertion, including the empty-scheme case.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0BAJ, conclusion; elementary density argument after the closed-section calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-birational-common-dense-opens",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-separated-lqf-base-change",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tags 0BAJ and 0BAC; for the separated alternative, replace the finite-morphism shrinking with Schemes 01KT (closedness of a section) and density"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +100,38 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.to_iso\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] [CategoryTheory.Epi f.base],\\n  CategoryTheory.IsIso f\", \"doc\": \"If $ f: X \\to Y $ is an open immersion of schemes and the underlying continuous map $ f_{\\text{base}}: X \\to Y $ is surjective (i.e., an epimorphism in the category of topological spaces), then $ f $ is \"}\n  {\"name\": \"AlgebraicGeometry.isProper_eq\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": @IsProper = (@IsSeparated ⊓ @UniversallyClosed : MorphismProperty Scheme) ⊓ @LocallyOfFiniteType\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.isIso_of_isOpenImmersion_of_opensRange_eq_top\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [IsOpenImmersion f] (hf : f.opensRange = ⊤) : IsIso f\", \"doc\": \"If $ f : X \\\\to Y $ is an open immersion of schemes and the image of $ f $ is the entire space $ Y $, then $ f $ is an isomorphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"{U : X.Opens} (hU : Dense (X := X) U) : IsDominant U.ι\", \"doc\": \"For a scheme $X$ and an open subset $U$ of its underlying topological space, if $U$ is dense in $X$, then the canonical inclusion morphism $\\\\iota: U \\\\to X$ is dominant, meaning its image is dense in $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(f : X.PartialMap Y) [IrreducibleSpace X] {U : X.Opens} (hU : Dense (U : Set X)) (hU' : U ≤ f.domain) :\\n  (f.restrict U hU hU').fromFunctionField = f.fromFunctionField\", \"doc\": \"Let $X$ be an irreducible scheme, $Y$ be a scheme, and $f: X \\\\dashrightarrow Y$ be a rational map. Let $U$ be a dense open subset of $X$ that is contained in the domain of $f$. The morphism of schemes\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.isIso\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"{X Y : Scheme.{u}} (f : X ⟶ Y) [IsOpenImmersion f] [Epi f.base] : IsIso f\", \"doc\": \"If $ f: X \\to Y $ is an open immersion of schemes and the underlying continuous map $ f_{\\\\text{base}} $ is surjective in the category of topological spaces, then $ f $ is an isomorphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.isProper_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsProper f ↔\\n    AlgebraicGeometry.IsSeparated f ∧ AlgebraicGeometry.UniversallyClosed f ∧ AlgebraicGeometry.LocallyOfFiniteType f\", \"doc\": \"A morphism of schemes is proper if and only if it is separated, universally closed, and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.RationalMap.dense_domain\", \"module\": \"Mathlib.AlgebraicGeometry.RationalMap\", \"type\": \"(f : X ⤏ Y) : Dense (X := X) f.domain\", \"doc\": \"For any rational map $ f $ between schemes $ X $ and $ Y $, the domain of $ f $ is a dense subset of $ X $.\"}\n",
    "date": "2026-10-19",
    "verdict": "no match: the displayed signatures do not state the node; related local or normalization results only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Birational locally finitely presented separated morphism between schemes with finitely many irreducible components is an isomorphism over a dense open",
+   "results": "{\"t\": \"2026-10-18T22:26:34Z\", \"tool\": \"leanfinder\", \"query\": \"Birational locally finitely presented separated morphism between schemes with finitely many irreducible components is an isomorphism over a dense open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsLocalIso\", \"AlgebraicGeometry.isomorphisms_eq_isOpenImmersion_inf_surjective\", \"AlgebraicGeometry.IsDominant.respectsIso\", \"AlgebraicGeometry.isomorphisms_eq_stalkwise\", \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"AlgebraicGeometry.Scheme.PartialMap.isOver_toRationalMap_iff_of_isSeparated\", \"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.IsLocalIso.instIsZariskiLocalAtSource\"], \"digest\": \"5710f96715b5f61e\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: related partial-map, local-isomorphism, or stalk facts do not construct the required opens from the stated generic local-ring hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "Birational, IsIso",
+   "results": "{\"t\": \"2026-10-18T22:26:35Z\", \"tool\": \"loogle\", \"query\": \"Birational, IsIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'Birational'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: related partial-map, local-isomorphism, or stalk facts do not construct the required opens from the stated generic local-ring hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "birational|dense.*[Ii]so|[Ii]so.*dense",
+   "results": "{\"t\": \"2026-10-18T22:26:35Z\", \"tool\": \"grep\", \"query\": \"birational|dense.*[Ii]so|[Ii]so.*dense\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 21, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\"], \"digest\": \"1f3e8676216fa183\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: related partial-map, local-isomorphism, or stalk facts do not construct the required opens from the stated generic local-ring hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Birational finite presentation separated morphism isomorphism on a dense open",
+   "results": "{\"t\": \"2026-10-18T22:26:35Z\", \"tool\": \"leansearch\", \"query\": \"Birational finite presentation separated morphism isomorphism on a dense open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.PartialMap.fromFunctionField_restrict\", \"AlgebraicGeometry.IsSeparated.instMorphismRestrict\", \"AlgebraicGeometry.IsOpenImmersion.to_iso\", \"AlgebraicGeometry.IsDominant.mk\", \"AlgebraicGeometry.Scheme.Hom.isoImage\", \"AlgebraicGeometry.isIso_iff_isOpenImmersion\", \"AlgebraicGeometry.IsDominant\", \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι\"], \"digest\": \"711e6cb52029e560\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: related partial-map, local-isomorphism, or stalk facts do not construct the required opens from the stated generic local-ring hypotheses"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-normal-modification-codimension-one",
@@ -82,5 +157,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-birational-isomorphism-dense-open",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Used the weaker 0BAC common-open lemma and the existing separated-base-change and closed-section statements. Wrote out why the section image equals the entire inverse image: it is closed there and dense there. Created one statement-only node, with five logged Mathlib searches and no match. No Lean work.",
+  "blueprint": "Technical input to the ancestor lem-per-artin-gabber-affine-curve proof Step 1 through normal modification codimension one, as recorded in blueprint.from: proves the 0BAJ dense-open input without changing any unit step.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-separated-lqf-base-change",
+    "why": "Only clause (1), separatedness preserved by arbitrary base change, is a generic scheme tool for restricting f to V; the perverse unit has no separate permanence theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-separated-lqf-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-331fedce1",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-331fedce1 (reviewer sub-agent of L); spot-checked: PASS, no changes made. I read Stacks 0BAC and 0BAJ (statements and proofs) and checked 01KT/01KU against tags/tags. ITEM: statement unchanged. It matches 0BAJ with the alternatives 'f separated' and 'f locally of finite presentation', with no reducedness assumption. Step 1 applies the new 0BAC(2) node. Step 2: f restricted to W=f^{-1}(V) is the base change along an open, so it is separated by lem-weil-pbc-separated-lqf-base-change clause (1). The section s=j∘g^{-1} is then a closed immersion by lem-weil-pbc-section-separated-closed-immersion, with image U, so U is closed in W. Step 3 (elementary): U is dense in W because W is open in Y, so U=W as open subschemes. This does not use 'a surjective closed immersion is an isomorphism', which fails for nonreduced schemes. The separated shortcut replaces the source's finite-morphism reduction and is valid below the unit. Cases tested: cusp normalization, identity on a nonreduced scheme, the empty scheme, and the doubled-origin line, which fails without separatedness and shows Step 2 needs it. NEW NODE lem-per-birational-common-dense-opens: exactly 0BAC(2) with no separatedness, and it correctly does not claim U=f^{-1}(V). It is strictly weaker than the item, so it is not a relabelling. It has a statement only, every notion cited, and five searches (LeanSearch, LeanFinder, Loogle, grep). Mathlib's Birational/*.lean has no matching result. A DAG search over 0BAC/0BAJ/birational found no duplicate: the trf common-cover, pbc component-assembly, per-normalization and curve-normalization nodes are all different statements. I accept the tool use of lem-weil-pbc-separated-lqf-base-change (sk-thm-p1), clause (1) only, as generic base-change permanence. No SGA citation; proof_deps equals the union of the uses; the blueprint from/via/same_as fields are correct."
  }
 }
