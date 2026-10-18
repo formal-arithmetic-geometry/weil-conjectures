@@ -17,7 +17,9 @@
   "def-pc-sheaf-restrict-scalars",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "def-weil-pbc-projection-formula-arrows",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "def-pur-ringed-coefficient-counit-presentations",
+  "def-pur-ringed-coefficient-change-presentations"
  ],
  "proof": [
   {
@@ -224,5 +226,23 @@
   "group": "Q59",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-e9a9d904f (reviewer sub-agent of L); spot-checked: The item's statement is true; I checked it independently. For a K-injective I with K-flat q:P->f_*I, U_X(eps_R)∘tau is the class of the abelian counit e. Its Q_A-|F_A adjunct is f_*(j) by the triangle identity, which is the K-injective normalization of kappa in lem-weil-pbc-ringed-topoi-derived-pushforward-composition (Stacks 0D6E, sites-cohomology l.4011). Edge cases f=id, R=A, K=0, zero ring and non-flat A->A/I all pass. No duplicate: the closest node, lem-weil-pbc-ring-sheaf-change-adjunction, only covers pro-etale sites with isomorphic coefficient maps. The item is not a restated clause of its parent lem-pur-ordinary-adjunction-scalar-compatibility; its Step 6 uses the item at exactly this generality. Steps 2 and 4 (now 5) were correct; the Tag 0037 counit identity is a Mathlib leaf. Repaired faults: (1) E4/E5 in Step 3: it evaluated at Q_R P with P resolving the argument of Q_R instead of a K-flat resolution of F_R K. It waved off arbitrary objects as 'the same calculation' and did not cite the representative characterization of derived adjuncts (lem-pc-pre-derived-adjoint-functors-general, 0FND). I rewrote it as Steps 3-4: eps_R represented by s⊗x->s·e(f^{-1}q x), so phi=Q(e); its adjunct is Q(f_*j)=kappa_K. (2) E5 in Step 1: 'transports' replaced by an explicit proof that tau is well defined (exact U_W and f^{-1}, K-flat resolutions [lem-pc-kflat-resolution], quasi-isomorphism preservation [lem-weil-pbc-ringed-topoi-derived-pullback]). Also added a reason for naturality in algebra maps; proof_deps recomputed. Cycle check: the 222 nodes reachable from the added citations do not include the item. Tool uses accepted: module-adjunction (03D7), derived-tensor-pullback, projection-formula-arrows (definition), pushforward-composition (0D6E); added pre-derived-adjoint-functors-general, kflat-resolution and ringed-topoi-derived-pullback. The coefficient-adjunction tool_use declaration was removed because sk-def-sf-operations is on route. Statement, blueprint and created fields unchanged; no new nodes; no SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedCoefficientRestrictionCounit",
+  "declaration": "CategoryTheory.RingedCoefficientCounit.ringedCoefficientRestrictionCounit",
+  "file": "lean/Sheaf/CategoryTheory/RingedCoefficientRestrictionCounit.lean",
+  "statement": "theorem ringedCoefficientRestrictionCounit (aX : constantRing JX A ⟶ RX) (aY : constantRing JY A ⟶ RY) (aI : constantRing JX A ⟶ RI) (haI : (sheafCompose JX (forget CommRingCat.{r})).map aI = IA.ringUnderlying.inv ≫ inverse.map ((sheafCompose JY (forget CommRingCat.{r})).map aY) ≫ IR.ringUnderlying.hom) (hc : aI ≫ c = aX) (o : OrdinaryPresentation direct geom IA IR c aX aY aI) [IA.modules.Additive] [HasDerivedCategory.{w} (modules RX)] [HasDerivedCategory.{w} (modules RY)] [HasDerivedCategory.{w} (modules (constantRing JX A))] [HasDerivedCategory.{w} (modules (constantRing JY A))] : Nonempty (DerivedPresentation o) ∧ ∀ p : DerivedPresentation o, CounitCompatibility p ∧ ∀ (RX' RI' : Sheaf JX CommRingCat.{r}) (RY' : Sheaf JY CommRingCat.{r}) (IR' : SheafOfModules.AlgebraicInverseImage inverse RY' RI') (c' : RI' ⟶ RX') (aX' : constantRing JX A ⟶ RX') (aY' : constantRing JY A ⟶ RY') (aI' : constantRing JX A ⟶ RI') (o' : OrdinaryPresentation direct geom IA IR' c' aX' aY' aI') [HasDerivedCategory.{w} (modules RX')] [HasDerivedCategory.{w} (modules RY')] (p' : DerivedPresentation o') (bX : RX ⟶ RX') (bY : RY ⟶ RY') (bI : RI ⟶ RI'), aX ≫ bX = aX' → aY ≫ bY = aY' → aI ≫ bI = aI' → c ≫ bX = bI ≫ c' → IR.ringUnderlying.hom ≫ (sheafCompose JX (forget CommRingCat.{r})).map bI = inverse.map ((sheafCompose JY (forget CommRingCat.{r})).map bY) ≫ IR'.ringUnderlying.hom → Nonempty (CoefficientChange p p' bX bY bI) ∧ ∀ m : CoefficientChange p p' bX bY bI, m.IsNatural",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-740fff1b5",
+  "group": "Q54",
+  "result": "pass",
+  "note": "Wrote review.md. Checked snapshot statements, dependencies, sources, canonical normalizations, universes, edge cases, signatures, docstrings, and route-pivot compliance. All three modules passed scompile.py with exit 0 and no diagnostics. No fixes needed; branch unchanged."
  }
 }

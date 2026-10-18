@@ -1,0 +1,125 @@
+{
+ "id": "def-pur-ringed-coefficient-change-presentations",
+ "kind": "definition",
+ "title": "Normalized coefficient changes between counit presentations",
+ "status": "split",
+ "statement": "For two ringed coefficient counit presentations over the same small sites, geometric morphism, coefficient ring and constant-coefficient inverse-image lift [def-pur-ringed-coefficient-counit-presentations], let $b_X:R_X\\to R'_X$, $b_Y:R_Y\\to R'_Y$ and $b_I:R_I\\to R'_I$ be ring-sheaf homomorphisms. Define LocalizedRestrictionChangeData for one site component, and CoefficientRestrictionChangeData for the two components (the eight restriction-comparison data fields below), CoefficientRestrictionChangeNormalized for their nine explicit compatibility and normalization equations, and CoefficientRestrictionChange for the data together with these proofs; define CoefficientDirectChangeData and ConstantDerivedChangeData for the other comparison data, their respective Normalized propositions for the displayed equations, and CoefficientDirectChange and ConstantDerivedChange for these data together with the proofs, and CoefficientChangeData to assemble them, CoefficientChangeNormalized for the mate equation, and CoefficientChange for the assembled data and its proof, recording their compatibility with the constant-coefficient algebra maps, inverse-image lift and structural maps; derived restrictions $V_X,V_Y$ identified with termwise restriction by localization factorization isomorphisms; the canonical restriction-composition isomorphisms $\\rho_X:U_XV_X\\cong U'_X$ and $\\rho_Y:U_YV_Y\\cong U'_Y$ fixed on complexes by their ordinary underlying-identity maps; the ordinary direct-image comparison fixed by its geometric underlying-identity equation; its derived comparison $\\beta:V_YF'_R\\cong F_RV_X$ fixed on K-injective representatives by the composition formula $f_*j$; the constant-coefficient derived identifications $\\alpha:Q_A\\cong Q'_A$ and $\\gamma:F'_A\\cong F_A$ fixed by their localization and K-injective equations; and $\\sigma:Q_RV_Y\\to V_XQ'_R$ fixed as the adjoint mate of $\\beta$ after the primed derived unit. Define CoefficientChange.IsNatural to be the conjunction of the following actual equalities for all derived objects $M\\in D(R'_Y)$ and $K\\in D(R'_X)$: $\\tau'_M\\,\\alpha_{U'_YM}\\,Q_A(\\rho_{Y,M})=\\rho_{X,Q'_RM}\\,U_X(\\sigma_M)\\,\\tau_{V_YM}$ and $F_A(\\rho_{X,K})\\,\\kappa_{V_XK}\\,U_Y(\\beta_K)=\\gamma_{U'_XK}\\,\\kappa'_K\\,\\rho_{Y,F'_RK}$. No such naturality equality is an input field of CoefficientChange.",
+ "stmt_deps": [
+  "def-pur-ringed-coefficient-counit-presentations"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Agent consequence of Tag 0D6E (lemma-derived-pushforward-composition) and Tag 07A6 (lemma-adjoint), with the ordinary tensor adjunction of Tag 03D7 (sites-modules, lemma-adjoint-pullback-pushforward-modules): counit normalization for the two factorizations through constant coefficients."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normalized derived coefficient counit presentation",
+   "results": "no exact declaration",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normalized presentation of a ringed topos coefficient square: the actual module pullback tensor functor, canonical derived adjunctions, the scalar unit comparison, and the K-injective direct-image composition comparison",
+   "results": "8 hits: SheafOfModules.Presentation and its map/generators/relations operations (Quasicoherent); pullbackObjUnitToUnit. These are ordinary presentations of individual modules or unit objects, not the normalized coefficient-counit diagram.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars, CategoryTheory.Adjunction, CategoryTheory.Functor.IsRightDerivedFunctor",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CoefficientChange|coefficient.*comparison|restriction.*comparison in CategoryTheory",
+   "results": "msearch grep: 0 hits. rg in WeilConjectures and lean/Sheaf finds coefficient change for etale orientation and finite coefficients, not general ringed-topos counit presentations. rg in dag/nodes finds no matching presentation node. blueprint_refs.py search coefficient restriction counit: 0 blueprint nodes match.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CoefficientChange|ringedCoefficientRestrictionCounit|coefficient.*counit|counit.*coefficient; blueprint_refs.py search coefficient counit",
+   "results": "Mathlib CategoryTheory: zero hits. No declaration in WeilConjectures or lean/Sheaf. The blueprint search finds only unrelated finite-field coefficient material. The existing DAG item states the theorem but no normalized coefficient-change presentation.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-ringed-coefficient-restriction-counit",
+  "date": "2026-10-17",
+  "group": "Q54"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-adjunctions",
+   "place": "Proof Step 1, ordinary derived adjunction: counit compatibility of the two coefficient-restriction/direct-image factorizations, used in the finite-free scalar calculation.",
+   "via": [
+    "lem-pur-ringed-coefficient-restriction-counit",
+    "lem-pur-ordinary-adjunction-scalar-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedCoefficientChangePresentations",
+  "declaration": "CategoryTheory.RingedCoefficientCounit.CoefficientChange",
+  "declarations": [
+   "CategoryTheory.RingedCoefficientCounit.CoefficientRestrictionChangeData",
+   "CategoryTheory.RingedCoefficientCounit.CoefficientRestrictionChangeNormalized",
+   "CategoryTheory.RingedCoefficientCounit.CoefficientRestrictionChange",
+   "CategoryTheory.RingedCoefficientCounit.CoefficientDirectChange",
+   "CategoryTheory.RingedCoefficientCounit.ConstantDerivedChange",
+   "CategoryTheory.RingedCoefficientCounit.CoefficientChange",
+   "CategoryTheory.RingedCoefficientCounit.CoefficientChange.IsNatural",
+   "CategoryTheory.RingedCoefficientCounit.CoefficientDirectChangeData",
+   "CategoryTheory.RingedCoefficientCounit.CoefficientDirectChangeNormalized",
+   "CategoryTheory.RingedCoefficientCounit.ConstantDerivedChangeData",
+   "CategoryTheory.RingedCoefficientCounit.ConstantDerivedChangeNormalized",
+   "CategoryTheory.RingedCoefficientCounit.LocalizedRestrictionChangeData",
+   "CategoryTheory.RingedCoefficientCounit.CoefficientChangeData",
+   "CategoryTheory.RingedCoefficientCounit.CoefficientChangeNormalized"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RingedCoefficientChangePresentations.lean",
+  "statement": "structure CoefficientChange (p : DerivedPresentation o) (p' : DerivedPresentation o') (bX : RX ⟶ RX') (bY : RY ⟶ RY') (bI : RI ⟶ RI') extends CoefficientChangeData p p' bX bY bI",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-740fff1b5",
+  "group": "Q54",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-740fff1b5",
+  "group": "Q54",
+  "result": "pass",
+  "note": "Wrote review.md. Checked snapshot statements, dependencies, sources, canonical normalizations, universes, edge cases, signatures, docstrings, and route-pivot compliance. All three modules passed scompile.py with exit 0 and no diagnostics. No fixes needed; branch unchanged."
+ }
+}

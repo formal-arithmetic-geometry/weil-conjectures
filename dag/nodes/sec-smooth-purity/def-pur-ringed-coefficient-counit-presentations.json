@@ -1,0 +1,124 @@
+{
+ "id": "def-pur-ringed-coefficient-counit-presentations",
+ "kind": "definition",
+ "title": "Normalized ringed coefficient counit presentations",
+ "status": "split",
+ "statement": "For small sites and a geometric adjunction $f^{-1}\\dashv f_*$ [def-weil-size-convention], let $A_X,A_Y$ be the constant sheaves of a commutative ring $A$ [def-weil-pbc-constant-sheaf]. Let $R_X,R_Y,R_I=f^{-1}R_Y$ be commutative ring sheaves with algebraic inverse-image lifts [def-weil-pbc-algebraic-inverse-image], structural map $c:R_I\\to R_X$, and compatible constant-coefficient algebra maps. Use the recorded module categories [def-weil-sheaf-of-modules-category], coefficient restriction [def-pc-sheaf-restrict-scalars], sheafified tensor extension [def-pur-sheaf-tensor-product] and unbounded derived categories [def-weil-abstract-derived-category]. Define OrdinaryPresentation to consist of module pullback fixed on objects and morphisms by $R_X\\otimes_{R_I}f^{-1}(-)$; additive direct images equipped with natural underlying-geometric-direct-image identifications; their adjunctions fixed by the geometric Hom bijection after the sheafified map $x\\mapsto1\\otimes x$; and the ordinary restriction, scalar-unit and direct-image-composition comparisons fixed by these underlying identifications. Define DerivedAdjunction to record a universal left/right derived pair with its localization maps, invertible right comparison on K-injectives and the ordinary-adjunction representative Hom formula [lem-pc-pre-derived-adjoint-functors-general] [def-weil-pbc-projection-formula-arrows]. Define CoefficientExactness to record preservation of finite limits and finite colimits by the two ordinary restriction functors. Define DerivedPresentation to consist of such exactness, the two canonical derived adjunction presentations, an invertible left comparison for constant coefficients, localized coefficient restriction with its factorization isomorphisms, the invertible pullback comparison on flat-term K-flat complexes [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], tau normalized by the localized scalar-unit map on those complexes, and kappa normalized by the K-injective composition formula using $f_*j$ [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. Define CounitCompatibility to be the proposition asserting the derived counit square. The square is a conclusion to be established, not a field of a presentation.",
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-abstract-derived-category",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "def-weil-pbc-projection-formula-arrows",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Agent consequence of Tag 0D6E (lemma-derived-pushforward-composition) and Tag 07A6 (lemma-adjoint), with the ordinary tensor adjunction of Tag 03D7 (sites-modules, lemma-adjoint-pullback-pushforward-modules): counit normalization for the two factorizations through constant coefficients."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "normalized derived coefficient counit presentation",
+   "results": "no exact declaration",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normalized presentation of a ringed topos coefficient square: the actual module pullback tensor functor, canonical derived adjunctions, the scalar unit comparison, and the K-injective direct-image composition comparison",
+   "results": "8 hits: SheafOfModules.Presentation and its map/generators/relations operations (Quasicoherent); pullbackObjUnitToUnit. These are ordinary presentations of individual modules or unit objects, not the normalized coefficient-counit diagram.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars, CategoryTheory.Adjunction, CategoryTheory.Functor.IsRightDerivedFunctor",
+   "results": "0 hits.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "CoefficientChange|coefficient.*comparison|restriction.*comparison in CategoryTheory",
+   "results": "msearch grep: 0 hits. rg in WeilConjectures and lean/Sheaf finds coefficient change for etale orientation and finite coefficients, not general ringed-topos counit presentations. rg in dag/nodes finds no matching presentation node. blueprint_refs.py search coefficient restriction counit: 0 blueprint nodes match.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-ringed-coefficient-restriction-counit",
+  "date": "2026-10-17",
+  "group": "Q54"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-prop-adjunctions",
+   "place": "Proof Step 1, ordinary derived adjunction: counit compatibility of the two coefficient-restriction/direct-image factorizations, used in the finite-free scalar calculation.",
+   "via": [
+    "lem-pur-ringed-coefficient-restriction-counit",
+    "lem-pur-ordinary-adjunction-scalar-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sf-mate",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.RingedCoefficientCounitPresentations",
+  "declaration": "CategoryTheory.RingedCoefficientCounit.DerivedPresentation",
+  "declarations": [
+   "CategoryTheory.RingedCoefficientCounit.constantRing",
+   "CategoryTheory.RingedCoefficientCounit.modules",
+   "CategoryTheory.RingedCoefficientCounit.underlying",
+   "CategoryTheory.RingedCoefficientCounit.restriction",
+   "CategoryTheory.RingedCoefficientCounit.onComplex",
+   "CategoryTheory.RingedCoefficientCounit.DerivedAdjunction",
+   "CategoryTheory.RingedCoefficientCounit.OrdinaryPresentation",
+   "CategoryTheory.RingedCoefficientCounit.CoefficientExactness",
+   "CategoryTheory.RingedCoefficientCounit.DerivedPresentation",
+   "CategoryTheory.RingedCoefficientCounit.CounitCompatibility"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/RingedCoefficientCounitPresentations.lean",
+  "statement": "structure DerivedPresentation [IA.modules.Additive] {aX : constantRing JX A ⟶ RX} {aY : constantRing JY A ⟶ RY} {aI : constantRing JX A ⟶ RI} (o : OrdinaryPresentation direct geom IA IR c aX aY aI) [HasDerivedCategory.{w} (modules RX)] [HasDerivedCategory.{w} (modules RY)] [HasDerivedCategory.{w} (modules (constantRing JX A))] [HasDerivedCategory.{w} (modules (constantRing JY A))]",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-740fff1b5",
+  "group": "Q54",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-740fff1b5",
+  "group": "Q54",
+  "result": "pass",
+  "note": "Wrote review.md. Checked snapshot statements, dependencies, sources, canonical normalizations, universes, edge cases, signatures, docstrings, and route-pivot compliance. All three modules passed scompile.py with exit 0 and no diagnostics. No fixes needed; branch unchanged."
+ }
+}
