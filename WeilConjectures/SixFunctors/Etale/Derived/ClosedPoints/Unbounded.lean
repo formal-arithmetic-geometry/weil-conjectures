@@ -307,7 +307,7 @@ lemma isIso_homology_rightDerivedFunctor_map_truncGETower_map_succ [PreservesFin
   have : L.IsGE (-((n + 1 : ℕ) : ℤ)) := inferInstance
   have h₁ : T.obj₁.IsGE (-(n : ℤ) - 1 + 1 - (1 : ℕ)) := by
     have : ((t.truncLT (-(n : ℤ))).obj L).IsGE (-((n + 1 : ℕ) : ℤ)) := inferInstance
-    exact t.isGE_of_ge _ _ (-((n + 1 : ℕ) : ℤ)) (by lia)
+    exact t.isGE_of_ge ((t.truncLT (-(n : ℤ))).obj L) _ (-((n + 1 : ℕ) : ℤ)) (by lia)
   have h₂ : T.obj₁.IsLE (-(n : ℤ) - 1) := t.isLE_of_le _ (-(n : ℤ) - 1) (-(n : ℤ) - 1) le_rfl
   have hac (q : ℤ) : F.IsRightAcyclic ((DerivedCategory.homologyFunctor C q).obj T.obj₁) := by
     rcases lt_trichotomy q (-(n : ℤ) - 1) with hq | rfl | hq
@@ -347,25 +347,257 @@ lemma isIso_homology_rightDerivedFunctor_map_truncGETower_map_succ [PreservesFin
     · have : IsIso ((DerivedCategory.homologyFunctor C q).map T.mor₂) :=
         DerivedCategory.isIso_homologyFunctor_map_truncGEπ_app L _ _ hq
       have : IsIso ((DerivedCategory.homologyFunctor C q).map
-          ((DerivedCategory.truncGETowerCone K).π.app (op (n + 1)))) :=
+          ((t.truncGEπ (-((n + 1 : ℕ) : ℤ))).app K)) :=
         DerivedCategory.isIso_homologyFunctor_map_truncGEπ_app K _ _ (by lia)
       have : IsIso ((DerivedCategory.homologyFunctor C q).map
-          ((DerivedCategory.truncGETowerCone K).π.app (op n))) :=
+          ((t.truncGEπ (-(n : ℤ))).app K)) :=
         DerivedCategory.isIso_homologyFunctor_map_truncGEπ_app K _ _ (by lia)
       have hg' : IsIso ((DerivedCategory.homologyFunctor C q).map g) := by
         have e := (DerivedCategory.homologyFunctor C q).congr_map
           (t.π_natTransTruncGEOfLE_app (-((n + 1 : ℕ) : ℤ)) (-(n : ℤ)) (by lia) K)
         rw [Functor.map_comp, ← hg] at e
-        exact IsIso.of_isIso_comp_left
-          ((DerivedCategory.homologyFunctor C q).map
-            ((DerivedCategory.truncGETowerCone K).π.app (op (n + 1)))) _ (hfg := e ▸ inferInstance)
+        have : IsIso ((DerivedCategory.homologyFunctor C q).map
+            ((t.truncGEπ (-((n + 1 : ℕ) : ℤ))).app K) ≫
+              (DerivedCategory.homologyFunctor C q).map g) := by
+          rw [e]
+          infer_instance
+        exact IsIso.of_isIso_comp_left ((DerivedCategory.homologyFunctor C q).map
+          ((t.truncGEπ (-((n + 1 : ℕ) : ℤ))).app K)) _
       have e := (DerivedCategory.homologyFunctor C q).congr_map hπh
       rw [Functor.map_comp] at e
+      have : IsIso ((DerivedCategory.homologyFunctor C q).map T.mor₂ ≫
+          (DerivedCategory.homologyFunctor C q).map h) := by
+        rw [e]
+        infer_instance
       exact IsIso.of_isIso_comp_left ((DerivedCategory.homologyFunctor C q).map T.mor₂) _
-        (hfg := e ▸ hg')
-  rw [← hπh, RF.map_comp, Functor.map_comp]
-  infer_instance
+  have hfinal : IsIso ((DerivedCategory.homologyFunctor D m).map (RF.map g)) := by
+    rw [← hπh, RF.map_comp, Functor.map_comp]
+    infer_instance
+  exact hfinal
 
 end Truncation
 
+section Unbounded
+
+variable {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C] [EnoughInjectives C]
+  [Abelian.HasKInjectiveResolutions C] [HasLimitsOfShape (Discrete ℕ) C]
+  {R : Type v} [Ring R] [HasDerivedCategory (ModuleCat.{v} R)]
+  [Abelian.HasKInjectiveResolutions (ModuleCat.{v} R)]
+
+/-- **Cohomology of unbounded complexes with acyclic cohomology objects** (abstract form of
+Stacks, Tag 0BKZ). Let `(Γᵢ)ᵢ` be a family of left exact functors `C ⥤ ModuleCat R` preserving
+countable products which *detects* cohomology: an object `N ∈ D(C)` with `Hᵠ(RΓᵢ(N)) = 0` for
+all `i` has `Hᵠ(N) = 0` (for sheaves on a site, `Γᵢ` are the sections over a family of
+objects covering every object). If `K ∈ D(C)` is such that all `Hᵠ(K)` are `Γᵢ`-acyclic, then
+`Hᵠ(RΓᵢ(K)) ≅ Γᵢ(Hᵠ(K))` for all `i` and `q`.
+
+Proof: let `c` be a homotopy limit cone over the tower `τ^{≥ -n} K`. The tower `Hᵐ(RΓᵢ(τ^{≥ -n} K))`
+is eventually constant by the acyclicity hypothesis, so the legs of `RΓᵢ(c)` induce isomorphisms
+on `Hᵐ` for `n ≫ 0` (Milnor sequence). By detection the legs of `c` induce isomorphisms on `Hᵐ`
+for `n ≫ 0`, so the comparison `K ⟶ R lim τ^{≥ -n} K` is an isomorphism, and we conclude by the
+bounded below case. -/
+theorem nonempty_homology_rightDerivedFunctor_obj_iso_of_acyclic_of_detects {ι : Type*}
+    (Γ : ι → C ⥤ ModuleCat.{v} R) [∀ i, (Γ i).Additive] [∀ i, PreservesFiniteLimits (Γ i)]
+    [∀ i, PreservesLimitsOfShape (Discrete ℕ) (Γ i)]
+    (hΓ : ∀ (N : DerivedCategory C) (q : ℤ), (∀ i, IsZero ((DerivedCategory.homologyFunctor
+      (ModuleCat.{v} R) q).obj ((Γ i).rightDerivedFunctor.obj N))) →
+        IsZero ((DerivedCategory.homologyFunctor C q).obj N))
+    (K : DerivedCategory C)
+    (hK : ∀ i q, (Γ i).IsRightAcyclic ((DerivedCategory.homologyFunctor C q).obj K))
+    (i : ι) (q : ℤ) :
+    Nonempty ((DerivedCategory.homologyFunctor (ModuleCat.{v} R) q).obj
+        ((Γ i).rightDerivedFunctor.obj K) ≅ (Γ i).obj ((DerivedCategory.homologyFunctor C q).obj K)) := by
+  let t := DerivedCategory.TStructure.t (C := C)
+  let T := DerivedCategory.truncGETower K
+  obtain ⟨c, hc⟩ := Pretriangulated.exists_isHomotopyLimit T
+  -- the legs of `c` induce isomorphisms on `Hᵐ(RΓⱼ(-))` for `n ≥ 1 - m`
+  have hleg (j : ι) (m : ℤ) (n : ℕ) (hn : 1 - m ≤ n) :
+      IsIso ((DerivedCategory.homologyFunctor _ m).map
+        ((Γ j).rightDerivedFunctor.map (c.π.app (op n)))) := by
+    let RΓ := (Γ j).rightDerivedFunctor
+    have := preservesLimitsOfShape_discrete_nat_rightDerivedFunctor (Γ j)
+    let n₀ := (1 - m).toNat
+    have hc' := (hc.map RΓ).whiskerAdd n₀
+    have hall (p : ℤ) (hp : m - 1 ≤ p) (a b : ℕ) (hab : a ≤ b) :
+        IsIso ((DerivedCategory.homologyFunctor _ p).map
+          ((addOpFunctor n₀ ⋙ T ⋙ RΓ).map (homOfLE hab).op)) :=
+      (T ⋙ RΓ ⋙ DerivedCategory.homologyFunctor _ p).isIso_map_homOfLE_op_of_isIso_succ n₀
+        (fun k hk ↦ (Γ j).isIso_homology_rightDerivedFunctor_map_truncGETower_map_succ K k
+          (hK j _) p (by lia)) (Nat.add_le_add_right hab n₀) (by lia)
+    obtain ⟨k, rfl⟩ : ∃ k, n = k + n₀ := ⟨n - n₀, by lia⟩
+    exact DerivedCategory.isIso_homologyFunctor_map_π_of_isHomotopyLimit_of_isIso hc' m
+      (hall m (by lia)) (hall (m - 1) le_rfl) k
+  -- hence, by detection, the legs of `c` induce isomorphisms on `Hᵐ` for `n ≥ 2 - m`
+  have hZ (n : ℕ) (m : ℤ) (hm : 2 - n ≤ m) :
+      IsIso ((DerivedCategory.homologyFunctor C m).map (c.π.app (op n))) := by
+    obtain ⟨Z, g, h, hT⟩ := distinguished_cocone_triangle (c.π.app (op n))
+    have hz (p : ℤ) (hp : 1 - n ≤ p) : IsZero ((DerivedCategory.homologyFunctor C p).obj Z) := by
+      refine hΓ Z p fun j ↦ ?_
+      have hRT := (Γ j).rightDerivedFunctor.map_distinguished _ hT
+      have h₁ : Epi ((DerivedCategory.homologyFunctor _ p).map
+          ((Γ j).rightDerivedFunctor.map (c.π.app (op n)))) := by
+        have := hleg j p n (by lia)
+        infer_instance
+      have h₂ : Mono ((DerivedCategory.homologyFunctor _ (p + 1)).map
+          ((Γ j).rightDerivedFunctor.map (c.π.app (op n)))) := by
+        have := hleg j (p + 1) n (by lia)
+        infer_instance
+      exact (DerivedCategory.HomologySequence.exact₃ _ hRT p (p + 1) rfl).isZero_X₂
+        ((DerivedCategory.HomologySequence.epi_homologyMap_mor₁_iff _ hRT p).1 h₁)
+        ((DerivedCategory.HomologySequence.mono_homologyMap_mor₁_iff _ hRT p (p + 1) rfl).1 h₂)
+    have hmono : Mono ((DerivedCategory.homologyFunctor C m).map (c.π.app (op n))) :=
+      (DerivedCategory.HomologySequence.mono_homologyMap_mor₁_iff _ hT (m - 1) m (by lia)).2
+        ((hz (m - 1) (by lia)).eq_of_src _ _)
+    have hepi : Epi ((DerivedCategory.homologyFunctor C m).map (c.π.app (op n))) :=
+      (DerivedCategory.HomologySequence.epi_homologyMap_mor₁_iff _ hT m).2
+        ((hz m (by lia)).eq_of_tgt _ _)
+    exact isIso_of_mono_of_epi _
+  -- the comparison map `α : K ⟶ c.pt`
+  let cK := DerivedCategory.truncGETowerCone K
+  let P := Fan.mk (∏ᶜ fun n : ℕ ↦ T.obj (op n)) (Pi.π fun n : ℕ ↦ T.obj (op n))
+  let hP : IsLimit P := productIsProduct _
+  obtain ⟨δ, hT⟩ := hc.exists_distTriang hP
+  obtain ⟨α, hα⟩ := Triangle.coyoneda_exact₂ _ hT (Fan.IsLimit.lift hP fun n ↦ cK.π.app (op n))
+    (Fan.IsLimit.lift_π_comp_one_sub_eq_zero hP (towerShift hP) (towerShift_proj hP) cK)
+  have hαπ (n : ℕ) : α ≫ c.π.app (op n) = cK.π.app (op n) := by
+    rw [← Fan.IsLimit.fac hP (fun n ↦ c.π.app (op n)) n,
+      ← Fan.IsLimit.fac hP (fun n ↦ cK.π.app (op n)) n, hα, assoc]
+    rfl
+  have hαiso : IsIso α := by
+    rw [DerivedCategory.isIso_iff]
+    intro j
+    let n := (2 - j).toNat
+    have := hZ n j (by lia)
+    have : IsIso ((DerivedCategory.homologyFunctor C j).map (α ≫ c.π.app (op n))) := by
+      rw [hαπ]
+      exact DerivedCategory.isIso_homologyFunctor_map_truncGEπ_app K _ _ (by lia)
+    rw [Functor.map_comp] at this
+    exact IsIso.of_isIso_comp_right _ ((DerivedCategory.homologyFunctor C j).map (c.π.app (op n)))
+  -- conclusion
+  let n := (1 - q).toNat
+  have hacn (p : ℤ) : (Γ i).IsRightAcyclic
+      ((DerivedCategory.homologyFunctor C p).obj (T.obj (op n))) := by
+    rcases lt_or_ge p (-(n : ℤ)) with hp | hp
+    · exact IsRightAcyclic.of_isZero (DerivedCategory.isZero_of_isGE _ (-(n : ℤ)) p hp)
+    · have : IsIso ((DerivedCategory.homologyFunctor C p).map (cK.π.app (op n))) :=
+        DerivedCategory.isIso_homologyFunctor_map_truncGEπ_app K _ _ hp
+      exact (hK i p).of_iso (asIso ((DerivedCategory.homologyFunctor C p).map
+        (cK.π.app (op n)))).symm
+  obtain ⟨e⟩ := (Γ i).nonempty_homology_rightDerivedFunctor_obj_iso_of_acyclic (T.obj (op n))
+    (-(n : ℤ)) hacn q
+  have := hleg i q n (by lia)
+  have : IsIso ((DerivedCategory.homologyFunctor C q).map (cK.π.app (op n))) :=
+    DerivedCategory.isIso_homologyFunctor_map_truncGEπ_app K _ _ (by lia)
+  exact ⟨(DerivedCategory.homologyFunctor _ q).mapIso ((Γ i).rightDerivedFunctor.mapIso
+    (asIso α)) ≪≫ asIso ((DerivedCategory.homologyFunctor _ q).map
+      ((Γ i).rightDerivedFunctor.map (c.π.app (op n)))) ≪≫ e ≪≫
+    (Γ i).mapIso (asIso ((DerivedCategory.homologyFunctor C q).map (cK.π.app (op n)))).symm⟩
+
+end Unbounded
+
 end CategoryTheory.Functor
+
+namespace AlgebraicGeometry.Etale
+
+variable (Λ : Type (u + 1)) [CommRing Λ]
+
+instance additive_sheafSections_obj_moduleCat {X : Scheme.{u}} (U : X.Etaleᵒᵖ) :
+    ((sheafSections X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj U).Additive where
+  map_add := rfl
+
+instance preservesLimitsOfShape_sheafSections_obj_moduleCat {X : Scheme.{u}} (U : X.Etaleᵒᵖ)
+    (J : Type*) [Category J] [HasLimitsOfShape J (ModuleCat.{u + 1} Λ)] :
+    PreservesLimitsOfShape J ((sheafSections X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj U) :=
+  inferInstanceAs (PreservesLimitsOfShape J (sheafToPresheaf X.smallEtaleTopology
+    (ModuleCat.{u + 1} Λ) ⋙ (evaluation _ _).obj U))
+
+instance preservesFiniteLimits_sheafSections_obj_moduleCat {X : Scheme.{u}} (U : X.Etaleᵒᵖ) :
+    PreservesFiniteLimits ((sheafSections X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj U) :=
+  inferInstanceAs (PreservesFiniteLimits (sheafToPresheaf X.smallEtaleTopology
+    (ModuleCat.{u + 1} Λ) ⋙ (evaluation _ _).obj U))
+
+/-- Let `B` be a class of objects of `X_ét` such that every object has a covering by members of
+`B`. An object `N ∈ D(X_ét, Λ)` such that `Hᵠ(U, N) = 0` for all `U ∈ B` has `ℋᵠ(N) = 0`:
+representing `N` by a K-injective complex `I`, every local section of `ℋᵠ(I)` lifts locally to
+a cycle of `I`, which on members of `B` is a boundary. -/
+theorem isZero_homology_of_forall_isZero_homology_rightDerivedFunctor_sheafSections
+    {X : Scheme.{u}} (B : Set X.Etale)
+    (hB : ∀ V : X.Etale, ∃ S ∈ X.smallEtaleTopology V, ∀ ⦃W : X.Etale⦄ (f : W ⟶ V), S f → W ∈ B)
+    (N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) (q : ℤ)
+    (hN : ∀ U ∈ B, IsZero ((_root_.DerivedCategory.homologyFunctor (ModuleCat.{u + 1} Λ) q).obj
+      (((sheafSections X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+        (op U)).rightDerivedFunctor.obj N))) :
+    IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj N) := by
+  obtain ⟨I, hI, ⟨e⟩⟩ := _root_.DerivedCategory.exists_iso_Q_obj_of_isKInjective N
+  -- `I` is exact in degree `q` on sections over members of `B`
+  have hex (U : X.Etale) (hU : U ∈ B) (z : (I.X q).obj.obj (op U))
+      (hz : (I.d q (q + 1)).hom.app (op U) z = 0) :
+      ∃ y : (I.X (q - 1)).obj.obj (op U), (I.d (q - 1) q).hom.app (op U) y = z := by
+    let Γ := (sheafSections X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (op U)
+    have h₁ : IsZero (((Γ.mapHomologicalComplex _).obj I).homology q) :=
+      (hN U hU).of_iso ((_root_.DerivedCategory.homologyFunctor _ q).mapIso
+        (Γ.rightDerivedFunctor.mapIso e) ≪≫ (_root_.DerivedCategory.homologyFunctor _ q).mapIso
+          (Γ.rightDerivedFunctorObjQIso I) ≪≫
+          (_root_.DerivedCategory.homologyFunctorFactors _ q).app _).symm
+    have h₂ := (((Γ.mapHomologicalComplex _).obj I).exactAt_iff_isZero_homology q).2 h₁
+    rw [HomologicalComplex.exactAt_iff' _ (q - 1) q (q + 1) (by simp) (by simp)] at h₂
+    exact (ShortComplex.moduleCat_exact_iff _).1 h₂ z hz
+  let S := I.sc' (q - 1) q (q + 1)
+  have hepi : Epi S.toCycles := by
+    rw [← Sheaf.isLocallySurjective_iff_epi']
+    constructor
+    intro V s
+    obtain ⟨T, hT, hTB⟩ := hB V
+    refine GrothendieckTopology.superset_covering _ (fun W f hf ↦ ?_) hT
+    have hmono : Mono (S.iCycles.hom.app (op W)) := by
+      have : Mono S.iCycles.hom := (sheafToPresheaf _ _).map_mono S.iCycles
+      infer_instance
+    have hcyc (x : S.cycles.obj.obj (op W)) :
+        (I.d q (q + 1)).hom.app (op W) (S.iCycles.hom.app (op W) x) = 0 :=
+      (ConcreteCategory.congr_hom (congrArg (fun φ ↦ φ.hom.app (op W)) S.iCycles_g) x).trans
+        (by simp)
+    have htc (y : (I.X (q - 1)).obj.obj (op W)) :
+        S.iCycles.hom.app (op W) (S.toCycles.hom.app (op W) y) =
+          (I.d (q - 1) q).hom.app (op W) y :=
+      ConcreteCategory.congr_hom (congrArg (fun φ ↦ φ.hom.app (op W)) S.toCycles_i) y
+    obtain ⟨y, hy⟩ := hex W (hTB f hf) _ (hcyc (S.cycles.obj.map f.op s))
+    exact ⟨y, (ModuleCat.mono_iff_injective _).1 hmono ((htc y).trans hy)⟩
+  have hexact : S.Exact := S.exact_iff_epi_toCycles.2 hepi
+  have hI' : I.ExactAt q := (I.exactAt_iff' (q - 1) q (q + 1) (by simp) (by simp)).2 hexact
+  exact ((I.exactAt_iff_isZero_homology q).1 hI').of_iso
+    ((_root_.DerivedCategory.homologyFunctor _ q).mapIso e ≪≫
+      (_root_.DerivedCategory.homologyFunctorFactors _ q).app I)
+
+/-- Blueprint `lem-kun-0bkz`: **cohomology of unbounded complexes** (Stacks, Tag 0BKZ). Let `X`
+be a scheme, `K ∈ D(X_ét, Λ)` (unbounded), and `B` a class of objects of `X_ét` such that
+(1) every object of `X_ét` has a covering by members of `B` and (2) `Hᵖ(U, ℋᵠ(K)) = 0` for all
+`p > 0`, all `q` and all `U ∈ B`. Then `Hᵠ(U, K) ≅ H⁰(U, ℋᵠ(K)) = Γ(U, ℋᵠ(K))` for all `q` and
+all `U ∈ B`. Here `H^•(U, -)` is the cohomology of the right derived functor of the sections
+functor `Γ(U, -)` on `D(X_ét, Λ)`.
+
+The blueprint argues with the hypercohomology spectral sequence; the proof here follows Stacks:
+`K` is the derived limit of its truncations `τ^{≥ -n} K`, and `RΓ(U, -)` commutes with derived
+limits (`CategoryTheory.Functor.nonempty_homology_rightDerivedFunctor_obj_iso_of_acyclic_of_detects`,
+with the detection property
+`AlgebraicGeometry.Etale.isZero_homology_of_forall_isZero_homology_rightDerivedFunctor_sheafSections`
+provided by the coverings by members of `B`). -/
+theorem nonempty_homology_rightDerivedFunctor_sheafSections_obj_iso_of_acyclic {X : Scheme.{u}}
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (B : Set X.Etale)
+    (hB : ∀ V : X.Etale, ∃ S ∈ X.smallEtaleTopology V, ∀ ⦃W : X.Etale⦄ (f : W ⟶ V), S f → W ∈ B)
+    (hK : ∀ U ∈ B, ∀ q p : ℤ, 0 < p → IsZero ((_root_.DerivedCategory.homologyFunctor _ p).obj
+      (((sheafSections X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+        (op U)).rightDerivedFunctor.obj ((_root_.DerivedCategory.singleFunctor _ 0).obj
+          ((_root_.DerivedCategory.homologyFunctor _ q).obj K)))))
+    {U : X.Etale} (hU : U ∈ B) (q : ℤ) :
+    Nonempty ((_root_.DerivedCategory.homologyFunctor (ModuleCat.{u + 1} Λ) q).obj
+        (((sheafSections X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+          (op U)).rightDerivedFunctor.obj K) ≅
+      ((sheafSections X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (op U)).obj
+        ((_root_.DerivedCategory.homologyFunctor _ q).obj K)) :=
+  Functor.nonempty_homology_rightDerivedFunctor_obj_iso_of_acyclic_of_detects
+    (fun V : B ↦ (sheafSections X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (op V.1))
+    (fun N p hN ↦ isZero_homology_of_forall_isZero_homology_rightDerivedFunctor_sheafSections Λ
+      B hB N p fun V hV ↦ hN ⟨V, hV⟩) K (fun V q p hp ↦ hK V.1 V.2 q p hp) ⟨U, hU⟩ q
+
+end AlgebraicGeometry.Etale
