@@ -14,11 +14,121 @@
   "def-weil-residue-field",
   "def-weil-pbc-strict-henselization-limit",
   "def-pc-fibre-product",
-  "def-kun-topological-krull-dimension"
+  "def-kun-topological-krull-dimension",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "def-weil-affine-spectrum",
+  "def-sc-generic-point",
+  "def-weil-irreducible-components"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose an affine open $U=\\operatorname{Spec}R$ of $X$ containing $x$. It contains $y$, since $x\\in\\overline{\\{y\\}}$. Write $\\mathfrak p\\subseteq\\mathfrak m\\subset R$ for the primes of $y,x$. The closure of $\\mathfrak p$ in $U$ is $V(\\mathfrak p)$: a closed set $V(J)$ contains $\\mathfrak p$ exactly when $J\\subseteq\\mathfrak p$. The affine clause of [lem-weil-pbc-reduced-induced-closed-subscheme] therefore gives $W\\cap U=\\operatorname{Spec}(R/\\mathfrak p)$ and makes $W\\to X$ a closed immersion. By [lem-weil-pbc-affine-open-stalk-localization](c), $A=\\mathcal O_{W,x}=(R/\\mathfrak p)_{\\mathfrak m/\\mathfrak p}$. This is a nonzero domain: $R/\\mathfrak p$ is a domain and the fractions have nonzero denominators, so a zero product has a zero numerator factor. Its zero prime maps to $y$, and every prime contains zero, so $y$ is its generic point. The unique maximal ideal maps to $x$ by [lem-weil-pbc-spec-local-ring-canonical-morphism](1). The same morphism supplies the canonical map $c:Z\\to W$; its stalk map at the closed point is the identity of $A$ by clause (2).",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01J3 (lemma-reduced-closed-subscheme), 01HV (lemma-spec-sheaves), 01J6 (lemma-morphism-from-spec-local-ring), and 01J7 (lemma-specialize-points); ILO XIV 2.1.3, reduction to the reduced local closure"
+   }
+  },
+  {
+   "text": "The geometric point $\\bar x$ factors through $W$, since the ideal of $W$ vanishes in $\\kappa(x)$, and then through the closed point of $Z$; both factorizations use the given embedding $\\kappa(x)\\to\\Omega$. Choose the same separable closure $K\\subset\\Omega$ and the same algebraic strict-henselization model $A^{\\mathrm{sh}}$ for these two geometric points. Apply [lem-exc-affine-strict-local-ring-comparison] to the chart $W\\cap U$ of $W$ and to the whole affine chart $Z=\\operatorname{Spec}A$. Their localized base rings are $A$ and $A_{\\mathfrak m_A}=A$, respectively, by [lem-weil-pbc-affine-open-stalk-localization](c); explicitly $a/s\\mapsto as^{-1}$ because every $s\\notin\\mathfrak m_A$ is a unit. Thus both geometric strict-local rings are identified with $A^{\\mathrm{sh}}$, with the same geometric residue evaluation. The algebraic model is the one of [def-sc-ring-strict-henselization]. The structural-map equation of the affine comparison makes the resulting isomorphism $Z_{(\\bar x)}\\simeq W_{(\\bar x)}$ compatible with $c:Z\\to W$ and hence with the maps to $X$. It is the canonical functorial map of [lem-weil-pbc-strict-henselization-functoriality](3): its ring map is local (it is an isomorphism of local rings), commutes with the structural maps just checked, and induces the identity on the common residue field $K$. The uniqueness clause of (3) therefore identifies it with that functorial map.",
+   "uses": [
+    "lem-exc-affine-strict-local-ring-comparison",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-sc-ring-strict-henselization",
+    "lem-weil-pbc-strict-henselization-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04HX (lemma-describe-etale-local-ring), with algebra.tex Tag 04GW (lemma-strict-henselization-different) and schemes.tex Tag 01HV"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-closed-immersion-strict-localization-cartesian] to the closed immersion $W\\hookrightarrow X$ and the geometric point over $x$. Together with Step 2 it gives the required canonical identification $Z_{(\\bar x)}\\simeq W_{(\\bar x)}\\simeq X_{(\\bar x)}\\times_X W$ over $X$. Put $T=Z_{(\\bar x)}$. The affine clause of that cited statement says that the map of strict-local rings is surjective, with kernel the extended defining ideal of $W$ on $U$. Consequently $T\\to X_{(\\bar x)}$ is a closed immersion by [def-weil-closed-immersion], and its underlying closed subset is exactly the inverse image of $W$ (on spectra both are $V(I\\mathcal O^{\\mathrm{sh}}_{X,\\bar x})$). Every ambient point over $y$ lies in that subset, and the embedding identifies the subspaces of points over $y$. For any such point $t$, its ambient closure stays in the closed subset $T$. Its closure in $T$ is the same subset with the same subspace topology. This proves the asserted identification of closures, rather than identifying $T$ with any component of the ambient strict localization.",
+   "uses": [
+    "lem-trf-closed-immersion-strict-localization-cartesian",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05WS (lemma-quotient-strict-henselization); the affine closed-immersion characterization in morphisms.tex Tag 01QO"
+   }
+  },
+  {
+   "text": "Write $T=\\operatorname{Spec}B$, where $B$ is the canonical geometric strict-local ring of the affine scheme $Z=\\operatorname{Spec}A$. The map $A\\to B$ is flat by [lem-sbc-affine-strict-henselization-structural-flat], applied to this affine scheme and the geometric point at its closed point. Let $C$ be any irreducible component of $T$. By [lem-sc-scheme-sober] it has a generic point, corresponding to a prime $\\mathfrak q\\subset B$, and $C=\\overline{\\{\\mathfrak q\\}}=V(\\mathfrak q)$. The prime $\\mathfrak q$ is minimal: if a prime $\\mathfrak r\\subsetneq\\mathfrak q$ existed, then the irreducible closed set $V(\\mathfrak r)=\\overline{\\{\\mathfrak r\\}}$ would strictly contain $V(\\mathfrak q)$, contrary to the component's maximality. Let $\\mathfrak p$ be the contraction of $\\mathfrak q$ to $A$. Since $A$ is a domain, $(0)\\subseteq\\mathfrak p$ are primes. Apply [lem-sc-flat-going-down] to obtain $\\mathfrak q_0\\subseteq\\mathfrak q$ contracting to zero. Minimality gives $\\mathfrak q_0=\\mathfrak q$, hence $\\mathfrak p=(0)$. By Step 1, the generic point of $C$ therefore lies over $y$.",
+   "uses": [
+    "lem-sbc-affine-strict-henselization-structural-flat",
+    "lem-sc-scheme-sober",
+    "lem-sc-flat-going-down"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIV, Proposition 2.1.3 proof, component generic points dominate the integral local closure; flatness from Stacks 07QM (lemma-dumb-properties-henselization)(1), going-down from Tag 00HS, generic points from Tag 01IS"
+   }
+  },
+  {
+   "text": "Conversely, let $t\\in T$ lie over $y$. Choose an irreducible component $C$ containing it by [lem-sc-irreducible-components-cover], and its generic point $\\eta_C$ by [lem-sc-scheme-sober]. Step 4 shows that $\\eta_C$ also lies over $y$. Since $t\\in\\overline{\\{\\eta_C\\}}$, the point $\\eta_C$ is a generalization of $t$. Under the closed embedding of Step 3 both belong to the fibre of $X_{(\\bar x)}\\to X$ over $y$. This fibre is discrete by [lem-per-strict-localization-discrete-fibres], whose hypotheses are precisely the given Noetherian $X$, specialization $x\\in\\overline{\\{y\\}}$, and geometric point over $x$. The fibre carries the subspace topology by [def-pc-scheme-fibre]. Generalization persists on a subspace containing both points: every relative open containing $t$ contains $\\eta_C$. In a discrete space the relative open $\\{t\\}$ forces $\\eta_C=t$. Thus $t$ is the generic point of $C$ and its closure is exactly $C$.",
+   "uses": [
+    "lem-sc-irreducible-components-cover",
+    "lem-sc-scheme-sober",
+    "lem-per-strict-localization-discrete-fibres",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIV, Proposition 2.1.3 proof, final two sentences: component containing a point over the generic point, and equality using discrete fibres"
+   }
+  },
+  {
+   "text": "A homeomorphism preserves irreducible closed subsets, their strict inclusions and their chains, so it preserves Krull dimension by [def-kun-topological-krull-dimension]. Apply this to the homeomorphism of closures in Step 3. If an ambient point over $y$ has one-dimensional closure, Step 5 identifies its closure in $T$ with an irreducible component of $T$; that component has dimension one. Conversely, for a one-dimensional component $C$ of $T$, Step 4 puts its generic point over $y$, and Step 3 identifies its ambient closure homeomorphically with $C$, so that closure has dimension one. Here generic points and components have exactly the meanings of [def-sc-generic-point, def-weil-irreducible-components]. All components used are components of $T=Z_{(\\bar x)}$; the closed embedding supplies no assertion that they are components of $X_{(\\bar x)}$.",
+   "uses": [
+    "def-kun-topological-krull-dimension",
+    "def-sc-generic-point",
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIV, Proposition 2.1.3 conclusion; dimension is Stacks topology.tex Tag 0055 (definition-Krull)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-krull-dimension",
+  "def-pc-scheme-fibre",
+  "def-sc-generic-point",
+  "def-sc-ring-strict-henselization",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "def-weil-irreducible-components",
+  "def-weil-pbc-localization-at-prime",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-per-strict-localization-discrete-fibres",
+  "lem-sbc-affine-strict-henselization-structural-flat",
+  "lem-sc-flat-going-down",
+  "lem-sc-irreducible-components-cover",
+  "lem-sc-scheme-sober",
+  "lem-trf-closed-immersion-strict-localization-cartesian",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-weil-pbc-strict-henselization-functoriality"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XIV, Proposition 2.1.3, printed pp. 209-210; the reduced-local-closure comparison is made explicit by Stacks Tags 01J3, 01HV, 04HX and 05WS, and the flat-component argument by 07QM(1), 00HS and 01IS."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +164,59 @@
    "results": "Retained search hits: AlgebraicGeometry.StructureSheaf.localizationToStalk_stalkSpecializes_apply, AlgebraicGeometry.StructureSheaf.localizationToStalk_stalkSpecializes, AlgebraicGeometry.StructureSheaf.stalkSpecializes_stalk_to_fiber_apply, AlgebraicGeometry.StructureSheaf.localizationToStalk_stalkSpecializes_assoc, AlgebraicGeometry.StructureSheaf.stalkSpecializes_stalk_to_fiber, AlgebraicGeometry.StructureSheaf.toStalk_stalkSpecializes_apply, AlgebraicGeometry.LocallyRingedSpace.stalkSpecializes_stalkMap, AlgebraicGeometry.StructureSheaf.toStalk_stalkSpecializes. None states the strict-localization component/fibre comparison.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict localization of a Noetherian scheme at a geometric point commutes with closed immersion and its generic fibre points are generic points of irreducible components",
+   "results": "Returned declarations: AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian, AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion, AlgebraicGeometry.instIsPreimmersionFromSpecStalk, AlgebraicGeometry.Scheme.PartialMap.mem_domain_ofFromSpecStalk, AlgebraicGeometry.Scheme.PartialMap.fromSpecStalkOfMem_ofFromSpecStalk, AlgebraicGeometry.Scheme.range_fromSpecStalk, AlgebraicGeometry.Scheme.isLocalHom_stalkClosedPointTo', AlgebraicGeometry.Scheme.isLocalHom_stalkClosedPointTo. No hit states the strict-localization/closed-local-closure component criterion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianLocalRing, PrimeSpectrum, irreducibleComponents",
+   "results": "Returned declarations: none. No hit states the strict-localization/closed-local-closure component criterion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHensel|strict_hensel|strict.*locali.*component",
+   "results": "Returned declarations: none; Mathlib subdirectory: AlgebraicGeometry. No hit states the strict-localization/closed-local-closure component criterion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Minimal primes of a strict henselization of a local integral domain are exactly the primes over zero",
+   "results": "Returned declarations: IsDomain.minimalPrimes_eq_singleton_bot, minimalPrimes, IsLocalization.minimalPrimes_comap, Ideal.primesOver_bot, PrimeSpectrum.isMin_iff, IsLocalization.minimalPrimes_map, Ring.KrullDimLE.minimalPrimes_eq_setOf_isPrime, minimalPrimes.finite_of_isNoetherianRing. No hit states the strict-localization/closed-local-closure component criterion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat ring map with zero dimensional fibres over an integral domain, the primes over zero are exactly the minimal prime ideals",
+   "results": "Returned declarations: Ideal.primesOver_bot, Algebra.HasGoingDown.of_flat, Ideal.exists_isPrime_liesOver_of_faithfullyFlat, RingHom.Flat.ofLocalizationPrime, RingHom.Flat.generalizingMap_comap, Algebra.HasGoingDown, Ideal.exists_comap_eq_of_mem_minimalPrimes, Ideal.exists_comap_eq_of_mem_minimalPrimes_of_injective. No hit states the strict-localization/closed-local-closure component criterion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.HasGoingDown, minimalPrimes",
+   "results": "Returned declarations: none. No hit states the strict-localization/closed-local-closure component criterion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "strict localization of reduced local closure of a point has component generic points precisely over the original generic point",
+   "results": "Returned declarations: genericPoints.component_ofComponent, genericPoints.isGenericPoint_ofComponent, genericPoints.ofComponent_component, AlgebraicGeometry.Scheme.range_fromSpecStalk, genericPoints.component, AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion, genericPoints.ofComponent, AlgebraicGeometry.IsAffineOpen.primeIdealOf_genericPoint. No hit states the strict-localization/closed-local-closure component criterion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-immediate-specialization-criterion",
@@ -79,5 +238,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-etale-immediate-component-criterion",
+  "worker": "stage1",
+  "summary": "Retained the earlier item and searches, checked against the unchanged current repository item and ILO XIV 2.1.3, and supplied six proof steps. Reused existing reduced-closed-subscheme, strict-local comparison, closed-immersion cartesian, flatness, going-down, sobriety, component-cover and discrete-fibre nodes; no new nodes or statement changes. Expanded the equality of strict localizations and both generic-point implications. Added the definitions/construction actually used by the statement.",
+  "blueprint": "Realizes the recorded ancestor lem-per-artin-gabber-affine-curve, historical Proof Step 3 on dimension-normalized Verdier duality, through lem-per-qbar-arbitrary-field-duality, lem-per-finite-residue-dualizing, lem-per-potential-extraordinary-pullback, and lem-per-immediate-specialization-criterion: reduction to the reduced local closure and the strict-local component criterion. The current main-20261015 ancestor statement is unchanged; its file omits the historical proof. No chapter or unit route is altered.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Step 1 uses the reduced closed subscheme and its affine radical-ideal description; this generic construction is not supplied by the perverse unit."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Steps 1-2 identify the local ring and the closed-point stalk in affine charts; this is a generic local-ring tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-spec-local-ring-canonical-morphism",
+    "why": "Step 1 uses its canonical map, closed point, and identity on the closed-point stalk; no perverse-unit statement gives this general construction."
+   },
+   {
+    "node": "lem-exc-affine-strict-local-ring-comparison",
+    "why": "Step 2 applies its affine comparison twice to the same local ring and same separable residue closure; it is a general geometric/algebraic strict-local comparison."
+   },
+   {
+    "node": "lem-trf-closed-immersion-strict-localization-cartesian",
+    "why": "Step 3 uses its actual canonical fibre-product isomorphism and surjective strict-local ring map, not an argument inside its proof. This is a general closed-immersion tool absent from the unit."
+   },
+   {
+    "node": "lem-sbc-affine-strict-henselization-structural-flat",
+    "why": "Step 4 uses flatness of the canonical ring map for Spec A, a generic strict-localization tool absent from this unit."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-functoriality",
+    "why": "Step 2 uses uniqueness in clause (3) to identify the constructed local-ring isomorphism with the canonical functorial map for Spec O(W,x) to W; this is a general strict-localization tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-spec-local-ring-canonical-morphism",
+  "lem-exc-affine-strict-local-ring-comparison",
+  "lem-trf-closed-immersion-strict-localization-cartesian",
+  "lem-sbc-affine-strict-henselization-structural-flat",
+  "lem-weil-pbc-strict-henselization-functoriality"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q34-3477ea74b",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q34-3477ea74b (reviewer sub-agent of L); spot-checked: Read ILO XIV 2.1 on printed pp. 209-210 (the reduction paragraph, Prop. 2.1.3 and its proof) and every cited statement. The item statement is unchanged from the version created by Q05 and still unsplit on live. It is stated correctly for Z_(x̄) of the reduced local closure, with no claim about components of the ambient X_(x̄). Step 1: reduced-induced closed subscheme on V(p) gives A=(R/p)_{m/p}, a domain whose generic point maps to y. Step 2: lem-exc is applied to D=R/p and to D=A with the same separable closure K; uniqueness in functoriality (3) identifies the resulting isomorphism with the canonical map. Step 3: the 05WS cartesian/surjection statement makes T→X_(x̄) a closed embedding onto the preimage of W, so closures are identified. Step 4: structural flatness, going-down from (0) and minimality put every component generic point over y. Step 5: discrete fibres over y force t=η_C. Step 6 (elementary): dimension is invariant under homeomorphism. Tested y=x, a line in A^2 (closure 1-dimensional, ambient 2-dimensional), a nodal cubic (two 1-dimensional components) and a surface (both sides false). proof_deps equals the union of the step uses; no cycle, merged id, SGA citation or new node. lem-per-geometric-immediate-catenary is 2.1.4, not a duplicate. All 7 declared tool_uses are accepted as generic tools. Batch 5: lem-trf-closed-immersion-strict-localization-cartesian is Stacks 05WS, pure strict-henselization algebra. Its closure contains no other trace-formula or Poincaré-duality node and no nt-assume, nt-target or trace-transport node. Neither assumption gives it, so the citation is accepted. Maintainer notes: the unsplit lem-per-strict-localization-discrete-fibres must not cite this item when it is split; blueprint.from.place refers to the historical master proof Step 3."
  }
 }
