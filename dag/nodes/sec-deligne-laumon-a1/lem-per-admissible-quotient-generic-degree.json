@@ -2,19 +2,15 @@
  "id": "lem-per-admissible-quotient-generic-degree",
  "kind": "statement",
  "title": "Intermediate admissible finite-group quotients and generic index",
- "statement": "Let $S$ be an affine excellent Noetherian scheme, let $M$ be an integral scheme of finite type and separated over $S$, and let a finite group $G$ act on $M$ by $S$-automorphisms, admissibly and generically freely. Admissible means that every orbit is contained in an affine open; generically free means free on geometric points of a $G$-stable dense open. For each subgroup $H\\leq G$, the scheme quotients $M/H$ and $M/G$ exist and are integral excellent Noetherian, and $M\\to M/H\\to M/G$ are finite surjective morphisms. Their structure sheaves are invariant sections and their underlying spaces are orbit spaces. The extension $\\kappa(M)/\\kappa(M/G)$ of function fields is Galois with group $G$, and $[\\kappa(M/H):\\kappa(M/G)]=[G:H]$. An equivariant morphism induces a morphism of quotients. If $M$ is projective over an affine Noetherian scheme with trivial $G$-action, its action and the actions of all subgroups are admissible. The quotients are of finite type over $S$. For an affine $M$, its quotient is affine. (Some finiteness hypothesis such as finite type over $S$ is needed: for a general excellent Noetherian $M$ the invariant ring of a finite group need not be Noetherian.)\n\nConventions for the notions used here: [def-pc-scheme], [def-pc-reduced-scheme], [def-weil-pbc-noetherian-ring], [def-exc-excellent-ring], [def-weil-regular-scheme], [def-trf-strict-normal-crossings-boundary], [def-per-prime-to-ell-alteration-topology], [def-pc-integral-scheme], [def-weil-proper-morphism], [def-weil-finite-type-morphism], [def-weil-finite-integral-morphism], [def-kun-projective], [def-sc-function-field].",
+ "statement": "Let $S$ be an affine excellent Noetherian scheme, let $M$ be an integral scheme of finite type and separated over $S$, and let a finite group $G$ act on $M$ by $S$-automorphisms, admissibly and generically freely. Admissible means that every orbit is contained in an affine open; generically free means free on geometric points of a $G$-stable dense open. For each subgroup $H\\leq G$, the scheme quotients $M/H$ and $M/G$ exist and are integral excellent Noetherian, and $M\\to M/H\\to M/G$ are finite surjective morphisms. Their structure sheaves are invariant sections and their underlying spaces are orbit spaces. The extension $\\kappa(M)/\\kappa(M/G)$ of function fields is Galois with group $G$, and $[\\kappa(M/H):\\kappa(M/G)]=[G:H]$. An equivariant morphism induces a morphism of quotients. If $M$ is projective over an affine Noetherian scheme with trivial $G$-action, its action and the actions of all subgroups are admissible. The quotients are of finite type over $S$. For an affine $M$, its quotient is affine. (Some finiteness hypothesis such as finite type over $S$ is needed: for a general excellent Noetherian $M$ the invariant ring of a finite group need not be Noetherian.)\n\nConventions: [def-pc-scheme], [def-weil-pbc-noetherian-ring], [def-exc-excellent-ring], [def-pc-integral-scheme], [def-weil-proper-morphism] (separatedness), [def-weil-finite-type-morphism], [def-weil-finite-integral-morphism], [def-kun-projective], [def-sc-function-field].",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "Expose IX 1.4, printed pp. 132--133: admissible quotient formation and the Sylow intermediate quotient of generic degree [G:H]. The generic-degree assertion is invariant-field Galois theory; existence and excellence are the finite admissible scheme quotient assertions used in that paragraph."
  },
  "stmt_deps": [
   "def-pc-scheme",
-  "def-pc-reduced-scheme",
   "def-weil-pbc-noetherian-ring",
   "def-exc-excellent-ring",
-  "def-weil-regular-scheme",
-  "def-trf-strict-normal-crossings-boundary",
-  "def-per-prime-to-ell-alteration-topology",
   "def-pc-integral-scheme",
   "def-weil-proper-morphism",
   "def-weil-finite-type-morphism",
@@ -22,9 +18,200 @@
   "def-kun-projective",
   "def-sc-function-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $S=\\operatorname{Spec}R$. First do the construction for any subgroup $K\\leq G$. An affine open containing a $G$-orbit contains the smaller $K$-orbit. Intersect its finitely many $K$-translates. Separatedness over the affine base makes this intersection affine, it is $K$-stable, and it still contains the orbit. Thus $M$ has a $K$-stable affine cover. Since $M$ is Noetherian, choose it finite. Its rings are domains (integrality), and each is of finite type over $R$ by the affine-pairs characterization of locally finite type morphisms, applied to the affine chart over $\\operatorname{Spec}R$.",
+   "uses": [
+    "lem-weil-pbc-separated-affine-open-intersection",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-pc-integral-scheme",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-lft-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T2 (morphisms-lemma-locally-finite-type-characterize); agent argument expanding ILO IX 1.4 (stable affine cover from admissibility and separatedness)"
+   }
+  },
+  {
+   "text": "On such a chart $U=\\operatorname{Spec}A$ put $C=A^K$. For $a\\in A$ the monic polynomial $\\prod_{k\\in K}(T-k(a))$ has coefficients in $C$, since every group element permutes its factors, and vanishes at $a$. The finite set of $R$-algebra generators also generates over $C$; hence the integral-generators lemma makes $A$ finite over $C$. Artin--Tate makes $C$ finite type over the Noetherian ring $R$, and consequently Noetherian. Set $Q_U=\\operatorname{Spec}C$ and let $q_U$ be induced by inclusion. It is finite by the affine definition.",
+   "uses": [
+    "lem-weil-pbc-finite-of-integral-generators",
+    "lem-per-artin-tate-subalgebra-finite-type",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "def-weil-finite-integral-morphism",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Agent argument expanding ILO IX 1.4 using the cited statements"
+   }
+  },
+  {
+   "text": "Form the action groupoid $\\coprod_{k\\in K}U\\rightrightarrows U$, with arrows $u\\mapsto k(u)$, inverse from $k^{-1}$ and composition from group multiplication. The coproduct is affine, with ring $\\prod_K A$. Both projections are finite locally free: after permuting each component by its action automorphism, each is the codiagonal, corresponding to the free $A$-module $\\prod_K A$ with its coordinate basis. The invariant equalizer is exactly $C$. The affine groupoid orbit-fibres theorem therefore says that $q_U$ is surjective and its underlying and geometric fibres are the $K$-orbits. Being finite, $q_U$ is closed, hence a topological quotient map.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "lem-weil-pbc-finite-free-algebra-spectrum",
+    "lem-a1-affine-groupoid-orbit-fibres",
+    "lem-weil-pbc-finite-closed-map-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Agent argument expanding ILO IX 1.4 using the cited statements"
+   }
+  },
+  {
+   "text": "For $f\\in C$, principal localization identifies $D_U(f)$ with $\\operatorname{Spec}A_f$ and $D_{Q_U}(f)$ with $\\operatorname{Spec}C_f$. If $f\\neq0$, a fraction $a/f^n$ is invariant exactly when $k(a)=a$ for every $k$: multiply $k(a)/f^n=a/f^n$ by the nonzero denominator in the domain $A$. Thus $(A_f)^K=C_f$. For $f=0$ both localizations are the zero ring and both opens are empty. These identifications commute with restriction, since they all send $a/f^n$ to that same fraction.",
+   "uses": [
+    "lem-weil-pbc-principal-localization-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01HR (affine schemes, principal opens); explicit invariant-fraction calculation"
+   }
+  },
+  {
+   "text": "If $W\\subseteq U$ is a $K$-stable open, every orbit in $W$ has an invariant principal neighbourhood contained in $W$. Indeed write $U\\setminus W=V(I)$; for the finitely many orbit primes prime avoidance gives $a\\in I$ outside all of them. Then $f=\\prod_{k\\in K}k(a)$ is invariant, avoids those primes, and $D(f)\\subseteq D(a)\\subseteq W$. Step 4 identifies the quotient of each such $D(f)$ with $D_{Q_U}(f)$. Consequently $q_U(W)$ is open and its invariant-section ringed space is locally these principal opens. This proves the restriction compatibility needed for gluing; it does not assume affineness of an arbitrary open.",
+   "uses": [
+    "lem-weil-pbc-prime-avoidance",
+    "lem-weil-pbc-principal-localization-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Prime avoidance and explicit orbit-product principal neighbourhoods"
+   }
+  },
+  {
+   "text": "For two stable charts $U,V$, apply step 5 to $U\\cap V$. Their open quotient pieces identify canonically: on the common orbit space both sheaves are $\\mathcal O_M(q^{-1}(-))^K$, by step 4 and the sheaf axiom. These identifications satisfy the cocycle condition, since all are identity on the same invariant sections. Glue the $Q_U$ by the scheme-gluing theorem, and glue the $q_U$ by morphism gluing. This produces $q_K:M\\to Q_K$ finite and surjective, with orbit-space topology and $\\mathcal O_{Q_K}=(q_{K*}\\mathcal O_M)^K$. Finiteness is checked on these affine target charts, whose inverse images are exactly $U$ because $U$ is stable and fibres are orbits: $q_K$ is affine by the affine-cover criterion, and over each chart $\\operatorname{Spec}A^K$ the pushforward of the structure sheaf is $\\widetilde A$ with $A$ a finite $A^K$-module, so $q_{K*}\\mathcal O_M$ is a finite quasi-coherent algebra, which is the finiteness definition.",
+   "uses": [
+    "lem-weil-pbc-glue-schemes",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-weil-finite-integral-morphism",
+    "pqf-lem-affine-local-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Agent argument expanding ILO IX 1.4 using the cited statements"
+   }
+  },
+  {
+   "text": "This quotient is categorical in schemes. For an invariant morphism $a:M\\to Z$, inverse images of affine opens of $Z$ are stable. Step 5 makes their images open in $Q_K$. On a principal chart inside such an inverse image, the pullback of sections from $Z$ lands in the invariant ring, defining the unique descended morphism to that affine target. The affine spectrum correspondence and morphism gluing assemble these morphisms; uniqueness follows from injectivity into invariant sections and surjectivity on points. For an equivariant map $M\\to N$, compose with $N\\to N/K$ and descend in this manner. In particular $q_G$ descends along $q_H$ to $Q_H\\to Q_G$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Agent argument expanding ILO IX 1.4 using the cited statements"
+   }
+  },
+  {
+   "text": "Over the chart $\\operatorname{Spec}A^G$ of $Q_G$, the intermediate quotient is $\\operatorname{Spec}A^H$, by restriction compatibility and uniqueness. It is surjective since $M\\to Q_G$ factors through it and is surjective. The ring $A^H$ is an $A^G$-submodule of the finite $A^G$-module $A$. As $A^G$ is Noetherian, the submodule-finiteness lemma makes this morphism finite. For either $K$, the finitely many rings $A^K$ are finite type over $R$; hence $Q_K$ is finite type over $S$ and Noetherian. They are domains; moreover the orbit-space continuous image of the nonempty irreducible $M$ is nonempty irreducible, so $Q_K$ is integral. Excellence of the finite type rings $A^K$ follows from excellence of $R$. If $M$ is affine use its single invariant-ring chart.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "def-weil-finite-integral-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-pc-integral-scheme",
+    "lem-exc-finite-type-localization-excellent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Agent argument expanding ILO IX 1.4 using the cited statements"
+   }
+  },
+  {
+   "text": "Let $L=\\kappa(M)$. On any nonempty $G$-stable affine chart the function-field theorem identifies $L$ with $\\operatorname{Frac}A$ and $\\kappa(Q_K)$ with $\\operatorname{Frac}(A^K)$. For $x=a/b\\in L^K$ with $b\\neq0$, put $d=\\prod_{k\\in K}k(b)$. Then $d\\neq0$, $d\\in A^K$, and $xd=a\\prod_{k\\neq1}k(b)\\in A$. Both $x$ and $d$ are invariant, so $xd\\in A^K$; thus $x=(xd)/d$. The reverse inclusion is immediate. Hence $\\kappa(Q_K)=L^K$, compatibly with the field inclusions from $Q_H\\to Q_G$.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01RW (function field); explicit invariant norm-denominator calculation"
+   }
+  },
+  {
+   "text": "The action on $L$ is faithful. If an element acts trivially on $L$, its action on the domain $A$ in each stable chart is trivial by injectivity $A\\hookrightarrow L$; by the affine spectrum correspondence it is the identity on each chart, hence on $M$. It then fixes a geometric point in the nonempty free dense open, so generic freeness forces the element to be $1$. Apply the finite faithful field-action theorem to obtain $L/L^G$ finite Galois with degree $|G|$. The full automorphism group has that same cardinality by the finite-Galois theorem, so the injective action of $G$ identifies it with this group.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lem-wf-finite-field-action-fixed-degree",
+    "lem-weil-pbc-finite-galois-fixed-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Agent argument expanding ILO IX 1.4 using the cited statements"
+   }
+  },
+  {
+   "text": "The restricted action of $H$ on $L$ is faithful, so the same field-action theorem gives $[L:L^H]=|H|$. For completeness the degree multiplication here is the elementary basis argument: if $(e_i)$ is an $L^H$-basis of $L$ and $(f_j)$ an $L^G$-basis of $L^H$, then $(e_if_j)$ spans $L$ by expanding coefficients and is independent by first collecting the $e_i$ and then the $f_j$. These bases are finite because $L/L^G$ is finite. Thus $|G|=|H|[L^H:L^G]$, and partitioning $G$ into its $H$-cosets gives $[L^H:L^G]=[G:H]$. Step 9 gives the stated generic degree. This includes $H=1$ and $H=G$.",
+   "uses": [
+    "lem-wf-finite-field-action-fixed-degree"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I3 plus elementary tower-basis and coset-counting arguments"
+   }
+  },
+  {
+   "text": "Finally suppose $M$ is projective over an affine Noetherian base $B$ with trivial action. Apply the existing projective finite-group quotient theorem over $B$, for $G$ and for every subgroup $K$. Its finite quotient has affine inverse images of affine neighbourhoods, and each such inverse image contains the entire orbit of any of its points. Hence every orbit is contained in an affine open, which is precisely admissibility. This verifies the projective sufficient condition independently of the admissibility hypothesis used in steps 1--11.",
+   "uses": [
+    "lem-per-projective-finite-group-quotient",
+    "def-weil-finite-integral-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "ILO IX 1.4, p.132, projectivity over the affine base; existing projective-quotient theorem"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-separated-affine-open-intersection",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "def-pc-integral-scheme",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-finite-of-integral-generators",
+  "lem-per-artin-tate-subalgebra-finite-type",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "def-weil-finite-integral-morphism",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "lem-weil-pbc-finite-free-algebra-spectrum",
+  "lem-a1-affine-groupoid-orbit-fibres",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-prime-avoidance",
+  "lem-weil-pbc-glue-schemes",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "pqf-lem-affine-local-target",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-wf-finite-field-action-fixed-degree",
+  "lem-weil-pbc-finite-galois-fixed-field",
+  "lem-per-projective-finite-group-quotient"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "IX 1.4 pp.132--133 expanded by invariant affine gluing, Stacks 00IS, 03BL, 01JC and 09I3; all calculations supplied explicitly."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,7 +243,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-uniformization-nodal-quotient-reduction",
@@ -82,5 +269,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-admissible-quotient-generic-degree",
+  "worker": "stage1",
+  "summary": "Constructed admissible quotients by invariant affine charts, checked restrictions and gluing, descended equivariant maps, proved intermediate finiteness via Noetherian submodules, and computed function fields with invariant norm denominators and faithful field-action Galois theory. Reused existing projective quotients for the projective admissibility criterion. One new Mathlib leaf: Artin--Tate. Maintainer reader (cc) FIX: step 1 cites lem-weil-pbc-lft-affine-pairs for finite-type chart rings, step 6 cites pqf-lem-affine-local-target for affineness of the glued quotient map, step 4/9 source files corrected.",
+  "blueprint": "Step 3 finiteness/duality branch of lem-per-artin-gabber-affine-curve, through the IX 1.1 uniformization input; ILO IX 1.4, pp.132--133, formation of X'/H and Y'/H and preservation of excellence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-free-algebra-spectrum",
+    "why": "Generic algebra/scheme tool used for the explicit admissible-quotient construction; the perverse unit has no replacement statement for this input."
+   },
+   {
+    "node": "lem-a1-affine-groupoid-orbit-fibres",
+    "why": "Generic algebra/scheme tool used for the explicit admissible-quotient construction; the perverse unit has no replacement statement for this input."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic algebra/scheme tool used for the explicit admissible-quotient construction; the perverse unit has no replacement statement for this input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-free-algebra-spectrum",
+  "lem-a1-affine-groupoid-orbit-fibres",
+  "lem-exc-finite-type-localization-excellent"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q134-584956b0e",
+  "group": "Q134",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q134-584956b0e (reviewer sub-agent of L); spot-checked: I read the item, its 12 steps, every cited statement, the new node and ILO IX 1.4 (pp.132-133, plus VI 3.2's SGA 1 V 1 recall). The mathematics is sound. The statement text is unchanged from the base; only unused convention stmt_deps were dropped. Checks: step 1 uses separatedness over affine S to get a stable affine cover. Step 2: the monic product polynomial makes A finite over A^K, and Artin-Tate gives A^K of finite type, hence Noetherian. Step 3: s and t of the action groupoid are free with the coordinate basis, so orbit-fibres and closedness apply. Step 4: invariants commute with invariant localization. Step 5: prime avoidance gives an invariant f=prod k(a) with D(f) inside W, because orbit primes are permuted. Step 6: gluing with saturated charts. Step 7: descent of invariant maps. Step 8: A^H is a submodule of the finite A^G-module A, giving finiteness, finite type, Noetherian, integral and excellent quotients. Step 9: the norm denominator gives kappa(Q_K)=L^K. Steps 10-11: faithfulness from generic freeness, then degree |G|, Galois group G, and [G:H] by the tower law and coset count. Step 12: invariance of the projective quotient gives admissibility. Edge cases checked: G=1, H=1, H=G, x->-x and x->x+1 on A^1. New leaf lem-per-artin-tate-subalgebra-finite-type = fg_of_fg_of_fg, Mathlib/RingTheory/Adjoin/Tower.lean:144-154 (stacks 00IS), read; no DAG duplicate. No cycle and no SGA. The 3 declared tool_uses are accepted as generic tools. FIX: (C1) step 1 used 'every affine open of a finite-type scheme over R has a finite-type ring' without a node; now cites lem-weil-pbc-lft-affine-pairs (01T2). (C1) step 6 used that q_K is affine because it is affine over an affine target cover, without a node; now cites pqf-lem-affine-local-target (01S8) and spells out the finiteness. Steps 4 and 9 had their source files corrected (schemes.tex 01HR, morphisms.tex 01RW). Advisory: the statement could cite def-per-admissible-finite-scheme-quotient.; 1 file(s) fixed by the reviewer"
  }
 }
