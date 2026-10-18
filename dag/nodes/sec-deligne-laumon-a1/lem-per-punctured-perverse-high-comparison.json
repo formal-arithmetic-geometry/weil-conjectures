@@ -16,9 +16,110 @@
   "def-weil-geometric-point",
   "def-weil-pbc-etale-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work with the underlying abelian etale complexes when computing hypercohomology. Set $C=\\tau^{\\mathrm{ord}}_{\\geq1}M$. The ordinary truncation triangle, after identifying its first term with $\\Lambda_U$ by the specified $\\alpha$, is\n$$\\Lambda_U\\xrightarrow{u}M\\longrightarrow C\\longrightarrow\\Lambda_U[1].$$\nThe truncation formulas give $\\mathcal H^r(C)=0$ for $r\\leq0$ and $\\mathcal H^r(C)=\\mathcal H^r(M)$ for $r\\geq1$. These are sheaves of $\\Lambda$-modules, in particular killed by $\\ell^n$. The first arrow is exactly the map in the statement, since it is the composite of $\\alpha$ with the truncation map.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "def-kun-truncations",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Lemma 5.3.2, printed pp. 288–289; Proposition 3.2.1, printed p. 268"
+   }
+  },
+  {
+   "text": "Write $h_y=\\dim\\mathcal O_{X,y}$ and $e_y=\\dim\\overline{\\{y\\}}$, the latter closure being in $X$. The generalization-chain description of $h_y$ and the Krull-dimension definition imply\n$$h_y\\leq d-1\\quad(y\\in U),\\qquad h_y+e_y\\leq d.$$\nFor the first inequality, append the proper specialization $y\\rightsquigarrow x$ to a chain of generalizations of $y$; for the second concatenate a chain from a generalization to $y$ with a chain in its closure starting at $y$. In finite dimension the finite integer suprema are attained; a chain in the irreducible closure may be extended to start at its generic point $y$. Both concatenations are chains in $X$, so their length is at most $d$. Exactness of geometric stalks identifies $(\\mathcal H^rM)_{\\bar y}$ with $H^r(M|_{\\bar y})$. Thus the assumed stalk bound, $h_y\\leq d-1$, and stalk conservativity give $\\mathcal H^r(C)=0$ for $r>2d-4$. In dimension $2$ this and Step 1 make every cohomology sheaf of $C$ zero, so $C=0$.",
+   "uses": [
+    "lem-sc-scheme-stalk-dimension-generalization-chains",
+    "def-weil-pbc-krull-dimension-ring",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Lemma 5.3.2, printed pp. 288–289; Proposition 3.2.1, printed p. 268"
+   }
+  },
+  {
+   "text": "For $1\\leq i\\leq d-2$, set $F_r=\\mathcal H^r(C)$ with $r=2i-1$ or $2i$. If $(F_r)_{\\bar y}\\neq0$, then $r\\leq\\max(0,2h_y-2)$. Since $r>0$, this forces $h_y\\geq i+1$ in either case. Step 2 therefore gives\n$$e_y\\leq d-i-1.$$\nConsequently both $F_{2i-1}$ and $F_{2i}$ have the pointwise support-closure bound $s_i=d-i-1$. This statement uses geometric stalk support; it does not assume that this support is closed or constructible.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Lemma 5.3.2, printed pp. 288–289; Proposition 3.2.1, printed p. 268"
+   }
+  },
+  {
+   "text": "Apply [lem-per-punctured-support-cohomological-bound] with $s=s_i$ to the sheaves killed by $\\ell$ occurring below. To pass from those coefficients to $F_r$, use its finite filtration\n$$F_r\\supset\\ell F_r\\supset\\cdots\\supset\\ell^nF_r=0.$$\nEvery quotient $Q_j=\\ell^jF_r/\\ell^{j+1}F_r$ is killed by $\\ell$, and has zero stalk wherever $F_r$ has zero stalk, by exactness of stalks. Hence $H^p(U,Q_j)=0$ for $p\\geq2s_i$. Each short exact sequence $0\\to\\ell^{j+1}F_r\\to\\ell^jF_r\\to Q_j\\to0$ gives a distinguished triangle. Derived global sections preserves these triangles: global sections is additive and left exact (it is a right adjoint), the sheaf category has enough injectives, and the cited bounded-below derived-functor theorem applies. The resulting long exact cohomology sequence, starting at $\\ell^nF_r=0$ and descending in $j$, gives\n$$H^p(U,F_r)=0\\quad(p\\geq2(d-i-1)).$$\nNo assertion that an injective module sheaf is injective as an abelian sheaf is used: all these triangles and derived global sections can be taken in abelian sheaves.",
+   "uses": [
+    "lem-per-punctured-support-cohomological-bound",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-sf-derived-ses-triangle",
+    "def-weil-pbc-global-sections-functor",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-derived-direct-image-triangulated",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Lemma 5.3.2, printed pp. 288–289; Proposition 3.2.1, printed p. 268"
+   }
+  },
+  {
+   "text": "We now use the finite ordinary truncation filtration of $C$, equivalently the finite filtration underlying the source's hypercohomology spectral sequence. Fix $t\\geq2d-2$. If $r=2i-1$ or $2i$ with $1\\leq i\\leq d-2$, then\n$$t-r\\geq2(d-i-1),\\qquad H^t(U,F_r[-r])=H^{t-r}(U,F_r)=0$$\nby Step 4 and commutation of derived global sections with shifts. The successive-truncation triangle is\n$$\\tau_{\\leq r-1}C\\longrightarrow\\tau_{\\leq r}C\\longrightarrow F_r[-r]\\longrightarrow(\\tau_{\\leq r-1}C)[1].$$\nInduct on $r$ from $\\tau_{\\leq0}C=0$ to $r=2d-4$: after derived global sections, the long exact sequence has zero outside terms $H^t(U,\\tau_{\\leq r-1}C)$ and $H^t(U,F_r[-r])$, so its middle term is zero. Since $C=\\tau_{\\leq2d-4}C$ in the derived category, this proves $H^t(U,C)=0$ for every $t\\geq2d-2$. For $d=2$ the same conclusion follows directly from $C=0$, with no induction indices.",
+   "uses": [
+    "lem-weil-pbc-truncation-triangle",
+    "lem-weil-pbc-derived-direct-image-triangulated",
+    "lem-sf-derived-homology-long-exact",
+    "def-weil-pbc-etale-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Lemma 5.3.2, printed pp. 288–289; Proposition 3.2.1, printed p. 268"
+   }
+  },
+  {
+   "text": "For $q\\geq2d$, apply derived global sections and the long exact cohomology sequence to the triangle of Step 1. Its segment is\n$$H^{q-2}(U,C)\\longrightarrow H^{q-1}(U,\\Lambda)\\xrightarrow{H^{q-1}(u)}H^{q-1}(U,M)\\longrightarrow H^{q-1}(U,C).$$\nBoth outside groups vanish by Step 5, because $q-2\\geq2d-2$. Exactness proves that the displayed map is an isomorphism, with the required specified $u$.",
+   "uses": [
+    "lem-weil-pbc-derived-direct-image-triangulated",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Lemma 5.3.2, printed pp. 288–289; Proposition 3.2.1, printed p. 268"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-standard-tstructure-derived-category",
+  "def-kun-truncations",
+  "def-weil-pbc-etale-cohomology",
+  "lem-sc-scheme-stalk-dimension-generalization-chains",
+  "def-weil-pbc-krull-dimension-ring",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "def-weil-pbc-derived-categories",
+  "lem-per-punctured-support-cohomological-bound",
+  "lem-sf-derived-ses-triangle",
+  "def-weil-pbc-global-sections-functor",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-truncation-triangle"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, Lemma 5.3.2, printed pp. 288–289; Proposition 3.2.1, printed p. 268"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,10 +148,38 @@
    "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/QExpansion.lean\", \"line\": \"230\", \"text\": \"private lemma hasSum_cuspFunction_of_hasSum_punctured {f : ℍ → ℂ} (hh : 0 < h) {c : ℕ → ℂ}\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/QExpansion.lean\", \"line\": \"251\", \"text\": \"        (hasSum_cuspFunction_of_hasSum_punctured hh hf (q := r) (by simpa using hr)\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/QExpansion.lean\", \"line\": \"259\", \"text\": \"        using hasSum_cuspFunction_of_hasSum_punctured hh hf hy hy'\"}\n  {\"file\": \"Mathlib/NumberTheory/ModularForms/QExpansion.lean\", \"line\": \"270\", \"text\": \"    exact (hf τ).unique (hasSum_cuspFunction_of_hasSum_punctured hh hf\"}\n  {\"file\": \"Mathlib/NumberTheory/LSeries/Nonvanishing.lean\", \"line\": \"170\", \"text\": \"  refine (analyticAt_of_differentiable_on_punctured_nhds_of_continuousAt ?_ ?_).differentiableAt\"}\n  {\"file\": \"Mathlib/NumberTheory/LSeries/Nonvanishing.lean\", \"line\": \"324\", \"text\": \"          ((Homeomorph.addLeft (1 : ℂ)).map_punctured_nhds_eq 0).le\"}\n  {\"file\": \"Mathlib/NumberTheory/LSeries/HurwitzZetaEven.lean\", \"line\": \"449\", \"text\": \"private lemma tendsto_div_two_punctured_nhds (a : ℂ) :\"}\n  {\"file\": \"Mathlib/NumberTheory/LSeries/HurwitzZetaEven.lean\", \"line\": \"451\", \"text\": \"  le_of_eq ((Homeomorph.mulRight₀ _ (inv_ne_zero (two_ne_zero' ℂ))).map_punctured_nhds_eq a)\"}\n  {\"file\": \"Mathlib/NumberTheory/LSeries/HurwitzZetaEven.lean\", \"line\": \"459\", \"text\": \"  refine (h1.comp <| tendsto_div_two_punctured_nhds 1).congr (fun s ↦ ?_)\"}\n  {\"file\": \"Mathlib/NumberTheory/LSeries/HurwitzZetaEven.lean\", \"line\": \"470\", \"text\": \"  refine (h1.comp <| zero_div (2 : ℂ) ▸ (tendsto_div_two_punctured_nhds 0)).congr (fun s ↦ ?_)\"}\n  {\"file\": \"Mathlib/NumberTheory/LSeries/HurwitzZetaEven.lean\", \"line\": \"477\", \"text\": \"  refine (h1.comp <| zero_div (2 : ℂ) ▸ (tendsto_div_two_punctured_nhds 0)).congr (fun s ↦ ?_)\"}\n  {\"file\": \"Mathlib/NumberTheory/Harmonic/ZetaAsymp.lean\", \"line\": \"22\", \"text\": \"* `tendsto_riemannZeta_sub_one_div`: the limit of `ζ s - 1 / (s - 1)`, at the filter of punctured\"}\n  {\"file\": \"Mathlib/NumberTheory/Harmonic/ZetaAsymp.lean\", \"line\": \"42\", \"text\": \"we obtain the limit along punctured neighbourhoods of 1 in `ℂ`.\"}\n  {\"file\": \"Mathlib/NumberTheory/Harmonic/ZetaAsymp.lean\", \"line\": \"356\", \"text\": \"  refine ⟨_, Complex.tendsto_limUnder_of_differentiable_on_punctured_nhds_of_isLittleO ?_ ?_⟩\"}\n  {\"file\": \"Mathlib/NumberTheory/Harmonic/ZetaAsymp.lean\", \"line\": \"553\", \"text\": \"    (univ_mem : _ ∈ 𝓝 (1 : ℂ)), continuousAt_iff_punctured_nhds, ← compl_eq_univ_sdiff]\"}\n  {\"file\": \"Mathlib/Topology/Algebra/ConstMulAction.lean\", \"line\": \"293\", \"text\": \"lemma punctured_nhds_smul (c : G) (x : α) : 𝓝[≠] (c • x) = c • 𝓝[≠] x :=\"}\n  {\"file\": \"Mathlib/Topology/Algebra/ConstMulAction.lean\", \"line\": \"294\", \"text\": \"  (Homeomorph.smul c).map_punctured_nhds_eq x |>.symm\"}\n  {\"file\": \"Mathlib/Topology/Algebra/ConstMulAction.lean\", \"line\": \"408\", \"text\": \"lemma punctured_nhds_smul₀ {c : G₀} (hc : c ≠ 0) (x : α) : 𝓝[≠] (c • x) = c • 𝓝[≠] x :=\"}\n  {\"file\": \"Mathlib/Topology/Algebra/ConstMulAction.lean\", \"line\": \"409\", \"text\": \"  punctured_nhds_smul (Units.mk0 c hc) x\"}\n  {\"file\": \"Mathlib/Analysis/Asymptotics/SpecificAsymptotics.lean\", \"line\": \"25\", \"text\": \"/-- If `f : 𝕜 → E` is bounded in a punctured neighborhood of `a`, then `f(x) = o((x - a)⁻¹)` as\"}\n  {\"file\": \"Mathlib/Analysis/Analytic/Order.lean\", \"line\": \"598\", \"text\": \"    · -- Case: f is locally zero in a punctured neighborhood of z\"}\n  {\"file\": \"Mathlib/Analysis/Analytic/Order.lean\", \"line\": \"601\", \"text\": \"    · -- Case: f is locally nonzero in a punctured neighborhood of z\"}\n  {\"file\": \"Mathlib/Analysis/Analytic/IsolatedZeros.lean\", \"line\": \"26\", \"text\": \"  vanish in a punctured neighborhood of `z₀`.\"}\n  {\"file\": \"Mathlib/Analysis/Analytic/IsolatedZeros.lean\", \"line\": \"124\", \"text\": \"vanish in a punctured neighborhood of `z₀`. -/\"}\n  {\"file\": \"Mathlib/Analysis/Analytic/IsolatedZeros.lean\", \"line\": \"145\", \"text\": \"/-- For a function `f` on `𝕜`, and `z₀ ∈ 𝕜`, there exists at most one `n` such that on a punctured\"}\n",
    "date": "2026-10-18",
    "verdict": "no match: the hits concern ordinary derived truncation, scheme stalks, ring-theoretic local cohomology, or unrelated uses of the words; none gives this etale perverse/potential-dualizing statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Comparison of high degree etale hypercohomology with a constant sheaf using perverse upper bounds on the complement of a closed point",
+   "results": "{\"t\": \"2026-10-18T14:26:02Z\", \"tool\": \"leansearch\", \"query\": \"Comparison of high degree etale hypercohomology with a constant sheaf using perverse upper bounds on the complement of a closed point\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CochainComplex.isStrictlyGE_of_ge\", \"AlgebraicGeometry.stalkClosedPointIso\", \"CompHausLike.LocallyConstant.counit_app_val\", \"CochainComplex.isStrictlyLE_of_le\", \"AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology\", \"CompHausLike.LocallyConstant.adjunction\", \"AlgebraicGeometry.Scheme.etalePretopology\"], \"digest\": \"ad8b92e201a92b4d\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected the returned declarations; these concern ordinary truncations, the algebraic etale locus, structural scheme stalks or support dimension of modules, not this etale cohomology bound"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"perverse\"",
+   "results": "{\"t\": \"2026-10-18T14:26:02Z\", \"tool\": \"loogle\", \"query\": \"\\\"perverse\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected the returned declarations; these concern ordinary truncations, the algebraic etale locus, structural scheme stalks or support dimension of modules, not this etale cohomology bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical map from the constant etale sheaf to a bounded below complex with constant zeroth truncation and perverse support bounds on a punctured strictly local scheme induces an isomorphism on high hypercohomology",
+   "results": "{\"t\": \"2026-10-18T14:26:03Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical map from the constant etale sheaf to a bounded below complex with constant zeroth truncation and perverse support bounds on a punctured strictly local scheme induces an isomorphism on high hypercohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.instIsIsoιTruncLEOfIsStrictlySupported\", \"HomologicalComplex.instIsIsoπTruncGEOfIsStrictlySupported\", \"HomologicalComplex.instIsIsoFRestrictionToTruncGE'OfIsStrictlySupported\", \"HomologicalComplex.isIso_ιTruncLE_iff\", \"HomologicalComplex.isIso_πTruncGE_iff\", \"HomologicalComplex.instIsIsoFTruncLE'ToRestrictionOfIsStrictlySupported\", \"CochainComplex.instIsIsoIntιTruncLEOfIsStrictlyLE\", \"HomologicalComplex.quasiIso_πTruncGE_iff_isSupported\"], \"digest\": \"fea0162697b4b468\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected the returned declarations; these concern ordinary truncations, the algebraic etale locus, structural scheme stalks or support dimension of modules, not this etale cohomology bound"
+  },
+  {
+   "tool": "grep",
+   "query": "perverse|punctured.*[Cc]ohom|[Cc]ohom.*punctured",
+   "results": "{\"t\": \"2026-10-18T14:26:07Z\", \"tool\": \"grep\", \"query\": \"perverse|punctured.*[Cc]ohom|[Cc]ohom.*punctured\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected the returned declarations; these concern ordinary truncations, the algebraic etale locus, structural scheme stalks or support dimension of modules, not this etale cohomology bound"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-normal-pinned-extension",
@@ -73,5 +202,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-punctured-perverse-high-comparison",
+  "worker": "stage1",
+  "summary": "Proved the unchanged comparison by the ordinary truncation triangle, explicit support-dimension inequalities, finite prime-power coefficient devissage and finite Postnikov induction. Added only the support-sensitive punctured-spectrum sheaf bound of ILO XVII 3.2.1; all formal tools are existing DAG nodes. Checked dimension two and boundary degrees.",
+  "blueprint": "Realizes the finite-coefficient potential-dualizing input under lem-per-artin-gabber-affine-curve proof Step 1, reached through the recorded normal-pinned-extension ancestry; specifically ILO XVII 5.3.2 in the normalization route. Finite Postnikov induction writes out the finite filtration used by its hypercohomology spectral sequence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-derived-direct-image-triangulated",
+    "why": "Generic bounded-below derived-functor exactness and shift compatibility, applied to global sections; this is formal homological algebra, not a replacement for the unit geometric route."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic long exact sequence of a distinguished triangle, used for finite coefficient devissage, Postnikov induction and the final comparison; no such statement is supplied by this unit."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Generic successive ordinary-truncation triangle used to expand the source hypercohomology filtration; not a change to the unit route."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Exactness identifies stalk cohomology and bounds the supports of coefficient subquotients; this is a general etale-sheaf tool."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "The general etale enough-points criterion turns the given stalk vanishing into sheaf vanishing."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Enough injectives in abelian etale sheaves (the explicit R=Z case) verifies the hypothesis of the generic derived-functor tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-truncation-triangle",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-module-sheaves-enough-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q28-01395e9a4",
+  "group": "Q28",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q28-01395e9a4 (reviewer sub-agent of L); spot-checked: I read the whole delivery and checked it against ILO XVII Lemme 5.3.2 (pp. 288-289), Prop 3.2.1 (p. 268) and §5.2, which defines D^{≤p} as a stalk condition. Item statement: unchanged; Λ=Z/ℓ^n is a specialization of the source's Z/nZ, and it is exactly what the parent lem-per-normal-pinned-extension (Steps 5 and 7) needs. Hypotheses and the map u = truncation∘α match the source. Step 1: the ordinary truncation triangle, with α substituted. Step 2: h_y ≤ d−1 and h_y + e_y ≤ d by concatenating chains in the local X; stalks are exact and conservative, so H^r(C)=0 for r>2d−4; for d=2, C=0. Step 3: r ∈ {2i−1, 2i} forces e_y ≤ d−i−1, a correct arithmetic step. Step 4: filtration by powers of ℓ, then the new node on each ℓ-killed graded piece, with the ses-triangle, triangulated RΓ and long exact sequence nodes; the descending induction is set up correctly. Step 5: Postnikov induction from τ≤0C=0 up to 2d−4, using t−r ≥ 2(d−i−1). Step 6: the long exact sequence with both outer terms zero for q ≥ 2d. Every cited statement says what its step takes from it. New node lem-per-punctured-support-cohomological-bound: a faithful statement-only version of Prop 3.2.1, with the closure taken in X and no constructibility hypothesis. Small cases tested: s=0 (F=0); a surface point with constant F, where the bound is sharp at H^3; a height-one point (cd ≤ 1). It is not a restatement of the item. A DAG search turned up nearby nodes (the trf Gabber nearby-cycle and strict-local torsion bounds, thm-exc-curve-open-dimension-general, the qbar affine support bound) but no duplicate, and blueprint main-20261015 has none. Three Mathlib search kinds are recorded. I accept all six declared tool_uses as generic tools: the triangulated derived functor, the long exact sequence, the truncation triangle, stalk exactness, stalk conservativity (Lean-closed) and enough injectives. No SGA source is cited. No fixes."
  }
 }
