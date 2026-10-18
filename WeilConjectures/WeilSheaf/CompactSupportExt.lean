@@ -8,6 +8,7 @@ module
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.CohomologySequence
 public import WeilConjectures.WeilSheaf.ProperCohomology.OpenImmersion
+import WeilConjectures.WeilSheaf.CompactSupportAdicConstant
 
 /-!
 # Compactly supported cohomology as cohomology of an extension by zero
@@ -19,34 +20,24 @@ the compactly supported cohomology of a Weil sheaf `F` on `X` is the ordinary co
 Weil sheaf `i_! F` on the proper `k₀`-scheme `Z`, Frobenius-equivariantly:
 `H_c^r(X ⊗ k̄, F) ≅ Hʳ(Z ⊗ k̄, i_! F)`.
 
-The ordinary cohomology of a Weil sheaf `G` on `Y` is in turn the pro-étale cohomology
-`Ext^r(ℤ, G)` of the underlying abelian sheaf of `G`, with the Frobenius computed through an
-injective resolution of `G` by pro-étale Weil sheaves, and multiplication by `c ∈ ℚ̄_ℓ` on the
-coefficients corresponding to multiplication by `c` on cohomology.
-
-Combining both, the compactly supported cohomology `H_c^r(X ⊗ k̄, F)` is `Ext^r(ℤ, ī_! F)` on
-`Z̄_proét`, with its Frobenius `x ↦ (ℤ ⟶ Fr⁻¹_* ℤ) ∘ Fr⁻¹_* x ∘ s`, `s` the structure isomorphism of
-the Weil sheaf `i_! F`. These comparisons reduce statements on compactly supported cohomology
-with `ℚ̄_ℓ`-coefficients (blueprint `thm-pod-degreewise-perfectness-over-a-field`) to pro-étale
-`Ext` groups, as in `prop-cohomological-finiteness`.
+Together with the description of ordinary cohomology as pro-étale `Ext`
+(`WeilConjectures.WeilSheaf.CompactSupportExtFrobenius`), this reduces statements on compactly
+supported cohomology with `ℚ̄_ℓ`-coefficients (blueprint
+`thm-pod-degreewise-perfectness-over-a-field`) to pro-étale `Ext` groups on `Z̄_proét`, as in
+`prop-cohomological-finiteness`.
 
 ## Main declarations
 
 - `AlgebraicGeometry.structureCompactification`: the chosen compactification of `X ⟶ Spec k₀`.
-- `AlgebraicGeometry.WeilSheaf.compactlySupportedCohomologyEquivExtensionByZero` and
-  `AlgebraicGeometry.WeilSheaf.nonempty_equiv_compactlySupportedCohomology_extensionByZero`:
+- `AlgebraicGeometry.WeilSheaf.nonempty_equiv_compactlySupportedCohomology_extensionByZero`:
   `H_c^r(X ⊗ k̄, F) ≅ Hʳ(Z ⊗ k̄, i_! F)` as Frobenius modules.
-- `AlgebraicGeometry.WeilSheaf.exists_addEquiv_ext_cohomology`: `Ext^r(ℤ, G) ≅ Hʳ(Y ⊗ k̄, G)`,
-  compatibly with the Frobenius and with the `ℚ̄_ℓ`-action.
-- `AlgebraicGeometry.ProEtaleWeilSheaf.extFrobenius_eq`: the Frobenius on `Ext^r(ℤ, G)` is
-  `x ↦ (ℤ ⟶ Fr⁻¹_* ℤ) ∘ Fr⁻¹_* x ∘ s`, independently of the resolution.
 -/
 
 @[expose] public section
 
 universe u
 
-open CategoryTheory Limits Endofunctor Abelian
+open CategoryTheory Limits
 
 -- `Spec k₀` over itself: prefer the identity structure over `AlgebraicGeometry.specOverSpec`.
 attribute [local instance 1100] CategoryTheory.instOverClass
@@ -66,22 +57,25 @@ variable (k₀) (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
 
 /-- The compactification `X ⟶[i] Z ⟶[g] Spec k₀` of the structure morphism of a separated
 quasi-compact `k₀`-scheme locally of finite type chosen by Nagata's theorem: the one through which
-compactly supported cohomology is defined (`AlgebraicGeometry.WeilComplex.derivedLowerShriek`). -/
-noncomputable abbrev structureCompactification : Compactification (X ↘ Spec (CommRingCat.of k₀)) :=
+compactly supported cohomology is defined (`AlgebraicGeometry.WeilComplex.derivedLowerShriek`).
+The scheme `Z` is a `k₀`-scheme through `g` (`AlgebraicGeometry.Compactification.over`). -/
+noncomputable abbrev structureCompactification :
+    Compactification (X ↘ Spec (CommRingCat.of k₀)) :=
   HasCompactification.compactification (X ↘ Spec (CommRingCat.of k₀))
     (hf := hasCompactification_of_over (k₀ := k₀) _)
 
--- instance : QuasiCompact (structureCompactification k₀ X).i :=
---   (structureCompactification k₀ X).quasiCompact_openImmersion inferInstance
--- 
--- instance : QuasiCompact ((structureCompactification k₀ X).Z ↘ Spec (CommRingCat.of k₀)) :=
---   inferInstanceAs (QuasiCompact ((structureCompactification k₀ X).g ≫ 𝟙 _))
--- 
--- instance : QuasiSeparated ((structureCompactification k₀ X).Z ↘ Spec (CommRingCat.of k₀)) :=
---   inferInstanceAs (QuasiSeparated ((structureCompactification k₀ X).g ≫ 𝟙 _))
--- 
--- instance : LocallyOfFiniteType ((structureCompactification k₀ X).Z ↘ Spec (CommRingCat.of k₀)) :=
---   inferInstanceAs (LocallyOfFiniteType ((structureCompactification k₀ X).g ≫ 𝟙 _))
+instance : QuasiCompact (structureCompactification k₀ X).i :=
+  (structureCompactification k₀ X).quasiCompact_openImmersion inferInstance
+
+instance : QuasiCompact ((structureCompactification k₀ X).Z ↘ Spec (CommRingCat.of k₀)) :=
+  inferInstanceAs (QuasiCompact ((structureCompactification k₀ X).g ≫ 𝟙 _))
+
+instance : QuasiSeparated ((structureCompactification k₀ X).Z ↘ Spec (CommRingCat.of k₀)) :=
+  inferInstanceAs (QuasiSeparated ((structureCompactification k₀ X).g ≫ 𝟙 _))
+
+instance :
+    LocallyOfFiniteType ((structureCompactification k₀ X).Z ↘ Spec (CommRingCat.of k₀)) :=
+  inferInstanceAs (LocallyOfFiniteType ((structureCompactification k₀ X).g ≫ 𝟙 _))
 
 end Compactification
 
@@ -92,19 +86,37 @@ variable [Fact (ringChar k₀ ≠ l)] {X : Scheme.{u}} [X.Over (Spec (CommRingCa
   [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
   [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
 
-
-
-
-noncomputable def testA1 (F : ProEtaleWeilSheaf k₀ l X) : Nonempty (
-  (DerivedCategory.singleFunctor _ 0 ⋙ (ProEtaleWeilSheaf.extensionByZero k₀ l
-        (HasCompactification.compactification (X ↘ Spec (CommRingCat.of k₀))
-    (hf := hasCompactification_of_over (k₀ := k₀) _)).i).mapDerivedCategory).obj F ≅
-  (ProEtaleWeilSheaf.extensionByZero k₀ l
-        (HasCompactification.compactification (X ↘ Spec (CommRingCat.of k₀))
-    (hf := hasCompactification_of_over (k₀ := k₀) _)).i ⋙ DerivedCategory.singleFunctor _ 0).obj F) := by
+/-- **Compactly supported cohomology is cohomology of the extension by zero.** For a Weil sheaf
+`F` on `X` and the chosen compactification `X ⟶[i] Z ⟶[g] Spec k₀`
+(`AlgebraicGeometry.structureCompactification`), `H_c^r(X ⊗ k̄, F) ≅ Hʳ(Z ⊗ k̄, i_! F)`,
+compatibly with the geometric Frobenii: by definition `Ra_! F = Rg_*(i_! F)`, the extension by
+zero `i_!` being exact, and `g` is the structure morphism of `Z`. -/
+theorem nonempty_equiv_compactlySupportedCohomology_extensionByZero (F : WeilSheaf k₀ l X)
+    (r : ℤ) :
+    Nonempty ((F.compactlySupportedCohomology r).Equiv
+      (((extensionByZero (HasCompactification.compactification (X ↘ Spec (CommRingCat.of k₀))
+        (hf := hasCompactification_of_over (k₀ := k₀) _)).i).obj F).cohomology r)) := by
   let c := HasCompactification.compactification (X ↘ Spec (CommRingCat.of k₀))
     (hf := hasCompactification_of_over (k₀ := k₀) _)
-  exact ⟨((ProEtaleWeilSheaf.extensionByZero k₀ l c.i).mapDerivedCategorySingleFunctor 0).app F⟩
+  -- the isomorphism of underlying complexes, stated explicitly to keep the kernel check cheap
+  have e : (ProEtaleWeilSheaf.lowerStar k₀ l c.g).rightDerivedFunctor.obj
+        ((ProEtaleWeilSheaf.extensionByZero k₀ l c.i).mapDerivedCategory.obj
+          ((_root_.DerivedCategory.singleFunctor _ 0).obj F.obj)) ≅
+      (ProEtaleWeilSheaf.lowerStar k₀ l (c.Z ↘ Spec (CommRingCat.of k₀))).rightDerivedFunctor.obj
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj
+          ((ProEtaleWeilSheaf.extensionByZero k₀ l c.i).obj F.obj)) :=
+    (ProEtaleWeilSheaf.lowerStar k₀ l c.g).rightDerivedFunctor.mapIso
+      (((ProEtaleWeilSheaf.extensionByZero k₀ l c.i).mapDerivedCategorySingleFunctor 0).app
+        F.obj) ≪≫
+    (Functor.rightDerivedFunctorNatIso
+      (ProEtaleWeilSheaf.lowerStarCongr k₀ l (Category.comp_id c.g).symm)).app _
+  have e' : (WeilComplex.derivedLowerShriek k₀ l (X ↘ Spec (CommRingCat.of k₀))).obj
+        (toComplex.obj F) ≅
+      (WeilComplex.derivedLowerStar (c.Z ↘ Spec (CommRingCat.of k₀))).obj
+        (toComplex.obj ((extensionByZero c.i).obj F)) :=
+    ObjectProperty.isoMk _ e
+  exact ⟨WeilComplex.cohomologyEquivOfIso e' r⟩
 
 end WeilSheaf
+
 end AlgebraicGeometry

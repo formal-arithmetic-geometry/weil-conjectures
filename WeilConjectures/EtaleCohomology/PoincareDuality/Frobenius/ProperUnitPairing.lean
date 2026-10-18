@@ -124,26 +124,26 @@ lemma map_unitCoefficientDualIso_inv_comp_contragredientWeilDatum {X : Scheme.{u
       Iso.inv_hom_id_assoc]
   rw [(derivedTensor A X |>.map (leftDerivedUpperStarUnitIso A g).inv).naturality_assoc,
     reassoc_of% hT, ← Functor.map_comp_assoc,
-    derivedTensor_map_unitCoefficientDualIso_inv_comp_coefficientEvaluation, ← hU,
-    Iso.inv_hom_id_assoc, ← NatTrans.comp_app_assoc, ← Functor.map_comp, Iso.inv_hom_id,
+    derivedTensor_map_unitCoefficientDualIso_inv_comp_coefficientEvaluation, ← hU]
+  simp only [Category.assoc, Iso.inv_hom_id_assoc]
+  rw [
+    ← NatTrans.comp_app_assoc, ← Functor.map_comp, Iso.inv_hom_id,
     CategoryTheory.Functor.map_id, NatTrans.id_app, Category.id_comp,
     derivedTensor_obj_map_eq_whiskerLeft]
   exact (leftUnitor_naturality _).symm
 
 
-/-- For a proper `a`, `Ra_* Λ_X ≅ Ra_! Λ_X`: the inverse of
-`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar` at the unit. -/
-noncomputable def rightDerivedLowerStarUnitIsoLowerShriek {X Y : Scheme.{u}} (a : X ⟶ Y)
-    [IsProper a] :
-    (R((a)_*[A])).obj (𝟙_ (DerivedCategory (Sheaf X.smallEtaleTopology A))) ≅
-      (R(a)_![A]).obj (𝟙_ (DerivedCategory (Sheaf X.smallEtaleTopology A))) :=
-  ((rightDerivedLowerShriekIsoRightDerivedLowerStar A a).app _).symm
-
-lemma rightDerivedLowerStarUnitIsoLowerShriek_hom {X Y : Scheme.{u}} (a : X ⟶ Y) [IsProper a] :
-    (rightDerivedLowerStarUnitIsoLowerShriek A a).hom =
-      (rightDerivedLowerShriekIsoRightDerivedLowerStar A a).inv.app
+/-- For a proper `a`, `Ra_* Λ_X ≅ Ra_! Λ_X`, given by the inverse of
+`AlgebraicGeometry.Etale.rightDerivedLowerShriekIsoRightDerivedLowerStar` at the unit. It is
+stated as an existence statement so that the unit object occurring in it is the one of the
+generic monoidal structure. -/
+lemma exists_iso_rightDerivedLowerStar_unit_rightDerivedLowerShriek {X Y : Scheme.{u}}
+    (a : X ⟶ Y) [IsProper a] :
+    ∃ s : (R((a)_*[A])).obj (𝟙_ (DerivedCategory (Sheaf X.smallEtaleTopology A))) ≅
+      (R(a)_![A]).obj (𝟙_ (DerivedCategory (Sheaf X.smallEtaleTopology A))),
+      s.hom = (rightDerivedLowerShriekIsoRightDerivedLowerStar A a).inv.app
         (𝟙_ (DerivedCategory (Sheaf X.smallEtaleTopology A))) :=
-  rfl
+  ⟨((rightDerivedLowerShriekIsoRightDerivedLowerStar A a).app _).symm, rfl⟩
 
 end General
 
@@ -166,36 +166,15 @@ lemma _root_.CategoryTheory.exists_addEquiv_comp_iso_hom {C D : Type*} [Category
 
 variable [Finite Λ]
 
-/-- `Ra_* Λ_X ≅ Ra_! Λ_X` is a morphism of Weil objects for the data induced by the canonical
-datum of `Λ_X`, for `a` proper and a cartesian square `g ≫ a = a ≫ h`. -/
-lemma isWeilMorphism_rightDerivedLowerStarUnitIsoLowerShriek_hom {X Y : Scheme.{u}}
-    {a : X ⟶ Y} [IsProper a] {g : X ⟶ X} {h : Y ⟶ Y} (sq : IsPullback g a a h) :
-    IsWeilMorphism h (lowerStarWeilDatum sq.toCommSq (leftDerivedUpperStarUnitIso _ g).hom)
-      (lowerShriekWeilDatum sq (leftDerivedUpperStarUnitIso _ g).hom)
-      (rightDerivedLowerStarUnitIsoLowerShriek (ModuleCat.{u + 1} Λ) a).hom := by
-  rw [rightDerivedLowerStarUnitIsoLowerShriek_hom]
-  exact IsWeilMorphism.of_iso_inv
-    ((rightDerivedLowerShriekIsoRightDerivedLowerStar _ a).app _).symm
-    (lowerShriekWeilDatum_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar_hom_app sq
-      (leftDerivedUpperStarUnitIso _ g).hom).symm
-
-/-- **Frobenius operators on `Hⁿ(X, Λ)` and on `Hⁿ_c(Y, Ra_! Λ)`.** For `a` proper and a cartesian
-square `g ≫ a = a ≫ h`, the identification `Hom(Λ_X, Λ_X[n]) ≅ Hom(Λ_Y, (Ra_! Λ_X)[n])` given by
-the adjunction `La^* ⊣ Ra_*` and `Ra_* ≅ Ra_!` intertwines the Frobenius operators of the
-canonical Weil data, `Ra_!` carrying the induced datum. -/
-theorem frobeniusOperator_unitShiftAddEquivLowerStar_comp_lowerShriek {X Y : Scheme.{u}}
-    {a : X ⟶ Y} [IsProper a] {g : X ⟶ X} {h : Y ⟶ Y} (sq : IsPullback g a a h) (n : ℤ)
-    (x : 𝟙_ (DerivedCategoryModule Λ X) ⟶ (𝟙_ (DerivedCategoryModule Λ X))⟦n⟧) :
-    frobeniusOperator h (shiftWeilDatum h
-        (lowerShriekWeilDatum sq (leftDerivedUpperStarUnitIso _ g).hom) n)
-      (unitShiftAddEquivLowerStar Λ a n x ≫
-        ((rightDerivedLowerStarUnitIsoLowerShriek (ModuleCat.{u + 1} Λ) a).hom)⟦n⟧') =
-      unitShiftAddEquivLowerStar Λ a n (frobeniusOperator g
-          (shiftWeilDatum g (leftDerivedUpperStarUnitIso _ g).hom n) x) ≫
-        ((rightDerivedLowerStarUnitIsoLowerShriek (ModuleCat.{u + 1} Λ) a).hom)⟦n⟧' :=
-  ((isWeilMorphism_rightDerivedLowerStarUnitIsoLowerShriek_hom sq).shift n).frobeniusOperator_comp
-    _ |>.trans (congrArg (· ≫ ((rightDerivedLowerStarUnitIsoLowerShriek _ a).hom)⟦n⟧')
-      (frobeniusOperator_unitShiftAddEquivLowerStar sq.toCommSq n x))
+/-- `Ra_* ≅ Ra_!` is a morphism of Weil objects for the induced data, for `a` proper and a
+cartesian square `g ≫ a = a ≫ h`. -/
+lemma isWeilMorphism_rightDerivedLowerShriekIsoRightDerivedLowerStar_inv_app {X Y : Scheme.{u}}
+    {a : X ⟶ Y} [IsProper a] {g : X ⟶ X} {h : Y ⟶ Y} (sq : IsPullback g a a h)
+    {K : DerivedCategoryModule Λ X} (φ : (L((g)^*[ModuleCat.{u + 1} Λ])).obj K ⟶ K) :
+    IsWeilMorphism h (lowerStarWeilDatum sq.toCommSq φ) (lowerShriekWeilDatum sq φ)
+      ((rightDerivedLowerShriekIsoRightDerivedLowerStar _ a).inv.app K) :=
+  IsWeilMorphism.of_iso_inv ((rightDerivedLowerShriekIsoRightDerivedLowerStar _ a).app K).symm
+    (lowerShriekWeilDatum_comp_rightDerivedLowerShriekIsoRightDerivedLowerStar_hom_app sq φ).symm
 
 section FiniteLevel
 
@@ -231,16 +210,34 @@ theorem exists_unitPairing_frobeniusOperator_geometricGaloisFrobenius
         (Nat.card k₀ ^ d) • P x y := by
   obtain ⟨γ, τ, hTr, hτ⟩ := exists_tateOrientation_isWeilMorphism_untwistedSmoothTrace f d Λ
   obtain ⟨ι⟩ := nonempty_tateObject_iso_unit Λ (AlgebraicClosure k₀) (-(d : ℤ))
-  obtain ⟨h₁, h₂⟩ := γ.nondegenerate_untwistedDegreewisePoincarePairing hΛ hcog (𝟙_ _) i j hij
-  have hF := γ.untwistedDegreewisePoincarePairing_unit_frobeniusOperator
-    f.isPullback_geometricGaloisFrobenius _ (isWeilPairing_coefficientEvaluation _
-      (leftDerivedUpperStarUnitIso _ f.geometricGaloisFrobenius.hom)) _
-    (isWeilMorphism_unitCoefficientDualIso_inv _) τ hTr (Nat.card k₀) hτ i j hij
+  have hnd := fun K ↦ γ.nondegenerate_untwistedDegreewisePoincarePairing hΛ hcog K i j hij
+  have hG := γ.untwistedDegreewisePoincarePairing_frobeniusOperator
+    f.isPullback_geometricGaloisFrobenius
+    (leftDerivedUpperStarUnitIso _ f.geometricGaloisFrobenius.hom).hom
+    (contragredientWeilDatum _ f.geometricGaloisFrobenius.hom
+      (leftDerivedUpperStarUnitIso _ f.geometricGaloisFrobenius.hom))
+    (isWeilPairing_coefficientEvaluation _
+      (leftDerivedUpperStarUnitIso _ f.geometricGaloisFrobenius.hom)) τ hTr (Nat.card k₀) hτ
+    i j hij
+  obtain ⟨s, hs⟩ := exists_iso_rightDerivedLowerStar_unit_rightDerivedLowerShriek
+    (ModuleCat.{u + 1} Λ) f.geometricFiberToAlgebraicClosure
+  have hsW := hs ▸ isWeilMorphism_rightDerivedLowerShriekIsoRightDerivedLowerStar_inv_app
+    f.isPullback_geometricGaloisFrobenius
+    (leftDerivedUpperStarUnitIso _ f.geometricGaloisFrobenius.hom).hom
+  have hιW := ((isWeilMorphism_unitCoefficientDualIso_inv (Λ := Λ)
+    f.geometricGaloisFrobenius.hom).rightDerivedLowerStar_map
+      f.isPullback_geometricGaloisFrobenius.toCommSq).shift j
+  have hFx := fun x ↦ ((hsW.shift i).frobeniusOperator_comp
+    (unitShiftAddEquivLowerStar Λ f.geometricFiberToAlgebraicClosure i x)).trans
+      (congrArg (· ≫ s.hom⟦i⟧') (frobeniusOperator_unitShiftAddEquivLowerStar
+        f.isPullback_geometricGaloisFrobenius.toCommSq i x))
+  have hFy := fun y ↦ (hιW.frobeniusOperator_comp
+    (unitShiftAddEquivLowerStar Λ f.geometricFiberToAlgebraicClosure j y)).trans
+      (congrArg (· ≫ _) (frobeniusOperator_unitShiftAddEquivLowerStar
+        f.isPullback_geometricGaloisFrobenius.toCommSq j y))
   obtain ⟨eI, heI⟩ := exists_addEquiv_comp_iso_hom
     (unitShiftAddEquivLowerStar Λ f.geometricFiberToAlgebraicClosure i)
-    ((shiftFunctor (DerivedCategoryModule Λ (Spec (.of (AlgebraicClosure k₀)))) i).mapIso
-      (rightDerivedLowerStarUnitIsoLowerShriek (ModuleCat.{u + 1} Λ)
-        f.geometricFiberToAlgebraicClosure))
+    ((shiftFunctor (DerivedCategoryModule Λ (Spec (.of (AlgebraicClosure k₀)))) i).mapIso s)
   obtain ⟨eJ, heJ⟩ := exists_addEquiv_comp_iso_hom
     (unitShiftAddEquivLowerStar Λ f.geometricFiberToAlgebraicClosure j)
     ((shiftFunctor (DerivedCategoryModule Λ (Spec (.of (AlgebraicClosure k₀)))) j).mapIso
@@ -251,31 +248,29 @@ theorem exists_unitPairing_frobeniusOperator_geometricGaloisFrobenius
   obtain ⟨eL⟩ : Nonempty ((𝟙_ (DerivedCategoryModule Λ (Spec (.of (AlgebraicClosure k₀)))) ⟶
       tateObject Λ (Spec (.of (AlgebraicClosure k₀))) (-d)) ≃+ Λ) :=
     ⟨ι.postcompAddEquiv.trans (endUnitAddEquiv Λ (Spec (.of (AlgebraicClosure k₀)))).symm⟩
+  have a3 := fun x y y' ↦ (congrArg (γ.untwistedDegreewisePoincarePairing _ i j hij (eI x))
+    (eJ.map_add y y')).trans ((γ.untwistedDegreewisePoincarePairing _ i j hij (eI x)).map_add _ _)
+  have a4 := fun x x' y ↦ (congrArg (fun z ↦ γ.untwistedDegreewisePoincarePairing _ i j hij z
+    (eJ y)) (eI.map_add x x')).trans
+      (LinearMap.map_add₂ (γ.untwistedDegreewisePoincarePairing _ i j hij) _ _ (eJ y))
   refine ⟨AddMonoidHom.mk' (fun x ↦ AddMonoidHom.mk' (fun y ↦
-    eL (γ.untwistedDegreewisePoincarePairing (𝟙_ (DerivedCategoryModule Λ f.geometricFiber)) i j
-      hij (eI x) (eJ y)))
-      fun y y' ↦ by rw [map_add, map_add, map_add]) fun x x' ↦ by
-        ext y
-        rw [AddMonoidHom.add_apply, AddMonoidHom.mk'_apply, AddMonoidHom.mk'_apply,
-          AddMonoidHom.mk'_apply, AddMonoidHom.mk'_apply, AddMonoidHom.mk'_apply,
-          AddMonoidHom.mk'_apply, map_add, map_add, LinearMap.add_apply, map_add],
+    eL (γ.untwistedDegreewisePoincarePairing _ i j hij (eI x) (eJ y)))
+      fun y y' ↦ (congrArg eL (a3 x y y')).trans (eL.map_add _ _)) fun x x' ↦
+        AddMonoidHom.ext fun y ↦ (congrArg eL (a4 x x' y)).trans (eL.map_add _ _),
     fun x hx ↦ ?_, fun y hy ↦ ?_, fun x y ↦ ?_⟩
-  · refine eI.injective ((h₁ (eI x) fun y' ↦ ?_).trans (map_zero eI).symm)
+  · refine eI.injective (((hnd _).1 (eI x) fun y' ↦ ?_).trans (map_zero eI).symm)
     obtain ⟨y, rfl⟩ := eJ.surjective y'
     have := hx y
     rw [AddMonoidHom.mk'_apply, AddMonoidHom.mk'_apply] at this
     exact (AddEquiv.map_eq_zero_iff eL).1 this
-  · refine eJ.injective ((h₂ (eJ y) fun x' ↦ ?_).trans (map_zero eJ).symm)
+  · refine eJ.injective (((hnd _).2 (eJ y) fun x' ↦ ?_).trans (map_zero eJ).symm)
     obtain ⟨x, rfl⟩ := eI.surjective x'
     have := hy x
     rw [AddMonoidHom.mk'_apply, AddMonoidHom.mk'_apply] at this
     exact (AddEquiv.map_eq_zero_iff eL).1 this
   · rw [AddMonoidHom.mk'_apply, AddMonoidHom.mk'_apply, AddMonoidHom.mk'_apply,
-      AddMonoidHom.mk'_apply, heI, heJ, heI, heJ,
-      ← frobeniusOperator_unitShiftAddEquivLowerStar_comp_lowerShriek
-        f.isPullback_geometricGaloisFrobenius,
-      ← frobeniusOperator_unitShiftAddEquivLowerStar f.isPullback_geometricGaloisFrobenius.toCommSq,
-      hF, ← Nat.cast_pow, Nat.cast_smul_eq_nsmul, map_nsmul]
+      AddMonoidHom.mk'_apply, heI, heJ, heI, heJ, ← hFx, ← hFy, ← heI, ← heJ, hG,
+      ← Nat.cast_pow, Nat.cast_smul_eq_nsmul, map_nsmul]
 
 end FiniteLevel
 
