@@ -390,5 +390,27 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralHeartDualizable",
+  "declaration": "AlgebraicGeometry.ProEtale.integralHeartDualizable",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.integralHeartStratumComplex",
+   "AlgebraicGeometry.ProEtale.integralHeartDualizable"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralHeartDualizable.lean",
+  "statement": "theorem integralHeartDualizable (X : Scheme.{u}) (C : SmallAdicCompletion.Modules ℓ E X) (_hC : IsConstantModelConstructible (SmallAdicCompletion.Coefficients.integerRing ℓ E) X C) (s : Scheme.Stratification X) (a : Fin s.n) (_hmodel : ∃ 𝒰 : Scheme.Cover.{u} Scheme.proetalePrecoverage (s.domain a), ∀ i : 𝒰.I₀, ∃ N : ModuleCat.{u + 1} (integralHeartScalars.{u} ℓ E), Module.Finite (integralHeartScalars.{u} ℓ E) N ∧ Nonempty ((CondensedRing.upperStar (SmallAdicCompletion.Coefficients.integerRing ℓ E) (𝒰.f i ≫ s.immersion a)).obj C ≅ (integralHeartRealization.{u} ℓ E (𝒰.X i)).obj N)) : Nonempty (ExactPairing (integralHeartStratumComplex ℓ E (s.immersion a) C) (((CondensedRing.derivedHom (SmallAdicCompletion.Coefficients.integerRing ℓ E) (s.domain a)).obj (op (integralHeartStratumComplex ℓ E (s.immersion a) C))).obj (𝟙_ (integralHeartDerivedCategory.{u} ℓ E (s.domain a))))) ∧ DerivedCategory.torAmplitudeIn _ (-1) 0 (integralHeartStratumComplex ℓ E (s.immersion a) C) ∧ DerivedCategory.torAmplitudeIn _ 0 1 (((CondensedRing.derivedHom (SmallAdicCompletion.Coefficients.integerRing ℓ E) (s.domain a)).obj (op (integralHeartStratumComplex ℓ E (s.immersion a) C))).obj (𝟙_ (integralHeartDerivedCategory.{u} ℓ E (s.domain a)))) ∧ Nonempty ((((CondensedRing.derivedHom (SmallAdicCompletion.Coefficients.integerRing ℓ E) (s.domain a)).obj (op ((DerivedCategory.singleFunctor _ 0).obj (SmallAdicCompletion.finiteModule ℓ E (s.domain a) 0)))).obj (𝟙_ (integralHeartDerivedCategory.{u} ℓ E (s.domain a)))) ≅ ((DerivedCategory.singleFunctor _ 0).obj (SmallAdicCompletion.finiteModule ℓ E (s.domain a) 0))⟦(-1 : ℤ)⟧)",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-988aaf153",
+  "group": "NA",
+  "result": "fix",
+  "note": "Item statement correct clause by clause: recorded completed coefficients; IsConstantModelConstructible C; any stratification and stratum a; pro-etale cover with a finite N per chart via integralHeartRealization; dual = derivedHom(K, unit); ExactPairing gives ev/coev and both triangles; torAmplitudeIn [-1,0] and [0,1] over all module sheaves; residue example finiteModule S 0 (= O/pi) dual is iso to itself shifted by -1, i.e. degree 1. No extra hypotheses, universes independent, docstrings and verbatim statement OK. Compile with live dep texts in the overlay: rc 0, item 3.7 s (deps 53.0 s and 7.5 s); compiling the item alone fails only on the missing published IntegralHeartLocalModel.olean. Mechanical fault: the delivery re-pushes landed IntegralHeartLocalModel and SmallCoefficientDerivedCompletion (live text plus a trailing blank line) and rewrites by/note of records det-lem-int-integral-heart-local-model and def-sfb-small-coefficient-derived-completion from Q06 to NA (no declaration change). FIX: fixes/ holds the exact live texts of both modules (sha256 = live). Maintainer: --revert-nodes for those two records to keep the live attribution."
  }
 }
