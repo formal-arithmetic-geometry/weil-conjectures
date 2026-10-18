@@ -11,18 +11,8 @@ public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import Sheaf.AlgebraicGeometry.UnrestrictedStrictHenselizationStalk
-import Sheaf.Paper.KunBcMapOnCohomology
-import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
-import Sheaf.AlgebraicGeometry.StrictHenselizationRestriction
-import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
-import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
-import Mathlib.CategoryTheory.Sites.Point.Skyscraper
-import Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import WeilConjectures.AlgebraicGeometry.Sites.StrictHenselization
-import WeilConjectures.SixFunctors.BaseChange.Square
-import Sheaf.AlgebraicGeometry.StrictHenselizationClosedLift
+import Sheaf.AlgebraicGeometry.ExchangeStrictLocalCohomologyStalk
+import Sheaf.AlgebraicGeometry.StrictHenselizationCanonicalMap
 
 /-! # Testing exchange on strict-local cohomology
 
@@ -89,6 +79,45 @@ theorem isIso_exchange_iff_strictLocalCohomology
           ((Category.comp_id g).trans (Category.id_comp g).symm))
         ((upperStar AddCommGrpCat.{u + 1}
           (pullback.snd (Scheme.strictHenselizationStructuralMap (x ≫ f)) g)).obj F) q) := by
-  sorry
+  classical
+  let α := (DerivedCategory.Plus.homologyFunctor _ (q : ℤ)).map
+    ((derivedBaseChangeMapPlus AddCommGrpCat.{u + 1}
+      (IsPullback.of_hasPullback f g).toCommSq.flip).app
+        ((DerivedCategory.Plus.singleFunctor _ 0).obj F))
+  constructor
+  · intro h Ω _ _ x a he ha
+    exact (isIso_exchange_stalk_iff_strictLocalCohomology f g F q α x a he ha).mp
+      (by infer_instance)
+  · intro h
+    apply Scheme.isIso_of_isIso_sheafFiber_map α
+    intro z
+    let x := X.algClosurePoint z
+    obtain ⟨m, hm, _⟩ := Scheme.strictHenselizationMap_existsUnique f x
+    let a := Spec.preimage m
+    have ha : Spec.map a ≫ Scheme.strictHenselizationStructuralMap (x ≫ f) =
+        Scheme.strictHenselizationStructuralMap x ≫ f := by
+      simpa only [a, Spec.map_preimage] using hm.1
+    have he : Scheme.strictHenselizationPointEvaluation (x ≫ f) =
+        (Scheme.strictHenselizationPointEvaluation x).comp a.hom := by
+      apply RingHom.ext
+      intro r
+      have hh : Spec.map (CommRingCat.ofHom
+          ((Scheme.strictHenselizationPointEvaluation x).comp a.hom)) =
+          Spec.map (CommRingCat.ofHom
+            (Scheme.strictHenselizationPointEvaluation (x ≫ f))) := by
+        simp only [CommRingCat.ofHom_comp, Spec.map_comp]
+        have ham : Spec.map (CommRingCat.ofHom a.hom) = m := by
+          change Spec.map a = m
+          exact Spec.map_preimage m
+        rw [ham]
+        exact hm.2
+      have hring := congrArg CommRingCat.Hom.hom (Spec.map_injective hh)
+      exact (DFunLike.congr_fun hring r).symm
+    have hi :=
+      (isIso_exchange_stalk_iff_strictLocalCohomology f g F q α x a he ha).mpr
+        (h _ x a he ha)
+    rw [Scheme.uliftPointSmallEtale, NatIso.isIso_map_iff
+      ((Scheme.pointSmallEtale x).uliftSheafFiberIso AddCommGrpCat.{u + 1})]
+    exact hi
 
 end AlgebraicGeometry.Etale

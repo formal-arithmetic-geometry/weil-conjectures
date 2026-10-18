@@ -44,100 +44,30 @@
  ],
  "proof": [
   {
-   "text": "Fix a geometric point $\\bar x$ of $X$, and put $\\bar s=f\\bar x$, $A=S_{(\\bar s)}\\times_S T$ and $B=X_{(\\bar x)}\\times_S T$. The projection $h:Y\\to X$ is quasi-compact and quasi-separated by clause (3) of [lem-weil-pbc-qcqs-morphism-permanence], applied to the base change of $g$. Clause (3) of [lem-weil-pbc-strict-henselization-functoriality] gives $u:X_{(\\bar x)}\\to S_{(\\bar s)}$ over $S$; base change gives $v=u\\times_S\\mathrm{id}_T:B\\to A$. The fibre-product universal property [def-pc-fibre-product] identifies $Y\\times_X X_{(\\bar x)}$ with $B$: both have precisely a compatible map to $T$ and to $X_{(\\bar x)}$. Under this identification the coefficient sheaf is the inverse image of $F$ by $B\\to T$.",
+   "text": "For a fixed geometric point x and a compatible strict-local map a, the new strict-local stalk criterion identifies the geometric stalk map of the degree-q derived exchange with the displayed cohomology pullback. Hence the stalk map is invertible exactly when the corresponding strict-local cohomology map is bijective.",
    "uses": [
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-strict-henselization-functoriality",
-    "def-pc-fibre-product"
+    "lem-weil-pbc-exchange-strict-local-cohomology-stalk-criterion"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0EZU, lemma-base-change-f-star-general-stalks, proof; Tag 03Q9, theorem-higher-direct-images; Tag 03Q8, lemma-higher-direct-images"
-   }
+   "elementary": false
   },
   {
-   "text": "Write $\\alpha:f^{-1}R^qg_*F\\to R^qh_*e^{-1}F$. The inverse-image stalk isomorphism [lem-weil-pbc-inverse-image-stalk-germ] identifies its source at $\\bar x$ with $(R^qg_*F)_{\\bar s}$. Apply [lem-weil-pbc-unrestricted-strict-henselization-stalk] first to $g,F,\\bar s$, and then to $h,e^{-1}F,\\bar x$. The hypotheses hold for $g$ by assumption and for $h$ by step 1. This gives invertible canonical restriction maps $a:(f^{-1}R^qg_*F)_{\\bar x}\\to H^q(A,F)$ and $b:(R^qh_*e^{-1}F)_{\\bar x}\\to H^q(B,F)$. These are the canonical maps defined in [def-weil-pbc-strict-henselization-restriction], not arbitrary isomorphisms of the two groups. No torsion assumption on $F$ is needed.",
+   "text": "If the exchange morphism is invertible, every geometric stalk map is invertible. Conversely, assume all displayed strict-local maps are bijective. For an arbitrary geometric point z, take x to be the algebraic-closure point of z and take a to be the map induced by the unique functorial strict-henselization map. Its evaluation and structural equations are exactly the canonical-map properties, so the stalk criterion supplies invertibility at z. The conservative geometric-stalk theorem then makes the exchange morphism invertible.",
    "uses": [
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "lem-weil-pbc-unrestricted-strict-henselization-stalk",
-    "def-weil-pbc-strict-henselization-restriction"
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-strict-henselization-functoriality"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0EZU, lemma-base-change-f-star-general-stalks, proof; Tag 03Q9, theorem-higher-direct-images; Tag 03Q8, lemma-higher-direct-images"
-   }
-  },
-  {
-   "text": "Compute $\\alpha_{\\bar x}$ on neighbourhood representatives. By [sbc-lem-higher-direct-image-presheaf] and the canonical stalk isomorphism for sheafification [lem-weil-pbc-sheafification-geometric-stalk], the stalk $(R^qg_*F)_{\\bar s}$ is represented by classes $\\xi\\in H^q(T\\times_S V,F)$ on pointed etale neighbourhoods $(V,\\bar v)$ of $\\bar s$; the target stalk is represented by $H^q(Y\\times_X W,e^{-1}F)$ on pointed neighbourhoods $(W,\\bar w)$ of $\\bar x$ [def-weil-pbc-geometric-stalks]. By [lemma-weil-pbc-affine-neighbourhood-cofinal], choose $V$ affine and take $W$ to be an affine open neighbourhood of the image of $(\\bar v,\\bar x)$ in $V\\times_S X$; write $w:W\\to V$ for its projection. The chosen point factors through this open, and restricting to it preserves the germ. The source germ is sent to this induced neighbourhood by the germ equation of [lem-weil-pbc-inverse-image-stalk-germ]. The map of cohomology classes there is pullback along $T\\times_S W\\to T\\times_S V$. Here is the resolution calculation identifying that map: choose an injective resolution $F\\to I^\\bullet$ on $T$, and a resolution comparison $e^{-1}I^\\bullet\\to J^\\bullet$ on $Y$. By [lem-kun-bc-map-on-cohomology] the exchange is computed by its termwise underived exchange followed by that comparison. The representative formula in [def-weil-pbc-underived-exchange], on the exchanged square, shows that on sections over $W$ the underived exchange sends a section on $T\\times_S V$ to its inverse-image-unit pullback on $T\\times_S W$, and then to $J^\\bullet(T\\times_S W)$. This is exactly the cocycle recipe of [def-weil-pbc-cohomology-pullback]. The restrictions of $I^\\bullet$ and $J^\\bullet$ to these etale objects compute their cohomology, by clause (5) of [lem-weil-pbc-cohomology-pullback-functorial]; its clauses (1) and (2) justify using the chosen comparison. Thus this computes the specified higher exchange, not merely some natural map between its source and target.",
-   "uses": [
-    "sbc-lem-higher-direct-image-presheaf",
-    "def-weil-pbc-geometric-stalks",
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "lem-kun-bc-map-on-cohomology",
-    "def-weil-pbc-cohomology-pullback",
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "lem-weil-pbc-sheafification-geometric-stalk",
-    "lemma-weil-pbc-affine-neighbourhood-cofinal",
-    "def-weil-pbc-underived-exchange"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0EZU, lemma-base-change-f-star-general-stalks, proof; Tag 03Q9, theorem-higher-direct-images; Tag 03Q8, lemma-higher-direct-images"
-   }
-  },
-  {
-   "text": "The canonical restrictions $a,b$ send a neighbourhood class to its pullback along the strict-local limit leg. To see the normalization directly, expand [def-weil-pbc-strict-henselization-restriction]: a germ is first restricted by the inverse-image unit along the limit leg, then the degree-$q$ mate is applied and sections are identified by Leray. Apply [lem-kun-bc-map-on-cohomology] also to the strict-local base-change square in that definition. The representative formula of [def-weil-pbc-underived-exchange] evaluates its termwise mate as inverse-image-unit pullback along the limit leg, followed by a resolution comparison on the strict-local fibre product. Clause (2) of [lem-weil-pbc-cohomology-pullback-functorial] permits comparison with a K-injective resolution there; exact sections and the Leray identification are the ones specified in the restriction definition. Thus the termwise computation sends a cocycle to its unit pullback followed by the resolution comparison; the defining recipe of [def-weil-pbc-cohomology-pullback] is exactly that same map. For a representative on $T\\times_S V$ and a compatible affine pointed refinement $W\\to V$ as in step 3, clause (4) of [lem-weil-pbc-strict-henselization-functoriality] says that $X_{(\\bar x)}\\to W\\to V$ equals $X_{(\\bar x)}\\xrightarrow{u}S_{(\\bar s)}\\to V$. Hence the two composites $B\\to T\\times_S W\\to T\\times_S V$ and $B\\xrightarrow{v}A\\to T\\times_S V$ are equal by their projections. Clause (4) of [lem-weil-pbc-cohomology-pullback-functorial] now gives, on this class, $b\\alpha_{\\bar x}(\\xi)=v^*a(\\xi)$, with the canonical inverse-image composition identifications on coefficients. This equality holds for every representative, so the stalk-colimit definition [def-weil-pbc-geometric-stalks] gives $b\\circ\\alpha_{\\bar x}=v^*\\circ a$. This verifies compatibility with the actual pullback map in the statement.",
-   "uses": [
-    "def-weil-pbc-strict-henselization-restriction",
-    "def-weil-pbc-cohomology-pullback",
-    "lem-weil-pbc-strict-henselization-functoriality",
-    "lem-weil-pbc-cohomology-pullback-functorial",
-    "def-weil-pbc-geometric-stalks",
-    "lem-kun-bc-map-on-cohomology",
-    "def-weil-pbc-underived-exchange"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0EZU, lemma-base-change-f-star-general-stalks, proof; Tag 03Q9, theorem-higher-direct-images; Tag 03Q8, lemma-higher-direct-images"
-   }
-  },
-  {
-   "text": "Since $a,b$ are isomorphisms, step 4 shows that $\\alpha_{\\bar x}$ is an isomorphism exactly when $v^*$ is. If $\\alpha$ is an isomorphism, every stalk map is an isomorphism simply by applying the stalk functor. Conversely suppose every $v^*$ is an isomorphism. All geometric stalks of $\\alpha$ are then bijective. Apply [lem-weil-pbc-sets-etale-iso-on-geometric-stalks] to its underlying map of sheaves of sets and the family of all geometric points of $X$, whose images cover $X$. It follows that $\\alpha$ is sectionwise bijective. Each inverse is an abelian-group homomorphism (apply the original homomorphism to the proposed sum and use injectivity), and the inverses commute with restriction (apply the original natural map and use injectivity). Thus these inverses give an inverse in abelian sheaves. This proves both implications, including when $X$ is empty.",
-   "uses": [
-    "lem-weil-pbc-sets-etale-iso-on-geometric-stalks"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0EZU, lemma-base-change-f-star-general-stalks, proof; Tag 03Q9, theorem-higher-direct-images; Tag 03Q8, lemma-higher-direct-images"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-strict-henselization-functoriality",
-  "def-pc-fibre-product",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-weil-pbc-unrestricted-strict-henselization-stalk",
-  "def-weil-pbc-strict-henselization-restriction",
-  "sbc-lem-higher-direct-image-presheaf",
-  "def-weil-pbc-geometric-stalks",
-  "lem-kun-bc-map-on-cohomology",
-  "def-weil-pbc-cohomology-pullback",
-  "lem-weil-pbc-cohomology-pullback-functorial",
-  "lem-weil-pbc-sheafification-geometric-stalk",
-  "lemma-weil-pbc-affine-neighbourhood-cofinal",
-  "def-weil-pbc-underived-exchange",
-  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks"
+  "lem-weil-pbc-exchange-strict-local-cohomology-stalk-criterion",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-strict-henselization-functoriality"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0EZU, lemma-base-change-f-star-general-stalks, proof; Tag 03Q9, theorem-higher-direct-images; Tag 03Q8, lemma-higher-direct-images"
+  "place": "Tag 0EZU, lemma-base-change-f-star-general-stalks; local stalk computation isolated in the new criterion node and global conservativity applied to geometric stalks."
  },
  "mathlib_searches": [
   {
@@ -283,14 +213,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-strict-henselization-functoriality",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-weil-pbc-unrestricted-strict-henselization-stalk",
-  "def-weil-pbc-strict-henselization-restriction",
-  "sbc-lem-higher-direct-image-presheaf",
-  "lem-kun-bc-map-on-cohomology",
-  "def-weil-pbc-cohomology-pullback",
-  "lem-weil-pbc-cohomology-pullback-functorial"
+  "lem-weil-pbc-strict-henselization-functoriality"
  ],
  "reviewed": {
   "date": "2026-10-14",
@@ -330,5 +253,15 @@
   "date": "2026-10-15",
   "existing": false,
   "note": "The degree-q exchange uses the recorded bounded-below abelian-sheaf presentation. Canonical strict-local ring maps are specified by the structural equation and equality of the canonical evaluations into Ω; these force locality and the specified residue inclusion, hence select exactly the unique functorial map. Sheaf.H and cohomologyMap are the existing recorded cohomology/pullback presentation."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A7",
+  "result": "pass",
+  "landing": "20261018T071132-L-1662921",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
