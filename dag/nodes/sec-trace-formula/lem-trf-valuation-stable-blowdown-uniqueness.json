@@ -268,5 +268,30 @@
   "group": "Q24",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-c0df64087 (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-trf-exceptional-contraction-diamond, every cited statement and the citer, and checked them against Temkin's Appendix B pp.57-58 (B.2, the contraction paragraph, B.3 and its proof, Cor 4.4.3(i)) using a local text copy of the paper. (1) Statement correction: I checked the counterexample myself. Two P^1s meeting at two points with constant r both contract to an irreducible nodal curve, and the two quotients cannot be compared, so the old statement is false. The added hypothesis, that r collapses no connected component, is Temkin's own setting before B.3 (a proper surjective map of connected curves). It is recorded in split_report.statement_correction and in the report. (2) Proof: Step 1's cancellation is correct (a k-point section of A gives c=h i s, then the colimit's unique mediator). The strong induction is set up properly. Step 4 uses only the diamond node's stated clauses (B_A exceptional, permanence, j_A h_A=j_B h_B), and the n=1 case is excluded correctly. Steps 5-6 (iteration, m<=n, uniqueness by cancellation) are correct. (3) New node: statement only, self-contained, every definition node checked, blueprint and search fields present, strictly smaller than the item, and no duplicate found. I tested it on disjoint and adjacent components (unmarked tail, marked tail, bridge, triangle with a self-node), on two components meeting twice (excluded by the new hypothesis) and on a non-separated case with a bridge between doubled origins; all are consistent. No fixes, no dropped nodes, no tool_uses. Downstream for the maintainer: the citer lem-trf-valuation-contracted-component-inclusion Step 3 must now justify noncollapse of r=f_Omega a_Omega. I believe it holds there (flatness, equidimensional fibres and Zariski connectedness), but that node needs repair."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ValuationStableBlowdownUniqueness",
+  "declaration": "AlgebraicGeometry.valuation_stable_blowdown_uniqueness",
+  "declarations": [
+   "AlgebraicGeometry.MultipointedCurve.IsReferenceExceptionalComponent",
+   "AlgebraicGeometry.MultipointedCurve.Hom.IsReferenceExceptionalContraction",
+   "AlgebraicGeometry.MultipointedCurve.Hom.HasReferenceExceptionalContractionSequence",
+   "AlgebraicGeometry.valuation_stable_blowdown_uniqueness"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ValuationStableBlowdownUniqueness.lean",
+  "statement": "theorem valuation_stable_blowdown_uniqueness (k : Type u) [Field k] [IsAlgClosed k] (C : Scheme.{u}) (c : C ⟶ Spec (.of k)) (P S : MultipointedCurve (Spec (.of k))) (r : P.X ⟶ C) (s : S.X ⟶ C) (hr : r ≫ c = P.x) (π : P.Hom S) (n : ℕ) (hπ : π.HasReferenceExceptionalContractionSequence k n r s) (hnoncollapse : ∀ x : P.X, ¬ (r '' connectedComponent x).Subsingleton) (hstable : ∀ a : ProjectiveLine (Spec (.of k)) ⟶ S.X, ¬ S.IsReferenceExceptionalComponent k s a) : (∀ (Q : MultipointedCurve (Spec (.of k))) (t : Q.X ⟶ C) (q : P.Hom Q) (m : ℕ), q.HasReferenceExceptionalContractionSequence k m r t → ∃! v : Q.Hom S, q.curve ≫ v.curve = π.curve ∧ q.marking ≫ v.marking = π.marking) ∧ (∀ (Q : MultipointedCurve (Spec (.of k))) (t : Q.X ⟶ C) (q : P.Hom Q) (m : ℕ), q.HasReferenceExceptionalContractionSequence k m r t → (∀ a : ProjectiveLine (Spec (.of k)) ⟶ Q.X, ¬ Q.IsReferenceExceptionalComponent k t a) → ∃! v : Q.Hom S, (q.curve ≫ v.curve = π.curve ∧ q.marking ≫ v.marking = π.marking) ∧ IsIso v.curve ∧ IsIso v.marking)",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The three real predicate helpers spell out this node's own reference-relative exceptional components, elementary pushouts and finite sequences. They use the recorded MultipointedCurve/Hom/IsSemistable interfaces. The existing final-target-relative MultipointedPair sequence predicate does not express a separate arbitrary reference scheme C."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5bc957770",
+  "group": "NG",
+  "result": "pass",
+  "note": "Lean matches the corrected node clause by clause: alg. closed k; P semistable via the sequence predicate; r over k via hr; noncollapse as ¬Subsingleton of the image of each connectedComponent; exceptional component = closed immersion of P¹ over k with irreducible-component range, singleton image, at most 2 marked/nonsmooth points; elementary contraction = IsPushout in Scheme with IsIso marking, semistable ends, factored reference, no properness added; recursive sequence with length 0 = arbitrary pointed iso; conclusions ∃! factor through every partial sequence and ∃! compatible iso between terminal quotients. Edge cases (n=m=0, empty marking/curve, disconnected, nonseparated) covered. lean.statement verbatim; node differs from live only in lean. H4: Q07 MultipointedPair.HasExceptionalContractionSequence is final-map-relative and adds properness and an iso off the component, so it is a distinct notion; no Mathlib match. Helpers are real, docstrings have source and blueprint tags, the six proof steps are carried, the body is only sorry. nt_compile --json rc 0 clean in 2.1 s; a broken control copy reports its error. Advisory: the unstated diamond lemma must reuse these helpers, and the theorem-owned defs may need a def node then; stmt_deps lack irreducible-components and smooth-morphisms nodes (they come via the modification node); the contracted-component-inclusion citer still owes noncollapse."
  }
 }
