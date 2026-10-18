@@ -15,9 +15,163 @@
   "def-per-perverse-subcategories",
   "def-weil-t-structure"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $P^{\\le n}_W,P^{\\ge n}_W$ for the two classes in the statement, always using the arbitrary-field dual of [lem-per-qbar-arbitrary-field-duality], rather than the finite-field dual mentioned by the older support definition. The formulas of [def-per-support-condition, def-per-perverse-subcategories] give $P^{\\le n}=P^{\\le0}[-n]$. Since $D(K[n])\\cong DK[-n]$ and $D^2K\\cong K$, they also give $P^{\\ge n}=P^{\\ge0}[-n]$ and $D(P^{\\ge n})=P^{\\le -n}$. Increasing an upper index weakens the support inequalities, so $P^{\\le n}\\subseteq P^{\\le n+1}$, and duality gives $P^{\\ge n+1}\\subseteq P^{\\ge n}$. In particular the shift inclusions in the definition of a t-structure hold.",
+   "uses": [
+    "lem-per-qbar-arbitrary-field-duality",
+    "def-per-support-condition",
+    "def-per-perverse-subcategories",
+    "def-weil-t-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "4.0: support normalization and self-dual perversity"
+   }
+  },
+  {
+   "text": "For a complementary pair $j:U\\hookrightarrow W$, $i:Z\\hookrightarrow W$, we claim $K\\in P^{\\le n}_W$ if and only if $j^*K\\in P^{\\le n}_U$ and $i^*K\\in P^{\\le n}_Z$. By [lem-per-adic-heart-pullback-fibres], each cohomology sheaf $F$ has a constructible nonzero-fibre locus $C$, and pullback restricts this locus. Write $C$ as a finite union of locally closed strata, refining by $U,Z$. For each nonempty stratum $S$, the first inequality of [lem-zl-finite-type-fibre-image-dimension-bounds], applied to $S\\hookrightarrow W$, gives $\\dim\\overline S\\le\\dim S$; the reverse inequality follows by viewing chains in $S$ inside its closure. A finite union of closures has dimension their maximum: an irreducible closed subset of the union lies in one member. Consequently $\\dim\\overline C=\\max(\\dim\\overline{C\\cap U}^{\\,U},\\dim\\overline{C\\cap Z}^{\\,Z})$, with empty terms $-\\infty$. Indeed the same strata compute each side and their dimensions do not change under their locally closed inclusions, by the same inequality and reverse inequality. Apply this equality to every $F=\\mathcal H^rK$, using the cohomology identities of [lem-per-qbar-dual-recollement], to prove the claim. In particular supports here may be taken closed, as in [def-per-support-condition].",
+   "uses": [
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-zl-finite-type-fibre-image-dimension-bounds",
+    "lem-per-qbar-dual-recollement",
+    "def-per-support-condition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "1.4.9 and 4.0.1: the support class is glued by ordinary restrictions"
+   }
+  },
+  {
+   "text": "Apply Step 2 to $D_WK$. The identities $j^*D_WK\\cong D_Uj^*K$ and $i^*D_WK\\cong D_Zi^!K$ from [lem-per-qbar-dual-recollement] give\n$$K\\in P^{\\ge n}_W\\quad\\Longleftrightarrow\\quad j^*K\\in P^{\\ge n}_U\\ \\text{and}\\ i^!K\\in P^{\\ge n}_Z.$$\nThis is a direct substitution into the cosupport definition, with index $-n$.",
+   "uses": [
+    "lem-per-qbar-dual-recollement",
+    "def-per-support-condition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "1.4.9: the cosupport class is glued by extraordinary closed restriction"
+   }
+  },
+  {
+   "text": "Use [lem-per-qbar-generic-duality-model] for any finite family of complexes on a nonempty $W$. On each of its irreducible open pieces $V$ of dimension $d$, a nonzero lisse constant-rank sheaf has support all of $V$: its fibres have positive rank everywhere, by the exact conservative fibres of [lem-per-adic-heart-pullback-fibres]. Thus a lisse-cohomology complex $L$ satisfies $L\\in P^{\\le n}_V$ exactly when $\\mathcal H^aL=0$ for $a>n-d$. The dual formula in [lem-per-qbar-generic-duality-model] says that $\\mathcal H^r(D_VL)$ vanishes exactly when $\\mathcal H^{-r-2d}L$ does. Applying the upper formula with index $-n$, and substituting $a=-r-2d$, gives $L\\in P^{\\ge n}_V$ exactly when $\\mathcal H^aL=0$ for $a<n-d$. These are ordinary shifted cohomological bounds, with ordinary truncations provided by [lem-per-adic-heart-pullback-fibres]. On a finite disjoint union of these pieces, the sum of extension-by-zero maps from the restrictions is an isomorphism: [lem-per-qbar-dual-recollement] defines the maps and their geometric fibres are the identity on the one relevant summand. Conservativity of fibres and bounded cohomology give the isomorphism. Hence the bounds and Hom groups can be checked piece by piece.",
+   "uses": [
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-qbar-dual-recollement",
+    "def-per-support-condition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "1.4.10 and 2.2.10--2.2.12: local ordinary bounds and dimension-normalized duality"
+   }
+  },
+  {
+   "text": "We prove the t-structure axioms simultaneously for all separated finite-type $k$-schemes by induction on their dimension. Dimensions are finite by [lem-kun-dimension-finite-type]. On the empty scheme all complexes are zero, since their cohomology has no geometric fibres, by [lem-per-adic-heart-pullback-fibres], so the assertion is immediate. Let $W$ be nonempty and assume the assertion in smaller dimension. Given $A\\in P^{\\le0}_W$ and $B\\in P^{\\ge1}_W$, choose the generic open of [lem-per-qbar-generic-duality-model] for $A,B$, with reduced closed complement $Z$ of smaller dimension. Steps 2--4 and ordinary t-structure orthogonality in [def-weil-t-structure] give $\\operatorname{Hom}(j^*A,j^*B)=0$; the induction hypothesis gives $\\operatorname{Hom}(i^*A,i^!B)=0$. The adjunctions of [lem-per-qbar-dual-recollement] identify these with $\\operatorname{Hom}(j_!j^*A,B)$ and $\\operatorname{Hom}(Ri_*i^*A,B)$. Its first localization triangle for $A$ therefore gives $\\operatorname{Hom}(A,B)=0$. The required contravariant Hom exactness is [lem-weil-pbc-hom-into-triangle-exact] applied to the dual triangle and the exact anti-equivalence of [lem-per-qbar-arbitrary-field-duality]. This proves orthogonality without assuming that the generic open has a perverse t-structure on all its constructible objects.",
+   "uses": [
+    "lem-kun-dimension-finite-type",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-qbar-generic-duality-model",
+    "def-weil-t-structure",
+    "lem-per-qbar-dual-recollement",
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "lem-per-qbar-arbitrary-field-duality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "1.4.10, proof of orthogonality; 2.2.10: refinement for the finitely many objects"
+   }
+  },
+  {
+   "text": "For $K\\in\\mathcal C_W$, choose a generic open as in [lem-per-qbar-generic-duality-model] for $K$, again with smaller-dimensional closed complement $Z$. On each open piece of dimension $d$, take the ordinary truncation triangle at degree $-d$; by [lem-per-adic-heart-pullback-fibres] these truncations exist in the same category and retain lisse cohomology. Assemble them as in Step 4 to obtain $A_U\\to j^*K\\to B_U\\to A_U[1]$, with $A_U\\in P^{\\le0}_U$ and $B_U\\in P^{\\ge1}_U$. Compose $K\\to Rj_*j^*K\\to Rj_*B_U$ and take a fibre $K'$, using the cone axiom of [thm-weil-pbc-verdier-axioms]. The adjunction isomorphism $j^*Rj_*\\cong\\operatorname{id}$ of [lem-per-qbar-dual-recollement] identifies the restriction of $K'\\to K\\to Rj_*B_U$ with the preceding ordinary truncation triangle, so $j^*K'\\cong A_U$. On $Z$, apply the induction hypothesis to obtain $C_Z=\\tau^{\\ge1}_Zi^*K'$ and the corresponding lower truncation, with $C_Z\\in P^{\\ge1}_Z$. Form the adjunction composite $K'\\to Ri_*i^*K'\\to Ri_*C_Z$ and let $A$ be its fibre.",
+   "uses": [
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-adic-heart-pullback-fibres",
+    "thm-weil-pbc-verdier-axioms",
+    "lem-per-qbar-dual-recollement"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "1.4.10, proof of the truncation axiom: the two successive fibres"
+   }
+  },
+  {
+   "text": "Apply the octahedral axiom [thm-weil-pbc-verdier-axioms] to $A\\to K'\\to K$. If $B$ is its cone for $A\\to K$, the other cone triangle is\n$$Ri_*C_Z\\longrightarrow B\\longrightarrow Rj_*B_U\\longrightarrow Ri_*C_Z[1].$$\nBy [lem-per-qbar-dual-recollement], $j^*Ri_*=0$ gives $j^*A\\cong A_U$ and $j^*B\\cong B_U$. Applying $i^*$ to $A\\to K'\\to Ri_*C_Z$ and using $i^*Ri_*\\cong\\operatorname{id}$ identifies $i^*A$ with $\\tau^{\\le0}_Zi^*K'$. Applying $i^!$ to the displayed triangle and using $i^!Ri_*\\cong\\operatorname{id}$ and $i^!Rj_*=0$ gives $i^!B\\cong C_Z$. Steps 2--3 now give $A\\in P^{\\le0}_W$ and $B\\in P^{\\ge1}_W$. Thus $A\\to K\\to B\\to A[1]$ is the required truncation triangle. Together with Steps 1 and 5, this verifies all axioms of [def-weil-t-structure], closing the induction. No compatibility of a fixed global stratification with every direct image is being assumed.",
+   "uses": [
+    "thm-weil-pbc-verdier-axioms",
+    "lem-per-qbar-dual-recollement",
+    "def-weil-t-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "1.4.10, octahedron and the four restriction calculations"
+   }
+  },
+  {
+   "text": "For boundedness, let $e=\\dim W$, finite by [lem-kun-dimension-finite-type]. By [lem-per-adic-heart-pullback-fibres], $\\mathcal H^rK=0$ for $r>b$ for some $b$. Every remaining support has dimension at most $e$, so $\\dim\\operatorname{Supp}\\mathcal H^rK\\le b+e-r$ and $K\\in P^{\\le b+e}_W$. The dual $D_WK$ is bounded constructible by [lem-per-qbar-arbitrary-field-duality]; if its cohomology vanishes above $c$, the same argument gives $D_WK\\in P^{\\le c+e}_W$, hence $K\\in P^{\\ge-c-e}_W$. Enlarge the upper index or decrease the lower index if needed to arrange their order. The empty scheme was already treated. This proves boundedness in the sense of [def-weil-t-structure].",
+   "uses": [
+    "lem-kun-dimension-finite-type",
+    "lem-per-adic-heart-pullback-fibres",
+    "lem-per-qbar-arbitrary-field-duality",
+    "def-per-support-condition",
+    "def-weil-t-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "2.2.17--2.2.19: bounded ordinary objects and the finite dimension range"
+   }
+  },
+  {
+   "text": "Fix $n$. If $K\\in P^{\\ge n}$, shifted orthogonality already proved gives $\\operatorname{Hom}(A,K)=0$ for all $A\\in P^{\\le n-1}$. Conversely assume this vanishing and take the truncation triangle $A\\to K\\to B\\to A[1]$ at $n-1$, so $A\\in P^{\\le n-1}$ and $B\\in P^{\\ge n}$. The first arrow is zero by the assumption, and $\\operatorname{Hom}(A,B[-1])=0$ by orthogonality, since $B[-1]\\in P^{\\ge n+1}\\subseteq P^{\\ge n}$. Exactness of $\\operatorname{Hom}(A,-)$ on $B[-1]\\to A\\to K$, supplied by [lem-weil-pbc-hom-into-triangle-exact], forces $\\operatorname{id}_A=0$. Thus $A=0$ and $K\\cong B\\in P^{\\ge n}$. To see the cone map is an isomorphism, apply the same representable-Hom exactness to $0\\to K\\to B\\to0$ for every test object, obtaining bijections on Hom; their inverses supply the inverse map. This proves exactly the displayed equivalence.",
+   "uses": [
+    "def-weil-t-structure",
+    "lem-weil-pbc-hom-into-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "1.3.4: the right-orthogonal characterization"
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-tstructure-extension-closure] to the t-structure just constructed. For every $n$, both $P^{\\le n}_W$ and $P^{\\ge n}_W$ are closed under extensions, which is the remaining assertion.",
+   "uses": [
+    "lem-sbc-tstructure-extension-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+    "place": "1.3.4: extension closure"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-per-perverse-subcategories",
+  "def-per-support-condition",
+  "def-weil-t-structure",
+  "lem-kun-dimension-finite-type",
+  "lem-per-adic-heart-pullback-fibres",
+  "lem-per-qbar-arbitrary-field-duality",
+  "lem-per-qbar-dual-recollement",
+  "lem-per-qbar-generic-duality-model",
+  "lem-sbc-tstructure-extension-closure",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-zl-finite-type-fibre-image-dimension-bounds",
+  "thm-weil-pbc-verdier-axioms"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bbd-faisceaux-pervers_Asterisque-100-1982.pdf",
+  "place": "BBD 1.4.10 two-fibre gluing proof and 4.0 support formulas, applied objectwise by dimension induction; the arbitrary-field adic structural inputs are explicitly separate nodes."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +207,45 @@
    "results": "No hits.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Support dimension and Verdier cosupport define a bounded middle perverse t structure on constructible adic complexes over a field",
+   "results": "DerivedCategory.TStructure.t; DerivedCategory.IsGE; DerivedCategory.IsLE; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.instIsGEObjSingleFunctor; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.isLE_Q_obj_iff; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"perverse\"",
+   "results": "No hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "perverse|Perverse",
+   "results": "No hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "bounded middle perverse t structure constructible sheaves Verdier duality",
+   "results": "DerivedCategory.TStructure.t; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; BddOrd.dualEquiv_inverse; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; SheafOfModules.PullbackConstruction.adjunction; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat; bddAbove_preimage_toDual; CategoryTheory.constantSheafAdj",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Noetherian induction gluing truncations for support and cosupport subcategories",
+   "results": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; HomologicalComplex.shortComplexTruncLE_X₃_isSupportedOutside; DerivedCategory.IsGE; HomologicalComplex.instIsStrictlySupportedTruncLE_1; HomologicalComplex.instIsStrictlySupportedTruncGE_1; HomologicalComplex.instIsStrictlySupportedTruncLE; HomologicalComplex.instIsStrictlySupportedTruncGE; CategoryTheory.Triangulated.TStructure.instIsLEObjTruncLTHSubIntOfNat",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-artin-gabber-affine-curve",
@@ -73,5 +262,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-qbar-middle-tstructure",
+  "worker": "stage1",
+  "summary": "Constructed support/cosupport truncations by the explicit two-fibre octahedral argument, using a generic lisse open separately for each finite set of objects. Proved support restriction equivalences, orthogonality, boundedness, the exact right-orthogonal characterization and extension closure. Retained the arbitrary-field and exact adic coefficient hypotheses; isolated only general adic dual recollement and the generic normalized dualizing-object calculation as new statement-only nodes. Statement unchanged.",
+  "blueprint": "Realizes the middle t-structure and extension closure invoked in Step 2 of lem-per-artin-gabber-affine-curve, and the self-dual classes invoked in Step 3. Supplies the structural input for the already reviewed replacement of that ancestor's invalid generating-block proof; does not alter its unit or the curve-unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-zl-finite-type-fibre-image-dimension-bounds",
+    "why": "Only its generic scheme-theoretic image dimension inequality is used to compare support closures of locally closed strata. No perverse-unit node supplies this dimension theorem."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Finite-dimensionality of finite-type schemes supplies the induction parameter and the boundedness bound."
+   },
+   {
+    "node": "thm-weil-pbc-verdier-axioms",
+    "why": "The existing common-stage coefficient construction supplies cones and the octahedron used in the explicit truncation argument."
+   },
+   {
+    "node": "lem-weil-pbc-hom-into-triangle-exact",
+    "why": "General representable-Hom exactness on distinguished triangles supplies the vanishing and zero-object arguments; used contravariantly only after applying the stated dual anti-equivalence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-zl-finite-type-fibre-image-dimension-bounds",
+  "lem-kun-dimension-finite-type",
+  "thm-weil-pbc-verdier-axioms",
+  "lem-weil-pbc-hom-into-triangle-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-d6d8fc7dd",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-d6d8fc7dd (reviewer sub-agent of L); spot-checked: I read in full the item, both new nodes, every cited statement, the unit sk-p-dl-a1-perverse, the ancestor and its main-20261015 proof, and the sources: BBD 1.4.9-1.4.10 (p.48) and 4.0 (p.101), Bhatt-Scholze 6.7.2, 6.7.19, 6.7.20 and 6.8.14/15, and the proof of ILO XVII 6.2.2.1. The item statement is unchanged and reads cosupport with the arbitrary-field dual. Small cases tested: Spec k, Q̄ℓ[1] and δ_x on A^1, the empty scheme, and components of unequal dimension. Steps 2-3 glue support and cosupport over j/i. In Step 4 I checked the sign of the generic dual formula: a=-r-2d gives P^{≤n}=D^{≤n-d} and P^{≥n}=D^{≥n-d}. Steps 5-7 are BBD 1.4.10's orthogonality and octahedron argument run as an induction on dimension; the four restriction identities each use a stated clause of the recollement helper. Steps 8-10 (boundedness, right-orthogonal characterization, extension-closure leaf) are correct. New nodes: lem-per-qbar-dual-recollement is true, with i^!:=D i^* D, Ri_*⊣i^! from D Ri_!≅Ri_*D and biduality, and i^!Rj_*=0. It is not a duplicate: prop-sf-localization-all-stages and prop-sf-open-closed-triangle-all-stages give only parts of it, on the def-weil-algebraically-closed-coefficients categories, without j_!⊣j^*, i^*⊣i_* or the dual identities. lem-per-qbar-generic-duality-model is true over imperfect k: ω≅Λ(d)[2d] holds on the regular locus by the proof of ILO 6.2.2.1, and the formula for H^r(DL) follows because internal Ext of lisse sheaves vanishes in positive degrees. Neither new node restates a clause of the item. Searches are recorded, the blueprint from/via are correct, and no SGA is cited. Accepted tool_uses: lem-zl-finite-type-fibre-image-dimension-bounds, lem-kun-dimension-finite-type, thm-weil-pbc-verdier-axioms, lem-weil-pbc-hom-into-triangle-exact. Batch-5: all five listed citations reach sec-poincare-duality only through the general Weil II definition def-pod-lisse-l-adic-sheaves (directly, or via lem-per-adic-heart-pullback-fibres and lem-per-adic-lisse-cohomology-calculus). That definition is not a result of either assumption and not a step of their proofs, so all five are accepted. No fixes."
  }
 }
