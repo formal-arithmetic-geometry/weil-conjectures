@@ -32,9 +32,155 @@
   "def-pc-fibre-product",
   "def-pc-reduced-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Assume the marked nodal quotient assertion in the statement, for this fixed $\\ell$. Write $U(S,Z)$ for the finite regular alteration-cover assertion in the conclusion. We first prove $U$ for all reduced quasi-excellent Noetherian schemes of dimension at most $d$, by strong induction on $d$. At each stage [lem-per-uniformization-complete-local-descent], in its bounded form, reduces the assertion to normal complete local schemes of dimension at most $d$. Thus the induction hypothesis is available for arbitrary excellent bases of dimension less than $d$, not merely complete local ones. After proving all finite stages we apply the unbounded form of that same descent theorem to the original $S$. This is legitimate because every Noetherian complete local ring has finite Krull dimension. No bound on the dimension of the original $S$ is imposed.",
+   "uses": [
+    "lem-per-uniformization-complete-local-descent",
+    "lem-weil-pbc-noetherian-local-finite-krull-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 1.3, p. 132; III 6.2, pp. 43--45"
+   }
+  },
+  {
+   "text": "For a normal complete local scheme of dimension zero the local domain is a field, so the nowhere dense closed subset is empty and the identity is a regular covering with empty boundary. In dimension one [lem-sc-normal-dim1-dvr] makes its local ring a discrete valuation ring; hence it is regular. A proper closed subset is empty or its closed point. In the latter case a uniformizer defines that reduced point, a strict normal crossings boundary with one regular component of codimension one. The identity is the required cover. These exhaust the dimensions zero and one.",
+   "uses": [
+    "lem-sc-normal-dim1-dvr",
+    "def-sc-discrete-valuation-ring",
+    "def-weil-regular-scheme",
+    "def-trf-strict-normal-crossings-boundary",
+    "lem-per-alteration-cover-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 1.3, p. 132, normalization base case"
+   }
+  },
+  {
+   "text": "Let $d\\geq2$ and take a normal complete local $X$ of dimension $d$, with its prescribed nowhere dense $Z$. Apply [lem-per-prime-to-ell-marked-algebraization] to get $p:X^+\\to X$, $g:X^+\\to W$, the marked pair $(W,Z_W)$, and the regular complete local base $Y_0$ of dimension $d-1$. The morphism $p$ is a covering: it is finite surjective with generic degree prime to $\\ell$. It will suffice to construct $U(W,Z_W)$, pull its covering back by the regular completion map $g$ using [lem-per-regular-pair-alteration-pullback], and compose with $p$. That lemma preserves both regularity and the exact inverse-image support. In particular this reduction does not treat completion as a finite-type object of $\\operatorname{alt}/W$; only the pulled-back finite-type covering maps are objects of $\\operatorname{alt}/X^+$.",
+   "uses": [
+    "lem-per-prime-to-ell-marked-algebraization",
+    "lem-per-regular-pair-alteration-pullback",
+    "lem-per-alteration-cover-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 1.3, p. 132; V 3.1.3--3.1.4, p. 66"
+   }
+  },
+  {
+   "text": "Apply [lem-per-proper-generic-curve-preparation] to $W\\to Y_0$ and $Z_W$. Its zero-dimensional generic-marking hypothesis holds: $W$ is integral, its generic fibre has dimension one, and a nowhere dense closed subset cannot contain that fibre's generic point. We obtain $f:P\\to Y_1$, the effective Cartier marking $E$, and $h:P^\\circ\\to W$ of generic degree prime to $\\ell$. The base $Y_1$ is affine integral normal excellent of dimension at most $d-1$; the generic fibre of $f$ is smooth geometrically integral, and $E$ is generically finite etale. Proving $U(P,|E|)$ suffices: restrict the resulting cover to $P^\\circ$, where its boundary is the inverse image of $h^{-1}Z_W$, and compose with the covering $h$. Open restriction preserves the regular local rings and the defining boundary intersections.",
+   "uses": [
+    "lem-per-proper-generic-curve-preparation",
+    "lem-per-alteration-cover-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 1.3, p. 132, compactification through Stein factorization"
+   }
+  },
+  {
+   "text": "Apply [lem-per-equivariant-marked-nodal-alteration] to $(P\\to Y_1,E)$, obtaining $C\\to Y'$ and $G$. Replace $P$ by $Q=C/G$ and the base by $Y=Y'/G$. The maps $Q\\to P$ and $Y\\to Y_1$ are proper birational. The former is a covering of generic degree one. Pull $E$ back to $Q$: its equation stays nonzero on the integral dominant source, hence still cuts out an effective Cartier divisor. The marking inclusion above $E$ is precisely the one supplied by the nodal theorem. The new $Y$ is integral excellent and has dimension at most $d-1$: it is proper birational over the excellent finite-dimensional $Y_1$ [lem-trf-closed-dominant-dimension]. Its separatedness over the affine original base permits finite affine open refinement. All group actions are admissible. We henceforth work separately over those affine opens and use $X=C/G$ for the quotient total space.",
+   "uses": [
+    "lem-per-equivariant-marked-nodal-alteration",
+    "lem-per-alteration-cover-calculus",
+    "lem-trf-closed-dominant-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 1.4, p. 132, first paragraph"
+   }
+  },
+  {
+   "text": "Choose an $\\ell$-Sylow subgroup $H\\leq G$ using [lem-weil-pbc-sylow-subgroup-prime-index]. The action on $C$ is generically free, since any stabilizer maps to a stabilizer on the dense free locus of $Y'$, and $C\\to Y'$ is dominant. Both $C$ and $Y'$ are of finite type over the affine excellent base of Step 5, on which $G$ acts trivially, so [lem-per-admissible-quotient-generic-degree] applies to them; by it the finite surjective map $C/H\\to C/G$ has generic degree $[G:H]$, prime to $\\ell$, so it is a covering. Replace $G$ by $H$, $X$ by $C/H$ and $Y$ by $Y'/H$. The base is still affine integral excellent and finite over the preceding base, so has dimension at most $d-1$ by [lem-trf-closed-dominant-dimension]. Pull back the Cartier marking; the support inclusion persists. The original $T'$ remains $H$-stable and its complement has free $H$-action. Apply [lem-per-free-finite-action-torsor] to that open to obtain a finite etale $H$-torsor over the complement of $T=T'/H$. Thus $G$ is now an $\\ell$-group. These replacements never require a prime-to-$\\ell$ degree for $C\\to X$ itself.",
+   "uses": [
+    "lem-weil-pbc-sylow-subgroup-prime-index",
+    "lem-per-admissible-quotient-generic-degree",
+    "lem-per-alteration-cover-calculus",
+    "lem-per-free-finite-action-torsor",
+    "lem-trf-closed-dominant-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 1.4, pp. 132--133, Sylow paragraph"
+   }
+  },
+  {
+   "text": "Apply the induction hypothesis to $(Y,T)$, whose dimension is at most $d-1$. It supplies a finite covering $(Y_i\\to Y)$ with $Y_i$ regular and the exact inverse image $T_i$ a strict normal crossings support. Each retained integral component $Y_i$ dominates $Y$ and is generically finite over it, by the definition of the alteration category. Thus $\\dim Y_i\\leq\\dim Y\\leq d-1$ by the inequality in [lem-trf-closed-dominant-dimension]. Refine by finitely many affine opens and connected components; the resulting bases are integral excellent regular Noetherian. Here excellence follows from finite type over the excellent $Y$ [lem-exc-finite-type-localization-excellent], and regular connected Noetherian schemes are integral [lem-sc-regular-connected-integral]. Apply [lem-per-nodal-quotient-normalized-base-refinement] to these maps: normalize a dominating component of $Y'\\times_Y Y_i$, choose its decomposition subgroup $G_i$, and pull the nodal curve and marking to that normalized base. The resulting quotients $X_i=C_i/G_i$ cover $X$ in the alteration topology. The cited statement supplies the entire comparison with the dominant pullback, including proper birationality, so no equality between normalization and ordinary base change is presumed.",
+   "uses": [
+    "lem-per-nodal-quotient-normalized-base-refinement",
+    "lem-per-alteration-cover-calculus",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-sc-regular-connected-integral",
+    "lem-trf-closed-dominant-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 1.4, p. 133, induction and normalized components"
+   }
+  },
+  {
+   "text": "For each $i$, all hypotheses of the assumed marked nodal quotient assertion now hold: $Y_i$ is affine integral excellent regular Noetherian of finite dimension, $T_i$ is an snc support; $G_i$ is a subgroup of an $\\ell$-group; $Y'_i$ is finite and is exactly the normalization of the connected $G_i$-torsor off $T_i$; $C_i$ is integral excellent separated Noetherian and projective flat finitely presented with the required connected nodal fibres; and $D_i$ is stable, finite etale and in the smooth locus. These clauses and admissibility are supplied by [lem-per-nodal-quotient-normalized-base-refinement]. The pulled-back $E_i$ is Cartier and its inverse image lies in the marked vertical boundary. Therefore the hypothesis produces a proper birational $r_i:R_i\\to X_i$ with $R_i$ integral regular Noetherian and the exact inverse image of $|E_i|$ an snc support. Each $r_i$ is a singleton covering, of generic degree one.",
+   "uses": [
+    "lem-per-nodal-quotient-normalized-base-refinement",
+    "lem-per-alteration-cover-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 1.4, p. 133, situation (*) and the assumed resolution of that situation"
+   }
+  },
+  {
+   "text": "Compose these finitely many $r_i$ with the covering $X_i\\to X$ and then all previous coverings; restrict over $P^\\circ$ to get a finite regular covering of $(W,Z_W)$. Pull back by $g:X^+\\to W$ and compose with $p:X^+\\to X$. Cover calculus gives finite covering families throughout, and regular pullback gives the same snc support as the full inverse image of $Z$. This proves the complete-local case in dimension $d$; the bounded descent theorem completes the induction. Every complete normal local Noetherian scheme has finite dimension, so unbounded complete-local descent now gives $U(S,Z)$ for the original reduced quasi-excellent Noetherian $S$. By the definition of $\\operatorname{alt}/S$, all final arrows are finite type. No equation for $Z$ on the original $S$ was required.",
+   "uses": [
+    "lem-per-alteration-cover-calculus",
+    "lem-per-regular-pair-alteration-pullback",
+    "lem-per-uniformization-complete-local-descent",
+    "def-per-prime-to-ell-alteration-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "IX 1.3--1.4, pp. 132--133; III 6.2, pp. 43--45"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-uniformization-complete-local-descent",
+  "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+  "lem-sc-normal-dim1-dvr",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-regular-scheme",
+  "def-trf-strict-normal-crossings-boundary",
+  "lem-per-alteration-cover-calculus",
+  "lem-per-prime-to-ell-marked-algebraization",
+  "lem-per-regular-pair-alteration-pullback",
+  "lem-per-proper-generic-curve-preparation",
+  "lem-per-equivariant-marked-nodal-alteration",
+  "lem-trf-closed-dominant-dimension",
+  "lem-weil-pbc-sylow-subgroup-prime-index",
+  "lem-per-admissible-quotient-generic-degree",
+  "lem-per-free-finite-action-torsor",
+  "lem-per-nodal-quotient-normalized-base-refinement",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-sc-regular-connected-integral",
+  "def-per-prime-to-ell-alteration-topology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "IX 1.3--1.4, pp. 132--133, using III 6.2 and V 3.1.3--3.1.4"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -70,10 +216,38 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Sylow.instFiniteQuotientSubgroupNormalizerOfFactPrime\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \"[Fact p.Prime] [Finite (Sylow p G)] (P : Sylow p G) : Finite (G ⧸ P.normalizer)\", \"doc\": \"For a prime number $ p $ and a finite Sylow $ p $-subgroup $ P $ of a group $ G $, the quotient group $ G $ modulo the normalizer of $ P $ is finite.\"}\n  {\"name\": \"Sylow.ofCard\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \"[Finite G] {p : ℕ} [Fact p.Prime] (H : Subgroup G) (card_eq : Nat.card H = p ^ (Nat.card G).factorization p) :\\n  Sylow p G\", \"doc\": \"Given a finite group $G$, a prime $p$, and a subgroup $H$ of $G$ such that the order of $H$ equals $p^{k}$ where $k$ is the exponent of $p$ in the prime factorization of $|G|$, then $H$ is a Sylow $p$\"}\n  {\"name\": \"Sylow.casesOn\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \"{p : ℕ} →\\n  {G : Type u_1} →\\n    [inst : Group G] →\\n      {motive : Sylow p G → Sort u} →\\n        (t : Sylow p G) →\\n          ((toSubgroup : Subgroup G) →\\n              (isPGroup' : IsPGroup p ↥toSubgroup) →\\n                (is_maximal' : ∀ {Q : Subgroup G}, IsPGroup p ↥Q → toSubgroup ≤ Q → Q = toSu\", \"doc\": \"A case analysis eliminator for Sylow $ p $-subgroups, which allows defining functions by specifying their value on the underlying subgroup, the proof that the subgroup is a $ p $-group, and the maxima\"}\n  {\"name\": \"Sylow.card_eq_card_quotient_normalizer\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \"[Fact p.Prime] [Finite (Sylow p G)] (P : Sylow p G) : Nat.card (Sylow p G) = Nat.card (G ⧸ P.normalizer)\", \"doc\": \"Let $ p $ be a prime number and $ G $ a finite group. Then, the number of Sylow $ p $-subgroups of $ G $ is equal to the index of the normalizer of any Sylow $ p $-subgroup $ P $ in $ G $, i.e., $ |\\te\"}\n  {\"name\": \"Sylow.noConfusion\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \"{P : Sort u} →\\n  {p : ℕ} →\\n    {G : Type u_1} →\\n      {inst : Group G} →\\n        {t : Sylow p G} →\\n          {p' : ℕ} →\\n            {G' : Type u_1} →\\n              {inst' : Group G'} →\\n                {t' : Sylow p' G'} → p = p' → G = G' → inst ≍ inst' → t ≍ t' → Sylow.noConfusionType P t t'\", \"doc\": \"A type-theoretic principle asserting that if two Sylow $ p $-subgroups are equal, then their underlying subgroups, proofs of being $ p $-groups, and maximality conditions are equal. This ensures the s\"}\n  {\"name\": \"Sylow.ext_iff\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \"∀ {p : ℕ} {G : Type u_1} [inst : Group G] {P Q : Sylow p G}, P = Q ↔ ↑P = ↑Q\", \"doc\": \"For any natural number $p$ and group $G$, two Sylow $p$-subgroups $P$ and $Q$ of $G$ are equal if and only if their canonical subgroups (as subgroups of $G$) are equal. In symbols, $P = Q$ if and only\"}\n  {\"name\": \"Sylow.isPretransitive_of_finite\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \"[hp : Fact p.Prime] [Finite (Sylow p G)] : IsPretransitive G (Sylow p G)\", \"doc\": \"For a prime number $ p $ and a group $ G $, if the set of Sylow $ p $-subgroups of $ G $ is finite, then the action of $ G $ on its Sylow $ p $-subgroups is transitive.\"}\n  {\"name\": \"Sylow.card_eq_index_normalizer\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \"[Fact p.Prime] [Finite (Sylow p G)] (P : Sylow p G) : Nat.card (Sylow p G) = P.normalizer.index\", \"doc\": \"For a prime number $ p $ and a finite group $ G $, if $ P $ is a Sylow $ p $-subgroup of $ G $, then the number of Sylow $ p $-subgroups in $ G $ is equal to the index of the normalizer of $ P $ in $ \"}",
    "date": "2026-10-19",
    "verdict": "no match: inspected hits concern ordinary normalization, smooth or etale morphisms, Noetherianity, abstract Sylow groups, or unrelated uses of regular/log/nodal; none states this geometric assertion or a one-line generalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gabber local uniformization conditional reduction to marked nodal quotient models over regular pairs",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmooth f] (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"Let $f: X \\\\to Y$ be a smooth morphism of schemes. For any point $x \\\\in X$, there exist an open neighborhood $V$ of $x$ and an open neighborhood $U$ of $f(x)$ with $f(V) \\\\subseteq U$, such that the rin\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {n : ℕ} {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsSmoothOfRelativeDimension n f]\\n  (x : ↥X),\\n  ∃ U V,\\n    ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n      RingHom.IsStandardSmoothOfRelativeDimension n\\n        (CommRingCat.Hom.hom (Algebraic\", \"doc\": \"For every point $x$ in $X$, there exist open neighborhoods $U$ of $f(x)$ in $Y$ and $V$ of $x$ in $X$ such that $V$ is contained in the preimage of $U$ under $f$, and the induced ring homomorphism on \"}\n  {\"name\": \"StandardEtalePair\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"(R : Type u_1) → [CommRing R] → Type u_1\", \"doc\": \"A structure for a commutative ring $ R $ equipped with data defining a standard étale pair, used in the context of étale morphisms in algebraic geometry.\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.IsSmooth fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmooth\", \"doc\": \"A morphism of schemes is smooth if and only if it is locally standard smooth, meaning that for every point in the domain, there exists an open neighborhood where the morphism is isomorphic to a standa\"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ (n : ℕ),\\n  AlgebraicGeometry.HasRingHomProperty (@AlgebraicGeometry.IsSmoothOfRelativeDimension n)\\n    fun {R S} [CommRing R] [CommRing S] =>\\n    RingHom.Locally fun {R S} [CommRing R] [CommRing S] => RingHom.IsStandardSmoothOfRelativeDimension n\", \"doc\": \"For any natural number $ n $ and a morphism $ f: X \\to Y $ of schemes, the morphism $ f $ is smooth of relative dimension $ n $ if and only if it is locally standard smooth of relative dimension $ n $.\"}\n  {\"name\": \"AlgebraicGeometry.IsSmoothOfRelativeDimension\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"ℕ → {X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"For a natural number $n$ and a morphism $f: X \\\\to Y$ of schemes, the proposition that $f$ is smooth of relative dimension $n$.\"}\n  {\"name\": \"AlgebraicGeometry.isSmooth_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsSmooth f ↔\\n    ∀ (x : ↥X),\\n      ∃ U V,\\n        ∃ (_ : x ∈ ↑V) (e : ↑V ≤ (TopologicalSpace.Opens.map f.base).obj ↑U),\\n          (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appLE f (↑U) (↑V) e)).IsStandardSmooth\", \"doc\": \"A morphism of schemes $f: X \\\\to Y$ is smooth if and only if for every point $x \\\\in X$, there exist open subsets $V$ of $X$ and $U$ of $Y$ such that $x \\\\in V$, $f(V) \\\\subseteq U$, and the induced ring \"}\n  {\"name\": \"Algebra.IsSmoothAt.exists_notMem_isStandardSmooth\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothOfFree\", \"type\": \"∀ (R : Type u_1) {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] (p : Ideal S) [inst_4 : p.IsPrime] [Algebra.IsSmoothAt R p],\\n  ∃ f ∉ p, Algebra.IsStandardSmooth R (Localization.Away f)\", \"doc\": \"Given a finitely presented $ R $-algebra $ S $ and a prime ideal $ \\\\mathfrak{p} $ of $ S $ where $ S $ is formally smooth at $ \\\\mathfrak{p} $, there exists an element $ f \\\\in S $ not belonging to $ \\\\m\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: hits do not state the conditional nodal quotient reduction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Prime to ell uniformization proved by dimension induction using equivariant semistable curves and Sylow quotients",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Sylow.instFiniteQuotientSubgroupNormalizerOfFactPrime\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \"[Fact p.Prime] [Finite (Sylow p G)] (P : Sylow p G) : Finite (G ⧸ P.normalizer)\", \"doc\": \"For a prime number $ p $ and a finite Sylow $ p $-subgroup $ P $ of a group $ G $, the quotient group $ G $ modulo the normalizer of $ P $ is finite.\"}\n  {\"name\": \"Sylow.noConfusion\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \"{P : Sort u} →\\n  {p : ℕ} →\\n    {G : Type u_1} →\\n      {inst : Group G} →\\n        {t : Sylow p G} →\\n          {p' : ℕ} →\\n            {G' : Type u_1} →\\n              {inst' : Group G'} →\\n                {t' : Sylow p' G'} → p = p' → G = G' → inst ≍ inst' → t ≍ t' → Sylow.noConfusionType P t t'\", \"doc\": \"A type-theoretic principle asserting that if two Sylow $ p $-subgroups are equal, then their underlying subgroups, proofs of being $ p $-groups, and maximality conditions are equal. This ensures the s\"}\n  {\"name\": \"card_sylow_modEq_one\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \"[Fact p.Prime] [Finite (Sylow p G)] : Nat.card (Sylow p G) ≡ 1 [MOD p]\", \"doc\": \"For a prime number $p$ and a finite group $G$, the number of Sylow $p$-subgroups of $G$ is congruent to $1$ modulo $p$.\"}\n  {\"name\": \"Sylow.noConfusionType\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \"Sort u →\\n  {p : ℕ} →\\n    {G : Type u_1} →\\n      [inst : Group G] → Sylow p G → {p' : ℕ} → {G' : Type u_1} → [inst' : Group G'] → Sylow p' G' → Sort u\", \"doc\": \"A type-theoretic principle asserting that if two Sylow $ p $-subgroups are equal, then their underlying subgroups, proofs of being $ p $-groups, and maximality conditions are equal. This ensures the s\"}\n  {\"name\": \"Sylow.ext_iff\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \"∀ {p : ℕ} {G : Type u_1} [inst : Group G] {P Q : Sylow p G}, P = Q ↔ ↑P = ↑Q\", \"doc\": \"For any natural number $p$ and group $G$, two Sylow $p$-subgroups $P$ and $Q$ of $G$ are equal if and only if their canonical subgroups (as subgroups of $G$) are equal. In symbols, $P = Q$ if and only\"}\n  {\"name\": \"Sylow.orbit_eq_top\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \"[Fact p.Prime] [Finite (Sylow p G)] (P : Sylow p G) : orbit G P = ⊤\", \"doc\": \"For a prime $ p $, a finite group $ G $, and a Sylow $ p $-subgroup $ P $ of $ G $, the orbit of $ P $ under the conjugation action of $ G $ is equal to the entire set of Sylow $ p $-subgroups of $ G \"}\n  {\"name\": \"Ring.DimensionLeOne.prime_le_prime_iff_eq\", \"module\": \"Mathlib.RingTheory.DedekindDomain.Ideal.Lemmas\", \"type\": \"[Ring.DimensionLEOne R] {P Q : Ideal R} [hP : P.IsPrime] [hQ : Q.IsPrime] (hP0 : P ≠ ⊥) : P ≤ Q ↔ P = Q\", \"doc\": \"In a commutative ring of Krull dimension at most one, for any non-zero prime ideals $ P $ and $ Q $, the containment $ P \\\\subseteq Q $ holds if and only if $ P = Q $.\"}\n  {\"name\": \"IsPGroup.toSylow_coe\", \"module\": \"Mathlib.GroupTheory.Sylow\", \"type\": \"[Fact p.Prime] {P : Subgroup G} (hP1 : IsPGroup p P) (hP2 : ¬p ∣ P.index) : (hP1.toSylow hP2) = P\", \"doc\": \"If $ P $ is a $ p $-subgroup of a group $ G $ with index not divisible by $ p $, then the Sylow $ p $-subgroup constructed from $ P $ is equal to $ P $ itself, i.e., $ \\\\text{toSylow}(P) = P $.\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: hits do not state the conditional nodal quotient reduction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"IsRegular\"",
+   "results": "[loogle] OK 2 hit(s)\n  {\"name\": \"SSet.Subcomplex.Pairing.IsRegular.toIsProper\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.AnodyneExtensions.Pairing\", \"type\": \" {X : SSet} {A : X.Subcomplex} {P : A.Pairing} [self : P.IsRegular] : P.IsProper\", \"doc\": \"\"}\n  {\"name\": \"SSet.Subcomplex.PairingCore.IsRegular.toIsProper\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.AnodyneExtensions.PairingCore\", \"type\": \" {X : SSet} {A : X.Subcomplex} {h : A.PairingCore} [self : h.IsRegular] : h.IsProper\", \"doc\": \"\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: hits do not state the conditional nodal quotient reduction."
+  },
+  {
+   "tool": "grep",
+   "query": "uniformi[sz]ation|alteration|[Nn]odal",
+   "results": "[grep] OK 5 hit(s)\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"295\", \"text\": \"/-- Lagrange interpolation: given a finset `s : Finset ι`, a nodal map `v : ι → F` injective on\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"529\", \"text\": \"section Nodal\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"536\", \"text\": \"/-- `nodal s v` is the unique monic polynomial whose roots are the nodes defined by `v` and `s`.\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"538\", \"text\": \"That is, the roots of `nodal s v` are exactly the image of `v` on `s`,\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Lagrange.lean\", \"line\": \"541\", \"text\": \"We can use `nodal` to define the barycentric forms of the evaluated interpolant.\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: hits do not state the conditional nodal quotient reduction."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-gabber-prime-to-ell-regular-cover",
@@ -98,5 +272,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-uniformization-nodal-quotient-reduction",
+  "worker": "stage1",
+  "summary": "Follow ILO IX 1.3--1.4 with strong dimension induction and complete-local approximation. Preserve the marking and prime-to-ell degree during algebraization; separate the equivariant nodal and normalized-component comparison inputs omitted by existing nonequivariant statements. Apply the supplied marked-model assertion only after the base has been regularized by induction. Statement unchanged.",
+  "blueprint": "lem-per-artin-gabber-affine-curve Step 3 finiteness/duality branch via the existing uniformization chain; this split supplies ILO IX 1.3--1.4, not a new Fourier or six-functor route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+    "why": "Generic local algebra, scheme theory or topology tool for the ILO IX reduction; this unit contains no replacement statement."
+   },
+   {
+    "node": "lem-sc-normal-dim1-dvr",
+    "why": "Generic local algebra, scheme theory or topology tool for the ILO IX reduction; this unit contains no replacement statement."
+   },
+   {
+    "node": "def-sc-discrete-valuation-ring",
+    "why": "Generic local algebra, scheme theory or topology tool for the ILO IX reduction; this unit contains no replacement statement."
+   },
+   {
+    "node": "def-weil-regular-scheme",
+    "why": "Generic local algebra, scheme theory or topology tool for the ILO IX reduction; this unit contains no replacement statement."
+   },
+   {
+    "node": "def-trf-strict-normal-crossings-boundary",
+    "why": "Generic local algebra, scheme theory or topology tool for the ILO IX reduction; this unit contains no replacement statement."
+   },
+   {
+    "node": "lem-weil-pbc-sylow-subgroup-prime-index",
+    "why": "Generic local algebra, scheme theory or topology tool for the ILO IX reduction; this unit contains no replacement statement."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic local algebra, scheme theory or topology tool for the ILO IX reduction; this unit contains no replacement statement."
+   },
+   {
+    "node": "lem-sc-regular-connected-integral",
+    "why": "Generic local algebra, scheme theory or topology tool for the ILO IX reduction; this unit contains no replacement statement."
+   },
+   {
+    "node": "lem-trf-closed-dominant-dimension",
+    "why": "The generic finite proper dimension equality bounds the quotient base by d-1 during dimension induction; the unit has no dimension-theory replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+  "lem-sc-normal-dim1-dvr",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-regular-scheme",
+  "def-trf-strict-normal-crossings-boundary",
+  "lem-weil-pbc-sylow-subgroup-prime-index",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-sc-regular-connected-integral",
+  "lem-trf-closed-dominant-dimension"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q74-58e0fb335",
+  "group": "Q74",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-58e0fb335 (reviewer sub-agent of L); spot-checked: I read the item, all nine new nodes and every cited statement in full. Sources checked in ILO: IX 1.1-1.4 (pp.131-133), III 6.1-6.2 with proof (pp.43-45), V 2.1.1-2.1.2 and 3.1.1-3.1.4 (pp.64-66), II 1.2.5-1.2.9 and 2.1-2.3.4 (pp.25-28). The statement is unchanged against the base copy and no SGA is cited. Steps 1-9 follow IX 1.3-1.4: (1) III 6.2 descent; the proof of 6.2 already reduces to normal complete local rings, and the bounded form holds because henselization and completion keep the dimension. (2) Dimensions 0 and 1 are a field and a DVR. (3) V 3.1.3/3.1.4 algebraization. Shrinking to the normal component through w, dominance, generic fibre dimension 1, nowhere-density of Z_W and regularity of g all hold. Pullback by g is II 2.3.4 with 031E. (4) IX 1.3 preparation. The radicial degree is a power of p, so prime to ell, and |E| meets P° exactly in h^-1 Z_W. (5) IX 1.2 clauses (i)-(vi) and the admissibility sentence of 1.4. Quotients are proper birational, and the dimension is kept by 02JX. (6) Sylow step: [G:H] is prime to ell and the torsor comes from the free locus. (7)-(8) The normalized-component node checks out: decomposition group, finite normalization, Y'_i/G_i=Y_i, C_i integral by flatness, X_i proper birational to (X x_Y Y_i)_md because kappa(X)/kappa(Y) is regular, and these form a cover. Every clause of the assumed assertion is met. (9) The composition gives the exact snc preimage. FAULT, E2, the only one: lem-per-admissible-quotient-generic-degree claimed that quotients of any admissible, generically free action on any integral excellent Noetherian M are Noetherian, with M finite over the quotient. Nagarajan's order-2 action on K[[x,y]] (char 2, [K:K^2]=inf) is a counterexample. FIX: that node now assumes M separated and of finite type over an affine excellent S, with G acting by S-automorphisms, which is the case the item uses. lem-per-free-finite-action-torsor now states quotient existence and finiteness as explicit hypotheses. Item Step 6 now says why the quotient node applies. Duplicate search: lem-per-gabber-partial-algebraization is strictly henselian and has no marking, so it is not a duplicate. lem-per-projective-finite-group-quotient, lem-per-free-finite-group-affine-quotient, lem-per-torsor-subgroup-quotient-finite-etale and lem-per-completely-decomposed-etale-finite-subcover overlap but are not duplicates. The trf IX 1.2/1.3 nodes (relative-marked-nodal-reduction, stein-smooth-generic-curve, excellent-base-generic-curve-preparation) are trivial-group or partial forms and cannot be cited under batch 5; noted for the maintainer. Batch-5 flags: def-trf-strict-normal-crossings-boundary is a pure definition whose 12-node closure is all definitions; accepted. lem-trf-closed-dominant-dimension is the Stacks 02JX dimension formula; its closure reaches only generic trf dimension lemmas, no trace-formula or Poincare step and no nt-assume leaf; accepted. The declared tool_uses are accepted.; 3 file(s) fixed by the reviewer"
  }
 }
