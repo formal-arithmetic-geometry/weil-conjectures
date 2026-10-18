@@ -9,6 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FieldBaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.TensorBaseChange
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle.Devissage
 
 /-!
 # Base change for a pushforward tensored with a flat sheaf
@@ -86,8 +87,11 @@ theorem isIso_tensorBaseChangeMap_singleFunctor_of_flat [Finite Λ] {K : Type u}
     (𝓕 : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     IsIso (tensorBaseChangeMap (ModuleCat.{u + 1} Λ) h e f' g sq₂.w
       ((L((p)^*[ModuleCat.{u + 1} Λ])).obj ((DerivedCategory.singleFunctor _ 0).obj 𝓔))
-      ((DerivedCategory.singleFunctor _ 0).obj 𝓕)) :=
-  sorry
+      ((DerivedCategory.singleFunctor _ 0).obj 𝓕)) := by
+  have : QuasiCompact h := MorphismProperty.of_isPullback sq₂.flip inferInstance
+  have : QuasiSeparated h := MorphismProperty.of_isPullback sq₂.flip inferInstance
+  exact isIso_tensorBaseChangeMap_singleFunctor_of_flat_of_lowerStar Λ a p f' h e g sq₂.w
+    (fun π _ 𝓕 ↦ isIso_tensorBaseChangeMap_lowerStar_unit Λ a b p f' h e g sq₁ sq₂ π 𝓕) 𝓔 h𝓔 𝓕
 
 end Etale
 
