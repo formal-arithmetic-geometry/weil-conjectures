@@ -7,7 +7,6 @@ module
 
 public import Sheaf.AlgebraicGeometry.BaseChangeInverseImageIso
 public import Sheaf.AlgebraicGeometry.DerivedCategories
-public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompCoherence
 import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Mates
 

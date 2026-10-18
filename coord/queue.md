@@ -1,6 +1,6 @@
 # Work queue
 
-78 items; claim with `tools/claim.py next <group> [--stage N]`.
+64 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (78)
+## Stage 3: modules to prove (64)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -18,41 +18,27 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.WeilSheaf.AdicFiniteCoefficientBound` | 4 | 1 | proof | route |
 | `Sheaf.WeilSheaf.CompactSupportFiniteCoefficientComparison` | 4 | 1 | proof | route |
 | `Sheaf.WeilSheaf.AffineCurveRangePositive` | 5 | 1 | proof | route |
-| `Sheaf.AlgebraicGeometry.ProperOpenComparisonComposition` | 6 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.AdicDenseOpenImmersionFiniteness` | 7 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.AdicProjectiveSpaceFiniteness` | 7 | 1 | proof | route |
-| `Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCompCanonical` | 7 | 1 | proof | route |
-| `Sheaf.AlgebraicGeometry.ProperOpenComparisonIdentityAux` | 7 | 1 | proof | route |
-| `Sheaf.AlgebraicGeometry.ProperOpenInterchangeComposition` | 7 | 1 | proof | route |
-| `Sheaf.AlgebraicGeometry.ProperOpenInterchangeRefinementNormalization` | 7 | 1 | proof | route |
-| `Sheaf.Paper.GaloisLisseAdicCompatibility` | 7 | 1 | proof | route |
-| `Sheaf.Paper.GaloisLisseAdicEquivalences` | 7 | 1 | proof | route |
-| `Sheaf.Paper.GaloisLisseFiniteCompatibility` | 7 | 1 | proof | route |
-| `Sheaf.Paper.GaloisLisseFiniteModuleLift` | 7 | 1 | proof | route |
-| `Sheaf.Paper.LisseAdicFiberFunctors` | 7 | 1 | proof | route |
-| `Sheaf.AlgebraicGeometry.ProperSupportGeometricStalk` | 8 | 1 | proof | route |
-| `Sheaf.NumberTheory.Padics.AdicLimitFiniteModules` | 8 | 1 | proof | route |
 | `WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension` | 8 | 4 | proof | route |
-| `WeilConjectures.WeilSheaf.ArtinSchreierDual` | 8 | 1 | proof | route |
-| `Sheaf.RepresentationTheory.ProfiniteStableLatticeCore` | 9 | 1 | proof | route |
-| `Sheaf.RepresentationTheory.ProfiniteStableLatticeTopology` | 9 | 1 | proof | route |
-| `Sheaf.AlgebraicGeometry.EtaleCompactificationGraphIso` | 12 | 1 | proof | route |
-| `Sheaf.AlgebraicGeometry.EtaleFiniteTwistExponentLine` | 14 | 1 | proof | route |
-| `Sheaf.AlgebraicGeometry.EtaleFiniteTwistSignedCoherence` | 14 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction` | 3 | 6 | proof | 1 |
 | `Sheaf.AlgebraicGeometry.BoundedBelowDerivedSmoothBaseChange` | 5 | 1 | proof | 1 |
 | `Sheaf.AlgebraicGeometry.CompactSupportFiniteTorsion` | 5 | 1 | proof | 1 |
 | `Sheaf.CategoryTheory.Galois.GaloisTransitive` | 5 | 1 | proof | 1 |
 | `Sheaf.AlgebraicGeometry.EtaleNormalComponents` | - | 1 | proof | 1 |
+| `Sheaf.AlgebraicGeometry.ProperOpenComparisonComposition` | 6 | 1 | proof | 2 |
 | `Sheaf.CategoryTheory.Galois.StacksGaloisObjectExists` | 6 | 1 | proof | 2 |
 | `Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction` | 6 | 3 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.ProperSupportSheafComposition` | 7 | 1 | proof | 2 |
+| `Sheaf.Paper.LisseAdicFiberFunctors` | 7 | 1 | proof | 2 |
+| `Sheaf.NumberTheory.Padics.AdicLimitFiniteModules` | 8 | 1 | proof | 2 |
 | `Sheaf.Algebra.Homology.RingedSiteBoundedFreeRHomModel` | - | 1 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage` | - | 2 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.QcqsHigherDirectImage` | - | 1 | proof | 2 |
 | `Sheaf.CategoryTheory.RingedTowerPushforwardLimitComparison` | - | 1 | proof | 2 |
 | `Sheaf.Paper.FiniteTensorConstructibleCohomology` | - | 1 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.RationalUnramifiedCotangentCriterion` | 6 | 1 | proof | 3 |
+| `Sheaf.AlgebraicGeometry.ProperSupportGeometricStalk` | 8 | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.ClosedSupportHom` | - | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.EtaleCompactSupportNormalization` | - | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.NowhereDenseDimZero` | - | 1 | proof | 3 |
@@ -101,9 +87,9 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 |---|---|---|---|
 | `Sheaf.SmoothPurity.NormalizedWitness` | 1 | 1 | `lem-pur-finite-smooth-adjunction-general-base` |
 | `WeilConjectures.ZetaFunction.TraceFormula` | 2 | 1 | `def-weil-global-geometric-frobenius` |
-| `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalBounded` | 3 | 1 | `det-cor-existence-ii-restriction` |
-| `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructibleCohomology` | 3 | 1 | `det-cor-existence-ii-restriction` |
-| `Sheaf.PoincareDuality.ProperProjectionFormulaBounded` | 3 | 1 | `lem-pd-module-ringed-topos-derived-comparison` |
+| `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalBounded` | 3 | 1 | `sk-thm-int-restriction` |
+| `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructibleCohomology` | 3 | 1 | `sk-thm-int-restriction` |
+| `Sheaf.PoincareDuality.ProperProjectionFormulaBounded` | 3 | 1 | `det-thm-sfb-proper-base-change-integral` |
 | `Sheaf.WeilSheaf.CohomologyGeometricConjugacy` | 4 | 1 | `def-weil-global-geometric-frobenius` |
 | `Sheaf.AlgebraicGeometry.EllAdicProperTruncationBound` | 5 | 1 | `det-proper-unbounded-window-arbitrary` |
 | `WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy` | 5 | 7 | `lem-fd-rational-coefficient-category-comparison` |
@@ -122,7 +108,6 @@ Not items: an open Orchestra branch or PR of the source library proves the modul
 | `WeilConjectures.DeligneLaumon.AffineLine.Perverse` | bundle/sec-deligne-laumon-a1-d1 |
 | `WeilConjectures.DeligneLaumon.Reduction.RealSheaves` | bundle/sec-deligne-laumon-general-d1 |
 | `WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary` | bundle/sec-purity-real-sheaves-d1 |
-| `WeilConjectures.SixFunctors.Etale.Derived.Exchange` | bundle/sec-smooth-purity-c2 |
 | `WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CohomologicalDimension` | bundle/sec-smooth-purity-d5 |
 | `WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients` | bundle/sec-six-functors-c1 |
 | `WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary` | bundle/sec-smooth-purity-d2 |
@@ -130,6 +115,7 @@ Not items: an open Orchestra branch or PR of the source library proves the modul
 | `WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromy` | bundle/sec-purity-real-sheaves-d1 |
 | `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect` | bundle/sec-poincare-duality-c1 |
 | `WeilConjectures.WeilSheaf.AffineLineCohomology` | bundle/sec-fourier-transform-d1 |
+| `WeilConjectures.WeilSheaf.ArtinSchreierDual` | bundle/sec-fourier-transform-d1 |
 | `WeilConjectures.WeilSheaf.CurveEndpoints` | bundle/sec-deligne-laumon-a1-d1 |
 | `WeilConjectures.WeilSheaf.DenseOpen` | bundle/sec-purity-real-sheaves-d1 |
 | `WeilConjectures.WeilSheaf.FourierInversion.Composite` | bundle/sec-fourier-transform-d1 |
