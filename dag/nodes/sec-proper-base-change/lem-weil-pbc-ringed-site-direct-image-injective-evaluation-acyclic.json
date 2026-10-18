@@ -34,7 +34,7 @@
  ],
  "proof": [
   {
-   "text": "Put $P=f_*I$ and forget its scalar action. For a covering $\\mathcal V=\\{V_j\\to V\\}$ of $\\mathcal C$, continuity of $u$ carries it to the covering $u\\mathcal V=\\{u(V_j)\\to u(V)\\}$ of $\\mathcal D$. Its covering-base-change comparison identifies $u(V_{j_0}\\times_V\\cdots\\times_VV_{j_p})$ with $u(V_{j_0})\\times_{u(V)}\\cdots\\times_{u(V)}u(V_{j_p})$ by induction on $p$. The isomorphisms preserve each tuple projection, since each comparison is characterized by its projections. Apply the contravariant restriction maps of $I$ to these comparisons, component by component, and take products. This gives an isomorphism $\\check C^\\bullet(\\mathcal V,P_{ab})\\cong\\check C^\\bullet(u\\mathcal V,I_{ab})$: both differentials are the same alternating sum of restrictions along the projections omitting one index. The ring map $\\rho$ only supplies the scalar action on $P$ and does not enter this additive complex.",
+   "text": "Put P=f_*I and choose any SiteCechComplex for each covering of C. Use the existing proved CategoryTheory.mapped_product_universal from Sheaf.CategoryTheory.ColimitSiteCechTransport (made public for reuse). By induction on the number of tuple factors, its image under F has the same universal property: in degree zero the projection is an isomorphism; in the successor step the tuple product is a pullback of the first covering arrow along the remaining tuple product. hpullback preserves this pullback. Use the image objects, projections and index maps themselves as the chosen SiteCechComplex in D. Functoriality verifies the compatibility equations. The underlying additive section complex of P on the original choice is then definitionally the section complex of I on the image choice, including the alternating differentials. hcover gives the image covering. The scalar action through rho does not enter this comparison.",
    "uses": [
     "def-weil-pbc-sites-and-cohomology",
     "def-weil-pbc-site-cech-complex"
@@ -70,9 +70,10 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison] to the $\\mathcal O_{\\mathcal C}$-module $P=f_*I$. The common universe and enough-injectives hypotheses are those of the item. Its comparison gives $R^q\\Gamma(U,-)(f_*I)\\cong H^q(U,P_{ab})=0$ for every $q>0$, proving the required module-category derived vanishing. No step uses exactness of extension of scalars or claims that $f_*I$ is injective, so no flatness of $\\rho$ is needed.",
+   "text": "Apply [lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison] to P=f_*I. Its natural comparison identifies module-derived evaluation with derived evaluation in abelian sheaves. Convert the Ext-defined H^q(U,P_ab) from step 3 to derived abelian evaluation using the already proved generic comparison [lem-sc-site-cohomology-right-derived-sections]. HasExt in the common universe follows from enough injectives and local smallness for abelian sheaves. Transport IsZero across these two isomorphisms. The module evaluation functor in the conclusion agrees definitionally with evaluation after toSheaf. No step uses exactness of extension of scalars or injectivity of f_*I, so no flatness of rho is needed.",
    "uses": [
-    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
+    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "lem-sc-site-cohomology-right-derived-sections"
    ],
    "elementary": false,
    "source": {
@@ -84,6 +85,7 @@
  "proof_deps": [
   "def-weil-pbc-site-cech-complex",
   "def-weil-pbc-sites-and-cohomology",
+  "lem-sc-site-cohomology-right-derived-sections",
   "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
   "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
   "lem-weil-pbc-sheafification-exact",
@@ -93,7 +95,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 072Z proof for a morphism induced by a continuous functor, using 03FC and 03F9, followed by 03FD for module-category evaluation"
+  "place": "Tag 072Z proof via the continuous functor covering/base-change comparisons, 03FC and 03F9, followed by 03FD; the formal Ext-to-derived-evaluation identification uses the proved generic Section 01FT comparison"
  },
  "mathlib_searches": [
   {
@@ -234,5 +236,15 @@
   "by": "NS",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261018T071231-L-1680332",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

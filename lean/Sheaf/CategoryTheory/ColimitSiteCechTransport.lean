@@ -21,7 +21,14 @@ private theorem product_ext {C : Type u} [Category C] {T : Type u} {U : C}
     (fun k ↦ by simp only [Category.assoc]; rw [S.comm])
   exact (hu a h).trans (hu b (fun _ ↦ rfl)).symm
 
-private theorem mapped_product_universal {C D : Type u} [Category C] [Category D]
+/-- A functor preserving pullbacks along the covering arrows preserves their iterated products.
+
+Source: Stacks Project, Sites, Tag 00WV, and the product calculation in Tag 09YL.
+The one-factor case uses `pr_zero`. Inductively, express a tuple product as the
+pullback of its first factor and its remaining tuple product over the base.
+Preservation of this pullback and the induction hypothesis give the desired
+universal property. Uniqueness follows from the two pullback projections. -/
+theorem mapped_product_universal {C D : Type u} [Category C] [Category D]
     {T : Type u} {U : C} {f : T → C} {hom : ∀ t, f t ⟶ U}
     (S : SiteCechComplex f hom) (A : C ⥤ D)
     (hp : ∀ (t : T) (Z : C) (g : Z ⟶ U), PreservesLimit (cospan (hom t) g) A)
