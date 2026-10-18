@@ -35,7 +35,10 @@ theorem constantCommRingUnit_locallyInjective
       (Functor.whiskerRight
         (toSheafify J ((Functor.const Cᵒᵖ).obj (CommRingCat.of B)))
         (forget₂ CommRingCat.{u} RingCat.{u})) := by
-  sorry
+  constructor
+  intro X x y h
+  exact Presheaf.equalizerSieve_mem J
+    (toSheafify J ((Functor.const Cᵒᵖ).obj (CommRingCat.of B))) x y h
 
 attribute [instance] constantCommRingUnit_locallyInjective
 
@@ -51,7 +54,10 @@ theorem constantCommRingUnit_locallySurjective
       (Functor.whiskerRight
         (toSheafify J ((Functor.const Cᵒᵖ).obj (CommRingCat.of B)))
         (forget₂ CommRingCat.{u} RingCat.{u})) := by
-  sorry
+  constructor
+  intro U s
+  exact Presheaf.imageSieve_mem J
+    (toSheafify J ((Functor.const Cᵒᵖ).obj (CommRingCat.of B))) s
 
 attribute [instance] constantCommRingUnit_locallySurjective
 
