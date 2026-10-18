@@ -1,0 +1,114 @@
+{
+ "id": "def-trf-endofunctor-powers",
+ "kind": "definition",
+ "title": "Natural-number powers of an endofunctor",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ be a category [def-nagata-category] and let $T:\\mathcal C\\to\\mathcal C$ be an endofunctor (a map on objects and morphisms preserving identities and composition). Its natural-number powers are the endofunctors $T^n$, defined recursively by $T^0=\\mathrm{id}_{\\mathcal C}$ and $T^{n+1}=T\\circ T^n$ for every $n\\in\\mathbb N$. Thus $T^n(x)$ and $T^n(f)$ are the $n$-fold iterates on objects and morphisms, including the identity at $n=0$.",
+ "stmt_deps": [
+  "def-nagata-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/simplicial.tex",
+  "place": "Example 0G5M (example-godement), the repeated-composition endofunctors X_n, and Lemma 0G5N (lemma-godement), notation 1_a for a >= 0 including the zero power."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural number powers of an endofunctor with zero the identity and successor composition",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Function.iterate_succ\", \"module\": \"Mathlib.Logic.Function.Iterate\", \"type\": \"(n : ℕ) : f^[n.succ] = f^[n] ∘ f\", \"doc\": \"For any natural number $ n $, $ f^{n+1} = f^n \\\\circ f $.\"}\n  {\"name\": \"Function.iterate_zero\", \"module\": \"Mathlib.Logic.Function.Iterate\", \"type\": \": f^[0] = id\", \"doc\": \"The zeroth iterate of a function $ f $ is the identity function, i.e., $ f^0 = \\\\text{id} $.\"}\n  {\"name\": \"Monoid.npow\", \"module\": \"Mathlib.Algebra.Group.Defs\", \"type\": \"{M : Type u} → [self : Monoid M] → ℕ → M → M\", \"doc\": \"For a monoid $ M $, the function $ \\\\text{npow} $ takes a natural number $ n $ and an element $ m \\\\in M $, and returns $ m^n $, which is the product of $ m $ multiplied by itself $ n $ times. When $ n \"}\n  {\"name\": \"CategoryTheory.Equivalence.powNat\", \"module\": \"Mathlib.CategoryTheory.Equivalence\", \"type\": \"(e : C ≌ C) : ℕ → (C ≌ C)\", \"doc\": \"A recursive function that defines the exponentiation of an equivalence $ e : \\\\mathcal{C} \\\\simeq \\\\mathcal{C} $ by a natural number $ n $, with base cases $ e^0 = \\\\text{id}_\\\\mathcal{C} $ and $ e^1 = e $\"}\n  {\"name\": \"Nat.iterate\", \"module\": \"Mathlib.Logic.Function.Iterate\", \"type\": \"{α : Sort u} (op : α → α) : ℕ → α → α\", \"doc\": \"The function `Nat.iterate` takes a function $ f : \\\\alpha \\\\to \\\\alpha $, a natural number $ n $, and an element $ a \\\\in \\\\alpha $, and returns $ f^n(a) $, the result of applying $ f $ to $ a $ exactly $ \"}\n  {\"name\": \"AlgHom.coe_pow\", \"module\": \"Mathlib.Algebra.Algebra.Hom\", \"type\": \"(φ : A →ₐ[R] A) (n : ℕ) : ⇑(φ ^ n) = φ^[n]\", \"doc\": \"For any algebra endomorphism $\\\\phi : A \\\\to A$ over a commutative semiring $R$ and any natural number $n$, the function obtained by raising $\\\\phi$ to the power $n$ (via composition) is equal to the $n$\"}\n  {\"name\": \"powMonoidWithZeroHom\", \"module\": \"Mathlib.Algebra.GroupWithZero.Hom\", \"type\": \": M₀ →*₀ M₀\", \"doc\": \"For a commutative monoid with zero $M_0$ and a natural number $n \\\\neq 0$, `powMonoidWithZeroHom` is the monoid-with-zero endomorphism on $M_0$ defined by the power function $x \\\\mapsto x^n$.\"}\n  {\"name\": \"instMonoidEnd\", \"module\": \"Mathlib.Algebra.Group.End\", \"type\": \": Monoid (Function.End α)\", \"doc\": \"The set of endofunctions on a type $\\\\alpha$ forms a monoid under function composition. The monoid operation is function composition $\\\\circ$, the identity element is the identity function $\\\\text{id}_\\\\a\"}\n",
+   "date": "2026-10-18",
+   "verdict": "Reuse the existing CategoryTheory.NaturalTransport.power, not a new definition. Mathlib hits concern functions, equivalences or formal coproduct powers; none is this plain endofunctor recursion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.iterate",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.Functor.iterate'\n",
+   "date": "2026-10-18",
+   "verdict": "Reuse the existing CategoryTheory.NaturalTransport.power, not a new definition. Mathlib hits concern functions, equivalences or formal coproduct powers; none is this plain endofunctor recursion."
+  },
+  {
+   "tool": "grep",
+   "query": "def (power|iterate)|endofunctor.*power",
+   "results": "[grep] OK 10 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"line\": \"364\", \"text\": \"def iteratedSliceForward : Over f ⥤ Over f.left where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"line\": \"370\", \"text\": \"def iteratedSliceBackward : Over f.left ⥤ Over f where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"line\": \"382\", \"text\": \"def iteratedSliceEquiv : Over f ≌ Over f.left where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"line\": \"400\", \"text\": \"def iteratedSliceForwardNaturalityIso {g : Over X} (p : f ⟶ g) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Comma/Over/Basic.lean\", \"line\": \"414\", \"text\": \"def iteratedSliceEquivOverMapIso {f g : Over X} (p : f ⟶ g) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/FormalCoproducts/Cech.lean\", \"line\": \"34\", \"text\": \"noncomputable def power (U : FormalCoproduct.{w} C) (α : Type t)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/FormalCoproducts/Cech.lean\", \"line\": \"46\", \"text\": \"noncomputable def powerπ (a : α) : U.power α ⟶ U where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/FormalCoproducts/Cech.lean\", \"line\": \"86\", \"text\": \"noncomputable def powerMap {U V : FormalCoproduct.{w} C} (f : U ⟶ V) (α : Type t)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/FormalCoproducts/Cech.lean\", \"line\": \"118\", \"text\": \"noncomputable def powerFunctor (α : Type t) [HasProductsOfShape α C] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/FormalCoproducts/Cech.lean\", \"line\": \"179\", \"text\": \"noncomputable def powerBifunctor [HasProducts.{t} C] :\"}\n",
+   "date": "2026-10-18",
+   "verdict": "Reuse the existing CategoryTheory.NaturalTransport.power, not a new definition. Mathlib hits concern functions, equivalences or formal coproduct powers; none is this plain endofunctor recursion."
+  },
+  {
+   "tool": "grep",
+   "query": "def (power|iterate)|endofunctor.*power in WeilConjectures and lean/Sheaf/CategoryTheory",
+   "results": "/home/ubuntu/weil-newtargets-shared/lean/Sheaf/CategoryTheory/IntegerShiftFromOne.lean:64:private noncomputable def iterated (a : I(1 : ℤ)) (n : ℤ) : I n :=\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/CategoryTheory/NaturalTransportInduction.lean:33:def power {C : Type u₁} [Category.{v₁} C] (T : C ⥤ C) : ℕ → C ⥤ C\n/home/ubuntu/weil-src-slopmaster2/WeilConjectures/AlgebraicGeometry/AbsoluteFrobenius.lean:53:noncomputable def iterateFrobenius : X ⟶ X where\n/home/ubuntu/weil-src-slopmaster2/WeilConjectures/Mathlib/AlgebraicGeometry/AffineSpace.lean:600:def iteratedAffineLine (S : Scheme.{u}) : ℕ → Scheme.{u}\n/home/ubuntu/weil-src-slopmaster2/WeilConjectures/Mathlib/AlgebraicGeometry/AffineSpace.lean:606:def iteratedAffineLineProj (S : Scheme.{u}) : ∀ r : ℕ, iteratedAffineLine S r ⟶ S\n/home/ubuntu/weil-src-slopmaster2/WeilConjectures/Mathlib/AlgebraicGeometry/AffineSpace.lean:721:noncomputable def iteratedAffineLine.evalCoord (S : Scheme.{u}) (r : ℕ) :\n/home/ubuntu/weil-src-slopmaster2/WeilConjectures/Mathlib/Algebra/CharP/Lemmas.lean:29:def iterateFrobeniusOfPrime (R : Type*) [CommRing R] {p : ℕ} (hp : p.Prime) (hR : (p : R) = 0)\n/home/ubuntu/weil-src-slopmaster2/WeilConjectures/Mathlib/CategoryTheory/Functor/Basic.lean:42:def iterate (G : C ⥤ C) : ℕ → C ⥤ C\n",
+   "date": "2026-10-18",
+   "verdict": "Exact existing match: CategoryTheory.NaturalTransport.power in Sheaf.CategoryTheory.NaturalTransportInduction. Also found upstream Functor.iterate with the same recursive convention; no new Lean definition is written. The consumer already uses NaturalTransport.power, as the return explicitly requires retaining."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-comonad-simplicial-object",
+  "date": "2026-10-18",
+  "group": "NZ"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Proof (1)--(2), semistable-alteration input in the nearby-cycle branch: ILO Exposé X, Theorem 3.4, Step 3, invoking Temkin 2010, Theorems 1.5 and 1.1 for a semistable multipointed modification. Temkin proof component: Marked dualizing line bundle and contracted-component degrees. Auxiliary input: Local complete-intersection determinant adjunction underlying the marked dualizing construction, before the marking is inserted. Supporting ring/sheaf input: Functorial standard resolutions and comparison with arbitrary polynomial resolutions. Generic input to lem-trf-cotangent-resolution-coherence: Standard simplicial object of an adjunction and its homotopy equivalences. Foundational construction: powers of a counital coassociative endofunctor, used in Stacks 08NC via Godement Lemma 0G5N. Definition of the powers T^n used in the comonad simplicial construction.",
+   "via": [
+    "lem-trf-comonad-simplicial-object",
+    "lem-trf-adjunction-standard-simplicial-homotopy",
+    "lem-trf-cotangent-resolution-coherence",
+    "lem-trf-lci-cotangent-presentation",
+    "lem-trf-flat-lci-canonical-adjunction",
+    "lem-trf-marked-nodal-dualizing-degrees",
+    "lem-trf-temkin-stable-modification",
+    "lem-trf-stable-modification-flat-curve-pair",
+    "lem-trf-dejong-relative-marked-semistable",
+    "lem-trf-relative-marked-nodal-reduction",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.NaturalTransportInduction",
+  "declaration": "CategoryTheory.NaturalTransport.power",
+  "statement": "def power {C : Type u₁} [Category.{v₁} C] (T : C ⥤ C) : ℕ → C ⥤ C",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Reuses the already published real recursive definition: zero is the identity functor and successor is power T n ⋙ T. This definition has no dependency on compared_eq or its sorry proof; this node owns the plain powers notion for statement dependencies, as required by the H2 return."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9462fba9d",
+  "group": "NZ",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9462fba9d",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Re-delivery after H2 return (fb67a260); Lean file byte-identical. Adds new def node def-trf-endofunctor-powers with existing:true record on unchanged Sheaf.CategoryTheory.NaturalTransportInduction / CategoryTheory.NaturalTransport.power (signature verbatim, statement T^0=id, T^{n+1}=T∘T^n matches recursion, cites live def-nagata-category, source Stacks 0G5M/0G5N); item stmt_deps now [def-weil-pbc-simplicial-object, def-trf-endofunctor-powers], no theorem dep, no other node change vs live. power is the only owner-module decl used; no competing owner live or in runs/2; no cycle. Statement re-checked vs 0G5N: counit/coassoc hyps, faces T^i e T^{n+1-i}, degeneracies T^i c T^{n-i}, augmentation degree-0 = e, evaluation functor pinned; edge cases fine. nt_compile --json clean 1.4 s exit 0. Advisory: lem-trf-global-frobenius-iterate-formula can later cite the new def node."
+ }
+}

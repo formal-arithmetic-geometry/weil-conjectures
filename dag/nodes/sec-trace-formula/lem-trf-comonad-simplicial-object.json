@@ -8,7 +8,8 @@
   "place": "Tag 0G5N, lemma-godement, with the construction in Example 0G5M (example-godement)."
  },
  "stmt_deps": [
-  "def-weil-pbc-simplicial-object"
+  "def-weil-pbc-simplicial-object",
+  "def-trf-endofunctor-powers"
  ],
  "proof": [
   {
@@ -231,5 +232,24 @@
   "group": "Q18",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-faf179217 (reviewer sub-agent of L); spot-checked: Read Stacks simplicial.tex 0G5M (example-godement), 0G5N (lemma-godement) with its full proof, and 016B (lemma-characterize-simplicial-object) (1)(a)-(e), (2), (3). The item statement is unchanged from live (unsplit; same stmt_deps) and matches 0G5N hypothesis by hypothesis: T,e,c are Y,d,s, the counit and coassociativity equations agree, and every degree is covered. I recomputed every step. Step 1: interchange law from naturality. Steps 2-5: all five relations by explicit words with checked index ranges; (c) uses the counits and (e) with i=j uses coassociativity. Step 6: new node applied in Fun(C,C), size handled by a containing universe. Step 7: A_n=e^{*(n+1)}, with (e*e)c=e from e*e=e(e*1_1) and the counit law. Step 8: the new node's morphism clause turns this into an augmentation. Step 9: naturality of evaluation. New node lem-trf-simplicial-operators-reconstruction: true, statement-only, self-contained, exactly 016B(2),(3), with all searches recorded. The pinned Mathlib only announces the GenRel equivalence (GeneratorsRelations/Basic.lean:18, NormalForms.lean:27), so the node is not a leaf. It is not a duplicate: simplex-presentation-faithful gives only faithfulness, godement-relations covers concrete module operators, monadic-bar-totalization is enriched/derived, and no blueprint node carries 0G5N or 016B. It is not a restatement of the item (D1). Blueprint from/via are correct. The route stays in unit sk-i-curve-zero, so no tool_uses. The parent's step 2 uses exactly the item's statement. No cycle, no SGA. Advisory: the inherited statement uses augmentation/const without a definition node; this is standard and not a split fault. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ComonadSimplicialObject",
+  "declaration": "CategoryTheory.comonad_simplicial_object",
+  "file": "lean/Sheaf/CategoryTheory/ComonadSimplicialObject.lean",
+  "statement": "theorem comonad_simplicial_object {C : Type u} [Category.{v} C] (T : C ⥤ C) (e : T ⟶ 𝟭 C) (c : T ⟶ T ⋙ T) (h₁ : c ≫ Functor.whiskerRight e T ≫ (Functor.leftUnitor T).hom = 𝟙 T) (h₂ : c ≫ Functor.whiskerLeft T e ≫ (Functor.rightUnitor T).hom = 𝟙 T) (h₃ : c ≫ Functor.whiskerRight c T ≫ (Functor.associator T T T).hom = c ≫ Functor.whiskerLeft T c) : ∃ (B : SimplicialObject (C ⥤ C)) (α : B ⟶ (SimplicialObject.const (C ⥤ C)).obj (𝟭 C)), (∀ n : ℕ, B.obj (Opposite.op (SimplexCategory.mk n)) = NaturalTransport.power T (n + 1)) ∧ (∀ (n : ℕ) (i : Fin (n + 2)), HEq (B.δ i) (Functor.whiskerLeft (NaturalTransport.power T (n + 1 - i.val)) (Functor.whiskerRight e (NaturalTransport.power T i.val)))) ∧ (∀ (n : ℕ) (i : Fin (n + 1)), HEq (B.σ i) (Functor.whiskerLeft (NaturalTransport.power T (n - i.val)) (Functor.whiskerRight c (NaturalTransport.power T i.val)))) ∧ HEq (α.app (Opposite.op (SimplexCategory.mk 0))) e ∧ ∃ E : C ⥤ SimplicialObject.Augmented C, E ⋙ SimplicialObject.Augmented.drop = B.flip ∧ E ⋙ SimplicialObject.Augmented.point = 𝟭 C ∧ ∀ (x : C) (n : SimplexCategoryᵒᵖ), HEq ((E.obj x).hom.app n) ((α.app n).app x)",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Reuses CategoryTheory.NaturalTransport.power through definition node def-trf-endofunctor-powers. HEq specifies the literal whiskered operators across equal parenthesized power functors; it is equality, not an arbitrary comparison isomorphism. Evaluation is a functor to Mathlib augmented simplicial objects."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9462fba9d",
+  "group": "NZ",
+  "result": "pass",
+  "note": "Re-delivery after H2 return (fb67a260); Lean file byte-identical. Adds new def node def-trf-endofunctor-powers with existing:true record on unchanged Sheaf.CategoryTheory.NaturalTransportInduction / CategoryTheory.NaturalTransport.power (signature verbatim, statement T^0=id, T^{n+1}=T∘T^n matches recursion, cites live def-nagata-category, source Stacks 0G5M/0G5N); item stmt_deps now [def-weil-pbc-simplicial-object, def-trf-endofunctor-powers], no theorem dep, no other node change vs live. power is the only owner-module decl used; no competing owner live or in runs/2; no cycle. Statement re-checked vs 0G5N: counit/coassoc hyps, faces T^i e T^{n+1-i}, degeneracies T^i c T^{n-i}, augmentation degree-0 = e, evaluation functor pinned; edge cases fine. nt_compile --json clean 1.4 s exit 0. Advisory: lem-trf-global-frobenius-iterate-formula can later cite the new def node."
  }
 }

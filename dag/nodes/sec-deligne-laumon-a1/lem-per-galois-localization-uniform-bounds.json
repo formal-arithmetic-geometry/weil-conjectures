@@ -22,7 +22,10 @@
   "def-weil-pbc-inverse-image",
   "def-weil-pbc-direct-image",
   "def-weil-pbc-constant-sheaf",
-  "def-weil-sheaf-of-modules-category"
+  "def-weil-sheaf-of-modules-category",
+  "def-per-galois-partition-modules",
+  "def-per-etale-support-functors",
+  "def-per-etale-evaluation-biduality"
  ],
  "proof": [
   {
@@ -483,5 +486,23 @@
   "group": "Q52",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-ba976265e (reviewer sub-agent of L); spot-checked: I read in full the item (12 steps), the new node lem-per-directed-galois-finite-tensor-generators, every cited statement, and ILO XVII 7.3.1-7.4.7 and 7.6.3-7.6.10 (printed pp.303-314). Route: the item follows ILO. Step 4 is 7.6.3: the localization triangle with K=j_!L kills the first term, so Rj_*M = D_X j_! D_U M, and Step 3 shows j*Q is dualizing. Steps 5-8 are 7.6.5 extended to A by a Λ-basis comparison N_X⊗R^qj_*C = R^qj_*(N_U⊗C); the filtered-colimit lemma applies because j is qcqs and the sheaves are killed by ℓ. Steps 10-12 are 7.6.6 (the printed 'ouverte' is a typo), with d_i=d+1 matching ILO's c'+1. Every partition and bound is fixed before the complex. Hypotheses: the localization triangle (K bounded, N in D^+) is applied correctly in Steps 4 and 11; Step 11 uses the same Ri^! definition, RHom(A,-)=id and i*i_*=1. New node: true. It combines ILO 7.4.2, 7.4.3/7.4.4 and 7.4.6/7.4.7, with the finite list C = k_{i!}T(σ) for σ simple Λ[K_i]-modules, independent of A. ILO writes B=A[K]; Λ[K] is meant. I re-checked the one-stratum dévissage under the DAG's étale-locally-constant reading of W_P: the constant part descends, so the claim stays true. Small cases checked: X empty, E=0, K trivial, K=Z/ℓ. It does not restate a clause of the item. Not a duplicate of lem-per-constructible-finite-monodromy-filtration (stratification chosen per E), lem-per-prime-field-tensor-devissage (triangulated 7.4.1), the 7.4.7 module node, cover-module-descent, exact-refinement or tensor-closure. The node has no proof steps, the source is ILO with no SGA, and its blueprint fields and searches are recorded. Batch 5, all three accepted: the two pod nodes are generic sheaf algebra; their closure adds only def-pod-ring-scalar-extension, and Step 7 uses only clause (1) of the lisse node. lem-trf-oriented-closed-base-localization is the closed subtopos with i*i_*=1 (Stacks 08LY/08M3/04CA). Its closure holds only generic topos and site trf nodes, and the base parent lem-per-ctf-hom-localization-devissage already cites it. No cycle, steps are under 2000 characters, and I accept the 26 foundational tool_uses. Minor, not faults: the new node could cite def-per-galois-partition-modules instead of inlining it, and the report mentions a citations.json that was not committed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.GaloisLocalizationUniformBounds",
+  "declaration": "AlgebraicGeometry.Etale.galois_localization_uniform_bounds",
+  "file": "lean/Sheaf/Paper/GaloisLocalizationUniformBounds.lean",
+  "statement": "theorem galois_localization_uniform_bounds (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) [IsNoetherian X] (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A] [Algebra (ZMod ℓ) A] (_hdual : ∃ Q : DerivedCategoryModule (ULift.{u + 1} (ZMod ℓ)) X, DerivedCategory.boundedConstructible (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) X Q ∧ ∀ M : DerivedCategoryModule (ULift.{u + 1} (ZMod ℓ)) X, DerivedCategory.boundedConstructible (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) X M → DerivedCategory.boundedConstructible (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) X (((derivedHom (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) X).obj (op M)).obj Q) ∧ IsIso (etaleEvaluationBiduality (ULift.{u + 1} (ZMod ℓ)) X Q M)) {Z U : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j] (_hij : Set.range i.base = (Set.range j.base)ᶜ) : ((∀ P : Scheme.GaloisPartition U, ∃ (Q : Scheme.GaloisPartition X) (d : ℕ), ∀ K : DerivedCategoryModule A U, P.boundedDerived A K → Q.boundedDerived A ((lowerStar (ModuleCat.{u + 1} A) j).rightDerivedFunctor.obj K) ∧ ∀ n : ℤ, _root_.DerivedCategory.IsLE K n → _root_.DerivedCategory.IsLE ((lowerStar (ModuleCat.{u + 1} A) j).rightDerivedFunctor.obj K) (n + (d : ℤ))) ∧ (∀ K : DerivedCategoryModule A U, DerivedCategory.boundedConstructible (ModuleCat.{u + 1} A) U K → DerivedCategory.boundedConstructible (ModuleCat.{u + 1} A) X ((lowerStar (ModuleCat.{u + 1} A) j).rightDerivedFunctor.obj K))) ∧ ((∀ P : Scheme.GaloisPartition X, ∃ (PZ : Scheme.GaloisPartition Z) (PU : Scheme.GaloisPartition U) (d : ℕ), ∀ K : DerivedCategoryModule A X, P.boundedDerived A K → PZ.boundedDerived A ((perEtaleClosedSupport A i j).rightDerivedFunctor.obj K) ∧ PU.boundedDerived A ((perEtalePull A j).obj K) ∧ (∀ n : ℤ, _root_.DerivedCategory.IsLE K n → _root_.DerivedCategory.IsLE ((perEtaleClosedSupport A i j).rightDerivedFunctor.obj K) (n + (d : ℤ))) ∧ (∀ n : ℤ, (_root_.DerivedCategory.IsLE K n → _root_.DerivedCategory.IsLE ((perEtalePull A j).obj K) n) ∧ (_root_.DerivedCategory.IsGE K n → _root_.DerivedCategory.IsGE ((perEtalePull A j).obj K) n))) ∧ (∀ K : DerivedCategoryModule A X, DerivedCategory.boundedConstructible (ModuleCat.{u + 1} A) X K → DerivedCategory.boundedConstructible (ModuleCat.{u + 1} A) Z ((perEtaleClosedSupport A i j).rightDerivedFunctor.obj K) ∧ DerivedCategory.boundedConstructible (ModuleCat.{u + 1} A) U ((perEtalePull A j).obj K)))",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-001332d06",
+  "group": "NX",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN 28fb34c6: Lean byte-identical, statement/proof unchanged vs live; stmt_deps now add only def nodes (def-per-galois-partition-modules, new existing:true def-per-etale-support-functors on perEtaleSupportKernel/ClosedSupport/Pull, new existing:true def-per-etale-evaluation-biduality on etaleEvaluationBiduality), theorems kept proof-only. All clauses match node and ILO XVII 7.6.3-7.6.7: prime-field dualizing hypothesis with canonical transpose of ev∘σ, complementary i/j, total R(lowerStar j) and R(i^* ker unit), j^* = mapDerivedCategory with IsLE and IsGE, partitions and d chosen before K and n, three D^b_c clauses, f.g.-stalk constructibility, no ℓ/excellence/f.g. assumptions, single universe. Edge cases ok. nt_compile --json clean 6.6 s. Records verbatim up to whitespace; no cycles (new nodes cite only generic nodes). Maintainer note: the evaluation-biduality def node duplicates def-per-etale-relative-biduality, forced because its module owner lem-per-coefficient-change-dualizing reaches this item; unify later. Advisories: sorry'd perEtaleClosedSupport_additive instance used for typing (owner cited only in proof); support-functors node omits the def-weil-pbc-direct-image citation; stale blueprint ids in existing docstrings; def-sf-setting not in stmt_deps."
  }
 }
