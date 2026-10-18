@@ -16,7 +16,8 @@
   "sk-def-sfb-module-pushforward-pullback",
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
   "sk-prop-sfb-cartesian-coefficients",
-  "def-pur-kinjective-complex"
+  "def-pur-kinjective-complex",
+  "sk-def-sfb-module-lower-shriek"
  ],
  "proof": [
   {
@@ -282,5 +283,44 @@
   "group": "Q73",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-90f4c61cc (reviewer sub-agent of L); spot-checked: Read the whole delivery: item statement, all 7 steps, the 10 cited node statements and the notions behind them, unit sk-cor-affine-space-rational, the main-20261015 sk-thm-sf-comp-composition proof (composition and canonicity paragraphs), and the local Stacks copies of 08BJ (lemma-adjoint-preserve-K-injectives) and 0D6E (lemma-derived-pushforward-composition). The mathematics is correct. Exact a^* (cartesian-coefficients final paragraph) and exact j_! with j_! ⊣ j^* (module-lower-shriek) meet the hypotheses of 08BJ, so f_*I, j^*I and j_Y^*f_*I are K-injective. κ is normalized with the identity resolution. Clauses 1 and 3 reduce sectionwise to fibre-product isomorphisms with the same projections to V and X. ρ comes from lem-sfb-proetale-open-restriction-counit for arbitrary ring sheaves with R=Λ_T. Naturality and independence of the representative follow from the representative and transition formulas of lem-sf-kinjective-derived-map-computation. Checked edge cases: empty and identity opens, identity maps, the zero complex, complexes unbounded in both directions. Statement unchanged; Λ=E or Q̄_ℓ with unbounded D(Mod_{Λ_T}); not a duplicate of lem-pc-restrict-derived-direct-image-open (ringed spaces) or lem-exc-proetale-derived-open-restriction (finite A); no new nodes; no SGA. Fixes: (C1/C4) steps 1 and 4 applied ringed-site module-sheaf nodes to the module-object category Mod_{Λ_T} without citing the identification, so they now cite def-weil-pbc-internal-abelian-sheaf-module-equivalence and proof_deps is recomputed. (C8) the off-route sk-prop-sfb-cartesian-coefficients was undeclared; it is now added to split_report.tool_uses and accepted. All six declared tool uses are accepted as generic tools.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0d4afce95",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Repair of returned head b91fff144cfc. H2 is fixed: the open-counit node is out of stmt_deps (only in proof_deps), its import is non-public, and all 5 objectComposition uses are expanded to MorphismProperty.Over.map. The only stmt_deps addition is sk-def-sfb-module-lower-shriek, which already has a lean record on newtargets-dag (allowed under 'stmt_deps may gain landed nodes') and is used by upperStar_preservesKInjectives. One commit, 3 files; the node changes only in lean and stmt_deps; lean.statement is verbatim in the file; no line over 100 characters; the only sorry is in the main theorem. Clause check: ℓ prime, k with prime ringChar ≠ ℓ, E a finite intermediate field of PadicAlgCl, coefficients continuousMapRingObj E.1 and padicAlgClRingObj (finite-subextension sheaf), Over-Spec-k schemes that are locally of finite type, quasi-compact and separated, unbounded DerivedCategory of Mod over condensedRingObj. κ is rightDerivedFunctorNatIso(lowerStarComp.symm) followed by rightDerivedFunctorCompIso, pinned on K-injective I to the class of lowerStarComp.inv. The associativity equation, ρ (mate of the canonical upperStarComp square on IsPullback squares with qc open j; IsIso; sectionwise identity on I(V×_T S); K-injective class formula), successive restriction and the restriction-composition equation all match the node with directions checked. Identity opens are explicit in the sectionwise formula; identity scheme maps are covered through the canonical lowerStarComp normalization, as no lowerStar-id interface exists to state a unitor equation. Real constructions, no hollow defs, docstrings with source and blueprint, no name collisions in side, slopmaster2 or newtargets. Edge cases: empty schemes and opens, unbounded and zero complexes, E = Q_ℓ, universes u+1/u with no extra equality. nt_compile --json on the snapshot: 12.6 s, exit 0, no warnings."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DerivedDirectImageOpenCoherence",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.derivedDirectImageOpenCoherence",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.lowerStar_preservesKInjectives",
+   "AlgebraicGeometry.ProEtale.CondensedRing.directImageComposition",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openCoherencePullbackSquare",
+   "AlgebraicGeometry.ProEtale.CondensedRing.directImageOpenRestriction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.derivedOpenCoherencePullbackSquare",
+   "AlgebraicGeometry.ProEtale.CondensedRing.derivedDirectImageOpenRestriction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.upperStar_preservesKInjectives",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openCoherenceSectionCoprojection",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openCoherenceSectionArrow",
+   "AlgebraicGeometry.ProEtale.CondensedRing.OpenCoherenceSectionwise",
+   "AlgebraicGeometry.ProEtale.CondensedRing.DirectImageCompositionNormalized",
+   "AlgebraicGeometry.ProEtale.CondensedRing.DirectImageCompositionAssociative",
+   "AlgebraicGeometry.ProEtale.CondensedRing.DirectImageRestrictionNormalized",
+   "AlgebraicGeometry.ProEtale.CondensedRing.openCoherenceRestrictionComp",
+   "AlgebraicGeometry.ProEtale.CondensedRing.DirectImageSuccessiveRestriction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.DirectImageRestrictionComposition",
+   "AlgebraicGeometry.ProEtale.CondensedRing.DirectImageOpenCoherence",
+   "AlgebraicGeometry.ProEtale.CondensedRing.derivedDirectImageOpenCoherence"
+  ],
+  "file": "lean/Sheaf/Paper/DerivedDirectImageOpenCoherence.lean",
+  "statement": "theorem derivedDirectImageOpenCoherence (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] (E : PadicAlgCl.FiniteIntermediateField ℓ) : DirectImageOpenCoherence (Profinite.continuousMapRingObj E.1) k ∧ DirectImageOpenCoherence (Profinite.padicAlgClRingObj ℓ) k",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Canonical maps are real constructions from the published internal-module adjunctions, exact derived pullback, and universal right-derived composition. The assertion includes sectionwise open normalization, the K-injective formulas, associativity and both restriction coherence equations. The closed upstream qbar binding is used with its finite-subextension convention. Statement dependencies gain only the already landed open extension-by-zero interface used in the K-injective preservation instance. Site object composition uses Mathlib MorphismProperty.Over.map directly at all five occurrences; the open-counit theorem remains solely a proof dependency, with a non-public import. This repairs H2 from returned head b91fff144cfc without changing the mathematical statement or replacing a dependency interface."
  }
 }

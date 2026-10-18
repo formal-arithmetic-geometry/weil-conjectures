@@ -16,7 +16,8 @@
   "sk-def-sfb-pulled-back-coefficients",
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
-  "def-sfb-site-derived-constant-module-functor"
+  "def-sfb-site-derived-constant-module-functor",
+  "def-zl-condensed-scalar-realization"
  ],
  "proof": [
   {
@@ -217,5 +218,31 @@
   "group": "Q36",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-ba7553628 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, the citers' steps that use the item, the unit route, and HRS arXiv 2305.18131. In HRS I checked §3 (Λ_X=p_X^{-1}Λ, the paragraph 'f^*=f^{-1} … exact, t-exact and symmetric monoidal'), (3.1), Remark 3.2, Def. 3.3 and Lemma 4.5 with its proof ('monoidal, conservative and commutes with inner homomorphisms'). The coefficient category and pullback are HRS's: ordinary D(T_proet,Λ_T), with f^* taken along α_f. Lisse means dualizable, which is a homotopy-category notion. The arbitrary-cover form is true by the same argument. Nothing is weakened and no SGA is used. Tested cases: K=0, X=∅ with the empty cover, identity and infinite covers, Λ=Z with ⊕_N Λ (not dualizable), and I=∅ in the abstract lemma (C is a groupoid and ν is invertible). Both new nodes are true and statement-only, and neither restates an item clause. The finite-discrete lem-cbc-proetale-stalk-conservative is only a special case of the new conservativity node. Three faults, all repaired in fixes/: (C4) Steps 1 and 3 cited constant-ring nodes for the condensed ring Λ_X: lem-pe-constant-left-module-inverse-image, localization clause (2), restriction clauses 2–3. Step 3 now uses localization clause (1), restriction clause 1 (any sheaf of rings), α_{u_i} and the scalar transport of def-weil-pbc-proetale-operations, and the conservativity node now defines u_i^*=Lu_i^*. (B3) The abstract helper used symmetric monoidal, strong symmetric monoidal and jointly conservative without defining them. They are now defined inline, with def-sfb-strong-monoidal-functor cited and an explicit transpose formula. (E5) The ring-map compatibility in the scalar-extension clause was only gestured at. Step 1 now argues it through def-zl-condensed-scalar-realization and the monoidal isomorphism f^*p_X^*≅p_T^* of sk-def-sfb-pullback-from-point-comp, whose component at Λ is α_f; there is no cycle. Step 4 now matches each hypothesis of the helper (η from lem-weil-pbc-ringed-internal-hom-exact-restriction; second and third identities of lem-weil-pbc-ringed-slice-evaluation-transpose). Accepted tool_uses: lem-sfb-ringed-derived-monoidal-comparisons and lem-sfb-proetale-object-inverse-image-restriction (added). The item statement is unchanged.; 3 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e57e0d39f",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Read check-brief2, packet, item node (only change vs side clone: lean record plus acyclic stmt_dep def-zl-condensed-scalar-realization, already landed and a prior proof_dep), all 8 stmt_dep records, the module, report (Worker report and Second reading by Q01 present), HRS §3 pullback paragraph, (3.1), Rem 3.2, Def 3.3, Lemma 4.5. Checked declarations used: upperStar is inverse image along canonical α_f; Mod.derivedMonoidalCategory confirmed by #synth as the instance for HasRightDual; DerivedCategory.braidedCategory is real Koszul data with no competing instance; condensedScalarRealization on D(Γ(*,Λ)); proetalePrecoverage is weakly-étale fpqc-type. All clauses match: exact plus braided pullback for every f, preservation of dualizables, natural scalar-realization iso, iff over every cover member with free index universe v; no qc/component or universe restriction. Edge cases ok (empty cover forces X empty; zero object, zero ring, infinite covers, unbounded P). Gates ok: no hollow defs, docstrings with source and blueprint, sorry-only bodies (axioms checked), statement verbatim. nt_compile --json on the snapshot file: rc=0, 11.3 s, clean. Non-blocking notes: the monoidal clause states existence of a strong braided structure; Nonempty (HasRightDual K) is written instead of the definitionally equal IsDualizable."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CondensedLisseProEtaleLocality",
+  "declaration": "AlgebraicGeometry.ProEtale.condensed_dualizable_iff_proetale_cover",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.condensedDerivedBraiding",
+   "AlgebraicGeometry.ProEtale.condensed_derivedPullback_exact_symmetricMonoidal",
+   "AlgebraicGeometry.ProEtale.condensed_derivedPullback_preserves_dualizable",
+   "AlgebraicGeometry.ProEtale.condensed_scalarRealization_pullback",
+   "AlgebraicGeometry.ProEtale.condensed_dualizable_iff_proetale_cover"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CondensedLisseProEtaleLocality.lean",
+  "statement": "theorem condensed_dualizable_iff_proetale_cover (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (X : Scheme.{u}) (𝒰 : Scheme.Cover.{v} Scheme.proetalePrecoverage X) (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ.X X))) : Nonempty (HasRightDual K) ↔ ∀ i : 𝒰.I₀, Nonempty (HasRightDual ((CondensedRing.upperStar Λ.X (𝒰.f i)).mapDerivedCategory.obj K))",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The four theorem declarations jointly state all asserted clauses. The helper instance registers the existing DerivedCategory.braidedCategory specialization, with real data and the ordinary Koszul braiding; no tensor or module category is redefined."
  }
 }
