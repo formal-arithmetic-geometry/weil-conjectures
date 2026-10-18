@@ -689,6 +689,7 @@ public import WeilConjectures.AlgebraicGeometry.DeformationSpace.BaseChangeSecti
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.Coordinates
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.ReesBaseChange
 public import WeilConjectures.AlgebraicGeometry.DeformationSpace.Smooth
+public import WeilConjectures.AlgebraicGeometry.DeformationSpace.SmoothProj
 public import WeilConjectures.AlgebraicGeometry.DeformationToNormalCone
 public import WeilConjectures.AlgebraicGeometry.DenseCompactification
 public import WeilConjectures.AlgebraicGeometry.DenseOpenComponentCoproduct
@@ -2865,6 +2866,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.Trace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Transport
 public import WeilConjectures.EtaleCohomology.TateTwist.AffineLineDatum
 public import WeilConjectures.EtaleCohomology.TateTwist.Basic
+public import WeilConjectures.EtaleCohomology.TateTwist.Cohomology
 public import WeilConjectures.EtaleCohomology.TateTwist.FiniteKummerLevel
 public import WeilConjectures.EtaleCohomology.TateTwist.FiniteKummerLevelBaseChange
 public import WeilConjectures.EtaleCohomology.TateTwist.KummerClass
@@ -4513,6 +4515,7 @@ public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.GeometricFro
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.Hom
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.InternalHom
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.Module
+public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.OpenImmersion
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.Ring
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.UnitMatrix
 public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.UpperStar
@@ -4756,6 +4759,7 @@ public import WeilConjectures.WeilSheaf.DualIrreducible
 public import WeilConjectures.WeilSheaf.EulerProduct
 public import WeilConjectures.WeilSheaf.ExtensionByZero
 public import WeilConjectures.WeilSheaf.FieldCoefficient
+public import WeilConjectures.WeilSheaf.FieldCoefficientCohomology
 public import WeilConjectures.WeilSheaf.FiniteEtale
 public import WeilConjectures.WeilSheaf.FiniteEtaleLisse
 public import WeilConjectures.WeilSheaf.FiniteLength
