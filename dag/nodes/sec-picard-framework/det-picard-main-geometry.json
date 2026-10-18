@@ -3,60 +3,128 @@
  "blueprint": {
   "is": "det-picard-main-geometry",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Smoothness, separatedness and properness of the degree components",
- "statement": "Let $k$ be algebraically closed, $C/k$ a smooth proper connected curve of\ngenus $g$, $P\\in C(k)$, and let $\\underline{\\operatorname{Pic}}_{C/k}=\\coprod_d\\underline{\\operatorname{Pic}}^d_{C/k}$\nbe as in [det-picard-main-degree]. Then:\n\n1. $\\underline{\\operatorname{Pic}}_{C/k}$ is locally of finite type,\nsmooth of pure dimension $g$ and separated over $k$;\n1. the Abel map $\\alpha:H_g\\to\\underline{\\operatorname{Pic}}^g_{C/k}$,\n$D\\mapsto\\cO_C(D)$ (normalized along $P$), is surjective;\n1. every $\\underline{\\operatorname{Pic}}^d_{C/k}$ is a smooth proper\ngeometrically irreducible (in particular geometrically connected)\nvariety of dimension $g$.",
+ "statement": "Let $k$ be algebraically closed, $C/k$ a smooth proper connected curve of genus $g$, $P\\in C(k)$, and let $\\underline{\\operatorname{Pic}}_{C/k}=\\coprod_d\\underline{\\operatorname{Pic}}^d_{C/k}$ be as in [det-picard-main-degree]. Let $H_g$ be a scheme representing $\\operatorname{Hilb}^g_{C/k}$ as in [thm-pc-hilb-curves]. Then:\n\n1. $\\underline{\\operatorname{Pic}}_{C/k}$ is locally of finite type, smooth of pure dimension $g$ and separated over $k$;\n1. the Abel map $\\alpha:H_g\\to\\underline{\\operatorname{Pic}}^g_{C/k}$, $D\\mapsto\\mathcal O_C(D)$ (normalized along $P$), is surjective;\n1. every $\\underline{\\operatorname{Pic}}^d_{C/k}$ is a smooth proper geometrically irreducible (in particular geometrically connected) variety of dimension $g$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-main/sk-thm-picard-main-geometry.md",
   "place": "node det-picard-main-geometry, order None"
  },
  "stmt_deps": [
-  "det-picard-main-degree"
+  "det-picard-main-degree",
+  "thm-pc-hilb-curves"
  ],
  "proof": [
   {
-   "text": "(1) Let $W\\subset H_g$ be the chart of [det-picard-f-representable-chart];\nit is an open subscheme of $\\underline{\\operatorname{Pic}}_{C/k}$\n(the inclusion $F\\subset\\operatorname{Pic}_{C/k}$ is representable by\nopen immersions), smooth of pure dimension $g$, and contained in\n$\\underline{\\operatorname{Pic}}^g_{C/k}$ (its classes have $\\chi=1$, i.e.\ndegree $g$). For $M\\in\\underline{\\operatorname{Pic}}_{C/k}(k)$ the\ntranslate $M^{-1}W$ is an open subscheme isomorphic to $W$. These\ntranslates cover: a point $t$ with residue field $K$ is a class $\\cL_t$\non $C_K$, and [lem-pc-twist] gives $\\cM_0$ on $C$ with\n$h^0(\\cL_t\\otimes\\cM_{0,K})=1$, $H^1=0$, i.e. $\\cL_t\\otimes\\cM_{0,K}\\in F(K)$,\nso $t\\in M^{-1}W$ for $M=[\\cM_0]$. Hence\n$\\underline{\\operatorname{Pic}}_{C/k}$ is locally of finite type and\nsmooth of pure dimension $g$. The unit $e:\\Spec k\\to\\underline{\\operatorname{Pic}}_{C/k}$\nis a $k$-point of a scheme locally of finite type over $k$, hence a closed\nimmersion. The diagonal is the preimage of $e$ under the morphism\n$(x,y)\\mapsto x y^{-1}$ of\n$\\underline{\\operatorname{Pic}}_{C/k}\\times_k\\underline{\\operatorname{Pic}}_{C/k}$\nto $\\underline{\\operatorname{Pic}}_{C/k}$, so it is a closed immersion and\nthe scheme is separated.",
+   "text": "(1) First the hypotheses of the cited nodes. $C$ is nonempty (it has the point $P$), connected, separated, of finite type, of dimension one and smooth over the algebraically closed field $k$, so it is a Noetherian integral scheme by [lem-sc-smooth-connected-curve-local-rings] (1), hence a curve in the sense of [def-pc-curve]; it is proper of dimension $1$ over $k$, hence projective over $k$ by [lem-sc-proper-dim-one-projective]. Thus $C$ is a smooth projective curve over $k$ with the $k$-rational point $P$, and since $k$ is algebraically closed it is separably closed, so [prop-pc-xk-integral] (2) shows that every base change $C_K$ ($K/k$ a field extension) is a smooth projective curve; in particular $C$ is geometrically integral, hence geometrically irreducible and geometrically connected. These are the hypotheses of [thm-pc-picard-representable], [det-picard-f-representable-chart], [lem-pc-twist], [thm-pc-hilb-curves], [lem-sc-hilb-to-pic-morphism], [lem-sc-hilb-to-pic-surjective] and [lem-sc-hilb-geometrically-integral] used below. Now [thm-pc-picard-representable] supplies the representing group scheme and its multiplication and inverse. Let $W\\subset H_g$ be the chart of [det-picard-f-representable-chart]; by its clause (1), $h_W\\cong F\\subset\\operatorname{Pic}_{C/k,P}\\cong\\operatorname{Pic}_{C/k}$, and by [lem-pc-f-open-subfunctor] the inclusion $F\\subseteq\\operatorname{Pic}_{C/k,P}$ is representable by open immersions, so $W\\to\\underline{\\operatorname{Pic}}_{C/k}$ is an open immersion; the chart node (2) says that $W$ is smooth of pure dimension $g$, and $W$ is of finite type over $k$, being open in the variety $H_g$ ([thm-pc-hilb-curves]). For any $k$-point $M$ of the group scheme, translation by $M$ is an isomorphism, so $M^{-1}W$ is an open subscheme isomorphic to $W$. If $t$ is a point with residue field $K$ and corresponding rigidified line bundle $\\mathcal L_t$ on $C_K$, [lem-pc-twist] gives a line bundle $\\mathcal M_0$ on $C$ with $h^0(C_K,\\mathcal L_t\\otimes\\mathcal M_{0,K})=1$ and $H^1(C_K,\\mathcal L_t\\otimes\\mathcal M_{0,K})=0$; since $C_K$ is a smooth projective curve over $K$, $H^i(C_K,-)=0$ for $i\\ge2$ by [lem-pc-vanishing-above-dim], so $Rf_{K,*}(\\mathcal L_t\\otimes\\mathcal M_{0,K})=R\\Gamma(C_K,\\mathcal L_t\\otimes\\mathcal M_{0,K})$ is a complex of $K$-vector spaces with cohomology $K$ in degree $0$ only, hence isomorphic to $K[0]$, i.e. the class of $\\mathcal L_t\\otimes\\mathcal M_{0,K}$ (rigidified along $P$) lies in $F(K)$. Hence $M\\cdot t\\in W$, i.e. $t$ lies in the translate $M^{-1}W$ for $M=[\\mathcal M_0]$. These translates cover the Picard scheme, proving it is locally of finite type and smooth of pure dimension $g$. Finally, [lem-sc-group-scheme-separated-field] says that every group scheme over a field is separated, so $\\underline{\\operatorname{Pic}}_{C/k}$ is separated.",
    "uses": [
+    "lem-sc-smooth-connected-curve-local-rings",
+    "lem-sc-proper-dim-one-projective",
+    "prop-pc-xk-integral",
+    "thm-pc-picard-representable",
     "det-picard-f-representable-chart",
-    "lem-pc-twist"
+    "lem-pc-f-open-subfunctor",
+    "thm-pc-hilb-curves",
+    "lem-pc-twist",
+    "lem-pc-vanishing-above-dim",
+    "lem-sc-group-scheme-separated-field"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0BA0, proof of Lemma 44.6.7 (lemma-picard-pieces), paragraphs 2–3 (with Lemma 44.6.2 lemma-open-representable for the open immersion and Lemma 44.6.4 lemma-twist-with-general-divisor for the covering); separatedness via Groupoids, Lemma 39.7.3 (Tag 047L)"
+   }
   },
   {
-   "text": "(2) The universal divisor $D_g\\subset C\\times H_g$ ([thm-pc-hilb-curves])\ngives, after normalization along $P$, a class in\n$\\operatorname{Pic}_{C/k}(H_g)$ of fibrewise degree $g$, i.e. a morphism\n$\\alpha:H_g\\to\\underline{\\operatorname{Pic}}^g_{C/k}$. Surjectivity may\nbe checked on geometric points: for an algebraically closed $K\\supseteq k$\nand $\\cL$ of degree $g$ on $C_K$, Riemann–Roch ([lem-sc-riemann-roch])\ngives $h^0(\\cL)\\ge\\chi(\\cL)=g+1-g=1$; the zero divisor $D$ of a nonzero\nsection is an effective Cartier divisor of degree $g$, a $K$-point of\n$H_g$, with $\\cO(D)\\cong\\cL$.",
+   "text": "(2) By (1), $C$ satisfies the hypotheses of the nodes cited here (separably closed $k$, smooth projective geometrically integral curve of genus $g$). The universal effective divisor on $C\\times H_g$ and its associated line bundle give the morphism $\\alpha$ by [lem-sc-hilb-to-pic-morphism]; normalization along $P$ changes the line bundle only by pullback from $H_g$, hence gives the same class in the Picard functor. For an algebraically closed extension $K/k$ and a degree-$g$ line bundle $\\mathcal L$ on $C_K$, [lem-sc-riemann-roch] gives $\\chi(\\mathcal L)=1$, so $\\mathcal L$ has a nonzero section. Its zero divisor is an effective Cartier divisor of degree $g$, and [lem-sc-hilb-to-pic-morphism] sends the corresponding $K$-point of $H_g$ to $[\\mathcal L]$. Equivalently, the surjectivity statement is [lem-sc-hilb-to-pic-surjective] specialized to $d=g$. Thus $\\alpha$ is surjective.",
    "uses": [
     "thm-pc-hilb-curves",
-    "lem-sc-riemann-roch"
+    "lem-sc-hilb-to-pic-morphism",
+    "lem-sc-riemann-roch",
+    "lem-sc-hilb-to-pic-surjective"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0BA0, proof of Lemma 44.6.7, paragraph 4 (surjectivity of gamma_d for d >= g)"
+   }
   },
   {
-   "text": "(3) By (2), $\\underline{\\operatorname{Pic}}^g_{C/k}$ is the image of the\nquasi-compact $H_g$, hence quasi-compact, hence (being locally of finite\ntype) of finite type. It is separated by (1), and it is the surjective\nimage of the proper $k$-scheme $H_g$, so it is universally closed, hence\nproper. As the image of the irreducible $H_g$ it is irreducible, and\nsince $\\alpha_K$ stays surjective for every field extension $K/k$ and\n$(H_g)_K$ is irreducible ([thm-pc-hilb-curves]: $H_g$ is geometrically\nintegral), it is geometrically irreducible. It is smooth of dimension $g$\nby (1), hence a smooth proper geometrically irreducible variety of\ndimension $g$. By [det-picard-main-degree] (3), tensoring with\n$\\cO_C((d-g)P)$ identifies it with every $\\underline{\\operatorname{Pic}}^d_{C/k}$.",
+   "text": "(3) By (2), $\\underline{\\operatorname{Pic}}^g_{C/k}$ is the surjective image of the proper scheme $H_g$ (properness and smoothness are in [thm-pc-hilb-curves], applicable because $C$ is geometrically irreducible by (1)). Its structure morphism is separated and locally of finite type by (1); therefore [lem-weil-pbc-image-universally-closed] makes $\\underline{\\operatorname{Pic}}^g_{C/k}\\to\\operatorname{Spec}k$ proper. For every field extension $K/k$, the base change $H_{g,K}$ is integral by [lem-sc-hilb-geometrically-integral], and the base-changed Abel map is surjective by [lem-weil-pbc-surjective-base-change]. The image of this irreducible space is irreducible by [lem-weil-pbc-irreducible-continuous-image], so $\\underline{\\operatorname{Pic}}^g_{C/k}$ is geometrically irreducible. Smoothness and pure dimension $g$ follow from (1), hence the degree-$g$ component is a smooth proper geometrically irreducible variety and therefore geometrically connected. Finally, [det-picard-main-degree] (3) identifies tensoring by $\\mathcal O_C((d-g)P)$ with an isomorphism $\\underline{\\operatorname{Pic}}^g_{C/k}\\xrightarrow{\\sim}\\underline{\\operatorname{Pic}}^d_{C/k}$, transferring all these properties to every $d$.",
    "uses": [
     "thm-pc-hilb-curves",
+    "lem-weil-pbc-image-universally-closed",
+    "lem-sc-hilb-geometrically-integral",
+    "lem-weil-pbc-surjective-base-change",
+    "lem-weil-pbc-irreducible-continuous-image",
     "det-picard-main-degree"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pic.tex",
+    "place": "Tag 0BA0, proof of Lemma 44.6.7, paragraphs 3–5"
+   }
   }
  ],
  "proof_deps": [
   "det-picard-f-representable-chart",
-  "lem-pc-twist",
-  "thm-pc-hilb-curves",
-  "lem-sc-riemann-roch",
   "det-picard-main-degree",
+  "lem-pc-f-open-subfunctor",
+  "lem-pc-twist",
+  "lem-pc-vanishing-above-dim",
+  "lem-sc-group-scheme-separated-field",
+  "lem-sc-hilb-geometrically-integral",
+  "lem-sc-hilb-to-pic-morphism",
+  "lem-sc-hilb-to-pic-surjective",
+  "lem-sc-proper-dim-one-projective",
+  "lem-sc-riemann-roch",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-weil-pbc-image-universally-closed",
+  "lem-weil-pbc-irreducible-continuous-image",
+  "lem-weil-pbc-surjective-base-change",
+  "prop-pc-xk-integral",
+  "thm-pc-hilb-curves",
   "thm-pc-picard-representable"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-main/sk-thm-picard-main-geometry.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/pic.tex",
+  "place": "Tag 0BA0, proof of Lemma 44.6.7 (lemma-picard-pieces)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Smoothness, separatedness, properness, and geometric irreducibility of degree components of the Picard scheme of a smooth proper curve",
+   "results": "General declarations AlgebraicGeometry.isProper_iff, IsProper.of_comp_of_isSeparated, IsSmooth; no Picard-component theorem.",
+   "date": "2026-10-18",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Picard scheme degree component smooth proper geometrically irreducible",
+   "results": "General smoothness and properness declarations; no Picard-component theorem.",
+   "date": "2026-10-18",
+   "verdict": "no direct match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Scheme.IsSeparated, IsProper, Smooth, GeometricallyIrreducible",
+   "results": "Unknown identifier Scheme.IsSeparated; no usable match.",
+   "date": "2026-10-18",
+   "verdict": "unavailable: invalid pattern"
+  },
+  {
+   "tool": "grep",
+   "query": "Picard|GeometricallyIrreducible|IsProper",
+   "results": "General Mathlib declarations in AlgebraicGeometry/Geometrically and ProjectiveSpectrum; no Picard-component declaration.",
+   "date": "2026-10-18",
+   "verdict": "no direct match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -89,5 +157,54 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "det-picard-main-geometry",
+  "worker": "stage1",
+  "summary": "Audited the imported three-part proof against Stacks Tag 0BA0 and the cited DAG statements. Added the missing definition of H_g and the missing use of Picard representability, replaced the unsupported Hilbert-scheme irreducibility inference with the existing geometrically-integral Hilbert node plus base-change and irreducible-image nodes, and cited the existing closed group-scheme separatedness node.",
+  "blueprint": "Steps realize Tag 0BA0 proof paragraphs 2–3 (degree decomposition, translates and smoothness), paragraph 4 (Abel morphism and surjectivity), and paragraphs 3–5 (properness, geometric irreducibility, and translation to all degrees).",
+  "tool_uses": [
+   {
+    "node": "lem-sc-group-scheme-separated-field",
+    "why": "generic: a group scheme over a field is separated (Stacks 047L, the citation of Tag 0BA0); no node of sk-thm-picard-main states it"
+   },
+   {
+    "node": "lem-sc-hilb-to-pic-morphism",
+    "why": "the Abel morphism gamma_d of Tag 0BA0 and its effect on K-points; stated only in the sibling unit sk-prop-jacobian"
+   },
+   {
+    "node": "lem-sc-hilb-to-pic-surjective",
+    "why": "surjectivity of gamma_d for d >= g (Tag 0BA0 paragraph 4), specialized to d=g; stated only in sk-prop-jacobian"
+   },
+   {
+    "node": "lem-sc-hilb-geometrically-integral",
+    "why": "the unit's step (3) takes geometric integrality of H_g from thm-pc-hilb-curves, whose statement does not contain it; this node of sk-prop-jacobian states it"
+   },
+   {
+    "node": "lem-sc-smooth-connected-curve-local-rings",
+    "why": "generic: a smooth connected curve over an algebraically closed field is integral, needed to apply the Chapter 44 nodes"
+   },
+   {
+    "node": "lem-sc-proper-dim-one-projective",
+    "why": "generic: a proper scheme of dimension <= 1 over a field is projective (Tag 0A26), needed to apply the Chapter 44 nodes stated for projective curves"
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-group-scheme-separated-field",
+  "lem-sc-hilb-to-pic-morphism",
+  "lem-sc-hilb-to-pic-surjective",
+  "lem-sc-hilb-geometrically-integral",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-sc-proper-dim-one-projective"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q104-4b31f4b8f",
+  "group": "Q104",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-4b31f4b8f (reviewer sub-agent of L); spot-checked: I read the item in full against Stacks pic.tex Tag 0BA0 (lemma-picard-pieces, lines 1196-1290), the main-20261015 blueprint statement and proof, the unit sk-thm-picard-main, and the statement of every cited node. The statement only adds the missing definition of H_g, so the target is not weakened. Small cases g=0 (C=P^1) and g=1 (Abel-Jacobi isomorphism) agree. The delivery has no new nodes and no cycles. Steps 2 and 3 are correct: surjectivity is lem-sc-hilb-to-pic-surjective with d=g; properness comes from lem-weil-pbc-image-universally-closed using the separated, locally finite type structure from (1); geometric irreducibility comes from lem-sc-hilb-geometrically-integral plus base change of a surjection plus the irreducible-image leaf; all degrees follow by det-picard-main-degree (3). Step 1 had three citation faults, fixed in fixes/dag/nodes/sec-picard-framework/det-picard-main-geometry.json. (1) C1/E1: the cited Chapter-44 nodes need an integral smooth projective curve, and for some a geometrically integral one, but the item has a smooth proper connected curve. Added lem-sc-smooth-connected-curve-local-rings (integral), lem-sc-proper-dim-one-projective (projective, Tag 0A26) and prop-pc-xk-integral (2) (geometrically integral). (2) C4: that W is open in Pic was asserted without citation. Added lem-pc-f-open-subfunctor (Tag 0B9V). (3) C1: deriving L_t⊗M_0 ∈ F(K) from h^0=1 and H^1=0 needs H^i=0 for i≥2. Added lem-pc-vanishing-above-dim. I accept six off-unit tool uses and recorded them in split_report.tool_uses: lem-sc-group-scheme-separated-field, lem-sc-hilb-to-pic-morphism, lem-sc-hilb-to-pic-surjective, lem-sc-hilb-geometrically-integral, lem-sc-smooth-connected-curve-local-rings and lem-sc-proper-dim-one-projective. Batch-5 flag: lem-trf-proper-finite-fibre-finite-near is Stacks 02UP, a generic lemma (a proper morphism with a finite fibre is finite near the point). It is not part of the trace formula or Poincaré duality, its own closure has no such content, and it is already reached through the base-cited thm-pc-hilb-curves, thm-pc-picard-representable and det-picard-main-degree. It is genuinely outside the assumptions, so I accept it.; 1 file(s) fixed by the reviewer"
  }
 }
