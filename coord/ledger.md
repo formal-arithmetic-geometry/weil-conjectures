@@ -16089,3 +16089,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:28 L: merged deliver/M3/Sheaf.AlgebraicGeometry.EtaleCompactificationConstructibility (stage 3; reviewer PASS; first push; landing 20261018T062831-L-662926 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:28 L: merged deliver/M3/Sheaf.Paper.KunBcMapOnCohomology (stage 3; reviewer PASS; first push; landing 20261018T062832-L-663303 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:28 L: merged deliver/M3/Sheaf.RepresentationTheory.ContinuousCochainsInvariantsZero (stage 3; reviewer PASS; first push; landing 20261018T062832-L-663543 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:28 L: merged deliver/M4/Sheaf.AlgebraicGeometry.CompatibleCompactificationTriangle (stage 3; reviewer PASS; first push; landing 20261018T062833-L-663810 (proof); batch 20261018T062645; modules 1; new nodes 0)
