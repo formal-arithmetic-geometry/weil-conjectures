@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineSpaceAdjunction
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Etale
 
 /-!
@@ -19,12 +20,12 @@ The proof reduces, through the étale-local normal form of a smooth morphism
 (`AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_affineLine`), to the
 étale case (`AlgebraicGeometry.Etale.etaleBaseChange`) and to the affine-line case
 (`AlgebraicGeometry.Etale.affineLineBaseChange`), which is the base change compatibility of the
-affine-space adjunction (`AlgebraicGeometry.Etale.affineSpaceBaseChange`, blueprint
+affine-space adjunction (`AlgebraicGeometry.Etale.affineSpaceAdjunction_baseChange`, blueprint
 `sk-lem-geo-affine-local`).
 
 ## Main statements
 
-- `AlgebraicGeometry.Etale.affineSpaceBaseChange` (`sk-lem-geo-affine-local`)
+- `AlgebraicGeometry.Etale.affineSpaceAdjunction_baseChange` (`sk-lem-geo-affine-local`)
 - `AlgebraicGeometry.Etale.affineLineBaseChange`
 - `AlgebraicGeometry.Etale.isIso_rightDerivedUpperShriekBaseChangeMap_of_smoothOfRelativeDimension`,
   `AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar`
@@ -61,24 +62,38 @@ variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 `Ra_! : D((𝔸^d_S)_proét, Λ) ⥤ D(S_proét, Λ)` is `a^*(d)[2d]`, with unit and counit compatible
 with base change."
 
-The identification `a^! ≅ a^*(d)[2d]` is the affine-space adjunction `Ra_! ⊣ a^*(d)[2d]` of
-`cor-amb-affine-space-adjunction`
-(`AlgebraicGeometry.Etale.nonempty_rightDerivedLowerShriek_adjunction_affineSpace`); this lemma
-records its compatibility with base change: for every scheme `S` on which the exponent of `Λ`
-is invertible and every cartesian square of `a` with quasi-compact base change `p'` admitting a
-compactification, the canonical base change map `Lg'^* Ra^! ⟶ Rp'^! Lg^*` is an isomorphism. -/
-theorem affineSpaceBaseChange (d : ℕ) (S : Scheme.{u}) [HasInvertibleExponent Λ S]
-    ⦃S' P' : Scheme.{u}⦄ {g : S' ⟶ S} {p' : P' ⟶ S'} {g' : P' ⟶ 𝔸(ULift.{u} (Fin d); S)}
-    (sq : IsPullback g' p' (𝔸(ULift.{u} (Fin d); S) ↘ S) g) [HasCompactification p']
-    [QuasiCompact p'] : IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq) :=
+Both parts are formalised, for every scheme `S` on which the exponent of `Λ` is invertible:
+
+* `a^! = a^*(d)[2d]`: the functor `La^* ⋙ (-)(d)[2d]` is right adjoint to `Ra_!` (as in
+  `cor-amb-affine-space-adjunction`,
+  `AlgebraicGeometry.Etale.nonempty_rightDerivedLowerShriek_adjunction_affineSpace`), for any
+  normalized Tate twist;
+* compatibility of the unit and counit of `Ra_! ⊣ Ra^!` with base change: for every cartesian
+  square of `a` with quasi-compact base change `p'` admitting a compactification, the
+  canonical base change map `Lg'^* Ra^! ⟶ Rp'^! Lg^*` is an isomorphism. This map is the mate
+  of the compact-support exchange, so it records exactly how the unit and counit transform
+  under base change.
+
+Clause 2 of the node is `lem-amb-etale-adjoint-locality`
+(`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedUpperShriek_comp_leftDerivedUpperStar_of_etale`).
+-/
+theorem affineSpaceAdjunction_baseChange (d : ℕ) (S : Scheme.{u}) [HasInvertibleExponent Λ S] :
+    (∀ [HasTateTwist Λ] [HasTateTwist.IsNormalized Λ],
+      Nonempty (rightDerivedLowerShriek (ModuleCat.{u + 1} Λ) (𝔸(ULift.{u} (Fin d); S) ↘ S) ⊣
+        L(((𝔸(ULift.{u} (Fin d); S) ↘ S))^*[ModuleCat.{u + 1} Λ]) ⋙
+          twistShift Λ 𝔸(ULift.{u} (Fin d); S) d)) ∧
+    ∀ ⦃S' P' : Scheme.{u}⦄ {g : S' ⟶ S} {p' : P' ⟶ S'}
+      {g' : P' ⟶ 𝔸(ULift.{u} (Fin d); S)} (sq : IsPullback g' p' (𝔸(ULift.{u} (Fin d); S) ↘ S) g)
+      [HasCompactification p'] [QuasiCompact p'],
+      IsIso (rightDerivedUpperShriekBaseChangeMap Λ sq) :=
   sorry
 
 /-- **Base change for the affine-line projections**, the elementary case (a) of the proof of
 blueprint `prop-asd-smooth-base-change`: the case `d = 1` of
-`AlgebraicGeometry.Etale.affineSpaceBaseChange`. -/
+`AlgebraicGeometry.Etale.affineSpaceAdjunction_baseChange`. -/
 theorem affineLineBaseChange : AffineLineBaseChange Λ := by
   intro S _ _ S' P' g p' g' sq _ _
-  exact affineSpaceBaseChange Λ 1 S sq
+  exact (affineSpaceAdjunction_baseChange Λ 1 S).2 sq
 
 variable {X Y : Scheme.{u}} [QuasiSeparatedSpace Y] [HasInvertibleExponent Λ X]
   (f : X ⟶ Y) [HasCompactification f] (d : ℕ) [SmoothOfRelativeDimension d f]
