@@ -21,7 +21,8 @@ The homotopy limit
 `n ↦ ν^* Rg_*^{ét}(𝒪_E ⧸ ℓⁿ)` of complexes of *abelian* sheaves. This file identifies its
 cohomology towers with the abelian sheaves underlying `ν^*` of the tower `n ↦ Hᵏ(Rg_* (Λ ⧸ ℓⁿ))`
 of étale sheaves of modules over the single ring `Λ = Shrink 𝒪_E`
-(`AlgebraicGeometry.Etale.higherDirectImageQuotPowTower`), naturally in `n`, which is the form of the hypotheses of
+(`AlgebraicGeometry.Etale.higherDirectImageQuotPowTower`), naturally in `n`, which is the form of
+the hypotheses of
 `AlgebraicGeometry.Scheme.UniversalCovers.nonempty_iso_homologyUpperStar_continuousMapAddSheaf'`:
 
 - `AlgebraicGeometry.ProEtale.constantSheafTowerIsoQuotPow`: the tower of constant abelian

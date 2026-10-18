@@ -112,6 +112,19 @@ lemma isSetFLC_upperStar_higherDirectImageQuotPowTower_obj {S : Scheme.{u}} (j :
         (j)^*[ModuleCat.{u + 1} Λ].mapIso (higherDirectImageQuotPowTowerObjIso I g i n).symm))
     (h.restrictScalars (Ideal.Quotient.mk (I ^ n)))
 
+/-- The `IsSetFLC` hypothesis of
+`AlgebraicGeometry.Etale.isSetFLC_upperStar_higherDirectImageQuotPowTower_obj` from finite local
+constancy over the finite ring `Λ ⧸ Iⁿ`. -/
+lemma isSetFLC_upperStar_higherDirectImageQuotPowTower_obj_of_flcProperty {S : Scheme.{u}}
+    (j : S ⟶ Y) (i n : ℕ) [Finite (Λ ⧸ I ^ n)]
+    (h : flcProperty S ((j)^*[ModuleCat.{u + 1} (Λ ⧸ I ^ n)].obj
+      (((g)_*[ModuleCat.{u + 1} (Λ ⧸ I ^ n)].rightDerived i).obj
+        (constantQuotSheaf Λ (I ^ n) T)))) :
+    IsSetFLC ((j)^*[ModuleCat.{u + 1} Λ].obj ((higherDirectImageQuotPowTower I g i).obj (op n))) :=
+  have := h
+  isSetFLC_upperStar_higherDirectImageQuotPowTower_obj I g j i n
+    (IsFiniteLocallyConstantSheaf.isSetFLC inferInstance)
+
 /-- An element of a module isomorphic to a module killed by `x` is killed by `x`. -/
 lemma _root_.ModuleCat.smul_eq_zero_of_iso {M N : ModuleCat.{u + 1} Λ} (e : M ≅ N) {x : Λ}
     (h : ∀ y : N, x • y = 0) (m : M) : x • m = 0 := by

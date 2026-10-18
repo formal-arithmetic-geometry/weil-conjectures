@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.NumberTheory.Padics.IntegersModPow
+public import WeilConjectures.NumberTheory.Padics.Exponential
 public import WeilConjectures.NumberTheory.Padics.IntegersNoetherian
 public import Mathlib.Topology.LocallyConstant.Basic
 public import WeilConjectures.RingTheory.CompleteLocalSubideal
@@ -97,19 +98,6 @@ instance isAdicComplete_span_natCast_shrink [Small.{u + 1} E] :
   exact (IsAdicComplete.congr_ringEquiv _ _).2 inferInstance
 
 omit [Algebra ℚ_[l] E] [IsScalarTower ℚ_[l] E (PadicAlgCl l)] [FiniteDimensional ℚ_[l] E] in
-/-- A nonunit of `𝒪_E` has norm `< 1`. -/
-lemma norm_lt_one_of_mem_maximalIdeal {x : integers l E}
-    (hx : x ∈ IsLocalRing.maximalIdeal (integers l E)) :
-    ‖algebraMap E (PadicAlgCl l) (x : E)‖ < 1 := by
-  have h1 : ‖algebraMap E (PadicAlgCl l) (x : E)‖ ≤ 1 := x.2
-  refine lt_of_le_of_ne h1 fun h ↦ hx ?_
-  have hx0 : (x : E) ≠ 0 := fun h0 ↦ by simp [h0] at h
-  have hinv : (x : E)⁻¹ ∈ integers l E := by
-    change ‖algebraMap E (PadicAlgCl l) (x : E)⁻¹‖₊ ≤ 1
-    rw [← NNReal.coe_le_coe, coe_nnnorm, map_inv₀, norm_inv, h, inv_one, NNReal.coe_one]
-  exact IsUnit.of_mul_eq_one (⟨_, hinv⟩ : integers l E) (Subtype.ext (by simp [hx0]))
-
-omit [Algebra ℚ_[l] E] [IsScalarTower ℚ_[l] E (PadicAlgCl l)] [FiniteDimensional ℚ_[l] E] in
 /-- The ideal `(ℓ)` of `𝒪_E` is `𝔪_E`-primary: some power of every nonunit lies in it. -/
 lemma maximalIdeal_le_radical_span_natCast :
     IsLocalRing.maximalIdeal (integers l E) ≤ (Ideal.span {(l : integers l E)}).radical := by
@@ -136,6 +124,28 @@ instance finite_quotient_span_natCast_shrink [Small.{u + 1} E] :
   have h : (Ideal.span {(l : integers l E)}).map (shrinkRingEquiv.{0, u} l E) =
       Ideal.span {(l : Shrink.{u + 1} (integers l E))} := by
     rw [Ideal.map_span, Set.image_singleton, shrinkRingEquiv_natCast]
+  Finite.of_equiv _ (Ideal.quotientEquiv _ _ (shrinkRingEquiv.{0, u} l E) h.symm).toEquiv
+
+/-- `𝒪_E ⧸ ℓⁿ` is finite. -/
+instance finite_quotient_span_natCast_pow_integers (n : ℕ) :
+    Finite (integers l E ⧸ Ideal.span {(l : integers l E)} ^ n) := by
+  have hr : IsLocalRing.maximalIdeal (integers l E) ≤
+      (Ideal.span {(l : integers l E)} ^ n).radical := by
+    rcases eq_or_ne n 0 with rfl | hn
+    · rw [pow_zero, Ideal.one_eq_top, Ideal.radical_top]
+      exact le_top
+    · rw [Ideal.radical_pow _ hn]
+      exact maximalIdeal_le_radical_span_natCast l E
+  obtain ⟨N, hN⟩ := Ideal.exists_pow_le_of_le_radical_of_fg hr (IsNoetherian.noetherian _)
+  exact Finite.of_surjective _ (Ideal.Quotient.factor_surjective hN)
+
+/-- `Λ ⧸ ℓⁿ` is finite for `Λ = Shrink 𝒪_E`. -/
+instance finite_quotient_span_natCast_pow_shrink [Small.{u + 1} E] (n : ℕ) :
+    Finite (Shrink.{u + 1} (integers l E) ⧸
+      Ideal.span {(l : Shrink.{u + 1} (integers l E))} ^ n) :=
+  have h : (Ideal.span {(l : integers l E)} ^ n).map (shrinkRingEquiv.{0, u} l E) =
+      Ideal.span {(l : Shrink.{u + 1} (integers l E))} ^ n := by
+    rw [Ideal.map_pow, Ideal.map_span, Set.image_singleton, shrinkRingEquiv_natCast]
   Finite.of_equiv _ (Ideal.quotientEquiv _ _ (shrinkRingEquiv.{0, u} l E) h.symm).toEquiv
 
 end Complete

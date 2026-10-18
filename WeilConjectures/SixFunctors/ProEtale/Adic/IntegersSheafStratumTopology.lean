@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.NumberTheory.Padics.IntegersAlgebra
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.QuotPowHigherDirectImageLimit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.IntegersSheafStratum
 public import WeilConjectures.SixFunctors.ProEtale.Adic.TowerLimitModule
@@ -19,7 +20,8 @@ identification `AlgebraicGeometry.ProEtale.nonempty_iso_homologyUpperStar_intege
 Then the group `lim_n Gₙ` of compatible families, with its limit topology, is a finite
 `𝒪_E`-module carrying the module (`ℓ`-adic) topology
 (`AlgebraicGeometry.ProEtale.towerLimit_isModuleTopology_integersStratum`): it is finite by the
-Bockstein argument (`AlgebraicGeometry.Etale.finite_limit_sheafFiber_upperStar_higherDirectImageQuotPowTower`)
+Bockstein argument
+(`AlgebraicGeometry.Etale.finite_limit_sheafFiber_upperStar_higherDirectImageQuotPowTower`)
 and `𝒪_E` acts on `Gₙ`, killed by `ℓⁿ`, through the discrete quotient `𝒪_E ⧸ ℓⁿ`
 (`PadicAlgCl.isLocallyConstant_shrinkRingEquiv_smul`).
 -/
@@ -57,7 +59,7 @@ theorem towerLimit_isModuleTopology_integersStratum {Ω : Type u} [Field Ω] [Is
       Etale.upperStar (ModuleCat.{u + 1} (integersShrink.{u} l E)) j ⋙
         (pointSmallEtale s).sheafFiber
     have (n : ℕ) : Small.{0} (G.obj (op n)) :=
-      have := (hH' n).finite_sheafFiber s
+      have : Finite (G.obj (op n)) := (hH' n).finite_sheafFiber s
       inferInstance
     letI := normedFieldOfAlgebra l E
     letI := ModuleCat.towerLimitModuleOf G (shrinkRingEquiv.{0, u} l E)
