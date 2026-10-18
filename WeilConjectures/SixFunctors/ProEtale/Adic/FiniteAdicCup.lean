@@ -31,11 +31,9 @@ compatible with the reductions `ℤ/ℓᵐ⁺¹ ⟶ ℤ/ℓᵐ` of the coefficie
 
 universe u
 
-open CategoryTheory Limits MonoidalCategory Abelian
-
 namespace AlgebraicGeometry.Etale
 
-open Opposite
+open CategoryTheory Limits Opposite
 
 variable (Λ : Type (u + 1)) [CommRing Λ] (X : Scheme.{u})
 
@@ -81,10 +79,10 @@ lemma constantRingHomEquiv_id :
 
 /-- The global section of `ℤ_X` corresponding to the identity is the generator `1`. -/
 lemma constantIntHomEquiv_id :
-    Sheaf.constantIntHomEquiv X.smallEtaleTopology (terminalEtaleIsTerminal X) _ (𝟙 _) =
+    Sheaf.constantIntHomEquiv.{u + 1} X.smallEtaleTopology (terminalEtaleIsTerminal X) _ (𝟙 _) =
       ((toSheafify X.smallEtaleTopology
         ((Functor.const X.Etaleᵒᵖ).obj (AddCommGrpCat.of (ULift.{u + 1} ℤ)))).app
-          (op (terminalEtale X))).hom (ULift.up 1) := by
+          (op (terminalEtale X))).hom (ULift.up.{u + 1} (1 : ℤ)) := by
   rfl
 
 /-- The class `ℤ_X ⟶ Λ_X` of `1` is the constant sheaf map of `ℤ ⟶ Λ`. -/
@@ -92,18 +90,20 @@ lemma constantIntToRing_comp_sheafForget₂ConstantRingIso_hom :
     Sheaf.constantIntToRing X.smallEtaleTopology (terminalEtaleIsTerminal X) Λ ≫
         (sheafForget₂ConstantRingIso Λ X).hom =
       (constantSheaf X.smallEtaleTopology AddCommGrpCat.{u + 1}).map
-        (AddCommGrpCat.ofHom ((Int.castAddHom Λ).comp AddEquiv.ulift.toAddMonoidHom)) := by
-  apply (Sheaf.constantIntHomEquiv X.smallEtaleTopology (terminalEtaleIsTerminal X) _).injective
+        (AddCommGrpCat.ofHom ((Int.castAddHom Λ).comp
+          (AddEquiv.ulift : ULift.{u + 1} ℤ ≃+ ℤ).toAddMonoidHom)) := by
+  apply (Sheaf.constantIntHomEquiv.{u + 1} X.smallEtaleTopology (terminalEtaleIsTerminal X)
+    _).injective
   rw [Sheaf.constantIntHomEquiv_comp, Sheaf.constantIntToRing]
-  erw [Equiv.apply_symm_apply,
-    constantRingHomEquiv_id]
+  erw [Equiv.apply_symm_apply, constantRingHomEquiv_id]
   conv_rhs => rw [← Category.id_comp ((constantSheaf _ _).map _), Sheaf.constantIntHomEquiv_comp,
     constantIntHomEquiv_id]
   have hK := congrArg (fun k ↦ k.hom (1 : Λ))
     (toSheafify_comp_sheafForget₂ConstantRingIso_hom Λ X (op (terminalEtale X)))
-  have hN := congrArg (fun k ↦ (k.app (op (terminalEtale X))).hom (ULift.up (1 : ℤ)))
+  have hN := congrArg (fun k ↦ (k.app (op (terminalEtale X))).hom (ULift.up.{u + 1} (1 : ℤ)))
     (toSheafify_naturality X.smallEtaleTopology ((Functor.const X.Etaleᵒᵖ).map
-      (AddCommGrpCat.ofHom ((Int.castAddHom Λ).comp AddEquiv.ulift.toAddMonoidHom))))
+      (AddCommGrpCat.ofHom ((Int.castAddHom Λ).comp
+          (AddEquiv.ulift : ULift.{u + 1} ℤ ≃+ ℤ).toAddMonoidHom))))
   dsimp at hK hN
   refine hK.trans (Eq.trans ?_ hN)
   exact congrArg _ (Int.cast_one (R := Λ)).symm
@@ -114,7 +114,8 @@ lemma epi_constantIntToRing (hΛ : Function.Surjective (Int.cast : ℤ → Λ)) 
   have h := constantIntToRing_comp_sheafForget₂ConstantRingIso_hom Λ X
   rw [← Iso.eq_comp_inv] at h
   rw [h]
-  have : Epi (AddCommGrpCat.ofHom ((Int.castAddHom Λ).comp AddEquiv.ulift.toAddMonoidHom)) := by
+  have : Epi (AddCommGrpCat.ofHom ((Int.castAddHom Λ).comp
+          (AddEquiv.ulift : ULift.{u + 1} ℤ ≃+ ℤ).toAddMonoidHom)) := by
     rw [AddCommGrpCat.epi_iff_surjective]
     intro y
     obtain ⟨n, rfl⟩ := hΛ y
@@ -143,6 +144,8 @@ lemma constantRingForgetMap_comp_sheafForget₂ConstantRingIso_hom {Λ' : Type (
   simp
 
 end AlgebraicGeometry.Etale
+
+open CategoryTheory Limits MonoidalCategory Abelian
 
 namespace AlgebraicGeometry.ProEtale
 
@@ -346,7 +349,7 @@ lemma forgetComparisonUpperStarUnit_comp_map_constantRingMap :
   rw [forgetComparisonUpperStarUnit, forgetComparisonUpperStarUnit, Category.assoc,
     Functor.comp_map, ← Functor.map_comp]
   erw [h]
-  rfl
+  try rfl
 
 omit [CompactSpace S] [QuasiSeparatedSpace S] in
 /-- The isomorphism of the constant pro-étale sheaf with `U ↦ C(U, A)` is natural in `A`. -/

@@ -110,27 +110,34 @@ theorem exists_traceCup_isPerfect_of_linearEquiv
   let cup (i j k : ℤ) (h : i + j = k) :
       (H i).carrier →ₗ[PadicAlgCl l] (H j).carrier →ₗ[PadicAlgCl l] (H k).carrier :=
     if hij : 0 ≤ i ∧ 0 ≤ j then cupNN i j k hij.1 hij.2 (by omega) h else 0
+  have hcup (i j k : ℤ) (h : i + j = k) (hij : 0 ≤ i ∧ 0 ≤ j) (x : (H i).carrier)
+      (y : (H j).carrier) : cup i j k h x y = Θ k (by omega)
+        (ProEtale.adicConstantHCup l f.geometricFiber hfin (i := i.toNat) (j := j.toNat)
+          (k := k.toNat) (by omega) ((Θ i hij.1).symm x) ((Θ j hij.2).symm y)) := by
+    simp only [cup, dif_pos hij]
+    rfl
+  have hcup0 (i j k : ℤ) (h : i + j = k) (hij : ¬ (0 ≤ i ∧ 0 ≤ j)) : cup i j k h = 0 := by
+    simp only [cup, dif_neg hij]
   refine ⟨FrobeniusModule.TraceCup.mk cup ?_ ?_ tr.toLinearMap htr,
     ⟨tr.bijective, fun i j h ↦ ?_⟩⟩
   · intro i j k h x y
     by_cases hij : 0 ≤ i ∧ 0 ≤ j
-    · simp only [cup, dif_pos hij, cupNN, LinearMap.compr₂_apply, LinearMap.compl₁₂_apply,
-        LinearEquiv.coe_coe, hΘ']
-      rw [← hΘ]
+    · rw [hcup i j k h hij, hcup i j k h hij, hΘ', hΘ', ← hΘ]
       exact congrArg _ (ProEtale.adicConstantHPullback_adicConstantHCup l f.geometricFiber hfin
         f.geometricGaloisFrobenius _ _ _).symm
-    · simp only [cup, dif_neg hij, LinearMap.zero_apply, map_zero]
+    · rw [hcup0 i j k h hij]
+      exact (map_zero ((adicConstant k₀ l X).cohomology k).frobenius).symm
   · intro i j k h x y
     by_cases hij : 0 ≤ i ∧ 0 ≤ j
     · have hji : 0 ≤ j ∧ 0 ≤ i := ⟨hij.2, hij.1⟩
-      simp only [cup, dif_pos hij, dif_pos hji, cupNN, LinearMap.compr₂_apply,
-        LinearMap.compl₁₂_apply, LinearEquiv.coe_coe]
       have hs : ((i.toNat : ℤ) * j.toNat).negOnePow = (i * j).negOnePow := by
         rw [Int.toNat_of_nonneg hij.1, Int.toNat_of_nonneg hij.2]
-      rw [ProEtale.adicConstantHCup_comm l f.geometricFiber hfin (by omega), hs, Units.smul_def,
-        Units.smul_def, map_zsmul]
+      rw [hcup j i k (by omega) hji, hcup i j k h hij,
+        ProEtale.adicConstantHCup_comm l f.geometricFiber hfin (i := i.toNat) (j := j.toNat)
+          (k := k.toNat) (by omega), hs, Units.smul_def, Units.smul_def, map_zsmul]
     · have hji : ¬ (0 ≤ j ∧ 0 ≤ i) := fun h' ↦ hij ⟨h'.2, h'.1⟩
-      simp only [cup, dif_neg hij, dif_neg hji, LinearMap.zero_apply, smul_zero]
+      rw [hcup0 j i k (by omega) hji, hcup0 i j k h hij, LinearMap.zero_apply, LinearMap.zero_apply,
+        LinearMap.zero_apply, LinearMap.zero_apply, smul_zero]
   · -- perfectness of `⟨x, y⟩ = tr (x ⌣ y)`
     change ((cup i j (2 * d) h).compr₂ tr.toLinearMap).IsPerfPair
     by_cases hij : 0 ≤ i ∧ 0 ≤ j
@@ -144,8 +151,8 @@ theorem exists_traceCup_isPerfect_of_linearEquiv
             ((Θ (2 * d) hk).trans tr).toLinearMap).compl₁₂ (Θ i hij.1).symm.toLinearMap
               (Θ j hij.2).symm.toLinearMap := by
         ext x y
-        simp only [cup, dif_pos hij, cupNN, LinearMap.compr₂_apply, LinearMap.compl₁₂_apply,
-          LinearEquiv.coe_coe, LinearEquiv.trans_apply]
+        rw [LinearMap.compr₂_apply, hcup i j (2 * d) h hij]
+        rfl
       rw [heq]
       infer_instance
     · have hsub (r : ℤ) (hr : r < 0 ∨ 2 * (d : ℤ) < r) : Subsingleton (H r).carrier :=
