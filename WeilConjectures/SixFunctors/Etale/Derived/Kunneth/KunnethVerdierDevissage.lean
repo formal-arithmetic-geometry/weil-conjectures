@@ -95,11 +95,14 @@ theorem isIso_kunnethVerdierMap_of_isClosedImmersion_of_isOpenImmersion
   have sqj := isPullback_pullbackMapLeft a b j
   have wi : pullbackMapLeft a b i ≫ pullback.snd a b = pullback.snd (i ≫ a) b := by simp
   have wj : pullbackMapLeft a b j ≫ pullback.snd a b = pullback.snd (j ≫ a) b := by simp
-  have hτj (B : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology 𝓜)) :
-      IsIso (rightDerivedUpperShriekTensorMap (pullbackMapLeft a b j)
-        ((L((pullback.fst a b)^*[𝓜])).obj M) ((L((pullback.snd a b)^*[𝓜])).obj B)) :=
-    isIso_rightDerivedUpperShriekTensorMap_of_isOpenImmersion Λ (pullbackMapLeft a b j)
-      (pullbackMapLeft a b i) hij' _ _
+  have hτi (B : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology 𝓜))
+      (hB : constructibleFiniteTor 𝓜 Y B) :
+      IsIso (rightDerivedUpperShriekTensorMap (pullbackMapLeft a b i)
+        ((L((pullback.fst a b)^*[𝓜])).obj M) ((L((pullback.snd a b)^*[𝓜])).obj B)) := by
+    have hE := exists_nonempty_iso_derivedTensor_rightDerivedLowerStar Λ b a j hM
+      (Iso.refl ((L((pullback.fst a b)^*[𝓜])).obj M)) hB
+    exact isIso_rightDerivedUpperShriekTensorMap_of_isClosedImmersion Λ (pullbackMapLeft a b i)
+      (pullbackMapLeft a b j) hij' _ _ hE
   sorry
 
 end Etale

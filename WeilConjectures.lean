@@ -7508,8 +7508,8 @@ public import WeilConjectures.RingTheory.DimensionQuasiFiniteOverPolynomialAlgeb
 public import WeilConjectures.RingTheory.DirectSumExtensionAssembly
 public import WeilConjectures.RingTheory.DirectedSubalgebraTensorColimit
 public import WeilConjectures.RingTheory.DirectedTensorCoconesColimit
-public import WeilConjectures.RingTheory.DiscreteValuationRing.Dominating
 public import WeilConjectures.RingTheory.DiscreteValuationRing.DerivedQuotientDuality
+public import WeilConjectures.RingTheory.DiscreteValuationRing.Dominating
 public import WeilConjectures.RingTheory.DiscreteValuationRing.QuotientDuality
 public import WeilConjectures.RingTheory.DualContent
 public import WeilConjectures.RingTheory.DualDepthTwo
@@ -8804,8 +8804,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExceptionalCore
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExceptionalCoreInduction
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExceptionalGeneral
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExternalHom
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethVerdierTransport
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Formal
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethVerdierDevissage
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethVerdierTransport
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.OrdinaryCompactSupport
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.OrdinaryProper
@@ -8952,6 +8953,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Tensor
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Unit
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Vanishing
 public import WeilConjectures.SixFunctors.Etale.Derived.VerdierBiduality
+public import WeilConjectures.SixFunctors.Etale.Derived.VerdierDualPullbackSmooth
 public import WeilConjectures.SixFunctors.Etale.Derived.VerdierExchange
 public import WeilConjectures.SixFunctors.Etale.Derived.VerdierPreservation
 public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplex
