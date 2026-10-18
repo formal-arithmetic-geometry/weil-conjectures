@@ -1,0 +1,129 @@
+{
+ "id": "lem-finrepair-existing-derived-modification-comparison",
+ "kind": "statement",
+ "title": "Existing derived object comparison for a proper modification",
+ "statement": "Let $Λ$ be a finite commutative ring. Let $π:Y\\to X$ be proper [def-weil-proper-morphism], let $j:U\\to X$ and $j\\prime:U\\prime\\to Y$ be open immersions [def-weil-open-immersion], and let $h:U\\prime\\to U$ be an isomorphism such that the square is cartesian [def-pc-fibre-product]. For any sheaf $G$ of $Λ$-modules on the small etale site of $U$ [def-weil-pbc-etale-sheaves], there exists an isomorphism $Rπ_*((j\\prime_!h^{-1}G)[0])\\simeq(j_!G)[0]$ in the unbounded derived category, using [def-weil-pbc-extension-by-zero], [def-weil-pbc-inverse-image], and [def-weil-pbc-direct-image]. This asserts an object isomorphism, with no assertion about the specific underived adjunction map.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/Finiteness/Modification.lean",
+  "place": "nonempty_rightDerivedLowerStar_openImmersionLowerShriek_iso, lines 75-135; existing proved source-library theorem for blueprint lem-finrepair-modification-extension-zero"
+ },
+ "stmt_deps": [
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-pc-fibre-product",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-shriek-base-change-map",
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof": [
+  {
+   "text": "Write F=j\\prime_!h^{-1}G and M=Rπ_*(F[0]). Let i be the closed complement of j. Proper base change for the finite coefficient ring [thm-weil-pbc-bounded-below], transported to the unbounded category on this bounded-below object by upperStarRightDerivedLowerStarSingleIso, identifies i^{-1}M with the direct image of the restriction of F to the inverse image of the complement. The two ranges are disjoint, by the pullback identity, so this restriction is zero by [lemma-openclosed-vanishing-lowershriek]. Hence i^{-1}M=0.",
+   "uses": [
+    "thm-weil-pbc-bounded-below",
+    "lemma-openclosed-vanishing-lowershriek"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The open-closed triangle [lem-cbc-open-closed-recollement] now shows that the counit j_!j^{-1}M → M is invertible: its third object is zero. The source-library exists_distTriang_openClosed is the unbounded form used by the already existing proof.",
+   "uses": [
+    "lem-cbc-open-closed-recollement"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Etale base change [lem-weil-pbc-etale-localization-exchange] identifies j^{-1}M with Rh_*(j\\prime^{-1}F[0]). The unit for extension by zero is invertible by [lem-weil-pbc-extension-by-zero-unit-iso], so j\\prime^{-1}F ≅ h^{-1}G. Since h is an isomorphism, h^{-1} and h_* are exact inverse equivalences and Rh_*(h^{-1}G[0]) ≅ G[0]. Combine this isomorphism with the inverse counit of step 2 and the exactness of j_! to obtain M ≅ (j_!G)[0]. These are exactly the isomorphisms e₁ and the final composite in the existing Lean proof.",
+   "uses": [
+    "lem-weil-pbc-etale-localization-exchange",
+    "lem-weil-pbc-extension-by-zero-unit-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-weil-pbc-bounded-below",
+  "lemma-openclosed-vanishing-lowershriek",
+  "lem-cbc-open-closed-recollement",
+  "lem-weil-pbc-etale-localization-exchange",
+  "lem-weil-pbc-extension-by-zero-unit-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/Finiteness/Modification.lean",
+  "place": "Existing complete Lean proof, extracted verbatim in meaning; no new Lean statement or proof obligation."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "higher direct image of extension by zero under a proper morphism is an isomorphism on its open support",
+   "results": "8 hits including sheafPushforwardCocontinuousCompSheafToPresheafIso_hom, HomologicalComplex.isSupported_iff_of_quasiIso, Scheme.Modules.restrictFunctorAdjCounitIso; no matching etale modification theorem.",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib match; source-library rg search found the existing proved theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived direct image of extension by zero under a proper morphism is extension by zero if the morphism is an isomorphism over the open subset",
+   "results": "8 hits including IsProper.instRespectsIsoScheme, Scheme.Hom.isoImage, IsProper.instMorphismRestrict; no matching derived etale theorem.",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctor.*single.*[Hh]omology|single.*rightDerivedFunctor.*[Zz]ero",
+   "results": "0 hits through msearch; direct rg on the source library found the comparison in Derived/Finiteness/Modification.lean.",
+   "date": "2026-10-18",
+   "verdict": "Existing source theorem reused; no duplicate Lean theorem introduced."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ModificationExtensionZero",
+  "date": "2026-10-18",
+  "group": "V1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-finrepair-modification-extension-zero",
+   "place": "Proof, second paragraph: proper geometric-fibre calculation of the derived object; existing source library supplies this through open-closed support.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Modification",
+  "declaration": "AlgebraicGeometry.Etale.nonempty_rightDerivedLowerStar_openImmersionLowerShriek_iso",
+  "statement": "theorem nonempty_rightDerivedLowerStar_openImmersionLowerShriek_iso {X Y U U' : Scheme.{u}}\n    (π : Y ⟶ X) [IsProper π] (j : U ⟶ X) [IsOpenImmersion j] (j' : U' ⟶ Y) [IsOpenImmersion j']\n    (π' : U' ⟶ U) [IsIso π'] (sq : IsPullback j' π' π j)\n    (G : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :\n    Nonempty ((R((π)_*[ModuleCat.{u + 1} Λ])).obj ((singleFunctor _ 0).obj\n        ((j')_!open[ModuleCat.{u + 1} Λ].obj ((π')^*[ModuleCat.{u + 1} Λ].obj G))) ≅\n      (singleFunctor _ 0).obj ((j)_!open[ModuleCat.{u + 1} Λ].obj G))",
+  "branch": "sheaf-dag",
+  "by": "V1",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261018T062931-L-685936",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261018T062931-L-685936",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
