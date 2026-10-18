@@ -15,9 +15,111 @@
   "def-weil-pbc-g-ring",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Each $A_j$ is flat over $R$ by [lem-weil-pbc-smooth-ring-map-flat]. The algebra colimit cocone with apex $B$ is also a colimit of the underlying $R$-modules by [lem-weil-pbc-filtered-colimit-algebras-underlying-module], since $J$ is small and filtered. Thus [lem-weil-pbc-filtered-colimit-flat-modules] makes $B$ a flat $R$-module. No Noetherian assumption on $R$ or $B$ is used.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-flat",
+    "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+    "lem-weil-pbc-filtered-colimit-flat-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07EP, lemma-colimit-smooth-regular, proof, first sentence (Algebra 00TA and 05UT)."
+   }
+  },
+  {
+   "text": "Fix a prime $\\mathfrak p\\subset R$ and put $k=\\kappa(\\mathfrak p)$ and $F=B\\otimes_R k$; $F$ is Noetherian by hypothesis. Let $K/k$ be any finite purely inseparable extension [def-weil-pbc-finite-purely-inseparable-extension]. Put $C=K\\otimes_R B$ and $C_j=K\\otimes_R A_j$, with $K$ an $R$-algebra via $R\\to k\\to K$. Tensor cancellation [lem-weil-pbc-tensor-cancel-base-change] with $S=k$, $A=K$ gives $K\\otimes_k(k\\otimes_R B)\\cong C$. Symmetry $k\\otimes_R B\\cong F$, given by $a\\otimes b\\mapsto b\\otimes a$ and its inverse, therefore identifies $K\\otimes_k F$ with $C$. Choose a finite $k$-basis $e_1,\\ldots,e_n$ of $K$. The elements $e_i\\otimes1$ generate $K\\otimes_k F$ over $F$: write each first tensor factor in that basis and use bilinearity [def-weil-pbc-module-tensor-product]. Thus [lem-weil-pbc-finite-algebra-noetherian] makes $K\\otimes_k F$, and hence $C$, Noetherian. This supplies the Noetherian hypothesis implicit in the Stacks proof.",
+   "uses": [
+    "def-weil-pbc-finite-purely-inseparable-extension",
+    "lem-weil-pbc-tensor-cancel-base-change",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-finite-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07EP, lemma-colimit-smooth-regular, proof, finite purely inseparable extension and displayed tensor identity; implicit Noetherianity uses Algebra 00FN."
+   }
+  },
+  {
+   "text": "We check that $C$ is the colimit of the rings $C_j$. Work in a common universe containing $J$, its morphisms, and all rings under consideration, so the universe hypothesis of [lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise] holds. Apply that node with $N=K$ and use tensor symmetry: $C$ is the colimit of the $R$-modules $C_j$, every element comes from one stage, and the coprojections $\\gamma_j:C_j\\to C$ are ring maps. Given a compatible ring cocone $f_j:C_j\\to T$, equip $T$ with its $R$-algebra structure using any one $f_j$. This is independent of $j$: maps from two indices to a common index identify their composites with $R$. The $f_j$ are now $R$-linear, so the module colimit gives a unique $R$-linear $f:C\\to T$ with $f\\gamma_j=f_j$. For $x,y\\in C$, represent both at a common stage $j$ using filteredness and the representation assertion. Then $f(xy)=f_j(x_jy_j)=f_j(x_j)f_j(y_j)=f(x)f(y)$; also $f(1)=f_j(1)=1$. Hence $f$ is a ring map. Conversely any ring map with these factorizations is $R$-linear and is the same $f$. This proves the ring-colimit universal property [def-weil-pbc-category-colimit] without assuming that arbitrary algebra colimits preserve underlying modules.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07EP, lemma-colimit-smooth-regular, proof, displayed equality with the colimit (Algebra 00DD and 00D6), ring universal property written out."
+   }
+  },
+  {
+   "text": "The map $K\\to C_j=K\\otimes_R A_j$ is smooth by clause (1) of [lem-weil-pbc-smooth-ring-map-base-change-composition]. Since $K$ is a field, [lem-weil-pbc-smooth-over-field-regular-local] says that every localization of $C_j$ at a prime is regular local. Fix a prime $\\mathfrak q\\subset C$ and let $\\mathfrak q_j=\\gamma_j^{-1}(\\mathfrak q)$. By [lem-weil-pbc-filtered-colimit-localization-at-prime], the rings $L_j=(C_j)_{\\mathfrak q_j}$ form a filtered diagram with colimit $L=C_{\\mathfrak q}$. Its transition maps are local: for an arrow $a:j\\to j'$ and a fraction $x/s\\in L_j$, its image belongs to the maximal ideal of $L_{j'}$ exactly when $C(a)(x)\\in\\mathfrak q_{j'}$, equivalently $x\\in\\mathfrak q_j$, exactly when $x/s$ belongs to the maximal ideal of $L_j$ [def-weil-pbc-localization-at-prime]. Here the denominator stays outside the prime by contraction. Each $L_j$ is regular local, and $L$ is Noetherian by [lem-weil-pbc-localization-noetherian], applied to the Noetherian ring $C$ from step 2.",
+   "uses": [
+    "lem-weil-pbc-smooth-ring-map-base-change-composition",
+    "lem-weil-pbc-smooth-over-field-regular-local",
+    "lem-weil-pbc-filtered-colimit-localization-at-prime",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07EP, lemma-colimit-smooth-regular, proof, smooth base change (00T4), regularity at the stages (00TT), localization of the filtered colimit (037D), Noetherian localization (00FN)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-filtered-category-directed-cofinal] to $J$ and the localized diagram of step 4. It supplies a small nonempty directed system of the same regular local rings with the same colimit $L$; all its transition maps are still local, since they are maps from the original localized diagram. The hypotheses of [lem-per-noetherian-local-colimit-regular] are therefore satisfied: regular local stages, local transition maps, and Noetherian apex $L$. Consequently $C_{\\mathfrak q}=L$ is regular local. Since $\\mathfrak q$ was arbitrary and $C$ is Noetherian, $C$ is a regular ring [def-weil-regular-scheme].",
+   "uses": [
+    "lem-weil-pbc-filtered-category-directed-cofinal",
+    "lem-per-noetherian-local-colimit-regular",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07EP, lemma-colimit-smooth-regular, proof, last sentence: Algebra 07DX; passage from small filtered categories to directed sets is Categories 0032."
+   }
+  },
+  {
+   "text": "For the chosen prime $\\mathfrak p$, the fibre $F$ is Noetherian and step 5 proves that $K\\otimes_k F\\cong C$ is regular for every finite purely inseparable extension $K/k$. Hence $F$ is geometrically regular over $k$ by [def-weil-pbc-g-ring]. This applies to every $\\mathfrak p\\subset R$. Together with flatness from step 1, it is precisely the definition in that node of a regular ring map $R\\to B$. The zero fibre causes no exception: it is Noetherian and has no prime localizations to check.",
+   "uses": [
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07EP, lemma-colimit-smooth-regular, proof, conclusion, using the definitions recalled in Section 07BY (Definition 07BZ and Algebra 0382)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-ring-map-flat",
+  "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+  "lem-weil-pbc-filtered-colimit-flat-modules",
+  "def-weil-pbc-finite-purely-inseparable-extension",
+  "lem-weil-pbc-tensor-cancel-base-change",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-smooth-ring-map-base-change-composition",
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "lem-weil-pbc-filtered-colimit-localization-at-prime",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-filtered-category-directed-cofinal",
+  "lem-per-noetherian-local-colimit-regular",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-g-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07EP, lemma-colimit-smooth-regular, proof at lines 10466–10483; tensor and localization details expanded and 07DX applied after Categories 0032."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -88,10 +190,45 @@
    "results": "{\"t\": \"2026-10-18T20:14:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"Regular\\\", \\\"Smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-18",
    "verdict": "no match: hits give smooth flatness, polynomial regular rings, or existence of colimits, not regularity of a smooth filtered colimit"
+  },
+  {
+   "tool": "grep",
+   "query": "colimit.*regular|regular.*colimit|[Gg]eometrically[Rr]egular|RingHom\\.Regular",
+   "results": "{\"t\": \"2026-10-18T20:45:23Z\", \"tool\": \"grep\", \"query\": \"colimit.*regular|regular.*colimit|[Gg]eometrically[Rr]egular|RingHom\\\\.Regular\", \"sub\": \"\", \"ok\": true, \"n_hits\": 14, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ObjectProperty/ColimitsCardinalClosure.lean\", \"Mathlib/CategoryTheory/Presentable/CardinalFilteredPresentation.lean\", \"Mathlib/CategoryTheory/Presentable/CardinalFilteredPresentation.lean\", \"Mathlib/CategoryTheory/Presentable/Basic.lean\", \"Mathlib/CategoryTheory/Presentable/Limits.lean\", \"Mathlib/CategoryTheory/Presentable/Limits.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/RegularMono.lean\", \"Mathlib/CategoryTheory/Limits/Shapes/RegularMono.lean\"], \"digest\": \"bd03bae6adeb4c7f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: smoothness, smooth flatness and colimit constructions do not assert geometric regularity of these fibres"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A filtered colimit of smooth ring maps with noetherian fibers is regular",
+   "results": "{\"t\": \"2026-10-18T20:45:24Z\", \"tool\": \"leansearch\", \"query\": \"A filtered colimit of smooth ring maps with noetherian fibers is regular\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRingCat.FilteredColimits.colimit\", \"CommRingCat.FilteredColimits.colimitCoconeIsColimit\", \"CommRingCat.FilteredColimits.colimitCocone\", \"RingCat.FilteredColimits.colimit\", \"CommSemiRingCat.FilteredColimits.colimit\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"RingHom.Smooth\", \"CommRingCat.FilteredColimits.R\"], \"digest\": \"2da98794a6cff3af\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: smoothness, smooth flatness and colimit constructions do not assert geometric regularity of these fibres"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Regular\", \"Smooth\"",
+   "results": "{\"t\": \"2026-10-18T20:45:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"Regular\\\", \\\"Smooth\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: smoothness, smooth flatness and colimit constructions do not assert geometric regularity of these fibres"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A filtered colimit of smooth algebras with Noetherian fibres is a regular ring map",
+   "results": "{\"t\": \"2026-10-18T20:45:26Z\", \"tool\": \"leanfinder\", \"query\": \"A filtered colimit of smooth algebras with Noetherian fibres is a regular ring map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Smooth.flat_of_isNoetherianRing\", \"Algebra.Smooth.exists_finiteType\", \"RingHom.IsStandardSmooth.toAlgebra\", \"Algebra.Smooth.flat\", \"Algebra.Smooth.exists_subalgebra_fg\", \"Algebra.Smooth.exists_subalgebra_finiteType\", \"Algebra.FormallySmooth.flat_of_algHom_of_isNoetherianRing\", \"Algebra.instSmoothOfIsStandardSmooth\"], \"digest\": \"3bb69e51c49d23a8\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: smoothness, smooth flatness and colimit constructions do not assert geometric regularity of these fibres"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An ind smooth algebra with noetherian geometric fibers defines a regular homomorphism",
+   "results": "{\"t\": \"2026-10-18T20:50:25Z\", \"tool\": \"leanfinder\", \"query\": \"An ind smooth algebra with noetherian geometric fibers defines a regular homomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instHasRingHomPropertyIsSmoothLocallyIsStandardSmooth\", \"Algebra.Smooth\", \"AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension\", \"RingHom.Smooth\", \"RingHom.IsStandardSmoothOfRelativeDimension.isStandardSmooth\", \"RingHom.IsStandardSmooth.smooth\", \"Algebra.Smooth.flat_of_isNoetherianRing\", \"Algebra.instSmoothOfIsStandardSmooth\"], \"digest\": \"d1c770fb8c9aeb3d\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: smoothness, smooth flatness and colimit constructions do not assert geometric regularity of these fibres"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-regular-strict-local-model",
@@ -116,5 +253,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-smooth-colimit-regular",
+  "worker": "stage1",
+  "summary": "Kept the statement and split the Stacks 07EP proof into six steps. Reused existing flatness, tensor, finite-algebra Noetherianity, smoothness, localization and directed-reindexing tools. Added only the general local-ring colimit lemma 07DX, statement-only and searched in Mathlib. Made Noetherianity after finite residue-field extension and the locality of every localized transition explicit. No Lean attachment, no statement dispute, no SGA source.",
+  "blueprint": "Proof Step 1: dimension-normalized duality; finite prime-power regular pullback, XVII 4.3.2.1 initial strict-local reduction, before normalization of the one-dimensional integral base. Algebraic input for the regular strict-local reduction: regularity of the ind-etale source extension, via smooth filtered colimits (07EP). This split supplies the smooth-colimit input to that strict-local reduction by the proof of Stacks 07EP.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+    "why": "Generic algebraic tool used in Stacks 07EP: A filtered colimit of algebras is the colimit of the underlying modules. The perverse Fourier unit does not prove this separate commutative-algebra fact; it is used only within the regular strict-local algebra input."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
+    "why": "Generic algebraic tool used in Stacks 07EP: Base change of a filtered colimit of algebras, elementwise. The perverse Fourier unit does not prove this separate commutative-algebra fact; it is used only within the regular strict-local algebra input."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-over-field-regular-local",
+    "why": "Generic algebraic tool used in Stacks 07EP: Local rings of a smooth algebra over a field are regular. The perverse Fourier unit does not prove this separate commutative-algebra fact; it is used only within the regular strict-local algebra input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-filtered-colimit-algebras-underlying-module",
+  "lem-weil-pbc-filtered-colimit-algebras-tensor-elementwise",
+  "lem-weil-pbc-smooth-over-field-regular-local"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q97-18d84eb1d",
+  "group": "Q97",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-18d84eb1d (reviewer sub-agent of L); spot-checked: Read Stacks 07EP (more-algebra.tex 10458-10483) and 07DX (algebra.tex 25834ff), every tag/label checked in tags/tags, the item and new node in full, and all 18 cited statements. The item statement, stmt_deps, source and blueprint are byte-equal to the base (Q43 snapshot) and match the parent's use. All six steps are correct. Step 1: smooth implies flat, the algebra colimit is the module colimit (J small filtered), so B is flat. Step 2: tensor-cancel with S=k, A=K plus a finite basis makes C finite over the Noetherian F, hence Noetherian; this is the Noetherianity 07EP leaves implicit. Step 3: the ring-colimit universal property is written out from tensor-elementwise. Step 4: smooth base change and smooth-over-field-regular-local; localization-at-prime gives the localized colimit; numerator test shows the transition maps are local; localization-noetherian. Step 5: Categories 0032 reindexing keeps the maps local; the new node applies, so C is regular. Step 6: the definition in def-weil-pbc-g-ring. New node lem-per-noetherian-local-colimit-regular is exactly 07DX: self-contained, statement-only, searched with three kinds of tool, blueprint from/via correct. It is true (tested on a constant system, a tower of fields, and non-injective local maps); the Noetherian apex is necessary. It is strictly smaller than the item (no base ring, smoothness, flatness or residue extension), not a restated clause. Whole-DAG grep found no duplicate: lem-weil-pbc-field-regular-ring covers only the field case. Accepted tool_uses: filtered-colimit-algebras-underlying-module, filtered-colimit-algebras-tensor-elementwise, smooth-over-field-regular-local (generic commutative algebra; they replace no unit step). No SGA. No fixes."
  }
 }
