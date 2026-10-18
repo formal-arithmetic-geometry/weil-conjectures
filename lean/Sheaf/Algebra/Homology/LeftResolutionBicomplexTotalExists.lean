@@ -64,7 +64,28 @@ theorem leftResolution_bicomplex_total_exists
     (Λ.bicomplexFunctor.obj K).HasTotal (ComplexShape.up ℤ) ∧
     ((ι.mapHomologicalComplex₂ (ComplexShape.up ℤ)
       (ComplexShape.up ℤ)).obj (Λ.bicomplexFunctor.obj K)).HasTotal
-      (ComplexShape.up ℤ) := by sorry
+      (ComplexShape.up ℤ) := by
+  letI : K.IsStrictlyLE b := (CochainComplex.isStrictlyLE_iff K b).2 hK
+  constructor
+  · intro p q hq
+    exact CochainComplex.isZero_of_isStrictlyLE _ 0 q hq
+  constructor
+  · intro p q hp
+    have hz : IsZero ((Λ.bicomplexFunctor.obj K).X p) :=
+      CochainComplex.isZero_of_isStrictlyLE _ b p hp
+    exact (HomologicalComplex.eval _ _ q).map_isZero hz
+  constructor
+  · intro p q hq
+    exact CochainComplex.isZero_of_isStrictlyLE _ 0 q hq
+  constructor
+  · intro p q hp
+    have hz : IsZero (((ι.mapHomologicalComplex₂ (ComplexShape.up ℤ)
+        (ComplexShape.up ℤ)).obj (Λ.bicomplexFunctor.obj K)).X p) :=
+      CochainComplex.isZero_of_isStrictlyLE _ b p hp
+    exact (HomologicalComplex.eval _ _ q).map_isZero hz
+  constructor
+  · exact HomologicalComplex₂.hasTotal_of_isStrictlyLE _ b 0
+  · exact HomologicalComplex₂.hasTotal_of_isStrictlyLE _ b 0
 
 
 end CategoryTheory.Abelian.LeftResolution
