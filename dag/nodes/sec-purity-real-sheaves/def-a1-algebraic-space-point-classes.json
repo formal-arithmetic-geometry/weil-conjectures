@@ -1,0 +1,118 @@
+{
+ "id": "def-a1-algebraic-space-point-classes",
+ "kind": "definition",
+ "title": "Field-valued point classes and the map from scheme points",
+ "status": "split",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and $F$ a presheaf of sets on the category of schemes over $S$, with test schemes and universes as in [def-trf-algebraic-space]. A field-valued point representative is a field $K$ [def-weil-field], a map $s:\\operatorname{Spec}K\\to S$ [def-weil-affine-spectrum], and an element $x\\in F(\\operatorname{Spec}K,s)$. Two representatives are equivalent when their restrictions to a common field extension agree, compatibly with their maps to $S$. The set $|F|$ of point classes is their quotient by this relation. For a scheme $T$ over $S$ and a morphism $t:h_T\\to F$, the map $|t|:|T|\\to|F|$ sends a scheme point $x$ to the class represented by $\\operatorname{Spec}\\kappa(x)\\to T\\to F$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-trf-algebraic-space",
+  "def-weil-field",
+  "def-weil-affine-spectrum"
+ ],
+ "source": {
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 03BU (definition-points), the common-extension equivalence relation immediately preceding it, and lemma-scheme-points immediately following it."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "quotient of field valued points of an algebraic space by common field extensions",
+   "results": "8 hits: AlgebraicGeometry.Scheme.SpecToEquivOfField_eq_iff; InfiniteGalois.normalAutEquivQuotient; IsGalois.normalAutEquivQuotient; algebraicClosure.algEquivOfAlgEquiv; AlgebraicGeometry.Scheme.residueField; BrauerGroup; AlgebraicGeometry.Scheme.RationalMap; AlgebraicGeometry.Scheme.residueFieldCongr.",
+   "date": "2026-10-18",
+   "verdict": "No algebraic-space point quotient; only scheme residue-field or unrelated quotients."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicSpace.Point, Quot",
+   "results": "0 hits; loogle: unknown identifier 'AlgebraicSpace.Point'",
+   "date": "2026-10-18",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "PointRepresentative|schemePointMap|namespace AlgebraicSpace (Mathlib/AlgebraicGeometry)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "No algebraic-space point quotient."
+  },
+  {
+   "tool": "grep",
+   "query": "PointRepresentative|schemePointMap|def Point |abbrev Point |Quot.*[Pp]oint|[Pp]oint.*Quot in WeilConjectures and lean/Sheaf; field-valued point classes and common field extension in dag/nodes; blueprint_refs.py search field-valued point classes",
+   "results": "No upstream algebraic-space point quotient. Side sources AlgebraicSpaceJointSurjectivity and AlgebraicSpaceFibreProductPoint expand representative conditions only; neither defines a quotient point type or map into it. The DAG joint-surjectivity node defines a family lifting predicate, not the quotient. Other Point declarations are unrelated. Blueprint search: 0 blueprint nodes match field-valued point classes. Proposed id: no matches.",
+   "date": "2026-10-18",
+   "verdict": "The explicit quotient and residue-field map are missing; the existing representative predicates are retained unchanged."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-space-affine-etale-cover",
+  "date": "2026-10-18",
+  "group": "Q05"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Gabber fpqc descent input to the Loc_X-to-Cov_X construction in Bhatt–Scholze Lemma 7.3.9, p.67, used through lem-a1-proetale-local-system-representability and lem-a1-space-fpqc-separated-valuative-descent in the lissity/support argument of lem-a1-affine-hc0. The quotient topology of the affine etale atlas needs the actual point set and residue-field map.",
+   "via": [
+    "lem-a1-space-affine-etale-cover",
+    "lem-a1-qc-map-affine-etale-neighbourhood",
+    "lem-a1-algebraic-space-fpqc-sheaf",
+    "lem-a1-space-fpqc-separated-valuative-descent",
+    "lem-a1-proetale-local-system-representability",
+    "lem-a1-normal-locally-constant-finite-section",
+    "lem-a1-normal-proetale-monodromy",
+    "lem-a1-smooth-lisse-integral-lattice",
+    "lem-a1-degree-zero-compact-support-sections"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpacePointClasses",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.Point",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpacePointClasses.lean",
+  "statement": "def Point {S : Scheme.{u}} (F : (Over S)ᵒᵖ ⥤ Type u) : Type (u + 1)",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.PointRepresentative",
+   "AlgebraicGeometry.AlgebraicSpace.PointRepresentative.Rel",
+   "AlgebraicGeometry.AlgebraicSpace.Point",
+   "AlgebraicGeometry.AlgebraicSpace.schemePointMap"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-cc891cf4c",
+  "group": "Q05",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-cc891cf4c",
+  "group": "Q05",
+  "result": "fix",
+  "note": "Mathematics and all statement clauses pass; both immutable Lean files compile cleanly through scompile.py. Replaced the H11 second-reading placeholder with a complete report in fixes/lem-a1-space-affine-etale-cover.report.md. Full findings and compiler evidence are in review.md. No repository or branch changes."
+ }
+}

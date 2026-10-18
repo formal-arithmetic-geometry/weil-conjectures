@@ -7,7 +7,7 @@
  },
  "kind": "statement",
  "title": "Kernels and cokernels of ind-constructible sheaves",
- "statement": "Let $\\Lambda=E$ or $\\Qlb$ and $f\\colon B\\to B'$ a morphism in $\\IndCons(X,\\Lambda)$. Let $P_f$ be the\ncategory of commutative squares consisting of a map $v\\colon C\\to D$ in $\\Cons(X,\\Lambda)$ and maps\n$C\\to B$, $D\\to B'$ compatible with $f$. Then $P_f$ is filtered, the projections $P_f\\to J(B)$ and\n$P_f\\to J(B')$ are cofinal, $f=\\varinjlim_{P_f}v$, and\n\n$$\n\\ker f=\\varinjlim_{P_f}\\ker v,\\qquad\\coker f=\\varinjlim_{P_f}\\coker v\n$$\n\nlie in $\\IndCons(X,\\Lambda)$.",
+ "statement": "Use the universe and small-site convention of [def-weil-size-convention]. Fix a prime $\\ell$, a field $k$ of characteristic $p>0$ with $p\\ne\\ell$, and a separated finite-type $k$-scheme $X$, in the standing setting of [sk-def-sfb-dc-setting]. Fix an algebraic closure $\\overline{\\mathbf Q}_\\ell$ of $\\mathbf Q_\\ell$ and a finite intermediate extension $E/\\mathbf Q_\\ell$. The two coefficients below mean the canonical condensed rings $\\underline E$ and $\\underline{\\overline{\\mathbf Q}_\\ell}$, pulled back to $X$ as in [sk-def-sfb-pulled-back-coefficients]. Use the internal module category of [sk-def-sfb-module-objects], constructibles of [sk-def-sfb-constructible], and the replete small-filtered-colimit closure $\\operatorname{IndCons}$ of [det-ind-heart-full-faithfulness].\n\nLet $\\Lambda=E$ or $\\Qlb$ and $f\\colon B\\to B'$ a morphism in $\\IndCons(X,\\Lambda)$. Let $P_f$ be the\ncategory of commutative squares consisting of a map $v\\colon C\\to D$ in $\\Cons(X,\\Lambda)$ and maps\n$C\\to B$, $D\\to B'$ compatible with $f$. Then $P_f$ is filtered, the projections $P_f\\to J(B)$ and\n$P_f\\to J(B')$ are cofinal, $f=\\varinjlim_{P_f}v$, and\n\n$$\n\\ker f=\\varinjlim_{P_f}\\ker v,\\qquad\\coker f=\\varinjlim_{P_f}\\coker v\n$$\n\nlie in $\\IndCons(X,\\Lambda)$.\n\nHere $P_f$ is essentially small; its colimits are taken over a small skeleton, as for $J(B)$ in [det-ind-heart-canonical-presentation]. The displayed colimit identifications are those induced by the squares: the arrow cocone has legs $(C\\to B,D\\to B')$, the kernel cocone has the induced maps $\\ker v\\to\\ker f$, and the cokernel cocone has the induced maps $\\operatorname{coker}v\\to\\operatorname{coker}f$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-ind-heart/sk-prop-ind-heart-kernels-cokernels.md",
   "place": "node det-ind-heart-kernels-cokernels, order None"
@@ -20,7 +20,9 @@
   "sk-def-sfb-constructible",
   "det-ind-heart-full-faithfulness",
   "det-ind-heart-canonical-presentation",
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "def-weil-size-convention",
+  "sk-def-sfb-dc-setting"
  ],
  "proof": [
   {
@@ -228,5 +230,69 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IndHeartKernelsCokernels",
+  "declaration": "AlgebraicGeometry.ProEtale.indHeart_kernelsCokernels",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.indHeartSquareSource",
+   "AlgebraicGeometry.ProEtale.indHeartSquareTarget",
+   "AlgebraicGeometry.ProEtale.indHeartSquareCocone",
+   "AlgebraicGeometry.ProEtale.IndHeartKernelsCokernelsAssertions",
+   "AlgebraicGeometry.ProEtale.indHeart_kernelsCokernels"
+  ],
+  "file": "lean/Sheaf/Paper/IndHeartKernelsCokernels.lean",
+  "statement": "theorem indHeart_kernelsCokernels (ℓ p : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [CharP k p] (hp : 0 < p) (hne : p ≠ ℓ) (X : Scheme.{u}) [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] : (∀ E : PadicAlgCl.FiniteIntermediateField ℓ, IndHeartKernelsCokernelsAssertions (Profinite.continuousMapRingObj.{u} E) X) ∧ IndHeartKernelsCokernelsAssertions (Profinite.padicAlgClRingObj.{u} ℓ) X",
+  "branch": "newtargets-dag",
+  "by": "N7",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The square category and its morphisms are the existing CostructuredArrow of the existing constructible inclusion on Arrow. Helpers specialize existing comma maps and the canonical left-extension cocone; no private square-category copy or arbitrary comparison map is used. IsColimit of its images under ker and coker specifies the canonical comparisons, including their legs. All object, morphism and coefficient universe parameters are explicitly bound."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3df0c7818",
+  "group": "N7",
+  "result": "pass",
+  "note": "Wrote review.md. Verified all statement clauses, dependency interfaces, source-based correction and three-citer audit, universes, canonical cocones, edge cases, and route-pivot compliance. Immutable module compiled cleanly through scompile.py in both modes. No fixes needed; no repository or branch changes made.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-18",
+  "by": "N7 stage 2",
+  "old_statement": "Let $\\Lambda=E$ or $\\Qlb$ and $f\\colon B\\to B'$ a morphism in $\\IndCons(X,\\Lambda)$. Let $P_f$ be the\ncategory of commutative squares consisting of a map $v\\colon C\\to D$ in $\\Cons(X,\\Lambda)$ and maps\n$C\\to B$, $D\\to B'$ compatible with $f$. Then $P_f$ is filtered, the projections $P_f\\to J(B)$ and\n$P_f\\to J(B')$ are cofinal, $f=\\varinjlim_{P_f}v$, and\n\n$$\n\\ker f=\\varinjlim_{P_f}\\ker v,\\qquad\\coker f=\\varinjlim_{P_f}\\coker v\n$$\n\nlie in $\\IndCons(X,\\Lambda)$.",
+  "what": "The imported statement does not introduce X, the prime or finite extension, and leaves the standing geometric hypotheses implicit. Make the source setting explicit, specify the fixed canonical condensed ring structures rather than arbitrary ring structures on the same abelian sheaf, and spell out essential smallness and the canonical cocone meaning of the displayed colimit equalities. The latter are already the size convention and the constructions in proof steps 2, 5 and 6; no unit statement changes.",
+  "source": {
+   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-setting/_section.md",
+   "place": "Standing setting, first paragraph; sk-prop-ind-heart/sk-prop-ind-heart-kernels-cokernels.md and its proof, square category and colimit paragraphs"
+  },
+  "citers": [
+   {
+    "id": "det-ambient-ind-derived-triangulated",
+    "holds": true,
+    "note": "holds: its statement already explicitly assumes sk-def-sfb-dc-setting; the ambient cohomology-map kernels and cokernels in its proof use precisely the retained closure clauses."
+   },
+   {
+    "id": "det-ind-heart-grothendieck",
+    "holds": true,
+    "note": "holds: closure under ambient kernels and cokernels in the same standing setting is exactly what both proof paragraphs use; all colimit and generator arguments remain valid."
+   },
+   {
+    "id": "det-proper-unbounded-window-bounded-below",
+    "holds": true,
+    "note": "holds: apply kernel/cokernel closure to spectral-sequence page maps on the standing target scheme Y; its positive characteristic and separated finite-type setting is unchanged."
+   }
+  ],
+  "old_stmt_deps": [
+   "sk-def-sfb-condensed-ring",
+   "sk-def-sfb-qlbar-condensed",
+   "sk-def-sfb-pulled-back-coefficients",
+   "sk-def-sfb-module-objects",
+   "sk-def-sfb-constructible",
+   "det-ind-heart-full-faithfulness",
+   "det-ind-heart-canonical-presentation",
+   "def-weil-pbc-category-colimit"
+  ]
  }
 }

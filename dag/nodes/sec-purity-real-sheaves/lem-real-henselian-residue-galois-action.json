@@ -280,5 +280,23 @@
   "group": "NC",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NC-4e3d47fe9 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. Added existing DAG citations for step 9’s algebraic-closure facts, made integrality transitivity explicit, corrected source locations, and clarified positive polynomial degree. Statement unchanged; no new nodes, cycles, long steps or forbidden proof dependencies. Written review.md and the corrected whole DAG JSON under fixes/dag/nodes/sec-purity-real-sheaves/.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HenselianResidueGaloisAction",
+  "declaration": "HenselianLocalRing.exists_residue_galois_action",
+  "file": "lean/Sheaf/RingTheory/HenselianResidueGaloisAction.lean",
+  "statement": "theorem exists_residue_galois_action (k0 : Type u) [Field k0] [Finite k0] (R : Type v) [CommRing R] [HenselianLocalRing R] [Algebra k0 R] [Finite (IsLocalRing.ResidueField R)] (K : Type w) [Field K] [Algebra k0 K] [Algebra R K] [IsScalarTower k0 R K] (Ω : Type z) [Field Ω] [Algebra K Ω] [IsAlgClosure K Ω] [Algebra R Ω] [Algebra k0 Ω] [IsScalarTower R K Ω] [IsScalarTower k0 K Ω] [IsScalarTower k0 R Ω] : IsLocalRing (integralClosure R Ω) ∧ ∀ [IsLocalRing (integralClosure R Ω)], Ideal.comap (algebraMap R (integralClosure R Ω)) (IsLocalRing.maximalIdeal (integralClosure R Ω)) = IsLocalRing.maximalIdeal R ∧ IsLocalHom (algebraMap R (integralClosure R Ω)) ∧ ∀ [IsLocalHom (algebraMap R (integralClosure R Ω))], IsAlgClosure (IsLocalRing.ResidueField R) (IsLocalRing.ResidueField (integralClosure R Ω)) ∧ ∃ (a : (Ω ≃ₐ[K] Ω) →* (integralClosure R Ω ≃ₐ[R] integralClosure R Ω)), (∀ (σ : Ω ≃ₐ[K] Ω) (b : integralClosure R Ω), ((a σ b : integralClosure R Ω) : Ω) = σ (b : Ω)) ∧ (∀ σ : Ω ≃ₐ[K] Ω, Ideal.comap (a σ).toRingHom (IsLocalRing.maximalIdeal (integralClosure R Ω)) = IsLocalRing.maximalIdeal (integralClosure R Ω)) ∧ ∃ (r : (Ω ≃ₐ[K] Ω) →* (IsLocalRing.ResidueField (integralClosure R Ω) ≃ₐ[IsLocalRing.ResidueField R] IsLocalRing.ResidueField (integralClosure R Ω))), Continuous r ∧ (∀ (σ : Ω ≃ₐ[K] Ω) (b : integralClosure R Ω), r σ (IsLocalRing.residue (integralClosure R Ω) b) = IsLocalRing.residue (integralClosure R Ω) (a σ b)) ∧ ∃ (c : algebraicClosure k0 Ω →ₐ[k0] integralClosure R Ω), (∀ x : algebraicClosure k0 Ω, (c x : Ω) = (x : Ω)) ∧ ∃ (t : algebraicClosure k0 Ω ≃ₐ[k0] IsLocalRing.ResidueField (integralClosure R Ω)), (∀ x : algebraicClosure k0 Ω, t x = IsLocalRing.residue (integralClosure R Ω) (c x)) ∧ ∀ (σ : Ω ≃ₐ[K] Ω) (x : algebraicClosure k0 Ω), ∃ y : algebraicClosure k0 Ω, (y : Ω) = σ (x : Ω) ∧ t y = r σ (t x)",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-973aa8f02",
+  "group": "NH",
+  "result": "pass",
+  "note": "Wrote review.md. All hypotheses, conclusions, dependencies, universes, source clauses, and signature checked; no defects found. Snapshot module compiled successfully through scompile.py in sandbox and library modes with no diagnostics."
  }
 }

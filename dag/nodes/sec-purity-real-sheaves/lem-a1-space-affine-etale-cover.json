@@ -13,7 +13,8 @@
   "def-weil-etale-morphism",
   "def-weil-open-immersion",
   "def-weil-affine-spectrum",
-  "def-weil-field"
+  "def-weil-field",
+  "def-a1-algebraic-space-point-classes"
  ],
  "proof": [
   {
@@ -168,5 +169,23 @@
   "group": "NY",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-ca7957656 (reviewer sub-agent of L); spot-checked: I read all of it: the contract documents, the report, the item, the statement of every cited node, and Stacks spaces-properties.tex at 03FX (lemma-cover-by-union-affines), 03BX (lemma-topology-points), 03H4 (lemma-points-cartesian) and 03BU (definition-points). I checked each tag against its label in tags/tags. The item's statement, stmt_deps and source are identical to the base node. The statement matches 03FX and 03BX (1)-(3) for sources that are schemes. Requiring t to be representable adds no real hypothesis, because every map from a scheme to an algebraic space is representable. The delivery adds no new nodes. Step 1 refines an atlas by affine opens over affine opens of S and takes their coproduct, using the basis, factorization and coproduct lemmas, as in the 03FX proof. Step 2 handles any test scheme T: it forms P=T x_E V and the open pieces P_v, which are open by base change of an open immersion and étale by composition. Their coproduct Q represents T x_E W; checking this is routine gluing. Q->T is étale because étaleness is local on the source, and it is surjective. Point-surjectivity follows by testing with Spec K. Step 3 shows the topology does not depend on the atlas, using W x_E V. The projections are correctly identified as base changes of p and of w, both are open, and |a|(D)=|w|^{-1}(A) holds in both directions using the fibre-product point lemma. This is the 03BX argument. Steps 4 and 5 prove continuity and openness through T x_E W, using surjectivity or étaleness of the base change and the point lemma. I tested the empty space, a scheme with its identity atlas, a non-surjective étale t, and points over different residue fields. There is no cycle: the item is not in its own closure of 132 nodes. The only non-definition citation that is not a Mathlib leaf is lem-a1-space-fibre-product-point, which is in the same unit, so no tool_uses are needed. No SGA is cited. Batch-5 flag on lem-a1-space-fibre-product-point: its closure, and the item's, reaches only two sec-trace-formula nodes, def-trf-algebraic-space and def-trf-algebraic-space-jointly-surjective-family. Both are general definitions (algebraic spaces and point classes), not steps of the trace formula or Poincaré duality proofs, so the citation is genuinely outside the assumed statements. I made no changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceAffineEtaleCover",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.exists_affine_etale_cover_and_point_topology",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceAffineEtaleCover.lean",
+  "statement": "theorem exists_affine_etale_cover_and_point_topology {S : Scheme.{u}} (E : AlgebraicSpace S) : ∃ (W : Over S) (w : yoneda.obj W ⟶ E.obj.obj) (I : Type u) (A : I → Scheme.{u}) (ι : ∀ i : I, A i ⟶ W.left), Nonempty (IsColimit (Cofan.mk W.left ι)) ∧ (∀ i : I, IsAffine (A i)) ∧ (∀ i : I, ∃ (U : S.Opens) (_ : IsAffineOpen U) (a : A i ⟶ U.toScheme), a ≫ U.ι = ι i ≫ W.hom) ∧ IsRepresentable w ∧ IsSurjective w ∧ IsEtale w ∧ Function.Surjective (schemePointMap w) ∧ ∃ τ : TopologicalSpace (Point E.obj.obj), τ = TopologicalSpace.coinduced (schemePointMap w) inferInstance ∧ (∀ (V : Over S) (p : yoneda.obj V ⟶ E.obj.obj), IsRepresentable p → IsSurjective p → IsEtale p → τ = TopologicalSpace.coinduced (schemePointMap p) inferInstance) ∧ (∀ (T : Over S) (t : yoneda.obj T ⟶ E.obj.obj), @Continuous T.left (Point E.obj.obj) inferInstance τ (schemePointMap t) ∧ (IsEtale t → @IsOpenMap T.left (Point E.obj.obj) inferInstance τ (schemePointMap t) ∧ @IsOpen (Point E.obj.obj) τ (Set.range (schemePointMap t))))",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-cc891cf4c",
+  "group": "Q05",
+  "result": "fix",
+  "note": "Mathematics and all statement clauses pass; both immutable Lean files compile cleanly through scompile.py. Replaced the H11 second-reading placeholder with a complete report in fixes/lem-a1-space-affine-etale-cover.report.md. Full findings and compiler evidence are in review.md. No repository or branch changes."
  }
 }
