@@ -298,5 +298,23 @@
   "group": "NM",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-455d44a58 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, Bhatt-Scholze Def 7.3.1(3) on p.66 and the full proof of Lemma 7.4.10 on p.71, the blueprint chain to lem-a1-affine-hc0, and the citer lem-a1-normal-locally-constant-finite-section. The item statement is unchanged and correct. I tested the empty Z, infinitely many components, and an open immersion that fails the lifting property. Steps 1-5 check out: step 3 uses Tag 02OG via thm-pqf-finite-iff-proper-finite-fibres, which I accept as a generic tool use. Step 4 uses the etale open-image and finite closed-image Mathlib leaves. Step 5 is genuinely elementary. Both children are true. For the clopen child: Z is locally Noetherian and normal, so it is geometrically unibranch and its components are clopen. For the qc-proper child: C is integral and separated; ZMT gives an open immersion into the normalization of X in kappa(xi); existence of lifts makes it surjective, so C is finite. Neither child is a duplicate: lem-fin-etale-normal-components and lem-trf-* need a Noetherian or affine source. Neither restates the item, and there is no cycle. Batch-5 check: def-trf-valuation-ring is a pure general definition that the item's base statement already cited. It is neither assumption nor part of their proofs, so it is accepted. Fixes: (1) clopen child: cite def-sc-ring-strict-henselization and def-weil-irreducible-components, define locally topologically Noetherian and connected component inline. (2) qc-proper child: it presupposed C open, so C is now assumed to be an open connected component (step 1 provides that); cite def-weil-finite-type-morphism, def-weil-proper-morphism and pqf-def-quasifinite; item step 2 text adjusted. (3) The item split_report.summary wrongly claimed a third child for the image argument; corrected.; 3 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b157eb9d3",
+  "group": "NE",
+  "result": "pass",
+  "note": "Changes: new module and report, plus only the item's lean field; lean.statement verbatim. Hypotheses match node and dep records: ConnectedSpace (incl. nonempty), IsLocallyNoetherian, CompactSpace, stalks IsDomain ∧ IsIntegrallyClosed (recorded inline normal form), Etale q, Mathlib ValuativeCriterion (unique LiftStruct for universe-u valuation squares = node's unique valuation lift; Mathlib size convention, not stronger). Conclusion: C c pinned to the true component by ConnectedComponents.mk fibre equality, open (Opens) and IsClosed, ConnectedSpace, IsFinite ∧ Etale ∧ Surjective of (C c).ι ≫ q (FEt object conditions), IsColimit of Cofan of the inclusions; no finiteness/nonemptiness of the index. Edge cases: Z empty (initial), infinite index, X empty excluded as in node. Gates: no defs, single sorry, module and theorem docstrings with source and blueprint and 5 proof steps, lines ≤100, non-public imports are recorded modules of stated proof deps (ProperQuasiFinite, UniversallyOpen), no duplicate in Mathlib/project. nt_compile.py --json clean (1.5-1.6 s, rc 0), matching delivery evidence; control copy with injected errors was reported, so the tool works. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalGeometricCoverComponents",
+  "declaration": "AlgebraicGeometry.normalGeometricCoverComponents",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalGeometricCoverComponents.lean",
+  "statement": "theorem normalGeometricCoverComponents {X Z : Scheme.{u}} [ConnectedSpace X] [IsLocallyNoetherian X] [CompactSpace X] (hnormal : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x)) (q : Z ⟶ X) [Etale q] (hval : ValuativeCriterion q) : ∃ C : ConnectedComponents Z → Z.Opens, (∀ c : ConnectedComponents Z, (C c : Set Z) = ConnectedComponents.mk ⁻¹' {c} ∧ IsClosed (C c : Set Z) ∧ ConnectedSpace (C c).toScheme ∧ IsFinite ((C c).ι ≫ q) ∧ Etale ((C c).ι ≫ q) ∧ Surjective ((C c).ι ≫ q)) ∧ Nonempty (IsColimit (Cofan.mk Z (fun c : ConnectedComponents Z ↦ (C c).ι)))",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-18",
+  "existing": false
  }
 }
