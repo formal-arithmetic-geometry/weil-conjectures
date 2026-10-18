@@ -19,127 +19,108 @@
  ],
  "proof": [
   {
-   "text": "Work throughout with sheaves of modules over the constant finite ring $\\Lambda$ on the small etale sites. The square gives open immersions $j,j'$ and arbitrary scheme morphisms $g,g_U$. By [prop-weil-pbc-inverse-image-modules-exact] the two inverse images are additive and exact on these module categories, and by [lem-weil-pbc-extension-by-zero-exact] the two extensions by zero are additive and exact. Apply [lem-weil-pbc-exact-functor-derived-factorization] to each of the four functors: their termwise complex functors preserve quasi-isomorphisms and induce functors on $D$. By [lem-weil-pbc-exact-functor-bounded-below], $H^r(F_DK)\\cong F(H^rK)$, so each preserves the lower cohomological bound of $K$ and restricts to $D^+$. Thus the two composite functors in the statement have exactly the stated source and target; no resolution or flatness assumption on a scheme morphism is required.",
+   "text": "Use the existing constant-coefficient sheaf functors upperStar and openImmersionLowerShriek with A = ModuleCat Λ. Their source instances supply additivity and exactness. The existing exact-functor constructions apply termwise to complexes, localize, and preserve the bounded-below subcategories. Keep the two public definitions of the canonical exchange and extension-by-zero composition comparisons unchanged.",
    "uses": [
-    "def-cbc-open-immersion-square",
-    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-inverse-image",
     "lem-weil-pbc-extension-by-zero-exact",
-    "lem-weil-pbc-exact-functor-derived-factorization",
     "lem-weil-pbc-exact-functor-bounded-below"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F (lemma-right-derived-exact-functor); sites-modules.tex Tag 04JC (lemma-flat-pullback-exact), Tag 03DJ (lemma-extension-by-zero-exact)"
+    "place": "Tag 015F; existing exact sheaf-functor instances in UpperLowerStar.Defs and LowerShriek.OpenImmersion.Defs"
    }
   },
   {
-   "text": "Write $b_{g,F}:g^{-1}j_!F\\xrightarrow{\\sim}j'_!g_U^{-1}F$ for the degreewise map of [lem-cbc-extension-zero-base-change]. The underived compatibility statement [lem-cbc-derived-extension-zero-base-change-underived-compatibility] identifies $b$ with the inverse of the module base-change mate $\\beta$, gives its adjunction transpose, and normalizes its restriction to the open as the identity. This identifies the actual canonical module map used below, not merely an unspecified isomorphism.",
+   "text": "The canonical underived map β is characterized by its unit equation. Apply mateEquiv_eq_of_unit to unit_map_openImmersionLowerShriekBaseChangeMap_app: its mate under j_! ⊣ j^* and j'_! ⊣ j'^* is exactly squareUpperStarIso for the flipped commuting square. Its inverse is the base-change map used in the public derived definition. Invertibility and naturality of the derived map then follow from the natural isomorphism itself.",
    "uses": [
-    "lem-cbc-derived-extension-zero-base-change-underived-compatibility",
-    "lem-cbc-extension-zero-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03S6 and 0F70; module base-change construction"
-   }
-  },
-  {
-   "text": "The module theorem [lem-weil-pbc-etale-shriek-base-change-modules] says that $\\beta$ and its inverse are natural in the module sheaf. By [lem-cbc-derived-extension-zero-base-change-underived-compatibility], $b=\\beta^{-1}$. Explicitly, for $t:F\\to F'$, the naturality equation for $\\beta$ is $\\beta_{F'}\\circ j'_!g_U^{-1}(t)=g^{-1}j_!(t)\\circ\\beta_F$. Multiplication on the left by $b_{g,F'}$ and on the right by $b_{g,F}$ gives $b_{g,F'}\\circ g^{-1}j_!(t)=j'_!g_U^{-1}(t)\\circ b_{g,F}$. This is the equation needed for the differentials of a complex.",
-   "uses": [
-    "lem-weil-pbc-etale-shriek-base-change-modules",
-    "lem-cbc-derived-extension-zero-base-change-underived-compatibility"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03S6, adjunction naturality"
-   }
-  },
-  {
-   "text": "For the identity square ($g=\\mathrm{id}_X$, $g_U=\\mathrm{id}_U$, $j'=j$), the explicit transpose in [lem-cbc-derived-extension-zero-base-change-underived-compatibility] says that $b_{\\mathrm{id},F}^{-1}$ is the transpose of $s_{\\mathrm{id}}\\circ\\mathrm{id}_U^{-1}(\\eta_{j,F})$. Here $s_{\\mathrm{id}}=c_{\\mathrm{id}_X,j}^{-1}\\circ c_{j,\\mathrm{id}_U}$ is built from the module-linear composition isomorphisms of [lem-weil-pbc-inverse-image-composition-module-linear], whose underlying abelian maps are those of [lem-weil-pbc-derived-inverse-image-composition]; by the unit laws in clause (1) of the latter, $c_{j,\\mathrm{id}_U}=e_Uj^{-1}$ and $c_{\\mathrm{id}_X,j}=j^{-1}e_X$, so after the identity comparisons $e$ the map $s_{\\mathrm{id}}$ is the identity and the transpose of $b_{\\mathrm{id},F}^{-1}$ is the unit $\\eta_{j,F}$ of $j_!\\dashv j^{-1}$, which is also the transpose of the identity. Injectivity of the adjunction bijection of [lem-weil-pbc-extension-by-zero-adjunction] gives $b_{\\mathrm{id},F}=\\mathrm{id}$ after these identifications.",
-   "uses": [
-    "lem-cbc-derived-extension-zero-base-change-underived-compatibility",
+    "lem-cbc-extension-zero-base-change",
     "lem-weil-pbc-extension-by-zero-adjunction",
-    "lem-weil-pbc-inverse-image-composition-module-linear",
-    "lem-weil-pbc-derived-inverse-image-composition"
+    "lem-weil-pbc-mate-pasting"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03S6, adjunction construction and Tag 0F70"
+    "place": "Tags 03S6 and 0F70; canonical adjunction-mate construction"
    }
   },
   {
-   "text": "For two successive arbitrary base changes, [lem-cbc-derived-extension-zero-base-change-vertical-pasting] states that the composite of the two underived canonical maps equals the canonical map for the composite base change after the inverse-image composition identifications. This is exactly the vertical pasting equation needed before localization.",
+   "text": "For the identity square, prove the underived unit law by injectivity of mateEquiv. The mate of the normalized identity square is computed by mateEquiv_unitors. Expanding squareUpperStarIso and applying upperStarComp_id_left and upperStarComp_id_right gives that same mate. Cancel the identity comparison to obtain β_id followed by upperStarId_X equals j_! applied to upperStarId_U.",
    "uses": [
-    "lem-cbc-derived-extension-zero-base-change-vertical-pasting"
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-mate-whisker",
+    "lem-weil-pbc-inverse-image-composition"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03S6 with composed adjunctions"
+    "place": "Tag 03S6, identity adjunction and inverse-image unit laws"
    }
   },
   {
-   "text": "For composable open immersions, [lem-cbc-derived-extension-zero-base-change-open-pasting] gives the displayed equation relating the two successive underived maps to the map for the composite immersion, with the canonical extension-by-zero composition comparisons. The comparisons and their endpoint identifications are the ones supplied by [lem-cbc-extension-zero-composition], so this proves the second pasting direction.",
+   "text": "For successive base changes, compare the mates of β for the composite square and the composite of the two β maps with the upperStarComp comparisons. mateEquiv_whiskerTop_whiskerBottom and mateEquiv_vcomp reduce equality to squareUpperStarIso_paste_vert_hom. For composable open immersions, first show that the conjugate of the actual openImmersionLowerShriekComp is upperStarComp.symm, using Adjunction.unit_leftAdjointUniq_hom_app. Then conjugateEquiv/mateEquiv composition and mateEquiv_hcomp reduce the required equality of mates to squareUpperStarIso_paste_horiz_hom. Injectivity gives both precise underived pasting equations.",
    "uses": [
-    "lem-cbc-derived-extension-zero-base-change-open-pasting",
-    "lem-cbc-extension-zero-composition"
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-mate-whisker",
+    "lem-weil-pbc-square-iso-pasting",
+    "lem-weil-pbc-inverse-image-composition",
+    "lem-cbc-extension-zero-composition",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03S6 and module extension-by-zero composition"
+    "place": "Tag 03S6; canonical extension-by-zero composition through uniqueness of left adjoints"
    }
   },
   {
-   "text": "For a cochain complex $K^\\bullet$, set $B_K^r=b_{g,K^r}$. Step 3 applied to $d^r:K^r\\to K^{r+1}$ gives\n$$j'_!g_U^{-1}(d^r)\\circ B_K^r=B_K^{r+1}\\circ g^{-1}j_!(d^r).$$\nThus $B_K$ is a chain map, and its degreewise inverse is a chain map by the same equality multiplied by the inverses. The two composites are the identity in every degree, so $B_K$ is an isomorphism of complexes, natural in chain maps. Compose this natural isomorphism with the localization functor on the target. Step 1 says both composite complex functors invert quasi-isomorphisms. Clause (2) of [lem-weil-pbc-localization-universal-property] now descends $B$ to a natural isomorphism of the induced functors on derived categories. Write $\\varphi_{F,K}:F_D(QK)\\xrightarrow{\\sim}Q(C(F)K)$ for the factorization maps of [lem-weil-pbc-exact-functor-derived-factorization]. For two composable exact functors $F,G$, the actual comparison for their induced composite at $QK$ is\n$$\\psi_{G,F,K}=\\varphi_{G,C(F)K}\\circ G_D(\\varphi_{F,K}):G_DF_D(QK)\\xrightarrow{\\sim}Q(C(G)C(F)K).$$\nIt is natural in $K$ by naturality of the two $\\varphi$ maps. These are precisely the $\\phi_1,\\phi_2$ required by clause (2) of the localization node for the two composites in this square. Therefore its formula gives the descended exchange component $\\psi_{j'_!,g_U^{-1},K}^{-1}\\circ Q(B_K)\\circ\\psi_{g^{-1},j_!,K}$. For three functors, both parenthesizations of $\\psi$ expand to $\\varphi_{H,C(G)C(F)K}\\circ H_D(\\varphi_{G,C(F)K})\\circ H_DG_D(\\varphi_{F,K})$; hence their coherence follows from functoriality, and equality on all $QK$ is detected by clause (3) of the localization node. Restrict to the full subcategory $D^+$, which both sides preserve by [lem-weil-pbc-exact-functor-bounded-below]. At an object represented by $K^\\bullet$ the component is the class of $B_K$ after these identifications. It is therefore exactly the derived map of the underived base-change map, and is an isomorphism for every $K\\in D^+(U_{\\Et},\\Lambda)$.",
+   "text": "Prove the derived identity law directly by localization. The factorization formulas for mapDerivedCategoryPlusNatIso, mapDerivedCategoryPlusIdIso and mapDerivedCategoryPlusSquareIso reduce equality after precomposition with the homotopy-category localization functor Qh to the underived identity law. Naturality of the factorization maps cancels their comparisons; faithfulness of the bounded-below inclusion and the homotopy quotient reduce the remaining equality to its component in each complex degree. Localization.natTrans_ext then gives the equality for every derived object.",
    "uses": [
-    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-derived-exact-square-factorization",
     "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-exact-functor-bounded-below"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F (lemma-right-derived-exact-functor); categories.tex Tag 04VG (lemma-properties-left-localization); natural-transformation descent as stated in the cited localization node"
-   }
-  },
-  {
-   "text": "Apply Step 4 in every degree of a representing complex for the identity square: its termwise exchange is the identity after the inverse-image identity comparisons. Apply Step 5 in every degree for successive base changes, and Step 6 for composable open immersions, including the comparison maps $c,c'$. Localization preserves the resulting identities and compositions. Clause (2) of [lem-weil-pbc-localization-universal-property] descends the endpoint comparisons and each exchange, using the $\\psi$ identifications written in Step 7; it respects composition. Clause (3) detects equality of the resulting natural transformations from equality on every $QK^\\bullet$. Thus all three sheaf-level equations give the corresponding derived equations. Restricting to $D^+$ proves the identity and both pasting clauses; naturality for every derived morphism was obtained by descent in Step 7.",
-   "uses": [
     "lem-weil-pbc-localization-universal-property"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F (lemma-right-derived-exact-functor); categories.tex Tag 04VG (lemma-properties-left-localization), functorial localization of identities and compositions"
+    "place": "Tag 015F; categories.tex Tag 04VG, detection of natural transformations under localization"
+   }
+  },
+  {
+   "text": "Use the existing generic mapDerivedCategoryPlusSquareIso_comp twice, with the exact functors and precise underived pasting equations proved above. For successive base changes apply it to the inverse canonical mates and the upperStarComp comparisons; for composable opens apply it to the forward mates and openImmersionLowerShriekComp. Private proved identities show that localization preserves inversion of the natural isomorphisms and identify the generic square/composition comparisons with the two unchanged public definitions. Cancel the invertible comparisons and exchange maps to obtain exactly the two displayed derived pasting clauses.",
+   "uses": [
+    "lem-weil-pbc-derived-exact-square-factorization",
+    "lem-cbc-extension-zero-base-change",
+    "lem-cbc-extension-zero-composition",
+    "lem-weil-pbc-inverse-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F; categories.tex Tag 04VG, functorial localization of compositions"
    }
   }
  ],
  "proof_deps": [
-  "def-cbc-open-immersion-square",
-  "lem-cbc-derived-extension-zero-base-change-open-pasting",
-  "lem-cbc-derived-extension-zero-base-change-underived-compatibility",
-  "lem-cbc-derived-extension-zero-base-change-vertical-pasting",
+  "def-weil-pbc-inverse-image",
   "lem-cbc-extension-zero-base-change",
   "lem-cbc-extension-zero-composition",
-  "lem-weil-pbc-derived-inverse-image-composition",
-  "lem-weil-pbc-etale-shriek-base-change-modules",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-derived-exact-square-factorization",
   "lem-weil-pbc-exact-functor-bounded-below",
   "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-weil-pbc-extension-by-zero-adjunction",
   "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-pbc-inverse-image-composition-module-linear",
+  "lem-weil-pbc-inverse-image-composition",
   "lem-weil-pbc-localization-universal-property",
-  "prop-weil-pbc-inverse-image-modules-exact"
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-mate-whisker",
+  "lem-weil-pbc-square-iso-pasting"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/cor-cbc-derived-extension-zero-base-change.md",
-  "place": "Proof expanded using Stacks Tags 03S6, 0F70, 015F and the existing localization universal-property node; identity/pasting verified by adjunction"
+  "by": "E3",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/cor-cbc-derived-extension-zero-base-change.md",
+  "place": "Stage 3: canonical underived mate identities proved directly from source mate/pasting APIs, then localized using the existing generic derived-square factorization and composition API; identity proved by localization extensionality. No new intermediate holes."
  },
  "mathlib_searches": [
   {
@@ -234,15 +215,10 @@
   "blueprint": "The original blueprint proof paragraph is realized by Step 1 (exactness), Steps 2–3 (specified underived comparison and naturality), Steps 4–6 (identity and both pasting directions), and Steps 7–8 (the original degreewise complex/localization descent). The same item statement occurs in main-20261015 under sec-six-functors-basics/sk-prop-sf-cbc."
  },
  "tool_uses": [
-  "prop-weil-pbc-inverse-image-modules-exact",
   "lem-weil-pbc-extension-by-zero-exact",
   "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-weil-pbc-extension-by-zero-unit-iso",
-  "lem-weil-pbc-inverse-image-composition-module-linear",
-  "lem-weil-pbc-derived-inverse-image-composition",
   "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "lem-weil-pbc-etale-shriek-base-change-modules"
+  "lem-weil-pbc-conjugate-iso-unit-equation"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -274,5 +250,15 @@
   "by": "NH",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261018T062733-L-643101",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
