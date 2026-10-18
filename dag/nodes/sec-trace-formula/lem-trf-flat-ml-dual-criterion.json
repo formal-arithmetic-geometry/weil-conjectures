@@ -207,5 +207,23 @@
   "group": "Q74",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-4d3e7072b (reviewer sub-agent of L); spot-checked: PASS. I read the whole item and checked it against Stacks algebra.tex: Tag 059G remark-flat-ML (l.21117), Tag 0595 definition-ML-system and the proof of (3)=>(2) of Tag 059E. The statement matches 059G hypothesis by hypothesis and is unchanged; the redundant flatness is kept as in the source. Step 1 is correct: the coordinate lifts lambda_{a,k} with lambda∘f_ik = eps_a∘f_ij give h_k∘f_ik = f_ij for every k>=j, and the rank-0 case works. Steps 2-3 give ker(f_i⊗L) ⊆ ker(f_ij⊗L), using the stated colimit cocone of tensor-commutes-with-colimits, clause (2) of filtered-colimit-elementwise (a nonempty directed poset is filtered) and tensor functoriality. This kernel inclusion is exactly the domination direction defined in lem-trf-mittag-leffler-eventual-domination. Step 4 notes that finite free modules are finitely presented and applies that same-unit equivalence. The dependency closure has 21 nodes and no cycle. The parent's last step supplies exactly the item's hypotheses (Lazard presentation plus stabilised dual images). There are no new nodes. The only DAG hits for 059G are the item and its parent, and the 059E/059M neighbours (hom-systems is the converse; eventual-domination and tensor-kernel-factorization state other facts) are not duplicates. Mathlib has no module Mittag-Leffler notion. The declared tool_uses of the two pbc Mathlib-status lemmas are accepted. No SGA is cited. Small cases checked: Z[1/2] (dual images 2^k Z do not stabilise), Z^(N) (surjective duals, free module), a singleton index, all stages zero, and an uncountable index. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FlatMLDualCriterion",
+  "declaration": "Module.isMittagLeffler_of_dual_images_stabilize",
+  "file": "lean/Sheaf/RingTheory/FlatMLDualCriterion.lean",
+  "statement": "theorem isMittagLeffler_of_dual_images_stabilize (R : Type u) [CommRing R] {I : Type v} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)] (F : I ⥤ ModuleCat.{max u v w} R) [∀ i : I, Module.Free R (F.obj i)] [∀ i : I, Module.Finite R (F.obj i)] (c : Cocone F) (hc : IsColimit c) [Module.Flat R c.pt] (hdual : ∀ i : I, ∃ (j : I) (hij : i ≤ j), ∀ (k : I) (hjk : j ≤ k), LinearMap.range (F.map (homOfLE (hij.trans hjk))).hom.dualMap = LinearMap.range (F.map (homOfLE hij)).hom.dualMap) : Module.IsMittagLeffler.{u, max u v w, s, t} R c.pt",
+  "branch": "newtargets-dag",
+  "by": "Q102",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-951934ae7",
+  "group": "Q102",
+  "result": "pass",
+  "note": "Statement matches Stacks 059G/0595 clause by clause: CommRing R; nonempty directed poset I; F : I ⥤ ModuleCat.{max u v w} R with Free+Finite stages; Cocone c + IsColimit hc; Module.Flat c.pt; hdual = range of dualMap of f_ik equals range of dualMap of f_ij in Dual(F_i), quantifiers ∀i∃j≥i∀k≥j; conclusion Module.IsMittagLeffler.{u,max u v w,s,t} (full recorded tensor notion, free s,t). Universe convention matches the eventual-domination dependency (advisory only). Edge cases (rank 0, zero ring, singleton, ×2 system) fine. No duplicate in Mathlib/live/side Sheaf. Docstrings carry source+blueprint+4 proof steps; lean.statement verbatim; nt_compile --json clean in 1.7 s, broken-copy control errors at line 83. No fixes."
  }
 }
