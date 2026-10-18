@@ -19,9 +19,135 @@
   "def-weil-open-immersion",
   "def-weil-closed-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a dualizing complex $Q$ on $X$ and write $D_X=R\\mathcal Hom_\\Lambda(-,Q)$. First let $j:U\\hookrightarrow X$ be open. The localized-site identification [lem-weil-pbc-etale-site-localization-open] and [lem-pur-site-restriction-module-adjunction-exact] give exact functors $j^*,j_!$. Their termwise derived functors therefore commute with cohomology [lem-weil-pbc-exact-functor-derived-factorization]. Restriction preserves constructibility [prop-constructible-pullback]. Extension by zero preserves it as well: take the given finite locally closed stratification of $U$, regard those strata as locally closed subschemes of $X$, and add the reduced closed complement, with zero sheaf on it. On the old strata $j_!F$ restricts to $F$, and outside $U$ it is zero by [lem-weil-pbc-extension-by-zero-stalks]. Thus $j_!$ and $j^*$ preserve bounded constructible complexes, without enlarging the cohomological interval. In particular $Q_U=j^*Q$ is bounded constructible.",
+   "uses": [
+    "lem-weil-pbc-etale-site-localization-open",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "prop-constructible-pullback",
+    "lem-weil-pbc-extension-by-zero-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Proposition 7.6.3, p.311: restriction of a dualizing complex to an open; expanded exactness and stratification argument."
+   }
+  },
+  {
+   "text": "Put $D_U=R\\mathcal Hom_\\Lambda(-,Q_U)$. Restriction of derived internal Hom to the slice [lem-weil-pbc-ringed-internal-hom-exact-restriction], identified with $U_{\\mathrm{et}}$ as in Step 1, gives natural isomorphisms $c_F:j^*D_XF\\cong D_Uj^*F$. For $M\\in D^b_c(U_{\\mathrm{et}},\\Lambda)$ apply this with $F=j_!M$. The identification $j^*j_!M\\cong M$ follows by restricting the extension-by-zero construction [def-weil-pbc-extension-by-zero]. Since $D_X(j_!M)$ is bounded constructible by the hypothesis on $Q$, Step 1 now shows that $D_UM$ is bounded constructible.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "def-weil-pbc-extension-by-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Proposition 7.6.3, p.311; expanded internal-Hom restriction argument (Stacks Tag 08JB)."
+   }
+  },
+  {
+   "text": "The isomorphisms $c_F$ identify $j^*(F\\to D_X^2F)$ with $j^*F\\to D_U^2j^*F$. Here the maps are the evaluation-transpose maps, not arbitrary isomorphisms: by [def-pur-derived-internal-hom] compute Hom using a K-injective target, and use the restriction comparison of [lem-weil-pbc-ringed-internal-hom-exact-restriction]. Restricting the evaluation pairing restricts the same composition $(\\varphi,m)\\mapsto\\varphi(m)$; the Koszul symmetry has the same sign before and after restriction. Its transpose is the double-dual map [lem-per-relative-bidual-triangles], so restricting the transpose gives precisely the transpose of that restricted pairing. Apply this to $F=j_!M$. The map on $X$ is an isomorphism by duality; hence its restriction is an isomorphism. Together with Step 2 this proves that $Q_U$ is dualizing.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-per-relative-bidual-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Proposition 7.6.3, p.311: the assertion that j^*Q is dualizing, with its canonical biduality map expanded."
+   }
+  },
+  {
+   "text": "Now let $i:Z\\hookrightarrow X$ be closed. The inverse images of a finite Noetherian affine cover of $X$ are affine charts $\\operatorname{Spec}(R/I)$ on $Z$ [def-weil-closed-immersion]. Quotients are Noetherian because any increasing ideal chain lifts to such a chain in $R$ [def-weil-pbc-noetherian-ring]. Thus $Z$ is Noetherian. It is finite by [lem-weil-pbc-closed-immersion-finite]. The exact finite direct image and its bounded-below right adjoint $i^!$ are available by [lem-per-finite-exceptional-internal-hom]. Also $i^*$ is exact by [prop-weil-pbc-inverse-image-modules-exact], and $i^*i_*\\cong\\mathrm{id}$ by [lem-kun-04ca]. The latter abelian-sheaf counit is $\\Lambda$-linear: it is the counit of the constant-ring module adjunction in the exact-inverse-image node. Apply these identities termwise and pass to derived categories using [lem-weil-pbc-exact-functor-derived-factorization]; in particular $i_*$ reflects isomorphisms. It preserves bounded constructibility: extend each stratum of a constructible sheaf on $Z$ to the same locally closed subscheme of $X$, with zero sheaf on $X\\setminus Z$. Its restriction to $Z$ is the original sheaf by $i^*i_*\\cong\\mathrm{id}$, and it is zero on the complement by the supported-image assertion of [lem-kun-04ca]. The finite stratification thus witnesses constructibility, and exactness preserves the cohomological bounds. Conversely $i^*$ preserves bounded constructibility by exactness and [prop-constructible-pullback].",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-per-finite-exceptional-internal-hom",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-kun-04ca",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "prop-constructible-pullback",
+    "def-weil-closed-immersion",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Proposition 7.6.9, p.313: inheritance under passage to a subscheme, expanded closed case; closed-site support is Stacks Tag 04CA."
+   }
+  },
+  {
+   "text": "Set $Q_Z=i^!Q$, initially an object of $D^+(Z_{\\mathrm{et}},\\Lambda)$. The unit case of [lem-per-finite-exceptional-internal-hom] gives\n$$i_*Q_Z\\cong R\\mathcal Hom_\\Lambda(i_*\\Lambda_Z,Q)=D_X(i_*\\Lambda_Z).$$\nThe sheaf $\\Lambda_Z$ is constant of rank one, so is constructible, and Step 4 shows that $i_*\\Lambda_Z$ is bounded constructible. Its dual on $X$ is therefore bounded constructible. Apply $i^*$ and $i^*i_*\\cong\\mathrm{id}$ from Step 4 to conclude that $Q_Z$ is bounded constructible. In particular this argument obtains boundedness of this specific extraordinary inverse image from the dualizing hypothesis; it assumes no general cohomological-dimension bound.",
+   "uses": [
+    "lem-per-finite-exceptional-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Proposition 7.6.9, p.313: the closed-subscheme inheritance assertion, expanded using the finite internal-Hom identity of Proposition 5.4.1, pp.291,293."
+   }
+  },
+  {
+   "text": "Write $D_Z=R\\mathcal Hom_\\Lambda(-,Q_Z)$. For every $M\\in D^b_c(Z_{\\mathrm{et}},\\Lambda)$ the same finite internal adjunction [lem-per-finite-exceptional-internal-hom] yields\n$$\\beta_M:i_*D_ZM\\xrightarrow{\\sim}D_X(i_*M).$$\nIts hypotheses hold: $\\Lambda$ is finite, both schemes are Noetherian, $i$ is finite, and $M,Q$ are bounded below. The right side is bounded constructible by Step 4 and the hypothesis on $D_X$. Applying $i^*$ as in Step 5 proves that $D_ZM$ is bounded constructible. Thus the same adjunction may also be applied with $D_ZM$ in place of $M$.",
+   "uses": [
+    "lem-per-finite-exceptional-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Proposition 7.6.9, p.313; finite internal adjunction in Proposition 5.4.1, pp.291,293."
+   }
+  },
+  {
+   "text": "Let $\\eta$ denote the canonical evaluation-transpose double-dual maps of [lem-per-relative-bidual-triangles]. By the evaluation--counit normalization in [lem-per-finite-exceptional-internal-hom], the comparison of Step 6 satisfies\n$$\\beta_{D_ZM}\\circ i_*\\eta_M\n =D_X(\\beta_M)\\circ\\eta_{i_*M}.$$\nTo check the equality, transpose both sides under tensor--internal-Hom adjunction, with target $R\\mathcal Hom_\\Lambda(i_*D_ZM,Q)$. On the left, the definition of $\\eta_M$ changes evaluation on the double dual into evaluation on $M$ after symmetry; the defining transpose of $\\beta_{D_ZM}$ then follows it by the counit $i_*Q_Z\\to Q$. On the right, naturality of evaluation changes precomposition by $\\beta_M$ into evaluation of $\\beta_M$; its defining transpose is the same evaluation on $M$ followed by that same counit. Both transposes are therefore the pairing $i_*D_ZM\\otimes^L i_*M\\to Q$ defining $\\beta_M$, with its factors interchanged by the same Koszul symmetry. The transposition bijection gives the displayed equality. Its right side is an isomorphism because $\\eta_{i_*M}$ and $\\beta_M$ are isomorphisms. Since $\\beta_{D_ZM}$ is an isomorphism and $i_*$ reflects isomorphisms (Step 4), $\\eta_M$ is an isomorphism. Steps 5--6 now prove that $Q_Z$ is dualizing.",
+   "uses": [
+    "lem-per-relative-bidual-triangles",
+    "lem-per-finite-exceptional-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Proposition 7.6.9, p.313: canonical biduality in the closed-subscheme inheritance assertion; evaluation--counit formal calculation."
+   }
+  },
+  {
+   "text": "For a locally closed subscheme choose the defining factorization $T\\xrightarrow{i}U\\xrightarrow{j}X$, with $i$ closed and $j$ open [def-weil-closed-immersion]. The open subscheme $U$ is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian], and its closed subscheme $T$ is Noetherian by the quotient-chart argument of Step 4. Apply Steps 1--3 to $j$ and Steps 4--7 inside $U$ to $i$. They construct the required dualizing complex $i^!j^*Q$ on $T$. If $T$ is empty its derived category is the zero category and the construction gives its zero dualizing object; the identity open or closed immersion gives $Q$. No reducedness, invertibility of $\\ell$, excellence, dimension bound, or uniform cohomological-dimension bound was used. The auxiliary $A$ in the inherited statement plays no role, since the coefficients throughout this assertion are $\\Lambda$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Proposition 7.6.9, p.313, inheritance sentence; factorization and empty-case verification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "prop-constructible-pullback",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "def-weil-pbc-extension-by-zero",
+  "def-pur-derived-internal-hom",
+  "lem-per-relative-bidual-triangles",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-per-finite-exceptional-internal-hom",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-kun-04ca",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, proof of Proposition 7.6.3, p.311 and inheritance sentence in proof of Proposition 7.6.9, p.313; expanded open and closed evaluation arguments."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +183,52 @@
    "results": "8 hits; top: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme, AlgebraicGeometry.IsReduced, AlgebraicGeometry.IsReduced.component_reduced, AlgebraicGeometry.Scheme.etaleTopology, AlgebraicGeometry.isReduced_of_isOpenImmersion, Algebra.basicOpen_subset_etaleLocus_iff, AlgebraicGeometry.IsLocallyArtinian; note: ; digest: c3e1f9d4d56e46c7",
    "date": "2026-10-18",
    "verdict": "no match: generic category, scheme, or condensed-module infrastructure does not state this theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dualizing complex existence on a locally closed subscheme inherited from an ambient Noetherian etale scheme",
+   "results": "8 hits; top: AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.instIsLocallyNoetherianToScheme, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.IsNoetherian, AlgebraicGeometry.IsLocallyArtinian, AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace, AlgebraicGeometry.IsLocallyArtinian.isLocallyNoetherian, AlgebraicGeometry.instIsGermInjectiveOfIsLocallyNoetherian; note: ; digest: b24e810fd57f3efa",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned scheme, ordinary sheaf, or categorical declarations do not state dualizing existence and inheritance on bounded constructible etale complexes"
+  },
+  {
+   "tool": "loogle",
+   "query": "dualizingComplex, verdierDual, IsIso",
+   "results": "0 hits; top: ; note: loogle: unknown identifier 'dualizingComplex'; digest: 4f53cda18c2baa0c",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned scheme, ordinary sheaf, or categorical declarations do not state dualizing existence and inheritance on bounded constructible etale complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|VerdierDual|biduality",
+   "results": "0 hits; top: ; note: ; digest: 4f53cda18c2baa0c",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned scheme, ordinary sheaf, or categorical declarations do not state dualizing existence and inheritance on bounded constructible etale complexes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Existence of a dualizing complex on a locally closed subscheme of a Noetherian scheme",
+   "results": "8 hits; top: AlgebraicGeometry.IsNoetherian.toIsLocallyNoetherian, AlgebraicGeometry.isLocallyNoetherian_of_isOpenImmersion, AlgebraicGeometry.isNoetherian_iff, AlgebraicGeometry.IsLocallyNoetherian, AlgebraicGeometry.instIsLocallyNoetherianToScheme, AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace, AlgebraicGeometry.instIsLocallyNoetherianXScheme, AlgebraicGeometry.IsLocallyNoetherian.mk; note: ; digest: 2aa4475727012a9b",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned scheme, ordinary sheaf, or categorical declarations do not state dualizing existence and inheritance on bounded constructible etale complexes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of derived internal Hom to an open subtopos and biduality for constructible sheaves",
+   "results": "8 hits; top: TopCat.Sheaf.restrictHomEquivHom, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.SheafedSpace.ofRestrict_hom_c_app, CompHausLike.LocallyConstant.adjunction, TopCat.Sheaf.extend_hom_app, CategoryTheory.Functor.IsCoverDense.restrictHomEquivHom, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; note: ; digest: 6ab57c0d3163d437",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned scheme, ordinary sheaf, or categorical declarations do not state dualizing existence and inheritance on bounded constructible etale complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "Dualizing|dualizing|biduality",
+   "results": "5 hits; top: Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean, Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean, Mathlib/CategoryTheory/Category/Cat/Op.lean; note: ; digest: 364d00e88036cc12",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned scheme, ordinary sheaf, or categorical declarations do not state dualizing existence and inheritance on bounded constructible etale complexes"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-ctf-hom-condition-b",
@@ -72,7 +240,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Proof, Step 1 of lem-per-artin-gabber-affine-curve: 'Relative Verdier duality, biduality ... over the same arbitrary field $k$', through lem-per-qbar-arbitrary-field-duality, lem-per-finite-residue-dualizing and lem-per-potential-local-duality; the last node's Step 2 extends finite-field coefficients.; coefficient comparison via ILO XVII 7.6.1, proof p. 314. Subargument: Expose XVII, proof of Proposition 7.6.9, p. 313, sentence asserting preservation of existence of a dualizing complex under passage to a subscheme; open case also in the proof of Proposition 7.6.3, p. 311.",
+   "place": "Current main-20261015 blueprint, lem-per-artin-gabber-affine-curve.proof.md, Step 3: duality symmetry of the middle perverse t-structure; the recorded descendants through arbitrary-field duality, finite-residue dualizing complexes, potential local duality and coefficient comparison require the locally closed inheritance used in ILO XVII proof of Proposition 7.6.9, p.313.",
    "via": [
     "lem-per-ctf-hom-condition-b",
     "lem-per-ctf-hom-coefficient-comparison",
@@ -84,5 +252,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-dualizing-locally-closed-inheritance",
+  "worker": "stage1",
+  "summary": "Expanded the ILO inheritance sentence into open restriction, closed extraordinary inverse image, bounded-constructible preservation and explicit canonical biduality calculations. Reused all available site and finite-adjunction tools; no new nodes and no statement change. Corrected the blueprint place to the current ancestor Step 3 while retaining its ancestry.",
+  "blueprint": "Current main-20261015 ancestor Step 3, duality symmetry, through the recorded coefficient-change descendants. The immediate place realized is the locally closed inheritance sentence in ILO XVII proof of Proposition 7.6.9; Steps 1--3 expand the open assertion of 7.6.3 and Steps 4--7 expand the closed case; Step 8 assembles locally closed immersions.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-site-localization-open",
+    "why": "Identifies an open small etale site with a slice, allowing the generic restriction formulas; no proof step of the perverse unit replaces this site tool."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Supplies exact open extension and restriction for module sheaves on a localized site."
+   },
+   {
+    "node": "prop-constructible-pullback",
+    "why": "Supplies ordinary etale constructibility under restriction; the perverse unit does not supply this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-stalks",
+    "why": "Supplies the zero stalks outside the open used to verify extension constructibility directly."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Supplies the generic derived internal-Hom restriction formula, without constructibility or dimension hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-finite",
+    "why": "Supplies finiteness of the closed map needed to apply the existing finite internal adjunction."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Supplies exact restriction with constant coefficients and identifies the module adjunction counit."
+   },
+   {
+    "node": "lem-kun-04ca",
+    "why": "Supplies the closed-site fully faithful supported image and its inverse-image left inverse."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "prop-constructible-pullback",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-closed-immersion-finite",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-kun-04ca"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-ad8c06adf",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-ad8c06adf (reviewer sub-agent of L); spot-checked: I read the whole item. It has 8 steps and no new nodes, and the statement is unchanged; I also read the statements of all 26 cited nodes. ILO XVII p.311 (proof of 7.6.3: j^*K is dualizing 'pour des raisons évidentes') and p.313 (proof of 7.6.9: existence is preserved under passage to a subscheme) match the item. ILO Déf. 0.8 matches the item's definition of a dualizing complex. The proof needs no invertibility of ℓ. Steps 1-3, open case: exact j^*/j_!, constructibility of j_! by strata plus zero stalks off U, D_U via the internal-Hom restriction, and restriction of the evaluation-transpose map. Steps 4-7, closed case: Z is Noetherian on its quotient charts. i_* is exact, reflects isomorphisms and preserves D^b_c (by 04CA and the module counit). i^!Q = i^*D_X(i_*Λ_Z) is in D^b_c. β_M: i_*D_ZM≅D_X(i_*M) from the finite internal adjunction. The identity β_{D_ZM}∘i_*η_M = D_X(β_M)∘η_{i_*M} is checked by transposition, so η_M is an isomorphism. Step 8 factors T→U→X and composes the two cases. Edge cases checked: empty T, identity immersions, nonreduced Z, characteristic ℓ. No duplicate: lem-fin-closed-immersion and lem-fin-extension-by-zero need finite type over k, and potential-extraordinary-pullback concerns pinned excellent schemes. No cycle and no SGA citation. The declared tool uses are accepted as generic site and étale infrastructure; the finite-exceptional and bidual-triangles nodes are in the item's own unit. Batch 5: lem-per-finite-exceptional-internal-hom is accepted. It is the generic finite-morphism internal adjunction, not part of the trace-formula or Poincaré-duality proofs; the flagged chain ends in the generic lisse-module node. Recomputing the batch-5 closure with and without the item's proof gives 16549 nodes both ways (difference 0), and that node is already in the base closure. No changes made."
  }
 }
