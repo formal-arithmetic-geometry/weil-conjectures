@@ -20,9 +20,189 @@
   "def-weil-pbc-integral-closure",
   "def-weil-pbc-adic-completion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The empty scheme satisfies the assertions with $S=\\varnothing$ and $Q=0$; hence suppose $X\\ne\\varnothing$. A field is Noetherian (its only ideals are $0$ and itself), so the finite-type-over-Noetherian lemma makes $X$ Noetherian. Apply the reduced-algebraic-normalization lemma to precisely the componentwise normalization in the statement: $\\nu$ is finite and surjective, the normal locus $N$ (points with integrally closed domain local ring) is dense open, $\\nu^{-1}N\\to N$ is an isomorphism, and normalization restricts to every open. None of these assertions requires separatedness. The Noetherian finite-component lemma gives finitely many components of $X$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-reduced-algebraic-normalization-field-change",
+    "lem-sc-noetherian-finite-irreducible-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BXR (lemma-normalization-locally-algebraic); Tag 0C1R, start of proof"
+   }
+  },
+  {
+   "text": "Fix a nonempty affine open $U=\\operatorname{Spec}R\\subset X$ and write $T=\\Gamma(\\nu^{-1}U,\\mathcal O)$. By restriction of normalization and its componentwise definition, $\\nu^{-1}U$ is the finite disjoint union of the function-field normalizations of $\\operatorname{Spec}(R/\\mathfrak p_i)$, where $\\mathfrak p_i$ are the minimal primes of $R$. The definition of function-field normalization and the affine description in the relative-normalization lemma identify $T=\\prod_i B_i$, where $B_i$ is the integral closure of $R/\\mathfrak p_i$ in $K_i=\\operatorname{Frac}(R/\\mathfrak p_i)$. The reduced-Noetherian total-fractions lemma identifies $Q(R)=\\prod_iK_i$ (the kernel of $R\\to R_{\\mathfrak p_i}$ is $\\mathfrak p_i$, by the localization criterion for zero). Thus $R\\to T\\subset Q(R)$ is injective. Because $\\nu$ is finite, $T$ is finite over $R$, so every element of $T$ is integral over $R$. Conversely an element of $Q(R)$ integral over $R$ has each coordinate integral over $R/\\mathfrak p_i$, hence in $B_i$. Therefore $T$ is exactly the integral closure of $R$ in $Q(R)$.",
+   "uses": [
+    "lem-weil-pbc-reduced-algebraic-normalization-field-change",
+    "def-weil-pbc-reduced-normalization",
+    "def-sc-normalization",
+    "lem-weil-pbc-relative-normalization",
+    "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "lem-weil-pbc-finite-algebra-is-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 0CDV (lemma-normalization-in-terms-of-components), 035F and 035H (affine integral-closure construction); varieties Tag 0C1R(3)"
+   }
+  },
+  {
+   "text": "For $x\\in U$ corresponding to $\\mathfrak p\\subset R$, the affine-open stalk lemma gives $A_x=R_{\\mathfrak p}$. This is reduced and Noetherian; Noetherianity follows from the localization-Noetherian lemma, and reducedness follows by clearing a denominator in a nilpotence equation. Since a finite morphism is affine, the affine-pushforward stalk lemma gives $C_x=(R\\setminus\\mathfrak p)^{-1}T$. Apply integral-closure localization to Step 2. Its ambient algebra $(R\\setminus\\mathfrak p)^{-1}Q(R)$ is $Q(R_{\\mathfrak p})$: in the finite product of fields of Step 2 a factor for $\\mathfrak p_i\\not\\subseteq\\mathfrak p$ vanishes, since an element of $\\mathfrak p_i\\setminus\\mathfrak p$ becomes invertible and is zero in that factor; every other factor is unchanged. The surviving primes $\\mathfrak p_iR_{\\mathfrak p}$ are exactly the minimal primes of $R_{\\mathfrak p}$, and their fraction fields remain $K_i$. The total-fractions lemma applied to $R_{\\mathfrak p}$ gives precisely this same product. Consequently $C_x$ is the integral closure of $A_x$ in its total ring of fractions, with the structural inclusion $A_x\\hookrightarrow C_x$. It is finite over $A_x$: localize finite generators of $T$ over $R$.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-sc-affine-pushforward-stalk-localization",
+    "lem-weil-pbc-integral-closure-commutes-localization",
+    "lem-weil-pbc-reduced-noetherian-total-ring-fractions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C1R(3); Tag 0C45 (lemma-normalize-noetherian-dim-1); Algebra Tags 0307 and 02LX"
+   }
+  },
+  {
+   "text": "The affine injections $R\\hookrightarrow T$ of Step 2 imply that $\\mathcal O_X\\to\\nu_*\\mathcal O_{X^\\nu}$ is a monomorphism: a section in its kernel restricts to zero on every affine open and hence is zero by the sheaf axiom. Both $X$ and $X^\\nu$ are locally Noetherian, the latter being finite type over $k$ since $\\nu$ is finite. On a locally Noetherian scheme the structure sheaf is coherent by the coherent/quasi-coherent-finite-type criterion. Finite pushforward therefore makes $\\nu_*\\mathcal O_{X^\\nu}$ coherent. Let $Q$ be the sheaf cokernel. Coherence of cokernels gives coherence of $Q$, and stalk exactness identifies $Q_x=C_x/A_x$ and supplies the stated short exact sequence. In particular every $Q_x$ is finite over $A_x$, since the images of the localized finite generators of $C_x$ generate it.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-finite-pushforward-coherent",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "lem-weil-pbc-module-stalk-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C1R(1)--(4); coherent.tex Tags 01XZ and 01Y6; modules.tex Tag 01BY"
+   }
+  },
+  {
+   "text": "For each $x$, Step 3 says $Q_x=0$ if and only if $A_x$ is integrally closed in $Q(A_x)$. Apply the reduced-normal/total-fractions equivalence: $A_x$ is reduced Noetherian and has finitely many minimal primes. It says this happens if and only if $A_x$ is normal, which for a local ring means a normal domain. Indeed in its finite product of normal domains a local nonzero ring has only one nonzero factor, because an idempotent $e$ in a local ring satisfies $e=0$ or $1$ (one of $e,1-e$ is a unit). Thus $\\operatorname{Supp}Q=X\\setminus N$, a closed subset. At any generic point of a component the reduced-Noetherian total-fractions lemma says the local ring is a field, so no generic point lies in this support. Since $X$ has dimension one, every irreducible closed subset of the support is a singleton closed point: otherwise it would lie strictly inside a component of $X$ and itself contain a nonempty proper irreducible closed subset, giving a chain of length two. The Noetherian closed-subset finite-component lemma now implies that $\\operatorname{Supp}Q$ is a finite set of closed points.",
+   "uses": [
+    "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "lem-sc-noetherian-closed-subset-finite-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C1R(2), proof; Algebra Tag 030C (lemma-characterize-reduced-ring-normal)"
+   }
+  },
+  {
+   "text": "Every closed point $x$ of $X$ has $\\dim A_x=1$. In fact primes of $A_x$ correspond to generizations of $x$ in an affine neighbourhood, so the dimension is at most one; a component through $x$ has dimension one by hypothesis and cannot have $x$ as its generic point, because $x$ is closed, so its generic point gives a strict chain to $x$ of length one. The structural residue-field lemma gives $\\kappa(x)=k$ as $k$-algebras. Hence that residue extension is separable, and the regular-local/separable-residue smoothness criterion gives: $X\\to\\operatorname{Spec}k$ is smooth at $x$ if and only if $A_x$ is regular. The dimension-one regular/normal equivalence identifies this with $x\\in N$. There are no remaining nonsmooth points on $N$: all its local rings are normal domains of dimension at most one, so are fields in dimension zero and regular by the same equivalence in dimension one. Thus $N$ is regular. The algebraically closed field $k$ is perfect, and regularity over a perfect field implies smoothness on $N$. Together with Step 5 this proves $S=X\\setminus N=\\operatorname{Supp}Q$, including its finiteness, closedness and the asserted structural residue fields.",
+   "uses": [
+    "lem-weil-pbc-closed-point-residue-field-base",
+    "lem-weil-pbc-regular-local-separable-residue-smooth",
+    "lem-weil-pbc-regular-local-dim-one-iff-normal",
+    "lem-trf-regular-perfect-field-smooth"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C1R(2); Tag 0B8X (regular and smooth loci over a perfect field); Algebra Tags 00TV and 00PD"
+   }
+  },
+  {
+   "text": "For $x\\in S$, put $M_x=Q_x=C_x/A_x$. It is finite and nonzero by Steps 4--6. Every nonmaximal prime of the one-dimensional local ring $A_x$ is minimal: a strictly smaller prime would give a chain of length two ending at the maximal ideal. At such a prime, localization of $Q_x$ is the stalk of $Q$ at the corresponding generic point, hence zero by Step 5. Here stalks of quasi-coherent modules are their module localizations, by the tilde-stalk lemma and an affine quasi-coherent presentation. Thus $M_x$ is supported only at the maximal ideal. The finite-module-supported-at-a-point lemma gives finite length, and the finite-length filtration lemma gives a finite filtration with simple successive quotients, as required by the statement's explicit meaning of finite length.",
+   "uses": [
+    "lem-weil-pbc-spec-tilde-stalk-localization",
+    "lem-sc-generic-stalk-finite-length",
+    "lem-weil-pbc-finite-length-module-simple-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C1R(4); Algebra Tags 00L5 (lemma-support-point) and 00J3 (lemma-simple-pieces)"
+   }
+  },
+  {
+   "text": "Use the skyscraper-stalk adjunction with the identity of $Q_x=M_x$ to obtain $Q\\to\\mathscr S_x(M_x)$ for each $x\\in S$; on an open containing $x$ this map sends a section to its germ. Assemble them into $g:Q\\to\\bigoplus_{x\\in S}\\mathscr S_x(M_x)$, using that $S$ is finite, so direct sum equals product. The stalk of $\\mathscr S_x(M_x)$ at $x$ is $M_x$, since all its neighbourhood restriction maps are identities. At $y\\ne x$ it is zero: $X\\setminus\\{x\\}$ is a neighbourhood of $y$ on which this sheaf vanishes. Taking a stalk commutes with this finite sum directly by representing finitely many germs on a common neighbourhood. Consequently $g_y$ is the identity of $M_y$ when $y\\in S$, and is the map $0\\to0$ otherwise. The stalkwise isomorphism criterion proves that $g$ is an isomorphism of $\\mathcal O_X$-modules, with precisely the germ action and sections stipulated in the statement.",
+   "uses": [
+    "lem-weil-pbc-module-skyscraper-stalk-adjunction",
+    "lem-weil-pbc-module-iso-on-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C1R(2); sheaves.tex Tags 009A, 009C and 007T"
+   }
+  },
+  {
+   "text": "Fix $x\\in S$. The affine description $A_x=R_{\\mathfrak p}$ makes it a local algebra essentially of finite type over $k$; Steps 3 and 6 show reducedness and dimension one. Apply the existing curve-normalization/completion lemma with $B=C_x$, whose integral-closure description was proved in Step 3. It identifies $C_x\\otimes_{A_x}\\widehat A_x$ with the integral closure of $\\widehat A_x$ in its total ring of fractions. Apply the finite-module completion/tensor lemma to the finite $A_x$-module $C_x$ and ideal $\\mathfrak m_x$. It identifies $\\widehat C_x$ with $\\widehat A_x\\otimes_{A_x}C_x$. Composing the tensor flip with these canonical maps identifies $\\widehat C_x$ with that same integral closure. This identification respects multiplication and the map from $\\widehat A_x$: on pure tensors the completion map is $a\\otimes c\\mapsto a\\,\\iota(c)$, and the product of two such images is $aa'\\iota(cc')$.",
+   "uses": [
+    "lem-trf-curve-normalization-completion",
+    "lem-weil-pbc-completion-finite-module-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C3V (lemma-normalization-same-after-completion), completion clause; Tag 0C1R(7); Algebra Tag 00MA"
+   }
+  },
+  {
+   "text": "Let $r$ be the length of the simple filtration of $M_x$ in Step 7. Every simple module over the local ring $A_x$ is killed by $\\mathfrak m_x$: a nonzero vector generates it, so it is $A_x/J$ with $J$ maximal, and the unique maximal ideal is $\\mathfrak m_x$. Multiplication by $\\mathfrak m_x$ therefore sends each stage of that filtration into the preceding stage. Iterating gives $\\mathfrak m_x^rM_x=0$. For $n\\ge r$ the quotients $M_x/\\mathfrak m_x^nM_x$ are $M_x$ and their transition maps are identities. A compatible sequence is uniquely specified by this constant tail, its earlier terms being the reductions of the tail value. Thus the canonical completion map $M_x\\to\\widehat M_x$ is an $A_x$-linear isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C1R(9), finite-length quotient in the proof; explicit filtration argument"
+   }
+  },
+  {
+   "text": "Apply exactness of completion to the short exact sequence $0\\to A_x\\to C_x\\to M_x\\to0$ of finite modules over the Noetherian ring $A_x$, completing with respect to $\\mathfrak m_x$. It gives $0\\to\\widehat A_x\\to\\widehat C_x\\to\\widehat M_x\\to0$. Hence the completed quotient map induces an $A_x$-linear isomorphism $\\widehat C_x/\\widehat A_x\\to\\widehat M_x$. The map $M_x\\to\\widehat C_x/\\widehat A_x$ induced by $c\\mapsto\\iota_{C_x}(c)$ is well defined, since elements of $A_x$ map into $\\widehat A_x$. Its composite with this quotient isomorphism is exactly $M_x\\to\\widehat M_x$, by the componentwise formula for completing the quotient map. Step 10 says that composite is an isomorphism, so the natural map $M_x\\to\\widehat C_x/\\widehat A_x$ is an isomorphism as asserted.",
+   "uses": [
+    "lem-weil-pbc-completion-exact-finite-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0C1R(9); Algebra Tag 00MB(2) (lemma-completion-flat)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-reduced-algebraic-normalization-field-change",
+  "lem-sc-noetherian-finite-irreducible-components",
+  "def-weil-pbc-reduced-normalization",
+  "def-sc-normalization",
+  "lem-weil-pbc-relative-normalization",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-sc-affine-pushforward-stalk-localization",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-finite-pushforward-coherent",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-regular-local-separable-residue-smooth",
+  "lem-weil-pbc-regular-local-dim-one-iff-normal",
+  "lem-trf-regular-perfect-field-smooth",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-sc-generic-stalk-finite-length",
+  "lem-weil-pbc-finite-length-module-simple-filtration",
+  "lem-weil-pbc-module-skyscraper-stalk-adjunction",
+  "lem-weil-pbc-module-iso-on-stalks",
+  "lem-trf-curve-normalization-completion",
+  "lem-weil-pbc-completion-finite-module-tensor",
+  "lem-weil-pbc-completion-exact-finite-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0C1R (lemma-prepare-delta-invariant), parts (1)--(4), (7), (9); affine/local normalization and the finite-support skyscraper argument made explicit; completion comparison through Tag 0C3V."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -65,10 +245,45 @@
    "results": "{\"t\": \"2026-10-17T22:23:08Z\", \"tool\": \"grep\", \"query\": \"normalization|skyscraper\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/Normalization.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\", \"Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean\"], \"digest\": \"eaf1feaf40fd07c6\"}. Read returned signatures and Mathlib/AlgebraicGeometry/Normalization.lean:15-26, 48-76, 440-445: relative normalization and its universal property do not state the coherent quotient, singular support, or finite-length completion comparison. Weierstrass and power-series preparation hits are unrelated.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*quotient|quotient.*normalization|delta.invariant",
+   "results": "{\"t\": \"2026-10-17T23:55:13Z\", \"tool\": \"grep\", \"query\": \"normalization.*quotient|quotient.*normalization|delta.invariant\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}. Read the returned signatures and Mathlib/AlgebraicGeometry/Normalization.lean:15--28,48--76; relative normalization and its universal property do not state the coherent singular quotient or finite-length completion comparison. The generic module cokernel APIs and Kummer--Dedekind number-theoretic quotient formulas do not state this geometric theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The cokernel of the normalization structure sheaf of a reduced curve is a finite sum of finite length skyscraper modules",
+   "results": "{\"t\": \"2026-10-17T23:55:13Z\", \"tool\": \"leansearch\", \"query\": \"The cokernel of the normalization structure sheaf of a reduced curve is a finite sum of finite length skyscraper modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.ker_toNormalization\", \"ModuleCat.cokernelIsoRangeQuotient\", \"ModuleCat.cokernelIsColimit\", \"CategoryTheory.Limits.cokernel\", \"CategoryTheory.ShortComplex.cokernelToAbelianCoimageIsCokernel\", \"ModuleCat.cokernel_π_ext\", \"SheafOfModules.relationsOfIsCokernelFree_s\", \"Module.Presentation.cokernel\"], \"digest\": \"cb239a90fb82d3f2\"}. Read the returned signatures and Mathlib/AlgebraicGeometry/Normalization.lean:15--28,48--76; relative normalization and its universal property do not state the coherent singular quotient or finite-length completion comparison. The generic module cokernel APIs and Kummer--Dedekind number-theoretic quotient formulas do not state this geometric theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalization\", \"cokernel\"",
+   "results": "{\"t\": \"2026-10-17T23:55:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"normalization\\\", \\\"cokernel\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}. Read the returned signatures and Mathlib/AlgebraicGeometry/Normalization.lean:15--28,48--76; relative normalization and its universal property do not state the coherent singular quotient or finite-length completion comparison. The generic module cokernel APIs and Kummer--Dedekind number-theoretic quotient formulas do not state this geometric theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent normalization exact sequence on reduced curves and comparison of the integral closure quotient with its completion",
+   "results": "{\"t\": \"2026-10-17T23:55:21Z\", \"tool\": \"leanfinder\", \"query\": \"Coherent normalization exact sequence on reduced curves and comparison of the integral closure quotient with its completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"KummerDedekind.quotMapEquivQuotQuotMap\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk\", \"Ideal.quotientRangePowQuotSuccInclusionEquiv\", \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"AlgebraicGeometry.Scheme.Hom.toNormalization_normalizationDesc_assoc\", \"AlgebraicGeometry.Scheme.Hom.ι_toNormalization\", \"AlgebraicGeometry.Scheme.Hom.ι_fromNormalization_assoc\", \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk_symm_apply_eq_span\"], \"digest\": \"b38b9159560b0fcd\"}. Read the returned signatures and Mathlib/AlgebraicGeometry/Normalization.lean:15--28,48--76; relative normalization and its universal property do not state the coherent singular quotient or finite-length completion comparison. The generic module cokernel APIs and Kummer--Dedekind number-theoretic quotient formulas do not state this geometric theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalization quotient of a reduced algebraic curve is supported at finitely many singular points and unchanged after local completion",
+   "results": "{\"t\": \"2026-10-17T23:55:22Z\", \"tool\": \"leanfinder\", \"query\": \"Normalization quotient of a reduced algebraic curve is supported at finitely many singular points and unchanged after local completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"WeierstrassCurve.IsMinimal\", \"WeierstrassCurve.minimal\", \"WeierstrassCurve.IsGoodReduction\", \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"WeierstrassCurve.exists_isIntegral\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"WeierstrassCurve.Affine.FunctionField\"], \"digest\": \"c7ff234fac140c57\"}. Read the returned signatures and Mathlib/AlgebraicGeometry/Normalization.lean:15--28,48--76; relative normalization and its universal property do not state the coherent singular quotient or finite-length completion comparison. The generic module cokernel APIs and Kummer--Dedekind number-theoretic quotient formulas do not state this geometric theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-nodal-normalization-quotient",
@@ -100,5 +315,169 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-normalization-singular-skyscraper",
+  "worker": "stage1",
+  "summary": "Preserved the statement and split the normalization quotient and completion claims into eleven steps, reusing existing DAG lemmas throughout. Proved the affine and stalk integral-closure descriptions, the precise nonsmooth support, and the canonical finite-length completion comparison. No new nodes.",
+  "blueprint": "Realizes the numerical exceptional-fibre normalization-sequence step of lem-trf-local-term-locality through its descendant lem-trf-nodal-normalization-quotient: coherent normalization quotient, finite singular skyscraper support, and completion comparison used to calculate each nodal quotient.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6); used for the normalization quotient argument, with its hypotheses checked in the relevant step. No trace-unit proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-algebraic-normalization-field-change",
+    "why": "Generic Geometry and separable field change of reduced algebraic normalization; used for the normalization quotient argument, with its hypotheses checked in the relevant step. No trace-unit proof step is replaced."
+   },
+   {
+    "node": "lem-sc-noetherian-finite-irreducible-components",
+    "why": "Generic Noetherian spaces have finitely many irreducible components; used for the normalization quotient argument, with its hypotheses checked in the relevant step. No trace-unit proof step is replaced."
+   },
+   {
+    "node": "def-weil-pbc-reduced-normalization",
+    "why": "Generic Componentwise normalization of a scheme; used for the normalization quotient argument, with its hypotheses checked in the relevant step. No trace-unit proof step is replaced."
+   },
+   {
+    "node": "def-sc-normalization",
+    "why": "Generic Normalization in the function field; used for the normalization quotient argument, with its hypotheses checked in the relevant step. No trace-unit proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-relative-normalization",
+    "why": "Generic The normalization of a scheme in a quasi-compact quasi-separated scheme over it; used for the normalization quotient argument, with its hypotheses checked in the relevant step. No trace-unit proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+    "why": "Generic The total ring of fractions of a reduced Noetherian ring is a finite product of fields; used for the normalization quotient argument, with its hypotheses checked in the relevant step. No trace-unit proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-finite-algebra-is-integral",
+    "why": "Generic A finite algebra is integral; used for the normalization quotient argument, with its hypotheses checked in the relevant step. No trace-unit proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-affine-open-stalk-localization",
+    "why": "Generic Stalk of a scheme at a point of an affine open: the canonical open immersion and the localization; used for the normalization quotient argument, with its hypotheses checked in the relevant step. No trace-unit proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "Generic Localizations of Noetherian rings are Noetherian; used for the normalization quotient argument, with its hypotheses checked in the relevant step. No trace-unit proof step is replaced."
+   },
+   {
+    "node": "lem-sc-affine-pushforward-stalk-localization",
+    "why": "Generic Affine pushforward stalk as a localization of inverse-image sections; used for the normalization quotient argument, with its hypotheses checked in the relevant step. No trace-unit proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-integral-closure-commutes-localization",
+    "why": "Generic Integral closure commutes with localization (Stacks 0307); used for the normalization quotient argument, with its hypotheses checked in the relevant step. No trace-unit proof step is replaced."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic Coherence on locally Noetherian schemes; used for the normalization quotient argument, with its hypotheses checked in the relevant step. No trace-unit proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-finite-pushforward-coherent",
+    "why": "Generic The direct image of a coherent module along a finite morphism to a locally Noetherian scheme is coherent; used for the normalization quotient argument, with its hypotheses checked in the relevant step. No trace-unit proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "why": "Generic Coherent modules on a scheme: kernels, cokernels, extensions and finite direct sums are coherent; used for the normalization quotient argument, with its hypotheses checked in the relevant step. No trace-unit proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-module-stalk-exact",
+    "why": "Generic Stalks of O_X-modules commute with kernels, images and cokernels (Stacks 01AG); used for the normalization quotient argument, with its hypotheses checked in the relevant step. No trace-unit proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+    "why": "Generic A reduced ring with finitely many minimal primes is normal iff integrally closed in its total ring of fractions; used for the normalization quotient argument, with its hypotheses checked in the relevant step. No trace-unit proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "why": "Generic A Noetherian ring has finitely many minimal primes; used for the normalization quotient argument, with its hypotheses checked in the relevant step. No trace-unit proof step is replaced."
+   },
+   {
+    "node": "lem-sc-noetherian-closed-subset-finite-components",
+    "why": "Generic A closed subset of a Noetherian scheme has finitely many irreducible components; used for the normalization quotient argument, with its hypotheses checked in the relevant step. No trace-unit proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-closed-point-residue-field-base",
+    "why": "Generic Residue fields of closed points over an algebraically closed field; used for the normalization quotient argument, with its hypotheses checked in the relevant step. No trace-unit proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-separable-residue-smooth",
+    "why": "Generic Regularity with separable residue field characterizes smoothness over a field; used for the normalization quotient argument, with its hypotheses checked in the relevant step. No trace-unit proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-dim-one-iff-normal",
+    "why": "Generic A Noetherian local ring of dimension one is regular iff it is a normal domain; used for the normalization quotient argument, with its hypotheses checked in the relevant step. No trace-unit proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-spec-tilde-stalk-localization",
+    "why": "Generic Stalks of tilde modules are localizations; used for the normalization quotient argument, with its hypotheses checked in the relevant step. No trace-unit proof step is replaced."
+   },
+   {
+    "node": "lem-sc-generic-stalk-finite-length",
+    "why": "Generic Finite module supported only at a maximal ideal has finite length; used for the normalization quotient argument, with its hypotheses checked in the relevant step. No trace-unit proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-finite-length-module-simple-filtration",
+    "why": "Generic A finite-length module has a filtration with simple quotients; used for the normalization quotient argument, with its hypotheses checked in the relevant step. No trace-unit proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-module-skyscraper-stalk-adjunction",
+    "why": "Generic The skyscraper sheaf of modules at a point is right adjoint to the stalk; used for the normalization quotient argument, with its hypotheses checked in the relevant step. No trace-unit proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-module-iso-on-stalks",
+    "why": "Generic A morphism of modules on a scheme is an isomorphism iff it is bijective on all stalks; used for the normalization quotient argument, with its hypotheses checked in the relevant step. No trace-unit proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-completion-finite-module-tensor",
+    "why": "Generic The completion of a finite module over a Noetherian ring is its base change to the completed ring; used for the normalization quotient argument, with its hypotheses checked in the relevant step. No trace-unit proof step is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-completion-exact-finite-modules",
+    "why": "Generic Adic completion is exact on finite modules over a Noetherian ring; used for the normalization quotient argument, with its hypotheses checked in the relevant step. No trace-unit proof step is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-reduced-algebraic-normalization-field-change",
+  "lem-sc-noetherian-finite-irreducible-components",
+  "def-weil-pbc-reduced-normalization",
+  "def-sc-normalization",
+  "lem-weil-pbc-relative-normalization",
+  "lem-weil-pbc-reduced-noetherian-total-ring-fractions",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-sc-affine-pushforward-stalk-localization",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-finite-pushforward-coherent",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "lem-weil-pbc-module-stalk-exact",
+  "lem-weil-pbc-reduced-normal-iff-integrally-closed-total-fractions",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-weil-pbc-closed-point-residue-field-base",
+  "lem-weil-pbc-regular-local-separable-residue-smooth",
+  "lem-weil-pbc-regular-local-dim-one-iff-normal",
+  "lem-weil-pbc-spec-tilde-stalk-localization",
+  "lem-sc-generic-stalk-finite-length",
+  "lem-weil-pbc-finite-length-module-simple-filtration",
+  "lem-weil-pbc-module-skyscraper-stalk-adjunction",
+  "lem-weil-pbc-module-iso-on-stalks",
+  "lem-weil-pbc-completion-finite-module-tensor",
+  "lem-weil-pbc-completion-exact-finite-modules"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q64-20bdc64eb",
+  "group": "Q64",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-20bdc64eb (reviewer sub-agent of L); spot-checked: PASS: I read the item in full (11 steps), all 42 cited statements, Stacks 0C1R statement and proof, 0C3V and 0B8X, and checked every cited step-source tag against the tags file. The statement is 0C1R (1)-(4), (7), (9) for a reduced finite-type scheme of pure dimension 1 over an algebraically closed k. Nonsmooth points equal singular points over a perfect field (0B8X). M_x stays a finite-length A_x-module, not a k-vector space; this matters because m*M is nonzero for A_4 (y^2=x^5). Nothing in the statement is weakened. Checks by step: Step 2: the affine ring T is the product of the B_i and equals the integral closure of R in Q(R). This uses the kernel of R->R_{p_i} being p_i, reducedness and 00GK, all verified. Step 3: Q(R_p) is the product of K_i over the p_i contained in p, so points where components meet are handled. Step 5: Supp Q is the complement of the normal locus N; the chain argument shows its components are closed points, and 0BA8 makes it finite. Step 6: closed points have dim A_x = 1 and residue field k. 00TV and 00PD show points off N are not smooth, and the same-unit regular-implies-smooth lemma over a perfect field gives smoothness on N. Steps 7-8: 00L5, 00J3, 009C and 007T, with hypotheses checked. Step 9: the same-unit 0C3V node's four hypotheses (reduced, local, essentially finite type over k, dimension 1) are verified, and 00MA applies. Steps 10-11: m^r M = 0 gives M = M-hat, and 00MB shows the natural map M -> C-hat/A-hat is an isomorphism. Edge cases: empty X, a smooth curve, node, cusp, tacnode, A_4, and two components meeting at a point. There are no new nodes. Duplicate search over 0C1R, 0C45 and skyscraper/normalization found only distinct nodes: the genus formula and the exc local-curve nodes. All off-unit citations are declared generic tool_uses, and I accept them. Blueprint from/same_as are present. No fixes were written."
  }
 }

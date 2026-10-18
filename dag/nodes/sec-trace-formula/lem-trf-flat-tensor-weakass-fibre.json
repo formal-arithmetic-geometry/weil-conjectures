@@ -15,9 +15,230 @@
   "def-weil-pbc-localization-at-prime",
   "def-weil-pbc-module-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We first record the localization bookkeeping used below. If $U$ is a multiplicative set in a ring $T$ and $\\mathfrak t\\cap U=\\varnothing$, then $(U^{-1}T)_{U^{-1}\\mathfrak t}=T_{\\mathfrak t}$ and $(U^{-1}P)_{U^{-1}\\mathfrak t}=P_{\\mathfrak t}$: the inverse maps on fractions send $(a/u)/(b/v)$ to $av/(ub)$ and conversely. Thus the local radical-annihilator criterion [lem-sc-weakass-localization] gives $\\mathfrak t\\in\\operatorname{WeakAss}_T(P)$ iff $U^{-1}\\mathfrak t\\in\\operatorname{WeakAss}_{U^{-1}T}(U^{-1}P)$. We use this both for principal localization in $S$ and for localizing the base at $\\mathfrak p$. The fibre $C$ is a finite-type algebra over the field $\\kappa(\\mathfrak p)$: substitute the images of coefficients in a finite presentation of $S$. A field is Noetherian since its only ideals are $0$ and the whole field, so [lem-weil-pbc-finite-type-algebra-noetherian] makes $C$ Noetherian. Every prime of $C$ is therefore finitely generated, and [lem-sc-ass-weakass-fg-prime] identifies its weakly associated primes with its exact-annihilator associated primes. The same observations apply to every fibre ring below.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "lem-sc-weakass-localization",
+    "def-weil-pbc-finitely-presented-algebra",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-sc-ass-weakass-fg-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05IG, localization criterion and the Noetherian fibre rings used throughout"
+   }
+  },
+  {
+   "text": "Write $Q=\\overline{\\mathfrak q}$. The set $E=\\operatorname{Ass}_C(C)$ is finite by [lem-weil-pbc-noetherian-associated-primes-finite]. For each $\\mathfrak r\\in E$ not contained in $Q$ choose $a_{\\mathfrak r}\\in\\mathfrak r\\setminus Q$ and multiply these elements. The product $a$ lies in every such $\\mathfrak r$ and is outside $Q$; an empty product is $1$. Write $a=b/s$ in $C=S_{\\mathfrak p}/\\mathfrak pS_{\\mathfrak p}$ with $b\\in S$, $s\\in R\\setminus\\mathfrak p$, and put $g=b$. Multiplication by the unit $s$ preserves membership in each prime, so $g\\notin\\mathfrak q$ and its image belongs to all the unwanted primes. Replace $S$ by $S_g$ and $\\mathfrak q$ by $\\mathfrak qS_g$. Step 1 preserves both the assertion about $\\mathfrak q$ and the fibre-associated assertion. In this new fibre every associated prime contracts to an associated prime of the old fibre contained in $Q$. The new algebra is still finitely presented (adjoin $t$ with $gt=1$) and flat: localize the injection obtained by tensoring with the original flat $S$, using [lem-weil-pbc-localization-module-exact]. We retain $R,S,\\mathfrak p,\\mathfrak q,C,Q$ for these localized data.",
+   "uses": [
+    "lem-weil-pbc-noetherian-associated-primes-finite",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-ring-localization-away",
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05IG, choice of g via lemma-weak-bourbaki-pre-pre (Tag 05IF); the product and denominator argument are written out"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-flat-algebra-etale-projective-neighborhood] to obtain the pointed etale square $R\\to R^{\\prime}$, $S\\to S^{\\prime}$ with primes $\\mathfrak p^{\\prime},\\mathfrak q^{\\prime}$ and projective $R^{\\prime}$-module $S^{\\prime}$. Put $M^{\\prime}=M\\otimes_R R^{\\prime}$, $W=M\\otimes_R S$, $W^{\\prime}=M^{\\prime}\\otimes_{R^{\\prime}}S^{\\prime}=W\\otimes_S S^{\\prime}$, $C^{\\prime}=S^{\\prime}\\otimes_{R^{\\prime}}\\kappa(\\mathfrak p^{\\prime})$, and $Q^{\\prime}=\\overline{\\mathfrak q^{\\prime}}$. The displayed identification sends $(m\\otimes r^{\\prime})\\otimes s^{\\prime}$ to $m\\otimes r^{\\prime}s^{\\prime}$, with inverse $m\\otimes s^{\\prime}\\mapsto(m\\otimes1)\\otimes s^{\\prime}$. By [lem-trf-etale-weakass-invariance], weak association of $\\mathfrak q$ to $W$ is equivalent to that of $\\mathfrak q^{\\prime}$ to $W^{\\prime}$, and weak association of $\\mathfrak p$ to $M$ is equivalent to that of $\\mathfrak p^{\\prime}$ to $M^{\\prime}$. Apply the same theorem to the etale map $C\\to C^{\\prime}$ and then the Noetherian conversion of Step 1: $Q\\in\\operatorname{Ass}_C(C)$ iff $Q^{\\prime}\\in\\operatorname{Ass}_{C^{\\prime}}(C^{\\prime})$.",
+   "uses": [
+    "lem-trf-flat-algebra-etale-projective-neighborhood",
+    "lem-trf-etale-weakass-invariance",
+    "def-weil-pbc-module-tensor-product",
+    "lem-sc-ass-weakass-fg-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05IG, first two proof paragraphs, etale diagram and three equivalences"
+   }
+  },
+  {
+   "text": "Every $\\mathfrak r^{\\prime}\\in\\operatorname{Ass}_{C^{\\prime}}(C^{\\prime})$ contracts, by the etale weak-assassin theorem and Step 1, to an associated prime $\\mathfrak r$ of $C$. The choice of $g$ ensures $\\mathfrak r\\subseteq Q$. Also there are no strict inclusions between primes of $C^{\\prime}$ with the same contraction to $C$: if $\\mathfrak a^{\\prime}\\subseteq\\mathfrak b^{\\prime}$ both contract to $\\mathfrak a$, then [lem-weil-pbc-etale-prime-generates-maximal] says $\\mathfrak a C^{\\prime}_{\\mathfrak b^{\\prime}}=\\mathfrak b^{\\prime}C^{\\prime}_{\\mathfrak b^{\\prime}}$, and the intermediate prime $\\mathfrak a^{\\prime}C^{\\prime}_{\\mathfrak b^{\\prime}}$ must equal it; contraction back gives equality. Consequently, whenever $Q^{\\prime}$ is associated, it is maximal among the associated primes of $C^{\\prime}$: any associated prime containing it contracts to a prime both containing and contained in $Q$, and hence equals it.",
+   "uses": [
+    "lem-trf-etale-weakass-invariance",
+    "lem-sc-ass-weakass-fg-prime",
+    "lem-weil-pbc-etale-prime-generates-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05IG, key observation and maximality of the selected fibre-associated prime"
+   }
+  },
+  {
+   "text": "For the first implication suppose initially that $Q$ is not associated. Then $Q^{\\prime}$ is not associated by Step 3. No associated prime $\\mathfrak r^{\\prime}$ of $C^{\\prime}$ can contain $Q^{\\prime}$: contraction and Step 4 would force equality. Apply finite prime avoidance [lem-weil-pbc-prime-avoidance] to $Q^{\\prime}$ and the finite set of associated primes [lem-weil-pbc-noetherian-associated-primes-finite]. We obtain $a\\in Q^{\\prime}$ outside their union, hence multiplication by $a$ on $C^{\\prime}$ is injective by [lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes]. If that finite set is empty, take $a=0$ and use the same zero-divisor statement. Since $C^{\\prime}=S^{\\prime}_{\\mathfrak p^{\\prime}}/\\mathfrak p^{\\prime}S^{\\prime}_{\\mathfrak p^{\\prime}}$, multiply $a$ by a nonzero residue-field scalar to obtain the image of an $a^{\\prime}\\in\\mathfrak q^{\\prime}$; this does not change injectivity. The lift lies in $\\mathfrak q^{\\prime}$ because $Q^{\\prime}$ contracts to it.",
+   "uses": [
+    "lem-weil-pbc-prime-avoidance",
+    "lem-weil-pbc-noetherian-associated-primes-finite",
+    "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes",
+    "def-weil-pbc-localization-at-prime",
+    "lem-weil-pbc-fibre-ring-primes-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05IG, paragraph beginning Suppose that the fibre prime is not associated"
+   }
+  },
+  {
+   "text": "Put $A=R^{\\prime}_{\\mathfrak p^{\\prime}}$ and $B=S^{\\prime}_{\\mathfrak p^{\\prime}}$. The module $B$ is projective over $A$: localize the splitting of $S^{\\prime}$ as a summand of a free $R^{\\prime}$-module, obtaining a splitting into a free $A$-module. A free module is flat because tensoring with it is a direct sum of copies of the input map; its direct summands are flat by restricting that injection to the summand. Apply [lem-trf-local-universal-injective-residue] to multiplication by $a^{\\prime}$ on $B$; its residue-field map is multiplication by $a$ on $C^{\\prime}$. It is universally injective over $A$, hence injective on $M^{\\prime}_{\\mathfrak p^{\\prime}}\\otimes_A B$ and, after exact localization, on $W^{\\prime}_{\\mathfrak q^{\\prime}}$. This prevents weak association at $\\mathfrak q^{\\prime}$: an element with annihilator radical the maximal ideal would be killed by a power of $a^{\\prime}$, and injectivity would force it to be zero. The local criterion and Step 3 give $\\mathfrak q\\notin\\operatorname{WeakAss}_S(W)$. Thus for every $M$, weak association at $\\mathfrak q$ implies fibre association at $Q$.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-pbc-module-tensor-product",
+    "lem-trf-local-universal-injective-residue",
+    "lem-weil-pbc-localization-module-exact",
+    "lem-sc-weakass-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05IG, universal injectivity argument proving the fibre condition"
+   }
+  },
+  {
+   "text": "Now assume $\\mathfrak q\\in\\operatorname{WeakAss}_S(W)$, and choose $z\\in W$ with $\\mathfrak q$ minimal over $\\operatorname{Ann}_S(z)$. Its image in $W_{\\mathfrak q}$ is nonzero (otherwise some element outside $\\mathfrak q$ annihilates $z$). For each $f\\in\\mathfrak p$ there are $g_f\\notin\\mathfrak q$ and $n_f\\geq1$ with $g_f f^{n_f}z=0$, for this particular $z$: an element $c/t$ of $S_{\\mathfrak q}$ kills $z/1$ iff $ucz=0$ for some $u\\notin\\mathfrak q$ [def-weil-pbc-module-localization], so $\\operatorname{Ann}_{S_{\\mathfrak q}}(z/1)=\\operatorname{Ann}_S(z)S_{\\mathfrak q}$; a prime of $S_{\\mathfrak q}$ containing it is $\\mathfrak tS_{\\mathfrak q}$ for a prime $\\mathfrak t\\subseteq\\mathfrak q$ containing $\\operatorname{Ann}_S(z)$, hence $\\mathfrak t=\\mathfrak q$ by minimality. By [lem-weil-pbc-zero-locus-eq-iff-radical-eq] the radical of $\\operatorname{Ann}_{S_{\\mathfrak q}}(z/1)$ is therefore $\\mathfrak qS_{\\mathfrak q}$, which contains $f/1$ since $\\mathfrak p\\subseteq\\mathfrak q$; so $f^{n_f}/1=c/t$ with $c\\in\\operatorname{Ann}_S(z)$, $t\\notin\\mathfrak q$, and clearing denominators gives $g_f\\notin\\mathfrak q$ with $g_ff^{n_f}z=0$. Let $z^{\\prime}$ be the image in $W^{\\prime}_{\\mathfrak p^{\\prime}}$. It is nonzero: the local map $S_{\\mathfrak q}\\to S^{\\prime}_{\\mathfrak q^{\\prime}}$ is flat by etaleness [def-weil-etale-morphism, def-weil-flat-morphism], and faithfully flat by [lem-pc-local-flat-faithful-flat-reflects-surjective]. A faithfully flat extension preserves nonzero elements under $x\\mapsto x\\otimes1$: flatness embeds the tensor of the cyclic submodule generated by $x$ into the ambient tensor, and if its generator became zero that cyclic tensor would be zero, whence the cyclic submodule would be zero by faithful flatness [def-weil-pbc-faithfully-flat-ring-map]. Hence $z$ stays nonzero at $\\mathfrak q^{\\prime}$, so already $z^{\\prime}\\ne0$.",
+   "uses": [
+    "def-weil-pbc-module-localization",
+    "def-weil-etale-morphism",
+    "def-weil-flat-morphism",
+    "lem-pc-local-flat-faithful-flat-reflects-surjective",
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05IG, base weak-association argument, choice of z and its nonzero image"
+   }
+  },
+  {
+   "text": "The image of $g_f$ in $C^{\\prime}$ avoids every associated prime: its contraction in $C$ is contained in $Q$ by Step 4, whereas $g_f\\notin\\mathfrak q$. The zero-divisor theorem makes multiplication by this image injective on $C^{\\prime}$. As in Step 6, [lem-trf-local-universal-injective-residue] makes multiplication by $g_f$ universally injective on $S^{\\prime}_{\\mathfrak p^{\\prime}}$ over $R^{\\prime}_{\\mathfrak p^{\\prime}}$. Cancelling it in $g_f f^{n_f}z^{\\prime}=0$ gives $f^{n_f}z^{\\prime}=0$ for every $f\\in\\mathfrak p$. Since $\\mathfrak p^{\\prime}R^{\\prime}_{\\mathfrak p^{\\prime}}=\\mathfrak pR^{\\prime}_{\\mathfrak p^{\\prime}}$ by [lem-weil-pbc-etale-prime-generates-maximal], the radical of the $R^{\\prime}_{\\mathfrak p^{\\prime}}$-annihilator of $z^{\\prime}$ is its maximal ideal: it contains the generators from $\\mathfrak p$, and is proper because $z^{\\prime}\\ne0$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes",
+    "lem-trf-local-universal-injective-residue",
+    "lem-weil-pbc-etale-prime-generates-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05IG, cancellation of g_i and radical of the base annihilator"
+   }
+  },
+  {
+   "text": "The projective module $S^{\\prime}_{\\mathfrak p^{\\prime}}$ is free over the local ring $R^{\\prime}_{\\mathfrak p^{\\prime}}$ by [lem-trf-projective-over-local-free]. Expanding $z^{\\prime}$ in this basis expresses it as a finite tuple of elements of $M^{\\prime}_{\\mathfrak p^{\\prime}}$, at least one coordinate $v$ nonzero. Every base element whose power annihilates $z^{\\prime}$ has that same power annihilating $v$; Step 8 therefore makes the radical of $\\operatorname{Ann}(v)$ the maximal ideal. By [lem-sc-weakass-localization] this gives $\\mathfrak p^{\\prime}\\in\\operatorname{WeakAss}_{R^{\\prime}}(M^{\\prime})$, and by [lem-trf-etale-weakass-invariance] it gives $\\mathfrak p\\in\\operatorname{WeakAss}_R(M)$. Steps 1--9 have now proved the entire forward implication for every flat finitely presented algebra and every module, without using the reverse implication.",
+   "uses": [
+    "lem-trf-projective-over-local-free",
+    "lem-sc-weakass-localization",
+    "lem-trf-etale-weakass-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05IG, free-module coordinate argument finishing the forward implication"
+   }
+  },
+  {
+   "text": "For the reverse implication assume $\\mathfrak p\\in\\operatorname{WeakAss}_R(M)$ and $Q\\in\\operatorname{Ass}_C(C)$. Perform Steps 2--4. They preserve these assumptions, make $S^{\\prime}$ projective over $R^{\\prime}$, and make $Q^{\\prime}$ maximal among the associated primes of $C^{\\prime}$. Localize the base at $\\mathfrak p^{\\prime}$ and rename the data $(A,\\mathfrak m)$, $B$, $L$, $\\mathfrak b$, $D=B/\\mathfrak mB$, and $\\overline{\\mathfrak b}$. Thus $A$ is local, $B$ is a projective $A$-module and a finitely presented $A$-algebra, $\\mathfrak m\\in\\operatorname{WeakAss}_A(L)$, and $\\overline{\\mathfrak b}$ is maximal in $\\operatorname{Ass}_D(D)$. These are the same fibres because tensoring a localized presentation with the residue field does not change it; projectivity follows by localizing its splitting. Step 1 preserves the relevant weak association. It suffices to prove $\\mathfrak b\\in\\operatorname{WeakAss}_B(L\\otimes_A B)$, since Step 1 and the etale equivalence of Step 3 then return to the original rings.",
+   "uses": [
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-pbc-projective-module",
+    "lem-sc-weakass-localization",
+    "lem-trf-etale-weakass-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05IG, reductions (1)--(5) in the reverse implication"
+   }
+  },
+  {
+   "text": "The local criterion [lem-sc-weakass-localization] gives $y\\in L$ such that $I=\\operatorname{Ann}_A(y)$ has radical $\\mathfrak m$. The map $A/I\\to L$, $\\bar a\\mapsto ay$, is injective. Tensoring it with $B$ embeds $B/IB$ into $L\\otimes_A B$, since a projective module is a summand of a free module and tensoring such a summand preserves injections, as explained in Step 6. The same splitting, tensored with $A/I$, shows $B/IB$ is projective over $A/I$. The fibre $D$ is Noetherian by Step 1, so write $\\overline{\\mathfrak b}=(\\bar h_1,\\ldots,\\bar h_n)$ and lift the generators to $h_i\\in B$; then $\\mathfrak b=\\mathfrak mB+(h_1,\\ldots,h_n)$. These are quotient lifts along the surjection $B\\to D$, with no claim that $\\mathfrak b$ itself is finitely generated.",
+   "uses": [
+    "lem-sc-weakass-localization",
+    "def-weil-pbc-flat-ring-map",
+    "def-weil-pbc-projective-module",
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05IG, choice of y, its annihilator I and generators of the fibre prime"
+   }
+  },
+  {
+   "text": "Consider the $A/I$-linear map $\\Psi:B/IB\\to(B/IB)^{\\oplus n}$, $z\\mapsto(h_1z,\\ldots,h_nz)$. Both modules are projective over $A/I$ by the splitting in Step 11. Tensoring with $A/\\mathfrak m$ gives the same multiplication-vector map on $D$. It has a nonzero kernel element: an exact-annihilator witness for $\\overline{\\mathfrak b}\\in\\operatorname{Ass}_D(D)$ is killed by every $\\bar h_i$. Every element of the maximal ideal $\\mathfrak m/I$ of $A/I$ is nilpotent since $\\sqrt I=\\mathfrak m$. If $\\Psi$ were injective, [lem-trf-nil-local-projective-injection-pure] would make its residue-field tensor injective, a contradiction. Choose $0\\ne z\\in\\ker\\Psi$ and let $J=\\operatorname{Ann}_B(z)$. We have $IB\\subseteq J$ and $h_i\\in J$. For every $a\\in\\mathfrak m$ some power belongs to $I$, so $\\mathfrak mB\\subseteq\\sqrt J$. Therefore $\\mathfrak b\\subseteq\\sqrt J$. This argument includes $n=0$, when $\\Psi$ has zero target.",
+   "uses": [
+    "lem-trf-nil-local-projective-injection-pure",
+    "def-weil-pbc-annihilator-associated-primes",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05IG, the map Psi and application of More on Algebra Tag 05GQ"
+   }
+  },
+  {
+   "text": "Since $z\\ne0$, $J$ is proper. Choose a prime $\\mathfrak s$ minimal over $J$ by [lem-weil-pbc-minimal-prime-over-proper-ideal]. Then $\\mathfrak s$ is weakly associated to $B/IB$ by its defining witness $z$, contains $\\mathfrak b$, and contracts to $\\mathfrak m$ because $\\mathfrak m$ is maximal. Apply only the forward implication already proved in Steps 1--9 to the flat finitely presented algebra $A\\to B$ and the module $A/I$; its tensor with $B$ is $B/IB$. This yields $\\overline{\\mathfrak s}\\in\\operatorname{Ass}_D(D)$. It contains $\\overline{\\mathfrak b}$, so maximality from Step 10 gives equality. The fibre-prime bijection [lem-weil-pbc-fibre-ring-primes-bijection] gives $\\mathfrak s=\\mathfrak b$. Thus $\\mathfrak b$ is minimal over $\\operatorname{Ann}_B(z)$. Under the injection $B/IB\\to L\\otimes_A B$ of Step 11 its annihilator stays exactly $J$ (an element kills its image if and only if it kills $z$), proving weak association to $L\\otimes_A B$. The equivalences of Step 10 prove the required reverse implication in the original rings.",
+   "uses": [
+    "lem-weil-pbc-minimal-prime-over-proper-ideal",
+    "lem-weil-pbc-fibre-ring-primes-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/flat.tex",
+    "place": "Tag 05IG, final paragraph; apply the previously proved forward direction, not the equivalence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-localization",
+  "lem-sc-weakass-localization",
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-sc-ass-weakass-fg-prime",
+  "lem-weil-pbc-noetherian-associated-primes-finite",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-trf-flat-algebra-etale-projective-neighborhood",
+  "lem-trf-etale-weakass-invariance",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-etale-prime-generates-maximal",
+  "lem-weil-pbc-prime-avoidance",
+  "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes",
+  "lem-weil-pbc-fibre-ring-primes-bijection",
+  "def-weil-pbc-projective-module",
+  "lem-trf-local-universal-injective-residue",
+  "def-weil-etale-morphism",
+  "def-weil-flat-morphism",
+  "lem-pc-local-flat-faithful-flat-reflects-surjective",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-trf-projective-over-local-free",
+  "lem-trf-nil-local-projective-injection-pure",
+  "def-weil-pbc-annihilator-associated-primes",
+  "lem-weil-pbc-minimal-prime-over-proper-ideal",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/flat.tex",
+  "place": "Tag 05IG, lemma-weak-bourbaki-pre, full proof specialized to N=S; Tag 05IF product argument expanded inline."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,10 +288,38 @@
    "results": "{\"t\": \"2026-10-17T22:26:49Z\", \"tool\": \"grep\", \"query\": \"def associatedPrimes|def IsAssociatedPrime|radical.*annihilator|annihilator.*radical\", \"sub\": \"RingTheory/Ideal/AssociatedPrime\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean\", \"Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean\", \"Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean\", \"Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean\", \"Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean\"], \"digest\": \"397fe17eb1bb9dac\"}; Read the hits: Module.associatedPrimes localization theorems concern localization, not arbitrary flat finitely presented base change; rankAtStalk and going-down concern ranks and prime chains, not annihilators. Read Mathlib/RingTheory/Ideal/AssociatedPrime/Basic.lean:61-112 and Localization.lean:35-114. Its IsAssociatedPrime means a prime equal to a radical annihilator, not a prime minimal over an annihilator in an arbitrary ring, and exact-annihilator equivalence there assumes Noetherianity. The grep for weaklyAssociated/weakAss/WeakAss and tensor-associated-prime names has zero hits. No matching flat-tensor theorem.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "weakAss|weaklyAssociated|weakly_associated|associatedPrimes.*[Ee]tale|[Ee]tale.*associatedPrimes",
+   "results": "{\"t\": \"2026-10-17T23:52:19Z\", \"tool\": \"grep\", \"query\": \"weakAss|weaklyAssociated|weakly_associated|associatedPrimes.*[Ee]tale|[Ee]tale.*associatedPrimes\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the localization hits in AssociatedPrime/Localization.lean:35-114 and the radical-annihilator definition in Basic.lean:62-115. They do not state arbitrary weak-assassin base change; the flat regular-sequence results are also different. No exact declaration or one-line specialization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Weakly associated primes of a module after flat finitely presented algebra base change are associated primes in the fibres above weakly associated base primes",
+   "results": "{\"t\": \"2026-10-17T23:52:24Z\", \"tool\": \"leanfinder\", \"query\": \"Weakly associated primes of a module after flat finitely presented algebra base change are associated primes in the fibres above weakly associated base primes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.HasGoingDown.of_flat\", \"Module.associatedPrimes.mem_associatePrimes_of_comap_mem_associatePrimes_isLocalizedModule\", \"Module.associatedPrimes.mem_associatedPrimes_of_comap_mem_associatedPrimes_of_isLocalizedModule\", \"Module.associatedPrimes.comap_mem_associatedPrimes_of_mem_associatedPrimes_of_isLocalizedModule_of_fg\", \"Module.associatedPrimes.preimage_comap_associatedPrimes_eq_associatedPrimes_of_isLocalizedModule\", \"Module.comap_freeLocus_le\", \"Module.rankAtStalk_baseChange\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange\"], \"digest\": \"b1d5b8da60774e97\"}; Read the localization hits in AssociatedPrime/Localization.lean:35-114 and the radical-annihilator definition in Basic.lean:62-115. They do not state arbitrary weak-assassin base change; the flat regular-sequence results are also different. No exact declaration or one-line specialization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associated primes of fibres and weakly associated primes under flat finitely presented ring maps for arbitrary modules",
+   "results": "{\"t\": \"2026-10-17T23:54:56Z\", \"tool\": \"leansearch\", \"query\": \"Associated primes of fibres and weakly associated primes under flat finitely presented ring maps for arbitrary modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"associatedPrimes\", \"IsAssociatedPrime\", \"Module.associatedPrimes.mem_associatedPrimes_atPrime_of_mem_associatedPrimes\", \"associatedPrimes.subset_union_of_exact\", \"LinearEquiv.AssociatedPrimes.eq\", \"IsAssociatedPrime.map_of_injective\", \"Module.associatedPrimes.mem_associatedPrimes_of_comap_mem_associatedPrimes_of_isLocalizedModule\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange\"], \"digest\": \"42590bd9b8f5c9dc\"}; Read the localization hits in AssociatedPrime/Localization.lean:35-114 and the radical-annihilator definition in Basic.lean:62-115. They do not state arbitrary weak-assassin base change; the flat regular-sequence results are also different. No exact declaration or one-line specialization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associatedPrimes\", \"TensorProduct\"",
+   "results": "{\"t\": \"2026-10-17T23:54:56Z\", \"tool\": \"loogle\", \"query\": \"\\\"associatedPrimes\\\", \\\"TensorProduct\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the localization hits in AssociatedPrime/Localization.lean:35-114 and the radical-annihilator definition in Basic.lean:62-115. They do not state arbitrary weak-assassin base change; the flat regular-sequence results are also different. No exact declaration or one-line specialization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-vertical-principal-ideal-fibre-detection",
@@ -102,5 +351,139 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-flat-tensor-weakass-fibre",
+  "worker": "stage1",
+  "summary": "Split the unchanged 05IG specialization into thirteen proof steps, reusing weak-assassin localization, Noetherian associated-prime and purity tools. Three searched statement-only children supply etale weak-assassin invariance, etale projective neighborhoods, and purity of projective injections over a nil local ring. Expanded the separating-element construction, faithful-flat witness preservation, coordinate argument and cyclic-quotient reverse implication. Corrected the source proof fibre-field typo without changing the theorem.",
+  "blueprint": "Historical nearby-cycle semistable-alteration branch of lem-trf-local-term-locality, Proof (1)--(2): the fibre-generic detection of vertical principal ideals in the strict semistable overlap argument; this node supplies the general flat-tensor weak-assassin theorem used on scalar quotients. This is a historical auxiliary algebra branch; the current blueprint uses the contracting-correspondence route. The delivered split follows this item's specified Stacks source and changes no unit route or record.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-module-localization",
+    "why": "Generic commutative-algebra tool: Localization of a module at a multiplicative subset. The historical sk-i-curve-zero auxiliary algebra branch has no same-unit theorem providing this statement."
+   },
+   {
+    "node": "lem-sc-weakass-localization",
+    "why": "Generic commutative-algebra tool: Weak association is detected after localization at a prime. The historical sk-i-curve-zero auxiliary algebra branch has no same-unit theorem providing this statement."
+   },
+   {
+    "node": "def-weil-pbc-finitely-presented-algebra",
+    "why": "Generic commutative-algebra tool: Ring maps of finite presentation. The historical sk-i-curve-zero auxiliary algebra branch has no same-unit theorem providing this statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Generic commutative-algebra tool: Finitely generated algebras over Noetherian rings are Noetherian. The historical sk-i-curve-zero auxiliary algebra branch has no same-unit theorem providing this statement."
+   },
+   {
+    "node": "lem-sc-ass-weakass-fg-prime",
+    "why": "Generic commutative-algebra tool: A finitely generated prime is associated exactly when it is weakly associated. The historical sk-i-curve-zero auxiliary algebra branch has no same-unit theorem providing this statement."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-associated-primes-finite",
+    "why": "Generic commutative-algebra tool: A finite module over a Noetherian ring has finitely many associated primes. The historical sk-i-curve-zero auxiliary algebra branch has no same-unit theorem providing this statement."
+   },
+   {
+    "node": "def-weil-pbc-localization-at-prime",
+    "why": "Generic commutative-algebra tool: Localization at a prime, residue field of a prime, fibre ring. The historical sk-i-curve-zero auxiliary algebra branch has no same-unit theorem providing this statement."
+   },
+   {
+    "node": "def-weil-ring-localization-away",
+    "why": "Generic commutative-algebra tool: Localization of a ring at one element. The historical sk-i-curve-zero auxiliary algebra branch has no same-unit theorem providing this statement."
+   },
+   {
+    "node": "def-weil-pbc-flat-ring-map",
+    "why": "Generic commutative-algebra tool: Flat module and flat ring map. The historical sk-i-curve-zero auxiliary algebra branch has no same-unit theorem providing this statement."
+   },
+   {
+    "node": "lem-weil-pbc-localization-module-exact",
+    "why": "Generic commutative-algebra tool: Localization of modules is exact. The historical sk-i-curve-zero auxiliary algebra branch has no same-unit theorem providing this statement."
+   },
+   {
+    "node": "def-weil-pbc-module-tensor-product",
+    "why": "Generic commutative-algebra tool: Tensor product of modules over a commutative ring. The historical sk-i-curve-zero auxiliary algebra branch has no same-unit theorem providing this statement."
+   },
+   {
+    "node": "lem-weil-pbc-etale-prime-generates-maximal",
+    "why": "Generic commutative-algebra tool: For an etale algebra the prime below generates the maximal ideal of the local ring. The historical sk-i-curve-zero auxiliary algebra branch has no same-unit theorem providing this statement."
+   },
+   {
+    "node": "lem-weil-pbc-prime-avoidance",
+    "why": "Generic commutative-algebra tool: Prime avoidance. The historical sk-i-curve-zero auxiliary algebra branch has no same-unit theorem providing this statement."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes",
+    "why": "Generic commutative-algebra tool: Zero divisors on a module over a Noetherian ring form the union of its associated primes. The historical sk-i-curve-zero auxiliary algebra branch has no same-unit theorem providing this statement."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-ring-primes-bijection",
+    "why": "Generic commutative-algebra tool: Primes of the fibre ring are the primes over p. The historical sk-i-curve-zero auxiliary algebra branch has no same-unit theorem providing this statement."
+   },
+   {
+    "node": "def-weil-pbc-projective-module",
+    "why": "Generic commutative-algebra tool: Projective modules. The historical sk-i-curve-zero auxiliary algebra branch has no same-unit theorem providing this statement."
+   },
+   {
+    "node": "def-weil-etale-morphism",
+    "why": "Generic commutative-algebra tool: Etale morphism of schemes. The historical sk-i-curve-zero auxiliary algebra branch has no same-unit theorem providing this statement."
+   },
+   {
+    "node": "def-weil-flat-morphism",
+    "why": "Generic commutative-algebra tool: Flat morphism of schemes. The historical sk-i-curve-zero auxiliary algebra branch has no same-unit theorem providing this statement."
+   },
+   {
+    "node": "lem-pc-local-flat-faithful-flat-reflects-surjective",
+    "why": "Generic commutative-algebra tool: Faithfully flat local stalk maps reflect surjectivity. The historical sk-i-curve-zero auxiliary algebra branch has no same-unit theorem providing this statement."
+   },
+   {
+    "node": "def-weil-pbc-faithfully-flat-ring-map",
+    "why": "Generic commutative-algebra tool: Faithfully flat modules and ring maps. The historical sk-i-curve-zero auxiliary algebra branch has no same-unit theorem providing this statement."
+   },
+   {
+    "node": "def-weil-pbc-annihilator-associated-primes",
+    "why": "Generic commutative-algebra tool: Associated primes as element annihilators over an arbitrary ring. The historical sk-i-curve-zero auxiliary algebra branch has no same-unit theorem providing this statement."
+   },
+   {
+    "node": "lem-weil-pbc-minimal-prime-over-proper-ideal",
+    "why": "Generic commutative-algebra tool: A proper ideal has a minimal prime over it. The historical sk-i-curve-zero auxiliary algebra branch has no same-unit theorem providing this statement."
+   },
+   {
+    "node": "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "why": "Generic commutative-algebra tool: the radical of an ideal is the intersection of the primes containing it; used in Step 7 to obtain g_f f^n z=0 for the chosen witness z. Added by the maintainer reader. The historical sk-i-curve-zero auxiliary algebra branch has no same-unit theorem providing this statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-pbc-module-localization",
+  "lem-sc-weakass-localization",
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-sc-ass-weakass-fg-prime",
+  "lem-weil-pbc-noetherian-associated-primes-finite",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-ring-localization-away",
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-localization-module-exact",
+  "def-weil-pbc-module-tensor-product",
+  "lem-weil-pbc-etale-prime-generates-maximal",
+  "lem-weil-pbc-prime-avoidance",
+  "lem-weil-pbc-noetherian-module-zerodivisors-union-associated-primes",
+  "lem-weil-pbc-fibre-ring-primes-bijection",
+  "def-weil-pbc-projective-module",
+  "def-weil-etale-morphism",
+  "def-weil-flat-morphism",
+  "lem-pc-local-flat-faithful-flat-reflects-surjective",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "def-weil-pbc-annihilator-associated-primes",
+  "lem-weil-pbc-minimal-prime-over-proper-ideal",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-5a5878ef1",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-5a5878ef1 (reviewer sub-agent of L); spot-checked: I read the whole split. It is Stacks 05IG (flat.tex 3750-3980) with N=S, built on 05IF, 05FP, 05ID and More on Algebra 05GM/05GN/05GP/05GQ, all checked at their labels in tags/tags. The item statement, stmt_deps and blueprint field match the base exactly. The worker's source-error note is correct: 05IG writes S'⊗κ(q') where it needs κ(p'), and WeakAss_S(M) where it needs WeakAss_R(M). Steps 1-13 hold. Step 2 (separating element g), step 4 (key observation; no inclusions among étale-fibre primes, via etale-prime-generates-maximal), steps 5-6 (regular element and universal injectivity), steps 8-9 (cancelling g_f, coordinate argument) and steps 10-13 (cyclic A/I reduction, Psi, minimal prime, forward direction reused without circularity) were each checked against the statements they cite. All three new nodes are true, smaller than the item, not duplicates and statement-only. lem-trf-etale-weakass-invariance (05FP, affine form) was tested on k->k x k and L=0. lem-trf-flat-algebra-etale-projective-neighborhood (05ID with F=O): I checked the fp permanence and that the fibre map C->C' is étale; on k->k[t] the projective module has infinite rank. lem-trf-nil-local-projective-injection-pure: a nil-maximal local ring is auto-associated, so 05GQ (1)=>(2) applies; tested on a field, k[eps], and the infinite-rank example after 05GQ is consistent. The off-unit tool_uses are generic algebra tools; I accept them. One C3 fault, repaired in fixes/dag/nodes/sec-trace-formula/lem-trf-flat-tensor-weakass-fibre.json: step 7 used lem-sc-weakass-localization (which only gives some element) to get g_f f^n z=0 for the chosen z. The repaired step argues explicitly: Ann_{S_q}(z/1)=Ann_S(z)S_q, minimality makes qS_q the only prime containing it, its radical is qS_q by lem-weil-pbc-zero-locus-eq-iff-radical-eq (a Mathlib leaf), and clearing denominators gives g_f. I updated the uses, proof_deps and tool_uses to match. No statement changed and no node dropped.; 1 file(s) fixed by the reviewer"
  }
 }
