@@ -1,0 +1,117 @@
+{
+ "status": "split",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-comp-coherence/det-sf-comp-coherence-refinement.md",
+  "place": "canonical refinement constructions used by det-sf-existence-brown, proof steps (3) and (6)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical compactification refinement map derived direct image open extension by zero",
+   "results": "No exact declaration was returned; only generic adjunction and derived-functor results appeared.",
+   "date": "2026-10-18",
+   "verdict": "No complete match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical derived direct-image compositor and compactification refinement map from open extension adjunction",
+   "results": "No exact existing project or Mathlib declaration; only generic derived-functor compositors were returned.",
+   "date": "2026-10-18",
+   "verdict": "No complete match."
+  },
+  {
+   "tool": "loogle",
+   "query": "Functor.rightDerivedFunctorNatIso, refinementTheta, lowerStarComp",
+   "results": "Generic right-derived functor natural-isomorphism declarations only; no compactification refinement data.",
+   "date": "2026-10-18",
+   "verdict": "No complete match."
+  },
+  {
+   "tool": "grep",
+   "query": "refinementDerivedLowerStarComp|refinementTheta|localizingRefinementMap",
+   "results": "The notions occur only in the old CompactificationRefinementLocalizing module and theorem node; no separate definition node exists.",
+   "date": "2026-10-18",
+   "verdict": "Moved into this definition module."
+  },
+  {
+   "tool": "rg",
+   "query": "localizingRefinementMap|refinementTheta",
+   "results": "No declaration in WeilConjectures upstream; the shared Sheaf module is the sole project source.",
+   "date": "2026-10-18",
+   "verdict": "No upstream match."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "det-sf-existence-brown",
+  "date": "2026-10-18",
+  "group": "NO"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sf-existence-brown",
+   "place": "proof steps (3) and (6), canonical compactification refinement construction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-sf-existence",
+ "id": "def-sf-comp-refinement-data",
+ "kind": "definition",
+ "title": "Canonical compactification refinement data",
+ "statement": "For the pro-etale module-object derived categories and boundary compactification refinements of [sk-def-nagata-sketch-data], with the module-derived lower-shriek convention [sk-def-sfb-module-derived-lower-shriek], the unbounded derived category size convention [def-weil-size-convention], and the localizing closure [sk-def-localizing-closure], define the canonical unbounded derived direct-image compositor $R(a\\circ h)_* \\xrightarrow{\\sim} Ra_*\\circ Rh_*$ normalized by the underived module compositor and K-injective derived-functor units. Define the canonical open restriction comparison for a boundary-preserving refinement, its invertibility facts, the resulting isomorphism $\\theta_{h,K}$ obtained by restricting $Rh_*j\\_!K$ and inverting the open-extension unit, and the canonical refinement map $e_{h,K}$ as the adjoint of $\\theta_{h,K}^{-1}$. These are the actual constructions used by the refinement-coherence theorem and satisfy no arbitrary-choice clause.",
+ "stmt_deps": [
+  "sk-def-nagata-sketch-data",
+  "sk-def-sfb-module-derived-lower-shriek",
+  "sk-def-localizing-closure",
+  "def-weil-size-convention"
+ ],
+ "lean": {
+  "module": "Sheaf.Paper.CompactificationRefinementLocalizing",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.refinementDerivedLowerStarComp",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.refinementDerivedLowerStarComp",
+   "AlgebraicGeometry.ProEtale.CondensedRing.refinementOpenUnit_isIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.refinementOpenRestriction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.refinementOpenRestriction_isIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.refinementTheta",
+   "AlgebraicGeometry.ProEtale.CondensedRing.localizingRefinementMap"
+  ],
+  "statement": "def refinementDerivedLowerStarComp {X Y Z : Scheme.{u}} (a : X ⟶ Y) (h : Y ⟶ Z) : (lowerStar Λ (a ≫ h)).rightDerivedFunctor ≅ (lowerStar Λ a).rightDerivedFunctor ⋙ (lowerStar Λ h).rightDerivedFunctor",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Reuses all six exact published canonical refinement constructions and supporting invertibility declarations in CompactificationRefinementLocalizing. No copied module or renamed declaration is delivered. The reverse proof-only import from this module to BrownExceptionalAdjoint must be omitted if it would close an import cycle."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-23c6a1b92",
+  "group": "NO",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-23c6a1b92",
+  "group": "NO",
+  "result": "pass",
+  "note": "Re-delivery after fe34663dbb1e, which L refused because CompactificationRefinementData duplicated six names in CompactificationRefinementLocalizing. Delta (diff -rq of snapshots): the Data module and the edited Localizing module are dropped, and only BrownExceptionalAdjoint.lean is delivered. It differs from fe34 by one import, so the helper and signature are byte-identical. def-sf-comp-refinement-data is existing:true on the six published decls; all exist in the live file, and its statement equals the live def up to whitespace. def-sf-localizing-lower-shriek is the landed NB record and is not re-delivered. Item node differs from live only in lean and stmt_deps; stmt_deps contain no theorem node. No DAG cycle (script over live nodes). Hypotheses match the node: prime l, char p>0 with p!=l, separated finite-type X/Y/f over k, admissible Lambda, Loc(Dctf), source-side Brown hypotheses with Dctf generators in u+1, matching BrownHypothesesFor. Clauses (1)-(3) match: adjunctions for all c; rightAdjointCommShift with exactness and unit/counit compatibility; counit-compatible uniqueness; phi pinned to the canonical refinement map on dense refinements (refinements unique), with identity and cocycle; gamma with the transferred-counit equation, uniqueness, identity and cocycle. Edge cases covered, one sorry, docstrings present, lean.statement verbatim. nt_compile --json clean (14.3 s, rc 0). Cosmetic only: one stale 'Moved into this definition module' search verdict in def-sf-comp-refinement-data."
+ }
+}

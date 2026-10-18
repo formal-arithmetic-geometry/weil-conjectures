@@ -399,5 +399,28 @@
   "group": "NA",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-139067506 (reviewer sub-agent of L); spot-checked: I read the item in full, the base statement, the citer lem-sp-proetale-open-injective-proper-acyclic, all 20 cited statements, Stacks 09AG/09C9/0982 and HHL Cor. 4.19 and Rem. 7.15. The base statement ('J need not have etale origin') is false. I checked the delivered counterexample step by step. Setup: Q=Spec k[[t]] is w-contractible by 0982; P is the regular cubic degeneration with a nodal fibre C; the ℤ-chain cover of C lifts by 0A48 to an integral pro-étale Ẑ-torsor T̃. Take F=F_p[T̃/ℤ]. Γ(P,F)=0, because π0^cond(T̃)=* and Ẑ-invariants of F_p[Ẑ/ℤ] vanish. Restricted to C, F has a nonzero section. Γ(P,G)→Γ(C,i^*G) is injective by 09AG on the cover by localizations at units mod t. With J=j^*I for an injective envelope I of F, this gives H^1(P,j_!J)≠0. The added etale-origin hypothesis is a visible E7 correction of a non-target agent-extracted node, and the corrected statement is true. Steps 1–6 check against their cited statements: 09AF comparison gives the witness; open-closed gives a^*j_!=0; finite-level pro-étale PBC (09C9 with I=0) gives z^*Rp_*F=0; the cohomology sheaves are e_!-extended; 09AG gives G_q(Q)=0; evaluation at the w-contractible Q is exact. I accept the tool_uses. FIX (C4): step 7 cited lem-weil-pbc-right-derived-plus-injective for 'p_*I^• represents Rp_*F'. That node concerns an abstract D^+ Kan extension, not the operations Rp_*. I rewrote step 7 to use an injective resolution, K-injectivity (dplus-representative (2)) and lem-weil-pbc-kinjective-hom-derived, and updated uses, proof_deps and tool_uses (whole file in fixes/dag/nodes/sec-smooth-purity/). Maintainer note: the citer lem-sp-proetale-open-injective-proper-acyclic is false by the same example, since evaluating R^1p_* at Q gives H^1≠0. Its step citing this item no longer matches, and its chain (lem-sp-proper-open-derived-support, lem-sp-fullcd-ambient-adjoint) needs a HUMAN.md entry.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleProperBoundaryCohomology",
+  "declaration": "AlgebraicGeometry.Scheme.proEtale_proper_boundary_cohomology",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.properBoundary_hasInjectiveResolutions",
+   "AlgebraicGeometry.Scheme.proEtale_proper_boundary_cohomology"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleProperBoundaryCohomology.lean",
+  "statement": "theorem proEtale_proper_boundary_cohomology (R : Type u) [CommRing R] (hR : ∀ (S : Type u) [CommRing S] (φ : R →+* S), φ.FaithfullyFlat → φ.WeaklyEtale → ∃ r : S →+* R, r.comp φ = RingHom.id R) {Z E P U : Scheme.{u}} (z : Z ⟶ Spec (CommRingCat.of R)) [IsClosedImmersion z] (e : E ⟶ Spec (CommRingCat.of R)) [IsOpenImmersion e] [QuasiCompact e] (hcomplement : Set.range e = (Set.range z)ᶜ) (hspecializes : ∀ x : Spec (CommRingCat.of R), ∃ t : Z, Specializes x (z t)) (p : P ⟶ Spec (CommRingCat.of R)) [IsProper p] (h : U ⟶ pullback p e) [IsOpenImmersion h] (hclosed : IsClosed (Set.range h)) [QuasiCompact (h ≫ pullback.fst p e)] (A : Type u) [CommRing A] [Finite A] (J : proEtaleRingModules U (proEtaleConstantRing U A)) [Injective J] (hetale : ∃ J₀ : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} A)), Nonempty ((sfIntrinsicModuleEquivalence U A).functor.obj ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) U).obj J₀) ≅ J)) (q : ℕ) (hq : 0 < q) : IsZero (((SheafOfModules.toSheaf ((sheafCompose (ProEt.topology P) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj (proEtaleConstantRing P A)) ⋙ sheafToPresheaf (ProEt.topology P) AddCommGrpCat.{u + 1} ⋙ (CategoryTheory.evaluation P.ProEtᵒᵖ AddCommGrpCat.{u + 1}).obj (op (ProEt.mk (𝟙 P)))).rightDerived q).obj ((sfIntrinsicExtensionByZero (h ≫ pullback.fst p e) A).obj J))",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Uses the recorded intrinsic constant-ring extension by zero. The etale-origin witness is the recorded fixed-scalar comparison followed by sfIntrinsicModuleEquivalence. Cohomology is the ordinary right-derived global-sections functor on the intrinsic module category; the auxiliary resolution instance is obtained from the recorded Grothendieck theorem at universes (u+1,u,0). No statement correction or dependency repair."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a2647c2c6",
+  "group": "NA",
+  "result": "pass",
+  "note": "All node clauses match the Lean: Spec R in Scheme.{u}; ring-retraction w-contractibility (same form as the cited lemma); closed immersion z; quasi-compact open immersion e with range e = (range z)ᶜ; specialization direction correct; IsProper p; pullback p e; clopen open immersion h; quasi-compact composite; Finite CommRing A; injective J over proEtaleConstantRing; etale-origin witness via the recorded comparisonUpperStar (= proEtaleSiteComparisonModules left adjoint) plus the canonical sfIntrinsicModuleEquivalence; recorded sfIntrinsicExtensionByZero; rightDerived of global sections at ProEt.mk (𝟙 P) on the module category; q>0. No extra hypotheses or universe equalities; edge cases admitted. The helper HasInjectiveResolutions is a Prop instance from the recorded Grothendieck theorem, with docstring, listed in declarations, not a duplicate. Statement verbatim; only the item's lean field changed; docstrings have the source place and all 7 proof steps; both report sections present. nt_compile --json clean in 4.5 s; broken-copy control fails. No findings."
  }
 }

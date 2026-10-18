@@ -296,5 +296,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProperExceptionalRestriction",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.proper_exceptional_restriction",
+  "file": "lean/Sheaf/Paper/ProperExceptionalRestriction.lean",
+  "statement": "theorem proper_exceptional_restriction (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (p : X ⟶ Y) [IsProper p.left] (_hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ) (h : ∀ K, localizingClosureProEtale Λ X.left K → localizingClosureProEtale Λ Y.left ((rightDerivedLowerShriekOfCompactification Λ (compactificationOverField p)).obj K)) (G : (localizingClosureProEtale Λ Y.left).FullSubcategory ⥤ (localizingClosureProEtale Λ X.left).FullSubcategory) (_adj : localizingLowerShriek Λ (compactificationOverField p) h ⊣ G) : ∃ hStar : ∀ K, localizingClosureProEtale Λ X.left K → localizingClosureProEtale Λ Y.left ((R((p.left)_*⟦Λ⟧)).obj K), Nonempty (localizingLowerShriek Λ (compactificationOverField p) h ≅ (localizingClosureProEtale Λ Y.left).lift ((localizingClosureProEtale Λ X.left).ι ⋙ R((p.left)_*⟦Λ⟧)) (fun K ↦ hStar K.obj K.property)) ∧ (∀ K : ConstantModelConstructibleFiniteTor Λ X.left, constantModelBoundedConstructible Λ Y.left ((R((p.left)_*⟦Λ⟧)).obj K.obj) ∧ DerivedCategory.finiteTorAmplitude _ ((R((p.left)_*⟦Λ⟧)).obj K.obj)) ∧ ∃ (hSY : (constantModelBoundedConstructible Λ Y.left ⊓ fun K ↦ DerivedCategory.finiteTorAmplitude _ K) ≤ localizingClosureProEtale Λ Y.left) (F₀ : ConstantModelConstructibleFiniteTor Λ X.left ⥤ ConstantModelConstructibleFiniteTor Λ Y.left) (G₀ : ConstantModelConstructibleFiniteTor Λ Y.left ⥤ ConstantModelConstructibleFiniteTor Λ X.left), F₀ ⋙ (constantModelBoundedConstructible Λ Y.left ⊓ fun K ↦ DerivedCategory.finiteTorAmplitude _ K).ι = (constantModelBoundedConstructible Λ X.left ⊓ fun K ↦ DerivedCategory.finiteTorAmplitude _ K).ι ⋙ R((p.left)_*⟦Λ⟧) ∧ G₀ ⋙ (constantModelBoundedConstructible Λ X.left ⊓ fun K ↦ DerivedCategory.finiteTorAmplitude _ K).ι = ObjectProperty.ιOfLE hSY ⋙ G ⋙ (localizingClosureProEtale Λ X.left).ι ∧ Nonempty (F₀ ⊣ G₀)",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e76c72e5a",
+  "group": "NH",
+  "result": "pass",
+  "note": "Clause-by-clause check against the node and the recorded Lean of sk-thm-existence (exceptionalInverseImage_exists: same Λ/ℓ/k/X/Y binders, localizingLowerShriek on compactificationOverField, h is membership only, G-adjunction form), localizingClosureProEtale, ConstantModelConstructibleFiniteTor, compactificationOverField and IsProper. Clause 1 is Nonempty(Rp_! ≅ lift of ι⋙R((p.left)_*⟦Λ⟧)) with ∃hStar for Loc preservation; R(g_*) is the same functor as inside rightDerivedLowerShriekOfCompactification. Clause 2 states Dctf preservation plus F₀/G₀ fixed by functor equalities through the full inclusions, and Nonempty(F₀ ⊣ G₀). Arbitrary right adjoint G is equivalent to the Brown adjoint (unique up to iso, Dctf replete). No extra hypotheses or universe restrictions; edge cases covered. lean.statement verbatim, one sorry, docstrings with source/blueprint and proof steps 1-5, both report sections present, only the lean record changed, first delivery of this item. All four nt_compile --json runs at load 123-138 stopped before the delivered file on base side-module 60 s timeouts (SfAlgebraicallyClosedCoefficients, GeneralAlgebraicallyClosedCoefficients, DerivedPullbackTensorHom twice); none is touched by the delivery, so judged from the delivery's clean 4.7 s/5.2 s compile and the signatures checked in the side clone. Maintainer: retry landing at lower load if it times out."
  }
 }
