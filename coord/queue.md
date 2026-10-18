@@ -56,9 +56,11 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.RingedExchangeTensorCoherence` | - | 2 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.RationalUnramifiedCotangentCriterion` | 6 | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.ProperSupportGeometricStalk` | 8 | 1 | proof | 3 |
+| `Sheaf.AlgebraicGeometry.ClosedSupportHom` | - | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.EtaleCompactSupportNormalization` | - | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.NowhereDenseDimZero` | - | 1 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.RationalTangentCotangentDuality` | - | 1 | proof | 3 |
+| `Sheaf.AlgebraicGeometry.RelativeTorsorCohomology` | - | 1 | proof | 3 |
 | `Sheaf.CategoryTheory.DerivedCategory.NoetherianFlatComplexPerfect` | - | 1 | proof | 3 |
 | `Sheaf.CategoryTheory.FiniteTypeLocallyConstantSerre` | - | 1 | proof | 3 |
 | `Sheaf.CategoryTheory.RingedCechKoszulDualLimit` | - | 1 | proof | 3 |
@@ -82,12 +84,10 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinearCore` | 8 | 1 | proof | 4 |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatEquationalCriterion` | - | 1 | proof | 4 |
 | `Sheaf.AlgebraicGeometry.AffineFormallySmooth` | - | 1 | proof | 4 |
-| `Sheaf.AlgebraicGeometry.ClosedSupportHom` | - | 1 | proof | 4 |
 | `Sheaf.AlgebraicGeometry.EtaleUnderivedExchangeModuleLinear` | - | 1 | proof | 4 |
 | `Sheaf.AlgebraicGeometry.FieldDiscreteModules` | - | 1 | proof | 4 |
 | `Sheaf.AlgebraicGeometry.IsFiniteLocallyFreeOfCoherentFreeStalks` | - | 1 | proof | 4 |
 | `Sheaf.AlgebraicGeometry.ProjectiveMorphismChartPreimage` | - | 1 | proof | 4 |
-| `Sheaf.AlgebraicGeometry.RelativeTorsorCohomology` | - | 1 | proof | 4 |
 | `Sheaf.Paper.AffineProjectiveComplexDerivedHom` | - | 1 | proof | 4 |
 | `Sheaf.Paper.FlatExtendedCechComparison` | - | 1 | proof | 4 |
 | `Sheaf.Paper.KoszulQuotientLimit` | - | 1 | proof | 4 |
@@ -102,8 +102,8 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.FiniteOrderedFlasqueCechComparison` | - | 1 | proof | 5 |
 | `Sheaf.RingTheory.NilpotentMarkedFreeComplexLift` | - | 1 | proof | 5 |
 | `Sheaf.RingTheory.NilpotentProjectiveComplexLift` | - | 1 | proof | 5 |
+| `Sheaf.AlgebraicGeometry.ClosedImmersionProducts` | - | 1 | proof | 6 |
 | `Sheaf.FieldTheory.SeparableTensorAlgebraicClosure` | - | 1 | proof | 6 |
-| `Sheaf.AlgebraicGeometry.ClosedImmersionProducts` | - | 1 | proof | 7 |
 | `Sheaf.AlgebraicGeometry.LocalFibreDimensionOpen` | - | 1 | proof | 7 |
 | `Sheaf.AlgebraicGeometry.TorsionSheafProperBaseChange` | - | 1 | proof | 7 |
 | `Sheaf.FieldTheory.SeparableQuotientProduct` | - | 1 | proof | 7 |
@@ -127,17 +127,17 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 |---|---|---|---|
 | `Sheaf.SmoothPurity.NormalizedWitness` | 1 | 1 | `lem-pur-finite-smooth-adjunction-general-base` |
 | `WeilConjectures.ZetaFunction.TraceFormula` | 2 | 1 | `def-weil-global-geometric-frobenius` |
-| `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalBounded` | 3 | 1 | `det-def-localizing-closure-ctf-equals-bc` |
-| `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructibleCohomology` | 3 | 1 | `det-def-localizing-closure-ctf-equals-bc` |
+| `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalBounded` | 3 | 1 | `det-cor-existence-ii-restriction` |
+| `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructibleCohomology` | 3 | 1 | `det-cor-existence-ii-restriction` |
 | `Sheaf.PoincareDuality.ProperProjectionFormulaBounded` | 3 | 1 | `lem-pd-module-ringed-topos-derived-comparison` |
 | `Sheaf.WeilSheaf.CohomologyGeometricConjugacy` | 4 | 1 | `def-weil-global-geometric-frobenius` |
 | `Sheaf.AlgebraicGeometry.EllAdicProperTruncationBound` | 5 | 1 | `det-proper-unbounded-window-arbitrary` |
 | `WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy` | 5 | 7 | `lem-fd-rational-coefficient-category-comparison` |
 | `WeilConjectures.DeligneLaumon.AffineLine.LocalDuality` | 6 | 2 | `cor-coef-verdier-weil-equivariance` |
-| `WeilConjectures.DeligneLaumon.AffineLine.Exactness` | 7 | 1 | `lem-dl-a1-weil-open-image-delta` |
+| `WeilConjectures.DeligneLaumon.AffineLine.Exactness` | 7 | 1 | `lem-dl-a1-constant-field-charts` |
 | `WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension` | 9 | 3 | `lem-trf-rational-local-frobenius-powers` |
 
-## Stage 3: held for an open upstream PR (24)
+## Stage 3: held for an open upstream PR (23)
 
 Not items: an open Orchestra branch or PR of the source library proves the module (~/upstream-pr/upstream-pending.tsv, the human, 2026-10-18: do not duplicate Orchestra's open PRs); the routine sync brings the proof, and the hold ends when no sorry is left.
 
@@ -148,7 +148,6 @@ Not items: an open Orchestra branch or PR of the source library proves the modul
 | `WeilConjectures.DeligneLaumon.AffineLine.Perverse` | bundle/sec-deligne-laumon-a1-d1 |
 | `WeilConjectures.DeligneLaumon.Reduction.RealSheaves` | bundle/sec-deligne-laumon-general-d1 |
 | `WeilConjectures.EtaleCohomology.Purity.RealSheaves.Boundary` | bundle/sec-purity-real-sheaves-d1 |
-| `WeilConjectures.EtaleCohomology.Purity.Smooth.Basic` | bundle/sec-smooth-purity-d3 |
 | `WeilConjectures.SixFunctors.Etale.Derived.Exchange` | bundle/sec-smooth-purity-c2 |
 | `WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CohomologicalDimension` | bundle/sec-smooth-purity-d5 |
 | `WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients` | bundle/sec-six-functors-c1 |
