@@ -1,0 +1,145 @@
+{
+ "id": "lem-weil-pbc-symmetric-product-sections-permutation",
+ "kind": "statement",
+ "title": "Permutation isomorphism preserves coefficient sections",
+ "statement": "For schemes X,S, m ≥ 0, morphisms pr_i : X → P¹_S indexed by Fin(m+1), an endomorphism f : X → X and a permutation π with f followed by pr_i = pr_π(i), let L and F_j be the ordered tensor line bundle and coefficient sections [def-weil-pbc-symmetric-product-sections]. There exists an isomorphism β : f^* L ≅ L [def-pc-module-pullback], carrying the adjunction-unit pullback [lem-pc-module-pullback-adjunction] of each F_j to F_j. No inverse of f or product universal property is required.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-reduction/lem-weil-pbc-symmetric-product-properties.md",
+  "place": "Proof, step 5: permutation of the tensor factors and reindexing the j-element subsets; Stacks Tag 0A4F."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-symmetric-product-sections",
+  "def-pc-module-pullback",
+  "lem-pc-module-pullback-adjunction"
+ ],
+ "proof": [
+  {
+   "text": "For a list of factor indices, form the right-associated tensor product ending in the unit and its pure tensor section. Induction on List.Perm constructs a section-preserving isomorphism: identity for nil; tensor with identity for cons; inverse associator, braiding, then associator for an adjacent swap; composition for transitivity. The structural maps act on tensor sections by their explicit section formulas.",
+   "uses": [
+    "def-sc-positive-tensor-family",
+    "lem-weil-pbc-invertible-pullback-tensor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compare the left-associated positive tensor with the right-associated list tensor. A snoc comparison follows by induction on the list using unitors and associators. Induction on m then gives the comparison for List.ofFn. Apply the list permutation theorem to the enumeration π and compose the comparisons. This isomorphism sends a permuted family of pure section tensors to its original order.",
+   "uses": [
+    "def-sc-positive-tensor-family"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Pullback commutes with positive tensor products, with pure-section compatibility, by induction on m and module_pullback_tensor. In each factor the composition comparison identifies f^*(pr_i^*O(1)) with (f followed by pr_i)^*O(1). Rewrite the latter map using the given equality with pr_π(i). Compatibility with adjunction units identifies both pulled coordinate sections. Tensor these factor isomorphisms and compose with the permutation comparison of the previous step.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-tensor",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "def-pc-projective-space-twist",
+    "def-weil-pbc-symmetric-product-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The resulting β sends the pure term indexed by J to the term indexed by π(J). Pullback and β are additive. Reindex the finite sum defining F_j along the equivalence J ↦ J.map π.toEmbedding, which preserves cardinality. Hence β takes every pulled coefficient section back to itself.",
+   "uses": [
+    "def-weil-pbc-symmetric-product-sections"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-projective-space-twist",
+  "def-sc-positive-tensor-family",
+  "def-weil-pbc-symmetric-product-sections",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-module-pullback-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-reduction/lem-weil-pbc-symmetric-product-properties.md",
+  "place": "Proof, step 5: permutation of the tensor factors and reindexing the j-element subsets; Stacks Tag 0A4F. Detailed argument and Lean proof by J8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Permuting a finite family of invertible sheaves gives a tensor product isomorphism carrying each pure tensor to the permuted pure tensor and preserving symmetric coefficient sections",
+   "results": "SymmetricPower.tprod_equiv and Rel.perm; TensorProduct.tensorTensorTensorComm, tensorTensorTensorComm_symm, tensorTensorTensorComm_comp_map, comm_symm_tmul and comm; PiTensorProduct.reindex_tprod.",
+   "date": "2026-10-18",
+   "verdict": "These concern modules over a fixed ring or symmetric tensor powers. None states the ordered tensor-sheaf or coefficient-section result. The proof uses the existing sheaf coherence maps and their section formulas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A permutation of factors of a tensor product of sheaves of modules gives an isomorphism taking each pure tensor to the permuted pure tensor",
+   "results": "Sheaf.symmetricCategory; SymmetricPower.tprod_equiv and Rel.perm; ModuleCat.MonoidalCategory.braiding_hom_apply and braiding_inv_apply; PiTensorProduct.reindex_symm and map_reindex_symm; TensorProduct.comm_symm_tmul.",
+   "date": "2026-10-18",
+   "verdict": "No theorem for the ordered tensor sheaf and its sections. Use the project sheaf associator, braiding and unitor section formulas, and induction on List.Perm."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tmul\"",
+   "results": "Name search returned elementary multiplication instances; no projective coefficient-section result.",
+   "date": "2026-10-18",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "symmetricProduct|positiveTensorFamily",
+   "results": "No Mathlib matches. Local project search found the existing positiveTensorFamily, tensor_section_affine_open, nonvanishing_tensorPullback and projectiveSpace_standardCharts_part2 declarations.",
+   "date": "2026-10-18",
+   "verdict": "No duplicate of this coefficient-section theorem; existing tools used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SymmetricProductProperties",
+  "date": "2026-10-18",
+  "group": "J8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-symmetric-product-properties",
+   "place": "Proof, step 5: permutation of the tensor factors and reindexing the j-element subsets; Stacks Tag 0A4F.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SymmetricProductSectionsPermutation",
+  "file": "lean/Sheaf/AlgebraicGeometry/SymmetricProductSectionsPermutation.lean",
+  "declaration": "AlgebraicGeometry.symmetricProduct_sections_permutation",
+  "statement": "theorem symmetricProduct_sections_permutation {S X : Scheme.{v}} (m : ℕ)\n    (pr : Fin (m + 1) → (X ⟶ ℙ(ULift.{v} (Fin 2); S)))\n    (f : X ⟶ X) (π : Equiv.Perm (Fin (m + 1)))\n    (hf : ∀ i, f ≫ pr i = pr (π i)) :\n    ∃ β : (Scheme.Modules.tensorPullback f).obj (symmetricProductLineBundle pr) ≅\n        symmetricProductLineBundle pr,\n      ∀ j : ULift.{v} (Fin (m + 2)),\n        β.hom.app ⊤ (((Classical.choose\n          (Scheme.Modules.exists_tensorPullbackAdjunction f)).unit.app\n            (symmetricProductLineBundle pr)).val.app (Opposite.op ⊤)\n              ((symmetricProductCoordinateSection pr j).val (Opposite.op ⊤))) =\n          (symmetricProductCoordinateSection pr j).val (Opposite.op ⊤)",
+  "branch": "sheaf-dag",
+  "by": "J8",
+  "date": "2026-10-18",
+  "declarations": [
+   "AlgebraicGeometry.symmetricProduct_sections_permutation",
+   "AlgebraicGeometry.factorSection_eval",
+   "AlgebraicGeometry.unitHomEquiv_sum_eval"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261018T091406-L-3256363",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261018T091406-L-3256363",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

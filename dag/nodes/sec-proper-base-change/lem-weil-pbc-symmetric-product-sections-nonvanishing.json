@@ -1,0 +1,143 @@
+{
+ "id": "lem-weil-pbc-symmetric-product-sections-nonvanishing",
+ "kind": "statement",
+ "title": "Coefficient sections have no common zero",
+ "statement": "For schemes X and S, an integer m ≥ 0 and any m+1 morphisms pr_i : X → P¹_S, let L be the ordered tensor product of pr_i^* O(1), and F_j its coefficient sections [def-weil-pbc-symmetric-product-sections]. At every point z of X, z belongs to the nonvanishing locus of some F_j [def-weil-pbc-ample-invertible-module], with 0 ≤ j ≤ m+1. No product universal property is required.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-reduction/lem-weil-pbc-symmetric-product-properties.md",
+  "place": "Proof, steps 2–3: coordinate pairs do not vanish, so the coefficient sections have no common zero (Stacks Tag 0A4F)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-symmetric-product-sections",
+  "def-weil-pbc-ample-invertible-module"
+ ],
+ "proof": [
+  {
+   "text": "Use the shared factorSection_eval lemma from SymmetricProductSectionsPermutation to evaluate each factor section as the adjunction-unit pullback of its homogeneous coordinate. The standard charts cover P¹, and each coordinate is nonvanishing on its chart. Nonvanishing survives tensor pullback, so at every point each coordinate pair contains a nonvanishing section.",
+   "uses": [
+    "def-pc-projective-space-twist",
+    "lem-weil-pbc-projective-space-standard-charts-part2",
+    "lem-sc-nonvanishing-tensor-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At z let J be the factors whose second coordinate is not nonvanishing. For every i in J the first coordinate is nonvanishing; outside J the second is nonvanishing. The tensor-section locus formula shows the tensor term indexed by J is nonvanishing. Pullback and tensor products preserve invertibility.",
+   "uses": [
+    "lem-sc-tensor-section-affine-open",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "def-weil-pbc-symmetric-product-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For K distinct from J with the same cardinality, J is not contained in K. Choose i in J outside K. The tensor term indexed by K uses the vanishing second coordinate at i, so the tensor-section locus formula says that term has zero residue value. The residue-value criterion follows by identifying the residue tensor with the quotient of the stalk by its maximal ideal times the module.",
+   "uses": [
+    "lem-sc-tensor-section-affine-open",
+    "def-weil-pbc-module-residue-fiber"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the shared unitHomEquiv_sum_eval lemma from SymmetricProductSectionsPermutation: evaluation of unitHomEquiv on a sum of section morphisms is additive, as is evaluation in the residue fibre. Consequently the value of F_|J| is the value of the unique nonzero term J. Its residue value is nonzero, proving the claimed nonvanishing. The chosen cardinality is at most m+1, including J empty and J the full set.",
+   "uses": [
+    "def-weil-pbc-symmetric-product-sections",
+    "def-weil-pbc-module-residue-fiber"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-projective-space-twist",
+  "def-weil-pbc-module-residue-fiber",
+  "def-weil-pbc-symmetric-product-sections",
+  "lem-sc-nonvanishing-tensor-pullback",
+  "lem-sc-tensor-section-affine-open",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-projective-space-standard-charts-part2"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-reduction/lem-weil-pbc-symmetric-product-properties.md",
+  "place": "Proof, steps 2–3: coordinate pairs do not vanish, so the coefficient sections have no common zero (Stacks Tag 0A4F). Detailed argument and Lean proof by J8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Given maps from a scheme to the projective line, the coefficient sections of the product of their linear forms have no common zero",
+   "results": "ProjectiveSpectrum.zeroLocus_mul_homogeneousIdeal, zeroLocus_singleton_mul, zeroLocus_mul_ideal; Scheme.zeroLocus and zeroLocus_def; IsLocalFrameOn.coeff_apply_zero_at; AffineMap.pi_eq_zero; Proj.add_apply.",
+   "date": "2026-10-18",
+   "verdict": "No coefficient-section or line-bundle nonvanishing theorem. The project standard-chart and tensor-section locus lemmas supply the relevant sheaf statements."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "tensor product of sections of invertible sheaves nonvanishing locus intersection",
+   "results": "Scheme.basicOpen_mul, RingedSpace.basicOpen_mul and Proj.basicOpen_mul; statements for functions, not for tensor sections of line bundles.",
+   "date": "2026-10-18",
+   "verdict": "No exact match; use the already proved project tensor-section locus and pullback-nonvanishing theorems."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tmul\"",
+   "results": "Name search returned elementary multiplication instances; no projective coefficient-section result.",
+   "date": "2026-10-18",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "symmetricProduct|positiveTensorFamily",
+   "results": "No Mathlib matches. Local project search found the existing positiveTensorFamily, tensor_section_affine_open, nonvanishing_tensorPullback and projectiveSpace_standardCharts_part2 declarations.",
+   "date": "2026-10-18",
+   "verdict": "No duplicate of this coefficient-section theorem; existing tools used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SymmetricProductProperties",
+  "date": "2026-10-18",
+  "group": "J8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-symmetric-product-properties",
+   "place": "Proof, steps 2–3: coordinate pairs do not vanish, so the coefficient sections have no common zero (Stacks Tag 0A4F).",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-reduction",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SymmetricProductSectionsNonvanishing",
+  "file": "lean/Sheaf/AlgebraicGeometry/SymmetricProductSectionsNonvanishing.lean",
+  "declaration": "AlgebraicGeometry.symmetricProduct_sections_nonvanishing",
+  "statement": "theorem symmetricProduct_sections_nonvanishing {S X : Scheme.{v}} (m : ℕ)\n    (pr : Fin (m + 1) → (X ⟶ ℙ(ULift.{v} (Fin 2); S))) :\n    ∀ z : X, ∃ j : ULift.{v} (Fin (m + 2)),\n      z ∈ Scheme.Modules.nonvanishingLocus (symmetricProductLineBundle pr)\n        ((symmetricProductCoordinateSection pr j).val (Opposite.op ⊤))",
+  "branch": "sheaf-dag",
+  "by": "J8",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261018T091406-L-3256363",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261018T091406-L-3256363",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
