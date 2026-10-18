@@ -98,14 +98,15 @@ lemma adicConstantSheafToLowerStar_lowerStarExchange_iso (eW : W ≅ W) (eW₁ :
       (lowerStarCongr (WeilCoefficients.{u} l) hc).hom.app _ ≫
       (lowerStarComp (WeilCoefficients.{u} l) eW.inv s).inv.app _ ≫
       (s)_*[WeilCoefficients.{u} l].map (adicConstantSheafLowerStarIso l eW.symm).hom =
-    (adicConstantSheafLowerStarIso l eW₁.symm).hom ≫ adicConstantSheafToLowerStar l s :=
+    (adicConstantSheafLowerStarIso l eW₁.symm).hom ≫ adicConstantSheafToLowerStar l s := by
   have h := adicConstantSheafToLowerStar_lowerStarExchange (l := l) s eW.inv eW₁.inv hc
   rw [← Iso.inv_comp_eq]
   change adicConstantSheafToLowerStar l eW₁.inv ≫ _ = _
   simp only [← Category.assoc] at h ⊢
   rw [h, Category.assoc, ← CategoryTheory.Functor.map_comp]
   change _ ≫ (s)_*[WeilCoefficients.{u} l].map
-    ((adicConstantSheafLowerStarIso l eW.symm).inv ≫ (adicConstantSheafLowerStarIso l eW.symm).hom) =
+    ((adicConstantSheafLowerStarIso l eW.symm).inv ≫
+      (adicConstantSheafLowerStarIso l eW.symm).hom) =
       _
   rw [Iso.inv_hom_id, CategoryTheory.Functor.map_id, Category.comp_id]
 
@@ -137,5 +138,23 @@ instance : IsIso ((adicUpperStarLowerStarAdjunction l s).homEquiv _ _ |>.symm
   have : IsIso ((Mod.forget _).map ((adicUpperStarLowerStarAdjunction l s).homEquiv _ _ |>.symm
       (adicUnitToLowerStar l s))) := this
   exact isIso_of_reflects_iso _ (Mod.forget _)
+
+
+/-- Composition of congruence isomorphisms of pushforwards. -/
+@[reassoc]
+lemma lowerStarCongr_hom_app_comp_lowerStarCongr_hom_app {Y₁ Y₂ : Scheme.{u}}
+    {f₁ f₂ f₃ : Y₁ ⟶ Y₂} (h₁ : f₁ = f₂) (h₂ : f₂ = f₃) (M) :
+    (lowerStarCongr (WeilCoefficients.{u} l) h₁).hom.app M ≫
+      (lowerStarCongr (WeilCoefficients.{u} l) h₂).hom.app M =
+    (lowerStarCongr (WeilCoefficients.{u} l) (h₁.trans h₂)).hom.app M := by
+  subst h₁ h₂
+  simp
+
+/-- The inverse of a congruence isomorphism of pushforwards. -/
+lemma lowerStarCongr_inv_app_eq {Y₁ Y₂ : Scheme.{u}} {f₁ f₂ : Y₁ ⟶ Y₂} (h₁ : f₁ = f₂) (M) :
+    (lowerStarCongr (WeilCoefficients.{u} l) h₁).inv.app M =
+      (lowerStarCongr (WeilCoefficients.{u} l) h₁.symm).hom.app M := by
+  subst h₁
+  simp
 
 end AlgebraicGeometry.ProEtale

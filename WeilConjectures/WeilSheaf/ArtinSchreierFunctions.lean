@@ -59,6 +59,13 @@ lemma affineLine.homOfSection_comp_artinSchreierMap (a : Γ(X, ⊤)) :
   · simp [affineLine.artinSchreierMap, affineLine.homOfSection]
 
 omit [Finite k₀] in
+/-- The composite of a function `a : X ⟶ 𝔸¹` with the reflection `x ↦ -x` is the function `-a`. -/
+lemma affineLine.homOfSection_comp_smul_neg_one (a : Γ(X, ⊤)) :
+    affineLine.homOfSection k₀ a ≫ affineLine.smul k₀ (-1) = affineLine.homOfSection k₀ (-a) := by
+  rw [affineLine.homOfSection_comp_smul]
+  simp
+
+omit [Finite k₀] in
 /-- The composite of a morphism `φ : Y ⟶ X` over `k₀` with the function `a : X ⟶ 𝔸¹` is the
 function `φ^* a`. -/
 lemma affineLine.comp_homOfSection {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]

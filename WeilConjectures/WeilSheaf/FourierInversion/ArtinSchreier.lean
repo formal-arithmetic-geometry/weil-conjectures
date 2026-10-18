@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.WeilSheaf.ArtinSchreierFunctions
-public import WeilConjectures.WeilSheaf.ArtinSchreierPullback
+public import WeilConjectures.WeilSheaf.ArtinSchreierNeg
 public import WeilConjectures.WeilSheaf.UpperStarId
 
 /-!
@@ -38,8 +38,19 @@ theorem nonempty_iso_tensorObj_artinSchreierOf (ψ : AddChar k₀ (PadicAlgCl l)
 
 /-- Blueprint `lem-fd-as-lisse` / `lem-fd-as-characters`: `ℒ_{ψ⁻¹,a} ≅ ℒ_{ψ,-a}`. -/
 theorem nonempty_iso_artinSchreierOf_inv (ψ : AddChar k₀ (PadicAlgCl l)) (a : Γ(X, ⊤)) :
-    Nonempty (artinSchreierOf ψ⁻¹ a ≅ artinSchreierOf ψ (-a)) :=
-  sorry
+    Nonempty (artinSchreierOf ψ⁻¹ a ≅ artinSchreierOf ψ (-a)) := by
+  rw [artinSchreierOf_eq, artinSchreierOf_eq, artinSchreier, artinSchreier,
+    WeilSheaf.image_artinSchreierIdempotent_eq ψ⁻¹, WeilSheaf.image_artinSchreierIdempotent_eq ψ]
+  obtain ⟨e⟩ := WeilSheaf.nonempty_iso_upperStar_smul_image_inv ψ 1
+  obtain ⟨e₁⟩ := WeilSheaf.nonempty_iso_upperStar_obj_of_iso (affineLine.homOfSection k₀ a)
+    (affineLine.smul k₀ (-1)) (affineLine.homOfSection k₀ (-a))
+    (affineLine.homOfSection_comp_smul_neg_one a) e
+  obtain ⟨e₂⟩ := WeilSheaf.nonempty_iso_upperStar_obj_upperStar_obj
+    (affineLine.homOfSection k₀ (-a)) (affineLine.smul k₀ 1) (affineLine.homOfSection k₀ (-a))
+    (by rw [affineLine.smul_one, Category.comp_id])
+    (@image _ _ _ _ (WeilSheaf.artinSchreierIdempotent ψ)
+      (WeilSheaf.hasImage_artinSchreierIdempotent ψ))
+  exact ⟨e₁ ≪≫ e₂.symm⟩
 
 /-- Blueprint `lem-fd-as-characters` (`ℒ_{ψ,0}` is the constant sheaf, the Artin–Schreier
 cover of the zero function being the trivial torsor): `ℒ_{ψ,0} ≅ ℚ̄_ℓ`. -/

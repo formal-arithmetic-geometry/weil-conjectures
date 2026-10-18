@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.WeilSheaf.ArtinSchreierFunctions
+public import WeilConjectures.WeilSheaf.ArtinSchreierPullback
 public import WeilConjectures.WeilSheaf.FourierInversion.TensorLisse
 public import WeilConjectures.WeilSheaf.FourierInversion.UpperStar
 public import WeilConjectures.WeilSheaf.FourierTateTwist
@@ -32,8 +33,8 @@ and tensoring with it does nothing.
   stalk formula at rational points (blueprint `lem-fd-stalk-formula`), by compact support base
   change along `AlgebraicGeometry.affineLine.rationalPointHom` and the restriction of the kernel
   to the fibre `AlgebraicGeometry.affineLine.fibreInclusion`.
-- `AlgebraicGeometry.nonempty_iso_artinSchreier_zero`: `ℒ_{ψ(0 · x)} ≅ ℚ̄_ℓ`, stated with
-  `sorry` (blueprint `lem-fd-as-characters`).
+- `AlgebraicGeometry.nonempty_iso_artinSchreier_zero`: `ℒ_{ψ(0 · x)} ≅ ℚ̄_ℓ` (blueprint
+  `lem-fd-as-characters`), from `AS^* ℒ_ψ ≅ ℚ̄_ℓ`.
 - `AlgebraicGeometry.WeilComplex.tensorLisseObjIsoOfIso`: tensoring with a Weil sheaf isomorphic
   to `ℚ̄_ℓ` is the identity.
 -/
@@ -90,7 +91,7 @@ trivial Frobenius, so all the isotypic summands of the pushforward are constant.
 of the kernel family `ℒ_{ψ(a x)}`. (blueprint: `lem-fd-as-characters`, the case `f = 0`) -/
 theorem nonempty_iso_artinSchreier_zero (ψ : AddChar k₀ (PadicAlgCl l)) :
     Nonempty (artinSchreier ψ 0 ≅ WeilSheaf.adicConstant k₀ l (affineLine k₀)) :=
-  sorry
+  nonempty_artinSchreier_zero_iso_adicConstant ψ
 
 section RationalPoint
 

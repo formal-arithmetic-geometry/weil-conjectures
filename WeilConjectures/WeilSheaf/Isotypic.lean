@@ -156,7 +156,9 @@ end Scalar
 
 section Torsor
 
-lemma _root_.AlgebraicGeometry.Scheme.Hom.geometricFiberMap_congr {k : Type u} [Field k]
+/-- The base change to `k̄` only depends on the morphism (a local copy of
+`AlgebraicGeometry.Scheme.Hom.geometricFiberMap_congr`, which lives in a heavier file). -/
+lemma _root_.AlgebraicGeometry.Scheme.Hom.geometricFiberMap_eq_of_eq {k : Type u} [Field k]
     {X₀ Y₀ : Scheme.{u}} {f : X₀ ⟶ Spec (.of k)} {g : Y₀ ⟶ Spec (.of k)} {φ ψ : X₀ ⟶ Y₀}
     (e : φ = ψ) (h : φ ≫ g = f) (h' : ψ ≫ g = f) :
     Scheme.Hom.geometricFiberMap φ h = Scheme.Hom.geometricFiberMap ψ h' := by
@@ -188,7 +190,7 @@ variable (k₀) in
 lemma geometricTorsorAut_comp (hτ : ∀ g, (τ g).hom ≫ π = π) (g : G) :
     (geometricTorsorAut k₀ τ g).hom ≫ π̄ = π̄ := by
   rw [Scheme.Hom.geometricFiberMapIso_hom, ← Scheme.Hom.geometricFiberMap_comp]
-  exact Scheme.Hom.geometricFiberMap_congr (hτ g) _ _
+  exact Scheme.Hom.geometricFiberMap_eq_of_eq (hτ g) _ _
 
 variable (k₀ l) in
 /-- The pushforward `π_* ℚ̄_ℓ` of the constant pro-étale Weil sheaf. -/
@@ -372,7 +374,7 @@ theorem ProEtaleWeilSheaf.nonempty_iso_ihom_of_isotypic [Etale π] [QuasiCompact
       (geometricTorsorAut k₀ τ g).hom ≫ (geometricTorsorAut k₀ τ h).hom := by
     simp only [Scheme.Hom.geometricFiberMapIso_hom]
     rw [← Scheme.Hom.geometricFiberMap_comp]
-    exact Scheme.Hom.geometricFiberMap_congr (hadd g h) _ _
+    exact Scheme.Hom.geometricFiberMap_eq_of_eq (hadd g h) _ _
   have hgeom {M : ProEtaleWeilSheaf k₀ l Z} (φ : M ⟶ ProEtaleWeilSheaf.torsorPushforward k₀ l π)
       (χ : AddChar G (PadicAlgCl l))
       (hφ : ∀ g, φ ≫ ProEtaleWeilSheaf.torsorTranslation π τ hτ g =

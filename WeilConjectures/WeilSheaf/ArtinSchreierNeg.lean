@@ -19,6 +19,24 @@ The reflection `x ↦ -x` of the affine line commutes with the Artin–Schreier 
 `AS_* ℚ̄_ℓ`, conjugating the translation `σ_c` into `σ_{-c}`; it therefore carries the
 `ψ`-isotypic component `ℒ_ψ` to the `ψ⁻¹`-isotypic component `ℒ_{ψ⁻¹}` (blueprint
 `lem-fd-as-characters`).
+
+## Main declarations
+
+- `AlgebraicGeometry.ProEtale.adicLowerStarExchange`: the exchange morphism
+  `b_* g_* ℚ̄_ℓ ⟶ g_* ℚ̄_ℓ` attached to `g ≫ b = a⁻¹ ≫ g`, with its compatibilities with deck
+  actions and with other exchange morphisms (computed on sections).
+- `AlgebraicGeometry.WeilSheaf.artinSchreierNegHom`: the action
+  `[-1]_* AS_* ℚ̄_ℓ ⟶ AS_* ℚ̄_ℓ` of the reflection, a morphism of Weil sheaves.
+- `AlgebraicGeometry.WeilSheaf.nonempty_iso_image_artinSchreierIdempotent_inv`:
+  `ℒ_{ψ⁻¹} ≅ [-1]^* ℒ_ψ`.
+- `AlgebraicGeometry.nonempty_artinSchreier_inv_iso`: `ℒ_{ψ⁻¹(a x)} ≅ ℒ_{ψ(-a x)}`.
+
+## Implementation notes
+
+To keep kernel checks cheap, morphisms of `ℓ`-adic sheaves are compared with their underlying
+sheaf morphisms only by rewriting (never by `rfl` between differently presented composites), and
+the objects at which natural transformations are evaluated are rewritten to a common form first
+(e.g. `AlgebraicGeometry.ProEtale.lowerStarComp_hom_app_unit`).
 -/
 
 @[expose] public section
@@ -31,8 +49,9 @@ namespace AlgebraicGeometry.ProEtale
 
 variable {l : ℕ} [Fact l.Prime]
 
-/-- The exchange morphism `(b⁻¹)_* g_* ℚ̄_ℓ ≅ (g ≫ b⁻¹)_* ℚ̄_ℓ = (a⁻¹ ≫ g)_* ℚ̄_ℓ ≅ g_* (a⁻¹)_* ℚ̄_ℓ
-≅ g_* ℚ̄_ℓ` attached to automorphisms `a`, `b` with `g ≫ b⁻¹ = a⁻¹ ≫ g`. -/
+/-- The exchange morphism `b_* g_* ℚ̄_ℓ ≅ (g ≫ b)_* ℚ̄_ℓ = (a⁻¹ ≫ g)_* ℚ̄_ℓ ≅ g_* (a⁻¹)_* ℚ̄_ℓ
+≅ g_* ℚ̄_ℓ` attached to an automorphism `a` of `X` and a morphism `b` with
+`g ≫ b = a⁻¹ ≫ g`. -/
 noncomputable def lowerStarExchangeStr {X Y : Scheme.{u}} (g : X ⟶ Y) (a : X ≅ X) (b : Y ⟶ Y)
     (hg : g ≫ b = a.inv ≫ g) :
     (b)_*[WeilCoefficients.{u} l].obj ((g)_*[WeilCoefficients.{u} l].obj
@@ -150,22 +169,6 @@ lemma pullbackLeftPullbackSndIso_inv_id_fst_fst_over {X Y Z : Scheme.{u}} (b : Z
   erw [Category.id_comp]
   exact pullbackLeftPullbackSndIso_inv_fst _ _ _
 
-/-- `pullback.lift_fst` with the base change of an object of the pro-étale site written as such. -/
-@[reassoc]
-lemma pullback_lift_fst_over {X Y Z T : Scheme.{u}} (g : X ⟶ Y) (V : Y.ProEt) (a : Z ⟶ X)
-    (h : T ⟶ ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).obj V).left) (k : T ⟶ Z)
-    (w : h ≫ ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).obj V).hom = k ≫ a) :
-    pullback.lift h k w ≫ pullback.fst (pullback.snd V.hom g) a = h :=
-  pullback.lift_fst _ _ _
-
-/-- `pullback.lift_snd` with the base change of an object of the pro-étale site written as such. -/
-@[reassoc]
-lemma pullback_lift_snd_over {X Y Z T : Scheme.{u}} (g : X ⟶ Y) (V : Y.ProEt) (a : Z ⟶ X)
-    (h : T ⟶ ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).obj V).left) (k : T ⟶ Z)
-    (w : h ≫ ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).obj V).hom = k ≫ a) :
-    pullback.lift h k w ≫ pullback.snd (pullback.snd V.hom g) a = k :=
-  pullback.lift_snd _ _ _
-
 /-- Exchange morphisms of commuting pairs of automorphisms commute. -/
 lemma lowerStarExchangeStr_comm {X Y : Scheme.{u}} (g : X ⟶ Y) (a : X ≅ X) (b : Y ⟶ Y)
     (a' : X ≅ X) (b' : Y ⟶ Y)
@@ -184,8 +187,8 @@ lemma lowerStarExchangeStr_comm {X Y : Scheme.{u}} (g : X ⟶ Y) (a : X ≅ X) (
     Functor.mapIso_hom, Functor.map_comp,
     ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, e₁,
     Quiver.Hom.unop_op, unop_op, lowerStarComp_hom_app_hom_app, lowerStarComp_inv_app_hom_app,
-    lowerStarCongr_hom_app_hom_app, adicConstantSheafLowerStarIso_inv_hom_app,
-    adicConstantSheafLowerStarIso_hom_hom_app, adicConstantSheaf_obj_map, e₂]
+    lowerStarCongr_hom_app_hom_app, adicConstantSheafLowerStarIso_hom_hom_app,
+    adicConstantSheaf_obj_map, e₂]
   simp only [← Functor.map_comp, ← op_comp]
   congr 2
   have h₁ : a'.hom ≫ a.hom = a.hom ≫ a'.hom := by
@@ -198,19 +201,118 @@ lemma lowerStarExchangeStr_comm {X Y : Scheme.{u}} (g : X ⟶ Y) (a : X ≅ X) (
   apply pullback.hom_ext
   · apply pullback.hom_ext
     · apply pullback.hom_ext
-      · simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.mk]
+      · simp [MorphismProperty.Over.pullbackCongr]
         simp [-pullbackLeftPullbackSndIso_hom_fst, -pullbackLeftPullbackSndIso_hom_fst_assoc,
-          pullbackLeftPullbackSndIso_inv_fst_fst_over_assoc, pullback_lift_fst_over_assoc,
+          pullbackLeftPullbackSndIso_inv_fst_fst_over_assoc,
           pullbackLeftPullbackSndIso_inv_id_fst_fst_over,
-          pullbackLeftPullbackSndIso_inv_fst_fst_over, pullback_lift_fst_over,
-          pullbackLeftPullbackSndIso_hom_fst_over_assoc, pullbackLeftPullbackSndIso_hom_fst_over,
-          pullback_lift_snd_over_assoc]
+          pullbackLeftPullbackSndIso_inv_fst_fst_over,
+          pullbackLeftPullbackSndIso_hom_fst_over_assoc, pullbackLeftPullbackSndIso_hom_fst_over]
       · simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullback,
-          MorphismProperty.Over.mk, hg, reassoc_of% hg, reassoc_of% h₂]
+          MorphismProperty.Over.mk, hg, reassoc_of% h₂]
     · simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullback,
         MorphismProperty.Over.mk, reassoc_of% h₁]
   · simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullback,
       MorphismProperty.Over.mk, h₁]
+
+/-- The underlying inverse of `AlgebraicGeometry.ProEtale.adicLowerStarUnitIso`. -/
+lemma adicLowerStarUnitIso_inv_hom {X Y : Scheme.{u}} (e : X ≅ Y) :
+    (adicLowerStarUnitIso l e).inv.hom = (adicConstantSheafLowerStarIso l e).inv :=
+  rfl
+
+/-- The exchange morphism `b_* g_* ℚ̄_ℓ ⟶ g_* ℚ̄_ℓ` of
+`AlgebraicGeometry.ProEtale.lowerStarExchangeStr`, as a morphism of `ℓ`-adic sheaves. -/
+noncomputable def adicLowerStarExchange {X Y : Scheme.{u}} (g : X ⟶ Y) (a : X ≅ X) (b : Y ⟶ Y)
+    (hg : g ≫ b = a.inv ≫ g) :
+    (b)_*ᵃ[l].obj ((g)_*ᵃ[l].obj (AdicSheaf.unit l X)) ⟶ (g)_*ᵃ[l].obj (AdicSheaf.unit l X) :=
+  (adicLowerStarComp l g b).hom.app _ ≫ (adicLowerStarCongr l hg).hom.app _ ≫
+    (adicLowerStarComp l a.inv g).inv.app _ ≫ (g)_*ᵃ[l].map (adicLowerStarUnitIso l a.symm).hom
+
+/-- The action of an automorphism `σ` of `X` over `Y` on `g_* ℚ̄_ℓ`, as a morphism of `ℓ`-adic
+sheaves. -/
+noncomputable def adicLowerStarDeckAction {X Y : Scheme.{u}} (g : X ⟶ Y) (σ : X ≅ X)
+    (hσ : σ.hom ≫ g = g) :
+    (g)_*ᵃ[l].obj (AdicSheaf.unit l X) ⟶ (g)_*ᵃ[l].obj (AdicSheaf.unit l X) :=
+  (g)_*ᵃ[l].map (adicLowerStarUnitIso l σ).inv ≫ (adicLowerStarComp l σ.hom g).hom.app _ ≫
+    (adicLowerStarCongr l hσ).hom.app _
+
+/-- The exchange morphism intertwines the deck actions of `σ` and `σ'` if `a ≫ σ = σ' ≫ a`, as
+morphisms of `ℓ`-adic sheaves. -/
+lemma adicLowerStar_map_deckAction_comp_exchange {X Y : Scheme.{u}}
+    (g : X ⟶ Y) (a : X ≅ X) (b : Y ⟶ Y) (σ σ' : X ≅ X) (hg : g ≫ b = a.inv ≫ g)
+    (hσ : σ.hom ≫ g = g) (hσ' : σ'.hom ≫ g = g) (hσa : a.hom ≫ σ.hom = σ'.hom ≫ a.hom) :
+    (b)_*ᵃ[l].map (adicLowerStarDeckAction g σ hσ) ≫ adicLowerStarExchange g a b hg =
+      adicLowerStarExchange g a b hg ≫ adicLowerStarDeckAction g σ' hσ' := by
+  refine Mod.hom_ext _ _ ?_
+  rw [Mod.comp_hom', Mod.comp_hom', adicLowerStar_map_hom, adicLowerStarDeckAction,
+    adicLowerStarDeckAction, adicLowerStarExchange]
+  repeat rw [Mod.comp_hom']
+  repeat rw [adicLowerStarComp_hom_app_hom]
+  repeat rw [adicLowerStarCongr_hom_app_hom]
+  repeat rw [adicLowerStarComp_inv_app_hom]
+  repeat rw [adicLowerStar_map_hom]
+  rw [adicLowerStarUnitIso_hom_hom, adicLowerStarUnitIso_inv_hom, adicLowerStarUnitIso_inv_hom]
+  repeat rw [lowerStarComp_hom_app_unit]
+  repeat rw [lowerStarComp_inv_app_unit]
+  repeat rw [lowerStarCongr_hom_app_unit]
+  have := lowerStar_map_lowerStarDeckAction_comp_lowerStarExchangeStr (l := l) g a b σ σ' hg hσ
+    hσ' hσa
+  rw [lowerStarExchangeStr_eq, lowerStarDeckAction, lowerStarDeckAction] at this
+  exact this
+
+/-- The composition isomorphism of pushforwards at `g_* ℚ̄_ℓ`, seen as an `ℓ`-adic sheaf. -/
+lemma lowerStarComp_hom_app_lowerStar_unit {X Y Z T : Scheme.{u}} (g : X ⟶ Y) (f : Y ⟶ Z)
+    (h : Z ⟶ T) :
+    (lowerStarComp (WeilCoefficients.{u} l) f h).hom.app ((g)_*ᵃ[l].obj (AdicSheaf.unit l X)).X =
+      (lowerStarComp _ f h).hom.app
+        ((g)_*[WeilCoefficients.{u} l].obj (adicConstantSheaf l X)) :=
+  rfl
+
+/-- The inverse composition isomorphism of pushforwards at `g_* ℚ̄_ℓ`, seen as an `ℓ`-adic
+sheaf. -/
+lemma lowerStarComp_inv_app_lowerStar_unit {X Y Z T : Scheme.{u}} (g : X ⟶ Y) (f : Y ⟶ Z)
+    (h : Z ⟶ T) :
+    (lowerStarComp (WeilCoefficients.{u} l) f h).inv.app ((g)_*ᵃ[l].obj (AdicSheaf.unit l X)).X =
+      (lowerStarComp _ f h).inv.app
+        ((g)_*[WeilCoefficients.{u} l].obj (adicConstantSheaf l X)) :=
+  rfl
+
+/-- The congruence isomorphism of pushforwards at `g_* ℚ̄_ℓ`, seen as an `ℓ`-adic sheaf. -/
+lemma lowerStarCongr_hom_app_lowerStar_unit {X Y Z : Scheme.{u}} (g : X ⟶ Y) {f h : Y ⟶ Z}
+    (e : f = h) :
+    (lowerStarCongr (WeilCoefficients.{u} l) e).hom.app ((g)_*ᵃ[l].obj (AdicSheaf.unit l X)).X =
+      (lowerStarCongr _ e).hom.app
+        ((g)_*[WeilCoefficients.{u} l].obj (adicConstantSheaf l X)) :=
+  rfl
+
+/-- The exchange morphisms of commuting pairs of automorphisms commute, as morphisms of `ℓ`-adic
+sheaves (from `AlgebraicGeometry.ProEtale.lowerStarExchangeStr_comm`). -/
+lemma adicLowerStar_map_exchange_comp_exchange {X Y : Scheme.{u}} (g : X ⟶ Y) (a : X ≅ X)
+    (b : Y ⟶ Y) (a' : X ≅ X) (b' : Y ⟶ Y)
+    (hg : g ≫ b = a.inv ≫ g) (hg' : g ≫ b' = a'.inv ≫ g)
+    (haa' : a.inv ≫ a'.inv = a'.inv ≫ a.inv) (hbb' : b ≫ b' = b' ≫ b) :
+    (b')_*ᵃ[l].map (adicLowerStarExchange g a b hg) ≫ adicLowerStarExchange g a' b' hg' =
+      (adicLowerStarComp l b b').hom.app _ ≫ (adicLowerStarCongr l hbb').hom.app _ ≫
+        (adicLowerStarComp l b' b).inv.app _ ≫ (b)_*ᵃ[l].map (adicLowerStarExchange g a' b' hg') ≫
+        adicLowerStarExchange g a b hg := by
+  refine Mod.hom_ext _ _ ?_
+  rw [adicLowerStarExchange, adicLowerStarExchange]
+  repeat rw [Mod.comp_hom']
+  repeat rw [adicLowerStar_map_hom]
+  repeat rw [Mod.comp_hom']
+  repeat rw [adicLowerStarComp_hom_app_hom]
+  repeat rw [adicLowerStarCongr_hom_app_hom]
+  repeat rw [adicLowerStarComp_inv_app_hom]
+  repeat rw [adicLowerStar_map_hom]
+  repeat rw [adicLowerStarUnitIso_hom_hom]
+  repeat rw [lowerStarComp_hom_app_unit]
+  repeat rw [lowerStarComp_inv_app_unit]
+  repeat rw [lowerStarCongr_hom_app_unit]
+  rw [lowerStarComp_hom_app_lowerStar_unit, lowerStarComp_inv_app_lowerStar_unit,
+    lowerStarCongr_hom_app_lowerStar_unit]
+  have := lowerStarExchangeStr_comm (l := l) g a b a' b' hg hg' haa' hbb'
+  simp only [lowerStarExchangeStr_eq, Iso.trans_hom, Iso.app_hom, Iso.symm_hom,
+    NatTrans.comp_app, Category.assoc] at this
+  exact this
 
 end AlgebraicGeometry.ProEtale
 
@@ -321,7 +423,7 @@ namespace AlgebraicGeometry
 
 open scoped ProEtale
 
-section Neg
+section NegWeil
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
@@ -331,49 +433,300 @@ instance : IsIso (affineLine.smul k₀ (-1)) :=
   ⟨⟨_, affineLine.smul_neg_one_comp_smul_neg_one k₀,
     affineLine.smul_neg_one_comp_smul_neg_one k₀⟩⟩
 
-omit [Fact (ringChar k₀ ≠ l)] in
-/-- The reflection is quasi-compact (named: see `AlgebraicGeometry.affineLine.quasiCompact_artinSchreierMap`). -/
-theorem affineLine.quasiCompact_smul_neg_one : QuasiCompact (affineLine.smul k₀ (-1)) :=
-  inferInstance
+section Carrier
 
-omit [Fact (ringChar k₀ ≠ l)] in
-/-- The reflection is quasi-separated (named). -/
-theorem affineLine.quasiSeparated_smul_neg_one : QuasiSeparated (affineLine.smul k₀ (-1)) :=
-  inferInstance
+variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
-omit [Fact (ringChar k₀ ≠ l)] in
-/-- The reflection is locally of finite type (named). -/
-theorem affineLine.locallyOfFiniteType_smul_neg_one :
-    LocallyOfFiniteType (affineLine.smul k₀ (-1)) :=
-  inferInstance
+/-- The composition isomorphism of pushforwards at the underlying sheaf of `ℚ̄_ℓ`, as the unit
+`ℓ`-adic sheaf (stated to rewrite with, see the implementation notes). -/
+lemma WeilSheaf.adicConstant_carrier_comp_hom {Z T : Scheme.{u}}
+    (f : (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ⟶ Z) (h : Z ⟶ T) :
+    (ProEtale.adicLowerStarComp l f h).hom.app (WeilSheaf.adicConstant k₀ l X).obj.carrier =
+      (ProEtale.adicLowerStarComp l f h).hom.app (ProEtale.AdicSheaf.unit l _) :=
+  rfl
+
+/-- The inverse composition isomorphism of pushforwards at the underlying sheaf of `ℚ̄_ℓ`. -/
+lemma WeilSheaf.adicConstant_carrier_comp_inv {Z T : Scheme.{u}}
+    (f : (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ⟶ Z) (h : Z ⟶ T) :
+    (ProEtale.adicLowerStarComp l f h).inv.app (WeilSheaf.adicConstant k₀ l X).obj.carrier =
+      (ProEtale.adicLowerStarComp l f h).inv.app (ProEtale.AdicSheaf.unit l _) :=
+  rfl
+
+/-- The congruence isomorphism of pushforwards at the underlying sheaf of `ℚ̄_ℓ`. -/
+lemma WeilSheaf.adicConstant_carrier_congr_hom {Z : Scheme.{u}}
+    {f h : (X ↘ Spec (CommRingCat.of k₀)).geometricFiber ⟶ Z} (e : f = h) :
+    (ProEtale.adicLowerStarCongr l e).hom.app (WeilSheaf.adicConstant k₀ l X).obj.carrier =
+      (ProEtale.adicLowerStarCongr l e).hom.app (ProEtale.AdicSheaf.unit l _) :=
+  rfl
+
+/-- The Weil structure of `ℚ̄_ℓ`, as a morphism of `ℓ`-adic sheaves. -/
+lemma WeilSheaf.adicConstant_str_hom :
+    (Endofunctor.IsoAlgebra.str (WeilSheaf.adicConstant k₀ l X).obj).hom =
+      (ProEtale.adicLowerStarUnitIso l
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.symm).hom :=
+  rfl
+
+end Carrier
+
+section Generic
+
+variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+  [Y.Over (Spec (CommRingCat.of k₀))] (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
+  [QuasiCompact φ] [QuasiSeparated φ] [LocallyOfFiniteType φ]
+  [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+
+/-- The Weil structure of the pushforward `φ_* ℚ̄_ℓ` is the exchange morphism of the base change
+`φ̄` with the geometric Frobenii. -/
+lemma WeilSheaf.lowerStar_adicConstant_obj_obj_str :
+    ((WeilSheaf.lowerStar φ).obj (WeilSheaf.adicConstant k₀ l X)).obj.obj.str =
+      ProEtale.adicLowerStarExchange (Scheme.Hom.geometricFiberMap φ (comp_over φ _))
+        (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
+        (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
+        (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _) := by
+  rw [← Endofunctor.IsoAlgebra.str_hom, WeilSheaf.lowerStar_obj_obj_str, Iso.trans_hom,
+    Iso.app_hom, ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso, Iso.trans_hom,
+    Iso.trans_hom, NatTrans.comp_app, NatTrans.comp_app, Iso.symm_hom, Functor.mapIso_hom]
+  rw [WeilSheaf.adicConstant_carrier_comp_hom, WeilSheaf.adicConstant_carrier_comp_inv,
+    WeilSheaf.adicConstant_carrier_congr_hom, WeilSheaf.adicConstant_str_hom,
+    ProEtale.adicLowerStarExchange]
+  rw [Category.assoc, Category.assoc]
+
+end Generic
+
+/-- The Weil structure of `AS_* ℚ̄_ℓ` is the exchange morphism of `ĀS` with the geometric
+Frobenius. -/
+lemma WeilSheaf.artinSchreierPushforward_obj_obj_str :
+    (WeilSheaf.artinSchreierPushforward k₀ l).obj.obj.str =
+      ProEtale.adicLowerStarExchange ĀS
+        (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius
+        (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
+        (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _) :=
+  WeilSheaf.lowerStar_adicConstant_obj_obj_str (affineLine.artinSchreierMap k₀)
+
+/-- The composition isomorphism of pushforwards at the underlying sheaf of `AS_* ℚ̄_ℓ`. -/
+lemma WeilSheaf.artinSchreierPushforward_carrier_comp_hom {Z T : Scheme.{u}}
+    (f : Scheme.Hom.geometricFiber (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) ⟶ Z)
+    (h : Z ⟶ T) :
+    (ProEtale.adicLowerStarComp l f h).hom.app
+        (WeilSheaf.artinSchreierPushforward k₀ l).obj.carrier =
+      (ProEtale.adicLowerStarComp l f h).hom.app
+        ((ĀS)_*ᵃ[l].obj (ProEtale.AdicSheaf.unit l _)) :=
+  rfl
+
+/-- The inverse composition isomorphism of pushforwards at the underlying sheaf of
+`AS_* ℚ̄_ℓ`. -/
+lemma WeilSheaf.artinSchreierPushforward_carrier_comp_inv {Z T : Scheme.{u}}
+    (f : Scheme.Hom.geometricFiber (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) ⟶ Z)
+    (h : Z ⟶ T) :
+    (ProEtale.adicLowerStarComp l f h).inv.app
+        (WeilSheaf.artinSchreierPushforward k₀ l).obj.carrier =
+      (ProEtale.adicLowerStarComp l f h).inv.app
+        ((ĀS)_*ᵃ[l].obj (ProEtale.AdicSheaf.unit l _)) :=
+  rfl
+
+/-- The congruence isomorphism of pushforwards at the underlying sheaf of `AS_* ℚ̄_ℓ`. -/
+lemma WeilSheaf.artinSchreierPushforward_carrier_congr_hom {Z : Scheme.{u}}
+    {f h : Scheme.Hom.geometricFiber (affineLine k₀ ↘ Spec (CommRingCat.of k₀)) ⟶ Z}
+    (e : f = h) :
+    (ProEtale.adicLowerStarCongr l e).hom.app
+        (WeilSheaf.artinSchreierPushforward k₀ l).obj.carrier =
+      (ProEtale.adicLowerStarCongr l e).hom.app
+        ((ĀS)_*ᵃ[l].obj (ProEtale.AdicSheaf.unit l _)) :=
+  rfl
 
 variable (k₀ l) in
-/-- The action of the reflection `x ↦ -x` on `AS_* ℚ̄_ℓ`, as a morphism of sheaves of modules
+/-- The action of the reflection `x ↦ -x` on `AS_* ℚ̄_ℓ`, as a morphism of `ℓ`-adic sheaves
 `[-1]_* ĀS_* ℚ̄_ℓ ≅ (ĀS ≫ [-1])_* ℚ̄_ℓ = ([-1] ≫ ĀS)_* ℚ̄_ℓ ≅ ĀS_* [-1]_* ℚ̄_ℓ ≅ ĀS_* ℚ̄_ℓ`. -/
 noncomputable def affineLine.artinSchreierNegModHom :
-    (Scheme.Hom.geometricFiberMap (affineLine.smul k₀ (-1)) (comp_over _ _))_*ᵃ[l].obj ((ĀS)_*ᵃ[l].obj
-      (ProEtale.AdicSheaf.unit l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber)) ⟶
-      (ĀS)_*ᵃ[l].obj
-        (ProEtale.AdicSheaf.unit l (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).geometricFiber) :=
-  (ProEtale.adicLowerStarComp l ĀS
-      (Scheme.Hom.geometricFiberMap (affineLine.smul k₀ (-1)) (comp_over _ _))).hom.app _ ≫
-    (ProEtale.adicLowerStarCongr l
-      (affineLine.geometricArtinSchreierMap_comp_geometricFiberMap_smul_neg_one k₀)).hom.app _ ≫
-    (ProEtale.adicLowerStarComp l (affineLine.geometricNegIso k₀).inv ĀS).inv.app _ ≫
-    (ĀS)_*ᵃ[l].map (ProEtale.adicLowerStarUnitIso l (affineLine.geometricNegIso k₀).symm).hom
+    (Scheme.Hom.geometricFiberMap (affineLine.smul k₀ (-1)) (comp_over _ _))_*ᵃ[l].obj
+        ((ĀS)_*ᵃ[l].obj (ProEtale.AdicSheaf.unit l _)) ⟶
+      (ĀS)_*ᵃ[l].obj (ProEtale.AdicSheaf.unit l _) :=
+  ProEtale.adicLowerStarExchange ĀS (affineLine.geometricNegIso k₀)
+    (Scheme.Hom.geometricFiberMap (affineLine.smul k₀ (-1)) (comp_over _ _))
+    (affineLine.geometricArtinSchreierMap_comp_geometricFiberMap_smul_neg_one k₀)
+
+/-- The action of the reflection on `AS_* ℚ̄_ℓ` commutes with the Weil structures: the
+reflection and the Artin–Schreier map are defined over `k₀`. -/
+lemma affineLine.artinSchreierNegModHom_comm :
+    (WeilSheaf.frobeniusPullback k₀ l (affineLine k₀)).map
+        (affineLine.artinSchreierNegModHom k₀ l) ≫
+      (WeilSheaf.artinSchreierPushforward k₀ l).obj.obj.str =
+    ((WeilSheaf.lowerStar (affineLine.smul k₀ (-1))).obj
+      (WeilSheaf.artinSchreierPushforward k₀ l)).obj.obj.str ≫
+      affineLine.artinSchreierNegModHom k₀ l := by
+  rw [WeilSheaf.artinSchreierPushforward_obj_obj_str, ← Endofunctor.IsoAlgebra.str_hom,
+    WeilSheaf.lowerStar_obj_obj_str, Iso.trans_hom,
+    Iso.app_hom, ProEtale.adicLowerStarGeometricFiberMapCompFrobeniusIso, Iso.trans_hom,
+    Iso.trans_hom, NatTrans.comp_app, NatTrans.comp_app, Iso.symm_hom, Functor.mapIso_hom,
+    Endofunctor.IsoAlgebra.str_hom, WeilSheaf.artinSchreierPushforward_obj_obj_str]
+  rw [WeilSheaf.artinSchreierPushforward_carrier_comp_hom,
+    WeilSheaf.artinSchreierPushforward_carrier_comp_inv,
+    WeilSheaf.artinSchreierPushforward_carrier_congr_hom, affineLine.artinSchreierNegModHom]
+  simp only [Category.assoc]
+  exact ProEtale.adicLowerStar_map_exchange_comp_exchange _ _ _ _ _ _ _
+    (affineLine.geometricNegIso_inv_comp_frobenius_inv k₀)
+    (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _)
+
+variable (k₀ l) in
+/-- The action of the reflection `x ↦ -x` on `AS_* ℚ̄_ℓ`, as a morphism of Weil sheaves
+`[-1]_* AS_* ℚ̄_ℓ ⟶ AS_* ℚ̄_ℓ`. -/
+noncomputable def WeilSheaf.artinSchreierNegHom :
+    (WeilSheaf.lowerStar (affineLine.smul k₀ (-1))).obj
+        (WeilSheaf.artinSchreierPushforward k₀ l) ⟶ WeilSheaf.artinSchreierPushforward k₀ l :=
+  ObjectProperty.homMk (ObjectProperty.homMk
+    ⟨affineLine.artinSchreierNegModHom k₀ l, affineLine.artinSchreierNegModHom_comm⟩)
+
+/-- Morphisms of Weil sheaves agree if their underlying morphisms of `ℓ`-adic sheaves do. -/
+lemma WeilSheaf.hom_ext_of_hom_hom_f {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+    {F G : WeilSheaf k₀ l X} {f g : F ⟶ G} (h : f.hom.hom.f = g.hom.hom.f) : f = g :=
+  ObjectProperty.hom_ext _ (ObjectProperty.hom_ext _ (Endofunctor.Algebra.Hom.ext h))
 
 omit [Fact (ringChar k₀ ≠ l)] in
-lemma affineLine.artinSchreierNegModHom_hom :
-    (affineLine.artinSchreierNegModHom k₀ l).hom =
-      ProEtale.lowerStarExchangeStr ĀS (affineLine.geometricNegIso k₀)
-        (Scheme.Hom.geometricFiberMap (affineLine.smul k₀ (-1)) (comp_over _ _))
-        (affineLine.geometricArtinSchreierMap_comp_geometricFiberMap_smul_neg_one k₀) := by
-  sorry
+/-- The action of `σ_c` on `ĀS_* ℚ̄_ℓ` is the deck action of the translation. -/
+lemma artinSchreierTranslationSheafHom_eq (c : k₀) :
+    artinSchreierTranslationSheafHom l c = ProEtale.adicLowerStarDeckAction ĀS
+      (affineLine.geometricTranslationIso k₀ c)
+      (affineLine.geometricTranslation_comp_artinSchreierMap k₀ c) :=
+  rfl
+
+/-- The reflection conjugates the translation `σ_c` into `σ_{-c}`. -/
+lemma WeilSheaf.lowerStar_map_artinSchreierTranslationAction_comp_artinSchreierNegHom (c : k₀) :
+    (WeilSheaf.lowerStar (affineLine.smul k₀ (-1))).map
+        (WeilSheaf.artinSchreierTranslationAction l c) ≫ WeilSheaf.artinSchreierNegHom k₀ l =
+      WeilSheaf.artinSchreierNegHom k₀ l ≫ WeilSheaf.artinSchreierTranslationAction l (-c) := by
+  refine WeilSheaf.hom_ext_of_hom_hom_f ?_
+  have := ProEtale.adicLowerStar_map_deckAction_comp_exchange (l := l) ĀS
+    (affineLine.geometricNegIso k₀)
+    (Scheme.Hom.geometricFiberMap (affineLine.smul k₀ (-1)) (comp_over _ _))
+    (affineLine.geometricTranslationIso k₀ c) (affineLine.geometricTranslationIso k₀ (-c))
+    (affineLine.geometricArtinSchreierMap_comp_geometricFiberMap_smul_neg_one k₀)
+    (affineLine.geometricTranslation_comp_artinSchreierMap k₀ c)
+    (affineLine.geometricTranslation_comp_artinSchreierMap k₀ (-c))
+    (affineLine.geometricNegIso_comp_geometricTranslationIso k₀ c)
+  rw [← artinSchreierTranslationSheafHom_eq, ← artinSchreierTranslationSheafHom_eq] at this
+  exact this
+
+/-- The reflection commutes with the multiplication by scalars. -/
+lemma WeilSheaf.lowerStar_map_smulEnd_comp_artinSchreierNegHom (b : PadicAlgCl l) :
+    (WeilSheaf.lowerStar (affineLine.smul k₀ (-1))).map
+        (WeilSheaf.smulEnd b (WeilSheaf.artinSchreierPushforward k₀ l)) ≫
+        WeilSheaf.artinSchreierNegHom k₀ l =
+      WeilSheaf.artinSchreierNegHom k₀ l ≫
+        WeilSheaf.smulEnd b (WeilSheaf.artinSchreierPushforward k₀ l) := by
+  refine WeilSheaf.hom_ext_of_hom_hom_f ?_
+  exact (congrArg (· ≫ affineLine.artinSchreierNegModHom k₀ l)
+    (ProEtale.AdicSheaf.adicLowerStar_map_smul _ _ _)).trans (ProEtale.AdicSheaf.smul_comp _ _)
+
+/-- The reflection carries the projector `e_ψ` to `e_{ψ⁻¹}`. -/
+lemma WeilSheaf.lowerStar_map_artinSchreierIdempotent_comp_artinSchreierNegHom
+    (ψ : AddChar k₀ (PadicAlgCl l)) :
+    (WeilSheaf.lowerStar (affineLine.smul k₀ (-1))).map (WeilSheaf.artinSchreierIdempotent ψ) ≫
+        WeilSheaf.artinSchreierNegHom k₀ l =
+      WeilSheaf.artinSchreierNegHom k₀ l ≫ WeilSheaf.artinSchreierIdempotent ψ⁻¹ := by
+  let := Fintype.ofFinite k₀
+  simp only [WeilSheaf.artinSchreierIdempotent, Functor.map_sum, Functor.map_comp,
+    Preadditive.sum_comp, Preadditive.comp_sum, Category.assoc,
+    WeilSheaf.lowerStar_map_artinSchreierTranslationAction_comp_artinSchreierNegHom,
+    reassoc_of% WeilSheaf.lowerStar_map_smulEnd_comp_artinSchreierNegHom]
+  refine Fintype.sum_equiv (Equiv.neg k₀) _ _ fun c ↦ ?_
+  rw [Equiv.neg_apply, neg_neg, AddChar.inv_apply]
 
 instance : IsIso (affineLine.artinSchreierNegModHom k₀ l) := by
-  unfold affineLine.artinSchreierNegModHom
+  unfold affineLine.artinSchreierNegModHom ProEtale.adicLowerStarExchange
   infer_instance
 
-end Neg
+instance : IsIso (WeilSheaf.artinSchreierNegHom k₀ l) := by
+  have : IsIso (WeilSheaf.artinSchreierNegHom k₀ l).hom.hom.f :=
+    inferInstanceAs (IsIso (affineLine.artinSchreierNegModHom k₀ l))
+  exact WeilSheaf.isIso_of_isIso_hom_hom_f _
+
+attribute [local instance high] WeilSheaf.hasImage_artinSchreierIdempotent
+
+variable (k₀ l) in
+/-- The pullback along the reflection `x ↦ -x` is an involution. -/
+noncomputable def WeilSheaf.upperStarNegUnitIso :
+    𝟭 (WeilSheaf k₀ l (affineLine k₀)) ≅
+      WeilSheaf.upperStar (affineLine.smul k₀ (-1)) ⋙
+        WeilSheaf.upperStar (affineLine.smul k₀ (-1)) :=
+  (WeilSheaf.upperStarIdIso _).symm ≪≫
+    WeilSheaf.upperStarCongrIso (affineLine.smul_neg_one_comp_smul_neg_one k₀).symm ≪≫
+    WeilSheaf.upperStarCompIso _ _
+
+variable (k₀ l) in
+/-- The pullback along the reflection `x ↦ -x` is the pushforward along it: both are right
+adjoint to the pullback, which is a self-inverse equivalence. -/
+noncomputable def WeilSheaf.upperStarNegIsoLowerStarNeg :
+    WeilSheaf.upperStar (k₀ := k₀) (l := l) (affineLine.smul k₀ (-1)) ≅
+      WeilSheaf.lowerStar (affineLine.smul k₀ (-1)) :=
+  (CategoryTheory.Equivalence.mk _ _ (WeilSheaf.upperStarNegUnitIso k₀ l)
+    (WeilSheaf.upperStarNegUnitIso k₀ l).symm).toAdjunction.rightAdjointUniq
+    (WeilSheaf.upperStarLowerStarAdjunction (affineLine.smul k₀ (-1)))
+
+/-- The images of two endomorphisms conjugate under an isomorphism are isomorphic. -/
+theorem _root_.CategoryTheory.nonempty_iso_image_of_comp_eq {C : Type*} [Category* C]
+    [Abelian C] {A B : C} (e : A ≅ B) (f : A ⟶ A) (g : B ⟶ B) [HasImage f] [HasImage g]
+    (h : f ≫ e.hom = e.hom ≫ g) :
+    Nonempty (Limits.image f ≅ Limits.image g) := by
+  have hg : (e.inv ≫ Limits.factorThruImage f) ≫ (Limits.image.ι f ≫ e.hom) = g := by
+    rw [Category.assoc, Limits.image.fac_assoc, h, Iso.inv_hom_id_assoc]
+  have : StrongEpi (e.inv ≫ Limits.factorThruImage f) := strongEpi_of_epi _
+  exact ⟨Limits.image.isoStrongEpiMono _ _ hg⟩
+
+/-- An exact functor of abelian categories preserves images. -/
+theorem _root_.CategoryTheory.nonempty_iso_obj_image {C D : Type*} [Category* C] [Category* D]
+    [Abelian C] [Abelian D] (Φ : C ⥤ D) [PreservesFiniteLimits Φ] [PreservesFiniteColimits Φ]
+    {A B : C} (f : A ⟶ B) [HasImage f] [HasImage (Φ.map f)] :
+    Nonempty (Φ.obj (image f) ≅ image (Φ.map f)) :=
+  ⟨Φ.mapIso (Abelian.imageIsoImage _).symm ≪≫ Abelian.PreservesImage.iso Φ _ ≪≫
+    Abelian.imageIsoImage _⟩
+
+/-- `φ^* F ≅ g'^* G` for `F ≅ g^* G` and `φ ≫ g = g'`. -/
+theorem WeilSheaf.nonempty_iso_upperStar_obj_of_iso {X Y : Scheme.{u}}
+    [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] (φ : Y ⟶ X)
+    (g : X ⟶ X) (g' : Y ⟶ X) [φ.IsOver (Spec (CommRingCat.of k₀))]
+    [g.IsOver (Spec (CommRingCat.of k₀))] [g'.IsOver (Spec (CommRingCat.of k₀))]
+    (h : φ ≫ g = g') {F G : WeilSheaf k₀ l X} (e : F ≅ (WeilSheaf.upperStar g).obj G) :
+    Nonempty ((WeilSheaf.upperStar φ).obj F ≅ (WeilSheaf.upperStar g').obj G) := by
+  obtain ⟨e'⟩ := WeilSheaf.nonempty_iso_upperStar_obj_upperStar_obj φ g g' h G
+  exact ⟨(WeilSheaf.upperStar φ).mapIso e ≪≫ e'⟩
+
+/-- Blueprint `lem-fd-as-characters`: `ℒ_{ψ⁻¹} ≅ [-1]^* ℒ_ψ`, the reflection carrying the
+projector `e_ψ` of `AS_* ℚ̄_ℓ` to `e_{ψ⁻¹}`. -/
+theorem WeilSheaf.nonempty_iso_image_artinSchreierIdempotent_inv
+    (ψ : AddChar k₀ (PadicAlgCl l)) :
+    Nonempty (image (WeilSheaf.artinSchreierIdempotent ψ⁻¹) ≅
+      (WeilSheaf.upperStar (affineLine.smul k₀ (-1))).obj
+        (image (WeilSheaf.artinSchreierIdempotent ψ))) := by
+  obtain ⟨i₁⟩ := nonempty_iso_image_of_comp_eq
+    ((WeilSheaf.upperStarNegIsoLowerStarNeg k₀ l).app _)
+    ((WeilSheaf.upperStar (affineLine.smul k₀ (-1))).map (WeilSheaf.artinSchreierIdempotent ψ))
+    _ ((WeilSheaf.upperStarNegIsoLowerStarNeg k₀ l).hom.naturality _)
+  obtain ⟨i₂⟩ := nonempty_iso_image_of_comp_eq (asIso (WeilSheaf.artinSchreierNegHom k₀ l)) _ _
+    (WeilSheaf.lowerStar_map_artinSchreierIdempotent_comp_artinSchreierNegHom ψ)
+  obtain ⟨i₃⟩ := nonempty_iso_obj_image (WeilSheaf.upperStar (k₀ := k₀) (l := l)
+    (affineLine.smul k₀ (-1))) (WeilSheaf.artinSchreierIdempotent ψ)
+  exact ⟨i₂.symm ≪≫ i₁.symm ≪≫ i₃.symm⟩
+
+/-- `[a]^* ℒ_{ψ⁻¹} ≅ [-a]^* ℒ_ψ`. -/
+theorem WeilSheaf.nonempty_iso_upperStar_smul_image_inv (ψ : AddChar k₀ (PadicAlgCl l))
+    (a : k₀) :
+    Nonempty ((WeilSheaf.upperStar (affineLine.smul k₀ a)).obj
+        (image (WeilSheaf.artinSchreierIdempotent ψ⁻¹)) ≅
+      (WeilSheaf.upperStar (affineLine.smul k₀ (-a))).obj
+        (image (WeilSheaf.artinSchreierIdempotent ψ))) := by
+  obtain ⟨e⟩ := WeilSheaf.nonempty_iso_image_artinSchreierIdempotent_inv (l := l) ψ
+  exact WeilSheaf.nonempty_iso_upperStar_obj_of_iso (affineLine.smul k₀ a)
+    (affineLine.smul k₀ (-1)) (affineLine.smul k₀ (-a))
+    (by rw [← affineLine.smul_mul, mul_neg_one]) e
+
+/-- Blueprint `lem-fd-as-characters` (the clause `ℒ_{ψ⁻¹,f} ≅ ℒ_{ψ,-f}` for `f = a x`):
+`ℒ_{ψ⁻¹(a x)} ≅ ℒ_{ψ(-a x)}`. -/
+theorem nonempty_artinSchreier_inv_iso (ψ : AddChar k₀ (PadicAlgCl l)) (a : k₀) :
+    Nonempty (artinSchreier ψ⁻¹ a ≅ artinSchreier ψ (-a)) := by
+  rw [artinSchreier, artinSchreier, WeilSheaf.image_artinSchreierIdempotent_eq ψ⁻¹,
+    WeilSheaf.image_artinSchreierIdempotent_eq ψ]
+  exact WeilSheaf.nonempty_iso_upperStar_smul_image_inv ψ a
+
+end NegWeil
 
 end AlgebraicGeometry

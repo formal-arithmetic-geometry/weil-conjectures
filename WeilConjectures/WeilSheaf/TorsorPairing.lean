@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.WeilSheaf.ConstantTwistCohomology
 public import WeilConjectures.WeilSheaf.CurryIsoCriterion
 public import WeilConjectures.WeilSheaf.IhomCurry
 public import WeilConjectures.WeilSheaf.SplitTorsor
@@ -193,16 +194,6 @@ end CategoryTheory.Mod
 namespace AlgebraicGeometry.ProEtale
 
 variable {l : ℕ} [Fact l.Prime]
-
-/-- The pullback commutes with multiplication by a scalar. -/
-lemma AdicSheaf.adicUpperStar_map_smul {X Z : Scheme.{u}} (g : X ⟶ Z)
-    (c : ULift.{u + 1} (PadicAlgCl l)) (M : AdicSheaf l Z) :
-    (g)^*ᵃ[l].map (AdicSheaf.smul c M) = AdicSheaf.smul c ((g)^*ᵃ[l].obj M) := by
-  apply ((adicUpperStarLowerStarAdjunction l g).homEquiv _ _).injective
-  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit, ← Functor.comp_map,
-    ← (adicUpperStarLowerStarAdjunction l g).unit.naturality, Functor.id_map,
-    AdicSheaf.adicLowerStar_map_smul]
-  exact AdicSheaf.smul_comp c _
 
 variable {Z W : Scheme.{u}} (π : W ⟶ Z) {G : Type u} (τ : G → (W ≅ W))
   (hτ : ∀ g, (τ g).hom ≫ π = π) [AddCommGroup G] [Finite G]
