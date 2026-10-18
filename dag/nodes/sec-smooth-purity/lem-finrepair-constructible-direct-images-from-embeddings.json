@@ -1,0 +1,113 @@
+{
+ "id": "lem-finrepair-constructible-direct-images-from-embeddings",
+ "kind": "statement",
+ "title": "Constructible direct images from embeddings into good sheaves",
+ "statement": "Let $\\Lambda$ be a finite commutative ring and let $f:X\\to S$ be a morphism of schemes [def-weil-pbc-scheme-conventions]. Work with sheaves of $\\Lambda$-modules on the small etale sites [def-weil-sheaf-of-modules-category]. Assume that every constructible sheaf $Q$ [def-weil-pbc-constructible-complexes] admits a monomorphism $Q\\hookrightarrow G$ into a constructible sheaf $G$ such that $Rf_*(G[0])$ has constructible homology in every integer degree [def-weil-pbc-direct-image]. Then every constructible sheaf $F$ has $Rf_*(F[0])$ with constructible homology in every integer degree, that is, $\\mathcal C(f)$ of [def-finrepair-property-c]. No finite-type, invertible-exponent, finite-cover, or uniform cohomological-dimension hypothesis is needed.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/Finiteness/ConstructibleDirectImage.lean",
+  "place": "hasConstructibleDirectImages_of_exists_mono and exists_trW_of_exists_mono; finite-order form of blueprint lem-finrepair-finite-surjection-cancellation, proof paragraphs 1--4"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-direct-image",
+  "def-finrepair-property-c"
+ ],
+ "proof": [
+  {
+   "text": "This records the existing proved source declaration hasConstructibleDirectImages_of_exists_mono, not a new Lean theorem. Its proof is as follows. Let P consist of derived objects whose derived f-image has constructible homology; Serre closure [thm-constructible-serre] makes P triangulated and invariant under isomorphism. Inductively, for every m and constructible F construct a map Q[-m] -> F[0] with constructible Q whose cone is in P. For m=0 use F and the identity. Given such Q, embed Q into G by the hypothesis, and put Qprime = coker(Q -> G), which is constructible by Serre closure. The short exact sequence gives Qprime[-1] -> Q -> G; shifting and composing increases m by one, and the octahedral axiom keeps its cone in P. For a nonnegative degree n take m=n+2. The right derived image of Q[-m] is concentrated in degrees >= m, so the long exact homology sequence identifies H^n(Rf_*F) with the constructible H^n of the cone. For negative n, H^n(Rf_*F)=0 by left t-exactness. This proves every integer degree without a uniform bound. All steps are already implemented in the cited source module; its printed axioms are only propext, Classical.choice and Quot.sound.",
+   "uses": [
+    "thm-constructible-serre"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "thm-constructible-serre"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/Finiteness/ConstructibleDirectImage.lean",
+  "place": "exists_trW_of_exists_mono and hasConstructibleDirectImages_of_exists_mono"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "If every constructible sheaf embeds into a constructible sheaf with constructible derived direct image, then all constructible sheaves have constructible derived direct images",
+   "results": "Eight results about constant sheaves and constructible subsets, led by CategoryTheory.Sheaf.isConstant_iff_mem_essImage; no matching resolution principle.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If every constructible sheaf embeds into a constructible sheaf whose derived direct image has constructible homology then all higher direct images of constructible sheaves are constructible",
+   "results": "Eight results, including Scheme.Hom.isConstructible_image, Scheme.Hom.isLocallyConstructible_image and Sheaf.isGrothendieckAbelian_of_essentiallySmall; no matching constructible resolution principle. Direct source search finds the cited exact proved declaration.",
+   "date": "2026-10-18",
+   "verdict": "source declaration verified; no Mathlib match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constructible\", \"Mono\"",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*exists_mono|exists_mono.*constructible",
+   "results": "msearch Mathlib grep: 0 hits. Local rg for hasConstructibleDirectImages_of_exists_mono finds the exact source declaration at ConstructibleDirectImage.lean:294 and no DAG record. Blueprint search resolution.*constructible has no match.",
+   "date": "2026-10-18",
+   "verdict": "exact existing source declaration; no existing DAG node"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConstructibleFiniteSurjectionCancellation",
+  "date": "2026-10-18",
+  "group": "B7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-finrepair-finite-surjection-cancellation",
+   "place": "Proof paragraphs 1--2: embedding into good sheaves and resolution; final two paragraphs: constructibility of the abutment, replaced by the proved finite-order resolution criterion.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ConstructibleDirectImage",
+  "declaration": "AlgebraicGeometry.Etale.hasConstructibleDirectImages_of_exists_mono",
+  "statement": "theorem hasConstructibleDirectImages_of_exists_mono {X S : Scheme.{u}} (f : X ⟶ S)\n    (h : ∀ Q : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ), IsConstructibleSheaf Q →\n      ∃ (G : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (ι : Q ⟶ G), Mono ι ∧\n        IsConstructibleSheaf G ∧ Etale.DerivedCategory.constructibleHomology\n          (ModuleCat.{u + 1} Λ) S\n            ((R((f)_*[ModuleCat.{u + 1} Λ])).obj ((singleFunctor _ 0).obj G))) :\n    HasConstructibleDirectImages Λ f",
+  "branch": "sheaf-dag",
+  "by": "B7",
+  "date": "2026-10-18",
+  "note": "Existing source declaration, directly proved and axiom-clean. No new Lean file or statement."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261018T062704-L-632138",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261018T062704-L-632138",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

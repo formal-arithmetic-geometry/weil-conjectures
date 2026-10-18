@@ -9,21 +9,11 @@ public import Sheaf.AlgebraicGeometry.ConstructibleHigherDirectImages
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 
-import WeilConjectures.SixFunctors.Finite.Stalk
-import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.ConstructibleSheaf.Pullback
-import WeilConjectures.ConstructibleSheaf.KernelCokernel
-import Sheaf.AlgebraicGeometry.EtaleGrothendieckSpectralSequence
-import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
-import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.CategoryTheory.CartanEilenbergExists
-import Sheaf.CategoryTheory.HypercohomologyFirstPage
-import Sheaf.CategoryTheory.ExactCoupleConvergence
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ConstructibleDirectImage
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
+import WeilConjectures.SixFunctors.Finite.Exact
 import Sheaf.AlgebraicGeometry.FiniteConstructibleDirectImage
-import WeilConjectures.CategoryTheory.ExactCoupleConvergence
-import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.LeraySpectralSequence
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 /-!
 # Constructibility descends through a finite surjection
@@ -82,6 +72,64 @@ theorem hasConstructibleHigherDirectImages_of_finite_surjective
     (f : X ⟶ S) (π : Y ⟶ X) [IsFinite π] [Surjective π]
     (h : HasConstructibleHigherDirectImages k N Λ hY hS (π ≫ f)) :
     HasConstructibleHigherDirectImages k N Λ hX hS f := by
-  sorry
+  -- Convert to the source-library predicate, which uses finite-stalk constructibility
+  -- and the unbounded derived functor in every integer degree.
+  have hc : HasConstructibleDirectImages Λ (π ≫ f) := by
+    intro F hF q
+    have : Scheme.IsConstructibleSheaf F := hF
+    by_cases hq : q < 0
+    · exact Scheme.IsConstructibleSheaf.of_isZero
+        (_root_.DerivedCategory.isZero_of_isGE _ 0 q hq
+          (hX := Functor.isGE_rightDerivedFunctor_obj_singleFunctor _ F))
+    · have hF' := (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf F).2 hF
+      have hq' := (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).1
+        (h q.toNat F hF')
+      have : Scheme.IsConstructibleSheaf
+          ((_root_.DerivedCategory.homologyFunctor _ q).obj
+            (((lowerStar (ModuleCat.{u + 1} Λ) (π ≫ f)).rightDerivedFunctorPlus ⋙
+              _root_.DerivedCategory.Plus.ι).obj
+                ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj F))) := by
+        change Scheme.IsConstructibleSheaf (higherDirectImage Λ (π ≫ f) q F)
+        simpa only [Int.toNat_of_nonneg (le_of_not_gt hq)] using hq'
+      exact Scheme.IsConstructibleSheaf.of_iso
+        ((_root_.DerivedCategory.homologyFunctor _ q).mapIso
+          ((lowerStar (ModuleCat.{u + 1} Λ) (π ≫ f)).rightDerivedFunctorPlusCompatibility.app
+            ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj F)))
+  -- Resolve to finite order by the constructible sheaves π_*π^*Q. The general source
+  -- resolution principle avoids constructing a full Cartan--Eilenberg spectral sequence.
+  have hf : HasConstructibleDirectImages Λ f := by
+    refine hasConstructibleDirectImages_of_exists_mono f fun Q hQ ↦ ?_
+    have : Scheme.IsConstructibleSheaf Q := hQ
+    have hG : Scheme.IsConstructibleSheaf
+        ((upperStar (ModuleCat.{u + 1} Λ) π).obj Q) :=
+      Scheme.IsConstructibleSheaf.upperStar π Q
+    have hG' := (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).2 hG
+    have hpush := (finite_directImage_constructible_and_higher_vanishing
+      k π N Λ hX _ hG').1
+    have hpush' := (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).1 hpush
+    refine ⟨_, (upperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) π).unit.app Q,
+      mono_unit_app_of_surjective Λ π π.surjective Q, hpush', ?_⟩
+    -- Finite direct image is exact, so its ordinary and derived functors agree.
+    let G := (upperStar (ModuleCat.{u + 1} Λ) π).obj Q
+    let e := (lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctor.mapIso
+        (((lowerStar (ModuleCat.{u + 1} Λ) π).mapDerivedCategorySingleFunctor 0).app G).symm ≪≫
+      (lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctor.mapIso
+        ((rightDerivedFunctorLowerStarIsoMapDerivedCategory
+          (ModuleCat.{u + 1} Λ) π).app _).symm ≪≫
+      (rightDerivedLowerStarComp (ModuleCat.{u + 1} Λ) π f).app _
+    exact (Etale.DerivedCategory.constructibleHomology (ModuleCat.{u + 1} Λ) S).prop_of_iso
+      e.symm (hc _ hG)
+  intro q F hF
+  have hF' := (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf F).1 hF
+  have : Scheme.IsConstructibleSheaf
+      ((_root_.DerivedCategory.homologyFunctor _ (q : ℤ)).obj
+        ((_root_.DerivedCategory.Plus.ι ⋙
+          (lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctor).obj
+            ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj F))) := hf F hF' q
+  apply (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).2
+  exact Scheme.IsConstructibleSheaf.of_iso
+    ((_root_.DerivedCategory.homologyFunctor _ (q : ℤ)).mapIso
+      ((lowerStar (ModuleCat.{u + 1} Λ) f).rightDerivedFunctorPlusCompatibility.app
+        ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj F)).symm)
 
 end AlgebraicGeometry.Etale

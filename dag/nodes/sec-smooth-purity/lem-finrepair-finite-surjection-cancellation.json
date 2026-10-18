@@ -18,107 +18,61 @@
  ],
  "proof": [
   {
-   "text": "Fix the finite commutative coefficient ring $\\Lambda$ in $\\mathcal C$, and let $F$ be a constructible $\\Lambda$-sheaf on $X_{\\Et}$. For any such module sheaf $Q$ (not necessarily constructible), consider the unit $\\eta_Q:Q\\to\\pi_*\\pi^*Q$. Apply [lemma-weil-pbc-finite-stalk-formula] and [lem-weil-pbc-inverse-image-stalk-germ] to its underlying abelian sheaves. At a geometric point $\\bar x$ this identifies $\\eta_Q$ with $Q_{\\bar x}\\to\\prod_{\\bar y\\in Y_{\\bar x}}Q_{\\bar x}$, $t\\mapsto(t)_{\\bar y}$: the compatibility with represented germs in the latter citation identifies each component with the identity, rather than merely identifying the source and target groups. The index set is finite and nonempty. Indeed, choose $y$ over $x$ using surjectivity; finiteness gives a finite residue-field extension $\\kappa(y)/\\kappa(x)$, which embeds over $\\kappa(x)$ into the algebraically closed field of $\\bar x$, giving a geometric lift. The diagonal is therefore injective. By exactness of geometric stalks [prop-weil-pbc-geometric-stalks-exact], every stalk of $\\ker\\eta_Q$ is zero. Apply [lemma-weil-pbc-geometric-stalk-conservative] to $0\\to\\ker\\eta_Q$ to deduce that the kernel is zero; this proves that $\\eta_Q$ is a monomorphism. The module kernel is computed sectionwise: its sections over each etale object are precisely the kernel of the underlying group homomorphism, with the inherited $\\Lambda$-action. Thus its underlying zero abelian sheaf is also the zero module sheaf, proving the module monomorphism.",
+   "text": "Convert C(pi f) from finite-constant-value constructibility to finite-stalk constructibility using [lem-weil-pbc-constructible-etale-module-sheaf-comparison]. For q >= 0, [src-right-derived-functor-plus-compatibility] identifies higherDirectImage with homology of the unbounded derived direct image. For q < 0, this homology is zero because the right derived functor of lowerStar applied to a sheaf in degree zero is concentrated in degrees >= 0 (Functor.isGE_rightDerivedFunctor_obj_singleFunctor). Thus obtain HasConstructibleDirectImages Lambda (pi >> f).",
    "uses": [
-    "lemma-weil-pbc-finite-stalk-formula",
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lemma-weil-pbc-geometric-stalk-conservative"
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "src-right-derived-functor-plus-compatibility"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03QP (proposition-finite-higher-direct-image-zero) (1); Tag 03Q1 (lemma-stalk-pullback) (3); Tag 03PT (lemma-stalk-exact); blueprint proof, first paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "The scheme $Y$ is of finite type over $k$: take a finite affine cover $\\operatorname{Spec}A_i$ of $X$ by finitely generated $k$-algebras; its inverse images are $\\operatorname{Spec}B_i$ with $B_i$ finite as an $A_i$-module. The generators of $A_i$ over $k$ together with a finite set of module generators of $B_i$ generate $B_i$ as a $k$-algebra. This verifies the finite-type source needed in $\\mathcal C(f\\pi)$ directly from [def-weil-pbc-scheme-conventions]. Put $Q_0=F$. Given constructible $Q_a$, its pullback $\\pi^*Q_a$ is constructible by [prop-constructible-pullback], so $G^a=\\pi_*\\pi^*Q_a$ is constructible by [lem-fin-finite-morphism]. Put $Q_{a+1}=\\operatorname{coker}\\eta_{Q_a}$; it is constructible by [thm-constructible-serre]. This defines constructible $Q_a,G^a$ for every $a\\geq0$ by induction. Define $d^a:G^a\\to G^{a+1}$ to be the quotient onto $Q_{a+1}$ followed by its monomorphic unit. Thus $\\ker d^a=\\operatorname{im}(Q_a\\to G^a)$, whereas $\\operatorname{im}d^{a-1}=\\operatorname{im}(Q_a\\to G^a)$ for $a>0$, since $G^{a-1}\\to Q_a$ is an epimorphism. For $a=0$ the same kernel is the image of $F$. Consequently $d^{a+1}d^a=0$ and $0\\to F\\to G^0\\to G^1\\to\\cdots$ is exact. Extend $G^\\bullet$ by zero in negative degrees; the augmentation $F[0]\\to G^\\bullet$ is a quasi-isomorphism.",
+   "text": "For each constructible Q, let G = pi^* Q. The theorem [prop-constructible-pullback] gives constructibility of G. Apply [lem-fin-finite-morphism] to pi with coefficient hypothesis hX, and convert by [lem-weil-pbc-constructible-etale-module-sheaf-comparison], to get constructibility of pi_*G. The unit Q -> pi_*G is monic by [lem-weil-pbc-finite-surjective-unit-mono], realized on module sheaves by the proved source theorem mono_unit_app_of_surjective (which needs only surjectivity).",
    "uses": [
     "prop-constructible-pullback",
     "lem-fin-finite-morphism",
-    "thm-constructible-serre",
-    "def-weil-pbc-scheme-conventions"
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "lem-weil-pbc-finite-surjective-unit-mono"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 095G (lemma-pullback-constructible); Tag 095R (lemma-finite-pushforward-constructible); Tag 03RZ (lemma-constructible-abelian); blueprint proof, first two paragraphs"
-   }
+   "elementary": false
   },
   {
-   "text": "For each $a$, apply [lem-weil-pbc-grothendieck-spectral-sequence] to $Y\\xrightarrow{\\pi}X\\xrightarrow f S$ and the constructible module sheaf $\\pi^*Q_a$. Its page is $E_2^{b,q}=R^bf_*(R^q\\pi_*(\\pi^*Q_a))$. By [lem-fin-finite-morphism], the rows $q>0$ vanish. In the remaining row there are no incoming or outgoing differentials from page two on. The finite filtration of the degree-$b$ abutment supplied by the cited spectral sequence has a single nonzero graded piece, $E_2^{b,0}$; hence $R^bf_*G^a\\cong R^b(f\\pi)_*(\\pi^*Q_a)$ for every $b\\geq0$. Only vanishing for the particular constructible sheaves $\\pi^*Q_a$ has been used; no assertion of exactness of $\\pi_*$ on arbitrary sheaves is taken from [lem-fin-finite-morphism].",
+   "text": "Finite direct image is exact by [lemma-weil-pbc-finite-direct-image-exact]. Form the explicit three-factor isomorphism: apply Rf_* to the inverse of the single-sheaf compatibility for exact pi_*, then to the inverse of rightDerivedFunctorLowerStarIsoMapDerivedCategory, and finally compose with rightDerivedLowerStarComp. This identifies Rf_*((pi_*G)[0]) with R(pi f)_*(G[0]). These are the existing exact-derived and canonical derived compositor interfaces; their composition is written in the Lean proof, rather than deduced from a spectral sequence. The hypothesis from step 1 gives constructible homology on the right, and invariance under isomorphism transfers it to the left.",
    "uses": [
-    "lem-weil-pbc-grothendieck-spectral-sequence",
-    "lem-fin-finite-morphism"
+    "lemma-weil-pbc-finite-direct-image-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-finite-surjection-cancellation.md",
-    "place": "Proof, third paragraph: composition spectral sequence, with the row-collapse argument written out"
-   }
+   "elementary": false
   },
   {
-   "text": "Work in $\\Mod(X_{\\Et},\\Lambda)$ and $\\Mod(S_{\\Et},\\Lambda)$, which are Grothendieck abelian by [lem-weil-pbc-module-sheaves-grothendieck-abelian]; the source has enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives]. The functor $f_*$ is additive and left exact on these module categories by [def-weil-pbc-direct-image]. Apply [lem-sp-cartan-eilenberg-exists] to the nonnegative complex $G^\\bullet$ of step 2. Apply [thm-sp-if-e1] to this Cartan--Eilenberg resolution and $v=f_*$, exchanging its indices $(r,s)=(b,a)$. This gives $E_1^{a,b}=R^bf_*G^a\\Longrightarrow\\mathcal H^{a+b}(Rf_*G^\\bullet)$ for $a,b\\geq0$. Since step 2 identifies $G^\\bullet$ with $F[0]$ in the derived category, the derived functor of [def-weil-pbc-direct-image] identifies the abutment with $R^{a+b}f_*F$. The differential convention after exchanging indices is $d_r:E_r^{a,b}\\to E_r^{a+r,b-r+1}$.",
+   "text": "Apply [lem-finrepair-constructible-direct-images-from-embeddings] to the embeddings of step 2 and the good direct images of step 3. This is the already-proved finite-order version of the blueprint resolution argument; it yields HasConstructibleDirectImages Lambda f without a full Cartan--Eilenberg spectral sequence or any uniform vanishing bound.",
    "uses": [
-    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
-    "lem-weil-pbc-module-sheaves-enough-injectives",
-    "def-weil-pbc-direct-image",
-    "lem-sp-cartan-eilenberg-exists",
-    "thm-sp-if-e1"
+    "lem-finrepair-constructible-direct-images-from-embeddings"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015I (lemma-cartan-eilenberg), with homology.tex Tag 0130 (lemma-ss-double-complex); blueprint proof, fourth paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "By the hypothesis $\\mathcal C(f\\pi)$, interpreted exactly as [def-finrepair-property-c], the sheaves $R^b(f\\pi)_*(\\pi^*Q_a)$ are constructible for all $a,b\\geq0$, since every $\\pi^*Q_a$ is constructible. By the isomorphisms of step 3, all the terms of the $E_1$ page of step 4 are therefore constructible.",
+   "text": "For each natural q and constructible F on X, use [lem-weil-pbc-constructible-etale-module-sheaf-comparison] on F, evaluate the conclusion of step 4, transport backwards across [src-right-derived-functor-plus-compatibility], and convert constructibility back. The result is precisely HasConstructibleHigherDirectImages with every original hypothesis retained.",
    "uses": [
-    "def-finrepair-property-c"
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "src-right-derived-functor-plus-compatibility"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-finite-surjection-cancellation.md",
-    "place": "Proof, fourth paragraph: use of the hypothesis"
-   }
-  },
-  {
-   "text": "Use [thm-constructible-serre] to pass inductively from one constructible page to the next: the kernel of each differential and its image are constructible (the image is the kernel of its cokernel), and the quotient of the kernel by the incoming image is constructible by the cokernel clause. Outside $a,b\\geq0$ every term is zero. At $(a,b)$ an incoming differential has source $(a-r,b+r-1)$ and an outgoing one has target $(a+r,b-r+1)$; both vanish when $r>\\max(a,b+1)$, so the stable term is constructible. The convergence assertion of [thm-sp-if-e1], with the conventions [def-sp-convergence], gives the abutment filtration; here it is finite, because in degree $n$ the first-quadrant total complex and its filtration have only the summands $a+b=n$ with $0\\leq a\\leq n$. Thus $R^nf_*F$ has a finite filtration whose quotients are the constructible $E_\\infty^{a,n-a}$. Starting with its zero final step and using the extension clause of [thm-constructible-serre] repeatedly shows that $R^nf_*F$ is constructible. Since $F$ and $n\\geq0$ were arbitrary, this is $\\mathcal C(f)$. The proof uses only finitely many filtration pieces in each degree and asserts no uniform vanishing bound.",
-   "uses": [
-    "thm-constructible-serre",
-    "thm-sp-if-e1",
-    "def-sp-convergence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0130 (lemma-ss-double-complex), lemma-first-quadrant-ss; etale-cohomology.tex Tag 03RZ (lemma-constructible-abelian); blueprint proof, final paragraph"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lemma-weil-pbc-finite-stalk-formula",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "prop-weil-pbc-geometric-stalks-exact",
-  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "src-right-derived-functor-plus-compatibility",
   "prop-constructible-pullback",
   "lem-fin-finite-morphism",
-  "thm-constructible-serre",
-  "def-weil-pbc-scheme-conventions",
-  "lem-weil-pbc-grothendieck-spectral-sequence",
-  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "def-weil-pbc-direct-image",
-  "lem-sp-cartan-eilenberg-exists",
-  "thm-sp-if-e1",
-  "def-finrepair-property-c",
-  "def-sp-convergence"
+  "lem-weil-pbc-finite-surjective-unit-mono",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-finrepair-constructible-direct-images-from-embeddings"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-finite-surjection-cancellation.md",
-  "place": "## Proof"
+  "group": "B7",
+  "date": "2026-10-18",
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/Finiteness/ConstructibleDirectImage.lean",
+  "place": "Reuse the proved hasConstructibleDirectImages_of_exists_mono resolution principle; supply the finite-cover unit, finite constructible pushforward, and explicit exact-derived composition isomorphism."
  },
  "mathlib_searches": [
   {
@@ -225,15 +179,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "thm-constructible-serre",
-  "lem-weil-pbc-grothendieck-spectral-sequence",
-  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "lem-sp-cartan-eilenberg-exists",
-  "thm-sp-if-e1"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
@@ -259,5 +205,15 @@
   "group": "NK",
   "result": "pass",
   "note": "Wrote review.md. Checked immutable files, source passages, exact declarations, hypotheses, conclusions, edge cases, dependency records, verbatim signature, docstrings, and report sections. Server-only compilation passed in 2.8 seconds without warnings or errors. No delivery errors found; no repository or branch changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261018T062704-L-632138",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
