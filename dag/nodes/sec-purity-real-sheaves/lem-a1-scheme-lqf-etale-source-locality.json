@@ -287,5 +287,23 @@
   "group": "N1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-54b7fdc65 (reviewer sub-agent of L); spot-checked: I read the whole delivery against Stacks Descent 03X4 (l.6964), 02KL (l.4385) and 0367 (l.4352), and Morphisms 01TK (l.3839), 02NH and 01TJ, and checked the candidates in Mathlib's QuasiFinite.lean and LocalFlatDescent.lean. The item statement is unchanged and agrees with 03X4. New node lem-a1-scheme-lqf-affine-criterion is 01TK (1)<=>(2)<=>(3), with Stacks' quasi-finite ring map correctly written out (Mathlib's LocallyQuasiFinite omits finite type, so it is not a leaf). New node lem-a1-lft-flat-lfp-source-descent is exactly the locally-of-finite-type alternative of 02KL. Both are statement-only and self-contained, neither restates a clause of the item, and an rg search of the DAG for these tags and statements found no duplicates. Steps 2 to 7 are correct, and every cited statement says what the step takes from it (00U5, 00PO, 0218, 01TH(4), 01SH, 01S7, 01TJ, 02NH, 01T2, 01TK(3)). FIX: step 1 claimed the same affine presentations witness local finite presentation of the restriction A->B, but they need not lie inside A and B. I rewrote it with the standard-open shrinking D(r) and D(a), using that A'_a = A'_a tensor_R R_r is finitely presented over R_r; the uses, proof_deps and statement are unchanged. I accept all five declared tool_uses as generic black boxes. Batch-5 check: lem-trf-quasi-finite-composition is Stacks 00PO, pure commutative algebra. Its whole closure is 9 nodes (defs plus lem-weil-pbc-fibre-ring-primes-bijection) and none is a trace-formula or Poincare-duality step. Neither assumption leaf states it and there is no other 00PO node to repoint to, so it is genuinely outside the assumed statements and not a RETURN cause. Edge cases tested: empty U (m=0), an open immersion that is not surjective, an infinite disjoint union of identities (p not quasi-compact), and A^1_k. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IsLocallyQuasiFiniteEtaleSource",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.isLocallyQuasiFinite_etale_source",
+  "file": "lean/Sheaf/AlgebraicGeometry/IsLocallyQuasiFiniteEtaleSource.lean",
+  "statement": "theorem isLocallyQuasiFinite_etale_source {U V T : Scheme.{u}} (p : U ⟶ V) (g : V ⟶ T) [Etale p] : (IsLocallyQuasiFinite g → IsLocallyQuasiFinite (p ≫ g)) ∧ (Function.Surjective p → IsLocallyQuasiFinite (p ≫ g) → IsLocallyQuasiFinite g)",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-9f388ab9e",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Statement, dependencies, source proof outline, docstrings, edge cases, report sections, and route-pivot constraints checked; per-file scompile succeeded."
  }
 }

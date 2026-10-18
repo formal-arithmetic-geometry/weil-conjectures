@@ -32,7 +32,9 @@
   "def-constructible-stratification",
   "def-sfb-module-open-lower-shriek",
   "sk-def-sfb-module-pushforward-pullback",
-  "sk-def-sfb-derived-categories"
+  "sk-def-sfb-derived-categories",
+  "det-lem-coefficient-heart-common-stratification",
+  "det-lem-coefficient-heart-filtration"
  ],
  "proof": [
   {
@@ -442,5 +444,30 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientHeart",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientHeart",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CoefficientHeartCurveAssertions",
+   "AlgebraicGeometry.ProEtale.CoefficientHeartFiltrationAssertions",
+   "AlgebraicGeometry.ProEtale.CoefficientHeartExtensionAssertions",
+   "AlgebraicGeometry.ProEtale.CoefficientHeartAssertions",
+   "AlgebraicGeometry.ProEtale.coefficientHeart"
+  ],
+  "file": "lean/Sheaf/Paper/CoefficientHeart.lean",
+  "statement": "theorem coefficientHeart (ℓ : ℕ) [Fact ℓ.Prime] (L : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1}) [IsCommMonObj (coefficientHeartRingObj L)] (hL : (∃ E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ), FiniteDimensional ℚ_[ℓ] E ∧ L = Profinite.padicSubfieldCondensedRing ℓ E) ∨ L = Profinite.padicAlgClCondensedRing ℓ) (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpℓ : p ≠ ℓ) (X : Scheme.{u}) [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] : @CoefficientHeartAssertions (coefficientHeartRingObj L) _ _ X { toIsLocallyNoetherian := LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k)) toCompactSpace := QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k)) }",
+  "branch": "newtargets-dag",
+  "by": "Q37",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-06a6f1425",
+  "group": "Q37",
+  "result": "pass",
+  "note": "Reviewed immutable node, source, dependencies, Lean module, docstrings, edge cases, route-pivot compliance, scompile evidence, and report sections; no defects found. Wrote review.md."
  }
 }
