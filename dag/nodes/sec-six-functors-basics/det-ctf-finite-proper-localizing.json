@@ -647,5 +647,35 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2ebc27823",
+  "group": "Q80",
+  "result": "fix",
+  "note": "Statement matches node clause by clause: standing hypotheses (prime l, char p>0, p!=l, separated finite type over k, k-morphisms), finite A with l^n*1=0, canonical finite discrete condensed coefficient, Dctf = recorded constantModelBoundedConstructible ⊓ finiteTorAmplitude (the closure's own generating set), Loc = recorded localizingClosureProEtale, sum index Type (u+2) = the derived category's object universe (verified) = the closure's universe. Clauses (1), (2) (arbitrary g, X' and Y' standing) and (3) (open and compactification) present; edge cases covered. Fixes: H4 the private derivedPullbackSquareComparison/derivedBaseChangeMate duplicated the recorded condensedAmbientExchange (def-weil-pbc-ambient-ringed-exchange, already in the delivery base), which clause (2) now uses; H9 unused ModuleObject.Derived.LowerShriek import and now-unused SquareTransport import removed; H8 blueprint tags on all declarations and the node's proof steps in the four theorem docstrings; lean.declarations completed with the coefficient helper and its instances, statement verbatim unchanged. Delivered file: clean in 79 s with a longer limit, after a 60 s timeout at load ~140; fixed file: clean with the official nt_compile.py in 23.0 s. merge_delivery.py dry run not possible as reviewer."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteProperLocalizing",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteProperLocalizing",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteDiscreteCondensedCoefficient",
+   "AlgebraicGeometry.ProEtale.finiteDiscreteCondensedCoefficient_monObj",
+   "AlgebraicGeometry.ProEtale.finiteDiscreteCondensedCoefficient_isCommMonObj",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientLocalizingProperties",
+   "AlgebraicGeometry.ProEtale.finiteProperLocalizing",
+   "AlgebraicGeometry.ProEtale.finiteProperLocalizing_baseChange",
+   "AlgebraicGeometry.ProEtale.finiteOpenLocalizing",
+   "AlgebraicGeometry.ProEtale.finiteCompactificationLocalizing"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteProperLocalizing.lean",
+  "statement": "theorem finiteProperLocalizing (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsProper f] : finiteCoefficientLocalizingProperties (finiteDiscreteCondensedCoefficient A) (f)_*⟦finiteDiscreteCondensedCoefficient A⟧.rightDerivedFunctor",
+  "branch": "newtargets-dag",
+  "by": "Q80",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Repair of immutable head 06017eb8b8c4: all clauses now use the recorded constant-model finite-Tor predicate and localizingClosureProEtale over the canonical finite discrete condensed coefficient. The base-change clause uses a ChosenCartesianSquare and the actual condensed unit/square/counit mate; open and compactification clauses retain the four-theorem split. Reviewer fix (H4, H8, H9): the private derivedPullbackSquareComparison/derivedBaseChangeMate duplicated the recorded ambient exchange of def-weil-pbc-ambient-ringed-exchange (Sheaf.Paper.CondensedAmbientExchange.condensedAmbientExchange, the same unit/square/counit mate of the same composition comparisons and derived adjunctions); clause (2) now states IsIso of that recorded map. The unused import ModuleObject.Derived.LowerShriek and the SquareTransport import are dropped; every declaration carries (blueprint: det-ctf-finite-proper-localizing) and the theorem docstrings carry the node's proof steps; the coefficient helper and its instances are listed in declarations.",
+  "fixed_by": "NT-stage2-cc-2ebc27823"
  }
 }

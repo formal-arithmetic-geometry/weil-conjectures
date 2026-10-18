@@ -370,5 +370,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4d98e3d66",
+  "group": "Q41",
+  "result": "pass",
+  "note": "Delivery 4d98e3d66f touches only the module, the node lean field and the report. The H13/H4 return is repaired: CoefficientHeartContinuous removed, sk-lem-coefficient-heart record untouched. Every clause matches the node: ℓ, char p≠ℓ, X and Z separated finite type over k, closed k-immersion, Λ=E or Q̄_ℓ in the all-continuous convention of IsLocalizingAdmissibleCoefficient, recorded Dbc, localizingClosureProEtale, localizingLowerShriek ⊣ G, recorded formalClosedSupport right derived functor with canonical adjunction. Input and support membership are conclusions; NatIso in C_Z over all of Dbc; counit equation in the node direction, verified true for every normalization iso `closed`. Edge cases (K=0, empty schemes, i=id, empty complement, both branches) and the single universe u checked. No definitions; sorry only; docstrings carry source, blueprint id and 4 proof steps; lean.statement verbatim. nt_compile --json rc 0 in 13.9 s with no warnings; probe #print axioms shows sorryAx and standard axioms. Non-blocking stage-3 note: proof step 1's Dbc=Dctf citation uses a coefficient-heart Lean with the finite-subextension Q̄_ℓ object."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ClosedAdjointConstructibleYoneda",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.closedAdjointConstructibleYoneda",
+  "file": "lean/Sheaf/Paper/ClosedAdjointConstructibleYoneda.lean",
+  "statement": "theorem closedAdjointConstructibleYoneda (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpℓ : p ≠ ℓ) {X Z U : Scheme.{u}} [X.Over (Spec (.of k))] [Z.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Z ↘ Spec (.of k))] [QuasiCompact (Z ↘ Spec (.of k))] [IsSeparated (Z ↘ Spec (.of k))] (i : Z ⟶ X) [IsClosedImmersion i] [i.IsOver (Spec (.of k))] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] (hij : Set.range i.base = (Set.range j.base)ᶜ) (E : PadicAlgCl.FiniteIntermediateField ℓ) (_hΛ : Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E)) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj (PadicAlgCl ℓ)))) (c : Compactification.BoundaryCompactification i) (h : ∀ K, localizingClosureProEtale Λ Z K → localizingClosureProEtale Λ X ((rightDerivedLowerShriekOfCompactification Λ c.obj.obj).obj K)) (G : (localizingClosureProEtale Λ X).FullSubcategory ⥤ (localizingClosureProEtale Λ Z).FullSubcategory) (adj : localizingLowerShriek Λ c.obj.obj h ⊣ G) (closed : localizingLowerShriek Λ c.obj.obj h ⋙ (localizingClosureProEtale Λ X).ι ≅ (localizingClosureProEtale Λ Z).ι ⋙ (lowerStar Λ i).mapDerivedCategory) (support : FormalClosedSupportAssertions Λ i j hij) : ∃ (hK : ∀ K : ConstantModelBoundedConstructible Λ X, localizingClosureProEtale Λ X K.obj) (hS : ∀ K : ConstantModelBoundedConstructible Λ X, localizingClosureProEtale Λ Z ((formalClosedSupport Λ i j).rightDerivedFunctor.obj K.obj)), ∃ e : ((localizingClosureProEtale Λ X).lift (constantModelBoundedConstructible Λ X).ι hK) ⋙ G ≅ (localizingClosureProEtale Λ Z).lift ((constantModelBoundedConstructible Λ X).ι ⋙ (formalClosedSupport Λ i j).rightDerivedFunctor) hS, ∀ K : ConstantModelBoundedConstructible Λ X, (lowerStar Λ i).mapDerivedCategory.map ((localizingClosureProEtale Λ Z).ι.map (e.hom.app K)) ≫ support.rightAdjoint.counit.app K.obj = closed.inv.app (G.obj (((localizingClosureProEtale Λ X).lift (constantModelBoundedConstructible Λ X).ι hK).obj K)) ≫ (localizingClosureProEtale Λ X).ι.map (adj.counit.app (((localizingClosureProEtale Λ X).lift (constantModelBoundedConstructible Λ X).ι hK).obj K))",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

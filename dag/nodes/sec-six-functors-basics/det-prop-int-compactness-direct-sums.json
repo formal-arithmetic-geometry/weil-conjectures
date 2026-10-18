@@ -541,5 +541,27 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c507518c4",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Read node, all 15 stmt-dep lean records, the module, report and the exact declarations used (IntegralConstructibleCompactness, LocalizingClosureExistence, CondensedConstantConstructibility, lowerStar/rightDerivedFunctor, padicIntegersRingObj, ObjectProperty.ind). Clause by clause, the Lean matches the node: setting binders as in sk-def-sfb-dc-setting; IsProper p over k; geometric-fibre bound via pullback over an algebraic closure of each residue field (empty fibre allowed); Rp_* = lowerStar.rightDerivedFunctor; Cons/Dbc from the recorded predicates; IndCons = H.ind.{u+1}, Dic and Loc as in the compactness and localizing-closure nodes; clause 1 bounds [0,2d+1]; clause 2 has both actual truncation arrows inducing H^q isos and sums preserved via a colimit cofan mapped to a colimit; clause 3 has Loc preservation and sums. Edge cases (empty family, zero object, d=0, unbounded below, universes) are covered; no stronger hypotheses. lean.statement is verbatim and the node diff is lean-only. Only sorry is the item theorem; helper Prop is real; docstrings have source and blueprint and the 11-step plan. Report has a real Worker report; the Second reading section has the accepted 2026-10-17 placeholder. nt_compile --json is clean (11.5 s, exit 0, no warnings). No findings."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralProperDirectSums",
+  "declaration": "AlgebraicGeometry.ProEtale.integralProperDirectSums",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralProperDirectImageAssertions",
+   "AlgebraicGeometry.ProEtale.integralProperDirectSums"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralProperDirectSums.lean",
+  "statement": "theorem integralProperDirectSums (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (k : Type u) [Field k] (p₀ : ℕ) [CharP k p₀] (hp₀ : 0 < p₀) (hpℓ : p₀ ≠ ℓ) (X Y : Scheme.{u}) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (p : X ⟶ Y) [p.IsOver (Spec (.of k))] [IsProper p] (d : ℕ) (hd : ∀ y : Y, topologicalKrullDim (pullback p (Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫ Y.fromSpecResidueField y) : Scheme.{u}) ≤ (d : WithBot ℕ∞)) : IntegralProperDirectImageAssertions (IsConstantModelConstructible (Profinite.padicIntegersRingObj ℓ E) X) (IsConstantModelConstructible (Profinite.padicIntegersRingObj ℓ E) Y) (constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E) X) (constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E) Y) (CondensedRing.lowerStar (Profinite.padicIntegersRingObj ℓ E) p).rightDerivedFunctor d",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

@@ -207,5 +207,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6d6b70512",
+  "group": "NR",
+  "result": "pass",
+  "note": "Commit 6d6b705 adds only the report, the item's lean record (node diff is lean-only) and Sheaf/Paper/FiniteWindow.lean; lean.statement is verbatim in the file. Clause-by-clause match against node and blueprint _section/proof: X arbitrary Scheme.{u}; ℓ prime; E a finite intermediate field of PadicAlgCl ℓ; Λ=E via continuousMapRingObj E and Λ=Q̄ℓ via padicAlgClRingObj ℓ in two theorems; Λ_X through pulledBackModuleObjects on Scheme.ProEt.topology; C with IsConstantModelConstructible; d_C:ℕ with the uniform Ext bound as hypothesis, identical to landed det-finite-window-unbounded and not stronger than the node; Dic as ∀q ind.{u+1}(Cons)(homologyFunctor q K); window truncGE(m-d_C)∘truncLE m with shift ⟦m⟧; C placed in degree 0 via singleFunctor 0. FiniteWindowAssertions is a Prop helper with no chosen data: the first equation e(a_K f)=b_K f pins e to b∘a⁻¹, the second gives naturality on all ambient morphisms of Dic. Edge cases (empty X, C=0, K=0, d_C=0, any m, unbounded K, E=Qℓ) covered; universes generic. Only proofs are sorry; source/blueprint docstrings with proof steps; no duplicate declarations. nt_compile --json: 45.8 s, rc 0, no errors or warnings. Second-reading section is the standard 2026-10-17 direct-delivery notice. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteWindow",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteWindow",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FiniteWindowAssertions",
+   "AlgebraicGeometry.ProEtale.finiteWindow",
+   "AlgebraicGeometry.ProEtale.finiteWindow_padicAlgCl"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteWindow.lean",
+  "statement": "theorem finiteWindow (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (X : Scheme.{u}) (C : pulledBackModuleObjects (Profinite.continuousMapRingObj E) X) (hC : IsConstantModelConstructible (Profinite.continuousMapRingObj E) X C) (d_C : ℕ) (hExt : ∀ N : pulledBackModuleObjects (Profinite.continuousMapRingObj E) X, IsConstantModelConstructible (Profinite.continuousMapRingObj E) X N → ∀ r : ℕ, d_C < r → Subsingleton (@Abelian.Ext _ _ _ (HasExt.standard _) C N r)) (m : ℤ) : FiniteWindowAssertions C (fun K ↦ ∀ q : ℤ, ObjectProperty.ind.{u + 1} (IsConstantModelConstructible (Profinite.continuousMapRingObj E) X) ((DerivedCategory.homologyFunctor _ q).obj K)) d_C m",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Two statements cover the finite-extension and algebraic-closure coefficients. The subtype indexing the additive equivalences is exactly the object class Dic in the ambient ordinary unbounded derived category. The first equation characterizes the canonical truncation zigzag, and the second asserts naturality in every ambient morphism of Dic objects. The uniform Ext bound is an explicit hypothesis, as in the already stated lower-tail lemma; no geometric restrictions on X or boundedness of K are imposed. FiniteWindowAssertions transparently packages the equivalence family and its two equations over an arbitrary abelian category, avoiding repetition of the large coefficient-category expression during compiled-module export. It contains only the exact conclusion and no chosen data."
  }
 }
