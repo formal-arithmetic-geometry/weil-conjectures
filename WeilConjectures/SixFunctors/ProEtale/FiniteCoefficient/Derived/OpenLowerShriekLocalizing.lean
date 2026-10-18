@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Triangulated.LocalizingClosure
+public import WeilConjectures.CategoryTheory.Triangulated.LocalizingClosureGeneration
 public import WeilConjectures.SixFunctors.Etale.Derived.Stability.OpenImmersion
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.OpenCover
@@ -87,7 +87,7 @@ coproducts, and maps the localizing closure `Loc(Dctf(U, Λ))` into `Loc(Dctf(X,
 restricts to a triangulated, coproduct-preserving functor between them, the triangulated
 structures and coproducts of the localizing closures being the ambient ones). The last part is
 the principle `det-proper-image-localizing-principle`
-(`CategoryTheory.ObjectProperty.localizingClosure_obj`), applied to the triangulated functor
+(`CategoryTheory.ObjectProperty.localizingClosure_obj_of_le`), applied to the triangulated functor
 `j_!`. This is the finite-coefficient case of the blueprint statement, for which `Dctf` is
 `AlgebraicGeometry.ProEtale.DerivedCategory.constructibleFiniteTor`. -/
 theorem localizingClosure_constructibleFiniteTor_openImmersionLowerShriek :
@@ -96,15 +96,15 @@ theorem localizingClosure_constructibleFiniteTor_openImmersionLowerShriek :
         ((D(ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j)).obj K)) ∧
     (∀ J : Type (u + 1), PreservesColimitsOfShape (Discrete J)
       (D(ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j))) ∧
-    (∀ K, (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) U).localizingClosure.{u + 1}
-        K →
-      (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X).localizingClosure.{u + 1}
+    (∀ K, (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) U).localizingClosure K →
+      (DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) X).localizingClosure
         ((D(ProEtale.openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j)).obj K)) := by
   have h₁ := fun K (hK : DerivedCategory.constructibleFiniteTor (ModuleCat.{u + 1} Λ) U K) ↦
     DerivedCategory.constructibleFiniteTor_mapDerivedCategory_openImmersionLowerShriek Λ j hK
   have h₂ := preservesColimitsOfShape_mapDerivedCategory_openImmersionLowerShriek Λ j
   refine ⟨h₁, h₂, fun K hK ↦ ?_⟩
-  exact ObjectProperty.localizingClosure_obj _ _
-    (fun K hK ↦ ObjectProperty.le_localizingClosure _ _ (h₁ K hK)) hK
+  have := h₂
+  exact ObjectProperty.localizingClosure_obj_of_le _ _ _
+    (fun K hK ↦ ObjectProperty.le_localizingClosure _ _ (h₁ K hK)) K hK
 
 end AlgebraicGeometry.ProEtale

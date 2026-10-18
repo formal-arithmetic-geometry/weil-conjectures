@@ -7,17 +7,11 @@ Authors: Bin Wu
 module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleTensorSectionsSheaf
-public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+public import WeilConjectures.AlgebraicGeometry.Sites.ArtinSchreier
 public import Mathlib.Algebra.Category.Grp.Ulift
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
-import WeilConjectures.AlgebraicGeometry.EtaleQuasiCoherentDescent
-import WeilConjectures.RingTheory.LocalRing.ArtinSchreierKernel
-import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.AlgebraicGeometry.ArtinSchreierData
-import WeilConjectures.AlgebraicGeometry.ArtinSchreierExact
+import WeilConjectures.AlgebraicGeometry.ArtinSchreierDataConstruction
 
 /-!
 # The Artin–Schreier sequence
@@ -37,7 +31,28 @@ namespace AlgebraicGeometry
 
 set_option autoImplicit false
 
-/-- The Artin–Schreier sequence, with its sectionwise maps specified.
+/-- Two étale sheaves of abelian groups whose sections are identified with the global functions,
+compatibly with restriction, are isomorphic. -/
+private noncomputable def sheafIsoOfSectionsEquiv {C : Scheme.{u}}
+    (G H : Sheaf C.smallEtaleTopology AddCommGrpCat.{u + 1})
+    (a : ∀ U : C.Etaleᵒᵖ, G.obj.obj U ≃+ Γ(U.unop.left, ⊤))
+    (b : ∀ U : C.Etaleᵒᵖ, H.obj.obj U ≃+ Γ(U.unop.left, ⊤))
+    (ha : ∀ (U V : C.Etaleᵒᵖ) (g : U ⟶ V) (x : G.obj.obj U),
+      a V (G.obj.map g x) = g.unop.left.appTop (a U x))
+    (hb : ∀ (U V : C.Etaleᵒᵖ) (g : U ⟶ V) (x : H.obj.obj U),
+      b V (H.obj.map g x) = g.unop.left.appTop (b U x)) :
+    G ≅ H :=
+  (fullyFaithfulSheafToPresheaf _ _).preimageIso
+    (NatIso.ofComponents (fun U ↦ ((a U).trans (b U).symm).toAddCommGrpIso) fun {U V} g ↦ by
+      ext x
+      apply (b V).injective
+      change b V ((b V).symm (a V (G.obj.map g x))) = b V (H.obj.map g ((b U).symm (a U x)))
+      rw [AddEquiv.apply_symm_apply, ha, hb, AddEquiv.apply_symm_apply])
+
+/-- The Artin–Schreier sequence `0 → ℤ/p → 𝔾ₐ → 𝔾ₐ → 0` on a curve over an algebraically closed
+field of characteristic `p`, with its sectionwise maps specified. It is the sequence
+`Scheme.artinSchreierSequence` of `AlgebraicGeometry.Sites.ArtinSchreier`, with `G = 𝔾ₐ`
+(`Scheme.gaSheaf`), `wp = ℘` (`Scheme.gaArtinSchreier`) and `iota = Scheme.constantZModToGaSheaf`.
 Source: Stacks Project, Étale Cohomology, Section 0A3J, and blueprint
 `lem-sc-as-sequence` (blueprint: lem-sc-as-sequence).
 
@@ -46,23 +61,10 @@ structure-module sheaf. The natural additive equivalences `a` identify its
 sections with global functions, including their restriction maps. The equation
 on the sheafification unit specifies the unique extension of `c ↦ c • 1`.
 
-Proof:
-1. In characteristic p, Frobenius minus the identity is additive and natural.
-   The constant-presheaf map factors uniquely through sheafification
-   (def-weil-pbc-sheafification, def-sc-constant-sheaves), using quasi-coherent
-   descent (lem-sc-etale-qcoherent-descent). Fermat gives the zero composite.
-2. Locally adjoin a root of `T^p-T-f`. Its derivative is -1, so the resulting
-   cover is étale (lem-weil-pbc-standard-etale-monic-derivative), and its
-   geometric fibres are nonempty (lem-weil-pbc-surjective-nonempty-fibres).
-   Local surjectivity gives epimorphy (lem-weil-pbc-abelian-sheaf-epi-locally-surjective).
-3. Exact geometric stalks (prop-weil-pbc-geometric-stalks-exact) identify the
-   kernel with the elements satisfying `x^p=x`. In a local ring these are
-   precisely the prime-field constants (lem-sc-local-ring-artin-schreier-kernel).
-   The constant sheaf has stalk `ZMod p` (lem-weil-pbc-constant-sheaf-geometric-stalk);
-   constants inject since the pointed neighbourhood rings are nonzero.
-4. Conservativity (lemma-weil-pbc-geometric-stalk-conservative) identifies the
-   kernel sheaf with the constant sheaf. With epimorphy and the zero composite,
-   this is short exact (def-weil-pbc-exact-sequence). -/
+Proof: `p` is prime and vanishes in `Γ(C, 𝒪_C)`. The sequence `ker ℘ → 𝔾ₐ → 𝔾ₐ` is short exact
+(`Scheme.artinSchreierSequence_shortExact`), and `ℤ/p → ker ℘` is an isomorphism
+(`Scheme.isIso_constantZModToKernelGaArtinSchreier`). The sections of `𝔾ₐ` and of the lifted
+structure-module sheaf are both the global functions, compatibly with restriction. -/
 theorem artinSchreier_shortExact
     {k : Type u} [Field k] [IsAlgClosed k]
     {C : Scheme.{u}} (f : C ⟶ Spec (.of k)) [IsCurve f]
@@ -84,9 +86,34 @@ theorem artinSchreier_shortExact
               (AddCommGrpCat.of (ULift.{u + 1} (ZMod p))))).app U (ULift.up c))) =
           (c.val : Γ(U.unop.left, ⊤))) ∧
       ShortComplex.ShortExact (ShortComplex.mk iota wp hzero) := by
-  obtain ⟨G, hG, a, wp, iota, hzero, hrestr, hwp, hiota⟩ :=
-    artinSchreier_data f p hp
-  refine ⟨G, hG, a, wp, iota, hzero, hrestr, hwp, hiota, ?_⟩
-  exact artinSchreier_data_shortExact f p hp G hG a wp iota hzero hrestr hwp hiota
+  have : NeZero p := ⟨hp.ne'⟩
+  have : Fact p.Prime := CharP.char_is_prime_of_pos k p
+  have hk : ((p : ℕ) : Γ(Spec (.of k), ⊤)) = 0 := by
+    rw [← map_natCast (Scheme.ΓSpecIso (CommRingCat.of k)).inv.hom, CharP.cast_eq_zero k p,
+      map_zero]
+  have hp0 : ((p : ℕ) : Γ(C, ⊤)) = 0 := by
+    rw [← map_natCast f.appTop.hom, hk, map_zero]
+  obtain ⟨G', hG', a', ha'⟩ := artinSchreier_construction C
+  let a : ∀ U : C.Etaleᵒᵖ, C.gaSheaf.obj.obj U ≃+ Γ(U.unop.left, ⊤) := fun _ ↦ AddEquiv.ulift
+  have ha : ∀ (U V : C.Etaleᵒᵖ) (g : U ⟶ V) (x : C.gaSheaf.obj.obj U),
+      a V (C.gaSheaf.obj.map g x) = g.unop.left.appTop (a U x) := fun _ _ _ _ ↦ rfl
+  let θ := C.constantZModToKernelGaArtinSchreier p hp0
+  have : IsIso θ := C.isIso_constantZModToKernelGaArtinSchreier p hp0
+  refine ⟨C.gaSheaf, sheafIsoOfSectionsEquiv _ _ a a' ha ha' ≪≫ hG', a,
+    C.gaArtinSchreier p hp0, C.constantZModToGaSheaf p hp0,
+    C.constantZModToGaSheaf_comp_gaArtinSchreier p hp0, ha, fun _ _ ↦ rfl, fun U c ↦ ?_, ?_⟩
+  · change ULift.down (α := Γ(U.unop.left, ⊤)) (((toSheafify _ _ ≫
+      (C.constantZModToGaSheaf p hp0).hom).app U) (ULift.up c)) = _
+    rw [C.toSheafify_constantZModToGaSheaf p hp0]
+    refine (C.zmodToGaPresheaf_app_apply p hp0 U c).trans ?_
+    conv_lhs => rw [← ZMod.natCast_zmod_val c]
+    rw [map_natCast, map_natCast]
+  · refine ShortComplex.shortExact_of_iso ?_ (C.artinSchreierSequence_shortExact p hp0)
+    refine ShortComplex.isoMk (asIso θ).symm (Iso.refl _) (Iso.refl _) ?_ ?_
+    · dsimp [Scheme.artinSchreierSequence]
+      rw [Category.comp_id, IsIso.inv_comp_eq]
+      exact (kernel.lift_ι _ _ _).symm
+    · dsimp [Scheme.artinSchreierSequence]
+      rw [Category.comp_id, Category.id_comp]
 
 end AlgebraicGeometry
