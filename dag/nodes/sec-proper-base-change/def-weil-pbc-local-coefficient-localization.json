@@ -14,9 +14,29 @@
   "document": "literature/stacks-project/algebraization.tex",
   "place": "Tag 0997 (lemma-hom-from-Af), coefficient localization and multiplication tower; slice restriction as in sites-modules.tex, Tags 03DI and 03DJ (lemma-extension-by-zero and lemma-extension-by-zero-exact)."
  },
- "proof": [],
+ "proof": [
+  {
+   "text": "Let T be slice restriction, G the forgetful functor to abelian sheaves, and H the abelian-sheaf restriction. The componentwise definition gives T.Additive. The identity comparison T ⋙ G ≅ toSheaf R ⋙ H is definitional. The source-library preservation instance for H and Mathlib preservation by G transfer finite-limit preservation to T.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The cocontinuous sheaf adjunction for Over.forget U gives preservation of colimits by H, hence finite colimits. The source-library sheafification instance gives finite-colimit preservation by G. The identity comparison transfers this to T, and G reflects finite colimits because it reflects isomorphisms; consequently T preserves finite colimits.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The multiplication map is the presheaf sectionsSMul map. After applying the faithful forgetful functor, its naturality is exactly PresheafOfModules.sectionsSMul_naturality with overSections U f. The derived restriction and derived multiplication definitions then elaborate from the exactness conjunction.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "G3",
+  "document": "Mathlib and source-library preservation instances",
+  "place": "Slice restriction through abelian-sheaf forgetful functor; PresheafOfModules.sectionsSMul_naturality for multiplication"
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -111,5 +131,15 @@
   "group": "NO",
   "result": "pass",
   "note": "Wrote review.md. Verified immutable files, source correspondence, dependencies, canonical constructions, universes, edge cases, and verbatim signatures. Both delivered modules passed server-only compilation without diagnostics. No delivery errors found; no project clones or branches changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G3",
+  "result": "pass",
+  "landing": "20261018T062757-L-651115",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

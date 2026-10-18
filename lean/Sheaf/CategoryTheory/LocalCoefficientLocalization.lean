@@ -12,6 +12,8 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.CategoryTheory.Functor.OfSequence
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
 
 /-!
 # Localization and multiplication by a section on a slice ringed site
@@ -81,7 +83,34 @@ theorem localCoefficientRestriction_exact {C : Type u} [SmallCategory C]
     (SheafOfModules.overFunctor.{u} (localCoefficientRings R) U).Additive ∧
       PreservesFiniteLimits (SheafOfModules.overFunctor.{u} (localCoefficientRings R) U) ∧
       PreservesFiniteColimits (SheafOfModules.overFunctor.{u} (localCoefficientRings R) U) := by
-  sorry
+  let R₀ := localCoefficientRings R
+  let T := SheafOfModules.overFunctor.{u} R₀ U
+  let G := SheafOfModules.toSheaf.{u} (R₀.over U)
+  let H := J.overPullback AddCommGrpCat.{u} U
+  have : T.Additive := by
+    constructor
+    intro M N f g
+    ext V x
+    rfl
+  let e : T ⋙ G ≅ SheafOfModules.toSheaf R₀ ⋙ H := Iso.refl _
+  have : PreservesFiniteLimits H := by
+    dsimp [H]
+    infer_instance
+  have : PreservesFiniteLimits (SheafOfModules.toSheaf R₀ ⋙ H) :=
+    comp_preservesFiniteLimits _ _
+  have : PreservesFiniteLimits (T ⋙ G) := preservesFiniteLimits_of_natIso e.symm
+  have : PreservesFiniteLimits T := preservesFiniteLimits_of_reflects_of_preserves T G
+  have : PreservesColimitsOfSize.{u, u} H :=
+    ((Over.forget U).sheafAdjunctionCocontinuous AddCommGrpCat.{u}
+      (J.over U) J).leftAdjoint_preservesColimits
+  have : PreservesFiniteColimits H := inferInstance
+  have : PreservesFiniteColimits (SheafOfModules.toSheaf R₀ ⋙ H) :=
+    comp_preservesFiniteColimits _ _
+  have : PreservesFiniteColimits (T ⋙ G) := preservesFiniteColimits_of_natIso e.symm
+  have : ReflectsFiniteColimits G :=
+    { reflects := fun K _ _ ↦ reflectsColimitsOfShape_of_reflectsIsomorphisms }
+  exact ⟨inferInstance, inferInstance,
+    preservesFiniteColimits_of_reflects_of_preserves T G⟩
 
 /-- Restriction on the derived categories, induced by exact module restriction.
 Source: Stacks Project, Modules on Sites, Tags 03DI and 03DJ
@@ -107,7 +136,9 @@ theorem localSectionMultiplication_naturality {C : Type u} [SmallCategory C]
     (f : R.obj.obj (op U))
     {M N : ringedSiteModules.{u} ((localCoefficientRings R).over U)} (g : M ⟶ N) :
     g ≫ localSectionMultiplication R U f N = localSectionMultiplication R U f M ≫ g := by
-  sorry
+  apply (SheafOfModules.forget _).map_injective
+  exact PresheafOfModules.sectionsSMul_naturality g.val
+    (PresheafOfModules.overSections (R := R.obj) U f)
 
 /-- Multiplication by `f` as a natural endomorphism of slice restriction.
 Source: Stacks Project, Tag 0997, lemma-hom-from-Af
