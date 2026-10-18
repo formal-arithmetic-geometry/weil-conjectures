@@ -16,41 +16,147 @@
   "def-weil-closed-immersion",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Equip $C$ with the divisorial fs log structure $M$ of [def-trf-log-regular-pair]. Its log triviality locus is exactly $C\\setminus B$. Excellence implies quasi-excellence by [def-exc-excellent-ring]. A geometric stabilizer is a subgroup of $G$, so its order divides $|G|$; a divisor of a unit integer is a unit in every residue field. Thus the action is tame. The action preserves $B$, so it preserves $M$: pulling back a regular function invertible off $B$ again gives such a function. The assumed generic freeness is unchanged. These verify all the hypotheses of the absolute logarithmic modification theorem.",
+   "uses": [
+    "def-trf-log-regular-pair",
+    "def-exc-excellent-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VI 1.2--1.4 and 3.1; VIII Theorem 1.1, p.85, hypotheses."
+   }
+  },
+  {
+   "text": "Apply [lem-per-gabber-absolute-equivariant-modification] to $(C,M,G)$, with its $Z=B$ and $F=T$. Obtain a $G$-equivariant morphism $f:C_1\\to C$ projective in the projective-bundle sense, with integral fs log regular source, log boundary $B_1=f^{-1}(B\\cup T)$ and very tame action. The cited statement gives an isomorphism over $C\\setminus(B\\cup T)$, including the full inverse image. Put $C^0=C\\setminus(B\\cup T)$. The complement of $T$ contains a dense invariant free open by hypothesis, and the complement of $B$ is dense. Since $C$ is integral, hence irreducible [def-pc-integral-scheme], their intersection $C^0$ is dense and nonempty. The theorem [lem-trf-log-regular-divisorial-structure] identifies the source's fs log structure with the divisorial structure of $C_1\\setminus B_1$. Thus its log regularity and the very tame conditions are precisely those of the pair in the item, for the stated boundary $B_1$.",
+   "uses": [
+    "lem-per-gabber-absolute-equivariant-modification",
+    "def-pc-integral-scheme",
+    "lem-trf-log-regular-divisorial-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Theorem 1.1, sections 4--5 and Theorem 5.6.1; VI 1.4 (divisorial log structure of a log regular scheme)."
+   }
+  },
+  {
+   "text": "By [lem-trf-projective-bundle-proper], $f$ is proper. By [def-weil-proper-morphism] and [def-weil-finite-type-morphism], it is in particular quasi-compact. Choose a finite affine cover of the Noetherian scheme $C$. Each inverse image is quasi-compact, so their finite union $C_1$ is quasi-compact: an open cover restricts to a finite subcover on each of these finitely many preimages. The fs log regular source is locally Noetherian by [def-trf-fs-log-blowup]. Hence $C_1$ is Noetherian (locally Noetherian and quasi-compact).",
+   "uses": [
+    "lem-trf-projective-bundle-proper",
+    "def-weil-proper-morphism",
+    "def-weil-finite-type-morphism",
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WC (lemma-locally-projective-proper); Tags 01W1 (definition-proper) and 01T1 (definition-finite-type); fs log regularity as in ILO VI 1.2."
+   }
+  },
+  {
+   "text": "Fix an affine open $W\\subseteq C$. The projective-bundle factorization of $f$ is a closed immersion into $\\mathbf P_C(\\mathcal E)$ for a finite-type quasi-coherent module $\\mathcal E$ [def-trf-projective-bundle-morphism]. Restrict it to $W$. The closed immersion remains closed by [lem-weil-pbc-closed-immersion-base-change]. The affine restriction data in [def-nagata-relative-proj] identify the ambient inverse image with $\\operatorname{Proj}(\\operatorname{Sym}(\\mathcal E)(W))$. Clause (b) of [lem-weil-pbc-quasi-coherent-symmetric-algebra] identifies this algebra with $\\operatorname{Sym}_{\\mathcal O_C(W)}(\\mathcal E(W))$, degree by degree since both maps send degree-one sections to the same generators. Applying these same affine descriptions to $\\mathcal E|_W$ identifies the ambient scheme with $\\mathbf P_W(\\mathcal E|_W)$. Restriction preserves the local finite generation and local module presentations defining finite type and quasi-coherence. Thus $f^{-1}(W)\\to W$ is projective in the projective-bundle sense.",
+   "uses": [
+    "def-trf-projective-bundle-morphism",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-nagata-relative-proj",
+    "lem-weil-pbc-quasi-coherent-symmetric-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01W8 (definition-projective); projective-bundle restriction from its relative Proj affine charts; Tag 01QR (lemma-base-change-closed-immersion)."
+   }
+  },
+  {
+   "text": "The structure sheaf $\\mathcal O_W$ is ample: in [def-weil-pbc-ample-invertible-module], take $n=1$ and $s=1$, so $W_s=W$ is affine; $W$ is quasi-compact as an affine open of the Noetherian scheme $C$. Apply [lem-trf-projective-bundle-to-h-projective] to the restricted morphism from the previous step. It is H-projective, meaning exactly a closed immersion $f^{-1}(W)\\hookrightarrow\\mathbf P^N_W$ followed by projection [def-kun-projective]. This proves the required projectivity for each affine open $W$; $W$ need not be invariant under $G$.",
+   "uses": [
+    "def-weil-pbc-ample-invertible-module",
+    "lem-trf-projective-bundle-to-h-projective",
+    "def-kun-projective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 087S (lemma-projective-over-quasi-projective-is-H-projective), clause (1); Properties Tag 01PS (definition-ample)."
+   }
+  },
+  {
+   "text": "Let $V\\subseteq C$ be any dense open. Since $C$ is integral, $V\\cap C^0$ is a nonempty open. By the full-preimage isomorphism over $C^0$, its inverse image is a nonempty open of $C_1$. Integrality of $C_1$ makes every nonempty open dense [def-pc-integral-scheme]. This dense open lies in $f^{-1}(V)$, so $f^{-1}(V)$ is dense. This also covers $V=C$, dimension zero, and the trivial group; no positive-dimensional hypothesis was used.",
+   "uses": [
+    "def-pc-integral-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "VIII Theorem 1.1(i) and integral normalized-tower construction; elementary irreducibility argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-log-regular-pair",
+  "def-exc-excellent-ring",
+  "lem-per-gabber-absolute-equivariant-modification",
+  "def-pc-integral-scheme",
+  "lem-trf-log-regular-divisorial-structure",
+  "lem-trf-projective-bundle-proper",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-trf-fs-log-blowup",
+  "def-trf-projective-bundle-morphism",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-nagata-relative-proj",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+  "def-weil-pbc-ample-invertible-module",
+  "lem-trf-projective-bundle-to-h-projective",
+  "def-kun-projective"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VIII Theorem 1.1 and Theorem 5.6.1 via the existing absolute-modification node; Stacks Tags 01WC and 087S give properness and the affine-base H-projectivity comparison. Elementary density argument written out."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
-   "query": "Gabber projective equivariant modification of log regular pairs gives very tame finite group action",
-   "results": "{\"t\": \"2026-10-18T20:18:51Z\", \"tool\": \"leanfinder\", \"query\": \"Gabber projective equivariant modification of log regular pairs gives very tame finite group action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"arithFrobAt\", \"IsArithFrobAt.arithFrobAt\", \"IsArithFrobAt.mul_inv_mem_inertia\", \"IsArithFrobAt.exists_of_isInvariant\", \"FDRep.instProjectiveOfNeZeroCastCard\", \"Algebra.IsInvariant.exists_smul_of_under_eq_of_profinite\", \"Rep.instProjective\", \"CategoryTheory.PreGaloisCategory.IsFundamentalGroup.transitive_of_isGalois\"], \"digest\": \"86cf99c0b98d40cb\"}; Read returned signatures: ordinary group orbits, arithmetic Frobenius, projective spectra and properness results do not supply the logarithmic assertion or finite-group quotient construction.",
+   "query": "Gabber equivariant projective modification of a tame generically free finite group action on a log regular scheme",
+   "results": "{\"t\": \"2026-10-18T21:05:29Z\", \"tool\": \"leanfinder\", \"query\": \"Gabber equivariant projective modification of a tame generically free finite group action on a log regular scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj\", \"AlgebraicGeometry.Proj.valuativeCriterion_existence\", \"AlgebraicGeometry.Scheme.Hom.normalization\", \"AlgebraicGeometry.Proj.fromOfGlobalSections\", \"AlgebraicGeometry.Proj.instIsSeparated\", \"AlgebraicGeometry.Proj.instLocallyOfFiniteTypeToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.instIsProperToSpecZeroOfFiniteTypeSubtypeMemOfNatNat\", \"AlgebraicGeometry.Proj.isSeparated\"], \"digest\": \"b1cbedeb87d07c4b\"}",
    "date": "2026-10-19",
-   "verdict": "no match"
+   "verdict": "no match: inspected signatures; normalization, Proj and abstract actions do not assert this logarithmic modification"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Projective\" \"MulAction\"",
+   "results": "{\"t\": \"2026-10-18T21:05:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"Projective\\\" \\\"MulAction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Function expected at\\n  \\\"Projective\\\"\\nbut this term has type\\n  String\\n\\nNote: Expected a function because this term is being applied to the argument\\n  \\\"MulAction\\\"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "equivariant.*modification|log.?regular|very.?tame",
+   "results": "{\"t\": \"2026-10-18T21:05:59Z\", \"tool\": \"grep\", \"query\": \"equivariant.*modification|log.?regular|very.?tame\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected signatures; normalization, Proj and abstract actions do not assert this logarithmic modification"
   },
   {
    "tool": "leansearch",
-   "query": "Gabber equivariant projective modification of a noetherian quasi-excellent log regular scheme with tame generically free finite group action produces a log regular scheme with very tame action",
-   "results": "{\"t\": \"2026-10-18T20:13:02Z\", \"tool\": \"leansearch\", \"query\": \"Gabber equivariant projective modification of a noetherian quasi-excellent log regular scheme with tame generically free finite group action produces a log regular scheme with very tame action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsProper.isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"WithZero.logEquiv_apply\", \"Rep.leftRegular_projective\", \"AlgebraicGeometry.FormallyUnramified.instIsStableUnderBaseChangeScheme\", \"Projectivization.instMulAction.congr_simp\", \"MulAction.Regular.isPretransitive\", \"Projectivization.smul_mk\"], \"digest\": \"191f0043e83960eb\"}; Read returned signatures: ordinary group orbits, arithmetic Frobenius, projective spectra and properness results do not supply the logarithmic assertion or finite-group quotient construction.",
+   "query": "Gabber theorem equivariant modification log regular very tame finite group action",
+   "results": "{\"t\": \"2026-10-18T21:06:06Z\", \"tool\": \"leansearch\", \"query\": \"Gabber theorem equivariant modification log regular very tame finite group action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsGalois.of_fixed_field\", \"IsGaloisGroup.fixedPoints\", \"Algebra.IsInvariant.exists_smul_of_under_eq\", \"SubMulAction.fixingSubgroup_smul_eq_fixingSubgroup_map_conj\", \"SubMulAction.fixingSubgroupEquivFixingSubgroup\", \"Algebra.IsInvariant.isIntegral_of_profinite\", \"IsGaloisGroup.isInvariant\", \"MulAction.IwasawaStructure.is_conj\"], \"digest\": \"26cd79949bfd9c4c\"}",
    "date": "2026-10-19",
-   "verdict": "no match"
+   "verdict": "no match: inspected signatures; normalization, Proj and abstract actions do not assert this logarithmic modification"
   },
   {
    "tool": "loogle",
    "query": "\"LogRegular\"",
-   "results": "{\"t\": \"2026-10-18T20:18:50Z\", \"tool\": \"loogle\", \"query\": \"\\\"LogRegular\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned signatures: ordinary group orbits, arithmetic Frobenius, projective spectra and properness results do not supply the logarithmic assertion or finite-group quotient construction.",
+   "results": "[loogle] OK 0 hit(s)\n",
    "date": "2026-10-19",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "very.?tame|equivariant.*modification|log.?regular",
-   "results": "{\"t\": \"2026-10-18T20:18:50Z\", \"tool\": \"grep\", \"query\": \"very.?tame|equivariant.*modification|log.?regular\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read returned signatures: ordinary group orbits, arithmetic Frobenius, projective spectra and properness results do not supply the logarithmic assertion or finite-group quotient construction.",
-   "date": "2026-10-19",
-   "verdict": "no match"
+   "verdict": "no match: no declaration with this logarithmic name"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-tame-log-quotient-modification",
@@ -76,5 +182,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-gabber-equivariant-log-modification",
+  "worker": "stage1",
+  "summary": "Preserved the complete statement. Reused the existing, more general absolute Gabber modification and existing projective-bundle comparison tools. Verified tame hypotheses, the actual divisorial boundary, Noetherianity, H-projectivity over each affine open and density under inverse image. No new nodes; earlier candidate files and citations are retained outside the delivery tree.",
+  "blueprint": "Nearest ancestor lem-per-artin-gabber-affine-curve, proof Step 3: Gabber local-uniformization input through the recorded duality/finiteness ancestry. Realizes the existing ILO VIII 1.1 modification route; no unit or chapter route change.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-log-regular-divisorial-structure",
+    "why": "Identifies the log structure supplied by the modification with the divisorial structure of its stated boundary; generic logarithmic tool."
+   },
+   {
+    "node": "lem-trf-projective-bundle-proper",
+    "why": "Converts projective-bundle projectivity to properness and hence quasi-compactness; generic scheme tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Restricts the projective-bundle embedding to an affine open; generic scheme tool."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+    "why": "Its affine-sections formula identifies the restricted projective bundle; generic algebra/sheaf tool."
+   },
+   {
+    "node": "lem-trf-projective-bundle-to-h-projective",
+    "why": "Converts the projective-bundle embedding to the finite-projective-space convention on affine opens with ample structure sheaf; generic projectivity tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-log-regular-divisorial-structure",
+  "lem-trf-projective-bundle-proper",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+  "lem-trf-projective-bundle-to-h-projective"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-faf9476e4",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-faf9476e4 (reviewer sub-agent of L); spot-checked: I read the delivery in full and wrote no fixes. It adds no new nodes, and the item statement is byte-identical to the one I repaired in Q70. Source: ILO VIII Thm 1.1 (printed p.85, pdf p.90), which asks for X noetherian, qe, separated and fs log regular, G tame and generically free, Z the non-triviality locus and T the non-free locus; it gives a projective modification with Z'=f^-1(Z∪T) and a very tame action. The split cites the existing unsplit lem-per-gabber-absolute-equivariant-modification (Q18), which is more general (fs log regular, quasi-excellent input, plus the four-stage tower). Step 1 checks every hypothesis of that node: the divisorial M is fs with triviality locus C∖B, excellent implies quasi-excellent, stabilizer orders divide |G| so the action is tame, preserving B means acting by log automorphisms, and its Z,F are this item's B,T. Step 2: the absolute node gives an integral, fs log regular, very tame source and an isomorphism over C∖(B∪T), meaning the full preimage. C^0 is dense because two nonempty opens of an irreducible scheme meet. lem-trf-log-regular-divisorial-structure says the source structure equals O∩j_*O_V^× with V dense, so (C1,B1) is a log regular pair, and the very-tame conditions match word for word. Step 3: 01WC properness gives quasi-compactness, and def-trf-fs-log-blowup works over locally Noetherian schemes, so C1 is Noetherian. Step 4 (elementary): the projective bundle restricts to an affine W through i_W and Sym clause (b). Step 5: O_W is ample with n=1, s=1, so 087S(1) makes f^-1(W)→W H-projective. Step 6: a nonempty preimage in an integral C1 is dense. Small and edge cases checked: ILO 1.2(a) (A², ±1, blowup of 0), trivial G, empty boundary, dimension 0, empty W. There is no cycle, and no SGA source is cited. I accept the five off-unit tool_uses. Batch-5 flags: I walked the closure of each flagged node (stmt_deps and proof_deps, stopping at nt-assume) and none contains thm-trf, sk-thm, a trace node or a sec-poincare-duality node. log-regular-divisorial-structure is general monoid and toric algebra (Nizioł, VI 1.4), projective-bundle-proper is 01WC, fs-log-blowup and projective-bundle-morphism are definitions, and projective-bundle-to-h-projective is 087S. All are general scheme theory or log geometry, outside both assumptions, so I accept them. Maintainer note: the item and the absolute node overlap (both state VIII 1.1, both created 2026-10-19 by different groups). That overlap is in the base, not this delivery, and reusing the general node is the correct response."
  }
 }
