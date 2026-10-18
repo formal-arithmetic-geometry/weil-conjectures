@@ -15,9 +15,94 @@
   "def-weil-pbc-closed-subset-proper-over-base",
   "lem-a1-degree-zero-compact-support-sections"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [sk-thm-nagata-compactification] to $a_X:X\\to\\operatorname{Spec}k$: the base is affine, hence quasi-compact and quasi-separated, and $a_X$ is separated of finite type by hypothesis. We obtain $j:X\\hookrightarrow\\overline X$ and $r:\\overline X\\to\\operatorname{Spec}k$ with $a_X=rj$, $j$ a quasi-compact open immersion and $r$ proper. These are precisely the data in [sk-def-nagata-sketch-data]. Thus $\\overline X$ is also separated and finite type over $k$. Density of the chosen compactification is not needed.",
+   "uses": [
+    "sk-thm-nagata-compactification",
+    "sk-def-nagata-sketch-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Definition 18.1 and the compactification at the start of Proposition 18.3(b)"
+   }
+  },
+  {
+   "text": "By [lem-a1-adic-compactification-section-realization], $J=j_!G$ lies in the constructible heart on $\\overline X$, $j^*J\\cong G$, and its adic fibres outside $X$ are zero. The same lemma identifies $H_c^0(X,G)$ with $\\operatorname{Hom}(\\mathbf1_{\\overline X},J)$ and $H^0(X,G)$ with $\\operatorname{Hom}(\\mathbf1_X,G)$. Define $\\alpha_{X,G}$ by restricting a representing morphism $t:\\mathbf1_{\\overline X}\\to J$ along $j$ and using that identification. The lemma identifies this very map with the compact-to-ordinary comparison, not merely some linear map between the spaces. Its Hom and coefficient identifications make it linear and natural in $G$.",
+   "uses": [
+    "lem-a1-adic-compactification-section-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14 and Remark 6.8.15; Milne Proposition 18.3(b), first displayed kernel"
+   }
+  },
+  {
+   "text": "Suppose $\\alpha_{X,G}(c)=0$, and let $t$ be the morphism representing $c$ in step 2. At every geometric point inside $X$, the fibre map of $t$ is zero because its restriction to $X$ is zero; outside $X$ its target fibre $J_{\\bar x}$ is zero by step 2. Apply exactness and joint conservativity of the constructible-heart fibres in [lem-per-adic-heart-pullback-fibres] to the identity morphism of $\\overline X$. Exactness identifies each fibre of $\\operatorname{im}t$ with $\\operatorname{im}(t_{\\bar x})=0$; conservativity gives $\\operatorname{im}t=0$, hence $t=0$. The isomorphism in step 2 now gives $c=0$. This proves injectivity.",
+   "uses": [
+    "lem-per-adic-heart-pullback-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Proposition 18.3(b): injectivity of compact-support sections into ordinary sections; adic fibre argument"
+   }
+  },
+  {
+   "text": "For arbitrary $c$, apply [lem-a1-adic-section-closed-support] on $\\overline X$ to its representing morphism $t$. It gives the closed subset $S=S(t)\\subseteq\\overline X$ and $t|_{\\overline X\\setminus S}=0$. Every point outside $X$ has zero target fibre by step 2, so $S\\subseteq j(X)$. Under $j$, let $Z\\subseteq X$ be this same subset. It is closed in $X$, and restricting the zero morphism on $\\overline X\\setminus S$ to $X\\setminus Z$ proves $\\alpha_{X,G}(c)|_{X\\setminus Z}=0$.",
+   "uses": [
+    "lem-a1-adic-section-closed-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Proposition 18.3(b): remove a neighborhood of the compactification boundary"
+   }
+  },
+  {
+   "text": "The whole underlying closed subset $|\\overline X|$ is proper over $k$: in [lem-weil-pbc-closed-subset-proper-over-base-properties](1), choose its closed subscheme structure $\\overline X$, which is proper by step 1. Clause (2) of that lemma then makes the closed subset $S\\subseteq\\overline X$ proper over $k$. Its reduced induced closed subscheme is unchanged when viewed inside the open $j(X)$: restricting its defining ideal to that open gives the same reduced scheme, since its entire underlying set already lies there. Thus $Z$ with its reduced induced structure is this proper $k$-scheme. This is exactly properness of a closed subset in [def-weil-pbc-closed-subset-proper-over-base].",
+   "uses": [
+    "lem-weil-pbc-closed-subset-proper-over-base-properties",
+    "def-weil-pbc-closed-subset-proper-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Proposition 18.3(b), pp. 120–121: a closed subset of the proper compactification lying in the open is proper"
+   }
+  },
+  {
+   "text": "The restriction in step 2 is the ordinary restriction of morphisms from the coefficient unit. Its further restriction to an open $V\\subseteq X$ is $(t|_X)|_V=t|_V$ by composition of pullbacks and their unit identifications; the restriction compatibility of [lem-a1-adic-compactification-section-realization] identifies this equality with restriction of ordinary sections. If $G|_V$ is lisse, [lem-tw-lisse-rational-realization] identifies its unit Hom with ordinary lisse continuous adic sections, at a finite coefficient field and then at the common stage. The identification is induced by scalar extension and respects units and pullback. Consequently it is the same section comparison as [lem-a1-degree-zero-compact-support-sections] wherever that lemma's smooth finite-field/Weil hypotheses apply. Its additional hypotheses are not imposed on general $X,G$ here. This proves the claimed lisse normalization and open-restriction compatibility.",
+   "uses": [
+    "lem-a1-adic-compactification-section-realization",
+    "lem-tw-lisse-rational-realization",
+    "lem-a1-degree-zero-compact-support-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Propositions 6.8.4 and 6.8.14, Remark 6.8.15: unit, restriction and lisse realization normalizations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-thm-nagata-compactification",
+  "sk-def-nagata-sketch-data",
+  "lem-a1-adic-compactification-section-realization",
+  "lem-per-adic-heart-pullback-fibres",
+  "lem-a1-adic-section-closed-support",
+  "lem-weil-pbc-closed-subset-proper-over-base-properties",
+  "def-weil-pbc-closed-subset-proper-over-base",
+  "lem-tw-lisse-rational-realization",
+  "lem-a1-degree-zero-compact-support-sections"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14 and Remark 6.8.15; Milne Proposition 18.3(b), compactification proof, with adic comparison and closed-support obligations explicitly separated"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -102,10 +187,45 @@
    "results": "{\"t\": \"2026-10-18T02:13:13Z\", \"tool\": \"leanfinder\", \"query\": \"Degree zero compactly supported cohomology of a constructible adic sheaf embeds into ordinary sections and each class vanishes outside a proper closed subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\"], \"digest\": \"69767f434ef38d6b\"}",
    "date": "2026-10-18",
    "verdict": "no match: read the returned signatures; these concern topological functions, structure sheaves or site equivalences, not constructible adic compact-support sections"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Degree zero compactly supported cohomology of a constructible adic sheaf embeds into global sections with proper support",
+   "results": "{\"t\": \"2026-10-18T02:27:32Z\", \"tool\": \"leanfinder\", \"query\": \"Degree zero compactly supported cohomology of a constructible adic sheaf embeds into global sections with proper support\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.LocallyConstant.counit_app_val\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"CompHausLike.LocallyConstantModule.functor\"], \"digest\": \"f100fce8b57ad0e0\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read returned signatures; topological function support, structure sheaves, site equivalences and coefficient sheaf definitions do not supply this constructible adic assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of extension by zero on a proper compactification inject into sections on the open subscheme",
+   "results": "{\"t\": \"2026-10-18T02:27:34Z\", \"tool\": \"leanfinder\", \"query\": \"Global sections of extension by zero on a proper compactification inject into sections on the open subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Hom.toImage_app_injective\", \"AlgebraicGeometry.specTargetImageFactorization_app_injective\", \"AlgebraicGeometry.StructureSheaf.toBasicOpen_injective\", \"AlgebraicGeometry.map_injective_of_isIntegral\", \"AlgebraicGeometry.isDominant_of_of_appTop_injective\", \"AlgebraicGeometry.stalkMap_injective_of_isOpenMap_of_injective\", \"AlgebraicGeometry.Scheme.Hom.stalkFunctor_toImage_injective\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\"], \"digest\": \"e76620bcfb183dda\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read returned signatures; topological function support, structure sheaves, site equivalences and coefficient sheaf definitions do not supply this constructible adic assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible rational adic compact support degree zero sections with proper support",
+   "results": "{\"t\": \"2026-10-18T02:27:28Z\", \"tool\": \"leansearch\", \"query\": \"Constructible rational adic compact support degree zero sections with proper support\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasCompactSupport\", \"Finsupp.degree_eq_zero_iff\", \"hasCompactSupport_def\", \"HasCompactSupport.intro\", \"HasCompactSupport.extend_zero\", \"HasCompactSupport.intro'\", \"HasCompactSupport.of_support_subset_isCompact\", \"HasCompactSupport.is_zero_at_infty\"], \"digest\": \"045e440feefa154d\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read returned signatures; topological function support, structure sheaves, site equivalences and coefficient sheaf definitions do not supply this constructible adic assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, AlgebraicGeometry.Scheme",
+   "results": "{\"t\": \"2026-10-18T02:27:28Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf, AlgebraicGeometry.Scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk\", \"AlgebraicGeometry.Scheme.GlueData.sheafValGluedMk_val\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.sheafEquiv\", \"AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom\", \"AlgebraicGeometry.Scheme.AffineEtale.sheafEquiv\", \"AlgebraicGeometry.Scheme.instAbelianSheafAffineEtaleTopology\", \"AlgebraicGeometry.Scheme.instAbelianSheafEtaleSmallEtaleTopology\", \"AlgebraicGeometry.Scheme.instIsEquivalenceSheafEtaleSmallEtaleTopologyAffineEtaleTopologySheafPushforwardContinuousSpec\"], \"digest\": \"4b7354bbd781c2d2\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read returned signatures; topological function support, structure sheaves, site equivalences and coefficient sheaf definitions do not supply this constructible adic assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "compactlySupported|compactSupport|sectionsWithSupport",
+   "results": "{\"t\": \"2026-10-18T02:27:28Z\", \"tool\": \"grep\", \"query\": \"compactlySupported|compactSupport|sectionsWithSupport\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: read returned signatures; topological function support, structure sheaves, site equivalences and coefficient sheaf definitions do not supply this constructible adic assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-l-dl-a1-endpoints",
@@ -122,5 +242,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-constructible-degree-zero-proper-support",
+  "worker": "stage1",
+  "summary": "Preserved the statement; gave the compactification argument using adic Hom sections, checked injectivity on exact conservative adic fibres, isolated the general adic compactification/section comparison and the closed support of an arbitrary constructible rational adic section, and supplied the proper-subset and lisse-restriction arguments. No discrete non-torsion etale model is used.",
+  "blueprint": "sk-l-dl-a1-endpoints, proof first two sentences: compact support of a section is proper over k, to exclude full support on the affine curve.",
+  "tool_uses": [
+   {
+    "node": "lem-per-adic-heart-pullback-fibres",
+    "why": "Exact conservative geometric fibres test the image of the section morphism; the endpoint unit has no replacement fibre-calculus result."
+   },
+   {
+    "node": "lem-weil-pbc-closed-subset-proper-over-base-properties",
+    "why": "Properness of a closed subset of a proper scheme is a generic geometric tool, not a change to the endpoint route."
+   },
+   {
+    "node": "lem-tw-lisse-rational-realization",
+    "why": "Unit-preserving lisse scalar-extension realization normalizes ordinary sections on arbitrary finite-type opens."
+   },
+   {
+    "node": "lem-a1-degree-zero-compact-support-sections",
+    "why": "Only its ordinary lisse section normalization is used on its stated domain; compact support or proper-support conclusions are not invoked."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-per-adic-heart-pullback-fibres",
+  "lem-weil-pbc-closed-subset-proper-over-base-properties",
+  "lem-tw-lisse-rational-realization",
+  "lem-a1-degree-zero-compact-support-sections"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NS-f5a81822b",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-f5a81822b (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full, with Milne LEC Def 18.1 and Prop 18.3(b) (pp.118–119) and Bhatt–Scholze Prop 6.8.14 and Rem 6.8.15 (pp.61–62) open. All six steps are correct. (1) Nagata compactification over a qcqs base; density is not needed because Comp(f) in def-weil-compactifications-refinements does not require it. (2) Ra_! = Rr_* j_! with r proper, and H^0 Fib_s = Hom(1_X̄, j_!G) by a^* ⊣ Ra_*; the compact-to-ordinary map is restriction via j_! → Rj_*. (3) Injectivity holds because fibres of im t vanish (exactness) and fibres are jointly conservative. (4) The support S of t lies in X because the boundary fibres of j_!G vanish. (5) Clauses (1) and (2) of lem-weil-pbc-closed-subset-proper-over-base-properties make S proper, and its reduced structure in X̄ is the same as in X. (6) The lisse normalization uses only the H^0 identification of lem-a1-degree-zero-compact-support-sections, with no circularity. New node lem-a1-adic-section-closed-support is true: S(t) is a union of connected lisse strata, so it is constructible; it is closed under specialization by cospecialization; it is therefore closed, and t vanishes off it by conservativity. I tested it on a skyscraper, on j_!Q̄_ℓ for 𝔾_m ⊂ 𝔸¹, and on a disconnected T. New node lem-a1-adic-compactification-section-realization is true; I tested U=T, U=∅ and 𝔸¹ ⊂ ℙ¹. Neither new node is a duplicate (checked lem-zl-extension-by-zero-punctual, lem-trf-compactification-cohomology, lem-cbc-proetale-extension-zero-comparison, lem-sfb-etale-geometric-fibre-compact-sections and lem-a1-degree-zero-compact-support-sections), and neither restates a clause of the item. Repaired one B3 fault: adic j_! cited no definition, so it now cites def-weil-integral-rational-qbar-compact-support in the statement and stmt_deps of lem-a1-adic-compactification-section-realization (whole file under fixes/). Batch-5 check: (a) lem-per-adic-heart-pullback-fibres -> def-pod-lisse-l-adic-sheaves is accepted because the target is the general Weil II lisse-sheaf definition and not part of Poincaré duality. (b) lem-tw-lisse-rational-realization -> lem-trf-integral-pullback-comparison-realization is accepted because that node is coherence of completed pullbacks with composition and scalar extension, which the trace-identity assumption does not give, and step 6 uses no trace content. All four nodes were already in the batch-5 closure through existing citers (4 and 6 of them respectively). tool_uses accepted as declared. No SGA, no target weakened.; 1 file(s) fixed by the reviewer"
  }
 }
