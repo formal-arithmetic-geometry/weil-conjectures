@@ -18,7 +18,8 @@
   "def-weil-pbc-constructible-complexes",
   "def-kun-derived-tensor",
   "def-weil-pbc-constant-sheaf",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-pc-mixed-total-tensor"
  ],
  "proof": [
   {
@@ -320,5 +321,30 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-62477650e (reviewer sub-agent of L); spot-checked: I read the mathematics in full against ILO XVII pp. 301-308 (7.2.1-7.2.7, 7.3.1-7.3.7, 7.4.1-7.4.7 and the proof of 7.4.1). The item is the ℓ-specialization of 7.4.1 with finitely generated N, which is no weaker; its statement is unchanged; X is an arbitrary Noetherian scheme and A an arbitrary Noetherian F_ℓ-algebra. All 8 steps check against the cited statements. Step 1: weak Serre closure for arbitrary Noetherian R, the global/affine-local comparison, cone cohomology from the long exact sequence, and summands via ker(1-e). Step 2: stalks of the tensor product and of a constant sheaf (clause 1 of lem-pod-lisse, arbitrary ring), exactness over a field, N_X is K-flat, local model N^d. Steps 4-6: the descent equivalence with B=F_ℓ[G] and A⊗B=A[G]; the mixed tensor clause carries the diagonal G-action; k_! is exact through the j_! node and the finite stalk formula for the closed immersion; the comparison N_X⊗k_!L_0≅k_!(N_S⊗L_0) checked on stalks. Step 8: truncation induction from the zero object. All three new nodes are true and are not item clauses or duplicates. The algebra node is 7.4.7; I tested A=F_ℓ, F_ℓ[G] with ℓ dividing |G|, and A=B=F_{ℓ^2}. The descent node holds for arbitrary R, A and N because Y is connected; the existing torsor-descent and cor-galois-lisse nodes need finite rings. The geometric filtration node stays true despite the ILO 7.2.7 warning, because its strata may be refined (nodal cubic with monodromy [[t,1],[1,0]]); generic trivialization, spreading out and Noetherian induction prove it. Batch 5: lem-pod-etale-stalk-tensor-scalar and lem-pod-lisse-tensor-and-scalar-extension (clause 1) are generic sheaf algebra. Their closures (66 and 70 nodes) contain no trace-formula node, and their only sec-poincare-duality members are themselves and def-pod-ring-scalar-extension, so neither is a statement assumed by the PD or trace-formula leaves nor a step of their proofs: accepted. I accept all 14 declared tool_uses as generic black boxes. Form: proof_deps equal the union of the step uses, all steps are under 2000 characters, no SGA. Cosmetic only: Step 5 names two stalk nodes in words rather than in brackets. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PrimeFieldTensorDevissage",
+  "declaration": "AlgebraicGeometry.Etale.primeFieldTensor_devissage",
+  "declarations": [
+   "AlgebraicGeometry.Etale.primeFieldTensorSheaf",
+   "AlgebraicGeometry.Etale.primeFieldTensorSheaf_preservesZeroMorphisms",
+   "AlgebraicGeometry.Etale.primeFieldTensorGenerators",
+   "AlgebraicGeometry.Etale.primeFieldTensor_devissage"
+  ],
+  "file": "lean/Sheaf/Paper/PrimeFieldTensorDevissage.lean",
+  "statement": "theorem primeFieldTensor_devissage (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) [IsNoetherian X] (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A] [Algebra (ULift.{u + 1} (ZMod ℓ)) A] : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} A) X = (primeFieldTensorGenerators X ℓ A).triangEnvelope",
+  "branch": "newtargets-dag",
+  "by": "Q51",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The generators are defined using all representative complexes and the sheafified sectionwise mixed tensor from def-pc-mixed-total-tensor. Over the prime field N_X is K-flat, so this computes the specified derived tensor with its A-action through N; no flatness hypothesis on N over A is imposed. The arbitrary-Noetherian-coefficient side uses the existing upstream DerivedCategory.boundedConstructible, whose finite-type stalk convention is Module.Finite, not finiteness of the coefficient ring. Both helper constructions and the named zero-morphism proof needed for mapping complexes are recorded in declarations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c5a5da51e",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Clauses match the node: ℓ prime, Λ=ULift(ZMod ℓ), X Noetherian, A Noetherian Λ-algebra with no Finite A, ambient DerivedCategoryModule A X, D^b_c(A) via the upstream boundedConstructible (constructible strata automatic on Noetherian X, f.g. stalks), F via the recorded isBoundedConstructible, N Module.Finite, generator = termwise sheafified ModuleCat.mixedTensor (Λ field so N_X is K-flat; A-action through N; canonical construction), conclusion = equality with triangEnvelope (shifts, extensions/cones, sums, retracts; zero included). Edge cases (empty X, A=0, ℓ=2, infinite A, non-flat N, unbounded representatives) all ok. Only sorry bodies: the main theorem and the PreservesZeroMorphisms helper, which has a docstring. lean.statement is verbatim in the file. Added stmt_dep def-pc-mixed-total-tensor is a landed node (allowed). No dependency record touched. nt_compile --json: 4.1 s, exit 0, no non-sorry warnings. Advisory: recorded IsLocallyConstantFiniteTypeModules/FiniteLocallyClosedStratification are imported but unused; the equivalent upstream predicate is used instead."
  }
 }
