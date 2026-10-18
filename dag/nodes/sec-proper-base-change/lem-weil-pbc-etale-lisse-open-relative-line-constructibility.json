@@ -34,171 +34,100 @@
  ],
  "proof": [
   {
-   "text": "By finite-type-over-Noetherian, $Y$ and $\\mathbf A^1_Y$ are Noetherian. Their affine coordinate rings are Noetherian, so the affine-Noetherian underlying-space theorem makes $\\mathbf A^1_Y$ a Noetherian topological space. Every open in such a space is quasi-compact: otherwise finite unions from a covering have no maximal member, contradicting ascending-chain termination for opens. Choose a finite principal cover $U=\\bigcup_{i=1}^rD(s_i)$ inside $\\operatorname{Spec}R[t]$. Every finite intersection is again principal, $D(s_{i_1}\\cdots s_{i_k})$, hence affine. It is smooth of relative dimension one over $Y$: affine-space smoothness gives the projection, and restriction through a principal open preserves it by smooth-relative-dimension permanence. Here $D(s)\\to\\operatorname{Spec}B$ is smooth of relative dimension zero directly from the smooth definition: $B_s=B[v]/(sv-1)$ is finitely presented, and $s$ invertible modulo a square-zero ideal stays invertible, since $(1+i)^{-1}=1-i$ when $i^2=0$, so every infinitesimal lifting uniquely factors through the localization. Its nonempty fibres are open subschemes of a point, hence dimension zero. The empty open has zero image and needs no argument. It remains to prove the assertion for every such principal open, then glue by relative Mayer--Vietoris.",
+   "text": "Finite type over the integers makes the base and affine line Noetherian. The open source is Noetherian and separated. Convert the finite-module-values hypothesis to IsFiniteLocallyConstantSheaf. A finite affine open cover exists, and pairwise intersections of affine opens are affine.",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
     "lem-sc-affine-noetherian-underlying-space",
+    "lem-weil-pbc-finite-locally-constant-module-values",
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "lem-weil-pbc-separated-affine-open-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKY, lemma-loc-constant-shriek-rel-dim-1: finite etale prime-torsion argument; Tag 0GKX, lemma-constant-shriek-rel-dim-1"
+   }
+  },
+  {
+   "text": "For fixed compactification, let Q be the triangulated property that every cohomology sheaf is constructible. Its restriction along the single-complex functor and compactified shriek contains zero and is closed under short exact sequences. Convert constructibility using the module-sheaf comparison. The Plus short-exact triangle and Serre closure supply these facts.",
+   "uses": [
+    "thm-constructible-serre",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "lem-sf-derived-ses-triangle",
+    "lem-sf-derived-homology-long-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-derived-direct-image-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKY, lemma-loc-constant-shriek-rel-dim-1: finite etale prime-torsion argument; Tag 0GKX, lemma-constant-shriek-rel-dim-1"
+   }
+  },
+  {
+   "text": "Reduce an affine restriction to sheaves killed by a prime. Strongly induct on a positive additive annihilator n, initially ringChar(Lambda), which is positive since Lambda is finite. If n=1 the sheaf is zero. Otherwise choose a prime p dividing n=p*m. The kernel K of p on F is killed by p, and F/K is killed by m<n. Both are finite locally constant, by kernel and cokernel closure over the finite Noetherian coefficient ring. The short-exact triangle combines the prime case for K with induction for F/K.",
+   "uses": [
+    "lemma-constructible-flc-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKY, lemma-loc-constant-shriek-rel-dim-1: finite etale prime-torsion argument; Tag 0GKX, lemma-constant-shriek-rel-dim-1"
+   }
+  },
+  {
+   "text": "An affine open restriction of the relative line is affine over the affine base and smooth of relative dimension one: its open immersion is etale and smooth of relative dimension zero, and the affine-line projection has relative dimension one. Apply the prime-torsion affine-curve lemma to each prime case for every cohomological degree and the given restricted compactification.",
+   "uses": [
     "sbc-lem-affine-space-smooth",
     "lem-sbc-smooth-relative-dimension-permanence",
-    "def-sbc-smooth-morphisms"
+    "def-sbc-smooth-morphisms",
+    "lem-weil-pbc-prime-lisse-affine-curve-shriek-constructibility"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKY; affine-cover expansion required to apply 0GKX"
+    "place": "Tag 0GKY, lemma-loc-constant-shriek-rel-dim-1: finite etale prime-torsion argument; Tag 0GKX, lemma-constant-shriek-rel-dim-1"
    }
   },
   {
-   "text": "Fix a principal open $W$ and write $h:W\\to Y$. Let $N>0$ annihilate the additive group of the finite ring $\\Lambda$ and factor $N=\\prod_\\ell\\ell^{n_\\ell}$. Choose integers $e_\\ell$ which are 1 modulo $\\ell^{n_\\ell}$ and 0 modulo the other factors (Bezout gives these residues). Multiplication by $e_\\ell$ defines pairwise orthogonal idempotents on $L|_W$ with sum 1, so $L|_W=\\bigoplus_\\ell F_\\ell$, each $\\ell^{n_\\ell}F_\\ell=0$. These are finite locally constant $\\Lambda$-module sheaves: on any constant trivializing cover, take the same idempotent summands of the finite fibre module. A derived additive functor preserves this finite split sum, so it suffices to treat one $F=F_\\ell$. The zero-ring/zero-sheaf case is already zero.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKY, coefficient-primary reduction"
-   }
-  },
-  {
-   "text": "Apply the prime-to-primary filtration cover input to the affine Noetherian $W$ and $F$. It gives $g:T\\to W$, affine clopen components $T_a$, filtrations by constant finite modules on each $T_a$, and constant fibre cardinality $d$ prime to $\\ell$. The module trace-degree theorem gives a $\\Lambda$-linear $t:g_*g^{-1}F\\to F$ with $t\\eta=d\\,\\mathrm{id}_F$. Choose an integer $a$ with $ad\\equiv1\\pmod{\\ell^n}$; since $\\ell^nF=0$, the map $at$ retracts $\\eta$. Finite direct-image exactness for abelian sheaves implies exactness for these module sheaves too: the underlying direct image is the abelian direct image and a sequence of module sheaves is exact exactly when its underlying abelian sequence is exact. Using the module direct-image construction, take an injective resolution of a degree-zero module sheaf. Exactness makes its termwise direct image a resolution of its direct image, so the computation of derived direct image gives $Rg_*=g_*$ on degree-zero sheaves. Choose a compactification of $hg$ by Nagata: $T$ is finite over the affine $W$, hence affine and quasi-compact and quasi-separated, and $hg$ is separated of finite type over the affine $Y$. A finite morphism is proper, so the identity compactification gives $Rg_!=Rg_*$. Shriek composition and compactification independence identify $Rh_!g_*g^{-1}F\\cong R(hg)_!g^{-1}F$. Applying the additive $Rh_!$ to the split maps shows $Rh_!F$ is a retract of this latter object, hence each of its cohomology sheaves is a retract as well.",
-   "uses": [
-    "lem-weil-pbc-etale-lisse-finite-etale-filtration",
-    "lem-weil-pbc-finite-etale-module-trace-degree",
-    "lemma-weil-pbc-finite-direct-image-exact",
-    "lem-weil-pbc-finite-proper",
-    "def-weil-pbc-projection-compactification",
-    "lem-weil-pbc-etale-shriek-qcqs-composition",
-    "lem-weil-pbc-etale-shriek-compactification-independence",
-    "lem-weil-pbc-module-direct-image-left-exact",
-    "def-weil-pbc-direct-image",
-    "thm-nagata-compactification"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKY trace and composition paragraph; 03SH, 01WN, 0F7J, 0F7I"
-   }
-  },
-  {
-   "text": "For a chosen compactification $c=(j,p)$, exactness of module extension by zero and the exact-functor derived theorem make $j_!$ triangulated. Module direct image is additive left exact and its source has enough injectives, so the right-derived theorem makes $Rp_*$ triangulated. Thus $Rp_*j_!$ is additive and triangulated: apply the two functors successively to a distinguished triangle and compose their shift isomorphisms. This applies to every compactification used below.",
-   "uses": [
-    "lem-weil-pbc-extension-by-zero-exact",
-    "lem-sf-exact-functor-derived-triangulated",
-    "lem-weil-pbc-module-direct-image-left-exact",
-    "lem-weil-pbc-module-sheaves-enough-injectives",
-    "lem-weil-pbc-derived-direct-image-triangulated",
-    "def-weil-triangulated-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKY final sentence invoking Tag 0GKX; Tag 03RZ filtration and retract closure"
-   }
-  },
-  {
-   "text": "Put $k_a=hg|_{T_a}:T_a\\to Y$. The cover input makes $T_a$ affine and $g|_{T_a}$ etale. Since $W$ and $Y$ are affine, $h$ is affine; an affine morphism has affine inverse images of all affine opens, and a morphism between affine schemes is affine (localize the corresponding ring map). Affine morphisms are separated and quasi-compact by affine permanence. Smooth-relative-dimension permanence gives $k_a$ smooth of relative dimension $0+1=1$. It is finite type: $h$ is finitely presented, and $g|_{T_a}$ is finite, as a clopen summand of the finite cover (on rings, it is an idempotent summand of a finite module). Nagata supplies a compactification of $k_a$. Apply the constant-coefficient relative-dimension-one theorem to every constant quotient $Q_{a,i}$ in the cover input; every $H^q(R(k_a)_!Q_{a,i})$ is constructible.",
-   "uses": [
-    "lem-weil-pbc-etale-lisse-finite-etale-filtration",
-    "pqf-def-affine-morphism",
-    "lem-weil-pbc-affine-morphism-permanence",
-    "lem-sbc-smooth-relative-dimension-permanence",
-    "thm-nagata-compactification",
-    "lem-weil-pbc-etale-constant-shriek-rel-dim-1"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKY final sentence invoking Tag 0GKX; Tag 03RZ filtration and retract closure"
-   }
-  },
-  {
-   "text": "Apply finite-filtration devissage to $\\Phi=R(k_a)_!$, the filtration $F_{a,i}$ supplied in step 3, and the class of constructible $\\Lambda$-module sheaves on $Y_{\\Et}$. This class contains zero by its definition and is closed under kernels, cokernels and extensions by the constructible Serre theorem. The preceding step verifies the hypothesis for every quotient and every degree, and the first replacement step verifies that $\\Phi$ is triangulated. We obtain constructibility of every $H^q(R(k_a)_!(g^{-1}F|_{T_a}))$.",
-   "uses": [
-    "lem-weil-pbc-etale-lisse-filtration-devissage",
-    "lem-weil-pbc-etale-lisse-finite-etale-filtration",
-    "thm-constructible-serre",
-    "def-weil-pbc-etale-constructible-sheaf"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKY final sentence invoking Tag 0GKX; Tag 03RZ filtration and retract closure"
-   }
-  },
-  {
-   "text": "Write $i_a:T_a\\hookrightarrow T$. Apply the disjoint-open-extension biproduct theorem to the finite disjoint open cover of $T$ and $G=g^{-1}F$: $G\\cong\\bigoplus_a i_{a!}(G|_{T_a})$. Each $i_a$ has compactification $(i_a,\\mathrm{id}_T)$, so its candidate shriek is the exact $i_{a!}$. Additivity of $R(hg)_!$ preserves this finite biproduct, and shriek composition identifies its $a$-th image with $R(k_a)_!(G|_{T_a})$. Thus $R(hg)_!G\\cong\\bigoplus_a R(k_a)_!(G|_{T_a})$. Applying cohomology preserves the biproduct relations, so every cohomology sheaf is the finite sum of the constructible component cohomology sheaves. A finite sum of constructible sheaves is constructible by repeated extension closure applied to $0\\to A\\to A\\oplus B\\to B\\to0$.",
-   "uses": [
-    "lem-pbc-t2-disjoint-open-extension-biproduct",
-    "def-weil-pbc-projection-compactification",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "lem-weil-pbc-etale-shriek-qcqs-composition",
-    "thm-constructible-serre"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKY final sentence invoking Tag 0GKX; Tag 03RZ filtration and retract closure"
-   }
-  },
-  {
-   "text": "Step 3 gives a retract on every cohomology sheaf: write $s:A\\to B$ and $r:B\\to A$ with $rs=1_A$, where $B$ is the constructible sheaf just obtained. Put $e=sr$. The map $s$ identifies $A$ with $\\ker(1_B-e)$: $(1-e)s=0$, and if $(1-e)b=0$ then $b=s(rb)$, with inverse the restriction of $r$. Kernel closure for the endomorphism $1-e$ of the constructible $B$ therefore proves $A$ constructible. Finally, the primary decomposition of step 2 is a finite split sum; additivity and repeated Serre extension closure give constructibility of $Rh_!(L|_W)$ in all degrees, for every chosen compactification.",
-   "uses": [
-    "thm-constructible-serre"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKY final sentence invoking Tag 0GKX; Tag 03RZ filtration and retract closure"
-   }
-  },
-  {
-   "text": "Induct on the number of principal opens covering $U$. The one-open case is steps 4--8. For $U=W_1\\cup V$ with $V$ the union of the remaining opens, the intersection $W_1\\cap V$ is covered by the at most $r-1$ principal opens $W_1\\cap W_i$; all their finite intersections remain principal. The induction hypothesis applies both to $V$ and to $W_1\\cap V$, with the restricted sheaf. The restricted maps are separated of finite type: the opens are quasi-compact in the Noetherian $U$, and their affine principal covers have finitely presented coordinate algebras over $R$. Choose their compactifications by Nagata. Relative Mayer--Vietoris for these quasi-compact opens gives a triangle $R(W_1\\cap V\\to Y)_!L\\to R(W_1\\to Y)_!L\\oplus R(V\\to Y)_!L\\to Rf_!^cL\\to$. In its cohomology sequence the third term is an extension of a cokernel and a kernel involving cohomology of the first two terms. Serre closure proves it constructible in every degree. The relative Mayer--Vietoris statement is for arbitrary chosen compactifications, so this proves the required assertion for the given $c$ without changing the candidate shriek.",
+   "text": "Define P(W) by quantifying over all open immersions with image W, all finite locally constant sheaves and all compactifications. The affine case just proved gives P on affine opens. Relative Mayer-Vietoris and the triangulated property Q give P(U union V) from P(U), P(V), and P(U intersection V). Pullback preserves finite local constancy; exact pullback commutes with the degree-zero single functor. Cohomology preserves binary biproducts and constructible sheaves are closed under them. Induct on the size of a finite affine cover. Intersecting with the newly inserted affine open gives a cover with at most the preceding size; its members are affine by separatedness. The empty cover is the empty affine open. Apply P(top) to the identity immersion and the prescribed compactification.",
    "uses": [
     "lem-weil-pbc-etale-shriek-relative-mayer-vietoris",
     "thm-constructible-serre",
-    "lem-sf-derived-homology-long-exact",
-    "thm-nagata-compactification"
+    "lem-weil-pbc-qcqs-finite-affine-open-cover",
+    "lem-weil-pbc-separated-affine-open-intersection",
+    "lem-sf-derived-homology-long-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKY affine-cover completion; relative Mayer--Vietoris and 03RZ"
+    "place": "Tag 0GKY, lemma-loc-constant-shriek-rel-dim-1: finite etale prime-torsion argument; Tag 0GKX, lemma-constant-shriek-rel-dim-1"
    }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-sc-affine-noetherian-underlying-space",
+  "lem-weil-pbc-finite-locally-constant-module-values",
+  "lem-weil-pbc-qcqs-finite-affine-open-cover",
+  "lem-weil-pbc-separated-affine-open-intersection",
+  "thm-constructible-serre",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-sf-derived-ses-triangle",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lemma-constructible-flc-serre",
   "sbc-lem-affine-space-smooth",
   "lem-sbc-smooth-relative-dimension-permanence",
   "def-sbc-smooth-morphisms",
-  "lem-weil-pbc-etale-lisse-finite-etale-filtration",
-  "lem-weil-pbc-finite-etale-module-trace-degree",
-  "lemma-weil-pbc-finite-direct-image-exact",
-  "lem-weil-pbc-finite-proper",
-  "def-weil-pbc-projection-compactification",
-  "lem-weil-pbc-etale-shriek-qcqs-composition",
-  "lem-weil-pbc-etale-shriek-compactification-independence",
-  "lem-weil-pbc-module-direct-image-left-exact",
-  "def-weil-pbc-direct-image",
-  "thm-nagata-compactification",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "lem-weil-pbc-derived-direct-image-triangulated",
-  "def-weil-triangulated-category",
-  "pqf-def-affine-morphism",
-  "lem-weil-pbc-affine-morphism-permanence",
-  "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
-  "lem-weil-pbc-etale-lisse-filtration-devissage",
-  "thm-constructible-serre",
-  "def-weil-pbc-etale-constructible-sheaf",
-  "lem-pbc-t2-disjoint-open-extension-biproduct",
-  "lem-weil-pbc-etale-shriek-relative-mayer-vietoris",
-  "lem-sf-derived-homology-long-exact"
+  "lem-weil-pbc-prime-lisse-affine-curve-shriek-constructibility",
+  "lem-weil-pbc-etale-shriek-relative-mayer-vietoris"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tag 0GKY primary/trace/filtration route; expand affine-cover gap with relative Mayer--Vietoris and use finite-ring 0GJ0 variant"
+  "place": "Tag 0GKY, with strong induction on an additive annihilator replacing primary idempotents and explicit finite-affine-cover Mayer-Vietoris induction; affine prime-torsion part isolated as a new node."
  },
  "mathlib_searches": [
   {
@@ -328,19 +257,10 @@
   "lem-sc-affine-noetherian-underlying-space",
   "sbc-lem-affine-space-smooth",
   "lem-sbc-smooth-relative-dimension-permanence",
-  "lemma-weil-pbc-finite-direct-image-exact",
-  "lem-weil-pbc-finite-proper",
   "def-sbc-smooth-morphisms",
-  "lem-weil-pbc-finite-etale-module-trace-degree",
-  "lem-weil-pbc-extension-by-zero-exact",
   "lem-sf-exact-functor-derived-triangulated",
-  "lem-weil-pbc-module-direct-image-left-exact",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
   "lem-sf-derived-ses-triangle",
-  "lem-sf-derived-homology-long-exact",
-  "thm-nagata-compactification",
-  "lem-weil-pbc-affine-morphism-permanence",
-  "lem-pbc-t2-disjoint-open-extension-biproduct"
+  "lem-sf-derived-homology-long-exact"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -379,5 +299,15 @@
   "by": "NB",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261018T071145-L-1666048",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -1,0 +1,260 @@
+{
+ "id": "lem-weil-pbc-prime-lisse-affine-curve-shriek-constructibility",
+ "kind": "statement",
+ "title": "Prime-torsion lisse constructibility on an affine smooth relative curve",
+ "statement": "Let Lambda be a finite commutative ring, R a finite-type integer algebra, and f:X -> Spec R an affine morphism from an affine scheme, smooth of relative dimension one [def-sbc-smooth-morphisms] [pqf-def-affine-morphism] [def-pc-scheme]. Let p be a prime number and F a finite locally constant sheaf of Lambda-modules on the small etale site of X [def-constructible-locally-constant], with p times its identity zero. For every compactification c of f [def-weil-pbc-projection-compactification] and every integer q, the q-th cohomology sheaf of Rf_!^c(F[0]) is constructible [def-weil-pbc-derived-categories] [def-weil-pbc-extension-by-zero] [def-weil-pbc-direct-image] [def-weil-pbc-etale-constructible-sheaf] [def-weil-derived-cohomology-sheaves].",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKY, lemma-loc-constant-shriek-rel-dim-1: finite etale prime-torsion argument; Tag 0GKX, lemma-constant-shriek-rel-dim-1"
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms",
+  "pqf-def-affine-morphism",
+  "def-pc-scheme",
+  "def-constructible-locally-constant",
+  "def-weil-pbc-projection-compactification",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-derived-cohomology-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "The base is Noetherian. Smoothness makes the affine source X locally Noetherian, hence its coordinate ring is Noetherian. Transport F along X isomorphic to Spec Gamma(X,top). Pullback preserves finite local constancy and p times the identity equals zero. Apply the finite etale filtration theorem with exponent one, obtaining g:T -> X finite etale surjective of constant positive degree d prime to p, and finitely many disjoint affine clopens W_a with finite constant-quotient filtrations of g^*F.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-etale-lisse-finite-etale-filtration"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKY, lemma-loc-constant-shriek-rel-dim-1: finite etale prime-torsion argument; Tag 0GKX, lemma-constant-shriek-rel-dim-1"
+   }
+  },
+  {
+   "text": "The trace composed with the unit on F is d times identity. The filtration theorem measures d over algebraically closed points, while the trace theorem asks for separably closed points: a finite etale algebra over a separably closed field is a product of copies of that field, and extension to an algebraic closure preserves this number of factors. Thus the trace-degree hypothesis holds. Bezout gives integers a,b with a*d+b*p=1; a times the trace retracts the unit because p annihilates F.",
+   "uses": [
+    "lem-weil-pbc-finite-etale-module-trace-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKY, lemma-loc-constant-shriek-rel-dim-1: finite etale prime-torsion argument; Tag 0GKX, lemma-constant-shriek-rel-dim-1"
+   }
+  },
+  {
+   "text": "Finite g is proper and direct image is exact. Its compactified derived shriek is therefore its ordinary direct image on single complexes. Compactification composition and independence identify the compact-support object on T with the compact-support image over X of g_*g^*F. Applying compactified shriek to the preceding unit and trace exhibits the desired object as a retract of this object on T.",
+   "uses": [
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-weil-pbc-finite-proper",
+    "def-weil-pbc-projection-compactification",
+    "lem-weil-pbc-etale-shriek-qcqs-composition",
+    "lem-weil-pbc-etale-shriek-compactification-independence",
+    "thm-nagata-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKY, lemma-loc-constant-shriek-rel-dim-1: finite etale prime-torsion argument; Tag 0GKX, lemma-constant-shriek-rel-dim-1"
+   }
+  },
+  {
+   "text": "Each affine clopen W_a is affine and separated over the affine base, and smooth of relative dimension one by etale composition. Choose its compactification by Nagata. Its ambient scheme is proper over the Noetherian base, hence Noetherian, so the open immersion is quasi-compact as required by the constant-coefficient theorem. Apply the constant-coefficient relative-dimension-one theorem to each finite constant quotient. Induct along the finite filtration using the short-exact triangles and the triangulated property of constructible cohomology. The initial zero subobject has zero image, and the last, top subobject is isomorphic to the pulled-back sheaf.",
+   "uses": [
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "thm-nagata-compactification",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-sf-derived-ses-triangle",
+    "thm-constructible-serre",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-derived-direct-image-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKY, lemma-loc-constant-shriek-rel-dim-1: finite etale prime-torsion argument; Tag 0GKX, lemma-constant-shriek-rel-dim-1"
+   }
+  },
+  {
+   "text": "The finite disjoint-clopen decomposition identifies g^*F with the biproduct of the extensions by zero of its restrictions. Compose compactifications to identify their shriek images. Additivity preserves this finite biproduct; constructible cohomology is closed under finite sums. Finally homology preserves the trace retraction, and a retract of a constructible sheaf is constructible, as the kernel of one minus its projector. This proves the assertion for every degree and every prescribed compactification, including empty sources and zero sheaves.",
+   "uses": [
+    "lem-pbc-t2-disjoint-open-extension-biproduct",
+    "lem-weil-pbc-etale-shriek-qcqs-composition",
+    "lem-weil-pbc-etale-shriek-compactification-independence",
+    "thm-constructible-serre"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKY, lemma-loc-constant-shriek-rel-dim-1: finite etale prime-torsion argument; Tag 0GKX, lemma-constant-shriek-rel-dim-1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-etale-lisse-finite-etale-filtration",
+  "lem-weil-pbc-finite-etale-module-trace-degree",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-weil-pbc-finite-proper",
+  "def-weil-pbc-projection-compactification",
+  "lem-weil-pbc-etale-shriek-qcqs-composition",
+  "lem-weil-pbc-etale-shriek-compactification-independence",
+  "thm-nagata-compactification",
+  "pqf-def-affine-morphism",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+  "lem-sf-derived-ses-triangle",
+  "thm-constructible-serre",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-pbc-t2-disjoint-open-extension-biproduct"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKY, lemma-loc-constant-shriek-rel-dim-1: finite etale prime-torsion argument; Tag 0GKX, lemma-constant-shriek-rel-dim-1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Constructibility of compactly supported cohomology for a prime torsion finite locally constant sheaf on an affine smooth relative curve over a finite type integer algebra",
+   "results": {
+    "hits": 8,
+    "note": "Unrelated locally constant condensed objects and affine limits; no compact-support constructibility theorem."
+   },
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsConstructibleEtaleModuleSheaf\"",
+   "results": {
+    "hits": 0,
+    "note": "Unknown identifier in Mathlib search."
+   },
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*[Ss]hriek|[Ss]hriek.*constructible",
+   "results": {
+    "hits": 0
+   },
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compact support pushforward of a finite locally constant sheaf killed by a prime on an affine smooth relative curve over a finitely generated integer algebra has constructible cohomology",
+   "results": {
+    "hits": 8,
+    "note": "Returned scheme module pushforward, Chevalley constructible image and condensed results, none equivalent."
+   },
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.LisseOpenRelativeLineConstructibility",
+  "date": "2026-10-18",
+  "group": "D9"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+   "place": "Affine prime-torsion part of Tag 0GKY: the finite etale trace and constant-filtration argument. The parent separately proves annihilator devissage and open-cover gluing.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PrimeLisseAffineCurveShriekConstructibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrimeLisseAffineCurveShriekConstructibility.lean",
+  "declaration": "AlgebraicGeometry.Etale.isConstructibleEtaleModuleSheaf_prime_lisse_affine_curve_shriek",
+  "statement": "theorem isConstructibleEtaleModuleSheaf_prime_lisse_affine_curve_shriek\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    (R : Type u) [CommRing R] [Algebra.FiniteType ℤ R]\n    {X : Scheme.{u}} (f : X ⟶ Spec (.of R))\n    [IsAffine X] [IsAffineHom f] [SmoothOfRelativeDimension 1 f]\n    (p : ℕ) (hp : p.Prime)\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (hF : Scheme.IsFiniteLocallyConstantSheaf F) (hkill : p • 𝟙 F = 0)\n    (c : Compactification f) (q : ℤ) :\n    Scheme.IsConstructibleEtaleModuleSheaf\n      ((_root_.DerivedCategory.Plus.homologyFunctor\n        (Sheaf (Spec (.of R)).smallEtaleTopology (ModuleCat.{u + 1} Λ)) q).obj\n        ((rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} Λ) c).obj\n          ((_root_.DerivedCategory.Plus.singleFunctor\n            (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0).obj F)))",
+  "branch": "sheaf-dag",
+  "by": "D9",
+  "date": "2026-10-18"
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-weil-pbc-prime-lisse-affine-curve-shriek-constructibility",
+  "worker": "stage3",
+  "summary": "The parent now proves coefficient annihilator devissage and finite-affine-cover gluing. This node isolates only the geometric prime-torsion affine case, with the source proof and the remaining interfaces identified.",
+  "blueprint": "Realizes the affine prime-torsion trace and constant-filtration part of Tag 0GKY, within the same proper-base-change unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "The same generic tool already approved for the parent: used in the prime-torsion affine part without replacing a unit statement or a unit proof step."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "The same generic tool already approved for the parent: used in the prime-torsion affine part without replacing a unit statement or a unit proof step."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-direct-image-exact",
+    "why": "The same generic tool already approved for the parent: used in the prime-torsion affine part without replacing a unit statement or a unit proof step."
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "The same generic tool already approved for the parent: used in the prime-torsion affine part without replacing a unit statement or a unit proof step."
+   },
+   {
+    "node": "lem-weil-pbc-finite-etale-module-trace-degree",
+    "why": "The same generic tool already approved for the parent: used in the prime-torsion affine part without replacing a unit statement or a unit proof step."
+   },
+   {
+    "node": "lem-sf-derived-ses-triangle",
+    "why": "The same generic tool already approved for the parent: used in the prime-torsion affine part without replacing a unit statement or a unit proof step."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "The same generic tool already approved for the parent: used in the prime-torsion affine part without replacing a unit statement or a unit proof step."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "The same generic tool already approved for the parent: used in the prime-torsion affine part without replacing a unit statement or a unit proof step."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "The same generic tool already approved for the parent: used in the prime-torsion affine part without replacing a unit statement or a unit proof step."
+   },
+   {
+    "node": "lem-pbc-t2-disjoint-open-extension-biproduct",
+    "why": "The same generic tool already approved for the parent: used in the prime-torsion affine part without replacing a unit statement or a unit proof step."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261018T071145-L-1666048",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D9",
+  "result": "pass",
+  "landing": "20261018T071145-L-1666048",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
