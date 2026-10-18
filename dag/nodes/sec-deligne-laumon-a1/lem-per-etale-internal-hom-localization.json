@@ -2,7 +2,7 @@
  "id": "lem-per-etale-internal-hom-localization",
  "kind": "statement",
  "title": "Etale internal Hom localization triangle for arbitrary coefficients",
- "statement": "Let $X$ be a scheme [def-pc-scheme], $A$ any commutative ring, and $i:Z\\hookrightarrow X$ a closed immersion with complementary open immersion $j:U\\hookrightarrow X$ [def-weil-closed-immersion, def-weil-open-immersion]. Use ordinary derived categories of sheaves of modules over the constant sheaves $A_T$ on the small etale sites $T_{\\mathrm{et}}$, $T=X,U,Z$ [def-weil-pbc-etale-site, def-weil-pbc-constant-sheaf, def-weil-pbc-derived-categories]. Inverse images $i^*,j^*$ are inverse images of module sheaves, applied to complexes [def-weil-pbc-inverse-image]. The functor $i_*$ is the exact closed direct image, applied termwise, $Rj_*$ is derived direct image [def-weil-pbc-direct-image], and $Ri^!$ is the right derived functor of $F\\mapsto i^*\\ker(F\\to j_*j^*F)$, where the arrow is the restriction adjunction unit. For every $K\\in D^b(X_{\\mathrm{et}},A)$ and $N\\in D^+(X_{\\mathrm{et}},A)$ there is a natural distinguished triangle [def-weil-triangulated-category]\n$$i_*R\\mathcal Hom_A(i^*K,Ri^!N)\\longrightarrow R\\mathcal Hom_A(K,N)\\longrightarrow Rj_*R\\mathcal Hom_A(j^*K,j^*N)\\longrightarrow\\bigl(i_*R\\mathcal Hom_A(i^*K,Ri^!N)\\bigr)[1].$$\nThe Hom objects are derived internal sheaf Hom [def-pur-derived-internal-hom]. The first two arrows are the ones obtained by applying this contravariant internal Hom to the open/closed extension triangle $j_!j^*K\\to K\\to i_*i^*K\\to(j_!j^*K)[1]$, followed by the internal-adjunction identifications for the open and closed immersions. No constructibility, finite Tor amplitude, finiteness of $A$, or dualizing-complex hypothesis is imposed.",
+ "statement": "Let $X$ be a scheme [def-pc-scheme], $A$ any commutative ring, and $i:Z\\hookrightarrow X$ a closed immersion with complementary open immersion $j:U\\hookrightarrow X$ [def-weil-closed-immersion, def-weil-open-immersion]. Use ordinary derived categories of sheaves of modules over the constant sheaves $A_T$ on the small etale sites $T_{\\mathrm{et}}$, $T=X,U,Z$ [def-weil-pbc-etale-site, def-weil-pbc-constant-sheaf, def-weil-pbc-derived-categories]. Inverse images $i^*,j^*$ are inverse images of module sheaves, applied to complexes [def-weil-pbc-inverse-image]. The functor $i_*$ is the exact closed direct image, applied termwise, $Rj_*$ is derived direct image [def-weil-pbc-direct-image], and $Ri^!$ is the right derived functor of $F\\mapsto i^*\\ker(F\\to j_*j^*F)$, where the arrow is the restriction adjunction unit. For every $K\\in D^b(X_{\\mathrm{et}},A)$ and $N\\in D^+(X_{\\mathrm{et}},A)$ there is a natural distinguished triangle [def-weil-triangulated-category]\n$$i_*R\\mathcal Hom_A(i^*K,Ri^!N)\\longrightarrow R\\mathcal Hom_A(K,N)\\longrightarrow Rj_*R\\mathcal Hom_A(j^*K,j^*N)\\longrightarrow\\bigl(i_*R\\mathcal Hom_A(i^*K,Ri^!N)\\bigr)[1].$$\nThe Hom objects are derived internal sheaf Hom [def-pur-derived-internal-hom]. The first two arrows are the ones obtained by applying this contravariant internal Hom to the open/closed extension triangle, with extension by zero $j_!$ [def-weil-pbc-extension-by-zero], $j_!j^*K\\to K\\to i_*i^*K\\to(j_!j^*K)[1]$, followed by the internal-adjunction identifications for the open and closed immersions. No constructibility, finite Tor amplitude, finiteness of $A$, or dualizing-complex hypothesis is imposed.",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "Expose XVII, proof of Lemma 7.6.10, displayed distinguished triangle, p. 313 (restricted here to bounded K and bounded-below N)."
@@ -20,9 +20,137 @@
   "def-pur-derived-internal-hom",
   "def-weil-pbc-extension-by-zero"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a bounded complex $B$ representing $K$ and a bounded-below complex $I$ of injective $A_X$-module sheaves representing $N$. The cited representative results give these models and say that $I$ is K-injective. Exact constant-coefficient inverse image computes $i^*K$ and $j^*K$ termwise, and the new sheaf adjunction lemma says that $i_* $ is exact and each $i^!_0 I^q$ is injective. Thus $i^!_0I$ is bounded below and K-injective. The right-derived-plus computation identifies it with $Ri^!N$, with exactly the kernel functor in the statement. There is no coefficient-finiteness assumption in any of these applications.",
+   "uses": [
+    "lem-sfb-bounded-representative",
+    "lem-weil-pbc-dplus-injective-representative",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-per-etale-closed-sheaf-internal-adjunction",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "09XQ (lemma-sections-with-support-acyclic), with bounded-below derived functors; ILO XVII 7.6.10 endpoint models"
+   }
+  },
+  {
+   "text": "Apply the open/closed short exact sequence to each term $B^q$, with its stated counit and unit. Naturality makes these sequences a short exact sequence of complexes $0\\to j_!j^*B\\to B\\to i_*i^*B\\to0$. The cone-to-quotient quasi-isomorphism identifies its standard cone triangle with $j_!j^*K\\to K\\to i_*i^*K\\to(j_!j^*K)[1]$: use exactness of $j_!$, exactness of inverse images, and exactness of $i_*$ from Step 1 to pass between models. The definition of the triangulated structure on the derived category makes this triangle distinguished.",
+   "uses": [
+    "lem-weil-pbc-open-closed-short-exact",
+    "lem-pc-cone-short-exact-quasi-iso",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-per-etale-closed-sheaf-internal-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "095L (lemma-ses-associated-to-open); cone comparison 0152 in derived.tex"
+   }
+  },
+  {
+   "text": "Apply contravariant $R\\mathcal Hom_A(-,N)$ to the triangle of Step 2. The cited triangulated-Hom statement gives a distinguished triangle with terms $R\\mathcal Hom_A(i_*i^*K,N)$, $R\\mathcal Hom_A(K,N)$, and $R\\mathcal Hom_A(j_!j^*K,N)$, in that order, followed by the shift of the first. Its arrows are precisely precomposition by the unit and counit of Step 2, with the usual Hom shift sign.",
+   "uses": [
+    "lem-sf-hom-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "08JC (lemma-RHom-triangulated), as used in ILO XVII 7.6.10"
+   }
+  },
+  {
+   "text": "For the closed term, apply the sheaf internal adjunction to $G=i^*B^p$ and $F=I^q$ for every $p,q$. In degree $n$ take the product over $p$ with $q=p+n$. This is a finite product because $B$ is bounded; $i_*$ preserves it, since its sections on $V$ are sections on $V\\times_XZ$. Naturality in both inputs identifies the Hom differentials $d_I\\varphi-(-1)^n\\varphi d_B$, so the termwise maps give an isomorphism of Hom complexes\n$$\\mathcal Hom^\\bullet(i_*i^*B,I)\\cong i_*\\mathcal Hom^\\bullet(i^*B,i^!_0I).$$\nThe definition of derived internal Hom applies because $I$ and $i^!_0I$ are K-injective by Step 1. Consequently the left term of Step 3 is naturally $i_*R\\mathcal Hom_A(i^*K,Ri^!N)$.",
+   "uses": [
+    "lem-per-etale-closed-sheaf-internal-adjunction",
+    "def-pur-derived-internal-hom",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "09XQ support adjunction on etale slices; ILO XVII 7.6.10, closed term"
+   }
+  },
+  {
+   "text": "For any module sheaves $G$ on $U$ and $F$ on $X$, the open adjunction on each etale slice $V$ gives\n$$\\mathcal Hom_X(j_!G,F)(V)=\\operatorname{Hom}_{V}(j_{V!}(G|_{V\\times_XU}),F|_V)\\cong\\operatorname{Hom}_{V\\times_XU}(G|_{V\\times_XU},F|_{V\\times_XU}).$$\nIndeed the restriction of the extension-by-zero presheaf to $V$ is the extension-by-zero presheaf for $V\\times_XU$ (an object over $V$ factors through this open exactly when its composite to $X$ factors through $U$). Sheafification gives the displayed equality. These adjunction bijections commute with slice restriction and give $\\mathcal Hom_X(j_!G,F)\\cong j_*\\mathcal Hom_U(G,j^*F)$, with the counit-induced inverse. This is a direct use of the cited adjunction and definition of sheaf Hom.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "def-weil-pbc-extension-by-zero",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "08FJ (lemma-adjoint-lower-shriek-restrict), sheaf-level slice calculation using 03DI"
+   }
+  },
+  {
+   "text": "Take a K-flat complex $P$ with flat terms and a quasi-isomorphism $P\\to B$. The derived pullback lemma makes $j^*P$ K-flat. The etale inverse-image/restriction identification applies to the open immersion, and its scalar actions are those of constant coefficient pullback. Restriction to the localized site preserves K-injectives, so $j^*I$ is K-injective. Hence $J=\\mathcal Hom^\\bullet(j^*P,j^*I)$ is K-injective and represents $R\\mathcal Hom_A(j^*K,j^*N)$. Since $j_!$ and $j^*$ preserve quasi-isomorphisms, $j_!j^*P$ represents $j_!j^*K$. Apply Step 5 degreewise and take products: $j_*$ commutes with these products by its sectionwise formula. Naturality again commutes with the Hom differential. We obtain\n$$\\mathcal Hom^\\bullet(j_!j^*P,I)\\cong j_*J.$$\nThe left side computes the right term of Step 3; the right side computes $Rj_*J$ because $J$ is K-injective. This proves the required open endpoint identification without a Tor or constructibility assumption.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-kinjective-restrict-localized",
+    "lem-pur-hom-kflat-into-kinjective",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-pur-derived-internal-hom",
+    "lem-weil-pbc-kinjective-total-derived",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-etale-inverse-image-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "0G7E (lemma-pullback-K-flat), 08FJ, 0A96 (lemma-RHom-from-K-flat-into-K-injective); ILO XVII 7.6.10, open term"
+   }
+  },
+  {
+   "text": "Substitute the endpoint isomorphisms of Steps 4 and 6 into the distinguished triangle of Step 3, including the shift of the closed comparison for its last arrow. A triangle isomorphic to a distinguished triangle is distinguished. This gives exactly the displayed triangle in the statement. Its first two arrows are precomposition with $K\\to i_*i^*K$ and $j_!j^*K\\to K$, followed by those same internal adjunctions. All sheaf comparisons are natural in their two arguments; on models they apply the adjunction bijection to each component of a map. Therefore they commute with maps of complexes and with homotopies. Quasi-isomorphisms in either Hom input are inverted by the derived-Hom construction, so these comparisons descend independently of the choices of $B,I,P$. The cone construction in Step 2, its natural cone-to-quotient map, and contravariant Hom give the claimed natural triangle, with the signed shift convention already fixed in Step 3.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pur-derived-internal-hom",
+    "lem-sf-hom-triangulated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Lemma 7.6.10, displayed triangle, printed p. 313"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-bounded-representative",
+  "lem-weil-pbc-dplus-injective-representative",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-per-etale-closed-sheaf-internal-adjunction",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-pc-cone-short-exact-quasi-iso",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-sf-hom-triangulated",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "def-weil-pbc-extension-by-zero",
+  "def-pur-sheaf-hom",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-etale-inverse-image-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, proof of Lemma 7.6.10, p. 313; expanded injective/K-flat argument for arbitrary commutative coefficients using the cited Stacks lemmas."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +186,39 @@
    "results": "8 hits; top: RingHom.Etale.ofLocalizationSpanTarget, AlgebraicGeometry.Scheme.isOpenImmersion_SpecMap_localizationAway, CategoryTheory.Triangulated.Localization.distinguished_cocone_triangle, AlgebraicGeometry.IsClosedImmersion.instIsMultiplicativeScheme, AlgebraicGeometry.Scheme.instIsOpenImmersionMapOfHomAwayAlgebraMap, AlgebraicGeometry.IsClosedImmersion.isIso_iff_ker_eq_bot, DerivedCategory.instPretriangulated, AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion; note: ; digest: bbdd344fbf55f773",
    "date": "2026-10-18",
    "verdict": "no match: the results do not give the closed/open internal sheaf-valued derived Hom triangle"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal sheaf Hom open closed localization distinguished triangle for arbitrary commutative ring etale sheaves",
+   "results": "8 hits; ModuleCat.Tilde.openToLocalization, CategoryTheory.Sheaf.H, ModuleCat.Tilde.toOpen, ModuleCat.tilde, AlgebraicGeometry.Scheme.Modules.Hom, PresheafOfModules.DifferentialsConstruction.instHasDifferentials, PresheafOfModules.homEquivOfIsLocallyBijective, PresheafOfModules.homEquivOfIsLocallyBijective_apply; ; digest 6fa9b1b11b79b389",
+   "date": "2026-10-18",
+   "verdict": "no match: hits do not state the etale closed/open derived internal sheaf Hom triangle."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward",
+   "results": "12 hits; SheafOfModules.pushforwardId, SheafOfModules.pushforward, SheafOfModules.instIsLeftAdjointOverOverRingCatPushforwardIdSheafOver, SheafOfModules.overPushforwardOverAdj, SheafOfModules.isLeftAdjoint_pushforward_of_isIso, SheafOfModules.pushforwardCongr, SheafOfModules.pushforwardNatIso, SheafOfModules.pushforwardNatTrans; ; digest 044b55baec8a6901",
+   "date": "2026-10-18",
+   "verdict": "no match: hits do not state the etale closed/open derived internal sheaf Hom triangle."
+  },
+  {
+   "tool": "grep",
+   "query": "localizationTriangle|supportedLocalization|upperShriek",
+   "results": "0 hits; ; ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-18",
+   "verdict": "no match: hits do not state the etale closed/open derived internal sheaf Hom triangle.",
+   "directory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived sheaf Hom converts open closed extension triangle to closed exceptional Hom and open direct image Hom",
+   "results": "8 hits; CategoryTheory.sheafHom, CategoryTheory.sheafHom', CategoryTheory.Pseudofunctor.sheafHom, CategoryTheory.ShortComplex.ShortExact.extClass_hom, CategoryTheory.Abelian.Ext.mk₀_hom, CategoryTheory.Sheaf.Hom.recOn, AlgebraicGeometry.Scheme.Modules.Hom, CategoryTheory.Sheaf.Hom; ; digest d116cd3ecc513867",
+   "date": "2026-10-18",
+   "verdict": "no match: hits do not state the etale closed/open derived internal sheaf Hom triangle."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-ctf-hom-localization-devissage",
@@ -86,5 +243,124 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-etale-internal-hom-localization",
+  "worker": "stage1",
+  "summary": "Expanded the localization triangle into seven steps: model choices, the exact open/closed extension sequence and cone, contravariant Hom exactness, a termwise closed adjunction, the explicit open sheaf adjunction on slices, its K-flat/K-injective derived identification, and natural transport of the triangle. One new statement-only sheaf-level closed internal-adjunction dependency. Existing finite-coefficient/pro-etale results were not applied to arbitrary etale coefficients.",
+  "blueprint": "Proof, Step 1 of lem-per-artin-gabber-affine-curve: 'Relative Verdier duality, biduality ... over the same arbitrary field $k$', through lem-per-qbar-arbitrary-field-duality, lem-per-finite-residue-dualizing and lem-per-potential-local-duality; the last node's Step 2 extends finite-field coefficients.; coefficient comparison via ILO XVII 7.6.1, proof p. 314. Subargument: ILO XVII 7.6.10 closed/open devissage. Dependency of the localization-devissage argument: Expose XVII, proof of Lemma 7.6.10, displayed distinguished triangle, p. 313 (restricted here to bounded K and bounded-below N). Steps 1-7 realize the displayed localization triangle used in ILO XVII 7.6.10, within the existing coefficient-comparison branch.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-bounded-representative",
+    "why": "Generic sheaf/derived-category tool for the explicit localization argument; no step of the Fourier/perverse unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Generic sheaf/derived-category tool for the explicit localization argument; no step of the Fourier/perverse unit is replaced."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic sheaf/derived-category tool for the explicit localization argument; no step of the Fourier/perverse unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-plus-injective",
+    "why": "Generic sheaf/derived-category tool for the explicit localization argument; no step of the Fourier/perverse unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-open-closed-short-exact",
+    "why": "Generic sheaf/derived-category tool for the explicit localization argument; no step of the Fourier/perverse unit is replaced."
+   },
+   {
+    "node": "lem-pc-cone-short-exact-quasi-iso",
+    "why": "Generic sheaf/derived-category tool for the explicit localization argument; no step of the Fourier/perverse unit is replaced."
+   },
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "Generic sheaf/derived-category tool for the explicit localization argument; no step of the Fourier/perverse unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic sheaf/derived-category tool for the explicit localization argument; no step of the Fourier/perverse unit is replaced."
+   },
+   {
+    "node": "lem-sf-hom-triangulated",
+    "why": "Generic sheaf/derived-category tool for the explicit localization argument; no step of the Fourier/perverse unit is replaced."
+   },
+   {
+    "node": "def-pur-derived-internal-hom",
+    "why": "Generic sheaf/derived-category tool for the explicit localization argument; no step of the Fourier/perverse unit is replaced."
+   },
+   {
+    "node": "def-weil-pbc-direct-image",
+    "why": "Generic sheaf/derived-category tool for the explicit localization argument; no step of the Fourier/perverse unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "Generic sheaf/derived-category tool for the explicit localization argument; no step of the Fourier/perverse unit is replaced."
+   },
+   {
+    "node": "def-weil-pbc-extension-by-zero",
+    "why": "Generic sheaf/derived-category tool for the explicit localization argument; no step of the Fourier/perverse unit is replaced."
+   },
+   {
+    "node": "def-pur-sheaf-hom",
+    "why": "Generic sheaf/derived-category tool for the explicit localization argument; no step of the Fourier/perverse unit is replaced."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic sheaf/derived-category tool for the explicit localization argument; no step of the Fourier/perverse unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic sheaf/derived-category tool for the explicit localization argument; no step of the Fourier/perverse unit is replaced."
+   },
+   {
+    "node": "lem-pur-kinjective-restrict-localized",
+    "why": "Generic sheaf/derived-category tool for the explicit localization argument; no step of the Fourier/perverse unit is replaced."
+   },
+   {
+    "node": "lem-pur-hom-kflat-into-kinjective",
+    "why": "Generic sheaf/derived-category tool for the explicit localization argument; no step of the Fourier/perverse unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Generic sheaf/derived-category tool for the explicit localization argument; no step of the Fourier/perverse unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Generic sheaf/derived-category tool for the explicit localization argument; no step of the Fourier/perverse unit is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-bounded-representative",
+  "lem-weil-pbc-dplus-injective-representative",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-pc-cone-short-exact-quasi-iso",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-sf-hom-triangulated",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "def-weil-pbc-extension-by-zero",
+  "def-pur-sheaf-hom",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-kinjective-restrict-localized",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-etale-inverse-image-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-e082815a4",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-e082815a4 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited statement, ILO XVII 7.6.10 (printed p.313: the displayed triangle i⋆RHom(i⋆K,i!L)→RHom(K,L)→Rj⋆RHom(j⋆K,j⋆L)) and the cited Stacks lemmas 09XQ, 08FJ, 0A96, 0G7E, 08JC and 095L. The item says the same as ILO, restricted to K bounded and N bounded below. The parent only applies it to N in D^b_P, and the live statement changed only by an added [def-weil-pbc-extension-by-zero] citation for j_! (already in stmt_deps), so nothing is weakened. All seven steps check against their cited statements. Step 1: B bounded; I is a bounded-below complex of injectives, so K-injective; i^!_0 I is K-injective by the new node and computes Ri^! by right-derived-plus (2). Step 2: open/closed short exact sequence, cone, distinguished triangle. Step 3: the first-variable order of lem-sf-hom-triangulated matches. Step 4: finite products from bounded B; Hom sign as in def-pur-derived-internal-hom. Step 5: accepted as elementary; the slice presheaf identity comes straight from the definition, sheafification commutes with restriction to a slice, and the DAG has no étale internal j_! Hom node. Step 6: K-flat j^*P, K-injective j^*I, then J is K-injective by 0A96; QJ lies in D^+, so j_*J computes Rj_*. Step 7: the triangle is transported by isomorphisms. The new node lem-per-etale-closed-sheaf-internal-adjunction is true. Tests: Z empty, Z=X, A=0, and a strictly henselian DVR with F=A_X (both sides 0). It is self-contained, has no proof sketch and does not restate a clause of the item. It strictly generalizes lem-pur-etale-supported-kernel-adjunction (abelian sheaves, global Hom) by adding A-modules, the internal Hom form and injectives; its later split should cite that node. The pro-étale lem-sfb-open-closed-internal-hom-formulas and the finite-coefficient closed-support nodes do not apply. No cycle. The declared generic tool_uses are accepted. No SGA source is used. No fixes."
  }
 }
