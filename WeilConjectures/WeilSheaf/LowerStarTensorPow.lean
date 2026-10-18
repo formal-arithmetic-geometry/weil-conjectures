@@ -238,9 +238,6 @@ lemma germ_lowerStar_toIhomDualSection
     rfl
   exact (congrArg (fun f ↦ f.hom (σ ⊗ₜ τ)) e).symm
 
-set_option maxRecDepth 10000 in
-set_option maxHeartbeats 1000000 in
--- unifying the stalks of `φ_* (F^{⊗ (k + 1)})` and of `φ̄_* 𝓗om(F^∨, F^{⊗ k})` unfolds deeply
 /-- **Powers of eigenvalues on stalks of pushforwards of tensor powers.** If `α` is an eigenvalue
 of the local Frobenius on the stalk `(φ_* F)_s` of the pushforward of a lisse Weil sheaf `F`, then
 `α ^ k` is an eigenvalue of the local Frobenius on `(φ_* (F^{⊗ k}))_s`. -/
@@ -262,15 +259,20 @@ theorem hasEigenvalue_stalkAt_lowerStar_tensorPow {F : WeilSheaf k₀ l X} (hF :
         (F.tensorPow hF k).obj.carrier.X) t (tensorPowSection F hF σ k)
   have hfrob (k : ℕ) : (((lowerStar φ).obj (F.tensorPow hF k)).stalkAt s m hs).frobenius (w k) =
       (α ^ k) • w k := by
+    -- The germ lemmas and the Frobenius lemmas describe the same stalk element `y` by terms that
+    -- differ in implicit objects (`φ̄_* G` against `(φ_* G).obj.carrier.X`). We name `y` and
+    -- compare these terms directly: asked to compare the Frobenius applied to both terms, the
+    -- kernel unfolds the Frobenius of the stalk instead, which takes minutes.
     induction k with
     | zero =>
       have h := stalkAt_unit_frobenius (k₀ := k₀) (l := l) s m hs
         ((lowerStar φ).obj (F.tensorPow hF 0)) _ (lowerStar_unit_str φ (adicConstant k₀ l X) _
           (adicConstant_unit_str (k₀ := k₀) (l := l) (X := X)))
-      have hw := germ_lowerStar_adicUnitSection (l := l) φ s t
-      calc _ = _ := congrArg (((lowerStar φ).obj (F.tensorPow hF 0)).stalkAt s m hs).frobenius hw
-        _ = _ := h
-        _ = (α ^ 0) • w 0 := by rw [pow_zero, one_smul]; exact hw.symm
+      obtain ⟨y, hy, hwy⟩ : ∃ y,
+          (((lowerStar φ).obj (F.tensorPow hF 0)).stalkAt s m hs).frobenius y = y ∧ w 0 = y :=
+        ⟨_, h, germ_lowerStar_adicUnitSection (l := l) φ s t⟩
+      rw [pow_zero, one_smul, hwy]
+      exact hy
     | succ k ih =>
       let v₀ : (((lowerStar φ).obj F).stalkAt s m hs).carrier := germ (WeilCoefficients.{u} l) s
         ((Scheme.Hom.geometricFiberMap φ (comp_over φ _))_*[_].obj F.obj.carrier.X) t σ
@@ -281,15 +283,13 @@ theorem hasEigenvalue_stalkAt_lowerStar_tensorPow {F : WeilSheaf k₀ l X} (hF :
         (lowerStar_pairing_str φ F (F.tensorPow hF k) (F.tensorPow hF (k + 1)) _
           (toIhomDual_str F (F.tensorPow hF k) hF)) v₀ (w k)
       rw [hv₁, ih, smul_tmul_smul_map] at h
-      have hw := germ_lowerStar_toIhomDualSection φ s t F.obj.carrier
-        (F.tensorPow hF k).obj.carrier σ (tensorPowSection F hF σ k)
-      calc _ = _ :=
-          congrArg (((lowerStar φ).obj (F.tensorPow hF (k + 1))).stalkAt s m hs).frobenius hw
-        _ = _ := h.symm
-        _ = (α ^ (k + 1)) • w (k + 1) := by
-          rw [← pow_succ']
-          exact congrArg (fun z ↦ (ULift.up (α ^ (k + 1)) : ULift.{u + 1} (PadicAlgCl l)) • z)
-            hw.symm
+      obtain ⟨y, hy, hwy⟩ : ∃ y,
+          (((lowerStar φ).obj (F.tensorPow hF (k + 1))).stalkAt s m hs).frobenius y =
+            (ULift.up (α * α ^ k) : ULift.{u + 1} (PadicAlgCl l)) • y ∧ w (k + 1) = y :=
+        ⟨_, h.symm, germ_lowerStar_toIhomDualSection φ s t F.obj.carrier
+          (F.tensorPow hF k).obj.carrier σ (tensorPowSection F hF σ k)⟩
+      rw [hwy, hy, pow_succ']
+      rfl
   have hne (k : ℕ) : w k ≠ 0 := by
     intro h
     obtain ⟨V', f, t', ht', hf⟩ := exists_map_eq_zero_of_germ_eq_zero s _ t _ h
