@@ -2,7 +2,7 @@
  "id": "lem-pur-reduction-limit-shift-adjunction",
  "kind": "statement",
  "title": "Shift compatibility of the reduction and total-limit adjunction",
- "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R$ and uniformizer $t$, and $A_n=R/t^n$ for $n\\ge1$. For finite-type $k$-schemes $W$ with their small pro-etale sites put $\\widehat R_W=\\lim_n(A_n)_W$, and let $\\mathscr S_W$ be the abelian category of strict semilinear systems of $(A_n)_W$-module sheaves, with its ordinary unbounded derived category, derived reduction $\\mathcal R_W$ and total-limit functor $\\mathcal L_W=R\\lim\\operatorname{Res}$ of [lem-coef-derived-system-evaluation-calculus]; regard $\\mathscr S_W$ as the module category of the ring diagram $((A_n)_W)_n$ on the simultaneous ringed diagram site of [lem-sf-integral-compactification-system-realization, def-coef-ringed-sequence-site]. Equip the reduction functor $\\mathcal R_W$ and the total-limit functor $\\mathcal L_W=R\\lim\\operatorname{Res}$ with the termwise cochain-shift comparisons, using the functorial total derived limit of [lem-weil-pbc-ringed-strict-tower-homotopy-limit], computed on a K-injective tower resolution; its Roos triangle is in the sense of [def-weil-derived-limit], and its shifted-cone model uses the cochain convention of [def-weil-abstract-derived-category]. The derived adjunction $\\mathcal R_W\\dashv\\mathcal L_W$ of [lem-coef-derived-system-evaluation-calculus] has unit $u:P\\to\\mathcal L_W\\mathcal R_WP$ and counit $e_N:\\mathcal R_W\\mathcal L_WN\\to N$. For every integer $r$, both $u$ and $e$ commute with the shift comparisons, naturally in $P\\in D(\\widehat R_W)$ and $N\\in D(\\mathscr S_W)$, including the signs from the shifted Roos cone.",
+ "statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R$ and uniformizer $t$, and $A_n=R/t^n$ for $n\\ge1$. For finite-type $k$-schemes $W$ with their small pro-etale sites put $\\widehat R_W=\\lim_n(A_n)_W$, and let $\\mathscr S_W$ be the abelian category of strict semilinear systems of $(A_n)_W$-module sheaves, with its ordinary unbounded derived category, derived reduction $\\mathcal R_W$ and total-limit functor $\\mathcal L_W=R\\lim\\operatorname{Res}$ of [lem-coef-derived-system-evaluation-calculus]; regard $\\mathscr S_W$ as the module category of the ring diagram $((A_n)_W)_n$ on the simultaneous ringed diagram site of [lem-sf-integral-compactification-system-realization, def-coef-ringed-sequence-site]. Equip the reduction functor $\\mathcal R_W$ and the total-limit functor $\\mathcal L_W=R\\lim\\operatorname{Res}$ with the termwise cochain-shift comparisons, using the functorial total derived limit of [lem-weil-pbc-ringed-strict-tower-homotopy-limit], computed on a K-injective tower resolution; its Roos triangle is in the sense of [def-weil-derived-limit], and its shifted-cone model uses the cochain convention of [def-weil-abstract-derived-category]. The derived adjunction $\\mathcal R_W\\dashv\\mathcal L_W$ of [lem-coef-derived-system-evaluation-calculus] has unit $u:P\\to\\mathcal L_W\\mathcal R_WP$ and counit $e_N:\\mathcal R_W\\mathcal L_WN\\to N$. For every integer $r$, both $u$ and $e$ commute with the shift comparisons, naturally in $P\\in D(\\widehat R_W)$ and $N\\in D(\\mathscr S_W)$, including the signs from the shifted Roos cone. Equivalently, for every coefficient calculus S supplied by [lem-coef-derived-system-evaluation-calculus] together with its coherence data, the stated shift comparisons and unit/counit compatibilities exist.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
   "place": "Coefficient-comparison sentence: the actual reduction/total-limit adjunction and its unit and counit in the expression-tree recursion"
@@ -309,5 +309,49 @@
   "group": "NY",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-8180c2464 (reviewer sub-agent of L); spot-checked: FIX, one labeling repair: step 6 had elementary=true although it relies on lem-weil-tower-evaluation-kinjective and lem-pc-ringed-space-product-kinjective (C2). I set it to false; the corrected whole file is in fixes/dag/nodes/sec-smooth-purity/lem-pur-reduction-limit-shift-adjunction.json and nothing else changed. I read the item, all 7 steps and the statement of every cited node, plus calculus proof steps 1-4 to see what its canonical adjunction means. I also read Stacks 0940/0941 (sites-cohomology.tex 5016-5110), the tags for 03D7, 07A6, 0D6E, 0A8D, 06YY, 079P, 0BK6 and 070H, unit sk-thm-sf-compatibility clause (7), and the coefficient sentence of the main-20261015 fix-prop-coherence.proof.md. Statement: true and not weakened. The worker's correction (def-weil-derived-limit defines a property of an object plus a triangle, not a functorial model) is right and matches the citer integral-realization-shift-coherence step 1. Step 1 agrees with Stacks 0940, with p^*Q=(Q tensor_A B_n)_n. Step 2: flat-term K-flat representatives, and the shift differential sign checks out. Step 3: p=g a, Ra_*=D(U), composition normalization is lim j, and with j[r] both sides have lim j^{i+r} in degree i. Step 4: the calculus adjunction is the derived adjunction of p transported along the step 2-3 comparisons, not inferred from evaluations; the unit and counit equations have the correct CommShift shape. Step 5: the split-transition argument with T_n(F)=i_{n,!}F checked. Step 6: I recomputed the cone C(h)[-1] in the def-weil-abstract-derived-category convention and the chi_r chain-map identity (-dy-(-1)^r hx,(-1)^r dx); also chi_r eta_{I[r]}=eta_I[r]. No duplicates: lem-pc-pinned-derived-adjunction-shifts and lem-pur-open-adjunction-shift state different things. No new nodes and no SGA citation. I accept the 13 declared generic tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurReductionLimitShiftAdjunction",
+  "declaration": "WeilConjectures.purReductionLimitShiftAdjunction",
+  "declarations": [
+   "WeilConjectures.purCoefficientLimitModel",
+   "WeilConjectures.purCoefficientShiftedResolution",
+   "WeilConjectures.purCoefficientRoosProductShift",
+   "WeilConjectures.PurCoefficientRoosTriangle",
+   "WeilConjectures.PurReductionLimitShiftData",
+   "WeilConjectures.purReductionLimitShiftAdjunction"
+  ],
+  "file": "lean/Sheaf/Paper/PurReductionLimitShiftAdjunction.lean",
+  "statement": "theorem purReductionLimitShiftAdjunction (S : CoefficientDerivedSystemCalculus l E W) (hS : CoefficientDerivedSystemCoherence l E W S) : Nonempty (PurReductionLimitShiftData l E W S)",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4d104ad09",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Re-delivery after two H3/H5 RETURNs (960c6e, a3006148). The node is unchanged except for lean.declarations and the formatted signature; the accepted ∀ S statement_change is kept. Repairs: limit_shift_resolution fixes coefficientSequenceLimit.commShiftIso against purCoefficientLimitModel (exact restriction, Rlim Q(j), rightDerivedFunctorObjQIso) for every K-injective j and exactly j[r], with lim's termwise shift. finite_shift_model fixes the finite shifts against coefficientFiniteReductionModel and the termwise mapHomologicalComplex shift on K-flat Q. The reduction shift is then determined by unit_shift/counit_shift, and reduction_shift_evaluation is real content. The Roos triangle has the actual limit as first vertex, 1-s on the actual tower transitions and p fixed by lim.π; its shift equation uses the same limit_shift and gives δ the sign r.negOnePow with shiftFunctorComm, which I checked against Mathlib's Triangle.shiftFunctor (iso (1,ε,1)) and the node's χ_r. The old rightAdjointCommShift vacuity attack no longer applies; reductionEvaluation is determined by unit_projection, so the ∀ S statement can be proved. Verbatim statement, 6 declarations, one sorry, docstrings, ≤100-char lines and universes OK. nt_compile --json: 27.7 s, exit 0, clean. Advisory: the reduction shift is fixed only via evaluations plus the adjunction (the dependency's reductionModel is itself only evaluation-level); the Roos δ is chosen rather than tied to a cone (per the accepted def-weil-derived-limit correction); DerivedAdjunctionShift and RingedStrictTowerHomotopyLimitIndependentCoefficients are proof-only imports.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-18",
+  "by": "Q18 stage 2",
+  "old_statement": "Fix $k=\\overline{\\mathbf F}_q$, a prime $\\ell\\ne\\operatorname{char}k$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $R$ and uniformizer $t$, and $A_n=R/t^n$ for $n\\ge1$. For finite-type $k$-schemes $W$ with their small pro-etale sites put $\\widehat R_W=\\lim_n(A_n)_W$, and let $\\mathscr S_W$ be the abelian category of strict semilinear systems of $(A_n)_W$-module sheaves, with its ordinary unbounded derived category, derived reduction $\\mathcal R_W$ and total-limit functor $\\mathcal L_W=R\\lim\\operatorname{Res}$ of [lem-coef-derived-system-evaluation-calculus]; regard $\\mathscr S_W$ as the module category of the ring diagram $((A_n)_W)_n$ on the simultaneous ringed diagram site of [lem-sf-integral-compactification-system-realization, def-coef-ringed-sequence-site]. Equip the reduction functor $\\mathcal R_W$ and the total-limit functor $\\mathcal L_W=R\\lim\\operatorname{Res}$ with the termwise cochain-shift comparisons, using the functorial total derived limit of [lem-weil-pbc-ringed-strict-tower-homotopy-limit], computed on a K-injective tower resolution; its Roos triangle is in the sense of [def-weil-derived-limit], and its shifted-cone model uses the cochain convention of [def-weil-abstract-derived-category]. The derived adjunction $\\mathcal R_W\\dashv\\mathcal L_W$ of [lem-coef-derived-system-evaluation-calculus] has unit $u:P\\to\\mathcal L_W\\mathcal R_WP$ and counit $e_N:\\mathcal R_W\\mathcal L_WN\\to N$. For every integer $r$, both $u$ and $e$ commute with the shift comparisons, naturally in $P\\in D(\\widehat R_W)$ and $N\\in D(\\mathscr S_W)$, including the signs from the shifted Roos cone.",
+  "source": {
+   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-package/fix-prop-coherence.proof.md",
+   "place": "Coefficient-comparison sentence: the actual reduction/total-limit adjunction and its unit and counit in the expression-tree recursion"
+  },
+  "citers": [
+   {
+    "id": "lem-pur-integral-realization-shift-coherence",
+    "holds": true,
+    "note": "Its proof uses this shift theorem for the actual coefficient calculus; the universal corrected conclusion supplies the same square."
+   }
+  ],
+  "what": "The existential conclusion allowed choosing a new coefficient calculus S and its coherence witness, so it did not assert shift compatibility for each calculus already supplied by the cited evaluation-calculus statement. The source quantifies over the actual derived reduction/limit adjunction; the corrected statement makes that universal quantification explicit while retaining every hypothesis and clause."
  }
 }

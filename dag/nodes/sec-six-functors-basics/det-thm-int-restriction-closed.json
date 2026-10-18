@@ -389,5 +389,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntegralRestrictionClosed",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.integralRestrictionClosed",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.generatorsToLocalizing",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.integralRestrictionClosedAssertions",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralCompactSupport.integralRestrictionClosed"
+  ],
+  "file": "lean/Sheaf/SixFunctors/IntegralRestrictionClosed.lean",
+  "statement": "theorem integralRestrictionClosed (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {X : Scheme.{u}} [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] {Z : Scheme.{u}} [Z.Over (Spec (.of k))] [LocallyOfFiniteType (Z ↘ Spec (.of k))] [QuasiCompact (Z ↘ Spec (.of k))] [IsSeparated (Z ↘ Spec (.of k))] (i : Z ⟶ X) [IsClosedImmersion i] [i.IsOver (Spec (.of k))] : ∃ hAdd : (closedModuleSectionsWithSupport (Profinite.padicIntegersRingObj ℓ E.val) i i.openComplement.ι).Additive, integralRestrictionClosedAssertions (k := k) ℓ E i hAdd",
+  "branch": "newtargets-dag",
+  "by": "Q10",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-d5eca43da"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d5eca43da",
+  "group": "Q10",
+  "result": "fix",
+  "note": "Statement correct against the node, source and stmt_deps: same standing hypotheses as formal_closed_support_derived and exists_integralBrownAdjoint (nothing stronger, no universe restriction); coefficient padicIntegersRingObj ℓ E.val; Dbc = constantModelBoundedConstructible; Loc = IntegralCompactSupport.localizing; RΓ_Z = rightDerivedFunctor of closedModuleSectionsWithSupport along the canonical i.openComplement.ι, with the dep's Additive witness. Clause 1 is generators X K → generators Z (RΓ_Z K). Clause 2 is a Nonempty natural iso on Dbc(X) for every BoundaryCompactification c (inhabited by (id_Z,i)), every Prop preservation witness h and every adjoint G of lowerShriek; the node names no canonical map, so this is its assertion. Helpers are real (ObjectProperty.lift, Prop package), sorry only, only the lean field changed, statement verbatim, lines ≤100. Edge cases Z/X empty, i=id, K=0 covered. nt_compile --json rc 0 for the delivered module (5.3 s) and the fixed module (5.5 s). FIX for H8: the theorem docstring condensed the node's 9 steps into two sentences, omitting steps 1, 2, 4, 6, 7 and 8; fixes/IntegralRestrictionClosed.lean replaces only that docstring with the 9 numbered steps, signature byte-identical. Advisory: brief second reading; report calls openComplement Mathlib's although it is upstream WeilConjectures; some public imports probably redundant."
  }
 }
