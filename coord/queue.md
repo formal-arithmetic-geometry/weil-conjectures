@@ -1,6 +1,6 @@
 # Work queue
 
-1464 items; claim with `tools/claim.py next <group> [--stage N]`.
+1466 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (1464)
+## Stage 3: modules to prove (1466)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -33,10 +33,12 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `WeilConjectures.SixFunctors.ProEtale.Adic.LisseMonodromy` | 7 | 1 | proof | route |
 | `WeilConjectures.WeilSheaf.DenseOpen` | 7 | 1 | proof | route |
 | `WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension` | 8 | 4 | proof | route |
+| `WeilConjectures.WeilSheaf.AffineLineCohomology` | 8 | 1 | proof | route |
 | `WeilConjectures.WeilSheaf.ArtinSchreierDual` | 8 | 1 | proof | route |
 | `Sheaf.Paper.EtaleFiniteCoefficientHomArrow` | 9 | 7 | proof | route |
 | `Sheaf.SixFunctors.FlatModel` | 9 | 5 | proof | route |
 | `WeilConjectures.WeilSheaf.FourierInversion.Composite` | 11 | 1 | proof | route |
+| `WeilConjectures.WeilSheaf.FourierInversion.Delta` | 11 | 1 | proof | route |
 | `WeilConjectures.WeilSheaf.FourierInversion.UpperStar` | 12 | 3 | proof | route |
 | `Sheaf.Paper.PurityFrameClass` | 13 | 4 | proof | route |
 | `Sheaf.Paper.DenseOpenPiOneSurjective` | - | 8 | proof | route |
@@ -1552,7 +1554,7 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.SixFunctors.IntegralCompactificationSystemRealization` | - | 1 | `lem-sf-generator-reduction-coherence` |
 | `Sheaf.SixFunctors.IntegralRealizationShiftCoherence` | - | 1 | `lem-pur-integral-basic-operation-shift` |
 
-## Stage 3: held for an open upstream PR (16)
+## Stage 3: held for an open upstream PR (14)
 
 Not items: an open Orchestra branch or PR of the source library proves the module (~/upstream-pr/upstream-pending.tsv, the human, 2026-10-18: do not duplicate Orchestra's open PRs); the routine sync brings the proof, and the hold ends when no sorry is left.
 
@@ -1560,17 +1562,15 @@ Not items: an open Orchestra branch or PR of the source library proves the modul
 |---|---|
 | `WeilConjectures.AlgebraicGeometry.Bertini` | bundle/sec-deligne-laumon-general-d1 |
 | `WeilConjectures.DeligneLaumon.AffineLine.DegreeOne` | bundle/sec-deligne-laumon-a1-d1 |
-| `WeilConjectures.DeligneLaumon.AffineLine.Perverse` | bundle/sec-deligne-laumon-a1-d1,bundle/sec-fourier-transform-d1,bundle/sec-six-functors-d1 |
+| `WeilConjectures.DeligneLaumon.AffineLine.Perverse` | bundle/sec-deligne-laumon-a1-d1,bundle/sec-six-functors-d1 |
 | `WeilConjectures.DeligneLaumon.Reduction.RealSheaves` | bundle/sec-deligne-laumon-general-d1 |
 | `WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients` | bundle/sec-six-functors-c1,bundle/sec-six-functors-d1 |
 | `WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary` | bundle/sec-smooth-purity-d2,prove2/sk-prop-sf-kunneth-ordinary |
 | `WeilConjectures.SixFunctors.Etale.Perverse.Operations` | bundle/sec-deligne-laumon-a1-d1 |
 | `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect` | bundle/sec-poincare-duality-c1 |
-| `WeilConjectures.WeilSheaf.AffineLineCohomology` | bundle/sec-fourier-transform-d1 |
 | `WeilConjectures.WeilSheaf.CurveEndpoints` | bundle/sec-deligne-laumon-a1-d1 |
-| `WeilConjectures.WeilSheaf.FourierInversion.Delta` | bundle/sec-fourier-transform-d1 |
-| `WeilConjectures.WeilSheaf.FourierInversion.OtherSections` | bundle/sec-fourier-transform-d1,bundle/sec-poincare-duality-c1,bundle/sec-smooth-purity-d1,bundle/sec-smooth-purity-d3 |
+| `WeilConjectures.WeilSheaf.FourierInversion.OtherSections` | bundle/sec-poincare-duality-c1,bundle/sec-smooth-purity-d1,bundle/sec-smooth-purity-d3 |
 | `WeilConjectures.WeilSheaf.LowerShriekFunctoriality` | bundle/sec-six-functors-c1,bundle/sec-six-functors-d1,bundle/sec-smooth-purity-d3 |
-| `WeilConjectures.WeilSheaf.LowerShriekOperations` | bundle/sec-fourier-transform-d1,bundle/sec-poincare-duality-c1,bundle/sec-six-functors-d1 |
+| `WeilConjectures.WeilSheaf.LowerShriekOperations` | bundle/sec-poincare-duality-c1,bundle/sec-six-functors-d1 |
 | `WeilConjectures.WeilSheaf.PoincareDuality` | bundle/sec-poincare-duality-c1 |
-| `WeilConjectures.WeilSheaf.TraceIsomorphism` | bundle/sec-poincare-duality-c1,bundle/sec-purity-real-sheaves-d1 |
+| `WeilConjectures.WeilSheaf.TraceIsomorphism` | bundle/sec-poincare-duality-c1 |
