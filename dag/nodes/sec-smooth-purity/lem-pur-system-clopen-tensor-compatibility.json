@@ -16,7 +16,8 @@
   "def-weil-size-convention",
   "lem-cbc-strict-tower-proper-open-calculus",
   "lem-coef-semilinear-derived-sections",
-  "lem-sf-open-tensor-normalization"
+  "lem-sf-open-tensor-normalization",
+  "def-pur-system-tensor-mate-arrows"
  ],
  "proof": [
   {
@@ -179,5 +180,23 @@
   "group": "Q118",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q118-c7b154118 (reviewer sub-agent of L); spot-checked: Read the full item, cited statements, sources, and route; verified the strict-system category, clopen comparison, mate normalization, tensor identity, edge cases, and absence of a dependency cycle. Corrected only Step 1’s transition source from M_n to M_{n+1}. Whole corrected JSON and concrete checks are in fixes/ and review.md. No target changed.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-f3fbbfe99",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable files, all statement dependencies, canonical maps, hypotheses, conclusions, universes, edge cases, docstrings, records, and route-pivot compliance. Both modules compile cleanly through scompile.py. No fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SystemClopenTensorCompatibility",
+  "declaration": "WeilConjectures.SystemTensorMate.system_clopen_tensor_compatibility",
+  "file": "lean/Sheaf/Paper/SystemClopenTensorCompatibility.lean",
+  "statement": "theorem system_clopen_tensor_compatibility (K : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ K.p) (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (o : TensorOperations l E) {A B C F : Scheme.{u}} [A.Over (Spec (.of K.k))] [B.Over (Spec (.of K.k))] [C.Over (Spec (.of K.k))] [F.Over (Spec (.of K.k))] [IsSeparated (A ↘ Spec (.of K.k))] [LocallyOfFiniteType (A ↘ Spec (.of K.k))] [QuasiCompact (A ↘ Spec (.of K.k))] [IsSeparated (B ↘ Spec (.of K.k))] [LocallyOfFiniteType (B ↘ Spec (.of K.k))] [QuasiCompact (B ↘ Spec (.of K.k))] [IsSeparated (C ↘ Spec (.of K.k))] [LocallyOfFiniteType (C ↘ Spec (.of K.k))] [QuasiCompact (C ↘ Spec (.of K.k))] [IsSeparated (F ↘ Spec (.of K.k))] [LocallyOfFiniteType (F ↘ Spec (.of K.k))] [QuasiCompact (F ↘ Spec (.of K.k))] (k : A ⟶ B) (r : A ⟶ C) (p : B ⟶ F) (i : C ⟶ F) [k.IsOver (Spec (.of K.k))] [r.IsOver (Spec (.of K.k))] [p.IsOver (Spec (.of K.k))] [i.IsOver (Spec (.of K.k))] [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) (H : D l E A) (Q : D l E F) : (o.delta i ((pushDerived l E r).obj H) Q).hom ≫ (o.J i).map (o.projection r H ((o.P i).obj Q)) ≫ (o.gamma k r p i h).app ((o.T A).obj (H, (o.P r).obj ((o.P i).obj Q))) = (o.T F).map (CategoryTheory.Prod.mkHom ((o.gamma k r p i h).app H) (𝟙 Q)) ≫ o.projection p ((o.J k).obj H) Q ≫ (pushDerived l E p).map ((o.delta k H ((o.P p).obj Q)).hom ≫ (o.J k).map ((o.T A).map (CategoryTheory.Prod.mkHom (𝟙 H) ((o.square k r p i h).hom.app Q))))",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

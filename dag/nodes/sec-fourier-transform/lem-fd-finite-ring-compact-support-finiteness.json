@@ -329,5 +329,23 @@
   "group": "Q34",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q34-af098a755 (reviewer sub-agent of L); spot-checked: Read all eight steps and cited statements; review.md records source checks and edge cases. Stacks 0GL0 supports arbitrary finite-ring constructibility; 095U and the spectral sequence give the uniform bound N=2d. Derived-category comparisons are justified. No new nodes, repairs, prohibited pivot dependencies, or assumed trace/duality proofs."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-50f1325bd",
+  "group": "Q35",
+  "result": "fix",
+  "note": "Reviewed immutable statement, dependencies, sources, universes, edge cases and route-pivot compliance; per-file compile passed cleanly. review.md records findings. Complete replacement report under fixes/ repairs the placeholder second reading (H11); no Lean or mathematical changes needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteRingCompactSupportFiniteness",
+  "declaration": "AlgebraicGeometry.Etale.finiteRingCompactSupportFiniteness",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteRingCompactSupportFiniteness.lean",
+  "statement": "theorem finiteRingCompactSupportFiniteness (k : Type u) [Field k] {X Y : Scheme.{u}} [Y.Over (Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (f : X ⟶ Y) [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] : IsSeparated f ∧ (∀ M : DerivedCategoryModule Λ X, DerivedCategory.isBoundedConstructible Λ X M → DerivedCategory.isBoundedConstructible Λ Y ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c).obj M)) ∧ ∃ N : ℕ, ∀ M : DerivedCategoryModule Λ X, DerivedCategory.isBoundedConstructible Λ X M → ∀ a b : ℤ, (∀ i : ℤ, (i < a ∨ b < i) → IsZero ((_root_.DerivedCategory.homologyFunctor (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) i).obj M)) → ∀ i : ℤ, (i < a ∨ b + (N : ℤ) < i) → IsZero ((_root_.DerivedCategory.homologyFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) i).obj ((rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} Λ) c).obj M))",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

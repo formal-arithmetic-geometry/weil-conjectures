@@ -15,7 +15,9 @@
   "def-weil-weil-sheaf-complex",
   "def-per-perverse-subcategories",
   "def-wf-middle-extension",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-per-support-condition",
+  "def-a1-common-stage-lisse-lattice"
  ],
  "proof": [
   {
@@ -221,5 +223,33 @@
   "group": "Q134",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q134-2b56a9157 (reviewer sub-agent of L); spot-checked: I read the whole delivery and wrote no fixes. Item: the seven-step proof is correct. Step 1 shows (j_*F)[1] is perverse using heart clause (4) for the ordinary j_*, the finite complement from lem-sc-dense-open-finite-complement (C is a def-sc-curves curve) and j^*j_*=id. Step 2 shows a boundary perverse B has H^{-1}B punctual, hence 0 by clause (3), so B=i_*E by the essential-image clause of the open-closed lemma; the new lemma then kills boundary subobjects and quotients. Step 3 kills H^0P with the clause (5) epimorphism, so P=G[1]. Step 4 shows ker u is a punctual subsheaf of G, hence 0. Step 5 applies triangle-lemma clause (4) once for the standard t-structure and once for the perverse one: the rotated triangle T->G[1]->A[1] gives the perverse short exact sequence 0->T->P->A[1]->0, so T=0. Step 6 gets uniqueness and naturality from Hom(G[1],A[1])=Hom(j^*G,F). Step 7 gets Weil compatibility from the Frobenius paragraph of the open-closed lemma and the Step 6 adjunction. The coefficient category is the same D^b_c(-,Qlbar) of def-weil-pbc-qbar-category in every node; no base change other than the geometric fibre occurs, and the target statement is unchanged. New node lem-dl-a1-boundary-hom-vanishing: true, checked independently. Hom(A[1],i_*E) is a negative Ext between heart objects. For Hom(i_*E,A[1]), the cone of tau^{<=0}Rj_*F -> Rj_*F lies in D^{>=1}, so Ri^!A is in D^{>=2}. Tested on Z empty, F=0, E=0, and the constant sheaf on G_m inside A^1. B1-B4 hold, all three search kinds are recorded, created and blueprint.from/via are correct, it is not a duplicate (checked prop-a1-curve-perverse-simples, lem-sf-ordinary-triangle-counit-cone (derived j_* only), lem-a1-local-boundary-duality) and not a restated clause. It has no lean_audit, contrary to the report, but most recent Q-group nodes lack it too; I treat that as no fault. Tool uses: all four declared tools are accepted, since the setup unit has no steps and cites no units. No cycle. Batch 5: def-pod-lisse-l-adic-sheaves and def-wf-middle-extension are general definitions outside both assumptions; thm-a1-curve-perverse-heart describes the curve perverse heart, is part of neither proof, and was already in the batch-5 closure through prop-a1-curve-perverse-simples, thm-a1-fourier-t-exact and prop-a1-fourier-middle-extension, so citing it adds nothing. No SGA is cited."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-2dc7ec9b0",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Independent statement, dependency, edge-case, docstring, route-pivot, and compiler checks passed; no fixes needed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CurveIntermediateExtension",
+  "declaration": "WeilConjectures.qbarCurveIntermediateExtension",
+  "declarations": [
+   "WeilConjectures.qbarCurveGeometricSeparated",
+   "WeilConjectures.qbarCurvePerverse",
+   "WeilConjectures.qbarCurveShiftedSource",
+   "WeilConjectures.qbarCurveWeilCarrier",
+   "WeilConjectures.QbarCurveBoundaryMinimal",
+   "WeilConjectures.qbarCurveRationalFrobeniusComparison",
+   "WeilConjectures.QbarCurveIntermediateExtensionAssertions",
+   "WeilConjectures.qbarCurveIntermediateExtension"
+  ],
+  "file": "lean/Sheaf/Paper/CurveIntermediateExtension.lean",
+  "statement": "theorem qbarCurveIntermediateExtension [GeometricallyConnected c.C.hom] : ∃ (sR : (qbarCurveDerivedRestriction D l hl Ω c).CommShift ℤ) (sΦ : (sfCommonStageWeilFrobeniusPullback D l hl c.U Ω).CommShift ℤ) (w : (D.geometricFrobenius c.U).hom ≫ qbarCurveGeometricOpen D c = qbarCurveGeometricOpen D c ≫ (D.geometricFrobenius c.C).hom) (rΦ : qbarCurveDerivedRestriction D l hl Ω c ⋙ sfCommonStageWeilFrobeniusPullback D l hl c.U Ω ≅ sfCommonStageWeilFrobeniusPullback D l hl c.C Ω ⋙ qbarCurveDerivedRestriction D l hl Ω c) (β : qbarCurveShiftedOrdinaryImage D l hl Ω c ⋙ qbarCurveDerivedRestriction D l hl Ω c ≅ qbarCurveShiftedSource D l Ω c), (∀ K : generalAlgebraicallyClosedConstructibleCategory l Ω (D.geometricFiber c.C).left, HEq (rΦ.hom.app K) ((GeneralAlgebraicallyClosedCoefficients.inclusion (l := l) (Ω := Ω) (Y := (D.geometricFiber c.U).left) K.stage).map (qbarCurveRationalFrobeniusComparison D l hl Ω c w K.stage K.obj).hom)) ∧ (∀ F : sfCommonStageHeart l (D.geometricFiber c.U).left Ω, (β.app F).hom = (fun [cs : (qbarCurveDerivedRestriction D l hl Ω c).CommShift ℤ] ↦ ((qbarCurveDerivedRestriction D l hl Ω c).commShiftIso (1 : ℤ)).hom.app ((qbarCurveOrdinaryPushforward D l hl Ω c).obj F).obj ≫ (shiftFunctor _ (1 : ℤ)).map ((qbarCurveOrdinaryAdjunction D l hl Ω c).counit.app F).hom) (cs := sR)) ∧ (∀ (F₀ : sfCommonStageWeilSheaf D l hl c.U Ω), HasCommonStageLisseLattice l Ω (D.geometricFiber c.U).left F₀.obj.carrier → QbarCurveIntermediateExtensionAssertions D l hl Ω c β rΦ ((fun [cs : (sfCommonStageWeilFrobeniusPullback D l hl c.U Ω).CommShift ℤ] ↦ (sfCommonStageWeilFrobeniusPullback D l hl c.U Ω).commShiftIso (1 : ℤ)) (cs := sΦ)) F₀)",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-18",
+  "existing": false
  }
 }
