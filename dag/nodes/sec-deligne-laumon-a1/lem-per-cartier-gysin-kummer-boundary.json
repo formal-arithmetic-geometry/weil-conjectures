@@ -1,0 +1,82 @@
+{
+ "id": "lem-per-cartier-gysin-kummer-boundary",
+ "kind": "statement",
+ "title": "Cartier Gysin normalization in the signed relative Kummer model",
+ "statement": "Let $\\ell$ be prime, $n\\geq1$, $m=\\ell^n$, and $\\Lambda=\\mathbf Z/m\\mathbf Z$. Let $X$ be a Noetherian excellent regular affine scheme with $\\ell$ invertible [def-exc-excellent-ring, def-weil-regular-scheme], and let $f\\in\\Gamma(X,\\mathcal O_X)$ be a nonzerodivisor such that the effective Cartier divisor $D=V(f)$ is regular [def-pc-divisor-line-bundle]. Write $i:D\\hookrightarrow X$ and $j:U=X-D\\hookrightarrow X$. Work on small etale derived categories with $\\Lambda_X(1)=\\mu_{m,X}$ [def-weil-pbc-derived-categories, def-asd-finite-etale-tate-twist]. Let $\\kappa(f)\\in H^1(U,\\mu_m)$ be the class of the $\\mu_m$-torsor of $m$-th roots of $f|_U$, equivalently the Kummer connecting class [lem-amb-kummer-any-base, lem-sc-torsor-h1]. Put $H^q_D(X,\\mu_m)=H^q(R\\Gamma_D(X,\\mu_m))$ [def-pur-etale-derived-supported-sections]. Fix the signed relative realization of [def-amb-relative-etale-cohomology, lem-pur-divisor-torsor-boundary-signs]: on an injective resolution $J$ its differential is $D(a,b)=(da,\\operatorname{res}(a)-db)$ on $J^q(X)\\oplus J^{q-1}(U)$ and its localization boundary $\\partial:H^1(U,\\mu_m)\\to H^2_D(X,\\mu_m)$ is represented by $b\\mapsto(0,-b)$. Use the Yoneda convention for the supported Chern class of a line bundle $B$ with an invertible section $s$ on $U$: its degree-one supported extension has fibre over the supported generator equal to the frame torsor of $B$, with the specified frame $s$ sent to zero, and its degree-two class is the Yoneda product with the Kummer extension. This specifies the Chern normalization allowed in Expose XVI, Definition 1.1 and its sign footnote. Under the supported-Hom and closed-adjunction identifications [lem-amb-closed-support-hom], the Gabber Gysin morphism of [lem-per-absolute-gysin-purity], twisted and shifted as $\\operatorname{Cl}_i(1)[2]:\\Lambda_D\\to i^!\\Lambda_X(1)[2]$, corresponds to\n$$-\\partial\\kappa(f)\\in H^2_D(X,\\mu_m).$$\nThis assertion fixes the comparison with the stated signed relative realization; the minus sign is part of the assertion.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI, sections 2.1–2.3: Definition 2.1.1, Definitions 2.2.2.5 and 2.2.2.7 (rank one), Definition 2.3.1; comparison with the explicitly specified signed relative Kummer realization. The signed-relative comparison is agent-stated, not a verbatim assertion of XVII Proposition 2.4.2.1(a)."
+ },
+ "stmt_deps": [
+  "def-exc-excellent-ring",
+  "def-weil-regular-scheme",
+  "def-pc-divisor-line-bundle",
+  "def-weil-pbc-derived-categories",
+  "def-asd-finite-etale-tate-twist",
+  "lem-amb-kummer-any-base",
+  "lem-sc-torsor-h1",
+  "def-pur-etale-derived-supported-sections",
+  "def-amb-relative-etale-cohomology",
+  "lem-pur-divisor-torsor-boundary-signs",
+  "lem-amb-closed-support-hom",
+  "lem-per-absolute-gysin-purity"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a regular effective Cartier divisor the etale Gysin fundamental class is the localization boundary of the Kummer class of a local equation",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"StandardEtalePair.hasMap_X\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {P : StandardEtalePair R}, P.HasMap P.X\", \"doc\": \"In the standard étale ring extension $ R[X,Y]/(f, Yg - 1) $, the image of the indeterminate $ X $ satisfies $ f(X) = 0 $ and $ g(X) $ is invertible (a unit) in the ring.\"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"Algebra.Generators.cMulXSubOneCotangent_eq\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (r : R)\\n  [inst_3 : IsLocalization.Away r S],\\n  Algebra.Generators.cMulXSubOneCotangent S r =\\n    Algebra.Extension.Cotangent.mk ⟨MvPolynomial.C r * MvPolynomial.X () - 1, ⋯⟩\", \"doc\": \"In the cotangent module of the algebra extension obtained by localizing at $ r $, the element represented by the polynomial $ C(r)X - 1 $ (where $ C(r) $ is the constant polynomial embedding of $ r $ \"}\n  {\"name\": \"Algebra.Generators.cotangentCompAwaySec\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/LocalizationAway\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {T : Type u_3} →\\n      {ι : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [inst_3 : CommRing T] →\\n                [inst_4 : Algebra R T] →\\n                  [inst_5 : Algebra S T]\", \"doc\": \"A linear map on the cotangent module of a localized algebra extension, constructed using the basis generated by the Jacobian equivalence for the localization at an element $ r $. This map sends each b\"}\n  {\"name\": \"Algebra.Generators.cMulXSubOneCotangent\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"{R : Type u_1} →\\n  (S : Type u_2) →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          (r : R) → [inst_3 : IsLocalization.Away r S] → (Algebra.Generators.localizationAway S r).toExtension.Cotangent\", \"doc\": \"The element in the cotangent module of the algebra extension obtained by localizing at $ r $, represented by the polynomial $ C(r)X - 1 $ where $ C(r) $ is the constant polynomial embedding of $ r $ a\"}\n  {\"name\": \"Algebra.basicOpen_subset_etaleLocus_iff\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A] {f : A},\\n  ↑(PrimeSpectrum.basicOpen f) ⊆ Algebra.etaleLocus R A ↔ Algebra.FormallyEtale R (Localization.Away f)\", \"doc\": \"For a commutative ring $ R $ and an $ R $-algebra $ A $, the basic open set $ D(f) $ in the Zariski topology on $ \\\\operatorname{Spec}(A) $ is contained in the étale locus of $ A $ over $ R $ if and on\"}\n  {\"name\": \"StandardEtalePair.aeval_X_g_mul_mk_X\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (P : StandardEtalePair R),\\n  (Polynomial.aeval P.X) P.g *\\n      (Ideal.Quotient.mk (Ideal.span {Polynomial.C P.f, Polynomial.X * Polynomial.C P.g - 1})) Polynomial.X =\\n    1\", \"doc\": \"In the standard étale ring extension defined by the pair $(f, g)$, the product of the evaluation of the polynomial $X$ at $g$ and the image of $X$ in the quotient ring $R[X,Y]/(f, Yg - 1)$ equals one,\"}\n  {\"name\": \"StandardEtalePresentation.toPresentation_σ'\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePresentation R S) (x : S), P.toPresentation.σ' x = ⋯.choose\", \"doc\": \"For any commutative rings $ R $ and $ S $ with an $ R $-algebra structure on $ S $, and a standard étale presentation $ P $ of $ S $ over $ R $, the function $ \\\\sigma' $ associated to the presentation\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Kummer\", \"cohomology\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Gysin|pseudodivisor|pseudo.divisor|supported.*Kummer",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"line\": \"17\", \"text\": \"A sieve `S` on `X` is covering for `finestTopologySingle P` iff\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"line\": \"59\", \"text\": \"def finestTopologySingle (P : Cᵒᵖ ⥤ Type w) : GrothendieckTopology C where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"line\": \"83\", \"text\": \"  sInf (finestTopologySingle '' Ps)\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "First Chern class with support of a principal Cartier divisor computed by the Kummer connecting morphism of a uniformizer",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Valuation.Uniformizer.val\", \"module\": \"Mathlib.RingTheory.Valuation.Discrete.Basic\", \"type\": \"{Γ : Type u_1} →\\n  [inst : LinearOrderedCommGroupWithZero Γ] →\\n    {A : Type u_2} → [inst_1 : Ring A] → {v : Valuation A Γ} → [hv : v.IsRankOneDiscrete] → v.Uniformizer → ↥v.integer\", \"doc\": \"The function mapping a uniformizer element $\\\\pi$ of a rank one discrete valuation $v$ to its image in the valuation ring $v.\\\\text{integer}$, where $v(\\\\pi) = 1$ by definition of a uniformizer in a disc\"}\n  {\"name\": \"Algebra.unramifiedLocus_eq_compl_support\", \"module\": \"Mathlib.RingTheory.Unramified.Locus\", \"type\": \": unramifiedLocus R A = (Module.support A Ω[A⁄R])ᶜ\", \"doc\": \"The unramified locus of an algebra $ A $ over a commutative ring $ R $ is equal to the complement of the support of the module of Kähler differentials $ \\\\Omega_{A/R} $.\"}\n  {\"name\": \"MeromorphicOn.divisor\", \"module\": \"Mathlib.Analysis.Meromorphic.Divisor\", \"type\": \"(f : 𝕜 → E) (U : Set 𝕜) : Function.locallyFinsuppWithin U ℤ\", \"doc\": \"For a meromorphic function $ f $ on a set $ U $ in a nontrivially normed field $ \\\\mathbb{K} $, taking values in a normed vector space $ E $, this constructs the divisor of $ f $ as a locally finite fo\"}\n  {\"name\": \"MeromorphicOn.divisor_zpow\", \"module\": \"Mathlib.Analysis.Meromorphic.Divisor\", \"type\": \"{f : 𝕜 → 𝕜} (hf : MeromorphicOn f U) (n : ℤ) : divisor (f ^ n) U = n • divisor f U\", \"doc\": \"For a meromorphic function $ f $ on a set $ U $ in a nontrivially normed field $ \\\\mathbb{K} $, and for any integer $ n $, the divisor of $ f^n $ is equal to $ n $ times the divisor of $ f $. The suppo\"}\n  {\"name\": \"Algebra.Extension.H1Cotangent\", \"module\": \"Mathlib.RingTheory.Extension.Cotangent.Basic\", \"type\": \": Type _\", \"doc\": \"The kernel of the cotangent complex map $\\\\ker(\\\\phi)/\\\\ker(\\\\phi)^2 \\\\to S \\\\otimes_R \\\\Omega_{S/R}$ in an $R$-algebra extension $S$, representing the first derived functor in the cotangent complex construc\"}\n  {\"name\": \"Valuation.associated_of_isUniformizer\", \"module\": \"Mathlib.RingTheory.Valuation.Discrete.Basic\", \"type\": \"{π₁ π₂ : K₀} (h1 : IsUniformizer v π₁) (h2 : IsUniformizer v π₂) : Associated π₁ π₂\", \"doc\": \"For a rank one discrete valuation $ v $ on a field $ K_0 $, any two uniformizers $ \\\\pi_1 $ and $ \\\\pi_2 $ are associated elements, meaning there exists a unit $ u $ in the valuation subring such that $\"}\n  {\"name\": \"MeromorphicOn.divisor_def\", \"module\": \"Mathlib.Analysis.Meromorphic.Divisor\", \"type\": \"(f : 𝕜 → E) (U : Set 𝕜) : divisor f U z = if MeromorphicOn f U ∧ z ∈ U then (meromorphicOrderAt f z).untop₀ else 0\", \"doc\": \"For a meromorphic function $ f : \\\\mathbb{K} \\\\to E $ on a set $ U \\\\subseteq \\\\mathbb{K} $ (where $ \\\\mathbb{K} $ is a nontrivially normed field and $ E $ is a normed vector space over $ \\\\mathbb{K} $), th\"}\n  {\"name\": \"Valuation.Uniformizer\", \"module\": \"Mathlib.RingTheory.Valuation.Discrete.Basic\", \"type\": \"{Γ : Type u_1} →\\n  [inst : LinearOrderedCommGroupWithZero Γ] →\\n    {A : Type u_2} → [inst_1 : Ring A] → (v : Valuation A Γ) → [hv : v.IsRankOneDiscrete] → Type u_2\", \"doc\": \"The type of a uniformizer element for a rank one discrete valuation $ v $ from a ring $ A $ to a linearly ordered commutative group with zero $ \\\\Gamma $.\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-trait-gysin-residue",
+  "date": "2026-10-18",
+  "group": "N8"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3: dimension-normalized Verdier duality, regular finite-torsion local model; the elementary trait orientation to which the higher-dimensional residue check reduces.",
+   "via": [
+    "lem-per-trait-gysin-residue",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
