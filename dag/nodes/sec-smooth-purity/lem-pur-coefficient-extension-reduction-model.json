@@ -18,7 +18,8 @@
   "def-weil-integral-reduction-tower",
   "lem-coef-normalized-dvr-effectivity",
   "def-pc-flat-sheaf-modules",
-  "lem-coef-semilinear-derived-sections"
+  "lem-coef-semilinear-derived-sections",
+  "lem-coef-derived-system-evaluation-calculus"
  ],
  "proof": [
   {
@@ -321,5 +322,51 @@
   "group": "Q72",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-2f99060fb (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and the full statements of the 25 cited nodes. Sources checked: the blueprint main-20261015 def-weil-derived-pullback-tensor-hom integral clause (no explicit comparison there, so by: agent is right); the lem-coef-normalized-dvr-effectivity statement and proof (it uses only a uniformizer of the DVR, so it applies with L in place of E and to unbounded K); and Stacks sites-cohomology 0G7E (line 3508) and 06YY (line 3585), which need no flatness of the coefficient map. Steps 1-3: quotient models are flat-term K-flat by 0G7E; the association maps (x⊗a)⊗b↦x⊗ι(a)b and their inverses are well defined by balancing and form a strict quotient-system isomorphism; the normalization comparison, its adjoint and the cocycle are verified. Step 4 is phi=a^{-1}e_D. It identifies the definition's cone model with the total Rlim through the 'each value is a derived limit' clause of the well-definedness lemma and the Roos-triangle tower lemma; this is a standard glossed comparison, accepted. Step 5: naturality descends through the equivalence of localized flat-term K-flat complexes with D(R_E). Step 6: for L=E it is the unitor, giving the reduction counit of the completion. Steps 7-8: the identity h e_H = e_J R_F L_F(h) holds by counit naturality; substituting phi_{E,L}, phi_{L,F} and phi_{E,F} gives the successive-extension clause, and both four-factor rebracketings agree. Small cases tested: K=0, K=R_E, L=E, m=n, unbounded K, empty W, and the non-flat ramified map Z/l^2 -> F_l[x]/x^2. The statement is true and not weakened. No new nodes; no duplicate in the DAG or the blueprint (checked against lem-pur-integral-operations-scalar-extension, lem-weil-scalar-extension-composition, lem-weil-finite-free-completed-scalar-comparison and lem-coef-integral-finite-extension); no cycle; no SGA. I accept the six declared tool uses. One repairable fault: step 1 uses lem-pc-kflat-resolution (unit sk-thm-picard-semicon, outside the route closure) without declaring it. Fixed by adding it to split_report.tool_uses in fixes/dag/nodes/sec-smooth-purity/lem-pur-coefficient-extension-reduction-model.json; nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-8c5ab1482",
+  "group": "Q46",
+  "result": "pass",
+  "note": "Statement, dependencies, declarations, docstrings, edge cases, route-pivot compliance, report sections, and recorded compiler evidence checked; no substantive finding."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientExtensionReductionModel",
+  "declaration": "WeilConjectures.coefficientExtensionReductionModel",
+  "declarations": [
+   "WeilConjectures.coefficientScalarModelZero",
+   "WeilConjectures.CoefficientScalarAssociation",
+   "WeilConjectures.CoefficientScalarUnit",
+   "WeilConjectures.coefficientExtensionQuotient_naturality",
+   "WeilConjectures.CoefficientExtensionSystems",
+   "WeilConjectures.coefficientExtensionSystem",
+   "WeilConjectures.coefficientExtensionCounit",
+   "WeilConjectures.coefficientExtensionFiniteAdditive",
+   "WeilConjectures.coefficientExtensionFiniteZero",
+   "WeilConjectures.coefficientExtensionReductionZero",
+   "WeilConjectures.coefficientExtensionDirectZero",
+   "WeilConjectures.coefficientExtensionCompositeZero",
+   "WeilConjectures.coefficientExtensionAssociationChain",
+   "WeilConjectures.coefficientExtensionRoosProjection",
+   "WeilConjectures.IsCoefficientExtensionAssociation",
+   "WeilConjectures.CoefficientExtensionAssociationData",
+   "WeilConjectures.IsCoefficientExtensionStrictTransition",
+   "WeilConjectures.CoefficientExtensionStrictModel",
+   "WeilConjectures.CoefficientExtensionReductionData",
+   "WeilConjectures.coefficientExtensionReductionIso",
+   "WeilConjectures.coefficientExtensionReductionModel",
+   "WeilConjectures.coefficientExtensionSuccessiveSystemIso",
+   "WeilConjectures.coefficientExtensionSuccessiveIso",
+   "WeilConjectures.coefficientExtensionReduction_composition",
+   "WeilConjectures.coefficientExtensionReduction_identity"
+  ],
+  "file": "lean/Sheaf/Paper/CoefficientExtensionReductionModel.lean",
+  "statement": "theorem coefficientExtensionReductionModel (_hl : IsUnit (l : Γ(W, ⊤))) : Nonempty (CoefficientExtensionReductionData l E L ι W SE SL A)",
+  "branch": "newtargets-dag",
+  "by": "Q46",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The existing sequence-site reduction calculus and canonical semilinear scalar models give the coherent quotient systems with independent site and coefficient universes. The main theorem returns the representative-normalized comparison; the identity and composition theorems retain the usual counit and an equality of coherent system maps. Helper structures package these same clauses; no new independent notion or coefficient construction is introduced."
  }
 }

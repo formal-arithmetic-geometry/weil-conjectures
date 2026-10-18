@@ -16,7 +16,12 @@
   "def-weil-integral-reduction-tower",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
   "lem-coef-normalized-dvr-effectivity",
-  "def-pur-integral-derived-operations"
+  "def-pur-integral-derived-operations",
+  "def-pur-completed-operation-expressions",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-sfb-ringed-site-duality-maps",
+  "def-trf-integral-comparison-sequence-systems",
+  "def-trf-integral-comparison-realization-models"
  ],
  "proof": [
   {
@@ -346,5 +351,44 @@
   "group": "Q96",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-154c90eee (reviewer sub-agent of L); spot-checked: I read the item in full: the statement (unchanged), all 12 steps, and the statements of all 9 stmt_deps and 14 proof_deps. I also read Bhatt–Scholze Def. 3.4.10 and Lemma 6.5.9(4) in the local PDF; they only motivate the operations, the qcqs lemma is not used, and proof_origin is correctly agent. The unit sk-def-purity-conv uses sk-def-sf-operations, so those statements are on-route; the sec-six-functors and properbasechange inputs are generic tools declared in tool_uses. No new nodes, no duplicate found in a whole-DAG search, no cycle, no SGA. The math is correct. Normalization of T_W and F_f holds via the monoidal comparison, the composite-pullback comparison and the α isomorphisms, with tensor over B_m, not over R. The identification is L T(e_A,e_N) after the quotient-model equalities. Tested small cases: m=n, the unit system, zero inputs, identity maps, Koszul signs; no flatness of B_m→B_n is used. Two citation faults (C1/C4), both repaired. (1) Step 4 took the system-level naturality of the counit e, and the fact that R_W is a functor, from lem-coef-semilinear-derived-sections, which does not model the R_W ⊣ L_W adjunction. It now cites lem-coef-derived-system-evaluation-calculus, which states that adjunction and its natural counit; I added this to tool_uses. (2) Step 5 identified the definitions' Cone(1-s) limit with the strict-tower total R lim as functors without a comparison; lem-pur-integral-operations-well-defined only says the value is a (non-canonical) derived limit. It now cites lem-weil-strict-roos-comparison, a natural iso ρ, plus lem-weil-proetale-countable-products-exact for its hypothesis. Both nodes are in sk-def-sf-operations, so on-route. proof_deps is updated to 17 ids, the longest step is 1577 characters, and the corrected file is in fixes/dag/nodes/sec-smooth-purity/.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-c592c1883",
+  "group": "Q45",
+  "result": "fix",
+  "note": "Reviewed statements, dependencies, sources, canonical maps, universes and edge cases. Both Lean modules compile successfully. Repaired the H11 placeholder second-reading section with a complete report replacement in fixes/. Findings recorded in review.md; branch head unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedOperationTowerSubstitution",
+  "declaration": "WeilConjectures.CompletedOperations.completedOperationTowerSubstitution",
+  "declarations": [
+   "WeilConjectures.CompletedOperations.Models",
+   "WeilConjectures.CompletedOperations.tensor",
+   "WeilConjectures.CompletedOperations.unit",
+   "WeilConjectures.CompletedOperations.tensorRealization",
+   "WeilConjectures.CompletedOperations.tensorComparison",
+   "WeilConjectures.CompletedOperations.pullbackComparison",
+   "WeilConjectures.CompletedOperations.systemValue",
+   "WeilConjectures.CompletedOperations.completedValue",
+   "WeilConjectures.CompletedOperations.comparison",
+   "WeilConjectures.CompletedOperations.reductionComparison",
+   "WeilConjectures.CompletedOperations.systemSubstitution",
+   "WeilConjectures.CompletedOperations.completedSubstitution",
+   "WeilConjectures.CompletedOperations.StructuralMap",
+   "WeilConjectures.CompletedOperations.structuralValue",
+   "WeilConjectures.CompletedOperations.ComparisonLaws",
+   "WeilConjectures.CompletedOperations.SubstitutionLaw",
+   "WeilConjectures.CompletedOperations.StructuralLaw",
+   "WeilConjectures.CompletedOperations.completedOperationTowerSubstitution"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedOperationTowerSubstitution.lean",
+  "statement": "theorem completedOperationTowerSubstitution {S : Type s} (W : S → Scheme.{t}) (_hl : ∀ (a : S) (x : W a), IsUnit (l : (W a).residueField x)) : ∃ M : Models l E W, ComparisonLaws.{t, u, s, i} l E M ∧ SubstitutionLaw.{t, u, s, i, j} l E M ∧ StructuralLaw.{t, u, s, i} l E M",
+  "branch": "newtargets-dag",
+  "by": "Q45",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Uses the published whole ringed-sequence derived category, canonical reduction/total-limit adjunction and independent-universe pullback models. Additional landed dependencies provide normalized tensor structural maps and quotient/Roos realizations; the new definition node supplies only finite typed expression syntax. All comparison arrows are explicit coherent-counit composites; completed structural maps are uniquely characterized by their limit and reduction equations."
  }
 }
