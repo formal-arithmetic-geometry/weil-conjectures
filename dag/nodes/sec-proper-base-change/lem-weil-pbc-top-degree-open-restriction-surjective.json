@@ -32,152 +32,23 @@
  ],
  "proof": [
   {
-   "text": "Identify the open immersion with its image $U\\subseteq |X|$. The Noetherian-scheme minimal-closed-subset theorem gives a Noetherian underlying topological space $T=|X|$. Local Noetherianity gives quasi-separatedness; since $X$ is quasi-compact, the qcqs-scheme spectral theorem gives that $T$ is spectral. Thus, in particular, $T$ is sober. No separatedness or properness hypothesis is used.",
+   "text": "Construct the underlying additive restriction surjectivity by the module/abelian resolution comparison and the topological Mayer--Vietoris argument, then apply the existing basic-linearity theorem.",
    "uses": [
-    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-    "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "lem-weil-pbc-qcqs-scheme-spectral",
-    "def-weil-open-immersion"
+    "lem-weil-pbc-top-degree-module-restriction-surjective",
+    "lem-weil-pbc-module-cohomology-fmap-basic-linearity"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0A3G, proposition-cohomological-dimension-spectral (2), scheme hypotheses; Properties Tags 01OZ, 01OY and 094L"
-   }
-  },
-  {
-   "text": "If $d=0$, the zero-dimensional Noetherian-scheme theorem makes $T$ finite discrete. Hence $U$ and its complement are disjoint open subsets. Given any section of $\\mathcal F|_U$, glue it with the zero section on $T\\setminus U$. Its restriction is the given section. Since $H^0=\\Gamma$, restriction in degree zero is surjective. This includes $U=\\varnothing$ and $U=T$. Henceforth assume $d\\geq1$.",
-   "uses": [
-    "lem-sc-zero-dim-noetherian-finite-discrete",
-    "pqf-def-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0A3G, proof, d=0 case; Properties Tag 0AAX, lemma-locally-Noetherian-dimension-0"
-   }
-  },
-  {
-   "text": "Write $A=\\mathcal F_{ab}$. Choose a module-injective resolution $\\mathcal F\\to I^\\bullet$, which exists because module sheaves have enough injectives. For each open $B\\subseteq T$, its restriction is module-injective. The underlying abelian sheaves of these terms are acyclic for global sections on $B$, by injective-module abelian acyclicity applied to the ringed site of opens of $B$. By the module-sheaf category definition, kernels are sectionwise kernels and cokernels are sheafifications of sectionwise cokernels. Forgetting scalars leaves these kernel and cokernel abelian groups unchanged (the induced scalar action descends to the quotient and its sheafification). Thus forgetting preserves kernels and cokernels, hence exactness, so the underlying augmented abelian complex is still a resolution. Leray acyclicity therefore computes $H^p(B,A|_B)$ by the underlying abelian complex $\\Gamma(B,I^\\bullet|_B)$, the very complex computing module cohomology. Consequently there are canonical isomorphisms $c_B:H^p(B,\\mathcal F|_B)\\cong H^p(B,A|_B)$. For inclusions $B\\subseteq B\\prime$, both restriction maps are induced by the identical chain map $\\Gamma(B\\prime,I^\\bullet)\\to\\Gamma(B,I^\\bullet)$, so $c_B\\circ\\mathrm{res}_{mod}=\\mathrm{res}_{ab}\\circ c_{B\\prime}$. This verifies restriction compatibility, not just an objectwise comparison.",
-   "uses": [
-    "lem-sc-ringed-space-module-sheaves-enough-injectives",
-    "lem-sc-ringed-space-restrict-injective-resolution",
-    "lem-sc-injective-module-abelian-acyclic-zariski",
-    "lemma-weil-pbc-leray-acyclicity",
-    "def-weil-sheaf-of-modules-category",
-    "def-sc-topological-abelian-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 01F1, lemma-modules-abelian (1), common-resolution proof; Tags 01DI, 01E1 and 03FD"
-   }
-  },
-  {
-   "text": "Set $Z=T\\setminus U$, $W=\\{x\\in T:\\overline{\\{x\\}}\\cap Z\\ne\\varnothing\\}$ and $S=W\\setminus Z$. The space $S$ is Noetherian: for any ascending chain of opens $O_i$ of $S$, choose ambient opens $P_i$ with $O_i=S\\cap P_i$ and replace $P_i$ by $\\bigcup_{j\\leq i}P_j$. These ambient opens form an ascending chain and therefore stabilize in $T$; intersecting with $S$ stabilizes the original chain. Moreover $S$ is stable under generalization: if $x$ specializes to $z\\in Z$ and $y$ generalizes $x$, then $y$ specializes to $z$; if $x\\in U$, then $y\\in U$ because $U$ is open.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0A3G, proof of (2), W minus Z; elementary subspace Noetherianity and specialization calculation"
-   }
-  },
-  {
-   "text": "We have $\\dim S\\leq d-1$. Indeed, take a chain $C_0\\subsetneq\\cdots\\subsetneq C_r$ of irreducible closed subsets of $S$. Their ambient closures $D_i=\\overline{C_i}^{\\,T}$ are irreducible closed and strictly nested, since $S\\cap D_i=C_i$. By sobriety choose the generic point $y$ of $D_0$. It generalizes any point of $C_0$, so the preceding generalization-stability gives $y\\in S$. Choose $z\\in Z\\cap\\overline{\\{y\\}}$. Then $\\overline{\\{z\\}}$ is nonempty irreducible closed and lies in $D_0$; it is strictly smaller because it lies in closed $Z$ whereas $y\\notin Z$. Thus $\\overline{\\{z\\}}\\subsetneq D_0\\subsetneq\\cdots\\subsetneq D_r$ is an ambient chain of length $r+1$, so $r+1\\leq d$. If $S$ is empty the bound holds by the definition of dimension. This is a direct chain argument, with no additional dimension theorem needed.",
-   "uses": [
-    "def-weil-spectral-space",
-    "def-kun-topological-krull-dimension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0A3G, proof of (2), dimension drop, with the chain argument made explicit"
-   }
-  },
-  {
-   "text": "Apply Noetherian topological cohomology vanishing to $S$, the abelian sheaf $A|_S$, and the nonnegative bound $d-1$. The hypotheses were verified in the preceding two steps. Since $d>d-1$, it gives $H^d(S,A|_S)=0$, including when $S=\\varnothing$. This replaces the lower-dimensional spectral induction in the source by the existing Noetherian vanishing theorem; no quasi-coherence is needed.",
-   "uses": [
-    "lem-sc-noetherian-topological-cohomology-vanishing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0A3G, proof of (2), lower-dimensional vanishing; Tag 02UZ, proposition-vanishing-Noetherian"
-   }
-  },
-  {
-   "text": "Let $\\xi\\in H^d(U,\\mathcal F|_U)$ and write $\\alpha=c_U(\\xi)$. The punctured-neighborhood comparison applies to spectral $T$, closed $Z$ and quasi-compact open complement $U$. It identifies $H^d(S,A|_S)$ with the filtered colimit of $H^d(N\\setminus Z,A|_{N\\setminus Z})$ over quasi-compact open neighborhoods $N$ of $Z$, using precisely restriction maps. The image of $\\alpha$ from the initial stage $N=T$ is therefore zero in that colimit.",
-   "uses": [
-    "lem-weil-pbc-punctured-neighborhood-cohomology-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0A3D, lemma-cohomology-of-neighbourhoods-of-closed (2); its application in Tag 0A3G, proof of (2)"
-   }
-  },
-  {
-   "text": "For completeness the eventual-zero inference is elementary: construct the directed colimit of groups as classes of pairs $(N,a)$, with $(N,a)\\sim(N\\prime,a\\prime)$ exactly when their restrictions agree at a common smaller neighborhood. Addition is defined after passing to a common smaller neighborhood; this gives the colimit universal property. Equality of the class of $(T,\\alpha)$ with the zero class thus gives a quasi-compact open $N\\supseteq Z$ with $\\alpha|_{N\\setminus Z}=0$. Since $N\\setminus Z=N\\cap U$, the restriction-compatible isomorphisms $c_B$ of step 3 imply $\\xi|_{N\\cap U}=0$ in module cohomology.",
-   "uses": [
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0A3G, proof of (2), extracting a neighborhood from the displayed filtered colimit; explicit quotient construction"
-   }
-  },
-  {
-   "text": "The opens $U,N$ cover $T$ since $N$ contains $Z$. Use the Mayer--Vietoris sequence for the ringed space $X$ and the arbitrary module $\\mathcal F$. Its exact segment is $H^d(X,\\mathcal F)\\to H^d(U,\\mathcal F|_U)\\oplus H^d(N,\\mathcal F|_N)\\to H^d(U\\cap N,\\mathcal F|_{U\\cap N})$, with the last map the difference of restrictions. The pair $(\\xi,0)$ maps to zero by step 8. Exactness gives $\\widetilde\\xi\\in H^d(X,\\mathcal F)$ restricting to $(\\xi,0)$, in particular restricting to $\\xi$ on $U$. This proves surjectivity for $d\\geq1$.",
-   "uses": [
-    "lem-sc-mayer-vietoris-ringed-space"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0A3G, proof of (2), final Mayer--Vietoris lifting; Tag 01EB, lemma-mayer-vietoris"
-   }
-  },
-  {
-   "text": "Finally the $k$-scheme structure supplies compatible maps $k\\to\\mathcal O_X(B)$ for all opens $B$. On the module-resolution complexes used in step 3, restriction obeys $\\mathrm{res}(a s)=a\\mathrm{res}(s)$ for $a\\in k$ in every degree, and the differentials are module-linear. Passing to kernels modulo images gives $\\mathrm{res}(a[ s])=a\\mathrm{res}([ s])$ on cohomology. In degree zero the same formula holds for sections. Thus the surjective canonical restriction map just proved is $k$-linear, as asserted.",
-   "uses": [
-    "def-weil-scheme-over-base",
-    "pqf-def-cohomology",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 01F1 common-resolution comparison and definition of derived global sections; degreewise scalar calculation"
+    "place": "Tags 0A3G and 01F1"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "lem-weil-pbc-qcqs-scheme-spectral",
-  "def-weil-open-immersion",
-  "lem-sc-zero-dim-noetherian-finite-discrete",
-  "pqf-def-cohomology",
-  "lem-sc-ringed-space-module-sheaves-enough-injectives",
-  "lem-sc-ringed-space-restrict-injective-resolution",
-  "lem-sc-injective-module-abelian-acyclic-zariski",
-  "lemma-weil-pbc-leray-acyclicity",
-  "def-weil-sheaf-of-modules-category",
-  "def-sc-topological-abelian-cohomology",
-  "def-weil-spectral-space",
-  "def-kun-topological-krull-dimension",
-  "lem-sc-noetherian-topological-cohomology-vanishing",
-  "lem-weil-pbc-punctured-neighborhood-cohomology-colimit",
-  "def-weil-pbc-category-colimit",
-  "lem-sc-mayer-vietoris-ringed-space",
-  "def-weil-scheme-over-base"
+  "lem-weil-pbc-top-degree-module-restriction-surjective",
+  "lem-weil-pbc-module-cohomology-fmap-basic-linearity"
  ],
- "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 0A3G, proposition-cohomological-dimension-spectral, proof of (2), Noetherian specialization using Tag 02UZ instead of its lower-dimensional induction; module comparison Tag 01F1"
- },
+ "proof_origin": "S2 delivery",
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -343,5 +214,15 @@
   "by": "NQ",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S2",
+  "result": "pass",
+  "landing": "20261018T071222-L-1677067",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

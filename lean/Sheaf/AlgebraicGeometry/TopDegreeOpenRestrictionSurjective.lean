@@ -9,23 +9,10 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Over
 public import Mathlib.Topology.KrullDimension
 public import Sheaf.CategoryTheory.RingedSiteModules
-public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Sheaf.AlgebraicGeometry.ZeroDimensionalNoetherianFiniteDiscrete
-import Sheaf.Paper.PQFCohomology
-import Sheaf.Topology.RingedSpaceModuleEnoughInjectives
-import Sheaf.Topology.RestrictInjectiveResolution
-import Sheaf.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.LongExactSequence
-import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
-import Mathlib.Topology.Spectral.Basic
-import Sheaf.Topology.NoetherianTopologicalCohomologyVanishing
-import Mathlib.CategoryTheory.Limits.HasLimits
-import Sheaf.Topology.ModuleMayerVietoris
-import Sheaf.Topology.PuncturedNeighborhoodCohomologyColimit
-import WeilConjectures.AlgebraicGeometry.PQFCohomology
-import WeilConjectures.CategoryTheory.Sites.InjectiveModuleAbelianAcyclic
-import WeilConjectures.Topology.RingedSpaceModuleEnoughInjectives
+public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
+import WeilConjectures.Topology.RingedSpaceModuleCohomology
+import Sheaf.AlgebraicGeometry.ModuleCohomologyRestrictionSurjective
+import WeilConjectures.AlgebraicGeometry.BasicPropertiesLinearity
 
 /-! # Surjectivity of top-degree cohomology restriction
 
@@ -163,6 +150,41 @@ theorem top_degree_open_restriction_surjective
       (forget₂ (ModuleCat.{u} k) AddCommGrpCat.{u}).map L =
         moduleCohomologyFMap j ((restrictAdjunction j).unit.app F) d ∧
       Function.Surjective L := by
-  sorry
+  classical
+  let rX := ((Scheme.ΓSpecIso (CommRingCat.of k)).inv ≫
+    (X ↘ Spec (.of k)).appTop).hom
+  let rV := ((Scheme.ΓSpecIso (CommRingCat.of k)).inv ≫
+    (j ≫ (X ↘ Spec (.of k))).appTop).hom
+  let g := j.appTop.hom
+  have hcomp : rV = g.comp rX := by
+    ext z
+    rfl
+  obtain ⟨L₀, hL₀⟩ := moduleCohomologyFMap_basic_linearity j
+    ((restrictAdjunction j).unit.app F) d
+  have hsurj := module_cohomology_restriction_surjective X d hdim V j F
+  have hLf (x) : L₀ x = moduleCohomologyFMap j
+      ((restrictAdjunction j).unit.app F) d x := by
+    exact congrArg (fun f ↦ f x) hL₀
+  have hsurj₀ : Function.Surjective L₀ := by
+    intro y
+    obtain ⟨x, hx⟩ := hsurj y
+    refine ⟨x, ?_⟩
+    exact (hLf x).trans hx
+  let C := ModuleCat.restrictScalarsComp'App rX g rV hcomp
+    ((RingedSpace.moduleCohomology V.toRingedSpace d).obj
+      ((restrictFunctor j).obj F))
+  let L := (ModuleCat.restrictScalars rX).map L₀ ≫ C.inv
+  refine ⟨L, ?_, ?_⟩
+  · ext x
+    change C.inv (L₀ x) = moduleCohomologyFMap j
+      ((restrictAdjunction j).unit.app F) d x
+    rw [hLf]
+    rfl
+  · intro y
+    obtain ⟨z, hz⟩ := (ConcreteCategory.bijective_of_isIso C.inv).2 y
+    obtain ⟨x, hx⟩ := hsurj₀ z
+    refine ⟨x, ?_⟩
+    change C.inv (L₀ x) = y
+    rw [hx, hz]
 
 end AlgebraicGeometry.Scheme.Modules
