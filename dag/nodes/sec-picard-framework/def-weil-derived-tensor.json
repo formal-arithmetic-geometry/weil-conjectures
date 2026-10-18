@@ -113,21 +113,21 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "module": "Sheaf.SixFunctors.IntrinsicDerivedTensorOfUniverses",
-  "declaration": "SheafOfModules.ringedSiteDerivedTensorOfUniverses",
-  "statement": "def ringedSiteDerivedTensorOfUniverses\n    {C : Type c} [Category.{v} C] [EssentiallySmall.{r} C]\n    {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{r})\n    [HasSheafify J AddCommGrpCat.{r}] [J.WEqualsLocallyBijective AddCommGrpCat.{r}]\n    [HasDerivedCategory.{w} (SheafOfModules.{r}\n      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))]\n    (K L : DerivedCategory (SheafOfModules.{r}\n      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))) :\n    DerivedCategory (SheafOfModules.{r}\n      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))",
-  "branch": "newtargets-dag",
-  "by": "Q23",
-  "date": "2026-10-17",
+  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Tensor",
+  "declaration": "AlgebraicGeometry.ProEtale.derivedTensor",
+  "statement": "noncomputable def derivedTensor :\n    DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤\n      DerivedCategory (Sheaf (Scheme.ProEt.topology X) A) ⥤\n        DerivedCategory (Sheaf (Scheme.ProEt.topology X) A)",
+  "branch": "slopmaster2",
+  "by": "NE",
+  "date": "2026-10-18",
   "existing": true,
-  "note": "§1(B) existing-presentation repair: the previous fixed-ring ModuleCat-valued-sheaf derivedTensor has different endpoints from the intrinsic SheafOfModules categories used by the recorded completion, constant-to-completion map, and integral constructible category. Reuse the already published ringedSiteDerivedTensorOfUniverses, the same ordinary K-flat total tensor over the constant ring sheaf in the intrinsic presentation, retaining the unequal object/morphism universes of the small pro-etale site. Scalar extension in this item is its standard derived-change-of-rings form reductionDerivedChange; no new tensor construction or hypothesis."
+  "note": "§1(B), exact existing fixed-ring presentation repair: ringedSiteDerivedTensorOfUniverses has intrinsic SheafOfModules endpoints and cannot type the fixed-ring projection map of the recorded compact-support functor. The current finite-coefficient derivedTensor is the same ordinary K-flat total tensor on fixed-ring module sheaves, with its canonical monoidal constraints. This is an existing construction, not a new tensor or hypothesis. The intrinsic construction remains available in its original module for intrinsic consumers."
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-b2d3f3dd2",
-  "group": "Q23",
-  "result": "pass",
-  "note": "Audited immutable node, dependencies, source references, Lean declarations, docstrings, edge cases, route-pivot compliance, report sections, and reproduced scompile.py successfully with local/server confirmation. No substantive or mechanical findings."
+  "reviewer": "NT-stage2-cc-55428d46b",
+  "group": "NE",
+  "result": "fix",
+  "note": "Read check-brief2, packet, prior review of 4bdcb3da4004, snapshot module and report, node diffs, upstream and side declarations. Prior F1 (def-exchange-projection narrowed) resolved: the commit touches only the report, the item node, def-weil-derived-tensor and the module; the module is byte-identical to the accepted one. Clause by clause correct: FiniteFieldDatum, l prime and l≠p, finite E, level n+1, finite-type X,Y over k, f separated of finite type, fixed c, fixed-ring P/S/delta/e, PF^c = projectionMapOfCompactification (direction PM⊗B→P(M⊗SB) checked), pi = beta∘PF^-1∘P(beta), exactly four IsIso hypotheses, M D^b_c and B,B' ctf via the recorded intrinsic predicates, unit and assoc equations in the node's order, all domain memberships true. Edge cases and universes ok; no hollow definitions; one sorry; docstrings present; statement verbatim. nt_compile rc 0 in 4.8 s, no errors; axioms propext, choice, Quot.sound. FIX F1: the report wrongly said the recorded compact-support interface is rightDerivedLowerShriekOfCompactification; on the base Q13 recorded sfIntrinsicCompactSupport. The complete lean.note override and report now document the fixed-ring vs intrinsic presentation and the stage-3 transport. FIX F2: the placeholder Second reading by NE section is replaced by a real clause-by-clause reading. Observations: the def-weil-derived-tensor record flips again (seventh time), accepted as the same notion and not revertible by a stage-2 fix; the added stmt_dep def-pur-finite-pullback-tensor-comparison is harmless."
  }
 }

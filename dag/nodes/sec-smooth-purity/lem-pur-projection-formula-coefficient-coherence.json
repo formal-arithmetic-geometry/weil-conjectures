@@ -21,7 +21,8 @@
   "def-weil-finite-torsion-constructibility",
   "def-weil-finite-tor-amplitude",
   "def-exchange-projection",
-  "def-sfb-projection-formula"
+  "def-sfb-projection-formula",
+  "def-pur-finite-pullback-tensor-comparison"
  ],
  "proof": [
   {
@@ -295,5 +296,38 @@
   "group": "Q93",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q93-f3dd5f2eb (reviewer sub-agent of L); spot-checked: Read the complete mathematics and cited statements; checked all nine steps against Stacks and the current blueprint, coefficient categories, edge cases, duplicates, dependency cycles, and batch-5 restrictions. No repairs needed. Accepted six generic tool uses; detailed findings are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-55428d46b",
+  "group": "NE",
+  "result": "fix",
+  "note": "Read check-brief2, packet, prior review of 4bdcb3da4004, snapshot module and report, node diffs, upstream and side declarations. Prior F1 (def-exchange-projection narrowed) resolved: the commit touches only the report, the item node, def-weil-derived-tensor and the module; the module is byte-identical to the accepted one. Clause by clause correct: FiniteFieldDatum, l prime and l≠p, finite E, level n+1, finite-type X,Y over k, f separated of finite type, fixed c, fixed-ring P/S/delta/e, PF^c = projectionMapOfCompactification (direction PM⊗B→P(M⊗SB) checked), pi = beta∘PF^-1∘P(beta), exactly four IsIso hypotheses, M D^b_c and B,B' ctf via the recorded intrinsic predicates, unit and assoc equations in the node's order, all domain memberships true. Edge cases and universes ok; no hollow definitions; one sorry; docstrings present; statement verbatim. nt_compile rc 0 in 4.8 s, no errors; axioms propext, choice, Quot.sound. FIX F1: the report wrongly said the recorded compact-support interface is rightDerivedLowerShriekOfCompactification; on the base Q13 recorded sfIntrinsicCompactSupport. The complete lean.note override and report now document the fixed-ring vs intrinsic presentation and the stage-3 transport. FIX F2: the placeholder Second reading by NE section is replaced by a real clause-by-clause reading. Observations: the def-weil-derived-tensor record flips again (seventh time), accepted as the same notion and not revertible by a stage-2 fix; the added stmt_dep def-pur-finite-pullback-tensor-comparison is harmless."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProjectionFormulaCoefficientCoherence",
+  "declaration": "AlgebraicGeometry.ProEtale.compactificationProjection_coefficient_coherence",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.projectionCoherenceSymmetry",
+   "AlgebraicGeometry.ProEtale.projectionCoherenceCoefficientNoetherian",
+   "AlgebraicGeometry.ProEtale.projectionCoherenceRealization",
+   "AlgebraicGeometry.ProEtale.projectionCoherenceConstructible",
+   "AlgebraicGeometry.ProEtale.projectionCoherenceFiniteTor",
+   "AlgebraicGeometry.ProEtale.CompactificationProjectionUnit",
+   "AlgebraicGeometry.ProEtale.CompactificationProjectionAssoc",
+   "AlgebraicGeometry.ProEtale.inverseCompactificationProjection",
+   "AlgebraicGeometry.ProEtale.CompactificationProjectionDomains",
+   "AlgebraicGeometry.ProEtale.CompactificationProjectionCoefficientCoherence",
+   "AlgebraicGeometry.ProEtale.compactificationProjection_coefficient_coherence"
+  ],
+  "file": "lean/Sheaf/Paper/ProjectionFormulaCoefficientCoherence.lean",
+  "statement": "theorem compactificationProjection_coefficient_coherence (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of D.k))] [Y.Over (Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (X ↘ Spec (CommRingCat.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of D.k))] [QuasiCompact (Y ↘ Spec (CommRingCat.of D.k))] (f : X ⟶ Y) [f.IsOver (Spec (CommRingCat.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) : CompactificationProjectionCoefficientCoherence (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E (n + 1)))) c (projectionCoherenceConstructible l E (n + 1) (Nat.succ_pos n) X) (projectionCoherenceFiniteTor l E (n + 1) (Nat.succ_pos n) X) (projectionCoherenceConstructible l E (n + 1) (Nat.succ_pos n) Y) (projectionCoherenceFiniteTor l E (n + 1) (Nat.succ_pos n) Y)",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Uses the actual ordinary fixed-ring compactification projection map and canonical K-flat symmetry and pullback comparisons. The recorded intrinsic constructibility predicates are transported by the canonical derived realization equivalence. The positive level is indexed by n+1, covering every n≥1 without an added finiteness or Noetherian hypothesis. The four component-isomorphism hypotheses are exactly the components inverted by the two equations. The finite PF^c is the existing upstream AlgebraicGeometry.ProEtale.projectionMapOfCompactification, exactly the projection component of Sheaf.Paper.ExchangeProjection.finiteExchangeProjection. This item uses that finite component directly; the full def-exchange-projection lean record, including Q14’s supplied-domain exchange/projection interface, is preserved unchanged. Presentation: P is the existing fixed-ring AlgebraicGeometry.ProEtale.rightDerivedLowerShriekOfCompactification (R(c.g)_* after termwise exact (c.i)_! at the same c), and S, delta, e are the fixed-ring L((f)^*[V]), leftDerivedUpperStarTensorIso and leftDerivedUpperStarUnitIso; the canonical projection map exists only in this presentation. The def-compact-support-direct-image-detailed record on newtargets-dag (Q13, AlgebraicGeometry.Scheme.sfIntrinsicCompactSupport) is the same Rr_* j_! in the intrinsic presentation, whose coefficient category Scheme.sfIntrinsicDerivedEquivalence identifies with the fixed-ring one; that record is left unchanged; likewise the intrinsic records of def-weil-derived-pullback-tensor-hom and lem-pur-derived-pullback-tensor-iso. Stage 3 must transport the pullback tensor coherence through that realization. def-pur-finite-pullback-tensor-comparison is cited only for its imported positive-level coefficient module; no declaration of it occurs in the statement.",
+  "fixed_by": "NT-stage2-cc-55428d46b"
  }
 }

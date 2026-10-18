@@ -226,5 +226,36 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-8bb41c27f (reviewer sub-agent of L); spot-checked: I read the item, all five steps and every cited node's statement in full. Checked statements: finite-free completed scalar comparison, twist-preserves, finite-Tor amplitude, integral twist/scalar coherence, compact-support coefficient comparison with its composition law, and the twist comparison beta. Sources read: master sk-thm-purity-transport Step 3 and main-20261015 thm-pur-rational-and-qbar-purity. Neither states the identity, so proof_origin=agent is correct. Domains hold: the twisted units are in integral D^b_ctf, f is finite type, and ell is invertible. I recomputed Steps 2-5 as equations and they are correct: the inverse twist equation, the inverse of the composition law, naturality of c_{F/E} at theta_E^{-1}, naturality of the associator at t_0, and the unit square u_F alpha = v B(u_E). Edge cases checked: d=0, E_0=E, E=F, t_0=0, ramified extensions. No new nodes and no duplicate. The parent's step 10 uses the item verbatim. No cycle, no SGA, and the tool uses are reachable on the unit route. Fix: theta_L and a_{F/E,1_E} are built from the natural twist comparison beta of lem-weil-integral-twist-derived-scalar, and Step 2 implicitly used beta's naturality at u_E. That node is now added to stmt_deps, to Step 2's uses and to proof_deps, with the expansion written out and a tool_uses entry. The statement is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9ac595153",
+  "group": "N9",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: datum/l≠p, E0=ULift Q_l ⊂ E ⊂ F via ι and the unique baseInclusion, separated finite-type k-schemes, smooth separated f of rel dim d, P_L=PurCompactSupport.image(completed L) c, C=completedDerivedScalarExtension, T_L=integralSheafTwist d of the completed unit shifted by 2d with residue inverse built from hl, theta/a=canonical commShift + named beta + pinned unit multiplication, t_L explicit, conclusion compact.hom ≫ P_F(a) ≫ t_F = C(t_E) ≫ v. Comparison fields are pinned by normalization equations (compact.hom = PurCompactSupport.comparison.app; unit chain fixed on pure tensors b⊗x↦bι(x) and iso.hom=counit≫Q.map chain), so they are not arbitrary maps; the dependency integralCoefficientComparison gives IsIso. The §1(B) beta module names the witness of integral_twist_derived_scalar, which is uniquely characterized on good K-flat representatives. Statement field verbatim, 11 declarations present, only the theorem's sorry, no hollow defs, docstrings and blueprint tags present, lines ≤100, needed imports in closure. Edge cases d=0, E=F, E=Q_l, t0=0, empty schemes, ramified covered. nt_compile: canonical-beta module 13.9 s clean, trace module 33.1/33.5 s clean. Minor notes only: dependency record's main declaration is now the beta def (theorem still blueprint-tagged); second reading labelled as worker self-check but matches every clause."
+ },
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.AdicScalarTraceCoherence",
+  "declaration": "WeilConjectures.PurAdicScalarTrace.scalar_trace_coherence",
+  "declarations": [
+   "WeilConjectures.PurAdicScalarTrace.unit",
+   "WeilConjectures.PurAdicScalarTrace.unitComplex",
+   "WeilConjectures.PurAdicScalarTrace.twistedUnit",
+   "WeilConjectures.PurAdicScalarTrace.residueInverse",
+   "WeilConjectures.PurAdicScalarTrace.overTwistedUnit",
+   "WeilConjectures.PurAdicScalarTrace.UnitMultiplication",
+   "WeilConjectures.PurAdicScalarTrace.CoefficientComparison",
+   "WeilConjectures.PurAdicScalarTrace.twistComparison",
+   "WeilConjectures.PurAdicScalarTrace.trace",
+   "WeilConjectures.PurAdicScalarTrace.baseInclusion",
+   "WeilConjectures.PurAdicScalarTrace.scalar_trace_coherence"
+  ],
+  "file": "lean/Sheaf/SecSmoothPurity/AdicScalarTraceCoherence.lean",
+  "statement": "theorem scalar_trace_coherence (c : Compactification f) (aE : CoefficientComparison l (ULift.{u} (Padic l)) E (baseInclusion l E) D hl c d) (aF : CoefficientComparison l (ULift.{u} (Padic l)) F (baseInclusion l F) D hl c d) (aFE : CoefficientComparison l E F ι D hl c d) (t₀ : (PurCompactSupport.image (PurCompactSupport.completed l (ULift.{u} (Padic l))) c).obj (overTwistedUnit l (ULift.{u} (Padic l)) D hl X d) ⟶ unit l (ULift.{u} (Padic l)) Y) : aFE.compact.hom ≫ (PurCompactSupport.image (PurCompactSupport.completed l F) c).map (twistComparison l E F ι D hl X d aFE.unitX).hom ≫ trace l (ULift.{u} (Padic l)) F (baseInclusion l F) D hl c d aF t₀ = (completedDerivedScalarExtension l E F ι Y).map (trace l (ULift.{u} (Padic l)) E (baseInclusion l E) D hl c d aE t₀) ≫ aFE.unitY.iso.hom",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-18",
+  "existing": false
  }
 }
