@@ -16453,3 +16453,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:59 L: merged deliver/H5/Sheaf.AlgebraicGeometry.ProEtaleUnitsSheaf (stage 3; reviewer PASS; first push; landing 20261018T135910-L-2960953 (proof); batch 20261018T135825; modules 1; new nodes 0)
 - 13:59 L: merged deliver/M1/Sheaf.Paper.CompletedIntegralConstantMapOfUniverses (stage 3; reviewer PASS; first push; landing 20261018T135911-L-2961246 (proof); batch 20261018T135825; modules 1; new nodes 0)
 - 13:59 L: merged deliver/M6/Sheaf.AlgebraicGeometry.WeaklyEtaleStability (stage 3; reviewer PASS; first push; landing 20261018T135913-L-2961675 (interface); batch 20261018T135825; modules 1; new nodes 0; change records: coord/changes/weaklyEtale-stability-prune-imports.md)
+- 13:59 L: merged deliver/P4/Sheaf.CategoryTheory.PretriangulatedKernelSplit (stage 3; reviewer PASS; first push; landing 20261018T135913-L-2961864 (proof); batch 20261018T135825; modules 1; new nodes 0)
