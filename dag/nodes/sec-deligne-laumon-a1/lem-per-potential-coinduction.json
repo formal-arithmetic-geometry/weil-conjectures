@@ -1,0 +1,72 @@
+{
+ "id": "lem-per-potential-coinduction",
+ "kind": "statement",
+ "title": "Internal coinduction along a prime-power coefficient quotient",
+ "statement": "Let $\\ell$ be a prime, $1\\leq s\\leq r$, $\\Lambda=\\mathbf Z/\\ell^r\\mathbf Z$ and $\\Lambda_s=\\mathbf Z/\\ell^s\\mathbf Z$, a $\\Lambda$-algebra through the quotient map. Let $X$ be a scheme and use the derived categories of module sheaves over the constant rings $\\Lambda_X$, $\\Lambda_{s,X}$ on the small etale site [def-weil-pbc-derived-categories], restriction of scalars along $\\Lambda_X\\to\\Lambda_{s,X}$ [def-pc-sheaf-restrict-scalars], and derived internal Hom [def-pur-derived-internal-hom]. For $K\\in D^+(X_{\\mathrm{et}},\\Lambda)$ put $K_s=R\\mathcal Hom_\\Lambda(\\Lambda_{s,X},K)\\in D^+(X_{\\mathrm{et}},\\Lambda_s)$. For every $M\\in D^+(X_{\\mathrm{et}},\\Lambda_s)$ there is an isomorphism $$R\\mathcal Hom_\\Lambda(M,K)\\cong R\\mathcal Hom_{\\Lambda_s}(M,K_s)$$ in $D^+(X_{\\mathrm{et}},\\Lambda)$, natural in $M$ and $K$, where $M$ on the left and the right-hand side are viewed as $\\Lambda$-complexes by restriction of scalars. It is the internal derived form of the restriction--coinduction adjunction: a local section $\\phi:M\\to K_s$ is sent to its composite with evaluation at $1\\in\\Lambda_s$, $K_s\\to K$. No potentiality, constructibility or bound beyond $D^+$ is assumed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, Proposition 6.2.1.1, second assertion (the canonical isomorphism R Hom_Lambda(M,K) = R Hom_Lambda'(M,K')), coefficient integer ell^r and divisor ell^s; the potential-pinning assertion of 6.2.1.1 is lem-per-potential-hom-coefficient-restriction"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coinduction of prime power torsion potential dualizing complexes and derived Hom change of coefficients",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"localCohomology.diagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) →\\n          ℕ → CategoryTheory.Functor Dᵒᵖ (CategoryTheory.Functor (ModuleCat R) (ModuleCat R))\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs a functor from $ \\\\mathcal{D}^{\\\\text{op}} $ to the category of $ R\"}\n  {\"name\": \"Ext\", \"module\": \"Mathlib/CategoryTheory/Abelian/Ext\", \"type\": \"(R : Type u_1) →\\n  [inst : Ring R] →\\n    (C : Type u_2) →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_2} C] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [CategoryTheory.Linear R C] →\\n            [CategoryTheory.EnoughProjectives C] →\\n              ℕ → CategoryTheory.Functor Cᵒᵖ (Cat\", \"doc\": \"For a ring $ R $ and an abelian $ R $-linear category $ \\\\mathcal{C} $ with enough projectives, the $ n $-th extension functor $ \\\\text{Ext}^n $ is a bifunctor $ \\\\mathcal{C}^{\\\\text{op}} \\\\times \\\\mathcal{\"}\n  {\"name\": \"DerivedCategory.instLinearCochainComplexIntQ\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Linear\", \"type\": \"∀ (R : Type t) [inst : Ring R] (C : Type u) [inst_1 : CategoryTheory.Category.{v, u} C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.Linear R C] [inst_4 : HasDerivedCategory C],\\n  CategoryTheory.Functor.Linear R DerivedCategory.Q\", \"doc\": \"The canonical functor from the category of cochain complexes with integer indices to the derived category preserves the $ R $-linear structure, meaning that for any two objects, the induced map on hom\"}\n  {\"name\": \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"If $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ is an $ R $-linear functor between abelian categories, then the induced functor $ F_* : \\\\mathcal{D}(\\\\mathcal{C}_1) \\\\to \\\\mathcal{D}(\\\\mathcal{C}_2) $ between t\"}\n  {\"name\": \"Rep.isZero_Tor_succ_of_projective\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic\", \"type\": \"∀ {k G : Type u} [inst : CommRing k] [inst_1 : Group G] (X Y : Rep k G) [CategoryTheory.Projective Y] (n : ℕ),\\n  CategoryTheory.Limits.IsZero (((Rep.Tor k G (n + 1)).obj X).obj Y)\", \"doc\": \"For any representations $X$ and $Y$ of a group $G$ over a commutative ring $k$, if $Y$ is a projective object in the category $\\\\text{Rep}(k, G)$, then the $(n+1)$-th Tor functor $\\\\text{Tor}_{n+1}^{kG}\"}\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"CategoryTheory.Functor.mapExactFunctor_smul\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {D : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} D] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] [inst_5 : CategoryTheory.Limits.PreservesFiniteLimit\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and objects $ X, Y \\\\in \\\\mathcal{C} $, the induced map $ \\\\operatorname{Ext}^n(X,Y) \\\\to \\\\operatorname{Ext}^n(F(X), F(Y)\"}\n  {\"name\": \"DerivedCategory.isLE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsLE n ↔ K.IsLE n\", \"doc\": \"For any cochain complex $ K $ with integer indices and any integer $ n $, the object $ Q(K) $ in the derived category belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure at degree $ n\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern ordinary module duals, generic derived categories, sheaf infrastructure or algebra descent; none states this etale potential-duality assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For etale sheaves RHom over Z mod ell power restricted to F ell equals RHom into the coinduced potential complex",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.sheafHom\", \"module\": \"Mathlib.CategoryTheory.Sites.SheafHom\", \"type\": \"(F G : Sheaf J A) : Sheaf J (Type _)\", \"doc\": \"Given sheaves $F$ and $G$ on a category $\\\\mathcal{C}$ with Grothendieck topology $J$ taking values in a category $\\\\mathcal{A}$, this defines the sheaf $\\\\mathcal{H}om(F,G)$ that assigns to each object \"}\n  {\"name\": \"CochainComplex.HomComplex.instModuleCochain\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \": Module R (Cochain F G n)\", \"doc\": \"For any two cochain complexes $F$ and $G$ in an $R$-linear category $\\\\mathcal{C}$, the type of cochains $\\\\text{Cochain}(F, G, n)$ in degree $n$ of the homomorphism complex $\\\\text{Hom}(F, G)$ is equipp\"}\n  {\"name\": \"PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification\", \"type\": \"{P : PresheafOfModules.{v} R₀} {F : SheafOfModules.{v} R}\\n  (g : P ⟶ (restrictScalars α).obj ((SheafOfModules.forget _).obj F)) :\\n  (SheafOfModules.toSheaf _).map ((sheafificationHomEquiv α).symm g) =\\n    (((sheafificationAdjunction J AddCommGrpCat).homEquiv P.presheaf ((SheafOfModules.toSheaf R).ob\", \"doc\": \"For a presheaf of modules $ M_0 $ over a presheaf of rings $ R_0 $, a sheaf of modules $ F $ over the sheafified ring $ R $, and a ring homomorphism $ \\\\alpha: R_0 \\\\to R $, the canonical bijection betw\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n  {\"name\": \"CompHausLike.LocallyConstantModule.functor_obj_val\", \"module\": \"Mathlib.Condensed.Discrete.Module\", \"type\": \"∀ {P : TopCat → Prop} (R : Type (max u w)) [inst : Ring R] [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P]\\n  [inst_2 : CompHausLike.HasExplicitPullbacks P]\\n  (hs :\\n    ∀ ⦃X Y : CompHausLike P⦄ (f : X ⟶ Y),\\n      CategoryTheory.EffectiveEpi f → Function.Surjective ⇑(CategoryTheory.ConcreteCateg\", \"doc\": \"For a ring $ R $ and a compact Hausdorff-like predicate $ P $ with explicit finite coproducts and pullbacks, and where effective epimorphisms are surjective on underlying sets, the underlying presheaf\"}\n  {\"name\": \"RingHom.Etale.toAlgebra\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \"{f : R →+* S} (hf : Etale f) : @Algebra.Etale R S _ _ f.toAlgebra\", \"doc\": \"If $ f : R \\\\to S $ is an étale ring homomorphism between commutative rings, then the induced algebra structure on $ S $ over $ R $ is étale, meaning $ S $ is finitely presented as an $ R $-algebra and\"}\n  {\"name\": \"RingHom.Etale\", \"module\": \"Mathlib.RingTheory.RingHom.Etale\", \"type\": \"{R S : Type*} [CommRing R] [CommRing S] (f : R →+* S) : Prop\", \"doc\": \"A ring homomorphism $ f : R \\\\to S $ between commutative rings is étale if the induced algebra structure on $ S $ over $ R $ via $ f $ satisfies the étale property, meaning $ S $ is finitely presented \"}\n  {\"name\": \"Algebra.formallyEtale_iff\", \"module\": \"Mathlib.RingTheory.Etale.Basic\", \"type\": \"∀ (R : Type u) (A : Type v) [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.FormallyEtale R A ↔ Subsingleton Ω[A⁄R] ∧ Subsingleton (Algebra.H1Cotangent R A)\", \"doc\": \"An $ R $-algebra $ A $ is formally étale if and only if the module of Kähler differentials $ \\\\Omega_{A/R} $ is trivial (i.e., zero) and the first cohomology group of the cotangent complex $ H^1_{\\\\text\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern ordinary module duals, generic derived categories, sheaf infrastructure or algebra descent; none states this etale potential-duality assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern ordinary module duals, generic derived categories, sheaf infrastructure or algebra descent; none states this etale potential-duality assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "potential.?dual|coinduc.*dualiz|dualiz.*coinduc",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern ordinary module duals, generic derived categories, sheaf infrastructure or algebra descent; none states this etale potential-duality assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-gabber-local-duality-general",
+  "date": "2026-10-18",
+  "group": "Q07"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof, Step 3: the local duality input for the Verdier lower-bound argument; internal coinduction comparison along a coefficient quotient",
+   "via": [
+    "lem-per-gabber-local-duality-general",
+    "lem-per-potential-local-duality",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

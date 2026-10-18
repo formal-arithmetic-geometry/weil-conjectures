@@ -13,9 +13,199 @@
   "def-weil-pbc-constructible-complexes",
   "def-pur-derived-internal-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the current pinned-potential definition: the pinnings are isomorphisms on the residue-field etale sites, and their geometric fibres commute with the normalized codimension-one transitions, using the signed twist identifications. Thus the hypothesis is a potential complex in the sense of ILO XVII 2.1.2, not just a collection of costalk isomorphisms. The given pinned potential complex $K$ belongs to $D^b_c(X_{\\mathrm{et}},\\Lambda)$, and even has finite Tor amplitude, by the existence-and-uniqueness theorem with its constructibility conclusion. This proves the first assertion for the actual given $K$, since the comparison in that theorem respects its pinnings.",
+   "uses": [
+    "def-per-potential-dualizing-complex",
+    "lem-per-potential-dualizing-uniqueness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Propositions 6.2.2.1–6.2.2.3"
+   }
+  },
+  {
+   "text": "First prove preservation for field coefficients $\\Lambda=\\mathbf F_\\ell$, by noetherian induction for all excellent schemes and potential complexes. An ordinary constructible sheaf $M$ is lisse on a dense open $j:U\\hookrightarrow X$: choose lisse neighborhoods of the finitely many generic points in a constructible stratification and remove their closed complements. Let $i:Z\\hookrightarrow X$ be the reduced closed complement. Both $U$ and $Z$ remain excellent, by excellence of finite-type algebras and localizations. In the open--closed triangle $j_!j^*M\\to M\\to i_*i^*M$, the internal-adjunction formulas identify the duals of the two outside terms with $Rj_*R\\mathcal Hom(j^*M,j^*K)$ and $i_*R\\mathcal Hom(i^*M,i^!K)$. Open restriction $j^*K$ is potential for $\\delta|_U$ by regular pullback pinnings: an open immersion is flat with fibres that are single reduced points or empty, hence regular, and its fibre local rings have dimension zero. Closed exceptional restriction $i^!K$ is potential by exceptional pullback: $i$ is proper, with compactification $(\\mathrm{id}_Z,i)$. The latter dual is bounded constructible on $Z$ by the induction hypothesis. For the former, etale locally $j^*M$ is finite free over $\\mathbf F_\\ell$ in degree zero, so it is site-perfect, and the Ext-sheaf constructibility lemma (with $E=\\mathbf Q_\\ell$, $n=1$, so $A=\\mathbf F_\\ell$) makes every cohomology sheaf of $R\\mathcal Hom(j^*M,j^*K)$ constructible on $U$. Internal Hom commutes with slice restriction, so on each member of an etale trivializing cover this complex is a finite direct sum of restrictions of $j^*K$; finitely many members suffice since $U$ is quasi-compact, so its cohomology lies in the bounded interval of $j^*K$ and it is bounded constructible on $U$. Direct-image finiteness applies to $j$ and $i$ since they are finitely presented over the excellent Noetherian target, so both outside duals are bounded constructible on $X$.",
+   "uses": [
+    "def-weil-pbc-constructible-complexes",
+    "lem-cbc-open-closed-recollement",
+    "lem-weil-stratum-ambient-hom",
+    "lem-per-potential-dualizing-finite-pullback",
+    "lem-per-potential-dualizing-uniqueness",
+    "lem-per-quasi-excellent-etale-direct-image-finiteness",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-per-regular-pullback-pinnings",
+    "lem-sf-ext-sheaf-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Proposition 6.2.3.1: locally constant sheaves and noetherian devissage"
+   }
+  },
+  {
+   "text": "Apply the contravariant triangulated functor $D_X$ to the open--closed triangle of step 2. Its two outside duals are bounded constructible, so triangulated closure of $D^b_c$ gives the same for $D_XM$. For nonempty $X$ the chosen dense open is nonempty, so its closed complement is proper; the empty scheme starts the noetherian induction. This proves preservation for ordinary constructible $\\mathbf F_\\ell$-sheaves. Finally the ordinary truncation triangles build any bounded complex from its finitely many shifted cohomology sheaves; applying $D_X$ and triangulated closure proves preservation for all $D^b_c$ complexes over $\\mathbf F_\\ell$.",
+   "uses": [
+    "lem-per-relative-bidual-triangles",
+    "lem-cbc-open-closed-recollement",
+    "prop-constructible-derived-subcategory",
+    "lem-weil-pbc-truncation-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Proposition 6.2.3.1"
+   }
+  },
+  {
+   "text": "For $\\Lambda=\\mathbf Z/\\ell^r\\mathbf Z$, set $K_1=R\\mathcal Hom_\\Lambda(\\mathbf F_\\ell,K)$. The coefficient-restriction lemma makes $K_1$ a pinned potential complex for $(X,\\delta,\\mathbf F_\\ell)$. Filter an ordinary constructible $\\Lambda$-sheaf $M$ by $M\\supseteq\\ell M\\supseteq\\cdots\\supseteq\\ell^rM=0$. Each quotient $Q_a=\\ell^aM/\\ell^{a+1}M$ is constructible over $\\mathbf F_\\ell$. The coinduction comparison identifies $D_KQ_a$ with $D_{K_1}Q_a$, which is bounded constructible by steps 2–3. Forgetting the field action keeps the same finite stalks and cohomological bounds. Apply the exactness of $D_K$ to the finite filtration triangles, then to the ordinary truncation triangles of any bounded constructible complex. This proves preservation of $D^b_c(X_{\\mathrm{et}},\\Lambda)$ for every $r$.",
+   "uses": [
+    "lem-per-potential-hom-coefficient-restriction",
+    "lem-per-potential-coinduction",
+    "lem-per-relative-bidual-triangles",
+    "def-weil-pbc-constructible-complexes",
+    "prop-constructible-derived-subcategory",
+    "lem-weil-pbc-truncation-triangle",
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 6.2.1.1 and proof of Proposition 6.2.3.1"
+   }
+  },
+  {
+   "text": "Write $\\eta_M:M\\to D_K^2M$ for the natural evaluation-transpose map, and work first with ordinary constructible sheaves. Weak biduality says that $\\eta_M$ is an isomorphism in all degrees at most zero. Thus it remains to prove $\\mathcal H^q(D_K^2M)=0$ for $q\\geq1$. For a regular $p:Y\\to X$, use the current fibrewise pinning theorem for ordinary pullback: it makes $p^*K$ potential for $\\delta_Y(y)=\\delta_X(p(y))-\\dim\\mathcal O_{Y_{p(y)},y}$, with geometrically regular fibres tested after finite residue-field extensions. At $y$, its fibrewise construction first localizes the base at $p(y)$, applies the supported base-change comparison on that localized scheme, and then applies the inverse point Gysin class in $\\operatorname{Spec}\\mathcal O_{Y_{p(y)},y}$. The theorem states that these pinnings respect specialization, open restriction and composition. Internal-Hom base change gives $p^*D_KM\\cong D_{p^*K}p^*M$. By step 4 the first dual is bounded constructible, so a second application gives $p^*D_K^2M\\cong D_{p^*K}^2p^*M$, identifying the two evaluation maps. In particular the assertion can be tested after every strict localization, whose source is excellent Noetherian and has finite Krull dimension.",
+   "uses": [
+    "lem-per-potential-weak-biduality",
+    "lem-per-potential-regular-base-change",
+    "lem-per-regular-pullback-pinnings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Propositions 4.1.1, 4.2.2, Lemma 4.3.1.1, Propositions 6.2.3.2 and 6.3.1; beginning of 6.5"
+   }
+  },
+  {
+   "text": "Prove biduality for all schemes of finite Krull dimension by induction on the dimension bound $d\\geq0$. For dimension less than zero only the empty scheme occurs, and its only module complex is zero, with invertible evaluation. For fixed $d$, assume biduality for every constructible sheaf on every excellent scheme of dimension less than $d$ with the given coefficient ring and any dimension function. Within this induction, prove for $q=1,2,\\ldots$ that $\\mathcal H^q(D^2M)=0$ for all constructible sheaves on all such schemes of dimension at most $d$; at the $q$th stage assume this for all positive degrees less than $q$. These are simultaneous hypotheses for all schemes and sheaves, not hypotheses on only the current $X$ or $M$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, 6.5, the dimension induction and Definition 6.5.1"
+   }
+  },
+  {
+   "text": "At this induction stage the vanishing condition in degree $q$ is closed under subobjects and extensions. Indeed, a short exact sequence $0\\to M\\prime\\to M\\to M\\prime\\prime\\to0$ gives a double-dual triangle. For $q>1$, its long exact sequence begins at this spot as $0\\to\\mathcal H^qD^2M\\prime\\to\\mathcal H^qD^2M\\to\\mathcal H^qD^2M\\prime\\prime$, since the degree $q-1$ term vanishes by the inner induction. For $q=1$, weak biduality identifies the preceding map with the surjection $M\\to M\\prime\\prime$, again giving the initial zero. Hence zero in the middle forces zero on the subobject, and zero on both outer terms forces zero in the middle.",
+   "uses": [
+    "lem-per-relative-bidual-triangles",
+    "lem-per-potential-weak-biduality",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-heart-short-exact-triangles"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 6.5.2"
+   }
+  },
+  {
+   "text": "Apply the normal-complete reduction with these dimension and degree induction hypotheses, the preservation proved in step 4, and weak biduality. It suffices, when $d\\geq2$, to prove $\\mathcal H^q(D_X^2\\Lambda_X)=0$ on each normal complete strictly henselian local $X$ of dimension $d$. When $d=0$ or $d=1$, that reduction has no remaining constant-sheaf hypothesis: the normal local models are regular and their normalized potential complexes are twist-shifts of the unit. Thus these two dimension base cases are included. Fix a remaining $X$ with $d\\geq2$.",
+   "uses": [
+    "lem-per-biduality-normal-complete-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 6.5.5 and following reduction to the complete normal case"
+   }
+  },
+  {
+   "text": "Partial algebraization gives a finite surjection $p:X\\prime\\to X$, with $X\\prime$ normal, a complete regular excellent local base $S$ of dimension $d-1$, a finite-type $Z\\to S$, and $X\\prime\\cong\\widehat{Z_{(\\bar z)}}$, with regular completion map $c:X\\prime\\to Z_{(\\bar z)}$. The outer induction gives biduality on every excellent scheme of dimension at most $d-1$. The local scheme $S$ is connected, regular and excellent, so the regular-unit lemma makes $-\\dim\\mathcal O_{S,s}$ a dimension function on $S$, and the finite-type dimension-function lemma (excellent schemes are universally catenary) gives one on $Z$. Finite-type propagation, applied with bound $d-1$, therefore gives biduality for the constant sheaf on $Z_{(\\bar z)}$, for every dimension function and pinned potential complex there. Choose one and pull it back by $c$; the regular pullback pinnings make it a pinned potential complex on $X\\prime$ for the induced dimension function. The regular base-change comparison, applied twice as in step 5, shows that $\\Lambda_{X\\prime}$ is reflexive for this potential complex. The normalization-independence assertion in the normal-complete reduction applies on $X\\prime$: any two dimension functions on this connected scheme differ by a constant, and the corresponding twist-shift cancels in $D^2$. Thus this reflexivity also holds for the pinned potential complex $p^!K_X$. Thus $\\mathcal H^q(D_{X\\prime}^2\\Lambda_{X\\prime})=0$ for the finite-pullback normalization.",
+   "uses": [
+    "lem-per-gabber-partial-algebraization",
+    "lem-per-biduality-finite-type-propagation",
+    "lem-per-potential-regular-base-change",
+    "lem-per-potential-dualizing-uniqueness",
+    "lem-per-potential-dualizing-finite-pullback",
+    "lem-per-biduality-normal-complete-reduction",
+    "lem-per-potential-dualizing-regular-unit",
+    "lem-per-finite-type-dimension-function",
+    "lem-per-regular-pullback-pinnings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, final paragraph of 6.5: partial algebraization and finite-type propagation"
+   }
+  },
+  {
+   "text": "For the finite map $p$, use the comparison with $K_{X\\prime}=p^!K_X$. It identifies $\\mathcal H^q(D_X^2p_*\\Lambda_{X\\prime})$ with $p_*\\mathcal H^q(D_{X\\prime}^2\\Lambda_{X\\prime})=0$. Because $p$ is surjective, the unit $\\Lambda_X\\hookrightarrow p_*\\Lambda_{X\\prime}$ is a monomorphism of constructible sheaves. The subobject closure established in step 7 gives $\\mathcal H^q(D_X^2\\Lambda_X)=0$. This supplies the constant-sheaf hypothesis of step 8, which then gives degree-$q$ vanishing for every constructible sheaf on every scheme of dimension at most $d$.",
+   "uses": [
+    "lem-per-potential-finite-bidual-comparison",
+    "lem-per-biduality-normal-complete-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 6.5.3 and final sentences of 6.5"
+   }
+  },
+  {
+   "text": "Induction on $q$ gives all positive-degree vanishings. Weak biduality then makes $\\eta_M$ an isomorphism for every ordinary constructible sheaf in dimensions at most $d$, completing the outer induction. For an arbitrary $X$ of the statement, with no global finite-dimensional assumption, pull back to each strict localization; step 5 and the finite-dimensional result show that every pullback of $\\eta_M$ is an isomorphism. Strict-local testing therefore gives biduality on $X$. Finally, use the finite truncation filtration of a bounded constructible complex and the morphism-of-triangles property of $\\eta$ to pass from ordinary constructible sheaves and their shifts to every $M\\in D^b_c$. The transformation is natural by its evaluation construction, so this proves the asserted natural biduality isomorphisms.",
+   "uses": [
+    "lem-per-potential-weak-biduality",
+    "lem-per-potential-regular-base-change",
+    "lem-per-relative-bidual-triangles",
+    "def-weil-pbc-constructible-complexes",
+    "lem-weil-pbc-truncation-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, end of 6.5; Theorem 6.1.1"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-per-potential-dualizing-complex",
+  "def-weil-pbc-constructible-complexes",
+  "lem-cbc-open-closed-recollement",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-per-biduality-finite-type-propagation",
+  "lem-per-biduality-normal-complete-reduction",
+  "lem-per-finite-type-dimension-function",
+  "lem-per-gabber-partial-algebraization",
+  "lem-per-potential-coinduction",
+  "lem-per-potential-dualizing-finite-pullback",
+  "lem-per-potential-dualizing-regular-unit",
+  "lem-per-potential-dualizing-uniqueness",
+  "lem-per-potential-finite-bidual-comparison",
+  "lem-per-potential-hom-coefficient-restriction",
+  "lem-per-potential-regular-base-change",
+  "lem-per-potential-weak-biduality",
+  "lem-per-quasi-excellent-etale-direct-image-finiteness",
+  "lem-per-regular-pullback-pinnings",
+  "lem-per-relative-bidual-triangles",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sf-ext-sheaf-constructible",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-stratum-ambient-hom",
+  "prop-constructible-derived-subcategory"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, 6.2–6.5, proof of Theorem 6.1.1, using Expose V 3.1.3–3.1.4"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -72,10 +262,38 @@
    "results": "msearch returned 16 hit(s); top: Mathlib/Data/Set/Defs.lean, Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/Algebra/Homology/HomotopyFiber.lean, Mathlib/Analysis/Normed/Module/PiTensorProduct/ProjectiveSeminorm.lean, Mathlib/Analysis/Normed/Module/DoubleDual.lean, Mathlib/Analysis/Normed/Module/DoubleDual.lean, Mathlib/Analysis/Normed/Module/DoubleDual.lean, Mathlib/Analysis/Normed/Module/DoubleDual.lean",
    "date": "2026-10-18",
    "verdict": "no match: hits concern ordinary linear duals, derived-category infrastructure, etale algebra, or unrelated analytic/order duality; none states etale duality for pinned potential complexes or its coefficient extension"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Gabber local duality potential dualizing complex excellent scheme prime power coefficients",
+   "results": "8 hits: BDeRham, BDeRhamPlus, PreTilt, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, instCommRingBDeRhamPlus, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact, localCohomology.ofSelfLERadical",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "potential.?dual|weakly.?reflexive|partial.?algebrai|regular.?base.?change",
+   "results": "1 hits: Mathlib/Topology/Algebra/Module/PerfectPairing.lean",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Potential dualizing complex on an excellent scheme preserves bounded constructible etale sheaves and evaluation biduality",
+   "results": "8 hits: Module.Dual.eval, Module.evalEquiv, Module.Dual.eval_comp_comp_evalEquiv_eq, LinearMap.IsPerfPair.dualEval, Module.erange_coe, Module.Dual.instIsReflecive, Module.symm_dualMap_evalEquiv, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-potential-local-duality",
@@ -96,5 +314,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-gabber-local-duality-general",
+  "worker": "stage1",
+  "summary": "Preserve the prime-power local-duality statement; reuse potential uniqueness and finite-field direct-image finiteness. Prove preservation by coefficient coinduction and strata, and spell out the dimension/positive-degree induction, partial algebraization and finite-cover subobject argument. Eight statement-only inputs are exposed. Repair of return at 263d5fad11: revalidated all direct citations against the current DAG; only the potential-complex definition changed. Step 1 now explicitly uses its residue-field pinnings, normalized transitions and signed twist identifications, and citations.json includes the current defining clause. Second repair, return at 42a07556c8: revalidated the corrected finite-extension regularity convention and absolute-Gysin pinning normalization; step 5 explicitly cites the current regular-pullback-pinnings theorem. Resumption: compared all 27 existing direct dependencies with 42a07556c8; only regular-pullback-pinnings changed. Step 5 spells out its localized supported exchange and inverse point class, and the current citation is revalidated.",
+  "blueprint": "lem-per-artin-gabber-affine-curve, proof Step 3: the local-duality and biduality input for the lower perverse bound, as inherited through the finite-residue potential-complex chain.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-stratum-ambient-hom",
+    "why": "Generic internal-adjunction formula for a locally closed etale stratum; the present unit has no general ringed-site Hom formula."
+   },
+   {
+    "node": "lem-cbc-open-closed-recollement",
+    "why": "Generic ordinary etale open--closed triangle used for sheaf devissage; no perverse or Fourier-specific replacement."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Internal Hom commutes with etale slice restriction; used to compute the dual of a finite locally constant field sheaf."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-proper",
+    "why": "Closed immersions are proper, so their exceptional restrictions have the compactification required by the potential-pullback theorem."
+   },
+   {
+    "node": "prop-constructible-derived-subcategory",
+    "why": "Triangulated closure of the ordinary finite-coefficient bounded constructible category."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "The generic standard truncation triangles provide the finite cohomology filtration."
+   },
+   {
+    "node": "lem-weil-heart-short-exact-triangles",
+    "why": "The generic heart short-exact-sequence triangle, needed for the coefficient filtration and the subobject calculation."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic long exact cohomology sequence used in the explicit subobject calculation."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Excellence of the open and reduced closed pieces is needed to apply potential pullback and the noetherian induction; this is the generic finite-type/localization permanence theorem."
+   },
+   {
+    "node": "lem-sf-ext-sheaf-constructible",
+    "why": "Constructibility of the Ext sheaves of a site-perfect (here lisse F_ell) complex into a bounded constructible one; generic finite-coefficient fact, no node of the unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-stratum-ambient-hom",
+  "lem-cbc-open-closed-recollement",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-closed-immersion-proper",
+  "prop-constructible-derived-subcategory",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-weil-heart-short-exact-triangles",
+  "lem-sf-derived-homology-long-exact",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-sf-ext-sheaf-constructible"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-f7ec8be3a",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-f7ec8be3a (reviewer sub-agent of L); spot-checked: This is a re-delivery of 42a07556, which was itself a re-delivery of 263d5fad. I FIXed both earlier heads, and both FIXes were lost because the group re-delivers from its own head. I diffed f7ec8be3 against the 42a07556 snapshot and fixes. The 8 new nodes are byte-identical. The item statement is unchanged and matches ILO XVII 6.1.1 for Z/ℓ^r. Only step 5 and the summary changed. Step 5 now spells out the fibrewise pinnings of the revised lem-per-regular-pullback-pinnings and cites it. Of the 41 statement and proof dependencies, that node is the only one whose statement changed. Its regularity is now tested on finite residue-field extensions, which is equivalent, and it now cites supported base change and absolute Gysin purity explicitly; the pinnings are the same. ILO XVII Lemme 4.3.1.1 exists at the place step 5 now cites. I accept step 5 as delivered. I re-applied the same repairs, splicing the delivered step 5 into my fixed item: (1) C5: lem-per-potential-coinduction is narrowed to the internal restriction–coinduction isomorphism, and step 4 cites lem-per-potential-hom-coefficient-restriction (6.2.1.1). (2) C5: lem-per-potential-regular-base-change no longer restates the 4.1.1 pinnings; it keeps 4.2.2, the 6.2.3.2 bidual identification under D_K L ∈ D^b_c, and strict-local testing, and steps 2, 5 and 9 cite the pinnings node. (3) C1: step 2's constructibility now comes from lem-sf-ext-sheaf-constructible (E=Q_ℓ, n=1), added as a tool use. (4) Step 9 now gets the dimension functions on S and Z from lem-per-potential-dualizing-regular-unit and lem-per-finite-type-dimension-function. proof_deps equals the union of the step uses; I checked this mechanically. No fix file cites SGA. Batch-5 flags, all accepted: the def/pinnings citations reach Stacks 05WR strict-local invariance (generic); finite-pullback reaches finite-coefficient purity, which neither assumption gives; uniqueness and direct-image finiteness reach generic affine-cover permanence of excellence and of G-rings. None is a step of the trace-formula or Poincaré-duality proofs. Maintainer note: this is the third loss of the same FIX; please forward the fix content to Q07.; 3 file(s) fixed by the reviewer"
  }
 }
