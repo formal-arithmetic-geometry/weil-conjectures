@@ -13,11 +13,108 @@
   "def-weil-derived-pullback-tensor-hom",
   "def-compact-support-direct-image-detailed",
   "def-exchange-projection",
-  "def-weil-frobenius-detailed"
+  "def-weil-frobenius-detailed",
+  "def-weil-integral-rational-qbar-compact-support"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-frobenius-square-cartesian], the displayed square commutes and is Cartesian, and both horizontal maps are scheme isomorphisms. Choose the compactification $c=(j,p)$ used to represent the exchange in [def-exchange-projection], and its base change $c'=(j',p')$ to the bottom-left copy of $Y$. Write $b:\\overline X'=\\overline X\\times_{Y,g_Y}Y\\to\\overline X$ for its horizontal projection. It is an isomorphism: its inverse is the pair $(1_{\\overline X},g_Y^{-1}p)$, and the two composites are identities by the fibre-product projections. The upper open square has horizontal arrows $b$ and $g_X$ after the Frobenius Cartesian identification. To use [def-exchange-projection] take $S=Y$, with structure maps $f:X\\to Y$, $1_Y:Y\\to Y$, and $g_Y:Y\\to Y$ at the three original corners. Then $f$ and $g_Y$ are $S$-morphisms, separated of finite type. This is a square of schemes over $Y$, even though its horizontal arrows need not be $k$-linear. No assertion that $X$ or $Y$ is separated over $k$ is involved.",
+   "uses": [
+    "lem-weil-frobenius-square-cartesian",
+    "def-exchange-projection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentence 1: compact-support exchange in the equivariant lift; geometry and a chosen compactification"
+   }
+  },
+  {
+   "text": "Fix $n\\geq1$ and work in the ambient unbounded derived categories of constant $A_{E,n}$-module sheaves. For the proper square $(p,p',g_Y,b)$, set $L=Lp^*$, $R=Rp_*$, $L'=Lp'^*$, $R'=Rp'_*$, $G=Lg_Y^*$ and $G'=Lb^*$. The adjunctions and natural square isomorphism $\\theta:L'G\\simeq G'L$ are precisely those specified in [def-exchange-projection]. Both $G$ and $G'$ are equivalences by [lem-weil-isomorphism-derived-pullback-equivalence], which applies to arbitrary scheme isomorphisms, without separatedness over a field. Thus [lem-weil-mate-iso-along-equivalences] applies, with $G$ an equivalence and $G'$ fully faithful. Its displayed unit--square--counit composite is exactly $\\operatorname{Ex}_{*,p}:Lg_Y^*Rp_*\\to Rp'_*Lb^*$ in the exchange definition. Therefore this specified direct-image exchange is a natural isomorphism, including when evaluated on $j_!K$. This is not an inference that an arbitrary mate of an isomorphism is invertible: the two horizontal equivalence hypotheses are essential here.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-weil-isomorphism-derived-pullback-equivalence",
+    "lem-weil-mate-iso-along-equivalences"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentence 1: compact-support exchange in the equivariant lift; invertibility of the proper factor at finite coefficients"
+   }
+  },
+  {
+   "text": "The upper open square in Step 1 satisfies [lem-cbc-proetale-extension-zero-base-change], so its canonical comparison $\\beta:Lb^*j_!\\simeq j'_!Lg_X^*$ is natural and invertible at $A_{E,n}$; finite pullback is the termwise inverse image in [def-exchange-projection]. That definition gives\n$$e_n^c=Rp'_*(\\beta)\\circ\\operatorname{Ex}_{*,p}(j_!-).$$\nThe first factor is invertible because a functor sends an inverse to an inverse, and the second is invertible by Step 2. Hence $e_n^c$ is a natural isomorphism. This finite-level assertion holds on the ambient categories; any constructibility, witness or finite-Tor restriction of the exchange inherits it. When compactification-independent finite functors are used, insert the natural comparison isomorphisms of [prop-compactification-coherence-detailed] on its stated etale-origin domain. Composing with those isomorphisms leaves the component invertible. Their hypotheses require only that $f$ be separated finite type between finite-type schemes over the field, not that the schemes be separated over that field.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero-base-change",
+    "def-exchange-projection",
+    "prop-compactification-coherence-detailed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentence 1: compact-support exchange in the equivariant lift; multiply the proper and open factors at finite level"
+   }
+  },
+  {
+   "text": "Now use an integral presentation on one of the operation/comparison domains specified in [def-exchange-projection]. For an input $K$, write $e:M\\to N$ for its integral exchange, where $M=Lg_Y^*Rf_!K$ and $N=Rf_!Lg_X^*K$. Both belong to the supplied $D^b_c(Y,\\mathcal O_E)$ domain. By the finite-reduction identifications required in that definition, reduction of the unit, square isomorphism, counit and open comparison gives exactly their finite-level counterparts. Consequently $e\\otimes^L A_{E,n}$ is conjugate by those identifications to $e_n(K\\otimes^L A_{E,n})$, and is invertible by Step 3 for every $n$. This uses the supplied coefficient and finite-Tor hypotheses; it asserts no additional existence or preservation of those comparison data.",
+   "uses": [
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentence 1: compact-support exchange in the equivariant lift; identify the reductions of the actual integral exchange"
+   }
+  },
+  {
+   "text": "Take a cone $C$ of $e$ in the ambient completed-coefficient derived category. By [lem-weil-integral-constructible-triangulated] it lies in $D^b_c(Y,\\mathcal O_E)$, since $M,N$ do (rotate the cone triangle to put $N,C,M[1]$ in that order). Derived reduction is the exact change-of-rings functor of [lem-pur-derived-change-of-rings], with $\\mathcal O=\\widehat{\\mathcal O}_{E,Y}$ and $\\mathcal O'=(A_{E,n})_Y$; hence $C\\otimes^L A_{E,n}$ is a cone of the isomorphism in Step 4 and is zero by [lem-kun-distinguished-cone-zero]. By [def-weil-derived-complete-integral-detailed] the object $C$ is derived complete. Its defining Roos triangle in [def-weil-derived-complete] therefore has the form $C\\to\\prod_n0\\to\\prod_n0\\to C[1]$. A product of zero objects is zero by the product universal property. Apply [lem-kun-distinguished-cone-zero] to this triangle: its third object is zero, so $C\\to0$ is an isomorphism. Thus $C=0$, and the same lemma applied to the cone triangle of $e$ gives that $e$ is an isomorphism. This proves detection here directly for the completed ring-sheaf coefficients; it does not identify them with condensed-module coefficients or infer equality of morphisms from their separate reductions.",
+   "uses": [
+    "lem-weil-integral-constructible-triangulated",
+    "lem-pur-derived-change-of-rings",
+    "def-weil-derived-complete-integral-detailed",
+    "def-weil-derived-complete",
+    "lem-kun-distinguished-cone-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentence 1: compact-support exchange in the equivariant lift; deduce integral invertibility from the zero reduction cones"
+   }
+  },
+  {
+   "text": "For $E$ coefficients the maps in [def-exchange-projection] are the rationalizations of the integral maps. By [def-weil-rationalization-karoubi], the objects are integral representatives and the morphisms are scalar-localized integral Hom groups. Send $e$ and its inverse $v$ from Step 5 to $e\\otimes1$ and $v\\otimes1$; their two products are $1\\otimes1$, so this is the specified rational exchange and its inverse. Naturality extends linearly to every rational morphism. For $\\Qlb$ coefficients represent $K$ at a finite field $E$ and take the classes of these two inverse arrows there, using [def-weil-algebraically-closed-coefficients]. Composition over that common field gives both identity classes. For a morphism represented over a larger common field $L$, the scalar comparisons supplied by [def-exchange-projection] conjugate this component to the exchange at $L$. The inverse conjugates to its inverse, since if $s e=t$ with $s,t$ invertible comparison composites, the inverse equality follows by multiplication. Thus the naturality equation at $L$ gives naturality in the common-stage category, and the supplied identity/tower cocycle makes the classes independent of enlarging $L$. Finally any specified compactification identifications conjugate the displayed components by natural isomorphisms, preserving invertibility. Restricting these natural isomorphisms to any of the domains in the statement proves the assertion. No Weil structure on the underlying input, Frobenius-stable lattice, or separatedness of the two schemes has been used.",
+   "uses": [
+    "def-exchange-projection",
+    "def-weil-rationalization-karoubi",
+    "def-weil-algebraically-closed-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentence 1: compact-support exchange in the equivariant lift; rationalization and common-stage inverse arrows"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-derived-complete",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-rationalization-karoubi",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "lem-kun-distinguished-cone-zero",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-frobenius-square-cartesian",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-weil-isomorphism-derived-pullback-equivalence",
+  "lem-weil-mate-iso-along-equivalences",
+  "prop-compactification-coherence-detailed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+  "place": "Sentence 1, expanded by the proper/open compactification formula, the existing abstract mate lemma, and a direct completed-coefficient reduction-cone argument"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -60,10 +157,45 @@
    "results": "AlgebraicGeometry.Scheme.Modules.pushforwardCongr; AlgebraicGeometry.Scheme.Modules.pushforwardCongr_inv_app_app; AlgebraicGeometry.Scheme.Hom.preimageIso_hom_ι; AlgebraicGeometry.Scheme.inv_app; AlgebraicGeometry.Scheme.Hom.preimageIso_hom_ι_assoc; AlgebraicGeometry.Scheme.Hom.preimageIso_inv_ι; AlgebraicGeometry.Scheme.Hom.inv_app; AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app",
    "date": "2026-10-18",
    "verdict": "no match: generic adjunction or ordinary structure-sheaf pushforward, not rational compact-support Frobenius exchange"
+  },
+  {
+   "tool": "grep",
+   "query": "compact.support.*exchange|[Ff]robenius.*[Bb]ase[Cc]hange",
+   "results": "No hits in Mathlib.",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern ordinary scheme module pullback, scheme isomorphisms or generic mate calculus, not the compact-support rational/common-stage exchange"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Base change for direct image with compact support along an isomorphism of schemes with rational l-adic coefficients",
+   "results": "AlgebraicGeometry.IsFinite.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.quasiCompact_isStableUnderBaseChange; AlgebraicGeometry.Surjective.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsProper.isStableUnderBaseChange; AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsLocalIso.instIsStableUnderBaseChangeScheme; AlgebraicGeometry.IsSeparated.isStableUnderBaseChange; AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern ordinary scheme module pullback, scheme isomorphisms or generic mate calculus, not the compact-support rational/common-stage exchange"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "CategoryTheory.mateEquiv; CategoryTheory.mateEquiv_counit; CategoryTheory.mateEquiv_counit_symm; CategoryTheory.unit_mateEquiv; CategoryTheory.unit_mateEquiv_symm; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.mateEquiv_vcomp",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern ordinary scheme module pullback, scheme isomorphisms or generic mate calculus, not the compact-support rational/common-stage exchange"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The compact support derived direct image commutes with pullback along geometric Frobenius automorphisms for rational l-adic sheaves",
+   "results": "SheafOfModules.conjugateEquiv_pullbackComp_inv; AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pullbackComp; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pushforwardComp_inv_app_val_app; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern ordinary scheme module pullback, scheme isomorphisms or generic mate calculus, not the compact-support rational/common-stage exchange"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Direct image with proper support commutes with inverse image under an equivalence of pro-etale sites induced by a scheme isomorphism",
+   "results": "AlgebraicGeometry.Scheme.Hom.inv_image; AlgebraicGeometry.Scheme.inv_app; AlgebraicGeometry.Scheme.Hom.preimageIso_hom_ι; AlgebraicGeometry.Scheme.Hom.inv_app; AlgebraicGeometry.Scheme.Hom.preimageIso; AlgebraicGeometry.Scheme.Hom.appIso_inv_app; AlgebraicGeometry.Scheme.Hom.app_invApp'; AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv_apply",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern ordinary scheme module pullback, scheme isomorphisms or generic mate calculus, not the compact-support rational/common-stage exchange"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-weil-operations",
@@ -80,5 +212,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-pod-weil-frobenius-compact-support-exchange",
+  "worker": "stage1",
+  "summary": "Six-step proof on the exact supplied operation domains. Finite exchange is the proper mate along equivalences followed by open base change; zero reduction cones prove integral invertibility, then scalar localization and common-stage classes preserve the explicit inverse. No new nodes, no separatedness of the schemes, no coefficient-category identification and no change of statement.",
+  "blueprint": "Realizes sentence 1 of prop-weil-operations.proof.md, namely the invertible compact-support exchange used to lift Rf_! to Weil complexes; expands the automorphism-square assertion in lem-fix-weil-operations.proof.md below that sentence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-frobenius-square-cartesian",
+    "why": "Generic geometry of the semilinear automorphism square, for arbitrary k_0-schemes; the finiteness unit supplies no such geometry theorem."
+   },
+   {
+    "node": "lem-weil-isomorphism-derived-pullback-equivalence",
+    "why": "General finite-coefficient site-isomorphism equivalence, needed for the proper mate; not a replacement for any finiteness step."
+   },
+   {
+    "node": "lem-weil-mate-iso-along-equivalences",
+    "why": "Abstract categorical invertibility criterion for the specified proper exchange; it is used as a generic tool below the equivariant-lift assertion."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-base-change",
+    "why": "General canonical open base-change comparison, the second factor in the compactification exchange formula."
+   },
+   {
+    "node": "prop-compactification-coherence-detailed",
+    "why": "Generic finite compactification comparison on its witnessed domain; no finiteness theorem is replaced."
+   },
+   {
+    "node": "lem-weil-integral-constructible-triangulated",
+    "why": "Closure under cones in the intrinsic completed-coefficient category, for the reduction-cone argument."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Exactness of derived reduction for sheaves over the completed coefficient ring; avoids importing a Nakayama statement for a different coefficient category."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-frobenius-square-cartesian",
+  "lem-weil-isomorphism-derived-pullback-equivalence",
+  "lem-weil-mate-iso-along-equivalences",
+  "lem-cbc-proetale-extension-zero-base-change",
+  "prop-compactification-coherence-detailed",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-0223ea32b",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-0223ea32b (reviewer sub-agent of L); spot-checked: I read the item, every cited statement, unit sk-lem-finite and the blueprint sources prop-weil-operations.proof.md sentence 1 and lem-fix-weil-operations.proof.md (the Ex_! Weil structure). There are no new nodes, and proof_deps equals the union of the step uses. Step 1: hypotheses of def-exchange-projection checked with S=Y and g=g_Y as an S-morphism; b: X̄×_{Y,g_Y}Y→X̄ is an isomorphism with inverse (1,g_Y^{-1}p). Step 2: L,R,L',R',G,G',θ matched to lem-weil-mate-iso-along-equivalences; its mate formula is exactly Ex_{*,p}, and G and G' are equivalences by lem-weil-isomorphism-derived-pullback-equivalence (scheme isomorphisms, ℓ invertible). Step 3: the upper open square is Cartesian, so β is an isomorphism by lem-cbc-proetale-extension-zero-base-change, and Ex_!^c=Rp'_*(β)∘Ex_{*,p}(j_!−) is invertible; the compactification-coherence comparisons only conjugate it. Step 4 relies only on the supplied finite-reduction identifications of the definition. Step 5: the cone lies in D^b_c by the triangulated-closure lemma, so it is derived complete; exact Lπ_n^* makes its reductions zero, so the Roos triangle C→0→0 gives C=0, using the Mathlib cone leaf. Step 6: raw scalar localization and common-stage classes keep both inverse equations. Edge cases: empty X, the non-separated affine line with doubled origin with f=id, P^1→Spec k against lem-weil-frobenius-cohomology-transport-iso part 2, zero complexes. Not duplicates: lem-coef-frobenius-exchange-equivalence (separated schemes, E only), lem-weil-frobenius-cohomology-transport-iso (f=a_Y only) and lem-pur-weil-semilinear-exchange-reindexing are special cases; the citer prop-weil-operations needs the general, non-separated Q̄_ℓ case. The statement is not weakened, and no SGA source is cited. I accept the seven declared tool_uses: lem-weil-frobenius-square-cartesian, lem-weil-isomorphism-derived-pullback-equivalence, lem-weil-mate-iso-along-equivalences, lem-cbc-proetale-extension-zero-base-change, prop-compactification-coherence-detailed, lem-weil-integral-constructible-triangulated and lem-pur-derived-change-of-rings, all generic tools. No fixes."
  }
 }
