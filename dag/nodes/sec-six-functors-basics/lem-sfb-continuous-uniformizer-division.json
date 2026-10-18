@@ -12,46 +12,39 @@
  ],
  "proof": [
   {
-   "text": "The valuation topology makes $E$ a topological field. Since a uniformizer is nonzero, multiplication by $\\pi^e$ on $E$ is a homeomorphism with inverse multiplication by $\\pi^{-e}$. Restricting this map to $A$ gives a homeomorphism $A\\to\\pi^eA$ with the subspace topology. Define $q$ as the inverse of this restriction composed with $f$; it is continuous and $A$-valued by the divisibility hypothesis, and it is unique because multiplication by $\\pi^e$ is injective.",
+   "text": "Specialize Padic.extension_integers_dvr to coefficientExtensionAbsoluteValue using spectralNorm_extends. Its chosen ring and maximal ideal are definitionally the recorded coefficient ring and maximal ideal. Extract the membership formulas, the criterion IsUnit a iff |a| = 1, nonzeroness of the maximal ideal, its uniformizer-generator equation, and the largest nonzero absolute value r in the maximal ideal. The generator equation and the nonzero maximal ideal show that the recorded uniformizer, and hence its e-th power c, is nonzero.",
    "uses": [
-    "def-weil-l-adic-coefficient-extension"
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-l-adic-extension-absolute-value"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Proof of Theorem 6.12(2), finite E case, pp. 18–19: comparison of valuations makes division integral."
-   }
+   "elementary": true
   },
   {
-   "text": "Write $f(t_0)=\\pi^e u$ with $u\\in A^\\times$. The defining equation $\\pi^e q(t_0)=f(t_0)$ and cancellation of the nonzero element $\\pi^e$ in the field $E$ give $q(t_0)=u$, so $q(t_0)$ is a unit of $A$.",
+   "text": "Equip E with the normed-field structure supplied by the recorded absolute value. Homeomorph.smulOfNeZero c gives the embedding x ↦ c*x of E. Compose with the subtype embedding of A, then apply Topology.IsEmbedding.toHomeomorph to obtain H : A ≃ₜ range (a ↦ c*a) with precisely the stated forward map. Lift f continuously into this range using its divisibility hypothesis, and define q by composing this lift with H.symm. The identity H.apply_symm_apply gives c*q(t)=f(t). Cancellation of c proves uniqueness among all quotients, even without using their continuity.",
    "uses": [
     "def-weil-l-adic-coefficient-extension"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Proof of Theorem 6.12(2), finite E case, pp. 18–19: comparison of valuations makes division integral."
-   }
+   "elementary": true
   },
   {
-   "text": "The unit group $A^\\times$ is open in the valuation topology: for a unit $u$, the coset $u+\\mathfrak m_E$ consists of units and is an open neighbourhood of $u$. Hence $U=q^{-1}(A^\\times)$ is an open neighbourhood of $t_0$ and $q|_U$ is unit-valued. Inversion on $E^\\times$ is continuous for the valuation topology, so $t\\mapsto q(t)^{-1}$, viewed as an $A$-valued map on $U$, is continuous. This proves the final local assertion.",
+   "text": "The maximal-value clause gives 0 ≤ r < 1 and says that every nonzero nonunit of A has absolute value at most r: a nonunit has absolute value below 1 and hence lies in the maximal ideal. Thus r < |a| implies that a is a unit. If f(t₀)=c*z for a unit z, cancellation gives q(t₀)=z, so |q(t₀)|=1. Take U={t | r < |q(t)|}; continuity of q and the absolute value makes U open, it contains t₀, and q is unit-valued throughout U. Apply ContinuousOn.inv₀ to the continuous E-valued map q, since its unit values are nonzero in E, to obtain the required continuous inverse on U.",
    "uses": [
-    "def-weil-l-adic-coefficient-extension"
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-l-adic-extension-integers-dvr"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-    "place": "Proof of Theorem 6.12(2), finite E case, pp. 18–19: comparison of valuations makes division integral."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-l-adic-coefficient-extension"
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-l-adic-extension-absolute-value"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker R3",
   "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-  "place": "Proof of Theorem 6.12(2), finite E case, pp. 18–19; explicit valuation-topology division and local unit inversion."
+  "place": "Proof of Theorem 6.12(2), finite E case, pp. 18–19; formalizes the existing division argument using the stated DVR maximal-value clause to exhibit an open unit neighbourhood."
  },
  "mathlib_searches": [
   {
@@ -139,5 +132,15 @@
   "date": "2026-10-17",
   "existing": false,
   "fixed_by": "NT-stage2-cc-2bf50a117"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261018T144419-L-3504299",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
