@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationTensor
+public import WeilConjectures.WeilSheaf.DerivedHom
 public import WeilConjectures.WeilSheaf.TateTwistCohomology
 
 /-!
@@ -39,28 +40,6 @@ variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fa
   {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 
 namespace ProEtaleWeilSheaf
-
-/-- A morphism `φ : A ⟶ A'` of pro-étale Weil sheaves induces `[A', B] ⟶ [A, B]`: all three
-constituents of the Weil structure of the internal hom are natural in the first variable. -/
-noncomputable def ihomMapLeft {A A' : ProEtaleWeilSheaf k₀ l X} (φ : A ⟶ A')
-    (B : ProEtaleWeilSheaf k₀ l X) : ihom k₀ l X A' B ⟶ ihom k₀ l X A B :=
-  ObjectProperty.homMk ⟨(Mod.ihomMap φ.hom.f).app B.carrier, by
-    have h := adicLowerStarCompIhomIso_inv_app_comp_ihomMap l
-      (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv φ.hom.f B.carrier
-    have hφ : A.str.inv ≫ (WeilSheaf.frobeniusPullback k₀ l X).map φ.hom.f =
-        φ.hom.f ≫ A'.str.inv := by
-      rw [Iso.inv_comp_eq, ← Category.assoc, Iso.eq_comp_inv]
-      exact φ.hom.h
-    rw [ihom_obj_str, ihom_obj_str, ← reassoc_of% h]
-    simp only [Category.assoc]
-    erw [(Mod.ihomMap φ.hom.f).naturality B.obj.str]
-    rw [← NatTrans.comp_app_assoc, ← NatTrans.comp_app_assoc, ← Mod.ihomMap_comp,
-      ← Mod.ihomMap_comp, hφ]⟩
-
-lemma ihomMapLeft_hom_f {A A' : ProEtaleWeilSheaf k₀ l X} (φ : A ⟶ A')
-    (B : ProEtaleWeilSheaf k₀ l X) :
-    (ihomMapLeft φ B).hom.f = (Mod.ihomMap φ.hom.f).app B.carrier :=
-  rfl
 
 /-- A morphism `g : B ⟶ B'` of pro-étale Weil sheaves induces `[A, B] ⟶ [A, B']`. -/
 noncomputable def ihomMapRight (A : ProEtaleWeilSheaf k₀ l X) {B B' : ProEtaleWeilSheaf k₀ l X}
