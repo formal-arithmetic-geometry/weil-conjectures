@@ -81,15 +81,25 @@ noncomputable abbrev derivedConstantSheaf (W : Scheme.{u}) :
     DerivedCategory A ⥤ DerivedCategory (Sheaf W.smallEtaleTopology A) :=
   (constantSheaf W.smallEtaleTopology A).mapDerivedCategory
 
+/-- The tensor product `Lp^* K ⊗ᴸ Lq^* L ∈ D(Z_ét, A)` of the inverse images of
+`K ∈ D(X_ét, A)` and `L ∈ D(Y_ét, A)` along morphisms `p : Z ⟶ X` and `q : Z ⟶ Y`, for a
+coefficient category `A`; here `⊗ᴸ` is the tensor product of the monoidal category `D(Z_ét, A)`,
+that is `AlgebraicGeometry.Etale.derivedTensor`. -/
+noncomputable def derivedExteriorTensor {X Y Z : Scheme.{u}} (p : Z ⟶ X) (q : Z ⟶ Y)
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (L : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    DerivedCategory (Sheaf Z.smallEtaleTopology A) :=
+  (L((p)^*[A])).obj K ⊗ (L((q)^*[A])).obj L
+
 /-- The derived exterior product `K ⊠ᴸ L := Lp_X^* K ⊗ᴸ Lp_Y^* L ∈ D((X ×_S Y)_ét, A)` of
-`K ∈ D(X_ét, A)` and `L ∈ D(Y_ét, A)`, for a coefficient category `A`; here `⊗ᴸ` is the tensor
-product of the monoidal category `D((X ×_S Y)_ét, A)`, that is
-`AlgebraicGeometry.Etale.derivedTensor`. -/
+`K ∈ D(X_ét, A)` and `L ∈ D(Y_ét, A)`, for a coefficient category `A`, where `p_X`, `p_Y` are
+the projections of `X ×_S Y` (`AlgebraicGeometry.Etale.derivedExteriorTensor`). -/
 noncomputable abbrev derivedExteriorProduct {S X Y : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S)
     (K : DerivedCategory (Sheaf X.smallEtaleTopology A))
     (L : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
     DerivedCategory (Sheaf (pullback f g).smallEtaleTopology A) :=
-  (L((pullback.fst f g)^*[A])).obj K ⊗ (L((pullback.snd f g)^*[A])).obj L
+  derivedExteriorTensor A (pullback.fst f g) (pullback.snd f g) K L
+
 
 end Coefficients
 

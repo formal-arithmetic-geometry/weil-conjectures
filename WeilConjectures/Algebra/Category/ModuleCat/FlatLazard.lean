@@ -8,6 +8,8 @@ module
 public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 public import Mathlib.CategoryTheory.Limits.Types.Filtered
 public import Mathlib.RingTheory.Flat.EquationalCriterion
+public import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
+public import Mathlib.LinearAlgebra.Basis.Prod
 
 /-!
 # Lazard's theorem: a flat module is a filtered colimit of finite free modules
@@ -21,7 +23,7 @@ statements are consequences of the equational criterion for flatness
 (`Module.Flat.exists_factorization_of_comp_eq_zero_of_free`).
 -/
 
-@[expose] public section
+@[expose] public noncomputable section
 
 universe u
 
@@ -42,13 +44,10 @@ namespace FinFreeOver
 
 variable {M}
 
-/-- The morphisms of `ModuleCat.FinFreeOver M`: the linear maps between the finite free modules
-compatible with the maps to `M`. -/
-def Hom (A B : FinFreeOver M) : Type u :=
-  { g : (Fin A.n →₀ R) →ₗ[R] (Fin B.n →₀ R) // B.f ∘ₗ g = A.f }
-
+/-- The morphisms of `ModuleCat.FinFreeOver M` are the linear maps between the finite free
+modules compatible with the maps to `M`. -/
 instance : Category (FinFreeOver M) where
-  Hom := Hom
+  Hom A B := { g : (Fin A.n →₀ R) →ₗ[R] (Fin B.n →₀ R) // B.f ∘ₗ g = A.f }
   id A := ⟨LinearMap.id, by simp⟩
   comp g h := ⟨h.1 ∘ₗ g.1, by rw [← LinearMap.comp_assoc, h.2, g.2]⟩
 
@@ -80,7 +79,7 @@ noncomputable def cocone : Cocone (diagram M) where
     { app A := ModuleCat.ofHom A.f
       naturality A B g := by
         ext x
-        simpa using (LinearMap.congr_fun g.2 x) }
+        exact LinearMap.congr_fun g.2 x }
 
 variable [Module.Flat R M]
 
@@ -104,7 +103,8 @@ instance isFiltered : IsFiltered (FinFreeOver M) where
       (f := g.1 - h.1) (x := B.f) (by rw [LinearMap.comp_sub, g.2, h.2, sub_self])
     refine ⟨⟨k, y⟩, ⟨a, hya.symm⟩, ?_⟩
     ext1
-    simpa [sub_eq_zero, LinearMap.comp_sub] using ha
+    rw [LinearMap.comp_sub] at ha
+    exact sub_eq_zero.1 ha
 
 /-- **Lazard's theorem**: a flat module `M` is the filtered colimit of the finite free modules
 `R^n` mapping to it. -/
@@ -113,15 +113,19 @@ noncomputable def isColimitCocone : IsColimit (cocone M) := by
     reflectsColimitsOfShape_of_reflectsIsomorphisms
   refine isColimitOfReflects (forget (ModuleCat.{u} R)) ?_
   refine Types.FilteredColimit.isColimitOf' _ _ (fun x ↦ ?_) (fun A x y hxy ↦ ?_)
-  · refine ⟨⟨1, Finsupp.linearCombination R (fun _ ↦ x)⟩, Finsupp.single 0 1, ?_⟩
-    simp
-  · have hxy' : A.f (x - y) = 0 := by
+  · let x' : M := x
+    refine ⟨⟨1, Finsupp.linearCombination R (fun _ ↦ x')⟩, Finsupp.single 0 1, ?_⟩
+    exact (by simp : Finsupp.linearCombination R (fun _ : Fin 1 ↦ x')
+      (Finsupp.single 0 1) = x').symm
+  · let x' : Fin A.n →₀ R := x
+    let y'' : Fin A.n →₀ R := y
+    have hxy' : A.f (x' - y'') = 0 := by
       rw [map_sub, sub_eq_zero]
-      simpa using hxy
+      exact hxy
     obtain ⟨k, a, y', hya, ha⟩ := Module.Flat.exists_factorization_of_apply_eq_zero_of_free hxy'
     refine ⟨⟨k, y'⟩, ⟨a, hya.symm⟩, ?_⟩
     rw [map_sub, sub_eq_zero] at ha
-    simpa using ha
+    exact ha
 
 end FinFreeOver
 

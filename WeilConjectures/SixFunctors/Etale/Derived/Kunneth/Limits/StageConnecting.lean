@@ -30,6 +30,19 @@ open CategoryTheory Limits Opposite Pretriangulated
 
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 
+/-- The connecting map `Hⁿ⁰(F(X₃)) ⟶ Hⁿ¹(F(X₁))` of the homology sequence of the image under a
+functor `F` to `D⁺(D)`, commuting with the shifts, of the triangle `X₁ ⟶ X₂ ⟶ X₃ ⟶ X₁[1]`. The
+instance of `F` commuting with the shifts is an explicit argument, so that all constructions
+built from it can use the same instance term. -/
+noncomputable def DerivedCategory.Plus.connectingOfTriangle {C D : Type*} [Category C]
+    [Category D] [Abelian D] [HasDerivedCategory D] {_ : HasShift C ℤ}
+    (F : C ⥤ DerivedCategory.Plus D) (iF : F.CommShift ℤ) {X₁ X₂ X₃ : C} (f : X₁ ⟶ X₂)
+    (g : X₂ ⟶ X₃) (δ : X₃ ⟶ X₁⟦(1 : ℤ)⟧) (n₀ n₁ : ℤ) (h : n₀ + 1 = n₁) :
+    (DerivedCategory.Plus.homologyFunctor D n₀).obj (F.obj X₃) ⟶
+      (DerivedCategory.Plus.homologyFunctor D n₁).obj (F.obj X₁) :=
+  (DerivedCategory.Plus.homologyFunctor D 0).homologySequenceδ
+    (F.mapTriangle.obj (Triangle.mk f g δ)) n₀ n₁ h
+
 namespace AlgebraicGeometry.Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
@@ -64,6 +77,12 @@ lemma exists_of_exact_sheafFiber {X : Scheme.{u}}
 namespace LimitStage
 
 variable {B W : Scheme.{u}}
+
+/-- The functor of a stage commutes with the shifts. Recording it as a named instance makes all the
+constructions below use the same instance term, which keeps their comparisons cheap. -/
+noncomputable instance (priority := high) commShift_functor (α : LimitStage B W) :
+    (functor Λ α).CommShift ℤ :=
+  inferInstance
 
 set_option maxHeartbeats 1000000 in
 -- the instance arguments of the whiskered transformations are large
@@ -115,9 +134,9 @@ noncomputable def connecting (α : LimitStage B W) (n₀ n₁ : ℤ) (h : n₀ +
         ((functor Λ α).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj E.X₃)) ⟶
       (DerivedCategory.Plus.homologyFunctor _ n₁).obj
         ((functor Λ α).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj E.X₁)) :=
-  (DerivedCategory.Plus.homologyFunctor _ 0).homologySequenceδ
-    ((functor Λ α).mapTriangle.obj (Triangle.mk ((DerivedCategory.Plus.singleFunctor _ 0).map E.f)
-      ((DerivedCategory.Plus.singleFunctor _ 0).map E.g) δ)) n₀ n₁ h
+  DerivedCategory.Plus.connectingOfTriangle (functor Λ α) (commShift_functor Λ α)
+    ((DerivedCategory.Plus.singleFunctor _ 0).map E.f)
+    ((DerivedCategory.Plus.singleFunctor _ 0).map E.g) δ n₀ n₁ h
 
 variable {Λ} in
 include hT in

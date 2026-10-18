@@ -35,13 +35,8 @@ lemma mapBifunctorSingle₁Iso_inv_naturality₁ [HasZeroObject C₁] {X₁ X₁
       (NatTrans.mapHomologicalComplex (F.map f) (.up ℤ)).app K₂ ≫
         (mapBifunctorSingle₁Iso F X₁' K₂).inv := by
   ext n
-  simp only [comp_f, mapBifunctorSingle₁Iso_inv_f, Category.assoc, ι_mapBifunctorMap,
-    single_map_f_self, Functor.map_comp, NatTrans.comp_app, id_f, Functor.map_id,
-    Category.comp_id, NatTrans.mapHomologicalComplex_app_f]
-  simp only [singleObjXSelf, Iso.refl_hom, Iso.refl_inv, singleObjXIsoOfEq, eqToIso_refl,
-    Category.id_comp, Category.assoc, Iso.inv_hom_id_assoc]
-  rw [NatTrans.naturality_assoc]
-  simp [← NatTrans.comp_app_assoc, ← Functor.map_comp]
+  simp [mapBifunctorSingle₁Iso_inv_f, single_map_f_self, ← NatTrans.comp_app_assoc,
+    ← Functor.map_comp]
 
 @[reassoc]
 lemma mapBifunctorSingle₁Iso_hom_naturality₁ [HasZeroObject C₁] {X₁ X₁' : C₁} (f : X₁ ⟶ X₁')

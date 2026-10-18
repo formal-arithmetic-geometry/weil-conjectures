@@ -314,11 +314,11 @@ variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
   [HasDerivedCategory C] [HasDerivedCategory D]
   (F : C ⥤ D) [F.Additive] [EnoughInjectives C] [Abelian.HasKInjectiveResolutions C]
 
+omit [EnoughInjectives C] in
 /-- Let `K ∈ D(C)` with `H^{-n-1}(K)` acyclic for the left exact functor `F`. Then the
 transition `τ^{≥ -n-1} K ⟶ τ^{≥ -n} K` induces isomorphisms on `Hᵐ(RF(-))` for `m ≥ -n`: its
 fiber is `H^{-n-1}(K)` placed in degree `-n-1`, whose image under `RF` is concentrated in degree
 `-n-1`. -/
-omit [EnoughInjectives C] in
 lemma isIso_homology_rightDerivedFunctor_map_truncGETower_map_succ [PreservesFiniteLimits F]
     (K : DerivedCategory C) (n : ℕ)
     (hK : F.IsRightAcyclic ((DerivedCategory.homologyFunctor C (-(n : ℤ) - 1)).obj K))

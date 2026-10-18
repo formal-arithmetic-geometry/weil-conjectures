@@ -130,7 +130,7 @@ noncomputable def Limits.isColimitMapCoconeOfNatTrans (β : P ⟶ R) {K : J ⥤ 
   have : ∀ j, IsIso ((Functor.whiskerLeft K β).app j) := h
   have : IsIso (Functor.whiskerLeft K β) := NatIso.isIso_of_isIso_app _
   refine (IsColimit.equivOfNatIsoOfIso (asIso (Functor.whiskerLeft K β)) _ _ ?_).symm hR
-  exact Cocones.ext (asIso (β.app c.pt)) fun j ↦ by simp
+  exact Cocone.ext (asIso (β.app c.pt)) fun j ↦ by simp
 
 /-- If `β : P ⟶ R` is an isomorphism at the point of a cocone `c` and at all the objects of its
 diagram, then `R` maps `c` to a colimit cocone if `P` does. -/
@@ -140,6 +140,6 @@ noncomputable def Limits.isColimitMapCoconeOfNatTrans' (β : P ⟶ R) {K : J ⥤
   have : ∀ j, IsIso ((Functor.whiskerLeft K β).app j) := h
   have : IsIso (Functor.whiskerLeft K β) := NatIso.isIso_of_isIso_app _
   refine IsColimit.equivOfNatIsoOfIso (asIso (Functor.whiskerLeft K β)) _ _ ?_ hP
-  exact Cocones.ext (asIso (β.app c.pt)) fun j ↦ by simp
+  exact Cocone.ext (asIso (β.app c.pt)) fun j ↦ by simp
 
 end CategoryTheory

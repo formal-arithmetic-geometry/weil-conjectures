@@ -151,6 +151,8 @@ lemma mapDerivedCategoryTensorComparison_app_app_comp (K M : HomotopyCategory C 
   simp only [Category.assoc]
   rfl
 
+omit [HasFunctorialFlatResolution D] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+  [F.Monoidal] in
 /-- Every object of `D(C)` is isomorphic to `Qh P` for a complex `P` whose image under `F` is
 K-flat. -/
 lemma exists_kFlatMap_iso (X : DerivedCategory C) :
@@ -160,9 +162,6 @@ lemma exists_kFlatMap_iso (X : DerivedCategory C) :
     (Φ := HomotopyCategory.quasiIsoLocalizerMorphism F.kFlatMap) (Qh.objPreimage X)
   have hw : IsIso (Qh.map R.w) := Localization.inverts Qh (HomotopyCategory.quasiIso _ _) _ R.hw
   exact ⟨R.X₁.obj, R.X₁.property, ⟨@asIso _ _ _ _ (Qh.map R.w) hw ≪≫ Qh.objObjPreimageIso X⟩⟩
-
-variable [∀ j, PreservesColimitsOfShape
-  (Discrete (ComplexShape.π (.up ℤ) (.up ℤ) (.up ℤ) ⁻¹' {j})) F]
 
 /-- The oplax monoidal structure on `D(F) : D(C) ⥤ D(D)` whose comonoidal structure is the
 tensor comparison `CategoryTheory.Functor.mapDerivedCategoryTensorComparison`. It is induced by
@@ -191,7 +190,7 @@ lemma isIso_mapDerivedCategoryOplaxMonoidal_η :
   have : IsIso (OplaxMonoidal.η (F.mapHomologicalComplex (.up ℤ))) := inferInstance
   have : IsIso (OplaxMonoidal.η (F.mapHomotopyCategory (.up ℤ))) := by
     rw [Functor.mapHomotopyCategory_η]
-    infer_instance
+    exact Functor.map_isIso _ _
   exact inferInstanceAs (IsIso (F.mapDerivedCategory.map (LaxMonoidal.ε Qh) ≫
     F.mapDerivedCategoryFactorsh.hom.app (𝟙_ _) ≫
       Qh.map (OplaxMonoidal.η (F.mapHomotopyCategory (.up ℤ))) ≫
@@ -227,7 +226,7 @@ lemma commShift_mapDerivedCategoryTensorComparisonApp_Qh_obj
   DerivedCategory.commShift_of_tensorLeft_fac F F.mapDerivedCategory
     F.mapDerivedCategoryFactorsh.hom X hX hFX _ (fun M ↦ by
       have := F.mapDerivedCategoryTensorComparison_app_app_comp X M
-      rw [tensorHom_def] at this
+      rw [tensorHom_def, Category.assoc] at this
       exact this)
 
 /-- For a fixed `K`, the comparison `D(F)(K ⊗ᴸ -) ⟶ D(F) K ⊗ᴸ D(F)(-)` commutes with the
