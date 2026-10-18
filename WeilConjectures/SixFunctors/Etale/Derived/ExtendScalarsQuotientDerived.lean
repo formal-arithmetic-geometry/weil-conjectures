@@ -206,19 +206,22 @@ lemma exists_iso_leftDerived_of_isDerivedBaseChange {K : 𝐃(X, Λ)} {K' : 𝐃
         (Sheaf.derivedRestrictScalars X.smallEtaleTopology (Ideal.Quotient.mk J)).map e.hom =
           η := by
   let adj := derivedExtendScalarsAdjunction J X
+  let R := Sheaf.derivedRestrictScalars X.smallEtaleTopology (Ideal.Quotient.mk J)
   obtain ⟨h, hh⟩ := (hη _).2 (adj.unit.app K)
+  have hh' : η ≫ R.map h = adj.unit.app K := hh
   let g := (adj.homEquiv K K').symm η
-  have hg : adj.unit.app K ≫
-      (Sheaf.derivedRestrictScalars X.smallEtaleTopology (Ideal.Quotient.mk J)).map g = η := by
-    rw [← Adjunction.homEquiv_unit, Equiv.apply_symm_apply]
+  have hg : adj.unit.app K ≫ R.map g = η := by
+    have := (adj.homEquiv K K').apply_symm_apply η
+    rwa [Adjunction.homEquiv_unit] at this
   refine ⟨⟨g, h, ?_, ?_⟩, hg⟩
   · apply (adj.homEquiv _ _).injective
-    simp only [Adjunction.homEquiv_unit, Functor.map_comp, Functor.map_id, Category.comp_id]
-    rw [reassoc_of% hg]
-    exact hh
+    change adj.unit.app K ≫ R.map (g ≫ h) = adj.unit.app K ≫ R.map (𝟙 _)
+    rw [Functor.map_comp, reassoc_of% hg, hh']
+    erw [CategoryTheory.Functor.map_id, Category.comp_id]
   · apply (hη K').1
-    simp only [Functor.map_comp, Functor.map_id, Category.comp_id]
-    rw [reassoc_of% hh, hg]
+    change η ≫ R.map (h ≫ g) = η ≫ R.map (𝟙 _)
+    rw [Functor.map_comp, reassoc_of% hh', hg]
+    erw [CategoryTheory.Functor.map_id, Category.comp_id]
 
 /-- The restriction of scalars of a derived base change `η : K ⟶ Res K'` of `K` along
 `Λ ⟶ Λ ⧸ J` is the reduction `K ⊗ᴸ (Λ ⧸ J)_X` (`AlgebraicGeometry.Etale.reductionModIdeal`). -/

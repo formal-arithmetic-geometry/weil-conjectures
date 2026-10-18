@@ -214,7 +214,7 @@ theorem nonempty_iso_reductionModIdeal_derivedHom (n : ℕ) {K L : 𝐃(X, Λ)}
   exact ⟨e₁ ≪≫ ((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).mapIso eL.symm ≪≫
     (derivedHomCompIsoOfAdjunction adj K).app Ln ≪≫
     (derivedRestrictScalars (Ideal.Quotient.mk (Ideal.span {ϖ} ^ n)) X).mapIso
-      (((derivedHom (ModuleCat.{u + 1} (Λ ⧸ Ideal.span {ϖ} ^ n)) X).mapIso eK.op).app Ln)⟩
+      (((derivedHom (ModuleCat.{u + 1} (Λ ⧸ Ideal.span {ϖ} ^ n)) X).mapIso eK.symm.op).app Ln)⟩
 
 include hϖ hI in
 /-- Blueprint `lem-coef-integral-hom-reduction`: Integral internal Hom and reduction.
