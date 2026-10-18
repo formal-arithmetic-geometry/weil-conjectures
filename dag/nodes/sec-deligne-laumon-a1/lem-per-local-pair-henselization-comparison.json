@@ -12,9 +12,75 @@
   "def-weil-pbc-henselian-terminology",
   "def-weil-pbc-henselization-at-prime"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-pair-henselization] to $(A,\\mathfrak m)$. For its colimit $K$ and structure map $\\eta$, we have $J=\\mathfrak mK$, the pair $(K,J)$ is henselian, and the canonical map $e:A/\\mathfrak m\\xrightarrow{\\sim}K/J$ is an isomorphism. In particular $K/J$ is a nonzero field, so $J$ is proper and maximal: ideals containing $J$ correspond to ideals of the field $K/J$, which are zero and the whole field.",
+   "uses": [
+    "lem-weil-pbc-pair-henselization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A03, lemma-henselization-local-ring, opening paragraph; Tag 0A02, lemma-henselization, quotient calculation."
+   }
+  },
+  {
+   "text": "For $z\\in J$, consider the cyclic, hence finite, $K$-algebra $D=K/(1-z)$. In $D$ the image of $z$ is $1$, so $JD=D$ and $D/JD$ is the zero ring. By the idempotent-lifting definition [def-weil-pbc-henselian-terminology], its single idempotent has a unique idempotent lift to $D$. Both $0_D$ and $1_D$ lift it; hence $0_D=1_D$. Thus $(1-z)=K$ and $1-z$ is a unit of $K$. This directly supplies the radical consequence needed in the opening paragraph of Stacks 0A03.",
+   "uses": [
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A03, lemma-henselization-local-ring, radical argument; Tag 09XI, lemma-characterize-henselian-pair, idempotent-lifting criterion."
+   }
+  },
+  {
+   "text": "If $x\\notin J$, choose $y\\in K$ whose residue is the inverse of $x+J$ in $K/J$. Then $1-xy\\in J$, so Step 2 makes $xy$ a unit, and $x$ is a unit (if $vxy=1$, then $vy$ is its inverse). No element of $J$ is a unit since $J$ is proper. Thus the nonunits are exactly $J$ and every proper ideal is contained in $J$: $K$ is local with maximal ideal $J$. Since $(K,J)$ is henselian, $K$ is henselian local by [def-weil-pbc-henselian-terminology]. Finally $\\eta(a)\\in J$ if and only if $e(a+\\mathfrak m)=0$, if and only if $a\\in\\mathfrak m$. Hence $\\eta$ is local and its residue-field map is precisely $e$.",
+   "uses": [
+    "def-weil-pbc-henselian-terminology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A03, lemma-henselization-local-ring, opening paragraph, with the unit and contraction arguments written out."
+   }
+  },
+  {
+   "text": "Let $S$ be henselian local with maximal ideal $\\mathfrak n$, and let $g:A\\to S$ be local. By [def-weil-pbc-henselian-terminology], $(S,\\mathfrak n)$ is a henselian pair, and locality gives $g(\\mathfrak m)\\subseteq\\mathfrak n$. Apply [lem-weil-pbc-henselization-universal-property] with $(B,J)=(A,\\mathfrak m)$, $(A',I')=(S,\\mathfrak n)$ and $\\varphi=g$. It gives a unique ring map $h:K\\to S$ with $h\\eta=g$ and $h(J)\\subseteq\\mathfrak n$. If $x\\notin J$, Step 3 makes $x$ a unit, so $h(x)$ is a unit and is outside $\\mathfrak n$. Thus $h^{-1}(\\mathfrak n)=J$ and $h$ is local. Every local $A$-algebra map extending $g$ is a ring-map extension, so the same uniqueness gives the asserted unique local extension.",
+   "uses": [
+    "def-weil-pbc-henselian-terminology",
+    "lem-weil-pbc-henselization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0A02, lemma-henselization, final paragraph (adjunction), applied after the locality proved in Tag 0A03."
+   }
+  },
+  {
+   "text": "Since $A$ is local, its localization $A_{\\mathfrak m}$ is canonically $A$: each denominator outside $\\mathfrak m$ is already a unit and $a/s\\mapsto as^{-1}$ is inverse to the localization map. Accordingly [def-weil-pbc-henselization-at-prime] identifies the universal property of Step 4 with ordinary henselization. For any chosen ordinary henselization $\\eta_H:A\\to H=A^h$, Step 4 gives a unique local $A$-map $u:K\\to H$; the defining property of $H$ gives a unique local $A$-map $v:H\\to K$. The local composites $vu$ and $\\mathrm{id}_K$ both extend $\\eta$, so Step 4 gives $vu=\\mathrm{id}_K$. The defining uniqueness for $H$ gives $uv=\\mathrm{id}_H$. These inverse maps give the canonical local $A$-algebra isomorphism $A^h\\cong K$; uniqueness also proves independence of the chosen representatives.",
+   "uses": [
+    "def-weil-pbc-henselization-at-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GQ, definition-henselization and following uniqueness discussion; More on Algebra Tag 0A03, lemma-henselization-local-ring, comparison conclusion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-pair-henselization",
+  "def-weil-pbc-henselian-terminology",
+  "lem-weil-pbc-henselization-universal-property",
+  "def-weil-pbc-henselization-at-prime"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0A03 (lemma-henselization-local-ring), locality and comparison, using the adjunction explicitly established in the final paragraph of Tag 0A02 (lemma-henselization); unit and locality details expanded directly from the cited idempotent-lifting definition."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +116,24 @@
    "results": "{\"t\": \"2026-10-18T20:18:08Z\", \"tool\": \"leansearch\", \"query\": \"The henselization of a local ring is the henselization of the pair consisting of the ring and its maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instHenselianRingMaximalIdeal\", \"HenselianRing.casesOn\", \"HenselianRing.recOn\", \"HenselianLocalRing\", \"HenselianLocalRing.toIsLocalRing\", \"HenselianLocalRing.TFAE\", \"HenselianLocalRing.is_henselian\", \"HenselianRing.rec\"], \"digest\": \"f5640b609f9910ad\"}",
    "date": "2026-10-19",
    "verdict": "no match: semantic hits concern HenselianLocalRing, its maximal ideal, and complete rings; Loogle and source grep have no henselization construction or comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ordinary henselization of a local ring agrees with henselization of maximal ideal pair",
+   "results": "{\"t\": \"2026-10-18T20:43:13Z\", \"tool\": \"leanfinder\", \"query\": \"ordinary henselization of a local ring agrees with henselization of maximal ideal pair\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instHenselianRingMaximalIdeal\", \"HenselianLocalRing.toIsLocalRing\", \"HenselianLocalRing\", \"HenselianLocalRing.TFAE\", \"Field.henselian\", \"IsAdicComplete.henselianRing\", \"HenselianLocalRing.is_henselian\", \"isLocalRing_of_isAdicComplete_maximal\"], \"digest\": \"9c38b8e987d73830\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: returned HenselianRing/HenselianLocalRing definitions, local-ring facts or root-lifting criteria, not the henselization construction or its universal local-map comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "local henselization universal property henselian pair maximal ideal",
+   "results": "{\"t\": \"2026-10-18T20:44:04Z\", \"tool\": \"leansearch\", \"query\": \"local henselization universal property henselian pair maximal ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instHenselianRingMaximalIdeal\", \"HenselianLocalRing.is_henselian\", \"IsLocalRing.maximalIdeal.isMaximal\", \"HenselianLocalRing.TFAE\", \"HenselianLocalRing.mk\", \"HenselianRing.recOn\", \"IsLocalRing.ResidueField.instLiesOverMaximalIdeal\", \"HenselianRing.is_henselian\"], \"digest\": \"7ae0dcab9be19c80\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: returned HenselianRing/HenselianLocalRing definitions, local-ring facts or root-lifting criteria, not the henselization construction or its universal local-map comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-weierstrass-henselian-cylinder",
@@ -77,5 +157,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-local-pair-henselization-comparison",
+  "worker": "stage1",
+  "summary": "Kept every clause and all hypotheses. Expanded pair henselization into its residue field, elementary locality from finite-algebra idempotent lifting, the separate existing pair-adjunction theorem, and inverse maps from the ordinary local universal property. No new nodes; no attachment exists in the prescribed source checkout. Read Stacks 0A03, 0A02 and 04GQ and all cited node statements. Reused the inherited Mathlib searches and ran the corresponding exact queries with Q90 receipts.",
+  "blueprint": "Supports the dimension-normalized local-duality input below the current split of lem-per-artin-gabber-affine-curve Step 1 through lem-per-qbar-arbitrary-field-duality, finite-residue duality, potential local duality, general local duality, partial algebraization and the henselian cylinder. The present Steps 1-5 realize the cylinder proof’s local-versus-pair henselization comparison. Neither chapter nor unit route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-henselization-universal-property",
+    "why": "Generic adjunction for henselian pairs, Stacks 0A02, applied only to the maximal-ideal pair of a henselian local target; the perverse/Fourier unit has no theorem about this ring-theoretic extension property."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-henselization-universal-property"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q90-26f94c1f1",
+  "group": "Q90",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q90-26f94c1f1 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement and stmt_deps are byte-identical to the unsplit base copy, there are no new nodes, and the only citer is lem-per-weierstrass-henselian-cylinder. Source: Stacks more-algebra 0A03 (lemma-henselization-local-ring), statement and proof, read in full. The delivery swaps two of the source's inputs for things already in the DAG. The Jacobson-radical input is replaced by a direct idempotent argument. The comparison through algebra-lemma-uniqueness-henselian is replaced by the 0A02 adjunction node together with the 04GQ universal property. It uses no SGA source and adds no hypothesis. Step 1: clause (3) of lem-weil-pbc-pair-henselization makes K/J a nonzero field, so J is maximal. Step 2: D=K/(1-z) is a finite K-algebra with D/JD=0, and the uniqueness of idempotent lifts in the definition forces D=0, so 1-z is a unit. Step 3: this gives locality, and injectivity of e makes eta local. Step 4: the hypotheses of lem-weil-pbc-henselization-universal-property hold exactly. h is local because units outside J map to units. Uniqueness among ring maps implies uniqueness among local maps. Step 5: A_m=A, and the maps u and v are mutually inverse by the two uniqueness statements. Cases I tested: a field, k[[t]], dual numbers and Z_(p); no step uses Noetherian, reduced or separability hypotheses. I found no duplicate: I grepped for 0A03 and scanned every henselization node; fiber-localization and the trf ind-etale node state different things. There is no cycle. I accept the tool use of lem-weil-pbc-henselization-universal-property (unit sk-thm-p1, the generic 0A02 adjunction, used as a black box). lem-weil-pbc-pair-henselization is Lean-closed. No fixes."
  }
 }
