@@ -15,9 +15,222 @@
   "def-pc-fppf-site",
   "def-weil-pbc-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "An equivalence relation on all $S$-valued test schemes supplies identity, inverse and composition uniquely: send $u$ to $(u,u)$, reverse $(u,v)$, and send a composable pair $(u,v),(v,w)$ to $(u,w)$. These operations are natural; full faithfulness of Yoneda turns them into morphisms, and equality on all test points proves the groupoid laws. They also give a groupoid on arbitrary test schemes by considering each possible structure map to $S$. Write $\\sigma=s^\\sharp$, $\\tau=t^\\sharp$. Since they agree on $C$, the canonical map $q:U\\to M=\\operatorname{Spec}C$ equalizes $s,t$. The affine fibre-product formula gives $U\\times_M U=\\operatorname{Spec}(A\\otimes_C A)$, and the comparison is induced by $\\phi(a\\otimes a_2)=\\sigma(a)\\tau(a_2)$. If $A=0$, the maps $A\\to B$ force $B=C=0$; all schemes concerned are empty and the assertions follow. Henceforth $A\\ne0$.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BM, first paragraph, and the equivalence-relation groupoid operations"
+   }
+  },
+  {
+   "text": "The comparison $k:R\\to U\\times_MU$ is a monomorphism: equality after its two projections implies equality after $j$, and the hypothesis on $H$-points gives equality of the original maps. It is finite: a finite list generating $B$ over $A$ via $\\sigma$ also generates it over $A\\otimes_C A$ via $\\phi$, because this larger scalar action includes $\\sigma(A)$. The finite-monomorphism lemma makes $k$ a closed immersion. On these affine schemes this means exactly that $\\phi$ is surjective.",
+   "uses": [
+    "lem-a1-finite-monomorphism-closed-immersion",
+    "def-weil-finite-integral-morphism",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BM, first paragraph; Morphisms Tag 03BB"
+   }
+  },
+  {
+   "text": "Apply the invariant-ring integrality and orbit lemmas to the groupoid just constructed. Thus $A$ is integral over $C$, $q$ is surjective, and the fibres of $|U|\\to|M|$ are the $R$-orbits. These statements apply also to every affine groupoid obtained below after changing the invariant base.",
+   "uses": [
+    "lem-a1-affine-groupoid-integral-invariants",
+    "lem-a1-affine-groupoid-orbit-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BM, second and final paragraphs, using Tags 03BJ and 03BL"
+   }
+  },
+  {
+   "text": "For a flat $C$-algebra $D$, tensor the exact sequence $0\\to C\\to A\\xrightarrow{\\tau-\\sigma} B$ with $D$. Flat tensor exactness identifies $D$ with the equalizer in $A_D=A\\otimes_C D$ of $\\sigma_D,\\tau_D:A_D\\to B_D=B\\otimes_C D$. The operations base change because they are over $M$ (the two maps to $M$ coincide); all groupoid equations remain equations after base change. Thus the new invariant ring is exactly $D$.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BK (groupoids-lemma-invariants-base-change), proof of (1) and (3)"
+   }
+  },
+  {
+   "text": "For each prime $\\mathfrak p\\subset C$, apply the flat local extension lemma to $C_{\\mathfrak p}$ and the infinite field extension $\\kappa(\\mathfrak p)(z)$. It gives a flat local map $C_{\\mathfrak p}\\to D$ with infinite residue field. This local map is faithfully flat. Localization is flat, so apply the preceding equalizer argument first to $C\\to C_{\\mathfrak p}$ and then to $C_{\\mathfrak p}\\to D$. We will prove $A_D$ finite free over $D$ and $\\phi_D$ an isomorphism for each such choice.",
+   "uses": [
+    "lem-weil-pbc-flat-local-extension-given-residue-field",
+    "lem-weil-pbc-flat-local-hom-faithfully-flat",
+    "lem-weil-pbc-localization-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BM, second and fourth paragraphs; Algebra Tag 03C3"
+   }
+  },
+  {
+   "text": "For $s:R\\to U$, and likewise $t$, finite-flat-lfp pushforward is finite locally free. On affine schemes this supplies a cover by principal opens with $B$ finite free over $A$ via the chosen map; choose a finite such cover since $\\operatorname{Spec}A$ is quasi-compact. Tensoring each displayed basis with $A_D$ gives the same kind of principal-open free cover for $B_D$ over $A_D$. The finite-free algebra spectrum lemma on each member proves $s_D,t_D$ finite locally free. In particular these maps have finite fibres. These affine basis descriptions will also be used when returning to $C$.",
+   "uses": [
+    "lem-sc-finite-pushforward-locally-free",
+    "lem-weil-pbc-finite-free-algebra-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02KB (morphisms-lemma-finite-flat), affine calculation, and base change of an explicit basis"
+   }
+  },
+  {
+   "text": "Work now over the local invariant ring $(D,\\mathfrak m)$ and abbreviate $A_D,B_D$ by $A,B$. By integrality, every maximal ideal of $A$ contracts to $\\mathfrak m$, and every prime of $A$ above $\\mathfrak m$ is maximal. There is such a point $u_0$ by surjectivity of the orbit lemma. Every other maximal point lies in its $R$-orbit and is therefore in $t(s^{-1}(u_0))$. The fibre $s^{-1}(u_0)$ is finite, so $A$ is semilocal. Also $\\mathfrak m A$ lies in every maximal ideal of $A$, hence in its Jacobson radical.",
+   "uses": [
+    "lem-a1-affine-groupoid-integral-invariants",
+    "lem-a1-affine-groupoid-orbit-fibres",
+    "lem-weil-pbc-integral-maximal-contracts-maximal",
+    "lem-weil-pbc-integral-prime-over-maximal-maximal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BM, final paragraph, first half"
+   }
+  },
+  {
+   "text": "The degree function of $s$ is locally constant. Its values at $s(r)$ and $t(r)$ are equal: composition with the arrow $r$ and its inverse identifies the source fibres after extension to $\\kappa(r)$, and fibre degree is unchanged by that extension. All maximal points of $A$ are in one orbit by the preceding step, hence have the same degree $r$. Every prime is contained in a maximal ideal, and a locally constant function takes equal values at two points in a specialization chain; therefore this degree is $r$ everywhere. The identity section makes $s$ surjective, so $r\\geq1$. The module $B$ via $\\sigma$ is consequently finite locally free of constant rank $r$.",
+   "uses": [
+    "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+    "lem-weil-pbc-fibre-degree-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BI (groupoids-lemma-finite-locally-free-disjoint-free), fibre-isomorphism argument, used in Tag 03BM"
+   }
+  },
+  {
+   "text": "Apply the semilocal submodule basis lemma to $D\\to A$, $P=B$ via $\\sigma$, and $N=\\tau(A)$. This is a $D$-submodule because $D$ consists of invariants. Surjectivity of $\\phi$ says precisely that $N$ spans $B$ over $A$. The residue field is infinite, $A$ is semilocal, $\\mathfrak m A\\subseteq\\operatorname{Jac}(A)$, and $B$ has the required constant positive rank by the preceding steps. We obtain $x_1,\\ldots,x_r\\in A$ such that $\\tau(x_j)$ form an $A$-basis of $B$. The affine groupoid basis-descent lemma then gives $A=\\bigoplus_j D x_j$ and identifies $\\phi_D:A\\otimes_D A\\to B$ with an isomorphism.",
+   "uses": [
+    "lem-a1-semilocal-submodule-basis",
+    "lem-a1-affine-groupoid-basis-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BM, final paragraph, second half; Algebra Tag 03C1 and Groupoids Tag 03C8"
+   }
+  },
+  {
+   "text": "Return to the original $C,A,B$. For each $\\mathfrak p$, faithful flatness of $C_{\\mathfrak p}\\to D$ detects exactness, so $\\phi_{\\mathfrak p}$ is an isomorphism, since $\\phi_D$ is. The flatness descent lemma likewise gives that $A_{\\mathfrak p}$ is flat over $C_{\\mathfrak p}$. A module vanishing at every prime is zero: a nonzero element has proper annihilator, contained in a maximal ideal where its localization is still nonzero. Apply this test to the kernel and cokernel of $\\phi$ to conclude that $\\phi$ is an isomorphism. For any injection $L\\to L_2$, localization exactness makes $L_{\\mathfrak p}\\to L_2_{\\mathfrak p}$ injective, and flatness of $A_{\\mathfrak p}$ gives injectivity after tensoring. The same zero test on its kernel shows $L\\otimes_C A\\to L_2\\otimes_C A$ injective. Thus $A$ is flat over $C$.",
+   "uses": [
+    "def-weil-pbc-faithfully-flat-ring-map",
+    "lem-weil-pbc-flatness-descends-faithfully-flat",
+    "lem-weil-pbc-localization-module-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BM, second paragraph, descent of the comparison and flatness"
+   }
+  },
+  {
+   "text": "Since $\\operatorname{Spec}A\\to\\operatorname{Spec}C$ is surjective and flat, $C\\to A$ is faithfully flat. The finite principal-open free cover of $B$ over $A$ from step 6 shows that $B$ is a finitely presented $A$-module. Under $\\phi$, this is $A\\otimes_C A$ with the $A$-action on its first factor. Faithfully flat descent of finite presentation, applied to the $C$-module $A$, makes $A$ finitely presented over $C$.",
+   "uses": [
+    "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+    "lem-sc-affine-standard-cover-finite-presentation-flat",
+    "lem-trf-finite-presentation-module-descent-flat-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BM, second paragraph, finite-presentation descent using Algebra Tag 03C4"
+   }
+  },
+  {
+   "text": "By steps 10 and 11, $A$ is a flat and finitely presented $C$-module, so the finitely-presented flat projectivity lemma makes $A$ a finite projective $C$-module. A finite projective module has a finite principal-open free cover: there are $g_1,\\ldots,g_m\\in C$ generating the unit ideal with each $A_{g_i}$ finite free over $C_{g_i}$. By the affine fibre-product formula the preimage of $D(g_i)$ in $U$ is $\\operatorname{Spec}A_{g_i}$, and the finite-free algebra spectrum lemma shows that $\\operatorname{Spec}A_{g_i}\\to\\operatorname{Spec}C_{g_i}$ is finite, flat and locally of finite presentation. Flatness at a point is a condition on local rings, and finite presentation at a point asks for affine neighbourhoods of the point and of its image; every point of $U$ lies over some open $D(g_i)$, so $q$ is flat and locally of finite presentation. For finiteness, let $V=\\operatorname{Spec}R\\subseteq M$ be an affine open. The affine fibre-product formula gives $q^{-1}(V)=\\operatorname{Spec}(A\\otimes_CR)$, and the images of finitely many $C$-module generators of $A$ generate $A\\otimes_CR$ as an $R$-module. Hence $q$ is finite locally free. Surjectivity was already proved in step 3, and the affine fibre-product formula together with $\\phi$ gives $R\\cong U\\times_MU$ with exactly the original projections.",
+   "uses": [
+    "lem-weil-pbc-finitely-presented-flat-module-projective",
+    "lem-weil-pbc-finite-projective-standard-free-cover",
+    "lem-weil-pbc-finite-free-algebra-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-finite-locally-free",
+    "def-weil-finite-integral-morphism",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BM, second paragraph, last sentence ('Hence A is finite locally free over C, see Algebra, Lemma 00NX'), and comparison conclusion"
+   }
+  },
+  {
+   "text": "The finite locally free surjection $q$ is an fppf cover. It is also a singleton fpqc cover, since its inverse image of each affine open is affine, flat and surjective. The maps $U\\to S$ agree on $R=U\\times_MU$, so fpqc descent of scheme morphisms gives a unique map $M\\to S$ making $q$ an $S$-morphism. Every fppf covering is an fpqc covering: its maps are open by flat-lfp openness, and the images of affine opens inside the inverse image of an affine open $V$ form an open cover of $V$; quasi-compactness selects finitely many of them, as required in the fpqc definition. Thus representable fpqc descent makes $h_M$ an fppf sheaf. On the fppf site over $S$, every $H\\to M$ lifts after the fppf covering $H\\times_MU\\to H$, by base-change stability of fppf coverings. If two elements of $U(H)$ have the same image in $M(H)$, their pair is an $H$-point of $U\\times_MU=R$, so their quotient classes are equal. The quotient presheaf therefore maps injectively and locally surjectively to $h_M$. The local-bijection sheafification criterion identifies its associated sheaf with $h_M$.",
+   "uses": [
+    "def-pc-fppf-site",
+    "def-weil-pbc-fpqc-covering",
+    "lem-weil-pbc-fpqc-representable-descent",
+    "lem-cbc-set-presheaf-sheafification-local-bijection",
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-trf-fppf-covering-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BM, first paragraph via Tag 03C5 (groupoids-lemma-criterion-quotient-representable); descent of the S-structure"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-a1-finite-monomorphism-closed-immersion",
+  "def-weil-finite-integral-morphism",
+  "def-weil-closed-immersion",
+  "lem-a1-affine-groupoid-integral-invariants",
+  "lem-a1-affine-groupoid-orbit-fibres",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-flat-local-extension-given-residue-field",
+  "lem-weil-pbc-flat-local-hom-faithfully-flat",
+  "lem-weil-pbc-localization-flat",
+  "lem-sc-finite-pushforward-locally-free",
+  "lem-weil-pbc-finite-free-algebra-spectrum",
+  "lem-weil-pbc-integral-maximal-contracts-maximal",
+  "lem-weil-pbc-integral-prime-over-maximal-maximal",
+  "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+  "lem-weil-pbc-fibre-degree-base-change",
+  "lem-a1-semilocal-submodule-basis",
+  "lem-a1-affine-groupoid-basis-descent",
+  "def-weil-pbc-faithfully-flat-ring-map",
+  "lem-weil-pbc-flatness-descends-faithfully-flat",
+  "lem-weil-pbc-localization-module-exact",
+  "lem-weil-pbc-flat-surjective-spectrum-faithfully-flat",
+  "lem-sc-affine-standard-cover-finite-presentation-flat",
+  "lem-trf-finite-presentation-module-descent-flat-local",
+  "lem-weil-pbc-finitely-presented-flat-module-projective",
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "def-pc-finite-locally-free",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fppf-site",
+  "def-weil-pbc-fpqc-covering",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-cbc-set-presheaf-sheafification-local-bijection",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-trf-fppf-covering-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 03BM (proposition-finite-flat-equivalence), with Tag 03BK(3), the elementary fibre argument of 03BI, and the explicitly cited algebraic descent lemmas."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +266,24 @@
    "results": "{\"t\": \"2026-10-18T01:48:28Z\", \"tool\": \"leansearch\", \"query\": \"A finite locally free equivalence relation on affine schemes has an affine scheme representing its fppf quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsFinite.recOn\", \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom\", \"AlgebraicGeometry.isFinite_iff\", \"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat\", \"AlgebraicGeometry.instLocallyOfFiniteTypeOfLocallyOfFinitePresentation\"], \"digest\": \"6275fcbb5e99ee03\"}",
    "date": "2026-10-18",
    "verdict": "no match: hits concern schemes, scheme morphisms, or generic sheaf gluing, not this algebraic-space or affine-relation statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The invariant ring of a finite flat affine equivalence relation represents the fppf quotient",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Rep.quotientToInvariantsFunctor_obj_V\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"∀ (k : Type u) {G : Type u} [inst : CommRing k] [inst_1 : Group G] (S : Subgroup G) [inst_2 : S.Normal] (X : Rep k G),\\n  ((Rep.quotientToInvariantsFunctor k S).obj X).V =\\n    ModuleCat.of k ↥(Representation.invariants (MonoidHom.comp X.ρ S.subtype))\", \"doc\": \"For a commutative ring $k$, group $G$, normal subgroup $S \\trianglelefteq G$, and a $k$-linear representation $X$ of $G$, the underlying module of the quotient-to-invariants functor applied to $X$ is t\"}\n  {\"name\": \"Rep.quotientToInvariantsFunctor\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"(k : Type u) →\\n  {G : Type u} →\\n    [inst : CommRing k] →\\n      [inst_1 : Group G] → (S : Subgroup G) → [inst_2 : S.Normal] → CategoryTheory.Functor (Rep k G) (Rep k (G ⧸ S))\", \"doc\": \"A functor from the category of representations of a group $ G $ over a commutative ring $ k $ to the category of representations of the quotient group $ G/S $, where $ S \\trianglelefteq G $ is a normal\"}\n  {\"name\": \"RingQuot.Rel\", \"module\": \"Mathlib.Algebra.RingQuot\", \"type\": \"(r : R → R → Prop) : R → R → Prop\", \"doc\": \"Given a binary relation $ r $ on a type $ R $, this inductive definition constructs the equivalence relation generated by $ r $, closed under reflexivity, symmetry, transitivity, and compatibility wit\"}\n  {\"name\": \"instIsInvariantSubtypeMemSubalgebraSubalgebraSubgroupQuotient\", \"module\": \"Mathlib.RingTheory.Invariant.Basic\", \"type\": \"(H : Subgroup G) [H.Normal] [Algebra.IsInvariant A B G] : Algebra.IsInvariant A (FixedPoints.subalgebra A B H) (G ⧸ H)\", \"doc\": \"Given a group $ G $ acting on a commutative ring $ B $ via a multiplicative semiring action, and a normal subgroup $ H \\trianglelefteq G $, the subalgebra $ B^H $ of elements fixed by $ H $ is invarian\"}\n  {\"name\": \"Rep.quotientToInvariantsFunctor_map_hom\", \"module\": \"Mathlib.RepresentationTheory.Invariants\", \"type\": \"∀ (k : Type u) {G : Type u} [inst : CommRing k] [inst_1 : Group G] (S : Subgroup G) [inst_2 : S.Normal] {X Y : Rep k G}\\n  (f : X ⟶ Y),\\n  ((Rep.quotientToInvariantsFunctor k S).map f).hom =\\n    (Rep.invariantsFunctor k ↥S).map ((Action.res (ModuleCat k) S.subtype).map f)\", \"doc\": \"For any commutative ring $k$, group $G$, normal subgroup $S \\trianglelefteq G$, and morphism $f : X \\to Y$ between $G$-representations, the action of the quotient-to-invariants functor on $f$ is equal t\"}\n  {\"name\": \"MvQPF.relQuot\", \"module\": \"Mathlib.Data.QPF.Multivariate.Constructions.Quot\", \"type\": \": @MvQPF _ (Quot1 R)\", \"doc\": \"Constructs a multivariate quotient polynomial functor by quotienting the original structure with respect to an equivalence relation $R$, using the quotient map $\\\\mathrm{Quot.mk}_R$ and representative \"}\n  {\"name\": \"AffineEquiv.noConfusion\", \"module\": \"Mathlib.LinearAlgebra.AffineSpace.AffineEquiv\", \"type\": \"{P : Sort u} →\\n  {k : Type u_1} →\\n    {P₁ : Type u_2} →\\n      {P₂ : Type u_3} →\\n        {V₁ : Type u_4} →\\n          {V₂ : Type u_5} →\\n            {inst : Ring k} →\\n              {inst_1 : AddCommGroup V₁} →\\n                {inst_2 : AddCommGroup V₂} →\\n                  {inst_3 : Module k V₁} →\\n     \", \"doc\": \"A structure representing an invertible affine map between two affine spaces $ P_1 $ and $ P_2 $ over a ring $ k $, where $ P_1 $ and $ P_2 $ are torsors over $ k $-modules $ V_1 $ and $ V_2 $. This in\"}\n  {\"name\": \"Representation.FiniteCyclicGroup.coinvariantsEquiv\", \"module\": \"Mathlib.RepresentationTheory.Homological.FiniteCyclic\", \"type\": \"(hg : ∀ x, x ∈ Subgroup.zpowers g) : ρ.Coinvariants ≃ₗ[k] (_ ⧸ LinearMap.range (ρ g - LinearMap.id))\", \"doc\": \"For a finite cyclic group $G$ generated by an element $g$, a representation $\\\\rho: G \\\\to \\\\mathrm{End}_k(V)$ on a module $V$ over a commutative ring $k$, and under the assumption that every element of \"}",
+   "date": "2026-10-18",
+   "verdict": "no match: search hits concern finite scheme maps or finite constant group invariant rings, not the finite locally free affine relation quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally free relation on affine schemes is effective and its quotient is affine",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsFinite.instHasAffinePropertyAndIsAffineFiniteCarrierObjOppositeOpensCarrierCarrierCommRingCatPresheafOpOpensTopHomAppTop\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsFinite fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.appTop f)).Finite\", \"doc\": \"A morphism of schemes with affine target is finite if and only if the source is affine and the induced ring homomorphism on global sections is finite (i.e., the target ring is finitely generated as a \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.toIsAffineHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [self : AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsAffineHom f\", \"doc\": \"If a morphism of schemes is finite, then it is affine.\"}\n  {\"name\": \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰S\", \"module\": \"Mathlib/AlgebraicGeometry/AffineTransitionLimit\", \"type\": \"∀ {I : Type u} [inst : CategoryTheory.Category.{u, u} I] {S X : AlgebraicGeometry.Scheme}\\n  {D : CategoryTheory.Functor I AlgebraicGeometry.Scheme} {t : D ⟶ (CategoryTheory.Functor.const I).obj S} {f : X ⟶ S}\\n  (self : AlgebraicGeometry.ExistsHomHomCompEqCompAux D t f) (i : self.𝒰S.I₀), AlgebraicGeo\", \"doc\": \"Given a category $\\\\mathcal{I}$, a diagram $D:\\\\mathcal{I}\\\\to\\\\text{Sch}$ of schemes, a natural transformation from $D$ to the constant diagram at $S$, and a morphism $X\\\\to S$, every element of the zerot\"}\n  {\"name\": \"AlgebraicGeometry.isFinite_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.IsFinite f ↔\\n    AlgebraicGeometry.IsAffineHom f ∧\\n      ∀ (U : Y.Opens),\\n        AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).Finite\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. Then $f$ is a finite morphism if and only if $f$ is an affine morphism and for every affine open subset $U$ of $Y$, the ring of sections $\\\\mathcal{O}_X(f^{-1\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Finite n],\\n  AlgebraicGeometry.LocallyOfFinitePresentation (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"If $ n $ is a finite type, then the affine space $ \\\\mathbb{A}^n_S $ over a scheme $ S $ is locally of finite presentation as a morphism over $ S $. This means that for every point in $ \\\\mathbb{A}^n_S \"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.finite_app\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsFinite f] (U : Y.Opens),\\n  AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).Finite\", \"doc\": \"For any finite morphism $ f: X \\\\to Y $ of schemes and any affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, meaning that $ \\\\Gamma\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.finite_app\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsFinite f] (U : Y.Opens),\\n  AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).Finite\", \"doc\": \"For any finite morphism $ f : X \\\\to Y $ of schemes and any affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\mathcal{O}_Y(U) \\\\to \\\\mathcal{O}_X(f^{-1}(U)) $ is finite, meaning that\"}\n  {\"name\": \"AlgebraicGeometry.instIsAffineSigmaObjScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Limits\", \"type\": \"∀ {σ : Type v} (g : σ → AlgebraicGeometry.Scheme) [inst : Finite σ] [∀ (i : σ), AlgebraicGeometry.IsAffine (g i)],\\n  AlgebraicGeometry.IsAffine (∐ g)\", \"doc\": \"The coproduct (disjoint union) of a finite family of affine schemes is itself an affine scheme. Specifically, if $\\\\sigma$ is a finite type and each scheme $g(i)$ in the family indexed by $\\\\sigma$ is a\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: search hits concern finite scheme maps or finite constant group invariant rings, not the finite locally free affine relation quotient"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-separated-locally-qf-space-representable",
@@ -76,5 +303,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-finite-flat-affine-relation-quotient",
+  "worker": "stage1",
+  "summary": "Read Stacks 03BM and its supporting source lemmas. Proved the quotient through surjectivity of the relation algebra map, flat local infinite-residue-field reduction, semilocal basis selection, and module descent. Reused degree, tensor exactness, descent and affine-spectrum nodes; created only four unsplit supporting lemmas and one Mathlib leaf. Retained the statement including arbitrary S and its unique descended structure.",
+  "blueprint": "The same affine quotient input to the proof of 03XX recorded in blueprint.from.place: this item realizes the finite locally free affine equivalence-relation argument cited in the inherited split of lem-a1-affine-hc0. The current blueprint hc0 proof itself contains no quotient argument; no change to the Rankin–Selberg unit route is made.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-flat-local-extension-given-residue-field",
+    "why": "Generic algebraic geometry, module, or sheaf descent tool used in the indicated proof step of Stacks 03BM; this unit has no version of it, and its Rankin–Selberg route is unchanged."
+   },
+   {
+    "node": "lem-sc-finite-pushforward-locally-free",
+    "why": "Generic algebraic geometry, module, or sheaf descent tool used in the indicated proof step of Stacks 03BM; this unit has no version of it, and its Rankin–Selberg route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-finite-free-algebra-spectrum",
+    "why": "Generic algebraic geometry, module, or sheaf descent tool used in the indicated proof step of Stacks 03BM; this unit has no version of it, and its Rankin–Selberg route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+    "why": "Generic algebraic geometry, module, or sheaf descent tool used in the indicated proof step of Stacks 03BM; this unit has no version of it, and its Rankin–Selberg route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-degree-base-change",
+    "why": "Generic algebraic geometry, module, or sheaf descent tool used in the indicated proof step of Stacks 03BM; this unit has no version of it, and its Rankin–Selberg route is unchanged."
+   },
+   {
+    "node": "lem-sc-affine-standard-cover-finite-presentation-flat",
+    "why": "Generic algebraic geometry, module, or sheaf descent tool used in the indicated proof step of Stacks 03BM; this unit has no version of it, and its Rankin–Selberg route is unchanged."
+   },
+   {
+    "node": "lem-trf-finite-presentation-module-descent-flat-local",
+    "why": "Generic algebraic geometry, module, or sheaf descent tool used in the indicated proof step of Stacks 03BM; this unit has no version of it, and its Rankin–Selberg route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-finite-projective-standard-free-cover",
+    "why": "Generic algebraic geometry, module, or sheaf descent tool used in the indicated proof step of Stacks 03BM; this unit has no version of it, and its Rankin–Selberg route is unchanged."
+   },
+   {
+    "node": "lem-galois-yoneda-fully-faithful",
+    "why": "Full faithfulness turns the natural identity, inverse and composition of the equivalence relation into scheme morphisms; generic category tool, with no change to the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-lfp-open",
+    "why": "Step 13 uses openness to refine any fppf cover by finitely many affine pieces above an affine target, and fppf base-change stability to lift maps locally; generic site tools, without changing the unit route."
+   },
+   {
+    "node": "lem-trf-fppf-covering-base-change",
+    "why": "Step 13 uses openness to refine any fppf cover by finitely many affine pieces above an affine target, and fppf base-change stability to lift maps locally; generic site tools, without changing the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-flat-local-extension-given-residue-field",
+  "lem-sc-finite-pushforward-locally-free",
+  "lem-weil-pbc-finite-free-algebra-spectrum",
+  "lem-weil-pbc-finite-locally-free-degree-locally-constant",
+  "lem-weil-pbc-fibre-degree-base-change",
+  "lem-sc-affine-standard-cover-finite-presentation-flat",
+  "lem-trf-finite-presentation-module-descent-flat-local",
+  "lem-weil-pbc-finite-projective-standard-free-cover",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-trf-fppf-covering-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NY-ba565122b",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-ba565122b (reviewer sub-agent of L); spot-checked: I read Stacks 03BM, 03BI, 03BJ, 03BK, 03BL, 03C8 (groupoids.tex 4194-4912), 03C1 and 02M9 (algebra.tex), and Mathlib IsClosedImmersion.iff_isFinite_and_mono (Finite.lean:124). The item statement matches 03BM without weakening; the extra surjectivity and S-structure conclusions are true. Steps 1-11 and 13 check against their sources and cited statements. The s/t convention swap is used consistently and matches 03C8. Step 8 is marked elementary; I accept it because the 03BI fibre argument is written out. Tested A=0, the trivial relation and U=Spec(k×k) with R=U×_kU. All five new nodes are statement-only, true and match their sources: 03BJ, 03BL, 03C8 finite case, 03BB as a correct Mathlib leaf, and 03C1 combined with 02M9. rg over the DAG found no duplicates, and none restates a clause of the item. FIX to step 12: the claim that finite local freeness is 'local on the target by its definition' fails for the DAG's every-affine-open definition of finite. Step 12 now gets finite projective from flat plus finitely presented via lem-weil-pbc-finitely-presented-flat-module-projective (00NX, the lemma 03BM cites), uses a principal-open free cover, and proves finiteness over an arbitrary affine V directly through the affine fibre-product formula. Its uses, source and proof_deps are updated. Batch-5 check: lem-trf-finite-projective-local-free is removed by the fix. lem-trf-finite-presentation-module-descent-flat-local (Algebra 03C4(2), the lemma 03BM cites) and lem-trf-fppf-covering-base-change (021O(3), a Mathlib leaf) are kept. Both are generic algebra or site facts that neither assumption gives; they bring no trace-formula statement into the closure, and no non-trf node states them. The declared generic tool_uses are accepted. No SGA is cited.; 1 file(s) fixed by the reviewer"
  }
 }

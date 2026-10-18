@@ -1,0 +1,70 @@
+{
+ "id": "lem-a1-semilocal-submodule-basis",
+ "kind": "statement",
+ "title": "A generating submodule contains a basis over a semilocal algebra",
+ "statement": "Let $(D,\\mathfrak m)$ be a commutative local ring, meaning a nonzero commutative ring with unique maximal ideal $\\mathfrak m$, and assume $D/\\mathfrak m$ is infinite. Let $D\\to E$ be a homomorphism of commutative rings, with $E$ semilocal (it has finitely many maximal ideals), and assume $\\mathfrak mE\\subseteq\\operatorname{Jac}(E)$, where $\\operatorname{Jac}(E)$ is the intersection of all maximal ideals. Let $P$ be a finite locally free $E$-module of constant rank $r\\geq1$, meaning that there is a finite cover of $\\operatorname{Spec}E$ by principal opens $D(f_j)$ on which $P_{f_j}\\cong E_{f_j}^{\\oplus r}$ [def-weil-affine-spectrum], [def-weil-pbc-module-localization-away]. Let $N\\subseteq P$ be a $D$-submodule whose $E$-linear span is all of $P$. Then there exist $n_1,\\ldots,n_r\\in N$ which form an $E$-basis of $P$.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 03C1 (algebra-lemma-semi-local-module-basis-in-submodule) and 02M9 (algebra-lemma-locally-free-semi-local-free)."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-module-localization-away"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Let R be local with infinite residue field and S semilocal with mS in its Jacobson radical. A generating R submodule of a constant rank finite locally free S module contains an S basis",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Module.exists_basis_of_basis_baseChange\", \"module\": \"Mathlib/RingTheory/LocalRing/Module\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsLocalRing R] [Module.FinitePresentation R M] {ι : Type u_5} (v : ι → M),\\n  LinearIndependent (IsLocalRing.ResidueField R) (⇑((TensorProduct.mk R (IsLocalRing.ResidueField R) M) 1) ∘ v) →\", \"doc\": \"Let $ R $ be a commutative local ring with maximal ideal $ \\\\mathfrak{m} $ and residue field $ k = R/\\\\mathfrak{m} $, and let $ M $ be a finitely presented $ R $-module. If a family of vectors $ v_i $ i\"}\n  {\"name\": \"Module.exists_basis_of_span_of_maximalIdeal_rTensor_injective\", \"module\": \"Mathlib/RingTheory/LocalRing/Module\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsLocalRing R] [Module.FinitePresentation R M],\\n  Function.Injective ⇑(LinearMap.rTensor M (Submodule.subtype (IsLocalRing.maximalIdeal R))) →\\n    ∀ {ι : Type u} (v : ι → M), Submodule.spa\", \"doc\": \"Let $ R $ be a local semiring with maximal ideal $ \\\\mathfrak{m} $, and let $ M $ be a finitely presented $ R $-module. If the canonical linear map $ \\\\mathfrak{m} \\\\otimes_R M \\\\to M $ induced by the inc\"}\n  {\"name\": \"Module.exists_basis_of_span_of_flat\", \"module\": \"Mathlib/RingTheory/LocalRing/Module\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] [IsLocalRing R]\\n  [Module.FinitePresentation R M] [Module.Flat R M] {ι : Type u} (v : ι → M),\\n  Submodule.span R (Set.range v) = ⊤ → ∃ κ a b, ∀ (i : κ), b i = v (a i)\", \"doc\": \"If $ M $ is a finitely presented flat module over a commutative semiring $ R $, and a set $ S $ spans $ M $, then there exists an index type $ \\\\kappa $, a function $ a : \\\\kappa \\\\to \\\\iota $, and a basi\"}\n  {\"name\": \"IsLocalRing.span_eq_top_of_tmul_eq_basis\", \"module\": \"Mathlib/RingTheory/LocalRing/Module\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [inst_3 : IsLocalRing R] [Module.Finite R M] {ι : Type u_5} (f : ι → M)\\n  (b : Module.Basis ι (IsLocalRing.ResidueField R) (TensorProduct R (IsLocalRing.ResidueField R) M)),\\n  (∀ (i : ι), 1 ⊗ₜ[R] f \", \"doc\": \"Let $R$ be a commutative local ring with residue field $k$, and let $M$ be a finitely generated $R$-module. Let $f: I \\\\to M$ be a family of elements in $M$. If the family of tensors $\\\\{1 \\\\otimes f(i)\\\\\"}\n  {\"name\": \"Module.nonempty_basis_of_flat_of_finrank_eq\", \"module\": \"Mathlib/RingTheory/LocalRing/Module\", \"type\": \"∀ (R : Type u_1) (M : Type u_2) [inst : CommRing R] [Finite (MaximalSpectrum R)] [inst_2 : AddCommGroup M]\\n  [inst_3 : Module R M] [Module.Finite R M] [Module.Flat R M] (n : ℕ),\\n  (∀ (P : MaximalSpectrum R), Module.finrank (R ⧸ P.asIdeal) (TensorProduct R (R ⧸ P.asIdeal) M) = n) →\\n    Nonempty (Modu\", \"doc\": \"If $ M $ is a finitely generated flat module over a commutative ring $ R $, and for every maximal ideal $ \\\\mathfrak{p} $ of $ R $ the rank of the tensor product $ M \\\\otimes_R (R/\\\\mathfrak{p}) $ over t\"}\n  {\"name\": \"IsLocalRing.basisQuotient\", \"module\": \"Mathlib/RingTheory/LocalRing/Quotient\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        [inst_2 : Algebra R S] →\\n          [inst_3 : IsLocalRing R] →\\n            [Module.Finite R S] →\\n              [Module.Free R S] →\\n                {ι : Type u_3} →\\n                  [Fintype ι] →\\n     \", \"doc\": \"Given a finite basis $ b $ of an $ R $-module $ S $, the images of $ b $ under the quotient maps form a basis for the quotient module $ S/pS $ over the quotient ring $ R/p $, where $ p $ is an ideal o\"}\n  {\"name\": \"IsLocalRing.basisQuotient_apply\", \"module\": \"Mathlib/RingTheory/LocalRing/Quotient\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [inst_3 : IsLocalRing R] [inst_4 : Module.Finite R S] [inst_5 : Module.Free R S] {ι : Type u_3} [inst_6 : Fintype ι]\\n  (b : Module.Basis ι R S) (i : ι),\\n  (IsLocalRing.basisQuotient b) i = (Ideal.Quoti\", \"doc\": \"For each index $i$, the $i$-th element of the basis for the quotient module $S/pS$ over $R/p$ is the image of the original basis element $b_i$ under the canonical quotient map $S \\to S/pS$.\"}\n  {\"name\": \"Module.FinitePresentation.exists_basis_localizedModule_powers\", \"module\": \"Mathlib/RingTheory/Localization/Free\", \"type\": \"∀ {R : Type u_4} {M : Type u_5} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (S : Submonoid R)\\n  {M' : Type u_1} [inst_3 : AddCommGroup M'] [inst_4 : Module R M'] (f : M →ₗ[R] M') [inst_5 : IsLocalizedModule S f]\\n  (Rₛ : Type u_3) [inst_6 : CommRing Rₛ] [inst_7 : Algebra R Rₛ]\", \"doc\": \"Let $R$ be a commutative ring and $M$ be a finitely presented $R$-module. Let $S$ be a submonoid of $R$. Suppose that the localization $S^{-1}M$ is a free $S^{-1}R$-module with a finite basis $b$ inde\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: Module.nonempty_basis_of_flat_of_finrank_eq gives a basis without membership in N; the local-ring basis theorems require E local, while E here is semilocal"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Over a semilocal algebra of a local ring with infinite residue field a generating submodule contains a basis for a finite projective module of constant rank",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Module.nonempty_basis_of_flat_of_finrank_eq\", \"module\": \"Mathlib.RingTheory.LocalRing.Module\", \"type\": \"[Module.Finite R M] [Flat R M] (n : ℕ) (rk : ∀ P : MaximalSpectrum R, finrank (R ⧸ P.1) ((R ⧸ P.1) ⊗[R] M) = n) :\\n  Nonempty (Basis (Fin n) R M)\", \"doc\": \"If $ M $ is a finitely generated flat module over a commutative ring $ R $, and for every maximal ideal $ \\\\mathfrak{p} $ of $ R $ the rank of the tensor product $ M \\\\otimes_R (R/\\\\mathfrak{p}) $ over t\"}\n  {\"name\": \"Module.exists_basis_of_basis_baseChange\", \"module\": \"Mathlib.RingTheory.LocalRing.Module\", \"type\": \"[Module.FinitePresentation R M] {ι : Type*} (v : ι → M) (hli : LinearIndependent k (TensorProduct.mk R k M 1 ∘ v))\\n  (hsp : Submodule.span k (Set.range (TensorProduct.mk R k M 1 ∘ v)) = ⊤)\\n  (H : Function.Injective ((𝔪).subtype.rTensor M)) : ∃ (b : Basis ι R M), ∀ i, b i = v i\", \"doc\": \"Let $ R $ be a commutative local ring with maximal ideal $ \\\\mathfrak{m} $ and residue field $ k = R/\\\\mathfrak{m} $, and let $ M $ be a finitely presented $ R $-module. If a family of vectors $ v_i $ i\"}\n  {\"name\": \"IsLocalRing.span_eq_top_of_tmul_eq_basis\", \"module\": \"Mathlib.RingTheory.LocalRing.Module\", \"type\": \"[Module.Finite R M] {ι} (f : ι → M) (b : Basis ι k (k ⊗[R] M)) (hb : ∀ i, 1 ⊗ₜ f i = b i) :\\n  Submodule.span R (Set.range f) = ⊤\", \"doc\": \"Let $R$ be a commutative local ring with residue field $k$, and let $M$ be a finitely generated $R$-module. Let $f: I \\\\to M$ be a family of elements in $M$. If the family of tensors $\\\\{1 \\\\otimes f(i)\\\\\"}\n  {\"name\": \"Module.Projective.of_basis\", \"module\": \"Mathlib.Algebra.Module.Projective\", \"type\": \"{ι : Type*} (b : Basis ι R P) : Projective R P\", \"doc\": \"If a module $ P $ over a semiring $ R $ admits a basis, then $ P $ is a projective module. This follows from the fact that a basis endows $ P $ with the structure of a free module, and free modules ar\"}\n  {\"name\": \"Module.exists_basis_of_span_of_maximalIdeal_rTensor_injective\", \"module\": \"Mathlib.RingTheory.LocalRing.Module\", \"type\": \"[Module.FinitePresentation R M] (H : Function.Injective ((𝔪).subtype.rTensor M)) {ι : Type u} (v : ι → M)\\n  (hv : Submodule.span R (Set.range v) = ⊤) : ∃ (κ : Type u) (a : κ → ι) (b : Basis κ R M), ∀ i, b i = v (a i)\", \"doc\": \"Let $ R $ be a local semiring with maximal ideal $ \\\\mathfrak{m} $, and let $ M $ be a finitely presented $ R $-module. If the canonical linear map $ \\\\mathfrak{m} \\\\otimes_R M \\\\to M $ induced by the inc\"}\n  {\"name\": \"Module.basisOfFiniteTypeTorsionFree\", \"module\": \"Mathlib.LinearAlgebra.FreeModule.PID\", \"type\": \"[Fintype ι] {s : ι → M} (hs : span R (range s) = ⊤) [IsTorsionFree R M] : Σ n : ℕ, Basis (Fin n) R M\", \"doc\": \"Given a finitely generated torsion-free module $ M $ over a principal ideal domain (PID) $ R $, there exists a natural number $ n $ and an $ R $-module basis for $ M $ indexed by $ \\\\mathrm{Fin}(n) $, \"}\n  {\"name\": \"Module.FinitePresentation.exists_basis_localizedModule_powers\", \"module\": \"Mathlib.RingTheory.Localization.Free\", \"type\": \"(Rₛ) [CommRing Rₛ] [Algebra R Rₛ] [Module Rₛ M'] [IsScalarTower R Rₛ M'] [IsLocalization S Rₛ]\\n  [Module.FinitePresentation R M] {I} [Finite I] (b : Basis I Rₛ M') :\\n  ∃ (r : R) (hr : r ∈ S) (b' : Basis I (Localization (.powers r)) (LocalizedModule (.powers r) M)),\\n    ∀ i,\\n      (LocalizedModule.li\", \"doc\": \"Let $R$ be a commutative ring and $M$ be a finitely presented $R$-module. Let $S$ be a submonoid of $R$. Suppose that the localization $S^{-1}M$ is a free $S^{-1}R$-module with a finite basis $b$ inde\"}\n  {\"name\": \"Submodule.basisOfPid\", \"module\": \"Mathlib.LinearAlgebra.FreeModule.PID\", \"type\": \"{ι : Type*} [Finite ι] (b : Basis ι R M) (N : Submodule R M) : Σ n : ℕ, Basis (Fin n) R N\", \"doc\": \"Given a free module $ M $ over a principal ideal domain (PID) $ R $ with a finite basis indexed by $ \\\\iota $, and a submodule $ N $ of $ M $, this definition constructs a natural number $ n $ and a ba\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: Module.nonempty_basis_of_flat_of_finrank_eq gives a basis without membership in N; the local-ring basis theorems require E local, while E here is semilocal"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Basis\", \"IsSemilocalRing\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match: Module.nonempty_basis_of_flat_of_finrank_eq gives a basis without membership in N; the local-ring basis theorems require E local, while E here is semilocal"
+  },
+  {
+   "tool": "grep",
+   "query": "semi.?local.*basis|basis.*semi.?local|submodule.*infinite.*residue",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match: Module.nonempty_basis_of_flat_of_finrank_eq gives a basis without membership in N; the local-ring basis theorems require E local, while E here is semilocal"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-finite-flat-affine-relation-quotient",
+  "date": "2026-10-18",
+  "group": "NY"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Fourth paragraph of the proof of 03XX: the affine schemes U′,R′ with finite etale projections have affine quotient by groupoids-proposition-finite-flat-equivalence. Supporting Tags 03C1 (algebra-lemma-semi-local-module-basis-in-submodule) and 02M9 (algebra-lemma-locally-free-semi-local-free).",
+   "via": [
+    "lem-a1-finite-flat-affine-relation-quotient",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
