@@ -8,19 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.SmoothBaseChangeCoefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import WeilConjectures.ConstructibleSheaf.KernelCokernel
-import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
-import Sheaf.AlgebraicGeometry.EtaleConstantModuleDirectImageLeftExact
-import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
-import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
-import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
-import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
-import Sheaf.CategoryTheory.TruncationHypercohomology
-import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
-import Sheaf.AlgebraicGeometry.OpenDirectImageOverField
-import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
-import WeilConjectures.CategoryTheory.TruncationHypercohomology
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BoundedConstructible
+import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 /-!
 # Open direct images with finite allowable coefficients
@@ -47,23 +38,12 @@ Source: blueprint sec-smooth-purity/sk-prop-sf-cbc,
 cor-fin-deligne-open-finite-coefficients
 (blueprint: cor-fin-deligne-open-finite-coefficients).
 
-Proof: choose the positive annihilator N invertible in k. If N = 1 the coefficient ring
-and all sheaves vanish. Otherwise split an N-torsion constructible sheaf into its finitely
-many primary parts using the Chinese-remainder idempotents. Filter each primary part by
-powers of its prime. The constructible Serre theorem makes all terms and quotients
-constructible. A quotient killed by a prime l is canonically an F_l-sheaf. The prime-field
-open-image corollary gives bounded constructible direct image, and the module/abelian
-derived-direct-image comparison identifies its underlying abelian cohomology with that
-computed using the original coefficients. Faithful exact forgetting detects vanishing.
-On each stratum, refine additive trivializations for every pair in the finite set A times
-the finite stalk; all scalar action tables then become constant, proving constructibility
-with the inherited A-action. The long exact sequence of derived functors and the Serre
-property reconstruct bounded constructible direct images through the finite filtrations
-and primary sums. For a bounded constructible complex use a bounded below injective
-representative and the truncation spectral sequence. Its E2 terms are the higher direct
-images of the finitely many cohomology sheaves, so they lie in a finite rectangle. Kernels,
-cokernels and extensions keep the stabilized terms and the finite abutment filtrations
-constructible. The rectangle bounds the nonzero total degrees, proving boundedness. -/
+Proof: use the source library's open-image theorem, which already allows arbitrary
+finite coefficients of invertible exponent, on each constructible sheaf. The proved
+finite truncation devissage lemma extends this to bounded constructible complexes.
+Convert constructibility through the equivalence between finite constant values and
+finite stalks; convert the explicit cohomology support interval to the standard
+t-structure bounds before applying devissage, and back afterwards. -/
 theorem isBoundedConstructible_rightDerivedLowerStar_of_isOpenImmersion
     (k : Type u) [Field k] (A : Type (u + 1)) [CommRing A] [Finite A]
     (N : ℕ) (hA : IsSmoothBaseChangeCoefficients N A (Spec (.of k)))
@@ -72,6 +52,24 @@ theorem isBoundedConstructible_rightDerivedLowerStar_of_isOpenImmersion
     (K : DerivedCategoryModule A X) (hK : DerivedCategory.isBoundedConstructible A X K) :
     DerivedCategory.isBoundedConstructible A Y
       ((rightDerivedLowerStar (ModuleCat.{u + 1} A) j).obj K) := by
-  sorry
+  have : HasInvertibleExponent A (Spec (.of k)) := ⟨N, hA.1, hA.2.2.1, hA.2.2.2⟩
+  have hK' : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} A) X K := by
+    obtain ⟨hc, a, b, _, hvan⟩ := hK
+    refine ⟨⟨⟨a, ?_⟩, ⟨b, ?_⟩⟩, fun q ↦
+      (Scheme.isConstructibleEtaleModuleSheaf_iff _).1 (hc q)⟩
+    · exact (_root_.DerivedCategory.isGE_iff K a).2 fun i hi ↦ hvan i (Or.inl hi)
+    · exact (_root_.DerivedCategory.isLE_iff K b).2 fun i hi ↦ hvan i (Or.inr hi)
+  have hpush := boundedConstructible_obj_of_forall_singleFunctor A
+    (lowerStar (ModuleCat.{u + 1} A) j).rightDerivedFunctor
+    (fun F hF ↦ by
+      have := hF
+      exact boundedConstructible_rightDerivedLowerStar_of_isOpenImmersion_of_field A aY j F)
+    hK'
+  obtain ⟨⟨⟨a, ha⟩, ⟨b, hb⟩⟩, hc⟩ := hpush
+  refine ⟨fun q ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff _).2 (hc q),
+    min a b, max a b, min_le_max, fun i hi ↦ ?_⟩
+  rcases hi with hi | hi
+  · exact (_root_.DerivedCategory.isGE_iff _ a).1 ha i (lt_of_lt_of_le hi (min_le_left _ _))
+  · exact (_root_.DerivedCategory.isLE_iff _ b).1 hb i (lt_of_le_of_lt (le_max_right _ _) hi)
 
 end AlgebraicGeometry.Etale
