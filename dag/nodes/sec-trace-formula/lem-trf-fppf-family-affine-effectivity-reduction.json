@@ -17,7 +17,8 @@
   "def-weil-pbc-scheme-conventions",
   "def-pd-descent-datum",
   "def-pc-fppf-site",
-  "def-weil-size-convention"
+  "def-weil-size-convention",
+  "def-trf-scheme-cover-descent-datum"
  ],
  "proof": [
   {
@@ -288,5 +289,23 @@
   "group": "Q49",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-c32b45b1f (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, the new leaf and every cited node's statement against Stacks descent.tex: 02W3 lemma-descending-types-morphisms (statement and full proof, l.9028-9128), 023X lemma-family-is-one and 02W0 lemma-refine-coverings-fully-faithful, plus topologies.tex 021O lemma-fppf(3). The item's statement, stmt_deps and blueprint are unchanged (compared with the side DAG). Each step matches its source. Step 1 writes out 023X with disjoint open components and gluing. Step 2 shows the infinite coproduct is an fpqc singleton via 021O(3) and the 021P refinement, without assuming I is finite. Step 3 identifies Z_U x_{A_U} C with the coproduct of the Q_j = V_{i(j)} x W_j, which have P by (i). Step 4 shows C -> U is affine, flat, surjective, lfp and qcqs, hence of finite presentation and fpqc. Step 5 uses the canonical pullback datum, then (ii) and (iii). Step 6 is the 02W0 reflection. Step 7 applies open-local effectivity and restricts to the components. Edge cases I=empty, T=empty and m=0 hold, and no hypothesis is used outside its scope. New leaf lem-trf-fppf-covering-base-change: true (021O(3)), a one-line specialization of Precoverage.mem_coverings_of_isPullback (Precoverage.lean:132) to Scheme.fppfPrecoverage (Fpqc.lean:40-42); it duplicates no existing node (the nearest are fpqc or etale versions, or definitions only). FIX: the item now declares the five off-unit tool uses in split_report.tool_uses, which the brief requires and the delivery omitted. I accept all five as generic 02W3 tools (affine refinement, finite-coproduct lfp, canonical pullback datum, refinement reflects effectivity, open-local effectivity). The leaf's `how` now also names ofArrows_mem_precoverage_iff (MorphismProperty.lean:82) and IsPullback.of_hasPullback. No drops.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FppfFamilyAffineEffectivityReduction",
+  "declaration": "AlgebraicGeometry.fppf_family_isEffective_of_affine_singletons",
+  "file": "lean/Sheaf/AlgebraicGeometry/FppfFamilyAffineEffectivityReduction.lean",
+  "statement": "theorem fppf_family_isEffective_of_affine_singletons (P : MorphismProperty Scheme.{u}) [P.RespectsIso] [P.IsStableUnderBaseChange] (hfinite : ∀ (n : ℕ) (Y B : Fin n → Scheme.{u}) (h : ∀ j, Y j ⟶ B j), (∀ j, P (h j)) → P (CategoryTheory.Limits.Sigma.map h)) (haffine : ∀ (A B : Scheme.{u}) [IsAffine A] [IsAffine B] (p : A ⟶ B), Flat p → Surjective p → LocallyOfFinitePresentation p → QuasiCompact p → QuasiSeparated p → ∀ (V : Over A) (D : Over.DescentDatum p V), P V.hom → D.IsEffective) {I : Type (u + 1)} (T : Scheme.{u}) (U : I → Scheme.{u}) (f : ∀ i, U i ⟶ T) (hcov : Presieve.ofArrows U f ∈ Scheme.fppfPrecoverage T) (D : SchemeCoverDescentDatum f) (hP : ∀ i, P (D.localScheme i).hom) : D.IsEffective",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7201ec847",
+  "group": "N8",
+  "result": "pass",
+  "note": "The statement matches node and Stacks 02W3 (tau=fppf) clause by clause. P is a MorphismProperty; RespectsIso is implied by IsStableUnderBaseChange, so not stronger; (i) is IsStableUnderBaseChange over all cartesian squares; (ii) hfinite covers every Fin n family with Sigma.map, n=0 included; (iii) haffine: IsAffine A, B and Flat/Surjective/LocallyOfFinitePresentation/QuasiCompact/QuasiSeparated, exactly the node's finite-presentation convention, with every V : Over A and Over.DescentDatum p V. Cover: ofArrows in fppfPrecoverage (flat+lfp, jointly surjective), no finiteness or affineness restriction. Datum and effectivity use the landed SchemeCoverDescentDatum and its IsEffective (no duplicate definition); P of the descended scheme is not claimed. I : Type (u+1) is fixed by the landed definition and Type u families embed via ULift, so no restriction. The node changes only in lean and in stmt_deps gaining the landed def-trf-scheme-cover-descent-datum (allowed by brief §5). lean.statement is verbatim in the file. Edge cases I empty, m=0, empty affines, infinite I: fine. Gates: one theorem proved by sorry, no definitions; source place and blueprint docstrings present and the theorem docstring follows the 7 proof steps; no pro-etale; Worker report and Second reading sections present. nt_compile.py --json on the snapshot text: rc=0, no errors or warnings, 1.8 s. The live lakefile sets warn.sorry=false; a probe copy confirmed errors are reported, the signature is as expected, and the axioms are sorryAx plus the standard three. Non-blocking note for stage 3: with large I the coproduct of proof step 1 may not exist in Scheme.{u}, so pass to a u-small subcover first. No fixes."
  }
 }
