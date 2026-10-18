@@ -6,6 +6,7 @@ module
 public import Sheaf.AlgebraicGeometry.ProEtaleLeftComplete
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import Sheaf.AlgebraicGeometry.ProEtaleMilnorEpimorphic
+import Mathlib.CategoryTheory.Limits.Constructions.EventuallyConstant
 
 /-!
 # Cohomology of the truncation tower
@@ -84,6 +85,61 @@ theorem truncation_tower_cohomology
         f ≫ limit.π (milnorCohomologyTower (postnikovTower K) q) (op n) =
           HomologicalComplex.homologyMap
             (K.πTruncGE (-(n : ℤ))) q) ∧ IsIso f := by
-  sorry
+  have hz (n : ℕ) (hn : (n : ℤ) < -q) :
+      IsZero ((milnorCohomologyTower (postnikovTower K) q).obj (op n)) := by
+    exact (K.truncGE (-(n : ℤ))).isZero_of_isGE (-(n : ℤ)) q (by omega)
+  have hi (n : ℕ) (hn : -q ≤ (n : ℤ)) :
+      IsIso (HomologicalComplex.homologyMap (K.πTruncGE (-(n : ℤ))) q) := by
+    exact (quasiIsoAt_iff_isIso_homologyMap _ _).mp
+      (K.quasiIsoAt_πTruncGE (-(n : ℤ)) q (by omega))
+  have hc (n : ℕ) :
+      K.πTruncGE (-((n + 1 : ℕ) : ℤ)) ≫ postnikovStep K n =
+        K.πTruncGE (-(n : ℤ)) := by
+    dsimp [postnikovStep]
+    rw [← Category.assoc, CochainComplex.πTruncGE_naturality]
+    simp
+  have hh (n : ℕ) :
+      HomologicalComplex.homologyMap (K.πTruncGE (-((n + 1 : ℕ) : ℤ))) q ≫
+        HomologicalComplex.homologyMap (postnikovStep K n) q =
+          HomologicalComplex.homologyMap (K.πTruncGE (-(n : ℤ))) q := by
+    rw [← HomologicalComplex.homologyMap_comp, hc]
+  have he (n : ℕ) : Epi (HomologicalComplex.homologyMap (postnikovStep K n) q) := by
+    by_cases hn : (n : ℤ) < -q
+    · exact (hz n hn).epi _
+    · have := hi n (by omega)
+      have := hi (n + 1) (by push_cast; omega)
+      have := IsIso.of_isIso_fac_left (hh n)
+      infer_instance
+  refine ⟨hz, hi, hh, ?_, he, ?_, ?_⟩
+  · intro n hn
+    exact (hz n hn).eq_of_tgt _ _
+  · let := HasDerivedCategory.standard (ringedSiteModules.{max u (t + 1)} R)
+    have ht (n : ℕ) :
+        Epi ((milnorCohomologyTower (postnikovTower K) q).map
+          (homOfLE (Nat.le_succ n)).op) := by
+      simpa [milnorCohomologyTower, postnikovTower] using he n
+    have := (AlgebraicGeometry.ProEtale.milnor_epimorphic.{u, t, max (u + 1) (t + 2)} X R
+      (milnorCohomologyTower (postnikovTower K) q) ht).1
+    exact isZero_cokernel_of_epi _
+  · let M := milnorCohomologyTower (postnikovTower K) q
+    let c : Cone M :=
+      { pt := K.homology q
+        π := NatTrans.ofOpSequence (fun n ↦
+          HomologicalComplex.homologyMap (K.πTruncGE (-(n : ℤ))) q) (by
+            intro n
+            simpa [M, milnorCohomologyTower, postnikovTower] using (hh n).symm) }
+    let N : ℕ := (-q).toNat
+    have hN : -q ≤ (N : ℤ) := by dsimp [N]; omega
+    have hconst : M.IsEventuallyConstantTo (op N) := by
+      intro i f
+      have hf : N ≤ i.unop := leOfHom f.unop
+      have : IsIso (c.π.app i) := hi i.unop (by omega)
+      have : IsIso (c.π.app (op N)) := hi N hN
+      exact IsIso.of_isIso_fac_left (c.w f)
+    have : IsIso (c.π.app (op N)) := hi N hN
+    let hc := hconst.isLimitOfIsIso c
+    refine ⟨(hc.conePointUniqueUpToIso (limit.isLimit M)).hom, ?_, inferInstance⟩
+    intro n
+    exact IsLimit.conePointUniqueUpToIso_hom_comp hc (limit.isLimit M) (op n)
 
 end AlgebraicGeometry.Scheme.ProEt
