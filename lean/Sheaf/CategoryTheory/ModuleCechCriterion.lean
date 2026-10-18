@@ -8,6 +8,7 @@ module
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.CategoryTheory.SiteCechComplex
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
+public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Sheaf.CategoryTheory.Sites.InjectivePresheafModuleCechExact
 import WeilConjectures.CategoryTheory.SiteSesCechH1Surjective
