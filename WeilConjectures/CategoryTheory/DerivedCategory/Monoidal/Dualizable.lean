@@ -51,6 +51,8 @@ noncomputable abbrev kFlatQh :
     (HomotopyCategory.quasiIso A (.up ℤ)).kFlat.FullSubcategory ⥤ DerivedCategory A :=
   (HomotopyCategory.quasiIso A (.up ℤ)).kFlat.ι ⋙ Qh
 
+instance : IsIso (ε (Qh : _ ⥤ DerivedCategory A)) := inferInstanceAs (IsIso (𝟙 _))
+
 instance : IsIso (ε (kFlatQh A)) := by
   rw [Functor.LaxMonoidal.comp_ε, ObjectProperty.ι_ε, CategoryTheory.Functor.map_id,
     Category.comp_id]
