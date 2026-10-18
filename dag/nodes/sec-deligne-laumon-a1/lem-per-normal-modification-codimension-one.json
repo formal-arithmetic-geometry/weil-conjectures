@@ -2,21 +2,161 @@
  "id": "lem-per-normal-modification-codimension-one",
  "kind": "statement",
  "title": "Proper birational modifications are isomorphisms near codimension one",
- "statement": "Let $X$ be a Noetherian scheme [def-weil-pbc-noetherian-ring] and $f:Y\\to X$ a proper birational morphism with $Y$ reduced [def-weil-proper-morphism, def-pc-reduced-scheme]. Birational means inducing isomorphisms on the local rings at the generic points, with those generic points in bijection. The maximal open subset of $X$ over which $f$ is an isomorphism contains every codimension-zero point and every codimension-one point whose local ring is a discrete valuation ring [def-sc-discrete-valuation-ring]. It also contains every point with normal local ring [def-weil-pbc-normal-ring] over which the fibre is finite.",
+ "statement": "Let $X$ be a Noetherian scheme, meaning locally Noetherian [pqf-def-locnoeth] and quasi-compact, and let $f:Y\\to X$ be a proper birational morphism with $Y$ reduced [def-weil-proper-morphism, def-pc-reduced-scheme]. Birational means that $f$ maps the generic points of the irreducible components of $Y$ bijectively onto those of $X$ and induces isomorphisms on their local rings [def-sc-generic-point, def-weil-locally-ringed-space-morphism]. Let $U\\subseteq X$ be the maximal open subset over which $f$ is an isomorphism. Then $U$ contains (1) every codimension-zero point; (2) every codimension-one point $x$ for which $\\mathcal O_{X,x}$ is a discrete valuation ring [def-sc-discrete-valuation-ring]; (3) every point $x$ with normal local ring [def-weil-pbc-normal-ring] for which the underlying fibre $f^{-1}(\\{x\\})$ is finite; and (4) every point $x$ with normal local ring such that $f$ is quasi-finite at some $y\\in Y$ with $f(y)=x$ [pqf-def-quasifinite]. Codimension of $x$ here is $\\dim\\mathcal O_{X,x}$ [def-weil-pbc-krull-dimension-ring], and quasi-compact means every open cover has a finite subcover.",
  "source": {
   "document": "literature/stacks-project/varieties.tex",
   "place": "Stacks Project Tag 0BFP (varieties-lemma-modification-normal-iso-over-codimension-1), all four clauses"
  },
  "stmt_deps": [
-  "def-weil-pbc-noetherian-ring",
+  "pqf-def-locnoeth",
   "def-weil-proper-morphism",
   "def-pc-reduced-scheme",
+  "def-sc-generic-point",
+  "def-weil-locally-ringed-space-morphism",
   "def-sc-discrete-valuation-ring",
-  "def-weil-pbc-normal-ring"
+  "def-weil-pbc-normal-ring",
+  "pqf-def-quasifinite",
+  "def-weil-pbc-krull-dimension-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The isomorphism opens glue: on their intersections the inverse to the same restricted $f$ is unique, so their union is the maximal such open $U$. By [pqf-lem-proper-basic], $f$ is separated and of finite type. By [lem-weil-pbc-finite-type-over-noetherian], $Y$ is Noetherian. By [lem-weil-pbc-noetherian-finitely-many-components], both schemes have finitely many irreducible components. By [pqf-lem-lft-fp-locnoeth], $f$ is locally of finite presentation. Thus [lem-per-birational-isomorphism-dense-open] supplies a dense open $V$ over which $f$ is an isomorphism. A dense open contains every generic point: for a component $C_i$, remove the finitely many other components; this leaves a nonempty open subset of $X$ inside $C_i$. Density forces $V$ to meet it. Every nonempty open of $C_i$ contains its generic point, so that point lies in $V$. These are the codimension-zero points, proving (1).",
+   "uses": [
+    "pqf-lem-proper-basic",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-per-birational-isomorphism-dense-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BFP, part (1), using Tag 0BAJ"
+   }
+  },
+  {
+   "text": "We first prove (4). Fix $x,y$ as in that clause and put $R=\\mathcal O_{X,x}$, a normal domain. Apply [lem-per-noetherian-injective-germ-neighbourhood] and replace $X$ by the resulting affine neighbourhood $\\operatorname{Spec}A$ of $x$, and $Y$ by its inverse image. The restriction remains proper by [lem-weil-pbc-proper-base-change]. Since $A\\hookrightarrow R$, $A$ is a domain, hence $X$ is integral. Birationality gives exactly one generic point of the restricted $Y$: generic points of an open subscheme are precisely generic points of components that meet that open; their images are the generic points of this integral $X$. Thus $Y$ is irreducible, and remains reduced, so it is integral by [def-pc-integral-scheme].",
+   "uses": [
+    "lem-per-noetherian-injective-germ-neighbourhood",
+    "lem-weil-pbc-proper-base-change",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BFP, proof of (4), first paragraph; Tag 0BX3"
+   }
+  },
+  {
+   "text": "Choose affine source and target neighbourhoods of $y$ and $x$ witnessing [pqf-def-quasifinite]. They can be taken inside the integral neighbourhood of Step 2: take a target principal open containing $x$ inside the intersection and then a source principal open containing $y$ inside its preimage; [lem-weil-pbc-quasi-finite-at-prime-principal-localization] preserves quasi-finiteness. Rename their rings $A,C$ and their primes $\\mathfrak p,\\mathfrak q$. The map $A\\to C$ is of finite type and quasi-finite at $\\mathfrak q$. Apply [lem-weil-pbc-quasi-finite-at-finite-subalgebra-away] to obtain a finite $A$-subalgebra $B\\subseteq C$ and $g\\in B\\setminus\\mathfrak q$ with $B_g\\xrightarrow{\\sim}C_g$. By [lem-sc-integral-function-field-affine-fraction], the affine domains $A,C$ embed in their generic local rings. Birationality identifies these with a common field $K$, the fraction field of both $A$ and $C$. All maps just used are the structural maps into $K$.",
+   "uses": [
+    "pqf-def-quasifinite",
+    "lem-weil-pbc-quasi-finite-at-prime-principal-localization",
+    "lem-weil-pbc-quasi-finite-at-finite-subalgebra-away",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BFP, local algebra in proof of (4); equivalent finite-subalgebra form from Algebra Tag 00Q9 (theorem-main-theorem) and Tag 00QB (lemma-quasi-finite-open-integral-closure)"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-affine-open-stalk-localization], $R=A_{\\mathfrak p}$ and $\\mathcal O_{Y,y}=C_{\\mathfrak q}$. Localize the inclusion $A\\subseteq B\\subseteq C\\subseteq K$ at $A\\setminus\\mathfrak p$. The ring $B_{\\mathfrak p}$ is finite as an $R$-module: localize a finite set of $A$-module generators of $B$; they still generate because each fraction is their linear combination with denominators in $A\\setminus\\mathfrak p$. By [lem-weil-pbc-finite-algebra-is-integral], each of its elements is integral over $R$. Since $R$ is integrally closed in $K$, this gives $R=B_{\\mathfrak p}$. The prime $\\mathfrak q\\cap B$ lies over $\\mathfrak p$, so after this localization it is the maximal ideal of $R$. Since $g\\notin\\mathfrak q$, localizing $B_g\\simeq C_g$ at these corresponding primes now gives $C_{\\mathfrak q}=R$. This equality is induced by the original local homomorphism $f^\\sharp_y$; in particular that homomorphism is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-finite-algebra-is-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BFP, proof of (4), normality and finite-algebra argument"
+   }
+  },
+  {
+   "text": "The inverse of $f^\\sharp_y$ gives a morphism $\\varphi:\\operatorname{Spec}R\\to Y$ mapping the closed point to $y$, by [lem-weil-pbc-morphism-from-spec-local-ring]. Its composite with $f$ is the canonical morphism $\\operatorname{Spec}R\\to X$: both correspond to $(x,\\mathrm{id}_R)$ under the same bijection. Apply [lem-per-local-ring-map-spread] with $T=S=X$, $a=\\mathrm{id}_X$, $Z=Y$, and $g=f$. Its hypotheses hold because $X$ is locally Noetherian and $f$ is locally of finite type by [pqf-lem-proper-basic]. It yields an open neighbourhood $W$ of $x$ and $s:W\\to Y$ with $f\\circ s$ equal to the inclusion of $W$. Thus $s$ factors through $f^{-1}(W)$ and is a section of $f^{-1}(W)\\to W$.",
+   "uses": [
+    "lem-weil-pbc-morphism-from-spec-local-ring",
+    "lem-per-local-ring-map-spread",
+    "pqf-lem-proper-basic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BFP, proof of (4), spreading the inverse local map; Tag 0BX6"
+   }
+  },
+  {
+   "text": "The restricted $f$ is separated by [pqf-lem-proper-basic], so its section $s:W\\to f^{-1}(W)$ is a closed immersion by [lem-weil-pbc-section-separated-closed-immersion]. The generic point of $W$ maps to the unique generic point of $Y$: its image lies above the generic point of $X$, and the generic fibre is a single point because the dense open of Step 1 is an isomorphism open. Consequently the closed image of $s$ is all of $f^{-1}(W)$. On any nonempty affine open of the integral scheme $f^{-1}(W)$ the ring $D$ is a domain by [def-pc-integral-scheme], and this closed immersion is $\\operatorname{Spec}(D/I)\\to\\operatorname{Spec}D$ by [def-weil-closed-immersion]. Its image contains the generic prime $(0)$, so $I\\subseteq(0)$ and $I=0$. Therefore $s$ is an isomorphism. Since $f\\circ s=\\mathrm{id}$, $f$ is its inverse, and $x\\in U$. This proves (4).",
+   "uses": [
+    "pqf-lem-proper-basic",
+    "lem-weil-pbc-section-separated-closed-immersion",
+    "def-weil-closed-immersion",
+    "def-pc-integral-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BFP, proof of (4), final closed-section argument"
+   }
+  },
+  {
+   "text": "For (3), suppose $R=\\mathcal O_{X,x}$ is normal and the fibre over $x$ is finite. The fibre is nonempty: $f(Y)$ is closed by [pqf-lem-proper-basic] and contains the dense isomorphism open of Step 1, hence equals $X$. Choose $y$ above $x$. By [pqf-lem-locqf-fibre-discrete], $f$ is quasi-finite at $y$, since $f$ is locally of finite type and this fibre is finite. Clause (4), proved in Steps 2--6, now gives $x\\in U$.",
+   "uses": [
+    "pqf-lem-proper-basic",
+    "pqf-lem-locqf-fibre-discrete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BFP, proof of (3), reduction to (4)"
+   }
+  },
+  {
+   "text": "Finally let $x$ be a codimension-one point with $R=\\mathcal O_{X,x}$ a DVR. The DVR definition [def-sc-discrete-valuation-ring] makes $R$ a principal ideal domain, so [lem-weil-pbc-pid-noetherian-normal] makes it Noetherian and normal. Its dimension is $1$ by the codimension assumption. At every generic point of $Y$ the induced residue field map is an isomorphism by birationality, hence an algebraic extension. Apply [lem-per-generically-finite-proper-near-dimension-one] to find an open neighbourhood of $x$ where $f$ is finite. Its fibre at $x$ is finite by [lem-weil-pbc-finite-closed-map-finite-fibres]. Clause (3), proved in Step 7, yields $x\\in U$, proving (2). The empty scheme has no points and is covered by the same argument vacuously.",
+   "uses": [
+    "def-sc-discrete-valuation-ring",
+    "lem-weil-pbc-pid-noetherian-normal",
+    "lem-per-generically-finite-proper-near-dimension-one",
+    "lem-weil-pbc-finite-closed-map-finite-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0BFP, proof of (2); Tag 0AB7, condition (1)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-integral-scheme",
+  "def-sc-discrete-valuation-ring",
+  "def-weil-closed-immersion",
+  "lem-per-birational-isomorphism-dense-open",
+  "lem-per-generically-finite-proper-near-dimension-one",
+  "lem-per-local-ring-map-spread",
+  "lem-per-noetherian-injective-germ-neighbourhood",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-morphism-from-spec-local-ring",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "lem-weil-pbc-pid-noetherian-normal",
+  "lem-weil-pbc-proper-base-change",
+  "lem-weil-pbc-quasi-finite-at-finite-subalgebra-away",
+  "lem-weil-pbc-quasi-finite-at-prime-principal-localization",
+  "lem-weil-pbc-section-separated-closed-immersion",
+  "pqf-def-quasifinite",
+  "pqf-lem-lft-fp-locnoeth",
+  "pqf-lem-locqf-fibre-discrete",
+  "pqf-lem-proper-basic"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BFP, varieties-lemma-modification-normal-iso-over-codimension-1, all four clauses; local Zariski main theorem in equivalent finite-subalgebra form"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,10 +185,45 @@
    "results": "[grep] OK 16 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicGeometry.Birational.RationalMap\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.AlgebraicGeometry.Birational.RationalMap\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"12\", \"text\": \"# Birationality and Rationality of schemes.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"15\", \"text\": \"birationality and rationality.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"21\", \"text\": \"- `Scheme.Birational X Y`: `X` and `Y` are birational, i.e. there exists a `PartialIso X Y`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"22\", \"text\": \"- `Scheme.BirationalOver sX sY`: `X` and `Y` are birational over `S` via structure maps\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Composition.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicGeometry.Birational.Dominant\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/RationalMap.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicGeometry.Birational.RationalMap\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/Polish.lean\", \"line\": \"138\", \"text\": \"  ENNReal.orderIsoUnitIntervalBirational.toHomeomorph.isClosedEmbedding.polishSpace\"}\n  {\"file\": \"Mathlib/Topology/MetricSpace/ProperSpace/Real.lean\", \"line\": \"58\", \"text\": \"  orderIsoUnitIntervalBirational.toHomeomorph.isEmbedding.secondCountableTopology\"}\n  {\"file\": \"Mathlib/Topology/Metrizable/Real.lean\", \"line\": \"29\", \"text\": \"  orderIsoUnitIntervalBirational.toHomeomorph.isEmbedding.metrizableSpace\"}\n  {\"file\": \"Mathlib/Data/ENNReal/Inv.lean\", \"line\": \"23\", \"text\": \"  - `orderIsoIicOneBirational : ℝ≥0∞ ≃o Iic (1 : ℝ≥0∞)`: The birational order isomorphism between\"}\n  {\"file\": \"Mathlib/Data/ENNReal/Inv.lean\", \"line\": \"30\", \"text\": \"  - `orderIsoUnitIntervalBirational : ℝ≥0∞ ≃o Icc (0 : ℝ) 1`: An order isomorphism between\"}\n  {\"file\": \"Mathlib/Data/ENNReal/Inv.lean\", \"line\": \"31\", \"text\": \"    the extended nonnegative real numbers and the unit interval. This is `orderIsoIicOneBirational`\"}\n  {\"file\": \"Mathlib/Data/ENNReal/Inv.lean\", \"line\": \"603\", \"text\": \"/-- The birational order isomorphism between `ℝ≥0∞` and the unit interval `Set.Iic (1 : ℝ≥0∞)`. -/\"}\n  {\"file\": \"Mathlib/Data/ENNReal/Inv.lean\", \"line\": \"605\", \"text\": \"def orderIsoIicOneBirational : ℝ≥0∞ ≃o Iic (1 : ℝ≥0∞) := by\"}\n",
    "date": "2026-10-18",
    "verdict": "no match: inspected hits concern normalization, field trace or unrelated declarations, not this statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper birational morphism from reduced scheme to Noetherian scheme is an isomorphism near normal points with finite fibres",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegralHom f],\\n  CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any integral morphism $ f: X \\to Y $ of schemes, the normalization morphism from $ X $ to the normalization of $ f $ is an isomorphism.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the canonical morphism from $ X $ to its normalization is dominant, meaning its image is dense in the normalization scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsReduced X],\\n  AlgebraicGeometry.IsReduced (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is a reduced scheme, then the normalization of any morphism $ f: X \\\\to Y $ is also a reduced scheme. This instance asserts that the categorical normalization construction preserves the reduce\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.Scheme.Hom.fromNormalization f)\", \"doc\": \"The canonical morphism from the normalization of a scheme morphism $ f: X \\to Y $ to the target scheme $ Y $ is an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → [AlgebraicGeometry.QuasiCompact f] → [AlgebraicGeometry.QuasiSeparated f] → AlgebraicGeometry.Scheme\", \"doc\": \"The normalization of a scheme morphism $ f: X \\to Y $ is defined as the colimit in the category of schemes of a diagram constructed by composing the opposite of the affine Zariski site inclusion functo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.toNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) →\\n    [inst : AlgebraicGeometry.QuasiCompact f] →\\n      [inst_1 : AlgebraicGeometry.QuasiSeparated f] → X ⟶ AlgebraicGeometry.Scheme.Hom.normalization f\", \"doc\": \"The morphism from a scheme $ X $ to the normalization of a scheme morphism $ f: X \\to Y $, constructed by gluing local normalization maps defined via the integral closure of structure sheaves over an a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] [AlgebraicGeometry.IsIntegral X],\\n  AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Scheme.Hom.normalization f)\", \"doc\": \"If $ X $ is an integral scheme, then the normalization of a morphism $ f: X \\\\to Y $ is also an integral scheme. This instance asserts that the categorical construction of normalization preserves the i\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.normalization.hom_ext\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f] {T : AlgebraicGeometry.Scheme}\\n  (f₁ f₂ : AlgebraicGeometry.Scheme.Hom.normalization f ⟶ T) (g : T ⟶ Y) [AlgebraicGeometry.IsAffineHom g],\\n  CategoryTheory.Categor\", \"doc\": \"Given two morphisms from the normalization of a scheme morphism $ f: X \\to Y $ to a scheme $ T $, if there exists an affine morphism $ g: T \\to Y $ such that both morphisms compose with $ g $ to yield t\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: the displayed signatures do not state the node; related local or normalization results only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Isomorphism locus of a proper modification contains generic points and discrete valuation codimension one points",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsLocalIso.instIsZariskiLocalAtSource\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/LocalIso\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtSource @AlgebraicGeometry.IsLocalIso\", \"doc\": \"The property of being a local isomorphism between schemes is Zariski-local at the source, meaning it can be verified on a Zariski open cover of the source scheme.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization\", \"module\": \"Mathlib/AlgebraicGeometry/Normalization\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.QuasiCompact f]\\n  [inst_1 : AlgebraicGeometry.QuasiSeparated f],\\n  AlgebraicGeometry.IsDominant (AlgebraicGeometry.Scheme.Hom.toNormalization f)\", \"doc\": \"For any scheme morphism $ f: X \\to Y $, the canonical morphism from $ X $ to its normalization is dominant, meaning its image is dense in the normalization scheme.\"}\n  {\"name\": \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget (AlgebraicGeometry.topologically @SpecializingMap)\", \"doc\": \"The property of being a specializing map for scheme morphisms is Zariski local at the target. This means that if a morphism $ f : X \\to Y $ of schemes has the property that its underlying continuous ma\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.PartialMap.mem_domain_ofFromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/RationalMap\", \"type\": \"∀ {X Y S : AlgebraicGeometry.Scheme} (sX : X ⟶ S) (sY : Y ⟶ S) [inst : IrreducibleSpace ↥X]\\n  [inst_1 : AlgebraicGeometry.LocallyOfFiniteType sY] {x : ↥X} [inst_2 : X.IsGermInjectiveAt x]\\n  (φ : AlgebraicGeometry.Spec (X.presheaf.stalk x) ⟶ Y)\\n  (h : CategoryTheory.CategoryStruct.comp φ sY = Categor\", \"doc\": \"Given schemes $X,Y,S$ with morphisms $s_X:X\\\\to S$ and $s_Y:Y\\\\to S$ locally of finite type, a point $x\\\\in X$ where the germ map is injective, and a morphism $\\\\phi:\\\\operatorname{Spec}(\\\\mathcal{O}_{X,x})\"}\n  {\"name\": \"AlgebraicGeometry.genericPoint_eq_of_isOpenImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/FunctionField\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsOpenImmersion f] [hX : IrreducibleSpace ↥X]\\n  [inst : IrreducibleSpace ↥Y], (CategoryTheory.ConcreteCategory.hom f.base) (genericPoint ↥X) = genericPoint ↥Y\", \"doc\": \"If $ f: X \\to Y $ is an open immersion between irreducible schemes $ X $ and $ Y $, then the image of the generic point of $ X $ under $ f $ coincides with the generic point of $ Y $. This follows from\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget @AlgebraicGeometry.IsDominant\", \"doc\": \"The property of being a dominant morphism is Zariski local at the target. This means that for any morphism $ f: X \\to Y $, if there exists a Zariski covering sieve on $ Y $ such that the pullback of $ \"}\n  {\"name\": \"AlgebraicGeometry.IsDominant.respectsIso\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"CategoryTheory.MorphismProperty.RespectsIso @AlgebraicGeometry.IsDominant\", \"doc\": \"Every isomorphism of schemes is a dominant morphism, meaning the property of being dominant holds for all isomorphisms in the category of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.IsDominant\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is dominant if the image of $ f $ is dense in $ Y $.\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: the displayed signatures do not state the node; related local or normalization results only"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProper, CategoryTheory.IsIso",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-19",
+   "verdict": "no match: the displayed signatures do not state the node; related local or normalization results only"
+  },
+  {
+   "tool": "grep",
+   "query": "birational|modification.*normal|codimension.*isIso",
+   "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Dominant.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicGeometry.Birational.RationalMap\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"9\", \"text\": \"public import Mathlib.AlgebraicGeometry.Birational.RationalMap\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"12\", \"text\": \"# Birationality and Rationality of schemes.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"15\", \"text\": \"birationality and rationality.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"21\", \"text\": \"- `Scheme.Birational X Y`: `X` and `Y` are birational, i.e. there exists a `PartialIso X Y`.\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Birational.lean\", \"line\": \"22\", \"text\": \"- `Scheme.BirationalOver sX sY`: `X` and `Y` are birational over `S` via structure maps\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Birational/Composition.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicGeometry.Birational.Dominant\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/RationalMap.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.AlgebraicGeometry.Birational.RationalMap\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: the displayed signatures do not state the node; related local or normalization results only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper birational modification is isomorphism near a normal point where it is quasi finite",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"RingHom.QuasiFinite.propertyIsLocal\", \"module\": \"Mathlib.RingTheory.RingHom.QuasiFinite\", \"type\": \": PropertyIsLocal QuasiFinite\", \"doc\": \"The property of a ring homomorphism between commutative rings being quasi-finite is local, meaning it can be checked on a cover or via localization.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"Algebra.QuasiFiniteAt\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"(p : Ideal S) [p.IsPrime] : Prop\", \"doc\": \"For a prime ideal $ p $ in a commutative ring $ S $, this proposition asserts that the localization of $ S $ at the complement of $ p $ forms a quasi-finite algebra over the base commutative ring $ R \"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V$ is contained in the preimage $f^{-1}(U)$, the induced ring h\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteMorphismRestrict\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"(f : X ⟶ Y) (V : Y.Opens) [LocallyQuasiFinite f] : LocallyQuasiFinite (f ∣_ V)\", \"doc\": \"For any morphism $ f: X \\to Y $ of schemes and any open subset $ V $ of $ Y $, if $ f $ is locally quasi-finite, then the restriction of $ f $ to $ V $ is also locally quasi-finite.\"}\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"[IsFinite f] : LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.LocallyQuasiFinite f → Sort u_1} →\\n      (t : AlgebraicGeometry.LocallyQuasiFinite f) →\\n        ((quasiFinite_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                 \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally quasi-finite if for every affine open subset $ U \\\\subseteq Y $, and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the \"}\n  {\"name\": \"Algebra.QuasiFiniteAt.baseChange\", \"module\": \"Mathlib.RingTheory.QuasiFinite.Basic\", \"type\": \"(p : Ideal S) [p.IsPrime] [QuasiFiniteAt R p] {A : Type*} [CommRing A] [Algebra R A] (q : Ideal (A ⊗[R] S)) [q.IsPrime]\\n  (hq : p = q.comap Algebra.TensorProduct.includeRight.toRingHom) : QuasiFiniteAt A q\", \"doc\": \"If a commutative ring $ S $ is quasi-finite over a base ring $ R $ at a prime ideal $ p $, then after base change to an $ R $-algebra $ A $, the tensor product $ A \\\\otimes_R S $ is quasi-finite over $\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: the displayed signatures do not state the node; related local or normalization results only"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-surface-resolution-supported-presentation",
@@ -73,5 +248,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-normal-modification-codimension-one",
+  "worker": "stage1",
+  "summary": "Restored the omitted fourth clause of Stacks 0BFP and corrected the Noetherian-scheme definition dependency. Split all four clauses; reused the existing finite-subalgebra local Zariski main theorem, properness and quasi-finite-fibre nodes. Added two statement-only geometric inputs and two exact Mathlib spreading-out leaves.",
+  "blueprint": "Proof Step 1: dimension-normalized Verdier duality and the middle t-structure (historically Step 3 when this child was created); the finite-coefficient potential-dualizing construction underlying the qbar generic duality model. Technical input to ILO XVII sections 3.4–3.5: Expose XVII sections 3.4.1–3.4.3: existence of an SNC resolution, Propositions 3.4.1.1(d), 3.4.1.2–3.4.1.3, the connectedness observation in 3.4.1.4, common domination in 3.4.2, and the normalized support square of Lemma 3.4.3.1; printed pp.270–274; input: Stacks Project Tag 0BFP (varieties-lemma-modification-normal-iso-over-codimension-1), all four clauses",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-quasi-finite-at-finite-subalgebra-away",
+    "why": "Generic scheme-theoretic tool used with its stated hypotheses in Stacks 0BFP; it supplies no alternative route for the perverse-sheaf unit."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-finite-at-prime-principal-localization",
+    "why": "Generic scheme-theoretic tool used with its stated hypotheses in Stacks 0BFP; it supplies no alternative route for the perverse-sheaf unit."
+   },
+   {
+    "node": "pqf-def-locnoeth",
+    "why": "Generic scheme-theoretic tool used with its stated hypotheses in Stacks 0BFP; it supplies no alternative route for the perverse-sheaf unit."
+   },
+   {
+    "node": "pqf-def-quasifinite",
+    "why": "Generic scheme-theoretic tool used with its stated hypotheses in Stacks 0BFP; it supplies no alternative route for the perverse-sheaf unit."
+   },
+   {
+    "node": "pqf-lem-locqf-fibre-discrete",
+    "why": "Generic scheme-theoretic tool used with its stated hypotheses in Stacks 0BFP; it supplies no alternative route for the perverse-sheaf unit."
+   },
+   {
+    "node": "pqf-lem-proper-basic",
+    "why": "Generic scheme-theoretic tool used with its stated hypotheses in Stacks 0BFP; it supplies no alternative route for the perverse-sheaf unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-quasi-finite-at-finite-subalgebra-away",
+  "lem-weil-pbc-quasi-finite-at-prime-principal-localization",
+  "pqf-def-locnoeth",
+  "pqf-def-quasifinite",
+  "pqf-lem-locqf-fibre-discrete",
+  "pqf-lem-proper-basic"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q103-e1b51ae30",
+  "group": "Q103",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-e1b51ae30 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item statement, all 8 steps and the 4 new nodes, against Stacks 0BFP (statement and full proof), 0AB7, 0BAJ, 0BX3 and 0BX6, and Mathlib SpreadingOut.lean at lines 77, 170 and 374. The item restores the missing clause (4) of 0BFP and spells out Noetherian, birational and codimension. Nothing is weakened, and the one citer (surface-resolution) uses clauses (1) and (2), which still hold. The reduced hypothesis is needed: Y=Spec k[t,e]/(e^2,te) over Spec k[t] is a counterexample without it, and the item keeps it. Every cited statement says what its step takes from it, and each step's hypotheses hold. The finite-subalgebra node gives B finite over A and B_g=C_g. The affine-stalk-localization node gives R=A_p and O_{Y,y}=C_q. Normality gives B_p=R inside the common fraction field K, and localizing gives C_q=R on the actual stalk map. The spreading leaf needs g∘φ=a∘c_t, which holds through the canonical-morphism definition. In Step 6 the section is a closed immersion whose image contains the generic point; it is onto because the 0BAJ open from Step 1 makes the generic fibre a single point, and I=0 on a domain chart. Step 7 gets a nonempty fibre from the closed image and quasi-finiteness from the locqf node. Step 8 goes DVR, then PID, then Noetherian and normal, then the 0AB7 node, then finite fibres, then clause (3). The 0BAJ (separated and finitely presented case) and 0AB7 (condition (1)) nodes are exact, strictly smaller than the item and not duplicates; the existing 0BAJ and 0AB7 nodes in the trace-formula and proper-base-change chapters are narrower or different, and the blueprint has no hits. The two Mathlib leaves are exact with the locally Noetherian germ-injective instance, and their line numbers are correct. I accept the six tool_uses (pbc and pqf nodes), all generic tools. No SGA source and no trace-formula node is cited. No fixes."
  }
 }
