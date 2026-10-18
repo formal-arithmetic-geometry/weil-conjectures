@@ -15,9 +15,110 @@
   "def-weil-pbc-henselian-terminology",
   "def-weil-pbc-adic-completion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\iota_M:M\\to M^\\wedge$ for the completion map. By [lem-weil-pbc-module-completion-complete], applied over $A$ to $M=D,C$, the projections to $M/I^nM$ are onto with kernels $I^nM^\\wedge$. The ideal $I$ is finitely generated because $A$ is Noetherian. An $A$-algebra map between these completions sends $I^nD^\\wedge$ into $I^nC^\\wedge$, hence is continuous and induces maps $\\varphi_n:D/I^nD\\to C/I^nC$. For $x\\in D^\\wedge$ choose $d_n\\in D$ representing its $n$th coordinate. Then $x-\\iota_D(d_n)\\in I^nD^\\wedge$, so the $n$th coordinate of $\\varphi(x)$ equals $\\varphi_n(d_n)$. Thus $\\varphi$ is exactly the inverse limit of these quotient maps and is determined by its restriction to $D$. The same argument shows that an $A$-algebra map $u:D\\to C$ has the required completion if and only if $\\iota_Cu=\\varphi\\iota_D$.",
+   "uses": [
+    "lem-weil-pbc-module-completion-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0AKJ, interpretation of maps of completions; algebra.tex Tag 05GG (lemma-hathat-finitely-generated)."
+   }
+  },
+  {
+   "text": "Set $E=D\\otimes_A C$ and $J=IC$. A finite algebra generating list for $D$ gives the generators $d_i\\otimes1$ for $E$ over $C$, so [lem-weil-pbc-finite-type-algebra-noetherian] makes $E$ Noetherian. By [lem-weil-pbc-etale-scheme-base-change], $\\operatorname{Spec}E\\to\\operatorname{Spec}C$ is etale off $V(J)$: this is the inverse image of the given etale restriction. At level $n$, the balanced rule $d\\otimes c\\mapsto\\varphi_n(d\\bmod I^nD)(c\\bmod J^n)$ defines $E/J^nE\\to C/J^n$. These maps commute with reductions. Their inverse limit is $\\sigma:E^\\wedge\\to C^\\wedge$. It retracts the structural map $C^\\wedge\\to E^\\wedge$, coordinate by coordinate, so is a $C^\\wedge$-algebra map and is surjective. On $D$ it is $\\varphi\\iota_D$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-etale-scheme-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0AKJ, reduction (A,I,B,C,phi) to (C,IC,B tensor C,C,sigma)."
+   }
+  },
+  {
+   "text": "Apply [lem-per-completed-retraction-conormal-torsion] with $R=C$, ideal $J$ and algebra $S=E$ to get $J^c(K/K^2)=0$ for $K=\\ker\\sigma$. We need algebraization retaining the map out of $E$. Apply [lem-per-conormal-torsion-algebraization] with its base ring and its finite type algebra BOTH equal to $E$, and its ideal equal to $JE$. The identity makes $E$ finite type over itself, and $(JE)^c$ annihilates the same conormal module. It yields a finite type $E$-algebra $T$ and an $E$-algebra isomorphism $\\beta:T^\\wedge\\xrightarrow{\\sim}C^\\wedge$, where the $E$-structure on $C^\\wedge$ is $\\sigma\\iota_E$. Both completions here are for $J$. Generators for $E$ over $C$ followed by generators for $T$ over $E$ show that $T$ is finite type over $C$; [lem-weil-pbc-finite-type-algebra-noetherian] makes it Noetherian.",
+   "uses": [
+    "lem-per-completed-retraction-conormal-torsion",
+    "lem-per-conormal-torsion-algebraization",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0AKJ, conormal annihilation and application of more-algebra.tex Tag 0ALR (lemma-quotient-by-idempotent)."
+   }
+  },
+  {
+   "text": "The map $\\beta$ is $C$-linear and therefore preserves the powers of $J$. By [lem-weil-pbc-module-completion-complete], for each $n\\geq1$ it induces an isomorphism $T/J^nT\\cong C/J^n$. Its composite with the structural map $C/J^n\\to T/J^nT$ is the identity, since $\\beta$ is an $E$-algebra map and $\\sigma$ is a retraction. Consequently that structural map is itself an isomorphism. Apply [lem-weil-pbc-etale-infinitesimal-neighbourhoods] to $\\operatorname{Spec}T\\to\\operatorname{Spec}C$ and $Z=\\operatorname{Spec}(C/J)$. Both affine schemes are Noetherian and the map is finite type. Every infinitesimal restriction is an isomorphism, hence etale. We obtain an etale open $W\\subseteq\\operatorname{Spec}T$ containing $V(JT)$.",
+   "uses": [
+    "lem-weil-pbc-module-completion-complete",
+    "lem-weil-pbc-etale-infinitesimal-neighbourhoods"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0AKJ, etaleness near V(I); more-morphisms.tex Tag 0A43 (lemma-check-smoothness-on-infinitesimal-nbhds), part (2)."
+   }
+  },
+  {
+   "text": "Write the closed complement of $W$ as $V(L)$ for an ideal $L\\subseteq T$. Since $V(L)\\cap V(JT)$ is empty, $L+JT=T$. Choose $g\\in L$ with $g=1-a$, $a\\in JT$. Then $\\operatorname{Spec}T_g=D(g)\\subseteq W$. The inclusion into $W$ is open, so [lem-weil-pbc-etale-composition-cancellation], parts (1),(2), shows that $C\\to T_g$ is etale. Modulo $J^n$ the element $g$ is invertible, with inverse $1+a+\\cdots+a^{n-1}$; hence $T_g/J^nT_g=T/J^nT$. Thus localization has not changed the completion or any of the structural quotient isomorphisms. Put $F=T_g$, and retain the isomorphism $\\beta:F^\\wedge\\to C^\\wedge$. The algebra $F$ is finite type over $C$, generated by generators of $T$ and $g^{-1}$.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0AKJ, replacement by a localization without changing completion; the etale-near-closed-fibre open suffices for the henselian target specialization."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-henselization-stage-map] to the etale map $C\\to F$ with $C/J\\cong F/JF$, and the identity morphism into the henselian pair $(C,J)$. It gives a unique $C$-algebra map $\\tau:F\\to C$. By [lem-weil-pbc-module-completion-complete], $C^\\wedge$ is complete for $J$; the filtration by the extended ideal $JC^\\wedge$ has the same powers. Hence [lem-weil-pbc-complete-pair-henselian] makes $(C^\\wedge,JC^\\wedge)$ henselian. Apply the uniqueness clause of the same stage-map node with target $C^\\wedge$. Both $\\iota_C\\tau$ and $\\beta\\iota_F$ extend $\\iota_C:C\\to C^\\wedge$, and the ideal condition holds by construction. They are therefore equal. Define $u$ as the composite $D\\to E\\to T\\to F\\xrightarrow{\\tau}C$. The $E$-linearity of $\\beta$ gives $\\iota_Cu=\\sigma\\iota_E|_D=\\varphi\\iota_D$. Step 1 shows that the completion of $u$ is exactly $\\varphi$.",
+   "uses": [
+    "lem-weil-pbc-henselization-stage-map",
+    "lem-weil-pbc-module-completion-complete",
+    "lem-weil-pbc-complete-pair-henselian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0AKJ, last sentence; more-algebra.tex Tags 0A02 (lemma-henselization), final paragraph, and 0ALJ (lemma-complete-henselian)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-henselian-factorization-criterion], henselianity of $(C,J)$ implies $J\\subseteq\\operatorname{Jac}(C)$. Apply [lem-weil-pbc-krull-intersection-jacobson] to the Noetherian ring $C$ and the finite module $M=C$, generated by $1$. It gives $\\bigcap_{n\\geq1}J^n=0$, so $\\iota_C:C\\to C^\\wedge$ is injective: its kernel consists exactly of elements lying in all these powers. If $u,v:D\\to C$ have the specified completion, Step 1 gives $\\iota_Cu=\\varphi\\iota_D=\\iota_Cv$; injectivity gives $u(d)=v(d)$ for each $d$. This proves uniqueness and completes both formulations of the statement.",
+   "uses": [
+    "lem-weil-pbc-henselian-factorization-criterion",
+    "lem-weil-pbc-krull-intersection-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/restricted.tex",
+    "place": "Tag 0AKJ, uniqueness paragraph; more-algebra.tex Tag 09XI and algebra.tex Tag 00IQ."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-per-completed-retraction-conormal-torsion",
+  "lem-per-conormal-torsion-algebraization",
+  "lem-weil-pbc-etale-infinitesimal-neighbourhoods",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-henselization-stage-map",
+  "lem-weil-pbc-complete-pair-henselian",
+  "lem-weil-pbc-henselian-factorization-criterion",
+  "lem-weil-pbc-krull-intersection-jacobson"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/restricted.tex",
+  "place": "Tag 0AKJ (lemma-fully-faithful-etale-over-complement); specialized henselian target. The etale-near-closed-fibre open is localized directly, since global etaleness away from V(I) of the algebraized section is unnecessary for this specialization."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,10 +147,38 @@
    "results": "[grep] OK 0 hit(s)\nSearched Mathlib/RingTheory",
    "date": "2026-10-19",
    "verdict": "no match: the hits concern ordinary etale algebras, formal smoothness, cotangent definitions or completeness; none states this completion/algebraization or henselian lifting theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An algebra homomorphism between adic completions of a finite type algebra etale away from an ideal and a henselian Noetherian target lifts uniquely to the original target",
+   "results": "OK 8 hits; IsAdicComplete.liftAlgHom, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, AdicCompletion.liftAlgHom, IsAdicComplete.mk_liftAlgHom, IsAdicComplete.algHom_ext, AdicCompletion.evalₐ_liftAlgHom, AdicCompletion.evalOneₐ_liftAlgHom",
+   "date": "2026-10-19",
+   "verdict": "no match: completion universal properties, formal smooth lifting and ordinary cotangent constructions do not give the bounded conormal torsion of a completed section of an algebra etale away from an ideal"
+  },
+  {
+   "tool": "grep",
+   "query": "hensel.*hom|hom.*hensel|completion.*[eE]tale|[eE]tale.*completion",
+   "results": "OK 0 hits; ; Mathlib/RingTheory",
+   "date": "2026-10-19",
+   "verdict": "no match: completion universal properties, formal smooth lifting and ordinary cotangent constructions do not give the bounded conormal torsion of a completed section of an algebra etale away from an ideal"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Full faithfulness of completion for algebras etale outside a closed subset over a henselian Noetherian pair",
+   "results": "OK 8 hits; AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful, AdicCompletion.ofAlgEquiv, Algebra.FormallySmooth.exists_kerProj_comp_eq_id, AdicCompletion.instAlgebra, Algebra.FormallyEtale.comp, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, AdicCompletion.mkₐ, Algebra.Etale.formallyEtale",
+   "date": "2026-10-19",
+   "verdict": "no match: completion universal properties, formal smooth lifting and ordinary cotangent constructions do not give the bounded conormal torsion of a completed section of an algebra etale away from an ideal"
+  },
+  {
+   "tool": "loogle",
+   "query": "HenselianRing, AlgHom",
+   "results": "OK 0 hits; ",
+   "date": "2026-10-19",
+   "verdict": "no match: completion universal properties, formal smooth lifting and ordinary cotangent constructions do not give the bounded conormal torsion of a completed section of an algebra etale away from an ideal"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-elkik-finite-etale-away-completion",
@@ -73,5 +202,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-etale-away-completion-hom-lifting",
+  "worker": "stage1",
+  "summary": "Kept the statement. Constructed the completed section after tensor base change, extracted only its conormal-torsion input, algebraized with base E to retain E-linearity, localized the etale neighbourhood of the full closed fibre, and lifted its section into C. Verified equality with the specified completed map by henselian stage uniqueness and uniqueness in C by Krull intersection. One new statement-only node; no Mathlib match or Lean attachment.",
+  "blueprint": "Current split of the blueprint ancestor lem-per-artin-gabber-affine-curve, Step 1: the dimension-normalized Verdier duality input, through lem-per-qbar-arbitrary-field-duality and its finite-coefficient local-duality construction; this item's partial algebraization is used in Step 4 of lem-per-gabber-local-duality-general. Supporting input: Elkik equivalence for finite algebras etale away from the completion ideal; The generic homomorphism-lifting input; the source is only finite type and the target need not be finite or etale.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-completion-complete",
+    "why": "Generic The adic completion of a module along a finitely generated ideal is complete, with quotients M/I^nM used in the completion/section argument; the perverse Fourier unit does not itself supply this commutative-algebra or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Generic Finitely generated algebras over Noetherian rings are Noetherian used in the completion/section argument; the perverse Fourier unit does not itself supply this commutative-algebra or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "Generic Base change of an etale morphism of schemes is etale (Stacks 02GO) used in the completion/section argument; the perverse Fourier unit does not itself supply this commutative-algebra or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-infinitesimal-neighbourhoods",
+    "why": "Generic Etaleness along a closed subscheme from its infinitesimal neighbourhoods used in the completion/section argument; the perverse Fourier unit does not itself supply this commutative-algebra or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Generic Open immersions are etale; etale morphisms compose and cancel used in the completion/section argument; the perverse Fourier unit does not itself supply this commutative-algebra or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-henselization-stage-map",
+    "why": "Generic Unique extension from a single étale henselization stage used in the completion/section argument; the perverse Fourier unit does not itself supply this commutative-algebra or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-complete-pair-henselian",
+    "why": "Generic A complete pair is henselian used in the completion/section argument; the perverse Fourier unit does not itself supply this commutative-algebra or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-factorization-criterion",
+    "why": "Generic Factorization criterion for henselian pairs used in the completion/section argument; the perverse Fourier unit does not itself supply this commutative-algebra or scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-krull-intersection-jacobson",
+    "why": "Generic Krull intersection theorem for an ideal in the Jacobson radical used in the completion/section argument; the perverse Fourier unit does not itself supply this commutative-algebra or scheme-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-completion-complete",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-infinitesimal-neighbourhoods",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-henselization-stage-map",
+  "lem-weil-pbc-complete-pair-henselian",
+  "lem-weil-pbc-henselian-factorization-criterion",
+  "lem-weil-pbc-krull-intersection-jacobson"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q53-7f49898dc",
+  "group": "Q53",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-7f49898dc (reviewer sub-agent of L); spot-checked: I read the whole delivery and wrote no fixes; the full checks are in review.md. Source: I read Stacks 0AKJ (restricted.tex 1847-1907) and 0ALQ (1764-1805). The item is 0AKJ with a henselian target (C^h=C), with the same hypotheses; its statement was not changed. Step 1: by 05GG, phi is continuous and equals lim phi_n. Step 2: sigma on (D⊗C)^ is a retraction; 00FN gives Noetherian and 02GO gives etale off V(IC). Step 3: the new conormal-torsion node applies (R=C, S=E). The 0ALR node is applied with base = algebra = E, so beta: T^ ≅ C^ is an E-algebra iso; this keeps the map out of D. Step 4: beta is C-linear, so T/J^nT ≅ C/J^n via the structural map, and 0A43(2) gives an etale open W containing V(JT). Step 5: I checked the departure from the source. g ∈ L with g−1 ∈ JT, D(g) ⊂ W, and the inverse of g mod J^n is the geometric sum. This correctly replaces the 0ALQ(2) localization. Step 6: the single-stage map node is applied to C and to C^ (henselian by 0ALJ). Uniqueness gives iota_C tau = beta iota_F, so iota_C u = phi iota_D. Step 7: 09XI gives J ⊆ Jac(C), and 00IQ gives iota_C injective, which proves uniqueness. New node lem-per-completed-retraction-conormal-torsion: I checked it is true independently (K/K^2 ≅ completed Omega_{S/R} ⊗ R^, and Omega_{S/R} is finite and supported in V(J)). I tested it on S=R, J=0, J=R, J nilpotent, k[t][x]/(x(x−t)) (c=1) and a case with no retraction (vacuous). It does not restate a clause of the item. I grepped for 0ALQ, 0ALM, 0AKJ and conormal and found no duplicate; the Jacobian-torsion and algebraization nodes differ. B1-B9 hold, all three kinds of Mathlib search are recorded, and the blueprint from/via are correct. I accept the declared tool_uses: generic Stacks commutative-algebra and etale tools. No SGA. One advisory: the stage-map node says 'etale ring map' while Step 5 gives an etale affine morphism. The two agree by the 02GI definition (one line via Mathlib HasRingHomProperty), as used throughout the DAG, so I do not count it as a fault."
  }
 }
