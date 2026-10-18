@@ -24,70 +24,64 @@
  ],
  "proof": [
   {
-   "text": "Fix a point x of X at which f is quasi-finite. By [pqf-def-quasifinite] (1), choose affine opens U = Spec(B) containing x and V = Spec(A) containing f(U), such that the induced finite-type ring map A \\to B is quasi-finite at the prime q of B corresponding to x.",
+   "text": "At a point x where f is quasi-finite, unpack Definition 01TD to obtain affine opens U containing x and V with f(U) contained in V. The induced ring map on sections is finite type and quasi-finite at primeIdealOf(x).",
    "uses": [
     "pqf-def-quasifinite"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01TI, proof using Definition 01TD (1)"
+    "place": "Tag 01TI, first two sentences of proof"
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-ring-quasi-finite-locus-open] to A \\to B and q. It gives an element g in B not contained in q such that A \\to B_g is quasi-finite at every prime of B_g.",
+   "text": "Use the openness assertion of the finite-type ring-map quasi-finite locus theorem for the affine pair. Its image under the canonical open immersion fromSpec is open in X. The identities range_fromSpec and fromSpec_primeIdealOf, together with injectivity of the chart, show that this open contains x and every point in it is quasi-finite for f using the original affine pair. Thus every point of the locus has an open neighbourhood contained in the locus, proving openness.",
    "uses": [
-    "lem-weil-pbc-ring-quasi-finite-locus-open"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00QA, lemma-quasi-finite-open"
-   }
-  },
-  {
-   "text": "The basic open D(g) of Spec(B) is an affine open neighbourhood of x, with coordinate ring B_g; viewed as an open subscheme U_g of X, its canonical affine immersion is an open neighbourhood of x by [lem-weil-pbc-affine-open-spec-points], and f(U_g) is contained in V. The induced map on this affine open and V is A \\to B_g, which is of finite type since A \\to B is and B_g = B[1/g]; so every point of U_g is quasi-finite for f by [pqf-def-quasifinite] (1) and step 2.",
-   "uses": [
+    "lem-weil-pbc-ring-quasi-finite-locus-open",
     "lem-weil-pbc-affine-open-spec-points",
-    "pqf-def-quasifinite",
-    "lem-weil-pbc-ring-quasi-finite-locus-open"
+    "pqf-def-quasifinite"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01TI, proof after Tag 00QA"
+    "place": "Tag 01TI, proof using Algebra Tag 00QA directly in Spec(A)"
    }
   },
   {
-   "text": "Every point of the quasi-finite locus has such an open neighbourhood U_g, while each U_g consists entirely of quasi-finite points. Therefore the locus is the union of these open subsets and is open in X.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01TI, conclusion of the proof"
-   }
-  },
-  {
-   "text": "Let U be the open locus of step 4 and x a point of U. The affine open U_g of step 3 around x lies in U, so U_g and V, with the finite-type ring map A \\to B_g quasi-finite at the prime of x (step 2), witness [pqf-def-quasifinite] (1) for the induced morphism U \\to S at x. Hence U \\to S is quasi-finite at every point of U, i.e. locally quasi-finite by [pqf-def-quasifinite] (2).",
+   "text": "Let T be this open locus. The induced morphism T -> S is locally of finite type. For x in T choose its finite-type affine pair U,V from Definition 01TD. Restrict U -> V to the open inverse image of U in T. This restricted map is an open immersion followed by U -> V, so is locally of finite type. Mathlib arrowResLEAppIso transports finite type of the ring map to U -> V, and the pointwise restriction criterion for locally finite type finishes.",
    "uses": [
     "pqf-def-quasifinite"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01TI, final assertion"
+    "place": "Tag 01TI, final assertion, with the local finite-type part of Definition 01TD"
+   }
+  },
+  {
+   "text": "The affine quasi-finiteness witness at x gives Mathlib quasi-finiteness of the stalk map: identify the fibre-ring singleton with the singleton in the topological affine fibre, use Algebra.QuasiFiniteAt.of_isOpen_singleton_fiber, and identify the stalk map with the map between prime localizations using arrowStalkMapIso. Cancel the source localization map using RingHom.QuasiFinite.of_comp. Transfer this stalk-map predicate across the open immersion T -> X. Since T -> S is locally of finite type by the previous step, Mathlib quasiFiniteAt_iff_isOpen_singleton_asFiber gives an isolated fibre point. Choose affine source and target neighbourhoods in T and S and apply the isolated-fibre-point affine-pair theorem to obtain the finite-type quasi-finite ring map required by Definition 01TD. This proves local quasi-finiteness of T -> S.",
+   "uses": [
+    "pqf-def-quasifinite",
+    "lem-weil-pbc-affine-open-spec-points",
+    "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01TI, final assertion; Tag 01TH, isolated-fibre characterization"
    }
   }
  ],
  "proof_deps": [
   "pqf-def-quasifinite",
   "lem-weil-pbc-ring-quasi-finite-locus-open",
-  "lem-weil-pbc-affine-open-spec-points"
+  "lem-weil-pbc-affine-open-spec-points",
+  "lem-weil-pbc-isolated-fibre-point-quasi-finite-affine-pairs"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tag 01TI, lemma-quasi-finite-points-open"
+  "place": "Tag 01TI, lemma-quasi-finite-points-open; final assertion expanded using Tag 01TH and Mathlib stalk-map and local finite-type APIs"
  },
  "mathlib_searches": [
   {
@@ -181,5 +175,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z8",
+  "result": "pass",
+  "landing": "20261018T062958-L-695575",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
