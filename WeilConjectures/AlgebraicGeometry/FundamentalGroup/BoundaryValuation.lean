@@ -75,13 +75,16 @@ instance : IsFractionRing Γ(C, c.W) C.functionField :=
 
 instance : c.ideal.IsMaximal := c.isMaximal_ideal
 
-include c in
+omit [IsAlgClosed k] [SmoothOfRelativeDimension 1 p] [Smooth p] [ConnectedSpace C]
+  [ConnectedSpace U] [IsLocallyNoetherian C] in
 /-- A boundary point with a chart is closed. -/
 lemma isClosed_singleton (hz : z ∉ Set.range j.base) : IsClosed ({z} : Set C) := by
   obtain ⟨u₀⟩ := (inferInstance : Nonempty U)
   exact j.isOpenEmbedding.isOpen_range.isClosed_singleton_of_mem_compl
     (IsCurve.krullDim_le_one (f := p)) ⟨_, u₀, rfl⟩ hz
 
+omit [IsAlgClosed k] [SmoothOfRelativeDimension 1 p] [ConnectedSpace U] [IsIntegral C]
+  [IsLocallyNoetherian C] in
 lemma ideal_ne_bot (hz : z ∉ Set.range j.base) : c.ideal ≠ ⊥ := fun h ↦
   c.ϖ_ne_zero hz (by simpa [h] using c.ϖ_mem)
 
@@ -92,7 +95,8 @@ lemma isAlgClosed_residueField (hz : z ∉ Set.range j.base) : IsAlgClosed c.ide
     TopCat.Presheaf.algebra_section_stalk C.presheaf z'
   have hloc : IsLocalization.AtPrime (C.presheaf.stalk z) c.ideal :=
     c.isAffineOpen.isLocalization_stalk z'
-  have := Scheme.isAlgClosed_residueField_of_isClosed p z (c.isClosed_singleton hz)
+  have := Scheme.isAlgClosed_residueField_of_isClosed p z
+    (BoundaryChart.isClosed_singleton (p := p) (j := j) (z := z) hz)
   let e₁ : Γ(C, c.W) ⧸ c.ideal ≃+* C.residueField z :=
     IsLocalization.AtPrime.equivQuotMaximalIdeal c.ideal (C.presheaf.stalk z)
   let e₀ : Γ(C, c.W) ⧸ c.ideal ≃+* c.ideal.ResidueField :=
@@ -110,7 +114,8 @@ set_option maxHeartbeats 400000 in
 `exp (- ord_z f)`. -/
 lemma valuation_eq_exp_neg_ord (hz : z ∉ Set.range j.base) {f : C.functionField} (hf : f ≠ 0) :
     (c.heightOneSpectrum hz).valuation C.functionField f = WithZero.exp (-C.ord f z) := by
-  have hcoh := coheight_eq_one_of_isClosed p (c.isClosed_singleton hz)
+  have hcoh := coheight_eq_one_of_isClosed p
+    (BoundaryChart.isClosed_singleton (p := p) (j := j) (z := z) hz)
   have := isDiscreteValuationRing_stalk_of_coheight_eq_one p hcoh
   let z' : c.W := ⟨z, c.mem⟩
   let _ : Algebra Γ(C, c.W) (C.presheaf.stalk z) :=
@@ -206,6 +211,7 @@ set_option synthInstance.maxHeartbeats 200000 in
 -- instance search through `SeparableClosure` and its integral closures is slow
 /-- **Inertia fixes `N`-th roots of units.** The inertia group of a point over the boundary point
 `z` fixes every `N`-th root in `Ω` of a unit of the local ring at `z`, for `N` invertible in
+omit [SmoothOfRelativeDimension 1 p] [ConnectedSpace U] [IsLocallyNoetherian C] in
 `k`. -/
 theorem inertia_apply_eq_of_pow_eq (Q : Ideal (integralClosure Γ(C, c.W) Ω)) [Q.IsMaximal]
     [Q.LiesOver c.ideal] {σ : Gal(Ω/C.functionField)}
@@ -284,7 +290,8 @@ theorem inertia_apply_eq_of_dvd_ord (hz : z ∉ Set.range j.base)
     {σ : Gal(Ω/C.functionField)} (hσ : σ ∈ Q.inertia Gal(Ω/C.functionField)) {N : ℕ} [NeZero N]
     (hN : (N : k) ≠ 0) {x : Ω} {f : C.functionField} (hf0 : f ≠ 0)
     (hf : algebraMap _ Ω f = x ^ N) (hdvd : (N : ℤ) ∣ C.ord f z) : σ x = x := by
-  have hcoh := coheight_eq_one_of_isClosed p (c.isClosed_singleton hz)
+  have hcoh := coheight_eq_one_of_isClosed p
+    (BoundaryChart.isClosed_singleton (p := p) (j := j) (z := z) hz)
   have := isDiscreteValuationRing_stalk_of_coheight_eq_one p hcoh
   obtain ⟨π, hπ⟩ := IsDiscreteValuationRing.exists_irreducible (C.presheaf.stalk z)
   obtain ⟨u, a, rfl⟩ := IsDiscreteValuationRing.exists_eq_algebraMap_mul_zpow hπ hf0

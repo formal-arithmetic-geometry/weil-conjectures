@@ -80,7 +80,7 @@ lemma exists_geometricFiberPointOfFinitePoint_comp_geometricFiberProj (x : X.fin
       ι.hom.comp (f.residueFieldAlgebraMap x.1) = algebraMap k _ ∧
       f.geometricFiberPointOfFinitePoint x ≫ f.geometricFiberProj =
         Spec.map ι ≫ X.fromSpecResidueField x.1 := by
-  letI := (f.residueFieldAlgebraMap x.1).toAlgebra
+  let := (f.residueFieldAlgebraMap x.1).toAlgebra
   have : Finite (X.residueField x.1) := X.mem_finitePoints.1 x.2
   have : Module.Finite k (X.residueField x.1) := Module.Finite.of_finite
   exact ⟨CommRingCat.ofHom
@@ -222,8 +222,8 @@ theorem exists_algebraicClosure_inertiaInvariants (ε₀ : AlgebraicClosure k₀
   have := hW.finite_quotient_primeIdealOf x hxW
   -- the `k₀`-structures
   set φ₀ := sectionsStructHom (k₀ := k₀) hW
-  letI : Algebra k₀ Ω := ((algebraMap Γ(C, W) Ω).comp φ₀).toAlgebra
-  letI : Algebra k₀ Γ(C, W) := φ₀.toAlgebra
+  let : Algebra k₀ Ω := ((algebraMap Γ(C, W) Ω).comp φ₀).toAlgebra
+  let : Algebra k₀ Γ(C, W) := φ₀.toAlgebra
   have : IsScalarTower k₀ Γ(C, W) Ω := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
   let ε₀A : AlgebraicClosure k₀ →ₐ[k₀] Ω :=
     { ε₀ with commutes' := fun c ↦ RingHom.congr_fun hε₀ c }
@@ -301,6 +301,7 @@ lemma algebraMap_inertiaInvariants_mem_nonunits_iff [Q.IsMaximal] (a : Γ(C, W))
   rw [Ideal.over_def Q m] at ham
   exact hu' ham
 
+omit hW in
 omit [Finite k₀] [C.Over (Spec (.of k₀))] [IsDedekindDomain Γ(C, W)] [IsGalois C.functionField Ω]
   [IsSepClosed Ω] [Q.LiesOver (hW.primeIdealOf ⟨x.1, hxW⟩).asIdeal] in
 /-- An element of `B_Q^{I_Q}` whose image in `Ω` lies in `Q` is a nonunit. -/
@@ -366,6 +367,7 @@ noncomputable abbrev specInertiaInvariantsToGeometricFiber
       (C ↘ Spec (.of k₀)).geometricFiber :=
   pullback.lift _ _ hε
 
+omit [IsSepClosed Ω] in
 include x hxW in
 /-- The neighbourhood `Spec B_Q^{I_Q} ⟶ C̄` is weakly étale. -/
 lemma weaklyEtale_specInertiaInvariantsToGeometricFiber
@@ -388,6 +390,7 @@ lemma weaklyEtale_specInertiaInvariantsToGeometricFiber
     infer_instance
   exact WeaklyEtale.of_comp _ (C ↘ Spec (.of k₀)).geometricFiberProj
 
+omit [IsIntegral C] in
 omit [Finite k₀] [IsDedekindDomain Γ(C, W)] [Nonempty W] [IsGalois C.functionField Ω]
   [IsSepClosed Ω] [Q.LiesOver (hW.primeIdealOf ⟨x.1, hxW⟩).asIdeal] in
 /-- The structure map of the residue field at `x ∈ W` factors through `Γ(C, W)`. -/
@@ -406,6 +409,7 @@ lemma residueFieldAlgebraMap_eq_comp :
 omit [IsDedekindDomain Γ(C, W)] in
 /-- **The embedding of the residue field induced by a point over `x`.** For an embedding
 `ε₀ : k̄ ↪ Ω` over `k₀` and a maximal ideal `Q` over `x`, there is a `k₀`-embedding
+omit [Finite k₀] in
 `ι₀ : κ(x) ↪ k̄` such that `ε₀(ι₀(ā)) ≡ a mod Q` for `a ∈ Γ(C, W)`. -/
 theorem exists_residueField_emb_compatible (ε₀ : AlgebraicClosure k₀ →+* Ω)
     (hε₀ : ε₀.comp (algebraMap k₀ (AlgebraicClosure k₀)) =
@@ -464,8 +468,8 @@ theorem exists_residueField_emb_compatible (ε₀ : AlgebraicClosure k₀ →+* 
     have hd : ¬ IsUnit
         (ε c - algebraMap Γ(C, W) (Ideal.inertiaInvariants C.functionField Q) a) := by
       rw [← hr, map_sub, show r (ε c) = c from RingHom.congr_fun hrε c, hc, sub_self]
-    letI : Algebra k₀ Γ(C, W) := (sectionsStructHom (k₀ := k₀) hW).toAlgebra
-    letI : Algebra k₀ Ω := ((algebraMap Γ(C, W) Ω).comp (sectionsStructHom (k₀ := k₀) hW)).toAlgebra
+    let : Algebra k₀ Γ(C, W) := (sectionsStructHom (k₀ := k₀) hW).toAlgebra
+    let : Algebra k₀ Ω := ((algebraMap Γ(C, W) Ω).comp (sectionsStructHom (k₀ := k₀) hW)).toAlgebra
     have : IsScalarTower k₀ Γ(C, W) Ω := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
     let eK : AlgebraicClosure k₀ →ₐ[k₀] Ω :=
       { toRingHom := ε₀, commutes' := RingHom.congr_fun hε₀ }

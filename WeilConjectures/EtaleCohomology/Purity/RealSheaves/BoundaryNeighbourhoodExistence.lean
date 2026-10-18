@@ -54,7 +54,7 @@ theorem isDomain_sections_tensorProduct {W : C.Opens} (hW : IsAffineOpen W) [Non
     (F : Type u) [Field F] [Algebra K F] :
     letI := (sectionsStructHom (k₀ := K) hW).toAlgebra
     IsDomain (Γ(C, W) ⊗[K] F) := by
-  letI := (sectionsStructHom (k₀ := K) hW).toAlgebra
+  let := (sectionsStructHom (k₀ := K) hW).toAlgebra
   set iC := C ↘ Spec (.of K)
   set f := Spec.map (CommRingCat.ofHom (algebraMap K F))
   have : ConnectedSpace ↥(pullback iC f) :=
@@ -86,8 +86,8 @@ theorem exists_galois_genericEmb_finset {W : C.Opens} (hW : IsAffineOpen W) [Non
     ∃ σ : Gal(Ω/C.functionField), ∀ y ∈ S,
       σ (genericEmb (U ↘ Spec (.of K)) j y) = genericEmb (U ↘ Spec (.of K)) j (Φ y) := by
   classical
-  letI : Algebra K Γ(C, W) := (sectionsStructHom (k₀ := K) hW).toAlgebra
-  letI : Algebra K Ω := ((algebraMap Γ(C, W) Ω).comp (sectionsStructHom (k₀ := K) hW)).toAlgebra
+  let : Algebra K Γ(C, W) := (sectionsStructHom (k₀ := K) hW).toAlgebra
+  let : Algebra K Ω := ((algebraMap Γ(C, W) Ω).comp (sectionsStructHom (k₀ := K) hW)).toAlgebra
   have : IsScalarTower K Γ(C, W) Ω := IsScalarTower.of_algebraMap_eq fun _ ↦ rfl
   have : IsFractionRing Γ(C, W) C.functionField :=
     functionField_isFractionRing_of_isAffineOpen C W hW
@@ -212,14 +212,14 @@ geometric generic point. -/
 lemma exists_genericEmb_eq_of_isIntegral {z : Ω}
     (hz : letI := (genericStructHom (U ↘ Spec (.of K)) j).toAlgebra; _root_.IsIntegral K z) :
     ∃ c, genericEmb (U ↘ Spec (.of K)) j c = z := by
-  letI := (genericStructHom (U ↘ Spec (.of K)) j).toAlgebra
+  let := (genericStructHom (U ↘ Spec (.of K)) j).toAlgebra
   let eK : AlgebraicClosure K →ₐ[K] Ω :=
     { toRingHom := genericEmb (U ↘ Spec (.of K)) j, commutes' := genericEmb_algebraMap j }
   let E := integralClosure K Ω
   let ε : AlgebraicClosure K →+* E :=
     eK.toRingHom.codRestrict E fun c ↦ (Algebra.IsIntegral.isIntegral (R := K) c).map eK
   have hint : ε.IsIntegral := by
-    letI := ε.toAlgebra
+    let := ε.toAlgebra
     have : IsScalarTower K (AlgebraicClosure K) E := IsScalarTower.of_algebraMap_eq fun c ↦
       Subtype.ext (genericEmb_algebraMap j c).symm
     intro e
@@ -290,7 +290,7 @@ theorem mem_weilGroup_of_forall_genericEmb (σ : Gal(Ω/C.functionField)) (n : �
     geometricFrobenius_pow_path, geometricFrobenius_pow_constantCoverPoint]
   congr 1
   refine constantCoverPoint_congr j A (RingHom.ext fun a ↦ ?_) _ _
-  letI := (genericStructHom (U ↘ Spec (.of K)) j).toAlgebra
+  let := (genericStructHom (U ↘ Spec (.of K)) j).toAlgebra
   let ψK : A.1 →ₐ[K] Ω := { toRingHom := ψ, commutes' := RingHom.congr_fun hψ }
   set b := ((A.frobenius.symm ^ n : A.1 ≃ₐ[K] A.1)) a
   have hab : a = b ^ (Nat.card K ^ n) := by
@@ -353,7 +353,7 @@ theorem exists_boundaryNeighbourhood_conj (z : ↥((Set.range j.base)ᶜ)) (x : 
   obtain ⟨i, hi⟩ := FiniteField.exists_apply_eq_pow_card_pow_of_comp_eq
     ((C ↘ Spec (.of K)).residueFieldAlgebraMap x)
     (hι₀k.trans (Scheme.Hom.geometricFiberPointEmb_comp_residueFieldAlgebraMap _ ⟨x, hxf⟩).symm)
-  letI := ((C ↘ Spec (.of K)).residueFieldAlgebraMap x).toAlgebra
+  let := ((C ↘ Spec (.of K)).residueFieldAlgebraMap x).toAlgebra
   have : Module.Finite K (C.residueField x) := Module.Finite.of_finite
   have hE : Nat.card (C.residueField x) =
       Fintype.card K ^ Module.finrank K (C.residueField x) := by

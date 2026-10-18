@@ -193,6 +193,7 @@ point: `ι(ι_x(ā)) ≡ a mod Q` for `a ∈ Γ(C, W)`, where `ι : k̄ ↪ Ω` 
 `ι_x : κ(x) ↪ k̄` the embedding of `x̄`. Let `σ_F` be an element of the decomposition group of
 `Q` acting on `ι(k̄)` as the `deg x`-th power of the geometric Frobenius. Then the inertia
 invariants `B_Q^{I_Q}` give a strictly henselian neighbourhood of the boundary point for the
+omit [GeometricallyConnected (C ↘ Spec (CommRingCat.of K))] in
 inertia group of `Q` and `σ_F`. (blueprint `lem-wf-boundary-stalk-invariants`) -/
 theorem nonempty_boundaryNeighbourhood_of_compatible {z : C} (hz : z ∉ Set.range j.base)
     (c : BoundaryChart (C ↘ Spec (.of K)) j z) (x : C.finitePoints) (hx : x.1 = z)
