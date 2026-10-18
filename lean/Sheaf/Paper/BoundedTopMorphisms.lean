@@ -5,6 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
+import Mathlib.Algebra.Homology.SingleHomology
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-! # Chain representatives for morphisms out of the top degree
