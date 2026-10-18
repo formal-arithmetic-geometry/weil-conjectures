@@ -17,7 +17,6 @@ evaluation (`AlgebraicGeometry.ProEtale.uncurryHom_ihomStr`,
 `AlgebraicGeometry.ProEtale.ihomStr_tensorHom_comp_evaluation`). These are the inputs for the
 compatibility of the comparison `j^* 𝓗om(G, ℚ̄_ℓ) ⟶ 𝓗om(j^* G, ℚ̄_ℓ)` with Weil structures.
 -/
--/
 
 @[expose] public section
 
