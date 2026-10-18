@@ -4,17 +4,12 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **1259**, closure **283**, holes in definitions **13**, definitions with undetermined data **28** (closure **8**).
+Holes now: library **740**, closure **145**, holes in definitions **8**, definitions with undetermined data **8** (closure **3**).
 
 Definitions with holes (def/instance/structure field):
 
-- `Sheaf.AlgebraicGeometry.TruncationExchangeCouple::CategoryTheory.TruncationExchange.couple` (def, line 346)
-- `Sheaf.CategoryTheory.FilteredHomologyExactCouple::CategoryTheory.filteredHomologyEIso` (def, line 36)
-- `Sheaf.CategoryTheory.FilteredHomologyExactCouple::CategoryTheory.filteredHomologyExactCouple` (def, line 29)
-- `WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization::AlgebraicGeometry.ProEtale.isLocalization_boundedConstructibleExtendScalars` (instance, line 175)
-- `WeilConjectures.SixFunctors.Etale.Derived.UpperShriek::AlgebraicGeometry.Etale.hasBoundedBelowUpperShriek` (instance, line 177)
-- `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible::AlgebraicGeometry.ProEtale.CondensedRing.isMonoidalClosed_boundedConstructible` (instance, line 438)
-- `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible::AlgebraicGeometry.ProEtale.CondensedRing.isMonoidal_boundedConstructible` (instance, line 429)
+- `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible::AlgebraicGeometry.ProEtale.CondensedRing.isMonoidalClosed_boundedConstructible` (instance, line 457)
+- `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible::AlgebraicGeometry.ProEtale.CondensedRing.isMonoidal_boundedConstructible` (instance, line 448)
 - `WeilConjectures.TraceFormula.Slop.Basic::AlgebraicGeometry.ProEtale.CondensedRing.Slop.boundedConstructibleLowerShriekComp` (def, line 144)
 - `WeilConjectures.TraceFormula.Slop.Basic::AlgebraicGeometry.ProEtale.CondensedRing.Slop.unitEndRingEquiv` (def, line 160)
 - `WeilConjectures.TraceFormula.Slop.Correspondence::AlgebraicGeometry.ProEtale.CondensedRing.Slop.Correspondence.traceClass` (def, line 206)
@@ -24,139 +19,218 @@ Definitions with holes (def/instance/structure field):
 
 Definitions with undetermined data (class-1 exceptions in `coord/hollow-definitions.md`):
 
-- `Sheaf.AlgebraicGeometry.CanonicalCoherentEtaleComparison::AlgebraicGeometry.Scheme.Modules.normalizedCoherentEtaleComparison` (line 130), chosen from `AlgebraicGeometry.Scheme.Modules.exists_unique_normalizedCoherentEtaleComparison`
-- `Sheaf.AlgebraicGeometry.EtaleModuleStalkSpecialization::AlgebraicGeometry.Scheme.etaleModuleStalkSpecialization` (line 81), chosen from `AlgebraicGeometry.Scheme.existsUnique_etaleModuleStalkSpecialization`
-- `Sheaf.AlgebraicGeometry.LocalAcyclicityAbelianSheaf::AlgebraicGeometry.Etale.localAcyclicityStrictMap` (line 54), chosen from `AlgebraicGeometry.Etale.existsUnique_localAcyclicityStrictMap`
-- `Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction::AlgebraicGeometry.Scheme.proEtaleRingRestrictionDerivedDirectImage` (line 222), chosen from `AlgebraicGeometry.Scheme.proEtaleRingRestrictionDerivedDirectImage_existsUnique`
-- `Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction::AlgebraicGeometry.Scheme.proEtaleRingRestrictionDirectImage` (line 103), chosen from `AlgebraicGeometry.Scheme.proEtaleRingRestrictionDirectImage_existsUnique`
-- `Sheaf.AlgebraicGeometry.ProperOpenComparison::AlgebraicGeometry.Etale.properOpenIdentification` (line 67), chosen from `AlgebraicGeometry.Etale.clopenSectionDirectImage`
-- `Sheaf.AlgebraicGeometry.RelativeProjectiveSpace::AlgebraicGeometry.RelativeProjectiveSpace.affinePolynomialEquiv` (line 193), chosen from `AlgebraicGeometry.RelativeProjectiveSpace.existsUnique_affinePolynomialEquiv`
-- `Sheaf.AlgebraicGeometry.RelativeProjectiveSpace::AlgebraicGeometry.RelativeProjectiveSpace.algebra` (line 140), chosen from `AlgebraicGeometry.RelativeProjectiveSpace.existsUnique_symmetricInput`
-- `Sheaf.AlgebraicGeometry.RelativeProjectiveSpace::AlgebraicGeometry.RelativeProjectiveSpace.construction` (line 145), chosen from `AlgebraicGeometry.exists_relativeProjData`
-- `Sheaf.AlgebraicGeometry.StrictHenselizationCanonicalMap::AlgebraicGeometry.Scheme.strictHenselizationMap` (line 48), chosen from `AlgebraicGeometry.Scheme.strictHenselizationMap_existsUnique`
-- `Sheaf.CategoryTheory.ScalarLocalization::CategoryTheory.ScalarLocalization.composition` (line 47), chosen from `CategoryTheory.exists_linear_scalarLocalization_category`
-- `Sheaf.Paper.CompleteCoefficientDatum::AlgebraicGeometry.Scheme.adicBalanceHom` (line 202), chosen from `AlgebraicGeometry.Scheme.adicBalance_exists`
-- `Sheaf.Paper.CompleteCoefficientDatum::AlgebraicGeometry.Scheme.adicTransitionComplex` (line 331), chosen from `AlgebraicGeometry.Scheme.adicTransitionComplex_exists`
-- `Sheaf.Paper.CompleteCoefficientDatum::AlgebraicGeometry.Scheme.adicUnitHom` (line 495), chosen from `AlgebraicGeometry.Scheme.adicUnit_exists`
-- `Sheaf.Paper.CompletionMap::AlgebraicGeometry.Scheme.adicCompletionTowerMap` (line 250), chosen from `AlgebraicGeometry.Scheme.adicCompletionTowerMap_exists`
-- `Sheaf.Paper.CompletionMap::AlgebraicGeometry.Scheme.adicReductionAugmentation` (line 64), chosen from `AlgebraicGeometry.Scheme.adicReductionAugmentation_exists`
-- `Sheaf.Paper.ExtendedLocalizationCech::SheafOfModules.LocalizationCech.unitMap` (line 190), chosen from `SheafOfModules.LocalizationCech.unitMap_existsUnique`
-- `Sheaf.Paper.FiniteFieldFiber::WeilConjectures.FiniteFieldDatum.extensionEmbedding` (line 87), chosen from `FiniteField.exists_unique_subfield_of_closure`
-- `Sheaf.Paper.FiniteFieldFiber::WeilConjectures.FiniteFieldDatum.extensionSubfield` (line 77), chosen from `FiniteField.exists_unique_subfield_of_closure`
+- `Sheaf.AlgebraicGeometry.RelativeProjectiveSpace::AlgebraicGeometry.RelativeProjectiveSpace.construction` (line 793), chosen from `AlgebraicGeometry.exists_relativeProjData`
+- `Sheaf.CategoryTheory.RingedSiteLocalizationCech::CategoryTheory.localization_fraction_iso` (line 68), chosen from `ModuleCat.localization_away_colimit`
 - `Sheaf.Paper.IntegralReductionTowerWellDefined::WeilConjectures.integralTowerTransition` (line 208), chosen from `WeilConjectures.integralTowerMaps_existUnique`
 - `Sheaf.Paper.IntegralReductionTowerWellDefined::WeilConjectures.integralTowerUnit` (line 201), chosen from `WeilConjectures.integralTowerMaps_existUnique`
-- `Sheaf.Paper.IntrinsicKoszulCompletion::AlgebraicGeometry.Scheme.koszulConstantOne` (line 139), chosen from `AlgebraicGeometry.Scheme.koszulConstantOne_exists`
-- `Sheaf.Paper.LisseAdicFiberFunctors::AlgebraicGeometry.Scheme.lisseAlgebraicFiberFunctor` (line 144), chosen from `AlgebraicGeometry.Scheme.lisseAlgebraicFiberFunctor_exists`
 - `Sheaf.Paper.LisseAdicSheaves::AlgebraicGeometry.Scheme.lisseCoefficientDiagramData` (line 527), chosen from `AlgebraicGeometry.Scheme.lisseCoefficientDiagram_exists`
 - `Sheaf.Paper.ProjectionFormulaArrows::SheafOfModules.mixedTensorRepresentative` (line 290), chosen from `SheafOfModules.mixedTensorRepresentative_existsUnique`
-- `Sheaf.Paper.RingedSiteIdeal::CategoryTheory.RingedSiteIdeal.extension` (line 172), chosen from `CategoryTheory.RingedSiteIdeal.existsUnique_extension`
-- `Sheaf.Paper.RingedTopoiCanonicalTensorPullback::SheafOfModules.ringedTopoiCanonicalDerivedTensorComparison` (line 752), chosen from `SheafOfModules.ringedTopoiCanonicalDerivedTensorPullback`
+- `Sheaf.Paper.RingedTopoiCanonicalTensorPullback::SheafOfModules.ringedTopoiCanonicalDerivedTensorComparison` (line 760), chosen from `SheafOfModules.ringedTopoiCanonicalDerivedTensorPullback`
 - `WeilConjectures.SmoothPurity.Defs::AlgebraicGeometry.ProEtale.CondensedRing.smoothPurityIso` (line 106), chosen from `AlgebraicGeometry.ProEtale.CondensedRing.exists_normalizedSmoothPurityMaps`
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 1082 | 193 |
-| WeilConjectures | 177 | 90 |
+| Sheaf | 574 | 48 |
+| WeilConjectures | 166 | 97 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 1680 | 744 | 936 | 734 | 18 |
-| 660345513 (Application of proof-dependency imports) | library | 1676 | 742 | 934 | 680 | 18 |
-| 660345513 (Application of proof-dependency imports) | closure | 1434 | 172 | 1262 | 604 | 1 |
+| 889327369 (Queue at the start of stage 3) | library | 1808 | 352 | 1456 | 733 | 14 |
+| 660345513 (Application of proof-dependency imports) | library | 1805 | 351 | 1454 | 679 | 14 |
+| 660345513 (Application of proof-dependency imports) | closure | 1500 | 76 | 1424 | 603 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
 | landing class | count |
 |---|---:|
-| proved | 3813 |
-| decomposed | 52 |
-| moved | 4065 |
-| pruned | 137 |
-| other | 631 |
+| proved | 4215 |
+| decomposed | 56 |
+| moved | 4159 |
+| pruned | 147 |
+| other | 634 |
 
 Per group: whole-library closed/added/net since stage 3; landing count is not progress. Closure progress is shown only after the imports baseline.
 
 | group | landings | closed | added | net | moved share |
 |---|---:|---:|---:|---:|---:|
 | <unknown> | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
-| A2 | 134 | 132 | 100 | 32 | 70/134 (52.2%) |
-| A3 | 135 | 131 | 85 | 46 | 59/135 (43.7%) |
-| A4 | 84 | 89 | 54 | 35 | 41/84 (48.8%) |
-| B2 | 136 | 142 | 88 | 54 | 55/136 (40.4%) |
-| B3 | 158 | 165 | 94 | 71 | 65/158 (41.1%) |
-| B4 | 77 | 79 | 50 | 29 | 35/77 (45.5%) |
-| C1 | 151 | 155 | 114 | 41 | 76/151 (50.3%) |
-| C2 | 129 | 123 | 86 | 37 | 59/129 (45.7%) |
-| C3 | 123 | 131 | 82 | 49 | 57/123 (46.3%) |
-| C4 | 67 | 67 | 35 | 32 | 23/67 (34.3%) |
-| D2 | 149 | 147 | 92 | 55 | 63/149 (42.3%) |
-| D3 | 118 | 135 | 72 | 63 | 52/118 (44.1%) |
-| D4 | 75 | 72 | 48 | 24 | 29/75 (38.7%) |
-| E1 | 165 | 198 | 107 | 91 | 82/165 (49.7%) |
-| E2 | 128 | 123 | 85 | 38 | 60/128 (46.9%) |
-| E3 | 121 | 136 | 95 | 41 | 59/121 (48.8%) |
-| E4 | 55 | 62 | 27 | 35 | 19/55 (34.5%) |
-| F1 | 152 | 157 | 108 | 49 | 72/152 (47.4%) |
-| F2 | 153 | 165 | 99 | 66 | 62/153 (40.5%) |
-| F3 | 104 | 104 | 63 | 41 | 43/104 (41.3%) |
-| F4 | 67 | 65 | 43 | 22 | 29/67 (43.3%) |
-| G1 | 143 | 142 | 114 | 28 | 76/143 (53.1%) |
-| G2 | 142 | 139 | 91 | 48 | 63/142 (44.4%) |
-| G3 | 104 | 106 | 66 | 40 | 45/104 (43.3%) |
-| G4 | 60 | 51 | 31 | 20 | 20/60 (33.3%) |
-| H1 | 141 | 140 | 107 | 33 | 75/141 (53.2%) |
-| H2 | 115 | 111 | 92 | 19 | 66/115 (57.4%) |
-| H3 | 123 | 138 | 100 | 38 | 69/123 (56.1%) |
-| H4 | 61 | 60 | 42 | 18 | 31/61 (50.8%) |
-| J1 | 126 | 134 | 75 | 59 | 53/126 (42.1%) |
-| J2 | 107 | 109 | 70 | 39 | 51/107 (47.7%) |
-| J3 | 121 | 127 | 77 | 50 | 54/121 (44.6%) |
-| J4 | 62 | 53 | 40 | 13 | 27/62 (43.5%) |
-| K1 | 122 | 139 | 89 | 50 | 61/122 (50.0%) |
-| K2 | 123 | 121 | 84 | 37 | 65/123 (52.8%) |
-| K3 | 109 | 109 | 77 | 32 | 56/109 (51.4%) |
-| K4 | 66 | 53 | 35 | 18 | 24/66 (36.4%) |
-| M1 | 142 | 147 | 92 | 55 | 65/142 (45.8%) |
-| M2 | 131 | 135 | 104 | 31 | 70/131 (53.4%) |
-| M3 | 109 | 111 | 72 | 39 | 52/109 (47.7%) |
-| M4 | 46 | 50 | 24 | 26 | 17/46 (37.0%) |
-| N1 | 137 | 138 | 108 | 30 | 74/137 (54.0%) |
-| N2 | 130 | 119 | 78 | 41 | 57/130 (43.8%) |
-| N3 | 89 | 84 | 65 | 19 | 45/89 (50.6%) |
-| N4 | 57 | 56 | 48 | 8 | 29/57 (50.9%) |
-| P1 | 120 | 140 | 93 | 47 | 67/120 (55.8%) |
-| P2 | 133 | 125 | 82 | 43 | 56/133 (42.1%) |
-| P3 | 103 | 95 | 81 | 14 | 52/103 (50.5%) |
-| P4 | 54 | 50 | 39 | 11 | 26/54 (48.1%) |
-| Q1 | 108 | 109 | 75 | 34 | 55/108 (50.9%) |
-| Q2 | 105 | 108 | 80 | 28 | 53/105 (50.5%) |
-| Q3 | 102 | 101 | 71 | 30 | 47/102 (46.1%) |
-| Q4 | 48 | 51 | 27 | 24 | 21/48 (43.8%) |
-| R1 | 126 | 129 | 98 | 31 | 67/126 (53.2%) |
-| R2 | 123 | 131 | 75 | 56 | 52/123 (42.3%) |
-| R3 | 98 | 95 | 65 | 30 | 42/98 (42.9%) |
-| R4 | 60 | 51 | 41 | 10 | 26/60 (43.3%) |
-| S1 | 124 | 126 | 106 | 20 | 69/124 (55.6%) |
-| S2 | 125 | 130 | 102 | 28 | 66/125 (52.8%) |
-| S3 | 106 | 101 | 63 | 38 | 48/106 (45.3%) |
-| S4 | 48 | 46 | 35 | 11 | 24/48 (50.0%) |
-| T1 | 111 | 114 | 82 | 32 | 56/111 (50.5%) |
-| T2 | 133 | 155 | 97 | 58 | 64/133 (48.1%) |
-| T3 | 102 | 97 | 77 | 20 | 53/102 (52.0%) |
-| T4 | 68 | 60 | 38 | 22 | 24/68 (35.3%) |
-| U1 | 126 | 129 | 92 | 37 | 62/126 (49.2%) |
-| U2 | 136 | 130 | 92 | 38 | 63/136 (46.3%) |
-| U3 | 97 | 100 | 69 | 31 | 49/97 (50.5%) |
-| U4 | 52 | 46 | 40 | 6 | 28/52 (53.8%) |
-| V1 | 115 | 107 | 85 | 22 | 55/115 (47.8%) |
-| V2 | 126 | 123 | 90 | 33 | 62/126 (49.2%) |
-| V3 | 107 | 111 | 75 | 36 | 56/107 (52.3%) |
-| V4 | 50 | 44 | 38 | 6 | 25/50 (50.0%) |
-| W2 | 114 | 119 | 78 | 41 | 54/114 (47.4%) |
-| W3 | 85 | 86 | 58 | 28 | 40/85 (47.1%) |
-| W4 | 49 | 43 | 36 | 7 | 27/49 (55.1%) |
-| X2 | 121 | 118 | 95 | 23 | 64/121 (52.9%) |
-| X3 | 101 | 96 | 62 | 34 | 43/101 (42.6%) |
+| A2 | 142 | 141 | 102 | 39 | 73/142 (51.4%) |
+| A3 | 142 | 140 | 91 | 49 | 62/142 (43.7%) |
+| A4 | 92 | 108 | 55 | 53 | 42/92 (45.7%) |
+| A5 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
+| A6 | 3 | 4 | 0 | 4 | 0/3 (0.0%) |
+| A7 | 2 | 2 | 2 | 0 | 2/2 (100.0%) |
+| A8 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
+| A9 | 2 | 2 | 1 | 1 | 1/2 (50.0%) |
+| B2 | 142 | 150 | 96 | 54 | 58/142 (40.8%) |
+| B3 | 163 | 171 | 96 | 75 | 66/163 (40.5%) |
+| B4 | 83 | 86 | 52 | 34 | 36/83 (43.4%) |
+| B5 | 2 | 2 | 1 | 1 | 1/2 (50.0%) |
+| B6 | 3 | 3 | 1 | 2 | 1/3 (33.3%) |
+| B7 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
+| B8 | 2 | 6 | 0 | 6 | 0/2 (0.0%) |
+| B9 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
+| C1 | 156 | 160 | 118 | 42 | 77/156 (49.4%) |
+| C2 | 135 | 129 | 87 | 42 | 60/135 (44.4%) |
+| C3 | 127 | 135 | 82 | 53 | 57/127 (44.9%) |
+| C4 | 73 | 73 | 35 | 38 | 23/73 (31.5%) |
+| C5 | 2 | 3 | 0 | 3 | 0/2 (0.0%) |
+| C6 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
+| C7 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
+| C8 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
+| C9 | 2 | 2 | 1 | 1 | 1/2 (50.0%) |
+| D2 | 155 | 152 | 93 | 59 | 64/155 (41.3%) |
+| D3 | 124 | 141 | 74 | 67 | 53/124 (42.7%) |
+| D4 | 82 | 88 | 48 | 40 | 29/82 (35.4%) |
+| D5 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
+| D6 | 2 | 2 | 1 | 1 | 1/2 (50.0%) |
+| D7 | 2 | 2 | 4 | -2 | 2/2 (100.0%) |
+| D8 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
+| D9 | 2 | 2 | 1 | 1 | 1/2 (50.0%) |
+| E1 | 170 | 203 | 109 | 94 | 83/170 (48.8%) |
+| E2 | 134 | 129 | 87 | 42 | 62/134 (46.3%) |
+| E3 | 127 | 146 | 100 | 46 | 60/127 (47.2%) |
+| E4 | 62 | 69 | 33 | 36 | 22/62 (35.5%) |
+| E5 | 2 | 4 | 0 | 4 | 0/2 (0.0%) |
+| E6 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
+| E7 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
+| E8 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
+| E9 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| F1 | 158 | 164 | 108 | 56 | 72/158 (45.6%) |
+| F2 | 158 | 170 | 102 | 68 | 64/158 (40.5%) |
+| F3 | 110 | 110 | 64 | 46 | 44/110 (40.0%) |
+| F4 | 73 | 73 | 47 | 26 | 31/73 (42.5%) |
+| F5 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
+| F6 | 2 | 2 | 1 | 1 | 1/2 (50.0%) |
+| F7 | 2 | 2 | 2 | 0 | 2/2 (100.0%) |
+| F8 | 2 | 3 | 0 | 3 | 0/2 (0.0%) |
+| F9 | 2 | 3 | 0 | 3 | 0/2 (0.0%) |
+| G1 | 147 | 148 | 114 | 34 | 76/147 (51.7%) |
+| G2 | 146 | 145 | 93 | 52 | 64/146 (43.8%) |
+| G3 | 108 | 111 | 67 | 44 | 46/108 (42.6%) |
+| G4 | 64 | 56 | 31 | 25 | 20/64 (31.2%) |
+| G5 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| G6 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| G7 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| G8 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| G9 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| H1 | 145 | 144 | 111 | 33 | 77/145 (53.1%) |
+| H2 | 120 | 131 | 92 | 39 | 66/120 (55.0%) |
+| H3 | 128 | 146 | 103 | 43 | 70/128 (54.7%) |
+| H4 | 65 | 64 | 42 | 22 | 31/65 (47.7%) |
+| H5 | 1 | 1 | 1 | 0 | 1/1 (100.0%) |
+| H6 | 2 | 3 | 0 | 3 | 0/2 (0.0%) |
+| H7 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| H8 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| H9 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| J1 | 130 | 143 | 75 | 68 | 53/130 (40.8%) |
+| J2 | 111 | 123 | 70 | 53 | 51/111 (45.9%) |
+| J3 | 125 | 133 | 79 | 54 | 55/125 (44.0%) |
+| J4 | 66 | 65 | 43 | 22 | 28/66 (42.4%) |
+| J5 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| J6 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| J7 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| J8 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| J9 | 1 | 1 | 2 | -1 | 1/1 (100.0%) |
+| K1 | 126 | 156 | 89 | 67 | 61/126 (48.4%) |
+| K2 | 127 | 127 | 84 | 43 | 65/127 (51.2%) |
+| K3 | 113 | 113 | 79 | 34 | 57/113 (50.4%) |
+| K4 | 70 | 57 | 35 | 22 | 24/70 (34.3%) |
+| K5 | 1 | 1 | 2 | -1 | 1/1 (100.0%) |
+| K6 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| K7 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| K8 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| K9 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| M1 | 146 | 152 | 94 | 58 | 65/146 (44.5%) |
+| M2 | 135 | 145 | 104 | 41 | 70/135 (51.9%) |
+| M3 | 113 | 116 | 73 | 43 | 52/113 (46.0%) |
+| M4 | 50 | 54 | 25 | 29 | 18/50 (36.0%) |
+| M5 | 1 | 1 | 1 | 0 | 1/1 (100.0%) |
+| M6 | 1 | 3 | 0 | 3 | 0/1 (0.0%) |
+| M7 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| M8 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| M9 | 1 | 1 | 1 | 0 | 1/1 (100.0%) |
+| N1 | 141 | 142 | 110 | 32 | 75/141 (53.2%) |
+| N2 | 134 | 124 | 79 | 45 | 58/134 (43.3%) |
+| N3 | 93 | 88 | 66 | 22 | 46/93 (49.5%) |
+| N4 | 61 | 60 | 48 | 12 | 29/61 (47.5%) |
+| P1 | 124 | 145 | 93 | 52 | 67/124 (54.0%) |
+| P2 | 137 | 134 | 82 | 52 | 56/137 (40.9%) |
+| P3 | 107 | 99 | 83 | 16 | 54/107 (50.5%) |
+| P4 | 59 | 71 | 42 | 29 | 28/59 (47.5%) |
+| P5 | 1 | 1 | 1 | 0 | 1/1 (100.0%) |
+| P7 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| P8 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| P9 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| Q1 | 114 | 116 | 77 | 39 | 57/114 (50.0%) |
+| Q2 | 109 | 112 | 81 | 31 | 54/109 (49.5%) |
+| Q3 | 106 | 105 | 72 | 33 | 48/106 (45.3%) |
+| Q4 | 52 | 55 | 30 | 25 | 22/52 (42.3%) |
+| Q5 | 1 | 1 | 2 | -1 | 1/1 (100.0%) |
+| Q6 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| Q7 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| Q8 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| Q9 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| R1 | 130 | 134 | 99 | 35 | 68/130 (52.3%) |
+| R2 | 127 | 136 | 75 | 61 | 52/127 (40.9%) |
+| R3 | 102 | 99 | 67 | 32 | 44/102 (43.1%) |
+| R4 | 64 | 55 | 41 | 14 | 26/64 (40.6%) |
+| R5 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| R6 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| R7 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| R8 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| R9 | 2 | 2 | 1 | 1 | 1/2 (50.0%) |
+| S1 | 128 | 130 | 109 | 21 | 70/128 (54.7%) |
+| S2 | 129 | 139 | 105 | 34 | 67/129 (51.9%) |
+| S3 | 110 | 107 | 63 | 44 | 48/110 (43.6%) |
+| S4 | 52 | 50 | 36 | 14 | 25/52 (48.1%) |
+| S5 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| S6 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| S7 | 1 | 2 | 0 | 2 | 0/1 (0.0%) |
+| S8 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| S9 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| T1 | 116 | 120 | 82 | 38 | 56/116 (48.3%) |
+| T2 | 137 | 159 | 97 | 62 | 64/137 (46.7%) |
+| T3 | 106 | 101 | 77 | 24 | 53/106 (50.0%) |
+| T4 | 72 | 64 | 38 | 26 | 24/72 (33.3%) |
+| T5 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| T6 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| T7 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| T8 | 1 | 1 | 1 | 0 | 1/1 (100.0%) |
+| T9 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| U1 | 129 | 132 | 92 | 40 | 62/129 (48.1%) |
+| U2 | 139 | 133 | 93 | 40 | 64/139 (46.0%) |
+| U3 | 101 | 104 | 70 | 34 | 50/101 (49.5%) |
+| U4 | 57 | 57 | 40 | 17 | 28/57 (49.1%) |
+| U5 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| U6 | 1 | 1 | 1 | 0 | 1/1 (100.0%) |
+| U7 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| U8 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| U9 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| V1 | 119 | 112 | 86 | 26 | 56/119 (47.1%) |
+| V2 | 130 | 133 | 90 | 43 | 62/130 (47.7%) |
+| V3 | 111 | 116 | 78 | 38 | 57/111 (51.4%) |
+| V4 | 54 | 48 | 38 | 10 | 25/54 (46.3%) |
+| V5 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| V6 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| V7 | 1 | 1 | 1 | 0 | 1/1 (100.0%) |
+| V8 | 1 | 1 | 1 | 0 | 1/1 (100.0%) |
+| V9 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| W2 | 118 | 125 | 78 | 47 | 54/118 (45.8%) |
+| W3 | 91 | 96 | 61 | 35 | 42/91 (46.2%) |
+| W4 | 53 | 47 | 36 | 11 | 27/53 (50.9%) |
+| W5 | 1 | 1 | 1 | 0 | 1/1 (100.0%) |
+| W6 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| W7 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| W8 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| W9 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| X2 | 125 | 122 | 95 | 27 | 64/125 (51.2%) |
+| X3 | 105 | 100 | 63 | 37 | 44/105 (41.9%) |
+| X5 | 1 | 1 | 1 | 0 | 1/1 (100.0%) |
+| X6 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| X7 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| X8 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| X9 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | XR0d56945a24047e2a | 1 | 1 | 1 | 0 | 1/1 (100.0%) |
 | XR1b27919aec52b018 | 1 | 1 | 1 | 0 | 1/1 (100.0%) |
 | XR33076d633fce5c89 | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
@@ -176,35 +250,45 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | XReedb48d351b955d4 | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
 | XRf51ccf77cd4e9fca | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | XRfef4bc449ceae451 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
-| Y2 | 109 | 111 | 98 | 13 | 59/109 (54.1%) |
-| Y3 | 104 | 91 | 56 | 35 | 45/104 (43.3%) |
+| Y2 | 113 | 115 | 101 | 14 | 61/113 (54.0%) |
+| Y3 | 108 | 94 | 57 | 37 | 46/108 (42.6%) |
+| Y5 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| Y6 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| Y7 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| Y8 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| Y9 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | Z2 | 3 | 4 | 0 | 4 | 1/3 (33.3%) |
+| Z5 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| Z6 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| Z7 | 1 | 1 | 2 | -1 | 1/1 (100.0%) |
+| Z8 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| Z9 | 2 | 2 | 1 | 1 | 1/2 (50.0%) |
 | launcher prover | 138 | 19 | 9 | 10 | 6/138 (4.3%) |
 
 Nearest targets (claims from the scanned git tree; live leases may differ):
 
 | module | distance | holes | group |
 |---|---:|---:|---|
-| WeilConjectures.PoincareDuality.Poincare | 0 | 1 | A4 |
 | Sheaf.SmoothPurity.NormalizedWitness | 1 | 1 | — |
-| WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible | 2 | 3 | B2 |
+| WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible | 2 | 3 | D3 |
 | WeilConjectures.ZetaFunction.TraceFormula | 2 | 1 | — |
 | Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalBounded | 3 | 1 | — |
 | Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructibleCohomology | 3 | 1 | — |
-| Sheaf.PoincareDuality.ProperProjectionFormulaBounded | 3 | 1 | — |
+| Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction | 3 | 1 | A3 |
+| Sheaf.PoincareDuality.ProperProjectionFormulaBounded | 3 | 1 | C3 |
 | WeilConjectures.WeilSheaf.PoincareDuality | 3 | 1 | — |
+| Sheaf.CategoryTheory.RingedDerivedRestriction | 4 | 1 | — |
 | Sheaf.WeilSheaf.AdicFiniteCoefficientBound | 4 | 1 | — |
 | Sheaf.WeilSheaf.CohomologyGeometricConjugacy | 4 | 1 | — |
 | Sheaf.WeilSheaf.CompactSupportFiniteCoefficientComparison | 4 | 1 | — |
 | WeilConjectures.DeligneLaumon.Reduction.RealSheaves | 4 | 2 | — |
 | WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CohomologicalDimension | 4 | 1 | — |
+| WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage | 4 | 1 | — |
 | WeilConjectures.WeilSheaf.LowerShriekFunctoriality | 4 | 1 | — |
 | Sheaf.AlgebraicGeometry.BoundedBelowDerivedSmoothBaseChange | 5 | 1 | — |
-| Sheaf.AlgebraicGeometry.CompactSupportFiniteTorsion | 5 | 1 | — |
-| Sheaf.AlgebraicGeometry.EllAdicProperTruncationBound | 5 | 1 | — |
-| Sheaf.AlgebraicGeometry.FundamentalGroup.FiberEquivalence | 5 | 2 | — |
-| Sheaf.AlgebraicGeometry.FundamentalGroup.OpenSubgroups | 5 | 1 | — |
-| Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact | 5 | 1 | — |
+| Sheaf.AlgebraicGeometry.EllAdicProperTruncationBound | 5 | 1 | D4 |
+| Sheaf.CategoryTheory.Galois.GaloisTransitive | 5 | 1 | — |
+| Sheaf.WeilSheaf.AffineCurveRangePositive | 5 | 1 | — |
 
 Modules pruned since the imports baseline:
 
@@ -342,6 +426,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.Curve.SepClosedComparisonCore`
 - `Sheaf.AlgebraicGeometry.Curve.SepClosedComparisonCurve`
 - `Sheaf.AlgebraicGeometry.DerivedBaseChangeMayerVietoris`
+- `Sheaf.AlgebraicGeometry.DerivedInverseImageComposition`
 - `Sheaf.AlgebraicGeometry.DerivedSectionsPushforwardComparison`
 - `Sheaf.AlgebraicGeometry.DescendAffine`
 - `Sheaf.AlgebraicGeometry.DescendQCOpenFGSubalgebra`
@@ -366,6 +451,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.EtaleFinitePushforwardUnitEdgeCompatibility`
 - `Sheaf.AlgebraicGeometry.EtaleGeometricFibreConstantSections`
 - `Sheaf.AlgebraicGeometry.EtaleGeometricFibreInverseImageConstant`
+- `Sheaf.AlgebraicGeometry.EtaleInverseImageCompositionModuleLinear`
 - `Sheaf.AlgebraicGeometry.EtaleInverseImageExact`
 - `Sheaf.AlgebraicGeometry.EtaleInverseImageSectionDescription`
 - `Sheaf.AlgebraicGeometry.EtaleLocalFiniteAtPoint`
@@ -375,6 +461,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap`
 - `Sheaf.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules`
 - `Sheaf.AlgebraicGeometry.EtaleMayerVietoris`
+- `Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives`
 - `Sheaf.AlgebraicGeometry.EtaleModulePullbackForgetNaturality`
 - `Sheaf.AlgebraicGeometry.EtaleNeighbourhoodPrescribedResidueField`
 - `Sheaf.AlgebraicGeometry.EtaleNormalComponents`
@@ -442,13 +529,17 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.FlatUnramifiedFormallyEtale`
 - `Sheaf.AlgebraicGeometry.FormallySmooth`
 - `Sheaf.AlgebraicGeometry.FormallyUnramifiedConormal`
+- `Sheaf.AlgebraicGeometry.FpqcAffineDescent`
 - `Sheaf.AlgebraicGeometry.FpqcAffineStandardRefinement`
 - `Sheaf.AlgebraicGeometry.FpqcDescendQuasiCompact`
+- `Sheaf.AlgebraicGeometry.FpqcFinerThanEtale`
+- `Sheaf.AlgebraicGeometry.FpqcLocalOnBaseCriterion`
 - `Sheaf.AlgebraicGeometry.FpqcMorphismsDescend`
 - `Sheaf.AlgebraicGeometry.FpqcOpenSubschemeDescent`
 - `Sheaf.AlgebraicGeometry.FpqcTensorSections`
 - `Sheaf.AlgebraicGeometry.FullAffineEtaleSite`
 - `Sheaf.AlgebraicGeometry.FullAffineEtaleTopos`
+- `Sheaf.AlgebraicGeometry.FunctionField`
 - `Sheaf.AlgebraicGeometry.GeometricPointMorphismStalkBijection`
 - `Sheaf.AlgebraicGeometry.GlobalGenerationNonvanishingCover`
 - `Sheaf.AlgebraicGeometry.GlobalHomPullbackAdjunction`
@@ -467,7 +558,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.InjectiveEtaleConstantRingModule`
 - `Sheaf.AlgebraicGeometry.InjectiveEtaleModuleCechH1`
 - `Sheaf.AlgebraicGeometry.InjectiveModuleSheafH1`
-- `Sheaf.AlgebraicGeometry.IntegralClosureDedekindSurjectiveFibres`
 - `Sheaf.AlgebraicGeometry.IntegralClosureFiniteFibreChooseG`
 - `Sheaf.AlgebraicGeometry.IntegralClosureFiniteFibreImageClopen`
 - `Sheaf.AlgebraicGeometry.IntegralDimOneAmple`
@@ -475,12 +565,14 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.InvertibleSectionRing`
 - `Sheaf.AlgebraicGeometry.InvertibleTensorQcoherent`
 - `Sheaf.AlgebraicGeometry.IsAffineOfFiniteClosedCover`
+- `Sheaf.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf`
 - `Sheaf.AlgebraicGeometry.IsFiniteLocallyFreeOfDegreeOfEtaleCover`
 - `Sheaf.AlgebraicGeometry.IsFiniteOfFpqcCover`
 - `Sheaf.AlgebraicGeometry.IsFiniteTypeEtaleModuleSheaf`
 - `Sheaf.AlgebraicGeometry.IsSeparatedOfFlatSurjectiveBaseChange`
 - `Sheaf.AlgebraicGeometry.IsSeparatedOfSurjectiveUniversallyClosed`
 - `Sheaf.AlgebraicGeometry.IsolatedFibrePointBaseChange`
+- `Sheaf.AlgebraicGeometry.KInjectiveResolutionsExist`
 - `Sheaf.AlgebraicGeometry.KilledSheafModuleLift`
 - `Sheaf.AlgebraicGeometry.LftOverFieldIsolatedPointResidueFinite`
 - `Sheaf.AlgebraicGeometry.LimitContainedInConstructible`
@@ -506,6 +598,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.Modules.ResidueFiber`
 - `Sheaf.AlgebraicGeometry.Morphisms.FpqcIntegralDescent`
 - `Sheaf.AlgebraicGeometry.Morphisms.FpqcOpenImmersionDescent`
+- `Sheaf.AlgebraicGeometry.Morphisms.LocallyOfFiniteTypeOfFpqcCover`
 - `Sheaf.AlgebraicGeometry.Morphisms.Projective`
 - `Sheaf.AlgebraicGeometry.Morphisms.UnramifiedBaseChangeOpen`
 - `Sheaf.AlgebraicGeometry.Morphisms.UnramifiedDescent`
@@ -535,6 +628,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.ProperBasic`
 - `Sheaf.AlgebraicGeometry.ProperCoproduct`
 - `Sheaf.AlgebraicGeometry.ProperDerivedDirectImageComposition`
+- `Sheaf.AlgebraicGeometry.ProperGeometricPointExchange`
 - `Sheaf.AlgebraicGeometry.ProperGlobalSectionsFlatBaseChange`
 - `Sheaf.AlgebraicGeometry.PullbackCohomologyLongExactLadder`
 - `Sheaf.AlgebraicGeometry.PullbackIsoNsmulDevissage`
@@ -551,6 +645,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.QuasicoherentSheafHom`
 - `Sheaf.AlgebraicGeometry.QuotientBaseChangeIdeal`
 - `Sheaf.AlgebraicGeometry.ReducedCurveNormalization`
+- `Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme`
 - `Sheaf.AlgebraicGeometry.ReductionUniversalHomeomorphism`
 - `Sheaf.AlgebraicGeometry.RelativeSpecBaseChange`
 - `Sheaf.AlgebraicGeometry.SchemeClopenIdempotent`
@@ -592,6 +687,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.UniversalThickeningFlatBaseChange`
 - `Sheaf.AlgebraicGeometry.UniversalThickeningOpenPieces`
 - `Sheaf.AlgebraicGeometry.UniversalThickeningOpenRestriction`
+- `Sheaf.AlgebraicGeometry.UniversallyClosedOfFpqcCover`
 - `Sheaf.AlgebraicGeometry.UnramifiedAlgebraOverFieldProduct`
 - `Sheaf.AlgebraicGeometry.UnramifiedEtaleLocalDecomposition`
 - `Sheaf.AlgebraicGeometry.UnramifiedFibrePointIsolated`
@@ -604,6 +700,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.AlgebraicGeometry.ZariskiUnitsRestriction`
 - `Sheaf.AlgebraicGeometry.ZeroDimIntegralPoint`
 - `Sheaf.AlgebraicGeometry.ZeroDimNoetherianAffine`
+- `Sheaf.AlgebraicGeometry.ZeroDimensionalNoetherianFiniteDiscrete`
 - `Sheaf.AlgebraicTopology.CoskeletalMapTrivialKan`
 - `Sheaf.AlgebraicTopology.CoskeletonFreeHomologyComparison`
 - `Sheaf.AlgebraicTopology.SetCechNerveFreeResolution`
@@ -628,7 +725,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.CoskeletonMatchingTuples`
 - `Sheaf.CategoryTheory.DeltaFunctor`
 - `Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors`
-- `Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantInd`
 - `Sheaf.CategoryTheory.DerivedCategory.EssentiallyConstantIndHomColimit`
 - `Sheaf.CategoryTheory.DerivedCategory.ShiftIdentification`
 - `Sheaf.CategoryTheory.DerivedCoupleExact`
@@ -644,6 +740,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.FilteredHomotopySpectralSequence`
 - `Sheaf.CategoryTheory.FilteredPageTwoModel`
 - `Sheaf.CategoryTheory.FirstQuadrantRowCollapse`
+- `Sheaf.CategoryTheory.Galois.AbstractEquivalence`
 - `Sheaf.CategoryTheory.GrothendieckAbelian.AcyclicQuotientComplexesBoundedSize`
 - `Sheaf.CategoryTheory.GrothendieckAbelian.FunctorialInjectiveComplexEmbedding`
 - `Sheaf.CategoryTheory.GrothendieckAbelian.KInjectiveCriterion`
@@ -662,6 +759,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.Limits.TowerLimitAdditiveLeftExact`
 - `Sheaf.CategoryTheory.Limits.TowerTransitionEndomorphism`
 - `Sheaf.CategoryTheory.LocalizationHomColimit`
+- `Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact`
 - `Sheaf.CategoryTheory.MatchingObjectCoskeleton`
 - `Sheaf.CategoryTheory.MittagLefflerExactSequence`
 - `Sheaf.CategoryTheory.MittagLefflerLimitExact`
@@ -689,12 +787,12 @@ Modules pruned since the imports baseline:
 - `Sheaf.CategoryTheory.SiteInjectiveCechAcyclic`
 - `Sheaf.CategoryTheory.SiteLerayDegenerate`
 - `Sheaf.CategoryTheory.SiteMorphismComposition`
-- `Sheaf.CategoryTheory.SitePullbackAbelianExact`
 - `Sheaf.CategoryTheory.SiteSesCechH1Surjective`
 - `Sheaf.CategoryTheory.SiteSystemStrictification`
 - `Sheaf.CategoryTheory.Sites.BinaryContractedProductPresentation`
 - `Sheaf.CategoryTheory.Sites.CoherentContractedPowers`
 - `Sheaf.CategoryTheory.Sites.CohomologyDerivedEvaluation`
+- `Sheaf.CategoryTheory.Sites.CohomologyOverObjectLocalization`
 - `Sheaf.CategoryTheory.Sites.CohomologySiteEquivalence`
 - `Sheaf.CategoryTheory.Sites.EtaleTorsorInverseImageExtension`
 - `Sheaf.CategoryTheory.Sites.EtaleTorsorPushoutExtension`
@@ -857,6 +955,7 @@ Modules pruned since the imports baseline:
 - `Sheaf.RingTheory.ConormalGeneratorsGlobalCompleteIntersection`
 - `Sheaf.RingTheory.DVRValuationRingCharacterization`
 - `Sheaf.RingTheory.DirectedUnionSubringsFlatModule`
+- `Sheaf.RingTheory.Etale.QuasiFiniteAtPrime`
 - `Sheaf.RingTheory.EtaleFiniteFactorDecomposition`
 - `Sheaf.RingTheory.EtaleLiftCoprimeFactorization`
 - `Sheaf.RingTheory.EtaleRetractionFiniteProductLocal`
@@ -867,8 +966,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.RingTheory.FiniteHomogeneousGenerators`
 - `Sheaf.RingTheory.FiniteIffFormalGlueing`
 - `Sheaf.RingTheory.FiniteIntegralConductor`
-- `Sheaf.RingTheory.FiniteLengthGlobalSubmodule`
-- `Sheaf.RingTheory.FiniteMaximalsOverElement`
 - `Sheaf.RingTheory.FinitePresentationAndFlatOfFiniteFreeStandardCover`
 - `Sheaf.RingTheory.FiniteProjectiveOfStandardCover`
 - `Sheaf.RingTheory.FiniteProjectiveStandardFreeCover`
@@ -893,7 +990,6 @@ Modules pruned since the imports baseline:
 - `Sheaf.RingTheory.JacobianPresentationLift`
 - `Sheaf.RingTheory.JacobsonDenominatorFunctionField`
 - `Sheaf.RingTheory.KaehlerDifferentialsModPowerIdeal`
-- `Sheaf.RingTheory.KrullAkizukiNoetherian`
 - `Sheaf.RingTheory.KrullIntersectionLocalization`
 - `Sheaf.RingTheory.LiftMonicCoprimeFactorizationEtale`
 - `Sheaf.RingTheory.LocalCompleteIntersectionFieldChange`
