@@ -15,37 +15,15 @@ public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
-import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
-import Mathlib.CategoryTheory.Sites.Point.Basic
-import Sheaf.AlgebraicGeometry.EtaleCompactSupportComparisons
-import Sheaf.AlgebraicGeometry.FiniteEtaleTwistLine
-import Sheaf.AlgebraicGeometry.ProperUnboundedBaseChange
-import Mathlib.AlgebraicGeometry.Morphisms.Etale
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
-import Sheaf.AlgebraicGeometry.OpenSectionClopen
-import Sheaf.Paper.RingedExchangeTensorCoherence
-import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullback
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.CompactificationCategory
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
-import Sheaf.AlgebraicGeometry.EtaleLocalNormalForm
-import WeilConjectures.Compactification.NagataCompactification
+import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality
+import WeilConjectures.ConstructibleSheaf.Pullback
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
-import Sheaf.AlgebraicGeometry.EtaleAmbientAdjointLocality
-import Sheaf.AlgebraicGeometry.ProperProjectionFormula
-import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
-import WeilConjectures.AlgebraicGeometry.DerivedCategories
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-! # Smooth tensor duality for ordinary etale coefficients
 
@@ -114,6 +92,45 @@ noncomputable def smoothTensorDualityMap
       ((derivedTensor A S).obj K).map
         ((rightDerivedUpperShriekAdjunction A f).counit.app (𝟙_ _)) ≫
       (derivedTensorRightUnitor A S K).hom)
+
+
+private lemma braided_tensor_mate
+    {C D : Type*} [Category* C] [Category* D]
+    [MonoidalCategory C] [BraidedCategory C]
+    [MonoidalCategory D] [BraidedCategory D]
+    {F : C ⥤ D} {G : D ⥤ C} (adj : F ⊣ G)
+    (P W : C) (K : D) (Q : D)
+    (π : F.obj (W ⊗ P) ⟶ Q ⊗ K) (ε : Q ⟶ 𝟙_ D) :
+    adj.homEquiv _ _ (F.map (β_ P W).hom ≫ π ≫
+        (β_ Q K).hom ≫ (K ◁ ε) ≫ (ρ_ K).hom) =
+      (β_ P W).hom ≫ (adj.homEquiv _ _ (π ≫ (ε ▷ K)) ≫ G.map (λ_ K).hom) := by
+  rw [← adj.homEquiv_naturality_right, ← adj.homEquiv_naturality_left]
+  apply congrArg (adj.homEquiv _ _)
+  simp only [Category.assoc]
+  rw [← BraidedCategory.braiding_naturality_left_assoc, braiding_rightUnitor]
+
+private lemma smoothTensorDualityMap_eq
+    (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+    [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+    [Abelian.HasFunctorialFlatResolution A] [UpperStarPreservesFlat A]
+    {FC : A → A → Type w} {CC : A → Type (u + 1)}
+    [∀ (P Q : A), FunLike (FC P Q) (CC P) (CC Q)] [ConcreteCategory.{u + 1} A FC]
+    [(CategoryTheory.forget A).ReflectsIsomorphisms]
+    [PreservesFilteredColimitsOfSize.{u + 1, u + 1} (CategoryTheory.forget A)]
+    [∀ T : Scheme.{u}, T.smallEtaleTopology.HasSheafCompose (CategoryTheory.forget A)]
+    {X S : Scheme.{u}} (f : X ⟶ S) [HasCompactification f]
+    [(rightDerivedLowerShriek A f).IsLeftAdjoint]
+    [hPF : IsIso (projectionMap A f)]
+    (K : _root_.DerivedCategory (Sheaf S.smallEtaleTopology A)) :
+    let := derivedBraidedCategory A X
+    smoothTensorDualityMap A f hPF K =
+      (β_ ((upperStar A f).leftDerivedFunctor.obj K) (dualizingComplex A f)).hom ≫
+        dualizingComplexTensorMapOfIsIso f K := by
+  let := derivedBraidedCategory A X
+  let := derivedBraidedCategory A S
+  exact braided_tensor_mate (rightDerivedUpperShriekAdjunction A f)
+    _ _ K _ (inv (((projectionMap A f).app _).app K))
+    ((rightDerivedUpperShriekAdjunction A f).counit.app (𝟙_ _))
 
 
 /-- Smooth tensor duality without a chosen orientation, for finite ordinary etale
@@ -319,6 +336,56 @@ theorem smooth_tensor_duality
               (ModuleCat.{u + 1} A)).obj (ModuleCat.of A A))) ∧
     ∀ K : DerivedCategoryModule A S, IsIso (smoothTensorDualityMap (ModuleCat.{u + 1} A) f
       (isIso_projectionMap_of_finite A f) K) := by
-  sorry
+  classical
+  have hNS : IsUnit (N : Γ(S, ⊤)) := by
+    apply S.toRingedSpace.isUnit_of_isUnit_germ
+    intro s hs
+    simpa only [map_natCast] using hInvertible s
+  have : HasInvertibleExponent A S := ⟨N, hN, hA, hNS⟩
+  have : HasInvertibleExponent A X := HasInvertibleExponent.of_hom f
+  obtain ⟨L, hLC, hStalk, ⟨e⟩, hTensor⟩ := exists_dualizingComplex_iso_and_tensor A f d
+  constructor
+  · refine ⟨L, ?_, ?_⟩
+    · exact ⟨(shiftFunctor _ (-(2 * (d : ℤ)))).mapIso e ≪≫
+        shiftShiftNeg _ (2 * (d : ℤ))⟩
+    · have : Scheme.IsLocallyConstantSheaf L := hLC
+      obtain ⟨datum⟩ := hLC.nonempty_locallyConstantDatum
+      let cover : Scheme.Cover.{u} Scheme.etalePrecoverage X :=
+        Scheme.Cover.mkOfCovers (Σ i : datum.cover.I₀, datum.cover.X i)
+          (fun i ↦ datum.cover.X i.1) (fun i ↦ datum.cover.f i.1)
+          (by
+            intro x
+            obtain ⟨i, y, hy⟩ := datum.cover.exists_eq x
+            exact ⟨⟨i, y⟩, y, hy⟩)
+          (fun i ↦ datum.cover.map_prop i.1)
+      refine ⟨cover, ?_⟩
+      intro i
+      let U := datum.cover.etalePrecoverageToEtale i.1
+      have hC := datum.isConstant i.1
+      have := hC
+      obtain ⟨M, ⟨eM⟩⟩ := (L.over U).mem_essImage_of_isConstant
+      let t := (datum.cover.X i.1).algClosurePoint i.2
+      let P := upperStar (ModuleCat.{u + 1} A) U.hom
+      let eP : (constantSheaf U.left.smallEtaleTopology (ModuleCat A)).obj M ≅ P.obj L :=
+        ((Scheme.Etale.overEquiv U).constantSheafSheafCongrIso
+          (X.smallEtaleTopology.over U) U.left.smallEtaleTopology (ModuleCat A)
+          Over.mkIdTerminal).symm.app M ≪≫
+        (Scheme.Etale.overSheafEquiv U (ModuleCat A)).functor.mapIso eM ≪≫
+        Scheme.overSheafEquivFunctorObjOverIso (ModuleCat A) U L
+      have : PreservesFilteredColimitsOfSize.{u, u}
+          (CategoryTheory.forget (ModuleCat.{u + 1} A)) :=
+        preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+      let eFree : M ≅ ModuleCat.of A A :=
+        ((Scheme.pointSmallEtale t).sheafFiberConstantSheafIso M).symm ≪≫
+        (Scheme.pointSmallEtale t).sheafFiber.mapIso eP ≪≫
+        (upperStarCompSheafFiberIso (ModuleCat A) U.hom t).app L ≪≫
+        (hStalk _ (t ≫ U.hom)).some
+      exact ⟨eM.symm ≪≫
+        (constantSheaf (X.smallEtaleTopology.over U) (ModuleCat A)).mapIso eFree⟩
+  · intro K
+    let := derivedBraidedCategory (ModuleCat A) X
+    rw [smoothTensorDualityMap_eq]
+    have : IsIso (dualizingComplexTensorMapOfIsIso f K) := hTensor K
+    infer_instance
 
 end AlgebraicGeometry.Etale

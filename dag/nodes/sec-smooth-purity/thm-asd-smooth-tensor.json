@@ -25,224 +25,42 @@
  ],
  "proof": [
   {
-   "text": "Choose a compactification $f=rj$. For an open immersion, the extension-by-zero stalk is the original stalk in the open and zero outside. Consequently $j_!(j^*P\\otimes Q)\\cong P\\otimes j_!Q$: at a point in the open it is the identity tensor comparison and outside both sides vanish. This holds for total complexes as well. Compute the derived tensor with a K-flat resolution with flat terms of $K$; its inverse image stays K-flat by the ringed-topos tensor-pullback lemma. Since $j_!$ is exact, the termwise comparison computes the derived one. Apply the proper projection formula for $r$ to $j_!M$ to obtain $Rf_!(f^*K\\otimes^L M)\\cong K\\otimes^LRf_!M$, for all unbounded $K,M$. In particular set $M=\\omega_f$, compose with the adjunction counit at $A_S$ and the tensor unit constraint, and transpose. This constructs the claimed global map $\\alpha_{f,K}$. All schemes in the compactification are Noetherian, since $S$ is Noetherian and the morphisms are finite type.",
+   "text": "The source library already states smooth duality in AlgebraicGeometry.Etale.exists_dualizingComplex_iso_and_tensor (WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality), for the same ordinary unbounded derived categories, with locally constant rank-one geometric stalks and the canonical mate in the opposite tensor order. Reuse this existing declaration rather than repeat its geometric proof. First apply RingedSpace.isUnit_of_isUnit_germ to N on S; package N, its positivity, its annihilation of A, and this unit as HasInvertibleExponent A S. HasInvertibleExponent.of_hom gives the hypothesis on X required by the source theorem. Apply that theorem with the given f and d.",
    "uses": [
     "def-asd-compactifiable",
-    "def-amb-etale-compact-support",
-    "lem-weil-pbc-extension-by-zero-stalks",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-amb-proper-coproducts-projection",
-    "thm-amb-etale-exceptional-adjoint",
-    "lem-kun-tensor-unit",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-pbc-geometric-stalks",
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lemma-weil-pbc-geometric-stalk-conservative"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-asd-smooth-tensor.md",
-    "place": "Proof (expanded from the blueprint)"
-   }
-  },
-  {
-   "text": "Because $NA=0$, the coefficient ring is torsion, so [lem-kun-proper-base-change-torsion-ring] applies to every proper rectangle. Together with the unbounded proper/open exchange and compact-support comparison stated in [lem-amb-unbounded-compact-support-comparisons], and the extension-by-zero stalk calculation [lem-weil-pbc-extension-by-zero-stalks], this gives the canonical proper/open comparison as an isomorphism for every unbounded $A$-module complex.",
-   "uses": [
-    "lem-kun-proper-base-change-torsion-ring",
-    "lem-amb-unbounded-compact-support-comparisons",
-    "lem-weil-pbc-extension-by-zero-stalks"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F0C; unbounded proper/open comparison"
-   }
-  },
-  {
-   "text": "The refinement, identity, and composition clauses of [lem-amb-unbounded-compact-support-comparisons] identify all compactification candidates canonically and coherently. Its unbounded composition comparison supplies $Rg_!Rf_!\\cong R(gf)_!$ and the associativity and identity laws, so the compact-support functor is independent of the chosen compactification.",
-   "uses": [
-    "lem-amb-unbounded-compact-support-comparisons"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7I–0F7J: refinement and composition coherence"
-   }
-  },
-  {
-   "text": "Apply [lem-amb-shriek-tensor-composition] to the canonical projections constructed in step 1. That statement gives the composite projection identity (in the displayed orientation); taking inverses gives the inverse projection orientation used here, and its refinement clause makes the maps independent of compactification. This supplies the tensor compatibility needed when transposing through composite adjunctions.",
-   "uses": [
-    "lem-amb-shriek-tensor-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/thm-asd-smooth-tensor.proof.md",
-    "place": "Proof paragraph 3: projection map through the composite counit"
-   }
-  },
-  {
-   "text": "For composable $X\\xrightarrow{a}Y\\xrightarrow{b}Z$ among the maps used below, the bases are qcqs because they are Noetherian. Nagata and [prop-nagata-compactification-category] give compactifications and common/equalizing refinements. The proper/open tower specified in [lem-amb-unbounded-compact-support-comparisons] therefore applies; its normalization is exactly the one used in steps 3 and 4.",
-   "uses": [
-    "thm-nagata-compactification",
-    "prop-nagata-compactification-category",
-    "lem-amb-unbounded-compact-support-comparisons"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7I (lemma-shriek-well-defined), 0F7J (lemma-shriek-composition): choices of compactifications and tower"
-   }
-  },
-  {
-   "text": "At each point of $X$, the smooth local normal form supplies affine opens $U\\subset X$, $V\\subset S$ and an etale map $U\\to\\mathbf A^d_V$. The dimension in this form is the given $d$: the etale map has zero-dimensional relative fibres, and [sbc-lem-affine-space-smooth] says that projection from affine space has relative dimension equal to its number of coordinates; apply [lem-sbc-smooth-relative-dimension-permanence] to the etale map and that projection. At the chosen point the resulting dimension equals $d$, so the chart integer is $d$. Compose the etale map with the open immersion $\\mathbf A^d_V\\subset\\mathbf A^d_S$ to obtain a separated finite-type etale $e:U\\to\\mathbf A^d_S$ with $fu=p_de$, where $u:U\\hookrightarrow X$. Thus the original base $S$ is retained. The maps $u,e,p_d,fu$ are compactifiable by Nagata, applied to their separated finite-type maps and qcqs Noetherian bases. Use the ordinary-etale projective-line adjunction [lem-asd-ordinary-finite-p1-adjunction], restrict by the exact open extension adjunction to affine lines, and iterate using steps 3–5. This supplies $Rp_{d!}\\dashv p_d^*(d)[2d]$ with its twist explicitly $A(1)=\\mu_N\\otimes_{\\mathbf Z/N}A$ on the ordinary etale site. In particular it makes no identification with def-coefficient-twists-detailed. Etale adjoint locality for $u$ and $e$ then identifies\n$$u^*f^\\times K\\cong (fu)^\\times K\\cong e^*p_d^*K(d)[2d],\\qquad u^*\\omega_f\\cong A_U(d)[2d].$$\nHere the finite etale twist is defined by the new ordinary projective-line input, with the same annihilator $N$ as the twist-line lemma. The affine iteration uses pullback of roots of unity and the tensor identity $A(1)^{\\otimes d}=A(d)$, not an adic comparison. Step 7 below fixes the counit of that iterated adjunction. The identification is the unique comparison of right adjoints through their Hom bijections.",
-   "uses": [
-    "sbc-thm-etale-local-normal-form",
-    "lem-sbc-smooth-relative-dimension-permanence",
-    "thm-nagata-compactification",
-    "lem-amb-etale-adjoint-locality",
-    "lem-asd-finite-etale-twist-line",
-    "lem-asd-ordinary-finite-p1-adjunction",
-    "sbc-lem-affine-space-smooth"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 054L, lemma-smooth-etale-over-affine-space; adjunction calculation follows the blueprint second paragraph"
-   }
-  },
-  {
-   "text": "Fix the normalization of the affine-space adjunction, rather than merely an abstract isomorphism of its right adjoint. On $\\mathbf P^1_S$, the adjunction counit is, by [lem-asd-ordinary-finite-p1-adjunction] for our arbitrary finite $A$,\n$$Rq_*q^*K(1)[2]\\cong K\\otimes^LRq_*A(1)[2]\\xrightarrow{1\\otimes t_q}K.$$\nFor $j:\\mathbf A^1_S\\hookrightarrow\\mathbf P^1_S$, the right adjoint of $Rq_*j_!$ is $j^*q^*(1)[2]$. Its counit is $Rq_*$ of the counit $j_!j^*\\to\\mathrm{id}$ followed by the displayed counit. The open-immersion tensor comparison from step 1 sends this composite to $1_K$ tensored with its value at $A_S$. Use the unbounded composition comparison of step 3 and its tensor compatibility from step 4. Iterating the affine-line factorization of $p_d$ gives the same assertion for $p_d$: the composite counit is obtained by successively applying the $d$ line counits. For $d=0$ it is the identity. Tensor reassociation sends $x\\otimes m_1\\otimes\\cdots\\otimes m_d$ to the same tensor at each stage, so its transpose is exactly the canonical isomorphism $p_d^*K\\otimes^LA(d)[2d]\\cong p_d^*K(d)[2d]$.",
-   "uses": [
-    "lem-amb-etale-adjoint-locality",
-    "lem-kun-tensor-unit",
-    "lem-asd-ordinary-finite-p1-adjunction",
-    "lem-amb-unbounded-compact-support-comparisons",
-    "lem-amb-shriek-tensor-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-asd-smooth-tensor.md",
-    "place": "Proof (expanded from the blueprint)"
-   }
-  },
-  {
-   "text": "For each separated finite-type etale chart map $v=u$ or $e$, [lem-asd-etale-sum-extension-tensor] gives the unbounded tensor comparison for sum extension and its compatibility with the fold counit. The comparison is the one used by the compactification projection in [lem-pur-etale-support-map-compatibility](2), so the tensor projection can be moved through the counit in both chart factorizations.",
-   "uses": [
-    "lem-asd-etale-sum-extension-tensor",
-    "lem-pur-etale-support-map-compatibility",
-    "def-weil-pbc-etale-sum-extension"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-asd-smooth-tensor.md",
-    "place": "Proof paragraph 3: etale sum-extension tensor and counit calculation"
-   }
-  },
-  {
-   "text": "Apply [lem-asd-tensor-mate-etale-precomp] to $f$ and $u:U\\hookrightarrow X$. With $h=fu$, its displayed equality identifies $u^*\\alpha_{f,K}$ with the canonical tensor mate $\\alpha_{h,K}$ after the locality identifications, including $u^*\\omega_f\\cong\\omega_h$ and the composite counit.",
-   "uses": [
-    "lem-asd-tensor-mate-etale-precomp"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-asd-smooth-tensor.md",
-    "place": "Proof paragraph 3: first canonical-mate factorization"
-   }
-  },
-  {
-   "text": "Apply [lem-asd-tensor-mate-etale-precomp] again, now with $f=p_d$ and $u=e$. The maps $p_d,e,h=p_de$ satisfy its compactifiability and Noetherian hypotheses by step 6. Its same equality identifies $e^*\\alpha_{p_d,K}$ with $\\alpha_{h,K}$, inserting the isomorphisms $e^*p_d^\\times B\\cong h^\\times B$ at $B=K,A_S$. By step 7 the affine-space mate is the tensor reassociation isomorphism; exact inverse image and the canonical tensor-pullback isomorphism preserve it. Thus $\\alpha_{h,K}$ is invertible.",
-   "uses": [
-    "lem-asd-tensor-mate-etale-precomp",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "prop-weil-pbc-inverse-image-modules-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-asd-smooth-tensor.md",
-    "place": "Proof paragraph 3: second canonical-mate factorization"
-   }
-  },
-  {
-   "text": "The affine charts of step 6 cover $X$. Steps 9–10 show that the pullback of the globally constructed canonical map is invertible on every such chart, with the same original base $S$. These are the local isomorphisms used in the following stalk test.",
-   "uses": [
-    "sbc-thm-etale-local-normal-form"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-asd-smooth-tensor.md",
-    "place": "Proof paragraph 3: chartwise local isomorphism"
-   }
-  },
-  {
-   "text": "Inverse image on etale module sheaves is exact, so it commutes with cohomology. The charts of step 6 cover $X$, and step 11 therefore makes every geometric stalk of every cohomology map $\\mathcal H^i(\\alpha_{f,K})$ an isomorphism. Apply the geometric-stalk criterion to each underlying abelian cohomology sheaf. Every $\\mathcal H^i(\\alpha_{f,K})$ is an isomorphism; equivalently its cone is acyclic, so $\\alpha_{f,K}$ is an isomorphism in the ordinary derived category. This uses no bounded-below hypothesis and applies the sheaf-level criterion only to sheaves.",
-   "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lemma-weil-pbc-geometric-stalk-conservative",
     "def-weil-pbc-derived-categories",
-    "def-weil-derived-cohomology-sheaves"
+    "thm-amb-etale-exceptional-adjoint"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-asd-smooth-tensor.md",
-    "place": "Proof (expanded from the blueprint)"
-   }
+   "elementary": true
   },
   {
-   "text": "The local model $u^*\\omega_f\\cong A_U(d)[2d]$ and the twist-line lemma give $\\mathcal H^i(\\omega_f)=0$ for $i\\ne-2d$: exact inverse image and the sheaf-stalk criterion detect this vanishing. Put $L=\\mathcal H^{-2d}(\\omega_f)$. It is locally isomorphic to $A_U(d)$, and refining the chart by a twist trivialization makes it isomorphic to $A$, which is precisely the stated local rank-one condition. To identify the complex globally, take a representative $C$ of $\\omega_f$ and let $q=-2d$. The good truncation $\\tau_{\\le q}C\\to C$ is a quasi-isomorphism because cohomology above $q$ vanishes. The projection $\\tau_{\\le q}C\\to L[-q]$ is a quasi-isomorphism because its kernel is acyclic (cohomology below $q$ vanishes and its degree-$q$ cycles equal its boundaries). These two quasi-isomorphisms give $\\omega_f\\cong L[2d]$. No local choices of a primitive root or of a basis of $L$ are glued into an orientation.",
+   "text": "Take the locally constant sheaf L supplied by the existing theorem. Shift its isomorphism omega_f ≅ L[2d] by -2d and cancel the two shifts. Take a locally constant trivializing cover and reindex it by pairs (i,y) with y a point of its i-th member; this discards empty members and still covers X. On each member let M be the constant module. Transport its trivialization from the localized site to the small etale site of that member. At its algebraic-closure geometric point the stalk of constant M is M, the pullback stalk is the stalk of L on X, and that stalk is isomorphic to A by the source theorem. Applying the localized constant-sheaf functor to M ≅ A gives the required module-sheaf rank-one trivialization. If X is empty the reindexed cover is empty and the assertion is vacuous.",
    "uses": [
-    "lem-asd-finite-etale-twist-line",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "def-kun-truncations",
-    "def-weil-derived-cohomology-sheaves",
     "def-constructible-locally-constant"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-asd-smooth-tensor.md",
-    "place": "Proof (expanded from the blueprint)"
-   }
+   "elementary": true
+  },
+  {
+   "text": "For an arbitrary adjunction F ⊣ G between braided monoidal categories, naturality of its Hom bijection in both arguments identifies the transpose of F(beta) followed by the inverse projection, beta on the base, the tensor of the counit, and the right unitor with beta followed by the source tensor mate and G of the left unitor. Braiding naturality moves the counit across beta and braiding_rightUnitor finishes the equality. Specialize this proved identity at a general coefficient category, so that the derived monoidal structure is not repeatedly elaborated at concrete module sheaf categories. It identifies smoothTensorDualityMap with the source dualizingComplexTensorMap precomposed by the canonical Koszul braiding. The source theorem makes the latter map invertible for each K; braiding and composition preserve invertibility.",
+   "uses": [
+    "def-kun-derived-tensor",
+    "lem-kun-tensor-unit"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-amb-etale-compact-support",
   "def-asd-compactifiable",
   "def-constructible-locally-constant",
-  "def-kun-truncations",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-derived-cohomology-sheaves",
+  "def-kun-derived-tensor",
   "def-weil-pbc-derived-categories",
-  "def-weil-pbc-etale-sum-extension",
-  "def-weil-pbc-geometric-stalks",
-  "lem-amb-etale-adjoint-locality",
-  "lem-amb-proper-coproducts-projection",
-  "lem-amb-shriek-tensor-composition",
-  "lem-amb-unbounded-compact-support-comparisons",
-  "lem-asd-etale-sum-extension-tensor",
-  "lem-asd-finite-etale-twist-line",
-  "lem-asd-ordinary-finite-p1-adjunction",
-  "lem-asd-tensor-mate-etale-precomp",
-  "lem-kun-proper-base-change-torsion-ring",
   "lem-kun-tensor-unit",
-  "lem-pur-etale-support-map-compatibility",
-  "lem-sbc-smooth-relative-dimension-permanence",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-pbc-extension-by-zero-stalks",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "prop-nagata-compactification-category",
-  "prop-weil-pbc-geometric-stalks-exact",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "sbc-lem-affine-space-smooth",
-  "sbc-thm-etale-local-normal-form",
-  "thm-amb-etale-exceptional-adjoint",
-  "thm-nagata-compactification"
+  "thm-amb-etale-exceptional-adjoint"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-asd-smooth-tensor.md",
-  "place": "Proof, four paragraphs; expanded tensor/counit comparison and corrected finite etale coefficient typing"
+  "by": "C2 stage 3",
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/SmoothDuality.lean",
+  "place": "exists_dualizingComplex_iso_and_tensor, combined with explicit local rank-one, shift, and canonical-mate interface conversions; the geometric proof remains the existing source theorem"
  },
  "mathlib_searches": [
   {
@@ -485,5 +303,15 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261018T062709-L-634406",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
