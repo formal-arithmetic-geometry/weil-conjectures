@@ -1,0 +1,81 @@
+{
+ "id": "lem-per-sepclosed-regular-proper-curve-trace",
+ "kind": "statement",
+ "title": "Trace and point classes on a regular proper curve over a separably closed field",
+ "statement": "Let $k$ be a separably closed field [def-pc-separably-closed], let $D$ be a regular integral proper $k$-scheme of dimension $1$ [def-weil-regular-scheme, def-pc-integral-scheme, def-weil-proper-morphism, def-weil-pbc-krull-dimension-ring], and let $\\ell$ be prime, $n\\geq1$ and $\\Lambda=\\mathbf Z/\\ell^n\\mathbf Z$, with $\\ell$ invertible in $k$. In ordinary small-etale cohomology [def-weil-pbc-derived-categories] with Tate twists [def-asd-finite-etale-tate-twist], there is a canonical trace isomorphism $\\operatorname{Tr}_{D/k}:H^2(D,\\Lambda(1))\\xrightarrow{\\sim}\\Lambda$. For every closed point $z\\in D$, the enlargement of support of the regular Gysin class $\\operatorname{Cl}_{z\\hookrightarrow D}(1)$ has trace $[\\kappa(z):k]$, where $\\kappa(z)$ is the residue field [def-weil-residue-field] and the Gysin class is the one of [lem-per-regular-immersion-class-calculus].",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII §3.4.1, proof of Proposition 3.4.1.3, printed pp.271–272 (trace characterization of closed-point Gysin classes)"
+ },
+ "stmt_deps": [
+  "def-pc-separably-closed",
+  "def-weil-regular-scheme",
+  "def-pc-integral-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-weil-pbc-derived-categories",
+  "def-asd-finite-etale-tate-twist",
+  "def-weil-residue-field",
+  "lem-per-regular-immersion-class-calculus"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a regular integral proper curve over a separably closed field the degree normalized trace identifies second etale cohomology with ZMod and sends a closed point Gysin class to its residue degree",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"FunctionField.classNumber\", \"module\": \"Mathlib/NumberTheory/ClassNumber/FunctionField\", \"type\": \"(Fq : Type u_1) →\\n  (F : Type u_2) →\\n    [inst : Field Fq] →\\n      [Fintype Fq] →\\n        [inst_2 : Field F] →\\n          [inst_3 : Algebra (Polynomial Fq) F] →\\n            [inst_4 : Algebra (RatFunc Fq) F] →\\n              [IsScalarTower (Polynomial Fq) (RatFunc Fq) F] →\\n                [FunctionFiel\", \"doc\": \"The class number is defined as the cardinality of the class group of the ring of integers $\\\\mathcal{O}_F$ (the integral closure of $\\\\mathbb{F}_q[X]$) in a function field $F$ over the finite field $\\\\ma\"}\n  {\"name\": \"Algebra.normalizedTrace\", \"module\": \"Mathlib/FieldTheory/NormalizedTrace\", \"type\": \"(F : Type u_1) →\\n  (K : Type u_2) →\\n    [inst : Field F] → [inst_1 : Field K] → [inst_2 : Algebra F K] → [CharZero F] → [Algebra.IsIntegral F K] → K →ₗ[F] F\", \"doc\": \"The normalized trace is an $ F $-linear map $ \\\\operatorname{Tr}_{\\\\text{norm}} : K \\\\to F $ defined by $ \\\\operatorname{Tr}_{\\\\text{norm}}(a) = \\\\frac{1}{[F(a):F]} \\\\cdot \\\\operatorname{Tr}_{F(a)/F}(a) $, wh\"}\n  {\"name\": \"Algebra.normalizedTrace_def\", \"module\": \"Mathlib/FieldTheory/NormalizedTrace\", \"type\": \"∀ (F : Type u_1) (K : Type u_2) [inst : Field F] [inst_1 : Field K] [inst_2 : Algebra F K] [inst_3 : CharZero F]\\n  [inst_4 : Algebra.IsIntegral F K] (a : K),\\n  (Algebra.normalizedTrace F K) a =\\n    (↑(Module.finrank F ↥F⟮a⟯))⁻¹ • (Algebra.trace F ↥F⟮a⟯) (IntermediateField.AdjoinSimple.gen F a)\", \"doc\": \"The normalized trace map $\\\\operatorname{Tr}_{\\\\text{norm}} : K \\\\to F$ is defined for each element $a \\\\in K$ as $\\\\operatorname{Tr}_{\\\\text{norm}}(a) = \\\\frac{1}{[F(a):F]} \\\\cdot \\\\operatorname{Tr}_{F(a)/F}(\"}\n  {\"name\": \"groupCohomology.exists_mul_galRestrict_of_norm_eq_one\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90\", \"type\": \"∀ {K L : Type} [inst : Field K] [inst_1 : Field L] [inst_2 : Algebra K L] [FiniteDimensional K L]\\n  [inst_4 : IsGalois K L] [IsCyclic Gal(L/K)] {g : Gal(L/K)} {A : Type u_1} {B : Type u_2} [inst_6 : CommRing A]\\n  [inst_7 : CommRing B] [inst_8 : Algebra A B] [inst_9 : Algebra A L] [inst_10 : Algebra \", \"doc\": \"In a cyclic Galois extension $ L/K $ with generator $ g $, if an element $ \\\\eta \\\\in B $ (the integral closure of $ A $ in $ L $) satisfies $ \\\\operatorname{Norm}_{L/K}(\\\\eta) = 1 $, then there exists a \"}\n  {\"name\": \"Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime\", \"module\": \"Mathlib/RingTheory/Polynomial/UniversalFactorizationRing\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (P : Ideal R) [inst_1 : P.IsPrime] (p : Polynomial R)\\n  (f g : Polynomial P.ResidueField),\\n  p.Monic →\\n    f.Monic →\\n      g.Monic →\\n        Polynomial.map (algebraMap R P.ResidueField) p = f * g →\\n          IsCoprime f g →\\n            ∃ R' x x_1,\\n              ∃ (\", \"doc\": \"Given a ring homomorphism $ f : A → B $ between commutative rings and prime ideals $ I ⊆ A $, $ J ⊆ B $ such that $ I $ is the preimage of $ J $ under $ f $, there exists a unique $ R $-algebra homomo\"}\n  {\"name\": \"prod_galRestrict_eq_norm\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"∀ (A : Type u_1) (K : Type u_2) (L : Type u_3) (B : Type u_6) [inst : CommRing A] [inst_1 : CommRing B]\\n  [inst_2 : Algebra A B] [inst_3 : Field K] [inst_4 : Field L] [inst_5 : Algebra A K] [inst_6 : IsFractionRing A K]\\n  [inst_7 : Algebra K L] [inst_8 : Algebra A L] [inst_9 : IsScalarTower A K L] [\", \"doc\": \"For a Galois extension $ L/K $ and an integrally closed ring $ A $, the product of the Galois group $ \\\\text{Gal}(L/K) $ acting on an element $ x $ of the integral closure $ B $ of $ A $ in $ L $ equal\"}\n  {\"name\": \"Algebra.trace_quotient_eq_of_isDedekindDomain\", \"module\": \"Mathlib/RingTheory/Trace/Quotient\", \"type\": \"∀ {R : Type u_1} (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal R)\\n  [p.IsMaximal] (x : S) [inst_4 : IsDedekindDomain R] [inst_5 : IsDomain S] [inst_6 : Module.IsTorsionFree R S]\\n  [inst_7 : Module.Finite R S] [inst_8 : IsIntegrallyClosed S],\\n  (Algebra.tr\", \"doc\": \"For a Dedekind domain $ R $, an integral domain $ S $ that is a torsion-free and finitely generated $ R $-module, and an integrally closed $ S $, the trace of the image of $ x $ in the quotient ring $\"}\n  {\"name\": \"Polynomial.residueFieldMapCAlgEquiv\", \"module\": \"Mathlib/RingTheory/LocalRing/ResidueField/Polynomial\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      [inst_1 : I.IsPrime] →\\n        (J : Ideal (Polynomial R)) →\\n          [inst_2 : J.IsPrime] →\\n            [inst_3 : J.LiesOver I] →\\n              J = Ideal.map Polynomial.C I → J.ResidueField ≃ₐ[I.ResidueField] RatFunc I.ResidueField\", \"doc\": \"Given prime ideals $ I \\\\subseteq R $ and $ J \\\\subseteq R[X] $ such that $ J $ lies over $ I $ (i.e., $ J \\\\cap R = I $) and $ J $ is the extension of $ I $ under the constant polynomial embedding $ C :\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern normalization, field trace or unrelated declarations, not this statement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Top etale cohomology of a regular proper curve over an imperfect separably closed field and purely inseparable closed point degrees",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Field.sepDegree_eq_of_isPurelyInseparable\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Tower\", \"type\": \"[IsPurelyInseparable F E] : sepDegree F K = sepDegree E K\", \"doc\": \"If $ E/F $ is a purely inseparable field extension, then for any field extension $ K/E $, the separable degree of $ K $ over $ F $ equals the separable degree of $ K $ over $ E $, i.e., $[K:F]_s = [K:\"}\n  {\"name\": \"IsPurelyInseparable.sepDegree_eq_one\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \"[IsPurelyInseparable F E] : sepDegree F E = 1\", \"doc\": \"If $ E/F $ is a purely inseparable field extension, then the separable degree of $ E $ over $ F $ is equal to 1, i.e., $ [E : F]_\\\\text{sep} = 1 $.\"}\n  {\"name\": \"isPurelyInseparable_iff_finSepDegree_eq_one\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \": IsPurelyInseparable F E ↔ finSepDegree F E = 1\", \"doc\": \"A field extension $ E $ over $ F $ is purely inseparable if and only if its separable degree $[E:F]_s$ equals 1.\"}\n  {\"name\": \"Field.sepDegree_eq_of_isPurelyInseparable_of_isSeparable\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Tower\", \"type\": \"[IsPurelyInseparable F E] [Algebra.IsSeparable E K] : sepDegree F K = Module.rank E K\", \"doc\": \"Let $ K \\\\subseteq E \\\\subseteq F $ be a tower of fields where $ E $ is separable over $ K $ and $ F $ is purely inseparable over $ E $. Then the separable degree $ [F:K]_s $ equals the degree $ [E:K] $\"}\n  {\"name\": \"Field.insepDegree\", \"module\": \"Mathlib.FieldTheory.SeparableClosure\", \"type\": \"(F : Type u) → (E : Type v) → [inst : Field F] → [inst_1 : Field E] → [Algebra F E] → Cardinal.{v}\", \"doc\": \"The inseparable degree of a field extension $ E $ over $ F $ is defined as the rank of $ E $ as a module over its separable closure in $ E $. This measures the dimension of $ E $ as a vector space ove\"}\n  {\"name\": \"IsPurelyInseparable.finSepDegree_eq_one\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \"[IsPurelyInseparable F E] : finSepDegree F E = 1\", \"doc\": \"If the field extension $ E $ over $ F $ is purely inseparable, then its separable degree $[E:F]_s$ is equal to 1.\"}\n  {\"name\": \"isSepClosed_iff_isPurelyInseparable_algebraicClosure\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \"[IsAlgClosure F E] : IsSepClosed F ↔ IsPurelyInseparable F E\", \"doc\": \"A field $ F $ is separably closed if and only if its algebraic closure $ E $ is a purely inseparable field extension of $ F $.\"}\n  {\"name\": \"isPurelyInseparable_of_finSepDegree_eq_one\", \"module\": \"Mathlib.FieldTheory.PurelyInseparable.Basic\", \"type\": \"(hdeg : finSepDegree F E = 1) : IsPurelyInseparable F E\", \"doc\": \"If the separable degree $[E:F]_s$ of a field extension $E$ over $F$ equals 1, then $E$ is purely inseparable over $F$. This means every element of $E$ has a minimal polynomial over $F$ of the form $x^\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern normalization, field trace or unrelated declarations, not this statement"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Gysin\", \"trace\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern normalization, field trace or unrelated declarations, not this statement"
+  },
+  {
+   "tool": "grep",
+   "query": "Gysin|etale.*cohomolog|cohomolog.*curve",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"line\": \"17\", \"text\": \"A sieve `S` on `X` is covering for `finestTopologySingle P` iff\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"line\": \"59\", \"text\": \"def finestTopologySingle (P : Cᵒᵖ ⥤ Type w) : GrothendieckTopology C where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"line\": \"83\", \"text\": \"  sInf (finestTopologySingle '' Ps)\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern normalization, field trace or unrelated declarations, not this statement"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-surface-resolution-supported-presentation",
+  "date": "2026-10-19",
+  "group": "Q72"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 1: dimension-normalized Verdier duality and the middle t-structure (historically Step 3 when this child was created); the finite-coefficient potential-dualizing construction underlying the qbar generic duality model. Technical input to ILO XVII sections 3.4–3.5: Expose XVII sections 3.4.1–3.4.3: existence of an SNC resolution, Propositions 3.4.1.1(d), 3.4.1.2–3.4.1.3, the connectedness observation in 3.4.1.4, common domination in 3.4.2, and the normalized support square of Lemma 3.4.3.1; printed pp.270–274; input: Expose XVII §3.4.1, proof of Proposition 3.4.1.3, printed pp.271–272 (trace characterization of closed-point Gysin classes)",
+   "via": [
+    "lem-per-surface-resolution-supported-presentation",
+    "lem-per-normal-top-residue-class",
+    "lem-per-normal-pinned-extension",
+    "lem-per-potential-dualizing-uniqueness",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
