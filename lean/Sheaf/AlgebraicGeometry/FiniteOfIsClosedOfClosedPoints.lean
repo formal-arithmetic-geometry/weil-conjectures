@@ -35,6 +35,14 @@ Proof:
 theorem finite_of_isClosed_of_closed_points (X : Scheme.{u})
     [IsLocallyNoetherian X] [CompactSpace X] (E : Set X) (hE : IsClosed E)
     (hpoints : ∀ x ∈ E, IsClosed ({x} : Set X)) : E.Finite := by
-  sorry
+  let : IsNoetherian X := ⟨⟩
+  obtain ⟨S, hS, hSc, hSi, rfl⟩ :=
+    TopologicalSpace.NoetherianSpace.exists_finite_set_isClosed_irreducible hE
+  refine hS.sUnion fun Z hZ ↦ ?_
+  obtain ⟨x, hx⟩ := QuasiSober.sober (hSi Z hZ) (hSc Z hZ)
+  have hxE : x ∈ ⋃₀ S := Set.mem_sUnion.mpr ⟨Z, hZ, hx.mem⟩
+  have hZeq : Z = {x} := hx.def.symm.trans (hpoints x hxE).closure_eq
+  rw [hZeq]
+  exact Set.finite_singleton x
 
 end AlgebraicGeometry
