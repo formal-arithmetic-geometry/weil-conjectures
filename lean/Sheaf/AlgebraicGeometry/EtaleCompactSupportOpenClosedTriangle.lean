@@ -9,16 +9,10 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
-import Sheaf.AlgebraicGeometry.EtaleConstantModuleDirectImageLeftExact
-import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
+import WeilConjectures.SixFunctors.Finite.Exact
 import Sheaf.AlgebraicGeometry.EtaleShriekQcqsComposition
 import Sheaf.AlgebraicGeometry.OpenClosedRecollement
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.AlgebraicGeometry.DerivedCategories
 
 /-!
 # Open-closed localization for relative etale compact support
@@ -93,6 +87,58 @@ theorem exists_compactSupport_openClosed_triangle
           (ShortComplex.mk _ _ z₂).Exact ∧
           (ShortComplex.mk _ _ z₃).Exact ∧
           (ShortComplex.mk _ _ z₁).Exact := by
-  sorry
+  classical
+  have : CompactSpace U := QuasiCompact.compactSpace_of_compactSpace j
+  have : QuasiSeparatedSpace U := quasiSeparatedSpace_of_quasiSeparated j
+  have : CompactSpace Z := QuasiCompact.compactSpace_of_compactSpace i
+  have : QuasiSeparatedSpace Z := quasiSeparatedSpace_of_quasiSeparated i
+  have : (𝟭 (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))).Additive := ⟨by intros; rfl⟩
+  let dU := Compactification.ofIsOpenImmersion j
+  let dZ := Compactification.ofIsProper i
+  let F := rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} Λ) c_f
+  let JU := (upperStar (ModuleCat.{u + 1} Λ) j).mapDerivedCategoryPlus.obj K
+  let IZ := (upperStar (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryPlus.obj K
+  let eU : rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} Λ) dU ≅
+      (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j).mapDerivedCategoryPlus :=
+    Functor.isoWhiskerLeft _
+      (Functor.rightDerivedFunctorPlusNatIso (lowerStarId (ModuleCat.{u + 1} Λ) X) ≪≫
+        Functor.rightDerivedFunctorPlusIdIso _) ≪≫ Functor.rightUnitor _
+  let eId : openImmersionLowerShriek (ModuleCat.{u + 1} Λ) (𝟙 Z) ≅
+      𝟭 (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
+    (openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} Λ) (𝟙 Z)).leftAdjointUniq
+      ((Adjunction.id).ofNatIsoRight (upperStarId (ModuleCat.{u + 1} Λ) Z).symm)
+  let eZ : rightDerivedLowerShriekOfCompactificationPlus (ModuleCat.{u + 1} Λ) dZ ≅
+      (lowerStar (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryPlus :=
+    Functor.isoWhiskerRight
+        (Functor.mapDerivedCategoryPlusNatIso eId ≪≫ Functor.mapDerivedCategoryPlusIdIso _)
+        _ ≪≫
+      Functor.leftUnitor _ ≪≫
+        (lowerStar (ModuleCat.{u + 1} Λ) i).rightDerivedFunctorPlusIsoMapDerivedCategoryPlus
+  obtain ⟨compU⟩ := nonempty_iso_etaleShriek_qcqs_compactification_comp Λ j f dU c_f c_g
+  obtain ⟨compZ⟩ := nonempty_iso_etaleShriek_qcqs_compactification_comp Λ i f dZ c_f c_h
+  obtain ⟨δ, hδ, _⟩ := exists_functorial_distTriang_openClosed Λ j i hij
+  let S := Triangle.mk
+    ((derivedOpenImmersionLowerShriekUpperStarAdjunctionPlus (ModuleCat.{u + 1} Λ) j).counit.app K)
+    ((upperStarLowerStarAdjunction
+      (ModuleCat.{u + 1} Λ) i).mapDerivedCategoryPlusAdjunction.unit.app K)
+    (δ K)
+  let G := F ⋙ DerivedCategory.Plus.ι
+  let T := G.mapTriangle.obj S
+  have hT : T ∈ distTriang _ := G.map_distinguished S (hδ K)
+  refine ⟨T, ?_, ?_, ?_, hT, ?_⟩
+  · exact ⟨DerivedCategory.Plus.ι.mapIso
+      (F.mapIso ((eU.app JU).symm) ≪≫ compU.app JU)⟩
+  · exact ⟨Iso.refl _⟩
+  · exact ⟨DerivedCategory.Plus.ι.mapIso
+      (F.mapIso ((eZ.app IZ).symm) ≪≫ compZ.app IZ)⟩
+  · intro q
+    have z₂ : (DerivedCategory.homologyFunctor _ q).map T.mor₁ ≫
+        (DerivedCategory.homologyFunctor _ q).map T.mor₂ = 0 := by
+      simp only [← Functor.map_comp, comp_distTriang_mor_zero₁₂ T hT, Functor.map_zero]
+    refine ⟨z₂, DerivedCategory.HomologySequence.comp_δ T hT q (q + 1),
+      DerivedCategory.HomologySequence.δ_comp T hT q (q + 1), ?_, ?_, ?_⟩
+    · exact DerivedCategory.HomologySequence.exact₂ T hT q
+    · exact DerivedCategory.HomologySequence.exact₃ T hT q (q + 1)
+    · exact DerivedCategory.HomologySequence.exact₁ T hT q (q + 1)
 
 end AlgebraicGeometry.Etale

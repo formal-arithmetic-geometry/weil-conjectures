@@ -34,133 +34,98 @@
  ],
  "proof": [
   {
-   "text": "First check the qcqs sources required by compact-support composition. Since $j_U$ is quasi-compact and $X$ is quasi-compact, $U$ is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](2). Affine opens of $U$ are affine opens of $X$, so both directions of [lem-weil-pbc-quasi-separated-affine-cover-criterion] show that $U$ is quasi-separated. By [def-weil-closed-immersion], $Z$ is homeomorphic to a closed subset of $X$, hence is quasi-compact by [lem-weil-pbc-closed-in-quasi-compact]. For affine opens $V_a$ covering $X$, that definition also says that $i^{-1}V_a$ is affine. Its intersection with $i^{-1}V_b$ is a closed subset of the quasi-compact space $V_a\\cap V_b$, and is therefore quasi-compact by the same lemma. The same affine-cover criterion shows that $Z$ is quasi-separated.",
+   "text": "Obtain CompactSpace U and CompactSpace Z by QuasiCompact.compactSpace_of_compactSpace applied to j and i. Obtain QuasiSeparatedSpace U and QuasiSeparatedSpace Z by quasiSeparatedSpace_of_quasiSeparated. The open and closed immersion instances supply separatedness, local finite type and quasi-compactness required by compact-support composition. Closed immersions are finite and proper; no finite generation of their ideal is assumed.",
    "uses": [
     "lem-weil-pbc-qcqs-morphism-permanence",
-    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
-    "def-weil-closed-immersion",
-    "lem-weil-pbc-closed-in-quasi-compact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tag 01KO, label lemma-characterize-quasi-separated; Tag 0GKP geometric hypotheses"
-   }
-  },
-  {
-   "text": "The hypothesis on $j_U$ and [lem-weil-pbc-qc-open-immersion-finite-type] give finite type of $j_U$. For an open-subscheme inclusion, two maps into $U$ with the same composite into $X$ agree, including their structure-sheaf maps. Thus $U\\times_XU\\cong U$, with diagonal inverse to either projection; the diagonal is an isomorphism and hence a closed immersion. This proves separatedness from [def-weil-pbc-scheme-conventions]. Thus [lem-weil-pbc-proper-fp-permanence](e) makes $g=fj_U$ separated and locally of finite type. Since $U$ is quasi-compact and $Y$ is quasi-separated, [lem-weil-pbc-qcqs-morphism-permanence](1) makes $g$ quasi-compact; locally finite type plus quasi-compact is finite type by [def-weil-pbc-scheme-conventions].",
-   "uses": [
     "lem-weil-pbc-qc-open-immersion-finite-type",
-    "def-weil-pbc-scheme-conventions",
-    "lem-weil-pbc-proper-fp-permanence",
-    "lem-weil-pbc-qcqs-morphism-permanence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tags 01T2 and 01T3, labels lemma-immersion-locally-finite-type and lemma-composition-finite-type; Schemes Tag 01KU, label lemma-separated-permanence"
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-closed-immersion-proper](a), $i$ is proper. By [lem-weil-pbc-closed-immersion-finite], it is finite, without any finite-generation assumption on its defining ideal. Apply [lem-weil-pbc-finite-over-separated-finite-type] to $i$ followed by $f$: $h=fi$ is separated of finite type. Together with the preceding two steps, all the geometric hypotheses of the two later applications of compact-support composition are now verified.",
-   "uses": [
-    "lem-weil-pbc-closed-immersion-proper",
     "lem-weil-pbc-closed-immersion-finite",
-    "lem-weil-pbc-finite-over-separated-finite-type"
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-weil-pbc-proper-fp-permanence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tags 01W5 and 035C, labels lemma-closed-immersion-proper and lemma-closed-immersion-finite; Tag 01T3, label lemma-composition-finite-type"
+    "place": "Schemes Tag 01KO; Morphisms Tags 01T2, 01T3, 035C and 01W5"
    }
   },
   {
-   "text": "Apply [lem-cbc-open-closed-recollement] to $i:Z\\hookrightarrow X$, $j_U:U\\hookrightarrow X$, the given finite commutative ring and $K\\in D^+(X_{\\Et},\\Lambda)$. It supplies a distinguished triangle $A\\xrightarrow{a}K\\xrightarrow{b}C\\xrightarrow{w}A[1]$ with $A=j_{U!}j_U^{-1}K$ and $C=i_*i^{-1}K$, where the closed direct image $i_*$ is exact. This is the absolute open-closed triangle of Tag 0GKL, obtained from the canonical sheaf short exact sequence of Tag 095L. Both functors in the displayed outer terms are the small-etale finite-ring functors of the statement, not exceptional inverse image or pro-etale operations.",
+   "text": "Use exists_functorial_distTriang_openClosed for j, i and hij, and evaluate its boundary at K. Let S be its distinguished triangle in the bounded-below derived category, with terms j_!j^*K, K and i_*i^*K. Only the existence and distinguishedness clauses are needed, not the naturality clause.",
    "uses": [
     "lem-cbc-open-closed-recollement"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0GKP and 0GKL, label lemma-triangle-associated-to-open; etale-cohomology.tex Tag 095L"
+    "place": "Tag 0GKL, label lemma-triangle-associated-to-open"
    }
   },
   {
-   "text": "Write the chosen $c_f$ as $(j_f,p_f)$ and put $F=Rf_!^{c_f}=Rp_{f,*}j_{f!}$, as defined by [def-weil-pbc-projection-compactification]. By [lem-weil-pbc-extension-by-zero-exact] and [lem-sf-exact-functor-derived-triangulated], termwise $j_{f!}$ is triangulated and preserves a lower bound on degrees of a representing complex. The module-sheaf categories have enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives]; $p_{f,*}$ is additive and left exact by [lem-weil-pbc-module-direct-image-left-exact]. Apply [lem-weil-pbc-derived-direct-image-triangulated] to these module categories, not merely to abelian sheaves: it gives the triangulated functor $Rp_{f,*}:D^+\\to D^+$ with its natural shift comparison. Consequently the composite $F$ is triangulated. Applying it to step 4 gives $FA\\xrightarrow{F(a)}FK\\xrightarrow{F(b)}FC\\xrightarrow{t}(FA)[1]$, where $t=\\sigma_A F(w)$ and $\\sigma_A:F(A[1])\\cong(FA)[1]$ is the composite shift comparison.",
+   "text": "Compactify j by Compactification.ofIsOpenImmersion j and i by Compactification.ofIsProper i. For the first, rightDerivedFunctorPlusNatIso(lowerStarId) followed by rightDerivedFunctorPlusIdIso identifies the identity derived direct image with identity. For the second, uniqueness of left adjoints and upperStarId identify extension by zero along identity with identity; descend that isomorphism termwise. Finite direct image is exact, so rightDerivedFunctorPlusIsoMapDerivedCategoryPlus identifies Ri_* with the termwise derived i_*. Apply the stated qcqs compact-support composition theorem for j followed by f and i followed by f. Evaluate the resulting natural isomorphisms on j^*K and i^*K.",
    "uses": [
     "def-weil-pbc-projection-compactification",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "lem-weil-pbc-etale-shriek-qcqs-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GKP, immersion identifications via 0GKM and composition via 0F7J; Derived Categories Tag 015F"
+   }
+  },
+  {
+   "text": "Let F be the bounded-below compact-support functor attached to c_f, and G its composite with the inclusion into the ambient derived category. Extension by zero is exact and the bounded-below derived direct image is triangulated, so G is triangulated. Set T = G.mapTriangle.obj S. Its distinguishedness is G.map_distinguished S. Apply F and then the inclusion to the vertex isomorphisms in the preceding step, and compose with the evaluated composition isomorphisms. These give the three Nonempty vertex isomorphisms required in the statement; the middle one is Iso.refl. No transport of the triangle itself is necessary because its vertices are specified up to isomorphism.",
+   "uses": [
     "lem-weil-pbc-extension-by-zero-exact",
     "lem-sf-exact-functor-derived-triangulated",
-    "lem-weil-pbc-module-sheaves-enough-injectives",
-    "lem-weil-pbc-module-direct-image-left-exact",
-    "lem-weil-pbc-derived-direct-image-triangulated"
+    "lem-weil-pbc-derived-direct-image-triangulated",
+    "def-weil-pbc-derived-categories"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKP, apply the triangulated compact-support functor; derived.tex Tags 015F, 05SE and 05SU"
+    "place": "Tag 0GKP, application of the triangulated compact-support functor"
    }
   },
   {
-   "text": "Choose for $j_U$ the compactification $d_U=(j_U,\\mathrm{id}_X)$ and for $i$ the compactification $d_Z=(\\mathrm{id}_Z,i)$. The properness of $i$ was checked in steps 1–3. The identity is proper directly from the definitions in [def-weil-pbc-scheme-conventions]: its diagonal is an isomorphism, its affine ring maps are identities of finite type, and all its base changes are identity closed maps. Both open factors are quasi-compact. The definition [def-weil-pbc-projection-compactification] gives $R(j_U)_!^{d_U}=R(\\mathrm{id}_X)_*j_{U!}\\cong j_{U!}$ and $Ri_!^{d_Z}=Ri_*$. Identity direct image is identity, including on resolutions. Since $i_*$ is exact by [lem-cbc-open-closed-recollement], on a resolution $L\\to I$ the map $i_*L\\to i_*I$ is a quasi-isomorphism by [lem-sf-exact-functor-derived-triangulated], giving $Ri_*\\cong i_*$ on $D^+$. Now apply [lem-weil-pbc-etale-shriek-qcqs-composition] to $U\\xrightarrow{j_U}X\\xrightarrow{f}Y$ with $d_U,c_f,c_g$, and to $Z\\xrightarrow{i}X\\xrightarrow{f}Y$ with $d_Z,c_f,c_h$. Steps 1–3 verified all qcqs and separated finite-type hypotheses. Evaluation gives isomorphisms $e_U:FA\\cong Rg_!^{c_g}j_U^{-1}K$ and $e_Z:FC\\cong Rh_!^{c_h}i^{-1}K$. Set $G=Rg_!^{c_g}j_U^{-1}K$, $H=Rh_!^{c_h}i^{-1}K$. The required arrows are $F(a)e_U^{-1}:G\\to FK$, $e_ZF(b):FK\\to H$, and $e_U[1]t e_Z^{-1}:H\\to G[1]$. Thus $(e_U,\\mathrm{id}_{FK},e_Z)$ is an isomorphism from the triangle in step 5 to this triangle. By TR1 in [def-weil-triangulated-category] it is distinguished. This proves existence for the three specified compactifications; no unjustified assertion that arbitrary chosen compactifications fit in a Cartesian triangle is used.",
+   "text": "For each integer q, functoriality of homology and the zero composite of the first two arrows of a distinguished triangle give z2. Use DerivedCategory.HomologySequence.comp_δ and δ_comp for z3 and z1. Apply exact₂, exact₃ and exact₁ to T and its distinguishedness to obtain exactness at all three positions, with the connecting map exactly HomologySequence.δ T q (q+1). The abelian and enough-injective instances for Sheaf(smallEtaleTopology, ModuleCat Λ) already come from the source library; the separate SheafOfModules encoding is not needed.",
    "uses": [
-    "def-weil-pbc-scheme-conventions",
-    "def-weil-pbc-projection-compactification",
-    "lem-cbc-open-closed-recollement",
-    "lem-sf-exact-functor-derived-triangulated",
-    "lem-weil-pbc-etale-shriek-qcqs-composition",
-    "def-weil-triangulated-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKP, identifications by composition (0F7J) and the immersion specializations of 0GKM"
-   }
-  },
-  {
-   "text": "The category of small-etale $\\Lambda$-module sheaves on $Y$ is abelian by [lem-weil-pbc-module-sheaves-grothendieck-abelian]. Apply [lem-sf-derived-homology-long-exact] to the distinguished triangle of step 6 in its derived category. By [def-weil-pbc-derived-categories], the bounded-below derived category is a strictly full triangulated subcategory of that category, so the same cohomology functors give the exact sequence at every integer $q$. Its connecting morphism is the one induced by $e_U[1]t e_Z^{-1}$, followed by the cohomology-shift identification $\\mathcal H^q(G[1])\\cong\\mathcal H^{q+1}(G)$. By [def-weil-derived-cohomology-sheaves], these cohomology objects are the cohomology sheaves in the statement. This is exactly the displayed sequence, including exactness at all three positions and every connecting map.",
-   "uses": [
-    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
     "lem-sf-derived-homology-long-exact",
-    "def-weil-pbc-derived-categories",
     "def-weil-derived-cohomology-sheaves"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GKP; derived.tex Tag 05RS, cohomology is homological"
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0GKP; Derived Categories Tag 05RS"
    }
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-qcqs-morphism-permanence",
-  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
-  "def-weil-closed-immersion",
-  "lem-weil-pbc-closed-in-quasi-compact",
   "lem-weil-pbc-qc-open-immersion-finite-type",
-  "def-weil-pbc-scheme-conventions",
-  "lem-weil-pbc-proper-fp-permanence",
-  "lem-weil-pbc-closed-immersion-proper",
   "lem-weil-pbc-closed-immersion-finite",
-  "lem-weil-pbc-finite-over-separated-finite-type",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-proper-fp-permanence",
   "lem-cbc-open-closed-recollement",
   "def-weil-pbc-projection-compactification",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-weil-pbc-etale-shriek-qcqs-composition",
   "lem-weil-pbc-extension-by-zero-exact",
   "lem-sf-exact-functor-derived-triangulated",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "lem-weil-pbc-module-direct-image-left-exact",
   "lem-weil-pbc-derived-direct-image-triangulated",
-  "lem-weil-pbc-etale-shriek-qcqs-composition",
-  "def-weil-triangulated-category",
-  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
-  "lem-sf-derived-homology-long-exact",
   "def-weil-pbc-derived-categories",
+  "lem-sf-derived-homology-long-exact",
   "def-weil-derived-cohomology-sheaves"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "C5",
+  "date": "2026-10-18",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tag 0GKP, label lemma-relative-triangle-associated-to-open"
+  "place": "Tag 0GKP, label lemma-relative-triangle-associated-to-open; existing bounded-below functor comparison API and Mathlib HomologySequence exactness"
  },
  "mathlib_searches": [
   {
@@ -323,10 +288,7 @@
  },
  "tool_uses": [
   "lem-cbc-open-closed-recollement",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "lem-weil-pbc-module-direct-image-left-exact",
-  "lem-weil-pbc-module-sheaves-grothendieck-abelian"
+  "lem-weil-pbc-extension-by-zero-exact"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -365,5 +327,15 @@
   "by": "NZ",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C5",
+  "result": "pass",
+  "landing": "20261018T062716-L-636912",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
