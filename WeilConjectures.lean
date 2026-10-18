@@ -9693,6 +9693,7 @@ public import WeilConjectures.WeilSheaf.Tensor
 public import WeilConjectures.WeilSheaf.TensorHomAdjunction
 public import WeilConjectures.WeilSheaf.TensorObjPairing
 public import WeilConjectures.WeilSheaf.TensorPower
+public import WeilConjectures.WeilSheaf.TraceAdicConstant
 public import WeilConjectures.WeilSheaf.TraceFunction
 public import WeilConjectures.WeilSheaf.TraceFunctionCongr
 public import WeilConjectures.WeilSheaf.TraceFunctionOps
