@@ -19,9 +19,40 @@
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Tag 0913 (lemma-extended-alternating-Cech-is-colimit-koszul), with sites-cohomology.tex Tags 0A0A and 0941 for the dual strict tower and derived inverse-limit convention."
  },
- "proof": [],
+ "proof": [
+  {
+   "text": "For one factor use the double-complex differential formulas. In the only nonzero square the power identity s^(m+2)=s^(m+1) composed with s proves compatibility; all other squares vanish. The degree-zero projection is a chain map because its target differential and degree-one component vanish.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Form the projection natural transformation on the sequential diagram using NatTrans.ofSequence. Its successor square is identity in degree zero and zero otherwise. Induct on the number of factors; bifunctor naturality combines the two projection identities. This includes the empty tensor, whose projection is identity.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Evaluate the transposed tensor tower at each index and degree. The square-zero identity, commutation of induced maps with differentials, and preservation of identities and compositions are exactly the corresponding identities of the original complexes and tensor functor.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the contravariant internal-Hom functor to projection naturality. Compose with evaluation at one and tensor by N. Functoriality and associativity give compatible unit chain maps, hence the degreewise unit cone.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The universal property of limits says that a map between cones induces the corresponding equality of limit lifts. Apply it to the differentials and the unit components, whose chain-map identities give the needed cone equations. This proves the ordinary-limit unit is a chain map.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0913, with sites-cohomology.tex Tags 0A0A and 0941",
+  "note": "H2: elementary coherence proofs of the existing strict constructions; Mathlib double, functoriality, and limit APIs suffice. No statement or construction is changed."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -129,7 +160,9 @@
    "CategoryTheory.RingedKoszulLimitPresentation",
    "CategoryTheory.RingedKoszulLimitPresentation.completion",
    "CategoryTheory.RingedKoszulLimitPresentation.unitOnComplex",
-   "CategoryTheory.RingedKoszulLimitPresentation.unit"
+   "CategoryTheory.RingedKoszulLimitPresentation.unit",
+   "CategoryTheory.ringedKoszulHasSheafCompose",
+   "CategoryTheory.ringedKoszulLimitPreservesZeroMorphisms"
   ],
   "file": "lean/Sheaf/CategoryTheory/RingedKoszulSystem.lean",
   "statement": "def ringedKoszulDiagram : (r : ℕ) → (Fin r → (O.obj ⋙ forget CommRingCat).sections) → ℕ ⥤ ringedSiteComplex O",
@@ -153,5 +186,15 @@
   "group": "NN",
   "result": "pass",
   "note": "Wrote review.md. Checked source statements, dependencies, definitions, universes, edge cases, records, and docstrings. Both modules compile cleanly through scompile.py; confirmed the exact compiled telescope definition. No corrections required; branch unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261018T071155-L-1668733",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

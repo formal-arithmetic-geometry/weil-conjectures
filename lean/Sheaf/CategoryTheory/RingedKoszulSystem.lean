@@ -25,6 +25,11 @@ Source: Stacks Project, More on Algebra, Tag 0913; Cohomology on Sites, Tag 0A0A
 @[expose] public noncomputable section
 
 set_option synthInstance.maxSize 2048
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types false
+
+
+
 
 universe u w
 
@@ -32,8 +37,48 @@ open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace CategoryTheory
 
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.isDefEq.respectTransparency false in
+private theorem koszulBifunctor_comp
+    {A B D : Type*} [Category A] [Category B] [Category D]
+    (T : A ⥤ B ⥤ D) {a₁ a₂ a₃ : A} {b₁ b₂ b₃ : B}
+    (f : a₁ ⟶ a₂) (g : b₁ ⟶ b₂) (p : a₂ ⟶ a₃) (q : b₂ ⟶ b₃) :
+    (T.map f).app b₁ ≫ (T.obj a₂).map g ≫
+        (T.map p).app b₂ ≫ (T.obj a₃).map q =
+      (T.map (f ≫ p)).app b₁ ≫ (T.obj a₃).map (g ≫ q) := by
+  simp only [Functor.map_comp, NatTrans.comp_app, Category.assoc]
+  rw [(T.map p).naturality_assoc]
+
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.isDefEq.respectTransparency false in
+private theorem koszulLimit_lift_map
+    {I A : Type*} [Category I] [Category A] [HasLimitsOfShape I A]
+    {F G : I ⥤ A} (s : Cone F) (t : Cone G) (a : F ⟶ G) (f : s.pt ⟶ t.pt)
+    (h : ∀ j, s.π.app j ≫ a.app j = f ≫ t.π.app j) :
+    limit.lift F s ≫ lim.map a = f ≫ limit.lift G t := by
+  apply limit.hom_ext
+  intro j
+  change (limit.lift F s ≫ limMap a) ≫ limit.π G j = _
+  rw [Category.assoc, limMap_π, ← Category.assoc, limit.lift_π,
+    Category.assoc, limit.lift_π]
+  exact h j
+
 variable {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
 variable (O : Sheaf J CommRingCat.{u})
+
+/-- Reuse the canonical preservation-of-sheaves instance during elaboration.
+Source: Mathlib, `GrothendieckTopology.HasSheafCompose`.
+(blueprint: def-weil-pbc-ringed-koszul-system). -/
+local instance ringedKoszulHasSheafCompose :
+    J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u}) := inferInstance
+
+/-- Reuse zero preservation of the inverse-limit functor.
+Source: Mathlib, additivity of limits.
+(blueprint: def-weil-pbc-ringed-koszul-system). -/
+local instance ringedKoszulLimitPreservesZeroMorphisms :
+    Functor.PreservesZeroMorphisms (lim : (ℕᵒᵖ ⥤ SheafOfModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) ⥤
+        SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) := inferInstance
 
 /-- Multiplication by a global section on the rank-one module sheaf.
 Source: Stacks Project, Tags 0913 and 0A0A
@@ -69,6 +114,8 @@ def ringedKoszulFactorStepF (s : (O.obj ⋙ forget CommRingCat).sections)
       eqToHom (congrArg (ringedKoszulFactor O s (m + 1)).X h.symm)
   else 0
 
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.isDefEq.respectTransparency false in
 /-- The components (1,s) commute with the differential.
 Proof: the sole nonzero square is s^(m+1) s = s^(m+2); elsewhere both sides vanish.
 Source: Stacks Project, Tags 0913 and 0A0A
@@ -78,7 +125,22 @@ theorem ringedKoszulFactorStepF_comm
     (h : (ComplexShape.up ℤ).Rel n k) :
     ringedKoszulFactorStepF O s m n ≫ (ringedKoszulFactor O s (m + 1)).d n k =
       (ringedKoszulFactor O s m).d n k ≫ ringedKoszulFactorStepF O s m k := by
-  sorry
+  have hnk : n + 1 = k := h
+  clear h
+  by_cases hn : n = 0
+  · subst n
+    have hk : k = 1 := hnk.symm
+    subst k
+    simp [ringedKoszulFactorStepF, ringedKoszulFactor,
+      HomologicalComplex.double_d, Category.assoc]
+    have hp : ringedKoszulScalar O s ^ (m + 1 + 1) =
+        (ringedKoszulScalar O s ^ (m + 1)) ≫ ringedKoszulScalar O s := by
+      simpa only [End.mul_def] using pow_succ' (ringedKoszulScalar O s) (m + 1)
+    simpa only [Category.assoc] using hp =≫
+      (HomologicalComplex.doubleXIso₁ (ringedKoszulScalar O s ^ (m + 1 + 1))
+        (by decide : (ComplexShape.up ℤ).Rel 0 1) (by decide)).inv
+  · simp [ringedKoszulFactor, HomologicalComplex.double_d_eq_zero₀, hn]
+
 
 /-- The forward Koszul chain map with components (1,s).
 Source: Stacks Project, Tags 0913 and 0A0A
@@ -102,6 +164,9 @@ def ringedKoszulTensor : ringedSiteComplex O ⥤ ringedSiteComplex O ⥤
   letI := Classical.choice (SheafOfModules.tensorClosed O).2.1
   (CategoryTheory.MonoidalCategory.curriedTensor _).map₂HomologicalComplex
     (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ)
+
+attribute [local irreducible] ringedKoszulTensor
+
 
 /-- The strict sequential diagram of the positive one-section Koszul factors.
 Source: Stacks Project, Tags 0913 and 0A0A
@@ -144,6 +209,8 @@ def ringedKoszulFactorProjectionF (s : (O.obj ⋙ forget CommRingCat).sections)
       eqToHom (congrArg (ringedSiteRingComplex O).X h.symm)
   else 0
 
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.isDefEq.respectTransparency false in
 /-- The degree-zero projection commutes with the differential.
 Proof: the target differential is zero and the source differential lands in degree one,
 where the projection vanishes. All other squares have a zero component.
@@ -154,7 +221,14 @@ theorem ringedKoszulFactorProjectionF_comm
     (h : (ComplexShape.up ℤ).Rel n k) :
     ringedKoszulFactorProjectionF O s m n ≫ (ringedSiteRingComplex O).d n k =
       (ringedKoszulFactor O s m).d n k ≫ ringedKoszulFactorProjectionF O s m k := by
-  sorry
+  by_cases hk : k = 0
+  · have hn : n ≠ 0 := by
+      have hnk : n + 1 = k := h
+      omega
+    rw [hk]
+    simp [ringedKoszulFactor, HomologicalComplex.double_d_eq_zero₀, hn]
+  · simp [ringedKoszulFactorProjectionF, hk]
+
 
 /-- The augmented positive Koszul factor.
 Source: Stacks Project, Tags 0913 and 0A0A
@@ -164,6 +238,8 @@ def ringedKoszulFactorProjection (s : (O.obj ⋙ forget CommRingCat).sections) (
   f := ringedKoszulFactorProjectionF O s m
   comm' := ringedKoszulFactorProjectionF_comm O s m
 
+set_option synthInstance.maxSize 2048 in
+attribute [local semireducible] ringedKoszulTensor in
 /-- The ordinary unit identification O[0] tensor O[0] = O[0].
 Source: Stacks Project, Tags 0913 and 0A0A
 (blueprint: def-weil-pbc-ringed-koszul-system). -/
@@ -192,6 +268,8 @@ def ringedKoszulProjection : (r : ℕ) →
         ((ringedKoszulTensor O).obj _).map (ih (fun i ↦ b i.succ) m) ≫
         (ringedKoszulUnitTensorIso O).hom) r
 
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.isDefEq.respectTransparency false in
 /-- The Koszul projections are compatible with the forward transitions.
 Proof: in one factor, the forward map is identity in degree zero. Tensor this identity
 and induct on the number of factors; composition gives the identity for every transition.
@@ -202,7 +280,49 @@ theorem ringedKoszulProjection_naturality (r : ℕ)
     (m n : ℕ) (f : m ⟶ n) :
     (ringedKoszulDiagram O r b).map f ≫ ringedKoszulProjection O r b n =
       ringedKoszulProjection O r b m := by
-  sorry
+  have hfactor (s : (O.obj ⋙ forget CommRingCat).sections) :
+      (ringedKoszulFactors O s).map f ≫ ringedKoszulFactorProjection O s n =
+        ringedKoszulFactorProjection O s m := by
+    let α : ringedKoszulFactors O s ⟶
+        (Functor.const ℕ).obj (ringedSiteRingComplex O) :=
+      NatTrans.ofSequence (ringedKoszulFactorProjection O s) (fun j ↦ by
+        simp only [ringedKoszulFactors, Functor.ofSequence_map_homOfLE_succ,
+          Functor.const_obj_map]
+        apply HomologicalComplex.Hom.ext
+        funext i
+        change (ringedKoszulFactorStepF O s j i ≫
+            ringedKoszulFactorProjectionF O s (j + 1) i) =
+          ringedKoszulFactorProjectionF O s j i ≫ 𝟙 _
+        by_cases hi : i = 0
+        · subst i
+          simp [ringedKoszulFactorStepF, ringedKoszulFactorProjectionF, Category.assoc]
+        · simp [ringedKoszulFactorProjectionF, hi])
+    have hh := α.naturality f
+    change (ringedKoszulFactors O s).map f ≫ ringedKoszulFactorProjection O s n =
+      ringedKoszulFactorProjection O s m ≫ 𝟙 _ at hh
+    exact hh.trans (Category.comp_id _)
+  induction r with
+  | zero => simp [ringedKoszulDiagram, ringedKoszulProjection]
+  | succ r ih =>
+    change (((ringedKoszulTensor O).map ((ringedKoszulFactors O (b 0)).map f)).app _ ≫
+        ((ringedKoszulTensor O).obj _).map
+          ((ringedKoszulDiagram O r (fun i ↦ b i.succ)).map f)) ≫
+        (((ringedKoszulTensor O).map (ringedKoszulFactorProjection O (b 0) n)).app _ ≫
+        ((ringedKoszulTensor O).obj _).map
+          (ringedKoszulProjection O r (fun i ↦ b i.succ) n) ≫
+        (ringedKoszulUnitTensorIso O).hom) =
+      ((ringedKoszulTensor O).map (ringedKoszulFactorProjection O (b 0) m)).app _ ≫
+        ((ringedKoszulTensor O).obj _).map
+          (ringedKoszulProjection O r (fun i ↦ b i.succ) m) ≫
+        (ringedKoszulUnitTensorIso O).hom
+    have hh := koszulBifunctor_comp (ringedKoszulTensor O)
+      ((ringedKoszulFactors O (b 0)).map f)
+      ((ringedKoszulDiagram O r (fun i ↦ b i.succ)).map f)
+      (ringedKoszulFactorProjection O (b 0) n)
+      (ringedKoszulProjection O r (fun i ↦ b i.succ) n)
+    simpa only [Category.assoc, hfactor, ih] using
+      hh =≫ (ringedKoszulUnitTensorIso O).hom
+
 
 /-- The compatible Koszul projections as an actual cocone.
 Source: Stacks Project, Tags 0913 and 0A0A
@@ -227,6 +347,8 @@ def ringedKoszulTensorTower (r : ℕ)
       (ringedKoszulDualTower O r b)
 
 
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.isDefEq.respectTransparency false in
 /-- The strict-tower differentials square to zero.
 Proof: evaluate at every tower index and use the square-zero identity of its complex.
 Source: Stacks Project, Tags 0913 and 0A0A
@@ -238,7 +360,9 @@ theorem ringedKoszulTensorTower_d_comp (r : ℕ)
         (HomologicalComplex.dNatTrans _ (ComplexShape.up ℤ) n (n + 1)) ≫
       Functor.whiskerLeft ((ringedKoszulTensorTower O r b).obj N)
         (HomologicalComplex.dNatTrans _ (ComplexShape.up ℤ) (n + 1) (n + 1 + 1)) = 0 := by
-  sorry
+  apply NatTrans.ext
+  funext m
+  exact (((ringedKoszulTensorTower O r b).obj N).obj m).d_comp_d n (n + 1) (n + 1 + 1)
 
 /-- The strict tensor tower, transposed into a complex in the abelian category of towers.
 Source: Stacks Project, Tags 0913 and 0A0A
@@ -265,6 +389,8 @@ def ringedKoszulTensorTowerComplexMapF (r : ℕ)
   Functor.whiskerRight ((ringedKoszulTensorTower O r b).map f)
     (HomologicalComplex.eval _ (ComplexShape.up ℤ) n)
 
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.isDefEq.respectTransparency false in
 /-- Tensor-tower maps commute with the differentials.
 Proof: evaluate at each tower index and use the chain-map identity of the tensor map.
 Source: Stacks Project, Tags 0913 and 0A0A
@@ -277,7 +403,12 @@ theorem ringedKoszulTensorTowerComplexMapF_comm (r : ℕ)
         (ringedKoszulTensorTowerComplex O r b M).d n k =
       (ringedKoszulTensorTowerComplex O r b N).d n k ≫
         ringedKoszulTensorTowerComplexMapF O r b f k := by
-  sorry
+  have hk : k = n + 1 := h.symm
+  subst k
+  apply NatTrans.ext
+  funext m
+  simp only [ringedKoszulTensorTowerComplex, CochainComplex.of_d]
+  exact (((ringedKoszulTensorTower O r b).map f).app m).comm n (n + 1)
 
 /-- The actual strict map of tower complexes induced by a chain map.
 Source: Stacks Project, Tags 0913 and 0A0A
@@ -289,6 +420,8 @@ def ringedKoszulTensorTowerComplexMap (r : ℕ)
   f := ringedKoszulTensorTowerComplexMapF O r b f
   comm' := ringedKoszulTensorTowerComplexMapF_comm O r b f
 
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.isDefEq.respectTransparency false in
 /-- The strict tensor-tower construction preserves identity maps.
 Proof: evaluate in each tower index and degree and use the identity law of the tensor functor.
 Source: Stacks Project, Tags 0913 and 0A0A
@@ -296,8 +429,15 @@ Source: Stacks Project, Tags 0913 and 0A0A
 theorem ringedKoszulTensorTowerComplexMap_id (r : ℕ)
     (b : Fin r → (O.obj ⋙ forget CommRingCat).sections) (N : ringedSiteComplex O) :
     ringedKoszulTensorTowerComplexMap O r b (𝟙 N) = 𝟙 _ := by
-  sorry
+  apply HomologicalComplex.Hom.ext
+  funext n
+  apply NatTrans.ext
+  funext m
+  change ((((ringedKoszulTensorTower O r b).map (𝟙 N)).app m).f n) = 𝟙 _
+  simp
 
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.isDefEq.respectTransparency false in
 /-- The strict tensor-tower construction preserves composition.
 Proof: evaluate in each tower index and degree and use functoriality of total tensor.
 Source: Stacks Project, Tags 0913 and 0A0A
@@ -308,7 +448,14 @@ theorem ringedKoszulTensorTowerComplexMap_comp (r : ℕ)
     ringedKoszulTensorTowerComplexMap O r b (f ≫ g) =
       ringedKoszulTensorTowerComplexMap O r b f ≫
         ringedKoszulTensorTowerComplexMap O r b g := by
-  sorry
+  apply HomologicalComplex.Hom.ext
+  funext n
+  apply NatTrans.ext
+  funext m
+  change ((((ringedKoszulTensorTower O r b).map (f ≫ g)).app m).f n) =
+    ((((ringedKoszulTensorTower O r b).map f).app m).f n) ≫
+      ((((ringedKoszulTensorTower O r b).map g).app m).f n)
+  simp
 
 /-- The functor from module complexes to strict tensor-tower complexes.
 Source: Stacks Project, Tags 0913 and 0A0A
@@ -332,6 +479,8 @@ def ringedKoszulDualUnit (r : ℕ)
   (ringedHomUnitEvaluationIso O (ringedSiteRingComplex O)).inv ≫
     ((homComplexFunctor (R := O)).map (ringedKoszulProjection O r b m).op).app _
 
+set_option synthInstance.maxSize 2048 in
+attribute [local semireducible] ringedKoszulTensor in
 /-- The canonical total-tensor right unit isomorphism.
 Source: Stacks Project, Tags 0913 and 0A0A
 (blueprint: def-weil-pbc-ringed-koszul-system). -/
@@ -356,6 +505,8 @@ def ringedKoszulTensorUnitComponent (r : ℕ)
   (ringedKoszulRightUnitIso O N).inv ≫
     ((ringedKoszulTensor O).obj N).map (ringedKoszulDualUnit O r b m.unop)
 
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.isDefEq.respectTransparency false in
 /-- The degree-zero units form a cone over the strict tensor tower.
 Proof: dualize compatibility of the Koszul projections with transitions, then tensor by N.
 Taking the component in degree n gives the asserted equality.
@@ -368,7 +519,36 @@ theorem ringedKoszulTensorUnitComponent_naturality (r : ℕ)
         (ringedKoszulTensorUnitComponent O r b N k).f n =
       (ringedKoszulTensorUnitComponent O r b N m).f n ≫
         ((ringedKoszulTensorTowerComplex O r b N).X n).map f := by
-  sorry
+  have hp := ringedKoszulProjection_naturality O r b k.unop m.unop f.unop
+  let D : (ringedSiteComplex O)ᵒᵖ ⥤ ringedSiteComplex O :=
+    (homComplexFunctor (R := O)).flip.obj (ringedSiteRingComplex O)
+  have hdual : D.map (ringedKoszulProjection O r b k.unop).op =
+      D.map (ringedKoszulProjection O r b m.unop).op ≫
+        D.map ((ringedKoszulDiagram O r b).map f.unop).op := by
+    rw [← D.map_comp, ← op_comp, hp]
+  have hd : ringedKoszulDualUnit O r b k.unop =
+      ringedKoszulDualUnit O r b m.unop ≫ (ringedKoszulDualTower O r b).map f := by
+    change (ringedHomUnitEvaluationIso O (ringedSiteRingComplex O)).inv ≫
+        D.map (ringedKoszulProjection O r b k.unop).op =
+      ((ringedHomUnitEvaluationIso O (ringedSiteRingComplex O)).inv ≫
+        D.map (ringedKoszulProjection O r b m.unop).op) ≫
+          D.map ((ringedKoszulDiagram O r b).map f.unop).op
+    rw [Category.assoc, hdual]
+  have ht : ringedKoszulTensorUnitComponent O r b N k =
+      ringedKoszulTensorUnitComponent O r b N m ≫
+        ((ringedKoszulTensorTower O r b).obj N).map f := by
+    change (ringedKoszulRightUnitIso O N).inv ≫
+        ((ringedKoszulTensor O).obj N).map (ringedKoszulDualUnit O r b k.unop) =
+      ((ringedKoszulRightUnitIso O N).inv ≫
+        ((ringedKoszulTensor O).obj N).map (ringedKoszulDualUnit O r b m.unop)) ≫
+        ((ringedKoszulTensor O).obj N).map ((ringedKoszulDualTower O r b).map f)
+    rw [hd, Functor.map_comp, Category.assoc]
+  change 𝟙 (N.X n) ≫ (ringedKoszulTensorUnitComponent O r b N k).f n =
+    (ringedKoszulTensorUnitComponent O r b N m).f n ≫
+      (((ringedKoszulTensorTower O r b).obj N).map f).f n
+  rw [Category.id_comp]
+  exact congrArg (fun g ↦ g.f n) ht
+
 
 /-- The compatible degree-zero maps as a degreewise cone over the strict tensor tower.
 Source: Stacks Project, Tags 0913 and 0A0A
@@ -395,6 +575,8 @@ def ringedKoszulLimitUnitF (r : ℕ)
   @id (N.X n ⟶ limit ((ringedKoszulTensorTowerComplex O r b N).X n))
     (limit.lift _ (ringedKoszulTensorUnitCone O r b N n))
 
+set_option backward.isDefEq.respectTransparency.types false in
+set_option backward.isDefEq.respectTransparency false in
 /-- The map to the ordinary inverse limit is a chain map.
 Proof: compose with each limit projection and use the chain-map identity of the degree-zero
 unit into each tensor complex. Joint monicity of limit projections gives the equality.
@@ -408,7 +590,17 @@ theorem ringedKoszulLimitUnitF_comm (r : ℕ)
           ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) ⥤ _).mapHomologicalComplex
             (ComplexShape.up ℤ)).obj (ringedKoszulTensorTowerComplex O r b N)).d n k =
       N.d n k ≫ ringedKoszulLimitUnitF O r b N k := by
-  sorry
+  change limit.lift _ (ringedKoszulTensorUnitCone O r b N n) ≫
+      lim.map ((ringedKoszulTensorTowerComplex O r b N).d n k) =
+    N.d n k ≫ limit.lift _ (ringedKoszulTensorUnitCone O r b N k)
+  apply koszulLimit_lift_map
+  intro m
+  have hk : k = n + 1 := h.symm
+  subst k
+  simp only [ringedKoszulTensorUnitCone, ringedKoszulTensorTowerComplex,
+    CochainComplex.of_d]
+  exact (ringedKoszulTensorUnitComponent O r b N m).comm n (n + 1)
+
 
 /-- The canonical ordinary strict-limit unit, before deriving inverse limit.
 Source: Stacks Project, Tags 0913 and 0A0A
