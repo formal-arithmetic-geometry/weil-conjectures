@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.OpenClosedInduction
-public import WeilConjectures.TraceFormula.Fibration
+public import WeilConjectures.TraceFormula.DimensionZero
 
 /-!
 
@@ -72,20 +72,23 @@ theorem modelTraceFormulaOne_mvPolynomial [IsAlgClosed k] (n : ℕ) :
       ModelTraceFormulaOne ℓ (k := k)
         (Spec.map (CommRingCat.ofHom (algebraMap k₀ (MvPolynomial (Fin 1) k₀ ⧸ J)))) := by
     have := locallyOfFiniteType_specMap_algebraMap k₀ (MvPolynomial (Fin 1) k₀ ⧸ J)
-    by_cases hJ : J = ⊥
-    · subst hJ
-      have := locallyOfFiniteType_specMap_algebraMap k₀ (MvPolynomial (Fin 1) k₀)
-      have := smoothOfRelativeDimension_spec_mvPolynomial_fin_one (k₀ := k₀)
-      exact ModelTraceFormulaOne.of_iso (ModelTraceFormulaOne.of_modelTraceFormula
-        (modelTraceFormula_of_smoothOfRelativeDimension_one _))
-        specMvPolynomialQuotientBotIso specMvPolynomialQuotientBotIso_hom_comp
-    · have := isFinite_spec_mvPolynomial_fin_one_quotient hJ
-      exact ModelTraceFormulaOne.of_modelTraceFormula (modelTraceFormula_of_isFinite _)
+    have := locallyOfFiniteType_specMap_algebraMap k₀ (MvPolynomial (Fin 1) k₀)
+    have := smoothOfRelativeDimension_spec_mvPolynomial_fin_one (k₀ := k₀)
+    have := IsClosedImmersion.spec_of_surjective (CommRingCat.ofHom (Ideal.Quotient.mk J))
+      Ideal.Quotient.mk_surjective
+    refine ModelTraceFormulaOne.of_fibration (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk J)))
+      (by rw [← Spec.map_comp, ← CommRingCat.ofHom_comp, ← Ideal.Quotient.algebraMap_eq,
+        ← IsScalarTower.algebraMap_eq])
+      (ModelTraceFormulaOne.of_modelTraceFormula
+        (modelTraceFormula_of_smoothOfRelativeDimension_one _)) fun y₀ _ ↦ ?_
+    exact modelTraceFormulaOne_of_isClosedImmersion _
   induction n with
   | zero =>
     intro k₀ _ _ _ I
-    have := isFinite_spec_mvPolynomial_fin_zero_quotient I
-    exact ModelTraceFormulaOne.of_modelTraceFormula (modelTraceFormula_of_isFinite _)
+    have := IsClosedImmersion.spec_of_surjective
+      (CommRingCat.ofHom (algebraMap k₀ (MvPolynomial (Fin 0) k₀ ⧸ I)))
+      (Ideal.Quotient.mk_surjective.comp (MvPolynomial.C_surjective (Fin 0)))
+    exact modelTraceFormulaOne_of_isClosedImmersion _
   | succ n ih =>
     intro k₀ _ _ _ I
     rcases n with _ | n
@@ -126,6 +129,15 @@ theorem modelTraceFormula_of_isAffine [IsAlgClosed k] {k₀ : Type u} [Field k�
     modelTraceFormulaOne_of_isAffine (modelFieldChange f₀ k₁)
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] [Algebra k₀ k]
+
+/-- **The trace formula in dimension zero** (blueprint `sk-thm-trace-formula`, Step 1): for a
+finite model `X₀`, which is affine, the trace formula holds by `modelTraceFormula_of_isAffine`,
+whose base cases are the base point and the empty scheme
+(`modelTraceFormulaOne_of_isClosedImmersion`). -/
+theorem modelTraceFormula_of_isFinite [IsAlgClosed k] {X₀ : Scheme.{u}}
+    (f₀ : X₀ ⟶ Spec (.of k₀)) [IsFinite f₀] : ModelTraceFormula ℓ (k := k) f₀ := by
+  have : IsAffine X₀ := isAffine_of_isAffineHom f₀
+  exact modelTraceFormula_of_isAffine f₀
 
 /-- **The trace formula over every model** (blueprint `sk-thm-trace-formula`), by Noetherian
 induction from `modelTraceFormula_of_isCompl`, `modelTraceFormula_of_isFinite`,

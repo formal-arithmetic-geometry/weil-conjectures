@@ -176,12 +176,13 @@ noncomputable def weilUpperStarRetractionIso {ΦZ : Z ⟶ Z} {ΦX : X ⟶ X} {i 
     simp only [Functor.map_comp, Category.assoc] at h
     rw [reassoc_of% h, weilUpperStar_retraction_nat_aux
       (fun a ↦ boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ a)]
-    rfl
-    exact hiρ)
+    · rfl
+    · exact hiρ)
 
 /-! ### Invariance and restrictions -/
 
 /-- A right dual transported along an isomorphism. -/
+@[instance_reducible]
 def hasRightDualOfIso' {C : Type*} [Category C] [MonoidalCategory C] {A B : C} (e : A ≅ B)
     [hB : HasRightDual B] : HasRightDual A where
   rightDual := Bᘁ
@@ -291,7 +292,7 @@ noncomputable def weilUpperStarIdIso {Φ : X ⟶ X} (h : Φ ≫ 𝟙 X = 𝟙 X 
     rw [← IsoAlgebra.str_hom, ← IsoAlgebra.str_hom, weilUpperStar_obj_str]
     simp only [weilUpperStarComparison, boundedConstructiblePullbackSquareComparison,
       Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.trans_inv, Iso.symm_inv, Functor.mapIso_hom,
-      eqToIso.inv, eqToIso.hom, NatTrans.comp_app, eqToHom_app, Category.assoc, Iso.app_inv]
+      eqToIso.inv, NatTrans.comp_app, eqToHom_app, Category.assoc]
     rw [← cancel_epi ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ Φ
       (𝟙 X)).hom.app K.carrier), Iso.hom_inv_id_app_assoc,
       reassoc_of% (boundedConstructibleUpperStarComp_id_right_app _ ℓ Φ K.carrier)]
@@ -301,6 +302,8 @@ noncomputable def weilUpperStarIdIso {Φ : X ⟶ X} (h : Φ ≫ 𝟙 X = 𝟙 X 
     rw [h₂, reassoc_of% (boundedConstructibleUpperStarComp_id_left_app _ ℓ Φ K.carrier)]
     simp)
 
+-- The instances on `Φ` are needed to state the trace formula.
+set_option linter.overlappingInstances false in
 /-- **The degree one trace formula over the empty scheme**: by additivity along the decomposition
 of the empty scheme into two copies of itself (`trace_compactFrobenius_eq_add`), the trace of the
 compactly supported Frobenius is twice itself, hence zero, and there are no rational points. -/
