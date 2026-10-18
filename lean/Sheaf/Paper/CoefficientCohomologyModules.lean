@@ -10,8 +10,7 @@ public import Sheaf.Paper.PointFgCompleteComplexes
 public import Sheaf.Paper.PointFdQbarCategory
 public import Sheaf.Paper.FieldCohomologyScalarExtension
 public import Sheaf.Paper.FiniteFieldFiber
-public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-public import Mathlib.RingTheory.TensorProduct.Finite
+import Mathlib.RingTheory.TensorProduct.Finite
 
 /-! # Cohomology modules of coefficient complexes
 
@@ -68,7 +67,7 @@ Proof: apply the finite-cohomology clause of the full-subcategory membership pro
 theorem coefficientFiniteCohomology_finite (R : Type u) [CommRing R] (i : ℤ)
     (C : (pointFiniteCohomology R).FullSubcategory) :
     Finite ((coefficientFiniteCohomology R i).obj C) := by
-  sorry
+  exact C.property.2 i
 
 /-- Integral coefficient cohomology is finitely generated.
 Source: blueprint order 1510 (blueprint: def-weil-coefficient-cohomology-modules).
@@ -76,7 +75,7 @@ Proof: apply the finitely-generated-cohomology clause of full-subcategory member
 theorem coefficientFgCohomology_finite (R : Type u) [CommRing R] (I : Ideal R) (i : ℤ)
     (C : (pointFgComplete R I).FullSubcategory) :
     Module.Finite R ((coefficientFgCohomology R I i).obj C) := by
-  sorry
+  exact C.property.2.1 i
 
 /-- Field coefficient cohomology is finite-dimensional.
 Source: blueprint order 1510 (blueprint: def-weil-coefficient-cohomology-modules).
@@ -84,7 +83,7 @@ Proof: apply the finite-dimensional-cohomology clause of full-subcategory member
 theorem coefficientFdCohomology_finite (F : Type u) [Field F] (i : ℤ)
     (C : (pointFiniteDimensional F).FullSubcategory) :
     FiniteDimensional F ((coefficientFdCohomology F i).obj C) := by
-  sorry
+  exact C.property.2 i
 
 variable (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω]
   [IsAlgClosure (Padic l) Ω]
@@ -107,7 +106,13 @@ Proof: finite-dimensional cohomology at E is part of membership in D^b_fd(E).
 Scalar extension preserves finite generation; over Ω this is finite dimensionality. -/
 theorem coefficientQbarCohomology_finite (i : ℤ) (C : PointFdQbar l Ω) :
     FiniteDimensional Ω ((coefficientQbarCohomology l Ω i).obj C) := by
-  sorry
+  have := (inferInstance : IsAlgClosure (Padic l) Ω)
+  let : FiniteDimensional C.1.val
+      ((homologyFunctor (ModuleCat.{u} C.1.val) i).obj C.2.obj) := C.2.property.2 i
+  let := C.1.val.subtype.toAlgebra
+  change Module.Finite Ω
+    (TensorProduct C.1.val Ω ((homologyFunctor (ModuleCat.{u} C.1.val) i).obj C.2.obj))
+  infer_instance
 
 /-- On a morphism represented at one common stage, the map is exactly extension of
 scalars of its ordinary cohomology map.
@@ -120,7 +125,16 @@ theorem coefficientQbarCohomology_map_stage (i : ℤ)
     (coefficientQbarCohomology l Ω i).map ((pointFdQbarStage l Ω E).map f) =
       (ModuleCat.extendScalars (R := E.val) (S := Ω) E.val.subtype).map
         ((homologyFunctor (ModuleCat.{u} E.val) i).map f.hom) := by
-  sorry
+  have := (inferInstance : IsAlgClosure (Padic l) Ω)
+  change (fieldDerivedHomologyIso (K := E.val) (L := Ω) E.val.subtype i).inv.app C.obj ≫
+      (homologyFunctor (ModuleCat.{u} Ω) i).map
+        ((fieldDerivedScalarExtension (K := E.val) (L := Ω) E.val.subtype).map f.hom) ≫
+      (fieldDerivedHomologyIso (K := E.val) (L := Ω) E.val.subtype i).hom.app D.obj = _
+  have h := (fieldDerivedHomologyIso (K := E.val) (L := Ω) E.val.subtype i).hom.naturality
+    f.hom
+  dsimp only [Functor.comp_map] at h
+  rw [h]
+  simp
 
 /-- The canonical identification after enlarging the finite coefficient stage:
 first commute cohomology with exact scalar extension, then apply the tensor tower map.
@@ -150,7 +164,21 @@ theorem coefficientQbarCohomology_changeStage
     (C : (pointFiniteDimensional E.val).FullSubcategory) (i : ℤ) :
     (coefficientQbarCohomology l Ω i).mapIso ((pointFdQbarStageComp l Ω h).app C) =
       coefficientCohomologyChangeStage l Ω h C i := by
-  sorry
+  have := (inferInstance : IsAlgClosure (Padic l) Ω)
+  apply Iso.ext
+  change (fieldDerivedHomologyIso (K := L.val) (L := Ω) L.val.subtype i).inv.app
+      ((fieldDerivedScalarExtension (K := E.val) (L := L.val)
+        (IntermediateField.inclusion h).toRingHom).obj C.obj) ≫
+      (homologyFunctor (ModuleCat.{u} Ω) i).map
+        (((fieldScalarTower (IntermediateField.inclusion h).toRingHom L.val.subtype).app
+          C.obj).hom) ≫
+      (fieldDerivedHomologyIso (K := E.val) (L := Ω) E.val.subtype i).hom.app C.obj = _
+  have ht := congrArg Iso.hom
+    (fieldDerivedHomologyIso_tower (IntermediateField.inclusion h).toRingHom
+      L.val.subtype i C.obj)
+  dsimp only [Iso.trans_hom, Functor.mapIso_hom] at ht
+  erw [ht]
+  simp [coefficientCohomologyChangeStage]
 
 /-- The four cohomology functors for the exact global coefficient datum and positive
 finite level of the blueprint. This tuple specializes the generic constructions,

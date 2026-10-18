@@ -16477,3 +16477,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:07 L: merged deliver/S5/Sheaf.Compactification.CommonDenseRefinement (stage 3; reviewer PASS; first push; landing 20261018T140717-L-3104623 (proof); batch 20261018T140710; modules 1; new nodes 0)
 - 14:07 L: merged deliver/U4/Sheaf.CategoryTheory.RingedDerivedRestrictionGeneral (stage 3; reviewer PASS; first push; landing 20261018T140717-L-3104775 (proof); batch 20261018T140710; modules 1; new nodes 0)
 - 14:07 L: merged deliver/U8/Sheaf.AlgebraicGeometry.ProEtaleIntrinsicExtensionByZeroExact (stage 3; reviewer PASS; first push; landing 20261018T140718-L-3104919 (proof); batch 20261018T140710; modules 1; new nodes 0)
+- 14:10 L: merged deliver/E3/Sheaf.Paper.CoefficientCohomologyModules (stage 3; reviewer PASS; first push; landing 20261018T141024-L-3141326 (interface); batch 20261018T141021; modules 1; new nodes 0; change records: coord/changes/E3-coefficient-cohomology-imports.md)

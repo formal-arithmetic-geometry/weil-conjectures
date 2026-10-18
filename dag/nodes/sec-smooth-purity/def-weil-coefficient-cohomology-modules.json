@@ -35,9 +35,55 @@
   "lem-weil-derived-field-scalar-extension-tower",
   "def-weil-point-fd-qlbar-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For coefficientFiniteCohomology_finite, coefficientFgCohomology_finite, and coefficientFdCohomology_finite, unfold the restricted functor on objects and project the relevant all-degrees finiteness clause from full-subcategory membership.",
+   "uses": [
+    "def-weil-point-finite-cohomology-complexes",
+    "def-weil-point-fg-complete-complexes",
+    "def-weil-point-fd-complexes",
+    "def-weil-derived-category-cohomology-functor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For coefficientQbarCohomology_finite, its object is literally scalar extension of the finite-stage cohomology. Take finite dimensionality from that stage membership and apply Mathlib Module.Finite.base_change, using the algebra structure induced by the intermediate-field inclusion.",
+   "uses": [
+    "def-weil-point-fd-qlbar-category",
+    "def-weil-point-fd-complexes",
+    "def-weil-vector-space-scalar-extension"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For coefficientQbarCohomology_map_stage, expand the conjugation defining copyObj. Naturality of fieldDerivedHomologyIso.hom identifies the last two factors with its source component followed by extension of the cohomology map. Cancel its inverse and hom.",
+   "uses": [
+    "def-weil-point-fd-qlbar-category",
+    "lem-weil-cohomology-commutes-scalar-extension"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For coefficientQbarCohomology_changeStage, compare hom morphisms of the isomorphisms. The induced realization of pointFdQbarStageComp is the canonical fieldScalarTower component. Take hom morphisms in fieldDerivedHomologyIso_tower, rewrite the conjugated cohomology map, and cancel the inverse/hom pair. The remaining factors are exactly coefficientCohomologyChangeStage.",
+   "uses": [
+    "def-weil-point-fd-qlbar-category",
+    "lem-weil-derived-field-scalar-extension-tower",
+    "lem-weil-cohomology-commutes-scalar-extension"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-point-finite-cohomology-complexes",
+  "def-weil-point-fg-complete-complexes",
+  "def-weil-point-fd-complexes",
+  "def-weil-derived-category-cohomology-functor",
+  "def-weil-point-fd-qlbar-category",
+  "def-weil-vector-space-scalar-extension",
+  "lem-weil-cohomology-commutes-scalar-extension",
+  "lem-weil-derived-field-scalar-extension-tower"
+ ],
+ "proof_origin": "Stage 3, E3, 2026-10-18: formalized the existing declaration docstrings directly, using subcategory membership, Mathlib scalar-extension finiteness, naturality, and the already stated cohomology/tensor tower compatibility. No new intermediate statements or route changes at the unit level.",
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -118,5 +164,15 @@
   "by": "N7",
   "date": "2026-10-16",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-ca76f",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261018T141024-L-3141326",
+  "kind": "interface",
+  "note": "independent cc review: delivered CoefficientCohomologyModules.lean and node vs live clone; compiled 54.5 s clean; #print axioms (sorryAx only via sorry deps FieldCohomologyScalarExtension/PointFdQbarCategory); unit sk-def-sf-admissible realized empty; zero importers"
  }
 }
