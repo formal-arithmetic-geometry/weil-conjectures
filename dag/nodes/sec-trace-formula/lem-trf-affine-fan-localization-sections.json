@@ -244,5 +244,23 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-528484183 (reviewer sub-agent of L); spot-checked: Read the full item, cited nodes, unit/chapter route, ILO VIII §§3.1.1–3.1.4, and Stacks Tags 00WH/00WK/00YR. All eight proof steps are mathematically valid, hypotheses and edge cases check, the coefficient category and localization maps are correct, no duplicate or circular split exists, and the generic sheafification tool use is accepted. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AffineFanLocalizationSections",
+  "declaration": "AlgebraicGeometry.FineFan.affineFan_localization_sections",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineFanLocalizationSections.lean",
+  "statement": "theorem affineFan_localization_sections (P : Type u) [CommMonoid P] (hP : IsFine P) : ∃ (sections : ∀ a : P, (affine P).presheaf.obj (op (basicOpen a)) ≃* Associates (Algebra.faceLocalization P (Submonoid.powers a))) (stalks : ∀ x : MonoidPrime P, stalk (affine P).presheaf x ≃* Associates (Algebra.faceLocalization P (Submonoid.closure {a : P | a ∉ x.carrier}))), (∀ a p : P, ∃ q : Algebra.faceLocalization P (Submonoid.powers a), q.val = Algebra.GrothendieckGroup.of p ∧ sections a ((affine P).presheaf.map (homOfLE le_top).op (affineSection P p)) = Associates.mk q) ∧ (∀ (a b : P) (h : basicOpen b ≤ basicOpen a) (q : Algebra.faceLocalization P (Submonoid.powers a)), ∃ r : Algebra.faceLocalization P (Submonoid.powers b), r.val = q.val ∧ sections b ((affine P).presheaf.map (homOfLE h).op ((sections a).symm (Associates.mk q))) = Associates.mk r) ∧ (∀ (a : P) (x : MonoidPrime P) (hx : x ∈ basicOpen a) (q : Algebra.faceLocalization P (Submonoid.powers a)), ∃ r : Algebra.faceLocalization P (Submonoid.closure {p : P | p ∉ x.carrier}), r.val = q.val ∧ stalks x (germ (affine P).presheaf (basicOpen a) x hx ((sections a).symm (Associates.mk q))) = Associates.mk r) ∧ (∀ (x : MonoidPrime P) (p : P), affineGerm x p = 1 ↔ p ∉ x.carrier)",
+  "branch": "newtargets-dag",
+  "by": "Q38",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1640443b1",
+  "group": "Q38",
+  "result": "pass",
+  "note": "Read node, stmt_dep def-trf-fine-fan-blowup (unchanged vs live) and its FineFanBlowup decls, faceLocalization, the module and the report. Hypothesis IsFine only, nothing stronger. The Lean has sections/stalks ≃* Associates(faceLocalization) plus numerator, restriction and germ clauses with equal ambient values, and the literal zero-germ iff. The existential isos are uniquely pinned (P→P_a/P_a^× is surjective; every germ comes from a basic open), so nothing is hollow. Edge cases (unit a, empty and maximal prime, group P, torsion, non-saturated), single universe u. lean.statement is verbatim; docstrings have source, blueprint and 8 steps; sorry only; proof-dep imports are allowed (LargeSetSheafification is live). No duplicate. nt_compile --json clean in 7.7 s. Advisory: the second-reading section is the author's own."
  }
 }
