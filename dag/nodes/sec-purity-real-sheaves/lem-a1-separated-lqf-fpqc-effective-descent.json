@@ -15,9 +15,51 @@
   "def-pd-descent-datum",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $U\\subseteq T\\prime$ be an affine open, let $V_U\\subseteq V$ be its inverse image (the open subscheme representing $V\\times_{T\\prime}U$ [def-pc-fibre-product]), let $K\\subseteq V_U$ be a quasi-compact open subscheme, and let $h:K\\to U$ be the restricted morphism. (a) $h$ is separated [def-weil-proper-morphism]: since $U\\to T\\prime$ is an open immersion, $K\\times_UK=K\\times_{T\\prime}K$ is the open subscheme of $V\\times_{T\\prime}V$ over $K\\times K$, and the diagonal of $V\\to T\\prime$, a closed immersion, has inverse image $K$ over it; the restriction of a closed immersion over an open of its target is a closed immersion, and it is the diagonal of $h$. (b) $h$ is locally quasi-finite by [lem-weil-pbc-lqf-restriction-to-opens] applied to $V\\to T\\prime$, the open $K$ and the open $U$. (c) $h$ is quasi-compact: $K$ is quasi-compact and $U$ is affine, hence quasi-separated by [lem-weil-pbc-affine-scheme-qcqs], so [lem-weil-pbc-qcqs-morphism-permanence](1) applies. (d) $h$ is locally of finite type by [lem-weil-pbc-lqf-locally-finite-type] and (b). By [lemma-nagata-quasi-affine-morphism-of-quasi-finite], whose four hypotheses are (a)–(d), $h:K\\to U$ is quasi-affine [def-nagata-quasi-affine-morphism]. Thus $V\\to T\\prime$ has the property required in [lem-a1-ind-quasi-affine-fpqc-effective-descent]: for every affine open of $T\\prime$, every quasi-compact open of its inverse image is quasi-affine over it.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-lqf-restriction-to-opens",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-lqf-locally-finite-type",
+    "lemma-nagata-quasi-affine-morphism-of-quasi-finite",
+    "def-nagata-quasi-affine-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0AP9, lemma-etale-separated-ind-quasi-affine, proof: $U\\to V$ is separated quasi-finite, then Zariski's Main Theorem in the form Tag 02LR, lemma-quasi-finite-separated-quasi-affine"
+   }
+  },
+  {
+   "text": "Apply [lem-a1-ind-quasi-affine-fpqc-effective-descent] to the singleton fpqc covering $f$ and the given descent datum. Its hypotheses are exactly the covering condition, the quasi-affine quasi-compact-open property from step 1, and the stated cocycle. It yields a $T$-scheme $W$ and an isomorphism $W\\times_TT\\prime\\xrightarrow{\\sim}V$ over $T\\prime$ inducing the given datum, with no quasi-compactness or finite-presentation assumption on $V\\to T\\prime$.",
+   "uses": [
+    "lem-a1-ind-quasi-affine-fpqc-effective-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-groupoids.tex",
+    "place": "Tag 0APK, lemma-ind-quasi-affine, singleton fpqc specialization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-lqf-restriction-to-opens",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-lqf-locally-finite-type",
+  "lemma-nagata-quasi-affine-morphism-of-quasi-finite",
+  "def-nagata-quasi-affine-morphism",
+  "lem-a1-ind-quasi-affine-fpqc-effective-descent"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-groupoids.tex",
+  "place": "Tag 0APK, lemma-ind-quasi-affine, specialized to a singleton fpqc cover; Tag 0AP9 (via Tag 02LR) supplies ind-quasi-affineness of separated locally quasi-finite morphisms"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,7 +95,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-algebraic-space-fpqc-sheaf",
@@ -74,5 +116,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-separated-lqf-fpqc-effective-descent",
+  "worker": "stage1",
+  "summary": "Split the item into the ind-quasi-affine effective-descent theorem of Stacks Tag 0APK (new node lem-a1-ind-quasi-affine-fpqc-effective-descent) and the input of Tag 0AP9 that separated locally quasi-finite morphisms are ind-quasi-affine, written out in step 1 from the existing closed Zariski-main-theorem node lemma-nagata-quasi-affine-morphism-of-quasi-finite (Tag 02LR) and the restriction/permanence lemmas, exactly as step 5 of lem-trf-separated-lqf-fppf-effective-descent does. The singleton fpqc hypothesis and the absence of quasi-compactness or finite-presentation assumptions are preserved.",
+  "blueprint": "Realizes the Gabber fpqc descent input to the Loc_X-to-Cov_X construction in the ancestor blueprint node, through the item’s existing representability and separated-valuative-descent chain.",
+  "tool_uses": [
+   {
+    "node": "lemma-nagata-quasi-affine-morphism-of-quasi-finite",
+    "why": "Step 1 needs Zariski's main theorem (Tag 02LR) that a separated quasi-compact locally quasi-finite morphism is quasi-affine; slopmaster2-closed node of sk-prop-nagata-sketch-zmt, no node of this unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-lqf-restriction-to-opens",
+    "why": "Step 1(b): local quasi-finiteness of the restriction K->U; generic permanence lemma, no node of this unit."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Step 1(c), clause (1): a morphism from a quasi-compact scheme to a quasi-separated one is quasi-compact; Mathlib leaf."
+   },
+   {
+    "node": "lem-weil-pbc-lqf-locally-finite-type",
+    "why": "Step 1(d): locally quasi-finite implies locally of finite type; generic lemma, no node of this unit."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Step 1(c): affine schemes are quasi-separated; Mathlib leaf."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lemma-nagata-quasi-affine-morphism-of-quasi-finite",
+  "lem-weil-pbc-lqf-restriction-to-opens",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-lqf-locally-finite-type",
+  "lem-weil-pbc-affine-scheme-qcqs"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-N3-4e9c87167",
+  "group": "N3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N3-4e9c87167 (reviewer sub-agent of L); spot-checked: I read Stacks 0APK (more-groupoids.tex l.3091, Gabber), Def. 0AP6 and Tag 0AP9 with its proof through 02LR (more-morphisms.tex l.19522, l.19681, l.12426), the item, both new nodes, every cited statement, the unit sk-p-real-rankin and the parent's use of the item. The item is 0APK for a one-member fpqc family plus 0AP9, with every hypothesis kept and nothing added or weakened. Small cases: V empty; an infinite disjoint union of copies of T' (not quasi-compact, so it needs 0APK and not 0247); a non-separated V is excluded. Kept new node lem-a1-ind-quasi-affine-fpqc-effective-descent is 0APK for one morphism. Its condition (quasi-compact opens over an affine open are quasi-affine over it) is equivalent to Stacks' ind-quasi-affine. It is true, a genuine generalization and not a restated clause. It is not a duplicate of lem-trf-quasi-affine-fpqc-effective-descent (which needs the whole morphism quasi-affine) or of lem-trf-separated-lqf-fppf-effective-descent (fppf). Its form, blueprint fields and searches are correct. Dropped node lem-a1-separated-lqf-ind-quasi-affine: true, but a few-line consequence of the existing node lemma-nagata-quasi-affine-morphism-of-quasi-finite, which is closed in slopmaster2 as IsQuasiAffineHom.of_locallyQuasiFinite (QuasiAffine.lean l.103-111). The report wrongly says that node needs finite presentation; it needs only locally of finite type, which locally quasi-finite already gives (C1/C5). The fix rewrites item step 1 to check (a) separated, elementary from the diagonal, (b) locally quasi-finite via lem-weil-pbc-lqf-restriction-to-opens, (c) quasi-compact via lem-weil-pbc-affine-scheme-qcqs and lem-weil-pbc-qcqs-morphism-permanence(1), (d) locally of finite type via lem-weil-pbc-lqf-locally-finite-type, then applies the Nagata node. This is the same argument as step 5 of the reviewed fppf node. proof_deps, proof_origin and split_report are updated. tool_uses are declared and accepted for these five generic or closed nodes, the same ones already accepted on lem-trf-separated-lqf-fppf-effective-descent. Nothing else cites the dropped node, and there is no cycle. No SGA is cited.; 1 file(s) fixed by the reviewer"
  }
 }
