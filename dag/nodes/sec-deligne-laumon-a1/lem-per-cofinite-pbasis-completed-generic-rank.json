@@ -243,5 +243,23 @@
   "group": "Q20",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-62304e9fc (reviewer sub-agent of L); spot-checked: PASS, no changes. I read ILO IV printed pp.47-51 (1.1.2-1.2.5 including Prop 1.2.4 and its proof, and 2.1.3-2.1.8 including (2.a) and (2.b)) and EGA 0_IV 21.9.4 with its proof. The item statement is unchanged and matches ILO 2.1.6 (2.b) for one integral component. Removing the p-basis existence theorem from stmt_deps is correct because the p-basis is supplied. Small cases: A=F_p(s)[[t]] gives rank 1 at J=empty and 2 at J={s}. A=κ[[x,y]]/(y^p-s x^p) gives rank 2 at J=empty, so J0 is genuinely needed, and rank 2=d+|J| at J={s}. Steps: Step 1 applies case (a) of the normalization node with the prescribed κ; a domain is reduced and equidimensional. Step 2 uses 07P5 with k_J=F_J and A_J=R_J; finiteness of K/K_J is argued in place and is correct. Step 3 expands by coefficient monomials, uses g^p in R_J, gets a relative p-basis because K^p is in K_J, and applies 07P2 to get dimension d+|J|. Step 4 checks every hypothesis of the stabilization node, and J containing J0 gives K_J inside K_J0. Step 5 uses that R is finite free over F_J[[t]], so A is finite over it, and B_1=R_J. Step 6 uses 00RT localization and the D(1/s) argument. Both new nodes are true. The stabilization node is ILO 1.2.4 word for word; I checked it for L=K, separable L/K and L=K(b^{1/p}). For the comparison node I gave my own proof: elements of B_1 have differentials in every m^n Omega, and Omega_{C/B_1} is finite and complete. Neither node is a clause of the item or a duplicate. lem-per-finite-formal-map-differential-cokernel needs a coefficient field and computes differentials relative to the full R. Advisory only: the comparison node could be derived in a few lines from lem-per-completed-differential-finite-conormal. I found no cycle, no SGA source, and every step is under 900 characters. I accept the five sec-proper-base-change tool_uses. The report's source-error section about the reversed subscript in ILO 2.1.6 is accurate."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CofinitePBasisCompletedGenericRank",
+  "declaration": "RingTheory.cofinitePBasisCompletedGenericRank",
+  "file": "lean/Sheaf/RingTheory/CofinitePBasisCompletedGenericRank.lean",
+  "statement": "theorem cofinitePBasisCompletedGenericRank (A : Type u) [CommRing A] [IsDomain A] [IsLocalRing A] [IsNoetherianRing A] [IsAdicComplete (IsLocalRing.maximalIdeal A) A] (p : ℕ) [Fact p.Prime] [CharP A p] (d : ℕ) (hd : 1 ≤ d) (hdim : ringKrullDim A = d) (k : Type v) [Field k] [CharP k p] [Algebra k A] (hres : Function.Bijective ((IsLocalRing.residue A).comp (algebraMap k A))) (E : Type w) (β : E → k) (hpb : ∃ b : Module.Basis {a : E →₀ ℕ // ∀ i : E, a i < p} (Subfield.closure (Set.range (fun x : k ↦ x ^ p))) k, ∀ a, b a = (a : E →₀ ℕ).prod (fun i e ↦ β i ^ e)) (F : Finset E → Subfield k) (hF : ∀ J, F J = Subfield.closure (Set.range (fun x : k ↦ x ^ p) ∪ {x : k | ∃ i : E, i ∉ J ∧ β i = x})) [∀ J : Finset E, Algebra (F J) A] (hcomp : ∀ (J : Finset E) (x : F J), algebraMap (F J) A x = algebraMap k A (x : k)) (L : Type z) [Field L] [Algebra A L] [IsFractionRing A L] : ∃ J0 : Finset E, ∀ J : Finset E, J0 ⊆ J → Module.rank L (L ⊗[A] AdicCompletion (IsLocalRing.maximalIdeal A) (KaehlerDifferential (F J) A)) = (d + J.card : ℕ)",
+  "branch": "newtargets-dag",
+  "by": "Q85",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ec5046e4f",
+  "group": "Q85",
+  "result": "pass",
+  "note": "Every clause matches the node: complete Noetherian local domain, char p with Fact p.Prime, ringKrullDim A = d with d >= 1, coefficient field via algebra map with bijective residue composite, p-basis as Module.Basis of bounded monomials over closure(range x^p) = k^p, F_J fixed by hF, algebra instances fixed by hcomp, M_J = AdicCompletion (maximalIdeal A) (KaehlerDifferential (F J) A), exists J0, forall J containing J0, Module.rank L (L tensor M_J) = d + |J|. No stronger assumption; universes u v w z independent. Edge cases E empty, J0 nonempty in general, infinite p-basis, d=0/p prime OK. Only the item lean record changed vs live; dep records identical; statement field verbatim. Docstrings have source, blueprint id and 6 proof steps; sorry only; imports are stmt_dep modules plus stated proof-dep and mathlib_match modules. No duplicate notion (trf continuous differentials differ). nt_compile --json clean (about 2 s); broken control copy fails. Advisory for stage 3: the cofinite-subfields node gained Lean record Sheaf.FieldTheory.CofiniteSubfieldsDifferentialRank after delivery; add the import then."
  }
 }

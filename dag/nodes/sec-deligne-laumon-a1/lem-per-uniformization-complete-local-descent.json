@@ -220,5 +220,27 @@
   "group": "Q142",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q142-e537bd1c3 (reviewer sub-agent of L); spot-checked: Re-delivery after the f16446a6 RETURN, which found the old closed-fibre shrink lemma false. Four new nodes are unchanged from that delivery and the item statement is unchanged; I reread all four against ILO III 3.1, 5.1, 5.4 and 6.2 (pp.43-45), III 6.3 and EGA IV 18.7.6. The replaced node lem-per-alteration-cover-closed-fibre-shrink is now a dimension-inductive gluing lemma, and it is true apart from one clause. Why it is true: on each P_i, the family made of V_i and the base changes P_i x_S T_t is completely decomposed etale, because points over s lie in V_i and points over t != s lift with unchanged residue field. So it covers by def-per-prime-to-ell-alteration-topology (i); composing with the Q_tj and refining gives a cover of S. The two earlier counterexamples do not meet the new hypotheses. The false clause: the node said a finite subfamily of the T_t is completely decomposed over S, but the T_t exist only for non-closed t, so nothing need lie over s (DVR with T_eta = Spec K). Fixed: the node now says the subfamily is completely decomposed over the punctured scheme S minus s, with the finite set F found by II 2.2.4 there. Item Step 4 had the same wording; it now extracts on S minus s and leaves the closed point to the V_i. I also corrected the node's source place: ILO p.44 has no dimension induction, because it invokes II 4.1.1, which is proved only for alt. The repair is built from ILO's own Nisnevich spreading in the first paragraph of 6.2. Steps 1-3 and 5-7 check out: Artin approximation for (A,m) uses excellence to get a G-ring, the induction for the bounded form is valid, and the unbounded case is local. I accepted the three generic pbc algebra tool_uses. Batch-5 flags: the henselization definition and the SNC-boundary definition are general definitions. Stacks 01TE (a finite-residue point is closed in its fibre, reached through alteration-cover-calculus) and 00NM (regular rings are universally catenary, reached through complete-local-excellence) are pure algebra and not part of the trace-formula or Poincare-duality proofs; all accepted. No duplicates found among the alteration, standard-form and cd-etale nodes. Fixes: two whole JSON files under fixes/dag/nodes/sec-deligne-laumon-a1/.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UniformizationCompleteLocalDescent",
+  "declaration": "AlgebraicGeometry.uniformization_complete_local_descent",
+  "declarations": [
+   "AlgebraicGeometry.HasRegularAlterationCover",
+   "AlgebraicGeometry.uniformization_complete_local_descent"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/UniformizationCompleteLocalDescent.lean",
+  "statement": "theorem uniformization_complete_local_descent (ell : ℕ) [Fact ell.Prime] : ((∀ (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] [IsDomain A] [IsIntegrallyClosed A] [IsAdicComplete (IsLocalRing.maximalIdeal A) A], IsUnit (ell : A) → ∀ Z : Set (Spec (.of A)), IsClosed Z → IsNowhereDense Z → HasRegularAlterationCover ell (Spec (.of A)) Z) → ∀ (S : Scheme.{u}) [IsReduced S] [IsNoetherian S], (∀ U : S.affineOpens, IsQuasiExcellent Γ(S, U)) → (∀ s : S, IsUnit (ell : S.presheaf.stalk s)) → ∀ Z : Set S, IsClosed Z → IsNowhereDense Z → HasRegularAlterationCover ell S Z) ∧ (∀ d : ℕ, (∀ (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] [IsDomain A] [IsIntegrallyClosed A] [IsAdicComplete (IsLocalRing.maximalIdeal A) A], topologicalKrullDim (Spec (.of A)) ≤ d → IsUnit (ell : A) → ∀ Z : Set (Spec (.of A)), IsClosed Z → IsNowhereDense Z → HasRegularAlterationCover ell (Spec (.of A)) Z) → ∀ (S : Scheme.{u}) [IsReduced S] [IsNoetherian S], topologicalKrullDim S ≤ d → (∀ U : S.affineOpens, IsQuasiExcellent Γ(S, U)) → (∀ s : S, IsUnit (ell : S.presheaf.stalk s)) → ∀ Z : Set S, IsClosed Z → IsNowhereDense Z → HasRegularAlterationCover ell S Z)",
+  "branch": "newtargets-dag",
+  "by": "Q89",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6337dbd4e",
+  "group": "Q89",
+  "result": "pass",
+  "note": "New module UniformizationCompleteLocalDescent: HasRegularAlterationCover = node U_ell (Alt S over identity, IsCoveringFamily on Fin n, IsRegularScheme+IsNoetherian sources, SNC boundary with support = preimage of Z; same expansion as live citer UniformizationNodalQuotientReduction). Theorem: unbounded + bounded (∀ d:ℕ, topologicalKrullDim ≤ d only on hypothesis bases and S) implications match node; complete normal local = Noetherian local integrally closed domain + IsAdicComplete maximal ideal; quasi-excellence via IsQuasiExcellent on all affine opens; ell invertible on stalks; Z closed nowhere dense; one universe u; no extra hypotheses. Edge cases (empty S, empty Z via 0-component SNC, d=0) covered. Item node unchanged except lean record; statement verbatim once; docstrings have source/blueprint/7-step plan; only sorry. nt_compile --json clean (2.4 s, exit 0). No findings."
  }
 }

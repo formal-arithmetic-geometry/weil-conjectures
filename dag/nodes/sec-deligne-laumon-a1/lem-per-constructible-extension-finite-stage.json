@@ -296,5 +296,24 @@
   "group": "Q112",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-bc45cf1b0 (reviewer sub-agent of L); spot-checked: I read the delivery in full: no new nodes, and the statement and stmt_deps are unchanged. Source check: ILO XVII Lemme 7.4.4 and its proof, printed p.306 (PDF p.312). The source gets the cocartesian square from SGA 4 IX 2.7.3 (Ext^1 commutes with filtered colimits), which the route lock forbids. The agent proof instead gets it in 8 steps, each checked against the cited statements. (1) The lifting node, applied to the epi F→G and 1_G, gives a finite affine sum E with a lift h, without needing F or H constructible. (2) The kernel K is constructible by the Noetherian subobject node (Stacks 09BH(3), finitely generated values, no finiteness of R); lifting 1_K gives a finite affine cover Q→K. (3) Hom(j_{V!}R_V,M)=M(V) by the localized-site adjunction; the extension-by-zero presheaf is the same as def-weil-pbc-etale-sum-extension. (4) Each V_t is affine hence qcqs, so qcqs section continuity plus directedness and nonemptiness put the finitely many sections in one H_a. (5) The factorization u through H_a is elementary and uses that H_a is a subobject. (6) The pushout lemma builds F_a; I checked p f_a=p_a on both legs and that f_a is mono. (7) The second pushout H⊔_K E is identified with F by the short five lemma. (8) Pushout pasting gives the universal property; all equations check. Edge cases checked: X empty, G=0, H=0, infinite Noetherian R, non-split extensions. Duplicate search over the DAG (7.4.4, Ext/filtered colimit/finite stage) found only the parent and the internal-Ext node, which states something different. The seven declared tool_uses are generic and accepted. Batch-5 flag: lem-trf-noetherian-submodule-finitely-presented, reached through the lifting node and the affine free presentation node, is Stacks 00FP (Noetherian submodule finitely presented). It is generic commutative algebra, not part of what the trace formula or Poincaré duality assumptions give or of their proofs, so I accept it. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.DeligneLaumon.ConstructibleExtensionFiniteStage",
+  "declaration": "AlgebraicGeometry.Etale.exists_constructible_extension_finite_stage",
+  "file": "lean/Sheaf/DeligneLaumon/ConstructibleExtensionFiniteStage.lean",
+  "statement": "theorem exists_constructible_extension_finite_stage (X : Scheme.{u}) [IsNoetherian X] (ℓ : ℕ) [Fact ℓ.Prime] (R : Type (u + 1)) [CommRing R] [IsNoetherianRing R] [Algebra (ZMod ℓ) R] (S : ShortComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R))) (hS : S.ShortExact) [Scheme.IsConstructibleSheaf S.X₃] (I : Type (u + 1)) [PartialOrder I] [Nonempty I] [IsDirectedOrder I] (D : I ⥤ Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)) (ι : D ⟶ (Functor.const I).obj S.X₁) [∀ a : I, Mono (ι.app a)] (hι : IsColimit (Cocone.mk S.X₁ ι)) : ∃ (a : I) (Fₐ : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)) (iₐ : D.obj a ⟶ Fₐ) (pₐ : Fₐ ⟶ S.X₃) (hz : iₐ ≫ pₐ = 0), (ShortComplex.mk iₐ pₐ hz).ShortExact ∧ ∃ φ : ShortComplex.mk iₐ pₐ hz ⟶ S, φ.τ₁ = ι.app a ∧ φ.τ₃ = 𝟙 S.X₃ ∧ Mono φ.τ₂ ∧ IsPushout iₐ (ι.app a) φ.τ₂ S.f",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The recorded locally-constant finite-type dependency exposes the existing Scheme.IsConstructibleSheaf predicate for ModuleCat-valued etale sheaves. On Noetherian X its constructible-stratum requirement is automatic for locally closed strata. Modules over the constant ring sheaf are represented through the existing etaleConstantModuleFunctor equivalence; the directed family is a functor with monic inclusion cocone to the first term of the short complex."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4ad6cfbff",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Statement matches the node and ILO XVII 7.4.4 proof (p.312) clause by clause: IsNoetherian X; Noetherian ZMod l-algebra R : Type (u+1) (recorded convention, same as the lifting dependency); G constructible via the recorded Scheme.IsConstructibleSheaf; nonempty directed I with monic cocone and IsColimit using the actual inclusions; conclusion: ShortExact upper row, tau1 = iota a, tau3 = id, Mono tau2, IsPushout in the correct argument order. Only the node's lean field changed; statement verbatim; one sorry; docstrings carry source, blueprint and all 8 steps; no duplicate. Edge cases (empty X, G=0, H=0, singleton I, zero/infinite R) admitted. nt_compile --json clean in 2.0 s. Advisory: unused private proof-dependency imports and a docstring-only public import."
  }
 }

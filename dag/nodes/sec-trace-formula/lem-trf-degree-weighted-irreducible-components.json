@@ -406,5 +406,23 @@
   "group": "Q83",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-24f27ce67 (reviewer sub-agent of L); spot-checked: Read Stacks 0AYW (l.9713, rank-one case, multiplicity definition l.9695) and 0AYV (l.9669). The item statement is unchanged and matches the source hypothesis by hypothesis, including the t=0 and empty-X edge cases. The agent-written route (01YF filtration of O_X, then 0AYV with r=1 on each integral support) is correct; I checked it step by step and tested it on an integral curve, the doubled curve (m=2), meeting lines, embedded or isolated points, and dim<=0 or empty X. There are no new nodes. Three citation gaps are repaired in fixes/dag/nodes/sec-trace-formula/lem-trf-degree-weighted-irreducible-components.json: (1) C1 in step 4, existence of a component containing Z_a, now cites lem-sc-irreducible-components-cover; (2) C4 in step 5, R_i -> kappa(xi_i) is surjective by def-weil-closed-immersion plus the stalk nodes; (3) C1/C4 in step 8, chi uses O-module cohomology but the closed-immersion comparison is for abelian sheaves, so it now cites lem-sc-zariski-module-abelian-cohomology-agree, which is also added to tool_uses. proof_deps is recomputed. Batch-5 flag on lem-trf-curve-euler-tensor-generic-rank: this is the unsplit Stacks 0AYV n=1 coherent Euler identity, it cites only definition nodes and its closure has no trf, pod or trace-transport node. Neither assumption gives it and it is not part of either proof, so I accept it. I accept the 11 declared generic tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.DegreeWeightedIrreducibleComponents",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.degree_weighted_irreducible_components",
+  "file": "lean/Sheaf/AlgebraicGeometry/DegreeWeightedIrreducibleComponents.lean",
+  "statement": "theorem degree_weighted_irreducible_components (k : Type u) [Field k] (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsProper (X ↘ Spec (.of k))] (hdim : topologicalKrullDim X ≤ 1) (N : X.Modules) [N.IsInvertible] : Set.Finite {c : Set X | c ∈ irreducibleComponents X ∧ topologicalKrullDim c = 1} ∧ ∀ (t : ℕ) (C : Fin t → Scheme.{u}) (j : (i : Fin t) → C i ⟶ X) (_hclosed : ∀ i, IsClosedImmersion (j i)) (_hreduced : ∀ i, IsReduced (C i)) (_hcomponent : ∀ i, Set.range (j i) ∈ irreducibleComponents X ∧ topologicalKrullDim (Set.range (j i)) = 1) (_hcomplete : ∀ c : Set X, c ∈ irreducibleComponents X → topologicalKrullDim c = 1 → ∃ i, Set.range (j i) = c) (_hdistinct : Function.Injective (fun i ↦ Set.range (j i))) (ξ : Fin t → X) (_hgeneric : ∀ i, closure ({ξ i} : Set X) = Set.range (j i)), (∀ i, IsIntegral (C i) ∧ IsProper (j i ≫ X ↘ Spec (.of k)) ∧ topologicalKrullDim (C i) = 1 ∧ ∃ m : ℕ, 0 < m ∧ Module.length (X.presheaf.stalk (ξ i)) (X.presheaf.stalk (ξ i)) = m) ∧ degree k N = ∑ i : Fin t, ((Module.length (X.presheaf.stalk (ξ i)) (X.presheaf.stalk (ξ i))).toNat : ℤ) * @degree k _ (C i) ⟨j i ≫ X ↘ Spec (.of k)⟩ ((tensorPullback (j i)).obj N) ∧ (t = 0 → degree k N = 0)",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-39b3a84a8",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Read node, 13 stmt_deps, Stacks 0AYW (varieties.tex 9695-9722), module, report. Every clause matches: k field, X proper, topologicalKrullDim X ≤ 1, N.IsInvertible. Finiteness of the 1-dim component set, integrality/properness/dim 1 of each C_i, and finite positive ambient generic lengths are stated as conclusions. Universal quantification over complete, irredundant reduced closed-immersion enumerations = reduced induced structure by uniqueness. Component degree uses the induced Over instance j≫X↘Spec k; pullback is the recorded tensorPullback; the formula and the t=0 clause match. Edge cases (empty, 0-dim, nonreduced, intersecting components, any field, universe u) are covered. No new definitions or nodes; only the lean field changed; statement verbatim; docstrings carry source and 11 proof steps; proof is sorry. nt_compile --json clean (2.1 s); a control probe proved it elaborates and confirmed the degree/tensorPullback signatures. Advisory only: the module-stalk import is unused (ring stalk is the same object) and the Cohomology.Defs import is redundant."
  }
 }

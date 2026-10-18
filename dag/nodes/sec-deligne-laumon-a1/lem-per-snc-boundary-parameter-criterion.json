@@ -191,5 +191,23 @@
   "group": "Q82",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-78da92b3a (reviewer sub-agent of L); spot-checked: I read all four steps against Stacks etale.tex 0BI9/0BIA (definition-strict-normal-crossings, lemma-strict-normal-crossings, including the proof) and against the component-based def-trf-strict-normal-crossings-boundary. The item statement is unchanged from the imported unsplit version. There are no new nodes, and the step uses equal proof_deps. Step 1: regular C_i of codimension 1, then 00NR quotient-kernel, then 00NQ dimension d-c, which forces I_i=(t_i). Step 2: the cotangent kernel of A to A/I_J has dimension |J|, and Nakayama extends the t_i to one parameter system. With the UFD node and the radical ideal, the minimal primes of h are the (t_i), using the definition's statement that the C_i are the reduced irreducible components. So h = unit*t_1...t_r. Step 3: the product of parameters is a nonzerodivisor (domain and regular sequence) and radical (pairwise non-associate primes). The components' stalk ideals are (t_j), and quotients by any subset are regular of dimension d-|J| (00NQ permutation clause). Finitely many components because H is Noetherian; all conditions are stalkwise and Cartier spreads out. Step 4 is genuinely elementary. Small cases checked: V(xy), V(x(x-y^2)), V(x^2), the Zariski-irreducible nodal cubic, and d=0 or H empty; both sides of the iff agree in each. No duplicate found: regular-boundary-divisorial-chart, trf nc-coordinate nodes, etale-regular-intersection-descent, snc-divisorial-log-chart, snc-parameter-root-quotient. Batch 5: the newly cited lem-trf-regular-local-ufd-boundary-factorization is Stacks 0AG0 (regular local implies UFD). Its 322-node closure is pure commutative and homological algebra (K0, Pic, global dimension) and reaches no trace-formula or Poincare-duality content, sk-thm-trace-transport or batch-4 target, so I accept it. Accept as tool_uses for L: the UFD node (sk-i-curve-zero), the 00NR and 00NQ nodes (sk-thm-p1) and lem-sc-regular-local-domain. No SGA cited. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SNCBoundaryParameterCriterion",
+  "declaration": "AlgebraicGeometry.isStrictNormalCrossingsBoundary_iff_parameters",
+  "file": "lean/Sheaf/AlgebraicGeometry/SNCBoundaryParameterCriterion.lean",
+  "statement": "theorem isStrictNormalCrossingsBoundary_iff_parameters (X : Scheme.{u}) [IsNoetherian X] (_hX : IsRegularScheme X) (H : X.IdealSheafData) : IsStrictNormalCrossingsBoundary H ↔ ∀ x : X, ∃ (U : X.affineOpens) (hx : x ∈ U.1) (t : List (X.presheaf.stalk x)) (r : ℕ), IsLocalRing.IsRegularSystemOfParameters t ∧ r ≤ t.length ∧ (H.ideal U).map (X.presheaf.germ U.1 x hx).hom = Ideal.span {(t.take r).prod}",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-08446c748",
+  "group": "NX",
+  "result": "pass",
+  "note": "Only change: item lean record plus new module SNCBoundaryParameterCriterion.lean (one theorem, sorry). Statement verbatim in the file. Clause check against node and Stacks 0BI9/0BIA: IsNoetherian X (qc needed for finitely many components), IsRegularScheme, arbitrary IdealSheafData H, the full recorded IsStrictNormalCrossingsBoundary, ∀x ∃ RSOP t and r ≤ length with stalk ideal = span{(t.take r).prod}; the affine-U existential is independent of U. Edge cases match: empty H/X, dim 0, V(x²), tangent branches, nodal cubic, nested/codim≥2 components. No duplicate in lean/Sheaf or Mathlib. Docstrings carry source, blueprint tag and the 4 proof steps; imports OK. nt_compile --json clean in 2.1 s; probe confirmed the Noetherian stalk instance and axioms (sorryAx only)."
  }
 }

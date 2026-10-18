@@ -140,5 +140,28 @@
   "group": "Q128",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q128-c4ecc0c57 (reviewer sub-agent of L); spot-checked: Read ILO IV Thm 3.1.2 (Epp), Rem 3.1.3 (mixed-characteristic reducedness; only S needs to be complete) and the §4.2.3 sentence 'De tels idéaux p étant en nombre fini … stable par changement de base fini'. The item statement matches the finite-family use in §4.2.3: injective local = local dominant, T_i excellent (automatic for a DVR with characteristic-0 fraction field), the empty family allowed, and the conclusion independent of the uniformizer. The citer lem-per-mixed-reduced-special-fibre-cover (steps 3 and 7) uses it consistently. The split mirrors the source: the one-trait Epp theorem (the theorem ILO cites), then a common finite extension, then stability. It is not a relabelling. Both new nodes are true. Stability, checked by hand: each localization of B_E is a DVR with uniformizer π', and its residue field is separable over the perfect field k'. So (D⊗W'')/π'' = κ_D⊗_{k'}k'' is reduced and B'⊗W'' is already the normalization of T⊗W''. Common extension: take W = integral closure of W_0 in a compositum; it is finite (Nagata) and a complete DVR (unique extension of the valuation), each W_i is the integral closure of W_0 in its fraction field so W_i ⊂ W, and the residue field is finite and perfect. Duplicate search: grep of the DAG for Epp, elimination of ramification, reduced special fibre and compositum found only different facts (perfect-core nodes, trf valuation reducedness, sbc tame nodes, lem-weil-common-extension-fields); the blueprint has no Epp node. No SGA, no off-unit citations. One fault, repaired (B2/E6): the single-trait node stated stability as 'the corresponding normalized integral closures after base change to W''', which is vague and did not require a W_0-compatible local map W'→W''; it also said 'Let p>0' and left terms undefined. Rewrote it with 'finite extension', 'field factor', B_E and 'good for T' defined inline, as clauses (1) existence, (2) T⊗W' reduced, (3) stability along local W_0-maps, and added def-weil-finitely-generated-module to stmt_deps. Reworded item steps 1 and 3 to cite clauses (1) and (3); the item statement, uses and proof_deps are unchanged.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.EppFiniteFamilyTraits",
+  "declaration": "IsDiscreteValuationRing.exists_epp_finite_family_traits",
+  "declarations": [
+   "IsDiscreteValuationRing.eppTraitTensorMap",
+   "IsDiscreteValuationRing.eppNormalizedFactorSpecialFibre",
+   "IsDiscreteValuationRing.exists_epp_finite_family_traits"
+  ],
+  "file": "lean/Sheaf/RingTheory/EppFiniteFamilyTraits.lean",
+  "statement": "theorem exists_epp_finite_family_traits (p : ℕ) (hp : p.Prime) (W₀ K₀ : Type u) [CommRing W₀] [IsDomain W₀] [IsDiscreteValuationRing W₀] [IsAdicComplete (maximalIdeal W₀) W₀] [Field K₀] [Algebra W₀ K₀] [IsFractionRing W₀ K₀] [CharZero K₀] [CharP (ResidueField W₀) p] [PerfectField (ResidueField W₀)] (I : Type w) [Finite I] (T F : I → Type v) [∀ i : I, CommRing (T i)] [∀ i : I, IsDomain (T i)] [∀ i : I, IsDiscreteValuationRing (T i)] [∀ i : I, Algebra W₀ (T i)] [∀ i : I, IsLocalHom (algebraMap W₀ (T i))] (hinj : ∀ i : I, Function.Injective (algebraMap W₀ (T i))) (hexc : ∀ i : I, IsExcellent (T i)) [∀ i : I, Field (F i)] [∀ i : I, Algebra (T i) (F i)] [∀ i : I, IsFractionRing (T i) (F i)] [∀ i : I, Algebra K₀ (F i)] (hF : ∀ i : I, (algebraMap (T i) (F i)).comp (algebraMap W₀ (T i)) = (algebraMap K₀ (F i)).comp (algebraMap W₀ K₀)) (hcore : ∀ (i : I) (x : ResidueField (T i)), (∀ n : ℕ, ∃ y : ResidueField (T i), y ^ (p ^ n) = x) → @IsAlgebraic (ResidueField W₀) (ResidueField (T i)) _ _ (ResidueField.map (algebraMap W₀ (T i))).toAlgebra x) : ∃ (W : Type u) (_ : CommRing W) (_ : IsDomain W) (_ : IsDiscreteValuationRing W) (_ : IsAdicComplete (maximalIdeal W) W) (_ : Algebra W₀ W) (_ : IsLocalHom (algebraMap W₀ W)), Function.Injective (algebraMap W₀ W) ∧ Module.Finite W₀ W ∧ (ResidueField.map (algebraMap W₀ W)).Finite ∧ CharP (ResidueField W) p ∧ PerfectField (ResidueField W) ∧ ∃ (K : Type u) (_ : Field K) (_ : Algebra W K) (_ : IsFractionRing W K) (_ : Algebra K₀ K) (_ : CharZero K) (hK : (algebraMap W K).comp (algebraMap W₀ W) = (algebraMap K₀ K).comp (algebraMap W₀ K₀)), ∀ i : I, (∃ (n : ℕ) (E : Fin n → Type (max u v)) (_ : ∀ j : Fin n, Field (E j)), Nonempty ((F i ⊗[K₀] K) ≃+* (∀ j : Fin n, E j))) ∧ ∀ (π : W), maximalIdeal W = Ideal.span {π} → ∀ (m : Ideal (F i ⊗[K₀] K)) (_ : m.IsMaximal), IsReduced (eppNormalizedFactorSpecialFibre W₀ (T i) W K₀ (F i) K (hF i) hK m π)",
+  "branch": "newtargets-dag",
+  "by": "Q125",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-66a42afdf",
+  "group": "Q125",
+  "result": "pass",
+  "note": "All 16 node clauses match the Lean with no extra hypotheses: T_i not assumed complete, empty I allowed, perfect core includes n=0 and is algebraic over k0 via ResidueField.map, uniformizer and maximal-ideal factor quantified universally, finite-product clause explicit, W finite injective local with finite and perfect residue extension, K determined by hK. Helpers are real constructions (TensorProduct.mapRingHom; quotient of integralClosure by 1⊗π). Proof is only sorry; docstrings give source place, blueprint id and the 3 proof steps; dependency records checked; statement verbatim in file. nt_compile --json clean (exit 0, 2.5 s) and a broken control copy fails. Universes explicit; citer MixedReducedSpecialFibreCover use is consistent; no competing declaration in side lean/Sheaf."
  }
 }

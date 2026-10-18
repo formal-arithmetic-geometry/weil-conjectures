@@ -174,5 +174,23 @@
   "group": "Q73",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-9260fb844 (reviewer sub-agent of L); spot-checked: I read the item in full: 5 steps, no new nodes, statement and stmt_deps byte-identical to the live unsplit node. Sources: EGA 0_IV 21.9.4 (EGA-IV-1 PDF p.177) assumes A of finite type over B; the item assumes module-finite, which is stronger, so the item is an instance and Step 1 can use a finite residue extension. ILO IV 2.1.6 (printed p.51, before (2.b)) is the use the citer lem-per-cofinite-pbasis-completed-generic-rank makes, and it matches. Small cases hold: r=0 (identity, also with an inseparable residue field) and C=F[[T]] (both sides are B·dT). Step 1: lem-per-completed-differential-finite-conormal applies, since C/m is a quotient of C/m_B C, which is finite over F because u is local. Step 2: B is free over B1 on monomials with exponents <p, and the tool use of lem-weil-pbc-finite-module-complete-over-complete-noetherian (sk-thm-p1) is accepted. Steps 4 and 5 use the universal property and generation by d_F c and are correct. Faults repaired in fixes/: (1) Step 3 contained a raw ESC control sequence ('\\u001b[adically') that the report claimed was removed. I rewrote the step with the density argument made explicit: b=g+h, u(h)∈m^N because u is local, d_F(m^N)⊆m^{N-1}Ω̂, Ω̂ is separated, d_F(u(T_i)^p)=0. (2) proof_deps listed def-weil-finitely-generated-module twice; it is now de-duplicated and equal to the union of the uses. I also removed the conormal node from split_report.tool_uses because it is in the item's own unit. The duplicate candidates are not duplicates: lem-per-finite-formal-map-differential-cokernel needs residue field k and concludes an exact sequence, and the trf completed-differential nodes have different settings. No SGA is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PthPowerSeriesCompletedDifferentialComparison",
+  "declaration": "KaehlerDifferential.pth_power_series_completed_differential_comparison",
+  "file": "lean/Sheaf/RingTheory/PthPowerSeriesCompletedDifferentialComparison.lean",
+  "statement": "theorem pth_power_series_completed_differential_comparison (F : Type u) [Field F] (p : ℕ) (hp : p ≠ 0) [CharP F p] (r : ℕ) (C : Type v) [CommRing C] [Algebra F C] [IsLocalRing C] [IsNoetherianRing C] [IsAdicComplete (IsLocalRing.maximalIdeal C) C] [Algebra (MvPowerSeries (Fin r) F) C] [IsScalarTower F (MvPowerSeries (Fin r) F) C] [IsLocalHom (algebraMap (MvPowerSeries (Fin r) F) C)] [Module.Finite (MvPowerSeries (Fin r) F) C] (hcont : ∀ n : ℕ, ∃ N : ℕ, IsLocalRing.maximalIdeal (MvPowerSeries (Fin r) F) ^ N ≤ (IsLocalRing.maximalIdeal C ^ n).comap (algebraMap (MvPowerSeries (Fin r) F) C)) : (∀ b : (MvPowerSeries.expand (σ := Fin r) (R := F) p hp).range, AdicCompletion.of (IsLocalRing.maximalIdeal C) (KaehlerDifferential F C) (D F C (algebraMap (MvPowerSeries (Fin r) F) C b)) = 0) ∧ ∃ e : KaehlerDifferential (MvPowerSeries.expand (σ := Fin r) (R := F) p hp).range C ≃ₗ[C] AdicCompletion (IsLocalRing.maximalIdeal C) (KaehlerDifferential F C), ∀ c : C, e (D (MvPowerSeries.expand (σ := Fin r) (R := F) p hp).range C c) = AdicCompletion.of (IsLocalRing.maximalIdeal C) (KaehlerDifferential F C) (D F C c)",
+  "branch": "newtargets-dag",
+  "by": "Q90",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c1e4d665d",
+  "group": "Q90",
+  "result": "pass",
+  "note": "Single theorem module + lean record; node text byte-identical to live; lean.statement verbatim. All clauses match: F field CharP p≠0, r:ℕ, B=MvPowerSeries (Fin r) F, C complete Noetherian local F-algebra, u via Algebra B C + IsScalarTower + IsLocalHom + adic continuity hcont, Module.Finite B C, B₁=(MvPowerSeries.expand p hp).range (range = series with exponents divisible by p, by coeff_expand_smul/coeff_expand_of_not_dvd; coefficients fixed, so fine for imperfect F), Ω̂=AdicCompletion 𝔪 Ω[C/F] (same as conormal prerequisite), vanishing on u(B₁), and ∃ C-linear equiv normalized on D c (canonical map). Independent universes u,v; no extra hypotheses; r=0, identity and non-injective u covered. No H4 duplicate in Mathlib/side (checked trf continuous-differentials and completion-comparison modules). Docstrings carry source, blueprint and 5 steps; imports follow rule 7. nt_compile --json clean (2.2 s). Advisory: hcont is implied by IsLocalHom but kept because the node states it."
  }
 }
