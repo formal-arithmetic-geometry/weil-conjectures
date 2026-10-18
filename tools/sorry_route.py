@@ -20,7 +20,11 @@ Output: {"t", "ok", "failed": [target modules whose walk failed], "route": {modu
 batches), "batches": {batchN: {module: [declarations]}}, "targets": {target module: {module: [declarations]}} (walks without assumptions), "assumed": {batchN: [declarations]},
 "own": {batchN: {module: [declarations]}}, "own_failed": [...]} (see below).
 `ok` is false when any target module failed: consumers must not read a partial route as complete (tools/tag_batches.py
-then keeps the import closure for that batch and says so). Exit 1 when a walk failed.
+then keeps the import closure for that batch and says so). Exit 1 when a walk failed. Since 2026-10-18 a failed run does
+not replace a complete local/sorry-route.json: the partial result goes to local/sorry-route-failed.json and the consumers
+keep the last complete route (a walk fails transiently while a global build rewrites the .oleans; at 12:27 that day the
+fallback to the import closure rewrote the queue without the items below the route and the dispatcher stopped 300+
+workers). Only when no complete route exists is the partial file written as before.
 Own route, reporting only (the human, 2026-10-18): batch 4's target uses batch 3's target, so batch 4's route counted
 all of batch 3's remaining work again. "own" is a separate walk per open batch N with stops = its assumptions plus every
 declaration of the target modules of the OTHER open batches (resolved through `declaring()`): another batch's main
@@ -221,7 +225,12 @@ def main():
            "batches": {k: srt(v) for k, v in batches.items()}, "targets": {k: srt(v) for k, v in tgt.items()},
            "assumed": assumed_by, "own": {k: srt(v) for k, v in own.items()}, "own_failed": own_failed}
     (R / "local").mkdir(exist_ok=True)
-    tmp = R / "local" / ".sorry-route.json"; tmp.write_text(json.dumps(out, indent=1)); tmp.replace(R / "local" / "sorry-route.json")
+    if failed and load() is not None:   # 2026-10-18: keep the last complete route (see the docstring)
+        (R / "local" / "sorry-route-failed.json").write_text(json.dumps(out, indent=1))
+        print(f"walks failed ({', '.join(failed)}): local/sorry-route.json keeps the last complete route; "
+              "this partial result is in local/sorry-route-failed.json", file=sys.stderr)
+    else:
+        tmp = R / "local" / ".sorry-route.json"; tmp.write_text(json.dumps(out, indent=1)); tmp.replace(R / "local" / "sorry-route.json")
     for k, v in out["batches"].items():
         print(f"{k}: {sum(len(x) for x in v.values())} sorried declarations in {len(v)} modules")
     for k, v in out["own"].items():
