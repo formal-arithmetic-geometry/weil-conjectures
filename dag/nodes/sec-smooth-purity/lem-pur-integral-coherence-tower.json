@@ -259,5 +259,42 @@
   "group": "Q117",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-4b5c235a8 (reviewer sub-agent of L); spot-checked: Read the item in full. Its statement is unchanged from the live side DAG; the delivery fills an empty proof with six steps and adds no new nodes. I read every cited statement and the sources: Stacks 07A4 (sites-cohomology.tex l.3684), which works with flat-term K-flat models and Tot, and Stacks 0941 (l.5067), the derived limit on strict towers. The coefficient category and pullback agree with def-pur-integral-derived-operations: R_W=lim(A_{E,n})_W, P_n=P⊗B_{Y,n}, termwise f_n^*. Steps 2–4 are instances of lem-pur-cochain-pullback-tensor-coherence. I type-checked the composition equation, which matches the lemma's a_P orientation and uses (fh)_n=f_n h_n. I checked the Koszul sign on pure tensors and the edge cases p=q=0 and f or h = id. Steps 5–6 follow from the functorial Rlim, the substitution lemma and the effectivity counits. No SGA is cited and the graph has no cycle. Two repairable faults are fixed in fixes/dag/nodes/sec-smooth-purity/lem-pur-integral-coherence-tower.json, which changes only proof, proof_deps and split_report. (1) C1/E5: step 1 took the underived associativity maps as the derived transition-adjoints that def-coef-normalized-dvr-tower requires, and treated the strict Tot/pullback towers as derived models, without citing the K-flatness facts this needs. It now writes these out and cites lem-pur-kflat-change-of-rings, lem-pur-derived-change-of-rings, lem-pur-kflat-total-tensor-model, prop-weil-pbc-proetale-constant-exact and lem-weil-pbc-ringed-topos-kflat-pullback. (2) The off-route tools lem-weil-pbc-ringed-strict-tower-homotopy-limit and lem-coef-normalized-dvr-effectivity were not declared. They are now in split_report.tool_uses together with the two new step-1 tools. I accept all five tool_uses, including the worker's lem-pur-system-normalized-tensor-closure. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralCoherenceTower",
+  "declaration": "WeilConjectures.IntegralCoherence.integralCoherenceTower",
+  "declarations": [
+   "WeilConjectures.IntegralCoherence.Complex",
+   "WeilConjectures.IntegralCoherence.pull",
+   "WeilConjectures.IntegralCoherence.compositor",
+   "WeilConjectures.IntegralCoherence.generator",
+   "WeilConjectures.IntegralCoherence.PullbackComparison",
+   "WeilConjectures.IntegralCoherence.PullbackComparison.tensor",
+   "WeilConjectures.IntegralCoherence.PullbackComparison.unit",
+   "WeilConjectures.IntegralCoherence.Coherent",
+   "WeilConjectures.IntegralCoherence.CompositionLaw",
+   "WeilConjectures.IntegralCoherence.value",
+   "WeilConjectures.IntegralCoherence.Good",
+   "WeilConjectures.IntegralCoherence.QuotientPresentation",
+   "WeilConjectures.IntegralCoherence.structuralValue",
+   "WeilConjectures.IntegralCoherence.Realization",
+   "WeilConjectures.IntegralCoherence.completedArrow",
+   "WeilConjectures.IntegralCoherence.ReductionLaw",
+   "WeilConjectures.IntegralCoherence.integralCoherenceTower"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralCoherenceTower.lean",
+  "statement": "theorem integralCoherenceTower (W : S → Scheme.{t}) (_hl : ∀ (a : S) (x : W a), IsUnit (l : (W a).residueField x)) : ∃ M : CompletedOperations.Models l E W, CompletedOperations.ComparisonLaws.{t, u, s, i} l E M ∧ CompletedOperations.SubstitutionLaw.{t, u, s, i, j} l E M ∧ CompletedOperations.StructuralLaw.{t, u, s, i} l E M ∧ (∃ c : ∀ {a b : S} (f : W a ⟶ W b), PullbackComparison l E f, (∀ {a b : S} (f : W a ⟶ W b), Coherent l E f (c f)) ∧ (∀ {a b d : S} (h : W d ⟶ W a) (f : W a ⟶ W b), CompositionLaw l E h f (c f) (c h) (c (h ≫ f)))) ∧ (∀ (a : S) (P : CochainComplex (scalarReductionSource l E (W a)) ℤ) (hP : CochainComplex.IsKFlatIndependentCoefficients (R := completedIntegralCommRingSheafUnrestricted l E (W a)) P) (_hflat : ∀ k : ℤ, SheafOfModules.IsFlatOnSite (J := Scheme.ProEt.topology (W a)) (R := completedIntegralCommRingSheafUnrestricted l E (W a)) (P.X k)), Nonempty (QuotientPresentation l E M a P hP)) ∧ (∀ {I : Type i} {location : I → S} (P : ∀ k : I, CochainComplex (scalarReductionSource l E (W (location k))) ℤ) (hP : ∀ k : I, CochainComplex.IsKFlatIndependentCoefficients (R := completedIntegralCommRingSheafUnrestricted l E (W (location k))) (P k)) (T : ∀ k : I, QuotientPresentation l E M (location k) (P k) (hP k)), ∃ R : Realization l E M (fun k ↦ (T k).complex), ReductionLaw l E M R)",
+  "branch": "newtargets-dag",
+  "by": "Q50",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-62620b569",
+  "group": "Q50",
+  "result": "pass",
+  "note": "Checked immutable statements, dependencies, canonical constructions, source clauses, universes, edge cases, docstrings and route pivot. Statement field matches verbatim; per-file compile and confirmation passed in 56.1s and 58.2s. No substantive errors; branch unchanged."
  }
 }
