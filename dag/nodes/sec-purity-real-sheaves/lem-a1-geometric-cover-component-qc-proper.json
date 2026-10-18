@@ -19,9 +19,211 @@
   "def-weil-proper-morphism",
   "pqf-def-quasifinite"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $f=q|_C$. The component lemma makes $C$ closed as well as open. The inclusion $C\\hookrightarrow Z$ is etale, and composition makes $f$ etale. It also inherits the stipulated valuation lifting property: a lift into $Z$ has clopen inverse image of $C$ in $\\operatorname{Spec}R$, containing its generic point. Since the spectrum of a domain is irreducible, that inverse image is the whole spectrum, so the lift factors through the open subscheme $C$. Uniqueness follows from uniqueness in $Z$. Both $C$ and $X$ are nonempty, since a component is nonempty and maps to $X$.",
+   "uses": [
+    "lem-a1-normal-etale-components-clopen",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 7.4.10, p. 71, reduction to a connected geometric covering; component restriction"
+   }
+  },
+  {
+   "text": "Apply the component lemma also to $\\mathrm{id}_X$ (an open immersion, hence etale). Connectedness makes $X$ irreducible, and the same lemma makes $C$ irreducible. The local domains of $X$ are reduced, so $X$ is integral. On a nonempty affine open of $X$, its coordinate ring is a domain and its localizations at maximal ideals are the given normal local domains; the local-normality lemma makes that coordinate ring a normal domain. The etale normal-ring lemma, on affine charts of $C\\to X$, then gives normal local domains on $C$. Thus $C$ too is reduced and integral. In particular the coordinate rings of nonempty affine opens of either scheme are normal domains, by the same local-normality lemma.",
+   "uses": [
+    "lem-a1-normal-etale-components-clopen",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "def-pc-reduced-scheme",
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-normal-domain-of-local-normal",
+    "lem-weil-pbc-etale-over-normal-ring-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 033K/033L, lemma-normal-reduced and lemma-integral-normal; local-normality criterion; Algebra Tag 033C"
+   }
+  },
+  {
+   "text": "Etaleness includes local finite presentation and, through unramifiedness, local finite type. Consequently $C$ is locally Noetherian. It is therefore quasi-separated as a scheme, and the permanence lemma makes $f$ quasi-separated. Apply the dense-source valuative criterion with $h=\\mathrm{id}_C$: the identity is quasi-compact with dense image, and step 1 supplies a unique lift for every valuation diagram. The separatedness conclusion applies without assuming $C$ or $f$ quasi-compact. Thus $f$ is separated.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "def-weil-unramified-morphism",
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "sk-lem-nagata-sketch-dense-valuative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01L0, lemma-valuative-criterion-separatedness; Properties Tag 01OY; Morphisms Tag 01T6"
+   }
+  },
+  {
+   "text": "Let $\\eta$ be the generic point of integral $X$, and put $K=\\mathcal O_{X,\\eta}$. Every nonempty open $O\\subset C$ has nonempty open image in $X$ by etaleness, so its image contains $\\eta$. In particular $C_\\eta$ is nonempty. The fibre has the topology of $f^{-1}(\\eta)$: on affine charts this is precisely the fibre-spectrum homeomorphism, and those charts cover the fibre. Two nonempty opens of that fibre come from opens $O_1,O_2$ of $C$. Irreducibility makes $O_1\\cap O_2$ nonempty, and its image again contains $\\eta$. Hence these fibre opens intersect, proving that $C_\\eta$ is irreducible.",
+   "uses": [
+    "lem-sc-scheme-sober",
+    "lem-sc-integral-function-field-affine-fraction",
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-weil-pbc-fibre-spec-homeomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 7.4.10, p. 71: the generic fibre is connected by irreducibility; affine fibre topology is Stacks Tag 00E6"
+   }
+  },
+  {
+   "text": "The etale fibre theorem makes $C_\\eta$ a discrete disjoint union of spectra of finite separable extensions of $K$. Its nonempty irreducible topology therefore has exactly one point $\\xi$, and $C_\\eta=\\operatorname{Spec}L$ for a finite separable extension $L/K$. Step 4 shows that $\\xi$ lies in every nonempty open of $C$, so it is the generic point of $C$ and $L=\\mathcal O_{C,\\xi}$. The affine-fraction theorem identifies $K$ and $L$ with the fraction fields of every nonempty affine coordinate ring of $X$ and $C$, respectively, compatibly with their germ maps.",
+   "uses": [
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 7.4.10, p. 71: connected generic fibre is finite; Stacks Tag 02GL(2), lemma-etale-over-field"
+   }
+  },
+  {
+   "text": "Fix a nonempty affine open $V=\\operatorname{Spec}A$ of $X$ and put $D=f^{-1}(V)$. The ring $A$ is Noetherian and is a normal domain by step 2, with fraction field $K$. Set $B=\\overline A^{\\,L}\\subset L$, the integral closure. The finite-separable integral-closure lemma makes $B$ a finite $A$-module. Thus $N=\\operatorname{Spec}B\\to V$ is finite. It is also of finite type: module generators generate $B$ as an $A$-algebra. Since $V$ is Noetherian, the finite-type theorem makes $N$ Noetherian. The minimal-closed-subset theorem therefore applies to $N$.",
+   "uses": [
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
+    "def-weil-pbc-integral-closure",
+    "def-weil-finite-integral-morphism",
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 032L, lemma-Noetherian-normal-domain-finite-separable-extension; Morphisms Tag 01T6"
+   }
+  },
+  {
+   "text": "The open $D$ is nonempty: $\\eta\\in V$, so the generic point $\\xi$ of step 5 lies in $D$. Let $U$ range over the nonempty quasi-compact opens of $D$. Such opens cover $D$ and are directed by finite union, because affine opens form a basis. The restriction $f_U:U\\to V$ is etale by open-immersion composition and etale cancellation. It is quasi-compact by the permanence lemma, since $U$ is quasi-compact and $V$ is affine and quasi-separated. Its fibres are discrete by the etale fibre theorem, so, being locally of finite type and quasi-compact, it is quasi-finite in the stated definition. It is separated, as a restriction of separated $f$: its diagonal is the restriction of the closed diagonal of $f$. Thus the normalization-open theorem applies to $f_U$, giving an open immersion $\\iota_U:U\\hookrightarrow N_U$ with $\\nu_U\\circ\\iota_U=f_U$, where $\\nu_U:N_U\\to V$ is the relative normalization of $V$ in $U$. Its statement does not say that $\\iota_U$ is the factorization $f'_U$ of the relative-normalization statement; step 8 compares the two.",
+   "uses": [
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "pqf-def-quasifinite",
+    "def-weil-proper-morphism",
+    "pqf-lem-normalization-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02LR, lemma-quasi-finite-separated-quasi-affine, applied only to quasi-compact opens U"
+   }
+  },
+  {
+   "text": "Identify $\\Gamma(U,\\mathcal O_U)$ with a subring of $L$ by the generic germ: injectivity follows on an affine cover from the affine-fraction theorem and then from the sheaf axiom. If $b\\in B$, then on each nonempty affine chart $W\\subset U$, the element $b\\in L=\\operatorname{Frac}\\mathcal O_C(W)$ is integral over $\\mathcal O_C(W)$, since its monic equation already has coefficients in $A$. The normality from step 2 implies $b\\in\\mathcal O_C(W)$. These representatives agree on overlaps by their common generic germ and glue to a section on $U$. Therefore $B\\subseteq\\Gamma(U,\\mathcal O_U)\\subseteq L$. The elements of the middle ring integral over $A$ are exactly $B$. Clause (iii) of the relative-normalization statement, applied to the qcqs map $f_U$ and the affine $V$, identifies $N_U$ with the same $N=\\operatorname{Spec}B$. It also identifies $f'_U$ on global sections with the inclusion $B\\hookrightarrow\\Gamma(U,\\mathcal O_U)$. Compare $\\iota_U$ with $f'_U$. By the affine-target bijection, $\\iota_U$ corresponds to an $A$-algebra map $\\sigma:B\\to\\Gamma(U,\\mathcal O_U)\\subseteq L$. The map $\\sigma$ is injective: $N$ is integral, $\\iota_U(U)$ is a nonempty open, and a section vanishing there has zero generic germ, hence is $0$ by the affine-fraction theorem. Every $x\\in L$ is $b/a$ with $b\\in B$ and $0\\neq a\\in A$. To see this, take a monic equation $x^n+\\sum_{i<n} c_ix^i=0$ over $K$ and $a\\neq0$ in $A$ with all $ac_i\\in A$. Multiplying by $a^n$ shows that $ax$ is integral over $A$. Hence $\\sigma$ extends to a $K$-embedding $\\tau:L\\to L$, which is an automorphism since $[L:K]<\\infty$. The maps $\\tau$ and $\\tau^{-1}$ preserve integrality over $A$, so $\\tau(B)=B$. Thus $\\sigma$ is the inclusion composed with $\\tau|_B$. By the bijection, $\\iota_U=\\operatorname{Spec}(\\tau|_B)\\circ f'_U$, where $\\operatorname{Spec}(\\tau|_B)$ is an automorphism of $N$ over $V$. Hence $j_U:=f'_U$ is an open immersion over $V$.",
+   "uses": [
+    "lem-sc-integral-function-field-affine-fraction",
+    "def-weil-pbc-normal-ring",
+    "def-weil-pbc-integral-closure",
+    "lem-weil-pbc-relative-normalization",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Normalization in another scheme, affine formula for relative normalization; Tag 01RV, lemma-integral-scheme-rational-functions"
+   }
+  },
+  {
+   "text": "For $U\\subset U'$ the inclusions $B\\to\\Gamma(U',\\mathcal O)\\to\\Gamma(U,\\mathcal O)$ are the same generic rational functions. The bijection between morphisms into an affine scheme and maps on global sections therefore gives $j_U=j_{U'}|_U$ under the identifications in step 8. Write $W_U=j_U(U)\\subseteq N$. Each $W_U$ is open, and $U\\subset U'$ implies $W_U\\subseteq W_{U'}$. All transition maps are inclusions of open subschemes with these specified identifications.",
+   "uses": [
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I1, lemma-morphism-into-affine; canonical inclusions into the integral closure in step 8"
+   }
+  },
+  {
+   "text": "The closed complements $N\\setminus W_U$ form a nonempty collection. Choose a minimal one by step 6, and denote its index by $U_0$. For arbitrary $U$ put $U'=U\\cup U_0$, which is again a nonempty quasi-compact open of $D$. Then $W_{U_0}\\subseteq W_{U'}$ and minimality of the complement forces equality. The compatible open immersions $U_0\\hookrightarrow U'\\hookrightarrow N$ consequently have the same image, so $U_0=U'$. Hence $U\\subseteq U_0$ for every such $U$. Since they cover $D$, we have $D=U_0$, proving $f^{-1}(V)$ quasi-compact. This is the ascending-open form of Noetherian induction, with its stabilization argument written out.",
+   "uses": [
+    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 7.4.10, p. 71, Noetherian compactness argument, expanded using the finite normalization N and Stacks 02LR"
+   }
+  },
+  {
+   "text": "Step 10 holds for every nonempty affine open $V$ of $X$; the inverse image of an empty affine open is empty and quasi-compact. Thus $f$ is quasi-compact by definition. Since it is also locally of finite type, it is of finite type. Its fibres are discrete by the etale fibre theorem, so it is quasi-finite; the quasi-finite finite-fibres equivalence gives a finite set $f^{-1}(x)$ for every $x\\in X$. This proves precisely the asserted finiteness of $q^{-1}(\\{x\\})\\cap C$.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "pqf-def-quasifinite",
+    "pqf-lem-qf-finitefibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02NH, lemma-quasi-finite; definition of finite type"
+   }
+  },
+  {
+   "text": "Finally apply the dense-source valuative criterion once more with $h=\\mathrm{id}_C$. The identity is quasi-compact with dense image, step 1 gives every unique valuation lift, step 3 gives quasi-separatedness, and step 11 gives finite type. Its properness conclusion therefore proves that $f:C\\to X$ is proper. Together with steps 10 and 11 this gives every clause of the item.",
+   "uses": [
+    "sk-lem-nagata-sketch-dense-valuative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 7.4.10, p. 71, last sentence; Stacks Tag 0894, dense-source valuative criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-normal-etale-components-clopen",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-pc-reduced-scheme",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-normal-domain-of-local-normal",
+  "lem-weil-pbc-etale-over-normal-ring-normal",
+  "def-weil-etale-morphism",
+  "def-weil-unramified-morphism",
+  "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "sk-lem-nagata-sketch-dense-valuative",
+  "lem-sc-scheme-sober",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-fibre-spec-homeomorphism",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
+  "def-weil-pbc-integral-closure",
+  "def-weil-finite-integral-morphism",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "pqf-def-quasifinite",
+  "def-weil-proper-morphism",
+  "pqf-lem-normalization-open",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-relative-normalization",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "pqf-lem-qf-finitefibres"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 7.4.10, p. 71: generic-fibre, Noetherian compactness and valuative-properness route; compactness expanded using Stacks 032L and 02LR and a directed family of quasi-compact opens."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -50,10 +252,38 @@
    "results": "0 hits",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A connected etale geometric covering of a normal Noetherian scheme is quasi compact and proper",
+   "results": "AlgebraicGeometry.Scheme.quasiCompactCover; AlgebraicGeometry.QuasiCompact; AlgebraicGeometry.QuasiCompact.mk; AlgebraicGeometry.quasiCompact_of_noetherianSpace_source; AlgebraicGeometry.QuasiCompactCover.of_isOpenMap; AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion; AlgebraicGeometry.QuasiCompactCover.instCoverOfIsIso; AlgebraicGeometry.instQuasiCompactOfUniversallyClosed",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A connected etale covering satisfying the valuative criterion over a normal Noetherian scheme is quasi compact",
+   "results": "AlgebraicGeometry.Scheme.quasiCompactCover; AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization; AlgebraicGeometry.QuasiCompactCover; AlgebraicGeometry.quasiCompact_of_noetherianSpace_source; AlgebraicGeometry.IsProper.of_valuativeCriterion; AlgebraicGeometry.Scheme.quasiCompactCover_iff; AlgebraicGeometry.instQuasiCompactOfIsLocallyNoetherianOfIsOpenImmersion; AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "geometric.?cover|connected.*[Ee]tale.*[Qq]uasi[Cc]ompact",
+   "results": "0 hits (grep restricted to Mathlib/AlgebraicGeometry)",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ValuativeCriterion\", \"QuasiCompact\"",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-normal-geometric-cover-components",
@@ -76,5 +306,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-geometric-cover-component-qc-proper",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved the component restriction inherits unique valuation lifting, established separatedness before any compactness argument, computed the finite separable generic fibre, and made compactness explicit by comparing the relative normalizations of all quasi-compact opens with one finite normalization. A maximal-open argument gives compactness; the valuative criterion gives properness. Every supporting result was already in the DAG; no new nodes.",
+  "blueprint": "Serves lem-a1-affine-hc0 through the recorded ancestor chain: the finite-monodromy/lattice subargument of the degree-zero compact-support proof. Realizes the compactness/properness sentence of Bhatt–Scholze Lemma 7.4.10 named in blueprint.from.place; the unit and chapter route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-over-normal-ring-normal",
+    "why": "Normality of etale affine charts, a local algebra tool below the geometric-cover argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-over-normal-ring-normal"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NB-120533d61",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-120533d61 (reviewer sub-agent of L); spot-checked: I read the item, all 41 cited node statements, the parent lem-a1-normal-geometric-cover-components and the unit sk-p-real-rankin, plus Bhatt–Scholze Lemma 7.4.10 (p. 71). The statement is true and matches BS's claim that connected geometric covers of a normal quasi-compact Noetherian base are finite étale; no target is weakened. It is strictly smaller than its parent, which also needs finite étale and surjective. The delivery has no new nodes, and the duplicate search found nothing. Steps 1–6 and 9–12 are correct against their cited statements: clopen irreducible components; integral normal C via the étale-normal tool; separated through 0894 with id_C; the generic fibre is a single point Spec L with L/K finite separable; B finite by 032L; Noetherian stabilization; finite fibres via 02NH; proper via 0894. Fault (C3/C4, E5), now repaired: pqf-lem-normalization-open only gives some open immersion iota_U with nu∘iota=f_U, not the canonical f'_U that steps 8 and 9 need. A K-automorphism of L, such as a Galois twist, can make them differ and would break j_U = j_{U'}|_U. The fix rewrites step 8: iota_U corresponds to an injective A-algebra map B→L; writing each x in L as b/a (cleared denominators) extends it to tau in Aut(L/K), with tau(B)=B. So iota_U = Spec(tau|_B)∘f'_U, and j_U := f'_U is an open immersion. Step 8 now also cites lem-weil-pbc-morphism-into-affine-scheme and is marked elementary: false. Step 7 now notes that D is nonempty (xi in D). The statement, stmt_deps and proof_deps are unchanged. I accept the declared tool use of lem-weil-pbc-etale-over-normal-ring-normal as a generic local-algebra black box. No SGA source is cited.; 1 file(s) fixed by the reviewer"
  }
 }
