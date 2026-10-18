@@ -15,9 +15,99 @@
   "def-pc-scheme-fibre",
   "def-pc-module-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $y\\in Y$ and put $z=h(y)$, $A=\\mathcal O_{Z,z}$, $B=\\mathcal O_{Y,y}$, $M=\\mathcal G_z$, with maximal ideals $\\mathfrak m_A,\\mathfrak m_B$. The stalk homomorphism $\\varphi:A\\to B$ is local and $B$ is flat over $A$ by [def-weil-flat-morphism]. Choose a Noetherian affine neighbourhood of $z$ from [pqf-def-locnoeth]. By [lem-weil-pbc-affine-open-stalk-localization](c), $A$ is a prime localization of its coordinate ring; [lem-weil-pbc-localization-noetherian] makes $A$ Noetherian. No assertion about Noetherianity of $B$ or finiteness of $M$ has been made.",
+   "uses": [
+    "def-weil-flat-morphism",
+    "pqf-def-locnoeth",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "lem-weil-pbc-localization-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 05DB (lemma-bourbaki), proof: set A, B, M and specialize F=O_Y"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-module-stalk-pullback], $(h^*\\mathcal G)_y\\cong M\\otimes_A B$ as $B$-modules. An isomorphism preserves the annihilator of each element, so [def-trf-relative-assassin] identifies $y\\in\\operatorname{Ass}_Y(h^*\\mathcal G)$ with $\\mathfrak m_B\\in\\operatorname{Ass}_B(M\\otimes_A B)$, always using exact element-annihilators. By [lem-sbc-scheme-fibre-stalk-quotient], the unique point $y_z$ of $Y_z$ above $y$ has local ring $C=B/\\mathfrak m_A B$, compatibly with the quotient map. Since $\\varphi$ is local, $\\mathfrak m_A B\\subseteq\\mathfrak m_B$, and the maximal ideal of $C$ is $\\mathfrak m_B/\\mathfrak m_A B$. Thus the fibre association condition is that this ideal is the annihilator of an element of $C$.",
+   "uses": [
+    "lem-weil-pbc-module-stalk-pullback",
+    "def-trf-relative-assassin",
+    "lem-sbc-scheme-fibre-stalk-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 05DB, proof: stalk of pullback and local ring of fibre; Schemes Tag 0HA1"
+   }
+  },
+  {
+   "text": "Apply the equality clause of [lem-weil-pbc-associated-primes-flat-base-change] with $R=A$, $S=B$, and $N=B$. Step 1 verifies both hypotheses, and its statement allows arbitrary $M$ and arbitrary $B$. Hence\n$$\\mathfrak m_B\\in\\operatorname{Ass}_B(M\\otimes_A B)\\quad\\Longleftrightarrow\\quad\n\\text{there is }\\mathfrak p\\in\\operatorname{Ass}_A(M)\\text{ with }\\mathfrak m_B\\in\\operatorname{Ass}_B(B/\\mathfrak pB).$$\nWe next identify which $\\mathfrak p$ can occur, rather than assuming it equals $\\mathfrak m_A$.",
+   "uses": [
+    "lem-weil-pbc-associated-primes-flat-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 05DB via Algebra Tag 05C2 (lemma-bourbaki-fibres); expand its reference to Tag 0312 (lemma-bourbaki)"
+   }
+  },
+  {
+   "text": "Suppose $\\mathfrak m_B=\\operatorname{Ann}_B(v)$ for $v\\in B/\\mathfrak pB$, where $\\mathfrak p$ is prime in $A$. The element $v$ is nonzero because $\\mathfrak m_B$ is proper. For $a\\notin\\mathfrak p$, multiplication by $a$ on $A/\\mathfrak p$ is injective: $ar\\in\\mathfrak p$ implies $r\\in\\mathfrak p$. By [lem-weil-pbc-flat-tensor-exact], tensoring this injection with the $A$-flat module $B$ stays injective. The isomorphism [lem-weil-pbc-tensor-over-quotient-ring](1) identifies the tensor module with $B/\\mathfrak pB$ by $\\bar r\\otimes b\\mapsto\\varphi(r)b$; on these generators the tensor map is multiplication by $\\varphi(a)$. Consequently $\\varphi(a)$ cannot annihilate $v$. If $a\\in\\mathfrak m_A\\setminus\\mathfrak p$, locality gives $\\varphi(a)\\in\\mathfrak m_B$, contradicting this conclusion. Hence $\\mathfrak m_A\\subseteq\\mathfrak p$. Every proper ideal of the local ring $A$ is contained in $\\mathfrak m_A$ (each element outside it is a unit), so $\\mathfrak p=\\mathfrak m_A$.",
+   "uses": [
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-tensor-over-quotient-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Algebra Tags 0312 and 05C1 (lemma-post-bourbaki), nonzerodivisor calculation on the prime quotient; used in 05C2"
+   }
+  },
+  {
+   "text": "For $C=B/\\mathfrak m_A B$ and $v\\in C$, the $B$-annihilator is the inverse image of the $C$-annihilator under the surjection $B\\to C$. Therefore\n$$\\operatorname{Ann}_B(v)=\\mathfrak m_B\\quad\\Longleftrightarrow\\quad\n\\operatorname{Ann}_C(v)=\\mathfrak m_B/\\mathfrak m_A B.$$\nIndeed the preimage of the displayed quotient ideal is $\\mathfrak m_B$, and surjectivity makes ideals of $C$ equal when their preimages are equal. By the definition [def-trf-relative-assassin] and step 2, this proves\n$$\\mathfrak m_B\\in\\operatorname{Ass}_B(B/\\mathfrak m_A B)\n\\quad\\Longleftrightarrow\\quad y_z\\in\\operatorname{Ass}_{Y_z}(\\mathcal O_{Y_z}).$$\nIt holds even if $B$ and $C$ are non-Noetherian.",
+   "uses": [
+    "def-trf-relative-assassin"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 05DB, proof: closed-fibre association; Algebra Tag 05BY (lemma-ass-quotient-ring), direct annihilator calculation"
+   }
+  },
+  {
+   "text": "Steps 3–5 give the equivalence\n$$\\mathfrak m_B\\in\\operatorname{Ass}_B(M\\otimes_A B)\\quad\\Longleftrightarrow\\quad\n\\bigl(\\mathfrak m_A\\in\\operatorname{Ass}_A(M)\\text{ and }y_z\\in\\operatorname{Ass}_{Y_z}(\\mathcal O_{Y_z})\\bigr).$$\nFor the forward implication choose $\\mathfrak p$ in step 3, identify it by step 4, and apply step 5. For the reverse implication use step 5 and take $\\mathfrak p=\\mathfrak m_A$ in step 3. By [def-trf-relative-assassin], the first condition on the right is exactly $z\\in\\operatorname{Ass}_Z(\\mathcal G)$. Step 2 identifies the left condition with association of $y$ to $h^*\\mathcal G$. Finally [def-pc-scheme-fibre] says $j_z$ identifies the points of $Y_z$ with $h^{-1}(z)$. Thus a fixed $y$ lies in the union in the statement precisely when these two right-hand conditions hold for $z=h(y)$. Since this holds for every $y$, the required equality of subsets follows.",
+   "uses": [
+    "def-trf-relative-assassin",
+    "def-pc-scheme-fibre"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 05DB, conclusion of the stalkwise equivalence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-flat-morphism",
+  "pqf-def-locnoeth",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-module-stalk-pullback",
+  "def-trf-relative-assassin",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-weil-pbc-associated-primes-flat-base-change",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-tensor-over-quotient-ring",
+  "def-pc-scheme-fibre"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 05DB (lemma-bourbaki), proof, specialized to F=O_Y; its algebra input 05C2 is expanded through the existing general 0312 node and the local annihilator calculation of 05C1."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,10 +150,52 @@
    "results": "0 hits: none; digest=4f53cda18c2baa0c.  The hits give flat morphisms, their stalk maps and base-change stability, or unrelated tensor/Noetherian facts. No associated-point formula for quasi-coherent module pullback. Grep associatedPoints|associatedPrimes|assassin was restricted to AlgebraicGeometry; the final grep to RingTheory.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "associatedPoints|associatedPrimes|assassin",
+   "results": "0 hits: none; digest=4f53cda18c2baa0c. Grep restricted to Mathlib/AlgebraicGeometry. Flatness/base-change, localization of associated primes, free loci, and rank formulas do not state the scheme pullback assassin formula. Localization candidates require localization, unlike a general flat morphism.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bourbaki formula for associated points under flat pullback of quasi coherent sheaves",
+   "results": "8 hits: PrimeSpectrum.comap_surjective_of_faithfullyFlat, AlgebraicGeometry.Scheme.Modules.instAdditivePullback, Module.FaithfullyFlat.of_comap_surjective, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.Flat.flat_of_affine_subset, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat.instSndScheme, RingHom.Flat.generalizingMap_comap; digest=44baaa7278b911b7. Flatness/base-change, localization of associated primes, free loci, and rank formulas do not state the scheme pullback assassin formula. Localization candidates require localization, unlike a general flat morphism.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "associatedPrimes, TensorProduct",
+   "results": "0 hits: none; digest=4f53cda18c2baa0c. Flatness/base-change, localization of associated primes, free loci, and rank formulas do not state the scheme pullback assassin formula. Localization candidates require localization, unlike a general flat morphism.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat morphism of schemes over a locally Noetherian base, associated points of pullback of any quasi coherent module are associated points of fibres over associated points of the module",
+   "results": "8 hits: AlgebraicGeometry.Flat.generalizingMap, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat.instSndScheme, AlgebraicGeometry.Flat.instFstScheme, AlgebraicGeometry.Flat.stalkMap, AlgebraicGeometry.Scheme.Hom.flat_appLE; digest=c5ca9346534dc729. Flatness/base-change, localization of associated primes, free loci, and rank formulas do not state the scheme pullback assassin formula. Localization candidates require localization, unlike a general flat morphism.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "associatedPrimes.*(Flat|Tensor)|IsAssociatedPrime.*(Flat|Tensor)",
+   "results": "0 hits: none; digest=4f53cda18c2baa0c. Grep restricted to Mathlib/RingTheory. Flatness/base-change, localization of associated primes, free loci, and rank formulas do not state the scheme pullback assassin formula. Localization candidates require localization, unlike a general flat morphism.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associated primes of a module tensor a flat algebra over a Noetherian ring equal primes in fibres over associated primes",
+   "results": "8 hits: Module.associatedPrimes.preimage_comap_associatedPrimes_eq_associatedPrimes_of_isLocalizedModule, Module.comap_freeLocus_le, Algebra.HasGoingDown.of_flat, Module.rankAtStalk_baseChange, Module.associatedPrimes.comap_mem_associatedPrimes_of_mem_associatedPrimes_of_isLocalizedModule_of_fg, Module.associatedPrimes.mem_associatePrimes_of_comap_mem_associatePrimes_isLocalizedModule, PrimeSpectrum.isEmbedding_tensorProductTo_of_surjectiveOnStalks_aux, Module.rankAtStalk_tensorProduct_of_isScalarTower; digest=b80a11a2d33d30d7. Flatness/base-change, localization of associated primes, free loci, and rank formulas do not state the scheme pullback assassin formula. Localization candidates require localization, unlike a general flat morphism.",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-relative-assassin-base-change",
@@ -93,5 +225,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-flat-pullback-associated-points",
+  "worker": "stage1",
+  "summary": "Proved the 05DB specialization stalkwise, expanding 05C2 through the existing arbitrary-module Bourbaki formula 0312. Locality and flat tensor exactness force its auxiliary prime to be the base maximal ideal. All facts reused from existing nodes; no new nodes. Statement, arbitrary quasi-coherent coefficients, and absence of Noetherianity of Y are preserved.",
+  "blueprint": "Proof (1)--(2) of lem-trf-local-term-locality, flat-family component-closure input through relative associated specialization; in the proof of Stacks 05DC used there, the displayed associated-point formula for the flat morphism of fibres. The six steps supply the flat pullback formula used in 05DC through relative assassin base change. Whole-blueprint searches for associated points, Bourbaki, and 05DB found no equivalent blueprint node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-stalk-pullback",
+    "why": "Generic stalk formula for pullback, needed to translate this geometric claim into local algebra; no node of sk-i-curve-zero states it."
+   },
+   {
+    "node": "lem-sbc-scheme-fibre-stalk-quotient",
+    "why": "Generic fibre local-ring quotient, needed to interpret fibre association; no node of sk-i-curve-zero states it."
+   },
+   {
+    "node": "lem-weil-pbc-associated-primes-flat-base-change",
+    "why": "General ring-theoretic Bourbaki formula 0312 for arbitrary modules; no node of sk-i-curve-zero supplies it without additional finite-type and Noetherian hypotheses."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-stalk-pullback",
+  "lem-sbc-scheme-fibre-stalk-quotient",
+  "lem-weil-pbc-associated-primes-flat-base-change"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-N8-7a740c49e",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-7a740c49e (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full; the delivery adds no new nodes. The statement is Stacks divisors 05DB (l.311) taken with F=O_Y and checked against its stalkwise proof: equality needs only Z locally Noetherian, G stays any quasi-coherent module and Y need not be Noetherian, so it is not weakened. Step 1: the flat-morphism definition gives the local stalk map, and the locnoeth definition, clause (c) of affine-open-stalk-localization and localization-noetherian make A Noetherian. Step 2: module-stalk-pullback holds for any module, and fibre-stalk-quotient (0HA1) gives O_{Y_z,y_z}=B/m_A B. Step 3: the 0312 node (algebra.tex l.15774) allows any M and S with N flat, applied with R=A and S=N=B. Step 4: I checked the argument that p=m_A: injectivity of multiplication by a on A/p carries over to B/pB by flat-tensor-exact and part (1) of tensor-over-quotient, and locality then forces m_A⊆p. Step 5 is the elementary annihilator correspondence along B→C. Step 6 uses that j_z maps onto h^{-1}(z). Small cases hold: A^1 over k[[t]] with G=O_Z or G=k, G=0, Y empty, h=id, and Z=Spec k with Y non-Noetherian. There is no duplicate: the related nodes need Noetherian rings and finite modules, or finite presentation with WeakAss. The proof closure (79 nodes) has no cycle. I accept the three declared tool_uses (module-stalk-pullback, scheme-fibre-stalk-quotient, the 0312 node) as generic black boxes. No SGA is cited."
  }
 }
