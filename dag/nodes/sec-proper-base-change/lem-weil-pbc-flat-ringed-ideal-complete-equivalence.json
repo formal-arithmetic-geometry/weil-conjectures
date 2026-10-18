@@ -30,80 +30,47 @@
  ],
  "proof": [
   {
-   "text": "Write $r$ for restriction of scalars. It is exact and conservative on module sheaves: kernels are sectionwise kernels with the inherited action, and cokernels are the same sheafifications of abelian presheaf cokernels before and after restriction. Thus it preserves cohomology and quasi-isomorphisms of complexes, induces $r:D(\\mathcal B)\\to D(\\mathcal O)$ by localization, and reflects isomorphisms (the cone has zero cohomology precisely when its underlying abelian sheaves do). By [lem-weil-pbc-restriction-local-completeness], $r$ preserves and reflects the local completeness conditions, so it restricts to a functor between the stated full subcategories.",
+   "text": "Use the existing exactness and conservativity proofs for restriction and the local-completeness equivalence. Choose the augmented global Cech model. Apply the strictly chain-level flat scalar-extension statement to obtain L, delta, u and its augmentation square.",
    "uses": [
     "def-pc-sheaf-restrict-scalars",
     "def-weil-sheaf-of-modules-category",
     "def-weil-abstract-derived-category",
-    "lem-weil-pbc-restriction-local-completeness"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 099I (lemma-restriction-derived-complete-equivalence), first paragraph; Tag 099C (lemma-restriction-derived-complete)."
-   }
-  },
-  {
-   "text": "Restriction to a slice is exact on underlying abelian sheaves by [lem-weil-pbc-site-restriction-exact]. By the kernel and cokernel description in [def-weil-sheaf-of-modules-category], this also proves exactness for module sheaves; consequently restriction preserves cohomology, quasi-isomorphisms, and quotient sheaves. Choose the augmented complex $\\epsilon:K^\\bullet\\to\\mathcal O[0]$ supplied by [lem-weil-pbc-extended-cech-completion-model]. Put $K_B^\\bullet=K^\\bullet\\otimes_{\\mathcal O}\\mathcal B$, with augmentation $\\epsilon_B(x\\otimes b)=\\varphi(\\epsilon(x))b$, and let $u:K^\\bullet\\to rK_B^\\bullet$ be $x\\mapsto x\\otimes1$. These are chain maps and $r\\epsilon_B\\circ u=\\varphi\\circ\\epsilon$. Flatness means tensoring is exact; applying this to the kernel/image sequences of any differential shows that this termwise tensor functor preserves cohomology and quasi-isomorphisms. On a slice where $\\mathcal J$ has generators $f_1,\\ldots,f_r$, the augmented local description of $K$ therefore identifies $u$ with the comparison of extended Čech complexes: on each localization the identification sends $(a/f^n)\\otimes b$ to $\\varphi(a)b/\\varphi(f)^n$, with inverse $b/\\varphi(f)^n\\mapsto(1/f^n)\\otimes b$. The balancing relation and the relation making $f$ invertible show that these maps are well-defined and mutually inverse; sheafification gives the asserted sheaf maps. Finite products here are finite direct sums, so this also identifies all terms and differentials. The quotient-isomorphism hypothesis restricts to the slice, and flatness restricts to the slice by [lem-weil-pbc-slice-restriction-flat]. Apply [lem-weil-pbc-flat-extended-cech-comparison] there. Thus $u$ is locally a quasi-isomorphism and hence globally one: each cohomology kernel/cokernel sheaf vanishes on a covering family of these slices.",
-   "uses": [
+    "lem-weil-pbc-restriction-local-completeness",
     "lem-weil-pbc-extended-cech-completion-model",
-    "def-pc-flat-sheaf-modules",
-    "def-pur-sheaf-tensor-product",
-    "lem-weil-pbc-slice-restriction-flat",
-    "lem-weil-pbc-flat-extended-cech-comparison",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-site-restriction-exact"
+    "lem-weil-pbc-flat-ringed-cech-base-change"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 099I, construction of K and K prime; Tag 099H (lemma-map-identifies-koszul-and-cech-complexes)."
-   }
+   "elementary": false
   },
   {
-   "text": "The coefficient-action product Hom-complex construction, including square-zero, chain-map functoriality, and the natural restriction comparison with the chosen R-valued Hom complex, is now proved by lem-weil-pbc-restricted-coefficient-hom-complex. Functorial K-injective replacement and localization remain to be implemented. The underived coefficient-action bifunctor, with its action formula and natural restriction comparison, is constructed in Lean by [lem-weil-pbc-restricted-coefficient-hom]. Fix this complex $K_B^\\bullet$. For $E$ represented by $E^\\bullet$, take the functorial K-injective replacement $E^\\bullet\\to I(E)^\\bullet$ of [def-pur-derived-internal-hom] and define $F(E)$ by $\\mathcal Hom^\\bullet_{\\mathcal O}(rK_B^\\bullet,I(E)^\\bullet)$, giving it a $\\mathcal B$-action by $(b h)(k)=h(bk)$. This is an action because $1h=h$, $(bc)h=b(ch)$ and addition distributes; restrictions commute with it, and the Hom differential is $\\mathcal B$-linear since $d(bk)=b\\,dk$. Maps are induced by the functorial maps of $I(E)$ and are $\\mathcal B$-linear. For a quasi-isomorphism $v:E^\\bullet\\to\\widetilde E^\\bullet$, naturality gives $I(v)q_E=q_{\\widetilde E}v$; since both replacement maps and $v$ are quasi-isomorphisms, two-out-of-three makes $I(v)$ a quasi-isomorphism between K-injective complexes. Apply [lem-pur-rhom-well-defined] with $s=I(v)$ and $t=\\mathrm{id}_{rK_B}$. Thus these Hom maps are quasi-isomorphisms when $E^\\bullet\\to\\widetilde E^\\bullet$ is one; they are so over $\\mathcal B$ because the underlying abelian cohomology sheaves are unchanged. Hence localization gives a functor $F:D(\\mathcal O)\\to D(\\mathcal B)$, whose restriction is naturally $rF(E)=R\\mathcal Hom_{\\mathcal O}(rK_B,E)$. This constructs the coefficient action and the functor; no equivalence or completeness is being assumed.",
+   "text": "Apply the coefficient-Hom augmentation theorem with the canonical functorial K-injective replacement T and its unit eta, obtaining G, c and b. Naturality of eta and two-out-of-three show that T carries quasi-isomorphisms to quasi-isomorphisms between K-injectives. Hom invariance, comparison c and exact conservative restriction show that T;G sends quasi-isomorphisms to quasi-isomorphisms. Localization constructs F:D(R) -> D(B) and its factorization isomorphism. This is the proved helper derivedCoefficientHomFunctor.",
    "uses": [
+    "lem-weil-pbc-coefficient-hom-augmentation",
     "def-pur-derived-internal-hom",
     "lem-pur-rhom-well-defined",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-restricted-coefficient-hom",
-    "lem-weil-pbc-restricted-coefficient-hom-complex"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 099I, displayed construction E prime = R SheafHom(r(K prime), E), with its coefficient action made explicit."
-   }
-  },
-  {
-   "text": "The supporting Lean theorem siteCompleteRestrictScalars_equivalence_of_completion implements the complete-subcategory lift from an ambient F, theta, beta and the augmentation identity. Precomposition with $u$ gives a natural isomorphism $\\theta_E:rF(E)\\to R\\mathcal Hom_{\\mathcal O}(K,E)$: $u$ is the quasi-isomorphism proved in step 2 and [lem-pur-rhom-well-defined] applies with $t=u$ and $s=\\mathrm{id}_{I(E)}$, where the target replacement $I(E)$ is K-injective by [def-pur-derived-internal-hom]. For locally derived complete $E$, the completion unit $\\eta_E:E\\to R\\mathcal Hom_{\\mathcal O}(K,E)$ is an isomorphism by [lem-weil-pbc-extended-cech-completion-model]. Set $\\alpha_E=\\theta_E^{-1}\\eta_E:E\\to rF(E)$. It is a natural isomorphism. Its target is locally derived $\\mathcal J$-complete since its source is; [lem-weil-pbc-restriction-local-completeness] then makes $F(E)$ locally derived $\\mathcal J\\mathcal B$-complete. Thus $F$ restricts to the proposed inverse functor and $\\alpha$ gives one of the two required natural isomorphisms.",
-   "uses": [
-    "lem-pur-rhom-well-defined",
-    "lem-weil-pbc-extended-cech-completion-model",
-    "lem-weil-pbc-restriction-local-completeness",
-    "def-pur-derived-internal-hom"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 099I, paragraph following the formula for E prime; Tag 099F, completion unit for a complete object."
-   }
-  },
-  {
-   "text": "For a locally derived complete $M\\in D(\\mathcal B)$ construct $\\beta_M:M\\to F(rM)$ as follows. On a representing complex and its O-linear replacement $q:rM^\\bullet\\to I(rM)^\\bullet$, send a homogeneous $m$ to the Hom cochain $k\\mapsto q(\\epsilon_B(k)m)$ (zero on degrees of $k$ other than zero). For $m$ of degree $n$, the Hom differential is $d_I\\beta(m)(k)-(-1)^n\\beta(m)(d_Kk)$. If $k$ has degree zero, this is $q(\\epsilon_B(k)d_Mm)$; if $k$ has degree $-1$, the second term vanishes because $\\epsilon_Bd_K=0$; in all other degrees both terms vanish. Therefore $d_{\\mathrm{Hom}}\\beta(m)=\\beta(d_Mm)$. It is a chain map; it is B-linear because $\\epsilon_B(bk)=b\\epsilon_B(k)$, so $\\beta_M(bm)(k)=q(\\epsilon_B(k)bm)=\\beta_M(m)(bk)$. Functoriality of $q$ makes it natural in chain maps, and the localization property in step 3 makes it natural in derived morphisms. Precomposing this cochain with $u$ yields $x\\mapsto q(\\varphi(\\epsilon(x))m)=\\epsilon(x)q(m)$, exactly the cochain defining $\\eta_{rM}$ by precomposition with $\\epsilon$. Thus $\\theta_{rM}\\circ r(\\beta_M)=\\eta_{rM}$ and $r(\\beta_M)=\\alpha_{rM}$. Step 4 applies since $rM$ is complete by [lem-weil-pbc-restriction-local-completeness]. Hence $r(\\beta_M)$ is an isomorphism. The conservativity proved in step 1 implies that $\\beta_M$ is an isomorphism. The natural isomorphisms $\\mathrm{id}\\cong rF$ and $\\mathrm{id}\\cong Fr$ exhibit the asserted equivalence. This is the omitted final compatibility check in the source.",
-   "uses": [
-    "def-pur-derived-internal-hom",
-    "lem-weil-pbc-extended-cech-completion-model",
-    "lem-weil-pbc-restriction-local-completeness",
-    "def-pc-sheaf-restrict-scalars",
     "def-weil-abstract-derived-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 099I, last displayed composite and final sentence (Details omitted), expanded by the augmentation-evaluation formula."
-   }
+   "elementary": true
+  },
+  {
+   "text": "The derived-Hom localization factorization gives the natural comparison from restriction of F to RHom(rc(L),-). Fully faithful whiskering by the localization functor descends that comparison. Since u is a quasi-isomorphism, derived precomposition gives an isomorphism Theta from restriction of F to RHom(K,-). The private computation lemmas ringedDerivedHomUnit_Q_obj and ringedCechCompletionUnit_Q_obj identify the canonical completion unit on every complex representative with eta followed by evaluation-at-one inverse and precomposition by epsilon. Their proofs descend the explicit resolution formula through localization and verify naturality; they do not replace the canonical unit.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "def-weil-pbc-ringed-completion-unit",
+    "def-weil-abstract-derived-category",
+    "lem-sc-hom-complex-unit-evaluation-naturality"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Whisker b by the B-localization and conjugate by the factorization isomorphisms to define beta:id_D(B) -> rD;F. On Q(M), use naturality of Theta and of the restriction factorization, cancel the resolution factorization isomorphism, apply the chain augmentation identity, and use the canonical-unit computation. Naturality of the completion unit gives rD(beta_M);Theta_(rD M)=unit_(rD M). Localization.natTrans_ext extends this equality to all derived objects. Apply the existing proved siteCompleteRestrictScalars_equivalence_of_completion with K, epsilon, Theta, beta and this identity. The reflector properties and conservativity give the asserted equivalence, with its specified ambient restriction functor.",
+   "uses": [
+    "lem-weil-pbc-coefficient-hom-augmentation",
+    "lem-weil-pbc-extended-cech-completion-model",
+    "lem-weil-pbc-restriction-local-completeness",
+    "def-weil-pbc-ringed-completion-unit",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -112,20 +79,18 @@
   "def-weil-abstract-derived-category",
   "lem-weil-pbc-restriction-local-completeness",
   "lem-weil-pbc-extended-cech-completion-model",
-  "def-pc-flat-sheaf-modules",
-  "def-pur-sheaf-tensor-product",
-  "lem-weil-pbc-slice-restriction-flat",
-  "lem-weil-pbc-flat-extended-cech-comparison",
+  "lem-weil-pbc-flat-ringed-cech-base-change",
+  "lem-weil-pbc-coefficient-hom-augmentation",
   "def-pur-derived-internal-hom",
   "lem-pur-rhom-well-defined",
-  "lem-weil-pbc-site-restriction-exact",
-  "lem-weil-pbc-restricted-coefficient-hom",
-  "lem-weil-pbc-restricted-coefficient-hom-complex"
+  "def-weil-pbc-ringed-completion-unit",
+  "lem-sc-hom-complex-unit-evaluation-naturality"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/algebraization.tex",
-  "place": "Tag 099I (lemma-restriction-derived-complete-equivalence), including an explicit verification of its omitted final compatibility."
+  "place": "Tag 099I (lemma-restriction-derived-complete-equivalence), construction of K prime and final displayed composite; Tag 099H for the flat comparison.",
+  "adaptation": "C2 formalizes localization, canonical-unit computation, descent of the B-linear augmentation, and the complete-category equivalence. The two strictly smaller chain-level construction obligations are isolated as named nodes."
  },
  "mathlib_searches": [
   {
@@ -250,9 +215,9 @@
   "date": "2026-10-18",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B4",
+  "group": "C2",
   "result": "pass",
-  "landing": "20261018T103529-L-18130",
+  "landing": "20261018T133833-L-2674878",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

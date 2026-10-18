@@ -17,18 +17,13 @@ public import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Sheaf.CategoryTheory.LocalExtendedCechDescription
 public import Sheaf.CategoryTheory.RingedCompletionUnit
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
-import Sheaf.Paper.SiteRestrictionExact
+import Sheaf.Algebra.Homology.HomComplexUnitEvaluationNaturality
 import Sheaf.Paper.ExtendedCechCompletionModel
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat
-import Sheaf.Paper.FlatExtendedCechComparison
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
+import Sheaf.Paper.FlatRingedCechBaseChange
+import Sheaf.Paper.CoefficientHomAugmentation
 import Sheaf.Paper.RestrictionLocalCompleteness
-import Sheaf.Paper.RestrictedCoefficientHomComplex
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import WeilConjectures.AlgebraicGeometry.SiteRestrictionExact
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
 import Sheaf.Paper.RestrictedCoefficientHom
 
@@ -46,6 +41,9 @@ universe u w
 open CategoryTheory CategoryTheory.Limits
 
 namespace CategoryTheory
+
+-- All computations with the chosen Hom complex use its public projection API.
+attribute [local irreducible] homComplexFunctor
 
 /-- Restriction of scalars is exact on module sheaves.
 Source: Stacks Project, Algebraization, Tag 099C
@@ -431,6 +429,224 @@ theorem siteCompleteRestrictScalars_equivalence_of_completion
     infer_instance
   exact IsIso.of_isIso_comp_right _ (θ.hom.app (r.obj M.obj))
 
+set_option maxHeartbeats 1200000 in
+-- The localization comparison contains both product variables and resolution functors.
+set_option backward.isDefEq.respectTransparency false in
+private theorem ringedDerivedHomUnit_Q_obj
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    (O : Sheaf J CommRingCat.{u})
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (siteModuleRings O))]
+    (M : ringedSiteComplex O) :
+    let A := SheafOfModules.{u} (siteModuleRings O)
+    letI : IsGrothendieckAbelian.{u} A := SheafOfModules.isGrothendieckAbelian _
+    let I := CochainComplex.kInjectiveResolutionFunctor.{u} A
+    let η := CochainComplex.toKInjectiveResolution.{u} A
+    let Q := DerivedCategory.Q (C := A)
+    let c := Localization.fac
+      ((𝟭 _).prod I ⋙ Functor.uncurry.obj (homComplexFunctor (R := O)) ⋙ Q)
+      (derivedInternalHom_inverts J O I η (fun M ↦
+        ⟨(CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A M).2,
+          CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} A M⟩))
+      (Q.op.prod Q)
+    ringedDerivedHomUnit O (Q.obj M) =
+      Q.map (η.app M) ≫ (Q.mapIso (ringedHomUnitEvaluationIso O (I.obj M))).inv ≫
+        c.inv.app (Opposite.op (ringedSiteRingComplex O), M) := by
+  let A := ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)
+  let : IsGrothendieckAbelian.{u} A := SheafOfModules.isGrothendieckAbelian _
+  let Q := DerivedCategory.Q (C := A)
+  let I := CochainComplex.kInjectiveResolutionFunctor.{u} A
+  let η := CochainComplex.toKInjectiveResolution.{u} A
+  let H := derivedInternalHom J O
+  let F := ringedCechCompletionFunctor O (ringedSiteRingComplex O)
+  let c := Localization.fac
+    ((𝟭 _).prod I ⋙ Functor.uncurry.obj (homComplexFunctor (R := O)) ⋙ Q)
+    (derivedInternalHom_inverts J O I η (fun M ↦
+      ⟨(CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} _ M).2,
+        CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} _ M⟩))
+    (Q.op.prod Q)
+  let a : (homComplexFunctor (R := O)).obj
+      (Opposite.op (ringedSiteRingComplex O)) ≅ 𝟭 _ :=
+    NatIso.ofComponents (ringedHomUnitEvaluationIso O) (by
+      intro M N f
+      apply HomologicalComplex.hom_ext
+      intro n
+      exact homComplex_unit_evaluation_naturality J O f n)
+  let t : Q ⋙ 𝟭 _ ⟶ Q ⋙ F :=
+    { app := fun M ↦ Q.map (η.app M) ≫
+        Q.map (a.inv.app (I.obj M)) ≫ (c.inv.app (Opposite.op (ringedSiteRingComplex O), M))
+      naturality := by
+        intro M N f
+        dsimp only [Functor.comp_map, Functor.id_map, F, ringedCechCompletionFunctor]
+        have hc := c.inv.naturality
+          (X := (Opposite.op (ringedSiteRingComplex O), M))
+          (Y := (Opposite.op (ringedSiteRingComplex O), N)) (𝟙 _, f)
+        have ha := a.inv.naturality (I.map f)
+        have hη := η.naturality f
+        dsimp at hc ha hη
+        simp only [Functor.map_id, NatTrans.id_app, Category.id_comp, op_id] at hc
+        change Q.map f ≫ (Q.map (η.app N) ≫ Q.map (a.inv.app (I.obj N)) ≫
+            c.inv.app (Opposite.op (ringedSiteRingComplex O), N)) =
+          (Q.map (η.app M) ≫ Q.map (a.inv.app (I.obj M)) ≫
+            c.inv.app (Opposite.op (ringedSiteRingComplex O), M)) ≫
+              H.map
+                (X := (Opposite.op (Q.obj (ringedSiteRingComplex O)), Q.obj M))
+                (Y := (Opposite.op (Q.obj (ringedSiteRingComplex O)), Q.obj N))
+                (𝟙 _, Q.map f)
+        have hη' : Q.map f ≫ Q.map (η.app N) = Q.map (η.app M) ≫ Q.map (I.map f) := by
+          simpa only [← Q.map_comp] using congrArg Q.map hη
+        have ha' : Q.map (I.map f) ≫ Q.map (a.inv.app (I.obj N)) =
+            Q.map (a.inv.app (I.obj M)) ≫
+              Q.map ((homComplexFunctor (R := O)).obj
+                (Opposite.op (ringedSiteRingComplex O)) |>.map (I.map f)) := by
+          simpa only [← Q.map_comp] using congrArg Q.map ha
+        rw [← Category.assoc, hη']
+        simp only [Category.assoc]
+        rw [← Category.assoc (Q.map (I.map f)), ha']
+        simp only [Category.assoc]
+        rw [hc]
+        rfl }
+  let W := HomologicalComplex.quasiIso A (ComplexShape.up ℤ)
+  let full := Localization.fullyFaithfulWhiskeringLeft Q W (DerivedCategory A)
+  let d : 𝟭 (DerivedCategory A) ⟶ F := full.preimage t
+  have hd (M : CochainComplex A ℤ) : d.app (Q.obj M) = t.app M :=
+    congrArg (fun z ↦ z.app M) (full.map_preimage t)
+  have hu (X : ringedSiteDerived O) : ringedDerivedHomUnit O X = d.app X := by
+    let e := Q.objObjPreimageIso X
+    have hn := d.naturality e.hom
+    dsimp at hn
+    rw [← cancel_epi e.hom]
+    rw [hn, hd]
+    simp only [ringedDerivedHomUnit, t, a, e, Q, I, η, c,
+      Category.assoc, Iso.hom_inv_id_assoc]
+    rfl
+  exact (hu (Q.obj M)).trans (hd M)
+
+set_option maxHeartbeats 800000 in
+-- Computing the unit unfolds the product localization and its chosen resolution.
+set_option backward.isDefEq.respectTransparency false in
+private theorem ringedCechCompletionUnit_Q_obj
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    (R : Sheaf J CommRingCat.{u})
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (siteModuleRings R))]
+    (K : ringedSiteComplex R) (ε : K ⟶ ringedSiteRingComplex R)
+    (M : ringedSiteComplex R) :
+    let A := SheafOfModules.{u} (siteModuleRings R)
+    letI : IsGrothendieckAbelian.{u} A := SheafOfModules.isGrothendieckAbelian _
+    let I := CochainComplex.kInjectiveResolutionFunctor.{u} A
+    let η := CochainComplex.toKInjectiveResolution.{u} A
+    let Q := DerivedCategory.Q (C := A)
+    let c : Q.op.prod Q ⋙ derivedInternalHom J R ≅
+        (𝟭 _).prod I ⋙ Functor.uncurry.obj (homComplexFunctor (R := R)) ⋙ Q :=
+      Localization.fac
+      ((𝟭 _).prod I ⋙ Functor.uncurry.obj (homComplexFunctor (R := R)) ⋙ Q)
+      (derivedInternalHom_inverts J R I η (fun M ↦
+        ⟨(CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A M).2,
+          CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} A M⟩))
+      (Q.op.prod Q)
+    ringedCechCompletionUnit R K ε (Q.obj M) =
+      Q.map (η.app M ≫ (ringedHomUnitEvaluationIso R (I.obj M)).inv ≫
+        ((homComplexFunctor (R := R)).map ε.op).app (I.obj M)) ≫
+          c.inv.app (Opposite.op K, M) := by
+  let A := SheafOfModules.{u} (siteModuleRings R)
+  let : IsGrothendieckAbelian.{u} A := SheafOfModules.isGrothendieckAbelian _
+  let I := CochainComplex.kInjectiveResolutionFunctor.{u} A
+  let η := CochainComplex.toKInjectiveResolution.{u} A
+  let Q := DerivedCategory.Q (C := A)
+  let c : Q.op.prod Q ⋙ derivedInternalHom J R ≅
+      (𝟭 _).prod I ⋙ Functor.uncurry.obj (homComplexFunctor (R := R)) ⋙ Q :=
+    Localization.fac
+    ((𝟭 _).prod I ⋙ Functor.uncurry.obj (homComplexFunctor (R := R)) ⋙ Q)
+    (derivedInternalHom_inverts J R I η (fun M ↦
+      ⟨(CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A M).2,
+        CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} A M⟩))
+    (Q.op.prod Q)
+  change ringedCechCompletionUnit R K ε (Q.obj M) =
+    Q.map (η.app M ≫ (ringedHomUnitEvaluationIso R (I.obj M)).inv ≫
+      ((homComplexFunctor (R := R)).map ε.op).app (I.obj M)) ≫
+        c.inv.app (Opposite.op K, M)
+  have hc := c.inv.naturality (X := (Opposite.op (ringedSiteRingComplex R), M))
+    (Y := (Opposite.op K, M)) (ε.op, 𝟙 M)
+  dsimp at hc
+  simp only [Functor.map_id, Category.comp_id] at hc
+  unfold ringedCechCompletionUnit
+  have hu := ringedDerivedHomUnit_Q_obj R M
+  change ringedDerivedHomUnit R (Q.obj M) =
+    Q.map (η.app M) ≫ Q.map (ringedHomUnitEvaluationIso R (I.obj M)).inv ≫
+      c.inv.app (Opposite.op (ringedSiteRingComplex R), M) at hu
+  rw [hu]
+  simp only [Functor.map_comp, Category.assoc]
+  rw [← hc]
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem derivedCoefficientHomFunctor
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (siteModuleRings R))]
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (siteModuleRings B))]
+    (L : ringedSiteComplex B)
+    (G : ringedSiteComplex R ⥤ ringedSiteComplex B)
+    (c : G ⋙ (SheafOfModules.restrictScalars.{u}
+        ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).mapHomologicalComplex
+          (.up ℤ) ≅
+      (homComplexFunctor (R := R)).obj
+        (Opposite.op (((SheafOfModules.restrictScalars.{u}
+          ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).mapHomologicalComplex
+            (.up ℤ)).obj L))) :
+    let A := SheafOfModules.{u} (siteModuleRings R)
+    letI : IsGrothendieckAbelian.{u} A := SheafOfModules.isGrothendieckAbelian _
+    let I := CochainComplex.kInjectiveResolutionFunctor.{u} A
+    let QR := DerivedCategory.Q (C := A)
+    let QB := DerivedCategory.Q (C := SheafOfModules.{u} (siteModuleRings B))
+    ∃ (F : ringedSiteDerived R ⥤ ringedSiteDerived B),
+      Nonempty (QR ⋙ F ≅ I ⋙ G ⋙ QB) := by
+  let A := SheafOfModules.{u} (siteModuleRings R)
+  let : IsGrothendieckAbelian.{u} A := SheafOfModules.isGrothendieckAbelian _
+  let r := SheafOfModules.restrictScalars.{u}
+    ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)
+  let := (siteRestrictScalars_exact φ).1
+  let := (siteRestrictScalars_exact φ).2
+  let rc := r.mapHomologicalComplex (.up ℤ)
+  let I := CochainComplex.kInjectiveResolutionFunctor.{u} A
+  let η := CochainComplex.toKInjectiveResolution.{u} A
+  let QR := DerivedCategory.Q (C := A)
+  let QB := DerivedCategory.Q (C := SheafOfModules.{u} (siteModuleRings B))
+  let H := (homComplexFunctor (R := R)).obj (Opposite.op (rc.obj L))
+  let cL : G ⋙ rc ≅ H := c
+  have hinv : (HomologicalComplex.quasiIso A (.up ℤ)).IsInvertedBy
+      (I ⋙ G ⋙ QB) := by
+    intro M N f hf
+    have : QuasiIso f := hf
+    have : QuasiIso (η.app M) :=
+      (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A M).2
+    have : QuasiIso (η.app N) :=
+      (CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A N).2
+    have hη : QuasiIso (η.app M ≫ I.map f) := by
+      rw [← η.naturality f]
+      dsimp
+      infer_instance
+    have : QuasiIso (I.map f) := (quasiIso_iff_comp_left _ _).mp hη
+    have : (I.obj M).IsKInjective :=
+      CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} A M
+    have : (I.obj N).IsKInjective :=
+      CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} A N
+    have hh : QuasiIso (H.map (I.map f)) := by
+      simpa [H] using quasiIso_homComplex_map (I.map f) (𝟙 (rc.obj L))
+    have hr : QuasiIso (rc.map ((G).map (I.map f))) := by
+      exact (quasiIso_iff_of_arrow_mk_iso
+        (rc.map ((G).map (I.map f))) (H.map (I.map f))
+        (Arrow.isoMk (cL.app (I.obj M)) (cL.app (I.obj N))
+          (cL.hom.naturality (I.map f)).symm)).mpr hh
+    have : QuasiIso ((G).map (I.map f)) :=
+      (siteRestrictScalars_quasiIso_iff φ _).mp hr
+    exact (DerivedCategory.isIso_Q_map_iff_quasiIso _ _).mpr inferInstance
+  let F := Localization.lift (I ⋙ G ⋙ QB) hinv QR
+  let fF := Localization.fac (I ⋙ G ⋙ QB) hinv QR
+  exact ⟨F, ⟨fF⟩⟩
+
+set_option maxHeartbeats 800000 in
+-- The localization comparison involves three resolutions and several whiskered isomorphisms.
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Restriction of scalars along a flat ring-sheaf map which is an isomorphism modulo a
 locally finitely generated ideal induces an equivalence of the locally derived complete
 full subcategories. The natural isomorphism in the conclusion identifies the equivalence
@@ -489,6 +705,183 @@ theorem flat_ringed_ideal_complete_equivalence
         ObjectProperty.ι
           (IsLocallyDerivedRingedIdealComplete B (I.extension φ).module (I.extension φ).inclusion) ⋙
           siteDerivedRestrictScalars φ) := by
-  sorry
+  let := hI
+  have : Mono I.inclusion := by
+    constructor
+    intro Z f g h
+    apply SheafOfModules.hom_ext
+    apply PresheafOfModules.hom_ext
+    intro X
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro z
+    apply Subtype.ext
+    exact congrArg (fun k ↦ k.val.app X z) h
+  obtain ⟨K, ε, hK⟩ := exists_ringedExtendedCech_global_model J R I.module I.inclusion
+  obtain ⟨L, δ, u, hu, haug⟩ :=
+    exists_flat_ringedCech_baseChange φ I hI hflat hquot K ε hK
+  have : QuasiIso u := hu
+  let A := SheafOfModules.{u} (siteModuleRings R)
+  let : IsGrothendieckAbelian.{u} A := SheafOfModules.isGrothendieckAbelian _
+  let T := CochainComplex.kInjectiveResolutionFunctor.{u} A
+  let η := CochainComplex.toKInjectiveResolution.{u} A
+  let QR := DerivedCategory.Q (C := A)
+  let QB := DerivedCategory.Q (C := SheafOfModules.{u} (siteModuleRings B))
+  let r := SheafOfModules.restrictScalars.{u}
+    ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)
+  let := (siteRestrictScalars_exact φ).1
+  let := (siteRestrictScalars_exact φ).2
+  let rc := r.mapHomologicalComplex (.up ℤ)
+  let rD := siteDerivedRestrictScalars φ
+  let eR : QB ⋙ rD ≅ rc ⋙ QR := r.mapDerivedCategoryFactors
+  obtain ⟨G, c, b, hb⟩ := exists_coefficientHom_augmentation φ K ε L δ T η u haug
+  obtain ⟨F, ⟨a₀⟩⟩ := derivedCoefficientHomFunctor φ L G c
+  let a : QR ⋙ F ≅ T ⋙ G ⋙ QB := a₀
+  let d : QR.op.prod QR ⋙ derivedInternalHom J R ≅
+      (𝟭 _).prod T ⋙ Functor.uncurry.obj (homComplexFunctor (R := R)) ⋙ QR :=
+    Localization.fac
+      ((𝟭 _).prod T ⋙ Functor.uncurry.obj (homComplexFunctor (R := R)) ⋙ QR)
+      (derivedInternalHom_inverts J R T η (fun M ↦
+        ⟨(CochainComplex.monoQuasiIso_toKInjectiveResolution_app.{u} A M).2,
+          CochainComplex.isKInjective_kInjectiveResolutionFunctor_obj.{u} A M⟩))
+      (QR.op.prod QR)
+  let dL : QR ⋙ ringedCechCompletionFunctor R (rc.obj L) ≅
+      T ⋙ (homComplexFunctor (R := R)).obj (Opposite.op (rc.obj L)) ⋙ QR :=
+    NatIso.ofComponents (fun M ↦ d.app (Opposite.op (rc.obj L), M)) (by
+      intro M N f
+      simpa [ringedCechCompletionFunctor] using d.hom.naturality
+        (X := (Opposite.op (rc.obj L), M))
+        (Y := (Opposite.op (rc.obj L), N)) (𝟙 _, f))
+  let e : QR ⋙ (F ⋙ rD) ≅ QR ⋙ ringedCechCompletionFunctor R (rc.obj L) :=
+    Functor.isoWhiskerRight a rD ≪≫ Functor.isoWhiskerLeft (T ⋙ G) eR ≪≫
+      Functor.isoWhiskerRight (Functor.isoWhiskerLeft T c) QR ≪≫ dL.symm
+  let fullR := Localization.fullyFaithfulWhiskeringLeft QR
+    (HomologicalComplex.quasiIso A (.up ℤ)) (ringedSiteDerived R)
+  let θ : F ⋙ rD ≅ ringedCechCompletionFunctor R (rc.obj L) := fullR.preimageIso e
+  have hθ (M : ringedSiteComplex R) : θ.hom.app (QR.obj M) = e.hom.app M :=
+    congrArg (fun z ↦ z.app M) (fullR.map_preimage e.hom)
+  have : IsIso (QR.map u) :=
+    (DerivedCategory.isIso_Q_map_iff_quasiIso _ u).mpr hu
+  let τ : ringedCechCompletionFunctor R (rc.obj L) ⟶ ringedCechCompletionFunctor R K :=
+    (Functor.curry.obj (derivedInternalHom J R)).map (QR.map u).op
+  have : IsIso τ := by dsimp [τ]; infer_instance
+  let Θ : F ⋙ rD ≅ ringedCechCompletionFunctor R K := θ ≪≫ asIso τ
+  let t : QB ⋙ 𝟭 (ringedSiteDerived B) ⟶ QB ⋙ (rD ⋙ F) :=
+    Functor.whiskerRight b QB ≫ Functor.whiskerLeft rc a.inv ≫
+      Functor.whiskerRight eR.inv F
+  let fullB := Localization.fullyFaithfulWhiskeringLeft QB
+    (HomologicalComplex.quasiIso (SheafOfModules.{u} (siteModuleRings B)) (.up ℤ))
+    (ringedSiteDerived B)
+  let β : 𝟭 (ringedSiteDerived B) ⟶ rD ⋙ F := fullB.preimage t
+  have hβQ (M : ringedSiteComplex B) : β.app (QB.obj M) =
+      QB.map (b.app M) ≫ a.inv.app (rc.obj M) ≫ F.map (eR.inv.app M) := by
+    exact congrArg (fun z ↦ z.app M) (fullB.map_preimage t)
+  obtain ⟨_, hnatural, _, _⟩ :=
+    ringedExtendedCech_reflector_properties J R I.module I.inclusion K ε hK
+  let dK (M : ringedSiteComplex R) :
+      (ringedCechCompletionFunctor R K).obj (QR.obj M) ≅
+        QR.obj (((homComplexFunctor (R := R)).obj (Opposite.op K)).obj (T.obj M)) := by
+    exact d.app (Opposite.op K, M)
+  have hΘ (M : ringedSiteComplex R) :
+      Θ.hom.app (QR.obj M) ≫ (dK M).hom =
+        rD.map (a.hom.app M) ≫ eR.hom.app (G.obj (T.obj M)) ≫
+          QR.map (c.hom.app (T.obj M) ≫
+            ((homComplexFunctor (R := R)).map u.op).app (T.obj M)) := by
+    have hd := d.hom.naturality (X := (Opposite.op (rc.obj L), M))
+      (Y := (Opposite.op K, M)) (u.op, 𝟙 M)
+    dsimp at hd
+    simp only [Functor.map_id, Category.comp_id] at hd
+    change τ.app (QR.obj M) ≫ (dK M).hom =
+      dL.hom.app M ≫ QR.map
+        (((homComplexFunctor (R := R)).map u.op).app (T.obj M)) at hd
+    change (θ.hom.app (QR.obj M) ≫ τ.app (QR.obj M)) ≫ _ = _
+    rw [Category.assoc, hd, ← Category.assoc, hθ M]
+    simp only [e, dL, Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerRight_hom,
+      Functor.isoWhiskerLeft_hom, NatTrans.comp_app, Functor.whiskerRight_app,
+      Functor.whiskerLeft_app, Functor.comp_obj, Category.assoc, Functor.map_comp,
+      Iso.inv_hom_id_app, Category.comp_id]
+  have hunitQ (M : ringedSiteComplex R) :
+      ringedCechCompletionUnit R K ε (QR.obj M) ≫ (dK M).hom =
+        QR.map (η.app M ≫ (ringedHomUnitEvaluationIso R (T.obj M)).inv ≫
+          ((homComplexFunctor (R := R)).map ε.op).app (T.obj M)) := by
+    have h := ringedCechCompletionUnit_Q_obj R K ε M
+    change ringedCechCompletionUnit R K ε (QR.obj M) =
+      QR.map (η.app M ≫ (ringedHomUnitEvaluationIso R (T.obj M)).inv ≫
+        ((homComplexFunctor (R := R)).map ε.op).app (T.obj M)) ≫
+          (dK M).inv at h
+    rw [h, Category.assoc, (dK M).inv_hom_id, Category.comp_id]
+  have hrep (M : ringedSiteComplex B) :
+      rD.map (β.app (QB.obj M)) ≫ Θ.hom.app (rD.obj (QB.obj M)) =
+        ringedCechCompletionUnit R K ε (rD.obj (QB.obj M)) := by
+    apply (cancel_mono ((ringedCechCompletionFunctor R K).map (eR.hom.app M))).mp
+    apply (cancel_mono ((dK (rc.obj M)).hom)).mp
+    have ha : rD.map (QB.map (b.app M) ≫ a.inv.app (rc.obj M)) ≫
+        rD.map (a.hom.app (rc.obj M)) = rD.map (QB.map (b.app M)) := by
+      rw [← rD.map_comp, Category.assoc, Iso.inv_hom_id_app]
+      apply congrArg rD.map
+      exact Category.comp_id _
+    have heR : rD.map (QB.map (b.app M)) ≫ eR.hom.app (G.obj (T.obj (rc.obj M))) =
+        eR.hom.app M ≫ QR.map (rc.map (b.app M)) :=
+      eR.hom.naturality (b.app M)
+    calc
+      ((rD.map (β.app (QB.obj M)) ≫ Θ.hom.app (rD.obj (QB.obj M))) ≫
+          (ringedCechCompletionFunctor R K).map (eR.hom.app M)) ≫
+          (dK (rc.obj M)).hom =
+        rD.map (β.app (QB.obj M) ≫ F.map (eR.hom.app M)) ≫
+          (Θ.hom.app (QR.obj (rc.obj M)) ≫ (dK (rc.obj M)).hom) := by
+            rw [rD.map_comp]
+            simp only [Category.assoc]
+            have hnΘ := Θ.hom.naturality (eR.hom.app M)
+            change rD.map (F.map (eR.hom.app M)) ≫ Θ.hom.app (QR.obj (rc.obj M)) =
+              Θ.hom.app (rD.obj (QB.obj M)) ≫
+                (ringedCechCompletionFunctor R K).map (eR.hom.app M) at hnΘ
+            rw [reassoc_of% hnΘ]
+      _ = rD.map (QB.map (b.app M) ≫ a.inv.app (rc.obj M)) ≫
+          (Θ.hom.app (QR.obj (rc.obj M)) ≫ (dK (rc.obj M)).hom) := by
+            rw [hβQ]
+            have hcanc := (F.mapIso (eR.app M)).inv_hom_id
+            change F.map (eR.inv.app M) ≫ F.map (eR.hom.app M) = 𝟙 _ at hcanc
+            simp only [Category.assoc, hcanc]
+            congr 2
+            rw [← Category.assoc]
+            exact Category.comp_id _
+      _ = rD.map (QB.map (b.app M)) ≫ eR.hom.app (G.obj (T.obj (rc.obj M))) ≫
+          QR.map (c.hom.app (T.obj (rc.obj M)) ≫
+            ((homComplexFunctor (R := R)).map u.op).app (T.obj (rc.obj M))) := by
+            rw [hΘ]
+            simpa only [← Category.assoc] using congrArg
+              (fun z ↦ z ≫ eR.hom.app (G.obj (T.obj (rc.obj M))) ≫
+                QR.map (c.hom.app (T.obj (rc.obj M)) ≫
+                  ((homComplexFunctor (R := R)).map u.op).app (T.obj (rc.obj M)))) ha
+      _ = eR.hom.app M ≫ QR.map (rc.map (b.app M) ≫
+          c.hom.app (T.obj (rc.obj M)) ≫
+            ((homComplexFunctor (R := R)).map u.op).app (T.obj (rc.obj M))) := by
+            rw [← Category.assoc, heR, Category.assoc, ← QR.map_comp]
+      _ = eR.hom.app M ≫ QR.map (η.app (rc.obj M) ≫
+          (ringedHomUnitEvaluationIso R (T.obj (rc.obj M))).inv ≫
+            ((homComplexFunctor (R := R)).map ε.op).app (T.obj (rc.obj M))) := by
+            rw [hb M]
+            rfl
+      _ = (ringedCechCompletionUnit R K ε (rD.obj (QB.obj M)) ≫
+          (ringedCechCompletionFunctor R K).map (eR.hom.app M)) ≫
+          (dK (rc.obj M)).hom := by
+            rw [← hunitQ (rc.obj M), ← Category.assoc]
+            have hn := hnatural (rD.obj (QB.obj M)) (QR.obj (rc.obj M)) (eR.hom.app M)
+            congr 1
+            exact hn.symm
+  -- Equality on complex representatives descends to all derived objects.
+  let ηK : 𝟭 (ringedSiteDerived R) ⟶ ringedCechCompletionFunctor R K :=
+    { app := ringedCechCompletionUnit R K ε
+      naturality E E' f := (hnatural E E' f).symm }
+  have hβ : Functor.whiskerRight β rD ≫ Functor.whiskerLeft rD Θ.hom =
+      Functor.whiskerLeft rD ηK := by
+    apply Localization.natTrans_ext QB
+      (HomologicalComplex.quasiIso (SheafOfModules.{u} (siteModuleRings B)) (.up ℤ))
+    intro M
+    exact hrep M
+  apply siteCompleteRestrictScalars_equivalence_of_completion φ I hI K ε hK F Θ β
+  intro M
+  exact congrArg (fun z ↦ z.app M) hβ
+
 
 end CategoryTheory

@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-coefficient-hom-augmentation",
+ "kind": "statement",
+ "title": "Natural coefficient-Hom augmentation and its restriction identity",
+ "statement": "Let phi:R -> B be a homomorphism of commutative ring sheaves on a small site. Let r be restriction of scalars [def-pc-sheaf-restrict-scalars], rc its extension to unbounded module complexes [def-weil-sheaf-of-modules-category], and sigma:R[0] -> rc(B[0]) the map induced by phi. Let epsilon:K -> R[0] and delta:L -> B[0] be augmented R- and B-complexes. Let T be any endofunctor of R-complexes and eta:id -> T any natural transformation. For every u:K -> rc(L) with u;rc(delta)=epsilon;sigma, there are G:C(R) -> C(B), a natural isomorphism c:G;rc ~= Hom_R(rc(L),-) of product internal Hom complexes [def-pur-hom-complex], and a B-linear natural chain map beta:id -> rc;T;G such that, for every B-complex M, rc(beta_M);c_(T rc M);Hom(u,id) equals eta_(rc M);ev_1^(-1);Hom(epsilon,id). Here ev_1 is evaluation at one for Hom_R(R[0],-) [def-weil-pbc-ringed-completion-unit]. No flatness, completeness, quasi-isomorphism or K-injectivity hypothesis is needed.",
+ "stmt_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-hom-complex",
+  "def-weil-pbc-ringed-completion-unit"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099I (lemma-restriction-derived-complete-equivalence), construction of K prime and final displayed composite; Tag 099H for the flat comparison."
+ },
+ "proof": [
+  {
+   "text": "Use the actual coefficient-Hom bifunctor with B-action by precomposition. Its evaluation map attached to e:A -> B and q:r(M) -> N sends a local m to the local R-linear morphism a -> q(e(a)m). This is B-linear under precomposition, restriction-compatible and natural in e, q and m. Extend the separately additive bifunctor to the product Hom-complex functor and normalize its restriction comparison by the product projections.",
+   "uses": [
+    "lem-weil-pbc-restricted-coefficient-hom",
+    "lem-weil-pbc-restricted-coefficient-hom-complex",
+    "lem-weil-pbc-bilinear-hom-complex",
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Fix L. For m in M^n define the p-th product projection of beta_M(m) to be zero for p != 0, and for p=0 use a -> eta^n(delta^0(a)m). The product universal property constructs each degree map. On the p=0 projection the chain-map equation is the chain-map equation for eta. On p=-1 the extra Hom differential term vanishes by delta d_L=0. On all other projections both sides vanish. Thus beta is a B-linear chain map, and naturality of eta gives naturality in M. This works equally for zero complexes and for zero eta.",
+   "uses": [
+    "lem-weil-pbc-bilinear-hom-complex",
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Restrict beta and precompose with u. On every product projection its value on x is eta(phi(epsilon(x))m)=epsilon(x)eta(m), by the augmentation square and R-linearity of eta. Evaluation-at-one inverse followed by precomposition with epsilon has exactly this formula. Equality of all product projections gives equality of chain maps. For phi=id and L=K=R[0] with identity augmentations this reduces to evaluation at one.",
+   "uses": [
+    "def-weil-pbc-ringed-completion-unit",
+    "lem-sc-hom-complex-projections"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-restricted-coefficient-hom",
+  "lem-weil-pbc-restricted-coefficient-hom-complex",
+  "lem-weil-pbc-bilinear-hom-complex",
+  "lem-sc-hom-complex-projections",
+  "def-weil-pbc-ringed-completion-unit"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099I (lemma-restriction-derived-complete-equivalence), construction of K prime and final displayed composite; Tag 099H for the flat comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Augmentation of chain complex gives natural evaluation map to internal Hom complex compatible with unit evaluation",
+   "results": "ChainComplex.augment, AlternatingFaceMapComplex.ε, augmentXZero, augmentXSucc, augmentation differentials and toSingle0. These concern augmentation and truncation, not B-linear coefficient internal Hom or its normalized evaluation map.",
+   "date": "2026-10-18",
+   "verdict": "No direct match; the existing coefficient-Hom and product-complex declarations supply only the construction ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homComplex\"",
+   "results": "HomotopyCategory.HomComplex.Triplet, p, q, hpq, Cochain, Cocycle and differentials. These are Hom groups; they do not supply coefficient-action internal Hom augmentation maps.",
+   "date": "2026-10-18",
+   "verdict": "No coefficient-action augmentation theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "augment.*(hom|Hom)|[Hh]om.*augment|[Cc]ech.*[Cc]omparison",
+   "results": "ChainComplex.augment and alternating simplicial augmentation maps. Repository searches found the proved coefficient-Hom bifunctor and product complex construction, but no global scalar-extension comparison or normalized augmentation-evaluation chain map.",
+   "date": "2026-10-18",
+   "verdict": "No duplicate of either missing step."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An augmentation of a complex induces a natural linear map into an internal Hom complex compatible with evaluation at one",
+   "results": "Eight hits: ChainComplex.augment, ChainComplex.toSingle₀AsComplex, CochainComplex.HomComplex and its cochain shift/map API, and Functor.mapHomologicalComplex_linear. The HomComplex hits concern abelian-group Hom complexes rather than the sheaf internal Hom with the required B-action and normalized evaluation comparison.",
+   "date": "2026-10-18",
+   "verdict": "No direct match; use the coefficient-Hom product construction and explicit evaluation formulas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FlatRingedIdealCompleteEquivalence",
+  "date": "2026-10-18",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form: comparison of constant and completed coefficients, via the flat ringed ideal-complete equivalence.",
+   "via": [
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientHomAugmentation",
+  "file": "lean/Sheaf/Paper/CoefficientHomAugmentation.lean",
+  "declaration": "CategoryTheory.exists_coefficientHom_augmentation",
+  "statement": "theorem exists_coefficientHom_augmentation\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)\n    (K : ringedSiteComplex R) (ε : K ⟶ ringedSiteRingComplex R)\n    (L : ringedSiteComplex B) (δ : L ⟶ ringedSiteRingComplex B)\n    (T : ringedSiteComplex R ⥤ ringedSiteComplex R)\n    (η : 𝟭 (ringedSiteComplex R) ⟶ T) :\n    let r := SheafOfModules.restrictScalars.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)\n    let rc := r.mapHomologicalComplex (.up ℤ)\n    let σ : ringedSiteRingComplex R ⟶ rc.obj (ringedSiteRingComplex B) :=\n      (HomologicalComplex.single _ (.up ℤ) 0).map\n          (SheafOfModules.LocalizationCech.unitMap φ) ≫\n        (HomologicalComplex.singleMapHomologicalComplex r (.up ℤ) 0).inv.app\n          (SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B))\n    ∀ (u : K ⟶ rc.obj L), u ≫ rc.map δ = ε ≫ σ →\n      ∃ G : ringedSiteComplex R ⥤ ringedSiteComplex B,\n        ∃ c : G ⋙ rc ≅ (homComplexFunctor (R := R)).obj (op (rc.obj L)),\n          ∃ β : 𝟭 (ringedSiteComplex B) ⟶ rc ⋙ T ⋙ G,\n            ∀ M : ringedSiteComplex B,\n              rc.map (β.app M) ≫ c.hom.app (T.obj (rc.obj M)) ≫\n                  ((homComplexFunctor (R := R)).map u.op).app (T.obj (rc.obj M)) =\n                (by\n                  change rc.obj M ⟶\n                    ((homComplexFunctor (R := R)).obj (op K)).obj (T.obj (rc.obj M))\n                  exact η.app (rc.obj M) ≫\n                    (ringedHomUnitEvaluationIso R (T.obj (rc.obj M))).inv ≫\n                    ((homComplexFunctor (R := R)).map ε.op).app (T.obj (rc.obj M)))",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261018T133833-L-2674878",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261018T133833-L-2674878",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

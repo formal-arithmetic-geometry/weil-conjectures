@@ -1,0 +1,150 @@
+{
+ "id": "lem-weil-pbc-flat-ringed-cech-base-change",
+ "kind": "statement",
+ "title": "Flat scalar extension of a global augmented Cech model",
+ "statement": "Let C be a small site, phi:R -> B a map of commutative ring sheaves, and I an ideal sheaf [def-weil-pbc-ringed-site-ideal] whose underlying module sheaf is locally finitely generated [def-weil-pbc-module-finite-type-presentation]. Suppose B is flat over R [def-pc-flat-sheaf-modules] and R/I -> B/IB is an isomorphism. Let epsilon:K -> R[0] be an unbounded R-module complex [def-weil-sheaf-of-modules-category] with augmented local extended Cech description for I [def-weil-pbc-local-extended-cech-description]. Write r for restriction of scalars [def-pc-sheaf-restrict-scalars] and rc for its termwise extension to complexes. Write sigma:R[0] -> rc(B[0]) for the map induced by phi and the single-complex comparison. Assume the derived categories [def-weil-abstract-derived-category] used in the local description exist. There are a B-module complex L, an augmentation delta:L -> B[0], and a quasi-isomorphism u:K -> rc(L) such that u followed by rc(delta) equals epsilon followed by sigma. This conclusion concerns augmented complexes only and does not assert any equivalence of complete derived categories.",
+ "stmt_deps": [
+  "def-weil-pbc-ringed-site-ideal",
+  "def-weil-pbc-module-finite-type-presentation",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-local-extended-cech-description",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099I (lemma-restriction-derived-complete-equivalence), construction of K prime and final displayed composite; Tag 099H for the flat comparison."
+ },
+ "proof": [
+  {
+   "text": "Construct termwise sheafified scalar extension E of K, using the tensor construction for module sheaves. The scalar-extension unit gives u:K -> r(EK), and the tensor-unit comparison gives delta:EK -> B[0]. The balancing relation proves the augmentation identity. The underlying R-functor of E is tensoring with the restricted B-module, so flatness makes E exact.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restrict to a slice where I has finitely many generators. Slice exactness transports the augmented local derived description and quotient isomorphism. Flatness restricts by the slice-flatness theorem. The fraction maps (a/f^n) tensor b -> phi(a)b/phi(f)^n and b/phi(f)^n -> (1/f^n) tensor b identify the scalar-extended localization terms, differentials and augmentations. Apply the flat extended Cech comparison. This proves that the local restriction of u is a quasi-isomorphism.",
+   "uses": [
+    "lem-weil-pbc-site-restriction-exact",
+    "lem-weil-pbc-slice-restriction-flat",
+    "lem-weil-pbc-flat-extended-cech-comparison",
+    "def-weil-pbc-local-extended-cech-description"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The local generating slices cover each object. Each cohomology kernel and cokernel sheaf of u vanishes on that covering, hence vanishes. Therefore u is a global quasi-isomorphism. For I=0 the quotient hypothesis makes phi an isomorphism; for the unit ideal the augmented Cech model is acyclic, consistently with this conclusion.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-site-restriction-exact",
+  "lem-weil-pbc-slice-restriction-flat",
+  "lem-weil-pbc-flat-extended-cech-comparison",
+  "def-weil-pbc-local-extended-cech-description"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099I (lemma-restriction-derived-complete-equivalence), construction of K prime and final displayed composite; Tag 099H for the flat comparison."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Flat extension of sheaves of rings induces quasi-isomorphism on augmented Cech complexes under isomorphism modulo finite generated ideal",
+   "results": "Eight hits including Sheaf.QuasicoherentData.IsFinitePresentation, Module.flat_of_isLocalized_span, RingHom.FaithfullyFlat.respectsIso and the standard-complex augmentation. None supplies this sheafified global augmented comparison. Read the existing flat extended Cech comparison and slice-flatness declarations.",
+   "date": "2026-10-18",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Localization.lift\"",
+   "results": "Ordinary ring-localization lifting lemmas. None states scalar extension of an augmented sheaf complex or a global quasi-isomorphism under the quotient-isomorphism hypothesis.",
+   "date": "2026-10-18",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "augment.*(hom|Hom)|[Hh]om.*augment|[Cc]ech.*[Cc]omparison",
+   "results": "ChainComplex.augment and alternating simplicial augmentation maps. Repository searches found the proved coefficient-Hom bifunctor and product complex construction, but no global scalar-extension comparison or normalized augmentation-evaluation chain map.",
+   "date": "2026-10-18",
+   "verdict": "No duplicate of either missing step."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat scalar extension of a sheaf of modules transports the augmented Cech complex and gives a quasi-isomorphism when the quotient modulo a finite generated ideal is unchanged",
+   "results": "Eight hits: Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Algebra.FormallyUnramified.flat_of_restrictScalars, IsSMulRegular.of_flat_of_isBaseChange, faithfully-flat extension-of-scalars reflection/comonadicity, and HomologicalComplex.instQuasiIsoExtendMap. These provide ordinary-module exactness and shape-extension facts, not the global augmented sheaf Cech comparison.",
+   "date": "2026-10-18",
+   "verdict": "No direct match; the stated local flat Cech comparison still needs scalar-extension and local-to-global glue."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FlatRingedIdealCompleteEquivalence",
+  "date": "2026-10-18",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form: comparison of constant and completed coefficients, via the flat ringed ideal-complete equivalence.",
+   "via": [
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FlatRingedCechBaseChange",
+  "file": "lean/Sheaf/Paper/FlatRingedCechBaseChange.lean",
+  "declaration": "CategoryTheory.exists_flat_ringedCech_baseChange",
+  "statement": "theorem exists_flat_ringedCech_baseChange\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) (I : RingedSiteIdeal R)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (siteModuleRings R))]\n    [∀ U : C, HasDerivedCategory.{w}\n      (SheafOfModules.{u} (siteModuleRings (R.over U)))]\n    (hI : SheafOfModules.IsFiniteType.{u, u, u} I.module)\n    (hflat : SheafOfModules.IsFlat\n      ((SheafOfModules.restrictScalars.{u}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).obj\n          (SheafOfModules.unit (siteModuleRings B))))\n    (hquot : I.IsQuotientIso φ)\n    (K : ringedSiteComplex R) (ε : K ⟶ ringedSiteRingComplex R)\n    (hK : HasLocalExtendedCechDescription R I.module I.inclusion K ε) :\n    let r := SheafOfModules.restrictScalars.{u}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)\n    let rc := r.mapHomologicalComplex (.up ℤ)\n    let σ : ringedSiteRingComplex R ⟶ rc.obj (ringedSiteRingComplex B) :=\n      (HomologicalComplex.single _ (.up ℤ) 0).map\n          (SheafOfModules.LocalizationCech.unitMap φ) ≫\n        (HomologicalComplex.singleMapHomologicalComplex r (.up ℤ) 0).inv.app\n          (SheafOfModules.unit (siteModuleRings B))\n    ∃ (L : ringedSiteComplex B) (δ : L ⟶ ringedSiteRingComplex B)\n      (u : K ⟶ rc.obj L), QuasiIso u ∧ u ≫ rc.map δ = ε ≫ σ",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-18"
+ },
+ "split_report": {
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-site-restriction-exact",
+    "why": "Generic exactness of restriction to a slice, already approved in the parent flat-ringed equivalence node; it transports the local augmented description and quotient condition. This supplies no proper-base-change or complete-category equivalence assertion."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261018T133833-L-2674878",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261018T133833-L-2674878",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
