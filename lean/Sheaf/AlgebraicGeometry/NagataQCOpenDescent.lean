@@ -37,7 +37,7 @@ theorem nagataQCOpenDescent_chart_le
     {j k : Over i} (t : j ⟶ k) (U : Y.Opens) :
     pullback.fst p (D.map j.hom) ⁻¹ᵁ U ≤
       (baseChangeDiagram D p).map t ⁻¹ᵁ (pullback.fst p (D.map k.hom) ⁻¹ᵁ U) := by
-  sorry
+  rw [← Scheme.Hom.comp_preimage, baseChangeDiagram_map_fst]
 
 /-- Compatibility of inverse-image charts with a base-changed limit projection.
 Source: blueprint node order 347 (blueprint: def-nagata-qc-open-descent).
@@ -49,7 +49,7 @@ theorem nagataQCOpenDescent_limit_chart_le
     {i : J} {Y : Scheme.{u}} (p : Y ⟶ D.obj i) (j : Over i) (U : Y.Opens) :
     pullback.fst p (c.π.app i) ⁻¹ᵁ U ≤
       (baseChangeCone D c p).π.app j ⁻¹ᵁ (pullback.fst p (D.map j.hom) ⁻¹ᵁ U) := by
-  sorry
+  rw [← Scheme.Hom.comp_preimage, baseChangeCone_π_app_fst]
 
 /-- The finite-stage open obtained from the chosen finite affine cover and basic-open lifts.
 Source: blueprint node order 347 (blueprint: def-nagata-qc-open-descent).
