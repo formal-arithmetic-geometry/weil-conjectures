@@ -26,117 +26,81 @@
  ],
  "proof": [
   {
-   "text": "For each $n$, perfectness supplies a bounded finite projective cochain complex $C_n$ with $H^0(C_n)\\cong P_n$ and all other cohomology zero. Remove its positive terms by descending induction on the greatest positive degree $b$ with a nonzero term. Since $H^b(C_n)=0$, the map $C_n^{b-1}\\twoheadrightarrow C_n^b$ is surjective and has a section by projectivity of $C_n^b$. Thus $C_n^{b-1}=\\ker(d^{b-1})\\oplus C_n^b$; the differential from degree $b-2$ lands in the kernel, and the two copies of $C_n^b$ form the contractible identity complex. Delete this summand. The replacement kernel is finite projective: it is a direct summand of a finite projective module, and the images under its projection of a finite generating set generate it. Iterate until all positive terms are zero. The quotient $C_n^0\\twoheadrightarrow H^0(C_n)\\cong P_n$ then augments an exact finite projective resolution in nonpositive degrees. Denote one such resolution by $Q_n$, of length $s_n\\geq0$. Set $r=s_1$. This uses no uniformity yet. If $I=A$, all $P_n=0$ and we may immediately use the zero resolutions with $r=0$.",
+   "text": "For each quotient use the K-projective bounded-model argument to obtain finite projective dimension. This uses only perfectness and does not require positive-tail cancellation.",
    "uses": [
-    "def-pc-perfect-ring-complex",
-    "def-weil-pbc-projective-module",
-    "def-weil-finitely-generated-module"
+    "lem-weil-pbc-perfect-module-finite-projective-dimension"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00O4, definition-finite-proj-dim; elementary cancellation of the positive tail of the bounded projective model"
-   }
+   "elementary": false
   },
   {
-   "text": "Fix a maximal ideal $\\mathfrak m$ of $A$ and write $R=A_{\\mathfrak m}$. It is local with maximal ideal $\\mathfrak mR$. It is Noetherian: any ideal $J\\subseteq R$ is the extension of its contraction $J^c$ (if $a/s\\in J$ then $a/1\\in J$, and conversely denominators are units); finitely many generators of $J^c$ therefore generate $J$. Localizing $Q_n$ preserves exactness and projectivity, and the images of finite generating sets still generate the localized terms. Hence $(P_n)_{\\mathfrak m}$ has finite projective dimension, and $\\operatorname{pd}_R((P_1)_{\\mathfrak m})\\leq r$. If $I\\not\\subseteq\\mathfrak m$, choose $a\\in I\\setminus\\mathfrak m$; the element $a^n$ kills $P_n$ and is invertible after localization, so $(P_n)_{\\mathfrak m}=0$ for every $n$.",
+   "text": "Let T be the maximal ideals containing I. The map m↦m/I, realized as m.map(A→A/I), embeds T into the subsets of A/I: contraction recovers m since I≤m. Since A/I is finite, T is finite. Each R=A_m is Noetherian local. Its depth is finite because depth(R)≤dim Supp(R)=dim(R), and a Noetherian local ring has finite Krull dimension. Choose a natural r bounding the depth of every such R, using the maximum of a finite range (including the empty-range case).",
    "uses": [
+    "def-weil-pbc-depth",
     "def-weil-pbc-localization-at-prime",
-    "def-weil-pbc-noetherian-ring",
+    "lem-weil-pbc-depth-le-support-dimension",
+    "lem-weil-pbc-noetherian-local-finite-krull-dimension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Localize P_n=A/I^n at a maximal ideal m. Mathlib localizedModule_hasProjectiveDimensionLE preserves the finite bound from the first step. If the localization is nonzero, the support-annihilator criterion gives I^n≤m. Primality implies I≤m, so m∈T. Finite generation survives localization. Auslander–Buchsbaum gives pd((P_n)_m)+depth((P_n)_m)=depth(A_m)≤r, hence pd((P_n)_m)≤r. If it is zero, it has projective dimension at most r without further assumptions.",
+   "uses": [
     "def-weil-pbc-module-localization",
     "lem-weil-pbc-localization-module-exact",
-    "lem-weil-pbc-localization-projective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tags 00CS (proposition-localization-exact), 05A3 (lemma-ascend-properties-modules), and fraction calculations"
-   }
-  },
-  {
-   "text": "Now assume $I\\subseteq\\mathfrak m$ and put $B=(P_1)_{\\mathfrak m}$. This is a nonzero cyclic $R$-module: $1/1=0$ would imply that some $u\\notin\\mathfrak m$ belongs to $I$. Also $B/\\mathfrak mRB\\cong A/\\mathfrak m\\ne0$, by the map $\\overline a/s\\mapsto\\overline a\\,\\overline s^{-1}$, whose kernel is $\\mathfrak mRB$; thus the depth definition takes its regular-sequence branch. For any $x=a/s\\in\\mathfrak mR$ take $a\\in\\mathfrak m$, $s\\notin\\mathfrak m$. Finiteness of the ring $A/I$ gives $0\\leq i<j$ with $\\overline a^i=\\overline a^j$. The numerator $1-a^{j-i}$ is outside $\\mathfrak m$, hence invertible in $R$. The identity $a^i(1-a^{j-i})B=0$ consequently gives $a^iB=0$. Nonzeroness of $B$ excludes $i=0$, and $x$ acts nilpotently on $B$. If multiplication by $x$ were injective, its $i$-fold iterate would be both injective and zero, forcing $B=0$. Therefore no element of $\\mathfrak mR$ can start a $B$-regular sequence; the empty sequence is allowed and $\\operatorname{depth}_R(B)=0$.",
-   "uses": [
-    "def-weil-pbc-module-localization",
-    "def-weil-pbc-depth"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00LI, definition-depth; elementary repetition of powers in the finite ring A/I"
-   }
-  },
-  {
-   "text": "Apply Auslander–Buchsbaum first to the nonzero finite $R$-module $B$: its finite projective dimension was established in step 2, and step 3 gives depth zero. Thus $\\operatorname{depth}(R)=\\operatorname{pd}_R(B)\\leq r$, in particular the ring depth is finite. For each $n$, $(P_n)_{\\mathfrak m}$ is likewise cyclic, of finite projective dimension by step 2, and nonzero: $1/1=0$ would give an element outside $\\mathfrak m$ lying in $I^n\\subseteq\\mathfrak m$. The same formula applied to this module gives $\\operatorname{pd}_R((P_n)_{\\mathfrak m})+\\operatorname{depth}_R((P_n)_{\\mathfrak m})=\\operatorname{depth}(R)\\leq r$. Depth is nonnegative by definition, so $\\operatorname{pd}_R((P_n)_{\\mathfrak m})\\leq r$. In conjunction with the zero case of step 2, this bound holds at every maximal ideal, for all $n$.",
-   "uses": [
+    "lem-weil-pbc-localization-projective",
+    "lem-weil-pbc-finite-module-support-annihilator",
     "lem-weil-pbc-auslander-buchsbaum",
-    "def-weil-pbc-depth",
-    "def-weil-pbc-module-localization"
+    "lem-weil-pbc-projective-resolution-ext-degree"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 090V, proposition-Auslander-Buchsbaum, applied to the two nonzero finite localized modules"
-   }
+   "elementary": false
   },
   {
-   "text": "Each $P_n$ is cyclic, hence finitely generated over the Noetherian ring $A$. The projective-resolution/Ext characterization turns the bounds of step 4 into $\\mathrm{PD}_{\\leq r}((P_n)_{\\mathfrak m})$ at every maximal ideal (the zero module has the zero resolution). The maximal-localization criterion therefore gives $\\mathrm{PD}_{\\leq r}(P_n)$ globally. Apply the same characterization in the reverse direction to get a projective resolution of $P_n$ of length at most $r$. The integer $r$ chosen in step 1 depends only on $P_1$, not on $n$.",
+   "text": "Each quotient is cyclic, hence finitely generated. The maximal-localization criterion turns the preceding local bound into HasProjectiveDimensionLE P_n r globally.",
    "uses": [
     "lem-weil-pbc-finite-module-pd-local-global",
-    "lem-weil-pbc-projective-dimension-ext-characterization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Mathlib local-global criterion, ProjectiveDimension.lean:82, and Tag 065R, lemma-projective-dimension-ext"
-   }
-  },
-  {
-   "text": "Retain the finite projective resolution $Q_n$ of length $s_n$ from step 1. If $s_n\\leq r$, pad on the left with zeros. If $s_n>r=0$, step 5 says $P_n$ itself is projective, and its generator $1$ makes it finite, so use $P_n$ in degree zero. If $s_n>r\\geq1$, write the resolution in homological degrees and put $K=\\ker(Q_{n,r-1}\\to Q_{n,r-2})$, with $K=\\ker(Q_{n,0}\\to P_n)$ when $r=1$. The kernel-projectivity criterion, using step 5 and $e=r-1$, makes $K$ projective. Exactness gives $K=\\operatorname{im}(Q_{n,r}\\to Q_{n,r-1})$, so the images of finitely many generators of $Q_{n,r}$ generate $K$. Hence $0\\to K\\to Q_{n,r-1}\\to\\cdots\\to Q_{n,0}\\to P_n\\to0$ is the required finite projective resolution. Reindexing homological degree $j$ as cochain degree $-j$ yields support in $[-r,0]$.",
-   "uses": [
-    "lem-weil-pbc-projective-resolution-kernel-projective",
     "def-weil-finitely-generated-module"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00O5, lemma-independent-resolution; finite-projective shortening as in Tag 0CXE, lemma-what-kind-of-resolutions-Noetherian"
-   }
+   "elementary": false
   },
   {
-   "text": "Tensor the resolution of step 6 with any module $M$ in degree zero. By the definition of Tor and of derived tensor via projective resolutions, its cohomology in degree $-i$ is $\\operatorname{Tor}_i^A(P_n,M)$, and its terms vanish outside $[-r,0]$, proving the asserted amplitude. Conversely, if these derived tensors vanish outside $[-r,0]$ for every $M$, then $\\operatorname{Tor}_i^A(P_n,M)=0$ for all $i>r$ and all $M$. The finite-module Tor-bound criterion applies because $A$ is Noetherian and $P_n$ is cyclic, and gives $\\mathrm{PD}_{\\leq r}(P_n)$. The projective-resolution/Ext characterization and the explicit shortening in step 6 recover a resolution by finite projectives of length at most $r$. Thus the two formulations have the same bound, including $r=0$ and zero quotients.",
+   "text": "Construct a resolution by finite projectives with bound r using the new finite-presentation induction lemma. This handles r=0 and zero quotients, and needs neither a chosen initial finite resolution nor its syzygy-shortening criterion.",
+   "uses": [
+    "lem-weil-pbc-bounded-finite-projective-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Tensor such a resolution with an arbitrary module. ProjectiveResolution.isoLeftDerivedObj computes Tor as its homology; tensor sends zero terms to zero, so Tor vanishes above r. Conversely, the finite-module Tor-bound criterion gives the global projective-dimension bound at the prescribed r. Apply the bounded finite-projective-resolution constructor independently for every positive n. Thus the two uniform conditions are equivalent at the same r.",
    "uses": [
     "def-weil-pbc-tor-modules",
     "lem-pc-finite-projective-dimension-of-tor-bound",
-    "lem-weil-pbc-projective-dimension-ext-characterization"
+    "lem-weil-pbc-bounded-finite-projective-resolution"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00LY, section-tor; Tor-bound criterion through Tags 00M5 and 058R"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-perfect-ring-complex",
-  "def-weil-pbc-projective-module",
-  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-perfect-module-finite-projective-dimension",
+  "def-weil-pbc-depth",
   "def-weil-pbc-localization-at-prime",
-  "def-weil-pbc-noetherian-ring",
+  "lem-weil-pbc-depth-le-support-dimension",
+  "lem-weil-pbc-noetherian-local-finite-krull-dimension",
   "def-weil-pbc-module-localization",
   "lem-weil-pbc-localization-module-exact",
   "lem-weil-pbc-localization-projective",
-  "def-weil-pbc-depth",
+  "lem-weil-pbc-finite-module-support-annihilator",
   "lem-weil-pbc-auslander-buchsbaum",
+  "lem-weil-pbc-projective-resolution-ext-degree",
   "lem-weil-pbc-finite-module-pd-local-global",
-  "lem-weil-pbc-projective-dimension-ext-characterization",
-  "lem-weil-pbc-projective-resolution-kernel-projective",
+  "def-weil-finitely-generated-module",
+  "lem-weil-pbc-bounded-finite-projective-resolution",
   "def-weil-pbc-tor-modules",
   "lem-pc-finite-projective-dimension-of-tor-bound"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Assembly of Tag 090V (Auslander–Buchsbaum), the maximal-localization criterion in Mathlib, and Tag 00O5; the repetition-of-powers argument and choice r=s_1 are written here."
+  "place": "Tags 090V, 065R and 0CXE; shorter finite-support assembly: finitely many maximal ideals over the finite ring A/I, finite local ring depths, and Auslander–Buchsbaum. The two bridge lemmas are proved in this delivery."
  },
  "mathlib_searches": [
   {
@@ -283,5 +247,15 @@
   "by": "NA",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261018T062759-L-651895",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

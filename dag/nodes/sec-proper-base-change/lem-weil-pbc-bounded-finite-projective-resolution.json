@@ -1,0 +1,137 @@
+{
+ "id": "lem-weil-pbc-bounded-finite-projective-resolution",
+ "kind": "statement",
+ "title": "Bounded resolutions by finite projectives over a Noetherian ring",
+ "statement": "Let R be a commutative Noetherian ring [def-weil-pbc-noetherian-ring], M a finitely generated R-module [def-weil-finitely-generated-module], and d a natural number. If Ext_R^i(M,N) [def-pc-ext] vanishes for every module N and every i>d, then M has a projective resolution [def-weil-pbc-finite-global-dimension] with finite terms [def-weil-finitely-generated-module], and all terms of degree greater than d zero. Projectivity has the meaning of [def-weil-pbc-projective-module].",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00O4, 00O5, 0CXE and 065R; bounded-projective model and finite-resolution arguments"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-pc-ext",
+  "def-weil-pbc-finite-global-dimension",
+  "def-weil-pbc-projective-module"
+ ],
+ "proof": [
+  {
+   "text": "Induct on d. At d=0 the Mathlib equivalence projective_iff_hasProjectiveDimensionLE_zero makes M projective. Its identity resolution has M in degree zero and zero elsewhere, all finite.",
+   "uses": [
+    "def-pc-ext",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "At d+1 use Module.exists_finite_presentation to choose a finite free module F surjecting onto M. Its kernel K is finite by Noetherianity. Mathlib ShortExact.hasProjectiveDimensionLT_X₃_iff gives the Ext bound d for K. Apply induction.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "def-pc-ext"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Augment the chosen resolution Q of K by F as degree zero and by F→M as augmentation. The first new differential is Q₀→K→F. Exactness in degree zero follows from surjectivity of Q₀→K and exactness of K→F→M; degree one uses injectivity of K→F and exactness of Q₁→Q₀→K. Higher exactness is that of Q. The exact-and-epi quasi-isomorphism criterion supplies a ProjectiveResolution. Its terms are F and the terms of Q, so they are finite and projective, and vanish above d+1.",
+   "uses": [
+    "def-weil-pbc-finite-global-dimension",
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-ext",
+  "def-weil-pbc-projective-module",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "def-weil-pbc-finite-global-dimension",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00O4, 00O5, 0CXE and 065R; bounded-projective model and finite-resolution arguments; proof written using Mathlib Ext and K-projective APIs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Every finite module of projective dimension at most d over a noetherian ring has a length d resolution by finite projective modules",
+   "results": "ModuleCat.projectiveResolution; ProjectiveResolution.ofComplex; Module.finitePresentation_of_finite; projective_iff_hasProjectiveDimensionLT_one. No length-and-finiteness constructor.",
+   "date": "2026-10-18",
+   "verdict": "No direct match; the listed APIs are used in the proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite module over a noetherian ring has a projective resolution by finite modules, with a prescribed finite length if its projective dimension is bounded",
+   "results": "projectiveDimension_ne_top_iff; HasProjectiveDimensionLE; projectiveDimension_le_iff. These characterize the bound but do not construct finite terms.",
+   "date": "2026-10-18",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectiveResolution\"",
+   "results": "ProjectiveResolution.self, ProjectiveResolution.ofComplex and resolution infrastructure, no finite-term bounded constructor.",
+   "date": "2026-10-18",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "finite.*[Pp]rojective.*[Rr]esolution",
+   "results": "Mathlib/RepresentationTheory/Homological/FiniteCyclic.lean only; local library has a local-ring finite-free constructor, which assumes IsLocalRing and cannot serve the global step.",
+   "date": "2026-10-18",
+   "verdict": "No generic duplicate. blueprint_refs search returned zero matching blueprint nodes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.UniformPerfectQuotientBound",
+  "date": "2026-10-18",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (c), TOW: uniform tensor bound; finite projective resolution construction",
+   "via": [
+    "lem-weil-pbc-uniform-perfect-quotient-bound"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.BoundedFiniteProjectiveResolution",
+  "file": "lean/Sheaf/RingTheory/BoundedFiniteProjectiveResolution.lean",
+  "declaration": "ModuleCat.exists_bounded_finite_projective_resolution",
+  "statement": "theorem exists_bounded_finite_projective_resolution\n    {R : Type u} [CommRing R] [IsNoetherianRing R]\n    (M : ModuleCat.{u} R) [Module.Finite R M] (d : ℕ)\n    (h : HasProjectiveDimensionLE M d) :\n    ∃ P : ProjectiveResolution M,\n      (∀ i : ℕ, Module.Finite R (P.complex.X i)) ∧\n      (∀ i : ℕ, d < i → IsZero (P.complex.X i))",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261018T062759-L-651895",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261018T062759-L-651895",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

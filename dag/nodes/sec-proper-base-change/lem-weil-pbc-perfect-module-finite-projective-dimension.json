@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-perfect-module-finite-projective-dimension",
+ "kind": "statement",
+ "title": "A module with perfect degree-zero complex has finite projective dimension",
+ "statement": "Let R be a commutative ring, assume the derived category of R-modules exists, and let M be an R-module. If its degree-zero complex M[0] is perfect [def-pc-perfect-ring-complex], then there is a natural d for which Ext_R^i(M,N) [def-pc-ext] vanishes for all R-modules N and i>d. Equivalently M has finite projective dimension. No Noetherian or nonzero hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00O4, 00O5, 0CXE and 065R; bounded-projective model and finite-resolution arguments"
+ },
+ "stmt_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-pc-ext",
+  "def-weil-pbc-projective-module"
+ ],
+ "proof": [
+  {
+   "text": "Choose a bounded complex P of finite projective modules supported in [a,b] and an isomorphism M[0]≅Q(P). Mathlib CochainComplex.isKProjective_of_projective makes P K-projective. Put d=max(-a,0).",
+   "uses": [
+    "def-pc-perfect-ring-complex",
+    "def-weil-pbc-projective-module"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For i>d and any module N, the complex L=N[0][i] is supported only in degree -i<a. Every cochain map P→L is zero: in a degree below a its source is zero; in every other degree its target is zero. Hence the homotopy-category Hom is a singleton. The K-projective comparison Qh_map_bijective identifies it with Hom_D(Q(P),Q(L)), which is therefore a singleton as well.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "def-pc-ext"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Transport along M[0]≅Q(P) and the shift comparison for Q to see Hom_D(M[0],N[0][i]) is a singleton. Ext.homEquiv transfers this to Ext_R^i(M,N). HasProjectiveDimensionLT.mk with bound d+1 proves the claim. The same argument covers the zero module and a positive lower support endpoint a.",
+   "uses": [
+    "def-pc-ext"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-weil-pbc-projective-module",
+  "def-pc-ext"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tags 00O4, 00O5, 0CXE and 065R; bounded-projective model and finite-resolution arguments; proof written using Mathlib Ext and K-projective APIs"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Perfect module concentrated in degree zero has finite projective dimension",
+   "results": "projectiveDimension_ne_top_iff; projective_iff_hasProjectiveDimensionLT_one; Module.projective_of_localization_maximal; no perfect-complex bridge.",
+   "date": "2026-10-18",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A module concentrated in degree zero that is perfect in the derived category has finite projective dimension",
+   "results": "Generic HasProjectiveDimensionLE and projectiveDimension_ne_top_iff APIs only.",
+   "date": "2026-10-18",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPerfect\", \"HasProjectiveDimensionLE\"",
+   "results": "Zero hits.",
+   "date": "2026-10-18",
+   "verdict": "No direct match."
+  },
+  {
+   "tool": "grep",
+   "query": "IsPerfect|perfect in Mathlib/Algebra/Homology/DerivedCategory; perfect.*resolution in lean/WeilConjectures and lean/Sheaf",
+   "results": "Mathlib has K-projective comparison APIs but no IsPerfect predicate. The source library defines IsPerfect and derives boundedness and finite homology, but has no finite-projective-dimension-of-single bridge. blueprint_refs search for perfect module returned zero matching blueprint nodes.",
+   "date": "2026-10-18",
+   "verdict": "No duplicate."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.UniformPerfectQuotientBound",
+  "date": "2026-10-18",
+  "group": "G4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (c), TOW: uniform tensor bound; finite projective dimension of the perfect finite-level quotients",
+   "via": [
+    "lem-weil-pbc-uniform-perfect-quotient-bound"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.PerfectModuleFiniteProjectiveDimension",
+  "file": "lean/Sheaf/RingTheory/PerfectModuleFiniteProjectiveDimension.lean",
+  "declaration": "ModuleCat.finite_projectiveDimension_of_perfect_single",
+  "statement": "theorem finite_projectiveDimension_of_perfect_single\n    {R : Type u} [CommRing R]\n    [HasDerivedCategory.{u} (ModuleCat.{u} R)] (M : ModuleCat.{u} R)\n    (h : DerivedCategory.IsPerfect ((DerivedCategory.singleFunctor _ 0).obj M)) :\n    ∃ d : ℕ, HasProjectiveDimensionLE M d",
+  "branch": "sheaf-dag",
+  "by": "G4",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261018T062759-L-651895",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261018T062759-L-651895",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
