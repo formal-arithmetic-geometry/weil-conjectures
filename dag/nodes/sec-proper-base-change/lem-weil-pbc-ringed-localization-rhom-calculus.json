@@ -50,12 +50,11 @@
    }
   },
   {
-   "text": "On the original site or any slice, let $h$ be a global section of its ring sheaf $R$, and let $L_h(V)=R(V)[1/h]$ as a presheaf. For a monomorphism $M'\\to M$ of module sheaves, the maps $M'(V)\\otimes_{R(V)}L_h(V)\\to M(V)\\otimes_{R(V)}L_h(V)$ are injective by [lem-weil-pbc-localization-flat]. Sheafifying preserves this monomorphism by [lem-weil-pbc-ringed-site-module-sheafification-exact]; [lem-pc-sites-module-sheafification-tensor] identifies it with $M'\\otimes_R L_h^\\#\\to M\\otimes_R L_h^\\#$. Tensor with $L_h^\\#$ preserves cokernels because it is a left adjoint [lem-pc-sheaf-modules-tensor-closed]. Consequently it is exact, which is precisely flatness [def-pc-flat-sheaf-modules]. A finite direct sum of these sheaves is flat: its tensor functor is the finite direct sum of their exact tensor functors, and kernels and cokernels of finite direct sums are computed componentwise. This argument includes the empty direct sum.",
+   "text": "For a global section h of a ring sheaf R, each module R(V)[1/h] is flat by [lem-weil-pbc-localization-flat], hence tensoring with it preserves finite limits in ModuleCat (Mathlib RingTheory.Flat.CategoryTheory). Evaluation functors on module presheaves jointly reflect limits, so tensoring with the localization presheaf preserves finite limits. Apply [lem-pc-sites-modules-sheafification-flat] to the identity map on the ring presheaf to obtain a flat sheafified localization. A finite sum of these sheaves is flat by [lem-pc-sites-modules-coproduct-flat], including the empty sum. Use the displayed isomorphism in IsBoundedLocalizationComplex to transport flatness to every term of P.",
    "uses": [
     "lem-weil-pbc-localization-flat",
-    "lem-weil-pbc-ringed-site-module-sheafification-exact",
-    "lem-pc-sites-module-sheafification-tensor",
-    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-pc-sites-modules-sheafification-flat",
+    "lem-pc-sites-modules-coproduct-flat",
     "def-pc-flat-sheaf-modules"
    ],
    "elementary": false,
@@ -65,12 +64,12 @@
    }
   },
   {
-   "text": "Restriction of a sheafified localization to $\\mathcal C/U$ is the sheafification of the restricted presheaf: over $V\\to U$ both are obtained by the same local sections, the same covering families and the same equality after a covering; use [def-pur-localized-ringed-site] and the sheafification universal property [lem-pc-sites-module-sheafification-interface]. Therefore step 2 applies to every term of $P|_U$. Since $P|_U$ is bounded, [lem-pc-bounded-above-flat-kflat-site] makes it K-flat. The same lemma makes $S[0]$ K-flat for $S=\\mathcal O_U[1/f]$. In the derived-tensor construction in the statement, take the identity K-flat replacement of $P|_U$. Its total tensor with $S[0]$ has terms $S\\otimes P^n|_U$ and differential $1\\otimes d_P$ by [def-pc-tensor-complex-sheaves], so it is exactly $P_f^\\bullet$. Thus the ordinary complex in the statement represents the derived tensor.",
+   "text": "Use slice restriction preserving flatness [lem-weil-pbc-slice-restriction-flat] on the flat terms obtained in step 2. Restriction preserves zero objects, so the original upper bound remains an upper bound after restriction. Apply [lem-pc-bounded-above-flat-kflat-site] to the restricted complex. The coefficient localization is flat by step 2; its complex concentrated in degree zero is bounded above by zero and flat in every degree (zero terms are flat), so the same K-flatness lemma applies. The source-library isomorphism CochainComplex.mapBifunctorSingle₁Iso identifies total tensor with a degree-zero left factor with termwise tensor: the unique nonzero first-degree summand gives the terms and differential of localizationSliceComplex. Thus identity K-flat replacements compute the stated derived tensor.",
    "uses": [
-    "def-pur-localized-ringed-site",
-    "lem-pc-sites-module-sheafification-interface",
+    "lem-weil-pbc-slice-restriction-flat",
     "lem-pc-bounded-above-flat-kflat-site",
-    "def-pc-tensor-complex-sheaves"
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-sheaf-modules-tensor-closed"
    ],
    "elementary": false,
    "source": {
@@ -79,7 +78,7 @@
    }
   },
   {
-   "text": "For any commutative ring $A$, the bilinear multiplication map gives $A[1/f]\\otimes_A A[1/g]\\to A[1/(fg)]$. Explicitly, for $k\\geq r,s$ it sends $(a/f^r)\\otimes(b/g^s)$ to $abf^{k-r}g^{k-s}/(fg)^k$. Its inverse sends $c/(fg)^n$ to $(1/f^n)\\otimes(c/g^n)$. The maps respect the fraction equivalence relations and are inverse: inserting the first expression into the second and moving $f^{k-r}$ and $g^{k-s}$ across the tensor sign gives the original pure tensor; the other composite is $c/(fg)^n$. These formulas commute with ring restriction maps. Sheafify this presheaf isomorphism and use [lem-pc-sites-module-sheafification-tensor] to obtain $\\mathcal O_U[1/f]\\otimes\\mathcal O_U[1/g]\\cong\\mathcal O_U[1/(fg)]$. Tensor distributes over the finite direct sums since it is a left adjoint [lem-pc-sheaf-modules-tensor-closed]. This proves the assertion about each summand, without requiring the differential of $P$ to preserve the displayed summands.",
+   "text": "For any commutative ring A, Mathlib IsLocalization.Away.mul' identifies A[1/f] tensor_A A[1/g] as a localization of A at powers of f*g. IsLocalization.algEquiv therefore gives its A-algebra isomorphism with A[1/(f*g)], including zero divisors and the zero localization. For every restriction ring homomorphism, compare the two composites from the tensor localization by IsLocalization.ringHom_ext: both send every a in A to the restricted a. The equality on pure tensors proves naturality as module-presheaf maps. Sheafify the resulting presheaf isomorphism and compose with [lem-pc-sites-module-sheafification-tensor]. On a slice, ring maps preserve products, so the restricted section of f*g equals the product of the restricted sections. This proves ringedLocalization_tensor_product. The finite-sum assertion follows from tensor being a left adjoint [lem-pc-sheaf-modules-tensor-closed].",
    "uses": [
     "lem-pc-sites-module-sheafification-tensor",
     "lem-pc-sheaf-modules-tensor-closed"
@@ -128,20 +127,21 @@
   "def-pur-sheaf-hom",
   "lem-pc-bounded-above-flat-kflat-site",
   "lem-pc-sheaf-modules-tensor-closed",
-  "lem-pc-sites-module-sheafification-interface",
   "lem-pc-sites-module-sheafification-tensor",
+  "lem-pc-sites-modules-coproduct-flat",
+  "lem-pc-sites-modules-sheafification-flat",
   "lem-pur-hom-kflat-into-kinjective",
   "lem-pur-kinjective-restrict-localized",
   "lem-pur-site-restriction-module-adjunction-exact",
   "lem-sc-derived-hom-tensor-total",
   "lem-weil-pbc-localization-flat",
-  "lem-weil-pbc-ringed-site-module-sheafification-exact",
+  "lem-weil-pbc-slice-restriction-flat",
   "prop-pur-kinjective-resolutions-exist"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 08J9 and 08JB, with the chain models of 0A90 and 0A96; algebraization.tex Tag 0996(3) for localization"
+  "place": "Tags 08J9 and 08JB, with the chain models of 0A90 and 0A96; algebraization.tex Tag 0996(3) for localization. Steps 2-4 use the existing sheafification-flat and flat-coproduct interfaces and Mathlib localization universal properties; the proof of steps 1, 5 and 6 remains to be completed in Lean."
  },
  "mathlib_searches": [
   {
@@ -352,5 +352,15 @@
   "group": "NB",
   "result": "pass",
   "note": "Statement, dependencies, docstrings, definitions, edge cases, report sections, and compiler evidence checked; no findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P1",
+  "result": "pass",
+  "landing": "20261018T062842-L-667586",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

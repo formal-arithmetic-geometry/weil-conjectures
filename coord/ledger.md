@@ -16105,3 +16105,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:28 L: merged deliver/N4/Sheaf.RepresentationTheory.CoinducedHomotopyContinuous (stage 3; reviewer PASS; first push; landing 20261018T062840-L-667092 (interface); batch 20261018T062645; modules 1; new nodes 0; change records: coord/changes/coinduced-homotopy-continuous-imports.md)
 - 06:28 L: merged deliver/P1/Sheaf.Algebra.Homology.ChangeOfRingsKFlat (stage 3; reviewer PASS; first push; landing 20261018T062841-L-667205 (interface); batch 20261018T062645; modules 2; new nodes 1)
 - 06:28 L: merged deliver/P1/Sheaf.AlgebraicGeometry.ProjectiveLineGenusZero (stage 3; reviewer PASS; first push; landing 20261018T062841-L-667456 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:28 L: merged deliver/P1/Sheaf.Paper.RingedLocalizationRHomCalculus (stage 3; reviewer PASS; first push; landing 20261018T062842-L-667586 (proof); batch 20261018T062645; modules 1; new nodes 0)
