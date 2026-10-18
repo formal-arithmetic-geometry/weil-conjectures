@@ -20,9 +20,97 @@
   "def-pc-finite-locally-free",
   "def-weil-surjective-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-per-alteration-cover-proper-normal-form] with $X=S$ and the given finite covering family. Its hypotheses are exactly the integral, Noetherian, quasi-excellent and invertible-prime hypotheses here. Obtain $f:Y\\to S$ proper surjective with $Y$ integral, $d=[k(Y):k(S)]>0$ prime to $\\ell$, a finite completely decomposed separated etale family $v_t:V_t\\to Y$, and maps $V_t\\to T_{b(t)}$ over $S$.",
+   "uses": [
+    "lem-per-alteration-cover-proper-normal-form"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II Theorem 3.2.1; first input to II Theorem 3.2.3."
+   }
+  },
+  {
+   "text": "Apply [lem-per-integral-etale-chart-flatification] to the single chart $S\\xrightarrow{1}S$ and $Y\\to S$. This gives a proper dense-open isomorphism $p_0:S_0\\to S$ with $S_0$ normal integral Noetherian, and an integral $Y_0$ mapping to $Y$, finite locally free surjective of rank $d$ over $S_0$. Pull back each $V_t\\to Y$ along $Y_0\\to Y$, obtaining $V_t^0\\to Y_0$. These maps are etale by [lem-weil-pbc-etale-covering-base-change]; separatedness and finite type are stable under base change by the cited permanence statement. The pulled-back family is completely decomposed: for $y_0\\mapsto y$, a lift with residue field $\\kappa(y)$ gives after tensoring with $\\kappa(y_0)$ a rational point above $y_0$. The projections $V_t^0\\to V_t$ retain all maps to $T_{b(t)}$.",
+   "uses": [
+    "lem-per-integral-etale-chart-flatification",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-pod-separated-finite-type-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II Theorem 3.2.3, platification reduction; base change of a completely decomposed family."
+   }
+  },
+  {
+   "text": "Apply [lem-per-finite-flat-cd-etale-exchange] to $Y_0\\to S_0$ and $(V_t^0\\to Y_0)_t$. The finite locally free rank is the same $d$ as in Step 1, hence positive and prime to $\\ell$. Obtain a finite completely decomposed family $u_j:U_j\\to S_0$, finite locally free surjections $Z_j\\to U_j$ of positive ranks $d_j$ prime to $\\ell$, and maps $Z_j\\to V_{t(j)}^0\\to T_{b(t(j))}$ over $S$. The $U_j,Z_j$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Split each $U_j$ into its finitely many normal integral open-and-closed components using [lem-fin-etale-normal-components], and restrict $Z_j$ and its map accordingly. Ranks are unchanged by this restriction, and every residue-field lift remains in one component, so the enlarged finite family is still completely decomposed. Discard empty charts.",
+   "uses": [
+    "lem-per-finite-flat-cd-etale-exchange",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-fin-etale-normal-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II Theorem 3.2.3, exchange assertion and integral etale charts."
+   }
+  },
+  {
+   "text": "For each integral chart $U_j$ write $K=k(U_j)$ and let $B$ be the finite-dimensional generic fibre algebra of $Z_j\\to U_j$, of dimension $d_j$. Construct a composition series of $B$ as a $B$-module by repeatedly choosing a proper submodule of largest $K$-dimension; dimensions decrease, so it terminates. Each simple quotient is $B/\\mathfrak m$ for a maximal ideal: any nonzero vector generates it and its annihilator is maximal. Additivity of vector-space dimension gives $d_j=\\sum_a[B/\\mathfrak m_a:K]$. Since $\\ell\\nmid d_j$, one summand has degree $n_j$ prime to $\\ell$. Take the closure of this generic-fibre point in $Z_j$ with its reduced induced structure, supplied by [lem-weil-pbc-reduced-induced-closed-subscheme], and call it $F_j$. It is integral: its space is the closure of a point, hence irreducible, and its scheme structure is reduced. Its generic field is $B/\\mathfrak m_a$. The map $F_j\\to U_j$ is finite by [lem-weil-pbc-closed-immersion-finite] and [lem-weil-pbc-finite-composition], hence proper by [lem-weil-pbc-finite-proper]. Its image is closed and contains the generic point of $U_j$, so it is surjective. It maps to the same $T_{b(t(j))}$ as $Z_j$. No flatness of $F_j\\to U_j$ is claimed at this stage.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-finite-composition",
+    "lem-weil-pbc-finite-proper"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II Theorem 3.2.3, integral sources: select a prime-to-ell generic component before the final platification; the dimension argument is written out."
+   }
+  },
+  {
+   "text": "The scheme $S_0$ is quasi-excellent by [lem-per-quasi-excellent-finite-type-stability], since it is of finite type over $S$. Apply [lem-per-integral-etale-chart-flatification] simultaneously to the finite family $U_j\\to S_0$ and the integral proper dominant maps $F_j\\to U_j$ from Step 4. All generic degrees are the positive integers $n_j$ prime to $\\ell$. It gives $b:S'\\to S_0$ proper and an isomorphism over a dense open, integral Noetherian $E_j=U_j\\times_{S_0}S'$, and integral Noetherian $W_j$ mapping to $F_j$, finite locally free surjective of rank $n_j$ over $E_j$. Set $p=p_0b$; it is proper by [lem-weil-pbc-proper-composition]. Its dense-open isomorphism follows by intersecting the isomorphism open for $b$ with the inverse image of that for $p_0$, and identifying this intersection with its open image in $S$ under $p_0$. Both opens contain the generic point. The maps $e_j:E_j\\to S'$ are separated etale of finite type by base-change permanence, and completely decomposed by the same rational-point tensor calculation as in Step 2. Compose $W_j\\to F_j\\to Z_j\\to V_{t(j)}^0\\to T_{b(t(j))}$ to define $h_j$. Every arrow is over $S$, so $q_{b(t(j))}h_j=pe_ja_j$. The two flatification conclusions give finite type of $S_0$ over $S$ and of $S',E_j,W_j$ over $S_0$; composing with $p_0$ gives finite type over $S$ by [lem-sfb-finite-type-composition-base-change] (1), and $E_j,W_j,S'$ are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. The indexing family is finite. These are all clauses of the item.",
+   "uses": [
+    "lem-per-quasi-excellent-finite-type-stability",
+    "lem-per-integral-etale-chart-flatification",
+    "lem-weil-pbc-proper-composition",
+    "lem-weil-pbc-etale-covering-base-change",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "II Theorem 3.2.3, final platification and assembly of its standard diagram; finite form in XIII 3.2.1."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-alteration-cover-proper-normal-form",
+  "lem-per-integral-etale-chart-flatification",
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-per-finite-flat-cd-etale-exchange",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-fin-etale-normal-components",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-finite-proper",
+  "lem-per-quasi-excellent-finite-type-stability",
+  "lem-weil-pbc-proper-composition",
+  "lem-sfb-finite-type-composition-base-change"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose II, proof of Theorem 3.2.3, pp. 30--31, using Theorem 3.2.1 and Corollary 2.2.4; explicit generic-component selection and a final simultaneous platification ensure integral sources."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -65,10 +153,66 @@
    "results": "{\"ok\": false, \"n_hits\": 0, \"note\": \"service unavailable: ERROR Command '['curl', '-s', '-m', '40', '-A', 'Mozilla/5.0 (weil-sheaf researc\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-18",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Theorem 3.2.3 refinement of a prime-to-ell alteration cover by a proper birational map, completely decomposed etale cover, and finite flat maps",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.Scheme.Cover.exists_of_f_eq_f\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.Scheme.Cover.ulift\", \"AlgebraicGeometry.Scheme.Cover.exists_of_trans_eq_trans\", \"AlgebraicGeometry.Scheme.Cover.map_prop\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"AlgebraicGeometry.Scheme.Hom.cover_I₀\"], \"digest\": \"17586ea810cb0248\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern ordinary scheme covers, etale morphisms, normalization or flatness; none states this refinement/flattening result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"IsBirational\", \"IsFlat\", \"IsEtale\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern ordinary scheme covers, etale morphisms, normalization or flatness; none states this refinement/flattening result."
+  },
+  {
+   "tool": "grep",
+   "query": "alteration|completely decomposed|finite.*flat|prime.to.*ell",
+   "results": "{\"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\"], \"digest\": \"4b0caa0167cd4ea0\"} (Mathlib/AlgebraicGeometry/)",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern ordinary scheme covers, etale morphisms, normalization or flatness; none states this refinement/flattening result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper prime-to-ell alteration cover dominated by completely decomposed etale cover",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"Algebra.IsEtaleAt.comp\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.Etale.formallyEtale\", \"Algebra.FormallyEtale.of_isSeparable\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology\"], \"digest\": \"0453f4135e4dd7e6\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern ordinary scheme covers, etale morphisms, normalization or flatness; none states this refinement/flattening result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Theorem 3.2.3 refinement of a prime-to-ell alteration cover by a proper birational map, completely decomposed etale cover, and finite flat maps",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.Scheme.Cover.exists_of_f_eq_f\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.Scheme.Cover.ulift\", \"AlgebraicGeometry.Scheme.Cover.exists_of_trans_eq_trans\", \"AlgebraicGeometry.Scheme.Cover.map_prop\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.h𝒰X\", \"AlgebraicGeometry.Scheme.Hom.cover_I₀\"], \"digest\": \"17586ea810cb0248\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern ordinary scheme covers, etale morphisms, normalization or flatness; none states this refinement/flattening result."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsProper\", \"IsBirational\", \"IsFlat\", \"IsEtale\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern ordinary scheme covers, etale morphisms, normalization or flatness; none states this refinement/flattening result."
+  },
+  {
+   "tool": "grep",
+   "query": "alteration|completely decomposed|finite.*flat|prime.to.*ell",
+   "results": "{\"ok\": true, \"n_hits\": 13, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/Fpqc.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/LocalFlatDescent.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\"], \"digest\": \"4b0caa0167cd4ea0\"} (Mathlib/AlgebraicGeometry/)",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern ordinary scheme covers, etale morphisms, normalization or flatness; none states this refinement/flattening result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Proper prime-to-ell alteration cover dominated by completely decomposed etale cover",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"Algebra.IsEtaleAt.comp\", \"AlgebraicGeometry.Scheme.Etale\", \"Algebra.Etale.formallyEtale\", \"Algebra.FormallyEtale.of_isSeparable\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology\"], \"digest\": \"0453f4135e4dd7e6\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits concern ordinary scheme covers, etale morphisms, normalization or flatness; none states this refinement/flattening result."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-prime-to-ell-uniformization-standard-form",
@@ -92,5 +236,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-alteration-cover-standard-refinement",
+  "worker": "stage1",
+  "summary": "Retained the earlier item and searches, checked ILO II 3.2.1--3.2.3 and 2.2.4, and split the standard-refinement proof into proper normal form, simultaneous platification, henselian exchange, explicit integral generic-component selection, and final simultaneous platification. Three statement-only inputs are new; no statement change or Mathlib leaf.",
+  "blueprint": "Realizes the ancestral Artin--Gabber Step 3 finiteness branch through the standard-form sentence of ILO XIII 3.2.1; this node supplies exactly the II 3.2.3 input already named in its blueprint.from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-covering-base-change",
+    "why": "Generic scheme-theoretic permanence or component construction used only as stated in the displayed proof; the unit has no replacement for this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Generic scheme-theoretic permanence or component construction used only as stated in the displayed proof; the unit has no replacement for this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme-theoretic permanence or component construction used only as stated in the displayed proof; the unit has no replacement for this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-fin-etale-normal-components",
+    "why": "Generic scheme-theoretic permanence or component construction used only as stated in the displayed proof; the unit has no replacement for this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic scheme-theoretic permanence or component construction used only as stated in the displayed proof; the unit has no replacement for this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-finite",
+    "why": "Generic scheme-theoretic permanence or component construction used only as stated in the displayed proof; the unit has no replacement for this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-composition",
+    "why": "Generic scheme-theoretic permanence or component construction used only as stated in the displayed proof; the unit has no replacement for this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-proper",
+    "why": "Generic scheme-theoretic permanence or component construction used only as stated in the displayed proof; the unit has no replacement for this scheme-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-proper-composition",
+    "why": "Generic scheme-theoretic permanence or component construction used only as stated in the displayed proof; the unit has no replacement for this scheme-theoretic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-covering-base-change",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-fin-etale-normal-components",
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-proper-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-f80625b9f",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-f80625b9f (reviewer sub-agent of L); spot-checked: Read the item, all three new nodes and every cited statement in full, against ILO Exposé II 3.2.1 (pp. 29–30), 3.2.3 and its sketch (pp. 30–31) and Cor. 2.2.4 (p. 27). The item's statement is unchanged from base, which is still unsplit live. Steps 1–4 check out. Step 2: chart-flatification with the single chart id_S, and base change preserves complete decomposition via the rational point κ(v)⊗κ(y_0). Step 3: exchange on the rank-d map, then splitting into normal integral components. Step 4: an elementary composition-series degree selection, also valid for non-reduced generic fibres. Step 5: the dense-open isomorphism holds for p=p_0∘b, and the h_j are composites of S-maps. One fault, C1: Step 5 claimed finite type over S and Noetherianity of S',E_j,W_j with no cited node. Those schemes are only finite type over S_0 by the flatification node. FIX: Step 5 now cites lem-sfb-finite-type-composition-base-change (1), a Mathlib leaf, and lem-weil-pbc-finite-type-over-noetherian, with proof_deps updated. New nodes are true, smaller than the item and not duplicates. proper-normal-form is ILO 3.2.1 plus a finite affine refinement, and is false if made birational (field case [k':k]=3, ℓ=2). finite-flat-cd-etale-exchange follows by henselization, a rank prime to ℓ in some factor, and descent of the idempotent and section. integral-etale-chart-flatification follows from 081R, flatness over étale charts, finite normalization for Nagata rings, then flat plus quasi-finite plus proper, hence finite with rank n_i. DAG greps for alteration, completely decomposed, Raynaud, 081R and 0B49, plus the trf alteration and flattening nodes, give no duplicates. Batch-5 flag: lem-per-quasi-excellent-finite-type-stability reaches lem-trf-g-ring-affine-cover and lem-trf-j2-affine-cover, both pure commutative algebra (G-ring and J-2 are local on affine covers). They are not part of the trace formula or Poincaré duality statements or proofs, so accepted; the full-closure recomputation finds only these and the Mathlib leaf lem-pod-separated-finite-type-base-change. No SGA cited. Declared tool uses accepted.; 1 file(s) fixed by the reviewer"
  }
 }
