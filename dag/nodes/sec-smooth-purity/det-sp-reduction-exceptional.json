@@ -21,7 +21,21 @@
   "sk-prop-sf-rf-shriek-preservation",
   "det-sp-reduction-direct-image",
   "def-asd-finite-etale-tate-twist",
-  "lem-amb-affine-space-top-trace"
+  "lem-amb-affine-space-top-trace",
+  "sk-def-sp-normalized-towers",
+  "lem-pur-exceptional-coefficient-comparison",
+  "def-weil-proetale-inverse-image",
+  "lem-trf-open-square-exchange",
+  "def-weil-pbc-witness-compatibility",
+  "def-weil-exceptional-inverse-image",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "def-sp-etale-adjoint-chart-comparison",
+  "def-sp-fixed-compact-support-comparison",
+  "def-sp-etale-compact-support-normalization",
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-asd-ordinary-finite-p1-data",
+  "def-sp-constant-scalar-pullback-comparison",
+  "lem-pur-etale-scalar-mate-projection"
  ],
  "proof": [
   {
@@ -599,5 +613,60 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0a747bdc9",
+  "group": "NW",
+  "result": "pass",
+  "note": "Re-delivery after lead return of PASSed head 249843638e94 (review_split route lock: def-sp-etale-compact-support-normalization source cited SGA 4). diff -rq vs that snapshot: only that node's source.place (now Stacks 03S3/03S5/03S6/0F4L with roles, labels verified in etale-cohomology.tex) and the report changed; the Lean module is byte-identical to the PASSed module, and all dependency records are identical to live. The route-lock regex finds no hit on the item or its 4 new def nodes. Statement re-read clause by clause (smooth of rel. dim d, fixed compactification, finite l-power A,B of Type u, any phi, Dctf, actual reductionDirectImageComparison, exists-unique natural c with counit identity, isIso, chart equation pinned by rightAdjointUniq and origin equation). Edge cases d=0, zero ring, non-flat phi, empty schemes are OK. Mechanical finding: tensorIso, openSquarePullbackModel, sfRealizationRestriction and scalarPullbackIso are each .choose of their theorem's own existsUnique, so the theorem stmt_deps are genuine; PASS on that point. nt_compile --json: 18.1 s, rc 0, no error or non-sorry warning. 5 sorry, all in theorems; no line over 100 characters; docstrings carry the 13 steps. Advisory: the published EtaleCompactSupportNormalization.lean docstrings still cite SGA 4; the module of sfRealizationRestriction (Paper.SfCompactSupportRestrictionOfScalars) is no longer named by the live lem-sf-compact-support-restriction-of-scalars record."
+ },
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.ReductionExceptional",
+  "declaration": "AlgebraicGeometry.ProEtale.reductionExceptional_isIso",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.reductionProEtaleSmall",
+   "AlgebraicGeometry.ProEtale.reductionConstantPush_eq",
+   "AlgebraicGeometry.ProEtale.reductionCompactSupportFixedIso",
+   "AlgebraicGeometry.ProEtale.reductionRealizationRestrict",
+   "AlgebraicGeometry.ProEtale.reductionRealizationScalarMap",
+   "AlgebraicGeometry.ProEtale.reductionRealizationScalarMap_isIso",
+   "AlgebraicGeometry.ProEtale.reductionRealizationScalarIso",
+   "AlgebraicGeometry.ProEtale.reductionSite",
+   "AlgebraicGeometry.ProEtale.reductionSiteScalarIso",
+   "AlgebraicGeometry.ProEtale.reductionSiteCompactSupportIso",
+   "AlgebraicGeometry.ProEtale.reductionEtaleTateMap_existsUnique",
+   "AlgebraicGeometry.ProEtale.reductionEtaleTateMap",
+   "AlgebraicGeometry.ProEtale.reductionEtaleTateExtensionMap",
+   "AlgebraicGeometry.ProEtale.reductionEtaleTateExtensionMap_isIso",
+   "AlgebraicGeometry.ProEtale.reductionEtaleTateIso",
+   "AlgebraicGeometry.ProEtale.reductionEtaleShiftedLineIso",
+   "AlgebraicGeometry.ProEtale.reductionEtaleP1ScalarIso",
+   "AlgebraicGeometry.ProEtale.reductionEtaleLineScalarIso",
+   "AlgebraicGeometry.ProEtale.reductionEtaleAffineScalarIso",
+   "AlgebraicGeometry.ProEtale.reductionEtaleChartScalarIso",
+   "AlgebraicGeometry.ProEtale.reductionEtaleAffineLeftIso",
+   "AlgebraicGeometry.ProEtale.reductionEtaleChartAdjunction",
+   "AlgebraicGeometry.ProEtale.reductionEtaleChartLeftIso",
+   "AlgebraicGeometry.ProEtale.reductionEtaleChartRightIso",
+   "AlgebraicGeometry.ProEtale.reductionRealizationPullbackIso",
+   "AlgebraicGeometry.ProEtale.reductionSitePullbackIso",
+   "AlgebraicGeometry.ProEtale.reductionCtfCompactSupport",
+   "AlgebraicGeometry.ProEtale.reductionCtfScalar",
+   "AlgebraicGeometry.ProEtale.reductionExceptionalComponent",
+   "AlgebraicGeometry.ProEtale.reductionRealizationCounitEquation",
+   "AlgebraicGeometry.ProEtale.ReductionExceptionalRealization",
+   "AlgebraicGeometry.ProEtale.reductionIntrinsicChartIso",
+   "AlgebraicGeometry.ProEtale.ReductionExceptionalChartEquation",
+   "AlgebraicGeometry.ProEtale.reductionExceptional_isIso"
+  ],
+  "file": "lean/Sheaf/SecSmoothPurity/ReductionExceptional.lean",
+  "statement": "theorem reductionExceptional_isIso (ℓ pchar : ℕ) [Fact ℓ.Prime] (hp : 0 < pchar) (hℓ : pchar ≠ ℓ) (k : Type u) [Field k] [CharP k pchar] {X Z Y : Scheme.{u}} [X.Over (Spec (.of k))] [Z.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Z ↘ Spec (.of k))] [QuasiCompact (Z ↘ Spec (.of k))] [IsSeparated (Z ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] (d : ℕ) [SmoothOfRelativeDimension d f] (j : X ⟶ Z) [IsOpenImmersion j] [j.IsOver (Spec (.of k))] (p : Z ⟶ Y) [IsProper p] [p.IsOver (Spec (.of k))] (hf : j ≫ p = f) {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (hA : ∃ n : ℕ, ∀ x : A, (ℓ ^ n) • x = 0) (hB : ∃ n : ℕ, ∀ x : B, (ℓ ^ n) • x = 0) (φ : A →+* B) : ∃ (hFA : ∀ M : spFiniteConstructibleTorCategory X A, spFiniteConstructibleTor Y A ((reductionCompactSupport A j p).obj M.obj)) (hFB : ∀ M : spFiniteConstructibleTorCategory X B, spFiniteConstructibleTor Y B ((reductionCompactSupport B j p).obj M.obj)) (hSX : ∀ M : spFiniteConstructibleTorCategory X A, spFiniteConstructibleTor X B ((scalarExtensionFunctor φ X).obj M.obj)) (hSY : ∀ K : spFiniteConstructibleTorCategory Y A, spFiniteConstructibleTor Y B ((scalarExtensionFunctor φ Y).obj K.obj)), ∃ (GA : spFiniteConstructibleTorCategory Y A ⥤ spFiniteConstructibleTorCategory X A) (GB : spFiniteConstructibleTorCategory Y B ⥤ spFiniteConstructibleTorCategory X B) (adjA : reductionCtfCompactSupport A j p hFA ⊣ GA) (adjB : reductionCtfCompactSupport B j p hFB ⊣ GB), ∃ (RA : ReductionExceptionalRealization A j p hFA GA adjA) (RB : ReductionExceptionalRealization B j p hFB GB adjB), ∃ hb : ∀ K : spFiniteConstructibleTorCategory Y A, IsIso ((reductionDirectImageComparison φ j p).app (GA.obj K).obj), ∃! c : GA ⋙ reductionCtfScalar φ X hSX ⟶ reductionCtfScalar φ Y hSY ⋙ GB, (∀ K : spFiniteConstructibleTorCategory Y A, (reductionCompactSupport B j p).map (c.app K).hom ≫ (adjB.counit.app ((reductionCtfScalar φ Y hSY).obj K)).hom = @inv _ _ _ _ ((reductionDirectImageComparison φ j p).app (GA.obj K).obj) (hb K) ≫ (scalarExtensionFunctor φ Y).map (adjA.counit.app K).hom) ∧ (∀ K : spFiniteConstructibleTorCategory Y A, IsIso (c.app K)) ∧ ReductionExceptionalChartEquation ℓ φ j p d hFA hFB hSX hSY GA GB adjA adjB RA RB c",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Repair of returned 3bed5c56b097: original small intrinsic coefficients and actual scalarExtensionFunctor; Dctf domain; smooth relative dimension; actual reductionDirectImageComparison; concluded constructible adjunctions, with ordinary-etale realization and actual transported counit; chart equation uses graph-normalized sum extension and the specified ordered affine-trace adjunction. All thirteen source proof steps are retained in the main docstring. Repair of returned head 4e9e16fdec10: definition nodes own the plain etale chart adjunction/left comparison, fixed compact-support comparison and graph-normalization structure; theorem references remain in proof_deps. Explicit statement dependencies record ordinary finite P1 transport/data and the two used scalar-pullback comparisons. The accepted Lean statement is unchanged. Repair of returned head 1f522a9a7776: def-sp-constant-scalar-pullback-comparison owns the three plain constant-coefficient scalar/pullback/direct-image constructions; the unused directImageScalarExchange theorem is not a statement dependency. The unused private SpecifiedExceptionalClassHom import is removed. The accepted theorem signature and all construction bodies are unchanged."
  }
 }

@@ -1,0 +1,135 @@
+{
+ "id": "def-weil-exact-derived-adjunction",
+ "kind": "definition",
+ "title": "Localization of an exact adjunction to derived categories",
+ "status": "split",
+ "statement": "Let $C,D$ be abelian categories with chosen derived categories [def-weil-abstract-derived-category], let $F:C\\to D$ and $G:D\\to C$ be additive exact functors, and let $a:F\\dashv G$ be their specified adjunction. Localize its degreewise cochain adjunction at quasi-isomorphisms, using the standard exact-functor factorizations, to define the specified adjunction $D(F)\\dashv D(G)$. Its units and counits are the localized original units and counits.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015F; localization of the actual termwise exact adjunction, as in SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derive an adjunction between exact additive functors by localization of their termwise adjunction on cochain complexes",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.derived'",
+     "CategoryTheory.Adjunction.derived",
+     "CategoryTheory.Adjunction.derived'_unit",
+     "CategoryTheory.Adjunction.derived'_counit",
+     "CategoryTheory.Adjunction.localization",
+     "CategoryTheory.Adjunction.isLocalization_leftAdjoint",
+     "CategoryTheory.Adjunction.localization_counit_app",
+     "CategoryTheory.Adjunction.localization_unit_app"
+    ]
+   },
+   "date": "2026-10-18",
+   "verdict": "Generic Mathlib localization APIs; the exact specialization already exists in OpenTensorNormalization.exactDerivedAdjunction and is reused without a new definition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived adjunction of exact additive functors between abelian categories with standard derived categories",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Adjunction.derived",
+     "CategoryTheory.Functor.mapDerivedCategoryFactorsh",
+     "CategoryTheory.Functor.mapDerivedCategoryFactors",
+     "CategoryTheory.Abelian.Ext.mapExactFunctor_hom",
+     "CategoryTheory.Functor.mapDerivedCategory",
+     "CategoryTheory.Adjunction.derived'",
+     "CategoryTheory.Abelian.Ext.mapExactFunctor",
+     "CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory"
+    ]
+   },
+   "date": "2026-10-18",
+   "verdict": "Generic Mathlib localization APIs; the exact specialization already exists in OpenTensorNormalization.exactDerivedAdjunction and is reused without a new definition."
+  },
+  {
+   "tool": "grep",
+   "query": "exactDerivedAdjunction|mapDerivedCategory.*Adjunction",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": []
+   },
+   "date": "2026-10-18",
+   "verdict": "Generic Mathlib localization APIs; the exact specialization already exists in OpenTensorNormalization.exactDerivedAdjunction and is reused without a new definition."
+  },
+  {
+   "tool": "grep",
+   "query": "rg exactDerivedAdjunction in dag/nodes, WeilConjectures and lean/Sheaf; blueprint_refs.py search exact derived adjunction",
+   "results": "The lemma node lists the declaration only among many normalization theorem helpers. No definition node owns this exact-adjunction notion. The declaration is at Sheaf/SixFunctors/OpenTensorNormalization.lean:356; blueprint search: 0 matching nodes.",
+   "date": "2026-10-18",
+   "verdict": "Add a definition node recording the exact existing declaration, with no duplicate module or definition."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "def-weil-frobenius-square-exchange",
+  "date": "2026-10-18",
+  "group": "Q22"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-global-geometric-frobenius",
+   "place": "Exact-derived open adjunction used in the simultaneous coefficient-system construction.",
+   "via": [
+    "def-weil-frobenius-square-exchange",
+    "def-weil-frobenius-cohomology-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "lean": {
+  "module": "Sheaf.SixFunctors.OpenTensorNormalization",
+  "declaration": "SheafOfModules.OpenTensorNormalization.exactDerivedAdjunction",
+  "statement": "def exactDerivedAdjunction {C D : Type v} [Category.{h} C] [Category.{h} D]\n    [Abelian C] [Abelian D] [HasDerivedCategory.{w} C] [HasDerivedCategory.{w} D]\n    {F : C ⥤ D} {G : D ⥤ C} [F.Additive] [G.Additive]\n    [PreservesFiniteLimits F] [PreservesFiniteColimits F]\n    [PreservesFiniteLimits G] [PreservesFiniteColimits G] (a : F ⊣ G) :\n    F.mapDerivedCategory ⊣ G.mapDerivedCategory",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Definition-node ownership of the exact termwise-localized adjunction formerly cited only through lem-sf-open-tensor-normalization. Uses the existing definition verbatim; no duplicate is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-873f8def6",
+  "group": "Q22",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-873f8def6",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Fifth delivery (after 661a RETURN, bf9d RETURN, 6bd5 FIX returned at landing, de4b RETURN). Both de4b findings repaired, checked by snapshot diff and against live records: (1) no prop-compactification-coherence-detailed record delivered (the snapshot copy is identical to Q116's live record); landed Sheaf.Paper.CompactificationCoherence imported; intrinsic-coordinate helpers moved unchanged into FrobeniusSquareExchange and owned by def-weil-operation-exchange-coefficient-descent; new refinementIntrinsicOrigin (keeps O.2.L, canonical alpha) and postponed theorem intrinsicCompactificationComparison_refinement equating the intrinsic comparison at a witness with the landed refinementComparisonIsomorphism conjugated by fixedCompactModel (factors match refinementComparisonAtWitness; new stmt_dep def-sf-refinement-comparison-isomorphism is landed). (2) SystemOperationExchangeRealization.lean is byte-identical (sha256) to the 6bd5 reviewer fix: canonical systemDirectEvaluation/systemPullEvaluation.inv. Mechanical theorem stmt_dep lem-trf-integral-pullback-comparison-realization: PASS on that point, models/scalarModels are .choose of the object its conclusion constructs. Ownership 13/68/74, each declaration owned once, all three statements verbatim, sorry only in theorems, docstrings/line lengths ok, no added hypotheses, edge cases covered. nt_compile --json clean: 14.0/28.7/4.1 s."
+ }
+}

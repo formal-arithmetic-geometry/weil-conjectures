@@ -330,36 +330,24 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N7-a3d5f9ec0 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, sources and unit/chapter route. All eight steps check out, including ramified nonflat coefficients, canonical transitions, scheme pullback and uniqueness. No new nodes or target weakening. Accepted all 13 declared tool uses. review.md records the checks and one inherited missing dependency outside this delivery."
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-b63d6f8c0",
-  "group": "N1",
+  "reviewer": "NT-stage2-cc-9400de512",
+  "group": "Q121",
   "result": "pass",
-  "note": "Reviewed immutable node, dependencies, source locations, Lean declarations/docstrings, edge cases, route-pivot compliance, and report sections. Reproduced scompile.py successfully for sandbox and library; no substantive findings or fixes required."
+  "note": "Head 9400de5 = PASSed 17783e0 byte-identical in both Lean files (CartierKummerMap sha256 68a1db19…) and all node JSONs; only report (one added self-check section) and generated blueprint-index differ. 17783e0's landing return (ledger 08:48) was a missing OrdinaryFiniteP1Arrows.olean: a side/live dependency changed in live at 16:48, reached via the necessary public stmt_dep import OrdinarySupportedKummerSystem; mechanical, not a delivery fault. All 10 existing stmt_dep records equal live; item not landed (live lean null). Independent re-read: prime l, finite E, level n+1 incl. m=1, no e|m, l invertible, closed immersion with invertible ideal, i_*A_D -> published finiteTateProSheaf(1)[2], exists-unique normalized pair (SupportedKummerBoundary, unit squares, IsFiniteTateSiteComparison), same c for every r, Chern composite +c1 (sign consistent with the extension model), Cartier-preserving base change without flatness, all a<=b reductions; edge cases m=1, empty D/T, h=id, a=b, non-flat h. One sorry (theorem), no hollow defs, docstrings with source and blueprint id, lines <=100, report has Worker report + Second reading by Q121. nt_compile --json at load ~36: Reduction 24.8 s, CartierKummerMap 24.7 s, rc 0, no warnings; second run confirms OrdinaryFiniteP1Arrows now present as cached side override. M1: land with --revert-nodes lem-amb-finite-tate-site-descent (commit still rewrites N1's record). M2: re-land as is at low load; do not ask for another re-push. M3: stale report history, cosmetic."
  },
  "lean": {
   "module": "Sheaf.Paper.FiniteTateSiteDescent",
   "declaration": "AlgebraicGeometry.Scheme.finite_tate_site_descent",
   "declarations": [
-   "AlgebraicGeometry.Scheme.finiteTateCoefficient",
-   "AlgebraicGeometry.Scheme.finiteTateConstantRestriction",
-   "AlgebraicGeometry.Scheme.finiteTateProSheaf",
-   "AlgebraicGeometry.Scheme.finiteTateProGenerator",
-   "AlgebraicGeometry.Scheme.finiteTateProPowerGenerator",
-   "AlgebraicGeometry.Scheme.finiteTateEtalePowerGenerator",
-   "AlgebraicGeometry.Scheme.finiteTateEtaleRootValue",
-   "AlgebraicGeometry.Scheme.finiteTateLimitRootValue",
-   "AlgebraicGeometry.Scheme.IsFiniteTateSiteComparison",
-   "AlgebraicGeometry.Scheme.IsFiniteTateEtalePullback",
-   "AlgebraicGeometry.Scheme.IsFiniteTateProPullback",
-   "AlgebraicGeometry.Scheme.IsFiniteTateEtaleTransition",
    "AlgebraicGeometry.Scheme.finite_tate_site_descent"
   ],
-  "file": "lean/Sheaf/Paper/FiniteTateSiteDescent.lean",
-  "statement": "theorem finite_tate_site_descent : ∃ b : ∀ (T : Scheme.{u}), IsUnit (l : Γ(T, ⊤)) → ∀ (r : ℕ) (hA : ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0) (k : ℕ), (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) T).obj (finiteEtaleTateTwist T (l ^ (r + 1)) _ hA k) ≅ finiteTateProSheaf l E n T k, (∀ (T : Scheme.{u}) (hT : IsUnit (l : Γ(T, ⊤))) (r : ℕ) (hA : ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0) (k : ℕ), IsFiniteTateSiteComparison l E n T r hA k (b T hT r hA k)) ∧ (∀ (T T' : Scheme.{u}) (v : T' ⟶ T) (hT : IsUnit (l : Γ(T, ⊤))) (hT' : IsUnit (l : Γ(T', ⊤))) (r : ℕ) (hA : ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0) (k : ℕ), ∃ (c : (Etale.upperStar (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) v).obj (finiteEtaleTateTwist T (l ^ (r + 1)) _ hA k) ≅ finiteEtaleTateTwist T' (l ^ (r + 1)) _ hA k) (d : (ProEtale.upperStar (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) v).obj (finiteTateProSheaf l E n T k) ≅ finiteTateProSheaf l E n T' k), IsFiniteTateEtalePullback l E n T v r hA k c ∧ IsFiniteTateProPullback l E n T v k d ∧ (ProEtale.upperStar (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) v).mapIso (b T hT r hA k) ≪≫ d = (ProEtale.comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) v).app (finiteEtaleTateTwist T (l ^ (r + 1)) _ hA k) ≪≫ (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) T').mapIso c ≪≫ b T' hT' r hA k) ∧ (∀ (T : Scheme.{u}) (hT : IsUnit (l : Γ(T, ⊤))) (r r' : ℕ) (_h : r ≤ r') (hA : ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0) (hA' : ((l ^ (r' + 1) : ℕ) : finiteTateCoefficient l E n) = 0) (k : ℕ), ∃! t : finiteEtaleTateTwist T (l ^ (r' + 1)) _ hA' k ≅ finiteEtaleTateTwist T (l ^ (r + 1)) _ hA k, IsFiniteTateEtaleTransition l E n T r r' hA hA' k t ∧ (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) T).mapIso t ≪≫ b T hT r hA k = b T hT r' hA' k) ∧ (∀ (T : Scheme.{u}) (hT : IsUnit (l : Γ(T, ⊤))) (r : ℕ) (hA : ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0) (k : ℕ) (G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (finiteTateCoefficient l E n))) (alpha : (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) T).obj G ≅ finiteTateProSheaf l E n T k), ∃! h : finiteEtaleTateTwist T (l ^ (r + 1)) _ hA k ≅ G, (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) T).mapIso h ≪≫ alpha = b T hT r hA k)",
+  "statement": "theorem finite_tate_site_descent :\n    ∃ b : ∀ (T : Scheme.{u}), IsUnit (l : Γ(T, ⊤)) →\n      ∀ (r : ℕ) (hA : ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0) (k : ℕ),\n      (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) T).obj\n        (finiteEtaleTateTwist T (l ^ (r + 1)) _ hA k) ≅ finiteTateProSheaf l E n T k,\n    (∀ (T : Scheme.{u}) (hT : IsUnit (l : Γ(T, ⊤))) (r : ℕ)\n      (hA : ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0) (k : ℕ),\n      IsFiniteTateSiteComparison l E n T r hA k (b T hT r hA k)) ∧\n    (∀ (T T' : Scheme.{u}) (v : T' ⟶ T)\n      (hT : IsUnit (l : Γ(T, ⊤))) (hT' : IsUnit (l : Γ(T', ⊤)))\n      (r : ℕ) (hA : ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0) (k : ℕ),\n      ∃ (c : (Etale.upperStar (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) v).obj\n          (finiteEtaleTateTwist T (l ^ (r + 1)) _ hA k) ≅\n            finiteEtaleTateTwist T' (l ^ (r + 1)) _ hA k)\n        (d : (ProEtale.upperStar (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) v).obj\n          (finiteTateProSheaf l E n T k) ≅ finiteTateProSheaf l E n T' k),\n      IsFiniteTateEtalePullback l E n T v r hA k c ∧\n      IsFiniteTateProPullback l E n T v k d ∧\n      (ProEtale.upperStar (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) v).mapIso\n          (b T hT r hA k) ≪≫ d =\n        (ProEtale.comparisonUpperStarCompUpperStarIso\n          (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) v).app\n            (finiteEtaleTateTwist T (l ^ (r + 1)) _ hA k) ≪≫\n        (ProEtale.comparisonUpperStar\n          (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) T').mapIso c ≪≫ b T' hT' r hA k) ∧\n    (∀ (T : Scheme.{u}) (hT : IsUnit (l : Γ(T, ⊤))) (r r' : ℕ) (_h : r ≤ r')\n      (hA : ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0)\n      (hA' : ((l ^ (r' + 1) : ℕ) : finiteTateCoefficient l E n) = 0) (k : ℕ),\n      ∃! t : finiteEtaleTateTwist T (l ^ (r' + 1)) _ hA' k ≅\n          finiteEtaleTateTwist T (l ^ (r + 1)) _ hA k,\n        IsFiniteTateEtaleTransition l E n T r r' hA hA' k t ∧\n        (ProEtale.comparisonUpperStar\n          (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) T).mapIso t ≪≫ b T hT r hA k =\n            b T hT r' hA' k) ∧\n    (∀ (T : Scheme.{u}) (hT : IsUnit (l : Γ(T, ⊤))) (r : ℕ)\n      (hA : ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0) (k : ℕ)\n      (G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (finiteTateCoefficient l E n)))\n      (alpha : (ProEtale.comparisonUpperStar\n        (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) T).obj G ≅\n          finiteTateProSheaf l E n T k),\n      ∃! h : finiteEtaleTateTwist T (l ^ (r + 1)) _ hA k ≅ G,\n        (ProEtale.comparisonUpperStar\n          (ModuleCat.{u + 1} (finiteTateCoefficient l E n)) T).mapIso h ≪≫ alpha =\n            b T hT r hA k)",
   "branch": "newtargets-dag",
-  "by": "N1",
-  "date": "2026-10-17",
-  "existing": false
+  "by": "Q121",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "The theorem and its supporting declarations are already published in Sheaf.Paper.FiniteTateSiteDescent; this delivery imports and reuses that module."
  }
 }

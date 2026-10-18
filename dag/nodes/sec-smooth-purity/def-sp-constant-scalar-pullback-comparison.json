@@ -1,0 +1,114 @@
+{
+ "id": "def-sp-constant-scalar-pullback-comparison",
+ "kind": "definition",
+ "title": "Canonical constant-coefficient scalar extension, direct image and pullback comparison",
+ "status": "split",
+ "statement": "Let $A,B$ be arbitrary commutative rings of universe $u$, let $\\varphi:A\\to B$ be a unital ring homomorphism, and let $f:T\\to V$ be a morphism of schemes of universe $u$ [def-pc-scheme]. Use the small pro-etale sites and constant ring sheaves with their canonical constant-section inverse-image identifications [def-weil-proetale-inverse-image]. Write $D(W,A)=D(\\operatorname{Mod}(A_W))$ for the ordinary unbounded derived category. Define $S_W:D(W,A)\\to D(W,B)$ to be the universal derived extension of scalars along the actual constant-ring map $A_W\\to B_W$, using the ringed scalar-extension construction [def-weil-pbc-four-corners]. Define $Rf_*^A:D(T,A)\\to D(V,A)$ to be the ordinary uncompleted ringed derived direct image whose scalar action is through the adjoint of the canonical constant-section comparison, and write $f_A^*:D(V,A)\\to D(T,A)$ for the exact derived identified-coefficient inverse image [def-weil-pbc-proetale-operations]. Define the natural isomorphism $\\lambda_f:f_B^*S_V\\xrightarrow{\\sim}S_Tf_A^*$ to be the canonical ringed reduction/pullback isomorphism [def-weil-pbc-four-corners], specialized to the constant rings, the two actual constant-ring maps induced by $\\varphi$, and the canonical constant-section coefficient identifications. Its coefficient square is the naturality square of those identifications. Equivalently it is the inverse mate of the exact restriction/pullback comparison, normalized on K-flat representatives by the ordinary tensor balancing map. No finiteness, flatness, boundedness, constructibility, properness or Tor-amplitude hypothesis is imposed.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-four-corners",
+  "def-weil-pbc-proetale-operations"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 07A5, 07A6, 03EL and 0D6D; constant-coefficient specialization used in the coefficient/chart comparison of det-sp-reduction-exceptional; published DirectImageScalarExchange plain constructions"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "constant coefficient derived scalar extension canonical inverse image pullback comparison and direct image on proetale schemes",
+   "results": "OK 8 hits: Scheme.Modules.pullbackPushforwardAdjunction, PresheafOfModules.pullback, Spec.preimage, Scheme.Modules.pseudofunctor_mapComp_inv_τl, Scheme.Modules.instAdditivePullback, PresheafOfModules.pullbackPushforwardAdjunction, PresheafOfModules.pushforward, AlgebraicGeometry.pullbackRestrictIsoRestrict. These concern generic presheaves or structure-sheaf modules, not the constant-ring pro-etale specializations.",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib match; reuse the existing Sheaf constructors."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars for sheaves of modules over constant rings commutes with inverse image on proetale sites",
+   "results": "OK 8 hits: SheafOfModules.freeFunctorCompPullbackIso, pullback_map_ιFree_comp_pullbackObjFreeIso_hom, pullbackIso, pushforwardCongr, pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, pullbackObjFreeIso_hom_naturality, pushforwardComp_inv_app_val_app (generic sheaf-module constructions). None is this derived constant-ring pro-etale comparison.",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib notion."
+  },
+  {
+   "tool": "loogle",
+   "query": "directImageScalarPullbackIso, directImageConstantPush, directImageScalarExtension",
+   "results": "OK 0 hit(s) | loogle: unknown identifier 'directImageScalarPullbackIso'",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "msearch.py grep directImageScalarPullbackIso|directImageConstantPush|directImageScalarExtension",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n directImageConstantPush|directImageScalarPullbackIso|directImageScalarExtension /home/ubuntu/weil-src-slopmaster2/WeilConjectures /home/ubuntu/weil-newtargets-shared/lean/Sheaf/SecSmoothPurity/DirectImageScalarExchange.lean; rg same names dag/nodes; tools/blueprint_refs.py search directImageScalarPullbackIso; tools/blueprint_refs.py search scalar inverse image",
+   "results": "No upstream old-source declaration. The published Sheaf module defines directImageScalarExtension at line 52, directImageConstantPush at line 60, and directImageScalarPullbackIso at line 75. Exact-name DAG references are in the exchange theorem ownership record and downstream reports, with no definition node for these three plain constructions. Both blueprint searches return 0 nodes. A definition-node statement search finds no existing owner.",
+   "date": "2026-10-18",
+   "verdict": "Use existing:true on the published declarations; separate their definition ownership from the unused exchange theorem, as return 1f522a9a7776 requests."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "det-sp-reduction-exceptional",
+  "date": "2026-10-18",
+  "group": "NW"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "constant-coefficient pullback/scalar comparison and direct image in the exceptional counit and coordinate-chart constructions",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.DirectImageScalarExchange",
+  "declaration": "AlgebraicGeometry.ProEtale.directImageScalarPullbackIso",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.directImageConstantPush",
+   "AlgebraicGeometry.ProEtale.directImageScalarPullbackIso",
+   "AlgebraicGeometry.ProEtale.directImageScalarExtension"
+  ],
+  "statement": "def directImageScalarPullbackIso {A B : Type u} [CommRing A] [CommRing B]\n    (φ : A →+* B) {T V : Scheme.{u}} (f : T ⟶ V) :\n    directImageScalarExtension φ V ⋙ Scheme.proEtaleConstantRingDerivedPullback B f ≅\n      Scheme.proEtaleConstantRingDerivedPullback A f ⋙ directImageScalarExtension φ T",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Definition ownership for exactly the three plain constant-coefficient constructors requested by return 1f522a9a7776. Scalar extension and direct image are abbreviations; the pullback isomorphism is a direct specialization of Scheme.proEtaleReductionPullbackIso from def-weil-pbc-four-corners. No use of theorem directImageScalarExchange, no Finite hypotheses, and no duplicate module."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0a747bdc9",
+  "group": "NW",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0a747bdc9",
+  "group": "NW",
+  "result": "pass",
+  "note": "Re-delivery after lead return of PASSed head 249843638e94 (review_split route lock: def-sp-etale-compact-support-normalization source cited SGA 4). diff -rq vs that snapshot: only that node's source.place (now Stacks 03S3/03S5/03S6/0F4L with roles, labels verified in etale-cohomology.tex) and the report changed; the Lean module is byte-identical to the PASSed module, and all dependency records are identical to live. The route-lock regex finds no hit on the item or its 4 new def nodes. Statement re-read clause by clause (smooth of rel. dim d, fixed compactification, finite l-power A,B of Type u, any phi, Dctf, actual reductionDirectImageComparison, exists-unique natural c with counit identity, isIso, chart equation pinned by rightAdjointUniq and origin equation). Edge cases d=0, zero ring, non-flat phi, empty schemes are OK. Mechanical finding: tensorIso, openSquarePullbackModel, sfRealizationRestriction and scalarPullbackIso are each .choose of their theorem's own existsUnique, so the theorem stmt_deps are genuine; PASS on that point. nt_compile --json: 18.1 s, rc 0, no error or non-sorry warning. 5 sorry, all in theorems; no line over 100 characters; docstrings carry the 13 steps. Advisory: the published EtaleCompactSupportNormalization.lean docstrings still cite SGA 4; the module of sfRealizationRestriction (Paper.SfCompactSupportRestrictionOfScalars) is no longer named by the live lem-sf-compact-support-restriction-of-scalars record."
+ }
+}

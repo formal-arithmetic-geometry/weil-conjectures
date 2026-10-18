@@ -34,7 +34,9 @@
   "def-weil-sheaf-of-modules-category",
   "sk-def-sp-tate-twist",
   "sk-lem-geo-cartier",
-  "sk-def-kummer"
+  "sk-def-kummer",
+  "def-sfb-cartier-reduction-data",
+  "def-sp-cartier-pole-boundary"
  ],
  "proof": [
   {
@@ -404,5 +406,59 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-da6bf1dbe",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Re-push of PASSed e66b6ec46e79 per the 97e3a8deaae4 RETURN: diff -rq shows the Lean module and all node records byte-identical to e66b6; only the report and generated blueprint-index.tsv differ. The spurious lem-sp-cartier-reduction-site-comparison stmt_dep and the Q54 module change are gone; item not in live, so not a credit grab. Independent reading: hypotheses exact (Fact ℓ.Prime, IsUnit ℓ on Y, arbitrary Scheme.{u}, size-only instances); clause 1 positive roof −(ν^* cartierPoleBoundary); clause 2 left-derived strict-system T plus completion reflector (complete outputs, universal unit); clause 3 a/s/t normalized, roots tower ζ↦ζ^ℓ, b existential as in the node; clause 4 each level equals cartierResidueReducedPro. Edge cases OK; lean.statement verbatim; stmt_deps = live 12 + 2 definition nodes (sk-lem-geo-cartier is base and cited by the node text); six sorry theorems; docstrings OK. nt_compile --json clean 35–41 s at load ~50 (delivery 40.7/41.3 s). Speed-up attempts (genInjectivity off, linters off) gave no gain back to back, so no FIX. Maintainer note: e66b6's landing return was a load timeout of this module; retry landing at lower load."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DiagonalTowerSystem",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_diagonalTowerSystem",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalAb",
+   "AlgebraicGeometry.ProEtale.DiagonalMod",
+   "AlgebraicGeometry.ProEtale.DiagonalSystems",
+   "AlgebraicGeometry.ProEtale.diagonalModuleSheafAbelian",
+   "AlgebraicGeometry.ProEtale.diagonalAbSheafAbelian",
+   "AlgebraicGeometry.ProEtale.diagonalScalarExtension",
+   "AlgebraicGeometry.ProEtale.diagonalForget",
+   "AlgebraicGeometry.ProEtale.diagonalScalarAdjunction",
+   "AlgebraicGeometry.ProEtale.diagonalForget_exact",
+   "AlgebraicGeometry.ProEtale.diagonalForgetLimits",
+   "AlgebraicGeometry.ProEtale.diagonalForgetColimits",
+   "AlgebraicGeometry.ProEtale.diagonalForget_additive",
+   "AlgebraicGeometry.ProEtale.DiagonalReductionPresentation",
+   "AlgebraicGeometry.ProEtale.DiagonalDerivedReduction",
+   "AlgebraicGeometry.ProEtale.diagonalDerivedSingleCounit",
+   "AlgebraicGeometry.ProEtale.diagonalResidue",
+   "AlgebraicGeometry.ProEtale.diagonalResidueProjection",
+   "AlgebraicGeometry.ProEtale.diagonalFiniteToPadic",
+   "AlgebraicGeometry.ProEtale.diagonalFiniteToPadic_exact",
+   "AlgebraicGeometry.ProEtale.diagonalFiniteToPadicLimits",
+   "AlgebraicGeometry.ProEtale.diagonalFiniteToPadicColimits",
+   "AlgebraicGeometry.ProEtale.diagonalFiniteToPadicAdditive",
+   "AlgebraicGeometry.ProEtale.diagonalSurface",
+   "AlgebraicGeometry.ProEtale.diagonalImmersion",
+   "AlgebraicGeometry.ProEtale.diagonalImmersion_cartier",
+   "AlgebraicGeometry.ProEtale.diagonalSurface_power_unit",
+   "AlgebraicGeometry.ProEtale.diagonalIntegralSource",
+   "AlgebraicGeometry.ProEtale.diagonalComparisonUnits",
+   "AlgebraicGeometry.ProEtale.diagonalIntegralBoundary",
+   "AlgebraicGeometry.ProEtale.DiagonalCompletionSpec",
+   "AlgebraicGeometry.ProEtale.DiagonalSourceNormalization",
+   "AlgebraicGeometry.ProEtale.DiagonalCycleSystemSpec",
+   "AlgebraicGeometry.ProEtale.exists_diagonalTowerSystem"
+  ],
+  "file": "lean/Sheaf/Paper/DiagonalTowerSystem.lean",
+  "statement": "theorem exists_diagonalTowerSystem (ℓ : ℕ) [Fact ℓ.Prime] (Y : Scheme.{u}) (hY : IsUnit (ℓ : Γ(Y, ⊤))) [HasDerivedCategory.{u + 1} (DiagonalAb (diagonalSurface Y))] [HasDerivedCategory.{u + 1} (DiagonalMod ℓ (diagonalSurface Y))] [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ (diagonalSurface Y))] [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ DiagonalAb (diagonalSurface Y))] [HasExt.{u + 1} (DiagonalSystems ℓ (diagonalSurface Y))] : ∃ D : DiagonalDerivedReduction ℓ (diagonalScalarExtension ℓ (diagonalSurface Y)), DiagonalCompletionSpec ℓ (diagonalSurface Y) D ∧ DiagonalCycleSystemSpec ℓ Y hY D",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Strict inverse systems of modules over the constant Z_l sheaf, presented by fixed-scalar module-valued sheaves. Ordinary reduction is fixed by cokernel universal properties and quotient transitions; its everywhere-defined left derived pair retains the actual strict system category. Comparison units, the positive roof sign, integral derived completion, and the full normalized finite Cartier arrows are explicit. Repair R2: additionally asserts intrinsic derived ell-completeness (right orthogonality to ell-invertible complexes) and a natural completion unit with its universal Hom property. Repair R1: the published Cartier definitions are attributed to def-sfb-cartier-reduction-data, rather than citing the unused comparison theorem. Repair F1/R4 (consumer specialization; no dependency-record repair): def-weil-sheaf-of-modules-category retains NH's ringedSiteModules and its owning file. DiagonalMod uses Mathlib Sheaf J (ModuleCat (ULift Z_l)), the fixed-scalar presentation of modules over the constant ring sheaf: constant scalar actions extend uniquely by local gluing, and conversely the ring-sheaf action restricts to constant sections; these inverse presentations have the same linear morphisms, sectionwise kernels and sheafified cokernels. def-pur-sheaf-tensor-product retains Q46's CochainTensorUniverses record: diagonalScalarExtension implements the same balanced tensor by ModuleCat.extendScalars and sheafification, with its insertion-of-one adjunction; DiagonalReductionPresentation specifies tensor with the finite quotient by cokernels and quotient transitions. sk-def-sp-tate-twist retains N4's ProEtaleTateTwistsOfUniverses record: the finite first twist used here is the actual proEtaleRootsOfUnityTower with power-ell transitions and geoCartierLine at each finite residue ring, with cartierProRootMap fixing its tensor generator and scalar action. The nonfinite condensed-coefficient construction is not substituted for the discrete constant Z_l tower. All three dependency files are restored byte-identically to newtargets-dag, preserving their owning modules, authors and original notes. Compilation repair: diagonalModuleSheafAbelian and diagonalAbSheafAbelian name the actual existing Mathlib abelian structures once, via inferInstance, sharing their sheafification witnesses throughout subsequent types. They contain real data, introduce no alternative category or additional hypotheses, and leave every original declaration and all six sorry proofs unchanged. This avoids repeated nested-proof abstraction and expensive kernel comparison of freshly synthesized abelian structures."
  }
 }

@@ -18,7 +18,13 @@
   "def-weil-proper-morphism",
   "def-weil-closed-immersion",
   "sk-def-sfb-module-pushforward-pullback",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "new-proetale-derived-module-pullback-monoidal",
+  "lem-weil-pbc-profinite-point-pullback",
+  "def-sfb-module-projection-section-arrows",
+  "def-sfb-module-projection-section-composites",
+  "def-sfb-module-section-projection-arrow",
+  "def-sfb-module-projection-section-inverse"
  ],
  "proof": [
   {
@@ -146,5 +152,28 @@
   "group": "Q94",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q94-2a664e3fb (reviewer sub-agent of L); spot-checked: I read the item, its one step, unit sk-thm-int-restriction and the blueprint sk-thm-int-restriction-line.proof.md clause (1). Its citer det-thm-int-restriction-line uses it with r=p_i and i=Delta. I read every cited statement in full, including the final section clause of lem-sfb-ringed-projection-tensor-composition. The math is correct. Up to tensor symmetry, the two pi conventions agree. The second coherence identity with f=i, g=r and pi_id=1 gives Rr_*(a_M) o pi_{r,M,Ri_*R_X}=1_M, modulo the unitor M (x) R_X = M, which is now explicit. The inverted clause follows by inverting both sides. Only ri=1 is used; properness, the closed-immersion property and M in L(X) are not needed. Small cases r=i=1, M=0, and X=Spec k with V=P^1_k, its 0-section and M=R_X all check. One fault (C4/E5): the step moved the ringed-topos lemma over to module objects in D(Mod_{R_Z}) citing only definition nodes, which do not state that comparison. FIX: the step now cites lem-pd-module-ringed-topos-derived-comparison (reviewed; it identifies the derived categories, tensors, Lf*/Rf_*, the adjunction with unit and counit, pullback composition and the tensor comparison, as already done in det-prop-p1-adjunction-rational-triangle). It also cites lem-weil-pbc-ringed-topoi-derived-pushforward-composition, since the direct-image composition is the mate of the pullback one. uses/proof_deps were updated and split_report.tool_uses declares both nodes. I accept all tool uses; the projection-coherence lemma is also within route, through sk-prop-p1-adjunction-rational. There are no new nodes, no duplicates, no cycle (reachability checked) and no SGA. The statement is unchanged. Details are in review.md; the corrected item is under fixes/dag/nodes/sec-six-functors-basics/.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4a7ecfab2",
+  "group": "Q15",
+  "result": "fix",
+  "note": "Lean and node records are byte-identical to the PASSed heads 227da443/ad633e03; only the report and blueprint-index changed. Substance re-read: all hypotheses (ℓ prime, E finite/O_E, char p≠ℓ, sep. finite type over k, IsProper r, IsClosedImmersion i, i≫r=𝟙, M ∈ localizingClosure(Dbc)) and both clauses (forward=𝟙; backward=𝟙 under IsIso π_r, a_M) match the node; projection is the homEquiv of the published leftDerivedUpperStarTensor ≫ 1⊗counit; pullbackSection uses canonical isos and pushforwardSection is its conjugate mate; edge cases r=i=id, M=0, empty scheme and V=X pass; universes unchanged; no hollow defs; the only sorry is the main theorem; statements verbatim; the 13 existing dep records equal live. Theorem stmt_deps: PASS on this point (theorem-constructed objects). The ad633 landing failed at Sandbox4 on the missing AlgebraicallyClosedCoefficients.olean; the unused `public import Sheaf.Paper.CartesianCoefficients` is the only route to it and to DerivedPullbackTensorHom. FIX: fixes/ProjectionSectionNormalization.lean drops that import (H9), with no record change. nt_compile --json: delivery rc=0 clean (32.2/20.6/17.4/23.9/15.6 s); with the fix rc=0 clean (28.5/18.9/14.0/21.7/13.7 s), and the problem modules are no longer built."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProjectionSectionNormalization",
+  "declaration": "AlgebraicGeometry.ProEtale.projection_section_normalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ProjectionSection.Normalized",
+   "AlgebraicGeometry.ProEtale.projection_section_normalization"
+  ],
+  "file": "lean/Sheaf/Paper/ProjectionSectionNormalization.lean",
+  "statement": "theorem projection_section_normalization (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (_hpℓ : p ≠ ℓ) (X V : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType V.hom] [QuasiCompact V.hom] [IsSeparated V.hom] (r : V ⟶ X) (i : X ⟶ V) [IsProper r.left] [IsClosedImmersion i.left] (h : i.left ≫ r.left = 𝟙 X.left) (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1}) (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X.left))) (_hM : CategoryTheory.localizingClosure (constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.1) X.left) M) : ProjectionSection.Normalized (Profinite.padicIntegersRingObj ℓ E.1) r.left i.left h M",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-4a7ecfab2"
  }
 }

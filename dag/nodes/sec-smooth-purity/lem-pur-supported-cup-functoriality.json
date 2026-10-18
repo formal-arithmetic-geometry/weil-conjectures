@@ -428,6 +428,10 @@
    "WeilConjectures.PurityFiniteSetting.FunctorialCupDerived",
    "WeilConjectures.PurityFiniteSetting.functorialCupConstant",
    "WeilConjectures.PurityFiniteSetting.functorialCupComparisonFunctor",
+   "WeilConjectures.PurityFiniteSetting.functorialCupComparisonFunctor_additive",
+   "WeilConjectures.PurityFiniteSetting.functorialCupComparisonFunctor_limits",
+   "WeilConjectures.PurityFiniteSetting.functorialCupComparisonFunctor_colimits",
+   "WeilConjectures.PurityFiniteSetting.functorialCupComparisonFunctor_monoidal",
    "WeilConjectures.PurityFiniteSetting.functorialCupTwist",
    "WeilConjectures.PurityFiniteSetting.functorialCupSingle",
    "WeilConjectures.PurityFiniteSetting.functorialCupSource",
@@ -463,6 +467,8 @@
    "WeilConjectures.PurityFiniteSetting.functorialCupChangeSupport",
    "WeilConjectures.PurityFiniteSetting.functorialCupReindex",
    "WeilConjectures.PurityFiniteSetting.functorialCupExtHom",
+   "WeilConjectures.PurityFiniteSetting.functorialCupKummerExt",
+   "WeilConjectures.PurityFiniteSetting.functorialCupFullSupportIso",
    "WeilConjectures.PurityFiniteSetting.functorialCupKummer",
    "WeilConjectures.PurityFiniteSetting.functorialCupLinear",
    "WeilConjectures.PurityFiniteSetting.FunctorialCupAlgebraLaws",
@@ -481,28 +487,34 @@
    "WeilConjectures.PurityFiniteSetting.functorialCupOpenExchange_existsUnique",
    "WeilConjectures.PurityFiniteSetting.functorialCupOpenPullback",
    "WeilConjectures.PurityFiniteSetting.FunctorialCupLocalizationLaws",
+   "WeilConjectures.PurityFiniteSetting.functorialCupExactHom",
    "WeilConjectures.PurityFiniteSetting.functorialCupComparisonSource_existsUnique",
+   "WeilConjectures.PurityFiniteSetting.functorialCupComparisonTwist_eq",
+   "WeilConjectures.PurityFiniteSetting.functorialCupComparisonConstant_eq",
    "WeilConjectures.PurityFiniteSetting.functorialCupCompare",
    "WeilConjectures.PurityFiniteSetting.functorialCupOrdinaryCompare",
    "WeilConjectures.PurityFiniteSetting.functorialCupComparisonOpen_existsUnique",
    "WeilConjectures.PurityFiniteSetting.functorialCupOpenCompare",
    "WeilConjectures.PurityFiniteSetting.FunctorialCupComparisonLaws",
-   "WeilConjectures.PurityFiniteSetting.supportedCupFunctoriality"
+   "WeilConjectures.PurityFiniteSetting.supportedCupFunctoriality",
+   "WeilConjectures.PurityFiniteSetting.functorialCupFrameTwistEtale_eq",
+   "WeilConjectures.PurityFiniteSetting.functorialCupFrameTwist_eq",
+   "WeilConjectures.PurityFiniteSetting.functorialCupExtTarget"
   ],
   "file": "lean/Sheaf/Paper/SupportedCupFunctoriality.lean",
   "statement": "theorem supportedCupFunctoriality (P : PurityFiniteSetting.{u}) : (∀ pro : Bool, P.FunctorialCupAlgebraLaws pro ∧ P.FunctorialCupLocalizationLaws pro) ∧ P.FunctorialCupComparisonLaws",
   "branch": "newtargets-dag",
-  "by": "Q67",
+  "by": "NE",
   "date": "2026-10-18",
   "existing": false,
-  "note": "Boolean false/true selects the actual small etale/pro-etale sites. Pullback uses uniquely section-normalized ordinary coefficient exchange, exact inverse image and normalized signed finite twists at ell^n. Cup is the prescribed tensor-morphism composite. Localization uses the actual source short exact sequence and its singleδ. All integer indices and arbitrary k-schemes/closed supports are retained."
+  "note": "The recorded Q67 module timed out during this item’s required file-only compile. This §1(B) repair uses the reviewed interface-preserving source: it removes redundant imports, makes the comparison functor explicit with its existing exact and monoidal instances, and records the finite-twist/Ext transport helpers. The public declarations used here retain their canonical signatures and constructions."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-ac41b5780",
-  "group": "Q67",
+  "reviewer": "NT-stage2-cc-2bfad5113",
+  "group": "NE",
   "result": "pass",
-  "note": "Statement, dependencies, canonical constructions, route, edge cases, docstrings, report sections, and per-file compilation verified; no findings."
+  "note": "Re-push of the PASSed 4c33fc20260f: both Lean files byte-identical (sha 0fcce5a6, 47f44c4a), all node records identical; only the report (dry-run validation section) and blueprint-index differ. Landing returned 4c33 only because the library pass of SupportedCupFunctoriality hit the 60 s limit; the preliminary (37.2 s) and sandbox passes were clean, so the cause was load. Rechecked against live: the §1(C) old_statement/old_stmt_deps/old_proof/old_proof_deps equal the live node; the 6 citers equal the live direct citers; the cup-functoriality dep record is still Q67's 67 decls, kept as a superset of 79. Local clauses keep -frameBoundary/-frameBoundaryProduct, Chern clause positive. Theorem stmt_dep finding: PASS on point, since functorialCupPullback/ChangeSupport/Compare rest on .choose of that module's existsUnique theorems, and supported-hom is cited for its Hom model only. nt_compile --json at load ~60: pair clean, 35.9 s and 18.5 s; with the live importer ClosedSupportedCupVanishing, 27.6 s and 8.3 s. The profile shows kernel checks dominate (functorialCupKummerExt 13 s, FunctorialCupAlgebraLaws 17 s, ComparisonLaws 8 s); genInjectivity/linters off gave no gain back to back (32.1 vs 31.6 s), so no FIX. Maintainer: retry landing at lower load; whichever of this delivery and Q10's unlanded cup refactor (aceb9bacc30d) lands second must be rebased."
  }
 }

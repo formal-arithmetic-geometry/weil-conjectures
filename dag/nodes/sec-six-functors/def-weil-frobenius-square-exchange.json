@@ -52,7 +52,15 @@
   "lem-sf-integral-direct-image-constructible",
   "lem-weil-isomorphism-derived-pullback",
   "lem-sf-integral-compact-support-constructible",
-  "lem-weil-pbc-comparison-pullback"
+  "lem-weil-pbc-comparison-pullback",
+  "def-weil-system-operation-exchange-realization",
+  "def-trf-integral-comparison-sequence-systems",
+  "lem-trf-integral-pullback-comparison-realization",
+  "def-zl-weil-compact-support-cohomology",
+  "def-zl-weil-ind-sheaf-category",
+  "def-weil-weil-sheaf-complex",
+  "def-weil-exact-derived-adjunction",
+  "def-weil-operation-exchange-coefficient-descent"
  ],
  "proof": [],
  "proof_deps": [],
@@ -151,5 +159,39 @@
   "group": "Q14",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q14-feb5ffa4e (reviewer sub-agent of L); spot-checked: Read the complete item, report, all 35 dependency statements, required DAG/unit/chapter documents, master source definitions, Deligne context, and recorded Mathlib searches. Verified finite mate orientation, Frobenius square, varying-ring integral system and functorial limit construction, rational/common-stage coefficient passage, compactification composite, base-change morphisms, etale-origin comparison, naturality, route, and edge cases. No new nodes, repairs, or unread material."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-873f8def6",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Fifth delivery (after 661a RETURN, bf9d RETURN, 6bd5 FIX returned at landing, de4b RETURN). Both de4b findings repaired, checked by snapshot diff and against live records: (1) no prop-compactification-coherence-detailed record delivered (the snapshot copy is identical to Q116's live record); landed Sheaf.Paper.CompactificationCoherence imported; intrinsic-coordinate helpers moved unchanged into FrobeniusSquareExchange and owned by def-weil-operation-exchange-coefficient-descent; new refinementIntrinsicOrigin (keeps O.2.L, canonical alpha) and postponed theorem intrinsicCompactificationComparison_refinement equating the intrinsic comparison at a witness with the landed refinementComparisonIsomorphism conjugated by fixedCompactModel (factors match refinementComparisonAtWitness; new stmt_dep def-sf-refinement-comparison-isomorphism is landed). (2) SystemOperationExchangeRealization.lean is byte-identical (sha256) to the 6bd5 reviewer fix: canonical systemDirectEvaluation/systemPullEvaluation.inv. Mechanical theorem stmt_dep lem-trf-integral-pullback-comparison-realization: PASS on that point, models/scalarModels are .choose of the object its conclusion constructs. Ownership 13/68/74, each declaration owned once, all three statements verbatim, sorry only in theorems, docstrings/line lengths ok, no added hypotheses, edge cases covered. nt_compile --json clean: 14.0/28.7/4.1 s."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FrobeniusGeometricExchange",
+  "declaration": "WeilConjectures.FrobeniusExchange.frobeniusCommonStage",
+  "declarations": [
+   "WeilConjectures.FrobeniusExchange.geometricCompactification_properties",
+   "WeilConjectures.FrobeniusExchange.geometricCompactification",
+   "WeilConjectures.FrobeniusExchange.frobeniusCompactFinite",
+   "WeilConjectures.FrobeniusExchange.fiber_finiteType",
+   "WeilConjectures.FrobeniusExchange.fiberMap_properties",
+   "WeilConjectures.FrobeniusExchange.fiberLocallyFiniteType",
+   "WeilConjectures.FrobeniusExchange.fiberQuasiCompact",
+   "WeilConjectures.FrobeniusExchange.frobeniusDirectIntegral",
+   "WeilConjectures.FrobeniusExchange.frobeniusCompactIntegral",
+   "WeilConjectures.FrobeniusExchange.frobeniusDirectModel",
+   "WeilConjectures.FrobeniusExchange.frobeniusCompactModel",
+   "WeilConjectures.FrobeniusExchange.frobeniusRational",
+   "WeilConjectures.FrobeniusExchange.frobeniusCommonStage"
+  ],
+  "file": "lean/Sheaf/Paper/FrobeniusGeometricExchange.lean",
+  "statement": "def frobeniusCommonStage (M : SupportModel (fiberMap D f₀) (galois D X₀) (galois D Y₀)) (Ω : Type v) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω]",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Four coefficient stages are constructed, with separate direct and retained compactification recipes. The system exchange is formed before evaluation; integral alpha-L(e)-beta, literal Hom localization and canonical common-stage descent supply the later stages. The finite exchange is ambient. Geometry uses the actual coefficient Frobenius and does not impose k-linearity. The chosen-compactification transport uses the canonical comparison in the repaired coherence interface."
  }
 }

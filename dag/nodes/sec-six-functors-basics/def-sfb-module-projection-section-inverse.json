@@ -1,0 +1,107 @@
+{
+ "id": "def-sfb-module-projection-section-inverse",
+ "kind": "definition",
+ "title": "Conditional inverse section projection composite",
+ "status": "split",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring, let $r:V\\to X$ and $i:X\\to V$ satisfy $i\\gg r=1_X$, and let $M$ be an object of the unbounded derived category of internal $\\Lambda_X$-modules. Use the projection map $\\pi$ and canonical section comparisons of [def-sfb-module-projection-section-arrows], and the section arrow $a_M$ of [def-sfb-module-section-projection-arrow]. Write $U=\\Lambda_X$ for the derived tensor unit and $s_M:Rr_*Ri_*M\\cong M$ for the direct-image section comparison. Whenever $\\pi_{r,M,Ri_*U}$ and $a_M$ are isomorphisms, define the backward endomorphism by\n$$M\\xrightarrow{s_M^{-1}}Rr_*Ri_*M\\xrightarrow{Rr_*(a_M^{-1})}Rr_*(Lr^*M\\otimes^{\\mathbf L}Ri_*U)\\xrightarrow{\\pi_{r,M,Ri_*U}^{-1}}M\\otimes^{\\mathbf L}Rr_*Ri_*U\\xrightarrow{1\\otimes s_U}M\\otimes^{\\mathbf L}U\\xrightarrow{\\rho_M}M.$$\nThis is the reversed inverse path of the forward endomorphism [def-sfb-module-projection-section-composites]. This definition asserts neither identity nor invertibility.",
+ "stmt_deps": [
+  "def-sfb-module-projection-section-arrows",
+  "def-sfb-module-section-projection-arrow",
+  "def-sfb-module-projection-section-composites"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-int-restriction/sk-thm-int-restriction-line.proof.md",
+  "place": "(1), diagonal projection identification and the cancellations on p_i Delta = id; canonical projection mate in Stacks sites-cohomology.tex, equation-projection-formula-map (Tag 0B56)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical derived projection formula map defined by adjunction and normalized along a retraction and its section",
+   "results": "OK 8 hit(s): retractionOfSectionOfKerSqZero; CategoryTheory.Adjunction.derivedη; CategoryTheory.Adjunction.derivedε; CategoryTheory.Adjunction.derivedε.congr_simp; retractionOfSectionOfKerSqZero_tmul_D; CategoryTheory.Retract.i; CategoryTheory.Retract.r; CategoryTheory.Retract.map_i.",
+   "date": "2026-10-18",
+   "verdict": "Generic derived-adjunction transformations and ordinary retracts are not the canonical internal-module projection/section maps or their unit-normalized composites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived module projection formula morphism defined as adjoint of tensor pullback comparison followed by counit, section retraction composites",
+   "results": "OK 8 hit(s): ModuleCat.RestrictionCoextensionAdj.counit', unit', counit'_app, unit'_app; ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, map, counit; CategoryTheory.IsGrothendieckAbelian.tensorObj.",
+   "date": "2026-10-18",
+   "verdict": "No canonical projection or section-composite definitions for the existing pro-etale derived internal modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.conjugateIsoEquiv",
+   "results": "OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "Reuse these generic APIs to define the missing canonical arrows; no existing specialized definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*formula|projection.*composition|counit.*tensor (Mathlib CategoryTheory); def-sfb-module-projection-section|ProjectionSection|projection_section (DAG, lean/Sheaf, upstream WeilConjectures); blueprint_refs.py search module projection section",
+   "results": "Mathlib grep: 17 generic monoidal/adjunction hits, no derived internal-module specialization. Blueprint search: 0 blueprint nodes match. Project/DAG matches are affine rectangle projection-sections tensor calculations and their citers, not derived projection mates or retraction composites.",
+   "date": "2026-10-18",
+   "verdict": "The ringed-topos coherence theorem is a proof dependency, not a definition of these maps on the actual internal-module derived functors."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-projection-section-normalization",
+  "date": "2026-10-18",
+  "group": "Q15"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-int-restriction-line",
+   "place": "(1), diagonal projection identification and the cancellations on p_i Delta = id",
+   "via": [
+    "lem-sfb-projection-section-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-int-restriction",
+ "lean": {
+  "module": "Sheaf.Paper.ModuleProjectionSectionInverse",
+  "declaration": "AlgebraicGeometry.ProEtale.ProjectionSection.backward",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.ProjectionSection.backward"
+  ],
+  "file": "lean/Sheaf/Paper/ModuleProjectionSectionInverse.lean",
+  "statement": "def backward {X V : Scheme.{u}} (r : V ⟶ X) (i : X ⟶ V) (h : i ≫ r = 𝟙 X) (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) [IsIso (projection Λ r M ((moduleDerivedPushforward Λ i).obj (𝟙_ _)))] [IsIso (sectionArrow Λ r i h M)] : M ⟶ M",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Real reversed inverse composite, defined only under invertibility of the two specified projection factors. No normalization or invertibility theorem is used."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4a7ecfab2",
+  "group": "Q15",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4a7ecfab2",
+  "group": "Q15",
+  "result": "fix",
+  "note": "Lean and node records are byte-identical to the PASSed heads 227da443/ad633e03; only the report and blueprint-index changed. Substance re-read: all hypotheses (ℓ prime, E finite/O_E, char p≠ℓ, sep. finite type over k, IsProper r, IsClosedImmersion i, i≫r=𝟙, M ∈ localizingClosure(Dbc)) and both clauses (forward=𝟙; backward=𝟙 under IsIso π_r, a_M) match the node; projection is the homEquiv of the published leftDerivedUpperStarTensor ≫ 1⊗counit; pullbackSection uses canonical isos and pushforwardSection is its conjugate mate; edge cases r=i=id, M=0, empty scheme and V=X pass; universes unchanged; no hollow defs; the only sorry is the main theorem; statements verbatim; the 13 existing dep records equal live. Theorem stmt_deps: PASS on this point (theorem-constructed objects). The ad633 landing failed at Sandbox4 on the missing AlgebraicallyClosedCoefficients.olean; the unused `public import Sheaf.Paper.CartesianCoefficients` is the only route to it and to DerivedPullbackTensorHom. FIX: fixes/ProjectionSectionNormalization.lean drops that import (H9), with no record change. nt_compile --json: delivery rc=0 clean (32.2/20.6/17.4/23.9/15.6 s); with the fix rc=0 clean (28.5/18.9/14.0/21.7/13.7 s), and the problem modules are no longer built."
+ }
+}

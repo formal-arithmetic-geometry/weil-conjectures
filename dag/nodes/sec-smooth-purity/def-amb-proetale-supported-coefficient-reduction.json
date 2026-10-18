@@ -1,0 +1,111 @@
+{
+ "id": "def-amb-proetale-supported-coefficient-reduction",
+ "kind": "definition",
+ "title": "Coefficient reduction of supported pro-etale Tate arrows",
+ "status": "split",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ and $m\\geq1$. Put $A_m=\\mathcal O_E/\\varpi_E^m$ and use the original finite pro-etale Tate sheaf $A_{m,T}(1)$ of [def-coefficient-twists-detailed], in the fixed-scalar presentation of [def-amb-finite-tate-site-comparison-data]. Use the ordinary unbounded pro-etale derived category [def-weil-pbc-proetale-modules], the constant module [def-pur-proetale-constant-module-unit], and direct image [def-weil-proetale-inverse-image]. Define a supported arrow family to assign, for every such $m$, scheme $T$ with $\\ell$ invertible and effective Cartier immersion $i:D\\hookrightarrow T$ [def-pc-divisor-line-bundle], a class $c_{m,i}\\in\\operatorname{Ext}^2(i_*A_{m,D},A_{m,T}(1))$. For every $b\\geq a\\geq1$, let $\\phi:A_b\\to A_a$ be the actual quotient factor of powers of the uniformizer ideal. Define coefficient-reduction compatibility to mean that there are maps $\\eta:i_*A_{b,D}\\to\\operatorname{Res}_\\phi(i_*A_{a,D})$ and $\\theta:A_{b,T}(1)\\to\\operatorname{Res}_\\phi(A_{a,T}(1))$. On every pro-etale object they send a constant supported section $z$ to $\\phi(z)$ and a pure root-limit tensor $x\\otimes z$ to $x\\otimes\\phi(z)$. Both maps are derived scalar-extension units: for either map $F\\to\\operatorname{Res}_\\phi G$ and every unbounded $K\\in D(T,A_a)$, precomposition with the map induces a bijection $\\operatorname{Hom}(G,K)\\to\\operatorname{Hom}(F,R\\operatorname{Res}_\\phi K)$, using the canonical degree-zero/exact-functor comparison. Finally the Ext equation is $\\eta\\,\\operatorname{Res}_\\phi(c_{a,i})=c_{b,i}\\,\\theta$. This is a compatibility predicate and asserts neither existence of a family nor flatness of the quotient coefficient map. The derived tensor convention is [def-kun-derived-tensor].",
+ "stmt_deps": [
+  "def-coefficient-twists-detailed",
+  "def-amb-finite-tate-site-comparison-data",
+  "def-weil-pbc-proetale-modules",
+  "def-pur-proetale-constant-module-unit",
+  "def-weil-proetale-inverse-image",
+  "def-pc-divisor-line-bundle",
+  "def-kun-derived-tensor"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+  "place": "final paragraph: compatibility of the construction with extension of coefficients and finite reductions"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A system of supported pro etale finite Tate degree two arrows compatible with derived coefficient extension along quotient reductions",
+   "results": "8 hits: RingHom.Etale; Algebra.FormallyEtale.iff_comp_bijective; Algebra.Etale.formallyEtale; Algebra.Etale.exists_subalgebra_fg; AlgebraicGeometry.Scheme.Etale; Algebra.IsEtaleAt.comp; AlgebraicGeometry.IsEtale; KaehlerDifferential.isBaseChange_of_formallyEtale. No supported pro-etale coefficient predicate.",
+   "date": "2026-10-17",
+   "verdict": "No existing pro-etale supported scalar-compatibility predicate; reuse the existing Tate line and generators."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\"",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"LinearMap.restrictScalars_id\", \"module\": \"Mathlib.Algebra.Module.LinearMap.Defs\", \"type\": \" (R : Type u_1) {S : Type u_5} {M : Type u_8} [Semiring R] [Semiring S] [AddCommMonoid M] [Module R M] [Module S M] [LinearMap.CompatibleSMul M M R S] : ↑R LinearMap.id = LinearMap.id\", \"doc\": \"\"}\n  {\"name\": \"LinearMap.restrictScalars\", \"module\": \"Mathlib.Algebra.Module.LinearMap.Defs\", \"type\": \" (R : Type u_1) {S : Type u_5} {M : Type u_8} {M₂ : Type u_10} [Semiring R] [Semiring S] [AddCommMonoid M] [AddCommMonoid M₂] [Module R M] [Module R M₂] [Module S M] [Module S M₂] [LinearMap.CompatibleSMul M M₂ R S] (fₗ : M →ₗ[S] M₂) : M →ₗ[R] M₂\", \"doc\": \"If `M` and `M₂` are both `R`-modules and `S`-modules and `R`-module structures\\nare defined by an action of `R` on `S` (formally, we have two scalar towers), then any `S`-linear\\nmap from `M` to `M₂` is\"}\n  {\"name\": \"LinearMap.restrictScalars_injective\", \"module\": \"Mathlib.Algebra.Module.LinearMap.Defs\", \"type\": \" (R : Type u_1) {S : Type u_5} {M : Type u_8} {M₂ : Type u_10} [Semiring R] [Semiring S] [AddCommMonoid M] [AddCommMonoid M₂] [Module R M] [Module R M₂] [Module S M] [Module S M₂] [LinearMap.CompatibleSMul M M₂ R S] : Function.Injective ↑R\", \"doc\": \"\"}\n  {\"name\": \"LinearMap.restrictScalars_self\", \"module\": \"Mathlib.Algebra.Module.LinearMap.Defs\", \"type\": \" (R : Type u_1) {M : Type u_8} {M₂ : Type u_10} [Semiring R] [AddCommMonoid M] [AddCommMonoid M₂] [Module R M] [Module R M₂] (f : M →ₗ[R] M₂) : ↑R f = f\", \"doc\": \"\"}\n  {\"name\": \"LinearMap.restrictScalars_inj\", \"module\": \"Mathlib.Algebra.Module.LinearMap.Defs\", \"type\": \" (R : Type u_1) {S : Type u_5} {M : Type u_8} {M₂ : Type u_10} [Semiring R] [Semiring S] [AddCommMonoid M] [AddCommMonoid M₂] [Module R M] [Module R M₂] [Module S M] [Module S M₂] [LinearMap.CompatibleSMul M M₂ R S] (fₗ gₗ : M →ₗ[S] M₂) : ↑R fₗ = ↑R gₗ ↔ fₗ = gₗ\", \"doc\": \"\"}\n  {\"name\": \"LinearMap.coe_restrictScalars\", \"module\": \"Mathlib.Algebra.Module.LinearMap.Defs\", \"type\": \" (R : Type u_1) {S : Type u_5} {M : Type u_8} {M₂ : Type u_10} [Semiring R] [Semiring S] [AddCommMonoid M] [AddCommMonoid M₂] [Module R M] [Module R M₂] [Module S M] [Module S M₂] [LinearMap.CompatibleSMul M M₂ R S] (f : M →ₗ[S] M₂) : ⇑(↑R f) = ⇑f\", \"doc\": \"\"}\n  {\"name\": \"LinearMap.restrictScalars_apply\", \"module\": \"Mathlib.Algebra.Module.LinearMap.Defs\", \"type\": \" (R : Type u_1) {S : Type u_5} {M : Type u_8} {M₂ : Type u_10} [Semiring R] [Semiring S] [AddCommMonoid M] [AddCommMonoid M₂] [Module R M] [Module R M₂] [Module S M] [Module S M₂] [LinearMap.CompatibleSMul M M₂ R S] (fₗ : M →ₗ[S] M₂) (x : M) : (↑R fₗ) x = fₗ x\", \"doc\": \"\"}\n  {\"name\": \"LinearMap.restrictScalars_zero\", \"module\": \"Mathlib.Algebra.Module.LinearMap.Defs\", \"type\": \" (R : Type u_14) (S : Type u_15) (M : Type u_16) (N : Type u_17) [Semiring R] [Semiring S] [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module R N] [Module S M] [Module S N] [LinearMap.CompatibleSMul M N R S] : ↑R 0 = 0\", \"doc\": \"\"}\n  {\"name\": \"LinearMap.restrictScalars_neg\", \"module\": \"Mathlib.Algebra.Module.LinearMap.Defs\", \"type\": \" {R : Type u_14} {S : Type u_15} [Semiring R] [Semiring S] {M : Type u_19} {N : Type u_20} [AddCommMonoid M] [AddCommGroup N] [Module R M] [Module R N] [Module S M] [Module S N] [LinearMap.CompatibleSMul M N R S] (f : M →ₗ[S] N) : ↑R (-f) = -↑R f\", \"doc\": \"\"}\n  {\"name\": \"LinearMap.restrictScalars_trans\", \"module\": \"Mathlib.Algebra.Module.LinearMap.Defs\", \"type\": \" {R : Type u_14} {S : Type u_15} {M : Type u_16} {N : Type u_17} [Semiring R] [Semiring S] [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module R N] [Module S M] [Module S N] [LinearMap.CompatibleSMul M N R S] {T : Type u_20} [Semiring T] [Module T M] [Module T N] [LinearMap.CompatibleSMul M N S\", \"doc\": \"\"}\n  {\"name\": \"LinearMap.restrictScalars_add\", \"module\": \"Mathlib.Algebra.Module.LinearMap.Defs\", \"type\": \" {R : Type u_14} {S : Type u_15} {M : Type u_16} {N : Type u_17} [Semiring R] [Semiring S] [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module R N] [Module S M] [Module S N] [LinearMap.CompatibleSMul M N R S] (f g : M →ₗ[S] N) : ↑R (f + g) = ↑R f + ↑R g\", \"doc\": \"\"}\n  {\"name\": \"LinearMap.restrictScalarsₗ\", \"module\": \"Mathlib.Algebra.Module.LinearMap.Defs\", \"type\": \" (R : Type u_14) (S : Type u_15) (M : Type u_16) (N : Type u_17) [Semiring R] [Semiring S] [AddCommMonoid M] [AddCommMonoid N] [Module R M] [Module R N] [Module S M] [Module S N] [LinearMap.CompatibleSMul M N R S] (R₁ : Type u_19) [Semiring R₁] [Module R₁ N] [SMulCommClass S R₁ N] [SMulCommClass R R\", \"doc\": \"`LinearMap.restrictScalars` as a `LinearMap`.\"}\n",
+   "date": "2026-10-17",
+   "verdict": "No existing pro-etale supported scalar-compatibility predicate; reuse the existing Tate line and generators."
+  },
+  {
+   "tool": "grep",
+   "query": "SupportedDerivedScalarUnit|SupportedKummerScalar",
+   "results": "msearch grep: OK 0 hit(s). Source rg finds only the ordinary etale SupportedDerivedScalarUnit and SupportedKummerScalar interfaces (read in full), their consumers, and their DAG records. No corresponding pro-etale scalar-normalized supported family predicate. The original finite Tate sheaf and its generators already exist and are reused. blueprint_refs.py search \"supported coefficient system\": 0 matches.",
+   "date": "2026-10-17",
+   "verdict": "No existing pro-etale supported scalar-compatibility predicate; reuse the existing Tate line and generators."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-amb-cartier-kummer-map",
+  "date": "2026-10-17",
+  "group": "Q121"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-amb-cartier-kummer-map",
+   "place": "proof, final paragraph: derived coefficient extension and coefficient-reduction compatibility",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleSupportedCoefficientReduction",
+  "declaration": "AlgebraicGeometry.Etale.CartierKummerReduction",
+  "declarations": [
+   "AlgebraicGeometry.Etale.cartierAbelianPro",
+   "AlgebraicGeometry.Etale.cartierHasWeakSheafifyPro",
+   "AlgebraicGeometry.Etale.cartierHasSheafifyPro",
+   "AlgebraicGeometry.Etale.cartierHasExtPro",
+   "AlgebraicGeometry.Etale.cartierSupported",
+   "AlgebraicGeometry.Etale.cartierSupportedGenerator",
+   "AlgebraicGeometry.Etale.cartierSupportedUnit",
+   "AlgebraicGeometry.Etale.CartierKummerFamily",
+   "AlgebraicGeometry.Etale.cartierCoefficientReduction",
+   "AlgebraicGeometry.Etale.IsCartierDerivedScalarUnit",
+   "AlgebraicGeometry.Etale.CartierKummerReduction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleSupportedCoefficientReduction.lean",
+  "statement": "def CartierKummerReduction (c : CartierKummerFamily l E) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q121",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9400de512",
+  "group": "Q121",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9400de512",
+  "group": "Q121",
+  "result": "pass",
+  "note": "Head 9400de5 = PASSed 17783e0 byte-identical in both Lean files (CartierKummerMap sha256 68a1db19…) and all node JSONs; only report (one added self-check section) and generated blueprint-index differ. 17783e0's landing return (ledger 08:48) was a missing OrdinaryFiniteP1Arrows.olean: a side/live dependency changed in live at 16:48, reached via the necessary public stmt_dep import OrdinarySupportedKummerSystem; mechanical, not a delivery fault. All 10 existing stmt_dep records equal live; item not landed (live lean null). Independent re-read: prime l, finite E, level n+1 incl. m=1, no e|m, l invertible, closed immersion with invertible ideal, i_*A_D -> published finiteTateProSheaf(1)[2], exists-unique normalized pair (SupportedKummerBoundary, unit squares, IsFiniteTateSiteComparison), same c for every r, Chern composite +c1 (sign consistent with the extension model), Cartier-preserving base change without flatness, all a<=b reductions; edge cases m=1, empty D/T, h=id, a=b, non-flat h. One sorry (theorem), no hollow defs, docstrings with source and blueprint id, lines <=100, report has Worker report + Second reading by Q121. nt_compile --json at load ~36: Reduction 24.8 s, CartierKummerMap 24.7 s, rc 0, no warnings; second run confirms OrdinaryFiniteP1Arrows now present as cached side override. M1: land with --revert-nodes lem-amb-finite-tate-site-descent (commit still rewrites N1's record). M2: re-land as is at low load; do not ask for another re-push. M3: stale report history, cosmetic."
+ }
+}

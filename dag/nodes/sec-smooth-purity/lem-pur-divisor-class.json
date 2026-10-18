@@ -7,7 +7,7 @@
  },
  "kind": "statement",
  "title": "Kummer class of a divisor and its $c_1$",
- "statement": "Fix the finite-coefficient setting of [def-pur-conventions], with $\\Lambda=A=A_{E,n}$ and arbitrary $n\\geq1$. In the separated finite-type $k$-scheme setting of [sk-def-purity-conv], let $T\\to B$ be smooth of relative dimension $d$ and let $D\\hookrightarrow T$ be a closed subfamily smooth over $B$, of pure codimension one as in [def-pur-frame-class]. Thus $D$ is an effective Cartier divisor [def-pc-divisor-line-bundle]. There is a canonical Kummer divisor class\n$$\\operatorname{cl}(D)\\in H^2_D(T_{\\mathrm{proet}},A(1))$$\nwith supported cohomology as in [def-pur-support-cohomology] and twist as in [def-coefficient-twists-detailed]. It is the global class constructed from the line bundle $\\mathcal O_T(D)$ with its canonical section trivializing it on $T\\setminus D$, by the relative torsor Kummer connecting map [lem-amb-relative-torsor-cohomology], followed by the coefficient map on roots prescribed in [def-pur-frame-class]. For every etale neighbourhood $U\\to T$ on which $D_U$ has equation $f$, its restriction is\n$$\\operatorname{cl}(D)|_U=\\partial\\kappa(f)\\in H^2_{D_U}(U,A(1)).$$\nIn particular it agrees with the rank-one frame class of [def-pur-frame-class], independently of the equation as in [lem-pur-frame-independence].\n\nThe same relative construction defines $\\operatorname{cl}(E)$ for any effective Cartier divisor $E$ on $T$, including a sum of smooth divisors. If $D_1,D_2$ are such divisors and $Z=|D_1|\\cup|D_2|$, then, after the canonical enlargement-of-support maps,\n$$\\operatorname{cl}(D_1+D_2)=\\operatorname{cl}(D_1)+\\operatorname{cl}(D_2)\\quad\\text{in }H^2_Z(T,A(1)).$$\nHere $D_1+D_2$ is defined by the product of the two Cartier ideals, so locally its equation is $f_1f_2$, not the two-element frame $(f_1,f_2)$. Forgetting support sends $\\operatorname{cl}(D)$ to $c_1(\\mathcal O_T(D))\\in H^2(T,A(1))$. Precisely, $c_1(L)$ means the ordinary etale Kummer connecting image of the frame-torsor class of $L$ [lem-sc-line-bundle-torsor], at exponent $m=\\ell^n$ killing $A$, mapped to the pro-etale twist by the same coefficient morphism as [def-pur-frame-class]. No $\\mathbf Z/m\\mathbf Z$-module structure on $\\mathbf G_m$ is assumed.",
+ "statement": "Fix the finite-coefficient setting of [def-pur-conventions], with $\\Lambda=A=A_{E,n}$ and arbitrary $n\\geq1$. In the separated finite-type $k$-scheme setting of [sk-def-purity-conv], let $T\\to B$ be smooth of relative dimension $d$ and let $D\\hookrightarrow T$ be a closed subfamily smooth over $B$, of pure codimension one as in [def-pur-frame-class]. Thus $D$ is an effective Cartier divisor [def-pc-divisor-line-bundle]. There is a canonical Kummer divisor class\n$$\\operatorname{cl}(D)\\in H^2_D(T_{\\mathrm{proet}},A(1))$$\nwith supported cohomology as in [def-pur-support-cohomology] and twist as in [def-coefficient-twists-detailed]. It is the global class constructed from the line bundle $\\mathcal O_T(D)$ with its canonical section trivializing it on $T\\setminus D$, by the relative torsor Kummer connecting map [lem-amb-relative-torsor-cohomology], followed by the coefficient map on roots prescribed in [def-pur-frame-class]. For every etale neighbourhood $U\\to T$ on which $D_U$ has equation $f$, its restriction is\n$$\\operatorname{cl}(D)|_U=-\\partial\\kappa(f)\\in H^2_{D_U}(U,A(1)).$$\nHere the relative construction is read in the Yoneda extension convention of [def-asd-ordinary-supported-kummer-boundary]: its lifting torsor over the supported section one is the frame torsor of $\\mathcal O_T(D)$, and its specified frame on $T\\setminus D$ maps to zero. In particular it is the negative of the rank-one frame class of [def-pur-frame-class], independently of the equation as in [lem-pur-frame-independence].\n\nThe same relative construction defines $\\operatorname{cl}(E)$ for any effective Cartier divisor $E$ on $T$, including a sum of smooth divisors. If $D_1,D_2$ are such divisors and $Z=|D_1|\\cup|D_2|$, then, after the canonical enlargement-of-support maps,\n$$\\operatorname{cl}(D_1+D_2)=\\operatorname{cl}(D_1)+\\operatorname{cl}(D_2)\\quad\\text{in }H^2_Z(T,A(1)).$$\nHere $D_1+D_2$ is defined by the product of the two Cartier ideals, so locally its equation is $f_1f_2$, not the two-element frame $(f_1,f_2)$. Forgetting support sends $\\operatorname{cl}(D)$ to $c_1(\\mathcal O_T(D))\\in H^2(T,A(1))$. Precisely, $c_1(L)$ means the ordinary etale Kummer connecting image of the frame-torsor class of $L$ [lem-sc-line-bundle-torsor], at exponent $m=\\ell^n$ killing $A$, mapped to the pro-etale twist by the same coefficient morphism as [def-pur-frame-class]. No $\\mathbf Z/m\\mathbf Z$-module structure on $\\mathbf G_m$ is assumed.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-a1-kummer/lem-pur-divisor-class.md",
   "place": "node lem-pur-divisor-class, order 1945"
@@ -22,7 +22,10 @@
   "def-coefficient-twists-detailed",
   "lem-pur-frame-independence",
   "lem-amb-relative-torsor-cohomology",
-  "lem-sc-line-bundle-torsor"
+  "lem-sc-line-bundle-torsor",
+  "def-asd-ordinary-supported-kummer-boundary",
+  "lem-pur-supported-cup-functoriality",
+  "lem-pur-supported-hom"
  ],
  "proof": [
   {
@@ -54,9 +57,10 @@
    }
   },
   {
-   "text": "Use [lem-amb-relative-torsor-cohomology] for $G=\\mathbf G_m$ to obtain $\\alpha_E=[(P_E,\\tau_E)]\\in H^1(T,W;\\mathbf G_m)$. Its forgotten-support image is $[P_E]$. This is a specified class, not an arbitrary lift of a Picard class. Replacing $f_a$ by $u_af_a$ changes $e_a$ to $u_a^{-1}e_a$ and leaves $s_E$ unchanged. Thus the pair and its relative class are independent of all local equations.",
+   "text": "Use [lem-amb-relative-torsor-cohomology] for $G=\\mathbf G_m$ to obtain $\\alpha_E=[(P_E,\\tau_E)]\\in H^1(T,W;\\mathbf G_m)$. Its forgotten-support image is $[P_E]$. This is a specified class, not an arbitrary lift of a Picard class. Replacing $f_a$ by $u_af_a$ changes $e_a$ to $u_a^{-1}e_a$ and leaves $s_E$ unchanged. Thus the pair and its relative class are independent of all local equations. In the Yoneda realization use the relative extension specified in [def-asd-ordinary-supported-kummer-boundary], with lifting torsor $P_E$ over one and with $\\tau_E$ sent to zero; this fixes the sign of its extension class.",
    "uses": [
-    "lem-amb-relative-torsor-cohomology"
+    "lem-amb-relative-torsor-cohomology",
+    "def-asd-ordinary-supported-kummer-boundary"
    ],
    "elementary": false,
    "source": {
@@ -65,11 +69,13 @@
    }
   },
   {
-   "text": "Put $m=\\ell^n$, which is invertible on $T$ and kills $A$ in the conventions and coefficient prescription of [def-pur-frame-class]. Apply [lem-amb-kummer-any-base] and the relative connecting map of [lem-amb-relative-torsor-cohomology] to form $\\beta_E=\\delta_{T,W}(\\alpha_E)\\in H^2(T,W;\\mu_m^{\\mathrm{et}})$. Its image in ordinary cohomology is $\\delta_T([P_E])$, by the relative lemma's compatibility with forgetting support. Only the exact sequence of abelian sheaves is used here, with no tensoring of $\\mathbf G_m$ over $\\mathbf Z/m\\mathbf Z$.",
+   "text": "Put $m=\\ell^n$, invertible on $T$ and killing $A$ by [def-pur-frame-class]. The pair of step 3 gives the extension $0\\to\\mathbf G_m\\to\\mathcal E\\to i_*\\mathbf Z_E\\to0$ specified in [def-asd-ordinary-supported-kummer-boundary]. Its Yoneda product with the Kummer extension of [lem-amb-kummer-any-base], followed by the roots coefficient map, is the relative Kummer construction in the recorded extension convention. Scalar adjunction gives its unique $A$-linear supported class. Pulling the extension back along $\\mathbf Z_T\\to i_*\\mathbf Z_E$ gives the ordinary extension whose lifting torsor is $P_E$. The torsor classification [lem-sc-line-bundle-torsor] therefore gives ordinary class $\\delta_T([P_E])$ with positive sign. This agrees with the forget-support requirement of [lem-amb-relative-torsor-cohomology]. No tensor over $\\mathbf Z/m$ is imposed on $\\mathbf G_m$.",
    "uses": [
     "def-pur-frame-class",
     "lem-amb-kummer-any-base",
-    "lem-amb-relative-torsor-cohomology"
+    "lem-amb-relative-torsor-cohomology",
+    "def-asd-ordinary-supported-kummer-boundary",
+    "lem-sc-line-bundle-torsor"
    ],
    "elementary": false,
    "source": {
@@ -78,11 +84,12 @@
    }
   },
   {
-   "text": "Apply [lem-pur-divisor-relative-cone] to $(T,W)$ and the etale root sheaf $\\mu_m^{\\mathrm{et}}$. It identifies $\\beta_E$ with a supported etale class and supplies its canonical comparison with pro-etale relative cohomology. Apply the coefficient morphism $\\sigma_T\\rho_T:\\nu_T^{-1}\\mu_m^{\\mathrm{et}}\\to A(1)_T$ of [def-pur-frame-class] to define $\\operatorname{cl}(E)\\in H^2_E(T_{\\mathrm{proet}},A(1))$. The relative-cone lemma identifies this group with the support-kernel derived group of [def-pur-support-cohomology] and states that these maps commute with forgetting support, etale restriction, the localization boundary and enlargement of support. Thus all those compatibilities hold for this global class at every coefficient index $n\\geq1$.",
+   "text": "Use [lem-pur-divisor-relative-cone] and [def-pur-support-cohomology] to identify relative and supported cohomology and their etale/pro-etale comparisons. Realize the class of step 4 in the supported Ext presentation of [def-asd-ordinary-supported-kummer-boundary], retaining its Yoneda normalization. Apply the coefficient map $\\sigma_T\\rho_T:\\nu_T^{-1}\\mu_m^{\\mathrm{et}}\\to A(1)_T$ of [def-pur-frame-class] and canonical site comparison to obtain $\\operatorname{cl}(E)$. These are additive and commute with etale restriction, forgetting support and support enlargement. The cone model must not be substituted for this extension normalization without checking the connecting-map sign; step 6 computes it directly.",
    "uses": [
     "lem-pur-divisor-relative-cone",
     "def-pur-frame-class",
-    "def-pur-support-cohomology"
+    "def-pur-support-cohomology",
+    "def-asd-ordinary-supported-kummer-boundary"
    ],
    "elementary": false,
    "source": {
@@ -91,12 +98,14 @@
    }
   },
   {
-   "text": "Let $h:U\\to T$ be an etale neighbourhood with $E_U=(f)$. The pullback of the pair $(P_E,\\tau_E)$ along $h$ is $(P_{E_U},\\tau_{E_U})$, since $\\mathcal I_E$, its dual and $s_E$ pull back; so by the pullback naturality of the bijection and of the connecting maps in [lem-amb-relative-torsor-cohomology], $\\alpha_E$ and $\\beta_E$ restrict to $\\alpha_{E_U}$ and $\\beta_{E_U}$. On $U$ the dual basis $e=f^{-1}$ trivializes $P_E$; its specified section on $U_f$ has coordinate $g=f|_{U_f}\\in\\mathbf G_m(U_f)$. By [lem-pur-divisor-torsor-boundary-signs] its canonical relative class is represented by $(0,g)$ in the cone $D(a,b)=(da,\\operatorname{res}a-db)$ and is $-\\partial[g]$. Apply the same lemma's short-exact-sequence assertion to the Kummer sequence of step 4: it gives $\\delta_{U,U_f}(\\alpha_{E_U})=\\partial\\delta(g)$, with the positive sign (both sides have representative $(0,-dr)$ for a lift $r$). Step 5 and its boundary-compatible coefficient map then give $\\operatorname{cl}(E)|_U=\\partial\\kappa(f)$. For smooth $E=D$, this is exactly the single-factor frame class of [def-pur-frame-class]; [lem-pur-frame-independence] agrees with the independence already supplied by the global pair construction.",
+   "text": "Etale pullback takes the Cartier ideal, its dual and canonical section to the corresponding data for $E_U$, so naturality in [lem-amb-relative-torsor-cohomology] identifies the restricted pair. Write $e=f^{-1}$ for the dual frame on $U$, and $g=f|_{U_f}$. The action in [lem-sc-line-bundle-torsor] gives $\\tau=g\\cdot e$. For the equivariant torsor map $F$ into the extension of [def-asd-ordinary-supported-kummer-boundary], $0=F(\\tau)=a(g)+F(e)$, hence $F(e)=-a(g)$. Thus this extension is the pushout of $0\\to j_!\\mathbf Z_{U_f}\\to\\mathbf Z_U\\to i_*\\mathbf Z_{E_U}\\to0$ along $1\\mapsto g^{-1}$. Yoneda composition with the Kummer extension gives $\\partial\\delta(g^{-1})=-\\partial\\delta(g)$. The coefficient and comparison maps of step 5 give $\\operatorname{cl}(E)|_U=-\\partial\\kappa(f)$. The cone formula of [lem-pur-divisor-torsor-boundary-signs] instead uses $D(a,b)=(da,\\operatorname{res}a-db)$, with localization $b\\mapsto(0,-b)$ and relativeConnecting anticommutes with localization. Its positive cone calculation is not the Yoneda extension normalization. For smooth $E=D$, the resulting class is minus the rank-one frame class of [def-pur-frame-class], independently of the equation by [lem-pur-frame-independence].",
    "uses": [
     "lem-pur-divisor-torsor-boundary-signs",
     "lem-amb-relative-torsor-cohomology",
     "def-pur-frame-class",
-    "lem-pur-frame-independence"
+    "lem-pur-frame-independence",
+    "def-asd-ordinary-supported-kummer-boundary",
+    "lem-sc-line-bundle-torsor"
    ],
    "elementary": false,
    "source": {
@@ -143,6 +152,7 @@
   "def-pc-divisor-line-bundle",
   "lem-sc-line-bundle-torsor",
   "lem-amb-relative-torsor-cohomology",
+  "def-asd-ordinary-supported-kummer-boundary",
   "lem-amb-kummer-any-base",
   "lem-pur-divisor-relative-cone",
   "def-pur-support-cohomology",
@@ -290,5 +300,214 @@
   "group": "Q45",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-3a6e12957 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, both new nodes, every cited statement, the proof of lem-amb-relative-torsor-cohomology (to confirm the signed model D(a,b)=(da,ra-db) and its canonical-extension construction), thm-pur-with-support-exactness (its boundary is the snake boundary), Stacks 03AJ as lem-sc-torsor-h1 restates it, and the main-20261015 and master blueprint proofs. lem-pur-divisor-relative-cone is true. D^2=0. The quotient of C by K is contractible by (x,y)->(y,0), because restriction of an injective sheaf to an open is surjective. The localization boundary is b->(0,-b), since (da,0)-(0,-b)=D(a,0). lem-cbc holds for every abelian etale sheaf. Small cases Z empty, Z=T and F=0 hold. lem-pur-divisor-torsor-boundary-signs is true. (a,b) is a cocycle and does not depend on h up to D(c,0). The trivial torsor with section g gives (0,g)=-(0,-g). In split horseshoes, delta(alpha_g)=(0,-dr)=d^1 delta_W(g). Small cases g=0, g extending globally, and a split sequence hold. Neither node duplicates lem-pur-support-localization-triangle, lem-pur-support-restriction-triangle, lem-amb-closed-support-hom or lem-amb-relative-torsor-cohomology, and neither restates a clause of the item. The item's steps 1-5 and 8 check out, as do steps 6 and 7 apart from two missing citations. The statement is not weakened. The coefficient path from etale mu_m to pro-etale A(1) goes through sigma_T rho_T, and no SGA source is used. The five declared tool_uses are accepted. Two faults are repaired in fixes/dag/nodes/sec-smooth-purity/lem-pur-divisor-class.json. Fault 1 (C1/C3): step 6 restricted the global class to the etale neighbourhood U without citing pullback naturality. It now cites lem-amb-relative-torsor-cohomology for it. Fault 2 (E5): step 7 asserted 'exactly enlargement of support' without a reason. It now writes the enlargement as the chain map (a,b)->(a,b|_W) on signed cones. It cites lem-pur-divisor-torsor-boundary-signs for the restricted pair and lem-weil-pbc-complex-ses-long-exact-naturality (a mathlib leaf) for commuting with delta. proof_deps were recomputed, and every step is under 2000 characters.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2bfad5113",
+  "group": "NE",
+  "result": "pass",
+  "note": "Re-push of the PASSed 4c33fc20260f: both Lean files byte-identical (sha 0fcce5a6, 47f44c4a), all node records identical; only the report (dry-run validation section) and blueprint-index differ. Landing returned 4c33 only because the library pass of SupportedCupFunctoriality hit the 60 s limit; the preliminary (37.2 s) and sandbox passes were clean, so the cause was load. Rechecked against live: the §1(C) old_statement/old_stmt_deps/old_proof/old_proof_deps equal the live node; the 6 citers equal the live direct citers; the cup-functoriality dep record is still Q67's 67 decls, kept as a superset of 79. Local clauses keep -frameBoundary/-frameBoundaryProduct, Chern clause positive. Theorem stmt_dep finding: PASS on point, since functorialCupPullback/ChangeSupport/Compare rest on .choose of that module's existsUnique theorems, and supported-hom is cited for its Hom model only. nt_compile --json at load ~60: pair clean, 35.9 s and 18.5 s; with the live importer ClosedSupportedCupVanishing, 27.6 s and 8.3 s. The profile shows kernel checks dominate (functorialCupKummerExt 13 s, FunctorialCupAlgebraLaws 17 s, ComparisonLaws 8 s); genInjectivity/linters off gave no gain back to back (32.1 vs 31.6 s), so no FIX. Maintainer: retry landing at lower load; whichever of this delivery and Q10's unlanded cup refactor (aceb9bacc30d) lands second must be rebased.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-18",
+  "by": "NE stage 2",
+  "old_statement": "Fix the finite-coefficient setting of [def-pur-conventions], with $\\Lambda=A=A_{E,n}$ and arbitrary $n\\geq1$. In the separated finite-type $k$-scheme setting of [sk-def-purity-conv], let $T\\to B$ be smooth of relative dimension $d$ and let $D\\hookrightarrow T$ be a closed subfamily smooth over $B$, of pure codimension one as in [def-pur-frame-class]. Thus $D$ is an effective Cartier divisor [def-pc-divisor-line-bundle]. There is a canonical Kummer divisor class\n$$\\operatorname{cl}(D)\\in H^2_D(T_{\\mathrm{proet}},A(1))$$\nwith supported cohomology as in [def-pur-support-cohomology] and twist as in [def-coefficient-twists-detailed]. It is the global class constructed from the line bundle $\\mathcal O_T(D)$ with its canonical section trivializing it on $T\\setminus D$, by the relative torsor Kummer connecting map [lem-amb-relative-torsor-cohomology], followed by the coefficient map on roots prescribed in [def-pur-frame-class]. For every etale neighbourhood $U\\to T$ on which $D_U$ has equation $f$, its restriction is\n$$\\operatorname{cl}(D)|_U=\\partial\\kappa(f)\\in H^2_{D_U}(U,A(1)).$$\nIn particular it agrees with the rank-one frame class of [def-pur-frame-class], independently of the equation as in [lem-pur-frame-independence].\n\nThe same relative construction defines $\\operatorname{cl}(E)$ for any effective Cartier divisor $E$ on $T$, including a sum of smooth divisors. If $D_1,D_2$ are such divisors and $Z=|D_1|\\cup|D_2|$, then, after the canonical enlargement-of-support maps,\n$$\\operatorname{cl}(D_1+D_2)=\\operatorname{cl}(D_1)+\\operatorname{cl}(D_2)\\quad\\text{in }H^2_Z(T,A(1)).$$\nHere $D_1+D_2$ is defined by the product of the two Cartier ideals, so locally its equation is $f_1f_2$, not the two-element frame $(f_1,f_2)$. Forgetting support sends $\\operatorname{cl}(D)$ to $c_1(\\mathcal O_T(D))\\in H^2(T,A(1))$. Precisely, $c_1(L)$ means the ordinary etale Kummer connecting image of the frame-torsor class of $L$ [lem-sc-line-bundle-torsor], at exponent $m=\\ell^n$ killing $A$, mapped to the pro-etale twist by the same coefficient morphism as [def-pur-frame-class]. No $\\mathbf Z/m\\mathbf Z$-module structure on $\\mathbf G_m$ is assumed.",
+  "what": "The positive local-equation formula mixed the signed-cone relativeConnecting convention with the recorded Yoneda/extClass convention. In SupportedKummerBoundary the frame action is smulMor(g) followed by e, tau=g*e, F(tau)=0, and equivariance forces F(e)=-a(g). The local extension is the pushout of localization along 1 to g inverse, so its Kummer Yoneda product is -boundary(kappa(f)), while its ordinary image is +c1(O(D)). For k an algebraic closure of F_2, ell=3, E=Q_3, n=1, U=A1_k and f=t, the boundary has residue 1 in F_3, so it differs from its negative. Both local clauses must be negated; globally negating the class would break the Chern clause.",
+  "source": {
+   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-divisor-class.proof.md",
+   "place": "Clause (a) and final forget-support paragraph, read in the Yoneda convention of def-asd-ordinary-supported-kummer-boundary; independent return H3 at 1c8be9c74d60 corrects the cone-to-Yoneda sign."
+  },
+  "citers": [
+   {
+    "id": "thm-pur-projective-bundle-formula",
+    "holds": false,
+    "note": "Steps 3-4 identify the divisor class with +boundary and its n-fold coordinate product; the Yoneda class has sign - and the product has sign (-1)^n, so those normalization steps need repair."
+   },
+   {
+    "id": "lem-pur-flag-local-comparison",
+    "holds": false,
+    "note": "Step 1 identifies +boundary with the normalized Cartier morphism; it is -boundary, so the stated r-fold comparison acquires (-1)^r."
+   },
+   {
+    "id": "thm-pur-rank-one-thom",
+    "holds": false,
+    "note": "The isomorphism statement survives multiplication by -1, but step 1 explicitly asserts the positive local equation and must be repaired."
+   },
+   {
+    "id": "lem-pur-cartier-class-agreement",
+    "holds": true,
+    "note": "Both constructions use the same frame torsor, specified section and Yoneda supported Kummer extension; its equality and arbitrary-base-change claim survive, with the corrected local sign."
+   },
+   {
+    "id": "thm-pur-localized-top-chern",
+    "holds": false,
+    "note": "Step 6 identifies the zero-section divisor class with the class glued from +boundary; the local value is -boundary, so this argument for L1 needs repair."
+   },
+   {
+    "id": "thm-pur-trace-normalization-transitivity",
+    "holds": false,
+    "note": "Step 3 uses the divisor theorem to send +boundary to +c1 on the projective line; the corrected theorem sends -boundary to +c1, so the trace-normalization argument needs repair."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pur-conventions",
+   "sk-def-purity-conv",
+   "def-sbc-smooth-morphisms",
+   "def-pur-frame-class",
+   "def-pc-divisor-line-bundle",
+   "def-pur-support-cohomology",
+   "def-coefficient-twists-detailed",
+   "lem-pur-frame-independence",
+   "lem-amb-relative-torsor-cohomology",
+   "lem-sc-line-bundle-torsor"
+  ],
+  "old_proof": [
+   {
+    "text": "Apply [lem-pur-smooth-pair-local-coordinates] to $D\\hookrightarrow T$ over $B$. The ambient finite-type setting is explicitly that of [sk-def-purity-conv]. Thus $T$ and $D$ are finite type over $k$, hence locally Noetherian by [lem-weil-pbc-finite-type-over-noetherian] applied to $\\operatorname{Spec}k$ (a field has just the two ideals $0,k$, so its spectrum is Noetherian). At a point $y\\in D$, the coordinate chart gives a regular sequence $f_1,\\ldots,f_b$ in $R=\\mathcal O_{T,y}$ defining $\\mathcal O_{D,y}$. Each $f_j$ lies in the maximal ideal of its successive quotient and is a nonzerodivisor there. The successive quotients remain Noetherian, since their ideals correspond to ideals of $R$ containing the quotient ideal, and the images of generators generate. Apply [lem-weil-pbc-dimension-quotient-nonzerodivisor] successively to obtain $\\dim R=\\dim\\mathcal O_{D,y}+b$. The pure-codimension convention in [def-pur-frame-class] says the difference is one, so $b=1$. Thus locally $\\mathcal I_D=(f)$ with $f$ a nonzerodivisor; off $D$ the ideal is the unit ideal. This proves that $D$ is Cartier and that one-function frames exist, without presuming regularity of the base. We will construct the global class rather than infer a global cohomology class from equality of local classes.",
+    "uses": [
+     "lem-pur-smooth-pair-local-coordinates",
+     "def-pur-conventions",
+     "sk-def-purity-conv",
+     "def-pur-frame-class",
+     "lem-weil-pbc-finite-type-over-noetherian",
+     "lem-weil-pbc-dimension-quotient-nonzerodivisor"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/more-morphisms.tex",
+     "place": "Tag 0FUE, lemma-etale-local-structure, applied to the first sentence of the blueprint proof"
+    }
+   },
+   {
+    "text": "For any effective Cartier divisor $E$ put $L_E=\\mathcal I_E^\\vee$ as in [def-pc-divisor-line-bundle]. On a chart $\\mathcal I_E=(f_a)$ write $e_a=f_a^{-1}$ for the dual basis, and put $s_E=f_ae_a$. On overlaps $e_b=(f_a/f_b)e_a$, so $f_be_b=f_ae_a$: these sections glue. On $W=T\\setminus E$ this section is nowhere zero and gives a specified trivialization $\\tau_E:\\mathcal O_W\\simeq L_E|_W$. By [lem-sc-line-bundle-torsor], $P_E=\\underline{\\operatorname{Isom}}(\\mathcal O_T,L_E)$ is a $\\mathbf G_m$-torsor, with the specified section $\\tau_E$ on $W$.",
+    "uses": [
+     "def-pc-divisor-line-bundle",
+     "lem-sc-line-bundle-torsor"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-divisor-class.proof.md",
+     "place": "First sentence and final paragraph; canonical section on the complement"
+    }
+   },
+   {
+    "text": "Use [lem-amb-relative-torsor-cohomology] for $G=\\mathbf G_m$ to obtain $\\alpha_E=[(P_E,\\tau_E)]\\in H^1(T,W;\\mathbf G_m)$. Its forgotten-support image is $[P_E]$. This is a specified class, not an arbitrary lift of a Picard class. Replacing $f_a$ by $u_af_a$ changes $e_a$ to $u_a^{-1}e_a$ and leaves $s_E$ unchanged. Thus the pair and its relative class are independent of all local equations.",
+    "uses": [
+     "lem-amb-relative-torsor-cohomology"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-divisor-class.proof.md",
+     "place": "First sentence: global well-definedness via a torsor with its specified section"
+    }
+   },
+   {
+    "text": "Put $m=\\ell^n$, which is invertible on $T$ and kills $A$ in the conventions and coefficient prescription of [def-pur-frame-class]. Apply [lem-amb-kummer-any-base] and the relative connecting map of [lem-amb-relative-torsor-cohomology] to form $\\beta_E=\\delta_{T,W}(\\alpha_E)\\in H^2(T,W;\\mu_m^{\\mathrm{et}})$. Its image in ordinary cohomology is $\\delta_T([P_E])$, by the relative lemma's compatibility with forgetting support. Only the exact sequence of abelian sheaves is used here, with no tensoring of $\\mathbf G_m$ over $\\mathbf Z/m\\mathbf Z$.",
+    "uses": [
+     "def-pur-frame-class",
+     "lem-amb-kummer-any-base",
+     "lem-amb-relative-torsor-cohomology"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/etale-cohomology.tex",
+     "place": "Tag 03PL, lemma-kummer-sequence; relative connecting construction from the blueprint final paragraph"
+    }
+   },
+   {
+    "text": "Apply [lem-pur-divisor-relative-cone] to $(T,W)$ and the etale root sheaf $\\mu_m^{\\mathrm{et}}$. It identifies $\\beta_E$ with a supported etale class and supplies its canonical comparison with pro-etale relative cohomology. Apply the coefficient morphism $\\sigma_T\\rho_T:\\nu_T^{-1}\\mu_m^{\\mathrm{et}}\\to A(1)_T$ of [def-pur-frame-class] to define $\\operatorname{cl}(E)\\in H^2_E(T_{\\mathrm{proet}},A(1))$. The relative-cone lemma identifies this group with the support-kernel derived group of [def-pur-support-cohomology] and states that these maps commute with forgetting support, etale restriction, the localization boundary and enlargement of support. Thus all those compatibilities hold for this global class at every coefficient index $n\\geq1$.",
+    "uses": [
+     "lem-pur-divisor-relative-cone",
+     "def-pur-frame-class",
+     "def-pur-support-cohomology"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-divisor-class.proof.md",
+     "place": "Support boundary and final paragraph; comparison performed on both terms of the relative cone"
+    }
+   },
+   {
+    "text": "Let $h:U\\to T$ be an etale neighbourhood with $E_U=(f)$. The pullback of the pair $(P_E,\\tau_E)$ along $h$ is $(P_{E_U},\\tau_{E_U})$, since $\\mathcal I_E$, its dual and $s_E$ pull back; so by the pullback naturality of the bijection and of the connecting maps in [lem-amb-relative-torsor-cohomology], $\\alpha_E$ and $\\beta_E$ restrict to $\\alpha_{E_U}$ and $\\beta_{E_U}$. On $U$ the dual basis $e=f^{-1}$ trivializes $P_E$; its specified section on $U_f$ has coordinate $g=f|_{U_f}\\in\\mathbf G_m(U_f)$. By [lem-pur-divisor-torsor-boundary-signs] its canonical relative class is represented by $(0,g)$ in the cone $D(a,b)=(da,\\operatorname{res}a-db)$ and is $-\\partial[g]$. Apply the same lemma's short-exact-sequence assertion to the Kummer sequence of step 4: it gives $\\delta_{U,U_f}(\\alpha_{E_U})=\\partial\\delta(g)$, with the positive sign (both sides have representative $(0,-dr)$ for a lift $r$). Step 5 and its boundary-compatible coefficient map then give $\\operatorname{cl}(E)|_U=\\partial\\kappa(f)$. For smooth $E=D$, this is exactly the single-factor frame class of [def-pur-frame-class]; [lem-pur-frame-independence] agrees with the independence already supplied by the global pair construction.",
+    "uses": [
+     "lem-pur-divisor-torsor-boundary-signs",
+     "lem-amb-relative-torsor-cohomology",
+     "def-pur-frame-class",
+     "lem-pur-frame-independence"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-divisor-class.proof.md",
+     "place": "Clause (a), with explicit relative-cone boundary calculation"
+    }
+   },
+   {
+    "text": "For $E=D_1+D_2$ let $\\mathcal I_E=\\mathcal I_{D_1}\\mathcal I_{D_2}$. On simultaneous Cartier charts $f_1f_2$ is a nonzerodivisor because both factors are, so $E$ is Cartier even when it is not smooth; its complement is $W=T\\setminus(|D_1|\\cup|D_2|)$. Multiplication identifies the ideal tensor product with the product ideal on these bases, hence $L_E\\simeq L_{D_1}\\otimes L_{D_2}$, carrying $s_E$ to $s_{D_1}\\otimes s_{D_2}$. The frame torsor is therefore the contracted product by [lem-sc-line-bundle-torsor], including its specified section over $W$. To see addition in relative $H^1$ from precisely the stated naturality of [lem-amb-relative-torsor-cohomology], take the product torsor for $\\mathbf G_m\\times\\mathbf G_m$ and its pair of sections. The two projections give $(\\alpha_{D_1},\\alpha_{D_2})$ in relative cohomology, since the two-term restriction cone commutes with finite products. Push out along multiplication $\\mathbf G_m\\times\\mathbf G_m\\to\\mathbf G_m$: on these additive cohomology groups it is addition, and on torsors it is their contracted product. Thus $\\alpha_E=\\alpha_{D_1}+\\alpha_{D_2}$ in $H^1(T,W;\\mathbf G_m)$. For $W\\subseteq W_i=T\\setminus|D_i|$ the restriction square gives the chain map $(a,b)\\mapsto(a,b|_W)$ of signed cones; by the representative $(a,h(s))$ of [lem-pur-divisor-torsor-boundary-signs] it sends $\\alpha_{D_i}$ to the class of $(P_{D_i},\\tau_{D_i}|_W)$, which is this enlargement of support. On the split cone sequences of the Kummer resolutions it is a morphism of short exact sequences, so it commutes with the relative connecting maps by [lem-weil-pbc-complex-ses-long-exact-naturality], and with the comparison and coefficient maps by step 5. The connecting and coefficient maps of steps 4-5 are homomorphisms, so their images give the required equality in $H^2_Z(T,A(1))$. This proves global additivity without a local-to-global injectivity claim for $H^2_Z$.",
+    "uses": [
+     "def-pc-divisor-line-bundle",
+     "lem-sc-line-bundle-torsor",
+     "lem-amb-relative-torsor-cohomology",
+     "lem-pur-divisor-torsor-boundary-signs",
+     "lem-weil-pbc-complex-ses-long-exact-naturality"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-divisor-class.proof.md",
+     "place": "Clause (b), addition; correcting the source two-function frame to the product equation"
+    }
+   },
+   {
+    "text": "Finally, step 4 gives $\\operatorname{forget}(\\beta_D)=\\delta_T([P_D])$. Step 5 commutes with forgetting support, so $\\operatorname{forget}(\\operatorname{cl}(D))$ is the ordinary Kummer boundary of the frame-torsor class of $L_D=\\mathcal O_T(D)$, followed by exactly the same roots coefficient morphism. This is $c_1(\\mathcal O_T(D))$ by the definition in the statement. The torsor interpretation of the line bundle is [lem-sc-line-bundle-torsor], and the compatibility of the relative connecting map with forgetting is the explicit last assertion of [lem-amb-relative-torsor-cohomology]. The equality holds globally; it is not deduced from restriction of ordinary $H^2$ to trivializing opens.",
+    "uses": [
+     "lem-sc-line-bundle-torsor",
+     "lem-amb-relative-torsor-cohomology",
+     "def-pur-frame-class"
+    ],
+    "elementary": true,
+    "source": {
+     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-divisor-class.proof.md",
+     "place": "Final paragraph: forget-support comparison with the ordinary Kummer connecting class"
+    }
+   }
+  ],
+  "old_proof_deps": [
+   "lem-pur-smooth-pair-local-coordinates",
+   "def-pur-conventions",
+   "sk-def-purity-conv",
+   "def-pur-frame-class",
+   "lem-weil-pbc-finite-type-over-noetherian",
+   "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+   "def-pc-divisor-line-bundle",
+   "lem-sc-line-bundle-torsor",
+   "lem-amb-relative-torsor-cohomology",
+   "lem-amb-kummer-any-base",
+   "lem-pur-divisor-relative-cone",
+   "def-pur-support-cohomology",
+   "lem-pur-divisor-torsor-boundary-signs",
+   "lem-pur-frame-independence",
+   "lem-weil-pbc-complex-ses-long-exact-naturality"
+  ]
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurityDivisorClass",
+  "declaration": "WeilConjectures.PurityFiniteSetting.divisor_class",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.DivisorEtaleClasses",
+   "WeilConjectures.PurityFiniteSetting.DivisorEtaleNormalized",
+   "WeilConjectures.PurityFiniteSetting.divisorProEtale",
+   "WeilConjectures.PurityFiniteSetting.DivisorLocalEquations",
+   "WeilConjectures.PurityFiniteSetting.DivisorAdditive",
+   "WeilConjectures.PurityFiniteSetting.DivisorChern",
+   "WeilConjectures.PurityFiniteSetting.divisor_class"
+  ],
+  "file": "lean/Sheaf/Paper/PurityDivisorClass.lean",
+  "statement": "theorem divisor_class (P : PurityFiniteSetting.{u}) {B T D : Scheme.{u}} (b : B ⟶ Spec (.of P.field.k)) [IsSeparated b] [LocallyOfFiniteType b] [QuasiCompact b] (v : T ⟶ B) (d : ℕ) [SmoothOfRelativeDimension d v] [IsSeparated (v ≫ b)] [LocallyOfFiniteType (v ≫ b)] [QuasiCompact (v ≫ b)] (i : D ⟶ T) [IsClosedImmersion i] [Smooth (i ≫ v)] (hcodim : ∀ z : D, ringKrullDim (T.presheaf.stalk (i z)) = ringKrullDim (D.presheaf.stalk z) + (1 : WithBot ℕ∞)) : ∃ C : P.DivisorEtaleClasses T, P.DivisorEtaleNormalized T (v ≫ b) C ∧ (∀ C' : P.DivisorEtaleClasses T, P.DivisorEtaleNormalized T (v ≫ b) C' → C' = C) ∧ ∃ hI : i.ker.IsInvertible, P.DivisorLocalEquations (v ≫ b) C i hI ∧ P.DivisorAdditive T C ∧ P.DivisorChern (v ≫ b) C i hI",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Canonical relative Kummer normalization at ell^n, with a unique etale Ext family and its actual pro-etale supported-Hom image. Includes Cartierness of the smooth divisor, arbitrary etale local equations, the recorded rank-one frame product, product-ideal additivity after canonical support enlargement, and the ordinary torsor Kummer Chern normalization. Helper definitions have real data. Three already-landed nodes are added to stmt_deps for their canonical boundary specification, maps, and supported-Hom model. HEq records equality of the identical published Ext/Hom realizations and the singleton/range support transport, avoiding costly kernel normalization without introducing a comparison choice. Returned H3 repaired: both local equations are negative frame boundaries in the fixed Yoneda convention; ordinary Chern normalization remains positive. Source-based statement_change and all six citing nodes audited."
  }
 }

@@ -19,7 +19,14 @@
   "def-pc-divisor-line-bundle",
   "def-weil-pbc-proetale-modules",
   "def-sf-comparison-derived-pullback",
-  "def-kun-derived-tensor"
+  "def-kun-derived-tensor",
+  "def-asd-ordinary-supported-kummer-system",
+  "def-asd-ordinary-supported-kummer-boundary",
+  "def-asd-ordinary-supported-kummer-scalar",
+  "def-weil-proetale-inverse-image",
+  "def-amb-finite-tate-site-comparison-data",
+  "def-pur-proetale-constant-module-unit",
+  "def-amb-proetale-supported-coefficient-reduction"
  ],
  "proof": [
   {
@@ -543,5 +550,42 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9400de512",
+  "group": "Q121",
+  "result": "pass",
+  "note": "Head 9400de5 = PASSed 17783e0 byte-identical in both Lean files (CartierKummerMap sha256 68a1db19…) and all node JSONs; only report (one added self-check section) and generated blueprint-index differ. 17783e0's landing return (ledger 08:48) was a missing OrdinaryFiniteP1Arrows.olean: a side/live dependency changed in live at 16:48, reached via the necessary public stmt_dep import OrdinarySupportedKummerSystem; mechanical, not a delivery fault. All 10 existing stmt_dep records equal live; item not landed (live lean null). Independent re-read: prime l, finite E, level n+1 incl. m=1, no e|m, l invertible, closed immersion with invertible ideal, i_*A_D -> published finiteTateProSheaf(1)[2], exists-unique normalized pair (SupportedKummerBoundary, unit squares, IsFiniteTateSiteComparison), same c for every r, Chern composite +c1 (sign consistent with the extension model), Cartier-preserving base change without flatness, all a<=b reductions; edge cases m=1, empty D/T, h=id, a=b, non-flat h. One sorry (theorem), no hollow defs, docstrings with source and blueprint id, lines <=100, report has Worker report + Second reading by Q121. nt_compile --json at load ~36: Reduction 24.8 s, CartierKummerMap 24.7 s, rc 0, no warnings; second run confirms OrdinaryFiniteP1Arrows now present as cached side override. M1: land with --revert-nodes lem-amb-finite-tate-site-descent (commit still rewrites N1's record). M2: re-land as is at low load; do not ask for another re-push. M3: stale report history, cosmetic."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CartierKummerMap",
+  "declaration": "AlgebraicGeometry.Etale.cartier_kummer_map",
+  "declarations": [
+   "AlgebraicGeometry.Etale.cartierAbelianEtale",
+   "AlgebraicGeometry.Etale.cartierAbelianGroups",
+   "AlgebraicGeometry.Etale.cartierHasExtAbelian",
+   "AlgebraicGeometry.Etale.cartierHasSheafifyAbelian",
+   "AlgebraicGeometry.Etale.cartierHasWeakSheafifyEtale",
+   "AlgebraicGeometry.Etale.cartierHasSheafifyEtale",
+   "AlgebraicGeometry.Etale.cartierHasExtEtale",
+   "AlgebraicGeometry.Etale.cartierConstantComparison",
+   "AlgebraicGeometry.Etale.CartierEtaleKummerFamily",
+   "AlgebraicGeometry.Etale.CartierEtaleKummerNormalization",
+   "AlgebraicGeometry.Etale.CartierEtaleKummerReduction",
+   "AlgebraicGeometry.Etale.CartierKummerRealization",
+   "AlgebraicGeometry.Etale.CartierKummerBaseChange",
+   "AlgebraicGeometry.Etale.CartierKummerChern",
+   "AlgebraicGeometry.Etale.cartier_kummer_map",
+   "AlgebraicGeometry.Etale.cartierKummerMap"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CartierKummerMap.lean",
+  "statement": "theorem cartier_kummer_map : (∀ n : ℕ, ∃ r : ℕ, ((l ^ (r + 1) : ℕ) : finiteTateCoefficient l E n) = 0) ∧ ∃! data : CartierEtaleKummerFamily l E × CartierKummerFamily l E, CartierEtaleKummerNormalization l E data.1 ∧ CartierEtaleKummerReduction l E data.1 ∧ CartierKummerRealization l E data.1 data.2 ∧ CartierKummerChern l E data.2 ∧ CartierKummerBaseChange l E data.2 ∧ CartierKummerReduction l E data.2",
+  "branch": "newtargets-dag",
+  "by": "Q121",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Uses the published finiteTateProSheaf, finiteTateProGenerator and root-normalized finite Tate comparison/pullback interfaces. The target is the existing original pro-etale twist in its fixed-scalar presentation. Positive quotient levels are n+1 and positive auxiliary Kummer exponents are r+1; no ramification-index divisibility hypothesis. Added only already published dependencies. Return L F1: cite the owning definition node for the fixed-scalar Tate interfaces; no statement dependency on the descent theorem."
  }
 }

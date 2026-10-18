@@ -1,0 +1,120 @@
+{
+ "id": "def-sp-etale-compact-support-normalization",
+ "kind": "definition",
+ "title": "Graph-normalized ordinary etale compact-support comparison datum",
+ "status": "split",
+ "statement": "Let $A$ be a commutative ring of universe $u+1$. Work with schemes of universe $u$ [def-pc-scheme] and ordinary unbounded derived categories of constant-$A$ module sheaves [def-weil-pbc-derived-categories]. A graph-normalized compact-support comparison datum consists of the following simultaneous data. For every separated etale morphism $v:V\\to T$ [def-weil-etale-morphism] [def-weil-proper-morphism] between Noetherian schemes and every compactification $c=(j,r)$ [def-weil-compactifications-refinements], it supplies an isomorphism $c_{v,c}:Rr_*Dj_!\\simeq Dv_{\\Sigma!}$ from ordinary compact support [def-amb-etale-compact-support] to derived sum extension [def-weil-pbc-etale-sum-extension], and a sheaf map $a_{v,c}:v_{\\Sigma!}\\to r_*j_!$. The composite of $a_{v,c}$ with the canonical map $r_*j_!\\to v_*$ is the graph-extension sum-to-direct-image map; on each homotopy representative, $c_{v,c}^{-1}$ is the degreewise descent of $a_{v,c}$ followed by the total right-derived unit. For quasi-compact $v$, the actual proper-exchange/open-extension base-change square equals the square for the inverse sum-extension exchange, and the corresponding pasted square holds for two successive changes of base, using inverse image [def-weil-pbc-inverse-image]. Under a proper refinement with Noetherian coarser compactification scheme the comparisons commute with the proper/open direct-image composition normalized over $V$. For the identity compactification of an identity morphism the comparison is the canonical identity comparison. Finally, for each right adjoint $G$ of $Rr_*Dj_!$ with specified adjunction, there is a unique isomorphism $G\\simeq v^*$ whose counit, transported by $c_{v,c}$, is exactly the degreewise sum/evaluation counit. This defines the datum only; no existence of such a family is asserted.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-derived-categories",
+  "def-weil-etale-morphism",
+  "def-weil-proper-morphism",
+  "def-weil-compactifications-refinements",
+  "def-amb-etale-compact-support",
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-pbc-inverse-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03S3 (definition-extension-zero: sum-extension/inverse-image adjunction), 03S5 (proposition-describe-jshriek: exactness), 03S6 (lemma-shriek-base-change: canonical base-change comparison), and 0F4L (lemma-shriek-into-star-separated-etale: graph-extension map into direct image). The simultaneous graph, derived, refinement, identity, base-change and counit normalization datum is assembled from these maps; its existence is not asserted by this definition."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical derived etale sum extension adjunction compact support composition comparison",
+   "results": "OK 8 hit(s): CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.comp, SheafOfModules.PullbackConstruction.adjunction, CompHausLike.LocallyConstant.adjunction_unit, CategoryTheory.Adjunction.IsTriangulated.comp, CategoryTheory.Adjunction.derivedη, SheafOfModules.pullbackComp. These are general adjunction constructions, not the named compact-support comparisons.",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib match; reuse the published Sheaf definitions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "graph normalized compact support to etale sum extension comparison family base change refinement counit",
+   "results": "OK 8 hit(s): CompHausLike.LocallyConstant.counit_app_val, CompHausLike.LocallyConstant.counit, CompHausLike.LocallyConstant.counitApp, ModuleCat.RestrictionCoextensionAdj.counit', CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction, CompHausLike.LocallyConstant.incl_of_counitAppApp, Condensed.profiniteSolidCounit, CompHausLike.LocallyConstant.counitAppApp. None is the graph-normalized comparison record.",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib match; the existing Sheaf structure owns the notion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical bounded below compact support comparison between etale and proetale sites",
+   "results": "OK 8 hit(s): AlgebraicGeometry.Scheme.zariskiTopology_le_etaleTopology, AlgebraicGeometry.Scheme.smallEtaleTopology, AlgebraicGeometry.Scheme.etaleTopology, Condensed.lanCondensedSet, LightProfinite.instWEqualsLocallyBijectiveCoherentTopology, Condensed.lanSheafProfinite, LightCondensed, LightCondensed.lanLightCondSet. None states this comparison.",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "loogle",
+   "query": "EtaleCompactSupportNormalization, etaleAmbientLeftComparison, fixedCompactSupportComparisonIso",
+   "results": "OK 0 hit(s) | loogle: unknown identifier 'EtaleCompactSupportNormalization'",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib match."
+  },
+  {
+   "tool": "grep",
+   "query": "EtaleCompactSupportNormalization|etaleAmbientLeftComparison|fixedCompactSupportComparisonIso|derivedEtaleLowerShriekUpperStarAdjunction (Mathlib, msearch.py)",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib definition."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n EtaleCompactSupportNormalization|etaleAmbientLeftComparison|fixedCompactSupportComparisonIso|derivedEtaleLowerShriekUpperStarAdjunction /home/ubuntu/weil-src-slopmaster2/WeilConjectures /home/ubuntu/weil-newtargets-shared/lean/Sheaf; rg -l same names dag/nodes; tools/blueprint_refs.py search each name",
+   "results": "Upstream old source has only the Plus adjunction in FreeSheaf. Sheaf has the actual definitions at EtaleAmbientAdjointLocality.lean:107,122, FiniteComparisonClassAdjunction.lean:85 and EtaleCompactSupportNormalization.lean:171. DAG references occur in theorem/helper consumers, not definition nodes owning these three notions. Each exact-name blueprint_refs search returned 0 blueprint nodes. Current source also supplies the generic adjunction in WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMapProjection, publicly available through the existing locality module.",
+   "date": "2026-10-18",
+   "verdict": "Exact existing definitions found; add definition ownership records only, no duplicate module."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "det-sp-reduction-exceptional",
+  "date": "2026-10-18",
+  "group": "NW"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "the counit-preserving chart identification in the exceptional coefficient comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleCompactSupportNormalization",
+  "declaration": "AlgebraicGeometry.Etale.EtaleCompactSupportNormalization",
+  "statement": "structure EtaleCompactSupportNormalization (A : Type (u + 1)) [CommRing A]",
+  "branch": "newtargets-dag",
+  "by": "NW",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Definition ownership for the published structure, independent of the theorem nonempty_etaleCompactSupportNormalization. No finite-ring premise is added to the structure: finiteness belongs to its existence theorem. The record fixes actual graph and representative maps, not arbitrary comparison isomorphisms."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0a747bdc9",
+  "group": "NW",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0a747bdc9",
+  "group": "NW",
+  "result": "pass",
+  "note": "Re-delivery after lead return of PASSed head 249843638e94 (review_split route lock: def-sp-etale-compact-support-normalization source cited SGA 4). diff -rq vs that snapshot: only that node's source.place (now Stacks 03S3/03S5/03S6/0F4L with roles, labels verified in etale-cohomology.tex) and the report changed; the Lean module is byte-identical to the PASSed module, and all dependency records are identical to live. The route-lock regex finds no hit on the item or its 4 new def nodes. Statement re-read clause by clause (smooth of rel. dim d, fixed compactification, finite l-power A,B of Type u, any phi, Dctf, actual reductionDirectImageComparison, exists-unique natural c with counit identity, isIso, chart equation pinned by rightAdjointUniq and origin equation). Edge cases d=0, zero ring, non-flat phi, empty schemes are OK. Mechanical finding: tensorIso, openSquarePullbackModel, sfRealizationRestriction and scalarPullbackIso are each .choose of their theorem's own existsUnique, so the theorem stmt_deps are genuine; PASS on that point. nt_compile --json: 18.1 s, rc 0, no error or non-sorry warning. 5 sorry, all in theorems; no line over 100 characters; docstrings carry the 13 steps. Advisory: the published EtaleCompactSupportNormalization.lean docstrings still cite SGA 4; the module of sfRealizationRestriction (Paper.SfCompactSupportRestrictionOfScalars) is no longer named by the live lem-sf-compact-support-restriction-of-scalars record."
+ }
+}

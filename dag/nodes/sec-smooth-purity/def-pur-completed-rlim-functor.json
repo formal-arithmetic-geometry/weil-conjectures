@@ -1,0 +1,109 @@
+{
+ "id": "def-pur-completed-rlim-functor",
+ "kind": "definition",
+ "title": "The completed-coefficient inverse-limit functor and its derived projections",
+ "status": "split",
+ "statement": "Let $T$ be a scheme with the small pro-etale site, and let $R$ be a sheaf of commutative rings on that site. Use the module category $\\operatorname{Mod}(R)$ and strict tower category $\\operatorname{Tow}_R(T)=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{\\mathrm{op}},\\operatorname{Mod}(R))$ with exact evaluations $\\operatorname{ev}_n$ of [def-weil-pbc-adic-coefficient-datum]. Define $L_R:\\operatorname{Tow}_R(T)\\to\\operatorname{Mod}(R)$ to be ordinary inverse limit, with its additive structure induced by preservation of binary products. On the derived categories of [def-weil-abstract-derived-category], define $\\mathrm{Rlim}_R=\\mathbf R L_R$, the total right derived functor of this actual inverse-limit functor, computed using K-injective resolutions of strict tower complexes. For each positive level $n$, define its projection natural transformation $\\pi_n^D:\\mathrm{Rlim}_R\\to D(\\operatorname{ev}_n)$ by applying the right-derived-natural-transformation construction to the ordinary limit projection $L_R\\to\\operatorname{ev}_n$ and composing with the canonical comparison $\\mathbf R\\operatorname{ev}_n\\cong D(\\operatorname{ev}_n)$ for exact evaluation. Lean indexes the positive level $n$ by $n-1\\in\\mathbf N$. These are the published constructions completedTowerLimit, coherenceTowerLimit_additive, completedRlim and completedRlimProjection; no triangulatedness, Roos-triangle or resolution-independence assertion is part of this definition.",
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/prop-weil-pbc-rlim-functoriality.md",
+  "place": "The displayed Rlim assignment, its ordinary inverse-limit functor, and evaluation projections; published constructions in lean/Sheaf/Paper/CompletedRlimFunctor.lean, definitions completedTowerLimit, completedRlim and completedRlimProjection, with coherenceTowerLimit_additive."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "completedRlim|completedTowerLimit|rightDerived.*lim",
+   "results": "{\"t\": \"2026-10-18T08:34:05Z\", \"tool\": \"grep\", \"query\": \"completedRlim|completedTowerLimit|rightDerived.*lim\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\"], \"digest\": \"4ec8d5b5a7d69875\"}",
+   "date": "2026-10-18",
+   "verdict": "Generic derived-functor ingredients only; reuse the exact published specialization in Sheaf.Paper.CompletedRlimFunctor."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.totalRightDerived",
+   "results": "{\"t\": \"2026-10-18T08:36:04Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.totalRightDerived\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.totalRightDerived\", \"CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit\", \"CategoryTheory.Functor.totalRightDerivedUnit\", \"CategoryTheory.Functor.IsRightDerivedFunctor.instCommShiftTotalRightDerived\"], \"digest\": \"8bd13f467feee3bd\"}",
+   "date": "2026-10-18",
+   "verdict": "Mathlib supplies the generic totalRightDerived and its unit; reuse the already published sheaf-tower specialization and projections in CompletedRlimFunctor."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The total right derived inverse limit functor on towers of sheaves of modules, with its projection natural transformations",
+   "results": "{\"t\": \"2026-10-18T08:34:05Z\", \"tool\": \"leansearch\", \"query\": \"The total right derived inverse limit functor on towers of sheaves of modules, with its projection natural transformations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.totalRightDerived\", \"CategoryTheory.Functor.limitIsoOfIsRightKanExtension_inv_π_assoc\", \"CategoryTheory.Functor.totalLeftDerived\", \"CategoryTheory.Functor.limitIsoOfIsRightKanExtension_inv_π\", \"CategoryTheory.NatTrans.rightDerived\", \"CategoryTheory.Functor.toRightDerivedZero\", \"CategoryTheory.Functor.rightDerivedNatTrans\", \"PresheafOfModules.limitCone_π_app_app\"], \"digest\": \"e10ab34a80d8b832\"}",
+   "date": "2026-10-18",
+   "verdict": "Generic derived-functor ingredients only; reuse the exact published specialization in Sheaf.Paper.CompletedRlimFunctor."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l completedTowerLimit|completedRlimProjection|coherenceTowerLimit_additive dag/nodes; rg -n completedRlim|completedTowerLimit WeilConjectures; rg -n completedRlim|completedTowerLimit lean/Sheaf; blueprint_refs.py search completed",
+   "results": "The DAG carries the properties theorem in prop-weil-pbc-rlim-functoriality, not a definition node for the four constructions. Upstream WeilConjectures has no completedRlim/completedTowerLimit match. Sheaf.Paper.CompletedRlimFunctor supplies all four exact declarations; other Sheaf matches are consumers. The blueprint search returns coefficient/completion nodes and the Rlim property theorem, not a definition node for this functor and its derived projections.",
+   "date": "2026-10-18",
+   "verdict": "Existing published constructions reused; no duplicate Lean module or declaration."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-condensed-tate-realization",
+  "date": "2026-10-18",
+  "group": "NG"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Step 2 of thm-pur-rational-and-qbar-purity: functorial reconstruction of the positive Tate tower and its canonical projections, used in lem-pur-condensed-tate-realization.",
+   "via": [
+    "lem-pur-condensed-tate-realization",
+    "nt-target-smooth-purity-qbar"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "module": "Sheaf.Paper.CompletedRlimFunctor",
+  "declaration": "AlgebraicGeometry.Scheme.completedRlim",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.completedTowerLimit",
+   "AlgebraicGeometry.Scheme.coherenceTowerLimit_additive",
+   "AlgebraicGeometry.Scheme.completedRlim",
+   "AlgebraicGeometry.Scheme.completedRlimProjection"
+  ],
+  "statement": "abbrev completedRlim (T : Scheme.{t})\n    (R : Sheaf (ProEt.topology T) CommRingCat.{t + 1}) :\n    DerivedCategory (reductionTowerCategory T (reductionModuleRing T R)) ⥤\n      reductionDerivedCategory T R",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Return H2 repair: records only the four published constructions used by CondensedTateRealization, without using completedRlim_computation, completedRlim_properties or completedRlim_roos. No copied module. Source verified through scompile.py --source Sheaf.Paper.CompletedRlimFunctor."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0349ea70a",
+  "group": "NG",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0349ea70a",
+  "group": "NG",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of feaf3d32ec36. Both theorem stmt_deps (prop-weil-pbc-rlim-functoriality, prop-weil-pbc-levelwise-truncations) removed; stmt_deps = base 10 + new def node def-pur-completed-rlim-functor. That node is existing:true on the four published CompletedRlimFunctor decls (completedTowerLimit, coherenceTowerLimit_additive, completedRlim, completedRlimProjection); its statement is verbatim lines 67-70; nothing is copied; the owner record is untouched; no cycle; the id is new; the H12 fields are present. The Lean is byte-identical except that the LevelwiseAdicTruncations import is dropped and two local letI's are added in ambientRealizationCommShift, using the same terms as pbcLevelwiseScalarCommShift, so there is no diamond. The node's statement and proof are unchanged vs base; the main lean.statement is verbatim; all 58 declarations are recorded. Independent clause check: l prime, char k prime ≠ l, Base k, R_X, B_X = padicAlgCl, finite tower with exponent n+1 and quotient/root-power maps, M_d = completedRlim of the tower shifted by [2d], hM membership in PbcIsBoundedConstructibleComplete over Z_l plus canonical reductions, J from At via M[1/l] then derived extension to B, ∃! e normalized by the balanced powers, d=0 fixed to integralToQbar. No universe restriction, no hollow defs, proofs are sorry only, docstrings ok, both report sections present (the second reading is a declared self-check). nt_compile --json: clean, 52.2 s of the 60 s limit, exit 0. Maintainer notes: thin compile margin; the new node's stmt_deps could also cite def-weil-pbc-kinjective-resolutions (minor)."
+ }
+}
