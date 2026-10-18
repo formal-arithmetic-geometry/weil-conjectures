@@ -463,7 +463,7 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.WeilSheaf.CohomologyGeometricConjugacy` | 4 | 1 | `def-weil-global-geometric-frobenius` |
 | `WeilConjectures.DeligneLaumon.Reduction.RealSheaves` | 4 | 2 | `sk-l-dl-general-quasifinite` |
 | `WeilConjectures.WeilSheaf.LowerShriekFunctoriality` | 4 | 1 | `def-fix-six-functor-datum` |
-| `Sheaf.AlgebraicGeometry.EllAdicProperTruncationBound` | 5 | 1 | `det-prop-int-compactness-direct-sums` |
+| `Sheaf.AlgebraicGeometry.EllAdicProperTruncationBound` | 5 | 1 | `det-proper-unbounded-window-arbitrary` |
 | `WeilConjectures.AlgebraicGeometry.Bertini` | 5 | 1 | `def-weil-global-geometric-frobenius` |
 | `WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy` | 5 | 7 | `lem-fd-rational-coefficient-category-comparison` |
 | `WeilConjectures.SixFunctors.Etale.Derived.IntegralCoefficients` | 5 | 7 | `lem-coef-finite-exceptional` |
