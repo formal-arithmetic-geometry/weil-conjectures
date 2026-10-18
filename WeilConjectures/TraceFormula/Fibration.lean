@@ -1,0 +1,352 @@
+/-
+Copyright (c) 2026 Claude. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: Claude
+-/
+module
+
+public import WeilConjectures.AlgebraicGeometry.AffinePresentation
+public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
+public import WeilConjectures.TraceFormula.ModelDegreeOne
+
+/-!
+
+# The fibration step of the trace formula
+
+Let `π₀ : X₀ ⟶ Y₀` be a morphism of `k₀`-schemes with `Y₀` affine. The degree one trace formula
+over `Y₀` and over all the fibres of `π₀` above `k₀`-points gives the degree one trace formula over
+`X₀` (`ProEtale.CondensedRing.ModelTraceFormulaOne.of_fibration`, blueprint
+`sk-thm-trace-formula`, the induction on the number of variables, through `sk-d-weil-push`):
+
+* the Weil `!`-pushforward `Rf_! K` along the base change `f : X ⟶ Y` of `π₀`, with the relative
+  Frobenius `r : X ⟶ X ×_{Y, Φ_Y} Y`, a finite universal homeomorphism
+  (`ProEtale.CondensedRing.relativeFrobenius`), has the compactly supported Frobenius of `K`
+  (Leray isomorphism, `nonempty_weilCompactCohomology_weilLowerShriekOfFrobenius_iso`);
+* by the degree one trace formula over `Y₀`, its trace is the sum over the points `y` fixed by
+  `Φ_Y` of the traces of the stalk Frobenii of `Rf_! K`, which are the compactly supported
+  Frobenii of the restrictions of `K` to the fibres `X_y` (proper base change,
+  `nonempty_weilStalk_weilLowerShriekOfFrobenius_iso`);
+* the fibres `X_y` are base changes of the fibres of `π₀` above the `k₀`-points `y₀` of `Y₀`
+  underlying `y` (`ProEtale.CondensedRing.IsModelFrobenius.fibre`), and the points of `X` fixed by
+  `Φ` are the disjoint union of the points of the fibres fixed by their Frobenii
+  (`ProEtale.CondensedRing.sum_fixedPoint_eq_sum_sum_fibre`).
+
+-/
+
+@[expose] public section
+
+universe u
+
+open CategoryTheory Limits MonoidalCategory Endofunctor
+
+open scoped CategoryTheory.Functor CategoryTheory.Obj
+
+namespace AlgebraicGeometry.ProEtale.CondensedRing
+
+open Scheme
+
+attribute [local instance] boundedConstructibleBraiding
+
+/-! ### The standard model of a scheme over `k₀` -/
+
+section StdModel
+
+variable {k : Type u} [Field k] {k₀ : Type u} [Field k₀] [Algebra k₀ k] {Y₀ : Scheme.{u}}
+  (g₀ : Y₀ ⟶ Spec (.of k₀))
+
+variable (k) in
+/-- The base change `Y₀ ×_{k₀} k` of a `k₀`-scheme, an object of `Over (Spec (.of k))`. -/
+noncomputable abbrev stdModel : Over (Spec (.of k)) :=
+  Over.mk (pullback.snd g₀ (Spec.map (CommRingCat.ofHom (algebraMap k₀ k))))
+
+instance [LocallyOfFiniteType g₀] : LocallyOfFiniteType (stdModel k g₀).hom :=
+  inferInstanceAs (LocallyOfFiniteType (pullback.snd _ _))
+
+instance [QuasiCompact g₀] : QuasiCompact (stdModel k g₀).hom :=
+  inferInstanceAs (QuasiCompact (pullback.snd _ _))
+
+instance [IsSeparated g₀] : IsSeparated (stdModel k g₀).hom :=
+  inferInstanceAs (IsSeparated (pullback.snd _ _))
+
+/-- The endomorphism `F × 𝟙` of the base change `Y₀ ×_{k₀} k`, for a `k₀`-endomorphism `F` of
+`Y₀`. -/
+noncomputable def stdModelFrobenius {F : Y₀ ⟶ Y₀} (hF : F ≫ g₀ = g₀) :
+    stdModel k g₀ ⟶ stdModel k g₀ :=
+  Over.homMk (pullback.lift (pullback.fst _ _ ≫ F) (pullback.snd _ _)
+    (by rw [Category.assoc, hF, pullback.condition])) (by simp)
+
+/-- The base change of a `k₀`-scheme with the base change of its Frobenius is a model. -/
+lemma isModelFrobenius_stdModel [Finite k₀] {F : Y₀ ⟶ Y₀} (hF : F.IsFrobenius (Nat.card k₀)) :
+    IsModelFrobenius (stdModelFrobenius (k := k) g₀ (hF.comp_eq g₀)) g₀ (pullback.fst _ _) where
+  isPullback := IsPullback.of_hasPullback _ _
+  exists_isFrobenius := ⟨F, hF, pullback.lift_fst _ _ _⟩
+
+end StdModel
+
+/-! ### Fibres over rational points -/
+
+section Fibre
+
+variable {k : Type u} [Field k] {X Y : Over (Spec (.of k))} (f : X ⟶ Y) {Φ : X ⟶ X}
+  {ΦY : Y ⟶ Y} (hf : Φ ≫ f = f ≫ ΦY) (y : RationalPoint Y) (hy : y ≫ ΦY = y)
+
+/-- A rational point is a closed immersion. -/
+lemma isClosedImmersion_rationalPoint (y : RationalPoint Y) : IsClosedImmersion y.left :=
+  isClosedImmersion_of_comp_eq_id Y.hom y.left (Over.w y)
+
+/-- The fibre `X_y = X ×_Y y` of `f : X ⟶ Y` over a rational point `y`. -/
+noncomputable abbrev fibre : Over (Spec (.of k)) :=
+  pullback f y
+
+/-- The inclusion `X_y ⟶ X` of the fibre. -/
+noncomputable abbrev fibreι : fibre f y ⟶ X :=
+  pullback.fst f y
+
+/-- The inclusion of the fibre is a closed immersion. -/
+instance isClosedImmersion_fibreι : IsClosedImmersion (fibreι f y).left :=
+  have := isClosedImmersion_rationalPoint y
+  MorphismProperty.of_isPullback ((IsPullback.of_hasPullback f y).map (Over.forget _)).flip
+    (inferInstanceAs (IsClosedImmersion y.left))
+
+lemma fibre_hom : (fibre f y).hom = (fibreι f y).left ≫ X.hom :=
+  (Over.w (fibreι f y)).symm
+
+instance [LocallyOfFiniteType X.hom] : LocallyOfFiniteType (fibre f y).hom := by
+  rw [fibre_hom]
+  infer_instance
+
+instance [QuasiCompact X.hom] : QuasiCompact (fibre f y).hom := by
+  rw [fibre_hom]
+  infer_instance
+
+instance [IsSeparated X.hom] : IsSeparated (fibre f y).hom := by
+  rw [fibre_hom]
+  infer_instance
+
+/-- The fibre square `X_y ⟶ X`, `X_y ⟶ s` over `f` and `y` is cartesian. -/
+lemma isPullback_fibre : IsPullback (fibreι f y) (toPoint (fibre f y)) f y := by
+  have h := IsPullback.of_hasPullback f y
+  rwa [toPoint_ext (pullback.snd f y) (toPoint _)] at h
+
+/-- The Frobenius `Φ_y` of the fibre over a point `y` fixed by `Φ_Y`, the restriction of `Φ`. -/
+noncomputable def fibreFrobenius : fibre f y ⟶ fibre f y :=
+  pullback.lift (pullback.fst f y ≫ Φ) (pullback.snd f y)
+    (by rw [Category.assoc, hf, pullback.condition_assoc, hy])
+
+@[reassoc]
+lemma fibreFrobenius_ι : fibreFrobenius f hf y hy ≫ fibreι f y = fibreι f y ≫ Φ :=
+  pullback.lift_fst _ _ _
+
+/-- The points of `X` fixed by `Φ` above `y` are the points of the fibre `X_y` fixed by
+`Φ_y`. -/
+noncomputable def fibreFixedPointEquiv :
+    {x : {x : RationalPoint X // x ≫ Φ = x} // x.1 ≫ f = y} ≃
+      {z : RationalPoint (fibre f y) // z ≫ fibreFrobenius f hf y hy = z} where
+  toFun x := ⟨pullback.lift x.1.1 (𝟙 _) (by rw [x.2, Category.id_comp]), by
+    apply pullback.hom_ext
+    · rw [Category.assoc, fibreFrobenius_ι, pullback.lift_fst_assoc, pullback.lift_fst, x.1.2]
+    · exact toPoint_ext _ _⟩
+  invFun z := ⟨⟨z.1 ≫ fibreι f y, by
+    rw [Category.assoc, ← fibreFrobenius_ι f hf y hy, ← Category.assoc, z.2]⟩, by
+    rw [Category.assoc, pullback.condition, ← Category.assoc,
+      toPoint_ext (z.1 ≫ pullback.snd f y) (𝟙 _), Category.id_comp]⟩
+  left_inv x := Subtype.ext (Subtype.ext (pullback.lift_fst _ _ _))
+  right_inv z := Subtype.ext (pullback.hom_ext (pullback.lift_fst _ _ _) (toPoint_ext _ _))
+
+end Fibre
+
+/-! ### The relative Frobenius -/
+
+section RelativeFrobenius
+
+variable {k : Type u} [Field k] {X Y : Over (Spec (.of k))} (f : X ⟶ Y) {Φ : X ⟶ X}
+  {ΦY : Y ⟶ Y} (hf : Φ ≫ f = f ≫ ΦY)
+
+/-- The *relative Frobenius* `r = (Φ, f) : X ⟶ X ×_{Y, Φ_Y} Y` (blueprint `sk-d-relative-frob`). -/
+noncomputable def relativeFrobenius : X ⟶ pullback f ΦY :=
+  pullback.lift Φ f hf
+
+@[reassoc (attr := simp)]
+lemma relativeFrobenius_fst : relativeFrobenius f hf ≫ pullback.fst f ΦY = Φ :=
+  pullback.lift_fst _ _ _
+
+@[reassoc (attr := simp)]
+lemma relativeFrobenius_snd : relativeFrobenius f hf ≫ pullback.snd f ΦY = f :=
+  pullback.lift_snd _ _ _
+
+lemma pullback_frobenius_hom :
+    (pullback f ΦY).hom = (pullback.fst f ΦY).left ≫ X.hom :=
+  (Over.w (pullback.fst f ΦY)).symm
+
+variable [IsFinite ΦY.left] [IsUniversalHomeomorphism ΦY.left]
+
+instance isFinite_pullback_fst_frobenius : IsFinite (pullback.fst f ΦY).left :=
+  MorphismProperty.of_isPullback ((IsPullback.of_hasPullback f ΦY).map (Over.forget _)).flip
+    (inferInstanceAs (IsFinite ΦY.left))
+
+instance isUniversalHomeomorphism_pullback_fst_frobenius :
+    IsUniversalHomeomorphism (pullback.fst f ΦY).left :=
+  MorphismProperty.of_isPullback ((IsPullback.of_hasPullback f ΦY).map (Over.forget _)).flip
+    (inferInstanceAs (IsUniversalHomeomorphism ΦY.left))
+
+instance [LocallyOfFiniteType X.hom] : LocallyOfFiniteType (pullback f ΦY).hom := by
+  rw [pullback_frobenius_hom]
+  infer_instance
+
+instance [QuasiCompact X.hom] : QuasiCompact (pullback f ΦY).hom := by
+  rw [pullback_frobenius_hom]
+  infer_instance
+
+instance [IsSeparated X.hom] : IsSeparated (pullback f ΦY).hom := by
+  rw [pullback_frobenius_hom]
+  infer_instance
+
+variable [IsFinite Φ.left] [IsUniversalHomeomorphism Φ.left]
+
+/-- The relative Frobenius is finite. -/
+instance isFinite_relativeFrobenius : IsFinite (relativeFrobenius f hf).left := by
+  have : IsFinite ((relativeFrobenius f hf).left ≫ (pullback.fst f ΦY).left) := by
+    rw [← Over.comp_left, relativeFrobenius_fst]
+    infer_instance
+  exact IsFinite.of_comp _ (pullback.fst f ΦY).left
+
+/-- The relative Frobenius is a universal homeomorphism. -/
+instance isUniversalHomeomorphism_relativeFrobenius :
+    IsUniversalHomeomorphism (relativeFrobenius f hf).left := by
+  have : IsUniversalHomeomorphism
+      ((relativeFrobenius f hf).left ≫ (pullback.fst f ΦY).left) := by
+    rw [← Over.comp_left, relativeFrobenius_fst]
+    infer_instance
+  exact IsUniversalHomeomorphism.of_comp _ (pullback.fst f ΦY).left
+
+end RelativeFrobenius
+
+/-! ### Summing over the fibres -/
+
+section Sum
+
+variable {k : Type u} [Field k] {X Y : Over (Spec (.of k))} (f : X ⟶ Y) {Φ : X ⟶ X}
+  {ΦY : Y ⟶ Y} (hf : Φ ≫ f = f ≫ ΦY)
+
+/-- A sum over the points of `X` fixed by `Φ` is the sum over the points `y` of `Y` fixed by
+`Φ_Y` of the sums over the points of the fibres `X_y` fixed by `Φ_y`. -/
+lemma sum_fixedPoint_eq_sum_sum_fibre {M : Type*} [AddCommMonoid M] (F : RationalPoint X → M)
+    [Fintype {x : RationalPoint X // x ≫ Φ = x}] [Fintype {y : RationalPoint Y // y ≫ ΦY = y}]
+    [∀ y : {y : RationalPoint Y // y ≫ ΦY = y},
+      Fintype {z : RationalPoint (fibre f y.1) // z ≫ fibreFrobenius f hf y.1 y.2 = z}] :
+    ∑ x : {x : RationalPoint X // x ≫ Φ = x}, F x.1 =
+      ∑ y : {y : RationalPoint Y // y ≫ ΦY = y},
+        ∑ z : {z : RationalPoint (fibre f y.1) // z ≫ fibreFrobenius f hf y.1 y.2 = z},
+          F (z.1 ≫ fibreι f y.1) := by
+  classical
+  let g : {x : RationalPoint X // x ≫ Φ = x} → {y : RationalPoint Y // y ≫ ΦY = y} :=
+    fun x ↦ ⟨x.1 ≫ f, by rw [Category.assoc, ← hf, ← Category.assoc, x.2]⟩
+  rw [← Finset.sum_fiberwise Finset.univ g]
+  refine Finset.sum_congr rfl fun y _ ↦ ?_
+  rw [Finset.sum_subtype (Finset.univ.filter fun x ↦ g x = y) (p := fun x ↦ g x = y)
+    (F := Subtype.fintype _) (fun x ↦ by simp)]
+  let e : {x : {x : RationalPoint X // x ≫ Φ = x} // g x = y} ≃
+      {x : {x : RationalPoint X // x ≫ Φ = x} // x.1 ≫ f = y.1} :=
+    Equiv.subtypeEquivRight fun x ↦ Subtype.ext_iff
+  refine Fintype.sum_equiv (e.trans (fibreFixedPointEquiv f hf y.1 y.2)) _ _ fun x ↦ ?_
+  simp [e, fibreFixedPointEquiv]
+
+end Sum
+
+/-! ### The model of a fibre -/
+
+section FibreModel
+
+variable {k : Type u} [Field k] {X : Over (Spec (.of k))} {Φ : X ⟶ X}
+  {k₀ : Type u} [Field k₀] [Algebra k₀ k] {X₀ Y₀ : Scheme.{u}}
+  {f₀ : X₀ ⟶ Spec (.of k₀)} {p : X.left ⟶ X₀} (π₀ : X₀ ⟶ Y₀) {g₀ : Y₀ ⟶ Spec (.of k₀)}
+  (hπ : π₀ ≫ g₀ = f₀)
+
+/-- The base change `f : X ⟶ Y₀ ×_{k₀} k` of `π₀ : X₀ ⟶ Y₀`. -/
+noncomputable def stdModelMap
+    (w : p ≫ f₀ = X.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap k₀ k))) :
+    X ⟶ stdModel k g₀ :=
+  Over.homMk (pullback.lift (p ≫ π₀) X.hom (by rw [Category.assoc, hπ, w])) (by simp)
+
+@[reassoc (attr := simp)]
+lemma stdModelMap_left_fst (w : p ≫ f₀ = X.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap k₀ k))) :
+    (stdModelMap π₀ hπ w).left ≫ pullback.fst _ _ = p ≫ π₀ :=
+  pullback.lift_fst _ _ _
+
+/-- The base change of `π₀` is compatible with the model Frobenii. -/
+lemma stdModelMap_comp [Finite k₀] {F₀ : X₀ ⟶ X₀} (hF₀ : F₀.IsFrobenius (Nat.card k₀))
+    (hp : Φ.left ≫ p = p ≫ F₀) {FY : Y₀ ⟶ Y₀} (hFY : FY.IsFrobenius (Nat.card k₀))
+    (w : p ≫ f₀ = X.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap k₀ k))) :
+    Φ ≫ stdModelMap π₀ hπ w = stdModelMap π₀ hπ w ≫ stdModelFrobenius g₀ (hFY.comp_eq g₀) := by
+  have hc : π₀ ≫ FY = F₀ ≫ π₀ := hF₀.comp_eq_comp f₀ hFY π₀
+  refine Over.OverMorphism.ext (pullback.hom_ext ?_ ?_)
+  · simp [stdModelMap, stdModelFrobenius, reassoc_of% hp, hc]
+  · simp [stdModelMap, stdModelFrobenius]
+
+variable [Finite k₀] (hΦ : IsModelFrobenius Φ f₀ p)
+
+omit [Finite k₀] in
+/-- The square `X ⟶ X₀`, `X ⟶ Y₀ ×_{k₀} k` over `π₀` is cartesian. -/
+lemma isPullback_stdModelMap :
+    IsPullback p (stdModelMap π₀ hπ hΦ.isPullback.w).left π₀
+      (pullback.fst g₀ (Spec.map (CommRingCat.ofHom (algebraMap k₀ k)))) := by
+  refine IsPullback.of_bot ?_ (stdModelMap_left_fst π₀ hπ _).symm (IsPullback.of_hasPullback _ _)
+  have h := hΦ.isPullback
+  rwa [← hπ, ← Over.w (stdModelMap π₀ hπ hΦ.isPullback.w)] at h
+
+variable (y : RationalPoint (stdModel k g₀)) (y₀ : Spec (.of k₀) ⟶ Y₀)
+  (hy₀ : Spec.map (CommRingCat.ofHom (algebraMap k₀ k)) ≫ y₀ =
+    y.left ≫ pullback.fst g₀ (Spec.map (CommRingCat.ofHom (algebraMap k₀ k))))
+
+/-- The map from the fibre `X_y` to the fibre `X₀ ×_{Y₀} y₀` of `π₀`. -/
+noncomputable def fibreModelMap :
+    (fibre (stdModelMap π₀ hπ hΦ.isPullback.w) y).left ⟶ pullback π₀ y₀ :=
+  pullback.lift ((fibreι (stdModelMap π₀ hπ hΦ.isPullback.w) y).left ≫ p)
+    ((fibre (stdModelMap π₀ hπ hΦ.isPullback.w) y).hom ≫
+      Spec.map (CommRingCat.ofHom (algebraMap k₀ k))) (by
+    have h := congrArg CommaMorphism.left
+      (isPullback_fibre (stdModelMap π₀ hπ hΦ.isPullback.w) y).w
+    simp only [Over.comp_left, toPoint_left] at h
+    rw [Category.assoc, Category.assoc, hy₀, ← stdModelMap_left_fst π₀ hπ hΦ.isPullback.w,
+      ← Category.assoc, h, Category.assoc])
+
+variable {F₀ : X₀ ⟶ X₀} (hF₀ : F₀.IsFrobenius (Nat.card k₀)) (hp : Φ.left ≫ p = p ≫ F₀)
+  {FY : Y₀ ⟶ Y₀} (hFY : FY.IsFrobenius (Nat.card k₀))
+  (hy : y ≫ stdModelFrobenius g₀ (hFY.comp_eq g₀) = y)
+
+/-- **The fibres are models** (blueprint `sk-thm-trace-formula`): the fibre `X_y` of the base
+change of `π₀` over a point `y` fixed by `Φ_Y`, with its Frobenius `Φ_y`, is the base change of
+the fibre `X₀ ×_{Y₀} y₀` of `π₀` over the `k₀`-point `y₀` underlying `y`. -/
+theorem isModelFrobenius_fibre :
+    IsModelFrobenius (fibreFrobenius (stdModelMap π₀ hπ hΦ.isPullback.w)
+        (stdModelMap_comp π₀ hπ hF₀ hp hFY hΦ.isPullback.w) y hy)
+      (pullback.snd π₀ y₀) (fibreModelMap π₀ hπ hΦ y y₀ hy₀) where
+  isPullback := by
+    refine IsPullback.of_right ?_ (pullback.lift_snd _ _ _) (IsPullback.of_hasPullback π₀ y₀)
+    have h₁ := (isPullback_fibre (stdModelMap π₀ hπ hΦ.isPullback.w) y).map (Over.forget _)
+    simp only [Over.forget_map, toPoint_left] at h₁
+    have h := h₁.paste_horiz (isPullback_stdModelMap π₀ hπ hΦ)
+    rw [← hy₀] at h
+    have heq : fibreModelMap π₀ hπ hΦ y y₀ hy₀ ≫ pullback.fst π₀ y₀ =
+        (fibreι (stdModelMap π₀ hπ hΦ.isPullback.w) y).left ≫ p :=
+      pullback.lift_fst _ _ _
+    rw [heq]
+    exact h
+  exists_isFrobenius := by
+    obtain ⟨FZ, hFZ⟩ := Scheme.Hom.exists_isFrobenius (pullback.snd π₀ y₀)
+    refine ⟨FZ, hFZ, pullback.hom_ext ?_ ?_⟩
+    · have hc : pullback.fst π₀ y₀ ≫ F₀ = FZ ≫ pullback.fst π₀ y₀ :=
+        hFZ.comp_eq_comp (pullback.snd π₀ y₀) hF₀ _
+      have hι := congrArg CommaMorphism.left (fibreFrobenius_ι
+        (stdModelMap π₀ hπ hΦ.isPullback.w) (stdModelMap_comp π₀ hπ hF₀ hp hFY
+          hΦ.isPullback.w) y hy)
+      simp only [Over.comp_left] at hι
+      simp only [fibreModelMap, Category.assoc, pullback.lift_fst, ← hc,
+        pullback.lift_fst_assoc]
+      rw [← Category.assoc, hι, Category.assoc, hp]
+    · simp only [fibreModelMap, Category.assoc, pullback.lift_snd, hFZ.comp_eq]
+      rw [← Category.assoc, Over.w]
+
+end FibreModel
+
+end AlgebraicGeometry.ProEtale.CondensedRing
