@@ -16228,3 +16228,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:29 L: merged deliver/X7/Sheaf.AlgebraicGeometry.EtaleModuleStalkSpecialization (stage 3; reviewer PASS; first push; landing 20261018T062950-L-692076 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:29 L: merged deliver/X8/Sheaf.AlgebraicGeometry.GeometricComponentCountBaseChange (stage 3; reviewer PASS; first push; landing 20261018T062951-L-692328 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:29 L: merged deliver/X9/Sheaf.AlgebraicGeometry.GeometricSpecializationStrictLocalLift (stage 3; reviewer PASS; first push; landing 20261018T062951-L-692645 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:29 L: merged deliver/Y2/Sheaf.AlgebraicGeometry.FundamentalGroup.OpenSubgroups (stage 3; reviewer PASS; first push; landing 20261018T062952-L-692844 (proof); batch 20261018T062645; modules 1; new nodes 0)
