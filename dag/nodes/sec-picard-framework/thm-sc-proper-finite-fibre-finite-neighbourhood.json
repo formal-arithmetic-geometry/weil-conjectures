@@ -24,68 +24,24 @@
  ],
  "proof": [
   {
-   "text": "Because a proper morphism is of finite type, the finite-fibre hypothesis at $s$ implies that $f$ is quasi-finite at every point of the fibre over $s$, by [pqf-lem-locqf-fibre-discrete] (using [pqf-lem-proper-basic] for finite type).",
+   "text": "Apply [lem-trf-proper-finite-fibre-finite-near], recorded as Mathlib theorem AlgebraicGeometry.exists_isFinite_morphismRestrict_of_finite_preimage_singleton, to f, s and the given finite fibre. Its conclusion is exactly the required open neighbourhood and finiteness of the restriction. The theorem works over any base; the locally Noetherian hypothesis remains in our unchanged statement but is not needed by this specialization.",
    "uses": [
-    "pqf-lem-proper-basic",
-    "pqf-lem-locqf-fibre-discrete"
+    "lem-trf-proper-finite-fibre-finite-near"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 02OH proof, first sentence; Morphisms Tag 02NH"
-   }
-  },
-  {
-   "text": "Let $U\\subseteq X$ be the open locus where $f$ is quasi-finite, supplied by [lem-sc-quasi-finite-points-open]. Since every point of $f^{-1}(\\{s\\})$ lies in this locus, $s$ is not in the image of the closed complement $Z=X\\setminus U$.",
-   "uses": [
-    "lem-sc-quasi-finite-points-open"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 02OH proof, first two sentences"
-   }
-  },
-  {
-   "text": "The image $f(Z)$ is closed because $f$ is proper, hence universally closed by [pqf-lem-proper-basic]. Choose an open neighbourhood $V\\subseteq S$ of $s$ disjoint from $f(Z)$. Then $f^{-1}(V)\\subseteq U$, so the restricted morphism $f^{-1}(V)\\to V$ is locally quasi-finite by [lem-sc-quasi-finite-points-open].",
-   "uses": [
-    "pqf-lem-proper-basic",
-    "lem-sc-quasi-finite-points-open"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 02OH proof, definition of $Z$ through choice of $V$"
-   }
-  },
-  {
-   "text": "The restriction $f^{-1}(V)\\to V$ is proper by [lem-pc-proper-base-change]. Since $V\\to S$ is an open immersion, $X \\times_S V = f^{-1}(V)$ and the projection is $f^{-1}(V)\\to V$; by [lem-pc-proper-base-change] (1) it is proper. It is quasi-finite because it is locally quasi-finite and quasi-compact, using [pqf-lem-qf-locqf-qc] and quasi-compactness from properness; hence it has finite fibres by [pqf-lem-qf-finitefibres]. Applying [thm-pqf-finite-iff-proper-finite-fibres] to this proper morphism over the locally Noetherian scheme $V$ shows that it is finite.",
-   "uses": [
-    "lem-pc-proper-base-change",
-    "pqf-lem-qf-locqf-qc",
-    "pqf-lem-qf-finitefibres",
-    "thm-pqf-finite-iff-proper-finite-fibres"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/coherent.tex",
-    "place": "Tag 02OH proof, final paragraph"
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02UP, lemma-proper-finite-fibre-finite-in-neighbourhood; Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean, lines 405-424"
    }
   }
  ],
  "proof_deps": [
-  "pqf-lem-proper-basic",
-  "pqf-lem-locqf-fibre-discrete",
-  "lem-sc-quasi-finite-points-open",
-  "lem-pc-proper-base-change",
-  "pqf-lem-qf-locqf-qc",
-  "pqf-lem-qf-finitefibres",
-  "thm-pqf-finite-iff-proper-finite-fibres"
+  "lem-trf-proper-finite-fibre-finite-near"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/coherent.tex",
-  "place": "Tag 02OH, lemma-proper-finite-fibre-finite-in-neighbourhood"
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 02UP, lemma-proper-finite-fibre-finite-in-neighbourhood, specialized to a locally Noetherian base; Mathlib exact theorem"
  },
  "mathlib_searches": [
   {
@@ -148,18 +104,7 @@
    }
   ]
  },
- "tool_uses": [
-  "pqf-lem-proper-basic",
-  "pqf-lem-locqf-fibre-discrete",
-  "pqf-lem-qf-locqf-qc",
-  "pqf-lem-qf-finitefibres",
-  "thm-pqf-finite-iff-proper-finite-fibres",
-  "pqf-lem-proper-basic",
-  "pqf-lem-locqf-fibre-discrete",
-  "pqf-lem-qf-locqf-qc",
-  "pqf-lem-qf-finitefibres",
-  "thm-pqf-finite-iff-proper-finite-fibres"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
@@ -196,5 +141,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W8",
+  "result": "pass",
+  "landing": "20261018T062944-L-690029",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

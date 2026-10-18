@@ -3,13 +3,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.FiniteDiscreteFiber
-import Sheaf.AlgebraicGeometry.FiniteIffProperFiniteFibres
-import Sheaf.AlgebraicGeometry.ProperBasic
-import Sheaf.AlgebraicGeometry.QuasiFiniteIffFiniteFibres
-import Sheaf.AlgebraicGeometry.QuasiFiniteLocallyQuasiFinite
-import Sheaf.AlgebraicGeometry.QuasiFiniteLocusOpen
-import WeilConjectures.AlgebraicGeometry.Morphisms.ProperQuasiFinite
+import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
 
 /-!
 # Proper morphisms with finite fibres are finite near a point
@@ -41,6 +35,6 @@ theorem exists_open_isFinite_restrict_of_isProper_of_finite_fibre
     {X S : Scheme.{u}} [IsLocallyNoetherian S] (f : X ⟶ S) [IsProper f] (s : S)
     (hs : (f ⁻¹' ({s} : Set S)).Finite) :
     ∃ U : S.Opens, s ∈ U ∧ IsFinite (f ∣_ U) := by
-  sorry
+  exact exists_isFinite_morphismRestrict_of_finite_preimage_singleton f s hs
 
 end AlgebraicGeometry
