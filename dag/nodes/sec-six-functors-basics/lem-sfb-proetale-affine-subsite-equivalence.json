@@ -261,5 +261,32 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-d9501b3e9 (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full, together with every cited node's statement (11 nodes plus the fpqc, pro-étale covering, small pro-étale site and weakly étale definitions). The statement matches Stacks 098W (proetale.tex lemma-alternative, l.2696) with the coverings of 098E; Stacks writes S_affine,etale in its display, which is a typo for S_affine,proetale, and the item uses the correct site. Step 1 gives cover-density (03A0(5)): 02GP and etale-implies-weakly-etale plus composition put affine opens in the site, and the family of all affine opens is a covering because each affine open W is itself a member. Step 2 shows that standard coverings are exactly the pro-étale coverings of an affine target, using 01SH as that node states it (098D/098E). Step 3 shows the affine subcategory is a site and the inclusion is continuous: fibre products are taken over an affine U (01I4/01JQ), so no quasi-separatedness of X is used, and the site axioms come from 022D/098C plus weakly-étale stability. Step 4 gives cocontinuity through the finite affine refinement of the affine target, matching clause (1) of the special-cocontinuous definition. Step 5 is correctly marked elementary: local fullness and faithfulness hold for a full inclusion, witnessed by identity coverings. Step 6 applies the 03A0 node, whose statement says the inverse image is precomposition, i.e. restriction; this agrees with the 03A0 proof (g^{-1}G(U)=G(u(U))). Edge cases checked: empty X, the empty covering of an empty affine, non-quasi-compact and non-quasi-separated X, and infinite coverings. There are no new nodes. A search found no pro-étale duplicate; the étale analogue lem-weil-pbc-affine-etale-site-topos is a different site, and the Lean AffineProEt is narrower. tools/review_split.py reports PASS. The eight declared tool_uses are accepted as generic black boxes from chapters that sec-six-functors-basics uses. No SGA is cited, no target was weakened, and there are no changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleAffineSubsiteEquivalence",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.affineWeaklyEtale_sheafEquivalence",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ProEt.affineSource",
+   "AlgebraicGeometry.Scheme.ProEt.AffineWeaklyEtale",
+   "AlgebraicGeometry.Scheme.ProEt.affineWeaklyEtaleInclusion",
+   "AlgebraicGeometry.Scheme.ProEt.affineWeaklyEtalePrecoverage",
+   "AlgebraicGeometry.Scheme.ProEt.affineWeaklyEtaleTopology",
+   "AlgebraicGeometry.Scheme.ProEt.affineWeaklyEtale_sheafEquivalence"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleAffineSubsiteEquivalence.lean",
+  "statement": "theorem affineWeaklyEtale_sheafEquivalence (X : Scheme.{u}) : ∃ e : Sheaf (topology X) (Type (max (u + 1) v)) ≌ Sheaf (affineWeaklyEtaleTopology X) (Type (max (u + 1) v)), Nonempty (e.functor ⋙ sheafToPresheaf (affineWeaklyEtaleTopology X) (Type (max (u + 1) v)) ≅ sheafToPresheaf (topology X) (Type (max (u + 1) v)) ⋙ (Functor.whiskeringLeft _ _ (Type (max (u + 1) v))).obj (affineWeaklyEtaleInclusion X).op)",
+  "branch": "newtargets-dag",
+  "by": "NL",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Real-data helpers define the full subsite of all affine weakly etale objects with finite standard coverings. The natural isomorphism identifies the equivalence functor with restriction on underlying presheaves. The site keeps object universe u+1 and morphism universe u; sets lie in max (u+1) v. Upstream AffineProEt has a narrower pro-affine-etale presentation condition and is not used as an existing match."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dacb503c7",
+  "group": "NL",
+  "result": "pass",
+  "note": "Read node, 098W/098E source, stmt_deps (Scheme, Mathlib Scheme.ProEt/precoverage/topology, site convention), module, report. Statement: X:Scheme.{u} with no extra hypotheses; full subcategory of ProEt with IsAffine U.left; coverings Precoverage.finite ⊓ (ProEt.precoverage X).comap ι (checked by Iff.rfl), which is 098E on affine targets; conclusion ∃ equivalence of sheaf categories with functor ≅ restriction along ι.op, as the node and 03A0 interface say. Universes u+1/u kept; coefficients Type (max (u+1) v), consistent with the size convention and with the consumer lem-sfb-proetale-enough-points. Edge cases: empty X/empty cover, non-qc/non-qs base, infinite covers. Upstream AffineProEt is narrower (pro-affine-etale), rightly not used; no existing match found. Helpers have real data and source/blueprint docstrings; only the item theorem has sorry, with six-step proof docstring; node diff adds only lean; statement verbatim; report has Worker report and Second reading by NL. nt_compile: 1.9 s, no diagnostics; #check/#print axioms clean (sorryAx only). No findings."
  }
 }

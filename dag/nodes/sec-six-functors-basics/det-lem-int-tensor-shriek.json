@@ -30,7 +30,8 @@
   "def-weil-triangulated-category",
   "def-pc-scheme",
   "def-weil-open-immersion",
-  "def-weil-closed-immersion"
+  "def-weil-closed-immersion",
+  "def-sfb-integral-model-condensed-coefficients"
  ],
  "proof": [
   {
@@ -535,5 +536,30 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralTensorShriek",
+  "declaration": "AlgebraicGeometry.ProEtale.integralTensorShriek_generated",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.integralTensorShriek_pointComplex",
+   "AlgebraicGeometry.ProEtale.integralTensorShriek_preserves",
+   "AlgebraicGeometry.ProEtale.integralTensorShriek_generated"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralTensorShriek.lean",
+  "statement": "theorem integralTensorShriek_generated (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (k : Type u) [Field k] (p : ℕ) [CharP k p] (_hp : 0 < p) (_hpl : p ≠ l) (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsNoetherian X] (K : DerivedCategory (pulledBackModuleObjects (integralModelCondensedCoefficients l E).X X)) (hK : boundedConstructible (condensedRingObj (integralModelCondensedCoefficients l E).X X) K) (P : ObjectProperty (DerivedCategory (pulledBackModuleObjects (integralModelCondensedCoefficients l E).X X))) [P.IsClosedUnderIsomorphisms] [P.IsTriangulatedClosed₁] [P.IsTriangulatedClosed₂] [P.IsTriangulatedClosed₃] (hgen : ∀ (T : X.FiniteLocallyClosedStratification) (a : Fin T.n) (Z : Scheme.{u}) (v : T.domain a ⟶ Z) (i : Z ⟶ X) [IsOpenImmersion v] [IsClosedImmersion i], v ≫ i = T.immersion a → ∀ M : DerivedCategory (pulledBackModuleObjects (integralModelCondensedCoefficients l E).X (T.domain a)), boundedConstructible (condensedRingObj (integralModelCondensedCoefficients l E).X (T.domain a)) M → (∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage (T.domain a), ∀ b : C.I₀, ∃ Q : CochainComplex (Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) (integralModelCondensedCoefficients l E).X) ℤ, (∃ r s : ℤ, ∀ n : ℤ, n < r ∨ s < n → IsZero (Q.X n)) ∧ (∀ n : ℤ, Mod.IsFree (integralModelCondensedCoefficients l E).X (Q.X n)) ∧ Nonempty ((CondensedRing.upperStar (integralModelCondensedCoefficients l E).X (C.f b)).mapDerivedCategory.obj M ≅ DerivedCategory.Q.obj (integralTensorShriek_pointComplex l E (C.X b) Q))) → P (((CondensedRing.openImmersionLowerShriek (integralModelCondensedCoefficients l E).X v).mapDerivedCategory ⋙ (CondensedRing.lowerStar (integralModelCondensedCoefficients l E).X i).rightDerivedFunctor).obj M)) : P K",
+  "branch": "newtargets-dag",
+  "by": "Q82",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Clause (1) is integralTensorShriek_preserves and clause (2) is integralTensorShriek_generated. The pointComplex helper constructs the actual termwise scalar model from the existing inverse image and its adjunction. Added the landed owner of integralModelCondensedCoefficients to stmt_deps to reuse that continuous condensed integer ring. No statement correction or new notion is introduced.",
+  "fixed_by": "NT-stage2-cc-f9a075fbc"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f9a075fbc",
+  "group": "Q82",
+  "result": "fix",
+  "note": "Statement matches the node clause by clause: standing setting, continuous condensed O_E, Dbc, j_!/i_*/i_*v_! preservation, generation by finite free pro-etale-local models on strata with iso and two-out-of-three closure; edge cases fine; helper is real; only sorry; docstrings and report sections fine; item module unchanged since 328fbae318f3 apart from one import. Fault: new module Sheaf.Paper.IntegralModelCondensedCoefficients redeclares AlgebraicGeometry.ProEtale.integralModelCondensedCoefficients (and _isCommMonObj), already landed with the same signature in Q58's Sheaf.Paper.IntegralModelSurjectiveClosedReflection in the delivery's base; a test module importing both fails with 'environment already contains'. Fix: fixes/def-sfb-integral-model-condensed-coefficients.json makes the new def node own the landed declaration with existing:true (same verbatim statement, corrected search entry); fixes/IntegralTensorShriek.lean imports the landed module instead, so the duplicate module is left out. Delivered files compile with rc 0 (2.3 s, 5.0 s); fixed module compiles with rc 0 (5.2 s) via nt_compile.py.; left out new module(s) lean/Sheaf/Paper/IntegralModelCondensedCoefficients.lean (--drop-files, or a record fixed to existing: true)"
  }
 }

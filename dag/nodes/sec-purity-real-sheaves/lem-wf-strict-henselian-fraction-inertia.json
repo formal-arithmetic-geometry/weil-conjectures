@@ -12,7 +12,9 @@
   "def-weil-residue-field",
   "def-weil-pbc-henselian-terminology",
   "def-weil-pbc-strict-henselization-limit",
-  "def-pd-separable-closure"
+  "def-pd-separable-closure",
+  "def-weil-pbc-henselization-at-prime",
+  "def-sc-ring-strict-henselization"
  ],
  "proof": [
   {
@@ -272,5 +274,28 @@
   "group": "Q42",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q42-d51514182 (reviewer sub-agent of L); spot-checked: Read the full mathematics and cited sources. Repaired one repeated C1/C4 citation gap: Steps 1–2 now explicitly derive normal-ring hypotheses from normal-domain conclusions using existing Stacks 030C node. Both new lemmas are valid and nonduplicate; no cycles, long steps, forbidden SGA citations or dropped pivot dependencies found. Corrected JSON and detailed review.md written.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.FieldTheory.StrictHenselianFractionInertia",
+  "declaration": "strictHenselianFractionInertia",
+  "file": "lean/Sheaf/FieldTheory/StrictHenselianFractionInertia.lean",
+  "statement": "theorem strictHenselianFractionInertia {A H R κsep K Ω L : Type u} [CommRing A] [IsDomain A] [IsDiscreteValuationRing A] [CommRing H] [HenselianLocalRing H] [Algebra (Localization.AtPrime (maximalIdeal A)) H] [Algebra A H] [IsScalarTower A (Localization.AtPrime (maximalIdeal A)) H] (hH : Algebra.IsHenselizationAtPrime' A (maximalIdeal A) H) [CommRing R] [Algebra A R] [Field κsep] [Algebra (ResidueField A) κsep] [IsSepClosure (ResidueField A) κsep] [Algebra A κsep] [IsScalarTower A (ResidueField A) κsep] (P : Algebra.StrictHenselizationPresentationIn.{u, u} A κsep R) [Field K] [Algebra H K] [IsFractionRing H K] [Field L] [Algebra R L] [IsFractionRing R L] [Field Ω] [Algebra K Ω] [IsSepClosure K Ω] : IsDomain H ∧ IsDomain R ∧ Function.Injective (algebraMap A H) ∧ ∃ _ : IsLocalRing R, Nonempty (R ≃+* Scheme.strictHenselizationRing (Spec.map (CommRingCat.ofHom ((algebraMap κsep (AlgebraicClosure κsep)).comp (algebraMap A κsep))))) ∧ ∃ eκ : (Spec (.of R)).residueField (closedPoint R) ≃+* κsep, (∀ r : R, eκ (((Spec (.of R)).evaluation ⊤ (closedPoint R) trivial).hom ((Scheme.ΓSpecIso (.of R)).inv.hom r)) = P.residueMap r) ∧ ∃ (_ : Algebra H R) (_ : Algebra H L) (_ : Algebra K L) (_ : Algebra L Ω) (_ : Algebra R Ω), IsScalarTower A H R ∧ IsScalarTower H R L ∧ IsScalarTower H K L ∧ IsScalarTower K L Ω ∧ IsScalarTower R L Ω ∧ IsLocalHom (algebraMap H R) ∧ Function.Injective (algebraMap H R) ∧ Function.Injective (algebraMap R Ω) ∧ IsGalois K L ∧ IsSepClosure L Ω ∧ ∃ (act : Gal(Ω/K) →* (R ≃ₐ[H] R)) (red : (R ≃ₐ[H] R) ≃* Gal(κsep/ResidueField A)) (res : Gal(Ω/K) →* Gal(κsep/ResidueField A)), (∀ (σ : Gal(Ω/K)) (r : R), algebraMap R Ω (act σ r) = σ (algebraMap R Ω r)) ∧ (∀ (τ : R ≃ₐ[H] R) (r : R), red τ (P.residueMap r) = P.residueMap (τ r)) ∧ res = red.toMonoidHom.comp act ∧ Function.Surjective res ∧ Set.range (algebraMap L Ω) = (IntermediateField.fixedField res.ker : Set Ω) ∧ res.ker = (IntermediateField.adjoin K (Set.range (algebraMap L Ω))).fixingSubgroup ∧ (∃ eI : res.ker ≃ₜ* Gal(Ω/L), ∀ (σ : res.ker) (a : Ω), eI σ a = σ.val a) ∧ ∃ (q : (Gal(Ω/K) ⧸ res.ker) ≃* Gal(L/K)) (s : Gal(L/K) ≃* (R ≃ₐ[H] R)), (∀ (σ : Gal(Ω/K)) (a : L), algebraMap L Ω (q (QuotientGroup.mk σ) a) = σ (algebraMap L Ω a)) ∧ (∀ (τ : Gal(L/K)) (r : R), algebraMap R L (s τ r) = τ (algebraMap R L r))",
+  "branch": "newtargets-dag",
+  "by": "NZ",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": [
+   "strictHenselianFractionInertia"
+  ],
+  "note": "Repair of a365c0f3d7c0: characterize H by the recorded henselization universal property and R by the recorded pointed-etale colimit with its induced residueMap. Prove domain and compatible embeddings existentially. Restriction and reduction are characterized on elements and res is their composite. Include the canonical scheme colimit/residue identifications and the separable-closure and Krull-topology clauses. Maintainer review fix: the hypothesis [IsLocalRing R] is not in the node (locality follows from P, Stacks 04GW) and is now the conclusion clause ∃ _ : IsLocalRing R.",
+  "fixed_by": "NT-stage2-cc-67294eef3"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-67294eef3",
+  "group": "NZ",
+  "result": "fix",
+  "note": "Statement checked clause by clause against the node and Stacks 0BSD/0BSW: DVR, henselization via IsHenselizationAtPrime', R via StrictHenselizationPresentationIn.{u,u} plus a true comparison with Scheme.strictHenselizationRing at the geometric point, residue identification eκ = P.residueMap, existential embeddings fixed by 5 scalar towers, local and injective H->R, act/red/res with res = red∘act surjective, L = fixedField(ker res), ker res = fixingSubgroup(L), IsSepClosure L Ω, ker res ≃ₜ* Gal(Ω/L), IsGalois K L, and q/s/red isomorphisms given elementwise; all correct. Node changes: lean, plus two landed stmt_deps (allowed). Statement field verbatim; docstrings carry source, blueprint id and 10 steps; only sorry; no hollow defs. One H3 fault fixed: extra hypothesis [IsLocalRing R], not in the node (locality follows from P, Stacks 04GW), moved into the conclusion as ∃ _ : IsLocalRing R. fixes/ has the complete module, lean-record JSON and report. nt_compile --json: delivered and fixed files rc=0 and clean; a broken control reports its error. Notes: one common universe u (stated in the report, no case lost); the scheme comparison is a bare Nonempty ring iso (extra true conclusion)."
  }
 }

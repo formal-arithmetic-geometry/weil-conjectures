@@ -315,5 +315,23 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-5ec668208 (reviewer sub-agent of L); spot-checked: I read the item in full: 10 steps, no new nodes, statement unchanged. I checked it against the extracted text of Bhatt–Scholze Lemmas 2.1.7, 2.2.9, 2.2.13 and 2.2.15. The statement agrees with BS 2.2.13 hypothesis by hypothesis (any ring, any ideal, (A,I) a henselian pair, two-way conclusion). The DAG definition of w-strictly local uses strictly henselian maximal localizations; BS 2.2.9 shows this agrees with BS's own definition, and the proof uses 097V for the converse. Step checks: 09XI gives I in the Jacobian radical, so the closed points of Spec A and Spec A/I coincide. 00CT and 05WS give the descent of strict henselianity to the quotient. For the ascent, 09Y6 makes V(p+I) connected, and the continuous retraction onto the profinite closed-point set forces a unique closed specialization. The local sections over strictly henselian local rings spread out through the finite-presentation factorization and glue over a clopen partition. 0H74 lifts the section, with (A,I) henselian and B étale hence smooth (Omega=0). 097V then gives strictly henselian maximal localizations. Edge cases checked: I=0, A=0, I=A, A local, A a finite product. No duplicate: rg over the DAG finds only the item and its parent. Two fixes (C1/C4), written to fixes/dag/nodes/sec-zeta-weil/lem-zl-henselian-wstrict-local-invariance.json: (1) step 5 identifies Z x_X Spec B with Spec(B/IB) without citing a node; it now cites the Mathlib leaf lem-weil-pbc-fibre-product-affine-spectra (pullbackSpecIso). (2) Step 8 applies lem-weil-pbc-w-local-partition, which is stated for def-weil-pbc-w-local; it now cites det-pe-wlocal-components (clauses 1 and 3) for the agreement of the two definitions and the profiniteness of the closed points. proof_deps is updated to the union of the steps' uses. Batch-5 flag on lem-trf-henselian-smooth-algebra-lifting: accepted as genuinely outside the assumptions. It is Stacks 0H74, pure commutative algebra that neither the trace-formula leaf nor the Poincare-duality leaf gives, created as a generic tool. Its whole closure (276 nodes) contains no other sec-trace-formula or sec-poincare-duality node and no nt-target or sk-thm-trace node, so citing it imports no proof of either assumed theorem. All 13 declared tool_uses are accepted as generic algebra/topology tools; the unit's duality route is unchanged and no SGA is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.HenselianWStrictLocalInvariance",
+  "declaration": "isWStrictlyLocalRing_iff_quotient_of_henselianRing",
+  "file": "lean/Sheaf/RingTheory/HenselianWStrictLocalInvariance.lean",
+  "statement": "theorem isWStrictlyLocalRing_iff_quotient_of_henselianRing (A : Type u) [CommRing A] (I : Ideal A) [HenselianRing A I] : IsWStrictlyLocalRing A ↔ IsWStrictlyLocalRing (A ⧸ I)",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-402bf769a",
+  "group": "NI",
+  "result": "pass",
+  "note": "Read node, both stmt_deps declarations (HenselianRing; WLocalSpace/IsWLocalRing/IsWStrictlyLocalRing/IsStrictlyHenselianLocalRing in side clone), BS 1309.1198 Def 2.2.1, Lemmas 2.2.9/2.2.13/2.2.15. Signature (A : Type u) [CommRing A] (I : Ideal A) [HenselianRing A I] : IsWStrictlyLocalRing A ↔ IsWStrictlyLocalRing (A ⧸ I) matches node and source clause by clause; no extra assumptions; edge cases A=0, I=0, I=A covered; universe bound. No definitions, proof sorry only, source/blueprint docstrings with 10-step plan, no duplicate found, node differs only in lean field, lean.statement verbatim. nt_compile.py --json clean (exit 0), negative control fails as expected. No findings."
  }
 }

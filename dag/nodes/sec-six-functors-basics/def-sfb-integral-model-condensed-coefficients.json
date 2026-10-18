@@ -1,0 +1,104 @@
+{
+ "id": "def-sfb-integral-model-condensed-coefficients",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-lem-int-tensor-shriek",
+   "place": "the coefficient ring used by the proof and by both clauses of the statement",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Integral condensed coefficient ring of a finite p-adic extension",
+ "statement": "For a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$, let\n$A_E=\\underline{\\mathcal O_E}$ be the commutative condensed ring on the coherent [sk-def-sfb-condensed-ring]\npro-étale site of profinite sets, where $\\mathcal O_E$ is the valuation ring selected by\nthe absolute value $|\\cdot|_E$ of [def-weil-l-adic-coefficient-extension]. In Lean this is\n`integralModelCondensedCoefficients l E`, with its commutative ring-object instance.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-tensor/det-lem-int-tensor-shriek.md",
+  "place": "proof coefficient setup: “Use the coefficient ring A_X = O_E”"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-l-adic-coefficient-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "continuous condensed coefficient ring of a finite p-adic extension valuation ring",
+   "results": "No exact declaration assembles this coefficient ring; nearest results are generic continuous coefficient and valuation-ring constructions.",
+   "date": "2026-10-18",
+   "verdict": "no exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "continuous condensed coefficient ring of the valuation ring of a finite p-adic extension",
+   "results": "No exact project declaration found; the nearest source declarations are Profinite.continuousCoefficientRingObj and Padic.coefficientExtensionIntegers.",
+   "date": "2026-10-18",
+   "verdict": "no exact existing notion; this definition composes the recorded coefficient constructions."
+  },
+  {
+   "tool": "loogle",
+   "query": "Profinite.continuousCoefficientRingObj Padic.coefficientExtensionIntegers",
+   "results": "The component declarations are available, but no declaration assembles this named integral model coefficient ring.",
+   "date": "2026-10-18",
+   "verdict": "no exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "integralModelCondensedCoefficients|def-sfb-integral-model-condensed-coefficients",
+   "results": "Sheaf.Paper.IntegralModelSurjectiveClosedReflection (landed by Q58) already declares AlgebraicGeometry.ProEtale.integralModelCondensedCoefficients and its IsCommMonObj instance, owned only as a helper of a theorem node; no definition node owns it. FiniteConstantModel.integralCoefficients is mathematically the same ring, built with the coefficientExtensionAbsoluteValue normed field.",
+   "date": "2026-10-18",
+   "verdict": "existing declaration; this definition node records it with existing: true (fixed by the reviewer)."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "det-lem-int-tensor-shriek",
+  "date": "2026-10-18",
+  "group": "Q82"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-int-tensor",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralModelSurjectiveClosedReflection",
+  "declaration": "AlgebraicGeometry.ProEtale.integralModelCondensedCoefficients",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.integralModelCondensedCoefficients",
+   "AlgebraicGeometry.ProEtale.integralModelCondensedCoefficients_isCommMonObj"
+  ],
+  "statement": "def integralModelCondensedCoefficients (l : ℕ) [Fact l.Prime]\n    (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] :\n    Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})",
+  "branch": "newtargets-dag",
+  "by": "Q82",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Existing declaration: the landed module Sheaf.Paper.IntegralModelSurjectiveClosedReflection (Q58) already declares AlgebraicGeometry.ProEtale.integralModelCondensedCoefficients and its IsCommMonObj instance, with this exact signature, as a helper of the theorem node lem-sfb-integral-model-surjective-closed-reflection. This definition node owns that declaration; a second module declaring the same full name would clash with it on import. Its spectralNorm.normedField structure is the spectral norm defining coefficientExtensionAbsoluteValue, so the ring and topology are those of the statement; FiniteConstantModel.integralCoefficients uses the same spectral absolute value, so it is mathematically the same ring."
+ },
+ "status": "split",
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f9a075fbc",
+  "group": "Q82",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f9a075fbc",
+  "group": "Q82",
+  "result": "fix",
+  "note": "Statement matches the node clause by clause: standing setting, continuous condensed O_E, Dbc, j_!/i_*/i_*v_! preservation, generation by finite free pro-etale-local models on strata with iso and two-out-of-three closure; edge cases fine; helper is real; only sorry; docstrings and report sections fine; item module unchanged since 328fbae318f3 apart from one import. Fault: new module Sheaf.Paper.IntegralModelCondensedCoefficients redeclares AlgebraicGeometry.ProEtale.integralModelCondensedCoefficients (and _isCommMonObj), already landed with the same signature in Q58's Sheaf.Paper.IntegralModelSurjectiveClosedReflection in the delivery's base; a test module importing both fails with 'environment already contains'. Fix: fixes/def-sfb-integral-model-condensed-coefficients.json makes the new def node own the landed declaration with existing:true (same verbatim statement, corrected search entry); fixes/IntegralTensorShriek.lean imports the landed module instead, so the duplicate module is left out. Delivered files compile with rc 0 (2.3 s, 5.0 s); fixed module compiles with rc 0 (5.2 s) via nt_compile.py.; left out new module(s) lean/Sheaf/Paper/IntegralModelCondensedCoefficients.lean (--drop-files, or a record fixed to existing: true)"
+ }
+}

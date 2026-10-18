@@ -259,5 +259,40 @@
   "group": "Q102",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-4a3a07654 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the unit and blueprint (main-20261015) statement and proof, every cited node's statement, and the delivery-errors list A–F. The statement is verbatim the blueprint's. Small cases check out: rank 0; a geometrically constant line with Frobenius scalar a ≠ 1, where both sides are that line with F acting by a; a nontrivial geometric character; and U0=C0. The worker's switch from the Weil equivalence to cor-galois-lisse-representations clause 2 is correct: taking Weil-equivariant maps would wrongly impose Fv=v. That corollary is already how def-wf-fundamental-representation and prop-wf-weil-sheaf-representation-equivalence are built, so no coefficient categories are silently identified. Step 6 (the old Step 5) gives a correct Frobenius computation: the degree-one lift from clause 2 of the dense-open lemma, normality of π1(U) as the kernel of the degree map, and independence of the chosen lift. Batch-5 check: def-pod-lisse-l-adic-sheaves is a general definition. cor-galois-lisse-representations is the general equivalence between lisse sheaves and π1-representations. Both assumption leaves (nt-assume-poincare-duality, nt-assume-trace-formula) and the item's own existing statement dependencies already reach it, and it was in the closure of both targets before this delivery. lem-wf-dense-open-pi1-surjective reaches the Poincaré-duality chapter only through that corollary. None of the three is a step of Poincaré duality or the trace formula, so all three are accepted. There are no new nodes and no cycle. I accept the four tool uses the worker declared. FIX (one fault, of type E1: hypotheses not checked): clause 2 of the dense-open lemma needs U0 dense in C0, and only U dense in C had been shown. The curve lemmas also need C to be a separated, finite-type, smooth curve of dimension one over k, which was asserted without proof. I added a new Step 1 that proves this from the base-change and dimension lemmas (separated, finite-type, smooth and image base-change lemmas, dimension preserved under field extension, the open-cover dimension bound, sobriety of schemes). I also added U0 dense in C0 to Step 2 (C→C0 is surjective), renumbered the step references, and updated proof_deps and split_report.tool_uses (three new tool uses). The fix is at fixes/dag/nodes/sec-purity-real-sheaves/p-real-sections.json; every other field is unchanged. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RealSheafSections",
+  "declaration": "AlgebraicGeometry.WeilGroup.ordinarySections_eq_geometricInvariants",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.etaleIntegralSectionsAt",
+   "AlgebraicGeometry.Scheme.etaleIntegralEvaluation_exists",
+   "AlgebraicGeometry.Scheme.etaleIntegralEvaluation",
+   "AlgebraicGeometry.Scheme.etaleAlgebraicSectionsAt",
+   "AlgebraicGeometry.Scheme.etaleAlgebraicEvaluation",
+   "AlgebraicGeometry.Scheme.etaleSectionsFrobenius_exists",
+   "AlgebraicGeometry.Scheme.etaleSectionsFrobenius",
+   "AlgebraicGeometry.WeilGroup.sectionsGeometricCurve_properties",
+   "AlgebraicGeometry.WeilGroup.sectionsGeometricCurve_noetherian",
+   "AlgebraicGeometry.WeilGroup.sectionsGeometricCurve_separated",
+   "AlgebraicGeometry.WeilGroup.sectionsGeometricCurve_invertible",
+   "AlgebraicGeometry.WeilGroup.sectionsGeometricOpen",
+   "AlgebraicGeometry.WeilGroup.sectionsGeometricOpen_isOpenImmersion",
+   "AlgebraicGeometry.WeilGroup.sectionsGeometricOpen_stable",
+   "AlgebraicGeometry.WeilGroup.ordinarySections_eq_geometricInvariants"
+  ],
+  "file": "lean/Sheaf/Paper/RealSheafSections.lean",
+  "statement": "theorem ordinarySections_eq_geometricInvariants {K : Type u} [Field K] [Finite K] {l : ℕ} [Fact l.Prime] [Fact (ringChar K ≠ l)] (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q] {C U : Scheme.{u}} [C.Over (Spec (.of K))] [U.Over (Spec (.of K))] [IsCurve (C ↘ Spec (.of K))] [SmoothOfRelativeDimension 1 (C ↘ Spec (.of K))] [GeometricallyConnected (C ↘ Spec (.of K))] [IsCurve (U ↘ Spec (.of K))] (j : U ⟶ C) [j.IsOver (Spec (.of K))] [IsOpenImmersion j] [Nonempty U] (W : WeilGroup (C ↘ Spec (.of K))) (WU : WeilGroup (U ↘ Spec (.of K))) (R : Restriction j WU W) (B : BasePointData W) (D : WeilMonodromyData B) (F : EtaleLisseWeilSheaf l Q (C ↘ Spec (.of K)).geometricGaloisFrobenius) (t : Spec (.of (AlgebraicClosure K)) ⟶ (U ↘ Spec (.of K)).geometricFiber) (τ : fiber (t ≫ Scheme.Hom.geometricFiberMap j (comp_over j (Spec (.of K)))) ≅ fiber B.t) : ∃ e : etaleAlgebraicSectionsAt l Q F.carrier (sectionsGeometricOpen (K := K) j) ≃ₗ[Q] Representation.invariants (((etaleFundamentalRep l Q (C ↘ Spec (.of K)).geometricGaloisFrobenius B.t D.degreeDatum D.toEtale F).comp R.restrict).comp WU.geometric.subtype), (∀ s, (e s : lisseAlgebraicFiber l (C ↘ Spec (.of K)).geometricFiber Q B.t F.carrier) = etaleAlgebraicPath l Q F.carrier τ (etaleAlgebraicEvaluation l Q F.carrier (sectionsGeometricOpen (K := K) j) _ (Over.homMk t) s)) ∧ ∀ s, (e (etaleSectionsFrobenius l Q (C ↘ Spec (.of K)).geometricGaloisFrobenius (sectionsGeometricOpen (K := K) j) (sectionsGeometricOpen_stable (K := K) j) F s) : lisseAlgebraicFiber l (C ↘ Spec (.of K)).geometricFiber Q B.t F.carrier) = etaleFundamentalRep l Q (C ↘ Spec (.of K)).geometricGaloisFrobenius B.t D.degreeDatum D.toEtale F D.frobLift (e s)",
+  "branch": "newtargets-dag",
+  "by": "Q60",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6dfea6e54",
+  "group": "Q60",
+  "result": "pass",
+  "note": "Re-delivery after L's H3 return: the item and both §1(B)-repaired dependencies (def-wf-fundamental-representation, prop-wf-weil-sheaf-representation-equivalence) now use the actual étale adic objects (LisseAlgebraicSheaf, the recorded étale automorphism pullback, lisseAlgebraicFiber); no pro-étale substitute. Node files changed only in lean, each with a note. Clause check: K finite, l prime and ≠ char, Q an algebraic closure in universe u+1; curve hypotheses as before; nonempty open immersion j; Restriction R; sections are Q⊗E⊗lim Γ (the def-pod convention, no Weil-fixedness); target is the invariants of (ρ∘R.restrict) on WU.geometric; e is pinned to germ evaluation plus the germ-normalized path; Frobenius on sections is uniquely characterized by pullback then F.str, and is intertwined with ρ(frobLift). Statement is true (connected open, surjective π1, flat scalar extensions). Conjugation convention checked: Tρ(g)T⁻¹=ρ(sgs⁻¹), matching the node and upstream frobStalkIso; liftChange is consistent. The arbitrary D does not change the content, so the statement is equivalent to the canonical case. Helper definitions are explicit data or the choice of a true ∃!; the recorded basepoint transport is only Nonempty, so the new path is a legitimate helper. Edge cases ok: rank 0, constant line with a≠1, nontrivial character, U0=C0, any t and τ, universes. Gates ok: docstrings with source and blueprint tag, six-step plan, 14/14 proofs sorry, statements verbatim, declarations match, both report sections present. nt_compile.py on all three files: exit 0, no errors or warnings, reproduced twice (5.7/4.4/7.9 s). Maintainer notes: CanonicalWeilFundamentalRepresentation.lean is orphaned and lem-dl-a1-lisse-extension-inertia still uses the old pro-étale canonicalFundamentalRep; downstream statements should pass B.weilMonodromyData.toEtale."
  }
 }

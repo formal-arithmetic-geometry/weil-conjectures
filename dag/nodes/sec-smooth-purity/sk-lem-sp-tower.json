@@ -499,5 +499,43 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SmoothPurityTowerReconstruction",
+  "declaration": "AlgebraicGeometry.ProEtale.spTower_reconstruction",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spReconstructionSiteSmall",
+   "AlgebraicGeometry.ProEtale.spCompletedEllProjection",
+   "AlgebraicGeometry.ProEtale.spCompletedEllCommProjection",
+   "AlgebraicGeometry.ProEtale.spCompletedEllRestriction",
+   "AlgebraicGeometry.ProEtale.spCompletedEvaluation",
+   "AlgebraicGeometry.ProEtale.spCompletedEvaluation_exact",
+   "AlgebraicGeometry.ProEtale.spCompletedEvaluationAdditive",
+   "AlgebraicGeometry.ProEtale.spCompletedEvaluationLimits",
+   "AlgebraicGeometry.ProEtale.spCompletedEvaluationColimits",
+   "AlgebraicGeometry.ProEtale.spCompletedTransition_existsUnique",
+   "AlgebraicGeometry.ProEtale.spCompletedTransition",
+   "AlgebraicGeometry.ProEtale.spDerivedCompletedEvaluation",
+   "AlgebraicGeometry.ProEtale.spCompletedEvaluationFactors",
+   "AlgebraicGeometry.ProEtale.spDerivedCompletedTransition_existsUnique",
+   "AlgebraicGeometry.ProEtale.spDerivedCompletedTransition",
+   "AlgebraicGeometry.ProEtale.spTowerReconstructionMap",
+   "AlgebraicGeometry.ProEtale.spTower_reconstruction"
+  ],
+  "file": "lean/Sheaf/Paper/SmoothPurityTowerReconstruction.lean",
+  "statement": "theorem spTower_reconstruction (C : spDerivedCoefficientTowers l E T D) (hC : spConstructibleTorTowers l E T D C) (hnorm : IsSpNormalizedTower l E T D C) (M : DerivedCategory (WeilConjectures.scalarReductionSource.{u, u} l E T)) [HasProduct (fun n : ℕ ↦ (spDerivedCompletedEvaluation l E T D n).obj C)] (p : M ⟶ ∏ᶜ fun n : ℕ ↦ (spDerivedCompletedEvaluation l E T D n).obj C) (δ : (∏ᶜ fun n : ℕ ↦ (spDerivedCompletedEvaluation l E T D n).obj C) ⟶ M⟦(1 : ℤ)⟧) (hlim : IsDerivedLimitTriangle (fun n : ℕ ↦ (spDerivedCompletedTransition l E T D n).app C) M p δ) : WeilConjectures.sfIntegralConstructible l E T M ∧ ∀ n : ℕ, IsIso (spTowerReconstructionMap l E T D C M p n)",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The theorem is stated for any Roos-triangle presentation M,p,δ of the actual derived inverse limit, with its canonical scalar-adjoint finite-level comparison. Helpers in this module construct its coefficient projection, exact evaluations and the original transitions; all choices are from unique characterizations. The tower, normalization and integral constructibility predicates are the recorded dependency declarations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5e8dad049",
+  "group": "Q02",
+  "result": "fix",
+  "note": "All 7 clauses match the node and its dependency declarations: the coefficient datum, D(Tow) via D, hC and hnorm are the recorded predicates; R lim is any Roos presentation over the completed ring using the tower's own transitions (presentations are unique up to an iso compatible with p); the conclusions are sfIntegralConstructible M and, for all n, IsIso of the derived tensor-restriction adjoint of p≫π_n in the finite-coefficient category. Helpers have real data with choices from true ∃! statements; 4 sorry-proof theorems; docstrings, imports, line widths and the verbatim lean.statement are OK; the node differs only in lean; no duplicate found. Edge cases m=1, m=n, zero tower, empty T and ramified E are covered, with no added assumptions. nt_compile --json: exit 0, 5.8 s, no diagnostics. Finding H11: the 'Second reading by Q02' section was the worker's own self-check. Fixed by fixes/sk-lem-sp-tower.report.md (worker report unchanged, section replaced by an independent clause-by-clause reading). No mathematical fault."
  }
 }

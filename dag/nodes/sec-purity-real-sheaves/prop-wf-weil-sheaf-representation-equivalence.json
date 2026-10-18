@@ -101,5 +101,29 @@
   }
  },
  "chapter": "sec-purity-real-sheaves",
- "unit": "sk-i-real-sheaves"
+ "unit": "sk-i-real-sheaves",
+ "lean": {
+  "module": "Sheaf.Paper.EtaleWeilSheafEquivalence",
+  "declaration": "AlgebraicGeometry.Scheme.etaleWeilSheafRepresentationEquivalence",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.etaleLisseWeilRepresentations",
+   "AlgebraicGeometry.Scheme.etaleWeilTensorCompatibility",
+   "AlgebraicGeometry.Scheme.etaleWeilSheafRepresentationEquivalence"
+  ],
+  "file": "lean/Sheaf/Paper/EtaleWeilSheafEquivalence.lean",
+  "statement": "theorem etaleWeilSheafRepresentationEquivalence [ConnectedSpace Y] : ∃ e : EtaleLisseWeilSheaf l Q h ≌ etaleLisseWeilRepresentations l Q h t d D, (∃ f : ∀ F : EtaleLisseWeilSheaf l Q h, (e.functor.obj F).obj.V ≃ₗ[Q] lisseAlgebraicFiber l Y Q t F.carrier, (∀ (F : EtaleLisseWeilSheaf l Q h) (g : G) (x : (e.functor.obj F).obj.V), f F ((e.functor.obj F).obj.ρ g x) = etaleFundamentalRep l Q h t d D F g (f F x)) ∧ ∀ (F H : EtaleLisseWeilSheaf l Q h) (a : F ⟶ H) (x : (e.functor.obj F).obj.V), f H ((e.functor.map a).hom.hom x) = etaleAlgebraicFiberMap l Q t ((Endofunctor.IsoAlgebra.forget (lisseAlgebraicAutomorphismPullback h l Q)).map a) (f F x)) ∧ Nonempty (Abelian (EtaleLisseWeilSheaf l Q h)) ∧ Nonempty (Abelian (etaleLisseWeilRepresentations l Q h t d D)) ∧ PreservesFiniteLimits e.functor ∧ PreservesFiniteColimits e.functor ∧ PreservesFiniteLimits e.inverse ∧ PreservesFiniteColimits e.inverse ∧ etaleWeilTensorCompatibility l Q h t d D e",
+  "branch": "newtargets-dag",
+  "by": "Q60",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Section 1(B), H3 repair: the closed upstream audit concerns a pro-etale source category. This module states the exact tensor equivalence on the actual etale adic coefficient-pair category with Weil descent, normalized to the repaired etale fundamental representation, including finite-limit/colimit preservation in both directions and the recorded underlying tensor and unit."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6dfea6e54",
+  "group": "Q60",
+  "result": "pass",
+  "note": "Re-delivery after L's H3 return: the item and both §1(B)-repaired dependencies (def-wf-fundamental-representation, prop-wf-weil-sheaf-representation-equivalence) now use the actual étale adic objects (LisseAlgebraicSheaf, the recorded étale automorphism pullback, lisseAlgebraicFiber); no pro-étale substitute. Node files changed only in lean, each with a note. Clause check: K finite, l prime and ≠ char, Q an algebraic closure in universe u+1; curve hypotheses as before; nonempty open immersion j; Restriction R; sections are Q⊗E⊗lim Γ (the def-pod convention, no Weil-fixedness); target is the invariants of (ρ∘R.restrict) on WU.geometric; e is pinned to germ evaluation plus the germ-normalized path; Frobenius on sections is uniquely characterized by pullback then F.str, and is intertwined with ρ(frobLift). Statement is true (connected open, surjective π1, flat scalar extensions). Conjugation convention checked: Tρ(g)T⁻¹=ρ(sgs⁻¹), matching the node and upstream frobStalkIso; liftChange is consistent. The arbitrary D does not change the content, so the statement is equivalent to the canonical case. Helper definitions are explicit data or the choice of a true ∃!; the recorded basepoint transport is only Nonempty, so the new path is a legitimate helper. Edge cases ok: rank 0, constant line with a≠1, nontrivial character, U0=C0, any t and τ, universes. Gates ok: docstrings with source and blueprint tag, six-step plan, 14/14 proofs sorry, statements verbatim, declarations match, both report sections present. nt_compile.py on all three files: exit 0, no errors or warnings, reproduced twice (5.7/4.4/7.9 s). Maintainer notes: CanonicalWeilFundamentalRepresentation.lean is orphaned and lem-dl-a1-lisse-extension-inertia still uses the old pro-étale canonicalFundamentalRep; downstream statements should pass B.weilMonodromyData.toEtale."
+ }
 }

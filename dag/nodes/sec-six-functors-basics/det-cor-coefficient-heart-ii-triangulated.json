@@ -404,5 +404,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientHeartTriangulated",
+  "declaration": "AlgebraicGeometry.ProEtale.constantModelBoundedConstructible_field_triangulated",
+  "file": "lean/Sheaf/Paper/CoefficientHeartTriangulated.lean",
+  "statement": "theorem constantModelBoundedConstructible_field_triangulated (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X] : (∀ E : PadicAlgCl.FiniteIntermediateField ℓ, (constantModelBoundedConstructible (Profinite.continuousMapRingObj.{u} E) X ).IsClosedUnderIsomorphisms ∧ (constantModelBoundedConstructible (Profinite.continuousMapRingObj.{u} E) X ).IsTriangulated ∧ (constantModelBoundedConstructible (Profinite.continuousMapRingObj.{u} E) X ).IsStableUnderRetracts) ∧ (constantModelBoundedConstructible (Profinite.padicAlgClRingObj.{u} ℓ) X ).IsClosedUnderIsomorphisms ∧ (constantModelBoundedConstructible (Profinite.padicAlgClRingObj.{u} ℓ) X ).IsTriangulated ∧ (constantModelBoundedConstructible (Profinite.padicAlgClRingObj.{u} ℓ) X ).IsStableUnderRetracts",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-915a3b6a6",
+  "group": "Q09",
+  "result": "pass",
+  "note": "The statement matches the node and the source sk-cor-coefficient-heart-ii-triangulated.md clause by clause. Noetherian X is written as IsLocallyNoetherian plus CompactSpace. The coefficients are, for every FiniteIntermediateField E, condensedRingObj(continuousMapRingObj E), which is the recorded padicSubfieldRingObj, and the finite-subextension padicAlgClRingObj, which is the recorded Qbar coefficient ring. Dbc is the recorded constantModelBoundedConstructible of the stmt_dep, with no private copy. IsClosedUnderIsomorphisms, IsTriangulated (the Mathlib match of def-weil-triangulated-subcategory: zero, Z-shifts, 2-of-3 by rotation) and IsStableUnderRetracts (thick) cover every conclusion clause. There are no extra hypotheses or universe restrictions. Edge cases checked: empty X, zero complex, E = Q_l. No duplicate exists; IntegralConstantModelHeart uses different coefficients. Imports are the stmt_dep module plus the proof_dep modules, and heart-closure is unrecorded so it is correctly omitted. Docstrings carry the source place, the blueprint tag and all six proof steps. The only proof is sorry. lean.statement matches the file verbatim, lines are at most 100 characters, and the node changed only in lean. nt_compile against the side overlay is clean in 3.9 s, with axioms limited to sorryAx and the standard axioms. Findings: none."
  }
 }
