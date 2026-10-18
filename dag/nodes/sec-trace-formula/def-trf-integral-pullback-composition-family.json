@@ -1,0 +1,105 @@
+{
+ "id": "def-trf-integral-pullback-composition-family",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-rational-frobenius-integral-model",
+   "place": "clause (2), the canonical integral pullback composition family used for powers of geometric Frobenius",
+   "via": [
+    "lem-trf-frobenius-coefficient-reduction-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Integral pullback composition family",
+ "statement": "For a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$, and for a scheme $T$ on which $\\ell$ is invertible, let $D^b_c(T,\\mathcal O_E)$ be the derived-complete integral constructible category [def-weil-derived-complete-integral-detailed] and, for a morphism $f$ of such schemes, let $Lf^*$ be the integral constructible pullback of [def-weil-derived-pullback-tensor-hom]. Define an integral pullback composition family to be a choice, for every composable pair $h:Z\\to W$, $k:W\\to V$ of schemes on which $\\ell$ is invertible, of a natural isomorphism $L(k\\circ h)^*\\cong Lh^*\\circ Lk^*$ of functors $D^b_c(V,\\mathcal O_E)\\to D^b_c(Z,\\mathcal O_E)$. This is the type of such families; the finite-level reduction and associativity normalizations that single out the canonical family are conditions on a member of this type, stated by the integral pullback composition lemma, not part of this definition.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "clause *(2)*: composition compatibility of integral pullbacks"
+ },
+ "stmt_deps": [
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-derived-pullback-tensor-hom"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "family of natural isomorphisms for composition of integral derived pullbacks with finite reduction normalization",
+   "results": "No exact match; the project declaration IntegralPullbackCompositionFamily is the recorded notion.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IntegralPullbackCompositionFamily",
+   "results": "No Mathlib match.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "composition family of integral derived pullback functors on completed constructible categories",
+   "results": "No exact match; generic pullback composition declarations only.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "IntegralPullbackCompositionFamily|integralPullbackComposition",
+   "results": "The exact project declaration is in Sheaf.Paper.IntegralPullbackComposition; no separate Mathlib notion.",
+   "date": "2026-10-18",
+   "verdict": "project declaration only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-frobenius-coefficient-reduction-coherence",
+  "date": "2026-10-18",
+  "group": "Q19"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "lean": {
+  "module": "Sheaf.Paper.IntegralPullbackComposition",
+  "declaration": "WeilConjectures.IntegralPullbackCompositionFamily",
+  "declarations": [
+   "WeilConjectures.IntegralPullbackCompositionFamily"
+  ],
+  "statement": "abbrev IntegralPullbackCompositionFamily",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "The exact definition already exists in Sheaf.Paper.IntegralPullbackComposition; this definition node gives the item's statement dependency a definition-level owner instead of citing the theorem integralPullbackComposition."
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9733ae76e",
+  "group": "Q19",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9733ae76e",
+  "group": "Q19",
+  "result": "fix",
+  "note": "Read the item, both new nodes, all stmt_deps, the dependency Lean (IntegralPullbackComposition, SelectedSchemeGaloisComparison, AdicCoefficientDatum, FiniteCoefficientReductionFlatModel, FourCorners) and the previous RETURN, whose two findings are now repaired. The hypotheses match the node and are no stronger: l≠p prime, ramified E allowed, X0 separated of finite type, K derived-complete integral constructible over the completed sheaf, every reduction finite-Tor. The four clauses match the node: quotient coherence nu∘(alpha_b⊗B_a)=alpha_a for all r≥1, naturality in K, integral and finite composition along powers of g, and the kappa reduction square with orientation checked. Edge cases a=b, lowest level, r=s=m=1, non-flat A2->A1, K=0, empty scheme, ramified E are covered. Universes are bound, the statement field is verbatim, all theorems are sorry, nothing is hollow, docstrings carry source and blueprint tags. nt_compile is clean on the original (1.9 s / 15.6 s) and on the fixes (1.9 s / 16.4 s). Fixed: (1) H4: frobeniusCoherenceKappa re-selected schemeGaloisComparison although the base records prop-trf-scheme-galois-comparison as canonicalSchemeGaloisComparison; removed, the module now imports SelectedSchemeGaloisComparison and uses the recorded declaration, and the lean-record drops the name. (2) H12/H3: new node def-trf-integral-pullback-composition-family described the normalized family while its Lean is the type of families, had empty stmt_deps and the reverse composition order; the node file is replaced, citing def-weil-derived-complete-integral-detailed and def-weil-derived-pullback-tensor-hom. (3) frobeniusReductionRingMap now states its type. Not blocking: lem-pod-integral-pullback-composition (used via .choose) is in proof_deps only. merge_delivery.py dry run not run (landing tools are forbidden in review)."
+ }
+}

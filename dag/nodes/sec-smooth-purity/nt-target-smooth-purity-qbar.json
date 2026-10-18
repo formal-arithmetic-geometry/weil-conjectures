@@ -196,5 +196,24 @@
   "landing": "20261017T165115-L-3502871",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2175a2ef3",
+  "group": "N6",
+  "result": "pass",
+  "note": "Statement is the source smoothPurityIso type token for token (Defs.lean:76-92) with the smoothness binder explicit, wrapped in Nonempty: a faithful rendering of 'there is an isomorphism' with no hollow data. Hypotheses match exactly (prime l; field k with ringChar prime and != l; X, Y LocallyOfFiniteType+QuasiCompact+IsSeparated over Spec k; SmoothOfRelativeDimension d f.left); no extra assumptions; universes as in the source. A #check probe shows the published smoothPurityIso and exists_normalizedSmoothPurityMaps lack the smoothness binder in their types, so a new theorem is justified (H4). Dependency records (lean only, with notes): def-pur-condensed-tate-twists rebound to the published WeilConjectures.TateTwist.ProEtale, which the node and item name; definitions read, real data, statement verbatim; citer modules already import it. sk-def-sfb-dc-setting existing record: compactificationOverField/BoundedConstructible plus Over-factorization declarations, all resolve by #check, statement verbatim. Item lean.statement verbatim; docstrings carry source place, blueprint id and the 8 proof steps; no defs; proof is sorry. nt_compile.py: module rc 0 (6.7 s), no warnings printed; probes clean. Edge cases d=0, empty schemes, arbitrary field, l=2, the n=0 Tate level and the shift sign all checked. Second-reading section is the accepted 2026-10-17 direct-delivery placeholder (same as merged N1/Q14); this review is the independent reading. Side note: the published NormalizedWitness and upstream smoothPurityIso drop smoothness from their types."
+ },
+ "lean": {
+  "module": "Sheaf.Targets.SmoothPurityQbar",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.nonempty_smoothPurityIso",
+  "file": "lean/Sheaf/Targets/SmoothPurityQbar.lean",
+  "statement": "theorem nonempty_smoothPurityIso (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (f : X ⟶ Y) (d : ℕ) [SmoothOfRelativeDimension d f.left] : Nonempty (((boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj (𝟙_ (Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧))).obj ≅ (shiftFunctor _ (2 * d : ℤ)).obj (tateTwistDerived X.left ℓ d))",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The node asserts existence of an isomorphism. Nonempty states precisely this proposition without hollow definition data. Every geometric hypothesis, especially SmoothOfRelativeDimension, is an explicit declaration binder. The published smoothPurityIso and exists_normalizedSmoothPurityMaps omit smoothness from their elaborated types and therefore do not match this node."
  }
 }

@@ -334,5 +334,32 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2175a2ef3",
+  "group": "N6",
+  "result": "pass",
+  "note": "Statement is the source smoothPurityIso type token for token (Defs.lean:76-92) with the smoothness binder explicit, wrapped in Nonempty: a faithful rendering of 'there is an isomorphism' with no hollow data. Hypotheses match exactly (prime l; field k with ringChar prime and != l; X, Y LocallyOfFiniteType+QuasiCompact+IsSeparated over Spec k; SmoothOfRelativeDimension d f.left); no extra assumptions; universes as in the source. A #check probe shows the published smoothPurityIso and exists_normalizedSmoothPurityMaps lack the smoothness binder in their types, so a new theorem is justified (H4). Dependency records (lean only, with notes): def-pur-condensed-tate-twists rebound to the published WeilConjectures.TateTwist.ProEtale, which the node and item name; definitions read, real data, statement verbatim; citer modules already import it. sk-def-sfb-dc-setting existing record: compactificationOverField/BoundedConstructible plus Over-factorization declarations, all resolve by #check, statement verbatim. Item lean.statement verbatim; docstrings carry source place, blueprint id and the 8 proof steps; no defs; proof is sorry. nt_compile.py: module rc 0 (6.7 s), no warnings printed; probes clean. Edge cases d=0, empty schemes, arbitrary field, l=2, the n=0 Tate level and the shift sign all checked. Second-reading section is the accepted 2026-10-17 direct-delivery placeholder (same as merged N1/Q14); this review is the independent reading. Side note: the published NormalizedWitness and upstream smoothPurityIso drop smoothness from their types."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.compactificationOverField",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.BoundedConstructible",
+   "AlgebraicGeometry.ProEtale.boundedConstructible",
+   "AlgebraicGeometry.HasCompactification.of_over",
+   "AlgebraicGeometry.Compactification.overObj",
+   "AlgebraicGeometry.Compactification.overI",
+   "AlgebraicGeometry.Compactification.overG",
+   "AlgebraicGeometry.Compactification.overI_overG"
+  ],
+  "statement": "noncomputable abbrev compactificationOverField {k : Type u} [Field k] {X Y : Over (Spec (.of k))}\n    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [QuasiCompact Y.hom]\n    [IsSeparated Y.hom] (f : X ⟶ Y) : Compactification f.left",
+  "branch": "slopmaster2",
+  "by": "N6",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Missing prerequisite supplied by an exact published existing interface, under the human bottom-up repair authorization. BoundedConstructible is the full ambient subcategory on bounded constructible internal modules over condensedRingObj. compactificationOverField is exactly the Nagata choice used by boundedConstructibleLowerShriek and UpperShriek. HasCompactification.of_over supplies existence, and overObj/overI/overG put the factorization over the same base with separated finite-type middle scheme. The setting is rendered by explicit target binders, not a new predicate."
  }
 }
