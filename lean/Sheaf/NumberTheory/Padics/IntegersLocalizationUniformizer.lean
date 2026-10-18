@@ -8,7 +8,8 @@ module
 public import Sheaf.NumberTheory.Padics.CoefficientExtension
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import Mathlib.LinearAlgebra.TensorProduct.Basic
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
+import Mathlib.LinearAlgebra.TensorProduct.Map
+import Mathlib.Algebra.Module.TransferInstance
 
 /-!
 # Inverting a coefficient-field uniformizer
@@ -75,6 +76,82 @@ theorem coefficientExtension_localization_uniformizer (l : ℕ) [Fact l.Prime]
           (∀ (e : E) (z : M ⊗[coefficientExtensionIntegers l E]
               Localization.Away (coefficientExtensionUniformizer l E)),
             F (s.toSMul.smul e z) = t.toSMul.smul e (F z)) := by
-  sorry
+  let abv := coefficientExtensionAbsoluteValue l E
+  let H := extension_integers_dvr l E abv
+    (spectralNorm_extends (K := ℚ_[l]) (L := E))
+  let O := H.choose
+  let HM := H.choose_spec.choose
+  let HS := H.choose_spec.choose_spec
+  rcases HS with ⟨hO, hm, hu, hlocal, hmax, hmax_unique, hfrac, hdvr,
+    hpid, hm0, hprime, hfinite, hr, hgen, hassoc, hexists⟩
+  let π : O := hgen.choose
+  have hπ : Ideal.span ({π} : Set O) = HM := hgen.choose_spec
+  have hπ_ne : (π : E) ≠ 0 := by
+    rcases hr with ⟨r, hr1, hr2, hchar⟩
+    intro h
+    apply (hchar π).mp hπ |>.1
+    exact Subtype.ext h
+  have hunit : IsUnit (algebraMap O E π) := by
+    change IsUnit (π : E)
+    exact isUnit_iff_ne_zero.mpr hπ_ne
+  have hsurj : ∀ z : E, ∃ n a, z * (algebraMap O E π) ^ n = algebraMap O E a := by
+    intro z
+    by_cases hz : z = 0
+    · refine ⟨0, 0, ?_⟩
+      simp [hz]
+    · let x : Eˣ := Units.mk0 z hz
+      obtain ⟨p, hp, _⟩ := hexists π hπ x
+      rcases p with ⟨v, n⟩
+      cases n with
+      | ofNat k =>
+          refine ⟨0, v * π ^ k, ?_⟩
+          change z * (π : E) ^ 0 = (((v : O) * π ^ k : O) : E)
+          have hp' := hp
+          simp only [x, Units.val_mk0] at hp'
+          simp [hp']
+      | negSucc k =>
+          refine ⟨k + 1, v, ?_⟩
+          change z * (π : E) ^ (k + 1) = (v : E)
+          have hp' := hp
+          simp only [x, Units.val_mk0, zpow_negSucc] at hp'
+          rw [hp']
+          field_simp
+  have heq : ∀ (a b : O), (algebraMap O E) a = algebraMap O E b →
+      ∃ n, π ^ n * a = π ^ n * b := by
+    intro a b hab
+    have hab' : a = b := Subtype.ext hab
+    exact ⟨0, by simp [hab']⟩
+  have hloc : IsLocalization.Away (coefficientExtensionUniformizer l E) E := by
+    change IsLocalization.Away π E
+    exact IsLocalization.Away.mk π hunit hsurj heq
+  let := hloc
+  let R := coefficientExtensionIntegers l E
+  let L := Localization.Away (coefficientExtensionUniformizer l E)
+  let φ : L ≃ₐ[R] E := IsLocalization.algEquiv
+    (Submonoid.powers (coefficientExtensionUniformizer l E)) L E
+  refine ⟨hloc, φ, ?_, ?_⟩
+  · intro x n
+    rw [IsLocalization.algEquiv_mk']
+    apply IsLocalization.mk'_eq_iff_eq_mul.mpr
+    change (x : E) = (x : E) * (π : E)⁻¹ ^ n * ((π ^ n : O) : E)
+    simp [hπ_ne]
+  · intro M _ _
+    let F := (φ.toLinearEquiv.lTensor M).toAddEquiv
+    let C := (TensorProduct.comm R M E).toAddEquiv
+    let t : Module E (M ⊗[R] E) := C.module E
+    let := t
+    let s : Module E (M ⊗[R] L) := F.module E
+    refine ⟨s, t, F, ?_, ?_, ?_, ?_⟩
+    · intro e m a
+      change F.symm (e • F (m ⊗ₜ a)) = m ⊗ₜ (φ.symm e * a)
+      change F.symm (C.symm (e • C (m ⊗ₜ φ a))) = _
+      simp [F, C, TensorProduct.smul_tmul', smul_eq_mul, map_mul]
+    · intro e m a
+      change C.symm (e • C (m ⊗ₜ a)) = m ⊗ₜ (e * a)
+      simp [C, TensorProduct.smul_tmul', smul_eq_mul]
+    · intro m a
+      rfl
+    · intro e z
+      exact F.apply_symm_apply (e • F z)
 
 end Padic
