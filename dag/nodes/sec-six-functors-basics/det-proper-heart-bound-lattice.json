@@ -322,10 +322,10 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-b3da311d3",
-  "group": "NY",
+  "reviewer": "NT-stage2-cc-126ef33fb",
+  "group": "Q42",
   "result": "pass",
-  "note": "Read the node, the blueprint lattice statement and proof, both stmt_deps (sk-def-sfb-dc-setting existing record; det-proper-heart-bound-torsion node, record and module) and every declaration used (torsionLocallyClosedExtension = openImmersionLowerShriek ⋙ lowerStar, IsLisseCoefficientModule = Mod.IsFree of finite rank on a pro-etale cover, proEtaleSheafInverseImage, rightDerivedGlobalSections = R(Sheaf.Γ), topologicalKrullDim). Every clause matches: ringChar conditions, separated finite-type X/Y/S over k, proper k-morphism p, signed d with the 'if d<0 then ⊥' fibre bound, affine weakly contractible V with no Noetherian assumption on V/X_V, j open and i closed with a_! = i_*j_!, H^q of the underlying abelian sheaf after the canonical inverse image along pullback.fst (same rendering as torsion), strict q > 2d+1. No extra assumptions; the S finite-type instances are required by the node and implied for a locally closed subscheme. Universes match torsion (u, Ab u+1). Edge cases d<0, d=0, q=2d+1, rank 0 and empty schemes covered. No definitions, one sorry, docstrings carry source, blueprint tag and 7 steps, lean.statement verbatim, line length ok; only the node lean field and the new module changed; report has Worker report and Second reading by NY. nt_compile --json: rc 0, 5.1 s, no warnings. No findings."
+  "note": "Re-delivery identical in substance to the landed NY version: only the Authors line, lean.by=Q42, the new Q42 report and a blueprint-index timestamp differ. Checked independently: every clause matches the node (ℓ prime; ringChar ≠0, ≠ℓ; separated finite-type X/Y/S over k; proper k-morphism p; signed d with the bound 'if d<0 then ⊥ else d.toNat'; affine weakly contractible V with no Noetherian condition on V/X_V; a=j≫i with a_! = torsionLocallyClosedExtension; L lisse via Mod.IsFree of finite rank; H^q of the underlying abelian sheaf after the inverse image along pullback.fst, the same rendering as the torsion dependency; strict q>2d+1). Edge cases d<0, d=0, q=2d+1, rank 0 and empty schemes are covered. Universes match torsion (u, Ab u+1). No definitions; one sorry; docstrings carry the source, blueprint tag and 7 steps; lean.statement verbatim; lines ≤94 characters. nt_compile --json rc=0 in 15.4 s with no warnings. The report has Worker report, Second reading by NY and a brief Second reading by Q42. No findings."
  },
  "lean": {
   "module": "Sheaf.Paper.ProperHeartBoundLattice",
@@ -333,7 +333,7 @@
   "file": "lean/Sheaf/Paper/ProperHeartBoundLattice.lean",
   "statement": "theorem properHeartBoundLattice (ℓ : ℕ) [Fact ℓ.Prime] (E : Type u) [Field E] [Algebra (Padic ℓ) E] [FiniteDimensional (Padic ℓ) E] (k : Type u) [Field k] (hchar : ringChar k ≠ 0) (hell : ringChar k ≠ ℓ) {X Y S Sbar : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [S.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (S ↘ Spec (.of k))] [LocallyOfFiniteType (S ↘ Spec (.of k))] [QuasiCompact (S ↘ Spec (.of k))] (p : X ⟶ Y) [p.IsOver (Spec (.of k))] [IsProper p] (d : ℤ) (hd : ∀ y : Y, topologicalKrullDim (pullback p (Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫ Y.fromSpecResidueField y) : Scheme.{u}) ≤ if d < 0 then ⊥ else (d.toNat : WithBot ℕ∞)) (V : Y.ProEt) [IsAffine V.left] (hV : (Scheme.ProEt.topology Y).IsWeaklyContractible.{u + 1} V) (j : S ⟶ Sbar) [IsOpenImmersion j] (i : Sbar ⟶ X) [IsClosedImmersion i] [(j ≫ i).IsOver (Spec (.of k))] (L : pulledBackModuleObjects (DerivedNakayama.integerRing ℓ E) S) (hL : IsLisseCoefficientModule (DerivedNakayama.integerRing ℓ E) L) (q : ℤ) (hq : 2 * d + 1 < q) : IsZero ((DerivedCategory.homologyFunctor Ab.{u + 1} q).obj ((rightDerivedGlobalSections Ab.{u + 1} (pullback p V.hom)).obj ((DerivedCategory.singleFunctor _ 0).obj ((Scheme.proEtaleSheafInverseImage (pullback.fst p V.hom) Ab.{u + 1}).obj (((torsionLocallyClosedExtension ℓ E j i).obj L).X)))))",
   "branch": "newtargets-dag",
-  "by": "NY",
+  "by": "Q42",
   "date": "2026-10-18",
   "existing": false
  }

@@ -394,5 +394,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0251f096d",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Statement matches node and source sk-lem-brown-hypotheses-generation clause by clause: FiniteFieldDatum, l prime and != p, X separated with LOFT+QC over Spec D.k, commutative condensed Lambda with six Mon-iso alternatives (finite discrete A killed by l^r, Z_l, O_E via padicIntegersRingObj, Q_l, E, finite-subextension Qbar padicAlgClRingObj, not the all-continuous IsLocalizingAdmissibleCoefficient), recorded ConstantModelConstructibleFiniteTor and localizingClosureProEtale, Type(u+1) skeleton with surjectivity and skeletal hypotheses, compactness as the exact IsCompactObject map on Loc families (HasCoproduct binder needed since there is no global instance and non-vacuous by localizingClosure_exists(1)), generation via Subsingleton Hom(C[n],K) => Nonempty (K = 0). Statement field verbatim; proof_deps = union of step uses; only the lean field added; 3 files changed. Edge cases: empty X, A=0, empty family, K=0, all n, E=Q_l. Gates: no new definitions, sorry only (axioms propext/sorryAx/choice/Quot.sound), source and blueprint docstrings with all 7 steps, side ProEt framework, no extra assumptions. nt_compile --json: two attempts timed out at 60 s on the proof-only import FiniteCoefficientDescentTwoColimit under load 140; the variant without it was clean in 16.4 s; third attempt on the unchanged file clean (dependency 59.6 s, module 8.2 s, exit 0, no warnings). Maintainer note: parent brownHypotheses (Q15) still uses the all-continuous Qbar ring and an arbitrary k."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.BrownHypothesesGeneration",
+  "declaration": "WeilConjectures.brownHypothesesGeneration",
+  "file": "lean/Sheaf/Paper/BrownHypothesesGeneration.lean",
+  "statement": "theorem brownHypothesesGeneration (D : FiniteFieldDatum.{u}) (ℓ : ℕ) [Fact ℓ.Prime] (hℓ : ℓ ≠ D.p) (X : Scheme.{u}) [X.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (hΛ : (∃ (A : Type) (_ : CommRing A) (_ : TopologicalSpace A) (_ : DiscreteTopology A) (_ : IsTopologicalRing A), Finite A ∧ (∃ r : ℕ, ∀ a : A, (ℓ ^ r) • a = 0) ∧ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj A))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℤ_[ℓ])) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicIntegersRingObj ℓ E))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj ℚ_[ℓ])) ∨ (∃ E : PadicAlgCl.FiniteIntermediateField ℓ, Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.continuousMapRingObj E))) ∨ Nonempty (Mon.mk Λ ≅ Mon.mk (Profinite.padicAlgClRingObj ℓ))) (G : Type (u + 1)) (g : G → ConstantModelConstructibleFiniteTor Λ X) (hG : ∀ C : ConstantModelConstructibleFiniteTor Λ X, ∃ i : G, Nonempty (C.obj ≅ (g i).obj)) (hG_skeletal : ∀ i j : G, Nonempty ((g i).obj ≅ (g j).obj) → i = j) : (∀ (i : G) (I : Type (u + 1)) (E : I → DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))) [HasCoproduct E], (∀ j : I, localizingClosureProEtale Λ X (E j)) → Function.Bijective (DirectSum.toAddMonoid (fun j : I ↦ Preadditive.rightComp (g i).obj (Sigma.ι E j)) : (⨁ j : I, ((g i).obj ⟶ E j)) →+ ((g i).obj ⟶ ∐ E))) ∧ (∀ K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)), localizingClosureProEtale Λ X K → (∀ (i : G) (n : ℤ), Subsingleton ((g i).obj⟦n⟧ ⟶ K)) → Nonempty (K ≅ 0))",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Compactness is the explicit canonical map of def-pc-compact-object in the ambient ordinary derived category, equivalent to compactness in the full localizing closure by det-def-localizing-closure-existence(1)-(2). The six coefficient alternatives use the actual ring objects, including finite-subextension-valued Qbar sections."
  }
 }
