@@ -1,9 +1,227 @@
 {
  "kind": "statement",
- "status": "unsplit",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "status": "split",
+ "proof": [
+  {
+   "text": "If the covering family is empty, then $Z$ is empty. Take $S'=S$, $h=\\mathrm{id}_S$ and $Y=\\varnothing$; all assertions are immediate from the definitions, with the empty isomorphism open. Henceforth the family is nonempty; empty members and empty intersections remain allowed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Empty-cover case, checked directly from the statement."
+   }
+  },
+  {
+   "text": "All $H_i$, their pairwise and triple intersections, and the inverse images of these intersections in $Y_i$ are quasi-compact and quasi-separated. Indeed $Z\\to S$ is finitely presented and $S$ is qcqs, hence $Z$ is qcqs by [lem-weil-pbc-qcqs-morphism-permanence](2); in a quasi-separated scheme intersections of quasi-compact opens are quasi-compact. Finiteness makes inverse images of these opens quasi-compact, by [lem-weil-pbc-affine-morphism-permanence](3), and quasi-separated. Restrictions of flat maps to opens are flat by the local-ring definition [def-weil-flat-morphism]. The restrictions remain locally finitely presented by the affine-neighbourhood definition [def-sbc-locally-finite-presentation]; part (1) of the permanence lemma makes them quasi-compact and quasi-separated over $S$, so they are finitely presented. These observations also apply after any base change by part (3) of that lemma and [lem-weil-pbc-flat-morphism-base-change].",
+   "uses": [
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-flat-morphism-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 03GI, 01KV, 01S7, 01TS, 01U9; restriction and base-change hypotheses for all later uses of 01ZM."
+   }
+  },
+  {
+   "text": "There is a quasi-compact open $V\\subseteq S$ containing $\\eta$ on which every $q_i$ is an isomorphism. To see this, choose an affine neighbourhood $S_0$ of $\\eta$. By [lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods], the directed system of affine neighbourhoods of $\\eta$ contained in $S_0$, with affine transitions, has limit $\\operatorname{Spec}k(S)$. Apply [thm-pd-spreading-out](2) to the inverse of $(q_i)_\\eta$, with the finitely presented objects $H_i|_{S_0}$ and $Y_i|_{S_0}$. Apply its equality clause (3) to the two inverse identities. This gives an inverse to $q_i$ over some affine neighbourhood. Directedness and finiteness of the family give one affine $V$ for all $i$. Set $D_i=Y_i\\times_S V$. Its inclusion in $Y_i$ is quasi-compact: $V\\to S$ is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](1), and this property survives base change by (3).",
+   "uses": [
+    "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Limits Tag 01ZM (lemma-descend-finite-presentation), clauses (2),(3); the generic-point instance of the affine-neighbourhood limit."
+   }
+  },
+  {
+   "text": "We will repeatedly use the following density verification. If $F\\to T$ is flat and $T$ is integral, its generic fibre is schematically dense. Over an affine $\\operatorname{Spec}R\\subseteq T$, any affine chart $\\operatorname{Spec}B$ of $F$ maps to the generic fibre by $B\\to B\\otimes_R\\operatorname{Frac}R$. If a section maps to zero, some nonzero $r\\in R$ annihilates it. Apply [lem-sc-flat-invertible-sections-torsion-free] with the invertible sheaf $\\mathcal O$ on that affine chart: multiplication by $r$ is injective. The section is zero. This proves injectivity on a basis and hence on every open by the sheaf axiom. Consequently the inverse image of any open of $T$ containing the generic point is schematically dense too: a section zero on that open is zero on the generic fibre and thus zero. This applies to $Z$, every $Y_i$, their open restrictions, and their flat base changes over integral bases.",
+   "uses": [
+    "lem-sc-flat-invertible-sections-torsion-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Generic density from flatness: affine localization and the torsion-free-sections argument used in Temkin Corollary 3.5.4."
+   }
+  },
+  {
+   "text": "Let $\\nu:N\\to S$ be the normalization in $k(S)$. Construct it by [lem-weil-pbc-relative-normalization], applied to $\\eta\\to S$. This morphism is affine: the inverse image of any nonempty affine of the integral $S$ is $\\operatorname{Spec}k(S)$. Thus the required qcqs hypotheses hold. The cited statement makes $N$ integral and $\\nu$ integral, and identifies its algebra on $\\operatorname{Spec}R\\subseteq S$ with the integral closure $\\overline R\\subseteq k(S)$. Apply [lem-sbc-integral-closure-finite-normal-product] with its product consisting of the single field $k(S)$. Every local ring of $N$ is an integrally closed domain, so $N$ is normal. On the generic fibre the integral closure of $k(S)$ in itself is $k(S)$, hence $N_\\eta=\\eta$. The scheme $N$ is qcqs by [lem-weil-pbc-affine-morphism-permanence](3) and [lem-weil-pbc-qcqs-morphism-permanence](2).",
+   "uses": [
+    "lem-weil-pbc-relative-normalization",
+    "lem-sbc-integral-closure-finite-normal-product",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 035F (lemma-integral-closure), 035I (lemma-characterize-normalization), 035L (lemma-normal-normalization); Temkin Corollary 3.5.4, normalization of the base."
+   }
+  },
+  {
+   "text": "Write $\\mathcal A=\\nu_*\\mathcal O_N$. By [lem-weil-pbc-affine-morphism-relative-spec](1) it is quasi-coherent. It is integral by the affine descriptions above. Use part (1), the subalgebra clause, of [lem-weil-pbc-integral-algebra-directed-colimit-finite]: let $\\mathcal A_\\lambda\\subseteq\\mathcal A$ run over its finite quasi-coherent subalgebras. Put $T_\\lambda=\\underline{\\operatorname{Spec}}_S\\mathcal A_\\lambda$ using the relative-spectrum anti-equivalence. Each $T_\\lambda\\to S$ is finite; locally its algebra is a subring of $k(S)$ containing $R$, so $T_\\lambda$ is integral and $(T_\\lambda)_\\eta=\\eta$. Transitions are finite by [lem-weil-pbc-finite-permanence-over-separated], hence affine. Sections of the colimit on affines are those of $\\mathcal A$ by [lem-weil-pbc-quasi-coherent-algebra-colimit]. Therefore [lem-weil-pbc-spec-colimit-limit], affine-locally on $S$, and [lem-weil-pbc-limit-affine-transition] give $N=\\varprojlim_\\lambda T_\\lambda$: factor cones on the inverse images of affine opens of $S$ and glue the unique factorizations by [lem-weil-pbc-scheme-morphism-gluing]. Include $\\mathcal O_S$ as the initial subalgebra. All $T_\\lambda$ are qcqs by affineness and the permanence lemma of step 2. No finite presentation of $T_\\lambda\\to S$ is needed.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "lem-weil-pbc-finite-permanence-over-separated",
+    "lem-weil-pbc-quasi-coherent-algebra-colimit",
+    "lem-weil-pbc-spec-colimit-limit",
+    "lem-weil-pbc-limit-affine-transition",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Properties Tag 0817 (lemma-integral-algebra-directed-colimit-finite)(1), Limits Tags 01YW and 01YX; the finite submodifications in Temkin Corollary 3.5.4."
+   }
+  },
+  {
+   "text": "Fix $i,j$, put $H=(H_i\\cap H_j)_N$, and $F_i=(q_i^{-1}(H_i\\cap H_j))_N$, $F_j=(q_j^{-1}(H_i\\cap H_j))_N$. Their maps to $H$ are finite by [lem-weil-pbc-finite-morphism-permanence](a). Both are flat, finitely presented over the normal integral $N$ by step 2, and have reduced geometric fibres by [lem-trf-geometric-reduced-fibre-locus-base-change] and restriction to opens. Hence [lem-trf-geometrically-reduced-eta-normal] applies to $F_i$ and $F_j$: every finite generic modification of either is an isomorphism. Over $V_N=\\nu^{-1}(V)$ their maps to $H$ are isomorphisms by step 3. Let $D=(F_i)_{V_N}\\simeq(F_j)_{V_N}$, with graph $\\gamma:D\\to P:=F_i\\times_H F_j$. This $D$ is quasi-compact by step 3 and $P$ is quasi-separated, since it is finite over the qcqs $H$ by [lem-weil-pbc-finite-composition] and finite base change. Thus $\\gamma$ is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](1). Form its scheme-theoretic image $G\\hookrightarrow P$ by [lem-weil-pbc-scheme-image-qc-kernel].",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-trf-geometric-reduced-fibre-locus-base-change",
+    "lem-trf-geometrically-reduced-eta-normal",
+    "lem-weil-pbc-finite-composition",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-scheme-image-qc-kernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Temkin Proposition 3.5.2 and Corollary 3.5.4 (printed pp. 20–21), comparison via a common finite graph; Stacks Tag 01R8 (lemma-quasi-compact-scheme-theoretic-image)."
+   }
+  },
+  {
+   "text": "The projections $p_i:G\\to F_i$, $p_j:G\\to F_j$ are finite: the projections of $P$ are finite by finite base change, and $G\\hookrightarrow P$ is finite by [lem-weil-pbc-closed-immersion-finite]; use [lem-weil-pbc-finite-composition]. Each $F_a\\to H$ is separated because finite morphisms are affine, by [lem-weil-pbc-affine-morphism-permanence](3). Apply [lemma-nagata-scheme-image-partial-section] to $D\\hookrightarrow F_i$, $F_j\\to H$ and $\\gamma$, and then interchange $i,j$. Both projections are isomorphisms over $D$, and their inverse images of $D$ are the graph copy of $D$ in $G$. This open is schematically dense in $F_i,F_j$ by step 4. It is schematically dense in $G$ as well: on an affine $W\\subseteq P$, the image lemma identifies the ideal with the kernel of $\\mathcal O_P(W)\\to\\mathcal O_D(\\gamma^{-1}W)$; the affine quotient description [def-weil-closed-immersion] therefore injects $\\mathcal O_G(G\\cap W)$ into these sections. These opens cover $G$. Since $V_N$ contains $\\eta$, both $p_a$ are generic isomorphisms. They are proper by [lem-weil-pbc-finite-proper]. Thus they are finite $\\eta$-modifications, and the eta-normality established in step 7 makes both isomorphisms. Set $\\phi_{ij}=p_jp_i^{-1}$ over $H$.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-closed-immersion-finite",
+    "lem-weil-pbc-finite-composition",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lemma-nagata-scheme-image-partial-section",
+    "lem-weil-pbc-scheme-image-qc-kernel",
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-finite-proper",
+    "lem-trf-geometrically-reduced-eta-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0CNG (lemma-scheme-theoretic-image-of-partial-section), Tag 01R8, Tag 035C; Temkin Corollary 3.5.4, explicit comparison of the two eta-normal sources."
+   }
+  },
+  {
+   "text": "The overlap map is unique, and the same uniqueness holds after any integral base change under consideration. Indeed work over an affine $\\operatorname{Spec}A\\subseteq H$ lying above an affine $\\operatorname{Spec}R$ of the base. Both models are affine there since finite. Two maps over $H$ yield homomorphisms from the target model's coordinate ring to the source model's ring $B$. Their generic restrictions agree, since each given finite map is a generic isomorphism. The map $B\\to B\\otimes_R\\operatorname{Frac}R$ is injective by [lem-sc-flat-invertible-sections-torsion-free], as in step 4. The homomorphisms therefore agree on every element. The affine comparisons cover the models, so [lem-weil-pbc-scheme-morphism-gluing] makes the maps equal. This also proves that $\\phi_{ii}=\\mathrm{id}$, $\\phi_{ji}=\\phi_{ij}^{-1}$ and $\\phi_{ik}=\\phi_{jk}\\phi_{ij}$ on triple overlaps.",
+   "uses": [
+    "lem-sc-flat-invertible-sections-torsion-free",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Uniqueness and cocycle verification in Temkin Corollary 3.5.4 and Theorem 3.5.5, Step 1; affine torsion-free verification."
+   }
+  },
+  {
+   "text": "Descend the finitely many $\\phi_{ij}$ and their inverses from $N=\\varprojlim T_\\lambda$ using [thm-pd-spreading-out](2). All models on overlaps are finitely presented over $S$ by step 2, and the $T_\\lambda$ are qcqs with affine transitions by step 6. Apply the equality clause (3) to both inverse identities and to $q_j\\phi_{ij}=q_i$; here the comparison target $(H_i\\cap H_j)_{T_\\lambda}$ is finitely presented too. Choose a common later index for the finite list of maps and equalities. Put $S'=T_\\lambda$. Its morphism $h:S'\\to S$ is finite and proper by [lem-weil-pbc-finite-proper], and has generic fibre $\\eta$. Its image is closed by properness and contains the generic point, hence equals $S$; thus it is surjective. The scheme $S'$ is integral by step 6. Uniqueness in step 9, using flatness over this integral $S'$, gives the cocycle for the descended overlap maps. It also forces their restrictions over $V'=h^{-1}(V)$ to be the identifications supplied by the isomorphisms $q_i|_{V'}$.",
+   "uses": [
+    "thm-pd-spreading-out",
+    "lem-weil-pbc-finite-proper"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Temkin Corollary 3.5.4, descent from normalization to a finite submodification; Limits Tag 01ZM (lemma-descend-finite-presentation)(2),(3)."
+   }
+  },
+  {
+   "text": "On $F_i=Y_i\\times_S S'$ take the overlap open $F_{ij}=q_i^{-1}((H_i\\cap H_j)_{S'})$. The descended maps are over the base overlap, so $\\phi_{ij}^{-1}(F_{ji}\\cap F_{jk})=F_{ij}\\cap F_{ik}$: both sides are precisely the inverse image of $(H_i\\cap H_j\\cap H_k)_{S'}$. Together with the cocycle this is the full hypothesis of [lem-weil-pbc-glue-schemes]. It gives a scheme $Y$ covered by the $F_i$. The maps $q_i:F_i\\to Z_{S'}$ agree on overlaps, so [lem-weil-pbc-scheme-morphism-gluing] glues them to $q:Y\\to Z_{S'}$. In fact $q^{-1}((H_i)_{S'})=F_i$: any representative in an $F_j$ whose image lies in $(H_i)_{S'}$ lies in the prescribed overlap, where it is identified with its representative in $F_i$. Thus [lem-weil-pbc-finite-local-on-target] proves $q$ finite. The generic restrictions are the given identities, so $q_\\eta$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-glue-schemes",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lem-weil-pbc-finite-local-on-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Temkin Theorem 3.5.5, Step 1 (printed p. 22); Schemes Tags 01JB (lemma-glue), 01JC (lemma-glue-schemes), Morphisms Tag 01WI (finiteness local on target)."
+   }
+  },
+  {
+   "text": "Each chart $F_i\\to S'$ is flat and finitely presented by step 2. Its geometric fibres are reduced by [lem-trf-geometric-reduced-fibre-locus-base-change]. Since the $F_i$ are open in $Y$, flatness of $Y\\to S'$ follows from [def-weil-flat-morphism] on local rings, and local finite presentation follows from [def-sbc-locally-finite-presentation] on affine neighbourhoods. The scheme $Z_{S'}$ is qcqs by [lem-weil-pbc-qcqs-morphism-permanence]. The finite map $q$ is affine, hence qcqs by [lem-weil-pbc-affine-morphism-permanence](3); consequently $Y$ is qcqs by part (2) of the first lemma, and its map to the qcqs $S'$ is qcqs by part (1). It is therefore finitely presented. On each geometric fibre the $F_i$ remain an open covering, so [lem-trf-reduced-scheme-open-cover] gives reducedness of that fibre.",
+   "uses": [
+    "lem-trf-geometric-reduced-fibre-locus-base-change",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-trf-reduced-scheme-open-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Flatness and finite presentation local on the source; Tags 01TS and 0576 (lemma-base-change-fibres-geometrically-reduced), reducedness local on an open covering."
+   }
+  },
+  {
+   "text": "Finally put $U=Z_{S'}\\times_{S'}V'$, viewed as an open in $Z_{S'}$. Step 10 shows that the restrictions of $q_i$ over $V'$ glue by their identity identifications; hence $q^{-1}(U)\\to U$ is an isomorphism, by [lem-weil-pbc-scheme-morphism-gluing] applied to their local inverses. Both $Z_{S'}\\to S'$ and $Y\\to S'$ are flat, the first by [lem-weil-pbc-flat-morphism-base-change] and the second by step 12. As $V'$ contains the generic point of the integral $S'$, step 4, using [lem-sc-flat-invertible-sections-torsion-free], proves injectivity of restriction of sections to $U$ and to $q^{-1}(U)$ on every open. This is exactly schematic density on both sides [def-trf-schematically-dense-open].",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lem-weil-pbc-flat-morphism-base-change",
+    "lem-sc-flat-invertible-sections-torsion-free",
+    "def-trf-schematically-dense-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Temkin §1.2 definition of modification and Theorem 3.5.5, Step 1; explicit target- and source-side schematic-density verification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-weil-pbc-local-ring-spec-limit-affine-neighbourhoods",
+  "thm-pd-spreading-out",
+  "lem-sc-flat-invertible-sections-torsion-free",
+  "lem-weil-pbc-relative-normalization",
+  "lem-sbc-integral-closure-finite-normal-product",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+  "lem-weil-pbc-finite-permanence-over-separated",
+  "lem-weil-pbc-quasi-coherent-algebra-colimit",
+  "lem-weil-pbc-spec-colimit-limit",
+  "lem-weil-pbc-limit-affine-transition",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-trf-geometric-reduced-fibre-locus-base-change",
+  "lem-trf-geometrically-reduced-eta-normal",
+  "lem-weil-pbc-finite-composition",
+  "lem-weil-pbc-scheme-image-qc-kernel",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lemma-nagata-scheme-image-partial-section",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-finite-proper",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-glue-schemes",
+  "lem-weil-pbc-finite-local-on-target",
+  "lem-trf-reduced-scheme-open-cover",
+  "def-trf-schematically-dense-open"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Detailed realization of Temkin Corollary 3.5.4 and Theorem 3.5.5 Step 1 (primary PDF read online; archival copy WANTED), with Stacks 01R8, 0CNG, 035F/035I/035L, Properties 0817 and Limits 01ZM/01YW/01YX. The common graph, simultaneous descent and schematic density are written out."
+ },
  "mathlib_match": null,
  "created": {
   "by": "worker",
@@ -91,6 +309,76 @@
    "results": "OK; 11 hits; top=['Mathlib/AlgebraicGeometry/Geometrically/Integral.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Integral.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Integral.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Integral.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Integral.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean']; note=; digest=0aa15ae394aded7b. Normalization interfaces construct integral closures and finite-isomorphism interfaces do not compare the two given generic modifications after finite base modification. The searched reduced-fibre file contains preservation and reducedness statements, not Temkin Corollary 3.5.4 or this finite-cover gluing result.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat geometrically reduced finite models agree after normalization and finite modification of the base",
+   "results": "8 hits; top=['AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom', 'Algebra.IsGeometricallyReduced', 'Algebra.IsGeometricallyReduced.casesOn', 'AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization', 'AlgebraicGeometry.Scheme.Hom.normalization.hom_ext', 'Algebra.isReduced_of_isGeometricallyReduced', 'AlgebraicGeometry.Flat.isStableUnderBaseChange', 'AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization']; note=; digest=8f6d4a44f0a63388. Read the returned hits and the finite-morphism, scheme-theoretically-dominant and normalization interfaces. These do not reconcile the given geometrically reduced models after finite birational base change; no exact match or one-line specialization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite generic modifications of a flat finitely presented scheme with geometrically reduced fibres glue after a finite birational change of an integral base",
+   "results": "8 hits; top=['AlgebraicGeometry.UniversallyOpen.of_flat', 'AlgebraicGeometry.Scheme.GlueData.gluedScheme', 'AlgebraicGeometry.finite_appTop_of_universallyClosed', 'AlgebraicGeometry.Flat', 'AlgebraicGeometry.Scheme.Hom.normalizationDesc', 'AlgebraicGeometry.Scheme.Hom.normalization', 'AlgebraicGeometry.LocallyOfFinitePresentation', 'AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget']; note=; digest=395fe006d7e1babe. Read the returned hits and the finite-morphism, scheme-theoretically-dominant and normalization interfaces. These do not reconcile the given geometrically reduced models after finite birational base change; no exact match or one-line specialization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "eta.normal|eta.modification|finite.*modification|glue.*modification AlgebraicGeometry",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Read the returned hits and the finite-morphism, scheme-theoretically-dominant and normalization interfaces. These do not reconcile the given geometrically reduced models after finite birational base change; no exact match or one-line specialization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.Flat\"",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Read the returned hits and the finite-morphism, scheme-theoretically-dominant and normalization interfaces. These do not reconcile the given geometrically reduced models after finite birational base change; no exact match or one-line specialization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "schematic.*closure|schemeTheoreticImage|schematicClosure AlgebraicGeometry",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Read the returned hits and the finite-morphism, scheme-theoretically-dominant and normalization interfaces. These do not reconcile the given geometrically reduced models after finite birational base change; no exact match or one-line specialization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two finite morphisms which are isomorphisms on the generic fibre admit a common finite refinement by the schematic closure of their generic diagonal",
+   "results": "8 hits; top=['AlgebraicGeometry.IsFinite.recOn', 'AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType', 'AlgebraicGeometry.IsFinite', 'AlgebraicGeometry.isSeparated_iff', 'AlgebraicGeometry.IsImmersion.instDiagonalScheme', 'AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion', 'AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom', 'AlgebraicGeometry.IsFinite.instOfIsIsoScheme']; note=; digest=6cea345fea7321e6. Read the returned hits and the finite-morphism, scheme-theoretically-dominant and normalization interfaces. These do not reconcile the given geometrically reduced models after finite birational base change; no exact match or one-line specialization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry.IsFinite\", \"AlgebraicGeometry.Scheme.Hom.schemeTheoreticImage\"",
+   "results": "0 hits; top=[]; note=; digest=4f53cda18c2baa0c. Read the returned hits and the finite-morphism, scheme-theoretically-dominant and normalization interfaces. These do not reconcile the given geometrically reduced models after finite birational base change; no exact match or one-line specialization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The schematic closure of the common generic fibre in the product of two finite generic models gives a finite generic modification of each flat model over an integral scheme",
+   "results": "8 hits; top=['AlgebraicGeometry.finite_appTop_of_universallyClosed', 'AlgebraicGeometry.Flat.generalizingMap', 'AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite', 'AlgebraicGeometry.Flat.instSndScheme', 'AlgebraicGeometry.IsFinite.instSndScheme', 'AlgebraicGeometry.IsFinite.instFstScheme', 'AlgebraicGeometry.Flat.instFstScheme', 'AlgebraicGeometry.IsIntegralHom.instSndScheme']; note=; digest=08da11e58a3f714c. Read the returned hits and the finite-morphism, scheme-theoretically-dominant and normalization interfaces. These do not reconcile the given geometrically reduced models after finite birational base change; no exact match or one-line specialization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "schematicImage|schemeTheoretic|schematicallyDense|schematically.*dense|schematic.*image AlgebraicGeometry",
+   "results": "9 hits; top=['Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean', 'Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean', 'Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean', 'Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean', 'Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean', 'Mathlib/AlgebraicGeometry/Morphisms/SchemeTheoreticallyDominant.lean']; note=; digest=c15db472931c4d15. Read the returned hits and the finite-morphism, scheme-theoretically-dominant and normalization interfaces. These do not reconcile the given geometrically reduced models after finite birational base change; no exact match or one-line specialization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given finite algebras B1 and B2 over A embedded in the same localization A tensor K, the image of B1 tensor_A B2 in A tensor K is a common finite birational extension with schematically dense generic fibre",
+   "results": "8 hits; top=['TensorProduct.toIntegralClosure_bijective_of_isLocalizationAway', 'TensorProduct.toIntegralClosure_bijective_of_isLocalization', 'Algebra.FiniteType.baseChange', 'Algebra.QuasiFinite.baseChange', 'RingHom.Finite.tensorProductMap', 'exists_fg_and_mem_baseChange', 'Algebra.instIsStandardOpenImmersionTensorProduct', 'Algebra.Smooth.exists_subalgebra_finiteType']; note=; digest=e5065e49ca229b9a. Read the returned hits and the finite-morphism, scheme-theoretically-dominant and normalization interfaces. These do not reconcile the given geometrically reduced models after finite birational base change; no exact match or one-line specialization.",
+   "date": "2026-10-17",
+   "verdict": "no match"
   }
  ],
  "blueprint": {
@@ -116,5 +404,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-finite-eta-modification-gluing",
+  "worker": "stage1",
+  "summary": "Kept the full statement unchanged. Thirteen explicit steps construct the comparison over the normalization using a common graph, descend finitely many maps and equations through finite subalgebras, verify uniqueness and the cocycle, glue, and retain an isomorphism open schematically dense on both sides. Reused existing DAG nodes throughout; no new nodes.",
+  "blueprint": "Historical creation chain through lem-trf-valuation-curve-finite-normalization: Temkin §4.1 opening paragraph uses Theorem 3.5.5 to prove finiteness of normalization. This is a general scheme-theoretic tool of that normalization argument, not a realization of the current contracting-correspondence statement of lem-trf-local-term-locality. Supporting ingredient: Corollary 3.5.4 and Theorem 3.5.5, Step 1, printed pp. 21–22; the additional finite base modification is essential. The normal base used in proving Corollary 3.5.4 is the normalization of S, followed by descent to a finite submodification, not an assumed property of S. This split realizes the historical Temkin normalization tool by its finite-base comparison and gluing argument, not by changing the current contracting-correspondence unit.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-flat-invertible-sections-torsion-free",
+    "why": "General scheme-theoretic tool for generic density and uniqueness; it does not replace a contracting-correspondence step and no statement of this unit supplies that generic tool."
+   },
+   {
+    "node": "lem-sbc-integral-closure-finite-normal-product",
+    "why": "General scheme-theoretic tool for normality of the normalization charts; it does not replace a contracting-correspondence step and no statement of this unit supplies that generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+    "why": "General scheme-theoretic tool for the finite-subalgebra approximation of the normalization; it does not replace a contracting-correspondence step and no statement of this unit supplies that generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-limit-affine-transition",
+    "why": "General scheme-theoretic tool for the limit of the finite birational base models; it does not replace a contracting-correspondence step and no statement of this unit supplies that generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-flat-invertible-sections-torsion-free",
+  "lem-sbc-integral-closure-finite-normal-product",
+  "lem-weil-pbc-integral-algebra-directed-colimit-finite",
+  "lem-weil-pbc-limit-affine-transition"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q47-b185ab78d",
+  "group": "Q47",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-b185ab78d (reviewer sub-agent of L); spot-checked: Read the item, all 13 steps and every cited node statement (30 proof dependencies, 12 statement dependencies). The delivery adds no new nodes. Temkin arXiv:0707.3953v3 is not in literature/, so I read a /tmp text copy left by another run: Prop. 3.5.2 (pp. 20-21), Cor. 3.5.4 (p. 21) and Th. 3.5.5 Step 1 (p. 22). The item is the n-chart gluing version of 3.5.4 plus Step 1 and needs no normality on S. Stacks checked: 0CNG (morphisms.tex, scheme-theoretic image of a partial section) and 0817(1) (finite quasi-coherent subalgebras). Step checks: (3) 01ZM clauses (2)/(3) over the affine neighbourhoods of eta give one good open V. (4) Flatness over a domain gives torsion-freeness, hence schematic density. (5) N is normal by the integral-closure node with a single field factor. (6) The finite subalgebras T_lambda are integral and birational, and N = lim T_lambda. (7)-(8) The scheme-theoretic image G of the graph in F_i x_H F_j: both projections are finite, isomorphisms over the dense open D (0CNG), and D is schematically dense in G by the 01R8 kernel description. They are therefore finite eta-modifications and become isomorphisms by the eta-normality node over the normal N. (9) Uniqueness of overlap maps over any integral base comes from B injecting into its generic fibre. (10) The overlap maps, inverses and equalities descend to T_lambda; h is finite, proper, surjective and birational. (11) The 01JB gluing hypotheses hold, and q is finite locally on the target. (12) Y is qcqs and finitely presented, with reduced geometric fibres via the open cover. (13) Both schematic-density clauses are proved. Edge cases tested: S a field, S normal, infinite normalization, empty cover, empty charts and empty fibres. No duplicates: the -spreading, -flatification and parent nodes all differ, and the blueprint has no matching node. No cycle. The only off-route proof dependency is thm-pd-spreading-out, which is Lean-closed, so it counts as a tool. The 4 declared tool_uses are on the route: unnecessary but harmless, accepted as generic tools. No SGA source is used. No fixes. Temkin PDF is WANTED for literature/."
  }
 }
