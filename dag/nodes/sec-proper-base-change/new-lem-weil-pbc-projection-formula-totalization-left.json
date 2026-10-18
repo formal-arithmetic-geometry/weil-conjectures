@@ -1,0 +1,107 @@
+{
+ "id": "new-lem-weil-pbc-projection-formula-totalization-left",
+ "blueprint": {
+  "is": null,
+  "from": "lemma-weil-pbc-projection-formula-totalization"
+ },
+ "kind": "statement",
+ "title": "First inverse equation for signed totalization",
+ "statement": "theorem ringedProjectionFormula_totalization_left\n    {C D : Type u} [Category.{u} C] [Category.{u} D]\n    {JC : GrothendieckTopology C} {JD : GrothendieckTopology D}\n    {R : Sheaf JC CommRingCat.{u}} {S RI : Sheaf JD CommRingCat.{u}}\n    (uInv : Sheaf JC (Type u) ⥤ Sheaf JD (Type u))\n    (uPush : Sheaf JD (Type u) ⥤ Sheaf JC (Type u))\n    (adj : uInv ⊣ uPush) [PreservesFiniteLimits uInv]\n    (I : AlgebraicInverseImage uInv R RI) (c : RI ⟶ S)\n    (uStar : SheafOfModules.{u}\n      ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ⥤\n      SheafOfModules.{u}\n      ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S))\n    (hobj : ∀ M : SheafOfModules.{u}\n      ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R), uStar.obj M = changeOfRings\n        c (I.modules.obj M))\n    (hmap : ∀ {M N : SheafOfModules.{u}\n      ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)} (a : M ⟶ N), uStar.map a =\n      eqToHom (hobj M) ≫ changeOfRingsHom c (I.modules.obj M) (I.modules.map a) ≫\n        eqToHom (hobj N).symm)\n    [uStar.Additive]\n    [HasDerivedCategory.{w} (SheafOfModules.{u}\n      ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u}\n      ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S))]\n    (LF : DerivedCategory (SheafOfModules.{u}\n      ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ⥤ DerivedCategory\n      (SheafOfModules.{u}\n      ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S)))\n    (epsilon : DerivedCategory.Qh ⋙ LF ⟶\n      uStar.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh)\n    (hLF : LF.IsLeftDerivedFunctor epsilon\n      (HomotopyCategory.quasiIso (SheafOfModules.{u}\n      ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (ComplexShape.up ℤ)))\n    (PR : ObjectProperty (CochainComplex (SheafOfModules.{u}\n      ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ))\n    (PS : ObjectProperty (CochainComplex (SheafOfModules.{u}\n      ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S)) ℤ))\n    (hPR : ∀ P, PR P ↔ P.IsAcyclicTensorKFlat ∧ ∀ n : ℤ, (P.X n).IsFlat)\n    (hPS : ∀ P, PS P ↔ P.IsAcyclicTensorKFlat ∧ ∀ n : ℤ, (P.X n).IsFlat)\n    (TR : (DerivedCategory (SheafOfModules.{u}\n      ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R))) × (DerivedCategory\n      (SheafOfModules.{u}\n      ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R))) ⥤ DerivedCategory\n      (SheafOfModules.{u}\n      ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)))\n    (TS : (DerivedCategory (SheafOfModules.{u}\n      ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S))) × (DerivedCategory\n      (SheafOfModules.{u}\n      ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S))) ⥤ DerivedCategory\n      (SheafOfModules.{u}\n      ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S)))\n    (rR : (PR.ι.prod PR.ι) ⋙ Functor.uncurry.obj\n        ((@CategoryTheory.MonoidalCategory.curriedTensor (SheafOfModules.{u}\n      ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) _\n          (SheafOfModules.monoidalCategory R)).map₂HomologicalComplex\n            (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q ≅\n      ((PR.ι ⋙ DerivedCategory.Q).prod (PR.ι ⋙ DerivedCategory.Q)) ⋙ TR)\n    (rS : (PS.ι.prod PS.ι) ⋙ Functor.uncurry.obj\n        ((@CategoryTheory.MonoidalCategory.curriedTensor (SheafOfModules.{u}\n      ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S)) _\n          (SheafOfModules.monoidalCategory S)).map₂HomologicalComplex\n            (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q ≅\n      ((PS.ι ⋙ DerivedCategory.Q).prod (PS.ι ⋙ DerivedCategory.Q)) ⋙ TS)\n    (k : CanonicalRingedTensorComparison R S RI uInv I c uStar hobj)\n    (V : SheafOfModules.{u} ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S) ⥤\n      SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (am :\n      uStar ⊣ V)\n    [V.Additive]\n    (RF : DerivedCategory (SheafOfModules.{u} ((sheafCompose JD (forget₂ CommRingCat.{u}\n      RingCat.{u})).obj S)) ⥤ DerivedCategory (SheafOfModules.{u} ((sheafCompose JC (forget₂\n      CommRingCat.{u} RingCat.{u})).obj R)))\n    (eta : V.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh ⟶\n      DerivedCategory.Qh ⋙ RF)\n    (hRF : ∀ G : DerivedCategory (SheafOfModules.{u} ((sheafCompose JD (forget₂ CommRingCat.{u}\n      RingCat.{u})).obj S)) ⥤ DerivedCategory (SheafOfModules.{u} ((sheafCompose JC (forget₂\n      CommRingCat.{u} RingCat.{u})).obj R)),\n      Function.Bijective (fun b : RF ⟶ G ↦ eta ≫ Functor.whiskerLeft DerivedCategory.Qh b))\n    (computeR : ∀ K : CochainComplex (SheafOfModules.{u} ((sheafCompose JD (forget₂ CommRingCat.{u}\n      RingCat.{u})).obj S)) ℤ, K.IsKInjective →\n      IsIso (derivedPushforwardComplexComparison V RF eta K))\n    (computeL : ∀ P : CochainComplex (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u}\n      RingCat.{u})).obj R)) ℤ,\n      P.IsAcyclicTensorKFlat → (∀ n : ℤ, (P.X n).IsFlat) →\n        IsIso (derivedPullbackComplexComparison uStar LF epsilon P))\n    (adjD : LF ⊣ RF)\n    (canonicalAdj : ∀ K : CochainComplex (SheafOfModules.{u} ((sheafCompose JD (forget₂\n      CommRingCat.{u} RingCat.{u})).obj S)) ℤ, K.IsKInjective →\n      LF.map (derivedPushforwardComplexComparison V RF eta K) ≫\n          adjD.counit.app (DerivedCategory.Q.obj K) =\n        derivedPullbackComplexComparison uStar LF epsilon\n          ((V.mapHomologicalComplex (ComplexShape.up ℤ)).obj K) ≫\n            DerivedCategory.Q.map ((am.mapHomologicalComplex (ComplexShape.up ℤ)).counit.app K))\n    (E : DerivedCategory (SheafOfModules.{u} ((sheafCompose JD (forget₂ CommRingCat.{u}\n      RingCat.{u})).obj S))) (K : CochainComplex (SheafOfModules.{u} ((sheafCompose JD (forget₂\n      CommRingCat.{u} RingCat.{u})).obj S)) ℤ) (hK : K.IsKInjective)\n    (repE : E ≅ DerivedCategory.Q.obj K)\n    (F : CochainComplex (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u}\n      RingCat.{u})).obj R)) ℤ)\n    (P : StrictPerfectCoefficientPackage ((sheafCompose JC (forget₂ CommRingCat.{u}\n      RingCat.{u})).obj R) F)\n    (hbounded : ∃ a b : ℤ, ∀ r : ℤ, r < a ∨ b < r → IsZero (F.X r)) :\n    (ringedProjectionFormulaArrows uInv uPush adj I c uStar hobj hmap LF epsilon hLF\n      PR PS hPR hPS TR TS rR rS k V am RF eta hRF computeR computeL adjD canonicalAdj\n      E K hK repE F P hbounded).1 ≫\n      (ringedProjectionFormulaArrows uInv uPush adj I c uStar hobj hmap LF epsilon hLF\n      PR PS hPR hPS TR TS rR rS k V am RF eta hRF computeR computeL adjD canonicalAdj\n      E K hK repE F P hbounded).2 = 𝟙 (TR.obj (RF.obj E, DerivedCategory.Q.obj F))",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-projection-formula-totalization.proof.md",
+  "place": "Conjunct left of the inverse equations."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-projection-formula-arrows"
+ ],
+ "proof": [
+  {
+   "text": "Expand the canonical representative comparison, apply the chosen finite-total inverse, and cancel the comparison isomorphisms by associativity and identity laws.",
+   "uses": [
+    "def-weil-pbc-projection-formula-arrows"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-projection-formula-arrows"
+ ],
+ "proof_origin": "main-20261015 proof, conjunct of lemma 1267",
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "signed totalization projection formula inverse canonical derived category",
+   "results": "No exact ringed-topos projection formula; only generic category infrastructure.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "projectionFormula totalization inverse",
+   "results": "No exact match.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "ringedProjectionFormula_totalization",
+   "results": "Only the target and these newly split declarations.",
+   "date": "2026-10-18",
+   "verdict": "no existing match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "signed totalization projection inverse",
+   "results": "Service search found no exact match.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 1267,
+ "blueprint_uses": [
+  "def-weil-pbc-projection-formula-arrows"
+ ],
+ "lean": {
+  "module": "Sheaf.Paper.ringedProjectionFormula_totalization_left",
+  "declaration": "SheafOfModules.ringedProjectionFormula_totalization_left",
+  "file": "lean/Sheaf/Paper/ringedProjectionFormula_totalization_left.lean",
+  "statement": "theorem ringedProjectionFormula_totalization_left\n    {C D : Type u} [Category.{u} C] [Category.{u} D]\n    {JC : GrothendieckTopology C} {JD : GrothendieckTopology D}\n    {R : Sheaf JC CommRingCat.{u}} {S RI : Sheaf JD CommRingCat.{u}}\n    (uInv : Sheaf JC (Type u) ⥤ Sheaf JD (Type u))\n    (uPush : Sheaf JD (Type u) ⥤ Sheaf JC (Type u))\n    (adj : uInv ⊣ uPush) [PreservesFiniteLimits uInv]\n    (I : AlgebraicInverseImage uInv R RI) (c : RI ⟶ S)\n    (uStar : SheafOfModules.{u}\n      ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R) ⥤\n      SheafOfModules.{u}\n      ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S))\n    (hobj : ∀ M : SheafOfModules.{u}\n      ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R), uStar.obj M = changeOfRings\n        c (I.modules.obj M))\n    (hmap : ∀ {M N : SheafOfModules.{u}\n      ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)} (a : M ⟶ N), uStar.map a =\n      eqToHom (hobj M) ≫ changeOfRingsHom c (I.modules.obj M) (I.modules.map a) ≫\n        eqToHom (hobj N).symm)\n    [uStar.Additive]\n    [HasDerivedCategory.{w} (SheafOfModules.{u}\n      ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u}\n      ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S))]\n    (LF : DerivedCategory (SheafOfModules.{u}\n      ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ⥤ DerivedCategory\n      (SheafOfModules.{u}\n      ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S)))\n    (epsilon : DerivedCategory.Qh ⋙ LF ⟶\n      uStar.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh)\n    (hLF : LF.IsLeftDerivedFunctor epsilon\n      (HomotopyCategory.quasiIso (SheafOfModules.{u}\n      ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (ComplexShape.up ℤ)))\n    (PR : ObjectProperty (CochainComplex (SheafOfModules.{u}\n      ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ))\n    (PS : ObjectProperty (CochainComplex (SheafOfModules.{u}\n      ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S)) ℤ))\n    (hPR : ∀ P, PR P ↔ P.IsAcyclicTensorKFlat ∧ ∀ n : ℤ, (P.X n).IsFlat)\n    (hPS : ∀ P, PS P ↔ P.IsAcyclicTensorKFlat ∧ ∀ n : ℤ, (P.X n).IsFlat)\n    (TR : (DerivedCategory (SheafOfModules.{u}\n      ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R))) × (DerivedCategory\n      (SheafOfModules.{u}\n      ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R))) ⥤ DerivedCategory\n      (SheafOfModules.{u}\n      ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)))\n    (TS : (DerivedCategory (SheafOfModules.{u}\n      ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S))) × (DerivedCategory\n      (SheafOfModules.{u}\n      ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S))) ⥤ DerivedCategory\n      (SheafOfModules.{u}\n      ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S)))\n    (rR : (PR.ι.prod PR.ι) ⋙ Functor.uncurry.obj\n        ((@CategoryTheory.MonoidalCategory.curriedTensor (SheafOfModules.{u}\n      ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) _\n          (SheafOfModules.monoidalCategory R)).map₂HomologicalComplex\n            (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q ≅\n      ((PR.ι ⋙ DerivedCategory.Q).prod (PR.ι ⋙ DerivedCategory.Q)) ⋙ TR)\n    (rS : (PS.ι.prod PS.ι) ⋙ Functor.uncurry.obj\n        ((@CategoryTheory.MonoidalCategory.curriedTensor (SheafOfModules.{u}\n      ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S)) _\n          (SheafOfModules.monoidalCategory S)).map₂HomologicalComplex\n            (ComplexShape.up ℤ) (ComplexShape.up ℤ) (ComplexShape.up ℤ)) ⋙ DerivedCategory.Q ≅\n      ((PS.ι ⋙ DerivedCategory.Q).prod (PS.ι ⋙ DerivedCategory.Q)) ⋙ TS)\n    (k : CanonicalRingedTensorComparison R S RI uInv I c uStar hobj)\n    (V : SheafOfModules.{u} ((sheafCompose JD (forget₂ CommRingCat.{u} RingCat.{u})).obj S) ⥤\n      SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (am :\n      uStar ⊣ V)\n    [V.Additive]\n    (RF : DerivedCategory (SheafOfModules.{u} ((sheafCompose JD (forget₂ CommRingCat.{u}\n      RingCat.{u})).obj S)) ⥤ DerivedCategory (SheafOfModules.{u} ((sheafCompose JC (forget₂\n      CommRingCat.{u} RingCat.{u})).obj R)))\n    (eta : V.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh ⟶\n      DerivedCategory.Qh ⋙ RF)\n    (hRF : ∀ G : DerivedCategory (SheafOfModules.{u} ((sheafCompose JD (forget₂ CommRingCat.{u}\n      RingCat.{u})).obj S)) ⥤ DerivedCategory (SheafOfModules.{u} ((sheafCompose JC (forget₂\n      CommRingCat.{u} RingCat.{u})).obj R)),\n      Function.Bijective (fun b : RF ⟶ G ↦ eta ≫ Functor.whiskerLeft DerivedCategory.Qh b))\n    (computeR : ∀ K : CochainComplex (SheafOfModules.{u} ((sheafCompose JD (forget₂ CommRingCat.{u}\n      RingCat.{u})).obj S)) ℤ, K.IsKInjective →\n      IsIso (derivedPushforwardComplexComparison V RF eta K))\n    (computeL : ∀ P : CochainComplex (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u}\n      RingCat.{u})).obj R)) ℤ,\n      P.IsAcyclicTensorKFlat → (∀ n : ℤ, (P.X n).IsFlat) →\n        IsIso (derivedPullbackComplexComparison uStar LF epsilon P))\n    (adjD : LF ⊣ RF)\n    (canonicalAdj : ∀ K : CochainComplex (SheafOfModules.{u} ((sheafCompose JD (forget₂\n      CommRingCat.{u} RingCat.{u})).obj S)) ℤ, K.IsKInjective →\n      LF.map (derivedPushforwardComplexComparison V RF eta K) ≫\n          adjD.counit.app (DerivedCategory.Q.obj K) =\n        derivedPullbackComplexComparison uStar LF epsilon\n          ((V.mapHomologicalComplex (ComplexShape.up ℤ)).obj K) ≫\n            DerivedCategory.Q.map ((am.mapHomologicalComplex (ComplexShape.up ℤ)).counit.app K))\n    (E : DerivedCategory (SheafOfModules.{u} ((sheafCompose JD (forget₂ CommRingCat.{u}\n      RingCat.{u})).obj S))) (K : CochainComplex (SheafOfModules.{u} ((sheafCompose JD (forget₂\n      CommRingCat.{u} RingCat.{u})).obj S)) ℤ) (hK : K.IsKInjective)\n    (repE : E ≅ DerivedCategory.Q.obj K)\n    (F : CochainComplex (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u}\n      RingCat.{u})).obj R)) ℤ)\n    (P : StrictPerfectCoefficientPackage ((sheafCompose JC (forget₂ CommRingCat.{u}\n      RingCat.{u})).obj R) F)\n    (hbounded : ∃ a b : ℤ, ∀ r : ℤ, r < a ∨ b < r → IsZero (F.X r)) :\n    (ringedProjectionFormulaArrows uInv uPush adj I c uStar hobj hmap LF epsilon hLF\n      PR PS hPR hPS TR TS rR rS k V am RF eta hRF computeR computeL adjD canonicalAdj\n      E K hK repE F P hbounded).1 ≫\n      (ringedProjectionFormulaArrows uInv uPush adj I c uStar hobj hmap LF epsilon hLF\n      PR PS hPR hPS TR TS rR rS k V am RF eta hRF computeR computeL adjD canonicalAdj\n      E K hK repE F P hbounded).2 = 𝟙 (TR.obj (RF.obj E, DerivedCategory.Q.obj F))",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProjectionFormulaTotalization",
+  "date": "2026-10-18",
+  "group": "A3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261018T103141-L-4174414",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261018T103141-L-4174414",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

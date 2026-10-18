@@ -19,6 +19,8 @@ import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
 import Sheaf.Algebra.Homology.KFlat
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
 import Sheaf.Paper.ProjectionFormulaProjectiveSummand
+import Sheaf.Paper.ringedProjectionFormula_totalization_left
+import Sheaf.Paper.ringedProjectionFormula_totalization_right
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
@@ -185,6 +187,12 @@ theorem ringedProjectionFormula_totalization
       (ringedProjectionFormulaArrows uInv uPush adj I c uStar hobj hmap LF epsilon hLF
       PR PS hPR hPS TR TS rR rS k V am RF eta hRF computeR computeL adjD canonicalAdj
       E K hK repE F P hbounded).1 =
-        𝟙 (RF.obj (TS.obj (E, LF.obj (DerivedCategory.Q.obj F)))) := sorry
+        𝟙 (RF.obj (TS.obj (E, LF.obj (DerivedCategory.Q.obj F)))) := by
+  exact ⟨ringedProjectionFormula_totalization_left uInv uPush adj I c uStar hobj hmap LF epsilon hLF
+    PR PS hPR hPS TR TS rR rS k V am RF eta hRF computeR computeL adjD canonicalAdj E K hK repE F P
+    hbounded,
+    ringedProjectionFormula_totalization_right uInv uPush adj I c uStar hobj hmap LF epsilon hLF
+    PR PS hPR hPS TR TS rR rS k V am RF eta hRF computeR computeL adjD canonicalAdj E K hK repE F P
+    hbounded⟩
 
 end SheafOfModules
