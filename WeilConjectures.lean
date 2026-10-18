@@ -2212,6 +2212,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebra
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraComp
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.IsoAlgebraStr
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjectiveResolution
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Linear
@@ -2251,6 +2252,7 @@ public import WeilConjectures.CategoryTheory.EffacingSequencePushout
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebra
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraAdjunction
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraFullyFaithful
+public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraHomology
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraTwist
 public import WeilConjectures.CategoryTheory.Endofunctor.Shift
 public import WeilConjectures.CategoryTheory.EssentiallyConstantSystem
@@ -3148,6 +3150,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.MonoidalShift
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Ab
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.Exact
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
+public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.MapHomologyIsoComp
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ModuleCat
 public import WeilConjectures.Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import WeilConjectures.Mathlib.Algebra.Homology.SingleHomology
