@@ -19,129 +19,109 @@
  ],
  "proof": [
   {
-   "text": "Write $u:S'\\to S$, $X'=X\\times_SS'$, $Y'=Y\\times_SS'$, $a:X'\\to X$, $b:Y'\\to Y$, and $j':X'\\to Y'$. Work with the finite constant coefficient ring $\\Lambda$ of the constructible sheaf $F$, with $F'=a^{-1}F$, and put $K=Rj_*F$, $K'=Rj'_*F'$. A finite morphism is integral by [pqf-lem-finite-integral-lft]. Radicial means universally injective; therefore the integral, radicial, surjective criterion [lem-pc-integral-radicial-surjective-universal-homeomorphism] makes $u$ a universal homeomorphism. The projections $a,b$, and every further pullback of $u$, are universal homeomorphisms by [lem-weil-pbc-universal-homeomorphism-base-change].",
+   "text": "Convert the project bounded-constructibility predicate to the source boundedConstructible predicate using the finite-module-value/stalk comparison and the homology characterizations of the standard t-structure. This is the proved private helper boundedConstructible_compare.",
+   "uses": [
+    "def-weil-pbc-constructible-complexes",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-fin-radicial-exchange-descent.proof.md",
+    "place": "Proof, Noetherian test schemes and exchange descent; existing source declaration WeilConjectures/SixFunctors/Etale/Derived/Finiteness/Deligne.lean:135-143"
+   }
+  },
+  {
+   "text": "A finite surjective universally injective v is a universal homeomorphism; so are pY and pX by pullback. The source topological-invariance theorem gives inverse-image equivalences. Apply the mate-isomorphism theorem to derivedSquareUpperStarIso and the derived inverse/direct-image adjunctions: the canonical cover exchange is an isomorphism (cover_exchange_iso).",
    "uses": [
     "pqf-lem-finite-integral-lft",
     "lem-pc-integral-radicial-surjective-universal-homeomorphism",
-    "lem-weil-pbc-universal-homeomorphism-base-change"
+    "lem-weil-pbc-universal-homeomorphism-base-change",
+    "prop-weil-pbc-universal-homeomorphism-topos",
+    "lem-weil-mate-iso-along-equivalences",
+    "sbc-def-base-change-map"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-radicial-exchange-descent.md",
-    "place": "Proof"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-fin-radicial-exchange-descent.proof.md",
+    "place": "Proof, Noetherian test schemes and exchange descent; existing source declaration WeilConjectures/SixFunctors/Etale/Derived/Finiteness/Deligne.lean:135-143"
    }
   },
   {
-   "text": "For any universal homeomorphism $v:V'\\to V$ encountered here, [thm-weil-pbc-universal-homeomorphism-invariance] gives mutually inverse sheaf equivalences $v^{-1},v_*$. These equivalences lift to constant $\\Lambda$-module sheaves: the action and its equations are carried by the inverse functors, and their units and counits are the underlying ones, as specified in [prop-weil-pbc-inverse-image-modules-exact]. Thus both are exact and their units and counits are isomorphisms. Apply [lem-weil-pbc-exact-functor-derived-factorization] and [lem-weil-pbc-exact-functor-derived-functor] to these two exact functors. Applying their sheaf units and counits termwise gives inverse derived equivalences $v^{-1}$ and $Rv_*$. By [lem-weil-pbc-exact-functor-complex-cohomology], $\\mathcal H^r(v^{-1}C)=v^{-1}\\mathcal H^r(C)$; this equivalence reflects zero objects, cohomological bounds, and isomorphisms. In the square for $j$ and $b$, the canonical inverse-image square isomorphism and the derived adjunctions are the ones in [sbc-def-base-change-map]. Apply [lem-weil-mate-iso-along-equivalences] with $L=j^{-1}$, $R=Rj_*$, $L'=j'^{-1}$, $R'=Rj'_*$, $G=b^{-1}$ and $G'=a^{-1}$. Both $G,G'$ are equivalences. Hence its mate is the canonical exchange isomorphism $\\beta_u:b^{-1}K\\xrightarrow{\\sim}K'$, not merely an unspecified isomorphism between the two objects.",
+   "text": "Prove finite-stalk reflection for any surjective q. Above the image of an arbitrary geometric point choose a point z upstairs and take the separable closure of its residue field. Its composite geometric point has the same image downstairs. Geometric-stalk comparison and upperStarCompSheafFiberIso transport finite generation from the upstairs stalk to the original stalk. Combine this with the proved local-constancy reflection for universal homeomorphisms.",
    "uses": [
-    "thm-weil-pbc-universal-homeomorphism-invariance",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-exact-functor-derived-functor",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
-    "sbc-def-base-change-map",
-    "lem-weil-mate-iso-along-equivalences"
+    "lem-weil-pbc-geometric-stalk-comparison-constant",
+    "lemma-openclosed-stalk-upperstar",
+    "lemma-constructible-universal-homeomorphism-invariance"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-radicial-exchange-descent.md",
-    "place": "Proof"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-fin-radicial-exchange-descent.proof.md",
+    "place": "Proof, Noetherian test schemes and exchange descent; existing source declaration WeilConjectures/SixFunctors/Etale/Derived/Finiteness/Deligne.lean:135-143"
    }
   },
   {
-   "text": "Here is constructibility descent for an arbitrary sheaf $G$ of $\\Lambda$-modules on $Y$. If $b^{-1}G$ is constructible, choose its finite stratification by reduced induced locally closed constructible subschemes, allowed by [def-weil-pbc-etale-constructible-sheaf]. The homeomorphism $|b|$ takes this partition to a locally closed constructible partition of $Y$: opens, closed sets and quasi-compactness are preserved, hence so are retrocompact opens and their finite Boolean combinations by [def-weil-constructible-subset]. Give each image stratum $Z$ its reduced induced structure; this choice is also allowed in [def-weil-pbc-etale-constructible-sheaf]. Put $P=Y'\\times_YZ$. Its projection to $Z$ is a universal homeomorphism by step 1, and $P_{\\mathrm{red}}\\to P$ is one by [lem-weil-pbc-reduction-universal-homeomorphism]. Their composite is universal: after any base change its two factors are homeomorphisms, so their composite is a homeomorphism. The reduced inverse-image stratum chosen above is $P_{\\mathrm{red}}$: locally, if $Z$ is defined by a radical ideal $I$ on an open affine $\\operatorname{Spec}A$, both reduced structures are the quotient of the corresponding ring $B$ upstairs by $\\sqrt{IB}$. Thus the two restrictions of $b^{-1}G$ agree on this stratum. Use [lemma-weil-pbc-universal-homeomorphism-site-equivalence] to descend a trivializing etale covering of that stratum to $Z$; covering reflection is [thm-weil-pbc-universal-homeomorphism-invariance]. On each descended etale object $V$, its pullback restriction is a constant finite module $M$. By [lemma-constructible-pullback-constant] the constant sheaf $M_V$ pulls back to that same constant sheaf. Full faithfulness of the module equivalence from step 2 therefore descends this isomorphism to $G|_V\\cong M_V$. Thus $G|_Z$ is finite locally constant as a module sheaf, with the same finite module values. This proves constructibility of $G$ without a Noetherian assumption on $Y$.",
+   "text": "Transport an upstairs finite stratification through the homeomorphism. Locally closed constructible subsets, the partition and disjointness are preserved. Construct actual immersed schemes for the image strata using vanishingIdeal, its subscheme, and an open restriction. For each stratum take the pullback upstairs. Its projection to the base is a universal homeomorphism, and its other projection has exactly the original stratum image. The immersion-independence lemma transfers finite local constancy to this pullback, and the preceding reflection descends it. Convert back to the project constructibility predicate. No comparison of reductions is needed.",
    "uses": [
-    "def-weil-pbc-etale-constructible-sheaf",
     "def-weil-constructible-subset",
-    "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
-    "thm-weil-pbc-universal-homeomorphism-invariance",
-    "lemma-constructible-pullback-constant",
-    "lem-weil-pbc-reduction-universal-homeomorphism"
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "lemma-constructible-immersion-independence",
+    "lemma-constructible-universal-homeomorphism-invariance"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-radicial-exchange-descent.md",
-    "place": "Proof"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-fin-radicial-exchange-descent.proof.md",
+    "place": "Proof, Noetherian test schemes and exchange descent; existing source declaration WeilConjectures/SixFunctors/Etale/Derived/Finiteness/Deligne.lean:135-143"
    }
   },
   {
-   "text": "By hypothesis $K'$ has cohomology zero outside some interval $[m,n]$ and constructible cohomology in that interval. Apply $\\beta_u$ of step 2 and the cohomology comparison there: $b^{-1}\\mathcal H^r(K)\\cong\\mathcal H^r(K')$. Reflection of zero objects gives the same interval $[m,n]$ for $K$. Apply step 3 to each $G=\\mathcal H^r(K)$ to descend constructibility. This is exactly bounded constructibility by [def-weil-pbc-constructible-complexes].",
+   "text": "Exact inverse image commutes with cohomology by leftDerivedUpperStarHomologyFunctorIso. Its full faithfulness reflects zero objects, so the upstairs interval bounds descend unchanged. Apply constructibility reflection in each degree. Transport hbounded through the canonical cover exchange to obtain global bounded constructibility of Rj_*F on Y, without assuming S Noetherian.",
    "uses": [
-    "def-weil-pbc-constructible-complexes"
+    "def-weil-pbc-constructible-complexes",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "prop-weil-pbc-universal-homeomorphism-topos"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-radicial-exchange-descent.md",
-    "place": "Proof"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-fin-radicial-exchange-descent.proof.md",
+    "place": "Proof, Noetherian test schemes and exchange descent; existing source declaration WeilConjectures/SixFunctors/Etale/Derived/Finiteness/Deligne.lean:135-143"
    }
   },
   {
-   "text": "Fix an arbitrary morphism $t:T\\to S$ with $T$ Noetherian. Put $T'=T\\times_SS'$, $q:T'\\to T$, $r:T'\\to S'$. Then $tq=ur$. The projection $q$ is the base change of the finite morphism $u$, hence finite by [lem-trf-finite-radicial-basechange]; thus $q$ is affine and over an affine open $\\operatorname{Spec}C\\subset T$ its preimage is $\\operatorname{Spec}D$ with $D$ a finite $C$-module [def-weil-finite-integral-morphism]. A finite family of module generators of $D$ generates it as a $C$-algebra, and $q$ is quasi-compact (affine), so $q$ is of finite type. Consequently $T'$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. It is a universal homeomorphism over $T$ by step 1, and the map $r:T'\\to S'$ is therefore an allowed Noetherian test map for the hypothesis. No Noetherianity of $S$ or $S'$ has been assumed.",
+   "text": "Put F'=pX^*F. The single-complex/pullback comparison identifies single F' with LpX^*(single F). Naturality transports the assumed upstairs exchange to single F'. For every Noetherian test upstairs, pullback preserves bounded constructibility (boundedConstructible_leftDerivedUpperStar); the assumed exchange then transfers it to the tested direct image. Thus the full source HasConstructibleDirectImageBaseChangeOn predicate holds upstairs. Apply the already stated finite-radicial Noetherian-test descent theorem, and project its exchange clause for each arbitrary downstairs test. Combine with the separately proved global boundedness.",
    "uses": [
-    "lem-trf-finite-radicial-basechange",
-    "def-weil-finite-integral-morphism",
-    "lem-weil-pbc-finite-type-over-noetherian"
+    "lem-fin-radicial-noetherian-test-descent",
+    "prop-constructible-pullback",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-radicial-exchange-descent.md",
-    "place": "Proof"
-   }
-  },
-  {
-   "text": "For a base morphism $h:B\\to S$ write $\\beta_h:h_Y^{-1}Rj_*F\\to Rj_{B,*}h_X^{-1}F$ for the canonical exchange of [sbc-def-base-change-map], i.e. the unbounded module exchange $\\Ex$ of [def-kun-unbounded-exchange] of the cartesian square $(j,j_B,h_Y,h_X)$. Take $Y_T=Y\\times_ST$, $X_T=X\\times_ST$ and $Y_{T'}=Y_T\\times_TT'$, $X_{T'}=X_T\\times_TT'$, with projections $t_Y,t_X$, $q_Y,q_X$, and $j_T,j_{T'}$ the base changes of $j$. By [lem-weil-pbc-cartesian-square-pasting] the same schemes, with $r_Y:Y_{T'}\\to Y'$ and $r_X:X_{T'}\\to X'$ the induced maps, also form cartesian squares $(j',j_{T'},r_Y,r_X)$ over $(j,j',b,a)$, and $t_Yq_Y=br_Y$, $t_Xq_X=ar_X$ as morphisms to $Y$ and $X$. Thus the two pastings $(j_T,j_{T'},q_Y,q_X)\\cdot(j,j_T,t_Y,t_X)$ and $(j',j_{T'},r_Y,r_X)\\cdot(j,j',b,a)$ are the same outer square $(j,j_{T'},t_Yq_Y,t_Xq_X)$. Applying [lem-fin-module-exchange-composite-base-change] to both pastings and evaluating at $F$ gives\n$$(Rj_{T'*}c^\\Lambda_{t_X,q_X})\\circ\\beta_q^{(t)}\\circ q_Y^{-1}(\\beta_t)\\circ(c^\\Lambda_{t_Y,q_Y})^{-1}=\\Ex_{\\mathrm{outer},F}=(Rj_{T'*}c^\\Lambda_{a,r_X})\\circ\\beta_r^{(u)}\\circ r_Y^{-1}(\\beta_u)\\circ(c^\\Lambda_{b,r_Y})^{-1},$$\nwhere $\\beta_q^{(t)}$ and $\\beta_r^{(u)}$ are the exchanges of the squares $(j_T,j_{T'},q_Y,q_X)$ at $t_X^{-1}F$ and $(j',j_{T'},r_Y,r_X)$ at $a^{-1}F=F'$. Since the $c^\\Lambda$ are isomorphisms, $\\beta_q^{(t)}\\circ q_Y^{-1}(\\beta_t)$ is an isomorphism if and only if $\\beta_r^{(u)}\\circ r_Y^{-1}(\\beta_u)$ is one.",
-   "uses": [
-    "sbc-def-base-change-map",
-    "def-kun-unbounded-exchange",
-    "lem-weil-pbc-cartesian-square-pasting",
-    "lem-fin-module-exchange-composite-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-radicial-exchange-descent.md",
-    "place": "Proof"
-   }
-  },
-  {
-   "text": "The composite $\\beta_r^{(u)}\\circ r_Y^{-1}(\\beta_u)$ of step 6 is an isomorphism: $\\beta_u$ is one by step 2, and $\\beta_r^{(u)}$ is one by the hypothesis, applicable because $T'$ is Noetherian by step 5. The first factor $\\beta_q^{(t)}$ on the left is an isomorphism by exactly the mate argument of step 2 applied to $j_T$ and the universal homeomorphism $q_Y$ (and its pullback $q_X$), using [lem-weil-mate-iso-along-equivalences]. By step 6, $\\beta_q^{(t)}\\circ q_Y^{-1}(\\beta_t)$ is an isomorphism; cancelling the isomorphism $\\beta_q^{(t)}$ shows $q_Y^{-1}(\\beta_t)$ is an isomorphism. Finally $q_Y^{-1}$ is conservative by the derived equivalence of step 2, so $\\beta_t$ is an isomorphism. Since $t:T\\to S$ was arbitrary with Noetherian $T$, this proves the required universal formation assertion over $S$, for the canonical exchange morphism, together with bounded constructibility from step 4.",
-   "uses": [
-    "lem-weil-mate-iso-along-equivalences"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-radicial-exchange-descent.md",
-    "place": "Proof"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-fin-radicial-exchange-descent.proof.md",
+    "place": "Proof, Noetherian test schemes and exchange descent; existing source declaration WeilConjectures/SixFunctors/Etale/Derived/Finiteness/Deligne.lean:135-143"
    }
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-constructible-complexes",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
   "pqf-lem-finite-integral-lft",
   "lem-pc-integral-radicial-surjective-universal-homeomorphism",
   "lem-weil-pbc-universal-homeomorphism-base-change",
-  "thm-weil-pbc-universal-homeomorphism-invariance",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "sbc-def-base-change-map",
+  "prop-weil-pbc-universal-homeomorphism-topos",
   "lem-weil-mate-iso-along-equivalences",
-  "def-weil-pbc-etale-constructible-sheaf",
+  "sbc-def-base-change-map",
+  "lem-weil-pbc-geometric-stalk-comparison-constant",
+  "lemma-openclosed-stalk-upperstar",
+  "lemma-constructible-universal-homeomorphism-invariance",
   "def-weil-constructible-subset",
-  "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
-  "lemma-constructible-pullback-constant",
-  "lem-weil-pbc-reduction-universal-homeomorphism",
-  "def-weil-pbc-constructible-complexes",
-  "lem-trf-finite-radicial-basechange",
-  "def-weil-finite-integral-morphism",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "def-kun-unbounded-exchange",
-  "lem-weil-pbc-cartesian-square-pasting",
-  "lem-fin-module-exchange-composite-base-change"
+  "lemma-constructible-immersion-independence",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-fin-radicial-noetherian-test-descent",
+  "prop-constructible-pullback"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-radicial-exchange-descent.md",
-  "place": "Proof, expanded via Stacks 04DF, 04DZ, 03SI and 0E47"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-fin-radicial-exchange-descent.proof.md",
+  "place": "Proof, formalized using source topological-invariance and finite-radicial Noetherian-test descent APIs; global boundedness proved separately by transported strata and stalk reflection (R2, 2026-10-18)"
  },
  "mathlib_searches": [
   {
@@ -367,26 +347,11 @@
   "pqf-lem-finite-integral-lft",
   "lem-pc-integral-radicial-surjective-universal-homeomorphism",
   "lem-weil-pbc-universal-homeomorphism-base-change",
-  "thm-weil-pbc-universal-homeomorphism-invariance",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-exact-functor-derived-functor",
   "lem-weil-pbc-exact-functor-complex-cohomology",
   "sbc-def-base-change-map",
   "lem-weil-mate-iso-along-equivalences",
-  "def-weil-pbc-etale-constructible-sheaf",
   "def-weil-constructible-subset",
-  "lemma-weil-pbc-universal-homeomorphism-site-equivalence",
-  "lemma-constructible-pullback-constant",
-  "def-weil-pbc-constructible-complexes",
-  "def-weil-finite-integral-morphism",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-inverse-image-composition",
-  "lem-weil-pbc-mate-pasting",
-  "lem-weil-pbc-reduction-universal-homeomorphism",
-  "lem-trf-finite-radicial-basechange",
-  "def-kun-unbounded-exchange",
-  "lem-weil-pbc-cartesian-square-pasting"
+  "def-weil-pbc-constructible-complexes"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -429,5 +394,15 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R2",
+  "result": "pass",
+  "landing": "20261018T062858-L-671851",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
