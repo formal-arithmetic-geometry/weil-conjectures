@@ -1,0 +1,111 @@
+{
+ "id": "lem-weil-pbc-extended-cech-reflector-core",
+ "kind": "statement",
+ "title": "Extended Cech completion core reflector clauses",
+ "statement": "For a small ringed site (C,J,O), a finite type ideal module I with monomorphism ι, and an augmented complex K ⟶ O[0] satisfying HasLocalExtendedCechDescription O I ι K ε, the internal-Hom completion functor has locally derived I-complete values and postcomposition with each canonical unit is bijective into every locally derived I-complete target.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099B and 099F, completeness and universal mapping clauses of proposition-derived-completion"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-local-extended-cech-description",
+  "def-weil-pbc-locally-derived-ringed-ideal-complete",
+  "def-weil-pbc-ringed-completion-unit"
+ ],
+ "proof": [
+  {
+   "text": "On every finite-generator slice, contract the localized extended Cech complex and filter the augmentation cone by its positive localization terms. The internal-Hom tensor identity gives vanishing against each ideal localization, and restriction transports this to the locally derived complete predicate. The same filtration identifies maps out of the completion with maps into any locally complete target, yielding the stated bijection. The sequential-localization comparison required to identify the sheafified finite filtration with the sectionwise localization remains to be proved.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tags 099B and 099F, proposition-derived-completion"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099B and 099F; strict subclause extracted from the reflector theorem"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived internal Hom from extended Cech complex gives complete values and universal mapping bijection",
+   "results": "No matching declaration; generic sheaf and cohomology results only.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived internal Hom from extended Cech complex gives complete values and universal mapping bijection",
+   "results": "No matching declaration; returned generic sheaf adjunctions and local cohomology only.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Function.Bijective (fun h => f ≫ h) derived completion",
+   "results": "No matching declaration.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extended.*[Cc]ech.*completion|derived.*completion.*reflector",
+   "results": "Searched Mathlib and existing WeilConjectures/Sheaf modules; only the parent and this core interface occur.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-extended-cech-reflector-properties",
+   "place": "stage-3 decomposition of the reflector theorem into core, naturality, and unit-isomorphism clauses",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ExtendedCechReflectorCore",
+  "declaration": "CategoryTheory.ringedExtendedCech_reflector_core",
+  "file": "lean/Sheaf/Paper/ExtendedCechReflectorCore.lean",
+  "statement": "theorem ringedExtendedCech_reflector_core {C : Type u} [SmallCategory C] (J : GrothendieckTopology C) (O : Sheaf J CommRingCat.{u}) [HasDerivedCategory.{w} (ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O))] [∀ U : C, HasDerivedCategory.{w} (ringedSiteModules.{u} ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (O.over U)))] (I : ringedSiteModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) (ι : I ⟶ SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj O)) [Mono ι] [I.IsFiniteType] (K : ringedSiteComplex O) (ε : K ⟶ ringedSiteRingComplex O) (hK : HasLocalExtendedCechDescription O I ι K ε) : (∀ E : ringedSiteDerived O, IsLocallyDerivedRingedIdealComplete O I ι ((ringedCechCompletionFunctor O K).obj E)) ∧ (∀ (E L : ringedSiteDerived O), IsLocallyDerivedRingedIdealComplete O I ι L → Function.Bijective (fun h : (ringedCechCompletionFunctor O K).obj E ⟶ L ↦ ringedCechCompletionUnit O K ε E ≫ h))",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-18"
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ExtendedCechCompletionModel",
+  "date": "2026-10-18",
+  "group": "E4"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261018T091400-L-3254261",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261018T091400-L-3254261",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
