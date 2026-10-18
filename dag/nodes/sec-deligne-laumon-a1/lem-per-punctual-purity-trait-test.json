@@ -19,9 +19,91 @@
   "def-weil-flat-morphism",
   "def-weil-finite-type-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a regular Noetherian $W$ as in the statement and a point $w$. Set $R=\\mathcal O_{W,w}$ and $d=\\dim R$. By [lem-per-punctual-strict-completion-test], it suffices to prove closed-point purity for $T=\\operatorname{Spec}B$, where $B=\\widehat{R^{\\mathrm{sh}}}$ is complete strictly henselian Noetherian regular local of dimension $d$. The cited test applies without excellence of $R$, so no excellence assumption on $W$ has been introduced.",
+   "uses": [
+    "lem-per-punctual-strict-completion-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI 3.2.1 and Proposition 3.2.4, p.244"
+   }
+  },
+  {
+   "text": "If $B$ contains a prime field, apply [lem-per-prime-field-punctual-purity] to $T$ to obtain the required purity at its closed point. Otherwise $B$ is mixed characteristic $(0,p)$: its residue field has prime characteristic $p$, and the injective map $\\mathbf Z\\to B$ does not extend to $\\mathbf Q$ because $p$ is not a unit. Indeed [lem-sc-regular-local-domain] makes $B$ a domain; if it has positive characteristic it already contains $\\mathbf F_p$, and if its residue field has characteristic zero then all nonzero integers are units, giving $\\mathbf Q$. In the remaining case $\\ell\\neq p$ because $\\ell$ is a unit.",
+   "uses": [
+    "lem-per-prime-field-punctual-purity",
+    "lem-sc-regular-local-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Proposition 3.2.5 and section 3.7 first paragraph"
+   }
+  },
+  {
+   "text": "In this remaining case choose a regular system of parameters of $B$. Apply [lem-per-complete-mixed-regular-pair-approximation] to obtain a small directed inverse system $Z_i\\hookrightarrow V_i$ over a complete strictly henselian mixed-characteristic trait $S$, with limiting pair $\\operatorname{Spec}k\\hookrightarrow T$. The cited statement supplies integral regular affine $V_i$, flat and finite type over $S$, regular $\\mathbf F_p$-schemes $Z_i$, and compatible regular sequences of length $d$. Each $V_i$ is quasi-projective as stated there, so the testing hypothesis of the item applies to every $V_i$. It follows that every $V_i$ is punctually pure.",
+   "uses": [
+    "lem-per-complete-mixed-regular-pair-approximation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent expansion of XVI section 3.7 complete-trait reduction using I 2.9, I 10.3(i), IV 4.1.8"
+   }
+  },
+  {
+   "text": "Every $Z_i$ is punctually pure by [lem-per-prime-field-punctual-purity], since it is regular Noetherian over $\\mathbf F_p$ with $\\ell\\neq p$. Apply conditions (b) and (c) of [lem-per-punctual-purity-two-of-three] to $Z_i\\hookrightarrow V_i$: condition (b) is this purity of $Z_i$, and condition (c) follows from purity of all of $V_i$ in Step 3. Both schemes are regular Noetherian, and their immersion has constant codimension $d$ by the regular sequence provided in Step 3. Thus the supported Kummer-class map $A_{Z_i}\\to i_i^!A_{V_i}(d)[2d]$ is an isomorphism for every $i$.",
+   "uses": [
+    "lem-per-prime-field-punctual-purity",
+    "lem-per-punctual-purity-two-of-three"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI Proposition 3.2.3, p.244, and Proposition 3.2.5, p.245"
+   }
+  },
+  {
+   "text": "Apply [lem-per-transverse-gysin-limit] to the inverse system from Step 3. Its index is small directed, its schemes and transitions are affine, and its fixed length-$d$ regular sequences are preserved and remain regular at the limit; the limit schemes are $T$ and its closed point. In every degree $q$, the isomorphisms of Step 4 induce compatible isomorphisms\n$$H^q(Z_i,A)\\longrightarrow H^{q+2d}_{Z_i}(V_i,A(d)).$$\nTaking their colimit and using the cited continuity and Kummer-map identification gives\n$$H^q(\\operatorname{Spec}k,A)\\xrightarrow{\\sim}H^{q+2d}_{\\{t\\}}(T,A(d)).$$\nThis is the map induced by the actual closed-point Kummer class, not merely an abstract isomorphism between the two groups.",
+   "uses": [
+    "lem-per-transverse-gysin-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Agent supported-continuity expansion of XVI section 3.7; XVI 2.1, 2.3.1; Stacks 03Q6"
+   }
+  },
+  {
+   "text": "The residue field $k$ is separably closed. By [lem-exc-etale-sheaves-gsets-point], its small-etale topos is equivalent to sets with an action of its trivial absolute Galois group, hence to sets; therefore global sections on $k$ identify sheaves of $A$-modules with $A$-modules and detect quasi-isomorphisms. Consequently the isomorphisms in every degree from Step 5 say precisely that $A_k\\to j_t^!A_T(d)[2d]$ is an isomorphism. The strict-completion test of Step 1 now implies punctual purity of $W$ at $w$. Since $w$ was arbitrary, $W$ is punctually pure.",
+   "uses": [
+    "lem-exc-etale-sheaves-gsets-point",
+    "lem-per-punctual-strict-completion-test"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QT, theorem-equivalence-sheaves-point; application of ILO XVI Proposition 3.2.4 at the end."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-punctual-strict-completion-test",
+  "lem-per-prime-field-punctual-purity",
+  "lem-sc-regular-local-domain",
+  "lem-per-complete-mixed-regular-pair-approximation",
+  "lem-per-punctual-purity-two-of-three",
+  "lem-per-transverse-gysin-limit",
+  "lem-exc-etale-sheaves-gsets-point"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XVI section 3.7 first paragraph, with XVI 3.2.1--3.2.5; complete-base and supported-limit argument expanded using the four explicit inputs."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,7 +142,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-gabber-regular-pair-purity",
@@ -84,5 +166,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-punctual-purity-trait-test",
+  "worker": "stage1",
+  "summary": "Split the complete-trait test into strict completion, the prime-field case, simultaneous algebraic approximation, two-of-three purity for the finite-stage pairs, and supported Kummer continuity. Preserved the original no-excellence statement and made the complete-base approximation input explicit.",
+  "blueprint": "lem-per-artin-gabber-affine-curve proof Step 3: regular finite-torsion local-model purity input, through the recorded ancestry.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-regular-local-domain",
+    "why": "The local algebra domain fact supplies the characteristic case distinction; no node of this unit states it."
+   },
+   {
+    "node": "lem-exc-etale-sheaves-gsets-point",
+    "why": "The small-etale sheaf equivalence over a field detects the final class over a separably closed residue field; no node of this unit gives this topos equivalence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-regular-local-domain",
+  "lem-exc-etale-sheaves-gsets-point"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q45-4236f86ad",
+  "group": "Q45",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-4236f86ad (reviewer sub-agent of L); spot-checked: Read the item, all four new nodes and every cited statement against ILO XVI 3.2.1-3.2.5, 3.7 p.254, 2.2.3.1 and 2.3.1, I 2.9, I 10.3 and IV 4.1.8, XVIII-A 2.1 (formal comparison without excellence), and Stacks 03Q6 and 03QT. The item statement is unchanged; testing only over complete traits makes it stronger, not weaker. Step 1: the strict-completion iff (3.2.1 remark + 3.2.4) is true without excellence. Step 2: the case split on characteristic is correct, and the prime-field case is 3.2.5. Step 3: the approximation node is true pure algebra. It uses a Cohen presentation and Popescu on C[x]_(p,x)->C[[x]], not on C->B, which can fail when B is ramified or k imperfect. Cotangent independence gives regular V_i and Z_i; V_i is flat because it is torsion-free; Z_i is an F_p-scheme because p=sum a_j t_j descends. Step 4: two-of-three (b)+(c) gives (a) in codimension d. Step 5: the supported-limit node is true via continuity on the ambient scheme and the complement, plus 2.2.3.1 base change of the Kummer class under a preserved regular sequence. No flatness is needed, so it does not duplicate class-calculus. Step 6: over a separably closed field, RΓ(k,-) is an equivalence, so isomorphisms on every H^q detect the isomorphism. The new nodes are statement-only, sourced, cite no SGA and form no cycle. They do not duplicate completion-supported-constant-comparison (that one assumes excellence), the log-smooth/monomial trait nodes, or the PBC Cohen/Popescu nodes. Tool uses lem-sc-regular-local-domain and lem-exc-etale-sheaves-gsets-point are accepted. Batch 5: all three flagged citations name the Kummer class of lem-per-regular-immersion-class-calculus only in their statements. The item already had that stmt_dep on the base, so the closure is unchanged. The path ends at lem-trf-bounded-below-derived-adjunction, a generic D^+ adjunction lemma that is outside both assumed statements (precedent NW 45bd4f27), so it is accepted. No fixes."
  }
 }
