@@ -25,7 +25,19 @@
   "def-coef-normalized-dvr-tower",
   "def-sbc-smooth-morphisms",
   "def-weil-scheme-morphism-properties",
-  "def-weil-pbc-proetale-site"
+  "def-weil-pbc-proetale-site",
+  "def-pur-adic-root-comparisons",
+  "def-pur-adic-finite-tensor-realization",
+  "def-pur-adic-twist-reduction",
+  "def-pur-adic-etale-realization",
+  "def-pur-adic-support-realization",
+  "def-pur-adic-proetale-realization",
+  "def-pur-adic-site-realization",
+  "def-pur-adic-purity-objects",
+  "def-pur-adic-source-reduction",
+  "def-pur-adic-exceptional-reduction",
+  "def-pur-adic-derived-site-realization",
+  "def-pur-adic-exceptional-system-realization"
  ],
  "proof": [
   {
@@ -340,13 +352,26 @@
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
  },
  "lean": {
-  "branch": "master",
-  "existing": true,
-  "module": "WeilConjectures.EtaleCohomology.Purity.Smooth.Adic",
-  "declaration": "AlgebraicGeometry.Etale.exists_iso_realization_twistShiftPullbackLevel",
+  "module": "Sheaf.Paper.PurAdicReconstruction",
+  "declaration": "WeilConjectures.purAdicReconstruction",
   "declarations": [
-   "AlgebraicGeometry.Etale.exists_iso_realization_twistShiftPullbackLevel"
+   "WeilConjectures.purAdicRestrictedEvaluation",
+   "WeilConjectures.purAdicReconstruction"
   ],
-  "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:19 UTC (L, propagation 2026-10-18), live declaration stated, proof open in WeilConjectures.EtaleCohomology.Purity.Smooth.Adic: the blueprint item thm-pur-adic-reconstruction's upstream Lean declarations as live states them; their proofs are still `sorry` in live (stage-3 route work)"
+  "file": "lean/Sheaf/Paper/PurAdicReconstruction.lean",
+  "statement": "theorem purAdicReconstruction (K : DerivedCategory (scalarReductionSource C.l E Y)) (hK : finiteTorConstructibleIntegral C.l E Y K) : ∃ gamma : purAdicSource D C E f d K ⟶ purAdicTarget D C E f K, IsIso gamma ∧ finiteTorConstructibleIntegral C.l E X (purAdicSource D C E f d K) ∧ finiteTorConstructibleIntegral C.l E X (purAdicTarget D C E f K) ∧ (∀ n : ℕ, IsIso (purAdicSourceReduction D C E f d K hK n) ∧ IsIso (purAdicTargetReduction D C E f d K hK n) ∧ (scalarReductionDerivedExtension C.l E X n).map gamma ≫ purAdicTargetReduction D C E f d K hK n = purAdicSourceReduction D C E f d K hK n ≫ (purAdicFiniteArrow D C E f d K hK n).hom) ∧ ∃ G : (coefficientSequenceDerivedRestriction C.l E X).obj ((pullbackTensorCalculus C.l E X).reduction.obj (purAdicSource D C E f d K)) ⟶ (coefficientSequenceDerivedRestriction C.l E X).obj ((integralExceptionalSystem C.l E D C.different f).obj K), gamma = (pullbackTensorCalculus C.l E X).adjunction.unit.app _ ≫ (coefficientConstantTowerLimit C.l E X).map G ∧ ∀ n : ℕ, (coefficientConstantTowerEvaluation C.l E X n).map G ≫ (purAdicRestrictedEvaluation C.l E X n).hom.app _ ≫ (scalarReductionRestriction C.l E X n).mapDerivedCategory.map (purAdicExceptionalEvaluation D C E f K n).hom = (purAdicRestrictedEvaluation C.l E X n).hom.app _ ≫ (scalarReductionRestriction C.l E X n).mapDerivedCategory.map (((pullbackTensorCalculus C.l E X).reductionEvaluation n).hom.app _ ≫ purAdicSourceReduction D C E f d K hK n ≫ (purAdicFiniteArrow D C E f d K hK n).hom)",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The current attached upstream exists_iso_realization_twistShiftPullbackLevel is explicitly only the reconstruction step: it assumes arbitrary normalized systems S,T, level identifications eS,eT, compatible isomorphisms gamma and arbitrary homotopy limits. It does not construct the actual integral source/exceptional target, establish finite purity compatibility or conclude constructible finite-Tor preservation and the quotient-linear reduction identity. This delivery states the full unchanged blueprint statement on the actual canonical constructions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1d92b1302",
+  "group": "N0",
+  "result": "fix",
+  "note": "Re-delivery of PASSed 76c20af30ac6 (landing return was a load timeout in base WeilSiteDerivedTensorDescent). All 13 owned modules byte-identical to 76c; item node adds only a correct lean.note (upstream exists_iso_realization_twistShiftPullbackLevel is only the reconstruction step); new-node edits trim implementation wording and add the real def-weil-exceptional-inverse-image citation; declaration lists match modules and statements are verbatim; dependency copies equal live. Statement substance unchanged from the clause-by-clause PASS (actual U, V, smoothPurityMap at K_n, IsIso, ctf endpoints, reduction equation for every n+1, coherent lift G; edge cases covered). New content: a §1(B) edit of Q118's live DerivedPullbackTensorHom (2 transparency options, 16 @[no_expose], not 9 as reported, including the operation functors). It does not address the landing failure and is ineffective: back to back, live 39.6/42.1 s vs delivered 36.6/41.9 s. The live module already has a published build and about 40 live files use the hidden names; 2 sampled importers compile clean. FIX: fixes/DerivedPullbackTensorHom.lean = live text. nt_compile --json: all 13 owned modules clean against live (5-26 s). Notes: if the dep node carries a group note, use --revert-nodes (the node is not in the snapshot); NW's re-binding of def-weil-finite-tor-amplitude left Sheaf.Paper.FiniteTorAmplitude, whose finiteTorConstructibleIntegral this item and at least 10 live modules use, with no owning node; land at lower load."
  }
 }
