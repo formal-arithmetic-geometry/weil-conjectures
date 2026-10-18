@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.WeilSheaf.LowerShriek
+public import WeilConjectures.WeilSheaf.LowerShriekIndependence
 public import WeilConjectures.WeilSheaf.ProperCohomology.LowerShriek
 
 /-!
@@ -157,8 +158,10 @@ theorem nonempty_derivedLowerShriek_toComplex_iso_of_isOpenImmersion (j : U ⟶ 
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
     [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))] (G : WeilSheaf k₀ l U) :
     Nonempty ((derivedLowerShriek k₀ l j).obj (WeilSheaf.toComplex.obj G) ≅
-      WeilSheaf.toComplex.obj ((WeilSheaf.extensionByZero j).obj G)) :=
-  sorry
+      WeilSheaf.toComplex.obj ((WeilSheaf.extensionByZero j).obj G)) := by
+  obtain ⟨e⟩ := WeilComplex.nonempty_derivedLowerShriek_iso_extensionByZero (k₀ := k₀) (l := l) j
+  exact ⟨e.app _ ≪≫ ObjectProperty.isoMk _
+    (((ProEtaleWeilSheaf.extensionByZero k₀ l j).mapDerivedCategorySingleFunctor 0).app G.obj)⟩
 
 /-- **The open–closed triangle** (blueprint: `prop-sf-open-closed-triangle-all-stages`): for a
 quasi-compact open immersion `j : U ⟶ X` with closed complement `i : Z ⟶ X` and a Weil complex `K`
@@ -177,8 +180,34 @@ theorem exists_distTriang_openClosed (j : U ⟶ X) [IsOpenImmersion j] [QuasiCom
     ∃ T ∈ distTriang (WeilComplex k₀ l X),
       Nonempty (T.obj₁ ≅ (derivedLowerShriek k₀ l j).obj ((upperStar j).obj K)) ∧
       Nonempty (T.obj₂ ≅ K) ∧
-      Nonempty (T.obj₃ ≅ (derivedLowerStar i).obj ((upperStar i).obj K)) :=
-  sorry
+      Nonempty (T.obj₃ ≅ (derivedLowerStar i).obj ((upperStar i).obj K)) := by
+  have := locallyOfFiniteType_over_of_isOver j (S := Spec (CommRingCat.of k₀))
+  have := locallyOfFiniteType_over_of_isOver i (S := Spec (CommRingCat.of k₀))
+  let adj := WeilComplex.extensionByZeroUpperStarAdjunction (k₀ := k₀) (l := l) j
+  obtain ⟨Q, v, w, hT⟩ := distinguished_cocone_triangle (adj.counit.app K)
+  -- `j^*` inverts the counit, so `j^* Q = 0` and `Q` comes from the closed part
+  have hj : IsIso ((WeilComplex.upperStar j).map (adj.counit.app K)) := by
+    sorry
+  have hQ : IsZero ((WeilComplex.upperStar j).obj Q) := (Triangle.isZero₃_iff_isIso₁ _
+    ((WeilComplex.upperStar j).map_distinguished _ hT)).2 hj
+  obtain ⟨P, ⟨eP⟩⟩ := WeilComplex.derivedLowerStar_essImage_of_isZero i j hij.symm Q hQ
+  -- `i^*` kills `j_! j^* K`, so `i^* K ≅ i^* Q`
+  have hi₁ : IsZero ((WeilComplex.upperStar i).obj
+      ((WeilComplex.extensionByZero j).obj ((WeilComplex.upperStar j).obj K))) :=
+    IsZero.of_full_of_faithful_of_isZero (ObjectProperty.ι _) _
+      (ProEtaleWeilSheaf.isZero_mapDerivedCategory_upperStar_obj_extensionByZero_obj j i
+        hij.disjoint _)
+  have hi : IsIso ((WeilComplex.upperStar i).map v) := (Triangle.isZero₁_iff_isIso₂ _
+    ((WeilComplex.upperStar i).map_distinguished _ hT)).1 hi₁
+  have : IsIso (WeilComplex.upperStarDerivedLowerStarAdjunction (k₀ := k₀) (l := l) i).counit :=
+    inferInstance
+  obtain ⟨e₁⟩ := WeilComplex.nonempty_derivedLowerShriek_iso_extensionByZero (k₀ := k₀) (l := l) j
+  have e₂ : P ≅ (WeilComplex.upperStar i).obj K :=
+    (asIso ((WeilComplex.upperStarDerivedLowerStarAdjunction i).counit.app P)).symm ≪≫
+      (WeilComplex.upperStar i).mapIso eP ≪≫ (asIso ((WeilComplex.upperStar i).map v)).symm
+  have e₃ : Q ≅ (WeilComplex.derivedLowerStar i).obj ((WeilComplex.upperStar i).obj K) :=
+    eP.symm ≪≫ (WeilComplex.derivedLowerStar i).mapIso e₂
+  exact ⟨Triangle.mk (adj.counit.app K) v w, hT, ⟨(e₁.app _).symm⟩, ⟨Iso.refl _⟩, ⟨e₃⟩⟩
 
 
 /-- **Composition of direct images with compact support** (blueprint: `prop-functor-package`,

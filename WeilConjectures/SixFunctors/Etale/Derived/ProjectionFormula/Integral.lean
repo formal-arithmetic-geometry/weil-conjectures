@@ -233,6 +233,36 @@ theorem hasProjectionFormula_of_derivedCompleteIntegral (f : X ⟶ Y) [HasCompac
     (isIso_reductionModIdeal_map_projectionMap_of_derivedCompleteIntegral l E f K L
       hKc hK hKt hLc hL hLt)
 
+/-- Blueprint `det-thm-sf-pf-adic-projection`, part (1): the integral proper projection formula.
+
+Let `f : X ⟶ Y` be proper and let `K`, `L` be bounded constructible, derived complete for `𝔪_E`
+and of finite Tor amplitude, such that `Rf_! K ⊗ᴸ L` and `K ⊗ᴸ Lf^* L` are derived complete. Then
+the projection map `Rf_! K ⊗ᴸ L ⟶ Rf_!(K ⊗ᴸ Lf^* L)` is an isomorphism. For proper `f`, the
+derived completeness of the target follows from that of `K ⊗ᴸ Lf^* L`, `Rf_! ≅ Rf_*` preserving
+derived completeness (`AlgebraicGeometry.Etale.derivedCompleteIntegral_rightDerivedLowerShriek`).
+As in the blueprint, the reduction of the projection map modulo `𝔪_E` is the torsion projection
+formula, and derived Nakayama concludes. The derived completeness of the two tensor products is
+automatic in the pro-étale setting of the blueprint but not on the small étale site (see the
+implementation notes of this file). The extension to the localizing categories
+`Loc(Dᵇc(-, 𝒪_E))` (part (2) of the blueprint node) is not formalised. -/
+theorem hasProjectionFormula_of_isProper_of_derivedCompleteIntegral (f : X ⟶ Y)
+    [HasCompactification f] [IsProper f]
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology 𝐌))
+    (L : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology 𝐌))
+    (hKc : DerivedCategory.boundedConstructible 𝐌 X K)
+    (hK : _root_.DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E K)
+    (hKt : DerivedCategory.finiteTorAmplitude 𝐌 X K)
+    (hLc : DerivedCategory.boundedConstructible 𝐌 Y L)
+    (hL : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E L)
+    (hLt : DerivedCategory.finiteTorAmplitude 𝐌 Y L)
+    (hs : _root_.DerivedCategory.derivedCompleteIntegral Y.smallEtaleTopology l E
+      (((derivedTensor 𝐌 Y).obj ((R(f)_![𝐌]).obj K)).obj L))
+    (ht : _root_.DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E
+      (((derivedTensor 𝐌 X).obj K).obj ((L((f)^*[𝐌])).obj L))) :
+    HasProjectionFormula 𝐌 f K L :=
+  hasProjectionFormula_of_derivedCompleteIntegral l E f K L hKc hK hKt hLc hL hLt hs
+    (derivedCompleteIntegral_rightDerivedLowerShriek l E f _ ht)
+
 end Etale
 
 end AlgebraicGeometry

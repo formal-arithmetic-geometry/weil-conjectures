@@ -79,7 +79,8 @@ noncomputable instance (X : Scheme.{u}) :
 
 instance (X : Scheme.{u}) :
     (DerivedCategoryDerivedCompleteIntegral.ι X.smallEtaleTopology l E).IsTriangulated :=
-  inferInstanceAs (DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E).ι.IsTriangulated
+  inferInstanceAs
+    (DerivedCategory.derivedCompleteIntegral X.smallEtaleTopology l E).ι.IsTriangulated
 
 instance (X : Scheme.{u}) :
     (DerivedCategoryDerivedCompleteIntegral.ι X.smallEtaleTopology l E).Linear
@@ -131,11 +132,12 @@ lemma rationalizationRightDerivedLowerShriekIso_hom_of_map (f : X ⟶ Y) [HasCom
   have := (Rationalization.mapFac 𝐒
     (DerivedCategoryDerivedCompleteIntegral.ι _ l E ⋙ R(f)_![𝐌])).inv.naturality u
   simp only [Functor.comp_obj, Functor.comp_map] at this
-  simp only [rationalizationRightDerivedLowerShriekIso, rationalizationRightDerivedLowerShriekIsoMap,
+  simp only [rationalizationRightDerivedLowerShriekIso,
+    rationalizationRightDerivedLowerShriekIsoMap,
     Iso.trans_hom, Iso.symm_hom, Iso.symm_inv, Iso.app_inv, Functor.mapIso_hom, asIso_hom,
-    Iso.app_hom,
-    Category.assoc]
-  rw [← reassoc_of% this, Iso.inv_hom_id_app, Category.comp_id]
+    Iso.app_hom]
+  rw [← reassoc_of% this, Iso.inv_hom_id_app]
+  exact Category.comp_id _
 
 end Etale
 

@@ -378,4 +378,180 @@ noncomputable def WeilComplex.derivedLowerShriekCompιIso (c : Compactification 
 
 end Independence
 
+section Flexible
+
+variable {X Y Z : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+  [Y.Over (Spec (CommRingCat.of k₀))] {f : X ⟶ Y} [f.IsOver (Spec (CommRingCat.of k₀))]
+  [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f]
+  [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+  [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))]
+
+/-- The direct image with compact support `Rf₀!` of Weil complexes is computed by any
+factorization `f = i ≫ g` of `f` into an open immersion `i` followed by a proper morphism `g`
+of `k₀`-schemes: `Rf₀! ≅ Rg_* ∘ i_!` (`prop-functor-package`, clause 2). -/
+theorem WeilComplex.nonempty_derivedLowerShriek_comp_ι_iso [hZ : Z.Over (Spec (CommRingCat.of k₀))]
+    (i : X ⟶ Z) (g : Z ⟶ Y) [IsOpenImmersion i] [IsProper g]
+    [i.IsOver (Spec (CommRingCat.of k₀))] [g.IsOver (Spec (CommRingCat.of k₀))]
+    (h : f = i ≫ g) :
+    Nonempty (WeilComplex.derivedLowerShriek k₀ l f ⋙ (WeilComplex.objectProperty k₀ l Y).ι ≅
+      (WeilComplex.objectProperty k₀ l X).ι ⋙
+        (ProEtaleWeilSheaf.extensionByZero k₀ l i).mapDerivedCategory ⋙
+          (ProEtaleWeilSheaf.lowerStar k₀ l g).rightDerivedFunctor) := by
+  let c : Compactification f := ⟨Z, g, i, h, inferInstance, inferInstance⟩
+  have e : hZ = Compactification.over (k₀ := k₀) c := by
+    have hg := comp_over g (Spec (CommRingCat.of k₀))
+    revert hg
+    cases hZ
+    intro hg
+    exact congrArg OverClass.ofHom hg.symm
+  subst e
+  exact ⟨WeilComplex.derivedLowerShriekCompιIso k₀ l c⟩
+
+end Flexible
+
+section OpenImmersion
+
+variable {U X : Scheme.{u}} [U.Over (Spec (CommRingCat.of k₀))]
+  [X.Over (Spec (CommRingCat.of k₀))] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
+  [j.IsOver (Spec (CommRingCat.of k₀))]
+
+instance : (WeilComplex.extensionByZero (k₀ := k₀) (l := l) j).Full :=
+  have := (ProEtaleWeilSheaf.fullyFaithfulMapDerivedCategoryExtensionByZero (k₀ := k₀) (l := l)
+    j).full
+  ObjectProperty.liftFullSubcategory_full _ _ _ _
+
+instance : (WeilComplex.extensionByZero (k₀ := k₀) (l := l) j).Faithful :=
+  have := (ProEtaleWeilSheaf.fullyFaithfulMapDerivedCategoryExtensionByZero (k₀ := k₀) (l := l)
+    j).faithful
+  ObjectProperty.liftFullSubcategory_faithful _ _ _ _
+
+/-- The adjunction `j_! ⊣ j^*` of Weil complexes along a quasi-compact open immersion `j`, the
+restriction of `AlgebraicGeometry.ProEtaleWeilSheaf.derivedExtensionByZeroUpperStarAdjunction`. -/
+noncomputable def WeilComplex.extensionByZeroUpperStarAdjunction :
+    WeilComplex.extensionByZero (k₀ := k₀) (l := l) j ⊣ WeilComplex.upperStar j :=
+  (ProEtaleWeilSheaf.derivedExtensionByZeroUpperStarAdjunction k₀ l j).restrictFullyFaithful
+    (ObjectProperty.fullyFaithfulι _) (ObjectProperty.fullyFaithfulι _) (Iso.refl _) (Iso.refl _)
+
+/-- The unit `K ⟶ j^* j_! K` of Weil complexes is an isomorphism: `j_!` is fully faithful. -/
+instance WeilComplex.isIso_extensionByZeroUpperStarAdjunction_unit :
+    IsIso (WeilComplex.extensionByZeroUpperStarAdjunction (k₀ := k₀) (l := l) j).unit :=
+  Adjunction.unit_isIso_of_L_fully_faithful _
+
+variable [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+  [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
+
+/-- **The direct image with compact support along an open immersion is the extension by zero**
+(`prop-functor-package`, clause 2, for the compactification `U ⟶[j] X ⟶[𝟙] X`):
+`Rj₀! ≅ j_!` on Weil complexes. -/
+theorem WeilComplex.nonempty_derivedLowerShriek_iso_extensionByZero :
+    Nonempty (WeilComplex.derivedLowerShriek k₀ l j ≅ WeilComplex.extensionByZero j) := by
+  obtain ⟨e⟩ := WeilComplex.nonempty_derivedLowerShriek_comp_ι_iso (k₀ := k₀) (l := l) (f := j) j
+    (𝟙 X) (Category.comp_id j).symm
+  exact ⟨((WeilComplex.objectProperty k₀ l X).fullyFaithfulι.whiskeringRight _).preimageIso
+    (e ≪≫ Functor.isoWhiskerLeft _ (Functor.isoWhiskerLeft _
+      (ProEtaleWeilSheaf.rightDerivedLowerStarIdIso k₀ l X) ≪≫ Functor.rightUnitor _) ≪≫
+      (ObjectProperty.liftFullSubcategoryCompιIso _ _ _ _).symm)⟩
+
+end OpenImmersion
+
+section BaseChange
+
+variable (k₀ l) in
+/-- Pullbacks of pro-étale Weil sheaves along equal morphisms are isomorphic. -/
+noncomputable def ProEtaleWeilSheaf.upperStarCongr {X Y : Scheme.{u}}
+    [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] {φ φ' : X ⟶ Y}
+    [φ.IsOver (Spec (CommRingCat.of k₀))] [φ'.IsOver (Spec (CommRingCat.of k₀))] (h : φ = φ') :
+    ProEtaleWeilSheaf.upperStar k₀ l φ ≅ ProEtaleWeilSheaf.upperStar k₀ l φ' := by
+  subst h
+  exact Iso.refl _
+
+variable (k₀ l) in
+/-- The derived pullback along a composite is the composite of the derived pullbacks. -/
+noncomputable def ProEtaleWeilSheaf.mapDerivedCategoryUpperStarCompIso {X Y Z : Scheme.{u}}
+    [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))]
+    [Z.Over (Spec (CommRingCat.of k₀))] (φ : X ⟶ Y) (ψ : Y ⟶ Z)
+    [φ.IsOver (Spec (CommRingCat.of k₀))] [ψ.IsOver (Spec (CommRingCat.of k₀))] :
+    (ProEtaleWeilSheaf.upperStar k₀ l (φ ≫ ψ)).mapDerivedCategory ≅
+      (ProEtaleWeilSheaf.upperStar k₀ l ψ).mapDerivedCategory ⋙
+        (ProEtaleWeilSheaf.upperStar k₀ l φ).mapDerivedCategory :=
+  Functor.mapDerivedCategoryNatIso (ProEtaleWeilSheaf.upperStarCompIso k₀ l φ ψ) ≪≫
+    Functor.mapDerivedCategoryCompIso _ _
+
+variable {X X' Z Z' : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+  [X'.Over (Spec (CommRingCat.of k₀))] [Z.Over (Spec (CommRingCat.of k₀))]
+  [Z'.Over (Spec (CommRingCat.of k₀))]
+  (g : X' ⟶ X) [g.IsOver (Spec (CommRingCat.of k₀))]
+  (i' : X' ⟶ Z') [IsOpenImmersion i'] [QuasiCompact i'] [i'.IsOver (Spec (CommRingCat.of k₀))]
+  (i : X ⟶ Z) [IsOpenImmersion i] [i.IsOver (Spec (CommRingCat.of k₀))]
+  (p : Z' ⟶ Z) [p.IsOver (Spec (CommRingCat.of k₀))]
+
+/-- Auxiliary form of
+`AlgebraicGeometry.ProEtaleWeilSheaf.isIso_counit_app_upperStar_obj_extensionByZero_obj`, for a
+given closed immersion `ι` complementary to `i'`. -/
+lemma ProEtaleWeilSheaf.isIso_counit_app_upperStar_obj_extensionByZero_obj_aux
+    (hsq : IsPullback g i' i p) {C : Scheme.{u}} [C.Over (Spec (CommRingCat.of k₀))]
+    (ι : C ⟶ Z') [IsClosedImmersion ι] [ι.IsOver (Spec (CommRingCat.of k₀))]
+    (hc : IsCompl (Set.range ι.base) (Set.range i'.base))
+    (K : _root_.DerivedCategory (ProEtaleWeilSheaf k₀ l X)) :
+    IsIso ((ProEtaleWeilSheaf.derivedExtensionByZeroUpperStarAdjunction k₀ l i').counit.app
+      ((ProEtaleWeilSheaf.upperStar k₀ l p).mapDerivedCategory.obj
+        ((ProEtaleWeilSheaf.extensionByZero k₀ l i).mapDerivedCategory.obj K))) := by
+  refine ProEtaleWeilSheaf.isIso_of_isIso_upperStar_map ι i' hc _ ?_ ?_
+  · have hz₁ := ProEtaleWeilSheaf.isZero_mapDerivedCategory_upperStar_obj_extensionByZero_obj
+      (k₀ := k₀) (l := l) i' ι hc.disjoint.symm
+      ((ProEtaleWeilSheaf.upperStar k₀ l i').mapDerivedCategory.obj
+        ((ProEtaleWeilSheaf.upperStar k₀ l p).mapDerivedCategory.obj
+          ((ProEtaleWeilSheaf.extensionByZero k₀ l i).mapDerivedCategory.obj K)))
+    have hd : Disjoint (Set.range i.base) (Set.range (ι ≫ p).base) := by
+      rw [Set.disjoint_left]
+      rintro _ ⟨x, rfl⟩ ⟨z, hz⟩
+      have : ι.base z ∈ Set.range i'.base := by
+        rw [range_snd_of_isPullback hsq, Set.mem_preimage, ← Scheme.Hom.comp_apply, hz]
+        exact ⟨x, rfl⟩
+      exact Set.disjoint_left.1 hc.disjoint ⟨z, rfl⟩ this
+    have hz₂ := (ProEtaleWeilSheaf.isZero_mapDerivedCategory_upperStar_obj_extensionByZero_obj
+      (k₀ := k₀) (l := l) i (ι ≫ p) hd K).of_iso
+        ((ProEtaleWeilSheaf.mapDerivedCategoryUpperStarCompIso k₀ l ι p).app _).symm
+    exact isIso_of_source_target_iso_zero _ hz₁.isoZero hz₂.isoZero
+  · have h := (ProEtaleWeilSheaf.derivedExtensionByZeroUpperStarAdjunction k₀ l
+      i').right_triangle_components ((ProEtaleWeilSheaf.upperStar k₀ l p).mapDerivedCategory.obj
+        ((ProEtaleWeilSheaf.extensionByZero k₀ l i).mapDerivedCategory.obj K))
+    exact @IsIso.of_isIso_comp_left _ _ _ _ _ _ _ inferInstance (by rw [h]; infer_instance)
+
+variable (k₀ l) in
+/-- **Base change for the extension by zero** of pro-étale Weil sheaves, on derived categories:
+for a cartesian square `g ≫ i = i' ≫ p` with `i` and `i'` open immersions,
+`D(p^*) ∘ D(i_!) ≅ D(i'_!) ∘ D(g^*)`. The counit `i'_! i'^* E ⟶ E` is an isomorphism for
+`E = p^* i_! K`, which vanishes off the range of `i'`, and `i'^* p^* i_! ≅ g^* i^* i_! ≅ g^*`. -/
+noncomputable def ProEtaleWeilSheaf.mapDerivedCategoryExtensionByZeroUpperStarIso
+    (hsq : IsPullback g i' i p) :
+    (ProEtaleWeilSheaf.extensionByZero k₀ l i).mapDerivedCategory ⋙
+        (ProEtaleWeilSheaf.upperStar k₀ l p).mapDerivedCategory ≅
+      (ProEtaleWeilSheaf.upperStar k₀ l g).mapDerivedCategory ⋙
+        (ProEtaleWeilSheaf.extensionByZero k₀ l i').mapDerivedCategory := by
+  have : IsIso (Functor.whiskerLeft ((ProEtaleWeilSheaf.extensionByZero k₀ l i).mapDerivedCategory ⋙
+        (ProEtaleWeilSheaf.upperStar k₀ l p).mapDerivedCategory)
+      (ProEtaleWeilSheaf.derivedExtensionByZeroUpperStarAdjunction k₀ l i').counit) := by
+    rw [NatTrans.isIso_iff_isIso_app]
+    intro K
+    let _ := OverClass.ofHom (i'.closedComplement ≫ Z' ↘ Spec (CommRingCat.of k₀))
+    have : i'.closedComplement.IsOver (Spec (CommRingCat.of k₀)) := ⟨rfl⟩
+    refine ProEtaleWeilSheaf.isIso_counit_app_upperStar_obj_extensionByZero_obj_aux g i' i p hsq
+      i'.closedComplement ?_ K
+    rw [Scheme.Hom.range_closedComplement]
+    exact isCompl_compl.symm
+  exact (asIso (Functor.whiskerLeft _
+      (ProEtaleWeilSheaf.derivedExtensionByZeroUpperStarAdjunction k₀ l i').counit) ≪≫
+      Functor.rightUnitor _).symm ≪≫
+    Functor.isoWhiskerRight (Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _
+      ((ProEtaleWeilSheaf.mapDerivedCategoryUpperStarCompIso k₀ l i' p).symm ≪≫
+        Functor.mapDerivedCategoryNatIso (ProEtaleWeilSheaf.upperStarCongr k₀ l hsq.w.symm) ≪≫
+        ProEtaleWeilSheaf.mapDerivedCategoryUpperStarCompIso k₀ l g i) ≪≫
+      (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight
+        (asIso (ProEtaleWeilSheaf.derivedExtensionByZeroUpperStarAdjunction k₀ l i).unit).symm _ ≪≫
+      Functor.leftUnitor _) _
+
+end BaseChange
+
 end AlgebraicGeometry

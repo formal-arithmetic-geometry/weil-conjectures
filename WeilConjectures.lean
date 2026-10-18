@@ -8867,6 +8867,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.PoincarePairing
 public import WeilConjectures.SixFunctors.Etale.Derived.Point
 public import WeilConjectures.SixFunctors.Etale.Derived.PointBiduality
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
+public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.CompactSupportRational
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Integral
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Rational
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula.Reduction

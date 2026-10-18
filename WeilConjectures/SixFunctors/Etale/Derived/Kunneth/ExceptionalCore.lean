@@ -164,11 +164,13 @@ end Kunneth
 
 Together they give `Rπ^! M ≅ ω_X ⊠ M` (`prop-trf-exceptional-kunneth`, constant auxiliary
 coefficient). -/
-def CoreProp {X : Scheme.{u}} (a : X ⟶ Spec (.of k)) [IsSeparated a] [LocallyOfFiniteType a]
-    [QuasiCompact a] : Prop :=
-  IsIso ((rightDerivedUpperShriekBaseChangeMap Λ (IsPullback.of_hasPullback a b)).app (𝟙_ _)) ∧
-    ∀ M, constructibleFiniteTor (ModuleCat.{u + 1} Λ) T M →
-      IsIso (dualizingComplexTensorMap Λ (pullback.snd a b) M)
+def CoreProp {X P : Scheme.{u}} (a : X ⟶ Spec (.of k)) (q : P ⟶ X) (π : P ⟶ T)
+    (sq : IsPullback q π a b) [HasCompactification a] [HasCompactification π]
+    [QuasiCompact π] : Prop :=
+  IsIso ((rightDerivedUpperShriekBaseChangeMap Λ sq).app (𝟙_ _)) ∧
+    ∀ M : _root_.DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
+      constructibleFiniteTor (ModuleCat.{u + 1} Λ) T M →
+        IsIso (dualizingComplexTensorMap Λ π M)
 
 /-- **The dévissage step.** Let `i : Z ⟶ X` be a closed immersion with open complement
 `j : U ⟶ X`. If the canonical maps of `CoreProp` are isomorphisms for `Z` and for `U`, then they
@@ -176,13 +178,14 @@ are for `X`: after `Ri'^!` and `Lj'^*`, for the base changes `i'`, `j'` of `i`, 
 the canonical maps for `Z` and `U` (by the coherent composition law, the base change map of `i`
 and the tensor map of `i'` being isomorphisms by supported localization and the ordinary
 Künneth formula), and a map is an isomorphism if it is so after `Ri'^!` and `Lj'^*`. -/
-set_option maxHeartbeats 100000 in
 theorem coreProp_of_isClosedImmersion_of_isOpenImmersion
     (hE : RightDerivedLowerShriekCompCoherence Λ) {X Z U : Scheme.{u}}
     (a : X ⟶ Spec (.of k)) [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a]
     (i : Z ⟶ X) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j]
     (hij : Set.range i.base = (Set.range j.base)ᶜ)
-    (hZ : CoreProp Λ b (i ≫ a)) (hU : CoreProp Λ b (j ≫ a)) : CoreProp Λ b a := by
+    (hZ : CoreProp Λ b (i ≫ a) _ _ (IsPullback.of_hasPullback (i ≫ a) b))
+    (hU : CoreProp Λ b (j ≫ a) _ _ (IsPullback.of_hasPullback (j ≫ a) b)) :
+    CoreProp Λ b a _ _ (IsPullback.of_hasPullback a b) := by
   have : CompactSpace X := QuasiCompact.compactSpace_of_compactSpace a
   have : HasInvertibleExponent Λ X := .of_hom a
   have : HasCompactification j := (Compactification.ofIsOpenImmersion j).hasCompactification
@@ -242,13 +245,14 @@ theorem coreProp_of_isClosedImmersion_of_isOpenImmersion
       ((L((pullback.snd a b)^*[ModuleCat.{u + 1} Λ])).obj M)) :=
     isIso_rightDerivedUpperShriekTensorMap_of_isOpenImmersion Λ (pullbackMapLeft a b j)
       (pullbackMapLeft a b i) hij' _ _
-  have h1 := isIso_dualizingComplexTensorMap_comp_iff hE (pullbackMapLeft a b i)
-    (pullback.snd a b) (pullback.snd (i ≫ a) b) wi M hτi
-  have h2 := h1.1 (hZ.2 M hM)
-  sorry
-  have h3 := (isIso_dualizingComplexTensorMap_comp_iff hE (pullbackMapLeft a b j) (pullback.snd a b)
-      (pullback.snd (j ≫ a) b) wj M hτj).1 (hU.2 M hM)
-  sorry
+  refine isIso_of_isIso_rightDerivedUpperShriek_map_of_isIso_map Λ (pullbackMapLeft a b i)
+    (pullbackMapLeft a b j) hij' _
+    ((isIso_dualizingComplexTensorMap_comp_iff hE (pullbackMapLeft a b i) (pullback.snd a b)
+      (pullback.snd (i ≫ a) b) wi M hτi).1 (hZ.2 M hM)) ?_
+  exact (NatIso.isIso_map_iff (rightDerivedUpperShriekIsoLeftDerivedUpperStar Λ
+    (pullbackMapLeft a b j)) _).1
+    ((isIso_dualizingComplexTensorMap_comp_iff hE (pullbackMapLeft a b j) (pullback.snd a b)
+      (pullback.snd (j ≫ a) b) wj M hτj).1 (hU.2 M hM))
 
 end Etale
 
