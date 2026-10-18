@@ -1,6 +1,6 @@
 # Work queue
 
-63 items; claim with `tools/claim.py next <group> [--stage N]`.
+55 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (63)
+## Stage 3: modules to prove (55)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -29,7 +29,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.CategoryTheory.Galois.GaloisTransitive` | 5 | 1 | proof | 1 |
 | `Sheaf.Paper.GaloisLisseRepresentations` | 6 | 1 | proof | 1 |
 | `Sheaf.AlgebraicGeometry.EtaleNormalComponents` | - | 1 | proof | 1 |
-| `WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization` | - | 1 | proof | 1 |
 | `Sheaf.CategoryTheory.Galois.StacksGaloisObjectExists` | 6 | 1 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullback` | 13 | 1 | proof | 2 |
 | `Sheaf.AlgebraicGeometry.ProperOpenInterchangeCoherence` | - | 1 | proof | 2 |
@@ -40,15 +39,11 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.RationalTangentCotangentDuality` | - | 1 | proof | 3 |
 | `Sheaf.CategoryTheory.DerivedCategory.NoetherianFlatComplexPerfect` | - | 1 | proof | 3 |
 | `Sheaf.CategoryTheory.RingedCechKoszulDualLimit` | - | 1 | proof | 3 |
-| `Sheaf.CategoryTheory.RingedSiteCompleteElementsIdeal` | - | 1 | proof | 3 |
 | `Sheaf.Paper.AdicCompletionReduction` | - | 2 | proof | 3 |
 | `Sheaf.Paper.ExtendedCechCompletionModel` | - | 1 | proof | 3 |
 | `Sheaf.Paper.FlatRingedIdealCompleteEquivalence` | - | 2 | proof | 3 |
 | `Sheaf.Paper.LocalHomTowerCriterion` | - | 1 | proof | 3 |
-| `Sheaf.Paper.ProjectionFormulaProjectiveSummand` | - | 1 | proof | 3 |
-| `Sheaf.Paper.RingedLocalizationRHomCalculus` | - | 1 | proof | 3 |
 | `Sheaf.RingTheory.PolynomialDistinctLinearCRT` | - | 1 | proof | 3 |
-| `Sheaf.RingTheory.RlimPerfectComplete` | - | 1 | proof | 3 |
 | `Sheaf.RingTheory.ValuationRingNormal` | - | 1 | proof | 3 |
 | `Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatEquationalCriterion` | - | 1 | proof | 4 |
 | `Sheaf.AlgebraicGeometry.FieldDiscreteModules` | - | 1 | proof | 4 |
@@ -56,9 +51,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.ProjectiveMorphismChartPreimage` | - | 1 | proof | 4 |
 | `Sheaf.CategoryTheory.DiscreteModulesAbelian` | - | 1 | proof | 4 |
 | `Sheaf.Paper.AffineProjectiveComplexDerivedHom` | - | 1 | proof | 4 |
-| `Sheaf.Paper.ProjectionFormulaFiniteFree` | - | 1 | proof | 4 |
-| `Sheaf.Paper.RestrictionLocalCompleteness` | - | 1 | proof | 4 |
-| `Sheaf.RingTheory.PseudoCoherentInverseRingReconstruction` | - | 1 | proof | 4 |
 | `Sheaf.AlgebraicGeometry.AffineFiniteModuleFreeLocus` | - | 2 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.FiniteDenseNormalOpen` | - | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.Sites.EtaleSheavesGsetsPoint` | - | 1 | proof | 5 |
