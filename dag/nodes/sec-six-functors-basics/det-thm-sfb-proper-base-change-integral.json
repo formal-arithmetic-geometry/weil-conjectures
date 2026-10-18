@@ -345,5 +345,25 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-442ecd142",
+  "group": "N9",
+  "result": "fix",
+  "note": "Re-delivery after landing return L (name collision). Diff vs 2f5ee663e6b5: only the declaration was renamed integralProperBaseChange -> integralProperDirectImageAndFormulas, plus a lean.note; the signature is otherwise byte-identical and the node differs from live only in lean. The rename is legitimate: the existing IntegralOpenImageProperFormulas.integralProperBaseChange (sk-thm-sf-pf-adic) is on Loc(Dctf) with PadicAlgCl/padicIntegersRingObj coefficients and standing squares, and has no completeness, reduction, Dbc or Nakayama clauses. The new name is unused live. The H3 re-check is correct: standing setting, Mod(O_E,T), level-0 reduction = (x)^L O_E/pi, the three clauses, condensedAmbientExchange and moduleObjectProjectionMap; no extra hypotheses, nothing hollow, sorry only. FIX: the earlier H8 docstring fix (the node's ten proof steps) was lost with the landing refusal and is re-applied to the renamed theorem in fixes/IntegralProperBaseChange.lean; lean.statement is verbatim and no record change is needed. nt_compile --json: delivered file 4.5 s clean, fixed file 3.8 s clean. Advisories: add def-sfb-module-object-projection-map to stmt_deps (maintainer); clause-1 iso is a Nonempty; clause-3 squares are arbitrary, stronger but true."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralProperBaseChange",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.integralProperDirectImageAndFormulas",
+  "file": "lean/Sheaf/Paper/IntegralProperBaseChange.lean",
+  "statement": "theorem integralProperDirectImageAndFormulas (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ l)] {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (p : X ⟶ Y) [p.IsOver (Spec (.of k))] [IsProper p] : (∀ (K : DerivedCategory (AdicCompletion.Modules l E X)), constantModelBoundedConstructible (DerivedNakayama.integerRing l E) X K → IsDerivedComplete l E Y ((moduleObjectDerivedPushforward (DerivedNakayama.integerRing l E) p).obj K) ∧ Nonempty ((AdicCompletion.derivedReduction l E Y 0).obj ((moduleObjectDerivedPushforward (DerivedNakayama.integerRing l E) p).obj K) ≅ (moduleObjectDerivedPushforward (DerivedNakayama.quotientRing l E 1) p).obj ((AdicCompletion.derivedReduction l E X 0).obj K)) ∧ constantModelBoundedConstructible (DerivedNakayama.integerRing l E) Y ((moduleObjectDerivedPushforward (DerivedNakayama.integerRing l E) p).obj K)) ∧ (∀ (C : DerivedCategory (AdicCompletion.Modules l E X)), IsDerivedComplete l E X C → IsZero ((AdicCompletion.derivedReduction l E X 0).obj C) → IsZero C) ∧ (∀ {X' Y' : Scheme.{u}} (g : Y' ⟶ Y) (p' : X' ⟶ Y') (g' : X' ⟶ X) (sq : ChosenCartesianSquare g' p' p g) (K : DerivedCategory (AdicCompletion.Modules l E X)), constantModelBoundedConstructible (DerivedNakayama.integerRing l E) X K → IsIso ((condensedAmbientExchange (DerivedNakayama.integerRing l E) sq).app K)) ∧ (∀ (K : DerivedCategory (AdicCompletion.Modules l E X)) (M : DerivedCategory (AdicCompletion.Modules l E Y)), constantModelBoundedConstructible (DerivedNakayama.integerRing l E) X K → constantModelBoundedConstructible (DerivedNakayama.integerRing l E) Y M → IsIso (moduleObjectProjectionMap (DerivedNakayama.integerRing l E) p K M))",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Repair of return L at 2f5ee663e6b5: the existing integralProperBaseChange in Sheaf.Paper.IntegralOpenImageProperFormulas states only base change on Loc(Dctf) for a finite intermediate field of PadicAlgCl. This node states the combined bounded integral proper-direct-image, residue-reduction, derived-Nakayama, base-change and projection-formula theorem for an arbitrary finite-dimensional Padic extension. They are different statements, so the combined theorem has the distinct name integralProperDirectImageAndFormulas; its hypotheses and conclusions are unchanged.",
+  "fixed_by": "NT-stage2-cc-442ecd142"
  }
 }

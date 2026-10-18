@@ -276,5 +276,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3a2289ac5",
+  "group": "NK",
+  "result": "pass",
+  "note": "Re-delivery after the H13 RETURN of 93fba73dc511. Item node and module byte-identical to the previous head. The def-weil-proetale-tor-amplitude record is now the requested superset: module CoefficientProEtaleTorAmplitude, which publicly imports ProEtaleTorAmplitude, with all 5 declarations (N6's HasProEtaleTorAmplitude/HasFiniteProEtaleTorAmplitude plus the 3 coefficient-sized predicates) and a note naming both modules. Live record unmoved since base, statement field verbatim, both modules sorry-free. Statement checked clause by clause: qcqs, Noetherian A, no extra assumptions; D pinned by Q ⋙ D ≅ complexPullback ⋙ Q; iff with the same [a,b], pro-etale side tested on all modules; ctf equivalence identified with ν*. Edge cases covered. One sorry, docstrings with source and blueprint tag and 7 proof steps, lean.statement verbatim. nt_compile --json rc 0 in 5.2 s, no warnings. Advisory: étale Tor test uses the generic HasCoefficientModelTorAmplitude (same K-flat test) instead of Etale.derivedTensor."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleFiniteTorComparisonNoetherian",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteTorComparisonNoetherian",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleFiniteTorComparisonNoetherian.lean",
+  "statement": "theorem finiteTorComparisonNoetherian (X : Scheme.{u}) [CompactSpace X] [QuasiSeparatedSpace X] (A : Type (max v (u + 1))) [CommRing A] [IsNoetherianRing A] : ∃ D : ConstantCompletion.D (ConstantCompletion.constant (Scheme.smallModelComparisonEtaleTopology.{u, v} X) A) ⥤ ConstantCompletion.D (ConstantCompletion.constant (Scheme.coefficientProEtaleModelTopology.{u, v} X) A), Nonempty (ConstantCompletion.Q _ ⋙ D ≅ constructibleComparisonComplexPullback X A ⋙ ConstantCompletion.Q _) ∧ (∀ K : ConstantCompletion.D (ConstantCompletion.constant (Scheme.smallModelComparisonEtaleTopology.{u, v} X) A), Scheme.IsCoefficientBoundedConstructibleEtale X A K → ∀ a b : ℤ, a ≤ b → (HasCoefficientModelTorAmplitude _ K a b ↔ Scheme.HasCoefficientProEtaleTorAmplitude X A (D.obj K) a b)) ∧ ∃ e : ObjectProperty.FullSubcategory (fun K ↦ Scheme.IsCoefficientBoundedConstructibleEtale X A K ∧ ∃ a b : ℤ, HasCoefficientModelTorAmplitude _ K a b) ≌ ObjectProperty.FullSubcategory (fun K ↦ coefficientBoundedConstructibleProEtale X A K ∧ Scheme.HasFiniteCoefficientProEtaleTorAmplitude X A K), Nonempty (e.functor ⋙ ObjectProperty.ι (fun K ↦ coefficientBoundedConstructibleProEtale X A K ∧ Scheme.HasFiniteCoefficientProEtaleTorAmplitude X A K) ≅ ObjectProperty.ι (fun K ↦ Scheme.IsCoefficientBoundedConstructibleEtale X A K ∧ ∃ a b : ℤ, HasCoefficientModelTorAmplitude _ K a b) ⋙ D)",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

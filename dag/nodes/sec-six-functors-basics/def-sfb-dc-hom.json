@@ -151,5 +151,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0b25405ec",
+  "group": "Q35",
+  "result": "fix",
+  "note": "Item boundedConstructibleHomOfPreserves (byte-identical to PASSed fdcd) matches def-sfb-dc-hom clause by clause: setting binders, arbitrary commutative condensed ring Λ, exactly hypothesis h, H_C = curry of ObjectProperty.lift of ambient derivedHom after ι.op×ι, fixed-K comparison from curryObjProdComp + currying unit inverse (identity components); not a duplicate of upstream boundedConstructibleHom (needs IsEllAdicFinitenessCoefficient). Dep §1(B) record for lem-sfb-dc-hom-preserves is a superset (keeps isMonoidalClosed_boundedConstructible, publicly imports its module); statement unchanged and sound. This head correctly dropped the 19 proof-only imports that broke fdcd's landing (IntegralHomReduction), but rewrote the lemma docstring as a 'current finite-truncation proof' citing lem-sfb-dc-hom-single/devissage/sf-hom-triangulated/dc-ell-adic-triangulated, which is not the node's proof: the live node still has the reviewed 10-step Bhatt–Scholze proof, and only lean differs (H8). FIX: fixes/BoundedConstructibleHomFiniteness.lean = this head's header + 4 public imports + fdcd's docstrings (node steps 1-8 verbatim; Qlbar steps 9-10 via existing instance); statement byte-identical, one sorry, lines <=100. nt_compile --json on fix + item: 5.3 s / 27.7 s, rc 0, clean; #check of both upstream decls OK. Maintainer notes: the dep record's lean.note wrongly claims a finite-truncation route; the record overwrites the lead's existing:true attachment (superset)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.BoundedConstructibleHomOfPreserves",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleHomOfPreserves",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleHomOfPreserves",
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleHomOfPreservesObjCompatibility"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundedConstructibleHomOfPreserves.lean",
+  "statement": "def boundedConstructibleHomOfPreserves (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] (h : ∀ K L : BoundedConstructible (condensedRingObj Λ X.left), boundedConstructible (condensedRingObj Λ X.left) (((derivedHom Λ X.left).obj (op K.obj)).obj L.obj)) : (BoundedConstructible (condensedRingObj Λ X.left))ᵒᵖ ⥤ BoundedConstructible (condensedRingObj Λ X.left) ⥤ BoundedConstructible (condensedRingObj Λ X.left)",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Conditional interface for an arbitrary commutative condensed ring with the stated preservation hypothesis. The current upstream boundedConstructibleHom requires IsEllAdicFinitenessCoefficient; the older local source instead applies an unrestricted sorried preservation assertion. Neither gives the node's arbitrary-coefficient conditional interface. Reuse derivedHom and boundedConstructible, lift the ambient bifunctor through the existing full subcategory, and supply its identity-component inclusion comparison."
  }
 }

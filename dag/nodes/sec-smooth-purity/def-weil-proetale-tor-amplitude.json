@@ -129,23 +129,26 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-1e6d6eda8",
-  "group": "N6",
+  "reviewer": "NT-stage2-cc-3a2289ac5",
+  "group": "NK",
   "result": "pass",
-  "note": "Re-delivery fixes R1-R3. R1: new definition node def-sp-reduction-direct-image-comparison owns ReductionDirectImageComparison.lean; the four helpers moved unchanged (diffed), the existing gamma/openExtension/openScalarIso/openSquarePullbackModel are re-exported rather than copied, the node text states the full unit-preservation rule, the H12 fields pass, and the item no longer cites the exchange theorem nodes. R2: a real clause-by-clause second reading. R3: lean.notes keep the old shared declarations; the rebound IsConstructibleProEtaleModuleSheaf and Has(Finite)ProEtaleTorAmplitude are real and verbatim. Item: only lean and stmt_deps changed; theorem signatures unchanged and re-checked (hypotheses, Dctf for both endpoints, NatTrans naturality, alpha-cocycle orientation, edge cases, universes). Two sorry, no hollow definitions, docstrings and lines OK. nt_compile.py on both files: 6.1 s and 4.1 s, exit 0, no diagnostics. Observations only: openSquarePullbackModel_existsUnique (general A) is still a sorry under lem-trf-open-square-exchange, whose statement covers only A_{E,n}; the shared constructibility/Tor records keep switching encodings."
+  "note": "Re-delivery after the H13 RETURN of 93fba73dc511. Item node and module byte-identical to the previous head. The def-weil-proetale-tor-amplitude record is now the requested superset: module CoefficientProEtaleTorAmplitude, which publicly imports ProEtaleTorAmplitude, with all 5 declarations (N6's HasProEtaleTorAmplitude/HasFiniteProEtaleTorAmplitude plus the 3 coefficient-sized predicates) and a note naming both modules. Live record unmoved since base, statement field verbatim, both modules sorry-free. Statement checked clause by clause: qcqs, Noetherian A, no extra assumptions; D pinned by Q ⋙ D ≅ complexPullback ⋙ Q; iff with the same [a,b], pro-etale side tested on all modules; ctf equivalence identified with ν*. Edge cases covered. One sorry, docstrings with source and blueprint tag and 7 proof steps, lean.statement verbatim. nt_compile --json rc 0 in 5.2 s, no warnings. Advisory: étale Tor test uses the generic HasCoefficientModelTorAmplitude (same K-flat test) instead of Etale.derivedTensor."
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.ProEtaleTorAmplitude",
-  "declaration": "AlgebraicGeometry.Scheme.HasProEtaleTorAmplitude",
+  "module": "Sheaf.AlgebraicGeometry.CoefficientProEtaleTorAmplitude",
+  "declaration": "AlgebraicGeometry.Scheme.HasCoefficientProEtaleTorAmplitude",
   "declarations": [
    "AlgebraicGeometry.Scheme.HasProEtaleTorAmplitude",
-   "AlgebraicGeometry.Scheme.HasFiniteProEtaleTorAmplitude"
+   "AlgebraicGeometry.Scheme.HasFiniteProEtaleTorAmplitude",
+   "CategoryTheory.HasCoefficientModelTorAmplitude",
+   "AlgebraicGeometry.Scheme.HasCoefficientProEtaleTorAmplitude",
+   "AlgebraicGeometry.Scheme.HasFiniteCoefficientProEtaleTorAmplitude"
   ],
-  "statement": "def HasProEtaleTorAmplitude (Y : Scheme.{t}) (A : Type t) [CommRing A]\n    (K : proEtaleDerivedCategory Y A) (a b : ℤ) : Prop",
+  "statement": "abbrev HasCoefficientProEtaleTorAmplitude (X : Scheme.{u})\n    (A : Type (max v (u + 1))) [CommRing A]\n    (K : CategoryTheory.ConstantCompletion.D\n      (CategoryTheory.ConstantCompletion.constant (coefficientProEtaleModelTopology.{u, v} X) A))\n    (a b : ℤ) : Prop",
   "branch": "newtargets-dag",
-  "by": "N6",
+  "by": "NK",
   "date": "2026-10-18",
   "existing": true,
-  "note": "Section 1(B): the recorded fixed-ModuleCat Tor predicate is not directly applicable to the intrinsic SheafOfModules derived objects of the scalar-extension and compact-support constructions. Rebind to the existing exact intrinsic predicate: an ordered common interval, testing derived tensor with every module sheaf in degree zero on all K-flat resolutions. Its finite-amplitude declaration existentially quantifies that common interval. There is no completion, test-sheaf restriction, added Tor bound, or equality of site object and morphism universes; the fixed-module predicate remains available upstream. Compatibility: the old declarations AlgebraicGeometry.ProEtale.DerivedCategory.torAmplitudeIn and finiteTorAmplitude remain available with their unchanged signatures in WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitude; neither that source module nor any existing consumer is edited or removed by this delivery."
+  "note": "Section 1(B), exact existing-interface repair. The module Sheaf.AlgebraicGeometry.CoefficientProEtaleTorAmplitude publicly imports the old module Sheaf.AlgebraicGeometry.ProEtaleTorAmplitude and retains its declarations AlgebraicGeometry.Scheme.HasProEtaleTorAmplitude and AlgebraicGeometry.Scheme.HasFiniteProEtaleTorAmplitude, while also exposing CategoryTheory.HasCoefficientModelTorAmplitude, AlgebraicGeometry.Scheme.HasCoefficientProEtaleTorAmplitude, and AlgebraicGeometry.Scheme.HasFiniteCoefficientProEtaleTorAmplitude. HasProEtaleTorAmplitude is confined to A : Type t and the ULift constant ring on the original Scheme.{t} site; it cannot accept the coefficient-sized constant-ring derived objects used by constructibleComparison. The coefficient-sized predicates are the same universal K-flat Tor tests on the equivalent small sites, with independent scheme and coefficient sizes; the finite variant requires a single ordered interval. No notion or tensor product is redefined."
  }
 }
