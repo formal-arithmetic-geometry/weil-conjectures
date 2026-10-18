@@ -14,9 +14,82 @@
   "def-pc-cochain-complex-modules",
   "def-pc-kflat-complex"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $j^*G=G|_U$ and $L=j_{U!}$ for the sheafified direct-sum extension by zero. By lem-pur-site-restriction-module-adjunction-exact, $j^*$ is exact and $L$ is an exact (in particular additive) left adjoint to $j^*$. This proves the exactness assertion of the item. The ring on the slice is exactly $R_U=R|_U$, so this is restriction of modules over the ring specified in the statement.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04IX, definition-localize-ringed-site; Tag 03DJ, lemma-extension-by-zero-exact; restriction exactness also used in Tag 0E8G, lemma-j-shriek-reflects-exactness."
+   }
+  },
+  {
+   "text": "Let $K^\\bullet$ be K-flat and let $G^\\bullet$ be an arbitrary acyclic complex of $R_U$-modules. Acyclicity means exactness of every consecutive triple $G^{n-1}\\to G^n\\to G^{n+1}$. Apply the forward implication of lem-weil-pbc-ringed-slice-extension-exactness to each triple: $LG^\\bullet$ is acyclic. The defining property of the given K-flat $K^\\bullet$, applied to this complex of $R$-modules, therefore makes $T^\\bullet=\\operatorname{Tot}(LG^\\bullet\\otimes_R K^\\bullet)$ acyclic.",
+   "uses": [
+    "def-pc-acyclic-complex-modules",
+    "lem-weil-pbc-ringed-slice-extension-exactness",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E8K, lemma-restriction-K-flat, first sentence and first displayed total tensor; Definition 06YN, definition-K-flat."
+   }
+  },
+  {
+   "text": "For a small family $(M_i)$ of $R_U$-modules, $L$ commutes with its direct sum. Indeed for every $R$-module $H$ the adjunction gives natural bijections $$\\operatorname{Hom}_R(L(\\bigoplus_i M_i),H)\\cong\\operatorname{Hom}_{R_U}(\\bigoplus_i M_i,j^*H)\\cong\\prod_i\\operatorname{Hom}_{R_U}(M_i,j^*H)\\cong\\prod_i\\operatorname{Hom}_R(LM_i,H).$$ Thus $L(\\bigoplus_i M_i)$ with the maps $L\\iota_i$ has the coproduct universal property, and the canonical map $\\bigoplus_i LM_i\\to L(\\bigoplus_i M_i)$ is an isomorphism. The module direct sums used here exist as in def-pc-tensor-complex-sheaves; in the application their index set is $\\{(p,q)\\in\\mathbf Z^2:p+q=n\\}$, small in the coefficient universe.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E8K, lemma-restriction-K-flat, proof: j_{U!} commutes with direct sums as a left adjoint; the Hom argument spells out that observation."
+   }
+  },
+  {
+   "text": "Put $A^\\bullet=\\operatorname{Tot}(G^\\bullet\\otimes_{R_U}K^\\bullet|_U)$. For each degree $n$, step 3 followed by the natural tensor isomorphisms of lem-weil-pbc-ringed-slice-extension-tensor gives $$\\theta^n:L(A^n)=L(\\bigoplus_{p+q=n}G^p\\otimes_{R_U}K^q|_U)\\xrightarrow{\\sim}\\bigoplus_{p+q=n}L(G^p\\otimes_{R_U}K^q|_U)\\xrightarrow{\\sim}\\bigoplus_{p+q=n}LG^p\\otimes_R K^q=T^n.$$ These are maps of complexes: on the $(p,q)$ summand, naturality in $G^p$ identifies the component $L(d_G^p\\otimes 1)$ with $L(d_G^p)\\otimes 1$, and naturality in $K^q$ identifies $L(1\\otimes d_K^q|_U)$ with $1\\otimes d_K^q$. The coproduct comparison respects its injections. Additivity of $L$ from step 1 respects the sum of these two components and the coefficient $(-1)^p$ of the second. These are precisely the signed differentials defining both total complexes, so $\\theta:LA^\\bullet\\xrightarrow{\\sim}T^\\bullet$ is a complex isomorphism. All sums are direct sums, including for unbounded complexes.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-extension-tensor",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E8K, lemma-restriction-K-flat, displayed equality of total complexes and its justification; uses Modules on Sites Tag 0E8I, lemma-j-shriek-and-tensor."
+   }
+  },
+  {
+   "text": "Since $T^\\bullet$ is acyclic by step 2 and $LA^\\bullet\\cong T^\\bullet$ by step 4, every consecutive triple of $LA^\\bullet$ is exact. Apply the reverse implication of lem-weil-pbc-ringed-slice-extension-exactness to the triple $A^{n-1}\\to A^n\\to A^{n+1}$ for each integer $n$. Every such triple is exact, so $A^\\bullet$ is acyclic. This holds for every acyclic $G^\\bullet$ of $R_U$-modules; by def-pc-kflat-complex it is exactly K-flatness of $K^\\bullet|_U$. The argument used K-flatness of $K^\\bullet$ alone, and imposed neither boundedness nor flatness of its terms.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-extension-exactness",
+    "def-pc-acyclic-complex-modules",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E8K, lemma-restriction-K-flat, final sentence; Modules on Sites Tag 0E8G, lemma-j-shriek-reflects-exactness."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-acyclic-complex-modules",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-ringed-slice-extension-exactness",
+  "lem-weil-pbc-ringed-slice-extension-tensor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0E8K, lemma-restriction-K-flat; exactness and adjunction for localization from sites-modules.tex Tags 04IX, 03DJ and 0E8G; tensor formula Tag 0E8I."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +125,45 @@
    "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.flat_of_isLocalized_span\", \"Module.Flat.of_isLocalizedModule\", \"Module.flat_iff_of_isLocalization\", \"Module.flat_of_localized_span\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\"], \"sub\": \"\"}",
    "date": "2026-10-18",
    "verdict": "no match: inspected hits concern ordinary flatness, module presentations, or homological notions without this site-local or unbounded K-flat assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctor.*[Kk].?[Ff]lat|[Kk].?[Ff]lat.*overFunctor|restriction.*K.flat|K.flat.*restriction",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"sub\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no declarations returned"
+  },
+  {
+   "tool": "leansearch",
+   "query": "K-flat complexes of module sheaves remain K-flat after restriction to the slice site at an object",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.instMorphismRestrict\", \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"CategoryTheory.Sheaf.ΓRes\", \"AlgebraicGeometry.Scheme.Modules.restrict_obj\", \"AlgebraicGeometry.Flat.instResLE\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso\", \"SheafOfModules.hasLimit\"], \"sub\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern flat morphisms, ordinary scalar restriction, scheme-module restriction, global sections or existence of limits; none asserts preservation of K-flat complexes on arbitrary sites"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overFunctor, \"kFlat\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"sub\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no declarations returned"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of an arbitrary unbounded K-flat complex of sheaves of modules to a localized ringed site preserves K-flatness",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.flat_of_isLocalized_span\", \"Module.Flat.localizedModule\", \"Module.flat_of_isLocalized_maximal\", \"AlgebraicGeometry.Flat.flat_appLE\", \"Module.Flat.of_isLocalizedModule\", \"RingHom.Flat.holdsForLocalizationAway\", \"Module.flat_of_localized_span\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\"], \"sub\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern ordinary flat modules or flat scheme morphisms, not K-flat complexes on an arbitrary ringed-site slice"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero along an over category and its tensor projection formula show restriction preserves tensor acyclicity of complexes",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.HasGoodTensor₁₂\", \"HomologicalComplex.HasGoodTensor₂₃\", \"HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX\", \"HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X\", \"HomologicalComplex.instHasTensorXTensorUnit\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor'\", \"HomologicalComplex.extend_exactAt\"], \"sub\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: HasGoodTensor and Tor concern tensor associativity or derived functors; extend_exactAt extends the index shape of a complex and is not extension by zero of sheaves along a site localization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-ringed-site-kflat-stalk-criterion",
@@ -83,5 +191,39 @@
   "slopmaster2": {
    "state": "none"
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-sfb-ringed-site-restriction-kflat",
+  "worker": "stage1",
+  "summary": "Following Stacks 0E8K, reuse the existing arbitrary-ringed-site restriction adjunction, extension exactness/reflection and tensor projection formula. Expand preservation of direct sums by the Hom universal property and the signed degreewise comparison of unbounded total complexes. No statement change, new nodes or attachments. Recorded fresh Q18 Mathlib searches; project-source search found no exact finished declaration.",
+  "blueprint": "lem-sfb-module-mapmod-pullback-kflat: transport preserves K-flat complexes; the recorded ancestry through lem-sfb-ringed-site-kflat-stalk-criterion needs restriction to C/U in the forward stalk criterion. Steps 1-5 prove precisely that local restriction tool by the proof of Stacks 0E8K, within unit sk-prop-sfb-module-derived-factorization clause (2).",
+  "tool_uses": [
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic arbitrary-ringed-site localization adjunction and exactness; used for exact restriction and the Hom proof of coproduct preservation, without changing the unit transport route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-extension-exactness",
+    "why": "Generic preservation and reflection of exact triples by sheafified extension by zero on C/U; used degreewise to move acyclicity out of and back into the slice. No own-unit node states this interface."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-extension-tensor",
+    "why": "Generic underived natural tensor projection formula on a ringed-site slice; used in each bidegree of the signed total comparison. No own-unit node gives the arbitrary ringed-site formula."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-ringed-slice-extension-exactness",
+  "lem-weil-pbc-ringed-slice-extension-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-Codex-Q18-d4c0375dc",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q18-d4c0375dc (reviewer sub-agent of L); spot-checked: Mathematics and citations check out. The item metadata incorrectly records created.item as lem-sfb-ringed-site-kflat-stalk-criterion and created.group as Q63; corrected JSON is in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-ringed-site-restriction-kflat.json.; 1 file(s) fixed by the reviewer"
  }
 }
