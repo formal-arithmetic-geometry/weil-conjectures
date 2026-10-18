@@ -34,6 +34,8 @@ universe u
 
 open CategoryTheory Limits
 
+attribute [local instance 1100] CategoryTheory.instOverClass
+
 namespace AlgebraicGeometry
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]

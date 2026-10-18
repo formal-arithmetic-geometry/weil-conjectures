@@ -184,7 +184,7 @@ lemma isOpen_setOf_modelMap_eq [Finite N] (T : Y.ProEt) (k : T ⟶ U) (i : ι)
   have : {z | modelMap ε a T k i h hh z = φ} =
       ⋂ n, (trivSections (ε i) T h hh (F.obj.map k.op (a n))) ⁻¹' {φ n} := by
     ext z
-    simp only [Set.mem_setOf_eq, Set.mem_iInter, Set.mem_preimage, Set.mem_singleton_iff]
+    simp only [Set.mem_ofPred_eq, Set.mem_iInter, Set.mem_preimage, Set.mem_singleton_iff]
     exact ⟨fun hz n ↦ by rw [← hz]; rfl, fun hz ↦ LinearMap.ext fun n ↦ hz n⟩
   rw [this]
   exact isOpen_iInter_of_finite fun n ↦ (isOpen_discrete _).preimage (ContinuousMap.continuous _)
@@ -196,7 +196,7 @@ lemma isOpen_setOf_bijective_modelMap [Finite N] (T : Y.ProEt) (k : T ⟶ U) (i 
   have : {z | Function.Bijective (modelMap ε a T k i h hh z)} =
       ⋃ φ : {φ : N →ₗ[Λ] M i // Function.Bijective φ}, {z | modelMap ε a T k i h hh z = φ} := by
     ext z
-    simp only [Set.mem_setOf_eq, Set.mem_iUnion]
+    simp only [Set.mem_ofPred_eq, Set.mem_iUnion]
     exact ⟨fun hz ↦ ⟨⟨_, hz⟩, rfl⟩, fun ⟨φ, hφ⟩ ↦ hφ ▸ φ.2⟩
   rw [this]
   exact isOpen_iUnion fun φ ↦ isOpen_setOf_modelMap_eq ε a T k i h hh φ
@@ -476,5 +476,134 @@ lemma nonempty_restrictionToOpen_iso [Finite N]
 end Restriction
 
 end Model
+
+section Etale
+
+variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {Y : Scheme.{u}}
+  (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+  {ι : Type*} {W : ι → Scheme.{u}} {g : ∀ i, W i ⟶ Y} [∀ i, WeaklyEtale (g i)]
+  {M : ι → Type (u + 1)} [∀ i, AddCommGroup (M i)] [∀ i, Module Λ (M i)]
+  [∀ i, TopologicalSpace (M i)] [∀ i, DiscreteTopology (M i)] [∀ i, Finite (M i)]
+  (ε : ∀ i, (ProEtale.upperStar (ModuleCat.{u + 1} Λ) (g i)).obj
+      ((comparisonUpperStar (ModuleCat.{u + 1} Λ) Y).obj G) ≅
+    (constantSheaf (Scheme.ProEt.topology (W i)) (ModuleCat.{u + 1} Λ)).obj
+      (ModuleCat.of Λ (M i)))
+
+/-- The forgetful functor of `ModuleCat.{u + 1} Λ` preserves filtered colimits of size `u`. -/
+local instance preservesFilteredColimits_locallyConstantModel :
+    PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+  preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+
+include ε in
+/-- **An étale sheaf whose comparison pullback is pro-étale locally constant is étale locally
+constant.** Every point of `Y` lies in the image of an étale `O ⟶ Y` over which `G` is the
+constant sheaf at one of the values of the trivializations of `ν^* G`. -/
+theorem exists_etale_iso_constantSheaf (hg : Presieve.ofArrows W g ∈ proetalePrecoverage Y)
+    (y : Y) :
+    ∃ (O : Scheme.{u}) (o : O ⟶ Y) (_ : Etale o) (_ : y ∈ Set.range o) (i : ι),
+      Nonempty ((Etale.upperStar (ModuleCat.{u + 1} Λ) o).obj G ≅
+        (constantSheaf O.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+          (ModuleCat.of Λ (M i))) := by
+  let A := ModuleCat.{u + 1} Λ
+  let F := (comparisonUpperStar A Y).obj G
+  obtain ⟨i, w, hw⟩ := ((Scheme.ofArrows_mem_precoverage_iff _).1 hg.2).1 y
+  obtain ⟨V, v, hv, y', hy'⟩ := exists_affineProEt_comp_eq (g i) w
+  obtain ⟨J, _, _, ⟨pres⟩⟩ := AffineProEt.exists_relativeLimitPresentation _ V
+  let c := presentationCone pres
+  obtain ⟨hcol⟩ := isColimit_comparisonUpperStar_mapCocone A G (presentationDiagram pres) c
+    (isLimitPresentationCone pres)
+  have hvc : v ≫ g i = c.pt.hom := hv
+  let constₗ : M i →ₗ[Λ] C(c.pt.left, M i) :=
+    { toFun := ContinuousMap.const _, map_add' _ _ := rfl, map_smul' _ _ := rfl }
+  let b : M i →ₗ[Λ] F.obj.obj (op c.pt) :=
+    (trivSections (ε i) c.pt v hvc).symm.toLinearMap ∘ₗ constₗ
+  obtain ⟨j, a, ha⟩ := exists_linearMap_lift_of_isColimit hcol (M i) b
+  let U : Y.ProEt := (toProEt Y).obj ((presentationDiagram pres).obj j.unop)
+  have : Etale U.hom := ((presentationDiagram pres).obj j.unop).prop
+  let p : c.pt ⟶ U := c.π.app j.unop
+  let a' : M i →ₗ[Λ] F.obj.obj (op U) := a
+  have ha' (m : M i) : F.obj.map p.op (a' m) = b m := ha m
+  -- the image of `y'` lies in the good locus
+  have hpv : p.left ≫ U.hom = v ≫ g i := by rw [hvc]; exact MorphismProperty.Over.w p
+  let ψ : c.pt ⟶ modelBase (g := g) (U := U) i := MorphismProperty.Over.homMk
+    (pullback.lift p.left v hpv)
+    (by
+      change _ ≫ pullback.fst U.hom (g i) ≫ U.hom = _
+      rw [pullback.lift_fst_assoc]
+      exact MorphismProperty.Over.w p)
+  have hmem : p.left y' ∈ goodLocus ε a' := by
+    refine ⟨i, ψ.left y', ?_, ?_⟩
+    · change (pullback.lift p.left v hpv ≫ pullback.fst U.hom (g i)) y' = _
+      rw [pullback.lift_fst]
+      rfl
+    · rw [← modelMap_comp ε a' ψ (ProEt.baseChangeHom (g i) U) p
+        (MorphismProperty.Over.Hom.ext (pullback.lift_fst _ _ _)) i (pullback.snd U.hom (g i))
+        (modelBase_condition i) v hvc (pullback.lift_snd _ _ _) y']
+      convert Function.bijective_id
+      ext m
+      rw [modelMap_apply, ha']
+      change trivSections _ _ _ _ ((trivSections (ε i) c.pt v hvc).symm
+        (ContinuousMap.const _ m)) y' = m
+      rw [LinearEquiv.apply_symm_apply]
+      rfl
+  let O : U.left.Opens := ⟨goodLocus ε a', isOpen_goodLocus ε a' hg⟩
+  obtain ⟨e⟩ := nonempty_restrictionToOpen_iso (O := O) ε a' hg subset_rfl
+  refine ⟨O, O.ι ≫ U.hom, inferInstance, ⟨⟨p.left y', hmem⟩, ?_⟩, i, ⟨?_⟩⟩
+  · rw [Scheme.Hom.comp_apply, Scheme.Opens.ι_apply, ← Scheme.Hom.comp_apply, hpv,
+      Scheme.Hom.comp_apply]
+    exact (congrArg (g i) hy').trans hw
+  · exact (comparisonUpperStar A O).preimageIso
+      (((comparisonUpperStarCompUpperStarIso A (O.ι ≫ U.hom)).app G).symm ≪≫
+        (ProEtale.upperStarIsoLocalizationRestriction A (O.ι ≫ U.hom) inferInstance).app F ≪≫
+        e.symm ≪≫ ((constantSheafCompComparisonUpperStarIso A O).app _).symm)
+
+end Etale
+
+variable {Λ : Type (u + 1)} [CommRing Λ]
+
+/-- A constant sheaf at a finite module is finite locally constant. -/
+lemma isFiniteLocallyConstantSheaf_constantSheaf {O : Scheme.{u}} (N : Type (u + 1))
+    [AddCommGroup N] [Module Λ N] [Finite N] :
+    IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
+      ((constantSheaf O.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ N)) :=
+  have : IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) ((Etale.lowerStar (ModuleCat.{u + 1} Λ) (𝟙 O)).obj
+        ((constantSheaf O.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ N))) :=
+    isFiniteLocallyConstantSheaf_lowerStar_constantSheaf (𝟙 O) (ModuleCat.of Λ N)
+  IsFiniteLocallyConstantSheaf.of_iso (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+    (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) ((Etale.lowerStarId (ModuleCat.{u + 1} Λ) O).app
+      ((constantSheaf O.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj (ModuleCat.of Λ N)))
+
+/-- **An étale sheaf of `Λ`-modules whose comparison pullback is locally constant with finite
+values on a pro-étale covering family is finite locally constant**, for a finite ring `Λ`. -/
+theorem isFiniteLocallyConstantSheaf_of_comparisonUpperStar [Finite Λ] {Y : Scheme.{u}}
+    (G : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) {ι : Type*} {W : ι → Scheme.{u}}
+    (g : ∀ i, W i ⟶ Y) (hg : Presieve.ofArrows W g ∈ proetalePrecoverage Y)
+    (h : ∀ i, ∃ M : ModuleCat.{u + 1} Λ, Finite M ∧
+      Nonempty ((ProEtale.upperStar (ModuleCat.{u + 1} Λ) (g i)).obj
+        ((comparisonUpperStar (ModuleCat.{u + 1} Λ) Y).obj G) ≅
+          (constantSheaf (Scheme.ProEt.topology (W i)) (ModuleCat.{u + 1} Λ)).obj M)) :
+    IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) G := by
+  have (i : ι) : WeaklyEtale (g i) :=
+    proetalePrecoverage_le_precoverage_weaklyEtale _ hg (.mk i)
+  choose M hM ε using h
+  let _ (i : ι) : TopologicalSpace (M i) := ⊥
+  have (i : ι) : DiscreteTopology (M i) := ⟨rfl⟩
+  choose O o ho hy i e using fun y ↦ exists_etale_iso_constantSheaf (M := fun i ↦ (M i : Type _))
+    G (fun i ↦ (ε i).some) hg y
+  let 𝒰 : Cover.{u} etalePrecoverage Y :=
+    { I₀ := Y
+      X := O
+      f := o
+      mem₀ := (presieve₀_mem_precoverage_iff _).mpr ⟨fun y ↦ ⟨y, hy y⟩, fun y ↦ ho y⟩ }
+  have (y : Y) : IsFiniteLocallyConstantSheaf (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M)
+      ((Etale.upperStar (ModuleCat.{u + 1} Λ) (𝒰.f y)).obj G) :=
+    have := isFiniteLocallyConstantSheaf_constantSheaf (Λ := Λ) (O := O y) (M (i y))
+    IsFiniteLocallyConstantSheaf.of_iso (FA := fun M N : ModuleCat.{u + 1} Λ ↦ M →ₗ[Λ] N)
+      (CA := fun M : ModuleCat.{u + 1} Λ ↦ M) (e y).some.symm
+  exact Scheme.IsFiniteLocallyConstantSheaf.of_cover 𝒰 G
 
 end AlgebraicGeometry.ProEtale
