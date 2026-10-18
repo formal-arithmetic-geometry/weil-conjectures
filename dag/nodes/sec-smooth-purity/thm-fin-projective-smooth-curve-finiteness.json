@@ -21,62 +21,52 @@
  ],
  "proof": [
   {
-   "text": "By [lem-pc-projective-proper], the projective morphism $f$ is proper. Set $F=\\mathbf F_\\ell$, the constant sheaf on $X$: it is a finite module sheaf over the finite coefficient ring $\\Lambda=\\mathbf F_\\ell$.",
+   "text": "Projectivity supplies IsProper f via IsHProjective.isProper. The constant module sheaf with value ULift (ZMod ell) has finite geometric stalks, since its stalk is the finite coefficient module itself. Apply geometricFiber_finite_stalk_formula to the canonical algebraic-closure point of each base point and take the isomorphism given by its explicitly transported base-change map. Pullback of a constant module sheaf is constant by upperStarConstantSheafIso.",
    "uses": [
-    "lem-pc-projective-proper"
+    "lem-pc-projective-proper",
+    "cor-weil-pbc-geometric-fiber-finite",
+    "lemma-constructible-pullback-constant"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-smooth-curve-finiteness.md",
-    "place": "Proof, first sentence"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [cor-weil-pbc-geometric-fiber-finite] to $f$, $\\Lambda=\\mathbf F_\\ell$, and $F$. For every geometric point $\\bar s$ of $S$ and every $r\\geq0$ it identifies the geometric stalk $(R^rf_*F)_{\\bar s}$ with $H^r(X_{\\bar s},F|_{X_{\\bar s}})$. The restriction of a constant sheaf is constant, so the latter group is $H^r(X_{\\bar s},\\mathbf F_\\ell)$.",
+   "text": "Forget the coefficient action on the resulting fibre-cohomology isomorphism. Apply nonempty_etaleModuleCohomology_forgetIso and constantCommuteCompose to identify the result with abelian cohomology of the fibre constantZMod sheaf. The private proved helper constant_prime_stalk_equiv composes these actual isomorphisms and returns an equivalence of underlying types.",
    "uses": [
-    "cor-weil-pbc-geometric-fiber-finite"
+    "lem-weil-pbc-etale-module-cohomology-forget"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-smooth-curve-finiteness.md",
-    "place": "Proof, proper base change sentence"
-   }
+   "elementary": false
   },
   {
-   "text": "By [lem-fin-projective-curve-betti-cardinalities], these fibre cohomology groups are finite and their cardinality functions have constructible level sets. The lemma applies because $S$ is Noetherian, $f$ is smooth and projective with geometric fibres of pure dimension one, and $\\ell$ is a prime invertible on $S$.",
+   "text": "Map the unit assumption through the evaluation map from global sections to each residue field. Apply projective_curve_betti_cardinalities, with the resulting nonzero residue-field prime, to obtain a natural-number-valued cardinality function b and constructible level sets. Its Cardinal.mk equality, transported by the helper equivalence, proves actual finiteness of every canonical geometric stalk as well as its Nat.card equality. The definition algClosurePoint is exactly the geometric point used by the Betti lemma.",
    "uses": [
     "lem-fin-projective-curve-betti-cardinalities"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-smooth-curve-finiteness.md",
-    "place": "Proof, finite stalks sentence"
-   }
+   "elementary": false
   },
   {
-   "text": "Fix $r\\geq0$. By definition, $R^rf_*F$ is an abelian etale sheaf on the Noetherian scheme $S$. Its geometric stalks are finite, and for every integer $n\\geq1$ the level set $C_n=\\{s\\in S:|(R^rf_*F)_{\\bar s}|=n\\}$ is constructible: the stalk isomorphisms of [cor-weil-pbc-geometric-fiber-finite] identify it with the corresponding cardinality locus of [lem-fin-projective-curve-betti-cardinalities]. Thus [fin4-lem-stalk-constructibility-criterion] gives a finite locally closed partition on which this sheaf is finite locally constant. This also gives constructibility as an $\\mathbf F_\\ell$-module sheaf: scalar multiplication by a class modulo $\\ell$ is repeated addition, so every additive trivialization is $\\mathbf F_\\ell$-linear. Since $r$ was arbitrary, every higher direct image is constructible.",
+   "text": "Compare an arbitrary separably closed geometric point with the canonical algebraic-closure point over the same base point using exists_geometricStalkComparison_constant. The comparison transfers finiteness to every geometric stalk, hence gives IsFiniteSheaf of the higher direct image. Apply the source library module-valued realization of fin4-lem-stalk-constructibility-criterion, Scheme.isConstructibleSheaf_iff_isConstructible_card in WeilConjectures.ConstructibleSheaf.Noetherian. Rewriting the stalk Nat.card by b gives its constructible-cardinality-locus premise. Finally isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf identifies this constructibility predicate with the unchanged conclusion. The module-valued criterion avoids an extra abelian-stratum-to-module-stratum conversion.",
    "uses": [
-    "cor-weil-pbc-geometric-fiber-finite",
-    "lem-fin-projective-curve-betti-cardinalities",
-    "fin4-lem-stalk-constructibility-criterion"
+    "lem-weil-pbc-geometric-stalk-comparison-constant",
+    "fin4-lem-stalk-constructibility-criterion",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-smooth-curve-finiteness.md",
-    "place": "Proof, final criterion sentence"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "cor-weil-pbc-geometric-fiber-finite",
   "fin4-lem-stalk-constructibility-criterion",
   "lem-fin-projective-curve-betti-cardinalities",
-  "lem-pc-projective-proper"
+  "lem-pc-projective-proper",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "lem-weil-pbc-geometric-stalk-comparison-constant",
+  "lemma-constructible-pullback-constant"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-fin-projective-smooth-curve-finiteness.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/thm-fin-projective-smooth-curve-finiteness.proof.md",
+  "place": "Whole proof; Q9 implements the proper-base-change, Betti-cardinality and stalk-criterion argument, using the existing source-library module-valued realization of the last criterion. This replaces the returned cyclic reuse of Finiteness.ProjectiveCurve."
  },
  "mathlib_searches": [
   {
@@ -214,5 +204,15 @@
   "group": "NW",
   "result": "pass",
   "note": "Wrote review.md. Audited the immutable statement, all five dependencies, source, declarations, docstrings, edge cases, universes, and report. Signature matches verbatim; per-file scompile.py reproduction passed cleanly. No corrections needed; branch unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q9",
+  "result": "pass",
+  "landing": "20261018T091411-L-3258382",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

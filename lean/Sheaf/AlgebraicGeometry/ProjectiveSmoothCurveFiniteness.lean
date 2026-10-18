@@ -13,9 +13,11 @@ public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Algebra.Field.ULift
 public import Mathlib.Data.ZMod.Basic
 import Sheaf.AlgebraicGeometry.GeometricFiberFinite
-import Sheaf.AlgebraicGeometry.StalkConstructibilityCriterion
+import WeilConjectures.ConstructibleSheaf.Noetherian
 import Sheaf.Paper.ProjectiveCurveBettiCardinalities
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
+import Sheaf.AlgebraicGeometry.EtaleModuleCohomologyForget
+import WeilConjectures.AlgebraicGeometry.GeometricStalkComparisonConstant
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 /-!
 # Constant-coefficient finiteness for projective smooth curves
@@ -32,6 +34,56 @@ universe u
 open CategoryTheory
 
 namespace AlgebraicGeometry
+
+/-- Proper base change for the constant prime-field sheaf, with coefficients forgotten. -/
+private theorem constant_prime_stalk_equiv
+    {X S : Scheme.{u}} (f : X ⟶ S) [IsProper f]
+    (ℓ : ℕ) [Fact ℓ.Prime] (r : ℕ) (s : S) :
+    Nonempty
+      (↥(((Scheme.pointSmallEtale (S.algClosurePoint s)).sheafFiber
+        (A := ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj
+        (Etale.higherDirectImage (ULift.{u + 1} (ZMod ℓ)) f r
+          ((constantSheaf X.smallEtaleTopology
+            (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj
+            (ModuleCat.of _ (ULift.{u + 1} (ZMod ℓ)))))) ≃
+      ↥((Etale.cohomology AddCommGrpCat.{u + 1}
+        (Limits.pullback f (S.algClosurePoint s)) (r : ℤ)).obj
+        ((DerivedCategory.singleFunctor _ 0).obj
+          ((Limits.pullback f (S.algClosurePoint s)).constantZMod ℓ)))) := by
+  let Λ := ULift.{u + 1} (ZMod ℓ)
+  let A := ModuleCat.{u + 1} Λ
+  let M := ModuleCat.of Λ Λ
+  let F := (constantSheaf X.smallEtaleTopology A).obj M
+  have : Limits.PreservesFilteredColimitsOfSize.{u, u} (CategoryTheory.forget A) :=
+    Limits.preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  have : Scheme.IsFiniteSheaf F := by
+    constructor
+    intro Ω _ _ y
+    let e := (Scheme.pointSmallEtale y).sheafFiberConstantSheafIso M
+    have : Finite (((Scheme.pointSmallEtale y).sheafFiber (A := A)).obj F) :=
+      Finite.of_equiv Λ e.toLinearEquiv.toEquiv.symm
+    exact (ModuleCat.isFinitelyGenerated_iff _).2 Module.Finite.of_finite
+  let y := S.algClosurePoint s
+  let Y := Limits.pullback f y
+  let G := (constantSheaf Y.smallEtaleTopology A).obj M
+  obtain ⟨e₁, e₂, he⟩ := Etale.geometricFiber_finite_stalk_formula
+    Λ f (AlgebraicClosure (S.residueField s)) y F r
+  let e := asIso (e₁.inv ≫
+    (Sheaf.Γ (Spec (.of (AlgebraicClosure (S.residueField s)))).smallEtaleTopology A).map
+      (Etale.baseChangeHomologyMap Λ (IsPullback.of_hasPullback f y) r F) ≫
+    e₂.hom)
+  let c := (Scheme.upperStarConstantSheafIso A (Limits.pullback.fst f y)).app M
+  let d := (Etale.cohomology A Y (r : ℤ)).mapIso
+    ((DerivedCategory.singleFunctor _ 0).mapIso c)
+  let U := forget₂ A AddCommGrpCat.{u + 1}
+  obtain ⟨forgetIso⟩ := Scheme.nonempty_etaleModuleCohomology_forgetIso Y Λ r
+  have : Y.smallEtaleTopology.PreservesSheafification U := by
+    apply GrothendieckTopology.instPreservesSheafification
+  let cAb := (constantCommuteCompose Y.smallEtaleTopology U).app M
+  let HAb := DerivedCategory.singleFunctor (Sheaf Y.smallEtaleTopology AddCommGrpCat.{u + 1})
+    0 ⋙ Etale.cohomology AddCommGrpCat.{u + 1} Y (r : ℤ)
+  exact ⟨(U.mapIso (e ≪≫ d) ≪≫ forgetIso.app G ≪≫
+    HAb.mapIso cAb).addCommGroupIsoToAddEquiv.toEquiv⟩
 
 /-- Higher direct images of the constant prime field sheaf under a smooth projective
 relative curve over a Noetherian scheme are constructible as module sheaves.
@@ -70,6 +122,43 @@ theorem isConstructibleEtaleModuleSheaf_higherDirectImage_constant_of_projective
             ((constantSheaf X.smallEtaleTopology
               (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj
               (ModuleCat.of (ULift.{u + 1} (ZMod ℓ)) (ULift.{u + 1} (ZMod ℓ))))))) := by
-  sorry
+  let Λ := ULift.{u + 1} (ZMod ℓ)
+  let F := (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj
+    (ModuleCat.of Λ Λ)
+  let H := Etale.higherDirectImage Λ f r F
+  have hinvres (s : S) : (ℓ : S.residueField s) ≠ 0 := by
+    simpa using (hinv.map (S.Γevaluation s).hom).ne_zero
+  obtain ⟨b, hb, -, hloci⟩ := projective_curve_betti_cardinalities
+    f ℓ (Fact.out : ℓ.Prime) hinvres
+  have hcard (s : S) : Cardinal.mk
+      (((Scheme.pointSmallEtale (S.algClosurePoint s)).sheafFiber
+        (A := ModuleCat.{u + 1} Λ)).obj H) = b r s := by
+    obtain ⟨e⟩ := constant_prime_stalk_equiv f ℓ r s
+    exact (Cardinal.mk_congr e).trans (hb r s)
+  have hfinite (s : S) : Finite
+      (((Scheme.pointSmallEtale (S.algClosurePoint s)).sheafFiber
+        (A := ModuleCat.{u + 1} Λ)).obj H) :=
+    Cardinal.mk_lt_aleph0_iff.mp ((hcard s).symm ▸ Cardinal.natCast_lt_aleph0)
+  have : Limits.PreservesFilteredColimitsOfSize.{u, u}
+      (CategoryTheory.forget (ModuleCat.{u + 1} Λ)) :=
+    Limits.preservesFilteredColimitsOfSize_shrink.{u, u + 1, u, u + 1} _
+  have : Scheme.IsFiniteSheaf H := by
+    constructor
+    intro Ω _ _ y
+    let s := y (IsLocalRing.closedPoint Ω)
+    obtain ⟨β, -⟩ := Scheme.exists_geometricStalkComparison_constant
+      (Λ := Λ) (S.algClosurePoint s) y (by simp [s])
+    have : Finite (((Scheme.pointSmallEtale y).sheafFiber
+        (A := ModuleCat.{u + 1} Λ)).obj H) :=
+      @Finite.of_equiv _ _ (hfinite s) (β.app H).toLinearEquiv.toEquiv
+    exact (ModuleCat.isFinitelyGenerated_iff _).2 Module.Finite.of_finite
+  apply (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf H).2
+  apply (Scheme.isConstructibleSheaf_iff_isConstructible_card H).2
+  intro n _
+  have hnat (s : S) : Nat.card
+      (((Scheme.pointSmallEtale (S.algClosurePoint s)).sheafFiber
+        (A := ModuleCat.{u + 1} Λ)).obj H) = b r s := by
+    simpa only [Nat.card, Cardinal.toNat_natCast] using congrArg Cardinal.toNat (hcard s)
+  simpa only [hnat] using (hloci r).2 n
 
 end AlgebraicGeometry
