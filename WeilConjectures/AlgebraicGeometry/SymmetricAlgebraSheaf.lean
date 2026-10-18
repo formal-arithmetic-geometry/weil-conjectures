@@ -175,7 +175,7 @@ noncomputable def symSpec [F.IsQuasicoherent] : Scheme.{u} :=
   (AffineZariskiSite.relativeGluingData F.coequifibered_toSymPresheaf).glued
 
 /-- The projection `Spec_X (Sym^• ℰ) ⟶ X`. -/
-noncomputable def symSpecProj [F.IsQuasicoherent] : F.symSpec ⟶ X :=
+noncomputable abbrev symSpecProj [F.IsQuasicoherent] : F.symSpec ⟶ X :=
   (AffineZariskiSite.relativeGluingData F.coequifibered_toSymPresheaf).toBase
 
 /-- The augmentation `Sym^• ℰ ⟶ 𝒪_X`, killing `ℰ`. -/
