@@ -1,0 +1,147 @@
+{
+ "id": "lem-cbc-proper-support-exchange-range",
+ "kind": "statement",
+ "title": "Sectionwise image and injectivity of proper-support exchange",
+ "statement": "Let a Cartesian square have horizontal projections a:Xprime->X and b:Yprime->Y and vertical maps f:X->Y and fprime:Xprime->Yprime, both separated and locally of finite type [def-pc-scheme, def-pc-fibre-product, def-weil-proper-morphism, def-weil-finite-type-morphism]. For a sheaf F of Lambda-modules [def-weil-pbc-etale-sheaves] form the proper-support sheaf of [lem-cbc-proper-support-section-calculus]. The ordinary base-change morphism b^*f_*F->fprime_*a^*F, restricted along b^*(f_!supp F)->b^*f_*F, is sectionwise injective and on each etale V over Yprime its image consists exactly of sections with support proper over V [def-cbc-etale-section-proper-support, def-weil-pbc-inverse-image, def-weil-pbc-direct-image].",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F55, 0F76"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-geometric-stalks",
+  "def-cbc-etale-section-proper-support",
+  "lem-cbc-proper-support-section-calculus",
+  "def-pc-fibre-product",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-direct-image",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Pullback preserves proper support, giving the sectionwise map G->b_*H for the two literal support sheaves. Its adjunct beta:b^*G->H has composite with the inclusion equal to the restricted ordinary comparison.",
+   "uses": [
+    "lem-cbc-proper-support-pullback-section-map",
+    "lem-cbc-proper-support-adjoint-comparison",
+    "lem-cbc-proper-support-section-calculus"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At an algebraically closed geometric point use the proper-support geometric-stalk restriction isomorphisms on both sides. Inverse-image stalk compatibility and the Cartesian identification of the two fibres identify the map beta with the identity on properly supported sections.",
+   "uses": [
+    "lem-cbc-proper-support-geometric-stalk",
+    "lem-cbc-proper-support-fibre-restriction-compatibility",
+    "lem-weil-pbc-inverse-image-stalk-germ"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Geometric stalk detection makes beta an isomorphism. Its composite with the literal support inclusion is therefore sectionwise injective with exactly the stated image.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-proper-support-pullback-section-map",
+  "lem-cbc-proper-support-adjoint-comparison",
+  "lem-cbc-proper-support-section-calculus",
+  "lem-cbc-proper-support-geometric-stalk",
+  "lem-cbc-proper-support-fibre-restriction-compatibility",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F55, 0F76; module coefficients and categorical details expanded in Lean"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "On the small etale site, nonzero germs of a section form a closed support, sections with proper support form a sheaf, and proper support direct image commutes with composition, open extension by zero and arbitrary base change",
+   "results": "AlgebraicGeometry.Scheme.smallEtaleTopology, TopCat.Presheaf.Γgerm, AlgebraicGeometry.Scheme.zeroLocus_isClosed, TopCat.Presheaf.Sheafify.isGerm, TopCat.Presheaf.section_ext, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv, AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet. Read returned signatures: these are generic stalk, ideal-sheaf or analytic compact-support results, not the claimed small-etale module-sheaf proper-support result.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper support of a section of the direct image sheaf is the closed image of its proper support; extension by zero has precisely sections with support proper over the base",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.support_map, AlgebraicGeometry.Scheme.Hom.support_ker, HasCompactSupport.tsupport_extend_zero, HasCompactSupport.tsupport_extend_zero_subset, AlgebraicGeometry.Scheme.Hom.range_subset_ker_support, AlgebraicGeometry.Scheme.IdealSheafData.map_vanishingIdeal, AlgebraicGeometry.Scheme.IdealSheafData.support_comap, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top. Read returned signatures: these are generic stalk, ideal-sheaf or analytic compact-support results, not the claimed small-etale module-sheaf proper-support result.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"toPresheafFiber_w\"",
+   "results": "CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_w, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_w_assoc, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_w_apply. Read returned signatures: these are generic stalk, ideal-sheaf or analytic compact-support results, not the claimed small-etale module-sheaf proper-support result.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "properSupport|proper_support|lowerShriek",
+   "results": "No hits. Read returned signatures: these are generic stalk, ideal-sheaf or analytic compact-support results, not the claimed small-etale module-sheaf proper-support result.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperSupportSheafComposition",
+  "date": "2026-10-18",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-finite-torsion",
+   "place": "Proof, refinement comparison paragraph and final pasting sentence: construction and composition of the sheaf of properly supported sections, its open/proper specializations and pullback compatibility.",
+   "via": [
+    "lem-cbc-proper-support-sheaf-composition",
+    "lem-cbc-proper-open-interchange-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperSupportExchangeRange",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperSupportExchangeRange.lean",
+  "declaration": "AlgebraicGeometry.Etale.properSupportExchange_range",
+  "statement": "theorem properSupportExchange_range (Λ : Type (u + 1)) [CommRing Λ]\n    {X Y X' Y' : Scheme.{u}} (f : X ⟶ Y) (a : X' ⟶ X)\n    (b : Y' ⟶ Y) (f' : X' ⟶ Y') [IsSeparated f] [LocallyOfFiniteType f]\n    [IsSeparated f'] [LocallyOfFiniteType f'] (sq : IsPullback a f' f b)\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (V : Y'.Etale) :\n    Function.Injective\n      (((upperStar (ModuleCat.{u + 1} Λ) b).map\n          ((properSupportLowerStarInclusion Λ f).app F) ≫\n        (baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app F).hom.app (op V)) ∧\n    ∀ s, (∃ t,\n      (((upperStar (ModuleCat.{u + 1} Λ) b).map\n          ((properSupportLowerStarInclusion Λ f).app F) ≫\n        (baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app F).hom.app (op V)) t = s) ↔\n      SectionHasProperSupport Λ ((upperStar (ModuleCat.{u + 1} Λ) a).obj F)\n        (f'.Etale.obj V) (pullback.fst V.hom f') s",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261018T092206-L-3361586",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261018T092206-L-3361586",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

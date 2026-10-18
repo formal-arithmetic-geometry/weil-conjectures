@@ -16380,3 +16380,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:22 L: returned deliver/M6/Sheaf.CategoryTheory.FilteredHomologyTowerQuotients (reviewer RETURN: (the landing tools, head bf3791ad4) the delivery did not land: lean/Sheaf/CategoryTheory/FilteredHomologyTowerDifferenti)
 - 09:22 L: returned deliver/Q3/Sheaf.AlgebraicGeometry.CanonicalCoherentEtaleComparison (reviewer RETURN: (the landing tools, head b134590b6) the delivery did not land: (d) user Sheaf.AlgebraicGeometry.PrimeCurveArtinSchreierK)
 - 09:22 L: returned deliver/W3/Sheaf.Paper.RingedLocalizationRHomCalculus (reviewer RETURN: (the landing tools, head 7406ac83a) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 09:22 L: merged deliver/H1/Sheaf.AlgebraicGeometry.ProperSupportSheafComposition (stage 3; reviewer PASS; after a return; landing 20261018T092206-L-3361586 (interface); batch 20261018T092201; modules 8; new nodes 7)

@@ -1,0 +1,137 @@
+{
+ "id": "lem-cbc-proper-support-section-image",
+ "kind": "statement",
+ "title": "Support of a proper-support direct-image section",
+ "statement": "Let Lambda be a commutative ring, f:X->Y be separated and locally of finite type and F an etale sheaf of Lambda-modules [def-pc-scheme, def-weil-pbc-etale-sheaves]. For V etale over Y and s in the proper-support subsheaf at V [lem-cbc-proper-support-section-calculus], there are closed subsets T of X_V and I of V such that T is precisely the nonzero-germ support of the underlying section, T is proper over V, I is its closed image, and I is precisely the nonzero-germ support of s as a section of the proper-support subsheaf. All germs are tested at separably closed geometric points.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F50, composition of direct image with proper supports; closed-image support calculation"
+ },
+ "stmt_deps": [
+  "lem-cbc-proper-support-section-calculus",
+  "def-pc-scheme",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Use the actual proper-support predicate to obtain the closed support T and properness; take its closed image I under the projection.",
+   "uses": [
+    "lem-cbc-proper-support-section-calculus",
+    "lem-weil-pbc-closed-subset-proper-over-base-properties"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Off I restrict to the open complement. Every geometric germ of the underlying section is zero there. The zero-open theorem shows the restriction is zero, and hence its direct-image germ is zero.",
+   "uses": [
+    "lem-sc-etale-section-zero-open",
+    "lem-cbc-etale-module-section-closed-support",
+    "lem-cbc-proper-support-section-locality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "If a direct-image germ at a point of I were zero, the zero-open theorem gives a zero neighbourhood. Choose an algebraically closed geometric point of T above it, lift it into that neighbourhood through the Cartesian restriction square, and use germ compatibility to contradict membership in T.",
+   "uses": [
+    "lem-sc-etale-section-zero-open",
+    "lem-cbc-etale-module-section-closed-support",
+    "lem-cbc-proper-support-section-locality"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-proper-support-section-calculus",
+  "lem-weil-pbc-closed-subset-proper-over-base-properties",
+  "lem-sc-etale-section-zero-open",
+  "lem-cbc-etale-module-section-closed-support",
+  "lem-cbc-proper-support-section-locality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F50, closed-image support argument expanded using etale-cohomology.tex Tag 04FR and the Cartesian restriction square."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "On the small etale site, nonzero germs of a section form a closed support, sections with proper support form a sheaf, and proper support direct image commutes with composition, open extension by zero and arbitrary base change",
+   "results": "AlgebraicGeometry.Scheme.smallEtaleTopology, TopCat.Presheaf.Γgerm, AlgebraicGeometry.Scheme.zeroLocus_isClosed, TopCat.Presheaf.Sheafify.isGerm, TopCat.Presheaf.section_ext, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv, AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet. Read returned signatures: these are generic stalk, ideal-sheaf or analytic compact-support results, not the claimed small-etale module-sheaf proper-support result.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper support of a section of the direct image sheaf is the closed image of its proper support; extension by zero has precisely sections with support proper over the base",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.support_map, AlgebraicGeometry.Scheme.Hom.support_ker, HasCompactSupport.tsupport_extend_zero, HasCompactSupport.tsupport_extend_zero_subset, AlgebraicGeometry.Scheme.Hom.range_subset_ker_support, AlgebraicGeometry.Scheme.IdealSheafData.map_vanishingIdeal, AlgebraicGeometry.Scheme.IdealSheafData.support_comap, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top. Read returned signatures: these are generic stalk, ideal-sheaf or analytic compact-support results, not the claimed small-etale module-sheaf proper-support result.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"toPresheafFiber_w\"",
+   "results": "CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_w, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_w_assoc, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_w_apply. Read returned signatures: these are generic stalk, ideal-sheaf or analytic compact-support results, not the claimed small-etale module-sheaf proper-support result.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "properSupport|proper_support|lowerShriek",
+   "results": "No hits. Read returned signatures: these are generic stalk, ideal-sheaf or analytic compact-support results, not the claimed small-etale module-sheaf proper-support result.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperSupportSheafComposition",
+  "date": "2026-10-18",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-finite-torsion",
+   "place": "Proof, refinement comparison paragraph and final pasting sentence: construction and composition of the sheaf of properly supported sections, its open/proper specializations and pullback compatibility.",
+   "via": [
+    "lem-cbc-proper-support-sheaf-composition",
+    "lem-cbc-proper-open-interchange-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperSupportSectionImage",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperSupportSectionImage.lean",
+  "declaration": "AlgebraicGeometry.Etale.properSupportSectionImage",
+  "statement": "theorem properSupportSectionImage (Λ : Type (u + 1)) [CommRing Λ]\n    {X Y : Scheme.{u}} (f : X ⟶ Y) [IsSeparated f] [LocallyOfFiniteType f]\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (V : Y.Etale)\n    (s : ((properSupportLowerStar Λ f).obj F).obj.obj (op V)) :\n    ∃ (T : TopologicalSpace.Closeds (f.Etale.obj V).left)\n      (I : TopologicalSpace.Closeds V.left),\n      (∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω]\n        (v : Spec (.of Ω) ⟶ (f.Etale.obj V).left), v default ∈ T ↔\n        (Scheme.pointSmallEtale (v ≫ (f.Etale.obj V).hom)).toPresheafFiber\n          (f.Etale.obj V) (Over.homMk v) F.obj s.val ≠ 0) ∧\n      Scheme.IsClosedSubsetProperOver (pullback.fst V.hom f) T ∧\n      (I : Set V.left) =\n        (fun x : (f.Etale.obj V).left => pullback.fst V.hom f x) '' (T : Set _) ∧\n      (∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (v : Spec (.of Ω) ⟶ V.left),\n        v default ∈ I ↔ (Scheme.pointSmallEtale (v ≫ V.hom)).toPresheafFiber V\n          (Over.homMk v) ((properSupportLowerStar Λ f).obj F).obj s ≠ 0)",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261018T092206-L-3361586",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261018T092206-L-3361586",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

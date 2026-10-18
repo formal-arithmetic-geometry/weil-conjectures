@@ -1,0 +1,125 @@
+{
+ "id": "lem-cbc-etale-module-section-closed-support",
+ "kind": "statement",
+ "title": "Closed support and geometric germ tests for module-sheaf sections",
+ "statement": "Let Lambda be a commutative ring and F a sheaf of Lambda-modules on the small etale site of a scheme X [def-pc-scheme, def-weil-pbc-etale-sheaves]. For an etale V over X and s in F(V), there is a closed subset T of V such that for every separably closed field Omega and v:Spec(Omega)->V, v(default) belongs to T exactly when the geometric germ of s at v is nonzero [def-weil-pbc-geometric-stalks]. Its underlying set is exactly the algebraically closed geometric support used in [def-cbc-etale-section-proper-support]. Consequently SectionHasProperSupport is equivalent to the same support criterion using all separably closed points, together with properness of the reduced closed support over the base. Forgetting the scalar action detects zero germs.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 04FR, 04FT (etale-cohomology.tex); 0F4X"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-geometric-stalks",
+  "def-cbc-etale-section-proper-support"
+ ],
+ "proof": [
+  {
+   "text": "Forget the scalar action. Filtered-colimit preservation gives the geometric-fibre comparison with the underlying abelian sheaf, and that isomorphism detects zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply [lem-sc-etale-section-zero-open] to the underlying abelian sheaf and take the closed complement of its open zero locus. The germ criterion of that theorem gives the criterion at every separably closed point. Algebraic closures of residue fields provide such points over every scheme point, giving the asserted underlying support set and equality of the two proper-support tests.",
+   "uses": [
+    "lem-sc-etale-section-zero-open"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-etale-section-zero-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 04FR, 04FT (etale-cohomology.tex); 0F4X; module coefficients and categorical details expanded in Lean"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "On the small etale site, nonzero germs of a section form a closed support, sections with proper support form a sheaf, and proper support direct image commutes with composition, open extension by zero and arbitrary base change",
+   "results": "AlgebraicGeometry.Scheme.smallEtaleTopology, TopCat.Presheaf.Γgerm, AlgebraicGeometry.Scheme.zeroLocus_isClosed, TopCat.Presheaf.Sheafify.isGerm, TopCat.Presheaf.section_ext, AlgebraicGeometry.Scheme.smallEtalePretopology, AlgebraicGeometry.ΓSpecIso_hom_stalkClosedPointIso_inv, AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet. Read returned signatures: these are generic stalk, ideal-sheaf or analytic compact-support results, not the claimed small-etale module-sheaf proper-support result.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Proper support of a section of the direct image sheaf is the closed image of its proper support; extension by zero has precisely sections with support proper over the base",
+   "results": "AlgebraicGeometry.Scheme.IdealSheafData.support_map, AlgebraicGeometry.Scheme.Hom.support_ker, HasCompactSupport.tsupport_extend_zero, HasCompactSupport.tsupport_extend_zero_subset, AlgebraicGeometry.Scheme.Hom.range_subset_ker_support, AlgebraicGeometry.Scheme.IdealSheafData.map_vanishingIdeal, AlgebraicGeometry.Scheme.IdealSheafData.support_comap, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top. Read returned signatures: these are generic stalk, ideal-sheaf or analytic compact-support results, not the claimed small-etale module-sheaf proper-support result.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"toPresheafFiber_w\"",
+   "results": "CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_w, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_w_assoc, CategoryTheory.GrothendieckTopology.Point.toPresheafFiber_w_apply. Read returned signatures: these are generic stalk, ideal-sheaf or analytic compact-support results, not the claimed small-etale module-sheaf proper-support result.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "properSupport|proper_support|lowerShriek",
+   "results": "No hits. Read returned signatures: these are generic stalk, ideal-sheaf or analytic compact-support results, not the claimed small-etale module-sheaf proper-support result.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperSupportSheafComposition",
+  "date": "2026-10-18",
+  "group": "H1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-finite-torsion",
+   "place": "Proof, refinement comparison paragraph and final pasting sentence: construction and composition of the sheaf of properly supported sections, its open/proper specializations and pullback compatibility.",
+   "via": [
+    "lem-cbc-proper-support-sheaf-composition",
+    "lem-cbc-proper-open-interchange-coherence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleModuleSectionClosedSupport",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleModuleSectionClosedSupport.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleModuleSection_closedSupport",
+  "statement": "theorem etaleModuleSection_closedSupport\n    (Λ : Type (u + 1)) [CommRing Λ] {X : Scheme.{u}}\n    (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (V : X.Etale)\n    (s : F.obj.obj (op V)) :\n    ∃ T : TopologicalSpace.Closeds V.left,\n      (∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (v : Spec (.of Ω) ⟶ V.left),\n        v default ∈ T ↔\n          (Scheme.pointSmallEtale (v ≫ V.hom)).toPresheafFiber V\n            (Over.homMk v) F.obj s ≠ 0) ∧\n      (T : Set V.left) =\n        {x | ∃ (Ω : Type u) (_ : Field Ω) (_ : IsAlgClosed Ω)\n          (v : Spec (.of Ω) ⟶ V.left), v default = x ∧\n            (Scheme.pointSmallEtale (v ≫ V.hom)).toPresheafFiber V\n              (Over.homMk v) F.obj s ≠ 0}",
+  "branch": "sheaf-dag",
+  "by": "H1",
+  "date": "2026-10-18",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleModuleGerm_zero",
+   "AlgebraicGeometry.Etale.etaleModuleSection_closedSupport",
+   "AlgebraicGeometry.Etale.sectionHasProperSupport_iff"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261018T092206-L-3361586",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261018T092206-L-3361586",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
