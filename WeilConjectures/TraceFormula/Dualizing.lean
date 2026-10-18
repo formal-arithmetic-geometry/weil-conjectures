@@ -21,7 +21,7 @@ finite type with structure morphism `a_X : X ⟶ s = Spec k`. The *dualizing com
 ```
 ω_X = Ra_X^! ℚ̄_ℓ ∈ Dᵇc(X)⟦ℚ̲̄_ℓ⟧
 ```
-(`ProEtale.CondensedRing.dualizingComplex`), for the exceptional inverse image
+(`ProEtale.CondensedRing.dualizingComplex'`), for the exceptional inverse image
 `boundedConstructibleUpperShriek` of the chosen compactification. It is transported along
 morphisms by the composition isomorphism `Rf^! ω_Y ≅ ω_X`
 (`ProEtale.CondensedRing.dualizingComplexComp`, blueprint `thm-trf-dualizing-complex-composition`),
@@ -76,7 +76,7 @@ the monoidal pullback `L(𝟙 s)^*`
 - `ProEtale.CondensedRing.boundedConstructibleUpperShriekId`: the identity isomorphism of the
   exceptional inverse image; its composition isomorphism is
   `ProEtale.CondensedRing.boundedConstructibleUpperShriekComp_padicAlgCl`.
-- `ProEtale.CondensedRing.dualizingComplex`, `ProEtale.CondensedRing.dualizingComplexComp`.
+- `ProEtale.CondensedRing.dualizingComplex'`, `ProEtale.CondensedRing.dualizingComplexComp`.
 - `ProEtale.CondensedRing.etalePurityIso`, `ProEtale.CondensedRing.dualizingComplexSmoothIso`:
   smooth purity for the dualizing complexes.
 - `ProEtale.CondensedRing.dualizingComplexPointIso`: `ω_s ≅ ℚ̄_ℓ,s`.
@@ -135,7 +135,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 
 /-- The *dualizing complex* `ω_X = Ra_X^! ℚ̄_ℓ` of a separated `k`-scheme of finite type
 (blueprint `def-trf-dualizing-complex`). -/
-noncomputable abbrev dualizingComplex (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]
+noncomputable abbrev dualizingComplex' (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]
     [QuasiCompact X.hom] [IsSeparated X.hom] : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
   (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj (𝟙_ _)
 
@@ -147,7 +147,7 @@ variable {X Y : Over (Spec (.of k))}
 `thm-trf-dualizing-complex-composition`). -/
 noncomputable def dualizingComplexComp (f : X ⟶ Y) :
     (boundedConstructibleUpperShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj
-        (dualizingComplex ℓ Y) ≅ dualizingComplex ℓ X :=
+        (dualizingComplex' ℓ Y) ≅ dualizingComplex' ℓ X :=
   ((boundedConstructibleUpperShriekComp_padicAlgCl ℓ f (toPoint Y)).app (𝟙_ _)).symm ≪≫
     eqToIso (by rw [comp_toPoint])
 
@@ -174,7 +174,7 @@ variable (X) in
 `ω_X ≅ ℚ̄_ℓ,X(d)[2d]`, after the inclusion `Dᵇc(X)⟦ℚ̲̄_ℓ⟧ ⥤ D(Mod_{ℚ̄_ℓ,X})`. This is
 `ProEtale.CondensedRing.smoothPurityIso` for the structure morphism `a_X`. -/
 noncomputable def dualizingComplexSmoothIso (d : ℕ) [SmoothOfRelativeDimension d X.hom] :
-    (dualizingComplex ℓ X).obj ≅
+    (dualizingComplex' ℓ X).obj ≅
       (shiftFunctor _ (2 * d : ℤ)).obj (tateTwistDerived X.left ℓ d) :=
   haveI : SmoothOfRelativeDimension d (toPoint X).left :=
     inferInstanceAs (SmoothOfRelativeDimension d X.hom)
@@ -186,7 +186,7 @@ variable (k) in
 `R(𝟙 s)^! ≅ 𝟭` of the exceptional inverse image (`boundedConstructibleUpperShriekId`) at the
 unit. -/
 noncomputable def dualizingComplexPointIso :
-    dualizingComplex ℓ (point k) ≅ 𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :=
+    dualizingComplex' ℓ (point k) ≅ 𝟙_ (Dᵇc((point k).left)⟦Profinite.padicAlgClRingObj ℓ⟧) :=
   (boundedConstructibleUpperShriekId ℓ (point k)).app (𝟙_ _)
 
 end Dualizing
@@ -201,7 +201,7 @@ variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).
 /-- The *Borel–Moore sections* of `X`: the morphisms `ℚ̄_ℓ,X ⟶ ω_X` (blueprint `sk-d-integral`). -/
 abbrev BorelMooreSection (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom]
     [QuasiCompact X.hom] [IsSeparated X.hom] : Type _ :=
-  𝟙_ (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) ⟶ dualizingComplex ℓ X
+  𝟙_ (Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) ⟶ dualizingComplex' ℓ X
 
 variable {ℓ} {X U : Over (Spec (.of k))} [QuasiCompact X.hom] [QuasiCompact U.hom]
 
