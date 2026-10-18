@@ -12,6 +12,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Dual
 public import WeilConjectures.SixFunctors.Etale.Derived.PoincarePairing
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Unit
 public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplex
+public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplexTensorHom
 
 /-!
 # Dual and Tate Weil data
@@ -89,8 +90,8 @@ lemma isIso_ihomComparison_comp_pre {Y K : C} [ExactPairing Y K] (φ : F.obj K �
         MonoidalClosed.curry (φ.inv ▷ _ ≫ μ F K _ ≫ F.map ((ihom.ev K).app (𝟙_ C)) ≫ u) := by
     rw [eq_comm, curry_eq_iff, uncurry_eq, whiskerLeft_ihomComparison_comp_pre_comp_ev]
   have := isIso_ihomUnitTensorToIhom Y K K
-  letI := exactPairingOfIsIso K
-  letI := ExactPairing.map F ((ihom K).obj (𝟙_ C)) K
+  let := exactPairingOfIsIso K
+  let := ExactPairing.map F ((ihom K).obj (𝟙_ C)) K
   have hb : IsPerfectPairing (μ F K _ ≫ F.map ((ihom.ev K).app (𝟙_ C)) ≫ u) := by
     refine ⟨?_⟩
     have h : μ F K _ ≫ F.map ((ihom.ev K).app (𝟙_ C)) ≫ u =
@@ -206,17 +207,15 @@ lemma leftDerivedUpperStarMonoidal_μ (K M : DerivedCategory (Sheaf Y.smallEtale
   rw [← cancel_mono (leftDerivedUpperStarTensorIso A g K M).hom, Iso.inv_hom_id]
   exact Functor.Monoidal.μ_δ _ _ _
 
-/-- The canonical comparison `Lg^* RHom(K, N) ⟶ RHom(Lg^* K, Lg^* N)` of the derived pullback
-with the derived internal hom: the comparison map of the monoidal functor `Lg^*`
-(`CategoryTheory.Functor.LaxMonoidal.ihomComparison`), the transpose of
-`Lg^* K ⊗ᴸ Lg^* RHom(K, N) ≅ Lg^*(K ⊗ᴸ RHom(K, N)) ⟶ Lg^* N`. This is the first arrow of the
-contragredient datum of blueprint `def-pod-dual-tate-datum`. -/
-noncomputable def leftDerivedUpperStarDerivedHomComparison
-    (K N : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    L((g)^*[A]).obj ((RHom(Y)[A].obj (op K)).obj N) ⟶
-      (RHom(Z)[A].obj (op (L((g)^*[A]).obj K))).obj (L((g)^*[A]).obj N) :=
-  letI := leftDerivedUpperStarMonoidal A g
-  (Functor.LaxMonoidal.ihomComparison L((g)^*[A]) K).natTrans.app N
+/-- The oplax monoidal structure map `δ` of the monoidal functor `Lg^*`
+(`AlgebraicGeometry.Etale.leftDerivedUpperStarMonoidal`) is the tensor comparison
+`Lg^*(K ⊗ᴸ M) ≅ Lg^* K ⊗ᴸ Lg^* M`. -/
+lemma leftDerivedUpperStarMonoidal_δ (K M : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    letI := leftDerivedUpperStarMonoidal A g
+    Functor.OplaxMonoidal.δ L((g)^*[A]) K M = (leftDerivedUpperStarTensorIso A g K M).hom := by
+  let := leftDerivedUpperStarMonoidal A g
+  rw [← cancel_epi (Functor.LaxMonoidal.μ L((g)^*[A]) K M), Functor.Monoidal.μ_δ,
+    leftDerivedUpperStarMonoidal_μ, Iso.inv_hom_id]
 
 /-- The comparison `Lg^* RHom(K, N) ⟶ RHom(Lg^* K, Lg^* N)` is compatible with the
 evaluations. -/
@@ -231,16 +230,6 @@ lemma derivedTensor_map_leftDerivedUpperStarDerivedHomComparison_comp_counit
   rw [← leftDerivedUpperStarMonoidal_μ]
   exact Functor.LaxMonoidal.ihomComparison_ev _ _ _
 
-
-/-- The oplax monoidal structure map `δ` of the monoidal functor `Lg^*`
-(`AlgebraicGeometry.Etale.leftDerivedUpperStarMonoidal`) is the tensor comparison
-`Lg^*(K ⊗ᴸ M) ≅ Lg^* K ⊗ᴸ Lg^* M`. -/
-lemma leftDerivedUpperStarMonoidal_δ (K M : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
-    letI := leftDerivedUpperStarMonoidal A g
-    Functor.OplaxMonoidal.δ L((g)^*[A]) K M = (leftDerivedUpperStarTensorIso A g K M).hom := by
-  let := leftDerivedUpperStarMonoidal A g
-  rw [← cancel_epi (Functor.LaxMonoidal.μ L((g)^*[A]) K M), Functor.Monoidal.μ_δ,
-    leftDerivedUpperStarMonoidal_μ, Iso.inv_hom_id]
 end Comparison
 
 section Datum
@@ -288,7 +277,61 @@ lemma derivedTensor_map_contragredientWeilDatum_comp_coefficientEvaluation
   rw [← leftDerivedUpperStarMonoidal_μ]
   exact Functor.LaxMonoidal.whiskerLeft_ihomComparison_comp_pre_comp_ev _ φ _
 
+/-- Blueprint `prop-pod-dual-tate-data-compatibility`: Compatibility of the dual and Tate data
+(Step 1).
 
+The contragredient datum `φ_{K^∨} : Lg^* K^∨ ⟶ K^∨` of a Weil datum `φ_K : Lg^* K ≅ K` on a
+perfect (dualizable) complex `K` is an isomorphism, so it is a genuine Weil datum on `K^∨`. Here
+`g` is any endomorphism of `X`; for an automorphism it is an isomorphism for every `K`. -/
+theorem isIso_contragredientWeilDatum (φ : L((g)^*[A]).obj K ≅ K) (hK : IsDualizable K) :
+    IsIso (contragredientWeilDatum A g φ) := by
+  obtain ⟨_⟩ := hK
+  obtain ⟨_⟩ := DerivedCategory.nonempty_exactPairing_swap K Kᘁ
+  let := leftDerivedUpperStarMonoidal A g
+  exact Functor.LaxMonoidal.isIso_ihomComparison_comp_pre _ (Y := Kᘁ) φ _
+
+/-- Blueprint `prop-pod-dual-tate-data-compatibility`: Compatibility of the dual and Tate data
+(Step 2).
+
+The coefficient evaluation `ev_K : K ⊗ᴸ K^∨ ⟶ Λ_X` intertwines the tensor product datum
+`φ_K ⊗ φ_{K^∨}` with the canonical datum `φ_Λ` of `Λ_X`:
+`φ_Λ ∘ Lg^* ev_K = ev_K ∘ (φ_K ⊗ φ_{K^∨}) ∘ (Lg^*(K ⊗ᴸ K^∨) ≅ Lg^* K ⊗ᴸ Lg^* K^∨)`. -/
+theorem map_coefficientEvaluation_comp_leftDerivedUpperStarUnitIso_hom
+    (φ : L((g)^*[A]).obj K ≅ K) :
+    L((g)^*[A]).map (DerivedCategory.coefficientEvaluation K) ≫
+        (leftDerivedUpperStarUnitIso A g).hom =
+      ((leftDerivedUpperStarTensorIso A g K _).hom ≫ ((derivedTensor A X).map φ.hom).app _ ≫
+        ((derivedTensor A X).obj K).map (contragredientWeilDatum A g φ)) ≫
+        DerivedCategory.coefficientEvaluation K := by
+  let := leftDerivedUpperStarMonoidal A g
+  rw [← leftDerivedUpperStarMonoidal_δ]
+  exact Functor.LaxMonoidal.map_ev_comp_eq_δ_comp_ihomComparison_comp_pre _ φ _
+
+/-- Blueprint `prop-pod-dual-tate-data-compatibility`: Compatibility of the dual and Tate data
+(Step 3).
+
+For a Weil datum `τ : Lg^* T ⟶ T` on an object `T` (for `T = Λ_X(r)`, the Tate datum `τ_r`),
+the twisted evaluation `K ⊗ᴸ (K^∨ ⊗ᴸ T) ⟶ T` (`AlgebraicGeometry.Etale.twistedEvaluation`)
+intertwines the datum `φ_K ⊗ (φ_{K^∨} ⊗ τ)` with `τ`: the twisted dual `K^∨(r) = K^∨ ⊗ᴸ Λ_X(r)`
+with the datum `φ_{K^∨(r)} = φ_{K^∨} ⊗ τ_r` pairs equivariantly with `K` into `Λ_X(r)`. -/
+theorem map_twistedEvaluation_comp (φ : L((g)^*[A]).obj K ≅ K)
+    {T : DerivedCategory (Sheaf X.smallEtaleTopology A)} (τ : L((g)^*[A]).obj T ⟶ T) :
+    L((g)^*[A]).map (twistedEvaluation T K) ≫ τ =
+      ((leftDerivedUpperStarTensorIso A g K _).hom ≫ ((derivedTensor A X).map φ.hom).app _ ≫
+        ((derivedTensor A X).obj K).map ((leftDerivedUpperStarTensorIso A g _ T).hom ≫
+          ((derivedTensor A X).map (contragredientWeilDatum A g φ)).app _ ≫
+            ((derivedTensor A X).obj _).map τ)) ≫ twistedEvaluation T K := by
+  let := leftDerivedUpperStarMonoidal A g
+  have hu := leftDerivedUpperStarTensorComparison_leftUnitor_hom A g T
+  rw [← leftDerivedUpperStarTensorIso_hom, ← leftDerivedUpperStarMonoidal_δ] at hu
+  rw [← leftDerivedUpperStarMonoidal_δ, ← leftDerivedUpperStarMonoidal_δ]
+  exact Functor.OplaxMonoidal.map_twistedPairing_comp _ φ.hom (contragredientWeilDatum A g φ)
+    (leftDerivedUpperStarUnitIso A g).hom τ (DerivedCategory.coefficientEvaluation K)
+    (by
+      rw [map_coefficientEvaluation_comp_leftDerivedUpperStarUnitIso_hom A g φ,
+        leftDerivedUpperStarMonoidal_δ]
+      rfl)
+    hu
 
 /-- Blueprint `def-pod-dual-tate-datum`: Dual and Tate Weil data (the datum on an internal
 hom).
@@ -314,20 +357,6 @@ lemma contragredientWeilDatum_eq_derivedHomWeilDatum (φ : L((g)^*[A]).obj K ≅
       derivedHomWeilDatum A g φ (leftDerivedUpperStarUnitIso A g).hom :=
   rfl
 
-/-- Blueprint `prop-pod-dual-tate-data-compatibility`: Compatibility of the dual and Tate data
-(Step 1).
-
-For a perfect (dualizable) complex `K` with a Weil datum `φ_K : Lg^* K ≅ K`, the contragredient
-datum `φ_{K^∨} : Lg^* K^∨ ⟶ K^∨` on the coefficient dual `K^∨ = RHom(K, Λ_X)` is an
-isomorphism, so `(K^∨, φ_{K^∨})` is again a Weil object. -/
-theorem isIso_contragredientWeilDatum (φ : L((g)^*[A]).obj K ≅ K) (hK : IsDualizable K) :
-    IsIso (contragredientWeilDatum A g φ) := by
-  obtain ⟨_⟩ := hK
-  obtain ⟨_⟩ := DerivedCategory.nonempty_exactPairing_swap K Kᘁ
-  let := leftDerivedUpperStarMonoidal A g
-  exact Functor.LaxMonoidal.isIso_ihomComparison_comp_pre (Y := Kᘁ) _ φ
-    (leftDerivedUpperStarUnitIso A g).hom
-
 /-- Blueprint `prop-pod-dual-tate-data-compatibility`: the contragredient datum of a perfect
 complex as an isomorphism `φ_{K^∨} : Lg^* K^∨ ≅ K^∨`
 (`AlgebraicGeometry.Etale.isIso_contragredientWeilDatum`). -/
@@ -336,54 +365,6 @@ noncomputable def contragredientWeilDatumIso (φ : L((g)^*[A]).obj K ≅ K) (hK 
       (DerivedCategory.coefficientDual A X).obj (op K) :=
   haveI := isIso_contragredientWeilDatum A g φ hK
   asIso (contragredientWeilDatum A g φ)
-
-/-- Blueprint `prop-pod-dual-tate-data-compatibility`: Compatibility of the dual and Tate data
-(Step 2).
-
-The coefficient evaluation `ev_K : K ⊗ᴸ K^∨ ⟶ Λ_X` is a morphism of Weil objects, for the
-tensor datum `φ_K ⊗ φ_{K^∨}` on the source and the canonical datum `Lg^* Λ_X ≅ Λ_X` on the
-target:
-```
-  Lg^*(K ⊗ᴸ K^∨) ──≅──▶ Lg^* K ⊗ᴸ Lg^* K^∨ ──φ_K ⊗ φ_{K^∨}──▶ K ⊗ᴸ K^∨
-        │                                                       │
-   Lg^* ev_K                                                   ev_K
-        ▼                                                       ▼
-     Lg^* Λ_X ─────────────────────────≅───────────────────────▶ Λ_X
-``` -/
-theorem leftDerivedUpperStar_map_coefficientEvaluation_comp (φ : L((g)^*[A]).obj K ≅ K) :
-    L((g)^*[A]).map (DerivedCategory.coefficientEvaluation K) ≫
-        (leftDerivedUpperStarUnitIso A g).hom =
-      ((leftDerivedUpperStarTensorIso A g K _).hom ≫ ((derivedTensor A X).map φ.hom).app _ ≫
-        ((derivedTensor A X).obj K).map (contragredientWeilDatum A g φ)) ≫
-        DerivedCategory.coefficientEvaluation K := by
-  let := leftDerivedUpperStarMonoidal A g
-  rw [← leftDerivedUpperStarMonoidal_δ]
-  exact Functor.LaxMonoidal.map_ev_comp_eq_δ_comp_ihomComparison_comp_pre _ φ _
-
-/-- Blueprint `prop-pod-dual-tate-data-compatibility`: Compatibility of the dual and Tate data
-(Step 3).
-
-For any object `T` (for instance the Tate twist `Λ_X(r)`) with a datum `τ : Lg^* T ⟶ T`, the
-twisted evaluation `K ⊗ᴸ (K^∨ ⊗ᴸ T) ⟶ T`
-(`AlgebraicGeometry.Etale.twistedEvaluation`) is a morphism of Weil objects, for the datum
-`φ_K ⊗ (φ_{K^∨} ⊗ τ)` on the source and `τ` on the target. -/
-theorem leftDerivedUpperStar_map_twistedEvaluation_comp (φ : L((g)^*[A]).obj K ≅ K)
-    {T : DerivedCategory (Sheaf X.smallEtaleTopology A)} (τ : L((g)^*[A]).obj T ⟶ T) :
-    L((g)^*[A]).map (twistedEvaluation T K) ≫ τ =
-      ((leftDerivedUpperStarTensorIso A g K _).hom ≫ ((derivedTensor A X).map φ.hom).app _ ≫
-        ((derivedTensor A X).obj K).map ((leftDerivedUpperStarTensorIso A g _ T).hom ≫
-          ((derivedTensor A X).map (contragredientWeilDatum A g φ)).app _ ≫
-            ((derivedTensor A X).obj _).map τ)) ≫ twistedEvaluation T K := by
-  let := leftDerivedUpperStarMonoidal A g
-  have hu := leftDerivedUpperStarTensorComparison_leftUnitor_hom A g T
-  rw [← leftDerivedUpperStarTensorIso_hom, ← leftDerivedUpperStarMonoidal_δ] at hu
-  rw [← leftDerivedUpperStarMonoidal_δ, ← leftDerivedUpperStarMonoidal_δ]
-  exact Functor.OplaxMonoidal.map_twistedPairing_comp _ φ.hom (contragredientWeilDatum A g φ)
-    (leftDerivedUpperStarUnitIso A g).hom τ (DerivedCategory.coefficientEvaluation K)
-    (by
-      rw [leftDerivedUpperStar_map_coefficientEvaluation_comp A g φ, leftDerivedUpperStarMonoidal_δ]
-      rfl)
-    hu
 
 /-- Blueprint `prop-pod-dual-tate-data-compatibility`: Compatibility of the dual and Tate data
 (Step 4).
@@ -414,7 +395,8 @@ theorem leftDerivedUpperStar_map_verdierDualIsoCoefficientDualTensor_comp {S : S
     ((verdierDualIsoCoefficientDualTensor γ hT).app (op K)) (twistedEvaluation T K)
     (whiskerLeft_verdierDualIsoCoefficientDualTensor_hom_app_comp γ hT K) _ ?_
   rw [leftDerivedUpperStarMonoidal_δ]
-  exact leftDerivedUpperStar_map_twistedEvaluation_comp A g φ τ
+  exact map_twistedEvaluation_comp A g φ τ
+
 end Datum
 
 end Etale

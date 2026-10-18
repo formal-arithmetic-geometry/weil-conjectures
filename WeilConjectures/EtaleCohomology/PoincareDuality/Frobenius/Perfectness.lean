@@ -10,7 +10,6 @@ public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Pairings
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.PointPairing
 public import WeilConjectures.EtaleCohomology.PoincareDuality.InvertibleTwist
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
-public import WeilConjectures.SixFunctors.Etale.Derived.GlobalDuality
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 
 /-!
@@ -154,31 +153,6 @@ theorem isPerfPair_degreewisePoincarePairing_of_isProper [IsProper a]
       (LinearEquiv.refl Λ _).toLinearMap).IsPerfPair :=
   have := γ.isPerfPair_degreewisePoincarePairing hK i j hij ℓ
   inferInstance
-
-/-- Blueprint `sk-rem-feeds` and `rem-feeds`: where the duality results feed.
-
-Global duality (`sk-thm-sf-global-duality`) and the identification of the derived pairing
-(`sk-thm-sf-identification`) are cited directly, and their degreewise consequence over a field
-is `sk-thm-derived-duality` (`thm-pod-degreewise-perfectness-over-a-field`). Here, over a
-separably closed field `k` and a finite field `Λ` whose characteristic is invertible on `X`
-(the condition `ℓ ≠ p`), for `K ∈ D^b_ctf(X, Λ)`:
-
-1. global duality `RΓ_c(X, K)^∨ ≅ RΓ(X, 𝔻_X K)`, written one step earlier as
-   `(Ra_! K)^∨ ≅ Ra_* (𝔻_X K)`;
-2. the derived Poincaré pairing `β_K` is perfect;
-3. the degreewise pairings `H^i_c(X, K) × H^j(X, K^∨(d)) ⟶ Λ`, `i + j = 2d`, are perfect. -/
-theorem globalDuality_and_isPerfectPairing_and_isPerfPair_degreewise (γ : TateOrientation Λ a d)
-    {K : DerivedCategoryModule Λ X} (hK : DerivedCategory.boundedConstructibleFiniteTor Λ X K)
-    (ℓ : (𝟙_ (DerivedCategoryModule Λ (Spec (.of k))) ⟶ 𝟙_ _) ≃ₗ[Λ] Λ) :
-    Nonempty ((DerivedCategory.coefficientDual (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj
-        (op ((R(a)_![ModuleCat.{u + 1} Λ]).obj K)) ≅
-      (R((a)_*[ModuleCat.{u + 1} Λ])).obj ((verdierDual (ModuleCat.{u + 1} Λ) a).obj (op K))) ∧
-    IsPerfectPairing (γ.poincarePairing K) ∧
-    ∀ (i j : ℤ) (hij : i + j = 2 * d),
-      ((γ.degreewisePoincarePairing K i j hij).compr₂ ℓ.toLinearMap).IsPerfPair :=
-  ⟨nonempty_iso_coefficientDual_rightDerivedLowerShriek Λ a K,
-    γ.isPerfectPairing_poincarePairing_of_finite K,
-    fun i j hij ↦ γ.isPerfPair_degreewisePoincarePairing hK i j hij ℓ⟩
 
 end TateOrientation
 

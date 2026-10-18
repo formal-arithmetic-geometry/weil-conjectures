@@ -10,8 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.BaseChangeField
 public import WeilConjectures.WeilSheaf.BaseChangeField.Cohomology
 public import WeilConjectures.WeilSheaf.Cohomology
+public import WeilConjectures.WeilSheaf.CohomologyAdicConstant
 public import WeilConjectures.WeilSheaf.Constant
-public import WeilConjectures.WeilSheaf.ConstantCohomologyVanishing
 public import WeilConjectures.ZetaLinearAlgebra.TraceCup
 
 /-!
@@ -63,15 +63,16 @@ a Frobenius-compatible graded-commutative cup product and a trace on which Frobe
 `i + j = 2 * d`, since `2 * d - (2 * d - i)` is not definitionally `i`. Outside `[0, 2d]` both
 groups vanish and perfectness is automatic.
 
-*Ingredients.* Three inputs from other subsections of the blueprint are not yet available for
-Weil sheaves and are stated here as separate lemmas, with `sorry`:
+*Ingredients.* The theorem is deduced by linear algebra
+(`WeilConjectures.ZetaLinearAlgebra.TraceCup`) from three statements about Weil sheaves:
 `AlgebraicGeometry.WeilSheaf.subsingleton_cohomology_adicConstant` (vanishing outside
-`[0, 2d]`, `sk-lem-finite`), `AlgebraicGeometry.WeilSheaf.exists_traceCup_isPerfect` (trace
-isomorphism and perfectness, `sk-cor-trace`, `sk-thm-derived-duality`, `sk-thm-transport`,
-`sk-thm-frobenius`) and
+`[0, 2d]`, `sk-lem-finite`, proved through the pro-étale cohomological dimension of `ℚ̄_ℓ`),
 `AlgebraicGeometry.WeilSheaf.exists_linearEquiv_cohomology_baseChangeField` (the Frobenius of
-`k₀'` is `F^r`, `sk-def-weil`). Everything else is deduced from these by linear algebra
-(`WeilConjectures.ZetaLinearAlgebra.TraceCup`).
+`k₀'` is `F^r`, proved by transporting Weil structures along the base change) and
+`AlgebraicGeometry.WeilSheaf.exists_traceCup_isPerfect` (trace isomorphism and perfectness at
+the coefficient stage `ℚ̄_ℓ`, `sk-cor-trace`, `sk-thm-derived-duality`, `sk-thm-transport`,
+`sk-thm-frobenius`), which is still `sorry`: it needs the cup product and trace of `ℚ̄_ℓ`-Weil
+cohomology, transported from the finite levels.
 -/
 
 @[expose] public section
@@ -106,7 +107,8 @@ theorem subsingleton_cohomology_adicConstant (d : ℕ)
     [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))] {i : ℤ}
     (hi : i < 0 ∨ 2 * d < i) :
     Subsingleton ((adicConstant k₀ l X).cohomology i).carrier :=
-  subsingleton_cohomology_adicConstant_of_smooth k₀ l X d (hi.imp id fun h ↦ by exact_mod_cast h)
+  subsingleton_cohomology_adicConstant_of_two_mul_lt k₀ l X d
+    (topologicalKrullDim_geometricFiber_le_of_smoothOfRelativeDimension _ d) hi
 
 /-- Blueprint `sk-cor-trace`, `sk-thm-derived-duality` (degreewise, with `K = ℚ̄_ℓ`, via
 `sk-thm-transport`) and `sk-thm-frobenius` (a), at the coefficient stage `ℚ̄_ℓ`: for `X`
@@ -122,10 +124,13 @@ theorem exists_traceCup_isPerfect (d : ℕ) [IsProper (X ↘ Spec (CommRingCat.o
       ((Nat.card k₀ : PadicAlgCl l) ^ d), T.IsPerfect :=
   sorry
 
-/-- Blueprint `sk-def-weil` (Frobenius-operator convention, `def-weil-frobenius-detailed`): for a
-finite extension `k₀'/k₀` of degree `r`, the cohomology of the base change `X ×_{k₀} k₀'` is
-that of `X`, the geometric Frobenius of `k₀'` corresponding to the `r`-th power `F^r` of the
-geometric Frobenius of `k₀`, since `Frob_{q^r} = Frob_q^r`. -/
+/-- Blueprint `def-weil-frobenius-detailed` (the geometric-Frobenius convention
+`Frob_{q^r} = Frob_q^r`), for the Weil structures of `sk-def-sf-weil-complexes` and the Frobenius
+operators of `def-trf-frobenius-operators`: for a finite extension `k₀'/k₀` of degree `r`, the
+cohomology of the base change `X ×_{k₀} k₀'` is that of `X`, the geometric Frobenius of `k₀'`
+corresponding to the `r`-th power `F^r` of the geometric Frobenius of `k₀`. This is item (6) of
+the proof of `thm-weil-poincare-duality`; see
+`AlgebraicGeometry.WeilSheaf.exists_linearEquiv_cohomology_adicConstant_baseChangeField`. -/
 theorem exists_linearEquiv_cohomology_baseChangeField
     [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
@@ -136,7 +141,7 @@ theorem exists_linearEquiv_cohomology_baseChangeField
       ∀ x, e (((adicConstant k₀' l (X.baseChangeField k₀ k₀')).cohomology i).frobenius x) =
         (((adicConstant k₀ l X).cohomology i).frobeniusEnd ^ Module.finrank k₀ k₀') (e x) :=
   haveI := fact_ringChar_ne_of_algebra (l := l) k₀ k₀'
-  exists_linearEquiv_cohomology_adicConstant_baseChangeField i
+  exists_linearEquiv_cohomology_adicConstant_baseChangeField k₀ l X k₀' i
 
 end Ingredients
 

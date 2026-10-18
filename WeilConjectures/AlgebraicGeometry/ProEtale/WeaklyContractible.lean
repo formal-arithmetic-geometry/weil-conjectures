@@ -83,7 +83,7 @@ lemma exists_disjoint_cover_of_comp_sigmaDesc_eq_id {W : T.ProEt} {κ : Type u}
     {V : κ → Scheme.{u}} (v : ∀ j, V j ⟶ W.left) (s : W.left ⟶ ∐ V)
     (hs : s ≫ Sigma.desc v = 𝟙 _) (S : Sieve W)
     (hS : ∀ j {Y : T.ProEt} (a : Y ⟶ W) (b : Y.left ⟶ V j), b ≫ v j = a.left → S a) :
-    ∃ (Y : κ → T.ProEt) (f : ∀ i, Y i ⟶ W),
+    ∃ (ι : Type u) (Y : ι → T.ProEt) (f : ∀ i, Y i ⟶ W),
       Sieve.ofArrows Y f ∈ topology T W ∧ (∀ i, S (f i)) ∧ (∀ i, Mono (f i)) ∧
       ∀ i j, i ≠ j → ∀ (Z : T.ProEt) (a : Z ⟶ Y i) (b : Z ⟶ Y j), a ≫ f i = b ≫ f j →
         ⊥ ∈ topology T Z := by
@@ -92,7 +92,7 @@ lemma exists_disjoint_cover_of_comp_sigmaDesc_eq_id {W : T.ProEt} {κ : Type u}
     rw [Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp, Opens.range_ι]
     rintro _ ⟨x, hx, rfl⟩
     exact hx
-  refine ⟨fun j ↦ ofOpenImmersion W (O j).ι, fun j ↦ ofOpenImmersionHom W (O j).ι,
+  refine ⟨κ, fun j ↦ ofOpenImmersion W (O j).ι, fun j ↦ ofOpenImmersionHom W (O j).ι,
     ?_, fun j ↦ hS j _ (IsOpenImmersion.lift (Sigma.ι V j) ((O j).ι ≫ s) (hO j)) ?_,
     fun j ↦ ?_, ?_⟩
   · refine mem_topology_of_openImmersion _ (fun j ↦ (O j).ι) (fun x ↦ ?_)
@@ -118,9 +118,8 @@ lemma exists_disjoint_cover_of_comp_sigmaDesc_eq_id {W : T.ProEt} {κ : Type u}
       exact (disjoint_opensRange_sigmaι V i j hij).le_bot ⟨hi, hj⟩
     exact bot_mem_topology Z
 
-/-- **Stacks 0990.** Let `W` be an object of the small pro-étale site whose underlying scheme
-is the spectrum of a w-contractible ring. Every covering sieve of `W` contains a finite covering
-family of pairwise disjoint monomorphisms.
+/-- **Stacks 0990.** An object of the small pro-étale site whose underlying scheme is the
+spectrum of a w-contractible ring is weakly contractible.
 
 Every covering sieve `S` of `W ≅ Spec R` contains a quasi-compact weakly étale cover, which
 is refined by finitely many affine schemes `V j`. Then `∐ V j ⟶ Spec R` is weakly étale and
@@ -128,12 +127,9 @@ surjective between affine schemes, so it has a section (`R` being w-contractible
 preimages of the `V j` under this section form a finite disjoint open cover of `W` whose
 members lie in `S`. -/
 @[stacks 0990]
-theorem exists_finite_disjoint_cover_of_iso {W : T.ProEt} {R : CommRingCat.{u}}
-    [IsWContractibleRing R] (e : W.left ≅ Spec R) {S : Sieve W} (hS : S ∈ topology T W) :
-    ∃ (ι : Type u) (_ : Finite ι) (Y : ι → T.ProEt) (f : ∀ i, Y i ⟶ W),
-      Sieve.ofArrows Y f ∈ topology T W ∧ (∀ i, S (f i)) ∧ (∀ i, Mono (f i)) ∧
-      ∀ i j, i ≠ j → ∀ (Z : T.ProEt) (a : Z ⟶ Y i) (b : Z ⟶ Y j), a ≫ f i = b ≫ f j →
-        ⊥ ∈ topology T Z := by
+theorem isWeaklyContractible_of_iso {W : T.ProEt} {R : CommRingCat.{u}} [IsWContractibleRing R]
+    (e : W.left ≅ Spec R) : (topology T).IsWeaklyContractible.{w} W := by
+  refine GrothendieckTopology.isWeaklyContractible_of_forall_mem.{w, u} fun S hS ↦ ?_
   obtain ⟨P, hP, hPS⟩ := mem_topology_iff.1 hS
   obtain ⟨𝒰, _, h𝒰⟩ := (mem_propQCPrecoverage_iff_exists_quasiCompactCover
     (P := @WeaklyEtale)).1 (mem_precoverage_iff.1 hP)
@@ -155,7 +151,7 @@ theorem exists_finite_disjoint_cover_of_iso {W : T.ProEt} {R : CommRingCat.{u}}
     rw [hk]
     exact 𝒱.covers x
   obtain ⟨s, hs⟩ := exists_comp_eq_id_of_isWContractibleRing (Sigma.desc v ≫ e.hom)
-  refine ⟨_, inferInstance, exists_disjoint_cover_of_comp_sigmaDesc_eq_id v (e.hom ≫ s) ?_ S ?_⟩
+  refine exists_disjoint_cover_of_comp_sigmaDesc_eq_id v (e.hom ≫ s) ?_ S ?_
   · rw [← cancel_mono e.hom, Category.assoc, Category.assoc, hs]
     simp
   · intro j Y b c hbc
@@ -171,16 +167,6 @@ theorem exists_finite_disjoint_cover_of_iso {W : T.ProEt} {R : CommRingCat.{u}}
       MorphismProperty.Over.Hom.ext hd.symm
     rw [hb]
     exact S.downward_closed (hPS _ _ (ha _)) _
-
-/-- **Stacks 0990.** An object of the small pro-étale site whose underlying scheme is the
-spectrum of a w-contractible ring is weakly contractible: every covering sieve contains a finite
-covering family of pairwise disjoint monomorphisms (`exists_finite_disjoint_cover_of_iso`). -/
-@[stacks 0990]
-theorem isWeaklyContractible_of_iso {W : T.ProEt} {R : CommRingCat.{u}} [IsWContractibleRing R]
-    (e : W.left ≅ Spec R) : (topology T).IsWeaklyContractible.{w} W :=
-  GrothendieckTopology.isWeaklyContractible_of_forall_mem.{w, u} fun _ hS ↦
-    have ⟨ι, _, Y, f, h⟩ := exists_finite_disjoint_cover_of_iso e hS
-    ⟨ι, Y, f, h⟩
 
 /-- **Stacks 0990.** The small pro-étale site has enough affine weakly contractible objects:
 every object `V` is covered by objects `W i` whose underlying schemes are spectra of

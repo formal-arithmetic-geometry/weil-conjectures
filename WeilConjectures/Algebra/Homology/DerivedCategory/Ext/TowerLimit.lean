@@ -6,6 +6,8 @@ Authors: Claude
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExactSequences
+public import Mathlib.CategoryTheory.Abelian.Refinements
+public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 public import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit
 
 /-!
@@ -129,4 +131,72 @@ theorem subsingleton_of_isLimit_tower [HasDerivedCategory C] [HasKInjectiveResol
   obtain ⟨z, rfl⟩ := hg m (by lia) x₃
   rw [comp_assoc_of_second_deg_zero, hS.comp_extClass, comp_zero]
 
+
+/-- If `S` is a short exact sequence and `Ext X S.X₁ (n + 1) = 0`, then
+`Ext X S.X₂ n ⟶ Ext X S.X₃ n` is surjective. -/
+lemma surjective_comp_mk₀_of_shortExact {S : ShortComplex C} (hS : S.ShortExact) (X : C) (n : ℕ)
+    (h : Subsingleton (Ext X S.X₁ (n + 1))) :
+    Function.Surjective fun x : Ext X S.X₂ n ↦ x.comp (mk₀ S.g) (add_zero n) := fun x₃ ↦
+  covariant_sequence_exact₃ X hS x₃ rfl (Subsingleton.elim _ _)
+
 end CategoryTheory.Abelian.Ext
+
+namespace CategoryTheory
+
+open Abelian
+
+variable {C : Type u} [Category.{v} C] [Abelian C]
+
+/-- In an abelian category in which sequential limits of epimorphisms project epimorphically
+onto the first term (e.g. a replete topos), the map `1 - t : ∏ Fₙ ⟶ ∏ Fₙ` is an epimorphism for
+every tower `F` of epimorphisms, where `t` has components `∏ Fₙ ⟶ Fₙ₊₁ ⟶ Fₙ`. Given
+`y : A ⟶ ∏ Fₙ`, solutions `xₙ - xₙ₊₁ = yₙ` are constructed step by step after passing to
+epimorphic refinements `Aₙ₊₁ ⟶ Aₙ`, and over the limit `lim Aₙ`, which maps epimorphically
+onto `A`, they assemble. -/
+lemma epi_one_sub_of_epiπAppZeroOfEpi [HasLimitsOfShape ℕᵒᵖ C] (h : EpiπAppZeroOfEpi C)
+    {F : ℕᵒᵖ ⥤ C} (hF : ∀ n : ℕ, Epi (F.map (homOfLE n.le_succ).op))
+    {P : Fan fun n : ℕ ↦ F.obj (op n)} (hP : IsLimit P) (t : P.pt ⟶ P.pt)
+    (ht : ∀ n : ℕ, t ≫ P.proj n = P.proj (n + 1) ≫ F.map (homOfLE n.le_succ).op) :
+    Epi (𝟙 P.pt - t) := by
+  rw [epi_iff_surjective_up_to_refinements]
+  intro A y
+  have hlift (n : ℕ) (B : C) (z : B ⟶ F.obj (op n)) :=
+    surjective_up_to_refinements_of_epi (F.map (homOfLE n.le_succ).op) z
+  choose B' π hπ x hx using hlift
+  let seq (n : ℕ) : Σ B : C, (B ⟶ A) × (B ⟶ F.obj (op n)) :=
+    Nat.rec ⟨A, 𝟙 A, 0⟩ (fun n p ↦ ⟨B' n p.1 (p.2.2 - p.2.1 ≫ y ≫ P.proj n),
+      π n p.1 _ ≫ p.2.1, x n p.1 _⟩) n
+  let G : ℕᵒᵖ ⥤ C := Functor.ofOpSequence (X := fun n ↦ (seq n).1)
+    fun n ↦ π n (seq n).1 ((seq n).2.2 - (seq n).2.1 ≫ y ≫ P.proj n)
+  have hG (n : ℕ) : limit.π G (op (n + 1)) ≫
+      π n (seq n).1 ((seq n).2.2 - (seq n).2.1 ≫ y ≫ P.proj n) = limit.π G (op n) := by
+    rw [← limit.w G (homOfLE n.le_succ).op, Functor.ofOpSequence_map_homOfLE_succ]
+  have hG₀ (n : ℕ) : limit.π G (op n) ≫ (seq n).2.1 = limit.π G (op 0) ≫ (seq 0).2.1 := by
+    induction n with
+    | zero => rfl
+    | succ n ih =>
+      rw [← ih, ← hG n, Category.assoc]
+  have hepi : Epi (limit.π G (op 0)) := h (limit.isLimit G) fun n ↦ by
+    rw [Functor.ofOpSequence_map_homOfLE_succ]
+    exact hπ _ _ _
+  have : Epi (seq 0).2.1 := inferInstanceAs (Epi (𝟙 A))
+  refine ⟨limit G, limit.π G (op 0) ≫ (seq 0).2.1, epi_comp _ _,
+    Fan.IsLimit.lift hP fun n ↦ limit.π G (op n) ≫ (seq n).2.2, ?_⟩
+  refine Fan.IsLimit.hom_ext hP _ _ fun n ↦ ?_
+  have hx' : π n (seq n).1 ((seq n).2.2 - (seq n).2.1 ≫ y ≫ P.proj n) ≫
+      ((seq n).2.2 - (seq n).2.1 ≫ y ≫ P.proj n) =
+      (seq (n + 1)).2.2 ≫ F.map (homOfLE n.le_succ).op :=
+    hx _ _ _
+  have e₁ : Fan.IsLimit.lift hP (fun n ↦ limit.π G (op n) ≫ (seq n).2.2) ≫ P.proj n =
+      limit.π G (op n) ≫ (seq n).2.2 := Fan.IsLimit.fac _ _ _
+  have e₂ : (Fan.IsLimit.lift hP (fun n ↦ limit.π G (op n) ≫ (seq n).2.2) ≫ t) ≫ P.proj n =
+      limit.π G (op n) ≫ (seq n).2.2 - limit.π G (op n) ≫ (seq n).2.1 ≫ y ≫ P.proj n := by
+    rw [Category.assoc, ht, ← Category.assoc, Fan.IsLimit.fac, Category.assoc, ← hx',
+      ← Category.assoc, hG n, Preadditive.comp_sub]
+  have e₃ : limit.π G (op n) ≫ (seq n).2.1 ≫ y ≫ P.proj n =
+      ((limit.π G (op 0) ≫ (seq 0).2.1) ≫ y) ≫ P.proj n := by
+    rw [← Category.assoc, hG₀, Category.assoc, Category.assoc, Category.assoc]
+  conv_rhs => rw [Preadditive.comp_sub, Preadditive.sub_comp, Category.comp_id, e₁, e₂, e₃,
+    sub_sub_cancel]
+
+end CategoryTheory

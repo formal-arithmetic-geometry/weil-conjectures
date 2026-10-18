@@ -5,133 +5,243 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.WeilSheaf.BaseChangeField.Comparison
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetCoherence
+public import WeilConjectures.WeilSheaf.BaseChangeField.Transport
 public import WeilConjectures.WeilSheaf.Stalk
 
 /-!
-# The Frobenius of global sections under transport and iteration
+# The Frobenius on global sections of transported Weil sheaves
 
-For a pro-étale sheaf `G` on a scheme `Z` with a morphism `φ : g_* G ⟶ G` along an
-endomorphism `g` of `Z`, the global sections `Γ(Z, G)` carry the endomorphism
+The global sections `Γ(Ȳ, K)` of a pro-étale Weil sheaf `(K, φ)` carry the Frobenius
+`Γ(Ȳ, K) ≅ Γ(Ȳ, Fr^* K) --Γ(φ)--> Γ(Ȳ, K)`
+(`AlgebraicGeometry.ProEtaleWeilSheaf.globalSectionsFrobenius`), as for Weil sheaves
+(`AlgebraicGeometry.WeilSheaf.globalSections`). This file shows:
 
-`Γ(Z, G) ≅ Γ(Z, g_* G) --Γ(φ)--> Γ(Z, G)`
-
-(`AlgebraicGeometry.ProEtale.globalSectionsStr`); for `g = Fr⁻¹` and `φ` a Weil structure this
-is the Frobenius of the global sections of a Weil sheaf
-(`AlgebraicGeometry.WeilSheaf.globalSections`). This file shows that it is natural
-(`AlgebraicGeometry.ProEtale.globalSectionsStr_naturality`), multiplicative under composition of
-the endomorphisms (`AlgebraicGeometry.ProEtale.globalSectionsStr_comp`), trivial for the identity
-(`AlgebraicGeometry.ProEtale.globalSectionsStr_id`), and invariant under transport along a
-morphism `θ` (`AlgebraicGeometry.ProEtale.globalSectionsStr_transport`). Consequently the
-endomorphism of the iterated Weil structure `φ_m` is the `m`-th power of that of `φ`
-(`AlgebraicGeometry.ProEtaleWeilSheaf.globalSectionsStr_frobeniusPowIso`).
+- the Frobenius is natural in `K`
+  (`AlgebraicGeometry.ProEtaleWeilSheaf.globalSectionsFrobenius_naturality`);
+- the Frobenius through the iterated Weil structure `φ_m : (Frᵐ)^* K ≅ K` is the `m`-th power of
+  the Frobenius (`AlgebraicGeometry.ProEtaleWeilSheaf.globalSectionsFrobeniusPow_succ`);
+- along an identification `θ : Ȳ ≅ Ȳ'` of geometric fibres with `θ ≫ Fr' = Frʳ ≫ θ`, the
+  Frobenius of the transported Weil sheaf `(θ_* K, θ_* φ_r)` is the `r`-th power of that of `K`
+  under `Γ(Ȳ', θ_* K) ≅ Γ(Ȳ, K)`
+  (`AlgebraicGeometry.ProEtaleWeilSheaf.globalSectionsFrobenius_transport`);
+- hence a Weil sheaf on a `k₀'`-scheme isomorphic to the transport of a Weil sheaf `H` on a
+  `k₀`-scheme has the global sections of `H`, with Frobenius `Fʳ`
+  (`AlgebraicGeometry.WeilSheaf.exists_linearEquiv_globalSections_of_iso_transport`).
 -/
 
 @[expose] public section
 
 universe u
 
-open CategoryTheory Limits Endofunctor
+open CategoryTheory Limits
 
 noncomputable section
 
-namespace AlgebraicGeometry.ProEtale
+namespace AlgebraicGeometry
 
-variable {l : ℕ} [Fact l.Prime]
+namespace ProEtale
 
+variable {A : Type*} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  {R S T : Scheme.{u}}
 
-/-- The endomorphism `Γ(Z, G) ≅ Γ(Z, g_* G) --Γ(φ)--> Γ(Z, G)` of the global sections of a
-pro-étale sheaf `G` with a morphism `φ : g_* G ⟶ G`. -/
-def globalSectionsStr {Z : Scheme.{u}} (g : Z ⟶ Z) {G : Sheaf (Scheme.ProEt.topology Z)
-    (WeilCoefficients.{u} l)} (φ : (g)_*[WeilCoefficients.{u} l].obj G ⟶ G) :
-    (Sheaf.Γ (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l)).obj G ⟶
-      (Sheaf.Γ (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l)).obj G :=
-  (globalSectionsLowerStarIso _ g).inv.app G ≫
-    (Sheaf.Γ (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l)).map φ
+/-- The invariance of global sections under pushforward along equal morphisms, inverted. -/
+@[reassoc]
+lemma globalSectionsLowerStarIso_inv_app_comp_congr {g g' : S ⟶ R} (h : g = g')
+    (G : Sheaf (Scheme.ProEt.topology S) A) :
+    (globalSectionsLowerStarIso A g).inv.app G ≫
+        (Sheaf.Γ _ A).map ((lowerStarCongr A h).hom.app G) =
+      (globalSectionsLowerStarIso A g').inv.app G := by
+  subst h
+  simp
 
-variable {Z : Scheme.{u}}
+/-- The invariance of global sections under pushforward is compatible with composition,
+inverted. -/
+@[reassoc]
+lemma globalSectionsLowerStarIso_inv_app_comp_lowerStarComp_inv (h₁ : T ⟶ S) (h₂ : S ⟶ R)
+    (G : Sheaf (Scheme.ProEt.topology T) A) :
+    (globalSectionsLowerStarIso A (h₁ ≫ h₂)).inv.app G ≫
+        (Sheaf.Γ _ A).map ((lowerStarComp A h₁ h₂).inv.app G) =
+      (globalSectionsLowerStarIso A h₁).inv.app G ≫
+        (globalSectionsLowerStarIso A h₂).inv.app ((h₁)_*[A].obj G) := by
+  have h : (Sheaf.Γ _ A).mapIso ((lowerStarComp A h₁ h₂).app G) ≪≫
+      (globalSectionsLowerStarIso A (h₁ ≫ h₂)).app G =
+      (globalSectionsLowerStarIso A h₂).app ((h₁)_*[A].obj G) ≪≫
+        (globalSectionsLowerStarIso A h₁).app G :=
+    Iso.ext (globalSectionsLowerStarIso_comp A h₁ h₂ G)
+  exact congrArg Iso.inv h
 
-/-- The endomorphism of the global sections is natural. -/
-lemma globalSectionsStr_naturality (g : Z ⟶ Z) {G G' : Sheaf (Scheme.ProEt.topology Z)
-    (WeilCoefficients.{u} l)} {φ : (g)_*[WeilCoefficients.{u} l].obj G ⟶ G}
-    {φ' : (g)_*[WeilCoefficients.{u} l].obj G' ⟶ G'} (f : G ⟶ G')
-    (hf : (g)_*[WeilCoefficients.{u} l].map f ≫ φ' = φ ≫ f) :
-    (Sheaf.Γ (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l)).map f ≫ globalSectionsStr g φ' =
-      globalSectionsStr g φ ≫
-        (Sheaf.Γ (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l)).map f := by
-  have n := (globalSectionsLowerStarIso (WeilCoefficients.{u} l) g).inv.naturality f
-  simp only [Functor.comp_map] at n
-  rw [globalSectionsStr, globalSectionsStr, reassoc_of% n, Category.assoc, ← Functor.map_comp,
-    ← Functor.map_comp, hf]
+/-- The invariance of global sections under pushforward is compatible with composition,
+inverted, with the composition isomorphism on the other side. -/
+@[reassoc]
+lemma globalSectionsLowerStarIso_inv_app_comp_lowerStarComp_hom (h₁ : T ⟶ S) (h₂ : S ⟶ R)
+    (G : Sheaf (Scheme.ProEt.topology T) A) :
+    (globalSectionsLowerStarIso A h₁).inv.app G ≫
+        (globalSectionsLowerStarIso A h₂).inv.app ((h₁)_*[A].obj G) ≫
+        (Sheaf.Γ _ A).map ((lowerStarComp A h₁ h₂).hom.app G) =
+      (globalSectionsLowerStarIso A (h₁ ≫ h₂)).inv.app G := by
+  rw [← globalSectionsLowerStarIso_inv_app_comp_lowerStarComp_inv_assoc]
+  exact (congrArg (_ ≫ ·) ((Sheaf.Γ _ A).mapIso ((lowerStarComp A h₁ h₂).app G)).inv_hom_id).trans
+    (Category.comp_id _)
 
-/-- The endomorphism of the global sections for `g₃ = g₂ ≫ g₁` and the composite
-`g₃_* G ≅ g₁_* g₂_* G --g₁_* φ₂--> g₁_* G --φ₁--> G` is the composite of those for `φ₂` and
-`φ₁`. -/
-lemma globalSectionsStr_comp (g₁ g₂ g₃ : Z ⟶ Z) (h : g₃ = g₂ ≫ g₁)
-    {G : Sheaf (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l)}
-    (φ₁ : (g₁)_*[WeilCoefficients.{u} l].obj G ⟶ G)
-    (φ₂ : (g₂)_*[WeilCoefficients.{u} l].obj G ⟶ G) :
-    globalSectionsStr g₃ ((lowerStarCongr _ h).hom.app G ≫ (lowerStarComp _ g₂ g₁).inv.app G ≫
-        (g₁)_*[WeilCoefficients.{u} l].map φ₂ ≫ φ₁) =
-      globalSectionsStr g₂ φ₂ ≫ globalSectionsStr g₁ φ₁ := by
-  have e₁ := globalSectionsLowerStarIso_comp (WeilCoefficients.{u} l) g₂ g₁ G
-  have e₂ := globalSectionsLowerStarIso_congr (WeilCoefficients.{u} l) h G
-  have n := (globalSectionsLowerStarIso (WeilCoefficients.{u} l) g₁).inv.naturality φ₂
-  simp only [Functor.comp_map] at n
-  have e₁' : (globalSectionsLowerStarIso (WeilCoefficients.{u} l) (g₂ ≫ g₁)).hom.app G =
-      (Sheaf.Γ _ _).map ((lowerStarComp _ g₂ g₁).inv.app G) ≫
-        (globalSectionsLowerStarIso (WeilCoefficients.{u} l) g₁).hom.app ((g₂)_*[_].obj G) ≫
-          (globalSectionsLowerStarIso (WeilCoefficients.{u} l) g₂).hom.app G := by
-    rw [← e₁, ← Functor.map_comp_assoc, Iso.inv_hom_id_app, CategoryTheory.Functor.map_id,
-      Category.id_comp]
-  have key : (globalSectionsLowerStarIso (WeilCoefficients.{u} l) g₃).inv.app G ≫
-      (Sheaf.Γ _ _).map ((lowerStarCongr _ h).hom.app G) ≫
-        (Sheaf.Γ _ _).map ((lowerStarComp _ g₂ g₁).inv.app G) =
-      (globalSectionsLowerStarIso (WeilCoefficients.{u} l) g₂).inv.app G ≫
-        (globalSectionsLowerStarIso (WeilCoefficients.{u} l) g₁).inv.app ((g₂)_*[_].obj G) := by
-    rw [← cancel_epi ((globalSectionsLowerStarIso (WeilCoefficients.{u} l) g₃).hom.app G),
-      Iso.hom_inv_id_app_assoc, ← e₂, e₁']
-    simp only [Category.assoc, Iso.hom_inv_id_app_assoc, Iso.hom_inv_id_app]
-    exact (Category.comp_id _).symm
-  simp only [globalSectionsStr, Functor.map_comp, Category.assoc]
-  rw [reassoc_of% n, reassoc_of% key]
+end ProEtale
 
-/-- The endomorphism of the global sections for `g = 𝟙` and the identification `𝟙_* G ≅ G` is
-the identity. -/
-lemma globalSectionsStr_id (g : Z ⟶ Z) (h : g = 𝟙 Z)
-    (G : Sheaf (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l)) :
-    globalSectionsStr g ((lowerStarCongr _ h).hom.app G ≫ (lowerStarId _ Z).hom.app G) = 𝟙 _ := by
-  have e₁ := globalSectionsLowerStarIso_congr (WeilCoefficients.{u} l) h G
-  rw [globalSectionsLowerStarIso_id] at e₁
-  rw [globalSectionsStr, Functor.map_comp, e₁, Iso.inv_hom_id_app]
+namespace ProEtaleWeilSheaf
 
-/-- The endomorphism of the global sections is invariant under transport along a morphism `θ`
-with `θ ≫ F' = F ≫ θ`: the global sections of `θ_* G`, with
-`F'_* θ_* G ≅ θ_* F_* G --θ_* φ--> θ_* G`, are those of `G`, with `φ`. -/
-lemma globalSectionsStr_transport {Z' : Scheme.{u}} (θ : Z ⟶ Z') (F : Z ⟶ Z) (F' : Z' ⟶ Z')
-    (h : θ ≫ F' = F ≫ θ) {G : Sheaf (Scheme.ProEt.topology Z) (WeilCoefficients.{u} l)}
-    (φ : (F)_*[WeilCoefficients.{u} l].obj G ⟶ G) :
-    globalSectionsStr F' ((lowerStarComp _ θ F').hom.app G ≫ (lowerStarCongr _ h).hom.app G ≫
-        (lowerStarComp _ F θ).inv.app G ≫ (θ)_*[WeilCoefficients.{u} l].map φ) ≫
-        (globalSectionsLowerStarIso _ θ).hom.app G =
-      (globalSectionsLowerStarIso _ θ).hom.app G ≫ globalSectionsStr F φ := by
-  have e₁ := globalSectionsLowerStarIso_comp (WeilCoefficients.{u} l) θ F' G
-  have e₂ := globalSectionsLowerStarIso_congr (WeilCoefficients.{u} l) h G
-  have e₃ := globalSectionsLowerStarIso_comp (WeilCoefficients.{u} l) F θ G
-  have n := (globalSectionsLowerStarIso (WeilCoefficients.{u} l) θ).hom.naturality φ
-  simp only [Functor.comp_map] at n
-  simp only [globalSectionsStr, Functor.map_comp, Category.assoc]
-  rw [n]
-  rw [← cancel_epi ((globalSectionsLowerStarIso (WeilCoefficients.{u} l) F').hom.app _),
+open ProEtale
+
+variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
+  {Y : Scheme.{u}} [Y.Over (Spec (CommRingCat.of k₀))]
+
+/-- The Frobenius `Γ(Ȳ, K) ≅ Γ(Ȳ, Fr^* K) --Γ(φ)--> Γ(Ȳ, K)` on the global sections of a
+pro-étale Weil sheaf `(K, φ)`; for Weil sheaves this is the Frobenius of
+`AlgebraicGeometry.WeilSheaf.globalSections`. -/
+def globalSectionsFrobenius (K : ProEtaleWeilSheaf k₀ l Y) :
+    (Sheaf.Γ _ (WeilCoefficients.{u} l)).obj K.carrier.X ⟶
+      (Sheaf.Γ _ (WeilCoefficients.{u} l)).obj K.carrier.X :=
+  (globalSectionsLowerStarIso _
+      (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).inv.app K.carrier.X ≫
+    (Sheaf.Γ _ _).map ((AdicSheaf.forget _).map K.str.hom)
+
+/-- The Frobenius on global sections is natural. -/
+@[reassoc]
+lemma globalSectionsFrobenius_naturality {K K' : ProEtaleWeilSheaf k₀ l Y} (f : K ⟶ K') :
+    K.globalSectionsFrobenius ≫ (Sheaf.Γ _ _).map ((AdicSheaf.forget _).map f.hom.f) =
+      (Sheaf.Γ _ _).map ((AdicSheaf.forget _).map f.hom.f) ≫ K'.globalSectionsFrobenius := by
+  rw [globalSectionsFrobenius, globalSectionsFrobenius, Category.assoc, ← Functor.map_comp,
+    ← Functor.map_comp, Endofunctor.IsoAlgebra.str_hom, Endofunctor.IsoAlgebra.str_hom,
+    ← f.hom.h, Functor.map_comp, Functor.map_comp]
+  exact ((globalSectionsLowerStarIso (WeilCoefficients.{u} l) _).inv.naturality_assoc _ _).symm
+
+/-- The Frobenius `Γ(Ȳ, K) ≅ Γ(Ȳ, (Frᵐ)^* K) --Γ(φ_m)--> Γ(Ȳ, K)` through the iterated Weil
+structure `φ_m`. -/
+def globalSectionsFrobeniusPow (K : ProEtaleWeilSheaf k₀ l Y) (m : ℕ) :
+    (Sheaf.Γ _ (WeilCoefficients.{u} l)).obj K.carrier.X ⟶
+      (Sheaf.Γ _ (WeilCoefficients.{u} l)).obj K.carrier.X :=
+  (globalSectionsLowerStarIso _
+      ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv).inv.app K.carrier.X ≫
+    (Sheaf.Γ _ _).map ((AdicSheaf.forget _).map (K.frobeniusPowIso m).hom)
+
+lemma globalSectionsFrobeniusPow_zero (K : ProEtaleWeilSheaf k₀ l Y) :
+    K.globalSectionsFrobeniusPow 0 = 𝟙 _ := by
+  have h : ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ 0).inv = 𝟙 _ := by
+    rw [pow_zero]
+    rfl
+  have e : (AdicSheaf.forget _).map (K.frobeniusPowIso 0).hom =
+      (lowerStarCongr _ h).hom.app K.carrier.X ≫
+        (lowerStarId (WeilCoefficients.{u} l) _).hom.app K.carrier.X := by
+    rw [← adicLowerStarCongr_hom_app_hom, ← adicLowerStarId_hom_app_hom]
+    rfl
+  rw [globalSectionsFrobeniusPow, e, Functor.map_comp,
+    globalSectionsLowerStarIso_inv_app_comp_congr_assoc, ← globalSectionsLowerStarIso_id,
+    Iso.inv_hom_id_app]
+
+/-- The Frobenius through `φ_{m+1}` is the Frobenius through `φ_m`, followed by the
+Frobenius. -/
+lemma globalSectionsFrobeniusPow_succ (K : ProEtaleWeilSheaf k₀ l Y) (m : ℕ) :
+    K.globalSectionsFrobeniusPow (m + 1) =
+      K.globalSectionsFrobeniusPow m ≫ K.globalSectionsFrobenius := by
+  have h : ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ (m + 1)).inv =
+      ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv ≫
+        (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv := by
+    rw [pow_succ, Aut.Aut_mul_def, Iso.trans_inv]
+  have e : (AdicSheaf.forget _).map (K.frobeniusPowIso (m + 1)).hom =
+      (lowerStarCongr _ h).hom.app K.carrier.X ≫
+        (lowerStarComp (WeilCoefficients.{u} l) _ _).inv.app K.carrier.X ≫
+        ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[_].map
+          ((AdicSheaf.forget _).map (K.frobeniusPowIso m).hom) ≫
+        (AdicSheaf.forget _).map K.str.hom := by
+    rw [frobeniusPowIso]
+    simp only [Iso.trans_hom, Iso.app_hom, Iso.symm_hom, Functor.mapIso_hom, Mod.forget_map,
+      Mod.comp_hom', adicLowerStarCongr_hom_app_hom, adicLowerStarComp_inv_app_hom,
+      adicLowerStar_map_hom]
+  have h₂ : (globalSectionsLowerStarIso (WeilCoefficients.{u} l)
+        (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).inv.app
+        ((((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ m).inv)_*[_].obj
+          K.carrier.X) ≫
+        (Sheaf.Γ _ _).map (((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv)_*[_].map
+          ((AdicSheaf.forget _).map (K.frobeniusPowIso m).hom)) =
+      (Sheaf.Γ _ _).map ((AdicSheaf.forget _).map (K.frobeniusPowIso m).hom) ≫
+        (globalSectionsLowerStarIso (WeilCoefficients.{u} l)
+          (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).inv.app K.carrier.X :=
+    ((globalSectionsLowerStarIso _ _).inv.naturality _).symm
+  rw [globalSectionsFrobeniusPow, globalSectionsFrobeniusPow, globalSectionsFrobenius, e]
+  simp only [CategoryTheory.Functor.map_comp, Category.assoc]
+  rw [globalSectionsLowerStarIso_inv_app_comp_congr_assoc,
+    globalSectionsLowerStarIso_inv_app_comp_lowerStarComp_inv_assoc, reassoc_of% h₂]
+
+/-- The Frobenius through `φ_m` is the `m`-th iterate of the Frobenius, pointwise. -/
+lemma globalSectionsFrobeniusPow_apply (K : ProEtaleWeilSheaf k₀ l Y) (m : ℕ)
+    (x : (WeilCoefficients.toModuleCat l).obj
+      ((Sheaf.Γ _ (WeilCoefficients.{u} l)).obj K.carrier.X)) :
+    ((WeilCoefficients.toModuleCat l).map (K.globalSectionsFrobeniusPow m)).hom x =
+      (fun y ↦ ((WeilCoefficients.toModuleCat l).map K.globalSectionsFrobenius).hom y)^[m] x := by
+  induction m with
+  | zero =>
+    rw [globalSectionsFrobeniusPow_zero, CategoryTheory.Functor.map_id]
+    rfl
+  | succ m ih =>
+    rw [globalSectionsFrobeniusPow_succ, Functor.map_comp, Function.iterate_succ_apply', ← ih]
+    rfl
+
+section Transport
+
+variable {k₀' : Type u} [Field k₀'] [Finite k₀']
+  {Y' : Scheme.{u}} [Y'.Over (Spec (CommRingCat.of k₀'))]
+  (θ : (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber ≅
+    (Y' ↘ Spec (CommRingCat.of k₀')).geometricFiber) (r : ℕ)
+  (hθ : θ.hom ≫ (Y' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.hom =
+    ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).hom ≫ θ.hom)
+
+/-- Under the identification `Γ(Ȳ', θ_* K) ≅ Γ(Ȳ, K)`, the Frobenius of the transported Weil
+sheaf `(θ_* K, θ_* φ_r)` is the Frobenius of `K` through `φ_r`. -/
+lemma globalSectionsFrobenius_transport (K : ProEtaleWeilSheaf k₀ l Y) :
+    (globalSectionsLowerStarIso _ θ.hom).inv.app K.carrier.X ≫
+        ((transport θ r hθ).obj K).globalSectionsFrobenius ≫
+        (globalSectionsLowerStarIso _ θ.hom).hom.app K.carrier.X =
+      K.globalSectionsFrobeniusPow r := by
+  have e : (AdicSheaf.forget _).map ((transport θ r hθ).obj K).str.hom =
+      (lowerStarComp (WeilCoefficients.{u} l) θ.hom
+          (Y' ↘ Spec (CommRingCat.of k₀')).geometricGaloisFrobenius.inv).hom.app K.carrier.X ≫
+        (lowerStarCongr _ (hom_comp_geometricGaloisFrobenius_inv θ r hθ)).hom.app K.carrier.X ≫
+        (lowerStarComp (WeilCoefficients.{u} l)
+          ((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).inv
+          θ.hom).inv.app K.carrier.X ≫
+        (θ.hom)_*[_].map ((AdicSheaf.forget _).map (K.frobeniusPowIso r).hom) := by
+    rw [transport_obj_str, transportCommIso]
+    simp only [Iso.trans_hom, Iso.app_hom, Iso.symm_hom, Functor.mapIso_hom, NatTrans.comp_app,
+      Mod.forget_map, Mod.comp_hom', adicLowerStarComp_hom_app_hom, adicLowerStarCongr_hom_app_hom,
+      adicLowerStarComp_inv_app_hom, adicLowerStar_map_hom, Category.assoc]
+  rw [globalSectionsFrobenius, e]
+  simp only [CategoryTheory.Functor.map_comp, Category.assoc]
+  erw [globalSectionsLowerStarIso_inv_app_comp_lowerStarComp_hom_assoc]
+  rw [globalSectionsLowerStarIso_inv_app_comp_congr_assoc,
+    globalSectionsLowerStarIso_inv_app_comp_lowerStarComp_inv_assoc]
+  have h₂ : (globalSectionsLowerStarIso (WeilCoefficients.{u} l) θ.hom).inv.app
+        ((((Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius ^ r).inv)_*[_].obj
+          K.carrier.X) ≫
+        (Sheaf.Γ _ _).map ((θ.hom)_*[_].map ((AdicSheaf.forget _).map (K.frobeniusPowIso r).hom)) =
+      (Sheaf.Γ _ _).map ((AdicSheaf.forget _).map (K.frobeniusPowIso r).hom) ≫
+        (globalSectionsLowerStarIso (WeilCoefficients.{u} l) θ.hom).inv.app K.carrier.X :=
+    ((globalSectionsLowerStarIso _ θ.hom).inv.naturality _).symm
+  rw [reassoc_of% h₂]
+  rw [Iso.inv_hom_id_app]
+  exact congrArg (_ ≫ ·) (Category.comp_id _)
+
+/-- For `α : K' ≅ θ_* K`, the Frobenius of `K'` corresponds under
+`Γ(Ȳ', K') ≅ Γ(Ȳ', θ_* K) ≅ Γ(Ȳ, K)` to the Frobenius of `K` through `φ_r`. -/
+lemma globalSectionsFrobenius_comp_of_iso_transport (K : ProEtaleWeilSheaf k₀ l Y)
+    {K' : ProEtaleWeilSheaf k₀' l Y'} (α : K' ≅ (transport θ r hθ).obj K) :
+    K'.globalSectionsFrobenius ≫ (Sheaf.Γ _ _).map ((AdicSheaf.forget _).map α.hom.hom.f) ≫
+        (globalSectionsLowerStarIso _ θ.hom).hom.app K.carrier.X =
+      (Sheaf.Γ _ _).map ((AdicSheaf.forget _).map α.hom.hom.f) ≫
+        (globalSectionsLowerStarIso _ θ.hom).hom.app K.carrier.X ≫
+        K.globalSectionsFrobeniusPow r := by
+  rw [globalSectionsFrobenius_naturality_assoc, ← globalSectionsFrobenius_transport θ r hθ K,
     Iso.hom_inv_id_app_assoc]
-  have e₃' : (Sheaf.Γ _ _).map ((lowerStarComp _ F θ).inv.app G) ≫
-      (globalSectionsLowerStarIso (WeilCoefficients.{u} l) θ).hom.app ((F)_*[_].obj G) =
-        (globalSectionsLowerStarIso (WeilCoefficients.{u} l) (F ≫ θ)).hom.app G ≫
-          (globalSectionsLowerStarIso (WeilCoefficients.{u} l) F).inv.app G := by
-    rw [← cancel_epi ((Sheaf.Γ _ _).map ((lowerStarComp _ F θ).hom.app G)),
-      ← Functor.map_comp_assoc, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id,
-      Category.id_comp, reassoc_of% e₃, Iso.hom_inv_id_app]
-    exact (Category.comp_id _).symm
-  rw [reassoc_of% e₃', reassoc_of% e₂, reassoc_of% e₁]
 
-end AlgebraicGeometry.ProEtale
+end Transport
+
+end ProEtaleWeilSheaf
+
+end AlgebraicGeometry

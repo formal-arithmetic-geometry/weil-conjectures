@@ -6,7 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.ConstantSheafModule
-public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.UnitIsoBijective
+public import WeilConjectures.CategoryTheory.Monoidal.UnitIsoBijective
 public import WeilConjectures.SixFunctors.Etale.Derived.AlgClosedField
 public import WeilConjectures.SixFunctors.Etale.Derived.GeometricPoint
 public import WeilConjectures.SixFunctors.Etale.Derived.Point

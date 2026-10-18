@@ -8,20 +8,22 @@ module
 public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.TowerLimit
 
 /-!
-# `Ext` into the limit of a tower: the Milnor isomorphism
+# `Ext` into the limit of a tower: the Milnor sequence
 
 Let `C` be an abelian category with K-injective resolutions and exact countable products, and
-`F : ℕᵒᵖ ⥤ C` a tower with limit `c` such that `1 - t` is an epimorphism on `∏ Fₙ` (e.g. a tower
-of epimorphisms in a replete topos). The long exact `Ext`-sequence of the Milnor sequence
-`0 ⟶ lim Fₙ ⟶ ∏ Fₙ ──1 - t──▶ ∏ Fₙ ⟶ 0` gives the Milnor sequence
-`0 ⟶ lim¹ Ext X Fₙ p ⟶ Ext X (lim Fₙ) (p + 1) ⟶ lim Ext X Fₙ (p + 1) ⟶ 0`. In particular, if
-`1 - t` is surjective on `∏ Ext X Fₙ p` (that is, `lim¹ Ext X Fₙ p = 0`, e.g. when the tower
-`Ext X Fₙ p` is Mittag-Leffler), then `Ext X (lim Fₙ) (p + 1) ≅ lim Ext X Fₙ (p + 1)`.
+`F : ℕᵒᵖ ⥤ C` a tower with limit `c` for which the Milnor sequence
+`0 ⟶ lim Fₙ ⟶ ∏ Fₙ ──1 - t──▶ ∏ Fₙ ⟶ 0` is short exact (e.g. a tower of epimorphisms in a replete
+topos). Its long exact `Ext`-sequence gives the Milnor exact sequence
+`0 ⟶ lim¹ Ext X Fₙ (q - 1) ⟶ Ext X (lim Fₙ) q ⟶ lim Ext X Fₙ q ⟶ 0`, in the following form:
 
-## Main statements
+* `CategoryTheory.Abelian.Ext.exists_comp_eq_of_isLimit_tower`: every compatible family of
+  classes in `Ext X Fₙ q` comes from `Ext X (lim Fₙ) q`;
+* `CategoryTheory.Abelian.Ext.eq_zero_of_isLimit_tower`: a class of `Ext X (lim Fₙ) (q + 1)`
+  vanishing in every `Ext X Fₙ (q + 1)` is zero, provided `lim¹ Ext X Fₙ q = 0`, i.e. `1 - t` is
+  surjective on `∏ Ext X Fₙ q` (e.g. when these groups are finite,
+  `AddCommGroup.exists_sub_map_succ_eq_of_finite`).
 
-- `CategoryTheory.Abelian.Ext.bijective_of_isLimit_tower`: the map from `Ext X (lim Fₙ) (p + 1)`
-  to the compatible families of `Ext X Fₙ (p + 1)` is bijective if `lim¹ Ext X Fₙ p = 0`.
+This identifies `Hⁱ(X, ℤ_ℓ)` with `lim Hⁱ(X, ℤ/ℓᵐ)` when the latter groups are finite.
 -/
 
 @[expose] public section
@@ -32,92 +34,110 @@ open CategoryTheory Limits Opposite DerivedCategory
 
 namespace CategoryTheory.Abelian.Ext
 
-variable {C : Type u} [Category.{v} C] [Abelian C] [HasExt.{w} C]
+variable {C : Type u} [Category.{v} C] [Abelian C] [HasExt.{w} C] [HasDerivedCategory C]
+  [HasKInjectiveResolutions C] [HasCountableProducts C] [HasExactLimitsOfShape (Discrete ℕ) C]
+  {F : ℕᵒᵖ ⥤ C}
 
-/-- The compatible families `(yₙ)` of elements of `Ext X Fₙ q` along a tower `F`: the inverse
-limit `lim Ext X Fₙ q`. -/
-def TowerCompatible (X : C) (F : ℕᵒᵖ ⥤ C) (q : ℕ) : Type _ :=
-  {y : ∀ n : ℕ, Ext X (F.obj (op n)) q //
-    ∀ n : ℕ, (y (n + 1)).comp (mk₀ (F.map (homOfLE n.le_succ).op)) (add_zero q) = y n}
+/-- The Milnor short complex `lim Fₙ ⟶ ∏ Fₙ ──1 - t──▶ ∏ Fₙ`. -/
+private noncomputable def milnorShortComplex (c : Cone F) : ShortComplex C :=
+  ShortComplex.mk _ _ (Fan.IsLimit.lift_π_comp_one_sub_eq_zero (productIsProduct _)
+    (Pi.lift fun n ↦ Pi.π (fun n : ℕ ↦ F.obj (op n)) (n + 1) ≫ F.map (homOfLE n.le_succ).op)
+    (fun n ↦ by simp) c)
 
-/-- The map `Ext X (lim Fₙ) q ⟶ lim Ext X Fₙ q`. -/
-def toTowerCompatible (X : C) {F : ℕᵒᵖ ⥤ C} (c : Cone F) (q : ℕ) (x : Ext X c.pt q) :
-    TowerCompatible X F q :=
-  ⟨fun n ↦ x.comp (mk₀ (c.π.app (op n))) (add_zero q), fun n ↦ by
-    rw [comp_assoc_of_third_deg_zero, mk₀_comp_mk₀, c.w]⟩
-
-/-- **The Milnor isomorphism for `Ext`.** Let `F : ℕᵒᵖ ⥤ C` be a tower with limit `c` such that
-`1 - t` is an epimorphism on products of the tower, where `t` has components
-`∏ Fₙ ⟶ Fₙ₊₁ ⟶ Fₙ`, and assume countable products are exact. If `1 - t` is surjective on
-`∏ Ext X Fₙ p` (i.e. `lim¹ Ext X Fₙ p = 0`), then `Ext X (lim Fₙ) (p + 1) ⟶ lim Ext X Fₙ (p + 1)`
-is bijective. -/
-theorem bijective_toTowerCompatible [HasDerivedCategory C] [HasKInjectiveResolutions C]
-    [HasCountableProducts C] [HasExactLimitsOfShape (Discrete ℕ) C] (X : C) {F : ℕᵒᵖ ⥤ C}
+omit [HasExt C] [HasDerivedCategory C] [HasKInjectiveResolutions C]
+  [HasExactLimitsOfShape (Discrete ℕ) C] in
+private lemma milnorShortComplex_shortExact
     (hF : ∀ ⦃P : Fan fun n : ℕ ↦ F.obj (op n)⦄ (_ : IsLimit P) (t : P.pt ⟶ P.pt),
       (∀ n : ℕ, t ≫ P.proj n = P.proj (n + 1) ≫ F.map (homOfLE n.le_succ).op) →
         Epi (𝟙 P.pt - t))
-    {c : Cone F} (hc : IsLimit c) (p : ℕ)
-    (hML : ∀ y : ∀ n : ℕ, Ext X (F.obj (op n)) p, ∃ x : ∀ n : ℕ, Ext X (F.obj (op n)) p,
-      ∀ n : ℕ, x n - (x (n + 1)).comp (mk₀ (F.map (homOfLE n.le_succ).op)) (add_zero p) =
-        y n) :
-    Function.Bijective (toTowerCompatible X c (p + 1)) := by
-  let P : Fan fun n : ℕ ↦ F.obj (op n) := Fan.mk _ (Pi.π _)
-  let hP : IsLimit P := productIsProduct _
-  let t : P.pt ⟶ P.pt := Pi.lift fun n ↦ Pi.π _ (n + 1) ≫ F.map (homOfLE n.le_succ).op
-  have ht (n : ℕ) : t ≫ P.proj n = P.proj (n + 1) ≫ F.map (homOfLE n.le_succ).op := by
-    simp [t, P]
-  let S : ShortComplex C :=
-    ShortComplex.mk _ _ (Fan.IsLimit.lift_π_comp_one_sub_eq_zero hP t ht c)
-  have hK := Fan.IsLimit.isLimitKernelForkOneSub hP t ht hc
-  have hS : S.ShortExact :=
-    { exact := S.exact_of_f_is_kernel hK
-      mono_f := Fork.IsLimit.mono hK
-      epi_g := hF hP t ht }
-  have hf (n : ℕ) : S.f ≫ P.proj n = c.π.app (op n) :=
-    Fan.IsLimit.fac hP (fun n ↦ c.π.app (op n)) n
-  have hφ (m : ℕ) := bijective_comp_mk₀_proj X hP m
-  have hneg {A B : C} (f : A ⟶ B) : mk₀ (-f) = -mk₀ f :=
-    eq_neg_of_add_eq_zero_left (by rw [← mk₀_add, neg_add_cancel, mk₀_zero])
-  -- the components of `W ∘ (1 - t)`
-  have hg {m : ℕ} (W : Ext X P.pt m) (n : ℕ) :
-      (W.comp (mk₀ S.g) (add_zero m)).comp (mk₀ (P.proj n)) (add_zero m) =
-        W.comp (mk₀ (P.proj n)) (add_zero m) -
-          (W.comp (mk₀ (P.proj (n + 1))) (add_zero m)).comp
-            (mk₀ (F.map (homOfLE n.le_succ).op)) (add_zero m) := by
-    have e : S.g ≫ P.proj n = P.proj n + -(P.proj (n + 1) ≫ F.map (homOfLE n.le_succ).op) := by
-      simp [S, ht, sub_eq_add_neg]
-    rw [comp_assoc_of_third_deg_zero, mk₀_comp_mk₀, e, mk₀_add, hneg, ← mk₀_comp_mk₀, comp_add,
-      comp_neg, ← comp_assoc_of_third_deg_zero, sub_eq_add_neg]
-  have hfx {m : ℕ} (x : Ext X c.pt m) (n : ℕ) :
-      (x.comp (mk₀ S.f) (add_zero m)).comp (mk₀ (P.proj n)) (add_zero m) =
-        x.comp (mk₀ (c.π.app (op n))) (add_zero m) := by
-    rw [comp_assoc_of_third_deg_zero, mk₀_comp_mk₀, hf]
-  refine ⟨fun x x' hxx' ↦ ?_, fun y ↦ ?_⟩
-  · -- injectivity: the kernel is the image of `lim¹`, which vanishes
-    have hd (n : ℕ) : (x - x').comp (mk₀ (c.π.app (op n))) (add_zero _) = 0 := by
-      rw [sub_comp, sub_eq_zero]
-      exact congrFun (congrArg Subtype.val hxx') n
-    have hdf : (x - x').comp (mk₀ S.f) (add_zero _) = 0 :=
-      (hφ (p + 1)).1 (funext fun n ↦ by
-        rw [Pi.zero_apply, zero_comp]
-        exact (hfx _ n).trans (hd n))
-    obtain ⟨z, hz⟩ := covariant_sequence_exact₁ X hS _ hdf rfl
-    obtain ⟨w, hw⟩ := hML fun n ↦ z.comp (mk₀ (P.proj n)) (add_zero p)
-    obtain ⟨W, hW⟩ := (hφ p).2 w
-    have hWz : W.comp (mk₀ S.g) (add_zero p) = z := (hφ p).1 (funext fun n ↦ by
-      have hW' (k : ℕ) : W.comp (mk₀ (P.proj k)) (add_zero p) = w k := congrFun hW k
-      dsimp only
-      rw [hg, hW', hW', hw])
-    rw [← sub_eq_zero, ← hz, ← hWz, comp_assoc_of_second_deg_zero, hS.comp_extClass, comp_zero]
-  · -- surjectivity: a compatible family lifts to `∏ Fₙ` and is killed by `1 - t`
-    obtain ⟨Y, hY⟩ := (hφ (p + 1)).2 y.1
-    have hY' (k : ℕ) : Y.comp (mk₀ (P.proj k)) (add_zero _) = y.1 k := congrFun hY k
-    have hYg : Y.comp (mk₀ S.g) (add_zero _) = 0 := (hφ (p + 1)).1 (funext fun n ↦ by
-      dsimp only
-      rw [hg, hY', hY', y.2 n, sub_self, Pi.zero_apply, zero_comp])
-    obtain ⟨x, hx⟩ := covariant_sequence_exact₂ X hS Y hYg
-    refine ⟨x, Subtype.ext (funext fun n ↦ ?_)⟩
-    change x.comp (mk₀ (c.π.app (op n))) (add_zero _) = y.1 n
-    rw [← hfx, hx, hY']
+    {c : Cone F} (hc : IsLimit c) : (milnorShortComplex c).ShortExact := by
+  have hK := Fan.IsLimit.isLimitKernelForkOneSub (productIsProduct _)
+    (Pi.lift fun n ↦ Pi.π (fun n : ℕ ↦ F.obj (op n)) (n + 1) ≫ F.map (homOfLE n.le_succ).op)
+    (fun n ↦ by simp) hc
+  exact { exact := (milnorShortComplex c).exact_of_f_is_kernel hK
+          mono_f := Fork.IsLimit.mono hK
+          epi_g := hF (productIsProduct _) _ fun n ↦ by simp }
+
+omit [HasExt C] [HasDerivedCategory C] [HasKInjectiveResolutions C]
+  [HasExactLimitsOfShape (Discrete ℕ) C] in
+private lemma milnorShortComplex_f_proj (c : Cone F) (n : ℕ) :
+    (milnorShortComplex c).f ≫ Pi.π (fun n : ℕ ↦ F.obj (op n)) n = c.π.app (op n) :=
+  Fan.IsLimit.fac (productIsProduct _) _ n
+
+omit [HasExt C] [HasDerivedCategory C] [HasKInjectiveResolutions C]
+  [HasExactLimitsOfShape (Discrete ℕ) C] in
+private lemma milnorShortComplex_g_proj (c : Cone F) (n : ℕ) :
+    (milnorShortComplex c).g ≫ Pi.π (fun n : ℕ ↦ F.obj (op n)) n =
+      Pi.π (fun n : ℕ ↦ F.obj (op n)) n -
+        Pi.π (fun n : ℕ ↦ F.obj (op n)) (n + 1) ≫ F.map (homOfLE n.le_succ).op := by
+  simp [milnorShortComplex, Preadditive.sub_comp]
+
+omit [HasDerivedCategory C] [HasKInjectiveResolutions C]
+  [HasExactLimitsOfShape (Discrete ℕ) C] in
+private lemma comp_milnorShortComplex_g_comp {X : C} (c : Cone F) {q : ℕ}
+    (z : Ext X (∏ᶜ fun n : ℕ ↦ F.obj (op n)) q) (n : ℕ) :
+    (z.comp (mk₀ (milnorShortComplex c).g) (add_zero q)).comp
+        (mk₀ (Pi.π (fun n : ℕ ↦ F.obj (op n)) n)) (add_zero q) =
+      z.comp (mk₀ (Pi.π (fun n : ℕ ↦ F.obj (op n)) n)) (add_zero q) -
+        (z.comp (mk₀ (Pi.π (fun n : ℕ ↦ F.obj (op n)) (n + 1))) (add_zero q)).comp
+          (mk₀ (F.map (homOfLE n.le_succ).op)) (add_zero q) := by
+  simp only [comp_assoc_of_third_deg_zero, mk₀_comp_mk₀, milnorShortComplex_g_proj,
+    sub_eq_add_neg, mk₀_add, mk₀_neg, comp_add, comp_neg]
+
+/-- **Surjectivity of `Ext X (lim Fₙ) q ⟶ lim Ext X Fₙ q`.** Every compatible family of classes
+`zₙ ∈ Ext X Fₙ q` is the image of a class of `Ext X (lim Fₙ) q`. -/
+theorem exists_comp_eq_of_isLimit_tower (X : C)
+    (hF : ∀ ⦃P : Fan fun n : ℕ ↦ F.obj (op n)⦄ (_ : IsLimit P) (t : P.pt ⟶ P.pt),
+      (∀ n : ℕ, t ≫ P.proj n = P.proj (n + 1) ≫ F.map (homOfLE n.le_succ).op) →
+        Epi (𝟙 P.pt - t))
+    {c : Cone F} (hc : IsLimit c) {q : ℕ} (z : ∀ n, Ext X (F.obj (op n)) q)
+    (hz : ∀ n, (z (n + 1)).comp (mk₀ (F.map (homOfLE n.le_succ).op)) (add_zero q) = z n) :
+    ∃ x : Ext X c.pt q, ∀ n, x.comp (mk₀ (c.π.app (op n))) (add_zero q) = z n := by
+  have hS := milnorShortComplex_shortExact hF hc
+  have hφ := bijective_comp_mk₀_proj X (productIsProduct fun n : ℕ ↦ F.obj (op n)) q
+  obtain ⟨y, hy⟩ := hφ.2 z
+  have hy' (n : ℕ) : y.comp (mk₀ (Pi.π (fun n : ℕ ↦ F.obj (op n)) n)) (add_zero q) = z n :=
+    congrFun hy n
+  have hyg : y.comp (mk₀ (milnorShortComplex c).g) (add_zero q) = 0 := by
+    refine hφ.1 (funext fun n ↦ ?_)
+    dsimp only
+    erw [comp_milnorShortComplex_g_comp, hy', hy', hz, sub_self, zero_comp]
+  obtain ⟨x, hx⟩ := covariant_sequence_exact₂ X hS y hyg
+  refine ⟨x, fun n ↦ ?_⟩
+  rw [← milnorShortComplex_f_proj, ← mk₀_comp_mk₀, ← comp_assoc_of_third_deg_zero, hx]
+  exact hy' n
+
+/-- **Injectivity of `Ext X (lim Fₙ) (q + 1) ⟶ lim Ext X Fₙ (q + 1)`** when `lim¹ Ext X Fₙ q`
+vanishes, i.e. when `(xₙ) ↦ (xₙ - t xₙ₊₁)` is surjective on `∏ Ext X Fₙ q`. -/
+theorem eq_zero_of_isLimit_tower (X : C)
+    (hF : ∀ ⦃P : Fan fun n : ℕ ↦ F.obj (op n)⦄ (_ : IsLimit P) (t : P.pt ⟶ P.pt),
+      (∀ n : ℕ, t ≫ P.proj n = P.proj (n + 1) ≫ F.map (homOfLE n.le_succ).op) →
+        Epi (𝟙 P.pt - t))
+    {c : Cone F} (hc : IsLimit c) {q : ℕ}
+    (hlim : ∀ y : ∀ n, Ext X (F.obj (op n)) q, ∃ x : ∀ n, Ext X (F.obj (op n)) q,
+      ∀ n, x n - (x (n + 1)).comp (mk₀ (F.map (homOfLE n.le_succ).op)) (add_zero q) = y n)
+    (x : Ext X c.pt (q + 1))
+    (hx : ∀ n, x.comp (mk₀ (c.π.app (op n))) (add_zero (q + 1)) = 0) : x = 0 := by
+  have hS := milnorShortComplex_shortExact hF hc
+  have hφ (m : ℕ) := bijective_comp_mk₀_proj X (productIsProduct fun n : ℕ ↦ F.obj (op n)) m
+  have hx₁ : x.comp (mk₀ (milnorShortComplex c).f) (add_zero (q + 1)) = 0 := by
+    refine (hφ (q + 1)).1 (funext fun n ↦ ?_)
+    simp only [zero_comp]
+    erw [comp_assoc_of_third_deg_zero, mk₀_comp_mk₀, milnorShortComplex_f_proj]
+    exact hx n
+  obtain ⟨x₃, rfl⟩ := covariant_sequence_exact₁ X hS x hx₁ rfl
+  -- `x₃` lies in the image of `1 - t`
+  obtain ⟨w, hw⟩ := hlim fun n ↦ x₃.comp (mk₀ (Pi.π (fun n : ℕ ↦ F.obj (op n)) n)) (add_zero q)
+  replace hw (n : ℕ) : w n - (w (n + 1)).comp (mk₀ (F.map (homOfLE n.le_succ).op)) (add_zero q) =
+      x₃.comp (mk₀ (Pi.π (fun n : ℕ ↦ F.obj (op n)) n)) (add_zero q) := hw n
+  obtain ⟨z, hz⟩ := (hφ q).2 w
+  have hz' (k : ℕ) : z.comp (mk₀ (Pi.π (fun n : ℕ ↦ F.obj (op n)) k)) (add_zero q) = w k :=
+    congrFun hz k
+  have hx₃ : z.comp (mk₀ (milnorShortComplex c).g) (add_zero q) = x₃ := by
+    refine (hφ q).1 (funext fun n ↦ ?_)
+    dsimp only
+    erw [comp_milnorShortComplex_g_comp, hz', hz']
+    exact hw n
+  rw [← hx₃, comp_assoc_of_second_deg_zero, hS.comp_extClass, comp_zero]
 
 end CategoryTheory.Abelian.Ext

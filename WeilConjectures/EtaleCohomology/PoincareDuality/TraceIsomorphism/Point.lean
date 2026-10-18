@@ -7,8 +7,9 @@ module
 
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 public import WeilConjectures.EtaleCohomology.PoincareDuality.TraceCup
-public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.InjectiveHom
-public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.UnitIsoBijective
+public import WeilConjectures.Algebra.Homology.DerivedCategory.InjectiveHom
+public import WeilConjectures.CategoryTheory.Monoidal.UnitIsoBijective
+public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChangeShift
 public import WeilConjectures.SixFunctors.Etale.Derived.PointUnit
 public import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
 
@@ -161,6 +162,88 @@ theorem bijective_comp_unit_rightDerivedLowerStar [Module.Injective Λ Λ] {X : 
       rw [← Category.assoc, hh, Category.assoc, Iso.hom_inv_id, Category.comp_id]
   exact hJ
 
+omit [IsSepClosed k] in
+/-- Injectivity of precomposition with the unit `Q ⟶ Ra_* La^* Q` is invariant under
+isomorphisms `Q ≅ Q'`, by naturality of the unit. -/
+lemma injective_comp_unit_of_iso {X : Scheme.{u}} (a : X ⟶ Spec (.of k))
+    {Q Q' : DerivedCategoryModule Λ (Spec (.of k))} (ι : Q ≅ Q')
+    (h : Function.Injective (fun g : (R((a)_*[ModuleCat.{u + 1} Λ])).obj
+        ((L((a)^*[ModuleCat.{u + 1} Λ])).obj Q') ⟶ Q' ↦
+      (derivedUpperStarLowerStarAdjunction _ a).unit.app Q' ≫ g)) :
+    Function.Injective (fun g : (R((a)_*[ModuleCat.{u + 1} Λ])).obj
+        ((L((a)^*[ModuleCat.{u + 1} Λ])).obj Q) ⟶ Q ↦
+      (derivedUpperStarLowerStarAdjunction _ a).unit.app Q ≫ g) := by
+  intro g₁ g₂ hg
+  have hn := (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} Λ) a).unit.naturality ι.inv
+  simp only [Functor.id_map, Functor.comp_map] at hn
+  have key (g : (R((a)_*[ModuleCat.{u + 1} Λ])).obj ((L((a)^*[ModuleCat.{u + 1} Λ])).obj Q) ⟶
+      Q) : (derivedUpperStarLowerStarAdjunction _ a).unit.app Q' ≫
+        ((R((a)_*[ModuleCat.{u + 1} Λ])).map ((L((a)^*[ModuleCat.{u + 1} Λ])).map ι.inv) ≫
+          g ≫ ι.hom) =
+      ι.inv ≫ ((derivedUpperStarLowerStarAdjunction _ a).unit.app Q ≫ g) ≫ ι.hom := by
+    rw [← reassoc_of% hn]
+    simp only [Category.assoc]
+  have h₁₂ := h (a₁ := (R((a)_*[ModuleCat.{u + 1} Λ])).map
+      ((L((a)^*[ModuleCat.{u + 1} Λ])).map ι.inv) ≫ g₁ ≫ ι.hom)
+    (a₂ := (R((a)_*[ModuleCat.{u + 1} Λ])).map
+      ((L((a)^*[ModuleCat.{u + 1} Λ])).map ι.inv) ≫ g₂ ≫ ι.hom) (by
+    simp only at hg ⊢
+    rw [key, key, hg])
+  simpa [← Functor.map_comp_assoc] using
+    (R((a)_*[ModuleCat.{u + 1} Λ])).map ((L((a)^*[ModuleCat.{u + 1} Λ])).map ι.hom) ≫= h₁₂ =≫
+      ι.inv
+
+set_option maxRecDepth 20000 in
+omit [IsSepClosed k] in
+/-- Injectivity of precomposition with the unit `Q ⟶ Ra_* La^* Q` is invariant under shifts:
+the unit commutes with the shift functors. -/
+lemma injective_comp_unit_shift {X : Scheme.{u}} (a : X ⟶ Spec (.of k))
+    {Q : DerivedCategoryModule Λ (Spec (.of k))} (n : ℤ)
+    (h : Function.Injective (fun g : (R((a)_*[ModuleCat.{u + 1} Λ])).obj
+        ((L((a)^*[ModuleCat.{u + 1} Λ])).obj Q) ⟶ Q ↦
+      (derivedUpperStarLowerStarAdjunction _ a).unit.app Q ≫ g)) :
+    Function.Injective (fun g : (R((a)_*[ModuleCat.{u + 1} Λ])).obj
+        ((L((a)^*[ModuleCat.{u + 1} Λ])).obj (Q⟦n⟧)) ⟶ Q⟦n⟧ ↦
+      (derivedUpperStarLowerStarAdjunction _ a).unit.app (Q⟦n⟧) ≫ g) := by
+  intro g₁ g₂ hg
+  simp only at hg
+  rw [← Adjunction.unit_app_shift_commShiftIso_inv_app, Category.assoc, Category.assoc] at hg
+  let F := shiftFunctor (DerivedCategoryModule Λ (Spec (.of k))) n
+  have e (g : (R((a)_*[ModuleCat.{u + 1} Λ])).obj
+      ((L((a)^*[ModuleCat.{u + 1} Λ])).obj (Q⟦n⟧)) ⟶ Q⟦n⟧) :
+      ((derivedUpperStarLowerStarAdjunction _ a).unit.app Q)⟦n⟧' ≫
+        ((((L((a)^*[ModuleCat.{u + 1} Λ])) ⋙ (R((a)_*[ModuleCat.{u + 1} Λ]))).commShiftIso
+          n).inv.app Q ≫ g) =
+      F.map ((derivedUpperStarLowerStarAdjunction _ a).unit.app Q ≫ F.preimage
+        ((((L((a)^*[ModuleCat.{u + 1} Λ])) ⋙ (R((a)_*[ModuleCat.{u + 1} Λ]))).commShiftIso
+          n).inv.app Q ≫ g)) := by
+    rw [F.map_comp, F.map_preimage]
+  have h₁₂ := congrArg F.map (h (F.map_injective ((e g₁).symm.trans (hg.trans (e g₂)))))
+  simp only [F.map_preimage] at h₁₂
+  exact (cancel_epi _).1 h₁₂
+
+/-- **Evaluation at `1`, injectivity form.** For `a : X ⟶ Spec k` with `X` connected and `Λ`
+self-injective, precomposition with the unit `Λ_s ⟶ Ra_* La^* Λ_s` is injective on
+`Hom(Ra_* La^* Λ_s, Λ_s)`
+(`AlgebraicGeometry.Etale.bijective_comp_unit_rightDerivedLowerStar`). -/
+lemma injective_comp_unit_rightDerivedLowerStar_unit [Module.Injective Λ Λ] {X : Scheme.{u}}
+    [ConnectedSpace X] (a : X ⟶ Spec (.of k)) :
+    Function.Injective (fun g : (R((a)_*[ModuleCat.{u + 1} Λ])).obj
+        ((L((a)^*[ModuleCat.{u + 1} Λ])).obj (𝟙_ (DerivedCategoryModule Λ (Spec (.of k))))) ⟶
+          𝟙_ _ ↦
+      (derivedUpperStarLowerStarAdjunction _ a).unit.app _ ≫ g) := by
+  let e := leftDerivedUpperStarConstantComplexIso Λ a
+  have hb := (bijective_comp_unit_rightDerivedLowerStar (Λ := Λ) a e).1
+  intro g₁ g₂ hg
+  have h₁₂ := hb (a₁ := (R((a)_*[ModuleCat.{u + 1} Λ])).map e.inv ≫ g₁)
+    (a₂ := (R((a)_*[ModuleCat.{u + 1} Λ])).map e.inv ≫ g₂) (by
+      simp only [Category.assoc] at hg ⊢
+      rw [← Functor.map_comp_assoc, ← Functor.map_comp_assoc, e.hom_inv_id]
+      erw [CategoryTheory.Functor.map_id]
+      simp only [Category.id_comp]
+      exact hg)
+  simpa [← Functor.map_comp_assoc] using (R((a)_*[ModuleCat.{u + 1} Λ])).map e.hom ≫= h₁₂
+
 variable [HasTateTwist Λ]
 
 variable (Λ k) [HasInvertibleExponent Λ (Spec (.of k))] in
@@ -175,6 +258,24 @@ theorem nonempty_tateObject_iso_unit (m : ℤ) :
   obtain ⟨g⟩ := Scheme.nonempty_iso_constantSheaf_of_sheafFiber_iso L f
   exact ⟨e ≪≫ (DerivedCategory.singleFunctor _ 0).mapIso g ≪≫
     (unitIsoSingleFunctorConstantSheaf Λ _).symm⟩
+
+variable (Λ) in
+/-- **Evaluation at a point is determined by the unit.** For `a : X ⟶ Spec k` with `X` connected
+over the separably closed field `k`, `Λ` self-injective and the shifted Tate object
+`Q = Λ_s(m)[n]`, precomposition with the unit `Q ⟶ Ra_* La^* Q` is injective on
+`Hom(Ra_* La^* Q, Q)`: the Tate twist is trivial over `s`
+(`AlgebraicGeometry.Etale.nonempty_tateObject_iso_unit`) and the case `Q = Λ_s` is
+`AlgebraicGeometry.Etale.injective_comp_unit_rightDerivedLowerStar_unit`. -/
+theorem injective_comp_unit_tateObject_shift [Module.Injective Λ Λ]
+    [HasInvertibleExponent Λ (Spec (.of k))] {X : Scheme.{u}} [ConnectedSpace X]
+    (a : X ⟶ Spec (.of k)) (m n : ℤ) :
+    Function.Injective (fun g : (R((a)_*[ModuleCat.{u + 1} Λ])).obj
+        ((L((a)^*[ModuleCat.{u + 1} Λ])).obj ((tateObject Λ (Spec (.of k)) m)⟦n⟧)) ⟶
+          (tateObject Λ (Spec (.of k)) m)⟦n⟧ ↦
+      (derivedUpperStarLowerStarAdjunction _ a).unit.app _ ≫ g) := by
+  obtain ⟨e⟩ := nonempty_tateObject_iso_unit Λ k m
+  exact injective_comp_unit_of_iso a ((shiftFunctor _ n).mapIso e)
+    (injective_comp_unit_shift a n (injective_comp_unit_rightDerivedLowerStar_unit a))
 
 namespace TateOrientation
 

@@ -7,16 +7,16 @@ module
 
 public import WeilConjectures.WeilSheaf.FourierInversion.Defs
 public import WeilConjectures.WeilSheaf.LowerShriekOperations
-public import WeilConjectures.WeilSheaf.ProjectionFormula
 public import WeilConjectures.WeilSheaf.TateTwist
+public import WeilConjectures.WeilSheaf.ProjectionFormula.LisseDualityProof
 
 /-!
 # Fourier inversion: inputs from other sections
 
-Statements of blueprint nodes of other sections (the open–closed recollement and the Thom
-isomorphism for Weil complexes) used in the proof of Fourier inversion, recorded here with `sorry`.
-The projection formula is `AlgebraicGeometry.WeilComplex.nonempty_iso_derivedLowerShriek_tensorLisse`
-(`WeilConjectures.WeilSheaf.ProjectionFormula`).
+Statements of blueprint nodes of other sections (the projection formula, the open–closed
+recorded here; the projection formula is proved in
+`WeilConjectures.WeilSheaf.ProjectionFormula`, the other two are recorded with `sorry`.
+recorded here with `sorry`.
 -/
 
 @[expose] public section
@@ -30,6 +30,24 @@ namespace AlgebraicGeometry
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
 section OtherSections
+
+/-- Blueprint `prop-weil-operations`: Six operations on Weil complexes (the projection
+formula). For a separated quasi-compact morphism `f : X ⟶ Y` locally of finite type of
+`k₀`-schemes of finite type and a lisse Weil sheaf `G` on `Y`, `Rf₀!(f^* G ⊗ K) ≅ G ⊗ Rf₀! K`
+naturally in the Weil complex `K` (`G`, lisse, is in particular of finite Tor-amplitude). -/
+theorem WeilComplex.nonempty_iso_derivedLowerShriek_tensorLisse {X Y : Scheme.{u}}
+    [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] (f : X ⟶ Y)
+    [f.IsOver (Spec (CommRingCat.of k₀))] [IsSeparated f] [LocallyOfFiniteType f]
+    [QuasiCompact f] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
+    [QuasiSeparated (Y ↘ Spec (CommRingCat.of k₀))] (G : WeilSheaf k₀ l Y) (hG : G.IsLisse) :
+    Nonempty (WeilComplex.derivedLowerShriek k₀ l f ⋙ WeilComplex.tensorLisse G hG ≅
+      WeilComplex.tensorLisse ((WeilSheaf.upperStar f).obj G)
+          (ProEtale.IsAdicLisseSheaf.upperStar _ hG) ⋙
+        WeilComplex.derivedLowerShriek k₀ l f) :=
+  WeilComplex.nonempty_iso_derivedLowerShriek_tensorLisse_of_duality
+    ProEtaleWeilSheaf.lisseDuality f G hG
 
 /-- Blueprint `def-weil-open-closed-recollement` and
 `prop-weil-open-closed-recollement-adjunctions` (open–closed recollement), for Weil complexes.

@@ -12,7 +12,6 @@ public import WeilConjectures.AlgebraicGeometry.Curve.Reductions
 public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Coinduce
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.Ext.TStructure
-public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Additive
 
 /-!
 # Free sheaves under extension by zero and pullback, and cohomology
@@ -144,9 +143,18 @@ noncomputable def Etale.etaleLowerShriekShiftedHomEquiv
     (N : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
     ((Etale.shiftedHomFunctor Λ ((Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) v hv).obj M) q).obj
       N) ≃+ ((Etale.shiftedHomFunctor Λ M q).obj ((v)^*[ModuleCat.{u + 1} Λ].obj N)) :=
-  (Etale.derivedEtaleLowerShriekUpperStarAdjunctionPlus Λ v hv).homAddEquivOfIso
-    (((Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) v hv).mapDerivedCategoryPlusSingleFunctor
-      0).app M) ((Etale.upperStarSingleShiftIso Λ v hv q).app N)
+  let i₁ := ((Etale.etaleLowerShriek (ModuleCat.{u + 1} Λ) v hv).mapDerivedCategoryPlusSingleFunctor
+    0).app M
+  let i₂ := (Etale.upperStarSingleShiftIso Λ v hv q).app N
+  let adj := Etale.derivedEtaleLowerShriekUpperStarAdjunctionPlus Λ v hv
+  AddEquiv.mk'
+    { toFun f := adj.homEquiv _ _ (i₁.hom ≫ f) ≫ i₂.hom
+      invFun g := i₁.inv ≫ (adj.homEquiv _ _).symm (g ≫ i₂.inv)
+      left_inv f := by simp
+      right_inv g := by simp }
+    (fun a b ↦ by
+      simp only [Equiv.coe_fn_mk, Adjunction.homEquiv_unit]
+      erw [Preadditive.comp_add, Functor.map_add, Preadditive.comp_add, Preadditive.add_comp])
 
 lemma Etale.etaleLowerShriekShiftedHomEquiv_apply
     (M : Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)
@@ -169,8 +177,14 @@ noncomputable def Etale.etaleLowerShriekShiftedHomIso
     (fun N ↦ (Etale.etaleLowerShriekShiftedHomEquiv Λ v hv M q N).toAddCommGrpIso)
     (fun {N N'} g ↦ by
       ext f
-      exact Adjunction.homAddEquivOfIso_comp _ _ _ _ _ _
-        ((Etale.upperStarSingleShiftIso Λ v hv q).hom.naturality g) f)
+      change Etale.etaleLowerShriekShiftedHomEquiv Λ v hv M q N'
+          (f ≫ (shiftFunctor _ q).map ((DerivedCategory.Plus.singleFunctor _ 0).map g)) =
+        Etale.etaleLowerShriekShiftedHomEquiv Λ v hv M q N f ≫ (shiftFunctor _ q).map
+          ((DerivedCategory.Plus.singleFunctor _ 0).map ((v)^*[ModuleCat.{u + 1} Λ].map g))
+      rw [Etale.etaleLowerShriekShiftedHomEquiv_apply, Etale.etaleLowerShriekShiftedHomEquiv_apply,
+        ← Category.assoc, Adjunction.homEquiv_naturality_right, Category.assoc, Category.assoc]
+      congr 1
+      exact (Etale.upperStarSingleShiftIso Λ v hv q).hom.naturality g)
 
 end Restriction
 
@@ -281,8 +295,8 @@ theorem Etale.subsingleton_H_forget₂_succ_of_injective (Z : Scheme.{u}) [Compa
       (ofArrows_mem_smallEtaleTopology_iff g).2 hg⟩
     refine compactSpace_and_quasiSeparatedSpace_piObj _ fun l ↦ ?_
     have := hU (y l)
-    exact ⟨Scheme.compactSpace_of_isAffine (U (y l)).left,
-      quasiSeparatedSpace_of_isAffine (U (y l)).left⟩
+    exact ⟨inferInstanceAs (CompactSpace (U (y l)).left),
+      inferInstanceAs (QuasiSeparatedSpace (U (y l)).left)⟩
   let T : Z.Etale := MorphismProperty.Over.mk ⊤ (𝟙 Z) (inferInstance : Etale (𝟙 Z))
   have hT : IsTerminal T :=
     MorphismProperty.Over.mkIdTerminal _ Z

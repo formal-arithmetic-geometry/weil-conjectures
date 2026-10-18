@@ -8,7 +8,6 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.Complete.Perfect
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Linear
-public import WeilConjectures.Mathlib.CategoryTheory.Sites.GlobalSections
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import WeilConjectures.SixFunctors.Etale.Derived.DerivedComplete
 public import WeilConjectures.SixFunctors.Etale.Derived.Exchange
@@ -49,9 +48,7 @@ At the integral stage `𝒪_E`, for a derived complete `K` whose reductions `K �
 bounded constructible of Tor amplitude in one common interval:
 
 - `AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections_integral`,
-  `AlgebraicGeometry.Etale.isPerfect_rightDerivedGlobalSections_integral` and the duals. The
-  integral `RΓ_c(X, K)` is, as in the blueprint, `RΓ(Spec k, -)` of the derived completion
-  `R lim_n Ra_!(K ⊗ᴸ Λ/Iⁿ)` of the étale `Ra_! K`, which itself need not be derived complete.
+  `AlgebraicGeometry.Etale.isPerfect_rightDerivedGlobalSections_integral` and the duals.
 
 At the rational stage `E`, the cohomology of these complexes and of their duals tensored up to
 `E`:
@@ -74,12 +71,8 @@ finite Tor amplitude (`sk-prop-sf-trace-perfectness`), hence perfect over the No
 compactification `X ⟶[j] X̄ ⟶[ā] Spec k` of `a_X`. Then `RΓ(X, K) ≅ RΓ(X̄, Rj_* K)` (Leray) and
 `RΓ(X̄, -) ≅ RΓ_c(X̄, -)` since `ā` is proper, and `Rj_* K` is again bounded constructible of
 finite Tor amplitude (`sk-thm-sf-direct-image-tor-amplitude`), so the compactly supported case
-applies to `Rj_* K` on `X̄`. At the integral stage, a derived complete complex whose reduction
-modulo `ϖ` is perfect is perfect (`DerivedCategory.isPerfect_of_rightOrthogonal_of_isPerfect_obj₃`,
-for `Λ` a complete principal ideal domain); the reduction of the completed `Ra_! K` is
-`Ra_!(K ⊗ᴸ Λ/I)`, perfect by the finite stage for torsion complexes
-(`AlgebraicGeometry.Etale.isPerfect_compactlySupportedGlobalSections_of_nsmul_eq_zero`). For
-`RΓ(X, K)` the object `Rā_! Rj_* K ≅ Rā_* Rj_* K` is already derived complete.
+applies to `Rj_* K` on `X̄`. The integral stage is reduced to its compactly supported case in
+the same way.
 
 The rational stage `E = 𝒪_E[1/ℓ]` is the rationalization of the integral stage
 (`DerivedCategoryDerivedCompleteRational`), whose objects come from integral ones. There is no
@@ -228,6 +221,27 @@ def DerivedCategory.boundedConstructibleIntegral (X : Scheme.{u}) :
         DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} Λ) X a b
           ((reductionModIdeal Λ X (I ^ (n + 1))).obj K)
 
+variable {I}
+
+/-- An element `r ∈ J` kills the reduction `K ⊗ᴸ (Λ/J)_X`. (A copy of
+`AlgebraicGeometry.Etale.smul_id_reductionModIdeal`, whose file imports this one.) -/
+private lemma smul_id_reductionModIdeal' {X : Scheme.{u}} {J : Ideal Λ} {r : Λ} (hr : r ∈ J)
+    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
+    r • 𝟙 ((reductionModIdeal Λ X J).obj K) = 0 := by
+  have hM : r • 𝟙 (ModuleCat.of Λ (Λ ⧸ J)) = 0 := by
+    refine ModuleCat.hom_ext (LinearMap.ext fun x ↦ ?_)
+    obtain ⟨y, rfl⟩ := Ideal.Quotient.mk_surjective x
+    simp only [ModuleCat.hom_smul, ModuleCat.hom_id, LinearMap.smul_apply, LinearMap.id_coe,
+      id_eq, ModuleCat.hom_zero, LinearMap.zero_apply]
+    rw [Algebra.smul_def, Ideal.Quotient.algebraMap_eq, ← map_mul (Ideal.Quotient.mk J),
+      Ideal.Quotient.eq_zero_iff_mem]
+    exact J.mul_mem_right _ hr
+  change r • 𝟙 (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K).obj _) = 0
+  rw [← CategoryTheory.Functor.map_id, ← Functor.map_smul,
+    ← (_root_.DerivedCategory.singleFunctor _ 0).map_id, ← Functor.map_smul,
+    ← (constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).map_id, ← Functor.map_smul, hM,
+    Functor.map_zero, Functor.map_zero, Functor.map_zero]
+
 /-- For a nonzerodivisor `ϖ` generating `I`, the third vertex of a distinguished triangle on the
 multiplication `ϖ : K ⟶ K` is the reduction `K ⊗ᴸ (Λ/I)_X`: tensor the distinguished triangle
 `Λ ⟶ Λ ⟶ Λ/I ⟶ Λ⟦1⟧` with `K`. -/
@@ -249,8 +263,9 @@ lemma nonempty_iso_reductionModIdeal_of_distTriang {X : Scheme.{u}} {ϖ : Λ}
       CategoryTheory.Functor.map_id]
   obtain ⟨φ, -⟩ := exists_iso_of_arrow_iso _ _ hT hT'
     (Arrow.isoMk u.symm u.symm (by
-      change u.inv ≫ (F.mapTriangle.obj T).mor₁ = (ϖ • 𝟙 K) ≫ u.inv
-      rw [hmor, Linear.smul_comp, Linear.comp_smul, Category.id_comp, Category.comp_id]))
+      dsimp only [Arrow.mk_hom, Triangle.mk_mor₁, Iso.symm_hom]
+      rw [hmor, Triangle.mk_mor₁, Linear.comp_smul, Linear.smul_comp]
+      exact congrArg (ϖ • ·) ((Category.comp_id u.inv).trans (Category.id_comp u.inv).symm)))
   exact ⟨Triangle.π₃.mapIso φ ≪≫ F.mapIso ((_root_.DerivedCategory.singleFunctor _ 0).mapIso
     ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).mapIso e))⟩
 
@@ -271,7 +286,7 @@ ideal domain, complete for the ideal generated by a nonzerodivisor `ϖ`. If an o
 `D(Spec(k)_ét, Λ)` is right orthogonal to the objects on which `ϖ` acts invertibly, and the
 reduction `N₁ = cone(ϖ : N ⟶ N)` has perfect derived global sections, then so has `N`. Evaluation
 at the point is a `Λ`-linear triangulated equivalence `D(Spec(k)_ét, Λ) ≌ D(Λ)`, so this is
-`DerivedCategory.isPerfect_of_rightOrthogonal_of_isPerfect_obj₃`. -/
+`DerivedCategory.isPerfect_obj_of_rightOrthogonal_of_isPerfect_obj₃`. -/
 theorem isPerfect_rightDerivedGlobalSections_of_rightOrthogonal {ϖ : Λ}
     (hϖ : ϖ ∈ nonZeroDivisors Λ) [IsAdicComplete (Ideal.span {ϖ}) Λ]
     {N N₁ : _root_.DerivedCategory
@@ -281,36 +296,14 @@ theorem isPerfect_rightDerivedGlobalSections_of_rightOrthogonal {ϖ : Λ}
     {g : N ⟶ N₁} {h : N₁ ⟶ N⟦(1 : ℤ)⟧} (hT : Triangle.mk (ϖ • 𝟙 N) g h ∈ distTriang _)
     (hN₁ : ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj N₁).IsPerfect) :
     ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj N).IsPerfect := by
-  let Γ := rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))
-  have : Γ.IsTriangulated := inferInstanceAs
-    (Sheaf.Γ (Spec (.of k)).smallEtaleTopology
+  have : (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).IsTriangulated :=
+    inferInstanceAs (Sheaf.Γ (Spec (.of k)).smallEtaleTopology
       (ModuleCat.{u + 1} Λ)).rightDerivedFunctor.IsTriangulated
-  have : Γ.Linear Λ := inferInstanceAs
-    ((Sheaf.Γ (Spec (.of k)).smallEtaleTopology
+  have : (rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).Linear Λ :=
+    inferInstanceAs ((Sheaf.Γ (Spec (.of k)).smallEtaleTopology
       (ModuleCat.{u + 1} Λ)).rightDerivedFunctor.Linear Λ)
-  refine _root_.DerivedCategory.isPerfect_of_rightOrthogonal_of_isPerfect_obj₃ hϖ
-    (g := Γ.map g) (h := Γ.map h ≫ (Γ.commShiftIso (1 : ℤ)).hom.app N) ?_ ?_ hN₁
-  · refine isomorphic_distinguished _ (Γ.map_distinguished _ hT) _
-      (Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _) (Iso.refl _) ?_ (by simp; rfl) (by simp; rfl))
-    simp only [Triangle.mk_mor₁, Iso.refl_hom,
-      Category.id_comp, Category.comp_id]
-    change ϖ • 𝟙 _ = Γ.map (ϖ • 𝟙 N)
-    rw [Functor.map_smul, CategoryTheory.Functor.map_id]
-  · intro L f hL
-    let e := Γ.asEquivalence
-    let ε : Γ.obj (e.inverse.obj L) ≅ L := e.counitIso.app L
-    have hL' : IsIso (ϖ • 𝟙 (e.inverse.obj L)) := by
-      have : IsIso (Γ.map (ϖ • 𝟙 (e.inverse.obj L))) := by
-        rw [Functor.map_smul, CategoryTheory.Functor.map_id]
-        have : ϖ • 𝟙 (Γ.obj (e.inverse.obj L)) = ε.hom ≫ (ϖ • 𝟙 L) ≫ ε.inv := by
-          simp
-        rw [this]
-        infer_instance
-      exact isIso_of_reflects_iso _ Γ
-    have h0 := hN (Γ.preimage (ε.hom ≫ f)) hL'
-    have : ε.hom ≫ f = 0 := by
-      rw [← Γ.map_preimage (ε.hom ≫ f), h0, Functor.map_zero]
-    rwa [Preadditive.IsIso.comp_left_eq_zero] at this
+  exact _root_.DerivedCategory.isPerfect_obj_of_rightOrthogonal_of_isPerfect_obj₃ _ hϖ hT
+    (fun _ f hL ↦ hN f hL) hN₁
 
 variable [HasInvertibleExponent (Λ ⧸ I) (Spec (.of k))]
 
@@ -343,17 +336,22 @@ theorem isPerfect_rightDerivedGlobalSections_of_rightOrthogonal_of_hom {ϖ : Λ}
         Triangle.mk φ g h ∈ distTriang _ →
           _root_.DerivedCategory.smulInvertible (Spec (.of k)).smallEtaleTopology ϖ Y) :
     ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj N).IsPerfect := by
+  have hϖmem : ϖ ∈ I := hϖI ▸ Ideal.mem_span_singleton_self ϖ
   obtain ⟨N₁, g, h, hT⟩ := distinguished_cocone_triangle (ϖ • 𝟙 N)
   refine isPerfect_rightDerivedGlobalSections_of_rightOrthogonal hϖ hN hT ?_
-  obtain ⟨e₁⟩ := nonempty_iso_reductionModIdeal_of_distTriang I hϖ hϖI hT
+  obtain ⟨e₁⟩ := nonempty_iso_reductionModIdeal_of_distTriang hϖ hϖI hT
   -- the reduction of `φ` is an isomorphism
   let F := reductionModIdeal Λ (Spec (.of k)) I
+  have : F.Linear Λ := inferInstanceAs
+    (((derivedTensor (ModuleCat.{u + 1} Λ) (Spec (.of k))).flip.obj _).Linear Λ)
   obtain ⟨Y, g', h', hY⟩ := distinguished_cocone_triangle φ
   have hYinv : IsIso (ϖ • 𝟙 Y) := hφ Y g' h' hY
   have hFY : IsZero (F.obj Y) := by
-    obtain ⟨Y₁, g₁, h₁, hT₁⟩ := distinguished_cocone_triangle (ϖ • 𝟙 Y)
-    obtain ⟨e₃⟩ := nonempty_iso_reductionModIdeal_of_distTriang I hϖ hϖI hT₁
-    exact ((Triangle.isZero₃_iff_isIso₁ _ hT₁).2 hYinv).of_iso e₃.symm
+    have hinv : IsIso (ϖ • 𝟙 (F.obj Y)) := by
+      rw [← CategoryTheory.Functor.map_id, ← Functor.map_smul]
+      infer_instance
+    rw [IsZero.iff_id_eq_zero, ← cancel_mono (ϖ • 𝟙 (F.obj Y)),
+      smul_id_reductionModIdeal' hϖmem Y, Limits.comp_zero, Limits.comp_zero]
   have hFφ : IsIso (F.map φ) :=
     (Triangle.isZero₃_iff_isIso₁ _ (F.map_distinguished _ hY)).1 hFY
   obtain ⟨e₂⟩ := nonempty_iso_reductionModIdeal_rightDerivedLowerShriek_of_isPrincipal (Λ := Λ) aX
@@ -421,8 +419,7 @@ theorem isPerfect_compactlySupportedGlobalSections_integral (hI : I.IsPrincipal)
   · -- `I = 0`: `Λ` is finite and every object is derived complete
     obtain rfl : I = ⊥ := by rw [hϖI, h0, Ideal.span_singleton_eq_bot]
     obtain ⟨_, _⟩ := finite_and_hasInvertibleExponent_of_eq_bot (k := k) (I := (⊥ : Ideal Λ)) rfl
-    obtain ⟨e, -⟩ := hc.exists_iso
-      (_root_.DerivedCategory.derivedComplete_bot ((R(aX)_![ModuleCat.{u + 1} Λ]).obj K))
+    obtain ⟨e, -⟩ := hc.exists_iso (_root_.DerivedCategory.derivedComplete_bot _)
     exact (isPerfect_compactlySupportedGlobalSections Λ aX _ ⟨hbc, a, b, hta⟩).of_iso
       ((compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX).mapIso
         (reductionModIdealBotIso K) ≪≫
@@ -432,7 +429,7 @@ theorem isPerfect_compactlySupportedGlobalSections_integral (hI : I.IsPrincipal)
   obtain ⟨hN, φ, hφ⟩ :=
     _root_.DerivedCategory.rightOrthogonal_and_exists_smulInvertible_cone_of_isHomotopyLimit hϖ
       hϖI _ hc
-  exact isPerfect_rightDerivedGlobalSections_of_rightOrthogonal_of_hom I hϖ hϖI aX K hbc hta c.pt
+  exact isPerfect_rightDerivedGlobalSections_of_rightOrthogonal_of_hom hϖ hϖI aX K hbc hta c.pt
     hN φ hφ
 
 omit [IsSeparated aX] in
@@ -505,7 +502,7 @@ theorem isPerfect_rightDerivedGlobalSections_integral [QuasiCompact aX] (hI : I.
     have := rightOrthogonal_smulInvertible_rightDerivedLowerStar ϖ c.g L hLorth
       (f ≫ ((rightDerivedLowerShriekIsoRightDerivedLowerStar _ c.g).app L).hom) hZ
     rwa [Preadditive.IsIso.comp_right_eq_zero] at this
-  refine (isPerfect_rightDerivedGlobalSections_of_rightOrthogonal_of_hom I hϖ hϖI c.g L hbc' hta'
+  refine (isPerfect_rightDerivedGlobalSections_of_rightOrthogonal_of_hom hϖ hϖI c.g L hbc' hta'
     _ hN (𝟙 _) fun Y g h hY ↦ ?_).of_iso
     ((compactlySupportedGlobalSectionsIsoOfIsProper _ c.g).app _ ≪≫
       (rightDerivedLowerStarCompRightDerivedGlobalSectionsIso _ c.i).app K)
@@ -525,7 +522,7 @@ theorem isPerfect_ihom_compactlySupportedGlobalSections_integral (hI : I.IsPrinc
     (hc : Pretriangulated.IsHomotopyLimit c) :
     ((ihom ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) (Spec (.of k))).obj c.pt)).obj
       (𝟙_ _)).IsPerfect :=
-  (isPerfect_compactlySupportedGlobalSections_integral I aX hI K hK c hc).ihom_unit
+  (isPerfect_compactlySupportedGlobalSections_integral aX hI K hK c hc).ihom_unit
 
 omit [IsSeparated aX] in
 /-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
@@ -537,7 +534,7 @@ theorem isPerfect_ihom_rightDerivedGlobalSections_integral [QuasiCompact aX]
     (hK : DerivedCategory.boundedConstructibleIntegral I X K) :
     ((ihom ((rightDerivedGlobalSections (ModuleCat.{u + 1} Λ) X).obj K)).obj
       (𝟙_ _)).IsPerfect :=
-  (isPerfect_rightDerivedGlobalSections_integral I aX hI K hK).ihom_unit
+  (isPerfect_rightDerivedGlobalSections_integral aX hI K hK).ihom_unit
 
 /-- Blueprint `sk-lem-finite`: Finiteness: the global sections are perfect at the point.
 
@@ -570,11 +567,11 @@ theorem rationalHomology_globalSections [QuasiCompact aX] (hI : I.IsPrincipal)
   intro C hC
   simp only [Set.mem_insert_iff, Set.mem_singleton_iff] at hC
   rcases hC with rfl | rfl | rfl | rfl
-  · exact (isPerfect_compactlySupportedGlobalSections_integral I aX hI K hK c hc).tensor_homology E
-  · exact (isPerfect_rightDerivedGlobalSections_integral I aX hI K hK).tensor_homology E
-  · exact (isPerfect_ihom_compactlySupportedGlobalSections_integral I aX hI K hK c
+  · exact (isPerfect_compactlySupportedGlobalSections_integral aX hI K hK c hc).tensor_homology E
+  · exact (isPerfect_rightDerivedGlobalSections_integral aX hI K hK).tensor_homology E
+  · exact (isPerfect_ihom_compactlySupportedGlobalSections_integral aX hI K hK c
       hc).tensor_homology E
-  · exact (isPerfect_ihom_rightDerivedGlobalSections_integral I aX hI K hK).tensor_homology E
+  · exact (isPerfect_ihom_rightDerivedGlobalSections_integral aX hI K hK).tensor_homology E
 
 end Integral
 

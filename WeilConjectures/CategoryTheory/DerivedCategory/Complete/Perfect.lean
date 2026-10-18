@@ -9,8 +9,8 @@ public import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
 public import Mathlib.Algebra.Homology.ShortComplex.Linear
 public import Mathlib.LinearAlgebra.FreeModule.PID
 public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
-public import WeilConjectures.CategoryTheory.DerivedCategory.UniversalCoefficient
 public import WeilConjectures.CategoryTheory.DerivedCategory.ProjectiveSingleHom
+public import WeilConjectures.CategoryTheory.DerivedCategory.UniversalCoefficient
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 /-!
@@ -274,13 +274,6 @@ lemma telescopeShortComplex_shortExact (hϖ : ϖ ∈ nonZeroDivisors R) :
 end Telescope
 
 
-/-- The homology of a complex of `R`-modules is `R`-linear in the morphism. -/
-lemma homologyMap_smul' {K L : CochainComplex (ModuleCat.{u} R) ℤ} (r : R) (φ : K ⟶ L) (i : ℤ) :
-    HomologicalComplex.homologyMap (r • φ) i = r • HomologicalComplex.homologyMap φ i := by
-  rw [HomologicalComplex.homologyMap, HomologicalComplex.homologyMap,
-    ← ShortComplex.homologyMap_smul]
-  congr 1
-
 variable [HasDerivedCategory.{u} (ModuleCat.{u} R)]
 
 /-- Let `ϖ` be a nonzerodivisor and `C ∈ D(R)` an object receiving no nonzero map from an object
@@ -518,6 +511,46 @@ theorem isPerfect_of_rightOrthogonal_of_isPerfect_obj₃ {ϖ : R} (hϖ : ϖ ∈ 
     exact fun i hi ↦ hzero i (C₁.isZero_of_isLE b i hi)
   exact isPerfect_of_isGE_of_isLE (b - a + 1).toNat a C ‹_›
     (TStructure.t.isLE_of_le C b _ (by lia)) fun q _ _ ↦ hfin q
+
+/-- The criterion `DerivedCategory.isPerfect_of_rightOrthogonal_of_isPerfect_obj₃` transported
+along an `R`-linear triangulated equivalence `F : D ⥤ D(R)`: if `N ∈ D` receives no nonzero
+morphism from an object on which `ϖ` acts invertibly, and `F` of the reduction
+`N₁ = cone(ϖ : N ⟶ N)` is perfect, then `F N` is perfect. -/
+theorem isPerfect_obj_of_rightOrthogonal_of_isPerfect_obj₃ {D : Type*} [Category* D]
+    [Preadditive D] [HasZeroObject D] [HasShift D ℤ] [∀ n : ℤ, (shiftFunctor D n).Additive]
+    [Pretriangulated D] [Linear R D] (F : D ⥤ DerivedCategory (ModuleCat.{u} R))
+    [F.IsEquivalence] [F.Linear R] [F.CommShift ℤ] [F.IsTriangulated]
+    {ϖ : R} (hϖ : ϖ ∈ nonZeroDivisors R) [IsAdicComplete (Ideal.span {ϖ}) R]
+    {N N₁ : D} {g : N ⟶ N₁} {h : N₁ ⟶ N⟦(1 : ℤ)⟧}
+    (hT : Triangle.mk (ϖ • 𝟙 N) g h ∈ distTriang _)
+    (hN : ∀ (L : D) (f : L ⟶ N), IsIso (ϖ • 𝟙 L) → f = 0)
+    (hN₁ : (F.obj N₁).IsPerfect) : (F.obj N).IsPerfect := by
+  have h1 : F.map (ϖ • 𝟙 N) = ϖ • 𝟙 (F.obj N) := by
+    rw [Functor.map_smul, CategoryTheory.Functor.map_id]
+  refine isPerfect_of_rightOrthogonal_of_isPerfect_obj₃ hϖ
+    (g := F.map g) (h := F.map h ≫ (F.commShiftIso (1 : ℤ)).hom.app N) ?_ ?_ hN₁
+  · refine isomorphic_distinguished _ (F.map_distinguished _ hT) _
+      (Triangle.isoMk _ _ (Iso.refl _) (Iso.refl _) (Iso.refl _) ?_ ?_ ?_)
+    · exact (Category.comp_id _).trans (h1.symm.trans (Category.id_comp _).symm)
+    · exact (Category.comp_id _).trans (Category.id_comp _).symm
+    · exact ((congrArg _ (CategoryTheory.Functor.map_id _ _)).trans
+        (Category.comp_id _)).trans (Category.id_comp _).symm
+  · intro L f hL
+    let ε := F.asEquivalence.counitIso.app L
+    have hL' : IsIso (ϖ • 𝟙 (F.inv.obj L)) := by
+      have : IsIso (F.map (ϖ • 𝟙 (F.inv.obj L))) := by
+        have e : F.map (ϖ • 𝟙 (F.inv.obj L)) = ε.hom ≫ (ϖ • 𝟙 L) ≫ ε.inv := by
+          rw [Functor.map_smul, CategoryTheory.Functor.map_id, Linear.smul_comp,
+            Linear.comp_smul]
+          exact congrArg (ϖ • ·) (ε.hom_inv_id.symm.trans
+            (congrArg (ε.hom ≫ ·) (Category.id_comp ε.inv).symm))
+        rw [e]
+        infer_instance
+      exact isIso_of_reflects_iso _ F
+    have h0 := hN _ (F.preimage (ε.hom ≫ f)) hL'
+    have : ε.hom ≫ f = 0 := by
+      rw [← F.map_preimage (ε.hom ≫ f), h0, Functor.map_zero]
+    rwa [Preadditive.IsIso.comp_left_eq_zero] at this
 
 end PID
 

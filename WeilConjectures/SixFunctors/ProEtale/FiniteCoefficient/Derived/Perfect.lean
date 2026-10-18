@@ -19,10 +19,9 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect.Dualizable
 public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Detection
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.DualizableLocal
+public import WeilConjectures.CategoryTheory.DerivedCategory.Monoidal.DualizableProjectiveUnitPerfect
 public import WeilConjectures.SixFunctors.ProEtale.WContractibleUnit
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LocalDualizable
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.UpperStarMon.Monoidal
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.FlatModuleCat
 
 /-!
 
@@ -61,8 +60,18 @@ coefficient ring `Λ`, lies in `Dctf(X, Λ)`.
   (`prop-pod-perfect-local-model`): a perfect complex lies in `Dctf(X, Λ)`. It is locally a
   bounded complex of finite projective modules
   (`AlgebraicGeometry.ProEtale.DerivedCategory.isDualizable_iff_isLocallyPerfect`, the node
-  `sk-def-perfect`, `sorry` there), so its cohomology sheaves are locally constant
-  with finite stalks, hence of étale origin (`lem-sf-proetale-constructible-origin`).
+  `sk-def-perfect`), so its cohomology sheaves are locally constant with finite stalks, hence of
+  étale origin (`lem-sf-proetale-constructible-origin`).
+- `AlgebraicGeometry.ProEtale.DerivedCategory.isDualizable_iff_isLocallyPerfect`
+  (`sk-def-perfect`, Stacks 0FPV): an object of `D(X_proét, Λ)` is dualizable if and only if it
+  is locally quasi-isomorphic to a bounded complex of finite projective `Λ_X`-modules. Being
+  dualizable is local for the pro-étale topology
+  (`AlgebraicGeometry.ProEtale.isDualizable_of_cover`,
+  `AlgebraicGeometry.ProEtale.isDualizable_leftDerivedUpperStar_obj`), and over the spectrum of
+  a w-contractible ring global sections behave like modules over a ring, so that dualizable
+  objects are bounded complexes of finite projective objects there
+  (`DerivedCategory.exists_iso_Q_obj_of_isDualizable`,
+  `AlgebraicGeometry.ProEtale.projective_unit_and_finite_of_isWContractibleRing`).
 - `AlgebraicGeometry.ProEtale.DerivedCategory.isTriangulated_boundedConstructible`:
   `Dᵇc_proét(X, Λ)` is a triangulated subcategory at a finite coefficient ring.
 - `AlgebraicGeometry.ProEtale.isDualizable_derivedDual` (`lem-pod-coefficient-dual-perfect`):
@@ -442,89 +451,40 @@ def IsLocallyPerfect (K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X
 
 omit [Finite Λ] in
 /-- A perfect, that is dualizable, object of `D(X_proét, Λ)` is locally quasi-isomorphic to a
-bounded complex of finite projective `Λ_X`-modules (`sk-def-perfect`, Stacks 0FPV).
+bounded complex of finite projective `Λ_X`-modules (`sk-def-perfect`, Stacks, Tag 0FPV).
 
-Cover `X` by the spectra `W_i = Spec S_i` of w-contractible, faithfully flat, ind-étale algebras
-over the rings of an affine open cover. The derived pullback `Lg_i^* K` is dualizable, `Lg_i^*`
-being monoidal, and on the pro-étale site of `W_i` the unit is a finite projective generator of
-sections, so dualizable objects are bounded complexes of finite projective modules
-(`AlgebraicGeometry.ProEtale.exists_iso_Q_obj_of_isDualizable`). -/
-theorem isLocallyPerfect_of_isDualizable [IsNoetherianRing Λ]
+Cover `X` by spectra `W i` of w-contractible rings (`Scheme.exists_isWContractibleRing_cover`).
+The derived pullbacks of `K` to the `W i` are dualizable
+(`AlgebraicGeometry.ProEtale.isDualizable_leftDerivedUpperStar_obj`), and over `W i` the unit is
+projective with finite global sections on coproducts and tensor products
+(`AlgebraicGeometry.ProEtale.projective_unit_and_finite_of_isWContractibleRing`), so dualizable
+objects are bounded complexes of finite projective objects
+(`DerivedCategory.exists_iso_Q_obj_of_isDualizable`). -/
+theorem isLocallyPerfect_of_isDualizable
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
     (hK : IsDualizable K) : IsLocallyPerfect Λ K := by
-  have 𝒜 : X.AffineOpenCover := X.affineOpenCover
-  choose S iS iA hind hff hw using fun x : 𝒜.I₀ ↦ exists_isWContractibleRing (𝒜.X x)
-  let φ (x : 𝒜.I₀) : 𝒜.X x ⟶ CommRingCat.of (S x) := CommRingCat.ofHom (algebraMap _ _)
-  have (x : 𝒜.I₀) : WeaklyEtale (Spec.map (φ x)) := by
-    rw [WeaklyEtale.Spec_iff]
-    exact RingHom.IndEtale.weaklyEtale ((RingHom.IndEtale.algebraMap_iff _ _).2 (hind x))
-  have (x : 𝒜.I₀) : Surjective (Spec.map (φ x)) :=
-    ((flat_and_surjective_SpecMap_iff (φ x)).2
-      (RingHom.faithfullyFlat_algebraMap_iff.2 (hff x))).2
-  let W (i : ULift.{u + 1} 𝒜.I₀) : Scheme.{u} := Spec (CommRingCat.of (S i.down))
-  let g (i : ULift.{u + 1} 𝒜.I₀) : W i ⟶ X := Spec.map (φ i.down) ≫ 𝒜.f i.down
-  refine ⟨ULift.{u + 1} 𝒜.I₀, W, g, ?_, fun i ↦ ?_⟩
-  · have h₁ : Presieve.ofArrows _ 𝒜.f ∈ Scheme.proetalePrecoverage X :=
-      Scheme.zariskiPrecoverage_le_proetalePrecoverage _
-        ((Scheme.ofArrows_mem_precoverage_iff _).mpr ⟨fun y ↦ ⟨_, 𝒜.covers y⟩,
-          fun x ↦ inferInstance⟩)
-    have h₂ (x : 𝒜.I₀) : Presieve.ofArrows (fun _ : PUnit.{1} ↦ Spec (CommRingCat.of (S x)))
-        (fun _ ↦ Spec.map (φ x)) ∈ Scheme.proetalePrecoverage (𝒜.X x |> Spec) := by
-      rw [Presieve.ofArrows_pUnit]
-      exact Scheme.Hom.singleton_mem_propQCPrecoverage (P := @WeaklyEtale) inferInstance
-    have h₃ := Precoverage.comp_mem_coverings _ h₁ _ h₂
-    convert h₃ using 1
-    refine le_antisymm ?_ ?_
-    · rintro _ _ ⟨i⟩
-      exact Presieve.ofArrows.mk (Y := fun p : Σ _ : 𝒜.I₀, PUnit.{1} ↦
-        Spec (CommRingCat.of (S p.1))) ⟨i.down, PUnit.unit⟩
-    · rintro _ _ ⟨⟨x, -⟩⟩
-      exact Presieve.ofArrows.mk (Y := W) ⟨x⟩
-  · have := hw i.down
-    obtain ⟨P, a, b, ha, hb, hP, ⟨e⟩⟩ := exists_iso_Q_obj_of_isDualizable (Λ := Λ) (Y := W i)
-      (R := CommRingCat.of (S i.down)) (Iso.refl _)
-      (isDualizable_leftDerivedUpperStar_obj (g i) hK)
-    exact ⟨P, a, b, ha, hb, hP, ⟨e⟩⟩
+  obtain ⟨ι, R, hR, g, hg⟩ := Scheme.exists_isWContractibleRing_cover X
+  have (i : ι) : WeaklyEtale (g i) :=
+    Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ hg (.mk i)
+  refine ⟨ι, _, g, hg, fun i ↦ ?_⟩
+  obtain ⟨_, hC, hT⟩ := projective_unit_and_finite_of_isWContractibleRing Λ (R i)
+  exact _root_.DerivedCategory.exists_iso_Q_obj_of_isDualizable hC hT
+    (isDualizable_leftDerivedUpperStar_obj (g i) hK)
 
--- the kernel checks the instances of the derived projection formula
-set_option maxHeartbeats 1000000 in
 omit [Finite Λ] in
-/-- Locally perfect objects are dualizable (`sk-def-perfect`): dualizability is local for the
-pro-étale topology, and a bounded complex of finite projective modules is dualizable.
-
-On each member `g_i : W_i ⟶ X` of the trivialising cover, `Lg_i^* K` is dualizable
-(`DerivedCategory.isDualizable_Q_obj`), so `Lg_i^*` sends the comparison
-`RHom(K, Λ_X) ⊗ᴸ K ⟶ RHom(K, K)` to an isomorphism
-(`AlgebraicGeometry.ProEtale.isIso_leftDerivedUpperStar_map_ihomUnitTensorToIhom_of_isDualizable`);
-the pullbacks along a pro-étale cover jointly reflect isomorphisms of cohomology sheaves
-(`AlgebraicGeometry.ProEtale.isIso_of_isIso_localizationRestriction`), so the comparison is an
-isomorphism and `K` is dualizable. -/
-theorem isDualizable_of_isLocallyPerfect [IsNoetherianRing Λ]
+/-- An object of `D(X_proét, Λ)` which is locally quasi-isomorphic to a bounded complex of
+finite projective `Λ_X`-modules is perfect, that is dualizable (`sk-def-perfect`, Stacks,
+Tag 0FPP): bounded complexes of finite projective modules are dualizable
+(`DerivedCategory.finProjComplex.isDualizable`), and dualizability is local for the pro-étale
+topology (`AlgebraicGeometry.ProEtale.isDualizable_of_cover`). -/
+theorem isDualizable_of_isLocallyPerfect
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))}
     (hK : IsLocallyPerfect Λ K) : IsDualizable K := by
   obtain ⟨ι, W, g, hg, hP⟩ := hK
   have (i : ι) : WeaklyEtale (g i) :=
     Scheme.proetalePrecoverage_le_precoverage_weaklyEtale _ hg (.mk i)
-  have hloc (i : ι) : IsIso ((L((g i)^*[ModuleCat.{u + 1} Λ])).map
-      (MonoidalClosed.ihomUnitTensorToIhom K K)) := by
-    obtain ⟨P, a, b, ha, hb, hr, ⟨e⟩⟩ := hP i
-    exact isIso_leftDerivedUpperStar_map_ihomUnitTensorToIhom_of_isDualizable (g i) K
-      (IsDualizable.of_iso e.symm (_root_.DerivedCategory.isDualizable_Q_obj P a b
-        fun n ↦ finProj.isDualizable (hr n)))
-  have : IsIso (MonoidalClosed.ihomUnitTensorToIhom K K) := by
-    rw [_root_.DerivedCategory.isIso_iff]
-    intro n
-    refine ProEtale.isIso_of_isIso_localizationRestriction (ModuleCat.{u + 1} Λ) _ g hg
-      fun i ↦ ?_
-    have := hloc i
-    rw [← NatIso.isIso_map_iff
-      (ProEtale.upperStarIsoLocalizationRestriction _ (g i) inferInstance)]
-    exact (NatIso.isIso_map_iff (leftDerivedUpperStarHomologyFunctorIso _ (g i) n) _).2
-      (inferInstanceAs (IsIso ((_root_.DerivedCategory.homologyFunctor _ n).map
-        ((L((g i)^*[ModuleCat.{u + 1} Λ])).map (MonoidalClosed.ihomUnitTensorToIhom K K)))))
-  obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory
-    (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))
-  exact (MonoidalClosed.isDualizable_iff_isIso_ihomUnitTensorToIhom K).2 this
+  exact isDualizable_of_cover g hg fun i ↦ (_root_.DerivedCategory.finProjComplex.isDualizable
+    (hP i))
 
 omit [Finite Λ] in
 /-- Blueprint `sk-def-perfect`: Perfectness at the point and on `X`.
@@ -534,7 +494,7 @@ product, if and only if it is locally quasi-isomorphic to a bounded complex of f
 `Λ_X`-modules (Stacks, Tag 0FPV). The statement at the point is
 `DerivedCategory.isPerfect_iff_isDualizable`, in
 `WeilConjectures.CategoryTheory.DerivedCategory.Perfect.Dualizable`. -/
-theorem isDualizable_iff_isLocallyPerfect [IsNoetherianRing Λ]
+theorem isDualizable_iff_isLocallyPerfect
     {K : _root_.DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))} :
     IsDualizable K ↔ IsLocallyPerfect Λ K :=
   ⟨isLocallyPerfect_of_isDualizable Λ, isDualizable_of_isLocallyPerfect Λ⟩

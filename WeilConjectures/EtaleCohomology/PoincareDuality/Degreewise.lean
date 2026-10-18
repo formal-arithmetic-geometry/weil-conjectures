@@ -82,21 +82,19 @@ The cohomology groups are the cohomology of the derived global sections
 `AlgebraicGeometry.Etale.rightDerivedGlobalSections`, which land in the derived category of
 `Λ`-modules; `H^i_c(X, K)` is `AlgebraicGeometry.Etale.compactlySupportedCohomology`.
 
-The degreewise duality of this file is the non-canonical form of the blueprint statement: an
-abstract isomorphism `Nonempty (_ ≅ _)` between the cohomology of `RΓ(Spec k, -)`, which between
-finite-dimensional spaces says that the two dimensions agree. It remains true and is kept.
+The blueprint asserts that the adjoint `H^{2d-i}(X, K^∨(d)) ⟶ H^i_c(X, K)^∨` of the degreewise
+pairing `⟨-, -⟩_i` is an isomorphism. The pairing
+`AlgebraicGeometry.Etale.TateOrientation.degreewisePairing` is stated on classes
+`Λ_Y ⟶ (Ra_! K)[i]`; comparing it with the cohomology of `RΓ(Spec k, -)` needs the lax monoidal
+structure of `RΓ(Spec k, -)`, which the repository does not have. The degreewise duality is
+therefore only proved in a non-canonical form, as an abstract isomorphism `Nonempty (_ ≅ _)`.
+Between finite-dimensional spaces this only says that the two dimensions agree; it does not
+close the blueprint statement that the adjoint of `⟨-, -⟩_i` is an isomorphism. The line-valued
+form with values in `Λ(-d)` is not stated separately.
 
-The canonical form, that the adjoint `H^{2d-i}(X, K^∨(d)) ⟶ H^i_c(X, K)^∨` of the degreewise
-pairing is an isomorphism, is proved on classes `Λ_Y ⟶ (Ra_! K)[i]`, without passing through the
-cohomology of `RΓ(Spec k, -)` (which would need its lax monoidal structure), for the `Λ`-bilinear
-pairings of `WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Pairings`:
-`AlgebraicGeometry.Etale.TateOrientation.isPerfPair_degreewisePoincarePairing`,
-`AlgebraicGeometry.Etale.TateOrientation.isPerfPair_degreewisePoincarePairing_of_isProper` and,
-for the line-valued pairings with values in `Λ(-d)`,
-`AlgebraicGeometry.Etale.TateOrientation.isPerfPair_untwistedDegreewisePoincarePairing`. There
-the degree-zero part of the perfect pairing `β_K` is a composition pairing
-`⟨x, y⟩ = x ≫ g(y)`, and over a field the composition pairing with the unit of the point
-category is perfect.
+TODO: once `RΓ(Spec k, -)` is lax monoidal, restate the degreewise duality as `IsIso` of the
+adjoint of `⟨-, -⟩_i`, from a canonical form of
+`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedGlobalSections_of_isPerfectPairing`.
 
 The field stages of the blueprint are `E` and `ℚ̄_ℓ`. The derived duality is available here
 only at finite coefficients (the projection formula is stated there), so the field is a finite
@@ -292,11 +290,9 @@ namespace TateOrientation
 
 /-- Blueprint `sk-thm-derived-duality`: Degreewise duality over a field (finite-field case,
 non-canonical form). This is the finite-field, non-canonical form of blueprint
-`thm-pod-degreewise-perfectness-over-a-field`: an abstract isomorphism, that is an equality of
-dimensions. The perfectness of the degreewise pairing itself (its adjoint is an isomorphism) is
-`AlgebraicGeometry.Etale.TateOrientation.isPerfPair_degreewisePoincarePairing` (and
-`AlgebraicGeometry.Etale.TateOrientation.isPerfPair_untwistedDegreewisePoincarePairing` for the
-line-valued pairing).
+`thm-pod-degreewise-perfectness-over-a-field`: only an abstract isomorphism, that is an equality
+of dimensions, is proved, not that the adjoint of the degreewise pairing `⟨-, -⟩_i` is an
+isomorphism (see the implementation notes of this file).
 
 Let `k` be separably closed, `Λ` a finite field (a finite domain) whose characteristic is
 invertible on `X`, `γ` a Tate orientation of `a : X ⟶ Spec k` of relative dimension `d`, with
@@ -343,8 +339,7 @@ theorem degreewise_duality [LocallyOfFiniteType a] (γ : TateOrientation Λ a d)
 /-- Blueprint `thm-pod-proper-poincare-duality`: Proper Poincaré duality (degreewise form,
 finite-field case, non-canonical form). As for
 `AlgebraicGeometry.Etale.TateOrientation.degreewise_duality`, only an abstract isomorphism (an
-equality of dimensions) is proved here; the perfectness of the degreewise pairing is
-`AlgebraicGeometry.Etale.TateOrientation.isPerfPair_degreewisePoincarePairing_of_isProper`.
+equality of dimensions) is proved, not the perfectness of the degreewise pairing.
 
 In the situation of `AlgebraicGeometry.Etale.TateOrientation.degreewise_duality`, if moreover
 `a` is proper, then for every `i` the cohomology spaces `H^i(X, K)` and `H^{2d-i}(X, K^∨(d))`
