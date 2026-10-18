@@ -143,6 +143,7 @@ noncomputable def restrictOpenLowerShriekIso :
       (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ c.i)).ofNatIsoRight
         (leftDerivedUpperStarComp _ v c.i (c.restrictOpen v).i rfl).symm)
 
+omit [Finite Λ] [_root_.AlgebraicGeometry.Etale e] in
 /-- The unit property of `AlgebraicGeometry.Etale.restrictOpenLowerShriekIso`. -/
 lemma unit_map_restrictOpenLowerShriekIso
     (N : _root_.DerivedCategory (Sheaf X₀.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -162,6 +163,7 @@ lemma unit_map_restrictOpenLowerShriekIso
 
 set_option maxHeartbeats 1000000 in
 -- the derived functors involved are large terms
+omit [Finite Λ] [_root_.AlgebraicGeometry.Etale e] in
 /-- The coherence of the graph isomorphisms `Lq^* ⋙ Lσ^* ≅ Dj_! ⋙ Lq_Z^* ⋙ Lσ^*` with the
 restriction along `v`. -/
 lemma compactificationEtaleGraphIso_restrictOpen
@@ -186,7 +188,8 @@ lemma compactificationEtaleGraphIso_restrictOpen
       L(((c.restrictOpen v).selfGraph)^*[ModuleCat.{u + 1} Λ]).map
         ((leftDerivedUpperStarComp _ (c.selfGraphRestrict v) (pullback.fst c.g e)
           (pullback.fst (c.restrictOpen v).g (v ≫ e)) (c.selfGraphRestrict_fst v).symm).inv.app
-            (D((c.i)_!open[ModuleCat.{u + 1} Λ]).obj (D((v)_!open[ModuleCat.{u + 1} Λ]).obj N))) := by
+            (D((c.i)_!open[ModuleCat.{u + 1} Λ]).obj
+              (D((v)_!open[ModuleCat.{u + 1} Λ]).obj N))) := by
   -- the sections of `q` and `q₀`
   have hpre := leftDerivedUpperStar_map_comp_compSectionIso (ModuleCat.{u + 1} Λ) v
     (pullback.snd c.g e) (pullback.snd (c.restrictOpen v).g (v ≫ e)) (c.selfGraphRestrict v)
@@ -224,15 +227,15 @@ lemma compactificationEtaleGraphIso_restrictOpen
     (c.restrictOpen v).selfGraph_snd).hom.naturality
       ((derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ v).unit.app N)
   dsimp at hnat hsec
-  simp only [Functor.map_comp, Category.assoc] at hpre' hpost hθ hnat hsec
   simp only [compactificationEtaleGraphIso_hom_app]
   simp only [Functor.map_comp, Category.assoc]
   simp only [reassoc_of% hpre']
-  simp only [hpost, reassoc_of% hpost]
-  simp only [← hnat, ← reassoc_of% hnat]
-  simp only [hθ, reassoc_of% hθ]
-  simp only [hsec, reassoc_of% hsec]
+  simp only [hpost]
+  simp only [← hnat]
+  simp only [reassoc_of% hθ]
+  simp only [reassoc_of% hsec]
 
+omit [Finite Λ] in
 /-- The "restrict to the graph and extend by zero" maps commute with restriction along `v`. -/
 lemma compactificationEtaleGraphMap_restrictOpen
     (N : _root_.DerivedCategory (Sheaf X₀.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -294,7 +297,8 @@ theorem compactificationEtaleUnit_restrictOpen
   simp only [compactificationEtaleUnit_app]
   rw [← cancel_mono ((derivedBaseChangeMap (ModuleCat.{u + 1} Λ)
     (IsPullback.of_hasPullback (c.restrictOpen v).g (v ≫ e)).toCommSq).app _)]
-  have hκ' := congrArg (R((pullback.snd (c.restrictOpen v).g (v ≫ e))_*[ModuleCat.{u + 1} Λ]).map) hκ
+  have hκ' := congrArg
+    (R((pullback.snd (c.restrictOpen v).g (v ≫ e))_*[ModuleCat.{u + 1} Λ]).map) hκ
   simp only [Functor.map_comp] at hκ'
   simp only [Functor.comp_obj, Functor.map_comp, Category.assoc] at hpaste ⊢
   simp only [NatIso.isIso_inv_app] at n₁

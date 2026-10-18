@@ -7,6 +7,9 @@ module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.EtaleLowerShriekCompactificationRestrict
 public import WeilConjectures.SixFunctors.Etale.Derived.SmoothDuality.Local
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ProperProjectionFormula
+public import WeilConjectures.AlgebraicGeometry.Sites.EtaleTopologicalInvariance.Section
+public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 
 /-!
 # The compactly supported direct image along an étale morphism is the extension by zero
@@ -56,8 +59,7 @@ lemma unit_map_compactificationEtaleComparison
       (compactificationEtaleUnit Λ e c).app N := by
   simp only [compactificationEtaleComparison, NatTrans.comp_app, Functor.leftUnitor_inv_app,
     Functor.whiskerRight_app, Functor.associator_hom_app, Functor.whiskerLeft_app,
-    Functor.rightUnitor_hom_app, Category.id_comp, Functor.map_comp, CategoryTheory.Functor.map_id,
-    Category.comp_id]
+    Functor.rightUnitor_hom_app, Category.id_comp, Functor.map_comp]
   have h := (derivedEtaleLowerShriekAdjunction (ModuleCat.{u + 1} Λ) e).unit.naturality
     ((compactificationEtaleUnit Λ e c).app N)
   dsimp at h
@@ -123,7 +125,8 @@ variable {X Y X₀ : Scheme.{u}} (e : X ⟶ Y) [_root_.AlgebraicGeometry.Etale e
 comparison of the left adjoints of `L(v ≫ e)^* ≅ Le^* ⋙ Lv^*`. -/
 noncomputable def etaleLowerShriekRestrictOpenIso :
     D(etaleLowerShriek (ModuleCat.{u + 1} Λ) (v ≫ e) inferInstance) ≅
-      D((v)_!open[ModuleCat.{u + 1} Λ]) ⋙ D(etaleLowerShriek (ModuleCat.{u + 1} Λ) e inferInstance) :=
+      D((v)_!open[ModuleCat.{u + 1} Λ]) ⋙
+        D(etaleLowerShriek (ModuleCat.{u + 1} Λ) e inferInstance) :=
   Adjunction.leftAdjointUniq (derivedEtaleLowerShriekAdjunction _ (v ≫ e))
     (((derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ v).comp
       (derivedEtaleLowerShriekAdjunction _ e)).ofNatIsoRight
@@ -196,6 +199,7 @@ section Iso
 variable {X Y : Scheme.{u}} (e : X ⟶ Y) [_root_.AlgebraicGeometry.Etale e]
   (c : Compactification e)
 
+omit [Finite Λ] [_root_.AlgebraicGeometry.Etale e] in
 /-- The derived pullback along an isomorphism is an equivalence. -/
 lemma isEquivalence_leftDerivedUpperStar_of_isIso [IsIso e] :
     (L((e)^*[ModuleCat.{u + 1} Λ])).IsEquivalence :=
@@ -233,6 +237,7 @@ theorem isIso_compactificationEtaleComparison_of_isIso [IsIso e] :
         c.selfGraph).counit.app T) := by
       rw [NatTrans.isIso_app_iff_of_iso _
         ((derivedOpenImmersionLowerShriekBaseChangeIso (ModuleCat.{u + 1} Λ) hpb).app N).symm]
+      dsimp only [Functor.comp_obj]
       have ht := (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ
         c.selfGraph).left_triangle_components (L((𝟙 X)^*[ModuleCat.{u + 1} Λ]).obj N)
       have : IsIso (D((c.selfGraph)_!open[ModuleCat.{u + 1} Λ]).map
@@ -263,7 +268,57 @@ theorem isIso_compactificationEtaleComparison_of_isIso [IsIso e] :
   have := hu N
   have : IsIso (derivedEtaleLowerShriekAdjunction (ModuleCat.{u + 1} Λ) e).counit :=
     inferInstance
-  infer_instance
+  have : IsIso (D(etaleLowerShriek (ModuleCat.{u + 1} Λ) e inferInstance).map
+    ((compactificationEtaleUnit Λ e c).app N)) := Functor.map_isIso _ _
+  have : IsIso ((derivedEtaleLowerShriekAdjunction (ModuleCat.{u + 1} Λ) e).counit.app
+    (Rf_!(c)[ModuleCat.{u + 1} Λ].obj N)) := NatIso.isIso_app_of_isIso _ _
+  exact IsIso.comp_isIso' inferInstance (IsIso.comp_isIso' inferInstance (IsIso.id _))
+
+
+/-- **The compactly supported direct image along an étale morphism is the extension by zero**:
+for an étale `e` with a compactification `c`, the comparison `De_! ⟶ Rf_!(c)` is an
+isomorphism. Isomorphisms are detected by the derived pullbacks to the geometric points of `Y`,
+and the comparison commutes with base change
+(`AlgebraicGeometry.Etale.compactificationEtaleComparison_baseChange`). Over a separably closed
+field, `X` is covered by sections of `e`, which are open immersions over which `e` is an
+isomorphism, and the comparison is local on `X`
+(`AlgebraicGeometry.Etale.isIso_compactificationEtaleComparison_of_cover`). -/
+theorem isIso_compactificationEtaleComparison :
+    IsIso (compactificationEtaleComparison Λ e c) := by
+  -- over a separably closed field
+  have hpt : ∀ {Ω : Type u} [Field Ω] [IsSepClosed Ω] {X₁ : Scheme.{u}}
+      (e₁ : X₁ ⟶ Spec (.of Ω)) [_root_.AlgebraicGeometry.Etale e₁] (c₁ : Compactification e₁),
+      IsIso (compactificationEtaleComparison Λ e₁ c₁) := by
+    intro Ω _ _ X₁ e₁ _ c₁
+    choose l hl hlx using fun x : X₁ ↦
+      Scheme.exists_fac_of_etale_of_isSepClosed e₁ (𝟙 _) x (Subsingleton.elim _ _)
+    have (x : X₁) : IsOpenImmersion (l x) :=
+      IsOpenImmersion.of_section_of_etale e₁ (l x) (hl x)
+    refine isIso_compactificationEtaleComparison_of_cover Λ e₁ c₁ l
+      (fun x ↦ ⟨x, default, hlx x⟩) (fun x ↦ ?_)
+    have : IsIso (l x ≫ e₁) := by
+      rw [hl x]
+      infer_instance
+    exact isIso_compactificationEtaleComparison_of_isIso Λ (l x ≫ e₁) (c₁.restrictOpen (l x))
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro N
+  refine isIso_of_isIso_leftDerivedUpperStar_algClosurePoint_map Λ _ fun y ↦ ?_
+  have sq := IsPullback.of_hasPullback e (Y.algClosurePoint y)
+  have h := compactificationEtaleComparison_baseChange Λ sq c N
+  have := hpt (pullback.snd e (Y.algClosurePoint y)) (c.ofIsPullback sq)
+  have := isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_of_finite Λ sq c
+  have h₂ : IsIso ((derivedEtaleLowerShriekBaseChangeIso _ sq).hom.app N ≫
+      L((Y.algClosurePoint y)^*[ModuleCat.{u + 1} Λ]).map
+        ((compactificationEtaleComparison Λ e c).app N) ≫
+      (rightDerivedLowerShriekOfCompactificationBaseChangeMap _ sq c).app N) := by
+    rw [h]
+    infer_instance
+  have h₃ := IsIso.of_isIso_comp_left ((derivedEtaleLowerShriekBaseChangeIso _ sq).hom.app N)
+    (L((Y.algClosurePoint y)^*[ModuleCat.{u + 1} Λ]).map
+        ((compactificationEtaleComparison Λ e c).app N) ≫
+      (rightDerivedLowerShriekOfCompactificationBaseChangeMap _ sq c).app N)
+  exact IsIso.of_isIso_comp_right _ ((rightDerivedLowerShriekOfCompactificationBaseChangeMap _
+    sq c).app N)
 
 end Iso
 

@@ -96,7 +96,7 @@ lemma selfGraph_selfGraphBaseChange :
   · simp only [Category.assoc, selfGraphBaseChange_fst, selfGraph_fst_assoc, selfGraph_fst,
       ofIsPullback_i_fst]
   · simp only [Category.assoc, selfGraphBaseChange_snd, selfGraph_snd_assoc, selfGraph_snd,
-      Category.id_comp, Category.comp_id]
+      Category.comp_id]
 
 /-- The graph of the base-changed compactification is the base change of the graph. -/
 lemma isPullback_selfGraph :
@@ -121,7 +121,8 @@ variable (A : Type*) [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u 
 chosen composite `m = a ≫ b`. -/
 lemma leftDerivedUpperStarComp_comp_map_congr {T S U R : Scheme.{u}} (f : T ⟶ S) (a : S ⟶ U)
     (b : U ⟶ R) (t : T ⟶ R) (m₁ m₂ : S ⟶ R) (h : m₁ = m₂) (p₁ : t = f ≫ m₁) (p₂ : t = f ≫ m₂)
-    (q₁ : m₁ = a ≫ b) (q₂ : m₂ = a ≫ b) (K : _root_.DerivedCategory (Sheaf R.smallEtaleTopology A)) :
+    (q₁ : m₁ = a ≫ b) (q₂ : m₂ = a ≫ b)
+    (K : _root_.DerivedCategory (Sheaf R.smallEtaleTopology A)) :
     (leftDerivedUpperStarComp A f m₁ t p₁).hom.app K ≫
         L((f)^*[A]).map ((leftDerivedUpperStarComp A a b m₁ q₁).hom.app K) =
       (leftDerivedUpperStarComp A f m₂ t p₂).hom.app K ≫
@@ -155,8 +156,8 @@ lemma leftDerivedUpperStarComp_square_coherence {X' X W' W Z' Z : Scheme.{u}} {g
   have ht₁ : g' ≫ j = (g' ≫ σ) ≫ qZ := by rw [hj, Category.assoc]
   have ht₂ : g' ≫ j = j' ≫ gb := Sj.w
   rw [← cancel_epi ((leftDerivedUpperStarComp A g' j (g' ≫ j) rfl).hom.app M)]
-  simp only [derivedSquareUpperStarIso, Iso.trans_hom, Iso.trans_inv, Iso.symm_hom,
-    Iso.symm_inv, NatTrans.comp_app, Functor.map_comp, Category.assoc]
+  simp only [derivedSquareUpperStarIso, Iso.trans_inv, Iso.symm_inv, NatTrans.comp_app,
+    Functor.map_comp, Category.assoc]
   rw [leftDerivedUpperStarComp_assoc'_app_assoc A g' σ qZ (g' ≫ σ) j (g' ≫ j) rfl hj ht₁,
     Iso.hom_inv_id_app_assoc,
     ← leftDerivedUpperStarComp_assoc'_app_assoc A σ' h qZ (g' ≫ σ) (h ≫ qZ) (g' ≫ j) Sσ.w rfl
@@ -175,6 +176,7 @@ section Unfold
 variable {X Y : Scheme.{u}} (e : X ⟶ Y) [_root_.AlgebraicGeometry.Etale e]
   (c : Compactification e)
 
+omit [Finite Λ] [_root_.AlgebraicGeometry.Etale e] in
 lemma compactificationEtaleGraphIso_hom_app
     (N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     have : IsOpenImmersion c.i := c.isOpenImmersion
@@ -189,6 +191,7 @@ lemma compactificationEtaleGraphIso_hom_app
     Functor.associator_inv_app]
   erw [Category.comp_id]
 
+omit [Finite Λ] in
 lemma compactificationEtaleGraphMap_app
     (N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     (compactificationEtaleGraphMap Λ e c).app N =
@@ -219,6 +222,7 @@ variable {X Y X' Y' : Scheme.{u}} {e : X ⟶ Y} {g : Y' ⟶ Y} {e' : X' ⟶ Y'} 
 
 set_option maxHeartbeats 1000000 in
 -- the derived functors involved are large terms
+omit [Finite Λ] [_root_.AlgebraicGeometry.Etale e] [_root_.AlgebraicGeometry.Etale e'] in
 /-- The coherence of the graph isomorphisms `Lq^* ⋙ Lσ^* ≅ Dj_! ⋙ Lq_Z^* ⋙ Lσ^*` with base
 change. -/
 lemma compactificationEtaleGraphIso_baseChange
@@ -281,6 +285,7 @@ lemma compactificationEtaleGraphIso_baseChange
     ← Functor.map_comp_assoc, Iso.hom_inv_id_app]
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
 
+omit [Finite Λ] in
 /-- The "restrict to the graph and extend by zero" maps commute with base change. -/
 lemma compactificationEtaleGraphMap_baseChange
     (N : _root_.DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
@@ -303,6 +308,7 @@ lemma compactificationEtaleGraphMap_baseChange
   simp only [Category.assoc]
   exact compactificationEtaleGraphIso_baseChange Λ sq c N
 
+omit [Finite Λ] [_root_.AlgebraicGeometry.Etale e] [_root_.AlgebraicGeometry.Etale e'] in
 /-- The compact-support base change `Ex_!(c)` at `N`, with the squares of the base-changed
 compactification typed by its scheme. -/
 lemma rightDerivedLowerShriekOfCompactificationBaseChangeMap_app_eq
