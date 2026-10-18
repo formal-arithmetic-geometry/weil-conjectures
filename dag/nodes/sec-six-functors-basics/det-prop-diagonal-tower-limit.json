@@ -27,7 +27,9 @@
   "sk-def-sfb-dc-setting",
   "sk-def-sp-tate-twist",
   "sk-def-pe-derived-completion",
-  "det-prop-sfb-qlbar-colimit-x-integral-limit"
+  "det-prop-sfb-qlbar-colimit-x-integral-limit",
+  "def-sfb-constant-ring-module-restriction",
+  "def-sfb-cartier-reduction-data"
  ],
  "proof": [
   {
@@ -403,5 +405,56 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DiagonalTowerLimit",
+  "declaration": "AlgebraicGeometry.ProEtale.diagonalTower_limit",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.diagonalCompletedRingSheafify",
+   "AlgebraicGeometry.ProEtale.diagonalLimitAdditive",
+   "AlgebraicGeometry.ProEtale.DiagonalRightDerived",
+   "AlgebraicGeometry.ProEtale.DiagonalRlim",
+   "AlgebraicGeometry.ProEtale.diagonalForgetTowerLimits",
+   "AlgebraicGeometry.ProEtale.DiagonalCompleted",
+   "AlgebraicGeometry.ProEtale.diagonalCompletedAbelian",
+   "AlgebraicGeometry.ProEtale.diagonalCompletedCoefficientComponent",
+   "AlgebraicGeometry.ProEtale.diagonalCompletedCoefficient_naturality",
+   "AlgebraicGeometry.ProEtale.diagonalCompletedCoefficientMap",
+   "AlgebraicGeometry.ProEtale.diagonalCompletedSource",
+   "AlgebraicGeometry.ProEtale.diagonalCompletedRestriction",
+   "AlgebraicGeometry.ProEtale.diagonalCompletedRestriction_exact",
+   "AlgebraicGeometry.ProEtale.diagonalCompletedRestrictionAdditive",
+   "AlgebraicGeometry.ProEtale.diagonalCompletedRestrictionLimits",
+   "AlgebraicGeometry.ProEtale.diagonalCompletedRestrictionColimits",
+   "AlgebraicGeometry.ProEtale.diagonalCompletedSheafTwist",
+   "AlgebraicGeometry.ProEtale.diagonalCompletedTwist",
+   "AlgebraicGeometry.ProEtale.DiagonalCompletedReduction",
+   "AlgebraicGeometry.ProEtale.diagonalCompletedDomain",
+   "AlgebraicGeometry.ProEtale.diagonalCompletedCodomain",
+   "AlgebraicGeometry.ProEtale.diagonalCompletedUnderlying",
+   "AlgebraicGeometry.ProEtale.diagonalOrdinaryRlim",
+   "AlgebraicGeometry.ProEtale.diagonalCompletedGenerator_existsUnique",
+   "AlgebraicGeometry.ProEtale.diagonalCompletedGenerator",
+   "AlgebraicGeometry.ProEtale.diagonalSourceLimitMap",
+   "AlgebraicGeometry.ProEtale.diagonalTargetLimitMap",
+   "AlgebraicGeometry.ProEtale.diagonalCompletedTwist_limits",
+   "AlgebraicGeometry.ProEtale.diagonalTower_directImage",
+   "AlgebraicGeometry.ProEtale.diagonalTower_limit"
+  ],
+  "file": "lean/Sheaf/Paper/DiagonalTowerLimit.lean",
+  "statement": "theorem diagonalTower_limit (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (hpℓ : p ≠ ℓ) (Y : Scheme.{u}) [Y.Over (Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (hY : IsUnit (ℓ : Γ(Y, ⊤))) [HasDerivedCategory.{u + 1} (DiagonalAb (diagonalSurface Y))] [HasDerivedCategory.{u + 1} (DiagonalMod ℓ (diagonalSurface Y))] [HasDerivedCategory.{u + 1} (DiagonalSystems ℓ (diagonalSurface Y))] [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ DiagonalAb (diagonalSurface Y))] [HasDerivedCategory.{u + 1} (DiagonalCompleted ℓ (diagonalSurface Y))] [HasDerivedCategory.{u + 1} (ℕᵒᵖ ⥤ DiagonalCompleted ℓ (diagonalSurface Y))] [HasExt.{u + 1} (DiagonalSystems ℓ (diagonalSurface Y))] (D : DiagonalDerivedReduction ℓ (diagonalScalarExtension ℓ (diagonalSurface Y))) (hcompletion : DiagonalCompletionSpec ℓ (diagonalSurface Y) D) (hsystem : DiagonalCycleSystemSpec ℓ Y hY D) : ∃ (H : DiagonalSystems ℓ (diagonalSurface Y)) (roots : H ⋙ diagonalForget ℓ (diagonalSurface Y) ≅ Scheme.proEtaleRootsOfUnityTower (diagonalSurface Y) ℓ (Fact.out : ℓ.Prime)) (a : D.T.obj ((DerivedCategory.singleFunctor _ 0).obj (diagonalIntegralSource Y)) ≅ (DerivedCategory.singleFunctor _ 0).obj (D.ordinary.E.obj (diagonalIntegralSource Y))) (b : D.T.obj (((DerivedCategory.singleFunctor _ 0).obj (diagonalComparisonUnits Y))⟦(1 : ℤ)⟧) ≅ ((DerivedCategory.singleFunctor _ 0).obj H)⟦(2 : ℤ)⟧) (c : Ext (D.ordinary.E.obj (diagonalIntegralSource Y)) H 2), a.hom = diagonalDerivedSingleCounit ℓ (diagonalScalarExtension ℓ (diagonalSurface Y)) D (diagonalIntegralSource Y) ∧ c.hom = a.inv ≫ D.T.map (diagonalIntegralBoundary Y).hom ≫ b.hom ∧ (∀ n : ℕ, ∃ (s : (D.ordinary.E.obj (diagonalIntegralSource Y)).obj (op n) ≅ (diagonalFiniteToPadic ℓ n (diagonalSurface Y)).obj ((lowerStar (ModuleCat.{u + 1} (diagonalResidue.{u} ℓ n)) (diagonalImmersion Y)).obj (geoCartierConstant (diagonalResidue.{u} ℓ n) (ProjectiveLine Y)))) (t : H.obj (op n) ≅ (diagonalFiniteToPadic ℓ n (diagonalSurface Y)).obj (geoCartierLine (diagonalResidue.{u} ℓ n) (ℓ ^ (n + 1)) (cartierResidue_cast ℓ (n + 1)) (diagonalSurface Y))), DiagonalSourceNormalization ℓ Y D.ordinary n s ∧ HEq ((diagonalForget ℓ (diagonalSurface Y)).map t.hom) (roots.hom.app (op n) ≫ cartierProRootMap (diagonalResidue.{u} ℓ n) (ℓ ^ (n + 1)) (cartierResidue_cast ℓ (n + 1)) (diagonalSurface Y) (pow_pos (Fact.out : ℓ.Prime).pos _) (diagonalSurface_power_unit ℓ Y hY n)) ∧ (Ext.mk₀ s.inv).comp ((c.mapExactFunctor ((evaluation ℕᵒᵖ (DiagonalMod ℓ (diagonalSurface Y))).obj (op n))).comp (Ext.mk₀ t.hom) (add_zero 2)) (zero_add 2) = (cartierResidueReducedPro ℓ (Fact.out : ℓ.Prime) (n + 1) (diagonalImmersion Y) (diagonalImmersion_cartier Y) (diagonalSurface_power_unit ℓ Y hY n)).mapExactFunctor (diagonalFiniteToPadic ℓ n (diagonalSurface Y))) ∧ ∃ (L : DiagonalRlim (DiagonalMod ℓ (diagonalSurface Y))) (M : DiagonalCompletedReduction ℓ (diagonalSurface Y)) (s₀ : (diagonalCompletedRestriction ℓ (diagonalSurface Y)).obj (diagonalCompletedSource ℓ Y) ≅ limit (D.ordinary.E.obj (diagonalIntegralSource Y))) (t₀ : (diagonalCompletedRestriction ℓ (diagonalSurface Y)).obj (Scheme.purTwistZlModule (diagonalSurface Y) ℓ) ≅ limit H), (∀ n : ℕ, diagonalCompletedGenerator ℓ Y ≫ (diagonalForget ℓ (diagonalSurface Y)).map (s₀.hom ≫ limit.π (D.ordinary.E.obj (diagonalIntegralSource Y)) (op n)) = (diagonalScalarAdjunction ℓ (diagonalSurface Y)).unit.app (diagonalIntegralSource Y) ≫ (diagonalForget ℓ (diagonalSurface Y)).map ((D.ordinary.π n).app (diagonalIntegralSource Y))) ∧ HEq ((diagonalForget ℓ (diagonalSurface Y)).map t₀.hom) (preservesLimitIso (diagonalForget ℓ (diagonalSurface Y)) H ≪≫ HasLimit.isoOfNatIso roots).inv ∧ IsIso (diagonalSourceLimitMap ℓ Y D a L s₀) ∧ IsIso (diagonalTargetLimitMap ℓ Y D H b L t₀) ∧ (∀ P : DerivedCategory (DiagonalCompleted ℓ (diagonalSurface Y)), IsIso (ℓ • 𝟙 P) → Subsingleton (P ⟶ diagonalCompletedDomain ℓ Y)) ∧ (∀ P : DerivedCategory (DiagonalCompleted ℓ (diagonalSurface Y)), IsIso (ℓ • 𝟙 P) → Subsingleton (P ⟶ diagonalCompletedCodomain ℓ Y)) ∧ (∃! δ : diagonalCompletedDomain ℓ Y ⟶ diagonalCompletedCodomain ℓ Y, (diagonalCompletedUnderlying ℓ (diagonalSurface Y)).map δ ≫ diagonalTargetLimitMap ℓ Y D H b L t₀ = diagonalSourceLimitMap ℓ Y D a L s₀ ≫ L.R.map (D.T.map (diagonalIntegralBoundary Y).hom)) ∧ ∀ (δ : diagonalCompletedDomain ℓ Y ⟶ diagonalCompletedCodomain ℓ Y), (diagonalCompletedUnderlying ℓ (diagonalSurface Y)).map δ ≫ diagonalTargetLimitMap ℓ Y D H b L t₀ = diagonalSourceLimitMap ℓ Y D a L s₀ ≫ L.R.map (D.T.map (diagonalIntegralBoundary Y).hom) → ∀ n : ℕ, ∃ (s : (diagonalCompletedUnderlying ℓ (diagonalSurface Y)).obj ((M.derived.T ⋙ ((evaluation ℕᵒᵖ (DiagonalCompleted ℓ (diagonalSurface Y))).obj (op n)).mapDerivedCategory).obj (diagonalCompletedDomain ℓ Y)) ≅ (((evaluation ℕᵒᵖ (DiagonalMod ℓ (diagonalSurface Y))).obj (op n)).mapDerivedCategory).obj (D.T.obj ((DerivedCategory.singleFunctor _ 0).obj (diagonalIntegralSource Y)))) (t : (diagonalCompletedUnderlying ℓ (diagonalSurface Y)).obj ((M.derived.T ⋙ ((evaluation ℕᵒᵖ (DiagonalCompleted ℓ (diagonalSurface Y))).obj (op n)).mapDerivedCategory).obj (diagonalCompletedCodomain ℓ Y)) ≅ (((evaluation ℕᵒᵖ (DiagonalMod ℓ (diagonalSurface Y))).obj (op n)).mapDerivedCategory).obj (D.T.obj (((DerivedCategory.singleFunctor _ 0).obj (diagonalComparisonUnits Y))⟦(1 : ℤ)⟧))), (diagonalCompletedUnderlying ℓ (diagonalSurface Y)).map ((M.unit n).app (diagonalCompletedDomain ℓ Y)) ≫ s.hom = diagonalSourceLimitMap ℓ Y D a L s₀ ≫ (L.projection n).app (D.T.obj ((DerivedCategory.singleFunctor _ 0).obj (diagonalIntegralSource Y))) ∧ (diagonalCompletedUnderlying ℓ (diagonalSurface Y)).map ((M.unit n).app (diagonalCompletedCodomain ℓ Y)) ≫ t.hom = diagonalTargetLimitMap ℓ Y D H b L t₀ ≫ (L.projection n).app (D.T.obj (((DerivedCategory.singleFunctor _ 0).obj (diagonalComparisonUnits Y))⟦(1 : ℤ)⟧)) ∧ (diagonalCompletedUnderlying ℓ (diagonalSurface Y)).map ((M.derived.T ⋙ ((evaluation ℕᵒᵖ (DiagonalCompleted ℓ (diagonalSurface Y))).obj (op n)).mapDerivedCategory).map δ) = s.hom ≫ (((evaluation ℕᵒᵖ (DiagonalMod ℓ (diagonalSurface Y))).obj (op n)).mapDerivedCategory).map (D.T.map (diagonalIntegralBoundary Y).hom) ≫ t.inv",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The three clauses are stated as diagonalTower_limit, diagonalTower_directImage and diagonalCompletedTwist_limits. Actual coefficient restriction, ordinary-to-derived limit maps, normalized quotient units, and the positive Cartier boundary fix the full completed-coefficient arrow; no uniqueness from separate reductions is asserted."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ae2ca60e8",
+  "group": "NV",
+  "result": "pass",
+  "note": "Re-delivery after the H2 RETURN of f44b7fa314b1, which found the statement sound and returned it only for packaging. The item .lean differs from f44b only by the dropped CoefficientRingedSequenceSite import. The 4 dependency modules and their records are removed. stmt_deps = the live 5 plus def-sfb-constant-ring-module-restriction and def-sfb-cartier-reduction-data, both existing:true def nodes identical to live and whose declarations the item uses (l.190, l.546-556). The statement, proof and proof_deps equal live; lean.statement is verbatim in the file. nt_compile --json clean, exit 0, 46.4 s and 46.1 s. Prior minor points A1-A4 remain, not return reasons."
  }
 }
