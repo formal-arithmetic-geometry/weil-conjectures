@@ -33,97 +33,53 @@
  ],
  "proof": [
   {
-   "text": "Put $k=\\kappa(\\mathfrak p)$ and $X=\\operatorname{Spec}F$. Choose finite $R$-algebra generators $t_1,\\ldots,t_n$ of $T$. The elements $t_i\\otimes1$ generate $F$ as a $k$-algebra: every element of the tensor product is a finite sum of pure tensors, and if $t=P(t_1,\\ldots,t_n)$ then $t\\otimes a=aP_k(t_1\\otimes1,\\ldots,t_n\\otimes1)$, where the coefficients of $P_k$ are the images in $k$ of the coefficients of $P$. Thus $F$ is a finite type algebra over the field $k$; no Noetherian hypothesis on $R$ or $T$ is needed.",
+   "text": "Put p = q.comap(algebraMap R T), F = p.Fiber T and let x be the canonical fibre prime. Mathlib Algebra.FiniteType.baseChange makes F finite type over p.ResidueField. Algebra.FiniteType.isNoetherianRing and PrimeSpectrum.instNoetherianSpace make Spec F Noetherian. Every subspace is Noetherian, and prime spectra and their subspaces are T0.",
    "uses": [
     "def-weil-pbc-finite-type-algebra",
-    "def-weil-pbc-localization-at-prime"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00PK, lemma-isolated-point-fibre, proof: the fibre algebra is of finite type over the residue field; Tag 00F3, definition-finite-type"
-   }
-  },
-  {
-   "text": "Apply [lem-wf-affine-noetherian-components] with $A=F$ and the field $k$. It gives that $F$ is Noetherian and that every descending chain of closed subsets of $X$ stabilizes.",
-   "uses": [
+    "def-weil-pbc-localization-at-prime",
     "lem-wf-affine-noetherian-components"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00FN, lemma-Noetherian-permanence; affine closed-set argument in literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-geometry/lem-wf-affine-noetherian-components.md"
-   }
+   "elementary": false
   },
   {
-   "text": "The one-member affine cover $X=\\operatorname{Spec}F$ makes $X$ locally Noetherian by [pqf-def-locnoeth]. It is also quasi-compact: if an open cover had no finite subcover, successively choose a member not contained in the union of the previously chosen finitely many members. The complements of these successive finite unions would form a strictly descending infinite chain of closed subsets, contradicting step 2. Consequently $X$ is a Noetherian scheme (locally Noetherian and quasi-compact).",
-   "uses": [
-    "pqf-def-locnoeth",
-    "def-weil-pbc-quasi-compact-scheme",
-    "def-weil-affine-spectrum",
-    "lem-wf-affine-noetherian-components"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Tag 01OV, definition-noetherian; elementary open-cover argument of Topology Tag 04ZA, lemma-Noetherian-quasi-compact"
-   }
-  },
-  {
-   "text": "Assume $\\varphi$ is quasi-finite at $\\mathfrak q$. By [def-weil-pbc-ring-map-quasi-finite-at-prime], the singleton $\\{\\overline{\\mathfrak q}\\}$ is an open neighbourhood in $X$. Its only nonempty irreducible closed subset is itself, so its Krull dimension is zero. Every neighbourhood of $\\overline{\\mathfrak q}$ is nonempty and has nonnegative dimension. The minimum defining dimension at the point is therefore exactly zero.",
+   "text": "Unfold quasi-finiteness to openness of {x}. An open singleton has discrete subspace topology and dimension at most zero. For any open neighbourhood U of x, the closure of x in U is an irreducible closed subset, so dim U is nonnegative. The infimum of neighbourhood dimensions is at most the dimension of the singleton and at least zero, hence equals zero.",
    "uses": [
     "def-weil-pbc-ring-map-quasi-finite-at-prime",
     "def-kun-topological-dimension-at-point",
     "def-kun-topological-krull-dimension"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Tag 0H7C, lemma-isolated-dim-0-locally-noetherian, first implication; Topology Tag 0055, definition-Krull"
-   }
+   "elementary": true
   },
   {
-   "text": "Conversely, suppose $\\dim_{\\overline{\\mathfrak q}}X=0$. Since dimension at a point is the minimum of the dimensions of its open neighbourhoods, there is an open neighbourhood $U$ of $\\overline{\\mathfrak q}$ with $\\dim U=0$. Regard $U$ as an open subscheme of the Noetherian scheme $X$ from step 3. By [lem-weil-pbc-noetherian-open-subscheme-noetherian], $U$ is Noetherian, so [lem-sc-zero-dim-noetherian-finite-discrete] applies and its topology is discrete. In particular $\\{\\overline{\\mathfrak q}\\}$ is open in $U$. Since $U$ is open in $X$, a subset open in $U$ is open in $X$, by the definition of the subspace topology.",
+   "text": "If the local dimension is zero, it is less than one. Apply iInf_lt_iff twice to obtain an open U containing x with dim U < 1. Dimensions take values in WithBot ENat, so dim U <= 0. Apply the existing topological theorem lem-sc-zero-dim-noetherian-closed-finite with ambient U and closed subset univ. It gives finiteness of U and closedness of all its singleton subsets. Thus U is finite and T1, hence discrete.",
    "uses": [
     "def-kun-topological-dimension-at-point",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "lem-sc-zero-dim-noetherian-finite-discrete"
+    "def-kun-topological-krull-dimension",
+    "lem-sc-zero-dim-noetherian-closed-finite"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/properties.tex",
-    "place": "Tag 0H7C, lemma-isolated-dim-0-locally-noetherian, converse; Tag 0AAX, lemma-locally-Noetherian-dimension-0"
-   }
+   "elementary": false
   },
   {
-   "text": "The openness of $\\{\\overline{\\mathfrak q}\\}$ obtained in step 5 is precisely quasi-finiteness of $\\varphi$ at $\\mathfrak q$ by [def-weil-pbc-ring-map-quasi-finite-at-prime]. Together with step 4 this proves the asserted equivalence.",
+   "text": "The singleton of x in U is open by discreteness. The subtype inclusion of the open U in Spec F is an open map, and its image is {x}. Thus {x} is open in Spec F, precisely the definition of quasi-finiteness at q.",
    "uses": [
     "def-weil-pbc-ring-map-quasi-finite-at-prime"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebra.tex",
-    "place": "Tag 00PL, definition-quasi-finite, item (1), with condition (1) of Tag 00PK, lemma-isolated-point-fibre"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-weil-pbc-finite-type-algebra",
   "def-weil-pbc-localization-at-prime",
   "lem-wf-affine-noetherian-components",
-  "pqf-def-locnoeth",
-  "def-weil-pbc-quasi-compact-scheme",
-  "def-weil-affine-spectrum",
   "def-weil-pbc-ring-map-quasi-finite-at-prime",
   "def-kun-topological-dimension-at-point",
   "def-kun-topological-krull-dimension",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-sc-zero-dim-noetherian-finite-discrete"
+  "lem-sc-zero-dim-noetherian-closed-finite"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tag 0397, lemma-locally-quasi-finite-rel-dimension-0, second proof; Properties Tag 0H7C, lemma-isolated-dim-0-locally-noetherian, with the quasi-compact affine-fibre restriction of Tag 0AAX"
+  "by": "agent",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 0H7C, lemma-isolated-dim-0-locally-noetherian; U8 formalizes the same isolated-point/local-dimension argument using the already proved topological finiteness theorem directly, omitting the open-subscheme construction. Fibre Noetherianity is Mathlib finite-type base change and Hilbert basis."
  },
  "mathlib_searches": [
   {
@@ -257,9 +213,6 @@
   ]
  },
  "tool_uses": [
-  "lem-sc-zero-dim-noetherian-finite-discrete",
-  "pqf-def-locnoeth",
-  "def-weil-pbc-quasi-compact-scheme",
   "def-kun-topological-dimension-at-point",
   "def-kun-topological-krull-dimension"
  ],
@@ -300,5 +253,15 @@
   "by": "NX",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U8",
+  "result": "pass",
+  "landing": "20261018T062929-L-685305",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
