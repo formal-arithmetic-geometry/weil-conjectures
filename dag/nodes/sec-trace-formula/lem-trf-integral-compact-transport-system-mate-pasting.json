@@ -268,5 +268,33 @@
   "group": "Q52",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-b44b1be7d (reviewer sub-agent of L); spot-checked: I read the item in full, all 13 cited statements, both blueprint passages (clause (3) of prop-trf-rational-frobenius-integral-model; thm-trf-l-function-euler-product, 'Global powers', on compatibility with composition) and Stacks 0E47 (remark-compose-base-change-horizontal). I confirmed that tags 0B65, 0DV0, 03CB, 0D6D and 0GL1 match the cited labels. The statement typechecks: both sides go from G_1G_mFC to FK_{m+1}C, and t is the inverse of c_{h,k} with h=g, k=g^m. E_r is exactly the system composite e_f^c of def-weil-frobenius-square-exchange item 2, with gamma replaced by gamma^r, on strict semilinear systems; for general Y it is not identified with RGamma_c. I recomputed each step. Step 2's cocycle holds because both paths conjugate the same strict pushforward identification and are therefore equal by uniqueness. Step 3: pasting clause (1) gives (e_1H_m)(G_1e_m), and whiskering by t and u^{-1} gives e_{m+1}(tS)=(Su)(e_1H_m)(G_1e_m), with no invertibility of e used. Step 4: by the open normalization and the triangle identity, the mate of a_r=b_r^{-1} is theta^{-1}; this yields b_{m+1}(uJ)=(Jv)(b_1K_m)(H_1b_m). Step 5 is naturality of e_1 at b_m. Edge cases checked: m=1, p=id, j=id, C=0, noninvertible transitions; no flatness or Tor hypothesis is used. There is no cycle, and all dependencies exist and are unmerged. lem-trf-compact-frobenius-transport-composition is the finite-level analogue, not a duplicate. There are no new nodes. I accept the six declared off-unit tool uses (semilinear derived sections, open tensor normalization, conjugate-iso uniqueness, mate pasting, mate whiskering, pro-étale pullback composition) as generic tools. No SGA source is cited. No changes."
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralCompactTransportSystemMatePasting",
+  "file": "lean/Sheaf/Paper/IntegralCompactTransportSystemMatePasting.lean",
+  "declaration": "WeilConjectures.FrobeniusExchange.integralCompactTransportSystemMatePasting",
+  "declarations": [
+   "WeilConjectures.FrobeniusExchange.compactTransportPower",
+   "WeilConjectures.FrobeniusExchange.compactTransportPowerSquare",
+   "WeilConjectures.FrobeniusExchange.compactTransportSystemPull",
+   "WeilConjectures.FrobeniusExchange.compactTransportSystemCompositor",
+   "WeilConjectures.FrobeniusExchange.compactTransportSystemFunctor",
+   "WeilConjectures.FrobeniusExchange.compactTransportSystemExchange",
+   "WeilConjectures.FrobeniusExchange.integralCompactTransportSystemMatePasting"
+  ],
+  "statement": "theorem integralCompactTransportSystemMatePasting (hl : l ≠ D.p) [IsSeparated f₀.left] [LocallyOfFiniteType f₀.left] [QuasiCompact f₀.left] : ∀ (m : ℕ), 1 ≤ m → Functor.whiskerLeft (compactTransportSystemFunctor D l E f₀ c₀) (compactTransportSystemCompositor D l E Y₀ m).hom ≫ compactTransportSystemExchange D l E f₀ c₀ (m + 1) = Functor.whiskerRight (compactTransportSystemExchange D l E f₀ c₀ m) (compactTransportSystemPull D l E Y₀ 1) ≫ (Functor.associator (compactTransportSystemPull D l E X₀ m) (compactTransportSystemFunctor D l E f₀ c₀) (compactTransportSystemPull D l E Y₀ 1)).hom ≫ Functor.whiskerLeft (compactTransportSystemPull D l E X₀ m) (compactTransportSystemExchange D l E f₀ c₀ 1) ≫ (Functor.associator (compactTransportSystemPull D l E X₀ m) (compactTransportSystemPull D l E X₀ 1) (compactTransportSystemFunctor D l E f₀ c₀)).inv ≫ Functor.whiskerRight (compactTransportSystemCompositor D l E X₀ m).hom (compactTransportSystemFunctor D l E f₀ c₀)",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-18",
+  "note": "Repair of returned immutable head c835f1932537: removes the arbitrary categorical data structure. Categories are coefficientSequenceDerived; F is systemDerivedOpen followed by systemDirect on the geometric base change of the supplied k0 compactification; E_r is systemCompactExchange for powers of geometric Galois Frobenius; t is the inverse of integralComparisonSystemComposition. Finite-field, coefficient and separated finite-type data are explicit. No mathematical statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cfd4905f1",
+  "group": "NS",
+  "result": "pass",
+  "note": "Re-delivery fixes every point of the c835f19 RETURN. G = integralComparisonDerivedSequencePullback along End.of(galois)^r on coefficientSequenceDerived of the geometric fibres; F = systemDerivedOpen ⋙ systemDirect on geometricCompactification of the supplied c₀; E_r = systemCompactExchange (mateEquiv proper exchange + inverse open mate) with squares from r-fold paste_horiz of frobenius_square_cartesian; t = inverse of the ∃!-canonical integralComparisonSystemComposition plus eqToIso. No free data. ℓ≠p, finite-field/E data, separated finite-type f₀ and the k₀ compactification are explicit; nothing stronger; universes as in the dependency operations. The equation was checked term by term (whiskers/associators), ∀ m≥1, as a natural-transformation equality. Only lean differs from the live node; statement verbatim; six-step docstring; nt_compile --json clean 4.5 s. Advisory: Prop-valued def compactTransportPowerSquare with a glue proof; uses SystemOperationExchangeRealization/IntegralComparisonSequenceSystems decls outside stmt_deps, reached via the FrobeniusGeometricExchange stmt_dep as the return prescribed; compositor is not the recorded integralTowerGeneralPullbackComposition (that one does not type on sequence systems); redundant private proof imports."
  }
 }
