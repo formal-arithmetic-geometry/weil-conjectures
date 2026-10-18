@@ -13,9 +13,138 @@
   "def-weil-pbc-completed-pullback",
   "def-weil-derived-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "A field is Noetherian. Apply [lem-weil-pbc-finite-type-over-noetherian] to $X,Y$ over $\\operatorname{Spec}k$, and [lem-kun-dimension-finite-type] to obtain Noetherian finite-dimensional schemes. Invertibility of $\\ell$ pulls back from $k$. Thus both schemes satisfy the hypotheses of the raw finite-stage categories and the scalar-extension comparisons [prop-weil-pbc-scalar-extension]. The separated finite-type $k$-morphism in the item satisfies the morphism hypothesis of [lem-a1-rational-direct-image-realization], which in fact allows any $k$-morphism between these separated finite-type schemes.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type",
+    "prop-weil-pbc-scalar-extension",
+    "lem-a1-rational-direct-image-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.2, Proposition 6.8.14(1),(2), Remark 6.8.15; explicit pair-category passage"
+   }
+  },
+  {
+   "text": "At each finite field $E$ write $\\mathcal C_E(W)=D^b_c(W,E)$ using [def-weil-pbc-rational-category], $P_E=Lf^*_{\\mathrm{comp},E}$ and $D_E=Rf_{*,E}$. The completed pullback is precisely [def-weil-pbc-completed-pullback]; only the finite and integral constructions of [def-weil-derived-direct-image] are used to define $D_E$, followed by raw rationalization. By [lem-a1-rational-direct-image-realization] these functors preserve the bounded constructible categories and have the canonical adjunction $h_E$. The equivalence $J$ of [lem-per-continuous-rational-derived-realization] identifies this with the ambient continuous-module adjunction, including its actual unit and counit. Exactness requires no change of triangulation: [lem-cbc-completed-pullback-triangles] gives the shift and triangle comparisons of the specified integral completed pullback, and [lem-pc-right-derived-functor-triangulated] gives them for the ordinary ringed-topos direct image identified with the strict-tower operation by the realization statement. The coefficient integers are Noetherian DVRs by [lem-weil-l-adic-extension-integers-dvr], so the quotients used for the completed pullback are perfect, with the two-term resolution given by multiplication by $\\varpi^n$. Both integral functors are coefficient-linear: their complex and strict-tower maps preserve the constant coefficient action, so applying either construction to $c u$ gives $c$ times its value on $u$; the same equality holds on derived morphisms. Their raw rationalizations are exact by [prop-weil-pbc-rational-transport].",
+   "uses": [
+    "def-weil-pbc-rational-category",
+    "def-weil-pbc-completed-pullback",
+    "def-weil-derived-direct-image",
+    "lem-a1-rational-direct-image-realization",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-cbc-completed-pullback-triangles",
+    "lem-pc-right-derived-functor-triangulated",
+    "prop-weil-pbc-rational-transport",
+    "lem-weil-l-adic-extension-integers-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.2, Proposition 6.8.14(1),(2), Remark 6.8.15; explicit pair-category passage"
+   }
+  },
+  {
+   "text": "For $E\\subset L$, abbreviate the specified comparisons of [prop-weil-pbc-scalar-extension] by $a_{L/E}:T_XP_E\\to P_LT_Y$ and $b_{L/E}:T_YD_E\\to D_LT_X$. Apply [lem-per-arbitrary-field-adjunction-scalars] to this arbitrary field $k$, the given morphism, and these raw rationalized stages. Its mate equation gives, for $u:P_EA\\to B$,\n$$h_L(T_X(u)a_A^{-1})=b_B T_Y(h_E(u)).$$\nIt gives the inverse equation as well, for these exact $a,b$, and identity, tower and shift compatibility. This is the needed scalar-naturality input; compatibility of a direct-image realization alone would not imply this equation. No finite-field datum or Karoubi coefficient category is used.",
+   "uses": [
+    "prop-weil-pbc-scalar-extension",
+    "lem-per-arbitrary-field-adjunction-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.2, Proposition 6.8.14(1),(2), Remark 6.8.15; explicit pair-category passage"
+   }
+  },
+  {
+   "text": "Construct functors directly on the pair category of [def-weil-pbc-qbar-category, def-weil-pbc-finite-stage-pair-category]. On objects put $P(E,A)=(E,P_EA)$ and $D(E,B)=(E,D_EB)$. For $F=P$ or $D$ write $c^P=a$, $c^D=b$. If $[M,u]:(E,K)\\to(E',K')$, define\n$$F[M,u]=[M,(c^F_{M/E',K'})^{-1}F_M(u)c^F_{M/E,K}].$$\nThe map inside brackets goes from $T_{M/E}F_EK$ to $T_{M/E'}F_{E'}K'$, so has the required pair-category type. For an extension $M\\subset N$, the tower equation for $c^F$ in [prop-weil-pbc-scalar-extension], followed by naturality, identifies this formula at $N$ with the associator-conjugate extension of the formula at $M$. Hence eventually equal representatives have eventually equal images. The unit comparison makes identities map to identities. At a common stage the middle $c^F(c^F)^{-1}$ cancels in a composite, proving composition; additivity follows there too. These formulas define the completed pullback and rationalized direct image on this pair category, using their given finite-stage operations.",
+   "uses": [
+    "def-weil-pbc-qbar-category",
+    "def-weil-pbc-finite-stage-pair-category",
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.2, Proposition 6.8.14(1),(2), Remark 6.8.15; explicit pair-category passage"
+   }
+  },
+  {
+   "text": "Let $A=(E,A_E)$ and $B=(F,B_F)$. An arrow $P A\\to B$ is represented by $u:T_{M/E}P_EA_E\\to T_{M/F}B_F$. Define\n$$\\Psi[M,u]=[M,b_{M/F,B_F}^{-1}\\,h_M(u\\,a_{M/E,A_E}^{-1})].$$\nHere $u a^{-1}$ has source $P_MT_{M/E}A_E$, and the displayed adjunct has target $T_{M/F}D_FB_F$, as required for an arrow $A\\to D B$. Conversely define\n$$\\Phi[M,v]=[M,h_M^{-1}(b_{M/F,B_F}v)\\,a_{M/E,A_E}].$$\nFor $M\\subset N$, use the scalar equation of Step 3 with input $u a^{-1}$ and then the tower equations for $a,b$. This gives $\\Psi_N(u_N)=(\\Psi_M(u))_N$, with both transports precisely the associator conjugations in [def-weil-pbc-finite-stage-pair-category]. The inverse scalar equation gives the same identity for $\\Phi$. Thus both formulas respect eventual equality and define maps on the pair Hom sets. At one stage, $h_M^{-1}h_M=1$ and $h_Mh_M^{-1}=1$, and the neighboring $a,a^{-1}$ and $b,b^{-1}$ cancel. Consequently $\\Phi\\Psi=1$ and $\\Psi\\Phi=1$.",
+   "uses": [
+    "lem-per-arbitrary-field-adjunction-scalars",
+    "prop-weil-pbc-scalar-extension",
+    "def-weil-pbc-finite-stage-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.2, Proposition 6.8.14(1),(2), Remark 6.8.15; explicit pair-category passage"
+   }
+  },
+  {
+   "text": "Naturality is checked at one common finite stage. Substitute the formula of Step 4 for a map in either variable into Step 5. Naturality of $a,b$ moves these comparisons through the maps, and naturality of the finite-stage bijection $h_M$ identifies precomposition by $P$ of a map with precomposition by that map, and postcomposition with postcomposition by $D$ of that map. The inverse comparisons cancel, yielding the two pair-category naturality equations. The finite-stage naturality is supplied by [lem-a1-rational-direct-image-realization]. By the shift clause of [lem-per-arbitrary-field-adjunction-scalars], shifting $u$ and inserting the operation shift comparisons in the formula for $\\Psi$ gives the shifted formula for $\\Psi(u)$. The scalar shift comparisons commute with $a,b$ by [prop-weil-pbc-scalar-extension], so this calculation also holds for pairs represented at different fields and for all integer shifts.",
+   "uses": [
+    "lem-a1-rational-direct-image-realization",
+    "lem-per-arbitrary-field-adjunction-scalars",
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.2, Proposition 6.8.14(1),(2), Remark 6.8.15; explicit pair-category passage"
+   }
+  },
+  {
+   "text": "It remains to verify exactness with the actual common-stage cones [def-weil-pbc-common-stage-cones]. Let $[M,u]:(E,K)\\to(F,L)$ and choose its stage-$M$ distinguished triangle $T_{M/E}K\\to T_{M/F}L\\to C(u)\\to(T_{M/E}K)[1]$. For $F=P$ or $D$, apply the exact finite-stage functor $F_M$ from Step 2. The resulting distinguished triangle defines a distinguished common-stage triangle. The image under the pair functor of the original common-stage cone triangle is isomorphic to this triangle: on the first two vertices the isomorphisms are $c^F_{M/E,K}$ and $c^F_{M/F,L}$, and on the cone vertex it is the identity on $F_M C(u)$. On arrows this follows by the conjugation formula of Step 4. On the closing arrow, the definition uses $\\sigma_{M/E,K}^{-1}p_u$; the shift compatibility of $c^F$ in [prop-weil-pbc-scalar-extension] identifies its image with the closing arrow of the $F_M$-image triangle. The same operation shift comparisons define the pair functor's commutation with shift. Since every distinguished pair triangle is isomorphic to such a cone triangle, both pair functors are exact triangulated.",
+   "uses": [
+    "def-weil-pbc-common-stage-cones",
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.2, Proposition 6.8.14(1),(2), Remark 6.8.15; explicit pair-category passage"
+   }
+  },
+  {
+   "text": "For a representative already over $E$, the formulas of Steps 4 and 5 reduce to $P_E,D_E,h_E$ by the identity comparisons. Moving it to a further finite field $L$ changes its adjunct by exactly $h_L(T_Xu\\,a^{-1})=b\\,T_Yh_E(u)$ of [lem-per-arbitrary-field-adjunction-scalars]. Thus the constructed adjunction is compatible with every finite coefficient extension, with the prescribed units and counits: they are the adjuncts of the identity arrows, so the same equation applies to them. Tower compatibility gives the same result after successive extensions. With Steps 6 and 7 this proves all clauses of the unchanged statement on $\\mathcal C_X,\\mathcal C_Y$.",
+   "uses": [
+    "lem-per-arbitrary-field-adjunction-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.2, Proposition 6.8.14(1),(2), Remark 6.8.15; explicit pair-category passage"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-derived-direct-image",
+  "def-weil-pbc-common-stage-cones",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-pbc-finite-stage-pair-category",
+  "def-weil-pbc-qbar-category",
+  "def-weil-pbc-rational-category",
+  "lem-a1-rational-direct-image-realization",
+  "lem-cbc-completed-pullback-triangles",
+  "lem-kun-dimension-finite-type",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-per-arbitrary-field-adjunction-scalars",
+  "lem-per-continuous-rational-derived-realization",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "prop-weil-pbc-rational-transport",
+  "prop-weil-pbc-scalar-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.7.2, Proposition 6.8.14(1),(2), Remark 6.8.15; explicit pair-category passage; scalar compatibility isolated as a new statement-only node"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +187,38 @@
    "results": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a separated finite-type morphism over an arbitrary field, completed adic Qbar ell derived pullback is left adjoint to constructible derived direct image",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeSchemeΓ; LightCondMod.LocallyConstant.adjunction; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor",
+   "date": "2026-10-18",
+   "verdict": "no match: underived scheme-module adjunctions only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, DerivedCategory, pullback, pushforward",
+   "results": "No hits; loogle reported unknown identifier 'pullback'.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Adjunction|leftDerivedUpperStarAdjunction|derivedUpperStarLowerStarAdjunction (Mathlib/CategoryTheory)",
+   "results": "25 hits including generic CategoryTheory.Adjunction imports and localization/adjunction files; no adic constructible pullback/direct-image adjunction.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "adic constructible Qbar ell derived pullback direct image adjunction over arbitrary field",
+   "results": "SheafOfModules.PullbackConstruction.adjunction; CategoryTheory.Subobject.mapPullbackAdj; AlgebraicGeometry.Scheme.Modules.restrictAdjunction; CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous; TopCat.Sheaf.instIsLeftAdjointPullback; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; TopCat.Presheaf.pushforwardPullbackAdjunction.",
+   "date": "2026-10-18",
+   "verdict": "no match: only underived or unrelated adjunctions"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-artin-gabber-affine-curve",
@@ -78,5 +235,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-qbar-ordinary-adjunction",
+  "worker": "stage1",
+  "summary": "Repair of the returned delivery: retained the exact arbitrary-field statement; isolated the missing normalized scalar-mate equation in one new raw-rational-stage lemma; constructed both functors on actual pair-category morphisms; gave typed forward/inverse adjunct formulas, eventual-equality checks, naturality, shifts and the common-stage-cone exactness argument. Removed all use of the finite-field Karoubi operation definitions and replaced the vague triangulation transport with existing exactness statements.",
+  "blueprint": "Realizes Step 2 of the ancestor blueprint node lem-per-artin-gabber-affine-curve: the ordinary adjunction used to transfer the pullback bound to direct image. The finite-stage realization and common-stage passage are the route retained here.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-completed-pullback-triangles",
+    "why": "Exactness for the specified strict-tower completed pullback; generic construction lemma, no replacement of the perverse unit route."
+   },
+   {
+    "node": "prop-weil-pbc-rational-transport",
+    "why": "Exact coefficient-linear operations extend to raw scalar localization."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic shift and triangle preservation for the K-injective ordinary direct image."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Scheme hypotheses of the coefficient-category constructions."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Finite dimension of finite-type schemes over an arbitrary field."
+   },
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Canonical scalar comparisons and their identity, tower and shift coherences."
+   },
+   {
+    "node": "def-weil-pbc-common-stage-cones",
+    "why": "The actual triangles used by the target pair category."
+   },
+   {
+    "node": "def-weil-pbc-finite-stage-pair-category",
+    "why": "The actual representative, equivalence and composition formulas for the target category."
+   },
+   {
+    "node": "def-weil-pbc-qbar-category",
+    "why": "The target coefficient category is exactly the pair category."
+   },
+   {
+    "node": "def-weil-pbc-rational-category",
+    "why": "Raw rationalized finite-stage categories underlying the target."
+   },
+   {
+    "node": "def-weil-pbc-completed-pullback",
+    "why": "The specified completed pullback used in the target."
+   },
+   {
+    "node": "def-weil-derived-direct-image",
+    "why": "Only the finite and integral constructions, then raw rationalization; its other Qbar category is never invoked."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Noetherian DVR coefficient rings and perfect finite quotients required by the strict-tower exactness input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-completed-pullback-triangles",
+  "prop-weil-pbc-rational-transport",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "prop-weil-pbc-scalar-extension",
+  "def-weil-pbc-common-stage-cones",
+  "def-weil-pbc-finite-stage-pair-category",
+  "def-weil-pbc-qbar-category",
+  "def-weil-pbc-rational-category",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-derived-direct-image",
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q07-f4aa02456",
+  "group": "Q07",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q07-f4aa02456 (reviewer sub-agent of L); spot-checked: Re-delivery after the RETURN of run 3d7813e1. All three returned points are repaired. The item statement is verbatim (only proof, proof_deps, proof_origin and split_report changed). review_split.py: PASS, 1 new node. No SGA. Source check: Bhatt–Scholze Lemma 6.7.2 needs f finitely presented between qcqs schemes and Y quasi-excellent and ell-coprime, which the item's hypotheses give; Remark 6.8.15 also read. C3/C4: Step 3 now cites the new statement-only node lem-per-arbitrary-field-adjunction-scalars for h_L(T_X(u)a^{-1}) = b T_Y(h_E u) and its inverse. Types check with a: T_X P_E -> P_L T_Y and b: T_Y D_E -> D_L T_X from prop-weil-pbc-scalar-extension. The new node generalizes lem-pur-ordinary-adjunction-scalar-compatibility from Fq-bar to any field, with the same normalization of b as a transpose through d. In that node's 13 steps the field enters only in Step 1 (hypothesis checks) and Step 11 (constructibility), and the new node takes constructibility from the arbitrary-field realization node instead. Small cases checked: E=L, f=id, X empty, ramified L/E, characteristic 0. Duplicate search by rg (h_L, mate over a field, adjunction/scalar terms): the closest nodes (lem-pur-ordinary-adjunction-scalar-compatibility, lem-pur-finite-coefficient-adjoint-comparisons, lem-pur-smooth-exchange-scalar-compatibility, prop-weil-pbc-qbar-condensed-basechange-compatibility, lem-per-qbar-arbitrary-field-duality) are restricted to finite or positive-characteristic fields or are different statements. B1–B9 are fine. The node is a finite-stage fact strictly smaller than the item, so it is not a D1 restatement and there is no cycle. E1/E6: Step 2 uses only the integral and finite part of def-weil-derived-direct-image plus raw localization, with no Karoubi operations. Step 4 defines the functors on pair-category morphisms by conjugation with c^F; types, stage independence, identities and composition checked. Step 5's adjunct formulas Psi and Phi are typed, well defined on the colimit Hom groups and mutually inverse. Step 7 checks exactness against def-weil-pbc-common-stage-cones, including the sigma^{-1} p_u arrow and the shift clause. E5: the vague 'transports' wording is replaced by lem-cbc-completed-pullback-triangles, lem-pc-right-derived-functor-triangulated and prop-weil-pbc-rational-transport, with the perfect-quotient hypothesis checked via the DVR node. The worker wrote tool_uses itself (C8). I accept them all: the target category's data comes from sk-thm-properbasechange and the rest are generic tools. Minor and not a fault: no arbitrary-field node states that the completed pullback preserves constructibility; the realization statements presuppose it, as at the earlier review. No fixes."
  }
 }

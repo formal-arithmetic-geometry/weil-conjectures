@@ -1,0 +1,83 @@
+{
+ "id": "lem-per-arbitrary-field-adjunction-scalars",
+ "kind": "statement",
+ "title": "Finite coefficient extension preserves the normalized ordinary adjunction over any field",
+ "statement": "Let $k$ be a field, let $\\ell$ be a prime invertible in $k$, and let $f:X\\to Y$ be a separated finite-type $k$-morphism between separated finite-type $k$-schemes [def-weil-scheme-morphism-properties]. Choose an algebraic closure $\\overline{\\mathbf Q}_\\ell$ and finite intermediate fields $E\\subset L$ [def-weil-l-adic-coefficient-extension]. For $H=E,L$ and $W=X,Y$ use the raw rationalized categories $\\mathcal C_H(W)=D^b_c(W,H)$ of [def-weil-pbc-rational-category], without a Karoubi envelope. Let $P_H$ be the rationalized completed pullback of [def-weil-pbc-completed-pullback], and let $D_H$ be the raw rationalized integral derived direct image of [def-weil-derived-direct-image]. Write\n$$h_H:\\operatorname{Hom}(P_H A,B)\\xrightarrow{\\sim}\\operatorname{Hom}(A,D_H B)$$\nfor the canonical adjunction identified with the ambient continuous-module derived adjunction by [lem-a1-rational-direct-image-realization, lem-per-continuous-rational-derived-realization], and $\\varepsilon_H:P_HD_H\\to1$ for its counit. Put $T_W=T_{L/E,W}$ and use precisely the comparisons and tensor associators of [prop-weil-pbc-scalar-extension],\n$$a:T_XP_E\\xrightarrow{\\sim}P_LT_Y,\\qquad b:T_YD_E\\xrightarrow{\\sim}D_LT_X.$$\nThen these specified comparisons are adjunction mates:\n$$h_L^{-1}(b_B)=T_X(\\varepsilon_{E,B})\\circ a_{D_EB}^{-1}.$$\nIn particular, for $A\\in\\mathcal C_E(Y)$, $B\\in\\mathcal C_E(X)$, $u:P_EA\\to B$ and $v:A\\to D_EB$,\n$$h_L\\bigl(T_X(u)\\circ a_A^{-1}\\bigr)=b_B\\circ T_Y\\bigl(h_E(u)\\bigr),$$\n$$h_L^{-1}\\bigl(b_B\\circ T_Y(v)\\bigr)=T_X\\bigl(h_E^{-1}(v)\\bigr)\\circ a_A^{-1}.$$\nThe same mate equality holds in the ambient derived categories of continuous coefficient-module sheaves under the realizations $J_W$ above. Explicitly, put $R_{H,W}=\\varprojlim_n(\\mathcal O_H/\\varpi_H^n)_W$ and $H_W=R_{H,W}[1/\\varpi_H]$. Let $\\widetilde P_H=H_X\\otimes^L_{f^{-1}H_Y}f^{-1}(-)$ and $\\widetilde D_H=Rf_{*,H}$ denote the ordinary ambient derived module operations, with adjunction $\\widetilde h_H$ and counit $\\widetilde\\varepsilon_H$. For ambient coefficient extension $\\widetilde T_W=-\\otimes^L_{E_W}L_W$ with restriction $V_W$ and coefficient-adjunction unit $\\eta^c_W$ [lem-pur-sheaf-ring-derived-coefficient-adjunction], let $d:V_Y\\widetilde D_L\\xrightarrow{\\sim}\\widetilde D_EV_X$ be the derived ringed-topos composition comparison of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. The ambient comparison $\\widetilde b_K$ is the coefficient-adjunction transpose of\n$$\\widetilde D_EK\\xrightarrow{\\widetilde D_E(\\eta^c_{X,K})}\\widetilde D_EV_X\\widetilde T_XK\\xrightarrow{d^{-1}}V_Y\\widetilde D_L\\widetilde T_XK,$$\nand is also the ordinary pullback/direct-image mate of the inverse balanced tensor comparison $\\widetilde a$. Explicitly, $\\widetilde h_L^{-1}(\\widetilde b_K)=\\widetilde T_X(\\widetilde\\varepsilon_{E,K})\\circ\\widetilde a_{\\widetilde D_EK}^{-1}$, where $\\widetilde a:\\widetilde T_X\\widetilde P_E\\xrightarrow{\\sim}\\widetilde P_L\\widetilde T_Y$. Its restriction through $J$ is the specified $b$, with $\\widetilde a$ restricting to $a$. These are equalities of coefficient-linear derived morphisms with these normalizations. The bijections $h_H$ and their inverses are $H$-linear and commute with cochain shifts under the canonical operation shift comparisons. All displayed equations respect identity extensions and successive extensions $E\\subset L\\subset L'$ under the tensor associators of [prop-weil-pbc-scalar-extension].",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.7.2, Proposition 6.8.14(2) and Remark 6.8.15; agent-derived scalar-mate compatibility, generalizing the finite-field lemma lem-pur-ordinary-adjunction-scalar-compatibility to arbitrary fields and raw rationalized stages"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-rational-category",
+  "def-weil-pbc-completed-pullback",
+  "def-weil-derived-direct-image",
+  "lem-a1-rational-direct-image-realization",
+  "lem-per-continuous-rational-derived-realization",
+  "prop-weil-pbc-scalar-extension",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical adjunction between completed adic pullback and derived direct image over any field commutes with finite coefficient extension via its tensor and projection comparisons",
+   "results": "AdicCompletion.tensor_map_id_left_eq_map; AdicCompletion.ofTensorProduct_naturality; AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply; AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of; IsDedekindDomain.HeightOneSpectrum.algebraMap_adicCompletion; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction",
+   "date": "2026-10-18",
+   "verdict": "no match: generic mate or underived module-adjunction statements do not identify the specified adic comparisons"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.NatTrans",
+   "results": "No hits.",
+   "date": "2026-10-18",
+   "verdict": "no match: generic mate or underived module-adjunction statements do not identify the specified adic comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "mate|conjugate|homEquiv.*naturality",
+   "results": "Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean; Mathlib/CategoryTheory/Adjunction/Unique.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: generic mate or underived module-adjunction statements do not identify the specified adic comparisons"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite change of l-adic coefficient fields preserves the normalized completed pullback direct image adjunction on raw rationalized constructible derived categories",
+   "results": "TopCat.Presheaf.pushforwardPullbackAdjunction; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; TopCat.Sheaf.pullbackPushforwardAdjunction; SheafOfModules.pullback; CategoryTheory.Functor.sheafPullbackConstruction.sheafAdjunctionContinuous; TopCat.Sheaf.instIsLeftAdjointPullback",
+   "date": "2026-10-18",
+   "verdict": "no match: generic mate or underived module-adjunction statements do not identify the specified adic comparisons"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension of coefficients commutes with the Hom adjunction bijection of completed derived pullback and direct image, with canonical mate normalization",
+   "results": "ModuleCat.homEquiv_extendScalarsComp; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.PullbackConstruction.adjunction; PresheafOfModules.pullbackComp; SheafOfModules.pullbackObjUnitToUnit; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+   "date": "2026-10-18",
+   "verdict": "no match: generic mate or underived module-adjunction statements do not identify the specified adic comparisons"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-qbar-ordinary-adjunction",
+  "date": "2026-10-18",
+  "group": "Q07"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Step 2: the ordinary adjunction used in BBD 4.2.4; compatibility needed to pass its finite-coefficient-stage Hom bijections to the arbitrary-field pair category",
+   "via": [
+    "lem-per-qbar-ordinary-adjunction"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
