@@ -33,7 +33,7 @@
    }
   },
   {
-   "text": "For both $R$ and $S$, apply clause (1) of [lem-weil-pbc-module-sheaves-colimits-forgetful]: the forgetful functor to abelian sheaves is faithful and preserves kernels and cokernels. Consequently it also preserves images, since an image is the kernel of a cokernel. In particular a short exact sequence of $S$-module sheaves has a short exact underlying sequence of abelian sheaves. This assertion concerns sheaf cokernels, which are sheafifications of sectionwise cokernels; it does not assert surjectivity on sections.",
+   "text": "For both completed and finite quotient coefficient sheaves, the forgetful functor to abelian sheaves preserves finite limits and finite colimits by the module-sheaf forgetful theorem. After restriction of scalars, forgetting is definitionally the original forgetful functor on the finite quotient module category. Hence the composite of restriction with the completed-coefficient forgetful functor preserves finite limits and finite colimits.",
    "uses": [
     "lem-weil-pbc-module-sheaves-colimits-forgetful"
    ],
@@ -44,7 +44,7 @@
    }
   },
   {
-   "text": "Let $0\\to M_1\\to M_2\\to M_3\\to0$ be such a short exact sequence. By Step 1 its restricted sequence has the same underlying abelian sequence; the composite of its two arrows remains zero because restriction keeps the morphisms and their composition. In the $R$-module category form the kernel of its first arrow, the cokernel of its second arrow, and the middle homology (the cokernel of the image inclusion into the kernel of the second arrow). By the preservation of kernels and cokernels in [lem-weil-pbc-module-sheaves-colimits-forgetful], the forgotten kernel, image and cokernel comparison maps identify the underlying image-to-kernel inclusion with that of the abelian sequence in Step 2. Therefore all three obstructions have zero underlying abelian sheaf. Faithfulness implies each is zero: its identity maps to the zero morphism, so its identity is zero. Thus the restricted sequence is short exact. This proves exactness of $\\operatorname{Res}_n$. No flatness or sectionwise lifting is used; the argument works along any sheaf ring morphism, so in particular along the stated reduction.",
+   "text": "The forgetful functor from completed-coefficient module sheaves reflects finite limits and finite colimits: kernels and cokernels have the underlying abelian sheaf constructions, and the functor is faithful. Apply Mathlib.preservesFiniteLimits_of_reflects_of_preserves and preservesFiniteColimits_of_reflects_of_preserves to the composites in Step 2. Thus restriction itself preserves finite limits and finite colimits, which is the exactness assertion. This argument uses sheafified cokernels, not sectionwise surjectivity, and requires no flatness.",
    "uses": [
     "lem-weil-pbc-module-sheaves-colimits-forgetful"
    ],
@@ -189,5 +189,15 @@
   "date": "2026-10-16",
   "existing": true,
   "note": "§1(B): the old exactness declaration requires a FiniteFieldDatum absent from the consumer. The published unrestricted exact restriction functor uses precisely the same completed-ring projection and preserves both finite limits and finite colimits."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-c4e0c",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261018T091402-L-3254673",
+  "kind": "interface",
+  "note": "independent cc review: Delivered DerivedScalarExtensionRestrictionAdjunction.lean vs clones/live version (3 statements byte-identical; scalarReductionDerivedExistence gets an explicit, definitionally equal type per change record, only users in the item module); compiled cleanly, direct importer IntegralCoefficients compiles against it; axioms only upstream sorryAx; all 6 new plain imports necessary; node proof/proof_deps vs Lean proof"
  }
 }

@@ -35,91 +35,85 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal C=Y_{\\mathrm{proet}}$, $R=\\widehat{\\mathcal O}_{E,Y}$, $S=(A_{E,n})_Y$ and $a=\\pi_n:R\\to S$. Here the finite constant sheaves, their quotient transitions, the sectionwise inverse-limit ring $R$ and the module derived categories are the constructions explicitly defined in the statement; no finite-field datum is needed. All module categories and localizations use the small skeleton and module universe of the site. Apply the ringed-topos module adjunction to the identity morphism of $\\operatorname{Sh}(\\mathcal C)$ with coefficient map $a$. Its tensor-formula pullback is $G(N)=S\\otimes_R N$ and its pushforward is $F(H)=\\operatorname{Res}_n H$. Thus $G\\dashv F$ on module sheaves. More explicitly, the forward Hom map sends $v$ to $x\\mapsto v(1\\otimes x)$; its inverse sends $w$ to $s\\otimes x\\mapsto s\\,w(x)$. These formulas are balanced, commute with restriction, and hence induce maps on the sheafified tensor product. Their composites are identities on generators. The underived unit is consequently $\\eta_N:x\\mapsto 1\\otimes x$, the tensor map induced by $a$.",
+   "text": "For the completed coefficient projection, the existing same-site tensor/restriction construction gives the underived adjunction and its normalized unit. The exactness proof uses the underlying abelian-sheaf forgetful functors and reflection of finite limits and colimits.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
     "def-pur-sheaf-tensor-product",
     "def-pc-sheaf-restrict-scalars",
-    "def-weil-pbc-proetale-site",
-    "def-pur-sheaf-inverse-limit",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D7 (lemma-adjoint-pullback-pushforward-modules), specialized to the identity topos and the ring map $a:R\\to S$; Tag 03CZ (lemma-adjointness-tensor-restrict) gives the same-site formulas"
-   }
-  },
-  {
-   "text": "Restriction of scalars changes only the scalar action. A sectionwise kernel therefore remains the same kernel with restricted action. A cokernel is the sheafification of the sectionwise abelian-group quotient in either module category; the restricted action is induced by $a$, so the same quotient and its sheafification give the cokernel after restriction. Thus $F$ preserves kernels and cokernels and is exact, without a hypothesis on $a$ or on the characteristic of $Y$.",
-   "uses": [
-    "def-pc-sheaf-restrict-scalars",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DA (lemma-abelian), with the restriction construction preceding Tag 03CZ (lemma-adjointness-tensor-restrict)"
-   }
-  },
-  {
-   "text": "Apply exact-functor derived factorization to $F$ to obtain its triangulated termwise functor $F_D$. Apply the exact-functor derived theorem: every complex computes $RF$ and its comparison $Q_R F(M)\\to RF(Q_S M)$ is an isomorphism. Accordingly identify $RF=F_D=\\operatorname{Res}_n$ on the unbounded derived categories. Apply derived change of rings to the actual sheaf map $a:R\\to S$, not to the discrete constant sheaf $(\\mathcal O_E)_Y$. It supplies an everywhere-defined exact left derived functor $LG$; on a K-flat resolution $p:P\\to K$ its value is $Q_S(S\\otimes_R P)$. This is precisely the tensor functor named in the item, including its canonical comparisons for different K-flat resolutions.",
-   "uses": [
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-exact-functor-derived-functor",
     "lem-pur-derived-change-of-rings"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YY (lemma-derived-base-change), identity-topos coefficient change; derived.tex Tag 015F (lemma-right-derived-exact-functor)"
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ"
    }
   },
   {
-   "text": "Use the general derived-adjoint-functors theorem with $\\mathcal A=\\operatorname{Mod}(S)$, $\\mathcal B=\\operatorname{Mod}(R)$, $F:\\mathcal A\\to\\mathcal B$ restriction and $G:\\mathcal B\\to\\mathcal A$ tensor extension. Step 1 gives the underived adjunction, and step 3 gives existence at every complex of both derived functors. The theorem yields the canonical bijections $\\operatorname{Hom}_{D(S)}(LG(K),M)\\cong\\operatorname{Hom}_{D(R)}(K,RF(M))$, bifunctorial in both derived variables. With the identifications of step 3 these are exactly the asserted bijections. No boundedness, flatness of $S$ over $R$, derived completeness of $K$, or constructibility is used.",
+   "text": "For exact restriction R, every homotopy object K has an essentially constant ind diagram after the denominator-under construction. Build the filtered category explicitly from the right-fraction calculus and use the exact functor to show that every map out of the identity denominator is sent to an isomorphism in the derived category; the resulting cocone is the required essential-constancy witness.",
    "uses": [
-    "lem-pc-derived-adjoint-functors"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6 (lemma-adjoint), proof invoking derived.tex Tag 09T5 (lemma-derived-adjoint-functors)"
-   }
-  },
-  {
-   "text": "Identify the unit, including its compatibility with the chosen resolution. For K-flat $P$, use the canonical comparison $LG(Q_RP)\\cong Q_SG(P)$. In the pre-derived adjunction formula take the target complex to be $G(P)$, its denominator $s$ to be the identity, the source denominator $t$ to be the identity of $P$, and $f=\\eta_P:P\\to F G(P)$. The termwise homotopy adjunction sends $f$ to $\\operatorname{id}_{G(P)}$. The right comparison is the exact-functor identification and the left comparison at $P$ is the K-flat isomorphism. Thus $Q_R(\\eta_P)$ is the adjunct of the identity of $LG(Q_RP)$. It is the derived unit on $Q_RP$. For a resolution $p:P\\to K$, naturality of the canonical bijection gives $\\eta_K=RF(LG(Q_Rp))\\circ Q_R(\\eta_P)\\circ(Q_Rp)^{-1}$. Under the model $LG(K)\\cong Q_SG(P)$ this is the roof $K\\xleftarrow{p}P\\xrightarrow{x\\mapsto1\\otimes x}F(S\\otimes_RP)$. Since $x\\mapsto1\\otimes x$ is induced by $a$, this proves the claimed description of the unit, independently of the resolution by the same naturality.",
-   "uses": [
-    "lem-pc-pre-derived-adjoint-functors-general",
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-pbc-exact-functor-derived-functor"
+    "lem-pc-right-fraction-representation",
+    "def-pc-essentially-constant-ind-diagram"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 0DVC (lemma-pre-derived-adjoint-functors), 09T5 (lemma-derived-adjoint-functors); sites-cohomology.tex Tag 06YY"
+    "place": "right-fraction localization and exact functor derived factorization"
+   }
+  },
+  {
+   "text": "For the left-derived comparison, use the resolving-class essential-constancy theorem on the class of homotopy objects where the chosen counit is invertible. K-flat resolutions supply this class and counit naturality proves closure under the relevant quasi-isomorphisms, giving the required essentially constant pro diagrams.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-resolving-class-essential-constancy",
+    "def-pc-essentially-constant-pro-diagram"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 09T5 and 0DVC"
+   }
+  },
+  {
+   "text": "Apply the existing compatibility theorem for derived adjunctions to the homotopy adjunction, the two essential-constancy witnesses, the chosen derived extension and exact derived restriction, and their comparison maps. It produces the required derived adjunction and the canonical hom-equivalence formula.",
+   "uses": [
+    "new-derived-adjunction-compatibility",
+    "lem-weil-pbc-termwise-adjunction-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 09T5 and 0DVC; existing DerivedAdjunctionCompatibility module"
+   }
+  },
+  {
+   "text": "Specialize the compatibility formula to the identity homotopy morphism. Naturality of the derived hom-equivalence identifies the comparison with the derived unit followed by the image of the underived counit. Reassociate and cancel the inverse/forward factorization isomorphisms to obtain the displayed unit equation.",
+   "uses": [
+    "new-derived-adjunction-compatibility"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "derivedη factorization"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
   "def-pur-sheaf-tensor-product",
   "def-pc-sheaf-restrict-scalars",
-  "def-weil-pbc-proetale-site",
-  "def-pur-sheaf-inverse-limit",
-  "def-weil-abstract-derived-category",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-exact-functor-derived-functor",
   "lem-pur-derived-change-of-rings",
-  "lem-pc-derived-adjoint-functors",
-  "lem-pc-pre-derived-adjoint-functors-general",
-  "lem-weil-pbc-termwise-adjunction-homotopy"
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-restriction-of-scalars-exact",
+  "lem-pc-kflat-resolution",
+  "lem-pur-resolving-class-essential-constancy",
+  "def-pc-essentially-constant-ind-diagram",
+  "def-pc-essentially-constant-pro-diagram",
+  "lem-pc-right-fraction-representation",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "new-derived-adjunction-compatibility"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 07A6 (lemma-adjoint), 06YY (lemma-derived-base-change); derived.tex Tags 09T5, 0DVC, 015F; sites-modules.tex Tag 03CZ"
+  "document": "literature/stacks-project/derived.tex; Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+  "place": "Derived adjunction compatibility and derived unit factorization, instantiated with exact restriction and the chosen scalar-reduction derived extension"
  },
  "mathlib_searches": [
   {
@@ -256,11 +250,6 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-ringed-topoi-module-adjunction",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-pc-derived-adjoint-functors",
-  "lem-pc-pre-derived-adjoint-functors-general",
   "lem-weil-pbc-termwise-adjunction-homotopy"
  ],
  "reviewed": {
@@ -309,5 +298,15 @@
   "existing": false,
   "note": "§1(B), returned-delivery repair: the immutable overlay lacked IsKFlatResolutionIndependentCoefficients and server artifacts exposed the older two-universe IsKFlat. Restore the recorded canonical independent-coefficient K-flat predicates and use those names throughout the paired reduction/adjunction packet. Site universes t+1 and t and coefficient universe max u (t+1) remain independent; all tensor formulas, universal properties and mathematical hypotheses are preserved.",
   "file": "lean/Sheaf/Paper/DerivedScalarExtensionRestrictionAdjunction.lean"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-c4e0c",
+  "group": "G2",
+  "result": "pass",
+  "landing": "20261018T091402-L-3254673",
+  "kind": "interface",
+  "note": "independent cc review: Delivered DerivedScalarExtensionRestrictionAdjunction.lean vs clones/live version (3 statements byte-identical; scalarReductionDerivedExistence gets an explicit, definitionally equal type per change record, only users in the item module); compiled cleanly, direct importer IntegralCoefficients compiles against it; axioms only upstream sorryAx; all 6 new plain imports necessary; node proof/proof_deps vs Lean proof"
  }
 }
