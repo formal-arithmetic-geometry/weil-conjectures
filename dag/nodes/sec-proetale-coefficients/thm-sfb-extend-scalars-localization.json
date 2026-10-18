@@ -37,215 +37,62 @@
  ],
  "proof": [
   {
-   "text": "Put $A_T=\\mathcal O_{E,T}$ and $B_T=E_T$ for every scheme $T$, and $A=A_X$, $B=B_X$. The item's map $\\varphi\\colon A_X\\to B_X$ is $p_X^*$ of the condensed inclusion [def-sfb-integers-to-subfield], with $p_X^*=\\pi_X^*\\circ\\mathrm{sheafify}\\circ\\operatorname{Lan}_{u^{\\mathrm{op}}}$ and $u(S)=\\operatorname{Spec}LC(S,\\mathbf Z)$ [sk-def-sfb-pullback-from-point]. Give $E$ the absolute value restricted from $\\overline{\\mathbf Q}_\\ell$, a norm extending that of $\\mathbf Q_\\ell$; then the same formula $p_T^*=\\pi_T^{-1}\\circ a^*$, $a(S)=\\operatorname{Spec}LC(S,\\mathbf Z)$, applied to the same topological rings $C(-,\\mathcal O_E)\\to C(-,E)$ defines the pulled-back condensed topological rings, with the actual inclusion $A_T\\to B_T$, of [def-weil-pbc-continuous-integral-coefficients] and [def-weil-pbc-condensed-e-module-category]. So these coincide by definition. Internal modules and sectionwise ring-sheaf modules are identified by [def-weil-pbc-internal-abelian-sheaf-module-equivalence]: the underlying abelian sheaves and their sections are unchanged. In particular free modules, finite presentations, exact sequences and their derived categories correspond. Let $\\mathcal T,\\mathcal T'$ be the two full bounded constructible categories in the statement. Their constructibility is the stratified local-finite-presentation predicate in the CURRENT statement of [sk-def-sfb-bounded-constructible], equivalently [def-sfb-constructible-module]. It is exactly the predicate used by the integral- and rational-coefficient tools just cited. No equality with finite constant local models is assumed.",
+   "text": "Give E its induced norm and normed Q_l-algebra structure. The integral ring object and inclusion in this module agree definitionally with continuousIntegers and integralScalarMap. The already proved boundedConstructible_derivedExtendScalars_obj defines the restriction F. The restriction is additive, by the isomorphism between the left derived functor of exact scalar extension and its levelwise derived functor. Use the proved integral-coefficient triangulated instance explicitly. Cache the standard small-colimit preservation of the two tensor functors locally; this changes only proof-valued typeclass arguments and avoids repeated graded-tensor instance search. Prove the criterion application first in continuousScalar_isLocalization for an arbitrary normed finite extension, with the proved preservation, additivity and integral triangulation supplied. Specialize that completed proof to the induced norm on the fixed subfield in the public instance. Use the proved general-coefficient integralScalarExtension_additive helper and an explicit definitional equality of the two functor presentations; preserve every original public statement and definition verbatim.",
    "uses": [
-    "def-weil-pbc-continuous-integral-coefficients",
-    "def-weil-pbc-condensed-e-module-category",
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "sk-def-sfb-bounded-constructible",
-    "def-sfb-constructible-module",
     "def-sfb-integers-to-subfield",
-    "sk-def-sfb-pullback-from-point"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definitions 6.8.1, 6.8.8, 6.8.10; coefficient/predicate identifications through the cited generic ring-object interfaces"
-   }
-  },
-  {
-   "text": "By [lem-weil-pbc-integral-constructible-serre] the integral constructible modules are closed under kernels, cokernels and extensions; [lem-weil-pbc-condensed-constructible-serre] says the same for the finite rational field $E$. Both apply to schemes with Noetherian underlying space, with precisely the coefficients and local-finite-presentation predicate fixed in step 1. Zero and isomorphism invariance follow directly from that predicate. The conditional triangulated-subcategory assertion of [sk-def-sfb-bounded-constructible] now applies to both categories. Thus $\\mathcal T,\\mathcal T'$ inherit their shifts and distinguished triangles. Their additive Hom groups give the canonical $\\mathbf Z$-linear structure, and additive shifts preserve integer multiplication.",
-   "uses": [
-    "lem-weil-pbc-integral-constructible-serre",
-    "lem-weil-pbc-condensed-constructible-serre",
+    "def-weil-pbc-continuous-integral-coefficients",
+    "lem-sfb-extend-scalars-bounded-constructible",
+    "sk-def-sfb-derived-extension-of-scalars",
+    "sk-def-sfb-pullback-from-point",
+    "lem-weil-pbc-continuous-integral-scalar-exact",
+    "lem-weil-pbc-padic-integers-bounded-triangulated",
+    "def-sfb-bounded-constructible-extend-scalars",
     "sk-def-sfb-bounded-constructible"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Corollary 6.8.9 and Proposition 6.8.11; the two cited Serre lemmas supply the generic-predicate comparison inputs"
-   }
+   "elementary": false
   },
   {
-   "text": "By [det-prop-sfb-qlbar-colimit-x-invert-ell], $B=A[1/\\ell]=\\varinjlim(A\\xrightarrow{\\ell}A\\to\\cdots)$ and $B$ is flat. For a K-flat resolution $P\\to K$, the computation in [sk-def-sfb-derived-extension-of-scalars] gives $F(K)=B\\otimes_AP$. Exact tensor takes $P\\to K$ to a quasi-isomorphism, so this identifies $F$ canonically with termwise ordinary tensor on derived categories. By [lem-sf-exact-functor-derived-triangulated] this functor is triangulated. Its restriction to $\\mathcal T\\to\\mathcal T'$ is defined by [lem-sfb-extend-scalars-bounded-constructible] and is exactly [def-sfb-bounded-constructible-extend-scalars]. For all termwise tensor and colimit calculations below use the small skeleton of [def-weil-pbc-proetale-site], in its larger universe. We use ordinary module sheaves, without completion.",
-   "uses": [
-    "det-prop-sfb-qlbar-colimit-x-invert-ell",
-    "sk-def-sfb-derived-extension-of-scalars",
-    "lem-sf-exact-functor-derived-triangulated",
-    "lem-sfb-extend-scalars-bounded-constructible",
-    "def-sfb-bounded-constructible-extend-scalars",
-    "def-weil-pbc-proetale-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.2 and Proposition 6.8.14(2); blueprint opening paragraph"
-   }
-  },
-  {
-   "text": "The functor $F$ is additive, so if $\\ell^n\\operatorname{id}_Z=0$ then $\\ell^n\\operatorname{id}_{FZ}=0$. Multiplication by $\\ell$ on $FZ$ is invertible because it is so on $B$ [det-prop-sfb-qlbar-colimit-x-invert-ell]; composing with its inverse gives $\\operatorname{id}_{FZ}=0$, so $FZ$ is zero. For a morphism in $W_{\\ell^{\\mathbf N}}$, apply $F$ to its cone triangle. Its cone is now zero, so [lem-kun-distinguished-cone-zero] makes the image arrow an isomorphism. The localization universal property in [sk-def-sfb-rationalization] therefore gives a factor $\\bar F:\\mathcal T[\\ell^{-1}]\\to\\mathcal T'$.",
-   "uses": [
-    "det-prop-sfb-qlbar-colimit-x-invert-ell",
-    "lem-kun-distinguished-cone-zero",
-    "sk-def-sfb-rationalization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/thm-sfb-extend-scalars-localization.proof.md",
-    "place": "F inverts W"
-   }
-  },
-  {
-   "text": "Use the Verdier localization model whose objects are those of $\\mathcal T$. Let $Q:\\mathcal T\\to\\mathcal T[\\ell^{-1}]$ be the rationalization. Apply [lem-sfb-rationalization-scalar-fractions] with $R=\\mathbf Z$ and $M=\\{\\ell^n:n\\ge0\\}$. The canonical map\n$$\\varinjlim_n\\operatorname{Hom}_{\\mathcal T}(K,L)\\longrightarrow\\operatorname{Hom}_{\\mathcal T[\\ell^{-1}]}(QK,QL),\\qquad [f,n]\\longmapsto\\ell^{-n}Q(f),$$\nwhere transitions multiply by $\\ell$, is surjective by clause 1. If $\\ell^{-n}Q(f)=\\ell^{-m}Q(g)$, multiply by $\\ell^{n+m}$ and use clause 2 to obtain an $r\\ge0$ with $\\ell^{r+m}f=\\ell^{r+n}g$. These are exactly the representatives of the two classes at stage $n+m+r$, proving injectivity. Invertibility of the scalar maps is part of [sk-def-sfb-rationalization]. This proves the localized Hom formula, with its specified canonical map.",
+   "text": "Use the scalar-fraction criterion proved in Lean as localization_of_scalar_fractions. If s has M-torsion cone, triangle exactness supplies both a left inverse and a right inverse up to scalars of M. Once these scalars act invertibly in the target, F(s) is invertible. Thus F factors through the same-object rationalization Q. The scalar-fraction theorem writes every quotient morphism as a scalar denominator times an integral image. Clearing denominators in the target proves fullness of the factor. Eventual scalar equality for integral arrows proves faithfulness, after clearing two quotient denominators. Essential surjectivity of F proves essential surjectivity of its factor. The factor is therefore an equivalence, proving IsLocalization.",
    "uses": [
     "lem-sfb-rationalization-scalar-fractions",
     "sk-def-sfb-rationalization"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/thm-sfb-extend-scalars-localization.proof.md",
-    "place": "Morphisms of the rationalization"
-   }
+   "elementary": false
   },
   {
-   "text": "Fix a sequence $D_n$ of complexes of $A$-modules with a common cohomological lower bound and a termwise colimit cocone $c$. By [lem-weil-pbc-integral-constructible-sheaf-hom], every constructible integral sheaf $M$ satisfies $H(D,c)(M[0])$ as defined in [def-weil-pbc-hom-colimit-property]. The sheaf hypothesis here is the stratified local-finite-presentation predicate of step 1. The condition is invariant under shifts, since replacing $M[0]$ by $M[0][r]$ replaces the target shift $q$ by $q-r$. It holds for zero since both Hom groups vanish.\n\nFor bounded constructible $K$ with cohomology in $[a,b]$, [def-sbc-standard-tstructure-derived-category] gives successive triangles\n$$\\tau_{\\le r-1}K\\longrightarrow\\tau_{\\le r}K\\longrightarrow H^r(K)[-r]\\longrightarrow(\\tau_{\\le r-1}K)[1].$$\nIndeed the quotient of these smart truncations is the complex $\\operatorname{im}d^{r-1}\\hookrightarrow\\ker d^r$ in degrees $r-1,r$, and projection onto $H^r(K)[-r]$ is a quasi-isomorphism. Each $H^r(K)$ is constructible by [sk-def-sfb-bounded-constructible]. Start with $\\tau_{\\le a-1}K=0$ and apply [lem-weil-pbc-hom-colimit-extension] for $r=a,\\ldots,b$. Since $\\tau_{\\le b}K\\simeq K$, the canonical maps\n$$\\varinjlim_n\\operatorname{Hom}_{D(A)}(K,QD_n[q])\\xrightarrow{\\sim}\\operatorname{Hom}_{D(A)}(K,Qc_\\infty[q])$$\nare isomorphisms for every $q$.",
+   "text": "Multiplication by ell is invertible on every rational derived object by derived_nsmul_isIso. The fully faithful inclusion of the bounded constructible subcategory reflects this isomorphism. Products show that every power of ell acts invertibly there.",
    "uses": [
+    "lem-weil-pbc-continuous-constructible-integral-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply continuousConstructible_clear_denominators to the ambient morphism between scalar extensions of two integral bounded constructible complexes. Its integral arrow already belongs to the full bounded constructible subcategory. Convert natural-number scalar powers into integer scalar powers. This is the surjectivity part of the localized Hom comparison.",
+   "uses": [
+    "lem-weil-pbc-continuous-constructible-integral-denominators"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For injectivity, represent the target integral complex B by a complex C. The termwise scalar telescope has colimit Res(F(C)); its zeroth leg is the extension unit. The derived-unit compatibility theorem identifies this with the specified derived adjunction unit. If F(f)=F(g), naturality of this unit implies equality of f and g followed by the zeroth telescope leg. Reindex the telescope by AsSmall(N). The bounded Postnikov argument homColimit_bounded, using constructible-sheaf Hom continuity, says shifted Hom from A preserves this cocone. Equality of representatives in a filtered colimit of abelian groups therefore holds at a finite stage. The transition from stage zero to n is ell^n times identity, proved by induction. Transport back along C ≅ B to obtain ell^n f = ell^n g. This covers zero morphisms and n=0.",
+   "uses": [
+    "lem-weil-pbc-integral-complex-telescope",
+    "lem-weil-pbc-integral-derived-unit",
+    "lem-weil-pbc-integral-constructible-sequential-hom",
     "lem-weil-pbc-integral-constructible-sheaf-hom",
     "def-weil-pbc-hom-colimit-property",
     "def-sbc-standard-tstructure-derived-category",
-    "sk-def-sfb-bounded-constructible",
-    "lem-weil-pbc-hom-colimit-extension"
+    "def-weil-pbc-integral-localization-telescope",
+    "def-sfb-constructible-module"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.12 and bounded truncation induction; the cited sheaf-source theorem supplies continuity for the current predicate"
-   }
+   "elementary": false
   },
   {
-   "text": "For $L\\in\\mathcal T$ choose a bounded-below complex $L^\\bullet$ representing it, using [def-sbc-standard-tstructure-derived-category]. The sequence with every term $L^\\bullet$ and transition $\\ell$ has termwise colimit representing $\\operatorname{Res}_A^BF(L)$. In fact [det-prop-sfb-qlbar-colimit-x-invert-ell] and tensor-colimit compatibility [lem-pc-module-filtered-colimits-tensor] identify it with $B\\otimes_AL^\\bullet$, and step 3 identifies ordinary with derived tensor. The terms have a common lower bound; exactness of filtered colimits also preserves that bound. Apply step 6 and the extension/restriction adjunction of [sk-def-sfb-derived-extension-of-scalars] to obtain\n$$\\operatorname{Hom}_{\\mathcal T'}(FK,FL)\\cong\\operatorname{Hom}_{D(A)}(K,\\operatorname{Res}FL)\\cong\\varinjlim_n\\operatorname{Hom}_{\\mathcal T}(K,L).$$\nThe ambient $D(A)$ is necessary since $\\operatorname{Res}FL$ need not be integral constructible. The $n$-th colimit leg is $\\ell^{-n}$ times the adjunction unit: this follows from the coefficient colimit legs $\\ell^{-n}\\varphi$. Consequently the displayed comparison sends $[f,n]$ to $\\ell^{-n}F(f)$. Comparing with the same canonical map in step 5 proves that the factor $\\bar F$ is fully faithful. We use the same-object Verdier localization model of step 5, so this covers every quotient object.",
+   "text": "For a rational bounded constructible K use continuousConstructible_integral_model. Its integral bounded constructible M and ambient isomorphism F(M) ≅ K give the same isomorphism in the full subcategory. This proves essential surjectivity and finishes the scalar-fraction criterion. The reused integral-model proof follows the unit route: stratified integral sheaf generators, cone closure using denominator clearing, and bounded truncations.",
    "uses": [
-    "def-sbc-standard-tstructure-derived-category",
-    "det-prop-sfb-qlbar-colimit-x-invert-ell",
-    "lem-pc-module-filtered-colimits-tensor",
-    "sk-def-sfb-derived-extension-of-scalars"
+    "lem-weil-pbc-continuous-constructible-integral-model"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.12 and Proposition 6.8.14(2), full faithfulness"
-   }
-  },
-  {
-   "text": "The essential image of the original functor $F$ is closed under cones. Given an arrow $a:FK\\to FL$, the canonical Hom comparison in steps 5–7 writes $a=\\ell^{-n}F(f)$ for some $f:K\\to L$ and $n\\ge0$. Complete $f$ to a distinguished triangle in $\\mathcal T$ by TR1 [def-weil-triangulated-category] and apply the triangulated functor $F$ of step 3. Its first arrow is $F(f)$. Complete $a$ to a distinguished triangle in $\\mathcal T'$. The vertical maps $\\ell^n\\operatorname{id}_{FK}$ on the first vertex and $\\operatorname{id}_{FL}$ on the second give a commuting first square, since $a\\circ\\ell^n=F(f)$, and both are isomorphisms. TR3 extends them to a morphism of triangles; [lem-sf-triangle-morphism-iso] makes its third component an isomorphism. Thus the given cone is isomorphic to $F$ of the integral cone. Endpoint isomorphisms handle objects merely isomorphic to $FK,FL$. Rotation gives extension closure, and exactness of $F$ gives zero and shift closure. Consequently all objects constructed by these operations from integral images belong to the image of $F$, hence also to the image of $\\bar F$. This uses fractions and invertible scalars, not fullness of the original integral functor.",
-   "uses": [
-    "def-weil-triangulated-category",
-    "lem-sf-triangle-morphism-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.14(2), finite-cone closure of the fully faithful factor"
-   }
-  },
-  {
-   "text": "Let $M$ be a constructible $B$-module. The current definition [def-sfb-constructible-module] supplies a finite stratification on each stratum of which $M$ is locally finitely presented. Every stratum has Noetherian underlying space. Apply [lem-weil-pbc-condensed-lfp-local-triviality] to each restriction: it is lisse, namely locally finite free over the SAME pulled-back condensed $E$-ring, not a constant discrete ring. Apply [lem-sfb-topological-stratified-lisse-lattices] on these strata. On a further finite stratification, each restriction has an integral lisse lattice $L_{0,S}$ with $B_S\\otimes_{A_S}L_{0,S}\\cong M|_S$. Local freeness implies local finite presentation by the presentation with zero relation module. Thus these are integral constructible sheaves in the required generic sense. No global lisse lattice is asserted.",
-   "uses": [
-    "def-sfb-constructible-module",
-    "lem-weil-pbc-condensed-lfp-local-triviality",
-    "lem-sfb-topological-stratified-lisse-lattices"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.13 first paragraph; the cited local-triviality bridge supplies the extra generic-predicate input"
-   }
-  },
-  {
-   "text": "For an open–closed cut $j:U\\hookrightarrow T$, $i:Z\\hookrightarrow T$ of a topologically Noetherian scheme, [lem-weil-pbc-proetale-ringed-open-closed] gives exact $j_!,i_*$ and the four restriction identities. The coefficient identifications are the untwisted ones of [sk-prop-sfb-cartesian-coefficients], requiring no invertibility of $\\ell$ on $T$. These extension functors preserve the constructibility of [def-sfb-constructible-module]: take the finite presentation stratification in their domain, view its strata in $T$, and append the complementary subset with the zero module. The restriction identities give the original presentations on the domain strata and the zero presentation on the complement. A stratum closed in an open of the domain is still locally closed in $T$; composition of its immersion with the domain immersion is an immersion by [lem-weil-pbc-proper-fp-permanence](e). Every open subset of a Noetherian space is quasi-compact, so all complements here are quasi-compact and all the schemes here are qcqs (intersections of affine opens are quasi-compact). These are the hypotheses of the ringed theorem.",
-   "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "sk-prop-sfb-cartesian-coefficients",
-    "def-sfb-constructible-module",
-    "lem-weil-pbc-proper-fp-permanence"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.14(2), extension of integral generators by open–closed cuts"
-   }
-  },
-  {
-   "text": "The extensions of step 10 commute with localization. Express $B_T\\otimes_{A_T}N$ as $\\varinjlim(N\\xrightarrow{\\ell}N\\to\\cdots)$, using [det-prop-sfb-qlbar-colimit-x-invert-ell] and [lem-pc-module-filtered-colimits-tensor]. The closed functor $i_*$ preserves this colimit by [lem-weil-pbc-proetale-ringed-open-closed]. For $j_!$, the stated adjunction gives, for any $P$, $\\operatorname{Hom}(j_!\\varinjlim N_n,P)=\\operatorname{Hom}(\\varinjlim N_n,j^{-1}P)=\\varprojlim_n\\operatorname{Hom}(j_!N_n,P)$, so its colimit comparison is an isomorphism. All functors are coefficient-linear, hence send each transition $\\ell$ to $\\ell$. With the coefficient identifications of [sk-prop-sfb-cartesian-coefficients], the colimit legs therefore give\n$$B_T\\otimes_{A_T}e(N)\\cong e(B_{\\mathrm{domain}}\\otimes_{A_{\\mathrm{domain}}}N),\\qquad e=j_!\\text{ or }i_*.$$\nFinite composites of these extensions are exact, preserve constructibility by step 10, and commute with localization by composing the displayed isomorphisms.",
-   "uses": [
-    "det-prop-sfb-qlbar-colimit-x-invert-ell",
-    "lem-pc-module-filtered-colimits-tensor",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "sk-prop-sfb-cartesian-coefficients"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.14(2), localization of integral generators; explicit colimit comparison"
-   }
-  },
-  {
-   "text": "Refine the finite partition from step 9 by a finite tree of open–closed cuts. Its stratum immersions into $X$ are composites of immersions, hence immersions by [lem-weil-pbc-proper-fp-permanence](e). For each such $S\\hookrightarrow X$ choose a factorization $S\\hookrightarrow U\\hookrightarrow X$ as closed then open [def-weil-closed-immersion, def-weil-open-immersion]. On a current branch $T\\to X$, first cut by the inverse-image open $T_U=T\\times_XU$ and its closed complement; inside $T_U$ cut by $T_S=T\\times_XS$ and its open complement. The pulled-back closed immersion is closed by [lem-weil-pbc-proper-fp-permanence](b); on affine charts it is defined by the extended ideal. Thus the branch $T_S$ has an ACTUAL morphism to $S$. Process the finitely many strata on all branches. A nonempty final leaf cannot be in the complement of every stratum, since their images cover $X$; it therefore maps to a stratum $S$. Every leaf is topologically Noetherian. Pull $L_{0,S}$ back to this leaf $V$: finite free trivializations and their inverse transition matrices pull back, and the coefficient isomorphism of [sk-prop-sfb-cartesian-coefficients] identifies its rationalization with $M|_V$. This gives integral lisse $L_{0,V}$. Empty branches are omitted. This finite procedure uses scheme-theoretic pullbacks throughout; set containment alone is never used to factor a scheme morphism.",
-   "uses": [
-    "lem-weil-pbc-proper-fp-permanence",
-    "def-weil-closed-immersion",
-    "def-weil-open-immersion",
-    "sk-prop-sfb-cartesian-coefficients"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.14(2), finite refinement of the lattice strata by open–closed cuts"
-   }
-  },
-  {
-   "text": "For a vertex $T$ of this finite tree, record its path extension $P_T$ to $X$, with $P_X=\\operatorname{id}$. At a cut with open child $j:U\\hookrightarrow T$ and closed child $i:Z\\hookrightarrow T$, set $P_U=P_Tj_!$ and $P_Z=P_Ti_*$. Steps 10–11 show that these are exact, preserve constructibility and commute with localization. At a leaf $V$ the integral constructible sheaf $P_VL_{0,V}$ consequently satisfies\n$$F((P_VL_{0,V})[0])\\cong(P_V(M|_V))[0].$$\nHere ordinary tensor computes $F$ by step 3. Thus the leaf object is in the essential image. This argument records the exact path functor used; it does not require a factorization-independent extension functor for arbitrary locally closed immersions.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.14(2), leaf generators and path extensions"
-   }
-  },
-  {
-   "text": "At a vertex $T$ the short exact sequence of [lem-weil-pbc-proetale-ringed-open-closed] is\n$$0\\to j_!(M|_U)\\to M|_T\\to i_*(M|_Z)\\to0.$$\nApply the exact path functor $P_T$ and use [lem-sf-derived-ses-triangle]. The resulting distinguished triangle has vertices $(P_U(M|_U))[0]$, $(P_T(M|_T))[0]$, $(P_Z(M|_Z))[0]$. By step 13 the leaf vertices are in the image. Backwards induction on the finite tree, using extension closure from step 8, puts every parent vertex in the image. At the root this proves $M[0]$ is in the image. If $X$ is empty, only the zero object occurs.",
-   "uses": [
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-sf-derived-ses-triangle"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.13 and Proposition 6.8.14(2), reconstruction from integral generators"
-   }
-  },
-  {
-   "text": "For $K'\\in\\mathcal T'$ with cohomology in $[a,b]$, use [def-sbc-standard-tstructure-derived-category] and the successive-truncation calculation in step 6. Begin with $\\tau_{\\le a-1}K'=0$. Each $H^r(K')$ is constructible by [sk-def-sfb-bounded-constructible], so step 14 and shift closure from step 8 put $H^r(K')[-r]$ in the image. Successive extension closure for $r=a,\\ldots,b$ puts $\\tau_{\\le b}K'\\simeq K'$ in the image. This proves essential surjectivity. The argument also covers a single nonzero cohomology degree and the zero complex.",
-   "uses": [
-    "def-sbc-standard-tstructure-derived-category",
-    "sk-def-sfb-bounded-constructible"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.14(2), bounded truncation devissage"
-   }
-  },
-  {
-   "text": "A fully faithful essentially surjective functor is an equivalence: choose for each target object an isomorphism from an image object, and use the bijections on Hom groups to define the inverse on morphisms; uniqueness makes identities and composition commute. Hence $\\bar F$ is an equivalence. Since $F=\\bar FQ$ and $Q$ is localization at the specified torsion-cone class [sk-def-sfb-rationalization], $F$ has the same localization universal property. This is the assertion.",
-   "uses": [
-    "sk-def-sfb-rationalization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/thm-sfb-extend-scalars-localization.proof.md",
-    "place": "Conclusion"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
@@ -253,40 +100,29 @@
   "def-sfb-bounded-constructible-extend-scalars",
   "def-sfb-constructible-module",
   "def-sfb-integers-to-subfield",
-  "def-weil-closed-immersion",
-  "def-weil-open-immersion",
-  "def-weil-pbc-condensed-e-module-category",
   "def-weil-pbc-continuous-integral-coefficients",
   "def-weil-pbc-hom-colimit-property",
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-  "def-weil-pbc-proetale-site",
-  "def-weil-triangulated-category",
-  "det-prop-sfb-qlbar-colimit-x-invert-ell",
-  "lem-kun-distinguished-cone-zero",
-  "lem-pc-module-filtered-colimits-tensor",
-  "lem-sf-derived-ses-triangle",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-sf-triangle-morphism-iso",
+  "def-weil-pbc-integral-localization-telescope",
   "lem-sfb-extend-scalars-bounded-constructible",
   "lem-sfb-rationalization-scalar-fractions",
-  "lem-sfb-topological-stratified-lisse-lattices",
-  "lem-weil-pbc-condensed-constructible-serre",
-  "lem-weil-pbc-condensed-lfp-local-triviality",
-  "lem-weil-pbc-hom-colimit-extension",
-  "lem-weil-pbc-integral-constructible-serre",
+  "lem-weil-pbc-continuous-constructible-integral-denominators",
+  "lem-weil-pbc-continuous-constructible-integral-image",
+  "lem-weil-pbc-continuous-constructible-integral-model",
+  "lem-weil-pbc-continuous-integral-scalar-exact",
+  "lem-weil-pbc-integral-complex-telescope",
+  "lem-weil-pbc-integral-constructible-sequential-hom",
   "lem-weil-pbc-integral-constructible-sheaf-hom",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-integral-derived-unit",
+  "lem-weil-pbc-padic-integers-bounded-triangulated",
   "sk-def-sfb-bounded-constructible",
   "sk-def-sfb-derived-extension-of-scalars",
   "sk-def-sfb-pullback-from-point",
-  "sk-def-sfb-rationalization",
-  "sk-prop-sfb-cartesian-coefficients"
+  "sk-def-sfb-rationalization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 6.8.2, Lemmas 6.8.12–13 and Proposition 6.8.14(2), following the blueprint factorization/Hom/integral-generators route; existing generic-predicate Serre, sheaf-Hom, and rational local-triviality nodes are explicit additional inputs"
+  "place": "Lemma 6.8.2, Lemma 6.8.12, Proposition 6.8.14(2); existing continuous-coefficient telescope, Hom-continuity, denominator and integral-model implementations; categorical scalar-fraction glue written by B3"
  },
  "mathlib_searches": [
   {
@@ -442,19 +278,7 @@
   ]
  },
  "tool_uses": [
-  "det-prop-sfb-qlbar-colimit-x-invert-ell",
-  "lem-sf-exact-functor-derived-triangulated",
-  "lem-weil-pbc-integral-constructible-sheaf-hom",
-  "lem-weil-pbc-hom-colimit-extension",
-  "lem-pc-module-filtered-colimits-tensor",
-  "lem-sf-triangle-morphism-iso",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "sk-prop-sfb-cartesian-coefficients",
-  "lem-sf-derived-ses-triangle",
-  "lem-weil-pbc-integral-constructible-serre",
-  "lem-weil-pbc-condensed-constructible-serre",
-  "lem-weil-pbc-condensed-lfp-local-triviality",
-  "lem-weil-pbc-proper-fp-permanence"
+  "lem-weil-pbc-integral-constructible-sheaf-hom"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -499,5 +323,15 @@
    "AlgebraicGeometry.ProEtale.isLocalization_boundedConstructibleExtendScalars"
   ],
   "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:19 UTC (L, propagation 2026-10-18), live declaration stated, proof open in WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization: the blueprint item thm-sfb-extend-scalars-localization's upstream Lean declarations as live states them; their proofs are still `sorry` in live (stage-3 route work)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261018T071135-L-1663793",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
