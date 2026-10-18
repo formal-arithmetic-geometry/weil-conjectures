@@ -5,12 +5,11 @@ Authors: SHEAF group Q56
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.EtaleClosedSupportTriangle
 public import Sheaf.AlgebraicGeometry.EtaleClosedAmbientAdjoint
-public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
@@ -91,6 +90,54 @@ theorem closedSupport_torAmplitude
           δ ∈ distTriang _) :
     DerivedCategory.hasTorAmplitudeIn A Z a (b + e + 1)
       ((R(lowerStar (ModuleCat.{u + 1} A) i)).rightAdjoint.obj K) := by
-  sorry
+  have _hij := hij
+  have _hab := hab
+  -- Exact direct image and the sheaf counit give the derived counit isomorphism.
+  let E := (R(lowerStar (ModuleCat.{u + 1} A) i)).rightAdjoint.obj K
+  let F := (R(lowerStar (ModuleCat.{u + 1} A) i)).obj E
+  let P := upperStar (ModuleCat.{u + 1} A) i
+  let I := lowerStar (ModuleCat.{u + 1} A) i
+  let c : I ⋙ P ≅ 𝟭 _ := asIso (Etale.upperStarLowerStarAdjunction _ i).counit
+  let dc : I.mapDerivedCategory ⋙ P.mapDerivedCategory ≅ 𝟭 _ :=
+    (Functor.mapDerivedCategoryCompIso I P).symm ≪≫
+      Functor.mapDerivedCategoryNatIso c ≪≫ Functor.mapDerivedCategoryIdIso _
+  let eF : P.mapDerivedCategory.obj F ≅ E :=
+    P.mapDerivedCategory.mapIso (I.rightDerivedFunctorIsoMapDerivedCategory.app E) ≪≫
+      dc.app E
+  intro N r hr
+  let M := I.obj N
+  let M₀ := (_root_.DerivedCategory.singleFunctor _ 0).obj M
+  let tensorM := (derivedTensor (ModuleCat.{u + 1} A) T).flip.obj M₀
+  let τ := Triangle.mk
+    ((Adjunction.ofIsLeftAdjoint (R(lowerStar (ModuleCat.{u + 1} A) i))).counit.app K)
+    ((mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) j).unit.app K) δ
+  -- The outer terms of the homology sequence vanish outside the claimed interval.
+  have ht := tensorM.map_distinguished τ hδ
+  have hKr := hK M r (by rcases hr with hr | hr <;> omega)
+  have hQr := hQ M (r - 1) (by rcases hr with hr | hr <;> omega)
+  have hFr : IsZero ((_root_.DerivedCategory.homologyFunctor _ r).obj
+      (tensorM.obj F)) := by
+    apply (_root_.DerivedCategory.HomologySequence.exact₁
+      (tensorM.mapTriangle.obj τ) ht (r - 1) r (by omega)).isZero_X₂
+    · exact hQr.eq_of_src _ _
+    · exact hKr.eq_of_tgt _ _
+  -- Exact inverse image preserves this vanishing.
+  have hPr : IsZero ((_root_.DerivedCategory.homologyFunctor _ r).obj
+      (P.mapDerivedCategory.obj (tensorM.obj F))) :=
+    (P.map_isZero hFr).of_iso ((P.mapDerivedCategoryHomologyFunctorIso r).symm.app _)
+  -- Monoidality and the two counits identify the pullback with E tensor N[0].
+  let eN : P.mapDerivedCategory.obj M₀ ≅
+      (_root_.DerivedCategory.singleFunctor _ 0).obj N :=
+    (P.mapDerivedCategorySingleFunctor 0).app M ≪≫
+      (_root_.DerivedCategory.singleFunctor _ 0).mapIso (c.app N)
+  let l := leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) i
+  let e : P.mapDerivedCategory.obj (tensorM.obj F) ≅
+      ((derivedTensor (ModuleCat.{u + 1} A) Z).obj E).obj
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj N) :=
+    (l.app (tensorM.obj F)).symm ≪≫
+      leftDerivedUpperStarTensorIso (ModuleCat.{u + 1} A) i F M₀ ≪≫
+      (((derivedTensor (ModuleCat.{u + 1} A) Z).mapIso (l.app F ≪≫ eF)).app _) ≪≫
+      ((derivedTensor (ModuleCat.{u + 1} A) Z).obj E).mapIso (l.app M₀ ≪≫ eN)
+  exact hPr.of_iso ((_root_.DerivedCategory.homologyFunctor _ r).mapIso e).symm
 
 end AlgebraicGeometry.Etale
