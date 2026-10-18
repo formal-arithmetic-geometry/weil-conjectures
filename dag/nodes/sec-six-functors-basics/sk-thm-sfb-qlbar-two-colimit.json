@@ -815,5 +815,30 @@
     }
    ]
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ef0e8ebec",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Wrote review.md. Verified all four clauses, dependency interfaces, canonical helpers, universes, edge cases, docstrings, report sections, and verbatim statement. No dropped-route dependencies. Per-file scompile passed both phases without diagnostics; no fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteCoefficientDescentTwoColimit",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteCoefficientDescentTwoColimit",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.finiteDescentDerivedComp",
+   "AlgebraicGeometry.ProEtale.finiteDescentDerivedHomToAlgCl",
+   "AlgebraicGeometry.ProEtale.finiteDescentDerivedHomTransition",
+   "AlgebraicGeometry.ProEtale.finiteCoefficientDescentTwoColimit"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteCoefficientDescentTwoColimit.lean",
+  "statement": "theorem finiteCoefficientDescentTwoColimit (k : Type u) [Field k] (p ℓ : ℕ) [CharP k p] [Fact ℓ.Prime] (hp : 0 < p) (hpℓ : p ≠ ℓ) (X : Scheme.{u}) [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] : (∀ L : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicAlgClRingObj X ℓ), IsLisseCoefficientModule (Profinite.padicAlgClRingObj ℓ) L → ∃ (E : PadicAlgCl.FiniteIntermediateField ℓ) (L_E : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)), IsLisseCoefficientModule (Profinite.continuousMapRingObj E) L_E ∧ Nonempty ((Mod.extendScalars (padicSubfieldRingObjToPadicAlgCl X ℓ E)).obj L_E ≅ L)) ∧ (∀ (E : PadicAlgCl.FiniteIntermediateField ℓ) (C D : ConstantModelBoundedConstructible (Profinite.continuousMapRingObj E) X) (r : ℤ), (∀ ψ : (derivedExtendScalarsToPadicAlgCl X ℓ E).obj C.obj ⟶ (derivedExtendScalarsToPadicAlgCl X ℓ E).obj (D.obj⟦r⟧), ∃ (F : PadicAlgCl.FiniteIntermediateField ℓ) (h : E ≤ F) (f : (derivedExtendScalarsSubfield X ℓ h).obj C.obj ⟶ (derivedExtendScalarsSubfield X ℓ h).obj (D.obj⟦r⟧)), finiteDescentDerivedHomToAlgCl X ℓ h f = ψ) ∧ (∀ (F G : PadicAlgCl.FiniteIntermediateField ℓ) (h : E ≤ F) (a : E ≤ G) (f : (derivedExtendScalarsSubfield X ℓ h).obj C.obj ⟶ (derivedExtendScalarsSubfield X ℓ h).obj (D.obj⟦r⟧)) (g : (derivedExtendScalarsSubfield X ℓ a).obj C.obj ⟶ (derivedExtendScalarsSubfield X ℓ a).obj (D.obj⟦r⟧)), finiteDescentDerivedHomToAlgCl X ℓ h f = finiteDescentDerivedHomToAlgCl X ℓ a g → ∃ (H : PadicAlgCl.FiniteIntermediateField ℓ) (b : F ≤ H) (c : G ≤ H), finiteDescentDerivedHomTransition X ℓ h b f = finiteDescentDerivedHomTransition X ℓ a c g)) ∧ (∀ K : ConstantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) X, ∃ (E : PadicAlgCl.FiniteIntermediateField ℓ) (K_E : ConstantModelBoundedConstructible (Profinite.continuousMapRingObj E) X), Nonempty ((derivedExtendScalarsToPadicAlgCl X ℓ E).obj K_E.obj ≅ K.obj)) ∧ ((∀ E : PadicAlgCl.FiniteIntermediateField ℓ, constantModelBoundedConstructible (Profinite.continuousMapRingObj E) X = boundedConstructible (padicSubfieldRingObj X ℓ E) ∧ (constantModelBoundedConstructible (Profinite.continuousMapRingObj E) X ⊓ DerivedCategory.finiteTorAmplitude _) = constantModelBoundedConstructible (Profinite.continuousMapRingObj E) X) ∧ (constantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) X = boundedConstructible (padicAlgClRingObj X ℓ) ∧ (constantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) X ⊓ DerivedCategory.finiteTorAmplitude _) = constantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) X) ∧ (constructibleCocone X ℓ).IsFilteredTwoColimit)",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "All four clauses. Dbc and Dctf use the existing finite-constant-model predicates; rational identification with the recorded generic Dcons is stated explicitly. The shifted Hom-colimit map is rendered by representatives and eventual equality, with canonical derived scalar transitivity. The target T(D[r]) is canonically (TD)[r] since scalar extension is exact."
  }
 }

@@ -20,7 +20,10 @@
   "sk-def-sfb-change-of-scalars",
   "def-weil-abstract-derived-category",
   "def-sfb-derived-extend-subfield",
-  "def-sfb-derived-extend-to-qlbar"
+  "def-sfb-derived-extend-to-qlbar",
+  "def-weil-pbc-finite-derived-tensor-comparison",
+  "def-weil-pbc-condensed-coefficient-comparisons",
+  "def-weil-pbc-condensed-coefficient-complex-diagram"
  ],
  "proof": [
   {
@@ -344,5 +347,34 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-50a0e7231",
+  "group": "Q47",
+  "result": "fix",
+  "note": "Wrote review.md and a complete replacement report in fixes/, correcting the H11 placeholder second reading. All three clauses, dependencies, universes, canonical maps, docstrings, and route-pivot checks passed. Snapshot compilation reproduced successfully: 11.2 s sandbox, 53.3 s library, no diagnostics. Lean and node records unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientFiniteDescentHom",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficient_finite_descent_hom",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.coefficientDescentDerivedHomMap",
+   "AlgebraicGeometry.ProEtale.coefficientDescentDerivedRestrictionMap",
+   "AlgebraicGeometry.ProEtale.coefficientDescentHomTransition",
+   "AlgebraicGeometry.ProEtale.coefficientDescentHomToAlgCl",
+   "AlgebraicGeometry.ProEtale.coefficientDescentRestrictionTransition",
+   "AlgebraicGeometry.ProEtale.coefficientDescentRestrictionToAlgCl",
+   "AlgebraicGeometry.ProEtale.coefficientDescentFields",
+   "AlgebraicGeometry.ProEtale.coefficient_finite_descent_hom"
+  ],
+  "file": "lean/Sheaf/Paper/CoefficientFiniteDescentHom.lean",
+  "statement": "theorem coefficient_finite_descent_hom {k : Type u} [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (_hpℓ : p ≠ ℓ) [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] (E : PadicAlgCl.FiniteIntermediateField ℓ) (C D : BoundedConstructible (padicSubfieldRingObj X ℓ E)) (r : ℤ) : (∀ (F : PadicAlgCl.FiniteIntermediateField ℓ) (h : E ≤ F), Function.Bijective (finiteCoefficientDerivedHomEquiv X ℓ h C.obj (((derivedExtendScalarsSubfield X ℓ h).obj D.obj)⟦r⟧))) ∧ Function.Bijective (finiteCoefficientDerivedAlgClHomEquiv X ℓ E C.obj (((derivedExtendScalarsToPadicAlgCl X ℓ E).obj D.obj)⟦r⟧)) ∧ (∀ (F G : PadicAlgCl.FiniteIntermediateField ℓ) (h : E ≤ F) (j : F ≤ G) (f : (derivedExtendScalarsSubfield X ℓ h).obj C.obj ⟶ ((derivedExtendScalarsSubfield X ℓ h).obj D.obj)⟦r⟧), finiteCoefficientDerivedHomEquiv X ℓ (h.trans j) C.obj _ (coefficientDescentHomTransition X ℓ h j C.obj D.obj r f) = finiteCoefficientDerivedHomEquiv X ℓ h C.obj _ f ≫ coefficientDescentRestrictionTransition X ℓ h j D.obj r) ∧ (∀ (F : PadicAlgCl.FiniteIntermediateField ℓ) (h : E ≤ F) (f : (derivedExtendScalarsSubfield X ℓ h).obj C.obj ⟶ ((derivedExtendScalarsSubfield X ℓ h).obj D.obj)⟦r⟧), finiteCoefficientDerivedAlgClHomEquiv X ℓ E C.obj _ (coefficientDescentHomToAlgCl X ℓ h C.obj D.obj r f) = finiteCoefficientDerivedHomEquiv X ℓ h C.obj _ f ≫ coefficientDescentRestrictionToAlgCl X ℓ h D.obj r) ∧ (∀ (K : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)) ℤ) (_e : DerivedCategory.Q.obj K ≅ D.obj) (a b : ℤ) (_hK : ∀ n : ℤ, n < a ∨ b < n → IsZero (K.X n)), IsFiltered (AsSmall.{u + 1} (Under E)) ∧ Nonempty (IsColimit (coefficientComplexCocone X ℓ K (coefficientDescentFields ℓ E) (fun i => leOfHom (ULift.down i).hom) (fun i => leOfHom (ULift.down i).hom))) ∧ ∀ (i : AsSmall.{u + 1} (Under E)) (n : ℤ), n < a → IsZero (((coefficientComplexDiagram X ℓ K (coefficientDescentFields ℓ E) (fun j => leOfHom (ULift.down j).hom) (fun j => leOfHom (ULift.down j).hom)).obj i).X n)) ∧ (∀ f : (derivedExtendScalarsToPadicAlgCl X ℓ E).obj C.obj ⟶ ((derivedExtendScalarsToPadicAlgCl X ℓ E).obj D.obj)⟦r⟧, ∃ (F : PadicAlgCl.FiniteIntermediateField ℓ) (h : E ≤ F) (g : (derivedExtendScalarsSubfield X ℓ h).obj C.obj ⟶ ((derivedExtendScalarsSubfield X ℓ h).obj D.obj)⟦r⟧), coefficientDescentHomToAlgCl X ℓ h C.obj D.obj r g = f) ∧ (∀ (F G : PadicAlgCl.FiniteIntermediateField ℓ) (h : E ≤ F) (j : E ≤ G) (f : (derivedExtendScalarsSubfield X ℓ h).obj C.obj ⟶ ((derivedExtendScalarsSubfield X ℓ h).obj D.obj)⟦r⟧) (g : (derivedExtendScalarsSubfield X ℓ j).obj C.obj ⟶ ((derivedExtendScalarsSubfield X ℓ j).obj D.obj)⟦r⟧), coefficientDescentHomToAlgCl X ℓ h C.obj D.obj r f = coefficientDescentHomToAlgCl X ℓ j C.obj D.obj r g → ∃ (H : PadicAlgCl.FiniteIntermediateField ℓ) (hF : F ≤ H) (hG : G ≤ H), coefficientDescentHomTransition X ℓ h hF C.obj D.obj r f = coefficientDescentHomTransition X ℓ j hG C.obj D.obj r g)",
+  "branch": "newtargets-dag",
+  "by": "Q47",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "All three clauses. Clause (1) uses the existing canonical Hom equivalences and states their naturality for finite inclusions and inclusion into the algebraic closure. Clause (2) uses the existing actual coefficientComplexDiagram and coefficientComplexCocone on the universe-lifted tail Under E, for every bounded representative and its specified lower bound. Clause (3) is bijectivity of the canonical filtered-colimit map expressed by finite representatives and eventual equality at a common finite stage; the maps use the recorded tensor transitivity and exact shift comparisons. No statement correction."
  }
 }
