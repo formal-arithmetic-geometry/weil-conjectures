@@ -36,16 +36,6 @@ theorem WeilSheaf.upperStar_eq_of_eq {X Y : Scheme.{u}} [X.Over (Spec (CommRingC
   subst h
   rfl
 
-omit [Finite k₀] in
-/-- The multiplication `μ : 𝔸² ⟶ 𝔸¹` is the morphism defined by the function `x y`. -/
-theorem affinePlane.mul_eq_homOfSection :
-    affinePlane.mul k₀ = affineLine.homOfSection k₀
-      ((affinePlane.fst k₀).appTop (AffineSpace.coord _ PUnit.unit) *
-        (affinePlane.snd k₀).appTop (AffineSpace.coord _ PUnit.unit)) := by
-  refine AffineSpace.hom_ext ?_ fun _ ↦ ?_
-  · rw [affinePlane.mul, affineLine.homOfSection, AffineSpace.homOfVector_over]
-  · rw [affinePlane.mul, affineLine.homOfSection, AffineSpace.homOfVector_appTop_coord]
-
 /-- The Fourier kernel `μ^* ℒ_ψ` is the Artin–Schreier sheaf `ℒ_ψ(x y)` of the function `x y`. -/
 theorem fourierKernel_eq_artinSchreierOf (ψ : AddChar k₀ (PadicAlgCl l)) :
     fourierKernel ψ = artinSchreierOf ψ

@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.WeilSheaf.ArtinSchreierFunctions
 public import WeilConjectures.WeilSheaf.FourierInversion.TensorLisse
 public import WeilConjectures.WeilSheaf.FourierInversion.UpperStar
 public import WeilConjectures.WeilSheaf.FourierTateTwist
@@ -144,8 +145,7 @@ lemma affineLine.isPullback_fibreInclusion (a : k₀) :
       (affineLine.rationalPointHom k₀ a ≫ affineLine k₀ ↘ Spec (CommRingCat.of k₀)) := by
     rw [affineLine.fibreInclusion_fst, affineLine.rationalPointHom_comp_over]
     exact IsPullback.of_horiz_isIso ⟨by rw [Category.id_comp, Category.comp_id]⟩
-  exact hout.of_right (affineLine.fibreInclusion_snd a)
-    (IsPullback.of_hasPullback _ _).flip
+  exact hout.of_right (affineLine.fibreInclusion_snd a) (IsPullback.of_hasPullback _ _)
 
 omit [Finite k₀] in
 /-- Along the fibre `x ↦ (x, a)`, the product `x ξ` restricts to `a x`: with the scaling,
@@ -153,56 +153,54 @@ omit [Finite k₀] in
 lemma affineLine.fibreInclusion_comp_mul_comp_smul_one (a : k₀) :
     affineLine.fibreInclusion k₀ a ≫ affinePlane.mul k₀ ≫ affineLine.smul k₀ 1 =
       affineLine.smul k₀ a := by
-  refine AffineSpace.hom_ext ?_ fun _ ↦ ?_
-  · simp only [Category.assoc, affineLine.smul, AffineSpace.smul_over, affinePlane.mul,
-      AffineSpace.homOfVector_over]
-    exact comp_over _ _
-  · simp only [affineLine.smul, Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
-      AffineSpace.smul_appTop_coord, affinePlane.mul, AffineSpace.homOfVector_appTop_coord,
-      map_mul, map_one, one_mul]
-    rw [← CommRingCat.comp_apply, ← Scheme.Hom.comp_appTop, ← CommRingCat.comp_apply,
-      ← Scheme.Hom.comp_appTop, affineLine.fibreInclusion_fst, affineLine.fibreInclusion_snd,
-      Scheme.Hom.comp_appTop, CommRingCat.comp_apply, affineLine.rationalPointHom,
-      AffineSpace.homOfVector_appTop_coord]
-    simp only [Scheme.Hom.id_appTop, CommRingCat.id_apply]
-    rw [mul_comm]
+  have hc : (affineLine.fibreInclusion k₀ a).appTop
+      ((affinePlane k₀ ↘ Spec (CommRingCat.of k₀)).appTop ((Scheme.ΓSpecIso (.of k₀)).inv.hom 1) *
+        ((affinePlane.fst k₀).appTop (AffineSpace.coord _ PUnit.unit) *
+          (affinePlane.snd k₀).appTop (AffineSpace.coord _ PUnit.unit))) =
+      (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).appTop ((Scheme.ΓSpecIso (.of k₀)).inv.hom a) *
+        AffineSpace.coord _ PUnit.unit := by
+    have h₁ : (affineLine.fibreInclusion k₀ a).appTop
+        ((affinePlane.fst k₀).appTop (AffineSpace.coord _ PUnit.unit)) =
+          (affineLine.fibreInclusion k₀ a ≫ affinePlane.fst k₀).appTop
+            (AffineSpace.coord _ PUnit.unit) := rfl
+    have h₂ : (affineLine.fibreInclusion k₀ a).appTop
+        ((affinePlane.snd k₀).appTop (AffineSpace.coord _ PUnit.unit)) =
+          (affineLine k₀ ↘ Spec (CommRingCat.of k₀)).appTop
+            ((affineLine.rationalPointHom k₀ a).appTop (AffineSpace.coord _ PUnit.unit)) := by
+      change (affineLine.fibreInclusion k₀ a ≫ affinePlane.snd k₀).appTop _ = _
+      rw [affineLine.fibreInclusion_snd]
+      rfl
+    rw [map_mul, map_mul, h₁, h₂, affineLine.fibreInclusion_fst, affineLine.rationalPointHom,
+      AffineSpace.homOfVector_appTop_coord, map_one, map_one, map_one, one_mul, mul_comm]
     rfl
+  rw [affinePlane.mul_eq_homOfSection, affineLine.homOfSection_comp_smul,
+    affineLine.comp_homOfSection, hc, ← affineLine.homOfSection_comp_smul,
+    affineLine.homOfSection_coord, Category.id_comp]
 
 end RationalPoint
 
-/-- Unfolding `AlgebraicGeometry.fourierTransform`. -/
-theorem fourierTransform_eq (ψ : AddChar k₀ (PadicAlgCl l)) :
-    fourierTransform ψ = WeilComplex.upperStar (affinePlane.fst k₀) ⋙
-      WeilComplex.tensorLisse (fourierKernel ψ) (isLisse_fourierKernel ψ) ⋙
-      WeilComplex.derivedLowerShriek k₀ l (affinePlane.snd k₀) ⋙ shiftFunctor _ (1 : ℤ) :=
-  rfl
-
-/-- Unfolding `AlgebraicGeometry.fourierKernel`. -/
-theorem fourierKernel_eq (ψ : AddChar k₀ (PadicAlgCl l)) :
-    fourierKernel ψ = (WeilSheaf.upperStar (affinePlane.mul k₀)).obj
-      ((WeilSheaf.upperStar (affineLine.smul k₀ 1)).obj
-        (image (WeilSheaf.artinSchreierIdempotent ψ))) :=
-  rfl
-
-/-- Unfolding `AlgebraicGeometry.artinSchreier`. -/
-theorem artinSchreier_eq (ψ : AddChar k₀ (PadicAlgCl l)) (a : k₀) :
-    artinSchreier ψ a = (WeilSheaf.upperStar (affineLine.smul k₀ a)).obj
-      (image (WeilSheaf.artinSchreierIdempotent ψ)) :=
-  rfl
+/-- Restricted to the fibre `x ↦ (x, a)`, the pullback along `(x, ξ) ↦ 1 · x ξ` is the pullback
+along `x ↦ a x`. -/
+theorem nonempty_iso_upperStar_fibreInclusion_mul_smul_one (a : k₀)
+    (F : WeilSheaf k₀ l (affineLine k₀)) :
+    Nonempty ((WeilSheaf.upperStar (affineLine.fibreInclusion k₀ a)).obj
+      ((WeilSheaf.upperStar (affinePlane.mul k₀)).obj
+        ((WeilSheaf.upperStar (affineLine.smul k₀ 1)).obj F)) ≅
+      (WeilSheaf.upperStar (affineLine.smul k₀ a)).obj F) := by
+  obtain ⟨e₁⟩ := WeilSheaf.nonempty_iso_upperStar_obj_upperStar_obj (affinePlane.mul k₀)
+    (affineLine.smul k₀ 1) _ rfl F
+  obtain ⟨e₂⟩ := WeilSheaf.nonempty_iso_upperStar_obj_upperStar_obj
+    (affineLine.fibreInclusion k₀ a) (affinePlane.mul k₀ ≫ affineLine.smul k₀ 1) _
+    (affineLine.fibreInclusion_comp_mul_comp_smul_one a) F
+  exact ⟨(WeilSheaf.upperStar (affineLine.fibreInclusion k₀ a)).mapIso e₁ ≪≫ e₂⟩
 
 /-- The Fourier kernel restricted to the fibre `x ↦ (x, a)` is `ℒ_{ψ(a x)}`. -/
 theorem nonempty_iso_upperStar_fibreInclusion_fourierKernel (ψ : AddChar k₀ (PadicAlgCl l))
     (a : k₀) :
     Nonempty ((WeilSheaf.upperStar (affineLine.fibreInclusion k₀ a)).obj (fourierKernel ψ) ≅
       artinSchreier ψ a) := by
-  rw [fourierKernel_eq, artinSchreier_eq]
-  obtain ⟨e₁⟩ := WeilSheaf.nonempty_iso_upperStar_obj_upperStar_obj (affinePlane.mul k₀)
-    (affineLine.smul k₀ 1) _ rfl (image (WeilSheaf.artinSchreierIdempotent ψ))
-  obtain ⟨e₂⟩ := WeilSheaf.nonempty_iso_upperStar_obj_upperStar_obj
-    (affineLine.fibreInclusion k₀ a) (affinePlane.mul k₀ ≫ affineLine.smul k₀ 1) _
-    (affineLine.fibreInclusion_comp_mul_comp_smul_one a)
-    (image (WeilSheaf.artinSchreierIdempotent ψ))
-  exact ⟨(WeilSheaf.upperStar (affineLine.fibreInclusion k₀ a)).mapIso e₁ ≪≫ e₂⟩
+  rw [fourierKernel, artinSchreier, artinSchreier]
+  exact nonempty_iso_upperStar_fibreInclusion_mul_smul_one a _
 
 /-- **The fibre of the Fourier transform over a rational point**: pulled back to the point
 `a : Spec k₀ ⟶ 𝔸¹`, the transform `FT_ψ(K)` is `RΓ_c(𝔸¹, K ⊗ ℒ_{ψ(a x)})[1]`, by compact support
@@ -228,7 +226,7 @@ theorem nonempty_iso_fourierTransform_comp_upperStar_rationalPointHom
     (WeilComplex.upperStarCompIso _ _).symm ≪≫
       WeilComplex.upperStarCongrIso (affineLine.fibreInclusion_fst a) ≪≫
       WeilComplex.upperStarIdIso _
-  rw [fourierTransform_eq]
+  rw [fourierTransform]
   exact ⟨Functor.associator _ _ _ ≪≫
     Functor.isoWhiskerLeft _ (Functor.associator _ _ _ ≪≫
       Functor.isoWhiskerLeft _ (Functor.associator _ _ _ ≪≫
