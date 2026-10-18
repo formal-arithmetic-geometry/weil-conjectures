@@ -37,116 +37,62 @@
  ],
  "proof": [
   {
-   "text": "Fix a geometric point $\\bar s$ and put $M=G_{\\bar s}$, a finite $\\Lambda$-module. Use the small representative category of affine pointed neighbourhoods specified in the strict-henselization construction; affine shrinking and cofilteredness make its opposite filtered. The elementwise filtered-colimit description of the stalk represents every $m\\in M$ by a section $\\sigma_m$ on a common pointed neighbourhood. The finitely many relations $\\sigma_0=0$, $\\sigma_{m+n}=\\sigma_m+\\sigma_n$ and $\\sigma_{am}=a\\sigma_m$, for $m,n\\in M$ and $a\\in\\Lambda$, hold in the stalk. The equality criterion in the filtered colimit and common refinement make all these relations hold on one neighbourhood $(U,\\bar u)$. Thus $m\\mapsto\\sigma_m$ is a module map $M\\to G(U)$ inducing identity on the chosen stalk. The constant-sheaf adjunction gives a morphism $\\varphi:\\underline M\\to G|_U$. Shrink $U$ to an affine pointed neighbourhood. Via the inverse-image stalk comparison and the constant-stalk identification, $\\varphi_{\\bar u}$ is bijective.",
+   "text": "At each point choose its algebraically closed geometric point and its finite stalk M. Lift the identity of M to a linear section map f on a pointed etale neighbourhood U.",
    "uses": [
-    "def-weil-pbc-strict-henselization-limit",
-    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-    "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
-    "lem-weil-pbc-filtered-colimit-modules-elementwise",
-    "def-weil-pbc-geometric-stalks",
-    "def-constructible-constant",
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "lem-weil-pbc-constant-sheaf-geometric-stalk"
+    "lem-weil-pbc-etale-finite-stalk-local-presentation"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GKC, lemma-characterize-locally-constant-module, proof of (2) implies (1); finite presentation paragraph, expanded by the finite module operation table"
-   }
+   "elementary": false
   },
   {
-   "text": "We record the pullback calculation used below (Stacks 0GJ6, lemma-specialization-map-pullback). Let $g:T\\to S$ be a morphism, $\\bar x$ a geometric point of $T$, and $\\bar z$ a geometric point of $T_{(\\bar x)}$; write $p_T:T_{(\\bar x)}\\to T$ and $\\bar y=p_T\\circ\\bar z$. For each affine pointed etale neighbourhood $(W,\\bar w)$ of $g\\bar x$, the base change $(W\\times_S T,(\\bar w,\\bar x))$ is a pointed neighbourhood of $\\bar x$. Choose an affine pointed refinement; its limit projection followed by the refinement map defines $T_{(\\bar x)}\\to W\\times_S T$. Two choices agree after a common affine refinement, by cofilteredness and compatibility of the limit projections. These maps commute with every pointed neighbourhood map, so their composites to $W$ form a cone. The defining limit gives $h:T_{(\\bar x)}\\to S_{(g\\bar x)}$ with these projections. Put $\\bar t=h\\bar z$. For a section $a\\in F(W)$ of an abelian sheaf $F$ on $S$, pullback gives the unit section on $W\\times_S T$. Specializing its germ at $\\bar x$ gives its germ at the point induced by $\\bar z$. The inverse-image germ comparison sends this to the germ of $a$ at the point of $W$ induced by $h\\bar z$, which is exactly $sp_F(a_{g\\bar x})$. Every source stalk element has such a representative, by the same comparison. Thus $c_{g,\\bar y,F}\\circ sp_{g^{-1}F}=sp_F\\circ c_{g,\\bar x,F}$. The abelian calculation applies to the underlying abelian sheaf of a module sheaf.",
+   "text": "Let E be the locus where the section map induces a bijection on a canonical geometric stalk. Specialization invariance also identifies all geometric points above the same ordinary point, so E is stable under specialization in both directions and contains the chosen point.",
    "uses": [
-    "def-weil-pbc-strict-henselization-limit",
-    "def-weil-pbc-strict-henselization-structural-map",
-    "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
-    "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-    "def-weil-pbc-inverse-image",
-    "lem-weil-pbc-inverse-image-stalk-germ"
+    "lem-weil-pbc-etale-section-germ-specialization"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJ6, label lemma-specialization-map-pullback, omitted proof expanded using limit projections and germs"
-   }
+   "elementary": false
   },
   {
-   "text": "Naturality and constants are direct germ calculations (Stacks 0GJ2, section-specialization). For a sheaf morphism $\\alpha:F\\to H$ and a section $a\\in F(W)$, specializing $\\alpha_W(a)$ and applying $\\alpha$ to the specialized germ of $a$ both give $(\\alpha_W(a))_{\\bar t}$. Hence $sp_H\\circ\\alpha_{\\bar s}=\\alpha_{\\bar t}\\circ sp_F$. For the constant sheaf $\\underline M$, represent $m$ by the canonical constant section labelled $m$ on the final neighbourhood. Specialization leaves this section unchanged; under the constant-stalk identification it therefore sends $m$ to $m$.",
-   "uses": [
-    "def-weil-pbc-geometric-stalks",
-    "lem-weil-pbc-constant-sheaf-geometric-stalk"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GJ2, label section-specialization, germ definition and functoriality"
-   }
-  },
-  {
-   "text": "Let $E$ be the set of points $x\\in U$ at which $\\varphi$ is bijective on a geometric stalk. The natural comparison between stalk functors at geometric points with the same image, identity on constant stalks, makes this condition independent of the chosen geometric point. For any $y\\leadsto x$ in $U$, lift a geometric point over $y$ to $U_{(\\bar x)}$ using the geometric-specialization lifting lemma. The pullback calculation of step 2 identifies specialization for $G|_U$ with one of the bijective specialization maps assumed for $G$; step 3 gives $sp_{G|_U}\\circ\\varphi_{\\bar x}=\\varphi_{\\bar y}\\circ sp_{\\underline M}$. The latter specialization is identity on $M$ by step 3. Write $b=sp_{G|_U}$, which is bijective by step 2 and the hypothesis; the displayed equation then gives $\\varphi_{\\bar y}=b\\circ\\varphi_{\\bar x}$ under the constant-stalk identifications. Consequently $\\varphi_{\\bar x}$ is bijective if and only if $\\varphi_{\\bar y}$ is bijective. Thus $E$ is stable under both specializations and generalizations and contains $u$.",
-   "uses": [
-    "lem-weil-pbc-geometric-stalk-comparison-constant",
-    "lem-weil-pbc-geometric-specialization-strict-local-lift"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GKC, lemma-characterize-locally-constant-module, proof of (2) implies (1); bijectivity locus paragraph"
-   }
-  },
-  {
-   "text": "The affine scheme $U$ is Noetherian: its map to $S$ is etale, hence locally of finite presentation and therefore locally of finite type (a finite presentation has finitely many algebra generators); the locally-Noetherian finite-type lemma applies, and the affine-scheme quasi-compactness lemma [lem-weil-pbc-affine-scheme-qcqs] gives quasi-compactness. Its irreducible components $C_1,\\ldots,C_r$ are finite in number. Remove their finite closed union for those $C_i$ not containing $u$, obtaining an open neighbourhood $V$ of $u$. Each remaining $C_i$ has a generic point $\\eta_i$ by sobriety of schemes. Since $u\\in C_i$, generalization stability gives $\\eta_i\\in E$; specialization stability then gives every point of $C_i$ in $E$. The components cover $U$, so $V\\subseteq E$.",
+   "text": "Choose an affine open through the point of U. Its morphism to S is locally of finite type, so it is locally Noetherian and affine quasi-compact, hence Noetherian. Its components are finite and the scheme is quasi-sober. The topological neighborhood lemma gives an open through the point contained in E.",
    "uses": [
     "def-weil-etale-morphism",
     "def-sbc-locally-finite-presentation",
     "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-affine-scheme-qcqs",
     "lem-weil-pbc-noetherian-finitely-many-components",
     "lem-weil-pbc-scheme-sober",
-    "lem-weil-pbc-affine-scheme-qcqs"
+    "lem-weil-pbc-specialization-invariant-neighborhood"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GKC, lemma-characterize-locally-constant-module, proof of (2) implies (1); component shrinking paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "On $V$, every geometric stalk of $\\varphi$ is bijective. Apply the stalkwise-isomorphism criterion to the underlying set sheaves to obtain an isomorphism on each section object. Its inverse is $\\Lambda$-linear: for $b,b^{\\prime}$ in the target, apply injectivity of $\\varphi$ to the identities $\\varphi(a+a^{\\prime})=b+b^{\\prime}$ and $\\varphi(\\lambda a)=\\lambda b$. The componentwise inverses commute with restriction: from $r_G\\circ\\varphi_W=\\varphi_{W^{\\prime}}\\circ r_M$, compose with the two inverses to get $\\varphi_{W^{\\prime}}^{-1}\\circ r_G=r_M\\circ\\varphi_W^{-1}$. Hence $G|_V\\simeq\\underline M$ as module sheaves. Repeat for every point of $S$, choosing a geometric point above it; the resulting etale neighbourhoods cover $S$ and each $M$ is finite. If $S$ is empty, the empty covering already gives the conclusion.",
+   "text": "Restrict the section map to this open W. The original germ formula for restriction and specialization invariance show it is bijective on every geometric stalk of W. The constant-sheaf adjunction and stalk detection therefore give a trivialization with finite module M.",
    "uses": [
-    "lem-weil-pbc-sets-etale-iso-on-geometric-stalks"
+    "lem-weil-pbc-etale-section-germ-specialization",
+    "lem-weil-pbc-etale-section-germ-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0GKC, lemma-characterize-locally-constant-module, proof of (2) implies (1); stalkwise isomorphism conclusion"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Choose W at every ordinary point of S. Their maps are etale and hit their indexing points, hence give a jointly surjective etale cover and the required finite trivializations. The index set is empty when S is empty.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-strict-henselization-limit",
-  "lem-weil-pbc-pointed-etale-neighbourhoods-cofiltered",
-  "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
-  "lem-weil-pbc-filtered-colimit-modules-elementwise",
-  "def-weil-pbc-geometric-stalks",
-  "def-constructible-constant",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-weil-pbc-constant-sheaf-geometric-stalk",
-  "def-weil-pbc-strict-henselization-structural-map",
-  "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-geometric-stalk-comparison-constant",
-  "lem-weil-pbc-geometric-specialization-strict-local-lift",
+  "lem-weil-pbc-etale-finite-stalk-local-presentation",
+  "lem-weil-pbc-etale-section-germ-specialization",
   "def-weil-etale-morphism",
   "def-sbc-locally-finite-presentation",
   "pqf-lem-locnoeth-lft",
+  "lem-weil-pbc-affine-scheme-qcqs",
   "lem-weil-pbc-noetherian-finitely-many-components",
   "lem-weil-pbc-scheme-sober",
-  "lem-weil-pbc-affine-scheme-qcqs",
-  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks"
+  "lem-weil-pbc-specialization-invariant-neighborhood",
+  "lem-weil-pbc-etale-section-germ-iso"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0GKC, lemma-characterize-locally-constant-module, (2) implies (1), finite-ring specialization"
+  "place": "Tag 0GKC, (2) implies (1); V5 uses section-germ specialization directly and proves the four intermediate arguments in Lean"
  },
  "mathlib_searches": [
   {
@@ -284,18 +230,13 @@
   "lem-weil-pbc-pointed-etale-neighbourhood-affine-shrink",
   "lem-weil-pbc-filtered-colimit-modules-elementwise",
   "def-weil-pbc-geometric-stalks",
-  "def-constructible-constant",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-weil-pbc-constant-sheaf-geometric-stalk",
-  "lem-weil-pbc-geometric-stalk-comparison-constant",
   "def-weil-etale-morphism",
   "def-sbc-locally-finite-presentation",
   "pqf-lem-locnoeth-lft",
   "lem-weil-pbc-noetherian-finitely-many-components",
   "lem-weil-pbc-scheme-sober",
   "lem-weil-pbc-sets-etale-iso-on-geometric-stalks",
-  "def-weil-pbc-strict-henselization-structural-map",
-  "def-weil-pbc-inverse-image"
+  "def-weil-pbc-strict-henselization-structural-map"
  ],
  "reviewed": {
   "date": "2026-10-14",
@@ -334,5 +275,15 @@
   "by": "NB",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261018T062936-L-687508",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

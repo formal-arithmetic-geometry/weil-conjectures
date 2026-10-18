@@ -1,0 +1,151 @@
+{
+ "id": "lem-weil-pbc-etale-section-germ-iso",
+ "kind": "statement",
+ "title": "Constant sheaf trivialization from section germs",
+ "statement": "Let $S$ be a scheme, $\\Lambda$ a commutative ring and $G$ a sheaf of $\\Lambda$-modules on the small etale site [def-weil-pbc-etale-sheaves]. Let $U\\to S$ be etale, $M$ a $\\Lambda$-module and $f:M\\to G(U)$ linear. Suppose that for every algebraically closed geometric point $a:\\operatorname{Spec}\\Omega\\to U$, the composite $\\operatorname{germ}_a\\circ f:M\\to G_{a\\to S}$ is bijective [def-weil-pbc-geometric-stalks]. Then $G|_U\\cong\\underline M$ on the localized site, with $\\underline M$ the constant sheaf [def-weil-pbc-constant-sheaf]. No finiteness or Noetherian hypothesis is needed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GKC, conclusion by Tag 03PT, expanded for module-valued sheaves and the localized site"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "The constant-sheaf adjunction on the localized site sends f to a morphism φ from the constant M sheaf to G.over U. Its unit evaluated at the terminal object followed by φ recovers f.",
+   "uses": [
+    "lem-weil-pbc-constant-sheaf-maps-global-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GKC, conclusion by Tag 03PT, expanded for module-valued sheaves and the localized site"
+   }
+  },
+  {
+   "text": "For a point with a chosen lift to U, the stalk of restriction is canonically the original stalk: identify the category of elements of the localized fibre functor with the over category at that lift. The forgetful functor from this over category is initial because the point fibre functor is flat. The final-colimit isomorphism has the required germ formula.",
+   "uses": [
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GKC, conclusion by Tag 03PT, expanded for module-valued sheaves and the localized site"
+   }
+  },
+  {
+   "text": "For any point on the localized site, the constant presheaf has stalk M. The sheafification unit induces an isomorphism on stalks, so the constant-section germ map is invertible. Naturality and the adjunction equation identify the stalk of φ with f followed by the original germ map.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GKC, conclusion by Tag 03PT, expanded for module-valued sheaves and the localized site"
+   }
+  },
+  {
+   "text": "Lift the conservative family of geometric points to the coefficient universe, then localize at U. Finality of the universe-lift equivalence preserves the germ formulas. The hypotheses and the two stalk identifications make all stalks of φ invertible. Conservativity detects that φ is an isomorphism; take its inverse.",
+   "uses": [
+    "lem-weil-pbc-sets-etale-iso-on-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GKC, conclusion by Tag 03PT, expanded for module-valued sheaves and the localized site"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constant-sheaf-maps-global-sections",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-constant-sheaf",
+  "lem-weil-pbc-sets-etale-iso-on-geometric-stalks"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GKC, conclusion by Tag 03PT, expanded for module-valued sheaves and the localized site"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A morphism from a constant sheaf on a localized site is an isomorphism if its section germ maps are bijective on every geometric stalk",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TopCat.Presheaf.isIso_iff_stalkFunctor_map_iso\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"{F G : Sheaf C X} (f : F ⟶ G) : IsIso f ↔ ∀ x : X, IsIso ((stalkFunctor C x).map f.1)\", \"doc\": \"A morphism between sheaves $F$ and $G$ on a topological space $X$ with values in a category $\\\\mathcal{C}$ is an isomorphism if and only if for every point $x \\\\in X$, the induced morphism on the stalks\"}\n  {\"name\": \"TopCat.Presheaf.isIso_of_stalkFunctor_map_iso\", \"module\": \"Mathlib.Topology.Sheaves.Stalks\", \"type\": \"{F G : Sheaf C X} (f : F ⟶ G) [∀ x : X, IsIso ((stalkFunctor C x).map f.1)] : IsIso f\", \"doc\": \"For any sheaves $F$ and $G$ on a topological space $X$ with values in a category $\\\\mathcal{C}$, a morphism $f : F \\\\to G$ is an isomorphism of sheaves if the induced map on stalks $f_x : F_x \\\\to G_x$ i\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.W_sheafToPreheaf_map_iff_isIso\", \"module\": \"Mathlib.CategoryTheory.Sites.Localization\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] (J : CategoryTheory.GrothendieckTopology C)\\n  {A : Type u_2} [inst_1 : CategoryTheory.Category.{v_2, u_2} A] {F₁ F₂ : CategoryTheory.Sheaf J A} (φ : F₁ ⟶ F₂),\\n  J.W ((CategoryTheory.sheafToPresheaf J A).map φ) ↔ CategoryTheory.IsIso φ\", \"doc\": \"A morphism $\\\\phi:F_1\\\\to F_2$ between sheaves on a category $\\\\mathcal{C}$ with respect to a Grothendieck topology $J$ is an isomorphism if and only if the induced map between their underlying presheave\"}\n  {\"name\": \"CategoryTheory.Sheaf.isConstant_of_iso\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"{F : Sheaf J D} {X : D} (i : F ≅ (constantSheaf J D).obj X) : IsConstant J F\", \"doc\": \"If a sheaf $ F $ on a category $\\\\mathcal{C}$ with values in a category $\\\\mathcal{D}$, equipped with a Grothendieck topology $ J $, is isomorphic to the constant sheaf associated with an object $ X \\\\in\"}\n  {\"name\": \"CategoryTheory.Sheaf.isLocallyBijective_iff_isIso\", \"module\": \"Mathlib.CategoryTheory.Sites.LocallyBijective\", \"type\": \": IsLocallyInjective f ∧ IsLocallySurjective f ↔ IsIso f\", \"doc\": \"A morphism between sheaves on a category $\\\\mathcal{C}$ with respect to a Grothendieck topology $J$ is an isomorphism if and only if it is both locally injective and locally surjective. This equivalenc\"}\n  {\"name\": \"CategoryTheory.Sheaf.isConstant_iff_isIso_counit_app\", \"module\": \"Mathlib.CategoryTheory.Sites.ConstantSheaf\", \"type\": \"[(constantSheaf J D).Faithful] [(constantSheaf J D).Full] (F : Sheaf J D) {T : C} (hT : IsTerminal T) :\\n  IsConstant J F ↔ (IsIso <| (constantSheafAdj J D hT).counit.app F)\", \"doc\": \"Given a Grothendieck topology $J$ on a category $\\\\mathcal{C}$ with a terminal object $T$, a sheaf $F$ with values in a category $\\\\mathcal{D}$ is constant if and only if the counit of the adjunction be\"}\n  {\"name\": \"TopCat.Presheaf.sheafifyStalkIso\", \"module\": \"Mathlib.Topology.Sheaves.Sheafify\", \"type\": \"(x : X) : F.sheafify.presheaf.stalk x ≅ F.stalk x\", \"doc\": \"For any topological space $X$, presheaf $\\\\mathcal{F}$ on $X$, and point $x \\\\in X$, the canonical morphism from the stalk of the sheafification of $\\\\mathcal{F}$ at $x$ to the stalk of $\\\\mathcal{F}$ at \"}\n  {\"name\": \"ModuleCat.Tilde.stalkIso\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Tilde\", \"type\": \"(x : PrimeSpectrum.Top R) :\\n  TopCat.Presheaf.stalk (tildeInModuleCat M) x ≅ ModuleCat.of R (LocalizedModule x.asIdeal.primeCompl M)\", \"doc\": \"For a commutative ring $ R $, an $ R $-module $ M $, and a prime ideal $ \\\\mathfrak{p} $ in $ R $, the stalk of the sheaf $ \\\\widetilde{M} $ at the point corresponding to $ \\\\mathfrak{p} $ is isomorphic \"}\n",
+   "date": "2026-10-18",
+   "verdict": "no exact match; component lemmas used in the Lean proof"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafFiber\", \"IsIso\"",
+   "results": "[loogle] OK 4 hit(s)\n  {\"name\": \"CategoryTheory.GrothendieckTopology.Point.instIsIsoMapFunctorOppositePresheafFiberToSheafify\", \"module\": \"Mathlib.CategoryTheory.Sites.Point.Skyscraper\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} (Φ : J.Point) {A : Type u'} [CategoryTheory.Category.{v', u'} A] [CategoryTheory.Limits.HasProducts A] [CategoryTheory.Limits.HasColimitsOfSize.{w, w, v', u'} A] (P : CategoryTheory.Functor Cᵒᵖ A) [CategoryT\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.Point.instIsIsoηFunctorOppositePresheafFiber\", \"module\": \"Mathlib.CategoryTheory.Sites.Point.Monoidal\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} (Φ : J.Point) {A : Type u'} [CategoryTheory.Category.{v', u'} A] [CategoryTheory.MonoidalCategory A] [CategoryTheory.Limits.HasColimitsOfSize.{w, w, v', u'} A] : CategoryTheory.IsIso (CategoryTheory.Functor.\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.Point.instIsIsoδFunctorOppositePresheafFiber\", \"module\": \"Mathlib.CategoryTheory.Sites.Point.Monoidal\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C} (Φ : J.Point) {A : Type u'} [CategoryTheory.Category.{v', u'} A] [CategoryTheory.MonoidalCategory A] [CategoryTheory.Limits.HasColimitsOfSize.{w, w, v', u'} A] [CategoryTheory.LocallySmall.{w, v, u} C] [∀ (X\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.instIsIsoFunctorOppositeToPresheafFiberNatTransPointBotCoeEquivHomUnopOpObjTypeShrinkYonedaSymmShrinkYonedaObjObjEquivId\", \"module\": \"Mathlib.CategoryTheory.Sites.Point.Presheaf\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.LocallySmall.{w, v, u} C] (X : C) (A : Type u_1) [CategoryTheory.Category.{u_2, u_1} A] [CategoryTheory.Limits.HasColimitsOfSize.{w, w, u_2, u_1} A] : CategoryTheory.IsIso ((CategoryTheory.GrothendieckTopology.pointBot X).toPresheafFib\", \"doc\": \"\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no exact match; component lemmas used in the Lean proof"
+  },
+  {
+   "tool": "grep",
+   "query": "jointlyReflectIsomorphisms|presheafFiberConstIso",
+   "results": "[grep] OK 18 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Preserves/Basic.lean\", \"line\": \"627\", \"text\": \"reflects the limit of `F` (see also `JointlyReflectIsomorphisms.jointlyReflectsColimit` in\"}\n  {\"file\": \"Mathlib/CategoryTheory/Limits/Preserves/Basic.lean\", \"line\": \"733\", \"text\": \"reflects the colimit of `F` (see also `JointlyReflectIsomorphisms.jointlyReflectsLimit` in\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/ReflectsIso/Jointly.lean\", \"line\": \"33\", \"text\": \"structure JointlyReflectIsomorphisms (F : ∀ i, C ⥤ D i) : Prop where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/ReflectsIso/Jointly.lean\", \"line\": \"68\", \"text\": \"namespace JointlyReflectIsomorphisms\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/ReflectsIso/Jointly.lean\", \"line\": \"70\", \"text\": \"variable (h : JointlyReflectIsomorphisms F)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/ReflectsIso/Jointly.lean\", \"line\": \"109\", \"text\": \"end JointlyReflectIsomorphisms\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/ReflectsIso/Jointly.lean\", \"line\": \"134\", \"text\": \"    JointlyReflectIsomorphisms F where\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/ReflectsIso/Limits.lean\", \"line\": \"22\", \"text\": \"namespace CategoryTheory.JointlyReflectIsomorphisms\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/ReflectsIso/Limits.lean\", \"line\": \"26\", \"text\": \"  {F : ∀ i, C ⥤ D i} (hF : JointlyReflectIsomorphisms F)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/ReflectsIso/Limits.lean\", \"line\": \"81\", \"text\": \"end CategoryTheory.JointlyReflectIsomorphisms\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/ReflectsIso/Exact.lean\", \"line\": \"40\", \"text\": \"namespace JointlyReflectIsomorphisms\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/ReflectsIso/Exact.lean\", \"line\": \"42\", \"text\": \"variable (hP : JointlyReflectIsomorphisms F)\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/ReflectsIso/Exact.lean\", \"line\": \"123\", \"text\": \"end JointlyReflectIsomorphisms\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"line\": \"52\", \"text\": \"  jointlyReflectIsomorphisms_type :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"line\": \"53\", \"text\": \"    JointlyReflectIsomorphisms\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"line\": \"74\", \"text\": \"lemma jointlyReflectIsomorphisms :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"line\": \"75\", \"text\": \"    JointlyReflectIsomorphisms\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"line\": \"79\", \"text\": \"      hP.jointlyReflectIsomorphisms_type.isIso_iff]\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no exact match; component lemmas used in the Lean proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleFiniteStalkSpecializationCriterion",
+  "date": "2026-10-18",
+  "group": "V5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-finite-stalk-specialization-criterion",
+   "place": "Proof steps 6",
+   "via": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSectionGermIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSectionGermIso.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_constant_iso_of_bijective_section_germs",
+  "statement": "theorem exists_constant_iso_of_bijective_section_germs\n    {S : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]\n    (G : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ))\n    (U : S.Etale) (M : ModuleCat.{u + 1} Λ) (f : M ⟶ G.obj.obj (op U))\n    (hf : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω]\n      (a : Spec (.of Ω) ⟶ U.left),\n      Function.Bijective (f ≫ (pointSmallEtale (a ≫ U.hom)).toPresheafFiber U\n        (Over.homMk a rfl) G.obj)) :\n    Nonempty (G.over U ≅\n      (constantSheaf (S.smallEtaleTopology.over U) (ModuleCat.{u + 1} Λ)).obj M)",
+  "branch": "sheaf-dag",
+  "by": "V5",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261018T062936-L-687508",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261018T062936-L-687508",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

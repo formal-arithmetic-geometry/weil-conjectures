@@ -16200,3 +16200,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:29 L: merged deliver/V4/Sheaf.AlgebraicGeometry.ProjectiveSpaceFunctorOfPoints (stage 3; reviewer PASS; first push; landing 20261018T062934-L-687028 (proof); batch 20261018T062645; modules 1; new nodes 2)
 - 06:29 L: merged deliver/V4/Sheaf.CategoryTheory.DerivedExactSquare (stage 3; reviewer PASS; first push; landing 20261018T062935-L-687156 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:29 L: merged deliver/V4/Sheaf.Topology.SpectralLimitConstructibleClosed (stage 3; reviewer PASS; first push; landing 20261018T062936-L-687358 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:29 L: merged deliver/V5/Sheaf.AlgebraicGeometry.EtaleFiniteStalkSpecializationCriterion (stage 3; reviewer PASS; first push; landing 20261018T062936-L-687508 (interface); batch 20261018T062645; modules 5; new nodes 4)

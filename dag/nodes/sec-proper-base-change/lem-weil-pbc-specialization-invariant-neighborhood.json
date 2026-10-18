@@ -1,0 +1,122 @@
+{
+ "id": "lem-weil-pbc-specialization-invariant-neighborhood",
+ "kind": "statement",
+ "title": "Open neighborhood in a specialization-invariant subset",
+ "statement": "Let $X$ be a quasi-sober topological space with finitely many irreducible components [def-weil-irreducible-components]. Let $E\\subseteq X$ satisfy $x\\in E\\Longleftrightarrow y\\in E$ whenever $x\\rightsquigarrow y$. For every $x\\in E$ there is an open subset $V$ such that $x\\in V\\subseteq E$. Here quasi-sobriety means that every irreducible closed subset has a generic point; no uniqueness or $T_0$ hypothesis is required.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GKC, component-shrinking paragraph, its purely topological argument"
+ },
+ "stmt_deps": [
+  "def-weil-irreducible-components"
+ ],
+ "proof": [
+  {
+   "text": "Remove the union of the irreducible components not containing x. Each component is closed and the union is finite, so its complement V is open and contains x.",
+   "uses": [
+    "def-weil-irreducible-components"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GKC, component-shrinking paragraph, its purely topological argument"
+   }
+  },
+  {
+   "text": "For y in V choose an irreducible component containing y. It also contains x, since otherwise it was removed. Its generic point specializes to both x and y; invariance first transfers membership from x to the generic point, then to y. Thus V is contained in E.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0GKC, component-shrinking paragraph, its purely topological argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-irreducible-components"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0GKC, component-shrinking paragraph, its purely topological argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "In a sober space with finitely many irreducible components a subset invariant under specialization and generalization contains a neighborhood of every one of its points",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"irreducibleComponents\", \"module\": \"Mathlib.Topology.Irreducible\", \"type\": \"(X : Type*) [TopologicalSpace X] : Set (Set X)\", \"doc\": \"The irreducible components of a topological space are the maximal irreducible subsets. This set consists of all subsets $ s $ of $ X $ that are irreducible and maximal with respect to inclusion, meani\"}\n  {\"name\": \"StableUnderSpecialization\", \"module\": \"Mathlib.Topology.Inseparable\", \"type\": \"(s : Set X) : Prop\", \"doc\": \"A subset $ s $ of a topological space is stable under specialization if for any points $ x $ and $ y $, whenever $ x $ specializes to $ y $ and $ x $ is in $ s $, then $ y $ is also in $ s $.\"}\n  {\"name\": \"TopologicalSpace.NoetherianSpace.exists_finite_set_closeds_irreducible\", \"module\": \"Mathlib.Topology.NoetherianSpace\", \"type\": \"[NoetherianSpace α] (s : Closeds α) :\\n  ∃ S : Set (Closeds α), S.Finite ∧ (∀ t ∈ S, IsIrreducible (t : Set α)) ∧ s = sSup S\", \"doc\": \"In a Noetherian topological space, every closed subset can be expressed as the union of finitely many irreducible closed subsets.\"}\n  {\"name\": \"genericPoints\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \": Set α\", \"doc\": \"The set of points $ x $ in a topological space $ \\\\alpha $ such that the closure of the singleton set $ \\\\{x\\\\} $ is an irreducible component of $ \\\\alpha $, i.e., a maximal irreducible closed subset of $\"}\n  {\"name\": \"irreducibleComponent_mem_irreducibleComponents\", \"module\": \"Mathlib.Topology.Irreducible\", \"type\": \"(x : X) : irreducibleComponent x ∈ irreducibleComponents X\", \"doc\": \"For any point $x$ in a topological space $X$, the irreducible component containing $x$ is one of the maximal irreducible subsets of $X$.\"}\n  {\"name\": \"stableUnderSpecialization_iff_exists_sUnion_eq\", \"module\": \"Mathlib.Topology.Inseparable\", \"type\": \"{s : Set X} : StableUnderSpecialization s ↔ ∃ (S : Set (Set X)), (∀ s ∈ S, IsClosed s) ∧ ⋃₀ S = s\", \"doc\": \"A subset $ s $ of a topological space is stable under specialization if and only if there exists a family $ \\\\mathcal{S} $ of closed subsets such that $ s = \\\\bigcup \\\\mathcal{S} $.\"}\n  {\"name\": \"genericPoint_specializes\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \"[QuasiSober α] [IrreducibleSpace α] (x : α) : genericPoint α ⤳ x\", \"doc\": \"In a quasi-sober irreducible topological space, the unique generic point specializes to every point $x$ in the space. This means that every neighborhood of $x$ is also a neighborhood of the generic po\"}\n  {\"name\": \"QuasiSober\", \"module\": \"Mathlib.Topology.Sober\", \"type\": \"(α : Type u_3) → [TopologicalSpace α] → Prop\", \"doc\": \"A topological space is quasi-sober if every irreducible closed subset is the closure of exactly one point.\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no exact match; component lemmas used in the Lean proof"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"irreducibleComponents\", \"Specializes\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-18",
+   "verdict": "no exact match; component lemmas used in the Lean proof"
+  },
+  {
+   "tool": "grep",
+   "query": "irreducibleComponents.*[Ff]inite|[Ff]inite.*irreducibleComponents",
+   "results": "[grep] OK 18 hit(s)\n  {\"file\": \"Mathlib/Topology/Sober.lean\", \"line\": \"313\", \"text\": \"lemma finite [T0Space α] (h : (irreducibleComponents α).Finite) : (genericPoints α).Finite :=\"}\n  {\"file\": \"Mathlib/Topology/NoetherianSpace.lean\", \"line\": \"38\", \"text\": \"- `TopologicalSpace.NoetherianSpace.finite_irreducibleComponents`: The number of irreducible\"}\n  {\"file\": \"Mathlib/Topology/NoetherianSpace.lean\", \"line\": \"193\", \"text\": \"theorem NoetherianSpace.finite_irreducibleComponents [NoetherianSpace α] :\"}\n  {\"file\": \"Mathlib/Topology/NoetherianSpace.lean\", \"line\": \"194\", \"text\": \"    (irreducibleComponents α).Finite := by\"}\n  {\"file\": \"Mathlib/Topology/NoetherianSpace.lean\", \"line\": \"206\", \"text\": \"  have hα : (irreducibleComponents α).Finite := finite_irreducibleComponents\"}\n  {\"file\": \"Mathlib/Topology/Irreducible.lean\", \"line\": \"358\", \"text\": \"    (S : Set (Set X)) (hS : S.Finite) (hSα : S ⊆ irreducibleComponents X) (hZS : Z ⊆ ⋃₀ S) :\"}\n  {\"file\": \"Mathlib/Topology/Irreducible.lean\", \"line\": \"367\", \"text\": \"    (hX : (irreducibleComponents X).Finite) (Z : Set X) (hZ : Z ∈ irreducibleComponents X) :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"74\", \"text\": \"lemma GeometricallyReduced.isReduced_of_flat_of_finite_irreducibleComponents\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"76\", \"text\": \"    [IsReduced Y] [Finite (irreducibleComponents Y)] : IsReduced X := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"115\", \"text\": \"  have : Finite ↑(irreducibleComponents ↥(Y.affineCover.X i)) := by\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"117\", \"text\": \"    exact TopologicalSpace.NoetherianSpace.finite_irreducibleComponents\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Geometrically/Reduced.lean\", \"line\": \"118\", \"text\": \"  exact isReduced_of_flat_of_finite_irreducibleComponents (pullback.snd _ _)\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"line\": \"364\", \"text\": \"theorem finite_irreducibleComponents_of_isNoetherian [IsNoetherian X] :\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Noetherian.lean\", \"line\": \"365\", \"text\": \"    (irreducibleComponents X).Finite := NoetherianSpace.finite_irreducibleComponents\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"line\": \"45\", \"text\": \"    exact TopologicalSpace.NoetherianSpace.finite_irreducibleComponents.sdiff.isClosed_biUnion\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/IdealSheaf/IrreducibleComponent.lean\", \"line\": \"55\", \"text\": \"      TopologicalSpace.NoetherianSpace.finite_irreducibleComponents Z hZ).symm\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"384\", \"text\": \"      exact TopologicalSpace.NoetherianSpace.finite_irreducibleComponents.sdiff.isClosed_biUnion\"}\n  {\"file\": \"Mathlib/AlgebraicGeometry/Morphisms/Smooth.lean\", \"line\": \"388\", \"text\": \"      TopologicalSpace.NoetherianSpace.finite_irreducibleComponents\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no exact match; component lemmas used in the Lean proof"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleFiniteStalkSpecializationCriterion",
+  "date": "2026-10-18",
+  "group": "V5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-finite-stalk-specialization-criterion",
+   "place": "Proof steps 5",
+   "via": []
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSectionGermNoetherianNeighborhood",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSectionGermNoetherianNeighborhood.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_open_subset_of_specialization_invariant",
+  "statement": "theorem exists_open_subset_of_specialization_invariant\n    {X : Type u} [TopologicalSpace X] [QuasiSober X]\n    (hfin : (irreducibleComponents X).Finite) (E : Set X)\n    (hE : ∀ x y : X, x ⤳ y → (x ∈ E ↔ y ∈ E))\n    (x : X) (hx : x ∈ E) :\n    ∃ V : TopologicalSpace.Opens X, x ∈ V ∧ (V : Set X) ⊆ E",
+  "branch": "sheaf-dag",
+  "by": "V5",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261018T062936-L-687508",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261018T062936-L-687508",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
