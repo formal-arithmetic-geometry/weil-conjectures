@@ -94,12 +94,12 @@
    "WeilConjectures.SfIsMixedOfWeightsAtMost"
   ],
   "file": "lean/Sheaf/Paper/AdicPunctualWeights.lean",
-  "statement": "def SfIsPunctuallyPureOfWeight (iota : Qbar ≃+* ℂ) (F : sfCommonStageWeilSheaf D l hl Y₀ Qbar) (w : ℝ) : Prop",
+  "statement": "def SfIsPunctuallyPureOfWeight (iota : Qbar →+* ℂ) (F : sfCommonStageWeilSheaf D l hl Y₀ Qbar) (w : ℝ) : Prop",
   "branch": "newtargets-dag",
-  "by": "Q72",
+  "by": "Q52",
   "date": "2026-10-18",
   "existing": false,
-  "note": "Section 1(B): the upstream predicates take the older AlgebraicGeometry.WeilSheaf category, not the recorded sfCommonStageWeilSheaf fixed-pair heart. This module states the exact punctual eigenvalue norm equality and finite-filtration mixedness on the recorded heart, using the recorded localClosedFrobeniusCohomology at a finite Weil stage and actual extension of its linear operator to the specified coefficient closure. Eigenvalues outside the field of definition are included; no semisimplicity is assumed."
+  "note": "Section 1(B), as expressly requested by the sk-d-dl-general-weights return: the existing fixed-pair heart interface required Qbar ≃+* ℂ, whereas the consumer and its source require only Qbar →+* ℂ. The same module and predicates are generalized in place to a ring homomorphism (automatically injective between fields); the eigenvalue definition, norm equality, finite filtration and category are unchanged. The dependency node's isomorphism case is obtained by passing iota.toRingHom. No private purity or mixedness predicate and no pro-etale substitute is introduced."
  },
  "blueprint_update": {
   "snapshot": "main-20261015",
@@ -110,9 +110,9 @@
  "reviewed_lean": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-3f5d8924d",
-  "group": "Q72",
+  "reviewer": "NT-stage2-cc-593a19237",
+  "group": "Q52",
   "result": "pass",
-  "note": "Read the node, the dependency nodes, the report and all three delivered modules, plus the live declarations they use. Hypotheses match the node (separated finite-type k0-schemes, open immersion j0, l != p, Qbar with iota); quasi-compactness of j0 is derived, and no properness, Noetherian or universe restriction is added. j_! is the left adjoint of the recorded zlWeilPull on the sfCommonStageWeilSheaf hearts: canonical, not hollow, mathematically j_!. Conclusions present: exactness (additive, finite limits, finite colimits); carrier iso with sfQbarCompactSupportValue for (j,id) plus a natural finite-stage comparison with sfCompactSupportFiniteFunctor; natural fibre iso inside U and zero fibre outside U at every geometric point; natural closed-fibre iso intertwining localClosedFrobeniusCohomology at closed points of U0; preservation of upper bounds and purity for all real w with q_x = card of the residue field. Edge cases (empty U, identity immersion, zero sheaf, any w, eigenvalues outside the field of definition) are covered. Section 1(B) repairs are justified: the punctual-weights node is re-pointed from the old WeilSheaf predicates to the recorded heart and its definitions match the node; the adic-fibre node's new module re-exports the original, repeats its twelve clauses verbatim and adds the intrinsic fibre via purCoefficientModel. Item changes only in lean and stmt_deps (three landed nodes added, as the brief allows); statements verbatim; new names unique; docstrings, sorry-only proofs, imports and line lengths conform. nt_compile.py on the three snapshot files: clean, 4.3/3.6/11.2 s, reproduced twice. Minor notes only: landed citers still use the old upstream weight predicates (a stage-3 bridge); the Frobenius clause is stated on the recorded local-Frobenius fibre, which is where that operator lives."
+  "note": "Clause-by-clause match: sheaf bound = recorded SfIsMixedOfWeightsAtMost (mono chain from zero, last term ≅ F, cokernels punctually pure of weight v≤w with ‖ι α‖=#κ(y)^(v/2)); SfIsMixed = ∃ w : ℝ; complex bound ∀ b : ℤ at w+b on sfCommonStageWeilComplex; H^b = (τ≥b τ≤b K)[b] as in prop-constructible-truncations, Weil structure from comparisons fixed by stated unit/counit equations plus the standard shift fieldCommonPullShift; closure theorems of_mono/of_epi/of_mono_cokernel correct, proofs sorry. Field embedding Qbar →+* ℂ, finite type = LocallyOfFiniteType + QuasiCompact, independent universes u, v. Edge cases m=0, empty scheme, negative b, zero cohomology covered. AdicPunctualWeights change only widens iota to an embedding; all 5 importers compile clean. Theorem stmt_deps: the definition needs the Frobenius/H^b comparison and t-exactness these theorems construct, so they stay. Compiles: both delivered files clean twice with no messages; 3 importers within the normal 60 s limit; the last 2 with a /tmp copy of the tool at a 400 s limit after the normal run timed out on the unchanged LocalFrobeniusTransportNormalization (201 s) under load. No hollow definitions, docstrings present, 6 sorrys all in theorem proofs, statement verbatim, report sections present."
  }
 }

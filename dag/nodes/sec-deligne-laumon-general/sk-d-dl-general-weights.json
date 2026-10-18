@@ -20,7 +20,10 @@
   "def-sf-categories",
   "def-weil-punctual-weights",
   "def-weil-complex-weights",
-  "def-weil-weil-sheaf-complex"
+  "def-weil-weil-sheaf-complex",
+  "prop-constructible-truncations",
+  "lem-a1-constructible-pullback-t-exact",
+  "def-zl-field-weil-shriek-shift-data"
  ],
  "proof": [],
  "proof_deps": [],
@@ -267,5 +270,40 @@
   "group": "NF",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-caf466395 (reviewer sub-agent of L); spot-checked: Read in full: the item, the unit (it has no steps), the chapter, the main-20261015 source at order 3154 (identical in main-20261017; \\DLRQ is Q̄_ℓ) and the older master text, the cited nodes sk-d-dl-a1-setup, def-sf-categories, def-weil-punctual-weights (and its blueprint_update), def-weil-complex-weights, def-weil-weil-sheaf-complex, def-weil-constructible-heart, def-weil-local-frobenius-trace and lem-weil-local-frobenius-conjugacy-class, plus slopmaster2 Weights.lean and StalkFunctor.lean. The statement is verbatim main-20261015 except that [sec-six-functors] became [def-sf-categories]. At Q̄_ℓ that node uses the same def-weil-algebraically-closed-coefficients construction as the Weil-sheaf nodes, so no coefficient category is silently identified. Small cases checked: n=0 gives the zero sheaf; a bounded K has zero H^b in almost every degree; subobject, quotient and extension closure hold through Frobenius-stable eigenvalue subsets and exact stalk functors, matching the sorry-free of_mono, of_epi and of_mono_cokernel. There are no new nodes. same_as with the two existing weight definitions is correct (both are imported blueprint nodes). FIX, three B2/B3 repairs, named as a statement correction in review.md: (1) X_0 is now 'of finite type', which the cited Weil-sheaf, heart and punctual-weight definitions require (Spec k_0(t) has a closed point with infinite residue field; the master unit says separated finite type and the Lean has LocallyOfFiniteType); (2) the purity condition |ι(α)|=q_y^{v/2} is written out for a field embedding ι, because the cited node fixes an isomorphism; (3) [def-weil-weil-sheaf-complex] is now cited in the text and stmt_deps; it was already in the closure through sk-d-dl-a1-setup, so there is no cycle. Batch-5 check: def-weil-punctual-weights and def-weil-complex-weights reach sec-poincare-duality only through lem-weil-local-frobenius-conjugacy-class. That lemma says the local Frobenius operators at two geometric points over one closed point are conjugate; it is a general fact, given by neither assumption and not a step of either proof. Both definitions were also already in the item's closure through sk-d-dl-a1-setup, so they are accepted as general definitions. For the maintainer: lean_audit line numbers come from a later slopmaster2 checkout than the one on this machine; verify the WeilComplex mono_weight attachment against 7d675a26.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.WeilMixedUpperBounds",
+  "declaration": "WeilConjectures.SfComplexIsMixedOfWeightsAtMost",
+  "declarations": [
+   "WeilConjectures.sfWeilStandardTStructure",
+   "WeilConjectures.sfWeilCohomologyUnderlying",
+   "WeilConjectures.sfWeilFrobeniusTruncLE_existsUnique",
+   "WeilConjectures.sfWeilFrobeniusTruncLE",
+   "WeilConjectures.sfWeilFrobeniusTruncGE_existsUnique",
+   "WeilConjectures.sfWeilFrobeniusTruncGE",
+   "WeilConjectures.sfWeilCohomologyFrobenius",
+   "WeilConjectures.sfWeilCohomology_mem",
+   "WeilConjectures.sfWeilCohomology",
+   "WeilConjectures.SfIsMixed",
+   "WeilConjectures.SfComplexIsMixedOfWeightsAtMost",
+   "WeilConjectures.SfIsMixedOfWeightsAtMost.of_mono",
+   "WeilConjectures.SfIsMixedOfWeightsAtMost.of_epi",
+   "WeilConjectures.SfIsMixedOfWeightsAtMost.of_mono_cokernel"
+  ],
+  "file": "lean/Sheaf/Paper/WeilMixedUpperBounds.lean",
+  "statement": "def SfComplexIsMixedOfWeightsAtMost (iota : Qbar →+* ℂ) (K : sfCommonStageWeilComplex D l hl Y₀ Qbar) (w : ℝ) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q52",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Repair of returned head e8bc1f01c945: the old upstream WeilSheaf/WeilComplex record was a different pro-etale/derived-of-pairs model. This module uses exactly sfCommonStageWeilSheaf/sfCommonStageWeilComplex and the generalized recorded SfIsMixedOfWeightsAtMost and SfIsPunctuallyPureOfWeight (field embeddings, not only isomorphisms). It constructs cohomology via the truncation-normalized t-exact Frobenius comparison, defines mixedness by existence of a real bound, states the degree w+b condition and all three closure theorems. No natural statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-593a19237",
+  "group": "Q52",
+  "result": "pass",
+  "note": "Clause-by-clause match: sheaf bound = recorded SfIsMixedOfWeightsAtMost (mono chain from zero, last term ≅ F, cokernels punctually pure of weight v≤w with ‖ι α‖=#κ(y)^(v/2)); SfIsMixed = ∃ w : ℝ; complex bound ∀ b : ℤ at w+b on sfCommonStageWeilComplex; H^b = (τ≥b τ≤b K)[b] as in prop-constructible-truncations, Weil structure from comparisons fixed by stated unit/counit equations plus the standard shift fieldCommonPullShift; closure theorems of_mono/of_epi/of_mono_cokernel correct, proofs sorry. Field embedding Qbar →+* ℂ, finite type = LocallyOfFiniteType + QuasiCompact, independent universes u, v. Edge cases m=0, empty scheme, negative b, zero cohomology covered. AdicPunctualWeights change only widens iota to an embedding; all 5 importers compile clean. Theorem stmt_deps: the definition needs the Frobenius/H^b comparison and t-exactness these theorems construct, so they stay. Compiles: both delivered files clean twice with no messages; 3 importers within the normal 60 s limit; the last 2 with a /tmp copy of the tool at a 400 s limit after the normal run timed out on the unchanged LocalFrobeniusTransportNormalization (201 s) under load. No hollow definitions, docstrings present, 6 sorrys all in theorem proofs, statement verbatim, report sections present."
  }
 }
