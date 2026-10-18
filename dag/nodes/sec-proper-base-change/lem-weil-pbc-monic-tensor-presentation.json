@@ -1,0 +1,158 @@
+{
+ "id": "lem-weil-pbc-monic-tensor-presentation",
+ "kind": "statement",
+ "title": "Finite monic tensor presentations and their evaluation maps",
+ "statement": "Let R be a commutative ring and I a finite index type. For polynomials P_i in R[T], set C to the finite tensor product over R of R[T]/(P_i) [def-weil-pbc-module-tensor-product]. If every P_i is monic, C has the basis indexed by tuples (e_i), 0 <= e_i < degree(P_i), consisting of tensor products of powers of the distinguished roots [def-weil-pbc-free-module]. For any commutative R-algebra B and tuple x_i in B with P_i(x_i)=0, evaluation induces an R-algebra map C -> B sending each distinguished root to x_i. If the x_i generate B as an R-algebra, this map is surjective. Zero rings, empty I, and constant monic polynomials are allowed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 03HW, lemma-massage-finite, proof."
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Use the power basis of each AdjoinRoot(P_i), and apply Mathlib Basis.piTensorProduct. The tensor products of the component power bases give exactly the asserted finite basis.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03HW, lemma-massage-finite, proof."
+   }
+  },
+  {
+   "text": "Lift evaluation on each AdjoinRoot factor using P_i(x_i)=0. The product of these factor maps is multilinear, preserves the unit, and is multiplicative on pure tensors, so PiTensorProduct.liftAlgHom supplies the algebra map. Evaluate tensors with one nonunit factor to verify the distinguished-root equations.",
+   "uses": [
+    "def-weil-polynomial-ring",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03HW, lemma-massage-finite, proof."
+   }
+  },
+  {
+   "text": "The range of the evaluation algebra map contains every generator x_i. It therefore contains their algebraic span, which is B by assumption. Hence the map is surjective.",
+   "uses": [
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03HW, lemma-massage-finite, proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-monic-quotient-free",
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-polynomial-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 03HW, lemma-massage-finite, proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite free tensor product of monic polynomial quotients is covered by evaluation sections after a finite free splitting extension",
+   "results": "8 hits: Polynomial.Monic.exists_splits_map and Module.Free.tensor are ingredients; MvPolynomial.aeval_one_tmul, TensorProduct.instFree and algebraic-closure splitting results do not state the required assembly.",
+   "date": "2026-10-18",
+   "verdict": "No exact match; use the existing single-equation splitting and tensor basis APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite tensor product of monic polynomial quotients the evaluations at tuples of roots cover its prime spectrum",
+   "results": "8 hits including Polynomial.exists_image_comap_of_monic, Ideal.pi_tensorProductMk_quotient_surjective, and universal factorization rings. None is the tensor evaluation cover. Separate simultaneous splitting query finds Polynomial.Monic.exists_splits_map, for one equation.",
+   "date": "2026-10-18",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "PiTensorProduct, Module.Basis",
+   "results": "10 hits including Basis.piTensorProduct and its apply and repr lemmas. This supplies the basis directly but does not supply the presentation map or section cover.",
+   "date": "2026-10-18",
+   "verdict": "Partial match used in the implementation."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_splits_map|basis.*piTensorProduct|presentationMap|tensor.*section|section.*tensor",
+   "results": "25 hits: AdjoinRoot.lean:1093 single monic splitting, PiTensorProduct basis API from a direct source search; no assembly or section-cover theorem. The library and blueprint searches for simultaneous splitting, monic tensor, closed sections, and adjoin roots found no duplicate.",
+   "date": "2026-10-18",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteAffineSectionCover",
+  "date": "2026-10-18",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Proof, classical constructibility input: finite pushforward constructibility (095R) invokes 095K(1); 095K proof, Noetherian approximation and finite section-cover paragraphs. Specifically: Finite monic tensor presentations and their evaluation maps.",
+   "via": [
+    "lem-weil-pbc-finite-affine-section-cover",
+    "lem-weil-pbc-quasifinite-affine-etale-thickening-decomposition",
+    "lem-weil-pbc-finite-fp-pushforward-constructible",
+    "lem-weil-pbc-etale-quasifinite-shriek-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.MonicTensorPresentation",
+  "file": "lean/Sheaf/RingTheory/MonicTensorPresentation.lean",
+  "declaration": "MonicTensorPresentation.presentationMap_surjective",
+  "statement": "theorem presentationMap_surjective (P : ι → R[X]) (x : ι → S)\n    (hx : ∀ i, aeval (x i) (P i) = 0)\n    (hgen : Algebra.adjoin R (Set.range x) = ⊤) :\n    Function.Surjective (presentationMap P x hx)",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-18",
+  "declarations": [
+   "MonicTensorPresentation.tensorLift",
+   "MonicTensorPresentation.Tensor",
+   "MonicTensorPresentation.presentationMap",
+   "MonicTensorPresentation.presentationMap_root",
+   "MonicTensorPresentation.basis",
+   "MonicTensorPresentation.presentationMap_surjective"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261018T062714-L-636583",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261018T062714-L-636583",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

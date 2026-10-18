@@ -1,0 +1,151 @@
+{
+ "id": "lem-weil-pbc-split-monic-tensor-sections",
+ "kind": "statement",
+ "title": "Evaluation sections cover a split monic tensor algebra",
+ "statement": "Let R be a commutative ring, I a finite index type and P_i in R[T] monic split polynomials. Set C to the tensor product of AdjoinRoot(P_i) as in [lem-weil-pbc-monic-tensor-presentation]. There exist a natural number n and surjective R-algebra homomorphisms e_k:C -> R (k in Fin n) such that every prime q of C is the inverse image under some e_k of a prime of R [def-weil-affine-spectrum]. In particular their spectral closed sections cover Spec C. No reducedness, domain or distinct-root hypothesis on R or P_i is imposed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 03HW, lemma-massage-finite, proof."
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-monic-tensor-presentation",
+  "def-weil-affine-spectrum",
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [
+  {
+   "text": "Write each split monic P_i as the product of a finite multiset of linear factors. Index a finite family by all tuples of factors. Evaluating at the corresponding roots gives an R-algebra map e:C -> R by the tensor presentation map, and e is surjective because it is the identity on structural scalars.",
+   "uses": [
+    "lem-weil-pbc-monic-tensor-presentation",
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03HW, lemma-massage-finite, proof."
+   }
+  },
+  {
+   "text": "For any prime q of C, pass to the domain quotient C/q. The image of each distinguished root satisfies P_i, so the product of its differences from the scalar roots is zero. The domain property gives one vanishing factor for each i; choose these factors to obtain a tuple k.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-polynomial-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03HW, lemma-massage-finite, proof."
+   }
+  },
+  {
+   "text": "The quotient map C -> C/q agrees with C -> R -> C/q defined by e_k on the distinguished root of every tensor factor. Extensionality for AdjoinRoot and for finite tensor algebra maps proves equality everywhere. Taking kernels shows q = e_k^{-1}(q contracted to R), which is the asserted spectrum equality. Reindex the finite tuple type by Fin n. If it is empty the assertion is vacuous; for empty I it is a singleton.",
+   "uses": [
+    "lem-weil-pbc-monic-tensor-presentation",
+    "def-weil-affine-spectrum",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03HW, lemma-massage-finite, proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-monic-tensor-presentation",
+  "def-weil-polynomial-ring",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 03HW, lemma-massage-finite, proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite free tensor product of monic polynomial quotients is covered by evaluation sections after a finite free splitting extension",
+   "results": "8 hits: Polynomial.Monic.exists_splits_map and Module.Free.tensor are ingredients; MvPolynomial.aeval_one_tmul, TensorProduct.instFree and algebraic-closure splitting results do not state the required assembly.",
+   "date": "2026-10-18",
+   "verdict": "No exact match; use the existing single-equation splitting and tensor basis APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite tensor product of monic polynomial quotients the evaluations at tuples of roots cover its prime spectrum",
+   "results": "8 hits including Polynomial.exists_image_comap_of_monic, Ideal.pi_tensorProductMk_quotient_surjective, and universal factorization rings. None is the tensor evaluation cover. Separate simultaneous splitting query finds Polynomial.Monic.exists_splits_map, for one equation.",
+   "date": "2026-10-18",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "PiTensorProduct, Module.Basis",
+   "results": "10 hits including Basis.piTensorProduct and its apply and repr lemmas. This supplies the basis directly but does not supply the presentation map or section cover.",
+   "date": "2026-10-18",
+   "verdict": "Partial match used in the implementation."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_splits_map|basis.*piTensorProduct|presentationMap|tensor.*section|section.*tensor",
+   "results": "25 hits: AdjoinRoot.lean:1093 single monic splitting, PiTensorProduct basis API from a direct source search; no assembly or section-cover theorem. The library and blueprint searches for simultaneous splitting, monic tensor, closed sections, and adjoin roots found no duplicate.",
+   "date": "2026-10-18",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteAffineSectionCover",
+  "date": "2026-10-18",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Proof, classical constructibility input: finite pushforward constructibility (095R) invokes 095K(1); 095K proof, Noetherian approximation and finite section-cover paragraphs. Specifically: Evaluation sections cover a split monic tensor algebra.",
+   "via": [
+    "lem-weil-pbc-finite-affine-section-cover",
+    "lem-weil-pbc-quasifinite-affine-etale-thickening-decomposition",
+    "lem-weil-pbc-finite-fp-pushforward-constructible",
+    "lem-weil-pbc-etale-quasifinite-shriek-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.SplitMonicTensorSections",
+  "file": "lean/Sheaf/RingTheory/SplitMonicTensorSections.lean",
+  "declaration": "MonicTensorPresentation.exists_cover",
+  "statement": "theorem exists_cover (R : Type u) [CommRing R] {ι : Type v} [Finite ι]\n    (P : ι → R[X]) (hP : ∀ i, (P i).Monic) (hsp : ∀ i, (P i).Splits) :\n    ∃ (n : ℕ) (e : Fin n → Tensor P →ₐ[R] R),\n      (∀ k, Function.Surjective (e k)) ∧\n      ∀ q : PrimeSpectrum (Tensor P),\n        ∃ (k : Fin n) (r : PrimeSpectrum R), PrimeSpectrum.comap (e k) r = q",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261018T062714-L-636583",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261018T062714-L-636583",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

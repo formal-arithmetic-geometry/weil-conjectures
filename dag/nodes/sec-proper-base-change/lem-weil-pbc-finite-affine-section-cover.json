@@ -32,7 +32,7 @@
  ],
  "proof": [
   {
-   "text": "If $X$ is empty, finiteness forces $Y$ empty. Take $X\\prime=W=X$, $a=p=\\mathrm{id}$, and the single closed subscheme $W_1=W$. Identity maps satisfy finite, flat and locally finite presentation directly. Otherwise write $X=\\operatorname{Spec}A$, $Y=\\operatorname{Spec}B$ with $A\\ne0$ and $B$ a finite $A$-module. Choose module generators $x_1,\\ldots,x_n$; they also generate as an algebra, since every element is already a linear combination. By finite-algebra integrality each $x_i$ satisfies a monic $P_i$. Choose positive-degree relations (multiply a relation by $T$ if necessary). This also allows $B=0$ and $n=0$.",
+   "text": "Use global sections of the affine schemes X and Y. Finite module generators generate the algebra; finite-algebra integrality supplies monic equations for them. No positive-degree modification or nonempty-spectrum case split is needed.",
    "uses": [
     "def-weil-finite-integral-morphism",
     "def-weil-affine-spectrum",
@@ -41,87 +41,72 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 03HW, label lemma-massage-finite, clauses (1)-(5); affineness of X\\prime and W follows from the finite morphisms in the same statement."
+    "place": "Tag 03HW, lemma-massage-finite, proof."
    }
   },
   {
-   "text": "Set $A_0=A$. For $i=1,\\ldots,n$, apply the monic splitting extension to the coefficient image of $P_i$ over the nonzero ring $A_{i-1}$, obtaining a nonzero finite free $A_{i-1}$-algebra $A_i$. Previously obtained linear factorizations remain factorizations after applying the next coefficient map. Each free basis can be chosen finite: the union of the finite supports of a finite set of module generators spans, so no basis vector outside that union is possible over a nonzero ring. The products of the successive basis vectors form an $A$-basis, by expanding first over $A_{i-1}$ and then over $A$, with uniqueness at both stages. Thus $A\\prime=A_n$ is nonzero finite free over $A$; for $n=0$ take $A\\prime=A$. Write $P_i=\\prod_{k=1}^{d_i}(T-\\alpha_{ik})$ in $A\\prime[T]$.",
+   "text": "Apply simultaneous faithful finite free splitting to the equations. The finite-free spectrum lemma gives finite local freeness of Spec S -> Spec R. Faithfulness and finite-algebra integrality give spectrum surjectivity by lying over. Compose with the affine comparison isomorphism to get a: Xprime -> X.",
    "uses": [
-    "lem-weil-pbc-monic-finite-free-splitting-extension",
-    "def-weil-pbc-free-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 03HW, label lemma-massage-finite, clauses (1)-(5); affineness of X\\prime and W follows from the finite morphisms in the same statement."
-   }
-  },
-  {
-   "text": "The structural map $A\\to A\\prime$ is injective: if $r1=0$, then $r$ annihilates every basis vector of $A\\prime$; the nonempty basis and uniqueness of coefficients imply $r=0$. Finite-algebra integrality and injective lying over give surjectivity of $\\operatorname{Spec}A\\prime\\to\\operatorname{Spec}A$. The finite-free spectrum lemma gives finite local freeness. Put $X\\prime=\\operatorname{Spec}A\\prime$.",
-   "uses": [
+    "lem-weil-pbc-finite-monic-simultaneous-splitting",
     "def-weil-pbc-free-module",
-    "lem-weil-pbc-finite-algebra-is-integral",
-    "lem-weil-pbc-integral-injective-lying-over",
-    "lem-weil-pbc-finite-free-algebra-spectrum"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 03HW, label lemma-massage-finite, clauses (1)-(5); affineness of X\\prime and W follows from the finite morphisms in the same statement."
-   }
-  },
-  {
-   "text": "Construct $C=A\\prime[T_1,\\ldots,T_n]/(P_1(T_1),\\ldots,P_n(T_n))$. Form successive one-variable monic quotients, adjoining $T_i$ at stage $i$. The maps from the multivariable quotient to the iterated quotient and back send each coefficient and each $T_i$ to its class; the relations vanish on both sides and the two composites fix these algebra generators, so they are inverse. The monic quotient basis gives at each stage the basis $1,T_i,\\ldots,T_i^{d_i-1}$. Expanding successively proves that $C$ is free over $A\\prime$ on the finite monomial family $\\prod_i T_i^{e_i}$, $0\\le e_i<d_i$; if a linear combination of these monomials is zero, grouping by the exponent of $T_n$ makes every coefficient in the preceding quotient zero by its power basis; repeating for $T_{n-1},\\ldots,T_1$ makes all original coefficients zero. For $n=0$ the algebra is $A\\prime$ with basis $1$. Hence $W=\\operatorname{Spec}C$ is affine and $p:W\\to X\\prime$ finite locally free by the spectrum lemma.",
-   "uses": [
-    "lem-weil-pbc-monic-quotient-free",
     "lem-weil-pbc-finite-free-algebra-spectrum",
-    "def-weil-pbc-free-module"
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "lem-weil-pbc-integral-injective-lying-over"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 03HW, label lemma-massage-finite, clauses (1)-(5); affineness of X\\prime and W follows from the finite morphisms in the same statement."
+    "place": "Tag 03HW, lemma-massage-finite, proof."
    }
   },
   {
-   "text": "Let $B\\prime=A\\prime\\otimes_A B$. The affine fibre-product theorem identifies $\\operatorname{Spec}B\\prime$ with $Y\\prime=Y\\times_X X\\prime$, including its projections. Sending $T_i$ to $1\\otimes x_i$ gives a map $C\\to B\\prime$, since $P_i(x_i)=0$. It is surjective: a pure tensor $a\\prime\\otimes b$, with $b=\\sum_i a_i x_i$, equals $\\sum_i a\\prime a_i(1\\otimes x_i)$, and tensors are sums of pure tensors. For the empty generator family $B=0$, surjectivity is vacuous. The affine closed-immersion criterion gives the required $j:Y\\prime\\hookrightarrow W$ over $X\\prime$.",
+   "text": "Let C be the tensor product over S of the AdjoinRoot algebras of the mapped equations. The monic tensor presentation theorem supplies its finite basis. Its evaluation at 1 tensor x_i is surjective: the equations vanish by coefficient base change, and the base-changed generators generate S tensor_R B by Mathlib adjoin_one_tmul_image_eq_top. The finite-free spectrum lemma gives p:Spec C -> Spec S finite locally free.",
    "uses": [
-    "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "lem-weil-pbc-monic-tensor-presentation",
+    "lem-weil-pbc-finite-free-algebra-spectrum",
     "def-weil-pbc-module-tensor-product"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 03HW, label lemma-massage-finite, clauses (1)-(5); affineness of X\\prime and W follows from the finite morphisms in the same statement."
+    "place": "Tag 03HW, lemma-massage-finite, proof."
    }
   },
   {
-   "text": "For each tuple $\\mathbf k=(k_i)$ with $1\\le k_i\\le d_i$, evaluation at $T_i=\\alpha_{ik_i}$ induces $C\\to A\\prime$. Its kernel is the ideal generated by $T_i-\\alpha_{ik_i}$: subtracting the evaluation of a polynomial expresses the difference as a sum of multiples of these linear polynomials, and each $P_i$ belongs to this ideal. Thus the quotient is $A\\prime$. By the affine closed-immersion criterion $W_{\\mathbf k}=\\operatorname{Spec}(C/(T_i-\\alpha_{ik_i})_i)$ is a closed subscheme of $W$ and its map to $X\\prime$ is an isomorphism. Any prime of $C$ contains, for each $i$, the product $\\prod_k(T_i-\\alpha_{ik})=0$, and repeated use of the definition of prime ideal gives a factor in that prime. Choosing one such factor for every $i$ places the point in some $W_{\\mathbf k}$. This finite family covers $W$ set theoretically, even with repeated roots. For $n=0$ there is one empty tuple and $W_{\\mathbf k}=W=X\\prime$.",
-   "uses": [
-    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
-    "def-weil-affine-spectrum"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 03HW, label lemma-massage-finite, clauses (1)-(5); affineness of X\\prime and W follows from the finite morphisms in the same statement."
-   }
-  },
-  {
-   "text": "Finally the same affine fibre-product identification realizes $Y\\prime\\to Y$ as $\\operatorname{Spec}(B\\to B\\otimes_A A\\prime)$, up to swapping tensor factors. If $e_1,\\ldots,e_r$ is the $A$-basis of $A\\prime$, the existing free-module base-change lemma gives the $B$-basis $1\\otimes e_1,\\ldots,1\\otimes e_r$ with exactly the same index set. The spectrum lemma proves finite local freeness. If $B\\ne0$, $r>0$ and if $b$ maps to $b1=0$, it annihilates every $1\\otimes e_i$; the coefficient of a chosen basis vector in $b(1\\otimes e_i)=0$ is $b$, so uniqueness forces $b=0$ and the structural map is injective; finite-algebra integrality and lying over give surjectivity. If $B=0$, both source and target spectra are empty, so surjectivity holds vacuously. This proves the final projection clause without a Noetherian assumption.",
+   "text": "The tensor-product pushout gives a pullback square of spectra. Transport it by X.isoSpec and Y.isoSpec to identify Spec(S tensor_R B) with the actual pullback of f and a. Applying Spec to the surjective evaluation map and precomposing with this comparison gives the closed immersion j. Algebra-map compatibility proves j followed by p is the second projection.",
    "uses": [
     "lem-weil-pbc-fibre-product-affine-spectra",
-    "def-weil-pbc-free-module",
-    "lem-weil-pbc-finite-free-algebra-spectrum",
-    "lem-weil-pbc-finite-algebra-is-integral",
-    "lem-weil-pbc-integral-injective-lying-over",
-    "lem-weil-pbc-free-module-base-change-free"
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+    "def-weil-affine-spectrum"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 03HW, label lemma-massage-finite, clauses (1)-(5); affineness of X\\prime and W follows from the finite morphisms in the same statement."
+    "place": "Tag 03HW, lemma-massage-finite, proof."
+   }
+  },
+  {
+   "text": "Apply the split monic tensor section-cover theorem. Every evaluation e_k:C -> S is surjective and fixes S, so Spec(e_k) is a closed immersion whose composite with p is the identity. The prime-spectrum covering assertion is exactly the required pointwise finite cover.",
+   "uses": [
+    "lem-weil-pbc-split-monic-tensor-sections",
+    "lem-weil-pbc-closed-immersion-affine-cover-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03HW, lemma-massage-finite, proof."
+   }
+  },
+  {
+   "text": "The first pullback projection is the base change of a. Mathlib base-change instances preserve its surjectivity, finiteness, flatness and local finite presentation. Assemble the last three properties into IsFiniteLocallyFree.",
+   "uses": [
+    "def-pc-finite-locally-free",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03HW, lemma-massage-finite, proof."
    }
   }
  ],
@@ -129,20 +114,22 @@
   "def-weil-finite-integral-morphism",
   "def-weil-affine-spectrum",
   "lem-weil-pbc-finite-algebra-is-integral",
-  "lem-weil-pbc-monic-finite-free-splitting-extension",
+  "lem-weil-pbc-finite-monic-simultaneous-splitting",
   "def-weil-pbc-free-module",
-  "lem-weil-pbc-integral-injective-lying-over",
   "lem-weil-pbc-finite-free-algebra-spectrum",
-  "lem-weil-pbc-monic-quotient-free",
+  "lem-weil-pbc-integral-injective-lying-over",
+  "lem-weil-pbc-monic-tensor-presentation",
+  "def-weil-pbc-module-tensor-product",
   "lem-weil-pbc-fibre-product-affine-spectra",
   "lem-weil-pbc-closed-immersion-affine-cover-criterion",
-  "def-weil-pbc-module-tensor-product",
-  "lem-weil-pbc-free-module-base-change-free"
+  "lem-weil-pbc-split-monic-tensor-sections",
+  "def-pc-finite-locally-free",
+  "def-weil-surjective-morphism"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tag 03HW, label lemma-massage-finite, clauses (1)-(5); affineness of X\\prime and W follows from the finite morphisms in the same statement."
+  "place": "Tag 03HW, lemma-massage-finite, proof."
  },
  "mathlib_searches": [
   {
@@ -329,5 +316,15 @@
   "by": "NF",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261018T062714-L-636583",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

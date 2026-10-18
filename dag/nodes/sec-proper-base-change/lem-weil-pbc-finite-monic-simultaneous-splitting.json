@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-finite-monic-simultaneous-splitting",
+ "kind": "statement",
+ "title": "A simultaneous faithful finite free splitting extension",
+ "statement": "Let R be a commutative ring, n a natural number and P_i in R[T] (i in Fin n) monic polynomials [def-weil-polynomial-ring]. There is a commutative R-algebra S that is finite [def-weil-finitely-generated-module], free [def-weil-pbc-free-module] and faithful as an R-module, such that every coefficient image P_i in S[T] splits into monic linear factors. The zero ring and n=0 are allowed.",
+ "source": {
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 03HW, lemma-massage-finite, proof."
+ },
+ "stmt_deps": [
+  "def-weil-polynomial-ring",
+  "def-weil-pbc-free-module",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof": [
+  {
+   "text": "For the zero base ring take S=R; every polynomial image is zero and hence splits. For a nonzero base ring, induct on n, taking R itself for n=0. Split the first equation over a nonzero finite free R-algebra T by the existing one-equation splitting lemma, and apply induction over T to the remaining coefficient images.",
+   "uses": [
+    "lem-weil-pbc-monic-finite-free-splitting-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03HW, lemma-massage-finite, proof."
+   }
+  },
+  {
+   "text": "Compose the algebra structures. Finite modules and free modules are transitive along a scalar tower; map the factorization of the first equation to S, and use the induction factorizations for the others. Since S is nonzero and free over R, uniqueness of basis coefficients makes scalar multiplication faithful.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 03HW, lemma-massage-finite, proof."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-monic-finite-free-splitting-extension",
+  "def-weil-pbc-free-module",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 03HW, lemma-massage-finite, proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite free tensor product of monic polynomial quotients is covered by evaluation sections after a finite free splitting extension",
+   "results": "8 hits: Polynomial.Monic.exists_splits_map and Module.Free.tensor are ingredients; MvPolynomial.aeval_one_tmul, TensorProduct.instFree and algebraic-closure splitting results do not state the required assembly.",
+   "date": "2026-10-18",
+   "verdict": "No exact match; use the existing single-equation splitting and tensor basis APIs."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite tensor product of monic polynomial quotients the evaluations at tuples of roots cover its prime spectrum",
+   "results": "8 hits including Polynomial.exists_image_comap_of_monic, Ideal.pi_tensorProductMk_quotient_surjective, and universal factorization rings. None is the tensor evaluation cover. Separate simultaneous splitting query finds Polynomial.Monic.exists_splits_map, for one equation.",
+   "date": "2026-10-18",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "PiTensorProduct, Module.Basis",
+   "results": "10 hits including Basis.piTensorProduct and its apply and repr lemmas. This supplies the basis directly but does not supply the presentation map or section cover.",
+   "date": "2026-10-18",
+   "verdict": "Partial match used in the implementation."
+  },
+  {
+   "tool": "grep",
+   "query": "exists_splits_map|basis.*piTensorProduct|presentationMap|tensor.*section|section.*tensor",
+   "results": "25 hits: AdjoinRoot.lean:1093 single monic splitting, PiTensorProduct basis API from a direct source search; no assembly or section-cover theorem. The library and blueprint searches for simultaneous splitting, monic tensor, closed sections, and adjoin roots found no duplicate.",
+   "date": "2026-10-18",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteAffineSectionCover",
+  "date": "2026-10-18",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Proof, classical constructibility input: finite pushforward constructibility (095R) invokes 095K(1); 095K proof, Noetherian approximation and finite section-cover paragraphs. Specifically: A simultaneous faithful finite free splitting extension.",
+   "via": [
+    "lem-weil-pbc-finite-affine-section-cover",
+    "lem-weil-pbc-quasifinite-affine-etale-thickening-decomposition",
+    "lem-weil-pbc-finite-fp-pushforward-constructible",
+    "lem-weil-pbc-etale-quasifinite-shriek-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.FiniteMonicSplitting",
+  "file": "lean/Sheaf/RingTheory/FiniteMonicSplitting.lean",
+  "declaration": "exists_faithful_finite_free_splitting",
+  "statement": "theorem exists_faithful_finite_free_splitting (R : Type u) [CommRing R]\n    (n : ℕ) (P : Fin n → R[X]) (hP : ∀ i, (P i).Monic) :\n    ∃ (S : Type u) (_ : CommRing S) (_ : Algebra R S)\n      (_ : Module.Finite R S) (_ : Module.Free R S) (_ : FaithfulSMul R S),\n      ∀ i, ((P i).map (algebraMap R S)).Splits",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261018T062714-L-636583",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261018T062714-L-636583",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
