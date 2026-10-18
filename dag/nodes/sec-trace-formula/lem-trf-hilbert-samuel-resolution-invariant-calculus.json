@@ -16,7 +16,9 @@
   "def-nagata-global-blowup",
   "def-nagata-strict-transform",
   "def-weil-regular-scheme",
-  "pqf-def-coherent"
+  "pqf-def-coherent",
+  "def-trf-admissible-embedded-history",
+  "def-trf-resolution-invariant-calculus-data"
  ],
  "proof": [
   {
@@ -290,5 +292,23 @@
   "group": "NZ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-52a5367f2 (reviewer sub-agent of L); spot-checked: I read the item in full: the statement, all 7 steps, all 4 new nodes, the parent lem-trf-embedded-resolution-ambient-comparison, every cited statement, and ILO VIII 2.3.9-2.3.13 (pp.93-94). BMT is absent from literature/; it is recorded as WANTED and proof_origin=agent. No SGA is cited. Statement change accepted: arbitrary ambient blowup histories make clause (1)'s 'new ambient is smooth' false, e.g. Bl_(u^2,v^3) A^2 has the singular chart u^2t=v^3. The parent's Steps 1, 2, 4, 5 and 7 use only admissible histories (segments of the process, their pullbacks and restrictions). Checks: Λ^D is strictly lex-increasing with Δ as inverse. Regular head = (1,(1,1,...)); a nonregular point has Δ^d h(1)=1+embdim-d>1. Under smooth maps, local component dimensions shift by s (dimension theory plus flat going-down), so c and q behave as stated. Smooth-centre blowups stay smooth, and the strict transform is the closure of a reduced open, hence reduced. The profile node was tested on plane∪line and on xy=0 plus a line. No duplicate in the DAG; the decomposition is the standard BM one and no node restates an item clause. Faults, all repaired: (1) C1/E5 Step 3: presentations are only étale-local but were glued as if Zariski, and smooth=>reduced/regular was uncited. M_H is now the reduced induced structure, and its étale pullback equals the engine centre via lem-weil-pbc-etale-scheme-base-change, etale-proposition-etale-reduced and reduced-induced (3). Regularity comes from lem-trf-smooth-geometrically-normal plus lem-weil-pbc-flat-under-regular; the last two off-unit generic nodes are added to tool_uses. (2) C1 Step 5: the inverse-image centre needed lem-trf-smooth-composition and smooth=>reduced; both added. (3) B2 engine node: 'the companion/coefficient-ideal construction gives' named an undefined object, now one ∃ global word assignment in a fixed ordered set. No cycle; steps are under 2000 characters; proof_deps updated. Accepted tool_uses: reduced-induced-closed-subscheme, finite-type-algebra-noetherian and lem-pc-proper-base-change (2), plus the two added. Fixed files: the item and lem-trf-marked-ideal-numerical-resolution-engine.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ResolutionInvariantCalculus",
+  "declaration": "AlgebraicGeometry.exists_resolution_invariant_calculus",
+  "file": "lean/Sheaf/AlgebraicGeometry/ResolutionInvariantCalculus.lean",
+  "statement": "theorem exists_resolution_invariant_calculus : ∃ (V : Type (u + 1)) (order : LinearOrder V) (bottom : OrderBot V), Nonempty (@ResolutionInvariantCalculus.{u, u + 1} V order bottom)",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-256aab830",
+  "group": "NY",
+  "result": "pass",
+  "note": "Clauses (1)-(4) are all present (finiteImage/regularPoint/maximumExists/maximumGeometry/nextGeometry/strictProgress; pullbackExists/smoothValues/smoothIdeals; IntrinsicComparison with intrinsicValues/intrinsicIdeals; termination), none weaker or stronger than the node. Admissible is the inductive closure of empty histories, reduced maximum-center steps and cartesian smooth pullbacks that delete exactly the unit-ideal stages; it agrees with the node because node (1) makes every step an allowed next history. Centers are reduced-induced through the closed immersion; comap is Mathlib's scheme-theoretic preimage ideal; strict transforms are the scheme-theoretic Nagata ones. V : Type (u+1) with LinearOrder/OrderBot, same pattern as the landed parent; no universe restriction on schemes. Edge cases n=0, empty/regular X, fully missed pullback, bottom maximum and identity intrinsic blowups are covered. No hollow definitions; the def modules have no sorry and the item has one; docstrings and lean.statement fields are verbatim. nt_compile --json on all 3 files: clean (3.6/2.7/2.1 s); a broken control copy errors. Advisory: pqf-def-coherent records IsQuasiCoherentFiniteType while the delivery uses IsFiniteTypeWithFiniteTypeKernels (exact 01BV coherence, tagged pqf-def-coherent, also used by landed LabeledEmbeddedResolution); three private imports stand in for proof deps with no Lean record yet; 'comparisons commute' holds automatically from the pointwise equalities."
  }
 }
