@@ -83,23 +83,22 @@
   "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite",
   "declaration": "SheafOfModules.IsFlatOnSite",
   "declarations": [
-   "SheafOfModules.IsFlatOnSite"
+   "SheafOfModules.IsFlatOnSite",
+   "CategoryTheory.exactFunctor"
   ],
-  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/FlatOnSite.lean",
-  "statement": "def IsFlatOnSite (F : SheafOfModules.{m} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) : Prop",
+  "statement": "def IsFlatOnSite\n    (F : SheafOfModules.{m} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) :\n    Prop",
   "branch": "newtargets-dag",
-  "by": "Q124",
-  "date": "2026-10-17",
-  "existing": false,
-  "note": "The compiler loaded a universe-zero flatness artifact although the published source has independent site, coefficient and module universes. This delivery supplies that unchanged independent-universe definition as a sibling overlay (only module documentation added), preserving the exact sheafified tensor definition.",
-  "fixed_by": "NT-stage2-cc-e0dd71a2a"
+  "by": "Q48",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Section 1(B), existing-interface repair without a new definition: retain the independent-universe IsFlatOnSite declaration for general ring sheaves and additionally expose its existing underlying CategoryTheory.exactFunctor predicate through this public-import module. IsFlatOnSite takes SheafOfModules and cannot take the Sheaf (ModuleCat Λ) encoding required by the recorded etale derived and constructible categories. In that encoding flatness is exactly exactFunctor applied to the canonical sheaf tensorRight L, the same defining condition as IsFlatOnSite; the new consumer uses that existing predicate directly. Neither flatness nor either sheaf tensor is redefined, no equivalence or comparison is assumed, and existing consumers of IsFlatOnSite are preserved."
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-e0dd71a2a",
-  "group": "Q124",
+  "reviewer": "NT-stage2-Codex-e56736d77",
+  "group": "Q48",
   "result": "fix",
-  "note": "Read the item, all 12 stmt_deps incl. 3 new def nodes and the def-pc-flat-sheaf-modules (B) record, the 5 modules, the upstream RingedToposMorphism/AlgebraicInverseImage/IsFlatOnSite/restrictScalars declarations and Stacks 0FND/0DVC/03D3/03ER. Every clause matches: coherent square orientation, flatness at both sites, one shared geometric morphism, transpose-pinned module adjunctions, IsRightDerivedFunctor+computes+0FND transpose normalization, exactness and K-injective preservation for r_U,r_V, b/d directions, ordinary/inverse/direct normalizations pinning b,d, and the adjunct identity with b.inv. HEq fields compare rfl-equal types (scratch check), so they are not vacuous. No extra hypotheses, universes bound, no hollow defs, only sorry is the theorem. nt_compile on all 5 files is clean (Defs/Adjuncts take 42-50 s under load, near the 60 s limit). Fixes: (1) item module adds missing proof-dep imports EssentiallyConstantInd/Pro, Mathlib.RingTheory.TensorProduct.Basic, Mathlib.Algebra.Homology.DerivedCategory.KInjective (H9); (2) FlatOnSite.lean drops a delivery-specific docstring sentence. Both are recompiled clean."
+  "note": "Lean statement and mathematics accepted; scompile.py passed both checks without diagnostics. Wrote review.md and a complete replacement report in fixes/lem-fd-flat-constructible-tensor.report.md, replacing the H11 placeholder second reading and recording compiler evidence. No Lean or node changes needed."
  }
 }

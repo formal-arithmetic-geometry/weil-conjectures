@@ -214,5 +214,29 @@
   "group": "Q39",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-581b47b98 (reviewer sub-agent of L); spot-checked: I read in full the item, its 5 steps, the statement of every cited node, the parent thm-fd-transform-well-defined (step 3 uses exactly this item's conclusion) and the unit sk-prop-well-defined. I checked the sources at the cited places: Stacks 095I (etale-cohomology.tex l.11991), 0961 (l.13688), 095D, and Homology 010N (homology.tex l.1545). The statement is unchanged and correct. Small cases: X empty, Lambda=0, L=0 and K=0 give zero. On a point with Lambda=Z/4, L=Lambda flat and K=Z/2[0] (infinite Tor amplitude), the tensor is Z/2[0] with the same bounds. With the non-flat L=Z/2, H^-1=Tor_1 is nonzero, so flatness is essential and the statement is sharp. Step 1: the exact-functor Mathlib leaf plus def-kun's total complex give C⊗L[0]=F(C) exactly (the sign term vanishes), so L[0] is K-flat in the def-pc-kflat-complex order and has flat terms. Step 2: the lem-pc-kflat-resolution model P has no bound condition. Naturality comes from the descent lemma, since P and L[0] both lie in P_R; it uses statements, not proofs. Step 3: the intersection node gives actual fibre-product strata Z_k×_X W_l (so the E3 containment trap is avoided). The pullback lemmas cover concrete-valued sheaves, and prop-weil-pbc-inverse-image-modules-exact (1)-(2) makes the trivializations Lambda-linear. The pseudo-functoriality mu^{-1}=pr^{-1}iota^{-1} is implicit but elementary. Step 4: the ringed-topoi tensor comparison applies with c the isomorphism from prop (1); the locally-constant and finite parts are each used once; the same stratification witnesses constructibility. Step 5 is elementary. Route: the off-unit statements are Lean-closed or Mathlib, except three, which are declared as tool_uses. I accept lem-pc-kflat-resolution, lem-weil-pbc-site-derived-tensor-descent and lem-weil-pbc-ringed-topoi-module-pullback-tensor as generic black-box tools. No new nodes and no duplicate found: lem-sfb-dc-tensor-preserves, det-lem-int-tensor-product and lem-pur-finite-tensor-constructible-cohomology have different coefficients or sites. No SGA. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e56736d77",
+  "group": "Q48",
+  "result": "fix",
+  "note": "Lean statement and mathematics accepted; scompile.py passed both checks without diagnostics. Wrote review.md and a complete replacement report in fixes/lem-fd-flat-constructible-tensor.report.md, replacing the H11 placeholder second reading and recording compiler evidence. No Lean or node changes needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatConstructibleTensor",
+  "declaration": "AlgebraicGeometry.Etale.flatConstructibleTensor_cohomology_and_bounds",
+  "declarations": [
+   "AlgebraicGeometry.Etale.flatConstructibleEtaleSheafProperty",
+   "AlgebraicGeometry.Etale.flatConstructibleTensorCohomologyLeft",
+   "AlgebraicGeometry.Etale.flatConstructibleTensorCohomologyRight",
+   "AlgebraicGeometry.Etale.flatConstructibleTensor_cohomology_and_bounds"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatConstructibleTensor.lean",
+  "statement": "theorem flatConstructibleTensor_cohomology_and_bounds (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] (X : Scheme.{u}) : (∀ i : ℤ, Nonempty (flatConstructibleTensorCohomologyLeft Λ X i ≅ flatConstructibleTensorCohomologyRight Λ X i)) ∧ ∀ (L : (flatConstructibleEtaleSheafProperty Λ X).FullSubcategory) (K : BoundedConstructibleDerivedCategory Λ X), (∀ i : ℤ, Scheme.IsConstructibleEtaleModuleSheaf (((flatConstructibleTensorCohomologyLeft Λ X i).obj L).obj K)) ∧ DerivedCategory.isBoundedConstructible Λ X (((derivedTensor (ModuleCat.{u + 1} Λ) X).obj K.obj).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj L.obj)) ∧ ∀ a b : ℤ, a ≤ b → (∀ i : ℤ, (i < a ∨ b < i) → IsZero ((_root_.DerivedCategory.homologyFunctor _ i).obj K.obj)) → ∀ i : ℤ, (i < a ∨ b < i) → IsZero (((flatConstructibleTensorCohomologyLeft Λ X i).obj L).obj K)",
+  "branch": "newtargets-dag",
+  "by": "Q48",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

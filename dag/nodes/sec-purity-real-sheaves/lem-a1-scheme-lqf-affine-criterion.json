@@ -209,5 +209,23 @@
   "group": "Q15",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q15-1a2450c63 (reviewer sub-agent of L); spot-checked: Read the item, source Tag 01TK, all cited node statements, unit/chapter route, delivery instructions, and recorded searches. All four proof steps are mathematically valid with matching hypotheses; no hidden finiteness, separation, or Noetherian assumptions occur. Edge cases were checked, no duplicate/new-node issue exists, and no route-lock violation was found. Wrote review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-1b0f25f3a",
+  "group": "Q34",
+  "result": "fix",
+  "note": "Replace the report with fixes/lem-a1-scheme-lqf-affine-criterion.report.md; no Lean or mathematical changes are needed."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IsLocallyQuasiFiniteAffineCriterion",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.isLocallyQuasiFinite_affine_criterion",
+  "file": "lean/Sheaf/AlgebraicGeometry/IsLocallyQuasiFiniteAffineCriterion.lean",
+  "statement": "theorem isLocallyQuasiFinite_affine_criterion {X S : Scheme.{u}} (f : X ⟶ S) : (f.IsLocallyQuasiFinite ↔ ∀ (A : X.Opens) (B : S.Opens), IsAffineOpen A → IsAffineOpen B → ∀ e : A ≤ f ⁻¹ᵁ B, ∃ hft : (f.appLE B A e).hom.FiniteType, ∀ q : PrimeSpectrum Γ(X, A), @Algebra.IsQuasiFiniteAtPrime Γ(S, B) Γ(X, A) _ _ (f.appLE B A e).hom.toAlgebra hft q) ∧ (f.IsLocallyQuasiFinite ↔ ∃ (J : Type u) (B : J → S.Opens) (I : J → Type u) (A : ∀ j : J, I j → X.Opens) (e : ∀ (j : J) (i : I j), A j i ≤ f ⁻¹ᵁ B j), (⨆ j : J, B j) = ⊤ ∧ (∀ j : J, (⨆ i : I j, A j i) = f ⁻¹ᵁ B j) ∧ ∀ (j : J) (i : I j), (f.resLE (B j) (A j i) (e j i)).IsLocallyQuasiFinite)",
+  "branch": "newtargets-dag",
+  "by": "Q34",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

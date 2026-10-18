@@ -450,5 +450,33 @@
   "group": "Q111",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-10bf8914f (reviewer sub-agent of L); spot-checked: I read the whole item, the source and every cited statement. The item cites only existing nodes and creates none. The STATEMENT-DISPUTED repair is correct. def-weil-finite-tor-amplitude defines a numerical Tor interval only at A_{E,n} and O_E; at E and Qbar it sets Dctf:=Dbc. The repaired statement keeps both intervals at the finite and integral stages, and at the field stages keeps Dbc and both standard-pair bounds. No separatedness hypothesis was added. Compactifications need not be dense, so the trivial compactification (j,1_Y) is valid. Steps 1-7 check out. Step 1: quasi-compact j from Noetherianity and retrocompactness; exact adjunction for any ring sheaf (Stacks 03DI/03DJ). Step 2: strata plus the reduced closed complement, using j^{-1}j_!=id and i^{-1}j_!=0 (09BN/09AH, quasi-compact j); bounded constructibility without Tor, and the Tor interval from the reviewed lem-trf-open-ctf. Step 3: the tensor identity (0E8I), K-flatness of JP from the definition, and (JC)_n=J_nC_n through change of rings. Step 4: Koszul and quotient-tower completeness are compared via constant-completion-equivalence and the Koszul reflector, the cbc completeness lemma is applied to the identity square, and the adic datum for O_E is verified. Step 5: J=Rj_! on etale-origin objects and naturally at the integral stage. Steps 6-7: separate upper and lower witnesses, with shifts. Edge cases U empty, U=Y, K=0, n=1, a=b and Z/l^2 checked. No cycle. One repaired fault (C1/C4): step 4 applied lem-cbc-completed-extension-zero-comparison, whose coefficient sheaf is the A_T of the adic datum (built from Cont(pi_0)), to the integral category's limit of sheafified constant sheaves without identifying the two. I added lem-weil-pbc-completed-constant-sheaf-reduction (last sentence: finite A/I^n gives (P_n)_T equal to the constant sheaf, so B=A_T) to step 4 and proof_deps, with a proposed tool_use entry. The 12 tool uses already proposed are generic interfaces and acceptable as proposals. Corrected file: fixes/dag/nodes/sec-six-functors/sk-lem-sf-open-ctf.json; details in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-29a2b1158",
+  "group": "N1",
+  "result": "pass",
+  "note": "Wrote review.md. Checked all coefficient-stage signatures, dependencies, sources, universes, edge cases, canonical wrappers, docstrings, and route-pivot exclusions. Statement field matches verbatim; scompile.py passed both forms without diagnostics. No fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OpenCompactSupportFiniteTor",
+  "declaration": "WeilConjectures.sfOpenCompactSupport_finite",
+  "declarations": [
+   "WeilConjectures.sfOpenIntegralCompactSupportValue",
+   "WeilConjectures.sfOpenRationalCompactSupportValue",
+   "WeilConjectures.sfOpenQbarCompactSupportValue",
+   "WeilConjectures.sfOpenCompactSupport_finite",
+   "WeilConjectures.sfOpenCompactSupport_integral",
+   "WeilConjectures.sfOpenCompactSupport_rational",
+   "WeilConjectures.sfOpenCompactSupport_qbar"
+  ],
+  "file": "lean/Sheaf/Paper/OpenCompactSupportFiniteTor.lean",
+  "statement": "theorem sfOpenCompactSupport_finite (n : ℕ) (hn : 1 ≤ n) (K : finiteTorConstructibleCategory l E n hn U) (hcoh : proEtaleCohomologicalSupport K.obj ⊆ Set.Icc a b) (hTor : HasProEtaleTorAmplitude U (Padic.coefficientExtensionRing l E n) K.obj a b) : finiteTorConstructible l E n hn Y ((@sfIntrinsicCompactSupport U Y j c (Padic.coefficientExtensionRing l E n) _ (Padic.finite_coefficientExtensionRing l E n hn)).obj K.obj) ∧ proEtaleCohomologicalSupport ((@sfIntrinsicCompactSupport U Y j c (Padic.coefficientExtensionRing l E n) _ (Padic.finite_coefficientExtensionRing l E n hn)).obj K.obj) ⊆ Set.Icc a b ∧ HasProEtaleTorAmplitude Y (Padic.coefficientExtensionRing l E n) ((@sfIntrinsicCompactSupport U Y j c (Padic.coefficientExtensionRing l E n) _ (Padic.finite_coefficientExtensionRing l E n hn)).obj K.obj) a b",
+  "branch": "newtargets-dag",
+  "by": "N1",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "All four coefficient-stage clauses are stated in the listed theorems. The three value wrappers only supply the quasi-compactness instance derived from finite type over the field, then call the recorded compact-support values with the same compactification and input. No extra geometric or coefficient hypothesis is imposed."
  }
 }
