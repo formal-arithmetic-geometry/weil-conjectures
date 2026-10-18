@@ -20,10 +20,10 @@
  ],
  "proof": [
   {
-   "text": "The only prime ideal of the field $K$ is $(0)$, so $\\Spec(K)$ has one underlying point; every open cover has a one-member subcover and every intersection of affine opens is either empty or the whole point. Thus it is quasi-compact and quasi-separated. By [def-kun-cd], for this scheme $\\Spec(K)$ the assertion $\\kuncd(\\Spec(K))=0$ is equivalent to vanishing of $H^q(\\Spec(K)_{\\Et},F)$ for every torsion abelian étale sheaf $F$ and every $q>0$, since the defining nonnegative bound has least possible value 0. Applying [lem-kun-03qu-sep-closed] to each torsion abelian étale sheaf (which is in particular an abelian étale sheaf) gives exactly these vanishings, so the cohomological dimension is 0.",
+   "text": "Unfold `def-kun-cd`, which defines the numerical dimension as the `ENat.sInf` of the set of finite natural bounds. The Mathlib lemma `ENat.sInf_eq_zero` reduces equality with zero to membership of zero in this set. Choose the witness natural number `n = 0`; the equality `0 = (0 : ℕ∞)` is immediate, and `lem-sf-separably-closed-torsion-cd`, in its Lean form `hasTorsionEtaleCohomologicalDimensionLE_zero_of_isSepClosed`, supplies the required torsion étale cohomological bound. Thus zero belongs to the defining set and the dimension is zero.",
    "uses": [
     "def-kun-cd",
-    "lem-kun-03qu-sep-closed"
+    "lem-sf-separably-closed-torsion-cd"
    ],
    "elementary": false,
    "source": {
@@ -34,7 +34,7 @@
  ],
  "proof_deps": [
   "def-kun-cd",
-  "lem-kun-03qu-sep-closed"
+  "lem-sf-separably-closed-torsion-cd"
  ],
  "proof_origin": {
   "by": "agent",
@@ -175,5 +175,15 @@
   "by": "NR",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M2",
+  "result": "pass",
+  "landing": "20261018T062829-L-662114",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

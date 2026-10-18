@@ -7,7 +7,7 @@ module
 
 public import Mathlib.FieldTheory.IsSepClosed
 public import Sheaf.AlgebraicGeometry.Sites.TorsionEtaleCohomologicalDimension
-import WeilConjectures.AlgebraicGeometry.Sites.FiniteSupport
+import Sheaf.AlgebraicGeometry.Sites.SeparablyClosedTorsionCohomologicalDimension
 
 /-!
 # Cohomological dimension of a separably closed point
@@ -35,6 +35,7 @@ zero is a bound. As zero is the least possible nonnegative bound, the dimension 
 theorem torsionEtaleCohomologicalDimension_eq_zero_of_isSepClosed
     (K : Type u) [Field K] [IsSepClosed K] :
     (Spec (.of K)).torsionEtaleCohomologicalDimension = 0 := by
-  sorry
+  rw [Scheme.torsionEtaleCohomologicalDimension, ENat.sInf_eq_zero]
+  exact ⟨0, by simp, hasTorsionEtaleCohomologicalDimensionLE_zero_of_isSepClosed K⟩
 
 end AlgebraicGeometry.Scheme
