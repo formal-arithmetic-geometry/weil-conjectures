@@ -207,5 +207,23 @@
   "group": "N2",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N2-c43d6a495 (reviewer sub-agent of L); spot-checked: I read the whole delivery and every cited node. The item statement is verbatim the main-20261015 blueprint (order 2641), the same as master (2297), with the same coefficient category (D^b_ctf,W(X,A_{E,n}) on the small pro-etale site), the geometric Galois g_gamma rather than Phi, and m,n>=1. The pullback identification type-checks because g^m and g^n commute. The confirmed source error is the blueprint display's last arrow: it is labelled Lg^*phi but should be phi, and step 3 repairs it. Step 1: constant-coefficient-composition supplies the composite-identification hypothesis of lem-weil-pbc-proetale-derived-pullback-composition (Stacks 0D6D, statement and proof read); correct. Step 2: I wrote out the induction iota_{r+1}=(iota_r Lg^*) o c_{g^r,g}, using the coherence identity with j=g^m, h=g^n, k=g; it holds. Step 3 is the elementary indexed concatenation with a_i=F^i(phi). Edge cases checked: m=n=1, single-factor blocks, m=n=2, K=0, X empty, scalar T on a point. Both new nodes are true, statement-only and strictly smaller than the item, with complete hypotheses (Stacks 03CB, 0H7J, 0D6D and 06YS read). Neither duplicates an existing node: pur713-def-pullback-comparison has the coefficient equality only inside a definition; the ringed-space, etale bounded-below and integral coherence nodes are different settings. I accept tool_uses prop-weil-pbc-proetale-constant-ring-map and lem-weil-pbc-proetale-derived-pullback-composition. FIX (B3): lem-trf-derived-pullback-coherence uses c_{f,g} with canonical identifications, which is only well typed through lem-trf-constant-coefficient-composition. I added that citation and stmt_dep in fixes/dag/nodes/sec-trace-formula/lem-trf-derived-pullback-coherence.json. Note: the maintainer-owned top-level tool_uses on the item still lists lem-pc-kflat-resolution, which the current steps no longer use.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-decaba319",
+  "group": "NX",
+  "result": "pass",
+  "note": "I read the node, all 4 stmt_deps declarations, the module, report and node diff (only lean changed; statement verbatim). The statement matches every clause: (phi^[m+n]).hom = (eqToIso from pow_add g n m (g^m >> g^n = g^(n+m)) then proEtaleConstantRingPullbackComposition(g^m,g^n).symm at K) >> (Lg^m)^*.map phi^[n] >> phi^[m], with m,n>=1 as in the node. The comparison is the canonical one used by the landed iteratedWeilPullbackIso recursion, so the identifications are consistent. No added hypotheses or instances; single universe u. Edge cases m=n=1, single blocks, m=n=2, K=0, empty X. One sorry theorem, no defs; docstrings carry source/blueprint and a 3-step proof sketch; Sheaf.* imports only (private proof imports). The near-match upperStarFactor...frobeniusPowStr_add is a different statement, so existing:false is right. nt_compile.py --json on the snapshot file against the local side overlay: rc 0, 7.8/8.5 s, no errors or warnings. Minor note: proEtaleConstantRingPullbackComposition belongs to pur713-def-pullback-comparison, which is not in stmt_deps, but it is the recorded stmt_dep's comparison specialised to constant rings and H2 forbids adding it."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IteratedWeilCocycle",
+  "declaration": "WeilConjectures.TraceFormulaCoefficientConventions.iterated_weil_cocycle",
+  "file": "lean/Sheaf/Paper/IteratedWeilCocycle.lean",
+  "statement": "theorem iterated_weil_cocycle (T : TraceFormulaCoefficientConventions.{u}) (K : T.strictWeilComplex) (m n : ℕ) (hm : 1 ≤ m) (hn : 1 ≤ n) : (T.iteratedWeilIsomorphism K (m + n) (by omega)).hom = (eqToIso (congrArg (proEtaleConstantRingDerivedPullback T.coefficientRing) (by simpa [Nat.add_comm] using (pow_add (End.of (T.datum.geometricGaloisFrobenius T.X₀)) n m))) ≪≫ (proEtaleConstantRingPullbackComposition ((End.of (T.datum.geometricGaloisFrobenius T.X₀)) ^ m) ((End.of (T.datum.geometricGaloisFrobenius T.X₀)) ^ n) T.coefficientRing).symm).hom.app K.obj.carrier ≫ (proEtaleConstantRingDerivedPullback T.coefficientRing ((End.of (T.datum.geometricGaloisFrobenius T.X₀)) ^ m)).map (T.iteratedWeilIsomorphism K n hn).hom ≫ (T.iteratedWeilIsomorphism K m hm).hom",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

@@ -189,5 +189,30 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-76eaeb5a7",
+  "group": "Q29",
+  "result": "fix",
+  "note": "Item statement correct in substance: all clauses of (1)-(3) match the node and blueprint source (statement verbatim). Lisse = pro-etale cover with Mod.IsFree, as the source defines it. Λ is pinned to padicSubfieldCondensedRing (finite E) or padicAlgClCondensedRing; the IsCommMonObj binder is inferred for these rings, so it adds no assumption. No hollow definitions, docstrings with source and blueprint, sorry only, universes free. Delivered files reproduce clean in nt_compile (3.9 s, 3.3 s). Finding: the delivery's section 1(B) repair of sk-def-sfb-constructible (Sheaf.Paper.ScalarConstructible) duplicates N7's landed record (Sheaf.Paper.CondensedConstantConstructibility, commit c7515d1) and redeclares AlgebraicGeometry.ProEtale.HasFiniteConstantLocalModel. Fix: fixes/CoefficientHeartCommonStratification.lean imports N7's module and uses HasFiniteConstantLocalModel Λ (P.domain a) (...); the signature and lean.statement are unchanged; it compiles clean (4.2 s, standard axioms plus sorryAx). The report is updated. The dependency change must be reverted (--revert-nodes sk-def-sfb-constructible, done automatically by the stage-2 landing when the dependency's lean has changed), which also leaves out ScalarConstructible.lean.; reverted the delivery's change of existing node(s) sk-def-sfb-constructible (--revert-nodes; kept as on newtargets-dag)"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientHeartCommonStratification",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientHeart_commonStratification",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IsLisseCoefficientModule",
+   "AlgebraicGeometry.ProEtale.coefficientHeartRingObj",
+   "AlgebraicGeometry.ProEtale.CoefficientHeartStratificationAssertions",
+   "AlgebraicGeometry.ProEtale.coefficientHeart_commonStratification"
+  ],
+  "file": "lean/Sheaf/Paper/CoefficientHeartCommonStratification.lean",
+  "statement": "theorem coefficientHeart_commonStratification (ℓ : ℕ) [Fact ℓ.Prime] (Λ : Sheaf (coherentTopology Profinite.{u}) RingCat.{u + 1}) [IsCommMonObj (coefficientHeartRingObj Λ)] (X : Scheme.{u}) [IsNoetherian X] (hΛ : (∃ E : IntermediateField ℚ_[ℓ] (PadicAlgCl ℓ), FiniteDimensional ℚ_[ℓ] E ∧ Λ = Profinite.padicSubfieldCondensedRing ℓ E) ∨ Λ = Profinite.padicAlgClCondensedRing ℓ) : CoefficientHeartStratificationAssertions (coefficientHeartRingObj Λ) X",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-76eaeb5a7"
  }
 }

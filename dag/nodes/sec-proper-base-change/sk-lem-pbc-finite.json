@@ -339,5 +339,34 @@
   "group": "Q29",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-d986a9e4e (reviewer sub-agent of L); spot-checked: Read the item (6 steps, no new nodes), the unit record, the main-20261015 unit folder (it contains lem-weil-pbc-finite-stalk-formula-restriction as this unit's 03QP lemma), Stacks 03QP and 0959 at their text, and every cited stored statement. Statement: verbatim plus definition references and 'commutative', which sk-def-pbc-conventions and sk-def-exchange already fix, so it is not weakened; coefficient category is Mod(Λ_T) with D^+(T_Et,Λ), as in sk-def-exchange. Step 1: stalk formula and finiteness from the restriction lemma, with the same finite hypotheses; naturality is sectionwise. Step 2: exactness by coordinatewise lifting, cokernel stalks and conservativity; empty fibre handled. Step 3: u' finite by permanence(a); lift bijection via α. Step 4: I recomputed the germ: representative s ↦ η_g(s) ↦ restriction along V'×_{W'}U' → V×_WU, then c_{g',v̄',F} gives r_{u,g'v̄',F}, so the actual exchange map is the identity coordinatewise (makes 0959 precise). Step 5: the faithful exact forgetful functor reflects isomorphisms; module unit/counit and module-linear exchange are cited. Step 6: the termwise lemma identifies the sk-def-exchange mate with Q(Ex^0_I then u'_*(j)); both are invertible. uses equal proof_deps, the traversal shows no cycle, and there are no SGA citations. I accept both declared tool uses: finite-stalk-formula-restriction and underived-exchange-module-linear. Small cases checked: V empty, disjoint union, nilpotent, purely inseparable, Λ=0, Λ=Z. Note: the existing clause-level nodes lemma-weil-pbc-finite-direct-image-exact, lemma-weil-pbc-finite-exchange and prop-weil-pbc-finite-morphism are not mentioned in the report; none states the conjunction with the module mate, so same_as [] stands. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9929002db",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Existing-declaration record (existing:true); node differs from the clone only in its lean field; no Lean module or sorry. Each clause matches an upstream declaration: IsFinite; Etale.stalkIsoPi (hom = Pi.lift stalkRestrict; both sides definitionally pointedEtaleStalk) with lowerStarSheafFiberIsoPi; GeometricFiber with its .finite instance; exactness via preservesFiniteLimits_lowerStar plus preservesFiniteColimits/preservesHomology_lowerStar_of_isFinite; isIso_baseChangeMap_of_isFinite on every IsPullback (canonical mate); isBaseChangeIso_of_isFinite (verbatim BaseChange.lean:359), whose field gives IsIso derivedBaseChangeMapPlus for every square, here with ModuleCat.{u+1} Λ for any CommRing Λ : Type (u+1). No extra hypotheses or universe restrictions; edge cases (empty fibre or schemes, identities, Λ=0, any characteristic) covered. Reviewer consumer compiled clean with nt_compile.py (2.6 s) and checked every clause, including IsIso of the derived exchange at an arbitrary bounded-below K. No findings."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Finite.BaseChange",
+  "declaration": "AlgebraicGeometry.Etale.isBaseChangeIso_of_isFinite",
+  "declarations": [
+   "AlgebraicGeometry.Etale.isBaseChangeIso_of_isFinite",
+   "AlgebraicGeometry.Etale.isIso_baseChangeMap_of_isFinite",
+   "AlgebraicGeometry.Etale.isBaseChangeIsoSheaf_of_isFinite",
+   "AlgebraicGeometry.Etale.stalkIsoPi",
+   "AlgebraicGeometry.Etale.lowerStarSheafFiberIsoPi",
+   "AlgebraicGeometry.Scheme.Hom.GeometricFiber.finite",
+   "AlgebraicGeometry.Etale.preservesFiniteLimits_lowerStar",
+   "AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isFinite",
+   "AlgebraicGeometry.Etale.preservesHomology_lowerStar_of_isFinite"
+  ],
+  "statement": "instance Etale.isBaseChangeIso_of_isFinite : Etale.IsBaseChangeIso A f",
+  "branch": "slopmaster2",
+  "by": "Q02",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Existing declaration bundle, one declaration per clause: Finite.Stalk.stalkIsoPi gives the restriction-of-germs product isomorphism for AddCommGrpCat.{u+1}, naturally in the sheaf by lowerStarSheafFiberIsoPi; Scheme.Hom.GeometricFiber.finite proves finiteness of exactly the specified lifts. Finite.Exact supplies preservation of finite colimits and homology; lowerStar already preserves finite limits. Finite.BaseChange supplies the actual underived mate isomorphism on every cartesian square and IsBaseChangeIso, whose isIso field proves that the recorded derivedBaseChangeMapPlus is invertible. Specialize A to AddCommGrpCat.{u+1} for the abelian clauses and ModuleCat.{u+1} Λ for arbitrary commutative Λ : Type (u+1) for the derived clause. All coefficient-category infrastructure hypotheses are inferred for these specializations; no torsion, finiteness, invertibility, etaleness, or Noetherian hypothesis is added. The module publicly imports the other modules of this bundle. The primary signature is verbatim from BaseChange.lean:359."
  }
 }

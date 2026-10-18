@@ -242,5 +242,24 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-182d19121",
+  "group": "Q36",
+  "result": "fix",
+  "note": "Statement matches node and source clause by clause: unbounded K over a sheaf of rings (not necessarily commutative) on Scheme.ProEt; Mathlib truncGE/πTruncGE with the canonical postnikovStep; clause 1 (vanishing for n<-q, iso for n>=-q, compatibility, zero maps, Epi), clause 2 (R1lim as milnorTowerCokernel per det-pe-milnor-sequence clause 2; canonical map to the limit is an iso); edge cases q>0, q=0, q<0, n=0, n=-q; universes bound, max u (t+1) as in the dependencies; no duplicate declaration (rg over side Sheaf/ and WeilConjectures/); item node changed only in lean. Fixes in fixes/ProEtaleLeftCompleteTruncationTower.lean, statement byte-identical: (1) H8, added the node's three proof steps to the theorem docstring; (2) H9/rule 7, the proof-dependency import ProEtaleMilnorEpimorphic changed from public import to import. nt_compile --json: delivered and fixed files rc=0, about 3.3 s, clean. Stage-3 note: the module imports ProEtaleLeftComplete (owned by det-pe-left-complete-iso, whose proof cites this item), so the proof-plan import back into it closes a cycle; add_proof_imports leaves such edges out and lists them, and the tower defs may need to move in stage 3."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleLeftCompleteTruncationTower",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.truncation_tower_cohomology",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleLeftCompleteTruncationTower.lean",
+  "statement": "theorem truncation_tower_cohomology (X : Scheme.{t}) (R : Sheaf (topology X) RingCat.{max u (t + 1)}) (K : CochainComplex (ringedSiteModules.{max u (t + 1)} R) ℤ) (q : ℤ) : (∀ n : ℕ, (n : ℤ) < -q → IsZero ((milnorCohomologyTower (postnikovTower K) q).obj (op n))) ∧ (∀ n : ℕ, -q ≤ (n : ℤ) → IsIso (HomologicalComplex.homologyMap (K.πTruncGE (-(n : ℤ))) q)) ∧ (∀ n : ℕ, HomologicalComplex.homologyMap (K.πTruncGE (-((n + 1 : ℕ) : ℤ))) q ≫ HomologicalComplex.homologyMap (postnikovStep K n) q = HomologicalComplex.homologyMap (K.πTruncGE (-(n : ℤ))) q) ∧ (∀ n : ℕ, (n : ℤ) < -q → HomologicalComplex.homologyMap (postnikovStep K n) q = 0) ∧ (∀ n : ℕ, Epi (HomologicalComplex.homologyMap (postnikovStep K n) q)) ∧ IsZero (milnorTowerCokernel (milnorCohomologyTower (postnikovTower K) q)) ∧ ∃ f : (HomologicalComplex.homologyFunctor (ringedSiteModules.{max u (t + 1)} R) (ComplexShape.up ℤ) q).obj K ⟶ limit (milnorCohomologyTower (postnikovTower K) q), (∀ n : ℕ, f ≫ limit.π (milnorCohomologyTower (postnikovTower K) q) (op n) = HomologicalComplex.homologyMap (K.πTruncGE (-(n : ℤ))) q) ∧ IsIso f",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-182d19121"
  }
 }

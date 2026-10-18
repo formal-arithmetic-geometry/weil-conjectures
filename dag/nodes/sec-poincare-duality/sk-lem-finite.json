@@ -240,5 +240,36 @@
   "group": "ND",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-f368b2f8e (reviewer sub-agent of L); spot-checked: Read in full: the item, the main-20261015 blueprint statement and proof of sk-lem-finite, the unit record, and every cited node (sk-def-set, sk-def-perfect, def-weil-finite-tor-amplitude, def-weil-ordinary-compact-cohomology, lem-pod-separated-finite-type-base-change (Mathlib leaf), lem-kun-dimension-finite-type (Lean-closed), and thm-pod-point-perfectness with its whole proof). The statement matches the blueprint: same four complexes, same stages, nothing added or weakened; the O_E common amplitude is made explicit for the reductions. The coefficient categories are the same Dctf and Fib_s Ra_*/Ra_! nodes the general theorem uses. Steps 1-4 check the hypotheses of thm-pod-point-perfectness (base change of separated finite type, Krull-dimension bound D, and the theorem's statement frees X_0 from the conventions' admissibility) and apply its clauses 1-3. Using that theorem is a citation of an existing, more general reviewed node that the unit itself names, not a D1 split. I accept its tool_use. No new nodes and no cycle. Small cases checked: point with K=Λ, Λ[-1] or 0, A^1, integral coefficients on a curve. Batch-5 check: sk-lem-finite is used in batch 5 only for finite-dimensionality of H^i and H^i_c. The trace-formula assumption takes that as a hypothesis, and the PD assumption explicitly excludes the perfectness of Rp_!. By traversal, the closure of thm-pod-point-perfectness contains no Verdier-exchange, PD, trace-formula or trace-transport node. The sec-poincare-duality and sec-trace-formula nodes it reaches are generic: definitions, adic-module algebra, the base-change leaf, filtered-localization infrastructure. So all four listed citations lie genuinely outside the assumed statements and their proofs. FIX: Step 3 asserted perfectness in the sense of sk-def-perfect without citing it (C4). I added sk-def-perfect to its uses and wrote one identifying sentence; proof_deps is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cea3b9e55",
+  "group": "NV",
+  "result": "fix",
+  "note": "Substance correct. All hypotheses and clauses of sk-lem-finite match at the four stages A_{E,n}, O_E, E and Qbar: the four complexes C, C_c and their point duals RHom(-,Λ) via ihom; IsDualizable for perfect (sk-def-perfect); bounded, finite cohomology and finiteTorAmplitude at finite level; bounded, Module.Finite cohomology and one uniform Tor interval for the derived reductions at every n+1 at O_E; pointFiniteDimensional at the field stages, with Qbar through the canonical pointFdQbarRealization. Uses the recorded FiniteTorAmplitude categories and the OrdinaryCompactCohomology sections, whose dependencies already fix E, Ω and X in universe u, so nothing extra is imposed. Checked the derived-category instance mix: the small-Hom D(Λ) is ShrinkHoms of the standard one, so the objects are canonically the same complexes and nothing arbitrary is identified. Instance aliases are existing constructions with docstrings. The node changes only lean, lean.statement is verbatim, dependency node copies are unchanged, every proof is sorry, docstrings carry the proof steps. nt_compile.py: clean, rc 0, only sorryAx beyond the standard axioms. Finding H9: the private import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType is unused by the statements (it is a stage-3 proof prerequisite). Fixed: fixes/lean/Sheaf/Paper/PoincarePointFiniteness.lean is the full file with that line removed, recompiled clean; no JSON change needed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PoincarePointFiniteness",
+  "declaration": "WeilConjectures.poincarePointFiniteness_finite",
+  "declarations": [
+   "WeilConjectures.poincarePointModuleDerived",
+   "WeilConjectures.poincarePointModelFiniteType",
+   "WeilConjectures.poincarePointModelQuasiCompact",
+   "WeilConjectures.poincarePointModelSeparated",
+   "WeilConjectures.poincarePointGeometricSeparated",
+   "WeilConjectures.poincarePointFiniteness_finite",
+   "WeilConjectures.poincarePointFiniteness_integral",
+   "WeilConjectures.poincarePointFiniteness_rational",
+   "WeilConjectures.poincarePointFiniteness_qbar"
+  ],
+  "file": "lean/Sheaf/Paper/PoincarePointFiniteness.lean",
+  "statement": "theorem poincarePointFiniteness_finite (hl : l ≠ D.p) (c : Compactification ((D.geometricFiber (Over.mk S.modelStructureMorphism)).left ↘ Spec (.of D.k))) (n : ℕ) (hn : 1 ≤ n) (K : finiteTorConstructibleCategory l E n hn (D.geometricFiber (Over.mk S.modelStructureMorphism)).left) : ∀ C ∈ ({finiteOrdinarySections D l E (D.geometricFiber (Over.mk S.modelStructureMorphism)).left n hn K.obj, finiteCompactSections D l E (D.geometricFiber (Over.mk S.modelStructureMorphism)).left c n hn K.obj} : Set (DerivedCategory (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))))), ∀ B ∈ ({C, (ihom C).obj (𝟙_ _)} : Set _), IsDualizable B ∧ DerivedCategory.TStructure.t.bounded B ∧ (∀ i : ℤ, Finite ((DerivedCategory.homologyFunctor (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))) i).obj B)) ∧ DerivedCategory.finiteTorAmplitude (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))) B",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Four coefficient-specific statements give the complete node. The nested two-element sets enumerate ordinary/compact sections and each of their point duals. Integral reductions use the existing pointReductionModuleTensor at positive exponent n+1. Instance aliases expose the existing native small-Hom module localization and the model/base-change properties; their data are existing constructions.",
+  "fixed_by": "NT-stage2-cc-cea3b9e55"
  }
 }
