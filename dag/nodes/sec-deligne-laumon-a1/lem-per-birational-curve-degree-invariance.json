@@ -16,9 +16,156 @@
   "def-pc-degree-line-bundle",
   "def-pc-euler-characteristic"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Both structure morphisms are separated and of finite type by [def-weil-proper-morphism]. A field is Noetherian, since its only ideals are $(0)$ and $(1)$; thus [lem-weil-pbc-finite-type-over-noetherian] makes $X$ and $X'$ Noetherian. The given isomorphism of dense opens sends the generic point of $X'$ to that of $X$ and identifies their local rings: these points exist by [lem-weil-pbc-scheme-sober], lie in every nonempty open by irreducibility, and open restriction leaves their stalks unchanged. In particular $f$ is dominant and induces an isomorphism of function fields. Since $X'$ is proper over $k$ and $X$ separated over $k$, [lem-weil-pbc-proper-over-separated] makes $f$ proper. All hypotheses of [lem-trf-proper-birational-curve-finite] now hold: both schemes are integral separated finite-type curves of dimension one, and the proper dominant map identifies their function fields. Consequently $f$ is finite.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-scheme-sober",
+    "lem-weil-pbc-proper-over-separated",
+    "lem-trf-proper-birational-curve-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYU, lemma-degree-birational-pullback, opening finiteness reduction; Tags 01W6, 01T6 and 0AB7 (lemma-finite-in-codim-1)."
+   }
+  },
+  {
+   "text": "Set $F=f_*\\mathcal O_{X'}$. The structure sheaves and $L$ are quasi-coherent of finite type: locally they are free of rank one, by [def-sc-invertible-module]. Hence they are coherent by [pqf-lem-coherent-ft-locnoeth], using the Noetherianness from Step 1. The pullback $f^*L$ is invertible by [lem-weil-pbc-invertible-pullback-tensor], so it too is coherent. By [lem-weil-pbc-finite-pushforward-coherent], $F$ and $f_*f^*L$ are coherent on $X$. Let $Q$ be the cokernel of the structure map $u:\\mathcal O_X\\to F$. Then $Q$ is coherent by [lem-weil-pbc-coherent-modules-kernel-cokernel-sum].",
+   "uses": [
+    "def-sc-invertible-module",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-invertible-pullback-tensor",
+    "lem-weil-pbc-finite-pushforward-coherent",
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tags 01XZ (lemma-coherent-Noetherian), 01Y6 (lemma-finite-pushforward-coherent), with Modules Tag 01BY (lemma-coherent-abelian); the coherent defect of 0AYU."
+   }
+  },
+  {
+   "text": "The map $u$ is injective, and its generic stalk is an isomorphism. To check this explicitly, let $V=\\operatorname{Spec}A$ be a nonempty affine open of $X$. Finiteness [def-weil-finite-integral-morphism] gives $f^{-1}V=\\operatorname{Spec}B$, with $B$ finite over $A$. The inverse image is nonempty because $f$ is dominant. By [lem-sc-integral-function-field-affine-fraction], $A$ and $B$ inject into their generic fields. Step 1 identifies these fields as $K$, compatibly with $A\\to B$; hence $A\\to B$ is injective. Moreover, for $S=A\\setminus\\{0\\}$, $S^{-1}B$ is a subring of $K$ containing $S^{-1}A=K$, so $S^{-1}B=K$. The affine description of $F$ in [def-weil-finite-integral-morphism] identifies its generic stalk with this localization. Thus $Q_\\eta=0$, where $\\eta$ is the generic point of $X$, and the defining cokernel sequence is $0\\to\\mathcal O_X\\xrightarrow{u}F\\to Q\\to0$.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-sc-integral-function-field-affine-fraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYU, lemma-degree-birational-pullback, kernel and cokernel at generic points; integral specialization has zero kernel. Affine generic-field description: Tags 01RV and 01HV."
+   }
+  },
+  {
+   "text": "By [pqf-lem-coherent-ft-locnoeth], the coherent $Q$ is quasi-coherent of finite type. Its support is closed by [lem-weil-pbc-scheme-theoretic-support], whose clause (3) identifies it with the image of a closed immersion. Step 3 says it omits $\\eta$, so it is a proper closed subset of $X$. It has dimension at most zero by [def-kun-topological-krull-dimension]: a strict chain of two nonempty irreducible closed subsets inside this support, followed by the integral closed subset $X$, would give a chain of length two in the one-dimensional $X$. The empty support also has dimension at most zero. We may therefore apply [lem-pc-chi-zero-dim-support] to $Q$ and $L$, obtaining $\\chi(X,Q\\otimes L)=\\chi(X,Q)$, with $Q\\otimes L$ coherent.",
+   "uses": [
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-weil-pbc-scheme-theoretic-support",
+    "def-kun-topological-krull-dimension",
+    "lem-pc-chi-zero-dim-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYU, zero-dimensional defect; Tag 0AYT (lemma-chi-tensor-finite), rank-one case, with Morphisms Tag 05JU."
+   }
+  },
+  {
+   "text": "Here is the needed rank-one projection formula without a derived assertion. The local bilinear maps $s\\otimes b\\mapsto (f^*s)b$, formed from [def-pc-module-pullback] and [def-pur-sheaf-tensor-product], give a sheaf map $\\theta:L\\otimes F\\to f_*f^*L$. On a trivializing open $V$ for $L$ [def-sc-invertible-module], choose a basis $e$. Then $f^*e$ is a basis on $f^{-1}V$ by the tensor definition of pullback, and $\\theta$ is the identity $F|_V\\to F|_V$, sending $e\\otimes b$ to $b f^*e$. On overlaps a change $e'=ae$, with $a$ a unit, multiplies both formulas by $f^*a$; thus these local descriptions agree. The resulting global map is an isomorphism because its restrictions to this cover have inverses.",
+   "uses": [
+    "def-pc-module-pullback",
+    "def-pur-sheaf-tensor-product",
+    "def-sc-invertible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 01E8, lemma-projection-formula (in Section 01E6), ordinary degree-zero rank-one case; its local-trivialization argument is written out."
+   }
+  },
+  {
+   "text": "Tensor the short exact sequence of Step 3 with $L$. Exactness can be checked on the trivializing cover from Step 5, where tensoring with $L$ is the identity on modules and maps. Thus $0\\to L\\to L\\otimes F\\to L\\otimes Q\\to0$ is exact. This uses only the locally free rank-one definition [def-sc-invertible-module] and the sheaf tensor product [def-pur-sheaf-tensor-product]. In particular, the middle term is coherent by the isomorphism of Step 5 and the coherence in Step 2, and the last term is coherent by Step 4 (or by the same local trivializations).",
+   "uses": [
+    "def-sc-invertible-module",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYU, tensoring the defect sequence by the locally free sheaf; rank-one exactness checked locally."
+   }
+  },
+  {
+   "text": "The finite morphism $f$ is affine by [def-weil-finite-integral-morphism]. Apply [lem-weil-pbc-affine-morphism-cohomology-edge] to the quasi-coherent modules $\\mathcal O_{X'}$ and $f^*L$. For every $i\\ge0$ it identifies $H^i(X,F)$ with $H^i(X',\\mathcal O_{X'})$ and $H^i(X,f_*f^*L)$ with $H^i(X',f^*L)$. These identifications are $k$-linear: the edge maps are linear over $\\Gamma(X,\\mathcal O_X)$, and $f$ is a $k$-morphism. All these coherent cohomology groups are finite-dimensional and vanish in sufficiently large degree by [lem-pc-coherent-hi], applied to the proper structure maps to $\\operatorname{Spec}k$. Taking their alternating dimensions [def-pc-euler-characteristic], and using Step 5, gives $\\chi(X,F)=\\chi(X',\\mathcal O_{X'})$ and $\\chi(X,L\\otimes F)=\\chi(X',f^*L)$.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "lem-pc-coherent-hi",
+    "def-pc-euler-characteristic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYU, first and last equalities, using Cohomology of Schemes Tag 089W (lemma-relative-affine-cohomology) and Tags 02O5, 02O6."
+   }
+  },
+  {
+   "text": "Apply the short-exact-sequence clause of [lem-pc-euler-additive] to the coherent sequences in Steps 3 and 6. It gives $\\chi(X,F)=\\chi(X,\\mathcal O_X)+\\chi(X,Q)$ and $\\chi(X,L\\otimes F)=\\chi(X,L)+\\chi(X,L\\otimes Q)$. In Step 4, [lem-pc-chi-zero-dim-support] gave $\\chi(X,Q\\otimes L)=\\chi(X,Q)$; the tensor symmetry follows directly by $q\\otimes s\\mapsto s\\otimes q$ from [def-pur-sheaf-tensor-product], so $\\chi(X,L\\otimes Q)=\\chi(X,Q)$ as well. Substitute these identities and Step 7, then subtract: $\\chi(X',f^*L)-\\chi(X',\\mathcal O_{X'})=\\chi(X,L)-\\chi(X,\\mathcal O_X)$.",
+   "uses": [
+    "lem-pc-euler-additive",
+    "lem-pc-chi-zero-dim-support",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYU, Euler-characteristic calculation with n=1; Tags 08AA (lemma-euler-characteristic-additive) and 0AYT (lemma-chi-tensor-finite)."
+   }
+  },
+  {
+   "text": "By [def-pc-degree-line-bundle], the left side of the equality in Step 8 is $\\deg_k(f^*L)$ and its right side is $\\deg_k(L)$. The pullback is invertible by Step 2, and both curves are proper over the same original field $k$, so these are precisely the two degrees in the statement. This proves the assertion without any smoothness or algebraic-closedness hypothesis.",
+   "uses": [
+    "def-pc-degree-line-bundle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYU, conclusion, using the degree definition (Tag 0BEW, definition-degree)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-topological-krull-dimension",
+  "def-pc-degree-line-bundle",
+  "def-pc-euler-characteristic",
+  "def-pc-module-pullback",
+  "def-pur-sheaf-tensor-product",
+  "def-sc-invertible-module",
+  "def-weil-finite-integral-morphism",
+  "def-weil-proper-morphism",
+  "lem-pc-chi-zero-dim-support",
+  "lem-pc-coherent-hi",
+  "lem-pc-euler-additive",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-trf-proper-birational-curve-finite",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "lem-weil-pbc-finite-pushforward-coherent",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-proper-over-separated",
+  "lem-weil-pbc-scheme-sober",
+  "lem-weil-pbc-scheme-theoretic-support",
+  "pqf-lem-coherent-ft-locnoeth"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0AYU, lemma-degree-birational-pullback, rank-one integral specialization; kernel is zero, and the ordinary projection formula and tensor exactness are checked on a trivializing cover."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +201,38 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-19",
    "verdict": "no match: the displayed hits do not state this scheme-theoretic comparison or degree theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "birational.*(degree|deg)|degree.*birational|deg.*birational",
+   "results": "0 hits: none",
+   "date": "2026-10-19",
+   "verdict": "no match: returned statements concern general morphism properties, Weierstrass curves or polynomial normalization, not cohomological line-bundle degree under a birational morphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback along normalization of a proper integral curve preserves the degree of an invertible sheaf",
+   "results": "8 hits: Polynomial.integralNormalization_degree, Polynomial.degree_integralNormalization, AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom, AlgebraicGeometry.Scheme.Hom.normalizationDesc, AlgebraicGeometry.Scheme.Hom.toNormalization, AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, Polynomial.degree_normalize",
+   "date": "2026-10-19",
+   "verdict": "no match: returned statements concern general morphism properties, Weierstrass curves or polynomial normalization, not cohomological line-bundle degree under a birational morphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"degree\", \"birational\"",
+   "results": "0 hits: none",
+   "date": "2026-10-19",
+   "verdict": "no match: returned statements concern general morphism properties, Weierstrass curves or polynomial normalization, not cohomological line-bundle degree under a birational morphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A birational morphism of integral proper curves preserves the Euler characteristic degree of a line bundle under pullback",
+   "results": "8 hits: AlgebraicGeometry.IsIntegralHom.instIsStableUnderBaseChangeScheme, WeierstrassCurve.Affine.Point.map_some, WeierstrassCurve.Projective.baseChange_nonsingular, WeierstrassCurve.Projective.comp_equiv_comp, WeierstrassCurve.Affine.baseChange_nonsingular, WeierstrassCurve.instIsEllipticMap, WeierstrassCurve.Affine.baseChange_slope, WeierstrassCurve.Affine.map_nonsingular",
+   "date": "2026-10-19",
+   "verdict": "no match: returned statements concern general morphism properties, Weierstrass curves or polynomial normalization, not cohomological line-bundle degree under a birational morphism"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-sepclosed-regular-proper-curve-trace",
@@ -83,5 +258,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-birational-curve-degree-invariance",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Split the rank-one integral case of Stacks 0AYU using existing finiteness, coherence, affine cohomology, additivity and zero-dimensional-support nodes. Wrote the injective birational defect and rank-one local projection/tensor calculations explicitly. No new nodes; no Lean attachment and no Mathlib match.",
+  "blueprint": "Realizes the degree comparison on the reduced geometric exceptional curve and its normalization identified in blueprint.from.place, below Step 1 of lem-per-artin-gabber-affine-curve, through the existing ancestor chain. Does not change any unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-proper-birational-curve-finite",
+    "why": "Step 1 uses only the generic geometric finiteness theorem for proper birational maps of integral curves. The unit has no scheme-theoretic finiteness lemma; no trace formula or Poincare duality assertion is used."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Steps 2 and 4 use coherence iff quasi-coherent of finite type on locally Noetherian schemes, a generic algebraic geometry tool absent from the unit."
+   },
+   {
+    "node": "lem-weil-pbc-invertible-pullback-tensor",
+    "why": "Step 2 uses preservation of invertible modules under ordinary scheme pullback, a generic module tool absent from the unit."
+   },
+   {
+    "node": "lem-weil-pbc-finite-pushforward-coherent",
+    "why": "Step 2 needs coherent ordinary module pushforward for a finite morphism to a locally Noetherian scheme; this is a generic coherence tool absent from the unit."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "why": "Step 2 uses closure of coherent modules under cokernels, a generic ringed-space algebra tool absent from the unit."
+   },
+   {
+    "node": "lem-sc-integral-function-field-affine-fraction",
+    "why": "Step 3 uses the injective affine germ maps and fraction-field description of an integral scheme; no curve estimate is invoked."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-theoretic-support",
+    "why": "Step 4 uses closedness of the support of a finite-type quasi-coherent module, via its scheme-theoretic support; no base-change result is invoked."
+   },
+   {
+    "node": "lem-pc-chi-zero-dim-support",
+    "why": "Steps 4 and 8 use invariance of Euler characteristic under an invertible twist of a zero-dimensional coherent module, the generic Stacks 0AYT tool absent from this unit."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "why": "Step 7 uses only ordinary quasi-coherent cohomology comparison along an affine scheme morphism, Stacks 089W, absent from this unit."
+   },
+   {
+    "node": "lem-pc-coherent-hi",
+    "why": "Step 7 uses only finiteness and eventual vanishing of proper coherent cohomology over a field, a generic coherence theorem absent from this unit."
+   },
+   {
+    "node": "lem-pc-euler-additive",
+    "why": "Step 8 uses only additivity for short exact coherent sequences; the Leray clause is not used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-proper-birational-curve-finite",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-weil-pbc-invertible-pullback-tensor",
+  "lem-weil-pbc-finite-pushforward-coherent",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "lem-sc-integral-function-field-affine-fraction",
+  "lem-weil-pbc-scheme-theoretic-support",
+  "lem-pc-chi-zero-dim-support",
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "lem-pc-coherent-hi",
+  "lem-pc-euler-additive"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q88-d791fc060",
+  "group": "Q88",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q88-d791fc060 (reviewer sub-agent of L); spot-checked: The item's statement is unchanged; it is the rank-one, integral, dimension-one case of Stacks 0AYU (lemma-degree-birational-pullback), which I read with its proof. There are no new nodes. All 9 steps check against the statements they cite. Step 1: X and X' are Noetherian, f is proper (proper over separated), and lem-trf-proper-birational-curve-finite (0AB7) applies with every hypothesis met, so f is finite. Step 3: O_X→f_*O_{X'} is injective and an isomorphism at the generic point, shown on affine charts with the fraction-field node; no normality is used. Step 4: Supp Q is closed and misses η, so its dimension is ≤0 by an explicit chain argument, and the zero-support node gives χ(Q⊗L)=χ(Q). Steps 5 and 6 (rank-one projection formula and exactness of ⊗L) are genuinely elementary, checked on a trivializing cover. Step 7: the affine cohomology isomorphism and finiteness from 02O5/02O6. Steps 8 and 9: Euler additivity, χ(Q) cancels, the signs match 0AYU, and the degree definition finishes. proof_deps equals the union of the uses. Edge cases tested: identity, nodal and cuspidal normalization (the proof correctly never claims χ(O_X)=χ(O_X')), non-rational support points, L=O. Batch-5 flag on lem-trf-proper-birational-curve-finite: accepted. It is Stacks 0AB7; its 104-node closure contains only 0AB6 (lem-trf-birational-curve-quasifinite) from the trace-formula chapter, plus generic Stacks nodes, and no Poincaré, sk-* or assumption node. It is neither a trace-formula nor a Poincaré-duality result, nor a step of their proofs. The declared generic tool_uses are accepted. No SGA source is used. No fixes."
  }
 }
