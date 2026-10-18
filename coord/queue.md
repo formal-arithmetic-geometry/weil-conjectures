@@ -558,7 +558,7 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `WeilConjectures.DeligneLaumon.AffineLine.DegreeOne` | 7 | 1 | `d-real-cohom` |
 | `WeilConjectures.DeligneLaumon.AffineLine.Exactness` | 7 | 1 | `lem-dl-a1-constructible-fibres-exact` |
 | `WeilConjectures.SixFunctors.Etale.Perverse.Operations` | 7 | 6 | `cor-sf-duality-pullback` |
-| `WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension` | 8 | 4 | `lem-a1-artin-schreier-prime-character-comparison` |
+| `WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension` | 8 | 4 | `lem-a1-qbar-open-closed-cohomology` |
 | `WeilConjectures.DeligneLaumon.AffineLine.Perverse` | 9 | 4 | `lem-a1-qbar-open-closed-cohomology` |
 | `WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension` | 9 | 3 | `lem-trf-rational-local-frobenius-powers` |
 | `WeilConjectures.WeilSheaf.FourierInversion.OtherSections` | 12 | 3 | `lem-pur-divisor-class` |
