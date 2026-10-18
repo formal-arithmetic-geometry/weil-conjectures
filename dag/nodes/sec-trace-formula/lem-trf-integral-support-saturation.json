@@ -117,5 +117,23 @@
   "group": "Q64",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q64-205778122 (reviewer sub-agent of L); spot-checked: Read the complete item, new node, cited statements, ILO Exposé VIII §3.2.8 Lemma 3.2.9 p.104, unit/chapter route, reports, and A–F delivery rules. Verified hypotheses, finite-subgroup and rational-cone separation, weighted obstruction use, Mathlib searches, blueprint metadata, duplicates, edge cases, and route compliance. No repairable fault or hidden long-step lemma found; review.md written."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.IntegralSupportSaturation",
+  "declaration": "MonoidAlgebra.support_subset_saturation_of_isIntegral",
+  "file": "lean/Sheaf/RingTheory/IntegralSupportSaturation.lean",
+  "statement": "theorem support_subset_saturation_of_isIntegral {k : Type u} [Field k] {G : Type v} [CommGroup G] [IsMulTorsionFree G] (P : Submonoid G) (hP : P.FG) (x : MonoidAlgebra k G) (hx : (MonoidAlgebra.mapDomainRingHom k P.subtype).IsIntegralElem x) : ∀ g ∈ x.coeff.support, g ∈ AlgebraicGeometry.FineFan.saturation P",
+  "branch": "newtargets-dag",
+  "by": "Q54",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0162eefef",
+  "group": "Q54",
+  "result": "pass",
+  "note": "Only the item's lean record changed; statement verbatim in the file. H3 matches clause by clause: Field k; CommGroup G + IsMulTorsionFree; P : Submonoid G with P.FG and nothing extra; integrality is IsIntegralElem along mapDomainRingHom k P.subtype, which a probe showed sends single p 1 to single p 1 (the canonical k[P] into k[G]); conclusion uses the stmt_dep's FineFan.saturation, the closure of the root set, which equals the node's set in a commutative group. Edge cases (x=0, scalars, trivial P/G, non-sharp P, non-fg G) covered; universes independent. Proof-dep imports follow rule 7 (RationalConeDualFinite, FreeModule.PID); no duplicate found; docstrings carry ILO VIII Lemma 3.2.9 p.104 (checked in the PDF) and the proof plan; sorry-only. nt_compile --json clean (3.2 s, exit 0) and a broken control errors. No findings."
  }
 }

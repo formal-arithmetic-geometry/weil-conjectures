@@ -1,0 +1,111 @@
+{
+ "id": "def-per-ind-finite-etale-local-system",
+ "kind": "definition",
+ "title": "Ind-finite etale local systems of sets and modules",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and use its small etale site [def-weil-pbc-etale-site]. A sheaf $F$ of sets is ind-finite etale if it is isomorphic to the colimit [def-weil-pbc-category-colimit] of a small filtered diagram of sheaves represented by finite etale $S$-schemes [def-galois-categories]. For a commutative ring $R$, an $R_S$-module sheaf [def-weil-sheaf-of-modules-category] [def-weil-pbc-constant-sheaf] is ind-finite etale if its underlying sheaf of sets is ind-finite etale. These module sheaves form the full subcategory of ambient module sheaves, so the arrows are all ambient module sheaf maps. For Noetherian $S$ these are the local systems of ILO XVII Definition 7.2.1 and its module variant. Neither finiteness of $R$ nor finite generation of stalks is required.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-category-colimit",
+  "def-galois-categories",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, Definition 7.2.1 and paragraph after Proposition 7.2.3, pp. 301-302."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "filtered colimit of finite etale representable sheaves ind finite local system definition",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Limits.IndObjectPresentation.ofCocone\", \"module\": \"Mathlib.CategoryTheory.Limits.Indization.IndObject\", \"type\": \"{I : Type v} [SmallCategory I] [IsFiltered I] {F : I ⥤ C} (c : Cocone (F ⋙ yoneda)) (hc : IsColimit c) :\\n  IndObjectPresentation c.pt\", \"doc\": \"Given a small filtered category $\\\\mathcal{I}$, a functor $F: \\\\mathcal{I} \\\\to \\\\mathcal{C}$, a cocone $c$ for the composition $F \\\\circ \\\\text{Yoneda}$, and a proof that $c$ is a colimit, this constructs \"}\n  {\"name\": \"CategoryTheory.Sheaf.hasFilteredColimitsOfSize\", \"module\": \"Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Sheaf\", \"type\": \"[HasSheafify J A] [HasFilteredColimitsOfSize.{v₂, u₂} A] : HasFilteredColimitsOfSize.{v₂, u₂} (Sheaf J A)\", \"doc\": \"Given a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$ and a category $\\\\mathcal{A}$ that has filtered colimits of size $(v₂, u₂)$ and a sheafification functor, the category of sheave\"}\n  {\"name\": \"CategoryTheory.Limits.IndObjectPresentation.mk\", \"module\": \"Mathlib.CategoryTheory.Limits.Indization.IndObject\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {A : CategoryTheory.Functor Cᵒᵖ (Type v)} →\\n      (I : Type v) →\\n        [ℐ : CategoryTheory.SmallCategory I] →\\n          [hI : CategoryTheory.IsFiltered I] →\\n            (F : CategoryTheory.Functor I C) →\\n              (ι : F.comp Cat\", \"doc\": \"Given a category $\\\\mathcal{C}$, a functor $A: \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\text{Type}\\\\,v$, a filtered category $I$, a functor $F: I \\\\to \\\\mathcal{C}$, a natural transformation $\\\\iota: F \\\\circ \\\\text{Yon\"}\n  {\"name\": \"CategoryTheory.Limits.isIndObject_colimit\", \"module\": \"Mathlib.CategoryTheory.Limits.Indization.FilteredColimits\", \"type\": \"(I : Type v) [SmallCategory I] [IsFiltered I] (F : I ⥤ Cᵒᵖ ⥤ Type v) (hF : ∀ i, IsIndObject (F.obj i)) :\\n  IsIndObject (colimit F)\", \"doc\": \"Let $\\\\mathcal{I}$ be a small filtered category, $\\\\mathcal{C}$ a category, and $F : \\\\mathcal{I} \\\\to \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathrm{Type}\\\\, v$ a functor such that each $F(i)$ is an ind-object in $\\\\\"}\n  {\"name\": \"LightCondensed.isColimitLocallyConstantPresheaf\", \"module\": \"Mathlib.Condensed.Discrete.Colimit\", \"type\": \"(hc : IsLimit c) [∀ i, Epi (c.π.app i)] : IsColimit <| (locallyConstantPresheaf X).mapCocone c.op\", \"doc\": \"The presheaf of locally constant functions on the opposite category of light profinite spaces, constructed from a diagram of finite types, satisfies the universal property of a colimit. Specifically, \"}\n  {\"name\": \"CategoryTheory.Limits.isIndObject_of_isFiltered_of_finallySmall\", \"module\": \"Mathlib.CategoryTheory.Limits.Indization.IndObject\", \"type\": \"(A : Cᵒᵖ ⥤ Type v) [IsFiltered (CostructuredArrow yoneda A)] [FinallySmall.{v} (CostructuredArrow yoneda A)] :\\n  IsIndObject A\", \"doc\": \"Let $\\\\mathcal{C}$ be a category and $A : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\text{Type}\\\\, v$ a functor. If the comma category $\\\\text{CostructuredArrow}(\\\\text{yoneda}, A)$ is filtered and finally small, then \"}\n  {\"name\": \"CategoryTheory.Ind.lim\", \"module\": \"Mathlib.CategoryTheory.Limits.Indization.Category\", \"type\": \"(I : Type v) [SmallCategory I] [IsFiltered I] : (I ⥤ C) ⥤ Ind C\", \"doc\": \"For a small filtered category $\\\\mathcal{I}$, this functor maps diagrams $\\\\mathcal{I} \\\\to \\\\mathcal{C}$ to their filtered colimit in the ind-category $\\\\mathrm{Ind}(\\\\mathcal{C})$. It is constructed by co\"}\n  {\"name\": \"CategoryTheory.Limits.colimitLimitIso\", \"module\": \"Mathlib.CategoryTheory.Limits.FilteredColimitCommutesFiniteLimit\", \"type\": \"(F : J ⥤ K ⥤ C) : colimit (limit F) ≅ limit (colimit F.flip)\", \"doc\": \"In a category with all filtered colimits and finite limits, the canonical morphism from the colimit of a filtered diagram of finite limits to the finite limit of the corresponding colimits is an isomo\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: generic Ind presentations, condensed constructions and finite module presentation predicates do not define ind-finite etale sheaves; grep has zero hits in AlgebraicGeometry. Direct rg of WeilConjectures and lean/Sheaf has no ind-finite predicate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "filtered colimit of finite etale representable sheaves ind finite local system definition",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.Presentation.IsFinite\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [inst_1 : CategoryTheory.HasWeakSheafify J AddCommGrpCat] →\\n          [inst_2 : J.WEqualsLocallyBijective AddCommGrpCat] →\\n          \", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$, a sheaf $R$ of rings on $\\\\mathcal{C}$, and conditions ensuring existence of sheafification, local bijectivity, and composition compatib\"}\n  {\"name\": \"SheafOfModules.IsFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $R$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of modules over $R$ is of finite presentation. Specifical\"}\n  {\"name\": \"SheafOfModules.IsFiniteType\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Generators\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      {R : CategoryTheory.Sheaf J RingCat} →\\n        [∀ (X : C), CategoryTheory.HasWeakSheafify (J.over X) AddCommGrpCat] →\\n          [∀ (X : C), (J.over X).WEqualsLocallyBijective AddCo\", \"doc\": \"Given a category $\\\\mathcal{C}$ with a Grothendieck topology $J$ and a sheaf $\\\\mathcal{R}$ of rings on $\\\\mathcal{C}$, this predicate asserts that a sheaf of $\\\\mathcal{R}$-modules $\\\\mathcal{F}$ is of fi\"}\n  {\"name\": \"CategoryTheory.PresheafIsFinite\", \"module\": \"Mathlib/CategoryTheory/Subfunctor/Finite\", \"type\": \"{C : Type u} → [inst : CategoryTheory.Category.{v, u} C] → CategoryTheory.Functor Cᵒᵖ (Type w) → Prop\", \"doc\": \"A presheaf $ F $ is finite if the top subfunctor $ \\\\top $ of $ F $ satisfies the finiteness condition for subfunctors.\"}\n  {\"name\": \"SheafOfModules.isFinitePresentation\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent\", \"type\": \"{C : Type u'} →\\n  [inst : CategoryTheory.Category.{v', u'} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      (R : CategoryTheory.Sheaf J RingCat) →\\n        [∀ (X : C), (J.over X).HasSheafCompose (CategoryTheory.forget₂ RingCat AddCommGrpCat)] →\\n          [∀ (X : C), CategoryTheory.HasWeak\", \"doc\": \"A predicate asserting that a sheaf of modules over a ring sheaf $ R $ is of finite presentation, meaning it can be locally described as the cokernel of a morphism between free modules of finite rank, \"}\n  {\"name\": \"LightProfinite.hasSheafify\", \"module\": \"Mathlib/Condensed/Light/Instances\", \"type\": \"∀ (A : Type u') [inst : CategoryTheory.Category.{u, u'} A] [CategoryTheory.Limits.HasLimits A]\\n  [CategoryTheory.Limits.HasColimits A] {FA : A → A → Type v} {CA : A → Type u}\\n  [inst_3 : (X Y : A) → FunLike (FA X Y) (CA X) (CA Y)] [inst_4 : CategoryTheory.ConcreteCategory A FA]\\n  [CategoryTheory.Lim\", \"doc\": \"The category of compact Hausdorff, totally disconnected, second-countable topological spaces (light profinite spaces), equipped with the coherent Grothendieck topology generated by finite effective ep\"}\n  {\"name\": \"Condensed.finFree\", \"module\": \"Mathlib/Condensed/Solid\", \"type\": \"(R : Type (u + 1)) → [inst : Ring R] → CategoryTheory.Functor FintypeCat (CondensedMod R)\", \"doc\": \"The functor from the category of finite types to the category of condensed $ R $-modules, constructed by composing the embedding of finite types into profinite spaces (via indiscrete topology), the in\"}\n  {\"name\": \"Condensed.isColimitLocallyConstantPresheaf\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"{I : Type u} →\\n  [inst : CategoryTheory.Category.{u, u} I] →\\n    [CategoryTheory.IsCofiltered I] →\\n      {F : CategoryTheory.Functor I FintypeCat} →\\n        (c : CategoryTheory.Limits.Cone (F.comp FintypeCat.toProfinite)) →\\n          (X : Type (u + 1)) →\\n            CategoryTheory.Limits.IsLimit c →\", \"doc\": \"Given a cofiltered diagram $\\\\mathcal{I}$ with values in the category of finite types and a cone $c$ over its composition with the profinite completion functor, if all projections of the cone are epimo\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: generic Ind presentations, condensed constructions and finite module presentation predicates do not define ind-finite etale sheaves; grep has zero hits in AlgebraicGeometry. Direct rg of WeilConjectures and lean/Sheaf has no ind-finite predicate."
+  },
+  {
+   "tool": "grep",
+   "query": "IsIndFinite|IndFiniteEtale|IsLocalSystem",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match: generic Ind presentations, condensed constructions and finite module presentation predicates do not define ind-finite etale sheaves; grep has zero hits in AlgebraicGeometry. Direct rg of WeilConjectures and lean/Sheaf has no ind-finite predicate."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-torsion-local-system-monodromy",
+  "date": "2026-10-18",
+  "group": "Q77"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "The ind-finite local systems used in the ILO XVII 7.2 support argument for the coefficient comparison, specifically the definition preceding the monodromy equivalence.",
+   "via": [
+    "lem-per-torsion-local-system-monodromy",
+    "lem-per-galois-partition-exact-refinement",
+    "lem-per-ctf-hom-condition-b",
+    "lem-per-ctf-hom-coefficient-comparison",
+    "lem-per-coefficient-change-dualizing",
+    "lem-per-potential-local-duality",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IndFiniteEtaleLocalSystem",
+  "declaration": "AlgebraicGeometry.Scheme.IsIndFiniteEtaleSheaf",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.IsIndFiniteEtaleSheaf",
+   "AlgebraicGeometry.Scheme.IsIndFiniteEtaleModule",
+   "AlgebraicGeometry.Scheme.IndFiniteEtaleModules"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/IndFiniteEtaleLocalSystem.lean",
+  "statement": "def IsIndFiniteEtaleSheaf {S : Scheme.{u}} (F : Sheaf S.smallEtaleTopology (Type (u + 1))) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q77",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6c2d41af9",
+  "group": "Q77",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6c2d41af9",
+  "group": "Q77",
+  "result": "pass",
+  "note": "Statement unchanged; Lean matches every clause of lem-per-torsion-local-system-monodromy (ILO XVII 7.2.1-7.2.5). New def node def-per-ind-finite-etale-local-system: an actual filtered colimit of finite-etale representables, real content, no duplicate in DAG, live/side Lean or runs/2. Monodromy pinned by the finiteGerm field (germ at a goes to germ at g.a; every stalk element is such a germ), so the action is canonical. Cover map h pinned on all finite-cover fibres, so h = c_*. Exactness, all small colimits, kernels/cokernels, extensions, constants, descent with L not assumed local, finite type iff f.g. stalk, Galois trivialization and the componentwise test all checked. R : Type (u+1) is the project convention and matches the landed consumers. Edge cases R=0, empty scheme, empty diagrams, infinite modules OK. Only the item theorem is sorry; docstrings and verbatim statements OK. The Proetale import is needed for the Subcanonical instance (tested by dropping it), not a pro-etale substitute. nt_compile --json clean: 5.3 s and 31.3 s, rc 0. Advisory: redundant [IsNoetherian T]; the germ-action citer becomes nearly a field projection; Q77's second reading is a self-audit."
+ }
+}

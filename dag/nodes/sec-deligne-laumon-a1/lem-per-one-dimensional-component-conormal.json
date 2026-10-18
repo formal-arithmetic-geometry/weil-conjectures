@@ -213,5 +213,23 @@
   "group": "Q119",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-9d14ee44b (reviewer sub-agent of L); spot-checked: I read the whole item. Its four steps, all ten cited node statements, the only citer (Step 3 of lem-per-ratliff-formal-catenarity) and the Stacks more-algebra.tex Tag 0AW3 proof, including the d=1 paragraph, all check out. The statement is unchanged and matches what the parent uses. No new nodes and no SGA. Step 1: lem-weil-pbc-adic-completion-noetherian and lem-weil-pbc-local-completion-local-ring apply as stated, so B is Noetherian and local with maximal ideal mB. Step 2: B_q is Noetherian (lem-weil-pbc-localization-noetherian); lem-weil-pbc-minimal-prime-localization-radical with I=0 gives √0=qB_q; lem-weil-pbc-fg-ideal-radical-power with K=0 gives (qB_q)^n=0, so q^n B_q=0. Step 3, marked elementary, which I accept: each case is a short check from the localization fraction definition and the definition of Krull dimension. For p not containing q, a power x^n is a unit at p and kills M, so M_p=0. At q, the fraction criterion gives M_q=0. A prime strictly between q and n would give a chain of length 2 in B/q, against dim(B/q)=1. So Supp(M) is contained in {n}. Step 4: lem-weil-pbc-finite-module-support-annihilator, lem-weil-pbc-zero-locus-eq-iff-radical-eq and lem-weil-pbc-fg-ideal-radical-power give n^c ⊆ Ann(J/J^2); the case M=0 is covered. Small cases: a DVR (n=c=1); k[[x,y]]/(xy) with q=(x) (n=1); k[[t,e]]/(e^2) needs n=2. Accepted tool use: lem-weil-pbc-adic-completion-noetherian, a generic Noetherianity tool that the unit has no replacement for. The grep over dag/nodes finds no duplicate: lem-per-conormal-torsion-algebraization and lem-weil-pbc-minimal-prime-reduced-localization-field are different statements. No fixes were needed."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.OneDimensionalComponentConormal",
+  "declaration": "Ideal.exists_pow_conormal_torsion_of_one_dimensional_component",
+  "file": "lean/Sheaf/RingTheory/OneDimensionalComponentConormal.lean",
+  "statement": "theorem exists_pow_conormal_torsion_of_one_dimensional_component {A : Type u} [CommRing A] [IsNoetherianRing A] [IsLocalRing A] [IsDomain A] (q : Ideal (AdicCompletion (IsLocalRing.maximalIdeal A) A)) [q.IsPrime] (hq : q ∈ minimalPrimes (AdicCompletion (IsLocalRing.maximalIdeal A) A)) (hdim : ringKrullDim ((AdicCompletion (IsLocalRing.maximalIdeal A) A) ⧸ q) = 1) : ∃ n c : ℕ, 1 ≤ n ∧ 1 ≤ c ∧ (q ^ n).map (algebraMap (AdicCompletion (IsLocalRing.maximalIdeal A) A) (Localization.AtPrime q)) = ⊥ ∧ ((IsLocalRing.maximalIdeal A).map (algebraMap A (AdicCompletion (IsLocalRing.maximalIdeal A) A))) ^ c ≤ Module.annihilator (AdicCompletion (IsLocalRing.maximalIdeal A) A) (q ^ n).Cotangent",
+  "branch": "newtargets-dag",
+  "by": "Q93",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ba1c4d6bd",
+  "group": "Q93",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0AW3 d=1 paragraph clause by clause: Noetherian local domain A, B=AdicCompletion (maximalIdeal A) A, q in minimalPrimes B (the IsPrime instance follows from it), ringKrullDim (B/q)=1, exists n c >= 1 with (q^n).map to Localization.AtPrime q = bottom and (mB)^c <= annihilator of (q^n).Cotangent (equivalent to (mB)^c(J/J^2)=0). No extra hypotheses or universe restriction. Edge cases q=0, A a field, nonreduced B, J/J^2=0 and several components all correct. No duplicate in Mathlib or side lean; only citer is ratliff-formal-catenarity Step 3. Node differs from live only in lean; lean.statement verbatim; docstrings carry source place, blueprint id and 4 proof steps; sorry-only; no line over 100; imports are statement plus proof-plan modules. nt_compile --json clean, 2.2 s, no warnings. No findings."
  }
 }
