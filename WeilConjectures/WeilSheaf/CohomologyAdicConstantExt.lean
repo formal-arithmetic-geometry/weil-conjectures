@@ -10,6 +10,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Preadditive.Injective.Resol
 public import WeilConjectures.SixFunctors.ProEtale.Adic.GlobalSectionsExt
 public import WeilConjectures.WeilSheaf.CohomologyResolution
 public import WeilConjectures.WeilSheaf.Constant
+public import WeilConjectures.CategoryTheory.Sites.SheafSmul
 
 /-!
 # Weil cohomology of the constant sheaf as pro-étale `Ext`
@@ -29,6 +30,7 @@ open CategoryTheory Limits Endofunctor Opposite Abelian
 namespace AlgebraicGeometry
 
 attribute [local instance 2000] CategoryWithHomology.hasHomology
+  ShortComplex.hasLeftHomology_of_hasHomology
 
 open ProEtale
 
@@ -156,6 +158,60 @@ noncomputable def extAddEquivHomology :
     (sectionsAddEquivOfIso (I.cocomplex.XIsoOfEq (CochainComplex.next ℕ r).symm))
     (sc_g_sectionsAddEquiv I r) (extMk_eq_zero_iff_sectionsAddEquiv I r)
 
+variable (k₀ l Y) in
+/-- Multiplication by a scalar `c ∈ ℚ̄_ℓ` on the underlying abelian sheaves of pro-étale Weil
+sheaves. -/
+@[simps]
+noncomputable def smulNatTrans (c : PadicAlgCl l) : forgetAb k₀ l Y ⟶ forgetAb k₀ l Y where
+  app M := (sheafForget₂ _ _).map (Sheaf.smulEnd M.carrier.X (ULift.up c))
+  naturality M M' φ := by
+    simp only [Functor.comp_map]
+    rw [← Functor.map_comp, ← Functor.map_comp]
+    exact congrArg _ (Sheaf.smulEnd_comp _ _).symm
+
+lemma sectionsAddEquiv_comp_smulNatTrans (c : PadicAlgCl l) {M : ProEtaleWeilSheaf k₀ l Y}
+    (f : constantIntSheaf _ ⟶ (forgetAb k₀ l Y).obj M) :
+    sectionsAddEquiv M (f ≫ (smulNatTrans k₀ l Y c).app M) =
+      (ULift.up c : ULift.{u + 1} (PadicAlgCl l)) • sectionsAddEquiv M f := by
+  refine (constantIntHomAddEquivΓ_comp f _).trans ?_
+  exact Sheaf.Γ_map_smulEnd.{u + 1} (J := Scheme.ProEt.topology _)
+    (Scheme.ProEt.isTerminalMkId _) _ _ _
+
+lemma extAddEquivHomology_extMk
+    (f : constantIntSheaf _ ⟶ (I.map (forgetAb k₀ l Y)).cocomplex.X r)
+    (hf : f ≫ (I.map (forgetAb k₀ l Y)).cocomplex.d r (r + 1) = 0)
+    (c : ((I.cocomplex.sc r).map (globalSectionsWeilFunctor k₀ l Y)).cycles)
+    (hc : ((I.cocomplex.sc r).map (globalSectionsWeilFunctor k₀ l Y)).iCycles c =
+      sectionsAddEquiv _ f) :
+    extAddEquivHomology I r ((I.map (forgetAb k₀ l Y)).extMk f (r + 1) rfl hf) =
+      ((I.cocomplex.sc r).map (globalSectionsWeilFunctor k₀ l Y)).homologyπ c :=
+  InjectiveResolution.extAddEquivHomology_extMk _ _ _ _ _ _ f hf c hc
+
+set_option maxRecDepth 4000 in
+set_option maxHeartbeats 1600000 in
+-- the terms of the image of a resolution are only definitionally the images of its terms
+/-- `extAddEquivHomology` is `ℚ̄_ℓ`-linear: multiplication by `c` on the coefficients corresponds
+to multiplication by `c` on the homology of the global sections. -/
+lemma extAddEquivHomology_comp_smul (c : PadicAlgCl l)
+    (x : Ext (constantIntSheaf _) ((forgetAb k₀ l Y).obj K) r) :
+    extAddEquivHomology I r (x.comp (Ext.mk₀ ((smulNatTrans k₀ l Y c).app K)) (add_zero r)) =
+      (ULift.up c : ULift.{u + 1} (PadicAlgCl l)) • extAddEquivHomology I r x := by
+  obtain ⟨f, hf, rfl⟩ := (I.map (forgetAb k₀ l Y)).extMk_surjective x (r + 1) rfl
+  obtain ⟨z, hz⟩ := ShortComplex.moduleCat_exists_iCycles
+    ((I.cocomplex.sc r).map (globalSectionsWeilFunctor k₀ l Y))
+    (sectionsAddEquiv _ f)
+    (InjectiveResolution.g_eq_zero_of_cocycle _ _ _ _ (sc_g_sectionsAddEquiv I r) _ hf)
+  rw [InjectiveResolution.extMk_comp_mk₀ f (r + 1) rfl hf
+    (InjectiveResolution.mapHomOfNatTrans (smulNatTrans k₀ l Y c) I),
+    extAddEquivHomology_extMk I r f hf z hz,
+    extAddEquivHomology_extMk I r _ _ ((ULift.up c : ULift.{u + 1} (PadicAlgCl l)) • z)
+      (by rw [map_smul, hz]; exact (sectionsAddEquiv_comp_smulNatTrans c f).symm), map_smul]
+
+lemma smulNatTrans_app_adicConstant (c : PadicAlgCl l) :
+    (smulNatTrans k₀ l Y c).app (ProEtaleWeilSheaf.adicConstant k₀ l Y) =
+      adicScalar l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber c :=
+  rfl
+
 /-- The Frobenius on the cocycles `ℤ ⟶ Iⁿ` of the complex computing `Ext(ℤ, K)`: the Frobenius of
 the global sections `Γ(Ȳ, Iⁿ)`. -/
 noncomputable def cocycleFrobenius (n : ℕ) :
@@ -232,6 +288,40 @@ theorem exists_addEquiv_adicConstantH_cohomology
   rw [ProEtaleWeilSheaf.extAddEquivHomology_extFrobenius]
   erw [LinearEquiv.apply_symm_apply, LinearEquiv.apply_symm_apply]
   rfl
+
+set_option maxHeartbeats 1600000 in
+-- `AdicConstantH` is only definitionally the `Ext` group of the underlying abelian sheaf
+/-- **Weil cohomology of `ℚ̄_ℓ` is pro-étale cohomology, `ℚ̄_ℓ`-linearly, with its Frobenius.**
+For an injective resolution `I` of the constant Weil sheaf,
+`Hʳ(Ȳ_proét, ℚ̄_ℓ) ≅ Hʳ(Y ⊗ k̄, ℚ̄_ℓ)` as `ℚ̄_ℓ`-vector spaces, the geometric Frobenius
+corresponding to the Frobenius `ProEtaleWeilSheaf.extFrobenius I r` induced by the Frobenius of
+the global sections of the terms of `I`. -/
+theorem exists_linearEquiv_adicConstantH_cohomology
+    (I : InjectiveResolution (WeilSheaf.adicConstant k₀ l Y).obj) (r : ℕ) :
+    ∃ Θ : AdicConstantH l (Y ↘ Spec (CommRingCat.of k₀)).geometricFiber r ≃ₗ[PadicAlgCl l]
+        ((WeilSheaf.adicConstant k₀ l Y).cohomology r).carrier,
+      ∀ x, Θ (ProEtaleWeilSheaf.extFrobenius I r x) =
+        ((WeilSheaf.adicConstant k₀ l Y).cohomology r).frobenius (Θ x) := by
+  obtain ⟨Θ, hΘ⟩ := exists_linearEquiv_cohomology_resolution (WeilSheaf.adicConstant k₀ l Y) I r
+  let Θa := (ProEtaleWeilSheaf.extAddEquivHomology I r).trans Θ.toAddEquiv.symm
+  have key (x : Abelian.Ext (ProEtale.constantIntSheaf _)
+      ((ProEtaleWeilSheaf.forgetAb k₀ l Y).obj (WeilSheaf.adicConstant k₀ l Y).obj) r) :
+      Θa (ProEtaleWeilSheaf.extFrobenius I r x) =
+        ((WeilSheaf.adicConstant k₀ l Y).cohomology r).frobenius (Θa x) := by
+    apply Θ.injective
+    rw [AddEquiv.trans_apply, AddEquiv.trans_apply, hΘ,
+      ProEtaleWeilSheaf.extAddEquivHomology_extFrobenius]
+    erw [LinearEquiv.apply_symm_apply, LinearEquiv.apply_symm_apply]
+    rfl
+  refine ⟨{ Θa with
+    map_smul' := fun c x ↦ ?_ }, fun x ↦ ?_⟩
+  · have hx : c • x = x.comp (Abelian.Ext.mk₀
+        ((ProEtaleWeilSheaf.smulNatTrans k₀ l Y c).app (WeilSheaf.adicConstant k₀ l Y).obj))
+        (add_zero r) := rfl
+    simp only [Θa, AddEquiv.toFun_eq_coe, RingHom.id_apply]
+    rw [hx, AddEquiv.trans_apply, ProEtaleWeilSheaf.extAddEquivHomology_comp_smul]
+    exact Θ.symm.map_smul c _
+  · exact key x
 
 end WeilSheaf
 
