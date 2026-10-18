@@ -1,0 +1,125 @@
+{
+ "id": "lem-cbc-proper-open-interchange-refinement-normalization",
+ "kind": "statement",
+ "title": "Refinement normalization of the canonical derived proper/open comparison",
+ "statement": "Let Λ be a finite commutative ring. For every commutative square with open horizontal maps k:A→B and i:C→D and proper vertical maps r:A→C and p:B→D, choose a natural isomorphism δ_Q:i!r*≅p*k!. Assume its composite with p* of the canonical inclusion k!→k*, followed by the direct-image compositor for k,p, equals the canonical inclusion i!→i* followed by the compositor for r,i, into (k≫p)*. No Cartesian hypothesis on this square is imposed. Let γ_Q be the canonical rightDerivedFunctorPlusBaseChange transformation attached to δ_Q on bounded-below derived categories of small-etale Λ-module sheaves. For p:T₁→T₂ proper and opens j₁:X→T₁ and j₂:X→T₂ with j₁≫p=j₂, the composite of j₂! applied to R(id_X)*≅id in the inverse direction with γ_(j₁,j₂,id_X,p) equals properOpenComparison, with the exact normalization specified in [def-weil-pbc-proper-open-comparison]. The derived categories, direct images, extension by zero, proper maps and open immersions are those of [def-weil-pbc-derived-categories], [def-weil-pbc-direct-image], [def-weil-pbc-extension-by-zero], [def-weil-proper-morphism] and [def-weil-open-immersion].",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B; the corresponding step of lem-cbc-proper-open-interchange-coherence"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-weil-pbc-proper-open-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Source: Stacks Project, More on Étale Cohomology, Tag 0F7B, refinement specialization.\n\nProof: Let V = T₁ ×[T₂] X, and let s : X → V be the section defined by (j₁,id).\nThe section is open and closed, since its composite with the open first projection is\nj₁ and it is a section of the proper second projection. Restrict the comparison to j₂.\nThe unit identity for rightDerivedFunctorPlusBaseChange computes it on an injective\nrepresentative by δ followed by the target derived unit. The assumed normalization\nof δ identifies the underlying sheaf map with extension by zero from the s-component:\nit is the identity on that component and zero on its complement. Under the canonical\nbase-change, extension-by-zero base-change and clopen-component restriction maps,\nthis is exactly the inverse of properOpenIdentification. The descended adjunction\nj₂! ⊣ j₂* identifies a map out of j₂!K with its restriction followed by the unit.\nThus the map is j₂! of that inverse followed by the counit, which is the definition\nof properOpenComparison. The lowerStar identity isomorphism removes R(id)_* with\nits canonical unit normalization. No Cartesian hypothesis on the original square is used.",
+   "uses": [
+    "def-weil-pbc-proper-open-comparison",
+    "lem-weil-pbc-derived-open-restriction",
+    "cor-cbc-derived-extension-zero-base-change",
+    "lem-weil-pbc-clopen-section-direct-image",
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proper-open-comparison",
+  "lem-weil-pbc-derived-open-restriction",
+  "cor-cbc-derived-extension-zero-base-change",
+  "lem-weil-pbc-clopen-section-direct-image",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof_origin": {
+  "by": "worker F4",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7B; the corresponding step of lem-cbc-proper-open-interchange-coherence",
+  "note": "Strict subargument of the parent: the ordinary isomorphism and derived invertibility are constructed in the parent, and are not assumed here."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A normalized proper open interchange natural isomorphism is compatible with refinement, horizontal and vertical composition, identities and pullback",
+   "results": "Eight generic categorical coherence hits, including CategoricalPullback.mkNatIso and FreeBicategory.normalize_naturality; none states the etale comparison. The source library has the conditional generic rightDerivedFunctorPlusBaseChange_cube, used for the base-change part.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedFunctorPlusBaseChange\"",
+   "results": "0 hits in Mathlib. Source PlusBaseChange supplies the construction and unit factorization, not these geometric normalizations.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "properOpenInterchange|rightDerivedFunctorPlusBaseChange_cube",
+   "results": "0 Mathlib hits. Local rg finds only the parent interchange declaration and its consumers; the source generic cube is proved and conditional on an ordinary cube.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normalized proper open interchange natural isomorphism is compatible with refinement, horizontal and vertical composition, identities and pullback",
+   "results": "Eight hits: NatIso.hcomp, generic categorical pullback and free bicategory/monoidal coherence, scheme open-cover refinement, and pullback shifts. None states the derived proper/open comparison or its normalization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProperOpenInterchangeCoherence",
+  "date": "2026-10-18",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-proper-open-interchange-coherence",
+   "place": "Tag 0F7B coherence step",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProperOpenInterchangeRefinementNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperOpenInterchangeRefinementNormalization.lean",
+  "declaration": "AlgebraicGeometry.Etale.properOpenInterchange_refinement_normalization",
+  "statement": "theorem properOpenInterchange_refinement_normalization\n    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]\n    (δ : ∀ {A B C D : Scheme.{u}} (k : A ⟶ B) (i : C ⟶ D) (r : A ⟶ C) (p : B ⟶ D) [IsOpenImmersion\n        k] [IsOpenImmersion i] [IsProper r] [IsProper p] (_h : k ≫ p = r ≫ i), (lowerStar\n        (ModuleCat.{u + 1} Λ) r) ⋙ (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) i) ≅\n        (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) k) ⋙ (lowerStar (ModuleCat.{u + 1} Λ) p))\n    (hδ : (∀ {A B C D : Scheme.{u}} (k : A ⟶ B) (i : C ⟶ D) (r : A ⟶ C) (p : B ⟶ D)\n      [IsOpenImmersion k]\n        [IsOpenImmersion i] [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i), ∀ (F : (Sheaf\n        A.smallEtaleTopology (ModuleCat.{u + 1} Λ))),\n      (δ k i r p h).hom.app F ≫ (lowerStar (ModuleCat.{u + 1} Λ) p).map\n        ((openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} Λ) k).app F) ≫\n        (lowerStarComp (ModuleCat.{u + 1} Λ) k p).hom.app F =\n      (openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} Λ) i).app ((lowerStar (ModuleCat.{u +\n        1} Λ) r).obj F) ≫\n        (lowerStarComp (ModuleCat.{u + 1} Λ) r i (k ≫ p) h).hom.app F)) :\n    (∀ {T₁ T₂ X : Scheme.{u}} (p : T₁ ⟶ T₂) [IsProper p]\n      (j₁ : X ⟶ T₁) (j₂ : X ⟶ T₂) [IsOpenImmersion j₁] [IsOpenImmersion j₂]\n      (h : j₁ ≫ p = j₂) (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1}\n        Λ))),\n      (openImmersionLowerShriek (ModuleCat.{u + 1} Λ) j₂).mapDerivedCategoryPlus.map\n        ((lowerStarIdDerivedPlus (ModuleCat.{u + 1} Λ) X).inv.app K) ≫\n        (Functor.rightDerivedFunctorPlusBaseChange (δ j₁ j₂ (𝟙 X) p (h.trans (Category.id_comp\n          j₂).symm)).hom).app K =\n      properOpenComparison Λ p j₁ j₂ h K)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261018T071150-L-1667247",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261018T071150-L-1667247",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
