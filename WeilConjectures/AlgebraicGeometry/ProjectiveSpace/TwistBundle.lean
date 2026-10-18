@@ -995,6 +995,89 @@ lemma hyperplane_appLE_coordRatio (i : α) (b : Option α) (h) :
     (hyperplaneSections α S) (span_hyperplaneSections α S) _ i (some i)
     (hyperplaneSections_some_s_self α S i) b h
 
+lemma reindexHom_hyperplane_appLE_coordRatio (e : α ≃ β) (i : α) (a : Option β) (h) :
+    ((standardOpen α S i).ι ≫ reindexHom S e ≫ hyperplane β S).appLE
+        (standardOpen (Option β) S (some (e i))) ⊤ h (coordRatio (Option β) S (some (e i)) a) =
+      (standardOpen α S i).topIso.inv ((hyperplaneSections α S (Option.map e.symm a)).s i) := by
+  have eD : (standardOpen α S i).topIso.inv =
+      (standardOpen α S i).ι.appLE (standardOpen α S i) ⊤ (Scheme.Opens.ι_preimage_self _).ge := by
+    rw [Scheme.Opens.ι_appLE]
+    rfl
+  have e₃ : standardOpen β S (e i) ≤
+      hyperplane β S ⁻¹ᵁ standardOpen (Option β) S (some (e i)) := by
+    rw [hyperplane_preimage_standardOpen_some]
+  have e₄ : standardOpen α S i ≤ reindexHom S e ⁻¹ᵁ standardOpen β S (e i) := by
+    rw [reindexHom_preimage_standardOpen, e.symm_apply_apply]
+  have e₅ : ⊤ ≤ ((standardOpen α S i).ι ≫ reindexHom S e) ⁻¹ᵁ standardOpen β S (e i) := by
+    rw [Scheme.Hom.comp_preimage, reindexHom_preimage_standardOpen, e.symm_apply_apply,
+      Scheme.Opens.ι_preimage_self]
+  rw [appLE_eq_of_eq (Category.assoc _ _ _).symm,
+    ← Scheme.Hom.appLE_comp_appLE _ _ _ (standardOpen β S (e i)) _ e₃ e₅,
+    CommRingCat.comp_apply, hyperplane_appLE_coordRatio]
+  cases a with
+  | none => simp [hyperplaneSections, Scheme.CoordinateCover.zeroSection]
+  | some b =>
+    rw [show (hyperplaneSections β S (some b)).s (e i) = coordRatio β S (e i) b by
+        simp only [hyperplaneSections, Scheme.CoordinateCover.coord_s,
+          standardCoordinateCover_ratio],
+      ← Scheme.Hom.appLE_comp_appLE _ _ _ (standardOpen α S i) _ e₄
+        (Scheme.Opens.ι_preimage_self _).ge,
+      CommRingCat.comp_apply, reindexHom_appLE_coordRatio S e i (e i) b (e.symm_apply_apply i),
+      ← eD]
+    simp only [Option.map_some, hyperplaneSections, Scheme.CoordinateCover.coord_s,
+      standardCoordinateCover_ratio]
+
+lemma hyperplane_reindexHom_appLE_coordRatio (e : α ≃ β) (i : α) (a : Option β) (h) :
+    ((standardOpen α S i).ι ≫ hyperplane α S ≫ reindexHom S (Equiv.optionCongr e)).appLE
+        (standardOpen (Option β) S (some (e i))) ⊤ h (coordRatio (Option β) S (some (e i)) a) =
+      (standardOpen α S i).topIso.inv
+        ((hyperplaneSections α S ((Equiv.optionCongr e).symm a)).s i) := by
+  have hopt : (Equiv.optionCongr e).symm (some (e i)) = some i :=
+    congrArg some (e.symm_apply_apply i)
+  have eD : (standardOpen α S i).topIso.inv =
+      (standardOpen α S i).ι.appLE (standardOpen α S i) ⊤ (Scheme.Opens.ι_preimage_self _).ge := by
+    rw [Scheme.Opens.ι_appLE]
+    rfl
+  have e₁ : standardOpen (Option α) S (some i) ≤ reindexHom S (Equiv.optionCongr e) ⁻¹ᵁ
+      standardOpen (Option β) S (some (e i)) := by
+    rw [reindexHom_preimage_standardOpen, hopt]
+  have e₂ : (standardOpen α S i) ≤ hyperplane α S ⁻¹ᵁ standardOpen (Option α) S (some i) := by
+    rw [hyperplane_preimage_standardOpen_some]
+  have e₅ : ⊤ ≤ ((standardOpen α S i).ι ≫ hyperplane α S) ⁻¹ᵁ
+      standardOpen (Option α) S (some i) := by
+    rw [Scheme.Hom.comp_preimage, hyperplane_preimage_standardOpen_some,
+      Scheme.Opens.ι_preimage_self]
+  rw [appLE_eq_of_eq (Category.assoc _ _ _).symm,
+    ← Scheme.Hom.appLE_comp_appLE _ _ _ (standardOpen (Option α) S (some i)) _ e₁ e₅,
+    CommRingCat.comp_apply, reindexHom_appLE_coordRatio S (Equiv.optionCongr e) (some i)
+      (some (e i)) a hopt,
+    ← Scheme.Hom.appLE_comp_appLE _ _ _ (standardOpen α S i) _ e₂
+      (Scheme.Opens.ι_preimage_self _).ge,
+    CommRingCat.comp_apply, hyperplane_appLE_coordRatio, ← eD]
+
+/-- Renaming the coordinates is compatible with the hyperplane embeddings. -/
+lemma hyperplane_comp_reindexHom (e : α ≃ β) :
+    hyperplane α S ≫ reindexHom S (Equiv.optionCongr e) = reindexHom S e ≫ hyperplane β S := by
+  refine Scheme.Opens.hom_ext_of_iSup_eq_top (fun i ↦ standardOpen α S i) (iSup_standardOpen α S)
+    _ _ fun i ↦ ?_
+  have hf₁ : ((standardOpen α S i).ι ≫ hyperplane α S ≫ reindexHom S (Equiv.optionCongr e)) ⁻¹ᵁ
+      standardOpen (Option β) S (some (e i)) = ⊤ := by
+    rw [Scheme.Hom.comp_preimage, Scheme.Hom.comp_preimage, reindexHom_preimage_standardOpen,
+      show (Equiv.optionCongr e).symm (some (e i)) = some i from
+        congrArg some (e.symm_apply_apply i),
+      hyperplane_preimage_standardOpen_some, Scheme.Opens.ι_preimage_self]
+  have hf₂ : ((standardOpen α S i).ι ≫ reindexHom S e ≫ hyperplane β S) ⁻¹ᵁ
+      standardOpen (Option β) S (some (e i)) = ⊤ := by
+    rw [Scheme.Hom.comp_preimage, Scheme.Hom.comp_preimage, hyperplane_preimage_standardOpen_some,
+      reindexHom_preimage_standardOpen, e.symm_apply_apply, Scheme.Opens.ι_preimage_self]
+  rw [eq_homOfSections_of_preimage_eq_top (Option β) S _ (some (e i)) hf₁,
+    eq_homOfSections_of_preimage_eq_top (Option β) S _ (some (e i)) hf₂]
+  congr 1
+  · simp
+  · funext a
+    rw [hyperplane_reindexHom_appLE_coordRatio, reindexHom_hyperplane_appLE_coordRatio]
+    rfl
+
 end Reindex
 
 end ProjectiveSpace

@@ -278,6 +278,40 @@ noncomputable def chernPow (h : constantComplex Λ X ⟶ (tateObject Λ X 1)⟦2
       ((derivedTensor (ModuleCat.{u + 1} Λ) X).obj _).map h ≫
       (shiftTateObjectAddIso Λ X a 1).hom ≫ eqToHom (by push_cast; rfl)
 
+omit [Finite Λ] in
+/-- Pullback along `f` of the identification `Λ(m)[2m] = Λ(m')[2m']` for `m = m'`. -/
+lemma leftDerivedUpperStar_map_eqToHom_tateObjectShift {Y : Scheme.{u}}
+    [HasInvertibleExponent Λ Y]
+    (f : X ⟶ Y) {m m' : ℤ} (hm : m = m')
+    (p : (tateObject Λ Y m)⟦2 * m⟧ = (tateObject Λ Y m')⟦2 * m'⟧)
+    (p' : (tateObject Λ X m)⟦2 * m⟧ = (tateObject Λ X m')⟦2 * m'⟧) :
+    (L((f)^*[ModuleCat.{u + 1} Λ])).map (eqToHom p) ≫ (leftDerivedUpperStarTateShiftIso Λ f m').hom =
+      (leftDerivedUpperStarTateShiftIso Λ f m).hom ≫ eqToHom p' := by
+  subst hm
+  simp
+
+omit [Finite Λ] in
+/-- **The cup powers are compatible with pullback**, inductive step: if `f^* (hᵃ) = (f^* h)ᵃ` then
+`f^* (hᵃ⁺¹) = (f^* h)ᵃ⁺¹`, by the compatibility of the diagonal, of the derived tensor product
+and of the identifications `Λ(a)[2a] ⊗ Λ(1)[2] ≅ Λ(a + 1)[2a + 2]` with pullback. -/
+lemma classRestriction_chernPow_succ {Y : Scheme.{u}} [HasInvertibleExponent Λ Y] (f : X ⟶ Y)
+    (h : constantComplex Λ Y ⟶ (tateObject Λ Y 1)⟦2 * (1 : ℤ)⟧) (a : ℕ)
+    (ih : VectorBundle.classRestriction Λ (r := a) f (chernPow h a) =
+      chernPow (VectorBundle.classRestriction Λ (r := 1) f h) a) :
+    VectorBundle.classRestriction Λ (r := a + 1) f (chernPow h (a + 1)) =
+      chernPow (VectorBundle.classRestriction Λ (r := 1) f h) (a + 1) := by
+  simp only [VectorBundle.classRestriction] at ih ⊢
+  rw [chernPow, chernPow, ← ih]
+  have hfold : ∀ {Z : Scheme.{u}}
+      {K K₁ M M₁ W : _root_.DerivedCategory (Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ))}
+      (x : K ⟶ K₁) (y : M ⟶ M₁) (z : _ ⟶ W),
+      ((derivedTensor _ Z).map x).app M ≫ ((derivedTensor _ Z).obj K₁).map y ≫ z =
+        derivedTensorHom _ x y ≫ z := fun _ _ _ ↦ by
+    simp only [derivedTensorHom, Category.assoc]
+  rw [hfold, hfold]
+  done
+
+
 end Powers
 
 variable {Λ n S}
@@ -1102,6 +1136,96 @@ theorem classRestriction_hyperplane_hyperplaneChernClass_eq {m : Type u} [Finite
       hyperplaneChernClass (hyperplaneClass Λ m aS) := by
   rw [classRestriction_hyperplane_hyperplaneChernClass,
     topChernClass_twistBundle_eq_hyperplaneChernClass]
+
+variable (S) in
+/-- Renaming the coordinates gives a cartesian square of hyperplanes. -/
+lemma isPullback_hyperplane_reindexHom {α β : Type u} (e : α ≃ β) :
+    IsPullback (reindexHom S e) (hyperplane α S) (hyperplane β S)
+      (reindexHom S (Equiv.optionCongr e)) := by
+  have : IsIso (reindexHom S e) := (reindexIso S e).isIso_hom
+  have : IsIso (reindexHom S (Equiv.optionCongr e)) :=
+    (reindexIso S (Equiv.optionCongr e)).isIso_hom
+  exact IsPullback.of_horiz_isIso ⟨(hyperplane_comp_reindexHom S e).symm⟩
+
+include aS in
+/-- **Transport of the hyperplane class** along the renaming of the coordinates: the restriction of
+the hyperplane class of `ℙ(Option β; S)` along `ℙ(Option α; S) ≅ ℙ(Option β; S)` is the hyperplane
+class of `ℙ(Option α; S)`. On the chart `D₊(Tᵢ)` it is the Kummer class of the pull-back
+`T_∗ / Tᵢ` of `T_∗ / T_{e i}`, so it is a hyperplane class (`eq_hyperplaneClass`). -/
+theorem restrictSupportedClass_reindex_hyperplaneClass {α β : Type u} [Finite α] [Finite β]
+    (e : α ≃ β) :
+    restrictSupportedClass (ModuleCat.{u + 1} Λ) (reindexHom S (Equiv.optionCongr e))
+        (hyperplane β S) (hyperplane α S) (reindexHom S e) (isPullback_hyperplane_reindexHom S e)
+        (leftDerivedUpperStarConstantComplexIso Λ _).inv
+        (leftDerivedUpperStarTateShiftIso Λ _ ((1 : ℕ) : ℤ)) (hyperplaneClass Λ β aS) =
+      hyperplaneClass Λ α aS := by
+  refine eq_hyperplaneClass aS fun i ↦ ?_
+  have hopt : (Equiv.optionCongr e).symm (some (e i)) = some i :=
+    congrArg some (e.symm_apply_apply i)
+  have hb₀ : Set.range ((standardOpen (Option α) S (some i)).ι ≫
+      reindexHom S (Equiv.optionCongr e)).base ⊆
+      Set.range (standardOpen (Option β) S (some (e i))).ι.base := by
+    rintro _ ⟨x, rfl⟩
+    rw [Scheme.Opens.range_ι]
+    have hx : x.1 ∈ reindexHom S (Equiv.optionCongr e) ⁻¹ᵁ
+        standardOpen (Option β) S (some (e i)) := by
+      rw [reindexHom_preimage_standardOpen, hopt]
+      exact x.2
+    exact hx
+  let b := IsOpenImmersion.lift _ _ hb₀
+  have hbι : b ≫ (standardOpen (Option β) S (some (e i))).ι =
+      (standardOpen (Option α) S (some i)).ι ≫ reindexHom S (Equiv.optionCongr e) :=
+    IsOpenImmersion.lift_fac _ _ _
+  have hv : b.appTop ((standardOpenIso (Option β) S (some (e i))).hom.appTop
+      (extraCoord β S (e i))) =
+      (standardOpenIso (Option α) S (some i)).hom.appTop (extraCoord α S i) := by
+    change b.appTop ((standardOpenIso _ S _).hom.appTop (AffineSpace.coord S ⟨none, by simp⟩)) =
+      (standardOpenIso _ S _).hom.appTop (AffineSpace.coord S ⟨none, by simp⟩)
+    rw [standardOpenIso_hom_appTop_coord, standardOpenIso_hom_appTop_coord]
+    have e₀ : (standardOpen (Option β) S (some (e i))).topIso.inv =
+        (standardOpen (Option β) S (some (e i))).ι.appLE (standardOpen (Option β) S (some (e i)))
+          ⊤ (Scheme.Opens.ι_preimage_self _).ge := by
+      rw [Scheme.Opens.ι_appLE]
+      rfl
+    have eD : (standardOpen (Option α) S (some i)).topIso.inv =
+        (standardOpen (Option α) S (some i)).ι.appLE (standardOpen (Option α) S (some i)) ⊤
+          (Scheme.Opens.ι_preimage_self _).ge := by
+      rw [Scheme.Opens.ι_appLE]
+      rfl
+    have e₂ : b.appTop = b.appLE ⊤ ⊤ le_top := by
+      rw [Scheme.Hom.appTop, Scheme.Hom.app_eq_appLE]
+      rfl
+    have e₁ : standardOpen (Option α) S (some i) ≤ reindexHom S (Equiv.optionCongr e) ⁻¹ᵁ
+        standardOpen (Option β) S (some (e i)) := by
+      rw [reindexHom_preimage_standardOpen, hopt]
+    rw [e₀, e₂, ← CommRingCat.comp_apply, Scheme.Hom.appLE_comp_appLE, appLE_eq_of_eq hbι,
+      ← Scheme.Hom.appLE_comp_appLE _ _ _ (standardOpen (Option α) S (some i)) _ e₁
+        (Scheme.Opens.ι_preimage_self _).ge,
+      CommRingCat.comp_apply, reindexHom_appLE_coordRatio S (Equiv.optionCongr e) (some i)
+        (some (e i)) none hopt, ← eD]
+    rfl
+  have hz := isPullback_zeroLocusSubschemeι b
+    (Set.range fun _ : Fin 1 ↦ (standardOpenIso (Option β) S (some (e i))).hom.appTop
+      (extraCoord β S (e i)))
+    (Set.range fun _ : Fin 1 ↦ (standardOpenIso (Option α) S (some i)).hom.appTop
+      (extraCoord α S i))
+    (by rw [← Set.range_comp]; exact congrArg Set.range (funext fun _ ↦ hv))
+  have : HasInvertibleExponent Λ (hyperplaneFrame α S i).U := .of_hom (hyperplaneFrame α S i).e
+  have : HasInvertibleExponent Λ (hyperplaneFrame β S (e i)).U :=
+    .of_hom (hyperplaneFrame β S (e i)).e
+  have hp := (hyperplaneFrame α S i).isPullback.paste_horiz (isPullback_hyperplane_reindexHom S e)
+  rw [frameRestriction, ← restrictSupportedClass_comp_tateShift Λ (hyperplaneFrame α S i).e
+    (reindexHom S (Equiv.optionCongr e)) _ rfl (hyperplane β S) (hyperplane α S) _
+    (reindexHom S e) (isPullback_hyperplane_reindexHom S e) (hyperplaneFrame α S i).toZ
+    (hyperplaneFrame α S i).isPullback _ hp]
+  refine (restrictSupportedClass_comp_tateShift Λ b (hyperplaneFrame β S (e i)).e
+    ((hyperplaneFrame α S i).e ≫ reindexHom S (Equiv.optionCongr e))
+    hbι.symm (hyperplane β S) _ _ (hyperplaneFrame β S (e i)).toZ
+    (hyperplaneFrame β S (e i)).isPullback _ hz _ hp (hyperplaneClass Λ β aS)).trans ?_
+  have hH := isHyperplaneClass_hyperplaneClass (Λ := Λ) aS (e i)
+  rw [frameRestriction] at hH
+  rw [hH, frameClass, frameClass]
+  exact restrictSupportedClass_kummerBoundaryProduct Λ b _ _ (fun _ ↦ hv) _ hz
 
 end TwistBundle
 
