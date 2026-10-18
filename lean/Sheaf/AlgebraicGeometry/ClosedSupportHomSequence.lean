@@ -1,0 +1,316 @@
+/-
+Copyright (c) 2026 The SHEAF contributors. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+Authors: SHEAF group K4
+-/
+module
+
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.GlobalSections
+public import Mathlib.CategoryTheory.Linear.Yoneda
+public import Mathlib.CategoryTheory.Linear.FunctorCategory
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
+
+import WeilConjectures.ConstructibleSheaf.Defs
+import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+import WeilConjectures.SixFunctors.OpenClosed.Exact
+
+/-!
+# The closed-support Hom sequence
+
+The ordinary injective-sheaf exact sequence used in the derived closed-support comparison.
+-/
+
+@[expose] public section
+set_option backward.isDefEq.respectTransparency false
+universe u
+open CategoryTheory CategoryTheory.Limits Opposite
+namespace CategoryTheory
+private lemma restriction_unit_formula
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    (U : C ⥤ D) (L : D ⥤ C) (B : C ⥤ E) (G : D ⥤ E)
+    (adj : U ⊣ L) (b : L ⋙ B ≅ G) {P : C} {PV : D} {M : E}
+    (c : U.obj P ≅ PV) (ηT : M ⟶ B.obj P) (ηV : M ⟶ G.obj PV)
+    (h : ηT ≫ B.map (adj.unit.app P ≫ L.map c.hom) ≫ b.hom.app PV = ηV)
+    {J : C} (f : P ⟶ J) :
+    ηT ≫ B.map f ≫ B.map (adj.unit.app J) ≫ b.hom.app (U.obj J) =
+      ηV ≫ G.map (c.inv ≫ U.map f) := by
+  have hb : ηT ≫ B.map (adj.unit.app P) ≫ b.hom.app (U.obj P) =
+      ηV ≫ G.map c.inv := by
+    apply (cancel_mono (G.map c.hom)).mp
+    simp only [Category.assoc, ← G.map_comp, c.inv_hom_id, Functor.map_id,
+      Category.comp_id]
+    rw [← b.hom.naturality]
+    dsimp only [Functor.comp_map]
+    rw [← B.map_comp_assoc]
+    exact h
+  have hn : f ≫ adj.unit.app J = adj.unit.app P ≫ L.map (U.map f) :=
+    adj.unit.naturality f
+  rw [← B.map_comp_assoc, hn, B.map_comp, Category.assoc]
+  have hbn : B.map (L.map (U.map f)) ≫ b.hom.app (U.obj J) =
+      b.hom.app (U.obj P) ≫ G.map (U.map f) := b.hom.naturality (U.map f)
+  rw [hbn, reassoc_of% hb, G.map_comp]
+private noncomputable def adjunctionHomLinearEquiv
+    (R : Type*) [Ring R] {C D : Type*} [Category C] [Category D]
+    [Preadditive C] [Preadditive D] [Linear R C] [Linear R D]
+    {F : C ⥤ D} {G : D ⥤ C} [F.Additive] [G.Linear R]
+    (adj : F ⊣ G) (X : C) (Y : D) : (F.obj X ⟶ Y) ≃ₗ[R] (X ⟶ G.obj Y) where
+  __ := adj.homAddEquiv X Y
+  map_smul' r f := by
+    change adj.unit.app X ≫ G.map (r • f) = r • (adj.unit.app X ≫ G.map f)
+    rw [Functor.map_smul, Linear.comp_smul]
+
+end CategoryTheory
+
+namespace AlgebraicGeometry.Etale
+private noncomputable def rankOneSectionsEquiv (A : Type (u + 1)) [CommRing A]
+    (T : Scheme.{u}) (J : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :
+    (((constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)).obj
+      (ModuleCat.of A A)) ⟶ J) ≃ₗ[A]
+      (Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} A)).obj J := by
+  let adj := constantSheafAdj T.smallEtaleTopology (ModuleCat.{u + 1} A) terminalIsTerminal
+  have : ((sheafSections T.smallEtaleTopology (ModuleCat.{u + 1} A)).obj
+      (op (⊤_ T.Etale))).Linear A := adj.right_adjoint_linear
+  let e : (((constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)).obj
+      (ModuleCat.of A A)) ⟶ J) ≃ₗ[A]
+      (ModuleCat.of A A ⟶ ((sheafSections T.smallEtaleTopology (ModuleCat.{u + 1} A)).obj
+        (op (⊤_ T.Etale))).obj J) :=
+    CategoryTheory.adjunctionHomLinearEquiv A adj (ModuleCat.of A A) J
+  exact (e.trans (ModuleCat.homLinearEquiv.trans
+    (LinearMap.ringLmapEquivSelf A A _))).trans
+      ((Sheaf.ΓNatIsoSheafSections T.smallEtaleTopology (ModuleCat.{u + 1} A)
+        terminalIsTerminal).app J).symm.toLinearEquiv
+
+private lemma rankOneSectionsEquiv_naturality (A : Type (u + 1)) [CommRing A]
+    (T : Scheme.{u}) {J J' : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)}
+    (k : J ⟶ J') (f : ((constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)).obj
+      (ModuleCat.of A A)) ⟶ J) :
+    rankOneSectionsEquiv A T J' (f ≫ k) =
+      (Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} A)).map k
+        (rankOneSectionsEquiv A T J f) := by
+  change (Sheaf.ΓNatIsoSheafSections T.smallEtaleTopology (ModuleCat.{u + 1} A)
+    terminalIsTerminal).inv.app J'
+      (((constantSheafAdj T.smallEtaleTopology (ModuleCat.{u + 1} A)
+        terminalIsTerminal).homEquiv _ _ (f ≫ k)) (1 : A)) =
+    (Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} A)).map k
+      ((Sheaf.ΓNatIsoSheafSections T.smallEtaleTopology (ModuleCat.{u + 1} A)
+        terminalIsTerminal).inv.app J
+        (((constantSheafAdj T.smallEtaleTopology (ModuleCat.{u + 1} A)
+          terminalIsTerminal).homEquiv _ _ f) (1 : A)))
+  rw [Adjunction.homEquiv_naturality_right]
+  exact congrArg (fun g ↦ g
+    (((constantSheafAdj T.smallEtaleTopology (ModuleCat.{u + 1} A)
+      terminalIsTerminal).homEquiv _ _ f) (1 : A)))
+    ((Sheaf.ΓNatIsoSheafSections T.smallEtaleTopology (ModuleCat.{u + 1} A)
+      terminalIsTerminal).inv.naturality k)
+
+private lemma unit_app_upperStarConstantSheafIso (A : Type (u + 1)) [CommRing A]
+    {V T : Scheme.{u}} (v : V ⟶ T) (a : ModuleCat.{u + 1} A) :
+    (constantSheafAdj T.smallEtaleTopology (ModuleCat.{u + 1} A)
+        terminalIsTerminal).unit.app a ≫
+      ((sheafSections T.smallEtaleTopology (ModuleCat.{u + 1} A)).obj
+        (op (⊤_ T.Etale))).map
+        ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) v).unit.app _ ≫
+          (lowerStar (ModuleCat.{u + 1} A) v).map
+            ((Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) v).hom.app a)) ≫
+      (lowerStarCompSheafSectionsTerminalIso (ModuleCat.{u + 1} A) v).hom.app _ =
+    (constantSheafAdj V.smallEtaleTopology (ModuleCat.{u + 1} A)
+      terminalIsTerminal).unit.app a := by
+  have := Adjunction.homEquiv_leftAdjointUniq_hom_app
+    (((constantSheafAdj T.smallEtaleTopology (ModuleCat.{u + 1} A)
+      terminalIsTerminal).comp (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) v)).ofNatIsoRight
+      (lowerStarCompSheafSectionsTerminalIso (ModuleCat.{u + 1} A) v))
+    (constantSheafAdj V.smallEtaleTopology (ModuleCat.{u + 1} A) terminalIsTerminal) a
+  rw [Adjunction.homEquiv_unit] at this
+  simp only [Adjunction.ofNatIsoRight_unit, NatTrans.comp_app,
+    Functor.whiskerLeft_app] at this
+  rw [← this, Scheme.upperStarConstantSheafIso]
+  simp only [Adjunction.comp_unit_app, Functor.map_comp, Category.assoc]
+  erw [← (lowerStarCompSheafSectionsTerminalIso (ModuleCat.{u + 1} A) v).hom.naturality]
+  rfl
+
+private lemma rankOneSections_restriction (A : Type (u + 1)) [CommRing A]
+    {V T : Scheme.{u}} (v : V ⟶ T)
+    (J : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))
+    (f : ((constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)).obj
+      (ModuleCat.of A A)) ⟶ J) :
+    globalSectionsUpperStarMap (ModuleCat.{u + 1} A) v J
+      (rankOneSectionsEquiv A T J f) =
+    rankOneSectionsEquiv A V ((upperStar (ModuleCat.{u + 1} A) v).obj J)
+      (((Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) v).app
+        (ModuleCat.of A A)).inv ≫ (upperStar (ModuleCat.{u + 1} A) v).map f) := by
+  let P := (constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)).obj
+    (ModuleCat.of A A)
+  let U := upperStar (ModuleCat.{u + 1} A) v
+  let B := (sheafSections T.smallEtaleTopology (ModuleCat.{u + 1} A)).obj
+    (op (⊤_ T.Etale))
+  let C := (sheafSections V.smallEtaleTopology (ModuleCat.{u + 1} A)).obj
+    (op (⊤_ V.Etale))
+  let b := lowerStarCompSheafSectionsTerminalIso (ModuleCat.{u + 1} A) v
+  let c := (Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) v).app
+    (ModuleCat.of A A)
+  let η := (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) v).unit
+  let ηT := (constantSheafAdj T.smallEtaleTopology (ModuleCat.{u + 1} A)
+    terminalIsTerminal).unit.app (ModuleCat.of A A)
+  let ηV := (constantSheafAdj V.smallEtaleTopology (ModuleCat.{u + 1} A)
+    terminalIsTerminal).unit.app (ModuleCat.of A A)
+  have hmap : ηT ≫ B.map f ≫ B.map (η.app J) ≫ b.hom.app (U.obj J) =
+      ηV ≫ C.map (c.inv ≫ U.map f) :=
+    CategoryTheory.restriction_unit_formula U (lowerStar (ModuleCat.{u + 1} A) v) B C
+      (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) v) b c ηT ηV
+        (unit_app_upperStarConstantSheafIso A v (ModuleCat.of A A)) f
+  let eT := Sheaf.ΓNatIsoSheafSections T.smallEtaleTopology (ModuleCat.{u + 1} A)
+    terminalIsTerminal
+  let eV := Sheaf.ΓNatIsoSheafSections V.smallEtaleTopology (ModuleCat.{u + 1} A)
+    terminalIsTerminal
+  have hr : (ηT ≫ B.map f ≫ eT.inv.app J) ≫
+      globalSectionsUpperStarMap (ModuleCat.{u + 1} A) v J =
+      ηV ≫ C.map (c.inv ≫ U.map f) ≫ eV.inv.app (U.obj J) := by
+    change (ηT ≫ B.map f ≫ eT.inv.app J) ≫
+      (eT.hom.app J ≫ B.map (η.app J) ≫ b.hom.app (U.obj J) ≫
+        eV.inv.app (U.obj J)) = _
+    simp only [Category.assoc, eT.inv_hom_id_app_assoc]
+    rw [reassoc_of% hmap]
+  change ((ηT ≫ B.map f ≫ eT.inv.app J) ≫
+      globalSectionsUpperStarMap (ModuleCat.{u + 1} A) v J) (1 : A) =
+    (ηV ≫ C.map (c.inv ≫ U.map f) ≫ eV.inv.app (U.obj J)) (1 : A)
+  exact congrArg (fun g ↦ g (1 : A)) hr
+
+end AlgebraicGeometry.Etale
+
+namespace CategoryTheory
+universe v u' w
+variable {C : Type u'} [Category.{v} C] [Abelian C]
+  (R : Type w) [Ring R] [Linear R C]
+private noncomputable def linearHomShortComplex (S : ShortComplex C) (J : C) :
+    ShortComplex (ModuleCat.{v} R) :=
+  ShortComplex.mk (((linearCoyoneda R C).map S.g.op).app J)
+    (((linearCoyoneda R C).map S.f.op).app J) (by
+      ext x
+      change S.f ≫ S.g ≫ x = 0
+      rw [← Category.assoc, S.zero, zero_comp])
+private lemma linearHomShortComplex_shortExact (S : ShortComplex C) (hS : S.ShortExact)
+    (J : C) [Injective J] : (linearHomShortComplex R S J).ShortExact := by
+  have := hS.mono_f
+  have := hS.epi_g
+  refine ModuleCat.shortComplex_shortExact _ ?_ ?_ ?_
+  · intro y
+    constructor
+    · intro h
+      obtain ⟨x, hx⟩ := CokernelCofork.IsColimit.desc' hS.gIsCokernel y h
+      exact ⟨x, hx⟩
+    · rintro ⟨x, rfl⟩
+      change S.f ≫ S.g ≫ x = 0
+      rw [← Category.assoc, S.zero, zero_comp]
+  · intro x y hxy
+    exact (cancel_epi S.g).1 hxy
+  · intro z
+    exact ⟨Injective.factorThru z S.f, Injective.comp_factorThru z S.f⟩
+end CategoryTheory
+
+namespace AlgebraicGeometry.Etale
+/-- Maps out of the closed constant sheaf form the kernel of restriction on an
+injective sheaf, naturally in the target sheaf.
+
+Source: Stacks Project, Etale Cohomology Tag 095L (the open–closed exact sequence),
+Modules on Sites Tag 03DI (extension by zero and its adjunction), and
+literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/
+lem-amb-closed-support-hom.md, proof steps 1 and 3.
+(blueprint: new-lem-amb-closed-support-hom-sequence).
+
+Proof: Apply the open–closed short exact sequence to the constant rank-one sheaf A_T.
+The canonical inverse-image identifications give the sequence
+0 → v_! A_V → A_T → i_* A_D → 0, whose maps are the counit and unit.
+Precomposition with the last map, followed by the identification
+Hom(A_T,J) ≅ Γ(T,J) sending a morphism to the image of 1, defines α.
+Associativity of composition proves naturality in J. The extension-by-zero
+adjunction identifies Hom(v_! A_V,J) with Γ(V,v^*J), and the counit formula
+identifies precomposition with the first map with the prescribed τ.
+The composite is zero because the open–closed sequence is a complex.
+Precomposition with its epimorphism is injective; a map from A_T which vanishes
+on v_! A_V factors uniquely through the cokernel i_* A_D. This is exactness
+at Γ(T,J). When J is injective, every map v_! A_V → J extends across the
+monomorphism v_! A_V → A_T, so τ is surjective. These arguments include the
+empty open or closed scheme and the zero coefficient ring. -/
+theorem closedSupportHomSequence (A : Type (u + 1)) [CommRing A]
+    {D V T : Scheme.{u}} (i : D ⟶ T) [IsClosedImmersion i]
+    (v : V ⟶ T) [IsOpenImmersion v]
+    (hcomp : Set.range v.base = (Set.range i.base)ᶜ)
+    (τ : Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} A) ⟶
+      upperStar (ModuleCat.{u + 1} A) v ⋙
+        Sheaf.Γ V.smallEtaleTopology (ModuleCat.{u + 1} A))
+    (hτ : ∀ J, τ.app J = globalSectionsUpperStarMap (ModuleCat.{u + 1} A) v J) :
+    ∃ (α : (linearCoyoneda A (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))).obj
+        (op ((lowerStar (ModuleCat.{u + 1} A) i).obj
+          ((constantSheaf D.smallEtaleTopology (ModuleCat.{u + 1} A)).obj
+            (ModuleCat.of A A)))) ⟶ Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} A))
+      (hzero : ∀ J, α.app J ≫ τ.app J = 0),
+      ∀ J, Injective J → (ShortComplex.mk (α.app J) (τ.app J) (hzero J)).ShortExact := by
+  classical
+  let P := (constantSheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)).obj
+    (ModuleCat.of A A)
+  have hicomp : Set.range i.base = (Set.range v.base)ᶜ := by
+    rw [hcomp, compl_compl]
+  let S := openClosedShortComplex (ModuleCat.{u + 1} A) v i
+    (disjoint_range_of_range_eq_compl v i hicomp) P
+  have hS : S.ShortExact := shortExact_openClosedShortComplex
+    (ModuleCat.{u + 1} A) v i P hicomp
+  let c := (lowerStar (ModuleCat.{u + 1} A) i).mapIso
+    ((Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) i).app (ModuleCat.of A A))
+  let g := S.g ≫ c.hom
+  let α : (linearCoyoneda A (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A))).obj
+      (op ((lowerStar (ModuleCat.{u + 1} A) i).obj
+        ((constantSheaf D.smallEtaleTopology (ModuleCat.{u + 1} A)).obj
+          (ModuleCat.of A A)))) ⟶ Sheaf.Γ T.smallEtaleTopology (ModuleCat.{u + 1} A) :=
+    { app J := ModuleCat.ofHom ((rankOneSectionsEquiv A T J).toLinearMap.comp
+        (Linear.leftComp A J g))
+      naturality J J' k := by
+        ext f
+        change rankOneSectionsEquiv A T J' (g ≫ f ≫ k) = _
+        rw [← Category.assoc, rankOneSectionsEquiv_naturality]
+        rfl }
+  let U := upperStar (ModuleCat.{u + 1} A) v
+  let a := openImmersionLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) v
+  have : U.Linear A := (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) v).left_adjoint_linear
+  let d := (Scheme.upperStarConstantSheafIso (ModuleCat.{u + 1} A) v).app
+    (ModuleCat.of A A)
+  let e₃ (J : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :
+      (S.X₁ ⟶ J) ≃ₗ[A] (Sheaf.Γ V.smallEtaleTopology (ModuleCat.{u + 1} A)).obj (U.obj J) :=
+    (CategoryTheory.adjunctionHomLinearEquiv A a (U.obj P) J).trans
+      ((Linear.homCongr A d (Iso.refl (U.obj J))).trans
+        (rankOneSectionsEquiv A V (U.obj J)))
+  have hβ (J : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) (f : P ⟶ J) :
+      τ.app J (rankOneSectionsEquiv A T J f) = e₃ J (S.f ≫ f) := by
+    rw [hτ]
+    erw [rankOneSections_restriction]
+    dsimp only [e₃, LinearEquiv.trans_apply, Linear.homCongr_apply]
+    apply congrArg (rankOneSectionsEquiv A V (U.obj J))
+    change d.inv ≫ U.map f = d.inv ≫ a.homEquiv _ _ (a.counit.app P ≫ f)
+    rw [Adjunction.homEquiv_naturality_right, ← Adjunction.homEquiv_symm_id]
+    erw [Equiv.apply_symm_apply, Category.id_comp]
+  have hzero (J : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) :
+      α.app J ≫ τ.app J = 0 := by
+    ext f
+    change τ.app J (rankOneSectionsEquiv A T J (g ≫ f)) = 0
+    rw [hβ]
+    have hz : S.f ≫ g ≫ f = 0 := by
+      dsimp only [g]
+      rw [← Category.assoc, ← Category.assoc, S.zero, zero_comp, zero_comp]
+    rw [hz, map_zero]
+  refine ⟨α, hzero, ?_⟩
+  intro J hJ
+  let := hJ
+  let e₁ := (Linear.homCongr A c (Iso.refl J)).toModuleIso
+  let e₂ := (rankOneSectionsEquiv A T J).toModuleIso
+  let e := ShortComplex.isoMk (S₁ := CategoryTheory.linearHomShortComplex A S J)
+    (S₂ := ShortComplex.mk (α.app J) (τ.app J) (hzero J))
+    e₁ e₂ (e₃ J).toModuleIso (by
+      ext f
+      change rankOneSectionsEquiv A T J (g ≫ ((c.inv ≫ f) ≫ 𝟙 J)) =
+        rankOneSectionsEquiv A T J (S.g ≫ f)
+      simp [g]) (by
+      ext f
+      exact hβ J f)
+  exact ShortComplex.shortExact_of_iso e
+    (CategoryTheory.linearHomShortComplex_shortExact A S hS J)
+end AlgebraicGeometry.Etale

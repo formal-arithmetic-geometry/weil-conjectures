@@ -25,92 +25,47 @@
  ],
  "proof": [
   {
-   "text": "Write $A_T,A_D,A_V$ for the constant coefficient ring sheaves (the commutative-ring convention of the derived-category definition). Apply [lem-weil-pbc-open-closed-short-exact] to the $A_T$-module $A_T$. By [prop-weil-pbc-inverse-image-modules-exact], $v^{-1}A_T=A_V$ and $i^{-1}A_T=A_D$, canonically. Thus obtain $0\\to v_!A_V\\xrightarrow{\\varepsilon}A_T\\xrightarrow{\\eta}i_*A_D\\to0$ in $A_T$-modules, with the adjunction counit and unit as its maps. This result applies to arbitrary open complements, with no finite-type hypothesis on $v$.",
+   "text": "Prove naturality of globalSectionsUpperStarMap directly from the adjunction unit and terminal-section identifications, and apply NatTrans.mapHomologicalComplex to obtain q with its required component formula. Apply [new-lem-amb-closed-support-hom-sequence] to get a natural underived kernel arrow alpha and short exactness on injective sheaves.",
    "uses": [
-    "lem-weil-pbc-open-closed-short-exact",
-    "prop-weil-pbc-inverse-image-modules-exact"
+    "new-lem-amb-closed-support-hom-sequence",
+    "def-weil-pbc-global-sections-functor"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 095L, lemma-ses-associated-to-open; constant coefficient inverse image as in Modules on Sites, Tag 04JC"
-   }
+   "elementary": true
   },
   {
-   "text": "The category $\\Mod(T_{\\Et},A)$ is Grothendieck abelian by [lem-weil-pbc-module-sheaves-grothendieck-abelian]. Apply [lem-pur-kinjective-degreewise-existence] in that category to choose a functorial quasi-isomorphism $K\\to I$ with $I$ K-injective and each $I^n$ injective. Put $C^n=\\Hom_T(i_*A_D,I^n)$, $E^n=\\Hom_T(A_T,I^n)$, and $B^n=\\Hom_T(v_!A_V,I^n)$, with differentials given by postcomposition with $d_I$. These are $A$-module complexes; the global Hom-complex convention is [def-weil-pbc-kinjective-resolutions].",
+   "text": "Apply [lem-pur-kinjective-degreewise-existence] to form the functorial resolution I=R(K). Map alpha termwise. The preceding short exact sequences in every degree give a short exact sequence of complexes C -> E -> B. Define the map C -> Cone(q)[-1] explicitly by inclusion in the shifted source summand. Identify it with the existing kernel comparison [lem-weil-degreewise-epi-kernel-cocone-qis] via the unique isomorphism from the kernel object; hence it is a quasi-isomorphism. Its naturality is the mappingCone.map formula on this summand.",
    "uses": [
-    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
     "lem-pur-kinjective-degreewise-existence",
+    "def-weil-pbc-kinjective-resolutions",
+    "lem-weil-degreewise-epi-kernel-cocone-qis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the already proved Functor.rightDerivedFunctorObjQIso of WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective to identify RF(QK) with Q(F(I)). Its naturality follows by composing the quotientCompQhIso naturalities and inverse naturality of the derived-functor unit. Compose with Q of the explicit quasi-isomorphism and Q.commShiftIso(-1). Naturality of the resolution, of the cone inclusion, and of the shift comparison gives exactly the required equation. No separate identification of the open term as a derived functor is needed by this concrete statement.",
+   "uses": [
+    "def-weil-abstract-derived-category",
     "def-weil-pbc-kinjective-resolutions"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Tag 079P, theorem-K-injective-embedding-grothendieck; Modules on Sites Tags 03DA, 03DB, 03EW"
-   }
-  },
-  {
-   "text": "Applying $\\Hom_T(-,I^n)$ to the sequence of step 1 gives $0\\to C^n\\to E^n\\xrightarrow{q^n}B^n\\to0$: a morphism vanishing on $v_!A_V$ factors uniquely through its cokernel $i_*A_D$, and surjectivity of $q^n$ is exactly the extension property defining the injective object $I^n$ [def-sp-injective-resolutions]. Postcomposition with $d_I$ commutes with precomposition, so these are a short exact sequence of complexes. The adjunction [lem-weil-pbc-extension-by-zero-adjunction] identifies $B^n$ with $\\Hom_V(A_V,v^*I^n)=\\Gamma(V,v^*I^n)$, and $E^n=\\Gamma(T,I^n)$: a module map out of the rank-one constant ring sheaf is determined by the image of $1$, and a section $s$ defines the map $a\\mapsto as$. These identifications commute with $d_I$. The counit formula in the adjunction node shows that $q$ is precisely restriction of sections, not an unspecified map between these complexes.",
-   "uses": [
-    "def-sp-injective-resolutions",
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "def-weil-pbc-constant-sheaf",
-    "def-weil-pbc-global-sections-functor"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 095L and 03S4; Modules on Sites Tag 03DI, lemma-extension-by-zero"
-   }
-  },
-  {
-   "text": "The restriction $v^*$ is exact by [prop-weil-pbc-inverse-image-modules-exact], and is right adjoint to the exact functor $v_!$ by [lem-weil-pbc-extension-by-zero-adjunction] and [lem-weil-pbc-extension-by-zero-exact]. Hence [lem-weil-pbc-right-adjoint-preserves-kinjective] says that $v^*I$ is K-injective, while exactness makes $v^*K\\to v^*I$ a quasi-isomorphism. Step 2 also applies with $V$ in place of $T$, so both sheaf categories have enough K-injectives. The K-injective computation [lem-weil-pbc-kinjective-total-derived] identifies $E=\\Gamma(T,I)$ with $R\\Gamma(T,K)$ and $B=\\Gamma(V,v^*I)$ with $R\\Gamma(V,v^*K)$ on the whole unbounded derived categories. Here termwise global sections, followed by localization to $D(A)$, is an exact functor on the homotopy category: it commutes with finite direct sums, shifts and the displayed cone differential. The same computation applied to $\\Hom_T(i_*A_D,-)$ identifies $C$ with ordinary global $R\\Hom_T(i_*A_D,K)$; termwise Hom from this fixed degree-zero sheaf likewise commutes with shifts and cones. Step 3 identifies the derived restriction morphism with $q:E\\to B$.",
-   "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-pbc-kinjective-total-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 08BJ (lemma-adjoint-preserve-K-injectives) and 070K (lemma-enough-K-injectives-implies)"
-   }
-  },
-  {
-   "text": "Use the cone convention of [def-weil-abstract-derived-category]. The complex $\\operatorname{Cone}(q)[-1]$ has degree-$n$ term $B^{n-1}\\oplus E^n$ and differential $(b,e)\\mapsto(-d_Bb-q(e),d_Ee)$. The map $C\\to\\operatorname{Cone}(q)[-1]$, $c\\mapsto(0,c)$, is a chain map and a quasi-isomorphism, as follows directly from degreewise surjectivity of $q$. For a cocycle $(b,e)$, choose $a\\in E^{n-1}$ with $q(a)=-b$; subtracting the boundary of $(0,a)$ leaves $(0,e-d_Ea)$ with $e-d_Ea\\in C^n$. Conversely, if $(0,c)$ is the boundary of $(b,e)\\in B^{n-2}\\oplus E^{n-1}$, then $q(e)=-d_Bb$; choose $a\\in E^{n-2}$ with $q(a)=b$, and $e+d_Ea\\in C^{n-1}$ has differential $c$. Thus the map induces bijections on every cohomology group. It is natural for chain maps $I\\to I'$, since it is just inclusion into the second summand. The functorial resolution from step 2 therefore gives naturality in $K$ at the complex level. To descend this naturality to derived categories, let $f:K\\to K\\prime$ be a quasi-isomorphism. Naturality of the resolution maps gives $I(f)\\eta_K=\\eta_{K\\prime}f$, so $I(f)$ is a quasi-isomorphism. By [lem-weil-pbc-kinjective-hom-derived] it is a homotopy equivalence. More explicitly, a homotopy $h:I^n\\to (I\\prime)^{n-1}$ with $f_I-g_I=d_{I\\prime}h+hd_I$ induces homotopies $h_C,h_E,h_B$ by postcomposition, and $q\\prime h_E=h_Bq$. On the shifted cones the degree-minus-one map $H(b,e)=(-h_Bb,h_Ee)$ satisfies $dH+Hd=(f_B-g_B)\\oplus(f_E-g_E)$: the off-diagonal term is $-q\\prime h_E+h_Bq=0$, and the diagonal terms are $d_Bh_B+h_Bd_B$ and $d_Eh_E+h_Ed_E$. Thus a homotopy inverse for $I(f)$ induces homotopy inverses on $C,E,B$ and the shifted cone, and inclusion $c\\mapsto(0,c)$ commutes with these maps. Both sides and their comparison therefore invert quasi-isomorphisms of $K$ and descend through localization. Combining this quasi-isomorphism with step 4 gives the asserted natural isomorphism in $D(A)$.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-kinjective-hom-derived"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-closed-support-hom.md",
-    "place": "Proof, final sentence; explicit signed cone and naturality calculation by NV"
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/KInjective.lean",
+    "place": "Functor.rightDerivedFunctorObjQIso; naturality of rightDerivedFunctorUnit"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-open-closed-short-exact",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "new-lem-amb-closed-support-hom-sequence",
+  "def-weil-pbc-global-sections-functor",
   "lem-pur-kinjective-degreewise-existence",
   "def-weil-pbc-kinjective-resolutions",
-  "def-sp-injective-resolutions",
-  "lem-weil-pbc-extension-by-zero-adjunction",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-global-sections-functor",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-kinjective-total-derived",
-  "def-weil-abstract-derived-category",
-  "lem-weil-pbc-kinjective-hom-derived"
+  "lem-weil-degreewise-epi-kernel-cocone-qis",
+  "def-weil-abstract-derived-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-closed-support-hom.md",
-  "place": "Proof, expanded using Stacks Tags 095L, 079P, 08BJ, 070K and an explicit cone calculation"
+  "place": "K4 stage 3: ordinary injective Hom sequence, existing kernel-cone comparison, and concrete natural K-injective derived-functor computation"
  },
  "mathlib_searches": [
   {
@@ -240,13 +195,8 @@
  },
  "tool_uses": [
   "lem-weil-pbc-open-closed-short-exact",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
   "lem-pur-kinjective-degreewise-existence",
-  "lem-weil-pbc-extension-by-zero-adjunction",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-kinjective-total-derived"
+  "lem-weil-pbc-extension-by-zero-adjunction"
  ],
  "reviewed": {
   "date": "2026-10-14",
@@ -274,5 +224,15 @@
   "date": "2026-10-15",
   "existing": false,
   "note": "Ordinary A-linear global RHom is the total right derived functor of linearCoyoneda from the degree-zero sheaf i_* A_D. The RHS uses the actual restriction map on the published functorial K-injective resolution, followed by the ordinary ModuleCat localization and shift. Its component formula uniquely specifies q; the final equation is naturality in K. No boundedness or finite-type hypothesis is added."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261018T092207-L-3361999",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
