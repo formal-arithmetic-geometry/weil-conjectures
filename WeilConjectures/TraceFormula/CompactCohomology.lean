@@ -414,9 +414,10 @@ theorem nonempty_hasRightDual_compactCohomology [IsSepClosed k]
       ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj K)) :=
   sorry
 
-/-- **Perfectness of the geometric stalks**: for `k` separably closed, the stalk `K_x̄ = Lx^* K`
-of a bounded constructible complex at a rational point is a perfect complex, that is a
-dualizable object of `Dᵇc(s)⟦ℚ̲̄_ℓ⟧`. -/
+/-- **Perfectness of the geometric stalks** (blueprint `prop-trf-compact-support-perfectness`,
+clause on derived geometric stalks; section `sec-smooth-purity`): for `k` separably closed,
+the stalk `K_x̄ = Lx^* K` of a bounded constructible complex at a rational point is a perfect
+complex, that is a dualizable object of `Dᵇc(s)⟦ℚ̲̄_ℓ⟧`. -/
 theorem nonempty_hasRightDual_stalk [IsSepClosed k]
     (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) (x : RationalPoint X) :
     Nonempty (HasRightDual
