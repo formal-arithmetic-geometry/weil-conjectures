@@ -2,7 +2,7 @@
  "id": "lem-pur-flag-pullback-injective",
  "kind": "statement",
  "title": "Injectivity of complete-flag pullback with arbitrary support",
- "statement": "Use [def-pur-conventions] at finite coefficients, the supported groups [def-pur-support-cohomology] and twists [def-coefficient-twists-detailed]. Let $F$ be a finite locally free module on a separated finite-type $k$-scheme $T$, let $p:T'=\\operatorname{Fl}_T(F)\\to T$ be [def-pur-complete-flag-bundle], and let $Z\\hookrightarrow T$ be any closed subscheme. For every degree $b$ and twist $a$, pullback is a split injection\n$$p^*:H^b_Z(T,A(a))\\longrightarrow H^b_{Z\\times_TT'}(T',A(a)).$$\nThe splitting is induced by projection onto the degree-zero summand of the iterated decomposition of $Rp_*A_{T'}$ in [thm-pur-projective-bundle-formula], under the projection formula. No regularity or smoothness of $Z$ is assumed.",
+ "statement": "Use [def-pur-conventions] at finite coefficients, the supported groups [def-pur-support-cohomology] and twists [def-coefficient-twists-detailed]. Let $r\\geq0$ and let $F$ be a finite locally free module of constant rank $r$ [def-amb-finite-locally-free-module] on a separated finite-type $k$-scheme $T$, let $p:T'=\\operatorname{Fl}_T(F)\\to T$ be [def-pur-complete-flag-bundle], and let $Z\\hookrightarrow T$ be any closed subscheme. For every degree $b$ and twist $a$, pullback is a split injection\n$$p^*:H^b_Z(T,A(a))\\longrightarrow H^b_{Z\\times_TT'}(T',A(a)).$$\nThe splitting is induced by projection onto the degree-zero summand of the iterated decomposition of $Rp_*A_{T'}$ in [thm-pur-projective-bundle-formula], under the projection formula. No regularity or smoothness of $Z$ is assumed.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-localized-top-chern.proof.md",
   "place": "Step 1: the flag-bundle pullback is injective (arbitrary closed support)"
@@ -11,12 +11,109 @@
   "def-pur-conventions",
   "def-pur-support-cohomology",
   "def-coefficient-twists-detailed",
+  "def-amb-finite-locally-free-module",
   "def-pur-complete-flag-bundle",
   "thm-pur-projective-bundle-formula"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $r=0$ or $r=1$, [def-pur-complete-flag-bundle] makes $p$ the identity, so the identity splits every supported pullback. For $r\\geq2$ the same recursive definition expresses $p$ as a finite tower\n$$T'=T_s\\xrightarrow{q_s}T_{s-1}\\longrightarrow\\cdots\\xrightarrow{q_1}T_0=T,$$\nwhere each $q_j$ is the projectivization of a locally free module of positive constant rank. The tautological kernel used for the next stage has rank one less. By [lem-pur-projective-bundle-tautological-geometry] each stage is proper and locally a projective-space bundle; the standard affine charts are polynomial affine spaces over affine base charts. Consequently the intermediate schemes remain separated and of finite type over $k$, as required for the projective-bundle formula. Put $Z_j=Z\\times_TT_j$. It remains to construct the prescribed splitting for a single stage $q:P\\to B$ and an arbitrary closed $C\\hookrightarrow B$.",
+   "uses": [
+    "def-pur-complete-flag-bundle",
+    "lem-pur-projective-bundle-tautological-geometry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-localized-top-chern.proof.md",
+    "place": "Step 1: degree-zero projective-bundle splitting with arbitrary closed support; explicit adjunction calculation"
+   }
+  },
+  {
+   "text": "We record the coefficient comparisons needed below, for all integers $a$. Choose $N$ with $\\ell^NA=0$. Write $L^{\\mathrm{et}}_S(a)$ for the etale Tate lines of [lem-asd-etale-finite-twist-pullback] with $m=\\ell^N$. The statement of [lem-pur-kummer-additivity] specifies the projection-induced identification $\\nu_S^*L^{\\mathrm{et}}_S(1)\\cong A_S(1)$ for every such killing exponent. Tensor powers give the same identification for $a>0$ by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], and $a=0$ is the constant coefficient unit. For $a<0$, apply inverse image to the evaluation between a positive tensor power and its dual: on a cover where the positive line is free of rank one this is the multiplication pairing $A\\otimes_A A\\to A$, whose dual comparison is the identity. Hence it is an isomorphism and gives the prescribed negative twist. The etale lines are locally constant finite free lines by [lem-asd-etale-finite-twist-pullback], so their pro-etale realizations are bounded constructible complexes in degree zero. That node's functorial pullback isomorphisms, together with [lem-weil-pbc-comparison-pullback], identify $Lq^*A_B(a)$ with $A_P(a)$. In particular these coefficients satisfy both the etale-origin requirement of supported-Hom pullback and the constructibility requirement of the finite-ring projection formula. No freeness of $A$ over $\\mathbf Z/\\ell^N$ is used.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-pur-kummer-additivity",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-localized-top-chern.proof.md",
+    "place": "Step 1: degree-zero projective-bundle splitting with arbitrary closed support; explicit adjunction calculation"
+   }
+  },
+  {
+   "text": "Suppose the bundle defining $q$ has rank $d+1$. By [thm-pur-projective-bundle-formula] there is an isomorphism\n$$\\Phi:\\bigoplus_{e=0}^{d}A_B(-e)[-2e]\\xrightarrow{\\sim}Rq_*A_P.$$\nIts $e=0$ component is the adjoint of the identity of $A_P$, since $h^0=1$. By the adjunction $Lq^*\\dashv Rq_*$ of [def-weil-pbc-proetale-operations], this component is the unit $\\eta_{A_B}:A_B\\to Rq_*A_P$. Define $r_0=\\operatorname{pr}_0\\Phi^{-1}$. The biproduct identity $\\operatorname{pr}_0\\operatorname{in}_0=1$ gives $r_0\\eta_{A_B}=1$. Thus it is the actual adjunction unit, rather than an unspecified copy of $A_B$, that the degree-zero projection retracts.",
+   "uses": [
+    "thm-pur-projective-bundle-formula",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-localized-top-chern.proof.md",
+    "place": "Step 1: degree-zero projective-bundle splitting with arbitrary closed support; explicit adjunction calculation"
+   }
+  },
+  {
+   "text": "Put $L=A_B(a)$. Apply [lem-sp-finite-ring-compact-support-projection] with $f=q$, identity open immersion in its proper compactification, $M=A_P$ and $K=L$. The ring $A$ is finite and killed by a power of $\\ell$, $q$ is proper, and the two inputs are bounded constructible. It gives the canonical isomorphism\n$$\\pi:(Rq_*A_P)\\otimes_A^L L\\xrightarrow{\\sim}Rq_*Lq^*L.$$\nDefine $r_L=(r_0\\otimes1_L)\\pi^{-1}:Rq_*Lq^*L\\to L$. The defining counit formula for $\\pi$ in the cited node shows\n$$\\pi\\circ(\\eta_{A_B}\\otimes1_L)=\\eta_L.$$\nIndeed the adjunct of the left side is $(\\varepsilon_{A_P}\\circ Lq^*\\eta_{A_B})\\otimes1_{Lq^*L}=1_{Lq^*L}$ by the triangle identity in [def-weil-pbc-proetale-operations], which also characterizes the adjunct of $\\eta_L$. Therefore $r_L\\eta_L=(r_0\\eta_{A_B})\\otimes1_L=1_L$. This verifies the needed normalization under the projection formula explicitly.",
+   "uses": [
+    "lem-sp-finite-ring-compact-support-projection",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-localized-top-chern.proof.md",
+    "place": "Step 1: degree-zero projective-bundle splitting with arbitrary closed support; explicit adjunction calculation"
+   }
+  },
+  {
+   "text": "Let $i:C\\hookrightarrow B$, $i':C'=C\\times_BP\\hookrightarrow P$, and $M=i_*A_C$. By [lem-pur-supported-hom] the source is $\\operatorname{Hom}(M,L[b])$. By [lem-pur-supported-hom-pullback], the closed exchange $c:Lq^*M\\xrightarrow{\\sim}i'_*A_{C'}$ identifies supported pullback with $\\alpha\\mapsto Lq^*\\alpha\\circ c^{-1}$. This applies to $L$ by the etale-origin comparisons in step 2. The adjunction of [def-weil-pbc-proetale-operations] consequently identifies the target supported group with\n$$\\operatorname{Hom}\\bigl(M,(Rq_*Lq^*L)[b]\\bigr).$$\nUnder this identification the pulled-back $\\alpha$ becomes $Rq_*(Lq^*\\alpha)\\circ\\eta_M=\\eta_{L[b]}\\circ\\alpha$, by naturality of the adjunction unit, using the canonical shift comparisons. Define $s_q$ on this Hom group by postcomposition with $r_L[b]$. Then $s_q(q^*\\alpha)=r_L[b]\\eta_{L[b]}\\alpha=\\alpha$. All maps are additive, hence $s_q$ is a homomorphism of abelian groups. The support is arbitrary: neither this adjunction nor the cited supported-Hom comparison requires $C$ regular or smooth.",
+   "uses": [
+    "lem-pur-supported-hom",
+    "lem-pur-supported-hom-pullback",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-localized-top-chern.proof.md",
+    "place": "Step 1: degree-zero projective-bundle splitting with arbitrary closed support; explicit adjunction calculation"
+   }
+  },
+  {
+   "text": "Apply step 5 to $(q_j,Z_{j-1})$ throughout the tower and set $s=s_{q_1}\\circ\\cdots\\circ s_{q_s}$. The canonical module pullback comparison of [lem-pur-proetale-module-pullback-composition] is the comparison of left adjoints, so, after applying the exact pullbacks termwise as in [def-weil-pbc-proetale-operations], its adjunct identifies the unit for a composite with the composite units. Together with the formula for supported pullback in [lem-pur-supported-hom-pullback], this gives $p^*=q_s^*\\cdots q_1^*$. Adjacent cancellations $s_{q_j}q_j^*=1$ now give $s p^*=1$.\nFinally [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] identifies $Rp_*$ with the iterated $Rq_{j,*}$. Iterating the projective-bundle decompositions of step 3 and the projection-formula identifications of step 4 expands it into a finite sum of shifted twists indexed by tuples $(e_1,\\ldots,e_s)$ with each $e_j\\geq0$. The all-zero tuple gives $A_T$; every other tuple has strictly positive $\\sum e_j$ and shift $-2\\sum e_j$. Projecting successively onto $e_s=0,\\ldots,e_1=0$ is exactly projection onto that all-zero summand, because each stage projection kills precisely its other biproduct components. The maps $s_{q_j}$ were defined from those very projections, so $s$ is the splitting prescribed in the statement. This finishes the proof for every $a,b$.",
+   "uses": [
+    "lem-pur-proetale-module-pullback-composition",
+    "def-weil-pbc-proetale-operations",
+    "lem-pur-supported-hom-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-localized-top-chern.proof.md",
+    "place": "Step 1: degree-zero projective-bundle splitting with arbitrary closed support; explicit adjunction calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-complete-flag-bundle",
+  "lem-pur-projective-bundle-tautological-geometry",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-pur-kummer-additivity",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-comparison-pullback",
+  "thm-pur-projective-bundle-formula",
+  "def-weil-pbc-proetale-operations",
+  "lem-sp-finite-ring-compact-support-projection",
+  "lem-pur-supported-hom",
+  "lem-pur-supported-hom-pullback",
+  "lem-pur-proetale-module-pullback-composition",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-localized-top-chern.proof.md",
+  "place": "Step 1: degree-zero projective-bundle splitting with arbitrary closed support; explicit adjunction calculation"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -45,10 +142,45 @@
    "results": "{\"t\": \"2026-10-18T02:15:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"Projectivization\\\", \\\"map\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Projectivization.map_id\", \"Projectivization.map\", \"Projectivization.map_injective\", \"Projectivization.map_comp\", \"Projectivization.map_mk\"], \"digest\": \"9f784940fe5715bd\"}",
    "date": "2026-10-18",
    "verdict": "no match: hits concern different notions; none states this supported-cohomology or scheme-theoretic construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullback on cohomology with arbitrary closed support is split injective for a complete flag bundle by the projective bundle theorem",
+   "results": "{\"t\": \"2026-10-18T02:36:29Z\", \"tool\": \"leanfinder\", \"query\": \"Pullback on cohomology with arbitrary closed support is split injective for a complete flag bundle by the projective bundle theorem\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι\", \"Profinite.NobelingProof.succ_exact\", \"CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective\", \"Profinite.NobelingProof.CC_exact\", \"Profinite.NobelingProof.succ_mono\", \"CochainComplex.isSplitMono_from_singleFunctor_obj_of_injective\", \"groupCohomology.instMonoModuleCatFH1InfRes\", \"CochainComplex.isKInjective_of_injective_aux\"], \"digest\": \"d3004133a1382f24\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits are Proj affine-chart identities, profinite Nobeling statements, and chain-complex splitting results with unrelated hypotheses."
+  },
+  {
+   "tool": "grep",
+   "query": "projective.*bundle|flag.*bundle|cohomology.*support",
+   "results": "{\"t\": \"2026-10-18T02:36:35Z\", \"tool\": \"grep\", \"query\": \"projective.*bundle|flag.*bundle|cohomology.*support\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no projective-bundle, flag-bundle or supported-cohomology theorem in AlgebraicGeometry."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Projectivization\", \"map\"",
+   "results": "{\"t\": \"2026-10-18T02:36:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"Projectivization\\\", \\\"map\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Projectivization.map_id\", \"Projectivization.map\", \"Projectivization.map_injective\", \"Projectivization.map_comp\", \"Projectivization.map_mk\"], \"digest\": \"9f784940fe5715bd\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: Projectivization.map and its laws concern projective spaces of vector spaces, not flag bundles or sheaf cohomology."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology with closed supports splitting principle projective bundle formula",
+   "results": "{\"t\": \"2026-10-18T02:36:47Z\", \"tool\": \"leansearch\", \"query\": \"Etale cohomology with closed supports splitting principle projective bundle formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"Algebra.exists_etale_of_isEtaleAt\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"Algebra.etaleLocus_eq_compl_support\", \"Algebra.Etale.recOn\", \"Algebra.FormallyEtale.instTensorProduct\", \"Algebra.isOpen_etaleLocus\"], \"digest\": \"877c5ca82f83d4f9\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern etale ring morphisms and the etale topology, not supported sheaf cohomology or the projective-bundle theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adjunction unit for the pullback along an iterated projective bundle admits a retraction given by the zeroth Chern power summand",
+   "results": "{\"t\": \"2026-10-18T02:36:48Z\", \"tool\": \"leanfinder\", \"query\": \"The adjunction unit for the pullback along an iterated projective bundle admits a retraction given by the zeroth Chern power summand\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Proj.pullbackAwayιIso\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc\", \"AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right_assoc\"], \"digest\": \"e4b4d6d377e5013a\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits are affine charts of Proj and do not give a splitting of sheaf direct images or supported cohomology."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-pur-localized-top-chern",
@@ -65,5 +197,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-pur-flag-pullback-injective",
+  "worker": "stage1",
+  "summary": "STATEMENT-DISPUTED (typing): the imported statement omitted constant rank, required by its referenced flag-bundle definition. Made rank r>=0 explicit, faithfully to the parent source's rank-r vector bundle. Gave six proof steps: recursive projective tower, finite twist comparisons, degree-zero unit retractions, normalized projection-formula calculation, and explicit supported-Hom adjunction left inverse. Reused existing nodes; no new nodes. Checked arbitrary closed support, every twist and degree, empty schemes and ranks zero and one.",
+  "blueprint": "Realizes Step 1 of thm-pur-localized-top-chern.proof.md in main-20261015: iterated projective-bundle decomposition, projection onto its degree-zero summand, and the projection-formula left inverse. The supported-Hom calculation supplies the omitted argument for arbitrary closed support.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-supported-hom",
+    "why": "Identifies arbitrary closed-support groups with Hom from the closed constant sheaf; no purity hypothesis on the support is introduced."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Supplies finite etale coefficient lines and their pullback for every integer twist and every killing exponent; only coefficient bookkeeping is used."
+   },
+   {
+    "node": "lem-pur-kummer-additivity",
+    "why": "Uses only its specified etale-to-pro-etale identification of the finite twist, valid for every killing exponent, to check the etale-origin hypothesis."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Carries tensor powers of the finite twist through exact comparison inverse image; no alternative geometric proof route is used."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Transfers the finite etale twist pullback comparison to ordinary pro-etale modules."
+   },
+   {
+    "node": "lem-sp-finite-ring-compact-support-projection",
+    "why": "The generic proper finite-ring projection formula with identity open compactification tensors the degree-zero retraction by the Tate line."
+   },
+   {
+    "node": "lem-pur-supported-hom-pullback",
+    "why": "Its normalized supported-Hom formula identifies the actual pullback on arbitrary support with the adjunction-unit map."
+   },
+   {
+    "node": "lem-pur-proetale-module-pullback-composition",
+    "why": "Identifies the composite of stage pullbacks with flag pullback using the canonical constant-coefficient module adjunctions."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Identifies Rp_* with the iterated direct images, so the successive projections are the all-zero summand of the iterated bundle decomposition."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-supported-hom",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-pur-kummer-additivity",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-sp-finite-ring-compact-support-projection",
+  "lem-pur-supported-hom-pullback",
+  "lem-pur-proetale-module-pullback-composition",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q38-0ec2116f7",
+  "group": "Q38",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-0ec2116f7 (reviewer sub-agent of L); spot-checked: I read the item, every cited statement, blueprint Step 1 of thm-pur-localized-top-chern (main-20261015) and Stacks 0F0G. No new nodes. (1) Statement: the delivery adds constant rank r>=0 because def-pur-complete-flag-bundle needs it; the parent assumes a rank-r bundle, so this is a typing correction, not a weakening, and the report names it. The extension to all b, a and any closed Z is harmless. (2) The steps check against the cited statements. Step 1: the tower has ranks r..2, each stage is proper by the tautological-geometry lemma, so every stage is in the domain of the projective-bundle formula. Step 2: the twist identification is in the statement of kummer-additivity, which gives the etale-origin and constructibility hypotheses used later. Step 3: the e=0 component is the unit. Step 4: lem-sp-finite-ring-compact-support-projection applies with j=id; its hypotheses hold (finite ring killed by a power of l, q proper, bounded constructible inputs), and the triangle identity gives pi(eta tensor 1)=eta_L. Step 5: the supported-Hom pullback formula plus adjunction naturality give a left inverse. Step 6: the units compose and the all-zero tuple is the only shift-0 summand. Small cases checked: r=0,1,2; Z empty; Z=T. No duplicate: rg over dag/nodes found only lem-pur-chern-flag-formula, a different statement. The worker's tool_uses are accepted. (3) Batch-5 check on lem-sp-finite-ring-compact-support-projection: it is outside the assumptions. Neither assumption gives a finite-ring proper projection formula. The node reached in sec-poincare-duality (lem-pod-lisse-module-sheaves-as-module-objects) is a general lemma that lisse sheaves are module objects in FLC(Y), used by proper base change. Smooth purity itself is in the stmt_deps of nt-assume-poincare-duality (nt-target-smooth-purity-qbar), so its proof legitimately belongs to batch 5. No fixes."
  }
 }
