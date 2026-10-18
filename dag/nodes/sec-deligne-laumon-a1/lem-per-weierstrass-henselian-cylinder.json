@@ -17,9 +17,157 @@
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-faithfully-flat-ring-map"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $k=\\Lambda/\\mathfrak m_\\Lambda$, $D=\\Lambda[[t_1,\\ldots,t_{r-1}]]$ and regroup coefficients to identify $R=D[[T]]$. By [lem-weil-pbc-power-series-noetherian], [lem-weil-pbc-power-series-local-ring] and [lem-weil-pbc-power-series-complete-over-complete-base], both $D$ and $R$ are Noetherian complete local rings, with maximal ideals $(\\mathfrak m_\\Lambda,t_1,\\ldots,t_{r-1})$ and $(\\mathfrak m_\\Lambda,t_1,\\ldots,t_{r-1},T)$ respectively. The regrouping sends the coefficient at $(e_1,\\ldots,e_r)$ to the coefficient of $t_1^{e_1}\\cdots t_{r-1}^{e_{r-1}}$ in the coefficient of $T^{e_r}$; finite convolution gives multiplicativity. These statements include $r=1$, when $D=\\Lambda$.",
+   "uses": [
+    "lem-weil-pbc-power-series-noetherian",
+    "lem-weil-pbc-power-series-local-ring",
+    "lem-weil-pbc-power-series-complete-over-complete-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V 1.1.1, setup; the complete-local hypotheses in V 1.1.3."
+   }
+  },
+  {
+   "text": "The coefficientwise reduction of $f$ is nonzero: since $\\mathfrak m_\\Lambda$ is finitely generated, a series all of whose coefficients lie in it is a sum of its finitely many generators times series, hence belongs to $\\mathfrak m_\\Lambda R$. In the nonzero series $\\bar f\\in k[[t_1,\\ldots,t_r]]$, choose its lexicographically least supported exponent $a=(a_1,\\ldots,a_r)$ by successively minimizing each coordinate. Set $w_r=1$ and, downwards, $w_i=1+\\sum_{j>i}a_jw_j$. If $b\\ne a$ is supported and $i$ is its first differing coordinate, then $b_i>a_i$ and $w\\cdot b-w\\cdot a\\geq w_i-\\sum_{j>i}a_jw_j>0$. Thus $a$ is the unique exponent of least weight. Substitute $t_i\\mapsto t_i+T^{w_i}$ for $i<r$, fixing $T$. By [lem-weil-pbc-power-series-adic-evaluation], this and the substitution with minus signs define continuous maps for the maximal-ideal topology: all substituted variables lie in the maximal ideal, and truncations of total degree $<N$ compute the maps modulo its $N$th power. Their composites fix every variable and constant, hence every truncation, hence every series by separatedness. They are inverse automorphisms and fix $\\Lambda[[T]]$. After putting $t_1=\\cdots=t_{r-1}=0$ and reducing modulo $\\mathfrak m_\\Lambda$, the substituted series is $\\sum_b\\bar f_bT^{w\\cdot b}$; each coefficient is a finite sum since all weights are positive. Its least coefficient is $\\bar f_a\\ne0$. For $r=1$ the same argument uses the identity substitution.",
+   "uses": [
+    "lem-weil-pbc-power-series-adic-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V 1.1.1(ii); explicit least-weight argument for the stated triangular coordinate change."
+   }
+  },
+  {
+   "text": "Apply [lem-per-weierstrass-preparation-complete-local] over the complete local ring $D$ to $c(f)\\in D[[T]]$. The last conclusion of Step 2 is exactly its nonzero-reduction hypothesis. This yields $c(f)=ug$ with $u$ a unit and $g=T^n+\\sum_{i<n}b_iT^i$, $b_i\\in\\mathfrak m_D$. The substitutions preserve the maximal ideal, so $c(f)$ is a nonunit. If $n=0$, monicity gives $g=1$, a contradiction. Therefore $n>0$ and $g\\in(\\mathfrak m_D,T)$.",
+   "uses": [
+    "lem-per-weierstrass-preparation-complete-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V 1.1.1(i); positivity of the order follows from f in the maximal ideal."
+   }
+  },
+  {
+   "text": "Put $R_0=D[T]$, $\\mathfrak q=(\\mathfrak m_D,T)$ and $A=(R_0)_{\\mathfrak q}$. By [lem-weil-pbc-finite-type-algebra-noetherian] and [lem-weil-pbc-localization-noetherian], $A$ is Noetherian; its maximal ideal is $\\mathfrak qA$ and its residue field is $k$. Apply [lem-per-local-pair-henselization-comparison] to identify the specified ordinary henselization $H=A^h$ with the henselization of $(A,\\mathfrak qA)$. Hence $H$ is local henselian with $\\mathfrak m_H=\\mathfrak qH$ and residue field $k$. Apply [lem-weil-pbc-henselization-noetherian-completion] to this Noetherian pair: $H$ is Noetherian. By [lem-weil-pbc-complete-pair-henselian], $R$ is henselian. The inclusion $R_0\\to R$ extends to a local map $A\\to R$, since a polynomial outside $\\mathfrak q$ has unit constant coefficient in $D$ and therefore is a unit in $R$ by [lem-weil-pbc-power-series-local-ring]. The universal property [def-weil-pbc-henselization-at-prime] now gives the canonical local map $H\\to R$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-per-local-pair-henselization-comparison",
+    "lem-weil-pbc-henselization-noetherian-completion",
+    "lem-weil-pbc-complete-pair-henselian",
+    "lem-weil-pbc-power-series-local-ring",
+    "def-weil-pbc-henselization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V 1.1.3; Stacks Tags 00FN, 0A03, 0AGV and 0ALJ."
+   }
+  },
+  {
+   "text": "For every $N\\geq1$, truncation in $T$ gives $R_0/\\mathfrak q^N\\xrightarrow{\\sim}R/(\\mathfrak m_DR+(T))^N$. Surjectivity follows since the tail starting at $T^N$ vanishes. For injectivity, [lem-weil-pbc-power-series-combined-ideal-coefficients] says a series lies in the target ideal exactly when its coefficient of $T^j$ lies in $\\mathfrak m_D^{N-j}$ for $j<N$; for polynomials this is exactly membership in $\\mathfrak q^N$, by expanding $(\\mathfrak m_D,T)^N$. Every $s\\notin\\mathfrak q$ is already invertible in this quotient: write $s=a(1+v)$ with $a\\in D^\\times$, $v\\in\\mathfrak q$, and invert $1+v$ by $\\sum_{j=0}^{N-1}(-v)^j$. Thus localization induces $A/(\\mathfrak qA)^N\\cong R_0/\\mathfrak q^N$. By [lem-weil-pbc-henselization-flat-quotients], $A/(\\mathfrak qA)^N\\xrightarrow{\\sim}H/\\mathfrak m_H^N$. These are all the maps induced by $R_0\\to H\\to R$, so commute with reduction in $N$. Taking inverse limits and using the maximal-ideal completeness of $R$ proves that the canonical map $H\\to R$ identifies $R$ with $\\widehat H_{\\mathfrak m_H}$.",
+   "uses": [
+    "lem-weil-pbc-power-series-combined-ideal-coefficients",
+    "lem-weil-pbc-henselization-flat-quotients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V 2.2.3, maximal-ideal completion assertion; explicit truncation comparison, Stacks 0AGU."
+   }
+  },
+  {
+   "text": "The ring $H$ is Noetherian local by Step 4, so [lem-weil-pbc-local-completion-faithfully-flat] makes its maximal-ideal completion map faithfully flat. The identification of Step 5 is induced by $H\\to R$, so this is precisely the required faithful flatness of that canonical map.",
+   "uses": [
+    "lem-weil-pbc-local-completion-faithfully-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V 1.1.3, faithful flatness used in its proof; Stacks Tag 00MC."
+   }
+  },
+  {
+   "text": "To check $(H,gH)$ directly in the idempotent definition [def-weil-pbc-henselian-terminology], take any finite $H$-algebra $B$. By [lem-weil-pbc-finite-over-henselian-local-product], write $B=\\prod_jB_j$ with local structural maps $H\\to B_j$. Since $g\\in\\mathfrak m_H$, each $gB_j$ lies in the maximal ideal of $B_j$, and $B_j/gB_j$ is nonzero local. In a local ring an idempotent $e$ is $0$ or $1$: one of $e,1-e$ is a unit and $e(1-e)=0$. Consequently the quotient $B_j\\to B_j/gB_j$ is a bijection on idempotents, sending $0,1$ to $0,1$. Taking the finite product proves the same for $B\\to B/gB$, including the zero-algebra case (empty product). This proves the asserted henselian pair without changing from maximal-ideal henselianity to a smaller ideal without argument.",
+   "uses": [
+    "def-weil-pbc-henselian-terminology",
+    "lem-weil-pbc-finite-over-henselian-local-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V Lemma 1.2.3; elementary idempotent proof using Stacks 04GH."
+   }
+  },
+  {
+   "text": "Fix $N\\geq1$. Modulo $\\mathfrak m_D$, the polynomial $g^N$ is $T^{nN}$; it is monic, so is again distinguished. Apply [lem-per-distinguished-polynomial-quotient] to obtain the canonical isomorphism $C_N:=D[T]/(g^N)\\xrightarrow{\\sim}R/(g^NR)$. The latter is nonzero local since $g\\in\\mathfrak m_R$, and it is henselian by [lem-weil-pbc-quotient-henselian-pair], because $R$ is henselian by Step 4. The preimage in $D[T]$ of its maximal ideal is $\\mathfrak q$, as is seen by composing with $R\\to k$ (constant term followed by residue). Thus all elements outside $\\mathfrak q$ are units in $C_N$, and localization gives a canonical isomorphism $A/g^NA\\xrightarrow{\\sim}C_N$. In particular $A/g^NA$ is itself henselian local.",
+   "uses": [
+    "lem-per-distinguished-polynomial-quotient",
+    "lem-weil-pbc-quotient-henselian-pair"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V Lemma 1.1.3, comparison modulo Q=P^N; V 1.1.1(i)."
+   }
+  },
+  {
+   "text": "By [lem-trf-henselization-quotient-at-prime], $H/g^NH$ is the ordinary henselization of $A/g^NA$. But the latter ring is already henselian by Step 8. Its henselization structure map is an isomorphism: [def-weil-pbc-henselization-at-prime] applied to the identity supplies a retraction, and uniqueness applied to maps back to the henselization makes the other composite the identity. Therefore $A/g^NA\\to H/g^NH$ is an isomorphism. The local map $H/g^NH\\to R/g^NR$ induced by the canonical map agrees on $A/g^NA$ with the isomorphism of Step 8, hence is also an isomorphism. These are canonical quotient maps, and their squares with the quotient projections for $N+1\\to N$ commute on every element of $H$.",
+   "uses": [
+    "lem-trf-henselization-quotient-at-prime",
+    "def-weil-pbc-henselization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V Lemma 1.1.3, passage to all powers; Stacks Tag 05WQ (lemma-quotient-henselization)."
+   }
+  },
+  {
+   "text": "By [lem-sbc-complete-local-subideal], the complete Noetherian local ring $R$ is complete also for the ideal $gR\\subseteq\\mathfrak m_R$. Hence taking inverse limits in Step 9 gives $\\widehat H_{gH}=\\varprojlim_NH/g^NH\\xrightarrow{\\sim}\\varprojlim_NR/g^NR=R$. The map from $H$ is the original canonical map because its $N$th coordinate is reduction of that map modulo $g^N$. Together with Steps 3--7 this proves all the clauses, and the construction in Step 2 was the identity for $r=1$.",
+   "uses": [
+    "lem-sbc-complete-local-subideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "V Lemma 1.1.3, final inverse-limit argument, and V 2.2.3, both completion topologies."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-henselian-terminology",
+  "def-weil-pbc-henselization-at-prime",
+  "lem-per-distinguished-polynomial-quotient",
+  "lem-per-local-pair-henselization-comparison",
+  "lem-per-weierstrass-preparation-complete-local",
+  "lem-sbc-complete-local-subideal",
+  "lem-trf-henselization-quotient-at-prime",
+  "lem-weil-pbc-complete-pair-henselian",
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-henselization-flat-quotients",
+  "lem-weil-pbc-henselization-noetherian-completion",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-power-series-adic-evaluation",
+  "lem-weil-pbc-power-series-combined-ideal-coefficients",
+  "lem-weil-pbc-power-series-complete-over-complete-base",
+  "lem-weil-pbc-power-series-local-ring",
+  "lem-weil-pbc-power-series-noetherian",
+  "lem-weil-pbc-quotient-henselian-pair"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose V 1.1.1(i),(ii), 1.1.3, 1.2.3 and 2.2.3; explicit weight and quotient arguments realizing these proofs using Mathlib and Stacks."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,7 +206,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-gabber-partial-algebraization",
@@ -81,5 +229,94 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-weierstrass-henselian-cylinder",
+  "worker": "stage1",
+  "summary": "Gave an explicit least-weight coordinate substitution, used two genuine Mathlib leaves for preparation and distinguished quotients, and compared both completion systems via canonical quotient maps. Added only the general ordinary-local/pair-henselization comparison as an unsplit input. Statement unchanged.",
+  "blueprint": "Current split of the blueprint ancestor lem-per-artin-gabber-affine-curve, Step 1: the dimension-normalized Verdier duality input, through lem-per-qbar-arbitrary-field-duality and its finite-coefficient local-duality construction; this item's partial algebraization is used in Step 4 of lem-per-gabber-local-duality-general. Supporting input: Weierstrass coordinate change and completion of a henselian cylinder",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-power-series-noetherian",
+    "why": "Noetherianity of the power-series coefficient ring and completed cylinder. General commutative-algebra tool; this perverse-sheaf unit provides no such statement."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-local-ring",
+    "why": "Locality, maximal ideals and the units needed for the localization map. General commutative-algebra tool; this perverse-sheaf unit provides no such statement."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-complete-over-complete-base",
+    "why": "Completeness for the combined maximal ideal. General commutative-algebra tool; this perverse-sheaf unit provides no such statement."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-adic-evaluation",
+    "why": "Construct continuous triangular substitutions from their images of variables. General commutative-algebra tool; this perverse-sheaf unit provides no such statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Noetherianity of D[T]. General commutative-algebra tool; this perverse-sheaf unit provides no such statement."
+   },
+   {
+    "node": "lem-weil-pbc-localization-noetherian",
+    "why": "Noetherianity of the localized polynomial ring. General commutative-algebra tool; this perverse-sheaf unit provides no such statement."
+   },
+   {
+    "node": "lem-weil-pbc-henselization-noetherian-completion",
+    "why": "Noetherianity of the henselization, after the ordinary/pair comparison. General commutative-algebra tool; this perverse-sheaf unit provides no such statement."
+   },
+   {
+    "node": "lem-weil-pbc-complete-pair-henselian",
+    "why": "Henselianity of the completed power-series ring. General commutative-algebra tool; this perverse-sheaf unit provides no such statement."
+   },
+   {
+    "node": "lem-weil-pbc-power-series-combined-ideal-coefficients",
+    "why": "Compute the quotients for the maximal-ideal completion. General commutative-algebra tool; this perverse-sheaf unit provides no such statement."
+   },
+   {
+    "node": "lem-weil-pbc-henselization-flat-quotients",
+    "why": "Compare quotients by powers of the maximal ideal. General commutative-algebra tool; this perverse-sheaf unit provides no such statement."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-henselian-local-product",
+    "why": "Reduce idempotent lifting modulo g to local factors. General commutative-algebra tool; this perverse-sheaf unit provides no such statement."
+   },
+   {
+    "node": "lem-weil-pbc-quotient-henselian-pair",
+    "why": "Henselianity of R/(g^N). General commutative-algebra tool; this perverse-sheaf unit provides no such statement."
+   },
+   {
+    "node": "lem-trf-henselization-quotient-at-prime",
+    "why": "Identify H/(g^N) as the ordinary henselization of A/(g^N). General commutative-algebra tool; this perverse-sheaf unit provides no such statement."
+   },
+   {
+    "node": "lem-sbc-complete-local-subideal",
+    "why": "Completeness of R for gR without claiming the g-adic and maximal-ideal topologies coincide. General commutative-algebra tool; this perverse-sheaf unit provides no such statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-power-series-noetherian",
+  "lem-weil-pbc-power-series-local-ring",
+  "lem-weil-pbc-power-series-complete-over-complete-base",
+  "lem-weil-pbc-power-series-adic-evaluation",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-henselization-noetherian-completion",
+  "lem-weil-pbc-complete-pair-henselian",
+  "lem-weil-pbc-power-series-combined-ideal-coefficients",
+  "lem-weil-pbc-henselization-flat-quotients",
+  "lem-weil-pbc-finite-over-henselian-local-product",
+  "lem-weil-pbc-quotient-henselian-pair",
+  "lem-trf-henselization-quotient-at-prime",
+  "lem-sbc-complete-local-subideal"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-N5-570ad0e9b",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-570ad0e9b (reviewer sub-agent of L); spot-checked: Read in full: the item, its 10 proof steps, the 3 new nodes, all 20 cited statements and the 8 stmt_deps definitions. Sources checked: ILO V 1.1.1(i),(ii), 1.1.3 with its proof, 1.2.3 and 2.2.3; Stacks 0A03; Mathlib WeierstrassPreparation.lean:458/651-659/811 and Distinguished.lean:31. The item statement is unchanged and agrees with ILO; the live item is still unsplit. Step 2: I checked the least-weight inequality (w·b−w·a ≥ 1), and the inverse substitution is justified by adic-evaluation uniqueness plus c(m_R^N) ⊆ m_R^N. The comparison node (Stacks 0A03) is needed because 0AGU and 0AGV are stated for pair henselization while def-weil-pbc-henselization-at-prime is only the universal property of ordinary henselization. Step 5: the coefficient criterion with J=m_D, one variable, matches q^N. Step 7 is genuinely elementary. Step 9: the retraction plus uniqueness argument is correct. Step 10 uses 00IP. Both Mathlib leaves match their declarations exactly, including the P=1 and n=0 edge cases. No duplicates in the DAG or the blueprint, no new node restates a clause of the item, and no SGA source is cited. Batch-5 flags: def-weil-pbc-henselization-at-prime is a general definition; lem-trf-henselization-quotient-at-prime is Stacks 05WQ, pure algebra, and its closure has no nt-assume, sk-thm-trace or Poincaré node. It is not a step of either assumed proof, so I accept both. I accept all 14 declared tool uses as generic algebra. No fixes."
  }
 }
