@@ -52,7 +52,7 @@ instance preservesFlat_constantSheaf (W : Scheme.{u}) :
     ObjectProperty.prop_of_iso _
       ((pointSmallEtale s).ulift.{u + 1}.sheafFiberConstantSheafIso M).symm hM
 
-set_option maxHeartbeats 1000000 in
+set_option maxHeartbeats 1600000 in
 noncomputable def testA (W : Scheme.{u}) (M N : DerivedCategory (ModuleCat.{u + 1} Λ)) :=
   ((constantSheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)).leftDerivedTensorComparison.app
     M).app N
