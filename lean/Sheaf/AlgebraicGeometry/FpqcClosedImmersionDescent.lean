@@ -7,9 +7,8 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Sites.Fpqc
 public import Mathlib.AlgebraicGeometry.Pullbacks
-import Sheaf.AlgebraicGeometry.FpqcAffineDescent
-import Sheaf.AlgebraicGeometry.Morphisms.ClosedImmersionOfSurjectiveStructureStalks
-import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
+import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.Fpqc
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FlatDescent
 
 /-!
 # Descent of closed immersions along fpqc coverings
@@ -44,6 +43,11 @@ theorem isClosedImmersion_of_fpqc_cover {X S : Scheme.{u}} (f : X ⟶ S) {I : Ty
     (S' : I → Scheme.{u}) (g : ∀ i, S' i ⟶ S)
     (hg : Presieve.ofArrows S' g ∈ Scheme.fpqcPrecoverage S)
     (h : ∀ i, IsClosedImmersion (pullback.snd f (g i))) : IsClosedImmersion f := by
-  sorry
+  -- Use the source library's singleton descent and its extension to covering families.
+  have := IsClosedImmersion.descendsAlong_surjective_inf_flat_inf_quasicompact.{u}
+  exact Scheme.of_isPullback_of_ofArrows_mem_fpqcTopology
+    (P := @IsClosedImmersion) (Precoverage.generate_mem_toGrothendieck hg) f
+    (fun i ↦ pullback.fst f (g i)) (fun i ↦ pullback.snd f (g i))
+    (fun i ↦ IsPullback.of_hasPullback f (g i)) h
 
 end AlgebraicGeometry
