@@ -18,7 +18,13 @@
   "sk-def-sfb-bounded-constructible",
   "sk-def-sfb-constructible",
   "def-weil-pbc-locally-derived-ringed-ideal-complete",
-  "sk-def-sfb-derived-tensor-hom"
+  "sk-def-sfb-derived-tensor-hom",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pe-internal-section-tensor-comparison",
+  "def-sfb-site-derived-constant-module-functor",
+  "sk-def-sfb-derived-extension-of-scalars",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-weil-proetale-inverse-image"
  ],
  "proof": [
   {
@@ -240,5 +246,48 @@
   "lem-weil-pbc-constant-completion-equivalence",
   "lem-weil-l-adic-extension-integers-dvr",
   "lem-sc-affine-noetherian-underlying-space"
- ]
+ ],
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ab0a1ee51",
+  "group": "Q41",
+  "result": "fix",
+  "note": "Mathematics and Lean statement pass; immutable module compiles cleanly in both checks. Fixed H11 by supplying the completed independent reading in fixes/det-lem-integral-models-stacks.report.md. Full findings recorded in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralModelsStacks",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralModelsStacks.integral_models_stacks",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.discreteSheaf",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.discreteObj",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.discreteObj_comm",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.constantToContinuous",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.discreteMap",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.discreteMap_mon",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.sectionMap",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.smallRing",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.smallMap",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.smallModules",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.smallDerivedObject",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.integersObj",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.integersObj_comm",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.scalarPointMap",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.scalarPointMap_mon",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.scalarMap",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.scalarMap_mon",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.residueMap",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.residueMap_mon",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.restriction",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.stacksConstructible",
+   "AlgebraicGeometry.ProEtale.IntegralModelsStacks.integral_models_stacks"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralModelsStacks.lean",
+  "statement": "theorem integral_models_stacks (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) [IsNoetherian X] : (∀ K, constantModelBoundedConstructible (integersObj l E) X K ↔ stacksConstructible l E X ((restriction l E X).obj K)) ∧ ∃ e : ConstantModelBoundedConstructible (integersObj l E) X ≌ (stacksConstructible l E X).FullSubcategory, Nonempty (e.functor ⋙ (stacksConstructible l E X).ι ≅ (constantModelBoundedConstructible (integersObj l E) X).ι ⋙ restriction l E X)",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The auxiliary definitions spell out the Stacks category introduced in the statement and the specified restriction functor. Completeness uses the existing local predicate after sectionwise transport to an equivalent small site. Coefficients and maps are constructed from actual constant sheaves, constant continuous functions, and the scalar quotient; no comparison or functor is postulated."
+ }
 }
