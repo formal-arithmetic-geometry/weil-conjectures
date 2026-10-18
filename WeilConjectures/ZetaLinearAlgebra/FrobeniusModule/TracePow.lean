@@ -43,14 +43,6 @@ namespace LinearMap
 variable {K V W : Type*} [Field K] [AddCommGroup V] [Module K V] [FiniteDimensional K V]
   [AddCommGroup W] [Module K W] [FiniteDimensional K W]
 
-/-- Over an algebraically closed field, endomorphisms with the same characteristic polynomial
-have the same traces of powers: these are the power sums of the roots of the characteristic
-polynomial. -/
-theorem trace_pow_eq_of_charpoly_eq [IsAlgClosed K] {f : Module.End K V} {g : Module.End K W}
-    (h : f.charpoly = g.charpoly) (n : ℕ) :
-    trace K V (f ^ n) = trace K W (g ^ n) := by
-  rw [trace_pow_eq_sum_pow_roots_charpoly, trace_pow_eq_sum_pow_roots_charpoly, h]
-
 /-- The roots of the reverse characteristic polynomial `det (1 - t f)` of an automorphism are
 the inverses of the roots of its characteristic polynomial. -/
 theorem roots_charpolyRev [IsAlgClosed K] (f : Module.End K V) (hf : IsUnit f.det) :
