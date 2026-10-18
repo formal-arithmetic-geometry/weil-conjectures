@@ -375,6 +375,116 @@ lemma compactPullback_id_app [IsProper (𝟙 X : X ⟶ X).left]
 
 end Identity
 
+/-! ### Compatibility with compact-support base change -/
+
+section BaseChange
+
+variable {X Y X' Y' : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+  [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom]
+  [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
+  {f : X ⟶ Y} {g : Y' ⟶ Y} {f' : X' ⟶ Y'} {g' : X' ⟶ X}
+
+omit [LocallyOfFiniteType X'.hom] [QuasiCompact X'.hom] [IsSeparated X'.hom] in
+/-- The composition isomorphisms `Rb_! ⋙ Ra_Y ≅ Ra_{X'}` along equal morphisms agree up to the
+cast. -/
+lemma boundedConstructibleLowerShriekCompToPoint_hom_app_congr {b b' : X ⟶ Y} (e : b = b')
+    (M : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Y)).map
+        (eqToHom (congrArg (fun b ↦
+          (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ b).obj M) e)) ≫
+      (boundedConstructibleLowerShriekCompToPoint ℓ b').hom.app M =
+      (boundedConstructibleLowerShriekCompToPoint ℓ b).hom.app M := by
+  subst e
+  simp
+
+/-- The composition isomorphisms `Rh_! ⋙ Ra ≅ Ra` are compatible with the composition
+isomorphism `Rg'_! ⋙ Rf_! ≅ Rf'_! ⋙ Rg_!` of a commutative square `g' ≫ f = f' ≫ g`. -/
+lemma boundedConstructibleLowerShriekSquareIso_compToPoint (w : g' ≫ f = f' ≫ g)
+    (M : Dᵇc(X'.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Y)).map
+        ((boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ w).hom.app M) ≫
+      (boundedConstructibleLowerShriekCompToPoint ℓ g).hom.app
+        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f').obj M) ≫
+      (boundedConstructibleLowerShriekCompToPoint ℓ f').hom.app M =
+    (boundedConstructibleLowerShriekCompToPoint ℓ f).hom.app
+        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ g').obj M) ≫
+      (boundedConstructibleLowerShriekCompToPoint ℓ g').hom.app M := by
+  have inv_assoc (a : X' ⟶ Y') (b : Y' ⟶ Y) :
+      (boundedConstructibleLowerShriekCompToPoint ℓ b).hom.app
+          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ a).obj M) ≫
+        (boundedConstructibleLowerShriekCompToPoint ℓ a).hom.app M =
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Y)).map
+          ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ a b).inv.app M) ≫
+        (boundedConstructibleLowerShriekCompToPoint ℓ (a ≫ b)).hom.app M := by
+    rw [← cancel_epi ((boundedConstructibleLowerShriekCompToPoint ℓ a).inv.app M ≫
+      (boundedConstructibleLowerShriekCompToPoint ℓ b).inv.app
+        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ a).obj M))]
+    simp only [Category.assoc, Iso.inv_hom_id_app_assoc, Iso.inv_hom_id_app]
+    rw [← reassoc_of% (boundedConstructibleLowerShriekCompToPoint_assoc ℓ a b M),
+      ← Functor.map_comp_assoc, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id,
+      Category.id_comp, Iso.inv_hom_id_app]
+  have inv_assoc' (a : X' ⟶ X) (b : X ⟶ Y) :
+      (boundedConstructibleLowerShriekCompToPoint ℓ b).hom.app
+          ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ a).obj M) ≫
+        (boundedConstructibleLowerShriekCompToPoint ℓ a).hom.app M =
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Y)).map
+          ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ a b).inv.app M) ≫
+        (boundedConstructibleLowerShriekCompToPoint ℓ (a ≫ b)).hom.app M := by
+    rw [← cancel_epi ((boundedConstructibleLowerShriekCompToPoint ℓ a).inv.app M ≫
+      (boundedConstructibleLowerShriekCompToPoint ℓ b).inv.app
+        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ a).obj M))]
+    simp only [Category.assoc, Iso.inv_hom_id_app_assoc, Iso.inv_hom_id_app]
+    rw [← reassoc_of% (boundedConstructibleLowerShriekCompToPoint_assoc ℓ a b M),
+      ← Functor.map_comp_assoc, Iso.hom_inv_id_app, CategoryTheory.Functor.map_id,
+      Category.id_comp, Iso.inv_hom_id_app]
+  rw [inv_assoc, inv_assoc', boundedConstructibleLowerShriekSquareIso_padicAlgCl]
+  simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, eqToIso.hom, eqToHom_app,
+    Functor.map_comp, Category.assoc]
+  rw [← Functor.map_comp_assoc (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+      (toPoint Y)) ((boundedConstructibleLowerShriekComp_padicAlgCl ℓ f' g).hom.app M),
+    Iso.hom_inv_id_app, CategoryTheory.Functor.map_id, Category.id_comp,
+    boundedConstructibleLowerShriekCompToPoint_hom_app_congr ℓ w]
+
+/-- **The pullback on compactly supported cohomology commutes with compact-support base change**
+(the unit compatibility of the mate `Ex_!`, blueprint `lem-trf-weil-shriek-operator-fibres`,
+step (β)): for a cartesian square `g' ≫ f = f' ≫ g` with `g, g'` proper,
+`c_{f'} ∘ RΓ_c(Ex_!) ∘ g^♯ = g'^♯ ∘ c_f`. -/
+lemma compactPullback_app_comp_baseChange (sq : IsPullback g' f' f g) [IsProper g.left]
+    [IsProper g'.left] (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (compactPullback ℓ g).app
+        ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ f).obj K) ≫
+      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Y')).map
+        ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq).app K) ≫
+      (boundedConstructibleLowerShriekCompToPoint ℓ f').hom.app
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g').obj K) =
+    (boundedConstructibleLowerShriekCompToPoint ℓ f).hom.app K ≫
+      (compactPullback ℓ g').app K := by
+  have hM := unit_mateEquiv_symm
+    (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ g')
+    (boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl ℓ g)
+    (boundedConstructibleLowerShriekSquareIso_padicAlgCl ℓ sq.w).hom K
+  rw [← boundedConstructibleLowerShriekBaseChange_padicAlgCl_eq_mateEquiv ℓ sq] at hM
+  simp only [boundedConstructibleUpperStarLowerShriekAdjunction_padicAlgCl,
+    Adjunction.ofNatIsoRight_unit, NatTrans.comp_app, Functor.whiskerLeft_app, Iso.symm_hom,
+    Functor.id_obj, Functor.comp_obj, Functor.map_comp, Category.assoc] at hM
+  have hM' := congrArg
+    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Y)).map hM
+  simp only [Functor.map_comp] at hM'
+  have hn := (boundedConstructibleLowerShriekCompToPoint ℓ g).hom.naturality
+    ((boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq).app K)
+  have hn' := (boundedConstructibleLowerShriekCompToPoint ℓ f).hom.naturality
+    ((boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+      g').unit.app K ≫ (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ g').inv.app _)
+  simp only [Functor.comp_map, Functor.map_comp, Category.assoc] at hn hn'
+  rw [compactPullback_app, compactPullback_app]
+  simp only [Category.assoc]
+  rw [← reassoc_of% hn, ← reassoc_of% hM', boundedConstructibleLowerShriekSquareIso_compToPoint,
+    reassoc_of% hn']
+  trace_state
+
+end BaseChange
+
 /-! ### Frobenius coefficient morphisms -/
 
 section Frobenius
