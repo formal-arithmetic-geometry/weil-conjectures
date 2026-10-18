@@ -12,10 +12,11 @@ public import WeilConjectures.RingTheory.CurveBranches
 /-!
 # The punctured spectrum of a strictly henselian local curve
 
-For a reduced one-dimensional strictly henselian Nagata local ring `R`, the punctured spectrum
+For a reduced one-dimensional strictly henselian excellent local ring `R`, the punctured spectrum
 `Spec R ∖ {𝔪}` is the finite disjoint union `∐ₐ Spec Frac(B(R)ₐ)` of the spectra of the fraction
-fields of the branches `B(R)ₐ` (`IsLocalRing.branch`), which are strictly henselian discrete
-valuation rings with the residue field of `R` (blueprint `lem-exc-punctured-curve-branches`).
+fields of the branches `B(R)ₐ` (`IsLocalRing.branch`), which are excellent strictly henselian
+discrete valuation rings with the residue field of `R` (blueprint
+`lem-exc-punctured-curve-branches`).
 -/
 
 @[expose] public section
@@ -76,22 +77,18 @@ lemma ι_puncturedSpectrumIsoOfIsLocalization_inv [IsLocalRing R] {f : R}
 /-- Blueprint `lem-exc-punctured-curve-branches`: The punctured strictly local curve has DVR
 branches.
 
-Let `R` be a reduced one-dimensional Nagata local ring which is henselian with algebraically
-closed residue field (i.e. strictly henselian). Then each branch `B(R)ₐ = \overline{R/pₐ}`
-(`IsLocalRing.branch`, the factors of the branch algebra `B(R)`) is a finite `R / pₐ`-module and
-a henselian discrete valuation ring whose residue field is the (algebraically closed) residue
-field of `R`, and the punctured spectrum `Spec R ∖ {𝔪}` is isomorphic to the finite disjoint
-union `∐ₐ Spec Frac(B(R)ₐ)`, compatibly with the maps to `Spec R` induced by
-`R → Frac(B(R)ₐ)`. (The ring-level statement is `IsLocalRing.branches_and_punctured_spectrum`.)
-
-The blueprint assumes `R` excellent. Excellence enters only through the finiteness of the
-normalization, via "excellent rings are Nagata" ([Stacks, Tag 07QV]); we assume the weaker Nagata
-property `IsNagataRing` directly, so this implies the blueprint statement. (The blueprint also
-records that the branches are excellent; this is not formalised since excellence is not
-defined here.) -/
-theorem puncturedSpectrum_branches (hR : IsNagataRing R) [HenselianLocalRing R] [IsReduced R]
-    [IsAlgClosed (ResidueField R)] (hdim : ringKrullDim R = 1) :
+Let `R` be a reduced excellent one-dimensional local ring which is henselian with algebraically
+closed residue field (i.e. strictly henselian; the residue characteristic plays no role). Then
+each branch `B(R)ₐ = \overline{R/pₐ}` (`IsLocalRing.branch`, the factors of the branch algebra
+`B(R)`) is a finite `R / pₐ`-module and an excellent henselian discrete valuation ring whose
+residue field is the (algebraically closed) residue field of `R`, and the punctured spectrum
+`Spec R ∖ {𝔪}` is isomorphic to the finite disjoint union `∐ₐ Spec Frac(B(R)ₐ)`, compatibly with
+the maps to `Spec R` induced by `R → Frac(B(R)ₐ)`. (The ring-level statement is
+`IsLocalRing.branches_and_punctured_spectrum`.) -/
+theorem puncturedSpectrum_branches (hR : IsExcellentRing R) [HenselianLocalRing R]
+    [IsReduced R] [IsAlgClosed (ResidueField R)] (hdim : ringKrullDim R = 1) :
     (∀ p : minimalPrimes R, Module.Finite (R ⧸ p.1) (branch R p) ∧
+      IsExcellentRing (branch R p) ∧
       IsDiscreteValuationRing (branch R p) ∧ HenselianLocalRing (branch R p) ∧
       (letI := isLocalRing_branch p;
         IsAlgClosed (ResidueField (branch R p)) ∧
@@ -103,7 +100,8 @@ theorem puncturedSpectrum_branches (hR : IsNagataRing R) [HenselianLocalRing R] 
   obtain ⟨hbr, f, -, hf, hloc⟩ := branches_and_punctured_spectrum hR hdim
   have := hR.isNoetherianRing
   have : Finite (minimalPrimes R) := (minimalPrimes.finite_of_isNoetherianRing R).to_subtype
-  refine ⟨fun p ↦ ⟨(hbr p).1, (hbr p).2.1, (hbr p).2.2.1, (hbr p).2.2.2.2⟩, this,
-    puncturedSpectrumIsoOfIsLocalization hf, ι_puncturedSpectrumIsoOfIsLocalization_inv hf⟩
+  refine ⟨fun p ↦ ⟨(hbr p).1, (hbr p).2.1, (hbr p).2.2.1, (hbr p).2.2.2.1,
+    (hbr p).2.2.2.2.2⟩, this, puncturedSpectrumIsoOfIsLocalization hf,
+    ι_puncturedSpectrumIsoOfIsLocalization_inv hf⟩
 
 end AlgebraicGeometry
