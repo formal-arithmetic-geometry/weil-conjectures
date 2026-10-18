@@ -16,29 +16,41 @@
  ],
  "proof": [
   {
-   "text": "expand the second tensor summand differential as (-1)^r times\nid tensor d_Q followed by the (r,s+1) inclusion. If p differs from -r,\nboth sides vanish by the off-diagonal clause of the two degree conditions.\nIf p=-r, test on lambda tensor y and x. Naturality of the tensor\nsheafification comparison gives (-1)^r lambda tensor d_Q(y). The degree\nn+1 condition evaluates this as (-1)^r (-1)^(r*(s+1)) lambda(x) d_Q(y).\nThe degree n condition followed by postcomposition gives\n(-1)^(r*s) d_Q(lambda(x) y). Linearity of d_Q and the identity\n(-1)^r (-1)^(r*(s+1)) = (-1)^(r*s) give equality. The equation\ns=-r+n identifies the target degrees; naturality of eqToHom identifies\nthe transported differentials. Extend from pure tensors by the tensor\nuniversal property, then use the sheafification adjunction and equality\non the unique slice object to recover the sheaf morphisms. No finite\nsupport, projectivity, or bounds are used. The same equations hold over\nthe zero ring, for zero modules, and for negative degrees.",
+   "text": "Expand the second total-tensor summand differential with Mathlib HomologicalComplex.mapBifunctor.d₂_eq. If p is not -r, the off-diagonal parts of the two assumed PerfectRingHomTensorDegreeCondition predicates make both sides zero. No existence or invertibility theorem for normalized degree maps is needed.",
+   "uses": [
+    "lem-pc-perfect-ring-hom-tensor-degrees",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For p=-r, cancel the inverse tensor-sheafification comparison and use the sheafification adjunction to test on sectionwise pure tensors. Internal-Hom sections are maps on the slice over the unique site object. Use Mathlib CostructuredArrow.mk_surjective to write a slice object as an arrow, IsDiscrete.eq_of_hom to identify its source, and Subsingleton.elim to identify that arrow with the identity. Thus test those maps at the identity object and at x, without restating a slice-uniqueness theorem. Naturality of the tensor comparison and of the sheafification unit carries lambda tensor y to lambda tensor d_Q(y). Evaluate the two assumed normalization predicates on these sections.",
    "uses": [
     "lem-pc-perfect-ring-hom-tensor-degrees",
     "def-pur-hom-complex",
-    "lem-pc-perfect-ring-dual-term-flat",
-    "def-pc-tensor-complex-sheaves"
+    "lem-pc-perfect-ring-dual-term-flat"
    ],
    "elementary": false
+  },
+  {
+   "text": "Use functoriality of integer-unit scalar multiplication through the two evaluations. The sign identity (-1)^r (-1)^(r*(s+1))=(-1)^(r*s) follows from negOnePow_add and the fact that every integer unit squares to one. Linearity of d_Q moves lambda(x) through the differential. Eliminating equalities of the source and target degree indices proves the eqToHom transport square. This proves the equality on all pure tensors, hence the asserted sheaf-morphism equality.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-pc-perfect-ring-hom-tensor-degrees",
+  "def-pc-tensor-complex-sheaves",
   "def-pur-hom-complex",
-  "lem-pc-perfect-ring-dual-term-flat",
-  "def-pc-tensor-complex-sheaves"
+  "lem-pc-perfect-ring-dual-term-flat"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "S1",
-  "date": "2026-10-13",
+  "group": "T4",
+  "date": "2026-10-18",
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Tag 0A6A, lemma-base-change-RHom, clause (1), expanded chain-level evaluation; Tag 0ATK, lemma-base-change-evaluation-map, clause (1)",
-  "note": "Expanded one of the two separate component calculations in the parent node."
+  "note": "Complete direct Lean proof of the existing component calculation; no new statements with sorry and no finite-projective existence or invertibility result used. Repair of the returned duplicate slice_unique helper: removed it and used the existing general Mathlib slice and discrete-category API directly."
  },
  "mathlib_searches": [
   {
@@ -124,12 +136,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-18",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "S1",
+  "group": "T4",
   "result": "pass",
-  "landing": "20261013T124315-L-3777841",
+  "landing": "20261018T071226-L-1678539",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
