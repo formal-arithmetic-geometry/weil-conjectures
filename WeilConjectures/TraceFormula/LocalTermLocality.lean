@@ -165,29 +165,32 @@ theorem localTerm_traceClass_ofGraph_eq_trace_of_isContractingAt (h : X ⟶ X)
 
 /-- **Zero-stalk vanishing for the Frobenius graph** (blueprint `lem-trf-local-term-locality`,
 item 3): let `Φ` be the model Frobenius of a model `X₀` of finite type over a finite field
-`k₀`, let `ψ : LΦ^* K ⟶ K` be an arbitrary, not necessarily invertible, Frobenius coefficient
-morphism, `m ≥ 1`, and `x` a rational point fixed by `Φ_m`. If the stalk `K_x` vanishes, the
-local term of the graph correspondence `(𝟙, Φ_m)` with coefficient map `ψ_m` along an open and
+`k₀`, `m ≥ 1`, let `v : LΦ_m^* K ⟶ K` be an arbitrary, not necessarily invertible, map (for
+instance the iterate `ψ_m` of a Frobenius coefficient morphism `ψ`, or `φ_m` for a Weil object)
+and `x` a rational point fixed by `Φ_m`. If the stalk `K_x` vanishes, the local term of the
+graph correspondence `(𝟙, Φ_m)` with coefficient map `v` along an open and
 closed subscheme `B` of the fixed locus, proper over `s`, with underlying set `{x}`, is zero.
 The graph is contracting at `x` since `Φ_m^♯ (t_i - a_i) = (t_i - a_i)^{q^m}` in affine
 coordinates, and the claim is item 2. -/
 theorem localTerm_traceClass_frobeniusGraph_eq_zero {k₀ : Type u} [Field k₀] [Finite k₀]
     [Algebra k₀ k] {X₀ : Scheme.{u}} {f₀ : X₀ ⟶ Spec (.of k₀)} [LocallyOfFiniteType f₀]
     {p : X.left ⟶ X₀} {Φ : X ⟶ X} (hΦ : IsModelFrobenius Φ f₀ p)
-    (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K ⟶ K)
-    {m : ℕ} (hm : 1 ≤ m) (F : (frobeniusGraph K Φ ψ m).FixedLocus) (x : RationalPoint X)
-    (hx : x ≫ (frobeniusGraph K Φ ψ m).c₁ = x ≫ (frobeniusGraph K Φ ψ m).c₂)
+    {m : ℕ} (hm : 1 ≤ m)
+    (v : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+      (frobeniusIterate Φ m)).obj K ⟶ K)
+    (F : (ofGraph K (frobeniusIterate Φ m) v).FixedLocus) (x : RationalPoint X)
+    (hx : x ≫ (ofGraph K (frobeniusIterate Φ m) v).c₁ = x ≫ (ofGraph K (frobeniusIterate Φ m) v).c₂)
     {B : Over (Spec (.of k))} [QuasiCompact B.hom] [IsProper B.hom] (j : B ⟶ F.F)
     [IsOpenImmersion j.left] [IsClosedImmersion j.left]
     (hB : Set.range j.left.base = {(F.liftPoint x hx).left.base (default : Spec (.of k))})
     (hK : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K)) :
-    ((frobeniusGraph K Φ ψ m).traceClass F).localTerm j = 0 :=
+    ((ofGraph K (frobeniusIterate Φ m) v).traceClass F).localTerm j = 0 :=
   sorry
 
 /-- **Zero-stalk vanishing on a smooth curve** (blueprint `sk-i-curve-zero`): for `X` smooth of
 relative dimension one over `s` with the model Frobenius `Φ` of a model over a finite field, an
-arbitrary Frobenius coefficient morphism `ψ`, `m ≥ 1` and a rational point `x` fixed by `Φ_m`
-with `K_x = 0`, the local term of the graph correspondence `(𝟙, Φ_m)` with coefficient `ψ_m`
+`m ≥ 1`, an arbitrary map `v : LΦ_m^* K ⟶ K` and a rational point `x` fixed by `Φ_m`
+with `K_x = 0`, the local term of the graph correspondence `(𝟙, Φ_m)` with coefficient `v`
 along an open and closed subscheme of the fixed locus, proper over `s`, with underlying set `{x}`
 is zero. This is the smooth-curve case of
 `ProEtale.CondensedRing.Correspondence.localTerm_traceClass_frobeniusGraph_eq_zero`. -/
@@ -195,15 +198,17 @@ theorem localTerm_traceClass_frobeniusGraph_eq_zero_of_smooth
     [SmoothOfRelativeDimension 1 X.hom] {k₀ : Type u} [Field k₀] [Finite k₀]
     [Algebra k₀ k] {X₀ : Scheme.{u}} {f₀ : X₀ ⟶ Spec (.of k₀)} [LocallyOfFiniteType f₀]
     {p : X.left ⟶ X₀} {Φ : X ⟶ X} (hΦ : IsModelFrobenius Φ f₀ p)
-    (ψ : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ).obj K ⟶ K)
-    {m : ℕ} (hm : 1 ≤ m) (F : (frobeniusGraph K Φ ψ m).FixedLocus) (x : RationalPoint X)
-    (hx : x ≫ (frobeniusGraph K Φ ψ m).c₁ = x ≫ (frobeniusGraph K Φ ψ m).c₂)
+    {m : ℕ} (hm : 1 ≤ m)
+    (v : (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+      (frobeniusIterate Φ m)).obj K ⟶ K)
+    (F : (ofGraph K (frobeniusIterate Φ m) v).FixedLocus) (x : RationalPoint X)
+    (hx : x ≫ (ofGraph K (frobeniusIterate Φ m) v).c₁ = x ≫ (ofGraph K (frobeniusIterate Φ m) v).c₂)
     {B : Over (Spec (.of k))} [QuasiCompact B.hom] [IsProper B.hom] (j : B ⟶ F.F)
     [IsOpenImmersion j.left] [IsClosedImmersion j.left]
     (hB : Set.range j.left.base = {(F.liftPoint x hx).left.base (default : Spec (.of k))})
     (hK : IsZero ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K)) :
-    ((frobeniusGraph K Φ ψ m).traceClass F).localTerm j = 0 :=
-  localTerm_traceClass_frobeniusGraph_eq_zero hΦ ψ hm F x hx j hB hK
+    ((ofGraph K (frobeniusIterate Φ m) v).traceClass F).localTerm j = 0 :=
+  localTerm_traceClass_frobeniusGraph_eq_zero hΦ hm v F x hx j hB hK
 
 end Correspondence
 
