@@ -15,6 +15,12 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatRe
 /-!
 # Change of rings for the derived tensor product
 
+For a ring homomorphism `f : R →+* S`, an `R`-module `M` and an `S`-module `P` we construct the
+natural isomorphism `M ⊗_R P ≅ (S ⊗_R M) ⊗_S P` of `R`-modules
+(`ModuleCat.tensorRestrictScalarsIso`) and deduce, for `M` flat and a complex `N` of `S`-modules,
+`M ⊗ᴸ_R N ≅ (S ⊗_R M) ⊗ᴸ_S N` in `D(R)` (`DerivedCategory.changeOfRingsTensorIso`, blueprint
+`lem-kun-change-of-rings-tensor`).
+
 For a homomorphism of commutative rings `f : R →+* S`, a flat `R`-module `M` and a complex `N`
 of `S`-modules, `M ⊗ᴸ_R N ≅ (S ⊗_R M) ⊗ᴸ_S N` in `D(R)`
 (`DerivedCategory.changeOfRingsTensorIso`, blueprint `lem-kun-change-of-rings-tensor`). The
