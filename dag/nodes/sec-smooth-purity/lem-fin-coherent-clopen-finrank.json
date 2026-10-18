@@ -1,0 +1,122 @@
+{
+ "id": "lem-fin-coherent-clopen-finrank",
+ "kind": "statement",
+ "title": "Source dimension formula for coherent cohomology on a finite clopen partition",
+ "statement": "Let k be a field, X a k-scheme, I a finite index type, and U_i pairwise disjoint opens with union X. Let M be an O_X-module and q in N. Suppose its source module cohomology H^q(X,M) is finite dimensional over k. Then finrank_k H^q(X,M) is the sum over i of finrank_k H^q(U_i,M|_{U_i}), where each U_i has the structure map induced from X. Pullback is the module restriction used on the right. Empty X and an empty index type are allowed. This is exactly the existing finrankH_eq_sum_of_pairwise_disjoint source API.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01E1, cohomology on opens and disjoint-cover assembly; existing proof finrankH_eq_sum_of_pairwise_disjoint in WeilConjectures/AlgebraicGeometry/Cohomology/EulerChar.lean"
+ },
+ "stmt_deps": [
+  "pqf-def-cohomology",
+  "def-pc-module-pullback",
+  "def-weil-vector-space-dimension"
+ ],
+ "proof": [
+  {
+   "text": "The complement of each U_i is the union of the other opens, so every U_i is closed. The adjunction units identify M with the finite biproduct of the pushforwards of its restrictions: this is the sheaf gluing axiom on the disjoint cover in each open of X. Restriction to a clopen subset and extension by zero are inverse componentwise equivalences; cohomology therefore identifies the cohomology of such a pushforward with that on U_i.",
+   "uses": [
+    "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "lem-sc-ringed-space-restrict-injective-resolution",
+    "def-sc-ringed-space-module-cohomology"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The finite biproduct of module cohomologies is the cohomology of M, compatibly with its k-action. The source module-cohomology comparison identifies the ringed-space and source APIs. Projecting the finite-dimensional total cohomology onto each factor makes every factor finite dimensional. A concatenation of bases gives the dimension sum. The source theorem proves this using isIso_biproduct_lift_restrictAdjunction_unit, H.isBilimitLinearEquiv, finrankH_of_isBilimit and finrankH_pushforward_ι.",
+   "uses": [
+    "lem-sc-module-cohomology-source-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "lem-sc-ringed-space-restrict-injective-resolution",
+  "def-sc-ringed-space-module-cohomology",
+  "lem-sc-module-cohomology-source-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 01E1, cohomology on opens and disjoint-cover assembly; existing proof finrankH_eq_sum_of_pairwise_disjoint in WeilConjectures/AlgebraicGeometry/Cohomology/EulerChar.lean Recorded against the existing source proof, or implemented by U7 where the declaration is new. No new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherent cohomology of proper schemes is finite dimensional and cohomology dimensions in projective flat families are constructible; cohomology on a finite disjoint open cover is a direct sum",
+   "results": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp; Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib theorem for these scheme-cohomology statements; reuse the existing source-library APIs and elementary cardinality or dimension lemmas."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.finrank, Finset.sum",
+   "results": "Module.finrank_pi_fintype; Module.finrank_directSum; Module.exists_nontrivial_relation_of_finrank_lt_card; Module.exists_nontrivial_relation_sum_zero_of_finrank_succ_lt_card; FiniteDimensional.exists_relation_sum_zero_pos_coefficient_of_finrank_succ_lt_card; Module.sum_neg_one_pow_finrank_eq_zero_of_exact; GradedObject.eulerChar_eq_sum_finSet_of_finrankSupport_subset; HomologicalComplex.eulerChar_eq_sum_finSet_of_finrankSupport_subset",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib theorem for these scheme-cohomology statements; reuse the existing source-library APIs and elementary cardinality or dimension lemmas."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteDimensional_H_of_isProper|finrankH_eq_sum_of_pairwise_disjoint|finite_range_and_isConstructible_finrankH_geometricFibre",
+   "results": "No Mathlib match. Source-library rg found the exact declarations recorded below.",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib theorem for these scheme-cohomology statements; reuse the existing source-library APIs and elementary cardinality or dimension lemmas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The cohomology of a coherent sheaf on a proper scheme over a field is finite dimensional, and its dimensions on geometric fibres in a projective flat family form constructible functions",
+   "results": "AlgebraicGeometry.finite_appTop_of_universallyClosed; AlgebraicGeometry.IsProper.toLocallyOfFiniteType; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; AlgebraicGeometry.IsFinite.recOn; SheafOfModules.QuasicoherentData.IsFinitePresentation; AlgebraicGeometry.IsProper; AlgebraicGeometry.IsProper.instOfIsFinite; AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib theorem for these scheme-cohomology statements; reuse the existing source-library APIs and elementary cardinality or dimension lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProjectiveCurveBettiCardinalities",
+  "date": "2026-10-18",
+  "group": "U7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fin-projective-curve-betti-cardinalities",
+   "place": "Source dimension formula for coherent cohomology on a finite clopen partition",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finrankH_eq_sum_of_pairwise_disjoint",
+  "statement": "theorem finrankH_eq_sum_of_pairwise_disjoint {ι : Type*} [Fintype ι] (U : ι → X.Opens) (hU : _root_.Pairwise (Disjoint on U)) (hcover : ⨆ i, U i = ⊤) (M : X.Modules) (q : ℕ) [FiniteDimensional k (M.H q)] : M.finrankH k q = ∑ i, letI : (U i).toScheme.Over (Spec (.of k)) := ⟨(U i).ι ≫ X ↘ Spec (.of k)⟩ ((Scheme.Modules.pullback (U i).ι).obj M).finrankH k q",
+  "branch": "sheaf-dag",
+  "by": "U7",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261018T092210-L-3363277",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261018T092210-L-3363277",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

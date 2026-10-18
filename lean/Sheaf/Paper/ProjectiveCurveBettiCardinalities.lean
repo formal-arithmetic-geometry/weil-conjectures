@@ -15,25 +15,11 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Sheaf.AlgebraicGeometry.SmoothCurvePointsDecomposition
-import Sheaf.Topology.RingedSpaceModuleEnoughInjectives
-import Sheaf.Topology.RestrictInjectiveResolution
-import Sheaf.Topology.RingedSpaceModuleCohomology
-import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
-import Sheaf.AlgebraicGeometry.Coherent
-import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import Mathlib.AlgebraicGeometry.Morphisms.Flat
-import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
-import WeilConjectures.AlgebraicGeometry.Curve.Estimate
-import WeilConjectures.ConstructibleSheaf.Defs
-import Sheaf.Paper.FiniteCoproductCohomologyAssembly
-import Sheaf.AlgebraicGeometry.ProjectiveFlatCoherentRanks
-import WeilConjectures.AlgebraicGeometry.Coherent
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import WeilConjectures.Topology.RingedSpaceModuleCohomology
-import WeilConjectures.Topology.RingedSpaceModuleEnoughInjectives
+import Sheaf.Paper.SmoothProperCurveNaturalCardinalities
+import Sheaf.AlgebraicGeometry.ProperSmoothGeometricComponentsLocallyConstant
+import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.GeometricFibreRank
+import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
+import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 
 /-!
 # Betti cardinalities of smooth projective curve families
@@ -49,6 +35,27 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
+
+private theorem constructible_comp_nat {T : Type*} [TopologicalSpace T]
+    (a : T → ℕ) (ha : (Set.range a).Finite)
+    (hc : ∀ n : ℕ, Topology.IsConstructible {s : T | a s = n}) (F : ℕ → ℕ) :
+    (Set.range (fun s ↦ F (a s))).Finite ∧
+      ∀ n : ℕ, Topology.IsConstructible {s : T | F (a s) = n} := by
+  classical
+  refine ⟨(ha.image F).subset ?_, fun n ↦ ?_⟩
+  · rintro _ ⟨s, rfl⟩
+    exact ⟨a s, ⟨s, rfl⟩, rfl⟩
+  · have he : {s : T | F (a s) = n} =
+        ⋃ m ∈ (Set.range a ∩ {m | F m = n}), {s : T | a s = m} := by
+      ext s
+      simp only [Set.mem_ofPred_eq, Set.mem_iUnion, Set.mem_inter_iff, Set.mem_range]
+      constructor
+      · intro h
+        exact ⟨a s, ⟨⟨s, rfl⟩, h⟩, rfl⟩
+      · rintro ⟨m, ⟨_, hm⟩, hsm⟩
+        exact hsm ▸ hm
+    rw [he]
+    exact Topology.IsConstructible.biUnion (ha.inter_of_left _) (fun m _ ↦ hc m)
 
 /-- Betti cardinalities and their constructibility in a smooth projective curve family.
 Source: blueprint `sec-smooth-purity/sk-prop-sf-cbc`, order 1610
@@ -111,6 +118,103 @@ theorem projective_curve_betti_cardinalities
         else 1) ∧
       ∀ r : ℕ, (Set.range (b r)).Finite ∧
         ∀ n : ℕ, Topology.IsConstructible {s : S | b r s = n} := by
-  sorry
+  classical
+  have : Smooth f := SmoothOfRelativeDimension.smooth 1 f
+  obtain ⟨n, hn, i, hi, hif⟩ := IsHProjective.exists_isClosedImmersion (f := f)
+  let := hn
+  let := hi
+  let Xs : S → Scheme.{u} := fun s ↦ pullback f (S.geometricPointAt s)
+  let c : S → ℕ := fun s ↦ Nat.card (_root_.ConnectedComponents (Xs s))
+  let g : S → ℕ := fun s ↦
+    letI : (Xs s).Over (Spec (.of (AlgebraicClosure (S.residueField s)))) :=
+      ⟨pullback.snd f (S.geometricPointAt s)⟩
+    Scheme.arithmeticGenus (AlgebraicClosure (S.residueField s)) (Xs s)
+  have hcard (s : S) :
+      Nat.card (Sheaf.H ((Xs s).constantZMod ℓ) 0) = ℓ ^ c s ∧
+      Nat.card (Sheaf.H ((Xs s).constantZMod ℓ) 1) = ℓ ^ (2 * g s) ∧
+      Nat.card (Sheaf.H ((Xs s).constantZMod ℓ) 2) = ℓ ^ c s ∧
+      ∀ r, 2 < r → Nat.card (Sheaf.H ((Xs s).constantZMod ℓ) r) = 1 := by
+    have hℓK : (ℓ : AlgebraicClosure (S.residueField s)) ≠ 0 := by
+      simpa only [map_natCast, map_zero] using
+        (algebraMap (S.residueField s)
+          (AlgebraicClosure (S.residueField s))).injective.ne (hinv s)
+    exact smooth_proper_curve_natural_cardinalities
+      (pullback.snd f (S.geometricPointAt s)) ℓ hℓK
+  have hc : (Set.range c).Finite ∧
+      ∀ m : ℕ, Topology.IsConstructible (c ⁻¹' {m}) := by
+    have hlocal : IsLocallyConstant c :=
+      (proper_smooth_geometric_components_locally_constant f).2.1
+    refine ⟨hlocal.range_finite, fun m ↦ ?_⟩
+    exact (hlocal.isClosed_fiber m).isCompact.isConstructible (hlocal.isOpen_fiber m)
+  have hg : (Set.range g).Finite ∧
+      ∀ m : ℕ, Topology.IsConstructible (g ⁻¹' {m}) := by
+    let G := SheafOfModules.unit X.ringCatSheaf
+    have : G.IsFinitePresentation :=
+      SheafOfModules.IsFiniteLocallyFree.isFinitePresentation.{u, u, u} _
+    have h := Scheme.Modules.finite_range_and_isConstructible_finrankH_geometricFibre
+      f i hif G (Scheme.Modules.isFlatOver_of_isInvertible f G) 1
+    let β : S → ℕ := fun s ↦
+      letI : (Xs s).Over (Spec (.of (AlgebraicClosure (S.residueField s)))) :=
+        ⟨pullback.snd f (S.geometricPointAt s)⟩
+      ((Scheme.Modules.pullback (pullback.fst f (S.geometricPointAt s))).obj G).finrankH
+        (AlgebraicClosure (S.residueField s)) 1
+    change (Set.range β).Finite ∧
+      (∀ m : ℕ, Topology.IsConstructible (β ⁻¹' {m})) at h
+    have heq : β = g := by
+      funext s
+      let : (Xs s).Over (Spec (.of (AlgebraicClosure (S.residueField s)))) :=
+        ⟨pullback.snd f (S.geometricPointAt s)⟩
+      exact Scheme.Modules.finrankH_congr (AlgebraicClosure (S.residueField s))
+        (Scheme.Modules.pullbackObjUnitIso (pullback.fst f (S.geometricPointAt s))) 1
+    rwa [heq] at h
+  let b : ℕ → S → ℕ := fun r s ↦
+    if r = 0 ∨ r = 2 then ℓ ^ c s else if r = 1 then ℓ ^ (2 * g s) else 1
+  have hnat (r : ℕ) (s : S) :
+      Nat.card (Sheaf.H ((Xs s).constantZMod ℓ) r) = b r s := by
+    by_cases hr : r = 0 ∨ r = 2
+    · rcases hr with rfl | rfl
+      · exact (hcard s).1
+      · exact (hcard s).2.2.1
+    · by_cases hr1 : r = 1
+      · subst r
+        exact (hcard s).2.1
+      · rw [show b r s = 1 by simp only [b, if_neg hr, if_neg hr1]]
+        exact (hcard s).2.2.2 r (by omega)
+  refine ⟨b, ?_, ?_, ?_⟩
+  · intro r s
+    have hb : b r s ≠ 0 := by
+      dsimp [b]
+      split_ifs
+      · exact pow_ne_zero _ hℓ.ne_zero
+      · exact pow_ne_zero _ hℓ.ne_zero
+      · simp only [not_false_eq_true]
+    have : Finite (Sheaf.H ((Xs s).constantZMod ℓ) r) :=
+      Nat.finite_of_card_ne_zero ((hnat r s).trans_ne hb)
+    obtain ⟨e⟩ := Scheme.nonempty_sheafH_extDerivedIso (Xs s) r
+    have he := Cardinal.mk_congr
+      ((e.app ((Xs s).constantZMod ℓ)).addCommGroupIsoToAddEquiv.toEquiv)
+    change Cardinal.mk (Sheaf.H ((Xs s).constantZMod ℓ) r) = _ at he
+    exact he.symm.trans (Nat.cast_card.symm.trans (congrArg Nat.cast (hnat r s)))
+  · intro r s
+    have he : (pullback.snd f (S.geometricPointAt s)).genus = g s := by
+      let inst : (Xs s).Over (Spec (.of (AlgebraicClosure (S.residueField s)))) :=
+        ⟨pullback.snd f (S.geometricPointAt s)⟩
+      have hd : SmoothOfRelativeDimension 1 (pullback.snd f (S.geometricPointAt s)) := by
+        infer_instance
+      have hp : IsProper (pullback.snd f (S.geometricPointAt s)) := by infer_instance
+      exact @Scheme.genus_eq_arithmeticGenus _ _ (Xs s) inst hd hp
+    change b r s = if r = 0 ∨ r = 2 then ℓ ^ c s else
+      if r = 1 then ℓ ^ (2 * (pullback.snd f (S.geometricPointAt s)).genus) else 1
+    rw [he]
+  · intro r
+    by_cases hr : r = 0 ∨ r = 2
+    · simpa only [b, if_pos hr] using
+        constructible_comp_nat c hc.1 hc.2 (fun n ↦ ℓ ^ n)
+    · by_cases hr1 : r = 1
+      · simpa only [b, if_neg hr, if_pos hr1] using
+          constructible_comp_nat g hg.1 hg.2 (fun n ↦ ℓ ^ (2 * n))
+      · simp only [b, if_neg hr, if_neg hr1]
+        refine ⟨Set.finite_range_const, fun n ↦ ?_⟩
+        by_cases hn : 1 = n <;> simp [hn]
 
 end AlgebraicGeometry

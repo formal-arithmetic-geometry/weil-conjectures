@@ -1,0 +1,120 @@
+{
+ "id": "lem-fin-proper-coherent-finite-dimensional",
+ "kind": "statement",
+ "title": "Source API for finite-dimensional proper coherent cohomology",
+ "statement": "Let k be a field, X a scheme over k with proper structure morphism [def-weil-proper-morphism], and F a quasi-coherent finitely presented O_X-module [pqf-def-coherent]. For every q in N its source-library module cohomology H^q(X,F), with the scalar action through the given structure map [pqf-def-cohomology], is finite dimensional over k [def-weil-vector-space-dimension]. No smoothness, connectedness, projectivity, or nonemptiness is required. This records the field-valued finiteness API already proved in the source library; it omits the extra bounded-vanishing conclusion of lem-pc-euler-characteristic-well-defined.",
+ "source": {
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 02O5, proper coherent finiteness, field base; existing proof finiteDimensional_H_of_isProper in WeilConjectures/AlgebraicGeometry/Cohomology/DirectImage/AffineMorphism.lean"
+ },
+ "stmt_deps": [
+  "pqf-def-coherent",
+  "pqf-def-cohomology",
+  "def-pc-scheme",
+  "def-weil-vector-space-dimension",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Apply proper coherent finiteness over the Noetherian affine scheme Spec k: the higher direct image has a finite module of global sections. The source proof uses finite_sections_higherDirectImage.",
+   "uses": [
+    "lem-pc-coherent-hi"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The affine-base comparison identifies those sections with H^q(X,F). The field-valued comparison is semilinear for the scalar isomorphism Gamma(Spec k,O)=k. Transport a finite generating set across that bijective semilinear map; every scalar in Gamma(Spec k,O) comes from k, so its image spans H^q(X,F) over k. This is finiteDimensional_H_of_isProper in AffineMorphism. The zero scheme and zero sheaf give zero-dimensional groups.",
+   "uses": [
+    "lem-pc-cohomology-sections-affine-base"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-coherent-hi",
+  "lem-pc-cohomology-sections-affine-base"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/coherent.tex",
+  "place": "Tag 02O5, proper coherent finiteness, field base; existing proof finiteDimensional_H_of_isProper in WeilConjectures/AlgebraicGeometry/Cohomology/DirectImage/AffineMorphism.lean Recorded against the existing source proof, or implemented by U7 where the declaration is new. No new sorry."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Coherent cohomology of proper schemes is finite dimensional and cohomology dimensions in projective flat families are constructible; cohomology on a finite disjoint open cover is a direct sum",
+   "results": "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; CategoryTheory.Presheaf.isSheaf_coherent_of_projective_comp; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; CategoryTheory.Presheaf.isSheaf_coherent_of_projective_of_comp; Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential; AlgebraicGeometry.exists_appTop_π_eq_of_isLimit; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.exists_mem_of_isClosed_of_nonempty",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib theorem for these scheme-cohomology statements; reuse the existing source-library APIs and elementary cardinality or dimension lemmas."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.finrank, Finset.sum",
+   "results": "Module.finrank_pi_fintype; Module.finrank_directSum; Module.exists_nontrivial_relation_of_finrank_lt_card; Module.exists_nontrivial_relation_sum_zero_of_finrank_succ_lt_card; FiniteDimensional.exists_relation_sum_zero_pos_coefficient_of_finrank_succ_lt_card; Module.sum_neg_one_pow_finrank_eq_zero_of_exact; GradedObject.eulerChar_eq_sum_finSet_of_finrankSupport_subset; HomologicalComplex.eulerChar_eq_sum_finSet_of_finrankSupport_subset",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib theorem for these scheme-cohomology statements; reuse the existing source-library APIs and elementary cardinality or dimension lemmas."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteDimensional_H_of_isProper|finrankH_eq_sum_of_pairwise_disjoint|finite_range_and_isConstructible_finrankH_geometricFibre",
+   "results": "No Mathlib match. Source-library rg found the exact declarations recorded below.",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib theorem for these scheme-cohomology statements; reuse the existing source-library APIs and elementary cardinality or dimension lemmas."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The cohomology of a coherent sheaf on a proper scheme over a field is finite dimensional, and its dimensions on geometric fibres in a projective flat family form constructible functions",
+   "results": "AlgebraicGeometry.finite_appTop_of_universallyClosed; AlgebraicGeometry.IsProper.toLocallyOfFiniteType; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; AlgebraicGeometry.IsFinite.recOn; SheafOfModules.QuasicoherentData.IsFinitePresentation; AlgebraicGeometry.IsProper; AlgebraicGeometry.IsProper.instOfIsFinite; AlgebraicGeometry.IsFinite.iff_isProper_and_isAffineHom",
+   "date": "2026-10-18",
+   "verdict": "No Mathlib theorem for these scheme-cohomology statements; reuse the existing source-library APIs and elementary cardinality or dimension lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProjectiveCurveBettiCardinalities",
+  "date": "2026-10-18",
+  "group": "U7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fin-projective-curve-betti-cardinalities",
+   "place": "Source API for finite-dimensional proper coherent cohomology",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finiteDimensional_H_of_isProper",
+  "statement": "theorem finiteDimensional_H_of_isProper [IsProper (X ↘ Spec (.of k))] (ℱ : X.Modules) [SheafOfModules.IsQuasicoherent (R := X.ringCatSheaf) ℱ] [SheafOfModules.IsFinitePresentation (R := X.ringCatSheaf) ℱ] (q : ℕ) : FiniteDimensional k (ℱ.H q)",
+  "branch": "sheaf-dag",
+  "by": "U7",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261018T092210-L-3363277",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261018T092210-L-3363277",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
