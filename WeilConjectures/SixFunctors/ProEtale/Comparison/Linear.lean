@@ -39,8 +39,4 @@ being left adjoint to the `Λ`-linear restriction `ν_*`. -/
 instance linear_comparisonUpperStar : ν^*(X)[A].Linear Λ :=
   (comparisonAdjunction A X).left_adjoint_linear
 
-example {R : Type (u + 1)} [CommRing R] :
-    (comparisonUpperStar (ModuleCat.{u + 1} R) X).Linear R :=
-  inferInstance
-
 end AlgebraicGeometry.ProEtale

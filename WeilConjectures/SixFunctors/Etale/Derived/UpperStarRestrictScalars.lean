@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.SixFunctors.BaseChange.RestrictScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperStarIdCoherence
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalars
@@ -14,10 +15,10 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Res
 
 Let `ρ : Λ →+* Λ'` be a morphism of commutative rings and `g : Y ⟶ Z` a morphism of schemes.
 Restriction of scalars along `ρ` commutes with the pullback `g^*` of étale sheaves of modules:
-there is a canonical isomorphism `g^* (Res F) ≅ Res (g^* F)` for sheaves `F` of `Λ'`-modules on
-`Z`. It is the conjugate, for the adjunctions `Res ⊣ Coext` and `g^* ⊣ g_*`, of the identity
-`g_* ∘ Coext = Coext ∘ g_*`: the direct image is precomposition with base change, while
-coextension of scalars is postcomposition. This isomorphism is compatible with the composition,
+the canonical isomorphism `g^* (Res F) ≅ Res (g^* F)` for sheaves `F` of `Λ'`-modules on `Z` is
+`AlgebraicGeometry.Etale.upperStarRestrictScalarsIso ρ g`, conjugate, for the adjunctions
+`Res ⊣ Coext` and `g^* ⊣ g_*`, to the identity `g_* ∘ Coext = Coext ∘ g_*`. This isomorphism is
+compatible with the composition,
 identity and congruence isomorphisms of the pullbacks, and passes to the derived categories,
 where it is compatible with the corresponding isomorphisms of derived pullbacks.
 
@@ -30,8 +31,6 @@ whose general pasting lemmas on derived categories it reuses.
 
 ## Main definitions
 
-- `AlgebraicGeometry.Etale.upperStarRestrictScalarsIso ρ g` :
-  `Res ⋙ g^* ≅ g^* ⋙ Res` on étale sheaves of modules.
 - `AlgebraicGeometry.Etale.leftDerivedUpperStarRestrictScalarsIso ρ g` :
   `Res ⋙ Lg^* ≅ Lg^* ⋙ Res` on the derived categories.
 
@@ -60,46 +59,6 @@ open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
 variable {Λ Λ' : Type (u + 1)} [CommRing Λ] [CommRing Λ'] (ρ : Λ →+* Λ')
-
-section UpperStar
-
-variable {Y Z : Scheme.{u}} (g : Y ⟶ Z)
-
-/-- Restriction of scalars along `ρ : Λ →+* Λ'` commutes with the pullback of étale sheaves:
-for a morphism of schemes `g : Y ⟶ Z`, the canonical isomorphism `g^* (Res F) ≅ Res (g^* F)` for
-sheaves `F` of `Λ'`-modules on `Z`. It is the conjugate, for the composite adjunctions
-`Res ⋙ g^* ⊣ g_* ⋙ Coext` and `g^* ⋙ Res ⊣ Coext ⋙ g_*`, of the identity of
-`g_* ⋙ Coext = Coext ⋙ g_*`: the direct image restricts sheaves along base change, while
-coextension of scalars is computed objectwise. It is used for the compatible systems of
-Frobenius coefficient morphisms (blueprint `prop-trf-adic-coefficient-morphism-systems` (3),
-`sk-prop-trace-adic`). -/
-noncomputable def upperStarRestrictScalarsIso :
-    Sheaf.restrictScalars Z.smallEtaleTopology ρ ⋙ (g)^*[ModuleCat.{u + 1} Λ] ≅
-      (g)^*[ModuleCat.{u + 1} Λ'] ⋙ Sheaf.restrictScalars Y.smallEtaleTopology ρ :=
-  (conjugateIsoEquiv
-    ((upperStarLowerStarAdjunction _ g).comp (Sheaf.restrictCoextendScalarsAdj _ ρ))
-    ((Sheaf.restrictCoextendScalarsAdj _ ρ).comp (upperStarLowerStarAdjunction _ g))).symm
-    (Iso.refl _)
-
-/-- `AlgebraicGeometry.Etale.upperStarRestrictScalarsIso` is conjugate to the identity. -/
-lemma conjugateEquiv_upperStarRestrictScalarsIso_hom :
-    conjugateEquiv
-      ((upperStarLowerStarAdjunction _ g).comp (Sheaf.restrictCoextendScalarsAdj _ ρ))
-      ((Sheaf.restrictCoextendScalarsAdj _ ρ).comp (upperStarLowerStarAdjunction _ g))
-      (upperStarRestrictScalarsIso ρ g).hom = 𝟙 _ :=
-  congrArg Iso.hom ((conjugateIsoEquiv _ _).apply_symm_apply (Iso.refl _))
-
-/-- The componentwise form of
-`AlgebraicGeometry.Etale.conjugateEquiv_upperStarRestrictScalarsIso_hom`. -/
-lemma conjugateEquiv_upperStarRestrictScalarsIso_hom_app
-    (F : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :
-    (conjugateEquiv
-      ((upperStarLowerStarAdjunction _ g).comp (Sheaf.restrictCoextendScalarsAdj _ ρ))
-      ((Sheaf.restrictCoextendScalarsAdj _ ρ).comp (upperStarLowerStarAdjunction _ g))
-      (upperStarRestrictScalarsIso ρ g).hom).app F = 𝟙 _ :=
-  NatTrans.congr_app (conjugateEquiv_upperStarRestrictScalarsIso_hom ρ g) F
-
-end UpperStar
 
 section Coherence
 

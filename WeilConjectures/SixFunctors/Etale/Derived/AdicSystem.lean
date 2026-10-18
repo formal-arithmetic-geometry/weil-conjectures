@@ -296,7 +296,8 @@ separably closed field `k` and a separated finite-type `a_X : X ⟶ Spec k`, com
 commutes with restriction of scalars along `ρ` through a coefficient comparison `α` for which
 `RΓ_c(X, K) ⊗ᴸ_Λ Λ' ⟶ RΓ_c(X, K ⊗ᴸ_Λ Λ')` is an isomorphism for every `K ∈ Dᵇctf(X, Λ)`, and `α`
 is compatible with the compact-support base change along every pair of automorphisms
-(`AlgebraicGeometry.Etale.IsCompactPullbackCompatible`). -/
+(`AlgebraicGeometry.Etale.IsCompactPullbackCompatible`). The canonical comparison is such an `α`;
+only its existence is used. -/
 theorem exists_isCoefficientChange_compactlySupportedGlobalSections
     [HasInvertibleExponent Λ (Spec (.of k))] (hρ : Function.Surjective ρ) :
     ∃ α, IsCoefficientChange ρ (compactlySupportedGlobalSections (ModuleCat.{u + 1} Λ) aX)
@@ -312,7 +313,8 @@ coefficient rings whose exponent is invertible on `k` and a geometric point `x̄
 the geometric stalk commutes with restriction of scalars along `ρ` through a coefficient
 comparison `β` for which `K_x̄ ⊗ᴸ_Λ Λ' ⟶ (K ⊗ᴸ_Λ Λ')_x̄` is an isomorphism for every
 `K ∈ Dᵇctf(X, Λ)`, and `β` is compatible with the stalk transport at `x̄` along every pair of
-automorphisms fixing `x̄` (`AlgebraicGeometry.Etale.IsStalkPullbackCompatible`). -/
+automorphisms fixing `x̄` (`AlgebraicGeometry.Etale.IsStalkPullbackCompatible`). The canonical
+comparison is such a `β`; only its existence is used. -/
 theorem exists_isCoefficientChange_geometricStalk
     [HasInvertibleExponent Λ (Spec (.of k))] (hρ : Function.Surjective ρ)
     (x : Spec (.of k) ⟶ X) :
