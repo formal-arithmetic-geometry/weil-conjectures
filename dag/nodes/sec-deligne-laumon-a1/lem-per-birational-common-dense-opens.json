@@ -195,5 +195,23 @@
   "group": "Q115",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-dd4a93c24 (reviewer sub-agent of L); spot-checked: Verdict FIX. I read Stacks Tags 0BAC alternative (2) and 0BAB in morphisms.tex (lines ~12970-13110; tags confirmed in tags lines 14204-14205) and Definition 0BAA. The item statement matches 0BAC(2) hypothesis by hypothesis; it spells out 'birational', swaps X and Y consistently, and weakens nothing. The new node lem-per-birational-generic-localization is the 0BAB ring claim (B_q ≅ A_p implies B_q ≅ A_q). I checked its proof: every prime of A_q contains p, A_q→κ(p) is surjective, so A_q is local and equals A_p. I tested it on id, k[x]→k[x,y]/(y²,xy), Z→Z[1/2] and a case where the hypothesis fails. It is true, self-contained, statement-only, strictly smaller than the item, and I found no duplicate after grepping the DAG for birational/0BAB/0BAC/'unique minimal prime' (the 0BAJ, 0552 and 0559 nodes are different statements). Steps 2-4 cite statements that say what is used. Three small repairs in the item (statement unchanged): (1) D5/E5: Steps 1 and 5 left out the source's omitted 'immediate reduction'. I wrote it out with disjoint opens X_i°=X∖∪_{j≠i}X_j and Y_i°, chosen affine charts with U_i^0 ⊆ f^{-1}(V_i^0), and explicit gluing of the disjoint U_i→V_i plus density through the generic points. (2) C1: added the Mathlib leaf lem-weil-pbc-affine-opens-induced-ring-map-spec-square (01I1) to Step 1 for 'f on the affine charts is Spec φ', and wrote in Step 3 that A_g is finitely presented over B_g by base change, which 00R2 needs with n=0. (3) B5: the source places of Steps 1 and 2 said 'Tag 0BAB, lemma-birational-birational'; corrected to 0BAC. I accept the tool_uses of the three sec-proper-base-change nodes. No SGA is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.BirationalCommonDenseOpens",
+  "declaration": "AlgebraicGeometry.exists_common_dense_opens_isIso_of_generic_stalks",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/BirationalCommonDenseOpens.lean",
+  "statement": "theorem exists_common_dense_opens_isIso_of_generic_stalks {X Y : Scheme.{u}} (f : Y ⟶ X) [LocallyOfFinitePresentation f] (hX : (irreducibleComponents X).Finite) (hY : (irreducibleComponents Y).Finite) (hgeneric : Set.BijOn f (genericPoints Y) (genericPoints X)) (hstalk : ∀ η ∈ genericPoints Y, IsIso (f.stalkMap η)) : ∃ (U : Y.Opens) (V : X.Opens), Dense (U : Set Y) ∧ Dense (V : Set X) ∧ ∃ hUV : U ≤ f ⁻¹ᵁ V, IsIso (f.resLE V U hUV)",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4da3a7164",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Statement matches Stacks 0BAC(2) with 0BAA spelled out (X/Y swapped consistently); Lean matches clause by clause: LocallyOfFinitePresentation, finite irreducibleComponents on both sides, Set.BijOn on genericPoints, IsIso stalkMap at generic points, dense U/V, U ≤ f⁻¹ᵁV, IsIso resLE; no extra hypotheses, no U=f⁻¹V. Edge cases ok (both empty; one empty excluded by BijOn; nonreduced/nonseparated allowed). Not a duplicate of BirationalDenseOpenIso (0BAJ: separated, full preimage); no parallel delivery found. Node differs from live only in lean; statement verbatim; source/blueprint docstrings and 5-step proof present; sorry only. Two stmt_deps are Mathlib leaves with mathlib_match and no lean record: fine. nt_compile --json clean 1.7 s, broken control fails with the expected goal. Advisory: unused proof-only imports."
  }
 }
