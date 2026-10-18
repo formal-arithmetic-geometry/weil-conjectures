@@ -16,9 +16,124 @@
   "def-weil-pbc-constructible-complexes",
   "def-pur-derived-internal-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First record closure under finite derived constructions. By [thm-constructible-serre], constructible $A$-module sheaves are closed under kernels, cokernels and extensions. Applying [lem-sbc-cohomology-in-weak-serre-subcategory] to this subcategory shows that $D^b_c$ is triangulated. By [lem-weil-pbc-finite-type-over-noetherian], $X$ is Noetherian. We prove the assertion simultaneously for all closed subschemes $T\\hookrightarrow X$, by induction on their underlying closed subsets: the induction claim at a closed subset quantifies over all closed subschemes with that support, including thickenings. The empty case is zero. Quotients of Noetherian rings are Noetherian, and generators for a finite-type algebra still generate its quotients; hence these closed subschemes are again Noetherian and of finite type over the same $S$. Their diagonals are restrictions of the closed diagonal of $X/S$, so they remain separated. Fix such a nonempty $T$, assume the assertion for every proper closed support, and fix $M,N\\in D^b_c(T_{\\mathrm{et}},A)$.",
+   "uses": [
+    "thm-constructible-serre",
+    "lem-sbc-cohomology-in-weak-serre-subcategory",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Propositions 3.9 and 3.15; Noetherian devissage expanded without a dualizing object."
+   }
+  },
+  {
+   "text": "For any open immersion $v:W\\hookrightarrow T$, the input [lem-per-low-base-open-sheaf-finiteness] gives $Rv_*F\\in D^b_c(T,A)$ for every constructible sheaf $F$ in degree zero. This extends to every $L\\in D^b_c(W,A)$: its finitely many truncation triangles [lem-weil-pbc-truncation-triangle] express it as successive extensions of $H^q(L)[-q]$. Module-sheaf categories have enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives], so [lem-weil-pbc-derived-direct-image-triangulated] applies to their additive left exact direct image. Apply $Rv_*$ to those finitely many triangles and use Step 1. Only finitely many sheaf-dependent bounds occur, so taking their maximum after shifts gives a finite bound. This step does not require a uniform cohomological-dimension estimate for all sheaves.",
+   "uses": [
+    "lem-per-low-base-open-sheaf-finiteness",
+    "lem-weil-pbc-truncation-triangle",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-derived-direct-image-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Propositions 3.15 and 3.16(1); ILO XIII Theorem 2.3.1(i), p.197; finite Postnikov devissage."
+   }
+  },
+  {
+   "text": "There are finitely many nonzero $H^q(M)$. Apply [prop-constructible-generic-constancy] to each and intersect the finitely many dense opens, obtaining a dense open $j:U\\hookrightarrow T$ on which every $H^q(M)$ is finite locally constant. The intersection is dense since $T$ is Noetherian and each open contains every generic point of its finitely many irreducible components. Let $i:Z\\hookrightarrow T$ be the reduced closed complement; its support is proper. By [prop-weil-pbc-inverse-image-modules-exact], restriction commutes with cohomology, and [prop-constructible-pullback] preserves constructibility. Thus $j^*M,j^*N,i^*M$ are bounded constructible, with the stated locally constant cohomology for $j^*M$.",
+   "uses": [
+    "prop-constructible-generic-constancy",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "prop-constructible-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Proposition 3.15, open/closed devissage underlying the regular-base case."
+   }
+  },
+  {
+   "text": "Here is the local calculation on $U$. If $F$ is a finite locally constant $A$-module sheaf and $G$ a constructible one, then on an etale cover trivializing $F$ it is $A^{\\oplus r}$, since $A$ is a field. By [def-pur-derived-internal-hom] the Hom complex from $A^{\\oplus r}[0]$ into a K-injective representative of $G[0]$ is that representative to the finite power $r$; its only cohomology is $G^{\\oplus r}$ in degree zero. Restriction of derived Hom to these slice sites agrees with derived Hom there by [lem-weil-pbc-ringed-internal-hom-exact-restriction]. Thus all higher internal Ext vanish, and the degree-zero Hom is constructible: on a common stratification trivializing $G$, further etale covers trivialize both sheaves and their Hom is a finite-dimensional constant vector space. Descending these local identifications is exactly finite local constancy on each stratum.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Proposition 3.15; elementary finite-free internal-Hom calculation on etale slices."
+   }
+  },
+  {
+   "text": "Apply the finite truncation triangles [lem-weil-pbc-truncation-triangle] first to $j^*N$ and then to $j^*M$. The distinguished-triangle assertions of [lem-sf-hom-triangulated] and Step 4 express $B=R\\mathcal Hom_A(j^*M,j^*N)$ as finitely many extensions of bounded constructible objects. Explicitly, if $M$ has cohomology in $[a,b]$ and $N$ in $[c,d]$, the building block $R\\mathcal Hom_A(H^q(j^*M)[-q],H^r(j^*N)[-r])$ has its only cohomology in degree $r-q$; hence all blocks lie in $[c-b,d-a]$. The long exact cohomology sequence and the Serre property from Step 1 give constructibility and the same finite bound for $B$. Step 2 then gives $Rj_*B\\in D^b_c(T,A)$.",
+   "uses": [
+    "lem-weil-pbc-truncation-triangle",
+    "lem-sf-hom-triangulated",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Proposition 3.15; finite truncation devissage, and Proposition 3.16(1) for the open term."
+   }
+  },
+  {
+   "text": "Apply [lem-per-etale-internal-hom-localization] with first argument $A_T[0]$ and second argument $N$. The identity $R\\mathcal Hom_A(A_W,L)=L$, computed directly from [def-pur-derived-internal-hom], for $W=T,U,Z$, identifies its triangle with\n$$i_*Ri^!N\\longrightarrow N\\longrightarrow Rj_*j^*N\\longrightarrow(i_*Ri^!N)[1].$$\nBoth middle and right terms are bounded constructible by Step 2, so Step 1 gives $i_*Ri^!N\\in D^b_c(T,A)$. The counit $i^*i_*\\cong1$ of [prop-openclosed-lowerstar-fully-faithful] is module-linear by naturality with respect to the $A$-actions, and applies termwise. Exactness of $i^*$ [prop-weil-pbc-inverse-image-modules-exact] and constructible pullback [prop-constructible-pullback] therefore imply $Ri^!N\\cong i^*i_*Ri^!N\\in D^b_c(Z,A)$. This proves the needed exceptional-restriction finiteness from open direct-image finiteness; no purity theorem is invoked.",
+   "uses": [
+    "lem-per-etale-internal-hom-localization",
+    "def-pur-derived-internal-hom",
+    "prop-openclosed-lowerstar-fully-faithful",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "prop-constructible-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO XVII proof of Lemma 7.6.10, displayed triangle p.313, applied to the constant first argument; Zheng Proposition 3.16(2), closed case."
+   }
+  },
+  {
+   "text": "Since $Z$ has proper closed support, the simultaneous induction hypothesis applies to $i^*M$ and $Ri^!N$ on $Z$, giving $C=R\\mathcal Hom_A(i^*M,Ri^!N)\\in D^b_c(Z,A)$. The exactness of closed direct image is part of [lem-per-etale-internal-hom-localization]. Its preservation of constructible cohomology follows from [lem-weil-pbc-finite-pushforward-constructible-noetherian], applied to the finite closed immersion; the underlying finite sheaves and their $A$-actions give precisely the constant-$A$ constructibility condition. Thus $i_*C$ is bounded constructible. Apply [lem-per-etale-internal-hom-localization] now with first argument $M$ and second argument $N$:\n$$i_*C\\longrightarrow R\\mathcal Hom_A(M,N)\\longrightarrow Rj_*B\\longrightarrow(i_*C)[1].$$\nStep 5 gives the right term, and Step 1 gives bounded constructibility of the middle term. This completes the Noetherian induction, including $T=X$, and proves the exact item statement.",
+   "uses": [
+    "lem-weil-pbc-finite-pushforward-constructible-noetherian",
+    "lem-per-etale-internal-hom-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+    "place": "Proposition 3.15; ILO XVII proof of Lemma 7.6.10, p.313, open/closed internal-Hom triangle."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "lem-per-etale-internal-hom-localization",
+  "lem-per-low-base-open-sheaf-finiteness",
+  "lem-sbc-cohomology-in-weak-serre-subcategory",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sf-hom-triangulated",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-weil-pbc-finite-pushforward-constructible-noetherian",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-truncation-triangle",
+  "prop-constructible-generic-constancy",
+  "prop-constructible-pullback",
+  "prop-openclosed-lowerstar-fully-faithful",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "thm-constructible-serre"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Propositions 3.14–3.16, pp.18–19; explicit finite-field Noetherian devissage using ILO XIII 2.3.1(i) and the purely formal triangle in ILO XVII 7.6.10. No dualizing argument."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,10 +177,46 @@
    "results": "25 hits: Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/Data/Set/Defs.lean, Mathlib/Analysis/InnerProductSpace/Dual.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Tactic/Translate/ToDual.lean, Mathlib/Algebra/Homology/HomotopyFiber.lean, Mathlib/Algebra/Homology/SpectralObject/Page.lean; digest fb68dfc0fe630737; ",
    "date": "2026-10-19",
    "verdict": "no match: read returned signatures; they concern constant sheaves, general derived categories, condensed modules, algebraic etaleness or constructible subsets, not this etale finiteness/duality assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derivedHom\"",
+   "results": "{\"t\": \"2026-10-18T23:15:57Z\", \"tool\": \"loogle\", \"query\": \"\\\"derivedHom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected the returned signatures; scheme open-immersion properties, constructible subsets and underived sheaf/cohomology definitions do not assert bounded constructibility of higher etale direct images"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*[Hh]om|[Hh]om.*constructible",
+   "results": "{\"t\": \"2026-10-18T23:15:57Z\", \"tool\": \"grep\", \"query\": \"constructible.*[Hh]om|[Hh]om.*constructible\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\"], \"digest\": \"f1aa2f886689b75c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected the returned signatures; scheme open-immersion properties, constructible subsets and underived sheaf/cohomology definitions do not assert bounded constructibility of higher etale direct images",
+   "sub": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom of bounded constructible etale sheaves over a regular noetherian base of dimension at most one is bounded constructible",
+   "results": "{\"t\": \"2026-10-18T23:16:03Z\", \"tool\": \"leanfinder\", \"query\": \"Derived internal Hom of bounded constructible etale sheaves over a regular noetherian base of dimension at most one is bounded constructible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward\", \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"instMonoidalClosedCondensedSet\", \"LightCondensed.instMonoidalClosedLightCondMod\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"CategoryTheory.Sheaf.H\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\"], \"digest\": \"1e252266ff46b96f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected the returned signatures; scheme open-immersion properties, constructible subsets and underived sheaf/cohomology definitions do not assert bounded constructibility of higher etale direct images"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal sheaf Hom preserves bounded constructible complexes of finite field sheaves on etale sites",
+   "results": "{\"t\": \"2026-10-18T23:22:33Z\", \"tool\": \"leansearch\", \"query\": \"Derived internal sheaf Hom preserves bounded constructible complexes of finite field sheaves on etale sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.sheafHom'\", \"CategoryTheory.sheafHom\", \"CategoryTheory.Presheaf.IsSheaf.hom\", \"CategoryTheory.sheafHom'Iso\", \"CategoryTheory.Sheaf.Hom\", \"CategoryTheory.Sheaf.Hom.recOn\", \"CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits\", \"CategoryTheory.Sheaf.instInhabitedHom\"], \"digest\": \"e93fd52fab9b2afe\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected the returned signatures; scheme open-immersion properties, constructible subsets and underived sheaf/cohomology definitions do not assert bounded constructibility of higher etale direct images"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheaf Ext between constructible etale torsion sheaves is constructible and vanishes in high degrees",
+   "results": "{\"t\": \"2026-10-18T23:22:35Z\", \"tool\": \"leanfinder\", \"query\": \"Sheaf Ext between constructible etale torsion sheaves is constructible and vanishes in high degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"DerivedCategory.IsGE\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"DerivedCategory.isGE_iff\", \"DerivedCategory.isLE_iff\"], \"digest\": \"3074b66cf95ce802\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected the returned signatures; scheme open-immersion properties, constructible subsets and underived sheaf/cohomology definitions do not assert bounded constructibility of higher etale direct images"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-complete-trait-constructible-biduality",
@@ -92,5 +243,99 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-low-base-constructible-internal-hom",
+  "worker": "stage1",
+  "summary": "Prove low-base internal-Hom finiteness by Noetherian open/closed induction. Add one sheaf-level open direct-image finiteness input for a regular base of dimension at most one; existing quasi-excellent and field-only inputs do not cover this base. Expand finite truncation, finite-free Hom, and the constant-first-argument localization giving Ri! finiteness. Preserve the item statement and all imported metadata.",
+  "blueprint": "Proof Step 1, dimension-normalized Verdier duality, via the regular finite-torsion duality input: the local biduality invoked in ILO Expose XVI, Lemma 3.5.9 proof, printed p.250, before the purity of the target is proved. Here: constructibility of the biduality cone before the dimension-one projective-line induction. The seven steps supply the independent low-base finiteness input for the constructible biduality cone, before biduality or purity.",
+  "tool_uses": [
+   {
+    "node": "def-pur-derived-internal-hom",
+    "why": "Generic Derived internal Hom on a ringed site, used only as a black box in the explicit Noetherian devissage; the perverse unit supplies no alternative proof of this tool."
+   },
+   {
+    "node": "lem-sbc-cohomology-in-weak-serre-subcategory",
+    "why": "Generic Cohomology in a weak Serre class gives a triangulated subcategory, used only as a black box in the explicit Noetherian devissage; the perverse unit supplies no alternative proof of this tool."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Generic Long exact cohomology sequence of a distinguished triangle in the derived category, used only as a black box in the explicit Noetherian devissage; the perverse unit supplies no alternative proof of this tool."
+   },
+   {
+    "node": "lem-sf-hom-triangulated",
+    "why": "Generic Exactness of the internal Hom in each variable, used only as a black box in the explicit Noetherian devissage; the perverse unit supplies no alternative proof of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-direct-image-triangulated",
+    "why": "Generic The derived direct image on bounded below derived categories is a triangulated functor, used only as a black box in the explicit Noetherian devissage; the perverse unit supplies no alternative proof of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-pushforward-constructible-noetherian",
+    "why": "Generic finite direct-image constructibility, used only as a black box in the explicit Noetherian devissage; the perverse unit supplies no alternative proof of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6), used only as a black box in the explicit Noetherian devissage; the perverse unit supplies no alternative proof of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Generic Sheaves of modules on the small etale site have enough injectives, used only as a black box in the explicit Noetherian devissage; the perverse unit supplies no alternative proof of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic Derived internal Hom calculus on small ringed sites, used only as a black box in the explicit Noetherian devissage; the perverse unit supplies no alternative proof of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Generic The truncation triangle tau_{<=q-1}K -> tau_{<=q}K -> H^q(K)[-q] is distinguished, used only as a black box in the explicit Noetherian devissage; the perverse unit supplies no alternative proof of this tool."
+   },
+   {
+    "node": "prop-constructible-generic-constancy",
+    "why": "Generic constructible-sheaf dense-open constancy, used only as a black box in the explicit Noetherian devissage; the perverse unit supplies no alternative proof of this tool."
+   },
+   {
+    "node": "prop-constructible-pullback",
+    "why": "Generic Pullback of constructible sheaves, used only as a black box in the explicit Noetherian devissage; the perverse unit supplies no alternative proof of this tool."
+   },
+   {
+    "node": "prop-openclosed-lowerstar-fully-faithful",
+    "why": "Generic ordinary etale closed counit, used only as a black box in the explicit Noetherian devissage; the perverse unit supplies no alternative proof of this tool."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic Inverse image of etale sheaves of modules over a constant ring is exact, used only as a black box in the explicit Noetherian devissage; the perverse unit supplies no alternative proof of this tool."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "Generic Constructible sheaves form a weak Serre subcategory, used only as a black box in the explicit Noetherian devissage; the perverse unit supplies no alternative proof of this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pur-derived-internal-hom",
+  "lem-sbc-cohomology-in-weak-serre-subcategory",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sf-hom-triangulated",
+  "lem-weil-pbc-derived-direct-image-triangulated",
+  "lem-weil-pbc-finite-pushforward-constructible-noetherian",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-truncation-triangle",
+  "prop-constructible-generic-constancy",
+  "prop-constructible-pullback",
+  "prop-openclosed-lowerstar-fully-faithful",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "thm-constructible-serre"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q39-3635ae085",
+  "group": "Q39",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-3635ae085 (reviewer sub-agent of L); spot-checked: Read both files in full, every cited statement, ILO XIII 2.3.1 (printed p.197) and Zheng 3.14–3.16 (pp.18–19). The item statement and stmt_deps are identical to the live node, which is still unsplit. New node lem-per-low-base-open-sheaf-finiteness: R^q j_* of a constructible F_ell-module sheaf is constructible and bounded per sheaf, over a regular Noetherian base of dimension <=1. It is a special case of ILO XIII 2.3.1(i), which needs only S Noetherian of dimension 1. The dimension-0 case via S ⊔ Spec Q[t] is valid, and Zheng 3.16(1) states the same. B1–B9 hold: statement only, objects introduced, defs correct, six searches recorded. It is not a duplicate of lem-per-gabber-open-immersion-sheaf-finiteness, which needs quasi-excellence that fails for a non-excellent DVR. Proof steps: Step 1 sets up a valid Noetherian induction over closed subsets, with D^b_c triangulated via thm-constructible-serre and the weak-Serre lemma. Step 2 gives finitely many per-sheaf bounds through truncation triangles and Rv_* triangulated. Step 3 uses generic constancy; for F_ell, abelian and module local constancy coincide. Step 4 is a genuinely elementary finite-free RHom calculation on slices. Step 5's degree bound [c-b, d-a] checks out. Step 6 applies the localization triangle with K=A_T to give i_*Ri^!N, then uses i^*i_*≅1 and exact i^* to show Ri^!N ∈ D^b_c(Z). Step 7 applies the induction on Z, finite pushforward and the localization triangle, which closes the induction. No SGA citation and no purity or dualizing input. The tool_uses are all generic and accepted. The parent's use on (P^1)^n over a field or an excellent DVR is covered. Edge cases checked: empty X, Z empty, field base, non-excellent DVR, nonreduced X. No fixes."
  }
 }
