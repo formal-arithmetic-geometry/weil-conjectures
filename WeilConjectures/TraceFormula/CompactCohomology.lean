@@ -336,7 +336,8 @@ lemma isoMk_condition_of_frobenius {A B : WeilBoundedConstructible ℓ (𝟙 X)}
   have hB := frobenius_hom B
   rw [IsoAlgebra.str_hom] at hA hB
   rw [← cancel_epi ((boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ X).inv.app
-    A.carrier), ← (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ X).inv.naturality_assoc,
+    A.carrier),
+    ← (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ X).inv.naturality_assoc,
     Functor.id_map, ← hB, ← reassoc_of% hA]
   exact h.symm
 /-- The compactly supported Frobenius of a Weil object `(K, φ)` is
@@ -546,6 +547,7 @@ lemma compactPullback_comp_weilLowerShriekFrobeniusComparison
   simp only [Category.assoc]
 
 set_option maxHeartbeats 1000000 in
+-- the defeq of the carriers of the lower shriek of Weil objects with `Rf_! K` is slow
 /-- **The Leray isomorphism for Weil objects** (blueprint `lem-trf-weil-shriek-operator-fibres`,
 the global operators): the compactly supported cohomology of `Rf_! K` is that of `K`,
 `RΓ_c(Y, Rf_! K) ≅ RΓ_c(X, K)`, as Weil objects for the identity of the base point. In
