@@ -12,22 +12,14 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
-import Sheaf.AlgebraicGeometry.LimitAffineTransition
-import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Sheaf.RingTheory.IntegralClosureFiniteNormalProduct
-import Sheaf.AlgebraicGeometry.NagataRelativeGluingDatumDescent
-import Sheaf.AlgebraicGeometry.NagataRelativeGluingValidStage
-import Sheaf.AlgebraicGeometry.NagataFinitePresentationDescent
-import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import Sheaf.AlgebraicGeometry.DescendFinite
-import Sheaf.AlgebraicGeometry.DescendClosedImmersion
-import Sheaf.AlgebraicGeometry.HomeomorphPurelyInseparableBaseChange
-import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
+import Sheaf.AlgebraicGeometry.PerfectClosureFiniteNormalModel
+import Sheaf.AlgebraicGeometry.ReducedNormalizationOverNormalReduction
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Finite
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
+import Mathlib.FieldTheory.PurelyInseparable.PerfectClosure
+import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
 import Sheaf.AlgebraicGeometry.Morphisms.FiniteNormalDenseOpenIso
-import Sheaf.AlgebraicGeometry.NagataRelativeGluingAxiomsEventually
 import Sheaf.AlgebraicGeometry.NormalityPerfectClosureTest
-import Sheaf.AlgebraicGeometry.ReducedAlgebraicNormalizationFieldChange
-import WeilConjectures.AlgebraicGeometry.HomeomorphPurelyInseparableBaseChange
 
 /-!
 # Geometrically normal normalization after purely inseparable extension
@@ -44,6 +36,222 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
+private theorem reduced_closedImmersion_iso
+    {A B : Scheme.{u}} (f : A ⟶ B) [IsClosedImmersion f] [Surjective f]
+    [IsReduced A] :
+    ∃ e : A ≅ B.nilradical.subscheme, e.hom ≫ B.nilradical.subschemeι = f := by
+  let g := f.liftNilradical
+  have hg : g ≫ B.nilradical.subschemeι = f := by simp [g]
+  have : IsClosedImmersion (g ≫ B.nilradical.subschemeι) := by rw [hg]; infer_instance
+  have : IsClosedImmersion g :=
+    IsClosedImmersion.of_comp_isClosedImmersion g B.nilradical.subschemeι
+  have : Surjective g := ⟨fun y => by
+    obtain ⟨x, hx⟩ := f.surjective (B.nilradical.subschemeι y)
+    refine ⟨x, B.nilradical.subschemeι.isClosedEmbedding.injective ?_⟩
+    change (g ≫ B.nilradical.subschemeι) x = _
+    rwa [hg]⟩
+  have : IsIso g := isIso_of_isClosedImmersion_of_surjective g
+  exact ⟨asIso g, hg⟩
+
+private theorem normal_stalks_of_iso {A B : Scheme.{u}} (e : A ≅ B)
+    (hA : ∀ z : A, IsDomain (A.presheaf.stalk z) ∧
+      IsIntegrallyClosed (A.presheaf.stalk z)) :
+    ∀ z : B, IsDomain (B.presheaf.stalk z) ∧
+      IsIntegrallyClosed (B.presheaf.stalk z) := by
+  intro z
+  obtain ⟨hd, hi⟩ := hA (e.inv z)
+  have : IsDomain (A.presheaf.stalk (e.inv z)) := hd
+  have : IsIntegrallyClosed (A.presheaf.stalk (e.inv z)) := hi
+  let es := (asIso (e.inv.stalkMap z)).commRingCatIsoToRingEquiv
+  exact ⟨es.symm.toMulEquiv.isDomain, IsIntegrallyClosed.of_equiv es⟩
+
+private theorem normal_stalks_of_openImmersion {A B : Scheme.{u}} (f : A ⟶ B)
+    [IsOpenImmersion f]
+    (hB : ∀ z : B, IsDomain (B.presheaf.stalk z) ∧
+      IsIntegrallyClosed (B.presheaf.stalk z)) :
+    ∀ z : A, IsDomain (A.presheaf.stalk z) ∧
+      IsIntegrallyClosed (A.presheaf.stalk z) := by
+  intro z
+  obtain ⟨hd, hi⟩ := hB (f z)
+  have : IsDomain (B.presheaf.stalk (f z)) := hd
+  have : IsIntegrallyClosed (B.presheaf.stalk (f z)) := hi
+  let es := (asIso (f.stalkMap z)).commRingCatIsoToRingEquiv
+  exact ⟨es.symm.toMulEquiv.isDomain, IsIntegrallyClosed.of_equiv es⟩
+
+private theorem normal_stalks_of_self_baseChange
+    {k : Type u} [Field k] (Y : Scheme.{u}) (q : Y ⟶ Spec (.of k))
+    (h : ∀ z : (pullback q (Spec.map
+        (CommRingCat.ofHom (algebraMap k k))) : Scheme.{u}),
+      IsDomain ((pullback q (Spec.map
+        (CommRingCat.ofHom (algebraMap k k)))).presheaf.stalk z) ∧
+      IsIntegrallyClosed ((pullback q (Spec.map
+        (CommRingCat.ofHom (algebraMap k k)))).presheaf.stalk z)) :
+    ∀ z : Y, IsDomain (Y.presheaf.stalk z) ∧
+      IsIntegrallyClosed (Y.presheaf.stalk z) := by
+  let b := Spec.map (CommRingCat.ofHom (algebraMap k k))
+  have hb : b = 𝟙 (Spec (.of k)) := by simp [b]
+  have : IsIso b := by rw [hb]; infer_instance
+  let g := inv (pullback.fst q b)
+  intro z
+  obtain ⟨hd, hi⟩ := h (g z)
+  have : IsDomain ((pullback q b).presheaf.stalk (g z)) := hd
+  have : IsIntegrallyClosed ((pullback q b).presheaf.stalk (g z)) := hi
+  let e := (asIso (g.stalkMap z)).commRingCatIsoToRingEquiv
+  exact ⟨e.symm.toMulEquiv.isDomain, IsIntegrallyClosed.of_equiv e⟩
+
+private theorem component_normalization_normal (T : Scheme.{u})
+    (Z : irreducibleComponents T)
+    (z : (T.reducedNormalizationComponent Z).normalization) :
+    IsDomain ((T.reducedNormalizationComponent Z).normalization.presheaf.stalk z) ∧
+      IsIntegrallyClosed ((T.reducedNormalizationComponent Z).normalization.presheaf.stalk z) := by
+  constructor
+  · infer_instance
+  · apply Scheme.Hom.isIntegrallyClosed_stalk_normalization
+    intro x
+    let F := (T.reducedNormalizationComponent Z).functionField
+    let e := (Spec.stalkIso F x).commRingCatIsoToRingEquiv
+    let eF : F ≃+* Localization.AtPrime x.asIdeal := RingEquiv.ofBijective _
+      (Field.localization_map_bijective (M := x.asIdeal.primeCompl) (by simp))
+    have hfield : IsField ((Spec F).presheaf.stalk x) :=
+      e.isField (eF.symm.isField (Field.toIsField F))
+    let := hfield.toField
+    infer_instance
+
+private theorem reducedNormalization_normal (T : Scheme.{u}) :
+    ∀ z : T.reducedNormalization,
+      IsDomain (T.reducedNormalization.presheaf.stalk z) ∧
+        IsIntegrallyClosed (T.reducedNormalization.presheaf.stalk z) := by
+  intro z
+  obtain ⟨i, x, hx⟩ := (sigmaOpenCover
+    (fun Z : irreducibleComponents T =>
+      (T.reducedNormalizationComponent Z).normalization)).exists_eq z
+  obtain ⟨hd, hi⟩ := component_normalization_normal T i x
+  have : IsDomain ((T.reducedNormalizationComponent i).normalization.presheaf.stalk x) := hd
+  have : IsIntegrallyClosed
+      ((T.reducedNormalizationComponent i).normalization.presheaf.stalk x) := hi
+  subst z
+  let e := (asIso ((Sigma.ι
+    (fun Z : irreducibleComponents T =>
+      (T.reducedNormalizationComponent Z).normalization) i).stalkMap x)).commRingCatIsoToRingEquiv
+  exact ⟨e.toMulEquiv.isDomain, IsIntegrallyClosed.of_equiv e.symm⟩
+
+private theorem reducedNormalization_finite
+    {k : Type u} [Field k] (T : Scheme.{u}) (q : T ⟶ Spec (.of k))
+    [LocallyOfFiniteType q] [QuasiCompact q] : IsFinite T.fromReducedNormalization := by
+  classical
+  have : IsLocallyNoetherian T := LocallyOfFiniteType.isLocallyNoetherian q
+  have : CompactSpace T := QuasiCompact.compactSpace_of_compactSpace q
+  have : IsNoetherian T := ⟨⟩
+  have : Finite (irreducibleComponents T) :=
+    (finite_irreducibleComponents_of_isNoetherian (X := T)).to_subtype
+  have (Z : irreducibleComponents T) :
+      IsFinite ((T.reducedNormalizationComponent Z).fromNormalization ≫
+        (Scheme.IdealSheafData.vanishingIdeal
+          ⟨Z.1, isClosed_of_mem_irreducibleComponents _ Z.2⟩).subschemeι) := by
+    let a := (Scheme.IdealSheafData.vanishingIdeal
+      ⟨Z.1, isClosed_of_mem_irreducibleComponents _ Z.2⟩).subschemeι
+    have : LocallyOfFiniteType (a ≫ q) := inferInstance
+    have := (T.reducedNormalizationComponent Z).isFinite_fromNormalization_of_locallyOfFiniteType
+      (a ≫ q)
+    exact inferInstance
+  exact IsFinite.sigmaDesc _
+
+private theorem reducedNormalization_dense_preimage (T : Scheme.{u}) [IsNoetherian T]
+    (U : T.Opens) (hU : Dense (U : Set T)) :
+    Dense (T.fromReducedNormalization ⁻¹ᵁ U : Set T.reducedNormalization) := by
+  classical
+  let C (Z : irreducibleComponents T) := T.reducedNormalizationComponent Z
+  let a (Z : irreducibleComponents T) : C Z ⟶ T :=
+    (Scheme.IdealSheafData.vanishingIdeal
+      ⟨Z.1, isClosed_of_mem_irreducibleComponents _ Z.2⟩).subschemeι
+  have ha (Z : irreducibleComponents T) : Set.range (a Z) = Z.1 := by
+    change Set.range (Scheme.IdealSheafData.vanishingIdeal
+      ⟨Z.1, isClosed_of_mem_irreducibleComponents _ Z.2⟩).subschemeι = _
+    rw [Scheme.IdealSheafData.range_subschemeι]
+    rfl
+  have hfinite : (irreducibleComponents T).Finite :=
+    finite_irreducibleComponents_of_isNoetherian (X := T)
+  have hnonempty (Z : irreducibleComponents T) :
+      (((C Z).fromNormalization ≫ a Z) ⁻¹ᵁ U : Set (C Z).normalization).Nonempty := by
+    let W : T.Opens := ⟨(⋃₀ (irreducibleComponents T \ {Z.1}))ᶜ, by
+      rw [Set.sUnion_eq_biUnion, isOpen_compl_iff]
+      exact hfinite.sdiff.isClosed_biUnion
+        (fun V hV => isClosed_of_mem_irreducibleComponents V hV.1)⟩
+    have hW : closure (W : Set T) = Z.1 :=
+      closure_sUnion_irreducibleComponents_sdiff_singleton hfinite Z.1 Z.2
+    have hWne : (W : Set T).Nonempty := by
+      by_contra! he
+      exact Z.2.1.nonempty.ne_empty (by rw [← hW, he, closure_empty])
+    obtain ⟨x, hxW, hxU⟩ := hU.inter_open_nonempty W W.isOpen hWne
+    have hxZ : x ∈ Z.1 := by rw [← hW]; exact subset_closure hxW
+    obtain ⟨c, hc⟩ := (ha Z).symm ▸ hxZ
+    obtain ⟨z, hz⟩ := (C Z).fromNormalization.surjective c
+    refine ⟨z, ?_⟩
+    change a Z ((C Z).fromNormalization z) ∈ U
+    rwa [hz, hc]
+  intro z
+  obtain ⟨i, x, rfl⟩ := (sigmaOpenCover (fun Z => (C Z).normalization)).exists_eq z
+  let V := ((C i).fromNormalization ≫ a i) ⁻¹ᵁ U
+  have hx : x ∈ closure (V : Set (C i).normalization) := V.isOpen.dense (hnonempty i) x
+  have himg := mem_closure_image
+    (Sigma.ι (fun Z => (C Z).normalization) i).continuous.continuousAt hx
+  apply closure_mono _ himg
+  rintro _ ⟨y, hy, rfl⟩
+  change T.fromReducedNormalization ((Sigma.ι (fun Z => (C Z).normalization) i) y) ∈ U
+  change ((Sigma.ι (fun Z => (C Z).normalization) i) ≫ T.fromReducedNormalization) y ∈ U
+  simpa [Scheme.fromReducedNormalization, C, a, V] using hy
+
+private theorem finite_component_normalization_presentation (T : Scheme.{u})
+    [IsNoetherian T] :
+    ∃ (n : ℕ) (C : Fin n → Scheme.{u}) (hC : ∀ i, IsIntegral (C i))
+      (a : ∀ i, C i ⟶ T),
+      (∀ i, IsClosedImmersion (a i)) ∧
+      Function.Injective (fun i => Set.range (a i)) ∧
+      (∀ Z : Set T, Z ∈ irreducibleComponents T ↔ ∃ i, Set.range (a i) = Z) ∧
+      ∃ e : (∐ fun i => @Scheme.normalization (C i) (hC i)) ≅ T.reducedNormalization,
+        e.hom ≫ T.fromReducedNormalization =
+          Sigma.desc (fun i => @Scheme.fromNormalization (C i) (hC i) ≫ a i) := by
+  classical
+  let : Fintype (irreducibleComponents T) :=
+    (finite_irreducibleComponents_of_isNoetherian (X := T)).fintype
+  let n := Fintype.card (irreducibleComponents T)
+  let e : Fin n ≃ irreducibleComponents T := (Fintype.equivFin _).symm
+  let C (i : Fin n) := T.reducedNormalizationComponent (e i)
+  let a (i : Fin n) : C i ⟶ T :=
+    (Scheme.IdealSheafData.vanishingIdeal
+      ⟨(e i).1, isClosed_of_mem_irreducibleComponents _ (e i).2⟩).subschemeι
+  have ha (i : Fin n) : Set.range (a i) = (e i).1 := by
+    change Set.range (Scheme.IdealSheafData.vanishingIdeal
+      ⟨(e i).1, isClosed_of_mem_irreducibleComponents _ (e i).2⟩).subschemeι = _
+    rw [Scheme.IdealSheafData.range_subschemeι]
+    rfl
+  refine ⟨n, C, fun i => inferInstance, a, fun i => inferInstance, ?_, ?_, ?_⟩
+  · intro i j hij
+    apply e.injective
+    apply Subtype.ext
+    simpa only [ha] using hij
+  · intro Z
+    constructor
+    · intro hZ
+      obtain ⟨i, hi⟩ := e.surjective ⟨Z, hZ⟩
+      exact ⟨i, (ha i).trans (congrArg Subtype.val hi)⟩
+    · rintro ⟨i, rfl⟩
+      rw [ha]
+      exact (e i).2
+  · let r : (∐ fun i : Fin n => (C i).normalization) ≅ T.reducedNormalization :=
+      Sigma.whiskerEquiv
+        (f := fun i : Fin n => (C i).normalization)
+        (g := fun Z : irreducibleComponents T =>
+          (T.reducedNormalizationComponent Z).normalization)
+        e (fun _ => Iso.refl _)
+    refine ⟨r, ?_⟩
+    apply Sigma.hom_ext
+    intro i
+    dsimp only [r]
+    simp only [Iso.refl_inv, Sigma.whiskerEquiv_hom]
+    simp [Scheme.fromReducedNormalization, C, a]
+
+
 /-- The componentwise normalization becomes geometrically normal after a finite purely
 inseparable extension. Source: Stacks Project, Varieties, Tag 0BXT
 (blueprint: lem-weil-pbc-normalization-geonormal-insep).
@@ -53,104 +261,24 @@ The integral closed subschemes `C i` enumerate the reduced irreducible component
 map given by `Sigma.desc` followed by the field-base-change projection. Thus no integrality
 or reducedness assumption is imposed on `X`.
 
-Proof (following the node's nine steps):
-1. Choose a perfect purely inseparable overfield $K/k$ using [lem-weil-pbc-perfect-purely-
-   inseparable-overfield]. Index its finite intermediate extensions by inclusion. This is a
-   nonempty directed set with union $K$: a finite family $a_1,\ldots,a_m$ lies in
-   $k(a_1,\ldots,a_m)$, which is finite because each $a_j$ satisfies $T^{q^{n_j}}-a_j^{q^{n_j}}$
-   over $k$; the compositum of two such fields is generated by their two finite generating
-   families. Every intermediate field is purely inseparable by the same power condition. By [lem-
-   weil-pbc-limit-affine-transition], $\operatorname{Spec}K$ is the inverse limit of their
-   spectra. The same assertion for $X_K=\varprojlim X_{k_i}$ follows on every affine chart
-   $\operatorname{Spec}A\subset X$ from $A\otimes_kK=\varinjlim(A\otimes_kk_i)$; tensor
-   generators and their bilinear relations give this colimit identity. Transition maps are affine
-   since on these charts they are maps of spectra.
-2. For each field $F$ occurring here, $X_F$ and its reduction are finite type over $F$: affine
-   charts are generated by the images of the finitely many generators of the original chart, and
-   taking the quotient by the nilradical preserves these generators. Fields are Noetherian (their
-   ideals are $0$ and $1$), so [lem-weil-pbc-finite-type-over-noetherian] gives Noetherianity,
-   and [lem-weil-pbc-locally-noetherian-quasi-separated] gives quasi-separatedness. Normalize
-   $(X_K)_{\mathrm{red}}$ componentwise and call the result $N_K$. The finite surjective map
-   supplied by [lem-weil-pbc-reduced-algebraic-normalization-field-change], followed by
-   reduction, is a finite surjective map $\nu_K:N_K\to X_K$: on an affine chart the reduction map
-   is $A\to A/\sqrt0$, and a finite module over this quotient is also a finite module over $A$.
-3. The scheme $N_K$ is normal, with no irreducibility assumption on $X$. On a reduced integral
-   component $C$ of $X_K$, [def-sc-normalization] describes its normalization on each affine
-   chart $\operatorname{Spec}A$ by the integral closure of $A$ in the function field of $C$.
-   Apply [lem-sbc-integral-closure-finite-normal-product] with the one-element family consisting
-   of that field: its prime localizations are integrally closed domains. [lem-weil-pbc-scheme-
-   coproduct-family] makes the component normalizations open and closed in $N_K$, so their local-
-   ring assertion covers every point. Moreover $\nu_K$ is of finite presentation: each affine
-   target ring $A$ is Noetherian, a finite $A$-module algebra is a finite type $A$-algebra, and
-   [lem-weil-pbc-finite-type-noetherian-finite-presentation] makes its relations finitely
-   generated; the finite affine morphism is quasi-compact and quasi-separated.
-4. Descend the finitely presented $X_K$-scheme $N_K$ along the system $S_i=X_{k_i}$. Use the
-   finite chart/overlap datum of [def-nagata-relative-gluing-datum-descent], and its common
-   equality stage [def-nagata-relative-gluing-valid-stage]. [lemma-nagata-relative-gluing-axioms-
-   eventually] supplies the inverse and cocycle equations there, and [lem-weil-pbc-glue-schemes]
-   realizes the datum by an actual scheme, as required in [def-nagata-finite-presentation-
-   descent]. Apply [lemma-nagata-finite-presentation-descends]: it gives a finitely presented
-   morphism $\nu:Y\to X_{k_i}$ whose base change to $K$ is exactly $\nu_K$. The base stages are
-   qcqs by step 2, the transitions are affine by step 1, and the morphism being descended is
-   finitely presented by step 3. This invokes the existing descent construction and its property
-   theorem, not merely a definition as a theorem of existence.
-5. Use the tail system $S_j=X_{k_j}$, $j\ge i$, with limit $X_K$, taking $Y$ and $X_{k_i}$ as the
-   two schemes over $S_i$. After increasing $k_i$, [lem-weil-pbc-descend-finite] makes $\nu$
-   finite. Its hypotheses hold: $X_{k_i}$ is qcqs by step 2, $Y$ is qcqs by [lem-weil-pbc-qcqs-
-   morphism-permanence] applied to its finitely presented structure morphism, and $\nu$ is
-   locally of finite type because it is finitely presented. Finiteness persists at all later
-   stages: affine coordinates become $B\otimes_{k_i}k_j$ over $A\otimes_{k_i}k_j$, generated as a
-   module by the images of any finite set of $A$-module generators of $B$. Apply [lem-weil-pbc-
-   normality-perfect-closure-test] to $Y/k_i$: its base change is the normal $N_K$, and $K/k_i$
-   is perfect and purely inseparable since all the powers in step 1 already belong to $k\subseteq
-   k_i$. Thus $Y$ is geometrically normal. The same test proves this again after any subsequent
-   enlargement of $k_i$, since its base change to $K$ remains $N_K$.
-6. By [lem-weil-pbc-reduced-algebraic-normalization-field-change], the normal locus of
-   $(X_K)_{\mathrm{red}}$ is dense open and the normalization is an isomorphism over it. Let
-   $V_K$ be the corresponding open of $X_K$, using the identical underlying space of reduction
-   [def-weil-pbc-scheme-reduction]. Then $\nu_K^{-1}(V_K)\to V_K$ is a closed immersion with
-   source $(V_K)_{\mathrm{red}}$. Its preimage is dense in $N_K$: each component normalization
-   has the same function field as its reduced integral component by [def-sc-normalization], so
-   its generic point lies above the generic point of that component, which belongs to the normal
-   locus. Every component therefore meets the preimage. All these opens are quasi-compact, since
-   the schemes are Noetherian by step 2 (for $N_K$ use its finite type over $K$, immediate from
-   its finite map).
-7. Use [pqf-lem-limit-qc-open-descends] on the system $X_{k_j}$ to descend $V_K$ to a quasi-
-   compact open $V\subset X_{k_i}$ after another enlargement. For closed-immersion descent take
-   the tail system $S_j=\operatorname{Spec}k_j$ with limit $\operatorname{Spec}K$; the two
-   schemes over its initial stage are $\nu^{-1}(V)$ and $V$. Restrict the descended finite map to
-   $\nu^{-1}(V)\to V$ and apply [lem-weil-pbc-descend-closed-immersion]. Its base change to $K$
-   is the closed immersion in step 6, it is locally of finite type (finite), and its source and
-   target are qcqs: $Y$ is finite type over $k_i$, hence Noetherian, and inverse images of quasi-
-   compact opens under the finite affine map are quasi-compact; they are quasi-separated by [lem-
-   weil-pbc-locally-noetherian-quasi-separated]. Enlarge once more to obtain a closed immersion
-   on this open. The descended open is in $X_{k_i}$, correcting the source's typo $V\subset Y$.
-8. Set $k'=k_i$ at the final stage. Both $X_K\to X_{k'}$ and $N_K=Y_K\to Y$ are homeomorphisms by
-   [lem-pc-homeo-pure-insep], since $K/k'$ is purely inseparable. Write these homeomorphisms as
-   $h_X:X_K\to X_{k'}$ and $h_Y:N_K\to Y$, so $h_X\nu_K=\nu h_Y$. For $x\in X_{k'}$, choose its
-   preimage $x_K$ and then $y_K$ with $\nu_K(y_K)=x_K$; then $\nu(h_Y(y_K))=x$. Also
-   $h_X^{-1}(V)=V_K$ and $h_Y^{-1}(\nu^{-1}(V))=\nu_K^{-1}(V_K)$. A homeomorphism identifies
-   closures, so density of these two inverse images implies density of $V$ and $\nu^{-1}(V)$. The
-   closed immersion $\nu^{-1}(V)\to V$ is surjective on points and its source is reduced, since
-   $Y$ is normal (step 5): a nilpotent section has zero germ in every domain stalk and therefore
-   is zero. Use the affine quotient characterization of [def-weil-closed-immersion]. On each
-   affine open it is a quotient $A\twoheadrightarrow B$ with radical kernel $I$ and
-   $V(I)=\operatorname{Spec}A$. Thus $I=\sqrt0$, and $B=A/\sqrt0$. Consequently $\nu^{-1}(V)\cong
-   V_{\mathrm{red}}$ over $V$. This argument identifies the closed subscheme scheme-
-   theoretically, rather than merely its image.
-9. Let $N$ be the componentwise normalization of $(X_{k'})_{\mathrm{red}}$. It is finite over
-   $X_{k'}$ by the same quotient-ring argument as in step 2, and normal by the componentwise
-   application of [lem-sbc-integral-closure-finite-normal-product] in step 3. The open
-   $V_{\mathrm{red}}$ is normal because it is isomorphic to the open $\nu^{-1}(V)$ of the normal
-   $Y$. Hence [lem-weil-pbc-reduced-algebraic-normalization-field-change] identifies $N|_V$ with
-   $V_{\mathrm{red}}$. Its preimage is dense in $N$, since $V$ is dense in the Noetherian target
-   and contains every component generic point, and the component normalization has the same
-   function field [def-sc-normalization]. Both finite normal sources $N$ and $Y$ thus have dense
-   inverse images of $V$ and an isomorphism there over $X_{k'}$. Apply [lem-sbc-finite-normal-
-   dense-open-iso] with locally Noetherian base $X_{k'}$ to obtain $N\cong Y$ over $X_{k'}$. For
-   each field extension $L/k'$, this isomorphism base changes to $N_L\cong Y_L$; the latter has
-   normal local rings by step 5. This proves every clause, with $k'/k$ finite purely inseparable
-   by step 1.
+Proof: Choose the perfect closure K of k in an algebraic closure. The finite-model
+lemma descends the normalization over K to a finite normal cover Y of X_E for a
+finite intermediate field E, together with a dense open U where the cover is a
+closed immersion. Its K-base change is normal, so the perfect-closure criterion
+makes Y geometrically normal over E.
+
+Let N be the componentwise normalization of X_E. Integral component normalizations
+have normal domain stalks by the source normalization construction. Their finite
+coproduct is finite over X_E, and the inverse image of U is dense: intersect U
+with the open obtained by deleting all components other than one fixed component,
+then lift a point by surjectivity of that component's normalization. This gives a
+nonempty, hence dense, open on each integral normalization.
+
+Over U the normal cover and N are isomorphic, since both are the reduction of U.
+The finite normal dense-open comparison extends this isomorphism to N ≅ Y over
+X_E. Enumerate the finitely many reduced components by Fin n, reindex the coproduct,
+and base change the resulting isomorphism to each field extension L/E. Stalk
+isomorphisms transfer the normal domain assertions from Y_L to N_L.
 -/
 theorem exists_finite_purelyInseparable_geometricallyNormal_normalization
     (k : Type u) [Field k] (X : Scheme.{u})
@@ -184,6 +312,65 @@ theorem exists_finite_purelyInseparable_geometricallyNormal_normalization
                 pullback.snd (X ↘ Spec (CommRingCat.of k))
                   (Spec.map (CommRingCat.ofHom (algebraMap k k'))))
               (Spec.map (CommRingCat.ofHom (algebraMap k' L)))).presheaf.stalk z) := by
-  sorry
+  classical
+  let K := perfectClosure k (AlgebraicClosure k)
+  let q := X ↘ Spec (CommRingCat.of k)
+  obtain ⟨E, hE, Y, f, U, hf, hs, hU, hYdense, hclosed, hK⟩ :=
+    exists_perfectClosure_finite_normal_model k K X q
+  have : Module.Finite k E := hE
+  have : IsFinite f := hf
+  have : Surjective f := hs
+  have : IsClosedImmersion (f ∣_ U) := hclosed
+  let T := pullback q (Spec.map (CommRingCat.ofHom (algebraMap k E)))
+  let p : T ⟶ Spec (.of E) := pullback.snd _ _
+  have : IsLocallyNoetherian T := LocallyOfFiniteType.isLocallyNoetherian p
+  have : CompactSpace T := QuasiCompact.compactSpace_of_compactSpace p
+  have : IsNoetherian T := ⟨⟩
+  have hpower : ∀ a : K, ∃ n : ℕ, ∃ b : E,
+      algebraMap E K b = a ^ (ringExpChar E ^ n) := by
+    intro a
+    exact IsPurelyInseparable.pow_mem E (ringExpChar E) a
+  have hgeom := (normal_stalks_perfectClosure_iff E K hpower Y (f ≫ p)).mp hK
+  have hYn := normal_stalks_of_self_baseChange Y (f ≫ p) (hgeom E)
+  have hfiniteN := reducedNormalization_finite T p
+  have hN := reducedNormalization_normal T
+  have hNdense := reducedNormalization_dense_preimage T U
+    (by simpa [Scheme.Opens.range_ι] using hU)
+  have (z : Y) : IsDomain (Y.presheaf.stalk z) := (hYn z).1
+  have : IsReduced Y := isReduced_of_isReduced_stalk Y
+  have : Surjective (f ∣_ U) := IsZariskiLocalAtTarget.restrict hs U
+  obtain ⟨eY, heY⟩ := reduced_closedImmersion_iso (f ∣_ U)
+  have hred := normal_stalks_of_iso eY
+    (normal_stalks_of_openImmersion (f ⁻¹ᵁ U).ι hYn)
+  obtain ⟨eR, heR⟩ := Scheme.reducedNormalization_over_normal_reduction T p U
+    (by simpa [Scheme.Opens.range_ι] using hU) hred
+  let eU := eR ≪≫ eY.symm
+  have heU : eU.hom ≫ (f ∣_ U) = T.fromReducedNormalization ∣_ U := by
+    rw [← heY]
+    simp only [eU, Iso.trans_hom, Iso.symm_hom, Category.assoc,
+      Iso.inv_hom_id_assoc, heR]
+  have : IsFinite T.fromReducedNormalization := hfiniteN
+  obtain ⟨eNY, heNY⟩ := Scheme.finite_normal_iso_of_dense_open
+    T.fromReducedNormalization f hN hYn U hNdense hYdense eU heU
+  obtain ⟨n, C, hC, a, ha, hinj, hcomp, eN, heN⟩ :=
+    finite_component_normalization_presentation T
+  refine ⟨E, inferInstance, inferInstance, hE, inferInstance, n, C, hC, a,
+    ha, hinj, hcomp, ?_⟩
+  intro L _ _ z
+  let e := eN ≪≫ eNY
+  have he : e.hom ≫ f =
+      Sigma.desc (fun i => @Scheme.fromNormalization (C i) (hC i) ≫ a i) := by
+    simp only [e, Iso.trans_hom, Category.assoc, heNY, heN]
+  let b := Spec.map (CommRingCat.ofHom (algebraMap E L))
+  let r := Sigma.desc (fun i => @Scheme.fromNormalization (C i) (hC i) ≫ a i)
+  let m : pullback (r ≫ p) b ⟶ pullback (f ≫ p) b :=
+    pullback.map _ _ _ _ e.hom (𝟙 _) (𝟙 _)
+      (by simp only [Category.comp_id, ← Category.assoc, he, r]) (by simp)
+  have : IsIso m := by dsimp only [m]; infer_instance
+  obtain ⟨hd, hi⟩ := hgeom L (m z)
+  have : IsDomain ((pullback (f ≫ p) b).presheaf.stalk (m z)) := hd
+  have : IsIntegrallyClosed ((pullback (f ≫ p) b).presheaf.stalk (m z)) := hi
+  let es := (asIso (m.stalkMap z)).commRingCatIsoToRingEquiv
+  exact ⟨es.symm.toMulEquiv.isDomain, IsIntegrallyClosed.of_equiv es⟩
 
 end AlgebraicGeometry

@@ -1,0 +1,182 @@
+{
+ "id": "lem-weil-pbc-reduced-normalization-over-normal-reduction",
+ "kind": "statement",
+ "title": "Componentwise normalization over an open with normal reduction",
+ "statement": "Let k be a field [def-weil-field], let q:T to Spec k be finite type [def-pc-scheme, def-weil-pbc-scheme-conventions], and let U be a dense open of T. Suppose every stalk of the reduction U_red [def-weil-pbc-scheme-reduction] is an integrally closed domain [def-weil-pbc-normal-ring]. Write n:N to T for the componentwise normalization [def-weil-pbc-reduced-normalization]. There is an isomorphism from the inverse image of U in N to U_red, whose composite with the reduction closed immersion U_red to U is n restricted to U. This is only a local normalization compatibility statement and contains neither an arbitrary normal cover nor any geometric normality assertion.",
+ "stmt_deps": [
+  "def-weil-field",
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-scheme-reduction",
+  "def-weil-pbc-normal-ring",
+  "def-weil-pbc-reduced-normalization"
+ ],
+ "source": {
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BXT final paragraph; Varieties Tag 0BXR; Morphisms Tags 035Q and 0CDV"
+ },
+ "proof": [
+  {
+   "text": "Finite type over k makes T Noetherian with finitely many irreducible components. The reduction R of U is locally Noetherian, and its reduction closed immersion is a homeomorphism on underlying spaces.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "def-weil-pbc-scheme-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 035Q and 0CDV; normal components and normalization over the normal locus"
+   }
+  },
+  {
+   "text": "A locally Noetherian scheme with domain stalks has open irreducible components: its connected components are open, and the source theorem AlgebraicGeometry.irreducibleSpace_of_isDomain_stalk makes each connected open irreducible. Maximality identifies these with irreducible components. Distinct components are disjoint, since a nonempty open intersection is dense in either irreducible component. For an integral closed component C of T, its restriction over dense U factors through R. The factor is closed, surjective onto one component of R, and is an open immersion: factor through its open image, then apply the reduced-target surjective closed-immersion criterion.",
+   "uses": [
+    "def-weil-pbc-normal-ring",
+    "def-weil-closed-immersion",
+    "def-weil-pbc-scheme-reduction",
+    "def-weil-pbc-reduced-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 035Q and 0CDV; normal components and normalization over the normal locus"
+   }
+  },
+  {
+   "text": "Transfer integral closedness along the open-immersion stalk isomorphisms from R to the relevant open of C. The source theorem Scheme.isIso_fromNormalization_restrict makes the function-field normalization of C an isomorphism over this open. Thus each normalized component restricted above U maps openly into R. Its range is exactly the inverse image in R of the corresponding component of T.",
+   "uses": [
+    "def-sc-normalization",
+    "lem-sc-normalization-over-normal-locus",
+    "def-weil-pbc-reduced-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 035Q and 0CDV; normal components and normalization over the normal locus"
+   }
+  },
+  {
+   "text": "The component images in R cover R. They are pairwise distinct: equality of their ranges pulls back along the reduction homeomorphism to equality of the intersections with U, and closing their images in T recovers the original components because U is dense. They are therefore pairwise disjoint open components. The coproduct of these open immersions is an isomorphism by Mathlib nonempty_isColimit_cofanMk_of.",
+   "uses": [
+    "lem-weil-pbc-noetherian-finitely-many-components",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 035Q and 0CDV; normal components and normalization over the normal locus"
+   }
+  },
+  {
+   "text": "Finite coproducts of schemes are universal. Their pullback along U to T is consequently the coproduct of the restricted normalized components. Compose its inverse comparison with the preceding coproduct isomorphism onto R. Check the displayed equation over U after precomposing each coprojection, using the nilradical lift factorization. This includes the empty coproduct case.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-pbc-reduced-normalization",
+    "def-weil-pbc-scheme-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 035Q and 0CDV; normal components and normalization over the normal locus"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-finitely-many-components",
+  "def-weil-pbc-scheme-reduction",
+  "def-weil-pbc-normal-ring",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-reduced-normalization",
+  "def-sc-normalization",
+  "lem-sc-normalization-over-normal-locus",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0BXT final comparison, Morphisms Tags 035Q and 0CDV; direct component and finite-coproduct proof written and compiled by W5"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The normalization over an open subset whose reduction is normal is isomorphic to that reduced open subset",
+   "results": "8 hits for relative normalization, normalizationDesc, reduced open subschemes, instIsReducedNormalization and relative fromNormalization_preimage; no componentwise normalization over a normal reduction.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"normalization\", \"nilradical\"",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalization.*[Rr]educ|[Rr]educ.*normalization",
+   "results": "5 hits: four in Mathlib/AlgebraicGeometry/Normalization.lean for relative reduced normalization and irreducibility, plus an unrelated integer normalization-monoid comment. Blueprint search normalization reduction found 0 identical imported nodes. The existing project reduced algebraic normalization theorem assumes a reduced base and does not directly identify normalization of a nonreduced scheme with that of its reduction.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.NormalizationGeonormalInsep",
+  "date": "2026-10-18",
+  "group": "W5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Classical constructibility input in the proof of thm-weil-pbc-direct-image-finiteness-proper, expanded by Tag 0GKX: paragraph beginning Given a generic point, the diagram and open W (0GK7). Auxiliary input: Tag 0GK5, label lemma-dim-1-projective-completion-after-insep, assertions (1)-(5); normalization interpreted componentwise as in its normalization section; proof of 0GK5: normalization-geonormal-insep; Tag 0BXT final paragraph; Varieties Tag 0BXR; Morphisms Tags 035Q and 0CDV; only compatibility over the open with normal reduction is left: the closed-immersion/reduction comparison is proved in the parent Lean module",
+   "via": [
+    "lem-weil-pbc-normalization-geonormal-insep",
+    "lem-weil-pbc-field-curve-completion-insep",
+    "lem-weil-pbc-good-curves-generic-diagram",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ReducedNormalizationOverNormalReduction",
+  "file": "lean/Sheaf/AlgebraicGeometry/ReducedNormalizationOverNormalReduction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.reducedNormalization_over_normal_reduction",
+  "statement": "theorem reducedNormalization_over_normal_reduction\n    {k : Type u} [Field k] (T : Scheme.{u}) (q : T ⟶ Spec (.of k))\n    [LocallyOfFiniteType q] [QuasiCompact q]\n    (U : T.Opens) (hU : Dense (U : Set T))\n    (hnormal : ∀ z : U.toScheme.nilradical.subscheme,\n      IsDomain (U.toScheme.nilradical.subscheme.presheaf.stalk z) ∧\n        IsIntegrallyClosed (U.toScheme.nilradical.subscheme.presheaf.stalk z)) :\n    ∃ e : (T.fromReducedNormalization ⁻¹ᵁ U).toScheme ≅ U.toScheme.nilradical.subscheme,\n      e.hom ≫ U.toScheme.nilradical.subschemeι = T.fromReducedNormalization ∣_ U",
+  "branch": "sheaf-dag",
+  "by": "W5",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261018T071240-L-1682918",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261018T071240-L-1682918",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
