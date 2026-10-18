@@ -36,10 +36,6 @@ import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar
-import Sheaf.AlgebraicGeometry.BoundedConstructibleLowerStarPreservation
-import Sheaf.AlgebraicGeometry.BoundedConstructibleLowerStarHomology
-import Sheaf.AlgebraicGeometry.BoundedConstructibleTensorPreservation
-import Sheaf.AlgebraicGeometry.BoundedConstructibleHomPreservation
 
 /-!
 
@@ -232,9 +228,7 @@ lemma boundedConstructible_rightDerivedLowerStar_obj [IsFinitenessCoefficient �
       (condensedRingObj Λ X.left)))
     (hK : boundedConstructible (condensedRingObj Λ X.left) K) :
     boundedConstructible (condensedRingObj Λ Y.left) ((R((f.left)_*⟦Λ⟧)).obj K) :=
-  by
-    refine ⟨boundedConstructible_rightDerivedLowerStar_bounded Λ ℓ f K hK, ?_⟩
-    exact boundedConstructible_rightDerivedLowerStar_constructible Λ ℓ f K hK
+  sorry
 
 /-- The derived pushforward `Rf_* : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(Y)⟦Λ⟧` on bounded constructible complexes:
 the restriction of `R((f)_*⟦Λ⟧)`. -/
@@ -453,11 +447,8 @@ geometric point of characteristic `3`, `Tor_i^{ℤ/4}(ℤ/2, ℤ/2) = ℤ/2` for
 derived self-tensor of `ℤ/2` is unbounded. -/
 instance isMonoidal_boundedConstructible
     {ℓ : ℕ} [IsEllAdicFinitenessCoefficient ℓ Λ] [Fact (ringChar k ≠ ℓ)] :
-    (boundedConstructible (condensedRingObj Λ X.left)).IsMonoidal := by
-  refine { prop_unit := ?_, prop_tensor := ?_ }
-  · exact boundedConstructible_tensor_unit Λ X
-  · intro K L hK hL
-    exact boundedConstructible_tensor_closure Λ X K L hK hL
+    (boundedConstructible (condensedRingObj Λ X.left)).IsMonoidal :=
+  sorry
 
 /-- The bounded constructible complexes of module objects over an `ℓ`-adic coefficient ring `Λ`
 are stable under the derived hom `RHom(-, -)`, the internal hom of `D(Mod_{Λ_X})`. For a general
@@ -466,7 +457,7 @@ are stable under the derived hom `RHom(-, -)`, the internal hom of `D(Mod_{Λ_X}
 instance isMonoidalClosed_boundedConstructible
     {ℓ : ℕ} [IsEllAdicFinitenessCoefficient ℓ Λ] [Fact (ringChar k ≠ ℓ)] :
     (boundedConstructible (condensedRingObj Λ X.left)).IsMonoidalClosed :=
-  ⟨fun K L hK hL ↦ boundedConstructible_hom_closure Λ X K L hK hL⟩
+  sorry
 
 /-- The derived tensor product `- ⊗ᴸ - : Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧ ⥤ Dᵇc(X)⟦Λ⟧` on bounded
 constructible complexes: the tensor product of the monoidal structure on the full subcategory

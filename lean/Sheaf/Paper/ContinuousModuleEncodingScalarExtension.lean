@@ -5,7 +5,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.Paper.ContinuousCoefficientModuleEncoding
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalClosed
 
 /-! # Scalar extension under continuous module encodings
 
@@ -93,7 +92,7 @@ private noncomputable def tensorFromRestrict
     simp only [one_smul]
     exact PresheafOfModules.naturality_apply g.val i m
 
-private noncomputable def scalarExtensionTensorHomEquiv
+private noncomputable def tensorHomEquiv
     (M : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A))
     (N : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B)) :
     (changeOfRings α M ⟶ N) ≃
@@ -126,7 +125,7 @@ theorem exists_siteChangeOfRingsAdjunction :
         SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj B)),
       (∀ M, F.obj M = changeOfRings α M) ∧
       Nonempty (F ⊣ restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map α)) := by
-  let e := scalarExtensionTensorHomEquiv α
+  let e := tensorHomEquiv α
   have he : ∀ M N N' (g : N ⟶ N') (f : changeOfRings α M ⟶ N),
       e M N' (f ≫ g) = e M N f ≫
         (restrictScalars ((sheafCompose J (forget₂ CommRingCat RingCat)).map α)).map g := by
