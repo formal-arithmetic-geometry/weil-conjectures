@@ -154,25 +154,21 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NS-d4569509c (reviewer sub-agent of L); spot-checked: The definition matches the blueprint and cited sources, with edge cases and target coefficient categories checked. Repair the ill-typed restriction by explicitly supplying the canonical identification iν^{-1}Λ_Y ≅ Λ_{Yν}; corrected whole JSON is in fixes/dag/nodes/sec-smooth-purity/def-weil-proetale-constructible-sheaf.json.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-cab367e52",
-  "group": "NC",
+  "reviewer": "NT-stage2-cc-cad1f5abc",
+  "group": "Q04",
   "result": "pass",
-  "note": "Reviewed immutable node, dependencies, Lean modules, docstrings, edge cases, report sections, and recorded scompile/dry-run evidence. No substantive or mechanical faults found; review.md written."
+  "note": "Checked every clause against the node and the source (proof Steps 1-6): field and primes, finite A with l^n = 0 (A = 0 allowed), separated finite-type f, s and f≫s, the same Compactification c on both sites, F_et and F_proet are the recorded Rg_*∘D(i_!) composites, nu^* is the left adjoint of proEtaleSiteComparisonModules, any given adjunction F_et ⊣ R, preservation hypothesis through isBoundedConstructible and hasTorAmplitudeIn. Conclusions: intrinsic pro-etale domain (bounded, IsConstructibleProEtaleFixedModuleSheaf on every H^i, all-module Tor), functorial etale origin E with α, H_K = E⋙R⋙nu_X^*, β on all of D^+, t equal to β^{-1}∘nu^*(ε)∘α exactly as Step 6, Hom bijection h ↦ G(h)≫t_K. Edge cases: A = 0, empty schemes, K = 0, a = b, universes not equated. Three §1(B) existing:true rebinds checked: torAmplitudeIn tests every sheaf with the derived tensor, the fixed-module constructibility matches the node, FiniteCoefficient lower shriek matches the node. Observation, not a fault: the shared pro-etale records flip back from the NC/Q91 coefficient interfaces; both forms are faithful and those modules stay landed. No hollow definitions, docstrings with source and blueprint, one sorry, lean.statement verbatim, report sections present (the second reading is an open self-check). nt_compile.py: module clean in 3.9 s; a control copy with a planted error reported it."
  },
  "lean": {
-  "module": "Sheaf.Paper.ProEtaleConstructibleCoefficientSheaf",
-  "declaration": "AlgebraicGeometry.Scheme.IsConstructibleProEtaleCoefficientModuleSheaf",
-  "declarations": [
-   "AlgebraicGeometry.Scheme.IsConstructibleProEtaleCoefficientModuleSheaf"
-  ],
-  "file": "lean/Sheaf/Paper/ProEtaleConstructibleCoefficientSheaf.lean",
-  "statement": "def IsConstructibleProEtaleCoefficientModuleSheaf (Y : Scheme.{u}) (A : Type (u + 1)) [CommRing A] [Finite A] (F : pbcModules Y (adicLisseConstantRing Y A)) : Prop",
+  "module": "Sheaf.Paper.ProEtaleFixedModuleConstructible",
+  "declaration": "AlgebraicGeometry.Scheme.IsConstructibleProEtaleFixedModuleSheaf",
+  "statement": "def IsConstructibleProEtaleFixedModuleSheaf (Y : Scheme.{u})\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    (F : Sheaf (ProEt.topology Y) (ModuleCat.{u + 1} A)) : Prop",
+  "note": "Section 1(B): the current record accepts pbcModules over adicLisseConstantRing and cannot be applied to the ordinary fixed-coefficient sheaves on which the compact-support functors act. Rebind to the already-published exact fixed-coefficient presentation: the same positive finite locally closed constructible partition, local constancy, and finite geometric stalks. This predicate is intrinsic and imposes no etale-origin assumption. The canonical associated-module-sheaf realization identifies this encoding with constant-ring module sheaves.",
   "branch": "newtargets-dag",
-  "by": "NC",
-  "date": "2026-10-16",
-  "existing": false,
-  "note": "§1(B), coefficient-universe generalization. The recorded predicate restricts the finite scalar ring to Type u and uses its ULift. The adic datum and AdicTower allow the scalar ring in Type (u+1); equating these universes would change the site. Re-export the original interface and supply its same intrinsic finite-stratification, finite-lisse notion for site-universe coefficients, using the existing IsRelativelyFiniteLisseModule and actual inverse-image coefficient sheaves. Finite constant local modules express precisely local constancy with finite geometric stalks, by refinement of a trivializing covering. No etale-origin assumption or alternate tower is introduced. Current base records ProEtaleFixedModuleConstructible, whose predicate is instead on fixed ModuleCat-valued sheaves; it cannot be applied directly to the ringed module sheaves M.level uses. This delivery retains the same ringed-coefficient interface, without changing the underlying constructibility notion."
+  "by": "Q04",
+  "date": "2026-10-18",
+  "existing": true
  }
 }

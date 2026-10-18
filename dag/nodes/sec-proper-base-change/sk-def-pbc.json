@@ -256,5 +256,30 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-60a9ea5bc",
+  "group": "N3",
+  "result": "fix",
+  "note": "Statement matches the node clause by clause: Λ CommRing; IsProper f; arbitrary g; ChosenCartesianSquare; K bounded below (IsGE), classical (IsClassicalModuleComplex), local torsion of underlying abelian cohomology (Sheaf.IsTorsion, no uniform bound); conclusion gives both endpoints bounded below and classical plus IsIso of the exchange, i.e. an iso in the full D+_class. No extra hypotheses; edge cases (empty schemes, Λ=0, K=0, identities, negative degrees, residue-characteristic torsion) covered; universes bound. H4 fault fixed: the delivery's classicalProEtalePullbackSquare/classicalProEtaleExchange re-built the mate of the recorded stmt-dep proEtaleAmbientRingedExchange from a different Classical.choose comparison (proEtaleCanonicalPullbackComposition instead of proEtaleCanonicalDerivedPullbackComparison), a private copy; the constant-ring version was already landed as ProEtale.directImageConstantExchange. fixes/ClassicalProEtaleProperBaseChange.lean removes the square helper and makes classicalProEtaleExchange an abbrev of proEtaleAmbientRingedExchange on constant rings, with hcoeff from proEtaleConstantRingCompositeCoefficients_eq and sq.w; theorem text unchanged, so lean.statement stays verbatim; lean-record and report fixes included. nt_compile.py: delivered and fixed files both rc 0, no messages; a deliberately broken copy confirmed errors are reported. Docstrings, sorry-only proof, line lengths and the sk-def-exchange/sk-def-pbc existing records were checked."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.BaseChangeProperty",
+  "declaration": "AlgebraicGeometry.Etale.HasTorsionBaseChange",
+  "declarations": [
+   "AlgebraicGeometry.Etale.HasTorsionBaseChange",
+   "AlgebraicGeometry.Scheme.IsTorsionSheaf",
+   "AlgebraicGeometry.Etale.DerivedCategory.Plus.torsionHomology",
+   "CategoryTheory.Sheaf.IsTorsion",
+   "AlgebraicGeometry.Scheme.isTorsionSheaf_iff_isTorsion"
+  ],
+  "statement": "def Etale.HasTorsionBaseChange (f : X ⟶ Y) : Prop",
+  "branch": "slopmaster2",
+  "by": "N3",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "No lean record was present. BaseChangeProperty.lean:135-139 is exactly the arbitrary-morphism, arbitrary-base-change, all bounded-below torsion-cohomology PBC predicate (specialize Lambda to the integers for PBC). Its imports expose TorsionSheaf.lean:87-91 (geometric-stalk torsion), :96-118 (equivalence with local torsion of the underlying abelian sheaf), and :455-460 (all integer-degree cohomology). CategoryTheory.Sheaf.IsTorsion in SheafCohomology/Basic.lean:73-76 is local torsion for arbitrary sites; it is used directly on the pro-etale underlying abelian cohomology in this delivery. The kernel-colimit and example clauses retain their existing named proof dependencies; none asserts global sectionwise torsion."
  }
 }

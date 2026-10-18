@@ -330,5 +330,23 @@
   "group": "NB",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-120533d61 (reviewer sub-agent of L); spot-checked: I read the item, all 41 cited node statements, the parent lem-a1-normal-geometric-cover-components and the unit sk-p-real-rankin, plus Bhatt–Scholze Lemma 7.4.10 (p. 71). The statement is true and matches BS's claim that connected geometric covers of a normal quasi-compact Noetherian base are finite étale; no target is weakened. It is strictly smaller than its parent, which also needs finite étale and surjective. The delivery has no new nodes, and the duplicate search found nothing. Steps 1–6 and 9–12 are correct against their cited statements: clopen irreducible components; integral normal C via the étale-normal tool; separated through 0894 with id_C; the generic fibre is a single point Spec L with L/K finite separable; B finite by 032L; Noetherian stabilization; finite fibres via 02NH; proper via 0894. Fault (C3/C4, E5), now repaired: pqf-lem-normalization-open only gives some open immersion iota_U with nu∘iota=f_U, not the canonical f'_U that steps 8 and 9 need. A K-automorphism of L, such as a Galois twist, can make them differ and would break j_U = j_{U'}|_U. The fix rewrites step 8: iota_U corresponds to an injective A-algebra map B→L; writing each x in L as b/a (cleared denominators) extends it to tau in Aut(L/K), with tau(B)=B. So iota_U = Spec(tau|_B)∘f'_U, and j_U := f'_U is an open immersion. Step 8 now also cites lem-weil-pbc-morphism-into-affine-scheme and is marked elementary: false. Step 7 now notes that D is nonempty (xi in D). The statement, stmt_deps and proof_deps are unchanged. I accept the declared tool use of lem-weil-pbc-etale-over-normal-ring-normal as a generic local-algebra black box. No SGA source is cited.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9e15b309a",
+  "group": "NA",
+  "result": "pass",
+  "note": "Lean signature matches node clause-by-clause: ConnectedSpace/CompactSpace/IsLocallyNoetherian X; hnormal = recorded inline normal-domain form on stalks; Etale q; ValuativeCriterion q = unique lift for every valuation ring/fraction-field square (Mathlib ValuativeCriterion.lean:53-80); C : Z.Opens with (C:Set Z)=connectedComponent z (open maximal nonempty connected); conclusion QuasiCompact ∧ IsProper ∧ HasFiniteFibres (∀ s, preimage finite) of C.ι ≫ q. No extra assumptions; universes standard Scheme.{u}, nothing auto-bound. Source BS 7.4.10 p.71 checked. 8 of 10 stmt_deps recorded and used; connected-scheme and valuation-ring are status-mathlib leaves used via their mathlib_match. Commit changes only module, node lean record, report; statement verbatim; only proof is sorry; no defs; docstrings carry source, blueprint tag and 12 proof steps; report has Worker report and Second reading by NA sections. Same interface as parent normalGeometricCoverComponents; no duplicate. nt_compile.py --json at library path: clean, 1.7 s, rc 0. No findings."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricCoverComponentQcProper",
+  "declaration": "AlgebraicGeometry.geometricCoverComponentQcProper",
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricCoverComponentQcProper.lean",
+  "statement": "theorem geometricCoverComponentQcProper {X Z : Scheme.{u}} [ConnectedSpace X] [CompactSpace X] [IsLocallyNoetherian X] (hnormal : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x)) (q : Z ⟶ X) [Etale q] (hval : ValuativeCriterion q) (C : Z.Opens) (hC : ∃ z : Z, (C : Set Z) = connectedComponent z) : QuasiCompact (C.ι ≫ q) ∧ IsProper (C.ι ≫ q) ∧ Scheme.Hom.HasFiniteFibres (C.ι ≫ q)",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

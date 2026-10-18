@@ -29,7 +29,8 @@
   "def-weil-pbc-bounded-derived-subcategories",
   "def-weil-pbc-proetale-site",
   "def-weil-pbc-proetale-operations",
-  "def-weil-pbc-ambient-ringed-exchange"
+  "def-weil-pbc-ambient-ringed-exchange",
+  "pur713-def-pullback-comparison"
  ],
  "proof": [
   {
@@ -428,5 +429,29 @@
     }
    ]
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-60a9ea5bc",
+  "group": "N3",
+  "result": "fix",
+  "note": "Statement matches the node clause by clause: Λ CommRing; IsProper f; arbitrary g; ChosenCartesianSquare; K bounded below (IsGE), classical (IsClassicalModuleComplex), local torsion of underlying abelian cohomology (Sheaf.IsTorsion, no uniform bound); conclusion gives both endpoints bounded below and classical plus IsIso of the exchange, i.e. an iso in the full D+_class. No extra hypotheses; edge cases (empty schemes, Λ=0, K=0, identities, negative degrees, residue-characteristic torsion) covered; universes bound. H4 fault fixed: the delivery's classicalProEtalePullbackSquare/classicalProEtaleExchange re-built the mate of the recorded stmt-dep proEtaleAmbientRingedExchange from a different Classical.choose comparison (proEtaleCanonicalPullbackComposition instead of proEtaleCanonicalDerivedPullbackComparison), a private copy; the constant-ring version was already landed as ProEtale.directImageConstantExchange. fixes/ClassicalProEtaleProperBaseChange.lean removes the square helper and makes classicalProEtaleExchange an abbrev of proEtaleAmbientRingedExchange on constant rings, with hcoeff from proEtaleConstantRingCompositeCoefficients_eq and sq.w; theorem text unchanged, so lean.statement stays verbatim; lean-record and report fixes included. nt_compile.py: delivered and fixed files both rc 0, no messages; a deliberately broken copy confirmed errors are reported. Docstrings, sorry-only proof, line lengths and the sk-def-exchange/sk-def-pbc existing records were checked."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ClassicalProEtaleProperBaseChange",
+  "declaration": "AlgebraicGeometry.Scheme.isIso_classicalProEtaleExchange_of_isProper",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.classicalProEtaleExchange",
+   "AlgebraicGeometry.Scheme.isIso_classicalProEtaleExchange_of_isProper"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ClassicalProEtaleProperBaseChange.lean",
+  "statement": "theorem isIso_classicalProEtaleExchange_of_isProper (Λ : Type u) [CommRing Λ] {X' X Y' Y : Scheme.{u}} {g' : X' ⟶ X} {f' : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} [IsProper f] (sq : ChosenCartesianSquare g' f' f g) (K : proEtaleDerivedCategory X Λ) (hbounded : ∃ n : ℤ, DerivedCategory.IsGE K n) (hclassical : ProEtale.IsClassicalModuleComplex K) (htorsion : ∀ q : ℤ, ((SheafOfModules.toSheaf _).obj ((DerivedCategory.homologyFunctor (proEtaleRingModules X (proEtaleConstantRing X Λ)) q).obj K)).IsTorsion) : (∃ n : ℤ, DerivedCategory.IsGE ((proEtaleRingDerivedDirectImage f (proEtaleConstantRing Y Λ) (proEtaleConstantRing X Λ) (proEtaleConstantRingComparison f Λ) ⋙ proEtaleConstantRingDerivedPullback Λ g).obj K) n) ∧ ProEtale.IsClassicalModuleComplex ((proEtaleRingDerivedDirectImage f (proEtaleConstantRing Y Λ) (proEtaleConstantRing X Λ) (proEtaleConstantRingComparison f Λ) ⋙ proEtaleConstantRingDerivedPullback Λ g).obj K) ∧ (∃ n : ℤ, DerivedCategory.IsGE ((proEtaleConstantRingDerivedPullback Λ g' ⋙ proEtaleRingDerivedDirectImage f' (proEtaleConstantRing Y' Λ) (proEtaleConstantRing X' Λ) (proEtaleConstantRingComparison f' Λ)).obj K) n) ∧ ProEtale.IsClassicalModuleComplex ((proEtaleConstantRingDerivedPullback Λ g' ⋙ proEtaleRingDerivedDirectImage f' (proEtaleConstantRing Y' Λ) (proEtaleConstantRing X' Λ) (proEtaleConstantRingComparison f' Λ)).obj K) ∧ IsIso ((classicalProEtaleExchange Λ sq).app K)",
+  "branch": "newtargets-dag",
+  "by": "N3",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Reviewer fix (H4): classicalProEtaleExchange is the recorded proEtaleAmbientRingedExchange (def-weil-pbc-ambient-ringed-exchange) specialized to constant rings with proEtaleConstantRingComparison; coefficient coherence from proEtaleConstantRingCompositeCoefficients_eq (pur713-def-pullback-comparison). The private square comparison helper was removed.",
+  "fixed_by": "NT-stage2-cc-60a9ea5bc"
  }
 }

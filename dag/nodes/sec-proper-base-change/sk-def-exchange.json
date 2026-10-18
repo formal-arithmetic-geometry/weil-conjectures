@@ -518,5 +518,28 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-60a9ea5bc",
+  "group": "N3",
+  "result": "fix",
+  "note": "Statement matches the node clause by clause: Λ CommRing; IsProper f; arbitrary g; ChosenCartesianSquare; K bounded below (IsGE), classical (IsClassicalModuleComplex), local torsion of underlying abelian cohomology (Sheaf.IsTorsion, no uniform bound); conclusion gives both endpoints bounded below and classical plus IsIso of the exchange, i.e. an iso in the full D+_class. No extra hypotheses; edge cases (empty schemes, Λ=0, K=0, identities, negative degrees, residue-characteristic torsion) covered; universes bound. H4 fault fixed: the delivery's classicalProEtalePullbackSquare/classicalProEtaleExchange re-built the mate of the recorded stmt-dep proEtaleAmbientRingedExchange from a different Classical.choose comparison (proEtaleCanonicalPullbackComposition instead of proEtaleCanonicalDerivedPullbackComparison), a private copy; the constant-ring version was already landed as ProEtale.directImageConstantExchange. fixes/ClassicalProEtaleProperBaseChange.lean removes the square helper and makes classicalProEtaleExchange an abbrev of proEtaleAmbientRingedExchange on constant rings, with hcoeff from proEtaleConstantRingCompositeCoefficients_eq and sq.w; theorem text unchanged, so lean.statement stays verbatim; lean-record and report fixes included. nt_compile.py: delivered and fixed files both rc 0, no messages; a deliberately broken copy confirmed errors are reported. Docstrings, sorry-only proof, line lengths and the sk-def-exchange/sk-def-pbc existing records were checked."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.BaseChange.Derived",
+  "declaration": "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus",
+  "declarations": [
+   "AlgebraicGeometry.Etale.derivedBaseChangeMapPlus",
+   "AlgebraicGeometry.Etale.baseChangeMap",
+   "AlgebraicGeometry.Etale.squareUpperStarIso"
+  ],
+  "statement": "noncomputable def Etale.derivedBaseChangeMapPlus (sq : CommSq g' f' f g) :\n    (f)_*[A].rightDerivedFunctorPlus ⋙ ((g)^*[A]).mapDerivedCategoryPlus ⟶\n      ((g')^*[A]).mapDerivedCategoryPlus ⋙ (f')_*[A].rightDerivedFunctorPlus",
+  "branch": "slopmaster2",
+  "by": "N3",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "No lean record was present. The existing source derived bounded-below map, ordinary mate and square composition comparison supply this notion without a new definition. DerivedComparison proves equality with the explicitly adjunction-mate construction in MorphismDefs; Derived.lean:134-138 defines the map, and :149-157 gives its termwise-resolution normalization. The category A specializes to ModuleCat of the discrete commutative coefficient ring. The pro-etale occurrence in the consuming theorem is the corresponding published ringed mate, with canonical constant-coefficient composition comparisons."
  }
 }

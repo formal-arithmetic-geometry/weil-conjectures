@@ -17,7 +17,8 @@
   "def-kun-tor-amplitude",
   "def-weil-proetale-tor-amplitude",
   "def-weil-pbc-etale-constructible-sheaf",
-  "def-weil-proetale-constructible-sheaf"
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-pbc-constructible-complexes"
  ],
  "proof": [
   {
@@ -263,5 +264,29 @@
   "group": "Q02",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-506d29acb (reviewer sub-agent of L); spot-checked: I read all of it: the item (6 steps), the unit and the main-20261015 blueprint proof, the parent sk-prop-sf-rf-shriek-preservation (Steps 7-9 use the item) and the statements of all cited nodes. No new nodes. The statement is unchanged and not weakened. Coefficients are constant-A module sheaves on both sites, with compact support for the same fixed compactification and nu as the base-change morphism; def-sfb with A=Mod_A matches the ordinary A_T-modules, per lem-sf-module-object-ordinary-coefficient-equivalence. Every hypothesis holds: A finite so Noetherian; X, Y, Xbar finite type over k so Noetherian and qcqs (lem-weil-pbc-finite-type-over-noetherian); sk-thm-pe-constructible-comparison needs discrete Noetherian Lambda and qcqs; lem-exc-comparison-tor-interval needs any finite A and D^+, iff over all module sheaves; lem-cbc-proetale-extension-zero-comparison needs finite Lambda and an open immersion; sk-thm-pe-direct-image-comparison takes qcqs p_f and j_!M in D^+; thm-amb-etale-exceptional-adjoint needs Noetherian schemes and proper finite-type p_f; thm-weil-pbc-site-comparison is used only on D^+ objects. I recomputed the counit formula in Step 6: naturality of beta gives t_K∘G(h) with t_K = alpha Q(eps_E) beta_RE^{-1}. Edge cases checked: f=id, X empty, K=0, A=0, A=F_l[x,y]/(x,y)^2, arbitrary char-p field. Not a duplicate of thm-sf-ambient-adjoint-class (Fbar_q, A_{E,n}), det-sp-et-proet-adjunction-transfer (downstream, assumes equivalences), lem-weil-pbc-proper-open-comparison-proetale (A_{E,n}) or lem-sf-constructible-exceptional-adjunction-coefficients. No SGA. Accepted tool_uses: sk-thm-pe-constructible-comparison, lem-exc-comparison-tor-interval, lem-cbc-proetale-extension-zero-comparison, sk-thm-pe-direct-image-comparison, thm-amb-etale-exceptional-adjoint, lem-sfb-finite-extension-by-zero-exact; the rest are in route, definitions or a Mathlib leaf. Two precision gaps fixed in fixes/dag/nodes/sec-six-functors-basics/lem-sf-etale-proetale-exceptional-transport.json. (1) Step 2 got H_K constructible only in the local-partition sense of sk-thm-pe-constructible-comparison, but the statement uses the global partition of def-weil-proetale-constructible-sheaf. I added a direct argument: H^i commutes with nu^* (lem-sf-comparison-pullback-exact (3)), stratum pullback commutes with nu^* (pullback clause of sk-thm-pe-direct-image-comparison), and an etale trivialization is a pro-etale one. I also stated the converse for K. (2) Step 3 left two identifications implicit: the lem-cbc pro-etale j_! equals sheafify∘Lan of def-sfb-finite-extension-by-zero (the index category is terminal or empty), and the unbounded K-injective Rp_* agrees with the D^+ functor on bounded-below inputs. Both are now written, def-sfb-finite-extension-by-zero is added to uses and proof_deps, and Step 4 refers to Step 3. proof_deps equals the union of uses. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cad1f5abc",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Checked every clause against the node and the source (proof Steps 1-6): field and primes, finite A with l^n = 0 (A = 0 allowed), separated finite-type f, s and f≫s, the same Compactification c on both sites, F_et and F_proet are the recorded Rg_*∘D(i_!) composites, nu^* is the left adjoint of proEtaleSiteComparisonModules, any given adjunction F_et ⊣ R, preservation hypothesis through isBoundedConstructible and hasTorAmplitudeIn. Conclusions: intrinsic pro-etale domain (bounded, IsConstructibleProEtaleFixedModuleSheaf on every H^i, all-module Tor), functorial etale origin E with α, H_K = E⋙R⋙nu_X^*, β on all of D^+, t equal to β^{-1}∘nu^*(ε)∘α exactly as Step 6, Hom bijection h ↦ G(h)≫t_K. Edge cases: A = 0, empty schemes, K = 0, a = b, universes not equated. Three §1(B) existing:true rebinds checked: torAmplitudeIn tests every sheaf with the derived tensor, the fixed-module constructibility matches the node, FiniteCoefficient lower shriek matches the node. Observation, not a fault: the shared pro-etale records flip back from the NC/Q91 coefficient interfaces; both forms are faithful and those modules stay landed. No hollow definitions, docstrings with source and blueprint, one sorry, lean.statement verbatim, report sections present (the second reading is an open self-check). nt_compile.py: module clean in 3.9 s; a control copy with a planted error reported it."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleProEtaleExceptionalTransport",
+  "declaration": "AlgebraicGeometry.ProEtale.etale_proEtale_exceptional_transport",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.exceptionalTransportEtaleObjects",
+   "AlgebraicGeometry.ProEtale.exceptionalTransportProEtaleObjects",
+   "AlgebraicGeometry.ProEtale.exceptionalTransportImage",
+   "AlgebraicGeometry.ProEtale.etale_proEtale_exceptional_transport"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleProEtaleExceptionalTransport.lean",
+  "statement": "theorem etale_proEtale_exceptional_transport (k : Type u) [Field k] (p l : ℕ) [CharP k p] (_hp : p.Prime) (_hl : l.Prime) (_hlp : l ≠ p) (A : Type (u + 1)) [CommRing A] [Finite A] (_hA : ∃ n : ℕ, (l ^ n : A) = 0) {X Y : Scheme.{u}} (f : X ⟶ Y) (s : Y ⟶ Spec (.of k)) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated s] [LocallyOfFiniteType s] [QuasiCompact s] [IsSeparated (f ≫ s)] [LocallyOfFiniteType (f ≫ s)] [QuasiCompact (f ≫ s)] (c : Compactification f) [IsSeparated (c.g ≫ s)] [LocallyOfFiniteType (c.g ≫ s)] [QuasiCompact (c.g ≫ s)] (R : Etale.DerivedCategoryModule A Y ⥤ Etale.DerivedCategoryModule A X) (adj : Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ⊣ R) (_hR : ∀ K, exceptionalTransportEtaleObjects A Y K → exceptionalTransportEtaleObjects A X (R.obj K)) : ∃ β : _root_.DerivedCategory.Plus.ι ⋙ Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ⋙ (comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory ≅ _root_.DerivedCategory.Plus.ι ⋙ (comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory ⋙ rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c, ∃ E : (exceptionalTransportProEtaleObjects A Y).FullSubcategory ⥤ Etale.DerivedCategoryModule A Y, ∃ α : E ⋙ (comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory ≅ (exceptionalTransportProEtaleObjects A Y).ι, (∀ K, exceptionalTransportEtaleObjects A Y (E.obj K)) ∧ (∀ K, exceptionalTransportProEtaleObjects A X ((exceptionalTransportImage A R E).obj K)) ∧ ∃ t : exceptionalTransportImage A R E ⋙ rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ⟶ (exceptionalTransportProEtaleObjects A Y).ι, (∀ K, ∃ hRE : _root_.DerivedCategory.TStructure.t.plus (R.obj (E.obj K)), t.app K = β.inv.app ⟨R.obj (E.obj K), hRE⟩ ≫ (comparisonUpperStar (ModuleCat.{u + 1} A) Y).mapDerivedCategory.map (adj.counit.app (E.obj K)) ≫ α.hom.app K) ∧ ∀ (K : (exceptionalTransportProEtaleObjects A Y).FullSubcategory) (M : _root_.DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))), Function.Bijective (fun h : (comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory.obj M.obj ⟶ (exceptionalTransportImage A R E).obj K ↦ (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).map h ≫ t.app K)",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

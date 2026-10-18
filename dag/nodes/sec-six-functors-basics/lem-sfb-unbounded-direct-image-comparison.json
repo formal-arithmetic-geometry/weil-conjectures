@@ -437,5 +437,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bb3fa4e76",
+  "group": "N9",
+  "result": "pass",
+  "note": "Every clause of the item matches the node and the blueprint source (sk-prop-pe-unbounded-classical-direct-image.md): k finite or algebraically closed; ℓ prime and invertible in k; A finite commutative and ℓ-primary in Type (u+1), the Etale.DerivedCategoryModule convention, so no restriction; X, Y and g of finite type (LocallyOfFiniteType+QuasiCompact); K in the full unbounded D(X_et,A). No k-compatibility of g is required, which matches the source and det-pe-unbounded-classical-bounds. The comparison map is the homEquiv mate under the pro-etale mapDerivedCategoryRightDerivedAdjunction of the landed directImageComparison inverse-image square followed by the etale derived counit; direction checked; helpers have real bodies. The pro-etale Sheaf(ModuleCat A) encoding is the one used by the landed sk-thm-pe-direct-image-comparison and is identified with FiniteCoefficientModules by the recorded realization equivalence. The §1(B) module SfbDerivedCategories reexports the existing derived-category and resolution interfaces, states the derived-adjunction clause with the node's hypotheses (Nonempty, proof sorry), and gives the bounded-constructible row through the upstream IsConstructibleModuleObject, allowing noncommutative R. Only lean fields changed; both lean.statement fields are verbatim; docstrings carry source, blueprint id and all 12 proof steps; only theorems are sorry. nt_compile.py --json on both files against the local side overlay: exit 0, clean (2.7 s and 2.5 s). Non-blocking remarks: the derived adjunction is existence only, not data; def-sfb-constructible-module and def-sfb-locally-finitely-presented still lack lean records; the Second reading by N9 section is a self-reread.; reverted the delivery's change of existing node(s) sk-def-sfb-derived-categories (--revert-nodes; kept as on newtargets-dag)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UnboundedDirectImageComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.unboundedDirectImageComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.unboundedDirectImagePullbackIso",
+   "AlgebraicGeometry.ProEtale.unboundedDirectImageComparisonMap",
+   "AlgebraicGeometry.ProEtale.unboundedDirectImageComparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/UnboundedDirectImageComparison.lean",
+  "statement": "theorem unboundedDirectImageComparison (k : Type u) [Field k] (hbase : Finite k ∨ IsAlgClosed k) {ℓ : ℕ} [Fact ℓ.Prime] (hℓ : IsUnit (algebraMap ℤ k (ℓ : ℤ))) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : ∃ n : ℕ, (ℓ : A) ^ n = 0) {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k))] [Y.Over (Spec (CommRingCat.of k))] [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k))] [QuasiCompact (X ↘ Spec (CommRingCat.of k))] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k))] [QuasiCompact (Y ↘ Spec (CommRingCat.of k))] (g : X ⟶ Y) [LocallyOfFiniteType g] [QuasiCompact g] (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) : IsIso (unboundedDirectImageComparisonMap A g K)",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

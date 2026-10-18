@@ -232,5 +232,29 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ec2f8eb2",
+  "group": "N8",
+  "result": "pass",
+  "note": "Read the item, all 9 statement dependencies and their sources (equivalence lines 290-431, ModuleObjects/Monoidal 50-200, CochainTensorUniverses, FlatOnSite, KFlat 287-346, SheafTensorStructure 73), and Stacks 03EK/0GMW. Hypotheses equal the equivalence dependency's binders (UnivLE.{max v w,u}, HasSheafify, J.W monoidal, comm MonObj R), with independent universes and nothing added. Probe rfl confirms the tensor structures are Sheaf.monoidalCategory, Mod.monoidalCategory (coequalizer tensorObj_X, regular unit) and cochainModulesMonoidal. All clauses are present and correct: exactness; tensor and unit isos pinned by real canonical pure-tensor maps; naturality, associator, unitor and braiding equations checked for direction; total complex iso pinned on each summand; acyclicity, flatness (exact tensorRight vs IsFlatOnSite) and K-flatness iffs. The six sorry'd helper instances are true consequences of the hypotheses, listed and documented, as in the landed CochainTensorUniverses. The new def-sfb-modobj-relative-tensor lean record (existing upstream Mod.monoidalCategory, audit closed) matches its node. Only lean fields changed; statement verbatim; docstrings carry all 8 steps; lines <=100. nt_compile clean in 7.4 s and 6.9 s. Edge cases R=0, empty site, unit factors, degree-0 and unbounded complexes covered. No findings."
+ },
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.ModuleObjects.Monoidal",
+  "declaration": "CategoryTheory.Mod.monoidalCategory",
+  "declarations": [
+   "CategoryTheory.Mod.monoidalCategory",
+   "CategoryTheory.Mod.tensorObj_X",
+   "CategoryTheory.Mod.tensorObjπ",
+   "CategoryTheory.Mod.isColimitTensorπ"
+  ],
+  "statement": "instance monoidalCategory : MonoidalCategory (Mod C R)",
+  "branch": "slopmaster2",
+  "by": "N8",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "The previously missing record is supplied from the published upstream framework (coord/pefw-upstream-framework.md). Its relative tensor is the coequalizer of exactly the two displayed action maps, tensorObj_X, with action through the first factor, regular module unit, and associator and unitors induced along toBimod. No new tensor construction is introduced."
  }
 }
