@@ -31,7 +31,7 @@
  ],
  "proof": [
   {
-   "text": "Since s = g(s'), the morphism Spec \\kappa(s') -> S' -> S factors as Spec \\kappa(s') -> Spec \\kappa(s) -> S through the residue-field map \\kappa(s) -> \\kappa(s') [def-weil-residue-field]. By the definitions of fibre and fibre product [def-pc-scheme-fibre, def-pc-fibre-product], (X')_{s'} = (X x_S S') x_{S'} Spec \\kappa(s') = X x_S Spec \\kappa(s') = (X x_S Spec \\kappa(s)) x_{Spec \\kappa(s)} Spec \\kappa(s') = X_s x_{Spec \\kappa(s)} Spec \\kappa(s'). The middle equality is the transitivity (pasting) of fibre products, supplied by [lem-weil-pbc-cartesian-square-pasting].",
+   "text": "Since s = g(s'), the morphism Spec \\kappa(s') -> S' -> S factors as Spec \\kappa(s') -> Spec \\kappa(s) -> S through the residue-field map \\kappa(s) -> \\kappa(s') [def-weil-residue-field]. By the definitions of fibre and fibre product [def-pc-scheme-fibre, def-pc-fibre-product], (X')_{s'} = (X x_S S') x_{S'} Spec \\kappa(s') = X x_S Spec \\kappa(s') = (X x_S Spec \\kappa(s)) x_{Spec \\kappa(s)} Spec \\kappa(s') = X_s x_{Spec \\kappa(s)} Spec \\kappa(s'). The middle equality is the transitivity (pasting) of fibre products, supplied by [lem-weil-pbc-cartesian-square-pasting]. In Lean, Mathlib's isPullback_fiberToSpecResidueField_of_isPullback gives this square directly; isoPullback and its projection equations give the required compatible isomorphism.",
    "uses": [
     "def-weil-residue-field",
     "def-pc-scheme-fibre",
@@ -45,7 +45,7 @@
    }
   },
   {
-   "text": "The morphism X_s -> Spec \\kappa(s) is locally of finite type by [lem-weil-pbc-lft-base-change], applied to f and Spec \\kappa(s) -> S. Choose an affine open U = Spec A of X_s containing x, with A a finite type \\kappa(s)-algebra; its inverse image U' = Spec(A \\otimes_{\\kappa(s)} \\kappa(s')) is an open neighbourhood of x' in the residue-field base change. The dimension at a point is computed on any open neighbourhood [def-kun-dimension], and [lem-weil-pbc-dimension-at-point-field-extension] gives dim_{x'} U' = dim_x U because the prime of A \\otimes_{\\kappa(s)} \\kappa(s') at x' lies over the prime of A at x. Hence dim_{x'}((X')_{s'}) = dim_x(X_s).",
+   "text": "The morphism X_s -> Spec \\kappa(s) is locally of finite type by [lem-weil-pbc-lft-base-change], applied to f and Spec \\kappa(s) -> S. Choose an affine open U = Spec A of X_s containing x, with A a finite type \\kappa(s)-algebra; its inverse image U' = Spec(A \\otimes_{\\kappa(s)} \\kappa(s')) is an open neighbourhood of x' in the residue-field base change. The dimension at a point is computed on any open neighbourhood [def-kun-dimension], and [lem-weil-pbc-dimension-at-point-field-extension] gives dim_{x'} U' = dim_x U because the prime of A \\otimes_{\\kappa(s)} \\kappa(s') at x' lies over the prime of A at x. Hence dim_{x'}((X')_{s'}) = dim_x(X_s). The Lean proof uses the existing AlgebraicGeometry.localDim_openEmbedding from Sheaf.AlgebraicGeometry.RationalPointStalkTopologicalLocalDimension to pass between affine open neighbourhoods and the scheme. pullbackSpecIso identifies the affine base change, and injectivity of the fibre inclusion identifies the point with asFiber.",
    "uses": [
     "lem-weil-pbc-lft-base-change",
     "def-kun-dimension",
@@ -68,9 +68,11 @@
   "lem-weil-pbc-dimension-at-point-field-extension"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "N3",
+  "date": "2026-10-18",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tag 02FY (lemma-dimension-fibre-after-base-change), part (1), whose dimension assertion follows Algebra Lemma 00P4"
+  "place": "Tag 02FY, part (1), affine field-extension comparison Tag 00P4; retained proof with the shared open-embedding lemma exposed in place after return 5d2bdf5da"
  },
  "mathlib_searches": [
   {
@@ -158,5 +160,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261018T071206-L-1672852",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

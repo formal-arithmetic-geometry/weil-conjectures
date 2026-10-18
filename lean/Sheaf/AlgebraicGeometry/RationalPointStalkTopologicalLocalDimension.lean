@@ -16,7 +16,10 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry
 
-private theorem localDim_openEmbedding {X : Type*} {Y : Type*}
+/-- An open embedding preserves the local topological Krull dimension at each point.
+The open neighbourhoods inside its range are cofinal among all open neighbourhoods
+of the image point, and the embedding identifies their dimensions. -/
+theorem localDim_openEmbedding {X : Type*} {Y : Type*}
     [TopologicalSpace X] [TopologicalSpace Y] {f : X → Y}
     (hf : Topology.IsOpenEmbedding f) (x : X) :
     topologicalKrullDimAt x = topologicalKrullDimAt (f x) := by
