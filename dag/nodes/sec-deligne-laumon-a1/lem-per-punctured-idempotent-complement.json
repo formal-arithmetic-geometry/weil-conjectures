@@ -10,9 +10,110 @@
  "stmt_deps": [
   "def-weil-ring-localization-away"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $r=0$, then $K=0$. Take $E^{\\prime}=R$ and $v=\\mathrm{id}_R$. The only $f\\in K$ is $0$, and localization at $0$ is the zero ring: the fraction equality of [def-weil-ring-localization-away] identifies every fraction with $0$. Thus both sides of $(u,v)_0$ are zero rings and it is an isomorphism. In the remaining steps assume $r>0$ and choose the given idempotents $e_i=e_{f_i}$.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0C2A, lemma-glueing-sum-components-open; the empty generating list made explicit"
+   }
+  },
+  {
+   "text": "Write $e_i=c_i/f_i^{d_i}$. Since $e_i^2=e_i$, the fraction equality of [def-weil-ring-localization-away] gives an integer $k_i\\geq0$ with $f_i^{k_i}(c_i^2-f_i^{d_i}c_i)=0$. Choose $t_i\\geq k_i$ and put $a_i=f_i^{t_i}c_i$, $n_i=d_i+t_i$. Then $a_i^2-f_i^{n_i}a_i=f_i^{2t_i}(c_i^2-f_i^{d_i}c_i)=0$, while $e_i=a_i/f_i^{n_i}$. Choose one $n\\geq\\max_i n_i$ and replace $a_i$ by $f_i^{n-n_i}a_i$. This preserves the represented fractions and gives $a_i^2=f_i^na_i$ and $e_i=a_i/f_i^n$ for every $i$. These are equalities in $R$, not merely in $R_{f_i}$.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0C2A, proof: choose a common n and clear the idempotence relations"
+   }
+  },
+  {
+   "text": "For each pair $i,j$ put $B=R_{f_if_j}$ and denote the images of $e_i,e_j$ in $B$ by the same letters. Inverting $f_j$ in the given $R_{f_i}$-algebra identification, and conversely inverting $f_i$ for $j$, identifies the same structural map $B\\to E_{f_if_j}$ with both $B\\to B_{e_i}$ and $B\\to B_{e_j}$. The order of these localizations does not matter: their maps send an iterated fraction to the fraction with the multiplied denominators, and the inverse maps are determined by making both denominators units [def-weil-ring-localization-away]. An invertible idempotent equals $1$, so $e_i-1$ maps to $0$ in $B_{e_j}$. The zero-fraction criterion gives $e_j^k(e_i-1)=0$ for some $k$, which we may increase to at least $1$. As $e_j^k=e_j$, this says $e_ie_j=e_j$. Interchanging $i,j$ gives $e_ie_j=e_i$. Therefore $e_i=e_j$ in $R_{f_if_j}$.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0C2A, proof: compatibility of the idempotent localizations on pairwise overlaps, with both orders written out"
+   }
+  },
+  {
+   "text": "In $R_{f_if_j}$ the fractions representing $e_i,e_j$ have common denominator $(f_if_j)^n$ and numerators $f_j^na_i,f_i^na_j$. By [def-weil-ring-localization-away], for each pair some power of $f_if_j$ kills $f_j^na_i-f_i^na_j$. Since there are finitely many pairs, choose a single $N\\geq0$ with $(f_if_j)^N(f_j^na_i-f_i^na_j)=0$ for all $i,j$. Put $b_i=f_i^Na_i$ and $d=n+N$. Rearranging this equality yields $f_j^db_i=f_i^db_j$ in $R$. Also $b_i^2=f_i^{2N}a_i^2=f_i^{2N+n}a_i=f_i^db_i$ and $e_i=b_i/f_i^d$. Hence in $R_{f_i}$, each $b_j$ is the multiple $(f_j^d/f_i^d)b_i$ of $b_i$.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0C2A, proof: uniform rescaling to put every numerator in the ideal of each localized numerator; symmetric overlap equality simplifies the exponents"
+   }
+  },
+  {
+   "text": "Set $J=(b_1,\\ldots,b_r)\\subseteq R$, $E^{\\prime}=R/J$, and let $v:R\\twoheadrightarrow R/J$ be the quotient map. The preceding divisibility gives $JR_{f_i}=(b_i)=(e_i)$ for every $i$, since $f_i$ is invertible in $R_{f_i}$. Apply [lem-weil-pbc-localization-quotient-commute] with $B=R$, the ideal $J$, and $b=f_i$. It identifies $E^{\\prime}_{f_i}$, compatibly with $v_{f_i}$, with $R_{f_i}/JR_{f_i}=R_{f_i}/(e_i)$.",
+   "uses": [
+    "lem-weil-pbc-localization-quotient-commute",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0C2A, proof: construction of C prime and its localizations; Tag 00CT, proposition-localize-quotient"
+   }
+  },
+  {
+   "text": "For $B=R_{f_i}$ and its idempotent $e=e_i$, the canonical map $B\\to B_e\\times B/(e)$ is an isomorphism. Indeed [def-weil-ring-localization-away] identifies $B_e$ with the ring $eB$ (whose identity is $e$) by $x/e^m\\mapsto ex$; its inverse sends $ex$ to $ex/1$. Likewise $B/(e)\\to(1-e)B$, $[y]\\mapsto(1-e)y$, has inverse $(1-e)y\\mapsto[(1-e)y]$. The maps are well defined by the fraction equality and $e(1-e)=0$. Under these identifications the canonical map is $b\\mapsto(eb,(1-e)b)$, with inverse $(x,y)\\mapsto x+y$, since $e+(1-e)=1$ and $e(1-e)=0$. The hypothesis $E_{f_i}=B_e$ and step 5 therefore show that the canonical map $R_{f_i}\\to E_{f_i}\\times E^{\\prime}_{f_i}$ is an isomorphism.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0C2A, proof: the elementary product decomposition B = B_e times B/(e), with inverse specified"
+   }
+  },
+  {
+   "text": "Write $T=E\\times E^{\\prime}$ and $\\alpha=(u,v):R\\to T$. Localization at any $h\\in R$ commutes with this two-factor product: the map $T_h\\to E_h\\times E^{\\prime}_h$ sends $(x,y)/h^k$ to $(x/h^k,y/h^k)$, and its inverse sends $(x/h^k,y/h^l)$ to $(h^lx,h^ky)/h^{k+l}$, with the powers of $h$ acting through the respective structural maps. The fraction equality of [def-weil-ring-localization-away] checks independence of representatives and both composites. Thus step 6 gives exactly the required isomorphism $\\alpha_{f_i}:R_{f_i}\\to T_{f_i}$, not a different map with the same source and target. Further localization preserves these isomorphisms by applying the inverse maps to numerators and denominators.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0C2A, proof: interpretation of the product-localization map and further localization"
+   }
+  },
+  {
+   "text": "Fix any $f\\in K$, put $S=R_f$, $V=T_f$, and let $g_i=f_i/1\\in S$. Writing $f=\\sum_i c_if_i$ shows $1=\\sum_i(c_i/f)g_i$, so the $g_i$ generate the unit ideal in $S$. Iterated fractions identify $S_{g_i}$ with $R_{ff_i}$ and $V_{g_i}$ with $T_{ff_i}$. Thus step 7 gives an isomorphism $\\alpha_i:S_{g_i}\\to V_{g_i}$ for each $i$, and also on every overlap. Regard $S,V$ as $S$-modules; their module localizations are these ring localizations by the same fraction formulas [def-weil-pbc-module-localization-away, def-weil-ring-localization-away]. If $s\\in\\ker\\alpha_f$, then all $s/1=0$ because the $\\alpha_i$ are injective. The injectivity clause of [lem-weil-pbc-cover-module-exact] for $M=S$ gives $s=0$. For $t\\in V$, take $s_i=\\alpha_i^{-1}(t/1)$. On overlaps their images coincide, because their images under the overlap isomorphism are both the restriction of $t$. The gluing clause of that node for $M=S$ gives $s\\in S$ with $s/1=s_i$. Now $\\alpha_f(s)-t$ is zero in every $V_{g_i}$; the injectivity clause for $M=V$ gives $\\alpha_f(s)=t$. Hence $\\alpha_f$ is bijective and so a ring isomorphism, for every $f\\in K$.",
+   "uses": [
+    "def-weil-pbc-module-localization-away",
+    "def-weil-ring-localization-away",
+    "lem-weil-pbc-cover-module-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0C2A, last paragraph: principal-cover test (algebra-lemma-cover); its injectivity and gluing argument supplied by Tag 00EK, lemma-cover-module"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-localization-quotient-commute",
+  "def-weil-pbc-module-localization-away",
+  "lem-weil-pbc-cover-module-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0C2A, lemma-glueing-sum-components-open, proof; both overlap identities and the final cover test are expanded explicitly using the existing Tag 00EK statement"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -41,10 +142,45 @@
    "results": "{\"t\": \"2026-10-18T21:13:23Z\", \"tool\": \"grep\", \"query\": \"quotient_of_isIdempotentElem|prodQuotientOfIsIdempotentElem\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Localization/Away/Lemmas.lean\", \"Mathlib/RingTheory/Unramified/Basic.lean\", \"Mathlib/RingTheory/Idempotents.lean\", \"Mathlib/RingTheory/Ideal/Pure.lean\"], \"digest\": \"ea58115bcaab1c65\"}",
    "date": "2026-10-19",
    "verdict": "no match: read Localization/Away/Lemmas.lean:66 and Idempotents.lean:475; these do not give the punctured complement construction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A ring homomorphism which is localization at an idempotent away from a finitely generated ideal has a complementary quotient over that punctured locus",
+   "results": "{\"t\": \"2026-10-18T22:23:17Z\", \"tool\": \"leanfinder\", \"query\": \"A ring homomorphism which is localization at an idempotent away from a finitely generated ideal has a complementary quotient over that punctured locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.Away.quotient_of_isIdempotentElem\", \"IsLocalization.away_of_isIdempotentElem\", \"IsLocalization.away_of_isIdempotentElem_of_mul\", \"PrimeSpectrum.exists_image_comap_of_finite_of_free\", \"PrimeSpectrum.range_comap_algebraMap_localization_compl_eq_range_comap_quotientMk\", \"RingHom.locally_iff_finite\", \"CompleteOrthogonalIdempotents.bijective_pi'\", \"Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq\"], \"digest\": \"95dbb8110ec62bca\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: localizations at one idempotent, finite splitting and a finite locality criterion only; no simultaneous complementary quotient"
+  },
+  {
+   "tool": "grep",
+   "query": "quotient_of_isIdempotentElem|prodQuotientOfIsIdempotentElem|bijective.*localiz",
+   "results": "{\"t\": \"2026-10-18T22:24:18Z\", \"tool\": \"grep\", \"query\": \"quotient_of_isIdempotentElem|prodQuotientOfIsIdempotentElem|bijective.*localiz\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Conductor.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Prime/Topology.lean\", \"Mathlib/RingTheory/Spectrum/Maximal/Localization.lean\", \"Mathlib/RingTheory/Spectrum/Maximal/Localization.lean\", \"Mathlib/RingTheory/Spectrum/Maximal/Localization.lean\"], \"digest\": \"f5a7e9a150239620\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: read Away/Lemmas.lean:66 and Idempotents.lean:475; idempotent quotient and product formulas only, not the simultaneous punctured complement"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Glue complementary quotient rings from localizations at idempotents on a finite principal open cover of a punctured spectrum",
+   "results": "{\"t\": \"2026-10-18T22:24:18Z\", \"tool\": \"leansearch\", \"query\": \"Glue complementary quotient rings from localizations at idempotents on a finite principal open cover of a punctured spectrum\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.Away.quotient_of_isIdempotentElem\", \"PrimeSpectrum.toPiLocalization\", \"AlgebraicGeometry.Scheme.affineBasisCoverRing\", \"AlgebraicGeometry.structureSheafInType\", \"MaximalSpectrum.PiLocalization\", \"AlgebraicGeometry.StructureSheaf.Localizations\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_f\", \"AlgebraicGeometry.Scheme.affineBasisCoverOfAffine\"], \"digest\": \"c6cbf5f989674e5f\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: idempotent quotient and spectrum-cover constructions only; no complementary quotient for the given ring map"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIdempotentElem\", \"Localization\"",
+   "results": "{\"t\": \"2026-10-18T22:24:18Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsIdempotentElem\\\", \\\"Localization\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"IsLocalization.Away.algebraMap_surjective_of_isIdempotentElem\", \"IsLocalization.away_of_isIdempotentElem_of_mul\", \"IsLocalization.away_of_isIdempotentElem\", \"IsLocalization.Away.quotient_of_isIdempotentElem\"], \"digest\": \"b9c248ec97e20f2f\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the four hits concern a single given idempotent and do not construct a quotient over a punctured ideal"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Glue a ring decomposition on finitely many principal open subsets using rescaled idempotent numerators and a complementary quotient",
+   "results": "{\"t\": \"2026-10-18T22:25:35Z\", \"tool\": \"leanfinder\", \"query\": \"Glue a ring decomposition on finitely many principal open subsets using rescaled idempotent numerators and a complementary quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\", \"IsLocalization.Away.quotient_of_isIdempotentElem\", \"PrimeSpectrum.exists_mul_eq_zero_add_eq_one_basicOpen_eq_of_isClopen\", \"RingHom.pi_bijective_of_isIdempotentElem\", \"PrimeSpectrum.isClopen_iff_mul_add\", \"AlgebraicGeometry.Scheme.affineOpenCoverOfSpanRangeEqTop_X_carrier\", \"PrimeSpectrum.basicOpen_eq_zeroLocus_of_isIdempotentElem\", \"PrimeSpectrum.isClopen_basicOpen_of_mul_add\"], \"digest\": \"e6c8fe90be39a820\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: normalize_finite_fraction_representation normalizes a section on a finite basic-open cover; the other hits describe given idempotents and clopen subsets, without constructing this complementary ring quotient"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-conormal-torsion-algebraization",
@@ -69,5 +205,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-punctured-idempotent-complement",
+  "worker": "stage1",
+  "summary": "Q41 checked Stacks 0C2A, searched project Lean and Mathlib, and wrote the finite denominator and complementary quotient construction in eight steps. Pairwise localization kernels give equality of the two overlap idempotents, allowing a simpler common rescaling than the source. Existing quotient-localization and principal-cover module-gluing nodes supply the only external statements; no new node is needed. The statement is unchanged, including the empty generating list and possibly nonsurjective original ring map.",
+  "blueprint": "Realizes the supporting commutative-algebra argument attached through lem-per-conormal-torsion-algebraization to the Ratliff/formal-catenarity branch of lem-per-artin-gabber-affine-curve (recorded blueprint.from place). Steps 2-4 realize the numerator choices and common rescaling of Stacks 0C2A; steps 5-7 its complementary quotient and product calculation; step 8 its final principal-cover test. No unit-level route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-cover-module-exact",
+    "why": "The final principal-cover test uses its stated injectivity and gluing clauses for the two S-modules S=R_f and V=(E times E prime)_f. This general commutative-algebra tool supplies exactly the gluing-of-functions input cited by Stacks 0C2A; no node of the perverse unit states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-cover-module-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q41-17acfc94e",
+  "group": "Q41",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q41-17acfc94e (reviewer sub-agent of L); spot-checked: I read the source, Stacks Tag 0C2A (more-algebra.tex lines 31983-32033). The item's statement matches it hypothesis by hypothesis, including the case r=0, and is byte-identical to the base unsplit version, so the citer lem-per-conormal-torsion-algebraization is unaffected. No new nodes. I checked all 8 steps by hand. Step 2 clears the idempotence relation into equalities in R with a common n. Step 3 shows the two idempotents agree on R_{f_if_j}; this is a cleaner argument than the source's (f_if_ja_j)^N relation, and it holds when e_j=0. Step 4 gives b_i=f_i^N a_i with d=n+N, b_i^2=f_i^d b_i and f_j^d b_i=f_i^d b_j. Step 5 uses the statement of the Mathlib leaf lem-weil-pbc-localization-quotient-commute (Stacks 00CT) to identify E' after inverting f_i. Steps 6-7 are elementary product algebra: B=B_e x B/(e), and localization commutes with a two-factor product. Step 8 tests over the principal cover through the injectivity and gluing clauses of lem-weil-pbc-cover-module-exact (Stacks 00EK), applied to M=S and M=V. Its tool_use is accepted: it is a generic commutative-algebra tool used as the source's algebra-lemma-cover. Small cases tested: R=k[x] with K=(x) and E=R_x or E=k, a generator f_i=0, and f=0 with r>0; all work. Searching the DAG for 0C2A, the lemma label and the key words finds no duplicate. Three kinds of Mathlib search are recorded; IsLocalization.Away.quotient_of_isIdempotentElem only handles a single global idempotent. No SGA is cited, the unit's route is unchanged, and the blueprint fields and the Review by Q41 section are present. No faults; no fixes written."
  }
 }
