@@ -10,11 +10,98 @@
  "stmt_deps": [
   "def-sbc-affine-space",
   "def-weil-pbc-derived-categories",
-  "lem-asd-etale-finite-twist-pullback"
+  "lem-asd-etale-finite-twist-pullback",
+  "def-weil-pbc-sites-and-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $m=\\ell^n$. Choose a primitive $m$-th root $\\zeta\\in k$ by [lem-sc-primitive-root]. For every $k$-scheme $T$, the map $a\\mapsto\\zeta^a$ identifies $\\Lambda_T$ with $\\mu_{m,T}$. Indeed $z^m-1=\\prod_{a\\in\\mathbf Z/m}(z-\\zeta^a)$ has pairwise unit differences, so a root on any etale object is uniquely a choice of one $\\zeta^a$ on a clopen partition; this is exactly a locally constant $\\mathbf Z/m$-valued section. This description commutes with restriction and every $k$-pullback. The signed tensor powers and duals defining the twists in [lem-asd-etale-finite-twist-pullback] consequently give compatible trivializations $\\Lambda_T\\cong\\Lambda_T(t)$ for every integer $t$. Negative powers use the basis dual to the chosen tensor basis. Only the computation uses this auxiliary basis.",
+   "uses": [
+    "lem-sc-primitive-root",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Section 16 opening paragraphs, p.107: twists and primitive-root trivialization"
+   }
+  },
+  {
+   "text": "For every sheaf occurring here, $H^q=0$ for $q<0$: in [def-weil-pbc-sites-and-cohomology] its injective resolution starts in degree zero. We may compute the underlying abelian-sheaf cohomology or fixed-$\\Lambda$ module cohomology interchangeably. To justify this precisely, apply [lem-weil-pbc-module-abelian-derived-direct-image-comparison] to the structure map to $s=\\operatorname{Spec}k$. By [lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant], sheaves on $s$ are naturally their section sets with constant-sheaf realization. Transporting addition and scalar multiplication gives the analogous equivalence for module sheaves; applying the equivalence termwise identifies derived direct image to $s$ with module-valued derived global sections. The stated comparison is therefore the required cohomology comparison and respects constants. For $r=0$, [def-sbc-affine-space] gives $\\mathbf A^0_k=s$. The finite twist is a torsion sheaf, and [lem-sf-separably-closed-torsion-cd] gives $H^q(s,\\Lambda(t))=0$ for $q>0$. Degree zero is its sections $\\Lambda(t)(k)$, and the constants map is the identity.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+    "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+    "def-sbc-affine-space",
+    "lem-sf-separably-closed-torsion-cd"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QQ, section-cohomology-point, lemma-equivalence-abelian-sheaves-point and lemma-compare-cohomology-point; nonnegative resolutions"
+   }
+  },
+  {
+   "text": "Apply [thm-pur-kummer-affine-line] with $N=n$, $R=\\Lambda$ and the finite free rank-one $R$-module $A=\\Lambda$. Clause (1) gives $H^q(\\mathbf A^1_k,\\Lambda(1))=0$ for $q>0$ and a degree-zero isomorphism from $\\Lambda$ sending $a$ to the section $\\zeta\\otimes a$. Under Step 1 this is exactly the constants map for $\\Lambda$. Thus the canonical constants map $u_1:\\Lambda[0]\\to R\\Gamma(\\mathbf A^1_k,\\Lambda)$ is an isomorphism: it induces an isomorphism on degree zero and on every other degree (both groups being zero, including negative degrees by Step 2); apply [lem-weil-pbc-unbounded-derived-iso-cohomology]. Step 2 supplies the fixed-module interpretation needed here.",
+   "uses": [
+    "thm-pur-kummer-affine-line",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Section 16, Example 16.3, p.109: affine-line Kummer calculation"
+   }
+  },
+  {
+   "text": "For $j\\geq0$ let $u_j:\\Lambda[0]\\to R\\Gamma(\\mathbf A^j_k,\\Lambda)$ be the canonical constants map. Step 2 gives $u_0$ invertible and Step 3 gives $u_1$ invertible. Suppose $u_j$ is invertible. The affine polynomial description in [def-sbc-affine-space] identifies $\\mathbf A^j_k\\times_k\\mathbf A^1_k$ with $\\mathbf A^{j+1}_k$: $k[x_1,\\ldots,x_j]\\otimes_k k[y]=k[x_1,\\ldots,x_j,y]$ via the mutually inverse maps on the displayed generators. Both factors are finite type since these polynomial algebras have finitely many generators. Apply [thm-kun-0f1p] with integer coefficient modulus $m=\\ell^n$ and both input sheaves $\\Lambda$. Its hypotheses hold because $k$ is algebraically closed, hence separably closed, and $m$ is invertible in $k$. By [lem-kun-pullback-constant] and [lem-kun-tensor-unit] the external coefficient is the constant $\\Lambda$. We obtain an isomorphism\n$$R\\Gamma(\\mathbf A^j_k,\\Lambda)\\otimes^L_\\Lambda R\\Gamma(\\mathbf A^1_k,\\Lambda)\\xrightarrow{\\kappa}R\\Gamma(\\mathbf A^{j+1}_k,\\Lambda).$$\nThe derived tensor functor [def-kun-derived-tensor] sends the two isomorphisms $u_j,u_1$ to an isomorphism. Its source is $\\Lambda[0]\\otimes^L_\\Lambda\\Lambda[0]\\cong\\Lambda[0]$ by the tensor-unit statement at $s$, using the module equivalence in Step 2. Hence the composite $v_{j+1}=\\kappa\\circ(u_j\\otimes^Lu_1)$ is invertible.",
+   "uses": [
+    "def-sbc-affine-space",
+    "thm-kun-0f1p",
+    "lem-kun-pullback-constant",
+    "lem-kun-tensor-unit",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F1P, lemma-kunneth; Milne Section 16 Example 16.3 and Section 22 Remark 22.3(b)"
+   }
+  },
+  {
+   "text": "The composite $v_{j+1}$ of Step 4 is $u_{j+1}$. In the formula of [def-kun-kunneth-map], $\\kappa$ is adjoint to the two pulled-back counits followed by the coefficient tensor multiplication. Composing with $u_j\\otimes^Lu_1$, its adjoint sends $a\\otimes b$ to the constant section $ab$: on each factor the counit applied to a pulled-back constant is that constant, by the adjunction triangle identity. The inverse-image composition comparisons in that definition identify this with the adjoint of $u_{j+1}$. Equivalently the two maps agree on $H^0$, sending $1$ to the constant section $1$; a map from the free module $\\Lambda[0]$ into a derived module complex is determined by its $H^0$ class, since the complex of maps from $\\Lambda$ is the complex itself. This verifies the claimed equality and closes the induction for the specified constants maps. Their targets therefore have only degree-zero cohomology. Finally apply the compatible sheaf trivializations of Step 1. The pullback compatibility in [lem-asd-etale-finite-twist-pullback] makes the square with $u_j$ and the actual constants map $\\Lambda(t)(k)\\to H^0(\\mathbf A^j_k,\\Lambda(t))$ commute. Its two vertical basis maps and top map are isomorphisms, so the bottom map is an isomorphism. Higher and negative vanishing transport through the same sheaf isomorphisms. Changing $\\zeta$ changes only the vertical maps; the bottom map is always pullback and is independent of any choice.",
+   "uses": [
+    "def-kun-kunneth-map",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Section 16 opening paragraphs and Example 16.3; Section 22 exterior-product map and its adjunction formula"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-derived-tensor",
+  "def-kun-kunneth-map",
+  "def-sbc-affine-space",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-kun-pullback-constant",
+  "lem-kun-tensor-unit",
+  "lem-sc-primitive-root",
+  "lem-sf-separably-closed-torsion-cd",
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+  "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "thm-kun-0f1p",
+  "thm-pur-kummer-affine-line"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Section 16, Example 16.3 together with Section 22 Künneth"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +137,45 @@
    "results": "{\"t\": \"2026-10-18T20:11:29Z\", \"tool\": \"leanfinder\", \"query\": \"The constant sections map from a finite ring to derived etale global sections of affine n space over an algebraically closed field is a quasi-isomorphism when its order is invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Rep.standardComplex.instQuasiIsoNatεToSingle₀\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.FormallyEtale.instForallOfFinite\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.Etale.formallyEtale\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\"], \"digest\": \"fd35f901be5a1eaf\"}",
    "date": "2026-10-19",
    "verdict": "no match: returned types concern cotangent complexes, algebraic etaleness, projective spectra or representation resolutions, not ordinary etale cohomology of these varieties"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*(acyclic|cohomology)|cohomology.*affine",
+   "results": "{\"t\": \"2026-10-18T20:36:04Z\", \"tool\": \"grep\", \"query\": \"affine.*(acyclic|cohomology)|cohomology.*affine\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected returned signatures; algebraic etaleness, affine geometry and abstract quasi-isomorphisms do not compute ordinary finite-coefficient etale cohomology of affine space"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite torsion etale cohomology of affine n space over an algebraically closed field vanishes in positive degrees",
+   "results": "{\"t\": \"2026-10-18T20:36:05Z\", \"tool\": \"leansearch\", \"query\": \"Finite torsion etale cohomology of affine n space over an algebraically closed field vanishes in positive degrees\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Etale.finitePresentation\", \"Algebra.FormallyEtale.subsingleton_h1Cotangent\", \"Algebra.Etale.formallyEtale\", \"RingHom.Etale\", \"AlgebraicGeometry.IsEtale\", \"Rep.FiniteCyclicGroup.groupCohomologyπEven_eq_zero_iff\", \"Algebra.FormallySmooth.subsingleton_h1Cotangent\", \"Algebra.isOpen_etaleLocus\"], \"digest\": \"aa811f2cdf9848db\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected returned signatures; algebraic etaleness, affine geometry and abstract quasi-isomorphisms do not compute ordinary finite-coefficient etale cohomology of affine space"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"cohomology\"",
+   "results": "{\"t\": \"2026-10-18T20:36:05Z\", \"tool\": \"loogle\", \"query\": \"\\\"Etale\\\", \\\"cohomology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected returned signatures; algebraic etaleness, affine geometry and abstract quasi-isomorphisms do not compute ordinary finite-coefficient etale cohomology of affine space"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine space over an algebraically closed field is acyclic for etale cohomology with finite coefficients of order invertible in the field",
+   "results": "{\"t\": \"2026-10-18T20:36:06Z\", \"tool\": \"leanfinder\", \"query\": \"Affine space over an algebraically closed field is acyclic for etale cohomology with finite coefficients of order invertible in the field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.instIsAffine\", \"AlgebraicGeometry.AffineSpace\", \"AlgebraicGeometry.AffineSpace.instLocallyOfFinitePresentationOverSchemeInferInstanceOverClassOfFinite\", \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.IsStandardSmooth.subsingleton_h1Cotangent\"], \"digest\": \"7b7a1364dfa20e78\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected returned signatures; algebraic etaleness, affine geometry and abstract quasi-isomorphisms do not compute ordinary finite-coefficient etale cohomology of affine space"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The constant sections map to derived etale global sections of affine space over an algebraically closed field is a quasi isomorphism for finite invertible cyclic coefficients",
+   "results": "{\"t\": \"2026-10-18T20:41:00Z\", \"tool\": \"leanfinder\", \"query\": \"The constant sections map to derived etale global sections of affine space over an algebraically closed field is a quasi isomorphism for finite invertible cyclic coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.FiniteCyclicGroup.resolution_quasiIso\", \"Rep.standardComplex.instQuasiIsoNatεToSingle₀\", \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\", \"CochainComplex.cm5b.instQuasiIsoIntP\", \"DerivedCategory.isIso_Q_map_iff_quasiIso\", \"Algebra.Etale.formallyEtale\", \"Algebra.FormallyEtale.instForallOfFinite\", \"CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ'\"], \"digest\": \"e6e1f9ad8b7eea13\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected returned signatures; algebraic etaleness, affine geometry and abstract quasi-isomorphisms do not compute ordinary finite-coefficient etale cohomology of affine space"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-geometric-projective-space-hyperplane-cohomology",
@@ -65,7 +187,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Proof Step 3: dimension-normalized Verdier duality, regular finite-torsion local model; pointwise purity and composition used to compare the normalized curve with the ambient regular scheme. Input: Kummer regular-immersion fundamental classes and their operations. Supporting input: Ordinary etale projective bundle and Chern identities over Noetherian bases. In the supporting Chern calculation: The geometric-fibre calculation underlying the projective-bundle isomorphism (Expose XVI, Theorem 1.2). Supporting the hyperplane induction: Section 16, Example 16.3, affine-line Kummer calculation and affine-space acyclicity via Section 22; Section 16 opening paragraphs on trivializing twists over an algebraically closed field",
+   "place": "Proof Step 3 supporting input: Section 16, Example 16.3 affine-line Kummer calculation and affine-space acyclicity via Section 22; Section 16 opening paragraphs on trivializing twists over an algebraically closed field",
    "via": [
     "lem-per-geometric-projective-space-hyperplane-cohomology",
     "lem-per-noetherian-etale-chern-identities",
@@ -79,5 +201,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-geometric-affine-space-acyclicity",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Five steps realize Milne Example 16.3: explicit signed twist trivialization, point and negative-degree base cases with module/abelian comparison, finite affine-line Kummer input, finite-type product Künneth induction, and an explicit adjunction calculation identifying the canonical constants map. All inputs already exist; no new nodes or Mathlib leaves. Read two semantic search phrasings and Loogle/grep results; no matching theorem. No Lean or compiler operations.",
+  "blueprint": "Realizes the supporting affine-space acyclicity input behind lem-per-artin-gabber-affine-curve Step 3 through the current item ancestry: Milne Section 16 twist paragraph (Step 1), point case (Step 2), Example 16.3 Kummer sentence (Step 3), Example 16.3 Künneth sentence and Section 22 (Steps 4-5). No chapter or unit route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-primitive-root",
+    "why": "Generic algebraic primitive-root existence over any algebraically closed field; no perverse-unit result supplies it."
+   },
+   {
+    "node": "thm-pur-kummer-affine-line",
+    "why": "Generic ordinary finite-coefficient affine-line Kummer calculation explicitly used by Milne Example 16.3, with no restriction to finite-field algebraic closures."
+   },
+   {
+    "node": "thm-kun-0f1p",
+    "why": "Generic ordinary finite-cyclic-coefficient Künneth theorem, applied to finite-type affine spaces, implementing the Section 22 route named by the item."
+   },
+   {
+    "node": "lem-kun-pullback-constant",
+    "why": "Generic constant coefficient inverse-image identification needed for the exterior tensor coefficient."
+   },
+   {
+    "node": "lem-kun-tensor-unit",
+    "why": "Generic derived tensor unit removes constant ring factors; the perverse unit has no such statement."
+   },
+   {
+    "node": "lem-sf-separably-closed-torsion-cd",
+    "why": "Generic torsion cohomology of a separably closed point for r=0."
+   },
+   {
+    "node": "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+    "why": "Unit-compatible fixed-coefficient/abelian derived comparison connects the Kummer cohomology calculation to module derived sections."
+   },
+   {
+    "node": "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+    "why": "Generic point-topos constant-sheaf identification realizes direct image to Spec k as global sections."
+   },
+   {
+    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "why": "Generic cohomology criterion applied to the line constants map."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic roots-of-unity signed twists and canonical pullback identifications; no change to the perverse route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-primitive-root",
+  "thm-pur-kummer-affine-line",
+  "thm-kun-0f1p",
+  "lem-kun-pullback-constant",
+  "lem-kun-tensor-unit",
+  "lem-sf-separably-closed-torsion-cd",
+  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+  "lem-weil-pbc-spec-algebraically-closed-etale-sheaf-constant",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-asd-etale-finite-twist-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NH-c0f3f4980",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-c0f3f4980 (reviewer sub-agent of L); spot-checked: I read the item, the full statement of every cited node, Milne LEC Example 16.3 (Kummer on A¹, then 'Künneth (22) implies A^m acyclic'), Remark 22.3(b), the §16 twist paragraph, and Stacks 0F1P/lemma-kunneth and 03QQ; no SGA source is used. The statement is unchanged and checked on r=0, char 0 (A¹_C simply connected), char p≠ℓ (Pic A¹=0, k^× divisible), q<0 and t<0. Step 1: the ζ-trivialization of μ_m by a clopen partition is correct; the differences ζ^a−ζ^b are units. Step 2: the r=0 case and q<0 follow from the cited module/abelian comparison, the sheaves-on-a-point node and torsion cd 0. Step 3: thm-pur-kummer-affine-line clause (1) with N=n, A=R=Λ; under the trivialization a↦ζ⊗a is the constants map; the cohomology criterion gives u₁. Step 4: induction with thm-kun-0f1p, whose hypotheses hold (finite type, k separably closed, ℓⁿ invertible), plus pullback-constant and tensor-unit; base cases u₀ and u₁. Step 5: the adjunction calculation in def-kun-kunneth-map shows κ∘(u_j⊗u₁)=u_{j+1}; the H⁰ test is valid because Λ is projective; twisting back via the pullback compatibility leaves a map independent of ζ. There are no new nodes and no duplicate: lem-pur-affine-line-ordinary-invariance assumes k=F̄_q, and the lem-fd nodes cover A¹ only. The declared tool_uses are accepted. Batch 5: the closures of thm-kun-0f1p and thm-pur-kummer-affine-line reach only generic pod/trf nodes (scalar extension, stalk of a tensor product, local constancy, separated finite type stable under base change, a localization is essentially surjective, proper with finite fibre is finite near s). Both cited nodes are already in the batch-5 closure computed without the item, and neither is part of the trace-formula or Poincaré-duality proofs, so both flags are accepted. No fixes."
  }
 }
