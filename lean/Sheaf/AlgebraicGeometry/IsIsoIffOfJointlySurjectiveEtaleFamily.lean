@@ -51,6 +51,20 @@ theorem isIso_iff_of_jointlySurjective_etale_family
     (ht : ∀ x : T, ∃ (i : I) (y : U i), (t i).base y = x)
     {G H : Sheaf T.smallEtaleTopology AddCommGrpCat.{u + 1}} (φ : G ⟶ H) :
     IsIso φ ↔ ∀ i : I, IsIso ((upperStar AddCommGrpCat.{u + 1} (t i)).map φ) := by
-  sorry
+  constructor
+  · intro h i
+    infer_instance
+  · intro h
+    refine Scheme.isIso_of_isIso_sheafFiber_map φ fun x ↦ ?_
+    obtain ⟨i, y, hy⟩ := ht ((T.algClosurePoint x) default)
+    obtain ⟨s, hs, -⟩ := Scheme.exists_fac_of_etale_of_isSepClosed
+      (t i) (T.algClosurePoint x) y hy
+    change IsIso (((Scheme.pointSmallEtale (T.algClosurePoint x)).ulift.{u + 1}).sheafFiber.map φ)
+    rw [← hs]
+    have := h i
+    refine (NatIso.isIso_map_iff
+      (upperStarCompUliftSheafFiberIso AddCommGrpCat.{u + 1} (t i) s) φ).1 ?_
+    rw [Functor.comp_map]
+    infer_instance
 
 end AlgebraicGeometry.Etale
