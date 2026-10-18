@@ -22,68 +22,66 @@
  ],
  "proof": [
   {
-   "text": "Choose a complex $C$ representing $K$ and resolutions $a:C\\to I$, $b:C\\to J$ using [prop-weil-pbc-kinjective-resolutions-exist]. They are quasi-isomorphisms with K-injective targets by [def-weil-pbc-kinjective-resolutions]. By [def-kun-rgamma-unbounded] the first construction is $\\Gamma(T,I)$. The second is the termwise-section recipe of [def-weil-pbc-etale-cohomology] with the same coefficient category $\\Mod(T_{\\Et},\\Lambda)$, not a change to the underlying abelian-sheaf resolution.",
+   "text": "The Lean statement already supplies the complex C and both resolutions a:C→I and b:C→J. Unpack [def-weil-pbc-kinjective-resolutions]: a and b are quasi-isomorphisms and I and J are K-injective. Their images under localization [def-weil-abstract-derived-category] are invertible. No additional resolution is chosen.",
    "uses": [
-    "prop-weil-pbc-kinjective-resolutions-exist",
     "def-weil-pbc-kinjective-resolutions",
-    "def-kun-rgamma-unbounded",
-    "def-weil-pbc-etale-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Tag 079P, theorem-K-injective-embedding-grothendieck; applied to module sheaves as in prop-weil-pbc-kinjective-resolutions-exist"
-   }
-  },
-  {
-   "text": "Write $Q$ for localization. Since $Qa$ and $Qb$ are invertible [def-weil-abstract-derived-category], form $\\alpha=Qb\\circ(Qa)^{-1}:QI\\to QJ$. The bijection of [lem-weil-pbc-kinjective-hom-derived], applied with target $J$, gives a unique homotopy class $u:I\\to J$ mapping to $\\alpha$; with target $I$ it gives a class $v:J\\to I$ mapping to $\\alpha^{-1}$. Injectivity with targets $I$ and $J$ gives $vu=1_I$ and $uv=1_J$ in the homotopy category. Injectivity with source $C$ and target $J$ also gives $ua=b$. Thus representatives $u,v$ are mutually inverse up to chain homotopy and the comparison respects the augmentations.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-kinjective-hom-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 070I, lemma-K-injective, clauses (1) and (3); agent-written comparison argument expanding the blueprint proof"
-   }
-  },
-  {
-   "text": "Global sections on module sheaves [def-weil-sheaf-of-modules-category] is additive: sums and composites of sheaf morphisms are sums and composites on sections at $T$. A cochain homotopy $h$ between $f,g$ satisfies $f^n-g^n=d^{n-1}h^n+h^{n+1}d^n$. Evaluating at $T$ gives the identical equation for $\\Gamma(f),\\Gamma(g),\\Gamma(h)$. Apply this to the two inverse homotopies from step 2. The maps $\\Gamma(u)$ and $\\Gamma(v)$ are homotopy inverses, hence are inverse in $D(\\Lambda)$, since localization factors through the homotopy category [def-weil-abstract-derived-category].",
-   "uses": [
-    "def-weil-sheaf-of-modules-category",
     "def-weil-abstract-derived-category"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 070I, lemma-K-injective, clauses (1) and (3); agent-written comparison argument expanding the blueprint proof"
+    "place": "Tag 070I, lemma-K-injective, clauses (1) and (3); augmentation-compatible comparison and functoriality"
    }
   },
   {
-   "text": "For any other augmentation-compatible comparison $u'$, $Q(u'a)=Qb$ implies $Qu'=\\alpha$. Injectivity of [lem-weil-pbc-kinjective-hom-derived] makes $u'$ homotopic to $u$, so step 3 gives the same isomorphism after global sections. For a morphism $f:K\\to K'$ represented between derived objects $QC$ and $QC'$, lift $Qa'\\,f\\,(Qa)^{-1}$ uniquely to a homotopy class $I\\to I'$ and $Qb'\\,f\\,(Qb)^{-1}$ uniquely to a class $J\\to J'$, using the same bijection with K-injective targets. The two composites from $I$ to $J'$ both localize to $Qb'\\,f\\,(Qa)^{-1}$; injectivity with target $J'$ identifies them. Step 3 therefore makes the square commute after global sections. For $f=1_K$, the derived lift is $Qa\\,(Qa)^{-1}=1_{QI}$, so injectivity identifies its homotopy class with $1_I$. For $f:K\\to K'$ and $g:K'\\to K''$, the composite of the lifts localizes to $(Qa''\\,g\\,(Qa')^{-1})(Qa'\\,f\\,(Qa)^{-1})=Qa''\\,(gf)\\,(Qa)^{-1}$; injectivity with target $I''$ identifies it with the lift of $gf$. For the $J$ resolutions the identity lift has image $Qb\\,(Qb)^{-1}=1_{QJ}$, and the composite has image $(Qb\\prime\\prime\\,g\\,(Qb\\prime)^{-1})(Qb\\prime\\,f\\,(Qb)^{-1})=Qb\\prime\\prime\\,(gf)\\,(Qb)^{-1}$; injectivity with targets $J$ and $J\\prime\\prime$ gives the identity and composition equations. This proves canonicity, naturality and independence of choices, completing the claimed agreement.",
+   "text": "By [lem-weil-pbc-kinjective-hom-derived], lift (Qa)⁻¹ followed by Qb to a map u:I→J. Reflect equality under localization to obtain a≫u homotopic to b. A second compatible comparison has the same localization after cancelling Qa, so it is homotopic to u. Lift the inverse of Qu to v:J→I; reflect the two inverse equations to obtain u≫v homotopic to 1 and v≫u homotopic to 1. The private helpers exist_Q_map_of_kInjective and homotopy_of_Q_map_eq implement the quotient-comparison isomorphism and the surjectivity/injectivity of Qh_map_bijective.",
    "uses": [
-    "lem-weil-pbc-kinjective-hom-derived"
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 070I, lemma-K-injective, clauses (1) and (3); agent-written comparison argument expanding the blueprint proof"
+    "place": "Tag 070I, lemma-K-injective, clauses (1) and (3); augmentation-compatible comparison and functoriality"
+   }
+  },
+  {
+   "text": "Termwise global sections is additive, hence maps each inverse homotopy to a homotopy. Localization identifies homotopic maps, so QΓv is an explicit inverse to QΓu. Compute the unbounded functor [def-kun-rgamma-unbounded] on I using Functor.rightDerivedFunctorObjQIso, preceded by the image of eC⁻¹ followed by Qa. This yields eI:RΓ(K)≅QΓI. Define eJ=eI followed by the isomorphism with hom QΓu; its compatibility equation is definitional. Since the bounded-below recipe [def-weil-pbc-etale-cohomology] uses the same module-sheaf sections, this gives the required agreement.",
+   "uses": [
+    "def-kun-rgamma-unbounded",
+    "def-weil-pbc-etale-cohomology",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective, clauses (1) and (3); augmentation-compatible comparison and functoriality"
+   }
+  },
+  {
+   "text": "For f:QC→QC′, use [lem-weil-pbc-kinjective-hom-derived] with targets I′ and J′ to lift (Qa)⁻¹≫f≫Qa′ and (Qb)⁻¹≫f≫Qb′ to p and q. Their augmentation equations follow by cancellation. For arbitrary p and q satisfying these equations, precompose Q(u≫q) and Q(p≫u′) with Qa. Both become f≫Qb′ by the two augmentation equations and the comparison equations for u and u′. Cancel Qa and reflect equality to a homotopy using the K-injectivity of J′. Termwise sections and localization send this homotopy to the asserted naturality square.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective, clauses (1) and (3); augmentation-compatible comparison and functoriality"
    }
   }
  ],
  "proof_deps": [
-  "prop-weil-pbc-kinjective-resolutions-exist",
   "def-weil-pbc-kinjective-resolutions",
-  "def-kun-rgamma-unbounded",
-  "def-weil-pbc-etale-cohomology",
   "def-weil-abstract-derived-category",
   "lem-weil-pbc-kinjective-hom-derived",
-  "def-weil-sheaf-of-modules-category"
+  "def-kun-rgamma-unbounded",
+  "def-weil-pbc-etale-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Agent-written augmentation-compatible comparison expanding the blueprint proof; inputs: Tag 070I (lemma-K-injective), clauses (1) and (3), and Tag 079P (theorem-K-injective-embedding-grothendieck)"
+  "place": "Tag 070I, lemma-K-injective; implemented by Mathlib Qh_map_bijective, homotopy preservation, and the source-library rightDerivedFunctorObjQIso; supplied resolutions eliminate the existence step"
  },
  "mathlib_searches": [
   {
@@ -210,9 +208,7 @@
   ]
  },
  "tool_uses": [
-  "prop-weil-pbc-kinjective-resolutions-exist",
   "lem-weil-pbc-kinjective-hom-derived",
-  "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category",
   "def-weil-pbc-kinjective-resolutions",
   "def-weil-pbc-etale-cohomology"
@@ -242,5 +238,15 @@
   "group": "NG",
   "result": "pass",
   "note": "Wrote review.md. Verified immutable files, all six statement dependencies, source passages, hypotheses, conclusions, edge cases, docstrings, and verbatim signature. Server-only compile reproduced cleanly in 2.0 seconds. No H1–H13 errors found; no repository changes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261018T062931-L-686075",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
