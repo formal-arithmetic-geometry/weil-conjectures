@@ -8,64 +8,25 @@ module
 public import Mathlib.NumberTheory.Padics.ProperSpace
 public import Mathlib.Topology.Algebra.Module.FiniteDimension
 public import Mathlib.Topology.LocallyConstant.Basic
+public import WeilConjectures.Mathlib.CategoryTheory.CofilteredSystem
 
 /-!
 # Inverse limits of finite modules
 
-Two facts on inverse systems of finite groups, used to control `ℓ`-adic cohomology
-`Hⁱ(X, ℤ_ℓ) = lim Hⁱ(X, ℤ/ℓᵐ)`:
+A finiteness criterion used to control `ℓ`-adic cohomology `Hⁱ(X, ℤ_ℓ) = lim Hⁱ(X, ℤ/ℓᵐ)`
+(the vanishing of `lim¹` for towers of finite groups is
+`AddCommGroup.exists_sub_map_succ_eq_of_finite`):
 
-* `AddCommGroup.exists_sub_map_succ_eq_of_finite`: for a tower `Mₙ₊₁ ⟶ Mₙ` of finite abelian
-  groups the map `1 - t : ∏ Mₙ ⟶ ∏ Mₙ`, `(xₙ) ↦ (xₙ - t xₙ₊₁)`, is surjective, i.e. `lim¹ Mₙ = 0`.
 * `PadicInt.module_finite_of_finite_quotient`: a `ℤ_p`-module `A` with maps `ρₘ : A ⟶ Eₘ` to
   modules killed by `pᵐ`, with `ker ρₘ = pᵐ A`, `⋂ ker ρₘ = 0` and `E₁` finite, is finitely
   generated. This applies to `A = Hⁱ(X, ℤ_ℓ)` with the reductions `ρₘ : Hⁱ(X, ℤ_ℓ) ⟶ Hⁱ(X, ℤ/ℓᵐ)`.
 
-Both are proved by compactness.
+The proof is by compactness.
 -/
 
 @[expose] public section
 
 open Topology Filter
-
-namespace AddCommGroup
-
-/-- **`lim¹` of a tower of finite groups vanishes.** For a tower `fₙ : Mₙ₊₁ ⟶ Mₙ` of finite abelian
-groups and any `(yₙ) ∈ ∏ Mₙ` there is `(xₙ)` with `xₙ - fₙ xₙ₊₁ = yₙ` for all `n`. -/
-theorem exists_sub_map_succ_eq_of_finite {M : ℕ → Type*} [∀ n, AddCommGroup (M n)]
-    [∀ n, Finite (M n)] (f : ∀ n, M (n + 1) →+ M n) (y : ∀ n, M n) :
-    ∃ x : ∀ n, M n, ∀ n, x n - f n (x (n + 1)) = y n := by
-  classical
-  let (n : ℕ) : TopologicalSpace (M n) := ⊥
-  have (n : ℕ) : DiscreteTopology (M n) := ⟨rfl⟩
-  let C (N : ℕ) : Set (∀ n, M n) := {x | ∀ n < N, x n - f n (x (n + 1)) = y n}
-  -- every finite stage can be solved, with any prescribed last value
-  have hne (N : ℕ) : ∀ z : M N, ∃ x ∈ C N, x N = z := by
-    induction N with
-    | zero => exact fun z ↦ ⟨Function.update 0 0 z, fun n hn ↦ absurd hn n.not_lt_zero,
-        Function.update_self _ _ _⟩
-    | succ N ih =>
-      intro z
-      obtain ⟨x, hx, hxN⟩ := ih (y N + f N z)
-      refine ⟨Function.update x (N + 1) z, fun n hn ↦ ?_, Function.update_self _ _ _⟩
-      rcases Nat.lt_succ_iff_lt_or_eq.1 hn with hn | rfl
-      · rw [Function.update_of_ne (by omega), Function.update_of_ne (by omega)]
-        exact hx n hn
-      · rw [Function.update_of_ne (by omega), Function.update_self, hxN, add_sub_cancel_right]
-  have hclosed (N : ℕ) : IsClosed (C N) := by
-    have : C N = ⋂ n ∈ Finset.range N, {x | x n - f n (x (n + 1)) = y n} := by
-      ext x
-      simp [C]
-    rw [this]
-    refine isClosed_biInter fun n _ ↦ isClosed_eq ?_ continuous_const
-    exact (continuous_apply n).sub
-      ((continuous_of_discreteTopology (f := f n)).comp (continuous_apply (n + 1)))
-  obtain ⟨x, hx⟩ := IsCompact.nonempty_iInter_of_sequence_nonempty_isCompact_isClosed C
-    (fun N x hx n hn ↦ hx n (by omega)) (fun N ↦ (hne N 0).elim fun x hx ↦ ⟨x, hx.1⟩)
-    (hclosed 0).isCompact hclosed
-  exact ⟨x, fun n ↦ Set.mem_iInter.1 hx (n + 1) n (by omega)⟩
-
-end AddCommGroup
 
 namespace PadicInt
 

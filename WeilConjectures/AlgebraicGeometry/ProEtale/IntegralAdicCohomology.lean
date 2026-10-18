@@ -313,7 +313,7 @@ theorem eq_zero_of_forall_reduction_eq_zero_succ (n : ℕ)
   let F := continuousSheafTower S (powOpenAddSubgroup p) hU
   have (k : ℕ) : Finite (Sheaf.H (F.obj (op k)) n) := hfin k
   obtain ⟨w, hw⟩ := AddCommGroup.exists_sub_map_succ_eq_of_finite
-    (M := fun k ↦ Sheaf.H (F.obj (op k)) n)
+    (G := fun k ↦ Sheaf.H (F.obj (op k)) n)
     (fun k ↦ (Ext.mk₀ (F.map (homOfLE k.le_succ).op)).postcomp _ (add_zero n)) y
   exact ⟨w, hw⟩
 

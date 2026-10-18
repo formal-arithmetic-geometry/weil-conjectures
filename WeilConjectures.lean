@@ -166,6 +166,7 @@ public import WeilConjectures.Algebra.LimitFinitePresentation
 public import WeilConjectures.Algebra.LimitFinitePresentation.Colimits
 public import WeilConjectures.Algebra.LimitFinitePresentation.Core
 public import WeilConjectures.Algebra.Module.AdicCompletionStableRanges
+public import WeilConjectures.Algebra.Module.AdicDualityTransport
 public import WeilConjectures.Algebra.Module.AdicPairingLimit
 public import WeilConjectures.Algebra.Module.InverseLimitFinite
 public import WeilConjectures.Algebra.Module.QuotientPrimaryComponentNoTorsion
@@ -4377,6 +4378,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.ClosedSupport
 public import WeilConjectures.SixFunctors.ProEtale.Adic.CompactLatticeBasis
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologicalDimension
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologyBaseChange
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologyDuality
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantGlobalSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheafTransport
