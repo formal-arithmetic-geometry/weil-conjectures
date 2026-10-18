@@ -26,64 +26,87 @@
  ],
  "proof": [
   {
-   "text": "Fix $s\\in S$. By [lem-sc-perfect-finite-free-residue-model] there is an affine open neighbourhood $U$ of $s$ on which $K$ is represented by a bounded complex of finite free modules whose term in degree $i$ has rank $d_i=\\dim_{\\kappa(s)}H^i(K\\otimes^{\\mathbf L}\\kappa(s))$; by hypothesis $d_i=0$ for $i<0$. A bounded complex of flat modules sitting in degrees $\\ge0$ computes $K|_U\\otimes^{\\mathbf L}\\mathcal G$ termwise, so it has no cohomology in negative degrees for every $\\mathcal O_U$-module $\\mathcal G$. As cohomology sheaves are local, $K$ has Tor-amplitude in $[0,\\infty)$ on $S$; in particular $H^i(K)=0$ for $i<0$.",
+   "text": "At a point s, the degree-zero fibre of the structure sheaf has dimension one. The fibre isomorphism therefore gives beta_0(K,s)=1 by [lem-sc-derived-residue-unit-betti]. Negative fibre cohomology gives beta_i(K,s)=0 for i<0. Apply [lem-sc-perfect-finite-free-residue-model] to obtain an affine neighbourhood U and a bounded finite-free model B with B^i=0 for i<0 and B^0 free of rank one.",
    "uses": [
+    "lem-sc-derived-residue-unit-betti",
     "lem-sc-perfect-finite-free-residue-model"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0E62, proof of lemma-proper-flat-h0, sentence 'This first implies that E has tor amplitude in [0, infinity)'"
+    "document": "Stacks Project",
+    "place": "Tag 0E62, degree-zero fibre criterion, using the minimal model of Tag 0BCD"
    }
   },
   {
-   "text": "Since $H^i(K)=0$ for $i<0$ we have $\\tau_{\\le0}K=H^0(K)[0]$, and $u$ factors as $\\mathcal O_S\\xrightarrow{H^0(u)}H^0(K)\\to K$. By naturality, for $s\\in S$ the fibre map $\\kappa(s)\\to H^0(K\\otimes^{\\mathbf L}\\kappa(s))$ is the composite $\\mathcal O_S\\otimes\\kappa(s)\\to H^0(K)\\otimes\\kappa(s)\\to H^0(K\\otimes^{\\mathbf L}\\kappa(s))$; as it is an isomorphism, the second map is surjective. Applying [lem-sc-perfect-cut-complex-degree-zero] (its Tor-amplitude hypothesis is step 1) gives an open neighbourhood $U$ of $s$ and $K|_U\\cong H^0(K)|_U\\oplus P$ with $P$ perfect of Tor-amplitude in $[1,\\infty)$.",
+   "text": "Use the existing strictlyPerfect_single_restricted_unit helper in the module of [lem-sc-connective-rank-one-model-stalk] to establish strict perfection of the restricted structure-sheaf single complex. Represent the restricted arrow from the structure sheaf in degree zero to B by a chain map alpha using [lem-pc-perfect-affine-map-representative]. At every point x of U its degree-zero component is invertible on the stalk by [lem-sc-rank-one-residue-stalk-component], since the original fibre hypothesis holds at every x and B^0 is free of rank one throughout U. Stalks detect isomorphisms of module sheaves (the stalk criterion in the module of [lem-sc-flat-cover-module-isomorphism-reflection]); the over-site equivalence reflects them. Thus alpha^0 is an isomorphism.",
    "uses": [
-    "lem-sc-perfect-cut-complex-degree-zero"
+    "lem-sc-connective-rank-one-model-stalk",
+    "lem-pc-perfect-affine-map-representative",
+    "lem-sc-rank-one-residue-stalk-component",
+    "lem-sc-flat-cover-module-isomorphism-reflection"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0E62, proof of lemma-proper-flat-h0, application of More on Algebra, Lemma better-cut-complex-in-two"
+    "document": "Stacks Project",
+    "place": "Tag 0E62, residue-field unit argument with Tag 0BCD"
    }
   },
   {
-   "text": "On $U$ as in step 2, $M=H^0(K)|_U$ is a direct summand of $K|_U$, hence perfect by [lem-pc-perfect-summand], and of Tor-amplitude in $[0,\\infty)$ by step 1; since $H^i(M\\otimes^{\\mathbf L}\\mathcal G)=\\mathcal Tor_{-i}(M,\\mathcal G)$ vanishes for $i<0$, $M$ is flat. On an affine open $V=\\operatorname{Spec}A\\subset U$, [lem-pc-perfect-affine-bounded-projective] represents $M|_V$ by a bounded complex $P^\\bullet$ of finite projective $A$-modules with cohomology only in degree $0$; exactness in degrees $\\ge1$ splits $P^{\\ge0}$ from the top, so $Z^0=\\ker(P^0\\to P^1)$ is a direct summand of $P^0$, and $M(V)=\\operatorname{coker}(P^{-1}\\to Z^0)$ is finitely presented. By [lem-weil-pbc-finitely-presented-flat-module-projective] it is finite projective, so $H^0(K)$ is finite locally free on $S$.",
+   "text": "At the original point s, apply the same stalk component criterion. Exact localized stalks commute with derived homology by [lem-sc-localized-homology-stalk-comparison]. The source complex is supported in degree zero and the target has no negative terms. Its outgoing degree-zero differential vanishes because it kills the invertible component alpha^0. Consequently homology of the stalk chain map in degree zero is invertible. Naturality of the homology and restriction comparisons identifies it, up to conjugation by isomorphisms, with the stalk of H^0(u). This holds for every s, so the stalk criterion gives that H^0(u) is an isomorphism.",
    "uses": [
-    "lem-pc-perfect-summand",
-    "lem-pc-perfect-affine-bounded-projective",
-    "lem-weil-pbc-finitely-presented-flat-module-projective"
+    "lem-sc-localized-homology-stalk-comparison",
+    "lem-sc-rank-one-residue-stalk-component",
+    "lem-pc-perfect-affine-map-representative",
+    "lem-sc-flat-cover-module-isomorphism-reflection"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0E62, proof of lemma-proper-flat-h0, paragraph 'Since E has tor amplitude in [0, infinity) ... finite locally free'"
+    "document": "Stacks Project",
+    "place": "Tag 0E62, conclusion on H^0(u); exact restriction and homology"
    }
   },
   {
-   "text": "On $U$ as in step 2, $K\\otimes^{\\mathbf L}\\kappa(s)\\cong(H^0(K)\\otimes\\kappa(s))\\oplus(P\\otimes^{\\mathbf L}\\kappa(s))$ because $H^0(K)$ is flat (step 3), and $P\\otimes^{\\mathbf L}\\kappa(s)$ has no cohomology in degrees $\\le0$; so $H^0(K)\\otimes\\kappa(s)\\to H^0(K\\otimes^{\\mathbf L}\\kappa(s))$ is an isomorphism, and by the factorization of step 2 so is $H^0(u)\\otimes\\kappa(s):\\kappa(s)\\to H^0(K)\\otimes\\kappa(s)$, for every $s\\in S$. Both $\\mathcal O_S$ and $H^0(K)$ are finite locally free (step 3), so [lem-sc-finite-locally-free-residue-isomorphism] shows that $H^0(u)$ is an isomorphism. Substituting it into the splitting of step 2 gives $K|_U\\cong\\mathcal O_U\\oplus P$ with $P$ perfect of Tor-amplitude in $[1,\\infty)$.",
+   "text": "Since alpha^0 is invertible, the chain-map equation saying that d_B^0 after alpha^0 is zero implies d_B^0=0. For the model transported to U, let p:B -> B^0[0] be the degree-zero projection and j its inclusion. The negative terms vanish and d_B^0=0, so these are chain maps and p after j is the identity on B^0[0]. Put N=ker(p), and factor the difference between the identity of B and j after p through this kernel to define the retraction B -> N. The resulting split short complex gives B isomorphic to B^0[0] direct-sum N. The terms N^i vanish for i<1: in degree zero the kernel inclusion has zero component and is monic, and in negative degrees N is a retract of the zero term of B. The isomorphism alpha^0 identifies B^0 with the structure sheaf.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "Stacks Project",
+    "place": "Tag 0E62, local splitting, specialized to a rank-one degree-zero model"
+   }
+  },
+  {
+   "text": "Every term of N is a retract of a finite-free term of B, and N inherits its finite support. Restricting this termwise retraction again to the top open witnesses perfection directly from its definition. The terms of N are flat. By [lem-pc-bounded-above-flat-kflat], N is K-flat, so it computes derived tensor. Tensoring N, which vanishes below degree one, with any module sheaf in degree zero still vanishes below degree one, hence has zero cohomology there (the proved tensor bounds in WeilConjectures.Mathlib.Algebra.Homology.Monoidal). The open restriction comparison from [lem-pc-tor-amplitude-open-local] identifies the localized derived model with derived pullback to U. Applying Q to the chain splitting and its biproduct comparison gives the claimed derived splitting with the structure sheaf and Q(N).",
    "uses": [
-    "lem-sc-finite-locally-free-residue-isomorphism"
+    "lem-pc-bounded-above-flat-kflat",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-pc-tor-amplitude-open-local"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/perfect.tex",
-    "place": "Tag 0E62, proof of lemma-proper-flat-h0, final paragraph"
+    "document": "Stacks Project",
+    "place": "Tag 0E62, perfect positive-amplitude summand; bounded flat tensor computation"
    }
   }
  ],
  "proof_deps": [
+  "lem-sc-derived-residue-unit-betti",
   "lem-sc-perfect-finite-free-residue-model",
-  "lem-sc-perfect-cut-complex-degree-zero",
-  "lem-pc-perfect-summand",
-  "lem-pc-perfect-affine-bounded-projective",
-  "lem-weil-pbc-finitely-presented-flat-module-projective",
-  "lem-sc-finite-locally-free-residue-isomorphism"
+  "lem-sc-connective-rank-one-model-stalk",
+  "lem-pc-perfect-affine-map-representative",
+  "lem-sc-rank-one-residue-stalk-component",
+  "lem-sc-flat-cover-module-isomorphism-reflection",
+  "lem-sc-localized-homology-stalk-comparison",
+  "lem-pc-bounded-above-flat-kflat",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-tor-amplitude-open-local"
  ],
  "proof_origin": {
-  "by": "document",
-  "document": "literature/stacks-project/perfect.tex",
-  "place": "Tag 0E62, proof of lemma-proper-flat-h0"
+  "by": "worker",
+  "group": "Z5",
+  "date": "2026-10-18",
+  "document": "Stacks Project",
+  "place": "Tag 0E62, degree-zero criterion, with the finite-free minimal model of Tag 0BCD",
+  "note": "Use the rank-one degree-zero model directly. Chain splitting, retract perfection, tensor bounds and homology-stalk transport are proved in Lean; no new intermediate holes. Repair of returned head 9845b6bdc: remove the duplicate private strictlyPerfect_single_restricted_unit proof and import all Sheaf.AlgebraicGeometry.ConnectiveRankOneModelStalk to use its existing private helper."
  },
  "mathlib_searches": [
   {
@@ -140,12 +163,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pc-perfect-summand",
-  "lem-weil-pbc-finitely-presented-flat-module-projective",
-  "lem-pc-tor-amplitude-qcoh-test",
-  "lem-pc-perfect-affine-bounded-projective"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-11",
   "by": "L",
@@ -183,5 +201,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z5",
+  "result": "pass",
+  "landing": "20261018T071245-L-1684009",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
