@@ -10,9 +10,114 @@
  "stmt_deps": [
   "def-weil-pbc-tor-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Keep $Q,G,h,D$ fixed. For a $D$-module $N$, write $A(N)$ for the condition $\\operatorname{Tor}^D_1(N,D/\\mathbf Z[I])=0$ for every monoid ideal $I\\subseteq Q$. We first prove the degree-one conclusion for every $N$ satisfying $A(N)$, not just for $M$. Choose a projective resolution $P_\\bullet\\to N$ as in [def-weil-pbc-tor-modules]. For any $D$-module $W$, regard $P_\\bullet\\otimes_D W$ as a cochain complex $C(W)$ by putting $C(W)^{-j}=P_j\\otimes_DW$ for $j\\ge0$ and $C(W)^j=0$ for $j>0$. Thus $H^{-1}(C(W))=\\operatorname{Tor}^D_1(N,W)$ and $C(0)=0$.",
+   "uses": [
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00LY (section-tor), projective-resolution definition; agent notation for the simultaneous degree-one argument."
+   }
+  },
+  {
+   "text": "If $0\\to W_1\\to W_2\\to W_3\\to0$ is short exact, each $P_j$ is flat by [lem-weil-pbc-projective-module-flat], so [lem-weil-pbc-flat-tensor-exact] makes $0\\to C(W_1)\\to C(W_2)\\to C(W_3)\\to0$ degreewise short exact. Apply [lem-weil-pbc-complex-ses-homology-long-exact] in degree $-1$. It gives exactness of $\\operatorname{Tor}^D_1(N,W_1)\\to\\operatorname{Tor}^D_1(N,W_2)\\to\\operatorname{Tor}^D_1(N,W_3)$. Therefore vanishing of the two outer groups implies vanishing of the middle group. This uses the full homology sequence, including its term before the middle Tor group.",
+   "uses": [
+    "lem-weil-pbc-projective-module-flat",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-complex-ses-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00M0 (lemma-long-exact-sequence-tor), proof via Homology Tag 0117 (lemma-long-exact-sequence-cochain); tensor exactness Tag 00HD (lemma-flat)."
+   }
+  },
+  {
+   "text": "For a small directed system $(W_a)$, [lem-weil-pbc-tensor-commutes-with-colimits], with the tensor flip $p\\otimes w\\mapsto w\\otimes p$, identifies $C(\\varinjlim_aW_a)$ with the termwise colimit of $C(W_a)$. Filtered module colimits are computed on abelian groups: the rule $d[w_a]=[dw_a]$ defines their $D$-action and verifies the module colimit universal property. Put $Z_a=\\ker(C(W_a)^{-1}\\to C(W_a)^0)$ and $B_a=\\operatorname{im}(C(W_a)^{-2}\\to C(W_a)^{-1})$. Apply [lem-weil-pbc-filtered-colimit-abelian-groups-exact] to $0\\to Z_a\\to C(W_a)^{-1}\\to C(W_a)^0$ and to $C(W_a)^{-2}\\to B_a\\to0$ and $0\\to B_a\\to C(W_a)^{-1}$. It identifies their colimits with the kernel and image in the colimit complex. Applying it once more to $0\\to B_a\\to Z_a\\to H^{-1}(C(W_a))\\to0$ gives $\\operatorname{Tor}^D_1(N,\\varinjlim_aW_a)\\cong\\varinjlim_a\\operatorname{Tor}^D_1(N,W_a)$. In particular, a directed colimit of degree-one-acyclic modules is degree-one-acyclic.",
+   "uses": [
+    "def-weil-pbc-tor-modules",
+    "lem-weil-pbc-tensor-commutes-with-colimits",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 0BNF (lemma-tor-commutes-filtered-colimits), proof; Tags 00DD (lemma-tensor-products-commute-with-limits) and 00DB (lemma-directed-colimit-exact). Argument written for the second variable using its fixed projective-resolution complex."
+   }
+  },
+  {
+   "text": "For a finite subset $E\\subseteq T\\setminus U$, put $T_E=U\\cup\\bigcup_{t\\in E}(t+h(Q))$ and $W_E=\\mathbf Z[T_E]/\\mathbf Z[U]$. This is the submodule of $V$ spanned over $\\mathbf Z$ by $T_E\\setminus U$. Enumerate $E=\\{t_1,\\ldots,t_r\\}$, set $T_0=U$ and $T_j=T_{j-1}\\cup(t_j+h(Q))$, and put $W_j=\\mathbf Z[T_j]/\\mathbf Z[U]$. These are stable subsets and $0=W_0\\subseteq\\cdots\\subseteq W_r=W_E$. Define $I_j=\\{q\\in Q:t_j+h(q)\\in T_{j-1}\\}$. Stability of $T_{j-1}$ gives $I_j+Q\\subseteq I_j$. The map $D\\to W_j/W_{j-1}$, $z^q\\mapsto[t_j+h(q)]$, is onto. Injectivity of $h$ and cancellation in $G$ make the values $t_j+h(q)$ distinct for distinct $q$. Thus the surviving values form an abelian-group basis of the quotient, and its kernel is exactly $\\mathbf Z[I_j]$. The displayed map is $D$-linear by the action formula, so $W_j/W_{j-1}\\cong D/\\mathbf Z[I_j]$. This coefficient-by-coefficient calculation also covers $I_j=\\varnothing$ and $I_j=Q$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent basis calculation supplying the monomial filtration used in the proof of this item; ILO Expose X 1.3(vii), printed p.140, and Lemma 1.5, printed p.142, are its intended application."
+   }
+  },
+  {
+   "text": "Assume $A(N)$. For each finite $E$, induct on $j$ in Step 4. The base $W_0=0$ has zero tensor complex. The factor $W_j/W_{j-1}\\cong D/\\mathbf Z[I_j]$ has zero Tor one by $A(N)$ and functoriality in [def-weil-pbc-tor-modules]. Step 2 applied to $0\\to W_{j-1}\\to W_j\\to W_j/W_{j-1}\\to0$ gives $\\operatorname{Tor}^D_1(N,W_j)=0$. In particular it vanishes on $W_E$. The finite subsets of $T\\setminus U$, ordered by inclusion, form a small nonempty directed set (the empty subset is included and union is an upper bound). Their $W_E$ have union $V$, since each element of $V$ has finite support in its abelian-group basis $T\\setminus U$. This union is their module colimit: compatible maps define a map on any element by choosing one stage containing its support. Step 3 now gives $\\operatorname{Tor}^D_1(N,V)=0$. This establishes the degree-one assertion simultaneously for every $N$ with $A(N)$ and every allowed pair $U\\subseteq T$.",
+   "uses": [
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent finite-filtration induction and directed-union argument, using Tags 00M0 and 0BNF as established in Steps 2 and 3."
+   }
+  },
+  {
+   "text": "Let $N$ satisfy $A(N)$ and let $I\\subseteq Q$ be a monoid ideal. The pair $T=h(I)$, $U=\\varnothing$ is allowed, and $q\\mapsto h(q)$ identifies $\\mathbf Z[I]$ with $\\mathbf Z[h(I)]$ as a $D$-module: it is a bijection on their specified bases and respects translation. Step 5 yields $\\operatorname{Tor}^D_1(N,\\mathbf Z[I])=0$. The basis inclusion of $\\mathbf Z[I]$ in $D$ gives the short exact sequence $0\\to\\mathbf Z[I]\\to D\\to D/\\mathbf Z[I]\\to0$, whose middle term is free of rank one. Applying [lem-sc-p1-tor-dimension-shift-natural] with $i=1$ and [lem-weil-pbc-tor-symmetry] twice gives $\\operatorname{Tor}^D_2(N,D/\\mathbf Z[I])\\cong\\operatorname{Tor}^D_2(D/\\mathbf Z[I],N)\\cong\\operatorname{Tor}^D_1(\\mathbf Z[I],N)\\cong\\operatorname{Tor}^D_1(N,\\mathbf Z[I])=0$. The same computation applies to the empty and full ideals.",
+   "uses": [
+    "lem-sc-p1-tor-dimension-shift-natural",
+    "lem-weil-pbc-tor-symmetry"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00M3 (lemma-tor-left-right) and the free-middle-term dimension shift from Tag 00LY (section-tor), as stated in lem-sc-p1-tor-dimension-shift-natural; agent application to monomial ideals."
+   }
+  },
+  {
+   "text": "For any short exact sequence $0\\to K\\to F\\to N\\to0$ with $F$ free and $A(N)$, [lem-sc-p1-tor-dimension-shift-natural] with $i=1$ identifies $\\operatorname{Tor}^D_1(K,D/\\mathbf Z[I])$ with $\\operatorname{Tor}^D_2(N,D/\\mathbf Z[I])$ for every monoid ideal $I$. Step 6 makes the latter zero, hence $A(K)$ holds. Construct such sequences successively without any finiteness hypothesis: start $K_0=M$, let $F_r=\\bigoplus_{x\\in K_r}D e_x$, send $e_x\\mapsto x$, and let $K_{r+1}$ be its kernel. The map is onto since $x$ is the image of $e_x$, so each $0\\to K_{r+1}\\to F_r\\to K_r\\to0$ is short exact with free middle term. The original hypothesis is $A(K_0)$, and induction using the first part of this step proves $A(K_r)$ for every $r\\ge0$.",
+   "uses": [
+    "lem-sc-p1-tor-dimension-shift-natural"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Free-resolution dimension shifting, Tag 00LY (section-tor); explicit free presentations and induction on the successive kernels."
+   }
+  },
+  {
+   "text": "Fix $i>0$ and the given $V$. Repeatedly applying [lem-sc-p1-tor-dimension-shift-natural] to the free presentations of Step 7 gives $\\operatorname{Tor}^D_i(M,V)\\cong\\operatorname{Tor}^D_1(K_{i-1},V)$; for $i=1$ this is the identity. Step 7 gives $A(K_{i-1})$, so Step 5 applied to this module makes the right hand side zero. This proves every positive-degree assertion. If $U=T$ (including $T=\\varnothing$), then $V=0$ and the same proof has only zero modules in its finite filtration. Empty $U$ needs no modification. No finite generation, sharpness, torsion-freeness of $G$, or ordinary flatness of $M$ was used.",
+   "uses": [
+    "lem-sc-p1-tor-dimension-shift-natural"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Agent conclusion by iterated free-middle-term dimension shifting and the degree-one monomial filtration."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-tor-modules",
+  "lem-weil-pbc-projective-module-flat",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-complex-ses-homology-long-exact",
+  "lem-weil-pbc-tensor-commutes-with-colimits",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-sc-p1-tor-dimension-shift-natural",
+  "lem-weil-pbc-tor-symmetry"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Algebraic monomial filtration and syzygy induction supplied by Q84; homological ingredients from Tags 00LY, 00M0, 00M3, 00DD, 00DB and 0BNF, with Homology Tag 0117. This supplies the algebraic extension used in ILO Expose X 1.3(vii) and Lemma 1.5."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -55,10 +160,59 @@
    "results": "{\"t\": \"2026-10-18T22:10:51Z\", \"tool\": \"leanfinder\", \"query\": \"Kato t-flatness criterion: monomial ideal Tor one tests imply all positive Tor vanishing for a monoid-set module embedded in a group modulo an invariant subset, over a commutative coefficient ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.tfae_equational_criterion\", \"Module.flat_of_isLocalized_span\", \"Module.Flat.of_forall_exists_factorization\", \"Module.FaithfullyFlat\", \"Module.Flat\", \"Module.Flat.of_forall_isTrivialRelation\", \"Module.Flat.iff_forall_exists_factorization\", \"Module.Flat.iff_lift_lsmul_comp_subtype_injective\"], \"digest\": \"acb3f5505389d1e2\"}; Read the hits: monoid algebra definitions, torsion-free modules, ordinary flatness criteria, and Tor vanishing for projective objects do not state this monomial-module devissage theorem. The test module M is not assumed flat or projective.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A monoid algebra module whose Tor one vanishes on every monomial ideal quotient has all positive Tor zero on quotients of invariant subsets of an abelian group",
+   "results": "{\"t\": \"2026-10-18T22:49:19Z\", \"tool\": \"leansearch\", \"query\": \"A monoid algebra module whose Tor one vanishes on every monomial ideal quotient has all positive Tor zero on quotients of invariant subsets of an abelian group\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MonoidAlgebra.instFree\", \"MonoidAlgebra\", \"AddMonoidAlgebra.instIsTorsionFree\", \"MonoidAlgebra.instIsTorsionFree\", \"MonoidAlgebra.instNoZeroDivisorsOfUniqueProds\", \"Representation.asAlgebraHom_mem_of_forall_mem\", \"MonoidAlgebra.tensorEquiv\", \"MonoidAlgebra.Submodule.instIsSemisimpleModule\"], \"digest\": \"9561bc011f91e766\"}; Hits concern monoid algebra definitions, freeness over the coefficient ring, torsion-freeness, tensor comparisons and semisimplicity; none states the restricted monomial-ideal Tor criterion.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tor\", \"exact\"",
+   "results": "{\"t\": \"2026-10-18T22:50:01Z\", \"tool\": \"loogle\", \"query\": \"\\\"Tor\\\", \\\"exact\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Function.Exact.rangeFactorization\", \"Function.MulExact.rangeFactorization\", \"Function.Exact.iff_rangeFactorization\", \"Function.MulExact.iff_rangeFactorization\", \"CategoryTheory.ExactFunctor\", \"CategoryTheory.LeftExactFunctor\", \"CategoryTheory.RightExactFunctor\", \"CategoryTheory.instIsClosedUnderIsomorphismsFunctorExactFunctor\"], \"digest\": \"89ba66ee435260a5\"}; The quoted substring search returns ring-equivalence and torsion-free declarations, or generic ExactFunctor declarations; no monomial Tor devissage statement.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If Tor one of a module vanishes against the ends of a short exact sequence, it vanishes against the middle module, because Tor is a homological functor",
+   "results": "{\"t\": \"2026-10-18T22:50:01Z\", \"tool\": \"leanfinder\", \"query\": \"If Tor one of a module vanishes against the ends of a short exact sequence, it vanishes against the middle module, because Tor is a homological functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"lTensor_injective_of_exact_of_exact_of_rTensor_injective\", \"CategoryTheory.isZero_Tor_succ_of_projective\", \"CategoryTheory.isZero_Tor'_succ_of_projective\", \"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"Rep.isZero_Tor_succ_of_projective\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\"], \"digest\": \"0038ebda413feb0b\"}; Read Mathlib/CategoryTheory/Monoidal/Tor.lean:43--67: the hits require a projective argument. Flat.lTensor_shortComplex_exact assumes ordinary flatness. These are generic ingredients, not this item.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "monomial.{0,50}Tor|Tor.{0,50}monomial|tFlat|t_flat|isZero_Tor_succ",
+   "results": "{\"t\": \"2026-10-18T22:50:41Z\", \"tool\": \"grep\", \"query\": \"monomial.{0,50}Tor|Tor.{0,50}monomial|tFlat|t_flat|isZero_Tor_succ\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Computability/Primrec/List.lean\", \"Mathlib/Computability/Primrec/List.lean\", \"Mathlib/Computability/Primrec/List.lean\", \"Mathlib/Computability/Primrec/List.lean\", \"Mathlib/Computability/Primrec/List.lean\", \"Mathlib/Algebra/FreeMonoid/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\"], \"digest\": \"04eee6e6ab5fb822\"}; Grep hits are unrelated flatMap/name-substring hits, ordinary flatness results, polynomial monomial operations, or Tor vanishing under projectivity. Read Tor.lean and the flatness criterion; no match for this statement.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Kato t-flatness over an integral monoid ring: testing Tor against monomial ideal quotients implies Tor acyclicity for modules freely spanned by stable subsets of an abelian group modulo stable subsets",
+   "results": "{\"t\": \"2026-10-18T22:50:43Z\", \"tool\": \"leanfinder\", \"query\": \"Kato t-flatness over an integral monoid ring: testing Tor against monomial ideal quotients implies Tor acyclicity for modules freely spanned by stable subsets of an abelian group modulo stable subsets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.tfae_equational_criterion\", \"Module.flat_of_isLocalized_span\", \"Module.Flat.of_forall_exists_factorization\", \"Module.FaithfullyFlat\", \"Module.Flat\", \"Module.Flat.flat_iff_torsion_eq_bot_of_isBezout\", \"Module.flat_of_localized_span\", \"Module.Flat.of_forall_isTrivialRelation\"], \"digest\": \"a1091e5bf8c58b5e\"}; Read Module.Flat.tfae_equational_criterion (Mathlib/RingTheory/Flat/EquationalCriterion.lean:106--129): this tests every ring ideal for ordinary flatness, not just monomial ideals. Other hits assume ordinary flatness or local flatness.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "monomial.{0,60}(Tor|flat)|Tor.{0,60}monomial|t[_-][Ff]lat",
+   "results": "{\"t\": \"2026-10-18T22:51:12Z\", \"tool\": \"grep\", \"query\": \"monomial.{0,60}(Tor|flat)|Tor.{0,60}monomial|t[_-][Ff]lat\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 17, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Flat/Basic.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\", \"Mathlib/RingTheory/Flat/Domain.lean\", \"Mathlib/RingTheory/Flat/Domain.lean\", \"Mathlib/RingTheory/Flat/Domain.lean\"], \"digest\": \"e77fcf1504772081\"}; Grep hits are unrelated flatMap/name-substring hits, ordinary flatness results, polynomial monomial operations, or Tor vanishing under projectivity. Read Tor.lean and the flatness criterion; no match for this statement.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Tor\", \"MonoidAlgebra\"",
+   "results": "{\"t\": \"2026-10-18T22:51:13Z\", \"tool\": \"loogle\", \"query\": \"\\\"Tor\\\", \\\"MonoidAlgebra\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AddMonoidAlgebra.toRingHom_mapDomainRingEquiv\", \"MonoidAlgebra.toRingHom_mapDomainRingEquiv\", \"AddMonoidAlgebra.toRingHom_mapRingEquiv\", \"MonoidAlgebra.toRingHom_mapRingEquiv\", \"AddMonoidAlgebra.instIsTorsionFree\", \"MonoidAlgebra.instIsTorsionFree\", \"AddMonoidAlgebra.toRingEquiv_uniqueAlgEquiv\", \"MonoidAlgebra.toRingEquiv_uniqueAlgEquiv\"], \"digest\": \"0d2c0c8b3e088144\"}; The quoted substring search returns ring-equivalence and torsion-free declarations, or generic ExactFunctor declarations; no monomial Tor devissage statement.",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-log-regular-chart-monomial-tor",
@@ -86,5 +240,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-monomial-module-tor-devissage",
+  "worker": "stage1",
+  "summary": "Proved the stated criterion without changing its hypotheses or conclusion and without creating nodes. The proof writes the finite monomial basis filtration, the degree-one extension and filtered-colimit arguments, and propagation of the ideal test to successive free syzygies. Existing closed Tor symmetry and natural dimension-shift nodes and existing Mathlib leaves supply all non-elementary homological inputs. Read every cited statement, excluded the insufficient low-degree Tor exact-sequence citation, searched the DAG and full blueprint, and recorded fresh Mathlib searches.",
+  "blueprint": "Realizes the algebra needed by the inherited ancestor place: lem-per-artin-gabber-affine-curve proof Step 3 through the finite-torsion log-model branch, specifically ILO Expose X 1.3(vii), p.140, and Lemma 1.5, pp.141--142. Steps 1--5 establish the monomial-module degree-one extension of the base-chart ideal test; Steps 6--8 supply all positive degrees by free syzygies. The item is a created algebra tool, not a restatement of the ancestor."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-562e4e99d",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-562e4e99d (reviewer sub-agent of L); spot-checked: Read the item's statement and all 8 steps in full, together with the statements of all 8 cited nodes. Statement unchanged; there are no new nodes. Small cases hold: Q={0} gives Tor over Z of a free group; Q=N with M=Z[x]/(x-1) meets the monomial tests but is not flat, and the conclusion still holds for Laurent and Z[x]/(x) quotients; V=0 when T is empty or U=T. The target matches its application in ILO Exp. X 1.3(vii) (p.140) and the proof of 1.5 (p.142), where Kato 6.1 is used for Z[P] and Lambda[P]/(I) over the chart ring of Q. Step 2: projective implies flat, then flat tensor exactness, then the full cochain long exact sequence; this gives extension closure for Tor_1. Step 3 writes out the 0BNF colimit argument using the tensor/colimit and filtered-exactness Mathlib leaves. Step 4: basis calculation giving W_j/W_{j-1} ≅ D/Z[I_j]; injectivity of h makes the labels distinct, and the edge cases I_j empty or Q are covered. Step 5: finite induction, then a directed union over finite E. Step 6: Tor_2(N,D/Z[I])=0 from symmetry, the first-variable dimension shift on 0->Z[I]->D->D/Z[I]->0, and Step 5 applied to Z[I] ≅ Z[h(I)]; this is not circular. Steps 7-8: explicit free syzygies carry A(K_r) forward, and iterated shifts reduce Tor_i to degree 1. Cited statements say what the steps use. The two non-leaf tools (dimension-shift-natural, tor-symmetry) are Lean-closed. Stacks tags verified; no SGA is cited. Searched the DAG for duplicates (trf Kato chart Tor test, the flat-Tor ideal criterion, the dimension-shifting special case): none states the item. No fixes."
  }
 }
