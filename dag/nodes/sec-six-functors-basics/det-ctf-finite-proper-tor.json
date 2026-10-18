@@ -302,5 +302,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperFiniteTorAmplitude",
+  "declaration": "AlgebraicGeometry.Etale.isBoundedConstructible_hasTorAmplitudeIn_rightDerivedLowerStar_of_proper",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperFiniteTorAmplitude.lean",
+  "statement": "theorem isBoundedConstructible_hasTorAmplitudeIn_rightDerivedLowerStar_of_proper (ℓ p : ℕ) (hℓ : ℓ.Prime) (hp : 0 < p) (hpℓ : p ≠ ℓ) (k : Type u) [Field k] [CharP k p] {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsProper f] (A : Type (u + 1)) [CommRing A] [Finite A] (hA : ∃ r : ℕ, 1 ≤ r ∧ (ℓ ^ r : ℕ) • (1 : A) = 0) (d : ℕ) (hd : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y) (F : Sheaf (pullback f y).smallEtaleTopology AddCommGrpCat.{u + 1}), (∀ (U : (pullback f y).Etale) (s : F.obj.obj (op U)), ∃ n : ℕ, (ℓ ^ n) • s = 0) → ∀ i : ℤ, (d : ℤ) < i → IsZero ((cohomology AddCommGrpCat.{u + 1} (pullback f y) i).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj F))) (a b : ℤ) (hab : a ≤ b) (C : DerivedCategoryModule A X) (hC : DerivedCategory.isBoundedConstructible A X C) (hCab : DerivedCategory.hasTorAmplitudeIn A X a b C) : DerivedCategory.isBoundedConstructible A Y ((rightDerivedLowerStar (ModuleCat.{u + 1} A) f).obj C) ∧ DerivedCategory.hasTorAmplitudeIn A Y a (b + (d : ℤ)) ((rightDerivedLowerStar (ModuleCat.{u + 1} A) f).obj C)",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4ebc5d1cf",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Every hypothesis and both conclusion clauses match the node and sk-def-sfb-dc-setting: ℓ prime; char p>0, p≠ℓ; X, Y separated of finite type over k; f a proper k-morphism (IsOver); A finite with ℓ^r·A=0, r≥1; fibre bound hd over all geometric points Spec Ω→Y and all sectionwise ℓ-power-torsion abelian sheaves on pullback f y, using the recorded Etale.cohomology spelling; C with isBoundedConstructible and hasTorAmplitudeIn a b; conclusion isBoundedConstructible ∧ hasTorAmplitudeIn a (b+d). Universes follow the recorded convention (u, coefficients u+1). rightDerivedLowerStar (unbounded total derived functor, sibling of the recorded rightDerivedLowerStarPlus) is accepted: the node asks for the total derived direct image, C is bounded, and the landed proof dependencies (lem-fin-proper-bounded-constructible, the projection formula) use the same functor. Edge cases admitted: empty schemes, zero ring, zero complex, a=b, d=0, ℓ=2. Node differs only in lean; lean.statement is verbatim in the file. Docstrings carry source and blueprint tags and the five-step proof; sorry only; no definitions; no pro-etale substitute. nt_compile.py on the snapshot: rc=0, item 3.3 s, no errors or warnings. Minor, non-blocking: stale stage-1 tool_uses entry lem-weil-pbc-ringed-topoi-derived-tensor-pullback."
  }
 }
