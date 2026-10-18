@@ -1,65 +1,145 @@
 {
-  "id": "d-real-cohom",
-  "blueprint": {
-    "is": "d-real-cohom",
-    "from": null,
-    "same_as": null
+ "id": "d-real-cohom",
+ "blueprint": {
+  "is": "d-real-cohom",
+  "from": null,
+  "same_as": [
+   "sk-d-real-cohom"
+  ]
+ },
+ "kind": "definition",
+ "title": "Cohomology and the Euler series",
+ "statement": "For any abelian sheaf $A$ on the etale site, ordinary cohomology means\n$H^i(C,A)=R^i\\Gamma(C,A)$, computed by an injective resolution as in [def-weil-pbc-etale-cohomology].\nFor a constructible Weil sheaf $\\mathcal K$ of\n[def-weil-weil-sheaf-complex] on a\ncurve in the sense of [d-real-setup], $H^i(C,\\mathcal K)$ and $H_c^i(C,\\mathcal K)$\nare the etale cohomology groups of [def-weil-ordinary-compact-cohomology],\nobtained from derived global sections\nand derived sections with proper support. With an adic lattice, take\nthe derived inverse limit of its finite coefficient levels and then\ninvert $\\ell$; extend the finite coefficient field as needed.\nThey carry the geometric Frobenius $F$ of [def-weil-global-geometric-frobenius],\nin the convention of [d-real-setup],\nwith Tate twists the constant Weil twists of [def-wf-constant-weil-twist],\nnormalized by $\\overline{\\mathbf Q}_\\ell(n)=\\mathcal B_{q^{-n}}$\nfor $n\\in\\mathbf Z$ as in [sk-d-real-operations].\nUsing the local characteristic factors $P_x$ of [def-wf-iota-real], the\nEuler series is\nthe locally finite formal product\n\n$$\nL_\\iota(C_0,\\mathcal K,T)\n=\\prod_{x\\in|C_0|}\\iota P_x(\\mathcal K,T^{e_x})^{-1}\n\\in 1+T\\mathbf C[[T]].\n$$\n\nLocally finite means that only finitely many factors contribute to any\nfixed coefficient; there are finitely many closed points of bounded degree.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-cohom/d-real-cohom.md",
+  "place": "node d-real-cohom, order 2603"
+ },
+ "stmt_deps": [
+  "d-real-setup",
+  "def-weil-weil-sheaf-complex",
+  "def-wf-constant-weil-twist",
+  "def-wf-iota-real",
+  "sk-d-real-operations",
+  "def-weil-pbc-etale-cohomology",
+  "def-weil-ordinary-compact-cohomology",
+  "def-weil-global-geometric-frobenius"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|eulerSeries|compactlySupportedCohomology|def H ",
+   "results": "5 hits; Mathlib/Algebra/Category/Grp/EpiMono.lean, Mathlib/LinearAlgebra/RootSystem/GeckConstruction/Basic.lean, Mathlib/AlgebraicTopology/ExtraDegeneracy.lean, Mathlib/CategoryTheory/Abelian/FreydMitchell.lean, Mathlib/Topology/Homotopy/TopCat/Basic.lean",
+   "date": "2026-10-18",
+   "verdict": "No match; five unrelated declarations whose names begin with h or H."
   },
-  "kind": "definition",
-  "title": "Cohomology and the Euler series",
-  "statement": "For any abelian sheaf $A$ on the etale site, ordinary cohomology means\n$H^i(C,A)=R^i\\Gamma(C,A)$, computed by an injective resolution.\nFor a constructible Weil sheaf $\\mathcal K$ of\n[def-weil-weil-sheaf-complex] on a\ncurve in the sense of [d-real-setup], $H^i(C,\\mathcal K)$ and $H_c^i(C,\\mathcal K)$\nare the etale cohomology groups obtained from derived global sections\nand derived sections with proper support. With an adic lattice, take\nthe derived inverse limit of its finite coefficient levels and then\ninvert $\\ell$; extend the finite coefficient field as needed.\nThey carry geometric Frobenius $F$ in the convention of [d-real-setup],\nwith Tate twists the constant Weil twists of [def-wf-constant-weil-twist].\nUsing the local characteristic factors $P_x$ of [def-wf-iota-real], the\nEuler series is\nthe locally finite formal product\n\n$$\nL_\\iota(C_0,\\mathcal K,T)\n=\\prod_{x\\in|C_0|}\\iota P_x(\\mathcal K,T^{e_x})^{-1}\n\\in 1+T\\mathbf C[[T]].\n$$\n\nLocally finite means that only finitely many factors contribute to any\nfixed coefficient; there are finitely many closed points of bounded degree.",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-purity-real-sheaves/sk-d-real-cohom/d-real-cohom.md",
-    "place": "node d-real-cohom, order 2603"
+  {
+   "tool": "leansearch",
+   "query": "Euler product of local Frobenius characteristic polynomials for constructible etale sheaves on a curve over a finite field",
+   "results": "8 hits; EulerProduct.eulerProduct_tprod, riemannZeta_eulerProduct_tprod, DirichletCharacter.LSeries_eulerProduct_tprod, EulerProduct.prod_filter_prime_geometric_eq_tsum_factoredNumbers, EulerProduct.eulerProduct_completely_multiplicative_tprod, riemannZeta_eulerProduct_hasProd, EulerProduct.eulerProduct_completely_multiplicative_hasProd, EulerProduct.eulerProduct_hasProd_mulIndicator",
+   "date": "2026-10-18",
+   "verdict": "No match. The returned EulerProduct and Dirichlet L-series declarations concern analytic products over rational primes, not local Frobenius factors of constructible sheaves."
   },
-  "stmt_deps": [
-    "def-weil-weil-sheaf-complex",
-    "def-wf-constant-weil-twist",
-    "def-wf-iota-real"
-  ],
-  "proof": [],
-  "proof_deps": [],
-  "proof_origin": null,
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "cites_remark"
-  ],
-  "blueprint_kind": "definition",
-  "blueprint_order": 2603,
-  "blueprint_uses": [
-    "d-real-setup",
-    "def-weil-weil-sheaf-complex",
-    "def-wf-constant-weil-twist",
-    "def-wf-iota-real"
-  ],
-  "blueprint_notes": [
-    {
-      "label": "uses_line",
-      "text": "Uses: [d-real-setup], [def-weil-weil-sheaf-complex], [def-wf-constant-weil-twist], [def-wf-iota-real]",
-      "where": "statement"
-    }
-  ],
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.H, PowerSeries",
+   "results": "0 hits; ",
+   "date": "2026-10-18",
+   "verdict": "No match; zero hits."
   },
-  "chapter": "sec-purity-real-sheaves",
-  "unit": "sk-d-real-cohom",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "For any abelian sheaf $A$ on the etale site, ordinary cohomology means\n$H^i(C,A)=R^i\\Gamma(C,A)$, computed by an injective resolution.\nFor a constructible Weil sheaf $\\mathcal K$ of\n[def-weil-weil-sheaf-complex] on a\ncurve in the sense of [d-real-setup], $H^i(C,\\mathcal K)$ and $H_c^i(C,\\mathcal K)$\nare the etale cohomology groups obtained from derived global sections\nand derived sections with proper support. With an adic lattice, take\nthe derived inverse limit of its finite coefficient levels and then\ninvert $\\ell$; extend the finite coefficient field as needed.\nThey carry geometric Frobenius $F$ in the convention of [d-real-setup],\nwith Tate twists the constant Weil twists of [def-wf-constant-weil-twist].\nUsing the local characteristic factors $P_x$ of [def-wf-iota-real], the\nEuler series is\nthe locally finite formal product\n\n$$\nL_\\iota(C_0,\\mathcal K,T)\n=\\prod_{x\\in|C_0|}\\iota P_x(\\mathcal K,T^{e_x})^{-1}\n\\in 1+T\\mathbf C[[T]].\n$$\n\nLocally finite means that only finitely many factors contribute to any\nfixed coefficient; there are finitely many closed points of bounded degree.",
-    "proof": [],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology and compactly supported cohomology of constructible Weil sheaves with adic coefficients and their Euler L series",
+   "results": "8 hits; BDeRham, BDeRhamPlus, Algebra.etaleLocus_eq_compl_support, Condensed.profiniteSolid, localCohomology.isoSelfLERadical, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, CompHausLike.LocallyConstantModule.functor, Condensed.lanSheafProfinite",
+   "date": "2026-10-18",
+   "verdict": "No match. Hits concern period rings, etale loci, condensed modules, and local cohomology, not this combined definition."
+  },
+  {
+   "tool": "grep",
+   "query": "WeilSheaf|WeilComplex|eulerSeries|compactlySupportedCohomology|noncomputable abbrev H|noncomputable def H",
+   "results": "25 hits; Mathlib/NumberTheory/LSeries/HurwitzZeta.lean, Mathlib/Combinatorics/Configuration.lean, Mathlib/Combinatorics/Configuration.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaOdd.lean, Mathlib/NumberTheory/LSeries/HurwitzZetaEven.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/ShiftedHom.lean, Mathlib/CategoryTheory/Enriched/FunctorCategory.lean",
+   "date": "2026-10-18",
+   "verdict": "No match among the 25 returned hits; the broad H pattern matches unrelated names such as hurwitzZeta and homEquiv. A narrowed search follows."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Definition of sheaf cohomology by right derived global sections and a formal power series Euler product over closed points",
+   "results": "8 hits; CategoryTheory.Sheaf.H, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor, CategoryTheory.Sheaf.instAddCommGroupH, CategoryTheory.Sheaf.coneΓ, CategoryTheory.HasGlobalSectionsFunctor, AlgebraicGeometry.termΓ(_,_)_1, AlgebraicGeometry.termΓ(_,_)",
+   "date": "2026-10-18",
+   "verdict": "Partial component only: CategoryTheory.Sheaf.H, read at Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean:59-60, defines abelian-sheaf cohomology as Ext. It supplies neither compact support nor adic coefficients nor the Euler product, so it does not state the item."
+  },
+  {
+   "tool": "grep",
+   "query": "def H|abbrev H|rightDerived",
+   "results": "Subdirectory: CategoryTheory/Sheaf/Cohomology. 0 hits; ",
+   "date": "2026-10-18",
+   "verdict": "No match in the first, incorrect subdirectory CategoryTheory/Sheaf/Cohomology. Corrected to CategoryTheory/Sites/SheafCohomology: H at Basic.lean:59 and H' at :87 cover ordinary sheaf cohomology only; H.equiv₀ at :105 and H.map at :114 do not supply the other clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "def H|abbrev H|rightDerived",
+   "results": "Subdirectory: CategoryTheory/Sites/SheafCohomology. 4 hits; Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean, Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean",
+   "date": "2026-10-18",
+   "verdict": "No match in the first, incorrect subdirectory CategoryTheory/Sheaf/Cohomology. Corrected to CategoryTheory/Sites/SheafCohomology: H at Basic.lean:59 and H' at :87 cover ordinary sheaf cohomology only; H.equiv₀ at :105 and H.map at :114 do not supply the other clauses."
   }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "cites_remark"
+ ],
+ "blueprint_kind": "definition",
+ "blueprint_order": 2603,
+ "blueprint_uses": [
+  "d-real-setup",
+  "def-weil-weil-sheaf-complex",
+  "def-wf-constant-weil-twist",
+  "def-wf-iota-real"
+ ],
+ "blueprint_notes": [
+  {
+   "label": "uses_line",
+   "text": "Uses: [d-real-setup], [def-weil-weil-sheaf-complex], [def-wf-constant-weil-twist], [def-wf-iota-real]",
+   "where": "statement"
+  }
+ ],
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-d-real-cohom",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "For any abelian sheaf $A$ on the etale site, ordinary cohomology means\n$H^i(C,A)=R^i\\Gamma(C,A)$, computed by an injective resolution.\nFor a constructible Weil sheaf $\\mathcal K$ of\n[def-weil-weil-sheaf-complex] on a\ncurve in the sense of [d-real-setup], $H^i(C,\\mathcal K)$ and $H_c^i(C,\\mathcal K)$\nare the etale cohomology groups obtained from derived global sections\nand derived sections with proper support. With an adic lattice, take\nthe derived inverse limit of its finite coefficient levels and then\ninvert $\\ell$; extend the finite coefficient field as needed.\nThey carry geometric Frobenius $F$ in the convention of [d-real-setup],\nwith Tate twists the constant Weil twists of [def-wf-constant-weil-twist].\nUsing the local characteristic factors $P_x$ of [def-wf-iota-real], the\nEuler series is\nthe locally finite formal product\n\n$$\nL_\\iota(C_0,\\mathcal K,T)\n=\\prod_{x\\in|C_0|}\\iota P_x(\\mathcal K,T^{e_x})^{-1}\n\\in 1+T\\mathbf C[[T]].\n$$\n\nLocally finite means that only finitely many factors contribute to any\nfixed coefficient; there are finitely many closed points of bounded degree.",
+  "proof": [],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "d-real-cohom",
+  "worker": "stage1",
+  "summary": "Checked the definition against the current main-20261015 blueprint (whose statement is identical to the imported master text except for order and removal of the Uses footer), the unit record, the whole DAG, and the slopmaster2 source. No exact sorry-free source declaration states the whole item: AlgebraicGeometry.WeilGroup.eulerSeries at LFunction.lean:109-121 defines only the formal Euler product, while the item also fixes ordinary and compactly supported cohomology, coefficient limits, Frobenius, twists, local factors, and local finiteness. The item therefore remains a project definition and is split by its existing definition dependencies; no new node is needed. Repair of returned head 856aba79df: re-read all four current dependency statements, retained the same definition and four dependencies, and included the unit realization file in the delivery so the reviewer need not apply a fix to an undelivered file. Restored the missing empty citation manifest and recorded actual Mathlib searches; no new node or proof step is introduced. Server preflight identified the missing sk-d-real-weil unit reach. Read sk-d-real-operations and its current blueprint source, and explicitly cited its Tate normalization B_{q^{-n}}, which also reaches the Weil-representation definition. This expands the existing Tate convention without changing the objects or scope.",
+  "blueprint": "The item is the imported blueprint definition d-real-cohom (main-20261015 order 2947; master order 2603). Its statement clauses are all retained: ordinary etale cohomology by derived global sections/injective resolution; H and H_c for constructible Weil sheaves; adic finite-level inverse limits and scalar extension; geometric Frobenius and constant Weil twists; the iota-local-factor Euler product in 1+T C[[T]]; and bounded-degree local finiteness.",
+  "same_as_search": "python3 tools/blueprint_refs.py search 'ordinary cohomology' and search 'localPolynomial' found no additional node for the local-polynomial wording; the current unit sketch sk-d-real-cohom is recorded as the equivalent blueprint twin."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q37-d58804313",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q37-d58804313 (reviewer sub-agent of L); spot-checked: Read in full: the item, the unit sk-d-real-cohom, the master (order 2603) and main-20261015 (order 2947) blueprint texts, the five cited nodes, sk-d-real-weil, def-wf-weil-group, def-weil-frobenius-detailed and LFunction.lean:90-136. Not attaching eulerSeries is right: it covers only one Weil representation. The new Tate clause Qlb(n)=B_{q^{-n}} is the 'Tate convention fixed above' of the unit (main sk-d-real-operations, last sentence). Sign check: geometric Frobenius has degree 1, so F_x acts by q_x^{-1}; n=0 gives the trivial line. Euler series checked: each factor is 1+O(T^{e_x}) and finitely many points have bounded degree. Small cases: zero sheaf gives 1; constant sheaf on A^1 gives 1/(1-qT); Tate twist has the expected sign. The ι embedding versus isomorphism difference is harmless. Route covers all five unit uses; no new nodes, proof steps, tool_uses or SGA. FIX (B3/C4): the statement used three DAG notions without citing them. (1) R^iΓ of abelian étale sheaves → def-weil-pbc-etale-cohomology. (2) H^i, H^i_c of Weil complexes → def-weil-ordinary-compact-cohomology, which works in the same D^b_c(Y,Λ) and on For(K). (3) Frobenius on cohomology → def-weil-global-geometric-frobenius, since d-real-setup defines F only on k and F_x. The corrected item adds these as bracket citations and stmt_deps, with no change to the mathematics and no cycles. Details in review.md.; 1 file(s) fixed by the reviewer"
+ }
 }
