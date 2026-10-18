@@ -3,24 +3,88 @@
  "blueprint": {
   "is": "sk-d-dl-general-weights",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "def-weil-punctual-weights",
+   "def-weil-complex-weights"
+  ]
  },
  "kind": "definition",
  "title": "Mixed upper bounds",
- "statement": "Retain $k_0=\\mathbf F_q$, geometric Frobenius, and a field embedding\n$\\iota:\\DLRQ\\hookrightarrow\\mathbf C$. Let $X_0$ be a $k_0$-scheme,\nwith the coefficient framework of Section [sec-six-functors]. A\nconstructible Weil sheaf $F$ on $X_0$ is *$\\iota$-mixed of weights at most\n$w$* if it has a finite filtration by Weil subsheaves\n$0=G_0\\subset G_1\\subset\\cdots\\subset G_n=F$ whose successive quotients\n$G_{i}/G_{i-1}$ are each punctually $\\iota$-pure of some weight\n$v_i\\le w$. It is *$\\iota$-mixed* if it is $\\iota$-mixed of weights at\nmost $w$ for some $w$. A bounded constructible Weil complex $K$ is\n*$\\iota$-mixed of weights at most $w$* if $\\mathcal H^bK$ is\n$\\iota$-mixed of weights at most $w+b$ for every $b\\in\\mathbf Z$.\n\nSubobjects, quotients and extensions of Weil sheaves preserve the bound\n\"$\\iota$-mixed of weights at most $w$\": intersect a filtration, take its\nimages, or splice filtrations, respectively.",
+ "statement": "Retain $k_0=\\mathbf F_q$, geometric Frobenius, and a field embedding\n$\\iota:\\DLRQ\\hookrightarrow\\mathbf C$. Let $X_0$ be a $k_0$-scheme of finite type,\nwith the coefficient framework of [def-sf-categories] at $\\Lambda=\\DLRQ$. A\nconstructible Weil sheaf $F$ on $X_0$ [def-weil-weil-sheaf-complex] is *$\\iota$-mixed of weights at most\n$w$* if it has a finite filtration by Weil subsheaves\n$0=G_0\\subset G_1\\subset\\cdots\\subset G_n=F$ whose successive quotients\n$G_{i}/G_{i-1}$ are each punctually $\\iota$-pure of some weight\n$v_i\\le w$ [def-weil-punctual-weights]: every eigenvalue $\\alpha$ of every\nlocal geometric Frobenius $F_y$, $y\\in|X_0|$, on the stalk of\n$G_i/G_{i-1}$ satisfies $|\\iota(\\alpha)|=q_y^{v_i/2}$ (a condition that uses\n$\\iota$ only as a field embedding). It is *$\\iota$-mixed* if it is $\\iota$-mixed of weights at\nmost $w$ for some $w$. A bounded constructible Weil complex $K$ on $X_0$ [def-weil-weil-sheaf-complex] is\n*$\\iota$-mixed of weights at most $w$* if $\\mathcal H^bK$ is\n$\\iota$-mixed of weights at most $w+b$ for every $b\\in\\mathbf Z$.\n\nSubobjects, quotients and extensions of Weil sheaves preserve the bound\n\"$\\iota$-mixed of weights at most $w$\": intersect a filtration, take its\nimages, or splice filtrations, respectively.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-d-dl-general-weights/_section.md",
   "place": "node sk-d-dl-general-weights, order 3154"
  },
  "stmt_deps": [
-  "sk-d-dl-a1-setup"
+  "sk-d-dl-a1-setup",
+  "def-sf-categories",
+  "def-weil-punctual-weights",
+  "def-weil-complex-weights",
+  "def-weil-weil-sheaf-complex"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "mixed upper bounds of constructible Weil sheaves via finite filtrations with punctually pure quotients and bounded cohomology Weil complexes",
+   "results": "LightCondensed.instIsGrothendieckAbelianLightCondMod; DerivedCategory.IsGE; SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.IsFiniteType; DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; DerivedCategory.isGE_Q_obj_iff; SheafOfModules.isFinitePresentation; CochainComplex.cm5b.instIsStrictlyGEI",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsMixedOfWeightsAtMost WeilSheaf WeilComplex",
+   "results": "0 hits; unknown identifier IsMixedOfWeightsAtMost",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsMixedOfWeightsAtMost|IsMixed|punctually.*pure",
+   "results": "0 hits in Mathlib",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite filtration of a sheaf by punctually pure quotients and complex cohomology weights",
+   "results": "IsFiltration.casesOn; IsFiltration.F_lt_le_F; IsFiltration; CategoryTheory.Sheaf.hasFilteredColimitsOfSize; IsFiltration.rec; IsModuleFiltration; IsFiltration.recOn; Ideal.Filtration",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "filtration by subsheaves with pure Frobenius weight quotients and cohomological weight bound",
+   "results": "IsModuleFiltration; IsModuleFiltration.toIsFiltration; Ideal.Filtration.Stable.bounded_difference; Ideal.Filtration.Stable.exists_forall_le; IsModuleFiltration.mk_int; Ideal.Filtration.Stable.exists_pow_smul_eq_of_ge; Ideal.Filtration.Stable.exists_pow_smul_eq; Ideal.Filtration.stable_iff_exists_pow_smul_eq_of_ge",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ObjectProperty.filtrationClosure",
+   "results": "0 hits; unknown identifier CategoryTheory.ObjectProperty.filtrationClosure",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "filtrationClosure|IsPunctuallyPureOfWeight",
+   "results": "0 hits in Mathlib",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "cohomology sheaf has mixed weight bound shifted by degree",
+   "results": "CategoryTheory.Sheaf.H; CochainComplex.HomComplex.Cochain.shift_v'; CochainComplex.HomComplex.Cochain.rightUnshift_coe; CochainComplex.HomComplex.Cochain.shift_v; CochainComplex.isGE_shift; CochainComplex.shiftFunctor_obj_X'; CochainComplex.shiftFunctor_map_f'; CochainComplex.shiftFunctor_obj_X",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -188,5 +252,20 @@
    ],
    "open": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "sk-d-dl-general-weights",
+  "worker": "stage1",
+  "summary": "Audited the mixed-sheaf and mixed-complex definitions against the current main-20261015 section, the unit record, the existing punctual-weights and complex-weights definition nodes, and the sorry-free slopmaster2 declarations in DeligneLaumon/Reduction/Weights.lean. The sheaf and complex predicates, the existential mixed predicate, and the stated subobject/quotient/extension closure are already represented by project declarations; no new node is needed. Updated statement dependencies and blueprint references, retained the closed-part audit, and recorded the required Mathlib searches. Maintainer reader (NF review): added the finite-type hypothesis on $X_0$ that the cited Weil-sheaf, constructible-heart and punctual-weight definitions require, cited [def-weil-weil-sheaf-complex] for Weil sheaves and complexes, and wrote out the punctual-purity condition for a field embedding $\\iota$ (the cited node fixes an isomorphism).",
+  "blueprint": "Realizes the complete sk-d-dl-general-weights section: the finite filtration definition and mixed existential clause, the degree-shifted cohomology definition for complexes, and the filtration/image/splicing closure sentence. The existing def-weil-punctual-weights and def-weil-complex-weights nodes are the same definitions in the coefficient-framework presentation."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NF-caf466395",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-caf466395 (reviewer sub-agent of L); spot-checked: Read in full: the item, the unit (it has no steps), the chapter, the main-20261015 source at order 3154 (identical in main-20261017; \\DLRQ is Q̄_ℓ) and the older master text, the cited nodes sk-d-dl-a1-setup, def-sf-categories, def-weil-punctual-weights (and its blueprint_update), def-weil-complex-weights, def-weil-weil-sheaf-complex, def-weil-constructible-heart, def-weil-local-frobenius-trace and lem-weil-local-frobenius-conjugacy-class, plus slopmaster2 Weights.lean and StalkFunctor.lean. The statement is verbatim main-20261015 except that [sec-six-functors] became [def-sf-categories]. At Q̄_ℓ that node uses the same def-weil-algebraically-closed-coefficients construction as the Weil-sheaf nodes, so no coefficient category is silently identified. Small cases checked: n=0 gives the zero sheaf; a bounded K has zero H^b in almost every degree; subobject, quotient and extension closure hold through Frobenius-stable eigenvalue subsets and exact stalk functors, matching the sorry-free of_mono, of_epi and of_mono_cokernel. There are no new nodes. same_as with the two existing weight definitions is correct (both are imported blueprint nodes). FIX, three B2/B3 repairs, named as a statement correction in review.md: (1) X_0 is now 'of finite type', which the cited Weil-sheaf, heart and punctual-weight definitions require (Spec k_0(t) has a closed point with infinite residue field; the master unit says separated finite type and the Lean has LocallyOfFiniteType); (2) the purity condition |ι(α)|=q_y^{v/2} is written out for a field embedding ι, because the cited node fixes an isomorphism; (3) [def-weil-weil-sheaf-complex] is now cited in the text and stmt_deps; it was already in the closure through sk-d-dl-a1-setup, so there is no cycle. Batch-5 check: def-weil-punctual-weights and def-weil-complex-weights reach sec-poincare-duality only through lem-weil-local-frobenius-conjugacy-class. That lemma says the local Frobenius operators at two geometric points over one closed point are conjugate; it is a general fact, given by neither assumption and not a step of either proof. Both definitions were also already in the item's closure through sk-d-dl-a1-setup, so they are accepted as general definitions. For the maintainer: lean_audit line numbers come from a later slopmaster2 checkout than the one on this machine; verify the WeilComplex mono_weight attachment against 7d675a26.; 1 file(s) fixed by the reviewer"
  }
 }
