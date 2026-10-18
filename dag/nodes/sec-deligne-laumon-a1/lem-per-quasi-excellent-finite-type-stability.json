@@ -243,5 +243,23 @@
   "group": "Q29",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-c7efa7d83 (reviewer sub-agent of L); spot-checked: I read the item and all 12 cited statements in full, and the sources Stacks 07QT, 07QU, morphisms 0HAB/0HAC and 01OV (0HAB's proof cites 07R4 and 0HA5). The statement is unchanged from the imported node and is the quasi-excellent alternative of 0HAC, with the quasi-compact => Noetherian remark of 01OV. Step 1 builds affine charts from the cover definition. Step 2 gets Noetherian from the Mathlib leaf FiniteType.isNoetherianRing and the G-ring property from 07PV; neither needs catenarity or injectivity. Step 3 writes out the J-2 argument with algebra generators: C of finite type over A is of finite type over R. Step 4 first shows X is locally Noetherian, then applies lem-trf-g-ring-affine-cover (0HA5) and lem-trf-j2-affine-cover (07R4) within their stated hypotheses, without assuming affine intersections. Step 5 reassembles quasi-excellence, and Step 6 takes a finite subcover of the chart cover. Edge cases checked: empty X, an infinite disjoint union of Spec k (not quasi-compact, so no Noetherian claim), 𝔸ⁿ_ℤ, and quotient maps. There is no duplicate in the DAG: lem-exc-finite-type-localization-excellent needs excellence. There are no new nodes. The three declared tool_uses (07PV, 0HA5, 07R4) are accepted as generic algebra. There is no SGA citation. Batch-5 flag: the closures of lem-trf-g-ring-affine-cover (23 nodes) and lem-trf-j2-affine-cover (81 nodes) contain no trace-formula or Poincaré-duality theorem, no sk-* node and no assumption leaf. They are pure scheme locality from Stacks, not steps of either assumed proof, so the escape clause applies and the flag is not a RETURN."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QuasiExcellentFiniteTypeStability",
+  "declaration": "AlgebraicGeometry.quasiExcellent_affineOpens_of_locallyOfFiniteType",
+  "file": "lean/Sheaf/AlgebraicGeometry/QuasiExcellentFiniteTypeStability.lean",
+  "statement": "theorem quasiExcellent_affineOpens_of_locallyOfFiniteType {X Y : Scheme.{u}} (h : X ⟶ Y) [LocallyOfFiniteType h] (hY : ∀ V : Y.affineOpens, IsQuasiExcellent Γ(Y, V)) : (∀ U : X.affineOpens, IsQuasiExcellent Γ(X, U)) ∧ (CompactSpace X → ∃ (n : ℕ) (U : Fin n → X.affineOpens), (⨆ i : Fin n, (U i : X.Opens)) = ⊤ ∧ ∀ i : Fin n, IsNoetherianRing Γ(X, U i))",
+  "branch": "newtargets-dag",
+  "by": "Q07",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7ccccc739",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: LocallyOfFiniteType h, hY over all affine opens with the shared IsQuasiExcellent, first conjunct the same, CompactSpace X → Fin n affine cover with sup = ⊤ and IsNoetherianRing. No extra hypotheses (no qc of h/Y, no catenarity/dimension). Mathematically Stacks 0HAC/0HAB/07QU plus 01OV. Single universe u; J-2 test algebras in the same universe in hypothesis and conclusion; j2_of_affine_open_cover/isGRing_of_affine_open_cover/isGRing_of_finiteType interfaces fit the route. Proof sorry-only, docstring has all 6 steps, Stacks tags and blueprint tag. Node diff vs live = lean only; statement verbatim; 5 stmt_dep records unchanged; no duplicate notion. nt_compile --json clean 2.4 s exit 0; BOGUS control fails. No findings."
  }
 }
