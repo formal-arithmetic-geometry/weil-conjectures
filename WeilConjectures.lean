@@ -2925,6 +2925,7 @@ public import WeilConjectures.AlgebraicGeometry.EtaleMayerVietorisSectionComplex
 public import WeilConjectures.AlgebraicGeometry.EtaleMayerVietorisSectionDiagram
 public import WeilConjectures.AlgebraicGeometry.EtaleMayerVietorisSections
 public import WeilConjectures.AlgebraicGeometry.EtaleModuleCohomologyForget
+public import WeilConjectures.AlgebraicGeometry.EtaleModuleCohomologyLargeFilteredColimit
 public import WeilConjectures.AlgebraicGeometry.EtaleModuleInjectiveForgetAcyclic
 public import WeilConjectures.AlgebraicGeometry.EtaleModuleInverseImageTransport
 public import WeilConjectures.AlgebraicGeometry.EtaleModulePullbackForgetNaturality
@@ -10922,6 +10923,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.BaseChangeUniver
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ClosedImmersion
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.CohomologicalDimension
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Comparisons
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ConstantProjection
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Coproducts
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.DescentLimit
