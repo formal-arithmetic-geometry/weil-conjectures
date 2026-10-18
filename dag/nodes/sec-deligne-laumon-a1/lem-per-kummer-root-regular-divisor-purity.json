@@ -20,9 +20,135 @@
   "def-pc-finite-locally-free",
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $C=B[u]/(u^\\ell-f)$. The monic power basis $1,u,\\ldots,u^{\\ell-1}$ [lem-weil-pbc-monic-quotient-free] makes $C$ finite free of rank $\\ell$; [lem-weil-pbc-finite-free-algebra-spectrum] gives finite local freeness of $p$, and [lem-weil-pbc-finite-algebra-noetherian] makes $C$ Noetherian. Injectivity of multiplication by $f$ on $B$ implies it on the free $B$-module $C$ coefficient by coefficient. Since $u^\\ell=f$, $uc=0$ implies $fc=0$, hence $c=0$. Evaluation $u=0$ identifies $C/(u)$ with $B/(f)$, with inverse induced by constants. Thus $D'\\simeq D$ is a regular effective Cartier divisor. Each prime of $B$ lifts: in an algebraic closure of its residue field choose a root of the positive-degree polynomial $T^\\ell-\\bar f$; the kernel of the resulting $C$-map is a prime over the chosen prime. The same argument for primes not containing $f$ gives a root with $u\\ne0$, hence surjectivity on the complements. These arguments include the empty spectrum and unit $f$.",
+   "uses": [
+    "lem-weil-pbc-monic-quotient-free",
+    "lem-weil-pbc-finite-free-algebra-spectrum",
+    "lem-weil-pbc-finite-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proposition 3.4.5, root-algebra calculation, printed p.246"
+   }
+  },
+  {
+   "text": "At primes of $C$ containing $u$, [lem-sbc-root-algebra-regular-at-root] applies with $R=B$, $n=\\ell$: $f$ is a nonzerodivisor and $B/(f)$ is regular. Off $u=0$, $f=u^\\ell$ is invertible and [lem-sbc-root-split-away-cover-etale] gives etaleness over $X$. For regularity there apply [lem-sbc-etale-regular-divisor-base-change] to the affine etale map $B\\to C[1/f]$ with its auxiliary element $g=1$: multiplication by $1$ is injective and $B/(1)=0$ is regular (it has no primes). Thus $C[1/f]$ is regular. The two loci cover $\\operatorname{Spec}C$, proving regularity of $X'$. Together with Step 1 this proves every geometric assertion about $p,D'$.",
+   "uses": [
+    "lem-sbc-root-algebra-regular-at-root",
+    "lem-sbc-root-split-away-cover-etale",
+    "lem-sbc-etale-regular-divisor-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proposition 3.4.5, regularity argument, printed pp.246–247"
+   }
+  },
+  {
+   "text": "Fix a geometric point $\\bar x$ of $D$, and write $S=\\operatorname{Spec}R=X_{(\\bar x)}$. The regular local ring $\\mathcal O_{X,x}$ has regular strict henselization by [lem-sc-strict-henselization-regular]; its quotient by $f$ is regular by [lem-sbc-strict-hensel-regular-divisor-quotient]. Strict henselization is faithfully flat [lem-sc-strict-henselization-faithfully-flat], so the defining preservation of injections [def-weil-pbc-flat-ring-map] applied to multiplication by $f$ shows that $f$ remains a nonzerodivisor; it lies in the maximal ideal because $x\\in D$. Finite base change of strict localizations [lem-trf-finite-base-strict-localization] identifies $X'\\times_X S$ with $X'_{(\\bar x')}$: its geometric closed fibre has coordinate ring $\\Omega[u]/(u^\\ell)$, so has precisely one connected component and one geometric point $\\bar x'$. Denote this strict local regular root pair by $(S_1,D_1)$. It has equation $u^\\ell=f$ and $D_1\\simeq D\\times_X S$. Thus the complements $U=S\\setminus D_S$ and $U_1=S_1\\setminus D_1$ are exactly the two complements needed by the strict-local divisor criterion for the corresponding points.",
+   "uses": [
+    "lem-sc-strict-henselization-regular",
+    "lem-sbc-strict-hensel-regular-divisor-quotient",
+    "lem-sc-strict-henselization-faithfully-flat",
+    "def-weil-pbc-flat-ring-map",
+    "lem-trf-finite-base-strict-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proposition 3.4.5, reduction at a geometric point of D, printed p.246"
+   }
+  },
+  {
+   "text": "Use [lem-per-kummer-classifying-purity-criterion] for $(R,f)$. Choose a topological generator of $G=\\mathbf Z_\\ell(1)$. Under $G\\simeq\\mathbf Z_\\ell$, [lem-exc-procyclic-two-term] with coefficient ring $A=\\mathbf F_\\ell$ and $s=1$ gives $H^q(BG,A)=0$ for $q\\ge2$. The new tower lemma supplies isomorphisms in degrees $0,1$ for $a_A:R\\Gamma(BG,A)\\to R\\Gamma(U,A)$. Since derived sections of a degree-zero sheaf have no negative cohomology, $a_A$ is an isomorphism exactly when $H^q(U,A)=0$ for all $q\\ge2$. The same argument applies to $(S_1,D_1)$ with parameter $u$, since Step 3 supplies its strictly local regular hypotheses. These are tests for the divisor pair, not for the closed point as a higher-codimension immersion.",
+   "uses": [
+    "lem-per-kummer-classifying-purity-criterion",
+    "lem-exc-procyclic-two-term"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Lemma 3.4.6 from Lemmas 3.4.7–3.4.8, printed p.247"
+   }
+  },
+  {
+   "text": "The tower lemma also supplies the cartesian square with $g:U_1\\to U$ and $g':BG\\to BG$ induced by multiplication by $\\ell$. Apply [lem-per-kummer-relative-cone-functor] with $H=\\ell G$, identified with $G$ by multiplication by $\\ell$. It produces the $A$-linear triangulated relative functor $F$, and the finite permutation module $M=g'_*A=\\operatorname{Map}(G/\\ell G,A)$. The map $a_A$ is an isomorphism iff $F(A)=0$. The second finite-cover comparison identifies $a_M$ with $R\\Gamma(BG,A)\\to R\\Gamma(U_1,A)$ for the shifted tower; it is an isomorphism iff $F(M)=0$. These identifications use the direct image $g'_*$, not inverse image: $M$ has rank $\\ell$, whereas $g'^*A=A$.",
+   "uses": [
+    "lem-per-kummer-classifying-purity-criterion",
+    "lem-per-kummer-relative-cone-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Paragraphs between Lemmas 3.4.8 and 3.4.9, printed pp.247–248"
+   }
+  },
+  {
+   "text": "Write $Q=G/\\ell G$, choose its cyclic generator $\\sigma$, and set $z=\\sigma-1$. The permutation module $M=\\operatorname{Map}(Q,A)$ has the cyclic delta-function basis; identify it $G$-equivariantly with $A[Q]=A[z]/(z^\\ell)$ by $\\sigma^i\\mapsto\\delta_{\\sigma^i}$. If the convention gives inverse translation instead, use $\\delta_{\\sigma^{-i}}$. The relation is $(\\sigma-1)^\\ell=\\sigma^\\ell-1=0$ in characteristic $\\ell$, and $1,z,\\ldots,z^{\\ell-1}$ is another basis by the triangular change from $1,\\sigma,\\ldots,\\sigma^{\\ell-1}$. Put $M_i=A[z]/(z^i)$ for $1\\le i\\le\\ell$, and $M_0=0$. For $i\\ge1$, multiplication by $z^{i-1}$ identifies the trivial module $A$ with the kernel of the quotient $M_i\\to M_{i-1}$. This gives explicit exact sequences $0\\to A\\to M_i\\to M_{i-1}\\to0$. They are exact already on the displayed bases, are $G$-equivariant, and $M_\\ell=M$.",
+   "uses": [
+    "def-exc-discrete-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proposition 3.4.5 final paragraph, explicit cyclic augmentation filtration, printed p.248"
+   }
+  },
+  {
+   "text": "The short exact sequences in Step 6 give distinguished triangles $A\\to M_i\\to M_{i-1}\\to A[1]$ in the derived category [def-weil-abstract-derived-category] of discrete $A[G]$-modules by [lem-sf-derived-ses-triangle]; their terms are concentrated in degree $0$, so they lie in $D^+$. The functor $F$ is triangulated by [lem-per-kummer-relative-cone-functor], so their images have long exact cohomology sequences by [lem-sf-derived-homology-long-exact]. If $F(A)=0$, induction starting with $M_0=0$ gives $F(M_i)=0$ for every $i$. Conversely, if $F(A)\\ne0$, bounded-below cohomology gives a least $n$ with $H^nF(A)\\ne0$. Induction on $i$, using the same long exact sequences, shows $H^kF(M_i)=0$ for $k<n$. The segment $H^{n-1}F(M_{i-1})\\to H^nF(A)\\to H^nF(M_i)$ then has zero first term, so its second map is injective for every $i\\ge1$. In particular $H^nF(M_\\ell)\\ne0$. Thus $F(A)=0$ iff $F(M)=0$. Together with Steps 4–5 this proves $H^q(U,A)=0$ for all $q\\ge2$ iff the same holds for $U_1$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-sf-derived-ses-triangle",
+    "lem-per-kummer-relative-cone-functor",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proposition 3.4.5 final paragraph, first nonzero cohomology argument, printed p.248"
+   }
+  },
+  {
+   "text": "Finally apply [lem-per-divisor-purity-strict-local-criterion] to the original pair $(X,D)$ and the regular pair $(X',D')$. Its hypotheses hold by Steps 1–2. The isomorphism $D'\\simeq D$ identifies their geometric points, and Step 3 identifies the strict local complements with $U,U_1$ for every such point. Step 7 equates the required vanishing tests at each point. Hence the two global supported Kummer class maps are isomorphisms simultaneously. If $D$ is empty there are no geometric points to test and both maps are maps of zero sheaves on the empty scheme, so the same conclusion holds.",
+   "uses": [
+    "lem-per-divisor-purity-strict-local-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Proposition 3.4.5, pointwise equivalence and conclusion, printed pp.246–248"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-discrete-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-flat-ring-map",
+  "lem-exc-procyclic-two-term",
+  "lem-per-divisor-purity-strict-local-criterion",
+  "lem-per-kummer-classifying-purity-criterion",
+  "lem-per-kummer-relative-cone-functor",
+  "lem-sbc-etale-regular-divisor-base-change",
+  "lem-sbc-root-algebra-regular-at-root",
+  "lem-sbc-root-split-away-cover-etale",
+  "lem-sbc-strict-hensel-regular-divisor-quotient",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-sc-strict-henselization-regular",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sf-derived-ses-triangle",
+  "lem-trf-finite-base-strict-localization",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-weil-pbc-finite-free-algebra-spectrum",
+  "lem-weil-pbc-monic-quotient-free"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI Proposition 3.4.5 and Lemmas 3.4.6–3.4.9, printed pp.246–248. Explicit cyclic filtration and least-cohomology argument spell out the final paragraph."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,7 +187,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-monomial-trait-punctual-purity",
@@ -87,5 +213,84 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-kummer-root-regular-divisor-purity",
+  "worker": "stage1",
+  "summary": "Preserved the statement and original metadata. Split the ILO Kummer-tower proof into root-algebra geometry, compatible strict-local pairs, low-degree plus procyclic cohomology, generic finite-cover relative comparison, and an explicit cyclic augmentation filtration and least-degree argument. Retained two corrected statement-only children; folded the earlier ill-typed filtration child into elementary Step 6 and Step 7. Corrected g-prime pullback to direct image and removed misuse of punctual purity locality.",
+  "blueprint": "The historical Step 3 of lem-per-artin-gabber-affine-curve reaches regular finite-coefficient duality through the recorded ancestor chain; this item supplies ILO XVI Proposition 3.4.5 for the monomial-trait proof. Its root-algebra paragraph is Steps 1–3, Lemmas 3.4.6–3.4.8 are Step 4, the square and relative functor are Step 5, Lemma 3.4.9 and the final devissage are Steps 6–8.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-monic-quotient-free",
+    "why": "monic quotient basis; a generic tool used within the ILO tower route, with no replacement in this unit."
+   },
+   {
+    "node": "lem-weil-pbc-finite-free-algebra-spectrum",
+    "why": "finite free algebra gives finite locally free spectrum; a generic tool used within the ILO tower route, with no replacement in this unit."
+   },
+   {
+    "node": "lem-weil-pbc-finite-algebra-noetherian",
+    "why": "finite algebra over a Noetherian ring is Noetherian; a generic tool used within the ILO tower route, with no replacement in this unit."
+   },
+   {
+    "node": "lem-sbc-root-algebra-regular-at-root",
+    "why": "root-algebra local regularity along u=0; a generic tool used within the ILO tower route, with no replacement in this unit."
+   },
+   {
+    "node": "lem-sbc-root-split-away-cover-etale",
+    "why": "etaleness off the root divisor; a generic tool used within the ILO tower route, with no replacement in this unit."
+   },
+   {
+    "node": "lem-sbc-etale-regular-divisor-base-change",
+    "why": "regularity under an affine etale map (auxiliary element 1); a generic tool used within the ILO tower route, with no replacement in this unit."
+   },
+   {
+    "node": "lem-sc-strict-henselization-regular",
+    "why": "strict henselization preserves regularity; a generic tool used within the ILO tower route, with no replacement in this unit."
+   },
+   {
+    "node": "lem-sbc-strict-hensel-regular-divisor-quotient",
+    "why": "regularity and Noetherianity of the strict-local divisor quotient; a generic tool used within the ILO tower route, with no replacement in this unit."
+   },
+   {
+    "node": "lem-sc-strict-henselization-faithfully-flat",
+    "why": "faithful flatness of the canonical strict henselization; a generic tool used within the ILO tower route, with no replacement in this unit."
+   },
+   {
+    "node": "lem-trf-finite-base-strict-localization",
+    "why": "canonical strict-local finite-base decomposition; a generic tool used within the ILO tower route, with no replacement in this unit."
+   },
+   {
+    "node": "lem-exc-procyclic-two-term",
+    "why": "continuous procyclic cohomology in degrees 0 and 1 only; a generic tool used within the ILO tower route, with no replacement in this unit."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "long exact cohomology sequence of a distinguished triangle; a generic tool used within the ILO tower route, with no replacement in this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-monic-quotient-free",
+  "lem-weil-pbc-finite-free-algebra-spectrum",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-sbc-root-algebra-regular-at-root",
+  "lem-sbc-root-split-away-cover-etale",
+  "lem-sbc-etale-regular-divisor-base-change",
+  "lem-sc-strict-henselization-regular",
+  "lem-sbc-strict-hensel-regular-divisor-quotient",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-trf-finite-base-strict-localization",
+  "lem-exc-procyclic-two-term",
+  "lem-sf-derived-homology-long-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-cb225ef4b",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-cb225ef4b (reviewer sub-agent of L); spot-checked: Read in full: ILO XVI 3.4.2, 3.4.5–3.4.9 (printed pp.245–248), the item, both new nodes and all 20 cited statements. The item statement is unchanged from live (still unsplit there), so no target is weakened. Steps 1–8 are correct. Step 2 applies lem-sbc-etale-regular-divisor-base-change with g=1, which is legitimate because the zero ring is vacuously regular under def-weil-regular-scheme. Step 3 uses the finite-base strict-localization node: the geometric fibre is Ω[u]/(u^ℓ), so it has one component. Step 4 uses the procyclic two-term complex for H^{≥2}(BG,A)=0. Step 5 uses direct image g'_*A, as on ILO p.248. Steps 6–7 give the explicit A[z]/(z^ℓ) filtration and the least-degree injection. Step 8 applies the strict-local divisor criterion to (X,D) and (X',D'). No cycle. Both new nodes are true, are not restatements of the parent and have no duplicate. lem-per-strict-local-divisor-low-kummer is an ingredient of the classifying node, not a duplicate. Faults fixed: (1) C1/C4: step 7 derived distinguished triangles from short exact sequences citing only def-weil-abstract-derived-category; it now cites the Mathlib leaf lem-sf-derived-ses-triangle. (2) B3: the relative-cone node used 'Grothendieck topos' with no definition node; it now cites def-weil-pbc-topos. Batch-5 flags: lem-trf-finite-base-strict-localization is generic strict-henselization algebra; its closure has only 4 trf nodes, all commutative algebra. The strict-local criterion reaches lem-trf-closed-immersion-strict-localization-cartesian, which is generic geometry; its closure has 43 trf/pod nodes, all generic infrastructure, with no trf/pod theorem, no sk-thm-trace-transport and no nt-* node. Neither is a step of the trace-formula or Poincaré-duality proofs, so both flags are accepted. The declared tool_uses are all generic black boxes and are accepted.; 2 file(s) fixed by the reviewer"
  }
 }
