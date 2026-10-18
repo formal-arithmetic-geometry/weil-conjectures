@@ -23,9 +23,140 @@
   "def-weil-pbc-direct-image",
   "def-weil-pbc-constructible-complexes"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First check the geometric hypotheses needed below. The field $k$ is Noetherian because its only ideals are $(0)$ and $(1)$, so $\\operatorname{Spec}k$ is Noetherian. Apply [lem-weil-pbc-finite-type-over-noetherian] successively to $Y\\to\\operatorname{Spec}k$, $f:X\\to Y$, and $q:\\overline X\\to Y$; $q$ is of finite type by the definition of properness [def-weil-proper-morphism]. Thus $Y,X,\\overline X$ are Noetherian, hence quasi-compact and, by [lem-weil-pbc-locally-noetherian-quasi-separated], quasi-separated. The morphisms $f$ and $q$ are locally of finite presentation by [pqf-lem-lft-fp-locnoeth]. They are quasi-compact by finite type and quasi-separated by [lem-weil-pbc-qcqs-morphism-permanence](1), since their sources are quasi-separated. Thus $f$ is of finite presentation. Also $j$ is quasi-compact by that same permanence lemma, since $X$ is quasi-compact and $\\overline X$ is quasi-separated. These arguments require no separatedness over $k$.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "pqf-lem-lft-fp-locnoeth",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01T6 (lemma-finite-type-noetherian), 01TX (lemma-noetherian-finite-type-finite-presentation); properties.tex Tag 01OY; schemes.tex Tags 03GI and 01KV"
+   }
+  },
+  {
+   "text": "The open immersion $j$ identifies $X$ with an open subscheme [def-weil-open-immersion]. Therefore $X\\times_{\\overline X}X\\cong X$ and its diagonal is an isomorphism, hence a closed immersion. It follows directly from [def-weil-proper-morphism] that $j$ is separated. The proper map $q$ is separated by the same definition. By the composition clause (e) of [lem-weil-pbc-proper-fp-permanence], $f=qj$ is separated.",
+   "uses": [
+    "def-weil-open-immersion",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tags 01L4 (lemma-monomorphism-separated), 01KU (lemma-separated-permanence), clause (1); the open-immersion case is the displayed diagonal argument"
+   }
+  },
+  {
+   "text": "Extension by zero is exact by [lem-weil-pbc-extension-by-zero-exact], and exact functors commute with cohomology by [lem-sp-exact-functor-preserves-homology](c). Hence, for $L=D(j_!)M$, one has $\\mathcal H^r(L)=j_!\\mathcal H^r(M)$; in particular $L$ is bounded below and has the same cohomological interval as $M$. To compare the two derived conventions, the module sheaf categories are Grothendieck abelian by [lem-weil-pbc-module-sheaves-grothendieck-abelian], have enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives], and admit K-injective resolutions by [prop-weil-pbc-kinjective-resolutions-exist]. The functor $q_*$ is additive and left exact by [lem-weil-pbc-module-direct-image-left-exact]. Therefore [src-right-derived-functor-plus-compatibility], applied to $q_*$, identifies its bounded-below derived functor on $L$ with its unbounded total right derived functor on $L$. All subsequent bounded-below computations consequently compute the functor $Rq_*D(j_!)$ specified in the statement.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-sp-exact-functor-preserves-homology",
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "prop-weil-pbc-kinjective-resolutions-exist",
+    "lem-weil-pbc-module-direct-image-left-exact",
+    "src-right-derived-functor-plus-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "section-derived-lower-shriek-compactification; exactness: sites-modules.tex Tag 03DJ; comparison: WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusCompatibility.lean, rightDerivedFunctorPlusCompatibility"
+   }
+  },
+  {
+   "text": "By [def-weil-pbc-constructible-complexes], $M$ is bounded below with constructible cohomology. Apply [lem-weil-pbc-etale-compactification-constructibility] to $f$ and the supplied compactification $(j,q)$. Its hypotheses are verified in steps 1 and 2: both endpoints are quasi-compact and quasi-separated, $f$ is separated and finitely presented, and $j$ is quasi-compact. Its coefficient hypothesis is precisely that $\\Lambda$ is a finite commutative ring. It yields constructibility of every $\\mathcal H^r(Rq_*j_!M)$. By step 3 this is the required unbounded-derived compact-support output.",
+   "uses": [
+    "def-weil-pbc-constructible-complexes",
+    "lem-weil-pbc-etale-compactification-constructibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GL0 (theorem-constructible-shriek), bounded-below finite-ring case"
+   }
+  },
+  {
+   "text": "Since $q$ is proper, it is of finite type [def-weil-proper-morphism], and $Y$ is quasi-compact by step 1. Thus [lem-fin-finite-type-fibre-dimension-bound] supplies $d\\geq0$ bounding the dimensions of every scheme-theoretic fibre of $q$. Fix this $d$ once and for all, and put $N=2d$. This choice depends on the supplied compactification and not on $M$ or its cohomological interval.",
+   "uses": [
+    "def-weil-proper-morphism",
+    "lem-fin-finite-type-fibre-dimension-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0A3V (lemma-morphism-finite-type-bounded-dimension); more-etale.tex Tag 0G2A (lemma-derived-lower-shriek-bounded), proper case"
+   }
+  },
+  {
+   "text": "Let $F$ be any $\\Lambda$-module sheaf on $\\overline X_{\\mathrm{et}}$. The finiteness of $\\Lambda$ gives a positive integer $m$ with $m1_\\Lambda=0$, so $mF=0$ and its underlying abelian sheaf $U(F)$ is torsion. Apply [lem-kun-proper-torsion-cd-bound] to $q$ and $U(F)$ to obtain $R^p q_*U(F)=0$ for $p>2d$. By [lem-sbc-higher-direct-image-forget-comparison], this is the underlying abelian sheaf of the module higher direct image $R^p q_*F$. A module sheaf with zero underlying abelian sheaf is zero. Hence $R^p q_*F=0$ for $p>2d$, uniformly for all $F$. This uses no invertibility of $m$ on any scheme.",
+   "uses": [
+    "lem-kun-proper-torsion-cd-bound",
+    "lem-sbc-higher-direct-image-forget-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095U (lemma-cohomological-dimension-proper); coefficient comparison: sites-cohomology.tex Tags 03FD (lemma-cohomology-modules-abelian-agree) and 072W (lemma-higher-direct-images)"
+   }
+  },
+  {
+   "text": "Suppose $\\mathcal H^r(M)=0$ for $r\\notin[a,b]$. By step 3, $L=D(j_!)M$ has the same vanishing. Apply [thm-sp-truncation-e2] to the left exact module direct image $q_*$ [lem-weil-pbc-module-direct-image-left-exact] between the Grothendieck abelian module sheaf categories [lem-weil-pbc-module-sheaves-grothendieck-abelian]. It gives a spectral sequence $E_2^{p,r}=R^p q_*\\mathcal H^r(L)\\Longrightarrow\\mathcal H^{p+r}(Rq_*L)$, with $E_2^{p,r}=0$ for $p<0$ and a finite exhaustive separated abutment filtration in every total degree. Step 6 gives $E_2^{p,r}=0$ for $p>2d$, and the hypothesis gives zero for $r\\notin[a,b]$. Thus a nonzero term must have $a\\leq p+r\\leq b+2d$. Outside this interval every associated graded of the finite filtration is zero, so the abutment is zero. By step 3 this proves $\\mathcal H^i(Rf_!^cM)=0$ for $i\\notin[a,b+N]$, with the fixed $N=2d\\geq0$.",
+   "uses": [
+    "thm-sp-truncation-e2",
+    "lem-weil-pbc-module-direct-image-left-exact",
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0G2A (lemma-derived-lower-shriek-bounded), clause (3), proper case and exact open-immersion case; derived.tex lemma-two-ss-complex-functor"
+   }
+  },
+  {
+   "text": "For each $M\\in D^b_c(X,\\Lambda)$ choose a finite cohomological interval $[a,b]$ using [def-weil-pbc-constructible-complexes]. Step 7 bounds the output in $[a,b+N]$, and step 4 makes each of its cohomology sheaves constructible. These are exactly the two conditions in that definition for $Rf_!^cM\\in D^b_c(Y,\\Lambda)$. The same $N$ works for every input and every proposed interval. The zero ring and empty schemes cause no exception: their module complexes are zero and the bound still holds.",
+   "uses": [
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0GL0 (theorem-constructible-shriek) and 0G2A (lemma-derived-lower-shriek-bounded), combined on bounded constructible inputs"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-open-immersion",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-proper-morphism",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-kun-proper-torsion-cd-bound",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-weil-pbc-etale-compactification-constructibility",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "pqf-lem-lft-fp-locnoeth",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "src-right-derived-functor-plus-compatibility",
+  "thm-sp-truncation-e2"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL0 and Tag 0G2A, using the existing DAG constructibility theorem and spelling out the proper-case cohomological bound via Tags 0A3V and 095U"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +185,45 @@
    "results": "8 hits: AlgebraicGeometry.Scheme.Hom.isConstructible_image, HasCompactSupport.comp_isClosedEmbedding, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, AlgebraicGeometry.Scheme.IdealSheafData.support_map, SheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatToSheaf, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.Hom.support_ker, AlgebraicGeometry.instQuasiCompactMorphismRestrict",
    "date": "2026-10-18",
    "verdict": "no match: no declaration states this etale-sheaf theorem; algebraic modules, constructible subsets, analytic Fourier transforms and condensed sheaf constructions in the hits have different objects or conclusions"
+  },
+  {
+   "tool": "grep",
+   "query": "constructib.*[Ss]hriek|[Ss]hriek.*constructib|cohomologicalDimension.*[Pp]roper|[Pp]roper.*cohomologicalDimension",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern generic sheaf pushforward, algebraic geometry, condensed locally constant modules, or abstract derived-category vanishing; none asserts constructible compact-support etale finiteness with the stated finite-ring hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A proper pushforward after extension by zero on the small etale site sends bounded constructible torsion module complexes to bounded constructible complexes",
+   "results": "8 hits: PresheafOfModules.pushforward₀, SheafOfModules.pushforward, TopCat.Sheaf.pushforward, AlgebraicGeometry.Scheme.Modules.pushforward, PresheafOfModules.pushforward₀_obj, SheafOfModules.pushforwardSections, SheafOfModules.pushforward_obj_val, SheafOfModules.pushforwardComp",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern generic sheaf pushforward, algebraic geometry, condensed locally constant modules, or abstract derived-category vanishing; none asserts constructible compact-support etale finiteness with the stated finite-ring hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"shriek\", \"constructible\"",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern generic sheaf pushforward, algebraic geometry, condensed locally constant modules, or abstract derived-category vanishing; none asserts constructible compact-support etale finiteness with the stated finite-ring hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For any finite commutative coefficient ring compact support direct image of etale sheaves preserves bounded constructible complexes and has a uniform cohomological bound",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, Algebra.etaleLocus_eq_compl_support, CompHausLike.LocallyConstantModule.functor, HomologicalComplex.map_isStrictlySupported, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern generic sheaf pushforward, algebraic geometry, condensed locally constant modules, or abstract derived-category vanishing; none asserts constructible compact-support etale finiteness with the stated finite-ring hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher direct images with proper support of constructible torsion etale module sheaves are constructible and vanish in uniformly high degrees",
+   "results": "8 hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, DerivedCategory.isZero_of_isGE, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, DerivedCategory.isGE_iff, DerivedCategory.isZero_of_isLE",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern generic sheaf pushforward, algebraic geometry, condensed locally constant modules, or abstract derived-category vanishing; none asserts constructible compact-support etale finiteness with the stated finite-ring hypotheses"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-fd-transform-well-defined",
@@ -74,5 +240,94 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-fd-finite-ring-compact-support-finiteness",
+  "worker": "stage1",
+  "summary": "Q34 split with no new nodes: verified finite presentation and qcqs geometry without separatedness over k; reused the existing arbitrary-finite-ring compactification constructibility theorem; obtained N=2d from a bound for fibres of q, proper torsion cohomological dimension and coefficient forgetting, then the finite truncation spectral sequence. Explicitly identified the bounded-below and unbounded direct-image conventions; statement unchanged.",
+  "blueprint": "thm-fd-transform-well-defined.proof.md, second sentence: compact-support p2,! preserves bounded constructible objects. This child proves the finite-ring input created by the parent split; the current main-20261015 proof has the same compact-support preservation step.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Geometric quasi-separatedness for nonseparated finite-type schemes over the field. No node of sk-prop-well-defined supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Quasi-compactness of the supplied open immersion and quasi-separatedness of f. No node of sk-prop-well-defined supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Composition of the separated maps j and q. No node of sk-prop-well-defined supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Exactness of the supplied compactification open-extension functor. No node of sk-prop-well-defined supplies this general tool."
+   },
+   {
+    "node": "lem-sp-exact-functor-preserves-homology",
+    "why": "Commutation of exact open extension with cohomology. No node of sk-prop-well-defined supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "why": "Grothendieck hypotheses for the bounded-below truncation spectral sequence. No node of sk-prop-well-defined supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Enough injectives for compatibility of bounded-below and unbounded direct image. No node of sk-prop-well-defined supplies this general tool."
+   },
+   {
+    "node": "prop-weil-pbc-kinjective-resolutions-exist",
+    "why": "K-injective resolution hypothesis for the same compatibility. No node of sk-prop-well-defined supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-direct-image-left-exact",
+    "why": "Additivity and left exactness of q_* in the module coefficient category. No node of sk-prop-well-defined supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-compactification-constructibility",
+    "why": "Constructibility for the exact ordinary-etale finite-ring compactification candidate, without an invertibility restriction. No node of sk-prop-well-defined supplies this general tool."
+   },
+   {
+    "node": "lem-fin-finite-type-fibre-dimension-bound",
+    "why": "A single nonnegative fibre-dimension bound for the fixed proper compactification map. No node of sk-prop-well-defined supplies this general tool."
+   },
+   {
+    "node": "lem-kun-proper-torsion-cd-bound",
+    "why": "Proper torsion abelian higher-direct-image vanishing without invertibility. No node of sk-prop-well-defined supplies this general tool."
+   },
+   {
+    "node": "lem-sbc-higher-direct-image-forget-comparison",
+    "why": "Transfer of the abelian vanishing to module higher direct images. No node of sk-prop-well-defined supplies this general tool."
+   },
+   {
+    "node": "thm-sp-truncation-e2",
+    "why": "Finite convergent spectral sequence extending the sheaf bound to a bounded complex. No node of sk-prop-well-defined supplies this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-proper-fp-permanence",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lem-weil-pbc-etale-compactification-constructibility",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-kun-proper-torsion-cd-bound",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "thm-sp-truncation-e2"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-Codex-Q34-af098a755",
+  "group": "Q34",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q34-af098a755 (reviewer sub-agent of L); spot-checked: Read all eight steps and cited statements; review.md records source checks and edge cases. Stacks 0GL0 supports arbitrary finite-ring constructibility; 095U and the spectral sequence give the uniform bound N=2d. Derived-category comparisons are justified. No new nodes, repairs, prohibited pivot dependencies, or assumed trace/duality proofs."
  }
 }

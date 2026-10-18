@@ -13,9 +13,124 @@
   "def-pur-complete-flag-bundle",
   "lem-pur-kummer-additivity"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $R_X=\\bigoplus_{i\\geq0}H^{2i}(X,A(i))$ with cup multiplication. The full-support instance of lem-pur-supported-cup-functoriality makes this a commutative graded ring: $(-1)^{(2i)(2j)}=1$. For a rank-$d>0$ bundle $V$ put $P_V(v)=\\sum_{i=0}^d(-1)^ic_i(V)v^{d-i}$. The current def-pur-chern-classes defines $c_i(V)=(-1)^{i+1}a_{d-i}$, where $(a_j)=\\Phi_{V,d}^{-1}(h_V^d)$; hence $P_V(h_V)=0$. This is the unique monic relation of degree $d$ whose coefficient of $v^{d-i}$ comes from $H^{2i}(X,A(i))$: subtract two such relations, and injectivity of that same degree-$2d$, twist-$d$ map $\\Phi_{V,d}$ makes every coefficient zero. The map is precisely the cohomology instance of thm-pur-projective-bundle-formula written in the definition. We prove the stated formula by induction on the length $r$, for all bases and all filtrations in the statement.",
+   "uses": [
+    "def-pur-chern-classes",
+    "lem-pur-supported-cup-functoriality",
+    "thm-pur-projective-bundle-formula"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/weil.tex",
+    "place": "Tag 0FI5, proposition-chern-class, defining relation (equation-chern-classes) and coefficient uniqueness"
+   }
+  },
+  {
+   "text": "If $r=0$, the left polynomial is $c_0(F)=1$ and the empty product is $1$. If $r=1$, $F=Q_1$; by lem-pur-projective-bundle-tautological-geometry the projection $\\mathbf P(F)\\to S$ is an isomorphism and its $\\mathcal O(1)$ corresponds to $F$. Thus the defining degree-one relation is $h-c_1(F)=0$, giving $c_1(F)=c_{1,A}(Q_1)$, with the same Kummer convention. These establish both base cases without forming $\\mathbf P(0)$.",
+   "uses": [
+    "def-pur-chern-classes",
+    "lem-pur-projective-bundle-tautological-geometry",
+    "lem-pur-kummer-additivity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/weil.tex",
+    "place": "Tag 0FI5, proposition-chern-class, invertible-bundle paragraph; rank-zero convention of the item"
+   }
+  },
+  {
+   "text": "Assume $r\\geq2$ and the induction claim for length $r-1$. Set $L=F_1=Q_1$ and $G=F/L$. Use the subbundle terminology of def-pur-complete-flag-bundle: the ambient quotient is locally free. We apply it to the filtration assumed in this item's statement, not just to the universal filtration of that definition. Locally trivialize each $Q_j$ and lift its basis section along $F_j\\twoheadrightarrow Q_j$; after refining the open neighbourhood these lifts exist by sheaf surjectivity. Inductively the lifts give an adapted frame of $F$, whose first vector spans $L$. Quotienting deletes that vector, so $G$ is locally free of rank $r-1$ and its filtration $F_j/L$ has line quotients $Q_2,\\ldots,Q_r$ and locally free ambient quotients. The induction claim therefore applies over the same possibly singular $S$. No global splitting is used.",
+   "uses": [
+    "def-pur-complete-flag-bundle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/weil.tex",
+    "place": "Tag 0FI5, proposition-chern-class, line-subbundle argument, applied recursively to the quotient filtration"
+   }
+  },
+  {
+   "text": "Let $p:P=\\mathbf P_S(F)\\to S$ and $P'=\\mathbf P_S(G)$. Use the canonical quotient $p^*F\\to\\mathcal O_P(1)$ and its frame formula from def-pur-complete-flag-bundle. The quotient $F\\twoheadrightarrow G$ gives $i:P'\\hookrightarrow P$, the locus where this tautological quotient kills $p^*L$. In a local splitting $F=L\\oplus G$ and frame $e_0,e_1,\\ldots,e_{r-1}$, this is the equation $X_0=0$. On the chart $X_j\\ne0$, $j>0$, it is $X_0/X_j=0$, a polynomial variable over the arbitrary affine base ring, hence a nonzerodivisor. On the chart $j=0$ its locus is empty and its equation is $1$. These descriptions glue since they express the vanishing of the globally defined map $p^*L\\to\\mathcal O_P(1)$. Therefore $P'$ is an effective Cartier divisor. The restricted tautological line is $\\mathcal O_{P'}(1)$: both are the quotient of $G$ with chart generator $e_j$ and transition $X_j/X_l$.",
+   "uses": [
+    "lem-pur-projective-bundle-tautological-geometry",
+    "def-pur-complete-flag-bundle",
+    "def-pc-divisor-line-bundle"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/weil.tex",
+    "place": "Tag 0FI5, proposition-chern-class, proof: the regular section cutting out P(F) inside P(E) for a line kernel"
+   }
+  },
+  {
+   "text": "The preceding regular section is a section of $M=\\mathcal O_P(1)\\otimes p^*L^\\vee$. Its evaluation identifies $M^\\vee$ with the Cartier ideal: in the displayed charts it sends a basis to the nonzerodivisor $X_0/X_j$. Dualizing gives $\\mathcal O_P(P')=M$ by def-pc-divisor-line-bundle. Put $h=c_{1,A}(\\mathcal O_P(1))$ and $x=c_{1,A}(L)$. Additivity and pullback in lem-pur-kummer-additivity give $c_{1,A}(M)=h-p^*x$: first $c_{1,A}(\\mathcal O)=0$ by additivity, then $c_{1,A}(L^\\vee)=-c_{1,A}(L)$. P and P' are separated finite type over k, as the locally projective bundles of the cited geometry statement over S, so their cohomology and Cartier maps lie in the stated finite-coefficient domains.",
+   "uses": [
+    "def-pc-divisor-line-bundle",
+    "lem-pur-projective-bundle-tautological-geometry",
+    "lem-pur-kummer-additivity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/weil.tex",
+    "place": "Tag 0FI5, proposition-chern-class, line-subbundle paragraph: divisor line and additive first Chern class"
+   }
+  },
+  {
+   "text": "Form $a=P_G(h)=\\sum_{i=0}^{r-1}(-1)^ip^*c_i(G)h^{r-1-i}\\in H^{2r-2}(P,A(r-1))$. Its restriction to $P'$ is zero: $i^*h=c_{1,A}(\\mathcal O_{P'}(1))$ by the tautological identification and Kummer pullback, and the resulting expression is exactly the defining relation for $G$. By lem-amb-cartier-kummer-map, the Cartier divisor $P'$ has a supported class $\\beta$ with support-forgetting image $c_{1,A}(M)=h-p^*x$; the supported-Hom identification of lem-pur-supported-hom reads that morphism as $\\beta\\in H^2_{P'}(P,A(1))$. Apply lem-pur-closed-supported-cup-vanishing with $X=P$, $Z=P'$, $\\alpha=a$, $b=2$, $s=1$, $a$-degree $2r-2$ and $t=r-1$. It gives $a(h-p^*x)=0$. Commutativity in Step 1 therefore gives $(h-p^*x)P_G(h)=0$. This verifies the divisor-annihilation input, rather than assuming the five axioms of Stacks Tag 0FI4 for this cohomology theory.",
+   "uses": [
+    "def-pur-chern-classes",
+    "lem-pur-kummer-additivity",
+    "lem-amb-cartier-kummer-map",
+    "lem-pur-supported-hom",
+    "lem-pur-closed-supported-cup-vanishing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/weil.tex",
+    "place": "Tag 0FI5, proposition-chern-class, proof of line-subbundle multiplicativity; axiom (5) of Tag 0FI4 verified using supported cup vanishing"
+   }
+  },
+  {
+   "text": "Expand the monic polynomial $(v-x)P_G(v)$. Its coefficient of $v^{r-i}$ is $(-1)^i(c_i(G)+x c_{i-1}(G))$, with $c_{-1}(G)=0$ and $c_r(G)=0$. Step 6 says its evaluation at $h$ is zero, and every coefficient has the required degree and twist. The uniqueness from Step 1 implies, for $0\\leq i\\leq r$,\n$$c_i(F)=c_i(G)+x c_{i-1}(G).$$\nConsequently $\\sum_{i=0}^rc_i(F)u^i=(1+xu)\\sum_{i=0}^{r-1}c_i(G)u^i$. This coefficient comparison proves the line-subbundle formula here; it is not delegated to a new Whitney or filtered-bundle lemma.",
+   "uses": [
+    "def-pur-chern-classes",
+    "thm-pur-projective-bundle-formula"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/weil.tex",
+    "place": "Tag 0FI5, proposition-chern-class, end of line-subbundle paragraph; corrected coefficient calculation"
+   }
+  },
+  {
+   "text": "The induction hypothesis of Step 3 gives $\\sum_{i=0}^{r-1}c_i(G)u^i=\\prod_{j=2}^r(1+x_ju)$. Substitute into Step 7 and use $x=x_1$ to obtain the required product for $F$. Taking the coefficient of $u^r$ gives $c_r(F)=x_1\\cdots x_r$. This closes the induction for every $r$. The coordinate nonzerodivisor argument was over an arbitrary ring; no step assumed S reduced, regular or smooth, and the filtration was split only on local charts.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/weil.tex",
+    "place": "Tag 0FI5, proposition-chern-class, iterated line-subbundle multiplicativity; blueprint localized-top-Chern Step 4 (L4)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-chern-classes",
+  "lem-pur-supported-cup-functoriality",
+  "thm-pur-projective-bundle-formula",
+  "lem-pur-projective-bundle-tautological-geometry",
+  "lem-pur-kummer-additivity",
+  "def-pur-complete-flag-bundle",
+  "def-pc-divisor-line-bundle",
+  "lem-amb-cartier-kummer-map",
+  "lem-pur-supported-hom",
+  "lem-pur-closed-supported-cup-vanishing"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/weil.tex",
+  "place": "Tag 0FI5 line-subbundle proof with corrected polynomial indices, together with the ordinary pro-etale closed-support input stated separately; realizes blueprint thm-pur-localized-top-chern Step 4 (L4)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,10 +159,45 @@
    "results": "{\"t\": \"2026-10-18T02:15:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"Chern\\\", \\\"Flag\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-18",
    "verdict": "no match: hits concern different notions; none states this supported-cohomology or scheme-theoretic construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chern classes of an algebraic vector bundle with a filtration by line bundles are elementary symmetric functions in the first Chern classes of its quotients",
+   "results": "{\"t\": \"2026-10-18T02:35:34Z\", \"tool\": \"leanfinder\", \"query\": \"Chern classes of an algebraic vector bundle with a filtration by line bundles are elementary symmetric functions in the first Chern classes of its quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"MvPolynomial.esymm\", \"MvPolynomial.esymm_eq_sum_subtype\", \"MvPolynomial.psum_eq_mul_esymm_sub_sum\", \"MvPolynomial.mul_esymm_eq_sum\", \"MvPolynomial.sum_antidiagonal_card_esymm_psum_eq_zero\", \"MvPolynomial.esymm_eq_multiset_esymm\", \"MvPolynomial.esymmPart\", \"Module.Basis.symmetricAlgebra_repr_apply\"], \"digest\": \"077a959cfec93c1c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: Read returned hits; none states finite-coefficient scheme cohomology with the claimed Chern or closed-support operation."
+  },
+  {
+   "tool": "grep",
+   "query": "Chern|Whitney|splitting.principle",
+   "results": "{\"t\": \"2026-10-18T02:35:43Z\", \"tool\": \"grep\", \"query\": \"Chern|Whitney|splitting.principle\", \"sub\": \"\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/Probability/Moments/SubGaussian.lean\", \"Mathlib/Probability/Moments/SubGaussian.lean\", \"Mathlib/Probability/Moments/SubGaussian.lean\", \"Mathlib/Probability/Moments/SubGaussian.lean\", \"Mathlib/Probability/Moments/SubGaussian.lean\", \"Mathlib/Probability/Moments/Basic.lean\", \"Mathlib/Probability/Moments/Basic.lean\", \"Mathlib/Probability/Moments/Basic.lean\"], \"digest\": \"12d4969ba50b0466\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: Read returned hits; none states finite-coefficient scheme cohomology with the claimed Chern or closed-support operation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Whitney sum formula for Chern classes of algebraic vector bundles in etale cohomology",
+   "results": "{\"t\": \"2026-10-18T02:35:44Z\", \"tool\": \"leansearch\", \"query\": \"Whitney sum formula for Chern classes of algebraic vector bundles in etale cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.instTensorProduct\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"Algebra.FormallyEtale.iff_exists_algEquiv_prod\", \"Algebra.Etale.formallyEtale\", \"Algebra.Etale.iff_exists_algEquiv_prod\", \"Algebra.Etale.baseChange\", \"Algebra.FormallyEtale.instFormallySmooth\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\"], \"digest\": \"5b86e54233d06e24\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: Read returned hits; none states finite-coefficient scheme cohomology with the claimed Chern or closed-support operation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"chern\"",
+   "results": "{\"t\": \"2026-10-18T02:35:44Z\", \"tool\": \"loogle\", \"query\": \"\\\"chern\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Lean.Meta.MatcherApp.matcherName\", \"Lean.Meta.Match.MkMatcherInput.matcherName\"], \"digest\": \"2e182d11eee43268\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: Read returned hits; none states finite-coefficient scheme cohomology with the claimed Chern or closed-support operation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The total Chern polynomial of an algebraic vector bundle filtered by invertible subquotients equals the product of one plus each first Chern class times the variable",
+   "results": "{\"t\": \"2026-10-18T02:37:08Z\", \"tool\": \"leanfinder\", \"query\": \"The total Chern polynomial of an algebraic vector bundle filtered by invertible subquotients equals the product of one plus each first Chern class times the variable\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.polyCharpolyAux_map_aeval\", \"LinearMap.charpoly_prodMap\", \"LinearMap.polyCharpolyAux_map_eq_charpoly\", \"Algebra.Generators.H1Cotangent.\\u03b4Aux_monomial\", \"MvPolynomial.mul_esymm_eq_sum\", \"MvPolynomial.sum_antidiagonal_card_esymm_psum_eq_zero\", \"MvPolynomial.psum_eq_mul_esymm_sub_sum\", \"LieAlgebra.engel_isBot_of_isMin.lieCharpoly_map_eval\"], \"digest\": \"3b011b2532750ad3\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: characteristic-polynomial and elementary-symmetric identities do not state scheme Chern classes or a filtration formula."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-pur-localized-top-chern",
@@ -64,5 +214,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-pur-chern-flag-formula",
+  "worker": "stage1",
+  "summary": "Proved the filtered Chern formula directly by induction using the first line subbundle, its projective quotient Cartier divisor, a corrected monic polynomial relation, and projective-bundle coefficient uniqueness. Added only the independent closed-support cup-vanishing statement; did not introduce Whitney multiplicativity or a restated flag formula as a node. Checked nonsplit filtrations, singular bases and ranks zero and one. Recorded Stacks proof typos in report.md; the item statement is unchanged. Repair of returned head a8ddcdb321: rebased citation interfaces to the current complete-flag and Chern-class definitions, using the explicit inverse-coordinate map for uniqueness and the canonical quotient chart formula for the divisor. Distinguished the arbitrary input filtration from the universal flag filtration; refreshed every affected verbatim quotation.",
+  "blueprint": "Realizes thm-pur-localized-top-chern, main-20261015 proof Step 4 (L4), the usual ordinary splitting-principle formula; the item was created to supply precisely that ordinary equality, independently of supported Euler-class construction.",
+  "tool_uses": [
+   {
+    "node": "lem-amb-cartier-kummer-map",
+    "why": "Supplies the ordinary supported Cartier morphism and its support-forgetting Kummer first Chern class for the projective quotient divisor, with no smoothness or purity assumption; this is a generic tool, not a replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-amb-cartier-kummer-map"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-Codex-Q26-e17a5fb4d",
+  "group": "Q26",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q26-e17a5fb4d (reviewer sub-agent of L); spot-checked: Read both nodes fully and checked all eight steps against cited statements and sources. Verified signs, rank-zero/one cases, singular bases, and the independent closed-support lemma. No duplicates, circular dependencies, or dropped-route citations found. Accepted Cartier-Kummer tool use; detailed review written to review.md."
  }
 }

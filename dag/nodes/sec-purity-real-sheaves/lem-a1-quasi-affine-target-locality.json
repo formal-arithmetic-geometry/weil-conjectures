@@ -11,9 +11,115 @@
   "def-pc-scheme",
   "def-nagata-quasi-affine-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The forward implication is immediate from [def-nagata-quasi-affine-morphism]: if $h$ is quasi-affine, then the inverse image of every affine open of $S$, in particular each $S_a$, is a quasi-affine scheme.",
+   "uses": [
+    "def-nagata-quasi-affine-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01SM, proof of lemma-characterize-quasi-affine, (1) implies (2)"
+   }
+  },
+  {
+   "text": "Assume that every $Z_a=h^{-1}(S_a)$ is quasi-affine. By [lem-trf-quasi-affine-canonical-affine-embedding], each $Z_a$ is quasi-compact and quasi-separated. The restricted map $h_a:Z_a\\to S_a$ is therefore quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](1) (its target is affine and hence quasi-separated by [lem-weil-pbc-affine-scheme-qcqs]); applying [lem-pc-quasi-compact-local-on-target] to the affine cover $(S_a)$ gives that $h$ is quasi-compact. To see that $h$ is quasi-separated, cover $Z\\times_S Z$ by the opens $Z_a\\times_{S_a}Z_a$. The inverse image of the $a$-th open under the diagonal is $Z_a$, and the restricted diagonal is the diagonal of $h_a$, which is quasi-compact because $h_a$ is quasi-separated by [lem-weil-pbc-qcqs-morphism-permanence](1). The same target-local criterion [lem-pc-quasi-compact-local-on-target] applied to $\\Delta_h$ makes $\\Delta_h$ quasi-compact; by [def-weil-quasi-separated-morphism], $h$ is quasi-separated. (If the cover is empty, then $S$ and $Z$ are empty and the conclusion is vacuous.)",
+   "uses": [
+    "lem-trf-quasi-affine-canonical-affine-embedding",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-pc-quasi-compact-local-on-target",
+    "def-weil-quasi-separated-morphism",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01SM, proof of lemma-characterize-quasi-affine, (2) implies (4), first paragraph; Schemes Lemma 01KO for the diagonal locality"
+   }
+  },
+  {
+   "text": "Put $\\mathcal A=h_*\\mathcal O_Z$ with its natural $\\mathcal O_S$-algebra structure. Since $h$ is quasi-compact and quasi-separated, [pqf-lem-pushforward-qcoh] makes its underlying module quasi-coherent. Apply [lem-weil-pbc-affine-morphism-relative-spec](2) to obtain the affine morphism $\\pi:Y=\\underline{\\operatorname{Spec}}_S(\\mathcal A)\\to S$ and an algebra isomorphism $\\alpha:\\mathcal A\\xrightarrow{\\sim}\\pi_*\\mathcal O_Y$, with each $Y_a=\\pi^{-1}(S_a)$ affine and identified with $\\operatorname{Spec}\\mathcal A(S_a)$.",
+   "uses": [
+    "pqf-lem-pushforward-qcoh",
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "pqf-def-coherent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01SM, proof of lemma-characterize-quasi-affine, (2) implies (4), construction of $\\mathcal A=f_*\\mathcal O_X$ and the relative spectrum"
+   }
+  },
+  {
+   "text": "Use the inverse algebra map $\\alpha^{-1}:\\pi_*\\mathcal O_Y\\to h_*\\mathcal O_Z$ in [lem-weil-pbc-affine-algebra-local-maps]. For every $a$ it gives a morphism $c_a:Z_a\\to Y$ over $S$, and the maps agree on all overlaps. By [lem-weil-pbc-scheme-morphism-gluing] they glue to $c:Z\\to Y$ with $\\pi c=h$. The restriction $c_a$ factors through $Y_a$. Under the affine chart $Y_a\\simeq\\operatorname{Spec}\\mathcal A(S_a)$, the induced map on global sections is $\\alpha_a^{-1}\\alpha_a=\\operatorname{id}_{\\mathcal A(S_a)}$. Thus [lem-weil-pbc-morphism-into-affine-scheme] identifies this restriction with the canonical map $j_a:Z_a\\to\\operatorname{Spec}\\Gamma(Z_a,\\mathcal O_{Z_a})$.",
+   "uses": [
+    "lem-weil-pbc-affine-algebra-local-maps",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01SM, proof of lemma-characterize-quasi-affine, (2) implies (4), canonical morphism and its affine-chart restriction"
+   }
+  },
+  {
+   "text": "Each $j_a$ is an open immersion by [lem-trf-quasi-affine-canonical-affine-embedding], so the composite $Z_a\\hookrightarrow Z\\xrightarrow{c}Y$ is an open immersion into the open subscheme $Y_a$. To check that $c$ is injective on points, suppose $c(z)=c(z')=y$. Since $\\pi c=h$, both $z$ and $z'$ map to $\\pi(y)\\in S$. Choose $a$ with $\\pi(y)\\in S_a$. Then both points lie in $Z_a$, and injectivity of $j_a$ gives $z=z'$. Thus $c$ is injective on points. Therefore [lem-weil-pbc-open-immersion-injective-local-source] makes $c$ an open immersion. It is quasi-compact: $Z_a=c^{-1}(Y_a)$ is quasi-compact, while $Y_a$ is affine and hence quasi-separated by [lem-weil-pbc-affine-scheme-qcqs], so [lem-weil-pbc-qcqs-morphism-permanence](1) makes $c|_{Z_a}:Z_a\\to Y_a$ quasi-compact; [lem-pc-quasi-compact-local-on-target] then makes $c$ quasi-compact.",
+   "uses": [
+    "lem-trf-quasi-affine-canonical-affine-embedding",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-open-immersion-injective-local-source",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "lem-pc-quasi-compact-local-on-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01SM, proof of lemma-characterize-quasi-affine, (2) implies (4), local open immersion and quasi-compactness"
+   }
+  },
+  {
+   "text": "For any affine open $U\\subseteq S$, the relative-Spec chart in [lem-weil-pbc-affine-morphism-relative-spec](2) makes $Y_U=\\pi^{-1}(U)$ affine. Since $c$ is a quasi-compact open immersion and $\\pi c=h$, the inverse image $h^{-1}(U)=c^{-1}(Y_U)$ is a quasi-compact open subscheme of the affine scheme $Y_U$. By [def-nagata-quasi-affine-morphism], this is exactly that $h$ is quasi-affine.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "def-weil-open-immersion",
+    "def-nagata-quasi-affine-morphism",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01SM, proof of lemma-characterize-quasi-affine, (3) implies (1), specialized to the constructed relative spectrum"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-quasi-affine-morphism",
+  "def-pc-fibre-product",
+  "def-weil-finite-type-morphism",
+  "def-weil-open-immersion",
+  "def-weil-quasi-separated-morphism",
+  "lem-pc-quasi-compact-local-on-target",
+  "lem-trf-quasi-affine-canonical-affine-embedding",
+  "lem-weil-pbc-affine-algebra-local-maps",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-weil-pbc-open-immersion-injective-local-source",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "pqf-def-coherent",
+  "pqf-lem-pushforward-qcoh"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 01SM, lemma-characterize-quasi-affine, equivalence (1) and (2); relative-spectrum construction and diagonal locality written out from cited Stacks lemmas"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -65,7 +171,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-ind-quasi-affine-permanence",
@@ -77,17 +183,54 @@
  "blueprint": {
   "from": {
    "node": "lem-a1-affine-hc0",
-   "place": "Gabber fpqc descent input to the Loc_X-to-Cov_X construction in Bhatt–Scholze Lemma 7.3.9, p.67, used through lem-a1-proetale-local-system-representability and lem-a1-space-fpqc-separated-valuative-descent. In the Gabber input: Tag 0APK proof, first paragraph: ind-quasi-affine base-change stability and reduction to affines; the quasi-separatedness needed for its next paragraphs. Tag 0F1U proof, invocations of Tag 01SM: characterize-quasi-affine, equivalence (1) and (2), used to pass from an affine cover to all affine opens.",
-   "via": [
-    "lem-a1-ind-quasi-affine-permanence",
-    "lem-a1-ind-quasi-affine-fpqc-effective-descent",
-    "lem-a1-separated-lqf-fpqc-effective-descent",
-    "lem-a1-algebraic-space-fpqc-sheaf",
-    "lem-a1-space-fpqc-separated-valuative-descent",
-    "lem-a1-proetale-local-system-representability"
-   ]
+   "place": "Tag 01SM proof, (1) implies (2) and the invocation of Tag 01SM in the Gabber affine-cover argument to pass from the chosen affine cover to every affine open",
+   "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-quasi-affine-target-locality",
+  "worker": "stage1",
+  "summary": "Expanded Tag 01SM into the forward implication, local quasi-compact and quasi-separated checks, the quasi-coherent relative-spectrum construction, the glued canonical open immersion, and the converse definition check. Reused existing DAG statements for canonical quasi-affine embeddings, qcqs permanence, relative spectra, local morphism construction, gluing, and open-immersion locality; created no new nodes and did not change the statement or hypotheses.",
+  "blueprint": "The item realizes the ancestor lem-a1-affine-hc0 blueprint reference to Tag 01SM: the affine-cover-to-all-affine-open passage is steps 2–6, while the direct implication is step 1.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-quasi-affine-canonical-affine-embedding",
+    "why": "Generic canonical embedding of an absolute quasi-affine scheme, used to obtain local quasi-compactness and the open immersions in Tag 01SM."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-relative-spec",
+    "why": "Generic relative-spectrum construction and affine-chart identification used in the Stacks relative-spectrum argument."
+   },
+   {
+    "node": "lem-weil-pbc-affine-algebra-local-maps",
+    "why": "Generic local construction of morphisms into an affine-over-S scheme from the pushforward algebra map."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "Generic gluing of the local maps into the global canonical morphism."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-injective-local-source",
+    "why": "Generic local criterion for the glued morphism to be an open immersion."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-quasi-affine-canonical-affine-embedding",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-affine-algebra-local-maps",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-open-immersion-injective-local-source"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-Codex-Q14-770ab57a7",
+  "group": "Q14",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q14-770ab57a7 (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements, sources and unit/chapter route. Tag 01SM supports the exact hypotheses. Repaired step 5 by explicitly using πc=h to place equal-image points in one chart before applying injectivity. No new nodes, cycles, prohibited trace/duality dependencies or long steps. Corrected JSON and detailed review written under fixes/ and review.md.; 1 file(s) fixed by the reviewer"
  }
 }

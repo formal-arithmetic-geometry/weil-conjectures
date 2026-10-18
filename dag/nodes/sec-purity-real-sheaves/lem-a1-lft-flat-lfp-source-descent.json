@@ -13,9 +13,116 @@
   "def-sbc-locally-finite-presentation",
   "def-weil-finite-type-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $y\\in Y$. Choose an affine open $V=\\operatorname{Spec}R\\subseteq S$ containing $h(y)$, and an affine open $W=\\operatorname{Spec}A\\subseteq Y$ containing $y$ and contained in $h^{-1}(V)$, using the affine-open basis. Cover the open subset $q^{-1}(W)\\subseteq X$ by affine opens $U_\\alpha=\\operatorname{Spec}B_\\alpha$ of $X$ contained in $q^{-1}(W)$. The pointwise finite-type criterion shows that it suffices, for each such $y$, to prove the induced ring map $R\\to A$ is of finite type. If $Y$ has no points this criterion is vacuous and the conclusion already holds.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-lft-pointwise-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02KL, lemma-flat-finitely-presented-permanence, first sentence of the proof; Schemes Tag 01IT (lemma-basis-affine-opens); Morphisms Tag 01T2 (lemma-locally-finite-type-characterize)."
+   }
+  },
+  {
+   "text": "For every $\\alpha$, apply the affine-pair flatness criterion to $q$ and the pair $(U_\\alpha,W)$: $A\\to B_\\alpha$ is flat. Apply the affine-pair finite-presentation lemma to the same pair: $A\\to B_\\alpha$ is of finite presentation. Apply the affine-pair finite-type criterion to $h\\circ q$ and $(U_\\alpha,V)$: $R\\to B_\\alpha$ is of finite type. These ring maps form the tower $R\\to A\\to B_\\alpha$ since the morphism is $h\\circ q$. All the opens used here are affine opens of the original schemes, so no claim about the affineness of an intersection is needed.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-lft-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02KL, affine reduction; Morphisms Tags 01U5 (lemma-flat-characterize), 01TQ (lemma-locally-finite-presentation-characterize), 01T2 (lemma-locally-finite-type-characterize)."
+   }
+  },
+  {
+   "text": "The morphism $q$ is open because it is flat and locally of finite presentation. Thus every $q(U_\\alpha)$ is open in $Y$, hence in $W$. Surjectivity of $q$ and the covering of $q^{-1}(W)$ imply $W=\\bigcup_\\alpha q(U_\\alpha)$. The affine scheme $W$ is quasi-compact; choose finitely many indices $\\alpha_1,\\ldots,\\alpha_n$ whose images cover $W$. This uses quasi-compactness only of $W$, and imposes none on $q$ or $q^{-1}(W)$.",
+   "uses": [
+    "lem-weil-pbc-flat-lfp-open",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02KL, proof, openness and finite affine selection; Morphisms Tag 01UA (lemma-fppf-open); Algebra Tag 00E8 (lemma-quasi-compact)."
+   }
+  },
+  {
+   "text": "Form $Z=\\coprod_{i=1}^nU_{\\alpha_i}$ and the morphisms $q_Z:Z\\to W$, $p_Z:Z\\to V$ induced by the component maps; then $p_Z=(h|_W)\\circ q_Z$ by the coproduct universal property. The components are pairwise disjoint open subschemes covering $Z$. By the finite-coproduct spectrum identification, $Z\\cong\\operatorname{Spec}B$ with $B=\\prod_{i=1}^nB_{\\alpha_i}$, with the specified component maps. At a point of component $U_{\\alpha_i}$ the local-ring map of $q_Z$ is the local-ring map of $q$ at that point, because both source and target have merely been restricted to open neighbourhoods. Thus $q_Z$ is flat by the stalkwise definition. Each component is an affine neighbourhood with finitely presented $A$-algebra by step 2, so the pointwise definition gives that $q_Z$ is locally of finite presentation. Each component also has finite-type $R$-algebra, so the pointwise finite-type criterion gives that $p_Z$ is locally of finite type. Finally $q_Z$ is surjective by the chosen finite image cover.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-weil-pbc-finite-affine-coproduct-spectrum",
+    "def-weil-flat-morphism",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-lft-pointwise-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02KL, proof, replacement by a finite affine coproduct; Schemes Tags 01JB and 01JC (lemma-glue, lemma-glue-schemes), applied to disjoint gluing; Morphisms Tags 01U3 (definition-flat), 01TP (definition-finite-presentation), 01T2."
+   }
+  },
+  {
+   "text": "Apply the affine-pair criteria to the full affine source $Z=\\operatorname{Spec}B$ and the full affine targets $W=\\operatorname{Spec}A$ and $V=\\operatorname{Spec}R$. From flatness and local finite presentation of $q_Z$ obtain that $A\\to B$ is flat and of finite presentation. From local finite type of $p_Z$ obtain that the composite $R\\to B$ is of finite type. The tower $R\\to A\\to B$ is exactly that of the two maps constructed in step 4, so its composite ring map agrees with that induced by $p_Z$.",
+   "uses": [
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+    "lem-weil-pbc-lft-affine-pairs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02KL, proof, final affine reduction; Morphisms Tags 01U5, 01TQ, 01T2."
+   }
+  },
+  {
+   "text": "For a maximal ideal $\\mathfrak m\\subset A$, surjectivity of $q_Z$ supplies a prime $\\mathfrak n\\subset B$ whose inverse image is $\\mathfrak m$. Every image of an element of $\\mathfrak m$ lies in $\\mathfrak n$, hence $\\mathfrak mB\\subseteq\\mathfrak n\\ne B$. Thus every extended maximal ideal is proper. Together with flatness of $A\\to B$ from step 5, the cited faithful-flatness criterion implies that $A\\to B$ is faithfully flat. If $A$ is the zero ring the condition on maximal ideals is empty, and the same criterion still applies.",
+   "uses": [
+    "lem-weil-pbc-flat-faithfully-flat-maximal-ideals"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02KL, final affine reduction; Algebra Tag 00HP (lemma-ff), implication (4) to (1); compare Tag 00HQ (lemma-ff-rings)."
+   }
+  },
+  {
+   "text": "Apply the ring-tower descent lemma to $R\\to A\\to B$: step 5 gives finite type of $R\\to B$ and finite presentation of $A\\to B$, while step 6 gives faithful flatness of $A\\to B$. Conclude that $R\\to A$ is of finite type. For each $y\\in Y$, the affine pair $(W,V)$ chosen in step 1 now satisfies the pointwise finite-type criterion for $h$. Therefore $h$ is locally of finite type.",
+   "uses": [
+    "lem-a1-finite-type-fppf-source-algebra",
+    "lem-weil-pbc-lft-pointwise-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tag 02KL (lemma-flat-finitely-presented-permanence), locally-of-finite-type conclusion, using Tag 0367 (lemma-finite-type-local-source-fppf-algebra) and Morphisms Tag 01T2."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-lft-pointwise-criterion",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-flat-lfp-open",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-weil-pbc-finite-affine-coproduct-spectrum",
+  "def-weil-flat-morphism",
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-flat-faithfully-flat-maximal-ideals",
+  "lem-a1-finite-type-fppf-source-algebra"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/descent.tex",
+  "place": "Tag 02KL, lemma-flat-finitely-presented-permanence, locally-of-finite-type proof, with algebraic input Tag 0367."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,7 +161,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-scheme-lqf-etale-source-locality",
@@ -66,7 +173,7 @@
  "blueprint": {
   "from": {
    "node": "lem-a1-affine-hc0",
-   "place": "Auxiliary schemehood branch of lem-a1-affine-hc0, through lem-a1-separated-etale-space-scheme and lem-a1-space-separated-lqf-permanence: the scheme-source-locality input for chart comparisons (Stacks 03X4).",
+   "place": "Auxiliary schemehood branch of lem-a1-affine-hc0: chart comparisons in lem-a1-scheme-lqf-etale-source-locality, via the separated-etale-space schemehood argument. Stacks 02KL affine reduction and its 0367 ring input.",
    "via": [
     "lem-a1-scheme-lqf-etale-source-locality",
     "lem-a1-space-separated-lqf-permanence",
@@ -77,5 +184,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-lft-flat-lfp-source-descent",
+  "worker": "stage1",
+  "summary": "Expanded the Stacks 02KL finite-type proof into seven steps, retaining the unrestricted scheme statement. Reused affine-open, flatness, finite-presentation, finite-type, openness and finite-coproduct nodes. Made faithful flatness explicit using proper extended maximal ideals. Created only the statement-only algebraic source-descent input 0367 after DAG, blueprint, project Lean and logged Mathlib searches.",
+  "blueprint": "Auxiliary schemehood branch of lem-a1-affine-hc0 (current main-20261015 statement has no proof text), through lem-a1-separated-etale-space-scheme and its chart-comparison source-locality input lem-a1-scheme-lqf-etale-source-locality. The seven steps realize precisely the 02KL tool used there, without changing the Rankin-Selberg unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-Codex-Q06-351cf924a",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q06-351cf924a (reviewer sub-agent of L); spot-checked: Read the full mathematics and checked all seven steps against Stacks 02KL, 0367 and cited affine criteria. No mathematical gap or duplicate found. Added the new node’s missing merged_into and lean_audit fields in fixes/. Detailed checks are in review.md.; 1 file(s) fixed by the reviewer"
  }
 }

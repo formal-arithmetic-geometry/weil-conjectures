@@ -16,9 +16,133 @@
   "lem-pur-kummer-additivity",
   "def-pur-supported-cup"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the vector-subbundle and invertible-quotient meanings of [def-pur-complete-flag-bundle]. For the given filtration on $S$, adapted frames are obtained by this elementary local construction: near any point trivialize each $Q_i$, lift its generator locally through $F_i\\twoheadrightarrow Q_i$, and shrink to an affine neighbourhood $U=\\operatorname{Spec}R$ where all finitely many lifts exist. A lifted generator splits $F_i\\to Q_i$, since its composite with that surjection is $1$; recursively, a frame of $F_{i-1}$ together with this lift is a frame of $F_i$. Thus $F_i|_U=\\mathcal O_Ue_1\\oplus\\cdots\\oplus\\mathcal O_Ue_i$ simultaneously for every $i$. This applies to any filtration in the statement, without identifying it with the universal filtration on a flag bundle. The relative-spectrum description [def-pur-vector-bundle-zero-section], applied to the locally free module $F_j^\\vee$, gives $E_j|_U=\\operatorname{Spec}R[t_1,\\ldots,t_j]$: the dual basis freely generates its symmetric algebra. The inclusion $a_j$ is the quotient setting $t_j=0$, and the image of the tautological vector in $\\pi_j^*Q_j$ is $t_j$ times the quotient-frame vector. Multiplication by $t_j$ is injective over every $R$, since it shifts the coefficients of a polynomial. Thus this section cuts out exactly $E_{j-1}$ as an effective Cartier divisor. Apply the last clause of [lem-pc-zero-scheme-divisor-iso] to obtain $\\mathcal O_{E_j}(E_{j-1})\\cong\\pi_j^*Q_j$. This argument uses local frames only; a globally split flag is unnecessary.",
+   "uses": [
+    "def-pur-complete-flag-bundle",
+    "def-pur-vector-bundle-zero-section",
+    "lem-pc-zero-scheme-divisor-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 01X0, lemma-characterize-OD (2); explicit polynomial calculation for the subbundle section"
+   }
+  },
+  {
+   "text": "In the charts of Step 1, the projections are $\\mathbf A^j_U\\to U$ and $\\mathbf A^{j-1}_U\\to U$, so [sbc-lem-affine-space-smooth] makes them smooth. Smoothness is affine-local by the equivalent affine-local definition in [def-sbc-smooth-morphisms]; hence $E_j$ and $E_{j-1}$ are smooth over $S$. They are separated finite-type $k$-schemes: their projections are affine, with finitely generated polynomial algebras on the base charts, and $S$ is separated finite type. More explicitly, an adapted finite affine covering exists since $S$ is quasi-compact; its preimages are affine polynomial spectra, and the relative diagonal is locally cut out by $t_i\\otimes1-1\\otimes t_i$. These are precisely the finite-type and separatedness conditions of [def-weil-finite-type-morphism, def-weil-proper-morphism]. For $a_j$ the complementary open is locally $D(t_j)$, and for $z_j$ it is $\\bigcup_{i=1}^jD(t_i)$, so both complementary open immersions are quasi-compact. Moreover $a_j$ is proper: after any base change it is still locally the spectrum of a quotient algebra, hence a closed map, and its diagonal is an isomorphism onto a closed subscheme; its local quotient algebra has one relation and is finitely generated. This verifies the properness required in Step 4 directly from [def-weil-proper-morphism].",
+   "uses": [
+    "sbc-lem-affine-space-smooth",
+    "def-sbc-smooth-morphisms",
+    "def-weil-finite-type-morphism",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 01V5 and 00T7 (affine-local smoothness and polynomial charts); elementary diagonal and principal-open calculations"
+   }
+  },
+  {
+   "text": "Write $\\rho_j:A_{E_j}\\to(z_j)_*A_S$ and $q_j:A_{E_j}\\to(a_j)_*A_{E_{j-1}}$ for restriction of constants. By [lem-exc-proetale-closed-exact] and Step 2, every closed direct image here is exact at the finite coefficient ring $A$. Thus it also denotes its derived functor. Direct-image composition is the canonical one: on a test object it evaluates successively on its fibre products, which associate. Since $z_j=a_jz_{j-1}$, this gives $(z_j)_*=(a_j)_*(z_{j-1})_*$ and $\\rho_j=(a_j)_*\\rho_{j-1}\\circ q_j$. The latter equality sends every constant section to the same restricted constant on $S$, so is an equality of sheaf morphisms before passing to the derived category. Put $\\alpha_j=\\Theta_j\\rho_j$; this is exactly the forget-support map appearing in the statement.",
+   "uses": [
+    "lem-exc-proetale-closed-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-localized-top-chern.proof.md",
+    "place": "Steps 2 and 4: interpret the nested supported morphisms and forgetting support"
+   }
+  },
+  {
+   "text": "For $j\\geq1$, abbreviate $a=a_j$, $X=E_j$, $Y=E_{j-1}$, $B=A_X$, $T=A_X(j-1)[2j-2]$, and $V=A_X(1)[2]$. The twist conventions [def-coefficient-twists-detailed] give $a^*T=A_Y(j-1)[2j-2]$. The finite twist is locally constant of rank one by [lem-pur-twist-sheaf-locally-free]; its positive tensor powers are again locally free of rank one by the local tensor calculation $A\\otimes_A A=A$. Consequently $T$ has a bounded constructible ordinary etale witness of finite Tor amplitude (one shifted flat sheaf), with its pro-etale realization. Take the witness $\\mu_{\\ell^N}\\otimes_{\\mathbf Z/\\ell^N}A$, $\\ell^NA=0$, and its tensor powers, using the canonical reduction comparison of [lem-pur-twist-sheaf-locally-free]. Apply [lem-weil-finite-compact-projection-formula] to the proper closed immersion $a$, $K=A_Y$, and this $T$. Its proper counit-defined projection isomorphism is\n$$P_T:(a_*A_Y)\\otimes_A^LT\\xrightarrow{\\sim}a_*a^*T.$$\nThe same formula with the coefficient unit is the identity. Under the constant-coefficient twist identifications in the question, the shifted-twisted divisor map is precisely\n$$\\widetilde d_j=(d_j\\otimes1_T)P_T^{-1}:a_*a^*T\\to V\\otimes T=A_X(j)[2j].$$\nThe even shift comparison is that of [lem-pur-shifted-tensor-morphism-calculus].",
+   "uses": [
+    "def-coefficient-twists-detailed",
+    "lem-pur-twist-sheaf-locally-free",
+    "lem-weil-finite-compact-projection-formula",
+    "lem-pur-shifted-tensor-morphism-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, equation-projection-formula-map; finite etale-origin invertibility supplied by the cited finite projection-formula node"
+   }
+  },
+  {
+   "text": "We need the projection map at a morphism, not just an isomorphism of its objects. For $x:B\\to T$, naturality and the tensor-unit normalization of the counit-defined projection map [lem-weil-pbc-ringed-projection-mate-exact] give\n$$a_*(a^*x)=P_T(1_{a_*A_Y}\\otimes x),$$\nwith $P_B=1$. This normalization is the same proper projection map as in Step 4. Composing with $q_j$ therefore yields the explicit identity\n$$P_T^{-1}a_*(a^*x)q_j=(1\\otimes x)q_j=q_j\\otimes x.$$\nHere the last equality uses the unit identifications $B=B\\otimes B$ and bifunctoriality of tensor. Equivalently, $P_T(q_j\\otimes1_T)$ is the adjunction unit at $T$: its adjunct is $(\\varepsilon_{A_Y}a^*q_j)\\otimes1_{a^*T}=1_{a^*T}$ by the triangle identity. This checks the restriction map in the formula as well as its tensor-unit normalization.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0B56, equation-projection-formula-map: naturality in K and the adjunction triangle identity at the tensor unit"
+   }
+  },
+  {
+   "text": "Induct on $j$. Put $C_0=1_A$ and $C_{j-1}=c_{1,A}(Q_1)\\cup\\cdots\\cup c_{1,A}(Q_{j-1})$ as a morphism $A_S\\to A_S(j-1)[2j-2]$. For $j=0$, $E_0=S$, $z_0=\\mathrm{id}$, and $\\Theta_0=\\mathrm{id}$, so $\\alpha_0=\\mathrm{id}=\\pi_0^*C_0$. Suppose $\\alpha_{j-1}=\\pi_{j-1}^*C_{j-1}$. Set $x=\\pi_j^*C_{j-1}:A_{E_j}\\to T$. Since $\\pi_ja_j=\\pi_{j-1}$, functoriality of pullback identifies $a_j^*x$ with $\\alpha_{j-1}$. The tensor/pullback and shift comparisons used here are canonical by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback, lem-pur-shifted-tensor-morphism-calculus]. Substituting the restriction-map factorization of Step 3 into the definition of $\\Theta_j$ gives\n$$\\alpha_j=\\widetilde d_j\\, (a_j)_*\\alpha_{j-1}\\,q_j.$$\nThis formula is valid on the ambient ordinary derived categories; it requires no smooth-purity isomorphism.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pur-shifted-tensor-morphism-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-localized-top-chern.proof.md",
+    "place": "Step 4, property L4: induction on the number of nested subbundles, with the rank-zero base case written out"
+   }
+  },
+  {
+   "text": "Insert the formula of Step 5 into Step 6 and use Step 4:\n$$\\alpha_j=(d_j\\otimes1_T)P_T^{-1}(a_j)_*(a_j^*x)q_j\n=(d_j\\otimes1_T)(q_j\\otimes x)=(d_jq_j)\\otimes x.$$\nAll tensor and target identifications here are the ones defining cup products in [def-pur-supported-cup], with full support for ordinary classes. The shifted tensor identities of [lem-pur-shifted-tensor-morphism-calculus] therefore identify this map with $(d_jq_j)\\cup x$. Step 1 makes $a_j$ an effective Cartier divisor with line bundle $\\pi_j^*Q_j$, so [lem-amb-cartier-kummer-map] gives the actual map equality $d_jq_j=c_{1,A}(\\pi_j^*Q_j)$. Consequently\n$$\\alpha_j=c_{1,A}(\\pi_j^*Q_j)\\cup\\pi_j^*C_{j-1}.$$",
+   "uses": [
+    "def-pur-supported-cup",
+    "lem-pur-shifted-tensor-morphism-calculus",
+    "lem-amb-cartier-kummer-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-localized-top-chern.proof.md",
+    "place": "Step 4, property L4: forgetting each Cartier support and the projection-formula multiplication calculation"
+   }
+  },
+  {
+   "text": "By the pullback clause of [lem-pur-kummer-additivity], $c_{1,A}(\\pi_j^*Q_j)=\\pi_j^*c_{1,A}(Q_j)$; the hypotheses hold because Step 2 verified that both schemes are separated finite type over $k$. Cup functoriality and graded commutativity in [lem-pur-supported-cup-functoriality], applied with full supports, now give\n$$\\alpha_j=\\pi_j^*\\bigl(c_{1,A}(Q_j)\\cup C_{j-1}\\bigr)\n=\\pi_j^*\\bigl(C_{j-1}\\cup c_{1,A}(Q_j)\\bigr).$$\nThe sign is $(-1)^{2(2j-2)}=1$. Associativity identifies the right-hand side with the required ordered product of $j$ first Chern classes. This completes the induction, including $j=1$, and proves the asserted equality for every $0\\leq j\\leq r$.",
+   "uses": [
+    "lem-pur-kummer-additivity",
+    "lem-pur-supported-cup-functoriality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-localized-top-chern.proof.md",
+    "place": "Step 4, property L4: pullback of the ordered Chern-root product"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-coefficient-twists-detailed",
+  "def-pur-complete-flag-bundle",
+  "def-pur-supported-cup",
+  "def-pur-vector-bundle-zero-section",
+  "def-sbc-smooth-morphisms",
+  "def-weil-finite-type-morphism",
+  "def-weil-proper-morphism",
+  "lem-amb-cartier-kummer-map",
+  "lem-exc-proetale-closed-exact",
+  "lem-pc-zero-scheme-divisor-iso",
+  "lem-pur-kummer-additivity",
+  "lem-pur-shifted-tensor-morphism-calculus",
+  "lem-pur-supported-cup-functoriality",
+  "lem-pur-twist-sheaf-locally-free",
+  "lem-weil-finite-compact-projection-formula",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "sbc-lem-affine-space-smooth"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-localized-top-chern.proof.md",
+  "place": "Steps 2 and 4 (nested-subspace correction already specified in the item); explicit induction using the counit projection map, Stacks Tag 0B56"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -47,10 +171,45 @@
    "results": "{\"t\": \"2026-10-18T02:15:51Z\", \"tool\": \"leansearch\", \"query\": \"Forgetting support of nested subbundle divisor classes is the product of first Chern classes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContMDiffAt.inner_bundle\", \"MeromorphicOn.divisor_fun_smul\", \"VectorBundle.prod\", \"FiberBundle.prod_trivializationAtlas'\", \"MeromorphicOn.divisor_zpow\", \"FiberBundle.prod\", \"Bundle.mdifferentiableOn_zeroSection\", \"MeromorphicOn.divisor_fun_mul\"], \"digest\": \"ee79d826da4ca72e\"}",
    "date": "2026-10-18",
    "verdict": "no match: hits concern different notions; none states this supported-cohomology or scheme-theoretic construction."
+  },
+  {
+   "tool": "grep",
+   "query": "Gysin|Cartier.*cohomology|firstChern|chernClass",
+   "results": "{\"t\": \"2026-10-18T02:35:37Z\", \"tool\": \"grep\", \"query\": \"Gysin|Cartier.*cohomology|firstChern|chernClass\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"Mathlib/CategoryTheory/Sites/Canonical.lean\"], \"digest\": \"17a4ebe8e1b1193c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits are scheme-ideal or projective-spectrum identities, group-cohomology maps, or incidental name substrings, not the supported Cartier-class formula."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Projection formula for closed immersions and multiplication of supported etale cohomology divisor classes",
+   "results": "{\"t\": \"2026-10-18T02:35:37Z\", \"tool\": \"leansearch\", \"query\": \"Projection formula for closed immersions and multiplication of supported etale cohomology divisor classes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion\", \"AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion\", \"AlgebraicGeometry.IsClosedImmersion.mk\", \"AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion\", \"AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion\", \"AlgebraicGeometry.IsImmersion.instOfIsClosedImmersion\", \"AlgebraicGeometry.IsClosedImmersion.of_comp\"], \"digest\": \"346fd5d320031a52\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits are scheme-ideal or projective-spectrum identities, group-cohomology maps, or incidental name substrings, not the supported Cartier-class formula."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Chern\"",
+   "results": "{\"t\": \"2026-10-18T02:35:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"Chern\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Lean.Meta.MatcherApp.matcherName\", \"Lean.Meta.Match.MkMatcherInput.matcherName\"], \"digest\": \"2e182d11eee43268\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits are scheme-ideal or projective-spectrum identities, group-cohomology maps, or incidental name substrings, not the supported Cartier-class formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Forgetting supports of iterated Cartier divisor classes for a complete flag of vector subbundles gives the cup product of first Chern classes",
+   "results": "{\"t\": \"2026-10-18T02:35:38Z\", \"tool\": \"leanfinder\", \"query\": \"Forgetting supports of iterated Cartier divisor classes for a complete flag of vector subbundles gives the cup product of first Chern classes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"AlgebraicGeometry.Proj.homOfLE_toBasicOpenOfGlobalSections_ι\", \"AlgebraicGeometry.Proj.mul_apply\", \"AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι_ι_eq_support_inter\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObjHom_comp\", \"AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι_ι\", \"AlgebraicGeometry.Scheme.IdealSheafData.inclusion_comp\"], \"digest\": \"c729ba6f56867b75\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits are scheme-ideal or projective-spectrum identities, group-cohomology maps, or incidental name substrings, not the supported Cartier-class formula."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projection formula naturality computes a composite of divisor Gysin morphisms as the product of their ordinary cohomology classes",
+   "results": "{\"t\": \"2026-10-18T02:35:39Z\", \"tool\": \"leanfinder\", \"query\": \"Projection formula naturality computes a composite of divisor Gysin morphisms as the product of their ordinary cohomology classes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"groupCohomology.π_map_apply\", \"groupCohomology.π_map\", \"groupCohomology.π_map_assoc\", \"groupCohomology.H1π_comp_map_apply\", \"groupCohomology.H1π_comp_map\", \"groupCohomology.infNatTrans\", \"groupCohomology.mapCocycles₁_comp_i\", \"groupCohomology.H2π_comp_map\"], \"digest\": \"df99f0d697c1e5b1\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected hits are scheme-ideal or projective-spectrum identities, group-cohomology maps, or incidental name substrings, not the supported Cartier-class formula."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-pur-localized-top-chern",
@@ -67,5 +226,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-pur-flag-localized-product",
+  "worker": "stage1",
+  "summary": "Q37: retained the already corrected nested-vector-subbundle statement; checked polynomial Cartier geometry and smoothness, coefficient domains and exact closed pushforwards; proved the forget-support equality by an explicit projection-map calculation and induction. Reused existing nodes throughout, with no new nodes or Mathlib leaves. Recorded real Mathlib searches and verbatim citation extracts. Repair of the landing refusal: reread the revised complete-flag definition, made the elementary adapted-frame construction for an arbitrary filtration explicit in Step 1, and refreshed its verbatim citation against the current DAG; the item statement and dependency ids are retained.",
+  "blueprint": "Realizes thm-pur-localized-top-chern proof Steps 2 and 4, specifically the nested-vector-subbundle correction already recorded in this item and the first-Chern-product calculation for L4. Does not assert the invalid successive-section construction on a singular zero locus.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-zero-scheme-divisor-iso",
+    "why": "Generic Cartier-zero-scheme line-bundle identification, used only after the explicit polynomial regularity check in Step 1; no replacement of the unit route."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic polynomial-chart smoothness tool for Step 2, with no purity assertion."
+   },
+   {
+    "node": "lem-exc-proetale-closed-exact",
+    "why": "Generic exactness of closed direct image for the quasi-compact complements checked in Step 2; needed to interpret the nested derived composites."
+   },
+   {
+    "node": "lem-weil-finite-compact-projection-formula",
+    "why": "Generic finite-coefficient proper projection formula, applied to a closed immersion and a shifted locally free coefficient line in Step 4; no smooth-purity input."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic counit-defined projection-map naturality and tensor-unit normalization, needed for the explicit adjunction calculation in Step 5."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic derived pullback/tensor comparison for the ordinary ringed topoi in Step 6."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-zero-scheme-divisor-iso",
+  "sbc-lem-affine-space-smooth",
+  "lem-exc-proetale-closed-exact",
+  "lem-weil-finite-compact-projection-formula",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-Codex-Q37-4226766a6",
+  "group": "Q37",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q37-4226766a6 (reviewer sub-agent of L); spot-checked: Read the full item, all eight steps, every cited statement, sources, and unit/chapter route. Verified finite coefficient witnesses, the actual projection-map naturality calculation, Cartier hypotheses, induction, signs, and edge cases. No new nodes, cycles through the item, dropped route-pivot dependencies, or substantive gaps. Accepted six declared tool uses; no fixes needed. Detailed checks are in review.md."
  }
 }
