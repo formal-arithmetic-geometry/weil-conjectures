@@ -14,9 +14,155 @@
   "def-weil-etale-morphism",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose any fs chart $R\\to M$ near $\\bar x$ and let $F\\subset R$ be the inverse image of $A^\\times$. It is a face because a product in a local ring is a unit exactly when both factors are units. The chart pushout gives $M_{\\bar x}=R_F\\oplus_{F^{\\rm gp}}A^\\times$. The face-sharpening lemma therefore identifies $\\overline M=M_{\\bar x}/A^\\times$ with the sharp fs monoid $R_F/F^{\\rm gp}$ and its group completion $C=B/A^\\times$ with $R^{\\rm gp}/F^{\\rm gp}$. In particular $C$ is finite free and $\\overline M$ embeds in $C$. The same pushout shows that $M_{\\bar x}$ is exactly the inverse image of $\\overline M$ inside $B$: if a group element has the class of a monoid element, their difference is a unit, so it too is a monoid element.",
+   "uses": [
+    "def-trf-fs-log-blowup",
+    "lem-trf-fs-face-sharpening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI Proposition 3.6.3, proof, printed p.252; explicit agent expansion of the prescribed inverse-image monoid and infinitesimal comparison argument attributed there to Kato (1988), Theorem 3.5."
+   }
+  },
+  {
+   "text": "Write $\\rho:G\\to C$ for $h$ followed by quotient by units, and $K=\\ker\\rho$. Choose a basis $c_1,\\ldots,c_d$ of the finite free group $C$ supplied by step 1 and lift each $c_j$ to $g_j\\in G$, using the assumed surjectivity of $\\rho$. Then $s(\\sum a_jc_j)=\\sum a_jg_j$ is a group section of $\\rho$ and $G=K\\oplus s(C)$. The subgroup theorem applied after a choice $G\\simeq\\mathbf Z^e$ makes $K$ finite free. From the inverse-image description in step 1, $P=\\rho^{-1}(\\overline M)=K\\oplus s(\\overline M)$. This equality is of actual submonoids of $G$ and keeps the specified $h$.",
+   "uses": [
+    "lem-weil-subgroup-finite-free-abelian-group-free"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI Proposition 3.6.3, proof, printed p.252; explicit agent expansion of the prescribed inverse-image monoid and infinitesimal comparison argument attributed there to Kato (1988), Theorem 3.5."
+   }
+  },
+  {
+   "text": "Let $m_1,\\ldots,m_v$ generate $\\overline M$, and let $k_1,\\ldots,k_e$ be a basis of $K$. Then $s(m_1),\\ldots,s(m_v),k_1,-k_1,\\ldots,k_e,-k_e$ generate $P$. It is integral as a submonoid of $G$. If $ag\\in P$ with $a>0$, then $a\\rho(g)\\in\\overline M$; saturation of $\\overline M$ in $C$ implies $\\rho(g)\\in\\overline M$ and hence $g\\in P$. Finally $\\overline M$ generates $C$, so $K\\oplus s(\\overline M)$ generates $K\\oplus s(C)=G$. Thus $P$ is fs and $P^{\\rm gp}\\to G$ is an isomorphism induced by the inclusion. Since $hi(0,q)=f^\\flat(q)\\in M_{\\bar x}$ for $q\\in Q$, the specified $u(q)=i(0,q)$ belongs to this very $P$.",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI Proposition 3.6.3, proof, printed p.252; explicit agent expansion of the prescribed inverse-image monoid and infinitesimal comparison argument attributed there to Kato (1988), Theorem 3.5."
+   }
+  },
+  {
+   "text": "The inverse image of $A^\\times$ under $h|_P$ is $K$, the unit group of $P$. The map $P\\oplus_K A^\\times\\to M_{\\bar x}$, $[p,v]\\mapsto h(p)v$, is surjective: lift the characteristic of a monoid element through $\\rho$ and correct by a unit. It is injective as well. If $h(p)v=h(p')v'$, then $\\rho(p)=\\rho(p')$ so $p'=p+k$ with $k\\in K$, and cancellation in $B$ gives $v=h(k)v'$. These two equalities are exactly the pushout relation $[p+k,v']=[p,h(k)v']$. Hence $h|_P$ satisfies the stalk-chart hypothesis, with its given germ, not a replacement germ.",
+   "uses": [
+    "def-trf-fs-log-blowup"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI Proposition 3.6.3, proof, printed p.252; explicit agent expansion of the prescribed inverse-image monoid and infinitesimal comparison argument attributed there to Kato (1988), Theorem 3.5."
+   }
+  },
+  {
+   "text": "Apply stalk-chart spreading to $h|_P$, using step 3 for finite generation and integrality and step 4 for the required pushout isomorphism. It gives a pointed etale neighbourhood $W$ and a chart $P\\to M|_W$ with exactly this germ. The two homomorphisms $Q\\to M|_W$, one from $u$ and this chart, the other from $f^\\flat$ and the fixed chart on $Y$, have equal germs. Choose a finite generating set of $Q$ and a common refinement of the finitely many pointed etale neighbourhoods on which these equalities hold. They then agree on every element of $Q$. Thus the base chart is retained. The chart ring map to functions gives a scheme map to the affine monoid spectrum by [lem-weil-pbc-morphism-into-affine-scheme]. The fibre-product universal property then gives the comparison $c:W\\to Z=Y\\times_{\\operatorname{Spec}\\mathbf Z[Q]}\\operatorname{Spec}\\mathbf Z[P]$.",
+   "uses": [
+    "lem-trf-fine-log-stalk-chart-spreading",
+    "def-trf-fs-log-blowup",
+    "def-weil-pbc-geometric-stalks",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI Proposition 3.6.3, proof, printed p.252; explicit agent expansion of the prescribed inverse-image monoid and infinitesimal comparison argument attributed there to Kato (1988), Theorem 3.5."
+   }
+  },
+  {
+   "text": "Put $T_j$ for the log section given by $i(e_j,0)\\in P$ on $W$. Its germ is $t_j$. Apply log-smooth infinitesimal calculus, including its etale-localization assertion. It gives a finite locally free logarithmic differential sheaf on $W$ and the same stalk module as in the hypothesis. Refine $W$ so that this sheaf is free. Its rank at $\\bar w$ is $r$ since the specified $d\\log t_j$ are a basis. In a local free frame the columns $d\\log T_j$ form an $r\\times r$ matrix with invertible determinant at $\\bar w$; restrict to the open where this determinant is a unit, using the adjugate formula for its inverse. The $d\\log T_j$ are then a basis throughout $W$. Also restrict so that $n$ is invertible, by spreading the germ of its inverse and the equation $n n^{-1}=1$. The case $r=0$ means a zero-rank sheaf and the empty matrix of determinant $1$.",
+   "uses": [
+    "lem-per-log-smooth-infinitesimal-calculus",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI Proposition 3.6.3, proof, printed p.252; explicit agent expansion of the prescribed inverse-image monoid and infinitesimal comparison argument attributed there to Kato (1988), Theorem 3.5."
+   }
+  },
+  {
+   "text": "The underlying $W\\to Y$ is locally of finite presentation by log-smooth calculus. The monoid presentation theorem gives finite generators and relations for $P$ and $Q$. Thus on an affine open $\\operatorname{Spec}R\\subset Y$, $Z$ is affine with algebra $D=R\\otimes_{\\mathbf Z[Q]}\\mathbf Z[P]$ finitely presented over $R$. Indeed, maps into this affine spectrum are ring maps out of $D$, hence exactly compatible ring maps out of $R$ and $\\mathbf Z[P]$; [lem-weil-pbc-morphism-into-affine-scheme] and the fibre-product universal property identify this spectrum with the indicated base change. For a finite presentation of $D$, take one variable per generator of $P$, its finitely many monoid relations as binomials, and the compatibility equations for the finitely many generators of $Q$. On any sufficiently small affine $V\\subset W$ mapping there, write its algebra as $B=R[x_1,\\ldots,x_a]/(f_1,\\ldots,f_b)$. If $y_1,\\ldots,y_c$ generate $D$ over $R$, represent each image in $B$ by $b_j(x)$. Then $B=D[x_1,\\ldots,x_a]/(f_1,\\ldots,f_b,y_1-b_1(x),\\ldots,y_c-b_c(x))$. This explicit presentation shows $c$ is locally of finite presentation.",
+   "uses": [
+    "lem-per-log-smooth-infinitesimal-calculus",
+    "lem-trf-fg-commutative-monoid-finite-presentation",
+    "def-sbc-locally-finite-presentation",
+    "lem-weil-pbc-morphism-into-affine-scheme",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI Proposition 3.6.3, proof, printed p.252; explicit agent expansion of the prescribed inverse-image monoid and infinitesimal comparison argument attributed there to Kato (1988), Theorem 3.5."
+   }
+  },
+  {
+   "text": "Consider an affine square-zero test $T_0\\hookrightarrow T$ for $c$, with ideal $I$, map $a_0:T_0\\to W$ and prescribed map $b:T\\to Z$. Give $T$ the log structure associated to the chart $P$ furnished by $b$, and $T_0$ its restriction. The general integral-chart logification lemma applies to this arbitrary scheme $T$, since $P$ is finitely generated and integral by step 3. It gives integral fine test log structures, strictness of the immersion, and the log morphism $a_0$ determined by its chart $P$. The maps to $Y$ agree through $Q$. Log-smooth calculus supplies an etale-local log lift $a:T\\to W$ over $Y$. For $p\\in P$, the log sections $a^\\flat(p)$ and $b^\\flat(p)$ agree modulo $I$. The strict-thickening fiber assertion of the logification lemma identifies the former with $b^\\flat(p)(1+\\epsilon(p))$ for a unique $\\epsilon(p)\\in I$: in the stalk pushout the fibre is the orbit of $\\ker(\\mathcal O_T^\\times\\to\\mathcal O_{T_0}^\\times)=1+I$, whose action is free by integrality. Multiplication and $I^2=0$ make $\\epsilon:P\\to I$ additive, hence extend it uniquely to $G=P^{\\rm gp}$. It is zero on $i(Q^{\\rm gp})$ since both maps are over $Y$.",
+   "uses": [
+    "lem-per-log-smooth-infinitesimal-calculus",
+    "def-trf-fs-log-blowup",
+    "lem-per-integral-chart-logification-thickening"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI Proposition 3.6.3, proof, printed p.252; explicit agent expansion of the prescribed inverse-image monoid and infinitesimal comparison argument attributed there to Kato (1988), Theorem 3.5."
+   }
+  },
+  {
+   "text": "Choose the log derivation represented by the unique linear map from the pullback of $\\omega_f$ to $I$ taking the basis $d\\log T_j$ to $-\\epsilon(i(e_j,0))$. Acting on $a$ by this derivation, as prescribed by log-smooth calculus, makes its new error $\\epsilon'$ zero on $i(\\mathbf Z^r\\oplus Q^{\\rm gp})$. Every class of $G/i(L)$ is killed by a power of $n$. Thus for each $g\\in G$ some $n^k g\\in i(L)$, so $n^k\\epsilon'(g)=0$; multiplication by $n$ on $I$ is invertible and $\\epsilon'(g)=0$. The corrected lift agrees with $b$ on $P$ and on $Y$, hence on $Z$: by [lem-weil-pbc-morphism-into-affine-scheme], on monoid rings their maps agree on every basis element $z^p$, and a fibre-product map is specified by its two components. This gives etale-local lifts of the ordinary test for $c$.",
+   "uses": [
+    "lem-per-log-smooth-infinitesimal-calculus",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-morphism-into-affine-scheme"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI Proposition 3.6.3, proof, printed p.252; explicit agent expansion of the prescribed inverse-image monoid and infinitesimal comparison argument attributed there to Kato (1988), Theorem 3.5."
+   }
+  },
+  {
+   "text": "Any two ordinary lifts over $Z$ are log lifts over $Y$ via the same chart $P$, by the associated-log universal property. Their difference is a log derivation by log-smooth calculus. It evaluates to zero on every $d\\log T_j$ since the lifts agree on $P$. These are a basis, so the derivation is zero and the lifts coincide, on every etale localization of $T$ as well. Apply the representable-presheaf sheaf theorem on $T_{\\rm Et}$ to the $T$-scheme $T\\times_ZW$. The etale-local lifts from step 9 agree on all overlaps by this uniqueness and glue to one lift over all of $T$. The first-order test therefore has exactly one global lift. Together with step 7, the locally-finitely-presented unique-lifting criterion proves $c$ etale. Steps 3--5 have already supplied every other conclusion and preserved the prescribed germ and base chart.",
+   "uses": [
+    "lem-per-log-smooth-infinitesimal-calculus",
+    "lem-per-integral-chart-logification-thickening",
+    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "lem-per-lfp-unique-infinitesimal-lifts-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI Proposition 3.6.3, proof, printed p.252; explicit agent expansion of the prescribed inverse-image monoid and infinitesimal comparison argument attributed there to Kato (1988), Theorem 3.5."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-fs-log-blowup",
+  "lem-trf-fs-face-sharpening",
+  "lem-weil-subgroup-finite-free-abelian-group-free",
+  "lem-trf-fine-log-stalk-chart-spreading",
+  "def-weil-pbc-geometric-stalks",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-morphism-into-affine-scheme",
+  "lem-per-log-smooth-infinitesimal-calculus",
+  "lem-trf-fg-commutative-monoid-finite-presentation",
+  "def-sbc-locally-finite-presentation",
+  "lem-per-integral-chart-logification-thickening",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+  "lem-per-lfp-unique-infinitesimal-lifts-etale"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI Proposition 3.6.3, proof, printed p.252; explicit agent expansion of the prescribed inverse-image monoid and infinitesimal comparison argument attributed there to Kato (1988), Theorem 3.5."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +198,38 @@
    "results": "lem-per-kato-lattice-chart-realization leanfinder Fine saturated monoid chart of a logarithmic scheme obtained from lattice and log differential basis\n[leanfinder] OK 8 hit(s)\n  {\"name\": \"NumberField.mixedEmbedding.fundamentalCone.realSpaceToLogSpace_completeFamily_of_ne\", \"module\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K] (i : { w // w ≠ NumberField.Units.dirichletUnitTheorem.w₀ }),\\n  NumberField.mixedEmbedding.fundamentalCone.realSpaceToLogSpace\\n      (NumberField.mixedEmbedding.fundamentalCone.completeFamily K ↑i) =\\n    ↑((NumberField.Units.basisUnitLattice\", \"doc\": \"For each infinite place $ i \\neq w_0 $ of a number field $ K $, the logarithmic embedding of the complete family element $ \\\\text{completeFamily}(K, i) $ corresponds to the basis vector $ \\\\text{basisUni\"}\n  {\"name\": \"NumberField.Units.dirichletUnitTheorem.logSpace\", \"module\": \"Mathlib/NumberTheory/NumberField/Units/DirichletTheorem\", \"type\": \"(K : Type u_1) → [inst : Field K] → [NumberField K] → Type (max 0 u_1)\", \"doc\": \"The type of real-valued functions defined on the set of infinite places of a number field $ K $ excluding a fixed infinite place $ w_0 $. This corresponds to the real vector space $ \\\\mathbb{R}^{r-1} $\"}\n  {\"name\": \"NumberField.mixedEmbedding.fundamentalCone.logMap_expMapBasis\", \"module\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K] (x : NumberField.mixedEmbedding.realSpace K),\\n  NumberField.mixedEmbedding.logMap\\n        (NumberField.mixedEmbedding.mixedSpaceOfRealSpace (↑NumberField.mixedEmbedding.fundamentalCone.expMapBasis x)) ∈\\n      ZSpan.fundamentalDomain\\n        \", \"doc\": \"For a number field $ K $, the image of the logarithmic map applied to the mixed space constructed from the exponential map basis lies within the fundamental domain of the unit lattice's $ \\\\mathbb{Z} $\"}\n  {\"name\": \"NumberField.Units.logEmbedding_fundSystem\", \"module\": \"Mathlib/NumberTheory/NumberField/Units/DirichletTheorem\", \"type\": \"∀ (K : Type u_1) [inst : Field K] [inst_1 : NumberField K] (i : Fin (NumberField.Units.rank K)),\\n  (NumberField.Units.logEmbedding K) (Additive.ofMul (NumberField.Units.fundSystem K i)) =\\n    ↑((NumberField.Units.basisUnitLattice K) i)\", \"doc\": \"For a number field $K$, the logarithmic embedding sends each fundamental unit $u_i$ (converted from multiplicative to additive structure) to the corresponding basis vector $v_i$ in the unit lattice $\\\\\"}\n  {\"name\": \"NumberField.mixedEmbedding.logMap\", \"module\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/FundamentalCone\", \"type\": \"{K : Type u_1} →\\n  [inst : Field K] →\\n    [inst_1 : NumberField K] →\\n      NumberField.mixedEmbedding.mixedSpace K → NumberField.Units.dirichletUnitTheorem.logSpace K\", \"doc\": \"The function maps an element $ x $ in the mixed embedding space of a number field $ K $ to the logarithmic space by assigning, for each infinite place $ w $, the value $ \\\\text{mult}(w) \\\\cdot \\\\left( \\\\l\"}\n  {\"name\": \"NumberField.mixedEmbedding.fundamentalCone.realSpaceToLogSpace_completeFamily_of_eq\", \"module\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K],\\n  NumberField.mixedEmbedding.fundamentalCone.realSpaceToLogSpace\\n      (NumberField.mixedEmbedding.fundamentalCone.completeFamily K NumberField.Units.dirichletUnitTheorem.w₀) =\\n    0\", \"doc\": \"For a number field $ K $ with a fixed infinite place $ w_0 $, the logarithmic embedding of the complete family of functions constructed from multiplicities at infinite places and inverse exponential m\"}\n  {\"name\": \"NumberField.mixedEmbedding.fundamentalCone.realSpaceToLogSpace_apply\", \"module\": \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K] (x : NumberField.mixedEmbedding.realSpace K)\\n  (w : { w // w ≠ NumberField.Units.dirichletUnitTheorem.w₀ }),\\n  NumberField.mixedEmbedding.fundamentalCone.realSpaceToLogSpace x w =\\n    x ↑w - (↑(↑w).mult * ∑ w', x w') * (↑(Module.finrank ℚ K)\", \"doc\": \"For any element $x$ in the real space of a number field $K$ and for any infinite place $w$ distinct from a fixed infinite place $w_0$, the logarithmic transformation $\\\\text{realSpaceToLogSpace}(x, w)$\"}\n  {\"name\": \"NumberField.Units.basisOfIsMaxRank_apply\", \"module\": \"Mathlib/NumberTheory/NumberField/Units/Regulator\", \"type\": \"∀ {K : Type u_1} [inst : Field K] [inst_1 : NumberField K]\\n  {u : Fin (NumberField.Units.rank K) → (NumberField.RingOfIntegers K)ˣ} (hu : NumberField.Units.IsMaxRank u)\\n  (i : Fin (NumberField.Units.rank K)),\\n  (NumberField.Units.basisOfIsMaxRank hu) i = (NumberField.Units.logEmbedding K) (Additive.\", \"doc\": \"For a number field $ K $ with ring of integers $ \\\\mathcal{O}_K $, given a family $ u : \\\\mathrm{Fin}(r-1) \\\\to (\\\\mathcal{O}_K)^\\\\times $ of units (where $ r $ is the number of infinite places of $ K $) s\"}\nRead all returned types: ordinary differentials/standard smoothness, divisible group injectivity, free-group structure, and number-field logarithmic units do not state this assertion. In particular injective divisible groups require divisibility by every integer, unlike the n-divisible subgroup here.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Realize prescribed lattice of logarithmic sections as a fine saturated chart with etale comparison using a basis of logarithmic differentials",
+   "results": "Read returned hits: NumberField.mixedEmbedding.fundamentalCone.realSpaceToLogSpace_completeFamily_of_ne, NumberField.mixedEmbedding.fundamentalCone.logMap_expMapBasis, Algebra.IsStandardSmooth.of_basis_kaehlerDifferential, NumberField.Units.logEmbedding_fundSystem, StandardEtalePresentation.P, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, NumberField.mixedEmbedding.fundamentalCone.realSpaceToLogSpace_completeFamily_of_eq, Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial.  No hit states this logarithmic assertion.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Prescribed lattice chart logarithmic smooth morphism etale comparison map logarithmic differential basis",
+   "results": "Read returned hits: AlgebraicGeometry.IsSmooth.casesOn, Algebra.SubmersivePresentation.basisDeriv, AlgebraicGeometry.IsSmooth.recOn, AlgebraicGeometry.IsSmooth.mk, AlgebraicGeometry.IsSmooth, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instIsSmooth, RingHom.Etale.  No hit states this logarithmic assertion.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"LogScheme\"",
+   "results": "Read returned hits: .  No hit states this logarithmic assertion.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "logarithmic.*(smooth|derivation|differential)|LogScheme|LogStructure",
+   "results": "Read returned hits: Mathlib/FieldTheory/Differential/Basic.lean.  No hit states this logarithmic assertion.",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-trait-log-smooth-uniformizer-chart",
@@ -81,5 +255,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-kato-lattice-chart-realization",
+  "worker": "stage1",
+  "summary": "Preserved the prescribed-lattice statement. Constructed P as the inverse image of the fs characteristic monoid, computed its exact stalk logification, spread the specified chart compatibly with Q, and proved the comparison etale by correcting a log-smooth infinitesimal lift using the prescribed differential basis and n-primary lattice quotient. Reused existing monoid and chart-spreading inputs. Added general log-smooth deformation calculus, the ordinary unique-lifting criterion, and integral chart logification on arbitrary schemes as statement-only nodes. The latter repairs the locally-Noetherian restriction on the existing associated-log lemma when testing arbitrary affine thickenings. Kato section 3 is WANTED, so this expanded proof is honestly marked agent-written.",
+  "blueprint": "Expands the Kato-chart subargument in the Proposition 3.6.3 proof cited by the uniformizer-chart ancestry of lem-per-artin-gabber-affine-curve, proof step 3; fixed chapter and unit route retained.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-fs-face-sharpening",
+    "why": "Generic fs-monoid localization/sharpening gives the characteristic monoid and its free group, without log regularity."
+   },
+   {
+    "node": "lem-trf-fine-log-stalk-chart-spreading",
+    "why": "Spreads a specified stalk chart after its exact logification is established; not a replacement for the prescribed-lattice argument."
+   },
+   {
+    "node": "lem-trf-fg-commutative-monoid-finite-presentation",
+    "why": "Generic finite monoid presentation used to write the finite algebra presentation of Z."
+   },
+   {
+    "node": "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+    "why": "Generic scheme-morphism gluing on the etale site, used only after unique corrected lifts are proved."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-fs-face-sharpening",
+  "lem-trf-fine-log-stalk-chart-spreading",
+  "lem-trf-fg-commutative-monoid-finite-presentation",
+  "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-N4-7c0e40aec",
+  "group": "N4",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N4-7c0e40aec (reviewer sub-agent of L); spot-checked: I read the item, its 10 steps, the three new nodes, the parent's steps 1-3 and the statement of every cited node. Sources read: ILO XVI 3.6.2-3.6.4, printed pp.252-253; Stacks 02HG (more-morphisms.tex l.1508) and 02HM (l.1706). The item statement is unchanged and is exactly the last paragraph of ILO 3.6.3: P = h^{-1}(M_x), the prescribed germ h|_P, the fixed base chart Q and an etale comparison to Y x_{Z[Q]} Z[P]. No target is weakened and no SGA is used. Step checks: step 1 gives M_x = R_F (+)_{F^gp} A^x, the characteristic monoid R_F/F^gp by face-sharpening, and M_x as the full inverse image by integrality. In step 2, K is free and P = K (+) s(Mbar). Step 3: P is fs and P^gp = G. Step 4: P^x = K = E, and the pushout map is injective by cancellation. Step 5: the spreading hypotheses hold, and finitely many germ equalities keep the Q-chart. Step 6: the dlog basis spreads by a determinant argument and n^{-1} is spread. Step 7: I checked the presentation B = D[x]/(f, y-b(x)) is correct. Step 8: the test log structure on an arbitrary T comes from the new logification node, and the error map eps: P -> I is additive and zero on Q. Step 9: a derivation cancels eps on Z^r; eps is then zero on G because G/i(L) is n-power torsion and n is a unit on T_0. Step 10: lifts are unique because a derivation vanishing on a basis is zero; they glue on T_Et, and 02HM gives etaleness. Small cases tested: P=0 or r=0; A^1 with t=1+x; the Kummer chart N->N, 1->d, with d invertible, and its failure in characteristic p dividing d. New nodes, all true and not restatements: the log-smooth calculus is Kato 3.3/3.5/3.9/3.10. The logification node generalises lem-trf-associated-log-universal-stalks, which is locally Noetherian only and so cannot serve arbitrary affine tests; strictness and the 1+I torsor clause checked. The 02HM node is not a duplicate (lem-weil-pbc-flat-unramified-formally-etale is the converse), and Mathlib has no scheme-level FormallyEtale. No cycles. The 4 declared tool_uses are accepted as generic: face-sharpening, chart-spreading, finite monoid presentation, small-etale representable sheaf. Batch-5 flags: I computed the closures of lem-trf-commutative-monoid-sheafification, fs-face-sharpening, fine-log-stalk-chart-spreading, fg-commutative-monoid-finite-presentation, def-trf-fs-log-blowup and def-per-fs-log-smooth-etale. They contain no thm-*, sk-thm-*, nt-*, trace or Poincare node; all are generic monoid/log algebra or definitions, neither assumption gives them and none is a step of either proof, so all are accepted. FIX: (1) B2/B3: lem-per-log-smooth-infinitesimal-calculus quantified over arbitrary (non-Noetherian) test log schemes but defined log structures only through def-trf-fs-log-blowup, which is locally Noetherian. I added an inline definition of log structures, fine charts and log morphisms on an arbitrary T, and stmt_deps += def-weil-pbc-etale-site and def-weil-pbc-geometric-stalks. (2) Item step 7 was marked elementary although it cites two non-trivial theorems; set to false.; 2 file(s) fixed by the reviewer"
  }
 }
