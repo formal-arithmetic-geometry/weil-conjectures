@@ -1,6 +1,6 @@
 # Work queue
 
-1444 items; claim with `tools/claim.py next <group> [--stage N]`.
+1446 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (1444)
+## Stage 3: modules to prove (1446)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -166,6 +166,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.WeilTensorProduct` | 7 | 12 | proof | 1 |
 | `Sheaf.AlgebraicGeometry.AffinePuncturedLineAlgebra` | 8 | 1 | proof | 1 |
 | `Sheaf.Paper.A1QbarOpenClosedCohomology` | 8 | 1 | proof | 1 |
+| `Sheaf.Paper.MiddleExtensionHcZero` | 8 | 1 | proof | 1 |
 | `Sheaf.Paper.RealSheavesSetup` | 8 | 2 | proof | 1 |
 | `Sheaf.Paper.WeilOpenImageDelta` | 8 | 1 | proof | 1 |
 | `Sheaf.AlgebraicGeometry.NormalOpenLisseImage` | 10 | 1 | proof | 1 |
@@ -452,6 +453,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.CoefficientFiniteDescentHom` | 7 | 1 | proof | 2 |
 | `Sheaf.Paper.CoefficientFiniteDescentLisse` | 7 | 1 | proof | 2 |
 | `Sheaf.Paper.CoefficientHeartSmall` | 7 | 1 | proof | 2 |
+| `Sheaf.Paper.CoefficientRingedSequenceSite` | 7 | 15 | proof | 2 |
 | `Sheaf.Paper.CompletedOperationTowerSubstitution` | 7 | 1 | proof | 2 |
 | `Sheaf.Paper.CompletedPullbackAdjunction` | 7 | 1 | proof | 2 |
 | `Sheaf.Paper.DerivedDirectImageOpenCoherence` | 7 | 1 | proof | 2 |
@@ -686,7 +688,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.BoundedFlatReplacement` | 7 | 2 | proof | 3 |
 | `Sheaf.Paper.CoefTowerCoaugmentation` | 7 | 5 | proof | 3 |
 | `Sheaf.Paper.CoefficientExtensionReductionModel` | 7 | 4 | proof | 3 |
-| `Sheaf.Paper.CoefficientRingedSequenceSite` | 7 | 15 | proof | 3 |
 | `Sheaf.Paper.CompactSupportExchangeTransport` | 7 | 1 | proof | 3 |
 | `Sheaf.Paper.CompletedMapReduction` | 7 | 3 | proof | 3 |
 | `Sheaf.Paper.CompletedProjectionCoherence` | 7 | 1 | proof | 3 |
@@ -862,6 +863,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.RingTheory.HenselianResidueGaloisAction` | - | 1 | proof | 3 |
 | `Sheaf.SecSmoothPurity.MixedBaseChange` | - | 1 | proof | 3 |
 | `Sheaf.SecSmoothPurity.ReductionExceptional` | - | 5 | proof | 3 |
+| `Sheaf.SixFunctors.ProEtale.SmallCoefficientDerivedCompletion` | - | 7 | proof | 3 |
 | `Sheaf.SixFunctors.SemilinearProperOpenMatePasting` | - | 33 | proof | 3 |
 | `Sheaf.AlgebraicGeometry.CompactSupportActionBaseChange` | 5 | 3 | proof | 4 |
 | `Sheaf.AlgebraicGeometry.EtaleGeometricFibreCompactSections` | 5 | 1 | proof | 4 |
@@ -1459,7 +1461,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Algebra.Homology.SplitCellComplexKFlat` | - | 1 | proof | 21 |
 | `Sheaf.CategoryTheory.BoundedFilteredPageFunctorNormalized` | - | 1 | proof | 21 |
 
-## Stage 3: waiting for statements of dependencies (79)
+## Stage 3: waiting for statements of dependencies (80)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
@@ -1513,7 +1515,6 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.PurityDiagonalSectionPasting` | 7 | 15 | `fix-lem-exchanges` |
 | `Sheaf.Paper.RationalOpenDirectImageConstructible` | 7 | 1 | `det-prop-scalar-six-pullback` |
 | `Sheaf.Paper.IntegralStratumExtBound` | 8 | 1 | `sk-lem-int-integral-heart` |
-| `Sheaf.Paper.MiddleExtensionHcZero` | 8 | 1 | `lem-a1-constructible-degree-zero-proper-support` |
 | `Sheaf.Paper.ProperHeartBoundLattice` | 8 | 1 | `sk-lem-integral-models` |
 | `Sheaf.Paper.ProperHeartBoundReduction` | 8 | 1 | `det-prop-scalar-six-pullback` |
 | `Sheaf.Paper.UniformConstructibleExtIntegral` | 8 | 1 | `sk-lem-integral-models` |
@@ -1528,6 +1529,7 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.AdicSmoothDualizingComplexes` | - | 12 | `lem-pur-adic-purity-scalar-naturality` |
 | `Sheaf.Paper.CommonStageFourierWeightUpper` | - | 2 | `lem-trf-rational-local-frobenius-powers` |
 | `Sheaf.Paper.CompletedStalkFrobeniusReduction` | - | 1 | `lem-trf-fixed-stalk-identification-reduction` |
+| `Sheaf.Paper.ConstructibleDegreeZeroProperSupport` | - | 5 | `lem-a1-adic-compactification-section-realization` |
 | `Sheaf.Paper.DetThmSfCtfStabilityInternalHom` | - | 1 | `sk-lem-int-integral-heart` |
 | `Sheaf.Paper.DiagonalTowerLimit` | - | 6 | `sk-lem-integral-models` |
 | `Sheaf.Paper.DualStalkFrobenius` | - | 1 | `lem-tw-lisse-rational-realization` |
@@ -1535,6 +1537,7 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `Sheaf.Paper.FourierKernelConvolution` | - | 8 | `sk-thm-sf-package` |
 | `Sheaf.Paper.FrobeniusOperatorCompactDescription` | - | 1 | `lem-weil-frobenius-cohomology-transport-iso` |
 | `Sheaf.Paper.IntegralDirectImageTower` | - | 1 | `sk-lem-integral-models` |
+| `Sheaf.Paper.IntegralHeartLocalModel` | - | 9 | `sk-lem-integral-models` |
 | `Sheaf.Paper.LocalFrobeniusConjugacyClass` | - | 1 | `lem-weil-frobenius-cohomology-transport-iso` |
 | `Sheaf.Paper.QuasiFiniteCompactSupportWeights` | - | 1 | `lem-a1-finite-weil-sections-decomposition` |
 | `Sheaf.Paper.RationalPurityPresentation` | - | 13 | `lem-pur-adic-purity-scalar-naturality` |
