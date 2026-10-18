@@ -332,7 +332,7 @@ lemma quotSpanPowSuccShortComplex_shortExact {ϖ : Λ} (hϖ : ϖ ∈ nonZeroDivi
         ring)⟩
     · rintro ⟨x, rfl⟩
       have := ConcreteCategory.congr_hom (quotSpanPowSuccShortComplex ϖ m).zero x
-      simpa using this
+      simp at this ⊢
   · intro x y h
     obtain ⟨w, rfl⟩ := Submodule.Quotient.mk_surjective _ x
     obtain ⟨w', rfl⟩ := Submodule.Quotient.mk_surjective _ y
