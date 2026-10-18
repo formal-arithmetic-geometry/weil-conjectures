@@ -8110,6 +8110,7 @@ public import WeilConjectures.ConstructibleSheaf.FiniteSetMonodromyTorsor
 public import WeilConjectures.ConstructibleSheaf.FiniteTypePushforward
 public import WeilConjectures.ConstructibleSheaf.FreeLifting
 public import WeilConjectures.ConstructibleSheaf.GenericConstancy
+public import WeilConjectures.ConstructibleSheaf.IntegralGenericCriterion
 public import WeilConjectures.ConstructibleSheaf.InternalHom
 public import WeilConjectures.ConstructibleSheaf.KernelCokernel
 public import WeilConjectures.ConstructibleSheaf.LisseLocus
@@ -10742,6 +10743,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.State
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.ThirdStep
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne.Transport
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImage
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImageSigma
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteBoundary
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteCancellation
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteComparison
