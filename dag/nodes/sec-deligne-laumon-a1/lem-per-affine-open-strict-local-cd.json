@@ -18,9 +18,68 @@
   "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-etale-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First handle a constructible sheaf. Let $C$ be a constructible sheaf of $\\Lambda$-modules on the small etale site of $V$. The affine-open specialization of Gabber’s affine Lefschetz theorem, [lem-per-affine-open-strict-local-cd-constructible], applies to the given Noetherian excellent strictly henselian local scheme $X$, its affine open $V$, the invertible prime-power coefficient ring $\\Lambda$, and $C$. It gives $H^q(V,C)=0$ for every $q>d$.",
+   "uses": [
+    "lem-per-affine-open-strict-local-cd-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XV, Corollary 1.2.2, printed p. 219, for the affine open immersion V -> X with delta_X(t) = dim of the closure of {t}, so that f_*delta_X(C) <= d; Corollary 1.2.4, printed p. 220, is its constant-coefficient case."
+   }
+  },
+  {
+   "text": "For an arbitrary sheaf $M$ of $\\Lambda$-modules, [lem-weil-pbc-module-sheaf-colimit-constructible] expresses $M$ as a filtered colimit $M\\cong\\varinjlim_a C_a$ of constructible sheaves of $\\Lambda$-modules on the qcqs scheme $V$. The hypotheses on $V$ hold because it is affine: [lem-weil-pbc-affine-scheme-qcqs] gives quasi-compactness and quasi-separatedness.",
+   "uses": [
+    "lem-weil-pbc-module-sheaf-colimit-constructible",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03SA (lemma-torsion-colimit-constructible), part (3), applied to the finite ring $\\Lambda$."
+   }
+  },
+  {
+   "text": "Filtered colimits commute with etale cohomology on a quasi-compact quasi-separated scheme by [lem-weil-pbc-cohomology-filtered-colimit], so $\\varinjlim_a H^q(V,C_a)\\xrightarrow{\\sim}H^q(V,M)$ for every $q\\geq0$. The module-valued formulation is identified with the underlying abelian-sheaf cohomology by [lem-weil-pbc-etale-module-cohomology-forget].",
+   "uses": [
+    "lem-weil-pbc-cohomology-filtered-colimit",
+    "lem-weil-pbc-etale-module-cohomology-forget"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Lemma 03Q5 (lemma-colimit), with Sites Lemma 03FD (lemma-cohomology-modules-abelian-agree)."
+   }
+  },
+  {
+   "text": "Each $C_a$ is constructible, so Step 1 gives $H^q(V,C_a)=0$ whenever $q>d$. The filtered colimit in Step 3 is therefore zero in those degrees, and hence $H^q(V,M)=0$ for every $q>d$.",
+   "uses": [
+    "lem-per-affine-open-strict-local-cd-constructible",
+    "lem-weil-pbc-cohomology-filtered-colimit",
+    "lem-weil-pbc-etale-module-cohomology-forget"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XV, Corollary 1.2.4 together with the filtered-colimit extension used after the constructible assertion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-affine-open-strict-local-cd-constructible",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-cohomology-filtered-colimit",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "lem-weil-pbc-module-sheaf-colimit-constructible"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XV, Corollaries 1.2.2 and 1.2.4, printed pp. 219–220, followed by Stacks etale-cohomology Lemma 03SA and Lemma 03Q5 and Sites Lemma 03FD for arbitrary finite-ring module sheaves."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -59,7 +118,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-strict-local-etale-dimension-bounds",
@@ -71,7 +130,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Proof Step 1: dimension-normalized Verdier duality and the middle t-structure (historically Step 3 when this child was created); the finite-coefficient potential-dualizing construction underlying the qbar generic duality model. Supporting the normal top-class argument: Expose XVII, Propositions 3.2.1 and 3.2.2, printed pp. 268–269; the punctured support estimate is proved for Z/ell^n directly by the constructible-support and affine-cover argument; the affine-open input of ILO XVII 3.2.1 and 3.2.2, applied to support-parameter intersections before Cech and to principal opens before the generic limit.",
+   "place": "Proof Step 1 of lem-per-artin-gabber-affine-curve: the affine-open cohomological-dimension input (ILO XV Corollary 1.2.4) used in the affine-open specialization; the arbitrary-sheaf assertion is obtained by the filtered-colimit extension of the constructible assertion.",
    "via": [
     "lem-per-strict-local-etale-dimension-bounds",
     "lem-per-normal-top-residue-class",
@@ -84,5 +143,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-affine-open-strict-local-cd",
+  "worker": "stage1",
+  "summary": "Split the affine-open Gabber bound into the constructible affine-open corollary and the filtered-colimit extension. Checked the exact excellent strictly henselian local and affine-open hypotheses against ILO XV Corollaries 1.2.2 and 1.2.4. Used the existing constructible-colimit, affine-qcqs, filtered-cohomology-colimit, and module-to-abelian comparison nodes; no Lean was written or compiled.",
+  "blueprint": "The proof realizes the affine-open cohomological-dimension input in the parent blueprint proof (ILO XV Corollary 1.2.4) in Step 1, then supplies the arbitrary-sheaf filtered-colimit extension required by the item statement."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NA-7e05f1e81",
+  "group": "NA",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-7e05f1e81 (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node lem-per-affine-open-strict-local-cd-constructible, every cited statement, the unit route, and the source ILO (arXiv 1207.3648) Exposé XV 1.1.2–1.2.6 (printed pp. 219–220). The item statement is unchanged from live. Mathematics accepted. The new node follows from ILO XV Cor. 1.2.2 applied to the affine, finite-type open immersion V→X: there f_*δ_X = δ_X|_V ≤ d. Excellent implies quasi-excellent, Λ=Z/ℓ^n has ℓ^n invertible, and the constructibility notion is the same one the colimit node uses. Steps 2–4 are correct: filtered colimit of constructible sheaves on the qcqs affine V, cohomology commuting with filtered colimits (module form), and the forget comparison; Step 4 is elementary. Edge cases checked: d=0, V empty, the generic point of a strictly henselian DVR (cd_ℓ=1), and non-constructible M. No duplicate found (grep for XV 1.2.x, affine Lefschetz, Gabber and cd with strictly local; the closest nodes are punctured-support-cohomological-bound, strict-local-etale-dimension-bounds and the trf nearby-cycle bound). The units sk-thm-p1 and sk-prop-h2 are in the route, so no tool_uses are needed. The citer strict-local-etale-dimension-bounds Steps 6 and 10 are covered. FIX: (1) the new node's source.place and blueprint.from.place, and the item's Step 1 source, named XV 1.2.4 ('equivalent to 1.2.2 for constructible'). 1.2.4 is the constant Z/n case only; the constructible statement comes directly from 1.2.2 for the open immersion, so the places now cite 1.2.2 with the δ computation. (2) Item Step 1 used C without introducing it; it is now introduced. No SGA is cited and no statement changed.; 2 file(s) fixed by the reviewer"
  }
 }
