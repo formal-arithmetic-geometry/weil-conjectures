@@ -21,101 +21,67 @@
  ],
  "proof": [
   {
-   "text": "Work throughout in the coefficient category $\\mathcal A$ of the statement. For $\\Ab(\\mathcal C)$, small sequential colimits exist and are exact by the filtered-colimits theorem. For $\\Mod(\\mathcal O)$, the module-colimits theorem gives an abelian category, a faithful exact forgetful functor $U$ to $\\Ab(\\mathcal C)$, and existence of small colimits with $U(\\varinjlim M_n)=\\varinjlim U(M_n)$. Thus taking the underlying abelian sheaves of the colimit of a sequential diagram of short exact module sequences gives an exact sequence. This reflects exactness: $U$ preserves kernels and cokernels, so it preserves the homology object of a three-term sequence, and $U(H)=0$ implies $1_H=0$ by faithfulness. Kernels and cokernels detect the endpoint monicity and epicity in the same way. Hence sequential colimits are exact in either coefficient category. This is not an identification of their derived categories.",
+   "text": "For abelian sheaves use exact filtered colimits. For module sheaves use the exact forgetful functor to abelian sheaves: Mathlib HasExactColimitsOfShape.domain_of_functor reflects finite limits and preserves filtered colimits. Shrink the filtered-index universe to Type 0. The same exactness holds in cochain complexes degreewise by HomologicalComplex.hasExactColimitsOfShape. CountableAB4.of_countableAB5 gives exact countable coproducts in each coefficient category.",
    "uses": [
     "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
     "lem-weil-pbc-module-sheaves-colimits-forgetful"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03CO (lemma-limits-colimits-abelian-sheaves), 03DA (lemma-abelian), 03DB (lemma-limits-colimits)"
-   }
+   "elementary": false
   },
   {
-   "text": "For $m\\ge0$ form $B_m=\\bigoplus_{n<m}E_n^\\bullet$ and $C_m=\\bigoplus_{n\\le m}E_n^\\bullet$. Map $v_m:B_m\\to C_m$ by $\\iota_n-\\iota_{n+1}f_n$, and map $q_m:C_m\\to E_m^\\bullet$ by the sum of the transition maps $f_{n,m}$. The sequence $0\\to B_m\\xrightarrow{v_m}C_m\\xrightarrow{q_m}E_m^\\bullet\\to0$ is split exact as complexes. Here $f_{n,m}=f_{m-1}\\cdots f_n$ for $n<m$ and $f_{m,m}=1$. Indeed $q_m v_m=0$ since $f_{n,m}=f_{n+1,m}f_n$, and $q_m$ has the last-summand section. If $v_m(x)=0$, its first coordinate gives $x_0=0$ and its subsequent coordinates give $x_n=f_{n-1}x_{n-1}=0$, so $v_m$ is monic; for a tuple $y$ in $\\ker(q_m)$ set $x_0=y_0$ and $x_n=y_n+f_{n-1}x_{n-1}$ for $n<m$. Then $v_m(x)=y$: the last equation is $y_m=-f_{m-1}x_{m-1}$, precisely $q_m(y)=0$. These finite matrix formulas are morphisms in $\\mathcal A$ and commute with differentials. For $m=0$ this is $0\\to0\\to E_0\\xrightarrow{1}E_0\\to0$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 093W (lemma-compute-colimit), finite initial-sum exact sequences; Tag 0949 (lemma-colim-hocolim)"
-   }
-  },
-  {
-   "text": "The inclusions $B_m\\to B_{m+1}$ and $C_m\\to C_{m+1}$, together with $f_m:E_m\\to E_{m+1}$, make these short exact sequences a sequential diagram: on the $n$-th summand both composites to $E_{m+1}$ are $f_{n,m+1}$. Its index $\\mathbf N$ is small and filtered. Apply the exactness of sequential colimits in $\\mathcal A$ established in step 1 separately in every cochain degree. Both colimits of finite sums are $A$: a compatible family of maps out of the finite sums is exactly a family of maps out of all $E_n$. Thus the colimit sequence is $0\\to A\\xrightarrow{u}A\\xrightarrow{q}L\\to0$, exact degreewise. The identifications commute with the differentials since all injections and transition maps are chain maps.",
+   "text": "Apply [lem-kun-sequential-telescope-mono] in the abelian category of cochain complexes to the specified coproduct B and telescope map u. This gives monicity without a monic-transition hypothesis.",
    "uses": [
-    "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+    "lem-kun-sequential-telescope-mono"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 093W (lemma-compute-colimit), finite initial-sum exact sequences; Tag 0949 (lemma-colim-hocolim)"
-   }
+   "elementary": false
   },
   {
-   "text": "The colimit relation $q\\iota_{n+1}f_n=q\\iota_n$ gives $qu=0$. In degree $r$, with the cone convention $\\operatorname{Cone}(u)^r=A^r\\oplus A^{r+1}$ and $d(b,a)=(db+ua,-da)$, the map $p^r(b,a)=q^r(b)$ satisfies $p^{r+1}d(b,a)=dq^r(b)$ because $qu=0$. This constructs exactly the asserted canonical chain map, without choosing an isomorphism of triangulated cones.",
+   "text": "The coproduct equations and the cocone equations imply uq=0, checked after every coprojection. A morphism r from B with ur=0 gives a cocone on E, since the equality on each consecutive transition is precisely (iota_n - f_n iota_{n+1})r=0. The universal property of L therefore gives a unique factorization through q. Thus q is a cokernel of u. Together with monicity this is the asserted short exact sequence of complexes. The Lean helper telescope_cokernel constructs this cokernel universal property explicitly.",
    "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use mappingCone.descShortComplex for the short exact sequence. Its restrictions are q and zero, and [lem-pc-cone-short-exact-quasi-iso] gives its quasi-isomorphism. Localization makes its image invertible; asIso provides the required e with e.hom=Q.map p.",
+   "uses": [
+    "lem-pc-cone-short-exact-quasi-iso",
     "def-weil-abstract-derived-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0949 (lemma-colim-hocolim); Tag 0152 (lemma-derived-canonical-delta-functor), cone comparison"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the canonical cone projection theorem to the short exact sequence of complexes from step 3, in the abelian category $\\mathcal A$. It asserts that the map from $\\operatorname{Cone}(u)$ to $L$, equal to $q$ on the unshifted summand and zero on the shifted summand, is a quasi-isomorphism. Its two restrictions identify it with the map $p$ constructed in step 4, giving the conclusion.",
-   "uses": [
-    "lem-pc-cone-short-exact-quasi-iso"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0949 (lemma-colim-hocolim); Tag 0152 (lemma-derived-canonical-delta-functor), cone comparison"
-   }
-  },
-  {
-   "text": "Countable sums in $\\mathcal A$ are exact. Indeed, for any countable family of short exact sequences take its finite initial sums: these are short exact because finite biproducts preserve kernels and cokernels coordinatewise. Their sequential colimit is the countable-sum sequence: maps out of the finite initial sums compatible with inclusions are exactly families of maps from the summands. Exact sequential colimits from step 1 therefore give exactness of that sequence. A finite or empty family is handled by its finite biproduct, and an arbitrary infinite countable family is reindexed by $\\mathbf N$. Apply [lem-kun-derived-countable-sums-exact] to $(E_n^\\bullet)$ in $\\mathcal A$. Its exact-countable-sums hypothesis has just been verified, so $Q(A^\\bullet)$ with the actual maps $Q(\\iota_n)$ is the coproduct of the $Q(E_n^\\bullet)$ in $D(\\mathcal A)$, without a boundedness hypothesis.",
+   "text": "Apply [lem-kun-derived-countable-sums-exact] and transport preservation from its chosen degreewise coproduct to the specified B. This yields the actual coprojections Q.map (B.inj n). Essential surjectivity of Q then gives all countable coproducts in the derived category: choose complex preimages for an arbitrary countable family and transport its mapped coproduct across the component isomorphisms.",
    "uses": [
     "lem-kun-derived-countable-sums-exact",
     "def-weil-pbc-category-colimit",
-    "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+    "def-weil-abstract-derived-category"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 093W (lemma-compute-colimit), first assertion; Tag 0A5L (lemma-direct-sums)"
-   }
+   "elementary": false
   },
   {
-   "text": "By the cone-triangle convention, $Q(A)\\xrightarrow{Q(u)}Q(A)\\to Q(\\operatorname{Cone}(u))\\to Q(A)[1]$ is distinguished. Step 6 supplies its two genuine derived coproducts. Additivity of $Q$ and the defining equations on each coprojection give $Q(u)Q(\\iota_n)=Q(\\iota_n)-Q(\\iota_{n+1})Q(f_n)$, so its first map is exactly $1-\\operatorname{shift}$ in the definition of homotopy colimit. This triangle therefore exhibits $Q(\\operatorname{Cone}(u))$ as a homotopy colimit. Step 5 makes $Q(p)$ an isomorphism. Replace the third vertex by $Q(L)$, compose the second arrow with $Q(p)$, and precompose the last arrow with $Q(p)^{-1}$: the resulting triangle is isomorphic to the cone triangle and hence distinguished. Its second arrow is $Q(q)$ because $p$ restricted to the cone inclusion is $q$. Thus $Q(L)$ is a homotopy colimit with its actual structure maps. All calculations were performed in $\\mathcal A$, so the module case follows within $D(\\Mod(\\mathcal O))$, including constant coefficients on the small etale site. The assertion makes no canonical-isomorphism claim for an arbitrary separately chosen triangulated cone.",
+   "text": "The localized mapping-cone triangle is distinguished. Triangle.isoMk transports its third vertex along e; its second square is Q(inr)Q(p)=Q(q), and its third square cancels e.hom with e.inv. For either triangle identify its first two vertices with the chosen derived coproduct using the unique coproduct isomorphism. Checking each coprojection, additivity of Q and hu identify its first arrow with identity minus successor. The remaining arrows transport with this coproduct isomorphism and its shifted inverse. This supplies both instances of [def-kun-truncations], with the same countable-coproduct structure.",
    "uses": [
-    "def-weil-abstract-derived-category",
-    "def-kun-truncations"
+    "def-kun-truncations",
+    "def-weil-abstract-derived-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0949 (lemma-colim-hocolim); Tag 090Z (definition-derived-colimit)"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-site-abelian-sheaves-filtered-colimits-exact",
   "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-kun-sequential-telescope-mono",
   "def-weil-pbc-category-colimit",
-  "def-weil-abstract-derived-category",
   "lem-pc-cone-short-exact-quasi-iso",
+  "def-weil-abstract-derived-category",
   "lem-kun-derived-countable-sums-exact",
   "def-kun-truncations"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 093W (lemma-compute-colimit), finite initial-sum exact sequences; Tag 0949 (lemma-colim-hocolim)"
+  "place": "Tags 093W (lemma-compute-colimit), 0949 (lemma-colim-hocolim), 0A5L (lemma-direct-sums); finite split monomorphisms and cokernel universal property"
  },
  "mathlib_searches": [
   {
@@ -242,5 +208,15 @@
   "by": "NM",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261018T062724-L-640105",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

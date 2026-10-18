@@ -1,0 +1,128 @@
+{
+ "id": "lem-kun-sequential-telescope-mono",
+ "kind": "statement",
+ "title": "The sequential telescope endomorphism is monic",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian] in which small filtered colimits [def-weil-pbc-category-colimit], with index objects and morphisms in $\\mathrm{Type}_0$, exist and preserve finite limits. Let $E:\\mathbf N\\to\\mathcal A$ be a functor, let $(B,\\iota_n)$ be any coproduct of the $E_n$, and let $t:B\\to B$ satisfy $t\\iota_n=\\iota_n-\\iota_{n+1}E(n\\to n+1)$ for every $n$. Then $t$ is a monomorphism. No transition map is assumed monic.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 093W (lemma-compute-colimit), finite initial telescope sequences and exactness of filtered colimits"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Write the specified coproduct B as the filtered colimit of its finite subcoproducts, indexed by finite subsets S of the discrete natural numbers. Mathlib finiteSubcoproductsCocone and isColimitFiniteSubproductsCocone provide this cocone and universal property; transport its vertex to B by the unique coproduct isomorphism.",
+   "uses": [
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each i define r_i:B to E_i by setting r_i iota_k equal to the transition E_k to E_i for k at most i and zero otherwise. Then r_i u iota_k is identity for k=i and zero otherwise. If k<i, functoriality identifies the two transition maps being subtracted; if k>i both terms vanish. These calculations are the Lean telescopeCoordinate and inj_telescope_coordinate helpers.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-sp-abelian"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a finite subset S, the maps r_i, i in S, assemble into a map B to the finite biproduct of the E_i. Its composite with u restricted to that finite subcoproduct is the canonical isomorphism from the finite coproduct to the finite biproduct, since all matrix entries are the Kronecker entries calculated above. Consequently the restricted map is monic. This includes S empty.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "These restrictions form a natural transformation from the diagram of finite subcoproducts to the constant diagram at B. It is objectwise monic, hence monic in the functor category. By the assumed exactness of filtered colimits its colimit is monic. Mathlib colim.map_mono' identifies this colimit map with u on the specified colimit vertices, giving Mono u.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-sp-abelian"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-category-colimit",
+  "def-sp-abelian"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 093W (lemma-compute-colimit), finite initial telescope sequences and exactness of filtered colimits"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "In an abelian category with exact sequential colimits, the identity minus successor map on the direct sum of a sequence is a monomorphism",
+   "date": "2026-10-18",
+   "results": "isStableUnderCoproductsMonomorphismsOfAB4OfSize; ShortExact.mono_f; mono_inl_of_isColimit; no telescope theorem",
+   "verdict": "no exact match; use general colimit monomorphism API"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mono_of_isColimit\"",
+   "date": "2026-10-18",
+   "results": "IsGrothendieckAbelian.mono_of_isColimit_monoOver; Types.pushoutCocone_inr_mono_of_isColimit",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "telescope|compute-colimit",
+   "date": "2026-10-18",
+   "results": "25 tactic metaprogramming telescope hits; source rg found no categorical telescope theorem in Mathlib. Existing project DirectSum module result assumes increasing submodules and does not cover arbitrary transitions.",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.ComplexColimitHomotopyColimit",
+  "date": "2026-10-18",
+  "group": "D4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-complex-colimit-hocolim",
+   "place": "Proof first two sentences, telescope exact sequence: monicity from finite initial sums and exact filtered colimits",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SequentialTelescopeMono",
+  "file": "lean/Sheaf/CategoryTheory/SequentialTelescopeMono.lean",
+  "declaration": "CategoryTheory.sequentialTelescope_mono",
+  "statement": "theorem sequentialTelescope_mono {A : Type u} [Category.{v} A] [Abelian A] [HasFilteredColimitsOfSize.{0, 0} A] [AB5OfSize.{0, 0} A] (E : ℕ ⥤ A) (B : Cofan (fun n : ℕ ↦ E.obj n)) (hB : IsColimit B) (t : B.pt ⟶ B.pt) (ht : ∀ n : ℕ, B.inj n ≫ t = B.inj n - E.map (homOfLE (Nat.le_succ n)) ≫ B.inj (n + 1)) : Mono t",
+  "branch": "sheaf-dag",
+  "by": "D4",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261018T062724-L-640105",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D4",
+  "result": "pass",
+  "landing": "20261018T062724-L-640105",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
