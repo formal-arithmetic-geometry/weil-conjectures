@@ -259,5 +259,23 @@
   "group": "N8",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-7a740c49e (reviewer sub-agent of L); spot-checked: I read the item and all six steps in full; the delivery adds no new nodes. The statement is Stacks divisors 05DB (l.311) taken with F=O_Y and checked against its stalkwise proof: equality needs only Z locally Noetherian, G stays any quasi-coherent module and Y need not be Noetherian, so it is not weakened. Step 1: the flat-morphism definition gives the local stalk map, and the locnoeth definition, clause (c) of affine-open-stalk-localization and localization-noetherian make A Noetherian. Step 2: module-stalk-pullback holds for any module, and fibre-stalk-quotient (0HA1) gives O_{Y_z,y_z}=B/m_A B. Step 3: the 0312 node (algebra.tex l.15774) allows any M and S with N flat, applied with R=A and S=N=B. Step 4: I checked the argument that p=m_A: injectivity of multiplication by a on A/p carries over to B/pB by flat-tensor-exact and part (1) of tensor-over-quotient, and locality then forces m_A⊆p. Step 5 is the elementary annihilator correspondence along B→C. Step 6 uses that j_z maps onto h^{-1}(z). Small cases hold: A^1 over k[[t]] with G=O_Z or G=k, G=0, Y empty, h=id, and Z=Spec k with Y non-Noetherian. There is no duplicate: the related nodes need Noetherian rings and finite modules, or finite presentation with WeakAss. The proof closure (79 nodes) has no cycle. I accept the three declared tool_uses (module-stalk-pullback, scheme-fibre-stalk-quotient, the 0312 node) as generic black boxes. No SGA is cited."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FlatPullbackAssociatedPoints",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.associatedPoints_tensorPullback_of_flat",
+  "file": "lean/Sheaf/AlgebraicGeometry/FlatPullbackAssociatedPoints.lean",
+  "statement": "theorem associatedPoints_tensorPullback_of_flat {Y Z : Scheme.{u}} (h : Y ⟶ Z) [Flat h] [IsLocallyNoetherian Z] (G : Z.Modules) [SheafOfModules.IsQuasicoherent.{u} G] : associatedPoints ((tensorPullback h).obj G) = ⋃ z ∈ associatedPoints G, (h.fiberι z) '' associatedPoints (SheafOfModules.unit (h.fiber z).ringCatSheaf)",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ec6f017af",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Matches Stacks 05DB (divisors l.310) with F=O_Y and locally Noetherian base: Flat h, IsLocallyNoetherian Z, arbitrary G with IsQuasicoherent.{u} (the predicate the pqf-def-coherent record builds on), nothing on Y, no finite type. Conclusion uses the recorded Scheme.Modules.associatedPoints (exact element annihilators), tensorPullback, h.fiber/fiberι and unit (h.fiber z).ringCatSheaf, as an equality of subsets of Y. lean.statement matches the file exactly; only the item's lean field changed; the six stmt_dep copies equal side. Public imports are the stmt_dep modules and plain imports the proof_dep modules (brief l.104). Docstrings carry source, blueprint id and the six steps; lines <=100; proof is only sorry. No duplicate (grep side/live lean; the scheme-level AlgebraicGeometry.associatedPoints is a separate node). Edge cases G=0, Y empty, h=id, non-Noetherian Y, Z=Spec k, empty union all covered. nt_compile --json: 3.1 s, clean; a broken control copy reports its error."
  }
 }
