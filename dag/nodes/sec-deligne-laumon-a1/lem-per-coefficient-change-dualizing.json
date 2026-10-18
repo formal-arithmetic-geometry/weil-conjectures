@@ -10,7 +10,9 @@
  "stmt_deps": [
   "def-kun-derived-tensor",
   "def-pur-derived-internal-hom",
-  "def-weil-pbc-constructible-complexes"
+  "def-weil-pbc-constructible-complexes",
+  "lem-kun-tensor-sym",
+  "lem-coef-etale-hom-thick-locus"
  ],
  "proof": [
   {
@@ -283,5 +285,30 @@
   "group": "N8",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-4e3575467 (reviewer sub-agent of L); spot-checked: Read ILO XVII §7 in full: Déf. 7.1.1 (the printed RHom(K,−) is a typo for RHom(−,K)), Thms 7.1.2/7.1.3, Prop. 7.4.6/Lemme 7.4.7 and the proof of 7.4.1, 7.5.3, Thm 7.6.1, Lemme 7.6.2 and the deduction of 7.1.3, the proof of 7.6.1, and Déf. 7.7.1 with the paragraph after it (ctf=c-parf over Noetherian rings, preserved by any A→A'). Also read Stacks 068V. The item statement is unchanged from N7's version and is correct (no ℓ-invertibility needed in §7). Step checks: S1 splits stalks over F_ℓ and gives a Tor interval independent of V (also D^b_ctf=D^b_c over any field B). S3: I recomputed the transpose, beta∘Tδ=δ_T, using α's stated evaluation normalization; directions are right and the elementary marking is accepted. S4: closure of the biduality class under shifts, cones, sums and summands (δ as a morphism of triangles, standard). S5: generators ≅ (B⊗F)^r. S6: B⊗K_A≅K_B is two lines over the field Λ; the residue field B may be infinite. S7: 066E plus 068V(3)⇒(1) with a=b=i+1 and M=A gives H^i=0, a valid replacement of 7.6.2. New comparison node = 7.6.1 (Noetherian B), plus T preserving ctf, which holds via 7.7.1; the map is pinned by evaluation. New generator node: both inclusions checked (7.4.6 with ℓA=0, plus weak-Serre and summand closure). Neither node is an item clause. Not duplicates: thm-coef-finite-hom, cor-weil-finite-constructible-hom, thm-sf-hom-ctf, lem-per-finite-tor-internal-hom-any-field, lem-fin-constructible-devissage and lem-trf-devissage-generation all have narrower hypotheses. No SGA. Batch-5: lem-sfb-etale-derived-tensor-stalk reaches lem-pod-etale-stalk-tensor-scalar, a generic stalk-of-tensor fact (Stacks 008B) cited by about 30 nodes. Neither assumed statement gives it, and it is not a step of either proof, so it lies genuinely outside them; no RETURN. All 6 tool_uses accepted. FIX (B3): both new nodes now cite def-constructible-stratification and def-weil-pbc-locally-constant-finite-type-modules for the general-A constructibility wording (statement and stmt_deps; meaning unchanged); files in fixes/dag/nodes/sec-deligne-laumon-a1/. Maintainer note: the item's own statement uses the same uncited wording.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientChangeDualizing",
+  "declaration": "AlgebraicGeometry.Etale.CoefficientChangeDualizing.coefficient_change_dualizing",
+  "declarations": [
+   "AlgebraicGeometry.Etale.CoefficientChangeDualizing.dual",
+   "AlgebraicGeometry.Etale.CoefficientChangeDualizing.biduality",
+   "AlgebraicGeometry.Etale.CoefficientChangeDualizing.homComparison",
+   "AlgebraicGeometry.Etale.CoefficientChangeDualizing.coefficient_change_dualizing"
+  ],
+  "file": "lean/Sheaf/Paper/CoefficientChangeDualizing.lean",
+  "statement": "theorem coefficient_change_dualizing (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) [IsNoetherian X] (K : DerivedCategoryModule (ULift.{u + 1} (ZMod ℓ)) X) (hK : DerivedCategory.isBoundedConstructible (ULift.{u + 1} (ZMod ℓ)) X K) (hdual : ∀ N : DerivedCategoryModule (ULift.{u + 1} (ZMod ℓ)) X, DerivedCategory.isBoundedConstructible (ULift.{u + 1} (ZMod ℓ)) X N → DerivedCategory.isBoundedConstructible (ULift.{u + 1} (ZMod ℓ)) X ((dual _ X K).obj (op N)) ∧ IsIso (biduality _ X K N)) (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A] [Algebra (ULift.{u + 1} (ZMod ℓ)) A] : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} A) X ((scalarExtension (algebraMap (ULift.{u + 1} (ZMod ℓ)) A) X).obj K) ∧ (∀ M : DerivedCategoryModule A X, DerivedCategory.boundedConstructibleFiniteTor A X M → DerivedCategory.boundedConstructibleFiniteTor A X ((dual A X ((scalarExtension (algebraMap (ULift.{u + 1} (ZMod ℓ)) A) X).obj K)).obj (op M)) ∧ IsIso (biduality A X ((scalarExtension (algebraMap (ULift.{u + 1} (ZMod ℓ)) A) X).obj K) M)) ∧ (∀ (M N : DerivedCategoryModule A X) (_hM : DerivedCategory.boundedConstructibleFiniteTor A X M) (_hN : DerivedCategory.boundedConstructibleFiniteTor A X N) (f : M ⟶ N), f ≫ biduality A X ((scalarExtension (algebraMap (ULift.{u + 1} (ZMod ℓ)) A) X).obj K) N = biduality A X ((scalarExtension (algebraMap (ULift.{u + 1} (ZMod ℓ)) A) X).obj K) M ≫ ((dual A X ((scalarExtension (algebraMap (ULift.{u + 1} (ZMod ℓ)) A) X).obj K)).rightOp ⋙ dual A X ((scalarExtension (algebraMap (ULift.{u + 1} (ZMod ℓ)) A) X).obj K)).map f) ∧ (IsField A → ∀ [Finite A] (M : DerivedCategoryModule A X), DerivedCategory.isBoundedConstructible A X M → DerivedCategory.isBoundedConstructible A X ((dual A X ((scalarExtension (algebraMap (ULift.{u + 1} (ZMod ℓ)) A) X).obj K)).obj (op M)) ∧ IsIso (biduality A X ((scalarExtension (algebraMap (ULift.{u + 1} (ZMod ℓ)) A) X).obj K) M)) ∧ ∀ N : DerivedCategoryModule (ULift.{u + 1} (ZMod ℓ)) X, DerivedCategory.isBoundedConstructible (ULift.{u + 1} (ZMod ℓ)) X N → ∃ (α : (scalarExtension (algebraMap (ULift.{u + 1} (ZMod ℓ)) A) X).obj ((dual _ X K).obj (op N)) ≅ (dual A X ((scalarExtension (algebraMap (ULift.{u + 1} (ZMod ℓ)) A) X).obj K)).obj (op ((scalarExtension (algebraMap (ULift.{u + 1} (ZMod ℓ)) A) X).obj N))) (β : (scalarExtension (algebraMap (ULift.{u + 1} (ZMod ℓ)) A) X).obj ((dual _ X K).obj (op ((dual _ X K).obj (op N)))) ≅ (dual A X ((scalarExtension (algebraMap (ULift.{u + 1} (ZMod ℓ)) A) X).obj K)).obj (op ((scalarExtension (algebraMap (ULift.{u + 1} (ZMod ℓ)) A) X).obj ((dual _ X K).obj (op N))))), α.hom = (homComparison X (algebraMap (ULift.{u + 1} (ZMod ℓ)) A) K).app (op N) ∧ β.hom = (homComparison X (algebraMap (ULift.{u + 1} (ZMod ℓ)) A) K).app (op ((dual _ X K).obj (op N))) ∧ (scalarExtension (algebraMap (ULift.{u + 1} (ZMod ℓ)) A) X).map (biduality _ X K N) ≫ β.hom ≫ (dual A X ((scalarExtension (algebraMap (ULift.{u + 1} (ZMod ℓ)) A) X).obj K)).map α.inv.op = biduality A X ((scalarExtension (algebraMap (ULift.{u + 1} (ZMod ℓ)) A) X).obj K) ((scalarExtension (algebraMap (ULift.{u + 1} (ZMod ℓ)) A) X).obj N)",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Uses the ordinary small-etale coefficient categories throughout. The added landed dependencies expose the canonical Koszul symmetry and evaluation-normalized coefficient comparison. General-ring boundedConstructibleFiniteTor is the existing upstream predicate with finitely generated module stalks; finite-ring inputs and the finite-field conclusion use the recorded isBoundedConstructible predicate. The three helpers are abbreviations or constructions of the maps belonging to this statement, using existing tensor-Hom and scalar-extension interfaces; no theorem other than the item is postponed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-563b8fbf1",
+  "group": "N9",
+  "result": "pass",
+  "note": "Read item, all 5 stmt_deps and their live Lean, source ILO XVII 7.1.1/7.1.3/7.6.1. All hypotheses and 5 conjuncts match the node: general-A boundedConstructible/boundedConstructibleFiniteTor with f.g. module stalks; finite-field clause on isBoundedConstructible with no Tor input; final clause pins alpha/beta to homComparison, direction rechecked. biduality = homEquiv(derivedTensorSymmetry then counit), canonical with Koszul signs. Mechanical finding: homComparison is .choose of etaleHomComparison_thickLocus, components fixed by IsEtaleHomTranspose; derivedTensorSymmetry is lem-kun-tensor-sym's own main declaration, the canonical iso it asserts; genuine dependencies, PASS on this point. Dependency node files identical to live; item changed only in lean and stmt_deps. One sorry, docstrings with 8 steps, max line 95, plain imports = proof-dep modules, statement verbatim, small etale site only. nt_compile --json clean in 11.7 s. Advisory only: scalarExtension and general-ring predicates reached indirectly; AmbientDualityPairing.bidualityMap is a second biduality presentation that needs a theorem hypothesis."
  }
 }
