@@ -23,6 +23,8 @@ import Sheaf.Algebra.Homology.KInjectiveComparisonPrinciple
 import Mathlib.CategoryTheory.Preadditive.Injective.Basic
 import Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact
 import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
+import Sheaf.CategoryTheory.RingedCechKoszulColimitIso
+import Sheaf.CategoryTheory.RingedCechKoszulDualKFlat
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
 import Sheaf.Algebra.Homology.KInjectiveProductsTermwise
 import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
@@ -152,6 +154,15 @@ structure RingedKoszulCechComparison where
         (targetRestriction V).hom
   empty_identity : r = 0 → ∀ E, IsIso (presentation.unit E)
 
+/-- The normalized comparison structure exists for the ringed extended Cech model.
+Source: Stacks Project, Tags 0913, 0A0A, 0941 and 08JB
+(blueprint: lem-weil-pbc-ringed-cech-koszul-comparison-existence).
+The proof assembles the telescope/Hom and strict-tower calculations, then transports
+units and restriction maps through their canonical natural isomorphisms. -/
+theorem exists_ringed_koszul_cech_comparison :
+    Nonempty (RingedKoszulCechComparison O r b) := by
+  sorry
+
 /-- The augmented extended Cech complex is the filtered colimit and homotopy colimit of
 its finite positive Koszul system; internal Hom from it is canonically the strict total
 derived inverse limit of tensor with its finite duals. The supplied normalized comparison
@@ -216,6 +227,16 @@ theorem ringed_cech_koszul_dual_limit :
         QuasiIso t) ∧
     (∀ m : ℕ, CochainComplex.IsAcyclicTensorKFlat ((ringedKoszulDualTower O r b).obj (op m))) ∧
     Nonempty (RingedKoszulCechComparison O r b) := by
-  sorry
+  have halpha := exists_ringed_cech_koszul_colimit_iso O r b
+  rcases halpha with ⟨alpha, halpha⟩
+  have ht := CochainComplex.quasiIso_telescopeColimit O (ringedKoszulDiagram O r b)
+  rcases ht with ⟨t0, ht0, _, hq⟩
+  have hq' : QuasiIso (t0 ≫ alpha.hom) := quasiIso_comp t0 alpha.hom
+  have hta : CochainComplex.mappingCone.inr _ ≫ (t0 ≫ alpha.hom) =
+      CochainComplex.telescopeToColimit O (ringedKoszulDiagram O r b) ≫ alpha.hom := by
+    rw [← Category.assoc, ht0]
+  refine ⟨⟨alpha, halpha, t0 ≫ alpha.hom, hta, hq'⟩, ?_, ?_⟩
+  · exact ringed_cech_koszul_dual_tower_isKFlat O r b
+  · exact exists_ringed_koszul_cech_comparison O r b
 
 end CategoryTheory
