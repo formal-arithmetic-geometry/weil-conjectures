@@ -15,9 +15,96 @@
   "def-kun-derived-tensor",
   "lem-amb-kummer-any-base"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $m\\geq1$ use coordinates $x_0,\\ldots,x_m$ and let $D=V(x_m)$. The standard charts [lem-weil-pbc-projective-space-standard-charts] identify $U=P-D=D_+(x_m)$ with $\\mathbf A^m_k$. On $D_+(x_i)$ with $i<m$, the divisor has equation $x_m/x_i$, a polynomial variable and hence a nonzerodivisor; quotienting the chart ring by it gives the standard chart of $\\mathbf P^{m-1}_k$. Thus $D\\cong\\mathbf P^{m-1}_k$ as a scheme, not merely as a set. Affine spaces are smooth by [sbc-lem-affine-space-smooth], so the chart covers and [lem-weil-pbc-smooth-local-on-source] show that both $P$ and $D$ are smooth. By [lemma-nagata-projective-space-base-change-proper] their structure maps are proper, hence separated and of finite type by [def-weil-proper-morphism]. A field is Noetherian (its only ideals are zero and the unit ideal), so [lem-weil-pbc-finite-type-over-noetherian] also makes both schemes Noetherian, as needed for the supported product calculation in step 4. The local generator of the ideal of $D$ is $x_m/x_i$; the dual ideal therefore has transition $x_i/x_j$, giving $\\mathcal O_P(D)=\\mathcal O_P(1)$. Restricting the transition functions for $\\mathcal O_P(1)$ to $D$ gives $\\mathcal O_D(1)$ [def-pc-projective-space-twist].",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "sbc-lem-affine-space-smooth",
+    "lem-weil-pbc-smooth-local-on-source",
+    "def-pc-projective-space-twist",
+    "def-pc-divisor-line-bundle",
+    "lemma-nagata-projective-space-base-change-proper",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Example 16.3, pair (projective hyperplane, projective space); coordinate verification"
+   }
+  },
+  {
+   "text": "Fix any twist $t$. Apply [thm-pur-with-support-exactness] to $(P,D)$ and the torsion sheaf $\\Lambda(t)$, and use [lem-per-smooth-divisor-kummer-purity] to replace its supported terms. The localization theorem is stated for abelian-sheaf cohomology, while the purity and affine lemmas use derived functors on $\\Lambda$-module sheaves; [lem-pur-module-restriction-kernel-comparison], applied to the monomorphism $U\\to P$ of the small etale site, identifies the supported, global and open-restriction groups of the two theories compatibly with the maps of the localization sequence. This gives the exact sequence\n$$\\cdots\\to H^{q-1}(U,\\Lambda(t))\\to H^{q-2}(D,\\Lambda(t-1))\\xrightarrow{i_*}H^q(P,\\Lambda(t))\\to H^q(U,\\Lambda(t))\\to\\cdots.$$\nBy [lem-per-geometric-affine-space-acyclicity] the outer terms vanish when $q\\geq2$, so $i_*$ is an isomorphism in every such degree. The same sequence at degrees zero and one gives $H^0(P,\\Lambda(t))\\cong H^0(U,\\Lambda(t))=\\Lambda(t)(k)$ and $H^1(P,\\Lambda(t))=0$: the supported groups in degrees zero and one are zero because their purity sources have negative degree. The degree-zero isomorphism is induced by constant sections, since restriction of such a section to $U$ is the same section.",
+   "uses": [
+    "thm-pur-with-support-exactness",
+    "lem-per-smooth-divisor-kummer-purity",
+    "lem-per-geometric-affine-space-acyclicity",
+    "lem-pur-module-restriction-kernel-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Corollary 16.2 and Example 16.3, displayed Gysin recurrence"
+   }
+  },
+  {
+   "text": "Induct on $m$, simultaneously for every integer $q$ and twist $t$. For $m=0$ the space is $\\operatorname{Spec}k=\\mathbf A^0_k$, so [lem-per-geometric-affine-space-acyclicity] gives the assertion in all degrees. For $m>0$, step 2 handles degrees zero and one. For $q\\geq2$ it identifies $H^q(P,\\Lambda(t))$ with $H^{q-2}(\\mathbf P^{m-1}_k,\\Lambda(t-1))$. The induction hypothesis therefore makes the group zero for odd $q$ and for $q>2m$; for $q=2a$ with $1\\leq a\\leq m$ it is a free rank-one $\\Lambda$-module. Negative degrees are zero because a sheaf in degree zero has a right-derived global-sections resolution in nonnegative degrees. This proves all the asserted vanishings for all $t$, including the top-boundary case $q=2m+1$.",
+   "uses": [
+    "lem-per-geometric-affine-space-acyclicity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Example 16.3, induction after the Gysin recurrence"
+   }
+  },
+  {
+   "text": "We identify the generators in this same induction, rather than choosing arbitrary bases of the free groups. The case $a=0$ is the unit section. Write $h_D=c_1(\\mathcal O_D(1))$. The supported Kummer normalization and its pullback compatibility in [lem-asd-ordinary-supported-kummer], with the transition calculation of step 1, give $i_*(1)=h$ and $i^*h=h_D$. In the latter identity one can pull back the divisor $V(x_0)$ to $D$ when $m>1$, using the stated Cartier pullback comparison; for $m=1$, its pullback is empty and the restricted line on the point is trivial, so both classes are zero. Apply the ordinary/support projection identity in [lem-per-noetherian-supported-product-calculus] to $L=\\mathcal O_P(D)$, with its canonical trivialization off $D$, and $x=h^{a-1}$. Its supported operator is the map of the purity lemma, since both use $c_{D,\\Lambda}$. After forgetting support the identity gives\n$$i_*(h_D^{a-1})=h^{a-1}\\cup c_1(\\mathcal O_P(D))=h^a.$$\nThe induction hypothesis identifies $b\\mapsto b h_D^{a-1}$ with an isomorphism $\\Lambda\\to H^{2a-2}(D,\\Lambda(a-1))$; step 2 identifies its target with $H^{2a}(P,\\Lambda(a))$ by $i_*$. Their composite is exactly $b\\mapsto b h^a$. Thus the specified positive Kummer powers, with no sign or unspecified unit change, generate all the required groups.",
+   "uses": [
+    "lem-asd-ordinary-supported-kummer",
+    "lem-per-noetherian-supported-product-calculus",
+    "lem-per-smooth-divisor-kummer-purity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Section 23, Kummer cycle class in codimension one and proof of Theorem 23.2, first paragraph; explicit projection-formula identification"
+   }
+  },
+  {
+   "text": "The associative bilinear cup products of [lem-per-noetherian-supported-product-calculus], with support all of $P$, give the diagonal even-degree algebra in the statement. Evaluation of a polynomial at $h$ is surjective, since step 4 says its degree-$a$ component is generated by $h^a$. Step 3 implies $h^{m+1}=0$. In degrees $0\\leq a\\leq m$ the evaluation map on coefficients is injective by step 4, and in larger degrees the target is zero. Since a polynomial is a finite sum of its homogeneous terms, its image is zero exactly when all its coefficients of degrees at most $m$ vanish. Its kernel is therefore precisely $(T^{m+1})$. This proves the graded algebra description, also when $m=0$, where $h=0$ and the algebra is $\\Lambda$.",
+   "uses": [
+    "lem-per-noetherian-supported-product-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+    "place": "Proof of Theorem 23.2, first paragraph, truncated polynomial algebra"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-divisor-line-bundle",
+  "def-pc-projective-space-twist",
+  "def-weil-proper-morphism",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-per-geometric-affine-space-acyclicity",
+  "lem-per-noetherian-supported-product-calculus",
+  "lem-per-smooth-divisor-kummer-purity",
+  "lem-pur-module-restriction-kernel-comparison",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-weil-pbc-smooth-local-on-source",
+  "lemma-nagata-projective-space-base-change-proper",
+  "sbc-lem-affine-space-smooth",
+  "thm-pur-with-support-exactness"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/milne-lectures-on-etale-cohomology_LEC.pdf",
+  "place": "Section 16, Corollary 16.2 and Example 16.3; Section 23, direct cycle class and first paragraph of the proof of Theorem 23.2"
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -46,10 +133,38 @@
    "results": "8 returned hits: AlgebraicGeometry.Proj.isBasis_basicOpen, AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.basicOpen_one, WeierstrassCurve.Affine.CoordinateRing.basis_apply, AlgebraicGeometry.Proj.openCoverOfISupEqTop, AlgebraicGeometry.Proj.affineOpenCover, AlgebraicGeometry.Proj.basicOpen, AlgebraicGeometry.Proj.affineOpenCoverOfIrrelevantLESpan",
    "date": "2026-10-18",
    "verdict": "no match: inspected hits concern other objects; no ordinary etale Chern, hyperplane-cohomology or splitting-scheme theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology of projective space over an algebraically closed field is generated by powers of the Kummer hyperplane class",
+   "results": "{\"t\": \"2026-10-18T20:03:29Z\", \"tool\": \"leanfinder\", \"query\": \"Etale cohomology of projective space over an algebraically closed field is generated by powers of the Kummer hyperplane class\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"WeierstrassCurve.Projective.PointClass\", \"Rep.standardComplex.x_projective\", \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"AlgebraicGeometry.Proj\", \"Algebra.etaleLocus_eq_compl_support\", \"Algebra.FormallySmooth.iff_subsingleton_and_projective\", \"AlgebraicGeometry.Proj.basicOpen_one\", \"Rep.FiniteCyclicGroup.resolution\"], \"digest\": \"4e6c6a22a8ab76b1\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: returned types concern cotangent complexes, algebraic etaleness, projective spectra or representation resolutions, not ordinary etale cohomology of these varieties"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ProjectiveSpace\", \"cohomology\"",
+   "results": "{\"t\": \"2026-10-18T20:03:58Z\", \"tool\": \"loogle\", \"query\": \"\\\"ProjectiveSpace\\\", \\\"cohomology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: returned types concern cotangent complexes, algebraic etaleness, projective spectra or representation resolutions, not ordinary etale cohomology of these varieties"
+  },
+  {
+   "tool": "grep",
+   "query": "projectiveSpace.*[Cc]ohomology|[Cc]ohomology.*projectiveSpace|hyperplane.*[Cc]lass",
+   "results": "{\"t\": \"2026-10-18T20:04:31Z\", \"tool\": \"grep\", \"query\": \"projectiveSpace.*[Cc]ohomology|[Cc]ohomology.*projectiveSpace|hyperplane.*[Cc]lass\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/MeasureTheory/Constructions/Pi.lean\"], \"digest\": \"041de27894276242\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: returned types concern cotangent complexes, algebraic etaleness, projective spectra or representation resolutions, not ordinary etale cohomology of these varieties"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology of projective space is a truncated polynomial ring on its hyperplane class",
+   "results": "{\"t\": \"2026-10-18T20:04:31Z\", \"tool\": \"leansearch\", \"query\": \"Etale cohomology of projective space is a truncated polynomial ring on its hyperplane class\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"StandardEtalePair.f\", \"StandardEtalePair.instAlgebraRing\", \"StandardEtalePair.X\", \"LinearAlgebra.Projectivization.termℙ\", \"Algebra.Etale.finitePresentation\", \"Algebra.Etale.formallyEtale\"], \"digest\": \"be8358952282cc1e\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: returned types concern cotangent complexes, algebraic etaleness, projective spectra or representation resolutions, not ordinary etale cohomology of these varieties"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-noetherian-etale-chern-identities",
@@ -74,5 +189,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-geometric-projective-space-hyperplane-cohomology",
+  "worker": "stage1",
+  "summary": "Retained the full statement for every algebraically closed field. Expanded the hyperplane Gysin induction and the positive Kummer generator calculation; introduced only general geometric affine-space acyclicity and smooth-divisor Kummer purity as statement-only prerequisites, since the existing finite-field-convention nodes do not cover characteristic zero or arbitrary transcendence degree.",
+  "blueprint": "Realizes the ancestor proof Step 3 through the supporting geometric-fibre projective-bundle computation named in blueprint.from.place; follows Milne Example 16.3 and Theorem 23.2 first paragraph below the unit route. No unit or chapter route changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "Generic coordinate chart interface needed to identify the actual hyperplane subscheme and affine complement."
+   },
+   {
+    "node": "sbc-lem-affine-space-smooth",
+    "why": "Generic smoothness of polynomial charts checks hypotheses of smooth-divisor purity."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-local-on-source",
+    "why": "Generic Zariski locality assembles chartwise smoothness."
+   },
+   {
+    "node": "thm-pur-with-support-exactness",
+    "why": "Generic localization sequence for ordinary etale torsion cohomology; this unit has no replacement."
+   },
+   {
+    "node": "lem-asd-ordinary-supported-kummer",
+    "why": "Generic supported Cartier Kummer normalization and pullback, used to pin down the positive generator."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic Noetherian permanence verifies the hypothesis of supported cup calculus on projective space."
+   },
+   {
+    "node": "lem-pur-module-restriction-kernel-comparison",
+    "why": "Generic comparison of module-sheaf and abelian-sheaf cohomology with supports (and of global sections), needed to combine the abelian localization sequence with the module-derived purity and affine lemmas; same unit as the declared localization theorem, no node of this unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-projective-space-standard-charts",
+  "sbc-lem-affine-space-smooth",
+  "lem-weil-pbc-smooth-local-on-source",
+  "thm-pur-with-support-exactness",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-pur-module-restriction-kernel-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q24-3b9f40cb0",
+  "group": "Q24",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-3b9f40cb0 (reviewer sub-agent of L); spot-checked: Read the delivery in full: the item, both new nodes, every cited node's statement, and all 17 proof steps of lem-per-noetherian-supported-product-calculus. Milne LEC places checked: §16 opening, Thm 16.1, Cor 16.2 and Ex 16.3 (Kummer on A^1, Künneth acyclicity of A^m, Gysin induction for P^m); §23 direct cycle map and its Kummer agreement; Thm 23.2 proof, first paragraph. Milne works over any algebraically closed k, so the full statement (char 0, any transcendence degree) is sourced. No SGA. Steps 1, 3, 4, 5 are correct. Step 1: O(D)=O(1) transition checked, sign positive. Step 3: induction (m,q,t)->(m-1,q-2,t-1), base A^0; checked q odd, q>2m, q<0, all t. Step 4: i_*(1)=h by the purity/lem-asd normalization; i^*h=h_D (m=1 trivial); the projection identity matches G(u)=e∘i_*u with e=c_{D,Λ} (product-calculus steps 13-15). Step 5: even-degree cups commute, h^{m+1}=0, kernel (T^{m+1}). One fault, repaired (C1/C4): step 2 combined the abelian-sheaf localization sequence of thm-pur-with-support-exactness with the module-derived H_D and H^* of the purity and affine nodes without citing the comparison. The FIX adds lem-pur-module-restriction-kernel-comparison to step 2: no cycle, same unit as the already-declared localization tool, already in the batch-5 closure. It is declared in tool_uses and proof_deps is updated; the statement is unchanged. New nodes are true and needed. Affine acyclicity: the existing nodes are dimension 1 only (thm-pur-kummer-affine-line) or use F_q-bar conventions (lem-pur-affine-line-ordinary-invariance, prop-pur-gm-relative-kummer). Smooth-divisor purity: the Gysin/absolute-purity nodes are ancestors (cycle), and thm-pur-regular-immersion-purity uses finite-field conventions; empty D and q<2 checked. Neither new node restates a clause of the item. Route: every off-unit statement is declared in tool_uses, and I accept them as generic. Batch-5: (1) lem-asd-ordinary-supported-kummer (item and purity node) reaches lem-pod-etale-stalk-tensor-scalar, which is generic stalk/tensor sheaf theory, not Poincaré duality. (2) lem-per-noetherian-supported-product-calculus reaches lem-trf-oriented-closed-base-localization, which is generic closed-subtopos theory, not the trace formula. All four nodes are already in the b5 closure with the item removed, so the delivery adds nothing; accepted.; 1 file(s) fixed by the reviewer"
  }
 }
