@@ -33,15 +33,16 @@ variable {C : Type*} [Category* C] [Abelian C] [HasDerivedCategory C]
   [HasExactLimitsOfShape (Discrete ℕ) C] [HasLimitsOfShape ℕᵒᵖ C]
   {F : ℕᵒᵖ ⥤ DerivedCategory C} {c : Cone F}
 
-/-- **Cohomology of a derived limit under the Mittag-Leffler condition.** In an abelian category
-with exact countable products in which sequential limits of epimorphisms project
-epimorphically onto the first term (e.g. sheaves on a replete topos), let `c` be a homotopy
-limit cone over a tower `F` in `D(C)` such that the transitions of the tower `H^{i-1}(Fₙ)` are
-epimorphisms. Then `Hⁱ(R lim F) = lim Hⁱ(Fₙ)`: in the Milnor triangle, `1 - t` is surjective on
-`∏ H^{i-1}(Fₙ)`, so `Hⁱ(R lim F) ⟶ ∏ Hⁱ(Fₙ)` is the kernel of `1 - t`, which is `lim Hⁱ(Fₙ)`. -/
-noncomputable def isLimitHomologyFunctorMapConeOfIsHomotopyLimit (hC : EpiπAppZeroOfEpi C)
+/-- **Cohomology of a derived limit when `lim¹` vanishes.** Let `c` be a homotopy limit cone
+over a tower `F` in `D(C)`, for an abelian category `C` with exact countable products. If
+`1 - t` is an epimorphism on the products of the tower `H^{i-1}(Fₙ)`, then
+`Hⁱ(R lim F) = lim Hⁱ(Fₙ)`: in the Milnor triangle, `Hⁱ(R lim F) ⟶ ∏ Hⁱ(Fₙ)` is then the
+kernel of `1 - t`, which is `lim Hⁱ(Fₙ)`. -/
+noncomputable def isLimitHomologyFunctorMapConeOfIsHomotopyLimitOfEpi
     (hc : IsHomotopyLimit c) (i : ℤ)
-    (hepi : ∀ n : ℕ, Epi ((homologyFunctor C (i - 1)).map (F.map (homOfLE n.le_succ).op))) :
+    (h1t : ∀ {Q : Fan fun n : ℕ ↦ (homologyFunctor C (i - 1)).obj (F.obj (op n))}
+      (_ : IsLimit Q) (t : Q.pt ⟶ Q.pt), (∀ n : ℕ, t ≫ Q.proj n = Q.proj (n + 1) ≫
+        (F ⋙ homologyFunctor C (i - 1)).map (homOfLE n.le_succ).op) → Epi (𝟙 Q.pt - t)) :
     IsLimit ((homologyFunctor C i).mapCone c) := by
   let K (n : ℕ) := F.obj (op n)
   let P : Fan K := Fan.mk (∏ᶜ K) (Pi.π K)
@@ -63,9 +64,7 @@ noncomputable def isLimitHomologyFunctorMapConeOfIsHomotopyLimit (hC : EpiπAppZ
       change (homologyFunctor C (i - 1)).map (𝟙 P.pt - towerShift hP) = _
       rw [Functor.map_sub, CategoryTheory.Functor.map_id]
     rw [e]
-    exact CategoryTheory.Limits.epi_one_sub_of_epiπAppZeroOfEpi hC
-      (F := F ⋙ homologyFunctor C (i - 1))
-        (hQ (i - 1)) _ (ht (i - 1)) hepi
+    exact h1t (hQ (i - 1)) _ (ht (i - 1))
   -- hence `Hⁱ(R lim F) ⟶ Hⁱ(∏ Fₙ)` is a monomorphism, a kernel of `1 - t`
   have h₂ : Mono ((homologyFunctor C i).map T.mor₁) :=
     (HomologySequence.mono_homologyMap_mor₁_iff T hT (i - 1) i (by lia)).2
@@ -100,5 +99,19 @@ noncomputable def isLimitHomologyFunctorMapConeOfIsHomotopyLimit (hC : EpiπAppZ
         change m ≫ (homologyFunctor C i).map T.mor₁ ≫ (homologyFunctor C i).map (P.proj n) = _
         rw [hfac, Fan.IsLimit.fac]
         exact hm (op n) }
+
+/-- **Cohomology of a derived limit under the Mittag-Leffler condition.** In an abelian category
+with exact countable products in which sequential limits of epimorphisms project
+epimorphically onto the first term (e.g. sheaves on a replete topos), let `c` be a homotopy
+limit cone over a tower `F` in `D(C)` such that the transitions of the tower `H^{i-1}(Fₙ)` are
+epimorphisms. Then `Hⁱ(R lim F) = lim Hⁱ(Fₙ)`: in the Milnor triangle, `1 - t` is surjective on
+`∏ H^{i-1}(Fₙ)`, so `Hⁱ(R lim F) ⟶ ∏ Hⁱ(Fₙ)` is the kernel of `1 - t`, which is `lim Hⁱ(Fₙ)`. -/
+noncomputable def isLimitHomologyFunctorMapConeOfIsHomotopyLimit (hC : EpiπAppZeroOfEpi C)
+    (hc : IsHomotopyLimit c) (i : ℤ)
+    (hepi : ∀ n : ℕ, Epi ((homologyFunctor C (i - 1)).map (F.map (homOfLE n.le_succ).op))) :
+    IsLimit ((homologyFunctor C i).mapCone c) :=
+  isLimitHomologyFunctorMapConeOfIsHomotopyLimitOfEpi hc i fun hQ t ht ↦
+    CategoryTheory.Limits.epi_one_sub_of_epiπAppZeroOfEpi hC
+      (F := F ⋙ homologyFunctor C (i - 1)) hQ t ht hepi
 
 end DerivedCategory

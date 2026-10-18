@@ -173,6 +173,7 @@ public import WeilConjectures.Algebra.Homology.DerivedCategory.ReductionDatum
 public import WeilConjectures.Algebra.Homology.DerivedCategory.SingleHomology
 public import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimit
 public import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimitHomology
+public import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimitMittagLeffler
 public import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimitRange
 public import WeilConjectures.Algebra.Homology.DerivedCategory.TowerLimitReplete
 public import WeilConjectures.Algebra.Homology.DerivedChangeOfRings
@@ -9082,6 +9083,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheafCohomology
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheafColimit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheafTransport
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantTowerLimit
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ContinuousMapReduction
 public import WeilConjectures.SixFunctors.ProEtale.Adic.DenseOpenFunctions
@@ -9177,6 +9179,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.Counterexample
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Defs
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Flat
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.LocallyConstantWContractible
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarCoherence
