@@ -213,10 +213,25 @@ lemma restrict_extendByZero_aux {CU CX : Type*} [Category CU] [Category CX] {jS 
     simp
   rw [Functor.map_comp, Category.assoc, Category.assoc, hn, ← reassoc_of% h2]
 
+/-- **The restriction of an extension, abstractly**: for `j_! ⊣ j^*` with invertible unit and
+commutation isomorphisms `b : j_! ⋙ F_Y ≅ F_U ⋙ j_!`, `c : j^* ⋙ F_U ≅ F_Y ⋙ j^*` such that the
+restriction of `b⁻¹` is `c` up to the units, the unit is an isomorphism of algebras
+`j^* (j_! K) ≅ K` for every algebra `K` with invertible structure morphism. -/
+noncomputable def IsoAlgebra.mapOfNatIsoObjMapOfNatIsoObjIso {CU CX : Type*} {_ : Category CU}
+    {_ : Category CX} {jS : CU ⥤ CX} {jU : CX ⥤ CU} (adj : jS ⊣ jU) [IsIso adj.unit] {ΦU : CU ⥤ CU}
+    {ΦY : CX ⥤ CX} (b : jS ⋙ ΦY ≅ ΦU ⋙ jS) (c : jU ⋙ ΦU ≅ ΦY ⋙ jU) (K : IsoAlgebra ΦU)
+    (hL : adj.unit.app (ΦU.obj K.carrier) ≫ jU.map (b.inv.app K.carrier) =
+      ΦU.map (adj.unit.app K.carrier) ≫ c.hom.app (jS.obj K.carrier)) :
+    (IsoAlgebra.mapOfNatIso c).obj ((IsoAlgebra.mapOfNatIso b).obj K) ≅ K :=
+  IsoAlgebra.isoMk (asIso (adj.unit.app K.carrier)).symm (by
+    rw [← IsoAlgebra.str_hom, ← IsoAlgebra.str_hom, IsoAlgebra.mapOfNatIso_obj_str,
+      Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, IsoAlgebra.mapOfNatIso_obj_str,
+      Iso.trans_hom, Iso.app_hom, Functor.mapIso_hom, Iso.symm_hom, asIso_inv]
+    exact restrict_extendByZero_aux adj b c K.carrier hL K.str.hom)
+
 variable {U Y : Over (Spec (.of k))} [LocallyOfFiniteType U.hom] [QuasiCompact U.hom]
   [IsSeparated U.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
   {ΦU : U ⟶ U} {ΦY : Y ⟶ Y} {j : U ⟶ Y} [IsOpenImmersion j.left]
-
 
 /-- The inverse of `a⁻¹ ≫ eqToHom h ≫ b` is `b⁻¹ ≫ eqToHom h' ≫ a`. -/
 lemma Iso.symm_trans_eqToIso_trans_symm {C : Type*} [Category C] {S T P P' : C} (a : P ≅ S)
@@ -226,24 +241,46 @@ lemma Iso.symm_trans_eqToIso_trans_symm {C : Type*} [Category C] {S T P P' : C} 
   simp
 
 omit [IsOpenImmersion j.left] in
-/-- The pullback comparison of the flipped Frobenius square is the inverse of that of the square. -/
-theorem boundedConstructiblePullbackSquareComparison_symm_eq_flip (hw : ΦU ≫ j = j ≫ ΦY) :
-    (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
-        (CommSq.mk hw)).symm =
-      boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
-        (CommSq.mk hw).flip :=
-  Iso.symm_trans_eqToIso_trans_symm _ _ _ _
-
-omit [IsOpenImmersion j.left] in
 /-- The Frobenius comparison of the pullback along `j` is the pullback comparison of the flipped
 cartesian square. -/
-lemma weilUpperStarComparison_hom_app_eq_flip (sq : IsPullback ΦU j j ΦY)
-    (hw : ΦU ≫ j = j ≫ ΦY) (K : Dᵇc(Y.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
-    (weilUpperStarComparison ℓ ΦU ΦY j hw).hom.app K =
-      (boundedConstructiblePullbackSquareComparison _ ℓ sq.toCommSq.flip).hom.app K :=
-by
-  -- UNFINISHED: the kernel times out on the proof-irrelevant comparison of the two squares
-  sorry
+lemma weilUpperStarComparison_eq_flip (sq : IsPullback ΦU j j ΦY) (hw : ΦU ≫ j = j ≫ ΦY) :
+    weilUpperStarComparison ℓ ΦU ΦY j hw =
+      boundedConstructiblePullbackSquareComparison _ ℓ sq.toCommSq.flip :=
+  Iso.symm_trans_eqToIso_trans_symm _ _ _ _
+
+/-- The restriction of the inverse of the open-square exchange `b_g` is any isomorphism `θ` equal
+to the pullback comparison of the flipped square, up to the units. -/
+lemma unit_comp_map_baseChangeIso_inv_of_eq {U' Y' : Over (Spec (.of k))}
+    [LocallyOfFiniteType U'.hom] [QuasiCompact U'.hom] [IsSeparated U'.hom]
+    [LocallyOfFiniteType Y'.hom] [QuasiCompact Y'.hom] [IsSeparated Y'.hom]
+    {Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} {_ : MonObj Λ} {_ : IsCommMonObj Λ}
+    {g : Y' ⟶ Y} {j' : U' ⟶ Y'} {gU : U' ⟶ U} [IsOpenImmersion j'.left]
+    {sq : IsPullback gU j' j g}
+    (θ : boundedConstructibleUpperStar Λ ℓ j ⋙ boundedConstructibleUpperStar Λ ℓ gU ≅
+      boundedConstructibleUpperStar Λ ℓ g ⋙ boundedConstructibleUpperStar Λ ℓ j')
+    (hθ : θ = boundedConstructiblePullbackSquareComparison Λ ℓ sq.toCommSq.flip)
+    (M : Dᵇc(U.left)⟦Λ⟧) :
+    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j').unit.app
+        ((boundedConstructibleUpperStar Λ ℓ gU).obj M) ≫
+      (boundedConstructibleUpperStar Λ ℓ j').map
+        ((boundedConstructibleOpenImmersionLowerShriekBaseChangeIso Λ ℓ sq).inv.app M) =
+    (boundedConstructibleUpperStar Λ ℓ gU).map
+        ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction Λ ℓ j).unit.app M) ≫
+      θ.hom.app ((boundedConstructibleOpenImmersionLowerShriek Λ ℓ j).obj M) := by
+  subst hθ
+  rw [boundedConstructibleOpenImmersionLowerShriekBaseChangeIso_inv]
+  exact Adjunction.unit_comp_map_exchangeLeft_app _ _ _ M
+
+omit [IsOpenImmersion j.left] in
+/-- The derived pullback of Weil objects is the functor on algebras of the Frobenius comparison. -/
+lemma weilUpperStar_eq_mapOfNatIso (hw : ΦU ≫ j = j ≫ ΦY) :
+    weilUpperStar ℓ ΦU ΦY j hw = IsoAlgebra.mapOfNatIso (weilUpperStarComparison ℓ ΦU ΦY j hw) :=
+  rfl
+
+/-- The Weil extension by zero is the functor on algebras of the open-square exchange. -/
+lemma weilOpenLowerShriek_eq_mapOfNatIso (sq : IsPullback ΦU j j ΦY) :
+    weilOpenLowerShriek ℓ sq = IsoAlgebra.mapOfNatIso (openSquareExchange ℓ sq) :=
+  rfl
 
 variable (ℓ) in
 /-- **The restriction of the Weil extension by zero** (blueprint `def-trf-weil-extension-zero`):
@@ -251,11 +288,9 @@ variable (ℓ) in
 noncomputable def weilUpperStarWeilOpenLowerShriekIso (sq : IsPullback ΦU j j ΦY)
     (hw : ΦU ≫ j = j ≫ ΦY) (K : WeilBoundedConstructible ℓ ΦU) :
     (weilUpperStar ℓ ΦU ΦY j hw).obj ((weilOpenLowerShriek ℓ sq).obj K) ≅ K :=
-  IsoAlgebra.isoMk
-    (asIso ((boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
-      (Profinite.padicAlgClRingObj ℓ) ℓ j).unit.app K.carrier)).symm
-    -- UNFINISHED: `restrict_extendByZero_aux` with `unit_comp_map_openSquareExchange_inv`
-    sorry
+  -- UNFINISHED: `IsoAlgebra.mapOfNatIsoObjMapOfNatIsoObjIso` applied to
+  -- `unit_comp_map_baseChangeIso_inv_of_eq`; the kernel check currently times out
+  sorry
 
 end Restriction
 
