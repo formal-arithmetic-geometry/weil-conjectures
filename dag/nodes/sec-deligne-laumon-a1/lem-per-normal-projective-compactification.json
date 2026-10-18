@@ -28,9 +28,187 @@
   "def-sc-generic-point",
   "def-weil-pbc-module-stalk"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $F=k(X)$. Let $\\xi$ be the generic point of the nonempty integral scheme $X$ and $s$ its image in $S$. Flatness at $\\xi$ [def-weil-flat-morphism] says that $F=\\mathcal O_{X,\\xi}$ is flat over $\\mathcal O_{S,s}$, which is $R$ (if $s$ is the closed point) or $K$ (if $s$ is the generic point). In the first case [lem-trf-flat-module-torsionfree-domain] shows that nonzero elements of $R$ act injectively on the nonzero field $F$; in the second case they act through units of $K$. In both cases nonzero elements of $R$ act injectively on $F$. Thus $R\\hookrightarrow F$ and $K\\hookrightarrow F$. On a nonempty affine finite-type chart of $X$, the generic prime contracts to $(0)\\subset R$, so [lem-weil-pbc-finite-type-residue-field-extension-finitely-generated] gives that $F/K$ is finitely generated. Let $L$ be the subfield of elements of $F$ algebraic over $K$. By [lem-zl-finite-algebraic-closure], $L/K$ is finite. Mixed characteristic gives characteristic zero, so [lem-weil-pbc-char-zero-field-extension-separable] makes this finite extension separable.",
+   "uses": [
+    "lem-trf-flat-module-torsionfree-domain",
+    "lem-weil-pbc-finite-type-residue-field-extension-finitely-generated",
+    "lem-zl-finite-algebraic-closure",
+    "lem-weil-pbc-char-zero-field-extension-separable",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO XVI 3.7, first paragraph, printed p.254: preparation of the algebraic constants; Fields Tag 037J; Algebra Tag 00TX; residue-field finite generation as recorded in the cited node."
+   }
+  },
+  {
+   "text": "Choose the locally closed immersion $X\\hookrightarrow\\mathbf P^n_S$ in the quasi-projectivity hypothesis. It is quasi-compact: $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian], hence each open subset of $X$ is quasi-compact. Projective space is separated over the affine $S$ by [lemma-nagata-projective-space-base-change-proper] and the definition of properness. Apply [sk-lem-nagata-sketch-closure] to form its scheme-theoretic image $Y\\hookrightarrow\\mathbf P^n_S$. It gives an open immersion $X\\hookrightarrow Y$ which is schematically dense. The underlying space of $Y$ is the closure of the irreducible $X$, hence irreducible. For any nonempty affine open $V\\subset Y$, schematic density injects $\\mathcal O_Y(V)$ into $\\mathcal O_X(V\\cap X)$, which embeds in $F$; thus this ring is a domain. Therefore $Y$ is integral, $X$ is dense in it, and $k(Y)=F$. Its displayed closed immersion makes $Y\\to S$ projective.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lemma-nagata-projective-space-base-change-proper",
+    "sk-lem-nagata-sketch-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WA, lemma-H-quasi-projective-open-H-projective, proof via scheme-theoretic closure; finite type over Noetherian Tag 01T6."
+   }
+  },
+  {
+   "text": "The complete Noetherian local ring $R$ is excellent by [lem-per-complete-local-excellence]. On each standard affine projective chart the ring of $Y$ is a quotient of $R[t_1,\\ldots,t_n]$, so $Y$ is finite type over $S$ and is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. These chart rings are finite-type $R$-algebras and are excellent by [lem-exc-finite-type-localization-excellent]. Since $Y$ is covered by these affine opens, [lem-trf-excellent-scheme-affine-cover] makes the coordinate ring of every affine open of $Y$ excellent, which is the excellence hypothesis of the preparation node. Form the normalization $\\nu:C=Y^\\nu\\to Y$ in $F$ using [def-sc-normalization]. Since $Y$ is reduced, excellent and Noetherian, [lem-per-excellent-normalization-preparation] gives that $\\nu$ is finite and surjective and $C$ is normal and Noetherian. The componentwise normalization has one component here: on any nonempty affine chart its ring is the integral closure of a domain in $F$, hence a domain. Thus $C$ is integral and $k(C)=F$.",
+   "uses": [
+    "lem-per-complete-local-excellence",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-trf-excellent-scheme-affine-cover",
+    "def-sc-normalization",
+    "lem-per-excellent-normalization-preparation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tags 035S, lemma-nagata-normalization; 035Q, lemma-normalization-normal; More on Algebra Tags 07QW and 07QU."
+   }
+  },
+  {
+   "text": "Regularity of $X$ implies normality by [rem-pc-regular-normal]. We check the normalization over the entire original open, not just over an unspecified dense open. If $A=\\mathcal O_X(U)$ for a nonempty affine open $U\\subset X$, an element of $F$ integral over $A$ is integral over every local ring $\\mathcal O_{X,x}$ for $x\\in U$; normality places it in every such local ring. By [lem-sc-function-field-sections-glue] it belongs to $A$, so $A$ is integrally closed in $F$. On a chart of $Y$ the normalization is integral closure in $F$; [lem-weil-pbc-integral-closure-commutes-localization] identifies its restriction to each principal open with the integral closure of that open. Principal opens of charts of $Y$ contained in $X$ cover $X$. The preceding equality therefore shows $\\nu^{-1}X\\cong X$ over $Y$. Its inverse gives a dense open immersion $j:X\\hookrightarrow C$, and the induced function-field identification is $k(C)=k(X)=F$.",
+   "uses": [
+    "rem-pc-regular-normal",
+    "lem-sc-function-field-sections-glue",
+    "def-sc-normalization",
+    "lem-weil-pbc-integral-closure-commutes-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0307, algebra-lemma-integral-closure-localize, applied to normalization charts; Tag 035Q; normality of regular schemes Tag 0569."
+   }
+  },
+  {
+   "text": "The projective embedding $Y\\hookrightarrow\\mathbf P^n_S$, with affine $S$, supplies an ample invertible sheaf on $Y$ by [lem-weil-pbc-projective-ample-invertible]. The finite map $\\nu:C\\to Y$ is projective in the projective-bundle convention by [lem-trf-finite-projective-bundle]. Because $Y$ has the stated ample sheaf, [lem-trf-projective-bundle-to-h-projective] upgrades this to the finite-projective-space convention. Apply [lem-trf-h-projective-composition] to $C\\to Y\\to S$. Hence $C\\to S$ is projective in exactly the convention required in the item.",
+   "uses": [
+    "lem-weil-pbc-projective-ample-invertible",
+    "lem-trf-finite-projective-bundle",
+    "lem-trf-projective-bundle-to-h-projective",
+    "lem-trf-h-projective-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0B3I, lemma-finite-projective; Tag 087S, lemma-projective-over-quasi-projective-is-H-projective; Tag 01WE, lemma-H-projective-composition."
+   }
+  },
+  {
+   "text": "Let $R_0$ be the integral closure of $R$ in the finite separable extension $L/K$. By [lem-weil-pbc-noetherian-normal-separable-integral-closure-finite], $R_0$ is finite over $R$. By [lem-weil-pbc-integral-closure-finite-extension-normal], it is a normal domain with fraction field $L$. The ring $R$ is henselian and strictly henselian by hypothesis. Since a domain has only the idempotents $0,1$, [lem-trf-integral-component-henselian-permanence] gives that $R_0$ is local and strictly henselian. By [lem-weil-pbc-finite-over-complete-local-product] it is complete Noetherian local. Finally [lem-sc-integral-closure-dedekind-surjective-fibres] gives that $R_0$ has dimension one, so [lem-sc-normal-dim1-dvr] makes it a discrete valuation ring. Set $S_0=\\operatorname{Spec}R_0$. The inclusion $R\\subset R_0$ gives a finite dominant extension of complete strictly henselian traits, with fraction field $k(S_0)=L$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
+    "lem-weil-pbc-integral-closure-finite-extension-normal",
+    "lem-trf-integral-component-henselian-permanence",
+    "lem-weil-pbc-finite-over-complete-local-product",
+    "lem-sc-integral-closure-dedekind-surjective-fibres",
+    "lem-sc-normal-dim1-dvr"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "More on Algebra Tag 09E8, remark-finite-separable-extension; Tag 092X, lemma-integral-over-henselian; Algebra Tags 032L, 0325, 09IG and 00PD."
+   }
+  },
+  {
+   "text": "For each $a\\in R_0\\subset L\\subset F$ and every $c\\in C$, a monic equation over $R$ is also a monic equation over the local ring $\\mathcal O_{C,c}\\subset F$. Because $C$ is normal, $a\\in\\mathcal O_{C,c}$. Apply [lem-sc-function-field-sections-glue] on $C$: $a$ is a global section. These sections are unique, since sections of the integral $C$ inject into $F$, and addition, multiplication and the $R$-algebra structure agree in $F$. Thus they define an $R$-algebra map $R_0\\to\\Gamma(C,\\mathcal O_C)$. The natural affine-spectrum adjunction [lem-a1-locally-ringed-space-affine-adjunction] yields a morphism $q:C\\to S_0$ whose composite with $S_0\\to S$ is the structural morphism already constructed. Restricting $q$ along $j$ gives the factorization on $X$ as well. This changes the base of the structural map only: $X$ itself has not been replaced by a fibre product.",
+   "uses": [
+    "lem-sc-function-field-sections-glue",
+    "lem-a1-locally-ringed-space-affine-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "ILO XVI 3.7, printed p.254, first paragraph: extend the trait so its ring is integrally closed in the function field. Local extension of constants uses normality and the sheaf axiom; affine adjunction as in Schemes Tag 01I1."
+   }
+  },
+  {
+   "text": "The finite morphism $S_0\\to S$ is separated by [lem-weil-pbc-finite-closed-map-finite-fibres]. Step 5 made the composite $C\\xrightarrow qS_0\\to S$ H-projective. Apply [lem-per-h-projective-permanence] to this factorization. It gives a closed immersion $C\\hookrightarrow\\mathbf P^N_{S_0}$ over $S_0$, so $C$ is projective over $S_0$ without changing its scheme or function field.",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-per-h-projective-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4Q, lemma-projective-permanence, with its finite-projective-space closed-graph proof."
+   }
+  },
+  {
+   "text": "The inclusion $R_0\\subset F$ is the map on generic stalks of $q$. Every local ring of the integral $C$ is a subring of $F$, so its $R_0$-module is torsion-free: $ab=0$ with $a\\ne0$ implies $b=0$ in $F$. A discrete valuation ring is a valuation ring, and [lem-trf-valuation-torsionfree-flat] therefore makes each of these local rings flat over $R_0$. At a point over the closed point of $S_0$ this is precisely flatness over the base local ring $R_0$. At a point over the generic point the base local ring is $L$, and any vector space over a field is flat. Thus $q$ is flat at every point, as required.",
+   "uses": [
+    "lem-trf-valuation-torsionfree-flat",
+    "def-weil-flat-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "More on Algebra Tag 0539, lemma-valuation-ring-torsion-free-flat."
+   }
+  },
+  {
+   "text": "Let $C_L$ be the generic fibre of $q$. It is nonempty, integral, and has function field $F$: on affine charts it is obtained by localizing the domains of $C$ at $R_0\\setminus\\{0\\}$. It is finite type over $L$, for the projective embedding in Step 8 gives a finite affine cover by quotients of polynomial $L$-algebras. The field $L$, being algebraic over the characteristic-zero $K$, has characteristic zero, hence is perfect. Apply [lem-kun-geometric-reduced-perfect] to the reduced finite-type $L$-scheme $C_L$; it is geometrically reduced. Also $L$ is algebraically closed in $F$: any element of $F$ algebraic over $L$ is algebraic over $K$ by transitivity of algebraicity and hence lies in $L$ by its definition. By [lem-zl-field-extension-algebraically-closed-geometric], $\\operatorname{Spec}F$ is geometrically irreducible over $L$. Then [lem-zl-generic-point-geometric-irreducibility] makes $C_L$ geometrically irreducible. After any field extension it is both reduced and irreducible, hence integral. This proves geometric integrality. Together with Steps 4 and 6 this gives all assertions, including $k(C)=k(X)$ and $k(S_0)=L$ with no extension of $F$.",
+   "uses": [
+    "lem-kun-geometric-reduced-perfect",
+    "lem-zl-field-extension-algebraically-closed-geometric",
+    "lem-zl-generic-point-geometric-irreducibility",
+    "def-pc-geometrically-irreducible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Varieties Tag 020I, lemma-perfect-reduced; Tag 054Q, lemma-geometrically-irreducible-function-field; Algebra Tag 037P, lemma-field-extension-geometrically-irreducible."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-flat-module-torsionfree-domain",
+  "lem-weil-pbc-finite-type-residue-field-extension-finitely-generated",
+  "lem-zl-finite-algebraic-closure",
+  "lem-weil-pbc-char-zero-field-extension-separable",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lemma-nagata-projective-space-base-change-proper",
+  "sk-lem-nagata-sketch-closure",
+  "lem-per-complete-local-excellence",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-trf-excellent-scheme-affine-cover",
+  "def-sc-normalization",
+  "lem-per-excellent-normalization-preparation",
+  "rem-pc-regular-normal",
+  "lem-sc-function-field-sections-glue",
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "lem-weil-pbc-projective-ample-invertible",
+  "lem-trf-finite-projective-bundle",
+  "lem-trf-projective-bundle-to-h-projective",
+  "lem-trf-h-projective-composition",
+  "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
+  "lem-weil-pbc-integral-closure-finite-extension-normal",
+  "lem-trf-integral-component-henselian-permanence",
+  "lem-weil-pbc-finite-over-complete-local-product",
+  "lem-sc-integral-closure-dedekind-surjective-fibres",
+  "lem-sc-normal-dim1-dvr",
+  "lem-a1-locally-ringed-space-affine-adjunction",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-per-h-projective-permanence",
+  "lem-trf-valuation-torsionfree-flat",
+  "def-weil-flat-morphism",
+  "lem-kun-geometric-reduced-perfect",
+  "lem-zl-field-extension-algebraically-closed-geometric",
+  "lem-zl-generic-point-geometric-irreducibility",
+  "def-pc-geometrically-irreducible"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI 3.7, first paragraph, printed p.254; algebraic-constant preparation and normalization of the projective closure, expanded using the cited Stacks results."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -99,10 +277,106 @@
    },
    "date": "2026-10-18",
    "verdict": "no match: relative normalization and valuative existence do not assert normal compactification with constants; smooth morphisms and Weierstrass minimal models do not assert an equivariant modification of a nodal tower"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An integral regular quasi projective scheme over a complete discrete valuation ring has a normal projective compactification over the integral closure of the base in its algebraic constants with geometrically integral generic fibre",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization",
+     "AlgebraicGeometry.Proj.valuativeCriterion_existence",
+     "AlgebraicGeometry.Scheme.Hom.instIsIntegralHomFromNormalization",
+     "AlgebraicGeometry.Scheme.Hom.instQuasiCompactToNormalization",
+     "AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom",
+     "AlgebraicGeometry.Scheme.Hom.normalization",
+     "AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc",
+     "AlgebraicGeometry.Scheme.Hom.normalizationDesc"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: normalization interfaces and properness of Proj do not construct this normal projective trait compactification with the prescribed algebraic constants."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normal scheme of finite type over a complete discrete valuation ring embeds as a dense open in a normal projective scheme after replacing the base by its algebraic constants",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.Scheme.mk.noConfusion",
+     "AlgebraicGeometry.Scheme.Hom.instIsDominantToNormalization",
+     "AlgebraicGeometry.Scheme.Hom.normalizationDesc",
+     "AlgebraicGeometry.Scheme.Hom.ι_toNormalization_assoc",
+     "AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization",
+     "AlgebraicGeometry.Scheme.Hom.instIsIntegralHomNormalizationDesc",
+     "AlgebraicGeometry.Scheme.Hom.instIsIsoToNormalizationOfIsIntegralHom",
+     "AlgebraicGeometry.Proj.valuativeCriterion_existence"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: normalization interfaces and properness of Proj do not construct this normal projective trait compactification with the prescribed algebraic constants."
+  },
+  {
+   "tool": "grep",
+   "query": "IsProjective|projective.*comp|comp.*projective",
+   "results": {
+    "ok": true,
+    "n_hits": 3,
+    "top": [
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean",
+     "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean"
+    ],
+    "note": "",
+    "subdirectory": "AlgebraicGeometry"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: normalization interfaces and properness of Proj do not construct this normal projective trait compactification with the prescribed algebraic constants."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"AlgebraicGeometry\", \"IsProjective\"",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "subdirectory": ""
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: normalization interfaces and properness of Proj do not construct this normal projective trait compactification with the prescribed algebraic constants."
+  },
+  {
+   "tool": "grep",
+   "query": "normalization|compactification",
+   "results": {
+    "ok": true,
+    "n_hits": 10,
+    "top": [
+     "Mathlib/AlgebraicGeometry/Normalization.lean",
+     "Mathlib/AlgebraicGeometry/Normalization.lean",
+     "Mathlib/AlgebraicGeometry/Normalization.lean",
+     "Mathlib/AlgebraicGeometry/Normalization.lean",
+     "Mathlib/AlgebraicGeometry/Normalization.lean",
+     "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+     "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean",
+     "Mathlib/AlgebraicGeometry/ZariskisMainTheorem.lean"
+    ],
+    "note": "",
+    "subdirectory": "AlgebraicGeometry"
+   },
+   "date": "2026-10-19",
+   "verdict": "no match: normalization interfaces and properness of Proj do not construct this normal projective trait compactification with the prescribed algebraic constants."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
@@ -120,5 +394,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-normal-projective-compactification",
+  "worker": "stage1",
+  "summary": "Expanded the ILO XVI 3.7 constant-trait preparation and normal projective closure into ten explicit steps; retained the statement and original X, verified finiteness and strict henselian completeness of its algebraic constants, and separated geometric reducedness from irreducibility. Reused existing geometric and algebraic nodes; one new statement-only H-projective permanence tool.",
+  "blueprint": "Historical purity branch of lem-per-artin-gabber-affine-curve, through the recorded via chain: ILO XVI 3.7 first paragraph, algebraic constants and normalization of the projective closure. This is a supporting algebraic-geometric tool, not a replacement of the Fourier unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-zl-finite-algebraic-closure",
+    "why": "Generic algebraic-geometric tool used for Write $F=k(X)$. No node of the Fourier unit supplies this normalization/constant-field tool."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic algebraic-geometric tool used for The complete Noetherian local ring $R$ is excellent by [lem-per-complete-local-excellence]. No node of the Fourier unit supplies this normalization/constant-field tool."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Generic algebraic-geometric tool used for Regularity of $X$ implies normality by [rem-pc-regular-normal]. No node of the Fourier unit supplies this normalization/constant-field tool."
+   },
+   {
+    "node": "lem-trf-finite-projective-bundle",
+    "why": "Generic algebraic-geometric tool used for The projective embedding $Y\\hookrightarrow\\mathbf P^n_S$, with affine $S$, supplies an ample invertible sheaf on $Y$ by [lem-weil-pbc-projective-ample-invertible]. No node of the Fourier unit supplies this normalization/constant-field tool."
+   },
+   {
+    "node": "lem-trf-projective-bundle-to-h-projective",
+    "why": "Generic algebraic-geometric tool used for The projective embedding $Y\\hookrightarrow\\mathbf P^n_S$, with affine $S$, supplies an ample invertible sheaf on $Y$ by [lem-weil-pbc-projective-ample-invertible]. No node of the Fourier unit supplies this normalization/constant-field tool."
+   },
+   {
+    "node": "lem-trf-h-projective-composition",
+    "why": "Generic algebraic-geometric tool used for The projective embedding $Y\\hookrightarrow\\mathbf P^n_S$, with affine $S$, supplies an ample invertible sheaf on $Y$ by [lem-weil-pbc-projective-ample-invertible]. No node of the Fourier unit supplies this normalization/constant-field tool."
+   },
+   {
+    "node": "lem-trf-integral-component-henselian-permanence",
+    "why": "Generic algebraic-geometric tool used for Let $R_0$ be the integral closure of $R$ in the finite separable extension $L/K$. No node of the Fourier unit supplies this normalization/constant-field tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-over-complete-local-product",
+    "why": "Generic algebraic-geometric tool used for Let $R_0$ be the integral closure of $R$ in the finite separable extension $L/K$. No node of the Fourier unit supplies this normalization/constant-field tool."
+   },
+   {
+    "node": "lem-sc-integral-closure-dedekind-surjective-fibres",
+    "why": "Generic algebraic-geometric tool used for Let $R_0$ be the integral closure of $R$ in the finite separable extension $L/K$. No node of the Fourier unit supplies this normalization/constant-field tool."
+   },
+   {
+    "node": "lem-kun-geometric-reduced-perfect",
+    "why": "Generic algebraic-geometric tool used for Let $C_L$ be the generic fibre of $q$. No node of the Fourier unit supplies this normalization/constant-field tool."
+   },
+   {
+    "node": "lem-zl-field-extension-algebraically-closed-geometric",
+    "why": "Generic algebraic-geometric tool used for Let $C_L$ be the generic fibre of $q$. No node of the Fourier unit supplies this normalization/constant-field tool."
+   },
+   {
+    "node": "lem-zl-generic-point-geometric-irreducibility",
+    "why": "Generic algebraic-geometric tool used for Let $C_L$ be the generic fibre of $q$. No node of the Fourier unit supplies this normalization/constant-field tool."
+   },
+   {
+    "node": "lem-trf-excellent-scheme-affine-cover",
+    "why": "Step 3 passes from excellent chart rings of Y to excellence of every affine open (Stacks 0HAB), the hypothesis of lem-per-excellent-normalization-preparation; generic commutative algebra, no node of the unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-zl-finite-algebraic-closure",
+  "lem-exc-finite-type-localization-excellent",
+  "rem-pc-regular-normal",
+  "lem-trf-finite-projective-bundle",
+  "lem-trf-projective-bundle-to-h-projective",
+  "lem-trf-h-projective-composition",
+  "lem-trf-integral-component-henselian-permanence",
+  "lem-weil-pbc-finite-over-complete-local-product",
+  "lem-sc-integral-closure-dedekind-surjective-fibres",
+  "lem-kun-geometric-reduced-perfect",
+  "lem-zl-field-extension-algebraically-closed-geometric",
+  "lem-zl-generic-point-geometric-irreducibility",
+  "lem-trf-excellent-scheme-affine-cover"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q75-5fe524546",
+  "group": "Q75",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q75-5fe524546 (reviewer sub-agent of L); spot-checked: Read all 10 steps, the new node and every cited statement, plus ILO XVI 3.7 (printed p.254) and Stacks 0C4Q. The item statement is unchanged and is true; tested on X=S, Spec K, Spec L and a ramified constant field. New node lem-per-h-projective-permanence: true by the 0C4Q closed-graph argument with the same n (base change of Δ_g, then of i); tested on empty Z, n=0 and g=id. No duplicate: I checked the pbc finite-separable refinement (field case only), pc projective base change and the trf projective-* nodes. It is not a clause of the item. Two small faults fixed in the item file. (1) Step 1 assumed flatness over R at the generic point; the local ring there can be K, so the step now handles both cases and cites def-weil-flat-morphism. (2) Step 3 justified excellence only for the chart rings, but the excellent-normalization preparation node needs it for every affine open; the step now cites lem-trf-excellent-scheme-affine-cover (Stacks 0HAB), which was already in that node's closure, and adds it to tool_uses. Batch-5 flags: I computed the closures. The torsion-free/flat Mathlib leaves, the universally-catenary/CM and affine-cover locality nodes, the finite-projective-bundle, bundle-to-H-projective and H-projective-composition nodes (EGA projective generalities) and henselian permanence are all generic algebra/geometry. None is a step of the trace formula or of Poincaré duality, so all are accepted.; 1 file(s) fixed by the reviewer"
  }
 }
