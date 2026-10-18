@@ -19,38 +19,38 @@
  ],
  "proof": [
   {
-   "text": "First normalize the coefficient identifications. The formula in [def-weil-pbc-proetale-operations] identifies $u^*M=u^{-1}M\\otimes_{u^{-1}A_X,c_u}A_T$ with $u^{-1}M$ carrying the transported action $a\\cdot m=c_u^{-1}(a)m$: the map is $m\\otimes a\\mapsto c_u^{-1}(a)m$, with inverse $m\\mapsto m\\otimes1$, and the balancing relation proves that they are inverse. Likewise transport an $A_Z$-module $G$ to an $i^{-1}A_X$-module by $b\\cdot g=c_i(b)g$. Its direct-image $A_X$-action is unchanged, since the action through the adjoint of $c_i$ becomes the action through the inverse-image ring unit after this transport. These maps are natural in module maps; the adjunction bijections in the operations definition are consequently identified. More explicitly, let $T_i$ be this transport from $i^{-1}A_X$-modules to $A_Z$-modules and let $\\theta_F:i^*F\\xrightarrow{\\sim}T_i(i^{-1}F)$ be the displayed tensor isomorphism. The identity of $i^*F$ corresponds, after transport, to $\\theta_F^{-1}$. Transposing by the inverse-image adjunction gives $\\eta_F^{c}=i_*(\\theta_F^{-1})\\circ\\eta_F^{0}$, where $\\eta^c$ is the specified module unit and $\\eta^0$ the unit with inverse-image coefficients; hence $i_*(\\theta_F)\\circ\\eta_F^c=\\eta_F^0$. Thus invertibility of the actual unit is preserved. We may therefore work with $A_Z=i^{-1}A_X$, $A_U=j^{-1}A_X$, and $i^*=i^{-1}$, $j^*=j^{-1}$. This preserves zero objects, essential-image membership, and the specified unit map.",
+   "text": "Transport coefficients using the scalar equivalence of def-weil-pbc-proetale-operations. Restriction along ci identifies its functor followed by ringed direct image with the specified direct image: the sectionwise identity linear maps give a natural isomorphism coefficientDirectImageIso. Tensor extension along cj is naturally isomorphic to the inverse scalar equivalence by uniqueness of left adjoints (proEtaleRingExtensionAdjunction). Hence pullback vanishes if and only if module inverse image vanishes. These constructions use no chosen module data.",
    "uses": [
     "def-weil-pbc-proetale-operations"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D3, lemma-adjoint-push-pull-modules; scalar transport and adjunction formulas explicitly stated in def-weil-pbc-proetale-operations"
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH, lemma-ses-associated-to-open; scalar transport uses sites-modules.tex, lemma-adjoint-push-pull-modules"
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-proetale-ringed-open-closed] with $A=A_X$. Its geometric hypotheses are exactly the closed immersion $i$ and its complementary quasi-compact open immersion $j$ in the item. It gives $j^{-1}i_*=0$, the adjunction $j_!\\dashv j^{-1}$, and for every module sheaf $F$ the short exact sequence $0\\to j_!j^{-1}F\\to F\\xrightarrow{\\eta_F}i_*i^{-1}F\\to0$. The middle-to-right arrow is the actual closed adjunction unit, not an unspecified map. The additional quasi-compact and quasi-separated hypothesis on $X$ in that node is only for its filtered-colimit clause, which is not used here.",
+   "text": "Apply lem-weil-pbc-proetale-ringed-open-closed to the object V = ProEt.mk j. Its equivalence q and inverse-image comparison identify zero open inverse image with zero localized restriction. Retain its closed adjunction ai, open adjunction aj, zero open restriction of closed direct images, invertible closed counit, and canonical localization sequence. No quasi-compactness or quasi-separatedness of X is needed.",
    "uses": [
     "lem-weil-pbc-proetale-ringed-open-closed"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AH, lemma-ses-associated-to-open; arbitrary ring-sheaf version supplied by lem-weil-pbc-proetale-ringed-open-closed"
+    "place": "Tag 09AH, lemma-ses-associated-to-open; scalar transport uses sites-modules.tex, lemma-adjoint-push-pull-modules"
    }
   },
   {
-   "text": "If $F\\cong i_*G$, applying $j^{-1}$ to the isomorphism identifies $j^{-1}F$ with $j^{-1}i_*G=0$ by step 2. Thus every object in the essential image has zero open restriction.",
+   "text": "For F isomorphic to the specified i_*G, coefficientDirectImageIso identifies it with the ringed direct image of the scalar transport of G. Apply the localized open restriction to this isomorphism and use the vanishing provided in the preceding step. The scalar and localized-site equivalences then imply j^*F is zero.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AH, lemma-ses-associated-to-open; arbitrary ring-sheaf version supplied by lem-weil-pbc-proetale-ringed-open-closed"
+    "place": "Tag 09AH, lemma-ses-associated-to-open; scalar transport uses sites-modules.tex, lemma-adjoint-push-pull-modules"
    }
   },
   {
-   "text": "Suppose $j^{-1}F=0$. By the adjunction of step 2, for every module sheaf $N$, $\\operatorname{Hom}(j_!0,N)\\cong\\operatorname{Hom}(0,j^{-1}N)$ is a singleton. Thus $j_!0$ is initial and hence a zero object in the abelian module-sheaf category [def-weil-sheaf-of-modules-category]. The sequence in step 2 is consequently $0\\to0\\to F\\xrightarrow{\\eta_F}i_*i^{-1}F\\to0$. By [def-weil-pbc-exact-sequence], exactness at $F$ says $\\ker\\eta_F=0$, and the last zero says $\\eta_F$ is epic. By the abelian-category definition [def-sp-abelian], the epimorphism $\\eta_F$ is a cokernel of some map $h:T\\to F$. Since $\\eta_Fh=0$ and $\\ker\\eta_F=0$, the kernel universal property gives $h=0$. The cokernel universal property therefore factors $1_F$ uniquely as $r\\circ\\eta_F$ for a map $r:i_*i^{-1}F\\to F$. Now $(\\eta_F\\circ r)\\circ\\eta_F=\\eta_F$, so cancellation of the epimorphism gives $\\eta_F\\circ r=1_{i_*i^{-1}F}$. Thus $r$ is an explicit two-sided inverse of the actual unit. Step 1 carries this conclusion back to the originally specified coefficient identifications.",
+   "text": "If j^*F is zero, localized open restriction is zero. Since extension by zero is left adjoint, it preserves zero objects. In the canonical localization sequence the left term is therefore zero. Convert ComposableArrows.Exact to the short-complex exactness predicate; Exact.mono_g applied to the zero first map makes ai.unit.app F monic. The localization sequence also makes it epic, so it is invertible in the abelian module-sheaf category. Transport ai.left.obj F back through the inverse coefficient equivalence; coefficientDirectImageIso, the equivalence counit, and the inverse unit compose to an explicit essential-image witness for the specified i_*.",
    "uses": [
     "def-weil-sheaf-of-modules-category",
     "def-weil-pbc-exact-sequence",
@@ -59,16 +59,16 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AH, lemma-ses-associated-to-open; arbitrary ring-sheaf version supplied by lem-weil-pbc-proetale-ringed-open-closed"
+    "place": "Tag 09AH, lemma-ses-associated-to-open; scalar transport uses sites-modules.tex, lemma-adjoint-push-pull-modules"
    }
   },
   {
-   "text": "For $j^*F=0$, the inverse of the unit isomorphism in step 4 is an isomorphism $i_*i^*F\\xrightarrow{\\sim}F$, exhibiting $G=i^*F$ as a witness to essential-image membership. Conversely step 3 gives $j^*F=0$ for every such member. This proves both directions and the canonical-unit assertion.",
+   "text": "To establish invertibility of the actual tensor-unit-normalized unit, use the invertible counit supplied by the same ringed localization theorem to obtain full faithfulness of ringed closed direct image (Mathlib Adjunction.fullyFaithfulROfIsIsoCounit). Full faithfulness is preserved by composition with the scalar equivalence and by coefficientDirectImageIso, so the specified i_* is fully faithful. Mathlib Adjunction.isIso_unit_app_iff_mem_essImage, applied to proEtaleRingModuleAdjunction itself and the essential-image witness just constructed, proves invertibility of precisely its unit. This avoids a separate explicit comparison of the two unit formulas.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AH, lemma-ses-associated-to-open; arbitrary ring-sheaf version supplied by lem-weil-pbc-proetale-ringed-open-closed"
+    "place": "Tag 09AH, lemma-ses-associated-to-open; scalar transport uses sites-modules.tex, lemma-adjoint-push-pull-modules"
    }
   }
  ],
@@ -82,7 +82,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 09AH, lemma-ses-associated-to-open: elementary supported-sheaf consequence of the canonical localization short exact sequence, using its existing arbitrary ring-sheaf version"
+  "place": "Tag 09AH, lemma-ses-associated-to-open, with scalar transport from sites-modules.tex lemma-adjoint-push-pull-modules; formalized by T7 using Mathlib exactness and fully-faithful adjunction criteria"
  },
  "mathlib_searches": [
   {
@@ -257,5 +257,15 @@
   "group": "Q34",
   "result": "pass",
   "note": "Exact statement/declarations verified; dependencies and Stacks sources checked; byte-identical file compiled successfully via scompile.py; no findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T7",
+  "result": "pass",
+  "landing": "20261018T145117-L-3645885",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
