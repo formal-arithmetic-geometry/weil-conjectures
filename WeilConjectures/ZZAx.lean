@@ -1,0 +1,4 @@
+import WeilConjectures.AlgebraicGeometry.Morphisms.UnderlyingFiniteEtaleExtension
+import WeilConjectures.AlgebraicGeometry.Morphisms.Slicing
+#print axioms AlgebraicGeometry.Scheme.GaloisCover.exists_finiteEtale_extension
+#print axioms AlgebraicGeometry.Scheme.GaloisCover.exists_finiteEtale_extension_noetherian
