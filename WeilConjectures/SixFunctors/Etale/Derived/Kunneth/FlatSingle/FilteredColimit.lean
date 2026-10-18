@@ -42,7 +42,12 @@ theorem preservesColimitsOfShape_singleFunctor_rightDerivedLowerStar
     PreservesColimitsOfShape J
       (DerivedCategory.singleFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
         R((h)_*[ModuleCat.{u + 1} Λ]) ⋙ DerivedCategory.homologyFunctor _ q) :=
-  sorry
+  have := preservesColimitsOfShape_higherDirectImage_large Λ h q J
+  preservesColimitsOfShape_of_natIso
+    (Functor.isoWhiskerLeft (DerivedCategory.Plus.singleFunctor _ 0)
+      (Functor.isoWhiskerRight
+        ((h)_*[ModuleCat.{u + 1} Λ]).rightDerivedFunctorPlusCompatibility
+        (DerivedCategory.homologyFunctor _ q)))
 
 end Etale
 

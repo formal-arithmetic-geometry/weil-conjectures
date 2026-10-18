@@ -65,32 +65,50 @@ noncomputable def tensorBaseChangeHomologyTarget (q : ℤ) :
     tensorRight ((e)^*[ModuleCat.{u + 1} Λ].obj 𝓕) ⋙ DerivedCategory.singleFunctor _ 0 ⋙
     R((h)_*[ModuleCat.{u + 1} Λ]) ⋙ DerivedCategory.homologyFunctor _ q
 
-variable [Etale.UpperStarPreservesFlat (ModuleCat.{u + 1} Λ)]
 
 set_option maxHeartbeats 1000000 in
-/-- The degree-`q` base change map
-`Hᵠ(Lp^* 𝓖[0] ⊗ᴸ τ^{≤q} N) ⟶ Hᵠ(Rh_*((h^* p^* 𝓖 ⊗ e^* 𝓕)[0]))`, natural in the sheaf `𝓖` on `X`:
-the truncation `τ^{≤q} N ⟶ N`, the base change map
-(`AlgebraicGeometry.Etale.tensorBaseChangeMapLeft`) and the comparison of the derived and the
-underived tensor products (`AlgebraicGeometry.Etale.singleFunctorTensorToSingle`). -/
-noncomputable def tensorBaseChangeHomologyMap (q : ℤ) :
-    tensorBaseChangeHomologySource Λ p f' g 𝓕 q ⟶ tensorBaseChangeHomologyTarget Λ p h e 𝓕 q :=
+/-- The truncation part `Hᵠ(Lp^* 𝓖[0] ⊗ᴸ τ^{≤q} N) ⟶ Hᵠ(Lp^* 𝓖[0] ⊗ᴸ N)` of the degree-`q` base
+change map. -/
+noncomputable def tensorBaseChangeHomologyTrunc (q : ℤ) :
+    tensorBaseChangeHomologySource Λ p f' g 𝓕 q ⟶
+      DerivedCategory.singleFunctor _ 0 ⋙ L((p)^*[ModuleCat.{u + 1} Λ]) ⋙
+        (-⊗ᴸ-(X')[ModuleCat.{u + 1} Λ]).flip.obj (tensorBaseChangeComplex Λ f' g 𝓕) ⋙
+          DerivedCategory.homologyFunctor _ q :=
+  Functor.whiskerLeft (DerivedCategory.singleFunctor _ 0 ⋙ L((p)^*[ModuleCat.{u + 1} Λ]))
+    (Functor.whiskerRight ((-⊗ᴸ-(X')[ModuleCat.{u + 1} Λ]).flip.map
+      ((DerivedCategory.TStructure.t.truncLEι q).app (tensorBaseChangeComplex Λ f' g 𝓕)))
+      (DerivedCategory.homologyFunctor _ q))
+
+set_option maxHeartbeats 1000000 in
+/-- The base change part `Hᵠ(Lp^* 𝓖[0] ⊗ᴸ N) ⟶ Hᵠ(Rh_*(Lh^* Lp^* 𝓖[0] ⊗ᴸ Le^* 𝓕[0]))` of the
+degree-`q` base change map. -/
+noncomputable def tensorBaseChangeHomologyBaseChange (q : ℤ) :
+    DerivedCategory.singleFunctor _ 0 ⋙ L((p)^*[ModuleCat.{u + 1} Λ]) ⋙
+        (-⊗ᴸ-(X')[ModuleCat.{u + 1} Λ]).flip.obj (tensorBaseChangeComplex Λ f' g 𝓕) ⋙
+          DerivedCategory.homologyFunctor _ q ⟶
+      (DerivedCategory.singleFunctor _ 0 ⋙ L((p)^*[ModuleCat.{u + 1} Λ]) ⋙
+        L((h)^*[ModuleCat.{u + 1} Λ])) ⋙
+        (-⊗ᴸ-(Y)[ModuleCat.{u + 1} Λ]).flip.obj (L((e)^*[ModuleCat.{u + 1} Λ]).obj
+          ((DerivedCategory.singleFunctor _ 0).obj 𝓕)) ⋙
+          R((h)_*[ModuleCat.{u + 1} Λ]) ⋙ DerivedCategory.homologyFunctor _ q :=
+  Functor.whiskerLeft (DerivedCategory.singleFunctor _ 0 ⋙ L((p)^*[ModuleCat.{u + 1} Λ]))
+    (Functor.whiskerRight (tensorBaseChangeMapLeft (ModuleCat.{u + 1} Λ) h e f' g w
+      ((DerivedCategory.singleFunctor _ 0).obj 𝓕)) (DerivedCategory.homologyFunctor _ q))
+
+set_option maxHeartbeats 1000000 in
+/-- The identification `Hᵠ(Rh_*(Lh^* Lp^* 𝓖[0] ⊗ᴸ Le^* 𝓕[0])) ≅ Hᵠ(Rh_*(h^* p^* 𝓖[0] ⊗ᴸ e^* 𝓕[0]))`
+of the derived pullbacks of sheaves with the underived ones. -/
+noncomputable def tensorBaseChangeHomologyPullbackIso (q : ℤ) :
+    (DerivedCategory.singleFunctor _ 0 ⋙ L((p)^*[ModuleCat.{u + 1} Λ]) ⋙
+        L((h)^*[ModuleCat.{u + 1} Λ])) ⋙
+        (-⊗ᴸ-(Y)[ModuleCat.{u + 1} Λ]).flip.obj (L((e)^*[ModuleCat.{u + 1} Λ]).obj
+          ((DerivedCategory.singleFunctor _ 0).obj 𝓕)) ⋙
+          R((h)_*[ModuleCat.{u + 1} Λ]) ⋙ DerivedCategory.homologyFunctor _ q ≅
+      ((p)^*[ModuleCat.{u + 1} Λ] ⋙ (h)^*[ModuleCat.{u + 1} Λ]) ⋙
+        (DerivedCategory.singleFunctor _ 0 ⋙ tensorRight ((DerivedCategory.singleFunctor _ 0).obj
+          ((e)^*[ModuleCat.{u + 1} Λ].obj 𝓕))) ⋙
+          R((h)_*[ModuleCat.{u + 1} Λ]) ⋙ DerivedCategory.homologyFunctor _ q :=
   let M := ModuleCat.{u + 1} Λ
-  let H := DerivedCategory.homologyFunctor (Sheaf X'.smallEtaleTopology M) q
-  let ι : tensorBaseChangeHomologySource Λ p f' g 𝓕 q ⟶
-      DerivedCategory.singleFunctor _ 0 ⋙ L((p)^*[M]) ⋙
-        (-⊗ᴸ-(X')[M]).flip.obj (tensorBaseChangeComplex Λ f' g 𝓕) ⋙ H :=
-    Functor.whiskerLeft (DerivedCategory.singleFunctor _ 0 ⋙ L((p)^*[M]))
-      (Functor.whiskerRight ((-⊗ᴸ-(X')[M]).flip.map
-        ((DerivedCategory.TStructure.t.truncLEι q).app (tensorBaseChangeComplex Λ f' g 𝓕))) H)
-  let τ : DerivedCategory.singleFunctor _ 0 ⋙ L((p)^*[M]) ⋙
-        (-⊗ᴸ-(X')[M]).flip.obj (tensorBaseChangeComplex Λ f' g 𝓕) ⋙ H ⟶
-      (DerivedCategory.singleFunctor _ 0 ⋙ L((p)^*[M]) ⋙ L((h)^*[M])) ⋙
-        (-⊗ᴸ-(Y)[M]).flip.obj (L((e)^*[M]).obj ((DerivedCategory.singleFunctor _ 0).obj 𝓕)) ⋙
-          R((h)_*[M]) ⋙ H :=
-    Functor.whiskerLeft (DerivedCategory.singleFunctor _ 0 ⋙ L((p)^*[M]))
-      (Functor.whiskerRight (tensorBaseChangeMapLeft M h e f' g w
-        ((DerivedCategory.singleFunctor _ 0).obj 𝓕)) H)
   let a : DerivedCategory.singleFunctor (Sheaf X.smallEtaleTopology M) 0 ⋙ L((p)^*[M]) ⋙
         L((h)^*[M]) ≅
       (p)^*[M] ⋙ (h)^*[M] ⋙ DerivedCategory.singleFunctor (Sheaf Y.smallEtaleTopology M) 0 :=
@@ -101,21 +119,35 @@ noncomputable def tensorBaseChangeHomologyMap (q : ℤ) :
   let b : (-⊗ᴸ-(Y)[M]).flip.obj (L((e)^*[M]).obj ((DerivedCategory.singleFunctor _ 0).obj 𝓕)) ≅
       tensorRight ((DerivedCategory.singleFunctor _ 0).obj ((e)^*[M].obj 𝓕)) :=
     (-⊗ᴸ-(Y)[M]).flip.mapIso ((singleFunctorCompLeftDerivedUpperStarIso M e).app 𝓕)
-  let θ₁ : (DerivedCategory.singleFunctor _ 0 ⋙ L((p)^*[M]) ⋙ L((h)^*[M])) ⋙
-        (-⊗ᴸ-(Y)[M]).flip.obj (L((e)^*[M]).obj ((DerivedCategory.singleFunctor _ 0).obj 𝓕)) ⋙
-          R((h)_*[M]) ⋙ H ⟶
-      ((p)^*[M] ⋙ (h)^*[M]) ⋙ (DerivedCategory.singleFunctor _ 0 ⋙
-        tensorRight ((DerivedCategory.singleFunctor _ 0).obj ((e)^*[M].obj 𝓕))) ⋙
-          R((h)_*[M]) ⋙ H :=
-    Functor.whiskerRight a.hom _ ≫
-      Functor.whiskerLeft ((p)^*[M] ⋙ (h)^*[M] ⋙ DerivedCategory.singleFunctor _ 0)
-        (Functor.whiskerRight b.hom (R((h)_*[M]) ⋙ H))
-  let θ₂ : ((p)^*[M] ⋙ (h)^*[M]) ⋙ (DerivedCategory.singleFunctor _ 0 ⋙
-        tensorRight ((DerivedCategory.singleFunctor _ 0).obj ((e)^*[M].obj 𝓕))) ⋙
-          R((h)_*[M]) ⋙ H ⟶ tensorBaseChangeHomologyTarget Λ p h e 𝓕 q :=
-    Functor.whiskerLeft ((p)^*[M] ⋙ (h)^*[M])
-      (Functor.whiskerRight (singleFunctorTensorToSingle ((e)^*[M].obj 𝓕)) (R((h)_*[M]) ⋙ H))
-  ι ≫ τ ≫ θ₁ ≫ θ₂
+  Functor.isoWhiskerRight a _ ≪≫
+    Functor.isoWhiskerLeft ((p)^*[M] ⋙ (h)^*[M] ⋙ DerivedCategory.singleFunctor _ 0)
+      (Functor.isoWhiskerRight b (R((h)_*[M]) ⋙ DerivedCategory.homologyFunctor _ q))
+
+set_option maxHeartbeats 1000000 in
+/-- The comparison `Hᵠ(Rh_*(h^* p^* 𝓖[0] ⊗ᴸ e^* 𝓕[0])) ⟶ Hᵠ(Rh_*((h^* p^* 𝓖 ⊗ e^* 𝓕)[0]))` of the
+derived and the underived tensor products. -/
+noncomputable def tensorBaseChangeHomologyComparison (q : ℤ) :
+    ((p)^*[ModuleCat.{u + 1} Λ] ⋙ (h)^*[ModuleCat.{u + 1} Λ]) ⋙
+        (DerivedCategory.singleFunctor _ 0 ⋙ tensorRight ((DerivedCategory.singleFunctor _ 0).obj
+          ((e)^*[ModuleCat.{u + 1} Λ].obj 𝓕))) ⋙
+          R((h)_*[ModuleCat.{u + 1} Λ]) ⋙ DerivedCategory.homologyFunctor _ q ⟶
+      tensorBaseChangeHomologyTarget Λ p h e 𝓕 q :=
+  Functor.whiskerLeft ((p)^*[ModuleCat.{u + 1} Λ] ⋙ (h)^*[ModuleCat.{u + 1} Λ])
+    (Functor.whiskerRight (singleFunctorTensorToSingle ((e)^*[ModuleCat.{u + 1} Λ].obj 𝓕))
+      (R((h)_*[ModuleCat.{u + 1} Λ]) ⋙ DerivedCategory.homologyFunctor _ q))
+
+set_option maxHeartbeats 1000000 in
+/-- The degree-`q` base change map
+`Hᵠ(Lp^* 𝓖[0] ⊗ᴸ τ^{≤q} N) ⟶ Hᵠ(Rh_*((h^* p^* 𝓖 ⊗ e^* 𝓕)[0]))`, natural in the sheaf `𝓖` on `X`:
+the truncation `τ^{≤q} N ⟶ N`, the base change map
+(`AlgebraicGeometry.Etale.tensorBaseChangeMapLeft`) and the comparison of the derived and the
+underived tensor products (`AlgebraicGeometry.Etale.singleFunctorTensorToSingle`). -/
+noncomputable def tensorBaseChangeHomologyMap (q : ℤ) :
+    tensorBaseChangeHomologySource Λ p f' g 𝓕 q ⟶ tensorBaseChangeHomologyTarget Λ p h e 𝓕 q :=
+  tensorBaseChangeHomologyTrunc Λ p f' g 𝓕 q ≫
+    tensorBaseChangeHomologyBaseChange Λ p h e f' g w 𝓕 q ≫
+      (tensorBaseChangeHomologyPullbackIso Λ p h e 𝓕 q).hom ≫
+        tensorBaseChangeHomologyComparison Λ p h e 𝓕 q
 
 end Etale
 

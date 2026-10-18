@@ -8827,12 +8827,14 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FiniteCoefficien
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle.BaseChange
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle.Coefficients
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle.Degreewise
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle.Devissage
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle.DimensionShift
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle.FilteredColimit
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle.FiniteGood
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle.FlatLowerStar
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle.Homology
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle.HomologyFlat
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle.JacobsonTorsion
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle.Pasting
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle.TensorSingle
