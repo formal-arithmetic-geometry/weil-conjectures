@@ -14,33 +14,55 @@
  ],
  "proof": [
   {
-   "text": "Check the actual exchange by transposition. Write $t:\\overline U'\\to\\overline U$ and $E_j:t^*Dj_!\\to Dj'_!h^*$ for the specified inverse open-extension comparison. Let $\\theta:r'^*g^*\\to t^*r^*$ be the inverse-image square comparison. The graph projections of [def-asd-compact-support-graph-comparison] give, on exact derived functors,\n$$\\delta'_{h^*K}\\circ r'^*(C^\\Sigma_K)=E_{j,K}\\circ t^*(\\delta_K)\\circ\\theta_{Du_{\\Sigma!}K}.\\tag{*}$$\nTo verify this identity without testing derived morphisms on stalks, pull the graph decomposition back to $V'=\\overline U'\\times_{X'}U'$. On its graph component both sides take the section of the corresponding lift to that same section, and on the complementary component both sides are zero. The comparisons $\\beta$ are adjunction-preserving: by their defining conjugacy they are the left-adjoint comparisons of the equality of the restriction/direct-image functors on the localized sites. Thus the comparisons in the two pasted rectangles coincide by [lem-weil-pbc-mate-pasting], and the composition comparison $\\lambda$ is normalized by those same adjunctions. This makes the preceding component calculation an equality of sheaf natural transformations; [lem-weil-pbc-localization-universal-property] descends it to (*) on arbitrary complexes. Now transpose $C^{(j,r)}_K\\circ g^*a_K$ under $r'^*\\dashv Rr'_*$. The definition of proper exchange in [def-kun-unbounded-exchange] gives its transpose as the right side of (*): naturality moves $a_K$ past the pulled-back counit, and $\\varepsilon_r\\circ r^*a_K=\\delta_K$ by the triangle identity. The transpose of $a'_{h^*K}\\circ C^\\Sigma_K$ is the left side of (*). Injectivity of the adjunction bijection proves\n$$C^{(j,r)}\\circ g^*a=(a'h^*)\\circ C^\\Sigma.$$\nNo equality of derived morphisms has been inferred merely from equality on cohomology.",
+   "text": "Transpose the two components under the derived adjunction Lp′* ⊣ Rp′_*. The transpose calculation uses naturality and the counit identity for mateEquiv: the compact-support exchange contributes the inverse-image square followed by the pulled-back counit. Naturality moves the input graph map to that counit.",
    "uses": [
-    "def-weil-pbc-etale-shriek-base-change-map",
-    "def-weil-pbc-adjunction-conjugate",
-    "lem-weil-pbc-mate-pasting",
-    "lem-weil-pbc-localization-universal-property",
-    "def-kun-unbounded-exchange"
+    "def-asd-compact-support-graph-comparison",
+    "def-kun-unbounded-exchange",
+    "lem-weil-pbc-mate-pasting"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03S6 (lemma-shriek-base-change); sites-cohomology.tex Tags 07A7 (remark-base-change), 0E46 and 0E47 (remark-compose-base-change, remark-compose-base-change-horizontal); explicit graph-component verification"
+    "place": "Tag 07A7: base-change as an adjunction mate"
+   }
+  },
+  {
+   "text": "The specified derived graph comparison transposes to the descended termwise projection, on both the original and pulled-back compactification. Substitute the projection base-change equation, which is the sheaf graph calculation descended through exact derived functors and normalized to total-left-derived inverse image.",
+   "uses": [
+    "lem-a2-compact-support-derived-projection",
+    "lem-a2-compact-support-graph-projection-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03S6, 0F4L, 04VG and 07A7: termwise projections and derived adjunction"
+   }
+  },
+  {
+   "text": "The two transposes are equal. Injectivity of the derived adjunction hom equivalence proves the required component equality. Natural-transformation extensionality and expansion of exactCompactSupportExchange identify these components with the unchanged original statement.",
+   "uses": [
+    "def-kun-unbounded-exchange",
+    "def-asd-compact-support-graph-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 07A7: injectivity of adjunction transposition"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-etale-shriek-base-change-map",
-  "def-weil-pbc-adjunction-conjugate",
+  "def-asd-compact-support-graph-comparison",
+  "def-kun-unbounded-exchange",
   "lem-weil-pbc-mate-pasting",
-  "lem-weil-pbc-localization-universal-property",
-  "def-kun-unbounded-exchange"
+  "lem-a2-compact-support-derived-projection",
+  "lem-a2-compact-support-graph-projection-base-change"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 03S6 and 0F4L; more-etale.tex Tags 0F7B-0F7F; current blueprint prop-asd-smooth-base-change, coherence (iii)",
-  "note": "Explicit graph construction and termwise descent of the parent normalization argument; the unit route is unchanged."
+  "place": "Tags 03S6 and 0F4L; categories.tex Tag 04VG; sites-cohomology.tex Tags 07A7, 0E46 and 0E47",
+  "note": "A2: complete formal transposition and exact-derived descent, reducing the sole geometric obligation to the ordinary sheaf graph rectangle. The blueprint unit route and existing statement are unchanged."
  },
  "mathlib_searches": [
   {
@@ -132,12 +154,12 @@
  "reviewed_proof": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "C-2c227",
+  "reviewer": "COMPILER",
   "group": "A2",
   "result": "pass",
-  "landing": "20261018T094933-L-3721634",
+  "landing": "20261018T112412-L-630984",
   "kind": "interface",
-  "note": "independent cc review: the delivered EtaleLocalization proof, GraphDerivedIso and GraphGeometricBaseChange generalizations and the new JointlySurjective module against the live tree, the change record and the 6 node files; compiled the delivery and its 7 downstream importers, ran #print axioms"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "statement_change": {
   "date": "2026-10-18",

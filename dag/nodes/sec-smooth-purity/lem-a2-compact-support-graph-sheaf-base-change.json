@@ -1,0 +1,161 @@
+{
+ "id": "lem-a2-compact-support-graph-sheaf-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-asd-smooth-base-change",
+   "place": "Proof, coherence (iii): etale inverse image and finite-fibre sum in the smooth chart, with the specified compact-support exchange of coherence (i). SGA 4 XVII 6.2.11; Tags 03S6 and 0F4L; sites-cohomology.tex Tags 0E46 and 0E47",
+   "via": [
+    "lem-asd-compact-support-graph-geometric-base-change",
+    "lem-asd-etale-compact-support-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Pullback preserves the specified compactification graph projection on sheaves",
+ "statement": "Let $A$ be a commutative ring, $f:U\\to X$ separated etale, $c=(i:U\\to Z,p:Z\\to X)$ a compactification, and $g:X'\\to X$ arbitrary. Put $U'=X'\\times_XU$, with $h:U'\\to U$ and $f':U'\\to X'$, and let $c'=(i':U'\\to Z',p':Z'\\to X')$ and $t:Z'\\to Z$ be the pulled-back compactification. Write $E=f_!$, $E'=f'_!$, $H=h^*$, $G=g^*$, $P=p^*$, $P'=p'^*$, $T=t^*$, $J=i_!$, $J'=i'_!$. Let $\\delta:EP\\to J$ and $\\delta':E'P'\\to J'$ be the sheaf projections [lem-a2-compact-support-termwise-projection] of the actual graph maps [def-f7-etale-compactification-graph-map]. Let $\\sigma:EG\\simeq HE'$ be the inverse etale sum base-change map [def-weil-pbc-etale-shriek-base-change-map], $\\theta:GP'\\simeq PT$ the inverse-image square comparison, and $j:HJ'\\to JT$ the open-extension base-change comparison. Then $(\\sigma P');(H\\delta');j=(E\\theta);(\\delta T)$, with the displayed associators. This is an identity of ordinary-sheaf transformations over arbitrary schemes and coefficients, including empty fibers and the zero ring.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "SGA 4 XVII 6.2.11; Tags 03S6 (lemma-shriek-base-change) and 0F4L (lemma-shriek-into-star-separated-etale); sites-cohomology.tex Tags 0E46 (remark-compose-base-change) and 0E47 (remark-compose-base-change-horizontal)"
+ },
+ "stmt_deps": [
+  "lem-a2-compact-support-termwise-projection",
+  "def-f7-etale-compactification-graph-map",
+  "def-weil-pbc-etale-shriek-base-change-map"
+ ],
+ "proof": [
+  {
+   "text": "First transpose the specified graph map back under p* ⊣ p_*; the triangle identities cancel the unit and counit inserted in its definition, giving exactly the original etale sum base-change comparison followed by the graph projection and graph composition comparison. In V=Z×_XU the section s=(i,id) of q:V→U is clopen: it is open because the other projection is etale and i is open, and closed because it is a section of the separated q. Base change gives V′ and its graph section s′, with graph and complementary open identified with their pullbacks. The graph projection q*→s_! is identity on the graph and zero on its complement, since it is the unit q*→s_*s*q* followed by the composition identity and the inverse clopen comparison s_!≅s_*.",
+   "uses": [
+    "def-f7-etale-compactification-graph-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F4L (lemma-shriek-into-star-separated-etale): extension by zero along an open-and-closed graph"
+   }
+  },
+  {
+   "text": "Restrict the pulled-back projection and the projection for V′ to this disjoint open cover. Both keep precisely the same section on the graph and vanish on the complement. Their equality follows from sheaf gluing on this disjoint cover; this argument is natural in the sheaf and does not use detection of derived morphisms by stalks.",
+   "uses": [
+    "def-f7-etale-compactification-graph-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F4L (lemma-shriek-into-star-separated-etale): the unique extension equal to the section on the graph and zero off it"
+   }
+  },
+  {
+   "text": "The sum exchange is the inverse left-adjoint comparison conjugate to inverse-image/direct-image exchange; the open-extension and graph composition comparisons use the same displayed adjunctions. Horizontal and vertical mate pasting identify the two pasted rectangles. Compose the preceding graph-projection identity with those comparisons to obtain exactly the displayed equation, including the specified direction of σ and j.",
+   "uses": [
+    "def-weil-pbc-etale-shriek-base-change-map",
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6 (lemma-shriek-base-change); sites-cohomology.tex Tags 0E46 (remark-compose-base-change) and 0E47 (remark-compose-base-change-horizontal): pasting canonical base-change maps"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-f7-etale-compactification-graph-map",
+  "def-weil-pbc-etale-shriek-base-change-map",
+  "lem-weil-pbc-mate-pasting",
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "SGA 4 XVII 6.2.11; Tags 03S6 (lemma-shriek-base-change) and 0F4L (lemma-shriek-into-star-separated-etale); sites-cohomology.tex Tags 0E46 (remark-compose-base-change) and 0E47 (remark-compose-base-change-horizontal)",
+  "note": "Explicit formal assembly of the graph-transposition route, using the displayed canonical comparisons. The blueprint unit route is retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a separated etale morphism, its clopen graph projection in a compactification commutes with pullback on sheaves",
+   "results": "8 hits, including PresheafedSpace.IsOpenImmersion.pullbackConeOfLeftLift_fst, IsSeparated.instSndScheme, IsSeparated.instFstScheme, IsSeparated.isStableUnderBaseChange, and IsEtale.instIsStableUnderBaseChangeScheme. No statement about sheaf graph projections.",
+   "date": "2026-10-18",
+   "verdict": "No exact match; generic categorical results are used where applicable."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformation between etale extension by zero and compact support pushforward commutes with base change",
+   "results": "8 hits, including SheafOfModules.unitToPushforwardObjUnit and its component formula, Scheme.Modules.pushforwardComp_hom_app_app and pushforward_map_app, and PresheafOfModules.pushforward₀CompToPresheaf. None is a compactification graph comparison theorem.",
+   "date": "2026-10-18",
+   "verdict": "No exact match; generic categorical results are used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryNatTrans|graph.*baseChange|transpose.*derived",
+   "results": "No matching Mathlib theorem. Existing library has the specified graph construction, openImmersionLowerShriekBaseChangeMap_comp_baseChangeMap_app, and finite-etale graph geometry, but no compactification graph projection base-change identity. The broader GraphCoherence theorem imports this item through GraphDerivedIso and cannot be used without a cycle.",
+   "date": "2026-10-18",
+   "verdict": "No exact match; generic categorical results are used where applicable."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphGeometricBaseChange",
+  "date": "2026-10-18",
+  "group": "A2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphSheafBaseChange",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCompactSupportGraphSheafBaseChange.lean",
+  "declaration": "AlgebraicGeometry.Etale.compactSupportGraphSheafProjection_baseChange",
+  "declarations": [
+   "AlgebraicGeometry.Etale.compactSupportGraphSheafProjection_baseChange"
+  ],
+  "statement": "theorem compactSupportGraphSheafProjection_baseChange\n    (A : Type (u + 1)) [CommRing A]\n    {U X X' : Scheme.{u}} (f : U ⟶ X) [Etale f] [IsSeparated f]\n    (c : Compactification f) (g : X' ⟶ X) :\n    let c' := c.ofIsPullback (IsPullback.of_hasPullback g f).flip\n    let E := etaleLowerShriek (ModuleCat.{u + 1} A) f inferInstance\n    let H := upperStar (ModuleCat.{u + 1} A) (pullback.snd g f)\n    let E' := etaleLowerShriek (ModuleCat.{u + 1} A) (pullback.fst g f) inferInstance\n    let P := upperStar (ModuleCat.{u + 1} A) c.g\n    let P' := upperStar (ModuleCat.{u + 1} A) c'.g\n    let T := upperStar (ModuleCat.{u + 1} A) (pullback.fst c.g g)\n    let δ := compactSupportGraphSheafProjection A f c (etaleCompactificationGraphMap A f c)\n    let δ' := compactSupportGraphSheafProjection A (pullback.fst g f) c'\n      (etaleCompactificationGraphMap A (pullback.fst g f) c')\n    letI := isIso_etaleLowerShriekBaseChangeMap A g f\n    let σ := (asIso (etaleLowerShriekBaseChangeMap A g f)).symm\n    Functor.whiskerRight σ.hom P' ≫ (Functor.associator H E' P').hom ≫\n        Functor.whiskerLeft H δ' ≫\n        openImmersionLowerShriekBaseChangeMap (ModuleCat.{u + 1} A)\n          (c.isPullback_i_ofIsPullback (IsPullback.of_hasPullback g f).flip).toCommSq =\n      (Functor.associator E (upperStar (ModuleCat.{u + 1} A) g) P').hom ≫\n        Functor.whiskerLeft E\n          (squareUpperStarIso (ModuleCat.{u + 1} A)\n            (IsPullback.of_hasPullback c.g g).toCommSq).hom ≫\n        (Functor.associator E P T).inv ≫ Functor.whiskerRight δ T",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-18"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphGeometricBaseChange",
+  "worker": "stage3 A2",
+  "summary": "Pullback preserves the specified compactification graph projection on sheaves. No new data is chosen from an unproved existence theorem.",
+  "blueprint": "Coherence (iii): graph projection, termwise localization, then adjunction transposition."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261018T112412-L-630984",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261018T112412-L-630984",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

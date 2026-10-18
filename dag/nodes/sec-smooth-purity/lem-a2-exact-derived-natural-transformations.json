@@ -1,0 +1,163 @@
+{
+ "id": "lem-a2-exact-derived-natural-transformations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-asd-smooth-base-change",
+   "place": "Proof, coherence (iii): etale inverse image and finite-fibre sum in the smooth chart, with the specified compact-support exchange of coherence (i). Tags 04VG and 07A7; explicit exact-functor normalization of the localization construction",
+   "via": [
+    "lem-asd-compact-support-graph-geometric-base-change",
+    "lem-asd-etale-compact-support-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Exact functors carry natural transformations and projection squares to unbounded derived categories",
+ "statement": "Let $C_i$ be abelian categories with unbounded derived categories, and let all functors below be additive and exact [lem-weil-pbc-localization-universal-property]. A natural transformation $\\tau:F\\to F'$ has a specified image $D\\tau:DF\\to DF'$ obtained degreewise on complexes and descended using the canonical exact-functor factorization isomorphisms. This construction preserves identities, composition, isomorphism maps and both whiskerings, with the canonical composition isomorphisms inserted. In particular, take $E:C_0\\to C_1$, $P:C_1\\to C_2$, $J:C_0\\to C_2$, $H:C_0\\to C_3$, $E':C_3\\to C_4$, $P':C_4\\to C_5$, $J':C_3\\to C_5$, $G:C_1\\to C_4$, $T:C_2\\to C_5$, isomorphisms $\\sigma:EG\\simeq HE'$, $\\theta:GP'\\simeq PT$, $j:HJ'\\simeq JT$, and transformations $\\delta:EP\\to J$, $\\delta':E'P'\\to J'$. If $(\\sigma P');(H\\delta');j=(E\\theta);(\\delta T)$, with associators inserted, the corresponding equation holds after $D$, using the specified exact composition and square comparisons. No boundedness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tags 04VG (lemma-properties-left-localization) and 07A7 (remark-base-change); explicit exact-functor normalization of the localization construction"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof": [
+  {
+   "text": "Construct Dτ with Localization.liftNatTrans and the canonical exact-functor factors through the homotopy localization. Its factorization equation is liftNatTrans_app. Compare transformations after this localization to prove preservation of composition and identities.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG (lemma-properties-left-localization): functors and natural transformations on a localization"
+   }
+  },
+  {
+   "text": "Represent homotopy objects by complexes. The degreewise definitions of transformed morphisms prove compatibility with left and right whiskering. Descend these formulas and cancel the canonical factorization isomorphisms. Compatibility with an isomorphism is the same liftNatTrans definition used by the existing mapDerivedCategoryNatIso.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG (lemma-properties-left-localization): degreewise natural transformations and localization"
+   }
+  },
+  {
+   "text": "Apply D to the assumed sheaf rectangle. Rewrite using the preceding composition and whiskering formulas. The two associators have identity degreewise components. The exact composition pentagon matches the intermediate comparisons; cancel the common source and target isomorphisms to obtain the stated component equation.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG (lemma-properties-left-localization): uniqueness of lifted natural transformations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/categories.tex",
+  "place": "Tags 04VG (lemma-properties-left-localization) and 07A7 (remark-base-change); explicit exact-functor normalization of the localization construction",
+  "note": "Explicit formal assembly of the graph-transposition route, using the displayed canonical comparisons. The blueprint unit route is retained."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural transformation of exact functors between abelian categories induces a natural transformation on derived categories, compatibly with composition",
+   "results": "8 hits, including Functor.rightDerivedNatTrans_comp, Functor.leftDerivedNatTrans_comp, NatTrans.leftDerived_comp, NatTrans.rightDerived_comp and their homotopy-category versions. None gives the normalized exact-functor API used here.",
+   "date": "2026-10-18",
+   "verdict": "No exact match; generic categorical results are used where applicable."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatTrans",
+   "results": "10 hits, including Localization.liftNatTrans, liftNatTrans_app, comp_liftNatTrans, liftNatTrans_id, and additive formulas. Read these generic localization foundations and use them in the construction.",
+   "date": "2026-10-18",
+   "verdict": "No exact match; generic categorical results are used where applicable."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryNatTrans|graph.*baseChange|transpose.*derived",
+   "results": "No exact-derived natural-transformation API. CategoryTheory/Functor/Derived/Adjunction.lean:125 supplies Adjunction.derivedε_fac_app for a different part of the proof.",
+   "date": "2026-10-18",
+   "verdict": "No exact match; generic categorical results are used where applicable."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphGeometricBaseChange",
+  "date": "2026-10-18",
+  "group": "A2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ExactDerivedNaturalTransformation",
+  "file": "lean/Sheaf/CategoryTheory/ExactDerivedNaturalTransformation.lean",
+  "declaration": "CategoryTheory.Functor.mapDerivedCategoryNatTrans_projectionSquare",
+  "declarations": [
+   "CategoryTheory.Functor.mapDerivedCategoryNatTrans",
+   "CategoryTheory.Functor.mapDerivedCategoryNatTrans_fac",
+   "CategoryTheory.Functor.mapDerivedCategoryNatTrans_comp",
+   "CategoryTheory.Functor.mapDerivedCategoryNatTrans_iso",
+   "CategoryTheory.Functor.mapDerivedCategoryNatTrans_whiskerRight",
+   "CategoryTheory.Functor.mapDerivedCategoryNatTrans_whiskerLeft",
+   "CategoryTheory.Functor.mapDerivedCategoryNatTrans_id",
+   "CategoryTheory.Functor.mapDerivedCategoryNatTrans_whiskerRight_eq",
+   "CategoryTheory.Functor.mapDerivedCategoryNatTrans_whiskerLeft_eq",
+   "CategoryTheory.Functor.mapDerivedCategoryNatTrans_projectionSquare"
+  ],
+  "statement": "theorem mapDerivedCategoryNatTrans_projectionSquare\n    (σ : E ⋙ G ≅ H ⋙ E') (θ : G ⋙ P' ≅ P ⋙ T) (j : H ⋙ J' ≅ J ⋙ T)\n    (δ : E ⋙ P ⟶ J) (δ' : E' ⋙ P' ⟶ J')\n    (hδ : Functor.whiskerRight σ.hom P' ≫ (Functor.associator H E' P').hom ≫\n        Functor.whiskerLeft H δ' ≫ j.hom =\n      (Functor.associator E G P').hom ≫ Functor.whiskerLeft E θ.hom ≫\n        (Functor.associator E P T).inv ≫ Functor.whiskerRight δ T)\n    (K : DerivedCategory C₀) :\n    P'.mapDerivedCategory.map ((mapDerivedCategorySquareIso σ).hom.app K) ≫\n        (mapDerivedCategoryCompIso E' P').inv.app (H.mapDerivedCategory.obj K) ≫\n        (mapDerivedCategoryNatTrans δ').app (H.mapDerivedCategory.obj K) ≫\n        (mapDerivedCategorySquareIso j).hom.app K =\n      (mapDerivedCategorySquareIso θ).hom.app (E.mapDerivedCategory.obj K) ≫\n        T.mapDerivedCategory.map ((mapDerivedCategoryCompIso E P).inv.app K ≫\n          (mapDerivedCategoryNatTrans δ).app K)",
+  "branch": "sheaf-dag",
+  "by": "A2",
+  "date": "2026-10-18"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphGeometricBaseChange",
+  "worker": "stage3 A2",
+  "summary": "Exact functors carry natural transformations and projection squares to unbounded derived categories. No new data is chosen from an unproved existence theorem.",
+  "blueprint": "Coherence (iii): graph projection, termwise localization, then adjunction transposition."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261018T112412-L-630984",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A2",
+  "result": "pass",
+  "landing": "20261018T112412-L-630984",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
