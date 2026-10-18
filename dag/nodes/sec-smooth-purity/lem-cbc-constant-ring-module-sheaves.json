@@ -24,7 +24,7 @@
    }
   },
   {
-   "text": "Use the sieve-site module-sheafification node with this constant ring presheaf. It supplies $b\\dashv i$, with $i$ restriction of scalars, and identifies the underlying abelian sheaf of $bN$ and its unit $\\eta_N:N\\to ibN$ with abelian sheafification and its unit. For a fixed-module sheaf $N$, this unit is an isomorphism on abelian presheaves: the sheafification universal property gives $c_N:(N^{\\#})\\to N$ with $c_N\\eta_N=1$, and uniqueness of maps out of the sheafification gives $\\eta_Nc_N=1$. Thus $c_N$ is an additive natural inverse of the unit. The hypotheses are exactly smallness, the chosen universes, and the covering-sieve topology; no fibre products are invoked.",
+   "text": "Use the module-sheafification construction of [lem-cbc-sieve-module-sheafification] with the constant ring presheaf and with the identity map from the underlying abelian presheaf of N to the same abelian sheaf N. The identity is locally bijective, so Mathlib PresheafOfModules.sheafify supplies a module sheaf whose abelian sheaf and section maps are definitionally those of N. This specializes the same sheafification universal property [def-weil-pbc-sheafification] without constructing a separate inverse to the usual sheafification unit.",
    "uses": [
     "lem-cbc-sieve-module-sheafification",
     "def-weil-pbc-sheafification"
@@ -36,7 +36,7 @@
    }
   },
   {
-   "text": "Transport the $\\underline\\Lambda$-action of $bN$ to the original abelian sheaf $N$ by the explicit formula $s\\star n=c_N(s\\cdot\\eta_N(n))$. Applying the additive bijection $\\eta_N$ to the unit, associativity and distributivity equations reduces them to the module axioms on $bN$. Naturality of $c_N$ and $\\eta_N$ gives compatibility with restrictions. Since the adjunction unit is linear over $\\Lambda^{\\mathrm{pre}}$, $\\iota(a)\\star n=c_N(\\eta_N(an))=an$. Denote the resulting module sheaf on exactly the same abelian sheaf by $E(N)$.",
+   "text": "The action is the real construction PresheafOfModules.Sheafify.module with the identity abelian unit, not a witness chosen from an existence theorem. The constructor supplies its module laws and semilinear restrictions. The map PresheafOfModules.toSheafify is fixed-ring linear and its underlying map is the identity, so its linearity gives iota(a) acting as the original scalar a. This defines E(N) on exactly the original sections.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -45,7 +45,7 @@
    }
   },
   {
-   "text": "The sieve-site module-sheafification node says that $i$ is fully faithful. If $Q_1,Q_2$ are two $\\underline\\Lambda$-module structures on the same abelian sheaf extending the fixed-$\\Lambda$ action of $N$, then $iQ_1=iQ_2=N$. Fullness lifts $1_N$ to a module morphism $Q_1\\to Q_2$. Restriction retains its underlying maps, so that lift has component $1_{N(C)}$. Its linearity says $s\\cdot_1 n=s\\cdot_2 n$ for all $C,s,n$. The two actions are equal. This proves the uniqueness asserted, including for the transported action constructed in step 3.",
+   "text": "Given two extended actions m,n on N, bundle them as module sheaves. A fixed-ring linear natural map between their scalar restrictions is formed using their extension equations. Mathlib PresheafOfModules.restrictHomEquivOfIsLocallySurjective lifts it to a map linear over the sheafified ring, with unchanged components. Apply this to the identity of N. Its linearity identifies the two scalar multiplications, and Module.ext' identifies the module structures sectionwise.",
    "uses": [
     "lem-cbc-sieve-module-sheafification"
    ],
@@ -56,7 +56,7 @@
    }
   },
   {
-   "text": "Given any fixed-$\\Lambda$-linear natural transformation $f:N\\to M$, apply the same full faithfulness to $E(N),E(M)$. Its restricted objects are exactly $N,M$, so there is a unique module morphism whose underlying map is $f$. In particular $f_C(s\\star n)=s\\star f_C(n)$ for every section $s$ of $\\underline\\Lambda$ and every $n$. Define $E(f)$ to be this same underlying natural transformation. The identity and composite laws hold componentwise, proving functoriality without changing maps.",
+   "text": "For any fixed-ring linear natural transformation f:N to M and any extended actions on N and M, form the restricted module-presheaf morphism using the extension equations. The same restriction Hom equivalence lifts f to a map linear over the sheafified ring, whose section maps remain f. Apply this in particular to the constructed actions to define E(f); identities, composition and addition hold componentwise.",
    "uses": [
     "lem-cbc-sieve-module-sheafification"
    ],
@@ -83,7 +83,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 03CY, lemma-sheafification-presheaf-modules, as prototype; explicit equivalence proof using the existing arbitrary-sieve Mathlib leaf lem-cbc-sieve-module-sheafification, not a pretopology-to-sieve identification."
+  "place": "Tag 03CY prototype; direct specialization of Mathlib PresheafOfModules.sheafify to the identity abelian sheafification map, with restrictHomEquivOfIsLocallySurjective for uniqueness and map linearity; explicit identity section maps give the equivalence."
  },
  "mathlib_searches": [
   {
@@ -218,5 +218,15 @@
   "group": "NA",
   "result": "pass",
   "note": "Read node, 4 stmt_deps, Stacks 03CY (sites-modules.tex:814-849, proof omitted, agent origin correct), module, report. All clauses match: the equivalence is canonical restriction along toSheafify (constantRingModuleRestriction is real data), both functors additive, the inverse keeps underlying abelian sheaves/maps (functor equality is achievable), exists-unique extended Module structure on the same carriers with semilinearity and iota-extension, and every linear f is linear for the extended actions; no extra hypotheses. Universe Λ : Type (max u v) is Mathlib's sheafification bound and covers the size convention (u=v); site universes stay independent. Edge cases (empty site, zero ring, empty sieves) are fine. No duplicate in Mathlib or the project (the near matches are ZMod/étale/pro-étale/different notions). Gates: no hollow defs, sorry only, docstrings with source/blueprint and the 6 proof steps, proof import non-public, ring/LeftExact imports needed together (HasWeakSheafify), lines <=96, node differs only in lean, statement verbatim, report sections present. nt_compile.py clean (2.5 s); axioms only sorryAx plus the standard ones."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261018T144401-L-3499465",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
