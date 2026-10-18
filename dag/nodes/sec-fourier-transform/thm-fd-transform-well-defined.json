@@ -1,167 +1,299 @@
 {
-  "id": "thm-fd-transform-well-defined",
-  "blueprint": {
-    "is": "thm-fd-transform-well-defined",
-    "from": null,
-    "same_as": null
-  },
-  "kind": "statement",
-  "title": "Well-definedness of the Fourier–Deligne transform",
-  "statement": "Let $S_0$ be a separated\nscheme of finite type over $k_0$, let $V_0\\to S_0$ be a vector\nbundle of rank $r$ with dual $V_0^\\vee$, let $E/\\Ql$ be a finite\nextension, and let $p_1,p_2$ be the projections of\n[def-fd-transform]. Then for every $K\\in D^b_c(V,E)$,\n\n$$\n\\operatorname{FT}_\\psi(K)\\in D^b_c(V^\\vee,E),\n$$\n\nand $\\operatorname{FT}_\\psi$ is an exact triangulated functor\n\n$$\n\\operatorname{FT}_\\psi:\nD^b_c(V,E)\\longrightarrow D^b_c(V^\\vee,E).\n$$",
-  "source": {
-    "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-prop-well-defined/thm-fd-transform-well-defined.md",
-    "place": "node thm-fd-transform-well-defined, order 2697"
-  },
-  "stmt_deps": [
+ "id": "thm-fd-transform-well-defined",
+ "blueprint": {
+  "is": "thm-fd-transform-well-defined",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Well-definedness of the Fourier–Deligne transform",
+ "statement": "Let $\\Lambda$ be a finite commutative ring in which $p$ is invertible\nand whose exponent is invertible on $S$, and let $\\pi:V\\to S$,\n$\\pi':V'\\to S$, $b$, $\\Psi$, $r\\in\\mathbf Z$ and the projections\n$p_1,p_2$ be as in [def-fd-transform], with\n$p_2:V\\times_SV'\\to V'$ of finite type and admitting a compactification.\nAssume that $V'$ is of finite type (quasi-compact and locally of finite type) over some field $k$. The compactification implies that $p_2$ is separated. Let\n$D^b_c(-,\\Lambda)$ denote the full subcategory of the derived category of\nétale sheaves of $\\Lambda$-modules consisting of the bounded complexes with\nconstructible cohomology sheaves. Then for every\n$K\\in D^b_c(V,\\Lambda)$,\n\n$$\n\\operatorname{FT}_\\psi(K)\\in D^b_c(V',\\Lambda),\n$$\n\nso that $\\operatorname{FT}_\\psi$ restricts to a functor\n\n$$\n\\operatorname{FT}_\\psi:\nD^b_c(V,\\Lambda)\\longrightarrow D^b_c(V',\\Lambda).\n$$",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-prop-well-defined/thm-fd-transform-well-defined.md",
+  "place": "node thm-fd-transform-well-defined, order 2697"
+ },
+ "stmt_deps": [
+  "def-fd-transform",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-finite-type-morphism",
+  "def-nagata-compactification",
+  "def-weil-proper-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Put $W=V\\times_SV'$. The pullback $p_1^*$ in [def-fd-transform] is the exact inverse image on constant-$\\Lambda$ module sheaves, by [prop-weil-pbc-inverse-image-modules-exact]. Hence $\\mathcal H^i(p_1^*K)=p_1^{-1}\\mathcal H^i(K)$ and the same global cohomological bounds hold. The underlying finite sheaves remain constructible by [prop-constructible-pullback]; the inherited module action and the same pulled-back strata make them constructible module sheaves. Thus $p_1^*K\\in D^b_c(W,\\Lambda)$ in the ordinary étale sense of [def-weil-pbc-constructible-complexes].",
+   "uses": [
     "def-fd-transform",
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "proof": [
-    {
-      "text": "The kernel $\\mathcal K_\\psi$ of [def-fd-kernel] is a lisse\nrank-one module, hence of finite Tor amplitude [prop-kernel-lisse] in the\ncoefficient conventions of the proper-base-change chapter ([def-weil-pbc-qbar-category]). By [prop-functor-package] of the framework chapter, the derived\npullback $Lp_1^*$, the derived tensor product, and the derived\ncompact-support direct image $p_{2,!}$ (the compact-support direct\nimage of the separated finite-type $p_2$)\nare exact triangulated functors on their constructible and finite-Tor\ndomains; hence $Lp_1^*K\\otimes^L_E\\mathcal K_\\psi$ lies in\n$D^b_c(V\\times_SV^\\vee,E)$, and its image under $p_{2,!}$\nlies in $D^b_c(V^\\vee,E)$; the shift $[r]$ of\n[def-fd-transform] preserves boundedness and constructibility.",
-      "uses": [
-        "def-fd-kernel",
-        "prop-kernel-lisse",
-        "def-weil-pbc-qbar-category",
-        "prop-functor-package",
-        "def-fd-transform"
-      ],
-      "elementary": false
-    }
-  ],
-  "proof_deps": [
-    "def-fd-kernel",
-    "prop-kernel-lisse",
-    "def-weil-pbc-qbar-category",
-    "prop-functor-package",
-    "def-fd-transform"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-fourier-transform/sk-prop-well-defined/thm-fd-transform-well-defined.md",
-    "place": "## Proof"
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "prop-constructible-pullback",
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095Y, lemma-pullback-c; finite constant-coefficient exactness and cohomology"
+   }
   },
-  "mathlib_searches": [],
-  "mathlib_match": null,
-  "status": "imported",
-  "merged_into": null,
-  "import_flags": [
-    "lean_multiple"
-  ],
-  "blueprint_kind": "theorem",
-  "blueprint_order": 2697,
-  "blueprint_uses": [
-    "def-fd-kernel",
+  {
+   "text": "In the general coefficient convention of [def-fd-transform], the kernel on $W$ is the Artin–Schreier sheaf $\\mathcal L_{\\Psi,b}$, namely the sheaf $b^*\\mathcal L_\\Psi$ of [def-fd-artin-schreier-sheaf] (current general-coefficient statement) for $k=\\mathbf F_p$, the kernel convention that [def-fd-transform] adopts. Apply [lem-fd-artin-schreier-finite-lisse] with $X=W$. Its hypotheses are exactly the characteristic-$p$ condition on $W$, $p\\in\\Lambda^\\times$, finite $\\Lambda$, and the specified $b,\\Psi$. It gives a flat constructible rank-one module sheaf $\\mathcal K_\\psi$ without requiring $V$ or $V'$ to be a vector bundle or to come from a finite field.",
+   "uses": [
     "def-fd-transform",
-    "def-weil-pbc-qbar-category",
-    "def-weil-pbc-scheme-conventions",
-    "prop-functor-package",
-    "prop-kernel-lisse"
-  ],
-  "lean": {
-    "module": "WeilConjectures.FourierTransform.Defs",
-    "declaration": "AlgebraicGeometry.Etale.boundedConstructible_fourierTransform_obj_of_boundedConstructible",
-    "branch": "slopmaster2",
-    "line": 315,
-    "sorry_free": false,
-    "body_lines": 1,
-    "others": [
-      {
-        "module": "WeilConjectures.FourierTransform.Defs",
-        "declaration": "AlgebraicGeometry.Etale.fourierTransformBoundedConstructible",
-        "branch": "slopmaster2",
-        "line": 220,
-        "sorry_free": true,
-        "body_lines": 7
-      }
+    "def-fd-artin-schreier-sheaf",
+    "lem-fd-artin-schreier-finite-lisse"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A3J, section-artin-schreier, exact Artin–Schreier sequence; character-idempotent trivialization as in the argument recorded in report.md",
+    "external": [
+     {
+      "document": "/home/ubuntu/weil-src-slopmaster2/WeilConjectures/FourierTransform/ArtinSchreier.lean",
+      "place": "artinSchreierSheafUpperStarIso, lines 688–692; isLocallyConstantSheaf_artinSchreierSheafOf, lines 731–734; isConstructibleSheaf_artinSchreierSheafOf, lines 1298–1302 (reference statements, not a claim of transitive closure)"
+     }
     ]
+   }
   },
-  "blueprint_lean": [
+  {
+   "text": "Apply [lem-fd-flat-constructible-tensor] on $W$ to $p_1^*K$ and the flat constructible sheaf $\\mathcal K_\\psi$. It gives $M=p_1^*K\\otimes^L_\\Lambda\\mathcal K_\\psi[0]\\in D^b_c(W,\\Lambda)$. In particular this operation has not imposed finite Tor amplitude on $K$; its cohomology remains in the same interval as that of $K$.",
+   "uses": [
+    "lem-fd-flat-constructible-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095I, lemma-tensor-product-constructible, and Tag 0961, lemma-tensor-c; flat degree-zero specialization, with the cohomology computation recorded in report.md"
+   }
+  },
+  {
+   "text": "Apply [lem-fd-finite-ring-compact-support-finiteness] with $Y=V'$, $X=W$ and $f=p_2$, using the chosen compactification that defines the transform. Here $V'$ is of finite type over the field $k$ by the corrected hypothesis, $p_2$ is of finite type by assumption, and its compactification is supplied. The lemma also verifies separatedness from that compactification. It gives $Rp_{2,!}M\\in D^b_c(V',\\Lambda)$ for this arbitrary finite ring, including rings that are neither fields nor quotients of discrete valuation rings.",
+   "uses": [
+    "lem-fd-finite-ring-compact-support-finiteness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GL0, theorem-constructible-shriek; Tag 0G2A, lemma-derived-lower-shriek-bounded, clause (3); chosen-compactification convention of section-derived-lower-shriek-compactification",
+    "external": [
+     {
+      "document": "literature/stacks-project/schemes.tex",
+      "place": "Tags 01KU, lemma-separated-permanence (1), and 01L4, lemma-monomorphism-separated (separatedness clause)"
+     }
+    ]
+   }
+  },
+  {
+   "text": "By [def-fd-transform], $\\operatorname{FT}_\\psi(K)=(Rp_{2,!}M)[r]$. If $Rp_{2,!}M$ has cohomology in $[a,b]$, its shift has $\\mathcal H^i((Rp_{2,!}M)[r])=\\mathcal H^{i+r}(Rp_{2,!}M)$, and so has constructible cohomology in $[a-r,b-r]$. This proves membership in the full subcategory [def-weil-pbc-constructible-complexes]. The ambient transform is already a functor by [def-fd-transform], including its specified action on morphisms. Restricting a functor whose objects land in a full subcategory retains its maps, identities and composites, giving the asserted functor on $D^b_c$.",
+   "uses": [
+    "def-fd-transform",
+    "def-weil-pbc-constructible-complexes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-well-defined/thm-fd-transform-well-defined.proof.md",
+    "place": "last clause: shift preserves boundedness and constructibility; restriction to the full subcategory"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-fd-transform",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "prop-constructible-pullback",
+  "def-weil-pbc-constructible-complexes",
+  "def-fd-artin-schreier-sheaf",
+  "lem-fd-artin-schreier-finite-lisse",
+  "lem-fd-flat-constructible-tensor",
+  "lem-fd-finite-ring-compact-support-finiteness"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-prop-well-defined/thm-fd-transform-well-defined.proof.md",
+  "place": "Repaired finite-coefficient realization of the five operations in the paragraph; the old E-coefficient package does not cover the current statement; source discrepancy and counterexample in split_report and report.md"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fourierTransform.*constructib|constructib.*fourierTransform",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match: no declaration states this etale-sheaf theorem; algebraic modules, constructible subsets, analytic Fourier transforms and condensed sheaf constructions in the hits have different objects or conclusions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Well defined Fourier Deligne transform on bounded constructible etale complexes with finite coefficients and quasi compact target",
+   "results": "8 hits: FourierTransform, FourierTransform.fourier, FourierTransform.mk, FourierTransform.fourierₗ, FourierTransform.noConfusionType, FourierInvPair, Real.fourierIntegral, SchwartzMap.fourierTransformCLM",
+   "date": "2026-10-18",
+   "verdict": "no match: no declaration states this etale-sheaf theorem; algebraic modules, constructible subsets, analytic Fourier transforms and condensed sheaf constructions in the hits have different objects or conclusions"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"fourierTransform\", \"constructible\"",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match: no declaration states this etale-sheaf theorem; algebraic modules, constructible subsets, analytic Fourier transforms and condensed sheaf constructions in the hits have different objects or conclusions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Fourier Deligne transform preserves bounded constructible etale complexes over a finite commutative ring when the second projection is compactifiable and target finite type over a field",
+   "results": "8 hits: LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, CompHausLike.LocallyConstantModule.functor, LightCondAb.ofSheafLightProfinite, LightCondMod.ofSheafLightProfinite, CondensedMod.ofSheafCompHaus, CondensedMod.ofSheafProfinite, CondensedMod.ofSheafStonean, Condensed.ofSheafForgetProfinite",
+   "date": "2026-10-18",
+   "verdict": "no match: no declaration states this etale-sheaf theorem; algebraic modules, constructible subsets, analytic Fourier transforms and condensed sheaf constructions in the hits have different objects or conclusions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [
+  "lean_multiple"
+ ],
+ "blueprint_kind": "theorem",
+ "blueprint_order": 2697,
+ "blueprint_uses": [
+  "def-fd-kernel",
+  "def-fd-transform",
+  "def-weil-pbc-qbar-category",
+  "def-weil-pbc-scheme-conventions",
+  "prop-functor-package",
+  "prop-kernel-lisse"
+ ],
+ "lean": {
+  "module": "WeilConjectures.FourierTransform.Defs",
+  "declaration": "AlgebraicGeometry.Etale.boundedConstructible_fourierTransform_obj_of_boundedConstructible",
+  "branch": "slopmaster2",
+  "line": 315,
+  "sorry_free": false,
+  "body_lines": 1,
+  "others": [
+   {
+    "module": "WeilConjectures.FourierTransform.Defs",
+    "declaration": "AlgebraicGeometry.Etale.fourierTransformBoundedConstructible",
+    "branch": "slopmaster2",
+    "line": 220,
+    "sorry_free": true,
+    "body_lines": 7
+   }
+  ]
+ },
+ "blueprint_lean": [
+  "AlgebraicGeometry.Etale.boundedConstructible_fourierTransform_obj_of_boundedConstructible",
+  "AlgebraicGeometry.Etale.fourierTransformBoundedConstructible"
+ ],
+ "uses_not_cited": [
+  "def-weil-pbc-scheme-conventions"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": [
     "AlgebraicGeometry.Etale.boundedConstructible_fourierTransform_obj_of_boundedConstructible",
     "AlgebraicGeometry.Etale.fourierTransformBoundedConstructible"
-  ],
-  "uses_not_cited": [
-    "def-weil-pbc-scheme-conventions"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": [
-        "AlgebraicGeometry.Etale.boundedConstructible_fourierTransform_obj_of_boundedConstructible",
-        "AlgebraicGeometry.Etale.fourierTransformBoundedConstructible"
-      ]
-    },
-    "slopmaster2": {
-      "state": "rests_on_sorry",
-      "decls": [
-        {
-          "name": "AlgebraicGeometry.Etale.boundedConstructible_fourierTransform_obj_of_boundedConstructible",
-          "module": "WeilConjectures.FourierTransform.Defs",
-          "lines": [
-            308,
-            329
-          ],
-          "kind": "theorem",
-          "sorry": false
-        },
-        {
-          "name": "AlgebraicGeometry.Etale.fourierTransformBoundedConstructible",
-          "module": "WeilConjectures.FourierTransform.Defs",
-          "lines": [
-            331,
-            349
-          ],
-          "kind": "def",
-          "sorry": false
-        }
-      ],
-      "missing": [],
-      "open": [
-        {
-          "name": "AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_isProper",
-          "module": "WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Proper",
-          "lines": [
-            157,
-            169
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        },
-        {
-          "name": "AlgebraicGeometry.Etale.exists_hasConstructibleDirectImageBaseChangeOn",
-          "module": "WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne",
-          "lines": [
-            108,
-            125
-          ],
-          "kind": "theorem",
-          "nodes": [],
-          "below": false
-        }
-      ]
-    }
+   ]
   },
-  "chapter": "sec-fourier-transform",
-  "unit": "sk-prop-well-defined",
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $\\Lambda$ be a finite commutative ring in which $p$ is invertible\nand whose exponent is invertible on $S$, and let $\\pi:V\\to S$,\n$\\pi':V'\\to S$, $b$, $\\Psi$, $r\\in\\mathbf Z$ and the projections\n$p_1,p_2$ be as in [def-fd-transform], with\n$p_2:V\\times_SV'\\to V'$ of finite type and admitting a compactification.\nAssume that $V'$ is locally of finite type over some field $k$. Let\n$D^b_c(-,\\Lambda)$ denote the full subcategory of the derived category of\nétale sheaves of $\\Lambda$-modules consisting of the bounded complexes\nwith constructible cohomology sheaves. Then for every\n$K\\in D^b_c(V,\\Lambda)$,\n\n$$\n\\operatorname{FT}_\\psi(K)\\in D^b_c(V',\\Lambda),\n$$\n\nso that $\\operatorname{FT}_\\psi$ restricts to a functor\n\n$$\n\\operatorname{FT}_\\psi:\nD^b_c(V,\\Lambda)\\longrightarrow D^b_c(V',\\Lambda).\n$$",
-    "proof": [
-      {
-        "text": "The kernel $\\mathcal K_\\psi$ of [def-fd-kernel] is a lisse\nrank-one module, hence of finite Tor amplitude [prop-kernel-lisse] in the\ncoefficient conventions of the proper-base-change chapter ([def-weil-pbc-qbar-category]). By [prop-functor-package] of the framework chapter, the derived\npullback $Lp_1^*$, the derived tensor product, and the derived\ncompact-support direct image $p_{2,!}$ (the compact-support direct\nimage of the separated finite-type $p_2$)\nare exact triangulated functors on their constructible and finite-Tor\ndomains; hence $Lp_1^*K\\otimes^L_E\\mathcal K_\\psi$ lies in\n$D^b_c(V\\times_SV^\\vee,E)$, and its image under $p_{2,!}$\nlies in $D^b_c(V^\\vee,E)$; the shift $[r]$ of\n[def-fd-transform] preserves boundedness and constructibility.",
-        "uses": [
-          "def-fd-kernel",
-          "prop-kernel-lisse",
-          "def-weil-pbc-qbar-category",
-          "prop-functor-package",
-          "def-fd-transform"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  "slopmaster2": {
+   "state": "rests_on_sorry",
+   "decls": [
+    {
+     "name": "AlgebraicGeometry.Etale.boundedConstructible_fourierTransform_obj_of_boundedConstructible",
+     "module": "WeilConjectures.FourierTransform.Defs",
+     "lines": [
+      308,
+      329
+     ],
+     "kind": "theorem",
+     "sorry": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.fourierTransformBoundedConstructible",
+     "module": "WeilConjectures.FourierTransform.Defs",
+     "lines": [
+      331,
+      349
+     ],
+     "kind": "def",
+     "sorry": false
+    }
+   ],
+   "missing": [],
+   "open": [
+    {
+     "name": "AlgebraicGeometry.Etale.boundedConstructible_rightDerivedLowerStar_of_isProper",
+     "module": "WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Proper",
+     "lines": [
+      157,
+      169
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    },
+    {
+     "name": "AlgebraicGeometry.Etale.exists_hasConstructibleDirectImageBaseChangeOn",
+     "module": "WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Deligne",
+     "lines": [
+      108,
+      125
+     ],
+     "kind": "theorem",
+     "nodes": [],
+     "below": false
+    }
+   ]
   }
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-prop-well-defined",
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $\\Lambda$ be a finite commutative ring in which $p$ is invertible\nand whose exponent is invertible on $S$, and let $\\pi:V\\to S$,\n$\\pi':V'\\to S$, $b$, $\\Psi$, $r\\in\\mathbf Z$ and the projections\n$p_1,p_2$ be as in [def-fd-transform], with\n$p_2:V\\times_SV'\\to V'$ of finite type and admitting a compactification.\nAssume that $V'$ is locally of finite type over some field $k$. Let\n$D^b_c(-,\\Lambda)$ denote the full subcategory of the derived category of\nétale sheaves of $\\Lambda$-modules consisting of the bounded complexes\nwith constructible cohomology sheaves. Then for every\n$K\\in D^b_c(V,\\Lambda)$,\n\n$$\n\\operatorname{FT}_\\psi(K)\\in D^b_c(V',\\Lambda),\n$$\n\nso that $\\operatorname{FT}_\\psi$ restricts to a functor\n\n$$\n\\operatorname{FT}_\\psi:\nD^b_c(V,\\Lambda)\\longrightarrow D^b_c(V',\\Lambda).\n$$",
+  "proof": [
+   {
+    "text": "The kernel $\\mathcal K_\\psi$ of [def-fd-kernel] is a lisse\nrank-one module, hence of finite Tor amplitude [prop-kernel-lisse] in the\ncoefficient conventions of the proper-base-change chapter ([def-weil-pbc-qbar-category]). By [prop-functor-package] of the framework chapter, the derived\npullback $Lp_1^*$, the derived tensor product, and the derived\ncompact-support direct image $p_{2,!}$ (the compact-support direct\nimage of the separated finite-type $p_2$)\nare exact triangulated functors on their constructible and finite-Tor\ndomains; hence $Lp_1^*K\\otimes^L_E\\mathcal K_\\psi$ lies in\n$D^b_c(V\\times_SV^\\vee,E)$, and its image under $p_{2,!}$\nlies in $D^b_c(V^\\vee,E)$; the shift $[r]$ of\n[def-fd-transform] preserves boundedness and constructibility.",
+    "uses": [
+     "def-fd-kernel",
+     "prop-kernel-lisse",
+     "def-weil-pbc-qbar-category",
+     "prop-functor-package",
+     "def-fd-transform"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "thm-fd-transform-well-defined",
+  "worker": "stage1",
+  "summary": "Repair of return 8c3cde06d6. Replaced the invalid finite-field/adic kernel and functor-package citations by three general finite-ring lemmas. Retained ordinary etale Db_c without requiring finite Tor amplitude of K. Added all category and morphism notions, verbatim citations and unit realization. STATEMENT-DISPUTED: locally finite type target alone does not give global boundedness; restored the quasi-compact target present in the source Lean declaration, with explicit disjoint-affine-space counterexample in report.md.",
+  "blueprint": "main-20261015 P2: pullback, lisse flat kernel, tensor, compact support and shift/restriction, in this order. The unit and node omit target quasi-compactness and their proof still uses E and the vector-dual setting: these are source errors, repaired below the unit with the same operations. The corrected statement restores the actual source theorem finite-type target hypothesis.",
+  "statement_dispute": {
+   "reason": "The main-20261015 node and unit omit QuasiCompact aV' from the source theorem. Global boundedness fails without it.",
+   "counterexample": "Take k algebraically closed of characteristic p, Lambda=F_l with l!=p, S=V'=coprod_{n>=0} Spec k, V=coprod_{n>=0} A^n_k, pi the componentwise structure maps and pi'=id. Then W=V, p1=id, p2=pi is finite type and has compactification coprod A^n -> coprod P^n -> coprod Spec k. Set b=0, Psi=1, r=0 and K=Lambda_V[0]. On component n, H_c^{2n}(A^n,Lambda)=Lambda(-n) is nonzero. Thus Rp2! K is not globally bounded.",
+   "correction": "Require V' to be quasi-compact as well as locally of finite type over k, exactly the actual slopmaster2 theorem and its docstring; retain arbitrary finite Lambda, arbitrary pairings and Db_c inputs."
+  },
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic exact inverse image of constant-coefficient module sheaves; covers arbitrary schemes and rings, with no finite-field setting."
+   },
+   {
+    "node": "prop-constructible-pullback",
+    "why": "Generic constructible sheaf pullback along any scheme morphism; underlying finite sheaves give the constructibility used at step 1."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "prop-constructible-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q140-13ac20481",
+  "group": "Q140",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-13ac20481 (reviewer sub-agent of L); spot-checked: I read the item, all five steps, the three new nodes, every cited statement, the unit record, Stacks more-etale 0GL0 (theorem-constructible-shriek), 0G2A(3) and the compactification section, tags 095I, 0961, 095Y and 0A3J, and slopmaster2 FourierTransform/Defs.lean l.290-349. (1) The corrected item statement adds quasi-compactness of V'. The uncorrected blueprint statement is false: with V = ⊔A^n over V' = ⊔Spec k and K = Λ[0], H^{2n}_c of A^n is nonzero on component n, so FT(K) is not globally bounded. The added hypothesis is exactly the Lean `[QuasiCompact aV']` at Defs.lean:315. The only citer, thm-a1-fourier-t-exact, works over A^1 and satisfies it. This corrects a false statement (E7), not a silent weakening, and the maintainer should record it in HUMAN.md. The coefficient category is ordinary small-étale finite Λ, never identified with Q̄_ℓ or E. (2) All three new nodes are true and are not duplicates or restated clauses. The Artin–Schreier lemma follows from a finite étale cover with regular F_p action, on which the image of e_Ψ is free of rank one. The tensor lemma holds because a flat factor makes the derived tensor termwise and constructibility passes to a common refinement. The finiteness lemma: X and Y are Noetherian, f = qj is separated, finite Λ is Noetherian and torsion, so 0GL0 gives constructibility and 0G2A(3) gives a uniform bound N. Edge cases checked: empty X, Λ = 0, trivial Ψ, K = 0, and Z/l against Z/l^2. (3) Batch-5 check on sk-def-as: it is a definition, but its stmt_deps chain into sk-thm-sf-package, a closure of 13,999 nodes with 60 in sec-poincare-duality, and it is the finite-field E-framed definition. The item actually needs def-fd-artin-schreier-sheaf, whose main-20261015 statement is the general-Λ definition and which def-fd-kernel's current statement cites. Its closure has 83 nodes and reaches no trace-formula, Poincaré-duality or assumption node. I replaced sk-def-as with it in item step 2 (proof_deps recomputed) and in the statement and stmt_deps of lem-fd-artin-schreier-finite-lisse. No other new citation reaches either chapter. (4) I accept the tool uses of prop-weil-pbc-inverse-image-modules-exact and prop-constructible-pullback. (5) For the maintainer: the unit's realized steps list prop-kernel-lisse, which the item does not use. The unit's P1 route (vector bundle, Q̄_ℓ) does not fit the general item, and the unit statement and uses need reconciliation together with the quasi-compactness source error. I left the unit unchanged.; 2 file(s) fixed by the reviewer"
+ }
 }
