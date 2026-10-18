@@ -256,5 +256,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-25834c9de",
+  "group": "Q80",
+  "result": "fix",
+  "note": "Lean statement, dependencies, source clauses, universes, edge cases, and route-pivot checks pass; per-file scompile reproduction passed without diagnostics. Repaired H11’s placeholder second reading with the complete replacement report in fixes/det-prop-sfb-cartesian-coefficients-finite-free.report.md. Full findings are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleFiniteFreeCoefficients",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_finiteFree_proEtale_coefficients",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleFiniteFreeCoefficients.lean",
+  "statement": "theorem exists_finiteFree_proEtale_coefficients (ℓ : ℕ) [Fact ℓ.Prime] (E F : PadicAlgCl.FiniteIntermediateField ℓ) (h : E ≤ F) (d : ℕ) (hd : d = Module.finrank ℚ_[ℓ] F / Module.finrank ℚ_[ℓ] E) : (∃ b : Fin d → PadicAlgCl.integers ℓ F, ∀ x : PadicAlgCl.integers ℓ F, ∃! a : Fin d → PadicAlgCl.integers ℓ E, ∑ i, (IntermediateField.inclusion h) (a i : E) * (b i : F) = (x : F)) ∧ ∀ (b : Fin d → PadicAlgCl.integers ℓ F), (∀ x : PadicAlgCl.integers ℓ F, ∃! a : Fin d → PadicAlgCl.integers ℓ E, ∑ i, (IntermediateField.inclusion h) (a i : E) * (b i : F) = (x : F)) → ∃ (r : Mon.mk (Profinite.padicIntegersRingObj.{u} ℓ E.1) ⟶ Mon.mk (Profinite.padicIntegersRingObj.{u} ℓ F.1)), (∀ (S : Profinite.{u}) (a : ULift.{u + 1} C(S, PadicAlgCl.integers ℓ E)) (s : S), (((r.hom.hom.app (op S)) a).down s : F) = (IntermediateField.inclusion h) (a.down s : E)) ∧ ∃ (m₀ : Fin d → (Profinite.padicIntegersRingObj.{u} ℓ E.1 ⟶ Profinite.padicIntegersRingObj.{u} ℓ F.1)) (m₁ : Fin d → (Profinite.continuousMapRingObj.{u} E ⟶ Profinite.continuousMapRingObj.{u} F)), (∀ (i : Fin d) (S : Profinite.{u}) (a : ULift.{u + 1} C(S, PadicAlgCl.integers ℓ E)) (s : S), (((m₀ i).hom.app (op S) a).down s : F) = (IntermediateField.inclusion h) (a.down s : E) * (b i : F)) ∧ (∀ (i : Fin d) (S : Profinite.{u}) (a : ULift.{u + 1} C(S, E)) (s : S), ((m₁ i).hom.app (op S) a).down s = (IntermediateField.inclusion h) (a.down s) * (b i : F)) ∧ ∃ (e₀ : ∀ X : Scheme.{u}, Mod.finiteFree (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X) d ≅ (Mod.comap ((upperStarFromPoint X).map r.hom)).obj (Mod.regular (condensedRingObj (Profinite.padicIntegersRingObj ℓ F.1) X))) (e₁ : ∀ X : Scheme.{u}, Mod.finiteFree (padicSubfieldRingObj X ℓ E) d ≅ (Mod.comap (padicSubfieldRingObjMap X ℓ h)).obj (Mod.regular (padicSubfieldRingObj X ℓ F))), (∀ (X : Scheme.{u}) (i : Fin d), (biproduct.ι (fun _ : Fin d => Mod.regular (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)) i).hom ≫ (e₀ X).hom.hom = (upperStarFromPoint X).map (m₀ i)) ∧ (∀ (X : Scheme.{u}) (i : Fin d), (biproduct.ι (fun _ : Fin d => Mod.regular (padicSubfieldRingObj X ℓ E)) i).hom ≫ (e₁ X).hom.hom = (upperStarFromPoint X).map (m₁ i)) ∧ (∀ (X : Scheme.{u}) (i : Fin d), padicIntegersToPadicSubfield X ℓ E ≫ (biproduct.ι (fun _ : Fin d => Mod.regular (padicSubfieldRingObj X ℓ E)) i).hom ≫ (e₁ X).hom.hom = (biproduct.ι (fun _ : Fin d => Mod.regular (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)) i).hom ≫ (e₀ X).hom.hom ≫ padicIntegersToPadicSubfield X ℓ F) ∧ (∀ (X Y : Scheme.{u}) (f : X ⟶ Y) (i : Fin d), (upperStar Ab.{u + 1} f).map ((biproduct.ι (fun _ : Fin d => Mod.regular (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) Y)) i).hom ≫ (e₀ Y).hom.hom) ≫ condensedPullbackHom (Profinite.padicIntegersRingObj ℓ F.1) f = condensedPullbackHom (Profinite.padicIntegersRingObj ℓ E.1) f ≫ (biproduct.ι (fun _ : Fin d => Mod.regular (condensedRingObj (Profinite.padicIntegersRingObj ℓ E.1) X)) i).hom ≫ (e₀ X).hom.hom) ∧ (∀ (X Y : Scheme.{u}) (f : X ⟶ Y) (i : Fin d), (upperStar Ab.{u + 1} f).map ((biproduct.ι (fun _ : Fin d => Mod.regular (padicSubfieldRingObj Y ℓ E)) i).hom ≫ (e₁ Y).hom.hom) ≫ condensedPullbackHom (Profinite.continuousMapRingObj F) f = condensedPullbackHom (Profinite.continuousMapRingObj E) f ≫ (biproduct.ι (fun _ : Fin d => Mod.regular (padicSubfieldRingObj X ℓ E)) i).hom ≫ (e₁ X).hom.hom) ∧ (∀ X : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars ((upperStarFromPoint X).map r.hom)) ∧ PreservesFiniteLimits (Mod.extendScalars (padicSubfieldRingObjMap X ℓ h)))",
+  "branch": "newtargets-dag",
+  "by": "Q80",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

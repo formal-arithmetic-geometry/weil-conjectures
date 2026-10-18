@@ -17,7 +17,8 @@
   "def-weil-proetale-locally-constant-sheaf",
   "def-weil-open-immersion",
   "def-weil-pbc-constant-sheaf",
-  "def-sfb-finitely-presented-module"
+  "def-sfb-finitely-presented-module",
+  "def-sc-finitely-presented-module"
  ],
  "proof": [
   {
@@ -278,5 +279,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-8b3b9becd",
+  "group": "Q79",
+  "result": "fix",
+  "note": "Statement, dependencies, sources, universes and edge cases pass; scompile reproduced successfully. Replaced the H11 second-reading placeholder with a substantive complete report in fixes/det-pe-finite-local-systems-type.report.md. Full review saved in review.md; Lean, snapshot and branch unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleFiniteLocalSystemsType",
+  "declaration": "AlgebraicGeometry.Scheme.finiteLocalSystemsType",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleFiniteLocalSystemsType.lean",
+  "statement": "theorem finiteLocalSystemsType (X : Scheme.{t}) (Λ : Type u) [CommRing Λ] (F : SheafOfModules.{max u (t + 1)} ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj ((constantSheaf (ProEt.topology X) CommRingCat.{max u (t + 1)}).obj (CommRingCat.of (ULift.{t + 1, u} Λ))))) (hF : IsLocallyConstantProEtaleModuleSheafWithModelsOfUniverses X Λ (fun M ↦ Module.FinitePresentation (ULift.{t + 1, u} Λ) M) F) (R : Type v) (model : R → ModuleCat.{max u (t + 1)} (ULift.{t + 1, u} Λ)) (hmodel : ∀ r : R, Module.FinitePresentation (ULift.{t + 1, u} Λ) (model r)) (hrep : ∀ M : ModuleCat.{max u (t + 1)} (ULift.{t + 1, u} Λ), Module.FinitePresentation (ULift.{t + 1, u} Λ) M → ∃! r : R, Nonempty (M ≅ model r)) : ∃ U : R → X.Opens, IsClopenDecomposition X R U ∧ Nonempty (IsColimit (Cofan.mk X (fun r : R ↦ (U r).ι))) ∧ ∀ r : R, ∃ (I : Type (t + 1)) (V : I → X.ProEt) (f : ∀ i : I, V i ⟶ ProEt.mk (U r).ι), Presieve.ofArrows V f ∈ (ProEt.precoverage X).coverings _ ∧ ∀ i : I, Nonempty (F.over (V i) ≅ proEtaleConstantModuleSheafOverOfUniverses X Λ (V i) (model r))",
+  "branch": "newtargets-dag",
+  "by": "Q79",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

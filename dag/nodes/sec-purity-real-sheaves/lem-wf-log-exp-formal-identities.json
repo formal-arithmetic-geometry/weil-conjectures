@@ -213,5 +213,23 @@
   "group": "Q31",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-c458d9f1b (reviewer sub-agent of L); spot-checked: The mathematics is correct and complete; one small citation repair was made. Item: same statement as current blueprint main-20261015 lem-wf-deep-principal-unit-log proof paragraph 3, formal identities only (L∘A=log(exp T)=T, A∘L=exp(log(1+T))-1=T), not weakened. Steps checked: step 1 DE=E, DL=B, (1+T)B=1; step 2 DH=(B∘A)E=1 via the chain rule and S_A of (1+T)B=1; step 3 h0=0, h1=1, h_{n+1}=0 using 1/(n+1) in Q; step 4 DK=KB and A∘L=K-1 via the sub and constant clauses; step 5 recurrence (n+1)k_{n+1}=(1-n)k_n with base k2=0, so K=1+T. Exact Fraction test to degree 13 confirms both identities. Zero ring and nilpotent Q-algebras are fine. New leaves match pinned Mathlib: substAlgHom (Substitution.lean:171), coe_substAlgHom:175, substAlgHom_X:313, HasSubst.of_constantCoeff_zero':67; derivative_subst (Derivative.lean:140, CommRing+HasSubst only), derivative:50, coeff_derivative:60. Both leaves were also tested on random integer series. subst_exp_log and subst_log_exp_sub_one are absent from pinned Mathlib (grep 0 hits), so the item is correctly not a leaf. Duplicate search over the whole DAG (exp-hom, nonarchimedean substitution, trf Jacobian chain rule, partial-derivative def, power-series exponential): no duplicate. Neither new node restates a clause of the item. Within the unit's route; no tool_uses; no SGA. FIX: in both new leaves, mathlib_match.how and source.place now also cite PowerSeries.coeff_subst' (Substitution.lean:247), which links Mathlib's subst to the nodes' coefficientwise sum f_n G^n (B6/B8). Corrected files are under fixes/dag/nodes/sec-purity-real-sheaves/.; 2 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-e4336740a",
+  "group": "N6",
+  "result": "pass",
+  "note": "Wrote review.md. Both formal identities, hypotheses, coefficients, substitution order, dependencies, universes, edge cases, docstrings, report sections, and route-pivot compliance checked. Exact snapshot compiled successfully through scompile.py in sandbox and library forms without diagnostics. No fixes required."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.PowerSeries.LogExpFormalIdentities",
+  "declaration": "PowerSeries.log_exp_sub_one_formal_identities",
+  "file": "lean/Sheaf/RingTheory/PowerSeries/LogExpFormalIdentities.lean",
+  "statement": "theorem log_exp_sub_one_formal_identities (R : Type u) [CommRing R] [Algebra ℚ R] : (log R).subst (exp R - 1) = (X : PowerSeries R) ∧ (exp R - 1).subst (log R) = (X : PowerSeries R)",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

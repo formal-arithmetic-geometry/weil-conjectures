@@ -283,5 +283,27 @@
   "group": "NM",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-b9bc34ffd (reviewer sub-agent of L); spot-checked: I read all of the mathematics: the item, the parent's use of it, the statements of all 22 cited nodes, and the Stacks sources (groupoids.tex 03LO/0APA/0APB, more-groupoids.tex 0APK (a),(b), topology 0A31, morphisms 02JQ). The statement matches the 0APK translation exactly, with affine flat surjective p, V quasi-separated, v in W in E, W an open invariant subscheme, and E an intersection of a nonempty family of quasi-compact opens that is set-theoretically invariant. Nothing is weakened. Steps 2-8 are correct and follow 0APA/0APB. The proof writes out the generalization-stability of sigma(Q) and sigma(H), K disjoint from T, both directions of invariance of the closure of T, and K disjoint from that closure (0APB leaves this implicit). It sets W = V minus that closure, with Q in K in W in H in E = sigma(H), and gets the spectral intersection description on the quasi-compact, quasi-separated H2. I checked the edge cases: V empty, p = id, H = V, and V not quasi-compact. There are no new nodes and no duplicates (rg for 0APA/0APB/03LO/0APK and invariant/saturation wording). I accept the two declared tool_uses, orbit-saturated and spectral-generalizations. picard-closure-specialization is closed in Lean, so it is a tool. Fix (C5/C1): step 1 re-derived inline that the diagonal pullback of phi is the identity, which the existing Lean-closed node lem-galois-descent-datum-diagonal-identity states exactly. I added it to step 1's uses and to proof_deps and cut the inline argument down to a gloss, in fixes/dag/nodes/sec-purity-real-sheaves/lem-a1-fpqc-invariant-intersection-neighbourhoods.json.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-ecc0ed716",
+  "group": "Q09",
+  "result": "fix",
+  "note": "Wrote review.md and a complete replacement report under fixes/, repairing H11’s author self-check with an independent reading. Mathematics, dependencies, canonical helper, and verbatim signature pass; scompile.py exited 0 without warnings. Shared HEAD advanced externally; immutable snapshot files were verified unchanged."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FpqcInvariantIntersectionNeighbourhoods",
+  "declaration": "CategoryTheory.Over.DescentDatum.exists_fpqc_invariant_intersection_neighbourhood",
+  "declarations": [
+   "CategoryTheory.Over.DescentDatum.descentRelationTarget",
+   "CategoryTheory.Over.DescentDatum.exists_fpqc_invariant_intersection_neighbourhood"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FpqcInvariantIntersectionNeighbourhoods.lean",
+  "statement": "theorem exists_fpqc_invariant_intersection_neighbourhood {X S : Scheme.{u}} [IsAffine X] [IsAffine S] (p : X ⟶ S) [Flat p] [Surjective p] {V : Over X} [QuasiSeparatedSpace V.left] (D : Over.DescentDatum p V) (v : V.left) : ∃ (W : V.left.Opens) (E : Set V.left), v ∈ W ∧ (W : Set V.left) ⊆ E ∧ (∃ 𝒰 : Set V.left.Opens, 𝒰.Nonempty ∧ (∀ U ∈ 𝒰, IsCompact (U : Set V.left)) ∧ E = ⋂ U ∈ 𝒰, (U : Set V.left)) ∧ Limits.pullback.fst (V.hom ≫ p) p ⁻¹ᵁ W = D.descentRelationTarget ⁻¹ᵁ W ∧ (Limits.pullback.fst (V.hom ≫ p) p) ⁻¹' E = D.descentRelationTarget ⁻¹' E",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

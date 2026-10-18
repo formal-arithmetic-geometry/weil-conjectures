@@ -161,5 +161,32 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-292630e96",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Verified statement, source, six dependencies, canonical existing declarations, edge cases, route-pivot compliance, report sections, and scompile.py evidence; no substantive findings."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic",
+  "declaration": "AlgebraicGeometry.ProEtale.coefficientRing",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.coefficientRing",
+   "AlgebraicGeometry.ProEtale.coefficientRing_X",
+   "AlgebraicGeometry.ProEtale.condensedRingObj",
+   "AlgebraicGeometry.ProEtale.isCommMonObj_condensedRingObj",
+   "CategoryTheory.Functor.monObjObj",
+   "CategoryTheory.Functor.mapMon",
+   "CategoryTheory.Functor.isCommMonObj_obj"
+  ],
+  "statement": "noncomputable def coefficientRing (X : Scheme.{u})\n    (Λ : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})) :\n    Mon (Sheaf (ProEt.topology X) Ab.{u + 1})",
+  "branch": "slopmaster2",
+  "by": "Q06",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Existing canonical construction, specialized to Λ = Mon.mk (Profinite.padicIntegersRingObj ℓ E), Mon.mk (Profinite.continuousMapRingObj E), and Mon.mk (Profinite.padicAlgClRingObj ℓ), with E : PadicAlgCl.FiniteIntermediateField ℓ and [Fact ℓ.Prime]. Its underlying object is p_X^* underline T; the unit and multiplication are definitionally the two prescribed composites via Functor.monObjObj. The three commutativity witnesses are isCommMonObj_condensedRingObj applied to those exact inputs. The E and Qbar specializations are also definitionally the published padicSubfieldRingObj X ℓ E and padicAlgClRingObj X ℓ. The Qbar input retains finite-subextension-valued sections. The branch label denotes the published WeilConjectures framework, read with scompile.py --source. No new definition or section formula is introduced; the report gives the complete parameter and dependency mapping."
  }
 }
