@@ -15,9 +15,182 @@
   "def-weil-irreducible-components",
   "def-kun-topological-krull-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For the forward implication assume $A$ is universally catenary. For every minimal prime $\\mathfrak p$ of $A$, [lem-per-universal-catenarity-minimal-quotients] makes $A/\\mathfrak p$ universally catenary and [lem-weil-pbc-local-completion-quotient] identifies its completion with $B/\\mathfrak pB$. It therefore suffices to show that every universally catenary Noetherian local domain has equidimensional completion. We prove this by strong induction on the least dimension $d$ of a completed minimal-prime quotient whenever equidimensionality fails.",
+   "uses": [
+    "lem-per-universal-catenarity-minimal-quotients",
+    "lem-weil-pbc-local-completion-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AW3, reduction to a domain and induction"
+   }
+  },
+  {
+   "text": "In that domain case the completion is Noetherian and local by [lem-weil-pbc-adic-completion-noetherian] and [lem-weil-pbc-local-completion-local-ring]. Its dimension is $\\dim A$ by [lem-weil-pbc-completion-dimension]. By [lem-weil-pbc-spec-irreducible-components-minimal-primes] its components are the $V(\\mathfrak q)$ for minimal primes; their dimensions are ring quotient dimensions by [lem-weil-pbc-spec-topological-krull-dimension-ring]. These dimensions are finite by [lem-weil-pbc-noetherian-local-finite-krull-dimension]. The smallest $d$ is strictly smaller than $\\dim A$ if they are unequal (every chain starts above some minimal prime, by [lem-weil-pbc-prime-contains-minimal-prime]). It is positive: a zero-dimensional minimal-prime quotient would make that prime the maximal ideal, hence the only prime in this local ring, making its spectrum equidimensional. Choose a minimal prime $\\mathfrak q$ attaining $0<d<\\dim A$.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-completion-dimension",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "lem-weil-pbc-spec-topological-krull-dimension-ring",
+    "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+    "lem-weil-pbc-prime-contains-minimal-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AW3, choice of d"
+   }
+  },
+  {
+   "text": "If $d=1$, [lem-per-one-dimensional-component-conormal] supplies $J=\\mathfrak q^n$ with conormal annihilated by a power of $\\mathfrak m$. Apply [lem-per-conormal-torsion-algebraization] to the finite-type algebra $A$ itself: there is a finite-type $A$-algebra $D$ whose $\\mathfrak m$-adic completion is $C=B/J$, as an $A$-algebra. Since $\\sqrt J=\\mathfrak q$, chains in $C$ are chains in $B/\\mathfrak q$ and $\\dim C=1$.",
+   "uses": [
+    "lem-per-one-dimensional-component-conormal",
+    "lem-per-conormal-torsion-algebraization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AW3, d=1 algebraization"
+   }
+  },
+  {
+   "text": "The completion reduction isomorphisms [lem-weil-pbc-adic-completion-mod-ideal] give $D/\\mathfrak mD=C/\\mathfrak mC=\\kappa(\\mathfrak m)$: indeed $J\\subset\\mathfrak q\\subset\\mathfrak mB$ and $B/\\mathfrak mB=\\kappa(\\mathfrak m)$ by [lem-weil-pbc-local-completion-local-ring]. Thus $\\mathfrak n=\\mathfrak mD$ is maximal with that residue field. Modulo every $\\mathfrak m^kD$, an element outside $\\mathfrak n$ is a unit: lift its inverse modulo $\\mathfrak mD$ and invert the remaining $1+u$ by the finite geometric series since $u^k=0$. Consequently localizing $D$ at $\\mathfrak n$ leaves its $\\mathfrak m$-adic completion unchanged. The local map $A\\to D_{\\mathfrak n}$ has closed fibre $\\kappa(\\mathfrak m)$, so [lem-weil-pbc-finite-after-completion] identifies this with its maximal-ideal completion. By [lem-weil-pbc-completion-dimension], $\\dim D_{\\mathfrak n}=\\dim C=1$. The needed Noetherianity of $D$ follows from [lem-weil-pbc-finite-type-algebra-noetherian].",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-finite-after-completion",
+    "lem-weil-pbc-completion-dimension",
+    "lem-weil-pbc-finite-type-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AW3, d=1 closed fibre and Tag 0394"
+   }
+  },
+  {
+   "text": "The contraction of $\\mathfrak q$ to the domain $A$ is zero: the completion map is flat by [lem-weil-pbc-local-completion-faithfully-flat], and [lem-sc-flat-going-down] applied to the minimal prime $\\mathfrak q$ makes its contraction minimal. Let $\\mathfrak q'$ be the inverse image of $\\mathfrak q/J$ under $D\\to C$; it lies in $\\mathfrak n$ and contracts to zero. Hence $A\\subset D/\\mathfrak q'$ is an inclusion of domains and the latter is finite type. Apply [lem-exc-dimension-formula-universally-catenary-finite-type-domain] at $\\mathfrak n/\\mathfrak q'$ over $\\mathfrak m$. The residue-field transcendence degree is zero by the preceding step, so\n$$\\dim (D/\\mathfrak q')_{\\mathfrak n}=\\dim A+\\operatorname{trdeg}_A(D/\\mathfrak q')\\ge\\dim A>1.$$\nBut chains in this quotient local ring are chains in $D_{\\mathfrak n}$, of dimension one. This contradiction proves the induction base.",
+   "uses": [
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-sc-flat-going-down",
+    "lem-exc-dimension-formula-universally-catenary-finite-type-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AW3, d=1 dimension formula"
+   }
+  },
+  {
+   "text": "If $d>1$, $A$ is catenary by the definition of universal catenarity [def-exc-excellent-ring], applied to the finite-type algebra $A$. The hyperplane reduction [lem-per-catenary-completion-hyperplane] gives a prime $\\mathfrak p$ of $A$ and a completed minimal-prime quotient of $A/\\mathfrak p$ of dimension $d-1$, strictly below $\\dim(A/\\mathfrak p)$. That quotient domain is universally catenary by [lem-per-universal-catenarity-quotient]. Its completion is therefore equidimensional by the strong induction hypothesis: if it were not, its least component dimension would be at most $d-1<d$. Its dimension equals $\\dim(A/\\mathfrak p)$ by [lem-weil-pbc-completion-dimension], contrary to the supplied component. This completes the forward implication.",
+   "uses": [
+    "def-exc-excellent-ring",
+    "lem-per-catenary-completion-hyperplane",
+    "lem-per-universal-catenarity-quotient",
+    "lem-weil-pbc-completion-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AW3, hyperplane induction, with prime-quotient reduction explicit"
+   }
+  },
+  {
+   "text": "Conversely suppose every indicated completed minimal-prime quotient is equidimensional. By [lem-per-universal-catenarity-minimal-quotients] it is enough to prove universal catenarity of each domain $A/\\mathfrak p$; [lem-weil-pbc-local-completion-quotient] identifies its completion with $B/\\mathfrak pB$. Thus rename the quotient $A$ and assume $B$ is equidimensional. The ring $B$ is Noetherian and local by [lem-weil-pbc-adic-completion-noetherian] and [lem-weil-pbc-local-completion-local-ring], and is complete by [lem-weil-pbc-adic-completion-mod-ideal]. It is excellent by [lem-per-complete-local-excellence], hence universally catenary by the definition of excellence [def-exc-excellent-ring].",
+   "uses": [
+    "lem-per-universal-catenarity-minimal-quotients",
+    "lem-weil-pbc-local-completion-quotient",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-adic-completion-mod-ideal",
+    "lem-per-complete-local-excellence",
+    "def-exc-excellent-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AW5, reduction and completion; Tag 032C via the excellence of complete local rings (Tag 07QW)"
+   }
+  },
+  {
+   "text": "Fix $P=A[x_1,\\ldots,x_r]$ and a maximal ideal $\\mathfrak n$ over $\\mathfrak m$. Since $B/\\mathfrak mB=A/\\mathfrak m$ by [lem-weil-pbc-local-completion-local-ring], the quotient rings $B[x_1,\\ldots,x_r]/\\mathfrak mB[x_1,\\ldots,x_r]$ and $P/\\mathfrak mP$ are the same polynomial ring over the residue field. The inverse image $\\mathfrak n'$ of $\\mathfrak n/\\mathfrak mP$ is maximal and contracts to $\\mathfrak n$. By [lem-per-polynomial-closed-fibre-components], $Q=B[x_1,\\ldots,x_r]_{\\mathfrak n'}$ is catenary and equidimensional, every component having dimension $\\dim B+r$.",
+   "uses": [
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-per-polynomial-closed-fibre-components"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AW5, closed-fibre polynomial localization"
+   }
+  },
+  {
+   "text": "The completion map is flat by [lem-weil-pbc-local-completion-faithfully-flat]. Its polynomial base change $P\\to B[x_1,\\ldots,x_r]$ is flat by [lem-weil-pbc-flat-module-base-change]. Localizing the target preserves flatness by [lem-pc-affine-flat-module-localization-preserves-flatness], and passing to the localization of the source gives flatness over $P_{\\mathfrak n}$ by [lem-weil-pbc-flat-over-localization]. Thus $P_{\\mathfrak n}\\to Q$ is flat and local. Both rings are Noetherian (polynomial finite type by [lem-weil-pbc-finite-type-algebra-noetherian], and localization: an ideal is extended from its contraction, so is generated by the images of finitely many generators of that contraction). Apply [lem-per-flat-equidimensional-catenary-descent] to conclude $P_{\\mathfrak n}$ is catenary.",
+   "uses": [
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-weil-pbc-flat-module-base-change",
+    "lem-pc-affine-flat-module-localization-preserves-flatness",
+    "lem-weil-pbc-flat-over-localization",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-per-flat-equidimensional-catenary-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AW5, flat local descent"
+   }
+  },
+  {
+   "text": "Every local ring essentially of finite type over $A$ is a localization of a quotient of one of the rings $P_{\\mathfrak n}$ just treated, by [lem-per-closed-fibre-polynomial-presentation]. Catenarity passes to these rings directly from prime correspondence: primes of a quotient are primes containing its kernel, and primes of a localization are primes disjoint from the multiplicative set; every prime between two such primes has the same property, so the intervals and saturated chain lengths are unchanged. Finally, for a finite-type $A$-algebra $E$ and primes $\\mathfrak a\\subseteq\\mathfrak b$, the whole interval identifies with that between $\\mathfrak aE_{\\mathfrak b}$ and $\\mathfrak bE_{\\mathfrak b}$ in the local ring $E_{\\mathfrak b}$, which is essentially finite type and hence catenary. Thus $E$ is catenary. By [def-exc-excellent-ring] this says precisely that $A$ is universally catenary. These are the elementary prime-chain arguments of Tags 00NJ, 00NK and 0AUN, rather than extra black-box criteria.",
+   "uses": [
+    "lem-per-closed-fibre-polynomial-presentation",
+    "def-exc-excellent-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AW5, reduction to polynomial local rings; elementary prime-chain arguments from algebra.tex Tags 00NJ, 00NK, 0AUN"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-excellent-ring",
+  "lem-exc-dimension-formula-universally-catenary-finite-type-domain",
+  "lem-pc-affine-flat-module-localization-preserves-flatness",
+  "lem-per-catenary-completion-hyperplane",
+  "lem-per-closed-fibre-polynomial-presentation",
+  "lem-per-complete-local-excellence",
+  "lem-per-conormal-torsion-algebraization",
+  "lem-per-flat-equidimensional-catenary-descent",
+  "lem-per-one-dimensional-component-conormal",
+  "lem-per-polynomial-closed-fibre-components",
+  "lem-per-universal-catenarity-minimal-quotients",
+  "lem-per-universal-catenarity-quotient",
+  "lem-sc-flat-going-down",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-completion-dimension",
+  "lem-weil-pbc-finite-after-completion",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-weil-pbc-flat-over-localization",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-local-completion-quotient",
+  "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-weil-pbc-spec-topological-krull-dimension-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0AW3, 0AW4, 0AW5 and proposition-ratliff 0AW6"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -29,7 +202,7 @@
   {
    "tool": "loogle",
    "query": "\"catenary\"",
-   "results": "{\"t\": \"2026-10-18T17:36:04Z\", \"tool\": \"loogle\", \"query\": \"\\\"catenary\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "results": "{\"t\": \"2026-10-18T18:56:37Z\", \"tool\": \"loogle\", \"query\": \"\\\"catenary\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-18",
    "verdict": "no match"
   },
@@ -56,7 +229,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-completion-component-dimension",
@@ -68,7 +241,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Proof Step 3, dimension-normalized Verdier duality over the arbitrary base field, expanded through lem-per-qbar-arbitrary-field-duality, lem-per-finite-residue-dualizing and lem-per-potential-extraordinary-pullback: the dimension-function normalization and its identification of Zariski and etale immediate specializations: completion applied first to the henselization and then, in the reverse direction, to the universally catenary reduced local closure (ILO XIV 2.1.6). ILO XIV 2.1.6, integral-case converse: the Ratliff theorem XIV 1.2.2 gives equidimensional completed components.",
+   "place": "Proof Step 3, dimension-normalized Verdier duality over the arbitrary base field: completion applied to the henselization and reverse completion of the universally catenary reduced local closure (ILO XIV 2.1.6), with Ratliff Theorem XIV 1.2.2.",
    "via": [
     "lem-per-completion-component-dimension",
     "lem-per-immediate-specialization-criterion",
@@ -79,5 +252,109 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-ratliff-formal-catenarity",
+  "worker": "stage1",
+  "summary": "Repaired and expanded the Ratliff argument into ten explicit steps: minimal-prime reduction, strong induction with a power-of-prime conormal algebraization, residue-field and dimension-formula contradiction, precise prime-quotient hyperplane induction, and flat completion/polynomial descent. The final catenarity criteria are proved by prime-chain correspondence.",
+  "blueprint": "Proof Step 3, ILO XIV 2.1.6 and Ratliff XIV 1.2.2: completion/component dimension and the formal-catenarity criterion used in the universally catenary reverse direction.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-dimension-formula-universally-catenary-finite-type-domain",
+    "why": "Generic commutative-algebra tool used exactly by its stated interface in the Ratliff source proof; no corresponding tool is supplied by the perverse-curve unit."
+   },
+   {
+    "node": "lem-pc-affine-flat-module-localization-preserves-flatness",
+    "why": "Generic commutative-algebra tool used exactly by its stated interface in the Ratliff source proof; no corresponding tool is supplied by the perverse-curve unit."
+   },
+   {
+    "node": "lem-sc-flat-going-down",
+    "why": "Generic commutative-algebra tool used exactly by its stated interface in the Ratliff source proof; no corresponding tool is supplied by the perverse-curve unit."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-mod-ideal",
+    "why": "Generic commutative-algebra tool used exactly by its stated interface in the Ratliff source proof; no corresponding tool is supplied by the perverse-curve unit."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic commutative-algebra tool used exactly by its stated interface in the Ratliff source proof; no corresponding tool is supplied by the perverse-curve unit."
+   },
+   {
+    "node": "lem-weil-pbc-completion-dimension",
+    "why": "Generic commutative-algebra tool used exactly by its stated interface in the Ratliff source proof; no corresponding tool is supplied by the perverse-curve unit."
+   },
+   {
+    "node": "lem-weil-pbc-finite-after-completion",
+    "why": "Generic commutative-algebra tool used exactly by its stated interface in the Ratliff source proof; no corresponding tool is supplied by the perverse-curve unit."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-algebra-noetherian",
+    "why": "Generic commutative-algebra tool used exactly by its stated interface in the Ratliff source proof; no corresponding tool is supplied by the perverse-curve unit."
+   },
+   {
+    "node": "lem-weil-pbc-flat-module-base-change",
+    "why": "Generic commutative-algebra tool used exactly by its stated interface in the Ratliff source proof; no corresponding tool is supplied by the perverse-curve unit."
+   },
+   {
+    "node": "lem-weil-pbc-flat-over-localization",
+    "why": "Generic commutative-algebra tool used exactly by its stated interface in the Ratliff source proof; no corresponding tool is supplied by the perverse-curve unit."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-faithfully-flat",
+    "why": "Generic commutative-algebra tool used exactly by its stated interface in the Ratliff source proof; no corresponding tool is supplied by the perverse-curve unit."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-local-ring",
+    "why": "Generic commutative-algebra tool used exactly by its stated interface in the Ratliff source proof; no corresponding tool is supplied by the perverse-curve unit."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-quotient",
+    "why": "Generic commutative-algebra tool used exactly by its stated interface in the Ratliff source proof; no corresponding tool is supplied by the perverse-curve unit."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+    "why": "Generic commutative-algebra tool used exactly by its stated interface in the Ratliff source proof; no corresponding tool is supplied by the perverse-curve unit."
+   },
+   {
+    "node": "lem-weil-pbc-prime-contains-minimal-prime",
+    "why": "Generic commutative-algebra tool used exactly by its stated interface in the Ratliff source proof; no corresponding tool is supplied by the perverse-curve unit."
+   },
+   {
+    "node": "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "why": "Generic commutative-algebra tool used exactly by its stated interface in the Ratliff source proof; no corresponding tool is supplied by the perverse-curve unit."
+   },
+   {
+    "node": "lem-weil-pbc-spec-topological-krull-dimension-ring",
+    "why": "Generic commutative-algebra tool used exactly by its stated interface in the Ratliff source proof; no corresponding tool is supplied by the perverse-curve unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-dimension-formula-universally-catenary-finite-type-domain",
+  "lem-pc-affine-flat-module-localization-preserves-flatness",
+  "lem-sc-flat-going-down",
+  "lem-weil-pbc-adic-completion-mod-ideal",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-completion-dimension",
+  "lem-weil-pbc-finite-after-completion",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-flat-module-base-change",
+  "lem-weil-pbc-flat-over-localization",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-local-completion-quotient",
+  "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+  "lem-weil-pbc-prime-contains-minimal-prime",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "lem-weil-pbc-spec-topological-krull-dimension-ring"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q04-233898bc8",
+  "group": "Q04",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-233898bc8 (reviewer sub-agent of L); spot-checked: I read the item, all 9 new nodes and every cited statement in full, plus Stacks 0AW2-0AW6, 0ALR (statement and whole proof), 0AUG, 0AUP, 00NK and 032C. The item statement matches 0AW6/0AW2 and is unchanged. Steps 1-10 follow 0AW3/0AW5 correctly. The d=1 case holds: the q^n conormal is supported at m_B, and every isomorphism in the 0ALR proof is a B-algebra map, so the A-algebra form is justified. The residue-field and completion argument holds, and the dimension formula gives dim >= dim A > 1, against dim D_n = 1. In the d>1 case the hyperplane node is true under catenarity: components of V(q,f) have dimension d-1, prime avoidance makes them components of V(fB) and so minimal over some p_iB, and dim A/p_i = dim A - 1. The prime-quotient induction is sound. The converse holds: n' is maximal over n, the polynomial components have dimension dim C + r, the map is flat and local, and the 0AW4 descent and the 0AUG/00NK/00NJ/0AUN prime-chain steps are short enough to mark elementary. Edge cases tested: field, Artinian ring, DVR, r=0. One fault, C5 duplicate: the new node lem-per-complete-local-universally-catenary (032C) is a one-line specialization of the existing reviewed node lem-per-complete-local-excellence (same unit; excellent includes universally catenary per def-exc-excellent-ring). That node's closure does not reach the item, so there is no cycle. FIX: step 7 now cites lem-per-complete-local-excellence and def-exc-excellent-ring, and proof_deps are recomputed. I accept the generic commutative-algebra tool_uses. There is no SGA citation and no other duplicate. This is not a target node.; 1 file(s) fixed by the reviewer"
  }
 }
