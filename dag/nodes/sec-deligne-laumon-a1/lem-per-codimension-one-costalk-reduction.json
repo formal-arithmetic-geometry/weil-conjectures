@@ -21,7 +21,11 @@
   "def-sc-normalization",
   "def-weil-universal-homeomorphism",
   "def-sc-discrete-valuation-ring",
-  "def-asd-finite-etale-tate-twist"
+  "def-asd-finite-etale-tate-twist",
+  "def-per-etale-geometric-costalk",
+  "def-asd-finite-etale-tate-sheaf",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-adjunction-mate"
  ],
  "proof": [
   {
@@ -420,5 +424,46 @@
   "group": "NB",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-b71efae73 (reviewer sub-agent of L); spot-checked: Read in full: the item, the new node lem-per-ind-etale-closed-support-base-change, every cited statement, Gabber XVII Def. 1.1.1–1.1.2, §1.3, Def. 1.3.1 and 1.4.1 (printed pp. 258–262), and Stacks 09XQ/0A45. Statement: unchanged against the live base except the twist definition reference and the dual-tensor convention for negative twists. Not weakened. No SGA. The nine steps are correct. Excellent ⇒ Nagata ⇒ N-2 gives a finite normalization. The Dedekind node plus integral-henselian permanence make it a strictly henselian DVR. Radicial + integral + surjective gives a universal homeomorphism. The degree is p^r with p≠ℓ. Ind-étale strict-local invariance and closed-support base change give both chains. Twists are handled by a global basis on strictly local schemes. New node: true (0A45 triangle plus ind-étale base change of Rj_* on D^+), general, not a clause of the parent, no duplicate found in a DAG-wide search. Batch-5: both lem-trf-integral-component-henselian-permanence (Stacks 092X/09XK algebra) and lem-trf-ind-etale-strict-local-invariance (05WR/0GIP) are generic leaves. Their closures (197 and 254 nodes) contain no trace-formula or Poincaré theorem, no sk-thm-trace-transport and no batch-4 target, and neither assumption gives them, so both are accepted. The 27 tool_uses are generic and accepted. FIX: (1) removed the duplicate stmt_dep def-asd-finite-etale-tate-twist. (2) C4 in Step 2: the triples node does not identify the pointed-neighbourhood X_(z̄) with the strict henselization of O_{X,z}. I added lem-exc-affine-strict-local-ring-comparison to the text, uses, proof_deps and tool_uses, and used the triples node with R=O_{X,z} for ind-étaleness and m_T=m_V·O_T.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CodimensionOneCostalkReduction",
+  "declaration": "AlgebraicGeometry.Etale.codimensionOneCostalkReduction",
+  "declarations": [
+   "AlgebraicGeometry.Etale.costalkCoefficientTensor",
+   "AlgebraicGeometry.Etale.CostalkTensorPresentation",
+   "AlgebraicGeometry.Etale.costalkPresentationCommShift",
+   "AlgebraicGeometry.Etale.costalkCoefficientTransport",
+   "AlgebraicGeometry.Etale.costalkStalkPresentation",
+   "AlgebraicGeometry.Etale.costalkPullbackPresentation",
+   "AlgebraicGeometry.Etale.costalkSupportPresentation",
+   "AlgebraicGeometry.Etale.costalkTrivializedSheafTensor",
+   "AlgebraicGeometry.Etale.costalkTrivializedFiberTensor",
+   "AlgebraicGeometry.Etale.costalkSectionsPresentation",
+   "AlgebraicGeometry.Etale.geometricCostalkPresentation",
+   "AlgebraicGeometry.Etale.strictLocalCostalkPresentation",
+   "AlgebraicGeometry.Etale.HasTwistShiftCompatibleIso",
+   "AlgebraicGeometry.Etale.codimensionOneClosureIdeal",
+   "AlgebraicGeometry.Etale.codimensionOneClosure",
+   "AlgebraicGeometry.Etale.codimensionOneClosureι",
+   "AlgebraicGeometry.Etale.codimensionOneComplex",
+   "AlgebraicGeometry.Etale.codimensionOnePresentation",
+   "AlgebraicGeometry.Etale.HasPrimeToResidueDegree",
+   "AlgebraicGeometry.Etale.CodimensionOneCostalkReduction",
+   "AlgebraicGeometry.Etale.codimensionOneCostalkReduction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CodimensionOneCostalkReduction.lean",
+  "statement": "theorem codimensionOneCostalkReduction (ℓ : ℕ) [Fact ℓ.Prime] (X : Scheme.{u}) [IsNoetherian X] (hExcellent : ∀ z : X, ∃ U : X.affineOpens, z ∈ U.1 ∧ IsExcellent Γ(X, U.1)) (hInvertible : ∀ z : X, IsUnit (ℓ : X.residueField z)) : (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (z : Spec (.of Ω) ⟶ X), HasTwistShiftCompatibleIso ℓ (geometricCostalkPresentation ℓ z) (strictLocalCostalkPresentation ℓ z)) ∧ ∀ (Ωx Ωy : Type u) [Field Ωx] [IsAlgClosed Ωx] [Field Ωy] [IsAlgClosed Ωy] (x : Spec (.of Ωx) ⟶ X) (y : Spec (.of Ωy) ⟶ X) (s : strictLocalization y ⟶ strictLocalization x), s ≫ strictLocalizationToBase x = strictLocalizationToBase y → topologicalKrullDim (codimensionOneClosure s) = 1 → ∃ hIntegral : IsIntegral (codimensionOneClosure s), @CodimensionOneCostalkReduction X ℓ _ Ωx Ωy _ _ _ _ x y s hIntegral",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-074b406d2",
+  "group": "NB",
+  "result": "pass",
+  "note": "Re-delivery of db22f3e1 (H3 tautological twist square, H2 unused theorem stmt_dep) repairs both faults. HasTwistShiftCompatibleIso now states the square on tensor by the actual finiteEtaleTateSheaf X a and its fibre. Passages are canonical (monoidal pullback with upperStarCompSheafFiberIso, the supportTensorMatePlus projection mate, monoidal sheafFiber); supported-sections leaves hold for every basis b with sheafFiber.mapIso b, so a change of basis cancels. Not implied by naturality (monodromy acts by chi^a). Geometric clauses unchanged; the EtaleGeometricCostalk node is byte-identical. Point equalities h proved by a probe (spec_map_strictHenselizationEval_comp_strictLocalizationToBase, SpecToEquivOfField). The unused theorem stmt_dep was removed; the added existing def stmt_deps (tate-sheaf, sheaf-tensor, adjunction-mate) are used, and preflight accepted them. nt_compile --json clean with no warnings: costalk 2.0 s, item 3.2 s, probe 2.0 s, with RegularClosedSupportBaseChange source in the overlay (published olean missing; if landing hits stale olean, it is build lag, land as is). Advisory: supportTensor* helpers are owned by theorem node lem-per-regular-closed-support-base-change, which is not a stmt_dep."
  }
 }
