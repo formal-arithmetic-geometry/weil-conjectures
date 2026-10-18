@@ -116,4 +116,13 @@ lemma extMap_extMk
   extMk_map_eq_of_extMk_eq R' Φ hΦ _ _ _ hf
     (R.extMk_surjective _ (n + 1) rfl).choose_spec.choose_spec
 
+lemma extMap_congr {Φ' : ∀ n, (X ⟶ R.cocomplex.X n) →+ (X' ⟶ R'.cocomplex.X n)}
+    (hΦ : ∀ n m (f : X ⟶ R.cocomplex.X n),
+      Φ m (f ≫ R.cocomplex.d n m) = Φ n f ≫ R'.cocomplex.d n m)
+    (hΦ' : ∀ n m (f : X ⟶ R.cocomplex.X n),
+      Φ' m (f ≫ R.cocomplex.d n m) = Φ' n f ≫ R'.cocomplex.d n m) (h : Φ = Φ') (n : ℕ) :
+    extMap R' Φ hΦ n = extMap R' Φ' hΦ' n := by
+  subst h
+  rfl
+
 end CategoryTheory.InjectiveResolution
