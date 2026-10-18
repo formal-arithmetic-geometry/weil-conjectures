@@ -31,151 +31,65 @@
  ],
  "proof": [
   {
-   "text": "First record the local computation used below. Restriction to $\\mathcal C/U$ is exact by [lem-pur-site-restriction-module-adjunction-exact], hence commutes with kernels, images, cohomology and good truncations. It commutes with sheaf tensor: the presheaf tensor formula [def-pur-sheaf-tensor-product] at $(V\\to U)$ is the same formula at $V$ upstairs. Coverings over $(V\\to U)$ are exactly the coverings of $V$, with their induced arrows to $U$ [def-pur-localized-ringed-site]. Thus the local representatives and local equalities in the two sheafifications agree, by [lem-weil-pbc-site-sheafification-sections-local], giving the canonical tensor comparison. Exact restriction also preserves finite sums.",
+   "text": "Use homologyFunctorFactors and the representative isomorphisms to transfer the upper homology bounds and the local constant finite type hypotheses from K,L to P,Q. Local constant finite type is invariant under isomorphism: compose each covering-slice trivialization with the restricted isomorphism.",
    "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "def-pur-sheaf-tensor-product",
-    "def-pur-localized-ringed-site",
-    "lem-weil-pbc-site-sheafification-sections-local"
+    "def-weil-derived-cohomology-sheaves",
+    "def-weil-pbc-site-locally-constant-finite-type"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 094H, local computation; tensor sheafification and slice coverings"
-   }
+   "elementary": true
   },
   {
-   "text": "For any two bounded-above derived objects choose representatives zero in degrees above their cohomological upper bounds using [def-sbc-standard-tstructure-derived-category]. Apply [lem-pc-kflat-bounded-flat-replacement] to get flat representatives with those same term bounds; these are K-flat by [lem-pc-bounded-above-flat-kflat-site]. Their restrictions are still flat by [lem-weil-pbc-slice-restriction-flat], still bounded above, hence still K-flat by the same criterion. By [lem-weil-pbc-site-derived-tensor-descent] the total tensors compute the derived tensors on either site. In each total degree only finitely many pairs of indices occur, so Step 1 identifies their restrictions termwise, including differentials [def-pc-tensor-complex-sheaves]. Consequently restriction of derived tensor cohomology equals the cohomology of the derived tensor of the restrictions.",
+   "text": "For fixed i and V, apply local finite-free truncation models to P with cutoff i-bQ and to Q with cutoff i-bP. Intersect the resulting two covering sieves. On an arrow of this intersection obtain E,F, upper term bounds, finite free terms and the two required local derived model isomorphisms.",
    "uses": [
-    "def-sbc-standard-tstructure-derived-category",
-    "lem-pc-kflat-bounded-flat-replacement",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-weil-pbc-slice-restriction-flat",
-    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-site-finite-free-truncation-models"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the local tensor comparison to these supplied models. It identifies H^i of the restricted tensor complex with H^i of the restricted c(T), where T is the algebraic total tensor of E and F.",
+   "uses": [
+    "lem-weil-pbc-site-tensor-local-model-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In degree j, put I={p in Z | j-bF <= p <= bE}. Map the coproduct over I of E^p tensor F^(j-p) to T^j using the total-complex inclusions. This map is epic: test equality of outgoing maps on every total summand; indices outside I have a zero tensor factor by an upper term bound. Every summand is finite, and the coproduct is finite via its finite biproduct/product description. Surjectivity of the epic map in ModuleCat makes T^j finite.",
+   "uses": [
     "def-pc-tensor-complex-sheaves"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 094H, local computation; Tag 0E8J, restriction-flat; Tags 06YS and 06YQ, bounded-above flat computation"
-   }
+   "elementary": true
   },
   {
-   "text": "Fix $i\\in\\mathbf Z$ and choose upper bounds $b_K,b_L$. Set $a=i-b_L$ and $c=i-b_K$. Apply [lem-weil-pbc-derived-tensor-truncation-window] with these cutoffs: $$H^i(K\\otimes_B^{\\mathbf L}L)\\cong H^i(K_0\\otimes_B^{\\mathbf L}L_0),\\qquad K_0=\\tau_{\\geq a}K,\\quad L_0=\\tau_{\\geq c}L.$$ These are bounded and their retained cohomology sheaves are unchanged; all other cohomology sheaves are zero by [def-kun-truncations]. Thus both still have locally constant finite-type cohomology. If a lower cutoff exceeds the upper bound, the corresponding truncated object is zero and the desired degree-$i$ cohomology is zero; use the constant zero module. Otherwise continue with the nonempty finite intervals.",
+   "text": "Noetherianity makes cycles, which inject into the finite module T^i, finite. The epimorphism from cycles onto H^i(T) makes that cohomology module finite.",
    "uses": [
-    "lem-weil-pbc-derived-tensor-truncation-window",
-    "def-kun-truncations"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 094H, first reduction, with upper-bound-dependent cutoffs"
-   }
-  },
-  {
-   "text": "Let $U$ be any object of $\\mathcal C$. The slice $\\mathcal C/U$ has final object $U$. Apply [lem-weil-pbc-site-bounded-constant-model] first to $K_0|_U$, and then to $L_0$ on each member of the resulting cover. Compose these two covering families. Relocalization in [def-pur-localized-ringed-site] identifies the iterated slices with slices of $\\mathcal C$. We obtain simultaneous derived models $\\underline{E^\\bullet}$ and $\\underline{F^\\bullet}$ with $E,F$ bounded complexes of finitely generated $B$-modules. The hypotheses of the model lemma hold because the coefficient ring is still the Noetherian ring $B$ and exact restriction and good truncation retain the stated cohomology; the canonical isomorphism $\\underline M_{\\mathcal C/W}\\simeq(\\underline M_{\\mathcal C})|_W$ of [lem-weil-pbc-site-constant-restriction], natural in $B$-linear maps, identifies $\\underline B|_W$ with the constant ring sheaf of the slice, the local constant descriptions $\\underline M|_V$ of the cohomology sheaves with constant sheaves of the slices, and the restriction of the first model $\\underline{E^\\bullet}$ to a member of the second cover with the termwise constant complex there, with the same constant differentials. There are two finite covering refinements for this fixed degree, with no refinement over infinitely many degrees.",
-   "uses": [
-    "lem-weil-pbc-site-bounded-constant-model",
-    "def-pur-localized-ringed-site",
-    "lem-weil-pbc-site-constant-restriction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 094H, application of Tag 094G on slices"
-   }
-  },
-  {
-   "text": "For $E$ and $F$, each kernel of a differential is a submodule of a finite $B$-module and is finite by [lem-weil-pbc-noetherian-submodule-finite]. Its cohomology quotient is finite, since the images of a finite set of generators generate any quotient. Cohomology vanishes above the term bound. Therefore [lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion] makes $E,F$ pseudo-coherent, and [def-pc-ring-pseudo-coherent-complex] supplies bounded-above complexes $P,Q$ of finite free $B$-modules with derived isomorphisms $P\\simeq E$, $Q\\simeq F$. No finite projective dimension or bounded free resolution is asserted.",
-   "uses": [
-    "lem-weil-pbc-noetherian-submodule-finite",
-    "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
-    "def-pc-ring-pseudo-coherent-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 094H, finite free replacement; More on Algebra Tag 066E"
-   }
-  },
-  {
-   "text": "The exact constant realization [def-sfb-site-derived-constant-module-functor] carries these derived isomorphisms to $\\underline P\\simeq\\underline E$ and $\\underline Q\\simeq\\underline F$, represented by termwise constant complexes. Since it preserves finite sums, a finite free module $B^r$ gives $(\\underline B)^r$. Tensoring any sheaf with this sheaf is the finite sum of $r$ copies of that sheaf: the two maps are the basis expansion and basis-vector insertion, inverse by bilinearity [def-pur-sheaf-tensor-product]. Finite sums preserve an exact sequence coordinatewise, so these sheaves are flat by [def-pc-flat-sheaf-modules]. Hence [lem-pc-bounded-above-flat-kflat-site] makes $\\underline P,\\underline Q$ K-flat, and [lem-weil-pbc-site-derived-tensor-descent] computes the local derived tensor by their total tensor.",
-   "uses": [
-    "def-sfb-site-derived-constant-module-functor",
-    "def-pur-sheaf-tensor-product",
-    "def-pc-flat-sheaf-modules",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-weil-pbc-site-derived-tensor-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 094H, finite free models and derived tensor computation"
-   }
-  },
-  {
-   "text": "If $P^p=0$ for $p>r$ and $Q^q=0$ for $q>s$, the summands of total degree $n$ have $n-s\\leq p\\leq r$ and $q=n-p$ [def-pc-tensor-complex-sheaves]. This is a finite set. On a pair of finite free terms, the maps sending a tensor of basis vectors to the corresponding tensor-basis vector and conversely identify $\\underline{P^p}\\otimes_{\\underline B}\\underline{Q^q}$ with $\\underline{P^p\\otimes_BQ^q}$ [def-pur-sheaf-tensor-product]. These maps commute with matrices of $B$-linear differentials, since both send a basis tensor to the same bilinear expansion. Finite sums and the differential $d_P\\otimes1+(-1)^p1\\otimes d_Q$ therefore identify the whole local total complex with $\\underline T$, where $T=\\operatorname{Tot}(P\\otimes_BQ)$ is bounded above and finite free in every degree.",
-   "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 094H, final sentence: tensor basis and total degree calculation"
-   }
-  },
-  {
-   "text": "Exactness of the constant module functor [def-sfb-site-derived-constant-module-functor] preserves kernels and cokernels, hence images and their quotients, giving $H^i(\\underline T)\\cong\\underline{H^i(T)}$. The cycles in $T^i$ are finite by [lem-weil-pbc-noetherian-submodule-finite], and their quotient $H^i(T)$ is finite because the images of cycle generators generate it. Thus the degree-$i$ local tensor cohomology is the constant sheaf of a finite $B$-module.",
-   "uses": [
-    "def-sfb-site-derived-constant-module-functor",
     "lem-weil-pbc-noetherian-submodule-finite"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 094H, final sentence: constant finite cohomology"
-   }
+   "elementary": true
   },
   {
-   "text": "Steps 1 and 2 identify the restriction of the original tensor cohomology with the tensor cohomology on each covering slice. Step 3 identifies its degree $i$ with that for the bounded objects, and Steps 4--8 exhibit it there as a constant finite-module sheaf. For each object $U$ this supplies the covering required by [def-weil-pbc-site-locally-constant-finite-type]; the constant sheaf of $H^i(T)$ on each slice is $\\underline{H^i(T)}|_{U'}$ by [lem-weil-pbc-site-constant-restriction], and the covering sieve generated by that family has the same property after further restriction, by the same isomorphism and relocalization. Since $i$ and $U$ were arbitrary, every cohomology sheaf is locally constant of finite type. No points of the site were used.",
+   "text": "Prove exactness of the actual constant realization used by the statement: evaluation jointly reflects finite limits and finite colimits of constant module presheaves, and module sheafification is exact. ShortComplex.mapHomologyIso therefore identifies H^i(c(T)) with c(H^i(T)). Exact slice restriction likewise commutes with homology by the same short-complex comparison. Compose these two restriction comparisons, the constant-realization comparison and the tensor comparison. The intersection cover and the finite module H^i(T) are precisely the witnesses in the definition of local constant finite type.",
    "uses": [
-    "def-weil-pbc-site-locally-constant-finite-type",
-    "lem-weil-pbc-site-constant-restriction"
+    "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-pbc-site-locally-constant-finite-type"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 094H, conclusion"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "def-pur-sheaf-tensor-product",
-  "def-pur-localized-ringed-site",
-  "lem-weil-pbc-site-sheafification-sections-local",
-  "def-sbc-standard-tstructure-derived-category",
-  "lem-pc-kflat-bounded-flat-replacement",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-weil-pbc-slice-restriction-flat",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "def-pc-tensor-complex-sheaves",
-  "lem-weil-pbc-derived-tensor-truncation-window",
-  "def-kun-truncations",
-  "lem-weil-pbc-site-bounded-constant-model",
-  "lem-weil-pbc-noetherian-submodule-finite",
-  "lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion",
-  "def-pc-ring-pseudo-coherent-complex",
-  "def-sfb-site-derived-constant-module-functor",
-  "def-pc-flat-sheaf-modules",
+  "def-weil-derived-cohomology-sheaves",
   "def-weil-pbc-site-locally-constant-finite-type",
-  "lem-weil-pbc-site-constant-restriction"
+  "lem-weil-pbc-site-finite-free-truncation-models",
+  "lem-weil-pbc-site-tensor-local-model-comparison",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
+  "lem-pur-site-restriction-module-adjunction-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 094H, local bounded-constant-model route of Tag 094G, with the corrected truncation comparison isolated and explicit finite-free computation"
+  "place": "Tag 094H; stage-3 proof from two local model interfaces, explicit finite-interval tensor generation, Noetherian cycles and exact constant realization"
  },
  "mathlib_searches": [
   {
@@ -402,7 +316,6 @@
   "lem-weil-pbc-site-sheafification-sections-local",
   "lem-weil-pbc-site-derived-tensor-descent",
   "lem-weil-pbc-slice-restriction-flat",
-  "def-sfb-site-derived-constant-module-functor",
   "lem-weil-pbc-noetherian-submodule-finite"
  ],
  "reviewed": {
@@ -430,5 +343,15 @@
   "by": "NU",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261018T091407-L-3256965",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

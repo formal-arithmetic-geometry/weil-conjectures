@@ -1,0 +1,152 @@
+{
+ "id": "lem-weil-pbc-site-module-sheaf-constant-ring-equivalence",
+ "kind": "statement",
+ "title": "Constant-ring module sheaves and module-valued sheaves on a small site",
+ "statement": "Let $\\mathcal C$ be a small category and $J$ a Grothendieck topology [def-weil-pbc-sites-and-cohomology]. Let $B$ be a commutative ring, let $R$ be a sheaf of rings, and supply a locally injective and locally surjective morphism $\\alpha$ from the constant ring presheaf with value $B$ to $R$ [def-weil-pbc-constant-sheaf, def-weil-pbc-sheafification]. Thus $R$ is a sheafification of this constant ring presheaf; both the canonical forgotten commutative-ring unit and its restrictions to slice sites are included. Write $c:\\operatorname{Mod}_B\\to\\operatorname{Mod}_R$ for the constant module presheaf followed by module sheafification along that ring unit [def-weil-sheaf-of-modules-category, def-weil-presheaf-modules-sheafification]. There exists an equivalence $e:\\operatorname{Sh}(\\mathcal C,\\operatorname{Mod}_B)\\simeq\\operatorname{Mod}_R$ with natural isomorphisms identifying (1) the underlying additive sheaf of $e(F)$ with the underlying additive sheaf of $F$ and (2) $c(M)$ with $e(\\underline M)$, naturally in every $B$-module $M$ and every linear map. For every object $U$, let $\\alpha_U$ be the restriction of $\\alpha$ to the slice site [def-pur-localized-ringed-site], and let $c_U$ be the corresponding constant module presheaf followed by module sheafification over $R|_U$. There is also a natural isomorphism $c_U \\simeq c(-)|_U$, natural in all module maps. All categories, coefficient rings and modules use the same small universe. No terminal object, point, Noetherianity or torsion hypothesis is needed.",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-localized-ringed-site"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Modules on Sites, section-constant (Tag 093I), opening paragraph, and Section 03DH (restriction to slices); Cohomology on Sites, lemma-cohomology-modules-abelian-agree (Tag 03FD); arbitrary-site encoding proof adapted from the existing scheme-specific construction"
+ },
+ "proof": [
+  {
+   "text": "Encode a module-valued presheaf as modules over the constant ring presheaf, retaining modules and restriction maps. The componentwise inverse on morphisms proves the encoding fully faithful. Use the supplied local bijectivity instances of the ring unit and compose the encoding of sheaves with module sheafification along that unit. This covers restricted constant-ring units as well as the original one.",
+   "uses": [
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification",
+    "def-weil-sheaf-of-modules-category",
+    "lem-pc-sites-module-sheafification-interface"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The unit on an encoded module-valued sheaf is invertible: after the conservative additive forgetful functor it is the ordinary sheafification unit of an already sheafy presheaf. The resulting extension functor is fully faithful by cancellation against scalar restriction. Restricting any R-module sheaf along the ring unit retains its additive sheaf and defines a module-valued sheaf. The invertible module-sheafification counit identifies its extension with the original object. This proves essential surjectivity and hence gives the equivalence.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pc-sites-module-sheafification-interface"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The additive-sheafification counit defines the first natural isomorphism. For constants, whisker the ordinary module-valued sheafification unit with the presheaf encoding and module sheafification. Its underlying additive map is locally bijective because the underlying-set unit is. Module sheafification inverts precisely such maps, so the whiskered unit is invertible. Naturality follows from the unit and both functors. This construction includes the empty site and zero ring.",
+   "uses": [
+    "def-weil-pbc-sheafification",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pc-sites-module-sheafification-interface"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each U restrict the global module-sheafification unit to the slice. It is a map from the constant module presheaf on the slice to the scalar restriction of the restricted realized module. Adjunction gives a map from the local constant realization to the restricted global one. After the conservative additive forgetful functor, this map is the sheafification of the restricted unit followed by the counit at an additive sheaf. The restricted unit is locally bijective and sheafification inverts it; the counit is invertible. Thus each component is invertible. Naturality follows by applying the module-sheafification Hom bijection to the required square and evaluating the global unit naturality square at each slice object and section. This yields the claimed natural isomorphism, including the empty slice.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-weil-pbc-sheafification",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pc-sites-module-sheafification-interface"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-sites-module-sheafification-interface",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Modules on Sites, section-constant (Tag 093I), opening paragraph, and Section 03DH (restriction to slices); Cohomology on Sites, lemma-cohomology-modules-abelian-agree (Tag 03FD); arbitrary-site encoding proof adapted from the existing scheme-specific construction; stage-3 interface reduction of lem-weil-pbc-locally-constant-tensor"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "On an arbitrary small site, sheaves of modules over a constant ring are equivalent to module valued sheaves, naturally compatible with constant modules and underlying additive sheaves",
+   "results": "8 hits: SheafOfModules.noConfusionType; CategoryTheory.constantSheaf; SheafOfModules; CategoryTheory.Sheaf.isConstant_iff_of_equivalence; CategoryTheory.Sheaf.IsConstant.mk; SheafOfModules.hom_ext; AlgebraicGeometry.Scheme.Modules; CategoryTheory.Sheaf.mem_essImage_of_isConstant",
+   "date": "2026-10-18",
+   "verdict": "no match: basic sheaf/module forgetful functors, scalar restriction at a terminal object, and sheafification adjunctions; none gives this constant-ring equivalence with its constant-module comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "On an arbitrary small site, sheaves of modules over a constant ring are equivalent to module valued sheaves, naturally compatible with constant modules and underlying additive sheaves",
+   "results": "8 hits: SheafOfModules.forgetToSheafModuleCat; SheafOfModules.unit; SheafOfModules.unit_val; SheafOfModules.toSheaf_obj_val; SheafOfModules.toSheafCompSheafToPresheafIso; SheafOfModules.forgetToSheafModuleCat_obj_val; SheafOfModules.freeFunctor; SheafOfModules.toSheaf",
+   "date": "2026-10-18",
+   "verdict": "no match: basic sheaf/module forgetful functors, scalar restriction at a terminal object, and sheafification adjunctions; none gives this constant-ring equivalence with its constant-module comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\"",
+   "results": "12 hits: PresheafOfModules; PresheafOfModules.unit; PresheafOfModules.instCategory; PresheafOfModules.sections; PresheafOfModules.Hom; PresheafOfModules.instPreadditive; PresheafOfModules.presheaf; PresheafOfModules.toPresheaf",
+   "date": "2026-10-18",
+   "verdict": "no match: basic sheaf/module forgetful functors, scalar restriction at a terminal object, and sheafification adjunctions; none gives this constant-ring equivalence with its constant-module comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "Module.*Sheaf.*[Ee]quiv|Sheaf.*[Cc]onstant.*[Ee]quiv",
+   "results": "15 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Sheafification.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf.lean; Mathlib/CategoryTheory/Sites/ConstantSheaf.lean; Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: basic sheaf/module forgetful functors, scalar restriction at a terminal object, and sheafification adjunctions; none gives this constant-ring equivalence with its constant-module comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocallyConstantTensor",
+  "date": "2026-10-18",
+  "group": "N1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-amplification-proper",
+   "place": "proof (c), through lem-weil-pbc-locally-constant-tensor: Modules on Sites, section-constant (Tag 093I), opening paragraph, and Section 03DH (restriction to slices); Cohomology on Sites, lemma-cohomology-modules-abelian-agree (Tag 03FD); arbitrary-site encoding proof adapted from the existing scheme-specific construction",
+   "via": [
+    "lem-weil-pbc-locally-constant-tensor"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SiteModuleSheafConstantRingEquivalence",
+  "file": "lean/Sheaf/CategoryTheory/SiteModuleSheafConstantRingEquivalence.lean",
+  "declaration": "CategoryTheory.site_moduleSheaf_constantRing_equivalence",
+  "statement": "theorem site_moduleSheaf_constantRing_equivalence\n    (J : GrothendieckTopology C) (Λ : Type u) [CommRing Λ]\n    (R : Sheaf J RingCat.{u})\n    (α : (Functor.const Cᵒᵖ).obj (RingCat.of Λ) ⟶ R.obj)\n    [Presheaf.IsLocallyInjective J α] [Presheaf.IsLocallySurjective J α] :\n    let c := SheafOfModules.strictPerfectConstantPresheaf (C := C) Λ ⋙\n      PresheafOfModules.sheafification.{u} α\n    ∃ e : Sheaf J (ModuleCat.{u} Λ) ≌ SheafOfModules.{u} R,\n      Nonempty (e.functor ⋙ SheafOfModules.toSheaf R ≅\n        sheafCompose J (forget₂ (ModuleCat.{u} Λ) AddCommGrpCat.{u})) ∧\n      Nonempty (c ≅ constantSheaf J (ModuleCat.{u} Λ) ⋙ e.functor) ∧\n      ∀ U : C,\n        let αU := Functor.whiskerLeft (Over.forget U).op α\n        letI : Presheaf.IsLocallyInjective (J.over U) αU :=\n          Presheaf.isLocallyInjective_whisker (J.over U) J (Over.forget U) α\n        letI : Presheaf.IsLocallySurjective (J.over U) αU :=\n          Presheaf.isLocallySurjective_whisker (J.over U) J (Over.forget U) α\n        Nonempty\n          (SheafOfModules.strictPerfectConstantPresheaf (C := Over U) Λ ⋙\n              PresheafOfModules.sheafification.{u} (R := R.over U) αU ≅\n            c ⋙ SheafOfModules.overFunctor R U)",
+  "branch": "sheaf-dag",
+  "by": "N1",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261018T091407-L-3256965",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N1",
+  "result": "pass",
+  "landing": "20261018T091407-L-3256965",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

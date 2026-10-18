@@ -10,24 +10,16 @@ public import Sheaf.Paper.SiteLocallyConstantFiniteType
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.CategoryTheory.Sites.Pretopology
 public import Mathlib.RingTheory.Noetherian.Defs
-import Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
-import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
-import Sheaf.Algebra.Homology.BoundedFlatReplacement
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
-import Sheaf.RingTheory.RingPseudoCoherent
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
-import Sheaf.CategoryTheory.RingedSliceExtensionTensor
-import Sheaf.Paper.SiteBoundedConstantModel
-import Sheaf.RingTheory.NoetherianPseudoCoherentCohomologyCriterion
-import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat
-import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
+import Sheaf.Paper.SiteFiniteFreeTruncationModels
+import Sheaf.Paper.SiteTensorLocalModelComparison
+import Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact
+import Mathlib.RingTheory.Noetherian.Basic
+import Mathlib.RingTheory.Finiteness.Basic
+import Mathlib.RingTheory.TensorProduct.Finite
+import Mathlib.Data.Int.Interval
+import Mathlib.Algebra.Category.ModuleCat.Biproducts
+import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 
 /-! # Derived tensor preserves locally constant finite type cohomology
 
@@ -39,9 +31,115 @@ Source: Stacks Project, Cohomology on Sites, Tag 094H
 
 universe u w
 
-open CategoryTheory CategoryTheory.Limits
+open CategoryTheory CategoryTheory.Limits CategoryTheory.MonoidalCategory
+open scoped TensorProduct
 
 namespace SheafOfModules
+
+section ConstantRealization
+
+variable {C : Type u} [Category.{u} C]
+
+set_option quotPrecheck false in
+set_option hygiene false in
+local notation "𝓡(" J ", " B ")" => (sheafCompose J
+  (forget₂ CommRingCat.{u} RingCat.{u})).obj
+    ((constantSheaf J CommRingCat.{u}).obj (CommRingCat.of B))
+set_option quotPrecheck false in
+set_option hygiene false in
+local notation "cB(" J ", " B ")" => strictPerfectConstantPresheaf (C := C) B ⋙
+  PresheafOfModules.sheafification.{u} (R := 𝓡(J, B)) (Functor.whiskerRight
+    (toSheafify J ((Functor.const Cᵒᵖ).obj (CommRingCat.of B)))
+    (forget₂ CommRingCat.{u} RingCat.{u}))
+private theorem constant_realization_homology (J : GrothendieckTopology C) (B : Type u) [CommRing B]
+    (T : CochainComplex (ModuleCat.{u} B) ℤ) (i : ℤ) :
+    Nonempty ((((cB(J, B)).mapHomologicalComplex (.up ℤ)).obj T).homology i ≅
+      (cB(J, B)).obj (T.homology i)) := by
+  let := constant_preservesFiniteLimits (C := C) B
+  let := constant_preservesFiniteColimits (C := C) B
+  have : PreservesFiniteLimits (cB(J, B)) := comp_preservesFiniteLimits _ _
+  have : PreservesFiniteColimits (cB(J, B)) := comp_preservesFiniteColimits _ _
+  exact ⟨(T.sc i).mapHomologyIso (cB(J, B))⟩
+
+private theorem restriction_homology
+    (J : Precoverage C) [J.HasIsos] [J.IsStableUnderComposition]
+    [J.IsStableUnderBaseChange] [J.HasPullbacks]
+    (B : Type u) [CommRing B]
+    (G : CochainComplex (SheafOfModules.{u} (𝓡(J.toGrothendieck, B))) ℤ)
+    (U : C) (i : ℤ) :
+    Nonempty
+      ((((overFunctor.{u} (𝓡(J.toGrothendieck, B)) U).mapHomologicalComplex
+        (.up ℤ)).obj G).homology i ≅
+        (overFunctor.{u} (𝓡(J.toGrothendieck, B)) U).obj (G.homology i)) := by
+  have hres := localizedModule_adjunction_exact J
+    ((constantSheaf J.toGrothendieck CommRingCat.{u}).obj (CommRingCat.of B)) U
+  have := hres.1
+  have := hres.2.1
+  exact ⟨(G.sc i).mapHomologyIso (overFunctor.{u} (𝓡(J.toGrothendieck, B)) U)⟩
+
+end ConstantRealization
+
+set_option synthInstance.maxSize 2048 in
+private theorem finite_tensor_terms (B : Type u) [CommRing B]
+    (E F : CochainComplex (ModuleCat.{u} B) ℤ)
+    (bE bF : ℤ)
+    (hEb : ∀ j : ℤ, bE < j → IsZero (E.X j))
+    (hFb : ∀ j : ℤ, bF < j → IsZero (F.X j))
+    (hE : ∀ j : ℤ, Module.Finite B (E.X j))
+    (hF : ∀ j : ℤ, Module.Finite B (F.X j))
+    (i : ℤ) :
+    Module.Finite B ((CochainComplex.mapBifunctor E F
+      (curriedTensor (ModuleCat B))).X i) := by
+  classical
+  let T := CochainComplex.mapBifunctor E F (curriedTensor (ModuleCat B))
+  let I := {p : ℤ // p ∈ Finset.Icc (i - bF) bE}
+  let G : I → ModuleCat B := fun p ↦ E.X p.val ⊗ F.X (i - p.val)
+  let π : (∐ G) ⟶ T.X i := Sigma.desc (fun p ↦
+    HomologicalComplex.ιMapBifunctor E F (curriedTensor _) (.up ℤ)
+      p.val (i - p.val) i (by simp))
+  have hπ : Epi π := by
+    constructor
+    intro Y g h hgh
+    apply HomologicalComplex.mapBifunctor.hom_ext
+    intro p q hpq
+    have hpq' : p + q = i := hpq
+    by_cases hp : p ∈ Finset.Icc (i - bF) bE
+    · have he := congrArg ((Sigma.ι G ⟨p, hp⟩) ≫ ·) hgh
+      have hq : q = i - p := by omega
+      subst q
+      simpa only [π, ← Category.assoc, Sigma.ι_desc] using he
+    · have hz : IsZero ((E.X p ⊗ F.X q) : ModuleCat B) := by
+        by_cases hpe : bE < p
+        · exact Functor.map_isZero (tensorRight (F.X q)) (hEb p hpe)
+        · have hq : bF < q := by simp only [Finset.mem_Icc] at hp; omega
+          exact Functor.map_isZero (tensorLeft (E.X p)) (hFb q hq)
+      exact hz.eq_of_src _ _
+  have hG (p : I) : Module.Finite B (G p) := by
+    have := hE p.val
+    have := hF (i - p.val)
+    change Module.Finite B (E.X p.val ⊗[B] F.X (i - p.val))
+    infer_instance
+  have : ∀ p : I, Module.Finite B (G p) := hG
+  let e : ModuleCat.of B (∀ p : I, G p) ≅ ∐ G :=
+    (ModuleCat.biproductIsoPi G).symm ≪≫ biproduct.isoCoproduct G
+  have : Module.Finite B ((∐ G) : ModuleCat B) := Module.Finite.of_surjective e.hom.hom
+    ((ModuleCat.epi_iff_surjective _).1 inferInstance)
+  exact Module.Finite.of_surjective π.hom ((ModuleCat.epi_iff_surjective _).1 hπ)
+
+private theorem locallyConstantFiniteType_of_iso
+    {C : Type u} [Category.{u} C] (J : GrothendieckTopology C)
+    (B : Type u) [CommRing B]
+    {F G : SheafOfModules.{u} ((sheafCompose J
+      (forget₂ CommRingCat.{u} RingCat.{u})).obj
+        ((constantSheaf J CommRingCat.{u}).obj (CommRingCat.of B)))}
+    (e : F ≅ G) (hG : IsLocallyConstantFiniteType J B G) :
+    IsLocallyConstantFiniteType J B F := by
+  intro V
+  obtain ⟨S, hS, h⟩ := hG V
+  refine ⟨S, hS, ?_⟩
+  intro U f hf
+  obtain ⟨M, hM, ⟨eM⟩⟩ := h U f hf
+  exact ⟨M, hM, ⟨(overFunctor _ U).mapIso e ≪≫ eM⟩⟩
 
 set_option synthInstance.maxSize 2048 in
 /-- Over a Noetherian coefficient ring, tensoring bounded-above derived objects with
@@ -52,37 +150,18 @@ computes derived tensor by their total tensor, exactly as in the node's conventi
 Source: Stacks Project, Cohomology on Sites, Tag 094H
 (blueprint: lem-weil-pbc-locally-constant-tensor).
 
-Proof plan:
-1. Restrict to slices using exact restriction
-   (`lem-pur-site-restriction-module-adjunction-exact`). Restriction commutes with tensor
-   (`def-pur-sheaf-tensor-product`). Flatness restricts by the extension-tensor formula
-   (`lem-weil-pbc-ringed-slice-extension-tensor`); extension by zero detects zero by local
-   sections (`def-weil-extension-by-zero-presheaf`,
-   `lem-weil-pbc-site-sheafification-sections-local`), hence reflects exactness.
-   Bounded-above flat representatives remain K-flat on slices
-   (`lem-pc-bounded-above-flat-kflat-site`).
-2. In degree i, with upper bounds bK,bL, truncate below i-bL and i-bK respectively.
-   Bounded flat replacements (`lem-pc-kflat-bounded-flat-replacement`) and total-degree
-   bounds show that the removed kernels have tensor cohomology zero in degrees i and i+1.
-   A local cycle/boundary chase using local lifts through quotient sheafification identifies
-   degree-i tensor cohomology before and after truncation. K-flatness and cones ensure
-   independence of representatives (`def-pc-kflat-complex`).
-3. The bounded objects admit local bounded constant finite-module models
-   (`lem-weil-pbc-site-bounded-constant-model`). Refine twice to obtain simultaneous models;
-   only finitely many refinements are needed for the fixed degree i.
-4. Exact constant sheafification (`lem-weil-pbc-site-module-presheaf-sheafification-exact`)
-   commutes with cohomology. Noetherianity makes submodules of finite modules finite
-   (induct on the rank of a finite free cover). The Noetherian pseudo-coherence criterion
-   (`lem-weil-pbc-noetherian-pseudocoherent-cohomology-criterion`) supplies bounded-above
-   finite free models (`def-pc-ring-pseudo-coherent-complex`). Their constant sheaves are
-   flat termwise and K-flat by `lem-pc-bounded-above-flat-kflat-site`.
-5. Tensor bases identify constant finite-free sheaf tensors with constant module tensors.
-   Upper bounds c,d leave only i-d ≤ p ≤ c in total degree i. Thus the total tensor is
-   termwise constant finite free, with differential dP tensor 1 + (-1)^p 1 tensor dQ.
-   Its degree-i cohomology is constant with finite value by exact sheafification and
-   Noetherianity (`def-pc-tensor-complex-sheaves`).
-6. These covering-slice computations for each object and each i are precisely local
-   constancy of finite type. No points or simultaneous infinite refinement are used.
+Proof:
+1. Transport homology bounds and local constancy along the representative isomorphisms.
+2. For the cutoffs i-bL and i-bK, use local finite-free truncation models and intersect
+   their covering sieves. Apply the local tensor-model comparison on each covering arrow.
+3. In total degree j, only indices j-bF <= p <= bE contribute. The coproduct over this
+   finite interval surjects onto the total term, so every total term is a finite module.
+4. Cycles are submodules of finite modules over a Noetherian ring, hence finite; their
+   homology quotient is finite as well.
+5. Constant module presheaves preserve finite limits and colimits by evaluation. Compose
+   with exact module sheafification and apply the short-complex homology comparison.
+6. The comparison and the finite module H^i(T) give the required trivialization on each
+   arrow of the intersection cover, exactly as in the definition of local constancy.
 -/
 theorem locallyConstantFiniteType_derivedTensor
     {C : Type u} [Category.{u} C]
@@ -122,6 +201,55 @@ theorem locallyConstantFiniteType_derivedTensor
           (SheafOfModules.monoidalCategory
             ((constantSheaf J.toGrothendieck CommRingCat.{u}).obj
               (CommRingCat.of B))))).homology i) := by
-  sorry
+  classical
+  let A := SheafOfModules.{u} ((sheafCompose J.toGrothendieck
+    (forget₂ CommRingCat.{u} RingCat.{u})).obj
+      ((constantSheaf J.toGrothendieck CommRingCat.{u}).obj (CommRingCat.of B)))
+  have ePH (j : ℤ) : P.homology j ≅ (DerivedCategory.homologyFunctor A j).obj K :=
+    ((DerivedCategory.homologyFunctorFactors A j).app P).symm ≪≫
+      (DerivedCategory.homologyFunctor A j).mapIso eP
+  have eQH (j : ℤ) : Q.homology j ≅ (DerivedCategory.homologyFunctor A j).obj L :=
+    ((DerivedCategory.homologyFunctorFactors A j).app Q).symm ≪≫
+      (DerivedCategory.homologyFunctor A j).mapIso eQ
+  obtain ⟨bP, hbP⟩ := hK
+  obtain ⟨bQ, hbQ⟩ := hL
+  have hPb (j : ℤ) (hj : bP < j) : IsZero (P.homology j) :=
+    (hbP j hj).of_iso (ePH j)
+  have hQb (j : ℤ) (hj : bQ < j) : IsZero (Q.homology j) :=
+    (hbQ j hj).of_iso (eQH j)
+  have hPlc (j : ℤ) : IsLocallyConstantFiniteType J.toGrothendieck B (P.homology j) :=
+    locallyConstantFiniteType_of_iso J.toGrothendieck B (ePH j) (hKlc j)
+  have hQlc (j : ℤ) : IsLocallyConstantFiniteType J.toGrothendieck B (Q.homology j) :=
+    locallyConstantFiniteType_of_iso J.toGrothendieck B (eQH j) (hLlc j)
+  intro i V
+  obtain ⟨S, hS, hSE⟩ := exists_site_finiteFree_truncation_models J B P
+    ⟨bP, hPb⟩ hPlc (i - bQ) V
+  obtain ⟨R, hR, hRF⟩ := exists_site_finiteFree_truncation_models J B Q
+    ⟨bQ, hQb⟩ hQlc (i - bP) V
+  refine ⟨S ⊓ R, J.toGrothendieck.intersection_covering hS hR, ?_⟩
+  intro U f hf
+  obtain ⟨E, bE, hEb, hE, eE⟩ := hSE U f hf.1
+  obtain ⟨F, bF, hFb, hF, eF⟩ := hRF U f hf.2
+  have eT := site_tensor_local_model_comparison J.toGrothendieck B P Q hP hQ
+    bP bQ hPb hQb i U E F ⟨bE, hEb⟩ ⟨bF, hFb⟩ hE hF eE eF
+  let T := CochainComplex.mapBifunctor E F (MonoidalCategory.curriedTensor (ModuleCat B))
+  have hT (j : ℤ) : Module.Finite B (T.X j) :=
+    finite_tensor_terms B E F bE bF hEb hFb (fun p ↦ (hE p).2) (fun q ↦ (hF q).2) j
+  let c := strictPerfectConstantPresheaf (C := C) B ⋙
+    PresheafOfModules.sheafification.{u} (R := ((sheafCompose J.toGrothendieck
+      (forget₂ CommRingCat.{u} RingCat.{u})).obj
+        ((constantSheaf J.toGrothendieck CommRingCat.{u}).obj (CommRingCat.of B))))
+      (Functor.whiskerRight
+        (toSheafify J.toGrothendieck ((Functor.const Cᵒᵖ).obj (CommRingCat.of B)))
+        (forget₂ CommRingCat.{u} RingCat.{u}))
+  obtain ⟨eH⟩ := constant_realization_homology J.toGrothendieck B T i
+  obtain ⟨eR⟩ := restriction_homology J B
+    (CochainComplex.mapBifunctor P Q (@MonoidalCategory.curriedTensor _ _
+      (monoidalCategory ((constantSheaf J.toGrothendieck CommRingCat.{u}).obj
+        (CommRingCat.of B))))) U i
+  obtain ⟨eRC⟩ := restriction_homology J B
+    ((c.mapHomologicalComplex (.up ℤ)).obj T) U i
+  exact ⟨T.homology i, finite_module_homology B T hT i,
+    ⟨eR.symm ≪≫ eT.some ≪≫ eRC ≪≫ (overFunctor _ U).mapIso eH⟩⟩
 
 end SheafOfModules
