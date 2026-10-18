@@ -241,5 +241,23 @@
   "group": "Q40",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q40-3526e6fff (reviewer sub-agent of L); spot-checked: Read the item, all 9 proof_deps and 4 stmt_deps statements, and descent.tex 0GNB(3) and 06VE(1),(5) with their proofs, plus tags 03DX, 03FH, 01LB, 01IC, 01AH, 03DB and lemma-etale-flat. Step 1: the equivalence node gives F, G and psi; the tensor-sections node gives the component Gamma(U,u^*psi), and the presheaf is already a sheaf for quasi-coherent F. Step 2: the Zariski kernel node (closed in slopmaster2, so a tool) gives K quasi-coherent, then K_et. Step 3: etale implies flat stalks; P_u from the pullback-adjunction node matches def-pc-module-pullback and is additive; the stalk-flat kernel node and global-sections left exactness give Gamma(U,u^*K) = ker. Step 4: the sectionwise-limits Mathlib leaf and the naturality of the bijections give K_et iso to ker psi_et, hence ker phi is quasi-coherent. Only flatness is used, exactly as in 06VE(5); the big-site counterexample 06VE(6) is excluded. Edge cases checked: 0, id, empty T, affine. No new nodes; no duplicate found in a DAG grep for 0GNB/06VE/03M1 and for etale kernel/exactness statements. Accepted tool_uses: lem-pc-module-pullback-adjunction, lem-sc-stalk-flat-tensor-pullback-kernels, lem-sc-global-sections-left-exact, lem-weil-pbc-module-sheaves-limits-sectionwise. No SGA. Not a target node. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SmallEtaleQuasiCoherentKernel",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isQuasicoherent_smallEtale_kernel",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmallEtaleQuasiCoherentKernel.lean",
+  "statement": "theorem isQuasicoherent_smallEtale_kernel (T : Scheme.{u}) {M N : ringedSiteModules.{u} (smallEtaleModuleRing T)} [M.IsQuasicoherent] [N.IsQuasicoherent] (φ : M ⟶ N) : (kernel φ).IsQuasicoherent ∧ ∀ U : T.Etale, Function.Injective ((kernel.ι φ).val.app (op U)) ∧ Function.Exact ((kernel.ι φ).val.app (op U)) (φ.val.app (op U))",
+  "branch": "newtargets-dag",
+  "by": "Q83",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-042a047aa",
+  "group": "Q83",
+  "result": "pass",
+  "note": "Clause-by-clause match: Scheme T arbitrary universe u; smallEtaleModuleRing T = actual Γ(U,O_U) ring sheaf on T.smallEtaleTopology; M N : ringedSiteModules.{u} (rfl = SmallEtaleModules T); Mathlib SheafOfModules.IsQuasicoherent = def-trf-space-quasi-coherent-module predicate; conclusion (kernel φ).IsQuasicoherent plus sectionwise injectivity and Function.Exact of the canonical kernel.ι, rendering (ker φ)(U)=ker φ_U. No extra hypotheses; edge cases (empty T, φ=0, id, zero modules) covered. Only the lean field changed and its statement is verbatim; no defs, sorry proof, docstrings with source and blueprint and Steps 1-4, proof_dep imports private, no line over 100 chars. nt_compile --json clean 2.6 s; a broken-copy control fails. Advisories: smallEtaleModuleRing and its instances come from theorem lem-trf-scheme-zariski-etale-quasi-coherent-equivalence's module (proof_dep, not stmt_dep; no def node owns them) — suggest an existing:true def node; the worker self-reported a direct read-only git show and a byte-identical restore of the item node file in the shared checkout."
  }
 }
