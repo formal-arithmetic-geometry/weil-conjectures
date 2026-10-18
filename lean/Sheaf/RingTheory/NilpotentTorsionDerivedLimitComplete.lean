@@ -8,9 +8,8 @@ module
 public import Sheaf.RingTheory.DerivedCompleteModuleComplex
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Sheaf.CategoryTheory.Triangulated.DerivedLimit
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
 import Sheaf.RingTheory.DerivedCompleteProductsTriangles
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
+import Mathlib.RingTheory.Nilpotent.Basic
 
 /-!
 # Derived completeness of limits of nilpotent torsion complexes
@@ -57,6 +56,31 @@ theorem isDerivedComplete_of_isDerivedLimit_of_nilpotent
     (h : ∀ (a : A), a ∈ I → ∀ n : ℕ, ∃ e : ℕ, 1 ≤ e ∧ (a ^ e) • 𝟙 (L n) = 0)
     (H : DerivedCategory (ModuleCat.{v} A)) (hH : IsDerivedLimit t H) :
     IsDerivedComplete I H := by
-  sorry
+  have hL : ∀ n : ℕ, IsDerivedComplete I (L n) := by
+    intro n a ha hP T hT
+    obtain ⟨e, _, he⟩ := h a ha n
+    obtain ⟨p, δ, hT⟩ := hT
+    let K : ℕ → DerivedCategory (ModuleCat.{v} A) := fun _ ↦ L n
+    let s : End (∏ᶜ K) := towerProductShift (K := K) (fun _ ↦ a • 𝟙 (L n))
+    have hs (r j : ℕ) : (s ^ r) ≫ Pi.π K j = (a ^ r) • Pi.π K (j + r) := by
+      induction r generalizing j with
+      | zero => simp
+      | succ r ih =>
+        rw [pow_succ, End.mul_def, Category.assoc, ih, Linear.comp_smul]
+        have hsπ : s ≫ Pi.π K (j + r) = a • Pi.π K (j + r + 1) := by
+          simp [s, towerProductShift, K]
+        rw [hsπ, smul_smul, pow_succ, Nat.add_assoc]
+    have hnil : IsNilpotent s := by
+      refine ⟨e, Pi.hom_ext _ _ fun j ↦ ?_⟩
+      rw [hs, zero_comp]
+      simpa only [K, Linear.comp_smul, Category.comp_id, comp_zero] using
+        congrArg (fun z ↦ Pi.π K (j + e) ≫ z) he
+    apply Pretriangulated.Triangle.isZero₁_of_isIso₂ _ hT
+    exact (isUnit_iff_isIso (1 - s)).1 hnil.isUnit_one_sub
+  have hQ : IsDerivedComplete I (∏ᶜ L) :=
+    (isDerivedComplete_products_and_triangles I).1 L hL |>.2
+  obtain ⟨p, δ, hH⟩ := hH
+  exact ((isDerivedComplete_products_and_triangles I).2
+    (Pretriangulated.Triangle.mk p (towerTransitionEndomorphism t) δ) hH).2.2 hQ hQ
 
 end DerivedCategory
