@@ -17,12 +17,70 @@
   "def-weil-pbc-derived-categories",
   "def-weil-pbc-inverse-image",
   "def-pur-etale-supported-kernel",
-  "def-per-potential-dualizing",
-  "lem-trf-geometric-inverse-image-exact"
+  "lem-trf-geometric-inverse-image-exact",
+  "def-asd-finite-etale-tate-twist",
+  "def-weil-pbc-adjunction-mate"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-per-regular-supported-base-change] with $n=1$, $h=r$, $a=i$, $Y=P$, $Z\\prime=Z_P$, $a\\prime=i_P$, and $h\\prime=q$. Identify $\\mathbf Z/\\ell\\mathbf Z$ with $\\mathbf F_\\ell$; this is the same constant coefficient ring, so the module categories, exact inverse images and supported kernel functors are the same. Its hypotheses are exactly regularity of $r$, Noetherianness of $P,X$, invertibility of $\\ell$, and the closed immersion $i$. It gives the canonical isomorphism $B_{r,i,M}:q^*i^!M\\longrightarrow i_P^!r^*M$ for every bounded-below $M$, without excellence or constructibility. The same cited statement supplies naturality, shifts, roots-of-unity twists, restriction to opens, and localization at points; these clauses also specialize at $n=1$.",
+   "uses": [
+    "lem-per-regular-supported-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Corollary 4.2.3 and Lemma 4.3.1.1; canonical counit normalization made explicit using the adjunction mate formula"
+   }
+  },
+  {
+   "text": "Fix the normalization of this canonical comparison. Write $\\varepsilon_i:i_*i^!\\to1$ and $\\varepsilon_{i_P}:i_{P*}i_P^!\\to1$ for the supported counits. The localization-triangle comparison in [lem-per-regular-supported-base-change] commutes with these counits. In the notation of [def-weil-pbc-adjunction-mate], take $L_1=i_*$, $R_1=i^!$, $L_2=i_{P*}$, $R_2=i_P^!$, $G=q^*$, $H=r^*$ and let $\\alpha:i_{P*}q^*\\xrightarrow{\\sim}r^*i_*$ be closed direct-image base change in this orientation. The counit compatibility reads $\\varepsilon_{i_P,r^*M}\\circ i_{P*}B_{r,i,M}=r^*(\\varepsilon_{i,M})\\circ\\alpha_{i^!M}$. The transpose characterization in the cited definition says precisely that $B_{r,i}$ is the mate of $\\alpha$. In particular the normalization specifies the actual arrow, not just its isomorphism class.",
+   "uses": [
+    "lem-per-regular-supported-base-change",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Corollary 4.2.3 and Lemma 4.3.1.1; canonical counit normalization made explicit using the adjunction mate formula"
+   }
+  },
+  {
+   "text": "For successive regular base changes $P\\xleftarrow{s}Q$, put $Z_Q=Q\\times_XZ$ and let $t:Z_Q\\to Z_P$ be the projection. The composition clause of [lem-per-regular-supported-base-change], at $n=1$, gives $B_{rs,i,M}=B_{s,i_P,r^*M}\\circ t^*(B_{r,i,M})$ under pullback-composition identifications. For successive closed immersions $W\\xrightarrow{k}Z\\xrightarrow{i}X$, identify $(ik)^!$ with $k^!i^!$ by [lem-cat-right-adjoint-composition], with its pasted counit. The successive-supported-restriction clause of [lem-per-regular-supported-base-change] is therefore the canonical right-adjoint comparison. Clause 2 of [lem-weil-pbc-mate-pasting], applied to these two closed adjunctions and their pullbacks, identifies the exchange for $ik$ with the two successive exchanges: after writing $k_P:W_P\\to Z_P$ and $u:W_P\\to W$, it is $k_P^!(B_{r,i,M})\\circ B_{q,k,i^!M}:u^*k^!i^!M\\to k_P^!i_P^!r^*M$. Thus both asserted pasting laws hold with the counit normalization from step 2.",
+   "uses": [
+    "lem-per-regular-supported-base-change",
+    "lem-cat-right-adjoint-composition",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Corollary 4.2.3 and Lemma 4.3.1.1; canonical counit normalization made explicit using the adjunction mate formula"
+   }
+  },
+  {
+   "text": "The localization and successive-closed-restriction clauses of [lem-per-regular-supported-base-change] also give the point-costalk assertion, without any assumption on excellence. Explicitly, to restrict at $z\\in Z$, first restrict the ambient scheme to $\\operatorname{Spec}\\mathcal O_{X,z}$, restrict $Z$ to its inverse image there, and then take the closed-point supported restriction. The cited statement identifies taking this costalk of $i^!M$ on $Z$ with taking the costalk of $M$ on $X$. Its compatibility with localization and successive supported restrictions says that doing these operations on the comparison in step 1 gives the same arrow as forming the comparison after localization and then composing supported restrictions. Together with step 3 this supplies the requested successive point-costalk identifications, and completes all clauses.",
+   "uses": [
+    "lem-per-regular-supported-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Corollary 4.2.3 and Lemma 4.3.1.1; canonical counit normalization made explicit using the adjunction mate formula"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-regular-supported-base-change",
+  "def-weil-pbc-adjunction-mate",
+  "lem-cat-right-adjoint-composition",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XVII, Corollary 4.2.3, specialized from the existing prime-power node; explicit mate and pasting verification"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -65,10 +123,38 @@
    "results": "{\"t\": \"2026-10-18T11:59:24Z\", \"tool\": \"grep\", \"query\": \"localCohomology|extraordinary|supportedRestriction|regularBaseChange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Manifold/Bordism.lean\", \"Mathlib/Geometry/Manifold/Bordism.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\"], \"digest\": \"db10800338a0393a\"}",
    "date": "2026-10-18",
    "verdict": "no match: scheme restriction, immersion, and algebraic local-cohomology hits do not state regular base change for supported etale complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "regularBaseChange|supportedRestriction|extraordinary",
+   "results": "{\"t\": \"2026-10-18T14:22:18Z\", \"tool\": \"grep\", \"query\": \"regularBaseChange|supportedRestriction|extraordinary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Manifold/Bordism.lean\", \"Mathlib/Geometry/Manifold/Bordism.lean\"], \"digest\": \"622a86a6cb8f6fc4\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern scheme morphisms, ring regularity, or unrelated manifold homology; none states closed supported etale derived base change"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extraordinary inverse image along a closed immersion commutes with regular pullback on etale torsion sheaves",
+   "results": "{\"t\": \"2026-10-18T14:22:19Z\", \"tool\": \"leansearch\", \"query\": \"Extraordinary inverse image along a closed immersion commutes with regular pullback on etale torsion sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.inv_naturality\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.app_inv_app'\", \"AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_apply\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_invApp\", \"AlgebraicGeometry.isPullback_of_isClosedImmersion\", \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict_inv_ofRestrict\"], \"digest\": \"3632a7babf68aa6e\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern scheme morphisms, ring regularity, or unrelated manifold homology; none states closed supported etale derived base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular base change for closed supported restriction of bounded below etale finite coefficient complexes",
+   "results": "{\"t\": \"2026-10-18T14:22:21Z\", \"tool\": \"leanfinder\", \"query\": \"Regular base change for closed supported restriction of bounded below etale finite coefficient complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"RingHom.Etale.isStableUnderBaseChange\", \"Algebra.Etale.baseChange\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"Algebra.etaleLocus_eq_compl_support\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"Algebra.IsEtaleAt.comp\"], \"digest\": \"ec2d3329db5f6202\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern scheme morphisms, ring regularity, or unrelated manifold homology; none states closed supported etale derived base change"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Local cohomology with support commutes with flat geometrically regular change of schemes for finite etale coefficients",
+   "results": "{\"t\": \"2026-10-18T14:24:03Z\", \"tool\": \"leanfinder\", \"query\": \"Local cohomology with support commutes with flat geometrically regular change of schemes for finite etale coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Flat.instResLE\", \"AlgebraicGeometry.Scheme.Hom.flat_appLE\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat\", \"AlgebraicGeometry.Flat.stalkMap\", \"AlgebraicGeometry.Flat.instHasRingHomPropertyFlat\", \"AlgebraicGeometry.Flat.of_stalkMap\", \"AlgebraicGeometry.Flat.flat_of_affine_subset\"], \"digest\": \"b259437cef71732a\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern scheme morphisms, ring regularity, or unrelated manifold homology; none states closed supported etale derived base change"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-regular-potential-pullback",
@@ -90,5 +176,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-regular-closed-support-base-change",
+  "worker": "stage1",
+  "summary": "No new node: the existing prime-power regular supported-base-change theorem specializes at n=1. Wrote the coefficient identification, counit/mate equation, both pasting formulas, and point-localization clause. All original hypotheses and conclusions retained. Removed unrelated potential-dualizing statement dependency and cited the finite Tate twist and mate definitions.",
+  "blueprint": "lem-per-artin-gabber-affine-curve, proof Step 3: arbitrary-field dimension-normalized Verdier duality through the finite-residue and regular-pullback expansions; canonical supported comparison needed for the fibrewise pinnings."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-N3-3576d5033",
+  "group": "N3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N3-3576d5033 (reviewer sub-agent of L); spot-checked: I read the item, all 4 steps and every cited statement in full, and checked the source in ILO XVII (pdftotext, printed pp. 281-282): Prop 4.2.1, Cor 4.2.3 (regular f between Noetherian Z[1/n]-schemes, closed i, every K in D+, evident map f'*i^!K -> i'^!f*K is an iso) and Lemma 4.3.1.1 (localize at X_(x), then take the fibre i^!). The item's hypotheses match 4.2.3 one for one, with no excellence or finite-type hypothesis. The statement is byte-identical to the live base, and the item cites no SGA. Step 1: lem-per-regular-supported-base-change (same unit, unsplit, created by Q30 the same day, Z/l^n with n>=1, no proof_deps, so no cycle) specializes at n=1 to the main iso and all its clauses; Z/l = F_l. Step 2: the cited 'commutes with closed counits' clause is the counit equation; with L1=i_*, R1=i^!, L2=i_P*, R2=i_P^!, G=q*, H=r* the mate goes q*i^! -> i_P^!r*, the right direction (def-weil-pbc-adjunction-mate). Step 3: regular compositions come from the cited composition clause; for closed k, i I worked out by hand that the mate-pasting clause 2 gives k_P^!(B_{r,i}) o B_{q,k}, which matches the step; q is regular as a base change of r; (ik)^! = k^!i^! by lem-cat-right-adjoint-composition. Step 4: localize first, then take the closed-point i^!, as in 4.3.1.1. Edge cases checked: Z empty, i=id, r=id, M=0, a point not closed in X, negative shifts. All citations are same-unit or Mathlib leaves, so no tool_uses. No blueprint duplicate found in a whole-DAG search. The stmt_deps change is justified: removed def-per-potential-dualizing (excellent-only, unused) and added the Tate-twist and mate definition nodes. Advisories: (a) the orientation of alpha needs the inverse of the closed-pushforward base-change iso, a stalkwise fact presupposed by both the item and the cited statement; (b) 'point costalk' is now described only in words (supported restriction after localization at points). Maintainer note: the item is the n=1 case of the same-day general node; consider merging, or pointing the item's citers (lem-per-regular-potential-pullback, lem-per-regular-pinnings-low-base-codimension) at the general node. No files changed."
  }
 }
