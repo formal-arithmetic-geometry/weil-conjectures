@@ -469,13 +469,6 @@ def ModelTraceFormula {X₀ : Scheme.{u}} (f₀ : X₀ ⟶ Spec (.of k₀)) [Loc
 
 variable {ℓ}
 
-/-- **The trace formula in dimension zero** (blueprint `sk-thm-trace-formula`, Step 1): for a
-finite model `X₀`, the fixed points of `Φ_m` are isolated and both sides are computed on the
-finitely many points of `X`. -/
-theorem modelTraceFormula_of_isFinite [IsAlgClosed k] {X₀ : Scheme.{u}}
-    (f₀ : X₀ ⟶ Spec (.of k₀)) [IsFinite f₀] : ModelTraceFormula ℓ (k := k) f₀ :=
-  sorry
-
 /-- **The trace formula for smooth curves** (blueprint `sk-thm-trace-formula`, through
 `sk-p-frob` and `sk-p-local`): for a model `X₀` separated and smooth of relative dimension one
 over `k₀`, the trace formula follows from the Lefschetz–Verdier formula on a compactification,
