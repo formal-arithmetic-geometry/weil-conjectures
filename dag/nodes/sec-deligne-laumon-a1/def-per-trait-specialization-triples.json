@@ -1,0 +1,115 @@
+{
+ "id": "def-per-trait-specialization-triples",
+ "kind": "definition",
+ "title": "Specialization triples of discrete continuous Galois modules",
+ "status": "split",
+ "statement": "Let $H$ be a topological group and $\\Lambda$ a commutative ring. Define $\\operatorname{TraitSpecialization}(\\Lambda,H)$ to be the category of triples $(W,V,a)$, where $W$ is a $\\Lambda$-module, $V$ is a discrete continuous $\\Lambda$-linear $H$-representation [def-exc-discrete-modules-category], and $a:W\\to V$ is an $H$-equivariant linear map when $W$ has trivial $H$-action. A morphism $(W,V,a)\\to(W\\prime,V\\prime,a\\prime)$ is a pair of linear maps $(f,g)$ with $g$ equivariant and $g a=a\\prime f$. Composition and identities are componentwise. The closed and generic projection functors send a triple to $W$ and $V$, respectively. Its invariant arrow is the same $a$ with codomain restricted to $V^H$.",
+ "stmt_deps": [
+  "def-exc-discrete-modules-category"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, section 1.2.2 opening paragraph (printed p. 260), description by arrows; global sections at the closed point also follow from Stacks Tag 03QO, etale-cohomology.tex, lemma-vanishing-etale-cohomology-strictly-henselian"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Category of equivariant module arrows with trivial source action and discrete continuous target action",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Action.HomSubtype\", \"Rep.invariantsAdjunction_homEquiv_apply_hom\", \"Rep.invariantsAdjunction\", \"CategoryTheory.Arrow.discreteEquiv\", \"MulActionHom.instAddMonoid\", \"Rep.trivial\", \"Rep.trivialFunctor\", \"MulActionHom.instAddGroup\"]}",
+   "date": "2026-10-18",
+   "verdict": "Related reusable representation/invariants interfaces; no specialization triple category."
+  },
+  {
+   "tool": "loogle",
+   "query": "Rep.trivialFunctor",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Rep.trivialFunctor\", \"Rep.instIsTrivialObjModuleCatTrivialFunctor\", \"Rep.trivialFunctor_obj_V\", \"Rep.trivialFunctor_map_hom\", \"Rep.invariantsAdjunction\", \"Rep.invariantsAdjunction_counit_app\", \"Rep.invariantsAdjunction_homEquiv_apply_hom\", \"Rep.invariantsAdjunction_homEquiv_symm_apply_hom\"]}",
+   "date": "2026-10-18",
+   "verdict": "Related reusable representation/invariants interfaces; no specialization triple category."
+  },
+  {
+   "tool": "grep",
+   "query": "TraitSpecialization|SpecializationTriple|trait.*triple|specialization.*arrow",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "TraitSpecialization|traitSpecialization|traitSheaves_equiv|lem-per-trait-sheaf-gluing in WeilConjectures and lean/Sheaf; specialization triple|specialization-triple|trait-specialization|category of triples|category of arrows in dag/nodes; blueprint_refs.py search specialization triples",
+   "results": "No Lean hits. DAG candidates inspected: only the item describes these trait triples; other hits are unrelated comma, operadic, or etale chart constructions. blueprint_refs: 0 blueprint nodes match specialization triples.",
+   "date": "2026-10-18",
+   "verdict": "no existing definition node or Lean specialization category"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-per-trait-sheaf-gluing",
+  "date": "2026-10-18",
+  "group": "N5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "ILO XVII 1.2.2 opening paragraph: the category of specialization arrows with trivial closed action, used in the trait gluing equivalence.",
+   "via": [
+    "lem-per-trait-sheaf-gluing",
+    "lem-per-trait-residue-model",
+    "def-per-potential-dualizing",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TraitSpecializationTriples",
+  "declaration": "AlgebraicGeometry.Etale.TraitSpecialization",
+  "declarations": [
+   "AlgebraicGeometry.Etale.traitDiscreteRepInclusion",
+   "AlgebraicGeometry.Etale.TraitSpecialization",
+   "AlgebraicGeometry.Etale.traitSpecializationClosed",
+   "AlgebraicGeometry.Etale.traitSpecializationGeneric",
+   "AlgebraicGeometry.Etale.traitSpecializationModule",
+   "AlgebraicGeometry.Etale.traitSpecializationInvariants",
+   "AlgebraicGeometry.Etale.traitSpecializationInvariantArrow",
+   "AlgebraicGeometry.Etale.traitTrivialFunctorAdditive"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TraitSpecializationTriples.lean",
+  "statement": "abbrev TraitSpecialization",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-113834df5",
+  "group": "N5",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-113834df5",
+  "group": "N5",
+  "result": "pass",
+  "note": "Both delivered modules compile clean via nt_compile --json (1.8 s, 4.8 s). The item Lean matches every node clause: strictly henselian DVR via IsStrictlyHenselianLocalRing and IsDiscreteValuationRing, arbitrary algebraically closed Ω containing Ks, Gal(Ks/K) with the Krull topology, geometric closed point s, Λ : Type (u+1) per the def-weil-pbc-derived-categories convention. The triple category is the exact Comma(Rep.trivialFunctor, ι DiscreteContinuousRep). The equivalence is pinned to the canonical functor by germ equations for w≫c and σ, a per-germ Galois action matching the existing pointSmallEtaleHom convention, and the restriction=a conjunct through r. Componentwise kernels/cokernels are stated via preservation by both projections. New def node def-per-trait-specialization-triples is correct and non-duplicate, with real invariant-arrow data. Records are verbatim; the only item change is the lean record plus the new stmt_dep. Report sections are present. Advisory H9: eight non-public proof-route imports are unused by the statement (it compiles without them)."
+ }
+}
