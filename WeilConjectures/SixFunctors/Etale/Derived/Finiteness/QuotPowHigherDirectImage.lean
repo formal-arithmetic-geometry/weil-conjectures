@@ -108,7 +108,7 @@ lemma isSetFLC_upperStar_higherDirectImageQuotPowTower_obj {S : Scheme.{u}} (j :
     IsSetFLC ((j)^*[ModuleCat.{u + 1} Λ].obj ((higherDirectImageQuotPowTower I g i).obj (op n))) :=
   IsFiniteLocallyConstantSheafOfTypes.of_iso
     ((sheafCompose _ (CategoryTheory.forget (ModuleCat.{u + 1} Λ))).mapIso
-      (((upperStarRestrictScalarsIso (I ^ n) j).app _).symm ≪≫
+      (((upperStarRestrictScalarsIso (Ideal.Quotient.mk (I ^ n)) j).app _).symm ≪≫
         (j)^*[ModuleCat.{u + 1} Λ].mapIso (higherDirectImageQuotPowTowerObjIso I g i n).symm))
     (h.restrictScalars (Ideal.Quotient.mk (I ^ n)))
 

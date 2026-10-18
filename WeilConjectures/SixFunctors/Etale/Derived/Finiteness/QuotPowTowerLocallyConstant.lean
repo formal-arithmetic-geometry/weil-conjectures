@@ -139,7 +139,7 @@ theorem isFiniteLocallyConstantSheaf_upperStar_higherDirectImageQuotPowTower
               (constantQuotSheaf Λ I T))) :=
         IsFiniteLocallyConstantSheaf.restrictScalars I _
       exact IsFiniteLocallyConstantSheaf.of_iso
-        (((upperStarRestrictScalarsIso I j).app _).symm ≪≫
+        (((upperStarRestrictScalarsIso (Ideal.Quotient.mk I) j).app _).symm ≪≫
           (j)^*[ModuleCat.{u + 1} Λ].mapIso (higherDirectImageQuotPowTowerObjOneIso I g k).symm)
   have hker {X Z : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (φ : X ⟶ Z)
       (hX : flcModuleProperty Λ S X) (hZ : flcModuleProperty Λ S Z) :
@@ -232,7 +232,7 @@ theorem flcProperty_upperStar_rightDerived_constantQuotSheaf_pow
           (constantQuotSheaf Λ (I ^ n) T)))) :=
     IsFiniteLocallyConstantSheaf.of_iso
       ((j)^*[ModuleCat.{u + 1} Λ].mapIso (higherDirectImageQuotPowTowerObjIso I g k n) ≪≫
-        (upperStarRestrictScalarsIso (I ^ n) j).app _)
+        (upperStarRestrictScalarsIso (Ideal.Quotient.mk (I ^ n)) j).app _)
   exact IsFiniteLocallyConstantSheaf.of_restrictScalars (I ^ n) _
 
 end AlgebraicGeometry.Etale
