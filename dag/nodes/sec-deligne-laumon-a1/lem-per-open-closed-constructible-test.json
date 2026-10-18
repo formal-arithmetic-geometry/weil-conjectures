@@ -13,11 +13,168 @@
   "def-weil-open-immersion",
   "def-weil-pbc-derived-categories",
   "def-weil-pbc-constructible-complexes",
-  "def-amb-etale-compact-support"
+  "def-amb-etale-compact-support",
+  "lem-exc-closed-ambient"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For either immersion $h=j,i$, inverse image on constant $\\Lambda$-module sheaves is exact by [prop-weil-pbc-inverse-image-modules-exact]. Applying [lem-sp-exact-functor-preserves-homology] degreewise gives $\\mathcal H^q(h^*L)=h^*\\mathcal H^q(L)$. The constructibility assertion of [prop-constructible-pullback] applies to each cohomology sheaf. Thus both $j^*$ and $i^*$ preserve bounded constructibility and preserve any cohomological interval. This uses ordinary small-etale inverse image throughout.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-sp-exact-functor-preserves-homology",
+    "prop-constructible-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04JC (lemma-flat-pullback-exact), constant-ring specialization; etale-cohomology.tex, constructible pullback (lemma-pullback-constructible); homology.tex Tag 010N"
+   }
+  },
+  {
+   "text": "The closed immersion $i$ is finite by [lem-weil-pbc-closed-immersion-finite]. Hence its direct image on abelian sheaves is exact by [lemma-weil-pbc-finite-direct-image-exact]. Direct image of constant-ring module sheaves has the same underlying abelian direct image, and the forgetful functor is faithful and exact by [lem-weil-pbc-module-sheaves-colimits-forgetful]; it therefore detects vanishing of homology and exactness. Consequently $i_*$ on $\\Lambda$-module sheaves is exact as well. The counit $i^*i_*\\cong\\mathrm{id}$ of [prop-openclosed-lowerstar-fully-faithful] is $\\Lambda$-linear, since its maps preserve addition and hence multiplication by every integer modulo $\\ell^n$. Exactness allows both functors and this counit to be applied termwise to complexes. By [lem-sp-exact-functor-preserves-homology], $\\mathcal H^q(i_*L)=i_*\\mathcal H^q(L)$; the same counit gives $i^*i_*L\\cong L$ in the derived category. In particular $i_*$ preserves and reflects a cohomological interval.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-finite",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "prop-openclosed-lowerstar-fully-faithful",
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03QP (proposition-finite-higher-direct-image-zero), Tag 04FX (lemma-stalk-pushforward-closed-immersion); sites-modules.tex Tag 03DA (lemma-abelian)"
+   }
+  },
+  {
+   "text": "For a constructible $\\Lambda$-module sheaf $G$ on $Z$, its stalks are finite by [def-weil-pbc-constructible-complexes]. The comparison [lem-weil-pbc-constructible-etale-module-sheaf-comparison] identifies this finite-stratification notion with the source-library notion in the hypothesis of [lem-weil-pbc-finite-pushforward-finite-stalk-module]. That node applies to the finite morphism $i$ and the Noetherian target $X$; it says that $i_*G$ is constructible. Use the same comparison to return to the finite-stratification notion. Applying this to every $\\mathcal H^q(L)$ and using Step 2 shows that $i_*$ preserves bounded constructibility. Conversely, if $i_*L$ is bounded constructible, Step 1 and the termwise counit of Step 2 give $L\\cong i^*i_*L$ bounded constructible. Thus closed direct image both preserves and reflects the property needed below.",
+   "uses": [
+    "def-weil-pbc-constructible-complexes",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "lem-weil-pbc-finite-pushforward-finite-stalk-module",
+    "lem-weil-pbc-closed-immersion-finite",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "prop-constructible-pullback",
+    "prop-openclosed-lowerstar-fully-faithful",
+    "lem-sp-exact-functor-preserves-homology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095R (lemma-finite-pushforward-constructible), finite closed immersion into the Noetherian scheme X; Tags 095E, 03RU, 09XZ for the constructibility comparison"
+   }
+  },
+  {
+   "text": "First let $Q$ be a constructible $\\Lambda$-module sheaf on $U$ annihilated by $\\ell$. Its same finite local constant module values are $\\mathbf F_\\ell$-vector spaces, so it is constructible with $\\mathbf F_\\ell$ coefficients too. Excellence implies quasi-excellence by [def-exc-excellent-ring]. Apply [lem-per-gabber-open-immersion-sheaf-finiteness] with $T=X$ and $B=\\mathbf F_\\ell$: each $R^qj_*Q$ computed over $B$ is constructible and is zero for $q$ sufficiently large, with a bound allowed to depend on $Q$. Apply [lem-sbc-higher-direct-image-forget-comparison] once with coefficient ring $\\Lambda$ and once with $B$. Both resulting underlying abelian sheaves are $\\mathcal H^q(Rj_*Q_{ab})$, so the higher direct images computed in the two module categories have isomorphic underlying abelian sheaves. This is an isomorphism of $\\Lambda$-modules: every group homomorphism commutes with the integer scalar actions, and the $\\Lambda$ action here is multiplication modulo $\\ell^n$. Thus the same finite local constant trivializations and the same vanishing bound apply over $\\Lambda$. Negative higher direct images vanish for a sheaf in degree zero by the bounded-below derived construction [def-weil-pbc-direct-image]. Consequently $Rj_*(Q[0])$ is bounded constructible over $\\Lambda$.",
+   "uses": [
+    "def-weil-pbc-constructible-complexes",
+    "def-exc-excellent-ring",
+    "lem-per-gabber-open-immersion-sheaf-finiteness",
+    "lem-sbc-higher-direct-image-forget-comparison",
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIII, Theorem 1.1.1, prime-coefficient case; sites-cohomology.tex Tag 03FD (lemma-cohomology-modules-abelian-agree) for the two coefficient-forgetting comparisons"
+   }
+  },
+  {
+   "text": "For an arbitrary constructible $\\Lambda$-module sheaf $F$ on $U$, put $F_r=\\operatorname{im}(\\ell^r:F\\to F)$ for $0\\le r\\le n$ and $Q_r=F_r/F_{r+1}$ for $0\\le r<n$. By [thm-constructible-serre], $F_r$ is constructible (an image is the kernel of a cokernel) and so is $Q_r$. We have $F_n=0$, $F_0=F$, and $\\ell Q_r=0$. Each short exact sequence $0\\to F_{r+1}\\to F_r\\to Q_r\\to0$, placed in degree zero, gives a distinguished triangle by [lem-weil-pbc-complex-ses-triangle]. Apply the triangulated functor $Rj_*$ [lem-pc-right-derived-functor-triangulated]. Step 4 supplies bounded constructibility of $Rj_*Q_r$; starting with $Rj_*F_n=0$ and descending from $r=n-1$ to $0$, the triangulated-subcategory assertion [prop-constructible-derived-subcategory] supplies bounded constructibility of $Rj_*F_r$ at each stage. This proves the required open-direct-image assertion for every constructible sheaf over $\\Lambda$ without assuming a bound uniform in all sheaves.",
+   "uses": [
+    "thm-constructible-serre",
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-pc-right-derived-functor-triangulated",
+    "prop-constructible-derived-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIII, Theorem 1.1.1 and paragraph 1.1.2; the finite coefficient-filtration argument, using Stacks Tag 03RZ (lemma-constructible-abelian) and derived.tex Tag 0152"
+   }
+  },
+  {
+   "text": "Let $M\\in D^b_c(U_{\\mathrm{et}},\\Lambda)$ have cohomology in $[a,b]$. For every $r$, [lem-pc-derived-lower-truncation-step-triangle], with its integer $n=-r$, gives the triangle $\\mathcal H^r(M)[-r]\\to\\tau_{\\ge r}M\\to\\tau_{\\ge r+1}M\\to\\mathcal H^r(M)[-r+1]$. Apply $Rj_*$, which preserves triangles and shifts by [lem-pc-right-derived-functor-triangulated]. Each image of a cohomology sheaf is bounded constructible by Step 5. Starting at $\\tau_{\\ge b+1}M=0$ and descending through $r=b,\\ldots,a$, closure under shifts and extensions in [prop-constructible-derived-subcategory] proves that $Rj_*\\tau_{\\ge r}M$ is bounded constructible. Since $\\tau_{\\ge a}M\\cong M$, this proves $Rj_*M\\in D^b_c(X_{\\mathrm{et}},\\Lambda)$. Only finitely many cohomology sheaves and filtration factors occur, so their individual bounds suffice.",
+   "uses": [
+    "lem-pc-derived-lower-truncation-step-triangle",
+    "lem-pc-right-derived-functor-triangulated",
+    "prop-constructible-derived-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XIII, paragraph 1.1.2 (the derived-complex reformulation); Stacks perfect.tex Tag 08D4, proof of (2), for the successive lower-truncation triangles"
+   }
+  },
+  {
+   "text": "Use [lem-exc-closed-ambient] for the ambient ordinary-etale right adjoint of closed direct image, and [lem-exc-closed-support-triangle] for its natural distinguished triangle\n$$i_*Ri^!K\\longrightarrow K\\longrightarrow Rj_*j^*K\\longrightarrow (i_*Ri^!K)[1].$$\nThis is the triangle in the ordinary module category for the finite ring $A=\\Lambda$; no constructibility is assumed here. For bounded-below $K$, exact $j^*$ and the bounded-below right derived functor $Rj_*$ [def-weil-pbc-direct-image] make the middle and third terms bounded below. The category $D^+$ is triangulated [def-weil-pbc-derived-categories], so the first term is bounded below too. Steps 1 and 2 give $Ri^!K\\cong i^*i_*Ri^!K$ bounded below. Hence this adjoint restricts to $D^+$ and is the $i^!$ of the statement, by its right-adjoint property on this full subcategory.",
+   "uses": [
+    "lem-exc-closed-ambient",
+    "lem-exc-closed-support-triangle",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "prop-openclosed-lowerstar-fully-faithful",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XQ (lemma-sections-with-support-acyclic) and Tag 0A45 (lemma-cohomology-with-support-triangle); the cited closed-support triangle node states the arbitrary-complex finite-ring version"
+   }
+  },
+  {
+   "text": "Assume $K\\in D^b_c(X_{\\mathrm{et}},\\Lambda)$. Step 1 gives $j^*K\\in D^b_c(U_{\\mathrm{et}},\\Lambda)$, and Step 6 gives $Rj_*j^*K\\in D^b_c(X_{\\mathrm{et}},\\Lambda)$. In the localization triangle of Step 7, the middle and third terms are therefore bounded constructible. By [prop-constructible-derived-subcategory], rotating that triangle shows that $i_*i^!K$ is bounded constructible. The reflection assertion proved in Step 3 then gives $i^!K\\in D^b_c(Z_{\\mathrm{et}},\\Lambda)$. This proves the forward implication.",
+   "uses": [
+    "prop-constructible-derived-subcategory",
+    "lem-exc-closed-support-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Lemma 6.2.2.2, forward implication using XIII-1.1.1 and 1.1.2"
+   }
+  },
+  {
+   "text": "Conversely suppose that $j^*K$ and $i^!K$ are bounded constructible. Step 6 gives bounded constructibility of $Rj_*j^*K$, and Step 3 gives that of $i_*i^!K$. These are the third and first terms of the distinguished triangle in Step 7. Since [prop-constructible-derived-subcategory] is a triangulated-subcategory assertion, it gives bounded constructibility of the middle term $K$. This proves the reverse implication and completes the equivalence.",
+   "uses": [
+    "prop-constructible-derived-subcategory",
+    "lem-exc-closed-support-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Lemma 6.2.2.2, reverse implication using XIII-1.1.1 and 1.1.2"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-sp-exact-functor-preserves-homology",
+  "prop-constructible-pullback",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "prop-openclosed-lowerstar-fully-faithful",
+  "def-weil-pbc-constructible-complexes",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-weil-pbc-finite-pushforward-finite-stalk-module",
+  "def-exc-excellent-ring",
+  "lem-per-gabber-open-immersion-sheaf-finiteness",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "def-weil-pbc-direct-image",
+  "thm-constructible-serre",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-pc-right-derived-functor-triangulated",
+  "prop-constructible-derived-subcategory",
+  "lem-pc-derived-lower-truncation-step-triangle",
+  "lem-exc-closed-ambient",
+  "lem-exc-closed-support-triangle",
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, Lemma 6.2.2.2 (printed p.294), using Expose XIII Theorem 1.1.1 and paragraph 1.1.2 (printed p.195); the coefficient filtration and localization argument are written out"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,10 +203,38 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-18",
    "verdict": "no match: returned declarations do not assert this statement for these objects and hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(UpperShriek|upperShriek|recollement)|exceptional.*constructible",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned results concern topological constructible subsets, scheme sections, or ordinary cohomological bounds, not the etale exceptional-restriction criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded constructible complexes detected by open and exceptional closed inverse image etale sheaves",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Topology.IsConstructible.preimage_of_isOpenEmbedding\", \"Topology.isConstructible_preimage_iff_of_isOpenEmbedding\", \"Topology.IsConstructible\", \"Topology.IsConstructible.image_of_isOpenEmbedding\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"IsCompact.isConstructible\", \"IsRetrocompact.isConstructible\", \"Topology.IsConstructible.preimage_of_isClosedEmbedding\"]}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned results concern topological constructible subsets, scheme sections, or ordinary cohomological bounds, not the etale exceptional-restriction criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"constructible\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned results concern topological constructible subsets, scheme sections, or ordinary cohomological bounds, not the etale exceptional-restriction criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded below complex of etale Z mod l power sheaves is bounded constructible iff open restriction and exceptional closed restriction are bounded constructible",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux\", \"DerivedCategory.isGE_Q_obj_iff\", \"Topology.IsLocallyConstructible.isConstructible\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"DerivedCategory.isLE_Q_obj_iff\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\"]}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned results concern topological constructible subsets, scheme sections, or ordinary cohomological bounds, not the etale exceptional-restriction criterion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-potential-dualizing-uniqueness",
@@ -71,5 +256,109 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-open-closed-constructible-test",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded the source reduction to open direct-image finiteness, reusing the existing finite-field Gabber sheaf theorem by a finite powers-of-ell filtration and cohomological truncations, then the ordinary-etale closed-support triangle. Explicitly checked coefficient forgetting, closed-image preservation and reflection, and the bounded-below adjoint. No new nodes.",
+  "blueprint": "Nearest ancestor lem-per-artin-gabber-affine-curve, proof Step 3: dimension-normalized Verdier duality, through potential dualizing bounded constructibility. Steps 1-3 provide the ordinary restriction and closed-image tools; 4-6 establish the open-image finiteness input; 7-9 expand Gabber XVII 6.2.2.2. No unit-level route is replaced.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic tool: Inverse image of etale sheaves of modules over a constant ring is exact, used in proof steps 1, 3, 7. This supports the excellent-base constructibility argument; it does not replace the unit route, and no node of the perverse-curve unit states this formal input."
+   },
+   {
+    "node": "lem-sp-exact-functor-preserves-homology",
+    "why": "Generic tool: Exact functors preserve kernels, cokernels, images, inverse images and homology, used in proof steps 1, 2, 3. This supports the excellent-base constructibility argument; it does not replace the unit route, and no node of the perverse-curve unit states this formal input."
+   },
+   {
+    "node": "prop-constructible-pullback",
+    "why": "Generic tool: Pullback of constructible sheaves, used in proof steps 1, 3. This supports the excellent-base constructibility argument; it does not replace the unit route, and no node of the perverse-curve unit states this formal input."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-finite",
+    "why": "Generic tool: Closed immersions are finite, used in proof steps 2, 3. This supports the excellent-base constructibility argument; it does not replace the unit route, and no node of the perverse-curve unit states this formal input."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-direct-image-exact",
+    "why": "Generic tool: Exactness of finite direct image, used in proof steps 2. This supports the excellent-base constructibility argument; it does not replace the unit route, and no node of the perverse-curve unit states this formal input."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic tool: Colimits of sheaves of modules and the forgetful functor to abelian sheaves, used in proof steps 2. This supports the excellent-base constructibility argument; it does not replace the unit route, and no node of the perverse-curve unit states this formal input."
+   },
+   {
+    "node": "prop-openclosed-lowerstar-fully-faithful",
+    "why": "Generic tool: $i_*$ is fully faithful, used in proof steps 2, 3, 7. This supports the excellent-base constructibility argument; it does not replace the unit route, and no node of the perverse-curve unit states this formal input."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "why": "Generic tool: Comparison of the two global constructible module sheaf predicates, used in proof steps 3. This supports the excellent-base constructibility argument; it does not replace the unit route, and no node of the perverse-curve unit states this formal input."
+   },
+   {
+    "node": "lem-weil-pbc-finite-pushforward-finite-stalk-module",
+    "why": "Generic tool: Finite pushforward of a constructible module sheaf with finite geometric stalks, used in proof steps 3. This supports the excellent-base constructibility argument; it does not replace the unit route, and no node of the perverse-curve unit states this formal input."
+   },
+   {
+    "node": "lem-sbc-higher-direct-image-forget-comparison",
+    "why": "Generic tool: Underlying abelian sheaf commutes with higher direct image, used in proof steps 4. This supports the excellent-base constructibility argument; it does not replace the unit route, and no node of the perverse-curve unit states this formal input."
+   },
+   {
+    "node": "thm-constructible-serre",
+    "why": "Generic tool: Constructible sheaves form a weak Serre subcategory, used in proof steps 5. This supports the excellent-base constructibility argument; it does not replace the unit route, and no node of the perverse-curve unit states this formal input."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Generic tool: A short exact sequence of complexes gives a distinguished triangle in D(A), functorially, used in proof steps 5. This supports the excellent-base constructibility argument; it does not replace the unit route, and no node of the perverse-curve unit states this formal input."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic tool: The unbounded right derived functor is triangulated, used in proof steps 5, 6. This supports the excellent-base constructibility argument; it does not replace the unit route, and no node of the perverse-curve unit states this formal input."
+   },
+   {
+    "node": "prop-constructible-derived-subcategory",
+    "why": "Generic tool: The constructible derived category, used in proof steps 5, 6, 8, 9. This supports the excellent-base constructibility argument; it does not replace the unit route, and no node of the perverse-curve unit states this formal input."
+   },
+   {
+    "node": "lem-pc-derived-lower-truncation-step-triangle",
+    "why": "Generic tool: Successive lower truncations have a single cohomology sheaf as cone, used in proof steps 6. This supports the excellent-base constructibility argument; it does not replace the unit route, and no node of the perverse-curve unit states this formal input."
+   },
+   {
+    "node": "lem-exc-closed-ambient",
+    "why": "Generic tool: Closed-immersion right adjoint before restriction, used in proof steps 7. This supports the excellent-base constructibility argument; it does not replace the unit route, and no node of the perverse-curve unit states this formal input."
+   },
+   {
+    "node": "lem-exc-closed-support-triangle",
+    "why": "Generic tool: Closed-support triangle before restriction, used in proof steps 7, 8, 9. This supports the excellent-base constructibility argument; it does not replace the unit route, and no node of the perverse-curve unit states this formal input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-sp-exact-functor-preserves-homology",
+  "prop-constructible-pullback",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "prop-openclosed-lowerstar-fully-faithful",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-weil-pbc-finite-pushforward-finite-stalk-module",
+  "lem-sbc-higher-direct-image-forget-comparison",
+  "thm-constructible-serre",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-pc-right-derived-functor-triangulated",
+  "prop-constructible-derived-subcategory",
+  "lem-pc-derived-lower-truncation-step-triangle",
+  "lem-exc-closed-ambient",
+  "lem-exc-closed-support-triangle"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-9bd91a4b4",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-9bd91a4b4 (reviewer sub-agent of L); spot-checked: Read the item in full: 9 steps, no new nodes; statement byte-identical to live, stmt_deps only gained lem-exc-closed-ambient. Read every cited node's statement and the source. ILO Gabber XVII Lemme 6.2.2.2 (Noetherian excellent Z[1/n]-scheme, K in D+, equivalence via 'Rj_* preserves D^b_c, cf. XIII-1.1.1') and XIII Thm 1.1.1/1.1.2 (quasi-excellent, bound depends on F) match the item's ℓ^n special case. Steps 1-3: exact restrictions; closed i_* exact on modules through the abelian finite-pushforward node plus faithful exact forget; counit linear over Z/ℓ^n; finite-stalk pushforward node with Noetherian X plus constructibility comparison both ways; reflection via i*i_* ≅ id. Step 4: the same-unit Gabber sheaf node with B=F_ℓ; all hypotheses hold (excellent ⇒ quasi-excellent, ℓ a unit, bound depends on the sheaf); the forget comparison applied for Λ and F_ℓ gives the same abelian sheaf, linear because Λ_X is a quotient of Z_X. Step 5: ℓ-adic image filtration via weak Serre, SES triangles and 2-of-3 in D^b_c; base and step are explicit. Step 6: truncation triangles with n=-r (indices checked). Step 7: the ordinary-étale support triangle shows Ri^!K is in D+, so it is the statement's bounded-below i^!. Steps 8/9: both implications correct. Edge cases checked: U or Z empty, nonreduced Z, n=1, X a point, j_*Λ on A^1. No cycle, no SGA. Duplicates: XIII-1.1.1 nodes are finite-field only; blueprint search found nothing. The 17 declared tool_uses are generic tools used as black boxes; all accepted. Advisory only: the D+ and unbounded Rj_* agree via K-injectivity of bounded-below injective complexes; this is implicit in the steps."
  }
 }
