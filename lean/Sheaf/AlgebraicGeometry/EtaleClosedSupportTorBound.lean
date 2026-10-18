@@ -6,7 +6,6 @@ Authors: SHEAF group Q56
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleClosedAmbientAdjoint
-public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
