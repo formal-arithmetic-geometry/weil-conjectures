@@ -18,9 +18,89 @@
   "def-weil-pbc-category-colimit",
   "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a nonempty stratum $j:S\\to X$ and write $c:V\\to S$ for its chosen cover. Constant-coefficient restriction is the exact module inverse image of [lem-pe-constant-left-module-inverse-image]. Its ring comparison identifies $j^{-1}A_X$ with $A_S$, so [lem-weil-pbc-ringed-topoi-module-pullback-tensor] gives $j^*(E\\otimes_{A_X}G)\\cong j^*E\\otimes_{A_S}j^*G$. The hypotheses on $\\mathcal W_{\\mathcal P}(A)$ already give filtered-colimit presentations of these two restrictions by finite-filtered sheaves. It is therefore enough to prove the corresponding assertion on $S$ with its one fixed cover; no refinement of the partition will be made.",
+   "uses": [
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Definitions 7.3.2-7.3.3; Stacks 00YV and 03EL for restriction."
+   }
+  },
+  {
+   "text": "Choose a geometric point $\\bar v$ of $V$, with image $\\bar s$, and put $\\Pi=\\pi_1(S,\\bar s)$ and $H=c_*\\pi_1(V,\\bar v)$. By [lem-per-torsion-local-system-monodromy], every generator whose pullback to $V$ is constant is a local system; its monodromy has trivial $H$-action. The same node says that ambient extensions of torsion local systems and all their small colimits remain local systems, and that stalks give an exact equivalence preserving colimits. It applies here because $\\ell A=0$ and $S$ is connected Noetherian. Thus every finite-filtered term in the two presentations is a local system whose discrete monodromy module has a finite $\\Pi$-stable filtration with $H$ acting trivially on its quotients. Conversely every such filtration corresponds to a finite filtration by subsheaves with quotients constant on $V$: exactness transports the submodules and quotients, the pullback clause makes their pullbacks constant, and $V\\to S$ is itself an etale covering witnessing local constancy.",
+   "uses": [
+    "lem-per-torsion-local-system-monodromy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "7.2.3-7.2.5 and Definition 7.3.2, pp. 301-303."
+   }
+  },
+  {
+   "text": "For two finite-filtered terms $L,M$ write their monodromy modules as $U,W$, with filtrations $0=U_0\\subset\\cdots\\subset U_r=U$ and $0=W_0\\subset\\cdots\\subset W_s=W$. Their tensor is a local system with monodromy $U\\otimes_A W$ and diagonal action by [lem-per-local-system-tensor-monodromy]. For integers $k$ define $T_k$ to be the sum of the images of $U_a\\otimes_A W_b$ for $a+b\\le k$, $0\\le a\\le r$, $0\\le b\\le s$. These are $\\Pi$-stable submodules, $T_0=0$ and $T_{r+s}=U\\otimes_AW$; if one filtration has length zero its module and the tensor are zero. For $h\\in H$, $u\\in U_a,w\\in W_b$,\n$$(h-1)(u\\otimes w)=(hu-u)\\otimes hw+u\\otimes(hw-w)\\in T_{a+b-1}.$$\nHere $hu-u\\in U_{a-1}$, $hw-w\\in W_{b-1}$, and $hw\\in W_b$; terms with $a=0$ or $b=0$ vanish. Since pure tensors generate the images, $H$ acts trivially on every $T_k/T_{k-1}$. This uses only the tensor relations and generators of [def-weil-pbc-module-tensor-product]; it never identifies a graded quotient with a tensor of graded quotients.",
+   "uses": [
+    "lem-per-local-system-tensor-monodromy",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Tensor-filtration consequence of 7.3.2 and 11.1.1; explicit elementary convolution calculation."
+   }
+  },
+  {
+   "text": "Apply the exact monodromy equivalence and its pullback criterion [lem-per-torsion-local-system-monodromy] to the filtration $T_k$ from Step 3. It becomes a finite filtration by subsheaves of $L\\otimes_{A_S}M$. Every quotient pulls back to a constant sheaf on $V$, and is therefore locally constant on $S$ by that etale covering. Hence the tensor of any two finite-filtered terms is again one of the finite-filtered objects allowed in the definition of $\\mathcal W$. No subobject closure of arbitrary etale sheaves is being used: these are submodules within the exact local-system equivalence.",
+   "uses": [
+    "lem-per-torsion-local-system-monodromy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "7.2.3-7.2.5 and Definition 7.3.2, finite-filtration interpretation."
+   }
+  },
+  {
+   "text": "Write $j^*E=\\varinjlim_{\\alpha\\in I}L_\\alpha$ and $j^*G=\\varinjlim_{\\beta\\in J}M_\\beta$ with small filtered index categories. Apply [lem-weil-pbc-sheaf-tensor-closed] with coefficient category $\\operatorname{Mod}_A$, its usual additive closed symmetric tensor, and an essentially small model of $S_{\\mathrm{et}}$. Its sheaf tensor is the ordinary constant-ring tensor here: [lem-pc-sites-module-sheafification-tensor], applied to constant presheaves and then to the module presheaves, identifies both with sheafification of the sectionwise balanced tensor. Thus its colimit-preservation assertion gives\n$$j^*E\\otimes_{A_S}j^*G\\cong\\varinjlim_{(\\alpha,\\beta)\\in I\\times J}(L_\\alpha\\otimes_{A_S}M_\\beta).$$\nThe product category is small and filtered: nonemptiness, cocones for two objects and equalization of parallel arrows are supplied coordinatewise by $I$ and $J$. Step 4 makes every term finite-filtered with the required constant-on-$V$ quotients. This is exactly the required filtered-colimit presentation.",
+   "uses": [
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "lem-pc-sites-module-sheafification-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "7.2.4 and Definition 7.3.2; Stacks 03EO (lemma-internal-hom-adjoint-tensor), 0GMW (lemma-sheafification-tensor)."
+   }
+  },
+  {
+   "text": "Repeat Steps 1-5 for each stratum. The restriction of $E\\otimes_{A_X}G$ then has the required presentation on every $S_i$, which is the definition of membership in $\\mathcal W_{\\mathcal P}(A)$. For empty $X$ there are no strata and this condition is vacuous. The construction keeps the original covers and allows arbitrary constant module values, zero modules and zero filtration lengths. At no point is injectivity of $U_a\\otimes W_b\\to U\\otimes W$ needed: its image defines $T_k$. Therefore no flatness condition has entered.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Definition 7.3.3; conclusion of the ordinary tensor argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "lem-pc-sites-module-sheafification-tensor",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-per-local-system-tensor-monodromy",
+  "lem-per-torsion-local-system-monodromy",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-pbc-sheaf-tensor-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII 7.2.3-7.2.5 and 7.3.2-7.3.3, expanded by the explicit convolution image filtration and generic monodromy tensor comparison."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -77,10 +157,66 @@
    "results": "0 hits; top: ; note: ; digest: 4f53cda18c2baa0c (subdirectory RepresentationTheory)",
    "date": "2026-10-18",
    "verdict": "no match: none states tensor closure of the ind-unipotent Galois-partition class"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor product of locally constant etale A-module sheaves trivialized by a fixed finite Galois cover",
+   "results": "{\"t\": \"2026-10-18T20:02:42Z\", \"tool\": \"leanfinder\", \"query\": \"Tensor product of locally constant etale A-module sheaves trivialized by a fixed finite Galois cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.LocallyConstantModule.functor\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"LightCondMod.LocallyConstant.functorIsoDiscreteAux₁\", \"LightCondensed.instMonoidalCategoryLightCondMod\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalLightCondSetLightCondModFree\"], \"digest\": \"a38ae370e78a352a\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: representation tensors and condensed monoidal structures do not state the etale ind-finite local-system comparison; Representation.tprod and tprod_apply were read in Mathlib/RepresentationTheory/Basic.lean:624-633"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.tensorProd_isSheaf, PresheafOfModules.Monoidal.tensorObj",
+   "results": "{\"t\": \"2026-10-18T20:02:42Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf.tensorProd_isSheaf, PresheafOfModules.Monoidal.tensorObj\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'PresheafOfModules.Monoidal.tensorObj'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: representation tensors and condensed monoidal structures do not state the etale ind-finite local-system comparison; Representation.tprod and tprod_apply were read in Mathlib/RepresentationTheory/Basic.lean:624-633"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorProd_isSheaf|tensorObj|locally constant",
+   "results": "{\"t\": \"2026-10-18T20:02:43Z\", \"tool\": \"grep\", \"query\": \"tensorProd_isSheaf|tensorObj|locally constant\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/FunctorHom.lean\", \"Mathlib/CategoryTheory/Action/Monoidal.lean\", \"Mathlib/CategoryTheory/Action/Monoidal.lean\", \"Mathlib/CategoryTheory/Action/Monoidal.lean\", \"Mathlib/CategoryTheory/Action/Monoidal.lean\", \"Mathlib/CategoryTheory/Action/Monoidal.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean\"], \"digest\": \"fcb9febc905116b4\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: representation tensors and condensed monoidal structures do not state the etale ind-finite local-system comparison; Representation.tprod and tprod_apply were read in Mathlib/RepresentationTheory/Basic.lean:624-633"
+  },
+  {
+   "tool": "grep",
+   "query": "localSystem|LocalSystem|monodromy|Monodromy",
+   "results": "{\"t\": \"2026-10-18T20:10:45Z\", \"tool\": \"grep\", \"query\": \"localSystem|LocalSystem|monodromy|Monodromy\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: representation tensors and condensed monoidal structures do not state the etale ind-finite local-system comparison; Representation.tprod and tprod_apply were read in Mathlib/RepresentationTheory/Basic.lean:624-633"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Tensor product of etale local systems corresponds to diagonal tensor product of arbitrary discrete monodromy representations",
+   "results": "{\"t\": \"2026-10-18T20:10:46Z\", \"tool\": \"leansearch\", \"query\": \"Tensor product of etale local systems corresponds to diagonal tensor product of arbitrary discrete monodromy representations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Representation.repOfTprodIso_apply\", \"Representation.repOfTprodIso\", \"CategoryTheory.Discrete.monoidal_tensorObj_as\", \"Representation.tprod\", \"CategoryTheory.MonoidalCategory.externalProductCompDiagIso\", \"Algebra.FormallyEtale.instTensorProduct\", \"PiTensorProduct\", \"Representation.diagonal\"], \"digest\": \"f914c5939dcf2500\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: representation tensors and condensed monoidal structures do not state the etale ind-finite local-system comparison; Representation.tprod and tprod_apply were read in Mathlib/RepresentationTheory/Basic.lean:624-633"
+  },
+  {
+   "tool": "loogle",
+   "query": "Representation.tprod",
+   "results": "{\"t\": \"2026-10-18T20:10:46Z\", \"tool\": \"loogle\", \"query\": \"Representation.tprod\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Representation.tprod\", \"Representation.tprod_apply\", \"Representation.smul_one_tprod_asModule\", \"Representation.smul_tprod_one_asModule\", \"Representation.TensorProduct.lid\", \"Representation.TensorProduct.rid\", \"Representation.TensorProduct.comm\", \"Representation.IntertwiningMap.lTensor\"], \"digest\": \"51de3b794e9873b8\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: representation tensors and condensed monoidal structures do not state the etale ind-finite local-system comparison; Representation.tprod and tprod_apply were read in Mathlib/RepresentationTheory/Basic.lean:624-633"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Monodromy equivalence for arbitrary torsion local systems sends sheaf tensor product to tensor product of discrete continuous fundamental group modules with diagonal action",
+   "results": "{\"t\": \"2026-10-18T20:10:46Z\", \"tool\": \"leanfinder\", \"query\": \"Monodromy equivalence for arbitrary torsion local systems sends sheaf tensor product to tensor product of discrete continuous fundamental group modules with diagonal action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology\", \"LightCondensed.instMonoidalCategoryLightCondMod\", \"CategoryTheory.Sheaf.monoidalCategory\", \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"Representation.repOfTprodIso\"], \"digest\": \"45cdb47a5d747a7a\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: representation tensors and condensed monoidal structures do not state the etale ind-finite local-system comparison; Representation.tprod and tprod_apply were read in Mathlib/RepresentationTheory/Basic.lean:624-633"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The equivalence between ind finite etale local systems and continuous discrete profinite group modules is symmetric monoidal without finite generation assumptions",
+   "results": "{\"t\": \"2026-10-18T20:11:28Z\", \"tool\": \"leanfinder\", \"query\": \"The equivalence between ind finite etale local systems and continuous discrete profinite group modules is symmetric monoidal without finite generation assumptions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"instMonoidalLightProfiniteLightCondSetLightProfiniteToLightCondSet\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalCategoryLightCondMod\", \"LightCondensed.instSymmetricCategoryLightCondMod\", \"LightCondMod.LocallyConstant.functorIsoDiscreteAux₂\"], \"digest\": \"134c99191ee63b58\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: representation tensors and condensed monoidal structures do not state the etale ind-finite local-system comparison; Representation.tprod and tprod_apply were read in Mathlib/RepresentationTheory/Basic.lean:624-633"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-ctf-hom-locally-constant",
@@ -105,5 +241,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-galois-partition-tensor-closure",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reduced to each stratum, transported finite filtrations to discrete monodromy modules, wrote the convolution image filtration and its action identity without flatness, and passed through the small filtered product of the two diagrams. One new statement-only node supplies the general tensor comparison for arbitrary torsion local systems; finite/lisse coefficient comparison nodes do not supply it.",
+  "blueprint": "Proof, Step 3 of lem-per-artin-gabber-affine-curve: 'By the duality symmetry of the middle perverse t-structure' and 'the Verdier exchange'; the inherited coefficient-duality branch via lem-per-qbar-arbitrary-field-duality, lem-per-finite-residue-dualizing, lem-per-potential-local-duality, lem-per-coefficient-change-dualizing, lem-per-ctf-hom-coefficient-comparison and lem-per-ctf-hom-condition-b. Subargument: ILO XVII Lemma 7.6.11, the locally constant flat case of condition (B). Auxiliary tensor stability of the fixed-partition weakly constructible class. Steps 1-6 realize the fixed-partition tensor subargument supporting ILO XVII 7.6.11 without altering the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-module-sheafification-tensor",
+    "why": "Identifies coefficient-valued sheaf tensor with the ordinary tensor over the constant ring sheaf."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Exact constant-coefficient restriction and its ring identification, a generic site tool."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "Generic underived module tensor comparison for restriction to strata."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-tensor-closed",
+    "why": "Generic sheaf tensor preserves colimits; the unit contains no general tensor adjunction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-module-sheafification-tensor",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-pbc-sheaf-tensor-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-c050446e2",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-c050446e2 (reviewer sub-agent of L); spot-checked: The mathematics is correct and was read in full against ILO XVII 7.2.1-7.2.5 (local systems, the classifying-topos equivalence, descent and torsion extension closure; Ex. 7.2.7), 7.3.1-7.3.3 (the item's W_P(A) is the 'autrement dit' form of 7.3.2) and 11.2.1/11.3. Step 1: the constant-ring inverse image and 03EL give restriction of tensors to strata. Steps 2/4: the monodromy node's cover-descent, extension, exactness and pullback clauses carry finite filtrations to and from Pi-modules with H trivial on the quotients, and V->S is an etale covering. Step 3: I checked (h-1)(u⊗w)=(hu-u)⊗hw+u⊗(hw-w) in T_{a+b-1}; the filtration uses images, so no flatness and no normality of H is needed. Step 5: sheaf-tensor-closed (3) with Mod_A plus the 0GMW constant-presheaf clause, and I×J is filtered. Edge cases: empty X and empty strata, zero modules and length-zero filtrations. The new node lem-per-local-system-tensor-monodromy is true: every torsion local system is a filtered union of sub-local systems each trivialised by one finite Galois cover; there constant⊗constant is constant; then descent and colimits apply, and stalks commute with sheafification. It holds for R=0, infinite-rank and non-flat cases, is strictly smaller than the item, and duplicates nothing: torsion-local-system-monodromy has no tensor clause, galois-cover-module-descent has a trivial first factor only, and the sfb monodromy realization, coef-etale-open-tensor and cor-galois-lisse nodes are all different. FIX for B3: the new node's notions (scheme, connected, Noetherian, geometric point, pi_1, module sheaf, constant sheaf, etale site, colimit) are now cited inline and in stmt_deps. The four declared generic tool_uses are accepted. No SGA, and the route and targets are unchanged.; 1 file(s) fixed by the reviewer"
  }
 }
