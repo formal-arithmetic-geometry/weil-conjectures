@@ -349,4 +349,46 @@ theorem isModelFrobenius_fibre :
 
 end FibreModel
 
+/-! ### The Weil `!`-pushforward along the base change -/
+
+section Pushforward
+
+variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)]
+
+/-- Isomorphic Weil objects for the identity of the base point have Frobenii of the same
+trace. -/
+lemma trace_frobenius_eq_of_iso {S T : WeilBoundedConstructible ℓ (𝟙 (point k))} (e : S ≅ T)
+    [hS : HasRightDual S.carrier] [hT : HasRightDual T.carrier] :
+    trace S.frobenius.hom = trace T.frobenius.hom :=
+  trace_eq_of_iso (X := S.carrier) (X' := T.carrier) ((IsoAlgebra.forget _).mapIso e) _ _
+    (WeilBoundedConstructible.frobenius_hom_naturality e.hom)
+
+variable {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+  [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+  (f : X ⟶ Y) {Φ : X ⟶ X} {ΦY : Y ⟶ Y} (hf : Φ ≫ f = f ≫ ΦY)
+  [IsFinite Φ.left] [IsUniversalHomeomorphism Φ.left] [IsFinite ΦY.left]
+  [IsUniversalHomeomorphism ΦY.left]
+
+/-- The Weil `!`-pushforward `Rf_! K` along `f`, with the relative Frobenius
+(blueprint `sk-d-weil-push`), has the compactly supported Frobenius of `K`, by the Leray
+isomorphism. -/
+lemma trace_compactFrobenius_weilPushforward (K : WeilBoundedConstructible ℓ Φ)
+    [hL : HasRightDual
+      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint Y)).obj
+        ((weilLowerShriekOfFrobenius ℓ Φ ΦY f (IsPullback.of_hasPullback f ΦY)
+          (relativeFrobenius f hf) (relativeFrobenius_fst f hf)
+          (relativeFrobenius_snd f hf)).obj K).carrier)]
+    [hK : HasRightDual
+      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
+        K.carrier)] :
+    trace ((weilLowerShriekOfFrobenius ℓ Φ ΦY f (IsPullback.of_hasPullback f ΦY)
+      (relativeFrobenius f hf) (relativeFrobenius_fst f hf)
+      (relativeFrobenius_snd f hf)).obj K).compactFrobenius = trace K.compactFrobenius := by
+  obtain ⟨e⟩ := nonempty_weilCompactCohomology_weilLowerShriekOfFrobenius_iso ℓ
+    (IsPullback.of_hasPullback f ΦY) (relativeFrobenius_fst f hf) (relativeFrobenius_snd f hf) K
+  exact trace_frobenius_eq_of_iso e (hS := hL) (hT := hK)
+
+end Pushforward
+
 end AlgebraicGeometry.ProEtale.CondensedRing
