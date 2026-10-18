@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.ProperLowerShriek
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImmersionUpperShriek
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.PullbackSquareComparison
 
 /-!
 
@@ -65,7 +66,10 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 transformations are identities for identity refinements and are transitive under
 composition"): for refinements `h : Z ⟶ Z₁` and `h₁ : Z₁ ⟶ Z₂` of factorizations
 `X ⟶[i] Z ⟶[p] Y`, `X ⟶[i₁] Z₁ ⟶[p₁] Y` and `X ⟶[i₂] Z₂ ⟶[p₂] Y`, the comparison along the
-composite `h ≫ h₁` is the composite of the comparisons. -/
+composite `h ≫ h₁` is the composite of the comparisons. The blueprint states the clause for
+refinements of compactifications; it is used here for factorizations with an open immersion
+followed by an arbitrary morphism, such as `U ⟶[j] X ⟶[𝟙] X`, which are compactifications up to
+the identification of the middle object. -/
 theorem boundedConstructibleLowerShriekRefinementIso_trans {i : X ⟶ Z} {i₁ : X ⟶ Z₁}
     {i₂ : X ⟶ Z₂} [IsOpenImmersion i.left] [IsOpenImmersion i₁.left] [IsOpenImmersion i₂.left]
     {h : Z ⟶ Z₁} {h₁ : Z₁ ⟶ Z₂} {h₂ : Z ⟶ Z₂} (sq : IsPullback (𝟙 X) i i₁ h)
@@ -346,6 +350,132 @@ lemma boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_inv_comp :
   simp only [← hc, Category.assoc, Iso.inv_hom_id_assoc, hr]
   have ht' := (Iso.inv_comp_eq _).2 ht.symm
   simp only [reassoc_of% ht']
+
+/-- The canonical map `j_! ⟶ Rj_*` of an open and proper immersion, assuming that the
+adjunction `(𝟙 U)_! ⊣ L(𝟙 U)^*` of the compactification `U ⟶[𝟙] U ⟶[j] X` is identified with
+the identity adjunction by `(𝟙 U)_! ≅ 𝟭` and `L(𝟙 U)^* ≅ 𝟭` (`hF4`). -/
+theorem boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl_clopen_of
+    (hF4 : ∀ W, (boundedConstructibleOpenImmersionLowerShriekOfIsProperIso _ ℓ j).inv.app
+        ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ
+          (Compactification.ofIsProper j.left).overI).obj W) ≫
+      (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+        (Profinite.padicAlgClRingObj ℓ) ℓ (Compactification.ofIsProper j.left).overI).counit.app W =
+      (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ U).hom.app W)
+    (M : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+        (Profinite.padicAlgClRingObj ℓ) ℓ j).unit.app M ≫
+      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j).map
+        ((boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).inv.app M ≫
+          (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ j).hom.app M) ≫
+      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+        j).counit.app M = 𝟙 M := by
+  have := isIso_boundedConstructibleLowerStarOpenImmersionLowerShriekExchange_padicAlgCl ℓ
+    (isPullback_openImmersionProperRefinementHom j)
+  -- the objects attached to the middle object of `U ⟶[𝟙] U ⟶[j] X`, read on `U`
+  let iS₀ := boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+    (Compactification.ofIsProper j.left).overI
+  let iS : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧ ⥤
+      Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧ :=
+    iS₀
+  let ι : iS ≅ 𝟭 _ := boundedConstructibleOpenImmersionLowerShriekOfIsProperIso _ ℓ j
+  let a'₀ := boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction
+    (Profinite.padicAlgClRingObj ℓ) ℓ (Compactification.ofIsProper j.left).overI
+  let a' : iS ⊣ boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 U) := a'₀
+  let BC₀ := boundedConstructibleOpenImmersionLowerShriekBaseChangeIso
+    (Profinite.padicAlgClRingObj ℓ) ℓ (isPullback_openImmersionProperRefinementHom j)
+  let BC : boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j ⋙
+      boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j ≅
+      boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 U) ⋙ iS := BC₀
+  let θ₀ := boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
+    (isPullback_openImmersionProperRefinementHom j).flip.toCommSq
+  let θ : boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j ⋙
+      boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 U) ≅
+      boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ j ⋙
+      boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 U) := θ₀
+  let Exch₀ := boundedConstructibleLowerStarOpenImmersionLowerShriekExchange
+    (Profinite.padicAlgClRingObj ℓ) ℓ (isPullback_openImmersionProperRefinementHom j)
+  let Exch : boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 U) ⋙
+      boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j ⟶
+      iS ⋙ boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ j := Exch₀
+  let comp₀ := boundedConstructibleLowerStarComp (Profinite.padicAlgClRingObj ℓ) ℓ
+    (openImmersionProperRefinementHom j) (𝟙 X)
+  let comp : boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ j ⋙
+      boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X) ≅
+      boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ j := comp₀
+  have hBC : BC.inv = Adjunction.exchangeLeft
+      (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j) a' θ := by
+    simp only [BC, BC₀, a', a'₀, θ, θ₀]
+    rw [boundedConstructibleOpenImmersionLowerShriekBaseChangeIso, Iso.symm_inv, asIso_hom,
+      boundedConstructibleOpenImmersionLowerShriekBaseChange_eq_exchangeLeft]
+  have hθ1 (Z : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) : θ.hom.app Z = 𝟙 _ := by
+    simp only [θ, θ₀, boundedConstructiblePullbackSquareComparison_hom_app]
+    rw [← cancel_epi ((boundedConstructibleUpperStarComp (Profinite.padicAlgClRingObj ℓ) ℓ
+      (𝟙 U) j).hom.app Z), Iso.hom_inv_id_app_assoc]
+    ext1
+    simp [boundedConstructibleUpperStarComp_hom_app_hom, openImmersionProperRefinementHom,
+      Compactification.ofIsProper]
+    rfl
+  have hF1 (N : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+      (boundedConstructibleLowerStarId (Profinite.padicAlgClRingObj ℓ) ℓ X).inv.app
+          ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ j).obj N) ≫
+        comp.hom.app N = 𝟙 _ :=
+    (boundedConstructibleLowerStarId_inv_app_comp_lowerStarComp_hom_app
+      (Profinite.padicAlgClRingObj ℓ) ℓ (openImmersionProperRefinementHom j) N).trans
+      (eqToHom_refl _ _)
+  have hF2 (N : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+      (boundedConstructibleLowerStarId (Profinite.padicAlgClRingObj ℓ) ℓ U).inv.app N ≫
+        (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ U).inv.app
+          ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 U)).obj N) ≫
+        (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+          (𝟙 U)).counit.app N = 𝟙 _ := by
+    rw [← boundedConstructibleLowerStarId_hom_app, Iso.inv_hom_id_app]
+  have hEx (N : Dᵇc(U.left)⟦Profinite.padicAlgClRingObj ℓ⟧) : Exch.app N =
+      (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ
+          j).unit.app ((boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ)
+            ℓ j).obj ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ
+              (𝟙 U)).obj N)) ≫
+        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ j).map
+          (BC.hom.app ((boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ
+            (𝟙 U)).obj N)) ≫
+        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ j).map
+          (iS.map ((boundedConstructibleUpperStarLowerStarAdjunction
+            (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 U)).counit.app N)) := by
+    simp [Exch, Exch₀, boundedConstructibleLowerStarOpenImmersionLowerShriekExchange,
+      boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeUnitStep,
+      boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeSquareStep,
+      boundedConstructibleLowerStarOpenImmersionLowerShriekExchangeCounitStep, BC, BC₀]
+    rfl
+  have hF3 := clopen_baseChange_aux
+    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j) a' ι
+    (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ U)
+    (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ U) θ BC hBC
+    (fun W ↦ hF4 W) (fun Z ↦ by simp [hθ1 Z])
+  have hφ := NatTrans.congr_app
+    (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_inv_comp j ℓ) M
+  rw [NatTrans.comp_app] at hφ
+  have hφ₂ : (boundedConstructibleLowerShriekIsoOpenImmersionLowerShriek_padicAlgCl ℓ j).inv.app M ≫
+      (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ j).hom.app M =
+      (boundedConstructibleLowerStarId (Profinite.padicAlgClRingObj ℓ) ℓ X).inv.app
+          ((boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).obj
+            M) ≫
+        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 X)).map
+          ((boundedConstructibleOpenImmersionLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ j).map
+            ((boundedConstructibleLowerStarId (Profinite.padicAlgClRingObj ℓ) ℓ U).inv.app M) ≫
+            Exch.app M) ≫
+        comp.hom.app (iS.obj M) ≫
+        (boundedConstructibleLowerStar (Profinite.padicAlgClRingObj ℓ) ℓ j).map (ι.hom.app M) := by
+    rw [hφ]
+    simp [boundedConstructibleLowerShriekRefinementIso, Exch, Exch₀, comp, comp₀, ι, iS, iS₀]
+    rfl
+  rw [hφ₂]
+  exact clopen_comparison_aux
+    (boundedConstructibleOpenImmersionLowerShriekUpperStarAdjunction _ ℓ j)
+    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ j)
+    (boundedConstructibleUpperStarLowerStarAdjunction (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 U))
+    (boundedConstructibleUpperStarId (Profinite.padicAlgClRingObj ℓ) ℓ U)
+    (boundedConstructibleLowerStarId (Profinite.padicAlgClRingObj ℓ) ℓ U) ι BC
+    (boundedConstructibleLowerStarId (Profinite.padicAlgClRingObj ℓ) ℓ X) comp Exch hF1 hF2 hF3
+    hEx M
 
 end Clopen
 
