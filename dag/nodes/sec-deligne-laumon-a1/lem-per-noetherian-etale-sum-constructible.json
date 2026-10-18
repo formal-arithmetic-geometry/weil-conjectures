@@ -20,9 +20,79 @@
   "def-weil-pbc-scheme-conventions",
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-etale-stratified-finite] to the given etale morphism $j:U\\to X$. Its hypotheses are precisely that both $U$ and $X$ are quasi-compact and quasi-separated. Obtain a finite stratification $i_a:X_a\\to X$ by constructible locally closed subschemes for which $U_a=U\\times_XX_a$ and $\\pi_a:U_a\\to X_a$ are finite etale. Write $v_a:U_a\\to U$ for the other projection.",
+   "uses": [
+    "lem-weil-pbc-etale-stratified-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S8, lemma-jshriek-constructible, first sentence of the proof; Tag 03S0."
+   }
+  },
+  {
+   "text": "For every $a$, apply [lem-weil-pbc-etale-shriek-base-change-modules] with $f=i_a$, the given $j$ and the input sheaf $\\underline M_U$. The coefficient ring in that statement is an arbitrary commutative ring, so $R$ is allowed. Its inverse comparison gives $i_a^{-1}j_!\\underline M_U\\cong\\pi_{a!}v_a^{-1}\\underline M_U$. By [lemma-constructible-pullback-constant], $v_a^{-1}\\underline M_U\\cong\\underline M_{U_a}$, with the same $R$-module $M$. Thus $i_a^{-1}j_!\\underline M_U\\cong\\pi_{a!}\\underline M_{U_a}$.",
+   "uses": [
+    "lem-weil-pbc-etale-shriek-base-change-modules",
+    "lemma-constructible-pullback-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S8, displayed restriction identity, using Tag 03S6, lemma-shriek-base-change."
+   }
+  },
+  {
+   "text": "Each $\\pi_a$ is finite etale, so apply [lem-weil-pbc-etale-shriek-star-finite-modules] to the $R_{U_a}$-module sheaf $\\underline M_{U_a}$. Its canonical isomorphism $\\pi_{a!}\\underline M_{U_a}\\cong\\pi_{a*}\\underline M_{U_a}$ yields $i_a^{-1}j_!\\underline M_U\\cong\\pi_{a*}\\underline M_{U_a}$. Finiteness of the coefficient ring is not a hypothesis of the cited statement.",
+   "uses": [
+    "lem-weil-pbc-etale-shriek-star-finite-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S8, displayed restriction identity, using Tag 03S7, lemma-shriek-equals-star-finite-etale."
+   }
+  },
+  {
+   "text": "The constant module sheaf $\\underline M_{U_a}$ is locally constant of finite type: in [def-weil-pbc-locally-constant-finite-type-modules], use the identity covering and the given finitely generated module $M$ on every localized object. Apply [lem-per-finite-etale-pushforward-finite-type] with $f=\\pi_a$. It gives that $\\pi_{a*}\\underline M_{U_a}$ is etale locally isomorphic, as an $R_{X_a}$-module sheaf, to constant finitely generated $R$-modules. Through the isomorphism of step 3 the same local trivializations trivialize $i_a^{-1}j_!\\underline M_U$.",
+   "uses": [
+    "lem-per-finite-etale-pushforward-finite-type",
+    "def-weil-pbc-locally-constant-finite-type-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S8, last two sentences of the proof, and Tag 095B, lemma-pushforward-locally-constant."
+   }
+  },
+  {
+   "text": "The finitely many immersed locally closed strata of step 1 are pairwise disjoint and cover $X$, as in [def-constructible-stratification]. Step 4 gives the required locally constant finitely generated module restrictions on every one. This is exactly the constructibility criterion stated in the item. It also covers the empty stratification when $X$ is empty and the zero module on strata with empty inverse image. No step assumed that $R$ or $M$ has a finite underlying set.",
+   "uses": [
+    "def-constructible-stratification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S8, conclusion of the proof and the definition of constructibility."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-stratification",
+  "def-weil-pbc-locally-constant-finite-type-modules",
+  "lem-per-finite-etale-pushforward-finite-type",
+  "lem-weil-pbc-etale-shriek-base-change-modules",
+  "lem-weil-pbc-etale-shriek-star-finite-modules",
+  "lem-weil-pbc-etale-stratified-finite",
+  "lemma-constructible-pullback-constant"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03S8, lemma-jshriek-constructible (3), entire proof, using Tags 03S0, 03S6, 03S7 and 095B."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -72,10 +142,94 @@
    "results": "{\"t\": \"2026-10-18T20:12:30Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf.freeYoneda, SheafOfModules.IsFinitePresentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-18",
    "verdict": "no match: related module-sheaf local generators, scheme morphisms or free Yoneda objects do not state the Noetherian-coefficient constructible theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite etale pushforward locally constant finitely generated module Noetherian ring",
+   "results": "{\"t\": \"2026-10-18T20:43:34Z\", \"tool\": \"leanfinder\", \"query\": \"finite etale pushforward locally constant finitely generated module Noetherian ring\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.LocallyConstantModule.functor\", \"Condensed.finFree\", \"Module.isLocallyConstant_rankAtStalk\", \"Algebra.Etale.finitePresentation\", \"Algebra.Etale.exists_subalgebra_fg\", \"AlgebraicGeometry.IsFinite.finite_app\", \"RingHom.Etale.propertyIsLocal\", \"AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian\"], \"digest\": \"292560b596a51cb9\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern condensed modules, topological locally constant functions, algebraic etaleness, rank functions, general pushforward functors or free Yoneda objects; none states finite-etale preservation of local constancy of module sheaves or constructibility of etale sum extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "finite etale pushforward locally constant module",
+   "results": "{\"t\": \"2026-10-18T20:43:35Z\", \"tool\": \"loogle\", \"query\": \"finite etale pushforward locally constant module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: Unknown identifier `finite`\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern condensed modules, topological locally constant functions, algebraic etaleness, rank functions, general pushforward functors or free Yoneda objects; none states finite-etale preservation of local constancy of module sheaves or constructibility of etale sum extension."
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward.*locally constant|finite.*etale",
+   "results": "{\"t\": \"2026-10-18T20:43:35Z\", \"tool\": \"grep\", \"query\": \"pushforward.*locally constant|finite.*etale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/Etale.lean\"], \"digest\": \"03168b4797c5bc7f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern condensed modules, topological locally constant functions, algebraic etaleness, rank functions, general pushforward functors or free Yoneda objects; none states finite-etale preservation of local constancy of module sheaves or constructibility of etale sum extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "finite etale direct image of a locally constant module is locally constant",
+   "results": "{\"t\": \"2026-10-18T20:43:35Z\", \"tool\": \"leansearch\", \"query\": \"finite etale direct image of a locally constant module is locally constant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.LocallyConstantModule.functor_obj_val\", \"LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone\", \"LocallyConstant.comapₗ\", \"IsLocallyConstant.range_finite\", \"CondensedMod.LocallyConstant.functorIsoDiscrete\", \"CondensedSet.LocallyConstant.functorFullyFaithful\", \"CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule\", \"LightCondMod.LocallyConstant.functorIsoDiscreteAux₁\"], \"digest\": \"5bba026fee1b069c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern condensed modules, topological locally constant functions, algebraic etaleness, rank functions, general pushforward functors or free Yoneda objects; none states finite-etale preservation of local constancy of module sheaves or constructibility of etale sum extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "extension by zero etale constructible Noetherian module",
+   "results": "{\"t\": \"2026-10-18T20:43:37Z\", \"tool\": \"leanfinder\", \"query\": \"extension by zero etale constructible Noetherian module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePresentation\", \"Algebra.Etale.exists_subalgebra_fg\", \"Algebra.Etale.finitePresentation\", \"StandardEtalePair.instEtaleRing\", \"RingHom.Etale.ofLocalizationSpan\", \"RingHom.Etale.ofLocalizationSpanTarget\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"Algebra.exists_etale_of_isEtaleAt\"], \"digest\": \"9663d851d0e176a4\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern condensed modules, topological locally constant functions, algebraic etaleness, rank functions, general pushforward functors or free Yoneda objects; none states finite-etale preservation of local constancy of module sheaves or constructibility of etale sum extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf.freeYoneda",
+   "results": "{\"t\": \"2026-10-18T20:43:37Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf.freeYoneda\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.freeYoneda\", \"CategoryTheory.Sheaf.freeYonedaHomEquiv\", \"CategoryTheory.Sheaf.isSeparating\", \"CategoryTheory.Sheaf.isSeparator\"], \"digest\": \"9afcb5c64f8a52a9\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern condensed modules, topological locally constant functions, algebraic etaleness, rank functions, general pushforward functors or free Yoneda objects; none states finite-etale preservation of local constancy of module sheaves or constructibility of etale sum extension."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible|jshriek",
+   "results": "{\"t\": \"2026-10-18T20:43:37Z\", \"tool\": \"grep\", \"query\": \"constructible|jshriek\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\"], \"digest\": \"c360eb7f048e36ff\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern condensed modules, topological locally constant functions, algebraic etaleness, rank functions, general pushforward functors or free Yoneda objects; none states finite-etale preservation of local constancy of module sheaves or constructibility of etale sum extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite etale morphism sends locally constant finite type sheaves of modules over any commutative ring to locally constant finite type sheaves by direct image",
+   "results": "{\"t\": \"2026-10-18T20:45:47Z\", \"tool\": \"leanfinder\", \"query\": \"A finite etale morphism sends locally constant finite type sheaves of modules over any commutative ring to locally constant finite type sheaves by direct image\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.LocallyConstantModule.functor\", \"CondensedMod.LocallyConstant.functor\", \"LightCondMod.LocallyConstant.functor\", \"CompHausLike.LocallyConstantModule.functor_map_val\", \"Condensed.finFree\", \"CompHausLike.LocallyConstantModule.functor_obj_val\", \"LightCondMod.LocallyConstant.functorToPresheaves\", \"CondensedMod.LocallyConstant.functorToPresheaves\"], \"digest\": \"45a46f3ba7b52b2e\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern condensed modules, topological locally constant functions, algebraic etaleness, rank functions, general pushforward functors or free Yoneda objects; none states finite-etale preservation of local constancy of module sheaves or constructibility of etale sum extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, ModuleCat",
+   "results": "{\"t\": \"2026-10-18T20:45:48Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf, ModuleCat\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"SheafOfModules.evaluation\", \"SheafOfModules.forgetToSheafModuleCat\", \"SheafOfModules.forgetToSheafModuleCat_obj_obj\", \"SheafOfModules.forgetToSheafModuleCat_map_hom\", \"SheafOfModules.unitHomEquiv_apply_coe\", \"SheafOfModules.forgetToSheafModuleCatOfIso\", \"SheafOfModules.evaluationPreservesLimitsOfSize\", \"SheafOfModules.Finite.evaluationPreservesFiniteLimits\"], \"digest\": \"c9ddd5be79904bc0\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern condensed modules, topological locally constant functions, algebraic etaleness, rank functions, general pushforward functors or free Yoneda objects; none states finite-etale preservation of local constancy of module sheaves or constructibility of etale sum extension."
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyConstant|locally.constant",
+   "results": "{\"t\": \"2026-10-18T20:45:48Z\", \"tool\": \"grep\", \"query\": \"LocallyConstant|locally.constant\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean\"], \"digest\": \"8e3dd905fcf8c1d7\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern condensed modules, topological locally constant functions, algebraic etaleness, rank functions, general pushforward functors or free Yoneda objects; none states finite-etale preservation of local constancy of module sheaves or constructibility of etale sum extension."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Direct image of a locally constant sheaf of finitely generated modules under a finite covering is locally constant",
+   "results": "{\"t\": \"2026-10-18T20:45:49Z\", \"tool\": \"leanfinder\", \"query\": \"Direct image of a locally constant sheaf of finitely generated modules under a finite covering is locally constant\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.LocallyConstantModule.functor\", \"CompHausLike.LocallyConstantModule.functor_obj_val\", \"CompHausLike.LocallyConstantModule.functor_map_val\", \"LightCondMod.LocallyConstant.functor\", \"CondensedMod.LocallyConstant.functor\", \"CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule\", \"CompHausLike.LocallyConstantModule.functorToPresheaves\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\"], \"digest\": \"2e37a7115e5b6fd9\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern condensed modules, topological locally constant functions, algebraic etaleness, rank functions, general pushforward functors or free Yoneda objects; none states finite-etale preservation of local constancy of module sheaves or constructibility of etale sum extension."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite etale morphism preserves local constancy of module sheaves under pushforward",
+   "results": "{\"t\": \"2026-10-18T20:45:50Z\", \"tool\": \"leansearch\", \"query\": \"A finite etale morphism preserves local constancy of module sheaves under pushforward\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforward\", \"AlgebraicGeometry.Scheme.Modules.pushforward\", \"SheafOfModules.pushforward_map_val\", \"SheafOfModules.pushforwardSections\", \"PresheafOfModules.pushforward₀_obj_obj_isModule\", \"PresheafOfModules.pushforward₀_obj\", \"AlgebraicGeometry.Scheme.Modules.pushforward_map_app\", \"SheafOfModules.pushforward_obj_val\"], \"digest\": \"0e7b48a789ba399b\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern condensed modules, topological locally constant functions, algebraic etaleness, rank functions, general pushforward functors or free Yoneda objects; none states finite-etale preservation of local constancy of module sheaves or constructibility of etale sum extension."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-noetherian-constructible-flat-lifting",
@@ -100,5 +254,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-noetherian-etale-sum-constructible",
+  "worker": "stage1",
+  "summary": "Followed the proof of Stacks 03S8(3) using existing stratification, module-shriek base change and finite-etale shriek-star nodes. The old 095B node assumes a finite coefficient ring, so added its genuinely more general arbitrary-ring finite-type module clause as one statement-only child. Checked constant pullback separately; retained all original hypotheses and allowed infinite module values.",
+  "blueprint": "Realizes the finite affine generator constructibility input along the inherited ancestry of lem-per-artin-gabber-affine-curve Step 1; below that unit route the source proof is exactly Stacks 03S8(3).",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-stratified-finite",
+    "why": "Generic qcqs etale stratification theorem (03S0) needed verbatim by 03S8; no node of the perverse unit states it."
+   },
+   {
+    "node": "lem-weil-pbc-etale-shriek-base-change-modules",
+    "why": "Generic underived module base change (03S6) used to restrict to strata; the perverse unit does not supply this sheaf tool."
+   },
+   {
+    "node": "lemma-constructible-pullback-constant",
+    "why": "Generic constant-sheaf pullback identification used without any perverse assertion."
+   },
+   {
+    "node": "lem-weil-pbc-etale-shriek-star-finite-modules",
+    "why": "Generic finite-etale sum-extension/direct-image identification (03S7), over arbitrary coefficients."
+   },
+   {
+    "node": "def-weil-pbc-locally-constant-finite-type-modules",
+    "why": "Existing definition fixes the arbitrary-ring finite-type notion."
+   },
+   {
+    "node": "def-constructible-stratification",
+    "why": "Existing definition supplies the finite immersed partition convention."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-stratified-finite",
+  "lem-weil-pbc-etale-shriek-base-change-modules",
+  "lemma-constructible-pullback-constant",
+  "lem-weil-pbc-etale-shriek-star-finite-modules",
+  "def-weil-pbc-locally-constant-finite-type-modules",
+  "def-constructible-stratification"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q99-707657bbe",
+  "group": "Q99",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-707657bbe (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement in full. Sources: Stacks 03S8 lemma-jshriek-constructible (3) (l.12185-12212) and 095B lemma-pushforward-locally-constant (l.9973-9990). No SGA source is used. The item statement is unchanged from Q23's version, matches 03S8(3) hypothesis by hypothesis, and matches the constructibility notion the parent uses with M=R. Step 1: 03S0 stratification, qcqs X and U checked. Step 2: 03S6 module base change (any commutative Lambda) with f=i_a, plus constant pullback (its category of values includes Lambda-modules), giving i_a^{-1}j_!M = pi_{a!}M. Step 3: 03S7 shriek=star for finite etale pi, any ring. Step 4: a constant sheaf is locally constant of finite type (maximal sieve); apply the new node and move the trivializations across the isomorphism. Step 5: elementary assembly, including empty X and empty strata. New node lem-per-finite-etale-pushforward-finite-type is true: etale-locally the finite etale map splits into n sheets, and a common refinement gives a finite product of finitely generated modules (zero when n=0). No finiteness of R or M is needed (checked with R=Z, M=Z). B1-B9 hold. It strictly generalizes lem-weil-pbc-etale-finite-pushforward-locally-constant, which needs a finite Lambda and so does not apply here; it is not a duplicate or a restatement. lem-weil-pbc-etale-free-sheaf-constructible is the finite-Lambda case of the item, so the item is not a duplicate either. The six generic sk-thm-p1 tool_uses are accepted. No cycle. No changes."
  }
 }
