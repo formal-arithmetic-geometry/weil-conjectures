@@ -17,6 +17,7 @@ public import WeilConjectures.ConstructibleSheaf.FiniteMorphism
 public import WeilConjectures.ConstructibleSheaf.Monoidal
 public import WeilConjectures.ConstructibleSheaf.FiniteDirectImageKunneth
 public import WeilConjectures.CategoryTheory.DerivedCategory.ConstructibleTorsion
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
 
 /-!
 # Dévissage of the degree-wise base change maps
@@ -57,24 +58,6 @@ open scoped CategoryTheory.Functor
 section General
 
 variable {C D : Type*} [Category C] [Category D]
-
-/-- A natural transformation between additive functors which is an isomorphism at finitely many
-objects is an isomorphism at their biproduct. -/
-lemma CategoryTheory.NatTrans.isIso_app_biproduct [Preadditive C] [Preadditive D]
-    [HasFiniteBiproducts D] {S T : C ⥤ D} [S.Additive] [T.Additive]
-    (τ : S ⟶ T) {ι : Type} [Finite ι] (f : ι → C) {_ : HasBiproduct f}
-    (hf : ∀ i, IsIso (τ.app (f i))) :
-    IsIso (τ.app (⨁ f)) := by
-  have : τ.app (⨁ f) = (S.mapBiproduct f ≪≫ biproduct.mapIso (fun i ↦ asIso (τ.app (f i))) ≪≫
-      (T.mapBiproduct f).symm).hom := by
-    rw [← cancel_mono (T.mapBiproduct f).hom]
-    simp only [Iso.trans_hom, Iso.symm_hom, Category.assoc, Iso.inv_hom_id, Category.comp_id]
-    refine biproduct.hom_ext _ _ fun i ↦ ?_
-    simp only [Category.assoc, biproduct.mapIso_hom, Functor.mapBiproduct_hom, asIso_hom]
-    erw [biproduct.lift_π, biproduct.map_π, biproduct.lift_π_assoc]
-    exact (τ.naturality _).symm
-  rw [this]
-  infer_instance
 
 /-- A natural transformation between additive functors which is an isomorphism at an object is an
 isomorphism at the retracts of the finite sums of copies of it. The biproduct is taken with the

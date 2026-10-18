@@ -18,6 +18,7 @@ public import WeilConjectures.CategoryTheory.Abelian.RightDerived.Acyclic
 public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategoryProjection
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
+public import WeilConjectures.Mathlib.CategoryTheory.Limits.Preserves.Shapes.Biproducts
 
 /-!
 # The projection map at flat modules placed in degree zero
@@ -46,30 +47,6 @@ universe u u₂
 open CategoryTheory Abelian Limits MonoidalCategory DerivedCategory
 
 open scoped CategoryTheory.Functor
-
-namespace CategoryTheory
-
-section Biproduct
-
-variable {A B : Type*} [Category* A] [Category* B] [Preadditive A] [Preadditive B]
-  {P R : A ⥤ B} [P.Additive] [R.Additive]
-
-/-- A natural transformation between additive functors is an isomorphism at a finite biproduct
-if it is an isomorphism at its summands. -/
-lemma NatTrans.isIso_app_biproduct (τ : P ⟶ R) {J : Type} [Finite J] (f : J → A)
-    [HasBiproduct f] (h : ∀ j, IsIso (τ.app (f j))) : IsIso (τ.app (⨁ f)) := by
-  have e : τ.app (⨁ f) = (P.mapBiproduct f).hom ≫
-      (biproduct.mapIso fun j ↦ asIso (τ.app (f j))).hom ≫ (R.mapBiproduct f).inv := by
-    rw [← cancel_epi (P.mapBiproduct f).inv, Iso.inv_hom_id_assoc]
-    refine biproduct.hom_ext' _ _ fun j ↦ ?_
-    simp only [biproduct.mapIso_hom, Functor.mapBiproduct_inv, biproduct.ι_desc_assoc,
-      biproduct.ι_map_assoc, biproduct.ι_desc, NatTrans.naturality, asIso_hom]
-  rw [e]
-  infer_instance
-
-end Biproduct
-
-end CategoryTheory
 
 namespace ModuleCat
 
