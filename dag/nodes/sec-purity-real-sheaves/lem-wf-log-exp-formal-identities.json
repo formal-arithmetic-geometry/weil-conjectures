@@ -10,9 +10,75 @@
  "stmt_deps": [
   "def-weil-formal-power-series"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $E=1+A=\\sum_{n\\ge0}T^n/n!$ and use the coefficientwise derivative $D(\\sum f_nT^n)=\\sum(n+1)f_{n+1}T^n$. Directly from the displayed coefficients, $DE=DA=E$ and $DL=B:=\\sum_{n\\ge0}(-1)^nT^n$. The Cauchy product gives $(1+T)B=1$: its constant coefficient is $1$, and its coefficient in every degree $n\\ge1$ is $(-1)^n+(-1)^{n-1}=0$. Also $A(0)=L(0)=0$ and $E(0)=1$. These computations use only rational arithmetic in $R$.",
+   "uses": [
+    "def-weil-formal-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.proof.md",
+    "place": "paragraph 3, formal inverse identities; agent-supplied coefficient proof: differentiate the defining coefficients and multiply the geometric series"
+   }
+  },
+  {
+   "text": "Put $H=L\\circ A$. The chain rule [lem-wf-formal-substitution-chain-rule], applicable because $A(0)=0$, gives $DH=(B\\circ A)E$. Substitute $A$ into $(1+T)B=1$ using the algebra homomorphism [lem-wf-formal-substitution-hom]: $(1+A)(B\\circ A)=1$. Since $1+A=E$ and multiplication is commutative, $DH=1$.",
+   "uses": [
+    "lem-wf-formal-substitution-chain-rule",
+    "lem-wf-formal-substitution-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.proof.md",
+    "place": "paragraph 3, formal inverse identities; agent-supplied coefficient proof: differentiate L composed with A and substitute A into the geometric product"
+   }
+  },
+  {
+   "text": "The constant term of $H=L\\circ A$ is zero: in the defining coefficientwise composition every positive power of $A$ has zero constant coefficient and $L(0)=0$. Write $H=\\sum h_nT^n$. The equality $DH=1$ says $h_1=1$ and $(n+1)h_{n+1}=0$ for every $n\\ge1$. Multiplication by the rational element $1/(n+1)$ gives $h_{n+1}=0$. Together with $h_0=0$, this proves $L\\circ A=T$.",
+   "uses": [
+    "def-weil-formal-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.proof.md",
+    "place": "paragraph 3, formal inverse identities; agent-supplied coefficient proof: recover the first identity from its derivative and constant term"
+   }
+  },
+  {
+   "text": "Put $K=E\\circ L$. The chain rule [lem-wf-formal-substitution-chain-rule], applicable because $L(0)=0$, and $DE=E$ give $DK=K B$. Hence $(1+T)DK=K$ by $(1+T)B=1$. The substitution homomorphism [lem-wf-formal-substitution-hom] fixes $1$ and preserves subtraction, so $A\\circ L=(E-1)\\circ L=K-1$.",
+   "uses": [
+    "lem-wf-formal-substitution-chain-rule",
+    "lem-wf-formal-substitution-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.proof.md",
+    "place": "paragraph 3, formal inverse identities; agent-supplied coefficient proof: differentiate E composed with L and reduce the second identity to a coefficient recurrence"
+   }
+  },
+  {
+   "text": "The constant coefficient of $K=E\\circ L$ is $1$: only the constant term of $E$ contributes because $L(0)=0$. Write $K=\\sum k_nT^n$. At degree $0$, $(1+T)DK=K$ gives $k_1=k_0=1$. At degree $n\\ge1$ it gives $(n+1)k_{n+1}+nk_n=k_n$, or $(n+1)k_{n+1}=(1-n)k_n$. For $n=1$ this gives $2k_2=0$, hence $k_2=0$. Inductively, if $n\\ge2$ and $k_n=0$, the recurrence gives $k_{n+1}=0$ after multiplication by $1/(n+1)$. Thus $K=1+T$, and step 4 gives $A\\circ L=T$. Every composition and every coefficient calculation above is finite in each degree; the argument applies also to the zero ring and to rational algebras with nilpotents, without any topology.",
+   "uses": [
+    "def-weil-formal-power-series"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.proof.md",
+    "place": "paragraph 3, formal inverse identities; agent-supplied coefficient proof: solve the second coefficient recurrence, including its base case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-formal-power-series",
+  "lem-wf-formal-substitution-chain-rule",
+  "lem-wf-formal-substitution-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-purity-real-sheaves/sk-d-real-log/lem-wf-deep-principal-unit-log.proof.md",
+  "place": "paragraph 3 invokes formal inverse identities without proof; supplied coefficientwise differentiation and recurrence argument, using the pinned Mathlib substitution homomorphism and chain rule"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -76,10 +142,45 @@
    "results": "Command returned 2 hits; scope=RingTheory/PowerSeries. Top results: [\"Mathlib/RingTheory/PowerSeries/Log.lean\", \"Mathlib/RingTheory/PowerSeries/Log.lean\"]. ",
    "date": "2026-10-18",
    "verdict": "no match for the complete repaired statement in this checkout; see report for individual candidate checks"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Formal power series logarithm log(1+T) and exponential exp(T)-1 are inverse under substitution over any commutative rational algebra",
+   "results": "8 hits, scope=service index; top: PowerSeries.exp_mul_exp_neg_eq_one, bernoulliPowerSeries_mul_exp_sub_one, PowerSeries.isUnit_exp, PowerSeries.exp, PowerSeries.exp_mul_exp_eq_exp_add, PowerSeries.exp_pow_sum, PowerSeries.invOneSubPow, PowerSeries.invOneSubPow_val_one_eq_invUnitSub_one. ",
+   "date": "2026-10-18",
+   "verdict": "no match in pinned checkout: Loogle returns subst_exp_log and subst_log_exp_sub_one from its remote index, but both are absent from the local Mathlib source (whole-tree grep: zero hits; Log.lean read completely). Other hits are exponential properties, not inverse identities."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a rational algebra power series log of exp minus one is X and exp substituted at log is 1 plus X",
+   "results": "8 hits, scope=service index; top: PowerSeries.exp_mul_exp_neg_eq_one, bernoulli'PowerSeries_mul_exp_sub_one, bernoulliPowerSeries_mul_exp_sub_one, PowerSeries.isUnit_exp, PowerSeries.exp, PowerSeries.exp_pow_sum, PowerSeries.constantCoeff_exp, PowerSeries.coeff_exp. ",
+   "date": "2026-10-18",
+   "verdict": "no match in pinned checkout: Loogle returns subst_exp_log and subst_log_exp_sub_one from its remote index, but both are absent from the local Mathlib source (whole-tree grep: zero hits; Log.lean read completely). Other hits are exponential properties, not inverse identities."
+  },
+  {
+   "tool": "loogle",
+   "query": "PowerSeries.exp, PowerSeries.subst",
+   "results": "2 hits, scope=service index; top: PowerSeries.subst_exp_log, PowerSeries.subst_log_exp_sub_one. ",
+   "date": "2026-10-18",
+   "verdict": "no match in pinned checkout: Loogle returns subst_exp_log and subst_log_exp_sub_one from its remote index, but both are absent from the local Mathlib source (whole-tree grep: zero hits; Log.lean read completely). Other hits are exponential properties, not inverse identities."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Formal power series log and exponential minus one are compositional inverses over a commutative Q algebra",
+   "results": "8 hits, scope=service index; top: PowerSeries.exp_unique_of_derivative_eq_self, PowerSeries.exp_mul_exp_neg_eq_one, PowerSeries.exp, PowerSeries.exp_mul_exp_eq_exp_add, bernoulli'PowerSeries_mul_exp_sub_one, PowerSeries.derivative_exp, PowerSeries.isUnit_exp, PowerSeries.exp_pow_sum. ",
+   "date": "2026-10-18",
+   "verdict": "no match in pinned checkout: Loogle returns subst_exp_log and subst_log_exp_sub_one from its remote index, but both are absent from the local Mathlib source (whole-tree grep: zero hits; Log.lean read completely). Other hits are exponential properties, not inverse identities."
+  },
+  {
+   "tool": "grep",
+   "query": "subst_exp_log|subst_log_exp_sub_one",
+   "results": "0 hits, scope=service index; top: . ",
+   "date": "2026-10-18",
+   "verdict": "no match in pinned checkout: Loogle returns subst_exp_log and subst_log_exp_sub_one from its remote index, but both are absent from the local Mathlib source (whole-tree grep: zero hits; Log.lean read completely). Other hits are exponential properties, not inverse identities."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-wf-deep-principal-unit-log",
@@ -96,5 +197,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-wf-log-exp-formal-identities",
+  "worker": "stage1",
+  "summary": "Checked the unchanged formal statement, current blueprint paragraph 3 and unit/chapter route. No project attachment; remote Loogle inverse theorems are absent from pinned Mathlib. Supplied both identities via explicit derivative/constant-term recurrences, with two strictly smaller generic Mathlib leaves for substitution algebra structure and chain rule. Every cited statement was read, and zero-ring/nilpotent edge cases checked.",
+  "blueprint": "Realizes only the purely formal inverse identities in lem-wf-deep-principal-unit-log proof paragraph 3. Analytic evaluation and convergence remain with the separate nonarchimedean substitution node; the unit and chapter route are unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q31-c458d9f1b",
+  "group": "Q31",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q31-c458d9f1b (reviewer sub-agent of L); spot-checked: The mathematics is correct and complete; one small citation repair was made. Item: same statement as current blueprint main-20261015 lem-wf-deep-principal-unit-log proof paragraph 3, formal identities only (L∘A=log(exp T)=T, A∘L=exp(log(1+T))-1=T), not weakened. Steps checked: step 1 DE=E, DL=B, (1+T)B=1; step 2 DH=(B∘A)E=1 via the chain rule and S_A of (1+T)B=1; step 3 h0=0, h1=1, h_{n+1}=0 using 1/(n+1) in Q; step 4 DK=KB and A∘L=K-1 via the sub and constant clauses; step 5 recurrence (n+1)k_{n+1}=(1-n)k_n with base k2=0, so K=1+T. Exact Fraction test to degree 13 confirms both identities. Zero ring and nilpotent Q-algebras are fine. New leaves match pinned Mathlib: substAlgHom (Substitution.lean:171), coe_substAlgHom:175, substAlgHom_X:313, HasSubst.of_constantCoeff_zero':67; derivative_subst (Derivative.lean:140, CommRing+HasSubst only), derivative:50, coeff_derivative:60. Both leaves were also tested on random integer series. subst_exp_log and subst_log_exp_sub_one are absent from pinned Mathlib (grep 0 hits), so the item is correctly not a leaf. Duplicate search over the whole DAG (exp-hom, nonarchimedean substitution, trf Jacobian chain rule, partial-derivative def, power-series exponential): no duplicate. Neither new node restates a clause of the item. Within the unit's route; no tool_uses; no SGA. FIX: in both new leaves, mathlib_match.how and source.place now also cite PowerSeries.coeff_subst' (Substitution.lean:247), which links Mathlib's subst to the nodes' coefficientwise sum f_n G^n (B6/B8). Corrected files are under fixes/dag/nodes/sec-purity-real-sheaves/.; 2 file(s) fixed by the reviewer"
  }
 }
