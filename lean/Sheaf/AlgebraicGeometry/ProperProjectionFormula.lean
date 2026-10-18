@@ -15,8 +15,6 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import Sheaf.AlgebraicGeometry.EtaleDerivedTensorSymmetry
 import WeilConjectures.SixFunctors.Etale.Derived.ProjectionFormula
-import Sheaf.AlgebraicGeometry.ProperTorsionProjectionFormula
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 
 /-!
 # The proper projection formula with the base factor first
@@ -44,19 +42,15 @@ Source: Stacks Project, Tag 0F0G and the signed symmetry following Tag 06YU
 (blueprint: lem-amb-proper-coproducts-projection).
 
 Proof:
-1. Finiteness of `A` implies additive torsion, including for the zero ring: two multiples
-   `i * 1` and `j * 1`, with `i < j`, coincide, and `(j-i) * a = 0` for every `a`.
-   By prop-weil-pbc-inverse-image-modules-exact the module inverse image is exact;
-   applying it termwise preserves acyclic complexes and quasi-isomorphisms, without bounds.
-2. Apply lem-kun-0f0g with `f = r`, `E = L`, and this `K`. Properness and the torsion
-   condition give invertibility of the middle, adjoint-of-counit projection map. Its
-   finite-coefficient specialization is also the existing upstream theorem
-   `isIso_rightDerivedLowerStarProjectionMap_of_finite`. Neither a uniform cohomological
-   dimension bound on `T` nor a Tor-amplitude condition on either complex is needed.
-3. By lem-kun-tensor-sym, the first symmetry `s` and the source symmetry `t` are the
-   canonical isomorphisms induced by the signed swap on K-flat complexes. The displayed
-   composite is `s ≫ PF ≫ Rr_*(t)`. Its inverse is `Rr_*(t.inv) ≫ PF.inv ≫ s.inv`;
-   functoriality and cancellation of the three inverse pairs give the result. -/
+1. Apply the existing finite-coefficient proper projection theorem
+   `isIso_rightDerivedLowerStarProjectionMap_of_finite` to `A` and `r`. Its geometric-stalk
+   proof identifies the canonical map with the constant-complex projection map on each
+   proper geometric fibre, then uses geometric-stalk conservativity. The theorem is
+   unbounded and has no Tor-amplitude hypothesis.
+2. Take the component at `L`, then at `K`, to obtain invertibility of the middle map.
+3. The two displayed symmetries are components of `derivedTensorSymmetry`, hence
+   isomorphisms. Direct image preserves the second isomorphism. Composition of these
+   three isomorphisms proves the assertion for the specified reordered map. -/
 theorem isIso_proper_projection_formula_reordered
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {V T : Scheme.{u}} (r : V ⟶ T) [IsProper r]
@@ -69,6 +63,7 @@ theorem isIso_proper_projection_formula_reordered
         (lowerStar (ModuleCat.{u + 1} A) r).rightDerivedFunctor.map
           (((derivedTensorSymmetry (ModuleCat.{u + 1} A) V).hom.app L).app
             ((upperStar (ModuleCat.{u + 1} A) r).leftDerivedFunctor.obj K))) := by
-  sorry
+  have := isIso_rightDerivedLowerStarProjectionMap_of_finite A r
+  infer_instance
 
 end AlgebraicGeometry.Etale
