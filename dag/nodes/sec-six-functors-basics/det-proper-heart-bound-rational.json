@@ -333,5 +333,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperHeartBoundRational",
+  "declaration": "AlgebraicGeometry.ProEtale.isZero_higherDirectImage_rational_of_isProper",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.isZero_higherDirectImage_rational_of_isProper",
+   "AlgebraicGeometry.ProEtale.isZero_higherDirectImage_padicAlgCl_of_isProper"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperHeartBoundRational.lean",
+  "statement": "theorem isZero_higherDirectImage_rational_of_isProper (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (k : Type u) [Field k] (hchar : ringChar k ≠ 0) (hell : ringChar k ≠ ℓ) {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (p : X ⟶ Y) [p.IsOver (Spec (.of k))] [IsProper p] (d : ℤ) (hd : ∀ y : Y, topologicalKrullDim (pullback p (Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫ Y.fromSpecResidueField y) : Scheme.{u}) ≤ if d < 0 then ⊥ else (d.toNat : WithBot ℕ∞)) (M : CategoryTheory.Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)) (hM : IsConstantModelConstructible (Profinite.continuousMapRingObj E) X M) (q : ℤ) (hq : 2 * d + 1 < q) : IsZero ((DerivedCategory.homologyFunctor _ q).obj (((CondensedRing.lowerStar (Profinite.continuousMapRingObj E) p).rightDerivedFunctor).obj ((DerivedCategory.singleFunctor _ 0).obj M)))",
+  "branch": "newtargets-dag",
+  "by": "Q88",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The finite rational and Qbar coefficient alternatives are stated as two theorems. Both use the recorded finite-constant-model constructibility predicate and the total right derived functor of the full module-object lowerStar composite. Negative integer dimension bounds are encoded by bottom; no nonnegativity assumption is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d61c8051b",
+  "group": "Q88",
+  "result": "pass",
+  "note": "Two sorry theorems, isZero_higherDirectImage_rational_of_isProper and isZero_higherDirectImage_padicAlgCl_of_isProper, checked clause by clause against the node and the blueprint source. The setting is explicit: char k>0 and ≠ℓ, X and Y separated of finite type over k, p proper over k. The d∈ℤ bound on the exact geometric fibre (Spec of the algebraic closure of κ(y)) is encoded as ⊥ for d<0, so all integer d are allowed. E is PadicAlgCl.FiniteIntermediateField. Q̄ℓ is padicAlgClRingObj (finite-subextension-valued), cited through the closed upstream audit as brief-stage2 l.9 allows. Cons is the recorded IsConstantModelConstructible (definition read, not hollow). Rp_* is Functor.rightDerivedFunctor of CondensedRing.lowerStar (mapMod then comap η); the conclusion is IsZero of degree-q cohomology for q>2d+1. Universes match the framework. Node diff is the lean field only; the statement is verbatim in the file. Docstrings carry the source place, the blueprint id and the 7 proof steps. No definitions, no proofs, no duplicate (ProEtaleClassicalBounds is differently scoped). The snapshot file went through nt_compile.py --json because the file-path mode refuses files outside the side lean tree: 3.9 s, rc=0, no errors or warnings (warn.sorry=false). Edge cases d<0, d=0, empty X or Y, M=0, E=ℚℓ checked. The second-reading section is the direct-delivery placeholder already used in many landed reports."
  }
 }

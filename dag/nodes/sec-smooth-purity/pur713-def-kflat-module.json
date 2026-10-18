@@ -229,5 +229,29 @@
   "group": "Q47",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q47-a6c9f9140 (reviewer sub-agent of L); spot-checked: I read the whole delivery. It is one commit with two files: the item and the report. There are no new nodes and nothing needed fixing. Statement: it keeps the main-20261015 order-2484 definition exactly (one-sided acyclic test with P on the left, resolution direction P→M, any commutative ring object, unbounded complexes). It adds only the conventions that were implicit: the site and universes from def-weil-pbc-proetale-site, the cochain conventions from def-weil-abstract-derived-category, and the signed direct-sum differential, which matches def-sfb-preserves-kflat-quasi-iso and Stacks 06YN. The existence claim is now stated precisely as a functor Q on CoCh(B) with a natural quasi-isomorphism Q⇒id. Nothing is weakened, and module objects are not silently identified with sheaves of O-modules. Steps: (1) Ab is Grothendieck abelian with a functorial free flat cover; additivity of ⊗_Z is used but not written, which is elementary. (2) The pro-étale site is essentially small via the V-small skeleton; lem-weil-pbc-sheaf-tensor-closed applies, and lem-sfb-sheaf-functorial-flat-resolution's hypotheses all hold. (3) lem-sfb-modobj-grothendieck and the internal-Hom node apply. def-sfb-modobj-relative-tensor coequalizes the same pair of arrows as pur713-def-relative-tensor, and the R-actions agree by that node's own clause, so the two relative tensors are the same. Colimit preservation and additivity of the module tensor are argued correctly. (4) lem-sfb-modobj-flat-resolutions states exactly what the step uses. (5) I checked d²=0 and the signs myself; the step is correctly marked elementary. (6) lem-sfb-kflat-derivability's hypotheses are met; its two-sided K-flat values give the acyclic-test K-flat property because Q(M)⊗N→Q(M)⊗0=0 is a quasi-isomorphism. Route: the unit has no steps and this is not its key node. I accept all five declared tool uses as generic categorical black boxes. The other off-unit statements cited are Mathlib leaves. Integrity: no cycle (closure of 308 nodes), every cited id exists and none is merged, and no SGA source is used. Duplicates: def-pc-kflat-complex, def-weil-derived-tensor and def-pc-module-kflat-complex are over other coefficient categories, and lem-pd-module-ringed-topos-derived-comparison treats this item and def-pc-kflat-complex as separate notions, so same_as=[] is fine. Edge cases checked: X empty, R=0, the zero complexes, unbounded complexes, characteristic 2."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.KFlatModuleObject",
+  "declaration": "AlgebraicGeometry.ProEtale.IsKFlatModuleObject",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IsKFlatModuleObject",
+   "AlgebraicGeometry.ProEtale.IsKFlatModuleObjectResolution",
+   "AlgebraicGeometry.ProEtale.exists_functorial_kFlatModuleObject_resolution"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/KFlatModuleObject.lean",
+  "statement": "def IsKFlatModuleObject (X : Scheme.{u}) (R : CommMon (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1})) (P : CochainComplex (Mod (Sheaf (Scheme.ProEt.topology X) AddCommGrpCat.{u + 1}) R.X) ℤ) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q47",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The binary direct-sum total tensor is the existing HomologicalComplex.tensorObj, over the recorded Mod.monoidalCategory relative tensor. The new one-sided acyclic-test predicate, resolution predicate, and functorial existence theorem together render all clauses of this node for arbitrary commutative ring objects, not only pulled-back condensed rings."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2e7c344fe",
+  "group": "Q47",
+  "result": "pass",
+  "note": "Matched every clause of the node and source (order 2484): arbitrary R : CommMon over Sheaf (ProEt.topology X) AddCommGrpCat.{u+1} with sheafified tensor over Z; recorded Mod and Mod.monoidalCategory; HomologicalComplex.tensorObj direct-sum total tensor with signs 1 and (-1)^p; one-sided acyclic test with P on the left; resolution = K-flat and QuasiIso for P->M; functorial existence with Q and q : Q => id. No extra hypotheses or universe equality; edge cases (empty X, R=0, zero or unbounded complexes, char 2) covered. Not a duplicate: FromJoel MorphismProperty.kFlat is two-sided quasi-iso preservation and a separate DAG node. nt_compile.py on the local overlay: module clean in 2.7 s; probe confirmed the instances, rfl unfolding, and sorry only in the theorem. Record statement verbatim; docstrings present; proof-plan imports allowed. Minor, non-blocking: the second reading is a disclosed self-check; one docstring citation sits under step 2 instead of step 1."
  }
 }

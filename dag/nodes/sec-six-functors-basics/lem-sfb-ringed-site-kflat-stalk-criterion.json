@@ -12,7 +12,8 @@
   "def-trf-geometric-morphism",
   "def-weil-sheaf-of-modules-category",
   "def-pc-kflat-complex",
-  "def-pc-module-kflat-complex"
+  "def-pc-module-kflat-complex",
+  "def-sfb-ringed-site-point"
  ],
  "proof": [
   {
@@ -275,5 +276,23 @@
   "group": "Q63",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q63-24352a37f (reviewer sub-agent of L); spot-checked: Read all six proof steps, all three new nodes, cited statements and source passages. Stacks 0DEN supports the argument without boundedness or flat-term assumptions on the original complex. Added required metadata defaults in three corrected JSON files; mathematics unchanged. Detailed checks and unavailable git-only pivot-record limitations are documented in review.md.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RingedSiteKFlatStalkCriterion",
+  "declaration": "CochainComplex.ringedSite_kFlat_stalk_criterion",
+  "file": "lean/Sheaf/Algebra/Homology/RingedSiteKFlatStalkCriterion.lean",
+  "statement": "theorem ringedSite_kFlat_stalk_criterion {C : Type u} [Category.{v} C] [EssentiallySmall.{w} C] (J : Precoverage C) (hJ : J.IsSiteForCoverings) (R : Sheaf J.toGrothendieck CommRingCat.{w}) (K : CochainComplex (ringedSiteModules.{w} ((sheafCompose J.toGrothendieck (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) ℤ) : (∀ (p : GeometricMorphism (Type w) (Sheaf J.toGrothendieck (Type w))) (s : RingedSitePoint R p), IsKFlatIndependentCoefficients (R := R) K → (HomologicalComplex.quasiIso (ModuleCat.{w} s.ring) (.up ℤ)).kFlat ((s.modules.mapHomologicalComplex (.up ℤ)).obj K)) ∧ (∀ (I : Type t) (p : I → GeometricMorphism (Type w) (Sheaf J.toGrothendieck (Type w))) (s : ∀ i : I, RingedSitePoint R (p i)), JointlyReflectIsomorphisms (fun i : I ↦ (p i).inverse) → (∀ i : I, (HomologicalComplex.quasiIso (ModuleCat.{w} (s i).ring) (.up ℤ)).kFlat (((s i).modules.mapHomologicalComplex (.up ℤ)).obj K)) → IsKFlatIndependentCoefficients (R := R) K)",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-91755fabc",
+  "group": "N8",
+  "result": "pass",
+  "note": "I checked the item theorem CochainComplex.ringedSite_kFlat_stalk_criterion clause by clause against the node and Stacks 0DEN. The site uses EssentiallySmall.{w} with a Precoverage and IsSiteForCoverings, R is a sheaf of commutative rings, K is an unbounded ℤ-complex in ringedSiteModules.{w} (w is the module universe). Points are GeometricMorphism (Type w) (Sheaf (Type w)). Both directions use the recorded IsKFlatIndependentCoefficients and MorphismProperty.kFlat predicates. The converse uses JointlyReflectIsomorphisms over a free index universe t with no Nonempty, the same form as lem-trf-point-family-conservative. There are no flatness, boundedness or finite-limit hypotheses. The new def-sfb-ringed-site-point (RingedSitePoint) is real data: because the point's inverse image preserves finite limits, its conditions on all test sheaves force the transported finite-product operations, and naturality fixes the maps. So the data are unique up to unique iso, quantifying over every presentation equals the natural statement, and the existence theorem is true. I found no existing equivalent in Mathlib Sites.Point, AlgebraicInverseImage, constant-coefficient point evaluation or topological stalks. Both statement fields are verbatim in their files. Imports match the proof dependencies with Lean records. Docstrings give sources, blueprint IDs and all six proof steps. Proofs are sorry only, lines are at most 98 characters, universes are bound, and edge cases are covered. nt_compile --json on both files in dependency order exited with rc 0, no errors and no warnings. I did not run the merge tool's dry run (write-capable), so the new node record fields are unverified until landing."
  }
 }

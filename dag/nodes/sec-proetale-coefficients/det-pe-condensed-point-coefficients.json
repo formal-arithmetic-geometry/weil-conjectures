@@ -284,5 +284,30 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CondensedPointCoefficients",
+  "declaration": "AlgebraicGeometry.ProEtale.condensed_point_coefficients",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.condensedPointRingRestriction",
+   "AlgebraicGeometry.ProEtale.condensedPointConstantRing",
+   "AlgebraicGeometry.ProEtale.condensedPointFiniteFunctionDiagram",
+   "AlgebraicGeometry.ProEtale.condensedPointFiniteFunctionCocone",
+   "AlgebraicGeometry.ProEtale.condensed_point_coefficients"
+  ],
+  "file": "lean/Sheaf/Paper/CondensedPointCoefficients.lean",
+  "statement": "theorem condensed_point_coefficients (Ω : Type u) [Field Ω] [IsSepClosed Ω] : (∀ F : Sheaf (coherentTopology Profinite.{u}) (Type (u + 1)), Nonempty ((profiniteToProEtOf (Spec (.of Ω))).op ⋙ ((profinitePointSetSchemeInverseImage (Spec (.of Ω))).obj F).obj ≅ F.obj)) ∧ (∀ F : Mon (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}), Nonempty ((condensedPointRingRestriction (Spec (.of Ω))).obj (coefficientRing (Spec (.of Ω)) F) ≅ (sheafToPresheaf (coherentTopology Profinite.{u}) Ab.{u + 1}).mapMon.obj F)) ∧ (∀ (T : Type u) [TopologicalSpace T] [Ring T] [IsTopologicalRing T], Nonempty ((condensedPointRingRestriction (Spec (.of Ω))).obj (coefficientRing (Spec (.of Ω)) (Mon.mk (Profinite.continuousCoefficientRingObj T))) ≅ (Profinite.continuousCoefficientRingPresheaf T).toMonAb)) ∧ (∀ (A : Type u) [Ring A] [TopologicalSpace A] [DiscreteTopology A], (∀ S : Profinite.{u}, (∃ e : LocallyConstant S A ≃+* C(S, A), ∀ f : LocallyConstant S A, (e f : S → A) = f) ∧ Nonempty (IsColimit (condensedPointFiniteFunctionCocone A S))) ∧ Nonempty (coefficientRing (Spec (.of Ω)) (Mon.mk (Profinite.continuousCoefficientRingObj A)) ≅ (comparisonUpperStar Ab.{u + 1} (Spec (.of Ω))).mapMon.obj (condensedPointConstantRing (Spec (.of Ω)).smallEtaleTopology A)) ∧ Nonempty (coefficientRing (Spec (.of Ω)) (Mon.mk (Profinite.continuousCoefficientRingObj A)) ≅ condensedPointConstantRing (Scheme.ProEt.topology (Spec (.of Ω))) A))",
+  "branch": "newtargets-dag",
+  "by": "Q68",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0597af818",
+  "group": "Q68",
+  "result": "pass",
+  "note": "Read the node, all 8 stmt_deps and the Lean module. Clause by clause: IsSepClosed Ω only; conjunct 1 is the set inverse image profinitePointSetSchemeInverseImage restricted along profiniteToProEtOf (=X[S]=Ω[S] via condensed_point_basis), naturally iso to F.obj; conjunct 2 is a Mon-object (ring-preserving) iso of the restricted coefficientRing (upperStarFromPoint.mapMon) with F; clause (1) compares with continuousCoefficientRingPresheaf T (C(S,T), precomposition, pointwise operations); clause (2) gives LC≃+*C with identity underlying map, IsColimit of the real A^{S_i} precomposition cocone over all DiscreteQuotients, a full-site ring iso with comparisonUpperStar Ab (same sheafPullback construction as the recorded proEtaleSiteComparison, real Monoidal instance) of the constant étale ring, and with the constant pro-étale ring (Mathlib constantSheaf). Edge cases: S empty, zero/noncommutative/infinite A, positive characteristic, single universe u, no stronger assumptions. Helpers carry real data, are not rival notions, and have source/blueprint docstrings; the theorem docstring has all six proof steps; proof is sorry only; lean.statement is verbatim; node diff is the lean field only. nt_compile.py (side overlay) compiles the file clean in 3.9 s, axioms propext/sorryAx/choice/Quot.sound. No fixes."
  }
 }
