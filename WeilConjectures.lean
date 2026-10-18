@@ -5853,6 +5853,7 @@ public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.AffineImmersion
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.AffineNeighbourhood
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Canonical
+public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.ChartBoundary
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.ChartPolynomial
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.ChartSections
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
@@ -8376,6 +8377,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerProductAppend
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerProductBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Normalization
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Orientation
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.ProjectiveLineClass
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Rational
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Reduction
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RegularImmersion
