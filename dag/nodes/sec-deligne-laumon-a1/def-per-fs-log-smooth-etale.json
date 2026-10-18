@@ -2,7 +2,7 @@
  "id": "def-per-fs-log-smooth-etale",
  "kind": "definition",
  "title": "Log smooth and log etale morphisms of fs log schemes",
- "statement": "Let $f:(V,M_V)\\to(B,M_B)$ be a morphism of locally Noetherian fs log schemes [def-trf-fs-log-blowup]. For a commutative monoid $P$, write $\\mathbf Z[P]=\\bigoplus_{p\\in P}\\mathbf Zz^p$ with $z^pz^q=z^{p+q}$. The morphism is log smooth if etale locally on source and target there are compatible fine saturated charts $P\\to M_B$, $Q\\to M_V$ and $u:P\\to Q$ such that the kernel and the torsion subgroup of the cokernel of $u^{\\rm gp}$ are finite of orders invertible on $V$, and the comparison morphism $V\\to B\\times_{\\operatorname{Spec}\\mathbf Z[P]}\\operatorname{Spec}\\mathbf Z[Q]$ is smooth [def-sbc-smooth-morphisms]. It is log etale if charts can be chosen with both the kernel and the whole cokernel finite of invertible orders and the comparison morphism etale [def-weil-etale-morphism]. Charts and group completions mean those of [def-trf-fs-log-blowup]; the comparisons use scheme fibre products [def-pc-fibre-product].",
+ "statement": "Let $f:(V,M_V)\\to(B,M_B)$ be a morphism of locally Noetherian fs log schemes, with charts, group completions and log morphisms as in [def-trf-fs-log-blowup]. Write commutative monoids additively. For such a monoid $P$, the monoid ring $\\mathbf Z[P]$ consists of finite sums $\\sum_{p\\in P}a_pz^p$, with $a_p\\in\\mathbf Z$, coefficientwise addition, and multiplication determined by $z^pz^q=z^{p+q}$ and $1=z^0$. Spectra and the contravariant maps they induce are as in [def-weil-affine-spectrum].\n\nEtale-local compatible chart data for $f$ mean a family of commutative squares $f_i:V_i\\to B_i$ over $f:V\\to B$, where $V_i\\to V$ and $B_i\\to B$ are etale [def-weil-etale-morphism] and the images of the $V_i$ cover $V$, together with fine saturated monoids $P_i,Q_i$, charts $P_i\\to M_{B_i}$ and $Q_i\\to M_{V_i}$ for the pulled-back log structures, and a monoid homomorphism $u_i:P_i\\to Q_i$ compatible with $f_i$ and its map of log structures. A chart $P_i\\to M_{B_i}$ yields a scheme morphism $b_i:B_i\\to\\operatorname{Spec}\\mathbf Z[P_i]$, the morphism corresponding by [lem-weil-pbc-morphism-into-affine-scheme] to the ring map $\\mathbf Z[P_i]\\to\\Gamma(B_i,\\mathcal O_{B_i})$ sending $z^p$ to the image of $p$ under the structure map; likewise write $a_i:V_i\\to\\operatorname{Spec}\\mathbf Z[Q_i]$. Compatibility of $u_i$ with $f_i$ gives $f_i^\\sharp$ of the image of $p$ equal to the image of $u_i(p)$, hence, by the same bijection, $b_i f_i=\\operatorname{Spec}(\\mathbf Z[u_i])a_i$, where $\\mathbf Z[u_i](z^p)=z^{u_i(p)}$. Thus there is a comparison morphism\n$$c_i=(f_i,a_i):V_i\\longrightarrow B_i\\times_{\\operatorname{Spec}\\mathbf Z[P_i]}\\operatorname{Spec}\\mathbf Z[Q_i],$$\nusing the scheme fibre product of [def-pc-fibre-product].\n\nPut $K_i=\\ker(u_i^{\\rm gp}:P_i^{\\rm gp}\\to Q_i^{\\rm gp})$ and $C_i=Q_i^{\\rm gp}/u_i^{\\rm gp}(P_i^{\\rm gp})$. The torsion subgroup is $(C_i)_{\\rm tors}=\\{c\\in C_i: nc=0\\text{ for some integer }n>0\\}$. A finite group's order is invertible on $V_i$ when its image in every local ring of $V_i$ is a unit. The morphism $f$ is called log smooth if such chart data exist with $K_i$ and $(C_i)_{\\rm tors}$ finite of orders invertible on $V_i$ and every $c_i$ smooth [def-sbc-smooth-morphisms]. It is called log etale if such chart data exist with $K_i$ and the whole $C_i$ finite of orders invertible on $V_i$ and every $c_i$ etale [def-weil-etale-morphism].",
  "source": {
   "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
   "place": "Expose X Proposition 1.2 and its proof, pp.136--138, chart criterion recalled there; Expose XVI 3.6.1--3.6.3, p.252 (trait version). General criterion is Kato, Logarithmic structures of Fontaine--Illusie, Theorem 3.5 (WANTED locally)."
@@ -11,7 +11,9 @@
   "def-trf-fs-log-blowup",
   "def-sbc-smooth-morphisms",
   "def-weil-etale-morphism",
-  "def-pc-fibre-product"
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-morphism-into-affine-scheme"
  ],
  "proof": [],
  "proof_deps": [],
@@ -44,10 +46,17 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-19",
    "verdict": "no match: ordinary smooth or etale morphisms, invariant-field algebra, module quotients and projectivizations do not state the logarithmic or scheme-quotient assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Logarithmically etale morphisms of fine saturated log schemes are defined by monoid charts with finite kernel and cokernel of invertible order",
+   "results": "{\"t\": \"2026-10-18T20:21:19Z\", \"tool\": \"leanfinder\", \"query\": \"Logarithmically etale morphisms of fine saturated log schemes are defined by monoid charts with finite kernel and cokernel of invertible order\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.IsEtale.of_comp\", \"Algebra.mem_etaleLocus_iff\"], \"digest\": \"0008b3f71ca8fbfd\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: inspected hits are ordinary scheme etaleness and the ordinary algebra etale locus, with no log structure or monoid chart conditions"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-trait-prime-to-ell-log-alteration",
@@ -72,5 +81,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "def-per-fs-log-smooth-etale",
+  "worker": "stage1",
+  "summary": "Expanded the existing chart definition into explicit etale-local diagrams, monoid-ring maps, kernel/cokernel/torsion and unit conditions. Read all four inherited statement dependencies and added the existing affine-spectrum node for Spec and contravariant scheme maps. No theorem or new node is introduced; proof and proof_deps remain empty. No completed project Lean declaration or Mathlib match was found. Kato Theorem 3.5 remains WANTED locally; ILO X 1.2 and XVI 3.6.1--3.6.3 were read.",
+  "blueprint": "Definition supporting the fs log-smooth and log-etale geometric constructions in ILO XVI 3.7, printed pp.254--255, under the inherited ancestor lem-per-artin-gabber-affine-curve proof Step 3; no unit or chapter route is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-acdeac43c",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-acdeac43c (reviewer sub-agent of L); spot-checked: The definition is correct against ILO Travaux de Gabber X Prop 1.2 (printed pp.136-138: Kato 3.5 adaptation with smooth comparison and an fs refinement), XVI 3.6.1-3.6.3 (p.252) and its use in XVI 3.7 (pp.254-255). The log etale clause (finite kernel and cokernel, etale comparison) matches Kato 3.5. Kato itself is still WANTED locally. Small cases tested: identity charts and trivial log structures (ordinary smooth/etale); the Kummer chart N->N, 1|->n (n must be invertible; the tame trait extension S'->T is log etale); semistable N->N^r (log smooth); log blowup (log etale); 0->N (log smooth, not log etale); empty V. No duplicate: no other DAG node or blueprint snapshot defines general log smooth or log etale (lem-trf-log-smooth-log-regular only inlines a special chart hypothesis). The Mathlib searches are recorded with no match. No SGA is cited. There are no new nodes or proof steps, and no tool_uses. One fault (B3/C4): b_i:B_i->Spec Z[P_i] with B_i not affine, and the equation b_i f_i = Spec(Z[u_i]) a_i, need Mor(X,Spec R) = Hom(R, Gamma(X,O)). def-weil-affine-spectrum gives only maps between spectra. FIX: the statement now builds b_i and a_i through the existing Mathlib leaf lem-weil-pbc-morphism-into-affine-scheme (Mathlib ΓSpec.adjunction), and that id is added to stmt_deps. It depends only on def-pc-scheme and def-weil-affine-spectrum, so there is no cycle. Nothing else changed.; 1 file(s) fixed by the reviewer"
  }
 }
