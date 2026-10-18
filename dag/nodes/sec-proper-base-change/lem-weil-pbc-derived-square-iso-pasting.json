@@ -26,86 +26,44 @@
  ],
  "proof": [
   {
-   "text": "**Step 1 (sheaf level).** The three identities for the sheaf-level isomorphisms $\\theta_\\square=c_{f,g'}^{-1}\\circ c_{g,f'}$, with $c,e$ of [lem-weil-pbc-inverse-image-composition], are [lem-weil-pbc-square-iso-pasting] (1)-(3). (They follow from the associativity and unit laws of $c,e$, [lem-weil-pbc-derived-inverse-image-composition] (1); e.g. for (2): by associativity for $(g,h,f'')$ the left side is $c_{f,g'h'}^{-1}\\circ c_{g,hf''}\\circ(c_{h,f''}g^{-1})$, and by associativity for $(f,g',h')$ and $(g,f',h')$ the right side is $c_{f,g'h'}^{-1}\\circ c_{fg',h'}\\circ c_{gf',h'}^{-1}\\circ c_{g,f'h'}\\circ(c_{h,f''}g^{-1})$, equal since $fg'=gf'$ and $f'h'=hf''$.) Since $\\theta_\\square$, $c$, $e$ are natural, applying them degreewise to complexes gives isomorphisms of complexes satisfying the same three identities degreewise.",
+   "text": "Express the derived comparison of a commutative square as (upperStarCompDerivedPlus for its lower-left path).symm followed by upperStarCompDerivedPlus for its upper-right path, with a common diagonal. This is pullbackSquareComparison_eq; substitution allows any equal chosen diagonal. All maps are already on the bounded-below derived categories.",
    "uses": [
-    "lem-weil-pbc-square-iso-pasting",
-    "lem-weil-pbc-derived-inverse-image-composition",
-    "def-weil-pbc-cartesian-square"
+    "def-weil-pbc-derived-square-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Lemma 03CB (lemma-composition-morphisms-sites, line 2764) and its proof: the composites of inverse images are identified by uniqueness of left adjoints; the pasting laws are tacit in sites-cohomology.tex Remarks 0E46/0E47 (lines 4062, 4094). Source Lean AlgebraicGeometry.Etale.squareUpperStarIso_paste_horiz_hom / _paste_vert_hom / squareUpperStarIso_id"
-   }
+   "elementary": false
   },
   {
-   "text": "**Step 2 (dictionary between termwise and derived transformations on $D$).** For each morphism of schemes $s$ let $s^{-1}_D$ be the termwise-induced functor on the unbounded derived categories with its natural isomorphism $\\varphi_{s,K}:s^{-1}_D(QK)\\xrightarrow{\\sim}Q(s^{-1}K)$, natural in the complex $K$ [def-weil-pbc-derived-inverse-image] (the $\\beta_s$ of [def-weil-pbc-derived-square-iso]); $Q$ is the localization at the quasi-isomorphisms [def-weil-abstract-derived-category]. For a word $w=(s_1,\\dots,s_n)$ of composable morphisms put $w_D=s^{-1}_{1,D}\\circ\\dots\\circ s^{-1}_{n,D}$, $w^{-1}=s_1^{-1}\\circ\\dots\\circ s_n^{-1}$ (termwise on complexes), and define $\\Phi^w_K:w_D(QK)\\xrightarrow{\\sim}Q(w^{-1}K)$ by $\\Phi^{()}_K=\\mathrm{id}_{QK}$ and $\\Phi^{(s,w)}_K=\\varphi_{s,w^{-1}K}\\circ s^{-1}_D(\\Phi^w_K)$. By induction on the length of $w$, $\\Phi^{w\\cdot v}_K=\\Phi^w_{v^{-1}K}\\circ w_D(\\Phi^v_K)$ for words $w,v$ (concatenation). Say that a natural transformation $\\sigma:w_D\\to w'_D$ *lifts* a natural transformation $\\tau:w^{-1}\\to w'^{-1}$ of functors on complexes if $\\sigma_{QK}=(\\Phi^{w'}_K)^{-1}\\circ Q(\\tau_K)\\circ\\Phi^w_K$ for every complex $K$. Then: (a) $\\theta^D_{\\square,\\mathrm{unb}}$ lifts $\\theta_\\square$ (words $(f',g)$, $(g',f)$; $\\Phi^{(f',g)}=\\beta_1$, $\\Phi^{(g',f)}=\\beta_2$; [def-weil-pbc-derived-square-iso]); $c^D_{u,v}$ on $D$ lifts $c_{u,v}$ (words $(v,u)$, $(uv)$) and $e^D_X$ on $D$ lifts $e_X$ (words $(\\mathrm{id}_X)$, $()$) ([lem-weil-pbc-derived-inverse-image-composition], the formulas of its Step 3). (b) If $\\sigma$ lifts $\\tau$ and $\\sigma'$ lifts $\\tau'$ (composable), $\\sigma'\\circ\\sigma$ lifts $\\tau'\\circ\\tau$ (the middle $\\Phi$ cancels); an invertible $\\sigma$ lifting an invertible $\\tau$ has $\\sigma^{-1}$ lifting $\\tau^{-1}$; the identity lifts the identity. (c) Left whiskering: if $\\sigma:w_D\\to w'_D$ lifts $\\tau$, then $t^{-1}_D\\sigma$ lifts $t^{-1}\\tau$ (words $(t,w),(t,w')$): naturality of $\\varphi_t$ in the complex for the morphism $\\tau_K$ gives $\\varphi_{t,w'^{-1}K}\\circ t^{-1}_D(Q\\tau_K)=Q(t^{-1}\\tau_K)\\circ\\varphi_{t,w^{-1}K}$, so $\\Phi^{(t,w')}_K\\circ t^{-1}_D(\\sigma_{QK})=\\varphi_{t,w'^{-1}K}\\circ t^{-1}_D(Q\\tau_K\\circ\\Phi^w_K)=Q(t^{-1}\\tau_K)\\circ\\Phi^{(t,w)}_K$. (d) Right whiskering: if $\\sigma:w_D\\to w'_D$ lifts $\\tau$ and $v$ is a word, then $\\sigma v_D$ lifts $\\tau v^{-1}$ (words $w\\cdot v,w'\\cdot v$): by naturality of $\\sigma$ for the isomorphism $\\Phi^v_K:v_D(QK)\\to Q(v^{-1}K)$, $\\sigma_{v_D(QK)}=w'_D(\\Phi^v_K)^{-1}\\circ\\sigma_{Q(v^{-1}K)}\\circ w_D(\\Phi^v_K)=w'_D(\\Phi^v_K)^{-1}\\circ(\\Phi^{w'}_{v^{-1}K})^{-1}\\circ Q(\\tau_{v^{-1}K})\\circ\\Phi^w_{v^{-1}K}\\circ w_D(\\Phi^v_K)$, which is $(\\Phi^{w'\\cdot v}_K)^{-1}\\circ Q(\\tau_{v^{-1}K})\\circ\\Phi^{w\\cdot v}_K$ by the concatenation formula.",
+   "text": "For the identity square on f choose the common diagonal f. The right and left derived unit laws identify the two composition comparisons with the corresponding whiskered identity comparisons. Compose with the identity comparison, cancel its inverse, and obtain identity (1).",
    "uses": [
-    "def-weil-pbc-derived-inverse-image",
-    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-derived-inverse-image-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take the component of derived associativity for a triple of arrows and rearrange it by canceling invertible morphisms. The two rearranged forms identify map(composition.hom) followed by composition.inv, and composition.hom followed by map(composition.inv). For horizontal pasting apply them to (f double prime,h,g), (h prime,f prime,g), and (h prime,g prime,f), choosing the intermediate diagonals using the two commutativity equations. The internal comparison maps and inverses cancel. This expresses the outer square comparison as the horizontal composite with the source and target composition isomorphisms. Precompose with the mapped inverse source comparison and cancel it to obtain (2).",
+   "uses": [
     "def-weil-pbc-derived-square-iso",
     "lem-weil-pbc-derived-inverse-image-composition"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Lemma 04VG (lemma-properties-left-localization, line 4406), clause (3): a functor out of the localization is determined by its composite with Q; with sites-cohomology.tex Lemma 0D6D (lemma-derived-pullback-composition, line 3658) and Remarks 0E46/0E47 (lines 4062, 4094; verification omitted there). Written out by an agent, as lem-weil-pbc-derived-inverse-image-composition Steps 5-6 and lem-weil-pbc-derived-square-iso-commshift Steps 4-5 (Mathlib Localization.natTrans_ext)"
-   }
+   "elementary": false
   },
   {
-   "text": "**Step 3 (the identities on $D$ at the objects $QK$).** Write $\\theta^D_{\\square,\\mathrm{unb}}$, $c^D$, $e^D$ for the transformations on the unbounded derived categories (Step 2 (a)). Each side of each of the three identities, read on $D$, is a composite of such transformations, their inverses, and their whiskerings by functors $t^{-1}_D$ on the left or on the right; the corresponding expression with $\\theta,c,e$ in place of $\\theta^D_{\\mathrm{unb}},c^D,e^D$ and $t^{-1}$ in place of $t^{-1}_D$ is the corresponding side of the termwise identity. By Step 2 (a)-(d), applied factor by factor, each side on $D$ lifts the corresponding termwise side, with the same source and target words on both sides (identity (1): words $(f,\\mathrm{id}_Y)$ and $(\\mathrm{id}_X,f)$; (2): $(f'',h,g)$ and $(g'h',f)$; (3): $(e',f',g)$ and $(g'',fe)$). For instance the right side of (2) is $(c^D_{g',h'}f^{-1}_D)\\circ(h'^{-1}_D\\theta^D_{\\square_1,\\mathrm{unb}})\\circ(\\theta^D_{\\square_2,\\mathrm{unb}}g^{-1}_D)$, which lifts $(c_{g',h'}f^{-1})\\circ(h'^{-1}\\theta_{\\square_1})\\circ(\\theta_{\\square_2}g^{-1})$ by (d), (c), (d) and (b); its left side $\\theta^D_{\\square_2\\cdot\\square_1,\\mathrm{unb}}\\circ(f''^{-1}_Dc^D_{g,h})$ lifts $\\theta_{\\square_2\\cdot\\square_1}\\circ(f''^{-1}c_{g,h})$ by (c) and (b). By Step 1 the termwise sides are equal, so at every $QK$ the two sides on $D$ are $(\\Phi^{w'}_K)^{-1}\\circ Q(\\text{the same morphism of complexes})\\circ\\Phi^w_K$, hence equal.",
+   "text": "Use the same rearranged associativity component equations for (e prime,f prime,g), (e prime,g prime,f), and (g double prime,e,f). Communtativity of the squares identifies the intermediate diagonals, and the internal comparison maps cancel. This expresses the outer square comparison as the vertical composite with the source and target composition isomorphisms. Precompose with the inverse source comparison and cancel it to obtain (3). Specialize the three proved identities from arbitrary Grothendieck abelian coefficients to AddCommGrpCat. The sheaf-level identities mentioned at the end of the node are already the source declarations squareUpperStarIso_id and squareUpperStarIso_paste_horiz_hom / squareUpperStarIso_paste_vert_hom; no duplicate declarations are needed.",
    "uses": [
-    "lem-weil-pbc-square-iso-pasting",
     "def-weil-pbc-derived-square-iso",
     "lem-weil-pbc-derived-inverse-image-composition"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Lemma 04VG (lemma-properties-left-localization, line 4406), clause (3): a functor out of the localization is determined by its composite with Q; with sites-cohomology.tex Lemma 0D6D (lemma-derived-pullback-composition, line 3658) and Remarks 0E46/0E47 (lines 4062, 4094; verification omitted there). Written out by an agent, as lem-weil-pbc-derived-inverse-image-composition Steps 5-6 and lem-weil-pbc-derived-square-iso-commshift Steps 4-5 (Mathlib Localization.natTrans_ext)"
-   }
-  },
-  {
-   "text": "**Step 4 (the identities on all of $D$).** For each identity, the two sides are natural transformations between the same two functors (composites of the functors $s^{-1}_D$, from the unbounded derived category of the bottom right scheme to that of the top left scheme of the square or rectangle), being composites of whiskered natural transformations; by Step 3 they agree at every object $QK$, $K$ a complex. $Q$ is a localization at the quasi-isomorphisms [def-weil-abstract-derived-category], so by the uniqueness clause (3) of [lem-weil-pbc-localization-universal-property] (with $L=Q$) the two sides are equal natural transformations on $D$. This is the argument of [lem-weil-pbc-derived-inverse-image-composition] Steps 5-6 and [lem-weil-pbc-derived-square-iso-commshift] Step 5.",
-   "uses": [
-    "lem-weil-pbc-localization-universal-property",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Lemma 04VG (lemma-properties-left-localization, line 4406), clause (3); Mathlib Localization.natTrans_ext"
-   }
-  },
-  {
-   "text": "**Step 5 (restriction to $\\Dplus$).** The inverse images on $\\Dplus$ are the restrictions of the $s^{-1}_D$ to the full subcategories $\\Dplus$, which they preserve [def-weil-pbc-derived-inverse-image], [def-weil-pbc-derived-categories]; $\\theta^D_\\square$ on $\\Dplus$ is the restriction of $\\theta^D_{\\square,\\mathrm{unb}}$ [def-weil-pbc-derived-square-iso], and $c^D$, $e^D$ on $\\Dplus$ are the restrictions of the transformations on $D$ ([lem-weil-pbc-derived-inverse-image-composition] Step 4 and the uniqueness in its clause (2)). Whiskering and composing natural transformations commute with restriction to full subcategories preserved by the functors, so each side of each identity on $\\Dplus$ is the restriction of the corresponding side on $D$, and the identities of Step 4 restrict to the three identities of the statement.",
-   "uses": [
-    "def-weil-pbc-derived-inverse-image",
-    "def-weil-pbc-derived-categories",
-    "def-weil-pbc-derived-square-iso",
-    "lem-weil-pbc-derived-inverse-image-composition"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Lemma 0D6D (lemma-derived-pullback-composition, line 3658): on bounded below complexes the derived pullbacks are computed termwise"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-square-iso-pasting",
-  "lem-weil-pbc-derived-inverse-image-composition",
-  "def-weil-pbc-cartesian-square",
-  "def-weil-pbc-derived-inverse-image",
-  "def-weil-abstract-derived-category",
   "def-weil-pbc-derived-square-iso",
-  "lem-weil-pbc-localization-universal-property",
-  "def-weil-pbc-derived-categories"
+  "lem-weil-pbc-derived-inverse-image-composition"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Remarks 0E46, 0E47 (lines 4062, 4094): the pasting of the identifications L(f')^*Lg^*=L(g')^*Lf^* is used there and its verification omitted; sites.tex Lemma 03CB and categories.tex Lemma 04VG (3) for the ingredients. The argument through the localization is written by an agent (model: lem-weil-pbc-derived-inverse-image-composition Steps 5-6, lem-weil-pbc-derived-square-iso-commshift Steps 4-5); the sheaf-level laws follow the source Lean AlgebraicGeometry.Etale.squareUpperStarIso_paste_horiz_hom / _paste_vert_hom / squareUpperStarIso_id"
+  "place": "Remarks 0E46 and 0E47; Lemma 0D6D. Direct coherence proof on D-plus written by X2 from the already-proved pullbackSquareComparison_eq, upperStarCompDerivedPlus_assoc, and upperStarCompDerivedPlus_id_left/right; the rearrangements follow the existing sheaf-level proof in WeilConjectures.SixFunctors.BaseChange.Pasting."
  },
  "mathlib_searches": [
   {
@@ -207,5 +165,15 @@
   "group": "C1",
   "result": "fix",
   "note": "sq₁/sq₂/sq₃ = IsPullback g' f' f g / h' f'' f' h / g'' e' e g'; θ = pullbackSquareComparison A sq.toCommSq (f'^*g^* ≅ g'^*f^*); c = (upperStarCompDerivedPlus a b).symm = cD of derivedInverseImageComposition, i = upperStarIdDerivedPlus = eD; id_horiz f = (f,f,id,id); paste_horiz/paste_vert give (g'h', f'', f, hg) and (g'', e'f', ef, g); all three equations in diagrammatic order match; sheaf restatement dropped for existing squareUpperStarIso_* lemmas"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X2",
+  "result": "pass",
+  "landing": "20261018T062945-L-690351",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
