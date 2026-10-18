@@ -1,0 +1,125 @@
+{
+ "id": "def-trf-strict-etale-log-blowup-procedure",
+ "kind": "definition",
+ "title": "Strict etale functorial log blowup procedures",
+ "status": "split",
+ "statement": "For locally Noetherian fs log schemes [def-trf-fs-log-blowup], call an input admissible if its underlying scheme is quasi-compact and every geometric characteristic group completion is torsion free. Call an input charted if it admits a global fan chart [lem-trf-log-fan-chart-blowup]. A tower over an input is a finite saturated log blowup tower with its initial level identified with that input. A contracted pullback comparison over a log morphism is the recursive pullback of its ordered tower, with pulled-back log ideals as centers, followed by deletion of exactly the centers equal to the whole log monoid sheaf. Formally a monotone count map records the retained stages; an ordered embedding lists all and only those retained stages. Its level maps and repeated-level transition maps form fs Cartesian squares; retained transitions and centers are those of the source tower, and deleted transitions are log identities. A strict etale log blowup procedure on a class of inputs assigns such a tower to every member and such a comparison to every strict etale morphism between members. The comparison count maps and log maps satisfy the identity and composition laws. An isomorphism of towers over the same input is an ordered levelwise log isomorphism, the identity at the initial level, preserving all arrows and actual centers. Agreement of two procedures on a subdomain consists of these isomorphisms, natural for every strict etale comparison. Taking the domain to be all charted admissible inputs makes the assignment independent of a chosen fan chart and includes finite disjoint unions and their component inclusions.",
+ "stmt_deps": [
+  "def-trf-fs-log-blowup",
+  "lem-trf-log-fan-chart-blowup"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose VIII 3.3.8--3.3.15, pp.108--110: towers, contraction, recursive pullback, and the functorial descent reduction."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A strict etale functorial log blowup procedure consists of finite towers with ordered coherent log ideal centers and canonical comparisons after deleting whole ideals",
+   "results": "8 hits: RingHom.FormallyEtale; AlgebraicGeometry.Scheme.Etale; Algebra.Etale.recOn; Algebra.FormallyEtale.localization_map; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; Algebra.Etale.comp; AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful; Algebra.FormallyEtale.iff_comp_bijective. These concern ordinary etale morphisms and algebras, not log blowup procedures.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Definition of canonical contracted comparison of finite logarithmic blowup towers with order preserving retained stages, strict etale functorial procedure",
+   "results": "8 hits: StandardEtalePair.HasMap.map; StandardEtalePair.lift; Algebra.Etale.comp; Algebra.exists_etale_isIdempotentElem_forall_liesOver_eq; Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial; StandardEtalePair.homEquiv; StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation; RingHom.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial. No log tower comparison.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SaturatedLogBlowupTower\"",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "msearch grep LogBlowup|logBlowup|LogScheme AlgebraicGeometry; rg IsLogBlowupInput|LogBlowupTowerOver|LogBlowupComparison|StrictEtaleLogBlowupProcedure|LogBlowupTowerIso|LogBlowupProcedureAgreement in Mathlib, WeilConjectures, lean/Sheaf and dag/lean_names_upstream.json",
+   "results": "0 Mathlib hits. No occurrences of the proposed declarations in Mathlib, WeilConjectures, lean/Sheaf or upstream names. Existing SaturatedLogBlowupTower and LogFanTower.StrictComparison were read and reused; the latter compares fan-indexed towers of equal length and does not encode contraction.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep (DAG and blueprint_refs)",
+   "query": "blueprint_refs.py search contracted log tower; blueprint_refs.py search log blowup; rg contracted.*(log|tower)|log.*procedure dag/nodes/sec-trace-formula",
+   "results": "Both blueprint searches: 0 matches. DAG matches include the item, its monoidal-resolution consumer, ordinary resolution rules and fine fan blowups. No definition of strict-etale log blowup procedure or contracted comparison of log towers.",
+   "date": "2026-10-18",
+   "verdict": "no existing node for notion"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-functorial-log-blowup-etale-descent",
+  "date": "2026-10-18",
+  "group": "Q153"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Historical nearby-duality/alteration branch of lem-trf-local-term-locality, proof (1)--(2), through lem-trf-log-regular-desingularization: monoidal resolution used for the regular modification of nodal pairs; ILO VIII 3.3.15, pp.109--110. Expose VIII, proof of Theorem 3.3.15, pp.109--110, initial descent reduction and final finite-disjoint-union argument; effective gluing input implicit there, using 3.3.8--3.3.10 for log blowups.",
+   "via": [
+    "lem-trf-functorial-log-blowup-etale-descent",
+    "lem-trf-monoidal-resolution-tower",
+    "lem-trf-log-regular-desingularization",
+    "lem-trf-nodal-pair-projective-resolution",
+    "lem-trf-plurinodal-alteration",
+    "lem-trf-nearby-cycle-verdier-duality",
+    "lem-trf-specialization-cohomological-comparison",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.StrictEtaleLogBlowupProcedure",
+  "declaration": "AlgebraicGeometry.StrictEtaleLogBlowupProcedure",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictEtaleLogBlowupProcedure.lean",
+  "statement": "structure StrictEtaleLogBlowupProcedure (D : FineSaturatedLogScheme.{u} → Prop)",
+  "branch": "newtargets-dag",
+  "by": "Q153",
+  "date": "2026-10-18",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.IsLogBlowupInput",
+   "AlgebraicGeometry.IsChartedLogBlowupInput",
+   "AlgebraicGeometry.LogBlowupTowerOver",
+   "AlgebraicGeometry.LogBlowupComparison",
+   "AlgebraicGeometry.StrictEtaleLogBlowupProcedure",
+   "AlgebraicGeometry.LogBlowupTowerIso",
+   "AlgebraicGeometry.LogBlowupProcedureAgreement"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b47fd396f",
+  "group": "Q153",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b47fd396f",
+  "group": "Q153",
+  "result": "pass",
+  "note": "Checked the item clause by clause against the node. Input class: FineSaturatedLogScheme + CompactSpace + torsion-free GrothendieckGroup of characteristic; charted = ∃ LogFanChart (a property, so chart independence is literal). Towers: SaturatedLogBlowupTower with level 0 = X and nonempty coherent centers. LogBlowupComparison: fs-Cartesian recursive pullback, retained centers = pullbackIdeal, deleted steps = log identities, deletion iff pulled ideal is whole (proper principal centers kept); identity/composition laws on count and log maps; finite unions lie in the charted domain. Conclusion: extension E on all admissible inputs, agreement with T, chart-neighbourhood comparison, unique agreement E≅E'. Uniqueness verified true (order isos unique, forward maps forced by the blowup ∃!). Hypotheses satisfiable by the trivial length-0 procedure. Edge cases: empty scheme, consecutive deletions, single universe u. No duplicate: FineFan.Contraction/ResolutionComparison are fan-level, LogFanTower.StrictComparison has equal length and no contraction; no sibling delivery defines these names. Records: only lean + new def node added to stmt_deps; statements verbatim; imports are statement or proof_dep modules; docstrings complete; sorry only; lines ≤100. nt_compile --json clean in dependency order (7.7 s, 4.2 s). Advisory: plain defs (LogFanChart, IsStrict, IsFSPullback, IsIdentity, ...) owned by theorem node lem-trf-log-fan-chart-blowup, a stage-1 stmt_dep not added by this delivery; the second reading is the worker rereading their own work."
+ }
+}

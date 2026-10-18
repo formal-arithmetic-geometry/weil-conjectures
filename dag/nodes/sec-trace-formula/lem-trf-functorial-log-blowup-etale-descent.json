@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-trf-fs-log-blowup",
   "lem-trf-log-fan-chart-blowup",
-  "pqf-def-locnoeth"
+  "pqf-def-locnoeth",
+  "def-trf-strict-etale-log-blowup-procedure"
  ],
  "proof": [
   {
@@ -297,5 +298,23 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-8fb2d2b53 (reviewer sub-agent of L); spot-checked: I read the item in full (10 steps, 0 new nodes), every cited node's statement, the parent lem-trf-monoidal-resolution-tower steps 4-6, and the source ILO VIII 3.3.7-3.3.16, printed pp.107-110, where the proof of 3.3.15 says 'By descent' twice. Stacks tags 04TR/04TQ/03GI/01K5/01OY/01T6/02GO/01S1/00VM resolve to the cited labels. The statement is unchanged and is exactly what the parent's steps 4-5 use; the contraction and recursive-pullback conventions match ILO 3.3.8/3.3.10. Small cases tested: empty scheme (length-0 tower); identity cover on a charted X; a proper principal center (retained); and chart pieces whose towers have different lengths. That last case is the real trap: U_a x_X U_b -> U_a is not surjective, so pieces cannot be compared index by index. The delivery handles it correctly with a single tower on U = disjoint union of the U_a, whose overlap projections are surjective, so no index is lost (Steps 2, 4, 5). Step 3: quasi-compactness of the overlaps comes from 01OY plus the permanence clauses, local Noetherianity from 01T6, and fan charts by composition with a strict etale map. That composite is a definitional check; the cited strict-base-change clause concerns towers, not charts, which is not a fault. Step 6: the descended ideal has an explicit sectionwise formula, injectivity and coherence are local, and the universe convention is cited. Step 7: the induction is set up explicitly (base X_0 = X, finite index set) and the centers are proper. Local Noetherianity of the blown-up stages comes from the convention of def-trf-fs-log-blowup; this is acceptable. Steps 8-10 (independence of the cover, contraction under a non-surjective strict etale map via the cover W -> Y, uniqueness) are correct. No cycle, no duplicate, no restated clause, no SGA. Tool uses accepted: lem-pe-set-sheaf-cover-descent is the only off-route citation and is generic Stacks 04TR/04TQ gluing; the other two declared nodes, lem-weil-pbc-finite-coproduct-lfp-qcqs and lem-weil-pbc-etale-site-localization-open, are already on the unit's route. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FunctorialLogBlowupEtaleDescent",
+  "declaration": "AlgebraicGeometry.functorial_log_blowup_etale_descent",
+  "file": "lean/Sheaf/AlgebraicGeometry/FunctorialLogBlowupEtaleDescent.lean",
+  "statement": "theorem functorial_log_blowup_etale_descent (T : StrictEtaleLogBlowupProcedure IsChartedLogBlowupInput.{u}) : ∃ E : StrictEtaleLogBlowupProcedure IsLogBlowupInput.{u}, Nonempty (LogBlowupProcedureAgreement T E (fun _ h ↦ h.1)) ∧ (∀ (X Y : FineSaturatedLogScheme.{u}) (hX : IsLogBlowupInput X) (hY : IsChartedLogBlowupInput Y) (f : EtaleLogHom Y X), f.IsStrict → Etale f.base → Nonempty (LogBlowupComparison f (E.tower X hX) (T.tower Y hY))) ∧ ∀ E' : StrictEtaleLogBlowupProcedure IsLogBlowupInput.{u}, Nonempty (LogBlowupProcedureAgreement T E' (fun _ h ↦ h.1)) → Nonempty (Unique (LogBlowupProcedureAgreement E E' (fun _ h ↦ h)))",
+  "branch": "newtargets-dag",
+  "by": "Q153",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b47fd396f",
+  "group": "Q153",
+  "result": "pass",
+  "note": "Checked the item clause by clause against the node. Input class: FineSaturatedLogScheme + CompactSpace + torsion-free GrothendieckGroup of characteristic; charted = ∃ LogFanChart (a property, so chart independence is literal). Towers: SaturatedLogBlowupTower with level 0 = X and nonempty coherent centers. LogBlowupComparison: fs-Cartesian recursive pullback, retained centers = pullbackIdeal, deleted steps = log identities, deletion iff pulled ideal is whole (proper principal centers kept); identity/composition laws on count and log maps; finite unions lie in the charted domain. Conclusion: extension E on all admissible inputs, agreement with T, chart-neighbourhood comparison, unique agreement E≅E'. Uniqueness verified true (order isos unique, forward maps forced by the blowup ∃!). Hypotheses satisfiable by the trivial length-0 procedure. Edge cases: empty scheme, consecutive deletions, single universe u. No duplicate: FineFan.Contraction/ResolutionComparison are fan-level, LogFanTower.StrictComparison has equal length and no contraction; no sibling delivery defines these names. Records: only lean + new def node added to stmt_deps; statements verbatim; imports are statement or proof_dep modules; docstrings complete; sorry only; lines ≤100. nt_compile --json clean in dependency order (7.7 s, 4.2 s). Advisory: plain defs (LogFanChart, IsStrict, IsFSPullback, IsIdentity, ...) owned by theorem node lem-trf-log-fan-chart-blowup, a stage-1 stmt_dep not added by this delivery; the second reading is the worker rereading their own work."
  }
 }

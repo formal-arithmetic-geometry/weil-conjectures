@@ -306,5 +306,46 @@
   "group": "Q65",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q65-440cc83ab (reviewer sub-agent of L); spot-checked: I read the whole delivery against the source, main-20261015 sec-smooth-purity/sk-lem-sp-tower/prop-coef-integral-dualizing.proof.md, second paragraph (identical to the master copy). The item realizes the sentence 'At finite level the adjunction ... prop-asd-internal-adjunction ... finite site comparisons', and gamma is defined by the counit. Coefficient category: constant-A_n pro-etale sheaves, with omega_{X,n}=nu^* a^x Rnu_* A and F_n defined from one fixed compactification, matching the source. No hypothesis is added beyond what the parent uses. Small cases check out: X=s, X=empty, M=0, and X=A^1 (A(1)[2] on both sides). All six steps check against the statements of the cited nodes; no step uses another node's proof. There is no cycle. Note that lem-pod-point-dualizing-complex reaches this item through prop-coef-integral-exceptional-adjoint, so it must not be cited. The new node lem-coef-finite-point-internal-hom-evaluation is true: at a point every complex is constant, A_n is self-injective, and I tested C=0, A_s and A_s/varpi. It is not a duplicate: lem-sf-point(2) and lem-pod-point-dualizing-complex give only an unspecified isomorphism, with no evaluation characterization or naturality. Accepted tool_uses: prop-asd-internal-adjunction, lem-asd-internal-adjunction-evaluation, lem-pur-projection-comparison-etale-origin, lem-pur-bounded-site-adjunction-transpose, and det-thm-sf-ctf-stability-direct-images. I made three repairs. (1) det-thm-sf-ctf-stability-direct-images was used off-route in Step 3 without a declaration; I declared it in tool_uses. (2) Step 4 applies the site comparison at s, which needs Ra^Et_! M_et in D^b_c, and this was never shown. Step 3 now proves it from lem-sf-proetale-constructible-origin(ii) and the full faithfulness given by thm-weil-pbc-site-comparison. I also clarified Step 1 so that biduality is applied on both sites. (3) The new node pointed vaguely at 'the point-dualizing normalization' without a citation, and the obvious citation would create a cycle. The normalization is now stated explicitly: a_s^x=id and the counit nu^*Rnu_*A_s->A_s, citing def-weil-pbc-site-comparison-morphism and thm-weil-pbc-site-comparison. The report misnames the stability node ('thm-sf-ctf-stability clause (iv)'); this affects the report only. Corrected files are in fixes/dag/nodes/sec-six-functors/.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.FiniteMappingAdjunction",
+  "declaration": "WeilConjectures.finiteMappingAdjunction",
+  "declarations": [
+   "WeilConjectures.FiniteMappingComposite",
+   "WeilConjectures.FiniteMappingSameComposite",
+   "WeilConjectures.finiteMappingArrowMap",
+   "WeilConjectures.finiteMappingGlobalComparison",
+   "WeilConjectures.finiteMappingEtalePointDual",
+   "WeilConjectures.finiteMappingGlobalHom",
+   "WeilConjectures.finiteMappingCompactSections",
+   "WeilConjectures.finiteMappingHomComparisonArrows",
+   "WeilConjectures.finiteMappingEtaleGammaArrows",
+   "WeilConjectures.finiteMappingDualArrow",
+   "WeilConjectures.finiteMappingDualTransportArrows",
+   "WeilConjectures.finiteMappingEtaleSectionsTensor",
+   "WeilConjectures.finiteMappingComparisonTensorArrows",
+   "WeilConjectures.finiteMappingSectionsTensorArrows",
+   "WeilConjectures.finiteMappingScalarUnitArrows",
+   "WeilConjectures.finiteMappingCounitInput",
+   "WeilConjectures.finiteMappingCounit",
+   "WeilConjectures.finiteMappingTransposeArrows",
+   "WeilConjectures.finiteMappingPairing",
+   "WeilConjectures.finiteMappingAdjunction"
+  ],
+  "file": "lean/Sheaf/SixFunctors/FiniteMappingAdjunction.lean",
+  "statement": "theorem finiteMappingAdjunction (hl : l ≠ D.p) [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] : ∃ γ : finiteMappingGlobalHom D l E n X c ≅ (finiteMappingCompactSections D l E n X c).op ⋙ coefficientDerivedDual (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))), (∀ (J : Etale.DerivedCategoryModule (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) X) (hJ : finiteTorConstructibleEtale l E (n + 1) (Nat.succ_pos n) X J), ∃ (hplus : DerivedCategory.TStructure.t.plus J) (hpro : finiteTorConstructibleProEtaleModule l E (n + 1) (Nat.succ_pos n) X ((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))) X).mapDerivedCategory.obj J)), FiniteMappingSameComposite (finiteMappingHomComparisonArrows (Padic.coefficientExtensionRing l E (n + 1)) c J ++ [Arrow.mk (γ.hom.app (op ⟨_, hpro⟩))] ++ finiteMappingDualTransportArrows (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) c ⟨J, hplus⟩) (finiteMappingEtaleGammaArrows (Padic.coefficientExtensionRing l E (n + 1)) D.k c J)) ∧ ∃ (homega : DerivedCategory.TStructure.t.plus (finiteMappingCounitInput (Padic.coefficientExtensionRing l E (n + 1)) c)) (scalar : 𝟙_ (DerivedCategory (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))))) ≅ (ProEtale.rightDerivedGlobalSections (ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1)))) (Spec (.of D.k))).obj (𝟙_ _)), FiniteMappingComposite (finiteMappingScalarUnitArrows (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) (Spec (.of D.k))) (Arrow.mk scalar.hom) ∧ ∀ M : (finiteTorConstructibleProEtaleModule l E (n + 1) (Nat.succ_pos n) X).FullSubcategory, FiniteMappingSameComposite (finiteMappingTransposeArrows (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) (γ.hom.app (op M))) (finiteMappingPairing (Padic.coefficientExtensionRing l E (n + 1)) c homega scalar M.obj)",
+  "branch": "newtargets-dag",
+  "by": "Q55",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The full intrinsic finite-Tor constructible domain and the etale-agreement equation are retained. The H3 repair explicitly adds the transported exceptional counit for the fixed compactification, its projection/evaluation pairing, and for every M equality with the tensor-Hom transpose of gamma. The point scalar isomorphism is normalized by the derived constant adjunction unit, and the bounded-below proof needed for its exceptional value is a conclusion. Canonical factors are bundled as Arrow lists; equality is ordinary equality of composites with endpoints. All helper definitions have real data; only the main theorem has sorry."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0f15b82c3",
+  "group": "Q55",
+  "result": "pass",
+  "note": "Re-delivery of 43ffcb71, which was returned only for H3 (the counit-transpose clause was missing). Only the lean field, the module, the report and the blueprint index changed; the statement, stmt_deps and proof are unchanged, and the item is not live elsewhere. New conjunct: homega (bounded below, a conclusion); scalar, whose hom is pinned by the derived constant/Gamma unit chain; and for EVERY intrinsic M, braiding then uncurry(gamma_M) = finiteMappingPairing (braiding, Leray inverse, canonical cup product, RGamma of the projection for c, pullback counit, evaluation, the transported exceptional counit nu^*Ra_!a^x Rnu_*1 -> 1 for c, scalar.inv). All factors are published canonical maps; there are no free maps or Nonempty. nt_compile --json on the module is clean (11.0 s). Scratch rfl junction checks (skipKernelTC, scratch only): pairing length 18 with all 17 junctions OK, ending at the unit; the scalar list has 5 junctions OK and endpoints matching scalar.hom; at instance level the transpose junction is OK and its first arrow equals the pairing's first arrow; a wrong-junction control fails. Statement verbatim; the 20 declarations match the file exactly; one sorry; no lines over 100 characters; docstrings carry the source/blueprint and the six proof steps. Advisory: the second reading is a self-reading (H11); the cup-product/projection factors use declarations from nodes outside stmt_deps."
  }
 }
