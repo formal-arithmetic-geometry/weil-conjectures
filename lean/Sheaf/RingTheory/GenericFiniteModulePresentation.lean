@@ -12,6 +12,7 @@ public import Mathlib.Algebra.Module.FinitePresentation
 
 import Mathlib.RingTheory.Noetherian.Basic
 import Sheaf.RingTheory.FinitelyPresentedAlgebraModuleGenericFreeness
+import Sheaf.RingTheory.LocalizedFinitePresentationData
 
 /-!
 # Generic finite presentation of finite modules
@@ -68,6 +69,22 @@ theorem exists_finitePresentation_localizedModule_powers
     ∃ a : R, a ≠ 0 ∧
       Module.FinitePresentation (Localization.Away (algebraMap R B a))
         (LocalizedModule.Away (algebraMap R B a) M) := by
-  sorry
+  obtain ⟨a, ha, n, m, f, g, hf, hgf⟩ :=
+    exists_localized_finite_presentation_data R B M
+  let S := Localization.Away (algebraMap R B a)
+  have hfg : (LinearMap.ker f).FG := by
+    have hk : LinearMap.ker f = LinearMap.range g :=
+      (LinearMap.exact_iff.mp hgf)
+    let g' : (Fin m → S) →ₗ[S] LinearMap.range g :=
+      LinearMap.codRestrict (LinearMap.range g) g (fun x => ⟨x, rfl⟩)
+    have hg' : Function.Surjective g' := by
+      rintro ⟨y, hy⟩
+      rcases hy with ⟨x, hx⟩
+      exact ⟨x, Subtype.ext hx⟩
+    let _ : Module.Finite S (LinearMap.range g) :=
+      Module.Finite.of_surjective g' hg'
+    have hrange : (LinearMap.range g).FG := Module.Finite.iff_fg.mp inferInstance
+    exact hk ▸ hrange
+  exact ⟨a, ha, Module.finitePresentation_of_free_of_surjective f hf hfg⟩
 
 end Module.Finite

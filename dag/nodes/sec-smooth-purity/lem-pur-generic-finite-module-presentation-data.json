@@ -1,0 +1,122 @@
+{
+ "id": "lem-pur-generic-finite-module-presentation-data",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-generic-finite-module-presentation",
+   "place": "Proof steps 1-6: polynomial presentation, generic freeness, and localization of the finite relation columns.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite exact presentation data after generic localization",
+ "statement": "Let R be a commutative integral domain, B a commutative finite type R-algebra, and M a finite B-module. There exist a nonzero a in R and natural numbers n,m with a surjective localized-linear map f : (Fin n → B_a) → M_a and a localized-linear map g : (Fin m → B_a) → (Fin n → B_a) such that g,f are exact.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 051T, algebra-lemma-generic-flatness, proof: polynomial presentation and generic freeness"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "Choose a polynomial algebra surjecting onto B and a finite set of module generators. Over the fraction field of R, Noetherianity gives finitely many relation generators; clear denominators and apply generic freeness to the resulting finitely presented quotient. After localizing at a suitable nonzero a, the relation columns give the displayed exact sequence.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-pur-fp-algebra-module-generic-freeness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 051T, algebra-lemma-generic-flatness, proof: polynomial case followed by general case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-type-algebra",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-pur-fp-algebra-module-generic-freeness"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 051T, algebra-lemma-generic-flatness, proof: polynomial case followed by general case"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite exact sequence after generic localization of a finite module over a finite type algebra",
+   "results": "No direct declaration found; the search results concern finite presentation of already finitely presented modules.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FinitePresentation → Function.Surjective LinearMap Function.Exact",
+   "results": "Only the standard finite-presentation extraction lemmas were returned; none constructs the generic localization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "generic.*finite.*presentation|localized.*finite.*module",
+   "results": "No direct Mathlib theorem; the construction is the stated Stacks argument.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.RingTheory.GenericFiniteModulePresentation",
+  "date": "2026-10-18",
+  "group": "P5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.LocalizedFinitePresentationData",
+  "file": "lean/Sheaf/RingTheory/LocalizedFinitePresentationData.lean",
+  "declaration": "Module.Finite.exists_localized_finite_presentation_data",
+  "statement": "theorem exists_localized_finite_presentation_data (R : Type u) (B : Type v) (M : Type w) [CommRing R] [IsDomain R] [CommRing B] [Algebra R B] [Algebra.FiniteType R B] [AddCommGroup M] [Module B M] [Module.Finite B M] : ∃ (a : R), a ≠ 0 ∧ ∃ (n m : ℕ) (f : (Fin n → Localization.Away (algebraMap R B a)) →ₗ[ Localization.Away (algebraMap R B a)] LocalizedModule.Away (algebraMap R B a) M) (g : (Fin m → Localization.Away (algebraMap R B a)) →ₗ[ Localization.Away (algebraMap R B a)] (Fin n → Localization.Away (algebraMap R B a))), Function.Surjective f ∧ Function.Exact g f",
+  "branch": "sheaf-dag",
+  "by": "P5",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261018T071211-L-1674385",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261018T071211-L-1674385",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
