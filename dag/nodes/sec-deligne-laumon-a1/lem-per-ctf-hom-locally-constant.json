@@ -19,9 +19,128 @@
   "def-pur-derived-internal-hom",
   "def-kun-derived-tensor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Tensoring with $F$ is an exact functor by hypothesis. Applying [lem-weil-pbc-exact-functor-complex-cohomology] to any complex $K$ gives $H^q(F\\otimes_A K)=F\\otimes_A H^q(K)$. Thus $F[0]$ is K-flat by the definition in [def-kun-derived-tensor], and $F[0]\\otimes_A^L G[0]=(F\\otimes_A G)[0]$ for every module sheaf $G$. In particular $F[0]$ is constructible of Tor amplitude $[0,0]$. Apply [lem-per-noetherian-ctf-flat-model] with $a=b=0$. Its representative has just one term $E^0$, so the representing quasi-isomorphism gives $E^0\\cong F$. Its additional assertion supplies a Galois partition $\\mathcal Q=(W_i\\to T_i)$ on whose covers $F$ is constant with finite projective $A$-module values. Transfer these isomorphisms from $E^0$ to $F$.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-kun-derived-tensor",
+    "lem-per-noetherian-ctf-flat-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Lemma 7.6.11, first sentence of proof; the stratified replacement of its trivializing cover uses the flat-model statement"
+   }
+  },
+  {
+   "text": "The assumed local constancy of $F$ provides etale trivializations $F|_U\\cong\\underline M_U$, with $M$ finitely generated, by [def-weil-pbc-locally-constant-finite-type-modules]. On each nonempty such $U$ choose a geometric point. Its image belongs to one $T_i$, and the geometric point lifts to $W_i\\to T_i$ after extending the separably closed field if necessary. The fibre of $F$ there is the finite projective module supplied by Step 1, and is also $M$. These fibre identifications follow from the pointed-neighbourhood definition [def-weil-pbc-geometric-stalks], or equivalently by composing geometric inverse images; constant coefficients and their module pullbacks are identified by [prop-weil-pbc-inverse-image-modules-exact]. Hence $M$ is finite projective. Discard empty covering members. We have proved that $F$ is etale-locally a direct summand of a finite free $A_X$-module, without asserting a global finite etale trivialization.",
+   "uses": [
+    "def-weil-pbc-locally-constant-finite-type-modules",
+    "def-weil-pbc-geometric-stalks",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Lemma 7.6.11, local finite-projective calculation, with the distinction in Exercise 7.2.7 retained"
+   }
+  },
+  {
+   "text": "Put $T(G)=\\mathcal Hom_A(F,G)$ and $D=T(A_X)$, using [def-pur-sheaf-hom]. On a trivializing $U$, choose $i:M\\to A^r$, $p:A^r\\to M$ with $pi=1$ and put $e=ip$. Precomposition identifies $T(G)|_U$ with $\\operatorname{im}(e^*:(G|_U)^r\\to(G|_U)^r)$. Indeed the two maps are $h\\mapsto hp$ and $f\\mapsto fi$, and their composite on $T(G)|_U$ is the identity. This is a natural retract of the finite-sum functor. Given an exact sequence, apply its idempotent to a local lift to see that the sequence of image summands is exact. Restriction to $U$ is exact by [prop-weil-pbc-inverse-image-modules-exact]; the cover detects vanishing of its homology sheaves by [lem-sfb-sheaf-cover-local-isomorphism]. Therefore $T$ is exact. By [lem-weil-pbc-constant-sheaf-sections-locally-constant], sections of constant additive sheaves are locally constant functions. The constant matrix $e^*$ acts pointwise; functions into its image locally lift to constant elements, so its sheaf image is the constant sheaf of its module image. On the same charts, $D=\\underline{\\operatorname{Hom}_A(M,A)}$ is a retract of $A_U^r$, hence is flat and locally constant of finite type. The canonical maps $D\\otimes_A G\\to T(G)$ are isomorphisms on these charts by [lem-pc-finite-projective-internal-hom-evaluation], and hence globally by the cover criterion. This identifies $T$ with tensoring by the flat sheaf $D$.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-sfb-sheaf-cover-local-isomorphism",
+    "lem-pc-finite-projective-internal-hom-evaluation",
+    "lem-weil-pbc-constant-sheaf-sections-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Lemma 7.6.11, exact local Hom calculation; finite-projective evaluation as in Stacks 08DQ"
+   }
+  },
+  {
+   "text": "For any scheme morphism $g:Y\\to X$, the inverse images of the charts in Step 2 cover $Y$. Exactness and additivity in [prop-weil-pbc-inverse-image-modules-exact] carry the image of the idempotent $e^*$ on $G^r$ to its image on $(g^*G)^r$. The latter is exactly $\\mathcal Hom_A(g^*F,g^*G)$, by the same retraction maps. The canonical Hom pullback comparison is therefore an isomorphism: locally it is the identity on that image. In particular $g^*D=\\mathcal Hom_A(g^*F,A_Y)$. If $g$ is the composite $W_i\\to T_i\\to X$ from Step 1, $g^*F=\\underline{M_i}$ with $M_i$ finite projective, so $g^*D=\\underline{\\operatorname{Hom}_A(M_i,A)}$. The last identification is the same constant finite-summand calculation as in Step 3. Consequently $D\\in\\mathcal W_{\\mathcal Q}(A)$, with a filtration of length one on each stratum.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-sfb-sheaf-cover-local-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Lemma 7.6.11, trivializing cover argument after restriction to the chosen strata"
+   }
+  },
+  {
+   "text": "Represent $N$ by a complex $K$ and take a K-injective resolution $K\\to I$. By [def-pur-derived-internal-hom], $R\\mathcal Hom_A(F,N)$ is represented by the termwise complex $T(I)$, since $F$ is in degree zero. Exactness of $T$ and [lem-weil-pbc-exact-functor-complex-cohomology] show that $T(K)\\to T(I)$ is a quasi-isomorphism and that, for every $q$,\n$$H^qR\\mathcal Hom_A(F,N)\\cong T(H^qN)\\cong D\\otimes_A H^qN.$$\nThis works for arbitrary stalk sizes and any representative $K$: there is no global-section exactness assertion and no claim that $F$ is a projective object of the sheaf category.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Lemma 7.6.11, first assertion about cohomological degrees; exact-functor cohomology is Stacks 010N"
+   }
+  },
+  {
+   "text": "Given $\\mathcal P$, apply [lem-per-galois-partition-exact-refinement] to $\\mathcal P$ and the single partition $\\mathcal Q$ fixed in Step 1. Obtain a common Galois refinement $\\mathcal R$ with $\\mathcal W_{\\mathcal P}(A),\\mathcal W_{\\mathcal Q}(A)\\subseteq\\mathcal W_{\\mathcal R}(A)$. For every admissible $N$, Step 4 places $D$ in $\\mathcal W_{\\mathcal R}(A)$ and the hypothesis places each $H^qN$ there. By [lem-per-galois-partition-tensor-closure], $D\\otimes_A H^qN$ also belongs to $\\mathcal W_{\\mathcal R}(A)$. Notice that only the stated inclusions of weakly constructible classes are used: we do not infer from them that $F$ becomes constant on the individual covers of $\\mathcal R$.",
+   "uses": [
+    "lem-per-galois-partition-exact-refinement",
+    "lem-per-galois-partition-tensor-closure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Lemma 7.6.11, final common-refinement argument; Definitions 7.3.2-7.3.3 and Exercise 7.3.8"
+   }
+  },
+  {
+   "text": "Take $\\mathcal P\\prime=\\mathcal R$. By the cohomology formula of Step 5, all cohomology sheaves of $R\\mathcal Hom_A(F,N)$ vanish outside $[u,v]$ and belong to $\\mathcal W_{\\mathcal R}(A)$ inside that interval. Thus it lies in $D^b_{\\mathcal P\\prime}(X,A)\\cap D^{[u,v]}$. The partition was chosen from $F$ and $\\mathcal P$ alone, independently of $u,v,N$, and refines $\\mathcal P$. If $X$ is empty all the sheaves vanish and the empty partition works. None of the steps uses a dualizing complex.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Lemma 7.6.11, bound c=0 and final sentence"
+   }
+  },
+  {
+   "text": "Suppose $N$ is constructible. Its finitely many nonzero cohomology sheaves have finite locally closed stratifications on which they are locally constant of finite type. Fix one such sheaf $G=H^qN$ and one of its strata $S$. The inverse-image calculation of Step 4 identifies $T(G)|_S$ with $\\mathcal Hom_A(F|_S,G|_S)$. Take a joint etale covering on which these two inputs are constant with values $M$ finite projective and $B$ finitely generated. The finite-summand calculation gives the constant value $\\operatorname{Hom}_A(M,B)$, a direct summand of $B^r$ and therefore finitely generated. This is precisely local constancy of finite type in [def-weil-pbc-locally-constant-finite-type-modules]. The same finite stratification [def-constructible-stratification] thus witnesses constructibility of $T(G)$. Step 5 identifies these sheaves with all the cohomology sheaves of the internal Hom, and Step 7 bounds their degrees. This proves the constructibility clause.",
+   "uses": [
+    "def-weil-pbc-locally-constant-finite-type-modules",
+    "def-constructible-stratification",
+    "lem-pc-finite-projective-internal-hom-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Lemma 7.6.11, first paragraph: preservation of constructibility"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-constructible-stratification",
+  "def-kun-derived-tensor",
+  "def-pur-derived-internal-hom",
+  "def-pur-sheaf-hom",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-pbc-locally-constant-finite-type-modules",
+  "lem-pc-finite-projective-internal-hom-evaluation",
+  "lem-per-galois-partition-exact-refinement",
+  "lem-per-galois-partition-tensor-closure",
+  "lem-per-noetherian-ctf-flat-model",
+  "lem-sfb-sheaf-cover-local-isomorphism",
+  "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, Lemma 7.6.11, p. 314, with stratified trivialization and fixed-partition tensor closure replacing the global finite-cover shortcut"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +176,45 @@
    "results": "8 hits; top: LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', CompHausLike.LocallyConstant.counit_app_val, CompHausLike.LocallyConstantModule.functor; note: ; digest: 775581d15b02cd22",
    "date": "2026-10-18",
    "verdict": "no match: generic category, scheme, or condensed-module infrastructure does not state this theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived Hom from flat locally constant constructible etale sheaf preserves Galois weak constructibility",
+   "results": "8 hits; top: CompHausLike.LocallyConstantModule.functor, LightCondSet.LocallyConstant.functor, LightCondensed.locallyConstantPresheaf, Condensed.locallyConstantPresheaf, Condensed.lanSheafProfinite, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, AlgebraicGeometry.Scheme.Hom.isConstructible_image, CondensedSet.mem_locallyConstant_essImage_of_isColimit_mapCocone; note: ; digest: 16a083b641e1e46d",
+   "date": "2026-10-18",
+   "verdict": "no match: generic sheaf Hom, condensed local systems and representation infrastructure do not state the item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.sheafHom",
+   "results": "3 hits; top: CategoryTheory.sheafHom, CategoryTheory.sheafHomSectionsEquiv, CategoryTheory.sheafHomSectionsEquiv_symm_apply_coe_apply; note: ; digest: 69704504fb9d2a14",
+   "date": "2026-10-18",
+   "verdict": "no match: generic sheaf Hom, condensed local systems and representation infrastructure do not state the item"
+  },
+  {
+   "tool": "grep",
+   "query": "Galois.*[Pp]artition|[Ww]eak.*[Cc]onstructib|[Cc]onstructib.*[Hh]om",
+   "results": "6 hits; top: Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/ChevalleyComplexity.lean, Mathlib/RingTheory/Spectrum/Prime/Chevalley.lean, Mathlib/Data/Setoid/Partition.lean; note: ; digest: fcf83befa25a5a39",
+   "date": "2026-10-18",
+   "verdict": "no match: generic sheaf Hom, condensed local systems and representation infrastructure do not state the item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived Hom from flat locally constant constructible etale sheaf preserves weak constructibility",
+   "results": "8 hits; top: CondensedSet.LocallyConstant.functorFullyFaithful, LightCondSet.LocallyConstant.functorFullyFaithful, CompHausLike.LocallyConstant.functor_obj_val, LightCondensed.lanLightCondSet, CompHausLike.LocallyConstantModule.functor_obj_val, CategoryTheory.Sheaf.ΓHomEquiv, CategoryTheory.Sheaf.IsConstant.mk, CompHausLike.LocallyConstantModule.functor; note: ; digest: b468e2f9d66e288c",
+   "date": "2026-10-18",
+   "verdict": "no match: generic sheaf Hom, condensed local systems and representation infrastructure do not state the item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "internal Hom from locally constant finite projective sheaf is exact and commutes with filtered colimits",
+   "results": "8 hits; top: LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, CompHausLike.LocallyConstantModule.functor, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition'; note: ; digest: 0c73be9f2f4ef6bf",
+   "date": "2026-10-18",
+   "verdict": "no match: generic sheaf Hom, condensed local systems and representation infrastructure do not state the item"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-ctf-hom-condition-b",
@@ -72,7 +226,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Proof, Step 1 of lem-per-artin-gabber-affine-curve: 'Relative Verdier duality, biduality ... over the same arbitrary field $k$', through lem-per-qbar-arbitrary-field-duality, lem-per-finite-residue-dualizing and lem-per-potential-local-duality; the last node's Step 2 extends finite-field coefficients.; coefficient comparison via ILO XVII 7.6.1, proof p. 314. Subargument: ILO XVII 7.6.11 locally constant flat case.",
+   "place": "Proof, Step 3 of lem-per-artin-gabber-affine-curve: 'By the duality symmetry of the middle perverse t-structure' and 'the Verdier exchange'; the inherited coefficient-duality branch via lem-per-qbar-arbitrary-field-duality, lem-per-finite-residue-dualizing, lem-per-potential-local-duality, lem-per-coefficient-change-dualizing, lem-per-ctf-hom-coefficient-comparison and lem-per-ctf-hom-condition-b. Subargument: ILO XVII Lemma 7.6.11, the locally constant flat case of condition (B).",
    "via": [
     "lem-per-ctf-hom-condition-b",
     "lem-per-ctf-hom-coefficient-comparison",
@@ -84,5 +238,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-ctf-hom-locally-constant",
+  "worker": "stage1",
+  "summary": "Read ILO XVII 7.6.11 and 7.2-7.3, separated local finite-projective Hom exactness from the partition argument, reused the existing Noetherian ctf flat model and exact common refinement, and introduced only fixed-partition ordinary tensor closure. Statement unchanged; no global finite etale trivialization assumed and no dualizing hypothesis used.",
+  "blueprint": "Supports the Step 3 duality/coefficient-change branch of lem-per-artin-gabber-affine-curve, via lem-per-qbar-arbitrary-field-duality, lem-per-finite-residue-dualizing, lem-per-potential-local-duality, lem-per-coefficient-change-dualizing, lem-per-ctf-hom-coefficient-comparison and lem-per-ctf-hom-condition-b. Realizes ILO XVII 7.6.11 inside that branch: local Hom and constructibility (steps 1-5,8), common-refinement bound (steps 6-7).",
+  "tool_uses": [
+   {
+    "node": "lem-pc-finite-projective-internal-hom-evaluation",
+    "why": "Evaluation identifies sheaf Hom from a finite-free retract with tensor by its dual on local charts."
+   },
+   {
+    "node": "lem-sfb-sheaf-cover-local-isomorphism",
+    "why": "Etale covers detect isomorphisms and zero homology sheaves; a general locality tool."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Exact functors compute cohomology termwise; generic homological algebra, with no replacement of the unit route."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Constant-coefficient inverse image is exact and identifies constant rings; used for all chart and stratum restrictions."
+   },
+   {
+    "node": "lem-weil-pbc-constant-sheaf-sections-locally-constant",
+    "why": "Identifies constant additive sheaf sections with locally constant functions, so a constant idempotent matrix has the constant image sheaf; a general local calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-finite-projective-internal-hom-evaluation",
+  "lem-sfb-sheaf-cover-local-isomorphism",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-constant-sheaf-sections-locally-constant"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-97a873c97",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-97a873c97 (reviewer sub-agent of L); spot-checked: I read the item, all eight steps, the new node lem-per-galois-partition-tensor-closure and every cited statement in full. Sources checked: ILO XVII 7.2.1-7.2.7, 7.3.1-7.3.8, 7.6.4-7.6.11 (pp. 301-314) and 11.1.1/11.2.1. The item statement is identical to the version the Q57 reviewer landed. The coefficient category is ordinary etale A_X-modules with A a Noetherian F_l-algebra, as in ILO. The W_P class equals ILO FCons_P: sheaves constant on V_i are local systems by 7.2.4, extensions of torsion local systems are local systems by 7.2.5, and the class is closed under filtered colimits. Step 1: F[0] is K-flat with Tor amplitude [0,0], and the flat model with a=b=0 gives E^0 = F and a Galois partition Q with finite projective values. Step 2: the geometric point factors through its reduced stratum and lifts to the split finite etale fibre; comparing constant pullbacks gives that M is projective. Step 3: the Hom sheaf is the image of an idempotent, hence exact; cover detection applies, the evaluation node applies on each localized chart, and D is flat. Step 4: g^*D is constant on W_i, so D is in W_Q. Step 5: T(K) -> T(I) is a quasi-isomorphism and H^q = D tensor H^qN. Steps 6-7: the common refinement from exact-refinement plus the new node give the [u,v] bound, independent of N. Step 8: constructibility from Hom_A(M,B), a summand of B^r. New node: true by the pi_1 ind-unipotent description (11.2.1(i),(vii),(x),(xi)), using the tensor filtration and filtered colimits, with no flatness needed. It is strictly smaller than the item, not a restated clause, and genuinely needed. No duplicate found among the Galois-partition nodes (exact-refinement, finite-monodromy-filtration, flat-model). It meets B1-B9 and has all three search kinds. Correct blueprint from/via; same_as []. The item's from.place change to Step 3 is confirmed in the main-20261015 proof text. No SGA citation. The tool_uses (evaluation, cover iso, exact-functor cohomology, inverse image, constant sections) are accepted as generic tools. Minor: Step 2 relies on composing inverse images to compare stalks; I accept this as elementary. No fixes."
  }
 }
