@@ -6,20 +6,14 @@ Authors: SHEAF group NK
 module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-public import Sheaf.AlgebraicGeometry.DerivedCategories
+public import Mathlib.CategoryTheory.Abelian.RightDerived
+public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
-public import Sheaf.CategoryTheory.FiniteCohomologicalDimensionAcyclicComplex
-import Sheaf.AlgebraicGeometry.EtaleModuleSheavesGrothendieckAbelian
-import Sheaf.AlgebraicGeometry.EtaleConstantModuleDirectImageLeftExact
-import Sheaf.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
+import WeilConjectures.CategoryTheory.DerivedCategory.FiniteCohomologicalDimension
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
+import WeilConjectures.Mathlib.CategoryTheory.Preadditive.LiftToFinset
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FilteredColimit
-import Mathlib.CategoryTheory.Abelian.RightDerived
-import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
-import Sheaf.CategoryTheory.GrothendieckDerivedCoproducts
-import Sheaf.CategoryTheory.GrothendieckDerivedCoproductsColimit
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import all Sheaf.CategoryTheory.CompactTestsRightAdjointCoproducts
 
 /-!
 # Finite cohomological dimension and coproducts of derived direct images
@@ -48,35 +42,20 @@ Stacks Project, Tag 0F11, proof of (1), and Tag 07K7
 (blueprint: lem-exc-direct-image-coproducts).
 
 Proof:
-1. The module-sheaf categories are Grothendieck abelian
-   (lem-weil-pbc-module-sheaves-grothendieck-abelian), hence have enough injectives
-   (lem-sp-grothendieck-enough-injectives). Direct image is additive and left exact
-   (lem-weil-pbc-module-direct-image-left-exact). A finite ring has positive characteristic,
-   taking characteristic one for the zero ring, so its module sheaves are torsion.
-   Express a sum as the filtered colimit of finite subsums, including the empty subsum.
-   Exact faithful coefficient forgetting preserves these colimits
-   (lem-weil-pbc-module-sheaves-colimits-forgetful). The natural invertible derived
-   coefficient comparison (lem-weil-pbc-module-abelian-derived-direct-image-comparison)
-   identifies higher images after forgetting. Its naturality identifies the comparison
-   on every finite-subsum leg. Apply lemma-weil-pbc-direct-image-filtered-colimit.
-   Finite sums of injective resolutions compute finite sums of higher images, since
-   finite sums of injectives are injective. Thus every higher image commutes with sums.
-   Exact faithful forgetting reflects invertibility. The degree-zero identification
-   (lem-sp-derived-well-defined) gives the assertion for underived direct image as well.
-2. Choose degreewise injective K-injective representatives I_s
-   (lem-pur-kinjective-degreewise-existence). Their termwise sum L represents the derived
-   coproduct (lem-kun-grothendieck-derived-coproducts), without a common lower bound.
-3. Injective terms are acyclic (lem-weil-pbc-derived-functor-injective-vanishing).
-   Step 1 makes the terms of L acyclic too. Apply
-   lem-kun-finite-cd-acyclic-complex with the bound c: its natural derived comparison is
-   invertible at I_s and L, and identifies derived coprojections with termwise images.
-   Uniqueness of the total right derived functor identifies this with rightDerivedLowerStar.
-4. Step 1 in degree zero gives an isomorphism from the termwise sum of u_* I_s to u_* L.
-   Its restrictions are the images of the coprojections, so it commutes with differentials.
-   Localize this complex isomorphism. The target version of
-   lem-kun-grothendieck-derived-coproducts identifies its source as the derived coproduct.
-   Naturality in Step 3 makes this exactly the canonical coproduct comparison, hence an
-   isomorphism. The empty family uses zero complexes and the same zero-to-zero comparison. -/
+1. For indices in the coefficient universe, the qcqs higher-direct-image filtered-colimit
+   theorem applies directly to module coefficients. The natural single-sheaf comparison
+   identifies its functor with the classical right derived functor in every degree.
+2. Each classical right derived functor is additive. Writing a coproduct as the filtered
+   colimit of its finite subsums therefore proves that it preserves coproducts.
+3. Apply the source library's finite-dimensional unbounded derived coproduct theorem to
+   the bound c and Step 2. Its K-injective and acyclic-complex argument identifies the
+   canonical coproduct cocone, and includes empty and unbounded families.
+4. For an existing coproduct in any indexing universe, its nonzero summands form a small
+   type: their split idempotents inject into the endomorphisms of the coproduct. Restrict
+   to this support, shrink it to the coefficient universe, and apply Step 3. The total
+   derived functor is additive, hence preserves zero objects, so restoring zero summands
+   preserves the same universal property. This is the proved source helper
+   `CategoryTheory.preservesCoproducts_of_small`, imported with `import all`. -/
 theorem rightDerivedLowerStar_preservesCoproducts_of_finite_dimension
     (A : Type (u + 1)) [CommRing A] [Finite A]
     {U T : Scheme.{u}} (f : U ⟶ T) [QuasiCompact f] [QuasiSeparated f]
@@ -85,6 +64,19 @@ theorem rightDerivedLowerStar_preservesCoproducts_of_finite_dimension
       c < p → IsZero (((lowerStar (ModuleCat.{u + 1} A) f).rightDerived p).obj M)) :
     ∀ I : Type w, PreservesColimitsOfShape (Discrete I)
       (rightDerivedLowerStar (ModuleCat.{u + 1} A) f) := by
-  sorry
+  have hsmall (I : Type (u + 1)) : PreservesColimitsOfShape (Discrete I)
+      (lowerStar (ModuleCat.{u + 1} A) f).rightDerivedFunctor := by
+    apply Functor.preservesColimitsOfShape_rightDerivedFunctor_of_rightDerived
+      (lowerStar (ModuleCat.{u + 1} A) f) I c hc
+    intro n
+    have := preservesFilteredColimitsOfSize_higherDirectImage A f (n : ℤ)
+    have : PreservesColimitsOfShape (Finset (Discrete I))
+        ((lowerStar (ModuleCat.{u + 1} A) f).rightDerived n) :=
+      preservesColimitsOfShape_of_natIso
+        (Functor.singleFunctorCompRightDerivedFunctorPlusCompHomologyFunctorIso
+          (lowerStar (ModuleCat.{u + 1} A) f) n)
+    exact preservesColimitsOfShape_discrete_of_preservesColimitsOfShape_finset I _
+  exact CategoryTheory.preservesCoproducts_of_small.{u + 1, w}
+    (lowerStar (ModuleCat.{u + 1} A) f).rightDerivedFunctor hsmall
 
 end AlgebraicGeometry.Etale

@@ -1,0 +1,121 @@
+{
+ "id": "lem-exc-finite-cd-derived-coproduct-criterion",
+ "kind": "statement",
+ "title": "Finite-dimensional unbounded derived coproduct criterion",
+ "statement": "Let $C,D$ be abelian categories [def-sp-abelian] with derived categories [def-weil-abstract-derived-category]. Suppose $C$ is Grothendieck abelian [def-sp-grothendieck-abelian] and has injective resolutions, and $D$ has K-injective resolutions. Let $F:C\\to D$ be additive and left exact [def-sp-left-exact-additive]. Fix a type $J$ for which both categories have $J$-indexed coproducts. Suppose that $R^qF(X)=0$ for all $X$ and $q>d$, for one natural number $d$, and that every classical right derived functor $R^nF$ preserves $J$-indexed coproducts. Then the unbounded total right derived functor $RF$ preserves $J$-indexed coproducts, including the empty family.",
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/FiniteCohomologicalDimension.lean",
+  "place": "preservesColimitsOfShape_rightDerivedFunctor_of_rightDerived, lines 309-322; Stacks 0F11, proof of (1)."
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-sp-grothendieck-abelian",
+  "def-sp-left-exact-additive"
+ ],
+ "proof": [
+  {
+   "text": "The natural degree-zero identification R^0F ≅ F supplies preservation by F itself.",
+   "uses": [
+    "lem-sp-derived-well-defined"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For an acyclic family X_j, apply preservation by R^(q+1)F. Its coproduct has zero identity because every restriction to a coprojection is zero. Thus coproducts of F-acyclic objects remain acyclic.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Choose K-injective representatives with injective components. Their coproduct represents the derived coproduct and has acyclic terms. The finite-dimensional acyclic-complex comparison computes RF on the representatives and their sum. F preserves the termwise sum; localizing and using naturality identifies its coprojections with the RF images of the original coprojections. This is exactly the canonical coproduct universal property.",
+   "uses": [
+    "lem-pur-kinjective-degreewise-existence",
+    "lem-kun-finite-cd-acyclic-complex",
+    "lem-kun-grothendieck-derived-coproducts"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-derived-well-defined",
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-kun-finite-cd-acyclic-complex",
+  "lem-kun-grothendieck-derived-coproducts"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/FiniteCohomologicalDimension.lean",
+  "place": "preservesColimitsOfShape_rightDerivedFunctor_of_rightDerived, lines 309-322; Stacks 0F11, proof of (1)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A right derived functor of finite cohomological dimension preserves coproducts if its higher derived functors do",
+   "results": "8 hits: CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib match; reuse the existing proved library declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "preservesCoproducts_of_small|preservesColimitsOfShape_rightDerivedFunctor_of_rightDerived|coproduct_small_support",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib match; reuse the existing proved library declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive left exact functor of finite cohomological dimension whose right derived functors preserve coproducts has an unbounded right derived functor preserving coproducts",
+   "results": "8 hits: CategoryTheory.leftExactFunctor_le_additiveFunctor, CategoryTheory.Functor.leftDerived, CategoryTheory.exactFunctor, CategoryTheory.exactFunctor_le_additiveFunctor, CategoryTheory.leftExactFunctor, CategoryTheory.Functor.preservesFiniteCoproductsOfAdditive, CategoryTheory.rightExactFunctor_le_additiveFunctor, CategoryTheory.ProjectiveResolution.isoLeftDerivedObj",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib match; reuse the existing proved library declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteCohomologicalDimensionDirectImageCoproducts",
+  "date": "2026-10-18",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-direct-image-coproducts",
+   "place": "Proof: the unbounded derived coproduct assertion, using the existing finite-dimensional acyclic-complex argument and retaining every indexing universe.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.FiniteCohomologicalDimension",
+  "declaration": "CategoryTheory.Functor.preservesColimitsOfShape_rightDerivedFunctor_of_rightDerived",
+  "statement": "theorem preservesColimitsOfShape_rightDerivedFunctor_of_rightDerived [IsGrothendieckAbelian.{w} C]\n    [HasInjectiveResolutions C] [Abelian.HasKInjectiveResolutions D] (J : Type*)\n    [HasColimitsOfShape (Discrete J) C] [HasColimitsOfShape (Discrete J) D] (d : ℕ)\n    (hF : ∀ (X : C) (q : ℕ), d < q → IsZero ((F.rightDerived q).obj X))\n    (hJ : ∀ n, PreservesColimitsOfShape (Discrete J) (F.rightDerived n)) :\n    PreservesColimitsOfShape (Discrete J) F.rightDerivedFunctor",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261018T062819-L-659082",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261018T062819-L-659082",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

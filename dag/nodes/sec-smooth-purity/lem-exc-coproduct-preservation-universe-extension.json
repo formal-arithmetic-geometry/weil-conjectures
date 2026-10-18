@@ -1,0 +1,107 @@
+{
+ "id": "lem-exc-coproduct-preservation-universe-extension",
+ "kind": "statement",
+ "title": "Extend coproduct preservation through small nonzero support",
+ "statement": "Let $D,C$ be preadditive categories [def-weil-preadditive-category], and suppose that every morphism set of $D$ is $s$-small, meaning equivalent to a type in universe $s$. Let $F:D\\to C$ preserve zero morphisms. If $F$ preserves coproducts indexed by every type in universe $s$, then for every universe $v$ and every type $I$ in universe $v$, $F$ preserves every existing $I$-indexed coproduct. No existence of all such larger coproducts is asserted.",
+ "source": {
+  "document": "lean/Sheaf/CategoryTheory/CompactTestsRightAdjointCoproducts.lean",
+  "place": "Proved private helpers coproduct_small_support and preservesCoproducts_of_small, lines 31-105; small-support argument in the final paragraph of compactTests_rightAdjoint_preservesCoproducts."
+ },
+ "stmt_deps": [
+  "def-weil-preadditive-category"
+ ],
+ "proof": [
+  {
+   "text": "For a coproduct B of K_i construct p_i:B→K_i by the universal property, with identity on K_i and zero on all other summands. The endomorphisms p_i followed by the ith inclusion are distinct for nonzero summands: equality for distinct i,j, tested by inclusion i and projection i, would make id(K_i)=0. The nonzero indices inject into End(B), so are s-small.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Restrict the cofan to nonzero indices. It is still colimiting: extend any family of maps by zero on zero summands and use the original universal property; maps from a zero object are unique. Shrink the support to universe s and reindex by its discrete equivalence. The hypothesis now preserves this coproduct.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Since F preserves zero morphisms it sends zero objects to zero objects. Restore the omitted zero summands in the image cofan. Its colimit property follows from uniqueness of maps out of each zero summand and the preserved restricted cofan. This proves preservation for the original existing coproduct, also for empty support.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/Sheaf/CategoryTheory/CompactTestsRightAdjointCoproducts.lean",
+  "place": "Proved private helpers coproduct_small_support and preservesCoproducts_of_small, lines 31-105; small-support argument in the final paragraph of compactTests_rightAdjoint_preservesCoproducts."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "preservesCoproducts_of_small|preservesColimitsOfShape_rightDerivedFunctor_of_rightDerived|coproduct_small_support",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib match; reuse the existing proved library declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functor preserving zero morphisms between locally small preadditive categories preserves coproducts of any universe if it preserves coproducts in the hom universe",
+   "results": "8 hits: CategoryTheory.Limits.preservesCoproductsOfShape_of_preservesBiproductsOfShape, CategoryTheory.Limits.preservesBiproduct_of_preservesCoproduct, CategoryTheory.Functor.preservesFiniteBiproductsOfAdditive, CategoryTheory.Functor.mapBiprod, CategoryTheory.Limits.preservesCoproduct_of_preservesBiproduct, CategoryTheory.Functor.preservesFiniteCoproductsOfAdditive, CategoryTheory.Functor.PreservesZeroMorphisms.mk, CategoryTheory.Functor.IsHomological.toPreservesZeroMorphisms",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib match; reuse the existing proved library declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor preserving zero morphisms between locally small preadditive categories preserves coproducts of any universe if it preserves coproducts in the hom universe",
+   "results": "8 hits: CategoryTheory.Functor.preservesCoproduct_of_preservesCokernels, CategoryTheory.Limits.preservesCoproduct_of_preservesBiproduct, CategoryTheory.Limits.preservesBiproductsOfShape_of_preservesCoproductsOfShape, CategoryTheory.Limits.preservesCoproductsOfShape_of_preservesBiproductsOfShape, CategoryTheory.Functor.preservesBinaryCoproducts_of_preservesCokernels, CategoryTheory.Limits.preservesBiproduct_of_preservesCoproduct, CategoryTheory.Functor.preservesFiniteCoproductsOfAdditive, CategoryTheory.Limits.preservesBinaryCoproduct_of_preservesBinaryBiproduct",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib match; reuse the existing proved library declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.FiniteCohomologicalDimensionDirectImageCoproducts",
+  "date": "2026-10-18",
+  "group": "K1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-exc-direct-image-coproducts",
+   "place": "Proof: the unbounded derived coproduct assertion, using the existing finite-dimensional acyclic-complex argument and retaining every indexing universe.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": true,
+  "module": "Sheaf.CategoryTheory.CompactTestsRightAdjointCoproducts",
+  "declaration": "CategoryTheory.preservesCoproducts_of_small",
+  "statement": "private theorem preservesCoproducts_of_small\n    {D : Type uD} [Category.{wD} D] [Preadditive D] [LocallySmall.{u} D]\n    {C : Type uC} [Category.{wC} C] [Preadditive C]\n    (c : D ⥤ C) [c.PreservesZeroMorphisms]\n    (hsmall : ∀ J : Type u, PreservesColimitsOfShape (Discrete J) c)\n    (I : Type v) : PreservesColimitsOfShape (Discrete I) c",
+  "branch": "sheaf-dag",
+  "by": "K1",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261018T062819-L-659082",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261018T062819-L-659082",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
