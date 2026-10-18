@@ -1,0 +1,125 @@
+{
+ "id": "lem-weil-pbc-ringed-topos-ring-square",
+ "kind": "definition",
+ "title": "Lifting the bottom structural ring map of a geometric square",
+ "statement": "For small sites J,K,J',K', ring sheaves A,B,A',B', geometric ring data f:A→B,g:A→A',e:B→B', and α:e.inverse⋙f.inverse≅H⋙g.inverse, assume g.inverse is full and faithful and g.ringMap invertible. Define r as the unique preimage under g.inverse of α⁻¹ at |B'| followed by f.inverse(e.ringMap), f.ringMap and g.ringMap⁻¹. For any adjunction H⊣R with H left exact, these are geometric ring data h:A'→B'. The square of structural maps commutes, using α.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CR, proof: structural map carried through the fixed geometric square."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-topos-ring-data"
+ ],
+ "proof": [
+  {
+   "text": "Take the fully faithful preimage of the displayed map as r. The map-preimage identity and naturality of α show, for every generalized element x:T→|B'|, that g.inverse(H(x);r);g.ringMap = α⁻¹_T;f.inverse(e.inverse(x);e.ringMap);f.ringMap.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the top and right ring identities to the right side, evaluated on the section obtained by α⁻¹_T. The reflection lemmas for g yield zero, one, addition and multiplication for H followed by r. Bundle H,R and the supplied adjunction with these laws.",
+   "uses": [
+    "def-weil-pbc-ringed-topos-ring-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand r, use map-preimage, then cancel α with its inverse and the invertible structural map with its inverse. This is the final square equation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-topos-ring-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "F3 worker",
+  "document": "lean/Sheaf/CategoryTheory/RingedToposRingSquare.lean",
+  "place": "Explicit Lean construction and operation calculations, expanding the transport details omitted in Tag 03CR."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A product preserving adjunction preserves ring operations and induces pushforward on sheaves of modules",
+   "results": "SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforward, SheafOfModules.PullbackConstruction.adjunction: these require a continuous functor of sites, rather than an arbitrary adjunction of sheaf categories.",
+   "date": "2026-10-18",
+   "verdict": "The site-presented APIs do not give this arbitrary geometric-morphism construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometric morphism of sheaf topoi and a ring object morphism induces a functor on sheaves of modules",
+   "results": "AlgebraicGeometry.Scheme.Modules.pushforward; SheafOfModules.pushforwardSections; SheafOfModules.pushforwardNatTrans; SheafOfModules.pushforward.",
+   "date": "2026-10-18",
+   "verdict": "Only scheme and continuous-site specializations were returned. Used the existing library finite-product and sectionwise constructions instead."
+  },
+  {
+   "tool": "grep",
+   "query": "SheafOfModules.*(map|transport)|RingedTopos; counit; prodComparison; lift_map",
+   "results": "Mathlib module pushforward is in Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous. CategoryTheory/Monoidal/Cartesian/Basic has lift_map, prodComparisonIso, terminal comparisons and their projection equations. No RingedToposMorphism or arbitrary-geometric direct image interface.",
+   "date": "2026-10-18",
+   "verdict": "Use these projection identities to prove the new compatibility lemmas; no exact interface already exists."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedToposSquareTransport",
+  "group": "F3",
+  "date": "2026-10-18"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form, strict-tower pullback: transporting ring and module structures across the finite-limit replacement sites.",
+   "via": [
+    "lem-weil-pbc-ringed-topos-square-transport",
+    "lem-weil-pbc-ringed-topos-site-presentation",
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-weil-pbc-diagram-kflat-replacements"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedToposRingSquare",
+  "file": "lean/Sheaf/CategoryTheory/RingedToposRingSquare.lean",
+  "declaration": "CategoryTheory.RingedToposMorphism.RingData.square",
+  "statement": "def square (R : Sheaf J' (Type u) ⥤ Sheaf K' (Type u)) (adjH : H ⊣ R) (hH : PreservesFiniteLimits H) : RingedToposMorphism.RingData A' B'",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-18",
+  "declarations": [
+   "CategoryTheory.RingedToposMorphism.RingData.squareRingMap",
+   "CategoryTheory.RingedToposMorphism.RingData.squareRingMap_naturality",
+   "CategoryTheory.RingedToposMorphism.RingData.square",
+   "CategoryTheory.RingedToposMorphism.RingData.square_comm"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261018T062747-L-648550",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261018T062747-L-648550",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

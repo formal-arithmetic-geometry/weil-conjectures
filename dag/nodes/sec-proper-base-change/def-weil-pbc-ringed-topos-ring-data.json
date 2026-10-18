@@ -1,0 +1,130 @@
+{
+ "id": "def-weil-pbc-ringed-topos-ring-data",
+ "kind": "definition",
+ "title": "Geometric ring data and its compatible module lift",
+ "statement": "For small sites (C,J),(D,K) and ring sheaves A,B, RingData A B consists of a finite-limit-preserving inverse image L, a right adjoint V with its adjunction, and a structural map L(|B|)→|A| satisfying zero, one, addition and multiplication identities on all generalized elements, exactly as in RingedToposMorphism. Modules d consists of its additive functor on module sheaves, the underlying-sheaf comparison to V, and the same adjunction scalar-action identity. withModules assembles these into the original unchanged RingedToposMorphism. A faithful L and monic structural map reflect all four ring identities.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Ringed topoi definition and induced direct images on module sheaves; the RingedToposMorphism interface."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Retain the geometric and ring fields of the original interface verbatim. Keep its module fields as a second record over these data; assembling the records reuses every field unchanged.",
+   "uses": [
+    "def-weil-pbc-ringed-topos-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For reflection, construct the constant zero and one maps and the pointwise sum and product of two generalized elements. Naturality follows from restriction homomorphisms. If two elements agree after L followed by the structural map, cancel that map using monicity and then use faithfulness of L. Apply this to the given element and the canonical zero, one, sum or product, using the forward ring laws.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-topos-morphism"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "F3 worker",
+  "document": "lean/Sheaf/CategoryTheory/RingedToposRingData.lean",
+  "place": "Explicit Lean construction and operation calculations, expanding the transport details omitted in Tag 03CR."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A product preserving adjunction preserves ring operations and induces pushforward on sheaves of modules",
+   "results": "SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforward, SheafOfModules.PullbackConstruction.adjunction: these require a continuous functor of sites, rather than an arbitrary adjunction of sheaf categories.",
+   "date": "2026-10-18",
+   "verdict": "The site-presented APIs do not give this arbitrary geometric-morphism construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometric morphism of sheaf topoi and a ring object morphism induces a functor on sheaves of modules",
+   "results": "AlgebraicGeometry.Scheme.Modules.pushforward; SheafOfModules.pushforwardSections; SheafOfModules.pushforwardNatTrans; SheafOfModules.pushforward.",
+   "date": "2026-10-18",
+   "verdict": "Only scheme and continuous-site specializations were returned. Used the existing library finite-product and sectionwise constructions instead."
+  },
+  {
+   "tool": "grep",
+   "query": "SheafOfModules.*(map|transport)|RingedTopos; counit; prodComparison; lift_map",
+   "results": "Mathlib module pushforward is in Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous. CategoryTheory/Monoidal/Cartesian/Basic has lift_map, prodComparisonIso, terminal comparisons and their projection equations. No RingedToposMorphism or arbitrary-geometric direct image interface.",
+   "date": "2026-10-18",
+   "verdict": "Use these projection identities to prove the new compatibility lemmas; no exact interface already exists."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedToposSquareTransport",
+  "group": "F3",
+  "date": "2026-10-18"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form, strict-tower pullback: transporting ring and module structures across the finite-limit replacement sites.",
+   "via": [
+    "lem-weil-pbc-ringed-topos-square-transport",
+    "lem-weil-pbc-ringed-topos-site-presentation",
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-weil-pbc-diagram-kflat-replacements"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedToposRingData",
+  "file": "lean/Sheaf/CategoryTheory/RingedToposRingData.lean",
+  "declaration": "CategoryTheory.RingedToposMorphism.RingData",
+  "statement": "structure RingedToposMorphism.RingData {C D : Type u} [SmallCategory C] [SmallCategory D] {J : GrothendieckTopology C} {K : GrothendieckTopology D} (A : Sheaf J RingCat.{u}) (B : Sheaf K RingCat.{u})",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-18",
+  "declarations": [
+   "CategoryTheory.RingedToposMorphism.RingData",
+   "CategoryTheory.RingedToposMorphism.ringData",
+   "CategoryTheory.RingedToposMorphism.RingData.zero",
+   "CategoryTheory.RingedToposMorphism.RingData.one",
+   "CategoryTheory.RingedToposMorphism.RingData.add",
+   "CategoryTheory.RingedToposMorphism.RingData.mul",
+   "CategoryTheory.RingedToposMorphism.RingData.reflect_eq",
+   "CategoryTheory.RingedToposMorphism.RingData.reflect_zero",
+   "CategoryTheory.RingedToposMorphism.RingData.reflect_one",
+   "CategoryTheory.RingedToposMorphism.RingData.reflect_add",
+   "CategoryTheory.RingedToposMorphism.RingData.reflect_mul",
+   "CategoryTheory.RingedToposMorphism.RingData.Modules",
+   "CategoryTheory.RingedToposMorphism.RingData.withModules"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261018T062747-L-648550",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261018T062747-L-648550",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

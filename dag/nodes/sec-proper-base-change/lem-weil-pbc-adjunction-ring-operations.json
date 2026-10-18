@@ -1,0 +1,110 @@
+{
+ "id": "lem-weil-pbc-adjunction-ring-operations",
+ "kind": "statement",
+ "title": "The counit respects transported constants and product operations",
+ "statement": "Let L:D→C be left adjoint to V:C→D between Cartesian monoidal categories, with V preserving finite products. For o:1_C→A, the composite L(!;terminalComparison(V)⁻¹;V(o));ε_A is !;o. For o:A×B→X and x:T→V(A),y:T→V(B), the composite L(⟨x,y⟩;productComparison(V)⁻¹;V(o));ε_X equals ⟨L(x);ε_A,L(y);ε_B⟩;o. The binary-operation specialization has A=B=X.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Sites, Section 00YR, finite-product transport; categorical naturality calculation for the ring and module operations in Modules on Sites, Tag 03CR."
+ },
+ "stmt_deps": [
+  "def-weil-category-product"
+ ],
+ "proof": [
+  {
+   "text": "Naturality of the counit at o moves o outside the final counit. For a constant, both remaining maps have terminal codomain, hence are equal. For a product operation, compose the remaining maps with each projection. Naturality of the counit at the projection and the inverse comparison projection equations reduce both to L(x);ε_A or L(y);ε_B. Product extensionality gives equality.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "F3 worker",
+  "document": "lean/Sheaf/CategoryTheory/AdjunctionRingOperations.lean",
+  "place": "Explicit Lean construction and operation calculations, expanding the transport details omitted in Tag 03CR."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A product preserving adjunction preserves ring operations and induces pushforward on sheaves of modules",
+   "results": "SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforward, SheafOfModules.PullbackConstruction.adjunction: these require a continuous functor of sites, rather than an arbitrary adjunction of sheaf categories.",
+   "date": "2026-10-18",
+   "verdict": "The site-presented APIs do not give this arbitrary geometric-morphism construction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A geometric morphism of sheaf topoi and a ring object morphism induces a functor on sheaves of modules",
+   "results": "AlgebraicGeometry.Scheme.Modules.pushforward; SheafOfModules.pushforwardSections; SheafOfModules.pushforwardNatTrans; SheafOfModules.pushforward.",
+   "date": "2026-10-18",
+   "verdict": "Only scheme and continuous-site specializations were returned. Used the existing library finite-product and sectionwise constructions instead."
+  },
+  {
+   "tool": "grep",
+   "query": "SheafOfModules.*(map|transport)|RingedTopos; counit; prodComparison; lift_map",
+   "results": "Mathlib module pushforward is in Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous. CategoryTheory/Monoidal/Cartesian/Basic has lift_map, prodComparisonIso, terminal comparisons and their projection equations. No RingedToposMorphism or arbitrary-geometric direct image interface.",
+   "date": "2026-10-18",
+   "verdict": "Use these projection identities to prove the new compatibility lemmas; no exact interface already exists."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedToposSquareTransport",
+  "group": "F3",
+  "date": "2026-10-18"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form, strict-tower pullback: transporting ring and module structures across the finite-limit replacement sites.",
+   "via": [
+    "lem-weil-pbc-ringed-topos-square-transport",
+    "lem-weil-pbc-ringed-topos-site-presentation",
+    "lem-weil-pbc-ringed-topos-flat-module-pullback",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-weil-pbc-diagram-kflat-replacements"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.AdjunctionRingOperations",
+  "file": "lean/Sheaf/CategoryTheory/AdjunctionRingOperations.lean",
+  "declaration": "CategoryTheory.Adjunction.counit_pair",
+  "statement": "theorem counit_pair {A B X : C} (o : A ⊗ B ⟶ X) {T : D} (x : T ⟶ V.obj A) (y : T ⟶ V.obj B) : L.map (lift x y ≫ (prodComparisonIso V A B).inv ≫ V.map o) ≫ adj.counit.app X = lift (L.map x ≫ adj.counit.app A) (L.map y ≫ adj.counit.app B) ≫ o",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-18",
+  "declarations": [
+   "CategoryTheory.Adjunction.counit_constant",
+   "CategoryTheory.Adjunction.counit_pair",
+   "CategoryTheory.Adjunction.counit_binary"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261018T062747-L-648550",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261018T062747-L-648550",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

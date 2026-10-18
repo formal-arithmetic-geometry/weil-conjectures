@@ -14,36 +14,39 @@
  ],
  "proof": [
   {
-   "text": "Transport A and B as internal commutative rings along the finite-product-preserving equivalences G and E, using the finite-product ring-functor theorem and the internal-ring/sheaf correspondence. The canonical underlying isomorphisms a,b give structural maps r_g,r_e by the equivalence counits. Naturality at the operations makes them ring maps; equivalence counits make them isomorphisms.",
+   "text": "Apply the single-ring equivalence transport separately to A along G and B along E. This constructs the two vertical ring data with their specified direct images, canonical counit maps and underlying comparisons.",
    "uses": [
-    "lem-weil-pbc-finite-product-ring-functor",
-    "lem-weil-pbc-sheaf-algebraic-structures-objects"
+    "lem-weil-pbc-ringed-topos-equivalence-ring-transport"
    ],
    "elementary": false
   },
   {
-   "text": "Put t=f.inverse.map r_e followed by f.ringMap. Full faithfulness of G.inverse lifts alpha.inv at B-prime followed by t and r_g inverse uniquely to r_h:H(B-prime)→A-prime. Naturality of alpha and the ring-operation equations imply preservation of zero, one, addition and multiplication after G.inverse; faithfulness reflects these equations. The defining equation, composed with alpha.hom and r_g, is the required final equality. Use the given H,R,adjH for h, and the equivalence adjunctions for g,e.",
-   "uses": [],
-   "elementary": true
+   "text": "Use full faithfulness of G.inverse and the invertible left structural map to construct the bottom ring data from the fixed natural isomorphism. Its direct image is R and its structural-map square commutes.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-ring-square"
+   ],
+   "elementary": false
   },
   {
-   "text": "For each adjunction L ⊣ V and structural map r:L(B)→A, let s:B→V(A) be its adjunct. On the set sheaf V(M), define the additive operations by V and inverse finite-product comparisons. Define scalar multiplication as B×V(M)→V(A)×V(M)→V(A×M)→V(M), using s in the first arrow. Operation naturality of unit and counit makes s a ring map. The module identities follow from those on M under product comparison; restriction maps are linear and the underlying set sheaf proves sheafhood. Apply V to module morphisms; naturality proves linearity, composition and additivity. The two projection equations for the product comparison and the Hom adjunction show that the adjunct of s(a) acting on x is r(L(a)) acting on the adjunct of x. The addition equation then gives module_linear for z=a*x+y. This is the usual induced module construction, described explicitly in the Lean docstring, rather than a new existence choice.",
+   "text": "Apply the compatible induced-module construction to the two vertical and bottom ring data. Assemble each pair of records into RingedToposMorphism; all geometric and ring fields remain definitionally the ones already constructed. Supply the transported comparisons, fixed natural isomorphism and square equation.",
    "uses": [
-    "def-weil-sheaf-of-modules-category"
+    "lem-weil-pbc-ringed-topos-induced-modules",
+    "def-weil-pbc-ringed-topos-ring-data"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-finite-product-ring-functor",
-  "lem-weil-pbc-sheaf-algebraic-structures-objects"
+  "lem-weil-pbc-ringed-topos-equivalence-ring-transport",
+  "lem-weil-pbc-ringed-topos-ring-square",
+  "lem-weil-pbc-ringed-topos-induced-modules",
+  "def-weil-pbc-ringed-topos-ring-data"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "Q2 worker",
+  "agent": "F3 worker",
   "document": "lean/Sheaf/CategoryTheory/RingedToposSquareTransport.lean",
-  "place": "Unproved fixed-square transport theorem; the declaration docstring gives the explicit ring-map and module-action constructions."
+  "place": "Complete assembly from explicit single-ring transport, faithful lifting of the square, and the compatible module direct image construction."
  },
  "mathlib_searches": [
   {
@@ -125,13 +128,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-16",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "X-4c3ef",
-  "group": "Q2",
+  "reviewer": "COMPILER",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261016T054838-L-157952",
+  "landing": "20261018T062747-L-648550",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean signatures, proofs and remaining transport obligation with their DAG nodes, source constructions, compile results and axiom checks; no direct importers."
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

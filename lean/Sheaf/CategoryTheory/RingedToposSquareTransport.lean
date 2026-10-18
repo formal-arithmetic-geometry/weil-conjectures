@@ -7,10 +7,9 @@ module
 
 public import Sheaf.CategoryTheory.RingedToposMorphism
 public import Mathlib.CategoryTheory.Equivalence
-import Sheaf.CategoryTheory.SheavesAlgebraicStructuresObjects
-import WeilConjectures.CategoryTheory.Adjunction.FiniteProductRingFunctor
-import WeilConjectures.CategoryTheory.Adjunction.FiniteProductRingFunctor
-import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.CategoryTheory.RingedToposRingSquare
+import Sheaf.CategoryTheory.RingedToposEquivalenceRingTransport
+import Sheaf.CategoryTheory.GeometricModuleConstruction
 
 /-!
 # Transporting a ringed geometric square across equivalences
@@ -106,6 +105,21 @@ theorem ringedTopos_squareTransport
       f.inverse.map e.ringMap ≫ f.ringMap =
         alpha.hom.app ((sheafCompose K' (forget CommRingCat)).obj B') ≫
           g.inverse.map h.ringMap ≫ g.ringMap := by
-  sorry
+  obtain ⟨A', gd, a, hgi, hgd, hgr, hgiso⟩ := ringedTopos_equivalenceRingTransport A G
+  obtain ⟨B', ed, b, hei, hed, her, _⟩ := ringedTopos_equivalenceRingTransport B E
+  let : gd.inverse.Full := by rw [hgi]; infer_instance
+  let : gd.inverse.Faithful := by rw [hgi]; infer_instance
+  let : IsIso gd.ringMap := hgiso
+  let α₀ : ed.inverse ⋙ f.inverse ≅ H ⋙ gd.inverse := by
+    simpa only [hgi, hei] using α
+  let hd := RingedToposMorphism.RingData.square f.ringData gd ed H α₀ R adjH hH
+  obtain ⟨gm⟩ := SheafOfModules.ringData_inducedModules A A' gd
+  obtain ⟨em⟩ := SheafOfModules.ringData_inducedModules B B' ed
+  obtain ⟨hm⟩ := SheafOfModules.ringData_inducedModules A' B' hd
+  let g := gd.withModules gm
+  let e := ed.withModules em
+  let h := hd.withModules hm
+  refine ⟨A', B', g, e, h, a, b, α₀, hgd, hed, rfl, hgr, her, ?_⟩
+  exact RingedToposMorphism.RingData.square_comm f.ringData gd ed H α₀
 
 end CategoryTheory

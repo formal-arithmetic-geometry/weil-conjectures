@@ -8,6 +8,8 @@ module
 public import Mathlib.Algebra.Category.Ring.Limits
 public import Sheaf.CategoryTheory.RingedSiteModules
 
+public import Sheaf.CategoryTheory.RingedToposRingData
+import Sheaf.CategoryTheory.AdjunctionRingOperations
 import Mathlib.CategoryTheory.Sites.CartesianMonoidal
 import Mathlib.CategoryTheory.Monoidal.CommGrp_
 import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
@@ -1131,5 +1133,116 @@ theorem geometric_module_construction
       simp only [Category.assoc, inv_prodComparison_map_snd, prod.map_snd, Category.comp_id]
       rfl
     · exact imageModule_action_comparison_right V S R d haP hmP H
+
+
+/-- Construct the module direct image from a structural ring map.
+
+Source: Stacks Project, Modules on Sites, pushforward of modules on ringed topoi.
+(blueprint: lem-weil-pbc-ringed-topos-induced-modules).
+The underlying sheaf is literally the given direct image. The scalar action is
+restriction along the adjunct of the structural map, and the Hom adjunction
+transports this action and addition to those of the original module. -/
+theorem ringData_inducedModules
+    {C D : Type u} [SmallCategory C] [SmallCategory D]
+    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+    (A : Sheaf J CommRingCat.{u}) (B : Sheaf K CommRingCat.{u})
+    (g : CategoryTheory.RingedToposMorphism.RingData
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj A)
+      ((sheafCompose K (forget₂ CommRingCat RingCat)).obj B)) :
+    Nonempty g.Modules := by
+  let L := g.inverse
+  let V := g.direct
+  let adj := g.adj
+  let : PreservesFiniteLimits L := g.leftExact
+  let : PreservesLimits V := adj.rightAdjoint_preservesLimits
+  let : L.Braided := Functor.Braided.ofChosenFiniteProducts L
+  let : V.Braided := Functor.Braided.ofChosenFiniteProducts V
+  let d := adj.homEquiv (rset B) (rset A) g.ringMap
+  have hb (a : rset B ⊗ rset B ⟶ rset B) (b : rset A ⊗ rset A ⟶ rset A)
+      (h : L.map a ≫ g.ringMap = CartesianMonoidalCategory.prodComparison L _ _ ≫
+        (g.ringMap ⊗ₘ g.ringMap) ≫ b) :
+      a ≫ d = (d ⊗ₘ d) ≫ Functor.LaxMonoidal.μ V _ _ ≫ V.map b :=
+    adjunct_binary L V adj _ _ a b g.ringMap h
+  have ha : ringAdd B ≫ d = (d ⊗ₘ d) ≫ Functor.LaxMonoidal.μ V _ _ ≫
+      V.map (ringAdd A) := by
+    apply hb
+    ext U t
+    exact g.ring_add _ (CartesianMonoidalCategory.fst _ _)
+      (CartesianMonoidalCategory.snd _ _) (ringAdd B) (fun _ _ ↦ rfl) U t
+  have hm : let := ringMonoid A
+            let := ringMonoid B
+            let := V.monObjObj (rset A)
+            IsMonHom d := by
+    let := ringMonoid A
+    let := ringMonoid B
+    let := V.monObjObj (rset A)
+    refine ⟨?_, ?_⟩
+    · apply adjunct_constant L V adj _ _ (ringOne B) (ringOne A) g.ringMap
+      ext U t
+      exact g.ring_one _ (ringOne B) (fun _ _ ↦ rfl) U t
+    · apply hb
+      ext U t
+      exact g.ring_mul _ (CartesianMonoidalCategory.fst _ _)
+        (CartesianMonoidalCategory.snd _ _) (ringMul B) (fun _ _ ↦ rfl) U t
+  let P := imageFunctor V A B d ha hm
+  refine ⟨{ modules := P
+            additive := ?_
+            underlying := imageFunctorUnderlying V A B d ha hm
+            module_linear := ?_ }⟩
+  · constructor
+    intro M N f h
+    ext W t
+    have hs : (mset A).map (f + h) = CartesianMonoidalCategory.lift
+        ((mset A).map f) ((mset A).map h) ≫ addition A N := by
+      ext U x
+      rfl
+    change (V.map ((mset A).map (f + h))).hom.app W t = _
+    rw [hs, V.map_comp, ← Functor.Monoidal.lift_μ]
+    rfl
+  · intro M T a x y z hz U t
+    change T ⟶ V.obj ((mset A).obj M) at x y z
+    have hs : z = CartesianMonoidalCategory.lift
+        (CartesianMonoidalCategory.lift a x ≫ action B (P.obj M)) y ≫
+          addition B (P.obj M) := by
+      ext W v
+      exact hz W v
+    have haM : action B (P.obj M) =
+        (d ⊗ₘ 𝟙 _) ≫ Functor.LaxMonoidal.μ V _ _ ≫ V.map (action A M) := rfl
+    have haddM : addition B (P.obj M) =
+        Functor.LaxMonoidal.μ V _ _ ≫ V.map (addition A M) := rfl
+    have hz' : z = CartesianMonoidalCategory.lift
+        (CartesianMonoidalCategory.lift (a ≫ d) x ≫
+          (CartesianMonoidalCategory.prodComparisonIso V _ _).inv ≫
+            V.map (action A M)) y ≫
+        (CartesianMonoidalCategory.prodComparisonIso V _ _).inv ≫
+          V.map (addition A M) := by
+      rw [hs, haM, haddM]
+      have hl : CartesianMonoidalCategory.lift a x ≫ (d ⊗ₘ 𝟙 _) =
+          CartesianMonoidalCategory.lift (a ≫ d) x := by
+        simpa only [Category.comp_id] using
+          CartesianMonoidalCategory.lift_map a x d (𝟙 _)
+      simp only [Functor.Monoidal.μ_of_cartesianMonoidalCategory]
+      rw [← Category.assoc (CartesianMonoidalCategory.lift a x), hl]
+    have hc := adj.counit_binary (addition A M)
+      (CartesianMonoidalCategory.lift (a ≫ d) x ≫
+        (CartesianMonoidalCategory.prodComparisonIso V _ _).inv ≫
+          V.map (action A M)) y
+    have haction := adj.counit_pair (action A M) (a ≫ d) x
+    rw [haction] at hc
+    have hd : L.map (a ≫ d) ≫ adj.counit.app (rset A) = L.map a ≫ g.ringMap := by
+      rw [L.map_comp, Category.assoc]
+      congr 1
+      exact (adj.homEquiv _ _).symm_apply_apply g.ringMap
+    rw [hd] at hc
+    have hzz : (adj.homEquiv T ((mset A).obj M)).symm z =
+        CartesianMonoidalCategory.lift
+          (CartesianMonoidalCategory.lift (L.map a ≫ g.ringMap)
+            ((adj.homEquiv T ((mset A).obj M)).symm x) ≫ action A M)
+          ((adj.homEquiv T ((mset A).obj M)).symm y) ≫ addition A M := by
+      rw [hz']
+      exact hc
+    change ((adj.homEquiv T ((mset A).obj M)).symm (z ≫ 𝟙 _)).hom.app U t = _
+    simp only [Category.comp_id]
+    exact congrArg (fun k ↦ k.hom.app U t) hzz
 
 end SheafOfModules
