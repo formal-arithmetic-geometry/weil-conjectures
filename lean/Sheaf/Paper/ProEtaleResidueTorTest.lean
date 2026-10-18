@@ -10,6 +10,7 @@ public import Sheaf.AlgebraicGeometry.ProEtaleTorAmplitude
 import Sheaf.Paper.ProEtaleResidueModuleTensorHomology
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.BoundedFlatIndependentCoefficients
+import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
