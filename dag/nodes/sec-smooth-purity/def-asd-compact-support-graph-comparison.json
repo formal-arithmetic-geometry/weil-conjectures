@@ -1,0 +1,140 @@
+{
+ "id": "def-asd-compact-support-graph-comparison",
+ "kind": "definition",
+ "title": "The specified sheaf and unbounded derived graph comparison",
+ "statement": "Let $A$ be a commutative ring, $f:U\\to X$ etale, and $c=(j:U\\to Z,r:Z\\to X)$ a compactification [def-weil-compactifications-refinements]. Define $a_c$ to be the canonical graph-extension map of [def-f7-etale-compactification-graph-map]. Define $Da:Df_{\\Sigma!}\\to Rr_*Dj_!$ by degreewise $a_c$, the homotopy compositor, and the total-right-derived unit, descended through the fully faithful localization $Q_h$ [lem-weil-pbc-localization-universal-property]. Its component at $Q_hK$ is compactSupportComparisonOnHomotopy$(A,f,c,a_c,K)$. The file also defines EtaleCompactSupportCore as the first four normalization fields and EtaleCompactSupportCoherence as its three exact base-change, proper-refinement, and identity equations, using the specified exchange [def-kun-unbounded-exchange]. The exchange, refinement, identity and localization helpers are retained.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03S3 (definition-extension-zero), 03S5 (proposition-describe-jshriek), 03S6 (lemma-shriek-base-change), 0F4L (lemma-shriek-into-star-separated-etale); more-etale.tex Tags 0F50, 0F51 and 0F7B-0F7F; graph-adjunction normalization on unbounded complexes supplied by the agent"
+ },
+ "stmt_deps": [
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-pbc-etale-shriek-base-change-map",
+  "lem-weil-pbc-etale-shriek-base-change-modules",
+  "def-weil-pbc-adjunction-conjugate",
+  "def-kun-unbounded-exchange",
+  "lem-weil-pbc-localization-universal-property",
+  "def-f7-etale-compactification-graph-map"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03S6 and 0F4L; more-etale.tex Tags 0F7B-0F7F; current blueprint prop-asd-smooth-base-change, coherence (iii)",
+  "note": "Explicit graph construction and termwise descent of the parent normalization argument; the unit route is unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a separated etale morphism and a compactification the graph extension by zero map composes to the canonical map to direct image",
+   "results": "8 hits including HasCompactSupport.extend_zero, AlgebraicGeometry.IsEtale, Scheme.Etale and IsProper.isStableUnderBaseChange; none concerns sheaf graph comparisons.",
+   "date": "2026-10-18",
+   "verdict": "No exact result for constant-ring etale sheaves, their graph comparison or unbounded compact supports."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The graph construction of etale extension by zero into a compactified pushforward respects base change and proper refinement",
+   "results": "8 hits: IsEtale.instIsStableUnderBaseChangeScheme, Scheme.Etale, StandardEtalePair.hasMap_X, StandardEtalePair.HasMap.map, IsEtale.instHasOfPostcompPropertyScheme, RingHom.Etale.isStableUnderBaseChange, Scheme.instCategoryEtale, IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified.",
+   "date": "2026-10-18",
+   "verdict": "No sheaf or derived normalization theorem; use the existing scheme geometry and adjunction APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.natTrans_ext",
+   "results": "CategoryTheory.Localization.natTrans_ext.",
+   "date": "2026-10-18",
+   "verdict": "Useful generic full-faithfulness tool, not the geometric normalization or coherence result."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_counit|fullyFaithfulWhiskeringLeft|graphExtend_graph",
+   "results": "9 hits: Adjunction/Mates.lean conjugateEquiv_counit and _symm; Monoidal/Closed/Basic.lean usage; Localization/Predicate.lean fullyFaithfulWhiskeringLeft; Abelian/SerreClass/Localization.lean wrappers. No graphExtend_graph in Mathlib.",
+   "date": "2026-10-18",
+   "verdict": "Generic categorical tools suffice for the explicit construction and formal assembly, but not its geometric normalization, isomorphism or coherences."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleCompactSupportNormalization",
+  "date": "2026-10-18",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-asd-smooth-base-change",
+   "place": "Proof, coherence (iii): etale inverse image and finite-fibre sum in the smooth chart, with the specified compact-support exchange of coherence (i).",
+   "via": [
+    "lem-asd-etale-compact-support-normalization"
+   ]
+  },
+  "same_as": [
+   "def-f7-etale-compactification-graph-map"
+  ]
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleCompactSupportNormalizationData",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCompactSupportNormalizationData.lean",
+  "declaration": "AlgebraicGeometry.Etale.compactSupportDerivedComparison",
+  "declarations": [
+   "AlgebraicGeometry.Etale.compactificationSheafToDirectImage",
+   "AlgebraicGeometry.Etale.exactEtaleSumExchange",
+   "AlgebraicGeometry.Etale.exactCompactSupportExchange",
+   "AlgebraicGeometry.Etale.exactCompactSupportExchangeSquare",
+   "AlgebraicGeometry.Etale.exactEtaleSumExchangeSquare",
+   "AlgebraicGeometry.Etale.compactSupportComparisonOnHomotopy",
+   "AlgebraicGeometry.Etale.normalizationLocalizationDesc",
+   "AlgebraicGeometry.Etale.normalizationLocalizationDesc_app",
+   "AlgebraicGeometry.Etale.compactSupportDerivedComparison",
+   "AlgebraicGeometry.Etale.compactSupportDerivedComparison_app",
+   "AlgebraicGeometry.Etale.refinementOpenCompactification",
+   "AlgebraicGeometry.Etale.identityEtaleCompactSupportComparison",
+   "AlgebraicGeometry.Etale.EtaleCompactSupportCore",
+   "AlgebraicGeometry.Etale.EtaleCompactSupportCoherence"
+  ],
+  "statement": "def compactSupportDerivedComparison\n    (A : Type (u + 1)) [CommRing A] {U X : Scheme.{u}} (f : U ⟶ X) [Etale f]\n    (c : Compactification f)\n    (a : etaleLowerShriek (ModuleCat.{u + 1} A) f inferInstance ⟶\n      openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i ⋙\n        lowerStar (ModuleCat.{u + 1} A) c.g) :\n    (etaleLowerShriek (ModuleCat.{u + 1} A) f inferInstance).mapDerivedCategory ⟶\n      rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-18"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-03b35",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261018T091405-L-3255847",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-03b35",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261018T091405-L-3255847",
+  "kind": "interface",
+  "note": "independent cc review: 03b351f vs passed head 30a0f75ae: the 7 Lean modules and 7 nodes are identical, plus the bundled F7 EtaleCompactificationGraphMap.lean (byte-identical to the F7 source compiled in the 30a0f review) and the re-created def-f7 node (lean.statement = def signature); all 8 modules + importer EtaleAmbientAdjointLocality compile (lcompile --all, exit 0); sorryAx only via the 3 stated holes"
+ }
+}

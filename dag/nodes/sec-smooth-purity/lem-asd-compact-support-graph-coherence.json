@@ -1,0 +1,180 @@
+{
+ "id": "lem-asd-compact-support-graph-coherence",
+ "kind": "statement",
+ "title": "Base-change, proper-refinement and identity equations for the graph map",
+ "statement": "Let $A$ be a finite commutative ring. For the specific core canonicalEtaleCompactSupportCore defined in [lem-asd-compact-support-graph-derived-isomorphism], the proposition EtaleCompactSupportCoherence [def-asd-compact-support-graph-comparison] holds. Thus its comparison $a^{-1}$ intertwines the specified compact-support and sum exchanges for every change of locally Noetherian quasi-compact base; for every proper refinement [def-weil-compactifications-refinements] its comparisons obey the exact direct-image-composition equation of that proposition; and for the proper identity compactification it equals identityEtaleCompactSupportComparison. These are equations of actual unbounded derived transformations. No adjoint-uniqueness or double-base-change clause is assumed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03S3 (definition-extension-zero), 03S5 (proposition-describe-jshriek), 03S6 (lemma-shriek-base-change), 0F4L (lemma-shriek-into-star-separated-etale); more-etale.tex Tags 0F50, 0F51 and 0F7B-0F7F; graph-adjunction normalization on unbounded complexes supplied by the agent"
+ },
+ "stmt_deps": [
+  "def-asd-compact-support-graph-comparison",
+  "lem-asd-compact-support-graph-derived-isomorphism",
+  "def-weil-compactifications-refinements"
+ ],
+ "proof": [
+  {
+   "text": "Check the actual exchange by transposition. Write $t:\\overline U'\\to\\overline U$ and $E_j:t^*Dj_!\\to Dj'_!h^*$ for the specified inverse open-extension comparison. Let $\\theta:r'^*g^*\\to t^*r^*$ be the inverse-image square comparison. The graph projections of [def-asd-compact-support-graph-comparison] give, on exact derived functors,\n$$\\delta'_{h^*K}\\circ r'^*(C^\\Sigma_K)=E_{j,K}\\circ t^*(\\delta_K)\\circ\\theta_{Du_{\\Sigma!}K}.\\tag{*}$$\nTo verify this identity without testing derived morphisms on stalks, pull the graph decomposition back to $V'=\\overline U'\\times_{X'}U'$. On its graph component both sides take the section of the corresponding lift to that same section, and on the complementary component both sides are zero. The comparisons $\\beta$ are adjunction-preserving: by their defining conjugacy they are the left-adjoint comparisons of the equality of the restriction/direct-image functors on the localized sites. Thus the comparisons in the two pasted rectangles coincide by [lem-weil-pbc-mate-pasting], and the composition comparison $\\lambda$ is normalized by those same adjunctions. This makes the preceding component calculation an equality of sheaf natural transformations; [lem-weil-pbc-localization-universal-property] descends it to (*) on arbitrary complexes. Now transpose $C^{(j,r)}_K\\circ g^*a_K$ under $r'^*\\dashv Rr'_*$. The definition of proper exchange in [def-kun-unbounded-exchange] gives its transpose as the right side of (*): naturality moves $a_K$ past the pulled-back counit, and $\\varepsilon_r\\circ r^*a_K=\\delta_K$ by the triangle identity. The transpose of $a'_{h^*K}\\circ C^\\Sigma_K$ is the left side of (*). Injectivity of the adjunction bijection proves\n$$C^{(j,r)}\\circ g^*a=(a'h^*)\\circ C^\\Sigma.$$\nNo equality of derived morphisms has been inferred merely from equality on cohomology.",
+   "uses": [
+    "def-weil-pbc-etale-shriek-base-change-map",
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-weil-pbc-mate-pasting",
+    "lem-weil-pbc-localization-universal-property",
+    "def-kun-unbounded-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S6 (lemma-shriek-base-change); sites-cohomology.tex Tags 07A7 (remark-base-change), 0E46 and 0E47 (remark-compose-base-change, remark-compose-base-change-horizontal); explicit graph-component verification"
+   }
+  },
+  {
+   "text": "For a proper refinement $p:\\overline U_1\\to\\overline U_2$ with $pj_1=j_2$, apply [lem-amb-unbounded-proper-open-interchange] to the square with top $j_1$, bottom $j_2$, left vertical $1_U$ and right vertical $p$. It gives the specified unbounded isomorphism $b_p:Dj_{2!}\\xrightarrow{\\sim}Rp_*Dj_{1!}$. Its sheaf support identification is the identity on the underlying sections over $U$, and its K-injective recipe fixes the derived normalization. Composing $Rr_{2*}b_p$ with the direct-image composition isomorphism [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] gives $\\rho_p:Rr_{2*}Dj_{2!}\\xrightarrow{\\sim}Rr_{1*}Dj_{1!}$. Its refinement composition and identity laws follow from the vertical-pasting and identity clauses of the same interchange node. All its hypotheses hold: $A$ is finite, both vertical maps are proper, both horizontal maps are open, and the compactifications are between Noetherian schemes. No cartesian hypothesis is needed for this application.",
+   "uses": [
+    "lem-amb-unbounded-proper-open-interchange",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "more-etale.tex Tags 0F7B (lemma-shriek-proper-and-open), case (b), and 0F7C (lemma-shriek-proper-and-open-compose); sites-cohomology.tex Tag 0D6E (lemma-derived-pushforward-composition)"
+   }
+  },
+  {
+   "text": "Put $B=Du_{\\Sigma!}K$. Under $r_1^*=p^*r_2^*\\dashv Rr_{2*}Rp_*$ the transpose of $\\rho_pa_2$ is $\\varepsilon_p\\circ p^*b_p\\circ p^*\\delta_2$. By [lem-asd-proper-open-refinement-adjoint-projection], its first two factors equal the degreewise clopen projection $D\\pi_p$. On each graph summand, $p^*\\delta_2$ retains the lifts landing on the graph for $j_2$, and $D\\pi_p$ retains among those the lifts landing on $j_1(U)$. Their composite therefore retains exactly the graph summands for $j_1$, acting identically on each, and kills the others: it is $\\delta_1$. These are termwise maps, descended by localization. The composite-adjunction counit formula in [lem-weil-pbc-mate-pasting] gives the displayed transpose, so the adjunction bijection proves $\\rho_pa_2=a_1$, hence $c_1\\rho_p=c_2$. For refinements $p:1\\to2$, $q:2\\to3$, this identity gives $\\rho_p\\rho_q=a_1c_2a_2c_3=a_1c_3=\\rho_{qp}$; for identity refinements it gives $a_ic_i=1$.",
+   "uses": [
+    "lem-asd-proper-open-refinement-adjoint-projection",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7B, lemma-shriek-proper-and-open, the specified K-injective map; the explicit derived adjoint as clopen-section projection is the extracted agent argument"
+   }
+  },
+  {
+   "text": "For the identity compactification, the graph projection is identity. The right-derived unit of the identity direct image is inverse to its exact-derived comparison. The lowerStarId comparison and right unitor therefore give precisely identityEtaleCompactSupportComparison. Cancel the invertible derived graph maps in the base-change and proper-refinement identities to obtain the three required equations.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03S3 (definition-extension-zero), 03S5 (proposition-describe-jshriek), 03S6 (lemma-shriek-base-change), 0F4L (lemma-shriek-into-star-separated-etale); more-etale.tex Tags 0F50, 0F51 and 0F7B-0F7F; graph-adjunction normalization on unbounded complexes supplied by the agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-shriek-base-change-map",
+  "def-weil-pbc-adjunction-conjugate",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-localization-universal-property",
+  "def-kun-unbounded-exchange",
+  "lem-amb-unbounded-proper-open-interchange",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-asd-proper-open-refinement-adjoint-projection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03S6 and 0F4L; more-etale.tex Tags 0F7B-0F7F; current blueprint prop-asd-smooth-base-change, coherence (iii)",
+  "note": "Explicit graph construction and termwise descent of the parent normalization argument; the unit route is unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a separated etale morphism and a compactification the graph extension by zero map composes to the canonical map to direct image",
+   "results": "8 hits including HasCompactSupport.extend_zero, AlgebraicGeometry.IsEtale, Scheme.Etale and IsProper.isStableUnderBaseChange; none concerns sheaf graph comparisons.",
+   "date": "2026-10-18",
+   "verdict": "No exact result for constant-ring etale sheaves, their graph comparison or unbounded compact supports."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The graph construction of etale extension by zero into a compactified pushforward respects base change and proper refinement",
+   "results": "8 hits: IsEtale.instIsStableUnderBaseChangeScheme, Scheme.Etale, StandardEtalePair.hasMap_X, StandardEtalePair.HasMap.map, IsEtale.instHasOfPostcompPropertyScheme, RingHom.Etale.isStableUnderBaseChange, Scheme.instCategoryEtale, IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified.",
+   "date": "2026-10-18",
+   "verdict": "No sheaf or derived normalization theorem; use the existing scheme geometry and adjunction APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.natTrans_ext",
+   "results": "CategoryTheory.Localization.natTrans_ext.",
+   "date": "2026-10-18",
+   "verdict": "Useful generic full-faithfulness tool, not the geometric normalization or coherence result."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_counit|fullyFaithfulWhiskeringLeft|graphExtend_graph",
+   "results": "9 hits: Adjunction/Mates.lean conjugateEquiv_counit and _symm; Monoidal/Closed/Basic.lean usage; Localization/Predicate.lean fullyFaithfulWhiskeringLeft; Abelian/SerreClass/Localization.lean wrappers. No graphExtend_graph in Mathlib.",
+   "date": "2026-10-18",
+   "verdict": "Generic categorical tools suffice for the explicit construction and formal assembly, but not its geometric normalization, isomorphism or coherences."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleCompactSupportNormalization",
+  "date": "2026-10-18",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-asd-smooth-base-change",
+   "place": "Proof, coherence (iii): etale inverse image and finite-fibre sum in the smooth chart, with the specified compact-support exchange of coherence (i).",
+   "via": [
+    "lem-asd-etale-compact-support-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCompactSupportGraphCoherence.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleCompactSupportGraph_coherence",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleCompactSupportGraph_coherence"
+  ],
+  "statement": "theorem etaleCompactSupportGraph_coherence\n    (A : Type (u + 1)) [CommRing A] [Finite A] :\n    EtaleCompactSupportCoherence A (canonicalEtaleCompactSupportCore A)",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-18"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-03b35",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261018T091405-L-3255847",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-03b35",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261018T091405-L-3255847",
+  "kind": "interface",
+  "note": "independent cc review: 03b351f vs passed head 30a0f75ae: the 7 Lean modules and 7 nodes are identical, plus the bundled F7 EtaleCompactificationGraphMap.lean (byte-identical to the F7 source compiled in the 30a0f review) and the re-created def-f7 node (lean.statement = def signature); all 8 modules + importer EtaleAmbientAdjointLocality compile (lcompile --all, exit 0); sorryAx only via the 3 stated holes"
+ }
+}

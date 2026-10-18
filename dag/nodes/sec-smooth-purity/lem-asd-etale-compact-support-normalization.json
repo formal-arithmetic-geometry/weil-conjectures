@@ -36,213 +36,76 @@
  ],
  "proof": [
   {
-   "text": "First fix the derived normalizations. Exactness and the sheaf adjunction $u_{\\Sigma!}\\dashv u^*$ are supplied by [lem-weil-pbc-etale-restriction-injectives]. Apply both functors degreewise. Their unit and counit are chain maps and descend to homotopy categories by [lem-weil-pbc-termwise-adjunction-homotopy]; exact functors invert quasi-isomorphisms by [lem-weil-pbc-exact-functor-derived-factorization]. Descend the unit, counit and triangle identities by [lem-weil-pbc-localization-universal-property]. This gives the adjunction on the whole unbounded categories, with the original evaluation counit in every degree. Do this also for all etale maps appearing below. The specified sheaf map $\\beta$ of [def-weil-pbc-etale-shriek-base-change-map] is invertible by [lem-weil-pbc-etale-shriek-base-change-modules]; descend $\\beta$ and its inverse degreewise. We always use $C^\\Sigma=\\beta^{-1}$, rather than an unspecified isomorphism between the two functors.",
+   "text": "Construct the actual clopen graph and its projection, using the inverse of the canonical clopen-extension comparison. Form δ with inverse specified β and the adjunction-preserving graph compositor, then transpose and descend degreewise. The component formula is proved by localization full faithfulness.",
    "uses": [
-    "lem-weil-pbc-etale-restriction-injectives",
+    "def-asd-compact-support-graph-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03S3 (definition-extension-zero), 03S5 (proposition-describe-jshriek), 03S6 (lemma-shriek-base-change), 0F4L (lemma-shriek-into-star-separated-etale); more-etale.tex Tags 0F50, 0F51 and 0F7B-0F7F; graph-adjunction normalization on unbounded complexes supplied by the agent"
+   }
+  },
+  {
+   "text": "The sheaf composite into direct image is the required canonical graph-extension arrow by [lem-asd-compact-support-graph-sheaf-normalization]. The actual derived arrow is invertible by [lem-asd-compact-support-graph-derived-isomorphism]; take its forced inverse. This supplies the first four fields without choosing any arbitrary witness of existence.",
+   "uses": [
+    "lem-asd-compact-support-graph-sheaf-normalization",
+    "lem-asd-compact-support-graph-derived-isomorphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03S3 (definition-extension-zero), 03S5 (proposition-describe-jshriek), 03S6 (lemma-shriek-base-change), 0F4L (lemma-shriek-into-star-separated-etale); more-etale.tex Tags 0F50, 0F51 and 0F7B-0F7F; graph-adjunction normalization on unbounded complexes supplied by the agent"
+   }
+  },
+  {
+   "text": "Use [lem-asd-compact-support-graph-coherence] for the actual base-change, proper-refinement and identity equations of the specified construction.",
+   "uses": [
+    "lem-asd-compact-support-graph-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03S3 (definition-extension-zero), 03S5 (proposition-describe-jshriek), 03S6 (lemma-shriek-base-change), 0F4L (lemma-shriek-into-star-separated-etale); more-etale.tex Tags 0F50, 0F51 and 0F7B-0F7F; graph-adjunction normalization on unbounded complexes supplied by the agent"
+   }
+  },
+  {
+   "text": "For two changes of base, apply the single-square equality twice. Evaluate the vertical TwoSquare composite on an object, use functoriality to move the middle comparison through the second inverse-image functor, substitute the first equality, and reassociate. This proves the exact stated composite with its canonical associators. No additional geometric pasting assertion is assumed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03S3 (definition-extension-zero), 03S5 (proposition-describe-jshriek), 03S6 (lemma-shriek-base-change), 0F4L (lemma-shriek-into-star-separated-etale); more-etale.tex Tags 0F50, 0F51 and 0F7B-0F7F; graph-adjunction normalization on unbounded complexes supplied by the agent"
+   }
+  },
+  {
+   "text": "For any chosen compact-support adjunction, conjugate the inverse compact-support comparison under it and the degreewise sum/evaluation adjunction. The conjugacy counit identity proves the required equation. If a second isomorphism satisfies it, cancel the invertible compact-support comparison and use injectivity of the sum-adjunction hom equivalence at every object. Thus the comparison is unique.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate",
     "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-localization-universal-property",
-    "def-weil-pbc-etale-shriek-base-change-map",
-    "lem-weil-pbc-etale-shriek-base-change-modules"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03S3 (definition-extension-zero), 03S5 (proposition-describe-jshriek), 03S6 (lemma-shriek-base-change); derived.tex Tags 08BJ, 015F and categories.tex Tag 04VG for termwise descent"
-   }
-  },
-  {
-   "text": "Put $V=\\overline U\\times_X U$, $v:V\\to\\overline U$, $q:V\\to U$, and $s=(j,1):U\\to V$. The map $v$ is etale by [lem-weil-pbc-etale-base-change-finite-limits]. The graph $s$ is open: inside the open $U\\times_XU$ it is the diagonal of $u$, which is open by the definition of unramified in [def-weil-unramified-morphism] and [def-weil-etale-morphism]. Here $U\\times_XU$ is open in $V$ by [lem-weil-pbc-open-immersion-base-change]. The map $q$ is proper by [lem-weil-pbc-proper-base-change], hence separated, and $qs=1$. Thus [lem-weil-pbc-open-section-clopen] gives $V=s(U)\\amalg W$. By [lem-weil-pbc-etale-sheaf-clopen-product], on a scheme decomposed into two disjoint opens, a module sheaf is a pair: restrictions give the pair, and gluing over the disjoint cover reconstructs the sheaf, with sections the product of the two section modules. Therefore $q^*M$ has a natural projection $P_M:q^*M\\to s_!M$, identity on $s(U)$ and zero on $W$. This projection is natural and commutes with all inverse images: pulling back the two opens preserves this pair description. The same projection is a chain map on any unbounded complex. This uses a binary decomposition, not an infinite product or a boundedness assumption.",
-   "uses": [
-    "lem-weil-pbc-etale-base-change-finite-limits",
-    "def-weil-unramified-morphism",
-    "def-weil-etale-morphism",
-    "lem-weil-pbc-open-immersion-base-change",
-    "lem-weil-pbc-proper-base-change",
-    "lem-weil-pbc-open-section-clopen",
-    "lem-weil-pbc-etale-sheaf-clopen-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F4L (lemma-shriek-into-star-separated-etale), graph construction; Tag 0A5B (lemma-constant-smooth-statements), first proof paragraph; morphisms.tex Tag 02GE and schemes.tex Tag 01KT (lemma-section-immersion)"
-   }
-  },
-  {
-   "text": "Use the inverse of the specified sum-extension comparison for the square $(r,u)$ to form\n$$\\delta_K:r^*Du_{\\Sigma!}K\\xrightarrow{\\beta^{-1}}Dv_{\\Sigma!}q^*K\\xrightarrow{Dv_{\\Sigma!}P_K}Dv_{\\Sigma!}Ds_!K\\xrightarrow{\\lambda}Dj_!K.$$\nThe last comparison $\\lambda$ is the adjunction-preserving composition comparison: $v_{\\Sigma!}s_!$ and $j_!$ are left adjoints to $s^*v^*=j^*$, so their units determine $\\lambda$ uniquely by [def-weil-pbc-adjunction-conjugate]. Equivalently on a summand indexed by a lift $T\\to U\\xrightarrow{s}V$ it is the same section indexed by its composite into $U\\xrightarrow{j}\\overline U$; this specifies the normalization. All these functors and maps are exact and termwise, and step 1 descends them. Transpose $\\delta$ under the canonical derived adjunction $r^*\\dashv Rr_*$ of [def-kun-unbounded-exchange], to define\n$$a_{u,(j,r),K}=Rr_*(\\delta_K)\\circ\\eta_{r,Du_{\\Sigma!}K}:Du_{\\Sigma!}K\\longrightarrow Rr_*Dj_!K.$$\nThis constructs a natural transformation on all of $D(U_{\\mathrm{et}},A)$ before asserting it is invertible.",
-   "uses": [
-    "def-weil-pbc-etale-shriek-base-change-map",
-    "lem-weil-pbc-etale-shriek-base-change-modules",
-    "lem-weil-pbc-etale-restriction-injectives",
-    "def-weil-pbc-adjunction-conjugate",
-    "def-kun-unbounded-exchange"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03S6 (lemma-shriek-base-change), 0F4L (lemma-shriek-into-star-separated-etale), graph projection; sites-cohomology.tex Tag 07A7 (remark-base-change); explicit adjunction transpose supplied here"
-   }
-  },
-  {
-   "text": "Check the actual exchange by transposition. Write $t:\\overline U'\\to\\overline U$ and $E_j:t^*Dj_!\\to Dj'_!h^*$ for the specified inverse open-extension comparison. Let $\\theta:r'^*g^*\\to t^*r^*$ be the inverse-image square comparison. The projections of step 2 give, on exact derived functors,\n$$\\delta'_{h^*K}\\circ r'^*(C^\\Sigma_K)=E_{j,K}\\circ t^*(\\delta_K)\\circ\\theta_{Du_{\\Sigma!}K}.\\tag{*}$$\nTo verify this identity without testing derived morphisms on stalks, pull the graph decomposition back to $V'=\\overline U'\\times_{X'}U'$. On its graph component both sides take the section of the corresponding lift to that same section, and on the complementary component both sides are zero. The comparisons $\\beta$ are adjunction-preserving: by their defining conjugacy they are the left-adjoint comparisons of the equality of the restriction/direct-image functors on the localized sites. Thus the comparisons in the two pasted rectangles coincide by [lem-weil-pbc-mate-pasting], and the composition comparison $\\lambda$ is normalized by those same adjunctions. This makes the preceding component calculation an equality of sheaf natural transformations; [lem-weil-pbc-localization-universal-property] descends it to (*) on arbitrary complexes. Now transpose $C^{(j,r)}_K\\circ g^*a_K$ under $r'^*\\dashv Rr'_*$. The definition of proper exchange in [def-kun-unbounded-exchange] gives its transpose as the right side of (*): naturality moves $a_K$ past the pulled-back counit, and $\\varepsilon_r\\circ r^*a_K=\\delta_K$ by the triangle identity. The transpose of $a'_{h^*K}\\circ C^\\Sigma_K$ is the left side of (*). Injectivity of the adjunction bijection proves\n$$C^{(j,r)}\\circ g^*a=(a'h^*)\\circ C^\\Sigma.$$\nNo equality of derived morphisms has been inferred merely from equality on cohomology.",
-   "uses": [
-    "def-weil-pbc-etale-shriek-base-change-map",
-    "def-weil-pbc-adjunction-conjugate",
-    "lem-weil-pbc-mate-pasting",
-    "lem-weil-pbc-localization-universal-property",
-    "def-kun-unbounded-exchange"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03S6 (lemma-shriek-base-change); sites-cohomology.tex Tags 07A7 (remark-base-change), 0E46 and 0E47 (remark-compose-base-change, remark-compose-base-change-horizontal); explicit graph-component verification"
-   }
-  },
-  {
-   "text": "We compute the construction over $P=\\operatorname{Spec}\\Omega$ for an algebraically closed field. By [lem-kun-0ezp], an etale $U_P\\to P$ is a disjoint union of copies of $P$. There are only finitely many: finite type [def-weil-finite-type-morphism] makes $u$ quasi-compact, and [lem-pc-quasi-compact-base-change] makes $U_P\\to P$ quasi-compact. Since $P$ is affine, its inverse image $U_P$ is quasi-compact by the definition. The component opens cover it, so finitely many components cover $U_P$. Each component $z:P\\to\\overline U_P$ is an open section of the proper $r_P$, which is proper by [lem-weil-pbc-proper-base-change]. It is clopen by [lem-weil-pbc-open-section-clopen]. Thus the finite union $U_P$ is clopen in $\\overline U_P$. The empty union is allowed.",
-   "uses": [
-    "lem-kun-0ezp",
-    "def-weil-finite-type-morphism",
-    "lem-weil-pbc-proper-base-change",
-    "lem-weil-pbc-open-section-clopen",
-    "lem-pc-quasi-compact-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03QT (theorem-equivalence-sheaves-point), 03QU (lemma-compare-cohomology-point), and morphisms.tex Tag 02GL (lemma-etale-over-field); graph section as in Tag 0F4L; schemes.tex Tag 01K5 (lemma-quasi-compact-preserved-base-change)"
-   }
-  },
-  {
-   "text": "Apply [lem-asd-clopen-geometric-sections-derived-evaluation] to the finitely many clopen sections of step 5, taking $V=\\overline U_P$, $r=r_P$ and the pulled-back $K$. Its normalized unbounded calculation identifies $Rr_{P*}Dj_{P!}K_P$ with the finite product of sheet complexes. The graph projection of step 2 restricts on the sheet $i$ to the projection onto $K_i$: its graph retains exactly the equal-sheet entry and kills every unequal-sheet entry. Thus it is precisely the $\\delta$ of the cited lemma. The lemma identifies its adjunct $a_{K_P}$ with the finite sum-to-product isomorphism, including the empty fibre.",
-   "uses": [
-    "lem-asd-clopen-geometric-sections-derived-evaluation"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 070Y (lemma-K-injective-defined) and 015F (lemma-right-derived-exact-functor); finite-clopen Hom-complex and evaluation normalization extracted by the agent from the geometric-fibre argument"
-   }
-  },
-  {
-   "text": "Apply [lem-kun-proper-base-change-torsion-ring] to $r$ and every geometric point $\\bar x:P\\to X$. It applies to arbitrary unbounded complexes over the torsion ring $A$, with no assumption that its order is invertible on $X$. The open and sum-extension exchanges are isomorphisms by [lem-weil-pbc-etale-shriek-base-change-modules], descended in step 1. The equality in step 4 therefore identifies $\\bar x^*a_K$ with the fibre construction computed in steps 5 and 6, so $\\bar x^*a_K$ is invertible. Exact inverse image on modules [prop-weil-pbc-inverse-image-modules-exact] and the exact module equivalence over $P$ [lem-weil-pbc-geometric-point-pullback-stalk] identify its cohomology maps with the stalks of $H^n(a_K)$. By [lemma-weil-pbc-geometric-stalk-conservative], each underlying abelian-sheaf map $H^n(a_K)$ is an isomorphism. Its inverse is $A$-linear because its original map is $A$-linear and bijective. Hence [lem-weil-pbc-unbounded-derived-iso-cohomology] makes $a_K$ invertible. Set $c=a^{-1}$. This uses stalks to detect invertibility, while the equality of derived transformations was proved by transposition in step 4.",
-   "uses": [
-    "lem-kun-proper-base-change-torsion-ring",
-    "lem-weil-pbc-etale-shriek-base-change-modules",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-geometric-point-pullback-stalk",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "lem-weil-pbc-unbounded-derived-iso-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 0F0C (lemma-proper-base-change-mod-n), unbounded torsion-coefficient proof as in lem-kun-proper-base-change-torsion-ring; Tags 03S6, 04JN and 03PU (theorem-exactness-stalks); derived.tex Tag 05RT"
-   }
-  },
-  {
-   "text": "By [lem-cbc-proper-support-sheaf-composition], $r_*j_!M$ identifies with proper-support sections for $u$. In degree zero the adjoint map $a_M$ sends the summand indexed by a lift $T\\to U$ to the section of $j_!M$ on $\\overline U\\times_XT$ supported on that lift's graph. That graph is clopen by step 2 with $U$ replaced by $T$: it is an open section of the separated proper projection. The section vanishes off that graph. Its support is closed, since vanishing of a section is local and hence defines an open locus. This closed support lies in the graph, which is isomorphic to $T$ over $T$. With its reduced closed-subscheme structure its map to $T$ is a closed immersion: affine-locally it is $\\operatorname{Spec}(B/I)\\to\\operatorname{Spec}B$, so it is finite type, separated and universally closed. It is therefore proper by [def-weil-proper-morphism]. These summand maps respect restrictions and sums, hence induce the map from the sheafified sum presheaf [def-weil-pbc-etale-sum-extension]. On each etale sheet its inverse recovers the original section; thus $c$ is precisely the proper-support-to-sheet-components comparison required in the statement. This is the inverse of the constructed map, not an independent choice of stalkwise isomorphisms.",
-   "uses": [
-    "def-weil-pbc-etale-sum-extension",
-    "def-weil-proper-morphism",
-    "lem-weil-pbc-open-section-clopen",
-    "lem-cbc-proper-support-sheaf-composition"
+    "lem-weil-pbc-etale-restriction-injectives"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "more-etale.tex Tags 0F50 (lemma-f-shriek-composition), 0F51 (lemma-proper-f-shriek), 0F4Y (lemma-separated-etale-shriek); etale-cohomology.tex Tag 0F4L, explicit graph section"
-   }
-  },
-  {
-   "text": "For a proper refinement $p:\\overline U_1\\to\\overline U_2$ with $pj_1=j_2$, apply [lem-amb-unbounded-proper-open-interchange] to the square with top $j_1$, bottom $j_2$, left vertical $1_U$ and right vertical $p$. It gives the specified unbounded isomorphism $b_p:Dj_{2!}\\xrightarrow{\\sim}Rp_*Dj_{1!}$. Its sheaf support identification is the identity on the underlying sections over $U$, and its K-injective recipe fixes the derived normalization. Composing $Rr_{2*}b_p$ with the direct-image composition isomorphism [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] gives $\\rho_p:Rr_{2*}Dj_{2!}\\xrightarrow{\\sim}Rr_{1*}Dj_{1!}$. Its refinement composition and identity laws follow from the vertical-pasting and identity clauses of the same interchange node. All its hypotheses hold: $A$ is finite, both vertical maps are proper, both horizontal maps are open, and the compactifications are between Noetherian schemes. No cartesian hypothesis is needed for this application.",
-   "uses": [
-    "lem-amb-unbounded-proper-open-interchange",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "more-etale.tex Tags 0F7B (lemma-shriek-proper-and-open), case (b), and 0F7C (lemma-shriek-proper-and-open-compose); sites-cohomology.tex Tag 0D6E (lemma-derived-pushforward-composition)"
-   }
-  },
-  {
-   "text": "Put $B=Du_{\\Sigma!}K$. Under $r_1^*=p^*r_2^*\\dashv Rr_{2*}Rp_*$ the transpose of $\\rho_pa_2$ is $\\varepsilon_p\\circ p^*b_p\\circ p^*\\delta_2$. By [lem-asd-proper-open-refinement-adjoint-projection], its first two factors equal the degreewise clopen projection $D\\pi_p$. On each graph summand, $p^*\\delta_2$ retains the lifts landing on the graph for $j_2$, and $D\\pi_p$ retains among those the lifts landing on $j_1(U)$. Their composite therefore retains exactly the graph summands for $j_1$, acting identically on each, and kills the others: it is $\\delta_1$. These are termwise maps, descended by step 1. The composite-adjunction counit formula in [lem-weil-pbc-mate-pasting] gives the displayed transpose, so the adjunction bijection proves $\\rho_pa_2=a_1$, hence $c_1\\rho_p=c_2$. For refinements $p:1\\to2$, $q:2\\to3$, this identity gives $\\rho_p\\rho_q=a_1c_2a_2c_3=a_1c_3=\\rho_{qp}$; for identity refinements it gives $a_ic_i=1$.",
-   "uses": [
-    "lem-asd-proper-open-refinement-adjoint-projection",
-    "lem-weil-pbc-mate-pasting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7B, lemma-shriek-proper-and-open, the specified K-injective map; the explicit derived adjoint as clopen-section projection is the extracted agent argument"
-   }
-  },
-  {
-   "text": "Transport the sum/evaluation adjunction of step 1 along $c:Rr_*Dj_!\\cong Du_{\\Sigma!}$. It gives the counit $\\varepsilon_\\Sigma\\circ(cu^*)$ and the corresponding transported unit. The right adjoint supplied by [thm-amb-etale-exceptional-adjoint] is therefore identified with $u^*$ by the unique adjunction-preserving right-adjoint comparison. Explicitly the comparison at $L$ is the transpose under $Du_{\\Sigma!}\\dashv u^*$ of $Ru_!u^\\times L\\xrightarrow{\\varepsilon_!}L$, after using $a:Du_{\\Sigma!}\\to Ru_!$; its inverse is the opposite transpose, and the triangle identities show that their composites are identities. The uniqueness and compatibility with units and counits are the conjugacy bijection [def-weil-pbc-adjunction-conjugate]. This proves the counit normalization without assuming that an arbitrarily chosen exceptional adjunction already has the sum counit.",
-   "uses": [
-    "thm-amb-etale-exceptional-adjoint",
-    "def-weil-pbc-adjunction-conjugate"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-smooth-base-change.proof.md",
-    "place": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/prop-asd-smooth-base-change.proof.md, coherence (iii); unique-adjoint comparison and counit normalization"
-   }
-  },
-  {
-   "text": "Finally invert $a$ in the exact identity from step 4 and cancel it on both sides. This gives $(c'h^*)C^{(j,r)}=C^\\Sigma(g^*c)$ in the requested direction. For the identity change of base the inverse-image comparison is identity; its mate is identity by [lem-weil-pbc-mate-pasting], and the conjugate defining $\\beta$ is identity by [def-weil-pbc-adjunction-conjugate]. For two changes of base, paste their inverse-image squares. The proper exchanges compose by the two pasting clauses of [lem-weil-pbc-mate-pasting], and the etale comparisons compose by conjugacy of the same restriction/direct-image squares; descent preserves composition by [lem-weil-pbc-localization-universal-property]. Their product is therefore the exchange for the composite change of base. Step 4 then intertwines these composites with the same $c$ as for the single square. For an identity morphism $u$, its sheet functor is identity, and step 3 is exactly the refinement map from its compactification to $(1,1)$; after that prescribed comparison $c$ is identity. This is the identity normalization, also when an identity morphism is presented using a nontrivial compactification.",
-   "uses": [
-    "lem-weil-pbc-mate-pasting",
-    "def-weil-pbc-adjunction-conjugate",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03S6 and 0F4L; sites-cohomology.tex Tags 0E46 and 0E47, mate pasting for identity and composed base-change squares; more-etale.tex Tag 0F7F (lemma-shriek-proper-and-open-base-change)"
+    "place": "Tags 03S3 (definition-extension-zero), 03S5 (proposition-describe-jshriek), 03S6 (lemma-shriek-base-change), 0F4L (lemma-shriek-into-star-separated-etale); more-etale.tex Tags 0F50, 0F51 and 0F7B-0F7F; graph-adjunction normalization on unbounded complexes supplied by the agent"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-etale-restriction-injectives",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-localization-universal-property",
-  "def-weil-pbc-etale-shriek-base-change-map",
-  "lem-weil-pbc-etale-shriek-base-change-modules",
-  "lem-weil-pbc-etale-base-change-finite-limits",
-  "def-weil-unramified-morphism",
-  "def-weil-etale-morphism",
-  "lem-weil-pbc-open-immersion-base-change",
-  "lem-weil-pbc-proper-base-change",
-  "lem-weil-pbc-open-section-clopen",
-  "lem-weil-pbc-etale-sheaf-clopen-product",
+  "def-asd-compact-support-graph-comparison",
+  "lem-asd-compact-support-graph-sheaf-normalization",
+  "lem-asd-compact-support-graph-derived-isomorphism",
+  "lem-asd-compact-support-graph-coherence",
   "def-weil-pbc-adjunction-conjugate",
-  "def-kun-unbounded-exchange",
-  "lem-weil-pbc-mate-pasting",
-  "lem-kun-0ezp",
-  "def-weil-finite-type-morphism",
-  "lem-pc-quasi-compact-base-change",
-  "lem-asd-clopen-geometric-sections-derived-evaluation",
-  "lem-kun-proper-base-change-torsion-ring",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-geometric-point-pullback-stalk",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "lem-weil-pbc-unbounded-derived-iso-cohomology",
-  "def-weil-pbc-etale-sum-extension",
-  "def-weil-proper-morphism",
-  "lem-cbc-proper-support-sheaf-composition",
-  "lem-amb-unbounded-proper-open-interchange",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-asd-proper-open-refinement-adjoint-projection",
-  "thm-amb-etale-exceptional-adjoint"
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-etale-restriction-injectives"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 03S6 and 0F4L, graph construction; more-etale.tex Tags 0F7B-0F7F, unbounded proper/open comparison; current blueprint prop-asd-smooth-base-change, coherence (iii)",
-  "note": "Constructs the normalization by clopen graph projection; verifies the specified exchange by adjunction, then proves invertibility by unbounded torsion proper base change. No identification of different coefficient categories."
+  "place": "Tags 03S6 and 0F4L; more-etale.tex Tags 0F7B-0F7F; prop-asd-smooth-base-change coherence (iii)",
+  "note": "J4 explicit graph construction, localization descent and constructor assembly. Three strictly smaller geometric properties remain separate; vertical pasting and counit-preserving adjoint uniqueness are proved directly in Lean."
  },
  "mathlib_searches": [
   {
@@ -567,31 +430,8 @@
   ]
  },
  "tool_uses": [
-  "lem-kun-0ezp",
-  "lem-kun-proper-base-change-torsion-ring",
-  "lem-weil-pbc-etale-base-change-finite-limits",
   "lem-weil-pbc-etale-restriction-injectives",
-  "lem-weil-pbc-etale-shriek-base-change-modules",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-weil-pbc-extension-by-zero-stalks",
-  "lem-weil-pbc-geometric-point-pullback-stalk",
-  "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-mate-pasting",
-  "lem-weil-pbc-open-immersion-base-change",
-  "lem-weil-pbc-open-section-clopen",
-  "lem-weil-pbc-proper-base-change",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-pbc-termwise-adjunction-homotopy",
-  "lem-weil-pbc-unbounded-derived-iso-cohomology",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "prop-weil-pbc-geometric-stalks-exact",
-  "lem-weil-pbc-etale-sheaf-clopen-product",
-  "lem-cbc-proper-support-sheaf-composition",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-pc-quasi-compact-base-change",
-  "prop-weil-pbc-kinjective-resolutions-exist",
-  "lem-amb-unbounded-proper-open-interchange"
+  "lem-weil-pbc-termwise-adjunction-homotopy"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -617,14 +457,6 @@
   "module": "Sheaf.AlgebraicGeometry.EtaleCompactSupportNormalization",
   "declaration": "AlgebraicGeometry.Etale.nonempty_etaleCompactSupportNormalization",
   "declarations": [
-   "AlgebraicGeometry.Etale.compactificationSheafToDirectImage",
-   "AlgebraicGeometry.Etale.exactEtaleSumExchange",
-   "AlgebraicGeometry.Etale.exactCompactSupportExchange",
-   "AlgebraicGeometry.Etale.exactCompactSupportExchangeSquare",
-   "AlgebraicGeometry.Etale.exactEtaleSumExchangeSquare",
-   "AlgebraicGeometry.Etale.compactSupportComparisonOnHomotopy",
-   "AlgebraicGeometry.Etale.refinementOpenCompactification",
-   "AlgebraicGeometry.Etale.identityEtaleCompactSupportComparison",
    "AlgebraicGeometry.Etale.EtaleCompactSupportNormalization",
    "AlgebraicGeometry.Etale.nonempty_etaleCompactSupportNormalization"
   ],
@@ -634,7 +466,7 @@
   "by": "NH",
   "date": "2026-10-15",
   "existing": false,
-  "note": "The normalized comparison is packaged as a family, including the graph-normalized sheaf arrow, its exact termwise derived normalization, proper-refinement equality, counit-preserving unique right-adjoint comparison, and base-change/pasting/identity clauses. Helpers give actual canonical maps and structures, with no data supplied by sorry."
+  "note": "Original full structure and theorem signature unchanged. The eight original helpers are now in the publicly reexported NormalizationData module, with identical signatures and bodies. Constructor proof uses the explicit graph construction; see new nodes for the three remaining holes."
  },
  "reviewed_lean": {
   "date": "2026-10-15",
@@ -643,5 +475,15 @@
   "group": "NH",
   "result": "pass",
   "note": "Wrote review.md. Checked immutable statement, all 16 dependencies, sources, declarations, normalizations, universes, edge cases, and maintainer gates. scompile.py reproduced clean sandbox and library compilation. No corrections needed; branch unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-03b35",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261018T091405-L-3255847",
+  "kind": "interface",
+  "note": "independent cc review: 03b351f vs passed head 30a0f75ae: the 7 Lean modules and 7 nodes are identical, plus the bundled F7 EtaleCompactificationGraphMap.lean (byte-identical to the F7 source compiled in the 30a0f review) and the re-created def-f7 node (lean.statement = def signature); all 8 modules + importer EtaleAmbientAdjointLocality compile (lcompile --all, exit 0); sorryAx only via the 3 stated holes"
  }
 }

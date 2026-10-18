@@ -1,0 +1,115 @@
+{
+ "id": "def-f7-etale-compactification-graph-map",
+ "kind": "definition",
+ "title": "The canonical etale compactification graph map",
+ "statement": "Let A be a commutative ring, f : U → X separated and etale, and c = (i : U → Z, g : Z → X) a compactification [def-weil-compactifications-refinements]. Define the canonical map f_! → g_*i_! (in diagrammatic functor order i_! ⋙ g_*) as follows. In V = Z ×_X U put q = pr_U, v = pr_Z and s = (i,id). The graph s is open and closed. The identity s ≫ q = id and the inverse of the clopen-extension comparison give a projection π : q^* → s_!. Compose the canonical sum-extension base-change isomorphism f_!g^* ≅ q^*v_! with πv_! and the adjunction-preserving composition isomorphism s_!v_! ≅ i_!. Transpose this transformation under g^* ⊣ g_* to obtain etaleCompactificationGraphMap A f c. All maps are constructed, with no arbitrary existential witness. This definition also covers empty schemes and the zero ring.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03S6 (lemma-shriek-base-change) and 0F4L (lemma-shriek-into-star-separated-etale), the clopen graph extension and its adjunction transpose."
+ },
+ "stmt_deps": [
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-inverse-image",
+  "def-weil-pbc-etale-sum-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03S6 and 0F4L",
+  "note": "F7 canonical explicit graph construction retained unchanged in the J4 repair. The prior delivery relied on the source being present at its base; C-30a0f reports it missing at landing, so J4 bundles the source and records its node."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a separated etale morphism and a compactification the graph extension by zero map composes to the canonical map to direct image",
+   "results": "8 hits including HasCompactSupport.extend_zero, AlgebraicGeometry.IsEtale, Scheme.Etale and IsProper.isStableUnderBaseChange; none concerns sheaf graph comparisons.",
+   "date": "2026-10-18",
+   "verdict": "No exact result for constant-ring etale sheaves, their graph comparison or unbounded compact supports."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a separated etale map and a compactification construct the graph extension from etale lower shriek to compactified pushforward",
+   "results": "8 hits including AlgebraicGeometry.liftCoborder_app, Scheme.Etale and Scheme.Hom.normalizationDiagramMap; none supplies this sheaf natural transformation.",
+   "date": "2026-10-18",
+   "verdict": "No exact result; retain the canonical F7 graph construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftAdjointUniq",
+   "results": "12 hits: leftAdjointUniq and its unit, counit and composition equations.",
+   "date": "2026-10-18",
+   "verdict": "Generic categorical comparison used in the explicit graph construction."
+  },
+  {
+   "tool": "grep",
+   "query": "isOpenImmersion_of_comp|openImmersionLowerShriekToLowerStar",
+   "results": "0 Mathlib hits; repository search finds the scheme postcomposition theorem and the clopen-extension comparison in the source library; no etaleCompactificationGraphMap declaration in the current library.",
+   "date": "2026-10-18",
+   "verdict": "Use the source-library APIs and deliver the retained F7 source together with its missing node."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleCompactSupportNormalization",
+  "date": "2026-10-18",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-etale-compact-support-normalization",
+   "place": "Construct the clopen compactification graph and transpose the graph projection.",
+   "via": [
+    "def-asd-compact-support-graph-comparison"
+   ]
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleCompactificationGraphMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCompactificationGraphMap.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleCompactificationGraphMap",
+  "statement": "def etaleCompactificationGraphMap\n    (A : Type (u + 1)) [CommRing A]\n    {U X : Scheme.{u}} (u : U ⟶ X) [Etale u] [IsSeparated u]\n    (c : Compactification u) :\n    etaleLowerShriek (ModuleCat.{u + 1} A) u inferInstance ⟶\n      openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i ⋙\n        lowerStar (ModuleCat.{u + 1} A) c.g",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-18"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-03b35",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261018T091405-L-3255847",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-03b35",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261018T091405-L-3255847",
+  "kind": "interface",
+  "note": "independent cc review: 03b351f vs passed head 30a0f75ae: the 7 Lean modules and 7 nodes are identical, plus the bundled F7 EtaleCompactificationGraphMap.lean (byte-identical to the F7 source compiled in the 30a0f review) and the re-created def-f7 node (lean.statement = def signature); all 8 modules + importer EtaleAmbientAdjointLocality compile (lcompile --all, exit 0); sorryAx only via the 3 stated holes"
+ }
+}

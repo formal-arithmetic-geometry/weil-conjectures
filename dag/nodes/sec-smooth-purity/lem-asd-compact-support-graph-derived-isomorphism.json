@@ -1,0 +1,168 @@
+{
+ "id": "lem-asd-compact-support-graph-derived-isomorphism",
+ "kind": "statement",
+ "title": "Invertibility of the specified graph map on unbounded complexes",
+ "statement": "Let $A$ be a finite commutative ring, $U,X$ locally Noetherian quasi-compact schemes, $f:U\\to X$ separated etale, and $c$ a compactification. In particular $f$ is of finite type [def-weil-finite-type-morphism]. The actual natural transformation $Da:Df_{\\Sigma!}\\to Rr_*Dj_!$ [def-asd-compact-support-graph-comparison] is an isomorphism. Its uniquely determined inverse defines canonicalEtaleCompactSupportComparison. Together with [lem-asd-compact-support-graph-sheaf-normalization] and the proved $Q_h$ component formula, it defines canonicalEtaleCompactSupportCore.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03S3 (definition-extension-zero), 03S5 (proposition-describe-jshriek), 03S6 (lemma-shriek-base-change), 0F4L (lemma-shriek-into-star-separated-etale); more-etale.tex Tags 0F50, 0F51 and 0F7B-0F7F; graph-adjunction normalization on unbounded complexes supplied by the agent"
+ },
+ "stmt_deps": [
+  "def-asd-compact-support-graph-comparison",
+  "lem-asd-compact-support-graph-sheaf-normalization",
+  "def-weil-finite-type-morphism",
+  "def-f7-etale-compactification-graph-map"
+ ],
+ "proof": [
+  {
+   "text": "For each geometric point g:Spec Ω→X, the pulled-back f_g is quasi-compact and locally quasi-finite. Since Spec Ω is locally Artinian, Mathlib AlgebraicGeometry.IsFinite.of_locallyQuasiFinite makes f_g finite. Apply [lem-asd-compact-support-finite-graph-isomorphism] to the base-changed compactification. This replaces the planned decomposition into field points, clopen-section geometry and separate K-injective evaluation theorem.",
+   "uses": [
+    "lem-asd-compact-support-finite-graph-isomorphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03S3 (definition-extension-zero), 03S5 (proposition-describe-jshriek), 03S6 (lemma-shriek-base-change), 0F4L (lemma-shriek-into-star-separated-etale); more-etale.tex Tags 0F50, 0F51 and 0F7B-0F7F; graph-adjunction normalization on unbounded complexes supplied by the agent"
+   }
+  },
+  {
+   "text": "Unbounded torsion proper base change for c.g makes the specified compact-support exchange at g an isomorphism. Evaluate [lem-asd-compact-support-graph-geometric-base-change] at K. Its right side is the sum-exchange isomorphism followed by the finite-fibre graph isomorphism. The left side is Dg*(a_K) followed by the compact-support exchange. Cancel the latter to prove Dg*(a_K) invertible.",
+   "uses": [
+    "lem-asd-compact-support-graph-geometric-base-change",
+    "lem-kun-proper-base-change-torsion-ring",
+    "lem-weil-pbc-etale-shriek-base-change-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03S3 (definition-extension-zero), 03S5 (proposition-describe-jshriek), 03S6 (lemma-shriek-base-change), 0F4L (lemma-shriek-into-star-separated-etale); more-etale.tex Tags 0F50, 0F51 and 0F7B-0F7F; graph-adjunction normalization on unbounded complexes supplied by the agent"
+   }
+  },
+  {
+   "text": "The canonical left-derived/exact inverse-image comparison identifies Dg*(a_K) with Lg*(a_K). Apply the established source-library theorem isIso_of_isIso_leftDerivedUpperStar_algClosurePoint_map, whose proof uses exact inverse image, conservative geometric points, and the unbounded cohomology isomorphism criterion. Every a_K is invertible; NatIso.isIso_of_isIso_app gives invertibility of the natural transformation. No equality of derived maps is tested on stalks.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03S3 (definition-extension-zero), 03S5 (proposition-describe-jshriek), 03S6 (lemma-shriek-base-change), 0F4L (lemma-shriek-into-star-separated-etale); more-etale.tex Tags 0F50, 0F51 and 0F7B-0F7F; graph-adjunction normalization on unbounded complexes supplied by the agent"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-compact-support-finite-graph-isomorphism",
+  "lem-asd-compact-support-graph-geometric-base-change",
+  "lem-kun-proper-base-change-torsion-ring",
+  "lem-weil-pbc-etale-shriek-base-change-modules",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03S6 and 0F4L; more-etale.tex Tags 0F7B-0F7F; current blueprint prop-asd-smooth-base-change, coherence (iii)",
+  "note": "Explicit graph construction and termwise descent of the parent normalization argument; the unit route is unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a separated etale morphism and a compactification the graph extension by zero map composes to the canonical map to direct image",
+   "results": "8 hits including HasCompactSupport.extend_zero, AlgebraicGeometry.IsEtale, Scheme.Etale and IsProper.isStableUnderBaseChange; none concerns sheaf graph comparisons.",
+   "date": "2026-10-18",
+   "verdict": "No exact result for constant-ring etale sheaves, their graph comparison or unbounded compact supports."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The graph construction of etale extension by zero into a compactified pushforward respects base change and proper refinement",
+   "results": "8 hits: IsEtale.instIsStableUnderBaseChangeScheme, Scheme.Etale, StandardEtalePair.hasMap_X, StandardEtalePair.HasMap.map, IsEtale.instHasOfPostcompPropertyScheme, RingHom.Etale.isStableUnderBaseChange, Scheme.instCategoryEtale, IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified.",
+   "date": "2026-10-18",
+   "verdict": "No sheaf or derived normalization theorem; use the existing scheme geometry and adjunction APIs."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.natTrans_ext",
+   "results": "CategoryTheory.Localization.natTrans_ext.",
+   "date": "2026-10-18",
+   "verdict": "Useful generic full-faithfulness tool, not the geometric normalization or coherence result."
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_counit|fullyFaithfulWhiskeringLeft|graphExtend_graph",
+   "results": "9 hits: Adjunction/Mates.lean conjugateEquiv_counit and _symm; Monoidal/Closed/Basic.lean usage; Localization/Predicate.lean fullyFaithfulWhiskeringLeft; Abelian/SerreClass/Localization.lean wrappers. No graphExtend_graph in Mathlib.",
+   "date": "2026-10-18",
+   "verdict": "Generic categorical tools suffice for the explicit construction and formal assembly, but not its geometric normalization, isomorphism or coherences."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleCompactSupportNormalization",
+  "date": "2026-10-18",
+  "group": "J4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-asd-smooth-base-change",
+   "place": "Proof, coherence (iii): etale inverse image and finite-fibre sum in the smooth chart, with the specified compact-support exchange of coherence (i).",
+   "via": [
+    "lem-asd-etale-compact-support-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphDerivedIso",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleCompactSupportGraphDerivedIso.lean",
+  "declaration": "AlgebraicGeometry.Etale.isIso_compactSupportGraphDerivedComparison",
+  "declarations": [
+   "AlgebraicGeometry.Etale.isIso_compactSupportGraphDerivedComparison",
+   "AlgebraicGeometry.Etale.canonicalEtaleCompactSupportComparison",
+   "AlgebraicGeometry.Etale.canonicalEtaleCompactSupportCore"
+  ],
+  "statement": "theorem isIso_compactSupportGraphDerivedComparison\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {U X : Scheme.{u}} (f : U ⟶ X) [Etale f] [IsSeparated f]\n    [IsLocallyNoetherian U] [CompactSpace U] [IsLocallyNoetherian X] [CompactSpace X]\n    (c : Compactification f) :\n    IsIso (compactSupportDerivedComparison A f c\n      (etaleCompactificationGraphMap A f c))",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-18"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-03b35",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261018T091405-L-3255847",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-03b35",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261018T091405-L-3255847",
+  "kind": "interface",
+  "note": "independent cc review: 03b351f vs passed head 30a0f75ae: the 7 Lean modules and 7 nodes are identical, plus the bundled F7 EtaleCompactificationGraphMap.lean (byte-identical to the F7 source compiled in the 30a0f review) and the re-created def-f7 node (lean.statement = def signature); all 8 modules + importer EtaleAmbientAdjointLocality compile (lcompile --all, exit 0); sorryAx only via the 3 stated holes"
+ }
+}

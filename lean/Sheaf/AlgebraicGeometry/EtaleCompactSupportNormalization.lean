@@ -5,33 +5,9 @@ Authors: SHEAF group NH
 -/
 module
 
-public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
+public import Sheaf.AlgebraicGeometry.EtaleCompactSupportNormalizationData
 
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
-public import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
-public import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeModules
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtale
-public import WeilConjectures.SixFunctors.Etale.LowerShriek.Comparison
-public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekBaseChange
-public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
-
-import Sheaf.EtaleCohomology.SepClosedFieldVanishing
-import Sheaf.AlgebraicGeometry.ProperUnboundedBaseChange
-import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.FiniteComparison
-import Sheaf.AlgebraicGeometry.GeometricPointCanonicalGerm
-import Sheaf.AlgebraicGeometry.OpenSectionClopen
-import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
-import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.AlgebraicGeometry.EtaleLowerShriekBaseChangeMap
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
-import Sheaf.AlgebraicGeometry.EtaleExceptionalAdjoint
-import Sheaf.AlgebraicGeometry.EtaleSheafClopenProduct
-import Sheaf.AlgebraicGeometry.ProperSupportSheafComposition
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphCoherence
 
 /-!
 # Normalization of compact supports for an etale morphism
@@ -50,124 +26,6 @@ open CategoryTheory CategoryTheory.Limits
 open scoped CategoryTheory.Functor
 
 namespace AlgebraicGeometry.Etale
-
-/-- Inclusion of compactly supported sheaf sections into direct image.
-Source: SGA 4 XVII 6.2.11
-(blueprint: lem-asd-etale-compact-support-normalization). -/
-noncomputable def compactificationSheafToDirectImage
-    (A : Type (u + 1)) [CommRing A] {U X : Scheme.{u}} {f : U ⟶ X}
-    (c : Compactification f) :
-    openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i ⋙
-      lowerStar (ModuleCat.{u + 1} A) c.g ⟶ lowerStar (ModuleCat.{u + 1} A) f :=
-  Functor.whiskerRight (openImmersionLowerShriekToLowerStar (ModuleCat.{u + 1} A) c.i)
-      (lowerStar (ModuleCat.{u + 1} A) c.g) ≫
-    (lowerStarComp (ModuleCat.{u + 1} A) c.i c.g f c.comm).hom
-
-/-- The specified sum-extension exchange, descended termwise and inverted.
-Source: Stacks Project Tag 03S6
-(blueprint: lem-asd-etale-compact-support-normalization). -/
-noncomputable def exactEtaleSumExchange
-    (A : Type (u + 1)) [CommRing A] {U X X' : Scheme.{u}}
-    (f : U ⟶ X) [Etale f] (g : X' ⟶ X) :
-    (etaleLowerShriek (ModuleCat.{u + 1} A) f inferInstance).mapDerivedCategory ⋙
-        (upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategory ≅
-      (upperStar (ModuleCat.{u + 1} A) (pullback.snd g f)).mapDerivedCategory ⋙
-        (etaleLowerShriek (ModuleCat.{u + 1} A) (pullback.fst g f)
-          inferInstance).mapDerivedCategory :=
-  haveI := isIso_etaleLowerShriekBaseChangeMap A g f
-  (Functor.mapDerivedCategoryCompIso _ _).symm ≪≫
-    Functor.mapDerivedCategoryNatIso (asIso (etaleLowerShriekBaseChangeMap A g f)).symm ≪≫
-    Functor.mapDerivedCategoryCompIso _ _
-
-/-- The proper exchange followed by inverse open-extension exchange, using exact derived
-inverse image. The transport from `L(g^*)` is the canonical exact-functor comparison.
-Source: SGA 4 XVII 5.2.2
-(blueprint: lem-asd-etale-compact-support-normalization). -/
-noncomputable def exactCompactSupportExchange
-    (A : Type (u + 1)) [CommRing A] {U X X' : Scheme.{u}}
-    {f : U ⟶ X} (c : Compactification f) (g : X' ⟶ X) :
-    rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c ⋙
-        (upperStar (ModuleCat.{u + 1} A) g).mapDerivedCategory ⟶
-      (upperStar (ModuleCat.{u + 1} A) (pullback.snd g f)).mapDerivedCategory ⋙
-        rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A)
-          (c.ofIsPullback (IsPullback.of_hasPullback g f).flip) :=
-  Functor.whiskerLeft (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c)
-      (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A) g).inv ≫
-    rightDerivedLowerShriekOfCompactificationBaseChangeMap (ModuleCat.{u + 1} A)
-      (IsPullback.of_hasPullback g f).flip c ≫
-    Functor.whiskerRight
-      (leftDerivedUpperStarIsoMapDerivedCategory (ModuleCat.{u + 1} A)
-        (pullback.snd g f)).hom _
-
-/-- The compact-support exchange as a 2-square, for canonical pasting.
-Source: SGA 4 XVII 5.2.2
-(blueprint: lem-asd-etale-compact-support-normalization). -/
-noncomputable def exactCompactSupportExchangeSquare
-    (A : Type (u + 1)) [CommRing A] {U X X' : Scheme.{u}}
-    {f : U ⟶ X} (c : Compactification f) (g : X' ⟶ X) :=
-  TwoSquare.mk _ _ _ _ (exactCompactSupportExchange A c g)
-
-/-- The specified sum exchange as a 2-square, for the same canonical pasting.
-Source: Stacks Project Tag 03S6
-(blueprint: lem-asd-etale-compact-support-normalization). -/
-noncomputable def exactEtaleSumExchangeSquare
-    (A : Type (u + 1)) [CommRing A] {U X X' : Scheme.{u}}
-    (f : U ⟶ X) [Etale f] (g : X' ⟶ X) :=
-  TwoSquare.mk _ _ _ _ (exactEtaleSumExchange A f g).hom
-
-/-- A termwise sheaf comparison followed by the total-right-derived comparison.
-This is a map on homotopy representatives, with no boundedness condition.
-Source: SGA 4 XVII 6.2.11
-(blueprint: lem-asd-etale-compact-support-normalization). -/
-noncomputable def compactSupportComparisonOnHomotopy
-    (A : Type (u + 1)) [CommRing A] {U X : Scheme.{u}} (f : U ⟶ X) [Etale f]
-    (c : Compactification f)
-    (a : etaleLowerShriek (ModuleCat.{u + 1} A) f inferInstance ⟶
-      openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i ⋙
-        lowerStar (ModuleCat.{u + 1} A) c.g)
-    (K : HomotopyCategory (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A))
-      (ComplexShape.up ℤ)) :
-    (etaleLowerShriek (ModuleCat.{u + 1} A) f inferInstance).mapDerivedCategory.obj
-        (DerivedCategory.Qh.obj K) ⟶
-      (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A) c).obj
-        (DerivedCategory.Qh.obj K) :=
-  (etaleLowerShriek (ModuleCat.{u + 1} A) f inferInstance).mapDerivedCategoryFactorsh.hom.app K ≫
-    DerivedCategory.Qh.map ((a.mapHomotopyCategory (ComplexShape.up ℤ)).app K) ≫
-    DerivedCategory.Qh.map
-      ((Functor.mapHomotopyCategoryCompIso (Iso.refl _) (ComplexShape.up ℤ)).inv.app K) ≫
-    (lowerStar (ModuleCat.{u + 1} A) c.g).rightDerivedFunctorUnit.app
-      (((openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).mapHomotopyCategory
-        (ComplexShape.up ℤ)).obj K) ≫
-    (lowerStar (ModuleCat.{u + 1} A) c.g).rightDerivedFunctor.map
-      ((openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).mapDerivedCategoryFactorsh.inv.app K)
-
-/-- Regard a proper refinement as a compactification of the coarser open immersion.
-Source: SGA 4 XVII 6.2.11
-(blueprint: lem-asd-etale-compact-support-normalization). -/
-def refinementOpenCompactification
-    {U X : Scheme.{u}} {f : U ⟶ X} {c d : Compactification f}
-    (r : c.Refinement d) : Compactification d.i where
-  Z := c.Z
-  g := r.hom
-  i := c.i
-  comm := r.i_hom.symm
-  isProper := inferInstance
-  isOpenImmersion := inferInstance
-
-/-- Identity normalization: remove the exact derived direct image of the identity.
-Source: SGA 4 XVII 6.2.11
-(blueprint: lem-asd-etale-compact-support-normalization). -/
-noncomputable def identityEtaleCompactSupportComparison
-    (A : Type (u + 1)) [CommRing A] (X : Scheme.{u}) :
-    rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} A)
-        (Compactification.ofIsProper (𝟙 X)) ≅
-      (etaleLowerShriek (ModuleCat.{u + 1} A) (𝟙 X) inferInstance).mapDerivedCategory :=
-  Functor.isoWhiskerLeft
-      (etaleLowerShriek (ModuleCat.{u + 1} A) (𝟙 X) inferInstance).mapDerivedCategory
-      ((lowerStar (ModuleCat.{u + 1} A) (𝟙 X)).rightDerivedFunctorIsoMapDerivedCategory ≪≫
-        Functor.mapDerivedCategoryNatIso (lowerStarId (ModuleCat.{u + 1} A) X) ≪≫
-        Functor.mapDerivedCategoryIdIso _) ≪≫
-    Functor.rightUnitor _
 
 /-- A simultaneous normalization, on all unbounded complexes. The graph-extension equation
 specifies the sheaf comparison, and the homotopy equation specifies its derived descent;
@@ -276,51 +134,113 @@ structure EtaleCompactSupportNormalization (A : Type (u + 1)) [CommRing A] where
           (etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) f inferInstance)).counit =
         adj.counit
 
+private theorem counitPreservingComparison
+    {C D : Type*} [Category C] [Category D]
+    {L S : C ⥤ D} {R T : D ⥤ C}
+    (e : L ≅ S) (adj : L ⊣ R) (sumAdj : S ⊣ T) :
+    ∃! q : R ≅ T,
+      Functor.whiskerLeft R e.hom ≫ Functor.whiskerRight q.hom S ≫ sumAdj.counit =
+        adj.counit := by
+  let q : R ≅ T := conjugateIsoEquiv adj sumAdj e.symm
+  have hq : Functor.whiskerLeft R e.hom ≫
+      Functor.whiskerRight q.hom S ≫ sumAdj.counit = adj.counit := by
+    ext Y
+    simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
+    change e.hom.app (R.obj Y) ≫
+      S.map (((conjugateEquiv adj sumAdj) e.inv).app Y) ≫ sumAdj.counit.app Y = _
+    rw [conjugateEquiv_counit adj sumAdj e.inv Y]
+    simp
+  refine ⟨q, hq, ?_⟩
+  intro q' hq'
+  apply Iso.ext
+  ext Y
+  apply (sumAdj.homEquiv _ _).symm.injective
+  change S.map (q'.hom.app Y) ≫ sumAdj.counit.app Y =
+    S.map (q.hom.app Y) ≫ sumAdj.counit.app Y
+  apply (cancel_epi (e.hom.app (R.obj Y))).1
+  exact (NatTrans.congr_app hq' Y).trans (NatTrans.congr_app hq Y).symm
+
+private theorem comparison_vComp
+    {C₀ C₁ C₂ C₃ C₄ C₅ : Type*}
+    [Category C₀] [Category C₁] [Category C₂]
+    [Category C₃] [Category C₄] [Category C₅]
+    {F₀ S₀ : C₀ ⥤ C₁} {F₁ S₁ : C₂ ⥤ C₃} {F₂ S₂ : C₄ ⥤ C₅}
+    {H₀ : C₀ ⥤ C₂} {H₁ : C₂ ⥤ C₄} {G₀ : C₁ ⥤ C₃} {G₁ : C₃ ⥤ C₅}
+    (a₀ : TwoSquare F₀ H₀ G₀ F₁) (a₁ : TwoSquare F₁ H₁ G₁ F₂)
+    (b₀ : TwoSquare S₀ H₀ G₀ S₁) (b₁ : TwoSquare S₁ H₁ G₁ S₂)
+    (e₀ : F₀ ≅ S₀) (e₁ : F₁ ≅ S₁) (e₂ : F₂ ≅ S₂)
+    (h₀ : a₀.natTrans ≫ Functor.whiskerLeft H₀ e₁.hom =
+      Functor.whiskerRight e₀.hom G₀ ≫ b₀.natTrans)
+    (h₁ : a₁.natTrans ≫ Functor.whiskerLeft H₁ e₂.hom =
+      Functor.whiskerRight e₁.hom G₁ ≫ b₁.natTrans) :
+    (a₀.vComp a₁).natTrans ≫ Functor.whiskerLeft (H₀ ⋙ H₁) e₂.hom =
+      Functor.whiskerRight e₀.hom (G₀ ⋙ G₁) ≫ (b₀.vComp b₁).natTrans := by
+  ext K
+  have h₀K := NatTrans.congr_app h₀ K
+  have h₁K := NatTrans.congr_app h₁ (H₀.obj K)
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app] at h₀K h₁K
+  simp only [TwoSquare.vComp, TwoSquare.mk, NatTrans.comp_app, Functor.associator_hom_app,
+    Functor.associator_inv_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+    Functor.comp_obj, Functor.comp_map, Category.id_comp, Category.comp_id, Category.assoc]
+  rw [h₁K, ← G₁.map_comp_assoc, h₀K, G₁.map_comp, Category.assoc]
+
 /-- The canonical compact-support-to-sum normalization, including its degree-zero,
 refinement, sum/evaluation adjunction, base-change and identity/composition normalizations.
 Source: SGA 4 XVII 5.2.2 and 6.2.11; Stacks Project Tag 03S6
 (blueprint: lem-asd-etale-compact-support-normalization).
 
 Proof:
-1. Apply sum extension and inverse image degreewise, using exactness from
-   lem-weil-pbc-etale-restriction-injectives. Descend their unit, evaluation counit and
-   triangles by lem-weil-pbc-termwise-adjunction-homotopy and
-   lem-weil-pbc-localization-universal-property. Descend the specified etale beta and its
-   inverse using lem-weil-pbc-etale-shriek-base-change-modules.
-2. In V = Z times_X U the graph of j is open (etale diagonal) and closed (a section of the
-   proper projection). Use lem-weil-pbc-open-section-clopen. Restriction to the two clopen
-   components gives the canonical projection q^*M to extension from the graph.
-3. Pull back sum extension to Z by the specified inverse beta, project to the graph and
-   compose left adjoints. Transpose under r^* adjoint to Rr_* to construct a from derived
-   sum extension to compact support before asserting invertibility.
-4. Pull this construction back along g. On graph components both maps are identity and
-   on their complements both are zero. Mate pasting and localization descend this equality
-   of sheaf transformations to all complexes. Transposition yields C g^*a = a' C_sum.
-5. At a geometric point use unbounded torsion proper base change
-   (lem-kun-proper-base-change-torsion-ring). By lem-kun-0ezp the fibre is a finite disjoint
-   union of field points. It is clopen in the compactification. Pushforward on it is the
-   exact finite product, equal to the finite sum; the graph construction is its identity.
-   Resolve the two clopen factors independently by K-injectives. The complement is zero.
-   Exact conservative stalks and lem-weil-pbc-unbounded-derived-iso-cohomology show a is
-   invertible on every complex, including the empty fibre. Put c = a inverse.
-6. On sheaves a extends each summand by zero off its graph. Its support is closed in the
-   graph, hence proper over the test scheme. The inverse recovers the sheet components.
-   The sheaf_normalization equation records precisely this map into direct image.
-7. For a refinement, restrict to the coarser open, apply proper exchange and project to
-   the clopen graph component. Transpose to obtain the identity-normalized comparison.
-   It is invertible by the same fibre calculation. Composing derived direct images gives
-   rho; transposition of the graph projections gives rho a₂ = a₁ and hence c₁ rho = c₂.
-   Identity and composition laws follow by cancellation.
-8. Transport the degreewise sum/evaluation adjunction through c. The conjugacy bijection
-   gives the unique right-adjoint isomorphism preserving the specified counit, for every
-   chosen compact-support right adjoint (thm-amb-etale-exceptional-adjoint).
-9. Invert a in step 4 to obtain the displayed base-change square. Identity comparisons
-   and pasted comparisons are identities and composites by mate pasting, conjugacy of beta
-   and localization. For the identity morphism the graph map is identity after removing
-   the identity functors; step 7 handles its other compactifications. -/
+1. Construct the clopen compactification graph and its actual projection. Transpose the
+   inverse specified sum exchange followed by that projection under proper direct image.
+   Descend this sheaf transformation degreewise through the localization; the component
+   formula is proved on every homotopy representative.
+2. The graph sheaf normalization identifies its composite into direct image with the
+   canonical graph-extension arrow. The derived graph isomorphism theorem gives the
+   uniquely specified inverse. Together they form canonicalEtaleCompactSupportCore.
+   For finite etale morphisms the derived isomorphism is proved by sheaf normalization,
+   preservation of K-injectives and cancellation of the derived-composition unit.
+3. The graph coherence theorem supplies the single-base-change, proper-refinement and
+   identity equations for this fixed inverse. Two applications of the single-square
+   equation prove the displayed vertical composite by functoriality and associativity.
+4. For any chosen compact-support adjunction, conjugate the inverse comparison under it
+   and the degreewise sum/evaluation adjunction. The conjugacy counit law proves the
+   specified equality. Cancel the invertible comparison and use injectivity of the sum
+   adjunction bijection to prove uniqueness of the right-adjoint isomorphism. -/
 theorem nonempty_etaleCompactSupportNormalization
     (A : Type (u + 1)) [CommRing A] [Finite A] :
     Nonempty (EtaleCompactSupportNormalization A) := by
-  sorry
+  let core := canonicalEtaleCompactSupportCore A
+  have coh := etaleCompactSupportGraph_coherence A
+  exact ⟨{
+    comparison := core.comparison
+    sheafComparison := core.sheafComparison
+    sheaf_normalization := core.sheaf_normalization
+    derived_normalization := core.derived_normalization
+    base_change := coh.base_change
+    composition := by
+      intro U X X' X'' f hf hs hq hU hUc hX hXc hX' hX'c hX'' hX''c c g k
+      exact comparison_vComp
+        (exactCompactSupportExchangeSquare A c g)
+        (exactCompactSupportExchangeSquare A
+          (c.ofIsPullback (IsPullback.of_hasPullback g f).flip) k)
+        (exactEtaleSumExchangeSquare A f g)
+        (exactEtaleSumExchangeSquare A (pullback.fst g f) k)
+        (core.comparison f c)
+        (core.comparison (pullback.fst g f)
+          (c.ofIsPullback (IsPullback.of_hasPullback g f).flip))
+        (core.comparison (pullback.fst k (pullback.fst g f))
+          ((c.ofIsPullback (IsPullback.of_hasPullback g f).flip).ofIsPullback
+            (IsPullback.of_hasPullback k (pullback.fst g f)).flip))
+        (coh.base_change f c g)
+        (coh.base_change (pullback.fst g f)
+          (c.ofIsPullback (IsPullback.of_hasPullback g f).flip) k)
+    refinement := coh.refinement
+    identity := coh.identity
+    adjunction := by
+      intro U X f hf hs hU hUc hX hXc c R adj
+      exact counitPreservingComparison (core.comparison f c) adj
+        (Adjunction.mapDerivedCategoryAdjunction
+          (etaleLowerShriekUpperStarAdjunction (ModuleCat.{u + 1} A) f inferInstance))
+  }⟩
 
 end AlgebraicGeometry.Etale
