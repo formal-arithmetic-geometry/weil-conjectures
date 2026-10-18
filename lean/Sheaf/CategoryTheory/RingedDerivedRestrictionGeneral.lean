@@ -7,6 +7,10 @@ module
 
 public import Sheaf.CategoryTheory.RingedDerivedRestriction
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
+import WeilConjectures.Mathlib.CategoryTheory.Sites.Continuous
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.CategoryTheory.Sites.EpiMono
+import Mathlib.CategoryTheory.Sites.PreservesLocallyBijective
 
 /-!
 # Derived slice restriction with independent universes
@@ -44,7 +48,33 @@ theorem ringedOverFunctor_exactGeneral (U : C)
     (SheafOfModules.overFunctor.{m} R U).Additive ∧
       PreservesFiniteLimits (SheafOfModules.overFunctor.{m} R U) ∧
       PreservesFiniteColimits (SheafOfModules.overFunctor.{m} R U) := by
-  sorry
+  let F := SheafOfModules.overFunctor.{m} R U
+  let G := SheafOfModules.toSheaf.{m} (R.over U)
+  let H := J.overPullback AddCommGrpCat.{m} U
+  have : F.Additive := by
+    constructor
+    intro M N f g
+    ext V x
+    rfl
+  let e : F ⋙ G ≅ SheafOfModules.toSheaf.{m} R ⋙ H := Iso.refl _
+  have : PreservesFiniteLimits H := inferInstance
+  have : PreservesFiniteLimits (F ⋙ G) := preservesFiniteLimits_of_natIso e.symm
+  have : PreservesFiniteLimits F := preservesFiniteLimits_of_reflects_of_preserves F G
+  have : H.PreservesEpimorphisms := by
+    constructor
+    intro M N f hf
+    have : Sheaf.IsLocallySurjective f :=
+      (Sheaf.isLocallySurjective_iff_epi' AddCommGrpCat.{m} f).2 hf
+    have : Sheaf.IsLocallySurjective (H.map f) :=
+      Presheaf.isLocallySurjective_whisker (J.over U) J (Over.forget U) f.hom
+    exact Sheaf.epi_of_isLocallySurjective (H.map f)
+  have : F.PreservesEpimorphisms := by
+    constructor
+    intro M N f hf
+    apply G.epi_of_epi_map
+    exact inferInstanceAs (Epi (H.map ((SheafOfModules.toSheaf.{m} R).map f)))
+  have : F.PreservesHomology := Functor.preservesHomology_of_preservesEpis_and_kernels F
+  exact ⟨inferInstance, inferInstance, Functor.preservesFiniteColimits_of_preservesHomology F⟩
 
 /-- The functor on derived categories induced by the actual exact slice restriction.
 Source: Stacks 03DH and 08JB (blueprint: def-weil-pbc-ringed-derived-restriction).
