@@ -20,9 +20,68 @@
   "def-sc-function-field",
   "def-sc-topological-abelian-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By the definition of excellence, $R$ is quasi-excellent (and Noetherian). Apply [lem-exc-quasi-excellent-nagata] to this quasi-excellent ring: $R$ is Nagata. Thus the given regular local ring $R$ has the Nagata and dimension-$2$ hypotheses needed for the regular-surface rationality theorem.",
+   "uses": [
+    "def-exc-excellent-ring",
+    "lem-exc-quasi-excellent-nagata"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 07QT, definition-excellent, and 07QV, lemma-quasi-excellent-nagata."
+   }
+  },
+  {
+   "text": "Apply [lem-per-regular-surface-rational] to $R$, using regular locality and dimension $2$ from the hypotheses and the Nagata property from Step 1. It follows that $R$ defines a rational singularity. This is the full predicate of [def-per-rational-surface-singularity], whose domain consists of Noetherian normal Nagata local domains of dimension $2$; in particular the normality condition on the base ring for propagation is included. We use the regular-surface theorem as stated, without extracting any additional assertion from its proof.",
+   "uses": [
+    "lem-per-regular-surface-rational",
+    "def-per-rational-surface-singularity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tags 0B4Q, lemma-regular-rational, and 0B4N, definition-reduce-to-rational."
+   }
+  },
+  {
+   "text": "Apply [lem-per-rational-singularity-birational-propagation] with its rings $(R,S)$ equal to $(R,B)$. Its base ring is a normal Nagata local domain of dimension $2$ defining a rational singularity by Steps 1 and 2. The inclusion is an injective local extension of domains with the same fraction field by hypothesis. The remaining assumptions on $S$ are exactly the given normality, local-domain property, dimension $2$, and essential finite type of $B$. Therefore $B$ defines a rational singularity.",
+   "uses": [
+    "lem-per-rational-singularity-birational-propagation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0BG0, lemma-rational-propagates."
+   }
+  },
+  {
+   "text": "Let $Z$ and $g:Z\\to\\operatorname{Spec}B$ be arbitrary as in the conclusion. They satisfy precisely the normal-modification convention in [def-per-rational-surface-singularity]: $g$ is proper, $Z$ is integral and normal, and $g$ induces an isomorphism of function fields. The defining universal vanishing for the rational singularity $B$ from Step 3, evaluated at $(Z,g)$, gives $H^1(Z_{\\rm Zar},\\mathcal O_Z)=0$. By [def-sc-topological-abelian-cohomology], this is the ordinary Zariski cohomology of the additive structure sheaf specified in the statement. Since $(Z,g)$ was arbitrary, this proves every asserted vanishing.",
+   "uses": [
+    "def-per-rational-surface-singularity",
+    "def-sc-topological-abelian-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/resolve.tex",
+    "place": "Tag 0B4N, definition-reduce-to-rational (1); modification convention at section-vanishing."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-excellent-ring",
+  "lem-exc-quasi-excellent-nagata",
+  "lem-per-regular-surface-rational",
+  "def-per-rational-surface-singularity",
+  "lem-per-rational-singularity-birational-propagation",
+  "def-sc-topological-abelian-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/resolve.tex",
+  "place": "Tags 0B4Q (lemma-regular-rational), 0BG0 (lemma-rational-propagates), and 0B4N (definition-reduce-to-rational); Nagata prerequisite from more-algebra.tex Tags 07QT and 07QV."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +117,45 @@
    "results": "8 hits; Algebra.IsStandardSmooth.subsingleton_h1Cotangent, Algebra.SubmersivePresentation.subsingleton_h1Cotangent, Algebra.FormallySmooth.subsingleton_h1Cotangent, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.Extension.subsingleton_h1Cotangent, Algebra.IsSmoothAt, Algebra.IsStandardSmooth.iff_exists_basis_kaehlerDifferential, Algebra.smoothLocus_eq_compl_support_inter; ; logged digest fd3cd933bd6195ba",
    "date": "2026-10-18",
    "verdict": "no match: read the returned signatures; these concern relative normalization, ordinary adic completion, rational maps, smooth/cotangent charts or Weierstrass nonsingularity, and do not assert this surface theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Vanishing of first structure sheaf cohomology for every normal proper birational model of a rational surface singularity",
+   "results": "8 hits; AlgebraicGeometry.LocallyRingedSpace.𝒪, Algebra.FormallySmooth.subsingleton_h1Cotangent, AlgebraicGeometry.structureSheafInType, AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen, AlgebraicGeometry.Spec.structureSheaf, AlgebraicGeometry.StructureSheaf.globalSectionsIso, AlgebraicGeometry.ProjectiveSpectrum.Proj.structureSheaf, Algebra.IsStandardSmoothOfRelationDimension.subsingleton_kaehlerDifferential; logged digest f503f6aaf7e53f32",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned signatures; smoothness, normalization and cotangent cohomology do not assert rational singularities or first structure-sheaf cohomology vanishing"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rational\", \"singular\"",
+   "results": "0 hits; ; logged digest 4f53cda18c2baa0c",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned signatures; smoothness, normalization and cotangent cohomology do not assert rational singularities or first structure-sheaf cohomology vanishing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A normal two dimensional local domain birational and essentially of finite type over an excellent regular local surface ring has rational singularities",
+   "results": "8 hits; AlgebraicGeometry.instHasRingHomPropertyIsSmoothOfRelativeDimensionLocallyIsStandardSmoothOfRelativeDimension, RingHom.isStandardSmoothOfRelativeDimension_holdsForLocalizationAway, AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension, AlgebraicGeometry.IsSmooth.exists_isStandardSmooth, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, Algebra.IsSmoothAt, AlgebraicGeometry.isSmoothOfRelativeDimension_iff; logged digest 6950dd96d2c179c4",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned signatures; smoothness, normalization and cotangent cohomology do not assert rational singularities or first structure-sheaf cohomology vanishing"
+  },
+  {
+   "tool": "grep",
+   "query": "rational.{0,30}singular|birational.{0,30}cohomolog",
+   "results": "0 hits; ; logged digest 4f53cda18c2baa0c",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned signatures; smoothness, normalization and cotangent cohomology do not assert rational singularities or first structure-sheaf cohomology vanishing"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every normal modification of a rational surface singularity has zero first Zariski cohomology of the structure sheaf",
+   "results": "8 hits; Algebra.IsStandardSmooth.subsingleton_h1Cotangent, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, Algebra.SubmersivePresentation.subsingleton_h1Cotangent, Algebra.smoothLocus_eq_compl_support_inter, AlgebraicGeometry.Scheme.Hom.instIsIntegralNormalization, AlgebraicGeometry.Scheme.Hom.ker_toNormalization, AlgebraicGeometry.Scheme.Hom.instIsAffineHomToNormalization, Algebra.FormallySmooth.subsingleton_h1Cotangent; logged digest 8f91e1f117cc4f36",
+   "date": "2026-10-18",
+   "verdict": "no match: read the returned signatures; smoothness, normalization and cotangent cohomology do not assert rational singularities or first structure-sheaf cohomology vanishing"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-surface-resolution-normalized-refinement",
@@ -88,5 +182,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-regular-surface-birational-rational-local-rings",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged and proved the vanishing using the existing regular-surface rationality and birational propagation nodes. Excellence supplies the Nagata hypothesis through the existing quasi-excellent-Nagata lemma. Unfolded the existing rational-singularity definition at the arbitrary normal modification. No new nodes or Mathlib leaves.",
+  "blueprint": "Supports lem-per-artin-gabber-affine-curve, proof Step 1 dimension-normalized duality, through the existing potential-dualizing surface-resolution chain; realizes the rational-local-ring input in Stacks 0BGM, proof paragraph beginning Let x_a, as already identified in blueprint.from.place.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-quasi-excellent-nagata",
+    "why": "Supplies Nagata from quasi-excellence; this general commutative-algebra prerequisite is not a step of the perverse Fourier unit and is not supplied by a node of that unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-quasi-excellent-nagata"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q44-63cb56b86",
+  "group": "Q44",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-63cb56b86 (reviewer sub-agent of L); spot-checked: I read the item and checked it against Stacks resolve.tex 0B4N (definition-reduce-to-rational), 0B4Q (lemma-regular-rational), 0BG0 (lemma-rational-propagates) and the 0BGM proof paragraph 'Let x_a', and more-algebra.tex 07QT and 07QV. The statement is unchanged from the Q51 creation and matches 0B4Q followed by 0BG0 with Stacks' normal-modification convention. def-sc-function-field now covers integral schemes, so its citation is valid. Step 1: excellent includes quasi-excellent, and 07QV makes R Nagata. Step 2: the regular-surface node is exactly 0B4Q. R's normality is carried by the rational-singularity predicate, which is only defined for normal Nagata local domains of dimension 2; the 0BGM proof uses it the same way, so this is not a fault. Step 3: every hypothesis of 0BG0 on A and B is supplied, and nothing about B being regular or proper is used. Step 4 is an elementary unfolding of 0B4N, with the cohomology identified by def-sc-topological-abelian-cohomology. proof_deps equals the union of the step uses, and there is no cycle. There are no new nodes. My grep for 0B4Q, 0BG0 and the related concepts found no duplicate. The declared tool use of lem-exc-quasi-excellent-nagata is accepted as generic algebra; other nodes in this chapter already cite it as a tool. I tested small cases (k[x,y] localized with its point blowup and a blowup chart, and B of dimension 1 is excluded by hypothesis). No SGA is cited. The citer lem-per-surface-resolution-normalized-refinement uses Step 4's conclusion exactly as stated. Minor: the report names a citations.json that is not in the commit; this is harmless."
  }
 }
