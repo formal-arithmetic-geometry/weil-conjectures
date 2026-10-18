@@ -221,4 +221,68 @@ instance isUniversalHomeomorphism_relativeFrobenius :
 
 end RelativeFrobenius
 
+/-! ### Summing over the fibres -/
+
+section Sum
+
+variable {k : Type u} [Field k] {X Y : Over (Spec (.of k))} (f : X ⟶ Y) {Φ : X ⟶ X}
+  {ΦY : Y ⟶ Y} (hf : Φ ≫ f = f ≫ ΦY)
+
+/-- A sum over the points of `X` fixed by `Φ` is the sum over the points `y` of `Y` fixed by
+`Φ_Y` of the sums over the points of the fibres `X_y` fixed by `Φ_y`. -/
+lemma sum_fixedPoint_eq_sum_sum_fibre {M : Type*} [AddCommMonoid M] (F : RationalPoint X → M)
+    [Fintype {x : RationalPoint X // x ≫ Φ = x}] [Fintype {y : RationalPoint Y // y ≫ ΦY = y}]
+    [∀ y : {y : RationalPoint Y // y ≫ ΦY = y},
+      Fintype {z : RationalPoint (fibre f y.1) // z ≫ fibreFrobenius f hf y.1 y.2 = z}] :
+    ∑ x : {x : RationalPoint X // x ≫ Φ = x}, F x.1 =
+      ∑ y : {y : RationalPoint Y // y ≫ ΦY = y},
+        ∑ z : {z : RationalPoint (fibre f y.1) // z ≫ fibreFrobenius f hf y.1 y.2 = z},
+          F (z.1 ≫ fibreι f y.1) := by
+  classical
+  let g : {x : RationalPoint X // x ≫ Φ = x} → {y : RationalPoint Y // y ≫ ΦY = y} :=
+    fun x ↦ ⟨x.1 ≫ f, by rw [Category.assoc, ← hf, ← Category.assoc, x.2]⟩
+  rw [← Finset.sum_fiberwise Finset.univ g]
+  refine Finset.sum_congr rfl fun y _ ↦ ?_
+  rw [Finset.sum_subtype (Finset.univ.filter fun x ↦ g x = y) (p := fun x ↦ g x = y)
+    (F := Subtype.fintype _) (fun x ↦ by simp)]
+  let e : {x : {x : RationalPoint X // x ≫ Φ = x} // g x = y} ≃
+      {x : {x : RationalPoint X // x ≫ Φ = x} // x.1 ≫ f = y.1} :=
+    Equiv.subtypeEquivRight fun x ↦ Subtype.ext_iff
+  refine Fintype.sum_equiv (e.trans (fibreFixedPointEquiv f hf y.1 y.2)) _ _ fun x ↦ ?_
+  simp [e, fibreFixedPointEquiv]
+
+end Sum
+
+/-! ### The model of a fibre -/
+
+section FibreModel
+
+variable {k : Type u} [Field k] {X : Over (Spec (.of k))} {Φ : X ⟶ X}
+  {k₀ : Type u} [Field k₀] [Algebra k₀ k] {X₀ Y₀ : Scheme.{u}}
+  {f₀ : X₀ ⟶ Spec (.of k₀)} {p : X.left ⟶ X₀} (π₀ : X₀ ⟶ Y₀) {g₀ : Y₀ ⟶ Spec (.of k₀)}
+  (hπ : π₀ ≫ g₀ = f₀)
+
+/-- The base change `f : X ⟶ Y₀ ×_{k₀} k` of `π₀ : X₀ ⟶ Y₀`. -/
+noncomputable def stdModelMap
+    (w : p ≫ f₀ = X.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap k₀ k))) :
+    X ⟶ stdModel k g₀ :=
+  Over.homMk (pullback.lift (p ≫ π₀) X.hom (by rw [Category.assoc, hπ, w])) (by simp)
+
+@[reassoc (attr := simp)]
+lemma stdModelMap_left_fst (w : p ≫ f₀ = X.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap k₀ k))) :
+    (stdModelMap π₀ hπ w).left ≫ pullback.fst _ _ = p ≫ π₀ :=
+  pullback.lift_fst _ _ _
+
+/-- The base change of `π₀` is compatible with the model Frobenii. -/
+lemma stdModelMap_comp [Finite k₀] {F₀ : X₀ ⟶ X₀} (hF₀ : F₀.IsFrobenius (Nat.card k₀))
+    (hp : Φ.left ≫ p = p ≫ F₀) {FY : Y₀ ⟶ Y₀} (hFY : FY.IsFrobenius (Nat.card k₀))
+    (w : p ≫ f₀ = X.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap k₀ k))) :
+    Φ ≫ stdModelMap π₀ hπ w = stdModelMap π₀ hπ w ≫ stdModelFrobenius g₀ (hFY.comp_eq g₀) := by
+  have hc : π₀ ≫ FY = F₀ ≫ π₀ := hF₀.comp_eq_comp f₀ hFY π₀
+  refine Over.OverMorphism.ext (pullback.hom_ext ?_ ?_)
+  · simp [stdModelMap, stdModelFrobenius, reassoc_of% hp, hc]
+  · simp [stdModelMap, stdModelFrobenius]
+
+end FibreModel
+
 end AlgebraicGeometry.ProEtale.CondensedRing
