@@ -6328,6 +6328,7 @@ public import WeilConjectures.EtaleCohomology.PoincareDuality.Degreewise
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Feeds
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.CompositionPairing
+public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.CupProduct
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.DualTateData
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Equivariance
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Pairings
@@ -6337,6 +6338,7 @@ public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Reciproc
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.SelfInjective
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.TracePairing
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.UnitPairing
+public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.UntwistedPerfectness
 public import WeilConjectures.EtaleCohomology.PoincareDuality.IntegralDegreewise
 public import WeilConjectures.EtaleCohomology.PoincareDuality.InvertibleTwist
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Pairing
@@ -6902,6 +6904,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Abelian.GrothendieckCategor
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.Basic
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.ExtHomology
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.ExtMap
+public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.ExtMapExactFunctor
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Injective.Resolution
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
 public import WeilConjectures.Mathlib.CategoryTheory.Abelian.Subobject
@@ -9130,6 +9133,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologyBaseCh
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologyDuality
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologyDualityFrobenius
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantGlobalSections
+public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantIntLowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheafTransport
 public import WeilConjectures.SixFunctors.ProEtale.Adic.Constructible
@@ -9558,6 +9562,7 @@ public import WeilConjectures.WeilSheaf.CohomologicalRange
 public import WeilConjectures.WeilSheaf.Cohomology
 public import WeilConjectures.WeilSheaf.CohomologyAdicConstant
 public import WeilConjectures.WeilSheaf.CohomologyAdicConstantExt
+public import WeilConjectures.WeilSheaf.CohomologyAdicConstantLattice
 public import WeilConjectures.WeilSheaf.CohomologyDegreeZero
 public import WeilConjectures.WeilSheaf.CohomologyExact
 public import WeilConjectures.WeilSheaf.CohomologyGeometricConjugacy

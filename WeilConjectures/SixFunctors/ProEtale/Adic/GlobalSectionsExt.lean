@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Category.Grp.ForgetCorepresentable
 public import Mathlib.CategoryTheory.Sites.GlobalSections
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologyBaseChange
 public import WeilConjectures.SixFunctors.ProEtale.ForgetModuleCohomology
-public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSections
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSectionsComm
 
 /-!
 # Global sections of sheaves of `ℚ̄_ℓ`-modules as morphisms out of `ℤ`
@@ -123,6 +123,22 @@ lemma constantIntSheafHomAddEquiv_constantIntSheafToLowerStar_comp
   simp only [ConcreteCategory.comp_apply] at h
   rw [← Category.id_comp f, constantIntSheafHomAddEquiv_comp, Category.id_comp]
   exact h
+
+
+/-- Composing with `ℤ_{X'} ⟶ g_* ℤ_X` and pushing forward corresponds, on global sections of a
+sheaf of `ℚ̄_ℓ`-modules, to the identification `Γ(X, M) ≅ Γ(X', g_* M)`. -/
+lemma constantIntHomAddEquivΓ_constantIntSheafToLowerStar_comp
+    (M : Sheaf (Scheme.ProEt.topology X) (WeilCoefficients.{u} l))
+    (f : constantIntSheaf X ⟶ (sheafForget₂ (ULift.{u + 1} (PadicAlgCl l)) X).obj M) :
+    constantIntHomAddEquivΓ X' ((g)_*[WeilCoefficients.{u} l].obj M)
+        (constantIntSheafToLowerStar g ≫ (g)_*[AddCommGrpCat.{u + 1}].map f) =
+      (globalSectionsLowerStarIso _ g).inv.app M (constantIntHomAddEquivΓ X M f) := by
+  rw [constantIntHomAddEquivΓ_apply, constantIntHomAddEquivΓ_apply,
+    globalSectionsLowerStarIso_inv_app_eq_sections]
+  have h := constantIntSheafHomAddEquiv_constantIntSheafToLowerStar_comp g f
+  simp only [ConcreteCategory.comp_apply]
+  erw [Iso.inv_hom_id_app_apply]
+  exact congrArg _ h
 
 end Sections
 

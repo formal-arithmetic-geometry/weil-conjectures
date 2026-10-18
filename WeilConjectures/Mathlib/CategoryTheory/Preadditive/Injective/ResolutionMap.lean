@@ -51,6 +51,23 @@ noncomputable def mapHomOfNatTrans (τ : F ⟶ F) {Z : C} (R : InjectiveResoluti
   ι_f_zero_comp_hom_f_zero := by
     simp [HomologicalComplex.singleMapHomologicalComplex, HomologicalComplex.single_map_f_self]
 
+variable {F} {G : D ⥤ D} [G.Additive] [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+  [G.PreservesInjectiveObjects] in
+/-- A natural transformation `σ : F ⋙ G ⟶ F` induces a morphism from the image under `G` of the
+image `F(R)` of an injective resolution `R` of `Z` to `F(R)`, over `σ_Z`. -/
+@[simps]
+noncomputable def mapMapHomOfNatTrans (σ : F ⋙ G ⟶ F) {Z : C} (R : InjectiveResolution Z) :
+    InjectiveResolution.Hom ((R.map F).map G) (R.map F) (σ.app Z) where
+  hom := (NatTrans.mapHomologicalComplex σ _).app R.cocomplex
+  ι_f_zero_comp_hom_f_zero := by
+    simp only [CochainComplex.single₀_obj_zero, map_ι, Functor.comp_obj, Iso.app_inv,
+      Functor.map_comp, HomologicalComplex.comp_f,
+      HomologicalComplex.singleMapHomologicalComplex_inv_app_self, CochainComplex.single₀ObjXSelf,
+      Iso.refl_hom, Iso.refl_inv, Functor.map_id, Category.comp_id,
+      Functor.mapHomologicalComplex_map_f, Category.id_comp, NatTrans.mapHomologicalComplex_app_f,
+      Category.assoc, CochainComplex.single₀_map_f_zero]
+    exact σ.naturality (R.ι.f 0)
+
 namespace Hom
 
 variable {Z Z' Z'' : C} {I : InjectiveResolution Z} {I' : InjectiveResolution Z'}
