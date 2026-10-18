@@ -1,0 +1,117 @@
+{
+ "id": "lem-sp-mapped-smart-truncation-tower",
+ "kind": "statement",
+ "title": "Map the smart cuts before totalizing",
+ "statement": "For abelian B and Grothendieck abelian C and a left exact additive G:B→C, a bicomplex I with horizontal degrees in Z and vertical degrees in N has a natural isomorphism from its smart-cut tower followed by mappedFunctor G and totalization to the total smart-cut tower of mappedFunctor G applied to I. This commutes with every bicomplex map.",
+ "source": {
+  "document": "Stacks Project, Homological Algebra and Derived Categories",
+  "place": "Tags 0118, 0156, 015K and 015X; the indicated proof steps of the CE comparison."
+ },
+ "stmt_deps": [
+  "def-sp-cartan-eilenberg-presentation",
+  "lem-sp-smart-truncation-decalage-tower"
+ ],
+ "proof": [
+  {
+   "text": "Extension from N to Z preserves finite limits: after evaluation in a nonnegative degree it is the corresponding evaluation functor, and in a negative degree it is zero. Apply the extended smart truncation comparison to the vertical functor G followed by extension, then whisker by totalization. Its naturality follows by totalizing the already proved naturality square.",
+   "uses": [
+    "lem-sp-extended-smart-truncation-map-iso"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-extended-smart-truncation-map-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Homological Algebra and Derived Categories",
+  "place": "Tags 0118, 0156, 015K and 015X; the indicated proof steps of the CE comparison.",
+  "note": "Inclusion-normalized constructions and the specified-resolution formulas; the remaining interval comparison follows the original item plan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A left exact additive functor commutes naturally with upper smart truncation towers and injective resolution comparisons",
+   "results": "LeftExactFunctor and toRightDerivedZero; no extended-tower comparison or specified-resolution naturality.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The spectral object formed by mapping cones of smart upper truncations of a cochain complex is isomorphic to the canonical spectral object of the derived category t-structure",
+   "results": "spectralObjectMappingCone, mappingCone.mapTriangleIso, triangleOfSESIso and generic distinguished-triangle APIs; no complete tower comparison.",
+   "date": "2026-10-18",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mapTruncLEComparison",
+   "results": "No Mathlib identifier; the project declares it in Sheaf.CategoryTheory.MapGoodUpperTruncation.",
+   "date": "2026-10-18",
+   "verdict": "project API used"
+  },
+  {
+   "tool": "grep",
+   "query": "extendedTruncationMapIso|specifiedResolutionDerivedSingle|smartTruncationTowerIso in dag/nodes; truncation and spectralObject in lean/WeilConjectures, lean/Sheaf, and Mathlib/Algebra/Homology",
+   "results": "No existing DAG node for these constructions. Reused project good-truncation comparisons and WeilConjectures PlusSingle formulas; Mathlib provides mapping cones and truncation APIs.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergDecalageSpectralObjectIso",
+  "date": "2026-10-18",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-grothendieck",
+   "place": "Proof step 2, the truncation comparison obtained from the CE page-realization lemma: Map the smart cuts before totalizing.",
+   "via": [
+    "lem-sp-ce-decalage-spectral-object-iso-exists",
+    "lem-sp-ce-decalage-spectral-object",
+    "lem-sp-ce-canonical-truncation-comparison",
+    "lem-sp-ce-filtered-truncation-comparison",
+    "lem-sp-ce-page-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.MappedSmartTruncationTower",
+  "file": "lean/Sheaf/CategoryTheory/MappedSmartTruncationTower.lean",
+  "declaration": "CategoryTheory.CartanEilenbergPresentation.mappedSmartTruncationTowerIso_naturality",
+  "statement": "theorem mappedSmartTruncationTowerIso_naturality\n    {I J : HomologicalComplex₂ B (.up ℤ) (.up ℕ)} (f : I ⟶ J) :\n    mappedSmartTruncationTowerMap G f ≫ (mappedSmartTruncationTowerIso G J).hom =\n      (mappedSmartTruncationTowerIso G I).hom ≫\n        HomologicalComplex₂.smartTruncationTowerMap ((mappedFunctor G).map f)",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261018T091408-L-3257438",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261018T091408-L-3257438",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,138 @@
+{
+ "id": "lem-sp-ce-smart-truncation-spectral-object",
+ "kind": "statement",
+ "title": "Resolved CE smart cuts compute the derived truncation spectral object",
+ "statement": "For an abelian category A, Grothendieck abelian categories B and C equipped with derived categories, and additive F:A→B and G:B→C and every Cartan–Eilenberg presentation P of F, construct a morphism from the cohomology mapping-cone spectral object of the totals of mapped CE smart cuts to H RG of the canonical truncation spectral object of Q(F(P.J)). Its components on bottom intervals are invertible and it is natural for every specified presentation comparison. This asserts no comparison with RF(P.X) and involves no filtration or decalage.",
+ "source": {
+  "document": "Stacks Project, Homological Algebra and Derived Categories",
+  "place": "Tags 0118, 0156, 015K and 015X; the indicated proof steps of the CE comparison."
+ },
+ "stmt_deps": [
+  "def-sp-cartan-eilenberg-presentation",
+  "lem-sp-mapped-smart-truncation-tower",
+  "lem-sp-specified-resolution-derived-single"
+ ],
+ "proof": [
+  {
+   "text": "Finite diagonals identify the total of each mapped CE smart cut with G of its total.",
+   "uses": [
+    "lem-sp-cartan-eilenberg-mapped-total"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The uniquely normalized truncated CE augmentations give injective resolutions, commuting with cutoff and presentation maps by cancellation and the total-coordinate formulas. Their cone squares compute RG naturally by the inverse derived unit.",
+   "uses": [
+    "lem-sp-ce-truncation-resolution",
+    "lem-sp-derived-injective-resolution-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The unique cochain/derived truncation comparison identifies the localized smart-cut tower with canonical upper truncations. Compare interval cone triangles using t-structure orthogonality, and compare triple-cutoff octahedral triangles to fix the connecting maps. Include zero and full-total endpoints and apply cohomology; the bottom components are isomorphisms.",
+   "uses": [
+    "lem-sp-derived-upper-truncation-comparison",
+    "def-sp-filtered-complex-decalage-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-cartan-eilenberg-mapped-total",
+  "lem-sp-ce-truncation-resolution",
+  "lem-sp-derived-injective-resolution-naturality",
+  "lem-sp-derived-upper-truncation-comparison",
+  "def-sp-filtered-complex-decalage-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Homological Algebra and Derived Categories",
+  "place": "Tags 0118, 0156, 015K and 015X; the indicated proof steps of the CE comparison.",
+  "note": "Inclusion-normalized constructions and the specified-resolution formulas; the remaining interval comparison follows the original item plan."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A left exact additive functor commutes naturally with upper smart truncation towers and injective resolution comparisons",
+   "results": "LeftExactFunctor and toRightDerivedZero; no extended-tower comparison or specified-resolution naturality.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The spectral object formed by mapping cones of smart upper truncations of a cochain complex is isomorphic to the canonical spectral object of the derived category t-structure",
+   "results": "spectralObjectMappingCone, mappingCone.mapTriangleIso, triangleOfSESIso and generic distinguished-triangle APIs; no complete tower comparison.",
+   "date": "2026-10-18",
+   "verdict": "generic tools only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mapTruncLEComparison",
+   "results": "No Mathlib identifier; the project declares it in Sheaf.CategoryTheory.MapGoodUpperTruncation.",
+   "date": "2026-10-18",
+   "verdict": "project API used"
+  },
+  {
+   "tool": "grep",
+   "query": "extendedTruncationMapIso|specifiedResolutionDerivedSingle|smartTruncationTowerIso in dag/nodes; truncation and spectralObject in lean/WeilConjectures, lean/Sheaf, and Mathlib/Algebra/Homology",
+   "results": "No existing DAG node for these constructions. Reused project good-truncation comparisons and WeilConjectures PlusSingle formulas; Mathlib provides mapping cones and truncation APIs.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CartanEilenbergDecalageSpectralObjectIso",
+  "date": "2026-10-18",
+  "group": "P3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-grothendieck",
+   "place": "Proof step 2, the truncation comparison obtained from the CE page-realization lemma: Resolved CE smart cuts compute the derived truncation spectral object.",
+   "via": [
+    "lem-sp-ce-decalage-spectral-object-iso-exists",
+    "lem-sp-ce-decalage-spectral-object",
+    "lem-sp-ce-canonical-truncation-comparison",
+    "lem-sp-ce-filtered-truncation-comparison",
+    "lem-sp-ce-page-realization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.CartanEilenbergSmartTruncationSpectralObject",
+  "file": "lean/Sheaf/CategoryTheory/CartanEilenbergSmartTruncationSpectralObject.lean",
+  "declaration": "CategoryTheory.cartanEilenberg_smartTruncation_spectralObject_comparison",
+  "statement": "theorem cartanEilenberg_smartTruncation_spectralObject_comparison\n    {A : Type uA} [Category.{vA} A] [Abelian A]\n    (F : A ⥤ B) (G : B ⥤ C) [F.Additive] [G.Additive] :\n    ∃ e : ∀ P : CartanEilenbergPresentation F,\n      (cochainTowerSpectralObjectFunctor C).obj\n          (CartanEilenbergPresentation.mappedSmartTruncationTower G P.I) ⟶\n        (derivedTruncationSpectralObjectFunctor G).obj\n          (DerivedCategory.Plus.Q.obj (F.specifiedResolutionComplex P.J)),\n      (∀ (P : CartanEilenbergPresentation F) (n : ℤ) (b : EInt),\n        IsIso (((e P).hom n).app (ComposableArrows.mk₁\n          (homOfLE (bot_le : (⊥ : EInt) ≤ b))))) ∧\n      ∀ (P Q : CartanEilenbergPresentation F) (d : P.Comparison Q),\n        (cochainTowerSpectralObjectFunctor C).map\n            (CartanEilenbergPresentation.mappedSmartTruncationTowerMap G d.α) ≫ e Q =\n          e P ≫ (derivedTruncationSpectralObjectFunctor G).map\n            (DerivedCategory.Plus.Q.map (ObjectProperty.homMk\n              ((F.mapHomologicalComplex (.up ℤ)).map\n                (HomologicalComplex.extendMap d.β ComplexShape.embeddingUpNat)) :\n              F.specifiedResolutionComplex P.J ⟶ F.specifiedResolutionComplex Q.J))",
+  "branch": "sheaf-dag",
+  "by": "P3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261018T091408-L-3257438",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P3",
+  "result": "pass",
+  "landing": "20261018T091408-L-3257438",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
