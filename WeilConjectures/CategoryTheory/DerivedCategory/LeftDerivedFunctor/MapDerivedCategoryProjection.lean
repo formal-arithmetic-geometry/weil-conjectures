@@ -112,6 +112,19 @@ lemma mapDerivedCategoryProjectionMap_app (E : DerivedCategory D) (K : DerivedCa
         adj.counit.app E ▷ F.mapDerivedCategory.obj K) :=
   rfl
 
+/-- The projection map, written with any comparison `φ'` equal to the tensor comparison of `D(F)`.
+This is the form in which projection maps are usually defined. -/
+lemma homEquiv_comp_counit_eq_mapDerivedCategoryProjectionMap_app
+    (φ' : ∀ X Y : DerivedCategory C, F.mapDerivedCategory.obj (X ⊗ Y) ⟶
+      F.mapDerivedCategory.obj X ⊗ F.mapDerivedCategory.obj Y)
+    (hφ' : ∀ X Y, φ' X Y = (F.mapDerivedCategoryTensorComparison.app X).app Y)
+    (E : DerivedCategory D) (K : DerivedCategory C) :
+    adj.homEquiv (G.obj E ⊗ K) (E ⊗ F.mapDerivedCategory.obj K)
+        (φ' (G.obj E) K ≫ adj.counit.app E ▷ F.mapDerivedCategory.obj K) =
+      (mapDerivedCategoryProjectionMap adj E).app K := by
+  rw [hφ']
+  rfl
+
 /-- The projection map `G E ⊗ᴸ 𝟙 ⟶ G (E ⊗ᴸ D(F) 𝟙)` is an isomorphism. -/
 lemma isIso_mapDerivedCategoryProjectionMap_app_tensorUnit (E : DerivedCategory D) :
     IsIso ((mapDerivedCategoryProjectionMap adj E).app (𝟙_ _)) := by
