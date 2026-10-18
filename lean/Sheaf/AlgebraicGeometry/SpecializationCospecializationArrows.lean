@@ -71,7 +71,81 @@ theorem etaleStalkSpecialization_naturality
     (Scheme.pointSmallEtale s).sheafFiber.map a ≫ etaleStalkSpecialization s t G =
       etaleStalkSpecialization s t F ≫
         (Scheme.pointSmallEtale (t ≫ Scheme.strictHenselizationStructuralMap s)).sheafFiber.map a :=
-  by sorry
+  by
+  let r : ∀ H : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1},
+      (Scheme.pointSmallEtale s).sheafFiber.obj H ⟶
+        (Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
+          AddCommGrpCat.{u + 1}).obj
+          ((upperStar AddCommGrpCat.{u + 1}
+            (Scheme.strictHenselizationStructuralMap s)).obj H) :=
+    fun H ↦ Classical.choose (existsUnique_strictHenselizationStalkRestriction s H)
+  have hr {F G : Sheaf S.smallEtaleTopology AddCommGrpCat.{u + 1}} (a : F ⟶ G) :
+      (Scheme.pointSmallEtale s).sheafFiber.map a ≫ r G =
+        r F ≫ (Sheaf.Γ (Scheme.strictHenselizationScheme s).smallEtaleTopology
+          AddCommGrpCat.{u + 1}).map
+          ((upperStar AddCommGrpCat.{u + 1}
+            (Scheme.strictHenselizationStructuralMap s)).map a) := by
+    let N := (equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse ⋙
+      Scheme.strictHenselizationAffineInclusion s ⋙ ObjectProperty.ι
+        (fun n : (Scheme.pointSmallEtale s).fiber.Elements ↦ IsAffine n.1.left)
+    have hN : N.Initial := (Scheme.strictHenselization_properties s).1
+    let c := ((Scheme.pointSmallEtale s).presheafFiberCocone F.obj).whisker N.op
+    let hc : IsColimit c :=
+      (Functor.Final.isColimitWhiskerEquiv N.op _).symm
+        ((Scheme.pointSmallEtale s).isColimitPresheafFiberCocone F.obj)
+    apply hc.hom_ext
+    intro j
+    have hrF := (Classical.choose_spec
+      (existsUnique_strictHenselizationStalkRestriction s F)).1
+    have hrG := (Classical.choose_spec
+      (existsUnique_strictHenselizationStalkRestriction s G)).1
+    change (Scheme.pointSmallEtale s).toPresheafFiber
+        ((Scheme.AffineEtale.Spec S).obj
+          ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj
+            j.unop).1)
+        ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj
+          j.unop).2 F.obj ≫ _ = _
+    erw [← Category.assoc,
+      (Scheme.pointSmallEtale s).toPresheafFiber_naturality a.hom, Category.assoc]
+    erw [hrG j.unop]
+    have hrF' : c.ι.app j ≫ r F = strictHenselizationSectionRestriction s F j.unop :=
+      hrF j.unop
+    conv_rhs => rw [← Category.assoc, hrF']
+    dsimp only [strictHenselizationSectionRestriction]
+    simp only [Category.assoc]
+    let g := Scheme.strictHenselizationStructuralMap s
+    let W := (Scheme.AffineEtale.Spec S).obj
+      ((equivSmallModel.{u} (Scheme.strictHenselizationNeighbourhoods s)).inverse.obj
+        j.unop).1
+    let V := Scheme.Etale.mk (𝟙 (Scheme.strictHenselizationScheme s))
+    have hu := (upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} g).unit.naturality a
+    have he := congrArg (fun b ↦ b.hom.app (Opposite.op W)) hu
+    dsimp only [Functor.id_map, ObjectProperty.FullSubcategory.comp_hom,
+      NatTrans.comp_app] at he
+    rw [← Category.assoc, ← Category.assoc]
+    erw [he]
+    simp only [Category.assoc]
+    have hn := ((upperStar AddCommGrpCat.{u + 1} g).map a).hom.naturality
+      (strictHenselizationNeighbourhoodSection s j.unop).op
+    erw [← reassoc_of% hn]
+    have ht := (Sheaf.ΓNatIsoSheafSections _ _
+      (IsTerminal.isTerminalOfObj
+        (MorphismProperty.Over.forget @AlgebraicGeometry.Etale ⊤
+          (Scheme.strictHenselizationScheme s)) V Over.mkIdTerminal)).inv.naturality
+      ((upperStar AddCommGrpCat.{u + 1} g).map a)
+    change ((upperStar AddCommGrpCat.{u + 1} g).map a).hom.app (Opposite.op V) ≫ _ = _ at ht
+    erw [ht]
+  let e := Functor.whiskerLeft
+      (upperStar AddCommGrpCat.{u + 1} (Scheme.strictHenselizationStructuralMap s))
+      (globalGerm t) ≫
+    (upperStarCompSheafFiberIso AddCommGrpCat.{u + 1}
+      (Scheme.strictHenselizationStructuralMap s) t).hom
+  change (Scheme.pointSmallEtale s).sheafFiber.map a ≫ (r G ≫ e.app G) =
+    (r F ≫ e.app F) ≫
+      (Scheme.pointSmallEtale (t ≫ Scheme.strictHenselizationStructuralMap s)).sheafFiber.map a
+  rw [← Category.assoc, hr a, Category.assoc]
+  erw [e.naturality]
+  rw [Category.assoc]
 
 /-- The natural transformation with the already defined specialization as its components.
 Source: Stacks Project, Tag 0GJ2
