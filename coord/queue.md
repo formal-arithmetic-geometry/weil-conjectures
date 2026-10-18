@@ -1,6 +1,6 @@
 # Work queue
 
-104 items; claim with `tools/claim.py next <group> [--stage N]`.
+110 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (104)
+## Stage 3: modules to prove (110)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -88,6 +88,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.FieldDiscreteModules` | - | 1 | proof | 4 |
 | `Sheaf.AlgebraicGeometry.IsFiniteLocallyFreeOfCoherentFreeStalks` | - | 1 | proof | 4 |
 | `Sheaf.AlgebraicGeometry.ProjectiveMorphismChartPreimage` | - | 1 | proof | 4 |
+| `Sheaf.CategoryTheory.DiscreteModulesAbelian` | - | 1 | proof | 4 |
 | `Sheaf.Paper.AffineProjectiveComplexDerivedHom` | - | 1 | proof | 4 |
 | `Sheaf.Paper.FlatExtendedCechComparison` | - | 1 | proof | 4 |
 | `Sheaf.Paper.KoszulQuotientLimit` | - | 1 | proof | 4 |
@@ -104,9 +105,14 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.RingTheory.NilpotentProjectiveComplexLift` | - | 1 | proof | 5 |
 | `Sheaf.AlgebraicGeometry.ClosedImmersionProducts` | - | 1 | proof | 6 |
 | `Sheaf.FieldTheory.SeparableTensorAlgebraicClosure` | - | 1 | proof | 6 |
+| `Sheaf.RepresentationTheory.CoinducedContinuousAcyclic` | - | 1 | proof | 6 |
+| `Sheaf.RepresentationTheory.CoinducedDiscreteEmbedding` | - | 1 | proof | 6 |
+| `Sheaf.RepresentationTheory.ContinuousCochainsDeltaFunctor` | - | 1 | proof | 6 |
+| `Sheaf.RepresentationTheory.ContinuousCochainsShortExact` | - | 1 | proof | 6 |
 | `Sheaf.AlgebraicGeometry.LocalFibreDimensionOpen` | - | 1 | proof | 7 |
 | `Sheaf.AlgebraicGeometry.TorsionSheafProperBaseChange` | - | 1 | proof | 7 |
 | `Sheaf.FieldTheory.SeparableQuotientProduct` | - | 1 | proof | 7 |
+| `Sheaf.RepresentationTheory.CoinducedHomotopyIdentity` | - | 1 | proof | 7 |
 | `Sheaf.AlgebraicGeometry.EtaleAtPrimeFlatUnramifiedCriterion` | - | 1 | proof | 8 |
 | `Sheaf.AlgebraicGeometry.BoundsFiberDegreesFieldPoints` | - | 1 | proof | 9 |
 | `Sheaf.AlgebraicGeometry.FppfAffineRefinement` | - | 1 | proof | 9 |
