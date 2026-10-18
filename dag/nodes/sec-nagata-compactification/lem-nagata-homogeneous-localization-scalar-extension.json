@@ -24,47 +24,47 @@
  ],
  "proof": [
   {
-   "text": "Put $H=A_{(f),0}$ and $K=C_{(f_S),0}$. The fraction relation in [def-nagata-homogeneous-localization-degree-zero] says $a/f^m=b/f^n$ iff $f^k(f^n a-f^m b)=0$ for some $k\\geq0$. Equivalently, for some $L\\geq m,n$ we have $f^{L-m}a=f^{L-n}b$ in $A_{Ld}$: for the forward direction take $L=m+n+k$, and for the reverse direction multiply this equality by $f^{m+n}$ to obtain a localization relation. Thus fractions can be compared at a common later denominator without cancelling $f$. In $C$, the relation $c/f_S^m=c\\prime/f_S^n$ means $f_S^k(f_S^n c-f_S^m c\\prime)=0$ for some $k\\geq0$; taking $L=m+n+k$ gives $f_S^{L-m}c=f_S^{L-n}c\\prime$. Conversely that equality multiplied by $f_S^{m+n}$ gives $f_S^L(f_S^n c-f_S^m c\\prime)=0$.",
+   "text": "The graded ring map a ↦ 1 ⊗ a induces a ring map on homogeneous localizations, compatible with the R-algebra structures by compatibility with the degree-zero maps. The tensor algebra universal property gives an S-algebra map λ. The homogeneous fraction map formula and scalar multiplication give λ(s ⊗ (a/f^m)) = (s ⊗ a)/(1 ⊗ f)^m.",
    "uses": [
     "def-nagata-homogeneous-localization-degree-zero"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01N2 (lemma-base-change-map-proj), omitted standard-open calculation; fraction convention of Tag 01M4 (lemma-standard-open)"
+    "place": "Tag 01N2 (lemma-base-change-map-proj), standard-open calculation; fraction convention of Tag 01M4 (lemma-standard-open)"
    }
   },
   {
-   "text": "The graded piece identification in the statement needs no flatness: the degree-$j$ inclusion $i_j:A_j\\to A$ and projection $p_j:A\\to A_j$ are $R$-linear and satisfy $p_j i_j=1$. The maps on tensors, $s\\otimes a\\mapsto s\\otimes i_j(a)$ and $s\\otimes a\\mapsto s\\otimes p_j(a)$, respect balanced relations and still have composite $1$. Thus $S\\otimes_R A_j$ identifies with its image $C_j$ in $C$, and every element of $C_j$ is a finite sum of tensors with numerator in $A_j$. For each $m$, the $R$-linear map $u_m:A_{md}\\to H$, $a\\mapsto a/f^m$, gives by the balanced tensor-product definition an $S$-linear map $q_m:C_{md}=S\\otimes_R A_{md}\\to S\\otimes_R H$, with $q_m(\\sum_i s_i\\otimes a_i)=\\sum_i s_i\\otimes(a_i/f^m)$. This formula respects tensor relations because $u_m$ is additive and $R$-linear. Moreover $q_{m+1}(f_S c)=q_m(c)$: on a pure tensor this is $s\\otimes(fa/f^{m+1})=s\\otimes(a/f^m)$, and pure tensors generate. Iterating gives $q_L(f_S^{L-m}c)=q_m(c)$. If $c/f_S^m=c'/f_S^n$, step 1 gives equality of their numerators after passing to some $L$; applying $q_L$ proves $q_m(c)=q_n(c')$. Hence $\\mu:K\\to S\\otimes_R H$, $c/f_S^m\\mapsto q_m(c)$, is well defined. Addition is computed by putting both fractions over $f_S^L$ and using additivity of $q_L$, so $\\mu$ is $S$-linear.",
+   "text": "For m ≥ 0 let u_m:A_(md) → H be the R-linear map a ↦ a/f^m, and put q_m = S ⊗ u_m. Multiplication by f^k defines an R-linear transition T_(m,k):A_(md) → A_((m+k)d). The ordinary fraction relation gives u_(m+k) T_(m,k) = u_m. Tensor induction gives q_(m+k)(S ⊗ T_(m,k))(c) = q_m(c). Tensor induction also shows that every x in S ⊗ H is q_m(c) for some m,c: pure tensors use a fraction presentation of their second factor, and sums pass from denominators m,n to m+n using these transitions.",
    "uses": [
     "def-nagata-homogeneous-localization-degree-zero"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01N2 (lemma-base-change-map-proj), omitted standard-open calculation; fraction convention of Tag 01M4 (lemma-standard-open)"
+    "place": "Tag 01N2 (lemma-base-change-map-proj), standard-open calculation; fraction convention of Tag 01M4 (lemma-standard-open)"
    }
   },
   {
-   "text": "For $s\\in S$ and $a/f^m\\in H$ set $b(s,a/f^m)=(s\\otimes a)/f_S^m$. Equality of fractions in $H$ passes to equality in $K$ by the common-denominator equality in step 1. Putting two fractions over a common denominator proves additivity in the second variable; additivity in the first variable is the tensor relation, and $b(sr,a/f^m)=b(s,ra/f^m)$ for $r\\in R$. Thus $b$ is balanced and induces the $S$-linear map $\\lambda:S\\otimes_R H\\to K$ with the asserted formula. On pure tensors $\\mu\\lambda(s\\otimes(a/f^m))=s\\otimes(a/f^m)$, so this composite is the identity. For any $c/f_S^m$, write $c=\\sum_i s_i\\otimes a_i$ in $C_{md}$. Then $\\lambda\\mu(c/f_S^m)=\\sum_i(s_i\\otimes a_i)/f_S^m=c/f_S^m$, so the other composite is the identity.",
+   "text": "The canonical map β_m:S ⊗ A_(md) → C_(md) is bijective: the decomposition of A as a direct sum of its graded pieces remains a direct sum after tensoring, so each graded inclusion remains split. This is Mathlib DirectSum.toBaseChange_bijective. Tensor induction proves λ(q_m(c)) = β_m(c)/(1 ⊗ f)^m, and β_(m+k)((S ⊗ T_(m,k))(c)) = β_m(c)(1 ⊗ f)^k. Every target fraction has numerator in a base-changed graded piece, hence is λ(q_m(c)) for a preimage c under β_m. Thus λ is surjective.",
    "uses": [
     "def-nagata-homogeneous-localization-degree-zero"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01N2 (lemma-base-change-map-proj), omitted standard-open calculation; fraction convention of Tag 01M4 (lemma-standard-open)"
+    "place": "Tag 01N2 (lemma-base-change-map-proj), standard-open calculation; fraction convention of Tag 01M4 (lemma-standard-open)"
    }
   },
   {
-   "text": "For $a\\in A_{md}$ and $a'\\in A_{nd}$, multiplication in the source tensor algebra and in the fraction ring gives $\\lambda((s\\otimes(a/f^m))(t\\otimes(a'/f^n)))=(st\\otimes aa')/f_S^{m+n}=\\lambda(s\\otimes(a/f^m))\\lambda(t\\otimes(a'/f^n))$. Distributing over finite sums proves multiplicativity on all elements. The unit $1\\otimes(1/1)$ maps to $1/1$, and $s\\otimes(1/1)$ maps to the coefficient $s$ in $K$. Thus $\\lambda$ is an $S$-algebra homomorphism; step 3 makes it bijective, hence an $S$-algebra isomorphism. Every use of equality was by a power-annihilated relation rather than cancellation, so zero-divisors and arbitrary $R\\to S$ are allowed.",
+   "text": "If λ(x)=0, write x=q_m(c). The ordinary localization zero criterion gives k such that (1 ⊗ f)^k β_m(c)=0. By the transition formula and injectivity of β_(m+k), (S ⊗ T_(m,k))(c)=0. Applying q_(m+k) and its transition identity yields x=0. Since λ is additive, trivial kernel gives injectivity. Promote the bijective S-algebra homomorphism to an S-algebra equivalence; its fraction formula is the one proved in step 1. No cancellation, flatness, or nonzero denominator hypothesis is used.",
    "uses": [
     "def-nagata-homogeneous-localization-degree-zero"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01N2 (lemma-base-change-map-proj), omitted standard-open calculation; fraction convention of Tag 01M4 (lemma-standard-open)"
+    "place": "Tag 01N2 (lemma-base-change-map-proj), standard-open calculation; fraction convention of Tag 01M4 (lemma-standard-open)"
    }
   }
  ],
@@ -74,7 +74,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Tag 01N2 (lemma-base-change-map-proj): expansion of the standard-open calculation omitted in its one-sentence proof"
+  "place": "Tag 01N2 (lemma-base-change-map-proj), standard-open calculation; fraction convention of Tag 01M4 (lemma-standard-open); K9 Lean proof uses the tensor common-denominator representation and the zero criterion instead of constructing an inverse on quotient representatives"
  },
  "mathlib_searches": [
   {
@@ -230,5 +230,15 @@
   "by": "NS",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261018T062826-L-661303",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
