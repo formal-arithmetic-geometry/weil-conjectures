@@ -2,7 +2,7 @@
  "id": "lem-per-catenary-completion-hyperplane",
  "kind": "statement",
  "title": "Hyperplane reduction of a non-equidimensional completion",
- "statement": "Let $(A,\\mathfrak m)$ be a catenary Noetherian local domain, let $B=\\widehat A$ be its maximal-ideal completion, and suppose a minimal prime $\\mathfrak q$ of $B$ has $1<d=\\dim(B/\\mathfrak q)<\\dim A$, where $d$ is the least dimension of a minimal-prime quotient of $B$. There exist a nonzero $f\\in\\mathfrak m$, a prime $\\mathfrak p$ of $A$ minimal over $fA$, and a minimal prime $\\mathfrak r$ of the maximal-ideal completion $\\widehat{A/\\mathfrak p}$ such that $\\dim(A/\\mathfrak p)=\\dim A-1$ and $\\dim(\\widehat{A/\\mathfrak p}/\\mathfrak r)=d-1$. In particular $0<d-1<\\dim(A/\\mathfrak p)$. [def-weil-pbc-noetherian-ring] [def-weil-pbc-adic-completion] [def-weil-pbc-krull-dimension-ring]",
+ "statement": "Let $(A,\\mathfrak m)$ be a catenary Noetherian local domain, let $B=\\widehat A$ be its maximal-ideal completion, and suppose a minimal prime $\\mathfrak q$ of $B$ has $1<d=\\dim(B/\\mathfrak q)<\\dim A$, where $d$ is the least dimension of a minimal-prime quotient of $B$. There exist a nonzero $f\\in\\mathfrak m$, a prime $\\mathfrak p$ of $A$ minimal over $fA$, and a minimal prime $\\mathfrak r$ of the maximal-ideal completion $\\widehat{A/\\mathfrak p}$ such that $\\dim(A/\\mathfrak p)=\\dim A-1$ and $\\dim(\\widehat{A/\\mathfrak p}/\\mathfrak r)=d-1$. In particular $0<d-1<\\dim(A/\\mathfrak p)$. [def-weil-pbc-noetherian-ring] [def-weil-pbc-adic-completion] [def-weil-pbc-krull-dimension-ring] Here a domain is a nonzero commutative ring without zero divisors, local means that $\\mathfrak m$ is the unique maximal ideal, and a minimal prime over an ideal is a prime containing that ideal with no strictly smaller prime containing it. Catenary means that between any comparable primes the lengths of finite strict chains have a finite bound and all saturated chains have the same length; a chain is saturated if no prime can be inserted between consecutive terms.",
  "source": {
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Tag 0AW3, lemma-not-formally-catenary, d>1 paragraph: prime avoidance hyperplane; prime-quotient refinement of the omitted formal-catenarity inference, under the catenarity hypothesis available in the contradiction argument."
@@ -12,9 +12,102 @@
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-krull-dimension-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $N=\\dim A$ and $\\mathfrak n=\\mathfrak mB$. The completion is Noetherian by [lem-weil-pbc-adic-completion-noetherian] and local with maximal ideal $\\mathfrak n$ by [lem-weil-pbc-local-completion-local-ring]. Quotients are Noetherian since generators of an inverse-image ideal map to generators, and quotients by proper ideals of a local ring are local by prime correspondence. All their dimensions are finite by [lem-weil-pbc-noetherian-local-finite-krull-dimension]. By [lem-weil-pbc-noetherian-finitely-many-minimal-primes], list the minimal primes of $B$ other than $\\mathfrak q$ as $\\mathfrak q_1,\\ldots,\\mathfrak q_s$. For each $i$, [lem-sc-finite-minimal-primes-over-ideal] gives finitely many primes minimal over $\\mathfrak q+\\mathfrak q_i$. Let $\\mathcal R$ consist of those primes in these lists for which $\\dim(B/\\mathfrak a)>0$. This is a finite set; it may be empty.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-weil-pbc-local-completion-local-ring",
+    "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+    "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "lem-sc-finite-minimal-primes-over-ideal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AW3, lemma-not-formally-catenary, d>1 paragraph: the components of the intersection with the other components; algebra.tex Tags 0316, 05GI, 00KQ, 00FR"
+   }
+  },
+  {
+   "text": "Every $\\mathfrak a\\in\\mathcal R$ is strictly smaller than $\\mathfrak n$, since its quotient has positive dimension; the same holds for $\\mathfrak q$ since $d>1$. Their contractions to $A$ are primes strictly smaller than $\\mathfrak m$: otherwise they contain $\\mathfrak mB=\\mathfrak n$. Also $\\mathfrak m\\ne0$, since $N>d>1$ whereas a local domain with zero maximal ideal is a field of dimension zero. Apply [lem-weil-pbc-prime-avoidance] to the ideal $\\mathfrak m$ and the finite list consisting of $(0)$, the contraction of $\\mathfrak q$, and the contractions of all members of $\\mathcal R$. We obtain $0\\ne f\\in\\mathfrak m$ whose image belongs neither to $\\mathfrak q$ nor to any member of $\\mathcal R$. The inclusion of $(0)$ handles even the case $\\mathcal R=\\varnothing$.",
+   "uses": [
+    "lem-weil-pbc-prime-avoidance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AW3, lemma-not-formally-catenary, choice of f by prime avoidance; Tag 00DS, lemma-silly"
+   }
+  },
+  {
+   "text": "The image $\\bar f$ in the local domain $C=B/\\mathfrak q$ is a nonzero element of its maximal ideal. Apply [lem-weil-pbc-dimension-quotient-nonzerodivisor] to obtain $\\dim(C/\\bar fC)=d-1$. Choose a chain attaining this finite dimension and lift its first prime to $B$. By [lem-weil-pbc-prime-contains-minimal-prime], a prime $P$ minimal over $\\mathfrak q+fB$ lies below that first prime. Appending $P$ if necessary shows $\\dim(B/P)\\ge d-1$; the reverse inequality follows because all chains above $P$ occur in $B/(\\mathfrak q+fB)$. Thus $\\dim(B/P)=d-1>0$. Apply [lem-weil-pbc-noetherian-height-quotient-bound] with one equation in $C$, at the prime $P/\\mathfrak q$. Its image in $C/\\bar fC$ is minimal, hence has height zero. Therefore $P/\\mathfrak q$ has height at most one. In particular there cannot be two strict inclusions of primes between $\\mathfrak q$ and $P$.",
+   "uses": [
+    "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+    "lem-weil-pbc-prime-contains-minimal-prime",
+    "lem-weil-pbc-noetherian-height-quotient-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AW3, lemma-not-formally-catenary, component of dimension d-1; Tag 00KW, lemma-one-equation"
+   }
+  },
+  {
+   "text": "We show that $P$ is minimal over $fB$. Take $T\\subseteq P$ minimal over $fB$, and a minimal prime $\\mathfrak b$ of $B$ contained in $T$, using [lem-weil-pbc-prime-contains-minimal-prime] twice. If $\\mathfrak b=\\mathfrak q$, then $T$ contains $\\mathfrak q+fB$, so minimality of $P$ over this ideal gives $T=P$. Otherwise $\\mathfrak b=\\mathfrak q_i$ for some $i$. Choose $\\mathfrak a$ minimal over $\\mathfrak q+\\mathfrak q_i$ inside $P$ by the same cited existence result. Since $\\dim(B/\\mathfrak a)\\ge\\dim(B/P)=d-1>0$, it belongs to $\\mathcal R$. The inclusion $\\mathfrak q\\subsetneq\\mathfrak a$ is strict because distinct minimal primes are incomparable. Also $\\mathfrak a\\subsetneq P$ is strict since $f\\notin\\mathfrak a$ but $f\\in P$. These two strict inclusions contradict the height bound established in Step 3. Thus only $T=P$ is possible. This supplies explicitly the component-separation argument implicit in the source.",
+   "uses": [
+    "lem-weil-pbc-prime-contains-minimal-prime"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AW3, lemma-not-formally-catenary, d>1 paragraph: avoiding the positive-dimensional intersections"
+   }
+  },
+  {
+   "text": "Let $\\mathfrak p=P\\cap A$. Choose $\\mathfrak p_0\\subseteq\\mathfrak p$ minimal over $fA$ by [lem-weil-pbc-prime-contains-minimal-prime]. The map $A\\to B$ is flat by [lem-weil-pbc-local-completion-faithfully-flat], so [lem-sc-flat-going-down] gives a prime $T\\subseteq P$ contracting to $\\mathfrak p_0$. Since $f\\in\\mathfrak p_0$, we have $f\\in T$, and Step 4 forces $T=P$. Consequently $\\mathfrak p_0=\\mathfrak p$, proving minimality over $fA$. Moreover $P$ is minimal over $\\mathfrak pB$: any prime between $\\mathfrak pB$ and $P$ contains $f$ and equals $P$. The completion isomorphism [lem-weil-pbc-local-completion-quotient] identifies $\\widehat{A/\\mathfrak p}$ with $B/\\mathfrak pB$. Thus $\\mathfrak r=P/\\mathfrak pB$ is a minimal prime of that completion and its quotient is $B/P$, of dimension $d-1$.",
+   "uses": [
+    "lem-weil-pbc-prime-contains-minimal-prime",
+    "lem-weil-pbc-local-completion-faithfully-flat",
+    "lem-sc-flat-going-down",
+    "lem-weil-pbc-local-completion-quotient"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AW3, lemma-not-formally-catenary, prime-quotient refinement; Tags 00MC, 00HS (lemma-flat-going-down), 00MA (lemma-completion-tensor)"
+   }
+  },
+  {
+   "text": "Finally apply [lem-weil-pbc-noetherian-height-quotient-bound] in $A$ with the single equation $f$ at $\\mathfrak p$. Minimality makes the corresponding prime of $A/fA$ have height zero, so $\\operatorname{ht}(\\mathfrak p)\\le1$. Since $A$ is a domain and $0\\ne f\\in\\mathfrak p$, the chain $(0)\\subsetneq\\mathfrak p$ has length one, hence is saturated. A chain of maximum length in $A/\\mathfrak p$ lifts to a saturated chain from $\\mathfrak p$ to $\\mathfrak m$. Prepending $(0)$ gives a saturated chain from $(0)$ to $\\mathfrak m$. A chain attaining $N$ also has these endpoints and is saturated. By the assumed catenarity their lengths coincide, giving $1+\\dim(A/\\mathfrak p)=N$. Because $1<d<N$, we have $0<d-1<N-1=\\dim(A/\\mathfrak p)$, as required.",
+   "uses": [
+    "lem-weil-pbc-noetherian-height-quotient-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 00KW, lemma-one-equation; Tag 00NI, definition-catenary; Tag 0AW3, lemma-not-formally-catenary, dimension of the hyperplane quotient"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sc-finite-minimal-primes-over-ideal",
+  "lem-sc-flat-going-down",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-local-completion-quotient",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-noetherian-height-quotient-bound",
+  "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+  "lem-weil-pbc-prime-avoidance",
+  "lem-weil-pbc-prime-contains-minimal-prime"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0AW3, lemma-not-formally-catenary, d>1 paragraph, with the component-separation and prime-quotient refinement written out using algebra.tex Tags 00DS, 00FR, 00KW, 00MC, 00MA and flat going down."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,10 +157,45 @@
    "results": "{\"t\": \"2026-10-18T20:16:59Z\", \"tool\": \"leansearch\", \"query\": \"Prime avoidance reduces a non-equidimensional completed catenary local domain to a prime quotient with a smaller dimensional completed component\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instIsMaximalOfIsPrimeOfKrullDimLEOfNatNat\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors\", \"Module.supportDim_quotSMulTop_succ_eq_of_notMem_minimalPrimes_of_mem_maximalIdeal\", \"Ideal.IsPrime.isMaximal\", \"PrimeSpectrum.irreducibleSpace\", \"Ring.KrullDimLE.of_isLocalization\", \"Ring.DimensionLEOne.maximalOfPrime\", \"Ideal.height_le_ringKrullDim_quotient_add_one\"], \"digest\": \"066ee3874d1f9b12\"}",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "catenary|equidimensional|ringKrullDim_quotient_span_singleton",
+   "results": "{\"t\": \"2026-10-18T21:08:16Z\", \"tool\": \"grep\", \"query\": \"catenary|equidimensional|ringKrullDim_quotient_span_singleton\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/KrullDimension/Regular.lean\", \"Mathlib/RingTheory/KrullDimension/Regular.lean\", \"Mathlib/RingTheory/KrullDimension/Regular.lean\", \"Mathlib/RingTheory/KrullDimension/Regular.lean\", \"Mathlib/RingTheory/KrullDimension/Regular.lean\"], \"digest\": \"9691eb35a9dbaab6\"}",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A prime quotient of a catenary local domain has a smaller completion component after cutting by an element",
+   "results": "{\"t\": \"2026-10-18T21:08:17Z\", \"tool\": \"leansearch\", \"query\": \"A prime quotient of a catenary local domain has a smaller completion component after cutting by an element\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.Quotient.instIsPrimeQuotientMapRingHomAlgebraMapMkOfLiesOver\", \"Ideal.Quotient.isDomain\", \"Ideal.map_height_le_one_of_mem_minimalPrimes\", \"Submodule.IsQuotientEquivQuotientPrime\", \"Ideal.height_le_height_add_one_of_mem\", \"Algebra.QuasiFinite.instFiniteResidueField\", \"cardQuot_pow_of_prime\", \"IsDedekindDomain.HeightOneSpectrum.coe_mem_adicCompletionIntegers\"], \"digest\": \"ffaeb643ddc39439\"}",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"catenary\"",
+   "results": "{\"t\": \"2026-10-18T21:08:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"catenary\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hyperplane reduction of a non-equidimensional completion of a catenary Noetherian local domain",
+   "results": "{\"t\": \"2026-10-18T21:08:18Z\", \"tool\": \"leanfinder\", \"query\": \"Hyperplane reduction of a non-equidimensional completion of a catenary Noetherian local domain\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ringKrullDim_le_ringKrullDim_add_spanFinrank\", \"ringKrullDim_le_ringKrullDim_quotSMulTop_succ\", \"ringKrullDim_le_ringKrullDim_add_card\", \"tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain\", \"ringKrullDim_quotSMulTop_succ_eq_ringKrullDim\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors\", \"IsDiscreteValuationRing.TFAE\"], \"digest\": \"751273ccda4c445d\"}",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Prime avoidance separates intersecting irreducible components of a completed local ring under a hypersurface section",
+   "results": "{\"t\": \"2026-10-18T21:08:19Z\", \"tool\": \"leanfinder\", \"query\": \"Prime avoidance separates intersecting irreducible components of a completed local ring under a hypersurface section\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.QuasiFiniteAt.exists_basicOpen_eq_singleton\", \"Ideal.exists_not_mem_forall_mem_of_ne_of_liesOver\", \"PrimeSpectrum.exist_ltSeries_mem_one_of_mem_last\", \"PrimeSpectrum.exists_image_comap_of_finite_of_free\", \"PrimeSpectrum.exist_mem_one_of_mem_maximal_ideal\", \"AlgebraicGeometry.Scheme.IsGermInjective.Spec\", \"PrimeSpectrum.exist_mem_one_of_mem_two\", \"AlgebraicGeometry.ProjIsoSpecTopComponent.FromSpec.carrier.relevant\"], \"digest\": \"ce574fc944e0eacf\"}",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-ratliff-formal-catenarity",
@@ -91,5 +219,84 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-catenary-completion-hyperplane",
+  "worker": "stage1",
+  "summary": "Expanded the 0AW3 hyperplane argument into six steps, reusing existing prime avoidance, finiteness, dimension and completion nodes; no new nodes. Made the component-separation argument and flat going-down passage to a prime quotient explicit.",
+  "blueprint": "Proof Step 3 of lem-per-artin-gabber-affine-curve, via Ratliff in the arbitrary-field duality/completion chain: realizes the d>1 induction of 0AW3 without changing the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-finite-minimal-primes-over-ideal",
+    "why": "Generic commutative-algebra input for the 0AW3 hyperplane argument; the perverse-curve unit supplies no version of this tool."
+   },
+   {
+    "node": "lem-sc-flat-going-down",
+    "why": "Generic commutative-algebra input for the 0AW3 hyperplane argument; the perverse-curve unit supplies no version of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Generic commutative-algebra input for the 0AW3 hyperplane argument; the perverse-curve unit supplies no version of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+    "why": "Generic commutative-algebra input for the 0AW3 hyperplane argument; the perverse-curve unit supplies no version of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-faithfully-flat",
+    "why": "Generic commutative-algebra input for the 0AW3 hyperplane argument; the perverse-curve unit supplies no version of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-local-ring",
+    "why": "Generic commutative-algebra input for the 0AW3 hyperplane argument; the perverse-curve unit supplies no version of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-local-completion-quotient",
+    "why": "Generic commutative-algebra input for the 0AW3 hyperplane argument; the perverse-curve unit supplies no version of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+    "why": "Generic commutative-algebra input for the 0AW3 hyperplane argument; the perverse-curve unit supplies no version of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-height-quotient-bound",
+    "why": "Generic commutative-algebra input for the 0AW3 hyperplane argument; the perverse-curve unit supplies no version of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+    "why": "Generic commutative-algebra input for the 0AW3 hyperplane argument; the perverse-curve unit supplies no version of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-prime-avoidance",
+    "why": "Generic commutative-algebra input for the 0AW3 hyperplane argument; the perverse-curve unit supplies no version of this tool."
+   },
+   {
+    "node": "lem-weil-pbc-prime-contains-minimal-prime",
+    "why": "Generic commutative-algebra input for the 0AW3 hyperplane argument; the perverse-curve unit supplies no version of this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-finite-minimal-primes-over-ideal",
+  "lem-sc-flat-going-down",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+  "lem-weil-pbc-local-completion-faithfully-flat",
+  "lem-weil-pbc-local-completion-local-ring",
+  "lem-weil-pbc-local-completion-quotient",
+  "lem-weil-pbc-noetherian-finitely-many-minimal-primes",
+  "lem-weil-pbc-noetherian-height-quotient-bound",
+  "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+  "lem-weil-pbc-prime-avoidance",
+  "lem-weil-pbc-prime-contains-minimal-prime"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q115-85903fda6",
+  "group": "Q115",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q115-85903fda6 (reviewer sub-agent of L); spot-checked: I read the whole item and there are no new nodes. The statement is unchanged against the live unsplit base apart from the appended inline definitions; the catenary definition matches Stacks 00NI. I read Stacks more-algebra 0AW3 (the d>1 paragraph). The split adds q∩A and (0) to the prime-avoidance list, which the proof needs and the source leaves out. Checks against each cited statement: Step 2: m is not contained in any listed contraction (each a in R is strictly below mB). Step 3: the dimension drops to d−1 in B/q because f̄ is a nonzero nonunit of a domain; Ideal.exists_minimalPrimes_le gives P minimal over q+fB with dim B/P = d−1; the height bound with t=1 gives ht(P/q) ≤ 1. Step 4: if T ⊆ P is minimal over fB and contains q_i, then a prime a minimal over q+q_i inside P is in R (this uses d>1), and q ⊊ a ⊊ P contradicts ht ≤ 1, so P is minimal over fB. Step 5: flat going-down gives T ⊆ P over p0, which forces p0 = p; local-completion-quotient with n = m/p identifies the completion of A/p with B/pB, so r = P/pB. Step 6: ht p = 1 plus catenarity of A (saturated chains (0)…m) gives dim A/p = N−1. Edge cases checked: fields and DVRs are excluded; d=2; empty R; non-reduced B; d=1 correctly falls outside. The parent lem-per-ratliff step uses exactly this clause. No duplicates (searched 0AW3, formally catenary, hyperplane). The 12 tool_uses are generic commutative algebra: 10 Mathlib leaves and 2 sk-thm-p1 split nodes; I accept them. No SGA citation, no cycle. No changes."
  }
 }
