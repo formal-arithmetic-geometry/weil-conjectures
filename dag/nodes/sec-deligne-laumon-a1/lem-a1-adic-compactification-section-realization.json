@@ -18,9 +18,167 @@
   "lem-per-adic-heart-pullback-fibres",
   "def-weil-algebraically-closed-coefficients"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work first at a finite field $E$. The schemes $U,T,s$ satisfy the realization hypotheses: $s=\\operatorname{Spec}k$ is Noetherian (the only ideals of $k$ are $0,k$), and [lem-weil-pbc-finite-type-over-noetherian] applies to their structure maps. Applying [lem-fin-finite-type-fibre-dimension-bound] over the one-point quasi-compact base $s$ bounds their dimensions, since the unique fibre is the scheme itself. Distinguish ordinary ringed-site extension $e_j$ for $B$-modules from the adic functor defined by the quotient tower. For an integral representative $K$, the compactification $(j,\\mathrm{id}_T)$ in [def-weil-integral-rational-qbar-compact-support] gives $Rj_!K=\\mathcal L_TJ_j\\mathcal R_UK$. Here the identity proper direct image is the identity and $J_j$ is termwise finite-level extension. Apply [lem-sf-integral-open-reduction-comparison]: its specified system isomorphism $r_j(K):\\mathcal R_T(e_jK)\\cong J_j\\mathcal R_UK$ respects every quotient transition, $e_jK$ is complete, and its map $d_j(K)$ identifies this very total limit with $e_jK$. Thus the adic and ordinary integral extensions agree naturally, with the stated open-adjunction normalization. This uses the strict-system isomorphism, rather than an inference that arbitrary maps agreeing at every finite level agree in the derived category.",
+   "uses": [
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-fin-finite-type-fibre-dimension-bound"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; integral reduction-system identification via Stacks Tag 0GL1 (sites-cohomology.tex, lemma-j-shriek-and-tensor) and the cited strict open-reduction comparison"
+   }
+  },
+  {
+   "text": "The tensor comparison of [lem-sf-open-tensor-normalization], applied on the $B$-ringed sites with $N=E_T=B_T[1/\\varpi]$, gives $E_T\\otimes^L_{B_T}e_jK\\cong e_j(E_U\\otimes^L_{B_U}K)$. The $E_T$-action is the balanced tensor action. Combine this with step 1 and the formula for $J$ in [lem-per-continuous-rational-derived-realization] to obtain $J_TRj_!QK\\cong e_jJ_UQK$. The open unit identifies its restriction to $U$ with the identity. Naturality for integral maps implies naturality for rational maps: a map $f/\\varpi^n$ is sent on both sides to $\\varpi^{-n}$ times the map for $f$. Hence this is an identification of the given rational functors. The ringed extension is sheafification of the extension-by-zero $E_T$-module presheaf, by [lem-pur-site-restriction-module-adjunction-exact]. Thus the coefficients here are the continuous $E_T$ of the realization theorem.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(2), Remark 6.8.15; Stacks Tags 03DI (sites-modules.tex, lemma-extension-by-zero), 03DJ (lemma-extension-by-zero-exact), 0GL1 (sites-cohomology.tex, lemma-j-shriek-and-tensor)"
+   }
+  },
+  {
+   "text": "At the rational stage [sk-lem-sf-open-ctf] says that $Rj_!$ preserves $D^b_c$ and every cohomological interval, without imposing a numerical integral Tor interval. In particular it preserves the heart. Under the t-exact equivalences $J_U,J_T$, its restriction is the exact module extension in step 2; consequently $j_!:\\Sh_c(U,E)\\to\\Sh_c(T,E)$ is exact. This does not assume that an arbitrary rational-heart representative is an integral sheaf with flat finite reductions.",
+   "uses": [
+    "sk-lem-sf-open-ctf",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; Proposition 6.8.14(2); blueprint main-20261015, sk-lem-sf-open-ctf, rational-coefficient clause"
+   }
+  },
+  {
+   "text": "Choose the closed complement $i:Z\\hookrightarrow T$ of $j$ with reduced scheme structure. The ringed open--closed identities of [lem-weil-pbc-proetale-ringed-open-closed] give $j^{-1}e_jJ_UF\\cong J_UF$ and $i^{-1}e_jJ_UF=0$. Apply the inverse-image comparison and full faithfulness of [lem-per-continuous-rational-derived-realization] to get $j^*j_!F\\cong F$ and $i^*j_!F=0$ in the adic hearts. A geometric point inside $U$ factors through $j$, and one outside $U$ factors through $i$ (the ideal of $Z$ maps to zero in its residue field). The pullback/fibre identity of [lem-per-adic-heart-pullback-fibres], applied respectively to $j$ and $i$, gives the claimed inside fibre and zero outside fibre. The scheme $Z$ is again separated finite type, so both pullback comparisons apply.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-per-adic-heart-pullback-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; Stacks Tags 09AG (proetale.tex, lemma-jshriek-zero), 09BN (lemma-open-immersion), 09BM (lemma-closed-immersion-complement-retrocompact-exact)"
+   }
+  },
+  {
+   "text": "Now suppose $T$ proper, and put $b:T\\to s=\\operatorname{Spec}k$. For an integral representative $K$, the compact-support definition gives $Ra_{U!}K=R\\lim_n\\operatorname{Res}_nRb_{*,n}j_!K_n$. By step 1 the strict tower $\\operatorname{Res}_nj_!K_n$ is the reduction tower of $e_jK$. The completed-coefficient direct-image comparison of [lem-pur-completed-coefficient-pushforward-comparison], applied to $f=b$ and the derived-complete object $e_jK$ (its strict reduction system being $\\mathcal R_T(e_jK)$), therefore identifies this expression with the ordinary completed-coefficient $Rb_*^B(e_jK)$; its $n$-th projection is $Rb_*^B$ of the reduction map followed by the coefficient-restriction comparison. The same object is $Rb_*(Rj_!K)$ by the tower definition of [def-weil-derived-direct-image]. All identifications are maps of strict towers, including their projections. Rationalizing and using [lem-a1-rational-direct-image-realization] gives $Ra_{U!}F\\cong Rb_*j_!F$ and its continuous realization $Rb_*^E(e_jJ_UF)$. The cohomology definition [def-weil-ordinary-compact-cohomology] now gives $H_c^0(U,F)\\cong H^0(T,j_!F)$.",
+   "uses": [
+    "def-weil-integral-rational-qbar-compact-support",
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-pur-completed-coefficient-pushforward-comparison",
+    "def-weil-derived-direct-image",
+    "lem-a1-rational-direct-image-realization",
+    "def-weil-ordinary-compact-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; Stacks Tag 0A07 (sites-cohomology.tex, lemma-Rf-commutes-with-Rlim); Milne Definition 18.1, pp. 118-119"
+   }
+  },
+  {
+   "text": "For any $C\\in D^b_c(s,E)$, [lem-weil-point-fibre-equivalence] and the definition [def-weil-finite-coefficient-point] identify $\\operatorname{Fib}_s\\mathbf1_s$ with $E[0]$: the continuous coefficient normalization of [lem-per-continuous-rational-derived-realization] gives $B_s(s)=C(|s|,A)=A$. Thus $\\operatorname{Hom}(\\mathbf1_s,C)\\cong\\operatorname{Hom}_{D(E)}(E[0],\\operatorname{Fib}_sC)$. The latter is $H^0(\\operatorname{Fib}_sC)$, with normalization evaluation on $1$: indeed maps from $E[0]$ are cycles, homotopies identify cycles differing by a boundary, and $E[0]$ is K-projective since a cycle $z$ in an acyclic vector-space complex is $dh$ and the map $1\\mapsto h$ is its null homotopy. [lem-coef-kprojective-derived-hom-bijection] makes this computation in the homotopy category a computation in the derived category. These descriptions prove naturality and $E$-linearity, not merely an abstract vector-space isomorphism.",
+   "uses": [
+    "lem-weil-point-fibre-equivalence",
+    "def-weil-finite-coefficient-point",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-coef-kprojective-derived-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Point coefficient normalization of def-weil-finite-coefficient-point; elementary cycle evaluation with the cited K-projective localization bijection"
+   }
+  },
+  {
+   "text": "Apply step 6 to $C=Ra_{W*}M$ for $W=U$ or $T$ and $M$ in its constructible heart. By [def-weil-ordinary-compact-cohomology] its degree-zero fibre cohomology is $H^0(W,M)$. The adjunction identification of [lem-a1-rational-direct-image-realization], with the pullback comparison of [lem-per-continuous-rational-derived-realization], gives $\\operatorname{Hom}(\\mathbf1_s,Ra_{W*}M)\\cong\\operatorname{Hom}(La_W^*\\mathbf1_s,M)\\cong\\operatorname{Hom}(\\mathbf1_W,M)$. The last unit identification is multiplication $E_W\\otimes_{a_W^{-1}E_s}a_W^{-1}E_s\\cong E_W$. Both objects in the last Hom are in the heart, which is a full subcategory by [def-weil-constructible-heart]. This proves the ordinary isomorphism for $U$; combined with step 5 for $M=j_!F$ it proves the compact-support isomorphism for $T$.",
+   "uses": [
+    "def-weil-ordinary-compact-cohomology",
+    "lem-a1-rational-direct-image-realization",
+    "lem-per-continuous-rational-derived-realization",
+    "def-weil-constructible-heart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(2), Remark 6.8.15; degree-zero Hom and ordinary-adjunction consequence, with the specified direct-image comparison"
+   }
+  },
+  {
+   "text": "The compact-to-ordinary map for this compactification is $Rb_*j_!F\\to Rb_*Rj_*F\\cong Ra_{U*}F$, where $j_!F\\to Rj_*F$ is the $j^*\\dashv Rj_*$-adjunct of the open-unit inverse $j^*j_!F\\cong F$. At finite level this is exactly the extension-to-direct-image comparison; step 1 identifies the realized open unit and counit, and the direct-image realization identifies the actual ordinary units and counits. The last isomorphism is the canonical ringed derived direct-image compositor [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. On a morphism $t:\\mathbf1_T\\to j_!F$ the adjunction formula therefore gives $\\mathbf1_U\\cong j^*\\mathbf1_T\\xrightarrow{j^*t}j^*j_!F\\cong F$. Thus steps 5--7 identify the specified comparison with restriction. For an open $V\\subset U$, restricting this expression gives $(j^*t)|_V$ followed by the restricted open-unit inverse; the normalized open unit in [lem-sf-open-tensor-normalization] is identity on sections. This proves compatibility with ordinary open restriction, without assuming that compact support itself restricts functorially to every open.",
+   "uses": [
+    "lem-sf-integral-open-reduction-comparison",
+    "lem-a1-rational-direct-image-realization",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; Milne Definition 18.1 and Proposition 18.3(b), pp. 118-121; canonical open-adjunction construction of the comparison"
+   }
+  },
+  {
+   "text": "For a finite extension $E\\subset L$, [lem-weil-finite-free-completed-scalar-comparison] identifies completed scalar extension with ordinary derived coefficient tensor. Apply [lem-sf-open-tensor-normalization] with the new coefficient sheaf to obtain its open-extension comparison; on restriction to $U$ it is identity. The realization comparisons commute with this coefficient extension by [lem-per-continuous-rational-derived-realization] and [lem-a1-rational-direct-image-realization]. The actual ordinary-adjunction bijections commute with it by [lem-pur-ordinary-adjunction-scalar-compatibility], and point evaluation commutes with it by [lem-weil-point-sections-scalar-extension]. Thus each arrow of steps 5--8, including the restriction formula, commutes with scalar extension. Its unit normalization is $1\\mapsto1$, $x\\otimes1\\mapsto x$, and $((x\\otimes a)\\otimes b)\\mapsto x\\otimes ab$; no assertion that $j_!\\mathbf1_U=\\mathbf1_T$ is needed. Finally use [def-weil-algebraically-closed-coefficients]: represent $F$, a morphism, or a finite comparison diagram over one common finite field, apply the preceding formulas there, and pass to the common-stage class. Two representatives agree at a further finite extension, where the same scalar compatibility identifies the formulas. Inverses and compositions pass in the same way. By [lem-per-adic-heart-pullback-fibres], standard cohomology and truncation are computed at a common finite stage; applying these to the finite-stage cone of a represented heart morphism shows that its kernel and cokernel, and hence exactness of $j_!$, are also computed stagewise. This proves the heart and fibre assertions as well as the comparison assertions at $\\Omega$.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-sf-open-tensor-normalization",
+    "lem-per-continuous-rational-derived-realization",
+    "lem-a1-rational-direct-image-realization",
+    "lem-pur-ordinary-adjunction-scalar-compatibility",
+    "lem-weil-point-sections-scalar-extension",
+    "def-weil-algebraically-closed-coefficients",
+    "lem-per-adic-heart-pullback-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14(1),(2), Lemma 6.8.2(1), Remark 6.8.15; specified common-finite-stage construction and scalar-normalized ordinary adjunction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-constructible-heart",
+  "def-weil-derived-direct-image",
+  "def-weil-finite-coefficient-point",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-ordinary-compact-cohomology",
+  "lem-a1-rational-direct-image-realization",
+  "lem-coef-kprojective-derived-hom-bijection",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-per-adic-heart-pullback-fibres",
+  "lem-per-continuous-rational-derived-realization",
+  "lem-pur-completed-coefficient-pushforward-comparison",
+  "lem-pur-ordinary-adjunction-scalar-compatibility",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-point-fibre-equivalence",
+  "lem-weil-point-sections-scalar-extension",
+  "sk-lem-sf-open-ctf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.8.14 and Remark 6.8.15, with the explicit strict open-reduction comparison, direct-image/limit comparison (Stacks Tag 0A07), and normalized open tensor comparison (Stacks Tag 0GL1); compactification interpretation as in Milne Definition 18.1. The degree-zero Hom and comparison calculation is agent-written."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +214,45 @@
    "results": "{\"t\": \"2026-10-18T02:27:23Z\", \"tool\": \"grep\", \"query\": \"extensionByZero|compactlySupported|proetale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\"], \"digest\": \"72abfb007d5a831c\"}",
    "date": "2026-10-18",
    "verdict": "no match: read returned signatures; topological function support, structure sheaves, site equivalences and coefficient sheaf definitions do not supply this constructible adic assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|compactlySupported|proetale",
+   "results": "{\"t\": \"2026-10-18T02:39:42Z\", \"tool\": \"grep\", \"query\": \"extensionByZero|compactlySupported|proetale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\"], \"digest\": \"72abfb007d5a831c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected returned signatures; ElladicCohomology.lean defines the continuous integral coefficient sheaf and its cohomology, and Proetale.lean defines the site; neither supplies this assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zeroth cohomology of a constructible adic sheaf is Hom from the coefficient unit and compact support is extension by zero on a proper compactification",
+   "results": "{\"t\": \"2026-10-18T02:39:43Z\", \"tool\": \"leansearch\", \"query\": \"Zeroth cohomology of a constructible adic sheaf is Hom from the coefficient unit and compact support is extension by zero on a proper compactification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasCompactSupport.extend_zero\", \"HasCompactSupport.continuous_extend_zero\", \"groupCohomology.cocyclesIso₀_inv_comp_iCocycles\", \"groupCohomology.H0Iso\", \"groupCohomology.π_comp_H0Iso_hom_apply\", \"ContinuousCohomology.continuousCohomologyZeroIso\", \"groupCohomology.H0\", \"CochainComplex.mkHom_f_0\"], \"digest\": \"cc3a32861569cdda\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected returned signatures; the hits concern topological support, topological group cohomology, completion rings, or general scalar/sheafification infrastructure, not the stated adic compactification interface."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.Adjunction",
+   "results": "{\"t\": \"2026-10-18T02:39:43Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules, CategoryTheory.Adjunction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.sheafificationAdjunction\", \"SheafOfModules.overMapPushforwardAdj\", \"SheafOfModules.overPushforwardOverAdj\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.PullbackConstruction.adjunction\"], \"digest\": \"2d777c4a7cb6ca75\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected returned signatures; sheafification and module pullback adjunctions do not state the completed constructible extension, compactification Hom identification, or their coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous l-adic extension by zero realizes completed compact support and degree zero cohomology as Hom from the coefficient unit",
+   "results": "{\"t\": \"2026-10-18T02:39:44Z\", \"tool\": \"leanfinder\", \"query\": \"Continuous l-adic extension by zero realizes completed compact support and degree zero cohomology as Hom from the coefficient unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"continuousCohomology\", \"BDeRhamPlus\", \"ContinuousCohomology.continuousCohomologyZeroIso\", \"ContinuousCohomology.homogeneousCochains\", \"ContinuousCohomology.kerHomogeneousCochainsZeroEquiv\", \"ContinuousCohomology.MultiInd.complex\", \"PadicInt.mahlerEquiv\", \"Profinite.NobelingProof.Nobeling_aux\"], \"digest\": \"97093e05e0a3725f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected returned signatures; the hits concern topological support, topological group cohomology, completion rings, or general scalar/sheafification infrastructure, not the stated adic compactification interface."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact extension by zero for modules over a ringed site and its scalar extension compatibility",
+   "results": "{\"t\": \"2026-10-18T02:40:05Z\", \"tool\": \"leanfinder\", \"query\": \"Exact extension by zero for modules over a ringed site and its scalar extension compatibility\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.Sheafify.smul_zero\", \"PresheafOfModules.Sheafify.zero_smul\", \"CategoryTheory.Functor.mapExactFunctor_smul\", \"ModuleCat.extendScalars_id_comp_assoc\", \"PresheafOfModules.Sheafify.SMulCandidate.mk'\", \"PresheafOfModules.Sheafify.instUniqueSMulCandidate\", \"CategoryTheory.Abelian.Ext.smul_eq_comp_mk₀\", \"ModuleCat.extendScalars_assoc'\"], \"digest\": \"ff5ab6174e2b9b68\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected returned signatures; the hits concern topological support, topological group cohomology, completion rings, or general scalar/sheafification infrastructure, not the stated adic compactification interface."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-constructible-degree-zero-proper-support",
@@ -78,5 +271,99 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-adic-compactification-section-realization",
+  "worker": "stage1",
+  "summary": "Q58: identified the given adic open-extension quotient tower with ordinary completed-ring extension by the existing strict-system comparison, then used normalized tensor and continuous direct-image realization. Proved heart exactness, adic fibres, compactification/ordinary Hom normalizations, the actual restriction formula, and scalar/common-stage compatibilities. No new nodes, no statement change, no Lean or builds.",
+  "blueprint": "Realizes the first two sentences of the proof of sk-l-dl-a1-endpoints, through the compactification-section interface needed by lem-a1-constructible-degree-zero-proper-support; leaves support and injectivity to the separate nodes.",
+  "tool_uses": [
+   {
+    "node": "lem-a1-rational-direct-image-realization",
+    "why": "Generic coefficient comparison used as a black box, without replacing the endpoint-unit proof route."
+   },
+   {
+    "node": "lem-fin-finite-type-fibre-dimension-bound",
+    "why": "Generic finite-type dimension bound, applied over Spec k to give the finite-dimensionality hypothesis of the continuous realization; no endpoint-unit node supplies it."
+   },
+   {
+    "node": "lem-per-adic-heart-pullback-fibres",
+    "why": "Generic coefficient comparison used as a black box, without replacing the endpoint-unit proof route."
+   },
+   {
+    "node": "lem-per-continuous-rational-derived-realization",
+    "why": "Generic coefficient comparison used as a black box, without replacing the endpoint-unit proof route."
+   },
+   {
+    "node": "lem-pur-completed-coefficient-pushforward-comparison",
+    "why": "Generic ringed-site direct-image/derived-limit comparison for the fixed compactification tower."
+   },
+   {
+    "node": "lem-pur-ordinary-adjunction-scalar-compatibility",
+    "why": "Generic scalar-naturality of the actual ordinary derived adjunction, used to descend comparison maps to common finite stages."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic coefficient comparison used as a black box, without replacing the endpoint-unit proof route."
+   },
+   {
+    "node": "lem-sf-integral-open-reduction-comparison",
+    "why": "Strict quotient-system realization of open extension, used as a coefficient comparison tool; no endpoint-unit statement supplies it."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic normalized ringed-site tensor/open adjunction comparison, needed to identify the given adic functor under realization."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Generic finite-free coefficient tensor/completion comparison."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic ringed-site restriction and boundary identities for continuous coefficient sheaves."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic ringed-topos derived direct-image compositor for the canonical compact-to-ordinary map."
+   },
+   {
+    "node": "lem-weil-point-fibre-equivalence",
+    "why": "Generic point coefficient equivalence, used to normalize the zeroth cohomology Hom identification."
+   },
+   {
+    "node": "lem-weil-point-sections-scalar-extension",
+    "why": "Generic point-section coefficient comparison, used for scalar compatibility of the cohomology normalization."
+   },
+   {
+    "node": "sk-lem-sf-open-ctf",
+    "why": "Generic preservation of constructible cohomological intervals for an open immersion; no endpoint-unit statement gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-a1-rational-direct-image-realization",
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "lem-per-adic-heart-pullback-fibres",
+  "lem-per-continuous-rational-derived-realization",
+  "lem-pur-completed-coefficient-pushforward-comparison",
+  "lem-pur-ordinary-adjunction-scalar-compatibility",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-integral-open-reduction-comparison",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-point-fibre-equivalence",
+  "lem-weil-point-sections-scalar-extension",
+  "sk-lem-sf-open-ctf"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-3cccbbb8d",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-3cccbbb8d (reviewer sub-agent of L); spot-checked: I read the whole item: statement, all 9 steps and the split_report with its 15 tool_uses. The delivery has no new nodes and leaves the statement and stmt_deps unchanged. I also read the unit sk-l-dl-a1-endpoints and the chapter record, and checked the statement of every cited node against the use made of it. Main checks: step 1 (lem-sf-integral-open-reduction-comparison: strict r_j, completeness and d_j, with j quasi-compact and K complete; the Noetherian and finite-dimension hypotheses come from the Mathlib leaf lem-weil-pbc-finite-type-over-noetherian and from lem-fin-finite-type-fibre-dimension-bound over Spec k); step 2 (γ of lem-sf-open-tensor-normalization with N=E_T, and the J formula); step 3 (the rational clause of sk-lem-sf-open-ctf uses the same standard pairs as def-weil-constructible-heart); step 4 (the ringed open-closed identities, and the fibres via lem-per-adic-heart-pullback-fibres for j and i with Z_red); step 5 (with the compactification (j,b), the defining tower is the strict reduction tower of e_jK, and lem-pur-completed-coefficient-pushforward-comparison gives Rb_*(e_jK)); step 6 (Fib_s 1_s = E, E[0] K-projective, checked); steps 7-8 (the adjunction identified by lem-a1-rational-direct-image-realization, then the compositor; restriction formula checked); step 9 (scalar and common-stage descent through lem-pur-ordinary-adjunction-scalar-compatibility and lem-weil-point-sections-scalar-extension). Sources checked: Bhatt-Scholze Prop. 6.8.11(3), 6.8.14(1),(2) and Rem. 6.8.15; Milne LEC Def. 18.1 and Prop. 18.2-18.3, pp. 119-121. Small cases checked: U empty, U=T, F=0, T disconnected, ramified L/E. The rg search found no duplicate; lem-a1-degree-zero-compact-support-sections is narrower. No SGA is cited. I accept the declared tool_uses: they are generic tools and none replaces a step of the endpoint unit. One fault, repaired in fixes/: under C1/C4, the step 5 text cited [prop-weil-pbc-direct-image-limits], which is not in its uses or in proof_deps and is an off-unit node with no tool_use declared. I replaced it with [lem-pur-completed-coefficient-pushforward-comparison], which is already in uses and states the comparison the step needs. I also corrected the tool_use 'why' for lem-fin-finite-type-fibre-dimension-bound, which wrongly called it a coefficient comparison. No drop_nodes.; 1 file(s) fixed by the reviewer"
  }
 }
