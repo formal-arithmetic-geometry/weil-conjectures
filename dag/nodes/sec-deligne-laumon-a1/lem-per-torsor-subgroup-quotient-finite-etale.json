@@ -14,9 +14,106 @@
   "def-weil-etale-morphism",
   "def-weil-pbc-geometric-fibre"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The Galois-cover hypothesis says that $c$ is a $G$-torsor [def-sbc-normal-dominant-galois]. In particular $c$ is surjective and the map $\\alpha:\\coprod_{g\\in G}E\\to E\\times_UE$, $(g,e)\\mapsto(ge,e)$, is an isomorphism. To verify this also from the stated geometric-fibre criterion, view $\\alpha$ over the second factor $E$. Its source and target are finite etale over $E$ [def-weil-pbc-finite-etale-category]; the disjoint copies of $E$ are the scheme coproduct of [lem-weil-pbc-scheme-coproduct-family], and the fold is finite etale since on an affine open it is the finite product of identity algebras. Since $E$ is nonempty and connected, choose a geometric point of $E$. The functor in [lem-fet-galois-category] reflects isomorphisms by [def-galois-category]. Its value on $\\alpha$ is the bijection $g\\mapsto ge$ from $G$ to the $c$-fibre over the chosen geometric point of $E$, by simple transitivity. Thus $\\alpha$ is an isomorphism. Every geometric fibre of $c$ is nonempty by the torsor hypothesis, giving surjectivity on underlying points as well.",
+   "uses": [
+    "def-sbc-normal-dominant-galois",
+    "def-weil-pbc-finite-etale-category",
+    "lem-fet-galois-category",
+    "def-galois-category",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Section 03SF (section-finite-etale-under-galois); torsor identity, checked by the conservative geometric fibre functor"
+   }
+  },
+  {
+   "text": "Restrict the action to $H$. The map $\\coprod_{h\\in H}E\\to E\\times_UE$ is the inclusion of the $H$-summands of $\\coprod_{g\\in G}E$ followed by $\\alpha$, so it is a monomorphism. Finite morphisms are affine by [def-weil-finite-integral-morphism]; hence $E\\to U$ is affine. Apply [lem-per-free-finite-group-affine-quotient] with base $U$, total scheme $E$ and group $H$. It gives a quotient $q:E\\to Q$ with structure map $w:Q\\to U$. The map $q$ is surjective, represents the fppf orbit sheaf, is categorical over $U$, and remains the orbit-sheaf quotient after every base change on $U$.",
+   "uses": [
+    "def-weil-finite-integral-morphism",
+    "lem-per-free-finite-group-affine-quotient",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 07S7 (lemma-quotient-scheme), affine case applied to the restricted action"
+   }
+  },
+  {
+   "text": "Use the two categorical properties with their maps fixed. The given $\\pi$ is $H$-invariant, so $\\pi=a\\circ q$ for a unique $U$-map $a:Q\\to Z$. Conversely $q$ is invariant, so $q=b\\circ\\pi$ for a unique scheme map $b:Z\\to Q$. The equality $w\\circ b\\circ\\pi=c=v\\circ\\pi$ implies $w\\circ b=v$ by uniqueness of factorization through $\\pi$, so $b$ is a $U$-map. Now $(a\\circ b)\\circ\\pi=\\pi$ and $(b\\circ a)\\circ q=q$; uniqueness for the two quotients gives $a\\circ b=1_Z$ and $b\\circ a=1_Q$. Thus $a$ identifies the actual given quotient with $q$, respecting the quotient maps and the structure maps. In particular $\\pi$ is surjective since $q$ is.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 07S7 (lemma-quotient-scheme), uniqueness of the categorical quotient; explicit two-sided inverse argument"
+   }
+  },
+  {
+   "text": "Pull back along $c:E\\to U$. The isomorphism $\\alpha$ identifies $E\\times_UE$ over its second factor with $\\coprod_{g\\in G}E$. Under this identification $h\\in H$ sends $(g,e)$ to $(hg,e)$. By the base-change assertion of [lem-per-free-finite-group-affine-quotient], $Z\\times_UE$ is its orbit-sheaf quotient. That quotient is $\\coprod_{Hg\\in H\\backslash G}E$, with the leg sending the $g$-copy identically to the $Hg$-copy: on any test scheme a map to these coproducts is a locally constant choice of label and a map to $E$; a coset label lifts locally to a $G$-label, and two lifts differ locally by an $H$-label. This gives mutually inverse maps on the sheafified orbit presheaf. Consequently the projection $Z\\times_UE\\to E$ is the fold map of $[G:H]$ copies. It is finite etale: over $\\operatorname{Spec}A\\subset E$ its coordinate algebra is $\\prod_{H\\backslash G}A$, finite free, flat and etale (each factor is the identity algebra).",
+   "uses": [
+    "lem-per-free-finite-group-affine-quotient",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 07S7 (lemma-quotient-scheme): base change of the represented orbit sheaf; explicit calculation of the quotient of the trivial torsor"
+   }
+  },
+  {
+   "text": "The singleton $\\{c:E\\to U\\}$ is an fpqc covering in [def-weil-pbc-fpqc-covering]. Indeed $c$ is flat because it is etale [def-weil-etale-morphism], and it is surjective by Step 1; for each affine open $V\\subset U$, its inverse image is a single affine open since $c$ is finite [def-weil-finite-integral-morphism], and its image is $V$. The base change of $v$ along this covering is finite etale by Step 4. Apply [lem-weil-pbc-fpqc-descend-finite] and [lem-galois-fpqc-descend-etale] to conclude that $v$ is finite and etale. No Noetherian or separation hypothesis on $U$ is required.",
+   "uses": [
+    "def-weil-pbc-fpqc-covering",
+    "def-weil-etale-morphism",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-fpqc-descend-finite",
+    "lem-galois-fpqc-descend-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/descent.tex",
+    "place": "Tags 02LA (lemma-descending-property-finite) and 02VN (lemma-descending-property-etale)"
+   }
+  },
+  {
+   "text": "Fix any geometric point $s:\\operatorname{Spec}\\Omega\\to U$. Simple transitivity gives a lift $e:\\operatorname{Spec}\\Omega\\to E$. Pull Step 4 back along $e$ and use the fibre-product universal property [def-pc-fibre-product]: since $c\\circ e=s$, this gives $Z\\times_U\\operatorname{Spec}\\Omega\\simeq\\coprod_{H\\backslash G}\\operatorname{Spec}\\Omega$. Therefore its geometric fibre in [def-weil-pbc-geometric-fibre] has $|H\\backslash G|=[G:H]$ points. Here $H\\backslash G$ is the set of right cosets; inversion gives a bijection $Hg\\mapsto g^{-1}H$ with the left cosets defining the index, so no normality assumption is used. The scheme $Z$ is nonempty because $E$ is nonempty and $\\pi$ is surjective. If $Z$ were the disjoint union of two nonempty open-and-closed subsets, their inverse images under $\\pi$ would be two nonempty open-and-closed subsets partitioning $E$, contradicting [def-weil-connected-scheme]. Thus $Z$ is connected. For $H=1$ the coset set has $|G|$ elements, and for $H=G$ it has one; all preceding constructions include both cases.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-pbc-geometric-fibre",
+    "def-weil-connected-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 07S7 (lemma-quotient-scheme), split fibre computation and continuous-surjective-image argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-normal-dominant-galois",
+  "def-weil-pbc-finite-etale-category",
+  "lem-fet-galois-category",
+  "def-galois-category",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-finite-integral-morphism",
+  "lem-per-free-finite-group-affine-quotient",
+  "def-weil-pbc-fpqc-covering",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-fpqc-descend-finite",
+  "lem-galois-fpqc-descend-etale",
+  "def-pc-fibre-product",
+  "def-weil-pbc-geometric-fibre",
+  "def-weil-connected-scheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tag 07S7 (lemma-quotient-scheme), with descent Tags 02LA and 02VN; explicit categorical identification, split orbit calculation and connectedness argument. This supplies the torsor-quotient calculation intended by the original reference to Tag 03BK."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -45,10 +142,59 @@
    "results": "EllipticCurve/{IsomOfJ,Jacobian/Basic,Projective/Basic,VariableChange}.lean, Group/Affine.lean (no scheme quotients by finite groups)",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The categorical quotient of a connected finite etale Galois cover by a subgroup is connected finite etale of degree the index",
+   "results": "CategoryTheory.PreGaloisCategory.instPreservesIsConnectedActionFintypeCatAutFunctorFunctorToAction; CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected; CategoryTheory.PreGaloisCategory.exists_hom_from_galois_of_connected; CategoryTheory.PreGaloisCategory.exists_lift_of_quotient_openSubgroup; CategoryTheory.PreGaloisCategory.fiberIsoQuotientStabilizer; CategoryTheory.PreGaloisCategory.FiberFunctor.isPretransitive_of_isConnected; CategoryTheory.PreGaloisCategory.instFiniteHomOfIsConnected; CategoryTheory.PreGaloisCategory.instFiniteAutOfIsConnected",
+   "date": "2026-10-19",
+   "verdict": "no match: abstract Galois categories, set actions, representability criteria, or affine properties only; no free-action scheme quotient theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "torsor|[Qq]uotient",
+   "results": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Scheme.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Topology.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean; Mathlib/AlgebraicGeometry/ProjectiveSpectrum/StructureSheaf.lean; Mathlib/AlgebraicGeometry/Geometrically/Connected.lean; grep subdirectory: AlgebraicGeometry",
+   "date": "2026-10-19",
+   "verdict": "no match: abstract Galois categories, set actions, representability criteria, or affine properties only; no free-action scheme quotient theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.FiniteEtale, CategoryTheory.Limits.IsColimit",
+   "results": "No hits; loogle: unknown identifier 'AlgebraicGeometry.Scheme.FiniteEtale'",
+   "date": "2026-10-19",
+   "verdict": "no match: abstract Galois categories, set actions, representability criteria, or affine properties only; no free-action scheme quotient theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "quotient finite etale scheme finite group action subgroup index geometric fibre",
+   "results": "Subgroup.finite_quotient_of_finite_quotient_of_index_ne_zero; Subgroup.finiteIndex_of_finite_quotient; AddSubgroup.finite_quotient_of_finiteIndex; AddSubgroup.finiteIndex_of_finite_quotient; Subgroup.index_ne_zero_iff_finite; Subgroup.finiteIndex_iff_finite_quotient; Subgroup.relIndex; Subgroup.index",
+   "date": "2026-10-19",
+   "verdict": "no match: abstract Galois categories, set actions, representability criteria, or affine properties only; no free-action scheme quotient theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invariants of a finite etale algebra under a finite group action are finite etale and commute with flat base change",
+   "results": "IsGaloisGroup.isInvariant; IsArithFrobAt.exists_of_isInvariant; Algebra.isInvariant_of_isGalois; arithFrobAt; Algebra.isInvariant_of_isGalois'; IsGaloisGroup.to_isFractionRing; IsGaloisGroup; IsGaloisGroup.iff_isFractionRing",
+   "date": "2026-10-19",
+   "verdict": "no match: abstract Galois categories, set actions, representability criteria, or affine properties only; no free-action scheme quotient theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.IsEtale, MulSemiringAction",
+   "results": "No hits; loogle: unknown identifier 'Algebra.IsEtale'",
+   "date": "2026-10-19",
+   "verdict": "no match: abstract Galois categories, set actions, representability criteria, or affine properties only; no free-action scheme quotient theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "invariants|GaloisCover|FiniteEtale|IsEtale",
+   "results": "Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ.lean; Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ.lean; Mathlib/AlgebraicGeometry/EllipticCurve/IsomOfJ.lean; Mathlib/AlgebraicGeometry/Morphisms/Etale.lean; grep subdirectory: AlgebraicGeometry",
+   "date": "2026-10-19",
+   "verdict": "no match: abstract Galois categories, set actions, representability criteria, or affine properties only; no free-action scheme quotient theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-trait-prime-to-ell-log-alteration",
@@ -73,5 +219,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-torsor-subgroup-quotient-finite-etale",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Constructed the free-action fppf quotient and identified it with the given categorical quotient by explicit inverse maps. Computed its pullback along E as copies indexed by right H-cosets, descended finite etaleness, counted every geometric fibre and proved connectedness. One general statement-only quotient input; all other cited inputs already exist. Exact source/Lean checks and actual Mathlib searches recorded.",
+  "blueprint": "Realizes the inherited ancestry through lem-per-artin-gabber-affine-curve, Step 3 purity reduction, specifically ILO XVI 3.7 p.255 and the parent alteration proof Step 7: the generically etale quotient has degree [G:H]. Does not change the chapter or unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-fet-galois-category",
+    "why": "Generic conservativity of the geometric fibre functor, to verify the G-torsor identity from the fibrewise formulation; no perverse-sheaf input or alternate route."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-finite",
+    "why": "Generic descent of finiteness along the original finite etale torsor, after the split orbit calculation."
+   },
+   {
+    "node": "lem-galois-fpqc-descend-etale",
+    "why": "Generic fpqc descent of etaleness along the same covering; the unit has no scheme-morphism descent statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fet-galois-category",
+  "lem-weil-pbc-fpqc-descend-finite",
+  "lem-galois-fpqc-descend-etale"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-6912e418b",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-6912e418b (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-per-free-finite-group-affine-quotient, every cited statement, parent Step 7 and Stacks 07S7/03BM/02LA/02VN/03SF/023Q. The new node matches the affine case of 07S7 hypothesis by hypothesis: K_S is finite locally free, freeness means j is a monomorphism, and X->S is affine. Its torsor, finite-locally-free-and-surjective, base-change and categorical clauses each follow in a few lines from the fppf torsor conclusion and the fact that schemes are fppf sheaves. I tested it on K=1, X empty, the swap on S⊔S, translation with char dividing |K|, and the trivial non-free action, which is correctly excluded. It is not a duplicate: lem-a1-finite-flat-affine-relation-quotient needs global affineness, lem-per-projective-finite-group-quotient has a Noetherian base and no torsor conclusion, lem-weil-pbc-connected-torsor-subgroup-quotient is only existential, and Mathlib has nothing (ColimitsOver is gluing). Step 1 derives alpha as an isomorphism from simple transitivity on fibres, using the reflection clause of the Galois category FEt(E). Step 2 checks that the restricted action is monomorphic and E->U affine. Step 3 gives explicit inverse U-isomorphisms compatible with pi and q, so the given pi is pinned. Step 4 identifies the base change as the coset-labelled coproduct; I checked the sheaf calculation. Step 5 checks the singleton fpqc covering and cites the exact finite and étale descent nodes. Step 6 counts [G:H] points per geometric fibre, also for non-normal H, and proves connectedness. The item statement is unchanged, stmt_deps and proof_deps are consistent and no SGA is cited. I accept the three declared generic tool_uses (fibre-functor conservativity, finite and étale fpqc descent). No changes."
  }
 }
