@@ -22,9 +22,190 @@
   "def-per-potential-dualizing",
   "def-kun-derived-tensor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Set $A=\\mathbf F_\\ell$ and $\\omega_h=h^!A$. All adjoints below are the ordinary etale compact-support adjoints. Smoothness gives local finite presentation; compactifiability gives finite type and separatedness. A finite-type scheme over a Noetherian scheme is Noetherian. Base change preserves separatedness, finite type and smooth relative dimension. Thus $W=P\\times_XP$, its projection $p_1:W\\to P$ and diagonal $\\Delta$ are admissible; $\\Delta$ is a regular closed immersion of codimension $d$, with normal bundle $T_{P/X}$. Noetherian schemes are quasi-compact and quasi-separated; Nagata supplies compactifications for all separated finite-type maps introduced below. In particular the normal-bundle projection and extended-Rees family in the section-specialization theorem are admissible. That theorem supplies smoothness, separatedness, finite type and Noetherianity of the deformation family. The same verifications apply after any Noetherian change of base. No ground field is introduced.",
+   "uses": [
+    "def-weil-compactifications-refinements",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-pur-diagonal-regular-immersion",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "thm-nagata-compactification",
+    "lem-pur-noetherian-etale-section-specialization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "sk-prop-sp-orientation.proof.md: admissibility of the diagonal and section deformation"
+   }
+  },
+  {
+   "text": "Fix the affine normalization on a Noetherian base $S$. For $q:\\mathbf P^1_S\\to S$, use the supported diagonal Kummer class $\\delta:R\\Delta_*A\\to A(1)[2]$. The ordinary projective-line adjunction has counit $\\epsilon_{q,K}= (1_K\\otimes t_q)\\mathrm{PF}^{-1}$, with $t_qh=1$ for $h=c_1(\\mathcal O(1))$. Its unit is the diagonal formula (G6): $M\\simeq Rp_{2*}R\\Delta_*M\\to Rp_{2*}p_1^*M(1)[2]\\simeq q^*Rq_*M(1)[2]$. The two diagonal integrals are identities; these are exactly the two triangle identities in det-sp-p1-adjunction. Restricting this adjunction through $j:\\mathbf A^1_S\\hookrightarrow\\mathbf P^1_S$ gives the affine-line adjunction in lem-amb-affine-space-top-trace, whose unit therefore uses the restricted supported diagonal class. This is a supported class: forgetting support on $\\mathbf A^2_S$ need not retain it. Iterating the line adjunction in the ordered coordinate tower defines the affine-$r$ comparison and trace, with the identity adjunction at $r=0$. This establishes the diagonal-class and integration normalization, not just an unspecified isomorphism.",
+   "uses": [
+    "lem-asd-ordinary-supported-kummer",
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "def-amb-p1-trace",
+    "det-sp-p1-adjunction",
+    "lem-sp-tower-p1-arbitrary-base-integrals",
+    "lem-amb-affine-space-top-trace",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "sk-prop-geo-p1-adjunction: (G6), (G7) and triangle identities; sk-lem-sp-finite-existence: ordered affine adjunctions"
+   }
+  },
+  {
+   "text": "The Cartesian square defining $p_1$ gives $p_2^*\\omega_p\\xrightarrow{\\beta}\\omega_{p_1}$ by ordinary smooth exceptional base change. Pulling back along $\\Delta$ and using $p_2\\Delta=1_P$ gives $a_p:\\omega_p\\xrightarrow{\\sim}\\Delta^*\\omega_{p_1}$. Apply the normalized section deformation comparison to $(p_1,\\Delta)$ to obtain $\\delta_p:\\Delta^*\\omega_{p_1}\\xrightarrow{\\sim}z^*\\omega_\\pi$, where $\\pi:T_{P/X}\\to P$. Specialize vector-bundle purity to $E=\\mathbf Q_\\ell$, $n=1$, so its coefficient ring is $A$. Its unit-coefficient comparison is $\\Gamma_\\pi:A(d)[2d]\\xrightarrow{\\sim}\\omega_\\pi$. Define\n$$\\alpha_p=(z^*\\Gamma_\\pi^{-1})\\delta_p a_p:\\omega_p\\xrightarrow{\\sim}A_P(d)[2d].$$\nThe Tate line is precisely $\\mu_\\ell\\otimes_{\\mathbf Z/\\ell}A$ by the ordinary Tate identification in vector-bundle purity. This fixes the specified diagonal, extended-Rees specialization and roots-of-unity orientation; it requires no perfectness assumption.",
+   "uses": [
+    "prop-asd-smooth-base-change",
+    "lem-pur-noetherian-etale-section-specialization",
+    "thm-amb-vector-bundle-purity",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "sk-prop-sp-orientation.proof.md: displayed diagonal/deformation/vector-bundle composite"
+   }
+  },
+  {
+   "text": "We compute this orientation on a smooth chart $h:U\\to V$, with $V,U$ affine and $e:U\\to\\mathbf A^d_V$ etale. Such charts exist by the smooth local normal form, and their opens are Noetherian. On $U\\times_VU$, subtract the first-factor coordinates from the second-factor coordinates: $x_i=e_i(u_2)-e_i(u_1)$. This gives an etale map to $\\mathbf A^d_U$ carrying the diagonal to zero. The inverse image of zero is etale separated over $U$, with the diagonal as a clopen section; remove its complementary closed component. Hence it is a map of section pairs with scheme-theoretic inverse image exactly the diagonal. Apply lem-per-etale-section-deformation-comparison: its two fibre comparisons identify $\\delta_h$ with the identity in these coordinates, using the frame $[x_i]$ on the normal bundle. Vector integration in this frame is the ordered affine trace, by its definition. Finally etale locality and mate pasting identify $a_h$ with the counit-preserving chart comparison. Thus\n$$\\alpha_h=e^*(\\Gamma_{p_d}^{-1})\\circ E_e,\\qquad E_e:\\omega_h\\xrightarrow{\\sim}e^*\\omega_{p_d},$$\nwhere $E_e$ is the canonical etale locality isomorphism and $\\Gamma_{p_d}$ is the ordered affine comparison from Step 2. The normal frame is induced by coordinate differences, not chosen independently. The translation used here preserves the specified affine trace: in one coordinate $z\\mapsto z-a$ extends to $[x_0:x_1]\\mapsto[x_0-a x_1:x_1]$, fixes infinity and preserves the hyperplane line bundle. Its Kummer class and the unit summand in the projective-line decomposition are therefore preserved; the second-summand projection defining $t_q$ is preserved as well. Restriction gives the affine-line assertion, and successive coordinate translations give the ordered affine-space assertion. Thus subtracting first-factor coordinates changes neither counit nor orientation.",
+   "uses": [
+    "sbc-thm-etale-local-normal-form",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-etale-section-clopen-immersion",
+    "lem-per-etale-section-deformation-comparison",
+    "def-amb-vector-integration",
+    "lem-amb-etale-adjoint-locality",
+    "lem-weil-pbc-mate-pasting",
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "lem-asd-ordinary-supported-kummer",
+    "def-amb-p1-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "sk-thm-dnc.proof.md: Local construction; sk-prop-sp-orientation.proof.md: three-factor formula"
+   }
+  },
+  {
+   "text": "For any ordinary etale complex $M$, set\n$$\\gamma_{p,M}=\\phi_{p,M}\\circ(1\\otimes\\alpha_p^{-1}):p^*M(d)[2d]\\to p^!M,$$\nwhere $\\phi$ is the canonical projection-and-counit tensor map. The tensor theorem makes $\\phi$ an isomorphism on the entire ordinary derived category, and $\\alpha_p$ is an isomorphism by Step 3. Thus $\\gamma$ is an isomorphism, natural in $M$; restrict to $D^+$ as requested. On an affine chart its transpose is the etale sum counit followed by ordered affine integration. Indeed the affine-line counit has the projection-and-trace formula of Step 2; the tensor-composition identity rewrites its iterates as the projection map followed by the constant-coefficient composite counit, and the same identity with the etale chart functor inserts its sum counit. Uniqueness of counit-preserving right-adjoint comparison therefore identifies the resulting chart map with $\\gamma$. This also checks that the tensor construction uses the actual affine normalization.",
+   "uses": [
+    "thm-asd-smooth-tensor",
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "lem-amb-affine-space-top-trace",
+    "lem-amb-shriek-tensor-composition",
+    "lem-amb-etale-adjoint-locality",
+    "def-weil-pbc-composite-adjunction",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "sk-thm-smooth-purity.proof.md: inverse orientation followed by canonical tensor map"
+   }
+  },
+  {
+   "text": "For a Noetherian base change $b:X'\\to X$, write $b':P'\\to P$ and $B:b'^*\\omega_p\\xrightarrow{\\sim}\\omega_{p'}$. The section-specialization theorem gives its normalized comparison after pullback; the diagonal square and its pullbacks give the same $a$ by mate pasting. Vector integration commutes with base change: on trivializations this is exactly $t_{p'_d}C_{d,b}=b^*t_{p_d}$ from the affine trace theorem, and its defining unique gluing gives the equality for every bundle. The vector comparison is its adjoint, so the same mate calculation identifies its pullback. Consequently the three factors of Step 3 give $\\alpha_{p'}B=b'^*\\alpha_p$ with the canonical Tate identifications. Now use the explicit tensor/base-change identity $\\beta_{p,b,M}b'^*\\phi_{p,M}=\\phi_{p',b^*M}(1\\otimes B)$ and substitute $\\alpha_{p'}^{-1}=B(b'^*\\alpha_p)^{-1}$. This gives $\\beta_{p,b,M}b'^*\\gamma_{p,M}=\\gamma_{p',b^*M}$. For an etale source chart, Step 4 and the chart description in Step 5 give the restriction comparison. On overlaps these are maps of shifted locally free rank-one sheaves for the unit object; full faithfulness of the single-complex embedding and sheaf gluing ensure equality, rather than an invalid assertion about arbitrary derived morphisms being locally detectable.",
+   "uses": [
+    "prop-asd-smooth-base-change",
+    "lem-pur-noetherian-etale-section-specialization",
+    "lem-weil-pbc-mate-pasting",
+    "lem-amb-affine-space-top-trace",
+    "def-amb-vector-integration",
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-pur-sheaf-hom-cover-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "sk-thm-dnc.proof.md: normalized gluing and change of base; sk-prop-an.proof.md: local integration and purity map"
+   }
+  },
+  {
+   "text": "For composable smooth maps $P\\xrightarrow p X\\xrightarrow q Y$ of dimensions $d,e$, compare the two maps into $(qp)^!M$ under the adjunction conjugate of $Rq_!Rp_!\\simeq R(qp)_!$. The tensor-composition identity and the composite-counit formula reduce their equality to the equality of the unit-coefficient orientations. By the tensor theorem all unit-coefficient dualizing objects in this comparison are shifted rank-one sheaves, in degree $-2(d+e)$ after tensoring. Thus this equality can be checked on a cover using full faithfulness and sheaf gluing. Choose compatible charts $U\\to\\mathbf A^d_V$, $V\\to\\mathbf A^e_T$. The induced $U\\to\\mathbf A^d_{\\mathbf A^e_T}=\\mathbf A^{d+e}_T$ is etale, by etale base change and composition. By Steps 4 and 5 all comparisons are the counit-preserving comparisons of these chart adjunctions. Their counit is the sum over the etale fibres followed by integration in the $d$ coordinates, followed by integration in the $e$ coordinates. The ordered $(d+e)$-coordinate adjunction has exactly this counit: its Hom bijection is the same succession of the $d+e$ affine-line Hom bijections and the etale Hom bijections. The coherent compact-support composition and mate-pasting identities identify these with the prescribed transitivity comparison. Uniqueness of right-adjoint comparison gives equality on every chart, hence for the orientation globally, hence for all $M$ by the tensor reduction. Shift degrees are even, so reassociating twists introduces no Koszul sign.",
+   "uses": [
+    "thm-asd-smooth-tensor",
+    "lem-amb-shriek-tensor-composition",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "lem-pur-sheaf-hom-cover-gluing",
+    "sbc-thm-etale-local-normal-form",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-amb-affine-space-top-trace",
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-weil-pbc-mate-pasting",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "sk-thm-smooth-purity.proof.md with sk-thm-composition-coherence: ordered chart counits and tensor composition"
+   }
+  },
+  {
+   "text": "At $d=0$ the morphism is etale. Apply lem-pur-finite-smooth-gamma-normalization with $n=1$. Its three-factor $\\alpha_p$ is exactly Step 3, including the canonical Rees-to-normal identification; its tensor composite is exactly Step 5. The resulting comparison is the counit-preserving etale inverse-image comparison, including for a nontrivial etale cover and for an open immersion. The identity and empty cases are included. Together with Step 2 this verifies every requested normalization and concludes the proof.",
+   "uses": [
+    "def-sbc-smooth-morphisms",
+    "lem-pur-finite-smooth-gamma-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+    "place": "sk-thm-smooth-purity.proof.md: dimension-zero normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-p1-trace",
+  "def-amb-vector-integration",
+  "def-sbc-smooth-morphisms",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-composite-adjunction",
+  "det-sp-p1-adjunction",
+  "det-sp-unique-right-adjoint",
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-shriek-tensor-composition",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-per-etale-section-deformation-comparison",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-pur-diagonal-regular-immersion",
+  "lem-pur-finite-smooth-gamma-normalization",
+  "lem-pur-noetherian-etale-section-specialization",
+  "lem-pur-sheaf-hom-cover-gluing",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sp-tower-p1-arbitrary-base-integrals",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "prop-asd-smooth-base-change",
+  "sbc-thm-etale-local-normal-form",
+  "thm-amb-vector-bundle-purity",
+  "thm-asd-smooth-tensor",
+  "thm-nagata-compactification"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/sk-thm-smooth-purity.proof.md",
+  "place": "Ordinary-etale Noetherian specialization of the current diagonal/deformation/tensor proof, expanded using existing general-base interfaces; Scholze Theorem 7.19 supplies the diagonal affine-line route."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,10 +241,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Sheaf.H\", \"module\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      CategoryTheory.Sheaf J AddCommGrpCat →\\n        [inst_1 : CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          [CategoryTheory.HasExt (CategoryTheory.Sheaf J AddCommGrpCat)] → ℕ → T\", \"doc\": \"For a sheaf $ F $ on a site with Grothendieck topology $ J $, the $ n $-th sheaf cohomology group is defined as the Ext group $ \\\\mathrm{Ext}^n $ between the constant sheaf associated to the integers $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (f : X ⟶ Y),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.map f).adj =\\n    (AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction f.as.unop).toCat\", \"doc\": \"For any morphism $ f $ in the opposite category of schemes, the adjunction associated with the pseudofunctor's mapping of $ f $ is equal to the pullback-pushforward adjunction between the module categ\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  (f : X ⟶ Y) → AlgebraicGeometry.Scheme.Modules.pullback f ⊣ AlgebraicGeometry.Scheme.Modules.pushforward f\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the pullback functor from the category of sheaves of modules over $ Y $'s structure sheaf to the category of sheaves of modules over $ X $'s structure sheaf\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {a b c : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (x : a ⟶ b) (x_1 : b ⟶ c),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.mapComp x x_1).hom.τl =\\n    CategoryTheory.NatTrans.toCatHom₂ (AlgebraicGeometry.Scheme.Modules.pullbackComp x_1.as.unop x.as.unop).inv\", \"doc\": \"For any composable morphisms $ f: X \\to Y $ and $ g: Y \\to Z $ of schemes, the left component of the homomorphism associated to the pseudofunctor's composition of pullback-pushforward adjunctions equals\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.instAbelian\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"{X : AlgebraicGeometry.Scheme} → CategoryTheory.Abelian X.Modules\", \"doc\": \"For any scheme $ X $, the category of sheaves of modules over the structure sheaf of $ X $ is an abelian category. This follows from the preadditive structure, existence of finite products, kernels, a\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"CategoryTheory.Pseudofunctor (CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ)\\n  (CategoryTheory.Bicategory.Adj CategoryTheory.Cat)\", \"doc\": \"A pseudofunctor from the locally discrete opposite category of schemes to the bicategory of adjunctions in categories, assigning to each scheme its category of modules (as an adjunction) and to each m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : CategoryTheory.LocallyDiscrete AlgebraicGeometry.Schemeᵒᵖ} (f : X ⟶ Y),\\n  (AlgebraicGeometry.Scheme.Modules.pseudofunctor.map f).r =\\n    (AlgebraicGeometry.Scheme.Modules.pushforward f.as.unop).toCatHom\", \"doc\": \"For any morphism $ f : X \\to Y $ of schemes, the right adjoint component of the pseudofunctor's action on $ f $ equals the pushforward functor $ f_* $ between the module categories of $ X $ and $ Y $.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Modules/Sheaf\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) {Z : CategoryTheory.Functor Y.Modules X.Modules}\\n  (h : AlgebraicGeometry.Scheme.Modules.pullback f ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp\\n      (AlgebraicGeometry.Scheme.Modules.pullbackComp (CategoryTheory.CategoryStruct.id X) f).inv\\n      (Catego\", \"doc\": \"For any scheme morphism $ f : X \\to Y $, the pseudofunctor structure of the pullback operation on module sheaves satisfies a right unitality associativity condition: the composition of the inverse of t\"}\n",
    "date": "2026-10-18",
    "verdict": "no match: returned declarations concern scheme structure sheaves, ring properties, unrelated regularity or adjunctions; none states the ordinary etale derived-sheaf assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "ordinary etale smooth purity orientation on arbitrary Noetherian schemes",
+   "results": "Actual logged results: {\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\"]}",
+   "date": "2026-10-18",
+   "verdict": "no match: scheme etale structure or structure-sheaf adjunctions, not ordinary etale smooth duality"
+  },
+  {
+   "tool": "loogle",
+   "query": "upperShriek, IsSmooth, Tate twist",
+   "results": "Actual logged results: {\"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'upperShriek'\", \"top\": []}",
+   "date": "2026-10-18",
+   "verdict": "no match: scheme etale structure or structure-sheaf adjunctions, not ordinary etale smooth duality"
+  },
+  {
+   "tool": "grep",
+   "query": "smooth.*purity|upperShriek|dualizing",
+   "results": "Actual logged results: {\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-18",
+   "verdict": "no match: scheme etale structure or structure-sheaf adjunctions, not ordinary etale smooth duality"
+  },
+  {
+   "tool": "leansearch",
+   "query": "ordinary etale derived smooth purity p shriek equals pullback Tate twist shift",
+   "results": "Actual logged results: {\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"Algebra.FormallyEtale.of_unramified_and_smooth\", \"Algebra.Etale.iff_isStandardSmoothOfRelativeDimension_zero\", \"Algebra.Etale.formallyEtale\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\"]}",
+   "date": "2026-10-18",
+   "verdict": "no match: scheme etale structure or structure-sheaf adjunctions, not ordinary etale smooth duality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Poincare duality relative dualizing sheaf of smooth morphism is roots of unity shifted by twice relative dimension",
+   "results": "Actual logged results: {\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_l\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_r\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc\", \"AlgebraicGeometry.Scheme.Modules.pullback\", \"PresheafOfModules.DifferentialsConstruction.relativeDifferentials'_map\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl\"]}",
+   "date": "2026-10-18",
+   "verdict": "no match: scheme etale structure or structure-sheaf adjunctions, not ordinary etale smooth duality"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-potential-extraordinary-pullback",
@@ -84,5 +300,169 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-ordinary-smooth-orientation",
+  "worker": "stage1",
+  "summary": "Preserved the statement. Proved the ordinary-etale Noetherian formula through diagonal base change, normalized section deformation and Kummer-normalized vector-bundle integration, followed by the canonical tensor map. Added only the etale section-coordinate deformation comparison; used existing general-base ordinary results instead of applying field-based constructible purity outside its hypotheses. Checked base change and composition through specified counits.",
+  "blueprint": "lem-per-artin-gabber-affine-curve proof Step 3, through potential extraordinary pullback: supplies the smooth twist/shift input. Steps 1,3,4 realize sk-prop-sp-orientation and sk-thm-dnc; Step 2 the diagonal affine-line normalization; Step 5 sk-thm-smooth-purity; Steps 6,7 base-change and composition normalization; Step 8 the etale zero-dimensional case.",
+  "tool_uses": [
+   {
+    "node": "det-sp-p1-adjunction",
+    "why": "Ordinary-etale general-base infrastructure: Triangle identities for the projective-line adjunction. Used for the specified adjoint/geometry/normalization in proof steps; this perverse-sheaf unit supplies no ordinary Noetherian version. It implements the smooth-purity chapter route used by this chapter."
+   },
+   {
+    "node": "det-sp-unique-right-adjoint",
+    "why": "Ordinary-etale general-base infrastructure: Right adjoints are unique up to a unique counit-compatible isomorphism. Used for the specified adjoint/geometry/normalization in proof steps; this perverse-sheaf unit supplies no ordinary Noetherian version. It implements the smooth-purity chapter route used by this chapter."
+   },
+   {
+    "node": "lem-amb-affine-space-top-trace",
+    "why": "Ordinary-etale general-base infrastructure: The affine-space trace is an isomorphism. Used for the specified adjoint/geometry/normalization in proof steps; this perverse-sheaf unit supplies no ordinary Noetherian version. It implements the smooth-purity chapter route used by this chapter."
+   },
+   {
+    "node": "lem-amb-etale-adjoint-locality",
+    "why": "Ordinary-etale general-base infrastructure: Etale localization of the ambient adjoint. Used for the specified adjoint/geometry/normalization in proof steps; this perverse-sheaf unit supplies no ordinary Noetherian version. It implements the smooth-purity chapter route used by this chapter."
+   },
+   {
+    "node": "lem-amb-shriek-tensor-composition",
+    "why": "Ordinary-etale general-base infrastructure: Tensor projection maps respect compact-support composition. Used for the specified adjoint/geometry/normalization in proof steps; this perverse-sheaf unit supplies no ordinary Noetherian version. It implements the smooth-purity chapter route used by this chapter."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Ordinary-etale general-base infrastructure: Unbounded ordinary etale compact-support comparisons. Used for the specified adjoint/geometry/normalization in proof steps; this perverse-sheaf unit supplies no ordinary Noetherian version. It implements the smooth-purity chapter route used by this chapter."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Ordinary-etale general-base infrastructure: Finite Tate lines on the small etale site and their pullback. Used for the specified adjoint/geometry/normalization in proof steps; this perverse-sheaf unit supplies no ordinary Noetherian version. It implements the smooth-purity chapter route used by this chapter."
+   },
+   {
+    "node": "lem-asd-ordinary-finite-p1-adjunction",
+    "why": "Ordinary-etale general-base infrastructure: Ordinary etale projective-line adjunction with arbitrary finite invertible-exponent coefficients. Used for the specified adjoint/geometry/normalization in proof steps; this perverse-sheaf unit supplies no ordinary Noetherian version. It implements the smooth-purity chapter route used by this chapter."
+   },
+   {
+    "node": "lem-asd-ordinary-supported-kummer",
+    "why": "Ordinary-etale general-base infrastructure: Supported Cartier Kummer map for ordinary etale arbitrary finite coefficients. Used for the specified adjoint/geometry/normalization in proof steps; this perverse-sheaf unit supplies no ordinary Noetherian version. It implements the smooth-purity chapter route used by this chapter."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Ordinary-etale general-base infrastructure: Separated finite-type morphisms are stable under base change. Used for the specified adjoint/geometry/normalization in proof steps; this perverse-sheaf unit supplies no ordinary Noetherian version. It implements the smooth-purity chapter route used by this chapter."
+   },
+   {
+    "node": "lem-pur-diagonal-regular-immersion",
+    "why": "Ordinary-etale general-base infrastructure: The diagonal is a regular immersion. Used for the specified adjoint/geometry/normalization in proof steps; this perverse-sheaf unit supplies no ordinary Noetherian version. It implements the smooth-purity chapter route used by this chapter."
+   },
+   {
+    "node": "lem-pur-finite-smooth-gamma-normalization",
+    "why": "Ordinary-etale general-base infrastructure: Dimension-zero diagonal/deformation orientation and tensor-map normalization. Used for the specified adjoint/geometry/normalization in proof steps; this perverse-sheaf unit supplies no ordinary Noetherian version. It implements the smooth-purity chapter route used by this chapter."
+   },
+   {
+    "node": "lem-pur-noetherian-etale-section-specialization",
+    "why": "Ordinary-etale general-base infrastructure: Normalized section specialization for ordinary etale dualizing complexes over a Noetherian base. Used for the specified adjoint/geometry/normalization in proof steps; this perverse-sheaf unit supplies no ordinary Noetherian version. It implements the smooth-purity chapter route used by this chapter."
+   },
+   {
+    "node": "lem-pur-sheaf-hom-cover-gluing",
+    "why": "Ordinary-etale general-base infrastructure: Gluing O-linear maps on one covering family. Used for the specified adjoint/geometry/normalization in proof steps; this perverse-sheaf unit supplies no ordinary Noetherian version. It implements the smooth-purity chapter route used by this chapter."
+   },
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Ordinary-etale general-base infrastructure: Base change and composition of smooth morphisms of fixed relative dimension. Used for the specified adjoint/geometry/normalization in proof steps; this perverse-sheaf unit supplies no ordinary Noetherian version. It implements the smooth-purity chapter route used by this chapter."
+   },
+   {
+    "node": "lem-sp-tower-p1-arbitrary-base-integrals",
+    "why": "Ordinary-etale general-base infrastructure: Finite projective-line splitting and diagonal integrals over arbitrary bases. Used for the specified adjoint/geometry/normalization in proof steps; this perverse-sheaf unit supplies no ordinary Noetherian version. It implements the smooth-purity chapter route used by this chapter."
+   },
+   {
+    "node": "lem-weil-pbc-derived-single-fully-faithful",
+    "why": "Ordinary-etale general-base infrastructure: The single-complex embedding of an abelian category is fully faithful. Used for the specified adjoint/geometry/normalization in proof steps; this perverse-sheaf unit supplies no ordinary Noetherian version. It implements the smooth-purity chapter route used by this chapter."
+   },
+   {
+    "node": "lem-weil-pbc-etale-composition-cancellation",
+    "why": "Ordinary-etale general-base infrastructure: Open immersions are etale; etale morphisms compose and cancel. Used for the specified adjoint/geometry/normalization in proof steps; this perverse-sheaf unit supplies no ordinary Noetherian version. It implements the smooth-purity chapter route used by this chapter."
+   },
+   {
+    "node": "lem-weil-pbc-etale-scheme-base-change",
+    "why": "Ordinary-etale general-base infrastructure: Base change of an etale morphism of schemes is etale (Stacks 02GO). Used for the specified adjoint/geometry/normalization in proof steps; this perverse-sheaf unit supplies no ordinary Noetherian version. It implements the smooth-purity chapter route used by this chapter."
+   },
+   {
+    "node": "lem-weil-pbc-etale-section-clopen-immersion",
+    "why": "Ordinary-etale general-base infrastructure: A section of a separated etale morphism is an open and closed immersion. Used for the specified adjoint/geometry/normalization in proof steps; this perverse-sheaf unit supplies no ordinary Noetherian version. It implements the smooth-purity chapter route used by this chapter."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Ordinary-etale general-base infrastructure: A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6). Used for the specified adjoint/geometry/normalization in proof steps; this perverse-sheaf unit supplies no ordinary Noetherian version. It implements the smooth-purity chapter route used by this chapter."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Ordinary-etale general-base infrastructure: A locally Noetherian scheme is quasi-separated (Stacks 01OY). Used for the specified adjoint/geometry/normalization in proof steps; this perverse-sheaf unit supplies no ordinary Noetherian version. It implements the smooth-purity chapter route used by this chapter."
+   },
+   {
+    "node": "lem-weil-pbc-mate-pasting",
+    "why": "Ordinary-etale general-base infrastructure: Mates of pasted squares and of conjugate-whiskered squares. Used for the specified adjoint/geometry/normalization in proof steps; this perverse-sheaf unit supplies no ordinary Noetherian version. It implements the smooth-purity chapter route used by this chapter."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Ordinary-etale general-base infrastructure: An open subscheme of a Noetherian scheme is Noetherian. Used for the specified adjoint/geometry/normalization in proof steps; this perverse-sheaf unit supplies no ordinary Noetherian version. It implements the smooth-purity chapter route used by this chapter."
+   },
+   {
+    "node": "prop-asd-smooth-base-change",
+    "why": "Ordinary-etale general-base infrastructure: Arbitrary base change for smooth ambient duality. Used for the specified adjoint/geometry/normalization in proof steps; this perverse-sheaf unit supplies no ordinary Noetherian version. It implements the smooth-purity chapter route used by this chapter."
+   },
+   {
+    "node": "sbc-thm-etale-local-normal-form",
+    "why": "Ordinary-etale general-base infrastructure: Etale-local normal form of a smooth morphism. Used for the specified adjoint/geometry/normalization in proof steps; this perverse-sheaf unit supplies no ordinary Noetherian version. It implements the smooth-purity chapter route used by this chapter."
+   },
+   {
+    "node": "thm-amb-vector-bundle-purity",
+    "why": "Ordinary-etale general-base infrastructure: Vector-bundle purity before smooth orientation. Used for the specified adjoint/geometry/normalization in proof steps; this perverse-sheaf unit supplies no ordinary Noetherian version. It implements the smooth-purity chapter route used by this chapter."
+   },
+   {
+    "node": "thm-asd-smooth-tensor",
+    "why": "Ordinary-etale general-base infrastructure: Smooth cohomological duality without a chosen orientation. Used for the specified adjoint/geometry/normalization in proof steps; this perverse-sheaf unit supplies no ordinary Noetherian version. It implements the smooth-purity chapter route used by this chapter."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Ordinary-etale general-base infrastructure: Nagata compactification, [stacks-project]. Used for the specified adjoint/geometry/normalization in proof steps; this perverse-sheaf unit supplies no ordinary Noetherian version. It implements the smooth-purity chapter route used by this chapter."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-sp-p1-adjunction",
+  "det-sp-unique-right-adjoint",
+  "lem-amb-affine-space-top-trace",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-shriek-tensor-composition",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-pur-diagonal-regular-immersion",
+  "lem-pur-finite-smooth-gamma-normalization",
+  "lem-pur-noetherian-etale-section-specialization",
+  "lem-pur-sheaf-hom-cover-gluing",
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-sp-tower-p1-arbitrary-base-integrals",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-section-clopen-immersion",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "prop-asd-smooth-base-change",
+  "sbc-thm-etale-local-normal-form",
+  "thm-amb-vector-bundle-purity",
+  "thm-asd-smooth-tensor",
+  "thm-nagata-compactification"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-370232b24",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-370232b24 (reviewer sub-agent of L); spot-checked: PASS, no fixes written. Statement and stmt_deps are byte-identical to the earlier N6 snapshots; only the split fields changed. Sources read: Scholze Thm 7.19 and its proof (supported diagonal Chern class on A², section-class normalization) plus the following deformation-to-the-normal-cone paragraph; main-20261015 sk-prop-sp-orientation (three-factor composite), det-sp-orientation-charts and det-sp-orientation-vector-bundle, sk-thm-dnc Local construction and Gluing, sk-thm-smooth-purity. Every one of the 35 cited statements was read; no SGA is used. Steps: (1) admissibility holds via finite type over Noetherian, base-change permanence, the diagonal regular immersion and Nagata. (2) P¹ counit (1⊗t_q)PF⁻¹ with t_q h=1, triangle identities in det-sp-p1-adjunction (Noetherian S, ordinary étale), diagonal integrals over any base, A^d as the ordered tower. (3) Direction checked: β gives p2*ω_p→ω_{p1}, Δ* gives a_p, then δ with n=1, then vector-bundle purity at E=Q_ℓ, n=1, whose Tate line is μ_ℓ⊗F_ℓ. (4) e(u2)−e(u1) is the base change of e followed by a translation, so it is étale; the diagonal is clopen in the zero fibre; the frame is the ideal classes; translation preserves t_q via [x0−a x1:x1]. This matches the blueprint's e×e plus translation. (5) φ is exactly thm-asd-smooth-tensor's map, valid on all of D. (6) P'×_{X'}P' = W×_{P}P', so the section lemma's base-change clause applies; the étale-chart restriction is checked locally on rank-one sheaves. (7) Composite étale charts and ordered counits; shifts are even. (8) d=0 by lem-pur-finite-smooth-gamma-normalization. New node: true. The deformation of (U,s) maps étale to the constant family A^d_{A^1} with x=tu, and uniqueness of κ gives χ_λδ=χ_e. Checked at d=0 and for the identity chart; it is statement-only, strictly smaller than the item, and has all fields. Batch-5: all eight listed chains end in lem-pod-etale-stalk-tensor-scalar or lem-pod-lisse-module-sheaves-as-module-objects. Both are generic sheaf algebra from cor-galois-lisse-representations, not steps of the Q̄_ℓ isIso_poincareMap proof, so all eight citations are accepted. Neither assumption gives ordinary F_ℓ purity over Noetherian bases; the Poincaré-duality leaf only takes smoothPurityIso as data. The 19 proposed tool_uses cover every off-unit citation and are accepted. Maintainer note: lem-trf-ambient-diagonal-purity-base-change (the item over excellent bases) and a clause of lem-trf-finite-ring-section-deformation (the new node) overlap this split. Both are on the trace-formula proof route, so batch 5 cannot cite them; consider a merge once that constraint lifts."
  }
 }
