@@ -4,7 +4,7 @@ Source scan; one hole per declaration, regardless of token count. Deleted declar
 Closure is the queue’s import upper bound. Classes use source references, not elaborated dependencies.
 Progress = closed − added in the closure, with pruning reported separately.
 
-Holes now: library **3849**, closure **144**, holes in definitions **9**, definitions with undetermined data **318** (closure **3**).
+Holes now: library **3809**, closure **144**, holes in definitions **9**, definitions with undetermined data **316** (closure **3**).
 
 Definitions with holes (def/instance/structure field):
 
@@ -89,8 +89,8 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 - `Sheaf.AlgebraicGeometry.ProEtalePullbackStalkCoherence::AlgebraicGeometry.Scheme.proEtaleStalkReparam` (line 156), chosen from `AlgebraicGeometry.Scheme.proEtaleStalkReparam_existsUnique`
 - `Sheaf.AlgebraicGeometry.ProEtaleRootsOfUnityInverseImage::AlgebraicGeometry.Scheme.proEtaleRootsOfUnityDirectImageMap` (line 55), chosen from `AlgebraicGeometry.Scheme.existsUnique_proEtaleRootsOfUnityDirectImageMap`
 - `Sheaf.AlgebraicGeometry.ProEtaleRootsOfUnitySheaf::AlgebraicGeometry.Scheme.proEtaleRootsOfUnitySections` (line 67), chosen from `AlgebraicGeometry.Scheme.existsUnique_proEtaleRootsOfUnitySections`
-- `Sheaf.AlgebraicGeometry.ProjectiveLineTrace::AlgebraicGeometry.Etale.projectiveLineTraceDatum` (line 60), chosen from `AlgebraicGeometry.Etale.exists_ordinaryFiniteP1Adjunction`
-- `Sheaf.AlgebraicGeometry.ProjectiveLineTrace::AlgebraicGeometry.Etale.projectiveLineTraceTransport` (line 50), chosen from `AlgebraicGeometry.Etale.exists_ordinaryFiniteP1Adjunction`
+- `Sheaf.AlgebraicGeometry.ProjectiveLineTrace::AlgebraicGeometry.Etale.projectiveLineTraceDatum` (line 58), chosen from `AlgebraicGeometry.Etale.exists_ordinaryFiniteP1Adjunction`
+- `Sheaf.AlgebraicGeometry.ProjectiveLineTrace::AlgebraicGeometry.Etale.projectiveLineTraceTransport` (line 48), chosen from `AlgebraicGeometry.Etale.exists_ordinaryFiniteP1Adjunction`
 - `Sheaf.AlgebraicGeometry.RelativeDifferentialsPullbackMap::AlgebraicGeometry.Scheme.Hom.relativeDifferentialsPullbackMap` (line 73), chosen from `AlgebraicGeometry.Scheme.Hom.existsUnique_relativeDifferentialsPullbackMap`
 - `Sheaf.AlgebraicGeometry.RelativeDualizingPair::AlgebraicGeometry.relativeDualizingDiagonalMultiplication` (line 105), chosen from `AlgebraicGeometry.existsUnique_relativeDualizingDiagonalMultiplication`
 - `Sheaf.AlgebraicGeometry.RelativeProjectiveSpace::AlgebraicGeometry.RelativeProjectiveSpace.construction` (line 793), chosen from `AlgebraicGeometry.exists_relativeProjData`
@@ -230,7 +230,6 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 - `Sheaf.Paper.IntegralDerivedOperations::WeilConjectures.integralCompletedTensorComparison` (line 91), chosen from `WeilConjectures.integralOperationsWellDefined`
 - `Sheaf.Paper.IntegralDerivedOperations::WeilConjectures.integralDerivedPullback` (line 59), chosen from `WeilConjectures.integralOperationsWellDefined`
 - `Sheaf.Paper.IntegralDerivedOperations::WeilConjectures.integralDerivedPullbackComparison` (line 69), chosen from `WeilConjectures.integralOperationsWellDefined`
-- `Sheaf.Paper.IntegralFinitePullbackComposition::WeilConjectures.integralFinitePullbackModel` (line 79), chosen from `WeilConjectures.integralFinitePullbackModel_existsUnique`
 - `Sheaf.Paper.IntegralHomReductionComparison::WeilConjectures.integralHomReductionComparison` (line 338), chosen from `WeilConjectures.integralHomReductionTensorData_exists`
 - `Sheaf.Paper.IntegralOperationsWellDefined::WeilConjectures.integralOperationsPullbackTransition` (line 212), chosen from `WeilConjectures.integralOperationsPullbackTransition_existsUnique`
 - `Sheaf.Paper.IntegralOperationsWellDefined::WeilConjectures.integralOperationsTensorTransition` (line 294), chosen from `WeilConjectures.integralOperationsTensorTransition_existsUnique`
@@ -312,7 +311,6 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 - `Sheaf.Paper.SfDerivedDirectImage::WeilConjectures.sfDirectImageRestrictionComparison` (line 103), chosen from `WeilConjectures.sfDirectImageRestrictionComparison_existsUnique`
 - `Sheaf.Paper.SfIntegralReductionTower::WeilConjectures.sfDerivedReductionTransition` (line 156), chosen from `WeilConjectures.sfDerivedReductionTransition_existsUnique`
 - `Sheaf.Paper.SfIntegralReductionTower::WeilConjectures.sfReductionTransition` (line 113), chosen from `WeilConjectures.sfReductionTransition_existsUnique`
-- `Sheaf.Paper.StrictTowerOperations::AlgebraicGeometry.Scheme.exchangeModuleComposition` (line 217), chosen from `AlgebraicGeometry.Scheme.exchangeModuleComposition_existsUnique`
 - `Sheaf.Paper.TateInverseLimitBaseChange::AlgebraicGeometry.Scheme.tateFiniteAlgebraMap` (line 482), chosen from `AlgebraicGeometry.Scheme.tateFiniteAlgebraMap_existsUnique`
 - `Sheaf.Paper.TateInverseLimitBaseChange::AlgebraicGeometry.Scheme.tateFiniteModule` (line 272), chosen from `AlgebraicGeometry.Scheme.tateFinitePresentation_exists`
 - `Sheaf.Paper.TateInverseLimitBaseChange::AlgebraicGeometry.Scheme.tateFiniteModuleIso` (line 279), chosen from `AlgebraicGeometry.Scheme.tateFinitePresentation_exists`
@@ -341,20 +339,20 @@ Definitions with undetermined data (class-1 exceptions in `coord/hollow-definiti
 
 | root | library | closure |
 |---|---:|---:|
-| Sheaf | 3683 | 47 |
+| Sheaf | 3643 | 47 |
 | WeilConjectures | 166 | 97 |
 
 | baseline | scope | closed | added | net | deleted | changed holed statements |
 |---|---|---:|---:|---:|---:|---:|
-| 889327369 (Queue at the start of stage 3) | library | 1808 | 3461 | -1653 | 733 | 14 |
-| 660345513 (Application of proof-dependency imports) | library | 1805 | 3460 | -1655 | 679 | 14 |
+| 889327369 (Queue at the start of stage 3) | library | 1808 | 3421 | -1613 | 733 | 14 |
+| 660345513 (Application of proof-dependency imports) | library | 1805 | 3420 | -1615 | 679 | 14 |
 | 660345513 (Application of proof-dependency imports) | closure | 1500 | 75 | 1425 | 603 | 0 |
 
 No closure delta is quoted across 660345513: proof-dependency imports changed the reached set.
 
 | landing class | count |
 |---|---:|
-| proved | 4216 |
+| proved | 4250 |
 | decomposed | 56 |
 | moved | 4161 |
 | pruned | 147 |
@@ -367,7 +365,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | <unknown> | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
 | A2 | 142 | 141 | 102 | 39 | 73/142 (51.4%) |
 | A3 | 143 | 141 | 91 | 50 | 62/143 (43.4%) |
-| A4 | 92 | 108 | 55 | 53 | 42/92 (45.7%) |
+| A4 | 93 | 109 | 55 | 54 | 42/93 (45.2%) |
 | A5 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
 | A6 | 3 | 4 | 0 | 4 | 0/3 (0.0%) |
 | A7 | 2 | 2 | 2 | 0 | 2/2 (100.0%) |
@@ -384,7 +382,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | C1 | 156 | 160 | 118 | 42 | 77/156 (49.4%) |
 | C2 | 136 | 130 | 89 | 41 | 61/136 (44.9%) |
 | C3 | 127 | 135 | 82 | 53 | 57/127 (44.9%) |
-| C4 | 73 | 73 | 35 | 38 | 23/73 (31.5%) |
+| C4 | 74 | 74 | 35 | 39 | 23/74 (31.1%) |
 | C5 | 2 | 3 | 0 | 3 | 0/2 (0.0%) |
 | C6 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
 | C7 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
@@ -397,7 +395,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | D6 | 2 | 2 | 1 | 1 | 1/2 (50.0%) |
 | D7 | 2 | 2 | 4 | -2 | 2/2 (100.0%) |
 | D8 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
-| D9 | 2 | 2 | 1 | 1 | 1/2 (50.0%) |
+| D9 | 3 | 3 | 1 | 2 | 1/3 (33.3%) |
 | E1 | 170 | 203 | 109 | 94 | 83/170 (48.8%) |
 | E2 | 134 | 129 | 87 | 42 | 62/134 (46.3%) |
 | E3 | 127 | 146 | 100 | 46 | 60/127 (47.2%) |
@@ -406,32 +404,32 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | E6 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
 | E7 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
 | E8 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
-| E9 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| E9 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
 | F1 | 158 | 164 | 108 | 56 | 72/158 (45.6%) |
 | F2 | 158 | 170 | 102 | 68 | 64/158 (40.5%) |
-| F3 | 110 | 110 | 64 | 46 | 44/110 (40.0%) |
+| F3 | 111 | 111 | 64 | 47 | 44/111 (39.6%) |
 | F4 | 73 | 73 | 47 | 26 | 31/73 (42.5%) |
-| F5 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
+| F5 | 3 | 3 | 0 | 3 | 0/3 (0.0%) |
 | F6 | 2 | 2 | 1 | 1 | 1/2 (50.0%) |
-| F7 | 2 | 2 | 2 | 0 | 2/2 (100.0%) |
+| F7 | 3 | 3 | 2 | 1 | 2/3 (66.7%) |
 | F8 | 2 | 3 | 0 | 3 | 0/2 (0.0%) |
 | F9 | 2 | 3 | 0 | 3 | 0/2 (0.0%) |
 | G1 | 147 | 148 | 114 | 34 | 76/147 (51.7%) |
 | G2 | 146 | 145 | 93 | 52 | 64/146 (43.8%) |
-| G3 | 108 | 111 | 67 | 44 | 46/108 (42.6%) |
+| G3 | 109 | 115 | 67 | 48 | 46/109 (42.2%) |
 | G4 | 64 | 56 | 31 | 25 | 20/64 (31.2%) |
 | G5 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
-| G6 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| G6 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
 | G7 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | G8 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
-| G9 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| G9 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
 | H1 | 145 | 144 | 111 | 33 | 77/145 (53.1%) |
 | H2 | 120 | 131 | 92 | 39 | 66/120 (55.0%) |
 | H3 | 128 | 146 | 103 | 43 | 70/128 (54.7%) |
-| H4 | 65 | 64 | 42 | 22 | 31/65 (47.7%) |
-| H5 | 1 | 1 | 1 | 0 | 1/1 (100.0%) |
+| H4 | 66 | 65 | 42 | 23 | 31/66 (47.0%) |
+| H5 | 2 | 2 | 1 | 1 | 1/2 (50.0%) |
 | H6 | 2 | 3 | 0 | 3 | 0/2 (0.0%) |
-| H7 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| H7 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
 | H8 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | H9 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | J1 | 130 | 143 | 75 | 68 | 53/130 (40.8%) |
@@ -452,41 +450,41 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | K7 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | K8 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | K9 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
-| M1 | 146 | 152 | 94 | 58 | 65/146 (44.5%) |
+| M1 | 147 | 153 | 94 | 59 | 65/147 (44.2%) |
 | M2 | 135 | 145 | 104 | 41 | 70/135 (51.9%) |
 | M3 | 113 | 116 | 73 | 43 | 52/113 (46.0%) |
 | M4 | 50 | 54 | 25 | 29 | 18/50 (36.0%) |
 | M5 | 1 | 1 | 1 | 0 | 1/1 (100.0%) |
-| M6 | 1 | 3 | 0 | 3 | 0/1 (0.0%) |
+| M6 | 2 | 4 | 0 | 4 | 0/2 (0.0%) |
 | M7 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | M8 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | M9 | 1 | 1 | 1 | 0 | 1/1 (100.0%) |
 | N1 | 141 | 142 | 110 | 32 | 75/141 (53.2%) |
 | N2 | 134 | 124 | 79 | 45 | 58/134 (43.3%) |
 | N3 | 93 | 88 | 66 | 22 | 46/93 (49.5%) |
-| N4 | 61 | 60 | 48 | 12 | 29/61 (47.5%) |
+| N4 | 63 | 62 | 48 | 14 | 29/63 (46.0%) |
 | P1 | 124 | 145 | 93 | 52 | 67/124 (54.0%) |
 | P2 | 137 | 134 | 82 | 52 | 56/137 (40.9%) |
 | P3 | 107 | 99 | 83 | 16 | 54/107 (50.5%) |
-| P4 | 59 | 71 | 42 | 29 | 28/59 (47.5%) |
-| P5 | 1 | 1 | 1 | 0 | 1/1 (100.0%) |
+| P4 | 60 | 72 | 42 | 30 | 28/60 (46.7%) |
+| P5 | 2 | 2 | 1 | 1 | 1/2 (50.0%) |
 | P7 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
-| P8 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| P8 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
 | P9 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | Q1 | 114 | 116 | 77 | 39 | 57/114 (50.0%) |
-| Q2 | 109 | 112 | 81 | 31 | 54/109 (49.5%) |
-| Q3 | 106 | 105 | 72 | 33 | 48/106 (45.3%) |
+| Q2 | 110 | 113 | 81 | 32 | 54/110 (49.1%) |
+| Q3 | 107 | 106 | 72 | 34 | 48/107 (44.9%) |
 | Q4 | 52 | 55 | 30 | 25 | 22/52 (42.3%) |
 | Q5 | 1 | 1 | 2 | -1 | 1/1 (100.0%) |
 | Q6 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | Q7 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
-| Q8 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| Q8 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
 | Q9 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | R1 | 130 | 134 | 99 | 35 | 68/130 (52.3%) |
 | R2 | 127 | 136 | 75 | 61 | 52/127 (40.9%) |
-| R3 | 102 | 99 | 67 | 32 | 44/102 (43.1%) |
+| R3 | 103 | 101 | 67 | 34 | 44/103 (42.7%) |
 | R4 | 64 | 55 | 41 | 14 | 26/64 (40.6%) |
-| R5 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| R5 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
 | R6 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | R7 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | R8 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
@@ -511,7 +509,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | T9 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | U1 | 129 | 132 | 92 | 40 | 62/129 (48.1%) |
 | U2 | 139 | 133 | 93 | 40 | 64/139 (46.0%) |
-| U3 | 101 | 104 | 70 | 34 | 50/101 (49.5%) |
+| U3 | 103 | 106 | 70 | 36 | 50/103 (48.5%) |
 | U4 | 57 | 57 | 40 | 17 | 28/57 (49.1%) |
 | U5 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | U6 | 1 | 1 | 1 | 0 | 1/1 (100.0%) |
@@ -520,13 +518,13 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | U9 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | V1 | 119 | 112 | 86 | 26 | 56/119 (47.1%) |
 | V2 | 130 | 133 | 90 | 43 | 62/130 (47.7%) |
-| V3 | 111 | 116 | 78 | 38 | 57/111 (51.4%) |
+| V3 | 112 | 117 | 78 | 39 | 57/112 (50.9%) |
 | V4 | 54 | 48 | 38 | 10 | 25/54 (46.3%) |
 | V5 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | V6 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | V7 | 1 | 1 | 1 | 0 | 1/1 (100.0%) |
 | V8 | 1 | 1 | 1 | 0 | 1/1 (100.0%) |
-| V9 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| V9 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
 | W2 | 118 | 125 | 78 | 47 | 54/118 (45.8%) |
 | W3 | 91 | 96 | 61 | 35 | 42/91 (46.2%) |
 | W4 | 53 | 47 | 36 | 11 | 27/53 (50.9%) |
@@ -535,7 +533,7 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | W7 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | W8 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | W9 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
-| X2 | 125 | 122 | 95 | 27 | 64/125 (51.2%) |
+| X2 | 126 | 124 | 95 | 29 | 64/126 (50.8%) |
 | X3 | 105 | 100 | 63 | 37 | 44/105 (41.9%) |
 | X5 | 1 | 1 | 1 | 0 | 1/1 (100.0%) |
 | X6 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
@@ -561,18 +559,18 @@ Per group: whole-library closed/added/net since stage 3; landing count is not pr
 | XReedb48d351b955d4 | 1 | 0 | 0 | 0 | 0/1 (0.0%) |
 | XRf51ccf77cd4e9fca | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | XRfef4bc449ceae451 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
-| Y2 | 113 | 115 | 101 | 14 | 61/113 (54.0%) |
-| Y3 | 108 | 94 | 57 | 37 | 46/108 (42.6%) |
+| Y2 | 114 | 119 | 101 | 18 | 61/114 (53.5%) |
+| Y3 | 109 | 95 | 57 | 38 | 46/109 (42.2%) |
 | Y5 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | Y6 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | Y7 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | Y8 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
-| Y9 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| Y9 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
 | Z2 | 3 | 4 | 0 | 4 | 1/3 (33.3%) |
 | Z5 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | Z6 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
 | Z7 | 1 | 1 | 2 | -1 | 1/1 (100.0%) |
-| Z8 | 1 | 1 | 0 | 1 | 0/1 (0.0%) |
+| Z8 | 2 | 2 | 0 | 2 | 0/2 (0.0%) |
 | Z9 | 2 | 2 | 1 | 1 | 1/2 (50.0%) |
 | launcher prover | 138 | 19 | 9 | 10 | 6/138 (4.3%) |
 
