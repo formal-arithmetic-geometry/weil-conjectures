@@ -16,10 +16,10 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantSheaf
 
 /-!
-# The constant sheaf `Λ_X` of a nonarchimedean field on the pro-étale site
+# The constant sheaf `Λ_X` of a nonarchimedean ring on the pro-étale site
 
-Let `Λ` be a field complete for... more precisely, any field `Λ` with an ultrametric norm, for
-instance a finite extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ` with the restricted norm. Following
+Let `Λ` be a commutative ring with an ultrametric norm, for instance a finite extension `E` of
+`ℚ_ℓ` inside `ℚ̄_ℓ` with the restricted norm, or its ring of integers `𝒪_E`. Following
 Bhatt–Scholze (*The pro-étale topology for schemes*, §6.8), the constructible `E`-sheaves of the
 blueprint (`def-weil-constructible-heart`, `def-weil-weil-sheaf-complex`) are modules over the
 pro-étale sheaf `E_X : U ↦ C(U, E)` of continuous `E`-valued functions. This file constructs
@@ -63,7 +63,7 @@ namespace AlgebraicGeometry
 
 section FieldFunctions
 
-variable (Λ : Type) [NormedField Λ] (T : Type*) [TopologicalSpace T]
+variable (Λ : Type) [NormedCommRing Λ] (T : Type*) [TopologicalSpace T]
 
 /-- The continuous functions `T → Λ`, as a `Λ`-subalgebra (all) of `C(T, Λ)`. They are the
 sections over `T` of the constant sheaf `Λ_X`; they play the role of the locally finite
@@ -117,12 +117,12 @@ instance _root_.PadicAlgCl.isUltrametricDist_intermediateField {l : ℕ} [Fact l
 `Type (u + 1)`, the universe of the `Hom`-types of sheaves on the sites of `Scheme.{u}`. The
 topology of `Λ` does not enter the coefficient category: it enters through the constant sheaf
 `AlgebraicGeometry.ProEtale.fieldConstantSheaf`. -/
-abbrev FieldCoefficients (Λ : Type) [NormedField Λ] : Type (u + 2) :=
+abbrev FieldCoefficients (Λ : Type) [NormedCommRing Λ] : Type (u + 2) :=
   ModuleCat.{u + 1} (ULift.{u + 1} Λ)
 
 namespace FieldCoefficients
 
-variable (Λ : Type) [NormedField Λ]
+variable (Λ : Type) [NormedCommRing Λ]
 
 /-- The underlying `Λ`-vector space of a module over `ULift Λ`, by restriction of scalars
 along `Λ ≃ ULift Λ`. -/
@@ -148,7 +148,7 @@ noncomputable def uliftLinearMap {M N : Type*} [AddCommGroup M] [Module Λ M]
 
 end FieldCoefficients
 
-variable (Λ : Type) [NormedField Λ]
+variable (Λ : Type) [NormedCommRing Λ]
 
 open FieldCoefficients
 
@@ -258,7 +258,7 @@ lemma fieldConstantSheafLowerStarIso_hom_hom_app {X Y : Scheme.{u}} (e : X ≅ Y
 
 /-- The constant sheaf on a nonempty scheme is nonzero: the constant function `1` is a
 nonzero global section. -/
-theorem not_isZero_fieldConstantSheaf (X : Scheme.{u}) [Nonempty X] :
+theorem not_isZero_fieldConstantSheaf (X : Scheme.{u}) [Nonempty X] [Nontrivial Λ] :
     ¬ IsZero (fieldConstantSheaf Λ X) := by
   intro h
   -- the sections over the terminal object `X` of the pro-étale site

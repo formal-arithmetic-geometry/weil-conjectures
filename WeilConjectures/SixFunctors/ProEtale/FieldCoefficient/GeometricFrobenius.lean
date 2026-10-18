@@ -12,8 +12,9 @@ public import WeilConjectures.SixFunctors.ProEtale.GeometricFrobenius
 # Pushforward and pullback of `Λ`-adic sheaves along a base change to `k̄` commute with the
 Frobenius
 
-This is the counterpart, for a coefficient field `Λ` with an ultrametric norm (the case of
-interest being a finite extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ`), of
+This is the counterpart, for a commutative coefficient ring `Λ` with an ultrametric norm (the
+cases of interest being a finite extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ` and its ring of integers
+`𝒪_E`), of
 `WeilConjectures.SixFunctors.ProEtale.Adic.GeometricFrobenius`, which treats `ℚ̄_ℓ`,
 with the same proofs; the constant sheaf `Λ_X : U ↦ C(U, Λ)` is that of
 `WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ConstantSheaf`.
@@ -44,7 +45,7 @@ open CategoryTheory Limits
 
 namespace AlgebraicGeometry.ProEtale
 
-variable (Λ : Type) [NormedField Λ] [IsUltrametricDist Λ]
+variable (Λ : Type) [NormedCommRing Λ] [IsUltrametricDist Λ]
 
 section Iso
 

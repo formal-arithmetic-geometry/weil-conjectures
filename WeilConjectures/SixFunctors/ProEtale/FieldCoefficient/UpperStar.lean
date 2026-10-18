@@ -18,8 +18,9 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek
 /-!
 # Pullback of the constant sheaf
 
-This is the counterpart, for a coefficient field `Λ` with an ultrametric norm (the case of
-interest being a finite extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ`), of
+This is the counterpart, for a commutative coefficient ring `Λ` with an ultrametric norm (the
+cases of interest being a finite extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ` and its ring of integers
+`𝒪_E`), of
 `WeilConjectures.SixFunctors.ProEtale.Adic.UpperStar`, which treats `ℚ̄_ℓ`,
 with the same proofs; the constant sheaf `Λ_X : U ↦ C(U, Λ)` is that of
 `WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ConstantSheaf`.
@@ -62,7 +63,7 @@ open CategoryTheory Limits Opposite Topology
 
 namespace AlgebraicGeometry.ProEtale
 
-variable (Λ : Type) [NormedField Λ] [IsUltrametricDist Λ] {V W : Scheme.{u}}
+variable (Λ : Type) [NormedCommRing Λ] [IsUltrametricDist Λ] {V W : Scheme.{u}}
 
 /-- The restriction of the constant sheaf along a weakly étale `g : W ⟶ V` is the
 constant sheaf: both have the continuous functions on `T` as sections

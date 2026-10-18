@@ -11,8 +11,9 @@ public import WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.Ring
 /-!
 # Sheaves of modules over the constant sheaf
 
-This is the counterpart, for a coefficient field `Λ` with an ultrametric norm (the case of
-interest being a finite extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ`), of
+This is the counterpart, for a commutative coefficient ring `Λ` with an ultrametric norm (the
+cases of interest being a finite extension `E` of `ℚ_ℓ` inside `ℚ̄_ℓ` and its ring of integers
+`𝒪_E`), of
 `WeilConjectures.SixFunctors.ProEtale.Adic.Module`, which treats `ℚ̄_ℓ`,
 with the same proofs; the constant sheaf `Λ_X : U ↦ C(U, Λ)` is that of
 `WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ConstantSheaf`.
@@ -52,7 +53,7 @@ open CategoryTheory MonoidalCategory MonObj Limits
 
 namespace AlgebraicGeometry.ProEtale
 
-variable (Λ : Type) [NormedField Λ] [IsUltrametricDist Λ]
+variable (Λ : Type) [NormedCommRing Λ] [IsUltrametricDist Λ]
 
 /-- The sheaves of modules over the constant sheaf `Λ_X` on the small pro-étale site
 of `X` (Bhatt–Scholze, §6.8): module objects over the monoid `Λ_X` in the monoidal category of
@@ -235,7 +236,7 @@ namespace AlgebraicGeometry.ProEtale
 
 open scoped Obj
 
-variable {Λ : Type} [NormedField Λ] [IsUltrametricDist Λ]
+variable {Λ : Type} [NormedCommRing Λ] [IsUltrametricDist Λ]
 
 section Isos
 
@@ -408,7 +409,7 @@ end AlgebraicGeometry.ProEtale
 
 namespace AlgebraicGeometry.ProEtale.FieldSheaf
 
-variable {Λ : Type} [NormedField Λ] [IsUltrametricDist Λ] {X : Scheme.{u}}
+variable {Λ : Type} [NormedCommRing Λ] [IsUltrametricDist Λ] {X : Scheme.{u}}
 
 /-- Multiplication by a scalar `c ∈ Λ`, an endomorphism of a sheaf of `Λ_X`-modules. -/
 noncomputable def smul (c : ULift.{u + 1} Λ) (M : FieldSheaf Λ X) : M ⟶ M :=

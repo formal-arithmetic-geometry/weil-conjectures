@@ -138,6 +138,7 @@ section Rank
 
 variable {P : Scheme.{u}} {ι κ ι' κ' : Type} [Fintype ι] [Fintype κ] [Fintype ι'] [Fintype κ']
 
+omit [IsUltrametricDist Λ] in
 /-- The pointwise rank of a morphism of finite free modules is invariant under composition with
 isomorphisms. -/
 lemma rank_unitMatrix_eq_of_eq_comp

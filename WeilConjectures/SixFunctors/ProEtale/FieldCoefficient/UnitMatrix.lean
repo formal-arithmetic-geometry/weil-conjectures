@@ -389,6 +389,7 @@ noncomputable def unitEndFunAddHom :
   map_zero' := unitEndFun_zero
   map_add' := unitEndFun_add
 
+omit [IsUltrametricDist Λ] in
 lemma unitMatrix_comp (ψ : (⨁ fun _ : ι ↦ unit Λ V) ⟶ ⨁ fun _ : κ ↦ unit Λ V)
     (ψ' : (⨁ fun _ : κ ↦ unit Λ V) ⟶ ⨁ fun _ : ν ↦ unit Λ V) :
     unitMatrix (ψ ≫ ψ') = unitMatrix ψ' * unitMatrix ψ := by
@@ -420,6 +421,7 @@ lemma unitMatrix_id [DecidableEq ι] :
   · rw [biproduct.ι_π_ne _ (Ne.symm h), if_neg h]
     rfl
 
+omit [IsUltrametricDist Λ] in
 lemma unitMatrix_injective :
     Function.Injective (unitMatrix (Λ := Λ) (V := V) (ι := ι) (κ := κ)) := by
   intro ψ ψ' h
@@ -447,20 +449,24 @@ attribute [local instance] Abelian.hasFiniteBiproducts
 
 variable {ι κ ν : Type} [Fintype ι] [Fintype κ] [Fintype ν]
 
+omit [IsUltrametricDist Λ] in
 lemma ofUnitMatrix_unitMatrix (ψ : (⨁ fun _ : ι ↦ unit Λ V) ⟶ ⨁ fun _ : κ ↦ unit Λ V) :
     ofUnitMatrix (unitMatrix ψ) = ψ :=
   unitMatrix_injective (unitMatrix_ofUnitMatrix _)
 
+omit [IsUltrametricDist Λ] in
 lemma ofUnitMatrix_mul (N₁ : Matrix ν κ (fieldFunctions Λ V))
     (N₂ : Matrix κ ι (fieldFunctions Λ V)) :
     ofUnitMatrix (N₁ * N₂) = ofUnitMatrix N₂ ≫ ofUnitMatrix N₁ :=
   unitMatrix_injective (by rw [unitMatrix_comp, unitMatrix_ofUnitMatrix, unitMatrix_ofUnitMatrix,
     unitMatrix_ofUnitMatrix])
 
+omit [IsUltrametricDist Λ] in
 lemma ofUnitMatrix_one [DecidableEq ι] :
     ofUnitMatrix (1 : Matrix ι ι (fieldFunctions Λ V)) = 𝟙 _ :=
   unitMatrix_injective (by rw [unitMatrix_ofUnitMatrix, unitMatrix_id])
 
+omit [IsUltrametricDist Λ] in
 lemma isIso_ofUnitMatrix [DecidableEq ι] (P : Matrix ι ι (fieldFunctions Λ V))
     (hP : IsUnit P.det) : IsIso (ofUnitMatrix P) :=
   ⟨ofUnitMatrix P⁻¹, by rw [← ofUnitMatrix_mul, Matrix.nonsing_inv_mul _ hP, ofUnitMatrix_one],
@@ -531,6 +537,7 @@ instance : Epi (biproduct.toSubtype (fun _ : ι ↦ unit Λ V) (· ∈ Set.range
   epi_of_epi_fac (biproduct.fromSubtype_toSubtype _ _)
 
 variable {ρ γ hρ hγ} in
+omit [IsUltrametricDist Λ] in
 lemma eq_blockMap_of_unitMatrix_eq
     (ψ : (⨁ fun _ : ι ↦ unit Λ V) ⟶ ⨁ fun _ : κ ↦ unit Λ V)
     (P : Matrix κ κ (fieldFunctions Λ V))

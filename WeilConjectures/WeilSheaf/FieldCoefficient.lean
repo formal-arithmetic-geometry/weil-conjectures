@@ -133,7 +133,8 @@ variable {X : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
 noncomputable instance : Category (FieldWeilSheaf k₀ Λ X) :=
   inferInstanceAs (Category (FieldWeilSheaf.objectProperty k₀ Λ X).FullSubcategory)
 
-noncomputable instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
+noncomputable instance FieldWeilSheaf.instAbelian
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
     Abelian (FieldWeilSheaf k₀ Λ X) := by
   have : (FieldWeilSheaf.objectProperty k₀ Λ X).IsClosedUnderKernels := inferInstance
   have : (FieldWeilSheaf.objectProperty k₀ Λ X).IsClosedUnderCokernels := inferInstance
@@ -144,7 +145,8 @@ noncomputable instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] 
 noncomputable instance : Preadditive (FieldWeilSheaf k₀ Λ X) :=
   inferInstanceAs (Preadditive (FieldWeilSheaf.objectProperty k₀ Λ X).FullSubcategory)
 
-instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
+instance FieldWeilComplex.isTriangulated_objectProperty
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
     (FieldWeilComplex.objectProperty k₀ Λ X).IsTriangulated := by
   have : (FieldWeilSheaf.objectProperty k₀ Λ X).IsClosedUnderKernels := inferInstance
   have : (FieldWeilSheaf.objectProperty k₀ Λ X).IsClosedUnderCokernels := inferInstance
@@ -170,12 +172,14 @@ instance (n : ℤ) : (shiftFunctor (FieldWeilComplex k₀ Λ X) n).Additive :=
 
 /-- **`D^b_{c,W}(X, Λ)` is a pretriangulated category**, the triangulated structure being that
 of the derived category of pro-étale `Λ`-Weil sheaves. -/
-noncomputable instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
+noncomputable instance FieldWeilComplex.instPretriangulated
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
     Pretriangulated (FieldWeilComplex k₀ Λ X) :=
   inferInstanceAs (Pretriangulated (FieldWeilComplex.objectProperty k₀ Λ X).FullSubcategory)
 
 /-- **`D^b_{c,W}(X, Λ)` is a triangulated category.** -/
-instance [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
+instance FieldWeilComplex.instIsTriangulated
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
     IsTriangulated (FieldWeilComplex k₀ Λ X) :=
   inferInstanceAs (IsTriangulated (FieldWeilComplex.objectProperty k₀ Λ X).FullSubcategory)
 

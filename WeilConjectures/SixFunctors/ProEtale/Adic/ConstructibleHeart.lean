@@ -24,10 +24,11 @@ in degree `0` is an equivalence from the abelian category `Sh_c(X, ℚ̄_ℓ)` o
 
 ## Implementation notes
 
-The blueprint defines the heart at the stages `E` and `ℚ̄_ℓ`. As for the constructible
-truncations (`WeilConjectures.SixFunctors.ProEtale.Adic.Truncation`), the `E` stage of the
-repository is a rationalization of derived complete integral complexes, which has no cohomology
-sheaves, so the heart is formalised at the `ℚ̄_ℓ` stage.
+The blueprint defines the heart at the stages `E` and `ℚ̄_ℓ`. This file treats the stage `ℚ̄_ℓ`;
+the stage `E`, in the same Bhatt–Scholze model of sheaves of modules over the constant sheaf
+`E_X : U ↦ C(U, E)`, is
+`AlgebraicGeometry.ProEtale.DerivedCategory.fieldConstructibleHeart`
+(`WeilConjectures.SixFunctors.ProEtale.FieldCoefficient.ConstructibleHeart`).
 -/
 
 @[expose] public section
@@ -52,8 +53,8 @@ the abelian category `Sh_c(X, ℚ̄_ℓ)` of constructible `ℓ`-adic sheaves
 finite-level reductions satisfying the finite-torsion constructibility condition (see
 `AlgebraicGeometry.ProEtale.IsAdicConstructibleSheaf`).
 
-Only the case of `ℚ̄_ℓ` coefficients of the blueprint node is formalised; the variants with
-other coefficient rings are not. -/
+This is the stage `ℚ̄_ℓ` of the blueprint node; the stage `E` is
+`AlgebraicGeometry.ProEtale.DerivedCategory.fieldConstructibleHeart`. -/
 def adicConstructibleHeart : ObjectProperty (_root_.DerivedCategory (AdicSheaf l X)) :=
   boundedAdicConstructible l X ⊓ _root_.DerivedCategory.TStructure.t.le 0 ⊓
     _root_.DerivedCategory.TStructure.t.ge 0

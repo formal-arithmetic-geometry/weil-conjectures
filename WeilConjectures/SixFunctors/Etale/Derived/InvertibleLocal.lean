@@ -5,7 +5,6 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Closed.Braided
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMapsComposition
 
 /-!
@@ -95,7 +94,6 @@ theorem isIso_of_forall_isIso_leftDerivedUpperStar_map {X : Scheme.{u}} {ι : Ty
 
 variable [Finite Λ]
 
-set_option maxHeartbeats 100000 in
 /-- For an étale `u : U ⟶ X` and `L ∈ D(X_ét, Λ)` with `Lu^* L` invertible, the derived pullback
 of the evaluation `L ⊗ᴸ RHom(L, Λ) ⟶ Λ` is an isomorphism, the derived pullback along `u`
 commuting with the derived internal hom
@@ -108,9 +106,9 @@ theorem isIso_leftDerivedUpperStar_map_ev_of_etale {U X : Scheme.{u}} (u : U ⟶
   obtain ⟨_⟩ := _root_.DerivedCategory.nonempty_braidedCategory
     (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} Λ))
   have := isIso_ihomComparison_leftDerivedUpperStar_of_etale Λ u L
-  exact isIso_map_ev_of_isIso_ihomComparison _ ((isInvertible_iff_exists_derivedTensor _).2 h)
+  exact isIso_map_ev_of_isIso_ihomComparison L((u)^*[ModuleCat.{u + 1} Λ])
+    ((isInvertible_iff_exists_derivedTensor _).2 h)
 
-set_option maxHeartbeats 100000 in
 /-- Blueprint `lem-pur-co-smooth-etale-locality`: Source-étale locality (family version).
 
 Invertibility is local for a jointly surjective family of étale morphisms `a i : U i ⟶ X`: if
