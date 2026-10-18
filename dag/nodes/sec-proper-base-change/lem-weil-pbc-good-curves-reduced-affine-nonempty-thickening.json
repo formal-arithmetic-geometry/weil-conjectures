@@ -1,0 +1,143 @@
+{
+ "id": "lem-weil-pbc-good-curves-reduced-affine-nonempty-thickening",
+ "kind": "statement",
+ "title": "Combine generic curve completion, finite radicial realization and spreading",
+ "statement": "Let $S$ be a reduced affine scheme and $f:X\\to S$ a separated morphism of finite presentation [def-pc-scheme] [def-weil-pbc-scheme-conventions]. Let $\\eta$ be the generic point of an irreducible component of $S$ [def-weil-irreducible-components] [def-sc-generic-point], and assume $\\dim X_\\eta\\leq1$ [def-pc-scheme-fibre] [def-kun-topological-krull-dimension]. There exist an open neighbourhood $U\\subset S$ of $\\eta$, a finite surjective universally injective morphism $V\\to U$, a finite family of finite etale morphisms $T_i\\to V$, and commutative diagrams over $V$ $$\\coprod_iY_i\\xrightarrow{\\nu}X_V:=X\\times_SV,\\qquad Y_i\\xrightarrow{j_i}\\overline Y_i\\to T_i\\to V$$ [def-pc-fibre-product] [lem-weil-pbc-scheme-coproduct-family] [def-weil-pbc-finite-etale-category], with the following properties. The map $\\nu$ is finite and surjective; each $j_i$ is an open immersion; $Y_i\\to T_i$ is smooth and surjective; $\\overline Y_i\\to T_i$ is smooth and proper with geometrically connected fibres of dimension at most one [def-sbc-smooth-morphisms] [def-pc-geometrically-irreducible]. There is an open $W\\subset X_V$ such that $W_i:=\\nu^{-1}(W)\\cap Y_i$ meets every fibre of $Y_i\\to T_i$, and $\\nu^{-1}(W)\\to W$ is a thickening, meaning a closed immersion surjective on underlying points [def-sbc-first-order-thickening]. No density assertion is part of this statement. The finite family may be empty.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GK7, label lemma-make-good-curves"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-irreducible-components",
+  "def-pc-scheme-fibre",
+  "def-kun-topological-krull-dimension",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "def-weil-pbc-finite-etale-category",
+  "def-sbc-smooth-morphisms",
+  "def-pc-geometrically-irreducible",
+  "def-sbc-first-order-thickening",
+  "def-sc-generic-point"
+ ],
+ "proof": [
+  {
+   "text": "Apply the field curve completion theorem to X_eta over kappa(eta). It supplies a finite purely inseparable extension K and the entire componentwise normalization and smooth projective completion diagram, including all finite-presentation and qcqs hypotheses.",
+   "uses": [
+    "lem-weil-pbc-field-curve-completion-insep"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Realize K on a reduced affine finite radicial cover of an affine open neighbourhood of eta. Keep its generic point and the compatible residue-field isomorphism.",
+   "uses": [
+    "lem-weil-pbc-finite-radicial-generic-residue-extension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Install the supplied affine, reduced and morphism-property instances and apply the prescribed-generic-diagram spreading theorem. Its hypotheses are exactly the field diagram and residue-field compatibility produced by the preceding steps.",
+   "uses": [
+    "lem-weil-pbc-good-curves-spread-generic-completion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-field-curve-completion-insep",
+  "lem-weil-pbc-finite-radicial-generic-residue-extension",
+  "lem-weil-pbc-good-curves-spread-generic-completion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GK7, label lemma-make-good-curves"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "spread out smooth proper generic curve normalization with thickening after finite radicial residue field extension over a reduced affine base",
+   "results": "8 hits on relative normalization: normalizationDesc, fromNormalization, instIsIntegralHomFromNormalization, toNormalization_fromNormalization and related declarations. No finite radicial realization or prescribed generic curve spreading statement.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "spread out smooth proper generic curve normalization with thickening after finite radicial residue field extension over a reduced affine base",
+   "results": "8 hits: Scheme.Hom.normalization, toNormalization, instIsIntegralNormalization, normalizationDesc, and smooth local-presentation lemmas. No finite generic residue-field model or good-curve spreading theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"IsFinite\"",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "good_curves|finite_radicial_generic|generic.*residue.*extension",
+   "results": "0 hits in Mathlib; the separate repository search found only the assigned good-curves theorem and the non-finite generic spread theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GoodCurvesGenericDiagram",
+  "date": "2026-10-18",
+  "group": "Q5"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Classical constructibility input in the proof of thm-weil-pbc-direct-image-finiteness-proper, expanded by Tag 0GKX: paragraph beginning Given a generic point, the diagram and open W (0GK7). Substep: Combine generic curve completion, finite radicial realization and spreading.",
+   "via": [
+    "lem-weil-pbc-good-curves-generic-diagram",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.GoodCurvesReducedAffineNonemptyThickening",
+  "file": "lean/Sheaf/AlgebraicGeometry/GoodCurvesReducedAffineNonemptyThickening.lean",
+  "declaration": "AlgebraicGeometry.exists_good_curves_reduced_affine_nonempty_thickening",
+  "statement": "theorem exists_good_curves_reduced_affine_nonempty_thickening\n    {X S : Scheme.{u}} [IsAffine S] [IsReduced S] (f : X ⟶ S) [IsSeparated f]\n    [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]\n    (η : S) (hη : ∃ Z ∈ irreducibleComponents S, IsGenericPoint η Z)\n    (hdim : topologicalKrullDim (f.fiber η) ≤ 1) :\n    ∃ (U : S.Opens) (_ : η ∈ U) (V : Scheme.{u}) (g : V ⟶ U.toScheme),\n      IsFinite g ∧ Surjective g ∧ UniversallyInjective g ∧\n      ∃ (n : ℕ) (T Y Ybar : Fin n → Scheme.{u})\n        (t : ∀ i, T i ⟶ V) (j : ∀ i, Y i ⟶ Ybar i)\n        (p : ∀ i, Ybar i ⟶ T i)\n        (ν : (∐ Y) ⟶ pullback f (g ≫ U.ι)),\n        IsFinite ν ∧ Surjective ν ∧\n        (∀ i, Sigma.ι Y i ≫ ν ≫ pullback.snd f (g ≫ U.ι) = j i ≫ p i ≫ t i) ∧\n        (∀ i, IsFinite (t i) ∧ Etale (t i)) ∧\n        (∀ i, IsOpenImmersion (j i)) ∧\n        (∀ i, Smooth (j i ≫ p i) ∧ Surjective (j i ≫ p i)) ∧\n        (∀ i, Smooth (p i) ∧ IsProper (p i) ∧\n          ∀ s : T i, GeometricallyConnected ((p i).fiberToSpecResidueField s) ∧\n            topologicalKrullDim ((p i).fiber s) ≤ 1) ∧\n        ∃ W : (pullback f (g ≫ U.ι)).Opens,\n          (∀ (i : Fin n) (s : T i),\n            ∃ y : (j i ≫ p i).fiber s,\n              ((j i ≫ p i).fiberι s ≫ Sigma.ι Y i ≫ ν) y ∈ W) ∧\n          IsThickening (pullback.snd ν W.ι)",
+  "branch": "sheaf-dag",
+  "by": "Q5",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261018T071214-L-1675155",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261018T071214-L-1675155",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -1,0 +1,128 @@
+{
+ "id": "lem-weil-pbc-finite-radicial-affine-shrinking",
+ "kind": "statement",
+ "title": "Affine shrinking downstairs under a finite radicial morphism",
+ "statement": "Let $g:V\\to S$ be a finite universally injective morphism of schemes [def-pc-scheme] [def-weil-finite-integral-morphism] [def-weil-radicial-morphism], $x\\in V$ and $O\\subset V$ an open neighbourhood of $x$. There is an affine open neighbourhood $U\\subset S$ of $g(x)$ such that $g^{-1}(U)\\subset O$. Neither surjectivity of $g$ nor affineness or reducedness of $S$ is required.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GK7, label lemma-make-good-curves"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-integral-morphism",
+  "def-weil-radicial-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The image g(V minus O) is closed because g is finite. It misses g(x), because injectivity forces every point over g(x) to equal x. Its complement is thus an open neighbourhood of g(x).",
+   "uses": [
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "def-weil-radicial-morphism"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose an affine open neighbourhood U of g(x) inside this complement. If y maps into U, then y cannot lie outside O, since otherwise g(y) would lie in the excluded image. This is the desired inverse-image containment.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "def-weil-radicial-morphism",
+  "lem-weil-pbc-affine-opens-basis"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0GK7, label lemma-make-good-curves"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "for a finite universally injective scheme map an open neighbourhood of a point contains the inverse image of an affine neighbourhood downstairs",
+   "results": "8 hits including Scheme.Hom.injective, IsAffineOpen.preimage, preimage_of_isOpenImmersion and exists_affine_mem_range_and_range_subset. These provide ingredients, not the closed-complement shrinking conclusion.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "for a finite universally injective scheme map an open neighbourhood of a point contains the inverse image of an affine neighbourhood downstairs",
+   "results": "8 hits: local-at-target universal injectivity, reduce_to_affine_nbhd, and spreading morphisms. None gives this finite closed-complement shrinking statement.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsAffineOpen\", \"preimage\"",
+   "results": "10 hits: preimages under isomorphisms, open immersions, affine morphisms and inverse limits. No shrinking under a finite radicial map.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*shrinking|shrinking.*affine|[Ii]sClosedMap.*neighb",
+   "results": "0 hits. Scheme.Hom.isClosedMap and the affine-open basis suffice for the direct proof.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.GoodCurvesGenericDiagram",
+  "date": "2026-10-18",
+  "group": "Q5"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "Classical constructibility input in the proof of thm-weil-pbc-direct-image-finiteness-proper, expanded by Tag 0GKX: paragraph beginning Given a generic point, the diagram and open W (0GK7). Substep: Affine shrinking downstairs under a finite radicial morphism.",
+   "via": [
+    "lem-weil-pbc-good-curves-generic-diagram",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteRadicialAffineShrinking",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteRadicialAffineShrinking.lean",
+  "declaration": "AlgebraicGeometry.exists_affine_shrinking_under_finite_radicial",
+  "statement": "theorem exists_affine_shrinking_under_finite_radicial\n    {V S : Scheme.{u}} (g : V ⟶ S) [IsFinite g] [UniversallyInjective g]\n    (x : V) (O : V.Opens) (hx : x ∈ O) :\n    ∃ U : S.Opens, IsAffineOpen U ∧ g x ∈ U ∧ g ⁻¹ᵁ U ≤ O",
+  "branch": "sheaf-dag",
+  "by": "Q5",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261018T071214-L-1675155",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q5",
+  "result": "pass",
+  "landing": "20261018T071214-L-1675155",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
