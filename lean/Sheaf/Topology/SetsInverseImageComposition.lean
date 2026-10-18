@@ -7,6 +7,7 @@ module
 
 public import Mathlib.Topology.Sheaves.Functors
 public import Mathlib.CategoryTheory.Sites.LeftExact
+import Mathlib.CategoryTheory.Adjunction.Unique
 
 /-!
 # Composition of inverse images of sheaves of sets
@@ -68,6 +69,24 @@ theorem exists_sets_inverseImage_comp
               ((pullbackPushforwardAdjunction (Type u) (f ≫ g)).unit.app G).hom.app
                 (op W) s) →
           c = e.hom.app G) := by
-  sorry
+  let adj := (pullbackPushforwardAdjunction (Type u) g).comp
+    (pullbackPushforwardAdjunction (Type u) f)
+  let adj' : pullback (Type u) (f ≫ g) ⊣
+      pushforward (Type u) f ⋙ pushforward (Type u) g :=
+    pullbackPushforwardAdjunction (Type u) (f ≫ g)
+  let e := adj.leftAdjointUniq adj'
+  refine ⟨e, fun G ↦ ?_⟩
+  have heq := adj.unit_leftAdjointUniq_hom_app adj' G
+  constructor
+  · intro W s
+    rw [Adjunction.comp_unit_app] at heq
+    exact congrArg (fun k ↦ k.hom.app (op W) s) heq
+  · intro c hc
+    apply (adj.homEquiv G _).injective
+    rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit, heq]
+    apply CategoryTheory.Sheaf.hom_ext
+    ext W s
+    rw [Adjunction.comp_unit_app]
+    exact hc W.unop s
 
 end TopCat.Sheaf
