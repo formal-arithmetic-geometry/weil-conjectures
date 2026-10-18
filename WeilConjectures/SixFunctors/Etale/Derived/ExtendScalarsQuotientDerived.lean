@@ -8,7 +8,6 @@ module
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.DerivedBaseChange
 public import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
-public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MonoidalKFlat
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.Derived.ExtendScalarsQuotient
 public import WeilConjectures.SixFunctors.Etale.Derived.Hom
@@ -28,7 +27,8 @@ a total left derived functor `LE : D(X_ét, Λ) ⥤ D(X_ét, A)`, the derived ba
   (`AlgebraicGeometry.Etale.nonempty_iso_restrictScalars_leftDerived_obj`);
 - `LE` is monoidal and, as a consequence, satisfies the internal adjunction
   `RHom_Λ(K, Res N) ≅ Res RHom_A(LE K, N)`
-  (`AlgebraicGeometry.Etale.derivedHomCompIsoOfAdjunction`);
+  (`AlgebraicGeometry.Etale.derivedHomCompIsoOfAdjunction`, in
+  `WeilConjectures.SixFunctors.Etale.Derived.ExtendScalarsQuotientHom`);
 - every derived base change `η : K ⟶ Res K'` along `Λ ⟶ Λ ⧸ J`
   (`CategoryTheory.Sheaf.IsDerivedBaseChange`) is `LE K`, so that `Res K' ≅ K ⊗ᴸ A_X`
   (`AlgebraicGeometry.Etale.nonempty_iso_reductionModIdeal_of_isDerivedBaseChange`).
@@ -132,31 +132,6 @@ noncomputable def derivedTensorQObjSingleFunctorObjIsoOfKFlat
 
 end
 
-section
-
-variable {A : Type u'} [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
-  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
-  [Abelian.HasFunctorialFlatResolution A]
-  {B : Type u'} [Category.{u + 1} B] [Abelian B] [IsGrothendieckAbelian.{u + 1} B]
-  [MonoidalCategory B] [MonoidalPreadditive B] [SymmetricCategory B] [MonoidalClosed B]
-  [Abelian.HasFunctorialFlatResolution B] {X}
-  {F : Sheaf X.smallEtaleTopology A ⥤ Sheaf X.smallEtaleTopology B} [F.Additive]
-  [F.PreservesKFlatQuasiIso] [F.PreservesFlat] [F.IsLeftAdjoint] [F.Monoidal]
-  {R : _root_.DerivedCategory (Sheaf X.smallEtaleTopology B) ⥤
-    _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)}
-
-/-- For a monoidal functor `F` of étale sheaves with derived functor `LF` left adjoint to `R`,
-`R ⋙ RHom(K, -) ≅ RHom(LF K, -) ⋙ R`: both are right adjoint to
-`T ↦ LF(K ⊗ᴸ T) ≅ LF K ⊗ᴸ LF T`. -/
-noncomputable def derivedHomCompIsoOfAdjunction (adj : F.leftDerivedFunctor ⊣ R)
-    (K : _root_.DerivedCategory (Sheaf X.smallEtaleTopology A)) :
-    R ⋙ (derivedHom A X).obj (op K) ≅ (derivedHom B X).obj (op (F.leftDerivedFunctor.obj K)) ⋙ R :=
-  (((derivedTensorHomAdjunction A K).comp adj).ofNatIsoLeft
-    (F.leftDerivedTensorIsoOfKFlat K)).rightAdjointUniq
-    (adj.comp (derivedTensorHomAdjunction B _))
-
-end
-
 set_option hygiene false in
 /-- The derived category `D(X_ét, Λ)` of étale sheaves of `Λ`-modules on `X`. -/
 local notation "𝐃(" X ", " Λ ")" =>
@@ -235,23 +210,6 @@ theorem nonempty_iso_reductionModIdeal_of_isDerivedBaseChange {K : 𝐃(X, Λ)}
   obtain ⟨e'⟩ := nonempty_iso_restrictScalars_leftDerived_obj J X K
   exact ⟨(Sheaf.derivedRestrictScalars X.smallEtaleTopology (Ideal.Quotient.mk J)).mapIso
     e.symm ≪≫ e'⟩
-
-/-- **Internal adjunction for a derived base change.** For a derived base change
-`η : K ⟶ Res K'` of `K` along `Λ ⟶ Λ ⧸ J` and `N ∈ D(X_ét, Λ ⧸ J)`,
-`RHom_Λ(K, Res N) ≅ Res RHom_{Λ ⧸ J}(K', N)`
-(`AlgebraicGeometry.Etale.derivedHomCompIsoOfAdjunction`). -/
-theorem nonempty_iso_derivedHom_restrictScalars_of_isDerivedBaseChange {K : 𝐃(X, Λ)}
-    {K' : 𝐃(X, Λ ⧸ J)}
-    {η : K ⟶ (Sheaf.derivedRestrictScalars X.smallEtaleTopology (Ideal.Quotient.mk J)).obj K'}
-    (hη : Sheaf.IsDerivedBaseChange η) (N : 𝐃(X, Λ ⧸ J)) :
-    Nonempty (((derivedHom (ModuleCat.{u + 1} Λ) X).obj (op K)).obj
-        ((Sheaf.derivedRestrictScalars X.smallEtaleTopology (Ideal.Quotient.mk J)).obj N) ≅
-      (Sheaf.derivedRestrictScalars X.smallEtaleTopology (Ideal.Quotient.mk J)).obj
-        (((derivedHom (ModuleCat.{u + 1} (Λ ⧸ J)) X).obj (op K')).obj N)) := by
-  obtain ⟨eK, -⟩ := exists_iso_leftDerived_of_isDerivedBaseChange hη
-  exact ⟨(derivedHomCompIsoOfAdjunction (derivedExtendScalarsAdjunction J X) K).app N ≪≫
-    (Sheaf.derivedRestrictScalars X.smallEtaleTopology (Ideal.Quotient.mk J)).mapIso
-      (((derivedHom (ModuleCat.{u + 1} (Λ ⧸ J)) X).mapIso eK.symm.op).app N)⟩
 
 end BaseChange
 
