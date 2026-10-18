@@ -16,36 +16,35 @@
  ],
  "proof": [
   {
-   "text": "Factor every graded cycle inclusion through graded cycles. Monotonicity of filtered cycles reduces the square-zero condition to the first-page kernel formula. This defines the normalized j family uniquely. After the normalized t family is constructed, use hH and epic cancellation to identify the stage-zero composite with pi followed by eH and the inverse initial E isomorphism. Cokernel exactness gives the epic quotient and its boundary kernel.",
+   "text": "For r=s+1, monotonicity of filtered cycles and the first-page kernel formula show that their graded differential vanishes. Lift their monic graded inclusions uniquely through graded iCycles, constructing j at every stage.",
    "uses": [
-    "def-sp-abelian",
     "def-sp-filtered-complex-subquotients",
-    "def-sp-filtered-homology-exact-couple",
-    "def-sp-convergence",
     "lem-sp-filtered-complex-first-page-cycles-boundaries"
    ],
    "elementary": false
   },
   {
-   "text": "Construct all t before the quotient induction. Identify alphaIter with homology of filtration inclusions, and initial f with the connecting morphism. The connecting-morphism representative formula sends an (s+1)-cycle representative to its differential in F^(p+s+1). The differential is a cycle because d squared vanishes. Its homology class, followed by the incoming alpha inclusion, represents the initial connecting class. Thus the initial E class factors through the finite-cycle-formula pullback on an epic cycle-representative cover. Invariance of image under epic precomposition gives the same factorization on the graded cycle subobject itself. Factor through the monic canonical tower inclusion to obtain t and its normalization at every stage.",
+   "text": "Compose j with graded homology and the inverse initial E identification. Rewrite tower Z as the inverse image under initial f of the incoming alpha image, using finiteCycle_formula. Pull back along the epic simultaneous representative cover. Its differentiated representative is a cycle in the deeper filtration step because d squared is zero and the filtration inclusion is monic. The connecting-from-cycle identity and the incoming-alpha homology formula from the forward-representative helpers exhibit the needed image factorization. Use the concrete D-object computation to align the homology objects. Descent of factorization along the representative epimorphism follows by cancelling that epimorphism in the cokernel of the subobject inclusion. Factor uniquely through the tower Z inclusion to obtain the full normalized family t.",
    "uses": [
+    "def-sp-filtered-homology-exact-couple",
+    "lem-sp-filtered-homology-couple-computations",
+    "lem-sp-filtered-complex-differential-representatives-cover",
+    "lem-sp-filtered-homology-tower-forward-representatives",
     "lem-sp-finite-cycle-formula",
-    "lem-sp-filtered-complex-representative-epis",
-    "def-sp-filtered-homology-couple-data",
-    "def-sp-filtered-complex-subquotients"
+    "def-sp-filtered-homology-couple-data"
    ],
    "elementary": false
   },
   {
-   "text": "Induct on the epic quotient and boundary kernel assertions only. At stage s their cokernel universal property supplies normalized isomorphisms to concrete quotient pages. Choose the uniquely normalized representative differential. The tower differential formula on an epic representative cover identifies both incoming and outgoing differentials after reindexing. Kernel and cokernel universal properties transport the canonical derived E quotient to the homology of this concrete page. Use filteredComplex_normalized_homology, which already packages the successor-cycle cover and successor-boundary image, to identify that homology with the successor quotient, normalized on successor cycles. Monic normalization of j and t identifies their transition maps. The canonical cycleLift_comm and projection_succ equations then identify the successor Q followed by this isomorphism with the concrete cokernel projection. Epimorphy and the boundary kernel follow from this equation and cokernel exactness.",
+   "text": "Induct on s for epimorphy and the boundary kernel of t followed by tower projection. At zero, cancel the epic representative projection in hH, then use the normalization of t and projection_zero to identify the map with the first-page cokernel projection followed by isomorphisms. At stage s, the induction hypothesis and the cokernel universal property give page quotient isomorphisms. Cancel an epic simultaneous representative cover in the tower differential equation and the representative page-differential equation to identify outgoing differentials. Index naturality similarly identifies incoming differentials, so transport the three-term complex to obtain its cycles and homology isomorphisms. The normalized-homology theorem identifies that homology with the successor cycle/boundary quotient and normalizes its projection. Monic normalization of t identifies its restriction between successive cycle objects; cycleLift_comm and projection_succ identify its successor projection with the preceding normalized homology map. Hence it is epic, and its kernel is the image of the successor boundary inclusion. Return the previously constructed j,t and both inductive conclusions.",
    "uses": [
-    "lem-sp-filtered-homology-tower-differential",
-    "lem-sp-filtered-complex-differential-representatives-cover",
-    "lem-sp-filtered-complex-page-differential",
-    "lem-sp-filtered-complex-normalized-homology",
+    "def-sp-abelian",
     "def-sp-convergence",
     "def-sp-exact-couple",
-    "def-sp-abelian"
+    "lem-sp-filtered-complex-differential-representatives-cover",
+    "lem-sp-filtered-homology-tower-differential",
+    "lem-sp-filtered-complex-page-differential",
+    "lem-sp-filtered-complex-normalized-homology"
    ],
    "elementary": false
   }
@@ -61,15 +60,16 @@
   "lem-sp-filtered-complex-first-page-cycles-boundaries",
   "lem-sp-filtered-complex-normalized-homology",
   "lem-sp-filtered-complex-page-differential",
-  "lem-sp-filtered-complex-representative-epis",
+  "lem-sp-filtered-homology-couple-computations",
   "lem-sp-filtered-homology-tower-differential",
+  "lem-sp-filtered-homology-tower-forward-representatives",
   "lem-sp-finite-cycle-formula"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "Stacks Project, Homological Algebra",
-  "place": "Tags 012K and 011R",
-  "note": "T3: compiled implementation of the normalized-family construction followed by quotient induction. Uses the existing normalized-homology comparison for the successor cycle/boundary calculation; generic kernel/cokernel transport and all index bookkeeping are proved locally. No new admitted statements."
+  "document": "Stacks Project, Homological Algebra; Mathlib homology and abelian cokernel API",
+  "place": "Tags 012K and 011R; explicit representative and derived-couple calculations",
+  "note": "M6: completed the cycle lift, differential transport and quotient induction in Lean; concrete D and normalized initial G are isolated as computation rules for the constructor. Existing theorem signatures are unchanged."
  },
  "mathlib_searches": [
   {
@@ -148,13 +148,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-18",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "T3",
+  "group": "M6",
   "result": "pass",
-  "landing": "20261015T212935-L-2072344",
-  "kind": "proof",
+  "landing": "20261018T092906-L-3441479",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {

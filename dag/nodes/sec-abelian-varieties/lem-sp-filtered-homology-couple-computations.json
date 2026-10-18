@@ -1,0 +1,133 @@
+{
+ "id": "lem-sp-filtered-homology-couple-computations",
+ "kind": "statement",
+ "title": "Concrete D objects and normalized initial G of the filtered homology couple",
+ "statement": "Let $\\mathcal C$ be an abelian category [def-sp-abelian], $K^\\bullet$ a cochain complex indexed by $\\mathbb Z$, and $F^\\bullet K^\\bullet$ a decreasing filtration by subcomplexes [def-sp-filtered-complex-subquotients]. Let $X$ be the fixed concrete filtered homology exact couple and $e_0(p,q)$ its prescribed initial E identification [def-sp-filtered-homology-exact-couple]. Then for every $P,Q\\in\\mathbb Z$ its explicit D object satisfies $X.D(P,Q)=H^{P+Q}(F^{-Q}K^\\bullet)$. Moreover, for every $p,q\\in\\mathbb Z$, the morphism $X.\\mathrm{initialG}(2p+q,-p)$ followed by $e_0(p,q)$ is heterogeneously equal to the map $H^{p+q}(F^pK^\\bullet)\\to H^{p+q}(\\operatorname{gr}^p_F K^\\bullet)$ induced by the canonical graded quotient. Here $\\mathrm{initialG}$ is the type-zero index-normalized backward map [def-sp-convergence]; heterogeneous equality compares the maps with their explicit, arithmetically equal integer-index expressions. These are computations for the fixed construction, with no finiteness or derived-page hypothesis.",
+ "source": {
+  "document": "Stacks Project, Homological Algebra; project concrete filtered homology construction",
+  "place": "Tag 012K, homology.tex section-filtered-complex and lemma-spectral-sequence-filtered-complex; concrete construction def-sp-filtered-homology-exact-couple, its explicit D and G fields"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtered-complex-subquotients",
+  "def-sp-filtered-homology-exact-couple",
+  "def-sp-convergence"
+ ],
+ "proof": [
+  {
+   "text": "The assembled exact couple has D field filteredHomologyD. Expand this abbreviation at P,Q to obtain the filtration-step homology object H^(P+Q)(F^(-Q)K). This is equality of the explicit object expressions, not a choice of an isomorphism.",
+   "uses": [
+    "def-sp-filtered-homology-exact-couple",
+    "def-sp-filtered-homology-couple-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand initialG at type zero and the G field of the assembled couple. The latter is filteredHomologyG, induced on homology by the canonical filtration quotient, with equality transports of its target. Expand the prescribed filteredHomologyEIso. The two target transports compose and cancel. The identities -(-p)=p and (2p+q)+(-p)=p+q identify the quotient map and its degree. Substitution of equal integer indices proves the stated heterogeneous equality.",
+   "uses": [
+    "def-sp-convergence",
+    "def-sp-filtered-homology-exact-couple",
+    "def-sp-filtered-homology-couple-data"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-convergence",
+  "def-sp-filtered-homology-couple-data",
+  "def-sp-filtered-homology-exact-couple"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "Stacks Project, Homological Algebra; explicit filtered homology couple data",
+  "place": "Tag 012K; filteredHomologyD and filteredHomologyG",
+  "note": "M6 repair: both computation clauses are proved in Lean against the explicit constructor landed by F8: D by reflexivity, normalized initialG by unfolding the fixed data and cancelling equality transports. No sorry remains."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The D objects of the homology exact couple of a filtered complex are the homology objects of its filtration steps",
+   "date": "2026-10-18",
+   "results": "{\"t\": \"2026-10-18T05:13:52Z\", \"tool\": \"leanfinder\", \"query\": \"The D objects of the homology exact couple of a filtered complex are the homology objects of its filtration steps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.opcycles\", \"CategoryTheory.ShortComplex.ShortExact.homology_exact₂\", \"HomologicalComplex.homology\", \"HomologicalComplex.HasHomology\", \"HomologicalComplex.extend.homologyData'\", \"HomologicalComplex.HomologySequence.composableArrows₃\", \"HomologicalComplex.extend.rightHomologyData.d_comp_desc_eq_zero_iff'\", \"HomologicalComplex.extend.rightHomologyData\"], \"digest\": \"f88ffd744d2ab1a4\"}",
+   "verdict": "No matching computation rule for the project-specific filtered homology couple; homologyMap API only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The homology exact couple of a filtered cochain complex has D terms equal to the homology of filtration steps and G map induced by the graded quotient",
+   "date": "2026-10-18",
+   "results": "{\"t\": \"2026-10-18T05:14:03Z\", \"tool\": \"leansearch\", \"query\": \"The homology exact couple of a filtered cochain complex has D terms equal to the homology of filtration steps and G map induced by the graded quotient\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.HomComplex.leftHomologyData'\", \"CochainComplex.ConnectData.cochainComplex_d\", \"CochainComplex.HomComplex\", \"HomologicalComplex.gradedHomologyFunctor\", \"groupCohomology.inhomogeneousCochains.d_def\", \"groupHomology.shortComplexH0_g\", \"CochainComplex.HomComplex.Cochain.ofHom_v_comp_d\", \"HomologicalComplex.homologyIsCokernel\"], \"digest\": \"ec7bc424879e131c\"}",
+   "verdict": "No matching computation rule for the project-specific filtered homology couple; homologyMap API only."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyMap",
+   "date": "2026-10-18",
+   "results": "{\"t\": \"2026-10-18T05:14:03Z\", \"tool\": \"loogle\", \"query\": \"HomologicalComplex.homologyMap\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"HomologicalComplex.homologyMap\", \"HomologicalComplex.homologyMap_id\", \"HomologicalComplex.instIsIsoHomologyMap\", \"HomologicalComplex.epi_homologyMap_of_epi_of_not_rel\", \"HomologicalComplex.mono_homologyMap_of_mono_of_not_rel\", \"HomologicalComplex.homologyMapIso_hom\", \"HomologicalComplex.homologyMapIso_inv\", \"HomologicalComplex.homologyFunctor_map\"], \"digest\": \"ead0f5303a188222\"}",
+   "verdict": "No matching computation rule for the project-specific filtered homology couple; homologyMap API only."
+  },
+  {
+   "tool": "grep",
+   "query": "filteredHomologyExactCouple|filteredHomologyG|initialG",
+   "date": "2026-10-18",
+   "results": "{\"t\": \"2026-10-18T05:19:31Z\", \"tool\": \"grep\", \"query\": \"filteredHomologyExactCouple|filteredHomologyG|initialG\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "verdict": "No matching computation rule for the project-specific filtered homology couple; homologyMap API only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FilteredHomologyTowerQuotients",
+  "date": "2026-10-18",
+  "group": "M6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sp-spectral-object-yields",
+   "place": "Tag 012K, Lemma 12.24.2: concrete homology exact-couple construction, its filtration-step D terms and graded-quotient map",
+   "via": [
+    "lem-sp-filtered-homology-tower-quotients",
+    "lem-sp-filtered-homology-couple-quotient-pages",
+    "lem-sp-filtered-quotient-canonical-structure",
+    "lem-sp-filtered-quotient-page-realization",
+    "lem-sp-bounded-filtered-page-construction",
+    "lem-sp-bounded-filtered-page-core",
+    "thm-sp-spectral-object-yields-canonical-pages"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-abelian-varieties",
+ "unit": "sk-prop-av-pqf-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredHomologyCoupleComputations",
+  "file": "lean/Sheaf/CategoryTheory/FilteredHomologyCoupleComputations.lean",
+  "declaration": "CategoryTheory.filteredHomologyExactCouple_computations",
+  "statement": "theorem filteredHomologyExactCouple_computations\n    {C : Type u} [Category.{v} C] [Abelian C]\n    (K : CochainComplex C ℤ) (F : DecreasingFiltration K) :\n    (∀ P Q : ℤ, (filteredHomologyExactCouple K F).D P Q =\n      (F.step (-Q) : CochainComplex C ℤ).homology (P + Q)) ∧\n    (∀ p q : ℤ, ((filteredHomologyExactCouple K F).initialG (2 * p + q) (-p) ≫\n        (filteredHomologyEIso K F p q).hom) ≍\n      HomologicalComplex.homologyMap\n        (F.complexQuotientπ p (p + 1) (by omega)) (p + q))",
+  "branch": "sheaf-dag",
+  "by": "M6",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261018T092906-L-3441479",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M6",
+  "result": "pass",
+  "landing": "20261018T092906-L-3441479",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
