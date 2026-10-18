@@ -81,7 +81,10 @@ private def evaluationContraction (G : Type u) [Group G] [TopologicalSpace G]
     intro x
     rfl
 
-private theorem contract_insert_zero (G : Type u) [Group G] (n : ℕ)
+/-- Contracting the first face after insertion multiplies the inserted entry with the head.
+Source: Stacks Project, Tag 0DVG, evaluation-contraction calculation in
+`lem-sc-locally-constant-cochains-acyclic-embedding`. -/
+theorem contract_insert_zero (G : Type u) [Group G] (n : ℕ)
     (g : Fin (n + 1) → G) (x : G) :
     Fin.contractNth 0 (· * ·) (Fin.cons x g) =
       Fin.cons (x * g 0) (fun i ↦ g i.succ) := by
@@ -90,7 +93,10 @@ private theorem contract_insert_zero (G : Type u) [Group G] (n : ℕ)
   · simp [Fin.contractNth]
   · simp [Fin.contractNth]
 
-private theorem contract_insert_succ (G : Type u) [Group G] (n : ℕ)
+/-- Contracting a later face commutes with insertion of the first entry.
+Source: Stacks Project, Tag 0DVG, evaluation-contraction calculation in
+`lem-sc-locally-constant-cochains-acyclic-embedding`. -/
+theorem contract_insert_succ (G : Type u) [Group G] (n : ℕ)
     (g : Fin (n + 1) → G) (x : G) (k : Fin (n + 1)) :
     Fin.contractNth k.succ (· * ·) (Fin.cons x g) =
       Fin.cons x (Fin.contractNth k (· * ·) g) := by
