@@ -6,12 +6,10 @@ Authors: Claude
 module
 
 public import Mathlib.AlgebraicGeometry.AffineSpace
-public import Mathlib.AlgebraicGeometry.FunctionField
+public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.ZariskisMainTheorem
-public import Mathlib.RingTheory.QuasiFinite.Basic
-public import WeilConjectures.AlgebraicGeometry.AffineSpace.Fiber
 
 /-!
 # A projective coordinate complement is finite
@@ -23,12 +21,15 @@ nonempty open of `S`, the complement `Z` of the union of the `t_{α r}⁻¹ V_{�
 `S`. This is the first step of Deligne's generic constructibility theorem
 (`thm-fin-deligne-generic-open`).
 
+The proof computes the generic fibre: over the residue field `K` of the generic point, the
+complement of each `V_{α r}` in `𝔸¹_K` lies in the zero set of a nonzero polynomial `P_{α r}`, so
+the generic fibre of the complement is cut out in `Spec K[t]` by the `P_{α r}(t_{α r})` and is
+finite. Zariski's main theorem then gives finiteness over a neighbourhood of the generic point,
+first for the reduced subscheme on the complement and then, by comparing fibres, for every closed
+subscheme supported there.
+
 ## Main statements
 
-- `MvPolynomial.finite_setOf_comap_C_eq_of_monic`: over a prime of `A`, only finitely many primes
-  of `A[X_r]` contain given monic polynomials `g_r(X_r)`.
-- `AlgebraicGeometry.AffineSpace.finite_setOf_reindex_notMem`: the points of `𝔸^σ_S` all of whose
-  coordinates avoid opens with monic complements form finite fibres.
 - `AlgebraicGeometry.exists_isFinite_morphismRestrict_of_range_subset`
   (`lem-fin-projective-coordinate-boundary`).
 -/
@@ -39,142 +40,132 @@ universe u
 
 open CategoryTheory Limits
 
-open scoped Polynomial
-
-/-- Evaluating a one-variable polynomial `g` at the variable `X r` and then applying `eval₂Hom`
-is the same as evaluating `g` at `v r`. -/
-lemma MvPolynomial.eval₂Hom_polynomial_eval₂_X {R S σ : Type*} [CommSemiring R]
-    [CommSemiring S] (f : R →+* S) (v : σ → S) (g : R[X]) (r : σ) :
-    eval₂Hom f v (g.eval₂ C (X r)) = g.eval₂ f (v r) := by
-  rw [Polynomial.hom_eval₂, eval₂Hom_comp_C, eval₂Hom_X']
-
-/-- Let `g_r` be monic polynomials over `A`, indexed by a finite type `σ`. Over each prime `p`
-of `A` there are only finitely many primes of `A[X_r : r ∈ σ]` containing every `g_r(X_r)`. -/
-theorem MvPolynomial.finite_setOf_comap_C_eq_of_monic {A σ : Type*} [CommRing A] [Finite σ]
-    (g : σ → A[X]) (hg : ∀ r, (g r).Monic) (p : PrimeSpectrum A) :
-    {P : PrimeSpectrum (MvPolynomial σ A) |
-      PrimeSpectrum.comap (C : A →+* MvPolynomial σ A) P = p ∧
-        ∀ r, (g r).eval₂ C (X r) ∈ P.asIdeal}.Finite := by
-  classical
-  set I : Ideal (MvPolynomial σ A) := Ideal.span (Set.range fun r ↦ (g r).eval₂ C (X r))
-  have hint (r : σ) : IsIntegral A (Ideal.Quotient.mkₐ A I (X r)) := by
-    refine ⟨g r, hg r, ?_⟩
-    rw [← Polynomial.aeval_def, Polynomial.aeval_algHom_apply, Polynomial.aeval_def,
-      MvPolynomial.algebraMap_eq]
-    exact Ideal.Quotient.eq_zero_iff_mem.2 (Ideal.subset_span ⟨r, rfl⟩)
-  have hadj : Algebra.adjoin A (Set.range fun r ↦ Ideal.Quotient.mkₐ A I (X r)) = ⊤ := by
-    rw [Set.range_comp' (Ideal.Quotient.mkₐ A I) X, ← AlgHom.map_adjoin, adjoin_range_X,
-      Algebra.map_top, AlgHom.range_eq_top]
-    exact Ideal.Quotient.mkₐ_surjective A I
-  have : Module.Finite A (MvPolynomial σ A ⧸ I) := by
-    refine ⟨?_⟩
-    have := fg_adjoin_of_finite (Set.finite_range _) (by rintro _ ⟨r, rfl⟩; exact hint r)
-    rwa [hadj, Algebra.top_toSubmodule] at this
-  refine ((Algebra.QuasiFinite.finite_comap_preimage_singleton (R := A)
-    (S := MvPolynomial σ A ⧸ I) p).image (PrimeSpectrum.comap (Ideal.Quotient.mk I))).subset ?_
-  rintro P ⟨hP, hPg⟩
-  have hIP : P ∈ Set.range (PrimeSpectrum.comap (Ideal.Quotient.mk I)) := by
-    rw [range_comap_of_surjective _ _ Ideal.Quotient.mk_surjective, Ideal.mk_ker]
-    exact Ideal.span_le.2 (Set.range_subset_iff.2 hPg)
-  obtain ⟨Q, rfl⟩ := hIP
-  refine ⟨Q, ?_, rfl⟩
-  rw [Set.mem_preimage, Set.mem_singleton_iff, ← hP, ← PrimeSpectrum.comap_comp_apply]
-  rfl
-
 namespace AlgebraicGeometry
 
-namespace AffineSpace
+/-- Over a field `K`, only finitely many primes of `K[X_r : r ∈ σ]` (`σ` finite) contain
+the elements `P_r(X_r)` for given nonzero one-variable polynomials `P_r`. -/
+theorem finite_setOf_forall_aeval_X_mem {K : Type u} [Field K] {σ : Type u} [Finite σ]
+    (P : σ → Polynomial K) (hP : ∀ r, P r ≠ 0) :
+    {q : PrimeSpectrum (MvPolynomial σ K) |
+      ∀ r, Polynomial.aeval (MvPolynomial.X r) (P r) ∈ q.asIdeal}.Finite := by
+  set J : Ideal (MvPolynomial σ K) :=
+    Ideal.span (Set.range fun r ↦ Polynomial.aeval (MvPolynomial.X r) (P r))
+  have hX (r : σ) : _root_.IsIntegral K (Ideal.Quotient.mkₐ K J (MvPolynomial.X r)) := by
+    refine IsAlgebraic.isIntegral ⟨P r, hP r, ?_⟩
+    rw [Polynomial.aeval_algHom_apply, Ideal.Quotient.mkₐ_eq_mk, Ideal.Quotient.eq_zero_iff_mem]
+    exact Ideal.subset_span ⟨r, rfl⟩
+  have : Algebra.IsIntegral K (MvPolynomial σ K ⧸ J) := by
+    refine ⟨fun a ↦ ?_⟩
+    obtain ⟨p, rfl⟩ := Ideal.Quotient.mkₐ_surjective K J a
+    induction p using MvPolynomial.induction_on with
+    | C a => rw [MvPolynomial.algHom_C]; exact isIntegral_algebraMap
+    | add p q hp hq => rw [map_add]; exact hp.add hq
+    | mul_X p r h => rw [map_mul]; exact h.mul (hX r)
+  have : Module.Finite K (MvPolynomial σ K ⧸ J) := Algebra.IsIntegral.finite
+  have : IsArtinianRing (MvPolynomial σ K ⧸ J) := IsArtinianRing.of_finite K _
+  refine (Set.finite_range (PrimeSpectrum.comap (Ideal.Quotient.mk J))).subset fun q hq ↦ ?_
+  rw [range_comap_of_surjective _ _ Ideal.Quotient.mk_surjective,
+    Ideal.mk_ker, PrimeSpectrum.mem_zeroLocus, SetLike.coe_subset_coe, Ideal.span_le]
+  rintro _ ⟨r, rfl⟩
+  exact hq r
 
-variable {σ : Type u} {T : Scheme.{u}} [IsAffine T]
+/-- Over an affine base, `AffineSpace.reindex` corresponds to `MvPolynomial.rename`. -/
+@[reassoc]
+lemma AffineSpace.SpecIso_inv_reindex {n m : Type u} (i : m → n) (R : CommRingCat.{u}) :
+    (SpecIso n R).inv ≫ reindex i (Spec R) =
+      Spec.map (CommRingCat.ofHom (MvPolynomial.rename i).toRingHom) ≫ (SpecIso m R).inv := by
+  ext1
+  · simp only [Category.assoc, reindex_over, SpecIso_inv_over, ← Spec.map_comp,
+      ← CommRingCat.ofHom_comp]
+    congr 2
+    ext; simp
+  · simp only [TopologicalSpace.Opens.map_top, Scheme.Hom.comp_app, CommRingCat.comp_apply]
+    conv_lhs => enter [2]; tactic => exact reindex_appTop_coord _ _ _
+    conv_rhs => enter [2]; tactic => exact SpecIso_inv_appTop_coord _ _
+    conv_lhs => tactic => exact SpecIso_inv_appTop_coord _ _
+    rw [← CommRingCat.comp_apply, ← Scheme.ΓSpecIso_inv_naturality, CommRingCat.comp_apply]
+    simp
 
-lemma mem_isoOfIsAffine_hom_apply_iff (x : 𝔸(σ; T)) (m : MvPolynomial σ Γ(T, ⊤)) :
-    m ∈ ((isoOfIsAffine σ T).hom x).asIdeal ↔
-      x ∉ 𝔸(σ; T).basicOpen
-        (MvPolynomial.eval₂Hom (𝔸(σ; T) ↘ T).appTop.hom (coord T) m) := by
-  rw [← Scheme.toSpecΓ_preimage_basicOpen]
-  simp only [isoOfIsAffine_hom, Scheme.Hom.comp_base, TopCat.hom_comp, ContinuousMap.comp_apply,
-    MvPolynomial.coe_eval₂Hom, TopologicalSpace.Opens.mem_map]
-  exact not_not.symm
+/-- Over a field `K`, given nonempty opens `V_r` of `𝔸¹_K = Spec K[X]`, only finitely many points
+of `Spec K[X_r : r ∈ σ]` (`σ` finite) have all their coordinate projections outside `V_r`. -/
+theorem finite_setOf_forall_SpecMap_rename_notMem {K : Type u} [Field K] {σ : Type u} [Finite σ]
+    (V : σ → (Spec (.of (MvPolynomial PUnit.{u + 1} K))).Opens)
+    (hV : ∀ r, (V r : Set (Spec (.of (MvPolynomial PUnit.{u + 1} K)))).Nonempty) :
+    {x : Spec (.of (MvPolynomial σ K)) | ∀ r,
+      Spec.map (CommRingCat.ofHom (MvPolynomial.rename fun _ : PUnit ↦ r).toRingHom) x ∉
+        V r}.Finite := by
+  have H (r : σ) : ∃ f : MvPolynomial PUnit.{u + 1} K, f ≠ 0 ∧
+      ∀ x : PrimeSpectrum (MvPolynomial PUnit.{u + 1} K), x ∉ V r → f ∈ x.asIdeal := by
+    obtain ⟨x, hx⟩ := hV r
+    obtain ⟨_, ⟨f, rfl⟩, hxf, hfV⟩ :=
+      PrimeSpectrum.isTopologicalBasis_basic_opens.exists_subset_of_mem_open hx (V r).2
+    refine ⟨f, ?_, fun y hy ↦ ?_⟩
+    · rintro rfl
+      simp at hxf
+    · by_contra h
+      exact hy (hfV h)
+  choose f hf0 hfV using H
+  have key (r : σ) (p : MvPolynomial PUnit.{u + 1} K) :
+      Polynomial.aeval (MvPolynomial.X r) (MvPolynomial.uniqueAlgEquiv K PUnit p) =
+        MvPolynomial.rename (fun _ : PUnit ↦ r) p := by
+    change ((Polynomial.aeval (MvPolynomial.X r)).comp
+      (MvPolynomial.uniqueAlgEquiv K PUnit).toAlgHom) p = _
+    congr 1
+    apply MvPolynomial.algHom_ext
+    intro i
+    simp
+  refine (finite_setOf_forall_aeval_X_mem (fun r ↦ MvPolynomial.uniqueAlgEquiv K PUnit (f r))
+    fun r ↦ (map_ne_zero_iff _ (AlgEquiv.injective _)).mpr (hf0 r)).subset fun x hx r ↦ ?_
+  rw [key]
+  exact hfV r _ (hx r)
 
-lemma comap_C_isoOfIsAffine_hom_apply (x : 𝔸(σ; T)) :
-    PrimeSpectrum.comap MvPolynomial.C ((isoOfIsAffine σ T).hom x) =
-      T.isoSpec.hom ((𝔸(σ; T) ↘ T) x) := by
-  have h1 : (isoOfIsAffine σ T).hom ≫ Spec.map (CommRingCat.ofHom MvPolynomial.C) =
-      (𝔸(σ; T) ↘ T) ≫ T.isoSpec.hom := by
-    rw [← cancel_epi (isoOfIsAffine σ T).inv, Iso.inv_hom_id_assoc, isoOfIsAffine_inv_over_assoc,
-      Iso.inv_hom_id, Category.comp_id]
-  have h2 := congrArg (fun f ↦ f x) h1
-  simp only [Scheme.Hom.comp_apply, Spec.map_apply, CommRingCat.hom_ofHom] at h2
-  exact h2
-
-/-- Let `g_r` be monic polynomials over `Γ(T, ⊤)` for an affine scheme `T`. In every fibre of
-`𝔸^σ_T ⟶ T`, only finitely many points lie in the common zero locus of the `g_r(t_r)`. -/
-theorem finite_setOf_notMem_basicOpen_of_monic [Finite σ] (g : σ → Γ(T, ⊤)[X])
-    (hg : ∀ r, (g r).Monic) (t : T) :
-    {x : 𝔸(σ; T) | (𝔸(σ; T) ↘ T) x = t ∧
-      ∀ r, x ∉ 𝔸(σ; T).basicOpen ((g r).eval₂ (𝔸(σ; T) ↘ T).appTop.hom (coord T r))}.Finite := by
-  refine ((MvPolynomial.finite_setOf_comap_C_eq_of_monic g hg (T.isoSpec.hom t)).preimage
-    (Scheme.homeoOfIso (isoOfIsAffine σ T)).injective.injOn).subset ?_
-  rintro x ⟨hxt, hx⟩
-  refine ⟨?_, fun r ↦ ?_⟩
-  · rw [Scheme.homeoOfIso_apply, comap_C_isoOfIsAffine_hom_apply, hxt]
-  · rw [Scheme.homeoOfIso_apply, mem_isoOfIsAffine_hom_apply_iff,
-      MvPolynomial.eval₂Hom_polynomial_eval₂_X]
-    exact hx r
-
-/-- The complement of a nonempty open `U` of the affine line over an integral affine scheme `T` is
-contained in the zero locus of a nonzero polynomial. -/
-theorem exists_ne_zero_forall_notMem_basicOpen [IsIntegral T] (U : 𝔸(PUnit.{u + 1}; T).Opens)
-    (hU : (U : Set 𝔸(PUnit.{u + 1}; T)).Nonempty) :
-    ∃ g : Γ(T, ⊤)[X], g ≠ 0 ∧ ∀ x ∉ U, x ∉ 𝔸(PUnit.{u + 1}; T).basicOpen
-      (g.eval₂ (𝔸(PUnit.{u + 1}; T) ↘ T).appTop.hom (coord T PUnit.unit)) := by
-  set Ψ := Scheme.homeoOfIso (isoOfIsAffine PUnit.{u + 1} T)
-  set Z := Ψ '' (U : Set 𝔸(PUnit.{u + 1}; T))ᶜ
-  have hZ : IsClosed Z := Ψ.isClosedMap _ U.isOpen.isClosed_compl
-  obtain ⟨x₀, hx₀⟩ := hU
-  obtain ⟨m, hmZ, hmx₀⟩ : ∃ m ∈ PrimeSpectrum.vanishingIdeal Z, m ∉ (Ψ x₀).asIdeal := by
-    by_contra! h
-    have : Ψ x₀ ∈ Z := by
-      rw [← hZ.closure_eq, ← PrimeSpectrum.zeroLocus_vanishingIdeal_eq_closure]
-      exact h
-    obtain ⟨y, hy, hyx⟩ := this
-    exact hy (Ψ.injective hyx ▸ hx₀)
-  obtain ⟨g, rfl⟩ := (MvPolynomial.uniqueAlgEquiv Γ(T, ⊤) PUnit.{u + 1}).symm.surjective m
-  refine ⟨g, fun h ↦ hmx₀ (by simp [h]), fun x hx ↦ ?_⟩
-  have hm := (PrimeSpectrum.mem_vanishingIdeal _ _).1 hmZ _ ⟨x, hx, rfl⟩
-  rw [Scheme.homeoOfIso_apply, mem_isoOfIsAffine_hom_apply_iff,
-    MvPolynomial.uniqueAlgEquiv_symm_apply, MvPolynomial.eval₂Hom_polynomial_eval₂_X] at hm
-  exact hm
-
-/-- Let `c : T ⟶ S` be an open immersion from an affine scheme and `V_r ⊆ 𝔸¹_S` opens, indexed by
-a finite type `σ`, whose complements over `T` lie in the zero loci of monic polynomials. Then over
-each point of `T`, only finitely many points of `𝔸^σ_S` have all their coordinates outside the
-`V_r`. -/
-theorem finite_setOf_reindex_notMem {S : Scheme.{u}} (c : T ⟶ S) [IsOpenImmersion c] [Finite σ]
-    (V : σ → 𝔸(PUnit.{u + 1}; S).Opens) (g : σ → Γ(T, ⊤)[X]) (hg : ∀ r, (g r).Monic)
-    (hV : ∀ r x, map PUnit c x ∉ V r → x ∉ 𝔸(PUnit.{u + 1}; T).basicOpen
-      ((g r).eval₂ (𝔸(PUnit.{u + 1}; T) ↘ T).appTop.hom (coord T PUnit.unit))) (t : T) :
-    {x : 𝔸(σ; S) | (𝔸(σ; S) ↘ S) x = c t ∧
-      ∀ r, reindex (fun _ : PUnit.{u + 1} ↦ r) S x ∉ V r}.Finite := by
-  refine ((finite_setOf_notMem_basicOpen_of_monic g hg t).image (map σ c)).subset ?_
-  rintro x ⟨hxt, hx⟩
-  obtain ⟨x', rfl⟩ : x ∈ Set.range (map σ c) := by
-    rw [range_map]
-    exact ⟨t, hxt.symm⟩
-  refine ⟨x', ⟨c.isOpenEmbedding.injective ?_, fun r ↦ ?_⟩, rfl⟩
-  · rw [← Scheme.Hom.comp_apply, map_over, Scheme.Hom.comp_apply] at hxt
-    exact hxt
-  · have h := hV r (reindex (fun _ : PUnit.{u + 1} ↦ r) T x') (by
-      rw [← Scheme.Hom.comp_apply, ← map_reindex, Scheme.Hom.comp_apply]
-      exact hx r)
-    have h' : x' ∉ reindex (fun _ : PUnit.{u + 1} ↦ r) T ⁻¹ᵁ 𝔸(PUnit.{u + 1}; T).basicOpen
-        ((g r).eval₂ (𝔸(PUnit.{u + 1}; T) ↘ T).appTop.hom (coord T PUnit.unit)) := h
-    have hc : (reindex (fun _ : PUnit.{u + 1} ↦ r) T).appTop.hom.comp
-        (𝔸(PUnit.{u + 1}; T) ↘ T).appTop.hom = (𝔸(σ; T) ↘ T).appTop.hom := by
-      rw [← CommRingCat.hom_comp, ← Scheme.Hom.comp_appTop, reindex_over]
-    rwa [Scheme.preimage_basicOpen_top, Polynomial.hom_eval₂, hc, reindex_appTop_coord] at h'
-
-end AffineSpace
+/-- Over an irreducible scheme `S` with generic point `η`, given nonempty opens `V_r` of `𝔸¹_S`,
+only finitely many points of `𝔸(σ; S)` (`σ` finite) lying over `η` have all their coordinate
+projections outside `V_r`. -/
+theorem finite_setOf_over_genericPoint {S : Scheme.{u}} [IrreducibleSpace S] {σ : Type u}
+    [Finite σ] (V : σ → 𝔸(PUnit; S).Opens)
+    (hV : ∀ r, (V r : Set 𝔸(PUnit; S)).Nonempty) :
+    {x : 𝔸(σ; S) | (𝔸(σ; S) ↘ S) x = genericPoint S ∧
+      ∀ r, AffineSpace.reindex (fun _ : PUnit ↦ r) S x ∉ V r}.Finite := by
+  set η := genericPoint S
+  set g := S.fromSpecResidueField η
+  have hg (z : Spec (S.residueField η)) : g z = η := S.fromSpecResidueField_apply η z
+  have hzz (n : Type u) (z : 𝔸(n; Spec (S.residueField η))) :
+      (AffineSpace.SpecIso n (S.residueField η)).inv
+        ((AffineSpace.SpecIso n (S.residueField η)).hom z) = z := by
+    rw [← Scheme.Hom.comp_apply, Iso.hom_inv_id]; rfl
+  set V' : σ → (Spec (.of (MvPolynomial PUnit.{u + 1} (S.residueField η)))).Opens := fun r ↦
+    (AffineSpace.SpecIso PUnit (S.residueField η)).inv ⁻¹ᵁ (AffineSpace.map PUnit g ⁻¹ᵁ V r)
+  have hV' (r : σ) :
+      (V' r : Set (Spec (.of (MvPolynomial PUnit.{u + 1} (S.residueField η))))).Nonempty := by
+    obtain ⟨v, hv⟩ := hV r
+    have hη : η ∈ (𝔸(PUnit; S) ↘ S) '' (V r : Set 𝔸(PUnit; S)) :=
+      (genericPoint_spec S).mem_open_set_iff (AffineSpace.isOpenMap_over _ _ (V r).2) |>.mpr
+        ⟨_, trivial, v, hv, rfl⟩
+    obtain ⟨v', hv', hv'η⟩ := hη
+    obtain ⟨pt⟩ : Nonempty (Spec (S.residueField η)) := inferInstance
+    obtain ⟨z, hz, -⟩ :=
+      Scheme.exists_preimage_of_isPullback (AffineSpace.isPullback_map (n := PUnit) g)
+      v' pt (by rw [hv'η, hg])
+    refine ⟨(AffineSpace.SpecIso PUnit (S.residueField η)).hom z, ?_⟩
+    change (AffineSpace.map PUnit g) ((AffineSpace.SpecIso PUnit (S.residueField η)).inv
+      ((AffineSpace.SpecIso PUnit (S.residueField η)).hom z)) ∈ V r
+    rw [hzz, hz]
+    exact hv'
+  refine (((finite_setOf_forall_SpecMap_rename_notMem V' hV').image
+    (AffineSpace.SpecIso σ (S.residueField η)).inv).image (AffineSpace.map σ g)).subset ?_
+  rintro x ⟨hx, hxV⟩
+  obtain ⟨pt⟩ : Nonempty (Spec (S.residueField η)) := inferInstance
+  obtain ⟨z, rfl, -⟩ := Scheme.exists_preimage_of_isPullback (AffineSpace.isPullback_map (n := σ) g)
+    x pt (by rw [hx, hg])
+  refine ⟨z, ⟨(AffineSpace.SpecIso σ (S.residueField η)).hom z, fun r hr ↦ hxV r ?_, ?_⟩, rfl⟩
+  · change (AffineSpace.map PUnit g) ((AffineSpace.SpecIso PUnit (S.residueField η)).inv
+      (Spec.map _ ((AffineSpace.SpecIso σ (S.residueField η)).hom z))) ∈ V r at hr
+    rw [← Scheme.Hom.comp_apply (Spec.map _), ← AffineSpace.SpecIso_inv_reindex,
+      Scheme.Hom.comp_apply, hzz, ← Scheme.Hom.comp_apply, ← AffineSpace.map_reindex,
+      Scheme.Hom.comp_apply] at hr
+    exact hr
+  · exact hzz σ z
 
 /-- Blueprint `lem-fin-projective-coordinate-boundary`: A projective coordinate complement is
 finite.
@@ -196,101 +187,54 @@ theorem exists_isFinite_morphismRestrict_of_range_subset {S Y : Scheme.{u}} [IsI
         Set.range i ⊆ (⋃ (α : ι) (r : σ α), (U α).ι ''
           ((e α ≫ AffineSpace.reindex (fun _ : PUnit ↦ r) S) ⁻¹' (V α r : Set 𝔸(PUnit; S))))ᶜ →
         IsFinite ((i ≫ p) ∣_ W) := by
-  classical
-  -- a nonempty affine open `S₀` of `S`
-  obtain ⟨s⟩ : Nonempty S := inferInstance
-  obtain ⟨S₀, hS₀, hsS₀, -⟩ :=
-    exists_isAffineOpen_mem_and_subset (show s ∈ (⊤ : S.Opens) from trivial)
-  have : IsAffine S₀ := hS₀
-  have : Nonempty S₀ := ⟨⟨s, hsS₀⟩⟩
-  -- the opens `V α r` meet the part of `𝔸¹_S` over `S₀`
-  have hV₀ (α : ι) (r : σ α) :
-      ((AffineSpace.map PUnit S₀.ι ⁻¹ᵁ V α r : 𝔸(PUnit; S₀).Opens) :
-        Set 𝔸(PUnit; S₀)).Nonempty := by
-    obtain ⟨x₀, hx₀⟩ := (𝔸(PUnit; S) ↘ S).surjective s
-    obtain ⟨x, hxV, hx⟩ := nonempty_preirreducible_inter (V α r).isOpen
-      ((𝔸(PUnit; S) ↘ S) ⁻¹ᵁ S₀).isOpen (hV α r) ⟨x₀, show _ ∈ S₀ from hx₀ ▸ hsS₀⟩
-    have hx' : x ∈ Set.range (AffineSpace.map PUnit S₀.ι) := by
-      rw [AffineSpace.range_map, Scheme.Opens.range_ι]
-      exact hx
-    obtain ⟨y, rfl⟩ := hx'
-    exact ⟨y, hxV⟩
-  choose g hg0 hg using fun α r ↦ AffineSpace.exists_ne_zero_forall_notMem_basicOpen _ (hV₀ α r)
-  -- invert all the leading coefficients
-  have : Fintype ((α : ι) × σ α) := Fintype.ofFinite _
-  set b : Γ(S₀, ⊤) := ∏ i : (α : ι) × σ α, (g i.1 i.2).leadingCoeff
-  have hb0 : b ≠ 0 := Finset.prod_ne_zero_iff.2 fun i _ ↦
-    Polynomial.leadingCoeff_ne_zero.2 (hg0 i.1 i.2)
-  set W' : S₀.toScheme.Opens := S₀.toScheme.basicOpen b
-  have hW'ne : (W' : Set S₀.toScheme).Nonempty := by
-    by_contra hne
-    rw [Set.not_nonempty_iff_eq_empty] at hne
-    exact hb0 (by simpa [W'] using hne)
-  have : IsAffine W' := (isAffineOpen_top S₀.toScheme).basicOpen b
-  have : Nonempty W' := hW'ne.to_subtype
-  have hb : IsUnit (W'.ι.appTop b) := by
-    refine W'.toScheme.toRingedSpace.isUnit_of_isUnit_germ ⊤ _ fun x _ ↦
-      (W'.toScheme.mem_basicOpen_top _ x).1 ?_
-    rw [← Scheme.preimage_basicOpen_top, Scheme.Opens.ι_preimage_self]
-    trivial
-  have hunit (α : ι) (r : σ α) : IsUnit (W'.ι.appTop (g α r).leadingCoeff) :=
-    isUnit_of_dvd_unit (map_dvd _ (Finset.dvd_prod_of_mem
-      (fun i : (α : ι) × σ α ↦ (g i.1 i.2).leadingCoeff) (Finset.mem_univ ⟨α, r⟩))) hb
-  set h : ∀ α, σ α → Γ(W', ⊤)[X] := fun α r ↦
-    Polynomial.C ((hunit α r).unit⁻¹ : Γ(W', ⊤)ˣ).1 * (g α r).map W'.ι.appTop.hom
-  have hmonic (α : ι) (r : σ α) : (h α r).Monic := by
-    refine Polynomial.monic_C_mul_of_mul_leadingCoeff_eq_one ?_
-    rw [Polynomial.leadingCoeff_map_of_leadingCoeff_ne_zero _ (hunit α r).ne_zero]
-    exact (hunit α r).val_inv_mul
-  set c : W'.toScheme ⟶ S := W'.ι ≫ S₀.ι
-  have hVh (α : ι) (r : σ α) (x : 𝔸(PUnit; W')) (hx : AffineSpace.map PUnit c x ∉ V α r) :
-      x ∉ 𝔸(PUnit; W').basicOpen
-        ((h α r).eval₂ (𝔸(PUnit; W') ↘ W').appTop.hom (AffineSpace.coord _ PUnit.unit)) := by
-    have h1 : AffineSpace.map PUnit W'.ι x ∉ AffineSpace.map PUnit S₀.ι ⁻¹ᵁ V α r := by
-      simpa [c, AffineSpace.map_comp] using hx
-    have h2 : x ∉ AffineSpace.map PUnit W'.ι ⁻¹ᵁ 𝔸(PUnit; S₀).basicOpen
-        ((g α r).eval₂ (𝔸(PUnit; S₀) ↘ S₀).appTop.hom (AffineSpace.coord _ PUnit.unit)) :=
-      hg α r _ h1
-    have hc : (AffineSpace.map PUnit W'.ι).appTop.hom.comp (𝔸(PUnit; S₀) ↘ S₀).appTop.hom =
-        (𝔸(PUnit; W') ↘ W').appTop.hom.comp W'.ι.appTop.hom := by
-      rw [← CommRingCat.hom_comp, ← CommRingCat.hom_comp, ← Scheme.Hom.comp_appTop,
-        ← Scheme.Hom.comp_appTop, AffineSpace.map_over]
-    rw [Scheme.preimage_basicOpen_top, Polynomial.hom_eval₂, hc, AffineSpace.map_appTop_coord,
-      ← Polynomial.eval₂_map] at h2
-    rw [Polynomial.eval₂_mul, Polynomial.eval₂_C, Scheme.basicOpen_mul]
-    exact fun hx' ↦ h2 hx'.2
-  refine ⟨c.opensRange, ?_, fun Z i _ hZ ↦ ?_⟩
-  · obtain ⟨t⟩ : Nonempty W' := inferInstance
-    exact ⟨c t, t, rfl⟩
-  -- the fibres of `Y ⟶ S` over `W` meet the complement in finitely many points
-  have hY (t : W') : {y : Y | p y = c t ∧ y ∈ (⋃ (α : ι) (r : σ α), (U α).ι ''
-      ((e α ≫ AffineSpace.reindex (fun _ : PUnit ↦ r) S) ⁻¹'
-        (V α r : Set 𝔸(PUnit; S))))ᶜ}.Finite := by
-    have hα (α : ι) : {u : U α | p ((U α).ι u) = c t ∧
-        ∀ r, AffineSpace.reindex (fun _ : PUnit ↦ r) S (e α u) ∉ V α r}.Finite := by
-      refine ((AffineSpace.finite_setOf_reindex_notMem c (V α) (h α) (hmonic α) (hVh α)
-        t).preimage (e α).injective.injOn).subset ?_
-      rintro u ⟨hut, hu⟩
-      refine ⟨?_, hu⟩
-      rw [← hut, ← Scheme.Hom.comp_apply, he, Scheme.Hom.comp_apply]
-    refine (Set.finite_iUnion fun α ↦ (hα α).image (U α).ι).subset ?_
-    rintro y ⟨hyt, hy⟩
+  set C : Set Y := (⋃ (α : ι) (r : σ α), (U α).ι ''
+    ((e α ≫ AffineSpace.reindex (fun _ : PUnit ↦ r) S) ⁻¹' (V α r : Set 𝔸(PUnit; S))))ᶜ
+  have hC : IsClosed C := by
+    refine (isOpen_iUnion fun α ↦ isOpen_iUnion fun r ↦ ?_).isClosed_compl
+    exact (U α).ι.isOpenEmbedding.isOpenMap _
+      ((V α r).2.preimage (e α ≫ AffineSpace.reindex (fun _ : PUnit ↦ r) S).continuous)
+  have hres {X T : Scheme.{u}} (f : X ⟶ T) (W : T.Opens) (x : (f ⁻¹ᵁ W).toScheme) :
+      W.ι ((f ∣_ W) x) = f ((f ⁻¹ᵁ W).ι x) := by
+    rw [← Scheme.Hom.comp_apply, morphismRestrict_ι, Scheme.Hom.comp_apply]
+  -- The fibre of `C` over the generic point is finite.
+  have hη : (C ∩ p ⁻¹' {genericPoint S}).Finite := by
+    refine (Set.finite_iUnion fun α ↦ ((finite_setOf_over_genericPoint (V α) (hV α)).preimage
+      (e α).isClosedEmbedding.injective.injOn).image (U α).ι).subset ?_
+    rintro y ⟨hyC, hyη⟩
     obtain ⟨α, hα⟩ : ∃ α, y ∈ U α := by
-      rw [← TopologicalSpace.Opens.mem_iSup, hU]
-      trivial
-    refine Set.mem_iUnion.2 ⟨α, ⟨y, hα⟩, ⟨hyt, fun r hr ↦ hy ?_⟩, rfl⟩
-    exact Set.mem_iUnion₂.2 ⟨α, r, ⟨y, hα⟩, by simpa using hr, rfl⟩
-  have hfib (t : W') : {z : Z | (i ≫ p) z = c t}.Finite :=
-    ((hY t).preimage i.injective.injOn).subset fun z hz ↦ ⟨hz, hZ ⟨z, rfl⟩⟩
-  have : LocallyQuasiFinite ((i ≫ p) ∣_ c.opensRange) := by
-    refine LocallyQuasiFinite.of_finite_preimage_singleton _ fun w ↦ ?_
-    obtain ⟨t, ht⟩ := w.2
-    refine ((hfib t).preimage ((i ≫ p) ⁻¹ᵁ c.opensRange).ι.injective.injOn).subset ?_
-    intro z hz
-    simp only [Set.mem_preimage, Set.mem_singleton_iff] at hz
-    change (i ≫ p) (((i ≫ p) ⁻¹ᵁ c.opensRange).ι z) = c t
-    rw [← Scheme.Hom.comp_apply, ← morphismRestrict_ι, Scheme.Hom.comp_apply, hz, ht]
+      simpa using (hU.ge (Set.mem_univ y) : y ∈ ⨆ α, U α)
+    refine Set.mem_iUnion.mpr ⟨α, ⟨y, hα⟩, ⟨?_, fun r hr ↦ hyC ?_⟩, rfl⟩
+    · rw [← Scheme.Hom.comp_apply, he, Scheme.Hom.comp_apply]
+      exact hyη
+    · exact Set.mem_iUnion₂.mpr ⟨α, r, ⟨y, hα⟩, hr, rfl⟩
+  -- The reduced closed subscheme supported on `C`.
+  let I := Scheme.IdealSheafData.vanishingIdeal (⟨C, hC⟩ : TopologicalSpace.Closeds Y)
+  have hrange : Set.range I.subschemeι = C := by
+    simp [I, Scheme.IdealSheafData.range_subschemeι]
+  obtain ⟨W, hηW, hW⟩ := exists_isFinite_morphismRestrict_of_finite_preimage_singleton
+    (I.subschemeι ≫ p) (genericPoint S) <| by
+      refine (hη.preimage I.subschemeι.isClosedEmbedding.injective.injOn).subset fun z hz ↦ ?_
+      exact ⟨hrange ▸ ⟨z, rfl⟩, hz⟩
+  refine ⟨W, ⟨_, hηW⟩, fun Z i _ hiC ↦ ?_⟩
+  have hfib (w : W) : (C ∩ p ⁻¹' {w.1}).Finite := by
+    refine ((Scheme.Hom.finite_preimage_singleton ((I.subschemeι ≫ p) ∣_ W) w).image
+      (((I.subschemeι ≫ p) ⁻¹ᵁ W).ι ≫ I.subschemeι)).subset ?_
+    rintro y ⟨hyC, hyw⟩
+    obtain ⟨z, rfl⟩ := hrange.ge hyC
+    have hzW : z ∈ (I.subschemeι ≫ p) ⁻¹ᵁ W := by
+      change p (I.subschemeι z) ∈ W
+      rw [hyw]
+      exact w.2
+    refine ⟨⟨z, hzW⟩, Subtype.ext ?_, rfl⟩
+    exact (hres _ W ⟨z, hzW⟩).trans hyw
+  have : LocallyQuasiFinite ((i ≫ p) ∣_ W) := by
+    refine .of_finite_preimage_singleton _ fun w ↦ ?_
+    refine ((hfib w).preimage (f := fun z ↦ i (((i ≫ p) ⁻¹ᵁ W).ι z))
+      (i.isClosedEmbedding.injective.comp
+        ((i ≫ p) ⁻¹ᵁ W).ι.isOpenEmbedding.injective).injOn).subset
+      fun z hz ↦ ⟨hiC ⟨_, rfl⟩, ?_⟩
+    change p (i (((i ≫ p) ⁻¹ᵁ W).ι z)) = w.1
+    rw [← Scheme.Hom.comp_apply i p, ← hres, hz]
     rfl
   exact IsFinite.of_isProper_of_locallyQuasiFinite _
-
 end AlgebraicGeometry

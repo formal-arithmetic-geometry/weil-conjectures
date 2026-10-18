@@ -6,7 +6,9 @@ Authors: Bin Wu
 
 module
 
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.Transition
+public import WeilConjectures.AlgebraicGeometry.HigherDirectImageTransitions
+
+
 
 /-! # Higher direct image transition compatibility
 

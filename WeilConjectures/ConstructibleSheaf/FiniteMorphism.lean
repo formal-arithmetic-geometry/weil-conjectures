@@ -6,13 +6,18 @@ Authors: Claude
 module
 
 public import WeilConjectures.ConstructibleSheaf.Noetherian
-public import WeilConjectures.ConstructibleSheaf.FinitePushforward.LisseGeneric
-public import WeilConjectures.ConstructibleSheaf.LisseLocus
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Integral
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import WeilConjectures.Mathlib.Topology.NoetherianSpace
 public import WeilConjectures.SixFunctors.Finite.BaseChange
 public import WeilConjectures.SixFunctors.Finite.Counit
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.AlgebraicGeometry.ConstructibleModuleUnderlyingSets
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAbelianLiftHom
+import WeilConjectures.AlgebraicGeometry.EtalePullbackForgetModules
+import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
+import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteStalksComparison
+import WeilConjectures.AlgebraicGeometry.GenericFinitePushforward
+import WeilConjectures.AlgebraicGeometry.LisseModuleSheaves
 
 /-!
 # Finite direct images of constructible sheaves on Noetherian schemes
@@ -68,77 +73,48 @@ is constructible.
 
 Let `S` be an integral Noetherian affine scheme, `g : Z ⟶ S` a finite morphism and `E` a
 constructible sheaf of `Λ`-modules on `Z_ét`. Then there is a dense open `S° ⊆ S` on which the
-direct image `g_* E` is finite locally constant (lisse).
-
-The sheaf `E` is finite locally constant on a dense open `W ⊆ Z`, which contains the whole
-generic fibre of `g` (inside a fibre of a finite morphism there are no nontrivial
-specializations), so over an affine open `U₀` avoiding the closed set `g(Z ∖ W)` the sheaf `E`
-is finite locally constant. By finite base change it remains to treat the direct image of a
-finite locally constant sheaf, which is
-`AlgebraicGeometry.Etale.exists_isOpenImmersion_isFiniteLocallyConstantSheaf_lowerStar`. -/
+direct image `g_* E` is finite locally constant (lisse). -/
 theorem Etale.exists_dense_isFiniteLocallyConstantSheaf_lowerStar {S Z : Scheme.{u}}
     [IsIntegral S] [IsAffine S] [IsNoetherian S] (g : Z ⟶ S) [IsFinite g]
     (E : Sheaf Z.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [IsConstructibleSheaf E] :
     ∃ U : S.Opens, Dense (U : Set S) ∧
       IsFiniteLocallyConstantSheaf
         ((U.ι)^*[ModuleCat.{u + 1} Λ].obj ((g)_*[ModuleCat.{u + 1} Λ].obj E)) := by
-  -- `E` is finite locally constant on a dense open `W` of `Z`
-  obtain ⟨W, hW, hEW⟩ := IsConstructibleSheaf.exists_dense_open E
-  have : IsLocallyNoetherian Z := LocallyOfFiniteType.isLocallyNoetherian g
-  have : CompactSpace Z := QuasiCompact.compactSpace_of_compactSpace g
-  have : IsNoetherian Z := {}
-  -- the closed image `g(Z ∖ W)` misses the generic point of `S`: a point `z` over it has a
-  -- generalization in `W`, which also lies over the generic point, hence equals `z`
-  have hF : IsClosed (g.base '' (W : Set Z)ᶜ) := g.isClosedMap _ W.isOpen.isClosed_compl
-  have hη : genericPoint S ∉ g.base '' (W : Set Z)ᶜ := by
-    rintro ⟨z, hz, hzη⟩
-    obtain ⟨w, hwW, hwz⟩ := hW.exists_specializes_of_isOpen W.isOpen z
-    have hgw : g.base w = g.base z := by
-      rw [hzη]
-      exact (((hwz.map g.continuous).trans (hzη ▸ specializes_rfl)).antisymm
-        ((genericPoint_spec S).specializes (Set.mem_univ _))).eq
-    exact hz (g.eq_of_specializes_of_apply_eq_of_isIntegralHom hwz hgw ▸ hwW)
-  -- an affine open `U₀ ∋ η` avoiding `g(Z ∖ W)`
-  obtain ⟨_, ⟨(U₀ : S.Opens), hU₀, rfl⟩, hηU₀, hU₀F⟩ :=
-    S.isBasis_affineOpens.exists_subset_of_mem_open hη hF.isOpen_compl
-  have : IsAffine U₀ := hU₀
-  have : Nonempty U₀ := ⟨⟨_, hηU₀⟩⟩
-  have : IsIntegral U₀ := isIntegral_of_isOpenImmersion U₀.ι
-  have : IsNoetherian U₀ := {}
-  -- over `U₀` the sheaf `E` is finite locally constant
-  have hrange : Set.range (pullback.fst g U₀.ι).base ⊆ Set.range W.ι.base := by
-    rintro _ ⟨x, rfl⟩
-    rw [Scheme.Opens.range_ι]
-    by_contra hx
-    refine hU₀F (show (pullback.fst g U₀.ι ≫ g) x ∈ U₀ from ?_) ⟨_, hx, rfl⟩
-    rw [pullback.condition, Scheme.Hom.comp_apply]
-    exact ((pullback.snd g U₀.ι).base x).2
-  have := IsFiniteLocallyConstantSheaf.upperStar_of_range_subset _ W.ι hrange E
-  -- the direct image over `U₀` is finite locally constant on an open of `U₀`
-  obtain ⟨S', j, hj, hS', hlisse⟩ :=
-    Etale.exists_isOpenImmersion_isFiniteLocallyConstantSheaf_lowerStar
-      (pullback.snd g U₀.ι) ((pullback.fst g U₀.ι)^*[ModuleCat.{u + 1} Λ].obj E)
-  have sq := IsPullback.of_hasPullback g U₀.ι
-  have := Etale.isIso_baseChangeMap_of_isFinite (ModuleCat.{u + 1} Λ) sq
-  let e := asIso ((Etale.baseChangeMap (ModuleCat.{u + 1} Λ) sq.toCommSq).app E)
-  have hk : IsFiniteLocallyConstantSheaf
-      ((j ≫ U₀.ι)^*[ModuleCat.{u + 1} Λ].obj ((g)_*[ModuleCat.{u + 1} Λ].obj E)) :=
-    IsFiniteLocallyConstantSheaf.of_iso (F := (j)^*[ModuleCat.{u + 1} Λ].obj
-      ((pullback.snd g U₀.ι)_*[ModuleCat.{u + 1} Λ].obj
-        ((pullback.fst g U₀.ι)^*[ModuleCat.{u + 1} Λ].obj E)))
-      (((j)^*[ModuleCat.{u + 1} Λ]).mapIso e.symm ≪≫
-      ((upperStarComp (ModuleCat.{u + 1} Λ) j U₀.ι).app _).symm)
-  -- the open `U` is the image of `j ≫ U₀.ι`
-  refine ⟨(j ≫ U₀.ι).opensRange, (j ≫ U₀.ι).opensRange.isOpen.dense ?_, ?_⟩
-  · obtain ⟨s⟩ := hS'
-    exact ⟨_, s, rfl⟩
-  · have := IsFiniteLocallyConstantSheaf.upperStar (j ≫ U₀.ι).isoOpensRange.inv
-      ((j ≫ U₀.ι)^*[ModuleCat.{u + 1} Λ].obj ((g)_*[ModuleCat.{u + 1} Λ].obj E))
-    exact IsFiniteLocallyConstantSheaf.of_iso
-      (F := ((j ≫ U₀.ι).isoOpensRange.inv)^*[ModuleCat.{u + 1} Λ].obj
-        ((j ≫ U₀.ι)^*[ModuleCat.{u + 1} Λ].obj ((g)_*[ModuleCat.{u + 1} Λ].obj E)))
-      ((upperStarComp (ModuleCat.{u + 1} Λ) (j ≫ U₀.ι).isoOpensRange.inv (j ≫ U₀.ι) _
-        (by simp)).app _).symm
+  -- the generic lissity of finite direct images of constructible abelian sheaves, applied to
+  -- the underlying sheaf of abelian groups of `E`
+  have hE := isConstructibleEtaleSheafOfSets_of_module Λ E
+    ((isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf E).2 inferInstance)
+  obtain ⟨U, hU, hlisse⟩ := exists_dense_open_lisse_finite_directImage S g _ hE
+  refine ⟨U, hU, ?_⟩
+  let H := (g)_*[ModuleCat.{u + 1} Λ].obj E
+  let G := (U.ι)^*[ModuleCat.{u + 1} Λ].obj H
+  -- inverse image commutes with forgetting the module structure
+  obtain ⟨em⟩ := Etale.pullback_forget_modules_iso Λ U.ι H
+  have hL : PreservesFiniteLimits (etaleSetPullback U.ι) := by
+    unfold etaleSetPullback Functor.sheafPullbackConstruction.sheafPullback
+    let : AB5OfSize.{u, u + 1} (Type (u + 1)) :=
+      AB5OfSize_of_univLE.{u, u + 1, u + 1, u + 1} (Type (u + 1))
+    infer_instance
+  obtain ⟨ea, -⟩ := etaleInverseImageAbelianLift_hom U S U.ι hL
+  let e : (sheafForget U.toScheme.smallEtaleTopology).obj G ≅ _ :=
+    (sheafCompose U.toScheme.smallEtaleTopology (forget AddCommGrpCat.{u + 1})).mapIso em ≪≫
+      ea.app ((sheafCompose S.smallEtaleTopology
+        (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj H)
+  -- so the underlying sheaf of sets of `G` is finite locally constant
+  have hT : IsFiniteLocallyConstantSheafOfTypes
+      ((sheafForget U.toScheme.smallEtaleTopology).obj G) := by
+    obtain ⟨⟨𝒰, h𝒰⟩, hfin⟩ := hlisse
+    refine ⟨⟨𝒰, fun j ↦ ?_⟩, isFiniteSheaf_of_finite_algClosed_stalks _ fun Ω _ _ s ↦ ?_⟩
+    · exact @Sheaf.isConstant_congr _ _ _ _ _ _ _ _
+        ((U.toScheme.smallEtaleTopology.overPullback (Type (u + 1)) _).mapIso e.symm) (h𝒰 j)
+    · exact @Finite.of_equiv _ _ ((ConcreteCategory.isFinitelyGenerated_iff_finite _).mp
+          (hfin.isFinitelyGenerated_sheafFiber Ω s))
+        ((pointSmallEtale s).sheafFiber.mapIso e.symm).toEquiv
+  -- over the finite ring `Λ` this makes `G` itself finite locally constant
+  obtain ⟨𝒰, h𝒰⟩ := (lisseModuleSheaf_iff_underlying_finiteLocallyConstant G).2 hT
+  refine (finite_locally_constant_module_values_iff G).1.1 ⟨⟨𝒰, fun i ↦ ?_⟩, h𝒰⟩
+  obtain ⟨M, _, ⟨e⟩⟩ := h𝒰 i
+  exact Sheaf.isConstant_of_iso _ e
 
 /-- The generic step of `AlgebraicGeometry.Scheme.IsConstructibleSheaf.lowerStar_of_isFinite`:
 a nonempty closed subset `Z` of the Noetherian base has a nonempty relatively open subset
