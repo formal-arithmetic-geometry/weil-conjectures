@@ -16154,3 +16154,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:29 L: merged deliver/S4/Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlatLimits (stage 3; reviewer PASS; first push; landing 20261018T062909-L-675165 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:29 L: merged deliver/S4/Sheaf.CategoryTheory.FunctorPreservesSequentialHomotopyColimit (stage 3; reviewer PASS; first push; landing 20261018T062910-L-675490 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:29 L: merged deliver/S4/Sheaf.CategoryTheory.RingedSiteCechRefinementSquare (stage 3; reviewer PASS; first push; landing 20261018T062910-L-675769 (proof); batch 20261018T062645; modules 1; new nodes 1)
+- 06:29 L: merged deliver/S4/Sheaf.CategoryTheory.SequentialTowerEvaluationFull (stage 3; reviewer PASS; first push; landing 20261018T062911-L-675969 (proof); batch 20261018T062645; modules 1; new nodes 0)
