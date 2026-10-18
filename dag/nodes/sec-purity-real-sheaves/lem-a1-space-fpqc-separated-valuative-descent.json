@@ -242,5 +242,29 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-997b68ff9 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps, both new nodes and the statement of every cited node in full. Sources checked: Bhatt–Scholze 7.3.9 p.67 ('Lemma 7.3.6 and descent'), Stacks 0421 and 04P2 (spaces-descent), 089F (spaces-morphisms) with its proof, the more-algebra definition that an extension of valuation rings is injective and local, and the tags 02L6/0421/04P2/089F in tags/tags. The item statement is unchanged, true, not weakened, and is what step 6 of lem-a1-proetale-local-system-representability uses. Step 1: the scheme equalizer W of two maps into E is tested on the base-changed fpqc cover T_i and descended with 02L6 applied to the scheme map W→T. Step 2: an ideal killed in the fraction field is zero. Steps 3–4: 089F applied with b=id gives an injective local map R→R'; torsion-free implies flat for R' and K', flat plus local gives faithfully flat, and the finite principal-open clause of the fpqc definition is checked explicitly. Step 6: R'⊗R'→K'⊗K' is injective by two flat-tensor applications; the two K-structures on D agree because nonzero r in R is invertible; the closed equalizer then forces J=0. Step 7: the 04P2 gluing, then the 04P2 uniqueness on {Spec K'→Spec K} recovers a. New nodes: lem-a1-flat-valuation-lifting matches 089F specialized to schemes, and lem-a1-algebraic-space-fpqc-sheaf matches the 04P2 equalizer with scheme domains. Both are statement-only, record all three search kinds, have correct blueprint.from/via and are not clauses of the item. Duplicate check: lem-weil-pbc-fpqc-representable-descent (023Q) has scheme targets only, and the other algebraic-space/fpqc nodes, the Nagata domination nodes and the proper specialization lift state different things. Accepted tool use: lem-pc-fpqc-descend-closed-immersion (sk-thm-picard-rr) as generic closed-immersion descent. Batch-5 check: def-trf-algebraic-space and def-trf-valuation-ring are general definitions, and lem-trf-flat-tensor-preserves-injection and lem-trf-valuation-torsionfree-flat are generic Mathlib algebra leaves. None of the four is part of the trace-formula or Poincaré-duality proofs, so all are accepted. Edge cases: X or E empty, R a field, the identity cover, and an infinite disjoint union (shows that properness must not be assumed). No SGA cited. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cc52fc2fa",
+  "group": "NE",
+  "result": "fix",
+  "note": "Statement matches node clause by clause: E : AlgebraicSpace X with q its structure map; base change via (Over.map (f i)).op ⋙ E.obj.obj; fpqc cover via Scheme.fpqcPrecoverage; full valuative lifting ∀ R K b a, ∃! lift; no qc/ft/extra assumptions; universes bound (u, test rings in Type u). Edge cases: empty I/X/E, R a field, no generic section, empty tests. H4 fault: delivered HasClosedDiagonal duplicates landed AlgebraicSpace.IsSeparatedPresheafMap (Sheaf.TraceFormula.SpaceQCSeparatedEtaleLocal, lem-trf-space-qc-separated-etale-local, used by 2 landed modules). Fix replaces it by IsSeparatedPresheafMap (terminal.from F), same meaning; adds the public import, drops the unused ClosedImmersion import; gives lean-record.json (declarations, verbatim statement, note) and the report with a reviewer-fix section. HasFullValuativeLifting is real, has no existing equivalent, and is kept. Docstrings/source/blueprint/7-step proof ok, sorry only, node changed only in lean. nt_compile.py: delivered and fixed files clean (~2.5 s); error-injection control confirms diagnostics are reported; #check/#print axioms ok."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceFpqcValuativeDescent",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.closedDiagonal_and_fullValuativeLifting_of_fpqc_cover",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.HasFullValuativeLifting",
+   "AlgebraicGeometry.AlgebraicSpace.closedDiagonal_and_fullValuativeLifting_of_fpqc_cover"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceFpqcValuativeDescent.lean",
+  "statement": "theorem closedDiagonal_and_fullValuativeLifting_of_fpqc_cover {X : Scheme.{u}} (E : AlgebraicSpace X) {I : Type u} (U : I → Scheme.{u}) (f : ∀ i : I, U i ⟶ X) (hcover : Presieve.ofArrows U f ∈ Scheme.fpqcPrecoverage X) (hlocal : ∀ i : I, IsSeparatedPresheafMap (terminal.from ((Over.map (f i)).op ⋙ E.obj.obj)) ∧ HasFullValuativeLifting ((Over.map (f i)).op ⋙ E.obj.obj)) : IsSeparatedPresheafMap (terminal.from E.obj.obj) ∧ HasFullValuativeLifting E.obj.obj",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Separatedness (closed diagonal, every scheme test a closed immersion) is the project's landed AlgebraicGeometry.AlgebraicSpace.IsSeparatedPresheafMap (Sheaf.TraceFormula.SpaceQCSeparatedEtaleLocal, the separatedness predicate of lem-trf-space-qc-separated-etale-local) applied to the structure map terminal.from F; the terminal presheaf on Over X is h_X, so this is q : E -> X, and its presheaf pullback over the terminal object is E x_X E. The reviewer's fix replaced the delivered duplicate HasClosedDiagonal by it (H4). HasFullValuativeLifting is a real Prop definition spelling out the full valuative lifting property defined explicitly in this node; no project or Mathlib declaration states it for presheaves/algebraic spaces. For E over X, q is its structure morphism; precomposition with (Over.map (f i)).op is the functor of points of the actual base change E x_X U_i over U_i. No presentation, additional structure, finiteness hypothesis, or arbitrary comparison map is assumed.",
+  "fixed_by": "NT-stage2-cc-cc52fc2fa"
  }
 }
