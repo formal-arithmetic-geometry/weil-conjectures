@@ -1,0 +1,144 @@
+{
+ "id": "lem-kun-strict-local-coefficient-presentation",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0f10",
+   "place": "Proof of affine clause (1), support estimate via Tag 0F0X: coefficient field and strict-local models supplied by Tag 0F0U.",
+   "via": [
+    "lem-kun-strict-local-algebraic-residue-models",
+    "lem-kun-affine-direct-image-support-bound"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A coefficient-compatible etale presentation of a strict localization",
+ "statement": "Let $K$ be a field, $Y$ a finite-type $K$-scheme [def-weil-scheme-over-base], [def-weil-finite-type-morphism], and $s:\\operatorname{Spec}\\Omega\\to Y$ a geometric point with $\\Omega$ algebraically closed [def-weil-geometric-point]. Put $y=s(\\operatorname{closedPoint}\\Omega)$ and $B=\\mathcal O^{\\mathrm{sh}}_{Y,s}$ [def-weil-pbc-strict-henselization-limit]. There exist an affine open $U$ containing $y$, a separably closed extension $L/K$ with $\\operatorname{trdeg}_K L=\\operatorname{trdeg}_K\\kappa(y)$ [def-kun-separably-closed], [def-kun-transcendence-degree], [def-weil-residue-field], a commutative domain $R$, compatible $R$- and $\\operatorname{Frac}(R)$-algebra structures on $L$ with $L/\\operatorname{Frac}(R)$ algebraic, and a ring map $r:R\\to\\Gamma(U,\\mathcal O_U)$. In addition there exist a small filtered category $I$ [def-weil-pbc-category-colimit], a diagram $E:I\\to (\\Gamma(U,\\mathcal O_U)\\downarrow\\mathbf{CRing})$, a cocone $c$, a ring map $h:L\\to c.\\mathrm{pt}.\\mathrm{right}$, and an isomorphism $e:\\operatorname{Spec}B\\cong\\operatorname{Spec}(c.\\mathrm{pt}.\\mathrm{right})$. The underlying ring cocone is colimiting and its vertex is nonzero. The composite of $e$, $\\operatorname{Spec}(c.\\mathrm{pt}.\\mathrm{hom})$, the affine-spectrum identification [def-weil-affine-spectrum], and $U\\hookrightarrow Y$ is the canonical structural map [def-weil-pbc-strict-henselization-structural-map]. The composites $R\\xrightarrow r\\Gamma(U)\\to c.\\mathrm{pt}.\\mathrm{right}$ and $K\\to\\Gamma(U)\\to c.\\mathrm{pt}.\\mathrm{right}$ agree respectively with $R\\to L\\xrightarrow h c.\\mathrm{pt}.\\mathrm{right}$ and $K\\to L\\xrightarrow h c.\\mathrm{pt}.\\mathrm{right}$. For every $i$, $\\operatorname{Spec}(E_i.\\mathrm{hom})$ is étale. Algebraic means each element satisfies a nonzero polynomial, and $\\operatorname{Frac}(R)$ is the fraction field of the domain $R$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F0U, lemma-strictly-henselian, proof before the compatible-model footnote; Tag 0F0X, lemma-interlude-I, second paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-over-base",
+  "def-weil-finite-type-morphism",
+  "def-weil-geometric-point",
+  "def-kun-transcendence-degree",
+  "def-weil-residue-field",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-kun-separably-closed",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-weil-affine-spectrum",
+  "lem-kun-strict-local-coefficient-chart",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Choose U,L,R,r,a,h from the coefficient-chart theorem. The map Spec Gamma(U)→Y is the affine chart. The displayed structural-map equation supplies the compatibility required by strictHenselization_indEtale_of_affine_chart, with A=B and the identity spectrum isomorphism. Thus a is ind-etale.",
+   "uses": [
+    "lem-kun-strict-local-coefficient-chart",
+    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0U, lemma-strictly-henselian, proof before the compatible-model footnote; Tag 0F0X, lemma-interlude-I, second paragraph"
+   }
+  },
+  {
+   "text": "Unpack RingHom.IndEtale.iff_exists into a small filtered ring diagram D, maps t_i:Gamma(U)→D_i, a colimit cocone b_i:D_i→B, and the equations t_i;b_i=a. Regard D as a diagram E in Under Gamma(U), and the same cocone as a cocone c of E with vertex a. Forgetting under-objects recovers the given ring colimit definitionally. The identity spectrum isomorphism preserves the structural map and all scalar equations. Each t_i is etale by the affine spectrum criterion.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0U, lemma-strictly-henselian, proof before the compatible-model footnote; Tag 0F0X, lemma-interlude-I, second paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-strict-local-coefficient-chart",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F0U, lemma-strictly-henselian, proof before the compatible-model footnote; Tag 0F0X, lemma-interlude-I, second paragraph; C2 uses coefficient-enlarged images in place of compatible tensor products."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite type scheme strict henselization admits a separably closed coefficient field algebraic over a rational function field lifting a finite transcendence basis",
+   "results": "8 hits, including separableClosure and field-theory declarations; no coefficient chart or strict-local presentation.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict henselization of finite type scheme inverse limit affine models over separably closed coefficient field algebraic residue extensions",
+   "results": "8 hits, including Scheme.SpecToEquivOfField and HenselianLocalRing.TFAE; no strict-local coefficient chart or model theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "strictHenselization|algebraicResidue",
+   "results": "0 Mathlib hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictLocalAlgebraicResidueModels",
+  "date": "2026-10-18",
+  "group": "C2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalCoefficientPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalCoefficientPresentation.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_strictLocal_coefficient_presentation",
+  "statement": "theorem exists_strictLocal_coefficient_presentation\n    {K : Type u} [Field K] (Y : Scheme.{u}) [Y.Over (Spec (.of K))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of K))] [QuasiCompact (Y ↘ Spec (.of K))]\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y) :\n    ∃ U : Y.Opens, s (IsLocalRing.closedPoint Ω) ∈ U ∧\n      ∃ hU : IsAffineOpen U,\n      ∃ (L : Type u) (_ : Field L) (_ : Algebra K L) (_ : IsSepClosed L),\n        Algebra.trdeg K L =\n          @Algebra.trdeg K (Y.residueField (s (IsLocalRing.closedPoint Ω))) _ _\n            (((Y ↘ Spec (.of K)).residueFieldAlgebraMap\n              (s (IsLocalRing.closedPoint Ω))).toAlgebra) ∧\n        ∃ (R : Type u) (_ : CommRing R) (_ : IsDomain R)\n          (_ : Algebra R L) (_ : Algebra (FractionRing R) L)\n          (_ : IsScalarTower R (FractionRing R) L)\n          (_ : Algebra.IsAlgebraic (FractionRing R) L)\n          (r : CommRingCat.of R ⟶ Γ(U.toScheme, ⊤))\n          (I : Type u) (_ : SmallCategory I) (_ : IsFiltered I)\n          (E : I ⥤ Under Γ(U.toScheme, ⊤)) (c : Cocone E)\n          (h : L →+* c.pt.right)\n          (e : strictHenselizationScheme s ≅ Spec c.pt.right),\n          Nonempty (IsColimit ((Under.forget _).mapCocone c)) ∧\n          Nontrivial c.pt.right ∧\n          e.hom ≫ Spec.map c.pt.hom ≫ (@Scheme.isoSpec U.toScheme hU).inv ≫ U.ι =\n            strictHenselizationStructuralMap s ∧\n          r ≫ c.pt.hom = CommRingCat.ofHom (algebraMap R L) ≫ CommRingCat.ofHom h ∧\n          (ΓSpecIso (.of K)).inv ≫ (U.ι ≫ (Y ↘ Spec (.of K))).appTop ≫ c.pt.hom =\n            CommRingCat.ofHom (algebraMap K L) ≫ CommRingCat.ofHom h ∧\n          ∀ i : I, Etale (Spec.map (E.obj i).hom)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261018T071139-L-1664779",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261018T071139-L-1664779",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

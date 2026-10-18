@@ -1,0 +1,167 @@
+{
+ "id": "lem-kun-strict-local-rational-chart",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-0f10",
+   "place": "Proof of affine clause (1), support estimate via Tag 0F0X: coefficient field and strict-local models supplied by Tag 0F0U.",
+   "via": [
+    "lem-kun-strict-local-algebraic-residue-models",
+    "lem-kun-affine-direct-image-support-bound"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "A rational chart in a strict-local ring",
+ "statement": "Let $K$ be a field, $Y$ a finite-type $K$-scheme [def-weil-scheme-over-base], [def-weil-finite-type-morphism], and $s:\\operatorname{Spec}\\Omega\\to Y$ a geometric point [def-weil-geometric-point]. Put $y=s(\\operatorname{closedPoint}\\Omega)$ and $B=\\mathcal O^{\\mathrm{sh}}_{Y,s}$ [def-weil-pbc-strict-henselization-limit]. There exist an affine open $U$ containing $y$, a commutative domain $K$-algebra $R$, maps $r:R\\to\\Gamma(U)$ and $a:\\Gamma(U)\\to B$, and a $\\operatorname{Frac}(R)$-algebra structure on $B$. The ring $B$ is nonzero. The map $\\operatorname{Spec}a$ followed by the canonical affine isomorphism and $U\\hookrightarrow Y$ is the strict-local structural map [def-weil-affine-spectrum], [def-weil-pbc-strict-henselization-structural-map]. The composite $a r$ is the composite $R\\to\\operatorname{Frac}(R)\\to B$. The canonical $K$-scalar map $K\\to\\Gamma(U)\\to B$ is $K\\to\\operatorname{Frac}(R)\\to B$. Finally $\\operatorname{trdeg}_K\\operatorname{Frac}(R)=\\operatorname{trdeg}_K\\kappa(y)$ [def-kun-transcendence-degree], [def-weil-residue-field].",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F0U, lemma-strictly-henselian, proof before the compatible-model footnote; Tag 0F0X, lemma-interlude-I, second paragraph"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-over-base",
+  "def-weil-finite-type-morphism",
+  "def-weil-geometric-point",
+  "def-kun-transcendence-degree",
+  "def-weil-residue-field",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-weil-affine-spectrum"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite transcendence basis of the finite-type residue field at y. Lift its finitely many elements through stalk residues and germs, and choose a common affine neighbourhood U. Let R be the polynomial ring over K on these lifted functions. Algebraic independence makes its residue evaluation injective, including for an empty basis.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-kun-finite-type-residue-trdeg",
+    "lem-weil-pbc-finitely-generated-field-finite-transcendence-basis",
+    "def-kun-transcendence-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0U, lemma-strictly-henselian, proof before the compatible-model footnote; Tag 0F0X, lemma-interlude-I, second paragraph"
+   }
+  },
+  {
+   "text": "The strict-local ring B is nonzero and local, with closed point mapping to y. Every point of Spec B generalizes its closed point; thus the structural morphism factors through U. Affine-spectrum full faithfulness supplies a and identifies its scalar map.",
+   "uses": [
+    "lem-weil-pbc-strict-henselization-functoriality",
+    "def-weil-pbc-strict-henselization-structural-map",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0U, lemma-strictly-henselian, proof before the compatible-model footnote; Tag 0F0X, lemma-interlude-I, second paragraph"
+   }
+  },
+  {
+   "text": "Every nonzero polynomial in the lifts has nonzero residue, hence is a unit in B. Localization extends the polynomial evaluation uniquely to FractionRing R. Its defining equations give both scalar compatibilities. The size of the transcendence basis computes both transcendence degrees.",
+   "uses": [
+    "def-kun-transcendence-degree",
+    "lem-kun-transcendence-degree-tower"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F0U, lemma-strictly-henselian, proof before the compatible-model footnote; Tag 0F0X, lemma-interlude-I, second paragraph"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-kun-finite-type-residue-trdeg",
+  "lem-weil-pbc-finitely-generated-field-finite-transcendence-basis",
+  "def-kun-transcendence-degree",
+  "lem-weil-pbc-strict-henselization-functoriality",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-weil-affine-spectrum",
+  "lem-kun-transcendence-degree-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 0F0U, lemma-strictly-henselian, proof before the compatible-model footnote; Tag 0F0X, lemma-interlude-I, second paragraph; C2 proves the rational chart using affine germ lifts, the closed-point structural identity and polynomial localization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A finite transcendence basis of a scheme residue field lifts to affine regular functions whose rational function field embeds in the strict henselization",
+   "results": "8 hits: IsTranscendenceBasis, exists_isTranscendenceBasis and its variants; no affine lifting or strict-local rational-chart theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite transcendence basis of a scheme residue field lifts to affine regular functions whose rational function field embeds in the strict henselization",
+   "results": "8 hits, including Scheme.residueField, Scheme.functionField, Scheme.descResidueField and Scheme.SpecToEquivOfField; no rational-chart theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalRing, FractionRing, Algebra",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists.*germ|lift.*FractionRing|lift.*transcendence",
+   "results": "25 hits, including Presheaf.exists_germ_eq, Scheme.exists_isUnit_germ_eq, FractionRing lift algebra facts; no combined rational-chart construction.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.StrictLocalAlgebraicResidueModels",
+  "date": "2026-10-18",
+  "group": "C2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.StrictLocalRationalChart",
+  "file": "lean/Sheaf/AlgebraicGeometry/StrictLocalRationalChart.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_strictLocal_rational_chart",
+  "statement": "theorem exists_strictLocal_rational_chart\n    {K : Type u} [Field K] (Y : Scheme.{u}) [Y.Over (Spec (.of K))]\n    [LocallyOfFiniteType (Y ↘ Spec (.of K))] [QuasiCompact (Y ↘ Spec (.of K))]\n    {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ Y) :\n    ∃ U : Y.Opens, s (IsLocalRing.closedPoint Ω) ∈ U ∧\n      ∃ hU : IsAffineOpen U,\n      ∃ (R : Type u) (_ : CommRing R) (_ : IsDomain R) (_ : Algebra K R)\n        (r : CommRingCat.of R ⟶ Γ(U.toScheme, ⊤))\n        (a : Γ(U.toScheme, ⊤) ⟶ strictHenselizationRing s)\n        (_ : Algebra (FractionRing R) (strictHenselizationRing s)),\n        Nontrivial (strictHenselizationRing s) ∧\n        Spec.map a ≫ (@Scheme.isoSpec U.toScheme hU).inv ≫ U.ι =\n          strictHenselizationStructuralMap s ∧\n        (r ≫ a).hom = (algebraMap (FractionRing R) (strictHenselizationRing s)).comp\n          (algebraMap R (FractionRing R)) ∧\n        ((ΓSpecIso (.of K)).inv ≫ (U.ι ≫ (Y ↘ Spec (.of K))).appTop ≫ a).hom =\n          (algebraMap (FractionRing R) (strictHenselizationRing s)).comp\n            (algebraMap K (FractionRing R)) ∧\n        Algebra.trdeg K (FractionRing R) =\n          @Algebra.trdeg K (Y.residueField (s (IsLocalRing.closedPoint Ω))) _ _\n            (((Y ↘ Spec (.of K)).residueFieldAlgebraMap\n              (s (IsLocalRing.closedPoint Ω))).toAlgebra)",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261018T071139-L-1664779",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261018T071139-L-1664779",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
