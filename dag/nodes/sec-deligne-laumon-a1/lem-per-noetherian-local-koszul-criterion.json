@@ -12,9 +12,53 @@
   "def-weil-pbc-koszul-complex",
   "def-weil-pbc-regular-sequence"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $r=0$, there are no successive injectivity conditions and the final quotient is $R\\ne0$, so [def-weil-pbc-regular-sequence] gives the conclusion. Assume now $r>0$. Put $I=(f_1,\\ldots,f_r)$ and $B=R/I$ [def-weil-pbc-algebra-hom-quotient]. Since each $f_j\\in\\mathfrak m$, $I\\subseteq\\mathfrak m$ and hence $1\\notin I$, so $B\\ne0$. Taking $i=1$ in the assumed positive-degree vanishing gives $H_1(K_R(f_1,\\ldots,f_r))=0$.",
+   "uses": [
+    "def-weil-pbc-regular-sequence",
+    "def-weil-pbc-algebra-hom-quotient"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 09CC, lemma-noetherian-finite-all-equivalent, implication (2) to (3); empty sequence and properness made explicit."
+   }
+  },
+  {
+   "text": "Apply [lem-per-h1-koszul-quasi-regular] to the ring $R$ and this tuple, using the $H_1$ vanishing of Step 1. It gives an isomorphism of graded $B$-algebras\n$$\\theta:B[T_1,\\ldots,T_r]\\xrightarrow{\\sim}\\operatorname{gr}_I(R),\\qquad T_j\\longmapsto[f_j]_1.$$\nThis is the canonical map: on degree-zero coefficients it is the identity, and on degree-$n$ monomials it sends $\\bar aT^\\alpha$ to $[a f^\\alpha]_n$. Thus the conclusion gives the specified generator-preserving associated-graded isomorphism, not merely an abstract isomorphism of the two rings. This application requires neither locality nor Noetherianity.",
+   "uses": [
+    "lem-per-h1-koszul-quasi-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tags 09CC and 062I, lemma-noetherian-finite-all-equivalent, implication (3) to (4), and lemma-H1-regular-quasi-regular with M=R."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-quasi-regular-noetherian-local] with $A=R$, $b=r$, $J=I$ and $C=B$. Its ring is nonzero, local and Noetherian by the hypotheses of this item, and all its generators lie in the maximal ideal by the same hypotheses. Its canonical polynomial-to-associated-graded isomorphism is precisely $\\theta$ from Step 2, with the same images of the variables. Its conclusion is that $f_1,\\ldots,f_r$ is an $R$-regular sequence, including both the successive injectivity conditions and the nonzero final quotient. This proves the assertion for $r>0$; Step 1 already handled $r=0$.",
+   "uses": [
+    "lem-pur-quasi-regular-noetherian-local"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 061S, lemma-quasi-regular-regular, specialized to M=R; this is implication (4) to (1) in Tag 09CC."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-algebra-hom-quotient",
+  "def-weil-pbc-regular-sequence",
+  "lem-per-h1-koszul-quasi-regular",
+  "lem-pur-quasi-regular-noetherian-local"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 09CC, lemma-noetherian-finite-all-equivalent, the route (2) to (3) to (4) to (1), using Tag 062I and Algebra Tag 061S with M=R."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -43,10 +87,52 @@
    "results": "{\"t\": \"2026-10-18T22:12:23Z\", \"tool\": \"leansearch\", \"query\": \"Koszul regular sequence in Noetherian local ring is a regular sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsRegular\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"IsLocalRing.isRegular_of_perm\", \"RingTheory.Sequence.IsWeaklyRegular.mk\", \"RingTheory.Sequence.isRegular_cons_iff\", \"IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal\", \"RingTheory.Sequence.isRegular_iff\", \"RingTheory.Sequence.isWeaklyRegular_iff\"], \"digest\": \"a9b0b1224c08ee1e\"}; Read the hits: the regular-sequence definitions, localization and permutation lemmas do not infer regularity from positive Koszul homology vanishing; the source explicitly lists Koszul regularity as TODO.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*regular|regular.*koszul|IsKoszulRegular",
+   "results": "{\"t\": \"2026-10-18T22:45:14Z\", \"tool\": \"grep\", \"query\": \"koszul.*regular|regular.*koszul|IsKoszulRegular\", \"sub\": \"RingTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Regular/RegularSequence.lean\"], \"digest\": \"e93f847680f4c3f4\"}; Read the returned types: regular-sequence hits assume weak regularity, cotangent hits concern smooth presentations, and generic homology hits identify kernels/cokernels. None supplies the stated Koszul-to-associated-graded implication or local converse. Mathlib/RingTheory/Regular/RegularSequence.lean:21 lists Koszul, H_1-regular and quasi-regular sequences as TODO; its local iff at lines 511–518 starts from weak regularity, not Koszul homology.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Koszul acyclicity detects regular sequences over Noetherian local rings",
+   "results": "{\"t\": \"2026-10-18T22:45:15Z\", \"tool\": \"leansearch\", \"query\": \"Koszul acyclicity detects regular sequences over Noetherian local rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsRegular\", \"HomologicalComplex.Acyclic\", \"ringKrullDim_add_length_eq_ringKrullDim_of_isRegular\", \"IsLocalRing.isRegular_of_perm\", \"RingTheory.Sequence.IsRegular.nontrivial\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"RingTheory.Sequence.isWeaklyRegular_iff\", \"RingTheory.Sequence.IsRegular.top_ne_smul\"], \"digest\": \"b94ce464020e04a6\"}; Read the returned types: regular-sequence hits assume weak regularity, cotangent hits concern smooth presentations, and generic homology hits identify kernels/cokernels. None supplies the stated Koszul-to-associated-graded implication or local converse. Mathlib/RingTheory/Regular/RegularSequence.lean:21 lists Koszul, H_1-regular and quasi-regular sequences as TODO; its local iff at lines 511–518 starts from weak regularity, not Koszul homology.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegular\", \"Koszul\"",
+   "results": "{\"t\": \"2026-10-18T22:45:15Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRegular\\\", \\\"Koszul\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}; Read the returned types: regular-sequence hits assume weak regularity, cotangent hits concern smooth presentations, and generic homology hits identify kernels/cokernels. None supplies the stated Koszul-to-associated-graded implication or local converse. Mathlib/RingTheory/Regular/RegularSequence.lean:21 lists Koszul, H_1-regular and quasi-regular sequences as TODO; its local iff at lines 511–518 starts from weak regularity, not Koszul homology.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Vanishing positive Koszul homology implies a sequence in the maximal ideal of a Noetherian local ring is regular",
+   "results": "{\"t\": \"2026-10-18T22:45:17Z\", \"tool\": \"leanfinder\", \"query\": \"Vanishing positive Koszul homology implies a sequence in the maximal ideal of a Noetherian local ring is regular\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal\", \"IsLocalRing.isWeaklyRegular_of_perm_of_subset_maximalIdeal\", \"RingTheory.Sequence.isRegular_iff\", \"RingTheory.Sequence.IsRegular\", \"RingTheory.Sequence.IsWeaklyRegular\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev\", \"RingTheory.Sequence.isWeaklyRegular_iff\"], \"digest\": \"9b0937bf45e36a83\"}; Read the returned types: regular-sequence hits assume weak regularity, cotangent hits concern smooth presentations, and generic homology hits identify kernels/cokernels. None supplies the stated Koszul-to-associated-graded implication or local converse. Mathlib/RingTheory/Regular/RegularSequence.lean:21 lists Koszul, H_1-regular and quasi-regular sequences as TODO; its local iff at lines 511–518 starts from weak regularity, not Koszul homology.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact Koszul complex over a local Noetherian ring makes successive multiplication on the quotients injective",
+   "results": "{\"t\": \"2026-10-18T22:45:43Z\", \"tool\": \"leanfinder\", \"query\": \"Exact Koszul complex over a local Noetherian ring makes successive multiplication on the quotients injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.powQuotSuccInclusion_injective\", \"RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev\", \"RingTheory.Sequence.isWeaklyRegular_iff\", \"RingTheory.Sequence.isWeaklyRegular_iff_Fin\", \"Ideal.quotientToQuotientRangePowQuotSucc_injective\", \"Algebra.SubmersivePresentation.cotangentComplexAux_injective\", \"Algebra.FormallyUnramified.comp_injective\", \"Algebra.SubmersivePresentation.cotangentComplex_injective\"], \"digest\": \"87a373624d510dbf\"}; Read the returned types: regular-sequence hits assume weak regularity, cotangent hits concern smooth presentations, and generic homology hits identify kernels/cokernels. None supplies the stated Koszul-to-associated-graded implication or local converse. Mathlib/RingTheory/Regular/RegularSequence.lean:21 lists Koszul, H_1-regular and quasi-regular sequences as TODO; its local iff at lines 511–518 starts from weak regularity, not Koszul homology.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal|def IsRegular|def IsWeaklyRegular|TODO: Koszul",
+   "results": "{\"t\": \"2026-10-18T22:47:48Z\", \"tool\": \"grep\", \"query\": \"isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal|def IsRegular|def IsWeaklyRegular|TODO: Koszul\", \"sub\": \"RingTheory/Regular\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Regular/Flat.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\"], \"digest\": \"8a12a752b511a300\"}; Read the returned types: regular-sequence hits assume weak regularity, cotangent hits concern smooth presentations, and generic homology hits identify kernels/cokernels. None supplies the stated Koszul-to-associated-graded implication or local converse. Mathlib/RingTheory/Regular/RegularSequence.lean:21 lists Koszul, H_1-regular and quasi-regular sequences as TODO; its local iff at lines 511–518 starts from weak regularity, not Koszul homology.",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-tor-independent-blowup-transform",
@@ -74,5 +160,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-noetherian-local-koszul-criterion",
+  "worker": "stage1",
+  "summary": "Kept the imported statement unchanged. Read Stacks 09CC, 062I and 061S and followed their stated implication chain. Made the empty sequence and H_1 specialization elementary steps, created only the strictly different general-ring H_1-to-polynomial-associated-graded input, and reused the existing Noetherian-local quasi-regularity criterion. Searched project Lean, the full DAG/blueprint, and Mathlib; no attachment or exact Mathlib match was found.",
+  "blueprint": "Proof Step 3: regular finite-torsion local model; Expose X Lemma 1.6, the inference from the pulled-back Koszul resolution to a regular immersion. The Koszul criterion used here is Stacks 09CC, whose proof passes through 062I and 061S.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-quasi-regular-noetherian-local",
+    "why": "Generic commutative-algebra criterion (Stacks 061S) turning the canonical polynomial associated graded into regularity; the perverse-curve unit has no such algebra lemma, and 09CC explicitly uses this input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-quasi-regular-noetherian-local"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q101-9f67b45b2",
+  "group": "Q101",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-9f67b45b2 (reviewer sub-agent of L); spot-checked: I read the item, the new node and both cited statements in full, plus the sources: Stacks 09CC (more-algebra l.7444-7470), the Koszul/H1-regular definition (l.7217), 062I with its full proof (l.7360ff), and Algebra 061N/061P/061S (l.16865/16878/17060). The item statement is unchanged and is 09CC (2)=>(1) with M=R. Step 1 is genuinely elementary: the empty sequence is regular because R is nonzero, and H_1=0 is the case i=1 of the hypothesis. Step 2 cites the new node, which is 062I with M=R written as the canonical map B[T] -> gr_I(R), T_j -> [f_j]_1; this map is the M=R case of 061N. Step 3 cites lem-pur-quasi-regular-noetherian-local (061S); it needs a nonzero Noetherian local ring, f_j in m and the same canonical isomorphism, and the item supplies all three. The step uses its statement only, and the closure of both cited nodes does not contain the item, so there is no cycle. I tested the new node on small cases. It holds for r=0, the zero ring, the unit ideal (1) and a nonzerodivisor t. For (0) over a field and for eps in k[eps]/(eps^2) the H_1 hypothesis fails, as it must. The node is strictly smaller than the item and does not restate it. It is statement-only, self-contained and cites its definitions. Its blueprint from.node matches the ancestor tool, and the blueprint search for quasi-regular found nothing. Mathlib's RegularSequence.lean:21 lists Koszul/H1/quasi-regular sequences as TODO. The DAG candidates for 062I/quasi-regular/Koszul are a definition only, degree-one conormal results, a prefix-quotient lemma and cotangent results; none is a duplicate. I accept the tool_use lem-pur-quasi-regular-noetherian-local: a generic commutative-algebra criterion from another unit, used as a black box exactly as 09CC uses it. The worker wrote that entry themselves, but it is correct as a record. There is no SGA citation. No fixes."
  }
 }
