@@ -12,16 +12,21 @@
  ],
  "proof": [
   {
-   "text": "Define V(M) as the intersection of kernels of rho(g)-id. Restrict an equivariant map to this submodule. Identities, composition and addition hold pointwise. This is an explicit construction rather than choice of an arbitrary witness.",
+   "text": "Define S(M) as the intersection of kernels of rho(g)-id, and V(M) as the module S(M). Membership is equivalent to rho(g)x=x for every g. Equivariance sends S(M) into S(N), so restrict each coefficient map to these submodules. Identity and composition hold pointwise, and the required equivalence V(M) to S(M) is the identity.",
    "uses": [],
-   "elementary": false
+   "elementary": true
   },
   {
-   "text": "Identify the continuous maps from G^0, a singleton, with the coefficient module by evaluation. The displayed degree-zero differential vanishes precisely on the invariant submodule. Degree-zero cohomology has no incoming boundaries, hence equals this kernel; the evaluation identifications commute with every coefficient map and give a natural isomorphism. Kernels and finite products of representations are computed on underlying modules. Invariant elements commute with both these constructions, so V preserves finite limits.",
+   "text": "Use the abelian structure fixed in the statement by [lem-exc-discrete-modules-abelian]. Give an ordinary A-module its trivial G-action; its stabilizers are all of G, hence open. Equivariant maps from that trivial representation to M are naturally exactly A-linear maps into S(M), by the invariant-element criterion. These explicit mutually inverse hom-set maps give an adjunction L adjoint to V using Adjunction.mkOfHomEquiv. A right adjoint preserves limits; Functor.additive_of_preserves_binary_products gives additivity for the preadditive structure fixed by the statement. This works over an arbitrary ring A and does not use a commutativity hypothesis.",
    "uses": [
     "lem-exc-discrete-modules-abelian"
    ],
    "elementary": false
+  },
+  {
+   "text": "The set Fin 0 to G is a singleton, so all its arguments agree. Specialize the differential formula at n=0 and simplify the sum over Fin 1: d(x)(g)=rho(g)(e(x)(z))-e(x)(z). A constant cochain on an invariant element therefore lifts to cycles. Conversely, evaluate the image of a cycle under iCycles at z; the cycle equation and the differential formula prove its value invariant. Both maps are A-linear. Cancelling the monic iCycles and evaluating continuous maps pointwise prove the two inverse identities. Compose this cycles isomorphism with the inverse of CochainComplex.isoHomologyπ₀, since there is no incoming boundary in degree zero. Finally CochainComplex.isoHomologyπ₀_inv_naturality, HomologicalComplex.cyclesMap_i, and the assumed coefficient formula prove naturality, yielding the asserted natural isomorphism.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -30,7 +35,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tag 0DVG, degree-zero differential and invariants"
+  "place": "Tag 0DVG, label section-continuous-group-cohomology, degree-zero differential; Tag 0A2H, invariant functor. Explicit adjunction and Lean implementation by M3, 2026-10-18."
  },
  "mathlib_searches": [
   {
@@ -104,13 +109,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-18",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E2",
+  "group": "M3",
   "result": "pass",
-  "landing": "20261012T085230-L-10693",
-  "kind": "interface",
+  "landing": "20261018T062832-L-663543",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
