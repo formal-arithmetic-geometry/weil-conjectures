@@ -1,9 +1,9 @@
 {
  "id": "lem-trf-valuation-rank-one-formal-comparison",
  "kind": "statement",
- "status": "unsplit",
+ "status": "split",
  "title": "Formal comparison for flat valuation algebras in height one",
- "statement": "Let $K$ be a separably closed field [def-kun-separably-closed], $V\\subseteq K$ a nontrivial height-one valuation ring [def-trf-valuation-ring], and $0\\ne\\pi\\in\\mathfrak m_V$. A hat denotes $\\pi$-adic completion [def-weil-pbc-adic-completion]. Put $\\widehat K=\\widehat V[1/\\pi]$. Then $\\widehat K$ is an algebraically closed complete rank-one valued field, with valuation ring $\\widehat V$. Let $A$ be a flat finitely presented $V$-algebra [def-weil-pbc-flat-ring-map, def-weil-pbc-finitely-presented-algebra] with geometrically reduced $A_K=A\\otimes_VK$. Then $\\widehat A$ is flat and topologically finitely presented over $\\widehat V$, and $C=\\widehat A[1/\\pi]$ is a reduced affinoid $\\widehat K$-algebra; the image of $\\widehat A$ in $C$ is bounded and topologically finitely generated over $\\widehat V$. For every flat finitely presented $V$-algebra $E$ and every $0\\ne s\\in V$, the inverse image of $s\\widehat E$ under $E\\to\\widehat E$ is $sE$. Finally, if $A\\subseteq E\\subseteq A_K$, $E$ is finite over $A$ [def-weil-finitely-generated-module], finitely presented as an $A$-module [def-sc-finitely-presented-module], and flat finitely presented over $V$, then the canonical map $\\widehat A\\otimes_AE\\to\\widehat E$ is an isomorphism and the inclusion $E\\subseteq A_K$ induces an injective map $\\widehat E\\to C$ with $\\widehat E[1/\\pi]\\cong C$. The completion maps $A\\to\\widehat A$ and $E\\to\\widehat E$ are not asserted to be injective; zero completions are included.",
+ "statement": "Let $K$ be a separably closed field [def-kun-separably-closed], $V\\subseteq K$ a nontrivial height-one valuation ring [def-trf-valuation-ring], and $0\\ne\\pi\\in\\mathfrak m_V$. A hat denotes $\\pi$-adic completion [def-weil-pbc-adic-completion]. Put $\\widehat K=\\widehat V[1/\\pi]$. Then $\\widehat K$ is an algebraically closed complete rank-one valued field, with valuation ring $\\widehat V$. Let $A$ be a flat finitely presented $V$-algebra [def-weil-pbc-flat-ring-map, def-weil-pbc-finitely-presented-algebra] with geometrically reduced $A_K=A\\otimes_VK$. Then $\\widehat A$ is flat and topologically finitely presented over $\\widehat V$, and $C=\\widehat A[1/\\pi]$ is a reduced affinoid $\\widehat K$-algebra; the image of $\\widehat A$ in $C$ is bounded and topologically finitely generated over $\\widehat V$. For every flat finitely presented $V$-algebra $E$ and every $0\\ne s\\in V$, the inverse image of $s\\widehat E$ under $E\\to\\widehat E$ is $sE$. Finally, if $A\\subseteq E\\subseteq A_K$, $E$ is finite over $A$ [def-weil-finitely-generated-module], finitely presented as an $A$-module [def-sc-finitely-presented-module], and flat finitely presented over $V$, then the canonical map $\\widehat A\\otimes_AE\\to\\widehat E$ is an isomorphism and the inclusion $E\\subseteq A_K$ induces an injective map $\\widehat E\\to C$ with $\\widehat E[1/\\pi]\\cong C$. The completion maps $A\\to\\widehat A$ and $E\\to\\widehat E$ are not asserted to be injective; zero completions are included. Here height one means that the only prime ideals of $V$ are $(0)$ and $\\mathfrak m_V$; geometrically reduced means reduced after every field extension of $K$. Restricted series over a complete valued field (or its valuation ring) are series whose coefficients tend to zero. Topologically finitely presented means a quotient of a restricted-series algebra in finitely many variables by a finitely generated ideal, with the adic quotient topology. An affinoid algebra is a quotient of a Tate restricted-series algebra in finitely many variables, with its Banach quotient topology; bounded means uniformly bounded for such a quotient norm, and topological generation means density of the generated polynomial subalgebra. Rank one is understood through a nontrivial real-valued nonarchimedean absolute value.",
  "source": {
   "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
   "url": "https://math.huji.ac.il/~temkin/papers/Stable_Modification.pdf",
@@ -18,9 +18,169 @@
   "def-weil-finitely-generated-module",
   "def-sc-finitely-presented-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose the absolute value supplied by [lem-trf-height-one-real-absolute-value]. For $0<|\\pi|<1$, the balls $\\pi^nV$ are cofinal among zero-neighbourhoods. Thus compatible residues in $\\widehat V=\\varprojlim V/\\pi^nV$ are exactly Cauchy sequences in $V$ modulo sequences tending to zero: choose representatives at each level, and conversely reduce an eventually constant residue. This identifies $\\widehat V$ with the closed unit ball of the metric completion of $K$. Every Cauchy sequence in $K$ is bounded, so multiplication by a fixed power of $\\pi$ puts the entire tail in $V$. Consequently that completion is $\\widehat V[1/\\pi]$. It is a field: for a nonzero Cauchy limit $x$, approximants $a_j$ eventually have the same nonzero norm, and $|a_j^{-1}-a_k^{-1}|=|a_j-a_k|/(|a_j||a_k|)$ proves that their inverses converge to an inverse of $x$. The norm extends by limits, is multiplicative and nonarchimedean, and its closed unit ball is $\\widehat V$. This proves completeness, nontriviality and real rank one, without a discrete-value assumption.",
+   "uses": [
+    "lem-trf-height-one-real-absolute-value",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Section 2.1 and Theorem 3.5.5 Step 3: identification of the completed valuation field."
+   }
+  },
+  {
+   "text": "Let $f\\in\\widehat K[T]$ be monic of degree $d>0$. Fix $R\\ge1$ larger than every lower coefficient norm of $f$. Coefficientwise density of $K$ in $\\widehat K$ followed by [lem-trf-separable-monic-approximation] gives monic separable $g_j\\in K[T]$ of degree $d$ with all lower coefficient errors less than $\\epsilon_j$, where $\\epsilon_j$ decreases to zero and $\\epsilon_j R^{d-1}<2^{-jd}$. Take also $\\epsilon_j<1$ and enlarge $R$ once if needed. By [lem-trf-separable-polynomial-linear-factorization], every $g_j$ splits in $K$. All its roots have norm at most $R$: for a root with norm bigger than $R$, the leading term strictly dominates every lower term, a contradiction. Choose a root $r_1$ of $g_1$. Given a root $r_j$ of $g_j$, coefficient estimates give $|g_{j+1}(r_j)|<2^{-jd}$. Factoring $g_{j+1}$ into $d$ linear factors shows that some root $r_{j+1}$ satisfies $|r_j-r_{j+1}|<2^{-j}$. The nonarchimedean triangle inequality makes $(r_j)$ Cauchy. Its limit $r\\in\\widehat K$ satisfies $f(r)=0$, by the same coefficient estimate and continuity of polynomial evaluation. Every nonconstant polynomial can be made monic by dividing by its leading coefficient; hence $\\widehat K$ is algebraically closed. This argument includes imperfect separably closed fields in positive characteristic.",
+   "uses": [
+    "lem-trf-separable-monic-approximation",
+    "lem-trf-separable-polynomial-linear-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 3.5.5 Step 3, algebraically closed completed ground field; agent expansion using coefficient approximation."
+   }
+  },
+  {
+   "text": "For a flat $V$-module $M$, multiplication by any nonzero element of $V$ is injective, by tensoring that injection on $V$. Its completion $\\widehat M=\\varprojlim M/\\pi^nM$ is $\\pi$-torsion-free: if $\\pi x=0$, represent $x_{n+1}$ by $u\\in M$; then $\\pi u\\in\\pi^{n+1}M$, so cancellation gives $u\\in\\pi^nM$ and $x_n=0$. If $0\\ne s\\in\\widehat V$, choose $k$ with $|\\pi|^k\\le|s|$, so $\\pi^k\\in s\\widehat V$. Therefore $s$ is also injective on $\\widehat M$. The ring $\\widehat V$ is a valuation ring by step 1, so [lem-trf-valuation-torsionfree-flat] makes $\\widehat M$ flat over $\\widehat V$. This applies in particular to $M=A$ and to every $E$ in the statement.",
+   "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "lem-trf-valuation-torsionfree-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 3.5.5 Step 3, flatness of the completed models; torsion cancellation expanded."
+   }
+  },
+  {
+   "text": "Here is the exactness calculation used for the finite presentations below. If $0\\to L\\to M\\to N\\to0$ is exact and $N$ is torsion-free over $V$, then $L\\cap\\pi^nM=\\pi^nL$: writing $l=\\pi^nm$, the image of $m$ in $N$ is zero by torsion-freeness. Thus $0\\to L/\\pi^nL\\to M/\\pi^nM\\to N/\\pi^nN\\to0$ is exact. The kernel transition maps $L/\\pi^{n+1}L\\to L/\\pi^nL$ are surjective. Apply [lem-weil-pbc-tower-limit-exact-surjective-kernels](b) to obtain the short exact sequence of completions. All systems here are indexed by the positive integers; no Noetherian or adic separation hypothesis on $L,M,N$ is used.",
+   "uses": [
+    "lem-weil-pbc-tower-limit-exact-surjective-kernels"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 3.5.5 Step 3, completion of presentations; inverse-limit exactness as in Stacks Tags 03CA and 02N1."
+   }
+  },
+  {
+   "text": "Write $A=P/(f_1,\\ldots,f_t)$ with $P=V[T_1,\\ldots,T_n]$, and $I=(f_1,\\ldots,f_t)$. The modules $P$ and its submodule $I$ are torsion-free over $V$, and $A$ is torsion-free by flatness. Apply step 4 to $0\\to I\\to P\\to A\\to0$, and also to the surjection $P^t\\to I$ and its kernel (whose quotient $I$ is torsion-free). It follows that $\\widehat A=\\widehat P/(f_1,\\ldots,f_t)\\widehat P$. Taking coefficients of compatible polynomials modulo $\\pi^m$ identifies $\\widehat P$ with $\\widehat V\\langle T\\rangle$: at each $m$ only finitely many coefficients survive, which is exactly the restricted-series condition. Conversely any such series has compatible polynomial residues. Hence this is a topologically finite presentation of $\\widehat A$ over $\\widehat V$. The surjective maps in the inverse-limit calculation give the quotient topology as well: every kernel residue lifts compatibly, and reduction modulo each $\\pi^m$ is the displayed polynomial quotient.",
+   "uses": [
+    "def-weil-pbc-finitely-presented-algebra",
+    "def-weil-pbc-adic-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 3.5.5 Step 3, topological finite presentation, expanded by finite presentations and step 4."
+   }
+  },
+  {
+   "text": "Every restricted series over $\\widehat K$ has bounded coefficients, so a common power of $\\pi$ puts them in $\\widehat V$. Inverting $\\pi$ in step 5 therefore gives $C=\\widehat K\\langle T\\rangle/(f_1,\\ldots,f_t)$. Apply [lem-trf-affinoid-polynomial-closed-point-comparison] with $F=\\widehat K$ and this polynomial ideal. In particular $C$ is a Noetherian Banach affinoid algebra. The image $D$ of $\\widehat A$ is the image of the Gauss unit ball, so it is bounded for the quotient norm, and it contains the open unit ball (an element of quotient norm less than one has a representative of Gauss norm less than one). Thus its $\\pi$-adic and induced norm topologies agree. The variables topologically generate $D$ over $\\widehat V$, by the restricted-series presentation. By step 3, multiplication by $\\pi$ is injective on $\\widehat A$, so its localization map into $C$ is injective. These statements include $C=0$.",
+   "uses": [
+    "lem-trf-affinoid-polynomial-closed-point-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 3.5.5 Step 3, affinoid presentation and bounded topologically finite model."
+   }
+  },
+  {
+   "text": "Set $B=A_K\\otimes_K\\widehat K=\\widehat K[T]/(f_1,\\ldots,f_t)$. It is reduced by the hypothesis of geometric reducedness (reducedness after every field extension). The field $\\widehat K$ is excellent by [lem-exc-fields-excellent]; finite type algebras and their localizations are excellent by [lem-exc-finite-type-localization-excellent]. For each maximal ideal $\\mathfrak m$ of $C$, step 6 and [lem-trf-affinoid-polynomial-closed-point-comparison] give a maximal ideal $\\mathfrak p$ of $B$ and $\\widehat{B_{\\mathfrak p}}\\cong\\widehat{C_{\\mathfrak m}}$. The ring $B_{\\mathfrak p}$ is reduced by [lem-weil-pbc-localization-preserves-reduced], and Noetherian and a G-ring by [def-exc-excellent-ring]. Its maximal-ideal completion map is regular by [def-weil-pbc-g-ring]. The completion is Noetherian by [lem-weil-pbc-adic-completion-noetherian]; hence [lem-exc-regular-map-reduced-target] shows that $\\widehat{B_{\\mathfrak p}}$, and thus $\\widehat{C_{\\mathfrak m}}$, is reduced.",
+   "uses": [
+    "lem-trf-affinoid-polynomial-closed-point-comparison",
+    "lem-exc-fields-excellent",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-weil-pbc-localization-preserves-reduced",
+    "def-exc-excellent-ring",
+    "def-weil-pbc-g-ring",
+    "lem-weil-pbc-adic-completion-noetherian",
+    "lem-exc-regular-map-reduced-target"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 3.5.5 Step 3, reducedness via algebraic closed-point completions; Stacks Tags 07QW, 07QU, 07QK and 0316."
+   }
+  },
+  {
+   "text": "The localization $C_{\\mathfrak m}$ is Noetherian by step 6 and [lem-weil-pbc-localization-noetherian]. Its maximal ideal is its Jacobson radical, so [lem-weil-pbc-krull-intersection-jacobson] with module $C_{\\mathfrak m}$ shows that the kernel of its completion map, the intersection of its maximal-ideal powers, is zero. Step 7 then implies $C_{\\mathfrak m}$ is reduced. If a nonzero nilpotent $x$ existed in $C$, choose a maximal ideal containing the proper ideal $\\operatorname{ann}(x)$. Its image in this localization is nonzero: any denominator annihilating it would belong to $\\operatorname{ann}(x)$ and therefore to the maximal ideal. This contradicts reducedness of that local ring. Hence $C$ is reduced; if $C=0$ this is immediate.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-weil-pbc-krull-intersection-jacobson"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 3.5.5 Step 3, local detection of reducedness; Stacks Tag 00IQ for separated local completions."
+   }
+  },
+  {
+   "text": "Let $E$ be as in the scalar-saturation assertion and let $0\\ne s\\in V$. Choose $N\\ge1$ with $|\\pi|^N\\le|s|$; then $\\pi^N V\\subset sV$. Suppose $e\\in E$ maps to $s\\widehat e\\in s\\widehat E$. Project this equality to $E/\\pi^NE$ using [lem-weil-pbc-adic-completion-mod-power] for the principal ideal $(\\pi)\\subset E$. Choose any representative $e_N\\in E$ of the component of $\\widehat e$. The equality says $e-se_N\\in\\pi^NE\\subset sE$, so $e\\in sE$. The converse follows by functoriality of completion. This reasoning takes residues, not an injection $E\\to\\widehat E$, and also works if the completion is zero.",
+   "uses": [
+    "lem-weil-pbc-adic-completion-mod-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 3.5.5 Step 3, scalar saturation; the source convergence argument expressed in a single cofinal quotient."
+   }
+  },
+  {
+   "text": "Now suppose $E$ satisfies the final hypotheses. Choose a finite presentation $A^v\\to A^u\\to E\\to0$ as an $A$-module and put $L=\\ker(A^u\\to E)$. Both $L$ (a submodule of the torsion-free module $A^u$) and $E$ are torsion-free over $V$. Apply step 4 to $0\\to L\\to A^u\\to E\\to0$ and to the surjection $A^v\\to L$ with its kernel. Finite products commute with compatible sequences, so $\\widehat E$ is the cokernel of the same presentation matrix over $\\widehat A$. Tensoring the original presentation with $\\widehat A$ gives that cokernel as well: a linear map out of either cokernel is exactly a map out of $\\widehat A^u$ annihilating the matrix relations. Thus the canonical map $\\widehat A\\otimes_AE\\to\\widehat E$ is an isomorphism. Finiteness of $E$ alone was not substituted for its explicit finite-presentation hypothesis.",
+   "uses": [
+    "def-sc-finitely-presented-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 3.5.5 Step 3, finite-module completion comparison, expanded using step 4."
+   }
+  },
+  {
+   "text": "Choose finitely many $A$-module generators of $E\\subset A_K$. Step 1 gives $K=V[1/\\pi]$, so a common denominator $q=\\pi^k$ clears all generators and gives $qE\\subset A$. Let $i:A\\to E$ be the inclusion and $j:E\\to A$ multiplication by $q$. Then $ji=q$ on $A$ and $ij=q$ on $E$. Completion preserves these identities. Since $q$ is injective on $\\widehat E$ by step 3, $\\widehat j$ is injective, and $e\\mapsto\\widehat j(e)/q$ gives the induced injection $\\widehat E\\to\\widehat A[1/\\pi]=C$. After inverting $\\pi$, the two completed maps are inverse up to the unit $q$, giving $\\widehat E[1/\\pi]\\cong C$. On $E$ the map agrees with its fraction inclusion, and on $\\widehat A$ with the localization map, so it is the asserted canonical comparison. No separation of $A$ or $E$ was assumed.",
+   "uses": [
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+    "place": "Theorem 3.5.5 Step 3, denominator-clearing embedding of the finite completed intermediate algebra."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-height-one-real-absolute-value",
+  "def-weil-pbc-adic-completion",
+  "lem-trf-separable-monic-approximation",
+  "lem-trf-separable-polynomial-linear-factorization",
+  "def-weil-pbc-flat-ring-map",
+  "lem-trf-valuation-torsionfree-flat",
+  "lem-weil-pbc-tower-limit-exact-surjective-kernels",
+  "def-weil-pbc-finitely-presented-algebra",
+  "lem-trf-affinoid-polynomial-closed-point-comparison",
+  "lem-exc-fields-excellent",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-localization-preserves-reduced",
+  "def-exc-excellent-ring",
+  "def-weil-pbc-g-ring",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-exc-regular-map-reduced-target",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-krull-intersection-jacobson",
+  "lem-weil-pbc-adic-completion-mod-power",
+  "def-sc-finitely-presented-module",
+  "def-weil-finitely-generated-module"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/temkin-stable-modification-arXiv-0707.3953v3.pdf",
+  "place": "Theorem 3.5.5 Step 3, printed pp. 22–23; primary text read online, missing local archival copy. Agent expands completions, algebraic closure and finite-presentation arguments; analytic local comparison isolated as a statement-only node."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,6 +223,41 @@
    "results": "hits=5; declarations/files=['Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean', 'Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean', 'Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean', 'Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean', 'Mathlib/RingTheory/AdicCompletion/AsTensorProduct.lean']; note=; directory=RingTheory/AdicCompletion. None of these hits states this assertion or a one-line generalization.",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsAlgClosed.*Completion|Completion.*IsAlgClosed|isAlgClosed.*[Cc]ompletion|noncomputable def.*[Nn]ormedField",
+   "results": "{\"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Padics/Complex.lean\", \"Mathlib/Analysis/Normed/Algebra/Spectrum.lean\", \"Mathlib/Analysis/Normed/Field/Basic.lean\", \"Mathlib/Analysis/RCLike/Basic.lean\", \"Mathlib/Analysis/RCLike/Basic.lean\"], \"sub\": \"\", \"digest\": \"38cb338576505c56\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the searches concern field completion only and do not establish the algebra/completion clauses. IsAlgClosed.of_denseRange in Mathlib/Analysis/Normed/Field/Dense.lean:45 assumes characteristic zero and an algebraically closed dense field; neither is available here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "completion of a separably closed rank one valued field is algebraically closed",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSepClosed.of_isAlgClosed\", \"AbsoluteValue.Completion\", \"IsSepClosure.isAlgClosure_of_perfectField\", \"Valued.completable\", \"CauSeq.Completion.Cauchy.field\", \"AlgebraicClosure.isAlgClosed\", \"IsSepClosure.isAlgClosure_of_perfectField_top\", \"IsSepClosed.isAlgClosed_of_perfectField\"], \"sub\": \"\", \"digest\": \"9195a16c8b4cf956\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the searches concern field completion only and do not establish the algebra/completion clauses. IsAlgClosed.of_denseRange in Mathlib/Analysis/Normed/Field/Dense.lean:45 assumes characteristic zero and an algebraically closed dense field; neither is available here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Completion\", \"IsAlgClosed\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"sub\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the searches concern field completion only and do not establish the algebra/completion clauses. IsAlgClosed.of_denseRange in Mathlib/Analysis/Normed/Field/Dense.lean:45 assumes characteristic zero and an algebraically closed dense field; neither is available here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The completion of an algebraically closed nonarchimedean normed field is algebraically closed",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"NormedField.instCompletableTopField\", \"spectralNorm.completeSpace\", \"Valued.completable\", \"UniformSpace.Completion.instNormedFieldOfCompletableTopField\", \"PadicAlgCl.normedField\", \"IsNonarchimedeanLocalField.instCompleteSpace\", \"NumberField.InfinitePlace.Completion.instAlgebra\", \"NumberField.InfinitePlace.Completion.instNormedField\"], \"sub\": \"\", \"digest\": \"8dd465077dec8abc\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the searches concern field completion only and do not establish the algebra/completion clauses. IsAlgClosed.of_denseRange in Mathlib/Analysis/Normed/Field/Dense.lean:45 assumes characteristic zero and an algebraically closed dense field; neither is available here."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A valuation of height one is equivalent to a real valued nonarchimedean absolute value and its valuation ring completes to the integers of the completed field",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsDedekindDomain.HeightOneSpectrum.valuedAdicCompletion_eq_valuation'\", \"IsDedekindDomain.HeightOneSpectrum.valuedAdicCompletion_def\", \"IsDedekindDomain.HeightOneSpectrum.valuedAdicCompletion_eq_valuation\", \"Valuation.instRankOneCompletion\", \"NumberField.instRankOneValuedAdicCompletion\", \"IsDedekindDomain.HeightOneSpectrum.mem_adicCompletionIntegers\", \"IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers\", \"IsNonarchimedeanLocalField.instCompleteSpaceSubtypeMemSubringIntegerValueGroupWithZeroValuation\"], \"sub\": \"\", \"digest\": \"161a76d0870afe3b\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the searches concern field completion only and do not establish the algebra/completion clauses. IsAlgClosed.of_denseRange in Mathlib/Analysis/Normed/Field/Dense.lean:45 assumes characteristic zero and an algebraically closed dense field; neither is available here."
   }
  ],
  "mathlib_match": null,
@@ -98,5 +293,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-trf-valuation-rank-one-formal-comparison",
+  "worker": "stage1",
+  "summary": "Q68 retained the statement, searched both project Lean sources and Mathlib, and expanded the height-one completion, scalar saturation and finite-module comparison without assuming original completion maps injective or V Noetherian. Three genuine supporting statements are isolated: the real-valued height-one bridge, separable-monic density, and algebraic/affinoid completed-local comparison. Reducedness reuses the existing excellence and Krull-intersection nodes.",
+  "blueprint": "Historical supporting ingredient of the normalization chain from lem-trf-local-term-locality (not a new route for the current contracting correspondence): Theorem 3.5.5, Step 3, printed pp. 22–23: completed analytic model, scalar saturation, and finite-module completion comparison; historical support only, no change to the current contracting-correspondence route or unit metadata.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-tower-limit-exact-surjective-kernels",
+    "why": "Exactness of countable inverse limits with surjective kernel transitions, applied only to the explicit residue sequences; no valuation-unit node supplies this general algebra tool."
+   },
+   {
+    "node": "lem-exc-fields-excellent",
+    "why": "Excellence of the completed ground field, used for reducedness of algebraic local completions; no node of this historical trace support states field excellence."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Excellence of a finite type algebra over a field and its localizations, as required by the source algebraic-to-analytic comparison; this does not replace any contracting-correspondence step."
+   },
+   {
+    "node": "lem-weil-pbc-adic-completion-noetherian",
+    "why": "Noetherianity of the maximal-ideal completion of a Noetherian algebraic local ring, needed by regular-map reducedness; no same-unit node gives this general algebra fact."
+   },
+   {
+    "node": "lem-exc-regular-map-reduced-target",
+    "why": "Reducedness ascends under a regular map of Noetherian rings, applied to the excellent algebraic local ring completion; no node of the unit supplies this algebra theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-tower-limit-exact-surjective-kernels",
+  "lem-exc-fields-excellent",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-adic-completion-noetherian",
+  "lem-exc-regular-map-reduced-target"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q68-c9f23a638",
+  "group": "Q68",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-c9f23a638 (reviewer sub-agent of L); spot-checked: Read the governing docs, the item, all three new nodes and the statement of every cited node. The source is Temkin 0707.3953v3, which has no copy in literature/ and is already listed as WANTED. I read it from a text extraction of the primary PDF already on this machine: Thm 3.5.5 Step 3 (pp. 22–23) and §2.1 (pp. 6–7). The item's clauses match the source: Â is topologically finitely presented and flat, K̂ is the completion, Â[1/π] is reduced via p = m ∩ A_K̂ maximal with an isomorphism of completions plus excellence, ωĈ ∩ C = ωC, and the finite-module comparison. The statement is unchanged apart from an inline glossary. Steps 1–11 are correct, and every cited statement's hypotheses are in force. Step 2's root selection checks out (|g_{j+1}(r_j)| < ε_j R^{d−1} < 2^{−jd}, then some root lies within 2^{−j}; separable approximation is applied over K, linear factorization over separably closed K). In step 7, field and finite-type excellence give the G-ring property, hence a regular completion map with Noetherian target, and regular-map reducedness applies. Step 8 uses Krull intersection with I = mC_m. Steps 4, 5 and 10 apply tower-limit exactness (b) with the torsion-freeness and surjective kernel transitions verified. Step 9 only needs π̂_N∘ι. Step 11 uses ji = q, ij = q and π-regularity. All three new nodes are true and strictly smaller than the item, and none is a duplicate (rg found no affinoid/Tate/height-one/rank-one/separable-density node). Height-one ⇒ real absolute value is the classical archimedean argument. Separable density is false only for a trivial absolute value, which the hypotheses exclude. The Tate/polynomial closed-point comparison is BGR-standard; edge cases C = 0 and n = 0 checked. I accept the five declared tool uses (tower-limit exactness, field excellence, finite-type-localization excellence, completion Noetherian, regular-map reduced target). No cycle and no SGA. Minor and unchanged: the new nodes have no lean_audit field, which tools/lean_status.py fills. No fixes written."
  }
 }
