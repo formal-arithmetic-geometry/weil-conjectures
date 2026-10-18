@@ -13,9 +13,132 @@
   "def-weil-pbc-constructible-complexes",
   "def-kun-derived-tensor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For existence and uniqueness retain the stronger property that every pinned potential $K$ also satisfies $\\Lambda_X\\cong\\tau_{\\leq0}R\\mathcal Hom(K,K)$. Reduction does not change this property: the reduction map is a universal homeomorphism, and its etale topos equivalence identifies constant coefficients, complexes, their cohomology, and derived Hom. It also identifies supported cohomology, since the complementary open and the kernel defining support correspond. The residue transitions defining potentiality use the same reduced curves and their normalizations after strict localization, hence the same pinnings and compatibility equations. Thus complexes and pinning-preserving morphisms correspond under reduction. The empty scheme has its zero complex and a singleton morphism set. It remains to prove the stronger property for reduced schemes.",
+   "uses": [
+    "lem-weil-pbc-reduction-universal-homeomorphism",
+    "thm-weil-pbc-universal-homeomorphism-invariance",
+    "def-per-potential-dualizing-complex",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, 5.5, reduction to the reduced case; definitions 1.4.1 and 2.1.1-2.1.2"
+   }
+  },
+  {
+   "text": "For normal $X$, its finitely many normal integral components are open and closed. Work on one component, with generic point $\\eta$, and put $m=\\delta(\\eta)$. Twisting by $\\Lambda(-m)$ and shifting by $[-2m]$ changes each pinning to one for $\\delta-m$, whose generic value is zero. The normal-extension lemma constructs $T=\\tau^\\varphi_{\\leq0}Rj_*\\Lambda$ with those pinnings, identifies every such normalized potential complex with $T$ by a unique pinned isomorphism, and gives its scalar derived-Hom rigidity. The twist-line lemma makes these twists locally free of rank one, so evaluation against their module duals is locally the identity and hence an isomorphism. Supported cohomology and its linear residue maps commute with such tensoring, as one checks on an etale cover trivializing the line. Twist back by $\\Lambda(m)[2m]$; the two operations are inverse, so they preserve uniqueness and identify endomorphism complexes. Taking the finite disjoint union of these complexes gives the desired object on $X$; restrictions of sheaves, complexes, and morphisms to disjoint open-and-closed components are independent. Thus the stronger property holds on every normal $X$.",
+   "uses": [
+    "rem-pc-regular-normal",
+    "lem-per-normal-pinned-extension",
+    "def-per-potential-dualizing-complex",
+    "def-asd-finite-etale-tate-twist",
+    "lem-asd-finite-etale-twist-line"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 5.3.1 and start of 5.5"
+   }
+  },
+  {
+   "text": "Use Noetherian induction on closed supports, strengthened to all schemes finite over the given closed subscheme. The empty support was settled in Step 1. For a reduced scheme $Z$ in this induction, normalization gives a finite surjection $p:Z'\\to Z$ with $Z'$ normal and an isomorphism over a dense open $U$. Put $Y=(Z\\setminus U)_{\\mathrm{red}}$ and $Y'=Y\\times_ZZ'$. Both $Y$ and $Y'$ are finite over $Y$, and their supports avoid the generic points of $Z$. In the strengthened induction over a fixed base, their images likewise avoid the generic points of its image: the finite closed-map lemma makes the boundary images closed; on affine charts, incomparability of primes for integral maps shows that a point above a minimal prime of the image must itself be minimal (a smaller prime would have the same contraction). Thus these boundary images are smaller closed supports and the induction hypothesis applies. All schemes remain Noetherian excellent by finite-type stability, and $\\ell$ remains invertible. The dimension functions are the induced ones $\\delta\\circ f$ of the gluing lemma; finite maps are proper with finite residue extensions, so finite pullback shows that they are dimension functions. Step 2 gives the stronger property on $Z'$, and induction gives it on $Y,Y'$. Apply finite-modification pinned gluing to this square: its cone produces the pinned complex on $Z$, while its uniqueness and scalar-Hom assertions prove the stronger property for every potential complex on $Z$. Reduction from Step 1 treats any nonreduced finite schemes encountered. This closes the induction and proves existence and unique pinning-preserving isomorphisms on $T$.",
+   "uses": [
+    "lem-per-excellent-normalization-preparation",
+    "lem-per-finite-modification-pinned-gluing",
+    "lem-exc-finite-type-localization-excellent",
+    "def-weil-pbc-reduced-normalization",
+    "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "lem-weil-pbc-integral-incomparability",
+    "lem-per-potential-dualizing-finite-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, 5.5, applying Proposition 5.4.1 to the normalization square"
+   }
+  },
+  {
+   "text": "Let $V$ be a nonempty connected Noetherian excellent regular scheme with $\\ell$ invertible, $\\delta$ a dimension function on $V$, and $c(x)=\\dim\\mathcal O_{V,x}$. We show $\\delta=\\delta(\\eta)-c$, where $\\eta$ is the generic point; $V$ is integral by clause (3) of the regular-normal remark. By the regular-unit lemma $-c$ is a dimension function, so $e=\\delta+c$ satisfies $e(y)=e(x)$ at every immediate geometric specialization $\\bar y\\rightsquigarrow\\bar x$. Induct on $c(x)$. If $c(x)=0$, then $\\mathcal O_{V,x}$ is a zero-dimensional domain, hence a field, so $x=\\eta$. If $d=c(x)\\geq1$, let $A$ be the strict henselization of $\\mathcal O_{V,x}$ at a geometric point $\\bar x$. Then $\\dim A=d$, and the maximal ideal of $A$ is $\\mathfrak m_xA$, so it is the only prime of $A$ above $\\mathfrak m_x$. Take a chain $P_0\\subsetneq\\cdots\\subsetneq P_d$ of primes of $A$ and put $P=P_{d-1}$; maximality of $d$ gives $\\dim A/P=1$. Let $\\bar y$ be a geometric point of $\\operatorname{Spec}A$ over $P$ and $y\\in V$ its image. The reduced closure $V(P)$ of its image in $V_{(\\bar x)}=\\operatorname{Spec}A$ has dimension one, so $\\bar y\\rightsquigarrow\\bar x$ is immediate. As $P$ is not maximal, $y\\neq x$, so $y$ is a proper generization of $x$; any chain of primes of $\\mathcal O_{V,y}$ extends by $\\mathfrak m_x$ in $\\mathcal O_{V,x}$, hence $c(y)<c(x)$. By induction $e(x)=e(y)=e(\\eta)=\\delta(\\eta)$.",
+   "uses": [
+    "rem-pc-regular-normal",
+    "lem-per-potential-dualizing-regular-unit",
+    "def-per-potential-dualizing-complex",
+    "lem-sc-strict-henselization-dimension",
+    "lem-weil-pbc-strict-henselization-triples",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIV, 2.1, remark after Definition 2.1.8 (a difference of dimension functions is invariant under specializations); used implicitly in XVII, proof of Proposition 6.2.2.1 together with Proposition 2.4.4.1"
+   }
+  },
+  {
+   "text": "Now let $K$ be any potential complex. Prove bounded constructibility by Noetherian induction on its scheme, first making the reduction of Step 1. The regular locus is open by the J-2 clause of excellence and contains every generic point: a reduced local ring at a minimal prime is a field, hence regular. Choose this dense regular open $j:U\\hookrightarrow X$, with reduced complementary closed $i:Z\\hookrightarrow X$. Potential pullback gives potential structures on $j^*K$ and $i^!K$; both maps are separated finite type and compactifiable (the open map factors through the identity proper map of $X$, so its exceptional pullback is the right adjoint $j^*$ of $j_!$; the closed map is proper, so its exceptional pullback is the right adjoint $i^!$ of $i_*$, as in the test below). Their dimension functions are restrictions of $\\delta$. Regular schemes are normal, so the component decomposition gives finitely many open-and-closed connected regular components of $U$. On each such component with generic point $\\eta$, Step 4 gives $\\delta=\\delta(\\eta)-c$, so the regular-unit lemma makes $\\Lambda(\\delta(\\eta))[2\\delta(\\eta)]$ potential for the restricted $\\delta$. The uniqueness just proved identifies $j^*K$ with this twist and shift of the constant finite free sheaf, which is bounded constructible: the twist-line lemma makes its positive twists locally constant finite free, and dualizing a local free generator proves the same for negative twists. Induction gives bounded constructibility of $i^!K$ on the smaller closed support $Z$. The open-closed constructibility test therefore gives $K\\in D^b_c(X_{\\mathrm{et}},\\Lambda)$. This argument works for every $n\\geq1$, including $n=1$.",
+   "uses": [
+    "def-exc-excellent-ring",
+    "lem-per-potential-dualizing-finite-pullback",
+    "lem-per-potential-dualizing-regular-unit",
+    "rem-pc-regular-normal",
+    "lem-per-open-closed-constructible-test",
+    "def-weil-pbc-constructible-complexes",
+    "lem-asd-finite-etale-twist-line"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 6.2.2.1 using Lemma 6.2.2.2 and Proposition 2.4.4.1"
+   }
+  },
+  {
+   "text": "Take $k=\\mathbf F_\\ell$ and $K'=R\\mathcal Hom_\\Lambda(k_X,K)$. Coefficient coinduction gives potential pinnings on $K'$ for $(X,\\delta,k)$ without assuming Tor finiteness. The $n=1$ case of Step 5 makes $K'$ bounded constructible, in particular bounded. Step 5 already made $K$ bounded over $\\Lambda$. Apply the prime-power Hom/tensor criterion to this bounded $K$: its condition (iii) is exactly the boundedness of $K'$, so its condition (i) gives a single finite Tor interval valid for tensoring $K$ with every module sheaf in degree zero. This proves the final assertion without confusing derived coefficient coinduction with derived tensor reduction.",
+   "uses": [
+    "lem-per-potential-hom-coefficient-restriction",
+    "lem-per-prime-power-hom-tensor-test",
+    "def-kun-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 6.2.2.3 using Proposition 6.2.1.1 and Lemma 6.2.2.4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "def-per-potential-dualizing-complex",
+  "def-pur-derived-internal-hom",
+  "rem-pc-regular-normal",
+  "lem-per-normal-pinned-extension",
+  "def-asd-finite-etale-tate-twist",
+  "lem-asd-finite-etale-twist-line",
+  "lem-per-excellent-normalization-preparation",
+  "lem-per-finite-modification-pinned-gluing",
+  "lem-exc-finite-type-localization-excellent",
+  "def-weil-pbc-reduced-normalization",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-integral-incomparability",
+  "lem-per-potential-dualizing-finite-pullback",
+  "lem-per-potential-dualizing-regular-unit",
+  "lem-sc-strict-henselization-dimension",
+  "lem-weil-pbc-strict-henselization-triples",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-exc-excellent-ring",
+  "lem-per-open-closed-constructible-test",
+  "def-weil-pbc-constructible-complexes",
+  "lem-per-potential-hom-coefficient-restriction",
+  "lem-per-prime-power-hom-tensor-test",
+  "def-kun-tor-amplitude"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, 5.3-5.5 and 6.2.1-6.2.2"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,10 +167,38 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence uniqueness and bounded constructibility of pinned potential etale dualizing complexes on excellent schemes",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Etale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"AlgebraicGeometry.Scheme → Type (u + 1)\", \"doc\": \"The property of being an étale morphism to a fixed scheme $X$, defined as morphisms that are smooth of relative dimension 0, constructed via the morphism property lifting over $X$.\"}\n  {\"name\": \"StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  (P : StandardEtalePair R) (I : Ideal S),\\n  I ^ 2 = ⊥ → ∀ (x : S), P.HasMap ((Ideal.Quotient.mk I) x) → ∃! ε, ε ∈ I ∧ P.HasMap (x + ε)\", \"doc\": \"Let $S$ be a commutative algebra over a commutative ring $R$, and let $I$ be an ideal of $S$ such that $I^2 = \\\\{0\\\\}$. Let $P$ be a standard étale pair over $R$. If the image of an element $x \\\\in S$ in\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is étale if it is smooth of relative dimension 0.\"}\n  {\"name\": \"AlgebraicGeometry.IsEtale.instFormallyUnramified\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Etale\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsEtale f], AlgebraicGeometry.FormallyUnramified f\", \"doc\": \"If a morphism $ f: X \\to Y $ of schemes is étale, then it is formally unramified. This means that every étale morphism satisfies the infinitesimal lifting property characterizing formal unramification,\"}\n  {\"name\": \"Algebra.etaleLocus\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"(R : Type u_1) → (A : Type u_2) → [inst : CommRing R] → [inst_1 : CommRing A] → [Algebra R A] → Set (PrimeSpectrum A)\", \"doc\": \"The set of prime ideals $\\\\mathfrak{p} \\\\in \\\\operatorname{Spec}(A)$ such that the algebra $A$ over the commutative ring $R$ is étale at $\\\\mathfrak{p}$. This means the localization of $A$ at $\\\\mathfrak{p\"}\n  {\"name\": \"StandardEtalePresentation.mk.inj\", \"module\": \"Mathlib/RingTheory/Etale/StandardEtale\", \"type\": \"∀ {R : Type u_4} {S : Type u_5} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  {P : StandardEtalePair R} {x : S} {hasMap : P.HasMap x} {lift_bijective : Function.Bijective ⇑(P.lift x hasMap)}\\n  {P_1 : StandardEtalePair R} {x_1 : S} {hasMap_1 : P_1.HasMap x_1}\\n  {lift_bijective_1 \", \"doc\": \"If two standard étale presentations constructed via the mk function are equal, then their underlying standard étale pairs and elements $x$ (satisfying $f(x)=0$ and $g(x)$ invertible) must be equal. Th\"}\n  {\"name\": \"Algebra.etaleLocus_eq_compl_support\", \"module\": \"Mathlib/RingTheory/Etale/Locus\", \"type\": \"∀ {R : Type u_1} {A : Type u_2} [inst : CommRing R] [inst_1 : CommRing A] [inst_2 : Algebra R A],\\n  Algebra.etaleLocus R A = (Module.support A Ω[A⁄R])ᶜ ∩ (Module.support A (Algebra.H1Cotangent R A))ᶜ\", \"doc\": \"The étale locus of an $ R $-algebra $ A $ is equal to the intersection of the complements of the supports of the module of Kähler differentials $ \\\\Omega_{A/R} $ and the first cotangent cohomology modu\"}\n  {\"name\": \"Algebra.Etale.formallyEtale\", \"module\": \"Mathlib/RingTheory/Etale/Basic\", \"type\": \"∀ {R : Type u} {A : Type v} {inst : CommRing R} {inst_1 : CommRing A} {inst_2 : Algebra R A} [self : Algebra.Etale R A],\\n  Algebra.FormallyEtale R A\", \"doc\": \"If $ A $ is an étale algebra over a commutative ring $ R $, then $ A $ is formally étale over $ R $. This establishes that the property of being étale implies formal étaleness in the context of commut\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match: returned declarations do not assert this statement for these objects and hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Residue compatible local cohomology orientations determine unique dualizing complexes with finite Tor dimension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"localCohomology.ofSelfLERadical\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \"(J : Ideal R) (i : ℕ) : ModuleCat.{u} R ⥤ ModuleCat.{u} R\", \"doc\": \"Given a commutative ring $ R $, an ideal $ J $, and a natural number $ i $, this constructs the $ i $-th local cohomology functor as an $ R $-linear endofunctor on the category of $ R $-modules. It is\"}\n  {\"name\": \"localCohomology.diagram\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \"(I : D ⥤ Ideal R) (i : ℕ) : Dᵒᵖ ⥤ ModuleCat.{u} R ⥤ ModuleCat.{u} R\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs a functor from $ \\\\mathcal{D}^{\\\\text{op}} $ to the category of $ R\"}\n  {\"name\": \"IsLocalRing.ResidueField.map_comp\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Basic\", \"type\": \"(f : T →+* R) (g : R →+* S) [IsLocalHom f] [IsLocalHom g] :\\n  IsLocalRing.ResidueField.map (g.comp f) = (IsLocalRing.ResidueField.map g).comp (IsLocalRing.ResidueField.map f)\", \"doc\": \"For local ring homomorphisms $ f : T \\\\to R $ and $ g : R \\\\to S $, the induced homomorphism between the residue fields of $ T $ and $ S $ is equal to the composition of the induced homomorphisms from $\"}\n  {\"name\": \"IsLocalRing.isLocalHom_residue\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Basic\", \"type\": \"∀ (R : Type u_1) [inst : CommRing R] [inst_1 : IsLocalRing R], IsLocalHom (IsLocalRing.residue R)\", \"doc\": \"For any commutative local ring $ R $, the canonical ring homomorphism from $ R $ to its residue field is a local homomorphism, meaning it preserves the maximal ideal structure by mapping the maximal i\"}\n  {\"name\": \"IsLocalRing.subsingleton_tensorProduct\", \"module\": \"Mathlib.RingTheory.LocalRing.Module\", \"type\": \"[Module.Finite R M] : Subsingleton (k ⊗[R] M) ↔ Subsingleton M\", \"doc\": \"For a local ring $ R $ with residue field $ k $ and a finite $ R $-module $ M $, the tensor product $ k \\\\otimes_R M $ is a subsingleton (i.e., has at most one element) if and only if $ M $ itself is a\"}\n  {\"name\": \"IsLocalRing.residue\", \"module\": \"Mathlib.RingTheory.LocalRing.ResidueField.Defs\", \"type\": \": R →+* ResidueField R\", \"doc\": \"The canonical ring homomorphism from a local ring $ R $ to its residue field, obtained by quotienting $ R $ by its unique maximal ideal consisting of all non-units.\"}\n  {\"name\": \"localCohomology.ofDiagram\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \"(I : D ⥤ Ideal R) (i : ℕ) : ModuleCat.{max u v} R ⥤ ModuleCat.{max u v} R\", \"doc\": \"Given a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs an $ R $-linear endofunctor on the category of $ R $-modules by\"}\n  {\"name\": \"Module.Basis.orientation\", \"module\": \"Mathlib.LinearAlgebra.Orientation\", \"type\": \"(e : Basis ι R M) : Orientation R M ι\", \"doc\": \"Given a commutative ring $ R $ with a strict ordered ring structure, an $ R $-module $ M $, and a finite index type $ \\\\iota $, if $ e $ is a basis of $ M $ indexed by $ \\\\iota $, then the orientation i\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match: returned declarations do not assert this statement for these objects and hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-18",
+   "verdict": "no match: returned declarations do not assert this statement for these objects and hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "potential.?dual|dualizing.?complex|pinning",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Algebra/Order/Group/Lattice.lean\", \"line\": \"14\", \"text\": \"underpinnings of vector lattices, Banach lattices, AL-space, AM-space etc.\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match: returned declarations do not assert this statement for these objects and hypotheses"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-finite-regular-reduction-dualizing",
@@ -68,5 +219,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-potential-dualizing-uniqueness",
+  "worker": "stage1",
+  "summary": "Followed ILO XVII normalization gluing for existence and pinned uniqueness, separate Noetherian induction for constructibility, and coefficient coinduction plus the periodic Hom/tensor criterion for Tor finiteness. Six strictly supporting lemmas are left statement-only. Reused regular pinnings, finite exceptional pullback, reduction invariance, excellence stability, and normal-component decomposition. No statement change.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve, Proof Step 3: the finite coefficient normalized dualizing complex needed in the generic-duality model. Realizes the finer existence/uniqueness/constructibility/Tor input created in lem-per-finite-regular-reduction-dualizing.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduction-universal-homeomorphism",
+    "why": "Reduction is a universal homeomorphism, needed to compare the identical small etale theories; the perverse unit has no replacement."
+   },
+   {
+    "node": "thm-weil-pbc-universal-homeomorphism-invariance",
+    "why": "Generic etale-topos invariance tool for reduction; no curve or finite-field restriction."
+   },
+   {
+    "node": "rem-pc-regular-normal",
+    "why": "Regular implies normal, and Noetherian normal schemes have finitely many clopen integral components; these generic scheme facts let both inductions apply the componentwise source results."
+   },
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic commutative-algebra stability of excellence under finite-type maps, ensuring the normalization-square schemes satisfy the source hypotheses."
+   },
+   {
+    "node": "lem-asd-finite-etale-twist-line",
+    "why": "Ordinary finite-coefficient Tate lines are etale locally free of rank one and flat over any scheme with the torsion order invertible; used to normalize generic shifts and verify constructibility, without changing the proof route."
+   },
+   {
+    "node": "lem-weil-pbc-finite-closed-map-finite-fibres",
+    "why": "Closedness of finite morphisms ensures the boundary images in the strengthened Noetherian induction are closed supports."
+   },
+   {
+    "node": "lem-weil-pbc-integral-incomparability",
+    "why": "Incomparability shows points above generic points of the finite image are generic, ensuring a nowhere dense boundary has smaller closed image."
+   },
+   {
+    "node": "lem-sc-strict-henselization-dimension",
+    "why": "Generic commutative algebra: strict henselization preserves Krull dimension, used to find an immediate geometric generization when normalizing the dimension function on a regular component; no node of the unit gives it."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Generic commutative algebra: the maximal ideal of the strict henselization is the extended maximal ideal, so a non-maximal prime lies over a proper generization; no node of the unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduction-universal-homeomorphism",
+  "thm-weil-pbc-universal-homeomorphism-invariance",
+  "rem-pc-regular-normal",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-asd-finite-etale-twist-line",
+  "lem-weil-pbc-finite-closed-map-finite-fibres",
+  "lem-weil-pbc-integral-incomparability",
+  "lem-sc-strict-henselization-dimension",
+  "lem-weil-pbc-strict-henselization-triples"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-6bb38b87a",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-6bb38b87a (reviewer sub-agent of L); spot-checked: Read ILO XVII Def 2.1.1-2.1.2, Prop 2.4.4.1, Thm 5.1.1, 5.2, 5.3.1(a)-(c) with Lemma 5.3.2, 5.4.1 with its whole proof (pp. 290-293), 5.5, and 6.1.1/6.2.1.1/6.2.2.1-6.2.2.4 (pp. 293-295); XIV 2.1.8 remark and 2.2.2. Also read the item, all six new nodes, every cited statement and the parent. The item statement is unchanged and true, with exactly the source's hypotheses (Z/l^n, Noetherian excellent, l invertible, no finite Krull dimension). New nodes, all true and strictly smaller than the item: normal = 5.3.1 (phi = max(0,-2delta-2) equals 2dimO-2 since delta = -dimO here); gluing = 5.4.1, sign checked; normalization = Stacks 035S/0BAJ; open-closed test = 6.2.2.2; coinduction = 6.2.1.1, the l^(n-m) identification checked; Hom/tensor = 6.2.2.4, tested on K = Z/l and K = Lambda over Z/l^2. No duplicates found by DAG search; no SGA. Small cases checked: field, DVR, p = id with Y empty, m = n, n = 1. FIX 1 (E5/C1): old Step 4 identified j*K with Lambda(delta(eta))[2delta(eta)] via the regular-unit lemma without showing delta = delta(eta) - dimO on regular components (XIV 2.1.8 remark, used silently in 6.2.2.1). Added a new Step 4 that proves it inline by induction on dimO, citing regular-unit, lem-sc-strict-henselization-dimension and lem-weil-pbc-strict-henselization-triples; the last two are declared as tool_uses. Old Steps 4-5 are renumbered to 5-6. FIX 2 (C4): the test node defined i^! as the derived supported kernel, while finite pullback yields the right adjoint of i_*. The test node now uses the bounded-below right adjoint of i_* = Ri_! (the source's i^!; stmt_dep changed to def-amb-etale-compact-support), and Step 5 spells out j^! = j^*. FIX 3 (C1): Step 3 now cites finite pullback for the induced dimension functions delta∘f of the gluing square. Accepted the 7 declared tool_uses. Advisory: the new nodes lack lean_audit.; 2 file(s) fixed by the reviewer"
  }
 }

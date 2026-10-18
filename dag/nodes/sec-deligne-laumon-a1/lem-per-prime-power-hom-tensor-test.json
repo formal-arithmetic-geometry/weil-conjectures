@@ -1,0 +1,73 @@
+{
+ "id": "lem-per-prime-power-hom-tensor-test",
+ "kind": "statement",
+ "title": "Prime-power coefficient Hom and tensor boundedness criterion",
+ "statement": "Let $X$ be a Noetherian scheme, let $\\ell$ be prime, $n\\geq1$, $\\Lambda=\\mathbf Z/\\ell^n\\mathbf Z$, and $k=\\mathbf F_\\ell$. Let $K\\in D^b(X_{\\mathrm{et}},\\Lambda)$ have bounded cohomology [def-weil-pbc-derived-categories]. The following are equivalent: (i) $K$ has finite Tor amplitude [def-kun-tor-amplitude]; (ii) $K\\otimes^L_\\Lambda k_X$ has bounded cohomology [def-kun-derived-tensor]; (iii) $R\\mathcal Hom_\\Lambda(k_X,K)$ has bounded cohomology [def-pur-derived-internal-hom]. When they hold there is a canonical isomorphism\n$$R\\mathcal Hom_\\Lambda(k_X,K)\\cong K\\otimes^L_\\Lambda k_X$$\nin $D^b(X_{\\mathrm{et}},k)$. Neither excellence, invertibility of $\\ell$ on $X$, nor constructibility of $K$ is required.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, Lemma 6.2.2.4, including the two-periodic comparison on pp. 294-295"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-kun-tor-amplitude",
+  "def-kun-derived-tensor",
+  "def-pur-derived-internal-hom"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a bounded complex of sheaves of Z mod prime power modules finite Tor dimension is equivalent to bounded derived Hom from the residue field",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsLE n], (DerivedCategory.Q.obj K).IsLE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the subcategory $ \\\\mathcal{L}_n $ (objects strictly supported in degrees $ \\\\leq n $) of the T-structure, then its image under the localization fun\"}\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b],\\n  ∃ K, ∃ (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ DerivedCategory.Q.obj K)\", \"doc\": \"For any object $X$ in the derived category of an abelian category $\\\\mathcal{C}$, if $X$ is cohomologically bounded below by integer $a$ and above by integer $b$ (i.e., $X \\\\in \\\\mathcal{G}_a \\\\cap \\\\mathc\"}\n  {\"name\": \"DerivedCategory.isLE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsLE n ↔ K.IsLE n\", \"doc\": \"For any cochain complex $ K $ with integer indices and any integer $ n $, the object $ Q(K) $ in the derived category belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure at degree $ n\"}\n  {\"name\": \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n], (DerivedCategory.Q.obj K).IsGE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the family $ \\\\mathcal{G}_n $ of the T-structure defined by cohomological support, then its image under the localization functor $ Q $ to the deriv\"}\n  {\"name\": \"DerivedCategory.isGE_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ),\\n  X.IsGE n ↔ ∀ i < n, CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, $ X $ satisfies the $ \\\\text{IsGE}(n) $ condition (i.e., belongs to the $ \\\\mathcal{G}_n $ family of\"}\n  {\"name\": \"DerivedCategory.isLE_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ),\\n  X.IsLE n ↔ ∀ (i : ℤ), n < i → CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and an integer $ n $, $ X $ belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure if and only if for e\"}\n  {\"name\": \"CategoryTheory.isZero_Tor'_succ_of_projective\", \"module\": \"Mathlib/CategoryTheory/Monoidal/Tor\", \"type\": \"∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (X Y : C) [CategoryTheory.Projective X] (n : ℕ),\\n  \", \"doc\": \"For any projective object $X$ in a monoidal abelian category $\\\\mathcal{C}$ with enough projective objects, and for any object $Y$ in $\\\\mathcal{C}$, the $(n+1)$-th Tor functor $\\\\mathrm{Tor}_{n+1}(X, Y)\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match: returned declarations do not assert this statement for these objects and hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Over Z mod p power bounded derived Hom from Fp is equivalent to bounded derived tensor with Fp by a periodic resolution",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"lTensorHomEquivHomLTensor\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \": P ⊗[R] (M →ₗ[R] Q) ≃ₗ[R] M →ₗ[R] P ⊗[R] Q\", \"doc\": \"Let $R$ be a commutative semiring, and let $P, Q$ be $R$-modules and $M$ be a free $R$-module. There is a canonical $R$-linear isomorphism: $$ P \\\\otimes_R \\\\text{Hom}_R(M, Q) \\\\cong \\\\text{Hom}_R(M, P \\\\o\"}\n  {\"name\": \"lTensorHomEquivHomLTensor.congr_simp\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \"∀ (R : Type u_2) (M : Type u_3) (P : Type u_5) (Q : Type u_6) [inst : CommSemiring R] [inst_1 : AddCommMonoid M]\\n  [inst_2 : AddCommMonoid P] [inst_3 : AddCommMonoid Q] [inst_4 : Module R M] [inst_5 : Module R P]\\n  [inst_6 : Module R Q] [inst_7 : Module.Free R M] [inst_8 : Module.Finite R M],\\n  lTen\", \"doc\": \"For a commutative semiring $ R $, an $ R $-module $ M $ that is free and finitely generated, and $ R $-modules $ P $ and $ Q $, the natural isomorphism between $ \\\\text{Hom}(M \\\\otimes_R P, Q) $ and $ \\\\\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.fromLeftDerivedZero_eq\", \"module\": \"Mathlib.CategoryTheory.Abelian.LeftDerived\", \"type\": \"{X : C} (P : ProjectiveResolution X) (F : C ⥤ D) [F.Additive] :\\n  F.fromLeftDerivedZero.app X =\\n    (P.isoLeftDerivedObj F 0).hom ≫ (ChainComplex.isoHomologyι₀ _).hom ≫ P.fromLeftDerivedZero' F\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and a projective resolution $ P $ of an object $ X \\\\in \\\\mathcal{C} $, the natural transformation $ \\\\eta_X : L_0F(\"}\n  {\"name\": \"rTensorHomEquivHomRTensor\", \"module\": \"Mathlib.LinearAlgebra.Contraction\", \"type\": \": (M →ₗ[R] P) ⊗[R] Q ≃ₗ[R] M →ₗ[R] P ⊗[R] Q\", \"doc\": \"Let $R$ be a commutative semiring, and let $M, P, Q$ be $R$-modules. If $M$ is a finitely generated free module, there exists a canonical $R$-linear equivalence between the tensor product of the modul\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.isoLeftDerivedObj\", \"module\": \"Mathlib.CategoryTheory.Abelian.LeftDerived\", \"type\": \"{X : C} (P : ProjectiveResolution X) (F : C ⥤ D) [F.Additive] (n : ℕ) :\\n  (F.leftDerived n).obj X ≅ (HomologicalComplex.homologyFunctor D _ n).obj ((F.mapHomologicalComplex _).obj P.complex)\", \"doc\": \"The n-th left-derived functor of an additive functor $ F : C \\to D $, constructed by first replacing objects with projective resolutions (chain complexes of projective objects), applying $ F $ to these\"}\n  {\"name\": \"CategoryTheory.instIsIsoFromLeftDerivedZero'\", \"module\": \"Mathlib.CategoryTheory.Abelian.LeftDerived\", \"type\": \"{X : C} (P : ProjectiveResolution X) : IsIso (P.fromLeftDerivedZero' F)\", \"doc\": \"For any object $X$ in an abelian category $\\\\mathcal{C}$ and its projective resolution $P$, the morphism from the zeroth right homology object of $F(P)$ to $F(X)$ is an isomorphism. This asserts that a\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedToHomotopyCategory\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \"(F : C ⥤ D) [F.Additive] : C ⥤ HomotopyCategory D (ComplexShape.up ℕ)\", \"doc\": \"The right-derived functor associated to an additive functor $ F : C \\to D $, constructed by first taking injective resolutions in the abelian category $ C $ and then applying the induced functor betwee\"}\n  {\"name\": \"CategoryTheory.Functor.leftDerivedToHomotopyCategory\", \"module\": \"Mathlib.CategoryTheory.Abelian.LeftDerived\", \"type\": \"(F : C ⥤ D) [F.Additive] : C ⥤ HomotopyCategory D (ComplexShape.down ℕ)\", \"doc\": \"The left derived functor associated to an additive functor $ F : C \\to D $, constructed by composing the projective resolutions functor on $ C $ with the induced functor between homotopy categories. Fo\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match: returned declarations do not assert this statement for these objects and hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torAmplitude\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-18",
+   "verdict": "no match: returned declarations do not assert this statement for these objects and hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|TorAmplitude|periodic|ZMod",
+   "results": "[grep] OK 2 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/AlternatingConst.lean\", \"line\": \"16\", \"text\": \"defines the periodic chain and cochain complexes\"}\n  {\"file\": \"Mathlib/Algebra/Homology/AlternatingConst.lean\", \"line\": \"19\", \"text\": \"different parity). We calculate the homology of these periodic complexes.\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match: returned declarations do not assert this statement for these objects and hypotheses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-potential-dualizing-uniqueness",
+  "date": "2026-10-18",
+  "group": "Q12"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3, dimension-normalized Verdier duality: Prime-power coefficient Hom and tensor boundedness criterion.",
+   "via": [
+    "lem-per-potential-dualizing-uniqueness",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -1,0 +1,73 @@
+{
+ "id": "lem-per-potential-hom-coefficient-restriction",
+ "kind": "statement",
+ "title": "Coinduction of potential pinnings to a quotient coefficient ring",
+ "statement": "Let $\\ell$ be prime, $1\\leq m\\leq n$, $\\Lambda=\\mathbf Z/\\ell^n\\mathbf Z$, $\\Lambda'=\\mathbf Z/\\ell^m\\mathbf Z$, and $X$ a Noetherian excellent scheme with $\\ell$ invertible [def-exc-excellent-ring]. Let $\\delta$ be a dimension function and $K\\in D^+(X_{\\mathrm{et}},\\Lambda)$ a pinned potential dualizing complex [def-per-potential-dualizing-complex]. Then\n$$K'=R\\mathcal Hom_\\Lambda(\\Lambda'_X,K)\\in D^+(X_{\\mathrm{et}},\\Lambda')$$\n[def-pur-derived-internal-hom, def-weil-pbc-derived-categories] has natural potential pinnings for $(X,\\delta,\\Lambda')$. These pinnings are induced by the supported-cohomology comparison with $R\\mathcal Hom_\\Lambda(\\Lambda',R\\Gamma_xK)$ and the coefficient identification $\\Lambda'\\cong\\operatorname{Hom}_\\Lambda(\\Lambda',\\Lambda)$ sending $a$ to the homomorphism $b\\mapsto\\ell^{n-m}ab$, together with the corresponding Tate-twist identifications. No constructibility or finite Tor amplitude of $K$ is assumed.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, Proposition 6.2.1.1 (specialization to prime-power coefficient rings)"
+ },
+ "stmt_deps": [
+  "def-exc-excellent-ring",
+  "def-per-potential-dualizing-complex",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom from a quotient coefficient ring into a pinned potential dualizing complex is again potential for the quotient coefficients",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Submodule.quotDualCoannihilatorToDual_apply\", \"module\": \"Mathlib/LinearAlgebra/Dual/Lemmas\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  (W : Submodule R (Module.Dual R M)) (m : M) (w : ↥W),\\n  (W.quotDualCoannihilatorToDual (Submodule.Quotient.mk m)) w = ↑w m\", \"doc\": \"For a submodule $ W $ of the dual module $ M^* $, the canonical linear map from the quotient module $ M / \\\\text{coannihilator}(W) $ to the dual of $ W $ satisfies $ \\\\phi([m])(w) = w(m) $ for all $ m \\\\\"}\n  {\"name\": \"Submodule.dualCopairing_apply\", \"module\": \"Mathlib/LinearAlgebra/Dual/Lemmas\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {W : Submodule R M}\\n  (φ : ↥W.dualAnnihilator) (x : M), (W.dualCopairing φ) (Submodule.Quotient.mk x) = φ x\", \"doc\": \"For a submodule $ W $ of an $ R $-module $ M $, the dual copairing map sends a functional $ \\\\varphi $ in the annihilator of $ W $ to a functional on the quotient module $ M/W $. Evaluating this induce\"}\n  {\"name\": \"Algebra.PreSubmersivePresentation.cotangentComplexAux\", \"module\": \"Mathlib/RingTheory/Smooth/StandardSmoothCotangent\", \"type\": \"{R : Type u_1} →\\n  {S : Type u_2} →\\n    {ι : Type u_3} →\\n      {σ : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : CommRing S] →\\n            [inst_2 : Algebra R S] →\\n              [Finite σ] → (P : Algebra.PreSubmersivePresentation R S ι σ) → P.toExtension.Cotangent →ₗ[S] σ → S\", \"doc\": \"The linear map from the cotangent module of the algebra extension to the space of functions $\\\\sigma \\\\to S$, constructed as the composition of the cotangent complex map, the basis representation, a lin\"}\n  {\"name\": \"Ideal.quotientToQuotientRangePowQuotSuccAux_mk\", \"module\": \"Mathlib/NumberTheory/RamificationInertia/Basic\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {S : Type v} [inst_1 : CommRing S] (p : Ideal R) (P : Ideal S) [inst_2 : Algebra R S]\\n  {i : ℕ} {a : S} (a_mem : a ∈ P ^ i) (x : S),\\n  p.quotientToQuotientRangePowQuotSuccAux P a_mem (Submodule.Quotient.mk x) =\\n    Submodule.Quotient.mk ⟨(Ideal.Quotient.mk (P ^ Ide\", \"doc\": \"A linear map from the quotient ring $ S/P $ to the quotient module $ (P^i/P^e)/\\\\text{range}(P^{i+1} \\\\to P^i) $, induced by the inclusion of $ P^{i+1} $ in $ P^i $. This map sends elements of $ S $ to \"}\n  {\"name\": \"Submodule.dualPairing_apply\", \"module\": \"Mathlib/LinearAlgebra/Dual/Lemmas\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] {W : Submodule R M}\\n  (φ : Module.Dual R M) (x : ↥W), (W.dualPairing (Submodule.Quotient.mk φ)) x = φ ↑x\", \"doc\": \"For any $ R $-linear functional $ \\\\varphi $ on $ M $ and any element $ x $ in the submodule $ W $, the evaluation of the dual pairing map (induced by quotienting the dual module $ M^* $ by the annihil\"}\n  {\"name\": \"AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Functoriality\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {f : M →ₗ[R] N},\\n  Function.Surjective ⇑((I • ⊤).mkQ ∘ₗ f) →\\n    ∀ {x : M} {n : ℕ} {y : N ⧸ I ^ n • ⊤} {y' : N ⧸ I ^ (n +\", \"doc\": \"Given a surjective composition of the canonical quotient map $ N \\\\to N/(I^n \\\\bullet \\\\top) $ with an $ R $-linear map $ f: M \\\\to N $, for any $ x \\\\in M $, $ n \\\\in \\\\mathbb{N} $, and compatible elements \"}\n  {\"name\": \"FGModuleCat.exactPairing\", \"module\": \"Mathlib/Algebra/Category/FGModuleCat/Basic\", \"type\": \"(K : Type u) → [inst : Field K] → (V : FGModuleCat K) → CategoryTheory.ExactPairing V (FGModuleCat.FGModuleCatDual K V)\", \"doc\": \"For any field $ K $ and finitely generated $ K $-module $ V $, there exists an exact pairing between $ V $ and its dual module $ \\\\text{Hom}_K(V, K) $, constructed via coevaluation and evaluation maps \"}\n  {\"name\": \"Algebra.instFiniteH1CotangentOfFinitePresentationOfProjectiveKaehlerDifferential\", \"module\": \"Mathlib/RingTheory/Extension/Cotangent/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.FinitePresentation R S] [Module.Projective S Ω[S⁄R]], Module.Finite S (Algebra.H1Cotangent R S)\", \"doc\": \"If $ S $ is a finitely presented $ R $-algebra and the module of Kähler differentials $ \\\\Omega_{S/R} $ is projective over $ S $, then the first cotangent cohomology module $ H^1_{\\\\text{cotangent}}(R, \"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match: returned declarations do not assert this statement for these objects and hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exceptional local cohomology pinnings commute with coinduction of etale torsion coefficient rings",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"groupCohomology.coindIso\", \"module\": \"Mathlib.RepresentationTheory.Homological.GroupCohomology.Shapiro\", \"type\": \"(A : Rep k S) (n : ℕ) : groupCohomology (coind S.subtype A) n ≅ groupCohomology A n\", \"doc\": \"For a commutative ring $ k $, group $ G $, subgroup $ S $, and a $ kS $-module $ A $, this establishes an isomorphism between the $ n $-th group cohomology of $ G $ with coefficients in the coinduced \"}\n  {\"name\": \"Rep.coindMap\", \"module\": \"Mathlib.RepresentationTheory.Coinduced\", \"type\": \"{A B : Rep k G} (f : A ⟶ B) : coind φ A ⟶ coind φ B\", \"doc\": \"Given a commutative ring $k$, monoids $G$ and $H$, a monoid homomorphism $\\\\varphi: G \\\\to H$, and a morphism $f: A \\\\to B$ between $G$-representations over $k$, this constructs the induced linear map be\"}\n  {\"name\": \"Rep.coind'_ext\", \"module\": \"Mathlib.RepresentationTheory.Coinduced\", \"type\": \"{f g : coind' φ A} (hfg : ∀ h, f.hom (single h 1) = g.hom (single h 1)) : f = g\", \"doc\": \"For the coinduced representation $\\\\text{coind}'(\\\\varphi, A)$ over a commutative ring $k$, two elements $f$ and $g$ are equal if their homomorphisms agree on all basis elements $\\\\text{single}(h, 1)$ fo\"}\n  {\"name\": \"localCohomology.ofSelfLERadical\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \"(J : Ideal R) (i : ℕ) : ModuleCat.{u} R ⥤ ModuleCat.{u} R\", \"doc\": \"Given a commutative ring $ R $, an ideal $ J $, and a natural number $ i $, this constructs the $ i $-th local cohomology functor as an $ R $-linear endofunctor on the category of $ R $-modules. It is\"}\n  {\"name\": \"Rep.coind\", \"module\": \"Mathlib.RepresentationTheory.Coinduced\", \"type\": \": Rep k H\", \"doc\": \"For a commutative semiring $k$, monoids $G$ and $H$, a monoid homomorphism $\\\\varphi: G \\\\to H$, and a $k$-module $A$ with $G$-representation $\\\\rho: G \\\\to \\\\mathrm{End}_k(A)$, this constructs the coinduc\"}\n  {\"name\": \"Rep.coindVEquiv\", \"module\": \"Mathlib.RepresentationTheory.Coinduced\", \"type\": \": A.ρ.coindV φ ≃ₗ[k] ((Action.res _ φ).obj (leftRegular k H) ⟶ A)\", \"doc\": \"For a commutative ring $k$, monoids $G$ and $H$, a monoid homomorphism $\\\\varphi: G \\\\to H$, and a $k$-module $A$ with $G$-action $\\\\rho$, this establishes a $k$-linear equivalence between the coinduced \"}\n  {\"name\": \"localCohomology\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \"(J : Ideal R) (i : ℕ) : ModuleCat.{u} R ⥤ ModuleCat.{u} R\", \"doc\": \"Given a commutative ring $ R $ and an ideal $ J $, the $ i $-th local cohomology functor with respect to $ J $ is constructed as the colimit of a diagram formed by the descending chain of powers $ J^n\"}\n  {\"name\": \"localCohomology.diagram\", \"module\": \"Mathlib.Algebra.Homology.LocalCohomology\", \"type\": \"(I : D ⥤ Ideal R) (i : ℕ) : Dᵒᵖ ⥤ ModuleCat.{u} R ⥤ ModuleCat.{u} R\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs a functor from $ \\\\mathcal{D}^{\\\\text{op}} $ to the category of $ R\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no match: returned declarations do not assert this statement for these objects and hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-18",
+   "verdict": "no match: returned declarations do not assert this statement for these objects and hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "potential.?dual|coinduction|change.?of.?rings",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-18",
+   "verdict": "no match: returned declarations do not assert this statement for these objects and hypotheses"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-potential-dualizing-uniqueness",
+  "date": "2026-10-18",
+  "group": "Q12"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 3, dimension-normalized Verdier duality: Coinduction of potential pinnings to a quotient coefficient ring.",
+   "via": [
+    "lem-per-potential-dualizing-uniqueness",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
