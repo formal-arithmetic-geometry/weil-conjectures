@@ -12,7 +12,8 @@
   "def-weil-affine-spectrum",
   "def-kun-topological-krull-dimension",
   "def-weil-pbc-adic-completion",
-  "def-weil-irreducible-components"
+  "def-weil-irreducible-components",
+  "def-per-local-cohomological-dimension"
  ],
  "proof": [
   {
@@ -248,5 +249,37 @@
   "group": "N7",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-022009ca9 (reviewer sub-agent of L); spot-checked: Read the item, all 7 steps and the 3 new nodes in full against Stacks algebraization 0DXP, 0DXI, 0DXQ, 0DXR, 0DX1 and 0BLX, plus 0ECR (first half) and more-algebra 0A06; all cited tags checked against the tags file. The item statement is identical to live. Steps 1-5 and 7 are correct: generator bound, then subideal completeness; minimal-prime components plus Serre reduced⇒S1 with the depth lift to A_p (Nakayama); J=J'J_0 gives V(J)∩Y={m}; four-lemma chase re-done; cofinal colimit. One fault, C4/E5 in step 6: identifying β_V(s) with the formal sections needs H^0 of the derived completion on the open V and its compatibility with completed restriction, but lem-per-punctured-derived-completion-sections covered only U. FIX: added to that node a true open-V degree-0 clause (natural in M, with reduction coordinates, compatible with restriction for V'⊆V); it is the source proof on V via 0BLX, 0A0K/0A06 and 0D60, where R^1lim involves H^{-1}=0 so no ML input is needed; source.place extended. Step 6 now cites the clause. New nodes: support comparison = 0DXP with s=1, d=q, hypotheses verbatim and (1) via 090T/0BFR; derived completion = 0DXI, all i true; localization diagram = the 0DXQ triangles, with the completed-restriction isomorphism from 0A6W. All are statement-only and self-contained, and none is a duplicate (grep of the tags and the sbc punctured-node candidates). Small cases checked: I=0, M=0, I=A, k[[x,y]] (excluded) and k[[x,y,z]] with I=(x). Accepted the 4 generic tool_uses. No SGA.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FormalPuncturedSections",
+  "declaration": "AlgebraicGeometry.Scheme.formal_punctured_sections_comparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.formal_punctured_sections_comparison",
+   "AlgebraicGeometry.FormalPuncturedSections.Reduction",
+   "AlgebraicGeometry.FormalPuncturedSections.reductionMap",
+   "AlgebraicGeometry.FormalPuncturedSections.reducedIdeal",
+   "AlgebraicGeometry.FormalPuncturedSections.Neighborhoods",
+   "AlgebraicGeometry.FormalPuncturedSections.neighborhoodInclusion",
+   "AlgebraicGeometry.FormalPuncturedSections.neighborhoodSections",
+   "AlgebraicGeometry.FormalPuncturedSections.quotientMap",
+   "AlgebraicGeometry.FormalPuncturedSections.thickeningOpen",
+   "AlgebraicGeometry.FormalPuncturedSections.thickeningTransition",
+   "AlgebraicGeometry.FormalPuncturedSections.formalSectionsDiagram"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FormalPuncturedSections.lean",
+  "statement": "theorem formal_punctured_sections_comparison (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] [IsAdicComplete (IsLocalRing.maximalIdeal A) A] (hfinite : topologicalKrullDim (Spec (.of A)) < ⊤) (I : Ideal A) (hI : I ≠ ⊤) (U : (Spec (.of A)).Opens) (hU : ∀ x : Spec (.of A), x ∈ U ↔ x ≠ IsLocalRing.closedPoint A) (d : WithBot ℕ∞) (hd : IsLeast {e : WithBot ℕ∞ | ∃ Z ∈ irreducibleComponents (Spec (.of A)), topologicalKrullDim Z = e} d) (hbound : ModuleCat.localCohomologicalDimension I + 1 < d) : ∃ e : colimit (neighborhoodSections I U) ≅ limit (formalSectionsDiagram (reducedIdeal I) (reductionMap A ⁻¹ᵁ U)), ∀ (V : Neighborhoods I U) (n : ℕ), colimit.ι (neighborhoodSections I U) (op V) ≫ e.hom ≫ limit.π (formalSectionsDiagram (reducedIdeal I) (reductionMap A ⁻¹ᵁ U)) (op n) ≫ (thickeningOpen (reducedIdeal I) (reductionMap A ⁻¹ᵁ U) n).topIso.hom ≫ (Spec (.of (Reduction A ⧸ reducedIdeal I ^ (n + 1)))).presheaf.map (homOfLE ((TopologicalSpace.Opens.map (quotientMap (reducedIdeal I) n).base).map ((TopologicalSpace.Opens.map (reductionMap A).base).map (homOfLE V.property.1))).le).op = (quotientMap (reducedIdeal I) n).app (reductionMap A ⁻¹ᵁ V.val)",
+  "branch": "newtargets-dag",
+  "by": "Q135",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Uses the already landed local cohomological dimension. The comparison is an isomorphism of the actual neighborhood colimit and positive quotient-section inverse limit, characterized on every colimit injection and limit projection by the restriction/reduction equation; this uniquely specifies the canonical comparison. Other declarations construct its concrete diagrams and maps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-45484ad85",
+  "group": "Q135",
+  "result": "pass",
+  "note": "Node copy = live except lean and the added landed stmt_dep def-per-local-cohomological-dimension (real sSup of rightDerived idealPowerTorsion in WithBot ℕ∞). Clause by clause vs Stacks 0DXR/0ECR: Noetherian local (nonzero), IsAdicComplete 𝔪, finite topologicalKrullDim, I≠⊤, U = puncture via hU, B = A/rad⊥, π = Spec.map, T_n = q⁻¹π⁻¹U at level n+1, d via IsLeast over irreducibleComponents, cd+1<d (cd=⊥ impossible under hI since Γ_I(A/I)≠0). The CommRingCat colimit is over the filtered neighborhood poset; the limit is ofSequence of quotient reductions. ∃ e iso with per-(V,n) restriction/reduction equations pins the canonical map, because q⁻¹π⁻¹V = q⁻¹π⁻¹U. Helpers are concrete with docstrings; lean.statement verbatim; no duplicates in live Sheaf or Q131. nt_compile --json clean 4.2 s, exit 0; broken control fails. Advisories: possibly redundant imports; docstring steps 1 and 6 lack bracketed node ids."
  }
 }

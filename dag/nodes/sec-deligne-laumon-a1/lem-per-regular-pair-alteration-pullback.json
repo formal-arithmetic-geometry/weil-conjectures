@@ -293,5 +293,31 @@
   "group": "Q141",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-6ed2c288b (reviewer sub-agent of L); spot-checked: PASS with no fixes; I read the item, both new nodes, every cited statement and the sources in full. Not superseded: the live node is still unsplit. The statement is unchanged apart from a conventions sentence and two definition stmt_deps, and no target is weakened. Sources: ILO IX 1.3 (printed p.132) is the regular base-change sentence. ILO II 1.1.5, 1.2.3 (4th bullet), 1.2.6, 1.2.7, 2.1.1 and 2.3.1-2.3.4 (pp.23-28) give the generator lemma's content. Stacks 0BI9/0BIA (etale.tex line 2419) give the snc criterion. Steps: (1) 07C1 applied to finite-type charts, then regular-local-maximal, gives a flat local map with regular closed fibre, and 031E makes the target regular. (2) Regular fibres are domains, hence reduced, which meets the generator lemma's hypothesis. (3) I verified the sieve-axiom argument: the image-covering sieves satisfy all three topology axioms, using that categorical pullbacks are preserved; the generators are covering, and minimality finishes. (4) m_B=(t,u) and dim B=d+e by the flat height formula, so (t,u) is a regular system of parameters. (5) The pulled-back ideal is (t1...tr)B, and the converse of the criterion gives an snc boundary on the right support, including the empty boundary. (6) Excellent gives G-ring, hence A->Â regular; R->R_p is regular, and composition applies because the fibres are Noetherian. New nodes: the generator lemma is true. Base change of a reduced object stays reduced (R0 by going-down, S1 ascends). Generic points go to generic points because fibres over generic points of the base are finite. The categorical product is the dominant-reduced part. The degree argument follows ILO 1.2.7. The snc criterion is true in both directions over a regular local UFD. It accepts xy, rejects xy(x+y), and rejects x^2-ay^2 with a a non-square. Neither node duplicates an existing one: the log-chart nodes give parameters only at strict local rings or over algebraically closed fields, and the cover-calculus node works inside alt/S rather than along a base change. Batch-5 flag: def-trf-strict-normal-crossings-boundary is the general snc definition, which the item's base stmt_deps already cited. It is not a step of the trace formula or Poincaré duality proofs, so I accept it. The declared tool_uses are all generic commutative algebra (07C1, 031E, 00ON, 07QI, Noetherian completion and so on); I recommend accepting them."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RegularPairAlterationPullback",
+  "declaration": "AlgebraicGeometry.PrimeToEllAlteration.regular_pair_alteration_pullback",
+  "declarations": [
+   "AlgebraicGeometry.PrimeToEllAlteration.baseObject",
+   "AlgebraicGeometry.PrimeToEllAlteration.toBaseObject",
+   "AlgebraicGeometry.PrimeToEllAlteration.regular_pair_alteration_pullback",
+   "AlgebraicGeometry.excellent_local_completion_isRegular",
+   "AlgebraicGeometry.excellent_stalk_completion_regular"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RegularPairAlterationPullback.lean",
+  "statement": "theorem regular_pair_alteration_pullback {S S' : Scheme.{u}} [IsNoetherian S] [IsNoetherian S'] [IsReduced S] [IsReduced S'] (g : S' ⟶ S) [Flat g] (hreg : ∀ (s : S) (L : Type u) [Field L] [Algebra (S.residueField s) L] [Module.Finite (S.residueField s) L], IsRegularScheme (pullback (g.fiberToSpecResidueField s) (Spec.map (CommRingCat.ofHom (algebraMap (S.residueField s) L))))) (ell : ℕ) [Fact ell.Prime] (hinv : ∀ s : S, IsUnit (ell : S.presheaf.stalk s)) {I : Type w} [Finite I] (R : I → Alt S) (hcover : IsCoveringFamily ell R (fun i ↦ toBaseObject (R i))) (hR : ∀ i, IsNoetherian (R i).obj.left ∧ IsRegularScheme (R i).obj.left) (hnoeth : ∀ i, IsNoetherian (pullback (R i).obj.hom g)) : (∀ i, IsRegularScheme (pullback (R i).obj.hom g)) ∧ (∃ R' : I → Alt S', (∀ i, (R' i).obj = Over.mk (pullback.snd (R i).obj.hom g)) ∧ IsCoveringFamily ell R' (fun i ↦ toBaseObject (R' i))) ∧ ∀ (Z : TopologicalSpace.Closeds S), IsNowhereDense (Z : Set S) → (∀ i, ∃ H : (R i).obj.left.IdealSheafData, IsStrictNormalCrossingsBoundary H ∧ (H.support : Set (R i).obj.left) = (R i).obj.hom ⁻¹' (Z : Set S)) → ∀ i, ∃ H' : (pullback (R i).obj.hom g).IdealSheafData, IsStrictNormalCrossingsBoundary H' ∧ (H'.support : Set ↥(pullback (R i).obj.hom g)) = (pullback.snd (R i).obj.hom g) ⁻¹' (g ⁻¹' (Z : Set S))",
+  "branch": "newtargets-dag",
+  "by": "Q44",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The main theorem states the alteration-family and support clauses. excellent_local_completion_isRegular and excellent_stalk_completion_regular state the final completion clause, including localization before completion. baseObject and toBaseObject construct the identity alteration object and its structural arrows, using the existing Alt category. Regular scheme morphisms use flatness and the explicit finite-residue-field fibre test, as in the neighboring regular-base-change modules."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3450ab358",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Every clause matches node and ILO IX 1.3: flat g with regular fibres after finite residue extensions, ell invertible on S, Finite I in Type w, IsCoveringFamily over the identity object, R'_i pinned by (R' i).obj = Over.mk (pullback.snd q_i g), exact snc supports with the empty boundary allowed; completion: excellent local A -> completion RingHom.IsRegular, stalk then completion composite flat with regular finite-extension fibres. Only the lean field changed vs live; lean.statement is verbatim; baseObject/toBaseObject are real constructions with no existing equivalent; docstrings carry source, blueprint and proof steps; all sorry. nt_compile --json clean (3.0 s, exit 0). Advisory: excellence assumed on all affine opens rather than the stalk only, matching the proof step and source."
  }
 }

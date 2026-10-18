@@ -233,5 +233,23 @@
   "group": "Q99",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-4d8b6409b (reviewer sub-agent of L); spot-checked: Read Stacks 0573 (more-morphisms l.6563) in full, plus Algebra 0565, Morphisms 056C and 01RE, with tags checked against tags/tags. The item statement is byte-identical to an earlier unsplit copy and matches 0573, with density written as O→j_*O_U injective per 01RE; no hypothesis was added. The 7 steps follow 0573 and each cited statement says what is used. (1) Reduction keeps the points and residue fields, so the fibres are the same; the reduced irreducible base is integral; restrict to a domain chart. (2) Use the finite affine cover from the finite-type definition; B_K is Noetherian, so U_η∩(X_r)_η is quasi-compact; the principal opens D(g)⊆U∩X_r are chosen on the total chart. (3) The new criterion gives injectivity of μ_K. (4) Apply the generic-flatness tool (domain, finite type, no fp) to the square-zero algebra E=B⊕M; E_a is flat over A, so its summands B_a and M_a are flat; this is a valid replacement for the 051T use. (5) Torsion-freeness gives B_a⊂B_K, so ker μ_a=0 and coker μ_a=M_a by fractions. (6) The flat-quotient tensor lemma with N=κ(y) and the criterion give W_y⊆U_y, and density passes from W_y to U_y by testing sections. (7) Intersect the finitely many D(a_r), which contain η, and glue by the sheaf axiom. New node lem-trf-affine-schematic-density-criterion is true; I tested n=0, n=1, k[x]/(x²) and k[x,y]/(xy) and checked the sheaf clause directly. It is statement-only, self-contained and smaller than the item. The DAG grep for 0565/01RE/056C/0573 and for density keywords found no duplicate (the Nagata qc-only definition and the topological lem-sbc-generic-open-fibre-density are different statements). Tool use lem-sbc-finite-type-algebra-generic-flatness is accepted: generic algebra not supplied by the sk-i-curve-zero unit. There is no cycle and no SGA citation. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SchematicDensityGenericFibreOpen",
+  "declaration": "AlgebraicGeometry.schematicDensityGenericFibreOpen",
+  "statement": "theorem schematicDensityGenericFibreOpen {X Y : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFiniteType f] [QuasiCompact f] (hY : IsIrreducible (Set.univ : Set Y)) (η : Y) (hη : IsGenericPoint η (Set.univ : Set Y)) (U : X.Opens) (hηdense : ∀ W : (f.fiber η).Opens, Function.Injective ((pullback.snd U.ι (f.fiberι η)).app W)) : ∃ V : Y.Opens, (V : Set Y).Nonempty ∧ ∀ (y : Y), y ∈ (V : Set Y) → ∀ W : (f.fiber y).Opens, Function.Injective ((pullback.snd U.ι (f.fiberι y)).app W)",
+  "by": "NP",
+  "date": "2026-10-18",
+  "file": "lean/Sheaf/AlgebraicGeometry/SchematicDensityGenericFibreOpen.lean",
+  "existing": false,
+  "branch": "newtargets-dag"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-81f888d6f",
+  "group": "NP",
+  "result": "fix",
+  "note": "Statement matches Tag 0573 and the node clause by clause: LocallyOfFiniteType+QuasiCompact; IsIrreducible univ; IsGenericPoint η univ; any U : X.Opens; X_y = f.fiber y; U_y = pullback U.ι (f.fiberι y); density written as injectivity of (pullback.snd U.ι (f.fiberι y)).app W for every open W, which is Tag 01RE for any open immersion. Conclusion ∃ nonempty open V with fibrewise injectivity. No extra hypotheses; empty-X, U=⊤/⊥ and non-reduced/non-Noetherian edge cases are covered. The lean.statement matches the file verbatim, and the node differs from live only in its lean record. Docstrings have source, blueprint and proof steps; the proof is only sorry. nt_compile --json is clean (2.9 s delivered, 2.7 s fixed). H9 FIX: removed the unused import Mathlib.AlgebraicGeometry.Morphisms.SchemeTheoreticallyDominant (fixes/SchematicDensityGenericFibreOpen.lean). Advisory: the landed def-trf-schematically-dense-open (SchematicallyDenseOpen) is the same notion; the item is not allowed to add it to stmt_deps, and its inline form is not a duplicate definition."
  }
 }

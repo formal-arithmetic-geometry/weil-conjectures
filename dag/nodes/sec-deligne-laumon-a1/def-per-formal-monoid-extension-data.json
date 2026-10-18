@@ -1,0 +1,145 @@
+{
+ "id": "def-per-formal-monoid-extension-data",
+ "kind": "definition",
+ "title": "Canonical chart tensor and extended formal monoid model data",
+ "status": "split",
+ "statement": "For a commutative ring $A$, commutative multiplicative monoids $R,Q$, a chart $\\alpha:R\\to(A,\\cdot)$ and a homomorphism $h:R\\to Q$, use the monoid rings $\\mathbf Z[R],\\mathbf Z[Q]$ with basis $[r]$, multiplication $[r][s]=[rs]$, and the actions induced by $\\alpha$ and $h$. Define the chart tensor ring $C=A\\otimes_{\\mathbf Z[R]}\\mathbf Z[Q]$ [def-weil-pbc-module-tensor-product] and its canonical base map $a\\mapsto a\\otimes1$. Put $G=\\alpha^{-1}(A^\\times)$. Define the sharp chart monoid as the additive notation for $\\operatorname{Associates}(G^{-1}R)$, the quotient of the monoid localization by association by a unit. The extended chart $G^{-1}R\\to A$ sends $r/g$ to $\\alpha(r)\\alpha(g)^{-1}$, and the canonical map $G^{-1}R\\to R^{\\rm gp}$ sends $r/g$ to $i(r)i(g)^{-1}$, where $i:R\\to R^{\\rm gp}$ is the canonical group-completion map. For a prime $\\mathfrak q$ of $C$ put $B=C_{\\mathfrak q}$ [def-weil-pbc-localization-at-prime]. Define its localized monomial chart $\\beta:Q\\to B$ by $q\\mapsto(1\\otimes[q])/1$ and its boundary ideal $J=\\langle\\beta(q):q\\in Q,\\ \\beta(q)\\notin B^\\times\\rangle$.\nFor commutative rings $B,H$, ideals $b,J\\subseteq B$, $c,L\\subseteq H$, and a ring equivalence $e:B\\simeq H$, define the adic-pair-equivalence predicate to mean $e(J)=L$, with $e$ continuous for the $b$-adic and $c$-adic topologies and $e^{-1}$ continuous for the reverse topologies (powers of the respective ideals are the neighborhoods of zero).\nFor a local commutative ring $B$, additive commutative monoid $T$, ideal $J\\subseteq B$, and Boolean $m$, define the extended-formal-monoid-model predicate as follows. Write $\\widehat B$ for the maximal-ideal completion [def-weil-pbc-adic-completion]. For a local coefficient ring $D$, let $H_D$ be the completion of $D[T]$ at $I_D=(\\mathfrak m_D,[t]:t\\ne0)$, with $D[T]$ having basis $[t]$ and $[t][s]=[t+s]$, and let $K_D=([t]:t\\ne0)H_D$. The predicate says that there exists a nonzero complete regular local ring $D$ [def-weil-regular-scheme], complete at $\\mathfrak m_D$ [def-weil-pbc-adic-completion], together with a residue-field ring equivalence $D/\\mathfrak m_D\\simeq B/\\mathfrak m_B$, such that: if $m=\\mathrm{false}$, there is a ring equivalence $e:\\widehat B\\simeq H_D$ satisfying the adic-pair-equivalence predicate for $(\\mathfrak m_B\\widehat B,J\\widehat B; I_DH_D,K_D)$; if $m=\\mathrm{true}$, there are $\\eta\\in H_D$ and a $D$-algebra equivalence $\\rho:H_D/K_D\\simeq D$ with $\\rho(\\eta\\bmod K_D)\\in\\mathfrak m_D\\setminus\\mathfrak m_D^2$, and a ring equivalence $e:\\widehat B\\simeq H_D/(\\eta)$ satisfying the same pair predicate with the images of $I_DH_D$ and $K_D$ in $H_D/(\\eta)$.",
+ "stmt_deps": [
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-pbc-adic-completion",
+  "def-weil-regular-scheme"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "VI 1.6, printed p.70; VI 2.2--2.3, printed pp.72--73; VIII 3.1.1--3.1.5, printed pp.98--99. Canonical chart and completed-pair definitions already published in Sheaf.RingTheory.FormalMonoidExtensionModel."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Definitions of chart tensor rings, sharp localized monoids, and continuous isomorphisms of completed formal monoid ring pairs",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"term_≃ₜ*_\", \"module\": \"Mathlib.Topology.Algebra.ContinuousMonoidHom\", \"type\": \": Lean.TrailingParserDescr✝\", \"doc\": \"The notation $\\\\simeq_\\\\mathrm{t}^*$ denotes a continuous monoid isomorphism between topological monoids, i.e., a bijective homomorphism that is continuous with a continuous inverse, preserving both the\"}\n  {\"name\": \"IsLocalization.tensorProduct_isLocalizedModule\", \"module\": \"Mathlib.RingTheory.Localization.BaseChange\", \"type\": \": IsLocalizedModule S (TensorProduct.mk R A M 1)\", \"doc\": \"For a commutative semiring $ R $, an $ R $-module $ M $, and a submonoid $ S $ of $ R $, the tensor product of the localization of $ R $ at $ S $ with $ M $ over $ R $ is the localization of $ M $ at \"}\n  {\"name\": \"MonoidAlgebra.tensorEquiv\", \"module\": \"Mathlib.RingTheory.TensorProduct.MonoidAlgebra\", \"type\": \": A ⊗[R] B[M] ≃ₐ[A] (A ⊗[R] B)[M]\", \"doc\": \"Let $R$ be a commutative semiring, $A$ and $B$ be commutative $R$-algebras, and $M$ be a commutative monoid. This defines the canonical $A$-algebra isomorphism:\\n$$A \\\\otimes_R B[M] \\\\cong (A \\\\otimes_R B\"}\n  {\"name\": \"AddMonoidAlgebra.tensorEquiv\", \"module\": \"Mathlib.RingTheory.TensorProduct.MonoidAlgebra\", \"type\": \"(R : Type u_1) →\\n  {M : Type u_2} →\\n    (A : Type u_4) →\\n      (B : Type u_5) →\\n        [inst : CommSemiring R] →\\n          [inst_1 : CommSemiring A] →\\n            [inst_2 : CommSemiring B] →\\n              [inst_3 : Algebra R A] →\\n                [inst_4 : Algebra R B] →\\n                  [inst_5 : \", \"doc\": \"Let $R$ be a commutative semiring, and let $A$ and $B$ be commutative $R$-algebras. Let $M$ be an additive commutative monoid. This definition establishes an equivalence of $A$-algebras between the te\"}\n  {\"name\": \"AddMonoidAlgebra.scalarTensorEquiv\", \"module\": \"Mathlib.RingTheory.TensorProduct.MonoidAlgebra\", \"type\": \"(R : Type u_1) →\\n  {M : Type u_2} →\\n    (A : Type u_4) →\\n      [inst : CommSemiring R] →\\n        [inst_1 : CommSemiring A] →\\n          [inst_2 : Algebra R A] →\\n            [inst_3 : AddCommMonoid M] → TensorProduct R A (AddMonoidAlgebra R M) ≃ₐ[A] AddMonoidAlgebra A M\", \"doc\": \"Let $R$ be a commutative semiring, $M$ be an additive commutative monoid, and $A$ be a commutative $R$-algebra. This definition establishes an $A$-algebra equivalence between the tensor product of $A$\"}\n  {\"name\": \"term_≃ₜ+_\", \"module\": \"Mathlib.Topology.Algebra.ContinuousMonoidHom\", \"type\": \": Lean.TrailingParserDescr✝\", \"doc\": \"The notation $\\\\simeq_\\\\mathrm{t}^+$ denotes a topological monoid isomorphism, which is a bijective continuous monoid homomorphism with a continuous inverse.\"}\n  {\"name\": \"TensorAlgebra.instRing\", \"module\": \"Mathlib.LinearAlgebra.TensorAlgebra.Basic\", \"type\": \"{S : Type*} [CommRing S] [Module S M] : Ring (TensorAlgebra S M)\", \"doc\": \"For any commutative ring $ S $ and $ S $-module $ M $, the tensor algebra $ \\\\mathrm{TensorAlgebra}(S, M) $ is equipped with a canonical ring structure, inherited from the free algebra quotiented by re\"}\n  {\"name\": \"MonoidAlgebra.scalarTensorEquiv\", \"module\": \"Mathlib.RingTheory.TensorProduct.MonoidAlgebra\", \"type\": \": A ⊗[R] R[M] ≃ₐ[A] A[M]\", \"doc\": \"The tensor product of an $ R $-algebra $ A $ with the monoid algebra $ R[M] $ over $ R $ is isomorphic to the monoid algebra $ A[M] $ as an $ A $-algebra. This equivalence is constructed by transposin\"}",
+   "date": "2026-10-18",
+   "verdict": "Mathlib supplies general tensor/completion constructions but not this chart-specific package; reuse the nine existing Sheaf definitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, TensorProduct",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AdicCompletion.ofTensorProduct\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_2) [AddCommGroup M] [Module R M] : TensorProduct R (AdicCompletion I R) M →ₗ[AdicCompletion I R] AdicCompletion I M\", \"doc\": \"The natural `AdicCompletion I R`-linear map from `AdicCompletion I R ⊗[R] M` to\\nthe adic completion of `M`.\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \" {R : Type u} [CommRing R] (I : Ideal R) (M : Type u) [AddCommGroup M] [Module R M] [IsNoetherianRing R] [Module.Finite R M] : TensorProduct R (AdicCompletion I R) M ≃ₗ[AdicCompletion I R] AdicCompletion I M\", \"doc\": \"`ofTensorProduct` packaged as linear equiv if `M` is a finite `R`-module and `R` is\\nNoetherian.\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfPiFintype\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (ι : Type u_4) [Fintype ι] [DecidableEq ι] : TensorProduct R (AdicCompletion I R) (ι → R) ≃ₗ[AdicCompletion I R] AdicCompletion I (ι → R)\", \"doc\": \"`ofTensorProduct` as an equiv in the case of `M = R^ι` where `ι` is finite.\"}\n  {\"name\": \"AdicCompletion.ofTensorProductInvOfPiFintype\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (ι : Type u_4) [Fintype ι] [DecidableEq ι] : AdicCompletion I (ι → R) ≃ₗ[AdicCompletion I R] TensorProduct R (AdicCompletion I R) (ι → R)\", \"doc\": \"(Implementation): If `M = R^ι` and `ι` is finite, we may construct an inverse to\\n`ofTensorProduct I (ι → R)`.\"}\n  {\"name\": \"AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \" {R : Type u} [CommRing R] (I : Ideal R) (M : Type u) [AddCommGroup M] [Module R M] [IsNoetherianRing R] [Module.Finite R M] : ↑(AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M) = AdicCompletion.ofTensorProduct I M\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_surjective_of_finite\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_2) [AddCommGroup M] [Module R M] [Module.Finite R M] : Function.Surjective ⇑(AdicCompletion.ofTensorProduct I M)\", \"doc\": \"If `M` is a finite `R`-module, then the canonical map\\n`AdicCompletion I R ⊗[R] M →ₗ AdicCompletion I M` is surjective.\"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_bijective_of_finite_of_isNoetherian\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \" {R : Type u} [CommRing R] (I : Ideal R) (M : Type u) [AddCommGroup M] [Module R M] [IsNoetherianRing R] [Module.Finite R M] : Function.Bijective ⇑(AdicCompletion.ofTensorProduct I M)\", \"doc\": \"If `R` is a Noetherian ring and `M` is a finite `R`-module, then the natural map\\ngiven by `AdicCompletion.ofTensorProduct` is an isomorphism.\"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_tmul\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (M : Type u_2) [AddCommGroup M] [Module R M] (r : AdicCompletion I R) (x : M) : (AdicCompletion.ofTensorProduct I M) (r ⊗ₜ[R] x) = r • (AdicCompletion.of I M) x\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_bijective_of_pi_of_fintype\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (ι : Type u_4) [Finite ι] : Function.Bijective ⇑(AdicCompletion.ofTensorProduct I (ι → R))\", \"doc\": \"If `M = R^ι`, `ofTensorProduct` is bijective.\"}\n  {\"name\": \"AdicCompletion.ofTensorProduct_comp_ofTensorProductInvOfPiFintype\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \" {R : Type u_1} [CommRing R] (I : Ideal R) (ι : Type u_4) [Fintype ι] [DecidableEq ι] : AdicCompletion.ofTensorProduct I (ι → R) ∘ₗ ↑(AdicCompletion.ofTensorProductInvOfPiFintype I ι) = LinearMap.id\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \" {R : Type u} [CommRing R] (I : Ideal R) (M : Type u) [AddCommGroup M] [Module R M] [IsNoetherianRing R] [Module.Finite R M] (x : M) : (AdicCompletion.ofTensorProductEquivOfFiniteNoetherian I M).symm ((AdicCompletion.of I M) x) = 1 ⊗ₜ[R] x\", \"doc\": \"\"}\n  {\"name\": \"AdicCompletion.tensor_map_id_left_injective_of_injective\", \"module\": \"Mathlib.RingTheory.AdicCompletion.AsTensorProduct\", \"type\": \" {R : Type u} [CommRing R] (I : Ideal R) [IsNoetherianRing R] {M : Type u} [AddCommGroup M] [Module R M] {N : Type u} [AddCommGroup N] [Module R N] {f : M →ₗ[R] N} [Module.Finite R M] [Module.Finite R N] (hf : Function.Injective ⇑f) : Function.Injective ⇑(TensorProduct.AlgebraTensorModule.map Linear\", \"doc\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "Mathlib supplies general tensor/completion constructions but not this chart-specific package; reuse the nine existing Sheaf definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "monoidChartTensor|chartSharpMonoid|localizedUnitChart|unitChartGroupMap|localizedTensorMonomial|localizedTensorBoundary|IsAdicPairEquiv|HasExtendedFormalMonoidModel",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "Mathlib supplies general tensor/completion constructions but not this chart-specific package; reuse the nine existing Sheaf definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l monoidChartTensor|chartSharpMonoid|localizedUnitChart|unitChartGroupMap|localizedTensorMonomial|localizedTensorBoundary|IsAdicPairEquiv|HasExtendedFormalMonoidModel /home/ubuntu/weil-newtargets-shared/dag/nodes",
+   "results": "/home/ubuntu/weil-newtargets-shared/dag/nodes/sec-trace-formula/lem-trf-formal-monoid-extension-model.json",
+   "date": "2026-10-18",
+   "verdict": "Only the existing theorem node carries these helper declarations; no definition node does. The published Sheaf definitions are reused, with no duplicate Lean code."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l monoidChartTensor|chartSharpMonoid|localizedUnitChart|unitChartGroupMap|localizedTensorMonomial|localizedTensorBoundary|IsAdicPairEquiv|HasExtendedFormalMonoidModel /home/ubuntu/weil-src-slopmaster2/WeilConjectures",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "Only the existing theorem node carries these helper declarations; no definition node does. The published Sheaf definitions are reused, with no duplicate Lean code."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l monoidChartTensor|chartSharpMonoid|localizedUnitChart|unitChartGroupMap|localizedTensorMonomial|localizedTensorBoundary|IsAdicPairEquiv|HasExtendedFormalMonoidModel /home/ubuntu/weil-newtargets-shared/lean/Sheaf",
+   "results": "/home/ubuntu/weil-newtargets-shared/lean/Sheaf/RingTheory/FormalMonoidExtensionModel.lean",
+   "date": "2026-10-18",
+   "verdict": "Only the existing theorem node carries these helper declarations; no definition node does. The published Sheaf definitions are reused, with no duplicate Lean code."
+  },
+  {
+   "tool": "blueprint_refs",
+   "query": "search chart tensor",
+   "results": "0 blueprint nodes match 'chart tensor'",
+   "date": "2026-10-18",
+   "verdict": "No blueprint definition node for the package."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-per-completed-invertible-kummer-monoid-extension",
+  "date": "2026-10-18",
+  "group": "Q36"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Completed chart calculation: canonical tensor, face localization, monomial ideals and continuous completed-pair model predicates.",
+   "via": [
+    "lem-per-completed-invertible-kummer-monoid-extension",
+    "lem-per-invertible-kummer-chart-log-regular",
+    "lem-per-tame-normalization-log-regular",
+    "lem-per-gabber-prime-to-ell-regular-cover",
+    "lem-per-prime-to-ell-uniformization-standard-form",
+    "lem-per-gabber-open-immersion-sheaf-finiteness",
+    "lem-per-quasi-excellent-etale-direct-image-finiteness",
+    "lem-per-finite-exceptional-preservation",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.RingTheory.FormalMonoidExtensionModel",
+  "declaration": "Algebra.monoidChartTensor",
+  "declarations": [
+   "Algebra.monoidChartTensor",
+   "Algebra.monoidChartTensorBase",
+   "Algebra.chartSharpMonoid",
+   "Algebra.localizedUnitChart",
+   "Algebra.unitChartGroupMap",
+   "Algebra.localizedTensorMonomial",
+   "Algebra.localizedTensorBoundary",
+   "AddMonoidAlgebra.IsAdicPairEquiv",
+   "AddMonoidAlgebra.HasExtendedFormalMonoidModel"
+  ],
+  "statement": "noncomputable def monoidChartTensor {A : Type u} [CommRing A]\n    {R : Type v} [CommMonoid R] {Q : Type w} [CommMonoid Q]\n    (α : R →* A) (h : R →* Q) : CommRingCat.{max u w}",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "H2 repair requested by the independent review of de02641522d0: this definition node records the nine already-published plain helper definitions, without claiming or depending on Algebra.formalMonoidExtension_model. No Lean declarations are copied or added."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8ed01fd06",
+  "group": "Q36",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8ed01fd06",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Re-delivery of the de02641522d0 H2 RETURN. Theorem stmt_dep lem-trf-formal-monoid-extension-model replaced by new def node def-per-formal-monoid-extension-data (existing:true, exactly the nine plain defs of Sheaf.RingTheory.FormalMonoidExtensionModel; lean.statement verbatim = monoidChartTensor signature; statement text matches each def including HasExtendedFormalMonoidModel false/true, IsAdicPairEquiv continuity both ways; H12 fields present; no parallel def node in live DAG). Item Lean byte-identical (sha256 77a48228) to the module previously verified clause by clause; node differs from live only in lean/stmt_deps; lean.statement verbatim. IsCohenRing requires Nat.Prime p and a DVR, so the mixed case cannot have p=0. Edge cases n=0, trivial S/T, N=1, torsion units covered; universes bound; only sorry; docstrings carry source and blueprint. nt_compile --json rc 0, 3.4 s, clean. Advisory: CompletedLocalModel/completedLocalModelBoundaryIdeal/localModelCompletionIdeal are owned by theorem node lem-trf-log-regular-saturation-normality, which is not in stmt_deps (unchanged since the reviewed delivery)."
+ }
+}

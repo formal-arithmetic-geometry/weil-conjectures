@@ -14,7 +14,8 @@
   "def-weil-pbc-cohen-ring",
   "def-weil-pbc-module-tensor-product",
   "def-weil-pbc-localization-at-prime",
-  "def-weil-regular-scheme"
+  "def-weil-regular-scheme",
+  "def-per-formal-monoid-extension-data"
  ],
  "proof": [
   {
@@ -262,5 +263,24 @@
   "group": "Q89",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-ee68dd276 (reviewer sub-agent of L); spot-checked: Read the item's 9 steps, the 3 new nodes, the report and ILO VI 2.1-2.3 (pp.71-73); the item realizes 2.3's completed Kummer chart formulas (via 1.6), generalized to a non-strict residue field and arbitrary unit faces and twists. Every step is correct against the statements it cites. Step 1: finite-completion-factor with S'=S=C, g=1. Step 2: face sharpening; N-torsion of V/h(U) by Kummer, injectivity and saturation; beta^-1(0)=0. Step 3: section into R_G. Step 4: tame group algebra; a single factor K whose residue field is kappa(q). Steps 5-6: the coefficient lift, unit lifts on a basis, presentation D[[S+T]]/(f, Y^beta(s) - v(s)X^s). Step 7: elimination with u=v^-1. Step 8: theta_0 = p mod (t) is not in m_E^2, and the lift preserves this. Step 9: ideal J. All 3 new nodes are true. Tame group algebra: cyclic filtration, Z^d - a with d invertible, so etale; tested on L=0, M=Z/2. Coefficient lift: henselian E (Stacks 09ZL), 07NF regularity, 031B completeness, m_D=nD with an injective cotangent map. Elimination: a contractive multiplicative substitution gives a retraction, and complete Nakayama gives surjectivity. None is a duplicate (checked the trf formal-monoid-extension-model, unit-splitting and support-projection nodes and the pbc henselian equivalence) and none restates an item clause. Batch-5 flags accepted: lem-trf-fs-face-sharpening is pure monoid algebra; its 71-node closure contains only the trf face lemmas and fs definitions and no trace-formula or Poincare proof node or target. def-trf-fs-log-blowup is a general definition already in the item's base stmt_deps. Fix (B2/B3): two new nodes, coefficient-lift and implicit-elimination, used 'sharp' (and coefficient-lift the monoid ring) undefined; definitions added inline, statements otherwise unchanged; files under fixes/dag/nodes/sec-deligne-laumon-a1/.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompletedInvertibleKummerMonoidExtension",
+  "declaration": "Algebra.completed_invertible_kummer_monoid_extension",
+  "file": "lean/Sheaf/RingTheory/CompletedInvertibleKummerMonoidExtension.lean",
+  "statement": "theorem completed_invertible_kummer_monoid_extension (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] (R : Type v) [CommMonoid R] (Q : Type w) [CommMonoid Q] (_hR : AlgebraicGeometry.IsFineSaturatedMonoid R) (_hQ : AlgebraicGeometry.IsFineSaturatedMonoid Q) (h : R →* Q) (_hh : Function.Injective h) (_hkummer : ∀ q : Q, ∃ d : ℕ, 0 < d ∧ ∃ r : R, h r = q ^ d) (_hgp : Function.Injective (GrothendieckGroup.lift ((GrothendieckGroup.of (M := Q)).comp h))) (_hfinite : Finite (GrothendieckGroup Q ⧸ (GrothendieckGroup.lift ((GrothendieckGroup.of (M := Q)).comp h)).range)) (N : ℕ) (_hN : 0 < N) (_hNunit : IsUnit (N : A)) (_hkill : ∀ z : GrothendieckGroup Q, ∃ r : GrothendieckGroup R, GrothendieckGroup.lift ((GrothendieckGroup.of (M := Q)).comp h) r = z ^ N) (α : R →* A) (a : Multiplicative (chartSharpMonoid α) →* A) (ε : GrothendieckGroup R →* Aˣ) (_hα : ∀ r : Localization ((IsUnit.submonoid A).comap α), localizedUnitChart α r = (ε (unitChartGroupMap α r) : A) * a (Multiplicative.ofAdd (Additive.ofMul (Associates.mk r)))) (q : Ideal (monoidChartTensor α h)) [q.IsPrime] (_hq : Ideal.comap (monoidChartTensorBase α h) q = IsLocalRing.maximalIdeal A) : ((∃ (n : ℕ) (e : AddMonoidAlgebra.CompletedLocalModel (IsLocalRing.ResidueField A) (chartSharpMonoid α) n ≃+* AdicCompletion (IsLocalRing.maximalIdeal A) A), ∀ s : chartSharpMonoid α, e (algebraMap (MvPolynomial (Fin n) (AddMonoidAlgebra (IsLocalRing.ResidueField A) (chartSharpMonoid α))) _ (MvPolynomial.C (AddMonoidAlgebra.single s (1 : IsLocalRing.ResidueField A)))) = algebraMap A _ (a (Multiplicative.ofAdd s))) → AddMonoidAlgebra.HasExtendedFormalMonoidModel (Localization.AtPrime q) (chartSharpMonoid (localizedTensorMonomial α h q)) (localizedTensorBoundary α h q) false) ∧ ((∃ (V : Type (max u v w)) (_ : CommRing V) (_ : IsLocalRing V) (p : ℕ), IsCohenRing p V ∧ Nonempty (IsLocalRing.ResidueField V ≃+* IsLocalRing.ResidueField A) ∧ ∃ (n : ℕ) (θ : AddMonoidAlgebra.CompletedLocalModel V (chartSharpMonoid α) n), θ - (p : AddMonoidAlgebra.CompletedLocalModel V (chartSharpMonoid α) n) ∈ AddMonoidAlgebra.completedLocalModelBoundaryIdeal V (chartSharpMonoid α) n ∧ ∃ e : (AddMonoidAlgebra.CompletedLocalModel V (chartSharpMonoid α) n ⧸ Ideal.span {θ}) ≃+* AdicCompletion (IsLocalRing.maximalIdeal A) A, ∀ s : chartSharpMonoid α, e (Ideal.Quotient.mk (Ideal.span {θ}) (algebraMap (MvPolynomial (Fin n) (AddMonoidAlgebra V (chartSharpMonoid α))) _ (MvPolynomial.C (AddMonoidAlgebra.single s (1 : V))))) = algebraMap A _ (a (Multiplicative.ofAdd s))) → AddMonoidAlgebra.HasExtendedFormalMonoidModel (Localization.AtPrime q) (chartSharpMonoid (localizedTensorMonomial α h q)) (localizedTensorBoundary α h q) true)",
+  "branch": "newtargets-dag",
+  "by": "Q36",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Reuses the nine canonical chart/completed-pair definitions recorded by def-per-formal-monoid-extension-data, independently of the group-isomorphism theorem in their published module. The present theorem assumes an injective Kummer map with finite group cokernel killed by an invertible positive integer."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8ed01fd06",
+  "group": "Q36",
+  "result": "pass",
+  "note": "Re-delivery of the de02641522d0 H2 RETURN. Theorem stmt_dep lem-trf-formal-monoid-extension-model replaced by new def node def-per-formal-monoid-extension-data (existing:true, exactly the nine plain defs of Sheaf.RingTheory.FormalMonoidExtensionModel; lean.statement verbatim = monoidChartTensor signature; statement text matches each def including HasExtendedFormalMonoidModel false/true, IsAdicPairEquiv continuity both ways; H12 fields present; no parallel def node in live DAG). Item Lean byte-identical (sha256 77a48228) to the module previously verified clause by clause; node differs from live only in lean/stmt_deps; lean.statement verbatim. IsCohenRing requires Nat.Prime p and a DVR, so the mixed case cannot have p=0. Edge cases n=0, trivial S/T, N=1, torsion units covered; universes bound; only sorry; docstrings carry source and blueprint. nt_compile --json rc 0, 3.4 s, clean. Advisory: CompletedLocalModel/completedLocalModelBoundaryIdeal/localModelCompletionIdeal are owned by theorem node lem-trf-log-regular-saturation-normality, which is not in stmt_deps (unchanged since the reviewed delivery)."
  }
 }
