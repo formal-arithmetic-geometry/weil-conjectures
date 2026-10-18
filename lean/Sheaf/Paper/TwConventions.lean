@@ -5,12 +5,7 @@ Authors: SHEAF group NL
 -/
 module
 
-public import Sheaf.Paper.FiniteFieldFiber
-public import Sheaf.Paper.PbcQbarCategory
 public import Sheaf.Paper.OrdinaryCompactCohomology
-public import Sheaf.AlgebraicGeometry.CompactifiableOverField
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
 
 /-! # Conventions for weights
 
