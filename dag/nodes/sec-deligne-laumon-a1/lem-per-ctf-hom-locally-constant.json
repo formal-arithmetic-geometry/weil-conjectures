@@ -17,7 +17,8 @@
   "def-weil-finitely-generated-module",
   "def-weil-pbc-category-colimit",
   "def-pur-derived-internal-hom",
-  "def-kun-derived-tensor"
+  "def-kun-derived-tensor",
+  "def-per-galois-partition-modules"
  ],
  "proof": [
   {
@@ -282,5 +283,23 @@
   "group": "Q18",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-97a873c97 (reviewer sub-agent of L); spot-checked: I read the item, all eight steps, the new node lem-per-galois-partition-tensor-closure and every cited statement in full. Sources checked: ILO XVII 7.2.1-7.2.7, 7.3.1-7.3.8, 7.6.4-7.6.11 (pp. 301-314) and 11.1.1/11.2.1. The item statement is identical to the version the Q57 reviewer landed. The coefficient category is ordinary etale A_X-modules with A a Noetherian F_l-algebra, as in ILO. The W_P class equals ILO FCons_P: sheaves constant on V_i are local systems by 7.2.4, extensions of torsion local systems are local systems by 7.2.5, and the class is closed under filtered colimits. Step 1: F[0] is K-flat with Tor amplitude [0,0], and the flat model with a=b=0 gives E^0 = F and a Galois partition Q with finite projective values. Step 2: the geometric point factors through its reduced stratum and lifts to the split finite etale fibre; comparing constant pullbacks gives that M is projective. Step 3: the Hom sheaf is the image of an idempotent, hence exact; cover detection applies, the evaluation node applies on each localized chart, and D is flat. Step 4: g^*D is constant on W_i, so D is in W_Q. Step 5: T(K) -> T(I) is a quasi-isomorphism and H^q = D tensor H^qN. Steps 6-7: the common refinement from exact-refinement plus the new node give the [u,v] bound, independent of N. Step 8: constructibility from Hom_A(M,B), a summand of B^r. New node: true by the pi_1 ind-unipotent description (11.2.1(i),(vii),(x),(xi)), using the tensor filtration and filtered colimits, with no flatness needed. It is strictly smaller than the item, not a restated clause, and genuinely needed. No duplicate found among the Galois-partition nodes (exact-refinement, finite-monodromy-filtration, flat-model). It meets B1-B9 and has all three search kinds. Correct blueprint from/via; same_as []. The item's from.place change to Step 3 is confirmed in the main-20261015 proof text. No SGA citation. The tool_uses (evaluation, cover iso, exact-functor cohomology, inverse image, constant sections) are accepted as generic tools. Minor: Step 2 relies on composing inverse images to compare stalks; I accept this as elementary. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CtfHomLocallyConstant",
+  "declaration": "AlgebraicGeometry.Etale.ctf_hom_locallyConstant",
+  "file": "lean/Sheaf/Paper/CtfHomLocallyConstant.lean",
+  "statement": "theorem ctf_hom_locallyConstant (l : ℕ) [Fact l.Prime] (X : Scheme.{u}) [IsNoetherian X] (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A] [Algebra (ZMod l) A] (F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) (hF : Scheme.IsFiniteLocallyConstantSheaf F) (hFlat : exactFunctor _ _ (tensorLeft F)) : ∀ P : Scheme.GaloisPartition X, ∃ P' : Scheme.GaloisPartition X, P'.Refines P (ULift.{u + 1} (ZMod l)) ∧ ∀ (a b : ℤ), a ≤ b → ∀ N : DerivedCategoryModule A X, P.boundedDerived A N → (∀ q : ℤ, q < a ∨ b < q → IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj N)) → P'.boundedDerived A (((derivedHom (ModuleCat.{u + 1} A) X).obj (op ((_root_.DerivedCategory.singleFunctor _ 0).obj F))).obj N) ∧ (∀ q : ℤ, q < a ∨ b < q → IsZero ((_root_.DerivedCategory.homologyFunctor _ q).obj (((derivedHom (ModuleCat.{u + 1} A) X).obj (op ((_root_.DerivedCategory.singleFunctor _ 0).obj F))).obj N))) ∧ (DerivedCategory.constructibleHomology (ModuleCat.{u + 1} A) X N → DerivedCategory.constructibleHomology (ModuleCat.{u + 1} A) X (((derivedHom (ModuleCat.{u + 1} A) X).obj (op ((_root_.DerivedCategory.singleFunctor _ 0).obj F))).obj N))",
+  "branch": "newtargets-dag",
+  "by": "Q59",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5fde84c16",
+  "group": "Q59",
+  "result": "pass",
+  "note": "Item ctf_hom_locallyConstant matches node and ILO XVII 7.6.11 clause by clause: Noetherian X, Noetherian ZMod l-algebra A : Type (u+1) (recorded convention), IsFiniteLocallyConstantSheaf F (etale-local, f.g. stalks, equivalent to lc+constructible on Noetherian X, no global finite cover), flat = exactFunctor (tensorLeft F) with the ordinary sheaf tensor (probe: Etale.sheafMonoidalCategory), quantifiers forall P exists P' before a,b,N, Refines = W_P(Lambda) <= W_P'(Lambda) exactly as ILO 7.3.3, same [a,b] interval, constructibility clause, no dualizing hypothesis. New def node def-per-galois-partition-modules faithful to ILO 7.3.1-7.3.3 (connected reduced strata, connected IsGalois finite etale cover, finite extensions by actual short exact sequences with locally constant quotients constant on V, filtered IsColimit cocone, no f.g. condition), real data, no duplicate in live lean/DAG or in-flight deliveries. Section 1(B) dependency def-weil-pbc-locally-constant-finite-type-modules: one added public import, superset mixed record, statement verbatim, live record unchanged since NK 10-15; all 7 live importers compile cleanly. nt_compile --json of 3 modules clean (2.6/3.3/2.8 s); statement verbatim. Advisory: dependency record lists names owned by def-constructible-* nodes; constructibility only for N in D^b_P (node's literal reading, covers D^b_c since P is universal); tensorLeft vs ObjectProperty.flat equivalent; some owner nodes outside stmt_deps."
  }
 }

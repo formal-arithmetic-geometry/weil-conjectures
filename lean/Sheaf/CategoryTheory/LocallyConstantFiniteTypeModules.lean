@@ -7,6 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.ConstantCoefficientScalarExtension
 public import Mathlib.RingTheory.Finiteness.Defs
+public import WeilConjectures.ConstructibleSheaf.Defs
 
 /-! # Local constant finite-module descriptions on a site
 
