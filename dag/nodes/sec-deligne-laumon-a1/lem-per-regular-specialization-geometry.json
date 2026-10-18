@@ -14,7 +14,8 @@
   "def-pc-scheme-fibre",
   "def-weil-geometric-point",
   "def-weil-pbc-strict-henselization-limit",
-  "def-weil-pbc-krull-dimension-ring"
+  "def-weil-pbc-krull-dimension-ring",
+  "def-per-geometric-specialization-category"
  ],
  "proof": [
   {
@@ -166,5 +167,34 @@
   "group": "Q29",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-60e2fed57 (reviewer sub-agent of L); spot-checked: Read the item, its six steps, all three new nodes and every cited statement in full, with ILO open at XVII 4.3.2.3–4.3.2.6 (pp.284–285) and XIV 2.1–2.2 and 2.5.4 (pp.209–213, 217–218). The item statement is byte-identical to live, where it is still unsplit. Every citation is in unit sk-p-dl-a1-perverse, there is no cycle, no SGA, and every step is under 2000 characters. New nodes: (1) strict-local-regular-integral-fibres is exactly XVII 4.3.2.3; its source needs some n invertible, which every strictly local scheme has. (2) local-dimension-function-calculus is XIV 2.2.4 local existence plus the codimension difference formula; I checked that formula independently: a maximal chain in the local closure is saturated and its steps are étale immediate by 2.1.4. (3) regular-dimension-function-pullback is exactly XIV 2.5.4. None of the three duplicates finite-type-dimension-function, immediate-specialization-criterion, geometric-immediate-catenary, potential-dualizing-regular-unit or strict-local-model. Steps: Step 1 uses the full statements of model, calculus and pullback, and the sign c_P=c_X+b(v)−b(u) is correct. Step 2 is the unique generic lift from integral fibres, with b=0 from the model node. Steps 3, 4 and 6 are elementary. Step 5 is the 4.3.2.6 square, with the composites agreeing over P_(t). Small cases agree: identity; generic to closed point of a smooth curve, 1=0+1−0; A¹ over a DVR, 2=1+1−0 and 1=1+1−1. No fixes, no tool_uses. Maintainer note: the reviewed rectangle node is a special case of this item and should be merged into it."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RegularSpecializationGeometry",
+  "declaration": "AlgebraicGeometry.RegularSpecializationGeometry.regular_specialization_geometry",
+  "declarations": [
+   "AlgebraicGeometry.RegularSpecializationGeometry.PointMap",
+   "AlgebraicGeometry.RegularSpecializationGeometry.fibreLocalDimension",
+   "AlgebraicGeometry.RegularSpecializationGeometry.IsFibreGeneric",
+   "AlgebraicGeometry.RegularSpecializationGeometry.LiesOver",
+   "AlgebraicGeometry.RegularSpecializationGeometry.HasGenericSquares",
+   "AlgebraicGeometry.RegularSpecializationGeometry.HasUniqueGenericLifts",
+   "AlgebraicGeometry.RegularSpecializationGeometry.HasImmediateGenericFactorizations",
+   "AlgebraicGeometry.RegularSpecializationGeometry.HasCodimensionFormula",
+   "AlgebraicGeometry.RegularSpecializationGeometry.regular_specialization_geometry"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RegularSpecializationGeometry.lean",
+  "statement": "theorem regular_specialization_geometry {P X : Scheme.{u}} (r : P ⟶ X) [IsNoetherian P] [IsNoetherian X] (hP : ∀ U : P.affineOpens, IsExcellent Γ(P, U)) (hX : ∀ U : X.affineOpens, IsExcellent Γ(X, U)) [Flat r] (hregular : ∀ (x : X) (L : Type u) [Field L] [Algebra (X.residueField x) L] [Module.Finite (X.residueField x) L], IsRegularScheme (pullback (r.fiberToSpecResidueField x) (Spec.map (CommRingCat.ofHom (algebraMap (X.residueField x) L))))) : HasGenericSquares r ∧ HasUniqueGenericLifts r ∧ HasImmediateGenericFactorizations r ∧ HasCodimensionFormula r",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-74e5ee5c0",
+  "group": "Q25",
+  "result": "fix",
+  "note": "Item statement correct: all 12 clauses match (Noetherian + excellent both sides, Flat, regular fibres after finite L in the same universe; strict-localization category on recorded constructions; codimension convention as landed GeometricImmediateCatenary; square, unique lift whose base-map compatibility is true via integral geometric fibres, ComposableArrows factorization incl. n=0, codimension formula in ℤ with no truncation). Edge cases, no duplicates, docstrings, sorry-only, statements verbatim all checked. nt_compile --json: both files clean (2.0 s / 2.3 s). FIX H2: new def node def-per-geometric-specialization-category cited theorem lem-trf-general-nearby-slice-test only for the plain structure SliceSpecialization, owned by existing:true def-trf-specialization-slice-data; fixes/def-per-geometric-specialization-category.json swaps that citation in statement and stmt_deps; Lean unchanged. Maintainer note: lem-per-regular-specialization-rectangle is a special case of this item."
  }
 }

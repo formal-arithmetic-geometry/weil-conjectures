@@ -1,0 +1,120 @@
+{
+ "id": "def-per-geometric-specialization-category",
+ "kind": "definition",
+ "title": "Geometric-specialization category and codimension",
+ "status": "split",
+ "statement": "For a scheme $S$, geometric points $p:\\operatorname{Spec}\\Omega_p\\to S$ with $\\Omega_p$ algebraically closed [def-weil-geometric-point] form the geometric-specialization category: a morphism $p\\to q$ is an $S$-morphism $S_{(p)}\\to S_{(q)}$ of their strict localizations [def-weil-pbc-strict-henselization-limit], [def-weil-pbc-strict-henselization-structural-map], with identity and composition those of schemes over $S$. Thus an isomorphism means an isomorphism of strict localizations over $S$, not an isomorphism of the arbitrary algebraically closed overfields. The underlying point of $p$ is its image in $S$; its distinguished point in $S_{(p)}$ is the image of $\\operatorname{Spec}\\Omega_p$ under the canonical evaluation map [def-weil-pbc-strict-henselization-point-evaluation]. Each arrow is identified with the strict-local specialization datum of [def-trf-specialization-slice-data]. Its codimension is the Krull dimension of the reduced closure of the image of this distinguished source point in $S_{(q)}$ [def-weil-pbc-krull-dimension-ring]; equivalently it is the topological Krull dimension of that closure, since reduction leaves the topological space unchanged. It is immediate if this dimension is one.",
+ "stmt_deps": [
+  "def-weil-geometric-point",
+  "def-weil-pbc-strict-henselization-limit",
+  "def-weil-pbc-strict-henselization-structural-map",
+  "def-weil-pbc-strict-henselization-point-evaluation",
+  "def-weil-pbc-krull-dimension-ring",
+  "def-trf-specialization-slice-data"
+ ],
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XIV, Definitions 2.1.1–2.1.2, printed pp.209–210; Expose XVII, Lemmas 4.3.2.4–4.3.2.6."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "category geometric points strict localizations specializations codimension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.localizationToStalk_stalkSpecializes_apply\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {x y : PrimeSpectrum R} (h : x ⤳ y)\\n  (x_1 : CategoryTheory.ToType { carrier := Localization.AtPrime y.asIdeal, commRing := OreLocalization.instCommRing }),\\n  (CategoryTheory.ConcreteCategory.hom ((AlgebraicGeometry.Spec.structureSheaf R).presheaf.stalkSpecialize\", \"doc\": \"For a commutative ring $ R $ and points $ x, y $ in $\\\\operatorname{Spec}(R)$ where $ x $ specializes to $ y $, the composition of the specialization-induced morphism $\\\\mathcal{O}_{\\\\operatorname{Spec}(\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.localizationToStalk_stalkSpecializes\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"{R : Type*} [CommRing R] {x y : PrimeSpectrum R} (h : x ⤳ y) :\\n  StructureSheaf.localizationToStalk R y ≫ (structureSheaf R).presheaf.stalkSpecializes h =\\n    CommRingCat.ofHom (PrimeSpectrum.localizationMapOfSpecializes h) ≫ StructureSheaf.localizationToStalk R x\", \"doc\": \"Given a commutative ring $ R $, prime ideals $ \\\\mathfrak{p} $ and $ \\\\mathfrak{q} $ in $ \\\\operatorname{Spec}(R) $ with $ \\\\mathfrak{p} $ specializing to $ \\\\mathfrak{q} $, the composition of the canonica\"}\n  {\"name\": \"PrimeSpectrum.localizationMapOfSpecializes\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"{x y : PrimeSpectrum R} (h : x ⤳ y) : Localization.AtPrime y.asIdeal →+* Localization.AtPrime x.asIdeal\", \"doc\": \"Given prime ideals $\\\\mathfrak{p}$ and $\\\\mathfrak{q}$ in the prime spectrum of a commutative semiring $R$, if $\\\\mathfrak{p}$ specializes to $\\\\mathfrak{q}$, this constructs the canonical ring homomorphi\"}\n  {\"name\": \"PrimeSpectrum.localizationMapOfSpecializes.congr_simp\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"∀ {R : Type u} [inst : CommSemiring R] {x y : PrimeSpectrum R} (h : x ⤳ y),\\n  PrimeSpectrum.localizationMapOfSpecializes h = PrimeSpectrum.localizationMapOfSpecializes h\", \"doc\": \"For any commutative semiring $ R $ and prime ideals $\\\\mathfrak{p}$ and $\\\\mathfrak{q}$ in its prime spectrum $\\\\operatorname{Spec}(R)$, if $\\\\mathfrak{p}$ specializes to $\\\\mathfrak{q}$ (i.e., every neigh\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.stalkSpecializes_stalk_to_fiber\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"{R : Type*} [CommRing R] {x y : PrimeSpectrum R} (h : x ⤳ y) :\\n  (structureSheaf R).presheaf.stalkSpecializes h ≫ StructureSheaf.stalkToFiberRingHom R x =\\n    StructureSheaf.stalkToFiberRingHom R y ≫ (CommRingCat.ofHom (PrimeSpectrum.localizationMapOfSpecializes h))\", \"doc\": \"For a commutative ring $ R $ and points $ x, y $ in its prime spectrum $ \\\\operatorname{Spec}(R) $ where $ x $ specializes to $ y $, the composition of the specialization-induced morphism between stalk\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.stalkSpecializes_stalk_to_fiber_apply\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {x y : PrimeSpectrum R} (h : x ⤳ y)\\n  (x_1 : CategoryTheory.ToType ((AlgebraicGeometry.Spec.structureSheaf R).presheaf.stalk y)),\\n  (CategoryTheory.ConcreteCategory.hom (AlgebraicGeometry.StructureSheaf.stalkToFiberRingHom R x))\\n      ((CategoryTheory.ConcreteCat\", \"doc\": \"For a commutative ring $ R $ and points $ x, y $ in its prime spectrum $ \\\\operatorname{Spec}(R) $ such that $ x $ specializes to $ y $, the composition of the specialization-induced morphism from the \"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.toStalk_stalkSpecializes_apply\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {x y : PrimeSpectrum R} (h : x ⤳ y)\\n  (x_1 : CategoryTheory.ToType { carrier := R, commRing := inst }),\\n  (CategoryTheory.ConcreteCategory.hom ((AlgebraicGeometry.Spec.structureSheaf R).presheaf.stalkSpecializes h))\\n      ((CategoryTheory.ConcreteCategory.hom (Al\", \"doc\": \"For a commutative ring $ R $ and points $ x,y $ in $ \\\\operatorname{Spec}(R) $ with $ x $ specializing to $ y $, the composition of the specialization-induced morphism $ \\\\mathcal{O}_{\\\\operatorname{Spec\"}\n  {\"name\": \"AlgebraicGeometry.StructureSheaf.localizationToStalk_stalkSpecializes_assoc\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {x y : PrimeSpectrum R} (h : x ⤳ y) {Z : CommRingCat}\\n  (h_1 : (AlgebraicGeometry.Spec.structureSheaf R).presheaf.stalk x ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.StructureSheaf.localizationToStalk R y)\\n      (CategoryTheory.CategoryStruct.co\", \"doc\": \"For a commutative ring $R$, points $x, y$ in its prime spectrum $\\\\operatorname{Spec}(R)$ with $x$ specializing to $y$, and any morphism $h_1$ from the stalk $\\\\mathcal{O}_{\\\\operatorname{Spec}(R),x}$ to\"}\n",
+   "date": "2026-10-18",
+   "verdict": "No category of geometric points with strict-localization arrows or its codimension; hits concern ordinary stalk specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Category of geometric points with maps of strict localizations and codimension of specialization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.instIsOverMapStalkSpecializesCommRingCatPresheaf\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x y : ↥X} (h : x ⤳ y),\\n  AlgebraicGeometry.Scheme.Hom.IsOver (AlgebraicGeometry.Spec.map (X.presheaf.stalkSpecializes h)) X\", \"doc\": \"For any scheme $X$ and points $x,y$ in $X$ where $x$ specializes to $y$, the morphism of schemes obtained by applying the spectrum map to the specialization-induced morphism between stalks of the stru\"}\n  {\"name\": \"AlgebraicGeometry.specializingMap_isZariskiLocalAtTarget\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UnderlyingMap\", \"type\": \"AlgebraicGeometry.IsZariskiLocalAtTarget (AlgebraicGeometry.topologically @SpecializingMap)\", \"doc\": \"The property of being a specializing map for scheme morphisms is Zariski local at the target. This means that if a morphism $ f : X \\to Y $ of schemes has the property that its underlying continuous ma\"}\n  {\"name\": \"AlgebraicGeometry.ValuativeCriterion.Existence.specializingMap\", \"module\": \"Mathlib/AlgebraicGeometry/ValuativeCriterion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y),\\n  AlgebraicGeometry.ValuativeCriterion.Existence f → SpecializingMap ⇑(CategoryTheory.ConcreteCategory.hom f.base)\", \"doc\": \"If a morphism $ f : X \\to Y $ of schemes satisfies the valuative criterion for existence, then $ f $ is a specializing map, meaning that specialization relations in the codomain can be lifted to the do\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x y : ↥X} (h : x ⤳ y),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (X.presheaf.stalkSpecializes h)) (X.fromSpecStalk y) =\\n    X.fromSpecStalk x\", \"doc\": \"For a scheme $X$ and points $x,y$ where $x$ specializes to $y$, the composition of the morphism induced by the specialization map between stalks $\\\\mathcal{F}_y \\\\to \\\\mathcal{F}_x$ with the canonical mo\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Spec_map_stalkSpecializes_fromSpecStalk\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x y : ↥X} (h : x ⤳ y),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (X.presheaf.stalkSpecializes h)) (X.fromSpecStalk y) =\\n    X.fromSpecStalk x\", \"doc\": \"For a scheme $X$ and points $x,y$ where $x$ specializes to $y$, the composition of the morphism $\\\\operatorname{Spec}$ applied to the specialization-induced stalk map $\\\\mathcal{F}_y \\\\to \\\\mathcal{F}_x$ \"}\n  {\"name\": \"AlgebraicGeometry.instCanonicallyOverSpecStalkCommRingCatPresheaf\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (x : ↥X) → (AlgebraicGeometry.Spec (X.presheaf.stalk x)).CanonicallyOver X\", \"doc\": \"For any scheme $ X $ and point $ x $ in $ X $, the affine scheme $ \\\\operatorname{Spec}(\\\\mathcal{O}_{X,x}) $, where $ \\\\mathcal{O}_{X,x} $ is the stalk of the structure sheaf at $ x $, is canonically ov\"}\n  {\"name\": \"AlgebraicGeometry.instOverSpecStalkCommRingCatPresheaf\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"(X : AlgebraicGeometry.Scheme) → (x : ↥X) → (AlgebraicGeometry.Spec (X.presheaf.stalk x)).Over X\", \"doc\": \"For any scheme $X$ and a point $x$ in its underlying topological space, there is a canonical morphism of schemes from the spectrum of the stalk at $x$ to $X$. This morphism is denoted as $\\\\operatornam\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.SpecMap_stalkSpecializes_fromSpecStalk_assoc\", \"module\": \"Mathlib/AlgebraicGeometry/Stalk\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} {x y : ↥X} (h : x ⤳ y) {Z : AlgebraicGeometry.Scheme} (h_1 : X ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.Spec.map (X.presheaf.stalkSpecializes h))\\n      (CategoryTheory.CategoryStruct.comp (X.fromSpecStalk y) h_1) =\\n    CategoryTheory.CategoryStru\", \"doc\": \"For a scheme $X$ and points $x,y$ where $x$ specializes to $y$, and for any scheme $Z$ with a morphism $f: X \\to Z$, the composition of the morphism $\\\\operatorname{Spec}(\\\\mathcal{O}_{X,y} \\\\to \\\\mathcal{\"}\n",
+   "date": "2026-10-18",
+   "verdict": "No category of geometric points with strict-localization arrows or its codimension; hits concern ordinary stalk specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "StrictGeometricPoint|GeometricSpecialization|SpecializationCategory (Mathlib/AlgebraicGeometry)",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-18",
+   "verdict": "No category of geometric points with strict-localization arrows or its codimension; hits concern ordinary stalk specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "rg StrictGeometricPoint|GeometricSpecialization|SpecializationCategory in WeilConjectures; rg geometric.*specializ|specializ.*geometric in lean/Sheaf; DAG definition search; blueprint_refs.py search geometric specialization",
+   "results": "Upstream source: no matching category. Project: SliceSpecialization in Sheaf.Paper.GeneralNearbySliceTest supplies individual arrows and is reused by specializationSlice. DAG has geometric points, strict localization and inline immediate specialization in def-per-potential-dualizing, but no category with composition and isomorphisms. blueprint_refs: 0 matching nodes.",
+   "date": "2026-10-18",
+   "verdict": "No existing category; reuse existing arrow and strict-local constructions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-per-regular-specialization-geometry",
+  "date": "2026-10-18",
+  "group": "Q25"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Geometric-specialization composition, isomorphism and codimension in the generic-fibre lifting argument; ILO XIV 2.1.1–2.1.2.",
+   "via": [
+    "lem-per-regular-specialization-geometry",
+    "lem-per-regular-potential-pullback",
+    "lem-per-potential-extraordinary-pullback",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GeometricSpecializationCategory",
+  "declaration": "AlgebraicGeometry.StrictGeometricPoint",
+  "declarations": [
+   "AlgebraicGeometry.StrictGeometricPointData",
+   "AlgebraicGeometry.StrictGeometricPointData.localization",
+   "AlgebraicGeometry.StrictGeometricPoint",
+   "AlgebraicGeometry.StrictGeometricPoint.underlying",
+   "AlgebraicGeometry.StrictGeometricPoint.closed",
+   "AlgebraicGeometry.StrictGeometricPoint.specializationSlice",
+   "AlgebraicGeometry.StrictGeometricPoint.codimension",
+   "AlgebraicGeometry.StrictGeometricPoint.IsImmediate"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GeometricSpecializationCategory.lean",
+  "statement": "abbrev StrictGeometricPoint (S : Scheme.{u})",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-74e5ee5c0",
+  "group": "Q25",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-74e5ee5c0",
+  "group": "Q25",
+  "result": "fix",
+  "note": "Item statement correct: all 12 clauses match (Noetherian + excellent both sides, Flat, regular fibres after finite L in the same universe; strict-localization category on recorded constructions; codimension convention as landed GeometricImmediateCatenary; square, unique lift whose base-map compatibility is true via integral geometric fibres, ComposableArrows factorization incl. n=0, codimension formula in ℤ with no truncation). Edge cases, no duplicates, docstrings, sorry-only, statements verbatim all checked. nt_compile --json: both files clean (2.0 s / 2.3 s). FIX H2: new def node def-per-geometric-specialization-category cited theorem lem-trf-general-nearby-slice-test only for the plain structure SliceSpecialization, owned by existing:true def-trf-specialization-slice-data; fixes/def-per-geometric-specialization-category.json swaps that citation in statement and stmt_deps; Lean unchanged. Maintainer note: lem-per-regular-specialization-rectangle is a special case of this item."
+ }
+}
