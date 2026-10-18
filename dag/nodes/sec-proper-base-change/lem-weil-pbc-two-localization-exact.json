@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-pbc-two-localization-exact",
+ "kind": "statement",
+ "title": "Exact row of two comaximal localizations",
+ "statement": "Let A be a commutative ring and f,g comaximal elements. For any specified A-algebras S=A[1/f], T=A[1/g], P=A[1/(fg)] with their localization structures, the diagonal A to S x T is injective, its image is the kernel of the difference of the canonical maps S x T to P, and that difference is surjective. Zero rings and zero denominators are allowed.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00EJ; algebraization.tex Tag 0998, original proof step 3."
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "If an element dies in both localizations, powers of f and g annihilate it. Coprimality of these powers and a Bezout identity imply it is zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EJ; algebraization.tex Tag 0998, original proof step 3."
+   }
+  },
+  {
+   "text": "For compatible fractions clear both denominators and then the power clearing their equality on the overlap. Increase both exponents to a common exponent E. If numerators a,b satisfy a*g^E=b*f^E, choose u*f^E+v*g^E=1; the numerator u*a+v*b realizes both fractions, by cancellation of the now invertible denominator powers.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EJ; algebraization.tex Tag 0998, original proof step 3."
+   }
+  },
+  {
+   "text": "Write an overlap fraction as z/(fg)^n. A Bezout identity u*f^n+v*g^n=1 shows that the pair v*z/f^n, -u*z/g^n maps to it. These arguments use Mathlib Away.exists_of_eq, Away.surj, IsCoprime.pow, and localization universal properties.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00EJ; algebraization.tex Tag 0998, original proof step 3."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 00EJ; algebraization.tex Tag 0998, original proof step 3.; B3 Lean realization of the corresponding step of lem-weil-pbc-ringed-derived-complete-elements-ideal"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Diagonal and difference of localizations at coprime elements form a short exact sequence",
+   "results": "{\"t\": \"2026-10-18T09:53:04Z\", \"tool\": \"leansearch\", \"query\": \"Diagonal and difference of localizations at coprime elements form a short exact sequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"exact_of_isLocalized_maximal\", \"LocalizedModule.map_exact\", \"IsLocalizedModule.map_exact\", \"exact_of_localized_maximal\", \"exact_of_isLocalized_span\", \"ModuleCat.localizedModule_functor_map_exact\", \"exact_of_localized_span\", \"AlgebraicGeometry.StructureSheaf.Localizations\"], \"digest\": \"9109aa1c9686d431\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: exactness of localization functors and coprime powers are components; the explicit diagonal/difference row is proved here."
+  },
+  {
+   "tool": "loogle",
+   "query": "IsCoprime.pow",
+   "results": "{\"t\": \"2026-10-18T09:47:44Z\", \"tool\": \"loogle\", \"query\": \"IsCoprime.pow\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"IsCoprime.pow\"], \"digest\": \"59795e10fac6de0e\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: exactness of localization functors and coprime powers are components; the explicit diagonal/difference row is proved here."
+  },
+  {
+   "tool": "grep",
+   "query": "IsCoprime|IsZero|localiz.*exact|exact.*localiz",
+   "results": "{\"t\": \"2026-10-18T09:53:18Z\", \"tool\": \"grep\", \"query\": \"IsCoprime|IsZero|localiz.*exact|exact.*localiz\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Primorial.lean\", \"Mathlib/NumberTheory/Modular.lean\", \"Mathlib/NumberTheory/Modular.lean\", \"Mathlib/NumberTheory/Modular.lean\", \"Mathlib/NumberTheory/Modular.lean\", \"Mathlib/NumberTheory/Modular.lean\", \"Mathlib/NumberTheory/DirichletCharacter/Basic.lean\", \"Mathlib/NumberTheory/DirichletCharacter/Basic.lean\"], \"digest\": \"f39aa0775771f0cf\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: exactness of localization functors and coprime powers are components; the explicit diagonal/difference row is proved here."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedSiteCompleteElementsIdeal",
+  "date": "2026-10-18",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-ringed-derived-complete-elements-ideal",
+   "place": "Tag 00EJ; algebraization.tex Tag 0998, original proof step 3.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.RingTheory.TwoLocalizationExact",
+  "file": "lean/Sheaf/RingTheory/TwoLocalizationExact.lean",
+  "declaration": "localization_two_exact",
+  "statement": "theorem localization_two_exact\n    {A : Type u} [CommRing A] (f g : A) (hc : IsCoprime f g)\n    (S T P : Type u) [CommRing S] [CommRing T] [CommRing P]\n    [Algebra A S] [Algebra A T] [Algebra A P]\n    [IsLocalization.Away f S] [IsLocalization.Away g T]\n    [IsLocalization.Away (f * g) P] :\n    let F := IsLocalization.Away.awayToAwayRight\n      (S := S) (P := P) f g\n    let G := IsLocalization.Away.awayToAwayLeft\n      (S := T) (P := P) g f\n    Function.Injective (fun x : A ↦\n      (algebraMap A (S) x, algebraMap A (T) x)) ∧\n    Function.Exact (fun x : A ↦\n      (algebraMap A (S) x, algebraMap A (T) x))\n      (fun x : S × T ↦ F x.1 - G x.2) ∧\n    Function.Surjective\n      (fun x : S × T ↦ F x.1 - G x.2)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261018T101335-L-3971996",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261018T101335-L-3971996",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

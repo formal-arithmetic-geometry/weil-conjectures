@@ -16397,3 +16397,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:49 L: merged deliver/F3/Sheaf.Paper.AdicCompletionReduction (stage 3; reviewer PASS; first push; landing 20261018T094935-L-3722747 (proof); batch 20261018T094929; modules 1; new nodes 0)
 - 09:52 L: returned deliver/Q3/Sheaf.AlgebraicGeometry.CanonicalCoherentEtaleComparison (reviewer RETURN: (reviewer C-3269d, head 3269d5537) H9 (unused import): lean/Sheaf/AlgebraicGeometry/CoherentEtaleEffacingSequence.lean l)
 - 10:13 L: returned deliver/A4/Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructibleCohomology (reviewer RETURN: (the landing tools, head de3282305) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Alg)
+- 10:13 L: merged deliver/B3/Sheaf.CategoryTheory.RingedSiteCompleteElementsIdeal (stage 3; reviewer PASS; first push; landing 20261018T101335-L-3971996 (interface); batch 20261018T101333; modules 6; new nodes 5)

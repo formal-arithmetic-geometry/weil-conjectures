@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-ringed-site-localization-cech",
+ "kind": "statement",
+ "title": "Binary localization Cech short exact sequence on a ringed site",
+ "statement": "On a small ringed site with commutative ring sheaf R, write L(a) for the sequential section localization [def-weil-pbc-ringed-site-section-localization] on the slice over U. For f,g in R(U) and h=f+g there exist maps making 0 to L(h) to L(h*f) direct-sum L(h*g) to L((h*f)*g) to 0 short exact.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0998, original proof step 3; algebra.tex Tag 00EJ."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ringed-site-section-localization"
+ ],
+ "proof": [
+  {
+   "text": "Identify the sequential localization with the sheafified fraction presheaf [def-weil-pbc-ringed-section-localization]. The nth unit module maps by x to x/f^n; evaluation and the existing localization colimit formula prove the presheaf cocone colimiting, and sheafification preserves it.",
+   "uses": [
+    "def-weil-pbc-ringed-section-localization",
+    "lem-sc-module-localization-filtered-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0998, original proof step 3; algebra.tex Tag 00EJ."
+   }
+  },
+  {
+   "text": "Construct restriction-compatible fraction maps from divisibility of the denominator sections. On each object put H=A[1/h]. Iterated localizations identify the other three fraction rings with H[1/f], H[1/g], H[1/(fg)]. Since f+g is invertible in H, f and g are comaximal. Apply the two-localization exact row.",
+   "uses": [
+    "lem-weil-pbc-two-localization-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0998, original proof step 3; algebra.tex Tag 00EJ."
+   }
+  },
+  {
+   "text": "The pointwise product presheaf is the binary biproduct. Evaluation detects zero homology and proves the presheaf row short exact. Exact module sheafification and the comparison isomorphisms transport it to the claimed sequential-localization row.",
+   "uses": [
+    "lem-weil-pbc-ringed-site-module-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0998, original proof step 3; algebra.tex Tag 00EJ."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-section-localization",
+  "lem-sc-module-localization-filtered-colimit",
+  "lem-weil-pbc-two-localization-exact",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0998, original proof step 3; algebra.tex Tag 00EJ.; B3 Lean realization of the corresponding step of lem-weil-pbc-ringed-derived-complete-elements-ideal"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Short exact sequence of sheaves of modules for localizations at two sections generating the unit ideal",
+   "results": "{\"t\": \"2026-10-18T09:53:04Z\", \"tool\": \"leansearch\", \"query\": \"Short exact sequence of sheaves of modules for localizations at two sections generating the unit ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalizedModule.map_exact\", \"LocalizedModule.map_exact\", \"exact_of_localized_maximal\", \"exact_of_isLocalized_maximal\", \"SheafOfModules.GeneratingSections.mk\", \"exact_of_isLocalized_span\", \"SheafOfModules.GeneratingSections.epi\", \"ModuleCat.localizedModule_functor_map_exact\"], \"digest\": \"664c3f2f9b0f228b\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits provide components but not this ringed-site assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_isZero",
+   "results": "{\"t\": \"2026-10-18T09:53:18Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.map_isZero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.map_isZero\"], \"digest\": \"a55a5b49ad1ed573\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits provide components but not this ringed-site assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "IsCoprime|IsZero|localiz.*exact|exact.*localiz",
+   "results": "{\"t\": \"2026-10-18T09:53:18Z\", \"tool\": \"grep\", \"query\": \"IsCoprime|IsZero|localiz.*exact|exact.*localiz\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Primorial.lean\", \"Mathlib/NumberTheory/Modular.lean\", \"Mathlib/NumberTheory/Modular.lean\", \"Mathlib/NumberTheory/Modular.lean\", \"Mathlib/NumberTheory/Modular.lean\", \"Mathlib/NumberTheory/Modular.lean\", \"Mathlib/NumberTheory/DirichletCharacter/Basic.lean\", \"Mathlib/NumberTheory/DirichletCharacter/Basic.lean\"], \"digest\": \"f39aa0775771f0cf\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits provide components but not this ringed-site assertion."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedSiteCompleteElementsIdeal",
+  "date": "2026-10-18",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-ringed-derived-complete-elements-ideal",
+   "place": "Tag 0998, original proof step 3; algebra.tex Tag 00EJ.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedSiteLocalizationCech",
+  "file": "lean/Sheaf/CategoryTheory/RingedSiteLocalizationCech.lean",
+  "declaration": "CategoryTheory.ringedSite_localization_cech",
+  "statement": "theorem ringedSite_localization_cech\n    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)\n    (R : Sheaf J CommRingCat.{u}) (U : C) (f g : R.obj.obj (op U)) :\n    let O : Sheaf J RingCat.{u} :=\n      (sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R\n    let L : O.obj.obj (op U) → SheafOfModules.{u} (O.over U) :=\n      fun a ↦ ringedSiteSectionLocalization O U a\n    ∃ (i : L (f + g) ⟶ L ((f + g) * f) ⊞ L ((f + g) * g))\n      (p : L ((f + g) * f) ⊞ L ((f + g) * g) ⟶ L (((f + g) * f) * g))\n      (hp : i ≫ p = 0), (ShortComplex.mk i p hp).ShortExact",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261018T101335-L-3971996",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261018T101335-L-3971996",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

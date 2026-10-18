@@ -7,11 +7,10 @@ module
 
 public import Sheaf.CategoryTheory.RingedSiteCompleteElement
 public import Mathlib.RingTheory.Ideal.Span
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Sheaf.Algebra.Homology.DerivedInternalHom
-import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.Paper.RingedLocalizationRHomCalculus
+import Sheaf.CategoryTheory.RingedSiteCompleteElementMultiplication
+import Sheaf.CategoryTheory.RingedSiteCompleteElementAddition
+import Sheaf.CategoryTheory.RingedSiteCompleteElementsLocal
+import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
 
 /-!
 # Vanishing localizations form a sheaf of ideals
@@ -30,6 +29,55 @@ set_option autoImplicit false
 
 namespace CategoryTheory
 
+private theorem sectionLocalization_zero
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    (R : Sheaf J RingCat.{u}) (U : C) :
+    IsZero (ringedSiteSectionLocalization R U 0) := by
+  let M := SheafOfModules.unit (R.over U)
+  have hz : (M.unitHomEquiv.symm
+      (PresheafOfModules.sectionsMk
+        (fun V ↦ R.obj.map V.unop.hom.op 0)
+        (fun {V W} a ↦ ringedSiteSectionLocalization_compatible R U 0 V W a))) = 0 := by
+    apply M.unitHomEquiv.injective
+    ext V
+    simp only [Equiv.apply_symm_apply]
+    simp only [SheafOfModules.unitHomEquiv_apply_coe, map_zero]
+    rfl
+  change IsZero (colimit (Functor.ofSequence (X := fun _ : ℕ ↦ M) (fun _ ↦ _)))
+  rw [hz]
+  apply (IsZero.iff_id_eq_zero _).mpr
+  apply colimit.hom_ext
+  intro n
+  have h := colimit.w (Functor.ofSequence (X := fun _ : ℕ ↦ M) (fun _ ↦ (0 : M ⟶ M)))
+    (homOfLE (Nat.le_add_right n 1))
+  simpa using h.symm
+
+open CategoryTheory.Pretriangulated.Opposite in
+private theorem completeElement_zero
+    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
+    (R : Sheaf J CommRingCat.{u})
+    [HasDerivedCategory.{w} (ringedSiteModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))]
+    [∀ U : C, HasDerivedCategory.{w} (SheafOfModules.{u}
+      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U))]
+    (K : DerivedCategory (ringedSiteModules.{u}
+      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))) (U : C) :
+    IsRingedSiteCompleteElement J R K U 0 := by
+  let O := (sheafCompose J (forget₂ CommRingCat RingCat)).obj R
+  let L := (DerivedCategory.singleFunctor (SheafOfModules.{u} (O.over U)) 0).obj
+    (ringedSiteSectionLocalization O U 0)
+  let N := ringedSiteDerivedRestriction O U K
+  let : HasDerivedCategory.{w} (ringedSiteModules.{u}
+      ((sheafCompose (J.over U) (forget₂ CommRingCat RingCat)).obj (R.over U))) :=
+    inferInstanceAs (HasDerivedCategory.{w} (SheafOfModules.{u} (O.over U)))
+  obtain ⟨s, hs⟩ := (ringedInternalHom_exact (J.over U) (R.over U)).2 N
+  let := s
+  have := hs
+  have hL : IsZero L := (DerivedCategory.singleFunctor _ 0).map_isZero
+    (sectionLocalization_zero O U)
+  exact ((Functor.curry.obj (derivedInternalHom (J.over U) (R.over U))).flip.obj N).map_isZero
+    hL.op
+
 /-- The sections whose localization has zero derived internal Hom into K form a sheaf
 of ideals. The first clause identifies every ideal section with the actual Hom-vanishing
 criterion. Ideals encode zero, addition, and multiplication by arbitrary sections. The
@@ -39,56 +87,20 @@ is the locally finite-generated ideal consequence, using local finite-span membe
 Source: Stacks Project, algebraization.tex, Tags 0998 and 0997
 (blueprint: lem-weil-pbc-ringed-derived-complete-elements-ideal).
 
-Proof (the six steps of the node):
-1. On the slice over $U$, write $F_f=R\mathcal Hom_{\mathcal O_U}(\mathcal O_U[1/f],K|_U)$.
-   Localization at zero is the zero module, so $F_0=0$ by the Hom-complex formula. Thus $0\in
-   S_K(U)$.
-2. For $f\in S_K(U)$ and $a\in\mathcal O(U)$ apply the localization internal-Hom identity with
-   $P=\mathcal O_U[1/f]$ and localizing section $a$. It gives $F_{af}\cong R\mathcal
-   Hom_{\mathcal O_U}(\mathcal O_U[1/a],F_f)=0$. This also applies when either section is zero;
-   in particular $a=-1$ proves closure under negatives.
-3. For $f,g\in S_K(U)$ put $h=f+g$. For each $V\to U$ take $R=\mathcal O(V)[1/h]$. The images of
-   $f,g$ generate its unit ideal because $f/h+g/h=1$. The standard-covering gluing statement
-   gives injectivity and middle exactness of $0\to R\to R[1/f]\oplus R[1/g]\to R[1/(fg)]$, with
-   diagonal and difference maps. For surjectivity, represent an element of the last term as
-   $z/(fg)^n$, increasing $n$ to be positive. The binomial expansion of $(f/h+g/h)^{2n-1}=1$
-   gives $u f^n+v g^n=1$ for some $u,v\in R$. The pair $(vz/f^n,-uz/g^n)$ maps to $z/(fg)^n$.
-   Sheafifying this sectionwise exact sequence gives $0\to\mathcal O_U[1/h]\to\mathcal
-   O_U[1/(fh)]\oplus\mathcal O_U[1/(gh)]\to\mathcal O_U[1/(fgh)]\to0$; iterated localization
-   agrees with localization at the product by its universal property.
-4. Write $A=\mathcal O_U[1/h]$, $B=\mathcal O_U[1/(fh)]\oplus\mathcal O_U[1/(gh)]$, $D=\mathcal
-   O_U[1/(fgh)]$, and let $i:A\to B$ be the injection of step 3. In degree-zero complexes its
-   cone $T=C(i)$ is $A\xrightarrow{i}B$ in degrees $-1,0$. The projection $T\to D[0]$ is a
-   quasi-isomorphism: its degree $-1$ cohomology is $\ker i=0$, and its degree $0$ cohomology is
-   $\operatorname{coker}i=D$. Choose a K-injective representative $I^\bullet$ of $K|_U$, and
-   write $H(X)=\mathcal Hom^\bullet(X,I^\bullet)$. The quasi-isomorphism clause of the derived
-   internal-Hom definition gives a quasi-isomorphism $H(D)\to H(T)$. Step 2 gives
-   $F_{fh}=F_{gh}=F_{fgh}=0$ (multipliers $h,h,gh$ respectively), so $H(T)$ and $H(B)=H(\mathcal
-   O_U[1/(fh)])\oplus H(\mathcal O_U[1/(gh)])$ are acyclic. The degreewise split sequence $0\to
-   B\to T\to A[1]\to0$ gives $0\to H(A[1])\to H(T)\to H(B)\to0$, also degreewise split:
-   restriction to the graded summand $B$ is surjective, with kernel the maps factoring through
-   the graded quotient $A[1]$, and the Hom differential preserves this kernel. Its kernel is
-   acyclic by the following local boundary chase. For a closed local section $x$ of the kernel,
-   acyclicity of $H(T)$ gives locally $y$ with $dy=x$; its image $\bar y$ is closed in $H(B)$,
-   so locally $\bar y=dz$. Lift $z$ using the degreewise splitting; then $y-d\widetilde z$ lies
-   in the kernel and has differential $x$. Thus $H(A[1])$ has zero cohomology sheaves. Its
-   degree $n$ term is $\mathcal Hom(A,I^{n-1})$, with the differential of $I$, so its cohomology
-   is that of $H(A)$ shifted by one degree. Therefore $F_h=0$ and $f+g\in S_K(U)$.
-5. For any arrow $V\to U$, the restriction identity for localization internal Hom gives
-   $F_f|_V\cong F_{f|_V}$. Hence membership is preserved by restriction. Conversely, suppose
-   $f|_{U_i}\in S_K(U_i)$ for a covering family of $U$. Then $F_f|_{U_i}=0$ for all $i$. Slice
-   restriction is evaluation of module sheaves on objects lying over $U_i$, so preserves kernels
-   and the locally defined images; it therefore commutes with cohomology. Every cohomology sheaf
-   of $F_f$ restricts to zero on the cover. A section of such a sheaf over any $V\to U$ vanishes
-   on the pulled-back covering sieve and is zero by the uniqueness axiom for a sheaf. Thus all
-   cohomology sheaves vanish, the representative complex is quasi-isomorphic to zero, and
-   $F_f=0$. A compatible family in $S_K$ glues uniquely in $\mathcal O$, and this local
-   criterion puts its glued section in $S_K$. Together with steps 1--4 this proves that $S_K$ is
-   a sheaf of ideals.
-6. On a slice where $b_1,\ldots,b_r$ generate the ideal sheaf and belong to $S_K$, a section of
-   the generated ideal is locally a finite sum $\sum_i a_i b_i$. Step 2 puts each summand in
-   $S_K$, and repeated application of step 4 puts the sum in $S_K$. Step 5 glues the local
-   membership. For $r=0$ the generated ideal is zero and step 1 applies.
+Proof: Localization at zero is the colimit of zero transition maps, hence zero.
+Contravariant derived internal Hom preserves zero, proving zero membership.
+The multiplication lemma identifies localization at af with the tensor of the
+localizations at a and f, proves these modules flat, and applies Hom-complex
+currying into a K-injective representative. The addition lemma uses the binary
+localization short exact sequence for h=f+g and exactness of contravariant
+RHom. The locality lemma compares slice restriction of the defining localization
+and of RHom, and proves descent by applying sheaf separatedness to cohomology
+sheaves on a pulled-back covering sieve. These three closure properties define
+an actual Ideal with carrier the complete elements. Its restriction and local
+membership properties are precisely the two parts of locality. Finally, all
+locally supplied generators belong to this ideal; Ideal.span_le puts every
+section of their span in it, and locality descends the resulting membership.
+The zero ideal, zero ring and empty covering sieves are included.
 -/
 theorem ringedSite_complete_elements_ideal
     {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
@@ -112,6 +124,25 @@ theorem ringedSite_complete_elements_ideal
             (∀ i : Fin r, IsRingedSiteCompleteElement J R K V (b i)) ∧
             R.obj.map a.op x ∈ Ideal.span (Set.range b)) →
         IsRingedSiteCompleteElement J R K U x) := by
-  sorry
+  have hlocal := ringedSite_completeElements_locality J R K
+  let I (U : C) : Ideal (R.obj.obj (op U)) :=
+    { carrier := {f | IsRingedSiteCompleteElement J R K U f}
+      zero_mem' := completeElement_zero J R K U
+      add_mem' := fun hf hg ↦ ringedSite_completeElement_add J R K U _ _ hf hg
+      smul_mem' := fun a _ hf ↦ ringedSite_completeElement_mul J R K U a _ hf }
+  refine ⟨I, fun _ _ ↦ Iff.rfl, ?_, ?_, ?_⟩
+  · intro U V a f hf
+    exact hlocal.1 U V a f hf
+  · intro U S hS f hf
+    exact hlocal.2 U S hS f hf
+  · intro U S hS x hx
+    apply hlocal.2 U S hS x
+    intro V a ha
+    obtain ⟨r, b, hb, hxb⟩ := hx V a ha
+    have hspan : Ideal.span (Set.range b) ≤ I V := by
+      apply Ideal.span_le.mpr
+      rintro _ ⟨i, rfl⟩
+      exact hb i
+    exact hspan hxb
 
 end CategoryTheory
