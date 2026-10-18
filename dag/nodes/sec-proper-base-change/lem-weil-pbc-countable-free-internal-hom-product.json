@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-countable-free-internal-hom-product",
+ "kind": "statement",
+ "title": "Internal Hom from the countable free module is a product",
+ "statement": "Let J be a small site, R a commutative ring sheaf, and N an R-module sheaf [def-weil-sheaf-of-modules-category]. Use the underlying ring convention of [def-weil-pbc-local-coefficient-localization]. Let P be the coproduct of unit modules indexed by lifted natural numbers. The internal Hom sheaf from P to N [def-pur-sheaf-hom], together with the natural-number-indexed maps obtained by precomposing with a basis inclusion and evaluating at 1, is a product of the copies of N. No finiteness of rank, flatness of N, or exactness of products is assumed.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0997, proof of lemma-hom-from-Af, the internal Hom of the countable free module."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-local-coefficient-localization",
+  "def-pur-sheaf-hom"
+ ],
+ "proof": [
+  {
+   "text": "The countable free coproduct, after taking opposites and reindexing the lifted natural numbers, is a product cone. Its universal property is proved explicitly by Sigma.desc and Sigma.hom_ext.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0997, proof of lemma-hom-from-Af, the internal Hom of the countable free module."
+   }
+  },
+  {
+   "text": "Use the existing SheafOfModules.tensorHomAdjunction and its naturality in the first tensor variable to construct a parametrized adjunction. Tensoring on the left is a left adjoint; braiding identifies tensoring on the right with it. Hence these tensor functors preserve coproducts. Mathlib ParametrizedAdjunction.preservesLimitsOfShape_flip_obj implies that internal Hom in its source preserves the opposite free coproduct cone.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0997, proof of lemma-hom-from-Af, the internal Hom of the countable free module."
+   }
+  },
+  {
+   "text": "Evaluation at 1, SheafOfModules.homObjUnitIso, identifies each factor with N. Transport the product property through these isomorphisms: lift a cone after composing all projections with the inverse unit isomorphism, and use the original limit fac and hom_ext to check the result. The resulting projections are exactly precomposition with the basis inclusion followed by evaluation.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0997, proof of lemma-hom-from-Af, the internal Hom of the countable free module."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0997, proof of lemma-hom-from-Af, the internal Hom of the countable free module."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Internal sheaf Hom from a countable free sum of the structure sheaf is the product of the target sheaf, with projections given by evaluation on basis inclusions.",
+   "results": "Eight hits including free, iFree, freeHomEquiv, sheafHom and freeFunctor; none states this internal module-Hom product property.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.homObj",
+   "results": "No hits; unknown identifier because the internal module-Hom construction is in the source library.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "homObj.*[Pp]roduct|[Cc]ountable.*[Hh]om",
+   "results": "Thirteen unrelated model-theory or countable-category matches. Local source search found only the finite-free homObjFreeIso, which does not handle the countable free sum.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LocalHomTowerCriterion",
+  "date": "2026-10-18",
+  "group": "M4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form, final Stacks comparison: passage between complete coefficient categories, using preservation and reflection of the local Stacks condition in the proof of 099I. Original Steps 3 and 4 only: free Hom-complex product and its scalar endomorphism. Free-vertex comparison, ordinary sheaf-level product calculation.",
+   "via": [
+    "lem-weil-pbc-local-hom-tower-criterion",
+    "lem-weil-pbc-restriction-local-completeness",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CountableFreeInternalHomProduct",
+  "file": "lean/Sheaf/Paper/CountableFreeInternalHomProduct.lean",
+  "declaration": "CategoryTheory.countableFree_internalHom_product",
+  "statement": "theorem countableFree_internalHom_product\n    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}\n    (R : Sheaf J CommRingCat.{u})\n    (N : ringedSiteModules.{u} (localCoefficientRings R)) :\n    Nonempty (IsLimit (Fan.mk (SheafOfModules.homObj (R := R)\n      (SheafOfModules.free (ULift.{u} ℕ)) N)\n      (fun n : ℕ ↦ SheafOfModules.homObjMap.{u, u, u, u} (R := R)\n        (SheafOfModules.ιFree (R := localCoefficientRings R) (ULift.up.{u} n)) (𝟙 N) ≫\n        (SheafOfModules.homObjUnitIso (R := R) N).hom)))",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261018T071203-L-1671989",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261018T071203-L-1671989",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
