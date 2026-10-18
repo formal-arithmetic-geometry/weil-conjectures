@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.Sites.SheafComposePushforwardMonoidal
 public import WeilConjectures.SixFunctors.ProEtale.Adic.AdicSheafForgetAb
 public import WeilConjectures.SixFunctors.ProEtale.Adic.PadicAlgClSheafIso
 
@@ -62,21 +63,6 @@ instance isMonHom_sheafificationAdjunction_homEquiv_symm {P : Cᵒᵖ ⥤ A} [Mo
   (sheafificationAdjunction J A).isMonHom_homEquiv_symm f
 
 end CategoryTheory.Sheaf
-
-namespace CategoryTheory
-
-/-- The components of `sheafToPresheafCompWhiskeringRightIsoSheafCompose` are identities. -/
-lemma sheafToPresheafCompWhiskeringRightIsoSheafCompose_hom_app {C : Type*} [Category C]
-    (J : GrothendieckTopology C) {A : Type*} [Category A] [MonoidalCategory A]
-    [BraidedCategory A] {B : Type*} [Category B] [MonoidalCategory B] [BraidedCategory B]
-    [(J.W (A := A)).IsMonoidal] [HasWeakSheafify J A] [(J.W (A := B)).IsMonoidal]
-    [HasWeakSheafify J B] (G : A ⥤ B) [J.HasSheafCompose G] [G.LaxMonoidal] (S : Sheaf J A) :
-    (sheafToPresheafCompWhiskeringRightIsoSheafCompose J G).hom.app S =
-      𝟙 ((sheafCompose J G).obj S).obj := by
-  simp [sheafToPresheafCompWhiskeringRightIsoSheafCompose,
-    sheafToPresheafCompWhiskeringRightCompPresheafToSheafIso]
-
-end CategoryTheory
 
 namespace AlgebraicGeometry.ProEtale
 

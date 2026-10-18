@@ -111,7 +111,7 @@ noncomputable def isLimitPadicIntSheafCone : IsLimit (padicIntSheafCone X l) := 
 `AlgebraicGeometry.ProEtale.adicConstantSheaf` underlying `ℓ`-adic sheaves, as a morphism of
 abelian sheaves: the map along which an integral lattice `lim_n Fₙ` of a lisse sheaf is to be
 rationalised. -/
-noncomputable def padicIntSheafToAdicConstantSheaf :
+noncomputable def integralToAdicConstantSheaf :
     (sheafCompose (ProEt.topology X) (forget₂ RingCat.{u + 1} Ab.{u + 1})).obj
         (padicIntSheaf X l) ⟶
       (sheafCompose (ProEt.topology X) (forget₂ (WeilCoefficients.{u} l) Ab.{u + 1})).obj
