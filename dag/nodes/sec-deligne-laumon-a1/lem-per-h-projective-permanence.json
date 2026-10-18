@@ -14,9 +14,72 @@
   "def-weil-proper-morphism",
   "def-kun-projective"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose the given $B$-closed immersion $i:Z\\hookrightarrow\\mathbf P^n_B$ and write $q:\\mathbf P^n_B\\to B$ for its projection, so $q\\circ i=g\\circ f$, using [def-kun-projective]. Apply [lem-weil-pbc-fibre-product-change-of-base-closed-immersion] to $f:Z\\to T$, $\\mathrm{id}_T:T\\to T$ and the separated map $g:T\\to B$. It gives a closed immersion $Z\\times_TT\\to Z\\times_BT$. By the universal property [def-pc-fibre-product], the first projection $Z\\times_TT\\to Z$ has inverse $(\\mathrm{id}_Z,f)$: their composites have the identity projections. Under this isomorphism the displayed closed immersion is the graph $\\gamma=(\\mathrm{id}_Z,f):Z\\to Z\\times_BT$. Thus $\\gamma$ is a closed immersion.",
+   "uses": [
+    "def-kun-projective",
+    "lem-weil-pbc-fibre-product-change-of-base-closed-immersion",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4Q, lemma-projective-permanence, first arrow in the factorization; schemes.tex Tags 01KS (lemma-semi-diagonal) and 01KR (lemma-fibre-product-after-map)."
+   }
+  },
+  {
+   "text": "Put $P=\\mathbf P^n_B\\times_BT$, and let $a:P\\to\\mathbf P^n_B$ be the first projection. The morphism $k:Z\\times_BT\\to P$ has components $(i\\circ\\mathrm{pr}_Z,\\mathrm{pr}_T)$. It is a base change of $i$ along $a$: explicitly, $Z\\times_{\\mathbf P^n_B}P\\cong Z\\times_BT$ by the inverse maps $(z,(p,t))\\mapsto(z,t)$ and $(z,t)\\mapsto(z,(i(z),t))$. These formulas mean morphisms specified by their projections, and are inverse by [def-pc-fibre-product]. Apply [lem-weil-pbc-closed-immersion-base-change] to conclude that $k$ is a closed immersion. This uses no flatness hypothesis on $g$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-closed-immersion-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4Q, lemma-projective-permanence, second arrow as base change of a closed immersion; Tag 01QR, lemma-base-change-closed-immersion."
+   }
+  },
+  {
+   "text": "Both $\\gamma$ and $k$ are closed immersions, so [lem-weil-pbc-closed-immersion-comp] makes $j=k\\circ\\gamma:Z\\hookrightarrow P$ a closed immersion. Its two components are $i$ and $f$: the first is $i\\circ\\mathrm{pr}_Z\\circ\\gamma=i$ and the second is $\\mathrm{pr}_T\\circ\\gamma=f$. Thus $j$ lies over $T$ with structural morphism $f$.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-comp"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 0C4Q, lemma-projective-permanence, composite factorization; Tag 01QS, lemma-composition-closed-immersion."
+   }
+  },
+  {
+   "text": "Use [lemma-nagata-projective-space-base-change-pullback] for $g:T\\to B$ and the finite homogeneous coordinate set $I=\\{0,\\ldots,n\\}$. It identifies $\\mathbf P(I;T)$ over $T$ with $T\\times_B\\mathbf P(I;B)$; interchange the two projections using [def-pc-fibre-product] to identify this with $P$. By [def-kun-projective], these are precisely $\\mathbf P^n_T$ and $\\mathbf P^n_B$. Composing $j$ with this isomorphism gives a closed immersion $Z\\hookrightarrow\\mathbf P^n_T$ whose projection is $f$. A closed immersion remains one under a target isomorphism directly from its definition [def-weil-closed-immersion]: the underlying closed embedding and the surjective structure-sheaf map are unchanged up to isomorphism. This is the factorization required by [def-kun-projective], with the original $n$.",
+   "uses": [
+    "lemma-nagata-projective-space-base-change-pullback",
+    "def-pc-fibre-product",
+    "def-kun-projective",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01WF, lemma-H-projective-base-change, projective-space base change; Tag 0C4Q, lemma-projective-permanence, last identification."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-projective",
+  "lem-weil-pbc-fibre-product-change-of-base-closed-immersion",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-comp",
+  "lemma-nagata-projective-space-base-change-pullback",
+  "def-weil-closed-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Tag 0C4Q, lemma-projective-permanence, closed-graph proof specialized to the given finite projective-space embedding; Tag 01WF, lemma-H-projective-base-change."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -118,10 +181,45 @@
    },
    "date": "2026-10-19",
    "verdict": "no match: semantic searches return IsProper.of_comp and IsFinite.of_comp; properness or finiteness cancellation does not assert a projective-space embedding. Loogle returns Proj structure sheaves; source grep has no projective cancellation declaration."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If a composite of morphisms of schemes is projective and the second morphism is separated, the first embeds as a closed subscheme of projective space of the same dimension over its target",
+   "results": "AlgebraicGeometry.IsClosedImmersion.of_comp; AlgebraicGeometry.instHasOfPostcompPropertySchemeIsClosedImmersionIsSeparated; AlgebraicGeometry.IsProper.of_comp; AlgebraicGeometry.UniversallyClosed.of_comp_of_isSeparated; AlgebraicGeometry.IsProper.of_comp_of_isSeparated; AlgebraicGeometry.Proj.isSeparated; AlgebraicGeometry.Proj.instIsSeparated; AlgebraicGeometry.IsSeparated.instIsClosedImmersionLiftSchemeId. These assert closed-immersion cancellation, properness, separatedness, or Proj chart identities, not a finite projective-space embedding for f.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsProjective, AlgebraicGeometry.IsSeparated",
+   "results": "No hits; service reports unknown identifier AlgebraicGeometry.IsProjective.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsProjective|IsHProjective|projective.*of_comp|projective.*permanence",
+   "results": "No hits in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme morphism X to Y is H-projective if X to S is H-projective and Y to S is separated",
+   "results": "AlgebraicGeometry.IsSeparated; AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty; AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated; AlgebraicGeometry.Scheme.IsSeparated.mk; AlgebraicGeometry.IsSeparated.of_isAffineHom; AlgebraicGeometry.IsSeparated.isStableUnderBaseChange; AlgebraicGeometry.isProper_iff; AlgebraicGeometry.IsProper.of_comp_of_isSeparated. These assert closed-immersion cancellation, properness, separatedness, or Proj chart identities, not a finite projective-space embedding for f.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cancellation of finite projective space embeddings of schemes after postcomposition with a separated morphism, using the graph closed immersion",
+   "results": "AlgebraicGeometry.Proj.pullbackAwayιIso_hom_awayι_assoc; AlgebraicGeometry.Proj.pullbackAwayιIso; AlgebraicGeometry.Proj.awayι_toSpecZero_assoc; AlgebraicGeometry.Proj.pullbackAwayιIso_inv_snd_assoc; AlgebraicGeometry.Proj.pullbackAwayιIso_inv_fst_assoc; AlgebraicGeometry.Proj.SpecMap_awayMap_awayι_assoc; AlgebraicGeometry.Proj.isSeparated; AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right_assoc. These assert closed-immersion cancellation, properness, separatedness, or Proj chart identities, not a finite projective-space embedding for f.",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-normal-projective-compactification",
@@ -146,5 +244,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-h-projective-permanence",
+  "worker": "stage1",
+  "summary": "Kept the H-projective same-dimension statement unchanged and expanded the Stacks closed-graph proof into four steps using existing nodes only. Checked exact source and Lean statements, graph and pullback identifications, and all citation interfaces; repeated logged Mathlib searches show no theorem asserting the item. No new nodes or unit changes.",
+  "blueprint": "The inherited ancestry points to lem-per-artin-gabber-affine-curve through lem-per-normal-projective-compactification. This generic scheme-theoretic permanence tool realizes the inherited from.place: keeping the normalized projective compactification projective after factoring its structural map through the separated finite trait extension. The current ancestor no longer contains that older ILO paragraph; no new claim about its current perverse-cohomology proof is made. Steps 1-3 give the graph embedding and step 4 preserves its finite coordinate set."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q113-b42d9bac7",
+  "group": "Q113",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q113-b42d9bac7 (reviewer sub-agent of L); spot-checked: Read the whole delivery: the item only, with no new nodes or unit changes. Read Stacks morphisms.tex Tag 0C4Q lemma-projective-permanence (l.10824), statement and proof, and every cited statement. The statement is unchanged from Q75's unsplit node and is the H-projective case of 0C4Q, where E=O^{n+1} pulls back to a free module of the same rank, so the same n is right. Step 1: change-of-base closed immersion with X=Z, Y=T, h=g gives Z×_T T→Z×_B T, identified with the graph (id,f); correct, and only g needs to be separated (01KS). Step 2: k is the base change of i along P^n_B×_B T→P^n_B, with explicit inverse maps; no flatness used. Step 3: the composite closed immersion has components i and f, so it lies over T. Step 4: lemma-nagata-projective-space-base-change-pullback with I={0..n} plus the factor swap; def-kun-projective defines P^N as P({0..N}), so n does not shift. All inputs are statements of Mathlib leaves, definitions or the Lean-closed isPullback_map, so no route departure and no tool_uses are needed, and there is no cycle. Duplicate search (0C4Q, permanence, H-projective): lem-weil-pbc-finite-separable-base-refinement covers only the field case, det-chow clause 2 is one specific π, and trf-h-projective-composition is composition; none duplicates the item. Edge cases Z=∅, n=0, g=id, f=id and non-reduced T all hold. Inherited blueprint from.place is kept and the report discloses the changed ancestor text. No changes."
  }
 }
