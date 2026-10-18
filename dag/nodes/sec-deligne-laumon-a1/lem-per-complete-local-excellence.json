@@ -272,5 +272,23 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-8844778bc (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and all 12 cited statements in full, plus the Stacks source: 07QW (statement and proof), 07PJ case (2), 07PC (all four conditions and the proof) and 07PI. The split follows the source route. Step 1: complete-local G-ring (07PS); its hypotheses match the item exactly. Step 2: a finite algebra B is Noetherian, and each prime quotient B/q is a finite A-domain, so it is complete local (0325 node); the new 07PI node then gives it a nonempty regular open. Step 3: the 07P9 node gives open regular locus for every finite algebra; B=0 is vacuous. Step 4: the new 07PC (3)=>(1) node gives J-2. Steps 5-6: Cohen surjection Lambda[[x]]->A (field or Cohen ring, n>=0); S is regular local, all its localizations are regular, so S is universally catenary. Step 7 (elementary): a finite type A-algebra is finite type over S by lifting coefficients, so it is catenary; this is genuinely a few lines. Step 8: assembly. New node lem-per-complete-local-domain-regular-open is exactly 07PI with J-0 expanded. Tested on a field, on a cusp k[[x,y]]/(y^2-x^3) and on k[e]/(e^2), which shows the domain hypothesis is needed. No duplicate: 032D is only an input to its proof, and the lem-exc-j0 nodes take J-0 as input. New node lem-per-j2-finite-algebra-criterion is 07PC (3)=>(1). It is not a duplicate of lem-exc-j2-residue-field-criterion, which is (4)=>(1) with a different hypothesis. Note for the next splitter: it can cite that node after the short (3)=>(4) argument. Neither new node restates the item. Batch-5 flag on lem-trf-regular-ring-universally-catenary: I recomputed the batch-5 closure from both targets, stopping at assumed.tsv, with and without the item's new deps. It adds only that node, lem-trf-cm-ring-universally-catenary and lem-trf-polynomial-algebra-cm, which are pure commutative algebra (regular => CM => universally catenary, Stacks 00NM/00NQ). Everything below them is already in the closure. Neither the trace formula nor Poincare duality assumption gives this result and it is not a step of their proofs. No non-trf node states it, so I accept the citation. No cycle, no SGA citation, blueprint from/via/same_as are correct, and the 7 off-unit tool_uses are generic algebra tools, accepted."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompleteLocalExcellent",
+  "declaration": "isExcellent_of_isNoetherianRing_of_isAdicComplete",
+  "file": "lean/Sheaf/RingTheory/CompleteLocalExcellent.lean",
+  "statement": "theorem isExcellent_of_isNoetherianRing_of_isAdicComplete (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] [IsAdicComplete (IsLocalRing.maximalIdeal A) A] : IsExcellent A",
+  "branch": "newtargets-dag",
+  "by": "N3",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a998ad855",
+  "group": "N3",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 07QW(2) clause by clause: CommRing, IsNoetherianRing, IsLocalRing, IsAdicComplete at maximalIdeal (Hausdorff+precomplete), conclusion IsExcellent (full body read: quasi-excellent ∧ universally catenary, finite-type algebras in universe u). No extra hypotheses; arbitrary universe u; statement field verbatim. Edge cases (fields, non-reduced Artinian, both characteristics, zero ring excluded as in source) ok. No duplicate complete-local excellence theorem in side lean/Sheaf or Mathlib. Only the item node's lean record changed; one new module with source/blueprint docstrings, 8-step proof docstring, single sorry, all 7 proof-dep imports exist. nt_compile --json clean (2.0 s); broken control copy errors. Report sections present."
  }
 }
