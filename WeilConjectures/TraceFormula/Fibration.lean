@@ -494,4 +494,66 @@ theorem traceFormulaOne_of_weilPushforward [IsSepClosed k] (K : WeilBoundedConst
 
 end Pushforward
 
+/-! ### The fibration step over a model -/
+
+section Main
+
+variable {ℓ : ℕ} [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+  [Fact (ringChar k ≠ ℓ)] {k₀ : Type u} [Field k₀] [Finite k₀] [Algebra k₀ k]
+
+/-- **The fibration step** (blueprint `sk-thm-trace-formula`): let `π₀ : X₀ ⟶ Spec A` be a
+morphism to an affine `k₀`-scheme. If the degree one trace formula holds over `Spec A` and over
+the fibres of `π₀` above all the `k₀`-points of `Spec A`, it holds over `X₀`. -/
+theorem ModelTraceFormulaOne.of_fibration [IsAlgClosed k] {A : Type u} [CommRing A]
+    [Algebra k₀ A] {X₀ : Scheme.{u}} (π₀ : X₀ ⟶ Spec (.of A)) {f₀ : X₀ ⟶ Spec (.of k₀)}
+    (hπ : π₀ ≫ Spec.map (CommRingCat.ofHom (algebraMap k₀ A)) = f₀) [LocallyOfFiniteType f₀]
+    [LocallyOfFiniteType π₀]
+    [LocallyOfFiniteType (Spec.map (CommRingCat.ofHom (algebraMap k₀ A)))]
+    (hY : ModelTraceFormulaOne ℓ (k := k) (Spec.map (CommRingCat.ofHom (algebraMap k₀ A))))
+    (hfib : ∀ y₀ : Spec (.of k₀) ⟶ Spec (.of A),
+      y₀ ≫ Spec.map (CommRingCat.ofHom (algebraMap k₀ A)) = 𝟙 _ →
+        ModelTraceFormulaOne ℓ (k := k) (pullback.snd π₀ y₀)) :
+    ModelTraceFormulaOne ℓ (k := k) f₀ := by
+  intro X _ _ _ Φ p hΦ K
+  let _ : Fintype k₀ := Fintype.ofFinite k₀
+  obtain ⟨F₀, hF₀, hp⟩ := hΦ.exists_isFrobenius
+  obtain ⟨FY, hFY⟩ := Scheme.Hom.exists_isFrobenius
+    (Spec.map (CommRingCat.ofHom (algebraMap k₀ A)))
+  have hΦY := isModelFrobenius_stdModel (k := k)
+    (Spec.map (CommRingCat.ofHom (algebraMap k₀ A))) hFY
+  have := hΦ.isFinite_self
+  have := hΦ.isUniversalHomeomorphism_self
+  have := hΦY.isFinite_self
+  have := hΦY.isUniversalHomeomorphism_self
+  have := hΦY.finite_fixedPoint (m := 1) one_ne_zero
+  have : Finite {y : RationalPoint (stdModel k (Spec.map (CommRingCat.ofHom
+      (algebraMap k₀ A)))) // y ≫ stdModelFrobenius _ (hFY.comp_eq _) = y} :=
+    Finite.of_equiv (FixedPoint (stdModelFrobenius (k := k)
+      (Spec.map (CommRingCat.ofHom (algebraMap k₀ A))) (hFY.comp_eq _)) 1)
+      (Equiv.subtypeEquivRight fun y ↦ by rw [frobeniusIterate_one])
+  have hdesc (y : RationalPoint (stdModel k (Spec.map (CommRingCat.ofHom (algebraMap k₀ A)))))
+      (hy : y ≫ stdModelFrobenius _ (hFY.comp_eq _) = y) :
+      ∃ y₀ : Spec (.of k₀) ⟶ Spec (.of A),
+        Spec.map (CommRingCat.ofHom (algebraMap k₀ k)) ≫ y₀ = y.left ≫ pullback.fst _ _ ∧
+          y₀ ≫ Spec.map (CommRingCat.ofHom (algebraMap k₀ A)) = 𝟙 _ := by
+    have hfr := (hΦY.comp_frobeniusIterate_left_eq_iff 1 y.left).1 (by
+      rw [frobeniusIterate_one, ← Over.comp_left, hy])
+    rw [pow_one] at hfr
+    exact exists_spec_point_of_frobenius_comp_eq _ (by
+      rw [Category.assoc, pullback.condition, ← Category.assoc]
+      erw [Over.w y]
+      exact Category.id_comp _) hfr
+  choose y₀ hy₀ hy₀' using hdesc
+  intro _ _ _
+  exact traceFormulaOne_of_weilPushforward (stdModelMap π₀ hπ hΦ.isPullback.w)
+    (stdModelMap_comp π₀ hπ hF₀ hp hFY hΦ.isPullback.w) K
+    (hY _ _ _ hΦY _)
+    (fun y hy ↦ ⟨(isModelFrobenius_fibre π₀ hπ hΦ y (y₀ y hy) (hy₀ y hy) hF₀ hp hFY
+      hy).isFinite_self, (isModelFrobenius_fibre π₀ hπ hΦ y (y₀ y hy) (hy₀ y hy) hF₀ hp hFY
+      hy).isUniversalHomeomorphism_self⟩)
+    (fun y hy ↦ hfib (y₀ y hy) (hy₀' y hy) _ _ _
+      (isModelFrobenius_fibre π₀ hπ hΦ y (y₀ y hy) (hy₀ y hy) hF₀ hp hFY hy) _)
+
+end Main
+
 end AlgebraicGeometry.ProEtale.CondensedRing
