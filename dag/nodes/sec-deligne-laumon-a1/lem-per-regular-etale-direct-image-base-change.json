@@ -21,9 +21,107 @@
   "def-weil-pbc-derived-exchange",
   "lem-weil-pbc-exchange-forget-coefficients"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $E=\\operatorname{For}K$ for the underlying bounded-below complex of abelian etale sheaves. By [lem-weil-pbc-exchange-forget-coefficients], coefficient forgetting commutes with inverse images and derived direct images, identifies the canonical module exchange with the canonical abelian exchange, and reflects whether this exchange is invertible. Thus it suffices to prove abelian exchange for $E$. Each $\\mathcal H^r(E)$ is the underlying abelian sheaf of the $\\Lambda$-module $\\mathcal H^r(K)$, so multiplication by the positive integer $\\ell^n$ kills it. This supplies the allowable torsion hypothesis below without any constructibility assumption.",
+   "uses": [
+    "lem-weil-pbc-exchange-forget-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6J (lemma-modules-abelian-unbounded), module/abelian comparison; canonical exchange compatibility as stated by the cited node"
+   }
+  },
+  {
+   "text": "Cover $Y$ by affine opens $W_i$ such that $h(W_i)$ lies in an affine open $U_i\\subseteq X$: choose $U_i$ around each image point and an affine neighbourhood inside $h^{-1}(U_i)$. Put $h_i:W_i\\to U_i$, $V_i=V\\times_XU_i$, $g_i:V_i\\to U_i$, and let $E_i$ be the restriction of $E$ to $V_i$. The open inclusions are etale by [lem-weil-pbc-open-immersion-etale]. The derived assertion of [sbc-lem-etale-locality], with its $X,S,T$ equal to our $Y,X,V$, reduces invertibility of the canonical abelian exchange to invertibility for these local squares and $E_i$. This is locality of the exchange morphism itself. By clause (3) of [lem-weil-pbc-qcqs-morphism-permanence], every $g_i$ is quasi-compact and quasi-separated. In particular $V_i$ need not be affine or Noetherian. We now prove the required local assertion for an arbitrary pair $W=\\operatorname{Spec}B\\to U=\\operatorname{Spec}A$.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale",
+    "sbc-lem-etale-locality",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZR (lemma-base-change-local), derived case; schemes.tex Tags 01K5 and 01KU(4) for qcqs base change"
+   }
+  },
+  {
+   "text": "The rings $A$ and $B$ are Noetherian by [pqf-lem-affine-open-locnoeth], since $X$ and $Y$ are Noetherian. By [lem-weil-pbc-flat-morphism-affine-criterion], the homomorphism $A\\to B$ is flat. For $\\mathfrak p\\in\\operatorname{Spec}A$ and a finite extension $k'/\\kappa(\\mathfrak p)$, the fibre of $W\\to U$ followed by extension to $k'$ is $\\operatorname{Spec}(B\\otimes_Ak')$, by [def-pc-scheme-fibre] and [lem-weil-pbc-fibre-product-affine-spectra]. It is an open subscheme of $Y\\times_X\\operatorname{Spec}k'$, which is regular by the hypothesis on $h$. Its local rings are therefore regular local rings. Taking $k'=\\kappa(\\mathfrak p)$, its affine coordinate ring is Noetherian by [pqf-lem-affine-open-locnoeth]; the same applies to every finite extension. The ring characterization of [def-weil-regular-scheme] now makes $B\\otimes_Ak'$ a regular Noetherian ring for every such extension. In particular this holds for finite purely inseparable extensions. These are exactly the flatness and Noetherian geometrically regular fibre conditions defining a regular ring map in [def-weil-pbc-g-ring]. Hence $A\\to B$ is a regular homomorphism of Noetherian rings.",
+   "uses": [
+    "pqf-lem-affine-open-locnoeth",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "def-pc-scheme-fibre",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-weil-regular-scheme",
+    "def-weil-pbc-g-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 4.2.1, affine reduction; affine flatness and the defining geometric-fibre criterion, as in Stacks Tags 01U2 and 07BZ"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-popescu-smoothing] to $A\\to B$. It gives a small filtered diagram of smooth $A$-algebras $B_j$ with compatible $A$-algebra maps to $B$ and colimit $B$. Apply clause (1) of [lem-weil-pbc-filtered-category-directed-cofinal] in the category of commutative rings. We may reindex by a nonempty directed set $I$, retaining the colimit $B$ and retaining smoothness of every $\\operatorname{Spec}B_i\\to U$: every term of the reindexed diagram is an original term. Thus there is a directed system $(B_i)_{i\\in I}$ of smooth $A$-algebras with $B=\\varinjlim_iB_i$ and with the prescribed $A$-algebra structure. This does not assume that $B$ itself is finitely presented over $A$.",
+   "uses": [
+    "lem-weil-pbc-popescu-smoothing",
+    "lem-weil-pbc-filtered-category-directed-cofinal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/smoothing.tex",
+    "place": "Tag 07GC (theorem-popescu); categories.tex Tag 0032 (lemma-directed-category-system), directed reindexing"
+   }
+  },
+  {
+   "text": "Put $W_i=\\operatorname{Spec}B_i$. By [lem-weil-pbc-spec-colimit-limit], the compatible maps identify $W=\\operatorname{Spec}B$ with $\\varprojlim_iW_i$ in schemes and the transitions are affine. Since the coprojections are $A$-linear, all the limit maps commute with the structure maps to $U$ and the induced map $W\\to U$ is precisely $h|_W$. Each $W_i\\to U$ is smooth by Step 4; it is also affine, since both schemes are affine, and hence quasi-compact and quasi-separated by [lem-weil-pbc-affine-morphism-permanence]. Apply [lem-kun-0f09] with $S=U$, $S'=W$, the smooth directed system $(W_i)$, $f=g_U:V\\times_XU\\to U$, and coefficient complex $E_U$. Its qcqs assumption on $f$ was verified in Step 2. Its torsion assumption holds with the same positive integer $\\ell^n$ at every cohomology stalk by Step 1 and restriction. The section $\\ell$ of $\\mathcal O_U$ is a unit: its local inverses exist by the hypothesis on $X$ and agree on overlaps, hence glue; so $\\ell^n$ is a unit in $\\Gamma(U,\\mathcal O_U)$. All the hypotheses of the cited limit theorem hold. It asserts invertibility of the canonical exchange $h_W^{-1}Rg_{U,*}E_U\\to Rg_{W,*}q_W^{-1}E_U$, exactly the local abelian morphism required in Step 2.",
+   "uses": [
+    "lem-weil-pbc-spec-colimit-limit",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-kun-0f09"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F09 (lemma-smooth-base-change-general); limits.tex Tag 01YW (lemma-directed-inverse-system-affine-schemes-has-limit), schemes.tex Tag 01SD"
+   }
+  },
+  {
+   "text": "Step 5 applies to every member $W_i\\to U_i$ of the covering of Step 2. The derived clause of [sbc-lem-etale-locality] therefore makes the global canonical abelian exchange $h^{-1}Rg_*E\\to Rg_{Y,*}q^{-1}E$ invertible. By [lem-weil-pbc-exchange-forget-coefficients], this is equivalent to invertibility of the canonical module exchange at $K$, with the constant coefficients transported as in the statement. This proves the assertion for every bounded-below $K$. No part of the argument imposed constructibility, finite type of $h$, or Noetherianity of $V$.",
+   "uses": [
+    "sbc-lem-etale-locality",
+    "lem-weil-pbc-exchange-forget-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0EZR (lemma-base-change-local), derived case; module/abelian exchange comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-weil-pbc-open-immersion-etale",
+  "sbc-lem-etale-locality",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "def-pc-scheme-fibre",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "def-weil-regular-scheme",
+  "def-weil-pbc-g-ring",
+  "lem-weil-pbc-popescu-smoothing",
+  "lem-weil-pbc-filtered-category-directed-cofinal",
+  "lem-weil-pbc-spec-colimit-limit",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-kun-0f09"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, Proposition 4.2.1, printed p. 281: affine localization, Popescu approximation, smooth base change and passage to a limit. The last two are supplied by the existing Stacks 0F09 node; no prohibited source is used."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -59,10 +157,45 @@
    "results": "{\"t\": \"2026-10-18T14:43:21Z\", \"tool\": \"leanfinder\", \"query\": \"Pullback along a regular scheme morphism commutes with the right derived direct image on the small etale site for prime power torsion coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity\", \"AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction\", \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity_assoc\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_right_unitality_assoc\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullbackComp\"], \"digest\": \"7bb559f8448b9faf\"}",
    "date": "2026-10-18",
    "verdict": "no match: hits concern regular sequences, regular categories, scheme morphisms, or structure-sheaf modules; none states etale derived direct-image or closed-support regular base change"
+  },
+  {
+   "tool": "grep",
+   "query": "regular.*baseChange|baseChange.*regular|regularBaseChange|geometricallyRegular",
+   "results": "{\"t\": \"2026-10-18T18:19:26Z\", \"tool\": \"grep\", \"query\": \"regular.*baseChange|baseChange.*regular|regularBaseChange|geometricallyRegular\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/RegularCategory/Basic.lean\", \"Mathlib/CategoryTheory/RegularCategory/Basic.lean\", \"Mathlib/CategoryTheory/RegularCategory/Basic.lean\", \"Mathlib/CategoryTheory/RegularCategory/Basic.lean\", \"Mathlib/CategoryTheory/RegularCategory/Basic.lean\", \"Mathlib/RingTheory/Flat/Basic.lean\", \"Mathlib/RingTheory/Regular/Flat.lean\", \"Mathlib/RingTheory/Regular/Flat.lean\"], \"digest\": \"84ebdf51d8c4f9e2\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned results concern etale morphism stability, scalar tensor products, structure-sheaf modules, regular sequences or regular categories, not this etale derived direct-image comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image of etale torsion sheaves commutes with regular base change of Noetherian schemes",
+   "results": "{\"t\": \"2026-10-18T18:19:26Z\", \"tool\": \"leansearch\", \"query\": \"Derived direct image of etale torsion sheaves commutes with regular base change of Noetherian schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.Etale.baseChange\", \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"AlgebraicGeometry.SurjectiveOnStalks.stableUnderBaseChange\", \"IsBaseChange.directSumPow\", \"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_isStableUnderBaseChange\", \"AlgebraicGeometry.IsProper.isStableUnderBaseChange\"], \"digest\": \"021b6912e9ff0f8f\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned results concern etale morphism stability, scalar tensor products, structure-sheaf modules, regular sequences or regular categories, not this etale derived direct-image comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular base change for bounded below etale torsion complexes along a flat geometrically regular morphism of Noetherian schemes",
+   "results": "{\"t\": \"2026-10-18T18:19:27Z\", \"tool\": \"leanfinder\", \"query\": \"Regular base change for bounded below etale torsion complexes along a flat geometrically regular morphism of Noetherian schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingHom.Etale.isStableUnderBaseChange\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"Algebra.Etale.baseChange\", \"Algebra.Etale.comp\", \"AlgebraicGeometry.IsEtale.of_comp\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"Algebra.FormallyEtale.comp\", \"Algebra.IsEtaleAt.comp\"], \"digest\": \"8ce9dfe1cd136e23\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned results concern etale morphism stability, scalar tensor products, structure-sheaf modules, regular sequences or regular categories, not this etale derived direct-image comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"baseChange\", \"regular\"",
+   "results": "{\"t\": \"2026-10-18T18:19:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"baseChange\\\", \\\"regular\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"IsSMulRegular.of_flat_of_isBaseChange\", \"CategoryTheory.Regular.regularEpiIsStableUnderBaseChange\", \"RingTheory.Sequence.IsRegular.of_faithfullyFlat_of_isBaseChange\", \"RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange\"], \"digest\": \"9b343ef9928d37c3\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned results concern etale morphism stability, scalar tensor products, structure-sheaf modules, regular sequences or regular categories, not this etale derived direct-image comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale derived direct image commutes with pullback along an inverse limit of smooth affine schemes",
+   "results": "{\"t\": \"2026-10-18T18:19:27Z\", \"tool\": \"leanfinder\", \"query\": \"Etale derived direct image commutes with pullback along an inverse limit of smooth affine schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.Scheme.instHasPullbacksEtale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.Scheme.instCategoryEtale\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\"], \"digest\": \"97f16916e0b6d5c4\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: returned results concern etale morphism stability, scalar tensor products, structure-sheaf modules, regular sequences or regular categories, not this etale derived direct-image comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-regular-supported-base-change",
@@ -86,5 +219,84 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-regular-etale-direct-image-base-change",
+  "worker": "stage1",
+  "summary": "Retained the exact statement. Realized the regular-base-change proof by affine localization, the existing Popescu theorem, directed reindexing and the existing pro-smooth base-change theorem. Checked the canonical module/abelian exchange and every geometric-fibre and qcqs hypothesis. Reused all inputs; created no new nodes.",
+  "blueprint": "The inherited from.place traces this input to the proof of lem-per-artin-gabber-affine-curve, Step 1, through regular supported exchange and finite-coefficient dualizing pullback. Steps 1--6 supply precisely the ordinary regular direct-image base change needed there, with the Proposition XVII.4.2.1 route. No unit or chapter proof step is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-exchange-forget-coefficients",
+    "why": "Use the canonical constant-module/abelian exchange comparison and its isomorphism detection; the perverse unit has no coefficient-forgetting theorem."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Use the generic fact that the affine open inclusions form an etale cover for localizing exchange."
+   },
+   {
+    "node": "sbc-lem-etale-locality",
+    "why": "Use derived exchange locality under etale neighbourhoods in source and base; this is the affine-localization tool in the item source."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Use preservation of quasi-compactness and quasi-separatedness by base change to the affine target opens."
+   },
+   {
+    "node": "pqf-lem-affine-open-locnoeth",
+    "why": "Use the generic affine-open ring criterion for a locally Noetherian scheme, not the compactification proof route."
+   },
+   {
+    "node": "lem-weil-pbc-flat-morphism-affine-criterion",
+    "why": "Use the affine flatness criterion to verify the ring-map hypothesis of Popescu."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Use the affine tensor-product identification of geometric fibre schemes."
+   },
+   {
+    "node": "lem-weil-pbc-popescu-smoothing",
+    "why": "Use regular Noetherian ring maps as filtered colimits of smooth algebras, exactly the approximation input of Proposition XVII.4.2.1."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-category-directed-cofinal",
+    "why": "Use directed reindexing of the small filtered Popescu diagram so the directed-system hypotheses of the existing limit results apply."
+   },
+   {
+    "node": "lem-weil-pbc-spec-colimit-limit",
+    "why": "Use the identification of spectrum of the directed ring colimit with the scheme limit, with affine transitions."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Use the qcqs consequence of affineness for the smooth stage structure maps."
+   },
+   {
+    "node": "lem-kun-0f09",
+    "why": "Use the existing canonical derived base-change theorem for a directed affine-transition limit of smooth qcqs schemes; it packages the smooth-base-change and continuity inputs of the source."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-weil-pbc-open-immersion-etale",
+  "sbc-lem-etale-locality",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "pqf-lem-affine-open-locnoeth",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-popescu-smoothing",
+  "lem-weil-pbc-filtered-category-directed-cofinal",
+  "lem-weil-pbc-spec-colimit-limit",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-kun-0f09"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-N0-77c8282b2",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-77c8282b2 (reviewer sub-agent of L); spot-checked: The statement matches ILO Gabber XVII Prop. 4.2.1 (p. 281, re-extracted from the PDF), specialized to Noetherian X and Y with Λ=Z/ℓ^n. It uses the constant Λ-module coefficient category and the module-adjunction exchange, and the delivery leaves it unchanged. No new nodes. A scan of all DAG statements found no duplicate regular direct-image base-change node. Step 1: the forget-coefficients clauses (1)-(3) and its iso-iff-iso conclusion give exactly the reduction to the abelian exchange, and ℓ^n kills every stalk. Step 2: checked against Stacks 0EZR (etale-cohomology.tex l.16307); with its X,S,T taken as Y,X,V the local squares are W_i×_{U_i}(V×_X U_i), and g_i is qcqs by base change (clause 3). Step 3: W×_X Spec k' is open in Y_x⊗k', which is regular and therefore locally Noetherian (02IT), so B⊗_A k' is a regular Noetherian ring and A→B is regular in the sense of 07BZ. Step 4: Popescu (07GC) needs A and B Noetherian and A→B regular, all from Step 3; the 0032 clause (1) reindexing keeps the colimit B, smoothness and the A-algebra structure. Step 5: 01YW gives Spec B = lim Spec B_i with affine transitions; the stage maps are qcqs because they are affine; lem-kun-0f09 (checked against Stacks 0F09, l.17975) applies with S=U, f=g_U and the single annihilator ℓ^n, a unit in Γ(U,O); its conclusion is the canonical exchange. Step 6: assembly by the 0EZR derived clause and For iso-detection. Small cases: identity, smooth affine h, empty V, K=0, n=1. No SGA is cited (route lock satisfied). The declared tool_uses are all generic black-box tools and I accept them. Cosmetic only, not changed: Step 5 reuses the letter W_i for Spec B_i, which Steps 2 and 6 use for the affine opens of Y."
  }
 }
