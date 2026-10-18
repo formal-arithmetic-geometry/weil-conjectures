@@ -1,0 +1,163 @@
+{
+ "id": "lem-weil-pbc-principal-contraction-spreading",
+ "kind": "statement",
+ "title": "Spreading local contraction data with free complements",
+ "statement": "Let R be a commutative ring, p a prime, and X,Y,Z finite free R-modules [def-weil-pbc-free-module]. Let a:X→Y and b:Y→Z satisfy b∘a=0. Set L=R_p [def-weil-pbc-localization-at-prime]; scalar extensions are [def-weil-pbc-module-tensor-product]. Suppose L-linear maps s:Y_L→X_L and t:Z_L→Y_L satisfy a_L∘s+t∘b_L=1. There is f outside p and maps s_f:Y_f→X_f, t_f:Z_f→Y_f over R_f [def-weil-ring-localization-away] satisfying a_f∘s_f∘a_f=a_f, t_f∘b_f∘t_f=t_f and a_f∘s_f+t_f∘b_f=1, for which ker(s_f∘a_f) and ker(b_f∘t_f) are free. No residue-field criterion, complex, or homotopy is asserted.",
+ "source": {
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00NX, lemma-finite-projective, direct summands of finite free modules and finite local freeness; denominator clearing as in Tag 068U"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-ring-localization-away"
+ ],
+ "proof": [
+  {
+   "text": "Use finite presentation of Y and Z to lift s and t from R_p after multiplying by denominators. Multiply the two lifts by the other denominator to obtain a common denominator c. The local middle identity implies that a s0+t0 b and c times identity have the same localization. Finiteness of Y gives one more element d outside p killing this error. Scaling both lifts by d gives actual R-linear maps satisfying a s0+t0 b=f times identity with f=dc outside p.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NX, lemma-finite-projective, direct summands of finite free modules and finite local freeness; denominator clearing as in Tag 068U"
+   }
+  },
+  {
+   "text": "From ba=0 and the scaled middle identity, q=s0 a on X and r=b t0 on Z satisfy q squared=fq and r squared=fr. For a scaled projector q, set C=coker q, which is finitely presented because the source and target are finite free. Over any R-algebra in which f is a unit, the map 1-q/f is a surjective projection to ker q whose kernel is range q; right exactness of tensor identifies the base change of C with this kernel.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-module-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NX, lemma-finite-projective, direct summands of finite free modules and finite local freeness; denominator clearing as in Tag 068U"
+   }
+  },
+  {
+   "text": "At p the normalized projector q/f is idempotent. The proved LinearMap.free_and_finite_ker_of_isIdempotentElem makes its kernel free over R_p, and hence C localized at p is free. Apply Module.FinitePresentation.exists_free_localizedModule_powers to C. Apply it separately to q and r, obtaining g1 and g2 outside p. Base change the resulting free cokernels to R localized at f g1 g2; the cokernel-kernel equivalences make both unnormalized projector kernels free there.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-pbc-localization-at-prime",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NX, lemma-finite-projective, direct summands of finite free modules and finite local freeness; denominator clearing as in Tag 068U"
+   }
+  },
+  {
+   "text": "Divide s0,t0 by the unit f to obtain a s+t b=1. The equation ba=0 gives a s a=a and b t b=b. Replace t by t b t, giving t b t=t and preserving the middle identity and b t. Multiplication by the inverse of f does not change the kernels. Explicit tensor-to-categorical-scalar-extension equivalences conjugate the maps and restrict to equivalences of their kernels. This proves every asserted equation and freeness clause. Empty bases and zero cokernels are covered by these constructions.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NX, lemma-finite-projective, direct summands of finite free modules and finite local freeness; denominator clearing as in Tag 068U"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-free-module",
+  "def-weil-pbc-module-tensor-product",
+  "def-weil-pbc-localization-at-prime",
+  "def-weil-ring-localization-away"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "E3",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00NX, lemma-finite-projective, direct summands of finite free modules and finite local freeness; denominator clearing as in Tag 068U"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Splitting linear maps between finite free modules at a prime localization spread to a principal localization with free complementary summands",
+   "results": "8 hits including LinearMap.split_surjective_of_localization_maximal, Module.free_of_isLocalizedModule, Module.freeLocus, LinearMap.ker_localizedMap_eq_localized'_ker and Module.mem_freeLocus_of_isLocalization. No combined principal spreading theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exists_lift_of_isLocalizedModule\"",
+   "results": "Module.FinitePresentation.exists_lift_of_isLocalizedModule: lifts one map after multiplying by a denominator; does not spread simultaneous identities and free kernels.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite diagram of linear maps between finite free modules over the localization at a prime, with polynomial identities, spreads to a principal localization outside the prime",
+   "results": "8 hits including Module.FinitePresentation.exists_notMem_bijective, exists_free_localizedModule_powers, exists_basis_localizedModule_powers and IsLocalizedModule.exists_isLocalizedModule_powers_of_finitePresentation. Individual denominator-clearing and local-freeness tools only.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_(lift|smul).*isLocalizedModule|exists_free_localizedModule_powers",
+   "results": "10 hits in Algebra/Module/FinitePresentation.lean, RingTheory/Localization/Free.lean and RingTheory/Spectrum/Prime/FreeLocus.lean: single-map lifts, clearing errors, and spreading free bases.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.FreeComplexResidueDegreeCancellation",
+  "date": "2026-10-18",
+  "group": "E3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-free-complex-residue-degree-cancellation",
+   "place": "Proof: spread the finite splitting maps obtained at the prime before constructing the supported homotopy",
+   "via": [
+    "lem-weil-pbc-localized-exact-pair-contraction"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.PrincipalContractionSpreading",
+  "file": "lean/Sheaf/Algebra/Homology/PrincipalContractionSpreading.lean",
+  "declaration": "ModuleCat.exists_principal_contraction_of_atPrime",
+  "statement": "theorem exists_principal_contraction_of_atPrime\n    {R : Type u} [CommRing R] (p : Ideal R) [p.IsPrime]\n    (X Y Z : ModuleCat.{max u v} R) (a : X ⟶ Y) (b : Y ⟶ Z) (hab : a ≫ b = 0)\n    (hX : Module.Free R X) (hY : Module.Free R Y) (hZ : Module.Free R Z)\n    (hfX : Module.Finite R X) (hfY : Module.Finite R Y) (hfZ : Module.Finite R Z)\n    (s : (ModuleCat.extendScalars.{u, u, max u v}\n        (algebraMap R (Localization.AtPrime p))).obj Y ⟶\n      (ModuleCat.extendScalars.{u, u, max u v}\n        (algebraMap R (Localization.AtPrime p))).obj X)\n    (t : (ModuleCat.extendScalars.{u, u, max u v}\n        (algebraMap R (Localization.AtPrime p))).obj Z ⟶\n      (ModuleCat.extendScalars.{u, u, max u v}\n        (algebraMap R (Localization.AtPrime p))).obj Y)\n    (hmid : s ≫ (ModuleCat.extendScalars (algebraMap R (Localization.AtPrime p))).map a +\n      (ModuleCat.extendScalars (algebraMap R (Localization.AtPrime p))).map b ≫ t =\n        𝟙 ((ModuleCat.extendScalars (algebraMap R (Localization.AtPrime p))).obj Y)) :\n    ∃ f : R, f ∉ p ∧\n      let E := ModuleCat.extendScalars.{u, u, max u v} (algebraMap R (Localization.Away f))\n      ∃ (s : E.obj Y ⟶ E.obj X) (t : E.obj Z ⟶ E.obj Y),\n        E.map a ≫ s ≫ E.map a = E.map a ∧\n        t ≫ E.map b ≫ t = t ∧\n        s ≫ E.map a + E.map b ≫ t = 𝟙 (E.obj Y) ∧\n        Module.Free (Localization.Away f) (LinearMap.ker (E.map a ≫ s).hom) ∧\n        Module.Free (Localization.Away f) (LinearMap.ker (t ≫ E.map b).hom)",
+  "branch": "sheaf-dag",
+  "by": "E3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261018T071146-L-1666453",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E3",
+  "result": "pass",
+  "landing": "20261018T071146-L-1666453",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
