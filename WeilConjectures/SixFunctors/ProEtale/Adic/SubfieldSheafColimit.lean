@@ -79,7 +79,7 @@ noncomputable def boundedOfIntegers (n : ℕ) (T : Type*) [TopologicalSpace T] :
   { toFun f := ⟨⟨fun x ↦ ((l : E) ^ n)⁻¹ * (f x : E),
         continuous_const.mul (continuous_subtype_val.comp f.continuous)⟩, n, fun x ↦ by
       rw [ContinuousMap.coe_mk, mul_inv_cancel_left₀ (pow_ne_zero n
-        (natCast_ne_zero_of_algebra l E))]
+        (natCast_ne_zero_of_algebra (l := l) (E := E)))]
       exact (f x).2⟩
     map_zero' := by
       ext x
@@ -106,7 +106,7 @@ lemma mem_boundedContinuousMaps_of_compactSpace {T : Type*} [TopologicalSpace T]
     (inv_prime_lt_one l)
   refine ⟨n, fun x ↦ ?_⟩
   have hnorm : ‖(l : E) ^ n * f x‖ ≤ 1 := by
-    have hl : ‖(l : E)‖ = (l : ℝ)⁻¹ := norm_algebraMap_natCast l E
+    have hl : ‖(l : E)‖ = (l : ℝ)⁻¹ := norm_algebraMap_natCast_self l E
     rw [norm_mul, norm_pow, hl]
     have hfx : ‖f x‖ ≤ |C| + 1 := (hC x (Set.mem_univ x)).trans ((le_abs_self C).trans (by simp))
     calc (l : ℝ)⁻¹ ^ n * ‖f x‖ ≤ (l : ℝ)⁻¹ ^ n * (|C| + 1) :=
@@ -175,7 +175,7 @@ noncomputable def boundedPresheafCocone :
       refine congrArg ULift.up (Subtype.ext (ContinuousMap.ext fun x ↦ ?_))
       change ((l : E) ^ (n + 1))⁻¹ * ((l : E) * (f.down x : E)) =
         ((l : E) ^ n)⁻¹ * (f.down x : E)
-      have hl := natCast_ne_zero_of_algebra l E
+      have hl := natCast_ne_zero_of_algebra (l := l) (E := E)
       field_simp
       ring }
 
@@ -196,13 +196,14 @@ noncomputable def isColimitBoundedPresheafCocone :
       (continuous_const.mul f.continuous).subtype_mk _⟩, ?_⟩
     refine congrArg ULift.up (Subtype.ext (ContinuousMap.ext fun x ↦ ?_))
     change f x = ((l : E) ^ k)⁻¹ * ((l : E) ^ k * f x)
-    rw [inv_mul_cancel_left₀ (pow_ne_zero k (natCast_ne_zero_of_algebra l E))]
+    rw [inv_mul_cancel_left₀ (pow_ne_zero k (natCast_ne_zero_of_algebra (l := l) (E := E)))]
   · obtain ⟨a⟩ := a
     obtain ⟨b⟩ := b
     have hab : a = b := ContinuousMap.ext fun x ↦ Subtype.ext <| by
       have := congrArg (fun z : ULift.{u + 1} (boundedContinuousMaps l E U.unop.left) ↦
         (z.down : C(U.unop.left, E)) x) h
-      exact mul_left_cancel₀ (inv_ne_zero (pow_ne_zero n (natCast_ne_zero_of_algebra l E))) this
+      exact mul_left_cancel₀
+        (inv_ne_zero (pow_ne_zero n (natCast_ne_zero_of_algebra (l := l) (E := E)))) this
     subst hab
     rfl
 

@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.NumberTheory.Padics.Extension
+public import WeilConjectures.NumberTheory.Padics.Logarithm
 
 /-!
 # The reductions `𝒪_E ⧸ ℓⁿ` of the ring of integers of a subfield of `ℚ̄_ℓ`
@@ -67,8 +68,9 @@ lemma integersModPowTransition_comp (n : ℕ) :
 lemma integersModPowMk_surjective (n : ℕ) : Function.Surjective (integersModPowMk l E n) :=
   Ideal.Quotient.mk_surjective
 
-lemma norm_algebraMap_natCast : ‖algebraMap E (PadicAlgCl l) (l : E)‖ = (l : ℝ)⁻¹ := by
-  rw [map_natCast, ← map_natCast (algebraMap ℚ_[l] (PadicAlgCl l)), norm_extends, Padic.norm_p]
+/-- The norm of `ℓ` in `E ⊆ ℚ̄_ℓ` is `ℓ⁻¹` (`norm_algebraMap_natCast` at `m = ℓ`). -/
+lemma norm_algebraMap_natCast_self : ‖algebraMap E (PadicAlgCl l) (l : E)‖ = (l : ℝ)⁻¹ := by
+  rw [norm_algebraMap_natCast, Padic.norm_p]
 
 lemma integersModPowMk_eq_zero_iff (n : ℕ) (x : integers l E) :
     integersModPowMk l E n x = 0 ↔
@@ -81,7 +83,7 @@ lemma integersModPowMk_eq_zero_iff (n : ℕ) (x : integers l E) :
     have he : ((a * (l : integers l E) ^ n : integers l E) : E) = (a : E) * (l : E) ^ n := by
       simp
     rw [he]
-    rw [map_mul, norm_mul, map_pow, norm_pow, norm_algebraMap_natCast]
+    rw [map_mul, norm_mul, map_pow, norm_pow, norm_algebraMap_natCast_self]
     exact mul_le_of_le_one_left (pow_nonneg hl.le n) ha
   · intro hx
     have hl0 : (l : E) ≠ 0 := fun h ↦ by
@@ -91,7 +93,7 @@ lemma integersModPowMk_eq_zero_iff (n : ℕ) (x : integers l E) :
     refine ⟨⟨(x : E) / (l : E) ^ n, ?_⟩, Subtype.ext ?_⟩
     · change ‖algebraMap E (PadicAlgCl l) ((x : E) / (l : E) ^ n)‖₊ ≤ 1
       rw [← NNReal.coe_le_coe, coe_nnnorm, map_div₀, norm_div, map_pow, norm_pow,
-        norm_algebraMap_natCast, NNReal.coe_one]
+        norm_algebraMap_natCast_self, NNReal.coe_one]
       exact div_le_one_of_le₀ hx (pow_nonneg hl.le n)
     · push_cast
       exact div_mul_cancel₀ _ (pow_ne_zero n hl0)
@@ -131,18 +133,13 @@ lemma continuous_integersModPowMk (n : ℕ) :
   exact (IsUltrametricDist.isOpen_closedBall _ (pow_ne_zero _ (inv_prime_pos l).ne')).preimage
     continuous_subtype_val
 
-lemma natCast_ne_zero_of_algebra : (l : E) ≠ 0 := fun h ↦ by
-  have := congrArg (algebraMap E (PadicAlgCl l)) h
-  rw [map_natCast, map_zero] at this
-  exact Nat.cast_ne_zero.2 (Fact.out : l.Prime).ne_zero this
-
 /-- Multiplication by `ℓⁿ` on `𝒪_E` is an embedding, being the restriction of a homeomorphism
 of `E`. -/
 lemma isEmbedding_natCast_pow_mul (n : ℕ) :
     letI := normedFieldOfAlgebra l E
     IsEmbedding (fun x : integers l E ↦ (l : integers l E) ^ n * x) := by
   let := normedFieldOfAlgebra l E
-  have hc : (l : E) ^ n ≠ 0 := pow_ne_zero n (natCast_ne_zero_of_algebra l E)
+  have hc : (l : E) ^ n ≠ 0 := pow_ne_zero n (natCast_ne_zero_of_algebra (l := l) (E := E))
   refine (IsEmbedding.of_comp_iff IsEmbedding.subtypeVal).1 ?_
   have : Subtype.val ∘ (fun x : integers l E ↦ (l : integers l E) ^ n * x) =
       Homeomorph.mulLeft₀ ((l : E) ^ n) hc ∘ Subtype.val :=
