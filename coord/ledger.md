@@ -16484,3 +16484,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:23 L: merged deliver/Z6/Sheaf.RingTheory.DvrCyclicSummandCancellation (stage 3; reviewer PASS; first push; landing 20261018T142335-L-3251736 (interface); batch 20261018T142331; modules 1; new nodes 0; change records: coord/changes/dvr-cyclic-cancellation-direct-sum-import.md)
 - 14:27 L: merged deliver/C3/Sheaf.Algebra.Homology.KFlatHomotopyTriangulated (stage 3; reviewer PASS; first push; landing 20261018T142714-L-3300364 (proof); batch 20261018T142710; modules 1; new nodes 0)
 - 14:27 L: merged deliver/R8/Sheaf.AlgebraicGeometry.EtaleDirectImageVanishing (stage 3; reviewer PASS; first push; landing 20261018T142715-L-3300510 (proof); batch 20261018T142710; modules 1; new nodes 0)
+- 14:27 L: merged deliver/S1/Sheaf.Paper.ConstructibleHomContinuityDevissage (stage 3; reviewer PASS; first push; landing 20261018T142716-L-3300636 (proof); batch 20261018T142710; modules 1; new nodes 0)

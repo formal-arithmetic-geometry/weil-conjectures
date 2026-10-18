@@ -10,9 +10,7 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs
 public import Mathlib.CategoryTheory.Preadditive.Yoneda.Basic
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import Mathlib.Algebra.Homology.HomologicalComplexLimits
-import Mathlib.CategoryTheory.Triangulated.Pretriangulated
-import Mathlib.Algebra.Category.Grp.AB
-import Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four
+import all Sheaf.CategoryTheory.HomColimitExtension
 
 /-!
 # Devissage for continuity of derived Hom
@@ -64,6 +62,27 @@ def complexHomContinuityLocus (A : Type a) [Category.{v} A] [Abelian A]
     (D : I ⥤ CochainComplex A ℤ) [HasColimit D] : ObjectProperty (DerivedCategory A) :=
   homContinuityLocus (D ⋙ DerivedCategory.Q)
     (DerivedCategory.Q.mapCocone (colimit.cocone D))
+
+private theorem homContinuityLocus_iff_homColimitProperty
+    {T : Type t} [Category.{v} T] [Preadditive T] [HasZeroObject T]
+    [HasShift T ℤ] [∀ n : ℤ, (shiftFunctor T n).Additive] [Pretriangulated T]
+    {I : Type v} [SmallCategory I] [IsFiltered I] (D : I ⥤ T) (c : Cocone D) (C : T) :
+    homContinuityLocus D c C ↔ homColimitProperty D c C := by
+  change (∀ q : ℤ, Function.Bijective (homContinuityComparison D c C q)) ↔ _
+  simp only [homColimitProperty, homContinuityComparison, ConcreteCategory.isIso_iff_bijective]
+  rfl
+
+private theorem homContinuityLocus_iso
+    {T : Type t} [Category.{v} T] [Preadditive T] [HasZeroObject T]
+    [HasShift T ℤ] [∀ n : ℤ, (shiftFunctor T n).Additive] [Pretriangulated T]
+    {I : Type v} [SmallCategory I] [IsFiltered I] (D : I ⥤ T) (c : Cocone D)
+    {C B : T} (e : C ≅ B) (hC : homContinuityLocus D c C) :
+    homContinuityLocus D c B := by
+  rw [homContinuityLocus_iff_homColimitProperty] at hC ⊢
+  intro n
+  let eF := Functor.isoWhiskerLeft (shiftFunctor T n)
+    (preadditiveCoyoneda.mapIso e.symm.op)
+  exact desc_iso_transfer D c _ _ eF (hC n)
 
 end CategoryTheory
 
@@ -119,7 +138,29 @@ theorem constructibleHomContinuity_devissage
       (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X))),
       G ≤ complexHomContinuityLocus _ D → ∀ n : ℕ,
         (G.shiftClosure ℤ).extensionProductIter n ≤ complexHomContinuityLocus _ D) := by
-  sorry
+  let D' := D ⋙ DerivedCategory.Q
+  let c := DerivedCategory.Q.mapCocone (colimit.cocone D)
+  let P := homContinuityLocus D' c
+  have hs (C) (n : ℤ) (h : P C) : P (C⟦n⟧) := by
+    exact (homContinuityLocus_iff_homColimitProperty D' c _).mpr
+      (homColimitProperty_shift D' c C
+        ((homContinuityLocus_iff_homColimitProperty D' c C).mp h) n)
+  have hi {C B} (e : C ≅ B) (h : P C) : P B := homContinuityLocus_iso D' c e h
+  have he (T) (hT : T ∈ distTriang _) (h₁ : P T.obj₁) (h₃ : P T.obj₃) :
+      P T.obj₂ := by
+    exact (homContinuityLocus_iff_homColimitProperty D' c _).mpr
+      (homColimitProperty_extensions D' c T hT
+        ((homContinuityLocus_iff_homColimitProperty D' c _).mp h₁)
+        ((homContinuityLocus_iff_homColimitProperty D' c _).mp h₃))
+  refine ⟨hs, fun _ _ e h ↦ hi e h, he, ?_⟩
+  let : P.IsClosedUnderIsomorphisms := ⟨fun e h ↦ hi e h⟩
+  let : P.IsStableUnderShift ℤ :=
+    { isStableUnderShiftBy := fun n ↦ ⟨fun C h ↦ hs C n h⟩ }
+  let : P.IsTriangulatedClosed₂ := .mk' he
+  intro G hG n
+  change (G.shiftClosure ℤ).extensionProductIter n ≤ P
+  exact (G.shiftClosure ℤ).extensionProductIter_le_of_isTriangulatedClosed₂
+    ((ObjectProperty.shiftClosure_le_iff G P (A := ℤ)).2 hG) n
 
 /-- The constructible specialization for finite E and the finite-subextension condensed
 algebraic closure. Source: blueprint devissage statement, last paragraph
@@ -162,3 +203,4 @@ theorem constructibleHomContinuity_of_lisseGenerators
   sorry
 
 end AlgebraicGeometry.ProEtale
+
