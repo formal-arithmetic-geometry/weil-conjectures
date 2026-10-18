@@ -11,9 +11,99 @@
   "def-weil-pbc-noetherian-ring",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The closed subsets of $X$ are the sets $V(I)$ by [lem-weil-pbc-spec-irreducible-closed-subsets-primes]. Given a descending chain of closed sets, take their radical ideals; the radical formula in [lem-weil-pbc-zero-locus-eq-iff-radical-eq] turns it into an ascending chain of ideals. Its union is an ideal; its finite generators, supplied by [def-weil-pbc-noetherian-ring], all belong to one member, so the chain stabilizes. Thus $X$ is Noetherian as a topological space. The spectrum is Kolmogorov: by the closure formula in [lem-weil-pbc-spec-irreducible-closed-subsets-primes], equality of the closures of two points gives inclusion of their primes in both directions, hence equality. Every subspace, in particular $W$, is Kolmogorov: intersect an ambient open separating two points with that subspace.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 02IM, lemma-complement-closed-point-Jacobson, direct proof of (1): Noetherian and Kolmogorov hypotheses, expanded from definitions."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-noetherian-space-compact-subsets] to the affine scheme $X$ and its subset $W$: $W$ is quasi-compact with its subspace topology. Since $W$ is nonempty and Kolmogorov, [lem-sc-quasi-compact-kolmogorov-closed-point], with ambient space $W$ and closed subset all of $W$, supplies a point $w\\in W$ whose singleton is closed in $W$. We will show that this same point is closed in $U$.",
+   "uses": [
+    "lem-sfb-noetherian-space-compact-subsets",
+    "lem-sc-quasi-compact-kolmogorov-closed-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 005E, lemma-quasi-compact-closed-point, and Tag 04ZA, lemma-Noetherian-quasi-compact; the choice used in the proof of Tag 02I7."
+   }
+  },
+  {
+   "text": "Every prime of $A$ is contained in $\\mathfrak m$: use [lem-weil-pbc-proper-ideal-contained-in-maximal] and uniqueness of the maximal ideal. In particular $V(\\mathfrak m)=\\{\\mathfrak m\\}$, so $U$ is open in $X$. Write $W=O\\cap F$ with $O$ open and $F$ closed in $U$. Since $\\{w\\}$ is closed in $W$, write $\\{w\\}=W\\cap C$ with $C$ closed in $U$. Hence $\\{w\\}=O\\cap(F\\cap C)$. The closed set $F\\cap C$ contains the closure of $w$ in $U$, giving $\\{w\\}=O\\cap\\overline{\\{w\\}}^{\\,U}$. Write $\\mathfrak p$ for the prime of $w$. By [lem-weil-pbc-spec-irreducible-closed-subsets-primes], this says $\\{w\\}=O\\cap V(\\mathfrak p)$, since $O\\subseteq U$. As $U$ is open, $O$ is open in $X$; consequently $\\{\\mathfrak p\\}$ is open in the whole subspace $V(\\mathfrak p)$, not just in its puncture.",
+   "uses": [
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 02IM, direct proof (1), the locally closed point becomes an open generic point of Spec(A/p); the subspace calculation is written out."
+   }
+  },
+  {
+   "text": "Suppose $w$ were not closed in $U$. Its closure in $U$ is $V(\\mathfrak p)\\cap U$ by [lem-weil-pbc-spec-irreducible-closed-subsets-primes], and contains a distinct point with prime $\\mathfrak q$. Step 3 gives $\\mathfrak p\\subsetneq\\mathfrak q\\subsetneq\\mathfrak m$. Put $B=A/\\mathfrak p$. By [lem-weil-pbc-quotient-local-structure], $B$ is a nonzero local ring with maximal ideal $\\mathfrak m/\\mathfrak p$. It is a domain: if $\\bar a\\bar b=0$, then $ab\\in\\mathfrak p$, so primality puts $a$ or $b$ in $\\mathfrak p$. It is Noetherian directly from finite generation: for an ideal $J\\subseteq B$, take finitely many generators of its inverse image in $A$ by [def-weil-pbc-noetherian-ring]; their images generate $J$ because $A\\to B$ is surjective.",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "lem-weil-pbc-quotient-local-structure",
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 02IM, direct proof (1): passage to the Noetherian local domain A/p; quotient Noetherianity expanded as in Algebra lemma-Noetherian-permanence."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-spec-quotient-homeomorphism-zero-locus], $\\operatorname{Spec}B$ is homeomorphic to $V(\\mathfrak p)$, with the zero prime mapping to $\\mathfrak p$. The primes $\\mathfrak q$ and $\\mathfrak m$ correspond to primes $\\bar{\\mathfrak q}$ and $\\bar{\\mathfrak m}$ with $(0)\\subsetneq\\bar{\\mathfrak q}\\subsetneq\\bar{\\mathfrak m}$: the inverse is the image under the quotient map and inverse image recovers the original prime. The closure and inclusion formula of [lem-weil-pbc-spec-irreducible-closed-subsets-primes] gives the strict chain of irreducible closed sets $V(\\bar{\\mathfrak m})\\subsetneq V(\\bar{\\mathfrak q})\\subsetneq V(0)=\\operatorname{Spec}B$. By the definition [def-kun-topological-krull-dimension], $\\dim\\operatorname{Spec}B\\geq2$. The homeomorphism and Step 3 also show that the singleton consisting of the zero prime is open in $\\operatorname{Spec}B$.",
+   "uses": [
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+    "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+    "def-kun-topological-krull-dimension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 02IM, direct proof (1): the strict prime chain supplies dimension at least two, and the locally closed generic point supplies an open singleton."
+   }
+  },
+  {
+   "text": "Apply [lem-per-noetherian-local-domain-open-infinite] to $B$: Step 4 verified that it is a nonzero Noetherian local domain, and Step 5 verified dimension at least two. Its open singleton $\\{(0)\\}$ is nonempty and finite, contradicting that lemma. Thus the assumption of Step 4 was false: $\\{w\\}$ is closed in $U$, and $w\\in W$ is the required point.",
+   "uses": [
+    "lem-per-noetherian-local-domain-open-infinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 02IM, direct proof (1), final contradiction using Algebra Tag 02IG (lemma-Noetherian-local-domain-dim-2-infinite-opens)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-spec-irreducible-closed-subsets-primes",
+  "lem-weil-pbc-zero-locus-eq-iff-radical-eq",
+  "def-weil-pbc-noetherian-ring",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "lem-sc-quasi-compact-kolmogorov-closed-point",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "lem-weil-pbc-quotient-local-structure",
+  "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+  "def-kun-topological-krull-dimension",
+  "lem-per-noetherian-local-domain-open-infinite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 02IM, lemma-complement-closed-point-Jacobson, direct proof of (1); expanded with the closed-point choice from Topology Tag 02I7 and 005E. Instead of introducing Jacobson terminology, choose a closed point in W and prove it is closed in the puncture by the same contradiction."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -56,10 +146,24 @@
    "results": "Logged actual response: 8 hits; isJacobsonRing_localization, PrimeSpectrum.exist_mem_one_of_mem_maximal_ideal, Polynomial.jacobson_bot_of_integral_localization, instIsHausdorffMaximalIdeal, IsJacobsonRing, IsLocalization.isMaximal_of_isMaximal_disjoint, IsLocalRing.maximalIdeal_le_jacobson, IsLocalization.isMaximal_iff_isMaximal_disjoint",
    "date": "2026-10-19",
    "verdict": "No match: isJacobsonRing_localization assumes the original ring is Jacobson, not merely Noetherian local; the other hits do not give closed points in every locally closed subset of the puncture."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The punctured spectrum of a Noetherian local ring is a Jacobson space, every nonempty locally closed subset contains a point closed in the punctured spectrum",
+   "results": "Logged actual response: 8 hits; AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatSpecOfOfIsJacobsonRing, AlgebraicGeometry.instJacobsonSpaceCarrierCarrierCommRingCatSpecOfIsJacobsonRingCarrier, PrimeSpectrum.instJacobsonSpaceOfIsJacobsonRing, PrimeSpectrum.isJacobsonRing_iff_jacobsonSpace, PrimeSpectrum.exists_isClosed_singleton_of_isJacobsonRing, PrimeSpectrum.isOpen_singleton_tfae_of_isNoetherian_of_isJacobsonRing, instIsJacobsonRingOfKrullDimLEOfNatNat, instIsJacobsonRingOfIsArtinianRing",
+   "date": "2026-10-19",
+   "verdict": "no match: no theorem supplies the Jacobson property of the punctured spectrum of a merely Noetherian local ring."
+  },
+  {
+   "tool": "grep",
+   "query": "(infinite.*open|open.*infinite|Infinite.*Open|Open.*Infinite)",
+   "results": "Logged actual response: 0 hits; ; subdirectory RingTheory",
+   "date": "2026-10-19",
+   "verdict": "no match: no theorem supplies the Jacobson property of the punctured spectrum of a merely Noetherian local ring."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-prime-avoidance-connectedness-slice",
@@ -86,5 +190,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-punctured-local-closed-points",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded the direct proof of Stacks 02IM(1): a point closed in W has a locally closed singleton in U, hence is an open generic point of its closure. If it is not closed in U, its prime quotient is a local Noetherian domain of dimension at least two with a finite nonempty open, contradicting 02IG. One new statement-only node for 02IG; compactness and spectrum/quotient inputs reuse existing Mathlib leaves.",
+  "blueprint": "Proof Step 1: dimension-normalized Verdier duality and the middle t-structure; the finite-coefficient potential-dualizing construction, via the normal-local top-residue-class input (ILO XVII Lemma 3.5.8): normality of completion and connectedness of punctured principal slices. Specific input: The prime-avoidance slicing construction in the complete-local connectedness input, retaining points in the two clopen pieces; the zero-piece case treats an empty complement. Auxiliary fact at the slicing step: choose points in the prescribed locally closed pieces which are closed in the whole punctured spectrum (Stacks 02J6(4)). Steps 1–6 prove the closed-point input to prime-avoidance slicing in the complete-local connectedness argument; the unit route is unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-44229feea",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-44229feea (reviewer sub-agent of L); spot-checked: Read Stacks 02IG (algebra.tex:14739-65), 02IM direct proof of (1) (properties.tex:818-58) and 02J6(4). The item statement is correct and unchanged; it is the locally-closed form of Jacobsonness of the punctured spectrum of a Noetherian local ring. Checked the six steps against the cited statements. Step 1: X is a Noetherian T0 space (radical chain plus finite generation). Step 2: W is compact, and 005E applied to W gives a point closed in W. Step 3: U is open, and {w}=O∩V(p), so {p} is open in V(p). Step 4: p⊊q⊊m, and A/p is a Noetherian local domain (quotient-local node with p⊆m). Step 5: the homeomorphism Spec B≅V(p) and a strict irreducible chain give dim≥2, and {(0)} is open. Step 6: this contradicts 02IG. Every other citation is a Mathlib leaf, so there is no route or tool_use issue. The new node lem-per-noetherian-local-domain-open-infinite states 02IG faithfully with all hypotheses. It is statement-only and self-contained, strictly smaller than the item, and has three recorded search kinds and correct blueprint.from. DVR shows the dim≥2 bound is necessary. No duplicate: rg over the DAG for 02IG/02IM/02J6/Jacobson/open-singleton/infinitely-many-primes, the main-20261015 blueprint and Mathlib (Spectrum/Prime/Jacobson.lean) found none. The parent prime-avoidance-slice uses the item exactly as stated. No cycle, no SGA source. No fixes."
  }
 }
