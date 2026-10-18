@@ -24,6 +24,13 @@ the pro-étale functors and projection maps of the repository specialised to the
 - `AlgebraicGeometry.ProEtale.starProjectionMapModule` (`pur713-def-star-projection`).
 - `AlgebraicGeometry.ProEtale.openProjectionMapModule` (`pur713-def-open-projection`).
 - `AlgebraicGeometry.ProEtale.shriekProjectionMapModule` (`pur713-def-shriek-projection`).
+
+## Implementation notes
+
+The three projection maps are stated as natural transformations of bifunctors, whose
+`(K, L)`-components are the morphisms of the blueprint: stating the components for objects `K`
+of `D(X_proét, Λ)` elaborated afresh at `ModuleCat Λ` makes the kernel compare instances of
+the sheaf categories found along different paths, which it fails to do in reasonable time.
 -/
 
 @[expose] public section
@@ -106,28 +113,27 @@ coefficients.
 For `f : X ⟶ Y`, `K ∈ D(X_proét, Λ)` and `L ∈ D(Y_proét, Λ)`,
 `P_{f,K,L} : Rf_* K ⊗ᴸ L ⟶ Rf_*(K ⊗ᴸ Lf^* L)` is the adjoint under `Lf^* ⊣ Rf_*` of the monoidal
 comparison `Lf^*(Rf_* K ⊗ᴸ L) ≅ Lf^* Rf_* K ⊗ᴸ Lf^* L` followed by `ε_K ⊗ 1`
-(`AlgebraicGeometry.ProEtale.rightDerivedLowerStarProjectionMap_app_app`). -/
-noncomputable abbrev starProjectionMapModule {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))
-    (L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))) :
-    ((-⊗ᴸ-(Y)[ModuleCat.{u + 1} Λ]).obj (R((f)_*[ModuleCat.{u + 1} Λ]).obj K)).obj L ⟶
-      R((f)_*[ModuleCat.{u + 1} Λ]).obj (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K).obj
-        (L((f)^*[ModuleCat.{u + 1} Λ]).obj L)) :=
-  ((rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) f).app K).app L
+(`AlgebraicGeometry.ProEtale.rightDerivedLowerStarProjectionMap_app_app`). It is the component
+at `(K, L)` of this natural transformation of bifunctors `D(X_proét, Λ) ⥤ D(Y_proét, Λ) ⥤
+D(Y_proét, Λ)`. -/
+noncomputable abbrev starProjectionMapModule {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    derivedTensorRightDerivedLowerStar (ModuleCat.{u + 1} Λ) f ⟶
+      rightDerivedLowerStarDerivedTensorLeftDerivedUpperStar (ModuleCat.{u + 1} Λ) f :=
+  rightDerivedLowerStarProjectionMap (ModuleCat.{u + 1} Λ) f
 
 /-- Blueprint `pur713-def-open-projection`: open-extension projection map, finite coefficients.
 
 For an open immersion `j : U ⟶ X`, `K ∈ D(U_proét, Λ)` and `N ∈ D(X_proét, Λ)`,
 `σ_{j,K,N} : D(j_!)(K ⊗ᴸ D(j^*) N) ⟶ D(j_!) K ⊗ᴸ N` is the adjoint under `D(j_!) ⊣ D(j^*)` of
 the unit at `K` tensored with the identity followed by the monoidal comparison of `j^*`, with
-`D(j^*) ≅ Lj^*` (`AlgebraicGeometry.ProEtale.derivedOpenImmersionLowerShriekProjectionMap`). -/
-noncomputable abbrev openProjectionMapModule {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j]
-    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology U) (ModuleCat.{u + 1} Λ)))
-    (N : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ))) :
-    D((j)_!open[ModuleCat.{u + 1} Λ]).obj (((-⊗ᴸ-(U)[ModuleCat.{u + 1} Λ]).obj K).obj
-        (L((j)^*[ModuleCat.{u + 1} Λ]).obj N)) ⟶
-      ((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj (D((j)_!open[ModuleCat.{u + 1} Λ]).obj K)).obj N :=
-  ((derivedOpenImmersionLowerShriekProjectionMap (ModuleCat.{u + 1} Λ) j).app K).app N
+`D(j^*) ≅ Lj^*` (`AlgebraicGeometry.ProEtale.derivedOpenImmersionLowerShriekProjectionMap`).
+It is the component at `(K, N)` of this natural transformation of bifunctors
+`D(U_proét, Λ) ⥤ D(X_proét, Λ) ⥤ D(X_proét, Λ)`. -/
+noncomputable abbrev openProjectionMapModule {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] :
+    (Functor.postcompose₂.obj D((j)_!open[ModuleCat.{u + 1} Λ])).obj
+        (derivedTensorWhiskeringRightLeftDerivedUpperStar (ModuleCat.{u + 1} Λ) j) ⟶
+      derivedTensorWhiskeringLeftOpenImmersionLowerShriek (ModuleCat.{u + 1} Λ) j :=
+  derivedOpenImmersionLowerShriekProjectionMap (ModuleCat.{u + 1} Λ) j
 
 /-- Blueprint `pur713-def-shriek-projection`: compact-support projection transformation, finite
 coefficients.
@@ -138,15 +144,14 @@ For a compactification `d = (j, p)` of `f` (for the chosen one `c_f`, this is `P
 `P_{p, j_! K, L}` (`AlgebraicGeometry.ProEtale.starProjectionMapModule`), of `Rp_*` applied to
 the inverse of the open-extension projection isomorphism `σ_{j,K,Lp^* L}`
 (`AlgebraicGeometry.ProEtale.openProjectionMapModule`), and of the composition comparison
-`Lj^* Lp^* ≅ Lf^*` (`AlgebraicGeometry.ProEtale.projectionMapOfCompactification_app_app`). -/
+`Lj^* Lp^* ≅ Lf^*` (`AlgebraicGeometry.ProEtale.projectionMapOfCompactification_app_app`).
+It is the component at `(K, L)` of this natural transformation of bifunctors
+`D(X_proét, Λ) ⥤ D(Y_proét, Λ) ⥤ D(Y_proét, Λ)`. -/
 noncomputable abbrev shriekProjectionMapModule {X Y : Scheme.{u}} {f : X ⟶ Y}
-    (c : Compactification f)
-    (K : DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)))
-    (L : DerivedCategory (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} Λ))) :
-    ((-⊗ᴸ-(Y)[ModuleCat.{u + 1} Λ]).obj ((Rf_!(c)[ModuleCat.{u + 1} Λ]).obj K)).obj L ⟶
-      (Rf_!(c)[ModuleCat.{u + 1} Λ]).obj (((-⊗ᴸ-(X)[ModuleCat.{u + 1} Λ]).obj K).obj
-        (L((f)^*[ModuleCat.{u + 1} Λ]).obj L)) :=
-  ((projectionMapOfCompactification (ModuleCat.{u + 1} Λ) c).app K).app L
+    (c : Compactification f) :
+    derivedTensorRightDerivedLowerShriek (ModuleCat.{u + 1} Λ) c ⟶
+      rightDerivedLowerShriekDerivedTensorLeftDerivedUpperStar (ModuleCat.{u + 1} Λ) c :=
+  projectionMapOfCompactification (ModuleCat.{u + 1} Λ) c
 
 end ProEtale
 

@@ -337,6 +337,7 @@ lemma map_smul_id_eq_zero {C D : Type*} [Category C] [Category D] [Preadditive C
 variable {X X' S' T Y : Scheme.{u}} (p : X' ⟶ X) (h : Y ⟶ X') (e : Y ⟶ T) (f' : X' ⟶ S')
   (g : T ⟶ S') (w : h ≫ f' = e ≫ g) (𝓕 : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ))
 
+omit [Finite Λ] in
 variable {𝓕} in
 /-- The sheaf `Hᵠ(τ^{≤q} N)` is killed by every element killing `𝓕`. -/
 lemma smul_id_tensorBaseChangeHomologySheaf {x : Λ} (hx : x • 𝟙 𝓕 = 0) (q : ℤ) :

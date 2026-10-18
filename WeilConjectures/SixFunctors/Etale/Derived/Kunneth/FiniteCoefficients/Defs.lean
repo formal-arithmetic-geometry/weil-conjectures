@@ -38,7 +38,7 @@ the coefficient category `ModuleCat Λ`, respectively `ModuleCat F`.
 
 @[expose] public section
 
-universe u
+universe u u'
 
 open CategoryTheory Limits MonoidalCategory
 
@@ -67,6 +67,42 @@ end Scheme
 
 namespace Etale
 
+section Coefficients
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
+  [Abelian.HasFunctorialFlatResolution A]
+
+/-- The constant complex functor `D(A) ⥤ D(W_ét, A)` for a coefficient category `A`: the functor
+induced on derived categories by the exact constant sheaf functor `M ↦ M_W`. The constructions
+of the ordinary Künneth morphism are carried out for such an `A` and then specialised to
+`A = ModuleCat Λ`. -/
+noncomputable abbrev derivedConstantSheaf (W : Scheme.{u}) :
+    DerivedCategory A ⥤ DerivedCategory (Sheaf W.smallEtaleTopology A) :=
+  (constantSheaf W.smallEtaleTopology A).mapDerivedCategory
+
+/-- The tensor product `Lp^* K ⊗ᴸ Lq^* L ∈ D(Z_ét, A)` of the inverse images of
+`K ∈ D(X_ét, A)` and `L ∈ D(Y_ét, A)` along morphisms `p : Z ⟶ X` and `q : Z ⟶ Y`, for a
+coefficient category `A`; here `⊗ᴸ` is the tensor product of the monoidal category `D(Z_ét, A)`,
+that is `AlgebraicGeometry.Etale.derivedTensor`. -/
+noncomputable def derivedExteriorTensor {X Y Z : Scheme.{u}} (p : Z ⟶ X) (q : Z ⟶ Y)
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (L : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    DerivedCategory (Sheaf Z.smallEtaleTopology A) :=
+  (L((p)^*[A])).obj K ⊗ (L((q)^*[A])).obj L
+
+/-- The derived exterior product `K ⊠ᴸ L := Lp_X^* K ⊗ᴸ Lp_Y^* L ∈ D((X ×_S Y)_ét, A)` of
+`K ∈ D(X_ét, A)` and `L ∈ D(Y_ét, A)`, for a coefficient category `A`, where `p_X`, `p_Y` are
+the projections of `X ×_S Y` (`AlgebraicGeometry.Etale.derivedExteriorTensor`). -/
+noncomputable abbrev derivedExteriorProduct {S X Y : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S)
+    (K : DerivedCategory (Sheaf X.smallEtaleTopology A))
+    (L : DerivedCategory (Sheaf Y.smallEtaleTopology A)) :
+    DerivedCategory (Sheaf (pullback f g).smallEtaleTopology A) :=
+  derivedExteriorTensor A (pullback.fst f g) (pullback.snd f g) K L
+
+
+end Coefficients
+
 section Ring
 
 variable (Λ : Type (u + 1)) [CommRing Λ]
@@ -87,17 +123,17 @@ noncomputable abbrev rightDerivedGlobalSectionsModule (W : Scheme.{u}) :
 
 For a scheme `W`, `c_{W,Λ} = D((-)_W) : D(Mod_Λ) ⥤ D(W_ét, Λ)` is the functor induced on derived
 categories by the exact constant sheaf functor `M ↦ M_W` (the sheafification of the constant
-presheaf), that is the repository's `AlgebraicGeometry.Etale.constantFunctor`. The blueprint
-takes `Λ = 𝒪_E/ϖⁿ`. -/
+presheaf), `AlgebraicGeometry.Etale.derivedConstantSheaf` for `A = ModuleCat Λ` (it is also
+the repository's `AlgebraicGeometry.Etale.constantFunctor`). The blueprint takes
+`Λ = 𝒪_E/ϖⁿ`. -/
 noncomputable abbrev constantComplexFunctor (W : Scheme.{u}) :
     DerivedCategory (ModuleCat.{u + 1} Λ) ⥤
       DerivedCategory (Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
-  constantFunctor Λ W
+  derivedConstantSheaf (ModuleCat.{u + 1} Λ) W
 
-/-- `c_{W,Λ}` is definitionally the levelwise functor of the constant sheaf functor. -/
-lemma constantComplexFunctor_eq (W : Scheme.{u}) :
-    constantComplexFunctor Λ W =
-      (constantSheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)).mapDerivedCategory :=
+/-- `c_{W,Λ}` is the repository's constant complex functor. -/
+lemma constantComplexFunctor_eq_constantFunctor (W : Scheme.{u}) :
+    constantComplexFunctor Λ W = constantFunctor Λ W :=
   rfl
 
 /-- Blueprint `pur7710-def-unbounded-etale-push`: unbounded étale direct image.
@@ -115,24 +151,13 @@ noncomputable abbrev rightDerivedLowerStarModule {X Y : Scheme.{u}} (f : X ⟶ Y
 For schemes `X`, `Y` over a base `S` (in the blueprint `S = Spec k`), with `Z = X ×_S Y` and
 projections `p_X`, `p_Y`, and for `K ∈ D(X_ét, Λ)`, `L ∈ D(Y_ét, Λ)`,
 `K ⊠ᴸ_Λ L := Lp_X^* K ⊗ᴸ_Λ Lp_Y^* L ∈ D(Z_ét, Λ)`, with the derived inverse images of étale
-sheaves of `Λ`-modules and their derived tensor product. -/
+sheaves of `Λ`-modules and their derived tensor product: the exterior product
+`AlgebraicGeometry.Etale.derivedExteriorProduct` for `A = ModuleCat Λ`. -/
 noncomputable abbrev exteriorProduct {S X Y : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S)
     (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (L : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     DerivedCategory (Sheaf (pullback f g).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
-  ((-⊗ᴸ-(pullback f g)[ModuleCat.{u + 1} Λ]).obj
-    (L((pullback.fst f g)^*[ModuleCat.{u + 1} Λ]).obj K)).obj
-      (L((pullback.snd f g)^*[ModuleCat.{u + 1} Λ]).obj L)
-
-/-- The exterior product is `Lp_X^* K ⊗ᴸ Lp_Y^* L`. -/
-lemma exteriorProduct_eq {S X Y : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S)
-    (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
-    (L : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
-    exteriorProduct Λ f g K L =
-      ((-⊗ᴸ-(pullback f g)[ModuleCat.{u + 1} Λ]).obj
-        (L((pullback.fst f g)^*[ModuleCat.{u + 1} Λ]).obj K)).obj
-          (L((pullback.snd f g)^*[ModuleCat.{u + 1} Λ]).obj L) :=
-  rfl
+  derivedExteriorProduct (ModuleCat.{u + 1} Λ) f g K L
 
 end Ring
 
