@@ -26,7 +26,9 @@
   "def-weil-local-frobenius-trace",
   "def-weil-punctual-weights",
   "def-weil-geometric-hypotheses",
-  "def-weil-derived-pullback-tensor-hom"
+  "def-weil-derived-pullback-tensor-hom",
+  "def-dl-a1-constant-extension-data",
+  "def-zl-field-weil-shriek-shift-data"
  ],
  "proof": [
   {
@@ -513,5 +515,39 @@
   "group": "Q131",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-ef277024b (reviewer sub-agent of L); spot-checked: I read the item and all 13 steps in full, every cited statement (36 proof_deps plus rem-dl-a1-conventions and def-wf-middle-extension), unit sk-p-dl-a1-exact, and the main-20261015 text of sk-p-dl-a1-exact and p-dl-a1-exact. I checked Stacks 0D6G (sites-cohomology.tex lemma-restrict-direct-image-open) and 04KV (varieties.tex lemma-geometrically-connected-if-connected-and-point). The statement is byte-identical to the base, so nothing was weakened; there are no new nodes and no SGA sources. The mathematics is sound. In the chart construction (steps 1-4), the evaluation map A⊗L→L gives an L-rational lift. The ring A⊗L is normal and Noetherian, so it is a finite product of domains and the factor through the lift is a connected affine chart. A connected chart with a rational point is geometrically connected. The open set U_V is dense because étale maps are open, and its complement is finite by the dimension argument. Over k the normal connected chart is irreducible, so U_V is geometrically connected. I tested this on F_2 and the degree-2 point of A^1 (m=1 and m>1), and on A^1_{F_4} viewed over F_2, which is not geometrically connected. In the comparison (steps 5-11), the Frobenius square hg_V=g_W^m h holds. The pro-étale slice localization (0D6G) works for both finite and completed rings, and restriction commutes with the derived limit of strict towers. Boundary maps are compared through uniqueness in the constructible heart, and the open-image-delta lemma's separated hypothesis holds because the charts are affine. For degrees (step 12), md'=ed. Transport composition and naturality give F_v=F_u^e, and at t, e=1, so F_t=F_s and q_t=q_s. Purity follows from triangularization over Qlb with q_v=q_u^e. No node duplicates the item: lem-zl-weil-constant-extension-frobenius is related but has no chart, R^r j_* or boundary-map content. Batch-5 check: all four flagged citations are outside both assumptions. lem-pod-integral-pullback-composition is pullback pseudo-functoriality and already lies in the closure of the item's own definition dependency def-weil-local-frobenius-trace. lem-trf-point-transport-composition and lem-trf-integral-point-transport-tower-realization (unit sk-d-weil) only make the definition of the local Frobenius operator coherent. p-linear-triangular is linear algebra that the parent p-dl-a1-exact already cites. None of their closures reaches nt-assume-trace-formula, nt-assume-poincare-duality, or any trace-formula or Poincaré-duality theorem. I accept all 26 declared tool_uses. FIX: step 4 used the algebraic-closure criterion for geometric connectedness while citing only the definition. It now also cites lem-weil-geometrically-connected-algebraic-closure (no cycle), which I added to its uses, to proof_deps and to tool_uses. The corrected file is fixes/dag/nodes/sec-deligne-laumon-a1/lem-dl-a1-constant-field-charts.json. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DlConstantFieldCharts",
+  "declaration": "WeilConjectures.dlConstantFieldCharts",
+  "declarations": [
+   "WeilConjectures.dlChartPull",
+   "WeilConjectures.dlChartReturnComparison",
+   "WeilConjectures.DlChartRestriction",
+   "WeilConjectures.DlChartLocalConjugacy",
+   "WeilConjectures.DlPointedConstantChart",
+   "WeilConjectures.DlPointedConstantChart.geometricMap",
+   "WeilConjectures.DlPointedConstantChart.geometricOpenMap",
+   "WeilConjectures.dlChartPullSquare",
+   "WeilConjectures.dlChartDerivedExchange",
+   "WeilConjectures.DlChartOpenComparison",
+   "WeilConjectures.DlPointedChartAdicData",
+   "WeilConjectures.DlOpenImageSuccessive",
+   "WeilConjectures.dlConstantFieldCharts"
+  ],
+  "file": "lean/Sheaf/Paper/DlConstantFieldCharts.lean",
+  "statement": "theorem dlConstantFieldCharts : (∀ (c : Scheme.MiddleExtensionCurve D) [IsAffine c.C.left] [SmoothOfRelativeDimension 1 c.C.hom], ((Set.range c.j.left)ᶜ).Finite ∧ (∀ s ∈ (Set.range c.j.left)ᶜ, s ∈ closedPoints c.C.left) ∧ ∀ (s : {s : c.C.left // s ∈ closedPoints c.C.left}), s.val ∉ Set.range c.j.left → ∀ (ι : c.C.left.residueField s.val →+* D.k), ι.comp (c.C.hom.residueFieldAlgebraMap s.val) = algebraMap D.k₀ D.k → ∃ A : DlPointedConstantChart D c s ι, Nonempty (DlPointedChartAdicData D l hl Ω c s ι A)) ∧ (∀ I : ∀ c : Scheme.MiddleExtensionCurve D, DlOpenImageData D l hl Ω c, ∀ (c d : Scheme.MiddleExtensionCurve D) (a : d.C ⟶ c.C) (b : d.U ⟶ c.U) [IsOpenImmersion a.left] [IsOpenImmersion b.left], IsPullback b.left d.j.left c.j.left a.left → ∃ (ha : (D.geometricFrobenius d.C).hom ≫ zlFiberMap D a = zlFiberMap D a ≫ localPositivePower (D.geometricFrobenius c.C).hom (1 - 1)) (hb : (D.geometricFrobenius d.U).hom ≫ zlFiberMap D b = zlFiberMap D b ≫ localPositivePower (D.geometricFrobenius c.U).hom (1 - 1)) (hs : zlFiberMap D d.j ≫ zlFiberMap D a = zlFiberMap D b ≫ zlFiberMap D c.j) (R : DlChartRestriction D D l hl hl Ω c.C d.C 1 (zlFiberMap D a) ha) (S : DlChartRestriction D D l hl hl Ω c.U d.U 1 (zlFiberMap D b) hb), Nonempty (DlChartOpenComparison D D l hl hl Ω c d 1 (zlFiberMap D a) (zlFiberMap D b) ha hb hs R S (I c) (I d))) ∧ DlOpenImageSuccessive D l hl Ω",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The residue field is identified, through the chosen embedding, with the published finite subfield of the fixed closure. DlPointedConstantChart.residue and embedding retain that equivalence. The normalized carrier and Weil equations specify the actual adic restriction; all images and local operators are the published ones. Additional declarations package precisely the chart and comparison clauses of this node."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-36fee94c4",
+  "group": "NJ",
+  "result": "fix",
+  "note": "Head 36fee94c4121 is byte-identical to the FIXed 406d2930c03e: chart sha 1b79f07e, same item node and new node; only dependency copies changed, and they equal live. The fa20/406d FIX was lost twice to 60 s landing timeouts in unrelated base modules (UpperLowerStar, DerivedPullbackTensorHom). Re-checked the statement against the node: affine smooth relative-dimension-one W in MiddleExtensionCurve, finite closed boundary, every closed boundary point s and compatible ι, chart with κ(s)≅extensionSubfield m compatible with ι, affine geometrically connected V_0 open in the constant-extension model, rational t over s with bijective residue map, étale h, Cartesian U_V geometrically connected with finite boundary. Restriction pinned by carrier, Weil θ^[m] and shift equations; r=0,1 comparisons normalized to the counit mate; degree-zero image and δ square; F_t=F_s, q_t=q_s, F_v=F_u^e via residueDegree; purity at the same weight; ∀ I open restrictions; successive restrictions. Edge cases and universes fine; sorry only on the theorem; docstrings and report sections present. nt_compile --json: chart clean in 13.2 s, exit 0. A #check probe confirms constantExtensionSheet/FiberIso take [IsSeparated X₀.hom]. FIX: fixes/def-dl-a1-constant-extension-data.json (whole node) restricts the sheet/fibre-iso sentence to separated X₀, cites def-zl-weil-ind-sheaf-category (zlFiberMap) and adds it to stmt_deps; no Lean change. Advisory: the item uses zlFiberMap without that owner in stmt_deps; the local conjugacy iso is existential, not pinned to the stalk of higher. Maintainer: land at lower load."
  }
 }
