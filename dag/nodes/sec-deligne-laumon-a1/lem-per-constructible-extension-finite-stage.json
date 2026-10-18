@@ -21,9 +21,113 @@
   "def-weil-pbc-exact-sequence",
   "def-weil-size-convention"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $i:H\\to F$ and $p:F\\to G$ for the given maps. The module-sheaf category is abelian and has all small colimits by [lem-weil-pbc-module-sheaves-grothendieck-abelian]. Apply [lem-per-noetherian-constructible-flat-lifting] to the epimorphism $p$ and $1_G$. It supplies a constructible $E=\\bigoplus_{t=1}^n j_{U_t!}R_{U_t}$, an epimorphism $e:E\\to G$, and $h:E\\to F$ with $ph=e$. Let $k:K\\to E$ be the kernel of $e$. Since $phk=0$ and $i$ identifies $H$ with $\\ker p$, there is a unique $v:K\\to H$ with $iv=hk$. Thus $0\\to K\\xrightarrow{k}E\\xrightarrow{e}G\\to0$ is short exact and $(v,h,1_G)$ maps it to the given sequence.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "lem-per-noetherian-constructible-flat-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03TT (lemma-when-ctf), finite affine lifting construction; 095N (lemma-category-constructible-modules). Ambient abelian category: sites-modules.tex Tags 03DA and 03DB."
+   }
+  },
+  {
+   "text": "The monomorphism $K\\to E$ has constructible target. Since both $X$ and $R$ are Noetherian, [lem-weil-pbc-constructible-module-subobject-noetherian] makes $K$ constructible in the finitely generated module sense. Apply [lem-per-noetherian-constructible-flat-lifting] again, now to $1_K:K\\to K$ and $1_K$. Obtain an epimorphism $q:Q\\to K$ with $Q=\\bigoplus_{t=1}^m j_{V_t!}R_{V_t}$ and each $V_t$ affine etale over $X$. Only finiteness of this family is used, not flatness or finiteness of the underlying set of $R$.",
+   "uses": [
+    "lem-weil-pbc-constructible-module-subobject-noetherian",
+    "lem-per-noetherian-constructible-flat-lifting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09BH (proposition-constructible-over-noetherian), part (3); Tag 03TT (lemma-when-ctf), finite affine lifting construction."
+   }
+  },
+  {
+   "text": "For an etale object $V\\to X$ and any module sheaf $M$, [lem-pur-site-restriction-module-adjunction-exact] on the localized site gives $\\operatorname{Hom}(j_{V!}R_V,M)=\\operatorname{Hom}(R_V,M|_V)=M(V)$. The last equality sends a map to its value at $1$ on the terminal object of the slice, and its inverse sends $s$ to multiplication by its restrictions. The extension in [def-weil-pbc-etale-sum-extension] is this localized-site extension: both use the summand indexed by each $V'\\to V$ over $X$ and then sheafify. Thus the identification applies to the summands of $Q$. It is natural in $M$: postcomposition sends the section $s$ to its image. In particular $vq:Q\\to H$ corresponds to a finite tuple $s_t\\in H(V_t)$.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-pbc-etale-sum-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI (lemma-extension-by-zero); Tag 0G1V (equation-map-lower-shriek-OU-into-module), evaluation at 1 and naturality."
+   }
+  },
+  {
+   "text": "Each $V_t$ is affine, hence quasi-compact and quasi-separated. Apply [lem-weil-pbc-etale-qcqs-sections-filtered-colimit] to the given colimit $(H_b)$ evaluated at $V_t$: $\\varinjlim_b H_b(V_t)\\to H(V_t)$ is bijective. Consequently $s_t$ comes from some $H_{a_t}(V_t)$. Concretely an element of this filtered module colimit is a finite sum of stage elements modulo transition relations, and directedness moves that sum to one stage. Choose a common upper bound $a$ of the finitely many $a_t$; when $m=0$, choose any $a\\in I$, using nonemptiness. Move the representing sections to $H_a(V_t)$. The natural identification in step 3 gives a morphism $t:Q\\to H_a$ with $\\iota_a t=vq$, where $\\iota_a:H_a\\to H$ is the inclusion.",
+   "uses": [
+    "lem-weil-pbc-etale-qcqs-sections-filtered-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 0738 (lemma-directed-colimits-sections), part (4), applied on the etale site as in etale-cohomology.tex Tag 03Q4 (section-colimit)."
+   }
+  },
+  {
+   "text": "Let $z:L\\to Q$ be the kernel of $q$. Then $\\iota_a tz=vqz=0$, so $tz=0$ because $\\iota_a$ is monic. In an abelian category the epimorphism $q$ is the cokernel of its kernel, so $t$ induces a unique $u:K\\to H_a$ with $uq=t$. Since $\\iota_a uq=\\iota_a t=vq$ and $q$ is epi, $\\iota_a u=v$. This is precisely where the hypothesis that every stage is a subobject is used: no later-stage equality of infinitely many relations is required.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA (lemma-abelian); kernel/cokernel characterization of epimorphisms in an abelian category."
+   }
+  },
+  {
+   "text": "Form $F_a=H_a\\amalg_K E$ along $u:K\\to H_a$ and $k:K\\to E$. By [lem-weil-pbc-pushout-short-exact-sequence], the kernel sequence of $e$ gives $0\\to H_a\\xrightarrow{j_a}F_a\\xrightarrow{p_a}G\\to0$. The maps $i\\iota_a:H_a\\to F$ and $h:E\\to F$ agree on $K$, since $i\\iota_a u=iv=hk$. The pushout therefore induces $f_a:F_a\\to F$, with $f_aj_a=i\\iota_a$ and $pf_a=p_a$. To prove $f_a$ monic, let $w:T\\to F_a$ satisfy $f_aw=0$. Then $p_aw=0$, so $w=j_ab$ for a unique $b:T\\to H_a$ by exactness. Now $0=f_aj_ab=i\\iota_ab$ forces $b=0$, because $i$ and $\\iota_a$ are monic. Hence $w=0$. Applying this to the difference of two parallel maps proves monicity.",
+   "uses": [
+    "lem-weil-pbc-pushout-short-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010I (section-extensions), pushout of an extension; Tag 08N4 (lemma-cartesian-cocartesian). The monicity check is the written kernel argument."
+   }
+  },
+  {
+   "text": "Also form $P=H\\amalg_K E$, now along $v$ and $k$. Again [lem-weil-pbc-pushout-short-exact-sequence] gives $0\\to H\\to P\\to G\\to0$. The maps $i$ and $h$ give $c:P\\to F$, and $(1_H,c,1_G)$ is a morphism of short exact sequences. Both endpoint maps are identities. Therefore [lem-weil-pbc-short-five-lemma] makes $c$ an isomorphism of extensions. Thus the original $F$, with these actual maps from $H$ and $E$, is the pushout $H\\amalg_K E$.",
+   "uses": [
+    "lem-weil-pbc-pushout-short-exact-sequence",
+    "lem-weil-pbc-short-five-lemma"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010I (section-extensions), pushout of an extension; Tag 05QB (lemma-five-lemma), padded short exact rows."
+   }
+  },
+  {
+   "text": "Finally let $T$ be any module sheaf. A compatible pair $\\alpha:F_a\\to T$, $\\beta:H\\to T$ for the square in the statement means $\\alpha j_a=\\beta\\iota_a$. Restricting $\\alpha$ to $E$ gives $\\gamma:E\\to T$ with $\\gamma k=\\alpha j_a u=\\beta\\iota_a u=\\beta v$. Step 7 yields a unique $F\\to T$ inducing $\\beta$ and $\\gamma$. Its composite with $f_a$ equals $\\alpha$, because the two maps agree on $H_a$ and $E$, which define the pushout $F_a$. Conversely any map $F\\to T$ gives that compatible pair. Uniqueness follows from the pushout description $F\\cong H\\amalg_K E$. This proves exactly the asserted universal property for the square $H_a\\to F_a$, $H\\to F$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 05PJ (example-fibre-product-pushouts), pushout universal property; explicit associativity verification for the two pushouts in steps 6 and 7."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-per-noetherian-constructible-flat-lifting",
+  "lem-weil-pbc-constructible-module-subobject-noetherian",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-pbc-etale-sum-extension",
+  "lem-weil-pbc-etale-qcqs-sections-filtered-colimit",
+  "lem-weil-pbc-pushout-short-exact-sequence",
+  "lem-weil-pbc-short-five-lemma"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, proof of Lemma 7.4.4, printed p.306 (PDF p.312), finite-stage extension assertion. Agent proof by finite affine etale lifting, constructible kernel relations, section-colimit continuity and two pushouts, using Stacks Tags 03TT, 09BH, 03DI, 0G1V, 0738, 010I and 05QB."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -73,10 +177,45 @@
    "results": "{\"t\": \"2026-10-18T22:11:06Z\", \"tool\": \"grep\", \"query\": \"Ext.*(filtered|[Cc]olimit)|([Cc]olimit|filtered).*Ext\", \"sub\": \"CategoryTheory/Abelian\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean\", \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Connected.lean\", \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Connected.lean\", \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Connected.lean\", \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Connected.lean\", \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Connected.lean\", \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean\", \"Mathlib/CategoryTheory/Abelian/Basic.lean\"], \"digest\": \"589ff90112f4f308\"}",
    "date": "2026-10-18",
    "verdict": "no match: finite-presentation predicates, general sheaf colimits, Mayer-Vietoris sequences and colimit hom_ext lemmas do not give descent of extensions with constructible quotient on a small etale site"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*extension|extension.*finite.stage|Ext.*[Cc]olimit",
+   "results": "{\"t\": \"2026-10-18T22:51:22Z\", \"tool\": \"grep\", \"query\": \"constructible.*extension|extension.*finite.stage|Ext.*[Cc]olimit\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ObjectProperty/Local.lean\", \"Mathlib/CategoryTheory/ObjectProperty/FiniteProducts.lean\", \"Mathlib/CategoryTheory/ObjectProperty/ColimitsOfShape.lean\", \"Mathlib/CategoryTheory/Generator/StrongGenerator.lean\", \"Mathlib/CategoryTheory/MorphismProperty/Ind.lean\", \"Mathlib/CategoryTheory/GradedObject.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/AbelianSubcategory.lean\", \"Mathlib/CategoryTheory/Adhesive/Basic.lean\"], \"digest\": \"a9c36f4e0f8dea0a\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits are general colimit universal-property/Ext substring matches, not descent of etale extensions with constructible quotient"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An extension with finitely presented quotient by a directed union of subobjects is a pushout of an extension by one subobject",
+   "results": "{\"t\": \"2026-10-18T22:51:22Z\", \"tool\": \"leansearch\", \"query\": \"An extension with finitely presented quotient by a directed union of subobjects is a pushout of an extension by one subobject\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.pushouts\", \"CategoryTheory.Limits.Types.Pushout\", \"CategoryTheory.Square.IsPushout\", \"CategoryTheory.Abelian.hasPushouts\", \"CategoryTheory.Limits.Types.Pushout'\", \"CategoryTheory.IsPushout.of_hasPushout\", \"Monoid.PushoutI\", \"CategoryTheory.IsPushout.mk\"], \"digest\": \"cf7aabdf35a8ece5\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits define pushouts or prove their existence, without the finite-stage extension assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ShortComplex.ShortExact, CategoryTheory.IsFiltered",
+   "results": "{\"t\": \"2026-10-18T22:51:22Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.ShortComplex.ShortExact, CategoryTheory.IsFiltered\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no theorem combines the short-exact and filtered-index notions for this descent statement"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A short exact sequence of etale module sheaves with constructible quotient descends from a directed union of kernels to one kernel",
+   "results": "{\"t\": \"2026-10-18T22:51:23Z\", \"tool\": \"leanfinder\", \"query\": \"A short exact sequence of etale module sheaves with constructible quotient descends from a directed union of kernels to one kernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.succ_exact\", \"SheafOfModules.Presentation.isColimit\", \"SheafOfModules.relationsOfIsCokernelFree\", \"SheafOfModules.relationsOfIsCokernelFree_s\", \"SheafOfModules.relationsOfIsCokernelFree_I\", \"SheafOfModules.Presentation.relations\", \"SheafOfModules.generatorsOfIsCokernelFree_I\", \"SheafOfModules.presentationOfIsCokernelFree\"], \"digest\": \"91cc24fbf38085f0\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern free sheaf presentations or local finite-presentation predicates, without constructible etale extension descent"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A constructible sheaf of modules on a noetherian etale site has extensions descending to finite stages of filtered unions",
+   "results": "{\"t\": \"2026-10-18T22:51:24Z\", \"tool\": \"leanfinder\", \"query\": \"A constructible sheaf of modules on a noetherian etale site has extensions descending to finite stages of filtered unions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.isFinitePresentation\", \"SheafOfModules.IsFinitePresentation\", \"SheafOfModules.IsFiniteType\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType\", \"SheafOfModules.Presentation.IsFinite\", \"SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType\", \"SheafOfModules.GeneratingSections.IsFiniteType\", \"SheafOfModules.IsFiniteType.exists_localGeneratorsData\"], \"digest\": \"1a30d0ba72d53967\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: hits concern free sheaf presentations or local finite-presentation predicates, without constructible etale extension descent"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-directed-galois-finite-tensor-generators",
@@ -103,5 +242,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-constructible-extension-finite-stage",
+  "worker": "stage1",
+  "summary": "Kept the complete statement unchanged. Replaced the implicit global Ext-continuity assertion by an eight-step finite-generator argument: lift a finite affine etale cover of G to F, cover its constructible kernel by finitely many affine etale rank-one sheaves, factor their sections through one H_a, descend through the epimorphism using monicity, and construct/compare two pushouts. Reused existing statements only, with no new nodes and no compiler use. Every citation has a verbatim statement quote.",
+  "blueprint": "Realizes the finite-stage extension assertion in ILO XVII 7.4.4 used by step 7 of lem-per-directed-galois-finite-tensor-generators, within the existing recorded chain from lem-per-artin-gabber-affine-curve through coefficient-change duality and the directed Galois partition devissage. The ancestor and via chain are retained; no chapter or unit route is changed.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "why": "Ambient module-sheaf abelian structure and existence of kernels/cokernels; the unit has no separate ambient-category statement."
+   },
+   {
+    "node": "lem-weil-pbc-constructible-module-subobject-noetherian",
+    "why": "Generic Noetherian-base subobject constructibility, with arbitrary Noetherian coefficient ring, makes the kernel of the lifted finite generator cover constructible."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic localized-site module adjunction identifies maps from affine etale rank-one extensions with sections; no node of this unit states that adjunction."
+   },
+   {
+    "node": "def-weil-pbc-etale-sum-extension",
+    "why": "Identifies the etale sum-extension construction used by the lifting lemma with the localized-site extension in the generic adjunction."
+   },
+   {
+    "node": "lem-weil-pbc-etale-qcqs-sections-filtered-colimit",
+    "why": "Generic fixed-site section continuity on affine etale objects supplies a single stage for each of finitely many relation generators."
+   },
+   {
+    "node": "lem-weil-pbc-pushout-short-exact-sequence",
+    "why": "Generic abelian-category pushout of a short exact sequence constructs the finite-stage sequence and the comparison sequence."
+   },
+   {
+    "node": "lem-weil-pbc-short-five-lemma",
+    "why": "Generic abelian-category short five lemma identifies the second pushout with the original extension; it does not replace any geometric unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-weil-pbc-constructible-module-subobject-noetherian",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-pbc-etale-sum-extension",
+  "lem-weil-pbc-etale-qcqs-sections-filtered-colimit",
+  "lem-weil-pbc-pushout-short-exact-sequence",
+  "lem-weil-pbc-short-five-lemma"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q112-bc45cf1b0",
+  "group": "Q112",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q112-bc45cf1b0 (reviewer sub-agent of L); spot-checked: I read the delivery in full: no new nodes, and the statement and stmt_deps are unchanged. Source check: ILO XVII Lemme 7.4.4 and its proof, printed p.306 (PDF p.312). The source gets the cocartesian square from SGA 4 IX 2.7.3 (Ext^1 commutes with filtered colimits), which the route lock forbids. The agent proof instead gets it in 8 steps, each checked against the cited statements. (1) The lifting node, applied to the epi F→G and 1_G, gives a finite affine sum E with a lift h, without needing F or H constructible. (2) The kernel K is constructible by the Noetherian subobject node (Stacks 09BH(3), finitely generated values, no finiteness of R); lifting 1_K gives a finite affine cover Q→K. (3) Hom(j_{V!}R_V,M)=M(V) by the localized-site adjunction; the extension-by-zero presheaf is the same as def-weil-pbc-etale-sum-extension. (4) Each V_t is affine hence qcqs, so qcqs section continuity plus directedness and nonemptiness put the finitely many sections in one H_a. (5) The factorization u through H_a is elementary and uses that H_a is a subobject. (6) The pushout lemma builds F_a; I checked p f_a=p_a on both legs and that f_a is mono. (7) The second pushout H⊔_K E is identified with F by the short five lemma. (8) Pushout pasting gives the universal property; all equations check. Edge cases checked: X empty, G=0, H=0, infinite Noetherian R, non-split extensions. Duplicate search over the DAG (7.4.4, Ext/filtered colimit/finite stage) found only the parent and the internal-Ext node, which states something different. The seven declared tool_uses are generic and accepted. Batch-5 flag: lem-trf-noetherian-submodule-finitely-presented, reached through the lifting node and the affine free presentation node, is Stacks 00FP (Noetherian submodule finitely presented). It is generic commutative algebra, not part of what the trace formula or Poincaré duality assumptions give or of their proofs, so I accept it. No fixes."
  }
 }
