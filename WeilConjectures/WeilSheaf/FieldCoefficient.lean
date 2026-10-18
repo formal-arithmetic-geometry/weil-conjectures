@@ -34,7 +34,10 @@ replaced by `Λ`: the sheaves are modules over the constant sheaf `Λ_X̄ : U �
 Bhatt–Scholze (`AlgebraicGeometry.ProEtale.FieldSheaf`), the Frobenius pullback is the
 pushforward along `Fr_X⁻¹`, and the Weil complexes are the bounded objects with constructible
 cohomology of the derived category of pro-étale Weil sheaves, all of whose terms carry a Weil
-structure, so that `θ` is represented termwise.
+structure, so that `θ` is represented termwise. The functors from the stages `E` to the stage
+`ℚ̄_ℓ`, induced by the extension of scalars `ℚ̄_ℓ ⊗_E -`, are
+`AlgebraicGeometry.FieldWeilComplex.toWeilComplex`
+(`WeilConjectures.WeilSheaf.FieldCoefficientExtendScalars`).
 
 ## Main definitions
 
@@ -122,7 +125,8 @@ Its objects carry the derived Frobenius isomorphism
 (`AlgebraicGeometry.FieldWeilComplex.frobeniusIso`), and forgetting it is the exact functor
 `For : D^b_{c,W}(X, E) ⥤ D^b_c(X̄, E)`
 (`AlgebraicGeometry.FieldWeilComplex.forgetBoundedConstructible`). The stage `ℚ̄_ℓ` is
-`AlgebraicGeometry.WeilComplex`. -/
+`AlgebraicGeometry.WeilComplex`, which `D^b_{c,W}(X, E)` maps to by extension of scalars
+(`AlgebraicGeometry.FieldWeilComplex.toWeilComplex`). -/
 def FieldWeilComplex (k₀ : Type u) [Field k₀] [Finite k₀] (Λ : Type) [NormedField Λ]
     [IsUltrametricDist Λ] (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] :=
   (FieldWeilComplex.objectProperty k₀ Λ X).FullSubcategory
