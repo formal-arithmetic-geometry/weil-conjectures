@@ -53,6 +53,14 @@ open _root_.AlgebraicGeometry.Etale.DerivedCategory
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
+/-- The unit `Λ_X` of `D(X_ét, Λ)` lies in `Dctf(X, Λ)`: it is the constant sheaf, which is
+constructible and flat, placed in degree `0`. -/
+theorem constructibleFiniteTor_tensorUnit (X : Scheme.{u}) :
+    constructibleFiniteTor (ModuleCat.{u + 1} Λ) X (𝟙_ _) :=
+  (constructibleFiniteTor _ X).prop_of_iso (singleFunctorObjUnitIso _ X)
+    ⟨boundedConstructible_singleFunctor_obj _ 0, 0, 0,
+      torAmplitudeIn_singleFunctor_obj_of_flat Λ _ (ObjectProperty.flat_of_tensorIso (λ_ _))⟩
+
 /-- The base change `i × 𝟙 : Z ×_S Y₂ ⟶ Y₁ ×_S Y₂` of a closed immersion is a closed
 immersion. -/
 instance isClosedImmersion_pullbackMapLeft {S Y₁ Y₂ Z : Scheme.{u}} (b₁ : Y₁ ⟶ S)

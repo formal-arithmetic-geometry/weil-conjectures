@@ -145,12 +145,12 @@ instance : (derivedHomConstructibleFiniteTor Λ X).IsTriangulated where
   exists_zero := by
     open ZeroObject in
     exact ⟨0, isZero_zero _, fun L _ ↦ (constructibleFiniteTor _ X).prop_of_isZero
-      (letI := _root_.DerivedCategory.braidedCategory
-        (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))
+      (letI := (_root_.DerivedCategory.nonempty_braidedCategory
+        (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ))).some
       MonoidalCategory.isZero_ihom_obj_of_isZero (isZero_zero _) L)⟩
   isStableUnderShiftBy a := ⟨fun K hK L hL ↦ (constructibleFiniteTor _ X).prop_of_iso
     ((derivedHomShiftIso _ K a).app L).symm
-      (hK _ ((constructibleFiniteTor (ModuleCat.{u + 1} Λ) X).le_shift (-a) _ hL))⟩
+      ((constructibleFiniteTor (ModuleCat.{u + 1} Λ) X).le_shift (-a) _ (hK L hL))⟩
   ext₂' T hT h₁ h₃ := ObjectProperty.le_isoClosure _ _ fun L hL ↦
     derivedHom_mem_of_distTriang_left (constructibleFiniteTor _ X) L T hT (h₁ L hL) (h₃ L hL)
 

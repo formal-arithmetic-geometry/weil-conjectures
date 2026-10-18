@@ -16,6 +16,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatRe
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
 public import WeilConjectures.AlgebraicGeometry.Morphisms.WeaklyEtale
+public import WeilConjectures.AlgebraicGeometry.ProEtale.Proetale.Basic
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.LocallyConstantPullback
@@ -258,7 +259,7 @@ noncomputable def locallyConstantPUnitRingEquiv :
   map_add' _ _ := rfl
 
 /-- The point is sent to a terminal object of the pro-étale site of `Spec ℤ`. -/
-def isTerminalProfiniteToProEtObjPUnit :
+noncomputable def isTerminalProfiniteToProEtObjPUnit :
     IsTerminal (profiniteToProEt.{u}.obj (Profinite.of PUnit.{u + 1})) := by
   let e := (locallyConstantPUnitRingEquiv.{u}).toCommRingCatIso
   have hS : IsTerminal (profiniteToScheme.obj (Profinite.of PUnit.{u + 1})) :=
@@ -277,7 +278,7 @@ instance preservesLimit_empty_profiniteToProEt :
     ((isLimitMapConeEmptyConeEquiv _ _).symm isTerminalProfiniteToProEtObjPUnit)
 
 instance preservesLimitsOfShape_pempty_profiniteToProEt :
-    PreservesLimitsOfShape (Discrete PEmpty) profiniteToProEt.{u} :=
+    PreservesLimitsOfShape (Discrete PEmpty.{1}) profiniteToProEt.{u} :=
   preservesLimitsOfShape_pempty_of_preservesTerminal _
 
 /-- The functor `S ↦ Spec LC(S, ℤ)` preserves finite limits: it preserves the terminal object
@@ -308,9 +309,12 @@ lemma coverPreserving_profiniteToProEt :
           refine ⟨a, LocallyConstant.homeomorphPrimeSpectrum (y, p), ?_⟩
           rw [LocallyConstant.homeomorphPrimeSpectrum_apply,
             LocallyConstant.homeomorphPrimeSpectrum_apply]
-          ext φ
-          exact Iff.rfl)
+          exact PrimeSpectrum.ext (Ideal.ext fun φ ↦ Iff.rfl))
         (fun a ↦ (inferInstance : WeaklyEtale (profiniteToProEt.map (π a)).left))
+    have (a : α) : QuasiCompact (𝒰.f a) := by
+      dsimp only [𝒰, Scheme.Cover.mkOfCovers, profiniteToScheme, Functor.comp_map]
+      exact (inferInstance : QuasiCompact (Spec.map (profiniteToCommRingCatOp.map (π a)).unop))
+    have : Finite 𝒰.I₀ := by dsimp only [𝒰, Scheme.Cover.mkOfCovers]; infer_instance
     have hmem : Presieve.ofArrows (fun a ↦ profiniteToProEt.obj (Y a))
         (fun a ↦ profiniteToProEt.map (π a)) ∈ ProEt.precoverage specZ (profiniteToProEt.obj U) := by
       rw [ProEt.precoverage, Precoverage.mem_comap_iff, Presieve.map_ofArrows]

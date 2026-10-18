@@ -54,6 +54,11 @@ namespace Etale
 
 variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
 
+-- Search the braiding through the symmetric structure, as in the definition of the derived
+-- tensor product: otherwise the monoidal structures found by instance search differ from the
+-- ones of the canonical maps, and unifying them is very expensive.
+attribute [local instance high] SymmetricCategory.toBraidedCategory
+
 /-- The left adjoint `Ri_!` of `Ri^!` is fully faithful for a closed immersion `i`
 (`sk-prop-sf-closed-unit`). -/
 noncomputable def rightDerivedLowerShriekFullyFaithfulOfIsClosedImmersion {Z X : Scheme.{u}}

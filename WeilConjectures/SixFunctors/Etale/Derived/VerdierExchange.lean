@@ -135,8 +135,7 @@ noncomputable def verdierDualRightDerivedLowerShriekShiftIso [IsIso (projectionM
       ((R((f)_*[A])).obj ((verdierDual A (f ≫ aY)).obj (op M)))⟦-a⟧ :=
   ((verdierDual A aY).mapIso (((R(f)_![A]).commShiftIso a).app M).op).symm ≪≫
     (derivedHomShiftIso A _ a).app (dualizingComplex A aY) ≪≫
-      (((RHom(Y)[A]).obj (op ((R(f)_![A]).obj M))).commShiftIso (-a)).app _ ≪≫
-        (shiftFunctor _ (-a)).mapIso ((verdierDualRightDerivedLowerShriekIso A f aY e).app (op M))
+      (shiftFunctor _ (-a)).mapIso ((verdierDualRightDerivedLowerShriekIso A f aY e).app (op M))
 
 end General
 
