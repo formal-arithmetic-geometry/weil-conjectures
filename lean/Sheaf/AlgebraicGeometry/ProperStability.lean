@@ -38,6 +38,9 @@ theorem proper_stability :
     (∀ (k : Type u) [Field k] (X Y : Scheme.{u})
       (f : X ⟶ Spec (CommRingCat.of k)) (g : Y ⟶ Spec (CommRingCat.of k)),
       IsProper f → IsProper (pullback.snd f g)) := by
-  sorry
+  refine ⟨IsProper.isStableUnderBaseChange, IsProper.stableUnderComposition, ?_⟩
+  intro k _ X Y f g hf
+  let : IsProper f := hf
+  infer_instance
 
 end AlgebraicGeometry
