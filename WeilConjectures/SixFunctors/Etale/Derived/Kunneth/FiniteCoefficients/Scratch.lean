@@ -54,7 +54,8 @@ instance preservesFlat_constantSheaf (W : Scheme.{u}) :
 
 set_option maxHeartbeats 1000000 in
 noncomputable def testA (W : Scheme.{u}) (M N : DerivedCategory (ModuleCat.{u + 1} Λ)) :=
-  ((constantSheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)).leftDerivedTensorComparison.app M).app N
+  ((constantSheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)).leftDerivedTensorComparison.app
+    M).app N
 
 end Etale
 
