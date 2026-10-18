@@ -26,6 +26,7 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated
 
 namespace CategoryTheory
 
+set_option backward.isDefEq.respectTransparency false in
 /-- Normalize the first map of an orthogonal distinguished triangle to the counit of the
 specified natural Hom bijections. Source: blueprint main-20261015,
 `sk-prop-closed-adjoint-constructible-support.proof.md`, first paragraph; Stacks Tags
@@ -74,6 +75,51 @@ theorem orthogonalTriangle_counit_normalization
           Triangle.mk ((Adjunction.mkOfHomEquiv Ψ).counit.app K) b
             (d ≫ (F.map u)⟦(1 : ℤ)⟧'),
         e.hom.hom₁ = F.map u ∧ e.hom.hom₂ = 𝟙 K ∧ e.hom.hom₃ = 𝟙 B := by
-  sorry
+  have hpost (A : C) :
+      Function.Bijective (fun f : F.obj A ⟶ F.obj (G.obj K) ↦ f ≫ a) := by
+    constructor
+    · intro f g hfg
+      change f ≫ a = g ≫ a at hfg
+      have hz : (f - g) ≫ a = 0 := by
+        rw [Preadditive.sub_comp, hfg, sub_self]
+      obtain ⟨k, hk⟩ := Triangle.coyoneda_exact₂ (Triangle.mk a b d).invRotate
+        (inv_rot_of_distTriang _ htriangle) (f - g) hz
+      have hkzero : k = 0 := horthogonal_shift A k
+      apply sub_eq_zero.mp
+      simpa only [hkzero, zero_comp] using hk
+    · intro f
+      obtain ⟨g, hg⟩ := Triangle.coyoneda_exact₂ (Triangle.mk a b d) htriangle f
+        (horthogonal A (f ≫ b))
+      exact ⟨g, hg.symm⟩
+  have hcomp (A : C) :
+      Function.Bijective (fun f : A ⟶ G.obj K ↦ f ≫ u) := by
+    have hm : Function.Bijective (F.map (X := A) (Y := G.obj K)) :=
+      ⟨F.map_injective, F.map_surjective⟩
+    have hb := (Ψ.homEquiv A K).bijective.comp ((hpost A).comp hm)
+    simpa only [Function.comp_def, Ψ.homEquiv_naturality_left, ← hu] using hb
+  obtain ⟨v, hv⟩ := (hcomp (G.obj K)).surjective (𝟙 (G.obj K))
+  have huv : u ≫ v = 𝟙 (G.obj K) := by
+    apply (hcomp (G.obj K)).injective
+    simp only [Category.assoc, hv, Category.comp_id, Category.id_comp]
+  have : IsIso u := ⟨⟨v, huv, hv⟩⟩
+  have ha : a = F.map u ≫ (Adjunction.mkOfHomEquiv Ψ).counit.app K := by
+    change a = F.map u ≫ (Ψ.homEquiv (G.obj K) K).symm (𝟙 (G.obj K))
+    rw [← Ψ.homEquiv_naturality_left_symm, Category.comp_id, hu]
+    exact ((Ψ.homEquiv (G.obj K) K).symm_apply_apply a).symm
+  let e : Triangle.mk a b d ≅
+      Triangle.mk ((Adjunction.mkOfHomEquiv Ψ).counit.app K) b
+        (d ≫ (F.map u)⟦(1 : ℤ)⟧') :=
+    Triangle.isoMk _ _ (asIso (F.map u)) (Iso.refl K) (Iso.refl B)
+      (by
+        change a ≫ 𝟙 K = F.map u ≫ (Adjunction.mkOfHomEquiv Ψ).counit.app K
+        simpa only [Category.comp_id] using ha)
+      (by
+        change b ≫ 𝟙 B = 𝟙 K ≫ b
+        rw [Category.comp_id, Category.id_comp])
+      (by
+        change d ≫ (F.map u)⟦(1 : ℤ)⟧' = 𝟙 B ≫ (d ≫ (F.map u)⟦(1 : ℤ)⟧')
+        rw [Category.id_comp])
+  exact ⟨inferInstance, ha, (distinguished_iff_of_iso e).mp htriangle,
+    e, rfl, rfl, rfl⟩
 
 end CategoryTheory
