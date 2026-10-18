@@ -5,15 +5,11 @@ Authors: SHEAF group H2
 -/
 module
 
-import all Sheaf.AlgebraicGeometry.AmpleIso
-
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import Sheaf.AlgebraicGeometry.TensorPullbackAdjunction
+import all WeilConjectures.AlgebraicGeometry.AmpleIso
 import Sheaf.AlgebraicGeometry.IsAffineOfFiniteClosedCover
-import Sheaf.AlgebraicGeometry.NonvanishingTensorPullback
-import Sheaf.Paper.NonvanishingSectionTrivializes
-import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 import WeilConjectures.AlgebraicGeometry.NonvanishingSectionTrivializes
 import WeilConjectures.AlgebraicGeometry.NonvanishingTensorPullback
 
@@ -73,6 +69,45 @@ theorem affine_locus_of_compatible_component_sections
     ∃ (q : (L.tensorPow 1).val.presheaf.obj (op ⊤)) (U : X.Opens),
       T ⊆ (U : Set X) ∧ IsAffineOpen U ∧
         (U : Set X) = nonvanishingLocus (L.tensorPow 1) q  := by
-  sorry
+  classical
+  obtain ⟨U, hU, _⟩ := nonvanishing_section_trivializes X L t
+  have hlocus (a : Fin r) :
+      nonvanishingLocus (P a) (s a) = (i a) ⁻¹' nonvanishingLocus L t := by
+    obtain ⟨e, he⟩ := he a
+    rw [← he]
+    erw [nonvanishingLocus_iso e]
+    ext x
+    exact nonvanishing_tensorPullback (i a) L t x
+  have hpre (a : Fin r) : (i a) ⁻¹ᵁ U = V a := by
+    ext x
+    change i a x ∈ (U : Set X) ↔ x ∈ (V a : Set (C a))
+    rw [hU, hVlocus a, hlocus a]
+    rfl
+  have hT : T ⊆ (U : Set X) := by
+    intro x hx
+    have hxcover : x ∈ ⋃ a, Set.range (i a) := by rw [hcover]; trivial
+    obtain ⟨a, y, hy⟩ := Set.mem_iUnion.mp hxcover
+    rw [hU, ← hy]
+    exact (hlocus a).le (hTV a (by change i a y ∈ T; rwa [hy]))
+  have hAffine (a : Fin r) : IsAffine (((i a) ⁻¹ᵁ U).toScheme) := by
+    rw [hpre a]
+    exact hVaff a
+  have hclosed (a : Fin r) : IsClosedImmersion ((i a) ∣_ U) := inferInstance
+  have hcov : ∀ x : U.toScheme, ∃ a : Fin r,
+      ∃ y : ((i a) ⁻¹ᵁ U).toScheme, ((i a) ∣_ U) y = x := by
+    intro x
+    have hxcover : x.1 ∈ ⋃ a, Set.range (i a) := by rw [hcover]; trivial
+    obtain ⟨a, y, hy⟩ := Set.mem_iUnion.mp hxcover
+    refine ⟨a, ⟨y, ?_⟩, ?_⟩
+    · change i a y ∈ U
+      rw [hy]
+      exact x.property
+    · apply Subtype.ext
+      simpa only [morphismRestrict_base_coe] using hy
+  have hAffU : IsAffine U.toScheme := isAffine_of_finite_closed_cover
+    U.toScheme r (fun a ↦ ((i a) ⁻¹ᵁ U).toScheme) (fun a ↦ (i a) ∣_ U) hcov
+  let e : L ≅ L.tensorPow 1 := (ρ_ L).symm
+  refine ⟨e.hom.app ⊤ t, U, hT, hAffU, ?_⟩
+  exact hU.trans (nonvanishingLocus_iso e t).symm
 
 end AlgebraicGeometry.Scheme.Modules
