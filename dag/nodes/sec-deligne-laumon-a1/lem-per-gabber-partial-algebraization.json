@@ -14,7 +14,8 @@
   "def-weil-regular-scheme",
   "def-weil-finite-type-morphism",
   "def-weil-pbc-strict-henselization-limit",
-  "def-kun-topological-krull-dimension"
+  "def-kun-topological-krull-dimension",
+  "def-per-geometric-dimension-function"
  ],
  "proof": [
   {
@@ -260,5 +261,23 @@
   "group": "Q36",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q36-9a2161507 (reviewer sub-agent of L); spot-checked: Read the item, the four new nodes and every cited statement against ILO IV 2.1.1, IV 4.2.2/4.2.5, V 1.1.1, 1.1.3, 1.2.3, 1.2.4, V 2.2.2–2.2.8, V 3.1.3–3.1.4, XVII 6.5 and Stacks 032D. The statement is unchanged from live. XVII 6.5 needs only a finite surjection, so using IV 4.2.2 in mixed characteristic is legitimate; no prime-to-ℓ claim is made. Steps 1–7 check out. Step 1: complete local A′; surjectivity via finite⇒integral and injective lying-over; dim D = d−1 in both cases; ℓ is a unit because the residue field has characteristic ≠ ℓ. Step 2: f·t_r ∈ m_R stays nonzero mod m_Λ; the étale restriction is done via composition/cancellation; c⁻¹ moves the étale locus to D(g). Step 3: Elkik for the Noetherian henselian pair (H,gH). Step 4: all local-model hypotheses hold, giving C ≅ O^sh_{Z,z̄}. Step 5: exactly one prime over m_H, so Ĥ⊗C = Ĉ. Step 6: excellence via complete-local excellence, finite type, and the 'both excellent' clause of regular-strict-local-model applied to id; the G-ring completion is regular. Step 7: dimension-function clause. The new nodes are true and tested on small cases: Cohen–Gabber (k[[x,y]], W[[x]]); cylinder (T², p+T; f=p excluded); Elkik = ILO V 1.2.4; local model (H, H[x]/(x²−T), inseparable residue extension, H×H excluded). The DAG has no duplicates of them, none restates a clause of the item, there is no cycle, and no SGA is cited. tool_uses are generic commutative algebra and accepted. Batch-5 flags accepted: lem-trf-regular-ring-universally-catenary (regular ⇒ universally catenary) is pure algebra outside both assumptions, and def-weil-pbc-henselization-at-prime is a general definition. FIX: the source place of lem-per-cohen-gabber-finite-presentations claimed ILO V 2.2.2 covers equal characteristic zero, but V 2.2.2 only refers to the characteristic-p IV 2.1.1. Replaced with Stacks Tag 032D (field case) plus automatic generic étaleness in characteristic 0; the statement is unchanged. Advisory: the report mentions a citations.json that is not in the commit.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GabberPartialAlgebraization",
+  "declaration": "AlgebraicGeometry.gabber_partial_algebraization",
+  "file": "lean/Sheaf/AlgebraicGeometry/GabberPartialAlgebraization.lean",
+  "statement": "theorem gabber_partial_algebraization (A : Type u) [CommRing A] [IsDomain A] [IsIntegrallyClosed A] [IsNoetherianRing A] [IsStrictlyHenselianLocalRing A] [IsAdicComplete (IsLocalRing.maximalIdeal A) A] (hExcellent : IsExcellent A) (ell : ℕ) (hPrime : ell.Prime) (hInvertible : IsUnit (ell : A)) (d : ℕ) (hd : 2 ≤ d) (hDimension : topologicalKrullDim (Spec (.of A)) = (d : WithBot ℕ∞)) : ∃ (X' : Scheme.{u}) (p : X' ⟶ Spec (.of A)) (D : CommRingCat.{u}) (_ : IsLocalRing D) (_ : IsNoetherianRing D) (_ : IsAdicComplete (IsLocalRing.maximalIdeal D) D) (Z : Scheme.{u}) (f : Z ⟶ Spec D) (Ω : Type u) (_ : Field Ω) (_ : IsAlgClosed Ω) (z : Spec (.of Ω) ⟶ Z) (_ : IsLocalRing (Scheme.strictHenselizationRing z)) (e : X' ≅ Spec (.of (AdicCompletion (IsLocalRing.maximalIdeal (Scheme.strictHenselizationRing z)) (Scheme.strictHenselizationRing z)))), IsFinite p ∧ Surjective p ∧ (∀ x : X', IsDomain (X'.presheaf.stalk x) ∧ IsIntegrallyClosed (X'.presheaf.stalk x)) ∧ IsExcellent D ∧ IsRegularScheme (Spec D) ∧ topologicalKrullDim (Spec D) = ((d - 1 : ℕ) : WithBot ℕ∞) ∧ IsUnit (ell : D) ∧ LocallyOfFiniteType f ∧ QuasiCompact f ∧ IsNoetherianRing (Scheme.strictHenselizationRing z) ∧ IsExcellent (Scheme.strictHenselizationRing z) ∧ (∃ δ : Scheme.strictHenselizationScheme z → ℤ, Scheme.IsGeometricDimensionFunction (Scheme.strictHenselizationScheme z) δ) ∧ RingHom.IsRegular (algebraMap (Scheme.strictHenselizationRing z) (AdicCompletion (IsLocalRing.maximalIdeal (Scheme.strictHenselizationRing z)) (Scheme.strictHenselizationRing z))) ∧ (ringChar A = ringChar (IsLocalRing.ResidueField A) → IsIso p)",
+  "branch": "newtargets-dag",
+  "by": "Q65",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-67dca2c3f",
+  "group": "Q65",
+  "result": "pass",
+  "note": "Re-delivery applies exactly the H4 correction asked by the 0d4c3d87/bf42a17b returns: the dimension-function clause now uses the existing predicate ∃ δ, Scheme.IsGeometricDimensionFunction (strictHenselizationScheme z) δ, with the import, stmt_deps (def-per-geometric-specialization-category replaced by the already-landed def-per-geometric-dimension-function; all 7 live stmt_deps kept) and lean.statement updated (word for word, substring-checked). Apart from lean and stmt_deps the node equals the live one. Every hypothesis and conclusion clause re-checked against the node and ILO V 3.1.3/3.1.4 and XVII 6.5: no mismatch, no universe restriction, edge cases d=2, equal characteristic 0/p and mixed characteristic all covered. Docstrings give source place, blueprint id and the 7 proof steps; only proof is sorry; no other Lean module states this item. nt_compile --json with side overrides: clean, 2.9 s. No findings."
  }
 }

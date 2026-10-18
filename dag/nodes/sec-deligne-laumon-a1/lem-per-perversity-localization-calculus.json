@@ -402,5 +402,41 @@
   "group": "Q24",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-7be2bb1e4 (reviewer sub-agent of L); spot-checked: Verdict FIX. I read the whole delivery against ILO XVII 5.1.1, 5.2 (the t-structure paragraph, Def 5.2.1, Prop 5.2.2(a)-(d) and its proof) and proof 5.3.1(a), printed pp.286-289, and read the statements of all 36 cited nodes. Statement changes are sound. (i) The costalk is now written as i_x^! on Spec O_{X,x}, with its geometric fibre computed on the strict localization; this is ILO 1.1.1 and adds no excellence hypothesis. (ii) The generic-point clause is now componentwise. The counterexample Spec k ⊔ Spec k is correct, the new clause is more general, and both uses in the parent lem-per-normal-pinned-extension (Steps 2 and 11) still go through. Steps 1-12 are correct; checks done: b=min p(η_i); the costalk shift giving U^⊥∩D^+ = D^{≥p+1}; the restriction of the triangle to D^+; the derived counit through the stalk formula plus the strict-local fibre; ind-étale invariance at every geometric point; the generic fibre K⊗_A B is a field; and i^!T = V[-1] ≥ q+2, which identifies T with τ_{≤p} Rg_*L (ILO's T = τ_{≤φ(x)} Rg_*L). All four new nodes are true; I proved each: the set-generated aisle (Lurie HA 1.4.4.11); support generators (gen ⊇ D^{ord≤b}, then a D^+ reduction using sheaves supported in Φ^a); costalk detection (Hom formula by adjunction; (1)⇒(2) via a maximal point of the support of the first nonzero local-cohomology sheaf); the pseudo-open fibre (pseudo-open immersions are monomorphisms and O_{Y,y}=O_{X,f(y)}). None is a duplicate (DAG and blueprint searched) and none restates a clause of the item. Batch 5: the closure reaches only lem-trf-bounded-below-derived-adjunction (a generic derived adjunction, Lean-closed, the only trf node reached through lem-per-ind-etale-closed-support-base-change) and lem-trf-ind-etale-strict-local-invariance (Stacks 05WR type). Both lie outside the assumed statements and their proofs, so I accepted them, as for 45bd4f27. The route and the 17 tool_uses are accepted, and nothing cites SGA. FIX (B3): the item statement and stmt_deps now cite def-weil-t-structure, def-weil-geometric-point, def-weil-pbc-geometric-stalks, def-weil-pbc-inverse-image and def-weil-pbc-direct-image; lem-per-supported-generators-costalk-detection now cites def-weil-geometric-point and def-weil-pbc-inverse-image. No nodes dropped.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PerversityLocalizationCalculus",
+  "declaration": "AlgebraicGeometry.Etale.perversity_localization_calculus",
+  "declarations": [
+   "AlgebraicGeometry.Etale.PointwisePerverseCoefficients",
+   "AlgebraicGeometry.Etale.PointwisePerverseDerived",
+   "AlgebraicGeometry.Etale.pointwisePerversePull",
+   "AlgebraicGeometry.Etale.pointwisePerversePush",
+   "AlgebraicGeometry.Etale.pointwisePerverseAdjunction",
+   "AlgebraicGeometry.Etale.pointwisePerversePuncture",
+   "AlgebraicGeometry.Etale.pointwisePerverseCostalk",
+   "AlgebraicGeometry.Etale.PointwisePerverseLE",
+   "AlgebraicGeometry.Etale.PointwisePerverseGE",
+   "AlgebraicGeometry.Etale.PointwisePerverseContext",
+   "AlgebraicGeometry.Etale.IsPointwisePseudoOpen",
+   "AlgebraicGeometry.Etale.IsPointwisePerverseRestriction",
+   "AlgebraicGeometry.Etale.PointwisePerverseHeartAdjunctionData",
+   "AlgebraicGeometry.Etale.PointwisePerverseHeartAdjunction",
+   "AlgebraicGeometry.Etale.PerversityLocalizationCalculus",
+   "AlgebraicGeometry.Etale.perversity_localization_calculus"
+  ],
+  "file": "lean/Sheaf/Paper/PerversityLocalizationCalculus.lean",
+  "statement": "theorem perversity_localization_calculus (ell : ℕ) (hell : Nat.Prime ell) (n : ℕ) (hn : 1 ≤ n) : Nonempty (PerversityLocalizationCalculus.{u} ell n)",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0b2984d4e",
+  "group": "N9",
+  "result": "pass",
+  "note": "Read the node, 17 stmt_dep records, the module, the report, and ILO XVII 5.2/5.2.1/5.2.2(a)-(d) and proof of 5.3.1(a) (pp.287-288). Every clause is rendered: t pinned by upper_iff/lower_iff (geometric stalk / strict-local supported-section costalk); pseudo-open = embedding + iso stalkMaps; pseudo_exact/pseudo_lower; heart adjunction pinned to the derived adjunction and truncLEι by unit_eq/counit_eq, with counit iso and full faithfulness; composition pinned via upperStarCompDerivedPlus plus conjugate mate; restriction_exact for etale/localization/strict localization; generic_locality with beta pinned to the base-change mate and e pinned by truncation maps; generic_components true; punctured_local with ordinary-truncation iso, compatibility and IsIso restriction. Universes follow the def-weil-pbc-derived-categories convention; no added assumptions; statement verbatim; 16 declarations recorded; docstrings OK; only sorry. nt_compile --json clean, exit 0, 53.6 s (near the 60 s limit). Advisory: A1 the eR = conjugate(e) existential is a formal tautology; A2 the costalk fibre comparison is not stated as a clause (it is proof dep lem-per-ind-etale-closed-support-base-change), so def-pur-etale-supported-kernel and def-weil-closed-immersion are unused in the Lean; A3 pointwisePerverseCostalk is defeq to Q22's geometricCostalk (theorem-module helper landed in parallel), maintainer note: consider a def node; A4 compile time close to the limit."
  }
 }

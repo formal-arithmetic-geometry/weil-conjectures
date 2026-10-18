@@ -183,5 +183,23 @@
   "group": "N3",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N3-ea6f64d0c (reviewer sub-agent of L); spot-checked: Read the complete item, report, cited statements, unit/chapter route, and ILO VIII source places. All four proof steps and hypotheses check out, including noninjective weights and positive-characteristic cancellation. No new nodes, duplicate splits, circular citations, or long non-elementary steps. No repairs needed; detailed checks and route-pivot snapshot limitation recorded in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.IntegralSupportWeightedInitialDegree",
+  "declaration": "AddMonoidAlgebra.not_isIntegralElem_of_negative_support_weight",
+  "file": "lean/Sheaf/RingTheory/IntegralSupportWeightedInitialDegree.lean",
+  "statement": "theorem not_isIntegralElem_of_negative_support_weight {k : Type u} [Field k] {H : Type v} [AddCommGroup H] [AddGroup.FG H] [IsAddTorsionFree H] (P : AddSubmonoid H) (w : H →+ ℤ) (hw : ∀ p ∈ P, 0 ≤ w p) (x : AddMonoidAlgebra k H) (hx : x ≠ 0) (hneg : ∃ g ∈ x.coeff.support, w g < 0) : ¬ (AddMonoidAlgebra.mapDomainRingHom k P.subtype).IsIntegralElem x",
+  "branch": "newtargets-dag",
+  "by": "Q73",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8d7ab5277",
+  "group": "Q73",
+  "result": "pass",
+  "note": "Node clauses k field, H FG torsion-free AddCommGroup, arbitrary AddSubmonoid P, w : H →+ ℤ with w≥0 on P, x≠0 with ∃ g ∈ x.coeff.support, w g<0 ⇒ ¬(mapDomainRingHom k P.subtype).IsIntegralElem x all match exactly; no extra hypotheses, independent universes u v. The snapshot node differs from the live node only in lean, and lean.statement is verbatim in the file. Docstrings carry the ILO VIII 3.2.9 p.104 source, the blueprint tag and all 4 proof steps; proof is sorry only; no definitions. No duplicate in Mathlib MonoidAlgebra/Laurent, side lean/Sheaf or runs/2. nt_compile --json clean (3.2 s, exit 0). Probe confirmed the mapDomainRingHom (M →+ N) signature, the IsIntegralElem definition, and that the hypotheses are satisfiable (e^{-1} in k[ℤ]). Advisory: FineFanBlowup import kept only for the stmt_dep; second-reading section is the worker's own pass."
  }
 }

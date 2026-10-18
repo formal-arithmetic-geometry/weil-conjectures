@@ -179,5 +179,23 @@
   "group": "Q125",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q125-84625a6b7 (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements, unit/chapter route, report, and ILO VIII §§3.1–3.2. The three-step deduction is valid; hypotheses, edge cases, dependency cycles, and duplicate candidates checked. No new nodes or hidden lemmas. The report correctly disclaims the inherited inaccurate “monomial-basis argument” source wording. Full findings written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.SaturatedMonoidAlgebraNormal",
+  "declaration": "MonoidAlgebra.saturated_monoid_algebra_normal",
+  "file": "lean/Sheaf/RingTheory/SaturatedMonoidAlgebraNormal.lean",
+  "statement": "theorem saturated_monoid_algebra_normal (k : Type u) [Field k] (G : Type v) [CommGroup G] [IsMulTorsionFree G] (Q : Submonoid G) (hfg : Q.FG) (hsat : AlgebraicGeometry.FineFan.saturation Q = Q) (hcompletion : Function.Bijective (Algebra.GrothendieckGroup.lift Q.subtype)) (x : MonoidAlgebra k G) (hx : (MonoidAlgebra.mapDomainRingHom k Q.subtype).IsIntegralElem x) : ∃ y : MonoidAlgebra k Q, MonoidAlgebra.mapDomainRingHom k Q.subtype y = x",
+  "branch": "newtargets-dag",
+  "by": "Q74",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cc6982743",
+  "group": "Q74",
+  "result": "pass",
+  "note": "All node clauses match the Lean: field k; torsion-free CommGroup G; Submonoid Q with Q.FG; saturation via the dependency's FineFan.saturation Q = Q (equivalent to root-closedness); completion via bijective canonical GrothendieckGroup.lift Q.subtype; IsIntegralElem over mapDomainRingHom; conclusion is membership in the image. No extra hypotheses; universes u, v independent; edge cases covered. lean.statement verbatim; only the lean field changed; no duplicate in Mathlib or project Lean; sole sorry; docstrings with source, blueprint id and proof steps; lines ≤100; imports used. nt_compile --json clean (3.7 s). Advisory: sibling MonoidAlgebraDomainFraction is additive, this one multiplicative; the common citer needs a conversion at stage 3."
  }
 }
