@@ -11,21 +11,9 @@ public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
-import Sheaf.CategoryTheory.KInjectiveTotalDerived
-import WeilConjectures.ConstructibleSheaf.OpenClosed
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
-import WeilConjectures.CategoryTheory.DerivedCategory.Constructible
-import Sheaf.AlgebraicGeometry.FiniteReflectsBoundedConstructible
-import Sheaf.AlgebraicGeometry.OpenClosedRecollement
-import Sheaf.AlgebraicGeometry.ProperBoundedConstructible
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteBoundary
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 /-!
 # Recovering bounded constructibility at a finite boundary
@@ -91,6 +79,31 @@ theorem isBoundedConstructible_of_finite_boundary
     (hpush : DerivedCategory.isBoundedConstructible Λ S
       ((rightDerivedLowerStarPlus (ModuleCat.{u + 1} Λ) b).obj K).obj) :
     DerivedCategory.isBoundedConstructible Λ Y K.obj := by
-  sorry
+  have hiff (T : Scheme.{u}) (L : DerivedCategoryModule Λ T) :
+      DerivedCategory.isBoundedConstructible Λ T L ↔
+        DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) T L := by
+    constructor
+    · rintro ⟨hc, r, s, hrs, hv⟩
+      refine ⟨⟨⟨r, ?_⟩, ⟨s, ?_⟩⟩, fun q ↦
+        (Scheme.isConstructibleEtaleModuleSheaf_iff _).1 (hc q)⟩
+      · exact (_root_.DerivedCategory.isGE_iff L r).2 fun q hq ↦ hv q (Or.inl hq)
+      · exact (_root_.DerivedCategory.isLE_iff L s).2 fun q hq ↦ hv q (Or.inr hq)
+    · rintro ⟨⟨⟨r, hr⟩, ⟨s, hs⟩⟩, hc⟩
+      refine ⟨fun q ↦ (Scheme.isConstructibleEtaleModuleSheaf_iff _).2 (hc q),
+        min r s, max r s, min_le_max, fun q hq ↦ ?_⟩
+      rcases hq with hq | hq
+      · exact (_root_.DerivedCategory.isGE_iff L r).1 hr q
+          (lt_of_lt_of_le hq (min_le_left _ _))
+      · exact (_root_.DerivedCategory.isLE_iff L s).1 hs q
+          (lt_of_le_of_lt (le_max_right _ _) hq)
+  have : HasInvertibleExponent Λ S := ⟨N, hcoeff.1, hcoeff.2.2.1, hcoeff.2.2.2⟩
+  have hp := (hiff _ _).1 hpush
+  have hp' : DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) S
+      ((rightDerivedLowerStar (ModuleCat.{u + 1} Λ) b).obj K.obj) :=
+    (DerivedCategory.boundedConstructible (ModuleCat.{u + 1} Λ) S).prop_of_iso
+      (((lowerStar (ModuleCat.{u + 1} Λ) b).rightDerivedFunctorPlusCompatibility).app K) hp
+  exact (hiff _ _).2
+    (boundedConstructible_of_upperStar_of_rightDerivedLowerStar Λ (S ↘ Spec (.of k))
+      b a i hcomplement K.obj K.property ((hiff _ _).1 hopen) hp')
 
 end AlgebraicGeometry.Etale

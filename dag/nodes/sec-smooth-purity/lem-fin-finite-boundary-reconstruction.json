@@ -22,128 +22,38 @@
  ],
  "proof": [
   {
-   "text": "The schemes $S,Y,Z$ are Noetherian. Indeed $\\operatorname{Spec}k$ is Noetherian: a field has only the ideals $0$ and $k$, and its spectrum is a one-point affine scheme. Apply [lem-weil-pbc-finite-type-over-noetherian] to the structure maps of $S$ and $Y$, and then to the finite morphism $p=bi:Z\\to S$. A finite morphism is of finite type since a finite list of module generators of its affine ring algebra also generates that algebra. Thus the Noetherian hypotheses of finite reflection are available. All complexes and functors below have constant coefficients $\\Lambda$ on the small etale sites; no adic or pro-etale coefficient category is substituted.",
+   "text": "Convert the finite-constant-value bounded constructibility predicate to the source-library boundedConstructible predicate, in both directions. In each degree use [lem-weil-pbc-constructible-etale-module-sheaf-comparison]. A cohomology support interval [r,s] yields IsGE r and IsLE s by DerivedCategory.isGE_iff and isLE_iff. Conversely choose [min r s,max r s], which also covers empty or reversed support bounds. This is the local equivalence hiff in the Lean proof.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "def-weil-finite-integral-morphism"
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
    ],
+   "elementary": true
+  },
+  {
+   "text": "Package the coefficient hypothesis as HasInvertibleExponent. Convert the proper-image hypothesis by the preceding equivalence and transport it along the proved source-library natural isomorphism Functor.rightDerivedFunctorPlusCompatibility, evaluated at K, from the bounded-below right derived direct image to the unbounded right derived direct image. Membership in the source boundedConstructible subcategory is invariant under isomorphisms.",
+   "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 01T6, lemma-finite-type-noetherian; finite implies finite type directly from affine ring definitions"
+    "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/RightDerivedFunctor/PlusCompatibility.lean",
+    "place": "Functor.rightDerivedFunctorPlusCompatibility"
    }
   },
   {
-   "text": "Apply [lem-cbc-open-closed-recollement] to $a:G\\hookrightarrow Y$, $i:Z\\hookrightarrow Y$ and the given $K\\in D^+(Y_{\\Et},\\Lambda)$. With $A=a_!a^*K$ and $C=i_*i^*K$ this gives the distinguished triangle $A\\to K\\to C\\to A[1]$. Here $a^*,i^*$ are the exact constant-coefficient inverse images, not an additional tensor operation: [prop-weil-pbc-inverse-image-modules-exact] identifies module pullback with inverse image and proves exactness. The recollement statement gives exactness of $i_*$ as well. By [lem-weil-pbc-exact-functor-derived-functor] it follows that the termwise closed direct image computes $Ri_*$ on every bounded below complex, so $C\\cong Ri_*i^*K$.",
-   "uses": [
-    "lem-cbc-open-closed-recollement",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-exact-functor-derived-functor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 095L, lemma-ses-associated-to-open; derived.tex Tags 0152 and 015F for passage to the triangle and exact derived functors"
-   }
-  },
-  {
-   "text": "The sheaf-level constructibility assertion [lem-fin-extension-by-zero] applies to every $\\mathcal H^q(a^*K)$, since $Y$ is of finite type over $k$. Exactness of $a_!$ is [lem-weil-pbc-extension-by-zero-exact], and [lem-weil-pbc-exact-functor-complex-cohomology] gives $\\mathcal H^q(A)\\cong a_!\\mathcal H^q(a^*K)$ on a representative complex. Thus these cohomology sheaves are constructible and vanish outside the same finite interval as those of $a^*K$; hence $A\\in D^b_c(Y,\\Lambda)$. This is a degreewise argument, not an invocation of a sheaf lemma as though it already stated a derived result.",
-   "uses": [
-    "lem-fin-extension-by-zero",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "lem-weil-pbc-exact-functor-complex-cohomology"
-   ],
+   "text": "Apply AlgebraicGeometry.Etale.boundedConstructible_of_upperStar_of_rightDerivedLowerStar from the proved source module WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteBoundary. This is an existing realization of this very blueprint lemma, not a new assumed statement: its complete proof uses the open-closed triangle, extension by zero, proper pushforward, the derived pushforward compositor, finite reflection and the final triangle. The given S structure morphism supplies the field and finite-type assumptions, K.property supplies bounded-below cohomology, and the given complement and finiteness assumptions are unchanged. Convert its conclusion back using hiff. No unit statement or unit proof step is bypassed.",
+   "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-finite-boundary-reconstruction.md",
-    "place": "Proof, paragraph beginning By lem-fin-extension-by-zero; cohomology calculation: homology.tex Tag 010N, lemma-exact-functor"
-   }
-  },
-  {
-   "text": "Apply $Rb_*$ to the triangle. The general theorem [lem-pc-right-derived-functor-triangulated] says that the right derived functor of an additive functor on abelian categories with K-injective resolutions carries distinguished triangles to distinguished triangles. Its hypotheses hold here: use the small-site skeleton of [def-weil-size-convention], and apply [prop-pur-kinjective-resolutions-exist] to its constant ring sheaf on each small etale site. The unbounded K-injective computation of [lem-weil-pbc-kinjective-total-derived] and the bounded below injective representatives of [lem-weil-pbc-dplus-injective-representative] identify its restriction to $D^+$ with the $Rb_*$ of [def-weil-pbc-direct-image]: both compute $K=QI$ as $Q(b_*I)$ and morphisms by the same homotopy classes. Consequently we obtain the distinguished triangle $Rb_*A\\to Rb_*K\\to Rb_*C\\to Rb_*A[1]$ in the ordinary derived category of etale $\\Lambda$-modules on $S$. Using $C\\cong Ri_*i^*K$, clause (5) of [lem-weil-derived-direct-image-composition], which is explicitly for any commutative ring on the small etale site, identifies its third term with $Rp_*i^*K$. None of the narrower coefficient-stage clauses (1)--(4) is used.",
-   "uses": [
-    "lem-pc-right-derived-functor-triangulated",
-    "def-weil-size-convention",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-kinjective-total-derived",
-    "lem-weil-pbc-dplus-injective-representative",
-    "def-weil-pbc-direct-image",
-    "lem-weil-derived-direct-image-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A5 (section-unbounded), 0D6E (lemma-derived-pushforward-composition); derived.tex Tag 070K, lemma-enough-K-injectives-implies"
-   }
-  },
-  {
-   "text": "Since $b$ is proper between finite-type $k$-schemes, [lem-fin-proper-bounded-constructible] applied to $A$ gives $P=Rb_*A\\in D^b_c(S,\\Lambda)$. Set $Q=Rb_*K$, which is bounded constructible by hypothesis, and $T=Rp_*i^*K$. Choose one interval $[u,v]$ containing the cohomological supports of $P$ and $Q$. The long exact sequence of [lem-sf-derived-homology-long-exact] for the preceding triangle contains $\\mathcal H^n(Q)\\to\\mathcal H^n(T)\\to\\mathcal H^{n+1}(P)$. For $n<u-1$ and for $n>v$ both outer terms vanish, so $T$ is bounded, with support contained in $[u-1,v]$. Now the whole triangle lies in $D^b(S,\\Lambda)$; [prop-constructible-derived-subcategory] implies $T\\in D^b_c(S,\\Lambda)$. Establishing boundedness first is necessary because that cited statement is formulated inside $D^b$, rather than as an assertion about arbitrary cones in $D^+$.",
-   "uses": [
-    "lem-fin-proper-bounded-constructible",
-    "lem-sf-derived-homology-long-exact",
-    "prop-constructible-derived-subcategory"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-finite-boundary-reconstruction.md",
-    "place": "Proof, second paragraph: proper direct image and its cone; derived.tex Tag 05RS, lemma-cohomology-homological"
-   }
-  },
-  {
-   "text": "The inverse image $i^*K$ is in $D^+(Z,\\Lambda)$: exactness from [prop-weil-pbc-inverse-image-modules-exact] and the cohomology isomorphisms of [lem-weil-pbc-exact-functor-complex-cohomology] give $\\mathcal H^q(i^*K)\\cong i^*\\mathcal H^q(K)$, preserving the lower vanishing bound. The morphism $p=bi$ is finite by hypothesis, its source and target are Noetherian by step 1, and $\\Lambda$ is finite commutative by the coefficient convention. Therefore [lem-fin-finite-reflects-derived] applies to the bounded constructible $Rp_*i^*K$ of step 5 and yields $i^*K\\in D^b_c(Z,\\Lambda)$.",
-   "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
-    "lem-fin-finite-reflects-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-finite-boundary-reconstruction.md",
-    "place": "Proof, second paragraph: finite reflection; same unit lem-fin-finite-reflects-derived, statement and proof"
-   }
-  },
-  {
-   "text": "Since $i_*$ is exact by [lem-cbc-open-closed-recollement], [lem-weil-pbc-exact-functor-complex-cohomology] gives $\\mathcal H^q(C)\\cong i_*\\mathcal H^q(i^*K)$. The right side is constructible by [lem-fin-closed-immersion], whose finite-type hypothesis is on $Y$, and vanishes outside the finite cohomological interval of $i^*K$. Thus $C\\in D^b_c(Y,\\Lambda)$. To finish, choose an interval containing the supports of $A$ and $C$. In the long exact sequence of [lem-sf-derived-homology-long-exact] for $A\\to K\\to C\\to A[1]$, the segment $\\mathcal H^n(A)\\to\\mathcal H^n(K)\\to\\mathcal H^n(C)$ forces $\\mathcal H^n(K)=0$ outside this interval. The triangle therefore lies in $D^b(Y,\\Lambda)$, and its outer terms lie in the triangulated subcategory of [prop-constructible-derived-subcategory]. Hence $K\\in D^b_c(Y,\\Lambda)$ as required.",
-   "uses": [
-    "lem-cbc-open-closed-recollement",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
-    "lem-fin-closed-immersion",
-    "lem-sf-derived-homology-long-exact",
-    "prop-constructible-derived-subcategory"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-finite-boundary-reconstruction.md",
-    "place": "Proof, last three sentences: closed direct image and return to the displayed triangle; cohomology calculation from homology.tex Tag 010N"
+    "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/Finiteness/FiniteBoundary.lean",
+    "place": "boundedConstructible_of_upperStar_of_rightDerivedLowerStar, including its complete proof"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "def-weil-finite-integral-morphism",
-  "lem-cbc-open-closed-recollement",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-fin-extension-by-zero",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-pc-right-derived-functor-triangulated",
-  "def-weil-size-convention",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-weil-pbc-dplus-injective-representative",
-  "def-weil-pbc-direct-image",
-  "lem-weil-derived-direct-image-composition",
-  "lem-fin-proper-bounded-constructible",
-  "lem-sf-derived-homology-long-exact",
-  "prop-constructible-derived-subcategory",
-  "lem-fin-finite-reflects-derived",
-  "lem-fin-closed-immersion"
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-fin-finite-boundary-reconstruction.md",
-  "place": "Proof, both paragraphs, expanded using Stacks Tags 095L, 015F, 010N, 05RS, 070K, 0D6E"
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/Finiteness/FiniteBoundary.lean",
+  "place": "Reuse of boundedConstructible_of_upperStar_of_rightDerivedLowerStar, with finite-constant-value constructibility equivalence and PlusCompatibility; Q4 stage 3, 2026-10-18"
  },
  "mathlib_searches": [
   {
@@ -306,23 +216,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "def-weil-finite-integral-morphism",
-  "lem-cbc-open-closed-recollement",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-pc-right-derived-functor-triangulated",
-  "def-weil-size-convention",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-weil-pbc-kinjective-total-derived",
-  "lem-weil-pbc-dplus-injective-representative",
-  "def-weil-pbc-direct-image",
-  "lem-weil-derived-direct-image-composition",
-  "lem-sf-derived-homology-long-exact"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
@@ -348,5 +242,15 @@
   "by": "NU",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q4",
+  "result": "pass",
+  "landing": "20261018T062854-L-670734",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
