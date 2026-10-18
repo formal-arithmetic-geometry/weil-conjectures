@@ -70,6 +70,24 @@ noncomputable def scalar (R : Sheaf J CommRingCat.{u})
     (f : (unit (rings R)).sections) : End (unit (rings R)) :=
   (unit (rings R)).unitHomEquiv.symm f
 
+private def value {R : Sheaf J CommRingCat.{u}}
+    (f : (unit (rings R)).sections) (X : Cᵒᵖ) : R.obj.obj X := f.val X
+
+private theorem scalar_apply (R : Sheaf J CommRingCat.{u})
+    (f : (unit (rings R)).sections) (X : Cᵒᵖ) (a : R.obj.obj X) :
+    (scalar R f).val.app X a = a * value f X := by
+  rfl
+
+private theorem scalar_pow_apply (R : Sheaf J CommRingCat.{u})
+    (f : (unit (rings R)).sections) (k : ℕ) (X : Cᵒᵖ) (a : R.obj.obj X) :
+    (scalar R f ^ k).val.app X a = a * value f X ^ k := by
+  induction k generalizing a with
+  | zero => simp
+  | succ k ih =>
+    rw [pow_succ']
+    change (scalar R f).val.app X ((scalar R f ^ k).val.app X a) = _
+    rw [scalar_apply, ih, pow_succ, mul_assoc]
+
 /-- Cochain Koszul differential at the positive exponent n+1. Source: Tag 0913
 (blueprint: def-weil-pbc-extended-localization-cech). -/
 noncomputable def differential (R : Sheaf J CommRingCat.{u}) (r : ℕ)
@@ -84,6 +102,76 @@ noncomputable def differential (R : Sheaf J CommRingCat.{u}) (r : ℕ)
             ⟨insert j s.val, insert_degree s j h⟩)
     else 0)
 
+private theorem scalar_powers_comm (R : Sheaf J CommRingCat.{u})
+    (f g : (unit (rings R)).sections) (k : ℕ) :
+    (scalar R f ^ k) ≫ (scalar R g ^ k) = (scalar R g ^ k) ≫ (scalar R f ^ k) := by
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro X
+  apply ModuleCat.hom_ext
+  apply LinearMap.ext
+  intro a
+  change (scalar R g ^ k).val.app X ((scalar R f ^ k).val.app X a) =
+    (scalar R f ^ k).val.app X ((scalar R g ^ k).val.app X a)
+  rw [scalar_pow_apply, scalar_pow_apply, scalar_pow_apply, scalar_pow_apply]
+  ac_rfl
+
+private theorem insertion_signs_cancel {r : ℕ} (s : Finset (Fin r))
+    (j k : Fin r) (hj : j ∉ s) (hk : k ∉ s) (hjk : j ≠ k) :
+    (-1 : ℤ) ^ (s.filter (· < j)).card *
+        (-1 : ℤ) ^ ((insert j s).filter (· < k)).card +
+      (-1 : ℤ) ^ (s.filter (· < k)).card *
+        (-1 : ℤ) ^ ((insert k s).filter (· < j)).card = 0 := by
+  classical
+  rcases lt_or_gt_of_ne hjk with h | h
+  · have hkj : ¬ k < j := not_lt_of_ge h.le
+    have hm : j ∉ s.filter (· < k) := fun hm ↦ hj (Finset.mem_filter.mp hm).1
+    simp only [Finset.filter_insert, h, hkj, ite_true, ite_false,
+      Finset.card_insert_of_notMem hm, pow_succ]
+    ring
+  · have hkj : ¬ j < k := not_lt_of_ge h.le
+    have hm : k ∉ s.filter (· < j) := fun hm ↦ hk (Finset.mem_filter.mp hm).1
+    simp only [Finset.filter_insert, h, hkj, ite_true, ite_false,
+      Finset.card_insert_of_notMem hm, pow_succ]
+    ring
+
+private def doubleIndex {r : ℕ} {q : ℤ} (s : Indices r q) (j k : Fin r)
+    (hj : j ∉ s.val) (hk : k ∉ insert j s.val) : Indices r (q + 1 + 1) :=
+  ⟨insert k (insert j s.val),
+    insert_degree ⟨insert j s.val, insert_degree s j hj⟩ k hk⟩
+
+private noncomputable def doubleTerm (R : Sheaf J CommRingCat.{u}) (r : ℕ)
+    (f : Fin r → (unit (rings R)).sections) (n : ℕ) (q : ℤ) (s : Indices r q)
+    (j k : Fin r) : unit (rings R) ⟶ term R r (q + 1 + 1) := by
+  classical
+  exact if hj : j ∉ s.val then if hk : k ∉ insert j s.val then
+    ((-1 : ℤ) ^ (s.val.filter (· < j)).card *
+      (-1 : ℤ) ^ ((insert j s.val).filter (· < k)).card) •
+      ((scalar R (f j) ^ (n + 1)) ≫ (scalar R (f k) ^ (n + 1)) ≫
+        Sigma.ι (fun _ : Indices r (q + 1 + 1) ↦ unit (rings R))
+          (doubleIndex s j k hj hk))
+    else 0 else 0
+
+private theorem doubleTerm_cancel (R : Sheaf J CommRingCat.{u}) (r : ℕ)
+    (f : Fin r → (unit (rings R)).sections) (n : ℕ) (q : ℤ) (s : Indices r q)
+    (j k : Fin r) : doubleTerm R r f n q s j k + doubleTerm R r f n q s k j = 0 := by
+  classical
+  by_cases hj : j ∈ s.val
+  · simp [doubleTerm, hj]
+  by_cases hk : k ∈ s.val
+  · simp [doubleTerm, hk]
+  by_cases he : j = k
+  · subst k
+    simp [doubleTerm]
+  have hkj : k ∉ insert j s.val := by simp [Finset.mem_insert, Ne.symm he, hk]
+  have hjk : j ∉ insert k s.val := by simp [Finset.mem_insert, he, hj]
+  have hi : doubleIndex s j k hj hkj = doubleIndex s k j hk hjk := by
+    apply Subtype.ext
+    exact Finset.insert_comm k j s.val
+  simp only [doubleTerm, dif_pos hj, dif_pos hk, dif_pos hkj, dif_pos hjk, hi]
+  rw [← Category.assoc, scalar_powers_comm R (f j) (f k) (n + 1), Category.assoc,
+    ← add_smul, insertion_signs_cancel s.val j k hj hk he, zero_smul]
+
 /-- The Koszul differential squares to zero. Source: Tag 0913
 (blueprint: def-weil-pbc-extended-localization-cech).
 Proof: on each free summand, pair the two orders of insertion of distinct indices.
@@ -93,7 +181,42 @@ indices contribute zero. Each pair therefore cancels. -/
 theorem differential_sq (R : Sheaf J CommRingCat.{u}) (r : ℕ)
     (f : Fin r → (unit (rings R)).sections) (n : ℕ) (q : ℤ) :
     differential R r f n q ≫ differential R r f n (q + 1) = 0 := by
-  sorry
+  classical
+  apply Sigma.hom_ext
+  intro s
+  have hsum : ∑ j, ∑ k, doubleTerm R r f n q s j k = 0 := by
+    rw [← Fintype.sum_prod_type
+      (fun p : Fin r × Fin r ↦ doubleTerm R r f n q s p.1 p.2)]
+    apply Finset.sum_involution (fun p _ ↦ Prod.swap p)
+    · intro p _
+      exact doubleTerm_cancel R r f n q s p.1 p.2
+    · intro p _ hp he
+      have he' : p.1 = p.2 := congrArg Prod.snd he
+      apply hp
+      simp [he', doubleTerm]
+    · intro p _
+      exact Finset.mem_univ _
+    · intro p _
+      exact Prod.swap_swap p
+  have hexpand : Sigma.ι (fun _ : Indices r q ↦ unit (rings R)) s ≫
+      differential R r f n q ≫ differential R r f n (q + 1) =
+        ∑ j, ∑ k, doubleTerm R r f n q s j k := by
+    simp only [differential, Sigma.ι_desc_assoc, Preadditive.sum_comp]
+    apply Finset.sum_congr rfl
+    intro j _
+    split_ifs with hj
+    · simp only [zero_comp]
+      simp [doubleTerm, hj]
+    · simp only [Preadditive.zsmul_comp, Category.assoc, Sigma.ι_desc,
+        Preadditive.comp_sum, Finset.smul_sum]
+      apply Finset.sum_congr rfl
+      intro k _
+      split_ifs with hk
+      · simp [doubleTerm, hj, hk]
+      · simp only [Preadditive.comp_zsmul, smul_smul,
+          doubleTerm, dif_pos hj, dif_pos hk]
+        rfl
+  rw [hexpand, hsum, comp_zero]
 
 /-- The positive-power cochain Koszul complex. Source: Tag 0913
 (blueprint: def-weil-pbc-extended-localization-cech). -/
@@ -108,6 +231,29 @@ noncomputable def subsetScalar (R : Sheaf J CommRingCat.{u}) (r : ℕ)
     (f : Fin r → (unit (rings R)).sections) (s : Finset (Fin r)) :
     End (unit (rings R)) :=
   (s.sort (· ≤ ·)).foldr (fun j a ↦ scalar R (f j) ≫ a) (𝟙 _)
+
+private theorem subsetScalar_apply (R : Sheaf J CommRingCat.{u}) (r : ℕ)
+    (f : Fin r → (unit (rings R)).sections) (s : Finset (Fin r))
+    (X : Cᵒᵖ) (a : R.obj.obj X) :
+    (subsetScalar R r f s).val.app X a = a * ∏ j ∈ s, value (f j) X := by
+  have hl : ∀ (l : List (Fin r)) (a : R.obj.obj X),
+      (l.foldr (fun j b ↦ scalar R (f j) ≫ b) (𝟙 _)).val.app X a =
+        a * (l.map (fun j ↦ value (f j) X)).prod := by
+    intro l
+    induction l with
+    | nil => intro a; simp
+    | cons j l ih =>
+      intro a
+      change (l.foldr (fun j b ↦ scalar R (f j) ≫ b) (𝟙 _)).val.app X
+        ((scalar R (f j)).val.app X a) = _
+      rw [scalar_apply, ih]
+      simp only [List.map_cons, List.prod_cons, mul_assoc]
+  have hp : ((s.sort (· ≤ ·)).map (fun j ↦ value (f j) X)).prod =
+      ∏ j ∈ s, value (f j) X := by
+    change (Multiset.map (fun j ↦ value (f j) X) (s.sort (· ≤ ·))).prod = _
+    rw [Finset.sort_eq]
+    rfl
+  exact (hl (s.sort (· ≤ ·)) a).trans (congrArg (a * ·) hp)
 
 /-- Termwise transition from exponent n+1 to n+2. Source: Tag 0913
 (blueprint: def-weil-pbc-extended-localization-cech). -/
@@ -124,7 +270,37 @@ theorem transition_comm (R : Sheaf J CommRingCat.{u}) (r : ℕ)
     (f : Fin r → (unit (rings R)).sections) (n : ℕ) (q : ℤ) :
     transitionTerm R r f q ≫ (koszul R r f (n + 1)).d q (q + 1) =
       (koszul R r f n).d q (q + 1) ≫ transitionTerm R r f (q + 1) := by
-  sorry
+  classical
+  have hc (s : Finset (Fin r)) (j : Fin r) (h : j ∉ s) :
+      subsetScalar R r f s ≫ (scalar R (f j) ^ (n + 1 + 1)) =
+        (scalar R (f j) ^ (n + 1)) ≫ subsetScalar R r f (insert j s) := by
+    apply SheafOfModules.hom_ext
+    apply PresheafOfModules.hom_ext
+    intro X
+    apply ModuleCat.hom_ext
+    apply LinearMap.ext
+    intro a
+    change (scalar R (f j) ^ (n + 1 + 1)).val.app X
+        ((subsetScalar R r f s).val.app X a) =
+      (subsetScalar R r f (insert j s)).val.app X
+        ((scalar R (f j) ^ (n + 1)).val.app X a)
+    rw [scalar_pow_apply, subsetScalar_apply, subsetScalar_apply, scalar_pow_apply,
+      Finset.prod_insert h, pow_succ]
+    ac_rfl
+  simp only [koszul, CochainComplex.of_d]
+  change transitionTerm R r f q ≫ differential R r f (n + 1) q =
+    differential R r f n q ≫ transitionTerm R r f (q + 1)
+  apply Sigma.hom_ext
+  intro s
+  simp only [transitionTerm, differential, Category.assoc, Sigma.ι_desc_assoc,
+    Sigma.ι_desc, Preadditive.comp_sum, Preadditive.sum_comp]
+  apply Finset.sum_congr rfl
+  intro j _
+  split_ifs with h
+  · simp only [comp_zero, zero_comp]
+  · simp only [Preadditive.comp_zsmul, Preadditive.zsmul_comp,
+      Category.assoc, Sigma.ι_desc]
+    rw [← Category.assoc, hc s.val j h, Category.assoc]
 
 /-- Koszul transition as a chain map. Source: Tag 0913
 (blueprint: def-weil-pbc-extended-localization-cech). -/
@@ -150,7 +326,6 @@ noncomputable def complex (R : Sheaf J CommRingCat.{u}) (r : ℕ)
     (f : Fin r → (unit (rings R)).sections) :
     CochainComplex (CategoryTheory.ringedSiteModules.{u} (rings R)) ℤ :=
   colimit (diagram R r f)
-
 
 /-- Restriction of scalars along a commutative coefficient map. Source: Tag 099H
 (blueprint: def-weil-pbc-extended-localization-cech). -/
@@ -214,12 +389,65 @@ noncomputable def unitMap {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B) :
     unit (rings R) ⟶ (restriction φ).obj (unit (rings B)) :=
   (unitMap_existsUnique φ).choose
 
+private theorem unitMap_apply {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)
+    (X : Cᵒᵖ) (a : R.obj.obj X) :
+    (unitMap φ).val.app X a = (φ.hom.app X) a :=
+  (unitMap_existsUnique φ).choose_spec.1 X a
+
+private theorem scalar_unitMap {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)
+    (f : (unit (rings R)).sections) (k : ℕ) :
+    (scalar R f ^ k) ≫ unitMap φ =
+      unitMap φ ≫ (restriction φ).map (scalar B (mapSection φ f) ^ k) := by
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro X
+  apply ModuleCat.hom_ext
+  apply LinearMap.ext
+  intro a
+  change (unitMap φ).val.app X ((scalar R f ^ k).val.app X a) =
+    (scalar B (mapSection φ f) ^ k).val.app X ((unitMap φ).val.app X a)
+  rw [unitMap_apply, scalar_pow_apply, scalar_pow_apply, unitMap_apply]
+  let b : R.obj.obj X := a
+  change (φ.hom.app X).hom (b * value f X ^ k) =
+    (φ.hom.app X).hom b * ((φ.hom.app X).hom (value f X)) ^ k
+  simp
+
+private theorem subsetScalar_unitMap {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)
+    (r : ℕ) (f : Fin r → (unit (rings R)).sections) (s : Finset (Fin r)) :
+    subsetScalar R r f s ≫ unitMap φ =
+      unitMap φ ≫ (restriction φ).map (subsetScalar B r (mapSection φ ∘ f) s) := by
+  have hl : ∀ l : List (Fin r),
+      l.foldr (fun j b ↦ scalar R (f j) ≫ b) (𝟙 _) ≫ unitMap φ =
+        unitMap φ ≫ (restriction φ).map
+          (l.foldr (fun j b ↦ scalar B (mapSection φ (f j)) ≫ b) (𝟙 _)) := by
+    intro l
+    induction l with
+    | nil => simp
+    | cons j l ih =>
+      simp only [List.foldr_cons, Category.assoc, ih, Functor.map_comp]
+      have hs := scalar_unitMap φ (f j) 1
+      simp only [pow_one] at hs
+      rw [← Category.assoc, hs, Category.assoc]
+  exact hl (s.sort (· ≤ ·))
+
 /-- Comparison of the free Koszul terms, with the same subset labels.
 Source: Tag 099H (blueprint: def-weil-pbc-extended-localization-cech). -/
 noncomputable def comparisonTerm {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)
     (r : ℕ) (q : ℤ) : term R r q ⟶ (restriction φ).obj (term B r q) :=
   Sigma.desc (fun s ↦ unitMap φ ≫
     (restriction φ).map (Sigma.ι (fun _ : Indices r q ↦ unit (rings B)) s))
+
+private theorem transitionTerm_comparison {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)
+    (r : ℕ) (f : Fin r → (unit (rings R)).sections) (q : ℤ) :
+    transitionTerm R r f q ≫ comparisonTerm φ r q =
+      comparisonTerm φ r q ≫ (restriction φ).map
+        (transitionTerm B r (mapSection φ ∘ f) q) := by
+  apply Sigma.hom_ext
+  intro s
+  simp only [transitionTerm, comparisonTerm, Category.assoc, Sigma.ι_desc_assoc,
+    Sigma.ι_desc]
+  rw [← Category.assoc, subsetScalar_unitMap, Category.assoc]
+  simp only [← Functor.map_comp, Sigma.ι_desc]
 
 /-- The coefficient comparison commutes with the Koszul differential. Source: Tag 099H
 (blueprint: def-weil-pbc-extended-localization-cech).
@@ -232,7 +460,24 @@ theorem comparison_comm {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)
         (((restriction φ).mapHomologicalComplex (ComplexShape.up ℤ)).obj
           (koszul B r (mapSection φ ∘ f) n)).d q (q + 1) =
       (koszul R r f n).d q (q + 1) ≫ comparisonTerm φ r (q + 1) := by
-  sorry
+  classical
+  dsimp only [term, Indices] at *
+  simp only [koszul, Functor.mapHomologicalComplex_obj_d, CochainComplex.of_d]
+  change comparisonTerm φ r q ≫
+    (restriction φ).map (differential B r (mapSection φ ∘ f) n q) =
+    differential R r f n q ≫ comparisonTerm φ r (q + 1)
+  apply Sigma.hom_ext
+  intro s
+  simp only [comparisonTerm, differential, Category.assoc, Sigma.ι_desc_assoc,
+    ← Functor.map_comp, Sigma.ι_desc, Functor.map_sum,
+    Preadditive.comp_sum, Preadditive.sum_comp]
+  apply Finset.sum_congr rfl
+  intro j _
+  split_ifs with h
+  · simp only [Functor.map_zero, comp_zero, zero_comp]
+  · simp only [Functor.map_zsmul, Preadditive.comp_zsmul, Preadditive.zsmul_comp,
+      Functor.map_comp, Category.assoc, Sigma.ι_desc, Function.comp_apply]
+    rw [← Category.assoc, ← scalar_unitMap, Category.assoc]
 
 /-- The termwise coefficient map of Koszul complexes. Source: Tag 099H
 (blueprint: def-weil-pbc-extended-localization-cech). -/
@@ -259,7 +504,15 @@ theorem comparisonCocone_naturality {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ 
       comparisonStage φ r f n ≫
         ((restriction φ).mapHomologicalComplex (ComplexShape.up ℤ)).map
           (colimit.ι (diagram B r (mapSection φ ∘ f)) n) := by
-  sorry
+  let T := (restriction φ).mapHomologicalComplex (ComplexShape.up ℤ)
+  let t : diagram R r f ⟶ diagram B r (mapSection φ ∘ f) ⋙ T :=
+    NatTrans.ofSequence (comparisonStage φ r f) (fun n ↦ by
+      simp only [diagram, Functor.ofSequence_map_homOfLE_succ, Functor.comp_map]
+      apply HomologicalComplex.hom_ext
+      intro q
+      exact transitionTerm_comparison φ r f q)
+  change (diagram R r f).map a ≫ (t.app m ≫ T.map _) = t.app n ≫ T.map _
+  rw [← Category.assoc, t.naturality, Functor.comp_map, Category.assoc, ← T.map_comp, colimit.w]
 
 /-- Cocone of the explicit coefficient comparisons. Source: Tag 099H
 (blueprint: def-weil-pbc-extended-localization-cech). -/
@@ -299,7 +552,19 @@ theorem idealRow_comparison_zero {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶ B)
     idealRow R r f ≫
       (unitMap φ ≫ (restriction φ).map (cokernel.π (idealRow B r (mapSection φ ∘ f)))) =
         0 := by
-  sorry
+  classical
+  have hi : ∀ j, Sigma.ι (fun _ : Fin r ↦ unit (rings R)) j ≫ idealRow R r f =
+      scalar R (f j) := fun j ↦ Sigma.ι_desc _ _
+  have hb : ∀ j, Sigma.ι (fun _ : Fin r ↦ unit (rings B)) j ≫
+      idealRow B r (mapSection φ ∘ f) = scalar B (mapSection φ (f j)) :=
+    fun j ↦ Sigma.ι_desc _ _
+  apply Sigma.hom_ext
+  intro j
+  rw [← Category.assoc, hi]
+  have hs := scalar_unitMap φ (f j) 1
+  simp only [pow_one] at hs
+  rw [← Category.assoc, hs, Category.assoc, ← Functor.map_comp, ← hb j,
+    Category.assoc, cokernel.condition, comp_zero, Functor.map_zero, comp_zero, comp_zero]
 
 /-- Underlying module morphism of the canonical quotient-ring-sheaf map.
 The cokernel of the row is the sheafified quotient by the generated ideal; being
@@ -313,7 +578,6 @@ noncomputable def quotientComparison {R B : Sheaf J CommRingCat.{u}} (φ : R ⟶
   cokernel.desc (idealRow R r f)
     (unitMap φ ≫ (restriction φ).map (cokernel.π (idealRow B r (mapSection φ ∘ f))))
     (idealRow_comparison_zero φ r f)
-
 
 /-- Fold the unique empty-subset summand onto the coefficient sheaf.
 Source: Tag 0913 (blueprint: def-weil-pbc-extended-localization-cech). -/
@@ -329,7 +593,14 @@ theorem augmentation_incoming (R : Sheaf J CommRingCat.{u}) (r : ℕ)
     (f : Fin r → (unit (rings R)).sections) (n : ℕ) (i : ℤ)
     (h : (ComplexShape.up ℤ).Rel i 0) :
     (koszul R r f n).d i 0 ≫ degreeZeroFold R r = 0 := by
-  sorry
+  have hi : i + 1 = 0 := h
+  have hempty : IsEmpty (Indices r i) := ⟨fun s ↦ by
+    have hn := Int.natCast_nonneg s.val.card
+    rw [s.property] at hn
+    omega⟩
+  apply Sigma.hom_ext
+  intro s
+  exact (hempty.false s).elim
 
 /-- Koszul augmentation to the coefficient sheaf in degree zero.
 Source: Tag 0913 (blueprint: def-weil-pbc-extended-localization-cech). -/
@@ -348,7 +619,25 @@ augmentation components are zero. Iterate this equality along the given arrow. -
 theorem augmentation_naturality (R : Sheaf J CommRingCat.{u}) (r : ℕ)
     (f : Fin r → (unit (rings R)).sections) {n m : ℕ} (a : n ⟶ m) :
     (diagram R r f).map a ≫ augmentationStage R r f m = augmentationStage R r f n := by
-  sorry
+  let F := diagram R r f
+  let A := (HomologicalComplex.single (CategoryTheory.ringedSiteModules.{u} (rings R))
+    (ComplexShape.up ℤ) 0).obj (unit (rings R))
+  let t : F ⟶ (Functor.const ℕ).obj A := NatTrans.ofSequence
+    (augmentationStage R r f) (fun n ↦ by
+      simp only [F, diagram, Functor.ofSequence_map_homOfLE_succ,
+        Functor.const_obj_map]
+      apply HomologicalComplex.to_single_hom_ext
+      simp only [HomologicalComplex.comp_f, augmentationStage,
+        HomologicalComplex.mkHomToSingle_f]
+      change transitionTerm R r f 0 ≫ degreeZeroFold R r ≫ _ = degreeZeroFold R r ≫ _
+      have hfold : transitionTerm R r f 0 ≫ degreeZeroFold R r = degreeZeroFold R r := by
+        apply Sigma.hom_ext
+        intro s
+        have hs : s.val = ∅ := Finset.card_eq_zero.mp (by exact_mod_cast s.property)
+        simp [transitionTerm, degreeZeroFold, subsetScalar, hs]
+      rw [← Category.assoc, hfold]
+      rfl)
+  exact (t.naturality a).trans (Category.comp_id _)
 
 /-- The augmentation cocone. Source: Tag 0913
 (blueprint: def-weil-pbc-extended-localization-cech). -/
