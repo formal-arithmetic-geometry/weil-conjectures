@@ -12,7 +12,7 @@
  ],
  "proof": [
   {
-   "text": "Write $b(t)=a(t)^{-1}$, so $a(t)b(t)=b(t)a(t)=1$. Matrices are entry families as in [def-weil-matrix]; multiplication here is the finite sum $(XY)_{ij}=\\sum_k X_{ik}Y_{kj}$. Set $N=L_1-I_n$ and $P=R_0-I_m$. Only the entries $N_{i1}=-bK_{i1}$ for $i>1$ can be nonzero, and row $1$ of $N$ is zero, so every summand $N_{ik}N_{kj}$ vanishes. Thus $N^2=0$. Likewise only $P_{1j}=-bK_{1j}$ for $j>1$ can be nonzero, and column $1$ of $P$ is zero, so $P^2=0$. Expanding gives $(I+N)(I-N)=(I-N)(I+N)=I$ and the same identities for $P$. Hence $L_1^{-1}=I-N$ and $R_0^{-1}=I-P$.",
+   "text": "Put b=Ring.inverse(a). Define B(d,c) to have corner d, zero remaining first row, first column c below the corner, and identity reduced block. Expanding finite matrix sums with Fin.sum_univ_succ and splitting both indices with Fin.cases proves B(d,c)B(e,f)=B(de,c e+f) and B(1,0)=I. Expanding the prescribed definitions gives L=B(b,-b K_i0) and R0=B(1,-b K_0j)^T. These are computations for the entry-family matrices of def-weil-matrix.",
    "uses": [
     "def-weil-matrix"
    ],
@@ -23,7 +23,7 @@
    }
   },
   {
-   "text": "The diagonal matrix $D=\\operatorname{diag}(a,1,\\ldots,1)$ satisfies $DL_0=L_0D=I_n$, using $ab=ba=1$. Therefore the prescribed product $L=L_0L_1$ has two-sided inverse $(I-N)D$: multiplication in either order cancels adjacent inverse factors. Entrywise, $L_{11}=b$, $L_{i1}=-bK_{i1}$ for $i>1$, and all remaining entries are those of $I_n$. Its inverse has $(L^{-1})_{11}=a$, $(L^{-1})_{i1}=K_{i1}$ for $i>1$, and the remaining identity entries, since $bK_{i1}a=K_{i1}$ by commutativity. Thus $L(t)\\in\\operatorname{GL}_n(A)$ and $R_0(t)\\in\\operatorname{GL}_m(A)$ for every $t$; here $\\operatorname{GL}_r(A)$ means the square matrices with a two-sided multiplicative inverse.",
+   "text": "The unit pivot gives ba=1. Apply the B multiplication formula to obtain L B(a,K_i0)=I, since -b K_i0 a+K_i0=0 by commutativity and ba=1. Transposing the B multiplication formula gives R0 B(1,b K_0j)^T=I. IsUnit.of_mul_eq_one makes each factor a unit; it applies because square matrices over a commutative ring form a Dedekind-finite monoid. If M N=I and M is a unit, then Ring.inverse(M)=Ring.inverse(M)(M N)=N, using Ring.inverse_mul_cancel_left. Hence the actual inverses in the statement are exactly B(a,K_i0) and B(1,b K_0j)^T.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -32,7 +32,7 @@
    }
   },
   {
-   "text": "Fix $t$ and suppress it in the notation. Column $1$ of $R_0$ is the first basis column, so $(KR_0)_{i1}=K_{i1}$. For $j>1$ its column $j$ has only the diagonal entry $1$ and the extra entry $-bK_{1j}$ in row $1$. Thus $(KR_0)_{ij}=K_{ij}-K_{i1}bK_{1j}$. In particular $(KR_0)_{1j}=K_{1j}-abK_{1j}=0$ for $j>1$, and $(KR_0)_{11}=a$. For $i,j>1$ the same formula is precisely $H_{ij}$, because $A$ is commutative.",
+   "text": "Expanding K R0 by Fin.sum_univ_succ gives its first column K_i0 and its other entries K_ij-K_i0 b K_0j. At row zero, ab=1 makes the nonpivot entries vanish; equivalently, in the full expanded product the first row cancels using ba=1 and commutativity. The reduced entries are the prescribed H.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -41,7 +41,7 @@
    }
   },
   {
-   "text": "Put $B=KR_0$. Row $1$ of $L_1$ is the first basis row, and for $i>1$, $(L_1B)_{ij}=B_{ij}-bK_{i1}B_{1j}$. At $j=1$ this is $K_{i1}-bK_{i1}a=0$. At $j>1$, $B_{1j}=0$, so it is $H_{ij}$. Consequently $L_1KR_0$ has corner $a$, zero remaining entries in its first row and column, and reduced block $H$. Left multiplication by $L_0$ multiplies only row $1$ by $b$, changing that corner to $ba=1$. This proves $LKR_0=\\begin{pmatrix}1&0\\\\0&H\\end{pmatrix}$ with exactly the order $L_0L_1$ in the statement.",
+   "text": "Compute all four cases of L K R0 by splitting each index into zero and successor and splitting each finite sum into the zero term and successor terms. The pivot is ba=1. Entries below it contain K_i0-b K_i0 a=0; prove this scalar cancellation first by rearranging to (1-ba)K_i0. The top row away from the pivot is zero. The remaining block is K_ij-b K_i0 K_0j: its extra term is a multiple of the already zero first-column expression. This proves exactly the prescribed block matrix identity and preserves L=L0 L1 in the given order.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -50,7 +50,7 @@
    }
   },
   {
-   "text": "For each fixed entry index, the displayed entries of $L$, $L^{-1}$, $R_0$ and $R_0^{-1}$ are constants or one of $a$, $b$, $K_{i1}$, $\\pm bK_{i1}$, $\\pm bK_{1j}$. The functions $a$ and all $K_{ij}$ are continuous by hypothesis, and $b$ is continuous by the separate hypothesis on the pivot inverse. Products, negatives and differences of these functions are continuous: for example $t\\mapsto(b(t),K_{i1}(t))$ is continuous into $A\\times A$, and composing with the continuous ring multiplication gives $bK_{i1}$; negation and subtraction work in the same way. Applying this twice to $H_{ij}=K_{ij}-bK_{i1}K_{1j}$ proves continuity of every residual entry. These are exactly the entrywise continuity assertions, including those of both inverse families; no continuity of inversion on the whole unit group is needed.",
+   "text": "For any continuous d:T→A and entrywise continuous c:T→(Fin s→A), B(d,c) is entrywise continuous: its four entry cases are d, zero, c_i and a constant identity entry. Apply this observation to L, R0 (with the indices transposed), and their explicit actual inverses from step 2. Their variable entries are a, b, K_i0, and ±b K_0j or ±b K_i0, continuous by hK, hinv, multiplication and negation. H is continuous by two multiplications and subtraction. This proves all five continuity clauses without global continuity of Ring.inverse.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -59,7 +59,7 @@
    }
   },
   {
-   "text": "When $n=1$ there are no indices $i>1$, and when $m=1$ there are no indices $j>1$. The corresponding reduced block has an empty row or column set; the same finite-sum calculations still apply. In particular for $m=n=1$ they give $b\\,a=1$. If $T$ is empty all pointwise assertions are vacuous and the unique entry functions are continuous. Thus the calculation covers every case allowed by $m,n\\geq1$.",
+   "text": "All computations use Fin.cases and Fin.sum_univ_succ uniformly for dimensions n+1 and m+1, so n=0 or m=0 requires no nonempty reduced index set. In the 1×1 case the block identity is ba=1. Empty T is covered because the pointwise results are universally quantified and the continuity constructions have no nonemptiness assumption. No domain, field or nontrivial-ring hypothesis is used.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -74,7 +74,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
-  "place": "Agent auxiliary calculation for the continuous-pivot step; HRS Theorem 6.12(2), printed pp. 18–19, motivates continuous division but does not state this matrix identity."
+  "place": "Agent-written elementary calculation formalized by R1: finite-sum triangular matrix multiplication, explicit inverse uniqueness, four entry cases of the Schur identity, and entrywise continuity. HRS Theorem 6.12(2), printed pp. 18–19, supplies the continuous-division context, not this auxiliary formula."
  },
  "mathlib_searches": [
   {
@@ -205,5 +205,15 @@
   "group": "Q78",
   "result": "pass",
   "note": "The Lean statement matches every hypothesis and conclusion of the node: arbitrary commutative topological ring, independent universes u and v, sizes n+1 and m+1, entrywise-continuous K, unit pivot with continuous Ring.inverse, L0, L1 and R0 as prescribed, L=L0*L1, H on the successor indices. The eight conjuncts give IsUnit, entry continuity of the matrices and their inverses, continuity of H, and L*K*R0 = diag(1,H) with the Fin.cases layout checked. The node changed only in lean; lean.statement is verbatim in the file. The five helpers have real data and docstrings, and the only sorry is the theorem proof. Docstrings carry the source, blueprint tag and 6 proof steps; lines are at most 100 characters and the single import is used. No name collision or duplicate in Mathlib or the side tree. nt_compile --json was clean (rc 0, 16 s and 10 s), and a control copy with an error gave rc 1. Edge cases n=0, m=0, empty T and the zero ring are covered. Non-blocking note: the maintainer-owned source.place overstates HRS."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R1",
+  "result": "pass",
+  "landing": "20261018T145112-L-3644050",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

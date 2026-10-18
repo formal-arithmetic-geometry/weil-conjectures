@@ -16537,3 +16537,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:51 L: merged deliver/P9/Sheaf.CategoryTheory.NormalizedDerivedComparisonCommonResolution (stage 3; reviewer PASS; first push; landing 20261018T145110-L-3643409 (proof); batch 20261018T145048; modules 1; new nodes 0)
 - 14:51 L: merged deliver/Q5/Sheaf.CategoryTheory.OrthogonalTriangleCounitNormalization (stage 3; reviewer PASS; first push; landing 20261018T145111-L-3643593 (proof); batch 20261018T145048; modules 1; new nodes 0)
 - 14:51 L: merged deliver/Q6/Sheaf.CategoryTheory.PresheafTensorInternalHom (stage 3; reviewer PASS; first push; landing 20261018T145112-L-3643811 (proof); batch 20261018T145048; modules 1; new nodes 0)
+- 14:51 L: merged deliver/R1/Sheaf.LinearAlgebra.Matrix.ContinuousUnitPivot (stage 3; reviewer PASS; first push; landing 20261018T145112-L-3644050 (proof); batch 20261018T145048; modules 1; new nodes 0)

@@ -104,7 +104,114 @@ theorem continuous_unitPivot_schur_formula {A : Type u} [CommRing A]
     (∀ i j, Continuous (fun t => unitPivotSchurComplement (K t) i j)) ∧
     (∀ t, unitPivotLeft (K t) * K t * unitPivotRightElimination (K t) =
       of (Fin.cases (Fin.cases 1 (fun _ => 0))
-        (fun i => Fin.cases 0 (unitPivotSchurComplement (K t) i)))) :=
-  sorry
+        (fun i => Fin.cases 0 (unitPivotSchurComplement (K t) i)))) := by
+  classical
+  -- A lower triangular matrix with identity as its reduced diagonal block.
+  let lo {s : ℕ} (d : A) (c : Fin s → A) : Matrix (Fin (s + 1)) (Fin (s + 1)) A :=
+    of (Fin.cases (Fin.cases d (fun _ => 0))
+      (fun i => Fin.cases (c i) (fun j => (1 : Matrix (Fin s) (Fin s) A) i j)))
+  have lo_mul {s : ℕ} (d e : A) (c f : Fin s → A) :
+      lo d c * lo e f = lo (d * e) (fun i => c i * e + f i) := by
+    ext i j
+    refine Fin.cases ?_ (fun i => ?_) i <;>
+      refine Fin.cases ?_ (fun j => ?_) j
+    all_goals simp [lo, Matrix.mul_apply, Fin.sum_univ_succ, Matrix.one_apply]
+  have lo_one {s : ℕ} : lo 1 (fun _ : Fin s => 0) = 1 := by
+    ext i j
+    refine Fin.cases ?_ (fun i => ?_) i <;>
+      refine Fin.cases ?_ (fun j => ?_) j
+    all_goals simp [lo, Matrix.one_apply, eq_comm]
+  have hL (M : Matrix (Fin (n + 1)) (Fin (m + 1)) A) : unitPivotLeft M = lo (Ring.inverse (M 0 0))
+      (fun i => -(Ring.inverse (M 0 0) * M i.succ 0)) := by
+    ext i j
+    simp only [unitPivotLeft, unitPivotScaling, Matrix.diagonal_mul]
+    refine Fin.cases ?_ (fun i => ?_) i <;>
+      refine Fin.cases ?_ (fun j => ?_) j
+    all_goals simp [lo, unitPivotLeftElimination, Matrix.one_apply, eq_comm]
+  have hR (M : Matrix (Fin (n + 1)) (Fin (m + 1)) A) : unitPivotRightElimination M =
+      (lo 1 (fun j => -(Ring.inverse (M 0 0) * M 0 j.succ)))ᵀ := by
+    ext i j
+    refine Fin.cases ?_ (fun i => ?_) i <;>
+      refine Fin.cases ?_ (fun j => ?_) j
+    all_goals simp [lo, unitPivotRightElimination, Matrix.one_apply, eq_comm]
+  -- Compute the inverse factors and the elimination identity entrywise.
+  have hp (K : Matrix (Fin (n + 1)) (Fin (m + 1)) A) (h : IsUnit (K 0 0)) :
+      (unitPivotLeft K * lo (K 0 0) (fun i => K i.succ 0) = 1) ∧
+      (unitPivotRightElimination K *
+        (lo 1 (fun j => Ring.inverse (K 0 0) * K 0 j.succ))ᵀ = 1) ∧
+      (unitPivotLeft K * K * unitPivotRightElimination K =
+        of (Fin.cases (Fin.cases 1 (fun _ => 0))
+          (fun i => Fin.cases 0 (unitPivotSchurComplement K i)))) := by
+    have hba := Ring.inverse_mul_cancel (K 0 0) h
+    have hLL : unitPivotLeft K * lo (K 0 0) (fun i => K i.succ 0) = 1 := by
+      rw [hL K, lo_mul, hba]
+      convert lo_one using 2
+      funext i
+      calc
+        -(Ring.inverse (K 0 0) * K i.succ 0) * K 0 0 + K i.succ 0 =
+            -(Ring.inverse (K 0 0) * K 0 0) * K i.succ 0 + K i.succ 0 := by ring
+        _ = 0 := by rw [hba]; ring
+    have hRR : unitPivotRightElimination K *
+        (lo 1 (fun j => Ring.inverse (K 0 0) * K 0 j.succ))ᵀ = 1 := by
+      rw [hR K, ← Matrix.transpose_mul, lo_mul]
+      simp only [mul_one, add_neg_cancel, lo_one, Matrix.transpose_one]
+    have hz (i : Fin n) :
+        K i.succ 0 + -(Ring.inverse (K 0 0) * K i.succ 0 * K 0 0) = 0 := by
+      calc
+        _ = -(Ring.inverse (K 0 0) * K 0 0) * K i.succ 0 + K i.succ 0 := by ring
+        _ = 0 := by rw [hba]; ring
+    have hblock : unitPivotLeft K * K * unitPivotRightElimination K =
+        of (Fin.cases (Fin.cases 1 (fun _ => 0))
+          (fun i => Fin.cases 0 (unitPivotSchurComplement K i))) := by
+      rw [hL K, hR K]
+      ext i j
+      refine Fin.cases ?_ (fun i => ?_) i <;>
+        refine Fin.cases ?_ (fun j => ?_) j
+      all_goals simp [lo, Matrix.mul_apply, Fin.sum_univ_succ, Matrix.one_apply,
+        unitPivotSchurComplement, hba, hz, sub_eq_add_neg, add_comm]
+    exact ⟨hLL, hRR, hblock⟩
+  have huL (t : T) : IsUnit (unitPivotLeft (K t)) :=
+    IsUnit.of_mul_eq_one _ (hp (K t) (hunit t)).1
+  have huR (t : T) : IsUnit (unitPivotRightElimination (K t)) :=
+    IsUnit.of_mul_eq_one _ (hp (K t) (hunit t)).2.1
+  -- Identify the explicit inverse with the total inverse used in the statement.
+  have inverse_eq {s : ℕ} (M N : Matrix (Fin (s + 1)) (Fin (s + 1)) A)
+      (hu : IsUnit M) (hMN : M * N = 1) : Ring.inverse M = N := by
+    calc
+      Ring.inverse M = Ring.inverse M * (M * N) := by rw [hMN, mul_one]
+      _ = N := Ring.inverse_mul_cancel_left M N hu
+  have hiL (t : T) : Ring.inverse (unitPivotLeft (K t)) =
+      lo (K t 0 0) (fun i => K t i.succ 0) :=
+    inverse_eq _ _ (huL t) (hp (K t) (hunit t)).1
+  have hiR (t : T) : Ring.inverse (unitPivotRightElimination (K t)) =
+      (lo 1 (fun j => Ring.inverse (K t 0 0) * K t 0 j.succ))ᵀ :=
+    inverse_eq _ _ (huR t) (hp (K t) (hunit t)).2.1
+  have clo {s : ℕ} (d : T → A) (c : T → Fin s → A)
+      (hd : Continuous d) (hc : ∀ i, Continuous (fun t => c t i))
+      (i j : Fin (s + 1)) : Continuous (fun t => lo (d t) (c t) i j) := by
+    refine Fin.cases ?_ (fun i => ?_) i <;>
+      refine Fin.cases ?_ (fun j => ?_) j
+    · simpa only [lo, of_apply, Fin.cases_zero] using hd
+    · simpa only [lo, of_apply, Fin.cases_zero, Fin.cases_succ] using
+        (continuous_const : Continuous (fun _ : T => (0 : A)))
+    · simpa only [lo, of_apply, Fin.cases_zero, Fin.cases_succ] using hc i
+    · exact continuous_const
+  refine ⟨huL, huR, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · intro i j
+    simp_rw [hL]
+    exact clo _ _ hinv (fun i => (hinv.mul (hK i.succ 0)).neg) i j
+  · intro i j
+    simp_rw [hR]
+    exact clo _ _ continuous_const (fun j => (hinv.mul (hK 0 j.succ)).neg) j i
+  · intro i j
+    simp_rw [hiL]
+    exact clo _ _ (hK 0 0) (fun i => hK i.succ 0) i j
+  · intro i j
+    simp_rw [hiR]
+    exact clo _ _ continuous_const (fun j => hinv.mul (hK 0 j.succ)) j i
+  · intro i j
+    exact (hK i.succ j.succ).sub ((hinv.mul (hK i.succ 0)).mul (hK 0 j.succ))
+  · intro t
+    exact (hp (K t) (hunit t)).2.2
 
 end Matrix
