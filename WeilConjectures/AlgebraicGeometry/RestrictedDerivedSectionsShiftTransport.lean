@@ -6,13 +6,16 @@ Authors: Bin Wu
 
 module
 
+
+
+public import WeilConjectures.AlgebraicGeometry.RawRestrictedCohomologyComparisonMap
 public import WeilConjectures.AlgebraicGeometry.RestrictedDerivedSectionZeroComparison
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.AdjunctionShift
-import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
-import WeilConjectures.SixFunctors.Etale.Derived.Shift
-import WeilConjectures.AlgebraicGeometry.RawRestrictedCohomologyComparisonMap
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.AdjunctionShift
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
+public import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+
+
 
 /-! # Transport of restricted section pullback through the shift comparison
 
@@ -91,14 +94,84 @@ private theorem canonical_unit_commShift
   infer_instance
 
 set_option backward.isDefEq.respectTransparency false in
+private theorem canonical_adjunction_unit_commShift
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D] [HasKInjectiveResolutions D]
+    {L : C ⥤ D} {R : D ⥤ C} [L.Additive] [R.Additive]
+    [PreservesFiniteLimits L] [PreservesFiniteColimits L] (adj : L ⊣ R) :
+    NatTrans.CommShift adj.mapDerivedCategoryRightDerivedAdjunction.unit ℤ := by
+  have : NatTrans.CommShift R.rightDerivedFunctorUnit ℤ := canonical_unit_commShift R
+  have hunit : NatTrans.CommShift (adj.mapHomologicalComplex (.up ℤ)).unit ℤ := by
+    constructor
+    intro n
+    ext K i
+    dsimp [Adjunction.mapHomologicalComplex]
+    simp only [Functor.commShiftIso_comp_hom_app, Functor.commShiftIso_id_hom_app,
+      HomologicalComplex.comp_f, Functor.mapHomologicalComplex_map_f,
+      Functor.mapHomologicalComplex_commShiftIso_hom_app_f]
+    simp only [HomologicalComplex.id_f, CochainComplex.shiftFunctor_obj_X', Category.id_comp,
+      Functor.comp_obj, CategoryTheory.Functor.map_id, Category.comp_id]
+    erw [Category.comp_id]
+  have : NatTrans.CommShift (adj.mapHomotopyCategory (.up ℤ)).unit ℤ := by
+    have heq : Functor.whiskerLeft (HomotopyCategory.quotient C (.up ℤ))
+        (adj.mapHomotopyCategory (.up ℤ)).unit =
+        (Functor.rightUnitor _).hom ≫ (Functor.leftUnitor _).inv ≫
+          Functor.whiskerRight (adj.mapHomologicalComplex (.up ℤ)).unit
+            (HomotopyCategory.quotient C (.up ℤ)) ≫
+          (Functor.associator _ _ _).hom ≫
+          Functor.whiskerLeft (L.mapHomologicalComplex (.up ℤ))
+            (R.mapHomotopyCategoryFactors (.up ℤ)).inv ≫
+          (Functor.associator _ _ _).inv ≫
+          Functor.whiskerRight (L.mapHomotopyCategoryFactors (.up ℤ)).inv
+            (R.mapHomotopyCategory (.up ℤ)) ≫
+          (Functor.associator _ _ _).hom := by
+      ext K
+      simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+        Functor.associator_hom_app, Functor.associator_inv_app,
+        Functor.leftUnitor_inv_app, Functor.rightUnitor_hom_app,
+        Adjunction.mapHomotopyCategory_unit_app_quotient, Category.id_comp]
+      simp [Functor.mapHomotopyCategoryFactors]
+    have : NatTrans.CommShift (Functor.whiskerLeft (HomotopyCategory.quotient C (.up ℤ))
+        (adj.mapHomotopyCategory (.up ℤ)).unit) ℤ := by
+      rw [heq]
+      infer_instance
+    exact NatTrans.CommShift.of_whiskerLeft _ (HomotopyCategory.quotient C (.up ℤ))
+      (fun X ↦ ⟨_, 𝟙 _, (HomotopyCategory.quotient_obj_surjective X).choose_spec ▸
+        inferInstance⟩)
+  let η := adj.mapDerivedCategoryRightDerivedAdjunction.unit
+  have heq : Functor.whiskerLeft DerivedCategory.Qh η =
+      (Functor.rightUnitor _).hom ≫ (Functor.leftUnitor _).inv ≫
+        Functor.whiskerRight (adj.mapHomotopyCategory (.up ℤ)).unit DerivedCategory.Qh ≫
+        (Functor.associator _ _ _).hom ≫
+        Functor.whiskerLeft (L.mapHomotopyCategory (.up ℤ)) R.rightDerivedFunctorUnit ≫
+        (Functor.associator _ _ _).inv ≫
+        Functor.whiskerRight L.mapDerivedCategoryFactorsh.inv R.rightDerivedFunctor ≫
+        (Functor.associator _ _ _).hom := by
+    ext K
+    apply (cancel_mono (R.rightDerivedFunctor.map
+      (L.mapDerivedCategoryFactorsh.hom.app K))).1
+    simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+      Functor.associator_hom_app, Functor.associator_inv_app,
+      Functor.leftUnitor_inv_app, Functor.rightUnitor_hom_app, Category.id_comp,
+      Category.assoc, ← R.rightDerivedFunctor.map_comp,
+      L.mapDerivedCategoryFactorsh.inv_hom_id_app, R.rightDerivedFunctor.map_id,
+      Category.comp_id]
+    erw [Category.id_comp, Category.comp_id]
+    exact (adj.mapHomotopyCategory (.up ℤ)).derivedη_fac_app
+      (HomotopyCategory.quasiIso C (.up ℤ)) L.mapDerivedCategoryFactorsh.hom
+      R.rightDerivedFunctorUnit K
+  have : NatTrans.CommShift (Functor.whiskerLeft DerivedCategory.Qh η) ℤ := by
+    rw [heq]
+    infer_instance
+  exact NatTrans.CommShift.of_whiskerLeft _ DerivedCategory.Qh
+    (fun X ↦ ⟨_, (DerivedCategory.Qh.objObjPreimageIso X).inv, inferInstance⟩)
+
+
+set_option backward.isDefEq.respectTransparency false in
 private theorem pullback_commShift {X Y : Scheme.{v}} (f : X ⟶ Y) :
     NatTrans.CommShift (derivedSectionPullback f) ℤ := by
-  have ha : (mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f).CommShift ℤ :=
-    (mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f).commShift_of_leftAdjoint ℤ
-  have : NatTrans.CommShift (lowerStar AddCommGrpCat.{v + 1} f).rightDerivedFunctorUnit ℤ := by
-    let adj := upperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f
-    have : adj.mapDerivedCategoryRightDerivedAdjunction.CommShift ℤ := ha
-    exact adj.commShift_rightDerivedFunctorUnit
+  have : NatTrans.CommShift (lowerStar AddCommGrpCat.{v + 1} f).rightDerivedFunctorUnit ℤ :=
+    canonical_unit_commShift _
   dsimp only [derivedSectionPullback]
   have : NatTrans.CommShift
       (Functor.rightDerivedFunctorCompIso'
@@ -120,7 +193,7 @@ private theorem pullback_commShift {X Y : Scheme.{v}} (f : X ⟶ Y) :
   let P := (lowerStar AddCommGrpCat.{v + 1} f).rightDerivedFunctor
   have hu : NatTrans.CommShift
       (mapDerivedUpperStarLowerStarAdjunction AddCommGrpCat.{v + 1} f).unit ℤ :=
-    inferInstance
+    canonical_adjunction_unit_commShift (upperStarLowerStarAdjunction _ f)
   have heq : derivedSectionPullback f =
       (Functor.leftUnitor R).inv ≫
         Functor.whiskerRight
