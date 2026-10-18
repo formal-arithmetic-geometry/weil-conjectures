@@ -16445,3 +16445,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:59 L: merged deliver/C4/Sheaf.AlgebraicGeometry.AmplificationConsequences (stage 3; reviewer PASS; first push; landing 20261018T135903-L-2958998 (proof); batch 20261018T135825; modules 1; new nodes 0)
 - 13:59 L: merged deliver/D9/Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesUnit (stage 3; reviewer PASS; first push; landing 20261018T135904-L-2959270 (proof); batch 20261018T135825; modules 1; new nodes 0)
 - 13:59 L: merged deliver/E9/Sheaf.AlgebraicGeometry.ProEtaleConstantRingPullbackComparison (stage 3; reviewer PASS; first push; landing 20261018T135905-L-2959728 (proof); batch 20261018T135825; modules 1; new nodes 0)
+- 13:59 L: merged deliver/F5/Sheaf.CategoryTheory.DerivedMonoidalClosed (stage 3; reviewer PASS; first push; landing 20261018T135906-L-2959938 (proof); batch 20261018T135825; modules 1; new nodes 0)
