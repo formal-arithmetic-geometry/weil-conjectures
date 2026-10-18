@@ -7,11 +7,6 @@ module
 
 public import Mathlib.Algebra.Homology.Additive
 public import WeilConjectures.ConstructibleSheaf.Defs
-import Mathlib.CategoryTheory.Sites.Sheafification
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Stalk
-import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 
 /-!
 # Inverse image of constant modules and complexes
@@ -57,6 +52,12 @@ theorem pullback_constantModule_isIso {X Y : Scheme.{u}} (f : X ⟶ Y)
     (∀ M : CochainComplex (ModuleCat.{u + 1} Λ) ℤ,
       IsIso (((upperStarConstantSheafIso (ModuleCat.{u + 1} Λ) f).hom.mapHomologicalComplex
         (ComplexShape.up ℤ)).app M)) := by
-  sorry
+  constructor
+  · intro M
+    infer_instance
+  · intro M
+    exact ((NatIso.mapHomologicalComplex
+      (upperStarConstantSheafIso (ModuleCat.{u + 1} Λ) f)
+      (ComplexShape.up ℤ)).app M).isIso_hom
 
 end AlgebraicGeometry.Scheme
