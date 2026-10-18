@@ -1,0 +1,140 @@
+{
+ "id": "def-weil-pbc-ring-complex-semilinear-extension",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Tag 099D(c): the actual map on a K-flat representative, with the scalar extension/restriction adjunction",
+   "via": [
+    "lem-weil-pbc-ring-complex-functorial",
+    "lem-weil-pbc-extended-cech-completion-model",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Explicit scalar extension and normalized lift on the one-point module site",
+ "statement": "Let $\\varphi:A\\to B$ be a homomorphism of commutative rings. Use the one-object bottom site and the tensor-presheaf construction of [def-pc-ring-hom-extension-shared-definitions], with the notation of [def-weil-pbc-ring-complex-cech-data]. Define $E_\\varphi$ by the actual tensor presheaf $B\\otimes_{A,\\varphi}M$ followed by sheafification; its map on a morphism $f$ is the sheafification of $\\mathrm{id}_B\\otimes f$. This is an additive functor. Its extension to integer cochain complexes has terms $\\operatorname{changeOfRings}(\\varphi,P^n)$ and differential $\\operatorname{changeOfRingsHom}(\\varphi,P^n,d_P)$. On the bottom site the sheafification unit is invertible and identifies sections of $E_\\varphi M$ with $B\\otimes_{A,\\varphi}M$. The extension/restriction adjunction extends any $\\varphi$-semilinear map $f:M\\to N$ to the unique $B$-linear map $E_\\varphi M\\to N$ sending $1\\otimes x$ to $f(x)$. Applied degreewise to a semilinear cochain map, these lifts commute with differentials. For a family map $m_\\varphi:K(A,I)\\to K(B,J)$ and a cochain map $p:P\\to K(A,I)$, denote by $\\operatorname{ringComplexExtendAlong}$ the actual lifted map $E_\\varphi P\\to K(B,J)$; its value on $1\\otimes x$ is $m_\\varphi(p(x))$. The functor, section, chain, and normalization identities are proved in Lean.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099D(c): the actual map on a K-flat representative, with the scalar extension/restriction adjunction"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ring-complex-cech-data",
+  "def-pc-ring-hom-extension-shared-definitions"
+ ],
+ "proof": [
+  {
+   "text": "Construct scalar extension by tensor presheaves and sheafification and lift maps by the extension/restriction adjunction. In the public point-lift definition use Subsingleton.elim on the one-object site directly. In the morphism extensionality proof reuse the existing CategoryTheory.point_eq helper from the one-point Hom transport module, without restating it.",
+   "uses": [
+    "lem-pc-ring-hom-extension-transport"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-ring-hom-extension-transport"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099D(c); Modules on Sites, Tag 03EK. Explicit scalar-extension construction and adjunction, with the existing one-point-site helper reused in the extensionality proof (repair of the duplicate declaration return)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Functor extending scalars for module sheaves on the one point site with normalized semilinear map",
+   "results": "ModuleCat.extendScalars; ModuleCat.ExtendScalars.obj'; ModuleCat.coextendScalars; ModuleCat.ExtendScalars.map'; PresheafOfModules.restrictScalars; ModuleCat.restrictScalars; PresheafOfModules.pushforward; ModuleCat.ExtendScalars.map'_id",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension functor of complexes of modules and a map determined on one tensor x",
+   "results": "ModuleCat.ExtendScalars.map'; ModuleCat.ExtendScalars.hom_ext_iff; ModuleCat.ExtendScalars.hom_ext; ModuleCat.CoextendScalars.map'; ModuleCat.ExtendScalars.map_tmul; HomologicalComplex.extend.mapX; ModuleCat.extendScalarsComp_hom_app_one_tmul; ModuleCat.ExtendScalars.obj'",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars|extendRestrictScalarsAdj|toSheafify_naturality",
+   "results": "extendScalars, ExtendScalars.hom_ext, extendRestrictScalarsAdj_homEquiv_apply, and PresheafOfModules.sheafification supply the constructions used here. No one-point-site functor with the exact changeOfRings object and pure-tensor normalization is already packaged.",
+   "date": "2026-10-18",
+   "verdict": "no exact match; use the named general constructions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingComplexFunctorial",
+  "date": "2026-10-18",
+  "group": "A3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingComplexSemilinearExtension",
+  "file": "lean/Sheaf/Paper/RingComplexSemilinearExtension.lean",
+  "declaration": "AlgebraicGeometry.ringComplexExtension",
+  "declarations": [
+   "AlgebraicGeometry.ringComplexPointLift",
+   "AlgebraicGeometry.ringComplexExtensionPresheaf",
+   "AlgebraicGeometry.ringComplexExtension",
+   "AlgebraicGeometry.ringComplexExtension_additive",
+   "AlgebraicGeometry.ringComplexExtensionComplex",
+   "AlgebraicGeometry.ringComplexExtensionSections",
+   "AlgebraicGeometry.ringComplexSemilinearLift",
+   "AlgebraicGeometry.ringComplexSemilinearLift_one_tmul",
+   "AlgebraicGeometry.ringComplex_point_hom_ext",
+   "AlgebraicGeometry.ringComplexExtension_hom_ext",
+   "AlgebraicGeometry.ringComplexExtension_map_one_tmul",
+   "AlgebraicGeometry.ringComplexExtendMap",
+   "AlgebraicGeometry.ringComplexExtendAlong",
+   "AlgebraicGeometry.ringComplexExtendAlong_one_tmul"
+  ],
+  "statement": "def ringComplexExtension {A B : CommRingCat.{u}} (φ : A →+* B) :\n    RingSiteModules A ⥤ RingSiteModules B",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-18"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "def-weil-pbc-ring-complex-semilinear-extension",
+  "worker": "stage3",
+  "summary": "Concrete component of the decomposition of Sheaf.Paper.RingComplexFunctorial. The unchanged upper theorem is assembled in Lean from strict functoriality, augmented Godement-Cech comparison, and local augmented scalar extension; no target or existing definition changes.",
+  "blueprint": "Tag 099D(c): the actual map on a K-flat representative, with the scalar extension/restriction adjunction"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261018T091356-L-3252795",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261018T091356-L-3252795",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

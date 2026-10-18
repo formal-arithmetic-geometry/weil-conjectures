@@ -1,0 +1,157 @@
+{
+ "id": "lem-weil-pbc-ring-complex-godement-functorial",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Tag 099D(a),(b); cohomology.tex Tag 0FKS and the coordinate calculation on iterated stalk products",
+   "via": [
+    "lem-weil-pbc-ring-complex-functorial",
+    "lem-weil-pbc-extended-cech-completion-model",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Strict functoriality of concrete Godement mapping fibres",
+ "statement": "For every commutative ring $A$ and finitely generated ideal $I\\subset A$, use the actual augmented Godement mapping fibre $(K(A,I),\\epsilon_{A,I})$ of [def-weil-pbc-ring-complex-godement-construction]. There is a family of degreewise $\\varphi$-semilinear maps $m_\\varphi:K(A,I)\\to K(B,J)$ for every ring map $\\varphi:A\\to B$ and every equality $\\varphi(I)B=J$ of finitely generated ideals, satisfying the predicate $\\operatorname{RingComplexFunctorial}$ of [def-weil-pbc-ring-complex-cech-data]. Explicitly, these commute with the differentials, satisfy $\\epsilon_{B,J}m_\\varphi=\\varphi\\epsilon_{A,I}$, are identity for $\\varphi=\\mathrm{id}_A$ and every equality witness for $I\\mathrm{id}_A=I$, and satisfy $m_\\psi m_\\varphi=m_{\\psi\\varphi}$ for every pair of composable ring maps and every supplied ideal-extension equality. This statement asserts no Cech comparison or derived base change.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0FKS (lemma-godement-resolution), coordinate construction under a morphism of ringed spaces; algebraization.tex Tag 099D(a),(b)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ring-complex-cech-data",
+  "def-weil-pbc-ring-complex-godement-construction"
+ ],
+ "proof": [
+  {
+   "text": "The inverse-image prime avoids I exactly when the prime avoids I B. Restrict Spec(phi) to a morphism of open complements U(B,J) to U(A,I). The coefficient map is the induced map of their structure modules.",
+   "uses": [
+    "def-weil-pbc-ring-complex-godement-construction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099D"
+   }
+  },
+  {
+   "text": "Apply the proved strict Godement model-map family to the induced map of open complements and the structure-module coefficient map. It supplies both cosimplicial maps and extended cochain maps with identity, composition and actual germ-augmentation equations. Take global sections, restricting coefficients along the ring maps from A and B. This gives the differential-compatible semilinear maps on the Godement section complexes.",
+   "uses": [
+    "def-weil-pbc-ring-complex-godement-construction",
+    "lem-weil-pbc-ring-complex-godement-model-maps"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0FKS, coordinate product-of-stalks construction"
+   }
+  },
+  {
+   "text": "Together with phi in degree zero the section maps form a square of the restriction cochain maps. Apply the functorial mapping cone and inverse rotation. Projection gives the augmentation equation. For identity morphisms every coordinate is unchanged. For a composite, both formulas select the coordinate at the composite image and apply the composite stalk map, so they agree. Extension equalities for ideals and all equality transports have proof-irrelevant witnesses. This gives all four equations, including empty complements. Form the square in A-modules by restriction of scalars from B. Restriction of scalars preserves finite biproducts and shifts, so the cone map and inverse rotation identify its target with the restricted B mapping fibre. Its section maps are therefore semilinear. The restriction coherences are the identity on underlying section functions, which gives the strict equations there.",
+   "uses": [
+    "def-weil-pbc-ring-complex-godement-construction",
+    "def-weil-pbc-ring-complex-cech-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099D"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ring-complex-godement-construction",
+  "lem-weil-pbc-ring-complex-godement-model-maps",
+  "def-weil-pbc-ring-complex-cech-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 099D(a),(b); cohomology.tex Tag 0FKS and the coordinate calculation on iterated stalk products"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Godement resolution strictly functorial across morphisms of ringed spaces",
+   "results": "SheafOfModules.pushforward; SheafOfModules.sectionsFunctor; AlgebraicGeometry.LocallyRingedSpace.isLocalHomStalkMap'; AlgebraicGeometry.LocallyRingedSpace.Γ; AlgebraicGeometry.LocallyRingedSpace.Hom; AlgebraicGeometry.LocallyRingedSpace.Γ_obj; AlgebraicGeometry.Scheme.Hom.toRingCatSheafHom; PresheafOfModules.sheafification_map",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict identity and composition for Godement resolution stalk coordinate maps across schemes",
+   "results": "AlgebraicGeometry.Scheme.fromSpecStalk_toSpecΓ; AlgebraicGeometry.Scheme.Hom.germ_stalkMap_assoc; AlgebraicGeometry.Scheme.stalkMap_germ_assoc; AlgebraicGeometry.Scheme.Hom.germ_stalkMap; AlgebraicGeometry.Scheme.Opens.fromSpecStalkOfMem_toSpecΓ; AlgebraicGeometry.Scheme.Opens.germ_stalkIso_hom; AlgebraicGeometry.Scheme.stalkMap_germ; AlgebraicGeometry.Scheme.fromSpecStalk_app",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "localCohomology|Cech|Godement",
+   "results": "No Godement declaration. LocalCohomology.lean lines 42-48 explicitly leave the Cech characterization as future work; its constructions are Ext-colimit functors for a fixed ring. AlternatingFaceMapComplex.lean supplies the general alternating coface functor, not ring-varying sections.",
+   "date": "2026-10-18",
+   "verdict": "no exact match; use the named general constructions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingComplexFunctorial",
+  "date": "2026-10-18",
+  "group": "A3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingComplexGodementFunctorial",
+  "file": "lean/Sheaf/Paper/RingComplexGodementFunctorial.lean",
+  "declaration": "AlgebraicGeometry.ringComplex_godement_functorial",
+  "declarations": [
+   "AlgebraicGeometry.ringComplex_godement_functorial"
+  ],
+  "statement": "theorem ringComplex_godement_functorial :\n    ∃ m : RingComplexMaps (fun A I ↦ ringComplexGodement A I.val),\n      RingComplexFunctorial (fun A I ↦ ringComplexGodement A I.val)\n        (fun A I ↦ ringComplexGodementAugmentation A I.val) m",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-18"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-weil-pbc-ring-complex-godement-functorial",
+  "worker": "stage3",
+  "summary": "Concrete component of the decomposition of Sheaf.Paper.RingComplexFunctorial. The unchanged upper theorem is assembled in Lean from strict functoriality, augmented Godement-Cech comparison, and local augmented scalar extension; no target or existing definition changes.",
+  "blueprint": "Tag 099D(a),(b); cohomology.tex Tag 0FKS and the coordinate calculation on iterated stalk products"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261018T091356-L-3252795",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261018T091356-L-3252795",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

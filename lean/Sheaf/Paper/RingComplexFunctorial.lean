@@ -12,24 +12,11 @@ public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import Mathlib.RingTheory.Localization.Away.Basic
-import Sheaf.Algebra.Homology.KFlatResolution
-import Sheaf.Paper.ModuleCupGodementModel
-import Sheaf.Paper.ModuleCupGodementModelsExist
-import Sheaf.Paper.ModuleCupGodementModelQuasiIso
-import Sheaf.Paper.ModuleCupGodementObjectFlasque
-import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
-import Sheaf.Paper.ModuleCupFlasqueAcyclicity
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
-import Sheaf.Topology.RingedSpaceModuleEnoughInjectives
-import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Mathlib.AlgebraicGeometry.Scheme
-import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.RingTheory.Flat.Localization
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
-import Sheaf.Paper.FiniteOrderedFlasqueCechComparison
-import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-import WeilConjectures.Topology.RingedSpaceModuleEnoughInjectives
+
+import Sheaf.Paper.RingComplexGodementFunctorial
+import Sheaf.Paper.RingComplexGodementCech
+import Sheaf.Paper.RingComplexCechBaseChange
 
 /-!
 # Functorial augmented ring complexes
@@ -61,38 +48,35 @@ namespace AlgebraicGeometry
 /-- Stacks Project, Tag 099D(a)-(d)
 (blueprint: lem-weil-pbc-ring-complex-functorial).
 
-Proof plan:
-1. Use the concrete Godement monad of def-sc-module-cup-godement-model and its alternating
-   coface resolution (lem-sc-module-cup-godement-model-pairing-models-exist). Its augmentation
-   is a quasi-isomorphism by lem-sc-module-cup-godement-model-quasi-iso and each term is
-   flasque by lem-sc-module-cup-godement-object-flasque, including on empty schemes.
-2. A ring map induces a map on the open complements of the ideals. On Godement products
-   select the component at the image point and apply the induced stalk map. Iteration
-   commutes with cofaces, units, compositions and augmentations componentwise.
-3. Put A in degree zero, followed by sections of the Godement resolution of the structure
-   module on Spec A minus V(I), shifted one degree to the right. Restriction followed by
-   germ augmentation is the first differential. Step 2 supplies the semilinear chain maps.
-4. For a finite generating list, compare the Godement section complex with the ordered
-   principal-open Cech complex through the finite Cech double total. The intersections
-   are affine by lem-weil-pbc-principal-localization-open-immersion; their sections are
-   the localizations by lem-weil-pbc-spec-module-tilde-sections. Quasi-coherence follows
-   from lem-weil-pbc-spec-tilde-free-module. Use pqf-lem-affine-vanishing and
-   lem-sc-module-cup-flasque-acyclicity, with enough injectives from
-   lem-sc-ringed-space-module-sheaves-enough-injectives and the bounded-below acyclic-unit
-   comparison src-right-derived-functor-plus-acyclic-unit. Then apply
-   lem-weil-pbc-finite-ordered-flasque-cech-comparison. The sums in each total degree are
-   finite. The comparison is natural in the ring map.
-5. Adjoin A in degree zero to the augmented comparison roof, shifting all former terms
-   by one without changing signs. In degrees zero and one its cohomology is respectively
-   the kernel and cokernel of A to H^0 of the former complex; in higher degrees it is
-   the shifted former cohomology. Both roof arrows remain quasi-isomorphisms and are
-   identity on A. Inverting the roof gives the augmentation-compatible derived isomorphism.
-6. All localization terms are flat by lem-weil-pbc-localization-flat. The finite Cech
-   complex is bounded and hence K-flat by lem-pc-bounded-above-flat-kflat-site. The
-   fraction formulas identify its tensor with B with the localization complex of the
-   image list, commuting with the differentials. Naturality of the roof makes this
-   the induced map, so every K-flat replacement computes the asserted isomorphism.
-   The empty list gives A[0]; zero rings, zero and repeated generators are included. -/
+Proof:
+1. Construct K(A,I) as the mapping fibre of A[0] to global sections of the concrete
+   Godement resolution on Spec A minus V(I). The germ augmentation is a chain map,
+   so the mapping fibre and its projection contain no postponed data.
+2. Apply ringComplex_godement_functorial. Its semilinear maps commute with the
+   differentials and augmentations and satisfy the strict identity and composition
+   equations, giving the first four clauses.
+3. Apply ringComplex_godement_cech. Principal intersections are affine and their
+   structure-sheaf sections are the specified localizations. Godement flasqueness
+   and affine acyclicity give the augmented comparison through the finite ordered
+   Cech double total. Mapping fibres give the final clause, including the signs
+   and the projection onto A in degree zero.
+4. Given p:P to K(A,I) a K-flat resolution, transport this augmented Cech model to
+   P by composing its derived comparison with the inverse of Q(p). Construct E by
+   the actual scalar-extension functor, and chi by extending the semilinear maps
+   m after p. The extension/restriction adjunction proves its value on 1 tensor x.
+   Pure-tensor extensionality proves its chain equation with the stipulated
+   changeOfRingsHom differential.
+5. Apply ringComplex_cech_baseChange_quasiIso to P and K(B,J). The required
+   augmentation equality follows from step 2 and the pure-tensor formula. This
+   comparison uses the fraction base-change isomorphism of the bounded flat Cech
+   model. Its augmentation determines the induced derived map by the
+   local-cohomology coreflection (Stacks, Tags 0A6R and 0ALZ), so that map is
+   invertible. K-flatness identifies ordinary scalar extension with derived scalar
+   extension. Thus chi is a quasi-isomorphism and Q(chi) is invertible.
+6. The term isomorphisms for E are identities by its construction, and the proved
+   pure-tensor formula is exactly the last equation in the base-change clause.
+   Assemble these data with the first four clauses and the model from step 3.
+   Empty lists, zero rings, and zero or repeated generators are included. -/
 theorem exists_functorial_ringComplex
     [∀ A : CommRingCat.{u}, HasDerivedCategory.{w} (RingSiteModules A)] :
     ∃ (K : ∀ A : CommRingCat.{u}, {I : Ideal A // I.FG} →
@@ -186,6 +170,31 @@ theorem exists_functorial_ringComplex
                     (op ⟨PUnit.unit⟩) x = e₀ x) ∧
           ∃ α : DerivedCategory.Q.obj C ≅ DerivedCategory.Q.obj (K A I),
             α.hom ≫ DerivedCategory.Q.map (ε A I) = DerivedCategory.Q.map a) := by
-  sorry
+  let K : RingComplexFamily.{u} := fun A I ↦ ringComplexGodement A I.val
+  let ε : RingComplexAugmentations K := fun A I ↦ ringComplexGodementAugmentation A I.val
+  obtain ⟨m, hm⟩ := ringComplex_godement_functorial.{u}
+  have hC (A : CommRingCat.{u}) (I : {I : Ideal A // I.FG}) :
+      RingComplexHasCechModel A I.val (K A I) (ε A I) := ringComplex_godement_cech A I
+  refine ⟨K, ε, m, hm.1, hm.2.1, hm.2.2.1, hm.2.2.2, ?_, hC⟩
+  intro A B φ I J h P p hP hp
+  let E := ringComplexExtensionComplex φ P
+  let χ := ringComplexExtendAlong φ K m I J h (hm.1 A B φ I J h) P p
+  have hCP : RingComplexHasCechModel A I.val P (p ≫ ε A I) :=
+    ringComplexHasCechModel_of_quasiIso (ε A I) p hp (hC A I)
+  have hχ : QuasiIso χ := by
+    apply ringComplex_cech_baseChange_quasiIso A B φ I J h
+      P (K B J) (p ≫ ε A I) (ε B J) hCP (hC B J) hP χ
+    intro x
+    dsimp only [χ]
+    rw [ringComplexExtendAlong_one_tmul]
+    exact (hm.2.1 A B φ I J h _).trans (by rfl)
+  refine ⟨E, fun n ↦ Iso.refl _, ?_, χ, ?_, ?_⟩
+  · intro n k
+    simp only [Iso.refl_hom, Category.comp_id, Category.id_comp]
+    rfl
+  · exact (DerivedCategory.isIso_Q_map_iff_quasiIso _ χ).2 hχ
+  · intro n x
+    simp only [Iso.refl_inv, SheafOfModules.id_val, PresheafOfModules.id_app]
+    exact ringComplexExtendAlong_one_tmul φ K m I J h (hm.1 A B φ I J h) P p n x
 
 end AlgebraicGeometry

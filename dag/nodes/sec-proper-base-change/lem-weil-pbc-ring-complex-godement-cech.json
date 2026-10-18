@@ -1,0 +1,203 @@
+{
+ "id": "lem-weil-pbc-ring-complex-godement-cech",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Tag 099D(d); cohomology.tex Tags 0FKS, 09SZ, 01ET, 01EQ, 01FJ, 01FM",
+   "via": [
+    "lem-weil-pbc-ring-complex-functorial",
+    "lem-weil-pbc-extended-cech-completion-model",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Augmented ordered localization model of the Godement ring complex",
+ "statement": "Let $A$ be a commutative ring and $I\\subset A$ a finitely generated ideal. Assume the ordinary derived category $D(A)$ of [def-weil-abstract-derived-category] in the indicated universe. The actual augmented Godement mapping fibre $(K(A,I),\\epsilon_{A,I})$ of [def-weil-pbc-ring-complex-godement-construction] satisfies $\\operatorname{RingComplexHasCechModel}(A,I,K(A,I),\\epsilon_{A,I})$ of [def-weil-pbc-ring-complex-cech-data]. Thus every finite generating list, including the empty list, gives the precise ordered product-localization coordinates, alternating differential, negative-degree vanishing and degree-zero identity augmentation, together with an augmentation-compatible isomorphism to $K(A,I)$ in $D(A)$.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099D(d); cohomology.tex Tags 0FKS, 09SZ, 01ET, 01EQ, 01FJ, 01FM"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ring-complex-cech-data",
+  "def-weil-pbc-ring-complex-godement-construction",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "For a list f spanning I, cover the open complement by the principal opens D(f_i). Each ordered intersection is D(product f_i) and is affine; its structure-module sections are the corresponding localization. The restriction maps are the unique algebra maps between those localizations.",
+   "uses": [
+    "def-weil-pbc-ring-complex-godement-construction",
+    "lem-weil-pbc-principal-localization-open-immersion",
+    "lem-weil-pbc-spec-module-tilde-sections",
+    "lem-weil-pbc-spec-tilde-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099D"
+   }
+  },
+  {
+   "text": "The specified Godement augmentation is a quasi-isomorphism and its terms are flasque. On each affine intersection the structure module has vanishing positive cohomology, while every Godement term is acyclic for sections. The bounded-below acyclic-resolution comparison therefore makes the section augmentation a quasi-isomorphism.",
+   "uses": [
+    "lem-sc-module-cup-godement-model-quasi-iso",
+    "lem-sc-module-cup-godement-object-flasque",
+    "pqf-lem-affine-vanishing",
+    "lem-sc-module-cup-flasque-acyclicity",
+    "src-right-derived-functor-plus-acyclic-unit",
+    "lem-sc-ringed-space-module-sheaves-enough-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 0FKS, 01ET; affine and flasque acyclicity"
+   }
+  },
+  {
+   "text": "Apply the finite ordered flasque-Cech comparison, giving a roof between Godement global sections and the finite localization Cech complex through its double total, with the degree-zero augmentation square. Take mapping fibres of the maps from A[0]. Identity on A and quasi-isomorphism on sections give quasi-isomorphism on fibres by the long exact homology sequence. The localization fibre has the requested coordinates; change the signs of successive positive-degree coordinates to match the inverse-rotation convention. The projection is identity on A. Invert this roof in D(A), retaining the augmentation square. For r=0 the open is empty, the section complexes vanish and the same fibre is A[0]; zero and repeated generators and the zero ring use these same formulas.",
+   "uses": [
+    "def-weil-pbc-ring-complex-cech-data",
+    "def-weil-pbc-ring-complex-godement-construction",
+    "lem-weil-pbc-finite-ordered-flasque-cech-comparison",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099D"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ring-complex-godement-construction",
+  "lem-weil-pbc-principal-localization-open-immersion",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "lem-weil-pbc-spec-tilde-free-module",
+  "lem-sc-module-cup-godement-model-quasi-iso",
+  "lem-sc-module-cup-godement-object-flasque",
+  "pqf-lem-affine-vanishing",
+  "lem-sc-module-cup-flasque-acyclicity",
+  "src-right-derived-functor-plus-acyclic-unit",
+  "lem-sc-ringed-space-module-sheaves-enough-injectives",
+  "def-weil-pbc-ring-complex-cech-data",
+  "lem-weil-pbc-finite-ordered-flasque-cech-comparison",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 099D(d); cohomology.tex Tags 0FKS, 09SZ, 01ET, 01EQ, 01FJ, 01FM"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite ordered localization Cech model is quasi isomorphic to the mapping fibre of Godement sections",
+   "results": "HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso; DerivedCategory.instIsLocalizationHomotopyCategoryIntUpQhQuasiIso; DerivedCategory.instIsIsoMapCochainComplexIntQ; HomotopicalAlgebra.CofibrantObject.HoCat.toLocalization; HasDerivedCategory.standard; ComplexShape.quotient_isLocalization; DerivedCategory.Q; HomologicalComplexUpToQuasiIso.quotientCompQhIso",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global sections of a flasque Godement resolution compared to a finite ordered Cech complex",
+   "results": "CategoryTheory.plusPlusSheaf_obj_val; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g; CategoryTheory.GrothendieckTopology.Plus.toPlus_eq_mk; CategoryTheory.GrothendieckTopology.Plus.exists_rep; CategoryTheory.plusPlusSheaf_map_val",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "localCohomology|Cech|Godement",
+   "results": "No Godement declaration. LocalCohomology.lean lines 42-48 explicitly leave the Cech characterization as future work; its constructions are Ext-colimit functors for a fixed ring. AlternatingFaceMapComplex.lean supplies the general alternating coface functor, not ring-varying sections.",
+   "date": "2026-10-18",
+   "verdict": "no exact match; use the named general constructions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingComplexFunctorial",
+  "date": "2026-10-18",
+  "group": "A3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingComplexGodementCech",
+  "file": "lean/Sheaf/Paper/RingComplexGodementCech.lean",
+  "declaration": "AlgebraicGeometry.ringComplex_godement_cech",
+  "declarations": [
+   "AlgebraicGeometry.ringComplex_godement_cech"
+  ],
+  "statement": "theorem ringComplex_godement_cech (A : CommRingCat.{u})\n    [HasDerivedCategory.{w} (RingSiteModules A)] (I : {I : Ideal A // I.FG}) :\n    RingComplexHasCechModel A I.val (ringComplexGodement A I.val)\n      (ringComplexGodementAugmentation A I.val)",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-18"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-weil-pbc-ring-complex-godement-cech",
+  "worker": "stage3",
+  "summary": "Concrete component of the decomposition of Sheaf.Paper.RingComplexFunctorial. The unchanged upper theorem is assembled in Lean from strict functoriality, augmented Godement-Cech comparison, and local augmented scalar extension; no target or existing definition changes.",
+  "blueprint": "Tag 099D(d); cohomology.tex Tags 0FKS, 09SZ, 01ET, 01EQ, 01FJ, 01FM",
+  "tool_uses": [
+   {
+    "node": "lem-sc-module-cup-godement-model-quasi-iso",
+    "why": "Generic Stalkwise exactness of the concrete Godement model used only as a tool in the ring-level completion construction; no node of this unit supplies this statement, and no step of the proper-base-change unit is replaced."
+   },
+   {
+    "node": "lem-sc-module-cup-godement-object-flasque",
+    "why": "Generic Flasqueness of the product of module stalk skyscrapers used only as a tool in the ring-level completion construction; no node of this unit supplies this statement, and no step of the proper-base-change unit is replaced."
+   },
+   {
+    "node": "pqf-lem-affine-vanishing",
+    "why": "Generic Vanishing of higher cohomology on affines used only as a tool in the ring-level completion construction; no node of this unit supplies this statement, and no step of the proper-base-change unit is replaced."
+   },
+   {
+    "node": "lem-sc-module-cup-flasque-acyclicity",
+    "why": "Generic Module-valued flasque acyclicity used only as a tool in the ring-level completion construction; no node of this unit supplies this statement, and no step of the proper-base-change unit is replaced."
+   },
+   {
+    "node": "src-right-derived-functor-plus-acyclic-unit",
+    "why": "Generic The bounded-below derived unit is invertible on right-acyclic complexes used only as a tool in the ring-level completion construction; no node of this unit supplies this statement, and no step of the proper-base-change unit is replaced."
+   },
+   {
+    "node": "lem-sc-ringed-space-module-sheaves-enough-injectives",
+    "why": "Enough injectives for module sheaves on an arbitrary ringed space is the categorical hypothesis for the bounded-below acyclic-resolution comparison on each principal affine intersection; the proper-base-change unit has no replacement for this general tool."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261018T091356-L-3252795",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261018T091356-L-3252795",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

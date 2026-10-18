@@ -10,112 +10,58 @@
  "mathlib_match": null,
  "proof": [
   {
-   "text": "Use the concrete Godement monad $T_X(F)(V)=\\prod_{x\\in V}F_x$ of [def-sc-module-cup-godement-model]. For every scheme choose its actual alternating coface complex $G_X(F)^q=T_X^{q+1}(F)$ and germ augmentation, as supplied by [lem-sc-module-cup-godement-model-pairing-models-exist]. The existence theorem specifies the terms and cofaces, rather than an undetermined object. [lem-sc-module-cup-godement-model-quasi-iso] makes it a resolution, and [lem-sc-module-cup-godement-object-flasque], applied with $T_X^qF$ in place of $F$, makes every term flasque. In particular this applies to every open subscheme and to the empty scheme.",
+   "text": "Use the actual Godement mapping fibre K(A,I) and its augmentation. Choose the degreewise semilinear maps furnished by strict Godement functoriality. Its four equations give the first four clauses of the statement.",
    "uses": [
-    "def-sc-module-cup-godement-model",
-    "lem-sc-module-cup-godement-model-pairing-models-exist",
-    "lem-sc-module-cup-godement-model-quasi-iso",
-    "lem-sc-module-cup-godement-object-flasque"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0FKS (lemma-godement-resolution) and the monad construction immediately preceding it."
-   }
-  },
-  {
-   "text": "For a scheme morphism $h:Y\\to X$ and an $h$-linear coefficient map $F\\to h_*F'$, define the Godement map on $V$ by $(s_x)_{x\\in V}\\mapsto(u_y(s_{h(y)}))_{y\\in h^{-1}V}$, where $u_y:F_{h(y)}\\to F'_y$ is the induced stalk map. It commutes with restriction and the germ units: at $y$ both composites are the germ of the image of the same section. Iterate this formula, using the induced stalk map of the previous iterate; induction gives commutation with every unit-insertion coface and hence the alternating differential. For $Z\\xrightarrow{k}Y\\xrightarrow{h}X$ both component formulas select $s_{h(k(z))}$ and apply the composite stalk map. Thus the maps compose strictly, are identity for identity morphisms, and commute with augmentations. These are component calculations on the prescribed monad terms, not choices of separate resolution comparisons.",
-   "uses": [
-    "def-sc-module-cup-godement-model"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 0FKS construction; explicit component calculation for morphisms of schemes."
-   }
-  },
-  {
-   "text": "For a ring $A$ and finitely generated ideal $I$, put $U(A,I)=\\operatorname{Spec}(A)\\setminus V(I)$ and $J(A,I)^q=\\Gamma(U(A,I),G_{U(A,I)}(\\mathcal O)^q)$. Define $K(A,I)^0=A$, $K(A,I)^n=J(A,I)^{n-1}$ for $n\\geq1$, and zero below zero. Define $d^0$ by restriction of $a\\in A$ followed by the germ augmentation and $d^n=d_J^{n-1}$ for $n\\geq1$. Then $d^1d^0=0$ by the augmentation identity and all other $d^2=0$ by Step 1. The augmentation to $A[0]$ is identity in degree zero and zero otherwise. A map $\\varphi:A\\to B$ gives $U(B,IB)\\to U(A,I)$ because a prime of $B$ avoids $IB$ exactly when its inverse image avoids $I$. Use $\\varphi$ in degree zero and the maps of Step 2 in positive degrees. The differential, augmentation, identity and composition equations follow from those component equations. No generator list is selected in this construction.",
-   "uses": [
-    "def-sc-module-cup-godement-model",
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "def-weil-affine-spectrum"
+    "def-weil-pbc-ring-complex-godement-construction",
+    "lem-weil-pbc-ring-complex-godement-functorial",
+    "def-weil-pbc-ring-complex-cech-data"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 099D (lemma-all-rings), clauses (a),(b); replacement construction via Tag 0FKS."
+    "place": "Tag 099D"
    }
   },
   {
-   "text": "Fix $I=(f_1,\\ldots,f_r)$. The principal opens $V_i=D(f_i)$ cover $U=U(A,I)$; every nonempty intersection is $D(\\prod_{i\\in S}f_i)$ and is affine by [lem-weil-pbc-principal-localization-open-immersion]. The sections of the structure module on it are $A[1/\\prod_{i\\in S}f_i]$, with their stated restriction maps, by [lem-weil-pbc-spec-module-tilde-sections]. The structure module is quasi-coherent by [lem-weil-pbc-spec-tilde-free-module] with rank one. Its higher cohomology vanishes by [pqf-lem-affine-vanishing]. Godement terms on each intersection are flasque, so [lem-sc-module-cup-flasque-acyclicity] makes them section-acyclic. The category on each intersection is abelian with enough injectives by [lem-sc-ringed-space-module-sheaves-enough-injectives]. Restriction to an open is exact (kernels and images are checked on its unchanged stalks), preserves flasqueness by the restriction-surjectivity definition, and commutes with the augmentation. Global sections is additive and left exact because sections preserve kernels. The bounded-below acyclic-unit comparison [src-right-derived-functor-plus-acyclic-unit], applied to global sections on that intersection and the restricted Godement resolution, therefore identifies its section cohomology with that of the structure module, including the degree-zero augmentation. Thus the section augmentations required by [lem-weil-pbc-finite-ordered-flasque-cech-comparison] are quasi-isomorphisms. Apply that node to obtain the roof $L_f\\xrightarrow{\\beta}D_f\\xleftarrow{\\alpha}J(A,I)$, both arrows quasi-isomorphisms and both agreeing on the augmented map from $A$. The cover is finite and all complexes are nonnegative, so the total sums in each degree are finite.",
+   "text": "The Godement Cech comparison gives an augmented ordered localization model for each K(A,I), which is exactly the final clause of the statement.",
    "uses": [
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "pqf-lem-affine-vanishing",
-    "lem-sc-module-cup-flasque-acyclicity",
-    "src-right-derived-functor-plus-acyclic-unit",
-    "lem-weil-pbc-finite-ordered-flasque-cech-comparison",
-    "lem-sc-ringed-space-module-sheaves-enough-injectives",
-    "lem-weil-pbc-principal-localization-open-immersion",
-    "lem-weil-pbc-spec-tilde-free-module"
+    "lem-weil-pbc-ring-complex-godement-cech",
+    "def-weil-pbc-ring-complex-cech-data"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Godement Tag 0FKS (cohomology-lemma-godement-resolution); affine Tag 01I3 (schemes-lemma-standard-open-affine); quasi-coherent affine vanishing Tag 01XB (coherent-lemma-quasi-coherent-affine-cohomology-zero); Cech Tags 01ET, 01EQ and 01FJ; bounded-below acyclic-resolution comparison."
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 099D"
    }
   },
   {
-   "text": "Adjoin $A$ in degree zero to each complex of the preceding roof, shift its previous degree $q$ to degree $q+1$, and use its augmentation from $A$ for the new first differential, without changing the old differential signs. The left complex is exactly $C_A(f)$ and the right is exactly $K(A,I)$. The two maps to the middle augmented total are identity on $A$. Each map is a quasi-isomorphism by the following direct calculation. For any nonnegative complex $M$ with augmentation $a:A[0]\\to M$, its extension $E(M)=(A\\to M^0\\to M^1\\to\\cdots)$ satisfies $H^0(E(M))=\\ker(A\\to H^0(M))$, $H^1(E(M))=\\operatorname{coker}(A\\to H^0(M))$, and $H^n(E(M))=H^{n-1}(M)$ for $n\\geq2$, with zero negative cohomology. A quasi-isomorphism of $M$ commuting with $a$ induces isomorphisms on each of these kernels, cokernels and higher cohomology groups, since it is identity on $A$. Apply this calculation to $\\alpha$ and $\\beta$. Consequently [def-weil-abstract-derived-category] inverts both maps and gives the desired augmentation-compatible derived isomorphism $C_A(f)\\cong K(A,I)$. For a map $A\\to B$, use the same indexed list $\\varphi(f_i)$ on $B$. Restrictions, germs and the component maps of Step 2 commute, so the naturality clause of the comparison node gives commuting squares for both arrows of the augmented roof. The resulting derived isomorphisms intertwine the actual chain map $K(A,I)\\to K(B,IB)$ with the componentwise localization map on $C(f)$.",
+   "text": "For a K-flat resolution p:P to K(A,I), construct E as the actual termwise scalar extension functor and chi as the semilinear composite m after p, extended by adjunction. The pure-tensor normalization and differential formula are proved by the explicit lifting API. Transport the augmented Cech model backwards across p by composing its derived isomorphism with the inverse of Q(p). Apply the two-complex Cech base-change theorem, whose augmentation equation follows from functorial augmentation compatibility and the normalization. Thus chi is a quasi-isomorphism, so Q(chi) is invertible, as required.",
    "uses": [
-    "lem-weil-pbc-finite-ordered-flasque-cech-comparison",
+    "def-weil-pbc-ring-complex-semilinear-extension",
+    "def-weil-pbc-ring-complex-cech-data",
+    "lem-weil-pbc-ring-complex-cech-base-change",
     "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 099D(d), algebraization-lemma-all-rings, proved with the component-defined Cech roof and the displayed elementary cohomology calculation."
-   }
-  },
-  {
-   "text": "Every term of $C_A(f)$ is a finite sum of localizations or $A$, hence flat: [lem-weil-pbc-localization-flat] gives flatness of each localization; tensoring a finite sum is the corresponding finite sum of tensor functors, and preserves kernels and cokernels componentwise. Since $C_A(f)$ vanishes above $r$, [lem-pc-bounded-above-flat-kflat-site] on the one-object site makes it K-flat. It therefore represents the derived tensor after the isomorphism of Step 5. For $g=\\prod_{i\\in S}f_i$, the map $A[1/g]\\otimes_A B\\to B[1/\\varphi(g)]$, $(a/g^m)\\otimes b\\mapsto\\varphi(a)b/\\varphi(g)^m$, is an isomorphism; its inverse sends $b/\\varphi(g)^m$ to $(1/g^m)\\otimes b$. The localization relations and tensor balancing verify both formulas, even if a denominator becomes zero. Apply these isomorphisms to every finite summand and identity in degree zero. They commute with each alternating localization differential, giving $C_A(f)\\otimes_A B\\cong C_B(\\varphi(f))$ as augmented complexes. By the commuting roof squares of Step 5 this is the induced derived map of the statement, not a separately chosen isomorphism. It proves clause (c) for arbitrary $B$, without flatness or Noetherianity. If $r=0$ then $I=0$, $U$ is empty, $J=0$, and $K=C=A[0]$ literally; the same reasoning includes the zero ring and repeated or zero generators.",
-   "uses": [
-    "lem-weil-pbc-localization-flat",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "def-pc-kflat-complex",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tag 099D(c), with localization fraction calculation and Tag 06YQ (lemma-bounded-flat-K-flat)."
+    "place": "Tag 099D"
    }
   }
  ],
  "proof_deps": [
-  "def-sc-module-cup-godement-model",
-  "lem-sc-module-cup-godement-model-pairing-models-exist",
-  "lem-sc-module-cup-godement-model-quasi-iso",
-  "lem-sc-module-cup-godement-object-flasque",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "def-weil-affine-spectrum",
-  "pqf-lem-affine-vanishing",
-  "lem-sc-module-cup-flasque-acyclicity",
-  "src-right-derived-functor-plus-acyclic-unit",
-  "lem-weil-pbc-finite-ordered-flasque-cech-comparison",
-  "lem-sc-ringed-space-module-sheaves-enough-injectives",
-  "lem-weil-pbc-principal-localization-open-immersion",
-  "lem-weil-pbc-spec-tilde-free-module",
-  "def-weil-abstract-derived-category",
-  "lem-weil-pbc-localization-flat",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "def-pc-kflat-complex",
-  "def-pc-tensor-complex-sheaves"
+  "def-weil-pbc-ring-complex-godement-construction",
+  "lem-weil-pbc-ring-complex-godement-functorial",
+  "def-weil-pbc-ring-complex-cech-data",
+  "lem-weil-pbc-ring-complex-godement-cech",
+  "def-weil-pbc-ring-complex-semilinear-extension",
+  "lem-weil-pbc-ring-complex-cech-base-change",
+  "def-weil-abstract-derived-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebraization.tex",
-  "place": "Tag 099D(a)-(d); replaces the incorrect injective-evaluation inference by the concrete Godement construction of Tag 0FKS and the finite Cech double-complex comparison."
+  "place": "Tag 099D(a)-(d): actual Godement mapping fibre, normalized scalar extension, and three separate obligations. Base change is identified from augmentation using dualizing.tex Tags 0A6R and 0ALZ."
  },
  "id": "lem-weil-pbc-ring-complex-functorial",
  "blueprint": {
@@ -313,5 +259,15 @@
   "by": "NZ",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261018T091356-L-3252795",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

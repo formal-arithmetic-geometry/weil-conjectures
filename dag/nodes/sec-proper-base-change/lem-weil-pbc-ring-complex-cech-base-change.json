@@ -1,0 +1,188 @@
+{
+ "id": "lem-weil-pbc-ring-complex-cech-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Tag 099D(c); dualizing.tex Tags 0A6R and 0ALZ, with the augmentation uniqueness argument expanded",
+   "via": [
+    "lem-weil-pbc-ring-complex-functorial",
+    "lem-weil-pbc-extended-cech-completion-model",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Augmentation-compatible base change for two ordered localization models",
+ "statement": "Let $\\varphi:A\\to B$ be a homomorphism of commutative rings and let $I\\subset A$, $J\\subset B$ be finitely generated ideals with $\\varphi(I)B=J$. Let $(P,\\epsilon_P:P\\to A[0])$ and $(L,\\epsilon_L:L\\to B[0])$ be augmented integer cochain complexes of module sheaves on the one-object bottom sites. Assume the ordinary derived categories [def-weil-abstract-derived-category], the augmented ordered localization-model properties $\\operatorname{RingComplexHasCechModel}(A,I,P,\\epsilon_P)$ and $\\operatorname{RingComplexHasCechModel}(B,J,L,\\epsilon_L)$ of [def-weil-pbc-ring-complex-cech-data], and acyclic-tensor K-flatness of $P$ [def-pc-kflat-complex]. Let $E_\\varphi P$ be the actual termwise scalar extension of [def-weil-pbc-ring-complex-semilinear-extension]. If $\\chi:E_\\varphi P\\to L$ is a cochain map such that $\\epsilon_L(\\chi(1\\otimes x))=\\varphi(\\epsilon_P(x))$ for every degree-zero section $x$ of $P$, where $1\\otimes x$ is sent into the sheafification by its actual unit, then $\\chi$ is a quasi-isomorphism. Only these two complexes and this single augmentation equation are assumed; no functorial family occurs.",
+ "source": {
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tags 0A6R (lemma-local-cohomology-adjoint), 0ALZ (lemma-torsion-change-rings), and algebraization.tex Tag 099D(c)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ring-complex-cech-data",
+  "def-weil-pbc-ring-complex-semilinear-extension",
+  "def-pc-kflat-complex",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite list generating I. The ordered localization complex is bounded because there are no increasing tuples longer than the list. Each term is flat: finite products equal finite direct sums and localization is flat. Thus it is K-flat. Use the two augmented derived model isomorphisms. Since P is K-flat, its ordinary scalar extension computes its derived extension. More explicitly, represent the augmented derived model isomorphism by a common cochain roof. Replace its source by a K-flat resolution. Both composite legs are quasi-isomorphisms between K-flat complexes, so changeOfRings_kFlat_quasiIso preserves them for the actual additive scalar-extension functor; its object and map equations are definitional. Inverting these legs gives the derived extension comparison, including its augmentation equation.",
+   "uses": [
+    "def-weil-pbc-ring-complex-cech-data",
+    "lem-weil-pbc-localization-flat",
+    "lem-pc-bounded-above-flat-kflat-site",
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-kflat-resolution",
+    "lem-pur-change-of-rings-kflat-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ; algebraization.tex Tag 099D(c)"
+   }
+  },
+  {
+   "text": "For each product g of generators the isomorphism B tensor_A A[1/g] to B[1/phi(g)] sends b tensor a/g^n to b phi(a)/phi(g)^n; the inverse sends b/phi(g)^n to b tensor 1/g^n. Tensor balancing and the localization relations verify the inverses even when phi(g)=0. The isomorphisms commute with the localization face maps and augmentations, yielding an augmented cochain isomorphism E(C_A(f)) to C_B(phi(f)).",
+   "uses": [
+    "lem-weil-pbc-localization-base-change",
+    "def-weil-pbc-ring-complex-semilinear-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0ALZ (lemma-torsion-change-rings); algebra.tex Tag 00DK"
+   }
+  },
+  {
+   "text": "For C_B, composition with C_B to B[0] is a bijection Hom(T,C_B) to Hom(T,B[0]) for every derived complex T which becomes zero after localization at each image generator. Indeed the cone is a finite iterated extension of shifts of localization modules. By the extension/restriction adjunction, all shifted Hom groups from T into each of these modules vanish: the localization of T is zero and localization is flat. The finite triangle exact sequences then give bijectivity. Inverting one generator contracts C_B by inserting/deleting that index with its ordered sign; hence E(P), which is isomorphic to E(C_A), satisfies this support condition. The augmentation equation in the statement is equality of the two actual augmented cochain maps by linearity on pure tensors. Under the augmented derived comparisons it therefore identifies chi with the isomorphism in the previous step, by bijectivity. Consequently chi is a quasi-isomorphism. For an empty list C=A[0], and a zero denominator gives the zero localization, so all edge cases obey the same argument.",
+   "uses": [
+    "def-weil-pbc-ring-complex-cech-data",
+    "def-weil-pbc-ring-complex-semilinear-extension",
+    "def-weil-abstract-derived-category",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/dualizing.tex",
+    "place": "Tag 0A6R (lemma-local-cohomology-adjoint) and Tag 0ALZ; sites-cohomology.tex Tag 07A6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ring-complex-cech-data",
+  "lem-weil-pbc-localization-flat",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pc-kflat-resolution",
+  "lem-pur-change-of-rings-kflat-quasi-iso",
+  "lem-weil-pbc-localization-base-change",
+  "def-weil-pbc-ring-complex-semilinear-extension",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/dualizing.tex",
+  "place": "Tag 099D(c); dualizing.tex Tags 0A6R and 0ALZ, with the augmentation uniqueness argument expanded"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Augmented local cohomology Cech complex scalar extension along any ring homomorphism is quasi isomorphism",
+   "results": "HomologicalComplex.quasiIsoAt_extendMap_iff; CategoryTheory.ShortComplex.QuasiIso.isIso; HomologicalComplex.quasiIso_extendMap_iff; IsLocalization.mapExtendScalars_eq_toLinearMap_mapₐ; HomologicalComplex.instQuasiIsoExtendMap; CochainComplex.truncateAugment; CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactors; AlgHom.extendScalars",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The augmented localization complex is the local cohomology coreflection and commutes with derived base change",
+   "results": "localCohomology.diagram; CategoryTheory.Functor.isHomological_of_localization; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory; CategoryTheory.Functor.mapDerivedCategoryFactors; CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory; DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorEquiv|tensorRightEquiv|localCohomology",
+   "results": "IsLocalization.Away.tensorEquiv and tensorRightEquiv give the termwise base-change algebra isomorphisms. LocalCohomology.lean does not supply the augmented derived Cech coreflection or the normalized complex comparison.",
+   "date": "2026-10-18",
+   "verdict": "no exact match; use the named general constructions"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingComplexFunctorial",
+  "date": "2026-10-18",
+  "group": "A3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingComplexCechBaseChange",
+  "file": "lean/Sheaf/Paper/RingComplexCechBaseChange.lean",
+  "declaration": "AlgebraicGeometry.ringComplex_cech_baseChange_quasiIso",
+  "declarations": [
+   "AlgebraicGeometry.ringComplex_cech_baseChange_quasiIso"
+  ],
+  "statement": "theorem ringComplex_cech_baseChange_quasiIso\n    (A B : CommRingCat.{u}) [HasDerivedCategory.{w} (RingSiteModules A)]\n    [HasDerivedCategory.{w} (RingSiteModules B)] (φ : A →+* B)\n    (I : {I : Ideal A // I.FG}) (J : {J : Ideal B // J.FG})\n    (h : I.val.map φ = J.val)\n    (P : CochainComplex (RingSiteModules A) ℤ)\n    (L : CochainComplex (RingSiteModules B) ℤ)\n    (εP : P ⟶ ringComplexSingle A) (εL : L ⟶ ringComplexSingle B)\n    (hCA : RingComplexHasCechModel A I.val P εP)\n    (hCB : RingComplexHasCechModel B J.val L εL)\n    (hP : P.IsAcyclicTensorKFlat) (χ : ringComplexExtensionComplex φ P ⟶ L)\n    (hε : ∀ x : (P.X 0).val.obj (op ⟨PUnit.unit⟩),\n      ringComplexAugmentationValue εL\n          ((χ.f 0).val.app (op ⟨PUnit.unit⟩)\n            ((toSheafify ⊥ (SheafOfModules.changeOfRingsPresheaf\n              (ringSiteMap φ) (P.X 0)).presheaf).app (op ⟨PUnit.unit⟩)\n                ((1 : B) ⊗ₜ[A, φ] x))) = φ (ringComplexAugmentationValue εP x)) :\n    QuasiIso χ",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-18"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-weil-pbc-ring-complex-cech-base-change",
+  "worker": "stage3",
+  "summary": "Concrete component of the decomposition of Sheaf.Paper.RingComplexFunctorial. The unchanged upper theorem is assembled in Lean from strict functoriality, augmented Godement-Cech comparison, and local augmented scalar extension; no target or existing definition changes.",
+  "blueprint": "Tag 099D(c); dualizing.tex Tags 0A6R and 0ALZ, with the augmentation uniqueness argument expanded",
+  "tool_uses": [
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic Bounded-above flat complexes on a ringed site are K-flat used only as a tool in the ring-level completion construction; no node of this unit supplies this statement, and no step of the proper-base-change unit is replaced."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Use the generic site K-flat resolution to replace the source of a common derived roof. No step of the Picard unit is replaced."
+   },
+   {
+    "node": "lem-pur-change-of-rings-kflat-quasi-iso",
+    "why": "Use the generic preservation theorem for actual scalar extension between K-flat complexes. No smooth-purity statement or proof step is replaced."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261018T091356-L-3252795",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261018T091356-L-3252795",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

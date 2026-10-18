@@ -1,0 +1,171 @@
+{
+ "id": "lem-weil-pbc-ring-complex-godement-model-maps",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Godement-coordinate part of Tag 099D(a),(b), implemented with cohomology.tex Tag 0FKS",
+   "via": [
+    "lem-weil-pbc-ring-complex-functorial",
+    "lem-weil-pbc-extended-cech-completion-model",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Strict coordinate-induced maps of the prescribed Godement models",
+ "statement": "For a scheme $X$, let $G_X$ and $a_X:\\mathcal O_X[0]\\to J_X$ be the prescribed Godement cosimplicial model and its extended alternating-coface augmentation [def-weil-pbc-ring-complex-godement-construction]. Let $e_X:J_X^0\\simeq G_X^0$ be its extension identification [lem-sc-module-cup-godement-cosimplicial-input]. There is a choice, for every morphism $f:Y\\to X$ and module morphism $q:\\mathcal O_X\\to f_*\\mathcal O_Y$, of a cosimplicial module morphism $g(f,q):G_X\\to f_*G_Y$ satisfying the following equations in every simplex degree $n$. For the identity and the canonical $q:\\mathcal O_X\\to (\\mathrm{id}_X)_*\\mathcal O_X$, $g(\\mathrm{id},q)^n$ is the canonical inverse pushforward-identity identification on $G_X^n$. For $k:Z\\to Y$ and $r:\\mathcal O_Y\\to k_*\\mathcal O_Z$, writing $c:f_*k_*\\simeq(f\\circ k)_*$ for the pushforward-composition identification, one has $g(f\\circ k,c\\,f_*r\\,q)^n=c\\,f_*g(k,r)^n\\,g(f,q)^n$. Finally $g(f,q)^0e_Xa_X^0=f_*(e_Ya_Y^0)q$. The family includes empty schemes and requires no quasi-isomorphism or flasqueness hypotheses. The same family admits extended cochain maps $l(f,q):J_X\\to f_*J_Y$ whose component in a nonnegative degree $m$ is $f_*((e_Y^m)^{-1})g(f,q)^m e_X^m$, where $e_X^m:J_X^m\\simeq G_X^m$ are the corresponding extension identifications. Their actual chain-augmentation equation is $l(f,q)^0a_X^0=f_*(a_Y^0)q$. In every integer degree they satisfy the same pushforward-identity and pushforward-composition equations as $g$, with $G_X^n$ replaced by $J_X^n$.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0FKS, coordinate product-of-stalks construction; Banerjee Section 1.1.4"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-ring-complex-godement-construction",
+  "lem-sc-module-cup-godement-cosimplicial-input"
+ ],
+ "proof": [
+  {
+   "text": "For a scheme map f and coefficient map q, use the existing coordinate-induced stalk map and product lift from the Godement f-map construction. Represent a stalk section by a germ; its image germ is the coefficient image on the inverse-image open. This proves identity and composition on stalks. Project to each skyscraper coordinate to get identity and composition for the product lift, then induct on the number of iterates.",
+   "uses": [
+    "new-module-cup-godement-fmap-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0FKS, coordinate product-of-stalks construction"
+   }
+  },
+  {
+   "text": "Use modelMap for the prescribed models, whose components are the iterated maps conjugated by the specified term equalities. Its existing proof gives naturality for cofaces and codegeneracies. The inverse equality transports cancel for compositions; naturality of pushforwardComp identifies the remaining composite with the iterated composite from step 1. Naturality of pushforwardId gives the identity equation. The existing modelMap_augmentation gives the actual degree-zero germ equation. Package the maps for all schemes, morphisms and coefficient maps simultaneously.",
+   "uses": [
+    "new-module-cup-godement-fmap-models",
+    "def-weil-pbc-ring-complex-godement-construction",
+    "lem-sc-module-cup-godement-cosimplicial-input"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0FKS, coordinate product-of-stalks construction"
+   }
+  },
+  {
+   "text": "Apply the existing crossMap construction to the cosimplicial maps. Its natural-degree formula is the source extension identification, followed by g, followed by the pushed-forward inverse target identification. For identities use naturality of pushforwardId and cancel these two identifications. For compositions cancel the middle source/target identifications and use naturality of pushforwardComp together with the cosimplicial composition equation. In negative degrees the source term is zero, so both equations are automatic. Postcompose the cosimplicial augmentation square with the pushed-forward inverse target identification; functoriality and the inverse equations give the actual cochain-augmentation equation.",
+   "uses": [
+    "new-module-cup-cosimplicial-fmap-summands",
+    "def-weil-pbc-ring-complex-godement-construction",
+    "lem-sc-module-cup-godement-cosimplicial-input"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 0FKS, coordinate product-of-stalks construction; Banerjee Section 1.1.4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "new-module-cup-godement-fmap-models",
+  "def-weil-pbc-ring-complex-godement-construction",
+  "lem-sc-module-cup-godement-cosimplicial-input",
+  "new-module-cup-cosimplicial-fmap-summands"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 0FKS, coordinate product-of-stalks construction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Godement cosimplicial product of stalks maps preserve identity composition and germ augmentation across schemes",
+   "results": "AlgebraicGeometry.Scheme.Hom.stalkMap_id; AlgebraicGeometry.Scheme.germ_stalkClosedPointTo_Spec_fromSpecStalk; AlgebraicGeometry.Scheme.stalkMap_comp; AlgebraicGeometry.Scheme.Hom.stalkMap_comp; AlgebraicGeometry.Scheme.stalkMap_id; TopCat.Presheaf.stalkFunctor_map_germ_apply'; TopCat.Presheaf.stalkFunctor_map_germ_apply; AlgebraicGeometry.PresheafedSpace.stalkMap.id",
+   "date": "2026-10-18",
+   "verdict": "no Godement model-map family; reuse generic stalk and pushforward declarations"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strictly functorial maps of Godement cosimplicial models induced by a morphism of ringed spaces and a sheaf morphism",
+   "results": "AlgebraicGeometry.LocallyRingedSpace.comp_c_app; AlgebraicGeometry.SheafedSpace.comp_c_app'; CategoryTheory.Functor.mapPresheaf_map_c; AlgebraicGeometry.SheafedSpace.comp_hom_c_app'; AlgebraicGeometry.SheafedSpace.comp_hom_c_app; AlgebraicGeometry.SheafedSpace.comp_c_app; AlgebraicGeometry.SheafedSpace.Γ_map; CategoryTheory.plusPlusSheaf_map_val",
+   "date": "2026-10-18",
+   "verdict": "no Godement model-map family; reuse generic stalk and pushforward declarations"
+  },
+  {
+   "tool": "grep",
+   "query": "Godement|godement|stalkPushforward",
+   "results": "Mathlib/Geometry/RingedSpace/OpenImmersion.lean; Mathlib/Geometry/RingedSpace/Stalks.lean; Mathlib/Geometry/RingedSpace/Stalks.lean; Mathlib/Geometry/RingedSpace/Stalks.lean; Mathlib/Geometry/RingedSpace/Stalks.lean; Mathlib/Topology/Sheaves/Stalks.lean; Mathlib/Topology/Sheaves/Stalks.lean; Mathlib/Topology/Sheaves/Stalks.lean",
+   "date": "2026-10-18",
+   "verdict": "no Godement model-map family; reuse generic stalk and pushforward declarations"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingComplexFunctorial",
+  "date": "2026-10-18",
+  "group": "A3"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingComplexGodementModelMaps",
+  "file": "lean/Sheaf/Paper/RingComplexGodementModelMaps.lean",
+  "declaration": "AlgebraicGeometry.ringComplex_godement_model_maps",
+  "statement": "theorem ringComplex_godement_model_maps :\n    ∃ g : ∀ (X Y : Scheme.{u}) (f : Y ⟶ X),\n        (SheafOfModules.unit X.ringCatSheaf ⟶\n          (pushforward f).obj (SheafOfModules.unit Y.ringCatSheaf)) →\n        (ringComplexGodementModel X ⟶ ringComplexGodementModel Y ⋙ pushforward f),\n      (∀ (X : Scheme.{u}) (n : SimplexCategory),\n        (g X X (𝟙 X) ((pushforwardId X).inv.app\n          (SheafOfModules.unit X.ringCatSheaf))).app n =\n            (pushforwardId X).inv.app ((ringComplexGodementModel X).obj n)) ∧\n      (∀ (X Y Z : Scheme.{u}) (f : Y ⟶ X) (k : Z ⟶ Y)\n        (q : SheafOfModules.unit X.ringCatSheaf ⟶\n          (pushforward f).obj (SheafOfModules.unit Y.ringCatSheaf))\n        (r : SheafOfModules.unit Y.ringCatSheaf ⟶\n          (pushforward k).obj (SheafOfModules.unit Z.ringCatSheaf))\n        (n : SimplexCategory),\n        (g X Z (k ≫ f) (q ≫ (pushforward f).map r ≫\n          (pushforwardComp k f).hom.app (SheafOfModules.unit Z.ringCatSheaf))).app n =\n            (g X Y f q).app n ≫ (pushforward f).map ((g Y Z k r).app n) ≫\n              (pushforwardComp k f).hom.app ((ringComplexGodementModel Z).obj n)) ∧\n      (∀ (X Y : Scheme.{u}) (f : Y ⟶ X)\n        (q : SheafOfModules.unit X.ringCatSheaf ⟶\n          (pushforward f).obj (SheafOfModules.unit Y.ringCatSheaf)),\n        (ringComplexGodementUnit X).f 0 ≫\n            (moduleCup_cosimplicialZeroIso X (ringComplexGodementModel X)).hom ≫\n            (g X Y f q).app ⦋0⦌ =\n          q ≫ (pushforward f).map ((ringComplexGodementUnit Y).f 0 ≫\n            (moduleCup_cosimplicialZeroIso Y (ringComplexGodementModel Y)).hom)) ∧\n      ∃ l : ∀ (X Y : Scheme.{u}) (f : Y ⟶ X),\n          (SheafOfModules.unit X.ringCatSheaf ⟶\n            (pushforward f).obj (SheafOfModules.unit Y.ringCatSheaf)) →\n          (ringComplexGodementResolution X ⟶\n            ((pushforward f).mapHomologicalComplex (.up ℤ)).obj\n              (ringComplexGodementResolution Y)),\n        (∀ (X Y : Scheme.{u}) (f : Y ⟶ X)\n          (q : SheafOfModules.unit X.ringCatSheaf ⟶\n            (pushforward f).obj (SheafOfModules.unit Y.ringCatSheaf)) (n : ℕ),\n          (l X Y f q).f (n : ℤ) =\n            (((alternatingCofaceMapComplex X.Modules).obj\n              (ringComplexGodementModel X)).extendXIso\n                ComplexShape.embeddingUpNat (i := n) rfl).hom ≫ (g X Y f q).app ⦋n⦌ ≫\n            (pushforward f).map\n              ((((alternatingCofaceMapComplex Y.Modules).obj\n                (ringComplexGodementModel Y)).extendXIso\n                  ComplexShape.embeddingUpNat (i := n) rfl).inv)) ∧\n        (∀ (X Y : Scheme.{u}) (f : Y ⟶ X)\n          (q : SheafOfModules.unit X.ringCatSheaf ⟶\n            (pushforward f).obj (SheafOfModules.unit Y.ringCatSheaf)),\n          (ringComplexGodementUnit X).f 0 ≫ (l X Y f q).f 0 =\n            q ≫ (pushforward f).map ((ringComplexGodementUnit Y).f 0)) ∧\n        (∀ (X : Scheme.{u}) (n : ℤ),\n          (l X X (𝟙 X) ((pushforwardId X).inv.app\n            (SheafOfModules.unit X.ringCatSheaf))).f n =\n              (pushforwardId X).inv.app ((ringComplexGodementResolution X).X n)) ∧\n        (∀ (X Y Z : Scheme.{u}) (f : Y ⟶ X) (k : Z ⟶ Y)\n          (q : SheafOfModules.unit X.ringCatSheaf ⟶\n            (pushforward f).obj (SheafOfModules.unit Y.ringCatSheaf))\n          (r : SheafOfModules.unit Y.ringCatSheaf ⟶\n            (pushforward k).obj (SheafOfModules.unit Z.ringCatSheaf)) (n : ℤ),\n          (l X Z (k ≫ f) (q ≫ (pushforward f).map r ≫\n            (pushforwardComp k f).hom.app (SheafOfModules.unit Z.ringCatSheaf))).f n =\n              (l X Y f q).f n ≫ (pushforward f).map ((l Y Z k r).f n) ≫\n                (pushforwardComp k f).hom.app ((ringComplexGodementResolution Z).X n))",
+  "branch": "sheaf-dag",
+  "by": "A3",
+  "date": "2026-10-18"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-weil-pbc-ring-complex-godement-model-maps",
+  "worker": "stage3",
+  "summary": "Proved the strict cosimplicial-map part of the new ring-complex functoriality obligation; no new hole.",
+  "blueprint": "Godement-coordinate part of Tag 099D(a),(b), implemented with cohomology.tex Tag 0FKS",
+  "tool_uses": [
+   {
+    "node": "new-module-cup-godement-fmap-models",
+    "why": "Reuse the generic coordinate-induced Godement stalk/product maps and their model transport. Its cup-product applications and unit are not replaced; only its generic private constructions are used as proof tools."
+   },
+   {
+    "node": "lem-sc-module-cup-godement-cosimplicial-input",
+    "why": "Use the generic extension identification in degree zero of a cosimplicial complex; this does not replace the statement or a proof step of its cup-product unit."
+   },
+   {
+    "node": "new-module-cup-cosimplicial-fmap-summands",
+    "why": "Reuse its generic crossMap construction for alternating coface complexes and extension by zero; its cup-pairing unit remains untouched."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261018T091356-L-3252795",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261018T091356-L-3252795",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
