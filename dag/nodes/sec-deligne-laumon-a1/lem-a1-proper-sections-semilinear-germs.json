@@ -1,0 +1,87 @@
+{
+ "id": "lem-a1-proper-sections-semilinear-germs",
+ "kind": "statement",
+ "title": "Derived germs commute with semilinear transport on a proper geometric fibre",
+ "statement": "Fix the finite-field datum $p,a,q,k_0,k$ of [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ in the chosen algebraic closure $\\Qlb$, and $\\Lambda\\in\\{E,\\Qlb\\}$. Use the rationalized and common-stage categories of [def-weil-rationalization-karoubi, def-weil-algebraically-closed-coefficients]. Let $Y_0$ be proper of finite type over $k_0$ [def-weil-proper-morphism], put $Y=Y_0\\times_{k_0}k$, $s=\\operatorname{Spec}k$, and write $a_Y:Y\\to s$. Put $h=\\operatorname{Spec}(\\gamma)$ and $g=\\operatorname{id}_{Y_0}\\times h$, where $\\gamma=(c\\mapsto c^q)^{-1}$ [def-weil-frobenius-detailed]. Write $P_r=L(g^r)^*$ and $Q_r=L(h^r)^*$ for derived pullback [def-weil-derived-pullback-tensor-hom]. All pullback-composition comparisons are the scalar localizations of [lem-pod-integral-pullback-composition], and at $\\Qlb$ are represented at a common finite field stage.\n\nFor $M\\in D^b_c(Y,\\Lambda)$ put $C(M)=R\\Gamma_c(Y,M)$ [def-weil-ordinary-compact-cohomology]. Use the identity compactification of $a_Y$ to identify this with $R\\Gamma(Y,M)$ and to form $\\tau_{c,M}:C(M)\\to C(P_1M)$ [lem-pod-proper-coincidence-frobenius, def-weil-frobenius-cohomology-transport]. For a $k$-point $z:s\\to Y$ (a geometric point of [def-weil-geometric-point]), put $C_z(M)=\\operatorname{Fib}_s(Lz^*M)$ [def-weil-finite-coefficient-point]. Let $e_z^M:C(M)\\to C_z(M)$ be the derived germ: through $R\\Gamma_c\\cong R\\Gamma$, it is obtained by applying $\\operatorname{Fib}_sLz^*$ to the counit $La_Y^*Ra_{Y*}M\\to M$ [fix-prop-adjunctions], using $a_Yz=\\operatorname{id}_s$ and the canonical composition comparisons.\n\nFor $r\\geq1$ let $T(z)=gz h^{-1}$ and $z_r=T^r(z)=g^rz h^{-r}$, which are $k$-points. The equality $g^rz=z_rh^r$ and the specified pullback-composition comparisons give\n$$b_{r,z,M}:Q_rLz_r^*M\\xrightarrow{\\sim}Lz^*P_rM.$$\nLet $d_r:P_r\\xrightarrow{\\sim}P_1^{\\,r}$ be the iterated composition comparison. Define\n$$\\tau^{[r]}_{c,M}=C(d_{r,M}^{-1})\\circ\\tau_{c,P_1^{r-1}M}\\circ\\cdots\\circ\\tau_{c,M}:C(M)\\longrightarrow C(P_rM).$$\nFor $N\\in D^b_c(s,\\Lambda)$ let $I_N^{[r]}:\\operatorname{Fib}_s(N)\\to\\operatorname{Fib}_s(Q_rN)$ be the composite of the $r$ point transports $\\iota_N,\\iota_{Q_1N},\\ldots,\\iota_{Q_1^{r-1}N}$ [def-weil-frobenius-point-transport], followed by the specified composition comparison.\n\nThen the following identity holds in $D^b_{\\mathrm{fd}}(\\Lambda)$, naturally in $M$, for every $r\\geq1$ and every $k$-point $z$:\n$$e_z^{P_rM}\\circ\\tau^{[r]}_{c,M}=\\operatorname{Fib}_s(b_{r,z,M})\\circ I_{Lz_r^*M}^{[r]}\\circ e_{z_r}^M.$$\nNo Weil structure on $M$ is assumed. In particular the formula concerns the specified exchange-mate/point-transport composite, not an unspecified identification of coefficient spaces.",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.7), printed pp. 150-151, and (1.1.10)-(1.1.14), pp. 151-153, transport of structure on fibres and cohomology. Agent refinement: the explicit derived germ/point-transport identity for the exchange-mate definitions, including their iterates and common-stage rational coefficients, used in the first evaluation sentence of the parent blueprint proof."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-rationalization-karoubi",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-proper-morphism",
+  "def-weil-frobenius-detailed",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pod-integral-pullback-composition",
+  "def-weil-ordinary-compact-cohomology",
+  "lem-pod-proper-coincidence-frobenius",
+  "def-weil-frobenius-cohomology-transport",
+  "def-weil-geometric-point",
+  "def-weil-finite-coefficient-point",
+  "def-weil-frobenius-point-transport",
+  "fix-prop-adjunctions"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of sections at geometric stalks commutes with semilinear automorphism pullback and transport of structure on etale cohomology",
+   "results": "Smooth-manifold stalk evaluation and ModuleCat.Tilde localization maps; no derived pro-etale or compact-support transport statement.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of global sections along a semilinear automorphism evaluated at a geometric point is the transported evaluation at the image point",
+   "results": "Scheme.Γevaluation_naturality, Scheme.Γevaluation_naturality_apply and locally-ringed-space variants: structure-sheaf residue-field evaluation, not constructible coefficient complexes.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"stalk\", \"pullback\"",
+   "results": "TopCat.Presheaf.stalkPullbackIso and pullbackPushforwardAdjunction_unit_app_app_germToPullbackStalk, Mathlib/Topology/Sheaves/Stalks.lean:303-308,335-345, read. These use points of a topological space and ordinary presheaves; they do not give geometric point reparametrization, completed/rational coefficients or the specified compact-support exchange mate.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "semilinear.*stalk|stalk.*transport|Frobenius.*cohomology|compact.*germ AlgebraicGeometry",
+   "results": "No hits in Mathlib/AlgebraicGeometry.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The counit giving evaluation of derived global sections commutes with inverse image and reparametrization of a geometric point over a field automorphism",
+   "results": "Scheme.Γevaluation_naturality and its variants, Mathlib/AlgebraicGeometry/ResidueField: maps of structure sheaves and residue fields, not the specified derived coefficient transports.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-finite-weil-sections-decomposition",
+  "date": "2026-10-18",
+  "group": "Q140"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-thm-dl-a1-upper",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-finite-boundary-weights",
+   "place": "First sentence, evaluation at geometric points: compatibility of that evaluation with the geometric-Frobenius action used by the following weight argument. This node isolates the comparison of semilinear cohomology transport with point transport, without any Weil structure.",
+   "via": [
+    "lem-a1-finite-weil-sections-decomposition"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
