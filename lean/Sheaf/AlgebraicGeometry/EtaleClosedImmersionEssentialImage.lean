@@ -8,10 +8,9 @@ module
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Sheaf.AlgebraicGeometry.EtaleSupport
 public import Mathlib.CategoryTheory.EssentialImage
-import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
 import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
-import WeilConjectures.SixFunctors.OpenClosed.Stalk
+import WeilConjectures.SixFunctors.OpenClosed.Conservative
+import WeilConjectures.SixFunctors.OpenClosed.Vanishing
 
 /-!
 # Direct image along a closed immersion on abelian etale sheaves
@@ -57,6 +56,72 @@ theorem lowerStar_closedImmersion_fullyFaithful_leftInverse_essImage
       ∀ F : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1},
         (lowerStar AddCommGrpCat.{u + 1} i).essImage F ↔
           Scheme.etaleSheafSupport F ⊆ Set.range i.base := by
-  sorry
+  classical
+  let A := AddCommGrpCat.{u + 1}
+  let W : X.Opens := ⟨(Set.range i.base)ᶜ,
+    (IsClosedImmersion.isClosedEmbedding i).isClosed_range.isOpen_compl⟩
+  have hij : Set.range i.base = (Set.range W.ι.base)ᶜ := by
+    rw [Scheme.Opens.range_ι]
+    exact (compl_compl _).symm
+  have hji := disjoint_range_of_range_eq_compl W.ι i hij
+  refine ⟨inferInstance, inferInstance,
+    ⟨asIso (upperStarLowerStarAdjunction A i).counit⟩, fun F ↦ ?_⟩
+  -- Support in the closed image means that restriction to its open complement is zero.
+  have hsupport : Scheme.etaleSheafSupport F ⊆ Set.range i.base ↔
+      CategoryTheory.Limits.IsZero ((upperStar A W.ι).obj F) := by
+    constructor
+    · intro hF
+      apply ((Scheme.jointlyReflectIsomorphisms_ulift_pointSmallEtale W A).isZero_iff).2
+      rintro ⟨_, ⟨w⟩⟩
+      have hz : CategoryTheory.Limits.IsZero
+          ((Scheme.pointSmallEtale (W.toScheme.algClosurePoint w ≫ W.ι)).sheafFiber.obj F) := by
+        by_contra hn
+        have hm := hF (show (W.toScheme.algClosurePoint w ≫ W.ι) default ∈
+            Scheme.etaleSheafSupport F from
+          ⟨_, inferInstance, inferInstance, _, rfl, hn⟩)
+        have hw : (W.toScheme.algClosurePoint w ≫ W.ι) default ∈ Set.range W.ι.base :=
+          ⟨_, rfl⟩
+        exact (hij ▸ hm) hw
+      have hz' := hz.of_iso ((upperStarCompSheafFiberIso A W.ι
+        (W.toScheme.algClosurePoint w)).app F)
+      exact hz'.of_iso ((Scheme.pointSmallEtale (W.toScheme.algClosurePoint w)).uliftSheafFiberIso
+        A |>.app ((upperStar A W.ι).obj F))
+    · intro hF x hx
+      rcases hx with ⟨Ω, hΩ, hclosed, s, rfl, hn⟩
+      by_contra hs
+      have hm : s.base (IsLocalRing.closedPoint Ω) ∈ Set.range W.ι.base := by
+        rw [Scheme.Opens.range_ι]
+        change s (IsLocalRing.closedPoint Ω) ∉ Set.range i.base
+        have he : s (IsLocalRing.closedPoint Ω) = s default :=
+          congrArg s (Subsingleton.elim _ _)
+        rw [he]
+        exact hs
+      let t := IsOpenImmersion.lift W.ι s
+        (Scheme.range_base_subset_of_closedPoint_mem s hm)
+      have ht : t ≫ W.ι = s := IsOpenImmersion.lift_fac _ _ _
+      have hz := (Scheme.pointSmallEtale t).sheafFiber.map_isZero hF
+      have hz' := hz.of_iso ((upperStarCompSheafFiberIso A W.ι t).app F).symm
+      rw [ht] at hz'
+      exact hn hz'
+  constructor
+  · rintro ⟨G, ⟨e⟩⟩
+    apply hsupport.mpr
+    exact (isZero_upperStar_lowerStar_of_disjoint_range A W.ι i hji G).of_iso
+      ((upperStar A W.ι).mapIso e).symm
+  · intro hF
+    have hz := hsupport.mp hF
+    let η := (upperStarLowerStarAdjunction A i).unit.app F
+    have hη : IsIso η := by
+      apply isIso_of_isIso_upperStar_map A W.ι i hij η
+      · exact hz.isIso
+          (isZero_upperStar_lowerStar_of_disjoint_range A W.ι i hji
+            ((upperStar A i).obj F)) _
+      · change IsIso ((upperStar A i).map
+          ((upperStarLowerStarAdjunction A i).unit.app F))
+        rw [← IsIso.inv_eq_of_inv_hom_id
+          ((upperStarLowerStarAdjunction A i).left_triangle_components F)]
+        infer_instance
+    exact ⟨(upperStar A i).obj F, ⟨(asIso η).symm⟩⟩
 
 end AlgebraicGeometry.Etale
+
