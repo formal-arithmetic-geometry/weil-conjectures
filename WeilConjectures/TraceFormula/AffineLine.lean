@@ -445,6 +445,89 @@ theorem modelTraceFormula_of_isProper [IsAlgClosed k] {X₀ : Scheme.{u}}
   intro _ _ _
   exact WeilBoundedConstructible.traceFormula_of_isProper hΦ K hm
 
+variable (ℓ) in
+/-- **The degree one trace formula on an open subscheme of a model** (blueprint
+`sk-thm-trace-formula`, second paragraph of the proof): for an open immersion `j₀ : U₀ ⟶ X₀` with
+closed complement `i₀ : Z₀ ⟶ X₀`, the degree one trace formula over `X₀` gives the one over
+`U₀`. A model `U` of `U₀` is the open subscheme `U₀ ×_{X₀} X` of the standard model
+`X = X₀ ×_{k₀} k`, stable under the model Frobenius with a cartesian square, and
+`WeilBoundedConstructible.traceFormulaOne_of_isOpenImmersion` applies. -/
+theorem modelTraceFormulaOne_of_isOpenImmersion [IsAlgClosed k] {X₀ U₀ Z₀ : Scheme.{u}}
+    (f₀ : X₀ ⟶ Spec (.of k₀)) [LocallyOfFiniteType f₀] [QuasiCompact f₀] [IsSeparated f₀]
+    (j₀ : U₀ ⟶ X₀) (i₀ : Z₀ ⟶ X₀) [IsOpenImmersion j₀] [IsClosedImmersion i₀]
+    (hcompl : IsCompl (Set.range j₀.base) (Set.range i₀.base))
+    (h : ModelTraceFormulaOne ℓ (k := k) f₀) : ModelTraceFormulaOne ℓ (k := k) (j₀ ≫ f₀) := by
+  intro U _ _ _ ΦU pU hΦU K
+  obtain ⟨F₀, hF₀⟩ := Scheme.Hom.exists_isFrobenius f₀
+  obtain ⟨FU, hFU, hpU⟩ := hΦU.exists_isFrobenius
+  obtain ⟨FZ, hFZ⟩ := Scheme.Hom.exists_isFrobenius (i₀ ≫ f₀)
+  have hFUc : FU ≫ j₀ = j₀ ≫ F₀ := (hFU.comp_eq_comp (j₀ ≫ f₀) hF₀ j₀).symm
+  have hFZc : FZ ≫ i₀ = i₀ ≫ F₀ := (hFZ.comp_eq_comp (i₀ ≫ f₀) hF₀ i₀).symm
+  let Φ : stdModel k f₀ ⟶ stdModel k f₀ := stdModelFrobenius f₀ (hF₀.comp_eq f₀)
+  have hΦ : IsModelFrobenius Φ f₀ (pullback.fst _ _) := isModelFrobenius_stdModel f₀ hF₀
+  have hpX : Φ.left ≫ pullback.fst _ _ = pullback.fst _ _ ≫ F₀ := by
+    simp [Φ, stdModelFrobenius]
+  let j : U ⟶ stdModel k f₀ := Over.homMk (pullback.lift (pU ≫ j₀) U.hom (by
+    rw [Category.assoc]
+    exact hΦU.isPullback.w)) (pullback.lift_snd _ _ _)
+  have hjs : j.left ≫ pullback.snd f₀ (Spec.map (CommRingCat.ofHom (algebraMap k₀ k))) =
+      U.hom :=
+    pullback.lift_snd _ _ _
+  have hq : IsPullback pU j.left j₀
+      (pullback.fst f₀ (Spec.map (CommRingCat.ofHom (algebraMap k₀ k)))) := by
+    refine IsPullback.of_bot ?_ (pullback.lift_fst _ _ _).symm (IsPullback.of_hasPullback _ _)
+    rw [hjs]
+    exact hΦU.isPullback
+  have : IsOpenImmersion j.left :=
+    MorphismProperty.of_isPullback (P := @IsOpenImmersion) hq ‹_›
+  have hw : ΦU ≫ j = j ≫ Φ := by
+    refine Over.OverMorphism.ext (pullback.hom_ext ?_ ?_)
+    · simp [j, Φ, stdModelFrobenius, reassoc_of% hpU, hFUc]
+    · simp [j, Φ, stdModelFrobenius]
+  have sq : IsPullback ΦU j j Φ := by
+    have := isPullback_frobeniusIterate_of_isOpenImmersion hΦ j₀ j hq hw 1
+    rwa [frobeniusIterate_one, frobeniusIterate_one] at this
+  have : LocallyOfFiniteType (modelBaseChange (X := stdModel k f₀) (pullback.fst _ _) i₀).hom :=
+    inferInstanceAs (LocallyOfFiniteType (pullback.snd _ _ ≫ (stdModel k f₀).hom))
+  have : QuasiCompact (modelBaseChange (X := stdModel k f₀) (pullback.fst _ _) i₀).hom :=
+    inferInstanceAs (QuasiCompact (pullback.snd _ _ ≫ (stdModel k f₀).hom))
+  have : IsSeparated (modelBaseChange (X := stdModel k f₀) (pullback.fst _ _) i₀).hom :=
+    inferInstanceAs (IsSeparated (pullback.snd _ _ ≫ (stdModel k f₀).hom))
+  have : IsClosedImmersion
+      (modelBaseChangeHom (X := stdModel k f₀) (pullback.fst _ _) i₀).left :=
+    inferInstanceAs (IsClosedImmersion (pullback.snd _ _))
+  have hΦZ := IsModelFrobenius.baseChange (X := stdModel k f₀) (Φ := Φ) _ i₀ hΦ hpX hFZc hFZ
+  have := hΦ.isFinite_self
+  have := hΦ.isUniversalHomeomorphism_self
+  have := hΦU.isFinite_self
+  have := hΦU.isUniversalHomeomorphism_self
+  have := hΦZ.isFinite_self
+  have := hΦZ.isUniversalHomeomorphism_self
+  have := hΦZ.finite_fixedPoint (m := 1) one_ne_zero
+  have : Finite {z : RationalPoint (modelBaseChange (X := stdModel k f₀) (pullback.fst _ _) i₀) //
+      z ≫ modelBaseChangeEndo _ _ hpX hFZc = z} :=
+    Finite.of_equiv (FixedPoint (modelBaseChangeEndo _ _ hpX hFZc) 1)
+      (Equiv.subtypeEquivRight fun z ↦ by rw [frobeniusIterate_one])
+  have hrange : Set.range j.left.base =
+      (pullback.fst f₀ (Spec.map (CommRingCat.ofHom (algebraMap k₀ k)))).base ⁻¹'
+        Set.range j₀.base := by
+    rw [← hq.flip.isoPullback_hom_fst, Scheme.Hom.comp_base, TopCat.coe_comp, Set.range_comp,
+      Set.range_eq_univ.2 (Scheme.Hom.surjective hq.flip.isoPullback.hom), Set.image_univ,
+      Scheme.Pullback.range_fst]
+    rfl
+  have hrangeZ : Set.range
+      (modelBaseChangeHom (X := stdModel k f₀) (pullback.fst _ _) i₀).left.base =
+      (pullback.fst f₀ (Spec.map (CommRingCat.ofHom (algebraMap k₀ k)))).base ⁻¹'
+        Set.range i₀.base :=
+    Scheme.Pullback.range_snd _ _
+  have hcomplX : IsCompl (Set.range j.left.base)
+      (Set.range (modelBaseChangeHom (X := stdModel k f₀) (pullback.fst _ _) i₀).left.base) := by
+    rw [hrange, hrangeZ]
+    exact hcompl.preimage _
+  intro _ _ _
+  exact WeilBoundedConstructible.traceFormulaOne_of_isOpenImmersion hcomplX sq hw
+    (modelBaseChangeEndo_comp _ _ hpX hFZc) (fun L ↦ h _ Φ _ hΦ L) K
+
 end Model
 
 end AlgebraicGeometry.ProEtale.CondensedRing
