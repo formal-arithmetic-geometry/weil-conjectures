@@ -32,74 +32,45 @@
  ],
  "proof": [
   {
-   "text": "Clause (2) of [det-ambient-ind-derived-sums] states that both $\\tau_{\\leq r}K$ and $\\tau_{\\geq r}K$ remain in $\\Dic$ whenever $K\\in\\Dic$. Its coefficients are exactly $E$ or $\\Qlb$, so it applies to the present category. The good-truncation formulas in [def-kun-truncations] give $\\mathcal H^j(\\tau_{\\geq r}K)=\\mathcal H^j(K)$ for $j\\geq r$ and zero otherwise, and the analogous formula for $\\tau_{\\leq s}K$. Thus $K_n=\\tau_{\\geq-n}K$ is bounded below, remains in $\\Dic$, and has cohomology in degrees $\\leq b$ whenever $K$ does. The same stability clause applies successively to both truncations used in the final window.",
+   "text": "Convert the finite-lower-bound formulation of the geometric fibre dimension bound to the form used by [det-proper-unbounded-window-arbitrary]. For any $\\delta\\in\\mathbb N_\\infty\\cup\\{-\\infty\\}$ satisfying $n\\leq\\delta\\Rightarrow n\\leq d$, if $d\\geq0$ and $\\delta>d$, then $d+1\\leq\\delta$ contradicts the hypothesis. If $d<0$, any $\\delta\\ne-\\infty$ would admit $0\\leq\\delta$ and contradict the hypothesis. Thus $\\delta\\leq d$ for nonnegative $d$ and $\\delta=-\\infty$ for negative $d$. This is the proved private Lean helper dimensionBound_of_nat_tests.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window.proof.md",
+    "place": "Second paragraph, its preservation and amplitude conclusions; third paragraph, the two canonical window maps"
+   }
+  },
+  {
+   "text": "Apply [det-proper-unbounded-window-arbitrary] with the converted dimension bound, the given coefficient ring and the given $K\\in\\Dic(X,\\Lambda)$. Its statement already gives $Rp_*K\\in\\Dic(Y,\\Lambda)$ and both amplitude bounds. Select these three clauses and arrange the upper and lower bounds in the order of the present assertion. The named dependency carries the bounded-below spectral-sequence reduction and truncation stability, so these are not repeated in this module.",
    "uses": [
-    "det-ambient-ind-derived-sums",
-    "def-kun-truncations"
+    "det-proper-unbounded-window-arbitrary"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window.proof.md",
-    "place": "Bounded-below and arbitrary paragraphs: justify the truncations used in the reduction"
+    "place": "Second paragraph, its preservation and amplitude conclusions; third paragraph, the two canonical window maps"
    }
   },
   {
-   "text": "For bounded-below $L\\in\\Dic(X,\\Lambda)$ apply [det-proper-unbounded-window-bounded-below]. Its hypotheses are precisely our coefficients, proper $p$, and fibre-dimension bound $d$, together with boundedness below of $L$. It gives ind-constructible cohomology of $Rp_*L$ in every degree, the lower bound $a$ if $L\\in\\Dic^{\\geq a}$, and the upper bound $b+2d+1$ if also $L\\in\\Dic^{\\leq b}$. This invokes the existing bounded-below spectral-sequence node rather than using an uncited spectral sequence or an uncited closure theorem.",
-   "uses": [
-    "det-proper-unbounded-window-bounded-below"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window.proof.md",
-    "place": "First paragraph, bounded-below case"
-   }
-  },
-  {
-   "text": "Fix arbitrary $K\\in\\Dic(X,\\Lambda)$ and an integer $q$. The stabilization assertion of [det-proper-unbounded-window-arbitrary] supplies $N$ such that, for $n\\geq N$, the canonical map $\\mathcal H^q(Rp_*K)\\to\\mathcal H^q(Rp_*K_n)$ is an isomorphism. Choose also $n\\geq0$. By step 1, $K_n$ is bounded below in $\\Dic$, so [det-proper-unbounded-window-bounded-below] makes the right-hand sheaf ind-constructible. Since $\\IndCons$ was defined up to sheaf isomorphism, the left-hand sheaf is ind-constructible as well. Doing this separately for every $q$ proves $Rp_*K\\in\\Dic(Y,\\Lambda)$. If $K\\in\\Dic^{\\leq b}$, step 1 gives the same upper bound on $K_n$; the bounded-below node then makes the right-hand side zero for $q>b+2d+1$, and the canonical isomorphism makes the left-hand side zero. This proves the upper amplitude bound without imposing boundedness below on $K$.",
-   "uses": [
-    "det-proper-unbounded-window-arbitrary",
-    "det-proper-unbounded-window-bounded-below"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window.proof.md",
-    "place": "Second paragraph, eventual-value isomorphism and its ind-constructibility and upper-bound consequences"
-   }
-  },
-  {
-   "text": "If $K\\in\\Dic^{\\geq a}(X,\\Lambda)$, then $K$ is already bounded below. The lower-bound assertion of [det-proper-unbounded-window-bounded-below] applies directly and gives $\\mathcal H^q(Rp_*K)=0$ for $q<a$, together with ind-constructible cohomology. Hence $Rp_*K\\in\\Dic^{\\geq a}(Y,\\Lambda)$.",
-   "uses": [
-    "det-proper-unbounded-window-bounded-below"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window.proof.md",
-    "place": "End of second paragraph, lower amplitude bound"
-   }
-  },
-  {
-   "text": "Put $A=\\tau_{\\leq q}K$ and $B=\\tau_{\\geq q-2d-1}A$. Step 1 gives $A,B\\in\\Dic(X,\\Lambda)$, and step 3 puts $\\mathcal H^q(Rp_*K)$, $\\mathcal H^q(Rp_*A)$ and $\\mathcal H^q(Rp_*B)$ in $\\IndCons(Y,\\Lambda)$. Apply [det-proper-unbounded-window-iso], with the same $\\Lambda,p,d,K,q$: its statement says that the two canonical maps give isomorphisms $\\alpha:\\mathcal H^q(Rp_*A)\\to\\mathcal H^q(Rp_*K)$ and $\\beta:\\mathcal H^q(Rp_*A)\\to\\mathcal H^q(Rp_*B)$. The required isomorphism is $\\beta\\circ\\alpha^{-1}$, whose inverse is $\\alpha\\circ\\beta^{-1}$; their composites are identities by cancellation. Since $\\IndCons$ is a full subcategory of module sheaves, these maps and their inverses are morphisms in $\\IndCons$. Thus this is exactly the isomorphism induced by the specified truncation zig-zag, rather than an unspecified isomorphism of its endpoints.",
+   "text": "For each integer $q$, apply [det-proper-unbounded-window-iso] with the original finite-lower-bound dimension hypothesis and the same $K$. Its final three clauses give the ind-constructibility of the final window endpoint and invertibility of the images under $H^q Rp_*$ of truncLEι and truncGEπ. These are exactly the remaining three conjuncts of ProperUnboundedWindowAssertions. The two maps and their inverses lie in the full subcategory IndCons, so their inverse-first composite is the specified window isomorphism. Repeat the same selections for the condensed algebraic closure coefficient declaration.",
    "uses": [
     "det-proper-unbounded-window-iso"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window.proof.md",
-    "place": "Third paragraph, the two canonical window maps and their composite"
+    "place": "Second paragraph, its preservation and amplitude conclusions; third paragraph, the two canonical window maps"
    }
   }
  ],
  "proof_deps": [
-  "det-ambient-ind-derived-sums",
-  "def-kun-truncations",
-  "det-proper-unbounded-window-bounded-below",
   "det-proper-unbounded-window-arbitrary",
   "det-proper-unbounded-window-iso"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-proper-unbounded-window/sk-lem-proper-unbounded-window.proof.md",
-  "place": "All three paragraphs; reuse the existing detail nodes for the spectral sequence, unbounded stabilization, and the two window arrows"
+  "place": "Second and third paragraphs, using the already stated conclusions of the arbitrary-complex and canonical-window detail nodes; elementary equivalence of the integer dimension-bound encodings"
  },
  "mathlib_searches": [
   {
@@ -243,5 +214,15 @@
   "date": "2026-10-18",
   "existing": false,
   "note": "Both coefficient cases use the existing total right-derived module pushforward and ordinary derived cohomology. The helper expands the conclusions, including the two specified canonical cohomology maps. The inherited source setting is made explicit by statement_change."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261018T145054-L-3636633",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
