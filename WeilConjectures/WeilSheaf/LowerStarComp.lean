@@ -22,6 +22,8 @@ pushforwards of pro-étale Weil sheaves.
 ## Main definitions
 
 - `AlgebraicGeometry.ProEtaleWeilSheaf.lowerStarCompIso`: `φ_* ⋙ ψ_* ≅ (φ ≫ ψ)_*`.
+- `AlgebraicGeometry.ProEtaleWeilSheaf.lowerStarCongr`: pushforwards along equal morphisms are
+  isomorphic.
 -/
 
 @[expose] public section
@@ -58,5 +60,13 @@ noncomputable def ProEtaleWeilSheaf.lowerStarCompIso (φ : X ⟶ Y) (ψ : Y ⟶ 
         (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv φ _)
         (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv ψ _)
         (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv (φ ≫ ψ) _) K)
+
+variable (k₀ l) in
+/-- Pushforwards of pro-étale Weil sheaves along equal morphisms are isomorphic. -/
+noncomputable def ProEtaleWeilSheaf.lowerStarCongr {φ φ' : X ⟶ Y}
+    [φ.IsOver (Spec (CommRingCat.of k₀))] [φ'.IsOver (Spec (CommRingCat.of k₀))] (h : φ = φ') :
+    ProEtaleWeilSheaf.lowerStar k₀ l φ ≅ ProEtaleWeilSheaf.lowerStar k₀ l φ' := by
+  subst h
+  exact Iso.refl _
 
 end AlgebraicGeometry

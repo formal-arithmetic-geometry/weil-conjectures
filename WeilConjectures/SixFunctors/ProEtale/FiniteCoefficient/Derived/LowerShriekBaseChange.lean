@@ -292,7 +292,7 @@ theorem isIso_rightDerivedLowerShriekOfCompactificationBaseChangeMap_app
     IsIso ((rightDerivedLowerShriekOfCompactificationBaseChangeMap (ModuleCat.{u + 1} Λ) sq
       c).app K) := by
   have := isIso_derivedBaseChangeMap_app_openImmersionLowerShriek_of_compactification Λ sq c K hK
-  sorry
+  exact NatTrans.isIso_app_comp_whiskerLeft_comp _ _ _ K
 
 end Finite
 

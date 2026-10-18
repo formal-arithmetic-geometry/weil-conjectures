@@ -170,6 +170,14 @@ noncomputable def ιCompFunctorIso (i : I) : S.ι i ⋙ F.functor ≅ F.Φ i ⋙
     simp only [Functor.comp_map, Iso.refl_hom, comp_id, id_comp]
     exact F.functor_map_ι f)
 
+@[simp]
+lemma ιCompFunctorIso_hom_app (i : I) (x : C i) :
+    (F.ιCompFunctorIso i).hom.app x = 𝟙 _ := rfl
+
+@[simp]
+lemma ιCompFunctorIso_inv_app (i : I) (x : C i) :
+    (F.ιCompFunctorIso i).inv.app x = 𝟙 _ := rfl
+
 /-- A compatible family of natural transformations between two morphisms of stage systems
 (blueprint `prop-weil-pbc-descent-functors`, "compatible natural transformations"). -/
 @[ext]
@@ -298,6 +306,31 @@ def comp (F : Morphism S S') (G : Morphism S' S'') : Morphism S S'' where
     simp only [Functor.map_comp]
     rw [reassoc_of% n₁]
 
+@[simp]
+lemma id_β_hom_app {i j : I} (h : i ≤ j) (x : C i) :
+    ((id S).β h).hom.app x = 𝟙 ((S.T h).obj x) := rfl
+
+@[simp]
+lemma id_β_inv_app {i j : I} (h : i ≤ j) (x : C i) :
+    ((id S).β h).inv.app x = 𝟙 ((S.T h).obj x) := rfl
+
+@[simp]
+lemma comp_β_hom_app (F : Morphism S S') (G : Morphism S' S'') {i j : I} (h : i ≤ j) (x : C i) :
+    ((F.comp G).β h).hom.app x =
+      (G.β h).hom.app ((F.Φ i).obj x) ≫ (G.Φ j).map ((F.β h).hom.app x) := by
+  simp only [comp_β, Iso.trans_hom, NatTrans.comp_app]
+  erw [Category.id_comp, Category.id_comp, Category.comp_id]
+  rfl
+
+@[simp]
+lemma comp_β_inv_app (F : Morphism S S') (G : Morphism S' S'') {i j : I} (h : i ≤ j) (x : C i) :
+    ((F.comp G).β h).inv.app x =
+      (G.Φ j).map ((F.β h).inv.app x) ≫ (G.β h).inv.app ((F.Φ i).obj x) := by
+  rw [← cancel_epi (((F.comp G).β h).hom.app x), Iso.hom_inv_id_app, comp_β_hom_app,
+    Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id_app]
+  erw [Functor.map_id, Category.id_comp, Iso.hom_inv_id_app]
+  rfl
+
 variable [IsDirectedOrder I]
 
 open PairCategory
@@ -344,6 +377,18 @@ lemma functorCompIso_hom_app (F : Morphism S S') (G : Morphism S' S'') (X : S.Pa
 @[simp]
 lemma functorCompIso_inv_app (F : Morphism S S') (G : Morphism S' S'') (X : S.PairCategory) :
     (functorCompIso F G).inv.app X = 𝟙 _ := rfl
+
+/-- The functor induced by the identity morphism acts as the identity on morphisms. -/
+@[simp]
+lemma functor_id_map {X Y : S.PairCategory} (f : X ⟶ Y) : (id S).functor.map f = f := by
+  simpa using (functorIdIso (S := S)).hom.naturality f
+
+/-- The functor induced by a composite acts on morphisms as the composite of the induced
+functors. -/
+@[simp]
+lemma functor_comp_map (F : Morphism S S') (G : Morphism S' S'') {X Y : S.PairCategory}
+    (f : X ⟶ Y) : (F.comp G).functor.map f = G.functor.map (F.functor.map f) := by
+  simpa using (functorCompIso F G).hom.naturality f
 
 end Morphism
 
