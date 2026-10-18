@@ -14,9 +14,145 @@
   "def-weil-pbc-localization-at-prime",
   "def-weil-regular-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $A=R$. By [lem-weil-pbc-complete-local-domain-finite-over-regular], choose a complete regular local subring $A_0\\subseteq A$ such that $A$ is a finite $A_0$-module. It is a domain because it is a subring of the domain $A$. By [lem-weil-pbc-regular-local-localization], every prime localization of $A_0$ is regular local. Thus $\\operatorname{Spec}A_0$ itself is a nonempty regular open: it contains the prime $(0)$. Put $K_0=\\operatorname{Frac}(A_0)$ and $K=\\operatorname{Frac}(A)$. The extension $K/K_0$ is finite by [lem-trf-finite-domain-fraction-degree].",
+   "uses": [
+    "lem-weil-pbc-complete-local-domain-finite-over-regular",
+    "lem-weil-pbc-regular-local-localization",
+    "lem-trf-finite-domain-fraction-degree"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PI, lemma-complete-Noetherian-domain-J-0, proof; J-0 means a nonempty regular open by Tag 07P7, definition-J."
+   }
+  },
+  {
+   "text": "We will use concrete models for all intermediate fields $K_0\\subseteq M\\subseteq K$: set $B(M)=A\\cap M$, an $A_0$-submodule and subring of $A$. It is finite over $A_0$ by [lem-weil-pbc-noetherian-submodule-finite], and hence Noetherian by [lem-weil-pbc-finite-algebra-noetherian]. Every finite module generating family also generates the algebra, so $A_0\\to B(M)$ is of finite type. The next step verifies that its fraction field is exactly $M$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-weil-pbc-finite-algebra-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PI, lemma-complete-Noetherian-domain-J-0, proof; J-0 means a nonempty regular open by Tag 07P7, definition-J."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-finite-algebra-is-integral], every $a\\in A$ satisfies a monic polynomial over $A_0$. For $a\\ne0$, cancel powers of $a$ from a relation with zero constant term (the ambient ring is a domain), obtaining $a^m+c_{m-1}a^{m-1}+\\cdots+c_0=0$ with $c_0\\ne0$. Thus $a^{-1}=-(a^{m-1}+c_{m-1}a^{m-2}+\\cdots+c_1)/c_0$ belongs to $(A_0\\setminus\\{0\\})^{-1}A$. This proves that this localization equals $K$. Every $x\\in M$ therefore has the form $a/s$ with $a\\in A$ and $0\\ne s\\in A_0$; then $a=sx\\in A\\cap M=B(M)$. Hence $\\operatorname{Frac}(B(M))=M$, and every $x\\in M$ admits a nonzero $s\\in A_0$ with $sx\\in B(M)$.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PI, lemma-complete-Noetherian-domain-J-0, proof; J-0 means a nonempty regular open by Tag 07P7, definition-J."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-separable-first-purely-inseparable] to $K/K_0$. Let $M_0$ be the separable algebraic closure of $K_0$ inside $K$. Then $M_0/K_0$ is separable and $K/M_0$ is purely inseparable; all these extensions are finite since $K/K_0$ is finite. The injection $A_0\\to B(M_0)$ has finite type by step 2 and fraction-field extension $M_0/K_0$ by step 3. Applying [lem-exc-j0-separable-finite-type-ascent] to the regular open of $A_0$ from step 1 gives a nonempty regular open in $\\operatorname{Spec}B(M_0)$. If $M_0=K$, then $B(M_0)=A$ and this is the conclusion. This includes characteristic zero.",
+   "uses": [
+    "lem-weil-pbc-separable-first-purely-inseparable",
+    "lem-exc-j0-separable-finite-type-ascent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PI, lemma-complete-Noetherian-domain-J-0, proof; J-0 means a nonempty regular open by Tag 07P7, definition-J."
+   }
+  },
+  {
+   "text": "Otherwise the characteristic is a prime $p>0$. By [lem-weil-pbc-purely-inseparable-pth-root-tower], choose a finite tower $M_0\\subset M_1\\subset\\cdots\\subset M_n=K$, where $M_i=M_{i-1}(\\alpha_i)$, $[M_i:M_{i-1}]=p$, and $\\alpha_i^p\\in M_{i-1}$ is not a $p$th power there. Set $B_i=B(M_i)$. We induct on $i$ on the assertion that $\\operatorname{Spec}B_i$ contains a nonempty regular open. Step 4 is the base $i=0$. Fix $1\\le i\\le n$ and assume the assertion for $B=B_{i-1}$; write $E=B_i$ and $M=M_{i-1}$.",
+   "uses": [
+    "lem-weil-pbc-purely-inseparable-pth-root-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PI, lemma-complete-Noetherian-domain-J-0, proof; J-0 means a nonempty regular open by Tag 07P7, definition-J."
+   }
+  },
+  {
+   "text": "Choose $0\\ne s\\in A_0$ with $z=s\\alpha_i\\in E$ by step 3. Then $M_i=M(z)$ and $b=z^p=s^p\\alpha_i^p$ lies in $A\\cap M=B$. It is not a $p$th power in $M$, since division by $s^p$ would make $\\alpha_i^p$ one. For $C=B[z]\\subseteq E$, the map $B[T]/(T^p-b)\\to C$, $T\\mapsto z$, is an isomorphism: division by the monic polynomial reduces every element to degree less than $p$, and a nonzero relation of that degree would contradict $[M(z):M]=p$. In particular $\\operatorname{Frac}(C)=M_i=\\operatorname{Frac}(E)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PI, lemma-complete-Noetherian-domain-J-0, proof; J-0 means a nonempty regular open by Tag 07P7, definition-J."
+   }
+  },
+  {
+   "text": "The ring $B$ is a domain of characteristic $p$ and of finite type over the Noetherian complete local ring $A_0$ (steps 1 and 2). Since $b$ is not a $p$th power in $M=\\operatorname{Frac}(B)$, [lem-weil-pbc-derivation-nonzero-on-non-pth-power] gives an additive derivation $D:B\\to B$ with $D(b)\\ne0$. Choose $0\\ne h\\in B$ with $D(h)\\subseteq\\operatorname{Spec}B$ contained in the nonempty regular open supplied by the induction hypothesis; here $D(h)$ denotes the principal open, not the value of the derivation. Such a choice is possible because principal opens form the basis of the Zariski topology. Set $g=hD(b)\\ne0$ and $S=B_g$.",
+   "uses": [
+    "lem-weil-pbc-derivation-nonzero-on-non-pth-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PI, lemma-complete-Noetherian-domain-J-0, proof; J-0 means a nonempty regular open by Tag 07P7, definition-J."
+   }
+  },
+  {
+   "text": "The ring $S$ is Noetherian by [lem-weil-pbc-localization-noetherian]. Its prime local rings are $B_{\\mathfrak q}$ for $g\\notin\\mathfrak q$, hence regular local by the choice of $h$; explicitly the two iterated fraction maps send $(a/g^r)/u$ to $a/(g^r u)$ and are inverse. Thus $S$ is a regular ring by the definition [def-weil-regular-scheme]. By [lem-weil-pbc-derivation-extends], $D$ extends to a derivation on $S$; its value on $b$ is the image of $D(b)$, a unit since $g=hD(b)$ is inverted. Therefore [lem-weil-pbc-degree-p-extension-regular], with $n=p$, gives that $S[T]/(T^p-b)$ is regular. The presentation in step 6 identifies this ring with $C_g$ by localizing the coefficients and the generator $T\\mapsto z$.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-derivation-extends",
+    "lem-weil-pbc-degree-p-extension-regular"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PI, lemma-complete-Noetherian-domain-J-0, proof; J-0 means a nonempty regular open by Tag 07P7, definition-J."
+   }
+  },
+  {
+   "text": "To pass from $C$ to $E$, take finite $A_0$-module generators $e_1,\\ldots,e_r$ of $E$ from step 2. Since $\\operatorname{Frac}(C)=\\operatorname{Frac}(E)$, write $e_j=u_j/v_j$ with $u_j,v_j\\in C$ and $v_j\\ne0$. Set $c=\\prod_jv_j\\ne0$ (the empty product is $1$). Every $e_j$ belongs to $C_c$, so their $A_0$-span $E$ lies in $C_c$; the reverse inclusion after localization follows from $C\\subseteq E$. Thus $E_c=C_c$ and $E_{gc}=C_{gc}$. This explicitly supplies the shrinking needed before applying the regularity statement about $C$ to $E$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PI, lemma-complete-Noetherian-domain-J-0, proof; J-0 means a nonempty regular open by Tag 07P7, definition-J."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-localization-of-regular-ring], localizing the regular ring $C_g$ further at $c$ gives a regular ring $C_{gc}=E_{gc}$. The principal open $D_E(gc)$ is nonempty since $E$ is a domain and $gc\\ne0$: it contains $(0)$. By [lem-weil-pbc-principal-localization-open-immersion] it is the image of $\\operatorname{Spec}E_{gc}$ in $\\operatorname{Spec}E$. For a prime $\\mathfrak q$ in that open, its local ring is $E_{\\mathfrak q}$ by the same fraction maps as in step 8, and is regular local since $E_{gc}$ is regular. This completes the induction. At $i=n$ we have $B_n=A\\cap K=A$, so the resulting principal open is the required $U$.",
+   "uses": [
+    "lem-weil-pbc-localization-of-regular-ring",
+    "lem-weil-pbc-principal-localization-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 07PI, lemma-complete-Noetherian-domain-J-0, proof; J-0 means a nonempty regular open by Tag 07P7, definition-J."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-complete-local-domain-finite-over-regular",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-trf-finite-domain-fraction-degree",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-weil-pbc-finite-algebra-noetherian",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-separable-first-purely-inseparable",
+  "lem-exc-j0-separable-finite-type-ascent",
+  "lem-weil-pbc-purely-inseparable-pth-root-tower",
+  "lem-weil-pbc-derivation-nonzero-on-non-pth-power",
+  "lem-weil-pbc-localization-noetherian",
+  "def-weil-regular-scheme",
+  "lem-weil-pbc-derivation-extends",
+  "lem-weil-pbc-degree-p-extension-regular",
+  "lem-weil-pbc-localization-of-regular-ring",
+  "lem-weil-pbc-principal-localization-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 07PI, lemma-complete-Noetherian-domain-J-0, proof; J-0 means a nonempty regular open by Tag 07P7, definition-J."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +188,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TopologicalSpace.NoetherianSpace.exists_open_ne_empty_le_irreducibleComponent\", \"module\": \"Mathlib.Topology.NoetherianSpace\", \"type\": \"[NoetherianSpace α] (Z : Set α) (H : Z ∈ irreducibleComponents α) : ∃ o : Set α, IsOpen o ∧ o.Nonempty ∧ o ≤ Z\", \"doc\": \"In a Noetherian topological space $\\\\alpha$, every irreducible component $Z$ contains a non-empty open subset $o$ (i.e., there exists an open set $o \\\\subseteq Z$ such that $o \\\\neq \\\\emptyset$).\"}\n  {\"name\": \"TopologicalSpace.NoetherianSpace.exists_isOpen_nonempty_subset_irreducibleComponent\", \"module\": \"Mathlib.Topology.NoetherianSpace\", \"type\": \"[NoetherianSpace α] (Z : Set α) (H : Z ∈ irreducibleComponents α) : ∃ o : Set α, IsOpen o ∧ o.Nonempty ∧ o ⊆ Z\", \"doc\": \"In a Noetherian topological space, every irreducible component contains a non-empty open subset, i.e., for any irreducible component $Z$ of the space, there exists an open set $o$ such that $o$ is non\"}\n  {\"name\": \"PrimeSpectrum.irreducibleSpace\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Topology\", \"type\": \"[IsDomain R] : IrreducibleSpace (PrimeSpectrum R)\", \"doc\": \"If $ R $ is a domain, then the prime spectrum $ \\\\operatorname{Spec}(R) $ equipped with the Zariski topology is an irreducible topological space.\"}\n  {\"name\": \"AlgebraicGeometry.instIsNoetherianSpecOfOfIsNoetherianRing\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{R} [CommRing R] [IsNoetherianRing R] : IsNoetherian <| Spec <| .of R\", \"doc\": \"The spectrum of a Noetherian commutative ring is a Noetherian scheme.\"}\n  {\"name\": \"AlgebraicGeometry.isLocallyNoetherian_Spec\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{R : CommRingCat} : IsLocallyNoetherian (Spec R) ↔ IsNoetherianRing R\", \"doc\": \"The scheme $\\\\operatorname{Spec}(R)$ is locally Noetherian if and only if the commutative ring $R$ is Noetherian (i.e., every ideal of $R$ is finitely generated).\"}\n  {\"name\": \"AlgebraicGeometry.instNoetherianSpaceCarrierCarrierCommRingCatSpecOfIsNoetherianRingCarrier\", \"module\": \"Mathlib.AlgebraicGeometry.Noetherian\", \"type\": \"{R : CommRingCat} [IsNoetherianRing R] : NoetherianSpace (Spec R)\", \"doc\": \"For any Noetherian commutative ring $ R $, the prime spectrum $ \\\\operatorname{Spec}(R) $ equipped with the Zariski topology is a Noetherian topological space. This means that every descending chain of\"}\n  {\"name\": \"PrimeSpectrum.exists_isClosed_singleton_of_isJacobsonRing\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Jacobson\", \"type\": \"[IsJacobsonRing R] (s : (Set (PrimeSpectrum R))) (hs : IsOpen s) (hs' : s.Nonempty) : ∃ x ∈ s, IsClosed { x }\", \"doc\": \"For a Jacobson ring $ R $, every non-empty open subset of the prime spectrum $ \\\\operatorname{Spec}(R) $ contains at least one point $ x $ such that the singleton set $ \\\\{x\\\\} $ is closed in the Zariski\"}\n  {\"name\": \"PrimeSpectrum.instNoetherianSpace\", \"module\": \"Mathlib.RingTheory.Spectrum.Prime.Noetherian\", \"type\": \": NoetherianSpace (PrimeSpectrum R)\", \"doc\": \"For any Noetherian ring $ R $, the prime spectrum $ \\\\operatorname{Spec}(R) $ equipped with the Zariski topology is a Noetherian topological space. This means that every descending chain of Zariski-clo\"}",
    "date": "2026-10-19",
    "verdict": "no match: hits concern adic completeness, dimension, regular sequences, quasi-finiteness, or spectrum topology; none proves existence of a nonempty regular open in a complete local domain"
+  },
+  {
+   "tool": "grep",
+   "query": "regularLocus|RegularLocus|IsJZero|JZero|J_0",
+   "results": "17 hits: Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean, Mathlib/AlgebraicGeometry/EllipticCurve/ModelsWithJ.lean, Mathlib/AlgebraicGeometry/EllipticCurve/ModelsWithJ.lean, Mathlib/AlgebraicGeometry/EllipticCurve/ModelsWithJ.lean, Mathlib/AlgebraicGeometry/EllipticCurve/ModelsWithJ.lean",
+   "date": "2026-10-19",
+   "verdict": "no match: returned hits do not state existence of a regular open in a complete Noetherian local domain"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The spectrum of a complete Noetherian local integral domain contains a nonempty open subset on which every localization is regular",
+   "results": "8 hits: Algebra.basicOpen_subset_smoothLocus_iff_smooth, AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat, PrimeSpectrum.instJacobsonSpaceOfIsJacobsonRing, AlgebraicGeometry.StructureSheaf.instInhabitedLocalizations, Algebra.basicOpen_subset_smoothLocus_iff, AlgebraicGeometry.isLocallyNoetherian_Spec, PrimeSpectrum.irreducibleSpace, Algebra.isOpen_unramifiedLocus",
+   "date": "2026-10-19",
+   "verdict": "no match: returned hits do not state existence of a regular open in a complete Noetherian local domain"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsNoetherianRing, IsLocalRing, IsAdicComplete",
+   "results": "1 hits: AdicCompletion.instIsAdicCompleteMaximalIdeal",
+   "date": "2026-10-19",
+   "verdict": "no match: returned hits do not state existence of a regular open in a complete Noetherian local domain"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complete Noetherian local domain has a nonempty open regular locus J zero",
+   "results": "8 hits: tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain, IsDiscreteValuationRing.TFAE, instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing, IsLocalRing.isOpen_maximalIdeal, IsLocalRing.isOpen_maximalIdeal_pow, ringKrullDim_eq_one_iff_of_isLocalRing_isDomain, Ring.KrullDimLE.isField_of_isReduced, isReduced_ofLocalizationMaximal",
+   "date": "2026-10-19",
+   "verdict": "no match: returned hits do not state existence of a regular open in a complete Noetherian local domain"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A Noetherian complete local integral domain is J0 the regular locus contains a nonempty principal open",
+   "results": "8 hits: tfae_of_isNoetherianRing_of_isLocalRing_of_isDomain, IsDiscreteValuationRing.TFAE, exists_maximalIdeal_pow_eq_of_principal, IsDedekindDomainDvr, Algebra.QuasiFiniteAt.exists_basicOpen_eq_singleton, PrimeSpectrum.exist_mem_one_of_mem_maximal_ideal, instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing, OfLocalizationMaximal",
+   "date": "2026-10-19",
+   "verdict": "no match: returned hits do not state existence of a regular open in a complete Noetherian local domain"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-complete-local-excellence",
@@ -80,5 +251,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-complete-local-domain-regular-open",
+  "worker": "stage1",
+  "summary": "Followed Stacks 07PI with its separable-first/pth-root finite tower made explicit; reused all existing algebra nodes and added no nodes. Wrote out intermediate finite ring models, the hypersurface presentation, and the denominator shrinking from the monogenic order to the target ring. Statement unchanged.",
+  "blueprint": "Proof Step 1: dimension-normalized Verdier duality and the middle t-structure; the supporting complete-local-ring excellence input in the normal top-residue-class construction, Stacks Tag 07QW clause (2). The J-2 input of Tag 07QW, proved in Tag 07PJ case (2), reduces to Tag 07PI: a complete local domain is J-0.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-complete-local-domain-finite-over-regular",
+    "why": "Generic commutative-algebra input in the Stacks 07PI proof of the supporting complete-local J-0 assertion; the perverse-sheaf unit supplies no such algebra statement. Used only through its stated conclusion, without replacing any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-regular-local-localization",
+    "why": "Generic commutative-algebra input in the Stacks 07PI proof of the supporting complete-local J-0 assertion; the perverse-sheaf unit supplies no such algebra statement. Used only through its stated conclusion, without replacing any unit step."
+   },
+   {
+    "node": "lem-exc-j0-separable-finite-type-ascent",
+    "why": "Generic commutative-algebra input in the Stacks 07PI proof of the supporting complete-local J-0 assertion; the perverse-sheaf unit supplies no such algebra statement. Used only through its stated conclusion, without replacing any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-purely-inseparable-pth-root-tower",
+    "why": "Generic commutative-algebra input in the Stacks 07PI proof of the supporting complete-local J-0 assertion; the perverse-sheaf unit supplies no such algebra statement. Used only through its stated conclusion, without replacing any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-derivation-nonzero-on-non-pth-power",
+    "why": "Generic commutative-algebra input in the Stacks 07PI proof of the supporting complete-local J-0 assertion; the perverse-sheaf unit supplies no such algebra statement. Used only through its stated conclusion, without replacing any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-derivation-extends",
+    "why": "Generic commutative-algebra input in the Stacks 07PI proof of the supporting complete-local J-0 assertion; the perverse-sheaf unit supplies no such algebra statement. Used only through its stated conclusion, without replacing any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-degree-p-extension-regular",
+    "why": "Generic commutative-algebra input in the Stacks 07PI proof of the supporting complete-local J-0 assertion; the perverse-sheaf unit supplies no such algebra statement. Used only through its stated conclusion, without replacing any unit step."
+   },
+   {
+    "node": "lem-weil-pbc-localization-of-regular-ring",
+    "why": "Generic commutative-algebra input in the Stacks 07PI proof of the supporting complete-local J-0 assertion; the perverse-sheaf unit supplies no such algebra statement. Used only through its stated conclusion, without replacing any unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-complete-local-domain-finite-over-regular",
+  "lem-weil-pbc-regular-local-localization",
+  "lem-exc-j0-separable-finite-type-ascent",
+  "lem-weil-pbc-purely-inseparable-pth-root-tower",
+  "lem-weil-pbc-derivation-nonzero-on-non-pth-power",
+  "lem-weil-pbc-derivation-extends",
+  "lem-weil-pbc-degree-p-extension-regular",
+  "lem-weil-pbc-localization-of-regular-ring"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NP-61f590ef3",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-61f590ef3 (reviewer sub-agent of L); spot-checked: I read the full proof of Stacks 07PI (more-algebra.tex), definition 07P7 and the statements of all 16 cited nodes. The item's statement is exactly 07PI with J-0 expanded and is unchanged; the parent lem-per-complete-local-excellence uses exactly this statement. Proof steps: (1) 032D gives a regular complete subring A_0, all of Spec A_0 is a regular open, and the fraction-field extension K/K_0 is finite. (2-3) The models B(M) = A ∩ M are finite over A_0 and have fraction field M, by the integral-equation inverse formula. (4) The separable part M_0 is handled by 07PB, with every hypothesis checked; finite separable algebraic meets the 030O definition with an empty transcendence basis. (5) The 09HI p-th-root tower gives an explicit induction with its base and claim stated. (6) z = sα_i makes B[T]/(T^p - b) ≅ C (the map is injective by the degree-p argument), and b is not a p-th power. (7-8) 07PH gives D, the principal open D(h) is chosen, the derivation is extended to B_g by 07PE(2), and 07PG with n = p makes C_g regular. (9) A common denominator c gives E_c = C_c. (10) The localization is regular and D_E(gc) is a nonempty regular open. The induction ends at B_n = A. Each step is correct and uses only what the cited statements say. There are no new nodes and no duplicates: only the item and its parent mention 07PI. The 8 tool uses are generic algebra used as black boxes and are accepted; no SGA source is cited. Batch-5: lem-trf-finite-domain-fraction-degree is a Mathlib leaf (instFiniteDimensionalFractionRingOfFinite, Mathlib/RingTheory/Algebraic/Integral.lean:696) with no proof_deps. It is general domain/fraction-field algebra, neither stated by nor a step of the trace formula or Poincare duality, so it is outside the assumed statements and accepted; I found no non-trf node with the same statement to repoint to. Small cases checked: R a field, k[[t^p]] ⊂ k[[t]], and characteristic 0."
  }
 }
