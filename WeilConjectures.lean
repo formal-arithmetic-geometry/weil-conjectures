@@ -54,6 +54,7 @@ public import WeilConjectures.Algebra.Homology.BifunctorMappingConeNaturality
 public import WeilConjectures.Algebra.Homology.DerivedCategory.AdicTower
 public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.ChgUniv
 public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.MapBijectiveAcyclic
+public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.MapExactFunctorHom
 public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.ModuleOfRingHom
 public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.TowerLimit
 public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.TowerLimitIso
@@ -1583,7 +1584,9 @@ public import WeilConjectures.AlgebraicGeometry.ProEtale.Coherent.Etale
 public import WeilConjectures.AlgebraicGeometry.ProEtale.CohomologyFilteredColimit
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Comparison.Affine
 public import WeilConjectures.AlgebraicGeometry.ProEtale.ContinuousSheaf
+public import WeilConjectures.AlgebraicGeometry.ProEtale.ContinuousSheafPullback
 public import WeilConjectures.AlgebraicGeometry.ProEtale.DenseOpen
+public import WeilConjectures.AlgebraicGeometry.ProEtale.EtaleCohomologyComparison
 public import WeilConjectures.AlgebraicGeometry.ProEtale.FiniteCoefficientCohomology
 public import WeilConjectures.AlgebraicGeometry.ProEtale.FiniteCoefficientEtaleComparison
 public import WeilConjectures.AlgebraicGeometry.ProEtale.Flat.QuasiCompactCover
@@ -1997,6 +2000,7 @@ public import WeilConjectures.Blowup.QuasiDomination
 public import WeilConjectures.Blowup.QuasiDominationExtension
 public import WeilConjectures.CategoryTheory.Abelian.DimensionShifting
 public import WeilConjectures.CategoryTheory.Abelian.Ext.MapExactFunctor
+public import WeilConjectures.CategoryTheory.Abelian.Ext.MapExactFunctorConj
 public import WeilConjectures.CategoryTheory.Abelian.ExtEpiEffacement
 public import WeilConjectures.CategoryTheory.Abelian.ExtRightDerivedHom
 public import WeilConjectures.CategoryTheory.Abelian.Filtration
@@ -4018,6 +4022,8 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Smooth
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.TorsionSheaf
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.UnderivedExchange
 public import WeilConjectures.SixFunctors.Etale.ConstantCohomologyExt
+public import WeilConjectures.SixFunctors.Etale.ConstantCohomologyExtPullback
+public import WeilConjectures.SixFunctors.Etale.ConstantRingEndomorphisms
 public import WeilConjectures.SixFunctors.Etale.Derived.AdjunctionShift
 public import WeilConjectures.SixFunctors.Etale.Derived.Adjunctions
 public import WeilConjectures.SixFunctors.Etale.Derived.AffineDirectImageVanishing
@@ -4479,6 +4485,7 @@ public import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStar
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.Monoidal
+public import WeilConjectures.SixFunctors.ProEtale.Comparison.UpperStar
 public import WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf
 public import WeilConjectures.SixFunctors.ProEtale.ExceptionalAdjoint
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.AlgClosedField
