@@ -16055,3 +16055,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:28 L: merged deliver/J2/Sheaf.AlgebraicGeometry.CompactifiableOverField (stage 3; reviewer PASS; first push; landing 20261018T062812-L-656943 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:28 L: merged deliver/J2/Sheaf.AlgebraicGeometry.FpqcAffineDescent (stage 3; reviewer PASS; first push; landing 20261018T062813-L-657163 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:28 L: merged deliver/J2/Sheaf.CategoryTheory.TruncationDescends (stage 3; reviewer PASS; first push; landing 20261018T062813-L-657305 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:28 L: merged deliver/J2/Sheaf.Paper.LisseTensorScalarExtension (stage 3; reviewer PASS; first push; landing 20261018T062814-L-657446 (proof); batch 20261018T062645; modules 1; new nodes 0)

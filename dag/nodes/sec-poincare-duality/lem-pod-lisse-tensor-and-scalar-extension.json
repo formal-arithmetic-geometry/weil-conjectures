@@ -25,68 +25,72 @@
  ],
  "proof": [
   {
-   "text": "The constant-sheaf stalk assertion is [lem-weil-pbc-constant-sheaf-geometric-stalk] applied to the underlying abelian group of $M$ (sheafification of a presheaf of $\\Lambda$-modules has as underlying abelian sheaf the sheafification of the underlying presheaf of abelian groups, and the germ of the global constant section $m$ is the class of $\\iota_Y(m)$ at $(Y,\\bar y)$); $\\Lambda$-linearity of $m\\mapsto m_{\\bar y}$ follows from the definitions.",
+   "text": "For the constant-module stalk map, use Point.presheafFiberConstIso in the module category: the constant pointed-neighbourhood diagram has value M and connected index category [lem-weil-pbc-colimit-constant-connected-diagram]. Its coprojection at the terminal neighbourhood is the inverse constant-fibre isomorphism. Naturality of toPresheafFiber identifies the displayed global-section germ with this coprojection followed by presheafFiber.map(toSheafify). The latter map is an isomorphism by the generic point sheafification API [lem-weil-pbc-sheafification-geometric-stalk]. This works directly for modules, without forgetting to abelian groups.",
    "uses": [
-    "lem-weil-pbc-constant-sheaf-geometric-stalk"
+    "lem-weil-pbc-colimit-constant-connected-diagram",
+    "lem-weil-pbc-sheafification-geometric-stalk"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Lemma 03PT (2) and Definition 040R"
+    "place": "Tags 03PT (2), 040R; the generic point and constant-colimit construction"
    }
   },
   {
-   "text": "Given trivializing coverings for $\\mathcal F$ and $\\mathcal G$, the fibre products $U_i\\times_Y V_j$ form a common etale covering [def-weil-pbc-etale-site]. On any etale $U$ with $\\mathcal F|_U\\cong\\underline M$, $\\mathcal G|_U\\cong\\underline N$, restriction to $U$ commutes with sheafification, and the presheaf tensor product of the two constant sheaves has the same sheafification as the constant presheaf $M\\otimes_\\Lambda N$ (Stacks 093V/095D), so $(\\mathcal F\\otimes_\\Lambda\\mathcal G)|_U\\cong\\underline{M\\otimes_\\Lambda N}$; likewise $(\\Lambda'\\otimes_\\Lambda\\mathcal F)|_U\\cong\\underline{\\Lambda'\\otimes_\\Lambda M}$ as sheaves of left $\\Lambda'$-modules. Since $\\Lambda,\\Lambda'$ are finite, $M\\otimes_\\Lambda N$ and $\\Lambda'\\otimes_\\Lambda M$ are finite modules, which gives lissity.",
+   "text": "Tensor lissity follows by combining the existing IsLocallyConstantSheaf.tensorObj_part [lem-weil-pbc-flc-tensor-locally-constant-part] and IsFiniteSheaf.tensorObj_part [lem-weil-pbc-flc-tensor-finite-part]. For the precise local tensor formula, express a tensor of sheaves as sheafification of their sectionwise tensor, using the sheafification counit and its monoidal tensorator. The Over.forget U pushforwardContinuousSheafificationCompatibility identifies its restriction with sheafification on the localized site. Tensor the two given local isomorphisms; monoidality of sheafification identifies the tensor of the two constant sheaves with the constant sheaf at M tensor N.",
    "uses": [
-    "def-weil-pbc-etale-site"
+    "lem-weil-pbc-flc-tensor-locally-constant-part",
+    "lem-weil-pbc-flc-tensor-finite-part"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Lemma 093V and etale-cohomology Lemma 095D"
+    "place": "Tag 093V; etale-cohomology Tag 095D"
    }
   },
   {
-   "text": "Apply clause (1) of [lem-pod-etale-stalk-tensor-scalar] (commutative $\\Lambda$, tensor product defined as the same sheafification) for the tensor-stalk isomorphism and its naturality and coherence.",
+   "text": "Apply etale_stalk_tensor_unique, etale_stalk_tensor_natural, and the coherence part of etale_stalk_tensor_coherence from [lem-pod-etale-stalk-tensor-scalar] to the lisse sheaves. These statements apply without finiteness or lissity hypotheses, so give the required special cases unchanged.",
    "uses": [
     "lem-pod-etale-stalk-tensor-scalar"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sheaves.tex",
-    "place": "Lemma 008B and Lemma 007K"
+    "place": "Tags 007K and 008B"
    }
   },
   {
-   "text": "The maps for composite scalar extensions agree on pure tensors by the associativity identification; this proves the coherence and naturality calculations.",
+   "text": "For scalar extension, restriction commutes with sheafification by the same Over.forget U compatibility. The left adjunction ringExtendScalarsAdj implies preservation of sheafification, so presheafToSheafCompComposeAndSheafifyIso identifies the extension of the constant sheaf at M with the constant sheaf at the extended module. Apply these isomorphisms to the given trivializing cover to prove local constancy and to obtain the exact local formula. To prove finite generation of the extended module E(M), take a finite generating set of M and its image under the adjunction unit. If a monomorphism N to E(M) contains these images, pull it back along the unit after restriction of scalars. Finite generation of M makes the projection to M an isomorphism, yielding a lift of the unit to N. Transpose this lift across the adjunction; its composite with N to E(M) is the identity by injectivity of the hom equivalence. Thus the monomorphism is an isomorphism, proving finite generation. At each geometric stalk apply this argument and the canonical presheaf-fibre and sheafification comparison isomorphisms, then the universe-lift stalk isomorphism. This proves scalar-extension lissity, including for noncommutative rings.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "scalar extension construction in Section 6.3"
+    "place": "Section 6.3, scalar extension by its balanced-tensor adjunction"
    }
   },
   {
-   "text": "Apply clause (2) of [lem-pod-etale-stalk-tensor-scalar], which holds for any (not necessarily commutative) ring homomorphism $\\Lambda\\to\\Lambda'$ with $\\Lambda'\\otimes_\\Lambda\\mathcal F$ defined as the same sheafification, and gives the stated pure-germ formula, $\\Lambda'$-linearity, naturality and compatibility with composites.",
+   "text": "For scalar stalks, specialize etale_stalk_scalar_component_unique in [lem-pod-etale-stalk-tensor-scalar] to ringExtendScalarsAdj. Evaluate its unit equation on a section; S-linearity extends the formula from the unit tensor to b tensor a. Naturality follows by composing the naturality equations of the inverse presheafFiberCompIso and inverse presheafToSheafCompSheafFiberIso. For composites, specialize etale_stalk_scalar_iteration from the same node. The two adjoint-uniqueness associativity isomorphisms agree because their hom-equivalence images agree after composing with the inverse restriction-of-scalars comparison. The unit equation for ringExtensionComp sends the two nested unit images to the composite unit image; linearity gives d tensor (s tensor m) mapping to (d times g(s)) tensor m. Evaluate the iteration theorem section equation on that nested tensor and use naturality of the units to move extension maps through pure tensors. Its stalk equation is exactly the required composite compatibility.",
    "uses": [
     "lem-pod-etale-stalk-tensor-scalar"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sheaves.tex",
-    "place": "Lemma 008B with Lemma 03EL and etale-cohomology Lemma 04FM"
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 6.3 with Tags 03EL, 008B and etale-cohomology 04FM"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-constant-sheaf-geometric-stalk",
-  "def-weil-pbc-etale-site",
+  "lem-weil-pbc-colimit-constant-connected-diagram",
+  "lem-weil-pbc-sheafification-geometric-stalk",
+  "lem-weil-pbc-flc-tensor-locally-constant-part",
+  "lem-weil-pbc-flc-tensor-finite-part",
   "lem-pod-etale-stalk-tensor-scalar"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Lemmas 093V and 008B with etale-cohomology Lemma 04FM"
+  "place": "093V and Section 6.3; generic point and existing tensor-preservation APIs; J2 Lean proof 2026-10-18"
  },
  "mathlib_searches": [
   {
@@ -202,5 +206,15 @@
   "group": "G1",
   "result": "fix",
   "note": "Y scheme, geometric point IsAlgClosed via ulift pointSmallEtale stalks (C1 form); lisse = IsFiniteLocallyConstantSheaf over ModuleCat.{u+1}; (1) Ring R, any M, constant germ map IsIso; (2) CommRing+Finite, lisse F G: F⊗G lisse, local iso on F.over U, stalk μ unique pure-germ map + IsIso, naturality, assoc/braid/unit coherence; (3) Ring R,S finite, f: lisse extension, local iso, canonical stalk comparison pure-germ + IsIso, naturality, composite R->S->T square + sectionwise sheaf iso"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261018T062814-L-657446",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
