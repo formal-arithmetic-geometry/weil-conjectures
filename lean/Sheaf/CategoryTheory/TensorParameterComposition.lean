@@ -72,6 +72,15 @@ theorem tensorParameterComposition {C : Type u₁} {D : Type u₂}
             G.map g) =
       tensorD.map (𝟙 (F.obj S) ×ₘ
         (μ.hom.app (T, P) ≫ F.map f ≫ adj.counit.app N)) ≫ g := by
-  sorry
+  rw [adj.homEquiv_naturality_left_symm, adj.homEquiv_naturality_right_symm,
+    tensorParameterMate, Equiv.symm_apply_apply]
+  have hμ : tensorD.map (𝟙 (F.obj S) ×ₘ F.map f) ≫ μ.hom.app (S, G.obj N) =
+      μ.hom.app (S, tensorC.obj (T, P)) ≫ F.map (tensorC.map (𝟙 S ×ₘ f)) := by
+    simpa using μ.hom.naturality (𝟙 S ×ₘ f)
+  simp only [Category.assoc]
+  rw [← Category.assoc (μ.hom.app (S, tensorC.obj (T, P))), ← hμ]
+  simp only [Category.assoc, Iso.hom_inv_id_app_assoc]
+  rw [← tensorD.map_comp_assoc, ← tensorD.map_comp_assoc]
+  simp
 
 end CategoryTheory
