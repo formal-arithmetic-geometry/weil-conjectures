@@ -22,80 +22,75 @@
  ],
  "proof": [
   {
-   "text": "Write $L=\\nu_X^*$ and $R=\\nu_{X,*}$ for the set-sheaf adjunction of [def-weil-pbc-site-comparison-morphism]. Its left adjoint preserves finite limits and its right adjoint is restriction; both preserve finite products. Apply $L$ to the addition, zero, negation and action $\\Lambda_{X,\\Et}\\times M\\to M$ of a module sheaf ([def-weil-sheaf-of-modules-category]). Under the product identifications these maps satisfy the module identities because those identities are equalities of maps and $L$ is a functor. This constructs an $L\\Lambda_{X,\\Et}=\\Lambda_X$-module $LM$ and carries linear maps to linear maps. Restriction similarly makes $RG$ an $R\\Lambda_X$-module; restrict scalars along $\\eta_{\\Lambda_{X,\\Et}}:\\Lambda_{X,\\Et}\\to R\\Lambda_X$. This ring map is an isomorphism by [det-pe-classical-sheaves-unit], and is a ring map since its naturality with addition, multiplication, zero and one gives the corresponding compatibility equations. Naturality with the projections identifies $\\eta_{A\\times B}$ with $\\eta_A\\times\\eta_B$ and $\\varepsilon_{G\\times H}$ with $\\varepsilon_G\\times\\varepsilon_H$ under product identifications. Naturality with every module structure map therefore makes $\\eta_M$ and $\\varepsilon_G$ additive and linear, using the triangle identity $\\varepsilon_{L\\Lambda_{X,\\Et}}\\circ L\\eta_{\\Lambda_{X,\\Et}}=1$ for the coefficients of the counit. The usual mutually inverse adjunct maps $a\\mapsto R(a)\\circ\\eta_M$ and $b\\mapsto\\varepsilon_G\\circ L(b)$ consequently carry linear maps to linear maps. Their inverse and naturality identities are those of the set-sheaf adjunction. Thus they define the asserted module adjunction for arbitrary discrete $\\Lambda$, without using the finite-ring assertion of the comparison-definition node.",
+   "text": "Specialize the canonical comparison adjunction comparisonAdjunction to ModuleCat over the arbitrary commutative ring. The already proved source-library instance preservesFiniteLimits_comparisonUpperStar gives finite-limit preservation directly; the left adjoint preserves all colimits, hence finite colimits. These constructions have no finite-ring hypothesis.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves-modules.proof.md",
+    "place": "Blueprint module proof; formalized step 1, using the existing generic coefficient API where available."
+   }
+  },
+  {
+   "text": "The forgetful functor ModuleCat to sets preserves filtered colimits (Mathlib ModuleCat.FilteredColimits.forget_preservesFilteredColimits). The comma categories for toProEt.op are filtered by the representable flatness of the site inclusion. Therefore forgetting preserves these pointwise left Kan extensions. It preserves sheafification as well. Apply the canonical sheafPullbackForgetIso to identify module inverse image followed by forgetting with forgetting followed by set inverse image.",
    "uses": [
     "def-weil-pbc-site-comparison-morphism",
-    "def-weil-sheaf-of-modules-category",
-    "det-pe-classical-sheaves-unit"
+    "lem-weil-pbc-sheaf-pullback-forget-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves-modules.proof.md",
-    "place": "paragraph 1; explicit product/naturality verification of the module adjunction"
+    "place": "Blueprint module proof; formalized step 2, using the existing generic coefficient API where available."
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-site-pullback-abelian-exact] to the comparison morphism of [def-weil-pbc-site-comparison-morphism], using the same larger-universe small skeletons as the sites. The underlying abelian inverse image is exact for this morphism of sites; the transported addition in step 1 is precisely its abelian-group structure. By [lem-weil-pbc-module-sheaves-colimits-forgetful], forgetting a module structure preserves kernels and cokernels, which are respectively sectionwise kernels and sheafified sectionwise cokernels. Accordingly the abelian comparisons $L(\\ker f)\\cong\\ker(Lf)$ and $L(\\operatorname{coker}f)\\cong\\operatorname{coker}(Lf)$ are linear: their maps are induced by the linear kernel inclusion and cokernel quotient, and their inverses are linear because the maps are bijective locally. Thus the module inverse image preserves kernels and cokernels, and is additive by the transported addition. It is exact. This argument needs no finiteness assumption on $\\Lambda$; the finite-coefficient node in the imported proof did not itself justify this conclusion.",
+   "text": "At the restriction of G, the unit compatibility of sheafPullbackForgetIso says V(eta) followed by Rset(e.hom) equals etaSet. Compose with Rset(e.inv) and cancel the inverse comparison. Apply the set adjunction Hom equivalence to e.inv followed by the forgotten module counit. The preceding equation turns its adjunct into V(eta) followed by V(R(epsilon)), which is the identity by the module right triangle identity. The adjunct of the set counit is the identity by the set right triangle identity. Injectivity of the Hom equivalence proves equality with the set counit.",
    "uses": [
-    "lem-weil-pbc-site-pullback-abelian-exact",
-    "def-weil-pbc-site-comparison-morphism",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves-modules.proof.md",
-    "place": "paragraph 2, with the finite-coefficient citation replaced by generic exactness; Stacks Tags 04JC and 03DA"
-   }
-  },
-  {
-   "text": "For module sheaves $M,M'$, [det-pe-classical-sheaves-unit] gives a unique underlying set-sheaf map $\\varphi:M\\to M'$ lifting each set-sheaf map $h:LM\\to LM'$. If $h$ is linear, the equations $\\varphi\\circ+_M=+_{M'}\\circ(\\varphi\\times\\varphi)$, $\\varphi\\circ0_M=0_{M'}$ and $\\varphi\\circ a_M=a_{M'}\\circ(1_{\\Lambda_{X,\\Et}}\\times\\varphi)$ become true after applying $L$, by the product and action identifications in step 1. Faithfulness on all set-sheaf Hom sets, including those with domain $M\\times M$, the terminal sheaf and $\\Lambda_{X,\\Et}\\times M$, reflects each of these equalities. Hence $\\varphi$ is additive and linear in the sense of [def-weil-sheaf-of-modules-category]. Conversely $L$ sends linear maps to linear maps by step 1. The bijection of underlying Hom sets therefore restricts to a bijection of module Hom sets: $L$ is fully faithful on module sheaves.",
-   "uses": [
-    "det-pe-classical-sheaves-unit",
-    "def-weil-sheaf-of-modules-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves-modules.proof.md",
-    "place": "paragraph 3; addition and zero included in the reflection of linearity"
-   }
-  },
-  {
-   "text": "For the continuity maps of [det-pe-classical-definition-continuity-map], a filtered colimit of $\\Lambda$-modules has the same underlying set as the filtered colimit of their sets: represent an element by $[i,x]$, put two representatives at a common later index to add them, and put $r[i,x]=[i,rx]$. Equality means equality after mapping to some common later index, so these operations are well defined and give precisely the module-colimit universal property. Every restriction is linear, so the resulting continuity map is the set continuity map with these operations. A bijective linear map has a linear inverse: if $y=c(x)$ and $y'=c(x')$, then $c^{-1}(y+y')=x+x'$ and $c^{-1}(ry)=rx$. Thus a module sheaf is classical if and only if its underlying set sheaf is classical.",
-   "uses": [
-    "det-pe-classical-definition-continuity-map"
+    "lem-weil-pbc-sheaf-pullback-forget-comparison",
+    "def-weil-pbc-site-comparison-morphism"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves-modules.proof.md",
-    "place": "paragraph 4, first sentence; elementary representative computation supplying the omitted module/set comparison"
+    "place": "Blueprint module proof; formalized step 3, using the existing generic coefficient API where available."
    }
   },
   {
-   "text": "By [det-pe-classical-sheaves-image], the underlying set sheaf of $LM$ is classical, and for any classical underlying set sheaf $G$ its counit $LRG\\to G$ is an isomorphism. Step 4 converts both statements to classicality of module sheaves. Step 1 has shown that this counit is linear, hence its inverse is linear by the same calculation as in step 4, applied on sections. The unit is also linear and is an isomorphism on underlying sheaves by [det-pe-classical-sheaves-unit], hence is an isomorphism of modules. Therefore $L$ takes values in the full subcategory of classical module sheaves and its restriction and $R$ have the displayed unit and counit as natural isomorphisms. Their triangle identities are unchanged from step 1. They are mutually quasi-inverse equivalences, with the exactness and full faithfulness proved in steps 2 and 3.",
+   "text": "Apply the counit characterization of det-pe-classical-sheaves-image to the underlying set sheaf of G. Step 3 identifies the set counit with the forgotten module counit composed with an isomorphism. Forgetting module sheaves reflects isomorphisms, sectionwise because a bijective linear map has a linear inverse. Thus G has classical underlying set sheaf exactly when its module counit is invertible. This uses the existing classicality predicate without introducing another one.",
    "uses": [
     "det-pe-classical-sheaves-image",
-    "det-pe-classical-sheaves-unit"
+    "det-pe-classical-definition-continuity-map"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves-modules.proof.md",
-    "place": "paragraph 4, remaining sentences; linearity and the actual unit/counit identify the quasi-inverse"
+    "place": "Blueprint module proof; formalized step 4, using the existing generic coefficient API where available."
+   }
+  },
+  {
+   "text": "The existing generic Grothendieck abelian comparison-unit theorem specializes to ModuleCat and gives the source-library full and faithful instances. Functor.FullyFaithful.ofFullyFaithful.map_bijective gives the required Hom-set bijections. Mathlib Adjunction.isIso_counit_app_iff_mem_essImage identifies the invertible module counit with existence of an etale module sheaf and an isomorphism of its inverse image with G. Compose this equivalence with step 4. These are precisely the last two clauses, and all statements and universes are unchanged.",
+   "uses": [
+    "lem-weil-pbc-comparison-grothendieck-unit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves-modules.proof.md",
+    "place": "Blueprint module proof; formalized step 5, using the existing generic coefficient API where available."
    }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-site-comparison-morphism",
-  "def-weil-sheaf-of-modules-category",
-  "det-pe-classical-sheaves-unit",
-  "lem-weil-pbc-site-pullback-abelian-exact",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-sheaf-pullback-forget-comparison",
+  "det-pe-classical-sheaves-image",
   "det-pe-classical-definition-continuity-map",
-  "det-pe-classical-sheaves-image"
+  "lem-weil-pbc-comparison-grothendieck-unit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-classical-sheaves/sk-thm-pe-classical-sheaves-modules.proof.md",
-  "place": "All four paragraphs, with the module-adjunction and continuity-map details supplied and arbitrary-coefficient exactness justified by Stacks 04JC/03DA."
+  "place": "All four paragraphs. T6: reuse existing arbitrary-coefficient adjunction, exactness and full faithfulness; use the canonical forgetful comparison and its unit equation to prove counit compatibility, then transfer the set essential-image theorem. No new holes."
  },
  "mathlib_searches": [
   {
@@ -205,10 +200,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-site-pullback-abelian-exact",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-16",
   "by": "L",
@@ -253,5 +245,15 @@
   "existing": false,
   "note": "Uses the fixed-coefficient ModuleCat encoding explicitly allowed by def-weil-pbc-etale-sheaves, with the recorded IsClassical predicate on the underlying set sheaf. The adjunction, exactness, full faithfulness and canonical counit/essential-image characterizations give exactly the module equivalence and its restriction quasi-inverse; no second classicality predicate is defined.",
   "fixed_by": "NT-stage2-cc-963bef049"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261018T145117-L-3645529",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

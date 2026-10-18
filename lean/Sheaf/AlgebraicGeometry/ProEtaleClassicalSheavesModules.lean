@@ -4,18 +4,13 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 module
 
 public import Sheaf.AlgebraicGeometry.ClassicalContinuityMap
-public import WeilConjectures.SixFunctors.ProEtale.Comparison
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
-public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
-public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
-public import Sheaf.CategoryTheory.RingedSiteModules
 
+import WeilConjectures.SixFunctors.ProEtale.Comparison.FullyFaithful
 import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesImage
-import Sheaf.AlgebraicGeometry.ProEtaleClassicalSheavesUnit
-import Sheaf.CategoryTheory.SitePullbackAbelianExact
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import Sheaf.CategoryTheory.SheafPullbackForgetComparison
+import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 
 /-!
 # Classical pro-étale sheaves of modules
@@ -41,6 +36,68 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.ProEtale
 
+private theorem comparisonForgetPreservesKan (X : Scheme.{u})
+    (Λ : Type (u + 1)) [CommRing Λ] :
+    (forget (ModuleCat.{u + 1} Λ)).PreservesLeftKanExtensions
+      (Scheme.toProEt X).op := by
+  intro P
+  let : PreservesFilteredColimitsOfSize.{u, u + 1}
+      (forget (ModuleCat.{u + 1} Λ)) :=
+    preservesFilteredColimitsOfSize_shrink.{u + 1, u + 1, u, u + 1} _
+  let : ∀ V, Functor.PreservesPointwiseLeftKanExtensionAt
+      (forget (ModuleCat.{u + 1} Λ)) P (Scheme.toProEt X).op V := by
+    intro V
+    infer_instance
+  infer_instance
+
+private noncomputable def comparisonForgetIso (X : Scheme.{u})
+    (Λ : Type (u + 1)) [CommRing Λ] :
+    comparisonUpperStar (ModuleCat.{u + 1} Λ) X ⋙
+        sheafCompose (Scheme.ProEt.topology X) (forget (ModuleCat.{u + 1} Λ)) ≅
+      sheafCompose X.smallEtaleTopology (forget (ModuleCat.{u + 1} Λ)) ⋙
+        Functor.sheafPullbackConstruction.sheafPullback (Scheme.toProEt X)
+          (Type (u + 1)) X.smallEtaleTopology (Scheme.ProEt.topology X) := by
+  let := comparisonForgetPreservesKan X Λ
+  exact sheafPullbackForgetIso X.smallEtaleTopology (Scheme.ProEt.topology X)
+    (Scheme.toProEt X) (forget (ModuleCat.{u + 1} Λ))
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem comparisonForgetIso_counit (X : Scheme.{u})
+    (Λ : Type (u + 1)) [CommRing Λ]
+    (G : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) :
+    (comparisonForgetIso X Λ).inv.app
+        ((comparisonLowerStar (ModuleCat.{u + 1} Λ) X).obj G) ≫
+      (sheafCompose (Scheme.ProEt.topology X) (forget (ModuleCat.{u + 1} Λ))).map
+        ((comparisonAdjunction (ModuleCat.{u + 1} Λ) X).counit.app G) =
+      (Scheme.proEtaleSiteComparison X).counit.app
+        ((sheafCompose (Scheme.ProEt.topology X)
+          (forget (ModuleCat.{u + 1} Λ))).obj G) := by
+  let := comparisonForgetPreservesKan X Λ
+  let M := ModuleCat.{u + 1} Λ
+  let V := sheafCompose X.smallEtaleTopology (forget M)
+  let W := sheafCompose (Scheme.ProEt.topology X) (forget M)
+  let R := comparisonLowerStar M X
+  let Rs := (Scheme.toProEt X).sheafPushforwardContinuous
+    (Type (u + 1)) X.smallEtaleTopology (Scheme.ProEt.topology X)
+  let adj := comparisonAdjunction M X
+  let adjs := Scheme.proEtaleSiteComparison X
+  let e := comparisonForgetIso X Λ
+  have hu := sheafPullbackForgetIso_unit X.smallEtaleTopology
+    (Scheme.ProEt.topology X) (Scheme.toProEt X) (forget M) (R.obj G)
+  change V.map (adj.unit.app (R.obj G)) ≫ Rs.map (e.hom.app (R.obj G)) =
+    adjs.unit.app (V.obj (R.obj G)) at hu
+  have hu' : adjs.unit.app (V.obj (R.obj G)) ≫ Rs.map (e.inv.app (R.obj G)) =
+      V.map (adj.unit.app (R.obj G)) := by
+    rw [← hu, Category.assoc, ← Rs.map_comp, e.hom_inv_id_app, Rs.map_id]
+    exact Category.comp_id _
+  apply (adjs.homEquiv _ _).injective
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit, Functor.map_comp,
+    ← Category.assoc, hu']
+  change V.map (adj.unit.app (R.obj G)) ≫ V.map (R.map (adj.counit.app G)) = _
+  rw [← V.map_comp, adj.right_triangle_components]
+  exact (V.map_id _).trans (adjs.right_triangle_components (W.obj G)).symm
+
 /-- Comparison inverse image is exact and fully faithful on modules over any discrete
 commutative ring, with essential image the classical module sheaves and restriction
 as quasi-inverse.
@@ -48,40 +105,26 @@ Source: Weil conjectures blueprint, main-20261015,
 `sk-thm-pe-classical-sheaves-modules`; Stacks Project, Tags 099T, 04JC and 03DA
 (blueprint: det-pe-classical-sheaves-modules).
 
-Proof, following the five steps of the node:
-1. Use the set adjunction of def-weil-pbc-site-comparison-morphism. Transport addition,
-   zero, negation and scalar action through its finite-product comparisons. Functoriality
-   preserves the module identities. Restriction carries the same actions back, with
-   coefficients restricted along the unit on the constant ring, which is invertible by
-   det-pe-classical-sheaves-unit. Naturality with all these operations, together with
-   the coefficient triangle identity, makes the unit and counit linear. Consequently
-   the mutually inverse adjunct maps restrict to linear maps and give the module
-   adjunction. In the fixed-coefficient encoding these are comparisonUpperStar and
-   comparisonLowerStar, defined by Kan extension and sheafification, and restriction.
-2. Apply lem-weil-pbc-site-pullback-abelian-exact on larger-universe small site models.
-   By lem-weil-pbc-module-sheaves-colimits-forgetful, kernels are sectionwise and
-   cokernels are sheafified sectionwise cokernels in both module and abelian sheaves.
-   The abelian kernel and cokernel comparisons are linear, since induced by the linear
-   inclusions and quotients; their inverses are linear locally. Transported addition
-   gives additivity. Thus the module functor preserves finite limits and finite colimits,
-   with no finite-ring hypothesis. These are its exactness clauses.
-3. By det-pe-classical-sheaves-unit every map between inverse-image underlying sheaves
-   lifts uniquely. If the given map is linear, faithfulness reflects its addition, zero
-   and scalar compatibility equations, including on the product domains. The lift is
-   therefore linear. Conversely step 1 preserves linearity. This gives the displayed
-   bijection on module Hom sets.
-4. In a filtered module colimit each element is represented by a stage element; add
-   after passing to a common later stage and act on a representative by its scalar.
-   Eventual equality makes these operations well defined. Thus the underlying set is
-   the filtered set colimit, and the linear continuity map has the same underlying map.
-   A bijective linear map has a linear inverse. Hence module classicality is exactly
-   IsClassical on the underlying set sheaf, using det-pe-classical-definition-continuity-map.
-5. Apply det-pe-classical-sheaves-image on underlying set sheaves. Inverse images are
-   classical and the counit is invertible precisely on classical objects. Steps 1 and 4
-   make the counit and its inverse linear. The unit is linear and invertible by
-   det-pe-classical-sheaves-unit. The unchanged triangle identities give the equivalence
-   with restriction as quasi-inverse. The last two clauses record its counit and
-   essential-image characterizations, respectively. -/
+Proof:
+1. Use the existing comparison adjunction for Grothendieck abelian coefficients,
+   specialized to modules. Its left adjoint already preserves finite limits and
+   finite colimits for every ring; no finite-coefficient hypothesis is needed.
+2. The forgetful functor from modules to sets preserves filtered colimits. The
+   comma categories computing the comparison Kan extension are filtered, so this
+   forgetful functor preserves those Kan extensions. It also preserves sheafification.
+   The canonical sheafPullbackForgetIso therefore identifies the underlying set
+   sheaf of module inverse image with set inverse image of the underlying sheaf.
+3. The canonical comparison respects the adjunction units. Compose its unit equation
+   with the inverse comparison. Apply the set adjunction Hom equivalence and the
+   two right triangle identities: the module counit, after forgetting and composing
+   with the inverse comparison, is exactly the set counit.
+4. Apply det-pe-classical-sheaves-image to the underlying set sheaf. The comparison
+   is invertible and forgetting modules reflects isomorphisms, so the set counit is
+   invertible exactly when the module counit is. This proves the classicality clause.
+5. The generic comparison unit theorem gives full faithfulness on module sheaves.
+   Its Hom equivalence gives the displayed bijectivity. Finally the fully faithful
+   adjunction criterion identifies invertibility of the counit with membership in
+   the essential image. Combine it with step 4 for the last clause. -/
 theorem proEtaleClassicalSheavesModules (X : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ] :
     ∃ (adj :
         comparisonUpperStar (ModuleCat.{u + 1} Λ) X ⊣
@@ -100,6 +143,20 @@ theorem proEtaleClassicalSheavesModules (X : Scheme.{u}) (Λ : Type (u + 1)) [Co
           (forget (ModuleCat.{u + 1} Λ))).obj G) ↔
           ∃ F : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ),
             Nonempty ((comparisonUpperStar (ModuleCat.{u + 1} Λ) X).obj F ≅ G)) := by
-  sorry
+  let adj := comparisonAdjunction (ModuleCat.{u + 1} Λ) X
+  have hc (G : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} Λ)) :
+      IsClassical ((sheafCompose (Scheme.ProEt.topology X)
+        (forget (ModuleCat.{u + 1} Λ))).obj G) ↔ IsIso (adj.counit.app G) := by
+    rw [(Scheme.proEtaleClassicalSheavesImage X _).2]
+    rw [← comparisonForgetIso_counit X Λ G]
+    rw [isIso_comp_left_iff]
+    exact (isIso_iff_of_reflects_iso _
+      (sheafCompose (Scheme.ProEt.topology X) (forget (ModuleCat.{u + 1} Λ))))
+  refine ⟨adj, inferInstance, inferInstance, ?_, hc, ?_⟩
+  · intro F G
+    exact (Functor.FullyFaithful.ofFullyFaithful
+      (comparisonUpperStar (ModuleCat.{u + 1} Λ) X)).map_bijective F G
+  · intro G
+    exact (hc G).trans adj.isIso_counit_app_iff_mem_essImage
 
 end AlgebraicGeometry.ProEtale
