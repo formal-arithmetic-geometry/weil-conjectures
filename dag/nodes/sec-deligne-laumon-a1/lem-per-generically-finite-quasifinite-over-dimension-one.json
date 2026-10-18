@@ -17,9 +17,168 @@
   "def-weil-residue-field",
   "pqf-def-quasifinite"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $z\\in Z$ over $s$. Choose an affine neighbourhood $V=\\operatorname{Spec}R$ of $s$, with corresponding prime $\\mathfrak p$, and an affine open $U=\\operatorname{Spec}A$ containing $z$ and contained in $g^{-1}(V)$. By [lem-weil-pbc-lft-affine-pairs], $A$ is a finite type $R$-algebra. By [lem-weil-pbc-affine-open-stalk-localization], $B=R_{\\mathfrak p}\\cong\\mathcal O_{S,s}$. Thus $B$ is Noetherian and local, with maximal ideal $\\mathfrak m=\\mathfrak pB$ and $\\dim B\\le1$. Write $k=B/\\mathfrak m=\\kappa(s)$ and $M=R\\setminus\\mathfrak p$.",
+   "uses": [
+    "lem-weil-pbc-lft-affine-pairs",
+    "lem-weil-pbc-affine-open-stalk-localization",
+    "def-weil-pbc-localization-at-prime"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AB6, lemma-quasi-finite-in-codim-1, proof of condition (2)"
+   }
+  },
+  {
+   "text": "Put $C=A\\otimes_R B$. By [lem-weil-pbc-fibre-product-affine-spectra], $\\operatorname{Spec}C$ is the base change of $U\\to V$ to $\\operatorname{Spec}B$. By [lem-weil-pbc-localization-base-change], $A\\to C$ is localization at the image of $M$. If $a_1,\\ldots,a_n$ generate $A$ over $R$, then $a_i\\otimes1$ generate $C$ over $B$: every pure tensor is a $B$-multiple of a polynomial in these elements, and every tensor is a finite sum of pure tensors. Thus $C$ is of finite type over $B$ in [def-weil-pbc-finite-type-algebra].",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-localization-base-change",
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AB6, lemma-quasi-finite-in-codim-1, proof of condition (2)"
+   }
+  },
+  {
+   "text": "A minimal prime $Q$ of $A$ gives a generic point $\\eta_Q$ of the irreducible component $V(Q)\\subset U$ by [lem-weil-pbc-spec-irreducible-components-minimal-primes]. Its closure in $Z$ is an irreducible component of $Z$: if that closure is contained in an irreducible closed subset $H\\subset Z$, then $H\\cap U$ is an irreducible closed subset of $U$ containing $V(Q)$, hence equals $V(Q)$ by maximality; the nonempty open $H\\cap U$ is dense in $H$, so $H=\\overline{V(Q)}$. This is precisely the maximality in [def-weil-irreducible-components]. Since $\\overline{\\{\\eta_Q\\}}=\\overline{V(Q)}$, $\\eta_Q$ is the generic point of this component as in [def-sc-generic-point]. The assumed generic algebraicity therefore says $\\kappa(Q)/\\kappa(Q\\cap R)$ is algebraic. Here the residue fields are the same in the open subschemes and their ambient schemes by [lem-weil-pbc-affine-open-stalk-localization].",
+   "uses": [
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "def-weil-irreducible-components",
+    "def-sc-generic-point",
+    "lem-weil-pbc-affine-open-stalk-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AB6, lemma-quasi-finite-in-codim-1, proof of condition (2)"
+   }
+  },
+  {
+   "text": "Let $Q'$ be any minimal prime of $C$ and $Q_0=Q'\\cap A$. By [lem-sc-irreducible-components-cover] and [lem-weil-pbc-spec-irreducible-components-minimal-primes], $Q_0$ contains a minimal prime $Q$ of $A$. Since $Q_0$ avoids the image of $M$, so does $Q$. By (1) of [lem-weil-pbc-localization-prime-residue-field-iso], $QC$ is a prime contained in $Q'$; minimality gives $QC=Q'$ and then $Q=Q_0$. Put $q_0=Q\\cap R$ and $q=Q'\\cap B$. The same prime correspondence for $R\\to B$ gives $q=q_0B$, with $q_0\\subseteq\\mathfrak p$. Clause (3) of that node identifies $\\kappa(Q)\\cong\\kappa(Q')$ and $\\kappa(q_0)\\cong\\kappa(q)$ compatibly with their structure maps. Hence Step 3 implies that $\\kappa(Q')/\\kappa(q)$ is algebraic. This verifies the generic hypothesis after localization without assuming $Z$ or $S$ globally Noetherian.",
+   "uses": [
+    "lem-sc-irreducible-components-cover",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "lem-weil-pbc-localization-prime-residue-field-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AB6, lemma-quasi-finite-in-codim-1, proof of condition (2)"
+   }
+  },
+  {
+   "text": "Let $P\\subset C$ be any prime above $\\mathfrak m$. Choose a minimal prime $Q'\\subseteq P$, again using [lem-sc-irreducible-components-cover] and [lem-weil-pbc-spec-irreducible-components-minimal-primes]. Set $q=Q'\\cap B$, $E=B/q$, $D=C/Q'$, and $r=P/Q'\\subset D$. Then $E\\hookrightarrow D$ is an inclusion of domains, $D$ is a finite type $E$-algebra (use the images of the generators of $C$), and $E$ is Noetherian by [lem-weil-pbc-finite-type-algebra-noetherian], applied to the quotient $B\\to B/q$, generated by zero extra elements. The prime $r$ contracts to $\\mathfrak m/q$ in $E$. Step 4 says $\\operatorname{Frac}(D)=\\kappa(Q')$ is algebraic over $\\operatorname{Frac}(E)=\\kappa(q)$, so $\\operatorname{trdeg}_E D=0$ by [def-kun-transcendence-degree]. Also $\\kappa(r)=\\operatorname{Frac}(C/P)=\\kappa(P)$ and $\\kappa(\\mathfrak m/q)=k$. Under [lem-weil-pbc-spec-quotient-homeomorphism-zero-locus], chains of primes of $E$ lift to chains of primes of $B$ containing $q$; hence their lengths are at most one by [def-weil-pbc-krull-dimension-ring].",
+   "uses": [
+    "lem-sc-irreducible-components-cover",
+    "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+    "lem-weil-pbc-finite-type-algebra-noetherian",
+    "def-kun-transcendence-degree",
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+    "def-weil-pbc-krull-dimension-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AB6, lemma-quasi-finite-in-codim-1, proof of condition (2)"
+   }
+  },
+  {
+   "text": "If $q=\\mathfrak m$, then $E=k$ and $\\operatorname{ht}_E(\\mathfrak m/q)=0$. Apply [lem-trf-affine-dimension-inequality] to $E\\hookrightarrow D$, $\\mathfrak m/q$ and $r$, with all its hypotheses checked in Step 5. It gives $\\operatorname{ht}_D(r)\\le0-\\operatorname{trdeg}_k\\kappa(P)$. Both height and transcendence degree are nonnegative, so $\\operatorname{trdeg}_k\\kappa(P)=0$. This is the vertical-component case, including the case $\\dim B=0$.",
+   "uses": [
+    "lem-trf-affine-dimension-inequality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AB6, vertical-component case, written using the dimension inequality of Algebra Tag 02IJ"
+   }
+  },
+  {
+   "text": "If $q\\ne\\mathfrak m$, then $q\\subsetneq\\mathfrak m$. The strict chain $(0)\\subsetneq\\mathfrak m/q$ in $E$ and the upper bound on chain lengths in Step 5 give $\\operatorname{ht}_E(\\mathfrak m/q)=1$. Moreover $r\\ne(0)$, since otherwise $P=Q'$ would have contraction both $\\mathfrak m$ and $q$. As $D$ is a domain, $(0)\\subsetneq r$ gives $\\operatorname{ht}_D(r)\\ge1$. Apply [lem-trf-affine-dimension-inequality] to the same inclusion and primes as in Step 6. It yields $1\\le\\operatorname{ht}_D(r)\\le1-\\operatorname{trdeg}_k\\kappa(P)$, and hence $\\operatorname{trdeg}_k\\kappa(P)=0$. Thus Steps 6 and 7 cover every component through every closed-fibre point.",
+   "uses": [
+    "lem-trf-affine-dimension-inequality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AB6, horizontal-component dimension-formula argument; Algebra Tag 02IJ, inequality clause"
+   }
+  },
+  {
+   "text": "The closed fibre of $\\operatorname{Spec}C\\to\\operatorname{Spec}B$ is $Y=\\operatorname{Spec}F$ with $F=C/\\mathfrak mC$: tensoring $C$ with $k=B/\\mathfrak m$ sends $c\\otimes\\bar b$ to $bc\\bmod\\mathfrak mC$, with inverse $\\bar c\\mapsto c\\otimes1$. By [lem-weil-pbc-spec-quotient-homeomorphism-zero-locus], its primes correspond to primes $P$ of $C$ over $\\mathfrak m$, and its residue field at $P/\\mathfrak mC$ is $\\operatorname{Frac}(C/P)$. The images of the finite algebra generators of $C$ generate $F$ over $k$, so $Y$ is of finite type over the field $k$ by [def-weil-finite-type-morphism]. Steps 6 and 7 show that every point of $Y$ has residue transcendence degree zero over $k$. Apply part (a) of [lem-kun-closed-point-field]: every point of $Y$ is closed.",
+   "uses": [
+    "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+    "def-weil-finite-type-morphism",
+    "lem-kun-closed-point-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AB6, lemma-quasi-finite-in-codim-1, proof of condition (2)"
+   }
+  },
+  {
+   "text": "Since all primes of $F$ are maximal, there is no strict inclusion between distinct primes. By [def-weil-pbc-krull-dimension-ring], $\\dim F\\le0$, equivalently $\\dim Y\\le0$. Apply [lem-weil-pbc-finite-type-dim-zero-artinian] to the finite type $k$-scheme $Y$: its underlying space is finite and discrete. This also includes $F=0$, when the fibre is empty.",
+   "uses": [
+    "def-weil-pbc-krull-dimension-ring",
+    "lem-weil-pbc-finite-type-dim-zero-artinian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AB6, lemma-quasi-finite-in-codim-1, proof of condition (2)"
+   }
+  },
+  {
+   "text": "The fibre $U_s$ is $\\operatorname{Spec}(A\\otimes_R k)$ by [lem-weil-pbc-fibre-product-affine-spectra]. The $B$-algebra $C=A\\otimes_R B$ therefore has $C\\otimes_B k\\cong A\\otimes_R k$, explicitly $(a\\otimes b)\\otimes c\\mapsto a\\otimes bc$, with inverse $a\\otimes c\\mapsto(a\\otimes1)\\otimes c$. Thus $U_s\\cong Y$, and the set of points of $U$ mapping to $s$ is finite by the fibre homeomorphism in [def-pc-scheme-fibre]. Apply [pqf-lem-locqf-fibre-discrete] to $U\\to V$. It is locally of finite type by [lem-weil-pbc-lft-affine-pairs], used in both directions: an affine open $U'\\subseteq U$ and an affine open $V'\\subseteq V$ with $g(U')\\subseteq V'$ are affine opens of $Z$ and $S$, so $\\mathcal O_S(V')\\to\\mathcal O_Z(U')$ is of finite type because $g$ is locally of finite type. It is quasi-finite at $z$. The affine neighbourhoods witnessing this for $U\\to V$ are also affine open neighbourhoods in $Z$ and $S$, so they witness quasi-finiteness of $g$ at $z$ by [pqf-def-quasifinite]. Since $z$ was arbitrary over $s$, this proves the item.",
+   "uses": [
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "def-pc-scheme-fibre",
+    "pqf-lem-locqf-fibre-discrete",
+    "lem-weil-pbc-lft-affine-pairs",
+    "pqf-def-quasifinite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AB6, lemma-quasi-finite-in-codim-1, proof of condition (2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-lft-affine-pairs",
+  "lem-weil-pbc-affine-open-stalk-localization",
+  "def-weil-pbc-localization-at-prime",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-localization-base-change",
+  "def-weil-pbc-finite-type-algebra",
+  "lem-weil-pbc-spec-irreducible-components-minimal-primes",
+  "def-weil-irreducible-components",
+  "def-sc-generic-point",
+  "lem-sc-irreducible-components-cover",
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-weil-pbc-finite-type-algebra-noetherian",
+  "def-kun-transcendence-degree",
+  "lem-weil-pbc-spec-quotient-homeomorphism-zero-locus",
+  "def-weil-pbc-krull-dimension-ring",
+  "lem-trf-affine-dimension-inequality",
+  "def-weil-finite-type-morphism",
+  "lem-kun-closed-point-field",
+  "lem-weil-pbc-finite-type-dim-zero-artinian",
+  "def-pc-scheme-fibre",
+  "pqf-lem-locqf-fibre-discrete",
+  "pqf-def-quasifinite"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/varieties.tex",
+  "place": "Tag 0AB6 (lemma-quasi-finite-in-codim-1), proof of condition (2), with its localization and reduced-component reductions written on affine rings and both component cases expanded using Algebra Tag 02IJ."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,10 +221,45 @@
    "results": "[grep] OK 5 hit(s)\n  {\"file\": \"339\", \"line\": \"def Scheme.Hom.QuasiFiniteAt (x \", \"text\": \" X) : Prop := (f.stalkMap x).hom.QuasiFinite\"}\n  {\"file\": \"343\", \"line\": \"lemma Scheme.Hom.QuasiFiniteAt.quasiFiniteAt\", \"text\": \"\"}\n  {\"file\": \"344\", \"line\": \"    {x \", \"text\": \" X} (hx : f.QuasiFiniteAt x) {V : X.Opens} (hV : IsAffineOpen V) {U : Y.Opens}\"}\n  {\"file\": \"346\", \"line\": \"    (f.appLE U V hVU).hom.QuasiFiniteAt (hV.primeIdealOf ⟨x, hxV⟩).asIdeal \", \"text\": \"= by\"}\n  {\"file\": \"358\", \"line\": \"  rw [RingHom.QuasiFiniteAt, Algebra.QuasiFiniteAt, ← RingHom.quasiFinite_algebraMap]\", \"text\": \"\"}\n",
    "date": "2026-10-19",
    "verdict": "no match: definitions and pointwise criteria do not derive quasi-finiteness from the generic algebraicity and local-dimension hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A locally finite type morphism with algebraic residue field extensions at all generic points is quasi-finite over a point whose local ring is Noetherian of dimension at most one",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.QuasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"(R : Type u_1) →\\n  {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → (p : Ideal S) → [p.IsPrime] → Prop\", \"doc\": \"For a prime ideal $ p $ in a commutative ring $ S $, this proposition asserts that the localization of $ S $ at the complement of $ p $ forms a quasi-finite algebra over the base commutative ring $ R \"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyQuasiFiniteQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyQuasiFinite fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.QuasiFinite\", \"doc\": \"A morphism of schemes is locally quasi-finite if and only if the corresponding ring homomorphism is quasi-finite, meaning the target ring is finitely generated as a module over the source ring.\"}\n  {\"name\": \"Algebra.quasiFinite_iff\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.QuasiFinite R S ↔\\n    autoParam (∀ (P : Ideal R) [inst_3 : P.IsPrime], Module.Finite P.ResidueField (P.Fiber S))\\n      Algebra.QuasiFinite.finite_fiber._autoParam\", \"doc\": \"For commutative rings $ R $ and $ S $, where $ S $ is an $ R $-algebra, $ S $ is quasi-finite over $ R $ if and only if for every prime ideal $ P $ in $ R $, the tensor product of the residue field of\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"Algebra.QuasiFinite.instResidueField\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (P : Ideal S)\\n  [inst_3 : P.IsPrime] [Algebra.QuasiFinite R S], Algebra.QuasiFinite R P.ResidueField\", \"doc\": \"For any commutative ring $ R $, a quasi-finite $ R $-algebra $ S $, and a prime ideal $ P $ of $ S $, the residue field of $ P $ is a quasi-finite $ R $-algebra.\"}\n  {\"name\": \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal R)\\n  [inst_3 : p.IsPrime] (P : Ideal S) [inst_4 : P.IsPrime] [inst_5 : P.LiesOver p] [Algebra.QuasiFiniteAt R P],\\n  Module.Finite p.ResidueField P.ResidueField\", \"doc\": \"Given prime ideals $\\\\mathfrak{p} \\\\subseteq R$ and $\\\\mathfrak{P} \\\\subseteq S$ where $\\\\mathfrak{P}$ lies over $\\\\mathfrak{p}$, if the localization $S_\\\\mathfrak{P}$ is quasi-finite as an $R$-module, then \"}\n  {\"name\": \"AlgebraicGeometry.instHasRingHomPropertyLocallyOfFiniteTypeFiniteType\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"AlgebraicGeometry.HasRingHomProperty @AlgebraicGeometry.LocallyOfFiniteType fun {R S} [CommRing R] [CommRing S] =>\\n  RingHom.FiniteType\", \"doc\": \"For any commutative rings $ R $ and $ S $, and a ring homomorphism $ f : R \\to S $, the induced morphism of schemes is locally of finite type if and only if $ f $ is a finite type ring homomorphism (i.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.stalkMap\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFiniteType f] (x : ↥X),\\n  (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.stalkMap f x)).EssFiniteType\", \"doc\": \"For any morphism $ f: X \\\\to Y $ of schemes that is locally of finite type and any point $ x \\\\in X $, the induced ring homomorphism on the stalks $ \\\\mathcal{O}_{Y,f(x)} \\\\to \\\\mathcal{O}_{X,x} $ is of es\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: returned definitions, quasi-finiteness consequences, fibre criteria, or unrelated localization-presentation dimension; none derives the closed-fibre bound from algebraicity at generic points and dimension at most one of the base local ring"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite type algebra over a one dimensional Noetherian local ring with algebraic extensions at minimal primes has zero dimensional closed fibre",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.quasiFinite_iff\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ (R : Type u_1) (S : Type u_2) [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S],\\n  Algebra.QuasiFinite R S ↔\\n    autoParam (∀ (P : Ideal R) [inst_3 : P.IsPrime], Module.Finite P.ResidueField (P.Fiber S))\\n      Algebra.QuasiFinite.finite_fiber._autoParam\", \"doc\": \"For commutative rings $ R $ and $ S $, where $ S $ is an $ R $-algebra, $ S $ is quasi-finite over $ R $ if and only if for every prime ideal $ P $ in $ R $, the tensor product of the residue field of\"}\n  {\"name\": \"Algebra.QuasiFinite.finite_fiber\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {inst : CommRing R} {inst_1 : CommRing S} {inst_2 : Algebra R S}\\n  [self : Algebra.QuasiFinite R S] (P : Ideal R) [inst_3 : P.IsPrime], Module.Finite P.ResidueField (P.Fiber S)\", \"doc\": \"For any commutative ring $ R $ and a quasi-finite $ R $-algebra $ S $, and for every prime ideal $ P $ of $ R $, the fiber of $ S $ over $ P $ (defined as the tensor product of the residue field of $ \"}\n  {\"name\": \"Algebra.QuasiFinite.instIsArtinianRingFiber\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S]\\n  [Algebra.QuasiFinite R S] (P : Ideal R) [inst_4 : P.IsPrime], IsArtinianRing (P.Fiber S)\", \"doc\": \"If $ S $ is a quasi-finite algebra over a commutative ring $ R $ and $ P $ is a prime ideal of $ R $, then the fiber of $ P $ in $ S $—defined as the tensor product of the residue field of $ P $ with \"}\n  {\"name\": \"Ring.KrullDimLE.of_isLocalization\", \"module\": \"Mathlib/RingTheory/KrullDimension/Zero\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] (p : Ideal R) (hp : p ∈ minimalPrimes R) (S : Type u_2)\\n  [inst_1 : CommSemiring S] [inst_2 : Algebra R S] [IsLocalization.AtPrime S p], Ring.KrullDimLE 0 S\", \"doc\": \"If $ S $ is the localization of a commutative semiring $ R $ at the complement of a minimal prime ideal $ \\\\mathfrak{p} $, then the Krull dimension of $ S $ satisfies $ \\\\dim(S) \\\\leq 0 $. This follows b\"}\n  {\"name\": \"instFiniteRingKrullDimOfIsNoetherianRingOfIsLocalRing\", \"module\": \"Mathlib/RingTheory/Ideal/KrullsHeightTheorem\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] [IsNoetherianRing R] [IsLocalRing R], FiniteRingKrullDim R\", \"doc\": \"Every Noetherian local ring has finite Krull dimension. This instance asserts that if a commutative ring is both Noetherian (every ideal is finitely generated) and local (possessing a unique maximal i\"}\n  {\"name\": \"Algebra.QuasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"(R : Type u_1) →\\n  {S : Type u_2} → [inst : CommRing R] → [inst_1 : CommRing S] → [Algebra R S] → (p : Ideal S) → [p.IsPrime] → Prop\", \"doc\": \"For a prime ideal $ p $ in a commutative ring $ S $, this proposition asserts that the localization of $ S $ at the complement of $ p $ forms a quasi-finite algebra over the base commutative ring $ R \"}\n  {\"name\": \"Algebra.Presentation.localizationAway_dimension_zero\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Basic\", \"type\": \"∀ {R : Type u} {S : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (r : R)\\n  [inst_3 : IsLocalization.Away r S], (Algebra.Presentation.localizationAway S r).dimension = 0\", \"doc\": \"The algebra presentation obtained by localizing a commutative semiring $ S $ at the powers of an element $ r $ has dimension zero, meaning the number of generators equals the number of relations in th\"}\n  {\"name\": \"Algebra.instFiniteResidueFieldOfQuasiFiniteAt\", \"module\": \"Mathlib/RingTheory/QuasiFinite/Basic\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] (p : Ideal R)\\n  [inst_3 : p.IsPrime] (P : Ideal S) [inst_4 : P.IsPrime] [inst_5 : P.LiesOver p] [Algebra.QuasiFiniteAt R P],\\n  Module.Finite p.ResidueField P.ResidueField\", \"doc\": \"Given prime ideals $\\\\mathfrak{p} \\\\subseteq R$ and $\\\\mathfrak{P} \\\\subseteq S$ where $\\\\mathfrak{P}$ lies over $\\\\mathfrak{p}$, if the localization $S_\\\\mathfrak{P}$ is quasi-finite as an $R$-module, then \"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: returned definitions, quasi-finiteness consequences, fibre criteria, or unrelated localization-presentation dimension; none derives the closed-fibre bound from algebraicity at generic points and dimension at most one of the base local ring"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) (x : ↥X) : Prop\", \"doc\": \"A morphism `f : X ⟶ Y` is quasi-finite at `x : X`\\nif the stalk map `𝒪_{X, x} ⟶ 𝒪_{Y, f x}` is quasi-finite.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.quasiFiniteAt\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyQuasiFinite f] (x : ↥X) : AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt f x\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.quasiFiniteAt_comp_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {g : Y ⟶ Z} {x : ↥X} [AlgebraicGeometry.LocallyQuasiFinite g] : AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt (CategoryTheory.CategoryStruct.comp f g) x ↔ AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt f x\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.quasiFiniteAt_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {x : ↥X} : AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt f x ↔ AlgebraicGeometry.LocallyQuasiFinite (CategoryTheory.CategoryStruct.comp (X.fromSpecStalk x) f)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.quasiFiniteAt_comp_iff_of_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \" {X Y Z : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {g : Y ⟶ Z} {x : ↥X} [AlgebraicGeometry.IsOpenImmersion f] : AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt (CategoryTheory.CategoryStruct.comp f g) x ↔ AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt g (f x)\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt.isClopen_singleton_asFiber\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFiniteType f] {x : ↥X} (hx : AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt f x) : IsClopen {AlgebraicGeometry.Scheme.Hom.asFiber f x}\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.quasiFiniteAt_iff_isOpen_singleton_asFiber\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [AlgebraicGeometry.LocallyOfFiniteType f] {x : ↥X} : AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt f x ↔ IsOpen {AlgebraicGeometry.Scheme.Hom.asFiber f x}\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt.quasiFiniteAt\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} {x : ↥X} (hx : AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt f x) {V : X.Opens} (hV : AlgebraicGeometry.IsAffineOpen V) {U : Y.Opens} (hU : AlgebraicGeometry.IsAffineOpen U) (hVU : V ≤ (TopologicalSpace.Opens.map f.base).obj U) (hxV : x ∈ V.carrier) : (Comm\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.isOpen_quasiFiniteAt\", \"module\": \"Mathlib.AlgebraicGeometry.ZariskisMainTheorem\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFiniteType f] : IsOpen {x | AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt f x}\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.mem_quasiFiniteLocus\", \"module\": \"Mathlib.AlgebraicGeometry.ZariskisMainTheorem\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [AlgebraicGeometry.LocallyOfFiniteType f] {x : ↥X} : x ∈ AlgebraicGeometry.Scheme.Hom.quasiFiniteLocus f ↔ AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt f x\", \"doc\": \"\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.exists_isIso_morphismRestrict_toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.ZariskisMainTheorem\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFiniteType f] [AlgebraicGeometry.IsSeparated f] [AlgebraicGeometry.QuasiCompact f] : ∃ U, CategoryTheory.IsIso (AlgebraicGeometry.Scheme.Hom.toNormalization f ∣_ U) ∧ ((TopologicalSpace.Opens.map (AlgebraicGeometry.Scheme.Hom.\", \"doc\": \"**Zariski's main theorem**\\n\\nRecall that any qcqs morphism `f : X ⟶ Y` factors through the relative normalization via\\n`f.toNormalization : X ⟶ f.normalization` (a dominant morphism) and\\n`f.fromNormaliz\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.exists_mem_and_isIso_morphismRestrict_toNormalization\", \"module\": \"Mathlib.AlgebraicGeometry.ZariskisMainTheorem\", \"type\": \" {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.LocallyOfFiniteType f] [AlgebraicGeometry.IsSeparated f] [AlgebraicGeometry.QuasiCompact f] (x : ↥X) (hx : AlgebraicGeometry.Scheme.Hom.QuasiFiniteAt f x) : ∃ V, (AlgebraicGeometry.Scheme.Hom.toNormalization f) x ∈ V ∧ CategoryTheory.I\", \"doc\": \"\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: returned definitions, quasi-finiteness consequences, fibre criteria, or unrelated localization-presentation dimension; none derives the closed-fibre bound from algebraicity at generic points and dimension at most one of the base local ring"
+  },
+  {
+   "tool": "grep",
+   "query": "0AB6|quasi.finite.*codim|genericallyFinite|generically_finite",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-19",
+   "verdict": "no match: returned definitions, quasi-finiteness consequences, fibre criteria, or unrelated localization-presentation dimension; none derives the closed-fibre bound from algebraicity at generic points and dimension at most one of the base local ring"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A generically finite locally finite type morphism is quasi-finite above points with local dimension at most one",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instLocallyQuasiFiniteOfIsFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"[IsFinite f] : LocallyQuasiFinite f\", \"doc\": \"Every finite morphism of schemes is quasi-finite. That is, if $ f: X \\to Y $ is a finite morphism of schemes, then $ f $ satisfies the conditions of being quasi-finite, which typically requires it to b\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"An inductive predicate defining when a morphism $ f: X \\\\to Y $ between schemes is quasi-finite, typically requiring it to be of finite type with finite fibers.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"Let $f: X \\\\to Y$ be a morphism of schemes. If for every affine open subset $U$ of $Y$ and every affine open subset $V$ of $X$ such that $V$ is contained in the preimage $f^{-1}(U)$, the induced ring h\"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (∀ {U : Y.Opens},\\n      AlgebraicGeometry.IsAffineOpen U →\\n        ∀ {V : X.Opens},\\n          AlgebraicGeometry.IsAffineOpen V →\\n            ∀ (e : V ≤ (TopologicalSpace.Opens.map f.base).obj U),\\n              (CommRingCat.Hom.hom (AlgebraicGeometry.\", \"doc\": \"If for every affine open subset $ U $ of $ Y $ and affine open subset $ V $ of $ X $ with $ V $ mapping into $ U $, the corresponding ring homomorphism is finitely generated as an algebra, then the mo\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsFinite f → Sort u} →\\n      (t : AlgebraicGeometry.IsFinite f) →\\n        ([toIsAffineHom : AlgebraicGeometry.IsAffineHom f] →\\n            (finite_app :\\n                ∀ (U : Y.Opens),\\n                  AlgebraicGeom\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is finite if it is affine and for every affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, m\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"[IsFinite f] : LocallyOfFiniteType f\", \"doc\": \"Every finite morphism of schemes is locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.LocallyQuasiFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.LocallyQuasiFinite f → Sort u_1} →\\n      (t : AlgebraicGeometry.LocallyQuasiFinite f) →\\n        ((quasiFinite_appLE :\\n              ∀ {U : Y.Opens},\\n                AlgebraicGeometry.IsAffineOpen U →\\n                 \", \"doc\": \"A morphism $ f: X \\\\to Y $ of schemes is locally quasi-finite if for every affine open subset $ U \\\\subseteq Y $, and every affine open subset $ V \\\\subseteq X $ such that $ V \\\\subseteq f^{-1}(U) $, the \"}\n  {\"name\": \"AlgebraicGeometry.LocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.FiniteType\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"The morphism $ f: X \\\\to Y $ is locally of finite type, meaning that for every point in $ Y $, there exists an open neighborhood whose preimage under $ f $ is covered by affine open subsets such that t\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: returned definitions, quasi-finiteness consequences, fibre criteria, or unrelated localization-presentation dimension; none derives the closed-fibre bound from algebraicity at generic points and dimension at most one of the base local ring"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-generically-finite-proper-near-dimension-one",
@@ -92,5 +286,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-generically-finite-quasifinite-over-dimension-one",
+  "worker": "stage1",
+  "summary": "Split Tag 0AB6 condition (1) into affine localization, inheritance of the generic algebraicity hypothesis, the vertical and horizontal cases of the existing dimension inequality, and the existing closed-point and finite-fibre criteria. All inputs already exist in the DAG; no new node, weakened hypothesis, or statement change. Retained inherited Mathlib records and appended five actually logged searches.",
+  "blueprint": "Proof Step 1: dimension-normalized Verdier duality and the middle t-structure (historically Step 3 when this child was created); the finite-coefficient potential-dualizing construction underlying the qbar generic duality model. Technical input to ILO XVII sections 3.4–3.5: Expose XVII sections 3.4.1–3.4.3: existence of an SNC resolution, Propositions 3.4.1.1(d), 3.4.1.2–3.4.1.3, the connectedness observation in 3.4.1.4, common domination in 3.4.2, and the normalized support square of Lemma 3.4.3.1; printed pp.270–274; input: Stacks Project Tag 0BFP (varieties-lemma-modification-normal-iso-over-codimension-1), all four clauses; input Tag 0AB7, varieties-lemma-finite-in-codim-1, condition (1); the Tag 0AB7 input invokes Tag 0AB6 to obtain quasi-finiteness over the chosen point; the steps realize exactly the 0AB6 input to 0AB7 in this inherited support-construction route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-localization-prime-residue-field-iso",
+    "why": "Generic residue fields before and after localization are identified by clauses (1) and (3); this is a generic commutative algebra tool absent from the perverse unit."
+   },
+   {
+    "node": "lem-trf-affine-dimension-inequality",
+    "why": "The Noetherian-domain dimension inequality supplies the codimension-one fibre bound of the item source; the perverse unit has no replacement for this commutative algebra tool."
+   },
+   {
+    "node": "lem-kun-closed-point-field",
+    "why": "Part (a) turns zero residue transcendence degree into closedness in a finite type scheme over a field; used as a generic scheme-theoretic tool."
+   },
+   {
+    "node": "pqf-lem-locqf-fibre-discrete",
+    "why": "The finite-fibre criterion converts the affine fibre finiteness into quasi-finiteness at the chosen point; it is a generic geometric tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-localization-prime-residue-field-iso",
+  "lem-trf-affine-dimension-inequality",
+  "lem-kun-closed-point-field",
+  "pqf-lem-locqf-fibre-discrete"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-a8f97b540",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-a8f97b540 (reviewer sub-agent of L); spot-checked: I read Stacks 0AB6 (varieties lemma-quasi-finite-in-codim-1), statement and proof. The item is exactly condition (1), and the statement is unchanged from the live node, which is still unsplit. There are no new nodes. Every cited statement checks out: Step 1 (01T2, 01HV localization), Step 2 (00DK base change), Step 3 (component generics through 00ES and density; correctly marked elementary), Step 4 (00E3 clauses (1) and (3); minimality gives QC = Q', so algebraicity transfers), Steps 5–7 (quotient domains E ⊂ D; algebra trdeg 0; the 02IJ inequality clause only, so no universal catenarity is needed; vertical case ht 0, horizontal case 1 ≤ 1 − t), Step 8 (00E5 and lem-kun-closed-point-field (a)), Step 9 (00KH dim 0 ⇒ finite discrete, empty case included) and Step 10 (fibre iso, pqf-lem-locqf-fibre-discrete, then pqf-def-quasifinite with the same witnesses). The one fault, repaired: Step 10 derived 'U→V locally of finite type' from the every-affine-pair criterion of lft-affine-pairs plus the single finite-type map R→A. One pair does not verify that criterion. I rewrote the sentence to derive it from g: every affine pair of U→V is an affine pair of g. Edge cases checked: dim 0 base, empty fibre, nonreduced rings, and counter-tests showing the hypotheses are needed (A¹_k; R[x] over a DVR; the vertical line). Duplicates: lem-trf-birational-curve-quasifinite is only the special case of integral curves over a field. I accept the four tool_uses. Batch-5 flag on lem-trf-affine-dimension-inequality: accepted. It is pure commutative algebra (02IJ inequality), and neither assumption gives it. Its own closure is 23 algebra nodes, and it is the only trf node among them, so citing it imports nothing from the trace formula's proof. The only other 02IJ node (sec-smooth-purity) is the equality clause and needs a universally catenary base.; 1 file(s) fixed by the reviewer"
  }
 }
