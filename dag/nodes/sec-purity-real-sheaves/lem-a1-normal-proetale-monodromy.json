@@ -21,7 +21,8 @@
   "def-weil-sheaf-of-modules-category",
   "cor-galois-lisse-representations",
   "def-weil-pbc-site-comparison-morphism",
-  "lem-per-lisse-completed-system-comparison"
+  "lem-per-lisse-completed-system-comparison",
+  "def-sfb-monodromy-realization-data"
  ],
  "proof": [
   {
@@ -332,5 +333,27 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-9789cfc89 (reviewer sub-agent of L); spot-checked: Read in full: the item, its ten steps, the new child, every cited statement, unit sk-p-real-rankin, the chapter, and the sources BS 1309.1198 Lemma 7.3.9 (p.67), §7.4 Lemmas 7.4.3-7.4.10 and Example 7.4.9 (pp.69-71), and Stacks 0BQ3 properties.tex:1935. The item is true: it is BS 7.4.7 together with 7.4.10, since normal implies geometrically unibranch. Its statement is unchanged. Steps 1-10 are correct. Coefficients are A_X = lim A_{n,X} with ell = u*varpi^e. The first clause of the etale-local monodromy realization applies to a connected qcqs scheme with Noetherian space. The lattice sheaf is locally constant with the identity coset, rank 0 included. The child gives a section on a finite etale surjective cover, and finite-etale descent then gives a global lattice M_0. The tower from lem-per and cor-galois(1) at each finite level gives Lambda_n; the adic-limit lemma gives Lambda finitely generated, and the pi-torsion argument plus the DVR lemma make it finite free, with joint continuity on the open sets varpi^-k Lambda. J_X normalization gives essential surjectivity, followed by the elementary quasi-inverse and the normalization. The new child lem-a1-normal-locally-constant-finite-section is true and follows from 7.3.9 (Loc=Cov) and the proof of 7.4.10. I tested it on an infinite constant sheaf, a singleton sheaf, a point, the empty sheaf (excluded by its hypothesis) and the nodal curve of 7.4.9 (normality is needed). It is statement-only, has no duplicate in the DAG, and does not restate the item. There are no cycles, and I accept the ten declared tool_uses. Batch-5 check: lem-sfb-integral-lisse-reduction-equivalence, lem-sfb-etale-local-monodromy-realization and lem-pod-adic-limit-finite-modules are coefficient and commutative-algebra infrastructure. Neither assumption gives them, and none is a step of the Poincare-duality or trace-formula argument. cor-galois-lisse-representations and lem-sfb-integral-lisse-reduction-equivalence are already cited by the parent and by the item's own pre-existing statement, and cor-galois by lem-a1-affine-hc0, so all three are accepted. Fix: added the missing citation def-weil-connected-scheme to the item's statement bracket and stmt_deps (B3).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NormalProEtaleMonodromy",
+  "declaration": "AlgebraicGeometry.Scheme.normal_proEtale_monodromy",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.NormalProEtaleMonodromy",
+   "AlgebraicGeometry.Scheme.normal_proEtale_monodromy"
+  ],
+  "file": "lean/Sheaf/Paper/NormalProEtaleMonodromy.lean",
+  "statement": "theorem normal_proEtale_monodromy (l : ℕ) [Fact l.Prime] (E : Type (u + 1)) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] {X : Scheme.{u}} [IsLocallyNoetherian X] [X.IsSeparated] (p : SfMonodromyPoint X) (hnormal : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x)) [∀ x : X, Invertible (l : X.residueField x)] : Nonempty (NormalProEtaleMonodromy l E p)",
+  "branch": "newtargets-dag",
+  "by": "Q12",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-69f3ddf54",
+  "group": "Q12",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: connected/nonempty via p.connected, Noetherian = IsLocallyNoetherian + p.compact, separated, stalkwise IsDomain ∧ IsIntegrallyClosed, geometric point/π1 via SfMonodromyPoint, ℓ invertible on residue fields; conclusion = lisse FullSubcategory ≌ SfContinuousRepresentations whose inverse ≅ a fully faithful additive E-linear functor with SfLatticeNormalization for every invariant lattice and SfNormalizationMap naturality (BS 7.4.7 + 7.4.10). No stronger hypotheses (p.quasiSeparated/p.noetherian are implied); rank 0, n=0 and universes OK. §1(B) repair of def-sfb-monodromy-realization-data removes only the duplicate GaloisLisseRepresentationData import: the item fails on the live module (galoisFiniteUnit duplicate), and the repaired module plus its importer EtaleLocalMonodromyRealization compile rc=0. The stmt_dep addition is a landed, used definition node. lean.statement is verbatim; no hollow definitions; only sorry is the theorem proof. nt_compile --json item+dep rc=0 (4.1 s / 12.0 s). Advisories: continuous-function coefficient convention (canonically identified in node step 1), three redundant imports (incl. LisseCompletedSystemComparison at 47.4 s), no docstrings on the structure's fields."
  }
 }

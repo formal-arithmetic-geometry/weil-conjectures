@@ -114,9 +114,10 @@
   "file": "lean/Sheaf/Paper/EtaleMonodromyRealizationData.lean",
   "statement": "structure SfMonodromyRealization {T : Scheme.{u}} (p : SfMonodromyPoint T)",
   "branch": "newtargets-dag",
-  "by": "Q20",
-  "date": "2026-10-16",
-  "existing": false
+  "by": "Q12",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "§1(B) repair: the recorded module imported both the side GaloisLisseRepresentations declarations and a stale duplicate GaloisLisseRepresentationData interface, causing an environment duplicate before this consumer could compile. This delivery uses the same SfMonodromyPoint, SfContinuousRepresentations, SfInvariantLattice, SfLatticeNormalization, SfNormalizationMap and related declarations with only the duplicate import removed; the notions and signatures are unchanged."
  },
  "reviewed": {
   "date": "2026-10-16",
@@ -127,11 +128,11 @@
   "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-16",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-420d385b9",
-  "group": "Q20",
+  "reviewer": "NT-stage2-cc-69f3ddf54",
+  "group": "Q12",
   "result": "pass",
-  "note": "Read the item node, all 12 stmt_deps, the new node def-sfb-monodromy-realization-data, the §1(B) dependency def-weil-pbc-lisse-lattice-coefficients, the three modules and the report (real Worker report and Second reading by Q20). Diffed against base: the item changes only lean plus one new stmt_dep; the dependency changes only lean, with a note. Every clause matches: J_T is one existential family, fully faithful, additive, E-linear via constant sections, lisse values, exact on underlying-exact sequences in the ambient SheafOfModules. Normalization holds for every actual stable finite free spanning lattice, levels ϖ^(n+1), FLC fibres with the c.γ monodromy pinned by finiteEtaleAction, ν^* = comparisonUpperStar, an abelian limit whose constant-scalar condition determines the A_T action, rationalization = changeOfRings, naturality on lattice-preserving maps. S is only topologically Noetherian; the cover is by connected qcqs topologically Noetherian charts with points; the isomorphisms are to the étale slice restriction; the arrow equation is correctly oriented; empty S gives empty I. E : Type (u+1) is forced by galoisCoefficientRepresentations; the Sized coefficient module is a valid §1(B) repair (the published one is Type 0, ContinuousCoefficientUniverse is Type u and a different node). Only sorries: the item and the named postponed sheaf theorem of the dependency. No hollow definitions, all docstrings carry source and blueprint, lean.statement matches the files verbatim. nt_compile.py --json on all three files: rc=0, no warnings (2.3 s, 9.8 s, 2.1 s). No findings."
+  "note": "Statement matches node clause by clause: connected/nonempty via p.connected, Noetherian = IsLocallyNoetherian + p.compact, separated, stalkwise IsDomain ∧ IsIntegrallyClosed, geometric point/π1 via SfMonodromyPoint, ℓ invertible on residue fields; conclusion = lisse FullSubcategory ≌ SfContinuousRepresentations whose inverse ≅ a fully faithful additive E-linear functor with SfLatticeNormalization for every invariant lattice and SfNormalizationMap naturality (BS 7.4.7 + 7.4.10). No stronger hypotheses (p.quasiSeparated/p.noetherian are implied); rank 0, n=0 and universes OK. §1(B) repair of def-sfb-monodromy-realization-data removes only the duplicate GaloisLisseRepresentationData import: the item fails on the live module (galoisFiniteUnit duplicate), and the repaired module plus its importer EtaleLocalMonodromyRealization compile rc=0. The stmt_dep addition is a landed, used definition node. lean.statement is verbatim; no hollow definitions; only sorry is the theorem proof. nt_compile --json item+dep rc=0 (4.1 s / 12.0 s). Advisories: continuous-function coefficient convention (canonically identified in node step 1), three redundant imports (incl. LisseCompletedSystemComparison at 47.4 s), no docstrings on the structure's fields."
  }
 }

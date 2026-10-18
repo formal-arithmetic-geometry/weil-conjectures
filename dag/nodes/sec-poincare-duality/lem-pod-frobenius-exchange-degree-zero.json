@@ -201,5 +201,48 @@
   "group": "NL",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-8f32988dc (reviewer sub-agent of L); spot-checked: I read the whole item, which has 5 steps and no new nodes, together with every cited statement, Stacks 07A7 (sites-cohomology remark-base-change), and Step 7 of the main-20261015 prop-cohomological-finiteness proof (the blueprint.from place). No SGA source is cited. The base-change map is the specified ambient mate of def-weil-frobenius-square-exchange (1) at finite pro-etale A_{E,n} level; it is not a chosen base-change isomorphism. lambda is defined explicitly and I checked that it is the two-sided inverse of kappa=j (x -> x⊗1). Step 2: g^{-1} is right adjoint to its exact quasi-inverse g_*, so g^*I is K-injective. La^* is modelled termwise, and the pre-derived adjunction fraction formula then gives H^0(e_M) as the underived mate. Step 4: I recomputed this independently. x in M(Y) is restricted to W=Y x_{a,h} s, and Y -> W, y -> (gy, ay), is an isomorphism over Y that turns pr_1 into g. So the colimit class equals the insertion at (Y -g-> Y), which is p_{g,M}. Step 5 is correctly elementary. Edge cases checked: M=0, Y empty, Y=s, and disconnected Y. The extra hypothesis Ra_*M in D^b_c is verified by the parent at its point of use. No duplicate: lem-trf-graph-frobenius-point-exchange needs Y proper and ctf coefficients, and lem-sbc-base-change-homology-zero-underived is étale and only covers H^0. The item is not a restatement of its parent's clause. All 16 proof_deps lie on the sk-lem-finite route (checked by script), so no tool_uses are needed. proof_deps equals the union of the steps' uses. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FrobeniusExchangeDegreeZero",
+  "declaration": "WeilConjectures.PodDegreeZero.frobenius_exchange_degree_zero",
+  "declarations": [
+   "WeilConjectures.PodDegreeZero.directZero",
+   "WeilConjectures.PodDegreeZero.tensorUnit",
+   "WeilConjectures.PodDegreeZero.intrinsicUnit",
+   "WeilConjectures.PodDegreeZero.squareArrow",
+   "WeilConjectures.PodDegreeZero.underivedMate",
+   "WeilConjectures.PodDegreeZero.exchangeZero",
+   "WeilConjectures.PodDegreeZero.pointModuleDerived",
+   "WeilConjectures.PodDegreeZero.sectionZero",
+   "WeilConjectures.PodDegreeZero.pull",
+   "WeilConjectures.PodDegreeZero.finalRestriction",
+   "WeilConjectures.PodDegreeZero.isoRestriction",
+   "WeilConjectures.PodDegreeZero.galoisIsIso",
+   "WeilConjectures.PodDegreeZero.pointTransportZero",
+   "WeilConjectures.PodDegreeZero.iotaZero",
+   "WeilConjectures.PodDegreeZero.transportZero",
+   "WeilConjectures.PodDegreeZero.frobeniusExchangeZero",
+   "WeilConjectures.PodDegreeZero.frobeniusUnderivedMate",
+   "WeilConjectures.PodDegreeZero.directSheaf",
+   "WeilConjectures.PodDegreeZero.toPointSections",
+   "WeilConjectures.PodDegreeZero.sigma",
+   "WeilConjectures.PodDegreeZero.sectionPullback",
+   "WeilConjectures.PodDegreeZero.frobenius_exchange_degree_zero"
+  ],
+  "file": "lean/Sheaf/Paper/FrobeniusExchangeDegreeZero.lean",
+  "statement": "theorem frobenius_exchange_degree_zero (n : ℕ) (M : integralOperationsFiniteModules l E (D.geometricFiber Y₀).left n) (_hM : @IsConstructibleProEtaleModuleSheaf _ (Padic.coefficientExtensionRing l E (n + 1)) _ (Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_pos n)) M) (_hRa : intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_pos n) (Spec (.of D.k)) ((proEtaleConstantDerivedDirectImage (D.geometricFiber Y₀).hom (Padic.coefficientExtensionRing l E (n + 1))).obj ((DerivedCategory.singleFunctor _ 0).obj M))) : (∀ (U : (Spec (.of D.k)).ProEt) (x : (directSheaf D l E Y₀ n M).val.obj (op ((proEtaleIsoPostcompose (frobeniusPointIso D).hom).obj U))), (frobeniusExchangeZero D l E Y₀ n M).val.app (op U) ((intrinsicUnit l E (frobeniusPointIso D).hom n (directSheaf D l E Y₀ n M)).val.app (op U) x) = (intrinsicUnit l E (FrobeniusExchange.galois D Y₀) n M).val.app (op ((proEtaleBaseChange (D.geometricFiber Y₀).hom).obj U)) (frobeniusUnderivedMate D l E Y₀ n M U x)) ∧ (∀ x : (directSheaf D l E Y₀ n M).val.obj (op (ProEt.mk (𝟙 (Spec (.of D.k))))), iotaZero D l hl E Y₀ n M x = (intrinsicUnit l E (frobeniusPointIso D).hom n (directSheaf D l E Y₀ n M)).val.app (op (ProEt.mk (𝟙 (Spec (.of D.k))))) (sigma D l E Y₀ n M x)) ∧ (∀ x : M.val.obj (op (ProEt.mk (𝟙 (D.geometricFiber Y₀).left))), frobeniusUnderivedMate D l E Y₀ n M (ProEt.mk (𝟙 (Spec (.of D.k)))) (sigma D l E Y₀ n M (toPointSections D l E Y₀ n M x)) = M.val.map ((proEtaleIsoPostcompose (FrobeniusExchange.galois D Y₀)).map (finalRestriction ((proEtaleBaseChange (D.geometricFiber Y₀).hom).obj (ProEt.mk (𝟙 (Spec (.of D.k))))))).op (sectionPullback D l E Y₀ n M x)) ∧ (∀ x : M.val.obj (op (ProEt.mk (𝟙 (D.geometricFiber Y₀).left))), transportZero D l hl E Y₀ n M (toPointSections D l E Y₀ n M x) = ((pull l E (FrobeniusExchange.galois D Y₀) n).obj M).val.map (finalRestriction ((proEtaleBaseChange (D.geometricFiber Y₀).hom).obj (ProEt.mk (𝟙 (Spec (.of D.k)))))).op ((intrinsicUnit l E (FrobeniusExchange.galois D Y₀) n M).val.app (op (ProEt.mk (𝟙 (D.geometricFiber Y₀).left))) (sectionPullback D l E Y₀ n M x)))",
+  "branch": "newtargets-dag",
+  "by": "Q06",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "All four identities, written with the canonical j = lambda inverse and faithful componentwise evaluation. directZero, exact homology comparisons and final-object projection restrictions specify every identification. underivedMate is restriction along the Cartesian square arrow, independently of the derived exchange. Helpers belong to this node; every definition has real data and the sole postponed proof is the main theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7ec17ac2b",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Only the item node's lean record and one module (22 declarations, sole sorry is the main theorem) are delivered; lean.statement matches the file verbatim. Hypotheses match the node exactly, with no extra assumptions or universe restriction. Every map is built from canonical recorded declarations: H0 of the recorded finiteExchange, the recorded point transport and ordinary transport, j as the recorded comparison complex in degree zero. The four conjuncts match the node's three equalities and its final formula, written with j = lambda inverse; the only citer uses the final formula. Advisory A1: B is defined as restriction along the Cartesian arrow; I recomputed that this is the adjunction mate in the sectionwise inverse-image model, so the third conjunct is definitional but its content is in the first, all-objects conjunct. Advisory A2: the second-reading section is a stub under the direct-delivery policy. nt_compile --json is clean on the third attempt (18.4 s, no errors or warnings); the first two attempts failed on the 600 s limit during cache rebuild and a load timeout in a dependency."
  }
 }
