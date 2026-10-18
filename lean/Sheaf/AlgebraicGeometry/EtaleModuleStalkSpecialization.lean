@@ -71,7 +71,79 @@ theorem existsUnique_etaleModuleStalkSpecialization
     ∃! r : (pointSmallEtale s).sheafFiber.obj G ⟶
       (pointSmallEtale (t ≫ strictHenselizationStructuralMap s)).sheafFiber.obj G,
       IsEtaleModuleStalkSpecialization s t G r := by
-  sorry
+  classical
+  let N := (equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse
+  let F := N ⋙ strictHenselizationAffineInclusion s ⋙ ObjectProperty.ι
+    (fun n : (pointSmallEtale s).fiber.Elements ↦ IsAffine n.1.left)
+  let : F.Initial := (strictHenselization_properties s).1
+  let v (j : SmallModel.{u} (strictHenselizationNeighbourhoods s)) :
+      (pointSmallEtale (t ≫ strictHenselizationStructuralMap s)).fiber.obj
+        ((AffineEtale.Spec S).obj (N.obj j).1) :=
+    Over.homMk
+      (t ≫ (strictHenselizationCone s).π.app (op (op j)) ≫
+        Spec.map (ΓSpecIso (N.obj j).1.left.unop).inv)
+      (by
+        change (t ≫ (strictHenselizationCone s).π.app (op (op j)) ≫
+          Spec.map (ΓSpecIso (N.obj j).1.left.unop).inv) ≫
+            ((AffineEtale.Spec S).obj (N.obj j).1).hom =
+          t ≫ strictHenselizationStructuralMap s
+        dsimp only [N]
+        rw [Category.assoc, Category.assoc]
+        exact congrArg (fun q : strictHenselizationScheme s ⟶ S ↦ t ≫ q)
+          (strictHenselizationStructuralMap_eq s j))
+  have hv {i j : SmallModel.{u} (strictHenselizationNeighbourhoods s)} (f : i ⟶ j) :
+      (pointSmallEtale (t ≫ strictHenselizationStructuralMap s)).fiber.map
+        ((AffineEtale.Spec S).map (N.map f).1) (v i) = v j := by
+    apply Over.OverMorphism.ext
+    change (t ≫ (strictHenselizationCone s).π.app (op (op i)) ≫
+      Spec.map (ΓSpecIso (N.obj i).1.left.unop).inv) ≫
+        Spec.map (N.map f).1.left.unop = _
+    have h := (strictHenselizationCone s).w (f.op.op)
+    let g := (N.map f).1.left.unop
+    change (strictHenselizationCone s).π.app (op (op i)) ≫
+      Spec.map (Spec.map g).appTop = _ at h
+    have hg := congrArg Spec.map (ΓSpecIso_inv_naturality g)
+    simp only [Spec.map_comp] at hg
+    calc
+      _ = t ≫ (strictHenselizationCone s).π.app (op (op i)) ≫
+          Spec.map (Spec.map g).appTop ≫
+            Spec.map (ΓSpecIso (N.obj j).1.left.unop).inv := by
+        simp only [Category.assoc]
+        rw [hg]
+      _ = _ := by
+        rw [← Category.assoc _ _ (Spec.map (ΓSpecIso (N.obj j).1.left.unop).inv), h]
+        rfl
+  let c := ((pointSmallEtale s).presheafFiberCocone G.obj).whisker F.op
+  let hc : IsColimit c :=
+    (Functor.Final.isColimitWhiskerEquiv F.op _).symm
+      ((pointSmallEtale s).isColimitPresheafFiberCocone G.obj)
+  let d : Cocone (F.op ⋙ (CategoryOfElements.π (pointSmallEtale s).fiber).op ⋙
+      G.obj) :=
+    { pt := (pointSmallEtale (t ≫ strictHenselizationStructuralMap s)).sheafFiber.obj G
+      ι :=
+        { app := fun j ↦
+            (pointSmallEtale (t ≫ strictHenselizationStructuralMap s)).toPresheafFiber
+              ((AffineEtale.Spec S).obj (N.obj j.unop).1) (v j.unop) G.obj
+          naturality := by
+            intro i j f
+            dsimp
+            rw [Category.comp_id]
+            change G.obj.map ((AffineEtale.Spec S).map (N.map f.unop).1).op ≫ _ = _
+            rw [GrothendieckTopology.Point.toPresheafFiber_w, hv] } }
+  refine ⟨hc.desc d, ?_, ?_⟩
+  · intro j w hw
+    have he : w = v j := by
+      apply Over.OverMorphism.ext
+      exact hw
+    subst w
+    exact hc.fac d (op j)
+  · intro r hr
+    apply hc.hom_ext
+    intro j
+    change (pointSmallEtale s).toPresheafFiber
+      ((AffineEtale.Spec S).obj (N.obj j.unop).1) (N.obj j.unop).2 G.obj ≫ r = _
+    rw [hr j.unop (v j.unop) rfl]
+    exact (hc.fac d j).symm
 
 /-- Specialization of geometric module stalks, the unique map carrying each affine
 pointed-neighbourhood germ to its germ along the strict-localization projection.
