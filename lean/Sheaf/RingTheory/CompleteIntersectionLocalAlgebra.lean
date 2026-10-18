@@ -5,7 +5,6 @@ Authors: SHEAF group Q90
 -/
 module
 
-public import Mathlib.RingTheory.EssentialFiniteness
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.RingTheory.Regular.RegularSequence
 

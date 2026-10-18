@@ -7,7 +7,6 @@ module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.Algebra.DirectSum.Basic
-public import Mathlib.CategoryTheory.Limits.Shapes.Products
 
 /-!
 # Countable Hom continuity on bounded-below families

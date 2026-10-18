@@ -4,12 +4,8 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 module
 
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Sheaf.Algebra.Homology.DerivedTensor
-public import Mathlib.AlgebraicGeometry.Sites.Etale
-public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
-public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 
 /-!
 # Tensor-invertible objects at finite coefficient level

@@ -7,7 +7,6 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleBoundedConstructible
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Hom
-import Sheaf.Paper.BoundedConstructibleHomFiniteness
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible
 
 /-!

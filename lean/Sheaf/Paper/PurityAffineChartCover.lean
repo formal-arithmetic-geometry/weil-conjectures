@@ -5,7 +5,6 @@ module
 
 public import Mathlib.AlgebraicGeometry.AffineSpace
 public import Sheaf.AlgebraicGeometry.OpenComplementCondition
-public import Mathlib.Data.Finset.Lattice.Fold
 
 /-! # Finite affine chart covers used in the purity admissibility statement
 

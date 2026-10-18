@@ -6,27 +6,8 @@ Authors: SHEAF group NI
 module
 
 public import Sheaf.Paper.ProjectionFormulaArrows
-import Sheaf.Paper.StrictPerfectCoefficientPackage
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
-import Sheaf.CategoryTheory.KInjectiveTotalDerived
-import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullback
-import Sheaf.Algebra.Homology.SplitPerfectTensorKInjective
-import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import Mathlib.Algebra.Homology.BifunctorShift
-import Sheaf.Algebra.Homology.KFlatResolutionGeneral
-import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
-import Sheaf.Algebra.Homology.KFlat
-public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
-import Sheaf.Paper.ProjectionFormulaProjectiveSummand
 import Sheaf.Paper.ringedProjectionFormula_totalization_left
 import Sheaf.Paper.ringedProjectionFormula_totalization_right
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-import Sheaf.CategoryTheory.ModulePullbackTensorIso
-import Sheaf.Paper.RingedTopoiDerivedPullback
-import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 
 /-!
 # Signed totalization of the perfect projection formula

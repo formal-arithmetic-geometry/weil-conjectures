@@ -5,20 +5,10 @@ Authors: SHEAF group N7
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
 public import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
 public import Sheaf.Topology.ProfiniteCondensedRing
 public import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
-public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import Mathlib.CategoryTheory.Triangulated.TStructure.TruncLEGT
-public import Mathlib.CategoryTheory.Triangulated.Subcategory
-public import Mathlib.CategoryTheory.Monoidal.Rigid.Basic
-public import Mathlib.RingTheory.RingHom.Flat
-public import Mathlib.Algebra.Module.FinitePresentation
-public import Mathlib.Topology.ExtremallyDisconnected
-public import Mathlib.Topology.Irreducible
 public import Sheaf.AlgebraicGeometry.FiniteConstantLocalModel
-public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 
 /-!
 # T-admissibility and its scalar local models

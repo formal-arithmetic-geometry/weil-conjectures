@@ -6,8 +6,6 @@ Authors: SHEAF group Q05
 module
 
 public import WeilConjectures.WeilSheaf.FourierInversion.Defs
-public import WeilConjectures.FourierTransform.Defs
-public import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 
 /-!
 # Fourier transforms on constructible Weil complexes

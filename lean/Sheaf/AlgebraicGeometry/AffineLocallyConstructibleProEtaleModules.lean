@@ -8,9 +8,6 @@ module
 public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
 public import Sheaf.AlgebraicGeometry.ProEtaleOperations
 public import Sheaf.Paper.ProEtaleLocallyConstantSheaf
-public import Mathlib.Algebra.Module.FinitePresentation
-public import Mathlib.RingTheory.Noetherian.Defs
-public import Mathlib.Topology.Constructible
 
 /-!
 # Affine-local constructibility for discrete pro-etale coefficients

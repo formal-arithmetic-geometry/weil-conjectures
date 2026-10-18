@@ -5,7 +5,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.BaseChangeArrowLocalization
-public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
 
 /-!
 # Canonical derived étale-localization comparisons

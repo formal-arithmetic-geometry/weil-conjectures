@@ -7,7 +7,6 @@ module
 
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FinitenessCoefficient
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.DerivedCategory
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Basic
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Tensor
 
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
@@ -15,8 +14,6 @@ import Sheaf.AlgebraicGeometry.LfpTensorSingle
 import Sheaf.AlgebraicGeometry.ProEtaleModuleConstructiblePullback
 import all Sheaf.AlgebraicGeometry.CondensedConstructibleSerre
 import all Sheaf.AlgebraicGeometry.ProEtaleAbelianClosedSupport
-import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal
-import Mathlib.AlgebraicGeometry.Noetherian
 
 
 /-! # BoundedConstructibleTensorSingle

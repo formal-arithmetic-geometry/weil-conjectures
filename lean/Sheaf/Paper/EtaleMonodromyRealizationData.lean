@@ -8,11 +8,6 @@ module
 public import Sheaf.AlgebraicGeometry.LisseLatticeCoefficientsSized
 public import Sheaf.Paper.GaloisLisseRepresentations
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
-public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-public import Mathlib.LinearAlgebra.Quotient.Defs
-public import Mathlib.Topology.NoetherianSpace
 
 /-!
 # Integral normalization data for rational monodromy realization

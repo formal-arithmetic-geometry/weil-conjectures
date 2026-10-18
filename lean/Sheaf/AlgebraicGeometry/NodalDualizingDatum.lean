@@ -9,8 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.Modules.Differentials
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Sheaf.AlgebraicGeometry.SheafExt
-public import Mathlib.Algebra.MvPolynomial.PDeriv
-public import Mathlib.LinearAlgebra.Matrix.Determinant.Basic
 public import Mathlib.RingTheory.Regular.RegularSequence
 
 /-!

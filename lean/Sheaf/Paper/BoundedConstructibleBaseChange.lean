@@ -6,7 +6,6 @@ Authors: SHEAF group NH
 module
 
 public import Sheaf.Paper.BoundedConstructiblePushforwardRestriction
-public import Sheaf.Topology.ProfiniteCondensedRing
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
 
 /-!

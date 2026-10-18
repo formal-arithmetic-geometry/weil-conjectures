@@ -5,7 +5,6 @@ Authors: SHEAF group Q42
 -/
 module
 
-public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentation
 public import WeilConjectures.EtaleCohomology.Purity.RealSheaves.WeilFundamentalRepresentationData
 
 /-! # The canonical geometric identification in the Weil fundamental representation
