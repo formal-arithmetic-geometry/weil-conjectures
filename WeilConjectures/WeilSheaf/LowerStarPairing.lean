@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.MonoidalIso
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.MonoidalIso
 public import WeilConjectures.WeilSheaf.LowerStar
 
 /-!

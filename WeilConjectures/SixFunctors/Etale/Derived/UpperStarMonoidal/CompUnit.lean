@@ -76,7 +76,7 @@ variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{
   [MonoidalCategory A] [MonoidalPreadditive A] [SymmetricCategory A] [MonoidalClosed A]
   [Abelian.HasFunctorialFlatResolution A]
 
-open DerivedCategory
+open _root_.DerivedCategory
 
 /-- The counit `η : Lh^* Λ_Y ⟶ Λ_X` of the oplax monoidal derived pullback, in terms of the counit
 of the left derived functor. -/

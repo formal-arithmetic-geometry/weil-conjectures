@@ -9,6 +9,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Stalk
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
+public import WeilConjectures.Topology.RingedModuleSkyscraper
 
 /-!
 # Pullback along flat coverings reflects isomorphisms of modules
@@ -82,8 +83,10 @@ namespace AlgebraicGeometry.Scheme.Modules
 variable {X : Scheme.{u}} (x : X) (I : Type u) [AddCommGroup I] [Module (X.presheaf.stalk x) I]
 
 /-- The sections over `V` of the skyscraper module at `x` with value `I`: a copy of `I` if
-`x ∈ V`, and zero otherwise. -/
-def SkyscraperSections (V : X.Opens) : Type u := PLift (x ∈ V) → I
+`x ∈ V`, and zero otherwise. This is `SheafOfModules.ringedSkyscraperSectionsType` for the
+underlying ringed space. -/
+def SkyscraperSections (V : X.Opens) : Type u :=
+  SheafOfModules.ringedSkyscraperSectionsType X.toRingedSpace x I V
 
 namespace SkyscraperSections
 
@@ -120,15 +123,11 @@ instance : Module Γ(X, V) (SkyscraperSections x I V) where
 
 end SkyscraperSections
 
-/-- The presheaf of abelian groups underlying the skyscraper module at `x` with value `I`. -/
-def skyscraperPresheafAb : X.Opensᵒᵖ ⥤ Ab.{u} where
-  obj V := AddCommGrpCat.of (SkyscraperSections x I V.unop)
-  map i := AddCommGrpCat.ofHom
-    { toFun s hx := s ⟨i.unop.le hx.down⟩
-      map_zero' := rfl
-      map_add' _ _ := rfl }
-  map_id _ := rfl
-  map_comp _ _ := rfl
+/-- The presheaf of abelian groups underlying the skyscraper module at `x` with value `I`.
+It is the abelian skyscraper presheaf `SheafOfModules.ringedSkyscraperPresheafAbOfType` of the
+underlying ringed space. -/
+def skyscraperPresheafAb : X.Opensᵒᵖ ⥤ Ab.{u} :=
+  SheafOfModules.ringedSkyscraperPresheafAbOfType X.toRingedSpace x I
 
 instance (V : X.Opensᵒᵖ) :
     Module (X.ringCatSheaf.obj.obj V) ((skyscraperPresheafAb x I).obj V) :=
@@ -150,25 +149,8 @@ lemma skyscraperPresheafAb_map_smul {V V' : X.Opensᵒᵖ} (i : V ⟶ V')
 
 omit [Module (X.presheaf.stalk x) I] in
 lemma isSheaf_skyscraperPresheafAb :
-    Presheaf.IsSheaf (Opens.grothendieckTopology X) (skyscraperPresheafAb x I) := by
-  rw [Presheaf.isSheaf_iff_isSheaf_forget _ _ (CategoryTheory.forget Ab.{u}),
-    isSheaf_iff_isSheaf_of_type]
-  intro U S hS s hs
-  -- the values of the family at `x` do not depend on the chosen open containing `x`
-  have key {V W : X.Opens} (f : V ⟶ U) (g : W ⟶ U) (hf : S f) (hg : S g) (hV : x ∈ V)
-      (hW : x ∈ W) :
-      s f hf ⟨hV⟩ = s g hg ⟨hW⟩ := by
-    have := hs (homOfLE (inf_le_left : V ⊓ W ≤ V)) (homOfLE inf_le_right) hf hg
-      (Subsingleton.elim _ _)
-    exact congr_arg (fun t : SkyscraperSections x I (V ⊓ W) ↦ t ⟨⟨hV, hW⟩⟩) this
-  choose V f hf hV using hS
-  refine ⟨show SkyscraperSections x I U from
-    fun hx ↦ s (f x hx.down) (hf x hx.down) ⟨hV x hx.down⟩, fun W g hg ↦ ?_, fun t ht ↦ ?_⟩
-  · refine SkyscraperSections.ext fun hx ↦ ?_
-    exact key _ _ _ _ _ _
-  · refine SkyscraperSections.ext fun hx ↦ ?_
-    exact congr_arg (fun t : SkyscraperSections x I (V x hx) ↦ t ⟨hV x hx⟩)
-      (ht (f x hx) (hf x hx))
+    Presheaf.IsSheaf (Opens.grothendieckTopology X) (skyscraperPresheafAb x I) :=
+  SheafOfModules.ringedSkyscraperPresheafAbOfType_isSheaf X.toRingedSpace x I
 
 /-- The skyscraper `𝒪_X`-module at `x` with value an `𝒪_{X,x}`-module `I`: its sections over `V`
 are `I` if `x ∈ V`, and `0` otherwise, with `Γ(X, V)` acting through the germ map. -/

@@ -11,6 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.ZeroLocus
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
+import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 
 /-! # Eventual generation from a finite affine section cover
 
@@ -26,61 +27,6 @@ universe u
 open CategoryTheory MonoidalCategory
 
 namespace AlgebraicGeometry.Scheme.Modules
-
--- Stacks 01PB: refine the finite generating cover by basic opens of U and descend
--- finiteness of their section modules. Adapted from the proved private helper in
--- WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine; no existence data is defined
--- from an unproved theorem.
-private theorem finite_sections_of_finiteType {X : Scheme.{u}} (F : X.Modules)
-    [F.IsQuasicoherent] [F.IsFiniteType] {U : X.Opens} (hU : IsAffineOpen U) :
-    Module.Finite Γ(X, U) Γ(F, U) := by
-  obtain ⟨q, hq⟩ := SheafOfModules.IsFiniteType.exists_localGeneratorsData F
-  have hcov : TopologicalSpace.IsOpenCover q.X :=
-    (Opens.coversTop_iff _ q.X).mp q.coversTop
-  let s : Set Γ(X, U) := {g | Module.Finite Γ(X, X.basicOpen g) Γ(F, X.basicOpen g)}
-  have hs : Ideal.span s = ⊤ := by
-    rw [← hU.self_le_iSup_basicOpen_iff]
-    intro x hx
-    obtain ⟨i, hi⟩ := hcov.exists_mem x
-    obtain ⟨g, hgW, hxg⟩ := hU.exists_basicOpen_le ⟨x, hi⟩ hx
-    have hV := hU.basicOpen g
-    let f : Spec Γ(X, X.basicOpen g) ⟶ Scheme.Opens.toScheme (q.X i) :=
-      IsOpenImmersion.lift (Scheme.Opens.ι (q.X i)) hV.fromSpec (by
-        rw [Scheme.Opens.range_ι]
-        exact hV.opensRange_fromSpec.le.trans hgW)
-    have hf : f ≫ Scheme.Opens.ι (q.X i) = hV.fromSpec := IsOpenImmersion.lift_fac _ _ _
-    have : IsOpenImmersion (f ≫ Scheme.Opens.ι (q.X i)) := by rw [hf]; infer_instance
-    have : IsOpenImmersion f := IsOpenImmersion.of_comp f (Scheme.Opens.ι (q.X i))
-    have : Limits.PreservesColimitsOfSize.{u, u} (overEquiv (q.X i)).functor :=
-      (overEquiv (q.X i)).toAdjunction.leftAdjoint_preservesColimits
-    have : Limits.PreservesColimitsOfSize.{u, u} (restrictFunctor f) := inferInstance
-    let T := (overEquiv (q.X i)).functor ⋙ restrictFunctor f
-    have : Limits.PreservesColimitsOfSize.{u, u} T := inferInstance
-    let e : T.obj (F.over (q.X i)) ≅ F.restrict hV.fromSpec :=
-      (restrictFunctor f).mapIso ((overFunctorEquiv (q.X i)).app F) ≪≫
-        ((restrictFunctorComp f (Scheme.Opens.ι (q.X i))).app F).symm ≪≫
-        (restrictFunctorCongr hf).app F
-    let σ := ((q.generators i).map T
-      ((restrictUnitIso f).symm ≪≫
-        (restrictFunctor f).mapIso (overEquivFunctorObjUnitIso (q.X i)))).ofEpi e.hom
-    have : Finite σ.I := (hq.isFiniteType i).finite
-    have : IsIso (F.restrict hV.fromSpec).fromTildeΓ :=
-      isIso_fromTildeΓ_of_isQuasicoherent _
-    have : Module.Finite Γ(X, X.basicOpen g) Γ(F.restrict hV.fromSpec, ⊤) :=
-      finite_sections_top_of_isIso_fromTildeΓ _ σ
-    exact TopologicalSpace.Opens.mem_iSup.mpr
-      ⟨⟨g, finite_sections_of_finite_sections_restrict_fromSpec F hV⟩, hxg⟩
-  let _ (r : s) : Module Γ(X, U) Γ(F, X.basicOpen r.1) :=
-    Module.compHom _ (algebraMap Γ(X, U) Γ(X, X.basicOpen r.1))
-  have _ (r : s) := isLocalizedModule_basicOpen F hU r.1
-  have _ (r : s) := hU.isLocalization_basicOpen r.1
-  have _ (r : s) : IsScalarTower Γ(X, U) Γ(X, X.basicOpen r.1) Γ(F, X.basicOpen r.1) :=
-    ⟨fun a b m ↦ mul_smul _ _ _⟩
-  exact Module.Finite.of_localizationSpan' s hs
-    (Rₚ := fun r : s ↦ Γ(X, X.basicOpen r.1)) (fun r ↦
-      { toFun := F.presheaf.map (homOfLE (X.basicOpen_le r.1)).op
-        map_add' := map_add _
-        map_smul' := map_smul F _ }) fun r ↦ r.2
 
 private theorem eqToHom_app_tmul_tensorPow {X : Scheme.{u}} (G M : X.Modules)
     (s : 𝟙_ X.Modules ⟶ M) {m n : ℕ} (h : m = n) (U : X.Opens) (t : Γ(G, U)) :
