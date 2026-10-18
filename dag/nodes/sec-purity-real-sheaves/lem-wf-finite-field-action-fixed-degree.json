@@ -1,0 +1,74 @@
+{
+ "id": "lem-wf-finite-field-action-fixed-degree",
+ "kind": "statement",
+ "title": "Degree and Galois property over the fixed field of a finite faithful field action",
+ "statement": "Let $L$ be a field [def-pc-field-extension], let $G$ be a finite group, and let $\\rho:G\\to\\operatorname{Aut}(L)$ be an injective group homomorphism, where $\\operatorname{Aut}(L)$ consists of field automorphisms. Put $L^G=\\{x\\in L:\\rho(g)(x)=x\\text{ for every }g\\in G\\}$, with its induced field operations. Then $L/L^G$ is finite Galois: it is finite-dimensional, separable algebraic [def-weil-pbc-separable-algebraic-extension], and normal (every element's minimal polynomial over $L^G$ splits over $L$). Moreover $[L:L^G]=|G|$, where the degree denotes vector-space dimension.",
+ "source": {
+  "document": "literature/stacks-project/fields.tex",
+  "place": "Tag 09I3 (lemma-galois-over-fixed-field), finite faithful action, Galois property and degree assertions; lines 2727-2781."
+ },
+ "stmt_deps": [
+  "def-pc-field-extension",
+  "def-weil-pbc-separable-algebraic-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "of_fixed_field|theorem finrank_eq_card",
+   "results": "4 hits: Mathlib/FieldTheory/Fixed.lean, Mathlib/FieldTheory/Galois/IsGaloisGroup.lean, Mathlib/FieldTheory/Galois/Basic.lean, Mathlib/FieldTheory/Galois/Basic.lean; subdirectory FieldTheory",
+   "date": "2026-10-18",
+   "verdict": "match: IsGalois.of_fixed_field and FixedPoints.finrank_eq_card; finite-dimensional instance in Fixed.lean:296, all read in the pinned source."
+  },
+  {
+   "tool": "leansearch",
+   "query": "If a finite group G acts faithfully by automorphisms on a field E, then E over its fixed field is Galois and its degree is the cardinality of G.",
+   "results": "8 hits: IsGalois.of_fixed_field, IsGaloisGroup.fixedPoints, FixedPoints.finrank_eq_card, AlgEquiv.card_le, IsGaloisGroup.isGalois, FixedPoints.toAlgAutMulEquiv, IsGalois.of_card_aut_eq_finrank, FixedPoints.finrank_le_card",
+   "date": "2026-10-18",
+   "verdict": "match: IsGalois.of_fixed_field and FixedPoints.finrank_eq_card; finite-dimensional instance in Fixed.lean:296, all read in the pinned source."
+  },
+  {
+   "tool": "loogle",
+   "query": "FixedPoints.subfield, Module.finrank",
+   "results": "2 hits: FixedPoints.finrank_le_card, FixedPoints.finrank_eq_card",
+   "date": "2026-10-18",
+   "verdict": "match: IsGalois.of_fixed_field and FixedPoints.finrank_eq_card; finite-dimensional instance in Fixed.lean:296, all read in the pinned source."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite group acting faithfully on a field makes the field Galois over the fixed subfield, with degree equal to the order of the group",
+   "results": "8 hits: IsGaloisGroup.fixedPoints, IsGalois.of_fixed_field, IsGaloisGroup.isGalois, FixedPoints.finrank_eq_card, IsGaloisGroup.finiteDimensional, IsGaloisGroup.finite, IsGaloisGroup.intermediateField, IsGaloisGroup.faithful",
+   "date": "2026-10-18",
+   "verdict": "match: IsGalois.of_fixed_field and FixedPoints.finrank_eq_card; finite-dimensional instance in Fixed.lean:296, all read in the pinned source."
+  }
+ ],
+ "mathlib_match": {
+  "declaration": "IsGalois.of_fixed_field",
+  "file": "Mathlib/FieldTheory/Galois/Basic.lean",
+  "line": 94,
+  "how": "one declaration per clause: IsGalois.of_fixed_field (Mathlib/FieldTheory/Galois/Basic.lean:94) gives the separable algebraic and normal clauses for the action induced by rho; the FiniteDimensional instance at Mathlib/FieldTheory/Fixed.lean:296 gives finiteness; FixedPoints.finrank_eq_card at Mathlib/FieldTheory/Fixed.lean:346 gives the degree, with FaithfulSMul supplied by injectivity of rho. Choosing a Fintype for the finite group only changes Nat.card to Fintype.card. Sources read 2026-10-18."
+ },
+ "status": "mathlib",
+ "created": {
+  "by": "worker",
+  "item": "lem-wf-henselian-finite-galois-lift",
+  "date": "2026-10-18",
+  "group": "Q09"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-i-real-boundary",
+ "blueprint": {
+  "from": {
+   "node": "lem-wf-boundary-stalk-invariants",
+   "place": "Proof paragraph 2: the fraction field of the strict henselization and its automorphisms over the henselization; the finite-stage fraction-field and degree calculation in Stacks 0BSW (lemma-identify-inertia), paragraph beginning 'Let kappa prime/kappa be a finite Galois extension'.",
+   "via": [
+    "lem-wf-henselian-finite-galois-lift",
+    "lem-wf-strict-henselian-fraction-inertia"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -14,9 +14,104 @@
   "def-pc-field-extension",
   "def-weil-pbc-separable-algebraic-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-localization-normal-domain], every prime localization of the normal domain $H$ is a normal domain; hence $H$ is a normal ring in [def-weil-pbc-normal-ring]. Applying [lem-weil-pbc-etale-over-normal-ring-normal] to $H\\to B$ makes $B$ a normal ring. If $\\mathfrak n$ is the unique maximal ideal of $B$, then $B=B_{\\mathfrak n}$: every element outside $\\mathfrak n$ is already a unit. The definition of a normal ring therefore says directly that $B$ is a normal domain. In particular it is integrally closed in $E=\\operatorname{Frac}(B)$.",
+   "uses": [
+    "lem-weil-pbc-localization-normal-domain",
+    "def-weil-pbc-normal-ring",
+    "lem-weil-pbc-etale-over-normal-ring-normal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00GY (lemma-localize-normal-domain), 033C (lemma-normal-goes-up), and 00GV (definition-ring-normal)."
+   }
+  },
+  {
+   "text": "The etale map makes $B$ flat over $H$ by [lem-weil-pbc-etale-algebra-flat]. Since $H$ is local and $B$ is module-finite, [lem-weil-pbc-finite-flat-local-free] makes $B$ free. Choose a finite basis $b_1,\\ldots,b_n$. Reducing its coordinate isomorphism $H^n\\simeq B$ modulo $\\mathfrak m$ gives $\\kappa^n\\simeq B/\\mathfrak mB\\simeq e$, so $n=[e:\\kappa]>0$. If $h\\in H$ maps to zero in $B$, it annihilates each $b_i$, whose coordinate vector has a coordinate equal to $1$; thus $h=0$. This proves injectivity and allows us to regard $H\\subset B$ and $K\\subset E$.",
+   "uses": [
+    "lem-weil-pbc-etale-algebra-flat",
+    "lem-weil-pbc-finite-flat-local-free"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00U2 (lemma-etale), flatness clause, and 00NZ (lemma-finite-flat-local). The basis calculation supplies the degree calculation of Tag 0BSW."
+   }
+  },
+  {
+   "text": "Inside $E$ put $C=\\{b/s:b\\in B,\\ 0\\ne s\\in H\\}$. The $b_i$ of step 2 form a $K$-basis of $C$: spanning follows by dividing their $H$-coordinate expansions by $s$, and independence follows by multiplying a putative $K$-linear relation by a common nonzero denominator in $H$ and using independence over $H$. For $0\\ne c\\in C$, multiplication by $c$ is an injective endomorphism of this $n$-dimensional $K$-vector space (since $C\\subset E$); the images of a basis are $n$ independent vectors and hence a basis, so this map is surjective and $cd=1$ for some $d\\in C$. Thus $C$ is a field containing $B$, and $C=E$. The map $K\\otimes_HB\\to C$, $k\\otimes b\\mapsto kb$, is an isomorphism: its inverse sends $b/s$ to $(1/s)\\otimes b$. Equality of fractions implies equality after multiplying by the invertible scalar $s t$, and the tensor balancing relation checks both composites on pure tensors. Consequently $E=K\\otimes_HB$ and $[E:K]=n=[e:\\kappa]$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BSW (lemma-identify-inertia), fraction fields and degrees calculation; elementary basis and fraction calculation filling the omitted detail."
+   }
+  },
+  {
+   "text": "Every $b\\in B$ is integral over $H$ by [lem-weil-pbc-finite-algebra-is-integral]. Conversely let $x\\in E$ satisfy a monic polynomial over $H$. The same polynomial, after the inclusion $H\\subset B$, is monic over $B$. Since $B$ is a normal domain by step 1, [def-weil-pbc-normal-ring] gives $x\\in B$. Hence $B$ is exactly the integral closure of $H$ in $E$.",
+   "uses": [
+    "lem-weil-pbc-finite-algebra-is-integral",
+    "def-weil-pbc-normal-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00GK (lemma-finite-is-integral) and Tag 0309 (definition-domain-normal)."
+   }
+  },
+  {
+   "text": "An $H$-algebra automorphism $\\tau$ of $B$ extends uniquely to a $K$-automorphism of $E$ by $b/c\\mapsto\\tau(b)/\\tau(c)$ for $c\\ne0$ in $B$; the inverse is the analogous extension of $\\tau^{-1}$. Conversely a $K$-automorphism $\\sigma$ of $E$ sends a root of a monic $H$-polynomial to another root of the same polynomial, since it fixes $H\\subset K$. Step 4 gives $\\sigma(B)\\subset B$, and applying it to $\\sigma^{-1}$ gives equality. Restriction and extension are inverse by their formulas on $B$ and on fractions, and these formulas also preserve composition. We have proved $\\operatorname{Aut}_K(E)\\simeq\\operatorname{Aut}_H(B)$ with restriction as the displayed forward map.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Tag 0BSW (lemma-identify-inertia), passage to fraction fields; explicit elementary automorphism calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-henselian-finite-etale-map-bijective] with $R=H$ and $S=T=B$. Its hypotheses hold because $H$ is henselian local and $B$ is finite etale. It identifies $\\operatorname{End}_H(B)$ with $\\operatorname{End}_\\kappa(e)$ by reduction. Reduction respects identity and composition. For any $\\kappa$-automorphism $u$ of $e$, lift both $u$ and $u^{-1}$ using surjectivity; their two composites reduce to the identity and so are identities by injectivity. Thus these lifts are inverse automorphisms. Conversely the reduction of an automorphism has the reduced inverse. Restricting the bijection therefore gives $\\operatorname{Aut}_H(B)\\simeq\\operatorname{Gal}(e/\\kappa)$, with the prescribed action on $B/\\mathfrak mB$.",
+   "uses": [
+    "lem-weil-pbc-henselian-finite-etale-map-bijective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 04GK (lemma-henselian-cat-finite-etale), full faithfulness, applied to automorphisms by lifting inverses."
+   }
+  },
+  {
+   "text": "Let $G=\\operatorname{Aut}_H(B)$, acting on $E$ by step 5. The action is faithful, since its restriction to $B$ is the original automorphism. By step 6 and [lem-weil-pbc-finite-galois-fixed-field] applied to the given finite Galois extension $e/\\kappa$, $G$ is finite and $|G|=[e:\\kappa]=n$. Set $F=E^G$; it contains $K$ because every extended automorphism fixes $K$. The new general field-action leaf [lem-wf-finite-field-action-fixed-degree] gives that $E/F$ is finite Galois and $[E:F]=|G|=n$. Also $F/K$ is finite: a $K$-linearly independent subset of $F$ remains independent in the finite-dimensional space $E$, so its size is at most $n$. Now [lem-weil-pbc-field-degree-multiplicativity] gives $n=[E:K]=[E:F][F:K]=n[F:K]$. Since $n>0$, $[F:K]=1$. The nonzero element $1$ is consequently a $K$-basis of $F$, giving $F=K$. Hence $E/K$ is Galois. Combining steps 5 and 6 yields exactly the two displayed group isomorphisms and their stated maps.",
+   "uses": [
+    "lem-weil-pbc-finite-galois-fixed-field",
+    "lem-wf-finite-field-action-fixed-degree",
+    "lem-weil-pbc-field-degree-multiplicativity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/fields.tex",
+    "place": "Tag 09I3 (lemma-galois-over-fixed-field), Tag 09I1 (lemma-finite-Galois) for the residue degree, and Tag 09G9 (lemma-multiplicativity-degrees); fills the fraction-field/degree detail of Tag 0BSW."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-normal-domain",
+  "def-weil-pbc-normal-ring",
+  "lem-weil-pbc-etale-over-normal-ring-normal",
+  "lem-weil-pbc-etale-algebra-flat",
+  "lem-weil-pbc-finite-flat-local-free",
+  "lem-weil-pbc-finite-algebra-is-integral",
+  "lem-weil-pbc-henselian-finite-etale-map-bijective",
+  "lem-weil-pbc-finite-galois-fixed-field",
+  "lem-wf-finite-field-action-fixed-degree",
+  "lem-weil-pbc-field-degree-multiplicativity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Tag 0BSW (lemma-identify-inertia), finite Galois residue-lift paragraph: explicit expansion of its omitted fraction-field and degree argument, using Algebra 04GK, 033C, 00U2, 00NZ, 00GK and Fields 09I3, 09G9."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -45,10 +140,38 @@
    "results": "8 hits: IsGaloisGroup.toFractionRing, IsGaloisGroup.of_isFractionRing, IsGaloisGroup.iff_isFractionRing, IsGaloisGroup.to_isFractionRing, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Algebra.instIsSeparableResidueFieldOfFormallyUnramified, Algebra.instFiniteResidueFieldOfFormallyUnramified, Algebra.FormallyUnramified.of_map_maximalIdeal",
    "date": "2026-10-18",
    "verdict": "no match: generic Galois/fraction-ring results assume a ring Galois action or invariant-ring equality; they do not derive it from a finite etale henselian residue lift."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite local etale algebra over a henselian normal domain has a Galois fraction field extension when its residue extension is Galois",
+   "results": "8 hits: IsGaloisGroup.iff_isFractionRing, IsGaloisGroup.of_isFractionRing, IsGaloisGroup.to_isFractionRing, Ring.instIsGaloisFractionRingNormalClosure, IsGaloisGroup.toFractionRing, Algebra.exists_etale_bijective_residueFieldMap_and_map_eq_mul_and_isCoprime, Algebra.FormallyUnramified.of_map_maximalIdeal, Algebra.instIsSeparableResidueFieldOfFormallyUnramified",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: fraction-field Galois-group results require an already established invariant-ring or ring-Galois-action hypothesis; they do not construct it from the henselian residue lift."
+  },
+  {
+   "tool": "grep",
+   "query": "hensel.*galois|galois.*hensel|etale.*galois|galois.*etale",
+   "results": "0 hits: ; subdirectory RingTheory",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: fraction-field Galois-group results require an already established invariant-ring or ring-Galois-action hypothesis; they do not construct it from the henselian residue lift."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For a henselian normal local domain H, a finite local etale H algebra with Galois residue extension has Galois fraction field extension of the same degree and the same automorphism group.",
+   "results": "8 hits: IsGaloisGroup.to_isFractionRing, Ring.instIsGaloisFractionRingNormalClosure, IsGalois.card_aut_eq_finrank, IsGaloisGroup.intermediateField, IsGalois.to_normal, IsGaloisGroup.mulEquivAlgEquiv, IsGalois.IntermediateField.AdjoinSimple.card_aut_eq_finrank, IsGalois.of_card_aut_eq_finrank",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: fraction-field Galois-group results require an already established invariant-ring or ring-Galois-action hypothesis; they do not construct it from the henselian residue lift."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsHenselian\", \"IsGalois\"",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match for the item: fraction-field Galois-group results require an already established invariant-ring or ring-Galois-action hypothesis; they do not construct it from the henselian residue lift."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-wf-strict-henselian-fraction-inertia",
@@ -67,5 +190,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-wf-henselian-finite-galois-lift",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded the finite-stage calculation of Stacks 0BSW into normality, freeness and equal degrees, explicit fraction/tensor identification, integral closure, restriction/extension and reduction of automorphisms, and a faithful finite field action whose fixed field is K by degrees. Reused all available algebra inputs; created only the general Mathlib field-action leaf 09I3. Checked exact project attachment candidates; none states the item. All searches are logged via msearch.py.",
+  "blueprint": "Proof paragraph 2: the fraction field of the strict henselization and its automorphisms over the henselization; the finite-stage fraction-field and degree calculation in Stacks 0BSW (lemma-identify-inertia), paragraph beginning 'Let kappa prime/kappa be a finite Galois extension'.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-over-normal-ring-normal",
+    "why": "Generic preservation of normality under etale ring maps, needed for the finite henselian residue lift; the boundary unit supplies no replacement algebra lemma."
+   },
+   {
+    "node": "lem-weil-pbc-henselian-finite-etale-map-bijective",
+    "why": "Generic full faithfulness of finite etale residue reduction over a henselian local ring; supplies unique lifts of automorphisms, not an alternative boundary-stalk route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-over-normal-ring-normal",
+  "lem-weil-pbc-henselian-finite-etale-map-bijective"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-Codex-Q09-5c6c40e7c",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q09-5c6c40e7c (reviewer sub-agent of L); spot-checked: Read both nodes, every proof step and cited statement, current blueprint route, Stacks passages, and pinned Mathlib matches. Normality, degrees, tensor identification, integral closure, and both automorphism maps check out. No duplicate, cycle, forbidden dependency, or repair found. Accepted both declared algebra tool_uses; details in review.md."
  }
 }

@@ -12,9 +12,93 @@
   "def-weil-pbc-proetale-site",
   "def-trf-geometric-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathcal A=X_{\\mathrm{aff,proet}}$ be the full subsite of affine weakly etale objects with standard finite affine coverings. By [lem-sfb-proetale-affine-subsite-equivalence], restriction gives an equivalence $E:\\operatorname{Sh}(X_{\\mathrm{proet}})\\simeq\\operatorname{Sh}(\\mathcal A)$. We will verify the finitary-slice criterion on $\\mathcal A$.",
+   "uses": [
+    "lem-sfb-proetale-affine-subsite-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098W, lemma-alternative; small-site part of the proof of Tag 0992, lemma-points-proetale"
+   }
+  },
+  {
+   "text": "Index by every object $U$ of the chosen small skeleton of $\\mathcal A$ [def-weil-pbc-proetale-site]. Put $h_U=(\\operatorname{Hom}_{\\mathcal A}(-,U))^\\#$ using [def-weil-pbc-sheafification]. The canonical map $e:\\coprod_U h_U\\to1$ is epic: if $a,b:1\\to F$ agree after $e$, they agree after every $h_U\\to1$ and hence after the unit $\\operatorname{Hom}(-,U)\\to h_U$. Evaluating those equal composites at $\\operatorname{id}_U$ gives $a_U(*)=b_U(*)$. This holds for every $U$, so $a=b$ as natural transformations [def-weil-pbc-sites-and-cohomology]. This proves the required representable-cover assertion directly, without subcanonicity or a cover of a non-affine terminal scheme.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "def-weil-pbc-sheafification",
+    "def-weil-pbc-sites-and-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YN, lemma-criterion-points, hypothesis (1): elementary verification using all objects and the sheafification unit"
+   }
+  },
+  {
+   "text": "Fix $U\\in\\mathcal A$. For a cospan $V\\to T\\leftarrow W$ in $\\mathcal A/U$, form $P=V\\times_TW$ as a scheme [def-pc-fibre-product]. Since $V,T,W$ are affine [def-pc-scheme], choose spectrum presentations; their arrows correspond to ring homomorphisms by [def-weil-affine-spectrum]. The formula in [lem-weil-pbc-fibre-product-affine-spectra] identifies $P$ with the spectrum of the corresponding tensor product, so $P$ is affine. The $X$-morphism $V\\to T$ is weakly etale by [lem-trf-weakly-etale-between-objects], since $V\\to X$ and $T\\to X$ are weakly etale. Its base change $P\\to W$ and then its composite $P\\to X$ are weakly etale by [lem-weil-pbc-ind-etale-stability]. Thus $P\\to X$ belongs to $\\mathcal A$; its map to $U$ makes it an object of $\\mathcal A/U$. The scheme universal property gives a unique map from every cone in this full slice category, so it is its pullback. This verifies affine-slice closure itself; no identification with a qcqs slice is used.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pc-scheme",
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-trf-weakly-etale-between-objects",
+    "lem-weil-pbc-ind-etale-stability"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098M, lemma-fibre-products-proetale, affine fibre-product argument, expanded through the existing affine-spectrum and weakly-etale nodes"
+   }
+  },
+  {
+   "text": "The identity $U\\to U$ is terminal in $\\mathcal A/U$. Step 3 supplies all pullbacks there. Apply [lem-weil-pbc-finite-limits-from-terminal-pullbacks](1) to obtain finite limits. By [lem-sfb-proetale-affine-subsite-equivalence], the chosen coverings of $\\mathcal A$ are standard finite affine coverings; a covering in the slice has the same underlying family and is therefore finite itself. Taking this family as its own refinement verifies the finite-cover-refinement hypothesis, including the empty covering of the empty scheme. This argument requires only that the objects of $\\mathcal A$ be affine, with no quasi-compactness or separatedness assumption on $X$.",
+   "uses": [
+    "lem-weil-pbc-finite-limits-from-terminal-pullbacks",
+    "lem-sfb-proetale-affine-subsite-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 098W and 0992: standard finite coverings on the affine subsite; slice finite limits from terminal objects and the affine pullbacks of Tag 098M"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-site-finitary-slice-enough-points] to $\\mathcal A$, with all its objects as the set-indexed family: step 2 proves the epimorphism hypothesis and steps 3-4 prove both slice hypotheses. We get a conservative set of points $p_j:\\mathbf{Set}\\to\\operatorname{Sh}(\\mathcal A)$. Compose these with the inverse of the equivalence $E$ of [lem-sfb-proetale-affine-subsite-equivalence]. An equivalence has an inverse adjunction and preserves all limits, by applying its inverse to the limit universal property, so this is a geometric morphism. By [def-trf-geometric-morphism], its inverse image is $p_j^{-1}E$. If all these functors send a morphism $a$ to bijections, conservativity makes $E(a)$ an isomorphism, and the inverse equivalence makes $a$ an isomorphism. The family remains set-indexed; its members are arbitrary topos points as asserted.",
+   "uses": [
+    "lem-sfb-site-finitary-slice-enough-points",
+    "lem-sfb-proetale-affine-subsite-equivalence",
+    "def-trf-geometric-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0992, lemma-points-proetale: Tag 00YN followed by transport through Tag 098W"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pc-scheme",
+  "def-trf-geometric-morphism",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-sfb-proetale-affine-subsite-equivalence",
+  "lem-sfb-site-finitary-slice-enough-points",
+  "lem-trf-weakly-etale-between-objects",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-finite-limits-from-terminal-pullbacks",
+  "lem-weil-pbc-ind-etale-stability"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 0992, lemma-points-proetale and proof via Tags 098N, 098W, 00YN and 00YQ"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +141,66 @@
    "results": "{\"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\", \"Mathlib/AlgebraicGeometry/Sites/EtalePoint.lean\"], \"sub\": \"AlgebraicGeometry/Sites\"}",
    "date": "2026-10-18",
    "verdict": "no match: hits give ordinary module flatness, sheaf pullback constructions, or points of topological/etale sites, not this assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A site has enough points when a set of objects covers the final object and every slice has finite limits and finite covering refinements",
+   "results": "CategoryTheory.Precoherent; CategoryTheory.GrothendieckTopology.Point; GrothendieckTopology.Subcanonical; coherentTopology; extensiveTopology; Point.isCofiltered; coherentCoverage; coherentTopology.subcanonical; no Deligne slice criterion",
+   "date": "2026-10-18",
+   "verdict": "no match: only generic point and coherent-topology infrastructure"
+  },
+  {
+   "tool": "loogle",
+   "query": "GrothendieckTopology.HasEnoughPoints, IsCoverDense, slice",
+   "results": "0 hits; loogle reports unknown identifier GrothendieckTopology.HasEnoughPoints",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "criterion.points|IsCoverDense|HasEnoughPoints (Mathlib/CategoryTheory/Sites)",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Deligne criterion for enough points from finitary slices",
+   "results": "Finset.sized_slice; CategoryTheory.Subfunctor.IsFinite.mk; SSet.finite_of_hasDimensionLT; Finset.slice; Subfunctor.IsFinite; Finset.mem_slice; affine-transition results; no site criterion",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction from the small pro-etale site to affine pro-etale objects is an equivalence of sheaf topoi",
+   "results": "AffineScheme.ΓIsEquiv; AffineZariskiSite.sheafEquiv; Functor.IsDenseSubsite.sheafEquiv; Etale.forgetFullyFaithful; Equivalence.sheafCongr; no pro-etale affine subsite theorem",
+   "date": "2026-10-18",
+   "verdict": "no match: generic dense-subsite equivalences only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsDenseSubsite.sheafEquiv, ProEt",
+   "results": "0 hits; loogle reports unknown identifier ProEt",
+   "date": "2026-10-18",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "IsDenseSubsite|sheafEquiv|ProEt (Mathlib/CategoryTheory/Sites)",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Affine pro-etale subsite has equivalent sheaf topos",
+   "results": "AffineZariskiSite.sheafEquiv; Functor.IsDenseSubsite.sheafEquiv_functor; Equivalence.sheafCongr_functor; no pro-etale affine subsite theorem",
+   "date": "2026-10-18",
+   "verdict": "no match: only affine Zariski and generic dense-subsite APIs"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-module-mapmod-pullback-kflat",
@@ -72,10 +212,84 @@
  "blueprint": {
   "from": {
    "node": "lem-sfb-module-mapmod-pullback-kflat",
-   "place": "Proof: testing against arbitrary acyclic module complexes on X; enough topos points makes the K-flat stalk criterion applicable",
+   "place": "Current blueprint proof, final sentence: \"one tests $f^*P\\otimes_{f^*\\Lambda_Y}N$ against an arbitrary acyclic complex $N$\". This is an auxiliary input for the replacement stalk argument in the current ancestor DAG split (step 4), not a claim that the blueprint contains an enough-points or stalk argument.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-sfb-proetale-enough-points",
+  "worker": "stage1",
+  "summary": "Repaired the returned split: proved the cover by all sheafified representables directly; established closure of affine slices under scheme fibre products using existing affine-spectrum, weakly-etale-between-objects, and stability nodes; applied the existing terminal/pullback criterion; corrected all blueprint provenance to the actual final arbitrary-acyclic-test sentence. Retained two statement-only nodes for the affine-site comparison and generic finitary-slice point criterion. No additional nodes, no change of the item statement.",
+  "blueprint": "Current blueprint proof, final sentence: \"one tests $f^*P\\otimes_{f^*\\Lambda_Y}N$ against an arbitrary acyclic complex $N$\". This is an auxiliary input for the replacement stalk argument in the current ancestor DAG split (step 4), not a claim that the blueprint contains an enough-points or stalk argument. The auxiliary item is explicitly used in step 4 of the current ancestor split; its five steps implement the Stacks 0992 argument, not an imaginary blueprint sentence.",
+  "tool_uses": [
+   {
+    "node": "def-pc-fibre-product",
+    "why": "Scheme pullback universal property restricts to the full affine slice once closure is proved."
+   },
+   {
+    "node": "def-pc-scheme",
+    "why": "Defines affine as isomorphic to a spectrum, used to apply the existing tensor-product formula."
+   },
+   {
+    "node": "def-weil-affine-spectrum",
+    "why": "Identifies morphisms between affine spectrum presentations with ring maps."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic affine scheme pullback formula proves the missing affine closure; the unit has no alternate affine-geometry lemma."
+   },
+   {
+    "node": "lem-trf-weakly-etale-between-objects",
+    "why": "Generic between-objects theorem supplies weak etaleness of V to T, before base change."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Its weakly-etale composition and base-change clauses prove that the scheme pullback stays an object over X."
+   },
+   {
+    "node": "lem-weil-pbc-finite-limits-from-terminal-pullbacks",
+    "why": "Generic categorical criterion turns the terminal identity and proved pullbacks into finite limits."
+   },
+   {
+    "node": "def-weil-pbc-proetale-site",
+    "why": "Supplies the small-skeleton convention and the weakly-etale small site."
+   },
+   {
+    "node": "def-weil-pbc-sites-and-cohomology",
+    "why": "Identifies sheaf morphisms as natural transformations for the elementary epicity proof."
+   },
+   {
+    "node": "def-weil-pbc-sheafification",
+    "why": "Its unit defines associated representables without an extra subcanonicity theorem."
+   },
+   {
+    "node": "def-trf-geometric-morphism",
+    "why": "Supplies the composite inverse-image formula when transporting points."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pc-fibre-product",
+  "def-pc-scheme",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-trf-weakly-etale-between-objects",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-weil-pbc-finite-limits-from-terminal-pullbacks",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-sheafification",
+  "def-trf-geometric-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-Codex-Q62-6be7c504e",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q62-6be7c504e (reviewer sub-agent of L); spot-checked: Read the item and both new nodes in full. Stacks 0992, 098W, 098M, 00YN and 00YQ support all five steps. Checked affine-slice closure, covering conventions, edge cases, duplicates, dependencies and route restrictions. No mathematical faults or fixes found. Detailed checks and snapshot limitations are recorded in review.md."
  }
 }
