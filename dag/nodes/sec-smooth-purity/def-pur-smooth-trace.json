@@ -155,5 +155,31 @@
   "group": "Q102",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q102-3379db962 (reviewer sub-agent of L); spot-checked: I read the whole item against the current blueprint main-20261015/sec-smooth-purity/sk-def-sp-trace/def-pur-smooth-trace.md (order 2365), its _section.md (sk-def-sp-trace), the old master text (order 2021) and every cited node's statement. Both composites are correct. gamma_{f,K}: Lf^*K(d)[2d] -> Rf^!K has the same direction in def-pur-smooth-purity-map and its blueprint_update (1⊗Pi_f^{-1}, then phi). The unit identification Lf^*Lambda_Y ≅ Lambda_X follows from def-weil-derived-pullback-tensor-hom (finite level) and prop-weil-pbc-proetale-constant-ring-map. Dropping the projection-formula sentence follows the current snapshot. None of the 18 citers depends on it: they use Tr = eps∘Rf_!(gamma) and cite fix-prop-projection-formula separately. Replacing the adjunction reference def-weil-exceptional-adjoint-admissibility with def-weil-exceptional-inverse-image is justified. The elliptic-curve Warning shows the admissibility clause fails for a smooth proper f, while the constructible adjunction is stated with no ambient datum, as def-pur-conventions prescribes. This adds no hypothesis and leaves the morphism unchanged. Coefficients are the finite stage A_{E,n} on the pro-etale site throughout, with no SGA. There are no new nodes and no proof steps. sk-def-sp-trace in same_as is correct. Edge cases checked: K=0, K=Lambda_Y with Tor [0,0], f=id with d=0, X empty, n=1. FIX, two repairable faults: (1) E1/C4: 'Both composites are taken in D^b_c(Y,Lambda)' assumed Rf_! preserves D^b_c, which no cited node stated. I reworded it as morphisms of D(Y_proet,Lambda) with objects in D^b_c(Y,Lambda) by the existing prop-finite-compact-support-constructibility (same chapter), and added it to stmt_deps; this creates no cycle. (2) The source still pointed to the old master file (order 2021) although the report said it had been updated; it now points to the main-20261015 path, order 2365. The whole corrected node is in fixes/dag/nodes/sec-smooth-purity/def-pur-smooth-trace.json; only statement, stmt_deps and source changed. Noted for the maintainer: the unit field (sk-thm-purity-transport vs the snapshot's sk-def-sp-trace) is maintainer-owned and was not changed. No tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a490f7332",
+  "group": "NO",
+  "result": "pass",
+  "note": "The return's H5/H3 is fixed: smoothExceptionalCounit is the published ProEtale.rightDerivedUpperShriekCounit (compact-support comparison, then ν^*ε^et, then ε^ν, whose g ↦ Rf_!g≫ε is the published adjunction bijection), carried over by sfIntrinsicCompactSupportComparison and E_Y.counitIso, with the same compactification as γ (HasCompactification is a Prop). The zero branch applies only to inputs not bounded below, never D^b_ctf or Λ_Y. coefficientValuedSmoothTrace = Rf_!(smoothPurityMap) ≫ counit. smoothTrace uses γ's own presentation formula at the ordinary unit with E.unitIso, which existsUnique_smoothPurityTensorMap covers. Hypotheses no stronger than the node (separatedness of X,Y over k is inherited from γ); one universe u with ModuleCat.{u+1}. H8/H9 fixed: header, source/blueprint docstrings, no theorem or sorry, unused import gone. lean.statement matches the signature exactly; node changes only its lean field. Edge cases d=0, K=0, K=Λ_Y, f=id, X empty, n=1 covered. nt_compile --json: rc=0, 3.8 s, no diagnostics (tool confirmed to report errors). Non-blocking notes: smoothTrace starts from Rf_!(Lf^*Λ_Y⊗Λ(d)[2d]) rather than Rf_!Λ_X(d)[2d], allowed by the node's last sentence; node source field still names the master path (maintainer-owned); coefficientUnit is new because derivedSheaf needs an unrelated divisibility hypothesis."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SmoothTrace",
+  "declaration": "WeilConjectures.PurityFiniteSetting.smoothTrace",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.smoothCompactSupport",
+   "WeilConjectures.PurityFiniteSetting.coefficientUnit",
+   "WeilConjectures.PurityFiniteSetting.smoothExceptionalCounit",
+   "WeilConjectures.PurityFiniteSetting.coefficientValuedSmoothTrace",
+   "WeilConjectures.PurityFiniteSetting.smoothTrace"
+  ],
+  "file": "lean/Sheaf/Paper/SmoothTrace.lean",
+  "statement": "def smoothTrace (P : PurityFiniteSetting.{u}) {X Y : Scheme.{u}} [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [IsSeparated (X ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))] [QuasiCompact (Y ↘ Spec (.of P.field.k))] [IsSeparated (Y ↘ Spec (.of P.field.k))] (f : X ⟶ Y) [f.IsOver (Spec (.of P.field.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (d : ℕ) [SmoothOfRelativeDimension d f] : (smoothCompactSupport P f).obj ((Scheme.sfIntrinsicDerivedEquivalence X P.Ring).functor.obj ((shiftFunctor (DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient))) (2 * (d : ℤ))).obj (((smoothPurityTensor P.Coefficient X).obj ((P.smoothPurityPullback f).obj ((Scheme.sfIntrinsicDerivedEquivalence Y P.Ring).inverse.obj (coefficientUnit P Y)))).obj ((shiftFunctor (DerivedCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} P.Coefficient))) (-(2 * (d : ℤ)))).obj (P.diagonalTwist X d))))) ⟶ coefficientUnit P Y",
+  "by": "NO",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Repair of b74106f62e89: the counit is the concrete published exceptional counit transported by the canonical support realization comparison and the intrinsic equivalence counit. The unit trace evaluates the existing explicit purity formula in the canonical etale-unit presentation, so both unnecessary postponed theorems have been removed. Header, source docstrings and public imports supplied; no new sorry, node correction or dependency repair.",
+  "branch": "newtargets-dag"
  }
 }
