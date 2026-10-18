@@ -1,0 +1,113 @@
+{
+ "id": "lem-trf-source-bounded-flat-tor-amplitude",
+ "kind": "statement",
+ "title": "Bounded flat module complexes have Tor amplitude in their support interval",
+ "statement": "Let $R$ be a commutative ring and choose its derived category $D(R)$ [def-weil-abstract-derived-category] with the ordinary K-flat derived tensor product. Let $P^\\bullet$ be a cochain complex of $R$-modules, and let $a,b\\in\\mathbf Z$. Suppose $P^i=0$ whenever $i<a$ or $b<i$, and every $P^i$ is flat, meaning that tensoring with it preserves exact sequences of modules. Then $Q(P)$ has Tor amplitude in $[a,b]$: for every $R$-module $M$ in degree zero, $H^i(Q(P)\\otimes_R^{\\mathbf L}M[0])=0$ whenever $i<a$ or $b<i$. No ordering of $a,b$, finite generation, locality, or Noetherian hypothesis is required.",
+ "source": {
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/FlatModel.lean",
+  "place": "DerivedCategory.torAmplitudeIn_Q_obj_of_flat, lines 241-250; module specialization of the existing proved generic source theorem. Stacks more-algebra.tex, lemma-tor-amplitude, implication (2) to (1), and lemma-derived-tor-quasi-isomorphism."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "The bounded-above flat complex P is K-flat by [lem-pc-module-bounded-flat-kflat], in the sense of [def-pc-module-kflat-complex]. The existing source theorem uses its proved bounded variant CochainComplex.kFlat_of_bounded_of_flat. For modules, categorical flatness and module flatness agree by ModuleCat.flat_iff_flat.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat",
+    "def-pc-module-kflat-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each ordinary module M, use [lem-weil-pbc-source-kflat-tensor-single-model] to identify Q(P) tensor-derived M[0] with Q of the complex P tensor M. That complex has the same zero terms outside [a,b]; its cohomology vanishes there. This is precisely the existing proved generic theorem DerivedCategory.torAmplitudeIn_Q_obj_of_flat specialized to ModuleCat R. For a greater than b the complex is zero, so the conclusion still holds.",
+   "uses": [
+    "lem-weil-pbc-source-kflat-tensor-single-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-module-bounded-flat-kflat",
+  "def-pc-module-kflat-complex",
+  "lem-weil-pbc-source-kflat-tensor-single-model"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "lean/WeilConjectures/CategoryTheory/DerivedCategory/FlatModel.lean",
+  "place": "DerivedCategory.torAmplitudeIn_Q_obj_of_flat, lines 241-250; module specialization of the existing proved generic source theorem. Stacks more-algebra.tex, lemma-tor-amplitude, implication (2) to (1), and lemma-derived-tor-quasi-isomorphism.",
+  "note": "Existing proved source declaration; no Lean file, new theorem, or sorry is added."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "torAmplitudeIn|torAmplitudeIn_Q_obj_of_flat",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib match; use the proved generic source declaration."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bounded complex of flat objects concentrated in degrees a through b has Tor amplitude in that interval",
+   "results": "8 hits: Module.Flat.rTensor_shortComplex_exact, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_exact, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, HomologicalComplex.instHasLimit, Module.Flat.iff_rTensor_preserves_shortComplex_exact, HomologicalComplex.instHasFiniteLimits",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib match; use the proved generic source declaration."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torAmplitudeIn\"",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "No exact Mathlib match; use the proved generic source declaration."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.DerivedCategory.FiniteTorAmplitudePerfect",
+  "date": "2026-10-18",
+  "group": "Z7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-finite-tor-amplitude-perfect",
+   "place": "Proof (If), bounded finite-free representative computes all derived tensors in its degree interval.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-trace-perfectness",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.DerivedCategory.FlatModel",
+  "declaration": "DerivedCategory.torAmplitudeIn_Q_obj_of_flat",
+  "statement": "lemma torAmplitudeIn_Q_obj_of_flat (P : CochainComplex C ℤ) (a b : ℤ)\n    [P.IsStrictlyGE a] [P.IsStrictlyLE b] (hP : ∀ n, ObjectProperty.flat (P.X n)) :\n    torAmplitudeIn C a b (Q.obj P)",
+  "branch": "sheaf-dag",
+  "by": "Z7",
+  "date": "2026-10-18",
+  "note": "Specialize the generic theorem to C = ModuleCat R, using ModuleCat.flat_iff_flat. All monoidal Grothendieck and functorial-flat-resolution instances exist. The blueprint node lem-kun-flat-bounded-tor-amplitude records the same generic declaration for sheaves on a scheme; that specialized geometric statement does not state this ordinary-module result. This record adds no declaration or proof obligation."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261018T144430-L-3509599",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261018T144430-L-3509599",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

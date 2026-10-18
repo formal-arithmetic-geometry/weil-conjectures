@@ -16511,3 +16511,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:44 L: merged deliver/X8/Sheaf.AlgebraicGeometry.RelativeFrobeniusGeometricFiber (stage 3; reviewer PASS; first push; landing 20261018T144426-L-3507592 (proof); batch 20261018T144352; modules 1; new nodes 0)
 - 14:44 L: merged deliver/Y5/Sheaf.AlgebraicGeometry.Sites.ProetaleSiteProperties (stage 3; reviewer PASS; first push; landing 20261018T144427-L-3508340 (proof); batch 20261018T144352; modules 1; new nodes 0)
 - 14:44 L: merged deliver/Z5/Sheaf.CategoryTheory.DerivedCategory.BoundedFiniteTorPerfect (stage 3; reviewer PASS; first push; landing 20261018T144429-L-3509128 (proof); batch 20261018T144352; modules 1; new nodes 0)
+- 14:44 L: merged deliver/Z7/Sheaf.CategoryTheory.DerivedCategory.FiniteTorAmplitudePerfect (stage 3; reviewer PASS; first push; landing 20261018T144430-L-3509599 (proof); batch 20261018T144352; modules 1; new nodes 1)

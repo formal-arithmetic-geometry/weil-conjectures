@@ -13,15 +13,12 @@ public import Mathlib.RingTheory.Finiteness.Defs
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 
-import Mathlib.Algebra.Module.Projective
-import Mathlib.RingTheory.Noetherian.Defs
+import Mathlib.RingTheory.Noetherian.Basic
 import Mathlib.RingTheory.Flat.Basic
 import Mathlib.RingTheory.LocalRing.Module
-import Sheaf.RingTheory.RingPseudoCoherent
+import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
 import Sheaf.RingTheory.NoetherianPseudoCoherentCohomologyCriterion
 import Sheaf.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTorPerfect
-import Sheaf.Algebra.Homology.BoundedFlatKFlat
-import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 
 /-!
@@ -92,6 +89,66 @@ theorem finiteTorAmplitude_iff_perfect_iff_finiteFree
             Module.Free (Padic.coefficientExtensionRing l E n) (P.X i) ∧
             Module.Finite (Padic.coefficientExtensionRing l E n) (P.X i)) ∧
           Nonempty (C ≅ Q.obj P)) := by
-  sorry
+  classical
+  let R := Padic.coefficientExtensionRing l E n
+  have : Finite R := Padic.finite_coefficientExtensionRing l E n hn
+  have : IsNoetherianRing R := inferInstance
+  have hdata := (Padic.extension_integers_dvr l E
+    (Padic.coefficientExtensionAbsoluteValue l E)
+    (spectralNorm_extends (K := Padic l) (L := E))).choose_spec.choose_spec
+  have hlocal : IsLocalRing (Padic.coefficientExtensionIntegers l E) := hdata.2.2.2.1
+  have hmax : (Padic.coefficientExtensionMaximalIdeal l E).IsMaximal := hdata.2.2.2.2.1
+  have hgen : Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
+      Set (Padic.coefficientExtensionIntegers l E)) =
+      Padic.coefficientExtensionMaximalIdeal l E :=
+    hdata.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
+  have hproper : Padic.coefficientExtensionIdeal l E n ≠ ⊤ := by
+    change Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
+      Set (Padic.coefficientExtensionIntegers l E)) ^ n ≠ ⊤
+    rw [hgen]
+    intro htop
+    have hle : Padic.coefficientExtensionMaximalIdeal l E ^ n ≤
+        Padic.coefficientExtensionMaximalIdeal l E :=
+      Ideal.pow_le_self (Nat.ne_of_gt (lt_of_lt_of_le Nat.zero_lt_one hn))
+    exact hmax.ne_top (top_le_iff.mp (htop ▸ hle))
+  have : Nontrivial R := Ideal.Quotient.nontrivial_iff.mpr hproper
+  have : IsLocalRing R := IsLocalRing.of_surjective'
+    (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E n)) Ideal.Quotient.mk_surjective
+  have hpc : IsPseudoCoherent C := by
+    apply (isPseudoCoherent_iff_boundedAbove_finite_homology R C).2
+    refine ⟨?_, hfinite⟩
+    obtain ⟨b, hb⟩ := hbounded.2
+    have : C.IsLE b := hb
+    exact ⟨b, fun i hi ↦ isZero_of_isLE C b i hi⟩
+  have hfree : IsPerfectRingComplex C ↔
+      ∃ (P : CochainComplex (ModuleCat.{u} R) ℤ) (a b : ℤ),
+        P.IsStrictlyGE a ∧ P.IsStrictlyLE b ∧
+          (∀ i : ℤ, Module.Free R (P.X i) ∧ Module.Finite R (P.X i)) ∧
+          Nonempty (C ≅ Q.obj P) := by
+    constructor
+    · rintro ⟨P, a, b, ha, hb, hP, e⟩
+      refine ⟨P, a, b, ha, hb, fun i ↦ ?_, e⟩
+      have := (hP i).1
+      have := (hP i).2
+      exact ⟨Module.free_of_flat_of_isLocalRing, inferInstance⟩
+    · rintro ⟨P, a, b, ha, hb, hP, e⟩
+      refine ⟨P, a, b, ha, hb, fun i ↦ ?_, e⟩
+      have := (hP i).1
+      exact ⟨inferInstance, (hP i).2⟩
+  refine ⟨⟨?_, ?_⟩, hfree⟩
+  · intro hTor
+    obtain ⟨P, ⟨a, b, hb⟩, hfin, hproj, ⟨e⟩⟩ :=
+      isPerfect_of_pseudoCoherent_finiteTorAmplitude C hpc hTor
+    refine ⟨P, a, b, ?_, ?_, fun i ↦ ⟨hproj i, hfin i⟩, ⟨e.symm⟩⟩
+    · exact (P.isStrictlyGE_iff a).2 (fun i hi ↦ hb i (Or.inl hi))
+    · exact (P.isStrictlyLE_iff b).2 (fun i hi ↦ hb i (Or.inr hi))
+  · intro hperfect
+    obtain ⟨P, a, b, ha, hb, hP, ⟨e⟩⟩ := hperfect
+    have hflat (i : ℤ) : ObjectProperty.flat (P.X i) := by
+      have := (hP i).1
+      exact (ModuleCat.flat_iff_flat _).2 inferInstance
+    refine ⟨min a b, b, min_le_right _ _, ?_⟩
+    exact (torAmplitudeIn _ (min a b) b).prop_of_iso e.symm
+      ((torAmplitudeIn_Q_obj_of_flat P a b hflat).mono (min_le_left _ _) le_rfl)
 
 end DerivedCategory
