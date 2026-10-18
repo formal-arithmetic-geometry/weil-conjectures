@@ -305,8 +305,8 @@ theorem Etale.preservesColimitsOfShape_higherDirectImage {X Y : Scheme.{u}} (h :
       (DerivedCategory.Plus.singleFunctor (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)) 0 ⋙
         R+((h)_*[ModuleCat.{u + 1} Λ]) ⋙ DerivedCategory.Plus.homologyFunctor _ q) :=
   have : IsFiltered (SmallModel.{u + 1} J) := IsFiltered.of_equivalence (equivSmallModel J)
-  have := (Etale.preservesFilteredColimitsOfSize_higherDirectImage Λ h q).preserves_filtered_colimits
-    (SmallModel.{u + 1} J)
+  have := (Etale.preservesFilteredColimitsOfSize_higherDirectImage Λ h q)
+    |>.preserves_filtered_colimits (SmallModel.{u + 1} J)
   preservesColimitsOfShape_of_equiv (equivSmallModel J).symm _
 
 end AlgebraicGeometry
