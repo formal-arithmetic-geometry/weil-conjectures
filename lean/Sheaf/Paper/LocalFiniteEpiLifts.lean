@@ -4,11 +4,6 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Mathlib.CategoryTheory.Sites.Over
-public import Mathlib.CategoryTheory.Sites.Pullback
-public import Mathlib.CategoryTheory.Sites.PreservesSheafification
-public import Mathlib.CategoryTheory.Sites.Abelian
-public import Mathlib.CategoryTheory.Sites.LeftExact
 public import Mathlib.Algebra.Category.ModuleCat.FilteredColimits
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheafOver

@@ -8,7 +8,6 @@ public import Sheaf.CategoryTheory.SiteCechEdgeNormalization
 public import Sheaf.CategoryTheory.RightDerivedUniversalDeltaFunctor
 public import Sheaf.CategoryTheory.Sites.CohomologyRightDerivedSections
 public import Mathlib.CategoryTheory.Sites.Pullback
-public import Sheaf.CategoryTheory.RingedSiteModules
 import WeilConjectures.CategoryTheory.SiteInjectiveCechAcyclic
 import Sheaf.CategoryTheory.Sites.InjectiveModuleCechAcyclic
 

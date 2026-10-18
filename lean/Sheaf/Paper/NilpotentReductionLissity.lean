@@ -6,14 +6,8 @@ Authors: SHEAF group NK
 module
 
 public import Sheaf.CategoryTheory.LocallyConstantFiniteTypeModules
-public import Sheaf.CategoryTheory.RingedSiteModules
-public import Mathlib.RingTheory.Ideal.Quotient.Defs
-public import Mathlib.RingTheory.Noetherian.Defs
-public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
 import Sheaf.Paper.NilpotentReductionStep
 import Sheaf.Paper.ConstantCoefficientScalarEquivalence
-import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-! # Lissity propagates through powers of a coefficient ideal
 

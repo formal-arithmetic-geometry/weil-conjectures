@@ -9,10 +9,7 @@ public import Sheaf.CategoryTheory.Sites.TorsorExtensionPresentation
 public import Sheaf.CategoryTheory.Sites.ContractedProductPresentation
 import Sheaf.CategoryTheory.Sites.ExtensionPresentationShortExact
 import Sheaf.CategoryTheory.Sites.ExtensionPresentationGeneratorFiber
-public import Mathlib.CategoryTheory.Sites.Abelian
-public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 import WeilConjectures.CategoryTheory.PushoutShortExactSequence
-import WeilConjectures.CategoryTheory.Sites.Torsor
 
 /-!
 # Pushout of the canonical étale torsor extension

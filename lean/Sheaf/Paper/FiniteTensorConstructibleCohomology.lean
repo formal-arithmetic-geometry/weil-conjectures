@@ -8,8 +8,6 @@ module
 public import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
 public import Sheaf.Algebra.Homology.DerivedTensor
 import Sheaf.Paper.ProEtaleRestrictedTensorFiniteLocalConstancy
-import Mathlib.Data.Finset.Sum
-import Mathlib.Data.Set.Finite.Lattice
 import Sheaf.Paper.ProEtaleConstantModulePullbackComposition
 import Sheaf.Paper.ProEtaleFiniteLocalConstancyPullback
 import WeilConjectures.ConstructibleSheaf.Refinement

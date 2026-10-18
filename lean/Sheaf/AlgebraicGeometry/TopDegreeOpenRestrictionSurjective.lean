@@ -6,11 +6,7 @@ Authors: SHEAF group NQ
 module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
-public import Mathlib.AlgebraicGeometry.Over
-public import Mathlib.Topology.KrullDimension
-public import Sheaf.CategoryTheory.RingedSiteModules
 public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
-import WeilConjectures.Topology.RingedSpaceModuleCohomology
 import Sheaf.AlgebraicGeometry.ModuleCohomologyRestrictionSurjective
 import WeilConjectures.AlgebraicGeometry.BasicPropertiesLinearity
 

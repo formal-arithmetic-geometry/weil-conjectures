@@ -6,12 +6,8 @@ Authors: SHEAF group NW
 module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
-public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
-public import Mathlib.CategoryTheory.Sites.ConstantSheaf
-public import Mathlib.Algebra.Field.ULift
-public import Mathlib.Data.ZMod.Basic
 import Sheaf.AlgebraicGeometry.GeometricFiberFinite
 import WeilConjectures.ConstructibleSheaf.Noetherian
 import Sheaf.Paper.ProjectiveCurveBettiCardinalities

@@ -7,15 +7,8 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
-public import Mathlib.CategoryTheory.Sites.ConstantSheaf
-public import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
-public import Mathlib.Topology.KrullDimension
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import Mathlib.Data.ZMod.Basic
 import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ProjectiveCurve
-import WeilConjectures.AlgebraicGeometry.FieldBaseChangeDimension
 import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 
 /-!

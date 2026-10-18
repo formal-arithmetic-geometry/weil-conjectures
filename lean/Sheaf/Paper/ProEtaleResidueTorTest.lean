@@ -8,15 +8,11 @@ module
 public import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
 public import Sheaf.AlgebraicGeometry.ProEtaleTorAmplitude
 import Sheaf.Paper.ProEtaleResidueModuleTensorHomology
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Algebra.Homology.BoundedFlatIndependentCoefficients
-import WeilConjectures.Algebra.Category.ModuleCat.Presheaf.InternalHom
-import Mathlib.Algebra.Homology.BifunctorFlip
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
-import Mathlib.Algebra.Homology.HomologySequence
 
 /-!
 # The residue test on the small pro-etale site

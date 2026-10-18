@@ -5,11 +5,8 @@ Authors: SHEAF group NJ
 -/
 module
 
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Geometrically.Reduced
-public import Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 public import Mathlib.FieldTheory.PurelyInseparable.Basic
-import Mathlib.RingTheory.RingHom.EssFiniteType
 import Sheaf.FieldTheory.FiniteFamilyCommonExtension
 import Sheaf.AlgebraicGeometry.RadicialReducedFlatGenericFibre
 import WeilConjectures.FieldTheory.MakeSeparable

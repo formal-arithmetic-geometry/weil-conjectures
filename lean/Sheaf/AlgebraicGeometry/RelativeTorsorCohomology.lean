@@ -9,16 +9,11 @@ public import Sheaf.AlgebraicGeometry.RelativeEtaleCohomology
 public import Sheaf.CategoryTheory.Sites.TorsorWithSection
 public import Sheaf.CategoryTheory.Sites.ContractedProductPresentation
 public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison
-public import Mathlib.Algebra.Homology.HomologySequence
-public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
-public import Sheaf.AlgebraicGeometry.DerivedCategories
-public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 import Sheaf.AlgebraicGeometry.RelativeTorsorClassNaturality
 import Sheaf.AlgebraicGeometry.RelativeTorsorForgetNormalization
 import Mathlib.CategoryTheory.Preadditive.Comma
-import Mathlib.Algebra.Homology.HomologySequenceLemmas
 import WeilConjectures.CategoryTheory.Abelian.HorseshoeResolutions
 
 /-!
