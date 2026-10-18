@@ -10,6 +10,8 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 public import WeilConjectures.Algebra.Homology.HomotopyCategory.DerivabilityStructure
 
+import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+
 /-!
 # K-flat resolutions and the homotopy derivability structure
 
@@ -70,6 +72,58 @@ theorem kFlat_derivability
           ∃ X : CochainComplex C ℤ,
             (HomotopyCategory.quotient C (.up ℤ)).obj X = K ∧
               X.IsKFlatForTotalTensor)).IsLeftDerivabilityStructure := by
-  sorry
+  -- Shrink the colimit hypotheses to the integer and graded-coproduct shapes.
+  have : HasColimitsOfSize.{0, 0} C := hasColimitsOfSizeShrink C
+  have (X : C) : PreservesColimitsOfSize.{0, 0} (tensorLeft X) :=
+    preservesColimitsOfSize_shrink (tensorLeft X)
+  have (X : C) : PreservesColimitsOfSize.{0, 0} (tensorRight X) :=
+    preservesColimitsOfSize_shrink (tensorRight X)
+  have : HasExactColimitsOfShape ℤ C := by
+    have := AB5OfSize_of_univLE.{0, 0, v, v} C
+    infer_instance
+  have (X₁ X₂ X₃ X₄ : GradedObject ℤ C) :
+      GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄ := by
+    intro i j
+    infer_instance
+  have (X₁ X₂ X₃ : GradedObject ℤ C) :
+      GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃ := by
+    intro i j
+    infer_instance
+  have (X₁ X₂ X₃ : GradedObject ℤ C) :
+      GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃ := by
+    intro i j
+    infer_instance
+  -- The binary total tensor and the source monoidal tensor have the same maps.
+  have hiff (X : CochainComplex C ℤ) :
+      X.IsKFlatForTotalTensor ↔ (HomologicalComplex.quasiIso C (.up ℤ)).kFlat X := by
+    rfl
+  have hprop :
+      (fun K : HomotopyCategory C (.up ℤ) ↦
+        ∃ X : CochainComplex C ℤ, (HomotopyCategory.quotient C (.up ℤ)).obj X = K ∧
+          X.IsKFlatForTotalTensor) = (HomotopyCategory.quasiIso C (.up ℤ)).kFlat := by
+    funext K
+    apply propext
+    constructor
+    · rintro ⟨X, rfl, hX⟩
+      exact (HomotopyCategory.kFlat_quotient_obj_iff X).2 ((hiff X).1 hX)
+    · intro hK
+      obtain ⟨X, rfl⟩ := K.quotient_obj_surjective
+      exact ⟨X, rfl, (hiff X).2 ((HomotopyCategory.kFlat_quotient_obj_iff X).1 hK)⟩
+  -- Reduction removes the zero summand without requiring additivity of P.
+  let Λ : Abelian.LeftResolution (ObjectProperty.flat.ι : _ ⥤ C) :=
+    { F := ObjectProperty.lift _ P hflat
+      π := p
+      epi_π_app := hepi }
+  let Γ := Λ.reduced
+  have hΓ (X : CochainComplex C ℤ) :=
+    Γ.kFlat_resolutionFunctor_obj ObjectProperty.flat.essImage_ι_le X
+  refine ⟨Γ.resolutionFunctor, Γ.resolutionNatTrans, ?_, ?_, ?_⟩
+  · intro X
+    exact (hiff _).2 (hΓ X)
+  · intro X
+    infer_instance
+  · rw [hprop]
+    exact Γ.homotopyCategory_kFlat_isLeftDerivabilityStructure
+      ObjectProperty.flat.essImage_ι_le
 
 end CategoryTheory

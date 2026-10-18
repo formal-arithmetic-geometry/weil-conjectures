@@ -26,113 +26,70 @@
  ],
  "proof": [
   {
-   "text": "By [def-sp-grothendieck-abelian], $C$ has small colimits and exact filtered colimits; the ordered set $\\mathbf Z$ is small and filtered (a common upper bound is the maximum). The class $\\mathcal F$ of two-sided flat objects contains zero and is isomorphism-stable. It is closed under finite biproducts and direct summands: tensor is additive, so tensoring a short exact sequence with $F\\oplus G$ gives the block direct sum of the sequences obtained with $F$ and $G$; kernels, images and cokernels are computed blockwise. The sum sequence is exact if both blocks are exact, and exactness of the sum forces exactness of each block. This works on both sides. The stipulated $P$ and its natural epimorphism are covers by $\\mathcal F$.",
+   "text": "Shrink the Grothendieck colimits and the stipulated tensor-colimit preservation to universe zero. AB5 gives exact ordered-integer colimits. Preservation of the coproducts indexed by pairs and triples of integers supplies the graded tensor compatibility instances. The existing flat-subcategory instances in WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat then give zero, finite coproducts and idempotent completeness of the flat subcategory.",
    "uses": [
     "def-sp-grothendieck-abelian",
-    "def-sfb-monoidal-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
-    "place": "Proof, first three sentences; verification of the class of flat objects."
-   }
-  },
-  {
-   "text": "Apply [lem-sfb-functorial-bounded-above-class-resolution] to $\\mathcal F$ and $P$. Step 1 verifies closure under direct summands as well as finite sums; no additivity or preservation of zero morphisms is required of the original $P$. Obtain one functor $S$ on the full category of all bounded-above complexes and a natural quasi-isomorphism $a_L:S(L)\\to L$, with flat terms and with every upper bound of $L$ also an upper bound of $S(L)$. In particular this is one functor for all truncation bounds, not unrelated choices of fixed-bound resolutions.",
-   "uses": [
-    "lem-sfb-functorial-bounded-above-class-resolution"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
-    "place": "Proof, first three sentences: the bounded-above functorial stages."
-   }
-  },
-  {
-   "text": "For $n\\in\\mathbf Z$, put $T_nX=\\tau_{\\le n}X$: its terms are $X^i$ for $i<n$, $\\ker d_X^n$ for $i=n$, and zero for $i>n$, with induced differentials. The maps $T_nX\\to T_{n+1}X$ are identity below $n$, the kernel inclusion in degree $n$, and zero in the other degrees. These are complex maps and are natural in $X$, by the kernel universal property. Set $E_nX=S(T_nX)$, with transitions obtained by applying $S$, and define $R(X)=\\operatorname{colim}_{n\\in\\mathbf Z}E_nX$ termwise. Its differential is induced by those of $E_nX$ and squares to zero since this holds after each colimit map. For $f:X\\to Y$, the compatible maps $S(T_nf)$ induce $R(f)$; the colimit universal property gives the identity and composition laws. For each degree $i$, $T_nX^i=X^i$ with identity transitions when $n>i$, so $\\operatorname{colim}_n T_nX\\cong X$. Taking colimits of $a_{T_nX}$ gives $r_X:R(X)\\to X$. Naturality of $a$ gives $r_Y R(f)=f r_X$.",
-   "uses": [
-    "def-weil-abstract-derived-category",
+    "def-sfb-monoidal-category",
     "def-weil-pbc-category-colimit"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 06Y4, more-algebra-lemma-K-flat-resolution: colimit of resolutions of good truncations; functorial refinement from step 2."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
+    "place": "First three sentences; existing source-library colimit and flat-subcategory instances."
    }
   },
   {
-   "text": "Exactness of $\\mathbf Z$-colimits implies $H^i(\\operatorname{colim}_n A_n)\\cong\\operatorname{colim}_n H^i(A_n)$ naturally for every diagram of complexes. Indeed apply exact colimits to $0\\to Z_n^i\\to A_n^i\\to B_n^{i+1}\\to0$ and $0\\to B_n^{i+1}\\to A_n^{i+1}\\to A_n^{i+1}/B_n^{i+1}\\to0$; the colimit differential has kernel $\\operatorname{colim}Z_n^i$ and image $\\operatorname{colim}B_n^{i+1}$. Applying exactness to $0\\to B_n^i\\to Z_n^i\\to H^i(A_n)\\to0$ identifies the quotient with $\\operatorname{colim}H^i(A_n)$. Each identification is natural because the maps are induced by the kernel, image and cokernel universal properties. Apply this to $a_{T_nX}$, whose cohomology maps are isomorphisms by step 2. Their colimits are isomorphisms, and the target colimit is $X$ by step 3. Thus $r_X$ is a quasi-isomorphism in every degree.",
+   "text": "Lift P to the full subcategory of flat objects using hflat. Together with p and hepi this is a LeftResolution of its inclusion. Apply the existing Mathlib LeftResolution.reduced construction, so that its cover functor preserves zero morphisms without any additivity assumption on P. Use the concrete existing LeftResolution.resolutionFunctor and resolutionNatTrans: these are the functorial bounded-above totalizations followed by the colimit of the good truncation diagram. Their quasiIso_resolutionNatTrans_app instance supplies every augmentation quasi-isomorphism. No choice of unrelated resolution witnesses is made.",
    "uses": [
     "def-weil-abstract-derived-category",
+    "def-weil-pbc-category-colimit",
     "def-sp-grothendieck-abelian"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 06Y4, more-algebra-lemma-K-flat-resolution: quasi-isomorphism of the colimit, expanded from exact filtered colimits."
+    "document": "lean/WeilConjectures/FromJoel/Algebra/Homology/LeftResolution/CochainComplex.lean",
+    "place": "LeftResolution.resolutionFunctor, resolutionNatTrans, quasiIso_resolutionNatTrans_app; Mathlib.Algebra.Homology.LeftResolution.Reduced.reduced."
    }
   },
   {
-   "text": "Each $E_nX=S(T_nX)$ vanishes above $n$ and has flat terms by step 2. Apply [lem-sfb-bounded-above-flat-kflat] with bound $b=n$. Its countable coproducts and integer-indexed exact colimits exist by step 1, and its tensor-preservation assumptions follow from the stipulated preservation of all small colimits. It follows that every $E_nX$ is two-sided K-flat.",
+   "text": "Apply the existing LeftResolution.kFlat_resolutionFunctor_obj to the reduced resolution and ObjectProperty.flat.essImage_ι_le. This is precisely the bounded-above-flat K-flat theorem applied to the stages of its colimit presentation, followed by closure of K-flatness under exact integer colimits. The source monoidal K-flat predicate on complexes is definitionally IsKFlatForTotalTensor, since its two morphism actions are tensorHom (identity) s and tensorHom s (identity). This proves K-flatness of every value of the constructed resolution functor.",
    "uses": [
-    "lem-sfb-bounded-above-flat-kflat"
+    "lem-sfb-bounded-above-flat-kflat",
+    "def-sfb-preserves-kflat-quasi-iso"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 06Y4, more-algebra-lemma-K-flat-resolution: bounded-above flat stages, using the project generalization of Tag 064K."
+    "document": "lean/WeilConjectures/FromJoel/CategoryTheory/Abelian/Flat/KFlat.lean",
+    "place": "LeftResolution.kFlat_resolutionFunctor_obj, CochainComplex.closedUnderColimitsOfShape_kFlat."
    }
   },
   {
-   "text": "Fix a quasi-isomorphism $s:U\\to V$. In total degree $i$, preservation of colimits by $-\\otimes U^q$ and the coproduct universal property identify $\\bigoplus_{p+q=i}(\\operatorname{colim}_n E_nX^p)\\otimes U^q$ with $\\operatorname{colim}_n\\bigoplus_{p+q=i}E_nX^p\\otimes U^q$: maps out of both objects are precisely compatible families of maps from $E_nX^p\\otimes U^q$. This identifies $R(X)\\otimes U$ with $\\operatorname{colim}_n(E_nX\\otimes U)$ as complexes, since on each summand both differentials have components $d_E\\otimes1$ and $(-1)^p1\\otimes d_U$. It also respects $1\\otimes s$ summandwise. The analogous construction using $U^p\\otimes-$ identifies $U\\otimes R(X)$ with $\\operatorname{colim}_n(U\\otimes E_nX)$, now with components $d_U\\otimes1$ and $(-1)^p1\\otimes d_E$, and respects $s\\otimes1$. Repeat with $V$ for the target identifications. By step 5 both $E_nX\\otimes s$ and $s\\otimes E_nX$ are quasi-isomorphisms. Step 4's cohomology calculation shows that their colimits are quasi-isomorphisms. Hence $R(X)\\otimes s$ and $s\\otimes R(X)$ are quasi-isomorphisms, which is exactly two-sided K-flatness of $R(X)$.",
+   "text": "Identify the exact existential representative predicate in the statement with the source K-flat property on the homotopy category. Forward, a K-flat representative gives source K-flatness by HomotopyCategory.kFlat_quotient_obj_iff, and transport along its object equality. Conversely choose a complex representative using quotient_obj_surjective and apply the reverse implication of that iff. Apply LeftResolution.homotopyCategory_kFlat_isLeftDerivabilityStructure to the same reduced resolution. This is the existing homotopy-resolution criterion, with the source K-flat triangulated and isomorphism-closed instances and the same natural quasi-isomorphism. Rewrite by the proved equality of predicates. Pair this with the functor, augmentation and their properties from steps 2 and 3.",
    "uses": [
+    "lem-sfb-homotopy-resolution-derivability-criterion",
     "def-sfb-preserves-kflat-quasi-iso",
-    "def-weil-pbc-category-colimit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 06Y3, more-algebra-lemma-colimit-K-flat: the two-sided categorical argument, with the differential and morphism compatibilities explicit."
-   }
-  },
-  {
-   "text": "By [lem-sfb-kflat-homotopy-triangulated], the property of being K-flat passes to the homotopy category and defines an isomorphism-closed full subcategory containing zero and closed under shifts and mapping cones. Its hypotheses hold here: $C$ is abelian, tensor is additive in each variable, small colimits exist, and both tensor functors preserve them. Denote this property on $K(C)$ by $\\mathcal P$. For every $X$, step 6 gives $\\mathcal P(qR(X))$.",
-   "uses": [
-    "lem-sfb-kflat-homotopy-triangulated"
+    "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
-    "place": "Proof, third sentence: the K-flat subcategory of K(C)."
-   }
-  },
-  {
-   "text": "Use [lem-sfb-homotopy-resolution-derivability-criterion] with $A=C$, $\\rho=R$, $p=r$ and $\\mathcal P$ from step 7. The closure conditions are supplied by step 7, the functor and natural transformation by step 3, their quasi-isomorphism components by step 4, and membership of the resolutions by step 6. The conclusion is precisely that $K_{\\mathrm{fl}}(C)\\to K(C)$ with restricted quasi-isomorphisms is a left derivability structure. The map $q(r_X):qR(X)\\to qX$ supplies the asserted left resolution of every homotopy object. This application uses functoriality only on complexes, as the criterion explicitly permits.",
-   "uses": [
-    "lem-sfb-homotopy-resolution-derivability-criterion"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
-    "place": "Proof, third sentence: left derivability for quasi-isomorphisms in K(C)."
+    "document": "lean/WeilConjectures/FromJoel/CategoryTheory/Abelian/Flat/KFlat.lean",
+    "place": "HomotopyCategory.kFlat_quotient_obj_iff and LeftResolution.homotopyCategory_kFlat_isLeftDerivabilityStructure; source triangulated K-flat instances."
    }
   }
  ],
  "proof_deps": [
   "def-sp-grothendieck-abelian",
   "def-sfb-monoidal-category",
-  "lem-sfb-functorial-bounded-above-class-resolution",
-  "def-weil-abstract-derived-category",
   "def-weil-pbc-category-colimit",
+  "def-weil-abstract-derived-category",
   "lem-sfb-bounded-above-flat-kflat",
   "def-sfb-preserves-kflat-quasi-iso",
-  "lem-sfb-kflat-homotopy-triangulated",
   "lem-sfb-homotopy-resolution-derivability-criterion"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
-  "place": "First three sentences, expanded by the functorial bounded-above construction, Stacks Tags 06Y4 and 06Y3 (more-algebra-lemma-K-flat-resolution and more-algebra-lemma-colimit-K-flat), and the project homotopy-category criterion."
+  "place": "First three sentences, realized directly using the existing reduced LeftResolution functorial unbounded construction and K-flat homotopy derivability theorem; M9, 2026-10-18."
  },
  "mathlib_searches": [
   {
@@ -303,5 +260,15 @@
   "group": "Q74",
   "result": "pass",
   "note": "Node diff vs side clone: only the lean record was added; the report has real Worker report and Second reading by Q74 sections. Every clause of the Lean signature matches the node: Grothendieck abelian with universe v, MonoidalCategory + MonoidalPreadditive, both tensor functors preserve all small colimits, ObjectProperty.flat (both tensor functors exact), functor P with flat values and epi components and no extra assumption on P, ∃ functor R on unbounded complexes with natural r, values K-flat in the recorded sense (CochainComplex.IsKFlatForTotalTensor), r componentwise quasi-iso, and HomotopyCategory.quasiIsoLocalizerMorphism on the K-flat-representative predicate (P.ι, restricted quasi-isos) satisfying Mathlib IsLeftDerivabilityStructure; the 'in particular' clause follows from its hasLeftResolutions field. Universes are free and unforced (checked with pp.universes). The upstream Flat/KFlat.lean result is not an exact match: it adds graded-tensor instances and uses a different K-flat predicate, so a new module is justified. lean.statement is verbatim the file signature; docstrings give the source place and blueprint tag plus the proof plan; the body is only sorry; no new definitions; no pro-étale substitute. nt_compile --json: clean, rc 0, 3.4 s. A probe copy in /tmp confirmed real elaboration (deliberate error caught) and sorryAx among the axioms. No findings requiring correction."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M9",
+  "result": "pass",
+  "landing": "20261018T144413-L-3502710",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
