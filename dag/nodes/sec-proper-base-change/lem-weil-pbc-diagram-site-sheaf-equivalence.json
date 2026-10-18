@@ -1,0 +1,129 @@
+{
+ "id": "lem-weil-pbc-diagram-site-sheaf-equivalence",
+ "kind": "statement",
+ "title": "Product-site sheaves are diagrams of sheaves",
+ "statement": "For small categories J,C, a topology K on C, and a topology T on J^op × C with the vertical covering-sieve criterion [lem-weil-pbc-diagram-site-topology], there is an equivalence E from set sheaves on T to J-diagrams of set sheaves on K. It sends F to j ↦ F restricted to the vertical slice j, sends horizontal arrows to the corresponding restrictions of F, and sends morphisms to their components. For each j, E followed by evaluation has right adjoint evaluationRightAdjoint(j) followed by the inverse equivalence, and preserves finite limits.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 00Z4, 00Z8 and 00XA; explicit product-site construction from the parent proof, not a theorem asserted by these tags"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-diagram-site-topology"
+ ],
+ "proof": [
+  {
+   "text": "Curry product presheaves into vertical component presheaves; horizontal restrictions give the diagram maps. Uncurry a diagram using horizontal transport followed by vertical restriction. Naturality and the factorization of product arrows prove the functor laws.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00Z4, 00Z8 and 00XA; explicit product-site construction from the parent proof, not a theorem asserted by these tags"
+   }
+  },
+  {
+   "text": "The componentwise sheaf criterion restricts both functors to sheaves. Construct the unit and counit with identity maps on sections; their naturality follows from product-arrow factorization and the diagram laws. The triangle identity holds sectionwise.",
+   "uses": [
+    "lem-weil-pbc-diagram-site-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00Z4, 00Z8 and 00XA; explicit product-site construction from the parent proof, not a theorem asserted by these tags"
+   }
+  },
+  {
+   "text": "The vertical criterion identifies T with the explicitly constructed topology. Use the concrete equivalence, whose normalization equalities are reflexive. Compose its equivalence adjunction with Mathlib evaluationAdjunctionLeft; finite-limit preservation follows from equivalence and evaluation instances.",
+   "uses": [
+    "lem-weil-pbc-diagram-site-topology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00Z4, 00Z8 and 00XA; explicit product-site construction from the parent proof, not a theorem asserted by these tags"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-diagram-site-topology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 00Z4, 00Z8 and 00XA; explicit product-site construction from the parent proof, not a theorem asserted by these tags"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheaves on a product site are diagrams of sheaves",
+   "results": "No matching product-site equivalence; returned coherent/cartesian results.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaves on a product site equivalent to diagrams of sheaves",
+   "results": "Finite-product sheaf results, no product-site realization. Loogle currying search finds Functor.currying, not its sheaf/module restriction.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheaf.*(diagram|functorCategory)|product.*site; PresheafOfModules.*(curry|uncurry)|SheafOfModules.*(prod|diagram)",
+   "results": "No relevant equivalence in Mathlib or either project library. Existing evaluation adjunction and preservation instances do provide exactness once the explicit equivalences are built.",
+   "date": "2026-10-18",
+   "verdict": "no direct match; reuse generic categorical results"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.DiagramSiteRealization",
+  "date": "2026-10-18",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form, first paragraph and display: strict diagram ringed-site realization; product-site realization proof steps 3-6 and 10-13.",
+   "via": [
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-weil-pbc-diagram-kflat-replacements"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DiagramSiteSheafEquivalence",
+  "declaration": "CategoryTheory.exists_diagramSite_sheaf_equivalence",
+  "file": "lean/Sheaf/CategoryTheory/DiagramSiteSheafEquivalence.lean",
+  "statement": "theorem exists_diagramSite_sheaf_equivalence (J C : Type u) [SmallCategory J] [SmallCategory C] (K : GrothendieckTopology C) (T : GrothendieckTopology (Jᵒᵖ × C)) (hT : ∀ (j : J) (U : C) (S : Sieve (op j, U)), S ∈ T (op j, U) ↔ S.functorPullback (Prod.sectR (op j) C) ∈ K U) : ∃ (E : Sheaf T (Type u) ≌ (J ⥤ Sheaf K (Type u))), (∀ (F : Sheaf T (Type u)) (j : J), ((E.functor.obj F).obj j).obj = (Prod.sectR (op j) C).op ⋙ F.obj) ∧ (∀ (F : Sheaf T (Type u)) (j k : J) (a : j ⟶ k) (U : C), HEq (((E.functor.obj F).map a).hom.app (op U)) (F.obj.map (Prod.mkHom a.op (𝟙 U)).op)) ∧ (∀ (F G : Sheaf T (Type u)) (f : F ⟶ G) (j : J) (U : C), HEq (((E.functor.map f).app j).hom.app (op U)) (f.hom.app (op (op j, U)))) ∧ (∀ j : J, Nonempty (E.functor ⋙ (evaluation J (Sheaf K (Type u))).obj j ⊣ evaluationRightAdjoint (Sheaf K (Type u)) j ⋙ E.inverse) ∧ PreservesFiniteLimits (E.functor ⋙ (evaluation J (Sheaf K (Type u))).obj j))",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261018T062900-L-672477",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261018T062900-L-672477",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

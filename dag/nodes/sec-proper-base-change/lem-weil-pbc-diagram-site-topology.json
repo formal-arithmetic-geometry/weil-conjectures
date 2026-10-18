@@ -1,0 +1,121 @@
+{
+ "id": "lem-weil-pbc-diagram-site-topology",
+ "kind": "statement",
+ "title": "Vertical product topology and its coefficient sheaf",
+ "statement": "Let J and C be small categories, K a Grothendieck topology on C, and O a sheaf of commutative rings on C. There is a topology T on J^op × C in which a sieve S on (op j,U) covers exactly when its pullback along V ↦ (op j,V) covers U in K. In particular the coefficient presheaf R(j,U)=O(U), whose horizontal restrictions are identities, is a sheaf of rings. These objects are constructed explicitly, not selected from existence statements.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 00Z4, 00Z8 and 00XA; explicit product-site construction from the parent proof, not a theorem asserted by these tags"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Define covering sieves by their vertical slices. Maximality is inherited from K. The vertical slice of a pullback contains the pullback of the original slice, so upward closure and pullback stability in K prove stability. For transitivity restrict the local covering assumptions to the vertical arrows and apply transitivity in K.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00Z4, 00Z8 and 00XA; explicit product-site construction from the parent proof, not a theorem asserted by these tags"
+   }
+  },
+  {
+   "text": "For set-valued presheaves, a matching family on a vertical cover extends to its product-sieve pullback using horizontal restrictions; gluing in the product implies gluing on the slice. Conversely glue the vertical part of a product matching family and check every other arrow by separatedness on the pullback of the vertical cover. Apply this criterion after every coyoneda functor to obtain the categorical sheaf criterion.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00Z4, 00Z8 and 00XA; explicit product-site construction from the parent proof, not a theorem asserted by these tags"
+   }
+  },
+  {
+   "text": "Define R as the second-projection pullback of O. Its vertical restrictions are O, so the criterion proves the sheaf condition. The topology and presheaf equalities are definitional.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00Z4, 00Z8 and 00XA; explicit product-site construction from the parent proof, not a theorem asserted by these tags"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 00Z4, 00Z8 and 00XA; explicit product-site construction from the parent proof, not a theorem asserted by these tags"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheaves on a product site are diagrams of sheaves",
+   "results": "No matching product-site equivalence; returned coherent/cartesian results.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaves on a product site equivalent to diagrams of sheaves",
+   "results": "Finite-product sheaf results, no product-site realization. Loogle currying search finds Functor.currying, not its sheaf/module restriction.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheaf.*(diagram|functorCategory)|product.*site; PresheafOfModules.*(curry|uncurry)|SheafOfModules.*(prod|diagram)",
+   "results": "No relevant equivalence in Mathlib or either project library. Existing evaluation adjunction and preservation instances do provide exactness once the explicit equivalences are built.",
+   "date": "2026-10-18",
+   "verdict": "no direct match; reuse generic categorical results"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.DiagramSiteRealization",
+  "date": "2026-10-18",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form, first paragraph and display: strict diagram ringed-site realization; product-site realization proof steps 1-2 and 4-6.",
+   "via": [
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-weil-pbc-diagram-kflat-replacements"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DiagramSiteTopology",
+  "declaration": "CategoryTheory.exists_diagramSite_topology_ring",
+  "file": "lean/Sheaf/CategoryTheory/DiagramSiteTopology.lean",
+  "statement": "theorem exists_diagramSite_topology_ring (J C : Type u) [SmallCategory J] [SmallCategory C] (K : GrothendieckTopology C) (O : Sheaf K RingCat.{u}) (_hO : ∀ (U : Cᵒᵖ) (a b : O.obj.obj U), a * b = b * a) : ∃ (T : GrothendieckTopology (Jᵒᵖ × C)) (R : Sheaf T RingCat.{u}), (∀ (j : J) (U : C) (S : Sieve (op j, U)), S ∈ T (op j, U) ↔ S.functorPullback (Prod.sectR (op j) C) ∈ K U) ∧ R.obj = (Prod.snd Jᵒᵖ C).op ⋙ O.obj",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261018T062900-L-672477",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261018T062900-L-672477",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

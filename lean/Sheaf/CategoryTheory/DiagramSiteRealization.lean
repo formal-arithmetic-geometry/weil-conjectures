@@ -10,6 +10,9 @@ public import Mathlib.CategoryTheory.Adjunction.Evaluation
 public import Mathlib.CategoryTheory.Sites.Limits
 public import Mathlib.CategoryTheory.Abelian.FunctorCategory
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Sheaf.CategoryTheory.DiagramSiteTopology
+import Sheaf.CategoryTheory.DiagramSiteSheafEquivalence
+import Sheaf.CategoryTheory.DiagramSiteModuleEquivalence
 
 /-!
 # Realizing diagrams of module sheaves on a product site
@@ -109,6 +112,14 @@ theorem exists_diagramSite_realization
           (M.functor ⋙ (evaluation J (ringedSiteModules.{u} O)).obj j) ∧
         PreservesFiniteColimits
           (M.functor ⋙ (evaluation J (ringedSiteModules.{u} O)).obj j)) := by
-  sorry
+  obtain ⟨T, R, hT, hR⟩ := exists_diagramSite_topology_ring J C K O hO
+  obtain ⟨E, hE₁, hE₂, hE₃, hE₄⟩ :=
+    exists_diagramSite_sheaf_equivalence J C K T hT
+  obtain ⟨M, hM₁, hM₂, hM₃, hM₄, hMadd, hML, hMC, hMe⟩ :=
+    exists_diagramSite_module_equivalence J C K O hO T R hT hR
+  refine ⟨T, R, E, M, hT, hR, hE₁, hE₂, hE₃, hM₁, hM₂, hM₃, hM₄,
+    hMadd, hML, hMC, ?_⟩
+  intro j
+  exact ⟨(hE₄ j).1, (hE₄ j).2, (hMe j).1, (hMe j).2⟩
 
 end CategoryTheory

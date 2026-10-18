@@ -1,0 +1,144 @@
+{
+ "id": "lem-weil-pbc-diagram-site-module-equivalence",
+ "kind": "statement",
+ "title": "Product-site module sheaves are diagram modules",
+ "statement": "For small categories J,C, a topology K on C, a commutative ring sheaf O, the vertical topology T [lem-weil-pbc-diagram-site-topology], and a ring sheaf R whose underlying presheaf is the pullback of O from C, the category of module sheaves over R [def-weil-sheaf-of-modules-category] is equivalent to J-diagrams of module sheaves over O. The equivalence is restriction to the vertical slices on objects, restriction maps, horizontal maps and morphisms, with the heterogeneous equalities displayed in Lean. It is additive and preserves finite limits and finite colimits; for every j, its composite with evaluation preserves finite limits and finite colimits.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CV and 03DA; explicit componentwise product-site construction from the parent proof"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-diagram-site-topology"
+ ],
+ "proof": [
+  {
+   "text": "Restrict a product module presheaf to each vertical slice with pushforward₀Obj. Horizontal restriction is linear because the coefficient restriction is the identity. Naturality and the product-arrow factorization assemble these into a functor to diagrams. Morphisms act componentwise.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-diagram-site-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CV and 03DA; explicit componentwise product-site construction from the parent proof"
+   }
+  },
+  {
+   "text": "Uncurry a diagram of module sheaves: at a product object use its component module, and on arrows compose its horizontal map and vertical restriction. Prove semilinearity, composition, and naturality from the component module laws. The componentwise sheaf criterion proves the resulting additive presheaf is a sheaf.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-diagram-site-topology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CV and 03DA; explicit componentwise product-site construction from the parent proof"
+   }
+  },
+  {
+   "text": "Build explicit unit and counit isomorphisms with identity section maps, using PresheafOfModules.isoMk. Product-arrow factorization proves their naturality and the triangle identity. These give an actual equivalence, and its object and morphism formulas follow by unfolding the constructions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CV and 03DA; explicit componentwise product-site construction from the parent proof"
+   }
+  },
+  {
+   "text": "An equivalence preserves finite limits and colimits, and finite-product preservation gives additivity. Mathlib forms module-sheaf colimits via sheafification and functor-category limits/colimits componentwise; evaluation therefore preserves finite limits and colimits. Compose these preservation instances with the equivalence.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CV and 03DA; explicit componentwise product-site construction from the parent proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-diagram-site-topology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CV and 03DA; explicit componentwise product-site construction from the parent proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "sheaves on a product site are diagrams of sheaves",
+   "results": "No matching product-site equivalence; returned coherent/cartesian results.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "sheaves on a product site equivalent to diagrams of sheaves",
+   "results": "Finite-product sheaf results, no product-site realization. Loogle currying search finds Functor.currying, not its sheaf/module restriction.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheaf.*(diagram|functorCategory)|product.*site; PresheafOfModules.*(curry|uncurry)|SheafOfModules.*(prod|diagram)",
+   "results": "No relevant equivalence in Mathlib or either project library. Existing evaluation adjunction and preservation instances do provide exactness once the explicit equivalences are built.",
+   "date": "2026-10-18",
+   "verdict": "no direct match; reuse generic categorical results"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.DiagramSiteRealization",
+  "date": "2026-10-18",
+  "group": "R3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Detailed form, first paragraph and display: strict diagram ringed-site realization; product-site realization proof steps 7-9 and 13.",
+   "via": [
+    "lem-weil-pbc-diagram-site-realization",
+    "lem-weil-pbc-diagram-kflat-replacements"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DiagramSiteModuleEquivalence",
+  "declaration": "CategoryTheory.exists_diagramSite_module_equivalence",
+  "file": "lean/Sheaf/CategoryTheory/DiagramSiteModuleEquivalence.lean",
+  "statement": "theorem exists_diagramSite_module_equivalence (J C : Type u) [SmallCategory J] [SmallCategory C] (K : GrothendieckTopology C) (O : Sheaf K RingCat.{u}) (_hO : ∀ (U : Cᵒᵖ) (a b : O.obj.obj U), a * b = b * a) (T : GrothendieckTopology (Jᵒᵖ × C)) (R : Sheaf T RingCat.{u}) (hT : ∀ (j : J) (U : C) (S : Sieve (op j, U)), S ∈ T (op j, U) ↔ S.functorPullback (Prod.sectR (op j) C) ∈ K U) (hR : R.obj = (Prod.snd Jᵒᵖ C).op ⋙ O.obj) : ∃ (M : ringedSiteModules.{u} R ≌ (J ⥤ ringedSiteModules.{u} O)), (∀ (F : ringedSiteModules.{u} R) (j : J) (U : Cᵒᵖ), HEq (((M.functor.obj F).obj j).val.obj U) (F.val.obj ((Prod.sectR (op j) C).op.obj U))) ∧ (∀ (F : ringedSiteModules.{u} R) (j : J) (U V : Cᵒᵖ) (f : U ⟶ V), HEq (((M.functor.obj F).obj j).val.map f) (F.val.map ((Prod.sectR (op j) C).op.map f))) ∧ (∀ (F : ringedSiteModules.{u} R) (j k : J) (a : j ⟶ k) (U : C), HEq (((M.functor.obj F).map a).val.app (op U)) (F.val.map (Prod.mkHom a.op (𝟙 U)).op)) ∧ (∀ (F G : ringedSiteModules.{u} R) (f : F ⟶ G) (j : J) (U : Cᵒᵖ), HEq (((M.functor.map f).app j).val.app U) (f.val.app ((Prod.sectR (op j) C).op.obj U))) ∧ M.functor.Additive ∧ PreservesFiniteLimits M.functor ∧ PreservesFiniteColimits M.functor ∧ (∀ j : J, PreservesFiniteLimits (M.functor ⋙ (evaluation J (ringedSiteModules.{u} O)).obj j) ∧ PreservesFiniteColimits (M.functor ⋙ (evaluation J (ringedSiteModules.{u} O)).obj j))",
+  "branch": "sheaf-dag",
+  "by": "R3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261018T062900-L-672477",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R3",
+  "result": "pass",
+  "landing": "20261018T062900-L-672477",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
