@@ -18,7 +18,8 @@
   "def-weil-flat-morphism",
   "def-weil-finite-type-morphism",
   "def-weil-closed-immersion",
-  "def-weil-affine-spectrum"
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-regular-system-of-parameters"
  ],
  "proof": [
   {
@@ -412,5 +413,23 @@
   "group": "Q03",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-eb9a33190 (reviewer sub-agent of L); spot-checked: I read the whole item: 12 steps, no new nodes, statement unchanged. I read every cited statement and ILO XVI 3.7 ¶1 (the Fujiwara-reduction role; the parent needs a complete strictly henselian trait, which the item supplies). Mathematics checked: Step 1, Cohen lift local and injective, C henselian by 0ALJ, ell≠p so ell is a unit in C. Step 2, degree-wise surjectivity. Step 3, c=1 by 00NR/00NQ, and f=p−ΣX_a b_a ∉ n² gives ker=(f) with f≡p mod X. Step 4, P/n^N = A/J^N = ⊕_{|E|<N} C/p^{N−|E|}. Step 5, 07QW→07QU→G-ring→0AH2→Popescu→0032. Steps 6–9: B_i/(p,X) smooth over k, hence regular; flat transport of X,p, then 00LJ permutation in the Noetherian local T, then 00NU and the J-2 open locus, then 061L, then component selection. Step 10, the directed preorder of good shrinks, with injectivity by 00D6. Step 11, torsion-free over the PID C, hence flat. Step 12, limits of affine schemes. Edge cases checked: d=1 (unramified and ramified), d=2 R=C[[u]], imperfect separably closed k, ell=p excluded. Duplicate search (cohen/regular-pair/Popescu citers): none. FIX (C4): the Popescu node gives Spec B→Spec A smooth in the scheme sense of def-sbc-smooth-morphisms, but Steps 5–7 and 11 use ring-map smoothness (00T4, 00TA, fibre regularity, finite presentation). I added the existing node lem-weil-pbc-smooth-ring-map-iff-smooth-affine to the Step 5 text, its uses and proof_deps. Its closure has no trf/pd nodes and creates no cycle. Batch 5: lem-per-complete-local-excellence reaches only generic commutative algebra in sec-trace-formula (lem-trf-regular-ring-universally-catenary, lem-trf-cm-ring-universally-catenary, lem-trf-polynomial-algebra-cm, lem-trf-finite-domain-fraction-degree: regular⇒CM⇒universally catenary). None is given by either assumption or is a step of their proofs, so the flag is accepted. The worker's generic-algebra tool_uses are accepted. No SGA citations.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompleteMixedRegularPairApproximation",
+  "declaration": "RingTheory.exists_complete_mixed_regular_pair_approximation",
+  "file": "lean/Sheaf/RingTheory/CompleteMixedRegularPairApproximation.lean",
+  "statement": "theorem exists_complete_mixed_regular_pair_approximation (R : Type u) [CommRing R] [IsRegularLocalRing R] [CharZero R] [IsStrictlyHenselianLocalRing R] [IsAdicComplete (IsLocalRing.maximalIdeal R) R] (p ℓ d : ℕ) (hp : p.Prime) [CharP (IsLocalRing.ResidueField R) p] (hℓ : ℓ.Prime) (hℓR : IsUnit (ℓ : R)) (hd : 1 ≤ d) (hdim : ringKrullDim R = (d : WithBot ℕ∞)) (t : Fin d → R) (ht : IsLocalRing.IsRegularSystemOfParameters (List.ofFn t)) (htreg : RingTheory.Sequence.IsRegular R (List.ofFn t)) : ∃ (C : Type u) (_ : CommRing C) (_ : IsDomain C) (_ : IsDiscreteValuationRing C) (_ : CharZero C) (_ : IsStrictlyHenselianLocalRing C) (_ : IsAdicComplete (IsLocalRing.maximalIdeal C) C) (_ : CharP (IsLocalRing.ResidueField C) p) (e : IsLocalRing.ResidueField C ≃+* IsLocalRing.ResidueField R) (_ : Algebra C R), IsUnit (ℓ : C) ∧ (∀ c : C, e (IsLocalRing.residue C c) = IsLocalRing.residue R (algebraMap C R c)) ∧ ∃ (I : Type u) (_ : Preorder I) (_ : Nonempty I) (_ : IsDirected I (· ≤ ·)) (B : I ⥤ CommAlgCat.{u} C) (G : I ⥤ CommRingCat.{u}) (q : B ⋙ forget₂ (CommAlgCat.{u} C) CommRingCat.{u} ⟶ G) (s : (i : I) → Fin d → B.obj i) (ι : B ⟶ (Functor.const I).obj (CommAlgCat.of C R)) (ν : G ⟶ (Functor.const I).obj (CommRingCat.of (IsLocalRing.ResidueField R))), (∀ (i j : I) (f : i ⟶ j) (a : Fin d), B.map f (s i a) = s j a) ∧ (∀ i : I, IsIntegral (Spec (CommRingCat.of (B.obj i))) ∧ IsRegularScheme (Spec (CommRingCat.of (B.obj i))) ∧ Flat (Spec.map (CommRingCat.ofHom (algebraMap C (B.obj i)))) ∧ LocallyOfFiniteType (Spec.map (CommRingCat.ofHom (algebraMap C (B.obj i)))) ∧ QuasiCompact (Spec.map (CommRingCat.ofHom (algebraMap C (B.obj i))))) ∧ (∀ i : I, IsRegularScheme (Spec (G.obj i)) ∧ CharP (G.obj i) p ∧ IsClosedImmersion (Spec.map (q.app i)) ∧ Function.Surjective (q.app i) ∧ RingHom.ker (q.app i).hom = Ideal.ofList (List.ofFn (s i)) ∧ RingTheory.Sequence.IsRegular (B.obj i) (List.ofFn (s i))) ∧ Nonempty (IsColimit ((forget₂ (CommAlgCat.{u} C) CommRingCat.{u}).mapCocone { pt := CommAlgCat.of C R, ι := ι })) ∧ Nonempty (IsColimit { pt := CommRingCat.of (IsLocalRing.ResidueField R), ι := ν }) ∧ (∀ (i : I) (a : Fin d), ι.app i (s i a) = t a) ∧ (∀ i : I, (ν.app i).hom.comp (q.app i).hom = (IsLocalRing.residue R).comp (ι.app i).hom.toRingHom)",
+  "branch": "newtargets-dag",
+  "by": "Q26",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-494f6badb",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: R complete strictly henselian regular local, CharZero with residue char p, dim d>=1, l a unit, ordered RSP t; Cohen trait C (DVR, complete, strictly henselian, mixed char, l unit) with residue iso e compatible with algebraMap C R; small nonempty directed I; B : I => CommAlgCat C and G with natural q; (i) Spec B_i integral, regular, flat, locally finite type, quasi-compact over C; (ii) Spec G_i regular, CharP p, closed immersion with ker = (s_i), s_i a compatible regular sequence; (iii) ring colimits R and k, square nu.q = residue.iota, iota(s_i a) = t a. lean.statement verbatim; stmt_deps gains only the landed RSP node, which the statement uses; all 12 proof steps verbatim in the docstring; the 28 unused non-public imports are proof_dep modules as brief l.104 requires; nt_compile --json clean in 4.1 s, injected-error control fails. Edge cases d=0, p=0 and empty I are excluded as in the node; one universe u. Advisory only: htreg duplicates a consequence of ht."
  }
 }
