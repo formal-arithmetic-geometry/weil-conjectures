@@ -11,6 +11,8 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 public import WeilConjectures.ConstructibleSheaf.FilteredColimit
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle.Coefficients
 public import WeilConjectures.ConstructibleSheaf.FiniteTypePushforward
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle.Degreewise
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle.FlatLowerStar
 
 /-!
 # Dévissage of the flat sheaf in the base change map
@@ -123,8 +125,15 @@ theorem isIso_tensorBaseChangeMap_singleFunctor_of_flat_of_lowerStar_of_smul_eq_
     (h𝓕 : ∀ x ∈ Ring.jacobson Λ, x • 𝟙 𝓕 = 0) :
     IsIso (tensorBaseChangeMap (ModuleCat.{u + 1} Λ) h e f' g w
       (L((p)^*[ModuleCat.{u + 1} Λ]).obj ((DerivedCategory.singleFunctor _ 0).obj 𝓔))
-      ((DerivedCategory.singleFunctor _ 0).obj 𝓕)) :=
-  sorry
+      ((DerivedCategory.singleFunctor _ 0).obj 𝓕)) := by
+  rw [isIso_tensorBaseChangeMap_iff_forall_isIso_tensorBaseChangeHomologyMap Λ p h e f' g w 𝓕 𝓔
+    h𝓔]
+  intro q
+  refine isIso_tensorBaseChangeHomologyMap_app_of_cokernel_lowerStar Λ p h e f' g w 𝓕 a h𝓕
+    (fun π _ q ↦ ?_) q 𝓔
+  rw [← isIso_tensorBaseChangeHomologyMap_app_iff_cokernel_smulDesc Λ p h e f' g w 𝓕 h𝓕]
+  exact (isIso_tensorBaseChangeMap_iff_forall_isIso_tensorBaseChangeHomologyMap Λ p h e f' g w 𝓕
+    _ (flat_lowerStar_obj_tensorUnit_of_isFinite Λ π)).1 (hgood π 𝓕) q
 
 /-- **Dévissage of the flat sheaf** in the proof of blueprint `lem-kun-0f1j`: for `X` of finite
 type over a field, `h` quasi-compact and quasi-separated, if the base change map
