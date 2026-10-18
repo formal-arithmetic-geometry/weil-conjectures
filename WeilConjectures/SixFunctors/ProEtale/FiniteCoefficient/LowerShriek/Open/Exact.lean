@@ -1,20 +1,23 @@
 /-
-Copyright (c) 2026 Claude. All rights reserved.
+Copyright (c) 2026 Weil conjectures project. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
 Authors: Claude
 -/
 module
 
-public import Mathlib.Algebra.Homology.ShortComplex.ExactFunctor
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.LowerShriek.Open.Defs
 
 /-!
-# Extension by zero on pro-étale sheaves: adjunction and exactness
+# Exactness of the extension by zero on the pro-étale site
 
-For an open immersion `j : U ⟶ X` the extension by zero `j_!` of pro-étale sheaves with values in
-a Grothendieck abelian category `A` (for instance sheaves of modules over a finite ring) is left
-adjoint to the restriction `j^*` (`AlgebraicGeometry.ProEtale.openImmersionLowerShriekHomEquiv`)
-and exact (`AlgebraicGeometry.ProEtale.shortExact_map_openImmersionLowerShriek`).
+For an open immersion `j : U ⟶ X` the extension by zero `j_!` on sheaves for the small
+pro-étale sites is exact (blueprint `lem-weil-extension-by-zero-exact`): it is a left adjoint,
+hence right exact, and it is left exact
+(`AlgebraicGeometry.ProEtale.preservesFiniteLimits_openImmersionLowerShriek`), being the
+presheaf-level extension by zero, which is computed objectwise, followed by sheafification.
+Maps `j_! M ⟶ N` correspond to maps `M ⟶ j^* N`
+(`AlgebraicGeometry.ProEtale.openImmersionLowerShriekHomEquiv`, blueprint
+`lem-weil-extension-by-zero-adjunction`).
 -/
 
 @[expose] public section
@@ -53,14 +56,21 @@ lemma openImmersionLowerShriekHomEquiv_naturality_right
       openImmersionLowerShriekHomEquiv A j M N b ≫ (j)^*[A].map c :=
   (openImmersionLowerShriekUpperStarAdjunction A j).homEquiv_naturality_right b c
 
-/-- Blueprint `lem-weil-extension-by-zero-exact`: the extension by zero `j_!` along an open
-immersion is exact, i.e. it carries short exact sequences of pro-étale sheaves on `U` to short
-exact sequences on `X`. It preserves finite colimits as a left adjoint, and finite limits since
-the presheaf-level extension by zero and sheafification are left exact
-(`AlgebraicGeometry.ProEtale.preservesFiniteLimits_openImmersionLowerShriek`). -/
+/-- Blueprint `lem-weil-extension-by-zero-exact`: Exactness of extension by zero. For an open
+immersion `j : U ⟶ X`, the extension by zero `j_!` of pro-étale sheaves with values in a
+Grothendieck abelian category `A` (for instance modules over a finite commutative ring such as
+`A_{E,n}`) sends short exact sequences to short exact sequences: it preserves finite limits
+(`AlgebraicGeometry.ProEtale.preservesFiniteLimits_openImmersionLowerShriek`) and, being a left
+adjoint, finite colimits. -/
 theorem shortExact_map_openImmersionLowerShriek
     {S : ShortComplex (Sheaf (Scheme.ProEt.topology U) A)} (hS : S.ShortExact) :
     (S.map (j)_!open[A]).ShortExact :=
   hS.map_of_exact _
+
+/-- The extension by zero `j_!` along an open immersion is exact: it preserves finite limits and
+finite colimits (blueprint `lem-weil-extension-by-zero-exact`). -/
+theorem preservesFiniteLimits_and_preservesFiniteColimits_openImmersionLowerShriek :
+    PreservesFiniteLimits (j)_!open[A] ∧ PreservesFiniteColimits (j)_!open[A] :=
+  ⟨inferInstance, inferInstance⟩
 
 end AlgebraicGeometry.ProEtale

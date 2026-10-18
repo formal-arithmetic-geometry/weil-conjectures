@@ -7,8 +7,9 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiFinite
 public import WeilConjectures.AlgebraicGeometry.Morphisms.QuasiFiniteFactorization
+public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
+public import WeilConjectures.WeilSheaf.FiniteLowerStar
 public import WeilConjectures.WeilSheaf.LowerShriekFunctoriality
-public import WeilConjectures.AlgebraicGeometry.ProEtale.WeaklyContractibleFinite
 
 /-!
 # Vanishing of direct images of Weil sheaves
@@ -38,8 +39,6 @@ Frobenius of quasi-finite direct images in
 universe u
 
 open CategoryTheory Limits
-
-open scoped AlgebraicGeometry.ProEtale
 
 namespace AlgebraicGeometry
 
@@ -107,92 +106,34 @@ theorem WeilSheaf.isZero_homologySheaf_derivedLowerShriek_of_neg (G : WeilSheaf 
 
 end LowerShriek
 
-/-- The pushforward of sheaves of modules over the constant `ℓ`-adic sheaf is exact as soon as
-the pushforward of the underlying sheaves of `ℚ̄_ℓ`-modules is: the forgetful functor reflects
-finite colimits and commutes with the pushforwards. -/
-theorem ProEtale.preservesFiniteColimits_adicLowerStar_of_preservesFiniteColimits
-    {X Y : Scheme.{u}} (g : X ⟶ Y)
-    [PreservesFiniteColimits ((g)_*[ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl l))])] :
-    PreservesFiniteColimits (g)_*ᵃ[l] :=
-  have : PreservesFiniteColimits ((g)_*ᵃ[l] ⋙ ProEtale.AdicSheaf.forget Y) :=
-    inferInstanceAs (PreservesFiniteColimits
-      (ProEtale.AdicSheaf.forget X ⋙ (g)_*[WeilCoefficients.{u} l]))
-  preservesFiniteColimits_of_reflects_of_preserves _ (ProEtale.AdicSheaf.forget Y)
-
-/-- The higher direct images `Rʳp₀*G` (`r > 0`) of a Weil sheaf vanish along any morphism `p`
-whose base change `p̄` to the geometric fibres has an exact pushforward of `ℓ`-adic sheaves:
-then `p₀*` is exact on pro-étale Weil sheaves, so `Rp₀*` is `p₀*` applied levelwise
-(`CategoryTheory.Functor.rightDerivedFunctorIsoMapDerivedCategory`). -/
-theorem WeilSheaf.isZero_higherLowerStar_of_preservesFiniteColimits {T Y : Scheme.{u}}
-    [T.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] (p : T ⟶ Y)
-    [p.IsOver (Spec (CommRingCat.of k₀))] [QuasiCompact p] [QuasiSeparated p]
-    [LocallyOfFiniteType p] [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
-    [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))]
-    [PreservesFiniteColimits
-      ((Scheme.Hom.geometricFiberMap p (comp_over p (Spec (CommRingCat.of k₀))))_*ᵃ[l])]
-    (G : WeilSheaf k₀ l T) (r : ℕ) (hr : 0 < r) :
-    IsZero ((WeilSheaf.higherLowerStar p r).obj G) := by
-  have : PreservesFiniteColimits (ProEtaleWeilSheaf.lowerStar k₀ l p) :=
-    Endofunctor.IsoAlgebra.preservesFiniteColimits_mapOfNatIso _
-  change IsZero ((WeilComplex.homologySheaf r).obj _)
-  rw [WeilComplex.isZero_homologySheaf_obj_iff]
-  let F := ProEtaleWeilSheaf.lowerStar k₀ l p
-  let e := F.rightDerivedFunctorIsoMapDerivedCategory.app
-      ((DerivedCategory.singleFunctor _ 0).obj G.obj) ≪≫
-    (F.mapDerivedCategorySingleFunctor 0).app G.obj
-  exact (DerivedCategory.isZero_of_isLE ((DerivedCategory.singleFunctor _ 0).obj (F.obj G.obj))
-    0 r (by exact_mod_cast hr)).of_iso ((DerivedCategory.homologyFunctor _ r).mapIso e)
-
-/-- **Finite pushforward is exact on pro-étale sheaves of `ℚ̄_ℓ`-modules**: for a finite morphism
-`g : X ⟶ Y` of finite presentation, the direct image `g_*` of pro-étale sheaves of (discrete)
-`ℚ̄_ℓ`-modules preserves finite colimits. This is the pro-étale analogue of the exactness of
-finite direct images for étale sheaves
-(`AlgebraicGeometry.Etale.preservesFiniteColimits_lowerStar_of_isFinite`), and the input of the
-passage to `ℚ̄_ℓ`-coefficients of blueprint `def-weil-pbc-qbar-category`.
-
-This is `AlgebraicGeometry.ProEtale.preservesFiniteColimits_lowerStar_of_isFinite`: a finite and
-finitely presented algebra over a w-contractible ring is w-contractible
-(`IsWContractibleRing.of_finite`), so `X ×_Y V` is weakly contractible for every `V` over `Y`
-whose underlying scheme is the spectrum of a w-contractible ring, and such `V` cover the site.
-
-Finite presentation is needed: for a separably closed field `k`, the closed immersion
-`Spec C(βℕ ∖ ℕ, k) ⟶ Spec C(βℕ, k)` is finite but its open complement is not quasi-compact,
-and exactness of its pushforward would make `Γ(Spec C(βℕ ∖ ℕ, k), -)` exact. -/
-theorem ProEtale.preservesFiniteColimits_lowerStar_padicAlgCl_of_isFinite {X Y : Scheme.{u}}
-    (g : X ⟶ Y) [IsFinite g] [LocallyOfFinitePresentation g] :
-    PreservesFiniteColimits ((g)_*[ModuleCat.{u + 1} (ULift.{u + 1} (PadicAlgCl l))]) :=
-  ProEtale.preservesFiniteColimits_lowerStar_of_isFinite g
-
-/-- **Finite direct images are exact** for Weil sheaves (blueprint `def-weil-pbc-qbar-category`):
-for a finite morphism `p : T ⟶ Y` of `k₀`-schemes, the higher direct images `Rʳp₀*G` of a Weil
-sheaf vanish for `r > 0`.
-
-This is the passage to pro-étale `ℚ̄_ℓ`-coefficients of the exactness of finite direct images
-for étale sheaves, which is proved as
-`AlgebraicGeometry.Etale.isZero_homology_rightDerivedFunctor_lowerStar_of_isFinite`. By
-`AlgebraicGeometry.WeilSheaf.isZero_higherLowerStar_of_preservesFiniteColimits` it reduces to
-the exactness of the pushforward of pro-étale sheaves of `ℚ̄_ℓ`-modules along the finite
-morphism `p̄`, which is
-`AlgebraicGeometry.ProEtale.preservesFiniteColimits_lowerStar_padicAlgCl_of_isFinite`. -/
+/-- **Finite direct images are exact** (blueprint: `lemma-weil-pbc-finite-direct-image-exact`,
+with the passage to `ℚ̄_ℓ`-coefficients of `def-weil-pbc-qbar-category`): for a finite morphism
+`p : T ⟶ Y` of `k₀`-schemes, the higher direct images `Rʳp₀*G` of a Weil sheaf vanish for
+`r > 0`: the pushforward `p₀*` is exact
+(`AlgebraicGeometry.ProEtaleWeilSheaf.preservesFiniteColimits_lowerStar_of_isFinite`), hence is
+its own right derived functor. -/
 theorem WeilSheaf.isZero_higherLowerStar_of_isFinite {T Y : Scheme.{u}}
     [T.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] (p : T ⟶ Y)
     [IsFinite p] [p.IsOver (Spec (CommRingCat.of k₀))]
     [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
     [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀))] (G : WeilSheaf k₀ l T) (r : ℕ) (hr : 0 < r) :
     IsZero ((WeilSheaf.higherLowerStar p r).obj G) := by
-  have : IsFinite (Scheme.Hom.geometricFiberMap p (comp_over p (Spec (CommRingCat.of k₀)))) :=
-    Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange (P := @IsFinite) p _ ‹_›
+  -- `Y` is locally noetherian, so the finite morphism `p` is of finite presentation and `p₀*`
+  -- is exact (`ProEtaleWeilSheaf.preservesFiniteColimits_lowerStar_of_isFinite`).
   have : IsLocallyNoetherian Y :=
     LocallyOfFiniteType.isLocallyNoetherian (Y ↘ Spec (CommRingCat.of k₀))
-  have : LocallyOfFinitePresentation (Scheme.Hom.geometricFiberMap p
-      (comp_over p (Spec (CommRingCat.of k₀)))) :=
-    Scheme.Hom.geometricFiberMap_of_isStableUnderBaseChange
-      (P := @LocallyOfFinitePresentation) p _ inferInstance
-  have := ProEtale.preservesFiniteColimits_lowerStar_padicAlgCl_of_isFinite (l := l)
-    (Scheme.Hom.geometricFiberMap p (comp_over p (Spec (CommRingCat.of k₀))))
-  have := ProEtale.preservesFiniteColimits_adicLowerStar_of_preservesFiniteColimits (l := l)
-    (Scheme.Hom.geometricFiberMap p (comp_over p (Spec (CommRingCat.of k₀))))
-  exact WeilSheaf.isZero_higherLowerStar_of_preservesFiniteColimits p G r hr
+  have := ProEtaleWeilSheaf.preservesFiniteColimits_lowerStar_of_isFinite k₀ l p
+  change IsZero ((WeilComplex.homologySheaf r).obj
+    ((WeilComplex.derivedLowerStar p).obj (WeilSheaf.toComplex.obj G)))
+  rw [WeilComplex.isZero_homologySheaf_obj_iff]
+  -- An exact functor is its own right derived functor, so `Rp₀*G` is `p₀*G` in degree `0`.
+  let F := ProEtaleWeilSheaf.lowerStar k₀ l p
+  let e : F.rightDerivedFunctor.obj ((_root_.DerivedCategory.singleFunctor _ 0).obj G.obj) ≅
+      (_root_.DerivedCategory.singleFunctor _ 0).obj (F.obj G.obj) :=
+    F.rightDerivedFunctorIsoMapDerivedCategory.app _ ≪≫
+      (F.mapDerivedCategorySingleFunctor 0).app G.obj
+  exact (_root_.DerivedCategory.isZero_of_isLE _ 0 r (by omega)).of_iso
+    ((_root_.DerivedCategory.homologyFunctor _ r).mapIso e)
 
 section QuasiFinite
 

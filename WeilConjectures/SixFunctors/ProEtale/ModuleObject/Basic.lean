@@ -17,6 +17,12 @@ public import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstantPushout
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coherence
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal
 
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.WeaklyEtale
+import WeilConjectures.RingTheory.Spectrum.Prime.LocallyConstant
+import WeilConjectures.CategoryTheory.Monoidal.Conjugate
+import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
+import WeilConjectures.Topology.SpectralSpace.ConnectedComponent
+
 /-!
 
 # Condensed coefficient rings and their canonical coefficient morphisms
@@ -137,8 +143,8 @@ flat separator of `Ab`, so `∐_{ℤ ⟶ M} ℤ`, the free abelian group on `M`,
 functorially onto `M`. This is the instance of `WeilConjectures.CategoryTheory.RingObjects.Ab`.
 -/
 instance AddCommGrpCat.hasFunctorialFlatResolution :
-    Abelian.HasFunctorialFlatResolution Ab.{u} :=
-  inferInstance
+    Abelian.HasFunctorialFlatResolution Ab.{u} := by
+  infer_instance
 
 namespace AlgebraicGeometry.ProEtale
 
@@ -178,14 +184,14 @@ instance weaklyEtale_toSpecZ_profiniteToScheme (S : Profinite.{u}) :
   let e : CommRingCat.of (LocallyConstant S (ULift.{u} ℤ)) ≅
       CommRingCat.of (LocallyConstant S ℤ) :=
     (LocallyConstant.congrRightRingEquiv ULift.ringEquiv).toCommRingCatIso
-  have : WeaklyEtale (Spec.map (CommRingCat.ofHom
-      (algebraMap (ULift.{u} ℤ) (LocallyConstant S (ULift.{u} ℤ))))) := by
-    rw [WeaklyEtale.Spec_iff, CommRingCat.hom_ofHom, RingHom.weaklyEtale_algebraMap_iff]
+  have : WeaklyEtale
+      (Spec.map e.hom ≫ Spec.map (CommRingCat.ofHom
+        (algebraMap (ULift.{u} ℤ) (LocallyConstant S (ULift.{u} ℤ))))) := by
     infer_instance
-  rw [show toSpecZ (profiniteToScheme.obj S) =
-    Spec.map e.hom ≫ Spec.map (CommRingCat.ofHom (algebraMap _ _)) from
-      specULiftZIsTerminal.hom_ext _ _]
-  infer_instance
+  rwa [specULiftZIsTerminal.hom_ext
+    (Spec.map e.hom ≫ Spec.map (CommRingCat.ofHom
+      (algebraMap (ULift.{u} ℤ) (LocallyConstant S (ULift.{u} ℤ)))))
+    (toSpecZ (profiniteToScheme.obj S))] at this
 
 /-- The functor `S ↦ Spec LC(S, ℤ)` from profinite sets to the pro-étale site of `Spec ℤ`. -/
 noncomputable def profiniteToProEt : Profinite.{u} ⥤ specZ.{u}.ProEt where
@@ -198,38 +204,118 @@ lemma profiniteToProEt_obj_left (S : Profinite.{u}) :
     (profiniteToProEt.obj S).left = Spec (.of (LocallyConstant S ℤ)) :=
   rfl
 
+-- Ring maps from locally constant integer-valued functions are determined by their
+-- map on profinite components. Characteristic functions identify their values after
+-- localization; conversely, `liftPrimeSpectrum` glues integers along clopen partitions.
+-- This constructs a left adjoint to `profiniteToCommRingCatOp`, avoiding tensor-product
+-- and equalizer computations. Source: the module's profinite-test-object construction
+-- and `LocallyConstant.homeomorphPrimeSpectrum` / `LocallyConstant.liftPrimeSpectrum`.
+private noncomputable def profiniteSpectrumProjection {S : Profinite.{u}} {R : Type u} [CommRing R]
+    (φ : LocallyConstant S ℤ →+* R) : C(PrimeSpectrum R, S) :=
+  ⟨fun p ↦ ((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)).symm
+      (PrimeSpectrum.comap φ p)).1,
+    continuous_fst.comp
+      ((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)).symm.continuous.comp
+        (PrimeSpectrum.continuous_comap φ))⟩
+
+private lemma profinite_localization_map_eq_eval {S : Profinite.{u}} {R : Type u} [CommRing R]
+    (φ : LocallyConstant S ℤ →+* R) (p : PrimeSpectrum R) (g : LocallyConstant S ℤ) :
+    algebraMap R (Localization.AtPrime p.asIdeal) (φ g) =
+      algebraMap R (Localization.AtPrime p.asIdeal) (g (profiniteSpectrumProjection φ p) : R) := by
+  classical
+  let s := profiniteSpectrumProjection φ p
+  let q := ((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)).symm
+    (PrimeSpectrum.comap φ p)).2
+  have hp : PrimeSpectrum.comap φ p = LocallyConstant.toPrimeSpectrum (s, q) :=
+    ((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)).apply_symm_apply _).symm
+  let χ := LocallyConstant.charFn ℤ (g.isLocallyConstant.isClopen_fiber (g s))
+  have hχ : φ χ ∉ p.asIdeal := by
+    change χ ∉ (PrimeSpectrum.comap φ p).asIdeal
+    rw [hp, LocallyConstant.mem_toPrimeSpectrum_asIdeal]
+    simpa [χ, LocallyConstant.charFn_apply_of_mem] using q.isPrime.one_notMem
+  have hid : IsIdempotentElem χ := by
+    change χ * χ = χ
+    ext x
+    by_cases hx : g x = g s
+    · simp [χ, LocallyConstant.charFn_apply_of_mem, hx]
+    · simp [χ, LocallyConstant.charFn_apply_of_notMem, hx]
+  have hχloc : algebraMap R (Localization.AtPrime p.asIdeal) (φ χ) = 1 :=
+    (hid.map φ).algebraMap_localization_atPrime_of_notMem hχ
+  have hmul : χ * g = χ * (g s : LocallyConstant S ℤ) := by
+    ext x
+    change χ x * g x = χ x * g s
+    by_cases hx : g x = g s
+    · simp [hx]
+    · simp [χ, LocallyConstant.charFn_apply_of_notMem, hx]
+  have h := congrArg (fun v ↦ algebraMap R (Localization.AtPrime p.asIdeal) (φ v)) hmul
+  simpa only [map_mul, map_intCast, hχloc, one_mul] using h
+
+private noncomputable def profiniteLocallyConstantHomEquiv
+    (R : CommRingCat.{u}ᵒᵖ) (S : Profinite.{u}) :
+    (Profinite.of (ConnectedComponents (PrimeSpectrum R.unop)) ⟶ S) ≃
+      (R ⟶ profiniteToCommRingCatOp.obj S) where
+  toFun f := (CommRingCat.ofHom (LocallyConstant.liftPrimeSpectrum (Int.castRingHom R.unop)
+    ⟨fun p ↦ f (ConnectedComponents.mk p), f.hom.hom.continuous.comp
+      ConnectedComponents.continuous_coe⟩)).op
+  invFun φ := ConcreteCategory.ofHom
+    ⟨(profiniteSpectrumProjection φ.unop.hom).continuous.connectedComponentsLift,
+      (profiniteSpectrumProjection φ.unop.hom).continuous.connectedComponentsLift_continuous⟩
+  left_inv f := by
+    apply ConcreteCategory.hom_ext
+    intro x
+    obtain ⟨p, rfl⟩ := ConnectedComponents.surjective_coe x
+    change (profiniteSpectrumProjection (LocallyConstant.liftPrimeSpectrum (Int.castRingHom R.unop)
+      ⟨fun p ↦ f (ConnectedComponents.mk p), f.hom.hom.continuous.comp
+        ConnectedComponents.continuous_coe⟩)) p = f (ConnectedComponents.mk p)
+    dsimp [profiniteSpectrumProjection]
+    rw [LocallyConstant.comap_liftPrimeSpectrum]
+    exact congrArg Prod.fst
+      ((LocallyConstant.homeomorphPrimeSpectrum (T := S) (R := ℤ)).symm_apply_apply _)
+  right_inv φ := by
+    apply Quiver.Hom.unop_inj
+    ext g
+    apply PrimeSpectrum.eq_of_forall_algebraMap_localization_eq
+    intro p
+    change algebraMap R.unop (Localization.AtPrime p.asIdeal)
+        (LocallyConstant.liftPrimeSpectrum (Int.castRingHom R.unop)
+          (profiniteSpectrumProjection φ.unop.hom) g) = _
+    rw [LocallyConstant.algebraMap_localization_liftPrimeSpectrum]
+    exact (profinite_localization_map_eq_eval φ.unop.hom p g).symm
+
+private lemma profiniteLocallyConstantHomEquiv_naturality (R : CommRingCat.{u}ᵒᵖ)
+    (S T : Profinite.{u}) (g : S ⟶ T)
+    (f : Profinite.of (ConnectedComponents (PrimeSpectrum R.unop)) ⟶ S) :
+    profiniteLocallyConstantHomEquiv R T (f ≫ g) =
+      profiniteLocallyConstantHomEquiv R S f ≫ profiniteToCommRingCatOp.map g := by
+  apply Quiver.Hom.unop_inj
+  ext h
+  apply PrimeSpectrum.eq_of_forall_algebraMap_localization_eq
+  intro p
+  change algebraMap R.unop (Localization.AtPrime p.asIdeal)
+      (LocallyConstant.liftPrimeSpectrum (Int.castRingHom R.unop) _ h) =
+    algebraMap R.unop (Localization.AtPrime p.asIdeal)
+      (LocallyConstant.liftPrimeSpectrum (Int.castRingHom R.unop) _
+        (LocallyConstant.comapRingHom g.hom.hom h))
+  rw [LocallyConstant.algebraMap_localization_liftPrimeSpectrum,
+    LocallyConstant.algebraMap_localization_liftPrimeSpectrum]
+  rfl
+
 /-- The functor `S ↦ Spec LC(S, ℤ)` preserves finite limits. See the module docstring. -/
 instance preservesFiniteLimits_profiniteToProEt : PreservesFiniteLimits profiniteToProEt.{u} := by
-  have hpb : PreservesLimitsOfShape WalkingCospan profiniteToScheme.{u} := by
-    refine ⟨fun {K} ↦ ?_⟩
-    have : PreservesLimit (cospan (K.map WalkingCospan.Hom.inl)
-        (K.map WalkingCospan.Hom.inr)) profiniteToScheme.{u} :=
-      preservesLimit_of_preserves_limit_cone (CompHausLike.pullback.isLimit _ _)
-        ((isLimitMapConePullbackConeEquiv _ _).symm (IsPullback.map Scheme.Spec
-          (Profinite.isPushout_locallyConstant_pullback _ _).op.flip).isLimit)
-    exact preservesLimit_of_iso_diagram _ (diagramIsoCospan K).symm
-  have : PreservesLimitsOfShape WalkingCospan profiniteToProEt.{u} := by
-    refine ⟨fun {K} ↦ ?_⟩
-    have : PreservesLimit K (profiniteToProEt ⋙ ProEt.forget specZ ⋙ Over.forget specZ) :=
-      inferInstanceAs (PreservesLimit K profiniteToScheme)
-    exact preservesLimit_of_reflects_of_preserves _ (ProEt.forget specZ ⋙ Over.forget specZ)
-  have : PreservesLimit (Functor.empty.{0} Profinite.{u}) profiniteToProEt.{u} := by
-    refine preservesLimit_of_preserves_limit_cone Profinite.isTerminalPUnit
-      ((isLimitMapConeEmptyConeEquiv _ _).symm ?_)
-    let e : CommRingCat.of (ULift.{u} ℤ) ≅ CommRingCat.of (LocallyConstant (PUnit.{u + 1}) ℤ) :=
-      RingEquiv.toCommRingCatIso (ULift.ringEquiv.trans
-        (RingEquiv.ofRingHom (LocallyConstant.constRingHom (X := PUnit.{u + 1}))
-          (LocallyConstant.evalRingHom PUnit.unit) (by ext f ⟨⟩; rfl) (by ext; rfl)))
-    have h : toSpecZ (profiniteToScheme.obj (Profinite.of PUnit.{u + 1})) =
-        Spec.map e.hom := specULiftZIsTerminal.hom_ext _ _
-    have : IsIso (toSpecZ (profiniteToScheme.obj (Profinite.of PUnit.{u + 1}))) := by
-      rw [h]
-      infer_instance
-    refine IsTerminal.isTerminalOfObj (ProEt.forget specZ) _ ?_
-    exact Over.mkIdTerminal.ofIso
-      (Over.isoMk (asIso (toSpecZ (profiniteToScheme.obj (Profinite.of PUnit.{u + 1}))))).symm
-  have := preservesLimitsOfShape_pempty_of_preservesTerminal profiniteToProEt.{u}
-  exact preservesFiniteLimits_of_preservesTerminal_and_pullbacks _
+  have h := (Adjunction.adjunctionOfEquivLeft profiniteLocallyConstantHomEquiv
+    profiniteLocallyConstantHomEquiv_naturality).rightAdjoint_preservesLimits
+  have : PreservesFiniteLimits profiniteToCommRingCatOp.{u} := inferInstance
+  have : PreservesFiniteLimits profiniteToScheme.{u} := by
+    unfold profiniteToScheme
+    infer_instance
+  have : (Over.forget specZ.{u}).IsEquivalence :=
+    (Over.equivalenceOfIsTerminal specULiftZIsTerminal).isEquivalence_functor
+  have : PreservesFiniteLimits
+      ((profiniteToProEt.{u} ⋙ Scheme.ProEt.forget specZ) ⋙ Over.forget specZ) :=
+    inferInstanceAs (PreservesFiniteLimits profiniteToScheme.{u})
+  have : PreservesFiniteLimits (profiniteToProEt.{u} ⋙ Scheme.ProEt.forget specZ) :=
+    preservesFiniteLimits_of_reflects_of_preserves _ (Over.forget specZ)
+  exact preservesFiniteLimits_of_reflects_of_preserves _ (Scheme.ProEt.forget specZ)
 
 instance : RepresentablyFlat profiniteToProEt.{u} :=
   flat_of_preservesFiniteLimits _
@@ -237,36 +323,44 @@ instance : RepresentablyFlat profiniteToProEt.{u} :=
 /-- The functor `S ↦ Spec LC(S, ℤ)` sends finite jointly surjective families to pro-étale
 coverings. See the module docstring. -/
 lemma coverPreserving_profiniteToProEt :
-    CoverPreserving (coherentTopology Profinite.{u}) (ProEt.topology specZ) profiniteToProEt where
-  cover_preserve {S R} hR := by
-    obtain ⟨α, _, X, π, hπ, hR⟩ := (coherentTopology.mem_sieves_iff_hasEffectiveEpiFamily R).1 hR
-    have hsurj := ((Profinite.effectiveEpiFamily_tfae X π).out 0 2).1 hπ
-    refine GrothendieckTopology.superset_covering _ ?_
-      (Precoverage.generate_mem_toGrothendieck (R := Presieve.ofArrows _
-        (fun a ↦ profiniteToProEt.map (π a))) ?_)
-    · rw [Sieve.generate_le_iff]
-      rintro _ _ ⟨a⟩
-      exact Sieve.image_mem_functorPushforward _ _ (hR a)
-    let 𝒰 : (profiniteToScheme.obj S).Cover (Scheme.precoverage @WeaklyEtale) :=
-      { I₀ := α
-        X a := profiniteToScheme.obj (X a)
-        f a := profiniteToScheme.map (π a)
-        mem₀ := by
-          rw [presieve₀_mem_precoverage_iff]
-          refine ⟨fun x ↦ ?_, fun a ↦ ?_⟩
-          · obtain ⟨⟨s, p⟩, rfl⟩ := LocallyConstant.toPrimeSpectrum_surjective
-              (T := S) (R := ℤ) x
-            obtain ⟨a, y, rfl⟩ := hsurj s
-            exact ⟨a, LocallyConstant.toPrimeSpectrum (y, p), rfl⟩
-          · have : WeaklyEtale (profiniteToScheme.map (π a) ≫ toSpecZ _) := by
-              rw [comp_toSpecZ]
-              infer_instance
-            exact WeaklyEtale.of_comp _ (toSpecZ (profiniteToScheme.obj S)) }
-    have (a : α) : QuasiCompact (𝒰.f a) :=
-      inferInstanceAs (QuasiCompact (Spec.map (CommRingCat.ofHom _)))
-    have : QuasiCompactCover 𝒰.toPreZeroHypercover := .of_finite
+    CoverPreserving (coherentTopology Profinite.{u}) (ProEt.topology specZ) profiniteToProEt := by
+  classical
+  constructor
+  intro T R hR
+  obtain ⟨ι, hι, S, f, hf, hRf⟩ :=
+    (coherentTopology.mem_sieves_iff_hasEffectiveEpiFamily R).mp hR
+  have hsurj := ((Profinite.effectiveEpiFamily_tfae S f).out 0 2).mp hf
+  have hgeom : ∀ q : profiniteToScheme.obj T,
+      ∃ i, q ∈ Set.range (profiniteToScheme.map (f i)) := by
+    intro q
+    obtain ⟨⟨t, p⟩, rfl⟩ := LocallyConstant.toPrimeSpectrum_surjective q
+    obtain ⟨i, s, hs⟩ := hsurj t
+    refine ⟨i, LocallyConstant.toPrimeSpectrum (s, p), ?_⟩
+    subst t
+    rfl
+  have hwe (i : ι) : WeaklyEtale (profiniteToScheme.map (f i)) := by
+    have : WeaklyEtale (profiniteToScheme.map (f i) ≫
+        toSpecZ (profiniteToScheme.obj T)) := by
+      rw [comp_toSpecZ]
+      infer_instance
+    exact WeaklyEtale.of_comp _ (toSpecZ (profiniteToScheme.obj T))
+  let C := Scheme.Cover.mkOfCovers (P := @WeaklyEtale) ι
+    (fun i ↦ profiniteToScheme.obj (S i)) (fun i ↦ profiniteToScheme.map (f i))
+    hgeom hwe
+  have (i : C.I₀) : QuasiCompact (C.f i) := by
+    change QuasiCompact (Spec.map _)
+    infer_instance
+  have : Finite C.I₀ := hι
+  have hcov : Presieve.ofArrows (fun i ↦ profiniteToProEt.obj (S i))
+      (fun i ↦ profiniteToProEt.map (f i)) ∈ ProEt.precoverage specZ (profiniteToProEt.obj T) := by
     rw [ProEt.precoverage, Precoverage.mem_comap_iff, Presieve.map_ofArrows]
-    exact ⟨Scheme.presieve₀_mem_qcPrecoverage_iff.2 this, 𝒰.mem₀⟩
+    exact (Scheme.Cover.ofQuasiCompactCover C).mem₀
+  apply (ProEt.topology specZ).superset_covering _
+    (Precoverage.generate_mem_toGrothendieck hcov)
+  rw [Sieve.generate_le_iff]
+  intro W g hg
+  obtain ⟨i⟩ := hg
+  exact R.image_mem_functorPushforward profiniteToProEt (hRf i)
 
 instance isContinuous_profiniteToProEt :
     profiniteToProEt.IsContinuous (coherentTopology Profinite.{u}) (ProEt.topology specZ) :=
@@ -277,8 +371,8 @@ instance isContinuous_profiniteToProEt :
 categories are essentially small in `u + 1` and `Ab.{u + 1}` has colimits of that size
 (`Functor.hasPointwiseLeftKanExtension_of_hasColimitsOfSize`). -/
 instance hasLeftKanExtension_op_profiniteToProEt (F : Profinite.{u}ᵒᵖ ⥤ Ab.{u + 1}) :
-    profiniteToProEt.op.HasLeftKanExtension F :=
-  inferInstance
+    profiniteToProEt.op.HasLeftKanExtension F := by
+  infer_instance
 
 /-- The profinite test object `X[S] = Spec LC(S, ℤ) ×_{Spec ℤ} X = lim_i ∐_{S_i} X` over a
 scheme `X`, as a functor from profinite sets to the pro-étale site of `X`. -/
@@ -416,24 +510,27 @@ noncomputable def upperStarFromPointComp :
 docstring. -/
 instance isMonoidal_upperStarFromPointComp :
     NatTrans.IsMonoidal (upperStarFromPointComp f).hom := by
-  have : @Adjunction.IsMonoidal _ _ _ _ _ _ _ _
+  have h₁ : @Adjunction.IsMonoidal _ _ _ _ _ _ _ _
       (upperStarLowerStarAdjunction Ab.{u + 1} (f ≫ toSpecZ Y))
-      Functor.Monoidal.toOplaxMonoidal _ :=
-    isMonoidal_upperStarLowerStarAdjunction _ _
-  have : @Adjunction.IsMonoidal _ _ _ _ _ _ _ _
+      Functor.Monoidal.toOplaxMonoidal _ := by
+    exact isMonoidal_upperStarLowerStarAdjunction _ _
+  have h₂ : @Adjunction.IsMonoidal _ _ _ _ _ _ _ _
       ((upperStarLowerStarAdjunction Ab.{u + 1} (toSpecZ Y)).comp
         (upperStarLowerStarAdjunction Ab.{u + 1} f))
-      Functor.Monoidal.toOplaxMonoidal _ :=
-    Adjunction.isMonoidal_comp _ _
-  have : NatTrans.IsMonoidal (upperStarComp Ab.{u + 1} f (toSpecZ Y)).inv :=
+      Functor.Monoidal.toOplaxMonoidal _ := by
+    exact Adjunction.isMonoidal_comp _ _
+  have hr : NatTrans.IsMonoidal (lowerStarComp Ab.{u + 1} f (toSpecZ Y)).hom := by
+    unfold lowerStarComp
+    infer_instance
+  have hc : NatTrans.IsMonoidal (upperStarComp Ab.{u + 1} f (toSpecZ Y)).inv :=
     isMonoidal_conjugateEquiv_symm _ _ (lowerStarComp Ab.{u + 1} f (toSpecZ Y)).inv
-  have hcongr {g g' : X ⟶ specZ} (h : g = g') :
-      NatTrans.IsMonoidal (eqToHom (congrArg (upperStar Ab.{u + 1}) h)) := by
-    subst h
+  have he (g g' : X ⟶ specZ.{u}) (h : g = g') : NatTrans.IsMonoidal
+      (eqToIso (congrArg (upperStar Ab.{u + 1}) h)).hom := by
+    subst g'
     exact inferInstanceAs (NatTrans.IsMonoidal (𝟙 _))
-  have := hcongr (comp_toSpecZ f)
+  have := he (f ≫ toSpecZ Y) (toSpecZ X) (comp_toSpecZ f)
   unfold upperStarFromPointComp
-  dsimp only [Iso.trans_hom, Iso.symm_hom, Functor.isoWhiskerLeft_hom, eqToIso.hom]
+  simp only [Iso.trans_hom, Functor.isoWhiskerLeft_hom, Iso.symm_hom]
   infer_instance
 
 /-- The comparison `α_f : f^* Λ_Y ≅ Λ_X` of the coefficient rings pulled back from the point,

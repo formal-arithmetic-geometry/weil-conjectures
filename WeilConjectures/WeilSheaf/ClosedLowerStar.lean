@@ -120,42 +120,4 @@ theorem WeilComplex.exists_isIso_app_of_isZero_upperStar_of_isClosedImmersion {U
           ((WeilComplex.upperStar i).obj K))) := hiso
   exact isIso_of_fully_faithful (ObjectProperty.ι _) _
 
-/-- The closed half of the open–closed recollement for Weil complexes, phrased with the general
-derived pushforward `AlgebraicGeometry.WeilComplex.derivedLowerStar` (whose definition uses the
-finiteness theorem). The same statement with the closed-immersion pushforward
-`AlgebraicGeometry.WeilComplex.derivedLowerStarOfIsClosedImmersion`, which does not use the
-finiteness theorem, is
-`AlgebraicGeometry.WeilComplex.exists_isIso_app_of_isZero_upperStar_of_isClosedImmersion`.
-Let `i : Z ⟶ X` be a closed immersion of `k₀`-schemes of finite type and `j : U ⟶ X` the
-complementary open immersion. There is a natural transformation `K ⟶ Ri_* i^* K` (the closed
-unit) which is an isomorphism at every `K` with `j^* K = 0`: in the recollement triangle
-`j_! j^* K ⟶ K ⟶ Ri_* i^* K ⟶`, the first term vanishes.
-
-The closed unit is the unit of `i^* ⊣ Ri_*`
-(`AlgebraicGeometry.ProEtaleWeilSheaf.derivedUpperStarLowerStarAdjunction`); it is invertible at
-`K` with `j^* K = 0` by
-`DerivedCategory.isIso_mapDerivedCategoryRightDerivedAdjunction_unit_app_of_isZero`, using that
-`i_*` is exact, `j^* i_* = 0` and that `i^*`, `j^*` jointly detect zero objects. The open
-immersion `j` is quasi-compact since `X` is Noetherian. -/
-theorem WeilComplex.exists_isIso_app_of_isZero_upperStar {X Z U : Scheme.{u}}
-    [X.Over (Spec (CommRingCat.of k₀))] [Z.Over (Spec (CommRingCat.of k₀))]
-    [U.Over (Spec (CommRingCat.of k₀))] (i : Z ⟶ X) (j : U ⟶ X) [IsClosedImmersion i]
-    [IsOpenImmersion j] [i.IsOver (Spec (CommRingCat.of k₀))]
-    [j.IsOver (Spec (CommRingCat.of k₀))] (hij : Set.range j = (Set.range i)ᶜ)
-    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
-    [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))] :
-    ∃ η : 𝟭 (WeilComplex k₀ l X) ⟶
-        WeilComplex.upperStar i ⋙ WeilComplex.derivedLowerStar (k₀ := k₀) (l := l) i,
-      ∀ K : WeilComplex k₀ l X, IsZero ((WeilComplex.upperStar j).obj K) → IsIso (η.app K) := by
-  obtain ⟨η, hη⟩ :=
-    WeilComplex.exists_isIso_app_of_isZero_upperStar_of_isClosedImmersion (k₀ := k₀) (l := l) i j
-      hij
-  refine ⟨η ≫ Functor.whiskerLeft _
-    (WeilComplex.derivedLowerStarIsoDerivedLowerStarOfIsClosedImmersion (k₀ := k₀) (l := l)
-      i).inv, fun K hK ↦ ?_⟩
-  have := hη K hK
-  dsimp
-  infer_instance
-
-
 end AlgebraicGeometry

@@ -74,7 +74,9 @@ theorem sum_map_pow_localEigenvalues_tensorPower (x : C.finitePoints) (n : ℕ) 
 
 /-- Blueprint `lem-rp-even-tensor-positivity`, part (i): every tensor power `ℱ^{⊗ k}`, `k ≥ 1`, of
 an `ι`-real sheaf is `ι`-real, its local eigenvalues being the `k`-fold products of the
-conjugation-stable local eigenvalues of `ℱ`. -/
+conjugation-stable local eigenvalues of `ℱ`. This is the version for Weil group
+representations over a curve; for lisse Weil sheaves on an arbitrary `k₀`-scheme see
+`AlgebraicGeometry.WeilSheaf.IsReal.tensorPow`. -/
 theorem IsReal.tensorPower (hρ : W.IsReal l ρ ι) {k : ℕ} (hk : 1 ≤ k) :
     W.IsReal l (ρ.tensorPower k) ι := by
   refine isReal_of_map_conj_localEigenvalues ι fun x ↦ ?_
@@ -96,7 +98,10 @@ complex local eigenvalues of `ℱ^{⊗ k}` is `(ι Tr (F_x ^ n ∣ ℱ)) ^ k`
 (`AlgebraicGeometry.WeilGroup.sum_map_pow_localEigenvalues_tensorPower`), an even power of a
 real number since the eigenvalue multiset of `ℱ` is stable under complex conjugation, and
 nonnegative power sums give nonnegative coefficients
-(`AlgebraicGeometry.WeilGroup.hasNonnegCoeffs_eulerFactor_of_sum_pow_nonneg`). -/
+(`AlgebraicGeometry.WeilGroup.hasNonnegCoeffs_eulerFactor_of_sum_pow_nonneg`). This is the
+version for Weil group representations over a curve; for lisse Weil sheaves on an arbitrary
+`k₀`-scheme, with the constant term, see
+`AlgebraicGeometry.WeilSheaf.IsReal.inv_localPolynomial_stalk_tensorPow_nonneg`. -/
 theorem IsReal.hasNonnegCoeffs_eulerFactor_tensorPower (hρ : W.IsReal l ρ ι)
     (x : C.finitePoints) {k : ℕ} (hk : 1 ≤ k) (heven : Even k) :
     (W.eulerFactor l (ρ.tensorPower k) ι x).HasNonnegCoeffs := by

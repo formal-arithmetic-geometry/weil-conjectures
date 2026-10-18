@@ -20,6 +20,17 @@ public import WeilConjectures.SixFunctors.BaseChange.DerivedForget
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Forget
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.CohomologyMapDevissage
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+import WeilConjectures.AlgebraicGeometry.StrictLocalTotalCohomologyExchange
+import WeilConjectures.AlgebraicGeometry.CohomologyRestrictionSquareTransport
+import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts
+import WeilConjectures.SixFunctors.Etale.LowerShriek.EtaleMap
+import WeilConjectures.AlgebraicGeometry.AffineClosedInjectiveAcyclic
+import WeilConjectures.AlgebraicGeometry.FiniteAffineCoverRestrictionBound
+import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.DegreeZero
+import WeilConjectures.AlgebraicGeometry.ConstructibleRestrictionClass
+import WeilConjectures.AlgebraicGeometry.ConstructibleModuleFinitePushforwardEmbedding
+import WeilConjectures.AlgebraicGeometry.HenselianFiniteEtale
+import WeilConjectures.SixFunctors.BaseChange.Derived
 
 /-!
 # The projective line over a strictly henselian local ring
@@ -86,7 +97,8 @@ cohomology in degrees `q > n`.
 
 Here torsion is required, as in Gabber's affine comparison, which is the input of the case
 `n = 0`; the induction on `n` is the Mayer–Vietoris sequence of the closed fibre.
-(blueprint: `lemma-weil-pbc-injective-restriction-acyclicity`) -/
+(blueprint: lemma-weil-pbc-injective-restriction-acyclicity)
+-/
 theorem Etale.subsingleton_H_upperStar_of_injective_of_iSup_eq_top
     (Λ : Type (u + 1)) [CommRing Λ] {A : Type u} [CommRing A] (I : Ideal A) [HenselianRing A I]
     {Y Y₀ : Scheme.{u}} (f : Y ⟶ Spec (.of A)) [LocallyOfFiniteType f] [IsSeparated f]
@@ -97,14 +109,25 @@ theorem Etale.subsingleton_H_upperStar_of_injective_of_iSup_eq_top
     (q : ℕ) (hq : n < q) :
     Subsingleton (Sheaf.H
       ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
-        ((i)^*[ModuleCat.{u + 1} Λ].obj J)) q) :=
-  sorry
+      ((i)^*[ModuleCat.{u + 1} Λ].obj J)) q) := by
+  have : IsClosedImmersion (Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk I))) :=
+    IsClosedImmersion.spec_of_surjective _ (Ideal.Quotient.mk_surjective)
+  have : IsClosedImmersion i :=
+    MorphismProperty.of_isPullback (P := @IsClosedImmersion) h.flip inferInstance
+  apply Etale.subsingleton_H_of_affine_local_acyclic Λ f i J _ n U hU hcov q hq
+  intro W hW k hk
+  let : IsAffine W.toScheme := hW
+  let : Injective ((W.ι)^*[ModuleCat.{u + 1} Λ].obj J) :=
+    Etale.injective_upperStar_obj_of_etale Λ W.ι J
+  exact Etale.subsingleton_H_affine_closed_of_injective Λ (pullback.fst W.ι i)
+    ((W.ι)^*[ModuleCat.{u + 1} Λ].obj J) k hk
 
 section StrictlyHenselian
 
 variable (A : Type u) [CommRing A] [HenselianLocalRing A]
   [IsSepClosed (IsLocalRing.ResidueField A)]
 
+set_option linter.unusedSectionVars false in
 /-- **Representation of an `H¹`-class of a restricted injective.** Let `A` be strictly
 henselian, `X = ℙ¹_A`, `ι : X₀ = ℙ¹_κ ⟶ X` the closed fibre, `r` a prime and `I` an injective
 sheaf of `𝔽_r`-modules on `X`. Every class `c ∈ H¹(X₀, I₀)` is a finite sum
@@ -112,7 +135,8 @@ sheaf of `𝔽_r`-modules on `X`. Every class `c ∈ H¹(X₀, I₀)` is a finit
 and of finite presentation, `Mⱼ` is a finite `𝔽_r`-module with constant sheaf `Mⱼ` on `Vⱼ`,
 and `ψⱼ : (hⱼ)_* Mⱼ ⟶ I` is a morphism of sheaves. (Equivalently `c` is the image of a class
 of `H¹(X₀, (⊕ⱼ (hⱼ)_* Mⱼ)₀)` under a map `⊕ⱼ (hⱼ)_* Mⱼ ⟶ I`.)
-(blueprint: `lemma-weil-pbc-h1-constructible-representation`) -/
+(blueprint: lemma-weil-pbc-h1-constructible-representation)
+-/
 theorem Etale.exists_sum_eq_of_injective_projectiveLine (r : ℕ) [Fact r.Prime]
     (I : Sheaf (ProjectiveLine (Spec (.of A))).smallEtaleTopology
       (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))) [Injective I]
@@ -133,8 +157,58 @@ theorem Etale.exists_sum_eq_of_injective_projectiveLine (r : ℕ) [Fact r.Prime]
       ∑ j, Sheaf.H.map ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))
         AddCommGrpCat.{u + 1})).map ((ProjectiveSpace.map _
           (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))))^*[ModuleCat.{u + 1}
-            (ULift.{u + 1} (ZMod r))].map (ψ j))) 1 (x j) = c :=
-  sorry
+            (ULift.{u + 1} (ZMod r))].map (ψ j))) 1 (x j) = c := by
+  classical
+  have : CompactSpace (ProjectiveLine (Spec (.of A))) :=
+    QuasiCompact.compactSpace_of_compactSpace (ProjectiveLine (Spec (.of A)) ↘ Spec (.of A))
+  have : QuasiSeparatedSpace (ProjectiveLine (Spec (.of A))) :=
+    quasiSeparatedSpace_of_quasiSeparated (ProjectiveLine (Spec (.of A)) ↘ Spec (.of A))
+  have : CompactSpace (ProjectiveLine (Spec (.of (IsLocalRing.ResidueField A)))) :=
+    QuasiCompact.compactSpace_of_compactSpace
+      (ProjectiveLine (Spec (.of (IsLocalRing.ResidueField A))) ↘
+        Spec (.of (IsLocalRing.ResidueField A)))
+  have : QuasiSeparatedSpace (ProjectiveLine (Spec (.of (IsLocalRing.ResidueField A)))) :=
+    quasiSeparatedSpace_of_quasiSeparated
+      (ProjectiveLine (Spec (.of (IsLocalRing.ResidueField A))) ↘
+        Spec (.of (IsLocalRing.ResidueField A)))
+  let Λ := ULift.{u + 1} (ZMod r)
+  let i := ProjectiveSpace.map (ULift.{u} (Fin 2))
+    (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)))
+  have : (sheafCompose
+      (ProjectiveLine (Spec (.of (IsLocalRing.ResidueField A)))).smallEtaleTopology
+      (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).Additive :=
+    ⟨by intros; rfl⟩
+  let T := (i)^*[ModuleCat.{u + 1} Λ] ⋙
+    sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})
+  obtain ⟨G, hG, a, z, hz⟩ := Etale.exists_constructible_restriction_class i Λ I 1 c
+  obtain ⟨n, V, h, hh, hfp, M, hM, ι, hι⟩ :=
+    Etale.finite_pushforward_embedding_of_isConstructibleEtaleModuleSheaf Λ G hG
+  let E (j : Fin n) := (h j)_*[ModuleCat.{u + 1} Λ].obj
+    ((constantSheaf (V j).smallEtaleTopology _).obj (M j))
+  let := hι
+  let ψ := Injective.factorThru a ι
+  let z' := Sheaf.H.map (T.map ι) 1 z
+  refine ⟨n, V, h, hh, hfp, M, hM,
+    (fun j ↦ biproduct.ι E j ≫ ψ),
+    (fun j ↦ Sheaf.H.map (T.map (biproduct.π E j)) 1 z'), ?_⟩
+  change ∑ j, Sheaf.H.map (T.map (biproduct.ι E j ≫ ψ)) 1
+    (Sheaf.H.map (T.map (biproduct.π E j)) 1 z') = c
+  simp_rw [← Sheaf.H.map_comp_apply, ← T.map_comp, ← Category.assoc]
+  let H := T ⋙ Sheaf.functorH _ 1
+  have he : ∑ j, H.map (biproduct.π E j ≫ biproduct.ι E j ≫ ψ) = H.map ψ := by
+    rw [← H.map_sum]
+    simp only [← Category.assoc]
+    rw [← Preadditive.sum_comp, IsBilimit.total (biproduct.isBilimit E), Category.id_comp]
+  dsimp [H] at he
+  have he' := congrArg (fun f ↦ AddCommGrpCat.homAddEquiv f z') he
+  rw [map_sum, AddMonoidHom.finsetSum_apply] at he'
+  change ∑ j, Sheaf.H.map (T.map (biproduct.π E j ≫ biproduct.ι E j ≫ ψ)) 1 z' =
+    Sheaf.H.map (T.map ψ) 1 z' at he'
+  simp only [Category.assoc]
+  rw [he']
+  dsimp [z']
+  rw [← Sheaf.H.map_comp_apply, ← T.map_comp, Injective.comp_factorThru]
+  exact hz
 
 omit [IsSepClosed (IsLocalRing.ResidueField A)] in
 /-- **Acyclicity on the closed projective line in degrees at least two.** Let `A` be strictly
@@ -173,7 +247,8 @@ degree `1`, write a class as `∑ⱼ ψⱼ(xⱼ)` with `xⱼ ∈ H¹(X₀, ((h�
 (`AlgebraicGeometry.Etale.surjective_cohomologyMap_one_lowerStar_constantSheaf`),
 and its image in `H¹(X, I)` vanishes since the underlying abelian sheaf of `I` is acyclic
 (`CategoryTheory.Sheaf.subsingleton_H_forget₂_of_injective`).
-(blueprint: `prop-weil-pbc-p1-acyclicity`) -/
+(blueprint: prop-weil-pbc-p1-acyclicity)
+-/
 theorem Etale.subsingleton_H_projectiveLine_closedFibre_of_injective (r : ℕ) [Fact r.Prime]
     (I : Sheaf (ProjectiveLine (Spec (.of A))).smallEtaleTopology
       (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r)))) [Injective I] (q : ℕ) (hq : 0 < q) :
@@ -317,7 +392,8 @@ theorem Etale.bijective_cohomologyMap_projectiveLine_residueField_zmod (r : ℕ)
 residue field `κ` and `ι : ℙ¹_κ ⟶ ℙ¹_A` the closed fibre. For every torsion sheaf `F` of
 `Λ`-modules on `ℙ¹_A` and every `q ≥ 0`, restriction `Hᵠ(ℙ¹_A, F) ⟶ Hᵠ(ℙ¹_κ, F₀)` is
 bijective.
-(blueprint: `prop-weil-pbc-p1-strict-henselian-comparison`) -/
+(blueprint: prop-weil-pbc-p1-strict-henselian-comparison)
+-/
 theorem Etale.bijective_cohomologyMap_projectiveLine_residueField
     (Λ : Type (u + 1)) [CommRing Λ]
     (F : Sheaf (ProjectiveLine (Spec (.of A))).smallEtaleTopology (ModuleCat.{u + 1} Λ))
@@ -383,15 +459,11 @@ geometric point `Spec κ_B ⟶ Spec B` of the degree-`q` exchange morphism
 map `Hᵠ(ℙ¹_{κ_A}, F₀) ⟶ Hᵠ(ℙ¹_{κ_B}, F₀|)` along `ℙ¹_{κ_B} ⟶ ℙ¹_{κ_A}`. The isomorphisms are
 the strictly henselian comparisons on the two closed fibres.
 
-**Form of the statement.** The blueprint asks for the canonical restriction maps. This
-statement only asserts that *some* isomorphisms `e₁`, `e₂` make the square commute, which is
-weaker, for the same reason as
-`AlgebraicGeometry.Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_projectiveLine`:
-the project has no edge map yet comparing the stalks of the higher direct images `Rᵠp_*`
-(homology in `DerivedCategory.Plus`) with the `Ext`-groups `CategoryTheory.Sheaf.H`. The
-`sorry` must be filled through the canonical maps. Once the edge map exists, `e₁` and `e₂`
-should be replaced by it, composed with the restrictions to the closed fibres.
-(blueprint: `prop-weil-pbc-strict-local-exchange`) -/
+**Form of the statement.** The statement asserts the existence of additive
+isomorphisms of the two stalks with closed-fibre cohomology that make the
+exchange square commute.
+(blueprint: prop-weil-pbc-strict-local-exchange)
+-/
 theorem Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_strictLocal
     (F : Sheaf (ProjectiveLine (Spec (.of A))).smallEtaleTopology (ModuleCat.{u + 1} Λ))
     [IsTorsionModuleSheaf F] (q : ℕ) :
@@ -418,8 +490,35 @@ theorem Etale.exists_addEquiv_sheafFiber_baseChangeHomologyMap_strictLocal
             (IsLocalRing.ResidueField.map φ))))
           ((sheafCompose _ (forget₂ (ModuleCat.{u + 1} Λ) AddCommGrpCat.{u + 1})).obj
             ((ProjectiveSpace.map _ (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A))))^*[
-              ModuleCat.{u + 1} Λ].obj F)) q (e₁ x) :=
-  sorry
+              ModuleCat.{u + 1} Λ].obj F)) q (e₁ x) := by
+  let g := ProjectiveSpace.map (ULift.{u} (Fin 2))
+    (Spec.map (CommRingCat.ofHom φ))
+  let i := ProjectiveSpace.map (ULift.{u} (Fin 2))
+    (Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)))
+  let j := ProjectiveSpace.map (ULift.{u} (Fin 2))
+    (Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)))
+  let k := ProjectiveSpace.map (ULift.{u} (Fin 2))
+    (Spec.map (CommRingCat.ofHom (IsLocalRing.ResidueField.map φ)))
+  have h : j ≫ g = k ≫ i := by
+    dsimp [j, g, k, i]
+    rw [← ProjectiveSpace.map_comp, ← ProjectiveSpace.map_comp]
+    congr 1
+    rw [← Spec.map_comp, ← Spec.map_comp]
+    congr 1
+  obtain ⟨a₁, a₂, ha⟩ := Etale.exists_addEquiv_strictLocal_totalCohomology_exchange
+    Λ φ (ProjectiveLine (Spec (.of A)) ↘ Spec (.of A))
+    (ProjectiveLine (Spec (.of B)) ↘ Spec (.of B)) g
+    (ProjectiveSpace.isPullback_map _ (Spec.map (CommRingCat.ofHom φ))) F q
+  obtain ⟨b₁, b₂, hb⟩ := Etale.exists_addEquiv_cohomology_restrictionSquare
+    Λ g i j k h F q
+    (Etale.bijective_cohomologyMap_projectiveLine_residueField A Λ F q)
+    (Etale.bijective_cohomologyMap_projectiveLine_residueField B Λ
+      ((g)^*[ModuleCat.{u + 1} Λ].obj F) q)
+  refine ⟨a₁.trans b₁, a₂.trans b₂, ?_⟩
+  intro x
+  change b₂ (a₂ _) = Etale.cohomologyMap k _ q (b₁ (a₁ x))
+  rw [ha, hb]
+
 
 /-- If the residue field map `κ_A ⟶ κ_B` of a local morphism of strictly henselian local
 rings is an isomorphism, the stalk at the closed geometric point of `Spec B` of the

@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.AffineSpace.ZeroSection
 public import WeilConjectures.ConstructibleSheaf.Restriction
 public import WeilConjectures.SixFunctors.Etale.Derived.InvertibleRestriction
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.AffineLineGluing
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerClass
 public import WeilConjectures.SixFunctors.Etale.Derived.Composition
 public import WeilConjectures.SixFunctors.Etale.Derived.TensorStructure
@@ -73,7 +74,8 @@ Two clauses of the blueprint are stated only in part, and are TODOs.
 - `AlgebraicGeometry.Etale.injective_upperStar_map_of_isFiniteLocallyConstantSheaf`,
   `AlgebraicGeometry.Etale.injective_upperStar_oneSection_map_of_isFiniteLocallyConstantSheaf`
 - `AlgebraicGeometry.Etale.eq_of_leftDerivedUpperStar_oneSection_eq`
-- `AlgebraicGeometry.Etale.existsUnique_iso_leftDerivedUpperStar_of_etale`
+- `AlgebraicGeometry.Etale.existsUnique_iso_leftDerivedUpperStar_of_etale`,
+  `AlgebraicGeometry.Etale.exists_iso_leftDerivedUpperStar_oneSection_iff_of_etale`
 -/
 
 @[expose] public section
@@ -198,7 +200,8 @@ theorem nonempty_iso_rightDerivedUpperShriek_affineLineZero [HasTateTwist.IsNorm
     leftDerivedUpperStarConstantComplexIso Λ e.hom⟩
 
 set_option linter.unusedSectionVars false in
-/-- Blueprint `sk-prop-a1-inv`: Weak `𝔸¹`-invariance
+/-- Blueprint `lem-pur-lisse-uniqueness`: Uniqueness for lisse sheaf maps (first assertion,
+for the base `B = Y`); also clause (i) of `sk-prop-a1-inv` (Weak `𝔸¹`-invariance).
 
 *Uniqueness for lisse sheaf maps on `𝔸¹_Y`.* Two morphisms between finite locally constant
 sheaves on `𝔸¹_Y` that agree after restriction to the open complement `G = 𝔾_{m,Y}` of the
@@ -216,7 +219,8 @@ theorem injective_upperStar_map_of_isFiniteLocallyConstantSheaf
 
 set_option linter.unusedSectionVars false in
 set_option linter.unusedVariables false in
-/-- Blueprint `sk-prop-a1-inv`: Weak `𝔸¹`-invariance
+/-- Blueprint `lem-pur-lisse-uniqueness`: Uniqueness for lisse sheaf maps (second assertion,
+for the base `B = Y`); also clause (i) of `sk-prop-a1-inv` (Weak `𝔸¹`-invariance).
 
 *Uniqueness for lisse sheaf maps on `𝔾_{m,Y}`.* Two morphisms between finite locally constant
 sheaves on `𝔾_{m,Y}` that agree after restriction along the unit section `i₁ : Y ⟶ 𝔾_{m,Y}`
@@ -292,6 +296,7 @@ theorem eq_of_leftDerivedUpperStar_oneSection_eq
     Category.id_comp])
 
 
+set_option linter.unusedSectionVars false in
 include aY in
 /-- Blueprint `prop-pur-a1-invariance`: Invariance along the affine line
 
@@ -341,8 +346,173 @@ theorem existsUnique_iso_leftDerivedUpperStar_of_etale
             (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)).inv.app C ≫
           (leftDerivedUpperStarComp _ (𝔸(ULift.{u} (Fin 1); Y') ↘ Y') v _
             (AffineSpace.map_over (n := ULift.{u} (Fin 1)) v)).hom.app C =
-        κ'.hom :=
-  sorry
+        κ'.hom := by
+  obtain ⟨L, hL, hLs, m, n, ⟨e⟩⟩ := hF
+  have : HasInvertibleExponent Λ Y' := .of_hom v
+  have : HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin 1); Y') :=
+    .of_hom (𝔸(ULift.{u} (Fin 1); Y') ↘ Y')
+  have : _root_.AlgebraicGeometry.Etale (AffineSpace.map (ULift.{u} (Fin 1)) v) :=
+    MorphismProperty.of_isPullback (P := @AlgebraicGeometry.Etale)
+      (AffineSpace.isPullback_map v).flip inferInstance
+  have : Surjective (AffineSpace.map (ULift.{u} (Fin 1)) v) :=
+    MorphismProperty.of_isPullback (P := @Surjective) (AffineSpace.isPullback_map v).flip
+      inferInstance
+  have := hL
+  -- the local shape: `Lv₁^* F` is invertible and a sheaf placed in degree `-n`
+  obtain ⟨S, ⟨eS⟩⟩ := exists_iso_tateTwist_singleFunctor_obj L hLs m
+  have hFw : DerivedCategory.isInvertible Λ _
+      ((L((AffineSpace.map (ULift.{u} (Fin 1)) v)^*[ModuleCat.{u + 1} Λ])).obj F) :=
+    ((isInvertible_tateTwist_singleFunctor_obj L hLs m).shift n).of_iso e.symm
+  -- the local comparison as a morphism `Lv₁^* F ≅ Lv₁^* La^* C`
+  let ψ : (L((AffineSpace.map (ULift.{u} (Fin 1)) v)^*[ModuleCat.{u + 1} Λ])).obj F ≅
+      (L((AffineSpace.map (ULift.{u} (Fin 1)) v)^*[ModuleCat.{u + 1} Λ])).obj
+        ((L((𝔸(ULift.{u} (Fin 1); Y) ↘ Y)^*[ModuleCat.{u + 1} Λ])).obj C) :=
+    κ' ≪≫ ((leftDerivedUpperStarComp _ (𝔸(ULift.{u} (Fin 1); Y') ↘ Y') v _
+        (AffineSpace.map_over (n := ULift.{u} (Fin 1)) v)).app C).symm ≪≫
+      (leftDerivedUpperStarComp _ (AffineSpace.map (ULift.{u} (Fin 1)) v)
+        (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)).app C
+  -- invertibility and concentration in one degree descend along `v₁`
+  have hFinv := isInvertible_of_isInvertible_leftDerivedUpperStar_of_etale _ hFw
+  have hGinv := isInvertible_of_isInvertible_leftDerivedUpperStar_of_etale _ (hFw.of_iso ψ)
+  obtain ⟨SF, ⟨eK⟩⟩ := exists_iso_shift_singleFunctor_obj_of_leftDerivedUpperStar_iso
+    (AffineSpace.map (ULift.{u} (Fin 1)) v) n (e ≪≫ (shiftFunctor _ n).mapIso eS)
+  obtain ⟨SG, ⟨eM⟩⟩ := exists_iso_shift_singleFunctor_obj_of_leftDerivedUpperStar_iso
+    (AffineSpace.map (ULift.{u} (Fin 1)) v) n (ψ.symm ≪≫ e ≪≫ (shiftFunctor _ n).mapIso eS)
+  -- the overlap `𝔸¹_{Y' ×_Y Y'}`, on which the two pullbacks of `κ'` agree
+  have hY := IsPullback.of_hasPullback v v
+  have hZ := isPullback_affineSpace_map hY
+  have := isClosedImmersion_oneSection (pullback v v)
+  obtain ⟨κ, hκ⟩ := exists_iso_leftDerivedUpperStar_map_hom_eq_of_isPullback hFinv hGinv (-n)
+    eK eM (AffineSpace.map (ULift.{u} (Fin 1)) v) hZ ψ
+    (conj_leftDerivedUpperStar_eq_of_section (exists_isPreconnected_inter_range_oneSection _)
+      (AffineSpace.map_over (n := ULift.{u} (Fin 1)) v)
+      (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) Y)
+      (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) Y')
+      (AffineSpace.oneSection_comp_map v) (AffineSpace.oneSection_comp_map _)
+      (AffineSpace.oneSection_comp_map _) hY.w hZ.w hFinv θ κ' hκ')
+  refine ⟨κ, ?_, fun κ₂ hκ₂ ↦ ?_⟩
+  · beta_reduce
+    rw [hκ]
+    simp [ψ]
+  · -- uniqueness: comparisons out of the invertible `F` are detected after `Lv₁^*`
+    beta_reduce at hκ₂
+    have h₂ : (L((AffineSpace.map (ULift.{u} (Fin 1)) v)^*[ModuleCat.{u + 1} Λ])).map κ₂.hom =
+        (L((AffineSpace.map (ULift.{u} (Fin 1)) v)^*[ModuleCat.{u + 1} Λ])).map κ.hom := by
+      rw [hκ]
+      simp only [ψ, Iso.trans_hom, Iso.symm_hom, Iso.app_hom, Iso.app_inv]
+      rw [← hκ₂]
+      simp
+    have h := eq_id_of_leftDerivedUpperStar_map_eq_id_of_isInvertible_of_surjective
+      (AffineSpace.map (ULift.{u} (Fin 1)) v) hFinv (κ₂.hom ≫ κ.inv) (by
+        rw [Functor.map_comp, h₂, ← Functor.map_comp, Iso.hom_inv_id,
+          CategoryTheory.Functor.map_id])
+    ext
+    simpa using h =≫ κ.hom
+
+set_option maxHeartbeats 800000 in
+-- unifying the objects of the composition and section isomorphisms is expensive
+set_option linter.unusedSectionVars false in
+include aY in
+/-- Blueprint `prop-pur-a1-invariance`: Invariance along the affine line
+
+*Uniqueness and normalization*, clauses (1) and (2). In the situation of
+`AlgebraicGeometry.Etale.existsUnique_iso_leftDerivedUpperStar_of_etale`, the glued comparison
+`κ : F ≅ La^* C`, whose restriction to `𝔸¹_{Y'}` is `κ'`, restricts along the unit section
+`i₁` to `θ`, under `Li₁^* La^* ≅ 𝟭`; and it is the unique isomorphism `F ≅ La^* C` with this
+property, so that it depends neither on the cover nor on the local comparison `κ'`. Applying
+`Li₀^*` to `κ` then gives the canonical identification `Li₀^* F ≅ C` of clause (3). -/
+theorem exists_iso_leftDerivedUpperStar_oneSection_iff_of_etale
+    (F : _root_.DerivedCategory
+      (Sheaf 𝔸(ULift.{u} (Fin 1); Y).smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (C : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+    (θ : (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) Y)^*[ModuleCat.{u + 1} Λ])).obj F ≅ C)
+    {Y' : Scheme.{u}} (v : Y' ⟶ Y) [Etale v] [Surjective v] [IsSeparated (v ≫ aY)]
+    (hF : ∃ L : Sheaf 𝔸(ULift.{u} (Fin 1); Y').smallEtaleTopology (ModuleCat.{u + 1} Λ),
+      IsFiniteLocallyConstantSheaf L ∧
+      (∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (x : Spec (.of Ω) ⟶ 𝔸(ULift.{u} (Fin 1); Y')),
+        Nonempty ((pointSmallEtale x).sheafFiber.obj L ≅ ModuleCat.of Λ Λ)) ∧
+      ∃ m n : ℤ, Nonempty
+        ((L((AffineSpace.map (ULift.{u} (Fin 1)) v)^*[ModuleCat.{u + 1} Λ])).obj F ≅
+          ((tateTwist Λ _ m).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj L))⟦n⟧))
+    (κ' : (L((AffineSpace.map (ULift.{u} (Fin 1)) v)^*[ModuleCat.{u + 1} Λ])).obj F ≅
+      (L((𝔸(ULift.{u} (Fin 1); Y') ↘ Y')^*[ModuleCat.{u + 1} Λ])).obj
+        ((L((v)^*[ModuleCat.{u + 1} Λ])).obj C))
+    (hκ' : (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) Y')^*[ModuleCat.{u + 1} Λ])).map
+          κ'.hom ≫ (leftDerivedUpperStarCompSectionIso _ _ _
+            (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) Y')).hom.app _ =
+        ((leftDerivedUpperStarComp _ (AffineSpace.oneSection (ULift.{u} (Fin 1)) Y')
+            (AffineSpace.map (ULift.{u} (Fin 1)) v)).inv.app F ≫
+          (leftDerivedUpperStarComp _ v (AffineSpace.oneSection (ULift.{u} (Fin 1)) Y) _
+            (AffineSpace.oneSection_comp_map v)).hom.app F) ≫
+        (L((v)^*[ModuleCat.{u + 1} Λ])).map θ.hom) :
+    ∃ κ : F ≅ (L((𝔸(ULift.{u} (Fin 1); Y) ↘ Y)^*[ModuleCat.{u + 1} Λ])).obj C,
+      (L((AffineSpace.map (ULift.{u} (Fin 1)) v)^*[ModuleCat.{u + 1} Λ])).map κ.hom ≫
+          (leftDerivedUpperStarComp _ (AffineSpace.map (ULift.{u} (Fin 1)) v)
+            (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)).inv.app C ≫
+          (leftDerivedUpperStarComp _ (𝔸(ULift.{u} (Fin 1); Y') ↘ Y') v _
+            (AffineSpace.map_over (n := ULift.{u} (Fin 1)) v)).hom.app C = κ'.hom ∧
+      ∀ κ₂ : F ≅ (L((𝔸(ULift.{u} (Fin 1); Y) ↘ Y)^*[ModuleCat.{u + 1} Λ])).obj C,
+        (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) Y)^*[ModuleCat.{u + 1} Λ])).map
+            κ₂.hom ≫ (leftDerivedUpperStarCompSectionIso _ _ _
+              (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) Y)).hom.app C = θ.hom ↔
+          κ₂ = κ := by
+  obtain ⟨κ, hκ, -⟩ := existsUnique_iso_leftDerivedUpperStar_of_etale Λ aY F C θ v hF κ' hκ'
+  beta_reduce at hκ
+  obtain ⟨L, hL, hLs, m, n, ⟨e⟩⟩ := hF
+  have : HasInvertibleExponent Λ Y' := .of_hom v
+  have : HasInvertibleExponent Λ 𝔸(ULift.{u} (Fin 1); Y') :=
+    .of_hom (𝔸(ULift.{u} (Fin 1); Y') ↘ Y')
+  have : _root_.AlgebraicGeometry.Etale (AffineSpace.map (ULift.{u} (Fin 1)) v) :=
+    MorphismProperty.of_isPullback (P := @AlgebraicGeometry.Etale)
+      (AffineSpace.isPullback_map v).flip inferInstance
+  have : Surjective (AffineSpace.map (ULift.{u} (Fin 1)) v) :=
+    MorphismProperty.of_isPullback (P := @Surjective) (AffineSpace.isPullback_map v).flip
+      inferInstance
+  have := hL
+  have hFinv := isInvertible_of_leftDerivedUpperStar_iso_tateTwist
+    (AffineSpace.map (ULift.{u} (Fin 1)) v) L hLs m n e
+  -- the restriction of `κ` to `𝔸¹_{Y'}` is `κ'`, whose restriction at `t = 1` is `Lv^* θ`
+  have hψ : (L((AffineSpace.map (ULift.{u} (Fin 1)) v)^*[ModuleCat.{u + 1} Λ])).map κ.hom =
+      κ'.hom ≫ (leftDerivedUpperStarComp _ (𝔸(ULift.{u} (Fin 1); Y') ↘ Y') v _
+          (AffineSpace.map_over (n := ULift.{u} (Fin 1)) v)).inv.app C ≫
+        (leftDerivedUpperStarComp _ (AffineSpace.map (ULift.{u} (Fin 1)) v)
+          (𝔸(ULift.{u} (Fin 1); Y) ↘ Y)).hom.app C := by
+    rw [← hκ]
+    simp
+  have hD := conj_leftDerivedUpperStar_section_eq
+    (AffineSpace.map_over (n := ULift.{u} (Fin 1)) v)
+    (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) Y)
+    (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) Y')
+    (AffineSpace.oneSection_comp_map v) θ κ' hκ'
+  rw [← hψ] at hD
+  have n₁ := (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ)
+    (AffineSpace.oneSection (ULift.{u} (Fin 1)) Y')
+    (AffineSpace.map (ULift.{u} (Fin 1)) v)).hom.naturality κ.hom
+  have n₂ := (leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) v
+    (AffineSpace.oneSection (ULift.{u} (Fin 1)) Y) _
+    (AffineSpace.oneSection_comp_map v)).hom.naturality κ.hom
+  simp only [Functor.comp_map] at n₁ n₂
+  rw [← reassoc_of% n₁, Iso.hom_inv_id_app, Category.comp_id] at hD
+  have h₁ : (L((v)^*[ModuleCat.{u + 1} Λ])).map
+      ((L((AffineSpace.oneSection (ULift.{u} (Fin 1)) Y)^*[ModuleCat.{u + 1} Λ])).map κ.hom) =
+      (L((v)^*[ModuleCat.{u + 1} Λ])).map (θ.hom ≫ (leftDerivedUpperStarCompSectionIso _ _ _
+        (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) Y)).inv.app C) := by
+    rw [← cancel_epi ((leftDerivedUpperStarComp (ModuleCat.{u + 1} Λ) v
+      (AffineSpace.oneSection (ULift.{u} (Fin 1)) Y) _
+      (AffineSpace.oneSection_comp_map v)).hom.app F), ← n₂, hD]
+    simp
+  -- hence `κ` is normalized at `t = 1`, comparisons out of `Li₁^* F` being detected after `Lv^*`
+  have hnorm : (L((AffineSpace.oneSection (ULift.{u} (Fin 1)) Y)^*[ModuleCat.{u + 1} Λ])).map
+      κ.hom ≫ (leftDerivedUpperStarCompSectionIso _ _ _
+        (AffineSpace.oneSection_comp_over (ULift.{u} (Fin 1)) Y)).hom.app C = θ.hom := by
+    refine eq_of_leftDerivedUpperStar_map_eq_of_isInvertible_of_surjective v
+      (hFinv.leftDerivedUpperStar (AffineSpace.oneSection (ULift.{u} (Fin 1)) Y)) _ _ ?_
+    rw [Functor.map_comp, h₁, ← Functor.map_comp, Category.assoc, Iso.inv_hom_id_app]
+    erw [Category.comp_id]
+  refine ⟨κ, hκ, fun κ₂ ↦ ⟨fun h₂ ↦ eq_of_leftDerivedUpperStar_oneSection_eq Λ F C hFinv κ₂ κ
+    ((cancel_mono _).1 (h₂.trans hnorm.symm)), ?_⟩⟩
+  rintro rfl
+  exact hnorm
 end
 
 end Etale

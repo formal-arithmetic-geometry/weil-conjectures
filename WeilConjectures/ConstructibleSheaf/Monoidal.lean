@@ -52,7 +52,7 @@ constructible without finiteness hypotheses on `X`: for an open immersion `j` it
 
 ## TODO
 
-Prove `IsFiniteLocallyConstantSheaf.tensorObj` and `IsFiniteLocallyConstantSheaf.ihom_unit`.
+Prove `IsFiniteLocallyConstantSheaf.ihom_unit`.
 -/
 
 @[expose] public section
