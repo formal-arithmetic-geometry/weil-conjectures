@@ -5,14 +5,10 @@ Authors: SHEAF group NZ
 -/
 module
 
-public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.Algebra.Homology.RingHomExtensionDefs
-public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-public import Mathlib.Algebra.Homology.BifunctorShift
 public import Mathlib.RingTheory.Localization.Away.Basic
-public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
 
 import Sheaf.Paper.RingComplexGodementFunctorial
 import Sheaf.Paper.RingComplexGodementCech
