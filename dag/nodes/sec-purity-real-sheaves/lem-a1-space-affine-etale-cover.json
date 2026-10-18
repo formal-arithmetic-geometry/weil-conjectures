@@ -15,9 +15,92 @@
   "def-weil-affine-spectrum",
   "def-weil-field"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a representable surjective etale atlas $p:h_V\\to E$ from [def-trf-algebraic-space]. For each point $v\\in V$, choose an affine open $S_v\\subseteq S$ containing its image and an affine open $U_v\\subseteq V$ containing $v$ and contained in the inverse image of $S_v$, using [lem-weil-pbc-affine-opens-basis] twice. The maps $U_v\\to S$ factor through $S_v$ by [lem-weil-pbc-morphism-factors-through-open-subscheme]. Thus these $U_v$ form a set-indexed open cover of $V$. Form $W=\\coprod_v U_v$ by [lem-weil-pbc-scheme-coproduct-family], with its disjoint open components. The morphisms $U_v\\to V$ give a morphism $r:W\\to V$ by the coproduct property, and put $w=p r:h_W\\to E$. Each affine component of $W$ retains its factorization through $S_v$.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-morphism-factors-through-open-subscheme",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03FX (lemma-cover-by-union-affines), proof lines 710-715: choose affine opens of an atlas over affine opens of S and form their disjoint union."
+   }
+  },
+  {
+   "text": "For any scheme test $T\\to E$, the pullback $P=T\\times_EV$ is a scheme and $P\\to T$ is surjective etale by [def-trf-algebraic-space]. Set $P_v=P\\times_VU_v$. These are open subschemes of $P$ by [lem-weil-pbc-open-immersion-base-change] and they cover $P$, since the $U_v$ cover $V$. Each composite $P_v\\to P\\to T$ is etale by clauses (1) and (2) of [lem-weil-pbc-etale-composition-cancellation]. By [lem-weil-pbc-scheme-coproduct-family], $Q=\\coprod_vP_v$ is a scheme. It represents $T\\times_EW$: a map to $W$ decomposes its source into inverse images of the disjoint open $U_v$, and maps of this decomposition into the corresponding $P_v$ glue uniquely. The projection $Q\\to T$ is etale because its restrictions to the open components are etale, as can be checked directly on affine neighborhoods in [def-weil-etale-morphism]. It is surjective: every point of $T$ has a point above it in $P$, which belongs to some $P_v$ and therefore lifts to $Q$. This proves representable surjective etaleness of $w$. For a point of $|E|$ represented by $\\operatorname{Spec}K\\to E$, apply this surjectivity to that scheme test and choose a point of its nonempty pullback. Its residue-field map to $W$ represents the given point class, so $|w|$ is surjective. If $V$ is empty the index set and coproducts are empty, and the same assertions hold.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-etale-composition-cancellation",
+    "lem-weil-pbc-scheme-coproduct-family",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03FX (lemma-cover-by-union-affines), proof lines 715-722: expanded scheme-test proof of representability, etaleness and surjectivity of the composite."
+   }
+  },
+  {
+   "text": "Give $|E|$ the quotient topology for the surjection $|w|:|W|\\to|E|$. Let $p:h_V\\to E$ be any other representable surjective etale map from a scheme. By [lem-a1-space-fibre-product-point], the sheaf fibre product $Q=W\\times_EV$ is represented by a scheme. Its projections $a:Q\\to W$ and $b:Q\\to V$ are surjective etale by the scheme-test clauses of [def-trf-algebraic-space], applied respectively to $p$ and $w$. They are continuous scheme morphisms and open by [lem-weil-pbc-etale-morphism-open-map]. If $A\\subseteq|E|$ has open inverse image under $|p|$, then $D=|b|^{-1}(|p|^{-1}(A))$ is open in $|Q|$, so $|a|(D)$ is open in $|W|$. We have $|a|(D)=|w|^{-1}(A)$. One inclusion follows from $w a=p b$. For the reverse inclusion, take $x\\in|W|$ with $|w|(x)\\in A$. Surjectivity of $p$ on the scheme test $\\operatorname{Spec}\\kappa(x)\\to E$ gives a point $y\\in|V|$ with $|p|(y)=|w|(x)$; [lem-a1-space-fibre-product-point] then supplies a point of $Q$ projecting to both $x$ and $y$. This point lies in $D$. Thus $A$ is open in the quotient topology defined by $w$. Interchanging $w$ and $p$ proves the converse. This proves independence for every representable surjective etale scheme atlas.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-a1-space-fibre-product-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03BX, proof of lemma-topology-points: quotient-topology definition and independence via $U\\times_XU'$."
+   }
+  },
+  {
+   "text": "Let $t:h_T\\to E$ be any morphism from a scheme and let $A\\subseteq|E|$ be open. The sheaf fibre product $Q=T\\times_EW$ is represented by a scheme by [lem-a1-space-fibre-product-point]. The projection $q:Q\\to T$ is a surjective etale morphism of schemes by the representable-etale and surjective clauses of [def-trf-algebraic-space]. The inverse image in $Q$ of $|t|^{-1}(A)$ is the pullback of the open subset $|w|^{-1}(A)\\subseteq|W|$, hence is open. Since $q$ is etale, its image is open by [lem-weil-pbc-etale-morphism-open-map]. The image is exactly $|t|^{-1}(A)$: a point of $T$ lies in it precisely when its image in $|E|$ lies in $A$, and the equivalence after a common field extension is represented by a point of the fibre product, as in [lem-a1-space-fibre-product-point]. Thus $|t|$ is continuous.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-a1-space-fibre-product-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03BX, proof of lemma-topology-points, continuity clause (2), using the fibre product $U\\times_XU'$."
+   }
+  },
+  {
+   "text": "Assume now that $t:h_T\\to E$ is representable etale and let $B\\subseteq|T|$ be open. The sheaf fibre product $Q=T\\times_EW$ is represented by a scheme by [lem-a1-space-fibre-product-point]. In $Q$, the inverse image of $B$ is open, and the projection $Q\\to W$ is etale, hence open by [lem-weil-pbc-etale-morphism-open-map]. Its image is $|w|^{-1}(|t|(B))$: a point in the image gives a common-field representative coming from $B$, while a point of the right-hand side gives such a representative by the fibre-product point criterion [lem-a1-space-fibre-product-point]. Therefore $|w|^{-1}(|t|(B))$ is open, so the quotient definition makes $|t|(B)$ open in $|E|$. Thus $|t|$ is open; taking $B=|T|$ shows that its image is open.",
+   "uses": [
+    "def-trf-algebraic-space",
+    "lem-weil-pbc-etale-morphism-open-map",
+    "lem-a1-space-fibre-product-point"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/spaces-properties.tex",
+    "place": "Tag 03BX, proof of lemma-topology-points, openness clause (3), with $U''=U\\times_XU'$."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-trf-algebraic-space",
+  "def-weil-etale-morphism",
+  "lem-a1-space-fibre-product-point",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "lem-weil-pbc-etale-morphism-open-map",
+  "lem-weil-pbc-morphism-factors-through-open-subscheme",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-scheme-coproduct-family"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/spaces-properties.tex",
+  "place": "Tags 03FX and 03BX, with the fibre-product point formulation of Tag 03H4."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -49,7 +132,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-qc-map-affine-etale-neighbourhood",
@@ -70,5 +153,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-space-affine-etale-cover",
+  "worker": "stage1",
+  "summary": "Revalidated the returned split against the current DAG. Replaced stale fibre-product criterion quotations, used its current scheme-representability and point-lifting clauses, and corrected the projection in atlas independence. Removed both the now-circular direct etale-open-image citation and the affine-atlas-open-cover citation, whose current proof reaches etale-open-image. Steps 1-2 instead carry out the original Tag 03FX construction from an existing atlas by affine refinement and a disjoint union. Steps 3-5 prove atlas independence, continuity and openness from the current fibre-product point criterion and scheme-etale openness. No new nodes or statement changes.",
+  "blueprint": "Realizes the affine-etale geometric input beneath lem-a1-affine-hc0: the Tag 03FX disjoint-union atlas and Tag 03BX point-topology construction used by the algebraic-space branch."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NY-ca7957656",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-ca7957656 (reviewer sub-agent of L); spot-checked: I read all of it: the contract documents, the report, the item, the statement of every cited node, and Stacks spaces-properties.tex at 03FX (lemma-cover-by-union-affines), 03BX (lemma-topology-points), 03H4 (lemma-points-cartesian) and 03BU (definition-points). I checked each tag against its label in tags/tags. The item's statement, stmt_deps and source are identical to the base node. The statement matches 03FX and 03BX (1)-(3) for sources that are schemes. Requiring t to be representable adds no real hypothesis, because every map from a scheme to an algebraic space is representable. The delivery adds no new nodes. Step 1 refines an atlas by affine opens over affine opens of S and takes their coproduct, using the basis, factorization and coproduct lemmas, as in the 03FX proof. Step 2 handles any test scheme T: it forms P=T x_E V and the open pieces P_v, which are open by base change of an open immersion and étale by composition. Their coproduct Q represents T x_E W; checking this is routine gluing. Q->T is étale because étaleness is local on the source, and it is surjective. Point-surjectivity follows by testing with Spec K. Step 3 shows the topology does not depend on the atlas, using W x_E V. The projections are correctly identified as base changes of p and of w, both are open, and |a|(D)=|w|^{-1}(A) holds in both directions using the fibre-product point lemma. This is the 03BX argument. Steps 4 and 5 prove continuity and openness through T x_E W, using surjectivity or étaleness of the base change and the point lemma. I tested the empty space, a scheme with its identity atlas, a non-surjective étale t, and points over different residue fields. There is no cycle: the item is not in its own closure of 132 nodes. The only non-definition citation that is not a Mathlib leaf is lem-a1-space-fibre-product-point, which is in the same unit, so no tool_uses are needed. No SGA is cited. Batch-5 flag on lem-a1-space-fibre-product-point: its closure, and the item's, reaches only two sec-trace-formula nodes, def-trf-algebraic-space and def-trf-algebraic-space-jointly-surjective-family. Both are general definitions (algebraic spaces and point classes), not steps of the trace formula or Poincaré duality proofs, so the citation is genuinely outside the assumed statements. I made no changes."
  }
 }
