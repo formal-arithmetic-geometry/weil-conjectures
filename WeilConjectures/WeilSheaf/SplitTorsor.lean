@@ -45,6 +45,34 @@ def IsTorsorSplit [Finite G] : Prop :=
   IsIso (Sigma.desc fun g : G ↦ pullback.lift (f := π) (g := π) (𝟙 W) (τ g).hom
     (by simp [hτ]) : ∐ (fun _ : G ↦ W) ⟶ pullback π π)
 
+section BaseChange
+
+variable {π τ hτ} [Finite G] {Z' W' : Scheme.{u}}
+
+/-- **Splittings are stable under base change.** If the automorphisms `τ_g` split `π`, then
+their base changes `τ'_g` along `q : Z' ⟶ Z` split the base change `π' : W' ⟶ Z'` of `π`. -/
+lemma IsTorsorSplit.of_isPullback (hsplit : IsTorsorSplit π τ hτ) {π' : W' ⟶ Z'} {p : W' ⟶ W}
+    {q : Z' ⟶ Z} (sq : IsPullback p π' π q) (τ' : G → (W' ≅ W'))
+    (hτ' : ∀ g, (τ' g).hom ≫ π' = π') (hp : ∀ g, (τ' g).hom ≫ p = p ≫ (τ g).hom) :
+    IsTorsorSplit π' τ' hτ' := by
+  have : IsIso (Sigma.desc fun g : G ↦ pullback.lift (f := π) (g := π) (𝟙 W) (τ g).hom
+    (by simp [hτ]) : ∐ (fun _ : G ↦ W) ⟶ pullback π π) := hsplit
+  have h₁ := FinitaryPreExtensive.isIso_sigmaDesc_lift_comp π (fun g ↦ (τ g).hom) hτ p
+  have hP : IsPullback (pullback.fst π' π') (pullback.snd π' π' ≫ p) (p ≫ π) π := by
+    have := (IsPullback.of_hasPullback π' π').flip.paste_horiz sq
+    rw [← sq.w] at this
+    exact this.flip
+  suffices IsIso (Sigma.desc (fun g : G ↦ pullback.lift (f := π') (g := π') (𝟙 _) (τ' g).hom
+      (by simp [hτ'])) ≫ hP.isoPullback.hom) from IsIso.of_isIso_comp_right _ hP.isoPullback.hom
+  convert h₁ using 1
+  refine Sigma.hom_ext _ _ fun g ↦ ?_
+  simp only [colimit.ι_desc_assoc, colimit.ι_desc, Cofan.mk_ι_app]
+  apply pullback.hom_ext
+  · simp
+  · simp [hp]
+
+end BaseChange
+
 section Sections
 
 variable {V : Scheme.{u}} (v : V ⟶ W)

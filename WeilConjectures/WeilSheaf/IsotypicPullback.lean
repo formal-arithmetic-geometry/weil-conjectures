@@ -437,15 +437,6 @@ instance ProEtaleWeilSheaf.isIso_homEquiv_symm_unitToLowerStar :
     exact h
   exact Endofunctor.IsoAlgebra.isIso_of_isIso_hom_f' _
 
-variable (k₀ l) in
-/-- Pushforwards of pro-étale Weil sheaves along equal morphisms are isomorphic. -/
-noncomputable def ProEtaleWeilSheaf.lowerStarCongrIso {X Y : Scheme.{u}}
-    [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] {φ φ' : X ⟶ Y}
-    [φ.IsOver (Spec (CommRingCat.of k₀))] [φ'.IsOver (Spec (CommRingCat.of k₀))] (h : φ = φ') :
-    ProEtaleWeilSheaf.lowerStar k₀ l φ ≅ ProEtaleWeilSheaf.lowerStar k₀ l φ' := by
-  subst h
-  exact Iso.refl _
-
 variable {X Z₁ : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
   [Z₁.Over (Spec (CommRingCat.of k₀))]
   (π : W ⟶ X) (π₁ : W₁ ⟶ Z₁) (h : X ⟶ Z₁)
@@ -459,7 +450,7 @@ commutative square `s ≫ π₁ = π ≫ h`. -/
 noncomputable def ProEtaleWeilSheaf.lowerStarSquareIso (hs : s ≫ π₁ = π ≫ h) :
     ProEtaleWeilSheaf.lowerStar k₀ l s ⋙ ProEtaleWeilSheaf.lowerStar k₀ l π₁ ≅
       ProEtaleWeilSheaf.lowerStar k₀ l π ⋙ ProEtaleWeilSheaf.lowerStar k₀ l h :=
-  ProEtaleWeilSheaf.lowerStarCompIso k₀ l s π₁ ≪≫ ProEtaleWeilSheaf.lowerStarCongrIso k₀ l hs ≪≫
+  ProEtaleWeilSheaf.lowerStarCompIso k₀ l s π₁ ≪≫ ProEtaleWeilSheaf.lowerStarCongr k₀ l hs ≪≫
     (ProEtaleWeilSheaf.lowerStarCompIso k₀ l π h).symm
 
 variable {π π₁ h s} in
@@ -515,11 +506,11 @@ lemma ProEtaleWeilSheaf.lowerStarCompIso_inv_app_hom_f {Y₁ Y₂ Y₃ : Scheme.
 
 /-- The underlying morphism of the isomorphism of pushforwards along equal morphisms
 (blueprint `lem-fd-as-characters`). -/
-lemma ProEtaleWeilSheaf.lowerStarCongrIso_hom_app_hom_f {Y₁ Y₂ : Scheme.{u}}
+lemma ProEtaleWeilSheaf.lowerStarCongr_hom_app_hom_f {Y₁ Y₂ : Scheme.{u}}
     [Y₁.Over (Spec (CommRingCat.of k₀))] [Y₂.Over (Spec (CommRingCat.of k₀))] {φ φ' : Y₁ ⟶ Y₂}
     [φ.IsOver (Spec (CommRingCat.of k₀))] [φ'.IsOver (Spec (CommRingCat.of k₀))] (e : φ = φ')
     (K : ProEtaleWeilSheaf k₀ l Y₁) :
-    ((ProEtaleWeilSheaf.lowerStarCongrIso k₀ l e).hom.app K).hom.f =
+    ((ProEtaleWeilSheaf.lowerStarCongr k₀ l e).hom.app K).hom.f =
       (adicLowerStarCongr l (show Scheme.Hom.geometricFiberMap φ (comp_over φ _) =
         Scheme.Hom.geometricFiberMap φ' (comp_over φ' _) by subst e; rfl)).hom.app K.carrier := by
   subst e
@@ -555,7 +546,7 @@ lemma ProEtaleWeilSheaf.isotypicPullback_key (hs : s ≫ π₁ = π ≫ h) (g : 
   simp only [Endofunctor.IsoAlgebra.comp_hom_f, ProEtaleWeilSheaf.lowerStar_map_hom_f,
     ProEtaleWeilSheaf.lowerStarSquareIso, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     ProEtaleWeilSheaf.lowerStarCompIso_hom_app_hom_f,
-    ProEtaleWeilSheaf.lowerStarCongrIso_hom_app_hom_f,
+    ProEtaleWeilSheaf.lowerStarCongr_hom_app_hom_f,
     ProEtaleWeilSheaf.lowerStarCompIso_inv_app_hom_f, ProEtaleWeilSheaf.unitToLowerStar_hom_f,
     ProEtaleWeilSheaf.torsorTranslation_hom_f]
   simp only [Iso.trans_inv, NatTrans.comp_app, Category.assoc]
@@ -563,7 +554,7 @@ lemma ProEtaleWeilSheaf.isotypicPullback_key (hs : s ≫ π₁ = π ≫ h) (g : 
       Scheme.Hom.geometricFiberMap s (comp_over s _) ≫ (geometricTorsorAut k₀ τ₁ g₁).hom := by
     simp only [Scheme.Hom.geometricFiberMapIso_hom]
     rw [← Scheme.Hom.geometricFiberMap_comp, ← Scheme.Hom.geometricFiberMap_comp]
-    exact Scheme.Hom.geometricFiberMap_eq_of_eq hτs _ _
+    exact Scheme.Hom.geometricFiberMap_congr hτs _ _
   exact adicLowerStar_map_adicUnitToLowerStar_comp_torsorTranslation _ _ _ _
     (geometricTorsorAut k₀ τ) (geometricTorsorAut_comp k₀ π τ hτ)
     (geometricTorsorAut k₀ τ₁) (geometricTorsorAut_comp k₀ π₁ τ₁ hτ₁) _ _ _ g g₁ hτs'

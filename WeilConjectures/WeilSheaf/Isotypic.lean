@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.AlgebraicGeometry.GeometricFrobenius.FiberMapCongr
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraTwist
 public import WeilConjectures.WeilSheaf.TorsorPairing
 public import WeilConjectures.WeilSheaf.UpperStarLowerStarAdjunction
@@ -38,35 +39,6 @@ open scoped Obj
 namespace AlgebraicGeometry
 
 open scoped ProEtale
-
-namespace ProEtale
-
-variable {Z W Z' W' : Scheme.{u}} {π : W ⟶ Z} {G : Type u} [Finite G] {τ : G → (W ≅ W)}
-  {hτ : ∀ g, (τ g).hom ≫ π = π}
-
-/-- **Splittings are stable under base change.** If the automorphisms `τ_g` split `π`, then
-their base changes `τ'_g` along `q : Z' ⟶ Z` split the base change `π' : W' ⟶ Z'` of `π`. -/
-lemma IsTorsorSplit.of_isPullback (hsplit : IsTorsorSplit π τ hτ) {π' : W' ⟶ Z'} {p : W' ⟶ W}
-    {q : Z' ⟶ Z} (sq : IsPullback p π' π q) (τ' : G → (W' ≅ W'))
-    (hτ' : ∀ g, (τ' g).hom ≫ π' = π') (hp : ∀ g, (τ' g).hom ≫ p = p ≫ (τ g).hom) :
-    IsTorsorSplit π' τ' hτ' := by
-  have : IsIso (Sigma.desc fun g : G ↦ pullback.lift (f := π) (g := π) (𝟙 W) (τ g).hom
-    (by simp [hτ]) : ∐ (fun _ : G ↦ W) ⟶ pullback π π) := hsplit
-  have h₁ := FinitaryPreExtensive.isIso_sigmaDesc_lift_comp π (fun g ↦ (τ g).hom) hτ p
-  have hP : IsPullback (pullback.fst π' π') (pullback.snd π' π' ≫ p) (p ≫ π) π := by
-    have := (IsPullback.of_hasPullback π' π').flip.paste_horiz sq
-    rw [← sq.w] at this
-    exact this.flip
-  suffices IsIso (Sigma.desc (fun g : G ↦ pullback.lift (f := π') (g := π') (𝟙 _) (τ' g).hom
-      (by simp [hτ'])) ≫ hP.isoPullback.hom) from IsIso.of_isIso_comp_right _ hP.isoPullback.hom
-  convert h₁ using 1
-  refine Sigma.hom_ext _ _ fun g ↦ ?_
-  simp only [colimit.ι_desc_assoc, colimit.ι_desc, Cofan.mk_ι_app]
-  apply pullback.hom_ext
-  · simp
-  · simp [hp]
-
-end ProEtale
 
 namespace Scheme.Hom
 
@@ -167,15 +139,6 @@ end Scalar
 
 section Torsor
 
-/-- The base change to `k̄` only depends on the morphism (a local copy of
-`AlgebraicGeometry.Scheme.Hom.geometricFiberMap_congr`, which lives in a heavier file). -/
-lemma _root_.AlgebraicGeometry.Scheme.Hom.geometricFiberMap_eq_of_eq {k : Type u} [Field k]
-    {X₀ Y₀ : Scheme.{u}} {f : X₀ ⟶ Spec (.of k)} {g : Y₀ ⟶ Spec (.of k)} {φ ψ : X₀ ⟶ Y₀}
-    (e : φ = ψ) (h : φ ≫ g = f) (h' : ψ ≫ g = f) :
-    Scheme.Hom.geometricFiberMap φ h = Scheme.Hom.geometricFiberMap ψ h' := by
-  subst e
-  rfl
-
 /-- The Weil structure of the constant pro-étale Weil sheaf
 (blueprint `lem-fd-as-characters`). -/
 lemma ProEtaleWeilSheaf.adicConstant_str_hom_hom (X : Scheme.{u})
@@ -205,7 +168,7 @@ variable (k₀) in
 lemma geometricTorsorAut_comp (hτ : ∀ g, (τ g).hom ≫ π = π) (g : G) :
     (geometricTorsorAut k₀ τ g).hom ≫ π̄ = π̄ := by
   rw [Scheme.Hom.geometricFiberMapIso_hom, ← Scheme.Hom.geometricFiberMap_comp]
-  exact Scheme.Hom.geometricFiberMap_eq_of_eq (hτ g) _ _
+  exact Scheme.Hom.geometricFiberMap_congr (hτ g) _ _
 
 variable (k₀ l) in
 /-- The pushforward `π_* ℚ̄_ℓ` of the constant pro-étale Weil sheaf. -/
@@ -391,7 +354,7 @@ theorem ProEtaleWeilSheaf.nonempty_iso_ihom_of_isotypic [Etale π] [QuasiCompact
       (geometricTorsorAut k₀ τ g).hom ≫ (geometricTorsorAut k₀ τ h).hom := by
     simp only [Scheme.Hom.geometricFiberMapIso_hom]
     rw [← Scheme.Hom.geometricFiberMap_comp]
-    exact Scheme.Hom.geometricFiberMap_eq_of_eq (hadd g h) _ _
+    exact Scheme.Hom.geometricFiberMap_congr (hadd g h) _ _
   have hgeom {M : ProEtaleWeilSheaf k₀ l Z} (φ : M ⟶ ProEtaleWeilSheaf.torsorPushforward k₀ l π)
       (χ : AddChar G (PadicAlgCl l))
       (hφ : ∀ g, φ ≫ ProEtaleWeilSheaf.torsorTranslation π τ hτ g =

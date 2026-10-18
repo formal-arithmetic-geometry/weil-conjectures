@@ -28,21 +28,13 @@ namespace AlgebraicGeometry
 
 variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)]
 
-/-- Pullbacks of Weil sheaves along equal morphisms agree. -/
-theorem WeilSheaf.upperStar_eq_of_eq {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-    [Y.Over (Spec (CommRingCat.of k₀))] {f g : X ⟶ Y} [f.IsOver (Spec (CommRingCat.of k₀))]
-    [g.IsOver (Spec (CommRingCat.of k₀))] (h : f = g) :
-    (WeilSheaf.upperStar f : WeilSheaf k₀ l Y ⥤ _) = WeilSheaf.upperStar g := by
-  subst h
-  rfl
-
 /-- The Fourier kernel `μ^* ℒ_ψ` is the Artin–Schreier sheaf `ℒ_ψ(x y)` of the function `x y`. -/
-theorem fourierKernel_eq_artinSchreierOf (ψ : AddChar k₀ (PadicAlgCl l)) :
-    fourierKernel ψ = artinSchreierOf ψ
+theorem nonempty_iso_fourierKernel_artinSchreierOf (ψ : AddChar k₀ (PadicAlgCl l)) :
+    Nonempty (fourierKernel ψ ≅ artinSchreierOf ψ
       ((affinePlane.fst k₀).appTop (AffineSpace.coord _ PUnit.unit) *
-        (affinePlane.snd k₀).appTop (AffineSpace.coord _ PUnit.unit)) := by
-  rw [fourierKernel, artinSchreierOf]
-  exact Functor.congr_obj (WeilSheaf.upperStar_eq_of_eq affinePlane.mul_eq_homOfSection) _
+        (affinePlane.snd k₀).appTop (AffineSpace.coord _ PUnit.unit))) := by
+  rw [fourierKernel, artinSchreierOf_eq]
+  exact ⟨(WeilSheaf.upperStarCongr affinePlane.mul_eq_homOfSection).app _⟩
 
 /-- **`FT_{ψ⁻¹} ∘ FT_ψ` on the triple product** (blueprint `lem-fd-kernel-composition`,
 `sk-lem-kernel-composition`, without forming the convolution kernel). On `𝔸³` with points
@@ -116,11 +108,11 @@ theorem nonempty_iso_fourierTransform_comp_fourierTransform_inv
     rw [e₁, e₂, e₃, h₁₂₃]
     ring
   -- the kernels as Artin–Schreier sheaves, and their pullbacks to `𝔸³`
-  obtain ⟨eK⟩ := WeilComplex.nonempty_iso_tensorLisse_of_iso
-    (eqToIso (fourierKernel_eq_artinSchreierOf ψ)) (isLisse_fourierKernel ψ)
+  obtain ⟨eF⟩ := nonempty_iso_fourierKernel_artinSchreierOf (l := l) ψ
+  obtain ⟨eF'⟩ := nonempty_iso_fourierKernel_artinSchreierOf (l := l) ψ⁻¹
+  obtain ⟨eK⟩ := WeilComplex.nonempty_iso_tensorLisse_of_iso eF (isLisse_fourierKernel ψ)
     (isLisse_artinSchreierOf ψ m)
-  obtain ⟨eK'⟩ := WeilComplex.nonempty_iso_tensorLisse_of_iso
-    (eqToIso (fourierKernel_eq_artinSchreierOf ψ⁻¹)) (isLisse_fourierKernel ψ⁻¹)
+  obtain ⟨eK'⟩ := WeilComplex.nonempty_iso_tensorLisse_of_iso eF' (isLisse_fourierKernel ψ⁻¹)
     (isLisse_artinSchreierOf ψ⁻¹ m)
   obtain ⟨eG₁⟩ := nonempty_iso_upperStar_artinSchreierOf (affineTripleProduct.proj₁₂ k₀) ψ m
   obtain ⟨eG₂⟩ := nonempty_iso_upperStar_artinSchreierOf (affineTripleProduct.proj₂₃ k₀) ψ⁻¹ m

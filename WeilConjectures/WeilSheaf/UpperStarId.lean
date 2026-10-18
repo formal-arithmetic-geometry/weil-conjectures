@@ -91,13 +91,15 @@ variable [Fact (ringChar k₀ ≠ l)]
 
 section WeilSheaf
 
-/-- The pullbacks of Weil sheaves along equal morphisms are isomorphic. -/
-noncomputable def WeilSheaf.upperStarCongrIso {X Y : Scheme.{u}}
-    [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] {φ φ' : X ⟶ Y}
-    [φ.IsOver (Spec (CommRingCat.of k₀))] [φ'.IsOver (Spec (CommRingCat.of k₀))] (h : φ = φ') :
-    WeilSheaf.upperStar (k₀ := k₀) (l := l) φ ≅ WeilSheaf.upperStar φ' := by
-  subst h
-  exact Iso.refl _
+/-- Pullbacks of Weil sheaves along equal morphisms are isomorphic. Stating this for an equation
+of morphisms keeps the kernel from unfolding `WeilSheaf.upperStar` when two instances of
+`Scheme.Hom.IsOver` differ; the instances are implicit arguments, so that they are found by
+unification. -/
+noncomputable def WeilSheaf.upperStarCongr {X Y : Scheme.{u}}
+    [X.Over (Spec (CommRingCat.of k₀))] [Y.Over (Spec (CommRingCat.of k₀))] {φ ψ : X ⟶ Y}
+    {_ : φ.IsOver (Spec (CommRingCat.of k₀))} {_ : ψ.IsOver (Spec (CommRingCat.of k₀))}
+    (h : φ = ψ) : WeilSheaf.upperStar (k₀ := k₀) (l := l) φ ≅ WeilSheaf.upperStar ψ :=
+  eqToIso (by subst h; rfl)
 
 /-- Pullback of Weil sheaves is compatible with composition: `(f ≫ g)^* ≅ g^* ⋙ f^*`. -/
 noncomputable def WeilSheaf.upperStarCompIso {X Y Z : Scheme.{u}}
@@ -119,7 +121,7 @@ theorem WeilSheaf.nonempty_iso_upperStar_obj_upperStar_obj {X Y Z : Scheme.{u}}
       (WeilSheaf.upperStar g').obj F) := by
   rw [← Functor.comp_obj]
   exact ⟨((WeilSheaf.upperStarCompIso φ g).app F).symm ≪≫
-    (WeilSheaf.upperStarCongrIso h).app F⟩
+    (WeilSheaf.upperStarCongr h).app F⟩
 
 /-- Pullback of Weil sheaves along the identity is the identity. -/
 noncomputable def WeilSheaf.upperStarIdIso (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))] :

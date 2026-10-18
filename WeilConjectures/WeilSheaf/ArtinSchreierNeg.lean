@@ -649,7 +649,7 @@ noncomputable def WeilSheaf.upperStarNegUnitIso :
       WeilSheaf.upperStar (affineLine.smul k₀ (-1)) ⋙
         WeilSheaf.upperStar (affineLine.smul k₀ (-1)) :=
   (WeilSheaf.upperStarIdIso _).symm ≪≫
-    WeilSheaf.upperStarCongrIso (affineLine.smul_neg_one_comp_smul_neg_one k₀).symm ≪≫
+    WeilSheaf.upperStarCongr (affineLine.smul_neg_one_comp_smul_neg_one k₀).symm ≪≫
     WeilSheaf.upperStarCompIso _ _
 
 variable (k₀ l) in
