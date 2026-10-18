@@ -74,6 +74,52 @@ theorem derivedSplittingUnique
         ∀ (e₁ e₂ : T.obj₂ ≅ T.obj₁ ⊞ T.obj₃),
           T.mor₁ ≫ e₁.hom = biprod.inl → T.mor₂ = e₁.hom ≫ biprod.snd →
           T.mor₁ ≫ e₂.hom = biprod.inl → T.mor₂ = e₂.hom ≫ biprod.snd → e₁ = e₂) := by
-  sorry
+  obtain ⟨P, hPprojective, hPbounds, ⟨eL⟩⟩ := hL
+  have hvan (N : DerivedCategory (ModuleCat.{v} R))
+      (hN : ∀ i : ℤ, a ≤ i →
+        IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{v} R) i).obj N)) :
+      ∀ f : L ⟶ N, f = 0 := by
+    let C := (DerivedCategory.Q (C := ModuleCat.{v} R)).objPreimage N
+    let eN := (DerivedCategory.Q (C := ModuleCat.{v} R)).objObjPreimageIso N
+    have hC (i : ℤ) (hi : a ≤ i) : IsZero (C.homology i) :=
+      (hN i hi).of_iso
+        (((DerivedCategory.homologyFunctorFactors (ModuleCat.{v} R) i).app C).symm ≪≫
+          (DerivedCategory.homologyFunctor (ModuleCat.{v} R) i).mapIso eN)
+    intro f
+    have hz := precise_vanishing (ModuleCat.{v} R) P C a
+      ⟨a, b, fun i hi ↦ hPbounds i (Or.inl hi), fun i hi ↦ hPbounds i (Or.inr hi)⟩
+      hPprojective (fun i hi ↦ hPbounds i (Or.inl hi)) hC
+      (eL.inv ≫ f ≫ eN.inv)
+    simpa using congrArg (fun g ↦ eL.hom ≫ g ≫ eN.hom) hz
+  refine ⟨hvan K, ?_, ?_⟩
+  · intro hK M T h₁ _h₂ h₃ hT
+    subst K
+    subst L
+    apply exists_iso_binaryBiproduct_of_distTriang T hT
+    apply hvan _ ?_ T.mor₃
+    intro i hi
+    exact (hK (i + 1) (by omega)).of_iso
+      (((DerivedCategory.homologyFunctor (ModuleCat.{v} R) 0).shiftIso
+        (1 : ℤ) i (i + 1) (by omega)).app T.obj₁)
+  · intro hK M T h₁ _h₂ h₃ _hT e₁ e₂ he₁₁ he₁₂ he₂₁ he₂₂
+    subst K
+    subst L
+    have hinl : biprod.inl ≫ e₁.inv = T.mor₁ := by
+      rw [← he₁₁]
+      simp
+    have hleft : biprod.inl ≫ (e₁.inv ≫ e₂.hom) = biprod.inl := by
+      rw [← Category.assoc, hinl, he₂₁]
+    have hright : (e₁.inv ≫ e₂.hom) ≫ biprod.snd = biprod.snd := by
+      rw [Category.assoc, ← he₂₂, he₁₂]
+      simp
+    have hcomp : e₁.inv ≫ e₂.hom = 𝟙 _ := by
+      apply biprod.hom_ext
+      · apply biprod.hom_ext'
+        · simpa only [Category.assoc, Category.id_comp] using
+            congrArg (fun g ↦ g ≫ biprod.fst) hleft
+        · simpa using hvan T.obj₁ hK (biprod.inr ≫ (e₁.inv ≫ e₂.hom) ≫ biprod.fst)
+      · simpa using hright
+    apply Iso.ext
+    simpa using (congrArg (fun g ↦ e₁.hom ≫ g) hcomp).symm
 
 end CategoryTheory
