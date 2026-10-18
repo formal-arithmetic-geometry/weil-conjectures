@@ -1,0 +1,136 @@
+{
+ "id": "new-e4-galois-adic-from-finite",
+ "kind": "statement",
+ "title": "Integral, rational and algebraic adic correspondence from finite coefficients",
+ "statement": "Let Y be connected, Noetherian and separated, y a geometric point, l a prime invertible on Y, G a compact topological fundamental group, and Q an algebraic closure of Q_l. Given a complete finite-coefficient correspondence c of [def-pod-galois-correspondence-data-e4] and a profinite model P with continuous group isomorphism δ : G ≃ P, there exists a GaloisLisseAdicCorrespondence y G c l Q whose model and group isomorphism are the supplied P and δ. In particular the integral, rational and algebraic equivalences use the same evaluation automorphism c.γ at every finite quotient; the rational and algebraic categories are abelian, the equivalences preserve finite limits and colimits, and the tensor, unit and scalar-extension comparisons have exactly the pure-tensor and reduction normalizations recorded in that data type. The lisse categories and representations are those of [def-pod-lisse-l-adic-sheaves] and [def-pod-l-adic-representations], with their fibre functors from [def-pod-lisse-adic-fibre-functors]. This result assumes, rather than constructs, c.",
+ "source": {
+  "document": "literature/stanford-weil2-seminar/L19.pdf",
+  "place": "Proposition 1.1.9, pp. 2–3; Weil II (1.1.1), (1.1.6); original proof steps 6–10"
+ },
+ "stmt_deps": [
+  "def-pod-galois-correspondence-data-e4",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-pod-l-adic-representations",
+  "def-pod-lisse-adic-fibre-functors"
+ ],
+ "proof": [
+  {
+   "text": "Keep the supplied profinite model P and δ fixed throughout. Apply c at every finite quotient of each finite coefficient ring. Its naturality and scalar comparisons identify the reduction transition maps. Reconstruct the finitely generated integral module and its equivariant maps by the adic inverse-limit theorem. Continuity is checked after every finite projection. Conversely use reductions of an integral representation and full faithfulness at each finite level to recover its lisse tower.",
+   "uses": [
+    "lem-pod-adic-limit-finite-modules",
+    "def-pod-lisse-l-adic-sheaves",
+    "def-pod-l-adic-representations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Rationalize the integral correspondence. An invariant localized Hom has a representative whose action differences are torsion; one fixed power of the uniformizer kills the torsion of this finite Hom module, so invariant Homs localize correctly. A continuous rational representation has a stable lattice, giving essential surjectivity.",
+   "uses": [
+    "lem-pod-profinite-stable-lattice",
+    "def-pod-lisse-l-adic-sheaves",
+    "def-pod-l-adic-representations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pass to the directed finite coefficient fields. Objects descend by the defining finite model of an l-adic representation, while finitely many matrix coefficients of maps descend after a common finite extension; scalar localization therefore gives full faithfulness and essential surjectivity over Q.",
+   "uses": [
+    "def-weil-finite-subextension-directed-set"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Kernels and cokernels at a common finite coefficient field remain continuous and descend, giving abelianity. Carry the finite-level tensor, unit and scalar comparisons through inverse limits and localization. Their values on pure tensors and on each finite projection identify all coherence maps and give precisely the required evaluation action and scalar formulas.",
+   "uses": [
+    "lem-pod-adic-limit-finite-modules",
+    "def-pod-lisse-adic-fibre-functors"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-adic-limit-finite-modules",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-pod-l-adic-representations",
+  "lem-pod-profinite-stable-lattice",
+  "def-weil-finite-subextension-directed-set",
+  "def-pod-lisse-adic-fibre-functors"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stanford-weil2-seminar/L19.pdf",
+  "place": "E4 formal decomposition of Proposition 1.1.9, pp. 2–3; Weil II (1.1.1), (1.1.6); original proof steps 6–10; the proof steps below follow that argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Reconstruct the equivalence of lisse l-adic sheaves and continuous representations from the finite coefficient fiber equivalence",
+   "results": "Found abstract finite-action Galois equivalences and condensed categories, but no adic correspondence.",
+   "date": "2026-10-18",
+   "verdict": "No exact match; use the existing stated dependencies and the source argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integral l-adic sheaves and continuous integral representations are equivalent by inverse limits then rationalization",
+   "results": "Found profinite condensed and solid module results; no matching etale adic equivalence.",
+   "date": "2026-10-18",
+   "verdict": "No exact match; use the existing stated dependencies and the source argument."
+  },
+  {
+   "tool": "grep",
+   "query": "galois_adic_from_finite|adic.*equivalence|lisse.*equivalence",
+   "results": "Nine Mathlib hits concerned unrelated quadratic or adic-completion equivalences. Local inputs are adic finite-module reconstruction, stable lattices and finite coefficient fields.",
+   "date": "2026-10-18",
+   "verdict": "No exact match; use the existing stated dependencies and the source argument."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GaloisLisseRepresentations",
+  "date": "2026-10-18",
+  "group": "E4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-galois-lisse-representations",
+   "place": "Proposition 1.1.9, pp. 2–3; Weil II (1.1.1), (1.1.6); original proof steps 6–10",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GaloisAdicFromFinite",
+  "file": "lean/Sheaf/Paper/GaloisAdicFromFinite.lean",
+  "declaration": "AlgebraicGeometry.Scheme.galois_adic_from_finite",
+  "statement": "theorem galois_adic_from_finite {Y : Scheme.{u}} [ConnectedSpace Y] {Ω : Type u} [Field Ω] [IsAlgClosed Ω] (y : Spec (.of Ω) ⟶ Y) (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [∀ P, MulAction G ((FiniteEtale.fiber y).obj P)] [IsFundamentalGroup (FiniteEtale.fiber y) G] (c : GaloisLisseFiniteCorrespondence y G) (P : ProfiniteGrp.{u}) (δ : G ≃ₜ* P) (l : ℕ) [Fact l.Prime] [IsNoetherian Y] [Y.IsSeparated] [∀ x : Y, Invertible (l : Y.residueField x)] (Q : Type (u + 1)) [Field Q] [Algebra ℚ_[l] Q] [IsAlgClosure ℚ_[l] Q] : ∃ a : GaloisLisseAdicCorrespondence y G c l Q, a.P = P ∧ HEq a.δ δ",
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-ffa47",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261018T111931-L-553702",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-ffa47",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261018T111931-L-553702",
+  "kind": "interface",
+  "note": "independent cc review: Theorem signature byte-identical to live; the 46 moved data declarations diffed identical to live lines 42-779 apart from blueprint tags and genInjectivity/genSizeOfSpec options (change record present); three new sorry statements checked true against their nodes, node lean.statement equals signature for all four new nodes; --all compile clean, importer TraceEnergy compiles, axioms propext/sorryAx/Classical.choice/Quot.sound"
+ }
+}

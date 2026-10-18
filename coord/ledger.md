@@ -16423,3 +16423,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:08 L: merged deliver/A4/Sheaf.AlgebraicGeometry.IsFiniteLocallyFreeOfCoherentFreeStalks (stage 3; reviewer PASS; first push; landing 20261018T110825-L-400789 (proof); batch 20261018T110821; modules 1; new nodes 0)
 - 11:08 L: merged deliver/D2/Sheaf.CategoryTheory.RingedCechKoszulColimitIso (stage 3; reviewer PASS; first push; landing 20261018T110825-L-401019 (interface); batch 20261018T110821; modules 2; new nodes 1)
 - 11:13 L: merged deliver/D3/Sheaf.CategoryTheory.RingedCechKoszulDualKFlat (stage 3; reviewer PASS; after a return; landing 20261018T111333-L-466232 (proof); batch 20261018T111329; modules 1; new nodes 0)
+- 11:19 L: merged deliver/E4/Sheaf.Paper.GaloisLisseRepresentations (stage 3; reviewer PASS; first push; landing 20261018T111931-L-553702 (interface); batch 20261018T111926; modules 5; new nodes 4; change records: coord/changes/e4-galois-correspondence-data.md)
