@@ -1,0 +1,97 @@
+{
+ "id": "lem-per-punctured-derived-completion-sections",
+ "kind": "statement",
+ "title": "Derived completion computes infinitesimal punctured-spectrum cohomology",
+ "statement": "Let $(A,\\mathfrak m)$ be a commutative Noetherian local ring [def-weil-pbc-noetherian-ring], let $I\\subseteq A$ be an ideal, let $M$ be a finite $A$-module [def-weil-finitely-generated-module], and put $U=\\operatorname{Spec}A\\setminus\\{\\mathfrak m\\}$ [def-weil-affine-spectrum]. Let $\\mathcal F=\\widetilde M|_U$ be the associated sheaf [lem-weil-pbc-spec-module-tilde-sections]. Work in the ordinary derived category $D(A)$ of $A$-modules [def-weil-abstract-derived-category]. For an ideal $K$, put $\\Gamma_K(N)=\\{x\\in N:K^r x=0\\text{ for some }r\\geq0\\}$ [def-sbc-ideal-power-torsion-functor], and write $R\\Gamma_K$ for its right derived functor and $H_K^j(M)=H^j(R\\Gamma_K(M[0]))$. Write $L^{\\wedge_I}=R\\varprojlim_{n\\geq1}(L\\otimes_A^{\\mathbf L}A/I^n)$ for derived $I$-adic completion: the derived tensor is computed using a K-flat resolution, and the derived inverse limit [def-weil-derived-limit] using the mapping fibre of $1-\\mathrm{shift}$ on the termwise products of a complex-level model of the tower. Use these derived-functor models and their natural completion maps, not arbitrary maps between abstract choices of cones. Write $R\\Gamma(U,-)$ for derived global sections of Zariski module sheaves [pqf-def-cohomology]. For every integer $i$ there is a canonical isomorphism $H^i((R\\Gamma(U,\\mathcal F))^{\\wedge_I})\\xrightarrow{\\sim}\\varprojlim_{n\\geq1}H^i(U,\\widetilde{M/I^nM}|_U)$. It is natural in $M$ and is induced by reduction maps; its composite with the completion map from $H^i(U,\\mathcal F)$ has $n$th coordinate the map induced by $M\\to M/I^nM$. Negative Zariski cohomology groups are understood to be zero. Moreover, for every open $V\\subseteq U$ there is likewise a canonical isomorphism $H^0((R\\Gamma(V,\\mathcal F|_V))^{\\wedge_I})\\xrightarrow{\\sim}\\varprojlim_{n\\geq1}\\Gamma(V,\\widetilde{M/I^nM}|_V)$ (for $V=U$ the one above with $i=0$), natural in $M$, whose composite with the completion map from $\\Gamma(V,\\mathcal F|_V)$ has $n$th coordinate the map induced by $M\\to M/I^nM$; for opens $V'\\subseteq V\\subseteq U$ these isomorphisms carry $H^0$ of the completed restriction map $(R\\Gamma(V,\\mathcal F|_V))^{\\wedge_I}\\to(R\\Gamma(V',\\mathcal F|_{V'}))^{\\wedge_I}$ to the limit of the restriction maps.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0DXI, lemma-compare-with-derived-completion, applied to the restriction of the sheaf associated to a finite module; its proof uses Tag 0DX1 (lemma-ML-local) and Tag 0A0K (lemma-derived-completion-pseudo-coherent). The degree-zero clause for an open V of U is the same proof on V (Tags 0BLX, lemma-formal-functions-general, and 0D60, cohomology-lemma-RGamma-commutes-with-Rlim), where the R^1lim term involves H^{-1}=0 and no Mittag-Leffler input is needed."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-finitely-generated-module",
+  "def-weil-abstract-derived-category",
+  "def-sbc-ideal-power-torsion-functor",
+  "def-weil-derived-limit",
+  "def-weil-pbc-adic-completion",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-spec-module-tilde-sections",
+  "pqf-def-cohomology"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology of derived completion of global sections on a punctured Noetherian local spectrum is the inverse limit of cohomology of quotients of a finite module by powers of an ideal",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"localCohomology.diagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) →\\n          ℕ → CategoryTheory.Functor Dᵒᵖ (CategoryTheory.Functor (ModuleCat R) (ModuleCat R))\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs a functor from $ \\\\mathcal{D}^{\\\\text{op}} $ to the category of $ R\"}\n  {\"name\": \"localCohomology.isoSelfLERadical\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (J : Ideal R) → [IsNoetherian R R] → (i : ℕ) → localCohomology.ofSelfLERadical J i ≅ localCohomology J i\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ J $, and a natural number $ i $, this establishes a natural isomorphism between the $ i $-th local cohomology functor constructed using ideal powers\"}\n  {\"name\": \"localCohomology\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → Ideal R → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $ and an ideal $ J $, the $ i $-th local cohomology functor with respect to $ J $ is constructed as the colimit of a diagram formed by the descending chain of powers $ J^n\"}\n  {\"name\": \"localCohomology.ofDiagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type (max u v)} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs an $ R $-linear endofunctor on the category of $ R $-modules by\"}\n  {\"name\": \"localCohomology.ofSelfLERadical\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → Ideal R → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $, an ideal $ J $, and a natural number $ i $, this constructs the $ i $-th local cohomology functor as an $ R $-linear endofunctor on the category of $ R $-modules. It is\"}\n  {\"name\": \"AdicCompletion.eval_of\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  (n : ℕ) (x : M), (AdicCompletion.eval I M n) ((AdicCompletion.of I M) x) = (I ^ n • ⊤).mkQ x\", \"doc\": \"For any natural number $n$ and element $x$ in an $R$-module $M$, the composition of the canonical embedding $\\\\mathrm{of}: M \\\\to \\\\varprojlim M/I^nM$ followed by the evaluation map $\\\\mathrm{eval}_n: \\\\va\"}\n  {\"name\": \"AdicCompletion.of_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  (x : M) (n : ℕ), ↑((AdicCompletion.of I M) x) n = (I ^ n • ⊤).mkQ x\", \"doc\": \"The canonical $ R $-linear map sending each element $ m $ of an $ R $-module $ M $ to its image in the $ I $-adic completion of $ M $, defined as the inverse limit $ \\\\varprojlim M/I^nM $. This map con\"}\n  {\"name\": \"BDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $.\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary adic completion definitions and localCohomology diagrams do not give punctured-spectrum formal functions or the coherent cohomology Mittag-Leffler theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Formal functions for a coherent sheaf on the punctured spectrum: derived completion cohomology equals inverse limit over infinitesimal neighborhoods",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.submodule\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) →\\n      (M : Type u_4) → [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → Submodule R ((n : ℕ) → M ⧸ I ^ n • ⊤)\", \"doc\": \"The submodule of the product $\\\\prod_{n \\\\in \\\\mathbb{N}} M/I^nM$ consisting of compatible sequences $\\\\{x_n\\\\}$ where each $x_n \\\\in M/I^nM$ and for all $m \\\\leq n$, the transition map sends $x_n$ to $x_m$.\"}\n  {\"name\": \"AdicCompletion\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_4) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_4\", \"doc\": \"The adic completion of an $ R $-module $ M $ with respect to an ideal $ I $ of a commutative ring $ R $ is the inverse limit of the quotient modules $ M/I^nM $, where $ I^n $ denotes the $ n $th power\"}\n  {\"name\": \"AdicCompletion.subring\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → Subring ((n : ℕ) → R ⧸ I ^ n • ⊤)\", \"doc\": \"The subring of the inverse limit $\\\\varprojlim R/I^n$ consisting of compatible sequences $(x_n)$ where each $x_n \\\\in R/I^n$ and the transition maps $\\\\varphi_{m,n}: R/I^n \\\\to R/I^m$ satisfy $\\\\varphi_{m,\"}\n  {\"name\": \"AdicCompletion.instCommRing\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Algebra\", \"type\": \"{R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → CommRing (AdicCompletion I R)\", \"doc\": \"The $I$-adic completion of a commutative ring $R$ with respect to an ideal $I$ forms a commutative ring under component-wise operations induced by the inverse limit of the quotient rings $R/I^n$. The \"}\n  {\"name\": \"AlgebraicGeometry.Spec.structureSheaf\", \"module\": \"Mathlib.AlgebraicGeometry.StructureSheaf\", \"type\": \": Sheaf CommRingCat (PrimeSpectrum.Top R)\", \"doc\": \"The sheaf of commutative rings on the prime spectrum $\\\\operatorname{Spec}(R)$ of a commutative ring $R$, constructed from the structure presheaf that assigns to each open set $U$ the ring of sections \"}\n  {\"name\": \"AdicCompletion.of\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"{R : Type u_1} →\\n  [inst : CommRing R] →\\n    (I : Ideal R) → (M : Type u_4) → [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → M →ₗ[R] AdicCompletion I M\", \"doc\": \"The canonical $ R $-linear map sending each element $ m $ of an $ R $-module $ M $ to its image in the $ I $-adic completion of $ M $, defined as the inverse limit $ \\\\varprojlim M/I^nM $. This map con\"}\n  {\"name\": \"AdicCompletion.of_apply\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"(x : M) (n : ℕ) : (of I M x).1 n = mkQ (I ^ n • ⊤ : Submodule R M) x\", \"doc\": \"The canonical $ R $-linear map sending each element $ m $ of an $ R $-module $ M $ to its image in the $ I $-adic completion of $ M $, defined as the inverse limit $ \\\\varprojlim M/I^nM $. This map con\"}\n  {\"name\": \"IsAdicComplete.of_lift\", \"module\": \"Mathlib.RingTheory.AdicCompletion.Basic\", \"type\": \"(f : ∀ (n : ℕ), M →ₗ[R] N ⧸ (I ^ n • ⊤ : Submodule R N))\\n  (h : ∀ {m n : ℕ} (hle : m ≤ n), factorPow I N hle ∘ₗ f n = f m) (x : M) :\\n  of I N (lift I f h x) = AdicCompletion.lift I f h x\", \"doc\": \"The canonical $ R $-linear map sending each element $ m $ of an $ R $-module $ M $ to its image in the $ I $-adic completion of $ M $, defined as the inverse limit $ \\\\varprojlim M/I^nM $. This map con\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary adic completion definitions and localCohomology diagrams do not give punctured-spectrum formal functions or the coherent cohomology Mittag-Leffler theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, Sheaf",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Sheaf'\n",
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary adic completion definitions and localCohomology diagrams do not give punctured-spectrum formal functions or the coherent cohomology Mittag-Leffler theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*complet|complet.*cohomolog|Mittag.*Leffler",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary adic completion definitions and localCohomology diagrams do not give punctured-spectrum formal functions or the coherent cohomology Mittag-Leffler theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mittag Leffler property for coherent cohomology modulo powers of an ideal on a punctured local spectrum",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"localCohomology.idealPowersDiagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → Ideal R → CategoryTheory.Functor ℕᵒᵖ (Ideal R)\", \"doc\": \"For a commutative ring $ R $ and an ideal $ J $, this defines a functor from the opposite category of natural numbers $ \\\\mathbb{N}^{\\\\text{op}} $ to the category of ideals of $ R $. The functor maps ea\"}\n  {\"name\": \"localCohomology.ofSelfLERadical\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → Ideal R → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $, an ideal $ J $, and a natural number $ i $, this constructs the $ i $-th local cohomology functor as an $ R $-linear endofunctor on the category of $ R $-modules. It is\"}\n  {\"name\": \"localCohomology.ideal_powers_initial\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"∀ {R : Type u} [inst : CommRing R] {J : Ideal R} [hR : IsNoetherian R R],\\n  (localCohomology.idealPowersToSelfLERadical J).Initial\", \"doc\": \"Given a Noetherian commutative ring $ R $ and an ideal $ J $, the functor from the opposite category of natural numbers $ \\\\mathbb{N}^{\\\\text{op}} $ to the category of ideals $ J' $ satisfying $ J \\\\subs\"}\n  {\"name\": \"localCohomology.idealPowersToSelfLERadical\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → (J : Ideal R) → CategoryTheory.Functor ℕᵒᵖ (localCohomology.SelfLERadical J)\", \"doc\": \"The functor from the opposite category of natural numbers $ \\\\mathbb{N}^{\\\\text{op}} $ to the category of ideals $ J' $ satisfying $ J \\\\subseteq \\\\sqrt{J'} $, constructed by lifting the ideal powers diag\"}\n  {\"name\": \"localCohomology\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} → [inst : CommRing R] → Ideal R → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $ and an ideal $ J $, the $ i $-th local cohomology functor with respect to $ J $ is constructed as the colimit of a diagram formed by the descending chain of powers $ J^n\"}\n  {\"name\": \"localCohomology.ofDiagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type (max u v)} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) → ℕ → CategoryTheory.Functor (ModuleCat R) (ModuleCat R)\", \"doc\": \"Given a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs an $ R $-linear endofunctor on the category of $ R $-modules by\"}\n  {\"name\": \"localCohomology.hasColimitDiagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"∀ {R : Type (max u v)} [inst : CommRing R] {D : Type v} [inst_1 : CategoryTheory.SmallCategory D]\\n  (I : CategoryTheory.Functor D (Ideal R)) (i : ℕ), CategoryTheory.Limits.HasColimit (localCohomology.diagram I i)\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, the diagram constructed via the $ i $-th extension functor $ \\\\text{Ext}^i_R $ app\"}\n  {\"name\": \"localCohomology.isoSelfLERadical\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    (J : Ideal R) → [IsNoetherian R R] → (i : ℕ) → localCohomology.ofSelfLERadical J i ≅ localCohomology J i\", \"doc\": \"For a Noetherian commutative ring $ R $, an ideal $ J $, and a natural number $ i $, this establishes a natural isomorphism between the $ i $-th local cohomology functor constructed using ideal powers\"}\n",
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary adic completion definitions and localCohomology diagrams do not give punctured-spectrum formal functions or the coherent cohomology Mittag-Leffler theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, CategoryTheory.Sheaf",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-19",
+   "verdict": "no match: ordinary adic completion definitions and localCohomology diagrams do not give punctured-spectrum formal functions or the coherent cohomology Mittag-Leffler theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-per-formal-punctured-idempotent-algebraization",
+  "date": "2026-10-19",
+  "group": "N7"
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof Step 1: dimension-normalized Verdier duality and the middle t-structure; the finite-coefficient potential-dualizing construction, via the normal-local top-residue-class input (ILO XVII Lemma 3.5.8): normality of completion and connectedness of punctured principal slices. Specific input: The formal-sections comparison used before the idempotent argument in the complete-local connectedness input; no connectedness conclusion is placed in this helper. Specific sub-input: Identification of completed punctured-spectrum cohomology with infinitesimal-neighborhood cohomology, 0DXI in the proof of 0DXQ underlying 0DXR.",
+   "via": [
+    "lem-per-formal-punctured-idempotent-algebraization",
+    "lem-per-complete-local-connectedness-bound",
+    "lem-per-normal-punctured-hypersurface-connected",
+    "lem-per-normal-top-residue-class",
+    "lem-per-normal-pinned-extension",
+    "lem-per-potential-dualizing-uniqueness",
+    "lem-per-finite-regular-reduction-dualizing",
+    "lem-per-qbar-generic-duality-model",
+    "lem-per-qbar-middle-tstructure"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
