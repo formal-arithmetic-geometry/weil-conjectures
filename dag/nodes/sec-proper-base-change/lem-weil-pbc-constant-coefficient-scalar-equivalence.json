@@ -1,0 +1,126 @@
+{
+ "kind": "statement",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-nilpotent-reduction-lissity",
+   "place": "proof: the one-step filtration induction and the nilpotent specialization",
+   "via": []
+  },
+  "same_as": []
+ },
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 094I, scalar-extension identification at a ring isomorphism"
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NilpotentReductionLissity",
+  "date": "2026-10-18",
+  "group": "N2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "mathlib_match": null,
+ "id": "lem-weil-pbc-constant-coefficient-scalar-equivalence",
+ "title": "Bijective constant scalar extension reflects finite lisse cohomology",
+ "statement": "Let C be a small site with topology T [def-weil-pbc-sites-and-cohomology], and let f:B to D be a bijective homomorphism of commutative rings. Use the constant coefficient rings and derived scalar extension [def-weil-pbc-constant-coefficient-scalar-extension], derived categories [def-weil-abstract-derived-category], and their cohomology [def-weil-derived-cohomology-sheaves]. If the i-th cohomology sheaf of the derived scalar extension of an arbitrary object K over B has local constant finite D-module descriptions [def-weil-pbc-locally-constant-finite-type-modules], then the i-th cohomology sheaf of K has local constant finite B-module descriptions. No boundedness, Noetherianity, or nilpotence is assumed.",
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-constant-coefficient-scalar-extension",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-pbc-locally-constant-finite-type-modules"
+ ],
+ "proof": [
+  {
+   "text": "The inverse ring isomorphism induces inverse restriction-of-scalars functors on sheaves. Construct the cancellation isomorphisms sectionwise using the ordinary module restriction equivalence. For a ring-sheaf isomorphism, ordinary extension of scalars is naturally isomorphic to restriction along its inverse: use the uniqueness of left adjoints on sections, with the unit sending m to 1 tensor m, and then sheafify. Naturality follows on these tensor generators.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the universal left-derived functor in [lem-pur-derived-change-of-rings]. The exact inverse restriction equivalence induces a derived functor, and the uniqueness of left-derived functors identifies it with the chosen constant coefficient scalar extension. Exact functors commute with homology.",
+   "uses": [
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply [lem-weil-pbc-constant-coefficient-lisse-restriction] to the bijective map, using its surjectivity, to restrict finite local models after the homology comparison. Then cancel the inverse coefficient equivalence to recover K.",
+   "uses": [
+    "lem-weil-pbc-constant-coefficient-lisse-restriction"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-constant-coefficient-lisse-restriction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY and Tag 094I, final identification when a coefficient quotient is the original ring; detailed elementary coefficient-equivalence proof by N2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A bijective ring homomorphism induces an equivalence on derived categories of sheaves of modules preserving locally constant finite type cohomology",
+   "results": "8 results, including PresheafOfModules.homEquivOfIsLocallyBijective and condensed locally constant module functors. No matching derived finite-lisse reflection theorem.",
+   "date": "2026-10-18",
+   "verdict": "No direct theorem; use sheafification adjunctions and exact derived functors."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"IsEquivalence\"",
+   "results": "ModuleCat.restrictScalars_isEquivalence_of_ringEquiv and two AlgCat instances.",
+   "date": "2026-10-18",
+   "verdict": "Use the module-category equivalence on sections; sheaf and derived comparisons still need proof."
+  },
+  {
+   "tool": "grep",
+   "query": "scalarExtension.*bijective|reduction_succ|restrictScalars.*[Ee]quivalence",
+   "results": "18 Mathlib matches about algebraic restriction of scalars, including ModuleCat.restrictScalarsEquivalenceOfRingEquiv.",
+   "date": "2026-10-18",
+   "verdict": "No site-level derived local-model theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A bijective ring homomorphism induces an equivalence on derived categories of sheaves of modules preserving locally constant finite type cohomology",
+   "results": "8 hits: RingHom.Etale.of_bijective, RingHom.FaithfullyFlat.of_bijective, SheafOfModules.bijective_pushforwardSections, RingEquiv.bijective, AlgEquiv.ofBijective, RingHom.Bijective.respectsIso, PresheafOfModules.homEquivOfIsLocallyBijective, RingEquiv.ofBijective.",
+   "date": "2026-10-18",
+   "verdict": "No complete matching finite local-model theorem. Generic restriction, ring-equivalence and triangulated-closure tools are used where applicable in the written proof."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantCoefficientScalarEquivalence",
+  "file": "lean/Sheaf/Paper/ConstantCoefficientScalarEquivalence.lean",
+  "declaration": "SheafOfModules.locallyConstantFiniteTypeModules_of_scalarExtension_bijective",
+  "statement": "theorem locallyConstantFiniteTypeModules_of_scalarExtension_bijective\n    {C : Type u} [Category.{u} C] (T : GrothendieckTopology C)\n    {B D : Type u} [CommRing B] [CommRing D] (f : B →+* D)\n    (hf : Function.Bijective f)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (constantCoefficientRing T B))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (constantCoefficientRing T D))]\n    (K : DerivedCategory (SheafOfModules.{u} (constantCoefficientRing T B)))\n    (i : ℤ)\n    (h : IsLocallyConstantFiniteTypeModules T D\n      ((DerivedCategory.homologyFunctor _ i).obj\n        ((constantCoefficientScalarExtension T f).obj K))) :\n    IsLocallyConstantFiniteTypeModules T B\n      ((DerivedCategory.homologyFunctor _ i).obj K)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261018T091408-L-3257205",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261018T091408-L-3257205",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

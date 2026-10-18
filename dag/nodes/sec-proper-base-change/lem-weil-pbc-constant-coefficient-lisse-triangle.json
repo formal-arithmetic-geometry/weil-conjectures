@@ -1,0 +1,131 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NilpotentReductionLissity",
+  "date": "2026-10-18",
+  "group": "N2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "mathlib_match": null,
+ "id": "lem-weil-pbc-constant-coefficient-lisse-triangle",
+ "title": "Finite local constant cohomology is closed under distinguished triangles",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-nilpotent-reduction-step",
+   "place": "proof step 1: use the Serre class with the reduction coefficient convention",
+   "via": []
+  },
+  "same_as": []
+ },
+ "statement": "Let T be a small site [def-weil-pbc-sites-and-cohomology] and B a commutative Noetherian ring [def-weil-pbc-noetherian-ring]. Use the constant coefficient ring formed in commutative rings [def-weil-pbc-constant-coefficient-scalar-extension] and its module sheaves [def-weil-sheaf-of-modules-category], derived category [def-weil-abstract-derived-category], and cohomology [def-weil-derived-cohomology-sheaves]. If both outer terms of a distinguished triangle have local constant finite B-module descriptions [def-weil-pbc-locally-constant-finite-type-modules] in every cohomological degree, so does the middle term. No cohomological boundedness is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 094I, first proof paragraph; compare sites-modules.tex, lemma-kernel-finite-locally-constant, Tag 093U (3)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-constant-coefficient-scalar-extension",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-pbc-locally-constant-finite-type-modules"
+ ],
+ "proof": [
+  {
+   "text": "Use [lem-weil-pbc-constant-coefficient-local-models-comparison] to obtain the unit-compatible constant-ring isomorphism and agreement of local models under scalar restriction. That restriction is an exact equivalence of abelian categories, with sectionwise cancellation isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-constant-coefficient-local-models-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The kernel, cokernel and extension conclusions of [lem-weil-pbc-locally-constant-derived-serre], together with transport of covering trivializations along isomorphisms, make finite local constant modules over the old constant ring a weak Serre class. Kernel and cokernel universality transfer closure from the chosen kernel and cokernel objects to arbitrary limiting forks and coforks.",
+   "uses": [
+    "lem-weil-pbc-locally-constant-derived-serre"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The homology-property closure underlying [lem-sbc-cohomology-in-weak-serre-subcategory] applies to the image triangle under the exact derived coefficient equivalence. Exact functors commute with homology, so the local-model comparison transfers the two outer hypotheses to this triangle. Its middle conclusion transfers back by the inverse homology comparison and the local-model equivalence. The proof only needs middle-term closure, so it uses the existing IsTriangulatedClosed2 instance and does not need a separate contains-zero argument.",
+   "uses": [
+    "lem-sbc-cohomology-in-weak-serre-subcategory"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-constant-coefficient-local-models-comparison",
+  "lem-weil-pbc-locally-constant-derived-serre",
+  "lem-sbc-cohomology-in-weak-serre-subcategory"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 094I; explicit constant-ring comparison and triangulated closure by N2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology in a weak Serre subcategory is closed under the middle term of a distinguished triangle",
+   "results": "8 hits about orthogonal triangulated classes and derived t-structure bounds; no finite locally constant sheaf comparison theorem.",
+   "date": "2026-10-18",
+   "verdict": "Use the existing library Serre and homology-property declarations."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsTriangulatedClosed₂\"",
+   "results": "12 hits, including ObjectProperty.ext_of_isTriangulatedClosed2 and the class constructor.",
+   "date": "2026-10-18",
+   "verdict": "Use the ext_of_isTriangulatedClosed2 API after transporting the Serre property."
+  },
+  {
+   "tool": "grep",
+   "query": "locallyConstant.*distinguished|homologyProperty_isTriangulated",
+   "results": "0 Mathlib hits; the source library has the generic homologyProperty_isTriangulatedClosed2 instance.",
+   "date": "2026-10-18",
+   "verdict": "No direct theorem for the current constant coefficient encoding."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology in a weak Serre subcategory is closed under the middle term of a distinguished triangle",
+   "results": "8 hits: CategoryTheory.ObjectProperty.ext_of_isTriangulatedClosed₃, CategoryTheory.Triangulated.Subcategory.ext₂, CategoryTheory.ObjectProperty.ext_of_isTriangulatedClosed₂', CategoryTheory.Triangulated.Subcategory.ext₁, CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderSubobjects, CategoryTheory.Triangulated.Subcategory.ext₃, CategoryTheory.ObjectProperty.prop_X₂_of_exact, CategoryTheory.ObjectProperty.IsTriangulatedClosed₃.mk.",
+   "date": "2026-10-18",
+   "verdict": "No complete matching finite local-model theorem. Generic restriction, ring-equivalence and triangulated-closure tools are used where applicable in the written proof."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantCoefficientLisseTriangle",
+  "file": "lean/Sheaf/Paper/ConstantCoefficientLisseTriangle.lean",
+  "declaration": "SheafOfModules.locallyConstantFiniteTypeModules_of_distinguished",
+  "statement": "theorem locallyConstantFiniteTypeModules_of_distinguished\n    {C : Type u} [Category.{u} C] (T : GrothendieckTopology C)\n    (B : Type u) [CommRing B] [IsNoetherianRing B]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (constantCoefficientRing T B))]\n    (t : Triangle (DerivedCategory\n      (SheafOfModules.{u} (constantCoefficientRing T B))))\n    (ht : t ∈ distTriang _)\n    (h₁ : ∀ i : ℤ, IsLocallyConstantFiniteTypeModules T B\n      ((DerivedCategory.homologyFunctor _ i).obj t.obj₁))\n    (h₃ : ∀ i : ℤ, IsLocallyConstantFiniteTypeModules T B\n      ((DerivedCategory.homologyFunctor _ i).obj t.obj₃)) :\n    ∀ i : ℤ, IsLocallyConstantFiniteTypeModules T B\n      ((DerivedCategory.homologyFunctor _ i).obj t.obj₂)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261018T091408-L-3257205",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261018T091408-L-3257205",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

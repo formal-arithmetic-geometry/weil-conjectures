@@ -1,0 +1,124 @@
+{
+ "kind": "statement",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-constant-coefficient-scalar-equivalence",
+   "place": "proof step 3: restricting finite local constant models",
+   "via": []
+  },
+  "same_as": []
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NilpotentReductionLissity",
+  "date": "2026-10-18",
+  "group": "N2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "mathlib_match": null,
+ "id": "lem-weil-pbc-constant-coefficient-lisse-restriction",
+ "title": "Surjective constant coefficient restriction preserves finite local models",
+ "statement": "On a small site with topology T [def-weil-pbc-sites-and-cohomology], let f:B to D be a surjective homomorphism of commutative rings. Let F be a sheaf of modules over the constant coefficient D-ring [def-weil-pbc-constant-coefficient-scalar-extension]. If F has local constant finite D-module descriptions [def-weil-pbc-locally-constant-finite-type-modules], its restriction of scalars along the constant-sheaf image of f has local constant finite B-module descriptions. Neither Noetherianity nor derived categories nor boundedness is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 094I: restriction of the coefficient filtration local models; elementary coefficient restriction consequence"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-constant-coefficient-scalar-extension",
+  "def-weil-pbc-locally-constant-finite-type-modules"
+ ],
+ "proof": [
+  {
+   "text": "Construct the comparison between sheafification of a restricted constant presheaf module and restriction of its module sheafification. The two coefficient sheafification units form a commuting square by naturality. The module sheafification adjunction constructs the comparison; forgetting to additive-group sheaves makes it the identity, and the forgetful functor reflects isomorphisms.",
+   "uses": [
+    "def-weil-pbc-constant-coefficient-scalar-extension"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Given a finite D-module M, view its scalar restriction N as a B-module. Since f is surjective, RingHom.Finite.of_surjective makes D finite over B. Give N its original D-action and the natural B-D scalar tower; Module.Finite.trans proves N finite over B.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the same covering sieve as for F. On each covering slice, scalar restriction commutes with slice restriction by the sectionwise definition. Apply restriction to the chosen trivialization, then compose with the constant-module comparison. The finite restricted module N is the required local model.",
+   "uses": [
+    "def-weil-pbc-locally-constant-finite-type-modules"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-coefficient-scalar-extension",
+  "def-weil-pbc-locally-constant-finite-type-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 094I, coefficient restriction in the induction argument; explicit sheafification and finite-module proof by N2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars along a surjective ring map preserves locally constant sheaves of finitely generated modules on an arbitrary site",
+   "results": "8 hits, including PresheafOfModules.restrictHomEquivOfIsLocallySurjective and condensed locally constant module functors. No theorem giving arbitrary-site finite local models after coefficient restriction.",
+   "date": "2026-10-18",
+   "verdict": "Use ordinary module finite-generation lemmas and the sheafification adjunction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Finite\", \"Surjective\", \"RingHom\"",
+   "results": "7 hits, including RingHom.Finite.of_surjective, RingHom.FiniteType.of_surjective and finite presentation results.",
+   "date": "2026-10-18",
+   "verdict": "Use RingHom.Finite.of_surjective and Module.Finite.trans for the module argument."
+  },
+  {
+   "tool": "grep",
+   "query": "locallyConstant.*restrictScalars|restrictScalars.*locallyConstant",
+   "results": "0 Mathlib hits.",
+   "date": "2026-10-18",
+   "verdict": "No complete local-model theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars along a surjective ring map preserves locally constant sheaves of finitely generated modules on an arbitrary site",
+   "results": "8 hits: PresheafOfModules.restrictScalarsObj, RestrictScalars, ModuleCat.RestrictScalars.obj', ModuleCat.restrictScalars, ModuleCat.preservesLimit_restrictScalars, PresheafOfModules.restrictScalars, SheafOfModules.restrictScalars, LinearMap.restrictScalarsₗ.",
+   "date": "2026-10-18",
+   "verdict": "No complete matching finite local-model theorem. Generic restriction, ring-equivalence and triangulated-closure tools are used where applicable in the written proof."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantCoefficientLisseRestriction",
+  "file": "lean/Sheaf/Paper/ConstantCoefficientLisseRestriction.lean",
+  "declaration": "SheafOfModules.locallyConstantFiniteTypeModules_restrictScalars_surjective",
+  "statement": "theorem locallyConstantFiniteTypeModules_restrictScalars_surjective\n    {C : Type u} [Category.{u} C] (T : GrothendieckTopology C)\n    {B D : Type u} [CommRing B] [CommRing D] (f : B →+* D)\n    (hf : Function.Surjective f)\n    (F : SheafOfModules.{u} (constantCoefficientRing T D))\n    (h : IsLocallyConstantFiniteTypeModules T D F) :\n    IsLocallyConstantFiniteTypeModules T B ((restrictScalars ((sheafCompose T\n      (forget₂ CommRingCat.{u} RingCat.{u})).map\n        ((constantSheaf T CommRingCat.{u}).map (CommRingCat.ofHom f)))).obj F)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261018T091408-L-3257205",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261018T091408-L-3257205",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

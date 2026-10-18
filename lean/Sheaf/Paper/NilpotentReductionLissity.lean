@@ -10,19 +10,10 @@ public import Sheaf.CategoryTheory.RingedSiteModules
 public import Mathlib.RingTheory.Ideal.Quotient.Defs
 public import Mathlib.RingTheory.Noetherian.Defs
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Sheaf.Paper.CohomologyInWeakSerreSubcategory
-import Sheaf.Algebra.Homology.KFlatResolution
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.Flat
-import Sheaf.Algebra.Homology.KFlat
-import Sheaf.Algebra.Homology.BoundedFlatReplacement
-import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-import Sheaf.CategoryTheory.FiniteTypeLocallyConstantSerre
-import Sheaf.Paper.LocallyConstantTensor
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Paper.NilpotentReductionStep
+import Sheaf.Paper.ConstantCoefficientScalarEquivalence
+import Mathlib.RingTheory.Ideal.Quotient.Operations
 
 /-! # Lissity propagates through powers of a coefficient ideal
 
@@ -85,6 +76,27 @@ theorem locallyConstantFiniteTypeModules_reduction_pow
     (∀ m : ℕ, 1 ≤ m → J ^ m = ⊥ →
       ∀ i : ℤ, IsLocallyConstantFiniteTypeModules T.toGrothendieck B
         ((DerivedCategory.homologyFunctor _ i).obj K)) := by
-  sorry
+  let lisseReduction (I : Ideal B) : Prop :=
+    ∀ i : ℤ, IsLocallyConstantFiniteTypeModules T.toGrothendieck (B ⧸ I)
+      ((DerivedCategory.homologyFunctor _ i).obj
+        ((constantCoefficientScalarExtension T.toGrothendieck (Ideal.Quotient.mk I)).obj K))
+  have hpow (m : ℕ) (hm : 1 ≤ m) : lisseReduction (J ^ m) := by
+    induction m, hm using Nat.le_induction with
+    | base =>
+        rw [pow_one]
+        exact hmod
+    | succ n hn ih =>
+        exact locallyConstantFiniteTypeModules_reduction_succ T B J K hbounded hmod n hn ih
+  refine ⟨hpow, ?_⟩
+  intro m hm hzero i
+  apply locallyConstantFiniteTypeModules_of_scalarExtension_bijective
+    T.toGrothendieck (Ideal.Quotient.mk (J ^ m)) ?_ K i (hpow m hm i)
+  constructor
+  · intro x y hxy
+    apply sub_eq_zero.mp
+    have hmem : x - y ∈ J ^ m := (Ideal.Quotient.eq_zero_iff_mem).mp (by
+      simpa only [map_sub, sub_eq_zero] using hxy)
+    simpa only [hzero, Ideal.mem_bot] using hmem
+  · exact Ideal.Quotient.mk_surjective
 
 end SheafOfModules

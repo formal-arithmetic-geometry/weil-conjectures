@@ -31,81 +31,28 @@
  ],
  "proof": [
   {
-   "text": "Let $\\mathscr L_B$ be the full subcategory of sheaves of $\\underline B$-modules locally isomorphic to constant sheaves of finitely generated $B$-modules. It contains zero and is invariant under isomorphism. By [lem-weil-pbc-locally-constant-derived-serre] it is closed under kernels, cokernels, and extensions. Apply [lem-sbc-cohomology-in-weak-serre-subcategory] to the abelian category [def-weil-sheaf-of-modules-category]: complexes with cohomology in $\\mathscr L_B$ form a full triangulated subcategory. Thus the two outer terms of a distinguished triangle belonging to it imply that the middle term belongs to it.",
+   "text": "Apply [lem-weil-pbc-nilpotent-reduction-step] by Nat.le_induction, starting with the given reduction modulo J and pow_one. Package the dependent quotient coefficient category as a predicate on ideals so the arbitrary derived-category instances are preserved by rewriting.",
    "uses": [
-    "lem-weil-pbc-locally-constant-derived-serre",
-    "lem-sbc-cohomology-in-weak-serre-subcategory",
-    "def-weil-sheaf-of-modules-category"
+    "lem-weil-pbc-nilpotent-reduction-step"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 094I, proof, paragraph beginning 'Recall that the locally constant sheaves'"
-   }
+   "elementary": false
   },
   {
-   "text": "Put $Q_n=J^n/J^{n+1}$. The quotient sequence $0\\to Q_n\\to B/J^{n+1}\\to B/J^n\\to0$ is exact. Constant presheaves preserve it objectwise, and [lem-weil-pbc-site-module-presheaf-sheafification-exact] makes its constant-sheaf sequence exact. Choose a K-flat resolution $P\\to K$ with flat terms using [lem-pc-kflat-resolution]. Flatness [def-pc-flat-sheaf-modules] makes $0\\to P\\otimes_B\\underline{Q_n}\\to P\\otimes_B\\underline{B/J^{n+1}}\\to P\\otimes_B\\underline{B/J^n}\\to0$ degreewise exact. Its cone identifies the usual short-exact-complex triangle (the kernel of the cone-to-quotient map is the contractible cone of the identity). Thus it gives the triangle in Tag 094I. For the scalar identification, $P\\otimes_B\\underline{B/J}$ is K-flat over $\\underline{B/J}$: tensoring it with an acyclic quotient-module complex gives $P\\otimes_B N$, acyclic by K-flatness [def-pc-kflat-complex]. Ordinary balancing then gives $(P\\otimes_B\\underline{B/J})\\otimes_{B/J}\\underline{Q_n}\\cong P\\otimes_B\\underline{Q_n}$, sending $(p\\otimes\\bar b)\\otimes q$ to $p\\otimes bq$, with inverse $p\\otimes q\\mapsto(p\\otimes1)\\otimes q$. These maps commute with differentials and restrictions, so compute the asserted derived identification by [lem-pur-derived-change-of-rings].",
+   "text": "If J^m is zero, the quotient map B to B/J^m is injective by Ideal.Quotient.eq_zero_iff_mem and is surjective by Ideal.Quotient.mk_surjective. Apply [lem-weil-pbc-constant-coefficient-scalar-equivalence] to the lisse cohomology supplied by the first part.",
    "uses": [
-    "lem-weil-pbc-site-module-presheaf-sheafification-exact",
-    "lem-pc-kflat-resolution",
-    "def-pc-flat-sheaf-modules",
-    "def-pc-kflat-complex",
-    "lem-pur-derived-change-of-rings",
-    "def-weil-abstract-derived-category"
+    "lem-weil-pbc-constant-coefficient-scalar-equivalence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 094I, proof, displayed distinguished triangles and isomorphisms"
-   }
-  },
-  {
-   "text": "The base case $n=1$ is the hypothesis. The quotient $B/J$ is Noetherian: lift an ideal to $B$ and project its finitely many generators. Also $J^n$ is a finitely generated ideal by [def-weil-pbc-noetherian-ring]; its generators project to generators of $Q_n$ over $B/J$, because $JQ_n=0$. Consequently $\\underline{Q_n}[0]$ is locally constant of finite type over $B/J$. The reduction $K\\otimes_B^L\\underline{B/J}$ is bounded above: first replace any representative by its good truncation at the upper bound $b$: replace the term in degree $b$ by the kernel of its outgoing differential and set all higher terms to zero. Since cohomology above $b$ is zero, the inclusion is a quasi-isomorphism. Apply [lem-pc-kflat-bounded-flat-replacement] and [lem-pc-bounded-above-flat-kflat-site] to obtain a K-flat flat representative with no terms above $b$; its tensor with a degree-zero coefficient module has no terms above $b$. Apply [lem-weil-pbc-locally-constant-tensor] over $B/J$ to obtain locally constant finite-type cohomology for the first triangle term of Step 2. Restricting these sheaves to $B$ preserves local constant finite-module descriptions. If the last triangle term has that property by induction, the triangulated closure from Step 1 [lem-sbc-cohomology-in-weak-serre-subcategory] implies it for the middle term. To recover its $B/J^{n+1}$-module local descriptions, choose finite generators $j_1,\\ldots,j_t$ of $J^{n+1}$. On any constant $B$-module trivialization $\\underline M$ the actions of these generators vanish as sheaf morphisms. Their module images therefore have zero constant sheaf; replace $M$ by $M/J^{n+1}M$, which has the same constant sheaf by exact sheafification [lem-weil-pbc-site-module-presheaf-sheafification-exact]. This quotient is a finite $B/J^{n+1}$-module and the isomorphism is quotient-linear. The induction proves every required reduction.",
-   "uses": [
-    "lem-weil-pbc-locally-constant-tensor",
-    "def-weil-pbc-noetherian-ring",
-    "lem-weil-pbc-site-module-presheaf-sheafification-exact",
-    "lem-pc-kflat-bounded-flat-replacement",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-sbc-cohomology-in-weak-serre-subcategory"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 094I, proof, final paragraph ('Combined with Lemma ... we obtain the result')"
-   }
-  },
-  {
-   "text": "If $J^m=0$, then $B/J^m=B$ and the canonical derived scalar-extension map identifies $K\\otimes_B^L\\underline{B/J^m}$ with $K$; hence the preceding conclusion applies directly to every cohomology sheaf of $K$. On a K-flat model $P$, this is the chain isomorphism $P\\otimes_B\\underline B\\to P$, $p\\otimes b\\mapsto bp$, with inverse $p\\mapsto p\\otimes1$.",
-   "uses": [
-    "lem-pur-derived-change-of-rings"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 094I, conclusion"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-locally-constant-derived-serre",
-  "lem-sbc-cohomology-in-weak-serre-subcategory",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-site-module-presheaf-sheafification-exact",
-  "lem-pc-kflat-resolution",
-  "def-pc-flat-sheaf-modules",
-  "def-pc-kflat-complex",
-  "lem-pur-derived-change-of-rings",
-  "def-weil-abstract-derived-category",
-  "lem-weil-pbc-locally-constant-tensor",
-  "def-weil-pbc-noetherian-ring",
-  "lem-pc-kflat-bounded-flat-replacement",
-  "lem-pc-bounded-above-flat-kflat-site"
+  "lem-weil-pbc-nilpotent-reduction-step",
+  "lem-weil-pbc-constant-coefficient-scalar-equivalence"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 094I, lemma-locally-constant-bounded; Tag 094H, lemma-locally-constant-tensor-product"
+  "place": "Tag 094I: explicit successor induction followed by the proved bijective coefficient-change specialization"
  },
  "mathlib_searches": [
   {
@@ -231,5 +178,15 @@
   "by": "NK",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261018T091408-L-3257205",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

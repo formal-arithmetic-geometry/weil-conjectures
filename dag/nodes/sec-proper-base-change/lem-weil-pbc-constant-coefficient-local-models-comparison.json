@@ -1,0 +1,132 @@
+{
+ "kind": "statement",
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NilpotentReductionLissity",
+  "date": "2026-10-18",
+  "group": "N2"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "mathlib_match": null,
+ "id": "lem-weil-pbc-constant-coefficient-local-models-comparison",
+ "title": "Comparison of constant-ring coefficient local models",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-nilpotent-reduction-step",
+   "place": "proof step 1: use the Serre class with the reduction coefficient convention",
+   "via": []
+  },
+  "same_as": []
+ },
+ "statement": "On a small site T [def-weil-pbc-sites-and-cohomology], let B be a commutative ring. There is an isomorphism e from the ring underlying the constant commutative-ring sheaf [def-weil-pbc-constant-coefficient-scalar-extension] to the constant ring sheaf, intertwining the two constant-presheaf sheafification units [def-weil-pbc-sheafification]. For every module sheaf F over the first ring, local constant finite-module descriptions [def-weil-pbc-locally-constant-finite-type-modules] hold for F if and only if the old constant-ring descriptions [def-weil-pbc-finite-type-locally-constant-module-sheaf] hold after restricting along e inverse. The unit compatibility determines the isomorphism uniquely; the proof constructs it by the canonical constant-sheaf comparison.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 094I, first proof paragraph; compare sites-modules.tex, lemma-kernel-finite-locally-constant, Tag 093U (3)"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-constant-coefficient-scalar-extension",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-locally-constant-finite-type-modules",
+  "def-weil-pbc-finite-type-locally-constant-module-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Forgetting commutativity preserves locally injective and locally surjective maps because underlying functions are unchanged. The characterization of sheafification equivalences by local bijectivity therefore shows that it preserves sheafification. Mathlib constantCommuteCompose gives the canonical ring-sheaf isomorphism, and its formula together with sheafComposeIso_inv_fac and naturality of toSheafify gives the compatibility with units. The isomorphism is explicitly constructed, not selected from an unproved existence statement.",
+   "uses": [
+    "def-weil-pbc-constant-coefficient-scalar-extension",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For an abstract ring isomorphism satisfying this unit compatibility, the module-sheafification adjunction constructs the comparison between the old constant module sheaf and inverse scalar restriction of the new one. On associated additive-group sheaves it is the identity, so it is an isomorphism.",
+   "uses": [
+    "def-weil-pbc-constant-coefficient-scalar-extension"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Scalar restriction commutes with slices. In one direction restrict each local constant trivialization and apply the constant-module comparison. In the other, apply scalar restriction along the inverse map and use the explicit cancellation isomorphisms, built sectionwise from ordinary module restriction. The same finite B-module is used in either direction.",
+   "uses": [
+    "def-weil-pbc-locally-constant-finite-type-modules",
+    "def-weil-pbc-finite-type-locally-constant-module-sheaf"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-coefficient-scalar-extension",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-locally-constant-finite-type-modules",
+  "def-weil-pbc-finite-type-locally-constant-module-sheaf"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 094I; explicit constant-ring comparison and triangulated closure by N2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Finite locally constant sheaves of modules over a constant commutative ring sheaf agree with module sheaves over the constant ring sheaf forgetting commutativity",
+   "results": "8 results about condensed locally constant module functors, with no comparison of these two ringed-site module encodings.",
+   "date": "2026-10-18",
+   "verdict": "No complete comparison statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantCommuteCompose\"",
+   "results": "CategoryTheory.constantCommuteCompose and CategoryTheory.constantCommuteCompose_hom_app_hom.",
+   "date": "2026-10-18",
+   "verdict": "Use these for the ring isomorphism and its unit compatibility; prove the module comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "constantCommuteCompose|constant.*[Mm]odule.*[Ii]so",
+   "results": "5 Mathlib hits about constantCommuteCompose and its counit formula.",
+   "date": "2026-10-18",
+   "verdict": "No full finite local-model comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite locally constant sheaves of modules over a constant commutative ring sheaf agree with module sheaves over the constant ring sheaf forgetting commutativity",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules, SheafOfModules.IsFiniteType.mk, CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule, CompHausLike.LocallyConstantModule.functor_obj_val, SheafOfModules.IsFiniteType, SheafOfModules.IsFinitePresentation.mk, SheafOfModules.instFaithfulSheafAddCommGrpCatToSheaf, SheafOfModules.mk.",
+   "date": "2026-10-18",
+   "verdict": "No complete matching finite local-model theorem. Generic restriction, ring-equivalence and triangulated-closure tools are used where applicable in the written proof."
+  }
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ConstantCoefficientLocalModelsComparison",
+  "file": "lean/Sheaf/Paper/ConstantCoefficientLocalModelsComparison.lean",
+  "declaration": "SheafOfModules.exists_constantCoefficientRing_localModels_comparison",
+  "statement": "theorem exists_constantCoefficientRing_localModels_comparison\n    {C : Type u} [Category.{u} C] (T : GrothendieckTopology C)\n    (B : Type u) [CommRing B] :\n    ∃ e : constantCoefficientRing T B ≅ (constantSheaf T RingCat.{u}).obj (RingCat.of B),\n      (constantCoefficientUnit T B ≫ e.hom.hom =\n        toSheafify T ((Functor.const Cᵒᵖ).obj (RingCat.of B))) ∧\n      ∀ F : SheafOfModules.{u} (constantCoefficientRing T B),\n        IsLocallyConstantFiniteTypeModules T B F ↔\n          IsFiniteTypeLocallyConstant T B ((restrictScalars e.inv).obj F)",
+  "branch": "sheaf-dag",
+  "by": "N2",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261018T091408-L-3257205",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261018T091408-L-3257205",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
