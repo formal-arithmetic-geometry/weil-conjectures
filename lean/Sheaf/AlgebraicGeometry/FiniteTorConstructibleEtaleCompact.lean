@@ -11,6 +11,7 @@ public import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
 public import Sheaf.CategoryTheory.CompactObject
 
 import Sheaf.AlgebraicGeometry.FiniteRingEtaleCompactGenerators
+import Mathlib.Algebra.CharP.CharAndCard
 
 /-!
 # Compactness of finite-Tor constructible étale complexes
@@ -61,6 +62,19 @@ theorem finiteTorConstructible_etale_compact
         DerivedCategory.isBoundedConstructible A X C →
         (∃ a b : ℤ, a ≤ b ∧ DerivedCategory.hasTorAmplitudeIn A X a b C) →
         @IsCompactObject (DerivedCategoryModule A X) _ _ hcoprod C := by
-  sorry
+  classical
+  let : Fintype D.k₀ := Fintype.ofFinite D.k₀
+  let : Fact D.p.Prime := ⟨D.prime⟩
+  have hcard : Fintype.card D.k₀ = D.p ^ D.a := by
+    simpa only [Nat.card_eq_fintype_card] using D.card_base.trans D.cardinality_eq
+  let : CharP D.k₀ D.p := charP_of_card_eq_prime_pow hcard
+  let : CharP D.k D.p := charP_of_injective_algebraMap' D.k₀ D.p
+  let : IsAlgClosed D.k := IsAlgClosure.isAlgClosed D.k₀
+  have hunit : IsUnit (ℓ : D.k) := by
+    apply isUnit_iff_ne_zero.mpr
+    exact CharP.cast_ne_zero_of_ne_of_prime D.k hℓprime hℓne.symm
+  obtain ⟨hcoprod, _, hcompact, _⟩ :=
+    finiteRing_compactGenerators ℓ hℓprime hunit (X ↘ Spec (CommRingCat.of D.k)) hA
+  exact ⟨hcoprod, fun C hC hTor ↦ hcompact C ⟨hC, hTor⟩⟩
 
 end AlgebraicGeometry.Etale
