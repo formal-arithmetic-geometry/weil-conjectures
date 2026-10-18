@@ -91,6 +91,7 @@ both endpoints K-flat. No preservation of coproducts by `F` is needed. -/
 theorem preservesTotalTensorKFlatQuasiIso_of_exact (F : C ⥤ D) [F.Additive]
     [PreservesFiniteLimits F] [PreservesFiniteColimits F] :
     F.PreservesTotalTensorKFlatQuasiIso := by
-  sorry
+  refine ⟨fun _ _ s _ ↦ ?_⟩
+  exact HomologicalComplex.quasiIso_map_of_preservesHomology s F
 
 end CategoryTheory.Functor
