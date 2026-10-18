@@ -9,6 +9,8 @@ public import Sheaf.Paper.PointFdComplexes
 public import Mathlib.Algebra.Category.ModuleCat.Descent
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import Mathlib.CategoryTheory.Adjunction.Additive
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Mathlib.RingTheory.TensorProduct.Finite
 
 /-! # Scalar extension on finite-dimensional coefficient complexes
 
@@ -67,7 +69,19 @@ the same finite support works. -/
 theorem fieldDerivedScalarExtension_preserves (f : K →+* L)
     (C : DerivedCategory (ModuleCat.{u} K)) (hC : pointFiniteDimensional K C) :
     pointFiniteDimensional L ((fieldDerivedScalarExtension f).obj C) := by
-  sorry
+  rcases hC with ⟨⟨s, hs⟩, hfd⟩
+  let F := ModuleCat.extendScalars f
+  have e (i : ℤ) := (F.mapDerivedCategoryHomologyFunctorIso i).app C
+  constructor
+  · refine ⟨s, fun i hi ↦ ?_⟩
+    exact (F.map_isZero (hs i hi)).of_iso (e i).symm
+  · intro i
+    have : Module.Finite K ((homologyFunctor (ModuleCat.{u} K) i).obj C) := hfd i
+    let := f.toAlgebra
+    have hfin : Module.Finite L
+        (F.obj ((homologyFunctor (ModuleCat.{u} K) i).obj C)) :=
+      Module.Finite.base_change K L _
+    exact (Module.Finite.equiv_iff (e i).toLinearEquiv).mp hfin
 
 /-- The transition functor on the specified full subcategories, with actual derived
 scalar extension as its underlying functor.
