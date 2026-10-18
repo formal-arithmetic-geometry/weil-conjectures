@@ -15,6 +15,8 @@ public import Mathlib.Algebra.Homology.BifunctorShift
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 public import Mathlib.CategoryTheory.Adjunction.Limits
 import Sheaf.Paper.RingedTopoiTensorComparisonConstruction
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackUnitExistence
+import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackUnitUnique
 import Mathlib.CategoryTheory.Limits.Types.Products
 import Mathlib.CategoryTheory.Adjunction.FullyFaithful
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
@@ -579,7 +581,11 @@ theorem canonicalRingedTensorComparison_unit
       R))).hom ≫
           (monoidalCategory S).tensorHom (𝟙 (L.obj M)) j.hom ≫
             ((monoidalCategory S).rightUnitor (L.obj M)).hom =
-          L.map (((monoidalCategory R).rightUnitor M).hom) := sorry
+          L.map (((monoidalCategory R).rightUnitor M).hom) := by
+  obtain ⟨j, hj⟩ := canonicalRingedTensorComparison_unit_exists R S RI uInv I c L hobj hmap k
+  refine ⟨j, hj, ?_⟩
+  intro y hy
+  exact canonicalRingedTensorComparison_unit_unique R S RI uInv I c L hobj hmap k y j hy hj
 
 /-- Chain-level representative of the canonical comparison.
 Source: Stacks 07A4 (blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback). -/
@@ -638,6 +644,7 @@ attribute [local irreducible] CanonicalRingedTensorComparison.totalIso monoidalC
 set_option synthInstance.maxSize 2048 in
 set_option maxHeartbeats 800000 in
 -- Elaborate the full two-variable representative square.
+set_option linter.style.longLine false in
 /-- Canonical derived comparison, uniquely characterized on K-flat flat-term representatives.
 Source: Stacks 07A4 and 0G7E
 (blueprint: lem-weil-pbc-ringed-topoi-derived-tensor-pullback).
@@ -720,7 +727,8 @@ theorem ringedTopoiCanonicalDerivedTensorPullback
     (∀ P : CochainComplex (SheafOfModules.{u} ((sheafCompose JC (forget₂ CommRingCat.{u}
       RingCat.{u})).obj R)) ℤ,
       P.IsAcyclicTensorKFlat → (∀ n : ℤ, (P.X n).IsFlat) →
-        CochainComplex.IsAcyclicTensorKFlat ((uStar.mapHomologicalComplex (ComplexShape.up ℤ)).obj P) ∧
+        CochainComplex.IsAcyclicTensorKFlat
+          ((uStar.mapHomologicalComplex (ComplexShape.up ℤ)).obj P) ∧
           ∀ n : ℤ,
             (((uStar.mapHomologicalComplex (ComplexShape.up ℤ)).obj P).X n).IsFlat) ∧
     ∃! alpha : TR ⋙ LF ≅ (LF.prod LF) ⋙ TS,
