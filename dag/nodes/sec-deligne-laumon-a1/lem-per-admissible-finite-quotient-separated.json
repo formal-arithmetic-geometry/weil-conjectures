@@ -13,11 +13,58 @@
   "def-weil-proper-morphism",
   "def-weil-finite-type-morphism",
   "def-weil-finite-integral-morphism",
-  "def-per-admissible-finite-scheme-quotient"
+  "def-per-admissible-finite-scheme-quotient",
+  "def-weil-surjective-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $p:M\\to S$ for the given structure morphism and $h:Q\\to S$ for the induced structure morphism; thus $h\\circ q=p$. By the quotient hypothesis [def-per-admissible-finite-scheme-quotient], $q$ is finite. Its underlying map is a topological quotient map and in particular surjective; this is precisely surjectivity of a scheme morphism [def-weil-surjective-morphism]. Consequently $q$ is a surjective morphism over $S$.",
+   "uses": [
+    "def-per-admissible-finite-scheme-quotient",
+    "def-weil-surjective-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose IX 1.4, printed pp.132--133: finite admissible quotients; structure maps to the original base."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-finite-proper] to the finite morphism $q:M\\to Q$. It follows that $q$ is proper. By the definition of proper [def-weil-proper-morphism], $q$ is universally closed. This application needs no hypothesis that $Q$ or $M$ is proper over $S$.",
+   "uses": [
+    "lem-weil-pbc-finite-proper",
+    "def-weil-proper-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Stacks Tag 01WN, lemma-finite-proper: finite implies affine and proper; Tag 01W1, definition-proper."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-surjective-universally-closed-separated] with its $X=M$, $Y=Q$, $f=q$, and its two structure morphisms $p$ and $h$. The relation $h\\circ q=p$ and surjectivity were checked in Step 1, universal closedness in Step 2, and $p$ is separated by hypothesis. The cited result therefore makes $h:Q\\to S$ separated, as required. Its hypotheses make no reference to freeness of the action or invertibility of $|G|$, so neither is required.",
+   "uses": [
+    "lem-weil-pbc-surjective-universally-closed-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Stacks Tag 09MQ, lemma-image-universally-closed-separated, part (4), applied to the finite quotient of ILO IX 1.4 (printed pp.132--133)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-per-admissible-finite-scheme-quotient",
+  "def-weil-surjective-morphism",
+  "lem-weil-pbc-finite-proper",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-surjective-universally-closed-separated"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/morphisms.tex",
+  "place": "Stacks Tag 09MQ, lemma-image-universally-closed-separated (4), with universal closedness supplied by Tag 01WN, lemma-finite-proper; application to the admissible quotient in ILO IX 1.4."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,10 +93,52 @@
    "results": "[grep] OK 0 hit(s)",
    "date": "2026-10-19",
    "verdict": "no match: inspected the returned types; they concern base-change permanence, ordinary normalization, or separated morphisms, not this assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "IsSeparated.*[Ss]urjective|[Ss]urjective.*IsSeparated|of_comp.*[Ss]eparated|image.*[Ss]eparated",
+   "results": "18 hits: Mathlib/AlgebraicGeometry/Normalization.lean; Mathlib/AlgebraicGeometry/Normalization.lean; Mathlib/AlgebraicGeometry/Normalization.lean; Mathlib/AlgebraicGeometry/Morphisms/Proper.lean; Mathlib/AlgebraicGeometry/Morphisms/Proper.lean; Mathlib/AlgebraicGeometry/Morphisms/Proper.lean; Mathlib/AlgebraicGeometry/Morphisms/Proper.lean; Mathlib/AlgebraicGeometry/Morphisms/Integral.lean",
+   "date": "2026-10-19",
+   "verdict": "no match: returned declarations concern separatedness of the source/first factor, finite first factors, universal closedness, or stability under base change; none proves separatedness of the target of a finite surjection. The two semantic phrasings were both inspected."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The target of a surjective universally closed morphism from a separated scheme over S is separated over S",
+   "results": "8 hits: AlgebraicGeometry.UniversallyClosed.of_comp_surjective; AlgebraicGeometry.Surjective.of_universallyClosed_of_isDominant; AlgebraicGeometry.UniversallyClosed.of_comp_of_isSeparated; AlgebraicGeometry.universallyClosed_isStableUnderBaseChange; AlgebraicGeometry.isProper_eq; AlgebraicGeometry.surjective_of_isDominant_of_isClosed_range; AlgebraicGeometry.UniversallyClosed; AlgebraicGeometry.UniversallyClosed.mk",
+   "date": "2026-10-19",
+   "verdict": "no match: returned declarations concern separatedness of the source/first factor, finite first factors, universal closedness, or stability under base change; none proves separatedness of the target of a finite surjection. The two semantic phrasings were both inspected."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsSeparated, AlgebraicGeometry.IsFinite",
+   "results": "4 hits: AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated; AlgebraicGeometry.IsFinite.of_comp; AlgebraicGeometry.exists_finite_imageι_comp_morphismRestrict_of_finite_image_preimage; AlgebraicGeometry.exists_etale_isCompl_of_quasiFiniteAt",
+   "date": "2026-10-19",
+   "verdict": "no match: returned declarations concern separatedness of the source/first factor, finite first factors, universal closedness, or stability under base change; none proves separatedness of the target of a finite surjection. The two semantic phrasings were both inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite surjective morphism X to Y over S with X separated over S implies Y is separated over S",
+   "results": "8 hits: AlgebraicGeometry.IsFinite.instHasOfPostcompPropertySchemeIsSeparated; AlgebraicGeometry.IsProper.toIsSeparated; AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty; AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated; AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated; AlgebraicGeometry.IsFinite.of_comp; AlgebraicGeometry.IsSeparated.isStableUnderBaseChange; AlgebraicGeometry.IsSeparated.instIsMultiplicativeScheme",
+   "date": "2026-10-19",
+   "verdict": "no match: returned declarations concern separatedness of the source/first factor, finite first factors, universal closedness, or stability under base change; none proves separatedness of the target of a finite surjection. The two semantic phrasings were both inspected."
+  },
+  {
+   "tool": "grep",
+   "query": "09MQ|[Ss]eparated.*[Uu]niversallyClosed|[Uu]niversallyClosed.*[Ss]eparated",
+   "results": "5 hits: Mathlib/AlgebraicGeometry/Morphisms/Proper.lean; Mathlib/AlgebraicGeometry/Morphisms/Proper.lean; Mathlib/AlgebraicGeometry/Morphisms/Proper.lean; Mathlib/AlgebraicGeometry/Morphisms/Proper.lean; Mathlib/AlgebraicGeometry/Morphisms/Proper.lean",
+   "date": "2026-10-19",
+   "verdict": "no match: returned declarations concern separatedness of the source/first factor, finite first factors, universal closedness, or stability under base change; none proves separatedness of the target of a finite surjection. The two semantic phrasings were both inspected."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Separatedness of schemes descends along a surjective universally closed morphism Stacks 09MQ",
+   "results": "8 hits: AlgebraicGeometry.instHasOfPostcompPropertySchemeUniversallyClosedIsSeparated; AlgebraicGeometry.instHasOfPostcompPropertySchemeIsSeparatedTopMorphismProperty; AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated; AlgebraicGeometry.IsProper.toIsSeparated; AlgebraicGeometry.instHasOfPostcompPropertySchemeIsProperIsSeparated; AlgebraicGeometry.UniversallyClosed.of_comp_of_isSeparated; AlgebraicGeometry.IsSeparated.of_comp; AlgebraicGeometry.instHasOfPostcompPropertySchemeIsClosedImmersionIsSeparated",
+   "date": "2026-10-19",
+   "verdict": "no match: returned declarations concern separatedness of the source/first factor, finite first factors, universal closedness, or stability under base change; none proves separatedness of the target of a finite surjection. The two semantic phrasings were both inspected."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-equivariant-marked-nodal-alteration",
@@ -76,5 +165,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-admissible-finite-quotient-separated",
+  "worker": "stage1",
+  "summary": "Preserved the statement. A finite quotient is proper, hence universally closed, and the existing general surjective-universally-closed separated-image theorem applies. All facts already have DAG nodes, so no new node is created. Added the surjectivity definition to statement dependencies and recorded fresh Mathlib searches with two semantic phrasings.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve, Step 3 finiteness/duality input: the IX 1.1 uniformization branch, realized through IX 1.4 admissible quotients in lem-per-equivariant-marked-nodal-alteration, needs separated quotient schemes. Steps 1--3 supply exactly that property and retain the ancestor/from/via route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-surjective-universally-closed-separated",
+    "why": "General scheme-theoretic separated-image lemma (Stacks 09MQ(4)), applied to the finite quotient in ILO IX 1.4. This is a tool within the existing uniformization branch, not a replacement of a unit step; the perverse-curve unit has no separate general separated-image lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-surjective-universally-closed-separated"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-aef893515",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-aef893515 (reviewer sub-agent of L); spot-checked: The statement is unchanged: it is byte-identical to the item as created unsplit in the Q136 snapshots. The only stmt_deps change adds def-weil-surjective-morphism, which the statement's 'finite surjective' needs. No new nodes. Step 1 unpacks def-per-admissible-finite-scheme-quotient: q is finite, and a topological quotient map is surjective, so q is surjective with h∘q=p. Step 2 cites the Mathlib leaf lem-weil-pbc-finite-proper (IsProper.instOfIsFinite, Proper.lean:69), so q is proper and therefore universally closed. Step 3 applies lem-weil-pbc-surjective-universally-closed-separated with X=M, Y=Q, f=q; its statement matches Stacks 09MQ(4) (morphisms.tex l.10114-10158), and every hypothesis is supplied. ILO IX 1.4 (printed pp.132-133) was read: it gives the admissible quotients, and the item makes their implicit separatedness explicit. No SGA is used. Small cases checked: empty M, trivial G, a swap of two copies of S, and a non-free Z/p action in characteristic p; the line with doubled origin shows the separatedness hypothesis is needed. No duplicate: projective-finite-group-quotient, admissible-quotient-affine-integral-charts, tame-admissible-scheme-quotient, free-finite-group-affine-quotient and the trf/a1 quotient nodes were read, and none states this. No cycle. I accept the declared tool_use: the 09MQ node was reviewed with a pass (L, 2026-10-10), is closed in slopmaster2 Lean without sorry, and is a generic black box. The citer lem-per-equivariant-marked-nodal-alteration step 14 uses exactly the conclusion. Advisory only: the existence of the induced morphism Q→S is presupposed by the statement's wording; it follows in a few lines from the quotient definition."
  }
 }
