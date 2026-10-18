@@ -1,0 +1,113 @@
+{
+ "id": "def-sp-proper-open-calculus",
+ "kind": "definition",
+ "title": "Coherent proper/open interchange data on a category of schemes",
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "statement": "Let $A$ be a collection of schemes [def-pc-scheme]. A proper/open calculus on $A$ consists of a category $D_X$ for each $X$ in $A$, functors $P_p:D_X\\to D_Y$ for proper maps [def-weil-proper-morphism] $p:X\\to Y$ between its schemes, and functors $J_j:D_U\\to D_X$ for quasi-compact open immersions [def-weil-open-immersion] (the open immersions among finite-type arrows) $j:U\\to X$. It has identity isomorphisms $P_{id_X}\\simeq id$ and $J_{id_X}\\simeq id$, and natural composition isomorphisms $P_qP_p\\simeq P_{qp}$ and $J_kJ_j\\simeq J_{kj}$ satisfying the associative and left and right unit equations. For every commutative square $pk=ir$ with quasi-compact open horizontal maps $k,i$ and proper vertical maps $r,p$, it specifies a natural isomorphism $\\gamma_Q:J_iP_r\\simeq P_pJ_k$. The vertical paste is $(P_{p_2}\\gamma_{Q_1})(\\gamma_{Q_2}P_{r_1})$ and the horizontal paste is $(\\gamma_{Q_2}J_k)(J_j\\gamma_{Q_1})$, with the proper/open compositors inserted. If both vertical, respectively both horizontal, arrows are identities, gamma is the identity after those identity identifications.\n\nFor a compactification $c=(j,p)$, put $H_c=P_pJ_j$. For a refinement $v:d\\to c$, its comparison $\\rho_v:H_c\\simeq H_d$ inserts the proper identity isomorphism, applies gamma to $v j_d=j_c id_X$, then applies the proper compositor. For a common refinement $d\\to c_1,c_2$, the comparison $H_{c_2}\\simeq H_{c_1}$ is $\\rho_{v_1}^{-1}\\rho_{v_2}$. For a compatible binary tower as in [lem-cbc-compactifiable-compatible-tower], its composition isomorphism is the displayed proper/open gamma whiskered by the outside proper/open functors and followed by the open/proper compositors. A tower refinement is a triple of refinements of its compactifications of $f,g,gf$, commuting with both tower arrows, with no additional cartesianness assumption. The identity identification of $H_{(id_X,id_X)}$ uses the two identity isomorphisms.\n\nThe geometric-existence predicate on $A$ means: for every separated finite-type map [def-weil-finite-type-morphism] between its schemes, the compactifications with ambient scheme in $A$ are nonempty and cofiltered, meaning common refinements and equalizing refinements as in [lem-cbc-compactifiable-cofiltered]; given compactifications of $g$ and $gf$, compatible binary towers over the prescribed compactification of $g$, refining the one of $gf$, exist; any two binary towers in $A$ have a common refining tower; and three composable such maps have a compatible three-map staircase with all six ambient schemes in $A$. The binary cartesian squares and the three-map staircase squares are fibre-product squares [def-pc-fibre-product]. These are geometric hypotheses, not axioms asserting any coherence conclusion about rho or tower composition.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-proper-morphism",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "lem-cbc-compactifiable-compatible-tower",
+  "lem-cbc-compactifiable-cofiltered",
+  "def-pc-fibre-product"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tags 0F7C/0F7D (vertical/horizontal gamma pasting), 0F7J (refinement and binary-tower formulas), 0F7K (three-map staircase); abstract P,J,gamma hypotheses of lem-sp-compactification-refinement-coherence."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "proper open covariant functors coherent interchange compactification calculus",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"topToCompHaus\", \"module\": \"Mathlib.Topology.Category.CompHaus.Basic\", \"type\": \": TopCat.{u} ⥤ CompHaus.{u}\", \"doc\": \"The functor from the category of topological spaces to the category of compact Hausdorff spaces, which assigns to each space its Stone-Čech compactification and to each continuous map the induced cont\"}\n  {\"name\": \"CategoryTheory.coherentTopology.coverPreserving\", \"module\": \"Mathlib.CategoryTheory.Sites.Coherent.SheafComparison\", \"type\": \":\\n  haveI := F.reflects_precoherent\\n  CoverPreserving (coherentTopology _) (coherentTopology _) F\", \"doc\": \"If a functor $ F : C \\\\to D $ is faithful and reflects finite families of effective epimorphisms between precoherent categories, then $ F $ preserves the coherent Grothendieck topologies on $ C $ and $\"}\n  {\"name\": \"CompactlyCoherentSpace.isOpen_iff_forall_compactSpace\", \"module\": \"Mathlib.Topology.Compactness.CompactlyCoherentSpace\", \"type\": \"[CompactlyCoherentSpace X] (s : Set X) :\\n  IsOpen s ↔ ∀ (K : Type u) [TopologicalSpace K] [CompactSpace K], ∀ (f : K → X), Continuous f → IsOpen (f ⁻¹' s)\", \"doc\": \"In a compactly coherent space $X$, a subset $S$ is open if and only if for every compact space $K$ and every continuous function $f : K \\to X$, the preimage $f^{-1}(S)$ is open in $K$.\"}\n  {\"name\": \"to_compactlyCoherentSpace\", \"module\": \"Mathlib.Topology.Compactness.CompactlyGeneratedSpace\", \"type\": \"[CompactlyGeneratedSpace X] : CompactlyCoherentSpace X\", \"doc\": \"Every compactly generated topological space is compactly coherent. That is, for a compactly generated space $X$, a subset $S \\\\subseteq X$ is open if and only if $S \\\\cap K$ is open in $K$ for every com\"}\n  {\"name\": \"IsOpenMap.functorNhds_obj_coe\", \"module\": \"Mathlib.Topology.Category.TopCat.OpenNhds\", \"type\": \"∀ {X Y : TopCat} {f : X ⟶ Y} (h : IsOpenMap ⇑(CategoryTheory.ConcreteCategory.hom f)) (x : ↑X)\\n  (U : TopologicalSpace.OpenNhds x), ↑((h.functorNhds x).obj U) = h.functor.obj ↑U\", \"doc\": \"Let $f: X \\\\to Y$ be a continuous open map between topological spaces, and let $x \\\\in X$. The map $f$ induces a functor $F_{nhds}$ from the category of open neighborhoods of $x$ to the category of open\"}\n  {\"name\": \"CompHausLike.LocallyConstant.functor\", \"module\": \"Mathlib.Condensed.Discrete.LocallyConstant\", \"type\": \":\\n  haveI := CompHausLike.preregular hs\\n  Type (max u w) ⥤ Sheaf (coherentTopology (CompHausLike.{u} P)) (Type (max u w))\", \"doc\": \"For each type $X$, this functor constructs a sheaf on the opposite category of compact Hausdorff-like spaces $\\\\mathbf{CompHausLike}_P^\\\\text{op}$ with values in $\\\\mathrm{Type}$. The sheaf assigns to ea\"}\n  {\"name\": \"CompactlyCoherentSpace.isCoherentWith\", \"module\": \"Mathlib.Topology.Compactness.CompactlyCoherentSpace\", \"type\": \"∀ {X : Type u_1} {inst : TopologicalSpace X} [self : CompactlyCoherentSpace X],\\n  Topology.IsCoherentWith {K | IsCompact K}\", \"doc\": \"In a compactly coherent topological space $X$, the topology is coherent with the family of compact subsets of $X$. This means that a subset of $X$ is open if and only if its intersection with every co\"}\n  {\"name\": \"LightProfinite.hasSheafify_type\", \"module\": \"Mathlib.Condensed.Light.Instances\", \"type\": \": HasSheafify (coherentTopology LightProfinite.{u}) (Type u)\", \"doc\": \"The category of compact Hausdorff, totally disconnected, second-countable topological spaces (light profinite spaces) equipped with the coherent Grothendieck topology admits a sheafification functor t\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no exact match: the existing formalism requires pullback adjunctions and cartesian refinements; coefficient-specific variants do not cover arbitrary P,J,gamma."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent proper and open functor interchange yields compactification refinement independence and associative composition",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"lightProfiniteToLightCondSetIsoTopCatToLightCondSet\", \"module\": \"Mathlib/Condensed/Light/Functors\", \"type\": \"lightProfiniteToLightCondSet ≅ LightProfinite.toTopCat.comp topCatToLightCondSet\", \"doc\": \"The natural isomorphism establishing that the Yoneda embedding from light profinite spaces to light condensed sets is naturally isomorphic to the composition of the canonical inclusion functor from li\"}\n  {\"name\": \"LightCondensed.lanLightCondSet\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"Type u → LightCondSet\", \"doc\": \"For each type $X$, this constructs a sheaf in the category of light condensed sets by taking the pointwise left Kan extension of the locally constant function presheaf $\\\\mathrm{LocallyConstant}(-, X)$\"}\n  {\"name\": \"Condensed.lanCondensedSet\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"Type (u + 1) → CondensedSet\", \"doc\": \"For a type $X$, this constructs the condensed set obtained by applying the equivalence functor between sheaves on profinite spaces and condensed sets to the sheaf defined as the left Kan extension of \"}\n  {\"name\": \"TopologicalSpace.Opens.mapComp\", \"module\": \"Mathlib/Topology/Category/TopCat/Opens\", \"type\": \"{X Y Z : TopCat} →\\n  (f : X ⟶ Y) →\\n    (g : Y ⟶ Z) →\\n      TopologicalSpace.Opens.map (CategoryTheory.CategoryStruct.comp f g) ≅\\n        (TopologicalSpace.Opens.map g).comp (TopologicalSpace.Opens.map f)\", \"doc\": \"For continuous maps `f : X → Y` and `g : Y → Z`, this provides the natural isomorphism `map(g ∘ f) ≅ (map f) ∘ (map g)`. This identity shows that the `Opens.map` construction, which sends a continuous\"}\n  {\"name\": \"CompHausLike.LocallyConstant.adjunction_left_triangle\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"∀ (P : TopCat → Prop) [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)]\\n  [inst_1 : CompHausLike.HasProp P PUnit.{u + 1}] [inst_2 : CompHausLike.HasExplicitFiniteCoproducts P]\\n  [inst_3 : CompHausLike.HasExplicitPullbacks P]\\n  (hs :\\n    ∀ ⦃X Y : CompHausLike P\", \"doc\": \"The composition of the unit natural transformation followed by the counit natural transformation equals the identity morphism on the locally constant sheaf functor, i.e., $\\\\text{functorToPresheaves.ma\"}\n  {\"name\": \"Condensed.lanPresheaf\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"CategoryTheory.Functor Profiniteᵒᵖ (Type (u + 1)) → CategoryTheory.Functor Profiniteᵒᵖ (Type (u + 1))\", \"doc\": \"For a presheaf $ F : \\text{Profinite}^\\text{op} \\to \\text{Type} $, this construction defines a new presheaf on $ \\text{Profinite}^\\text{op} $ by taking the pointwise left Kan extension of $ F $ along the op\"}\n  {\"name\": \"CompHausLike.LocallyConstant.sigmaComparison_comp_sigmaIso\", \"module\": \"Mathlib/Condensed/Discrete/LocallyConstant\", \"type\": \"∀ {P : TopCat → Prop} [inst : ∀ (S : CompHausLike P) (p : ↑S.toTop → Prop), CompHausLike.HasProp P (Subtype p)]\\n  {Q : CompHausLike P} {Z : Type (max u w)} (r : LocallyConstant (↑Q.toTop) Z) (a : Function.Fiber ⇑r)\\n  [inst_1 : CompHausLike.HasExplicitFiniteCoproducts P]\\n  (X : CategoryTheory.Functor\", \"doc\": \"For a locally constant function $ r: Q \\to Z $ on a compact Hausdorff space $ Q $ with explicit finite coproducts, the composition of the morphism induced by the sigma isomorphism (relating the fiber s\"}\n  {\"name\": \"LightCondensed.lanPresheaf\", \"module\": \"Mathlib/Condensed/Discrete/Colimit\", \"type\": \"CategoryTheory.Functor LightProfiniteᵒᵖ (Type u) → CategoryTheory.Functor LightProfiniteᵒᵖ (Type u)\", \"doc\": \"The presheaf constructed by taking the pointwise left Kan extension of a functor $ F : \\\\text{LightProfinite}^{\\\\text{op}} \\\\to \\\\text{Type}\\\\, u $ along the opposite functor $ \\\\text{FintypeCat.toLightProf\"}\n",
+   "date": "2026-10-18",
+   "verdict": "no exact match: the existing formalism requires pullback adjunctions and cartesian refinements; coefficient-specific variants do not cover arbitrary P,J,gamma."
+  },
+  {
+   "tool": "grep",
+   "query": "ProperOpenCalculus|CompactificationCalculus|proper.open.*datum (Mathlib/CategoryTheory)",
+   "results": "[grep] OK 0 hit(s)\n\nDirect rg of the same expression in WeilConjectures and lean/Sheaf found only coefficient-specific systems and mate constructions; read Formalism/Basic.lean, ProperOpenTowerComparison.lean and SemilinearProperOpenMatePasting.lean. None supplies arbitrary P,J,gamma data without adjunctions. DAG and blueprint searches found no node for this abstract datum.",
+   "date": "2026-10-18",
+   "verdict": "no exact match: the existing formalism requires pullback adjunctions and cartesian refinements; coefficient-specific variants do not cover arbitrary P,J,gamma."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-compactification-refinement-coherence",
+  "date": "2026-10-18",
+  "group": "Q02"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Local pairs: formal compactification comparisons and composition of the tower adjunctions.",
+   "via": [
+    "lem-sp-compactification-refinement-coherence",
+    "lem-sp-coefficient-tower-shriek-calculus"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperOpenCalculus",
+  "declaration": "AlgebraicGeometry.ProperOpenCalculus",
+  "declarations": [
+   "AlgebraicGeometry.ProperOpenCalculus",
+   "AlgebraicGeometry.ProperOpenCalculus.H",
+   "AlgebraicGeometry.ProperOpenCalculus.rho",
+   "AlgebraicGeometry.ProperOpenCalculus.compare",
+   "AlgebraicGeometry.ProperOpenCalculus.TriangleObjects",
+   "AlgebraicGeometry.ProperOpenCalculus.TowerRefinement",
+   "AlgebraicGeometry.ProperOpenCalculus.towerIso",
+   "AlgebraicGeometry.ProperOpenCalculus.TowerObjects",
+   "AlgebraicGeometry.ProperOpenCalculus.identityIso",
+   "AlgebraicGeometry.ProperOpenCalculus.Geometry"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperOpenCalculus.lean",
+  "statement": "structure ProperOpenCalculus (A : Scheme.{u} → Prop)",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f2919f28b",
+  "group": "Q02",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f2919f28b",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Read both modules, both node records, report, deps and upstream Compactification/Refinement/Triangle/Tower. ProperOpenCalculus fields match def node; vertical/horizontal pasting match varying-ring formulas; identity-square laws present. H=J_i⋙P_g; rho uses the square d.i≫r.hom=𝟙≫c.i with pId/pComp as node says; compare=ρ_{v1}^{-1}ρ_{v2} (c2→c1). 8 conjuncts: rho id/comp, independence over arbitrary common refinements, cocycle (diagrammatic order correct), tower compatibility via TowerRefinement (exactly the 7 step-5 equations, no cartesianness), staircase associativity on upstream Tower, both unit towers (checked derivable). Geometry fields match cofiltered/compatible-tower deps. No extra hypotheses, universes u,v,w independent. No duplicate notion found. No sorry in data; docstrings/source/blueprint/proof present; statements verbatim. nt_compile --json clean (4.1s/3.1s); control edit fails as expected. Advisory: redundant plain imports in item module."
+ }
+}

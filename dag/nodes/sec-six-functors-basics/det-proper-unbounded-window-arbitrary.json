@@ -304,5 +304,27 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cd4f8d5cf",
+  "group": "N6",
+  "result": "pass",
+  "note": "Both theorems (E and Q̄_ℓ) match the node and source clause by clause: setup, coefficients and fibre bound hd are the bounded-below dependency's word for word minus its bounded-below hypothesis; K satisfies the same ind-constructibility predicate with no bound; first clause is ∀q ∃N ∀n≥N, IsIso of H^q applied to Rp_* of the canonical truncation map truncGEπ(-n).app K, in the right direction; ind-constructibility of H^n(Rp_*K) and the IsGE a and IsLE (b+2d+1) clauses are present. Rp_* = moduleObjectDerivedPushforward = lowerStar.rightDerivedFunctor, the same object as the dependency. Universes bound. Edge cases checked: K=0, empty schemes, negative d, d=0, all integer degrees, n=0. No definitions; both proofs exactly sorry; docstrings give source place, blueprint tag and all six proof steps; node record differs from live only in lean; statement verbatim in file; no duplicate or name clash. nt_compile --json clean in 16.6 s (control compile with an inserted error fails as expected). Advisory only: HomologySequence import stands in for lem-sf-derived-homology-long-exact, which has no Lean record."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ProperIndConstructibleUnbounded",
+  "declaration": "AlgebraicGeometry.ProEtale.proper_indConstructible_unbounded",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.proper_indConstructible_unbounded",
+   "AlgebraicGeometry.ProEtale.proper_indConstructible_unbounded_padicAlgCl"
+  ],
+  "file": "lean/Sheaf/Paper/ProperIndConstructibleUnbounded.lean",
+  "statement": "theorem proper_indConstructible_unbounded (ℓ : ℕ) [Fact ℓ.Prime] (E : PadicAlgCl.FiniteIntermediateField ℓ) (k : Type u) [Field k] (p₀ : ℕ) [CharP k p₀] (hp₀ : 0 < p₀) (hpℓ : p₀ ≠ ℓ) (X Y : Scheme.{u}) [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] (p : X ⟶ Y) [p.IsOver (Spec (.of k))] [IsProper p] (d : ℤ) (hd : ∀ y : Y, topologicalKrullDim (pullback p (Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField y) (AlgebraicClosure (Y.residueField y)))) ≫ Y.fromSpecResidueField y) : Scheme.{u}) ≤ if 0 ≤ d then (d.toNat : WithBot ℕ∞) else ⊥) (K : DerivedCategory (pulledBackModuleObjects (Profinite.continuousMapRingObj E) X)) (hK : ∀ n : ℤ, ObjectProperty.ind.{u + 1} (IsConstantModelConstructible (Profinite.continuousMapRingObj E) X) ((DerivedCategory.homologyFunctor _ n).obj K)) : (∀ q : ℤ, ∃ N : ℕ, ∀ n : ℕ, N ≤ n → IsIso ((DerivedCategory.homologyFunctor _ q).map ((CondensedRing.moduleObjectDerivedPushforward (Profinite.continuousMapRingObj E) p).map ((DerivedCategory.TStructure.t.truncGEπ (-(n : ℤ))).app K)))) ∧ (∀ n : ℤ, ObjectProperty.ind.{u + 1} (IsConstantModelConstructible (Profinite.continuousMapRingObj E) Y) ((DerivedCategory.homologyFunctor _ n).obj ((CondensedRing.moduleObjectDerivedPushforward (Profinite.continuousMapRingObj E) p).obj K))) ∧ (∀ a : ℤ, K.IsGE a → ((CondensedRing.moduleObjectDerivedPushforward (Profinite.continuousMapRingObj E) p).obj K).IsGE a) ∧ (∀ b : ℤ, K.IsLE b → ((CondensedRing.moduleObjectDerivedPushforward (Profinite.continuousMapRingObj E) p).obj K).IsLE (b + 2 * d + 1))",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

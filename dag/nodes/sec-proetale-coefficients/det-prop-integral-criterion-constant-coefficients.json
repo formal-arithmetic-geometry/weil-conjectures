@@ -24,7 +24,8 @@
   "sk-def-pe-derived-completion",
   "def-weil-derived-limit",
   "def-pc-flat-sheaf-modules",
-  "lem-weil-pbc-constant-completion-equivalence"
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-weil-proetale-inverse-image"
  ],
  "proof": [
   {
@@ -289,5 +290,36 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b0825178a",
+  "group": "NY",
+  "result": "pass",
+  "note": "Read the item node, all 13 stmt_deps, report and module, plus the live ConstantCompletionEquivalence (lines 1-715), ProEtaleCoefficientPullbackUniverses and DerivedCompletion. Clause 1: IsFlatOnSite (recorded def-pc-flat-sheaf-modules) of res c (unit B); for R and B the quotient maps to R_(n+1) are locally surjective with kernel locally (pi^(n+1)), and limit.lift_pi makes the induced map an iso, so this is equivalent to the node. Clause 2: an equivalence of the IsIso-completionUnit full subcategories, pinned to dres c and to extend c ⋙ completion true. Clause 3: alpha with the pure-tensor formula and beta : extend(q_B) ≅ dres ⋙ extend(q_R) with the finiteDerivedComparison square on flat-term K-flat P; unconditional for all K. No extra hypotheses; n+1 indexing covers exactly the positive levels; edge cases ok. All objects specialize the recorded general dependency (no H4). The stmt_deps addition def-weil-proetale-inverse-image is a landed node and permitted; otherwise only lean changed. No hollow defs, one sorry, docstrings and six proof steps present, imports follow rule 7, lines <=100, statement verbatim, lean record complete. nt_compile --json: 4.8 s clean, exit 0, no warnings. Advisory: E and X share universe u, as in the deps; B-completeness via the strict-tower model, which the node prescribes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.IntegralConstantCompletion",
+  "declaration": "AlgebraicGeometry.ProEtale.IntegralConstantCompletion.integral_constant_completion",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.IntegralConstantCompletion.integers",
+   "AlgebraicGeometry.ProEtale.IntegralConstantCompletion.ideal",
+   "AlgebraicGeometry.ProEtale.IntegralConstantCompletion.topology",
+   "AlgebraicGeometry.ProEtale.IntegralConstantCompletion.constantRing",
+   "AlgebraicGeometry.ProEtale.IntegralConstantCompletion.completedRing",
+   "AlgebraicGeometry.ProEtale.IntegralConstantCompletion.scalarMap",
+   "AlgebraicGeometry.ProEtale.IntegralConstantCompletion.finiteRing",
+   "AlgebraicGeometry.ProEtale.IntegralConstantCompletion.quotientMap",
+   "AlgebraicGeometry.ProEtale.IntegralConstantCompletion.Complete",
+   "AlgebraicGeometry.ProEtale.IntegralConstantCompletion.integral_constant_completion"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/IntegralConstantCompletion.lean",
+  "statement": "theorem integral_constant_completion : SheafOfModules.IsFlatOnSite ((res (scalarMap l E X)).obj (SheafOfModules.unit (siteModuleRings (completedRing l E X)))) ∧ (∀ (b : Bool) (n : ℕ), Presheaf.IsLocallySurjective (topology X) (quotientMap l E X b n).hom ∧ ∀ (U : Scheme.coefficientProEtaleSiteModel.{u, u} X) (x : (coefficients (topology X) (integers l E) (ideal l E) b).obj.obj (op U)), (quotientMap l E X b n).hom.app (op U) x = 0 ↔ ∃ S : Sieve U, S ∈ topology X U ∧ ∀ (V : Scheme.coefficientProEtaleSiteModel.{u, u} X) (g : V ⟶ U), S g → (coefficients (topology X) (integers l E) (ideal l E) b).obj.map g.op x ∈ Ideal.span {((algebraSection (baseMap (topology X) (integers l E) (ideal l E) b) (ULift.up (Padic.coefficientExtensionUniformizer l E))).val (op V)) ^ (n + 1)}) ∧ (∃ e : (Complete l E X true).FullSubcategory ≌ (Complete l E X false).FullSubcategory, Nonempty (e.functor ⋙ (Complete l E X false).ι ≅ (Complete l E X true).ι ⋙ dres (scalarMap l E X)) ∧ Nonempty (e.inverse ⋙ (Complete l E X true).ι ≅ (Complete l E X false).ι ⋙ extend (scalarMap l E X) ⋙ completion (topology X) (integers l E) (ideal l E) true)) ∧ ∀ n : ℕ, ∃ α : res (scalarMap l E X) ⋙ change (quotientMap l E X false n) ≅ change (quotientMap l E X true n), (∀ (M : Mod (completedRing l E X)) (U : (Scheme.coefficientProEtaleSiteModel.{u, u} X)ᵒᵖ) (s : (finiteRing l E X n).obj.obj U) (m : M.val.obj U), (α.hom.app M).val.app U (tensorSection (quotientMap l E X false n) ((res (scalarMap l E X)).obj M) U s m) = tensorSection (quotientMap l E X true n) M U s m) ∧ ∃ β : extend (quotientMap l E X true n) ≅ dres (scalarMap l E X) ⋙ extend (quotientMap l E X false n), ∀ P : Cx (completedRing l E X), P.IsKFlat → (∀ q : ℤ, SheafOfModules.IsFlat (P.X q)) → (extend (quotientMap l E X false n)).map ((resFactors (scalarMap l E X)).inv.app P) ≫ (extendComparison (quotientMap l E X false n)).app (((res (scalarMap l E X)).mapHomologicalComplex (.up ℤ)).obj P) ≫ (Q (finiteRing l E X n)).map ((NatIso.mapHomologicalComplex α (.up ℤ)).hom.app P) = β.inv.app ((Q (completedRing l E X)).obj P) ≫ (extendComparison (quotientMap l E X true n)).app P",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "All three clauses on the published equivalent small pro-etale site: flatness, canonical positive quotients characterized by local surjectivity and locally principal kernels; the complete-category restriction equivalence with inverse identified as completed derived scalar extension; and the canonical coefficient-linear finite comparison normalized on pure tensors and flat-term K-flat representatives. Completeness uses exactly the general dependency's strict quotient-tower completion unit. ULift only places the integer ring in the module universe; no new hypothesis is imposed."
  }
 }

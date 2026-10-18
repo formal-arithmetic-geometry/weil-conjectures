@@ -174,5 +174,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f2f2c8692",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Statement matches the main-20261015 _section.md word for word. Item node differs from live only in lean; both dep nodes unchanged; no new nodes, no (B) repair, no statement change. Clauses: d pinned as π_E on sections; explicit resolution with P in degrees -1..0, rank-one free terms via em/e0, differential = pulled-back d^(n+1), QuasiIso augmentation with ε.f 0 = e0 ≫ finiteUnit; natural cone iso as in landed det-resolution (node does not say canonical, proof citers only); vanishing and iso clauses via reductionFunctor 1 and recorded IsDerivedComplete. Indexing checked: coefficientExtensionRing m = O_E/π^m, finiteModule n = exponent n+1. No extra hypotheses; universes forced by deps; edge cases n=1, empty X, zero complex, identity, unbounded complexes covered. Docstrings, proof steps, ≤100-char lines, stage-2 import rule (stmt_dep public, stated proof-dep plain), sorry only, record statement verbatim, no duplicate. nt_compile --json clean: 3.1 s, rc 0, no warnings. Advisory only: reductionFunctor/coneFunctor/pullback/regularPullbackIso come from the module of theorem node det-pe-derived-nakayama-resolution (a proof_dep), re-exported by stmt_dep DerivedCompletion; no def node carries reductionFunctor/coneFunctor."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DerivedNakayama",
+  "declaration": "AlgebraicGeometry.ProEtale.DerivedNakayama.reduction_and_derived_nakayama",
+  "file": "lean/Sheaf/Paper/DerivedNakayama.lean",
+  "statement": "theorem reduction_and_derived_nakayama (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] : (∃ d : End (Mod.regular (integerRing l E)), (∀ (S : Profinite.{u}ᵒᵖ) (f : (integerRing l E).obj.obj S) (s : S.unop), ((d.hom.hom.app S) f).down s = Padic.coefficientExtensionUniformizer l E * f.down s) ∧ ∀ (X : Scheme.{u}) (n : ℕ), (∃ (P : CochainComplex (AdicCompletion.Modules l E X) ℤ), P.IsStrictlyGE (-1) ∧ P.IsStrictlyLE 0 ∧ ∃ (em : P.X (-1) ≅ Mod.regular (AdicCompletion.ring l E X)) (e0 : P.X 0 ≅ Mod.regular (AdicCompletion.ring l E X)), P.d (-1) 0 = em.hom ≫ (regularPullbackIso l E X).inv ≫ (pullback l E X).map (d ^ (n + 1)) ≫ (regularPullbackIso l E X).hom ≫ e0.inv ∧ ∃ ε : P ⟶ (CochainComplex.singleFunctor (AdicCompletion.Modules l E X) 0).obj (AdicCompletion.finiteModule l E X n), QuasiIso ε ∧ ε.f 0 = e0.hom ≫ AdicCompletion.finiteUnit l E X n) ∧ Nonempty (DerivedCategory.Q ⋙ reductionFunctor l E X (n + 1) ≅ coneFunctor l E X (d ^ (n + 1)))) ∧ (∀ (X : Scheme.{u}) (K : Derived l E X), IsDerivedComplete l E X K → IsZero ((reductionFunctor l E X 1).obj K) → IsZero K) ∧ (∀ (X : Scheme.{u}) (K L : Derived l E X) (f : K ⟶ L), IsDerivedComplete l E X K → IsDerivedComplete l E X L → IsIso ((reductionFunctor l E X 1).map f) → IsIso f)",
+  "branch": "newtargets-dag",
+  "by": "Q21",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

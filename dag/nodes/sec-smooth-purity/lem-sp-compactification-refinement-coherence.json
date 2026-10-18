@@ -17,7 +17,8 @@
   "def-pc-fibre-product",
   "lem-cbc-compactifiable-compatible-tower",
   "lem-cbc-compactifiable-cofiltered",
-  "lem-sp-varying-ring-proper-open-pasting"
+  "lem-sp-varying-ring-proper-open-pasting",
+  "def-sp-proper-open-calculus"
  ],
  "proof": [
   {
@@ -264,5 +265,26 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-24a4a4a2c (reviewer sub-agent of L); spot-checked: Read the full item, all eleven steps, cited statements, Stacks 0F7C/0F7D/0F7J/0F7K and current blueprint route. Refinement cancellation, six-square naturality and staircase associativity check out. No new nodes, hidden long steps, duplicate assertions or forbidden batch-5 dependencies found. No corrections needed; concrete checks recorded in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f2919f28b",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Read both modules, both node records, report, deps and upstream Compactification/Refinement/Triangle/Tower. ProperOpenCalculus fields match def node; vertical/horizontal pasting match varying-ring formulas; identity-square laws present. H=J_i⋙P_g; rho uses the square d.i≫r.hom=𝟙≫c.i with pId/pComp as node says; compare=ρ_{v1}^{-1}ρ_{v2} (c2→c1). 8 conjuncts: rho id/comp, independence over arbitrary common refinements, cocycle (diagrammatic order correct), tower compatibility via TowerRefinement (exactly the 7 step-5 equations, no cartesianness), staircase associativity on upstream Tower, both unit towers (checked derivable). Geometry fields match cofiltered/compatible-tower deps. No extra hypotheses, universes u,v,w independent. No duplicate notion found. No sorry in data; docstrings/source/blueprint/proof present; statements verbatim. nt_compile --json clean (4.1s/3.1s); control edit fails as expected. Advisory: redundant plain imports in item module."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CompactificationRefinementCoherence",
+  "declaration": "AlgebraicGeometry.ProperOpenCalculus.compactification_refinement_coherence",
+  "declarations": [
+   "AlgebraicGeometry.ProperOpenCalculus.compactification_refinement_coherence"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CompactificationRefinementCoherence.lean",
+  "statement": "theorem compactification_refinement_coherence {A : Scheme.{u} → Prop} (F : ProperOpenCalculus.{u, v, w} A) : Geometry A → (∀ (X Y : {X : Scheme.{u} // A X}) (f : X.1 ⟶ Y.1) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) (hc : A c.Z), F.rho X Y hc hc (Compactification.Refinement.id c) = Iso.refl (F.H X Y c hc)) ∧ (∀ (X Y : {X : Scheme.{u} // A X}) (f : X.1 ⟶ Y.1) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c d e : Compactification f) (hc : A c.Z) (hd : A d.Z) (he : A e.Z) (r : d.Refinement c) (s : e.Refinement d), F.rho X Y hc he (s.comp r) = F.rho X Y hc hd r ≪≫ F.rho X Y hd he s) ∧ (∀ (X Y : {X : Scheme.{u} // A X}) (f : X.1 ⟶ Y.1) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c₁ c₂ d e : Compactification f) (h₁ : A c₁.Z) (h₂ : A c₂.Z) (hd : A d.Z) (he : A e.Z) (r₁ : d.Refinement c₁) (r₂ : d.Refinement c₂) (s₁ : e.Refinement c₁) (s₂ : e.Refinement c₂), F.compare X Y h₁ h₂ hd r₁ r₂ = F.compare X Y h₁ h₂ he s₁ s₂) ∧ (∀ (X Y : {X : Scheme.{u} // A X}) (f : X.1 ⟶ Y.1) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c₁ c₂ c₃ d₁₂ d₂₃ d₁₃ : Compactification f) (h₁ : A c₁.Z) (h₂ : A c₂.Z) (h₃ : A c₃.Z) (h₁₂ : A d₁₂.Z) (h₂₃ : A d₂₃.Z) (h₁₃ : A d₁₃.Z) (r₁ : d₁₂.Refinement c₁) (r₂ : d₁₂.Refinement c₂) (s₂ : d₂₃.Refinement c₂) (s₃ : d₂₃.Refinement c₃) (t₁ : d₁₃.Refinement c₁) (t₃ : d₁₃.Refinement c₃), F.compare X Y h₂ h₃ h₂₃ s₂ s₃ ≪≫ F.compare X Y h₁ h₂ h₁₂ r₁ r₂ = F.compare X Y h₁ h₃ h₁₃ t₁ t₃) ∧ (∀ (X Y Z : {X : Scheme.{u} // A X}) (f : X.1 ⟶ Y.1) (g : Y.1 ⟶ Z.1) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] (T S R : Compactification.Triangle f g) (hT : TriangleObjects (A := A) T) (hS : TriangleObjects (A := A) S) (hR : TriangleObjects (A := A) R) (r : TowerRefinement R T) (s : TowerRefinement R S), (F.towerIso X Y Z T hT).hom ≫ (F.compare X Z hS.2.2 hT.2.2 hR.2.2 s.rfg r.rfg).hom = NatTrans.hcomp (F.compare X Y hS.1 hT.1 hR.1 s.rf r.rf).hom (F.compare Y Z hS.2.1 hT.2.1 hR.2.1 s.rg r.rg).hom ≫ (F.towerIso X Y Z S hS).hom) ∧ (∀ (X Y Z W : {X : Scheme.{u} // A X}) (f : X.1 ⟶ Y.1) (g : Y.1 ⟶ Z.1) (h : Z.1 ⟶ W.1) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated g] [LocallyOfFiniteType g] [QuasiCompact g] [IsSeparated h] [LocallyOfFiniteType h] [QuasiCompact h] (T : Compactification.Tower f g h) (hT : TowerObjects (A := A) T), Functor.whiskerRight (F.towerIso X Y Z T.fg ⟨hT.1, hT.2.1, hT.2.2.2.1⟩).hom (F.H Z W T.ch hT.2.2.1) ≫ (F.towerIso X Z W T.fg_h ⟨hT.2.2.2.1, hT.2.2.1, hT.2.2.2.2.2⟩).hom = (Functor.associator _ _ _).hom ≫ Functor.whiskerLeft (F.H X Y T.cf hT.1) (F.towerIso Y Z W T.gh ⟨hT.2.1, hT.2.2.1, hT.2.2.2.2.1⟩).hom ≫ (F.towerIso X Y W T.f_gh ⟨hT.1, hT.2.2.2.2.1, hT.2.2.2.2.2⟩).hom) ∧ (∀ (X Y : {X : Scheme.{u} // A X}) (f : X.1 ⟶ Y.1) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) (hc : A c.Z), (F.towerIso X X Y (Compactification.Triangle.unitLeft c) ⟨X.2, hc, hc⟩).hom = Functor.whiskerRight (F.identityIso X).hom (F.H X Y c hc) ≫ (Functor.leftUnitor (F.H X Y c hc)).hom) ∧ (∀ (X Y : {X : Scheme.{u} // A X}) (f : X.1 ⟶ Y.1) [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) (hc : A c.Z), (F.towerIso X Y Y (Compactification.Triangle.unitRight c) ⟨hc, Y.2, hc⟩).hom = Functor.whiskerLeft (F.H X Y c hc) (F.identityIso Y).hom ≫ (Functor.rightUnitor (F.H X Y c hc)).hom)",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-18",
+  "existing": false
  }
 }

@@ -441,5 +441,28 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f0cc7ba4a",
+  "group": "N2",
+  "result": "pass",
+  "note": "Statement matches node det-lem-int-tensor-product and its blueprint source clause by clause. Standing setting: prime l, field k of char p>0 with p != l, finite E/Q_l, X separated finite type over k. Clause 1 uses the recorded constantModelBoundedConstructible; the tensor is the recorded uncompleted CondensedRing.derivedTensor (K ⊗ L and tensorLeft both checked by rfl). Clause 2: arbitrary S; bounded Mod.IsFree (finite free) complexes on the point pulled back along a Mathlib proetalePrecoverage cover, the same convention as the recorded HasFiniteConstantLocalModel; conclusions IsDualizable (both triangle identities), PreservesLimitsOfShape (Discrete I) for any universe w (true since tensorLeft M is a right adjoint), IsHomotopyLimit cones preserved, IsDerivedComplete preserved. Universes are those of the recorded dependencies; edge cases (empty scheme or cover, rank 0, varying bounds, non-qc S) are not excluded. Item changed only in lean; statement verbatim; one sorry, standard axioms; docstrings with source, blueprint tag and all 11 steps; lines <= 100. nt_compile --json: rc 0, clean, 3.8 s; probe rc 0. Advisories: (1) the helper instance integralTensorProduct_point_isLeftAdjoint duplicates the existing isLeftAdjoint_upperStarFromPoint (ModuleObject/Colimit/Compatibility.lean:114, not imported here); Prop-valued, harmless. (2) The proof-dependency import Sheaf.Paper.CartesianCoefficients is omitted; the report's compile-failure reason no longer holds (the import compiles clean), but the same import made the Q15 landing fail on unpublished side modules, so no FIX was issued. (3) The second-reading section is the disclosed worker self-check."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralTensorProduct",
+  "declaration": "AlgebraicGeometry.ProEtale.integralTensorProduct",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.integralTensorProduct_point_isLeftAdjoint",
+   "AlgebraicGeometry.ProEtale.integralTensorProduct"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralTensorProduct.lean",
+  "statement": "theorem integralTensorProduct (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (k : Type u) [Field k] (p : ℕ) [CharP k p] (_hp : 0 < p) (_hpl : p ≠ l) : (∀ (X : Scheme.{u}) [X.Over (Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] (K L : DerivedCategory (AdicCompletion.Modules l E X)), constantModelBoundedConstructible (DerivedNakayama.integerRing l E) X K → constantModelBoundedConstructible (DerivedNakayama.integerRing l E) X L → constantModelBoundedConstructible (DerivedNakayama.integerRing l E) X (K ⊗ L)) ∧ (∀ (S : Scheme.{u}) (M : DerivedCategory (AdicCompletion.Modules l E S)), (∃ C : Scheme.Cover.{u} Scheme.proetalePrecoverage S, ∀ i : C.I₀, ∃ P : CochainComplex (Mod (Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) (DerivedNakayama.integerRing l E)) ℤ, (∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (P.X n)) ∧ (∀ n : ℤ, Mod.IsFree (DerivedNakayama.integerRing l E) (P.X n)) ∧ Nonempty ((CondensedRing.upperStar (DerivedNakayama.integerRing l E) (C.f i)).mapDerivedCategory.obj M ≅ DerivedCategory.Q.obj (((DerivedNakayama.pullback l E (C.X i)).mapHomologicalComplex (ComplexShape.up ℤ)).obj P))) → IsDualizable M ∧ (∀ I : Type w, PreservesLimitsOfShape (Discrete I) (tensorLeft M)) ∧ (∀ (F : ℕᵒᵖ ⥤ DerivedCategory (AdicCompletion.Modules l E S)) (c : Cone F), IsHomotopyLimit c → IsHomotopyLimit ((tensorLeft M).mapCone c)) ∧ (∀ N : DerivedCategory (AdicCompletion.Modules l E S), IsDerivedComplete l E S N → IsDerivedComplete l E S (M ⊗ N)))",
+  "branch": "newtargets-dag",
+  "by": "N2",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "First conjunction: ordinary relative derived tensor closure with the recorded finite constant scalar-model constructibility. Second conjunction: local bounded finite free scalar models on arbitrary schemes, duality with both identities via IsDualizable, preservation of products of arbitrary index universe, preservation of the full sequential homotopy-limit cone, and the recorded continuous-coefficient derived completeness. The helper instance constructs the existing point inverse-image left adjunction by composition; no mathematical hypothesis is added."
  }
 }

@@ -252,5 +252,23 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5221f4791",
+  "group": "N4",
+  "result": "pass",
+  "note": "Node copy differs from live only in lean (live lean null). lean.statement verbatim in file. Four conjuncts match the node and blueprint source clause by clause: K_1=0 ⇒ ∀n K_(n+1)=0 ∧ K=0 (index 0 = π^1); every distinguished triangle with obj1, obj2 complete has obj3 complete; all integer shifts; IsIso(derivedReduction 0 map f) with K, L complete ⇒ IsIso f. Uses recorded dep declarations IsDerivedComplete, Modules and derivedReduction (continuous condensed O_E pulled back; real pro-etale site). D(B_1) vs D(R) reading is equivalent since restriction is conservative. No extra hypotheses; universes exactly the dep's. No definitions, single sorry, docstrings carry source place, blueprint tag and 8 proof steps. Imports are statement plus proof-dep modules per stage-2 rule. Both report sections present. No duplicate found (rg nakayama, IsDerivedComplete users). nt_compile --json of the snapshot: rc 0, no messages, 2.9 s (dep 41.6 s); type-error control fails as expected."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DerivedNakayamaFirstReduction",
+  "declaration": "AlgebraicGeometry.ProEtale.derived_nakayama_first_reduction",
+  "file": "lean/Sheaf/Paper/DerivedNakayamaFirstReduction.lean",
+  "statement": "theorem derived_nakayama_first_reduction (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) : (∀ K : DerivedCategory (AdicCompletion.Modules l E X), IsDerivedComplete l E X K → IsZero ((AdicCompletion.derivedReduction l E X 0).obj K) → (∀ n : ℕ, IsZero ((AdicCompletion.derivedReduction l E X n).obj K)) ∧ IsZero K) ∧ (∀ T : Triangle (DerivedCategory (AdicCompletion.Modules l E X)), T ∈ distTriang (DerivedCategory (AdicCompletion.Modules l E X)) → IsDerivedComplete l E X T.obj₁ → IsDerivedComplete l E X T.obj₂ → IsDerivedComplete l E X T.obj₃) ∧ (∀ K : DerivedCategory (AdicCompletion.Modules l E X), IsDerivedComplete l E X K → ∀ r : ℤ, IsDerivedComplete l E X (K⟦r⟧)) ∧ (∀ (K L : DerivedCategory (AdicCompletion.Modules l E X)) (f : K ⟶ L), IsDerivedComplete l E X K → IsDerivedComplete l E X L → IsIso ((AdicCompletion.derivedReduction l E X 0).map f) → IsIso f)",
+  "branch": "newtargets-dag",
+  "by": "N4",
+  "date": "2026-10-18",
+  "existing": false
  }
 }
