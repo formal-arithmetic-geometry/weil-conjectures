@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.CupProduct
 
+public import WeilConjectures.SixFunctors.Etale.ConstantCohomologyRingChange
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ConstantCohomologyDualityFrobenius
 
 /-!
@@ -184,12 +185,105 @@ theorem finiteAdicHPullback_finiteAdicHCup [ConnectedSpace S] (e : S ≅ S) {i j
     (finiteAdicHPullback_unitShiftAddEquivFiniteAdicH l m S e i x).symm
     (finiteAdicHPullback_unitShiftAddEquivFiniteAdicH l m S e j y).symm
 
+/-- The reduction `ℤ/ℓᵐ⁺¹ ⟶ ℤ/ℓᵐ` of the coefficient rings. -/
+noncomputable def zmodTransitionRingHom :
+    ULift.{u + 1} (ZMod (l ^ (m + 1))) →+* ULift.{u + 1} (ZMod (l ^ m)) :=
+  (ZMod.castHom (pow_dvd_pow l (Nat.le_succ m)) (ZMod (l ^ m))).ulift
+
+lemma finiteAdicHCup_extAddEquivFiniteAdicH {i j k : ℕ} (h : i + j = k)
+    (z : Ext (Sheaf.constantRing S.smallEtaleTopology (ULift.{u + 1} (ZMod (l ^ m))))
+      (Sheaf.constantRing S.smallEtaleTopology (ULift.{u + 1} (ZMod (l ^ m)))) i)
+    (z' : Ext (Sheaf.constantRing S.smallEtaleTopology (ULift.{u + 1} (ZMod (l ^ m))))
+      (Sheaf.constantRing S.smallEtaleTopology (ULift.{u + 1} (ZMod (l ^ m)))) j) :
+    finiteAdicHCup l m S h (extAddEquivFiniteAdicH l m S i z) (extAddEquivFiniteAdicH l m S j z') =
+      extAddEquivFiniteAdicH l m S k (z.comp z' h) := by
+  rw [finiteAdicHCup_apply, AddEquiv.symm_apply_apply, AddEquiv.symm_apply_apply]
+
+/-- Pushing the change of rings `φ_*` along `ν^* ∘ forget`: `ψ ∘ φ_* z = z ∘ ψ` for the map
+`ψ : Λ'_S ⟶ Λ_S` of constant sheaves. -/
+lemma mapExactFunctor_extRingChange {Λ' Λ : Type (u + 1)} [CommRing Λ'] [CommRing Λ]
+    (φ : Λ' →+* Λ) {n : ℕ}
+    (z : Ext (Sheaf.constantRing S.smallEtaleTopology Λ')
+      (Sheaf.constantRing S.smallEtaleTopology Λ') n) :
+    (Ext.mk₀ ((Etale.sheafForget₂ Λ' S ⋙ comparisonUpperStar AddCommGrpCat.{u + 1} S).map
+        (Etale.constantRingMap φ S))).comp
+      ((Etale.extRingChange φ S n z).mapExactFunctor
+        (Etale.sheafForget₂ Λ S ⋙ comparisonUpperStar AddCommGrpCat.{u + 1} S)) (zero_add n) =
+      (z.mapExactFunctor (Etale.sheafForget₂ Λ' S ⋙ comparisonUpperStar AddCommGrpCat.{u + 1} S)).comp
+        (Ext.mk₀ ((Etale.sheafForget₂ Λ' S ⋙ comparisonUpperStar AddCommGrpCat.{u + 1} S).map
+          (Etale.constantRingMap φ S))) (add_zero n) := by
+  have h := congrArg (fun e ↦ e.mapExactFunctor
+    (Etale.sheafForget₂ Λ' S ⋙ comparisonUpperStar AddCommGrpCat.{u + 1} S))
+    (Etale.mk₀_comp_mapExactFunctor_extRingChange φ S n z)
+  simp only [Ext.mapExactFunctor_comp, Ext.mapExactFunctor_mk₀,
+    Ext.mapExactFunctor_mapExactFunctor] at h
+  exact h
+
+omit [Fact l.Prime] [CompactSpace S] [QuasiSeparatedSpace S] in
+lemma forgetComparisonUpperStarUnit_comp_map_constantRingMap :
+    forgetComparisonUpperStarUnit l (m + 1) S ≫ (forgetComparisonUpperStar l (m + 1) S).map
+      (Etale.constantRingMap (zmodTransitionRingHom l m) S) = forgetComparisonUpperStarUnit l m S := by
+  have h := Etale.constantIntToRing_comp_constantRingForgetMap (zmodTransitionRingHom l m) S
+  dsimp only [Etale.constantRingForgetMap, Etale.sheafRestrictScalarsCompSheafForget₂Iso,
+    Iso.refl_hom, NatTrans.id_app] at h
+  erw [Category.comp_id] at h
+  rw [forgetComparisonUpperStarUnit, forgetComparisonUpperStarUnit, Category.assoc,
+    Functor.comp_map, ← Functor.map_comp]
+  erw [h]
+  rfl
+
+lemma forgetComparisonUpperStarConstantRingIso_transition :
+    (forgetComparisonUpperStar l (m + 1) S).map
+        (Etale.constantRingMap (zmodTransitionRingHom l m) S) ≫
+      (forgetComparisonUpperStarConstantRingIso l m S).hom =
+    (forgetComparisonUpperStarConstantRingIso l (m + 1) S).hom ≫ continuousSheafMap S
+      (openAddSubgroupQuotientMap (powOpenAddSubgroup l) (powOpenAddSubgroup_succ_le l) m) := by
+  sorry
+
+/-- The comparison `Extⁿ_Λ(Λ_S, Λ_S) ≅ Hⁿ(S_proét, ℤ_ℓ/ℓᵐ)` intertwines the change of rings
+`ℤ/ℓᵐ⁺¹ ⟶ ℤ/ℓᵐ` with the reduction of the coefficients. -/
+lemma extAddEquivFiniteAdicH_extRingChange (n : ℕ)
+    (z : Ext (Sheaf.constantRing S.smallEtaleTopology (ULift.{u + 1} (ZMod (l ^ (m + 1)))))
+      (Sheaf.constantRing S.smallEtaleTopology (ULift.{u + 1} (ZMod (l ^ (m + 1))))) n) :
+    extAddEquivFiniteAdicH l m S n (Etale.extRingChange (zmodTransitionRingHom l m) S n z) =
+      finiteAdicHTransition l m S n (extAddEquivFiniteAdicH l (m + 1) S n z) := by
+  have key : Ext.mk₀CompMk₀ (forgetComparisonUpperStarUnit l m S)
+      ((Etale.extRingChange (zmodTransitionRingHom l m) S n z).mapExactFunctor
+        (forgetComparisonUpperStar l m S)) (forgetComparisonUpperStarConstantRingIso l m S).hom =
+      (Ext.mk₀CompMk₀ (forgetComparisonUpperStarUnit l (m + 1) S)
+        (z.mapExactFunctor (forgetComparisonUpperStar l (m + 1) S))
+        (forgetComparisonUpperStarConstantRingIso l (m + 1) S).hom).comp
+          (Ext.mk₀ (continuousSheafMap S (openAddSubgroupQuotientMap (powOpenAddSubgroup l)
+            (powOpenAddSubgroup_succ_le l) m))) (add_zero n) := by
+    rw [Ext.mk₀CompMk₀_comp_mk₀, ← forgetComparisonUpperStarConstantRingIso_transition,
+      ← forgetComparisonUpperStarUnit_comp_map_constantRingMap]
+    refine (Ext.mk₀_comp_mk₀CompMk₀ _ _ _ _).symm.trans ?_
+    refine congrArg (fun e ↦ (Ext.mk₀ (forgetComparisonUpperStarUnit l (m + 1) S)).comp e
+      (zero_add n)) ?_
+    refine (Ext.mk₀_comp_comp_mk₀ _ _ _).symm.trans ?_
+    refine (congrArg (fun e ↦ e.comp (Ext.mk₀ (forgetComparisonUpperStarConstantRingIso l m S).hom)
+      (add_zero n)) (mapExactFunctor_extRingChange S (zmodTransitionRingHom l m) z)).trans ?_
+    refine (Ext.comp_assoc_of_third_deg_zero _ _ _ _).trans ?_
+    exact congrArg (fun e ↦ Ext.comp _ e (add_zero n)) (Ext.mk₀_comp_mk₀ _ _)
+  exact (extAddEquivFiniteAdicH_apply l m S n _).trans (key.trans (congrArg
+    (finiteAdicHTransition l m S n) (extAddEquivFiniteAdicH_apply l (m + 1) S n z)).symm)
+
 /-- The reduction `ℤ/ℓᵐ⁺¹ ⟶ ℤ/ℓᵐ` of the coefficients is multiplicative for the cup product. -/
 theorem finiteAdicHTransition_finiteAdicHCup {i j k : ℕ} (h : i + j = k)
     (x : FiniteAdicH S l (m + 1) i) (y : FiniteAdicH S l (m + 1) j) :
     finiteAdicHTransition l m S k (finiteAdicHCup l (m + 1) S h x y) =
-      finiteAdicHCup l m S h (finiteAdicHTransition l m S i x) (finiteAdicHTransition l m S j y) :=
-  sorry
+      finiteAdicHCup l m S h (finiteAdicHTransition l m S i x) (finiteAdicHTransition l m S j y) := by
+  obtain ⟨z, rfl⟩ := (extAddEquivFiniteAdicH l (m + 1) S i).surjective x
+  obtain ⟨z', rfl⟩ := (extAddEquivFiniteAdicH l (m + 1) S j).surjective y
+  refine (congrArg (finiteAdicHTransition l m S k)
+    (finiteAdicHCup_extAddEquivFiniteAdicH l (m + 1) S h z z')).trans ?_
+  refine (extAddEquivFiniteAdicH_extRingChange l m S k _).symm.trans ?_
+  refine (congrArg (extAddEquivFiniteAdicH l m S k)
+    (Etale.extRingChange_comp _ S h z z')).trans ?_
+  refine (finiteAdicHCup_extAddEquivFiniteAdicH l m S h _ _).symm.trans ?_
+  exact congr_arg₂ (fun a b ↦ finiteAdicHCup l m S h a b)
+    (extAddEquivFiniteAdicH_extRingChange l m S i z)
+    (extAddEquivFiniteAdicH_extRingChange l m S j z')
 
 omit [CompactSpace S] [QuasiSeparatedSpace S] in
 /-- `c ∈ ℤ_ℓ` acts on `Hⁿ(S, ℤ/ℓᵐ)` as the natural number `PadicInt.appr c m`. -/

@@ -70,6 +70,20 @@ theorem subsingleton_cohomology_adicConstant_of_two_mul_lt (e : ℕ)
         (Y ↘ Spec (CommRingCat.of k₀)).geometricFiberToAlgebraicClosure e he r
         (by exact_mod_cast hr))
 
+/-- Blueprint `sk-lem-finite` (constant-sheaf clause, `prop-cohomological-finiteness`): the
+cohomology `Hⁱ(X ⊗ k̄, ℚ̄_ℓ)` of a smooth `k₀`-scheme of finite type and pure dimension `d`
+vanishes for `i ∉ [0, 2d]`: the fibrewise cohomological dimension of `X ⊗ k̄` over the
+algebraically closed field `k̄` is `2d`. -/
+theorem subsingleton_cohomology_adicConstant (X : Scheme.{u}) [X.Over (Spec (CommRingCat.of k₀))]
+    (d : ℕ) [QuasiCompact (X ↘ Spec (CommRingCat.of k₀))]
+    [QuasiSeparated (X ↘ Spec (CommRingCat.of k₀))]
+    [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+    [SmoothOfRelativeDimension d (X ↘ Spec (CommRingCat.of k₀))] {i : ℤ}
+    (hi : i < 0 ∨ 2 * d < i) :
+    Subsingleton ((adicConstant k₀ l X).cohomology i).carrier :=
+  subsingleton_cohomology_adicConstant_of_two_mul_lt k₀ l X d
+    (topologicalKrullDim_geometricFiber_le_of_smoothOfRelativeDimension _ d) hi
+
 end WeilSheaf
 
 end AlgebraicGeometry
