@@ -8805,7 +8805,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExceptionalCoreI
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExceptionalGeneral
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExternalHom
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Formal
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethVerdierBase
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethVerdierDevissage
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethVerdierInduction
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethVerdierTransport
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Ordinary
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.OrdinaryCompactSupport
@@ -8867,6 +8869,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Perfect
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Dual
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.FiniteProjective
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Invertible
+public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.PointPerfectness
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.Pullback
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.SitePerfect
 public import WeilConjectures.SixFunctors.Etale.Derived.Perfect.TateTwist

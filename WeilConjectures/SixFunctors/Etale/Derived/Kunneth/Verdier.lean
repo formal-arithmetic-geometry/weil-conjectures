@@ -8,6 +8,7 @@ module
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Comparisons
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExceptionalGeneral
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.ExternalHom
+public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethVerdierInduction
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekIso
 
 /-!
@@ -200,8 +201,18 @@ theorem nonempty_iso_externalProduct_verdierDual [IsAlgClosed k] {X Y : Scheme.{
         ((verdierDual (ModuleCat.{u + 1} Λ) b).obj (op N)) ≅
       (RHom(pullback a b)[ModuleCat.{u + 1} Λ].obj
           (op ((L((pullback.snd a b)^*[ModuleCat.{u + 1} Λ])).obj N))).obj
-        ((R(pullback.fst a b)^![ModuleCat.{u + 1} Λ]).obj M)) :=
-  sorry
+        ((R(pullback.fst a b)^![ModuleCat.{u + 1} Λ]).obj M)) := by
+  have hE := rightDerivedLowerShriekCompCoherence Λ
+  have hD := constructibleFiniteTor_verdierDual Λ b hN
+  have hω : constructibleFiniteTor (ModuleCat.{u + 1} Λ) Y (dualizingComplex _ b) :=
+    constructibleFiniteTor_dualizingComplex Λ (𝟙 _) b (constructibleFiniteTor_tensorUnit Λ _)
+  have := isIso_kunnethVerdierMap Λ b N (dualizingComplex _ b) hE hD hω a hM
+  obtain ⟨e⟩ := nonempty_iso_rightDerivedUpperShriek_of_isPullback Λ hE b a (pullback.snd a b)
+    (pullback.fst a b) (IsPullback.of_hasPullback a b).flip hM
+  obtain ⟨fl⟩ := nonempty_iso_derivedTensor_flip (ModuleCat.{u + 1} Λ) (pullback a b)
+  exact ⟨asIso (kunnethVerdierMap (ModuleCat.{u + 1} Λ) N (dualizingComplex _ b) (pullback.snd a b)
+      ((L((pullback.fst a b)^*[ModuleCat.{u + 1} Λ])).obj M)) ≪≫
+    ((RHom(pullback a b)[ModuleCat.{u + 1} Λ]).obj _).mapIso ((fl.app _).app _ ≪≫ e.symm)⟩
 
 /-- Blueprint `prop-trf-external-hom`: External Hom; the `β` map.
 

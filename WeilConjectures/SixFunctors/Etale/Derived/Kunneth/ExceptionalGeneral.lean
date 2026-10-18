@@ -60,15 +60,17 @@ local notation "𝓜" => ModuleCat.{u + 1} Λ
 
 /-- The base change `f × 𝟙 : X ×_S W ⟶ Y ×_S W` of a compactifiable morphism admits a
 compactification. -/
-instance hasCompactification_pullbackMapLeft {S X Y W : Scheme.{u}} (b : Y ⟶ S) (c : W ⟶ S)
+theorem hasCompactification_pullbackMapLeft {S X Y W : Scheme.{u}} (b : Y ⟶ S) (c : W ⟶ S)
     (f : X ⟶ Y) [HasCompactification f] : HasCompactification (pullbackMapLeft b c f) :=
   .of_isPullback (isPullback_pullbackMapLeft b c f)
 
 /-- The base change `f × 𝟙 : X ×_S W ⟶ Y ×_S W` of a quasi-compact morphism is quasi-compact. -/
-instance quasiCompact_pullbackMapLeft {S X Y W : Scheme.{u}} (b : Y ⟶ S) (c : W ⟶ S)
+theorem quasiCompact_pullbackMapLeft {S X Y W : Scheme.{u}} (b : Y ⟶ S) (c : W ⟶ S)
     (f : X ⟶ Y) [QuasiCompact f] : QuasiCompact (pullbackMapLeft b c f) :=
   MorphismProperty.of_isPullback (P := @QuasiCompact) (isPullback_pullbackMapLeft b c f)
     inferInstance
+
+attribute [local instance] hasCompactification_pullbackMapLeft quasiCompact_pullbackMapLeft
 
 /-- `Rf^!` preserves `Dctf` (`thm-sf-ctf-stability` (v)), for a target of finite type over
 `k`. -/
@@ -218,15 +220,17 @@ end Left
 
 /-- The base change `𝟙 × f : X ×_S Y ⟶ X ×_S Z` of a compactifiable morphism admits a
 compactification. -/
-instance hasCompactification_pullbackMapRight {S X Y Z : Scheme.{u}} (b : X ⟶ S) (c : Z ⟶ S)
+theorem hasCompactification_pullbackMapRight {S X Y Z : Scheme.{u}} (b : X ⟶ S) (c : Z ⟶ S)
     (f : Y ⟶ Z) [HasCompactification f] : HasCompactification (pullbackMapRight b c f) :=
   .of_isPullback (isPullback_pullbackMapRight b c f)
 
 /-- The base change `𝟙 × f : X ×_S Y ⟶ X ×_S Z` of a quasi-compact morphism is quasi-compact. -/
-instance quasiCompact_pullbackMapRight {S X Y Z : Scheme.{u}} (b : X ⟶ S) (c : Z ⟶ S)
+theorem quasiCompact_pullbackMapRight {S X Y Z : Scheme.{u}} (b : X ⟶ S) (c : Z ⟶ S)
     (f : Y ⟶ Z) [QuasiCompact f] : QuasiCompact (pullbackMapRight b c f) :=
   MorphismProperty.of_isPullback (P := @QuasiCompact) (isPullback_pullbackMapRight b c f)
     inferInstance
+
+attribute [local instance] hasCompactification_pullbackMapRight quasiCompact_pullbackMapRight
 
 /-- **The exceptional Künneth formula for `𝟙 × f`** (`prop-trf-exceptional-kunneth`): the
 mirror image of `AlgebraicGeometry.Etale.exceptionalKunneth_pullbackMapLeft`, by the symmetry

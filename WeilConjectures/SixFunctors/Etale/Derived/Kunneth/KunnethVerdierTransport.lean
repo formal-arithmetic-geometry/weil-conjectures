@@ -221,7 +221,8 @@ lemma isIso_map_kunnethVerdierMap_iff {P' : Scheme.{u}} (g : P' ⟶ P) [HasCompa
     (h₂ : IsIso (rightDerivedUpperShriekTensorMap g S ((L((φ)^*[A])).obj ω))) :
     IsIso ((R(g)^![A]).map (kunnethVerdierMap A N ω φ S)) ↔
       IsIso (kunnethVerdierMap A N ω (g ≫ φ) ((R(g)^![A]).obj S)) :=
-  @isIso_map_pairingKunnethMap_pulledBackPairing_iff _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ N ω _ _ g _ _
+  @isIso_map_pairingKunnethMap_pulledBackPairing_iff _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ N ω _ _ g
+    _ _
     _ hassoc φ S h₁ h₂
 
 /-- **The Künneth–Verdier map at `Rφ^! Λ`** (`thm-trf-kunneth-verdier`): it is invertible as soon
@@ -251,6 +252,17 @@ lemma isIso_kunnethVerdierMap_derivedTensor_of_exactPairing
   have : HasRightDual ((L((p)^*[A])).obj D) := ⟨(L((p)^*[A])).obj F⟩
   have : IsIso (pairingKunnethMap (pulledBackPairing A N ω φ) S) := h
   exact isIso_pairingKunnethMap_tensor_left _ _ _
+
+/-- The tensor map of `Rf^!` at `(Λ, K)` is invertible as soon as the canonical map
+`θ_{f, K} : ω_f ⊗ᴸ Lf^* K ⟶ Rf^! K` is, `θ_{f, K}` being the tensor map followed by the left
+unitor. -/
+lemma isIso_rightDerivedUpperShriekTensorMap_unit_of_isIso {X' Y' : Scheme.{u}} (f : X' ⟶ Y')
+    [HasCompactification f] [(R(f)_![A]).IsLeftAdjoint] [IsIso (projectionMap A f)]
+    (K : _root_.DerivedCategory (Sheaf Y'.smallEtaleTopology A))
+    (h : IsIso (dualizingComplexTensorMapOfIsIso f K)) :
+    IsIso (rightDerivedUpperShriekTensorMap f (𝟙_ _) K) :=
+  have : IsIso (rightDerivedUpperShriekTensorMap f (𝟙_ _) K ≫ (R(f)^![A]).map (λ_ K).hom) := h
+  IsIso.of_isIso_comp_right _ ((R(f)^![A]).map (λ_ K).hom)
 
 end KunnethVerdierMap
 

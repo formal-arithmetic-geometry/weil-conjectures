@@ -24,7 +24,8 @@ functor `F` with a comparison `δ : F(N ⊗ N') ≅ F N ⊗ F N'`, and let
 `τ : R M ⊗ F N ⟶ R(M ⊗ N)` be the tensor map (`CategoryTheory.Adjunction.projectionTensorMap`).
 The *internal Hom exchange* `R [A, Y] ⟶ [F A, R Y]` (`CategoryTheory.Adjunction.ihomExchange`)
 is an isomorphism, and `R` carries the Künneth map of `ev` at `S` to the Künneth map of
-`F ev` at `R S`, through `τ` (`CategoryTheory.Adjunction.projectionTensorMap_comp_map_pairingKunnethMap`).
+`F ev` at `R S`, through `τ`
+(`CategoryTheory.Adjunction.projectionTensorMap_comp_map_pairingKunnethMap`).
 So, if `τ` is invertible at `(S, D)` and `(S, W)`, then `R` of the Künneth map is invertible if and
 only if the Künneth map of `F ev` at `R S` is
 (`CategoryTheory.Adjunction.isIso_map_pairingKunnethMap_iff`).
@@ -185,7 +186,7 @@ theorem isIso_ihomExchange (A Y : D) : IsIso (adj.ihomExchange π A Y) := by
   rw [← curry_uncurry (g ≫ adj.ihomExchange π A Y),
     ← (adj.homEquiv _ _).apply_symm_apply (uncurry (g ≫ adj.ihomExchange π A Y)),
     homEquiv_symm_uncurry_comp_ihomExchange adj π hπ g]
-  simp only [e, Equiv.trans_apply, homEquiv_apply_eq, homEquiv_symm_apply_eq]
+  simp only [e, Equiv.trans_apply, homEquiv_symm_apply_eq]
   congr 2
   simp [ι, Iso.homCongr]
 
@@ -221,7 +222,8 @@ theorem projectionTensorMap_comp_map_pairingKunnethMap {A Dd W : D} (ev : Dd ⊗
 isomorphism if and only if the Künneth map of `F D ⊗ F A ≅ F(D ⊗ A) ⟶ F W` at `R S` is. -/
 theorem isIso_map_pairingKunnethMap_iff {A Dd W : D} (ev : Dd ⊗ A ⟶ W) (S : D)
     [IsIso (adj.projectionTensorMap π S Dd)] [IsIso (adj.projectionTensorMap π S W)] :
-    IsIso (R.map (pairingKunnethMap ev S)) ↔ IsIso (pairingKunnethMap (inv (δ Dd A) ≫ F.map ev) (R.obj S)) := by
+    IsIso (R.map (pairingKunnethMap ev S)) ↔
+      IsIso (pairingKunnethMap (inv (δ Dd A) ≫ F.map ev) (R.obj S)) := by
   have := adj.isIso_ihomExchange π hπ A (S ⊗ W)
   have h := adj.projectionTensorMap_comp_map_pairingKunnethMap π hπ hπr δ hassoc ev S
   constructor
@@ -244,7 +246,7 @@ section Dualizable
 
 open Adjunction
 
-variable {E : Type*} [Category* E] [MonoidalCategory E] [BraidedCategory E] [MonoidalClosed E]
+variable {E : Type*} [Category* E] [MonoidalCategory E]
 
 /-- The counit of `Tᘁ ⊗ - ⊣ T ⊗ -`. -/
 lemma tensorLeftAdjunction_counit_app' (T : E) [HasRightDual T] (X : E) :
@@ -267,7 +269,8 @@ lemma projectionTensorMap_tensorLeftAdjunction (T : E) [HasRightDual T] (M N : E
 /-- **Tensoring with a dualizable object.** If the Künneth map of `ev` at `S` is an
 isomorphism, then so is the one at `T ⊗ S` for `T` with a right dual: this is the transport of
 the Künneth map along the adjunction `Tᘁ ⊗ - ⊣ T ⊗ -`. -/
-theorem isIso_pairingKunnethMap_tensor_left {A D W : E} (ev : D ⊗ A ⟶ W) (T : E) [HasRightDual T]
+theorem isIso_pairingKunnethMap_tensor_left [BraidedCategory E] [MonoidalClosed E] {A D W : E}
+    (ev : D ⊗ A ⟶ W) (T : E) [HasRightDual T]
     (S : E) [IsIso (pairingKunnethMap ev S)] : IsIso (pairingKunnethMap ev (T ⊗ S)) := by
   have hπ : ∀ {M M' : E} (φ : M ⟶ M') (N : E),
       (tensorLeft Tᘁ).map φ ▷ N ≫ (α_ Tᘁ M' N).hom =

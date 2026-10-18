@@ -98,12 +98,37 @@ theorem isIso_kunnethVerdierMap_of_isClosedImmersion_of_isOpenImmersion
   have hτi (B : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology 𝓜))
       (hB : constructibleFiniteTor 𝓜 Y B) :
       IsIso (rightDerivedUpperShriekTensorMap (pullbackMapLeft a b i)
-        ((L((pullback.fst a b)^*[𝓜])).obj M) ((L((pullback.snd a b)^*[𝓜])).obj B)) := by
-    have hE := exists_nonempty_iso_derivedTensor_rightDerivedLowerStar Λ b a j hM
-      (Iso.refl ((L((pullback.fst a b)^*[𝓜])).obj M)) hB
-    exact isIso_rightDerivedUpperShriekTensorMap_of_isClosedImmersion Λ (pullbackMapLeft a b i)
-      (pullbackMapLeft a b j) hij' _ _ hE
-  sorry
+        ((L((pullback.fst a b)^*[𝓜])).obj M) ((L((pullback.snd a b)^*[𝓜])).obj B)) :=
+    isIso_rightDerivedUpperShriekTensorMap_of_isClosedImmersion Λ (pullbackMapLeft a b i)
+      (pullbackMapLeft a b j) hij' _ _
+      (exists_nonempty_iso_derivedTensor_rightDerivedLowerStar Λ b a j hM (Iso.refl _) hB)
+  have hτj (B : _root_.DerivedCategory (Sheaf Y.smallEtaleTopology 𝓜)) :
+      IsIso (rightDerivedUpperShriekTensorMap (pullbackMapLeft a b j)
+        ((L((pullback.fst a b)^*[𝓜])).obj M) ((L((pullback.snd a b)^*[𝓜])).obj B)) :=
+    isIso_rightDerivedUpperShriekTensorMap_of_isOpenImmersion Λ (pullbackMapLeft a b j)
+      (pullbackMapLeft a b i) hij' _ _
+  refine isIso_of_isIso_rightDerivedUpperShriek_map_of_isIso_map Λ (pullbackMapLeft a b i)
+    (pullbackMapLeft a b j) hij' _ ?_ ?_
+  · rw [isIso_map_kunnethVerdierMap_iff N ω (pullbackMapLeft a b i)
+      (projectionMapAssociativity Λ _) _ _ (hτi _ hD) (hτi _ hω),
+      isIso_kunnethVerdierMap_congr N ω wi]
+    have : IsIso ((rightDerivedUpperShriekBaseChangeMap Λ sqi).app M) :=
+      isIso_rightDerivedUpperShriekBaseChangeMap_app_of_isClosedImmersion Λ sqi j hij
+        (pullbackMapLeft a b j) hdisj _
+        ⟨_, nonempty_iso_leftDerivedUpperStar_fst_rightDerivedLowerStar Λ b a j
+          (constructibleFiniteTor_leftDerivedUpperStar _ j hM)⟩
+    exact (isIso_kunnethVerdierMap_iff_of_iso N ω _
+      (asIso ((rightDerivedUpperShriekBaseChangeMap Λ sqi).app M))).1 hZ
+  · refine (NatIso.isIso_map_iff (rightDerivedUpperShriekIsoLeftDerivedUpperStar Λ
+      (pullbackMapLeft a b j)) _).1 ?_
+    rw [isIso_map_kunnethVerdierMap_iff N ω (pullbackMapLeft a b j)
+      (projectionMapAssociativity Λ _) _ _ (hτj _) (hτj _),
+      isIso_kunnethVerdierMap_congr N ω wj]
+    exact (isIso_kunnethVerdierMap_iff_of_iso N ω _
+      ((rightDerivedUpperShriekIsoLeftDerivedUpperStar Λ (pullbackMapLeft a b j)).app _ ≪≫
+        ((leftDerivedUpperStarComp _ (pullbackMapLeft a b j) (pullback.fst a b)
+          (pullback.fst (j ≫ a) b ≫ j) sqj.w).app M).symm ≪≫
+        (leftDerivedUpperStarComp _ (pullback.fst (j ≫ a) b) j).app M)).2 hU
 
 end Etale
 
