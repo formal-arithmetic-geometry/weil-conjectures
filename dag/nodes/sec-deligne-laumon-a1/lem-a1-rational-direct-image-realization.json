@@ -436,5 +436,41 @@
   "group": "N7",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-13920b360 (reviewer sub-agent of L); spot-checked: I read the item, all 15 steps, every cited node statement, unit sk-p-dl-a1-perverse, chapter sec-deligne-laumon-a1, and Bhatt–Scholze Lemma 6.7.2, Proposition 6.8.14(2) and Remark 6.8.15. The proof is agent-written, as declared. There are no new nodes; the false helper was withdrawn and is cited nowhere. The statement is unchanged and not weakened. The core isomorphism is correct. Step 4 proves f qcqs because X is noetherian. Step 5 shows E_T is flat over B_T, since it is a filtered colimit of copies of B_T along multiplication by the uniformizer. Step 8 then applies det-pe-bounded-continuity-direct-image to that colimit, and the stage equation of step 7 makes the canonical colimit map equal to H^q of the restricted comparison, which is therefore an isomorphism. I recomputed the step 11 mate equation and the step 12 unit and counit equations; they match the transpose form in def-weil-pbc-adjunction-mate. Edge cases checked: empty X, K=0, torsion K, shifts, f=id, and finite versus infinite disjoint unions of points. Fixes are in fixes/dag/nodes/sec-deligne-laumon-a1/lem-a1-rational-direct-image-realization.json. Missing citations: step 1 now cites lem-weil-pbc-finite-type-over-noetherian and lem-kun-dimension-finite-type (declared in split_report.tool_uses); step 4 names det-pe-bounded-continuity-direct-image in its text, so it is now in uses. Repairable faults: (1) Step 10 (C3/E5/E6) took q_M from lem-tw-ordinary-completed-integral-pullback, which uses the completed pullback of def-pur-integral-derived-operations, while the item and the realization node use def-weil-pbc-completed-pullback; it also asserted the transported Hom bijection without justification. Rewritten: q_M is now the comparison of def-weil-pbc-completed-pullback, and the Hom bijection follows from the adjunct equation of lem-weil-pbc-ring-sheaf-change-adjunction applied to the constant sheaf mapping to B. Step 12 now cites the same definition. (2) Step 13 (E1) never checked that raw scalar localization is a localization at a class of morphisms, as lem-sfb-adjunction-localization requires; I added the elementary check, citing lem-weil-pbc-localization-universal-property. (3) Step 14 left implicit that the coefficient-change direct-image comparisons are mates of their pullback comparisons; I made this explicit through steps 7 and 11. proof_deps is now the union of all uses; no cycle; every step is under 2000 characters; all other fields are unchanged. The added off-unit tool use is lem-kun-dimension-finite-type.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RationalDirectImageRealization",
+  "declaration": "AlgebraicGeometry.Scheme.ContinuousRational.DirectImage.rational_direct_image_realization",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.ContinuousRational.DirectImage.Space",
+   "AlgebraicGeometry.Scheme.ContinuousRational.DirectImage.modulePush",
+   "AlgebraicGeometry.Scheme.ContinuousRational.DirectImage.modulePush_additive",
+   "AlgebraicGeometry.Scheme.ContinuousRational.DirectImage.derivedPush",
+   "AlgebraicGeometry.Scheme.ContinuousRational.DirectImage.pushUnit",
+   "AlgebraicGeometry.Scheme.ContinuousRational.DirectImage.Ordinary",
+   "AlgebraicGeometry.Scheme.ContinuousRational.DirectImage.projection",
+   "AlgebraicGeometry.Scheme.ContinuousRational.DirectImage.integralPush",
+   "AlgebraicGeometry.Scheme.ContinuousRational.DirectImage.rawPush",
+   "AlgebraicGeometry.Scheme.ContinuousRational.DirectImage.Comparison",
+   "AlgebraicGeometry.Scheme.ContinuousRational.DirectImage.FieldChange",
+   "AlgebraicGeometry.Scheme.ContinuousRational.DirectImage.Identity",
+   "AlgebraicGeometry.Scheme.ContinuousRational.DirectImage.FieldComposition",
+   "AlgebraicGeometry.Scheme.ContinuousRational.DirectImage.Package",
+   "AlgebraicGeometry.Scheme.ContinuousRational.DirectImage.rational_direct_image_realization"
+  ],
+  "file": "lean/Sheaf/Paper/RationalDirectImageRealization.lean",
+  "statement": "theorem rational_direct_image_realization (k : Type u) [Field k] (l : ℕ) [Fact l.Prime] (_hl : IsUnit (l : k)) : ∃ r : Family.{u} l, Nonempty (Package k l r)",
+  "branch": "newtargets-dag",
+  "by": "NQ",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The structures unpack this node’s normalized comparison obligation. The ambient continuous direct image is the actual total right derived sectionwise module pushforward; the projection is the mate of the dependency’s balanced tensor comparison. Raw direct image is the existing ScalarLocalization.transport of the ordinary completed-ring restriction. Actual completed and raw adjunction units/counits, finite coefficient mates and their associators, and identity comparisons are specified by equations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-eecb10b91",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable files, all statement dependencies, sources, canonical comparisons, edge cases, universes, docstrings, and route-pivot compliance. Both per-file compiler checks passed without diagnostics (15.9 s and 20.7 s). No corrections required."
  }
 }

@@ -238,5 +238,29 @@
   "group": "Q26",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q26-e17a5fb4d (reviewer sub-agent of L); spot-checked: Read both nodes fully and checked all eight steps against cited statements and sources. Verified signs, rank-zero/one cases, singular bases, and the independent closed-support lemma. No duplicates, circular dependencies, or dropped-route citations found. Accepted Cartier-Kummer tool use; detailed review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ChernFlagFormula",
+  "declaration": "WeilConjectures.PurityFiniteSetting.chern_flag_formula",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.ordinaryFiniteFlagRoot",
+   "WeilConjectures.PurityFiniteSetting.ordinaryFiniteFlagProductCoefficient",
+   "WeilConjectures.PurityFiniteSetting.ordinaryFiniteFlagTopProduct",
+   "WeilConjectures.PurityFiniteSetting.chern_flag_formula"
+  ],
+  "file": "lean/Sheaf/Paper/ChernFlagFormula.lean",
+  "statement": "theorem chern_flag_formula (P : PurityFiniteSetting.{u}) {S : Scheme.{u}} (a : S ⟶ Spec (.of P.field.k)) [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a] (F : S.Modules) (r : ℕ) [F.IsFiniteLocallyFreeOfRank r] (H : Fin (r + 1) → S.Modules) (ι : ∀ i : Fin (r + 1), H i ⟶ F) (d : ∀ j : Fin r, H j.castSucc ⟶ H j.succ) (hmono : ∀ i : Fin (r + 1), Mono (ι i)) (hcompat : ∀ j : Fin r, d j ≫ ι j.succ = ι j.castSucc) (hzero : IsZero (H 0)) (hfull : IsIso (ι (Fin.last r))) (hsub : ∀ i : Fin (r + 1), (cokernel (ι i)).IsLocallyFree) (hQ : ∀ j : Fin r, (cokernel (d j)).IsInvertible) : (∀ i : Fin (r + 1), P.ordinaryFiniteChernClass a F r i.val = P.ordinaryFiniteFlagProductCoefficient S r (fun j => P.ordinaryFiniteFlagRoot a (cokernel (d j)) (hQ j)) i.val) ∧ P.ordinaryFiniteChernClass a F r r = P.ordinaryFiniteFlagTopProduct S r (fun j => P.ordinaryFiniteFlagRoot a (cokernel (d j)) (hQ j))",
+  "branch": "newtargets-dag",
+  "by": "N2",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-5de618d1a",
+  "group": "N2",
+  "result": "pass",
+  "note": "Statement, dependencies, source alignment, edge cases, docstrings, helper constructions, route-pivot compliance, and per-file sandbox/library compilation all checked successfully."
  }
 }
