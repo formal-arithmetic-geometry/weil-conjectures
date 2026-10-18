@@ -207,7 +207,11 @@
   "lem-weil-compact-support-reduction-tower-functor",
   "def-pur-derived-internal-hom",
   "lem-weil-tower-evaluation-kinjective",
-  "lem-weil-pbc-ringed-projection-mate-exact"
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-coef-derived-system-evaluation-calculus",
+  "def-coef-ringed-sequence-site",
+  "def-coef-ringed-tensor-hom-model",
+  "def-compact-support-direct-image-detailed"
  ],
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
@@ -379,5 +383,56 @@
   "group": "Q91",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q91-fb7312072 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 10 steps in full, every cited node's statement, the parent prop-coef-integral-dualizing (step 10), the consumer lem-coef-tower-natural-currying, and blueprint main-20261015 prop-coef-integral-dualizing.proof.md paragraph 2. The statement is unchanged and not weakened. Small cases tested: point with K=R (pairing A_n⊗^L_R A_n→A_n through the balancing map), f=ϖ, K=R/ϖ, X empty. The B_K = T_a^c claim holds in the sense of agreeing evaluations and transitions, which is all that node's existence statement fixes. No new nodes, no duplicates, no cycle, no SGA. Three citation faults, all repaired in fixes/: (1) C4: the existence of the closed tensor-Hom structure and its evaluation counit was cited only to the definition def-coef-ringed-tensor-hom-model; Steps 3, 6 and 10 now also cite lem-sf-ringed-derived-closed-symmetric-monoidal (same unit). (2) C4: Step 2 identified the finite mapping complexes using only the Hom-set scalar adjunction; it now cites lem-sfb-dc-hom-scalar-adjunction with RΓ and the composition comparison, and I accepted that as an added tool use. (3) Step 9 evaluated counits and mates on the quotient-ring sequence sites as if evaluation preserved K-injectives, which it need not because the left adjoint of e_n is not exact; it now cites lem-coef-semilinear-derived-sections (same unit, reviewed), which gives these evaluations with no K-injectivity claim. I accept the 13 declared tool uses. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-4f786026e",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Statement, dependencies, source proof, edge cases, route-pivot compliance, docstrings, report sections, and scompile.py sandbox/library compilation all checked; no findings."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.CoefTowerEvaluationPairing",
+  "declaration": "WeilConjectures.coefTowerEvaluationPairing",
+  "declarations": [
+   "WeilConjectures.coefPairingModules",
+   "WeilConjectures.coefPairingModules_grothendieck",
+   "WeilConjectures.coefPairingModules_flat",
+   "WeilConjectures.coefPairingDerived",
+   "WeilConjectures.coefPairingTensor",
+   "WeilConjectures.coefPairingSections",
+   "WeilConjectures.coefPairingHom",
+   "WeilConjectures.coefPairingSupport",
+   "CategoryTheory.CoefPairingFrame",
+   "CategoryTheory.CoefPairingFrame.leftMate",
+   "CategoryTheory.CoefPairingFrame.projection",
+   "CategoryTheory.CoefPairingFrame.pairing",
+   "WeilConjectures.coefPairingOrdinarySections_additive",
+   "WeilConjectures.coefPairingOrdinaryIntegralSections",
+   "WeilConjectures.coefPairingOrdinaryIntegralSections_additive",
+   "WeilConjectures.coefPairingComplexTower_shape",
+   "WeilConjectures.coefPairingComplexTower_d_comp_d",
+   "WeilConjectures.coefPairingComplexTower",
+   "WeilConjectures.coefPairingHomComplex",
+   "WeilConjectures.coefPairingIntegralSections",
+   "WeilConjectures.coefPairingFiniteSections",
+   "WeilConjectures.coefPairingFiniteHom",
+   "WeilConjectures.coefPairingIntegralHom",
+   "WeilConjectures.coefPairingSequenceGrothendieck",
+   "WeilConjectures.CoefPairingSystem",
+   "WeilConjectures.CoefPairingSystem.beta",
+   "WeilConjectures.coefPairingFiniteSupport",
+   "WeilConjectures.CoefPairingFiniteFrame",
+   "WeilConjectures.coefPairingFiniteBeta",
+   "WeilConjectures.coefPairingFiniteC",
+   "WeilConjectures.coefTowerEvaluationPairing"
+  ],
+  "file": "lean/Sheaf/SixFunctors/CoefTowerEvaluationPairing.lean",
+  "statement": "theorem coefTowerEvaluationPairing (hl : l ≠ D.p) (Q : CochainComplex (coefficientSequenceModules.{u, u} l E X) ℤ) (eQ : ∀ n : ℕ, (coefficientSequenceDerivedEvaluation.{u, u} l E X n).obj (coefTraceInput l E X Q) ≅ integralDualizingFiniteTerm l E D X n) (_hQ : ∀ {m n : ℕ} (h : n ≤ m), (coefficientSequenceDerivedTransition.{u, u} l E X h).app (coefTraceInput l E X Q) ≫ (normalizedDVRRes.{u, u} l E X h).map (eQ n).hom = (eQ m).hom ≫ integralDualizingExceptionalTransition l E D X hl h) : ∃ (S : CoefficientDerivedSystemCalculus l E X) (G : CoefPairingSystem l E (finiteDualizingCompactification D X) S) (F : ∀ n : ℕ, CoefPairingFiniteFrame l E (finiteDualizingCompactification D X) S G n) (evaluationTensor : ∀ n : ℕ, coefPairingTensor l E ⋙ coefTraceEvaluation l E n ≅ (coefTraceEvaluation l E n).prod (coefTraceEvaluation l E n) ⋙ MonoidalCategory.tensor (DerivedCategory (ModuleCat.{u + 1} (coefTraceRing l E)))) (eIntegralHom : ∀ n : ℕ, coefPairingHom l E X S Q ⋙ coefTraceEvaluation l E n ≅ coefPairingIntegralHom l E X n (integralDualizingFiniteTerm l E D X n)) (eH : ∀ n : ℕ, coefPairingHom l E X S Q ⋙ coefTraceEvaluation l E n ≅ coefPairingFiniteHom l E X n (integralDualizingFiniteTerm l E D X n)) (eB : ∀ n : ℕ, coefPairingSupport l E D X S ⋙ coefTraceEvaluation l E n ≅ coefPairingFiniteC l E D X n) (eQcompact : ∀ n : ℕ, (coefTraceEvaluation l E n).obj (coefTraceDualizingTower l E D X Q) ≅ (coefPairingFiniteSupport l E (finiteDualizingCompactification D X) n).obj (integralDualizingFiniteTerm l E D X n)), (∀ (K : DerivedCategory (scalarReductionSource.{u, u} l E X)) (P : CochainComplex (scalarReductionSource.{u, u} l E X) ℤ) (_eP : DerivedCategory.Q.obj P ≅ K) (I : CochainComplex (ℕᵒᵖ ⥤ scalarReductionSource.{u, u} l E X) ℤ) (_hI : I.IsKInjective) (_eI : DerivedCategory.Q.obj I ≅ (coefficientSequenceDerivedRestriction.{u, u} l E X).obj (coefTraceInput l E X Q)), Nonempty ((coefPairingHom l E X S Q).obj (op K) ≅ DerivedCategory.Q.obj (coefPairingHomComplex l E X P I))) ∧ (∀ n : ℕ, ∃ scalarIso : coefPairingIntegralHom l E X n (integralDualizingFiniteTerm l E D X n) ≅ coefPairingFiniteHom l E X n (integralDualizingFiniteTerm l E D X n), (eIntegralHom n).hom ≫ scalarIso.hom = (eH n).hom) ∧ (∀ (K : DerivedCategory (scalarReductionSource.{u, u} l E X)) {m n : ℕ} (h : n ≤ m), (coefTraceTransition l E h).app ((coefPairingSupport l E D X S).obj K) ≫ (eB n).hom.app K = (eB m).hom.app K ≫ (coefPairingIntegralSections l E (Spec (.of D.k))).map (compactSupportRestrictedTransition l E (finiteDualizingCompactification D X) m n h K)) ∧ (∀ (K : DerivedCategory (scalarReductionSource.{u, u} l E X)), finiteTorConstructibleIntegral l E X K → ∀ n : ℕ, (coefTraceEvaluation l E n).map (G.beta l E (S.reduction.obj K) (coefTraceInput l E X Q)) ≫ (eQcompact n).hom = (evaluationTensor n).hom.app ((coefPairingHom l E X S Q).obj (op K), (coefPairingSupport l E D X S).obj K) ≫ ((eH n).hom.app (op K) ⊗ₘ (eB n).hom.app K) ≫ coefPairingFiniteBeta l E (finiteDualizingCompactification D X) S G n (F n) ((scalarReductionDerivedExtension l E X n).obj K) (integralDualizingFiniteTerm l E D X n)) ∧ (∀ (K K' : DerivedCategory (scalarReductionSource.{u, u} l E X)), finiteTorConstructibleIntegral l E X K → finiteTorConstructibleIntegral l E X K' → ∀ f : K ⟶ K', (coefPairingTensor l E).map (Prod.mkHom ((coefPairingHom l E X S Q).map f.op) (𝟙 _)) ≫ G.beta l E (S.reduction.obj K) (coefTraceInput l E X Q) = (coefPairingTensor l E).map (Prod.mkHom (𝟙 _) ((coefPairingSupport l E D X S).map f)) ≫ G.beta l E (S.reduction.obj K') (coefTraceInput l E X Q))",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-17",
+  "existing": false
  }
 }
