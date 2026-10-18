@@ -257,5 +257,23 @@
   "group": "Q118",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-0f7b4dd83 (reviewer sub-agent of L); spot-checked: Read in full: the item, its 8 steps and every cited statement, plus Stacks 0AW4 (more-algebra.tex:32389). The statement matches the base and 0AW4 hypothesis by hypothesis; it only spells out 'local' and 'equidimensional' and adds the def-kun-topological-krull-dimension stmt_dep. Nothing was weakened, and the citer lem-per-ratliff-formal-catenarity is unaffected. The steps follow the Stacks proof. Step 2 writes out the catenary+equidimensional formula dim B_q = d - dim B/q by counting saturated chains. Step 3 uses going down (00HS) to get q∩A=p for q minimal over pB, then 00ON (Mathlib leaf, flat Noetherian, any prime, no finite-type hypothesis) gives dim B_q = dim A_p. Step 4 gives equidimensionality of Spec(B/pB). Step 5 applies 00ON at the maximal ideals of A/p->B/pB (flat by the quotient-flat leaf with M=B, local, Noetherian) and of A->B, with the same closed fibre, and gets (*) dim A_p = a - dim A/p. Step 6 gives equidimensionality of A. Step 7 shows B/pB is catenary because prime intervals coincide, then reapplies steps 1-5 non-recursively at p'/p, where the left side is 1. Step 8 telescopes to catenarity. Each cited node states what its step uses. All theorem inputs are Mathlib leaves or definitions, so there is no cycle and no tool_uses. Elementary flags are justified. Tested: A=B a field, k->k[t]_(t), the identity on a DVR, B=k[x,y]_(x,y)/(xy), p=m_A. rg over the DAG for catenary with equidimensional/flat found no duplicate. There are no new nodes, no SGA source and no changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FlatEquidimensionalCatenaryDescent",
+  "declaration": "RingHom.Flat.equidimensional_quotients_and_catenary_descent",
+  "file": "lean/Sheaf/RingTheory/FlatEquidimensionalCatenaryDescent.lean",
+  "statement": "theorem Flat.equidimensional_quotients_and_catenary_descent {A : Type u} {B : Type v} [CommRing A] [CommRing B] [IsNoetherianRing A] [IsNoetherianRing B] [IsLocalRing A] [IsLocalRing B] (f : A →+* B) [IsLocalHom f] (hf : f.Flat) (hcat : IsCatenaryRing B) (heq : ∀ (Z W : Set (Spec (.of B))), Z ∈ irreducibleComponents (Spec (.of B)) → W ∈ irreducibleComponents (Spec (.of B)) → topologicalKrullDim Z = topologicalKrullDim W) : (∀ (p : Ideal A) [p.IsPrime], ∀ (Z W : Set (Spec (.of (B ⧸ p.map f)))), Z ∈ irreducibleComponents (Spec (.of (B ⧸ p.map f))) → W ∈ irreducibleComponents (Spec (.of (B ⧸ p.map f))) → topologicalKrullDim Z = topologicalKrullDim W) ∧ IsCatenaryRing A ∧ (∀ (Z W : Set (Spec (.of A))), Z ∈ irreducibleComponents (Spec (.of A)) → W ∈ irreducibleComponents (Spec (.of A)) → topologicalKrullDim Z = topologicalKrullDim W)",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8d87d5fd9",
+  "group": "NG",
+  "result": "pass",
+  "note": "Lean statement matches node and Stacks 0AW4 clause by clause: commutative Noetherian local A,B (independent universes u,v); IsLocalHom f (equivalent to the comap condition on maximal ideals by IsLocalRing.local_hom_TFAE 1<->5); f.Flat; IsCatenaryRing B (recorded ExcellentRing declaration, definition read); equidimensionality spelled out as equal topologicalKrullDim of all irreducibleComponents of Spec(.of B); conclusions for every prime p of A on Spec(B / p.map f), IsCatenaryRing A, and equidimensional Spec A. No extra hypotheses; edge cases (p = m_A, single-component spectra, WithBot dimensions, no domain or reducedness assumption) are fine. lean.statement is verbatim in the file; only the lean record differs from the live node. No duplicate equidimensionality notion in lean/Sheaf or the DAG. Plain imports are exactly the proof_deps' Mathlib modules (brief rule 7). Docstrings carry the source place, blueprint id and all 8 steps; proof is sorry only; no line over 100 characters. nt_compile --json clean in 1.7 s; a broken-identifier control copy fails. The citer ratliff-formal-catenarity is unaffected. Second reading is the worker's own reread but matches every clause. No findings."
  }
 }
