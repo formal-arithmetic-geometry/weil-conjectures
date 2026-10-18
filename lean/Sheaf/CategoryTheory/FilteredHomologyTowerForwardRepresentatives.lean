@@ -41,7 +41,42 @@ private theorem filtered_alphaIter
       HomologicalComplex.homologyMap
         (Subobject.ofLE (F.step (-Q)) (F.step (-(Q + (s : ℤ))))
           (F.antitone_step (by omega))) (P + Q) := by
-  sorry
+  induction s generalizing P Q with
+  | zero =>
+    unfold BigradedExactCouple.alphaIter
+    apply (eqToHom_heq_id_dom _ _ _).trans
+    symm
+    apply (inclusion_homology_heq K F _ _ (-Q) (-Q) _ (P + Q)
+      (by omega) le_rfl rfl (by omega) rfl).trans
+    simp only [Subobject.ofLE_refl, HomologicalComplex.homologyMap_id]
+    rfl
+  | succ s ih =>
+    simp only [BigradedExactCouple.alphaIter, ← Category.assoc, comp_eqToHom_heq_iff]
+    have hα : (filteredHomologyExactCouple K F).alpha P Q ≍
+        HomologicalComplex.homologyMap
+          (Subobject.ofLE (F.step (-Q)) (F.step (-(Q + 1)))
+            (F.antitone_step (by omega))) (P + Q) := by
+      simp only [filteredHomologyExactCouple, filteredHomologyAlpha,
+        comp_eqToHom_heq_iff]
+      rfl
+    have hi : (filteredHomologyExactCouple K F).alphaIter s (P - 1) (Q + 1) ≍
+        HomologicalComplex.homologyMap
+          (Subobject.ofLE (F.step (-(Q + 1))) (F.step (-(Q + (s + 1 : ℕ))))
+            (F.antitone_step (by omega))) (P + Q) := by
+      apply (ih (P - 1) (Q + 1)).trans
+      exact inclusion_homology_heq K F _ _ _ _ _ _ (by omega) (by omega)
+        rfl (by omega) (by omega)
+    have h := heq_comp (by rfl) (by
+      change (F.step (-(Q + 1)) : CochainComplex C ℤ).homology (P - 1 + (Q + 1)) =
+        (F.step (-(Q + 1)) : CochainComplex C ℤ).homology (P + Q)
+      congr 1; omega) (by
+      change (F.step (-((Q + 1) + (s : ℤ))) : CochainComplex C ℤ).homology
+          (P - 1 - (s : ℤ) + ((Q + 1) + (s : ℤ))) =
+        (F.step (-(Q + (s + 1 : ℕ))) : CochainComplex C ℤ).homology (P + Q)
+      apply congrArg₂ (fun p n ↦ (F.step p : CochainComplex C ℤ).homology n) <;> omega)
+      hα hi
+    apply h.trans
+    rw [← HomologicalComplex.homologyMap_comp, Subobject.ofLE_comp_ofLE]
 
 private theorem connecting_heq
     {C : Type u} [Category.{v} C] [Abelian C]
@@ -58,7 +93,10 @@ private theorem filtered_initial_f
     (filteredHomologyEIso K F p q).inv ≫
         (filteredHomologyExactCouple K F).f (2 * p + q) (-p) ≍
       (filteredStep_shortExact K F p).δ (p + q) (p + q + 1) rfl := by
-  sorry
+  simp only [filteredHomologyEIso, eqToIso.inv, filteredHomologyExactCouple,
+    BigradedExactCouple.pageCouple, filteredHomologyF, ← Category.assoc,
+    eqToHom_comp_heq_iff, comp_eqToHom_heq_iff]
+  exact connecting_heq K F _ _ _ _ (by omega) (by omega)
 
 private theorem connecting_representative
     {C : Type u} [Category.{v} C] [Abelian C]
@@ -203,9 +241,7 @@ private theorem tower_forward_inclusion
           _ = (T.Z (r + 1) p q).arrow ≫ X.f p q := by
             rw [ih, Subobject.ofLE_arrow_assoc]
 
-/- TAKEN OUT at the upstream sync e47efb5a5 (2026-10-17): does not compile against the source;
-returned as a stage-3 repair item.
-/ -- The forward map of the derived couple is the lifted connecting class, before applying g.
+/-- The forward map of the derived couple is the lifted connecting class, before applying g.
 Source: Stacks Project, Tag 012K, representative differential formula preceding Lemma 12.24.2;
 Tag 011R, the restriction equation for the derived forward map.
 (blueprint: lem-sp-filtered-homology-tower-forward-representatives).
@@ -223,7 +259,7 @@ of that same filtration inclusion. The cycle b determines the source homology cl
 without any epimorphic refinement. Thus he gives the identical composite for the right
 side after I. Cancel the monomorphism hImono. The index transports express the equalities
 P=2*(p+s+1)+(q-s) and Q=-(p+s+1); they preserve the total degree p+q+1.
-This establishes only the forward-map identity; the induced g comparison is separate. - /
+This establishes only the forward-map identity; the induced g comparison is separate. -/
 theorem filteredHomology_tower_forward_representatives
     (C : Type u) [Category.{v} C] [Abelian C]
     (U : ObjectProperty.FullSubcategory
@@ -372,6 +408,5 @@ theorem filteredHomology_tower_forward_representatives
   simp only [Category.assoc]
   rw [reassoc_of% he, hIt, reassoc_of% (hcomm s (2 * p + q) (-p)), reassoc_of% ht', hf₀, hα]
   simpa only [Category.assoc] using hδ
--/
 
 end CategoryTheory
