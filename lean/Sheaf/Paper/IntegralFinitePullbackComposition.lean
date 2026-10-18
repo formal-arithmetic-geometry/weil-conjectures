@@ -71,7 +71,47 @@ theorem integralFinitePullbackModel_existsUnique
                 (Padic.coefficientExtensionRing l E (n + 1))))).unit.app M).val.app (op U) m) =
           ((proEtaleConstantRingAdjunction
             (Padic.coefficientExtensionRing l E (n + 1)) f).unit.app M).val.app (op U) m := by
-  sorry
+  let A := Padic.coefficientExtensionRing l E (n + 1)
+  let adj₁ := coefficientProEtaleModuleAdjunction.{u, u} f
+    (CommRingCat.of (ULift.{u + 1} A))
+  let adj₂ := proEtaleConstantRingAdjunction A f
+  -- The adjoint of the inverse-image coefficient map is the original constant-section map.
+  have hρ : proEtaleRingDirectImageMap f (proEtaleConstantRing Y A)
+      (proEtaleConstantRing X A) (proEtaleConstantRingComparison f A) =
+      coefficientProEtaleDirectRingMap.{u, u} f (CommRingCat.of (ULift.{u + 1} A)) := by
+    change (proEtaleSheafAdjunction f CommRingCat.{u + 1}).homEquiv _ _
+      (proEtaleCoefficientInverseImageMap f A) = _
+    exact ((proEtaleSheafAdjunction f CommRingCat.{u + 1}).homEquiv _ _).apply_symm_apply
+      (proEtaleCoefficientDirectImageMap f A)
+  let d : proEtaleConstantRingPushforward A f ≅
+      coefficientProEtaleModuleDirectImage.{u, u} f (CommRingCat.of (ULift.{u + 1} A)) :=
+    SheafOfModules.pushforwardCongr (by
+      exact congrArg (fun q ↦
+        (sheafCompose (ProEt.topology Y)
+          (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map q) hρ)
+  -- Conjugating the sectionwise identity gives the unit-normalized pullback comparison.
+  let a := (conjugateIsoEquiv adj₂ adj₁).symm d
+  have ha : ∀ (M : integralOperationsFiniteModules l E Y n) (U : Y.ProEt)
+      (m : M.val.obj (op U)),
+      (a.hom.app M).val.app (op ((proEtaleBaseChange f).obj U))
+        ((adj₁.unit.app M).val.app (op U) m) =
+          (adj₂.unit.app M).val.app (op U) m := by
+    intro M U m
+    exact (congrArg (fun z ↦ z.val.app (op U) m)
+      (unit_conjugateEquiv_symm adj₂ adj₁ d.hom M)).symm
+  refine ⟨a, ha, ?_⟩
+  intro b hb
+  apply Iso.ext
+  apply NatTrans.ext
+  funext M
+  -- The unit equation determines each component through the adjunction Hom bijection.
+  apply (adj₁.homEquiv _ _).injective
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro U
+  ext m
+  exact (hb M U.unop m).trans (ha M U.unop m).symm
 
 /-- The uniquely unit-normalized change of presentation for finite pullback.
 Source: Stacks Tags 03D3 and 0D6D
