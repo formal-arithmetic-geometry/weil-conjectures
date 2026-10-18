@@ -16233,3 +16233,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:29 L: merged deliver/Y3/Sheaf.CategoryTheory.FiniteContinuousModule (stage 3; reviewer PASS; first push; landing 20261018T062953-L-693418 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:29 L: merged deliver/Y3/Sheaf.CategoryTheory.Triangulated.DerivedLimitLevelwiseIsomorphism (stage 3; reviewer PASS; first push; landing 20261018T062953-L-693637 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:29 L: merged deliver/Y3/WeilConjectures.SixFunctors.Etale.Derived.Exchange (stage 3; reviewer PASS; first push; landing 20261018T062954-L-693911 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:29 L: merged deliver/Y5/Sheaf.AlgebraicGeometry.IntegralFibreEtaleSplitting (stage 3; reviewer PASS; first push; landing 20261018T062955-L-694094 (proof); batch 20261018T062645; modules 1; new nodes 0)
