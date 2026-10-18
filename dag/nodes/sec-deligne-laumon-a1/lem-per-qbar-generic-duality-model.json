@@ -1,11 +1,170 @@
 {
  "id": "lem-per-qbar-generic-duality-model",
  "kind": "statement",
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-weil-pbc-finite-type-over-noetherian], $T$ is Noetherian, and by [lem-kun-dimension-finite-type] it has finite dimension. Its irreducible components $C_1,\\ldots,C_t$ are finite in number: [lem-sc-locnoeth-components-locally-finite] gives a neighborhood meeting finitely many components at each point; a finite subcover exists since $T$ is quasi-compact. For each $i$ let $V_i=T\\setminus\\bigcup_{j\\ne i}C_j$. This is an open subset with irreducible underlying space, contains the generic point $\\eta_i$, and is contained in $C_i$. The $V_i$ are disjoint and their union contains all generic points.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-kun-dimension-finite-type",
+    "lem-sc-locnoeth-components-locally-finite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Proposition 6.2.2.1 (printed p.294)"
+   }
+  },
+  {
+   "text": "Only finitely many cohomology sheaves $\\mathcal H^r(K_a)$ are nonzero, by the bounded t-structure of [lem-per-adic-heart-pullback-fibres]. Each admits a finite locally closed stratification on which it is lisse with locally constant ranks, by the final clause of that same node. For each $i$ and each such sheaf take the stratum containing $\\eta_i$. A locally closed subset containing the generic point of an irreducible space contains an open neighborhood of that point: write it as an open subset of its closed closure, whose closure is all of $V_i$. Thus there is an open neighborhood $W_i\\subseteq V_i$ of $\\eta_i$ on which every one of the finitely many sheaves is lisse. Restriction is the exact pullback of that node. Each rank is constant on $W_i$, since a locally constant integer-valued function on an irreducible space is constant.",
+   "uses": [
+    "lem-per-adic-heart-pullback-fibres"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14 and Remark 6.8.15; finite-stratum constructible-heart characterization, followed by the elementary generic-stratum argument"
+   }
+  },
+  {
+   "text": "Shrink $W_i$ further so that $(W_i)_{\\mathrm{red}}$ is regular. Indeed $k$ is excellent by [lem-exc-fields-excellent]. Its J-2 property, as explicitly defined in [def-exc-excellent-ring], makes the regular locus of every finite-type $k$-algebra open. The reduced affine charts of $W_i$ are still finite-type $k$-algebras (quotient the coordinate rings by their nilradicals), so their regular loci glue to an open subset. This subset contains $\\eta_i$: a reduced local ring at a minimal prime is a field, since it has just one prime ideal and its nilradical is zero. A field is regular of dimension zero by [def-weil-regular-scheme]. Denote the resulting nonempty open by $U_i$. No assertion that $U_i$ is smooth over $k$ has been made.",
+   "uses": [
+    "lem-exc-fields-excellent",
+    "def-exc-excellent-ring",
+    "def-weil-regular-scheme"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Proposition 6.2.2.1 (printed p.294)"
+   }
+  },
+  {
+   "text": "Put $U=\\coprod_iU_i\\subseteq T$ and $d_i=\\dim U_i$. Each $d_i$ is a nonnegative finite integer by nonemptiness and [lem-kun-dimension-finite-type]. The complement $Z=T\\setminus U$ contains no generic point. To check the strict dimension drop directly, an irreducible chain in $Z$ ends in an irreducible closed subset $F$ lying in some $C_i$, because the finite closed cover by the $C_i$ covers $F$. Since $\\eta_i\\notin Z$, $F\\subsetneq C_i$. Appending $C_i$ gives a chain in $T$ one step longer. Consequently $\\dim Z\\leq\\dim T-1$ if $Z$ is nonempty. Passing to its reduced closed subscheme changes no topological chain. This also proves that $Z$ is empty when $\\dim T=0$.",
+   "uses": [
+    "lem-kun-dimension-finite-type"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, proof of Proposition 6.2.2.1 (printed p.294)"
+   }
+  },
+  {
+   "text": "Fix $X=U_i$ and $d=d_i$. At the coefficient field $\\mathbf Q_\\ell$, set $R=\\mathbf Z_\\ell$ and $\\Omega_R=a_X^!R_k$, where $a_X$ is the structure map. By [lem-per-adic-exceptional-projection] this is a derived-complete bounded constructible integral object and its canonical derived reductions are $\\nu_X^*a_{X,n}^!(\\mathbf Z/\\ell^n)_k$, compatibly with the reduction tower. Apply [lem-per-finite-regular-reduction-dualizing] to $X$: it is separated finite-type with regular reduction and irreducible underlying space by the preceding construction. Thus the reduction tower of $\\Omega_R[-2d]$ identifies with $N_n=\\nu_X^*(\\mathbf Z/\\ell^n)_X(d)$, rank-one locally free sheaves in degree zero, with normalized Kummer transitions.",
+   "uses": [
+    "lem-per-adic-exceptional-projection",
+    "lem-per-finite-regular-reduction-dualizing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVII, Proposition 2.4.4.1, Proposition 4.1.2, Theorem 5.1.1 and proof of Proposition 6.2.2.1; Bhatt-Scholze Lemma 6.7.19"
+   }
+  },
+  {
+   "text": "The compatible rank-one system $((\\mathbf Z/\\ell^n)_X(d))_n$ defines a lisse $\\mathbf Z_\\ell$-sheaf $N$; [lem-per-lisse-completed-system-comparison] realizes it on the pro-etale site as the ordinary inverse limit $\\varprojlim N_n$, locally free of rank one over the completed coefficient sheaf. The transitions $N_{n+1}\\to N_n$ are epimorphisms, because they are reductions between normalized rank-one local systems. Therefore [det-pe-milnor-epimorphic] identifies this ordinary limit in degree zero with the derived limit. On the other hand, [def-weil-derived-complete] identifies $\\Omega_R[-2d]$ with a derived limit of the same tower. The uniqueness up to isomorphism in [lem-weil-derived-limit-existence], clause 1, gives $\\Omega_R\\cong N[2d]$. Only an isomorphism is required; no canonical choice of a triangulated derived limit is asserted.",
+   "uses": [
+    "lem-per-lisse-completed-system-comparison",
+    "det-pe-milnor-epimorphic",
+    "def-weil-derived-complete",
+    "lem-weil-derived-limit-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 6.7.19--6.7.20 and Proposition 6.8.4; reconstruction from the normalized reduction tower"
+   }
+  },
+  {
+   "text": "Rationalize $N$ and pass to the common-field category; write $\\mathcal O_i=(\\mathbf Q_\\ell,N[1/\\ell])$. This is a rank-one lisse sheaf by [lem-per-lisse-completed-system-comparison] and [def-pod-lisse-l-adic-sheaves]. We verify that the image of $\\Omega_R$ is the $\\omega_X$ of the statement. For any finite $E/\\mathbf Q_\\ell$ the scalar-extension comparison for $a_X^!$ in [lem-per-adic-exceptional-projection] identifies its integral value on the coefficient unit with $\\Omega_R\\otimes_{\\mathbf Z_\\ell}\\mathcal O_E$. With the compact-support functors of [def-weil-integral-rational-qbar-compact-support] and raw rational Hom groups of [def-weil-pbc-rational-category], the integral adjunction bijections extend to rational Hom groups by tensoring with $E$; their inverses and naturality equations extend as well. Passing these compatible bijections to the filtered Hom colimits by [lem-coef-qbar-adjunction-hom-descent] gives natural bijections $\\operatorname{Hom}(K,(\\mathbf Q_\\ell,\\Omega_R[1/\\ell]))\\cong\\operatorname{Hom}(Ra_{X!}K,\\overline{\\mathbf Q}_{\\ell,k})$. Here the common-stage morphisms are precisely those of [def-weil-pbc-qbar-category]. The adjunction of [lem-per-qbar-arbitrary-field-duality] identifies the latter Hom group with $\\operatorname{Hom}(K,\\omega_X)$. Apply this natural bijection of represented Hom functors and its inverse to the two identity maps: naturality says the resulting maps are inverse. Thus the image of $\\Omega_R$ is isomorphic to $\\omega_X$. It follows from the preceding step that $\\omega_X\\cong\\mathcal O_i[2d]$.",
+   "uses": [
+    "lem-per-lisse-completed-system-comparison",
+    "def-pod-lisse-l-adic-sheaves",
+    "lem-per-adic-exceptional-projection",
+    "lem-coef-qbar-adjunction-hom-descent",
+    "def-weil-pbc-qbar-category",
+    "lem-per-qbar-arbitrary-field-duality",
+    "def-weil-integral-rational-qbar-compact-support",
+    "def-weil-pbc-rational-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14 and Remark 6.8.15; rationalization and common finite-stage adjunction"
+   }
+  },
+  {
+   "text": "For a lisse sheaf $M$ on $X$ put $F(M)=R\\mathcal Hom(M,\\mathcal O_i)$. The evaluation pairing induces $M^\\vee\\otimes\\mathcal O_i\\to F(M)$. This is an isomorphism in degree zero: at a common finite coefficient field, take a pro-etale cover trivializing both locally finite free sheaves; it becomes the equality between the matrix dual of a finite free module with values in a free line and its ordinary dual tensored with that line. Derived internal Hom restricts to these slice sites by [lem-weil-pbc-ringed-internal-hom-exact-restriction]. The actual integral evaluation and tensor--Hom adjunction are those of [lem-per-adic-closed-constructible], so these local evaluations give the specified adic comparison after rationalization. The dual and tensor cohomology calculations in [lem-per-adic-lisse-cohomology-calculus] identify its source with the asserted degree-zero sheaf. All maps are evaluation-defined and hence agree after finite coefficient extension; they give the same isomorphism in the common-stage category. In particular $F$ sends every lisse sheaf to its linear dual tensored with $\\mathcal O_i$, in degree zero.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-per-adic-closed-constructible",
+    "lem-per-adic-lisse-cohomology-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.4 and Remark 6.8.15; local finite-free evaluation calculation"
+   }
+  },
+  {
+   "text": "For a bounded $L$ with lisse cohomology let $F(L)=R\\mathcal Hom(L,\\mathcal O_i)$. This functor is contravariantly exact and reverses shifts by [lem-weil-pbc-ringed-internal-hom-exact-restriction]. Induct on the number of degrees in an interval containing the nonzero cohomology of $L$. The zero object is immediate. If $b$ is the highest nonzero degree, use the standard truncation triangle\n$$A=\\tau^{\\le b-1}L\\longrightarrow L\\longrightarrow\\mathcal H^b(L)[-b]\\longrightarrow A[1]$$\nof the bounded t-structure in [lem-per-adic-heart-pullback-fibres]. Applying $F$ gives a triangle with first term $(\\mathcal H^bL)^\\vee\\otimes\\mathcal O_i[b]$, by the preceding step, and third term $F(A)$. Inductively $F(A)$ has no cohomology below $-b+1$ and has cohomology $(\\mathcal H^{-r}A)^\\vee\\otimes\\mathcal O_i$ in degree $r$. The cohomology exact sequence therefore identifies $\\mathcal H^{-b}F(L)$ with $(\\mathcal H^bL)^\\vee\\otimes\\mathcal O_i$ and identifies $\\mathcal H^rF(L)$ with $\\mathcal H^rF(A)$ for $r>-b$; both sides vanish for $r<-b$. This proves $\\mathcal H^rF(L)\\cong(\\mathcal H^{-r}L)^\\vee\\otimes\\mathcal O_i$ for every $r$, including gaps in the cohomological interval.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-per-adic-heart-pullback-fibres"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; elementary bounded standard-truncation induction after the lisse evaluation calculation"
+   }
+  },
+  {
+   "text": "By the definition of $D_X$ in [lem-per-qbar-arbitrary-field-duality] and $\\omega_X\\cong\\mathcal O_i[2d]$, the internal-Hom shift isomorphism gives $D_XL\\cong F(L)[2d]$. Since $\\mathcal H^r(B[2d])=\\mathcal H^{r+2d}(B)$, the preceding formula yields\n$$\\mathcal H^r(D_XL)\\cong(\\mathcal H^{-r-2d}L)^\\vee\\otimes\\mathcal O_i.$$\nIts right side is lisse by the dual and tensor assertions of [lem-per-adic-lisse-cohomology-calculus]. At every geometric point its fibre is the ordinary dual of the finite-dimensional fibre of $\\mathcal H^{-r-2d}L$, tensored with a one-dimensional space. Such a space vanishes exactly when the original fibre does. Joint conservativity of geometric fibres in [lem-per-adic-heart-pullback-fibres] then gives the asserted equivalence of vanishing. The argument applied to each $U_i$ proves every clause, including nonreduced schemes and imperfect fields.",
+   "uses": [
+    "lem-per-qbar-arbitrary-field-duality",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-per-adic-lisse-cohomology-calculus",
+    "lem-per-adic-heart-pullback-fibres"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Remark 6.8.15; shift convention and geometric-fibre calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exc-excellent-ring",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-derived-complete",
+  "def-weil-integral-rational-qbar-compact-support",
+  "def-weil-pbc-qbar-category",
+  "def-weil-pbc-rational-category",
+  "def-weil-regular-scheme",
+  "det-pe-milnor-epimorphic",
+  "lem-coef-qbar-adjunction-hom-descent",
+  "lem-exc-fields-excellent",
+  "lem-kun-dimension-finite-type",
+  "lem-per-adic-closed-constructible",
+  "lem-per-adic-exceptional-projection",
+  "lem-per-adic-heart-pullback-fibres",
+  "lem-per-adic-lisse-cohomology-calculus",
+  "lem-per-finite-regular-reduction-dualizing",
+  "lem-per-lisse-completed-system-comparison",
+  "lem-per-qbar-arbitrary-field-duality",
+  "lem-sc-locnoeth-components-locally-finite",
+  "lem-weil-derived-limit-existence",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, proof of Proposition 6.2.2.1 (printed p.294), with the Bhatt-Scholze Lemmas 6.7.19--6.7.20 and 6.8.14 adic passage and the bounded truncation calculation written out."
+ },
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-qbar-middle-tstructure",
@@ -70,6 +229,41 @@
    "results": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; CochainComplex.cm5b.instQuasiIsoIntP; DerivedCategory.exists_iso_Q_obj_of_isGE; DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE; DerivedCategory.exists_iso_Q_obj_of_isLE; DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.instIsGEObjSingleFunctor",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Generic dense open lisse model of the relative Verdier dualizing complex on a finite type scheme over an arbitrary field",
+   "results": "AlgebraicGeometry.Scheme.AffineZariskiSite.instIsCoverDenseOpensToOpensFunctorGrothendieckTopologyCarrierCarrierCommRingCat; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.Scheme.subcanonical_zariskiTopology; AlgebraicGeometry.Scheme.instLocallyCoverDenseOverTopMorphismPropertyOverForgetOverGrothendieckTopology; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit; AlgebraicGeometry.exists_lift_of_germInjective; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit; AlgebraicGeometry.Scheme.AffineZariskiSite.instIsDenseSubsiteOpensCarrierCarrierCommRingCatGrothendieckTopologyGrothendieckTopologyToOpensFunctor",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "No hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|Dualizing|lisse|Lisse",
+   "results": "Mathlib/Tactic/Translate/ToDual.lean; Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean; Mathlib/Analysis/InnerProductSpace/Dual.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean; Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean; Mathlib/CategoryTheory/Category/Cat/Op.lean; Mathlib/Data/Set/Defs.lean",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Verdier dual cohomology on a dense lisse stratum is the linear dual shifted by twice the dimension",
+   "results": "FGModuleCat.FGModuleCatDual; Subspace.dualEquivDual; Subspace.instModuleDualFiniteDimensional; Subspace.dual_finrank_eq; Representation.dual; Module.Dual.congr; Subspace.dualRestrict_comp_dualLift; Subspace.dualLift",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized potential dualizing complex on the regular locus of an excellent scheme is a Tate twist in one degree",
+   "results": "AlgebraicGeometry.Scheme.Hom.ι_toNormalization; AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation; AlgebraicGeometry.Scheme.Hom.normalizationDiagram; AlgebraicGeometry.Scheme.Hom.toNormalization_app_preimage; AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap; Algebra.smoothLocus_eq_compl_support_inter; AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap; BDeRham",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "blueprint": {
@@ -82,5 +276,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-qbar-generic-duality-model",
+  "worker": "stage1",
+  "summary": "Preserved the arbitrary-field statement. Constructed common generic lisse opens, shrank their reductions to regular loci using excellence, proved the dimension drop by chains, and derived the adic dualizing line from compatible finite-torsion normalized dualizing complexes. Wrote the finite-stage adjunction descent and the lisse-cohomology duality calculation explicitly. Added only the finite-torsion regular-reduction model; no generic-open, rank or cohomology clause was moved to a replacement node.",
+  "blueprint": "Supplies the generic shifted ordinary classes and dimension-normalized Verdier-duality calculation needed in Step 2 and Step 3 of lem-per-artin-gabber-affine-curve, through lem-per-qbar-middle-tstructure. The parent unit route is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) infrastructure used as stated; this supplies geometry, inverse-limit or ringed-derived-category tools, rather than replacing a perverse-unit proof step."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Generic Finiteness of the dimension of a finite type scheme infrastructure used as stated; this supplies geometry, inverse-limit or ringed-derived-category tools, rather than replacing a perverse-unit proof step."
+   },
+   {
+    "node": "lem-sc-locnoeth-components-locally-finite",
+    "why": "Generic Irreducible components of a locally Noetherian scheme are locally finite infrastructure used as stated; this supplies geometry, inverse-limit or ringed-derived-category tools, rather than replacing a perverse-unit proof step."
+   },
+   {
+    "node": "lem-exc-fields-excellent",
+    "why": "Generic Fields are excellent infrastructure used as stated; this supplies geometry, inverse-limit or ringed-derived-category tools, rather than replacing a perverse-unit proof step."
+   },
+   {
+    "node": "det-pe-milnor-epimorphic",
+    "why": "Generic Towers with epimorphic transitions have no derived limit terms infrastructure used as stated; this supplies geometry, inverse-limit or ringed-derived-category tools, rather than replacing a perverse-unit proof step."
+   },
+   {
+    "node": "lem-weil-derived-limit-existence",
+    "why": "Generic Existence and computation of derived limits infrastructure used as stated; this supplies geometry, inverse-limit or ringed-derived-category tools, rather than replacing a perverse-unit proof step."
+   },
+   {
+    "node": "lem-coef-qbar-adjunction-hom-descent",
+    "why": "Generic Compatible additive equivalences on directed Hom systems infrastructure used as stated; this supplies geometry, inverse-limit or ringed-derived-category tools, rather than replacing a perverse-unit proof step."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic Derived internal Hom calculus on small ringed sites infrastructure used as stated; this supplies geometry, inverse-limit or ringed-derived-category tools, rather than replacing a perverse-unit proof step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-kun-dimension-finite-type",
+  "lem-sc-locnoeth-components-locally-finite",
+  "lem-exc-fields-excellent",
+  "det-pe-milnor-epimorphic",
+  "lem-weil-derived-limit-existence",
+  "lem-coef-qbar-adjunction-hom-descent",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-N8-793e7b452",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-793e7b452 (reviewer sub-agent of L); spot-checked: I read the item and the new node in full, with every cited statement open. Source: ILO XVII, proof of Prop. 6.2.2.1 (reduce, excellent dense regular open, connected regular case gives K ≃ Λ(δ(η))[2δ(η)] by 2.4.4.1 and 5.1.1). Steps 1–4 (finitely many components, generic lisse opens, J-2 regular locus of X_red, dimension drop by appending C_i) are correct and use what the cited nodes state. Step 5 uses the finite reductions of lem-per-adic-exceptional-projection and the new node. Step 6 uses the Milnor epimorphic lemma, the derived-complete definition and clause 1 of derived-limit uniqueness. It holds even without tower compatibility, because the item only claims some rank-one O_α. Step 7 identifies the object with ω_X by scalar extension, rational Hom groups, the directed-colimit Hom lemma and Yoneda. Steps 8–10 do the local evaluation, the truncation induction (exact sequence checked) and the sign H^r(DL) = (H^{-r-2d}L)^∨⊗O. New node lem-per-finite-regular-reduction-dualizing is true: Spec of a purely inseparable extension gives Λ, absolute purity through a local embedding in A^N gives Λ(d)[2d], and nilpotent thickenings change nothing. It is not a duplicate of thm-pur-regular-immersion-purity, cor-pur-finite-stage-smooth-dualizing-complex or lem-per-finite-residue-dualizing, and it does not restate a clause of the item. FIX (B3): the new node said 'irreducible' without a citation; added [def-weil-irreducible-components] to its statement and stmt_deps in fixes/dag/nodes/sec-deligne-laumon-a1/. The 8 declared tool_uses are generic infrastructure and are accepted. Batch-5 flag: lem-per-lisse-completed-system-comparison reaches only def-pod-lisse-l-adic-sheaves, a general definition that the item statement already cites. The new node is regular-scheme purity over arbitrary fields with finite coefficients; nt-assume-poincare-duality (smooth, char p, Q̄_ℓ) cannot give it, and it is not a step of that proof. No SGA citation.; 1 file(s) fixed by the reviewer"
  }
 }
