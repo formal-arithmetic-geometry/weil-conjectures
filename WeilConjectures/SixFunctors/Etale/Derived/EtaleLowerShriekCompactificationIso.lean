@@ -199,15 +199,6 @@ section Iso
 variable {X Y : Scheme.{u}} (e : X ⟶ Y) [_root_.AlgebraicGeometry.Etale e]
   (c : Compactification e)
 
-omit [Finite Λ] [_root_.AlgebraicGeometry.Etale e] in
-/-- The derived pullback along an isomorphism is an equivalence. -/
-lemma isEquivalence_leftDerivedUpperStar_of_isIso [IsIso e] :
-    (L((e)^*[ModuleCat.{u + 1} Λ])).IsEquivalence :=
-  (CategoryTheory.Equivalence.mk L((e)^*[ModuleCat.{u + 1} Λ]) L((inv e)^*[ModuleCat.{u + 1} Λ])
-    ((leftDerivedUpperStarId _ Y).symm ≪≫ leftDerivedUpperStarComp _ (inv e) e (𝟙 Y) (by simp))
-    ((leftDerivedUpperStarComp _ e (inv e) (𝟙 X) (by simp)).symm ≪≫
-      leftDerivedUpperStarId _ X)).isEquivalence_functor
-
 /-- **Over an isomorphism, the comparison `De_! ⟶ Rf_!(c)` is an isomorphism.** The candidate
 unit is invertible: `Lq^* ⟶ Dσ_! Lσ^* Lq^*` is the unit of an adjunction whose left adjoint
 `Lq^* ⋙ Lσ^* ≅ 𝟭` is fully faithful, and `Lq_Z^* Dj_!` lies in the image of `Dσ_!`, the
@@ -215,7 +206,6 @@ projection `q_Z` being an isomorphism; and the counit of `De_! ⊣ Le^*` is inve
 being an equivalence. -/
 theorem isIso_compactificationEtaleComparison_of_isIso [IsIso e] :
     IsIso (compactificationEtaleComparison Λ e c) := by
-  have := isEquivalence_leftDerivedUpperStar_of_isIso Λ e
   -- the candidate unit is invertible
   have hu : ∀ N, IsIso ((compactificationEtaleUnit Λ e c).app N) := by
     intro N
