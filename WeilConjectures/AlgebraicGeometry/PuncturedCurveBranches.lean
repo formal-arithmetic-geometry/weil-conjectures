@@ -89,7 +89,7 @@ normalization, via "excellent rings are Nagata" ([Stacks, Tag 07QV]); we assume 
 property `IsNagataRing` directly, so this implies the blueprint statement. (The blueprint also
 records that the branches are excellent; this is not formalised since excellence is not
 defined here.) -/
-theorem puncturedSpectrum_branches [IsNagataRing R] [HenselianLocalRing R] [IsReduced R]
+theorem puncturedSpectrum_branches (hR : IsNagataRing R) [HenselianLocalRing R] [IsReduced R]
     [IsAlgClosed (ResidueField R)] (hdim : ringKrullDim R = 1) :
     (∀ p : minimalPrimes R, Module.Finite (R ⧸ p.1) (branch R p) ∧
       IsDiscreteValuationRing (branch R p) ∧ HenselianLocalRing (branch R p) ∧
@@ -100,7 +100,8 @@ theorem puncturedSpectrum_branches [IsNagataRing R] [HenselianLocalRing R] [IsRe
     ∃ e : (puncturedSpectrum R).toScheme ≅ ∐ fun p ↦ Spec (branchFractionField R p),
       ∀ p, Sigma.ι _ p ≫ e.inv ≫ (puncturedSpectrum R).ι =
         Spec.map (CommRingCat.ofHom (algebraMap R (FractionRing (branch R p)))) := by
-  obtain ⟨hbr, f, -, hf, hloc⟩ := branches_and_punctured_spectrum (R := R) hdim
+  obtain ⟨hbr, f, -, hf, hloc⟩ := branches_and_punctured_spectrum hR hdim
+  have := hR.isNoetherianRing
   have : Finite (minimalPrimes R) := (minimalPrimes.finite_of_isNoetherianRing R).to_subtype
   refine ⟨fun p ↦ ⟨(hbr p).1, (hbr p).2.1, (hbr p).2.2.1, (hbr p).2.2.2.2⟩, this,
     puncturedSpectrumIsoOfIsLocalization hf, ι_puncturedSpectrumIsoOfIsLocalization_inv hf⟩

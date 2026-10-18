@@ -12,7 +12,7 @@ public import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Localization.Away.Basic
 public import WeilConjectures.RingTheory.HenselianDVRExtension
-public import WeilConjectures.RingTheory.NagataRing
+public import WeilConjectures.RingTheory.NagataRingIntegralClosure
 
 /-!
 # Branches of a one-dimensional local ring
@@ -509,12 +509,13 @@ end punctured
 
 section nagata
 
-variable {R} [IsNagataRing R]
+variable {R} (hR : IsNagataRing R)
+include hR
 
 /-- The normalization of a Nagata ring is finite: each branch `B(R)ₐ` is a finite
 `R / pₐ`-module. -/
 theorem finite_branch (p : minimalPrimes R) : Module.Finite (R ⧸ p.1) (branch R p) :=
-  IsNagataRing.finite_integralClosure_quotient p.1
+  hR.finite_integralClosure_quotient p.1
 
 variable [HenselianLocalRing R] (hdim : ringKrullDim R = 1)
 include hdim
@@ -543,8 +544,10 @@ theorem branches_and_punctured_spectrum [IsReduced R] [IsAlgClosed (ResidueField
           ∀ b : branch R p, ∃ r : R, b - algebraMap R (branch R p) r ∈ maximalIdeal _)) ∧
     ∃ f ∈ maximalIdeal R, (∀ q : Ideal R, q.IsPrime → (f ∉ q ↔ q ≠ maximalIdeal R)) ∧
       IsLocalization.Away f (branchFractionRing R) := by
-  refine ⟨fun p ↦ ⟨finite_branch p, isDiscreteValuationRing_branch p hdim (finite_branch p),
-    henselianLocalRing_branch p (finite_branch p), inferInstance,
+  have := hR.isNoetherianRing
+  refine ⟨fun p ↦ ⟨finite_branch hR p,
+    isDiscreteValuationRing_branch p hdim (finite_branch hR p),
+    henselianLocalRing_branch p (finite_branch hR p), inferInstance,
     isAlgClosed_residueField_branch p⟩, ?_⟩
   obtain ⟨f, hfm, hf⟩ := exists_mem_maximalIdeal_forall_notMem hdim
   exact ⟨f, hfm, fun q _ ↦ notMem_iff_ne_maximalIdeal hdim hfm hf q,

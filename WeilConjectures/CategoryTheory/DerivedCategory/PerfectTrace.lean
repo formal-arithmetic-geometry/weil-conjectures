@@ -29,7 +29,7 @@ components of `v`.
 ## Main results
 
 - `DerivedCategory.trace_eq_algebraMap_sum_negOnePow_linearMapTrace`: the alternating sum
-  formula, for the Koszul braiding `DerivedCategory.braidedCategory` of the derived tensor
+  formula, for the Koszul braiding `DerivedCategory.braidedCategory'` of the derived tensor
   product.
 - `DerivedCategory.trace_eq_algebraMap_sum_negOnePow_linearMapTrace_of_braiding_hom_μ`: the
   same for any braiding for which `Qh` is braided on K-flat complexes.
@@ -99,7 +99,7 @@ of the ordinary `R`-module traces of the components of `v`:
 
 provided the braiding of `D(R)` is the Koszul one in the sense that the lax monoidal structure
 of `Qh : K(R) ⥤ D(R)` intertwines the Koszul braiding of K-flat complexes with the braiding
-of `D(R)`. This holds for the braiding `DerivedCategory.braidedCategory` of the derived tensor
+of `D(R)`. This holds for the braiding `DerivedCategory.braidedCategory'` of the derived tensor
 product (`DerivedCategory.braiding_hom_μ_Qh`). -/
 theorem trace_eq_algebraMap_sum_negOnePow_linearMapTrace_of_braiding_hom_μ
     [BraidedCategory (DerivedCategory (ModuleCat.{u} R))]
@@ -149,7 +149,7 @@ theorem trace_eq_algebraMap_sum_negOnePow_linearMapTrace_of_braiding_hom_μ
 
 
 /-- Blueprint `sk-p-trace`, via `lem-trf-chain-supertrace`: for the braiding
-`DerivedCategory.braidedCategory` of the derived tensor product on `D(R)` (the Koszul braiding
+`DerivedCategory.braidedCategory'` of the derived tensor product on `D(R)` (the Koszul braiding
 of complexes, descended along K-flat resolutions), the categorical trace of a chain endomorphism
 `v` of a bounded complex `P` of finitely generated free `R`-modules is the alternating sum of
 the traces of its components:
@@ -161,11 +161,11 @@ theorem trace_eq_algebraMap_sum_negOnePow_linearMapTrace
     (hfree : ∀ i, Module.Free R (P.X i)) (hfin : ∀ i, Module.Finite R (P.X i))
     (K : DerivedCategory (ModuleCat.{u} R)) [HasRightDual K] (w : K ⟶ K)
     (e : K ≅ Q.obj P) (hw : w ≫ e.hom = e.hom ≫ Q.map v) :
-    letI := braidedCategory (ModuleCat.{u} R)
+    letI := braidedCategory' (ModuleCat.{u} R)
     MonoidalCategory.trace w =
       algebraMap R (End (𝟙_ (DerivedCategory (ModuleCat.{u} R))))
         (∑ i ∈ s, (i.negOnePow : ℤ) • LinearMap.trace R (P.X i) (v.f i).hom) :=
-  letI := braidedCategory (ModuleCat.{u} R)
+  letI := braidedCategory' (ModuleCat.{u} R)
   trace_eq_algebraMap_sum_negOnePow_linearMapTrace_of_braiding_hom_μ
     (fun X Y _ _ ↦ braiding_hom_μ_Qh X Y) P v s hs hfree hfin K w e hw
 
