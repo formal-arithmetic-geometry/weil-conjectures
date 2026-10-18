@@ -16,9 +16,81 @@
   "def-weil-pbc-strict-henselization-limit",
   "def-weil-pbc-krull-dimension-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix the specified target point $t$ and work with the induced map $P_{(t)}\\to X_{(x)}$. By [lem-per-regular-strict-local-model] this is a regular map of excellent Noetherian strictly local schemes, and the fibre local dimensions at its points are the original $b(u)$. By [lem-per-local-dimension-function-calculus], choose a dimension function $\\delta_X$ on $X_{(x)}$. By [lem-per-regular-dimension-function-pullback], $\\delta_P(u)=\\delta_X(r(u))-b(u)$ is a dimension function on $P_{(t)}$. The difference formula of [lem-per-local-dimension-function-calculus], applied on both schemes, now gives, for any geometric arrow $u\\rightsquigarrow v$ in this setting,\n$$c_P(u,v)=\\delta_P(u)-\\delta_P(v)=c_X(r(u),r(v))+b(v)-b(u).$$\nHere codimensions are computed in the strict localizations belonging to these specified arrows, as in the statement.",
+   "uses": [
+    "lem-per-regular-strict-local-model",
+    "lem-per-local-dimension-function-calculus",
+    "lem-per-regular-dimension-function-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIV, Theorem 2.2.1 and Proposition 2.5.4; XVII, strict-local reduction in 4.3.2.4."
+   }
+  },
+  {
+   "text": "For a fibre-generic geometric point $\\eta$ over $x$, apply the strict-local reduction of Step 1 with $t=\\eta$ and then [lem-per-strict-local-regular-integral-fibres]. The geometric fibre of $P_{(\\eta)}\\to X_{(x)}$ above the specified $x'$ is nonempty and integral, hence has one generic point. A geometric point over that generic point is a geometric specialization to the closed point $\\eta$ lying over the specified base arrow. Its fibre local dimension is zero, so it is fibre-generic in $P$. Any fibre-generic lift must lie over that same generic point of this fibre. Choosing separable closures identifies its strict localization with the one just chosen, up to an isomorphism; such an isomorphism need not be unique. Thus the lift is unique in the geometric-specialization category in exactly the sense of the statement. We use geometric points through their strict localizations, not isomorphisms between arbitrary algebraically closed overfields.",
+   "uses": [
+    "lem-per-strict-local-regular-integral-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Lemma 4.3.2.4 from Lemma 4.3.2.3, printed p.285."
+   }
+  },
+  {
+   "text": "Apply the formula of Step 1 after strict localization at this $\\eta$. The two endpoints $\\eta'$ and $\\eta$ of the generic lift have $b=0$ by fibre-genericity. Therefore $c_P(\\eta',\\eta)=c_X(x',x)$. In particular a lift of a codimension-one base arrow has codimension one. If the base arrow is an identity or a geometric isomorphism, its lift has codimension zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, final sentence of Lemma 4.3.2.4; XIV, Proposition 2.5.4."
+   }
+  },
+  {
+   "text": "Given a finite factorization $x'=x_0\\rightsquigarrow\\cdots\\rightsquigarrow x_n=x$ into immediate arrows and the chosen endpoint $\\eta_n=\\eta$, construct $\\eta_i\\rightsquigarrow\\eta_{i+1}$ backwards, from $i=n-1$ to $i=0$, by Step 2. Every $\\eta_i$ is fibre-generic and every arrow has codimension one by Step 3, hence is immediate. The composite is a fibre-generic lift of the prescribed whole base arrow. Uniqueness in Step 2 identifies it, up to isomorphism at its source, with the originally specified $\\eta'\\rightsquigarrow\\eta$; use this identification for the first endpoint. This is the required factorization of that arrow. The empty factorization gives the identity case.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Lemma 4.3.2.5, printed p.285."
+   }
+  },
+  {
+   "text": "To construct the square for $t'\\rightsquigarrow t$, work in $P_{(t)}\\to X_{(x)}$ with the specified arrows. By [lem-per-strict-local-regular-integral-fibres] the geometric fibre over $x$ is integral. Choose a geometric generic point $\\eta$ of it and the resulting specialization $\\eta\\rightsquigarrow t$. Step 2 lifts $x'\\rightsquigarrow x$ to $\\eta'\\rightsquigarrow\\eta$. The specified $t'$ is a point of the geometric fibre of $P_{(t)}$ over $x'$, which is also integral by the cited node. Its generic point therefore specializes to $t'$. Choose a geometric representative $\\eta''\\rightsquigarrow t'$ of this specialization. The fibre-generic points $\\eta'$ and $\\eta''$ lie over the same generic point of this integral fibre, so identify their strict localizations by an isomorphism over that fibre. Compose it with $\\eta''\\rightsquigarrow t'$ to obtain the left vertical arrow. All these maps are over $P_{(t)}$; their maps to its closed geometric point $t$ are the specified structural maps. Hence their two composites to $t$ agree as geometric specializations. The vertical arrows lie over $x'$ and $x$, respectively, and both upper points are fibre-generic.",
+   "uses": [
+    "lem-per-strict-local-regular-integral-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Lemma 4.3.2.6, printed p.285."
+   }
+  },
+  {
+   "text": "For the left vertical arrow the base arrow is the identity at $x'$, so Step 1 gives $c_P(\\eta',t')=0+b(t')-0=b(t')$. Likewise $c_P(\\eta,t)=b(t)$. Applied to the given bottom arrow, Step 1 gives exactly $c_P(t',t)=c_X(x',x)+b(t)-b(t')$. This also checks additivity along both paths: each path sum is $c_X(x',x)+b(t)$, the codimension of the common composite by Step 1. All differences are integers; equal endpoints and codimension-zero geometric isomorphisms yield zero and satisfy the same calculations.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIV, Proposition 2.5.4; XVII, Lemma 4.3.2.6."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-regular-strict-local-model",
+  "lem-per-local-dimension-function-calculus",
+  "lem-per-regular-dimension-function-pullback",
+  "lem-per-strict-local-regular-integral-fibres"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XVII, proofs of Lemmas 4.3.2.4–4.3.2.6, using Lemma 4.3.2.3; XIV, Theorem 2.2.1 and Proposition 2.5.4."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,7 +129,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-regular-potential-pullback",
@@ -69,7 +141,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Proof Step 3, dimension-normalized arbitrary-field Verdier duality, through the finite-residue and extraordinary-pullback expansions: generic-fibre lifting of specializations and relative-codimension accounting in the regular ordinary pullback argument",
+   "place": "Proof Step 3 of lem-per-artin-gabber-affine-curve in the master blueprint (lower perverse bound via Verdier duality), through regular pullback of the finite-coefficient potential dualizing complexes: the generic-fibre lifting and codimension argument.",
    "via": [
     "lem-per-regular-potential-pullback",
     "lem-per-potential-extraordinary-pullback",
@@ -79,5 +151,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-regular-specialization-geometry",
+  "worker": "stage1",
+  "summary": "Continued the earlier repair and removed the stale rectangle citation, which would now be circular. Reused the existing strict-local-model node for regularity, excellence and preservation of local fibre dimensions; restricted the new integral-fibres node to the genuinely missing XVII 4.3.2.3 assertion. The six steps prove the numerical identity, unique generic lift, chain lifting and commutative square. Three statement-only supporting nodes, no Mathlib leaves; statement unchanged. Prior proof, sources and search logs retained; report and quotations brought up to date.",
+  "blueprint": "Proof Step 3 of lem-per-artin-gabber-affine-curve in the master blueprint (lower perverse bound via Verdier duality), through regular pullback of the finite-coefficient potential dualizing complexes: the generic-fibre lifting and codimension argument."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q29-60e2fed57",
+  "group": "Q29",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-60e2fed57 (reviewer sub-agent of L); spot-checked: Read the item, its six steps, all three new nodes and every cited statement in full, with ILO open at XVII 4.3.2.3–4.3.2.6 (pp.284–285) and XIV 2.1–2.2 and 2.5.4 (pp.209–213, 217–218). The item statement is byte-identical to live, where it is still unsplit. Every citation is in unit sk-p-dl-a1-perverse, there is no cycle, no SGA, and every step is under 2000 characters. New nodes: (1) strict-local-regular-integral-fibres is exactly XVII 4.3.2.3; its source needs some n invertible, which every strictly local scheme has. (2) local-dimension-function-calculus is XIV 2.2.4 local existence plus the codimension difference formula; I checked that formula independently: a maximal chain in the local closure is saturated and its steps are étale immediate by 2.1.4. (3) regular-dimension-function-pullback is exactly XIV 2.5.4. None of the three duplicates finite-type-dimension-function, immediate-specialization-criterion, geometric-immediate-catenary, potential-dualizing-regular-unit or strict-local-model. Steps: Step 1 uses the full statements of model, calculus and pullback, and the sign c_P=c_X+b(v)−b(u) is correct. Step 2 is the unique generic lift from integral fibres, with b=0 from the model node. Steps 3, 4 and 6 are elementary. Step 5 is the 4.3.2.6 square, with the composites agreeing over P_(t). Small cases agree: identity; generic to closed point of a smooth curve, 1=0+1−0; A¹ over a DVR, 2=1+1−0 and 1=1+1−1. No fixes, no tool_uses. Maintainer note: the reviewed rectangle node is a special case of this item and should be merged into it."
  }
 }
