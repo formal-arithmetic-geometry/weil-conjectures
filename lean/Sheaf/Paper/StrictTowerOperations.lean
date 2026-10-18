@@ -6,12 +6,10 @@ Authors: SHEAF group Q13
 module
 
 public import Sheaf.Paper.FourCorners
-public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicFiniteOperations
 public import Sheaf.Paper.CompletedRlimFunctor
-public import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
-public import Sheaf.AlgebraicGeometry.ProEtaleCanonicalPullbackComposition
 public import Mathlib.CategoryTheory.Adjunction.Mates
 public import Mathlib.CategoryTheory.Adjunction.Whiskering
+import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 
 /-! # Canonical operations on strict module towers
 
@@ -81,7 +79,42 @@ Thus that particular map is invertible; no finiteness of A is required. -/
 theorem exchangeConstantComparison_isIso {U V : Scheme.{t}} (f : U ⟶ V)
     (A : Type (t + 1)) [CommRing A] :
     IsIso ((proEtaleConstantComparison f).app (CommRingCat.of A)) := by
-  sorry
+  let B := CommRingCat.of A
+  let T := ⊤_ V.ProEt
+  let hT := terminalIsTerminal (C := V.ProEt)
+  let hGT := hT.isTerminalObj (proEtaleBaseChange f)
+  let adjY := constantSheafAdj (ProEt.topology V) CommRingCat.{t + 1} hT
+  let adjX := constantSheafAdj (ProEt.topology U) CommRingCat.{t + 1} hGT
+  let adj := (adjY.comp (proEtaleSheafAdjunction f CommRingCat.{t + 1})).ofNatIsoRight
+    ((proEtaleBaseChange f).sheafPushforwardContinuousCompSheafSectionsObjIso
+      CommRingCat.{t + 1} (ProEt.topology V) (ProEt.topology U) (op T))
+  have he : (proEtaleConstantComparison f).app B =
+      (adj.leftAdjointUniq adjX).hom.app B := by
+    apply (adj.homEquiv _ _).injective
+    rw [Adjunction.homEquiv_leftAdjointUniq_hom_app]
+    rw [Adjunction.homEquiv_ofNatIsoRight_apply]
+    change (adjY.comp (proEtaleSheafAdjunction f CommRingCat.{t + 1})).homEquiv _ _
+      ((proEtaleConstantComparison f).app B) ≫ 𝟙 _ = _
+    rw [Category.comp_id, Adjunction.comp_homEquiv]
+    change adjY.homEquiv _ _
+      ((proEtaleSheafAdjunction f CommRingCat.{t + 1}).homEquiv _ _
+        (((proEtaleSheafAdjunction f CommRingCat.{t + 1}).homEquiv _ _).symm
+          (proEtaleConstantDirectImageMap f CommRingCat.{t + 1} B))) = _
+    rw [Equiv.apply_symm_apply]
+    change ((constantPresheafAdj CommRingCat.{t + 1} hT).comp
+      (sheafificationAdjunction (ProEt.topology V) CommRingCat.{t + 1})).homEquiv _ _
+        (proEtaleConstantDirectImageMap f CommRingCat.{t + 1} B) = _
+    rw [Adjunction.comp_homEquiv]
+    change (constantPresheafAdj CommRingCat.{t + 1} hT).homEquiv _ _
+      ((sheafificationAdjunction (ProEt.topology V) CommRingCat.{t + 1}).homEquiv _ _
+        (((sheafificationAdjunction (ProEt.topology V) CommRingCat.{t + 1}).homEquiv
+          _ _).symm _)) = _
+    rw [Equiv.apply_symm_apply]
+    change 𝟙 B ≫ _ = _
+    rw [Category.id_comp]
+    rfl
+  rw [he]
+  infer_instance
 
 /-- The constant coefficient identification, fixed by the constant-section map.
 Source: strict normalization, paragraph 2; Stacks 00VC
@@ -119,7 +152,9 @@ map is an isomorphism. Evaluation at every index proves both preservation claims
 theorem exchangeTowerModulePull_exact :
     PreservesFiniteLimits (exchangeTowerModulePull f R S c) ∧
       PreservesFiniteColimits (exchangeTowerModulePull f R S c) := by
-  sorry
+  constructor
+  · exact ⟨fun _ _ _ ↦ inferInstance⟩
+  · exact ⟨fun _ _ _ ↦ inferInstance⟩
 
 /-- Left exactness on strict towers. Source: strict normalization, proof step 1
 (blueprint: def-weil-pbc-strict-tower-operations). -/
@@ -208,7 +243,29 @@ theorem exchangeModuleComposition_existsUnique {V W Z : Scheme.{t}}
         (proEtaleRingCompositeCoefficients h k RV RW RZ ck ch) ≅
       proEtaleRingModulePullback k RV RW ck ⋙ proEtaleRingModulePullback h RW RZ ch,
       ExchangeModuleCompositionNormalized h k RV RW RZ ck ch a := by
-  sorry
+  obtain ⟨adjk, adjh, adjhk, _, _, _, d, hd, _⟩ :=
+    proEtaleRingDerivedPullbackComposition h k RV RW RZ ck ch
+      (proEtaleRingCompositeCoefficients h k RV RW RZ ck ch) rfl
+  let e := conjugateIsoEquiv
+    ((proEtaleRingModuleAdjunction k RV RW ck).comp
+      (proEtaleRingModuleAdjunction h RW RZ ch))
+    (proEtaleRingModuleAdjunction (h ≫ k) RV RZ
+      (proEtaleRingCompositeCoefficients h k RV RW RZ ck ch))
+  refine ⟨e.symm d, ?_, ?_⟩
+  · change ∀ N U m, ((e (e.symm d)).hom.app N).val.app (op U) m = _
+    rw [e.apply_symm_apply]
+    exact hd
+  · intro a ha
+    apply e.injective
+    rw [e.apply_symm_apply]
+    apply Iso.ext
+    apply NatTrans.ext
+    funext N
+    apply SheafOfModules.hom_ext
+    apply PresheafOfModules.hom_ext
+    intro U
+    ext m
+    exact (ha N U.unop m).trans (hd N U.unop m).symm
 
 /-- The ordinary canonical pullback composition, fixed by its sectionwise conjugate
 and the existing tensor-unit-normalized module adjunctions.
@@ -240,7 +297,7 @@ theorem StrictTowerRingedSquare.exchangeCoefficients_eq (r : StrictTowerRingedSq
       Σ q : X' ⟶ Y,
         (proEtaleSheafInverseImage q CommRingCat.{t + 1}).obj r.RY ≅ r.RX') =
       ⟨g' ≫ f, proEtaleRingCompositeCoefficients g' f r.RY r.RX r.RX' r.cf r.cg'⟩ := by
-  sorry
+  exact Sigma.ext sq.w.symm r.coherent.symm
 
 /-- The canonical module pullback comparison around the chosen ringed square.
 Source: strict normalization, paragraph 2; Stacks 07A7, 0D6D

@@ -16462,3 +16462,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:59 L: merged deliver/R5/Sheaf.CategoryTheory.Sites.RGammaDerivedLimit (stage 3; reviewer PASS; first push; landing 20261018T135919-L-2963360 (proof); batch 20261018T135825; modules 1; new nodes 0)
 - 13:59 L: merged deliver/V9/Sheaf.AlgebraicGeometry.ProEtaleProductsDerived (stage 3; reviewer PASS; first push; landing 20261018T135942-L-2973125 (proof); batch 20261018T135825; modules 1; new nodes 0)
 - 13:59 L: merged deliver/X2/Sheaf.AlgebraicGeometry.CompactSupportProjectionOpenRestriction (stage 3; reviewer PASS; first push; landing 20261018T135944-L-2973459 (proof); batch 20261018T135825; modules 1; new nodes 0)
+- 13:59 L: merged deliver/Y2/Sheaf.Paper.StrictTowerOperations (stage 3; reviewer PASS; first push; landing 20261018T135945-L-2973766 (interface); batch 20261018T135825; modules 1; new nodes 0; change records: coord/changes/Y2-strict-tower-proof-import-pruning.md)
