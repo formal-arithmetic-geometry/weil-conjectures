@@ -286,7 +286,9 @@ Proof: the raw stage is inserted into `nagataRelativeGluingEqualityStages`. Appl
 `le_directedFiniteUpperBound` with the raw datum's fixed `boundPair_le`. -/
 theorem nagataRelativeRawStage_le_validStage :
     R.raw.stage ≤ nagataRelativeGluingValidStage D c hc i₀ f R P A := by
-  sorry
+  classical
+  exact le_directedFiniteUpperBound i₀ R.base.boundPair R.base.boundPair_le
+    R.base.boundOrder (Finset.mem_insert_self _ _)
 
 /-- The transported finite diagram, including chart and overlap schemes over the new base,
 opens in the charts, both inclusions, and both directions of each overlap map.
