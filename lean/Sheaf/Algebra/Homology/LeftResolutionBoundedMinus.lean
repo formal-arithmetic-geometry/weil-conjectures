@@ -6,7 +6,6 @@ Authors: SHEAF group Q45
 module
 
 public import WeilConjectures.FromJoel.Algebra.Homology.LeftResolution.CochainComplexMinus
-import WeilConjectures.FromJoel.Algebra.Homology.BicomplexColumns
 
 /-!
 # Functorial bounded-above resolutions from a zero-preserving left resolution
@@ -41,36 +40,19 @@ sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md`, first three se
 `WeilConjectures/FromJoel/Algebra/Homology/LeftResolution/CochainComplexMinus.lean:32-273`
 (blueprint: lem-sfb-left-resolution-bounded-minus).
 
-Proof (the node's steps):
-1. Package `Q` and `π` (with `hπ`) as the left-resolution datum
-   `Λ : CategoryTheory.Abelian.LeftResolution ι`; `[Q.PreservesZeroMorphisms]` is the
-   zero-preservation hypothesis of `CochainComplexMinus.lean:32-36`.
-2. Apply `lem-sfb-left-resolution-objectwise-cochain`: the cochain-complex resolution
-   functor and its objectwise quasi-isomorphic augmentation; its complexes and their images
-   under `ι` vanish in every resolution degree `q > 0` (FromJoel `LeftResolution/Basic`).
-3. For bounded-above `K` choose an upper bound `b`.
-   `lem-sfb-left-resolution-bicomplex-total-exists` gives the resolution bicomplex `B_K`,
-   its vanishing for `p > b` and `q > 0`, and the existence of both diagonal totals.
-4. Put `T(K) = Tot(B_K)` in `C` and `S(K) = ι(T(K))` termwise, `S(f) = ι(Tot(B_f))`;
-   the functor laws come from those of the objectwise resolution and `total.map`. The totals
-   do not depend on a bound witness, so `S` acts on every map of `CochainComplex.Minus A`.
-   For `n > b` every diagonal summand of `T(K)^n` is zero (`p ≤ b`, `q ≤ 0` force
-   `n ≤ b`), so `T(K)^n` and `S(K)^n` are zero; every `S(K)^n = ι(T(K)^n)` is in the
-   essential image of `ι`.
-5. The map `τ_K` of `lem-sfb-left-resolution-totalized-augmentation` is natural and a
-   quasi-isomorphism, by the bounded-column comparison
-   `lem-pc-bounded-above-double-complex-total-comparison`
-   (`HomologicalComplex₂.total.quasiIso_map_of_isStrictlyGE_of_isStrictlyLE`) applied to the
-   objectwise quasi-isomorphisms of step 2.
-6. `lem-sfb-left-resolution-additive-total-transport` with `F = ι` (zero object and finite
-   coproducts in `C`, `A` preadditive, `ι` additive, the bounds of step 3) gives the natural
-   isomorphism `e_K = mapTotalIso : Tot(ι B_K) ≅ S(K)`.
-7. `lem-sfb-left-resolution-single-row-total` gives the natural isomorphism
-   `r_K : Tot(singleRow₀ K) ≅ K`.
-8. Put `a_K = r_K ∘ τ_K ∘ e_K⁻¹ : S(K) ⟶ K`, a quasi-isomorphism as a composite of
-   isomorphisms and a quasi-isomorphism; the naturality of steps 5–7 gives
-   `f ∘ a_K = a_L ∘ S(f)`. Step 4 gives the essential-image and upper-bound clauses
-   (FromJoel `totalπ`, `minusResolutionNatTrans`, `CochainComplexMinus.lean:216-256`). -/
+Proof:
+1. Package `Q`, `π`, and `hπ` as `Λ : CategoryTheory.Abelian.LeftResolution ι`.
+2. Use the existing `Λ.minusResolutionFunctor`, apply `ι.mapCochainComplexMinus`,
+   and then include in all cochain complexes. Whisker `Λ.minusResolutionNatTrans`
+   with the inclusion to obtain the augmentation. The existing quasi-isomorphism
+   instance proves its components are quasi-isomorphisms. These constructions already
+   implement the objectwise resolution, bounded totalization, additive total transport,
+   and single-row identification of the original plan.
+3. Every term is definitionally `ι` applied to the corresponding term of the
+   `C`-valued resolution, so the essential-image witness uses the identity isomorphism.
+4. For any upper bound `b` of `L`, the existing total-support instance gives that
+   same upper bound for the `C`-valued total. Termwise application of `ι` preserves
+   this strict support. No bound witness enters the functor or its augmentation. -/
 theorem exists_functorial_boundedAbove_left_resolution
     {A : Type u₁} [Category.{v₁} A] [Abelian A]
     {C : Type u₂} [Category.{v₂} C] [Preadditive C]
@@ -85,6 +67,19 @@ theorem exists_functorial_boundedAbove_left_resolution
         ∃ (X : C), Nonempty ((S.obj L).X i ≅ ι.obj X)) ∧
       (∀ (L : CochainComplex.Minus A) (b : ℤ),
         L.obj.IsStrictlyLE b → (S.obj L).IsStrictlyLE b) := by
-  sorry
+  let Λ : CategoryTheory.Abelian.LeftResolution ι := ⟨Q, π, hπ⟩
+  let S := (Λ.minusResolutionFunctor ⋙ ι.mapCochainComplexMinus) ⋙ Minus.ι A
+  let a : S ⟶ Minus.ι A := Functor.whiskerRight Λ.minusResolutionNatTrans (Minus.ι A)
+  refine ⟨S, a, ?_, ?_, ?_⟩
+  · intro L
+    exact inferInstanceAs
+      (QuasiIso ((Functor.whiskerRight Λ.minusResolutionNatTrans (Minus.ι A)).app L))
+  · intro L i
+    exact ⟨((Λ.minusResolutionFunctor.obj L).obj).X i, ⟨Iso.refl _⟩⟩
+  · intro L b hL
+    have : L.obj.IsStrictlyLE b := hL
+    change CochainComplex.IsStrictlyLE ((ι.mapHomologicalComplex (ComplexShape.up ℤ)).obj
+      ((Λ.bicomplexFunctor.obj L.obj).total (ComplexShape.up ℤ))) b
+    infer_instance
 
 end CochainComplex

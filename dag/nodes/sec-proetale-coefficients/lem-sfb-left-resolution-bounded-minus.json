@@ -15,110 +15,47 @@
  ],
  "proof": [
   {
-   "text": "Package the given functor $Q$ and epimorphic natural transformation $\\pi$ as the left-resolution datum $\\Lambda$ for $\\iota$. The hypotheses on $C$, $\\iota$, and zero preservation are exactly the data required by the construction.",
+   "text": "Package Q, π, and hπ as Λ : CategoryTheory.Abelian.LeftResolution ι. Its functor is definitionally Q, so it preserves zero morphisms.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the existing proved source construction Λ.minusResolutionFunctor : Minus A ⥤ Minus C, followed by ι.mapCochainComplexMinus and Minus.ι A, for S. This is the total of the objectwise resolution, mapped termwise by ι. Whisker the existing Λ.minusResolutionNatTrans with Minus.ι A to obtain a : S ⟶ Minus.ι A. The source instance QuasiIso ((Functor.whiskerRight Λ.minusResolutionNatTrans (Minus.ι A)).app L) supplies the component quasi-isomorphisms. The existing source implementation already combines the objectwise cochain resolution [lem-sfb-left-resolution-objectwise-cochain], the bounded-column comparison [lem-pc-bounded-above-double-complex-total-comparison], total transport via mapTotalIso, and the single-row identification [lem-sfb-left-resolution-single-row-total]; no separate statement-only wrapper is needed.",
+   "uses": [
+    "lem-sfb-left-resolution-objectwise-cochain",
+    "lem-pc-bounded-above-double-complex-total-comparison",
+    "lem-sfb-left-resolution-single-row-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "WeilConjectures/FromJoel/Algebra/Homology/LeftResolution/CochainComplexMinus.lean",
+    "place": "minusResolutionFunctor, minusResolutionNatTrans, and the whiskered quasi-isomorphism instance, lines 226–263; totalπ and its quasi-isomorphism instance, lines 216–224."
+   }
+  },
+  {
+   "text": "For L and i, take X to be the i-th term of (Λ.minusResolutionFunctor.obj L).obj. The term (S.obj L).X i is definitionally ι.obj X, so Iso.refl provides the essential-image isomorphism.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Given any b and hL : L.obj.IsStrictlyLE b, install hL as a local instance. The source total-support instance gives IsStrictlyLE ((Λ.bicomplexFunctor.obj L.obj).total (ComplexShape.up ℤ)) b; termwise mapping by ι preserves strict support. This proves the upper-bound clause for every b without altering the functor or choosing bound-dependent maps.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "WeilConjectures/FromJoel/Algebra/Homology/LeftResolution/CochainComplexMinus.lean",
-    "place": "lines 32–36, where the LeftResolution variable and zero-preserving hypothesis are fixed"
-   }
-  },
-  {
-   "text": "Apply [lem-sfb-left-resolution-objectwise-cochain] to obtain the cochain-complex resolution functor and its objectwise quasi-isomorphic augmentation. Its complexes and their images under $\\iota$ vanish in every resolution degree $q>0$.",
-   "uses": [
-    "lem-sfb-left-resolution-objectwise-cochain"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "WeilConjectures/FromJoel/Algebra/Homology/LeftResolution/Basic.lean",
-    "place": "cochainComplexFunctor, cochainComplexNatTransπ, and QuasiIso instances, lines 20–145"
-   }
-  },
-  {
-   "text": "For a bounded-above $K$ choose any upper bound $b$. [lem-sfb-left-resolution-bicomplex-total-exists] gives the resolution bicomplex, its vanishing for first degree $p>b$ and resolution degree $q>0$, and the existence of both required diagonal totals. The bicomplex and total are the constructions described in that node.",
-   "uses": [
-    "lem-sfb-left-resolution-objectwise-cochain",
-    "lem-sfb-left-resolution-bicomplex-total-exists"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "WeilConjectures/FromJoel/Algebra/Homology/LeftResolution/CochainComplexMinus.lean",
-    "place": "bicomplexFunctor support and HasTotal instances, lines 48–108"
-   }
-  },
-  {
-   "text": "Write $T(K)=\\operatorname{Tot}(B_K)$ for the total in $C$, and define $S(K)=\\iota(T(K))$ by applying $\\iota$ termwise. On a cochain map $f:K\\to L$, set $S(f)=\\iota(\\operatorname{Tot}(B_f))$. The functor laws follow from those of the objectwise resolution and total.map. These totals and maps are chosen for the bicomplexes themselves, independently of any bound witness; the bounds only prove that the needed coproducts exist. Thus the construction acts on every map between bounded-above complexes, even with different bounds. If $n>b$, each diagonal summand of $T(K)^n$ is zero: otherwise its indices would satisfy $p\\le b$, $q\\le0$ and $n=p+q\\le b$. Hence the diagonal coproduct $T(K)^n$ is zero. The additive functor $\\iota$ preserves zero objects, so $S(K)^n$ is zero as well. For every $n$, the term $S(K)^n=\\iota(T(K)^n)$ itself is in the essential image of $\\iota$.",
-   "uses": [
-    "lem-sfb-left-resolution-objectwise-cochain",
-    "lem-sfb-left-resolution-bicomplex-total-exists"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "WeilConjectures/FromJoel/Algebra/Homology/LeftResolution/CochainComplexMinus.lean",
-    "place": "total upper-bound instance, lines 133–149; minusResolutionFunctor and its map_id/map_comp proofs, lines 226–237, followed by termwise application of ι"
-   }
-  },
-  {
-   "text": "The map $\\tau_K$ of [lem-sfb-left-resolution-totalized-augmentation] is natural in $K$ and a quasi-isomorphism: its naturality is the component calculation using $\\pi$-naturality, and its quasi-isomorphism is the bounded-column comparison applied to the objectwise quasi-isomorphisms from step 2.",
-   "uses": [
-    "lem-sfb-left-resolution-totalized-augmentation",
-    "lem-pc-bounded-above-double-complex-total-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "WeilConjectures/FromJoel/Algebra/Homology/LeftResolution/CochainComplexMinus.lean",
-    "place": "totalπ′ naturality and quasi-isomorphism, lines 160–206"
-   }
-  },
-  {
-   "text": "Apply [lem-sfb-left-resolution-additive-total-transport] with $F=\\iota$. The category $C$ has a zero object and finite coproducts by hypothesis, $A$ is preadditive because it is abelian, and $\\iota$ is additive. The bounds on $B_K$ from step 3 are exactly the two support hypotheses of that lemma. Its natural isomorphism $e_K=\\mathrm{mapTotalIso}_{\\iota,B_K}$ identifies $\\operatorname{Tot}(\\iota B_K)$ with $S(K)=\\iota(\\operatorname{Tot}(B_K))$, naturally for all maps between bounded-above complexes.",
-   "uses": [
-    "lem-sfb-left-resolution-additive-total-transport",
-    "lem-sfb-left-resolution-bicomplex-total-exists"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "WeilConjectures/FromJoel/Algebra/Homology/TotalComplexMap.lean",
-    "place": "mapTotalIso and its naturality, lines 118–145; bounded-minus support instance in CochainComplexMinus.lean:208–220"
-   }
-  },
-  {
-   "text": "Use [lem-sfb-left-resolution-single-row-total] to identify the total of the row concentrated in degree $0$ with $K$, naturally in $K$.",
-   "uses": [
-    "lem-sfb-left-resolution-single-row-total"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "WeilConjectures/FromJoel/Algebra/Homology/BicomplexRows.lean",
-    "place": "singleRow₀ObjTotal and its naturality, lines 170–182"
-   }
-  },
-  {
-   "text": "Write $r_K:\\operatorname{Tot}(\\operatorname{singleRow}_0(K))\\xrightarrow{\\sim}K$ for the isomorphism of step 7. Define $a_K=r_K\\circ\\tau_K\\circ e_K^{-1}:S(K)\\to K$. The first and last factors are isomorphisms and the middle factor is a quasi-isomorphism, so $a_K$ is a quasi-isomorphism. For $f:K\\to L$, the naturality equations from steps 5–7 give $f\\circ a_K=r_L\\circ\\operatorname{Tot}(\\operatorname{singleRow}_0(f))\\circ\\tau_K\\circ e_K^{-1}=r_L\\circ\\tau_L\\circ\\operatorname{Tot}(\\iota B_f)\\circ e_K^{-1}=a_L\\circ S(f)$. Thus these components define the required natural transformation; step 4 already proved the essential-image and upper-bound clauses.",
-   "uses": [
-    "lem-sfb-left-resolution-totalized-augmentation",
-    "lem-sfb-left-resolution-additive-total-transport",
-    "lem-sfb-left-resolution-single-row-total"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "WeilConjectures/FromJoel/Algebra/Homology/LeftResolution/CochainComplexMinus.lean",
-    "place": "definition of totalπ and minusResolutionNatTrans, and its quasi-isomorphism/naturality, lines 216–256"
+    "place": "total upper-bound instance, lines 133–149, and Mathlib HomologicalComplex.map_isStrictlySupported."
    }
   }
  ],
  "proof_deps": [
   "lem-pc-bounded-above-double-complex-total-comparison",
-  "lem-sfb-left-resolution-additive-total-transport",
-  "lem-sfb-left-resolution-bicomplex-total-exists",
   "lem-sfb-left-resolution-objectwise-cochain",
-  "lem-sfb-left-resolution-single-row-total",
-  "lem-sfb-left-resolution-totalized-augmentation"
+  "lem-sfb-left-resolution-single-row-total"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-derived-tensor-hom/lem-sfb-derived-monoidal.proof.md",
-  "place": "Proof, first three sentences; functorial bounded-above totalization and its natural quasi-isomorphic augmentation are implemented in CochainComplexMinus.lean:32-273."
+  "document": "WeilConjectures/FromJoel/Algebra/Homology/LeftResolution/CochainComplexMinus.lean",
+  "place": "Existing minusResolutionFunctor/minusResolutionNatTrans and whiskered QuasiIso instance, lines 226–263; total-support instance, lines 133–149. Reused directly by Y3 rather than reconstructing their already proved implementation from statement-only wrappers."
  },
  "mathlib_searches": [
   {
@@ -216,5 +153,15 @@
   "group": "Q45",
   "result": "pass",
   "note": "Statement correct: hypotheses (Abelian A; Preadditive C with HasZeroObject and HasFiniteCoproducts; ι Full/Faithful/Additive; Q PreservesZeroMorphisms; π with epimorphic components) match the node and FromJoel CochainComplexMinus.lean:32-36/90/208. Conclusions match: S on CochainComplex.Minus A (full subcategory, all maps, no bound witness), a : S ⟶ Minus.ι A, pointwise QuasiIso, ∃X, Nonempty(S(L)^i ≅ ιX), every upper bound b preserved. Four independent universes, no extra assumptions, lean.statement verbatim, no duplicate; provable via minusResolutionFunctor/NatTrans. Gates: no definitions, sorry only, source/blueprint docstrings and 8-step proof docstring, report has both sections. nt_compile (--json, snapshot text): clean in 1.6 s; a control error was detected. Note: re-delivery of N8's module already landed in 416b4a1356; only the Authors line and lean.by/date/note change. stmt_deps lists def-weil-abstract-derived-category without citing it in the text (accepted at the earlier review)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y3",
+  "result": "pass",
+  "landing": "20261018T135946-L-2974046",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
