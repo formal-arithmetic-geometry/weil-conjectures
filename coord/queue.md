@@ -1,6 +1,6 @@
 # Work queue
 
-420 items; claim with `tools/claim.py next <group> [--stage N]`.
+421 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (420)
+## Stage 3: modules to prove (421)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -21,6 +21,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.AdicDenseOpenImmersionFiniteness` | 7 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.AdicProjectiveSpaceFiniteness` | 7 | 1 | proof | route |
 | `Sheaf.RingTheory.FiniteAlgebraExtremallyDisconnected` | 8 | 1 | proof | route |
+| `WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension` | 8 | 4 | proof | route |
 | `WeilConjectures.WeilSheaf.ArtinSchreierDual` | 8 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.FiniteTypeDirectImageConstructibility` | 3 | 1 | proof | 1 |
 | `Sheaf.AlgebraicGeometry.NoetherianStratumDetection` | 3 | 3 | proof | 1 |
@@ -435,7 +436,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.CategoryTheory.FilteredHomologyTowerQuotients` | 9 | 2 | proof | 24 |
 | `Sheaf.CategoryTheory.FiniteCycleFormula` | 9 | 1 | proof | 25 |
 
-## Stage 3: waiting for statements of dependencies (12)
+## Stage 3: waiting for statements of dependencies (11)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
@@ -451,7 +452,6 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `WeilConjectures.DeligneLaumon.AffineLine.TraceEnergy` | 5 | 7 | `lem-fd-rational-coefficient-category-comparison` |
 | `WeilConjectures.DeligneLaumon.AffineLine.LocalDuality` | 6 | 2 | `cor-coef-verdier-weil-equivariance` |
 | `WeilConjectures.DeligneLaumon.AffineLine.Exactness` | 7 | 1 | `lem-dl-a1-weil-open-image-delta` |
-| `WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension` | 8 | 4 | `lem-a1-qbar-open-closed-cohomology` |
 | `WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension` | 9 | 3 | `lem-trf-rational-local-frobenius-powers` |
 
 ## Stage 3: held for an open upstream PR (22)
