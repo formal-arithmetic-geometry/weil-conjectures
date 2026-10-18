@@ -10,6 +10,7 @@ public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.Pairings
 public import WeilConjectures.EtaleCohomology.PoincareDuality.Frobenius.PointPairing
 public import WeilConjectures.EtaleCohomology.PoincareDuality.InvertibleTwist
 public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CompactSupport
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekToLowerStar
 
 /-!

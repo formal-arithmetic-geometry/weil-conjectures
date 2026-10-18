@@ -64,7 +64,7 @@ theorem isPerfect_compactlySupportedGlobalSections_of_nsmul_eq_zero (Λ : Type (
     rw [← CategoryTheory.Functor.map_id, ← Functor.map_nsmul, hN, Functor.map_zero]
   exact isPerfect_rightDerivedGlobalSections_of_isSepClosed _
     ⟨boundedConstructible_rightDerivedLowerStar _ c.g (𝟙 _) c.g (Category.comp_id _) N hNL hNk
-      hL.1.1, a, b, torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing Λ c.g (𝟙 _) c.g
+      hL.1.1, a, _, torAmplitudeIn_rightDerivedLowerStar_of_isNoetherianRing Λ c.g (𝟙 _) c.g
       (Category.comp_id _) d hd a b N hNL hNk hL.1.1 hL.2⟩
 
 end AlgebraicGeometry.Etale

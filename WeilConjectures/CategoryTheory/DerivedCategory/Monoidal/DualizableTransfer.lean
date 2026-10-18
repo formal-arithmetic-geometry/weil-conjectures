@@ -251,6 +251,9 @@ lemma isIso_ihomComparison_mapHomologicalComplex (P : CochainComplex C ℤ) :
     (adj.mapHomologicalComplex (.up ℤ)) P
 
 
+set_option maxHeartbeats 400000 in
+-- elaborating the transported resolutions and the two compatibility proofs in a single
+-- structure instance slightly exceeds the default budget
 variable {G} in
 /-- The image of a `DualizabilityDatum P` under `G`: the resolutions are mapped by `G` (which
 preserves quasi-isomorphisms and, having an exact left adjoint, K-injective complexes), and the
