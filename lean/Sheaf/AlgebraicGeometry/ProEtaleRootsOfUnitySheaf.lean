@@ -11,6 +11,8 @@ public import Sheaf.CategoryTheory.TorsionSheafConstantModule
 public import Mathlib.CategoryTheory.Sites.Abelian
 public import Mathlib.CategoryTheory.Functor.OfSequence
 public import Mathlib.RingTheory.RootsOfUnity.Basic
+import Mathlib.Algebra.Category.Grp.Limits
+import Mathlib.Algebra.Category.Grp.EpiMono
 
 /-! # Roots of unity on the small pro-etale site
 
@@ -59,7 +61,40 @@ theorem existsUnique_proEtaleRootsOfUnitySections (S : Scheme.{u}) (N : ℕ) (U 
         Additive (rootsOfUnity N ((proEtaleStructureSheaf S).obj.obj U)),
       ∀ x, ULift.up (Additive.ofMul (Additive.toMul (e x)).val) =
         (proEtaleRootsOfUnityInclusion S N).hom.app U x := by
-  sorry
+  let E := sheafToPresheaf (ProEt.topology S) AddCommGrpCat.{u + 1} ⋙
+    (CategoryTheory.evaluation _ _).obj U
+  let φ := E.map (proEtaleUnitsPower S N)
+  let e := PreservesKernel.iso E (proEtaleUnitsPower S N) ≪≫
+    AddCommGrpCat.kernelIsoKer φ
+  let g : φ.hom.ker ≃+
+      Additive (rootsOfUnity N ((proEtaleStructureSheaf S).obj.obj U)) :=
+    { toFun := fun y ↦ Additive.ofMul ⟨y.1.down.toMul, by
+        apply (mem_rootsOfUnity N _).2
+        have hy : N • y.1 = 0 := y.2
+        exact congrArg (fun z ↦ z.down.toMul) hy⟩
+      invFun := fun y ↦ ⟨ULift.up (Additive.ofMul y.toMul.val), by
+        change N • (ULift.up (Additive.ofMul y.toMul.val)) = 0
+        apply ULift.ext
+        apply Additive.toMul.injective
+        exact (mem_rootsOfUnity N _).1 y.toMul.property⟩
+      left_inv := fun y ↦ by rfl
+      right_inv := fun y ↦ by rfl
+      map_add' := fun y z ↦ by rfl }
+  let e' := e.addCommGroupIsoToAddEquiv.trans g
+  have he (x : (proEtaleRootsOfUnitySheaf S N).obj.obj U) :
+      ULift.up (Additive.ofMul (Additive.toMul (e' x)).val) =
+        (proEtaleRootsOfUnityInclusion S N).hom.app U x := by
+    change ((e.hom ≫ AddCommGrpCat.ofHom φ.hom.ker.subtype) x) = _
+    rw [Iso.trans_hom, Category.assoc, AddCommGrpCat.kernelIsoKer_hom_comp_subtype,
+      PreservesKernel.iso_hom, kernelComparison_comp_ι]
+    rfl
+  refine ⟨e', he, ?_⟩
+  intro e'' he''
+  apply AddEquiv.ext
+  intro x
+  apply Additive.toMul.injective
+  apply Subtype.ext
+  exact congrArg (fun y ↦ y.down.toMul) ((he'' x).trans (he x).symm)
 
 /-- Sections of the roots-of-unity sheaf, identified by the canonical kernel inclusion.
 Source: Stacks Project, Tags 03PK and 03P4 (blueprint: def-pur-roots-of-unity-sheaf).
@@ -76,7 +111,16 @@ In additive notation this equality is `N • x = 0`. Injectivity of the kernel i
 then proves the same equality in the roots-of-unity sheaf. -/
 theorem proEtaleRootsOfUnity_nsmul (S : Scheme.{u}) (N : ℕ)
     (U : S.ProEtᵒᵖ) (x : (proEtaleRootsOfUnitySheaf S N).obj.obj U) : N • x = 0 := by
-  sorry
+  have hmono : Mono (proEtaleRootsOfUnityInclusion S N) := by
+    dsimp [proEtaleRootsOfUnityInclusion]
+    infer_instance
+  have : Mono (proEtaleRootsOfUnityInclusion S N).hom :=
+    (sheafToPresheaf _ _).map_mono _
+  have hx := congrArg (fun f ↦ f.hom.app U x) (kernel.condition (proEtaleUnitsPower S N))
+  apply (AddCommGrpCat.mono_iff_injective
+    ((proEtaleRootsOfUnityInclusion S N).hom.app U)).mp inferInstance
+  change N • ((proEtaleRootsOfUnityInclusion S N).hom.app U x) = 0 at hx
+  simpa only [map_nsmul, map_zero] using hx
 
 /-- The constant coefficient ring in the ambient universe of pro-etale abelian sheaves.
 Source: Stacks Project, Tags 03PK and 03CY (blueprint: def-pur-roots-of-unity-sheaf). -/
@@ -100,7 +144,12 @@ theorem proEtaleRootsOfUnityTransition_condition (S : Scheme.{u}) (N N' : ℕ)
     (hN : 0 < N) (hN' : 0 < N') (h : N ∣ N') :
     (proEtaleRootsOfUnityInclusion S N' ≫
       ((N' / N) • 𝟙 (proEtaleUnitsSheaf S))) ≫ proEtaleUnitsPower S N = 0 := by
-  sorry
+  have _ := hN
+  have _ := hN'
+  simp only [proEtaleUnitsPower, Preadditive.comp_nsmul, Category.comp_id, smul_smul,
+    Nat.mul_comm N (N' / N),
+    Nat.div_mul_cancel h]
+  exact kernel.condition (proEtaleUnitsPower S N')
 
 /-- The transition morphism, induced by `x ↦ x^(N'/N)` on units via the kernel property.
 Source: Stacks Project, Tag 03PK (blueprint: def-pur-roots-of-unity-sheaf). -/
@@ -117,7 +166,8 @@ Proof: write `N' = N*k`; an `N`-th root raised to `N'` is `(x^N)^k = 1`.
 Apply the sectionwise kernel description. -/
 theorem proEtaleRootsOfUnity_nsmul_of_dvd (S : Scheme.{u}) (N N' : ℕ) (h : N ∣ N')
     (U : S.ProEtᵒᵖ) (x : (proEtaleRootsOfUnitySheaf S N).obj.obj U) : N' • x = 0 := by
-  sorry
+  obtain ⟨k, rfl⟩ := h
+  simp [mul_comm N k, mul_nsmul, proEtaleRootsOfUnity_nsmul]
 
 /-- The transition is linear over the constant `Z/N'` sheaf, for the unique canonical actions.
 Source: Stacks Project, Tags 03PK and 03CY (blueprint: def-pur-roots-of-unity-sheaf).
@@ -136,7 +186,12 @@ theorem proEtaleRootsOfUnityTransition_linear (S : Scheme.{u}) (N N' : ℕ)
           (proEtaleRootsOfUnitySheaf S N)
           (proEtaleRootsOfUnity_nsmul_of_dvd S N N' h) U).toSMul a
           ((proEtaleRootsOfUnityTransition S N N' hN hN' h).hom.app U x) := by
-  sorry
+  exact torsionSheaf_hom_linear.{u + 1} (ProEt.topology S) N' hN'
+    (proEtaleRootsOfUnitySheaf S N') (proEtaleRootsOfUnitySheaf S N)
+    (proEtaleRootsOfUnity_nsmul S N') (proEtaleRootsOfUnity_nsmul_of_dvd S N N' h)
+    (proEtaleRootsOfUnityTransition S N N' hN hN' h) _ _
+    (torsionSheafModuleStructure_spec.{u + 1} (ProEt.topology S) N' hN' _ _)
+    (torsionSheafModuleStructure_spec.{u + 1} (ProEt.topology S) N' hN' _ _)
 
 /-- The transition as a morphism of sheaves of modules over the larger constant ring.
 Source: Stacks Project, Tags 03PK and 03CY (blueprint: def-pur-roots-of-unity-sheaf). -/
@@ -162,7 +217,24 @@ theorem proEtaleRootsOfUnityTransition_prime (S : Scheme.{u}) (ℓ : ℕ) (hℓ 
         (pow_pos hℓ.pos _) (pow_pos hℓ.pos _)
         (pow_dvd_pow ℓ (Nat.le_succ (r + 1)))).hom.app U x) =
       ℓ • (proEtaleRootsOfUnityInclusion S (ℓ ^ (r + 2))).hom.app U x := by
-  sorry
+  have hdiv : ℓ ^ (r + 2) / ℓ ^ (r + 1) = ℓ := by
+    rw [show r + 2 = (r + 1) + 1 by omega, pow_succ,
+      Nat.mul_div_cancel_left _ (pow_pos hℓ.pos _)]
+  have hh := kernel.lift_ι (proEtaleUnitsPower S (ℓ ^ (r + 1)))
+    (proEtaleRootsOfUnityInclusion S (ℓ ^ (r + 2)) ≫
+      ((ℓ ^ (r + 2) / ℓ ^ (r + 1)) • 𝟙 (proEtaleUnitsSheaf S)))
+    (proEtaleRootsOfUnityTransition_condition S (ℓ ^ (r + 1)) (ℓ ^ (r + 2))
+      (pow_pos hℓ.pos _) (pow_pos hℓ.pos _)
+      (pow_dvd_pow ℓ (Nat.le_succ (r + 1))))
+  have hx := congrArg (fun f ↦ f.hom.app U x) hh
+  change (proEtaleRootsOfUnityInclusion S (ℓ ^ (r + 1))).hom.app U
+      ((proEtaleRootsOfUnityTransition S (ℓ ^ (r + 1)) (ℓ ^ (r + 2))
+        (pow_pos hℓ.pos _) (pow_pos hℓ.pos _)
+        (pow_dvd_pow ℓ (Nat.le_succ (r + 1)))).hom.app U x) =
+      (ℓ ^ (r + 2) / ℓ ^ (r + 1)) •
+        (proEtaleRootsOfUnityInclusion S (ℓ ^ (r + 2))).hom.app U x at hx
+  rw [hdiv] at hx
+  exact hx
 
 /-- The inverse system indexed by `r ≥ 1`; the natural-number index `r` denotes `r+1`.
 Source: Stacks Project, Tag 03PK and the coefficient-twist blueprint

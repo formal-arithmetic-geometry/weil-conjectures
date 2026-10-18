@@ -25,9 +25,54 @@
   "def-weil-pbc-constant-sheaf",
   "lem-pur-torsion-sheaf-constant-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply preservation of kernels by the inclusion of abelian sheaves into presheaves and evaluation. Mathlib PreservesKernel.iso and AddCommGrpCat.kernelIsoKer identify sections with the concrete kernel of N times identity on the lifted additive units. Remove ULift and additive notation to identify this kernel with rootsOfUnity. Compatibility with the inclusion is kernelComparison_comp_ι; equality after the subgroup inclusion proves uniqueness. This works also for N=0.",
+   "uses": [
+    "def-pur-abelian-sheaf-kernel",
+    "def-pur-proetale-units-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Evaluate kernel.condition and use injectivity of the kernel inclusion on sections to prove N annihilates every section. If N divides N prime, write N prime=N*k and use mul_nsmul to deduce annihilation by N prime.",
+   "uses": [
+    "def-pur-abelian-sheaf-kernel"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Compose the N prime/N multiple of the identity with N times the identity. Bilinearity of composition and Nat.div_mul_cancel identify the resulting exponent with N prime. The kernel equation proves the transition condition, so kernel.lift defines the transition.",
+   "uses": [
+    "def-pur-abelian-sheaf-kernel"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply torsionSheaf_hom_linear with the canonical actions, whose normalization and semilinearity are torsionSheafModuleStructure_spec, using the two annihilation results. This gives the linearity needed for the module morphism.",
+   "uses": [
+    "lem-pur-torsion-sheaf-constant-module"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a prime ell, pow_succ and cancellation by the positive ell^(r+1) give ell^(r+2)/ell^(r+1)=ell. Evaluate kernel.lift_ι on sections and substitute this equality. Functor.ofOpSequence supplies all remaining inverse-system transitions.",
+   "uses": [
+    "def-pur-abelian-sheaf-kernel"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-abelian-sheaf-kernel",
+  "def-pur-proetale-units-sheaf",
+  "lem-pur-torsion-sheaf-constant-module"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Section 03PK (section-kummer), the defining kernel and sectionwise roots-of-unity equation; Definition 03P4 (definition-additive-sheaf), units and constant coefficients. Module linearity is Stacks 03CY via lem-pur-torsion-sheaf-constant-module. Elementary categorical and exponent calculations formalized by W5, 2026-10-18."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -118,5 +163,15 @@
   "group": "NL",
   "result": "pass",
   "note": "Existing Q16 pro-etale roots-of-unity declaration matches the node and source; dependencies, transitions, torsion module, universes, edge cases, docstrings, and scompile checks passed. Dry-run could not proceed due to external launcher fetch-lock contention."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261018T150151-L-3800778",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
