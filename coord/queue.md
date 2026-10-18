@@ -1,6 +1,6 @@
 # Work queue
 
-1485 items; claim with `tools/claim.py next <group> [--stage N]`.
+1486 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (1485)
+## Stage 3: modules to prove (1486)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -21,6 +21,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.EllAdicLocalizingExceptionalConstructibleCohomology` | 3 | 1 | proof | route |
 | `Sheaf.PoincareDuality.ProperProjectionFormulaBounded` | 3 | 1 | proof | route |
 | `Sheaf.WeilSheaf.AdicFiniteCoefficientBound` | 4 | 1 | proof | route |
+| `Sheaf.WeilSheaf.CohomologyGeometricConjugacy` | 4 | 1 | proof | route |
 | `Sheaf.WeilSheaf.CompactSupportFiniteCoefficientComparison` | 4 | 1 | proof | route |
 | `WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CohomologicalDimension` | 4 | 1 | proof | route |
 | `Sheaf.AlgebraicGeometry.EllAdicProperTruncationBound` | 5 | 1 | proof | route |
@@ -1500,17 +1501,16 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Algebra.Homology.SplitCellComplexKFlat` | - | 1 | proof | 21 |
 | `Sheaf.CategoryTheory.BoundedFilteredPageFunctorNormalized` | - | 1 | proof | 21 |
 
-## Stage 3: waiting for statements of dependencies (59)
+## Stage 3: waiting for statements of dependencies (58)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
 | module | distance to a target | sorry | waits for (first unstated node) |
 |---|---|---|---|
 | `Sheaf.SmoothPurity.NormalizedWitness` | 1 | 1 | `lem-pur-condensed-exceptional-reconstruction` |
-| `WeilConjectures.ZetaFunction.TraceFormula` | 2 | 1 | `def-weil-global-geometric-frobenius` |
+| `WeilConjectures.ZetaFunction.TraceFormula` | 2 | 1 | `lem-zl-general-condensed-weil-realization` |
 | `Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions` | 3 | 3 | `lem-sfb-modobj-abelian` |
 | `Sheaf.Paper.ProperBaseChangeRational` | 4 | 6 | `det-prop-scalar-six-pullback` |
-| `Sheaf.WeilSheaf.CohomologyGeometricConjugacy` | 4 | 1 | `def-weil-global-geometric-frobenius` |
 | `Sheaf.CategoryTheory.InternalSectionTensorComparison` | 5 | 7 | `lem-sfb-modobj-abelian` |
 | `Sheaf.Paper.CartesianCoefficients` | 5 | 2 | `lem-sfb-modobj-abelian` |
 | `Sheaf.Paper.EtaleWeilFundamentalRepresentation` | 5 | 8 | `def-tw-frobenius-action` |
