@@ -217,15 +217,25 @@ def queue_stage(m: str):
     return None
 
 
+def node_file(m: str):
+    """The node file the queue reads: dag_queue.nodes_dir() (SHEAF_DAG in coord/sheaf.env when set), else dag/nodes."""
+    import dag_queue
+    for base in dict.fromkeys((dag_queue.nodes_dir(), li.ROOT / "dag" / "nodes")):
+        hits = list(base.glob(f"*/{m}.json"))
+        if hits:
+            return hits[0]
+    return None
+
+
 def node_finished(m: str, stage=None) -> bool:
     """A stage-1 item is finished when its node file is no longer unsplit/imported (the queue may be stale);
     a stage-2 item (stage 2 opened 2026-10-11) when its node already records a Lean declaration (`lean.module`)
     or is a Mathlib leaf: a split node is exactly what stage 2 states, so the stage-1 rule must not refuse it."""
-    hits = list((li.ROOT / "dag" / "nodes").glob(f"*/{m}.json"))
-    if not hits:
+    hit = node_file(m)
+    if hit is None:
         return False
     try:
-        d = json.loads(hits[0].read_text())
+        d = json.loads(hit.read_text())
     except Exception:
         return False
     if stage is None:
@@ -237,10 +247,13 @@ def node_finished(m: str, stage=None) -> bool:
         if isinstance(l, dict) and l.get("convention"):   # a convention node (L, 2026-10-11): no Lean notion, not an item
             return True
         return d.get("status") in ("mathlib", "merged")
-    # launcher's order 2026-10-10 20:55 UTC: a node whose status is split, mathlib or merged is finished whether or not
-    # `reviewed` is set (L's own split of lem-pc-ringed-space-module-stalk-tensor at 19:58 carried no `reviewed`, so
-    # `next` handed the item to J1 at 20:14 after F1 had abandoned it for the same reason)
-    if d.get("status") in ("split", "mathlib", "merged"):
+    # the human, 2026-10-18: stage-1 claimability follows dag_queue.stage1(): a split node is finished only when its review
+    # stands (`reviewed` set, dag_queue.unfolded); a split whose review was withdrawn (`reviewed` removed when its statement
+    # changed, as lem-sfb-dc-lower-star-preserves in 1bab541d8d) is a stage-1 item again (re-review / re-split for the
+    # changed statement) and must be claimable. Before, by the launcher's order of 2026-10-10 20:55 UTC, any `split`
+    # counted as finished whether or not `reviewed` was set. Mathlib leaves and merged nodes stay finished.
+    import dag_queue
+    if dag_queue.unfolded(d) or d.get("status") in ("mathlib", "merged"):
         return True
     # launcher's finding, 2026-10-10 17:30 UTC: a node attached to a sorry-free Lean declaration (lean_audit closed or
     # attached) stays status unsplit but is finished; groups claimed such nodes eight times each
