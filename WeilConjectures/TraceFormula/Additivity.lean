@@ -150,6 +150,8 @@ namespace WeilBoundedConstructible
 variable {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
   [IsSeparated X.hom] {Φ : X ⟶ X} [IsFinite Φ.left] [IsUniversalHomeomorphism Φ.left]
 
+-- matching the unfolded Frobenius comparison of the lower shriek against the abstract statement
+set_option maxHeartbeats 1000000 in
 /-- **The compactly supported Frobenius is `RΓ_c(φ) ∘ Φ^♯`** (blueprint
 `prop-trf-graph-operator`): for a Weil object `(K, φ)`,
 `F_c = Ra_{X!} φ ∘ Φ^♯ : RΓ_c(X, K) ⟶ RΓ_c(X, LΦ^* K) ⟶ RΓ_c(X, K)`. -/
