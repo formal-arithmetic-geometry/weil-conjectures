@@ -53,6 +53,7 @@ public import WeilConjectures.Algebra.Homology.BifunctorLinear
 public import WeilConjectures.Algebra.Homology.BifunctorMappingConeNaturality
 public import WeilConjectures.Algebra.Homology.DerivedCategory.AdicTower
 public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.ChgUniv
+public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.MapBijectiveAcyclic
 public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.ModuleOfRingHom
 public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.TowerLimit
 public import WeilConjectures.Algebra.Homology.DerivedCategory.Ext.TowerLimitIso
