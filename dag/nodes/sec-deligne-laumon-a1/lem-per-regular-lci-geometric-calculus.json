@@ -21,7 +21,8 @@
   "def-weil-pbc-krull-dimension-ring",
   "def-kun-transcendence-degree",
   "def-weil-residue-field",
-  "pqf-def-quasifinite"
+  "pqf-def-quasifinite",
+  "def-per-regular-closed-immersion-codimension"
  ],
  "proof": [
   {
@@ -457,5 +458,35 @@
   "group": "Q68",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-71d08d4af (reviewer sub-agent of L); spot-checked: Read the item in full. It has 11 steps and no new nodes. I read all cited statements and the Stacks sources: 0E9J, 067P, 067Q, 067R, 061L, 00NR/00NQ, 065K, 06A9, 00ON, 02FX, 0ALW, 01TH, 07NF. The statement is unchanged, no SGA source is used, and the closure has no cycle. Batch-5 flag: lem-trf-regular-sequence-dimension-formula is a Mathlib leaf (ringKrullDim_add_length_eq_ringKrullDim_of_isRegular). Its closure is three definitions, so it adds nothing to the batch-5 closure, and neither the trace-formula nor the Poincaré-duality assumption gives it. I accept it as a generic tool. Three repairable faults, fixed in fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-regular-lci-geometric-calculus.json. (1) E5, Step 2: after spreading with 061L, the step inverts a further h without saying why the sequence stays regular; the localization argument and the nonzero final quotient are now written out. (2) C4/E1, Step 8: the 00ON flat height formula was applied to chart ring maps whose flatness was not shown; it is now applied to the flat stalk map O_{X,x}→O_{P,z}, citing def-weil-flat-morphism. (3) C1, Step 9: passing the chart's regular sequence to the stalk O_{P,z} was not cited; it now cites lem-weil-pbc-weakly-regular-sequence-localization-prime. proof_deps is reset to the union of the uses. Step 5's sources check out: smooth-pair 067U, 06A9 with A=C=R and I=0, and rank r from 02G1. Steps 3 and 4 match 067P/00LM and 065K. Step 10's finite-fibre argument is correct. I tested the formula r−c=dim O_Y−dim O_X+trdeg on the identity, a rational section of A^r, A^1_k at its generic and closed points, Spec F_p→Spec Z, A^1_{F_p}→Spec Z through A^1_Z, and empty Y; all hold. The 23 declared tool_uses are generic algebra or scheme facts used as black boxes, and I accept them.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.RegularLCIGeometricCalculus",
+  "declaration": "AlgebraicGeometry.exists_regularClosedImmersion_factor_of_regular",
+  "declarations": [
+   "AlgebraicGeometry.exists_regularClosedImmersion_factor_of_regular",
+   "AlgebraicGeometry.regularClosedImmersion_codimension_rank_unique",
+   "AlgebraicGeometry.regularClosedImmersion_flat_baseChange",
+   "AlgebraicGeometry.regularClosedImmersion_comp_codimension",
+   "AlgebraicGeometry.regularClosedImmersion_smooth_section",
+   "AlgebraicGeometry.isRegularScheme_of_smooth_over_regular",
+   "AlgebraicGeometry.regular_affine_finiteType_closed_presentation",
+   "AlgebraicGeometry.regular_lci_virtual_dimension_formula",
+   "AlgebraicGeometry.regular_lci_virtual_dimension_independent",
+   "AlgebraicGeometry.finite_residue_extension_trdeg_zero_of_quasiFinite"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/RegularLCIGeometricCalculus.lean",
+  "statement": "theorem exists_regularClosedImmersion_factor_of_regular {Y X : Scheme.{u}} [IsNoetherian Y] [IsNoetherian X] (i : Y ⟶ X) [IsImmersion i] (hY : IsRegularScheme Y) (hX : IsRegularScheme X) : ∃ (U : X.Opens) (j : Y ⟶ U.toScheme) (c : Y → ℕ), j ≫ U.ι = i ∧ IsRegularClosedImmersionWithCodimension j c",
+  "branch": "newtargets-dag",
+  "by": "Q63",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c3caacac5",
+  "group": "Q63",
+  "result": "pass",
+  "note": "Item node unchanged from the stage-1 PASS apart from the lean record and the new def node in stmt_deps. All 10 theorems match the node clause by clause: rank/local constancy/uniqueness; immersion between regular schemes via an open ambient; flat base change with c∘fst; composition with c+d∘i; separated smooth section of codim r; smooth over regular; affine closed presentation, existence plus every such immersion; virtual-dimension formula with varying r (dim_z of fibre), integer subtraction and canonical residue map; independence of factorization; quasi-finite in both readings gives finite residue extension and trdeg 0. Formula checked against Stacks 00ON/04NA and the regular-sequence dimension drop. New def IsRegularClosedImmersionWithCodimension is genuine (063D/063J, source-points only, so codimension 0 on a clopen piece and empty sources work). nt_compile --json of both files: rc 0, sorry-only (1.6 s, 2.1 s). Verbatim statements, declarations, docstrings and imports OK; no name clash. Maintainer notes: (1) overlap with Q02's constant-c IsStalkRegularClosedImmersion, present at base and not mentioned in the report; a generalisation, not a duplicate; a bridge lemma is advised for stage 3; (2) stmt_deps def-weil-proper-morphism and pqf-def-locnoeth are unused, inherited from stage 1."
  }
 }
