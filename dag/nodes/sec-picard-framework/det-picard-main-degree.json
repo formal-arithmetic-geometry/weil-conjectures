@@ -3,7 +3,9 @@
  "blueprint": {
   "is": "det-picard-main-degree",
   "from": null,
-  "same_as": null
+  "same_as": [
+   "prop-pd-picard-degree-decomposition"
+  ]
  },
  "kind": "statement",
  "title": "Degree decomposition of the Picard scheme of a geometric curve",
@@ -13,46 +15,182 @@
   "place": "node det-picard-main-degree, order None"
  },
  "stmt_deps": [
-  "thm-pc-picard-representable"
+  "thm-pc-picard-representable",
+  "def-sc-curves",
+  "def-sc-genus",
+  "def-sc-invertible-module",
+  "def-pc-euler-characteristic",
+  "def-pc-picard-functor",
+  "def-pc-pic-sigma-functor",
+  "def-pc-divisor-line-bundle"
  ],
  "proof": [
   {
-   "text": "(1) The projection $\\pi:C\\times\\underline{\\operatorname{Pic}}_{C/k}\\to\\underline{\\operatorname{Pic}}_{C/k}$\nis proper, flat and of finite presentation, and $\\cL$ is invertible,\nhence flat over the base. By [sk-thm-picard-coherence] (a), every point\nhas an affine neighbourhood $U$ on which $R\\pi_*\\cL$ is represented by a\nbounded complex $K^\\bullet$ of finite free modules whose formation\ncommutes with base change; so for $t\\in U$,\n$\\chi(\\cL_t)=\\sum_q(-1)^q\\dim_{\\kappa(t)}H^q(K^\\bullet\\otimes\\kappa(t))=\\sum_q(-1)^q\\operatorname{rk}K^q$,\nwhich does not depend on $t\\in U$ (the Euler characteristic of a finite\ncomplex of vector spaces equals the alternating sum of the dimensions of\nits terms). Hence $\\chi(\\cL_t)$, and with it $\\delta$, is locally\nconstant, and the fibres $\\delta^{-1}(d)$ are open, hence also closed\n(their complement is a union of open sets). By Riemann–Roch\n([lem-sc-riemann-roch], applied over an algebraic closure of\n$\\kappa(t)$, using [lem-pc-degree-base-change]) $\\delta(t)$ is the\ndivisor degree of $\\cL_t$.",
+   "text": "First verify the curve hypotheses needed below. By [lem-sc-smooth-connected-curve-local-rings], $C$ is integral. By [lem-sc-proper-dim-one-projective], its properness and dimension one imply projectivity. Thus $C$ is a smooth projective curve in the integral sense of that phrase. Since $k$ is algebraically closed it is separably closed, so [prop-pc-xk-integral] applies with the given $P$: for every field extension $K/k$, $C_K$ is an integral smooth projective curve. In particular the field-extension fibres used below are integral proper curves of dimension one.",
    "uses": [
-    "sk-thm-picard-coherence",
+    "lem-sc-smooth-connected-curve-local-rings",
+    "lem-sc-proper-dim-one-projective",
+    "prop-pc-xk-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-main/sk-thm-picard-main-degree.md",
+    "place": "Degree decomposition: proof of clauses (1)-(3), expanded using the cited existing nodes"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-riemann-roch] to $\\mathcal O_C$ to get $\\chi(C,\\mathcal O_C)=1-g$. For any field extension $K/k$, [lem-sc-flat-base-change-coherent] identifies the cohomology of $\\mathcal O_{C_K}$ with the scalar extensions of that of $\\mathcal O_C$. Extending a basis preserves dimension, hence $\\chi(C_K,\\mathcal O_{C_K})=1-g$. Thus the degree defined in the item agrees on every such fibre with $\\chi(\\mathcal L)-\\chi(\\mathcal O)$ of [def-pc-degree-line-bundle]. More generally, [lem-pc-degree-base-change](1) preserves this degree under any further field extension. All the schemes are proper and of dimension one by step 1, and all the modules here are invertible.",
+   "uses": [
     "lem-sc-riemann-roch",
+    "lem-sc-flat-base-change-coherent",
+    "def-pc-degree-line-bundle",
     "lem-pc-degree-base-change"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-main/sk-thm-picard-main-degree.md",
+    "place": "Degree decomposition: proof of clauses (1)-(3), expanded using the cited existing nodes"
+   }
   },
   {
-   "text": "(2) A morphism $h:T\\to\\underline{\\operatorname{Pic}}_{C/k}$ classifies\n$(\\mathrm{id}\\times h)^*\\cL$, whose fibre at $s\\in T$ is\n$\\cL_{h(s)}\\otimes_{\\kappa(h(s))}\\kappa(s)$, of the same Euler\ncharacteristic (flat base change). So $h$ factors through the open and\nclosed subscheme $\\delta^{-1}(d)$ iff all fibres of the classified sheaf\nhave degree $d$. For $T=\\Spec k$ this identifies the $k$-points with\n$\\operatorname{Pic}(C)$ in degree $d$ (rigidification is automatic since\n$\\operatorname{Pic}(\\Spec k)=0$).",
-   "uses": [],
-   "elementary": null
-  },
-  {
-   "text": "(3) Degree is additive under tensor product of invertible sheaves on a\ncurve over a field ([lem-pc-degree-base-change]); the dual has the\nopposite degree. Hence $\\operatorname{Pic}^0_{C/k}$ is a subgroup functor,\nrepresented by the open and closed subscheme\n$\\underline{\\operatorname{Pic}}^0_{C/k}$, which is therefore a subgroup\nscheme ([rem-pc-group-structure]). The class of $\\cO_C(dP)$ (rigidified\nalong $P$) is a $k$-point of degree $d$, and multiplication by it is an\nautomorphism of the group scheme $\\underline{\\operatorname{Pic}}_{C/k}$\nwith inverse multiplication by $\\cO_C(-dP)$; by additivity it carries\n$\\delta^{-1}(0)$ onto $\\delta^{-1}(d)$.",
+   "text": "Put $S=\\underline{\\operatorname{Pic}}_{C/k}$ and $\\pi:C\\times_k S\\to S$. By [lem-pc-proper-base-change], $\\pi$ is proper and smooth. By [lem-pc-smooth-flat] it is flat and locally of finite presentation; properness gives quasi-compactness and quasi-separatedness, so it is of finite presentation. On a trivializing open of the invertible module $\\mathcal L$, its stalk is free of rank one over the source local ring, so flatness of $\\pi$ makes it flat over the base. It is of finite presentation as a module since it is locally free of rank one. Apply [sk-thm-picard-coherence](a). After shrinking around any point of $S$, obtain a bounded finite free complex $K^\\bullet$ computing $R\\pi_*\\mathcal L$, including after residue-field base change. Write $B^q,Z^q$ for boundaries and cycles of the resulting finite-dimensional complex. The equalities $\\dim K^q=\\dim Z^q+\\dim B^{q+1}$ and $\\dim Z^q=\\dim H^q+\\dim B^q$ telescope in the alternating sum. Consequently $\\chi(\\mathcal L_t)=\\sum_q(-1)^q\\operatorname{rank}K^q$, independent of $t$ on this open. Subtracting $1-g$ proves that $\\delta$ is locally constant.",
    "uses": [
+    "lem-pc-proper-base-change",
+    "lem-pc-smooth-flat",
+    "sk-thm-picard-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-main/sk-thm-picard-main-degree.md",
+    "place": "Degree decomposition: proof of clauses (1)-(3), expanded using the cited existing nodes"
+   }
+  },
+  {
+   "text": "Each $S_d=\\delta^{-1}(d)$ is open; its complement is the union of the other open fibres, so it is closed as well. Give $S_d$ its open subscheme structure. The subsets are disjoint and cover $S$, and their inclusions identify their structure sheaves with the restrictions of $\\mathcal O_S$. The resulting disjoint union of schemes maps isomorphically to $S$: inverse maps on the open cover $\\{S_d\\}$ agree on the empty pairwise intersections and glue. A morphism $h:T\\to S$ factors through $S_d$ exactly when its underlying image lies there, since in that case restricting $h$ to the open target gives its unique factorization.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-main/sk-thm-picard-main-degree.md",
+    "place": "Degree decomposition: proof of clauses (1)-(3), expanded using the cited existing nodes"
+   }
+  },
+  {
+   "text": "A morphism $h:T\\to S$ classifies the pullback of the stipulated universal $P$-rigidified module. Its fibre at $s\\in T$ is the scalar extension of $\\mathcal L_{h(s)}$ from $\\kappa(h(s))$ to $\\kappa(s)$; degree is unchanged by step 2, using [lem-pc-degree-base-change](1). The class therefore has all fibres of degree $d$ if and only if $\\delta(h(s))=d$ for every $s$. The factorization in step 4 gives a natural bijection between these classes and $\\operatorname{Hom}_k(T,S_d)$. Changing a representative by a line bundle from $T$ does not change the condition: its restriction to a residue field is a one-dimensional vector space, so the resulting twist of the fibre is isomorphic to the original module. This proves representability of the stated degree subfunctor on arbitrary test schemes, including nonreduced ones.",
+   "uses": [
+    "lem-pc-degree-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-main/sk-thm-picard-main-degree.md",
+    "place": "Degree decomposition: proof of clauses (1)-(3), expanded using the cited existing nodes"
+   }
+  },
+  {
+   "text": "For $T=\\operatorname{Spec}k$, [cor-pc-sigma-pic-iso] and [def-pc-pic-sigma-functor] identify the Picard functor with the kernel of $P^*:\\operatorname{Pic}(C)\\to\\operatorname{Pic}(k)$. Every one-dimensional $k$-vector space admits a basis, so $\\operatorname{Pic}(k)=0$ and the kernel is all of $\\operatorname{Pic}(C)$. Combined with step 5, this identifies $S_d(k)$ with isomorphism classes of degree-$d$ invertible modules on $C$. A rigidification adds no extra classes: any two nonzero trivializations differ by a scalar, and multiplying the module by that inverse scalar gives a compatible isomorphism.",
+   "uses": [
+    "cor-pc-sigma-pic-iso",
+    "def-pc-pic-sigma-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-main/sk-thm-picard-main-degree.md",
+    "place": "Degree decomposition: proof of clauses (1)-(3), expanded using the cited existing nodes"
+   }
+  },
+  {
+   "text": "On a fibre $C_K$, apply [lem-trf-curve-euler-tensor-generic-rank] to invertible modules $A,B$, with $\\mathcal F=B$ of generic rank one. It gives $\\chi(A\\otimes B)=\\deg(A)+\\chi(B)$; subtracting $\\chi(\\mathcal O)$ gives $\\deg(A\\otimes B)=\\deg(A)+\\deg(B)$. Its integral proper dimension-one hypotheses hold by step 1. The identity $A\\otimes A^\\vee\\cong\\mathcal O$ gives $\\deg(A^\\vee)=-\\deg(A)$ and $\\deg(\\mathcal O)=0$ by the degree formula in step 2. Thus degree-zero relative classes contain the identity and are closed under multiplication and inverse for every $T$. The group multiplication and inverse on $S$ are induced by tensor product and dualization by [rem-pc-group-structure]. Their restrictions land in $S_0$ by step 5. The group identities restrict from $S$, so the clopen subscheme $S_0$ is a subgroup scheme.",
+   "uses": [
+    "lem-trf-curve-euler-tensor-generic-rank",
+    "rem-pc-group-structure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-main/sk-thm-picard-main-degree.md",
+    "place": "Degree decomposition: proof of clauses (1)-(3), expanded using the cited existing nodes"
+   }
+  },
+  {
+   "text": "By [lem-sc-point-cartier], the given rational point $P$ is an effective Cartier divisor. By [lem-pc-degree-base-change](2), $\\mathcal O_C(dP)$ has degree $d$ for every integer $d$, including negative $d$ with the dual-power convention. Its one-dimensional fibre at $P$ can be trivialized, giving a $k$-point of $S_d$. Translation on $S$ by this class is tensoring with the pullback of $\\mathcal O_C(dP)$, and translation by its inverse is tensoring with $\\mathcal O_C(-dP)$, by [rem-pc-group-structure]. Their composites are the identity since the two line bundles tensor to $\\mathcal O_C$. On every fibre, step 7 adds $d$ or $-d$ to degree (the translating class has degree $d$ after residue-field extension by [lem-pc-degree-base-change](1)). Thus these mutually inverse translations restrict to $S_0\\to S_d$ and $S_d\\to S_0$. This proves precisely the isomorphism and inverse asserted in clause (3).",
+   "uses": [
+    "lem-sc-point-cartier",
     "lem-pc-degree-base-change",
     "rem-pc-group-structure"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-main/sk-thm-picard-main-degree.md",
+    "place": "Degree decomposition: proof of clauses (1)-(3), expanded using the cited existing nodes"
+   }
   }
  ],
  "proof_deps": [
-  "sk-thm-picard-coherence",
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-sc-proper-dim-one-projective",
+  "prop-pc-xk-integral",
   "lem-sc-riemann-roch",
+  "lem-sc-flat-base-change-coherent",
+  "def-pc-degree-line-bundle",
   "lem-pc-degree-base-change",
-  "rem-pc-group-structure"
+  "lem-pc-proper-base-change",
+  "lem-pc-smooth-flat",
+  "sk-thm-picard-coherence",
+  "cor-pc-sigma-pic-iso",
+  "def-pc-pic-sigma-functor",
+  "lem-trf-curve-euler-tensor-generic-rank",
+  "rem-pc-group-structure",
+  "lem-sc-point-cartier"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-main/sk-thm-picard-main-degree.md",
-  "place": "## Proof"
+  "place": "Clauses (1)-(3); expanded following Stacks pic.tex, Tag 0BA0 (pic-lemma-picard-pieces), perfect.tex Tag 0B9T, and varieties.tex Tags 0AYV/0AYX"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "picard.*(degree|component)|degree.*picard|PicardScheme",
+   "results": "No hits",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Picard scheme of a smooth proper curve is the disjoint union of open and closed degree components",
+   "results": "AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall; AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian; AlgebraicGeometry.sigmaOpenCover; AlgebraicGeometry.instFinitaryExtensiveScheme; AlgebraicGeometry.isProper_eq; AlgebraicGeometry.IsIntegral.casesOn; AlgebraicGeometry.instHasFiniteCoproductsScheme; AlgebraicGeometry.Scheme.isAffine_affineCover",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Picard\"",
+   "results": "ODE.picard; IsPicardLindelof; ODE.picard_apply₀; IsPicardLindelof.weaken_lipschitz; ODE.picard_apply; IsPicardLindelof.lipschitzOnWith; IsPicardLindelof.continuousOn; IsPicardLindelof.norm_le",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Picard scheme of a smooth proper connected curve over an algebraically closed field decomposes into open and closed degree components, translated by a rational point",
+   "results": "WeierstrassCurve.Jacobian.PointClass; WeierstrassCurve.Jacobian.Point.point; WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_mul_mk_XYIdeal'; WeierstrassCurve.Affine.Point.toClass_some; WeierstrassCurve.Projective.PointClass; WeierstrassCurve.Affine.Point.toClass_apply; WeierstrassCurve.Affine.CoordinateRing.mk_XYIdeal'_neg_mul; FunctionField.classNumber",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Picard|Pic\\.degree|picardFunctor",
+   "results": "Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean; Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean; Mathlib/AlgebraicGeometry/EllipticCurve/Weierstrass.lean",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Algebraic geometry Picard functor degree zero subgroup and translation by a divisor",
+   "results": "CommRing.relPic; CommRing.Pic.functor; Submodule.range_unitsToPic; instCommGroupPic; Submodule.unitsToPic; CommRing.Pic; CommRing.Pic.AsModule; WeierstrassCurve.Affine.Point.toClass",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "unreachable"
@@ -81,5 +219,84 @@
    "decls": [],
    "missing": []
   }
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "det-picard-main-degree",
+  "worker": "stage1",
+  "summary": "Expanded the imported degree proof into eight explicit steps; reused existing curve, cohomology, rigidification and tensor-Euler nodes. Replaced the incorrect citation of general tensor additivity to the divisor-only degree-base-change node by the existing generic-rank formula. No statement change and no new nodes.",
+  "blueprint": "Steps 1-4 realize the first imported proof paragraph (local constancy and clopen decomposition); steps 5-6 realize paragraph 2 (degree subfunctor and k-points); steps 7-8 realize paragraph 3 (subgroup and the specified translations). The unit representability route is unchanged: representability is an assumption/cited input, not reproved.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-smooth-connected-curve-local-rings",
+    "why": "Integral curve hypothesis for the generic-rank tensor formula; the item unit does not supply curve local-ring geometry."
+   },
+   {
+    "node": "lem-sc-proper-dim-one-projective",
+    "why": "Converts the item proper-curve hypothesis to the projective-curve hypothesis of the existing Picard rigidification statements."
+   },
+   {
+    "node": "prop-pc-xk-integral",
+    "why": "Supplies integral dimension-one fibres over arbitrary residue fields for the tensor-degree argument."
+   },
+   {
+    "node": "lem-sc-riemann-roch",
+    "why": "Identifies the constant 1-g with the Euler characteristic of the structure sheaf."
+   },
+   {
+    "node": "lem-sc-flat-base-change-coherent",
+    "why": "Preserves the Euler characteristic of the structure sheaf under residue-field extension."
+   },
+   {
+    "node": "lem-pc-degree-base-change",
+    "why": "Field-extension invariance and the degree of rational-point twists, as required by the original blueprint proof."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Checks properness and smoothness of the universal curve projection."
+   },
+   {
+    "node": "lem-pc-smooth-flat",
+    "why": "Checks relative flatness and local finite presentation before using the perfect-complex theorem."
+   },
+   {
+    "node": "sk-thm-picard-coherence",
+    "why": "The original degree proof uses its arbitrary-base-change bounded finite free model."
+   },
+   {
+    "node": "cor-pc-sigma-pic-iso",
+    "why": "Identifies the relative Picard functor with the rigidified kernel for its k-points."
+   },
+   {
+    "node": "lem-trf-curve-euler-tensor-generic-rank",
+    "why": "Generic Euler tensor formula yields tensor additivity on each integral fibre; the cited degree-base-change node only covers effective-divisor twists."
+   },
+   {
+    "node": "lem-sc-point-cartier",
+    "why": "Ensures the rational point is a Cartier divisor before constructing its positive and negative twists."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-smooth-connected-curve-local-rings",
+  "lem-sc-proper-dim-one-projective",
+  "prop-pc-xk-integral",
+  "lem-sc-riemann-roch",
+  "lem-sc-flat-base-change-coherent",
+  "lem-pc-degree-base-change",
+  "lem-pc-proper-base-change",
+  "lem-pc-smooth-flat",
+  "sk-thm-picard-coherence",
+  "cor-pc-sigma-pic-iso",
+  "lem-trf-curve-euler-tensor-generic-rank",
+  "lem-sc-point-cartier"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q98-f1dee8c7b",
+  "group": "Q98",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-f1dee8c7b (reviewer sub-agent of L); spot-checked: Read in full: the item, every cited statement, the blueprint markdown (main-20261015), Stacks 0BA0 (pic.tex l.1195) with its 0B9T-based proof, and varieties 0AYV. This is the first delivery: no new nodes, and the statement is verbatim from the blueprint and true. I tested d=0, d<0, g=0 (P^1), transcendental residue fields, nonreduced T and empty T. No cycle (checked by script). Step 1: integrality, projectivity and prop-pc-xk-integral(2) give C_K as a smooth projective, integral, dim-1 curve over every field extension K. Step 2: RR(1) plus flat base change give chi(O)=1-g on every fibre, so delta equals def-pc-degree-line-bundle's degree. Step 3: the universal curve is proper, smooth, flat and of finite presentation, and L is locally free of rank 1, so the hypotheses of sk-thm-picard-coherence(a) hold; its finite free model commuting with base change makes chi locally constant. Step 4 is elementary and factors only through open subschemes. Steps 5-6: the degree subfunctor is represented using lem-pc-degree-base-change(1); k-points come from cor-pc-sigma-pic-iso with Pic(k)=0. Step 7 fixes a real C4 fault in the imported proof, which cited divisor-only clause (2) for general tensor additivity; it now uses lem-trf-curve-euler-tensor-generic-rank with r=1, whose integral/proper/dim-1 hypotheses hold by step 1. Step 8: P is Cartier by lem-sc-point-cartier and deg O(dP)=d by lem-pc-degree-base-change(2); the translations by O(+-dP) are mutually inverse and restrict to Pic^0 <-> Pic^d. Batch-5 flag: lem-trf-curve-euler-tensor-generic-rank is the general coherent Euler formula of Stacks 0AYV, which neither the trace formula nor Poincare duality gives, and this item does not use it as a step of either proof. It is unsplit, its 253-node closure contains no other trace-formula node, no Poincare-duality node and no nt-assume leaf, and the citation adds only itself to the item's closure; accepted. prop-pd-picard-degree-decomposition is a more general (separably closed) version without the k-points clause; it is recorded in same_as, which is legitimate since the item is an existing blueprint node. The tool_uses are generic and accepted. No changes."
  }
 }
