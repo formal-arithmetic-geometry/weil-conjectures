@@ -18,55 +18,250 @@
   "def-weil-pbc-inverse-image",
   "def-weil-pbc-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $U=T\\setminus Z$, $U'=U\\times_TT'$, and write $j:U\\hookrightarrow T$, $j':U'\\hookrightarrow T'$ and $q:U'\\to U$. The open and closed base-change lemmas give the two complementary immersions on $T'$. The open-subscheme theorem for Noetherian schemes implies that the inverse image under $j$ of every affine open of $T$ is quasi-compact; the same applies to $j'$. An open immersion has diagonal the identity of its source (its two projections identify $U\\times_TU$ with $U$), so it is quasi-separated. Thus $j,j'$ are qcqs, as required in the strict-local direct-image results below. No separatedness or finite-type assumption on $g$ is used.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "def-weil-quasi-separated-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tags 01OW (lemma-locally-Noetherian), 01OZ (lemma-Noetherian-topology); quasi-separatedness from the definition in schemes.tex, Tag 01KK (definition-separated)"
+   }
+  },
+  {
+   "text": "Let $i^!_0F=i^{-1}\\ker(F\\to j_*j^{-1}F)$. The supported-kernel adjunction states both $i_*i^!_0F\\cong\\ker(F\\to j_*j^{-1}F)$ and $i_*\\dashv i^!_0$ on abelian sheaves, with $i_*$ exact. These statements hold for constant $A$-module sheaves: kernels, direct images and the indicated inverse images carry their induced $A$-actions, and naturality of the abelian Hom bijection says that $f\\circ a=a\\circ f$ holds for a map if and only if it holds for its transpose, for each $a\\in A$. Exactness of coefficient forgetting detects exactness of $i_*$ on modules. Module sheaves have enough injectives. Apply the bounded-below derived-adjunction theorem with $L=i_*$, $R=i^!_0$. It identifies the specified $i^!=Ri^!_0$ as the right adjoint of termwise $i_*$ on $D^+$, with counit represented on an injective complex by the supported-kernel inclusion. The argument applies also to $i'$.",
+   "uses": [
+    "def-pur-etale-supported-kernel",
+    "lem-pur-etale-supported-kernel-adjunction",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-trf-bounded-below-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XQ (lemma-sections-with-support-acyclic), support adjunction; bounded-below derivation with its counit normalization"
+   }
+  },
+  {
+   "text": "Choose a bounded-below complex $I$ of injective $A_T$-modules representing $K$. For every etale $V\\to T$, apply the restriction-kernel lemma to the monomorphism $V\\times_TU\\to V$ in $T_{\\mathrm{et}}$: it gives surjectivity $I^r(V)\\to I^r(V\\times_TU)$. Hence\n$$0\\to i_*i^!_0I\\to I\\to j_*j^*I\\to0$$\nis a degreewise short exact sequence of module complexes. The open immersion is etale and restriction along an etale map preserves injective module sheaves; thus $j^*I$ computes $Rj_*j^*K$. The bounded-below right-derived theorem computes $i^!K$ by $i^!_0I$. The short-exact-complex triangle therefore gives\n$$S_K:=i_*i^!K\\xrightarrow{\\varepsilon_K}K\\xrightarrow{\\eta_K}Rj_*j^*K\\to S_K[1].$$\nThe counit is the one fixed in Step 2, and the second arrow is the open adjunction unit. The same construction gives the triangle on $T'$. Naturality of the short-exact-complex triangle and of derived comparisons makes these triangles natural in $K$.",
+   "uses": [
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-pur-module-restriction-kernel-comparison",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-weil-pbc-etale-restriction-injectives",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A45 (lemma-cohomology-with-support-triangle), injective-resolution proof; constant-module restriction-kernel version of the same exact sequence"
+   }
+  },
+  {
+   "text": "The canonical closed exchange $c:g^*i_*\\to i'_*h^*$ is an isomorphism already on sheaves. Indeed at a geometric point $t'$ outside $Z'$ both sides have zero stalk by the supported-image description of closed pushforward; at a point $z'$ of $Z'$ the inverse-image stalk identification and the closed-pushforward stalk identification identify both sides with the stalk at $h(z')$. The representative-section formula for underived exchange sends the germ of a section to that same germ, so these are identifications of the canonical map. Stalk conservativity proves the assertion. The formulas are $A$-linear. Since closed direct image and inverse image are exact, the same $c$, applied termwise, is the closed direct-image comparison on $D^+$. Localizing the exact adjunction $i'^{-1}\\dashv i'_*$ gives that same adjunction on $D^+$. Its counit is the termwise closed counit $i'^{-1}i'_*\\cong1$. Thus the adjunction Hom bijection, followed by this counit isomorphism, proves $i'_*$ fully faithful on $D^+$; in particular it reflects isomorphisms.",
+   "uses": [
+    "lem-kun-04ca",
+    "lemma-openclosed-stalk-lowerstar",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "def-weil-pbc-underived-exchange",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "prop-weil-pbc-inverse-image-exact",
+    "def-weil-exact-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04CA (proposition-closed-immersion-pushforward), Tag 03Q1 (lemma-stalk-pullback), and the canonical exchange on representative sections"
+   }
+  },
+  {
+   "text": "Define $\\beta_K:h^*i^!K\\to i'^!g^*K$ by transposing\n$$i'_*h^*i^!K\\xrightarrow{c^{-1}}g^*i_*i^!K\\xrightarrow{g^*\\varepsilon_K}g^*K$$\nunder $i'_*\\dashv i'^!$. The mate bijection makes this a natural transformation and gives exactly\n$$\\varepsilon'_{g^*K}\\circ i'_*(\\beta_K)\\circ c_{i^!K}=g^*(\\varepsilon_K).$$\nThus it is the comparison prescribed in the statement; it remains to prove invertibility.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Adjunction-mate construction, transposed counit characterization"
+   }
+  },
+  {
+   "text": "Fix a geometric point $t':\\operatorname{Spec}\\Omega\\to T'$ with $\\Omega$ algebraically closed, and put $t=g t'$. Write $C=T_{(t)}$, $B=T'_{(t')}$ with structural maps $s:C\\to T$, $s':B\\to T'$. Strict-local invariance for ind-etale morphisms says that the canonical map $v:B\\to C$ is an isomorphism over $T$. Form $U_C=U\\times_TC$ and $U_B=U'\\times_{T'}B$; the map $U_B\\to U_C$ is its base change, hence an isomorphism. Consequently the exchange $E_v$ for the open immersion $U_C\\hookrightarrow C$ along $v$ is invertible: the two isomorphisms of schemes identify their small etale sites, and under these inverse equivalences the exchange is the identity by its transposed-counit definition.",
+   "uses": [
+    "lem-trf-ind-etale-strict-local-invariance",
+    "def-weil-pbc-derived-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 05WR (lemma-quasi-finite-strict-henselization, etale case), 0GIP (lemma-base-change-strict-henselization-quasi-finite, filtered-colimit case)"
+   }
+  },
+  {
+   "text": "For any $F\\in D^+(U_{\\mathrm{et}})$ of abelian sheaves, let $P:s^*Rj_*F\\to Rj_{C,*}F_C$ be the strict-local exchange, and let $Q:s'^*Rj'_*q^*F\\to Rj_{B,*}F_B$ be the corresponding exchange over $T'$. The strict-local global-homology theorem applies to $j,j'$ by Step 1: it says that global sections of $H^n(P)$ and $H^n(Q)$ are isomorphisms for every integer $n$, including negative ones. The global-sections-to-closed-stalk isomorphism on strictly henselian local schemes is natural in the sheaf, so it identifies these maps with their closed geometric stalk maps. Thus $P$ at the closed point of $C$ and $Q$ at the closed point of $B$ are isomorphisms on all cohomology groups. This uses the complex version of strict-local continuity, not only its sheaf-in-degree-zero version.",
+   "uses": [
+    "lem-weil-pbc-strict-local-base-change-global-homology",
+    "lem-weil-pbc-strictly-henselian-sections-stalk"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q9 (theorem-higher-direct-images), derived assertions and their proof; strict-local global sections as the closed stalk"
+   }
+  },
+  {
+   "text": "Let $E:g^*Rj_*F\\to Rj'_*q^*F$ be the original open exchange. Apply the derived exchange cube to the original square and its strict-local square over $v:B\\to C$. With the canonical inverse-image composition identifications it gives\n$$E_v\\circ v^*P=Q\\circ s'^*E.$$\nAt the closed geometric point of $B$, $E_v$ is invertible by Step 6 and $v^*P,Q$ induce isomorphisms on every cohomology group by Step 7 (the isomorphism $v$ sends closed point to closed point). The inverse-image stalk formula, exactness of stalks, and the inverse-image composition identifications identify the remaining map with $H^n(E)_{t'}$. It too is invertible for all $n$. Since $t'$ was arbitrary, derived stalk conservativity proves $E$ is an isomorphism. Coefficient-forgetting exchange compatibility now gives the same assertion for every $F\\in D^+(U_{\\mathrm{et}},A)$, with the specified $A$-linear exchange map.",
+   "uses": [
+    "lem-kun-derived-exchange-cube",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-weil-pbc-derived-inverse-image-composition",
+    "lem-weil-pbc-derived-stalk-conservative",
+    "lem-weil-pbc-exchange-forget-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q9 (theorem-higher-direct-images); canonical exchange composition as in sites-cohomology.tex, Tag 0E47 (remark-compose-base-change-horizontal)"
+   }
+  },
+  {
+   "text": "Apply exact $g^*$ to the triangle of Step 3; it remains distinguished by the exact-functor triangulated theorem. Compare it with the triangle for $g^*K$ on $T'$, using the identity on the middle term and the open exchange $E_{j^*K}$ on the last term, after $q^*j^*K\\cong j'^*g^*K$. The right square commutes: the transpose defining open exchange, precomposed with the open unit, is that unit, by the adjunction triangle identity. Rotate the two triangles and apply TR3 to this square. Rotating back supplies a first-component map $\\lambda:g^*S_K\\to S'_{g^*K}$ with $\\varepsilon'\\lambda=g^*\\varepsilon$. Under $g^*S_K\\cong i'_*h^*i^!K$, full faithfulness from Step 4 and the adjunction bijection of Step 5 force $\\lambda=i'_*(\\beta_K)\\circ c_{i^!K}$. Hence the actual prescribed mate is the first component of a morphism of these distinguished triangles.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-weil-pbc-derived-exchange",
+    "def-weil-triangulated-category",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A45 (lemma-cohomology-with-support-triangle); TR2 and TR3 and the unit/counit definition of the exchange"
+   }
+  },
+  {
+   "text": "For every $n$, take the five consecutive cohomology terms\n$$H^{n-1}(K)\\to H^{n-1}(Rj_*j^*K)\\to H^n(S_K)\\to H^n(K)\\to H^n(Rj_*j^*K)$$\nin the two compared triangles, with $g^*$ applied in the first row. The middle comparison is $H^n(i'_*(\\beta_K)\\circ c)$, and the other four comparisons are isomorphisms by Step 8 and the identity on $g^*K$. The five lemma proves that the middle comparison is invertible for each $n$. Thus $i'_*(\\beta_K)$ is an isomorphism in the derived category. Applying the left inverse $i'^{-1}$ from Step 4 shows that $\\beta_K$ itself is invertible.",
+   "uses": [
+    "lem-weil-pbc-five-lemma",
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-derived-cohomology-ladder",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "def-weil-pbc-bounded-derived-subcategories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0A45 (lemma-cohomology-with-support-triangle), its long exact cohomology sequence and the five lemma"
+   }
+  },
+  {
+   "text": "All maps defining $c$ and $\\beta$ are module maps, and the Hom transpose in Step 2 is $A$-linear, so the isomorphisms are $A$-linear. On bounded-below injective complexes, the supported-kernel counit is termwise inclusion. Shifting complexes shifts this inclusion and the closed exchange without changing either map; after the canonical derived shift identifications the shifted $\\beta_K$ and $\\beta_{K[n]}$ have the same transpose, hence are equal for every $n\\in\\mathbf Z$. For successive affine ind-etale maps $g_1:T_1\\to T$, $g_2:T_2\\to T_1$, write $h_1,h_2$ for the maps on closed subschemes. The closed comparison for $g_1g_2$ equals the composite of the two comparisons: on a representative section both restrict it to its pullback, and successive restrictions equal one restriction along the composite. The transpose of\n$$h_2^*h_1^*i^!K\\xrightarrow{h_2^*\\beta_{g_1,K}}h_2^*i_1^!g_1^*K\\xrightarrow{\\beta_{g_2,g_1^*K}}i_2^!g_2^*g_1^*K$$\nis, by the two counit equations of Step 5, $g_2^*g_1^*\\varepsilon_K$. This is also the transpose of $\\beta_{g_1g_2,K}$, so the mate bijection gives their equality under the canonical composition identifications. The identity case is the same equation with the identity counit comparison. None of these arguments restricts the cohomology sheaves to be constructible.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "def-weil-pbc-underived-exchange",
+    "lem-weil-pbc-derived-inverse-image-composition",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 09XQ (lemma-sections-with-support-acyclic), termwise supported counit; adjunction-mate uniqueness and composition of section restrictions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-etale-supported-kernel",
+  "def-weil-abstract-derived-category",
+  "def-weil-exact-derived-adjunction",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-weil-pbc-derived-exchange",
+  "def-weil-pbc-underived-exchange",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-triangulated-category",
+  "lem-kun-04ca",
+  "lem-kun-derived-exchange-cube",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-pur-module-restriction-kernel-comparison",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-trf-bounded-below-derived-adjunction",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-derived-cohomology-ladder",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "lem-weil-pbc-derived-stalk-conservative",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-weil-pbc-five-lemma",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-strict-local-base-change-global-homology",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lemma-openclosed-stalk-lowerstar",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "prop-weil-pbc-inverse-image-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03Q9, 0A45, 09XQ; agent assembly of strict-local cube and counit-mate arguments from the existing cited interfaces."
+ },
  "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "For an affine ind-etale base change, the extraordinary inverse image for a closed immersion of schemes commutes with pullback on bounded below etale derived categories with finite coefficients",
-   "results": "8 hits; AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, AlgebraicGeometry.Scheme.instHasPullbacksEtale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_inv_τl, AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map, AlgebraicGeometry.of_targetAffineLocally_of_isPullback",
-   "date": "2026-10-18",
-   "verdict": "no match: hits concern scheme-theoretic closed immersions, structure-sheaf pullback, ordinary topological stalks, etale loci or scheme limits; none states base change for the derived closed-support right adjoint on small etale module categories."
-  },
-  {
-   "tool": "loogle",
-   "query": "\"IsClosedImmersion\", \"Sheaf\"",
-   "results": "2 hits; AlgebraicGeometry.IsClosedImmersion.overEquivIdealSheafData, AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion",
-   "date": "2026-10-18",
-   "verdict": "no match: hits concern scheme-theoretic closed immersions, structure-sheaf pullback, ordinary topological stalks, etale loci or scheme limits; none states base change for the derived closed-support right adjoint on small etale module categories."
-  },
   {
    "tool": "grep",
    "query": "indEtale|IndEtale|extraordinary|[Cc]ostalk|supported.*[Bb]ase[Cc]hange",
    "results": "2 hits; Mathlib/Geometry/Manifold/Bordism.lean, Mathlib/Geometry/Manifold/Bordism.lean",
    "date": "2026-10-18",
-   "verdict": "no match: hits concern scheme-theoretic closed immersions, structure-sheaf pullback, ordinary topological stalks, etale loci or scheme limits; none states base change for the derived closed-support right adjoint on small etale module categories."
+   "verdict": "no match: only two uses of the word extraordinary in manifold bordism documentation."
   },
   {
    "tool": "leansearch",
-   "query": "Closed immersion extraordinary inverse image commutes with ind-etale base change for bounded below etale complexes",
-   "results": "8 hits; AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.IsClosedImmersion.base_closed, AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, AlgebraicGeometry.IsImmersion.isStableUnderBaseChange, AlgebraicGeometry.IsClosedImmersion.mk, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion",
+   "query": "Etale sheaf local cohomology extraordinary pullback along closed immersion commutes with ind-etale base change",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.IsLocalAtTarget.of_isPullback, AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme, AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange, AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_inv_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.lift",
    "date": "2026-10-18",
-   "verdict": "no match: hits concern scheme-theoretic closed immersions, structure-sheaf pullback, ordinary topological stalks, etale loci or scheme limits; none states base change for the derived closed-support right adjoint on small etale module categories."
+   "verdict": "no match: the hits concern structure-sheaf geometry, Kahler differentials or ordinary topological stalks, not derived supported etale module sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine ind-etale base change commutes with derived sections supported on a closed subscheme in bounded below etale module sheaves",
+   "results": "8 hits; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, KaehlerDifferential.isBaseChange_of_formallyEtale, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, AlgebraicGeometry.Scheme.Hom.formallyUnramified_appLE, AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE, Algebra.etaleLocus_eq_compl_support, Algebra.basicOpen_subset_etaleLocus_iff, AlgebraicGeometry.IsEtale.of_comp",
+   "date": "2026-10-18",
+   "verdict": "no match: the hits concern structure-sheaf geometry, Kahler differentials or ordinary topological stalks, not derived supported etale module sheaves."
   },
   {
    "tool": "loogle",
    "query": "\"Sheaf\", \"stalk\"",
    "results": "12 hits; TopCat.Presheaf.stalk, TopCat.Presheaf.stalkFunctor, TopCat.Presheaf.stalkCongr, TopCat.Presheaf.stalkFunctor_obj, TopCat.Presheaf.stalkSpecializes, TopCat.Presheaf.stalkSpecializes_refl, TopCat.Presheaf.stalkCongr_hom, TopCat.Presheaf.stalkCongr_inv",
    "date": "2026-10-18",
-   "verdict": "no match: hits concern scheme-theoretic closed immersions, structure-sheaf pullback, ordinary topological stalks, etale loci or scheme limits; none states base change for the derived closed-support right adjoint on small etale module categories."
+   "verdict": "no match: the hits concern structure-sheaf geometry, Kahler differentials or ordinary topological stalks, not derived supported etale module sheaves."
   },
   {
    "tool": "leanfinder",
-   "query": "Etale sheaf local cohomology base change along inverse limits of etale schemes; derived sections with closed support and exceptional pullback",
-   "results": "8 hits; AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, Algebra.etaleLocus_eq_compl_support, AlgebraicGeometry.IsEtale.instFormallyUnramified, Algebra.basicOpen_subset_etaleLocus_iff, Algebra.FormallyEtale.localization_base, Algebra.etaleLocus, Algebra.exists_etale_of_isEtaleAt",
+   "query": "Closed support local cohomology functor as right adjoint to extension from a closed subspace and invariance of strict henselizations under etale limits",
+   "results": "8 hits; localCohomology, localCohomology.ofSelfLERadical, localCohomology.ofDiagram, localCohomology.diagram, localCohomology.isoSelfLERadical, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules, AlgebraicGeometry.Scheme.kerAdjunction, localCohomology.hasColimitDiagram",
    "date": "2026-10-18",
-   "verdict": "no match: hits concern scheme-theoretic closed immersions, structure-sheaf pullback, ordinary topological stalks, etale loci or scheme limits; none states base change for the derived closed-support right adjoint on small etale module categories."
+   "verdict": "no match: localCohomology is algebraic ideal-power local cohomology of ring modules, not the small-etale closed-support right adjoint; the other hits are structure-sheaf adjunctions."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-codimension-one-costalk-reduction",
@@ -88,5 +283,179 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-ind-etale-closed-support-base-change",
+  "worker": "stage1",
+  "summary": "Statement retained verbatim. Proved the specified bounded-below module right adjoint by derived supported kernels, its counit triangle by a short exact sequence on injective module complexes, and ind-etale locality through strict-local invariance plus the canonical exchange cube. Identified the actual counit mate using TR3 and adjunction uniqueness, then checked A-linearity, shifts, and composition. No new nodes: all substantive inputs already exist. No finished Lean declaration states the item.",
+  "blueprint": "Serves the ancestor lem-per-artin-gabber-affine-curve costalk/locality input (current split Step 3) through lem-per-codimension-one-costalk-reduction, as recorded in blueprint.from; realizes the strict-local supported-cohomology locality in Travaux de Gabber XVII Definitions 1.1.1 and 1.4.1 without replacing the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-kun-04ca",
+    "why": "Steps 4 use this general Pushforward along a closed immersion interface as a tool for closed-support locality; the perverse/Fourier unit does not supply this site-theoretic or categorical fact."
+   },
+   {
+    "node": "lem-kun-derived-exchange-cube",
+    "why": "Steps 8 use this general Derived exchange commutes around a commutative cube interface as a tool for closed-support locality; the perverse/Fourier unit does not supply this site-theoretic or categorical fact."
+   },
+   {
+    "node": "lem-pur-etale-supported-kernel-adjunction",
+    "why": "Steps 2 use this general Closed etale support kernel and its exact left adjoint interface as a tool for closed-support locality; the perverse/Fourier unit does not supply this site-theoretic or categorical fact."
+   },
+   {
+    "node": "lem-pur-module-restriction-kernel-comparison",
+    "why": "Steps 3 use this general Forgetting constant module coefficients compares derived restriction kernels interface as a tool for closed-support locality; the perverse/Fourier unit does not supply this site-theoretic or categorical fact."
+   },
+   {
+    "node": "lem-sf-derived-homology-long-exact",
+    "why": "Steps 10 use this general Long exact cohomology sequence of a distinguished triangle in the derived category interface as a tool for closed-support locality; the perverse/Fourier unit does not supply this site-theoretic or categorical fact."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Steps 9 use this general An exact functor of abelian categories induces a triangulated functor on derived categories interface as a tool for closed-support locality; the perverse/Fourier unit does not supply this site-theoretic or categorical fact."
+   },
+   {
+    "node": "lem-trf-bounded-below-derived-adjunction",
+    "why": "Steps 2 use this general Canonical bounded-below derived adjunction and its comparison normalization interface as a tool for closed-support locality; the perverse/Fourier unit does not supply this site-theoretic or categorical fact."
+   },
+   {
+    "node": "lem-trf-ind-etale-strict-local-invariance",
+    "why": "Steps 6 use this general Strict localizations are invariant under ind-etale morphisms interface as a tool for closed-support locality; the perverse/Fourier unit does not supply this site-theoretic or categorical fact."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Steps 1 use this general Base change of a closed immersion is a closed immersion interface as a tool for closed-support locality; the perverse/Fourier unit does not supply this site-theoretic or categorical fact."
+   },
+   {
+    "node": "lem-weil-pbc-complex-ses-triangle",
+    "why": "Steps 3 use this general A short exact sequence of complexes gives a distinguished triangle in D(A), functorially interface as a tool for closed-support locality; the perverse/Fourier unit does not supply this site-theoretic or categorical fact."
+   },
+   {
+    "node": "lem-weil-pbc-derived-cohomology-ladder",
+    "why": "Steps 10 use this general A morphism of distinguished triangles gives a morphism of the long exact cohomology sequences interface as a tool for closed-support locality; the perverse/Fourier unit does not supply this site-theoretic or categorical fact."
+   },
+   {
+    "node": "lem-weil-pbc-derived-inverse-image-composition",
+    "why": "Steps 8, 11 use this general Composition isomorphisms of derived inverse images and their coherence interface as a tool for closed-support locality; the perverse/Fourier unit does not supply this site-theoretic or categorical fact."
+   },
+   {
+    "node": "lem-weil-pbc-derived-stalk-conservative",
+    "why": "Steps 8 use this general Conservativity of geometric stalks on the derived category interface as a tool for closed-support locality; the perverse/Fourier unit does not supply this site-theoretic or categorical fact."
+   },
+   {
+    "node": "lem-weil-pbc-dplus-injective-representative",
+    "why": "Steps 3 use this general Every object of D^+ is represented by a bounded below K-injective complex of injectives interface as a tool for closed-support locality; the perverse/Fourier unit does not supply this site-theoretic or categorical fact."
+   },
+   {
+    "node": "lem-weil-pbc-etale-restriction-injectives",
+    "why": "Steps 3 use this general Etale restriction preserves injectives interface as a tool for closed-support locality; the perverse/Fourier unit does not supply this site-theoretic or categorical fact."
+   },
+   {
+    "node": "lem-weil-pbc-exchange-forget-coefficients",
+    "why": "Steps 8 use this general The derived exchange morphism commutes with forgetting the coefficient ring interface as a tool for closed-support locality; the perverse/Fourier unit does not supply this site-theoretic or categorical fact."
+   },
+   {
+    "node": "lem-weil-pbc-five-lemma",
+    "why": "Steps 10 use this general Five lemma in an abelian category interface as a tool for closed-support locality; the perverse/Fourier unit does not supply this site-theoretic or categorical fact."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Steps 4, 8 use this general Stalk of an inverse image, compatible with germs of pulled-back sections interface as a tool for closed-support locality; the perverse/Fourier unit does not supply this site-theoretic or categorical fact."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Steps 2 use this general Colimits of sheaves of modules and the forgetful functor to abelian sheaves interface as a tool for closed-support locality; the perverse/Fourier unit does not supply this site-theoretic or categorical fact."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Steps 2 use this general Sheaves of modules on the small etale site have enough injectives interface as a tool for closed-support locality; the perverse/Fourier unit does not supply this site-theoretic or categorical fact."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Steps 1 use this general An open subscheme of a Noetherian scheme is Noetherian interface as a tool for closed-support locality; the perverse/Fourier unit does not supply this site-theoretic or categorical fact."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-base-change",
+    "why": "Steps 1 use this general Base change of an open immersion is an open immersion (Stacks 01JY) interface as a tool for closed-support locality; the perverse/Fourier unit does not supply this site-theoretic or categorical fact."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Steps 3 use this general An open immersion of schemes is etale interface as a tool for closed-support locality; the perverse/Fourier unit does not supply this site-theoretic or categorical fact."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-plus-injective",
+    "why": "Steps 3 use this general Right derived functor on bounded below derived categories, computed on bounded below complexes of injectives interface as a tool for closed-support locality; the perverse/Fourier unit does not supply this site-theoretic or categorical fact."
+   },
+   {
+    "node": "lem-weil-pbc-strict-local-base-change-global-homology",
+    "why": "Steps 7 use this general Strict-local base-change mate on global cohomology interface as a tool for closed-support locality; the perverse/Fourier unit does not supply this site-theoretic or categorical fact."
+   },
+   {
+    "node": "lem-weil-pbc-strictly-henselian-sections-stalk",
+    "why": "Steps 7 use this general Global sections over a strictly henselian local scheme are the stalk at the closed point interface as a tool for closed-support locality; the perverse/Fourier unit does not supply this site-theoretic or categorical fact."
+   },
+   {
+    "node": "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "why": "Steps 10 use this general Isomorphisms in the unbounded derived category detected by cohomology interface as a tool for closed-support locality; the perverse/Fourier unit does not supply this site-theoretic or categorical fact."
+   },
+   {
+    "node": "lemma-openclosed-stalk-lowerstar",
+    "why": "Steps 4 use this general Stalks of $i_*$ on $Z$ interface as a tool for closed-support locality; the perverse/Fourier unit does not supply this site-theoretic or categorical fact."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Steps 4 use this general Conservativity of geometric stalks interface as a tool for closed-support locality; the perverse/Fourier unit does not supply this site-theoretic or categorical fact."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Steps 8 use this general Exactness of geometric stalks interface as a tool for closed-support locality; the perverse/Fourier unit does not supply this site-theoretic or categorical fact."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-exact",
+    "why": "Steps 4 use this general Exactness of inverse image interface as a tool for closed-support locality; the perverse/Fourier unit does not supply this site-theoretic or categorical fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-kun-04ca",
+  "lem-kun-derived-exchange-cube",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-pur-module-restriction-kernel-comparison",
+  "lem-sf-derived-homology-long-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-trf-bounded-below-derived-adjunction",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-pbc-derived-cohomology-ladder",
+  "lem-weil-pbc-derived-inverse-image-composition",
+  "lem-weil-pbc-derived-stalk-conservative",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-etale-restriction-injectives",
+  "lem-weil-pbc-exchange-forget-coefficients",
+  "lem-weil-pbc-five-lemma",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-strict-local-base-change-global-homology",
+  "lem-weil-pbc-strictly-henselian-sections-stalk",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lemma-openclosed-stalk-lowerstar",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "prop-weil-pbc-inverse-image-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-N6-429c321e6",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-429c321e6 (reviewer sub-agent of L); spot-checked: I read all 11 steps and the statement of every cited node; the mathematics is correct and the statement is verbatim and true. Steps: (1) j and j' are qcqs: Noetherian open subscheme, and the diagonal of an open immersion is an isomorphism. (2) i_* is left adjoint to i^!_0 on A-modules, by A-linearity of the natural bijection. The bounded-below derived-adjunction node applies because Mod(T,A) has enough injectives and i_* is exact. (3) The restriction-kernel node gives surjectivity for injective modules, which yields the 0A45 triangle; this matches etale-cohomology.tex lemma-cohomology-with-support-triangle. (4) c is checked by stalks (04CA support, 03Q1 germ), and the localized exact adjunction makes i'_* fully faithful. (6) The strict-local invariance hypothesis holds because g is affine and ind-etale. (7) The 03Q9-type global-homology node applies to the qcqs j and j', and gives closed stalks. (8) I checked the cube instantiation (T,U,T',U') / (C,U_C,B,U_B) with g s' = s v. It gives E_v∘v*P = Q∘s'*E, and forget-coefficients moves the result to A-modules. (9-10) TR3, plus full faithfulness, forces lambda = i'_*(beta)∘c; then the five lemma and the left inverse finish. Small cases: Z empty, Z=T, A=0, g=id. The parent's uses (A=F_l, strict localization, Spec O_{T,t}) satisfy the hypotheses. Batch-5: lem-trf-bounded-below-derived-adjunction is pure homological algebra; its 14-node closure has no trace-formula or Poincare-duality statement and is already cited outside trf. lem-trf-ind-etale-strict-local-invariance is Olivier-type strict-henselization invariance; neither assumption gives it, and the parent already cites it. Both are genuinely outside the assumed statements, so I accepted them. tool_uses are all generic and accepted; I found no duplicate. FIX (B5): two step source labels. Step 1 now gives 01KK as schemes.tex definition-separated; Step 8's document is now etale-cohomology.tex for 03Q9, with 0E47 named in sites-cohomology.tex. Nothing else changed.; 1 file(s) fixed by the reviewer"
  }
 }
