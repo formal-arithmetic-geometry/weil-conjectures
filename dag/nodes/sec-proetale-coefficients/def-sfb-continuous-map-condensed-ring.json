@@ -27,7 +27,7 @@
    }
   },
   {
-   "text": "Apply [lem-sfb-profinite-coherent-sheaf-criterion] with $\\mathcal A$ the category of unital rings. It suffices to check that $P$ takes finite disjoint coproducts to products of rings and that the kernel-pair diagram for every continuous surjection is an equalizer of rings. This uses the ring-valued version of the criterion directly.",
+   "text": "Identify the type-valued presheaf underlying P with ContinuousMap.yonedaPresheaf Profinite.toTopCat T followed by uliftFunctor, using the identity natural isomorphism. The forgetful functor from unital rings to types reflects finite limits. Thus Presheaf.isSheaf_coherent_of_hasPullbacks_of_comp reduces ring-valued sheafness to type-valued sheafness. Remove the universe lift with Presieve.isSheaf_comp_uliftFunctor_iff, and apply [lem-sfb-profinite-coherent-sheaf-criterion] to the continuous-map presheaf.",
    "uses": [
     "lem-sfb-profinite-coherent-sheaf-criterion"
    ],
@@ -38,7 +38,7 @@
    }
   },
   {
-   "text": "For a finite family $(S_i)$, restriction gives $C(\\coprod_iS_i,T)\\to\\prod_i C(S_i,T)$. Its inverse sends $(a_i)$ to the function $a(i,s)=a_i(s)$. For every open $V\\subseteq T$, its inverse image is $\\bigcup_i\\{i\\}\\times a_i^{-1}(V)$, open in the disjoint union, so the inverse function is continuous. Both directions preserve every ring operation by evaluation on each component. Thus this is the product of rings, including the empty family: $C(\\varnothing,T)$ is the one-element ring, terminal among unital rings.",
+   "text": "The finite-product condition for ContinuousMap.yonedaPresheaf is the existing Mathlib instance: Profinite.toTopCat preserves finite coproducts and continuous maps from a finite disjoint union are tuples of maps on its clopen components. This includes the empty union. Hence the continuous-map presheaf preserves finite products.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -47,7 +47,7 @@
    }
   },
   {
-   "text": "Let $q:S'\\to S$ be a continuous surjection and let $b\\in C(S',T)$ have equal pullbacks along both projections from $S'\\times_S S'$. For $x,y$ with $q(x)=q(y)$ the pair $(x,y)$ lies in that fibre product, so $b(x)=b(y)$. Define $a(s)$ to be this common value on the nonempty fibre $q^{-1}(s)$. Then $a\\circ q=b$, and surjectivity gives uniqueness. The source $S'$ is compact and the target $S$ is Hausdorff, so [lem-sfb-compact-hausdorff-surjection-quotient] applies to $q$ with both spaces regarded as whole subspaces of themselves. For any open $V\\subseteq T$, $q^{-1}(a^{-1}(V))=b^{-1}(V)$ is open; the quoted quotient criterion makes $a^{-1}(V)$ open. Hence $a$ is continuous. No Hausdorffness or completeness of $T$ is used.",
+   "text": "For an effective epimorphism q in Profinite, Profinite.effectiveEpi_tfae implies q is surjective. Its source is compact and its target Hausdorff, so [lem-sfb-compact-hausdorff-surjection-quotient], namely Topology.IsQuotientMap.of_surjective_continuous, makes q a quotient map. Apply Mathlib equalizerCondition_yonedaPresheaf to Profinite.toTopCat and T: equality on the kernel pair makes each compatible function constant on fibres; quotient lifting descends it continuously, and surjectivity proves uniqueness. The argument is universe-polymorphic and imposes no separation or completeness condition on T.",
    "uses": [
     "lem-sfb-compact-hausdorff-surjection-quotient"
    ],
@@ -58,18 +58,18 @@
    }
   },
   {
-   "text": "The equalizer assertion holds in rings, not just on elements. Given any unital ring $R$ and ring homomorphism $h:R\\to C(S',T)$ whose two pullbacks agree, apply the preceding descent to $h(r)$ for each $r$ to obtain $\\widetilde h(r)\\in C(S,T)$. Evaluating at a lift $x$ of $s$ gives $\\widetilde h(r+r')(s)=h(r+r')(x)=h(r)(x)+h(r')(x)$ and $\\widetilde h(rr')(s)=h(r)(x)h(r')(x)$; $\\widetilde h(0)(s)=h(0)(x)=0$ and $\\widetilde h(1)(s)=h(1)(x)=1$. Thus $\\widetilde h$ is a ring homomorphism with $q^*\\widetilde h=h$. Surjectivity of $q$ makes it the unique such homomorphism. This is the equalizer universal property. Together with the finite product calculation, [lem-sfb-profinite-coherent-sheaf-criterion] now proves that $P$ is a sheaf of rings. Define $\\underline T$ to be this sheaf with the already constructed sections and restrictions.",
+   "text": "The finite-product instance and equalizer condition give type-valued sheafness by [lem-sfb-profinite-coherent-sheaf-criterion]. Reinsert the universe lift and the identity comparison with the forgotten ring presheaf. Reflect sheafness through forget RingCat with Presheaf.isSheaf_coherent_of_hasPullbacks_of_comp. This uses only finite-limit reflection and works with independent universes for Profinite and T; it avoids the universe-restricted general isSheaf_iff_isSheaf_forget lemma. Define the ring sheaf from the original presheaf and this proof.",
    "uses": [
     "lem-sfb-profinite-coherent-sheaf-criterion"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-continuous-map-condensed-ring.proof.md",
     "place": "Conditions (a), (b), with the first paragraph reduction replaced by the explicit ring-valued universal property."
    }
   },
   {
-   "text": "Use the tensor and size convention in the current statement of [sk-def-sfb-ring-object]: abelian sheaves have the sheafified objectwise tensor product over $\\mathbf Z$ with unit $a(\\underline{\\mathbf Z})$, on an essentially small site. Fix the universe of the profinite sets and take a larger ambient universe for the sheaf categories, so that this site is essentially small there; the cited statement explicitly includes the coherent site of profinite sets. Its part 3 says that the underlying abelian sheaf of any sheaf of rings on this site is a ring object for this tensor product, commutative when all its section rings are. Apply it to the sheaf $\\underline T$ constructed in steps 1–5. If $T$ is commutative, $(ab)(s)=a(s)b(s)=b(s)a(s)=(ba)(s)$ for every $s$, so every $C(S,T)$ is commutative and the ring object is commutative.",
+   "text": "Use the tensor and size convention in the current statement of [sk-def-sfb-ring-object]: abelian sheaves have the sheafified objectwise tensor product over $\\mathbf Z$ with unit $a(\\underline{\\mathbf Z})$, on an essentially small site. Fix the universe of the profinite sets and take a larger ambient universe for the sheaf categories, so that this site is essentially small there; the cited statement explicitly includes the coherent site of profinite sets. Its part 3 says that the underlying abelian sheaf of any sheaf of rings on this site is a ring object for this tensor product, commutative when all its section rings are. Apply it to the sheaf $\\underline T$ constructed in steps 1–5. If $T$ is commutative, $(ab)(s)=a(s)b(s)=b(s)a(s)=(ba)(s)$ for every $s$, so every $C(S,T)$ is commutative and the ring object is commutative. In Lean, install the two enriched-Hom existence families from presheaf_enrichedHoms_exist, exactly as in continuousMapRingObjOfUniverseMonObj. Apply Sheaf.isCommMonObj_sheafCompose_obj to continuousMapRingSheafOfUniverse T with the pointwise witness fun S a b => mul_comm a b. Its monoid and braided structures are definitionally the recorded sfbSheafTensorStructure structures.",
    "uses": [
     "sk-def-sfb-ring-object"
    ],
@@ -88,7 +88,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-condensed-ring/def-sfb-continuous-map-condensed-ring.proof.md",
-  "place": "Full proof, supplemented by explicit ring-valued product and equalizer universal properties; quotient-map step follows Stacks Tags 08YD and 0AAU."
+  "place": "Full proof, using the blueprint first-paragraph forgetful reduction and Mathlib coherent finite-limit reflection. Adapted the existing universe-restricted proofs in WeilConjectures.CategoryTheory.RingObjects.Condensed.ContinuousMap and Sheaf.AlgebraicGeometry.ContinuousCoefficientUniverse to independent universes. The three declared proof dependencies and the unit route are retained."
  },
  "mathlib_searches": [
   {
@@ -242,5 +242,15 @@
    "missing": [],
    "open": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261018T142716-L-3300806",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

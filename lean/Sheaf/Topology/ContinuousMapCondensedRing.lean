@@ -48,21 +48,39 @@ noncomputable def continuousMapRingPresheafOfUniverse (T : Type v) [TopologicalS
 Source: blueprint `def-sfb-continuous-map-condensed-ring.proof.md`, conditions (a),(b)
 (blueprint: def-sfb-continuous-map-condensed-ring).
 
-Proof: the pointwise operations are continuous and precomposition preserves them. Apply
-`lem-sfb-profinite-coherent-sheaf-criterion` in the category of unital rings. Maps from a
-finite disjoint union are tuples of maps on its clopen components, including the empty
-union, whose function ring is terminal. For a continuous surjection q, a section equal on
-its kernel pair is constant on its fibres, hence descends uniquely as a set map. By
-`lem-sfb-compact-hausdorff-surjection-quotient`, q is a quotient map, so this descended map
-is continuous. For a ring homomorphism from a test ring, descend each of its values;
-evaluation at lifts of points verifies preservation of addition, multiplication, zero
-and one. This gives the ring-valued equalizer universal property and hence sheafness.
-Universe lifting preserves these universal properties. -/
+Proof: identify the underlying type-valued presheaf with the universe lift of
+`ContinuousMap.yonedaPresheaf`. Universe lifting preserves sheafness. Apply
+`lem-sfb-profinite-coherent-sheaf-criterion` to this presheaf: finite coproducts give
+products, including the empty coproduct. For an effective epimorphism of profinite sets,
+`Profinite.effectiveEpi_tfae` gives surjectivity, and
+`lem-sfb-compact-hausdorff-surjection-quotient` makes it a quotient map. The existing
+`equalizerCondition_yonedaPresheaf` descends compatible functions along that quotient.
+Finally the forgetful functor from rings to types reflects finite limits, so
+`Presheaf.isSheaf_coherent_of_hasPullbacks_of_comp` gives the ring-valued sheaf condition. -/
 theorem isSheaf_continuousMapRingPresheafOfUniverse (T : Type v) [TopologicalSpace T]
     [Ring T] [IsTopologicalRing T] :
     Presheaf.IsSheaf (coherentTopology Profinite.{u})
       (continuousMapRingPresheafOfUniverse.{u, v} T) := by
-  sorry
+  let e : continuousMapRingPresheafOfUniverse.{u, v} T ⋙
+      forget RingCat.{max u v + 1} ≅
+      ContinuousMap.yonedaPresheaf Profinite.toTopCat.{u} T ⋙
+        uliftFunctor.{max u v + 1} :=
+    NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ rfl)
+  have h : Presheaf.IsSheaf (coherentTopology Profinite.{u})
+      (continuousMapRingPresheafOfUniverse.{u, v} T ⋙
+        forget RingCat.{max u v + 1}) := by
+    rw [Presheaf.isSheaf_of_iso_iff e,
+      isSheaf_iff_isSheaf_of_type, Presieve.isSheaf_comp_uliftFunctor_iff,
+      ← isSheaf_iff_isSheaf_of_type]
+    rw [Presheaf.isSheaf_iff_preservesFiniteProducts_and_equalizerCondition]
+    refine ⟨inferInstance, ?_⟩
+    apply +allowSynthFailures equalizerCondition_yonedaPresheaf Profinite.toTopCat.{u} T
+    intro Z B π hπ
+    exact .of_surjective_continuous (((Profinite.effectiveEpi_tfae π).out 0 2).mp hπ)
+      π.hom.hom.continuous
+  exact Presheaf.isSheaf_coherent_of_hasPullbacks_of_comp
+    (continuousMapRingPresheafOfUniverse.{u, v} T)
+    (forget RingCat.{max u v + 1}) h
 
 /-- The condensed ring with sections C(S,T) and precomposition restrictions.
 Source: blueprint `def-sfb-continuous-map-condensed-ring.md`, sheaf assertion
@@ -123,6 +141,14 @@ theorem isCommMonObj_continuousMapRingObjOfUniverse (T : Type v) [TopologicalSpa
       (sfbSheafTensorStructure (A := AddCommGrpCat.{max u v + 1})
         (coherentTopology Profinite.{u})).symmetric.toBraidedCategory
       (continuousMapRingObjOfUniverse T) (continuousMapRingObjOfUniverseMonObj T) := by
-  sorry
+  let h := presheaf_enrichedHoms_exist
+    (C := Profinite.{u}) (A := AddCommGrpCat.{max u v + 1})
+  let : ∀ (F G : Profinite.{u}ᵒᵖ ⥤ AddCommGrpCat.{max u v + 1}),
+    Enriched.FunctorCategory.HasEnrichedHom AddCommGrpCat.{max u v + 1} F G := h.1
+  let : ∀ (F G : Profinite.{u}ᵒᵖ ⥤ AddCommGrpCat.{max u v + 1}),
+    Enriched.FunctorCategory.HasFunctorEnrichedHom AddCommGrpCat.{max u v + 1} F G := h.2
+  exact Sheaf.isCommMonObj_sheafCompose_obj (coherentTopology Profinite.{u})
+    (continuousMapRingSheafOfUniverse T)
+    fun S (a b : ULift.{max u v + 1} C(S.unop, T)) ↦ mul_comm a b
 
 end Profinite
