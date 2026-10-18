@@ -5,7 +5,11 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Sites.CohomologyFilteredColimit
+public import Mathlib.Algebra.Category.Grp.AB
+public import Mathlib.Algebra.Category.Grp.Ulift
+public import Mathlib.Algebra.Category.Grp.FilteredColimits
+public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.HasExt
+public import WeilConjectures.CategoryTheory.Filtered.Finite
 public import WeilConjectures.CategoryTheory.Sites.CechCriterion
 
 /-!
@@ -20,6 +24,11 @@ abelian sheaves commutes with filtered colimits ([Stacks 03Q6], [Stacks 0738]).
 
 ## Main statements
 
+- `AddCommGrpCat.exists_ι_apply_eq_of_isColimit`,
+  `AddCommGrpCat.exists_map_eq_zero_of_isColimit`: filtered colimits of abelian groups indexed by
+  categories of arbitrary size are computed elementwise.
+- `CategoryTheory.Functor.toInjectiveExtension`: a functorial monomorphism from a diagram in a
+  Grothendieck abelian category into a diagram of injective objects.
 - `CategoryTheory.Sheaf.exists_map_eq_zero_of_isColimit_of_finite`,
   `CategoryTheory.Sheaf.exists_app_eq_of_isColimit_of_finite`: sections over members of `B` of a
   filtered colimit of abelian sheaves come from a finite stage and are separated at a finite
@@ -35,19 +44,101 @@ abelian sheaves commutes with filtered colimits ([Stacks 03Q6], [Stacks 0738]).
 
 ## Implementation notes
 
-This is the site-generic version of `AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered_small`
-for the small étale site, with the same proof: sections over members of `B` commute with
+The proof is the one sketched in [Stacks 03Q6]: sections over members of `B` commute with
 filtered colimits, hence so do the Čech complexes on the finite families; a filtered colimit of
 injective sheaves thus has vanishing higher cohomology by the Čech criterion, and we conclude by
 dimension shifting along the functorial injective embedding
-`CategoryTheory.Functor.toInjectiveExtension`, filtered colimits being exact.
+`CategoryTheory.Functor.toInjectiveExtension`, filtered colimits being exact. The case of the
+small étale site of a quasi-compact quasi-separated scheme is
+`AlgebraicGeometry.Scheme.H_map_isColimit_of_isFiltered_small`.
 -/
 
 @[expose] public section
 
-universe w' v w
+universe w' v w w₀ w₁ w₂
 
 open CategoryTheory Limits Opposite Presheaf
+
+/-! ### Filtered colimits of abelian groups of arbitrary size -/
+
+namespace AddCommGrpCat
+
+variable {𝒥 : Type w₁} [Category.{w₂} 𝒥] [IsFiltered 𝒥] {G : 𝒥 ⥤ AddCommGrpCat.{w₀}}
+  {d : Cocone G}
+
+/-- Every element of a colimit of a filtered diagram of abelian groups of arbitrary size comes
+from some member of the diagram (the colimit is preserved by the universe lift, after which it
+is computed on the underlying types). -/
+lemma exists_ι_apply_eq_of_isColimit (hd : IsColimit d) (x : d.pt) :
+    ∃ (j : 𝒥) (y : G.obj j), d.ι.app j y = x := by
+  have : PreservesFilteredColimitsOfSize.{w₂, w₁}
+      (CategoryTheory.forget AddCommGrpCat.{max w₀ w₁ w₂}) :=
+    preservesFilteredColimitsOfSize_shrink.{w₁, max w₀ w₁ w₂, w₂, max w₀ w₁ w₂} _
+  have hd' := isColimitOfPreserves AddCommGrpCat.uliftFunctor.{max w₁ w₂} hd
+  obtain ⟨j, y, hy⟩ := Concrete.isColimit_exists_rep _ hd' (ULift.up x)
+  exact ⟨j, y.down, congrArg ULift.down hy⟩
+
+/-- An element of a member of a filtered diagram of abelian groups of arbitrary size which
+vanishes in the colimit vanishes in a later member of the diagram. -/
+lemma exists_map_eq_zero_of_isColimit (hd : IsColimit d) {j : 𝒥} (y : G.obj j)
+    (hy : d.ι.app j y = 0) : ∃ (j' : 𝒥) (a : j ⟶ j'), G.map a y = 0 := by
+  have : PreservesFilteredColimitsOfSize.{w₂, w₁}
+      (CategoryTheory.forget AddCommGrpCat.{max w₀ w₁ w₂}) :=
+    preservesFilteredColimitsOfSize_shrink.{w₁, max w₀ w₁ w₂, w₂, max w₀ w₁ w₂} _
+  have hd' := isColimitOfPreserves AddCommGrpCat.uliftFunctor.{max w₁ w₂} hd
+  obtain ⟨j', a, b, hab⟩ := Concrete.isColimit_exists_of_rep_eq _ hd'
+    (ULift.up y : (G ⋙ AddCommGrpCat.uliftFunctor.{max w₁ w₂}).obj j)
+    (0 : (G ⋙ AddCommGrpCat.uliftFunctor.{max w₁ w₂}).obj j)
+    (congrArg ULift.up (hy.trans (map_zero _).symm))
+  refine ⟨IsFiltered.coeq a b, a ≫ IsFiltered.coeqHom a b, ?_⟩
+  have h₁ := congrArg ULift.down hab
+  change G.map a y = G.map b 0 at h₁
+  rw [map_zero] at h₁
+  rw [G.map_comp, ConcreteCategory.comp_apply, h₁, map_zero]
+
+end AddCommGrpCat
+
+/-! ### Functorial injective embeddings -/
+
+namespace CategoryTheory.Functor
+
+open ZeroObject
+
+variable {A : Type*} [Category* A] [Abelian A] [IsGrothendieckAbelian.{w₀} A]
+  {K : Type*} [Category* K] (D : K ⥤ A)
+
+/-- The diagram of the morphisms `D k ⟶ 0` to a zero object, as a diagram of arrows. -/
+noncomputable def arrowToZero : K ⥤ Arrow A where
+  obj k := Arrow.mk (0 : D.obj k ⟶ 0)
+  map a := Arrow.homMk (D.map a) (𝟙 0) (by simp)
+
+/-- A functorial injective object containing `D k`: the middle object of the functorial
+factorization of `D k ⟶ 0` into a monomorphism followed by a morphism with the right lifting
+property with respect to monomorphisms. -/
+noncomputable def injectiveExtension : K ⥤ A :=
+  D.arrowToZero ⋙
+    (MorphismProperty.functorialFactorizationData (MorphismProperty.monomorphisms A)
+      (MorphismProperty.monomorphisms A).rlp).Z
+
+/-- The natural monomorphism `D ⟶ D.injectiveExtension` into a diagram of injectives. -/
+noncomputable def toInjectiveExtension : D ⟶ D.injectiveExtension where
+  app k := (MorphismProperty.functorialFactorizationData (MorphismProperty.monomorphisms A)
+      (MorphismProperty.monomorphisms A).rlp).i.app (D.arrowToZero.obj k)
+  naturality _ _ a := (MorphismProperty.functorialFactorizationData
+    (MorphismProperty.monomorphisms A) (MorphismProperty.monomorphisms A).rlp).i.naturality
+      (D.arrowToZero.map a)
+
+instance (k : K) : Injective (D.injectiveExtension.obj k) :=
+  inferInstanceAs (Injective (IsGrothendieckAbelian.monoMapFactorizationDataRlp
+    (0 : D.obj k ⟶ 0)).Z)
+
+instance (k : K) : Mono (D.toInjectiveExtension.app k) :=
+  inferInstanceAs (Mono (IsGrothendieckAbelian.monoMapFactorizationDataRlp
+    (0 : D.obj k ⟶ 0)).i)
+
+end CategoryTheory.Functor
+
+/-! ### Cohomology and filtered colimits -/
 
 namespace CategoryTheory.Sheaf
 
