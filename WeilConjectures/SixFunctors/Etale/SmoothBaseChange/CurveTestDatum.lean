@@ -10,6 +10,8 @@ public import WeilConjectures.Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.FailureOverField
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.ConstantCoefficients
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.IntegralBaseChange
+import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.PrimeCyclicDetection
+import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.PrimeQuotientDetection
 
 /-!
 # The universal curve-test datum attached to a failure of base change
@@ -123,7 +125,9 @@ variable (Λ : Type (u + 1)) [CommRing Λ] {X S : Scheme.{u}} (p : X ⟶ S)
 `K` over it: the spectrum `S''` of the integral closure of `Γ(S', ⊤)` in `K`. It is affine,
 integral and normal, its function field is algebraically closed
 (`IsFractionRing.isAlgClosed_integralClosure`), the morphism `S'' ⟶ S'` is integral, and the
-given point `Spec K ⟶ S'` lifts to a geometric generic point of `S''`. -/
+given point `Spec K ⟶ S'` lifts to a geometric generic point of `S''`. 
+(blueprint: lem-sbc-normalization-algclosed-field)
+-/
 theorem Etale.exists_normalization_of_isAlgClosed {S' : Scheme.{u}} [IsAffine S'] {K : Type u}
     [Field K] [IsAlgClosed K] (g : Spec (.of K) ⟶ S') :
     ∃ (S'' : Scheme.{u}) (_ : IsAffine S'') (_ : IsIntegral S'')
@@ -196,20 +200,12 @@ theorem Etale.exists_not_isZero_higherDirectImage_constantModSheaf {K : Type u} 
     (F : Sheaf (Spec (.of K)).smallEtaleTopology (ModuleCat.{u + 1} Λ))
     (hF : ¬ IsZero ((Etale.baseChangeTargetFunctor Λ e h q).obj F)) :
     ∃ d, d ∣ n ∧ ¬ IsZero (Etale.higherDirectImage Λ h q (Etale.constantModSheaf Λ Y d)) := by
-  have hF0 : n • 𝟙 F = 0 := by
-    refine (sheafToPresheaf _ _).map_injective ?_
-    rw [CategoryTheory.Functor.map_nsmul, CategoryTheory.Functor.map_id, Functor.map_zero]
-    ext U x
-    simp [← Nat.cast_smul_eq_nsmul Λ, hΛ]
-  -- dévissage to a sheaf killed by a prime `r ∣ n`
-  obtain ⟨r, hr, hrn, G, hG, hGne⟩ := exists_prime_dvd_not_isZero_map_of_nsmul_id_eq_zero
-    (Etale.baseChangeTargetFunctor Λ e h q)
-    (fun S hS ↦ Etale.exact_baseChangeTargetFunctor_map_of_shortExact Λ e h q hS)
-    n (Nat.pos_of_ne_zero hn) F hF0 hF
-  have : Fact r.Prime := ⟨hr⟩
-  obtain ⟨M, hM, hMne⟩ := Etale.exists_smul_eq_zero_not_isZero_of_isSepClosed Λ e h q r G hG hGne
-  exact ⟨r, hrn, Etale.not_isZero_higherDirectImage_constantModSheaf_of_smul_eq_zero Λ h q r M hM
-    hMne⟩
+  obtain ⟨r, hr, hrn, hunit, hnonzero⟩ :=
+    Etale.exists_prime_cyclic_higherDirectImage Λ e h n hn hΛ q F hF
+  refine ⟨r, hrn, ?_⟩
+  intro hzero
+  exact hnonzero
+    (Etale.isZero_prime_cyclic_higherDirectImage_of_quotient Λ h q r hr hunit hzero)
 
 /-- Blueprint `sbc-lem-bc-universal-test`: Universal curve-test datum for a failure.
 

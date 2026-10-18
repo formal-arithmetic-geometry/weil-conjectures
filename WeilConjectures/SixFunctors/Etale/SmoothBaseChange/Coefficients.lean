@@ -6,10 +6,9 @@ Authors: Nailin Guan
 module
 
 public import Mathlib
-public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusBaseChangeComp
-public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage.FilteredColimit
-public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.RestrictScalars
+public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.HigherDirectImage
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
+import WeilConjectures.AlgebraicGeometry.EtaleBaseChangeRestrictScalars
 
 /-!
 # The coefficients of the smooth base change theorem
@@ -267,40 +266,74 @@ end ChangeOfRings
 
 section Torsion
 
+private lemma isIso_quotientCounit (n : ℕ)
+    (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : n • 𝟙 F = 0) :
+    IsIso ((Sheaf.restrictCoextendScalarsAdj T.smallEtaleTopology
+      (Ideal.Quotient.mk (Ideal.span {(n : Λ)}))).counit.app F) := by
+  let c := (Sheaf.restrictCoextendScalarsAdj T.smallEtaleTopology
+    (Ideal.Quotient.mk (Ideal.span {(n : Λ)}))).counit.app F
+  have (U : T.Etaleᵒᵖ) : IsIso (c.hom.app U) := by
+    rw [ConcreteCategory.isIso_iff_bijective]
+    refine ⟨?_, ?_⟩
+    · exact (ModuleCat.mono_iff_injective _).1
+        (ModuleCat.mono_coextendQuotientShortComplex_f (n : Λ) (F.obj.obj U))
+    · intro x
+      apply (ShortComplex.moduleCat_exact_iff _).1
+        (ModuleCat.exact_coextendQuotientShortComplex (n : Λ) (F.obj.obj U)) x
+      have hn : n • 𝟙 (F.obj.obj U) = 0 :=
+        congrArg (fun α : F ⟶ F ↦ α.hom.app U) hF
+      change (n : Λ) • x = 0
+      have hx := congrArg (fun α : F.obj.obj U ⟶ F.obj.obj U ↦ α.hom x) hn
+      simpa only [ModuleCat.hom_nsmul, LinearMap.smul_apply,
+        ModuleCat.hom_id, LinearMap.id_apply, ModuleCat.hom_zero,
+        LinearMap.zero_apply, Nat.cast_smul_eq_nsmul] using hx
+  have : IsIso ((sheafToPresheaf _ _).map c) := NatIso.isIso_of_isIso_app c.hom
+  exact isIso_of_reflects_iso c (sheafToPresheaf _ _)
+
 /-- The change of rings `Λ ↝ Λ/nΛ` for the base-change map.
 
 Let `F` be a sheaf of `Λ`-modules on `T_ét` killed by `n`. Then `F` is a sheaf of
 `Λ/nΛ`-modules, restriction of scalars along `Λ ⟶ Λ/nΛ` commutes with `p^*`, `e^*` and with the
 derived pushforwards (the cohomology of a sheaf of modules does not depend on the coefficient
 ring), and identifies the base-change map of `F` over `Λ` with the one over `Λ/nΛ`. Hence the
-base-change property `BC(p, Λ/nΛ, q)` makes the base-change map of `F` an isomorphism. -/
+base-change property `BC(p, Λ/nΛ, q)` makes the base-change map of `F` an isomorphism. 
+(blueprint: lem-sbc-quotient-coefficients-base-change)
+-/
 theorem Etale.isIso_baseChangeHomologyMap_of_nsmul_eq_zero (sq : IsPullback e h g p)
     [QuasiCompact g] [QuasiSeparated g] (q : ℤ) (n : ℕ)
     (hp : Etale.BaseChangeProperty (Λ ⧸ Ideal.span {(n : Λ)}) p q)
     (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (hF : n • 𝟙 F = 0) :
     IsIso (Etale.baseChangeHomologyMap Λ sq q F) := by
-  let φ : Λ →+* Λ ⧸ Ideal.span {(n : Λ)} := Ideal.Quotient.mk _
-  let rT := Sheaf.restrictScalars T.smallEtaleTopology φ
-  -- `F` is the restriction of scalars of the sheaf of `Λ/nΛ`-modules `F' = Hom_Λ(Λ/nΛ, F)`
-  let F' := (sheafCompose T.smallEtaleTopology (ModuleCat.coextendScalars.{u + 1} φ)).obj F
-  have : IsIso ((Sheaf.restrictCoextendScalarsAdj T.smallEtaleTopology φ).counit.app F) :=
-    Etale.isIso_restrictCoextendScalarsAdj_counit_app (n : Λ) F
-      (Etale.natCast_smul_eq_zero_of_nsmul_eq_zero hF)
-  suffices hF' : IsIso (Etale.baseChangeHomologyMap Λ sq q (rT.obj F')) from
-    @Etale.isIso_of_comm _ _ _ _ _ _ _ _ _ _ _ _
-      (Etale.baseChangeHomologyMap_naturality Λ sq q
-        ((Sheaf.restrictCoextendScalarsAdj T.smallEtaleTopology φ).counit.app F)).symm hF'
-  -- the base-change map of `F'` over `Λ/nΛ` is an isomorphism, hence so is the one of `res F'`
-  have key := Etale.isIso_homologyMap_baseChange_restrictScalars φ sq q
-    ((DerivedCategory.Plus.singleFunctor _ 0).obj F') (hp g e h sq F')
-  change IsIso ((DerivedCategory.Plus.homologyFunctor _ q).map
-    ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).app
-      ((DerivedCategory.Plus.singleFunctor _ 0).obj (rT.obj F'))))
-  have w := congr_arg (DerivedCategory.Plus.homologyFunctor _ q).map
-    ((Etale.baseChange (ModuleCat.{u + 1} Λ) sq.toCommSq).naturality
-      ((rT.mapDerivedCategoryPlusSingleFunctor 0).hom.app F'))
-  simp only [CategoryTheory.Functor.map_comp] at w
-  exact @Etale.isIso_of_comm _ _ _ _ _ _ _ _ _ _ _ _ w key
+  let φ := Ideal.Quotient.mk (Ideal.span {(n : Λ)})
+  have : (ModuleCat.coextendScalars.{u + 1, u + 1, u + 1} φ).IsRightAdjoint :=
+    (ModuleCat.restrictCoextendScalarsAdj.{u + 1} φ).isRightAdjoint
+  have : PreservesLimitsOfSize.{u, u + 1}
+      (ModuleCat.coextendScalars.{u + 1, u + 1, u + 1} φ) :=
+    (ModuleCat.restrictCoextendScalarsAdj.{u + 1} φ).rightAdjoint_preservesLimits
+  let G := (sheafCompose T.smallEtaleTopology
+    (ModuleCat.coextendScalars.{u + 1, u + 1, u + 1} φ)).obj F
+  let c := (Sheaf.restrictCoextendScalarsAdj T.smallEtaleTopology φ).counit.app F
+  have : IsIso c := isIso_quotientCounit Λ n F hF
+  have : IsIso (Etale.baseChangeHomologyMap (Λ ⧸ Ideal.span {(n : Λ)}) sq q G) :=
+    hp g e h sq G
+  obtain ⟨a⟩ := Etale.exists_baseChangeHomologyMap_restrictScalars_arrow_iso φ sq q G
+  have : IsIso (Etale.baseChangeHomologyMap Λ sq q
+      ((Sheaf.restrictScalars T.smallEtaleTopology φ).obj G)) :=
+    (Arrow.isIso_iff_isIso_of_isIso a.hom).2 (by infer_instance)
+  have hc := Etale.baseChangeHomologyMap_naturality Λ sq q c
+  change Etale.baseChangeHomologyMap Λ sq q
+      ((Sheaf.restrictScalars T.smallEtaleTopology φ).obj G) ≫
+      (Etale.baseChangeTargetFunctor Λ e h q).map c =
+    (Etale.baseChangeSourceFunctor Λ p g q).map c ≫
+      Etale.baseChangeHomologyMap Λ sq q F at hc
+  have heq : Etale.baseChangeHomologyMap Λ sq q F =
+      inv ((Etale.baseChangeSourceFunctor Λ p g q).map c) ≫
+        Etale.baseChangeHomologyMap Λ sq q
+          ((Sheaf.restrictScalars T.smallEtaleTopology φ).obj G) ≫
+        (Etale.baseChangeTargetFunctor Λ e h q).map c := by
+    rw [hc, IsIso.inv_hom_id_assoc]
+  rw [heq]
+  infer_instance
 
 /-- *Filtered torsion*: to prove that the base-change map is an isomorphism at a sheaf which is
 torsion of orders invertible on `S`, it suffices to do so at the sheaves killed by a single
