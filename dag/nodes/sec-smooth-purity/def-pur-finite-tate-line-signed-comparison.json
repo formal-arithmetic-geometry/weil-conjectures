@@ -1,0 +1,108 @@
+{
+ "id": "def-pur-finite-tate-line-signed-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-regular",
+   "place": "Step 2 statement: the finite coefficient, finite Tate line, and normalized tensor data used to form the signed twists",
+   "via": [
+    "lem-pur-twist-cancellation"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Finite Tate line data and signed comparison interface",
+ "statement": "For a scheme $T$, a prime $\\ell$, a finite commutative coefficient ring $A$ in the site universe, a natural-number level $n$, and a coefficient map $a:\\mathbf Z/\\ell^{n+1}\\to A$, use the canonical finite coefficient sheaf $A_T$ [def-weil-pbc-constant-sheaf], its scalar map from the finite root coefficient ring, the finite Tate line obtained by scalar extension of the roots-of-unity module [def-pur-roots-of-unity-sheaf], and its normalized pure-tensor section. These are the canonical finite Tate coefficient, scalar, line, and tensor constructions recorded by the four declarations in the Lean record.",
+ "stmt_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-pur-roots-of-unity-sheaf"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "finite Tate coefficient line and normalized pure tensor on the pro-etale site",
+   "results": "No exact LeanSearch declaration for finite Tate coefficient sheaves, lines, or normalized tensors.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite Tate coefficient line tensor and signed comparison structure",
+   "results": "8 hits, all unrelated Mathlib linarith/root-system/profinite declarations; no finite Tate coefficient or line declaration.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "tateFiniteCoefficient, tateFiniteLine, tateFiniteTensor",
+   "results": "0 hits; loogle reports unknown identifier tateFiniteCoefficient.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "tateFiniteCoefficient|tateFiniteScalar|tateFiniteLine|tateFiniteTensor in Mathlib, WeilConjectures and lean/Sheaf",
+   "results": "No declarations in Mathlib or WeilConjectures; lean/Sheaf locates all four in Sheaf.Paper.TateTwistLocallyFree.",
+   "date": "2026-10-18",
+   "verdict": "existing project declarations match; no duplicate definition"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-twist-cancellation",
+  "date": "2026-10-18",
+  "group": "NK"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-regular",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TateTwistLocallyFree",
+  "declaration": "AlgebraicGeometry.Scheme.tateFiniteCoefficient",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.tateFiniteCoefficient",
+   "AlgebraicGeometry.Scheme.tateFiniteScalar",
+   "AlgebraicGeometry.Scheme.tateFiniteLine",
+   "AlgebraicGeometry.Scheme.tateFiniteTensor"
+  ],
+  "statement": "abbrev tateFiniteCoefficient (X : Scheme.{u}) (A : Type (u + 1)) [CommRing A]",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "The four finite coefficient/line/tensor declarations are already defined in Sheaf.Paper.TateTwistLocallyFree, with the canonical roots module and scalar extension bodies. They are plain definitions, not choices of the theorem det-def-sp-tate-twist-locally-free."
+ },
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/sk-thm-regular.proof.md",
+  "place": "Step 2, explicit signed-twist calculation, substeps 1--2"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c3b615cad",
+  "group": "NK",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c3b615cad",
+  "group": "NK",
+  "result": "pass",
+  "note": "Re-delivery of 0f2443e44472 (RETURN only for H2/R1). Lean byte-identical (sha 4bce44c3…), substance accepted there; item lean record unchanged; only stmt_deps changed. Theorem stmt_deps det-def-sp-tate-twist-locally-free / det-prop-sfb-cartesian-coefficients-twists replaced by new existing:true def nodes def-pur-finite-tate-line-signed-comparison (TateTwistLocallyFree: tateFiniteCoefficient/Scalar/Line/Tensor, statement verbatim l.50) and def-pur-signed-comparison-interface (CartesianCoefficientTwists: SpSignedComparison, header verbatim l.176-180). Both theorems remain in proof_deps. All owner-module decls used in code (SpSignedComparison, tateFiniteCoefficient/Line/Tensor) are covered; spFiniteTwists_cartesian appears only in docstrings. New-node stmt_deps exist and are definitions. lean.statement verbatim, one sorry, report sections present. nt_compile --json twice: failed before the delivered file, in the side override CoefficientRingedSequenceSite.lean (unknown identifier coefficientFiniteDerivedExtension l.182), not part of this delivery; the identical file compiled clean in 10.7 s in the 0f24 review, and the delivery reports a successful deliver2 dry-run compile. Maintainer note: the landing compile may hit that side-tree failure. Advisory: one new node's title misnames its content; tateFiniteTensor's body uses purScalarSection from a theorem-owned module (base-era)."
+ }
+}

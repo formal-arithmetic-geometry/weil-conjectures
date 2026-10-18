@@ -296,5 +296,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5422e6a4a",
+  "group": "Q09",
+  "result": "fix",
+  "note": "Mathematics correct. Clause (1): the canonical closed unit on ker(M→j_*j^*M) is invertible, natural in M. Clause (2): i_* exact, adjunction to Γ_Z, left exact, small limits. Clause (3): K-injective (unbounded) and injective preservation. Hypotheses match the dc-setting binders, and Γ_Z is a real construction (kernel of the actual unit, then upperStar). The proof is sorry only, the docstrings are complete and the record is verbatim. H4 fault: the inline hΛ coefficient list duplicates IsLocalizingAdmissibleCoefficient, the recorded lean of stmt_dep sk-def-localizing-closure (Sheaf.Paper.LocalizingAdmissibleCoefficients, already in the snapshot); the report's 'no usable predicate' claim is wrong. The two forms are equivalent case by case (continuousMapCondensedRing := Mon.mk continuousMapRingObj; ℓ^n=0 ⇔ ∀a, ℓ^n•a=0; FiniteIntermediateField). FIX: hΛ uses the recorded predicate and module import, the unused EllAdic import is dropped, and the lean-record statement and report are updated. nt_compile --json: delivered and fixed files rc 0, no errors or warnings."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FormalClosedSupportSheaves",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.formal_closed_support_sheaves",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.moduleSectionsWithSupport",
+   "AlgebraicGeometry.ProEtale.CondensedRing.closedModuleSectionsWithSupport",
+   "AlgebraicGeometry.ProEtale.CondensedRing.formal_closed_support_sheaves"
+  ],
+  "file": "lean/Sheaf/Paper/FormalClosedSupportSheaves.lean",
+  "statement": "theorem formal_closed_support_sheaves (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] (hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ) {X Z V : Scheme.{u}} [X.Over (Spec (.of k))] [Z.Over (Spec (.of k))] [V.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] (i : Z ⟶ X) [IsClosedImmersion i] [i.IsOver (Spec (.of k))] (j : V ⟶ X) [IsOpenImmersion j] [j.IsOver (Spec (.of k))] (hij : Set.range j = (Set.range i)ᶜ) : IsIso (Functor.whiskerLeft (moduleSectionsWithSupport Λ j) (upperStarLowerStarAdjunction Λ i).unit) ∧ PreservesFiniteLimits (lowerStar Λ i) ∧ PreservesFiniteColimits (lowerStar Λ i) ∧ Nonempty (lowerStar Λ i ⊣ closedModuleSectionsWithSupport Λ i j) ∧ PreservesFiniteLimits (closedModuleSectionsWithSupport Λ i j) ∧ PreservesLimitsOfSize.{u + 1, u + 1} (closedModuleSectionsWithSupport Λ i j) ∧ ∃ (_ : (closedModuleSectionsWithSupport Λ i j).Additive), (∀ I : CochainComplex (pulledBackModuleObjects Λ X) ℤ, I.IsKInjective → CochainComplex.IsKInjective (((closedModuleSectionsWithSupport Λ i j).mapHomologicalComplex (ComplexShape.up ℤ)).obj I)) ∧ (∀ I : pulledBackModuleObjects Λ X, Injective I → Injective ((closedModuleSectionsWithSupport Λ i j).obj I))",
+  "branch": "newtargets-dag",
+  "by": "Q09",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-5422e6a4a"
  }
 }

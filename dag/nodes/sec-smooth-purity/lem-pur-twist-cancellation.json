@@ -97,7 +97,12 @@
   "sk-def-purity-conv",
   "def-weil-exceptional-inverse-image",
   "lem-pur-coprojection",
-  "sk-def-sp-tate-twist"
+  "sk-def-sp-tate-twist",
+  "def-pur-supported-cup",
+  "def-pur-proetale-constant-module-unit",
+  "def-weil-proetale-inverse-image",
+  "def-pur-finite-tate-line-signed-comparison",
+  "def-pur-signed-comparison-interface"
  ],
  "mathlib_searches": [
   {
@@ -194,5 +199,56 @@
   "group": "Q93",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-8bf578a37 (reviewer sub-agent of L); spot-checked: Read the item, all six steps, every cited statement, unit sk-thm-regular, and blueprint main-20261015 sk-thm-regular.proof.md Step 2 plus pur9-rg-def-phi. The statement's composite has the same four arrows, order and direction as pur9-rg-def-phi, with the orientation data taken as inputs. Its conclusions, Ri^!Λ_X≅Λ_Z(-c)[-2c] and a degree-zero target ≅Λ_Z, are Step 2's. Nothing is weakened, and the coefficient category D^b_c(-,A_{E,n}) on the pro-étale site matches sk-def-purity-conv, def-weil-exceptional-inverse-image and lem-pur-coprojection. Step 1: clause 3 of det-def-sp-tate-twist-locally-free applies because ℓ∈(ϖ). Signed additivity holds by local generator contraction, checked independent of the generator. The twists lie in D^b_ctf because constructibility is pro-étale local and the lines are flat of rank one. Step 2: the hypotheses of det-prop-sfb-cartesian-coefficients-twists hold, and Li^* is termwise i^{-1} by def-weil-derived-pullback-tensor-hom. Step 4: lem-pur-coprojection applies with K=T_X(N)∈D^b_c and L=T_X(-m), invertible in D^b_ctf with inverse T_X(m). Its inverse followed by additivity is exactly the stated last arrow, so the actual composite is invertible. Step 5: lem-pur-coprojection with K=Λ_X and L=T_X(c); signs checked with N=3, m=1, c=2. Steps 3 and 6 are elementary. Edge cases checked: c=0, m=0, i=id (forces N=m), empty Z, and a point in A^1. Rescaling b by a unit rescales Φ, so claiming only invertibility is correct. All citations are within the unit's route (sk-prop-an, sk-lem-coprojection, plus one definition), so no tool_uses are needed. There is no cycle and no SGA. No new nodes. Existing lem-pur-immersion-twist states the twist-passage ingredient, not the item, so there is no duplicate. No fixes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c3b615cad",
+  "group": "NK",
+  "result": "pass",
+  "note": "Re-delivery of 0f2443e44472 (RETURN only for H2/R1). Lean byte-identical (sha 4bce44c3…), substance accepted there; item lean record unchanged; only stmt_deps changed. Theorem stmt_deps det-def-sp-tate-twist-locally-free / det-prop-sfb-cartesian-coefficients-twists replaced by new existing:true def nodes def-pur-finite-tate-line-signed-comparison (TateTwistLocallyFree: tateFiniteCoefficient/Scalar/Line/Tensor, statement verbatim l.50) and def-pur-signed-comparison-interface (CartesianCoefficientTwists: SpSignedComparison, header verbatim l.176-180). Both theorems remain in proof_deps. All owner-module decls used in code (SpSignedComparison, tateFiniteCoefficient/Line/Tensor) are covered; spFiniteTwists_cartesian appears only in docstrings. New-node stmt_deps exist and are definitions. lean.statement verbatim, one sorry, report sections present. nt_compile --json twice: failed before the delivered file, in the side override CoefficientRingedSequenceSite.lean (unknown identifier coefficientFiniteDerivedExtension l.182), not part of this delivery; the identical file compiled clean in 10.7 s in the 0f24 review, and the delivery reports a successful deliver2 dry-run compile. Maintainer note: the landing compile may hit that side-tree failure. Advisory: one new node's title misnames its content; tateFiniteTensor's body uses purScalarSection from a theorem-owned module (base-era)."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurityTwistCancellation",
+  "declaration": "AlgebraicGeometry.ProEtale.purity_twist_cancellation",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.PurityCancellationCategory",
+   "AlgebraicGeometry.ProEtale.purityCancellationLine",
+   "AlgebraicGeometry.ProEtale.purityCancellationTate",
+   "AlgebraicGeometry.ProEtale.purityCancellationTensor",
+   "AlgebraicGeometry.ProEtale.purityCancellationTwist",
+   "AlgebraicGeometry.ProEtale.purityCancellationUnit",
+   "AlgebraicGeometry.ProEtale.purityCancellationPullback",
+   "AlgebraicGeometry.ProEtale.purityCancellationFiniteLine",
+   "AlgebraicGeometry.ProEtale.PurityCancellationFiniteComparison",
+   "AlgebraicGeometry.ProEtale.purityCancellationRealization",
+   "AlgebraicGeometry.ProEtale.purityCancellationSection",
+   "AlgebraicGeometry.ProEtale.PurityCancellationFrame",
+   "AlgebraicGeometry.ProEtale.purityCancellationTensorSection",
+   "AlgebraicGeometry.ProEtale.purityCancellationSingleProduct",
+   "AlgebraicGeometry.ProEtale.purityCancellationProductNormalized",
+   "AlgebraicGeometry.ProEtale.PurityCancellationContractions",
+   "AlgebraicGeometry.ProEtale.purityCancellationZero",
+   "AlgebraicGeometry.ProEtale.PurityCancellationContractions.product",
+   "AlgebraicGeometry.ProEtale.PurityCancellationContractions.unit",
+   "AlgebraicGeometry.ProEtale.PurityCancellationSheafPullback",
+   "AlgebraicGeometry.ProEtale.PurityCancellationSheafPullback.transport",
+   "AlgebraicGeometry.ProEtale.purityCancellationCoprojection",
+   "AlgebraicGeometry.ProEtale.PurityCancellationComparisons",
+   "AlgebraicGeometry.ProEtale.PurityCancellationComparisons.unitCancel",
+   "AlgebraicGeometry.ProEtale.PurityCancellationComparisons.addCancel",
+   "AlgebraicGeometry.ProEtale.PurityCancellationComparisons.pullbackTransport",
+   "AlgebraicGeometry.ProEtale.PurityCancellationComparisons.pullback",
+   "AlgebraicGeometry.ProEtale.purityCancellationArrow",
+   "AlgebraicGeometry.ProEtale.purityTwistCancellationComposite",
+   "AlgebraicGeometry.ProEtale.purity_twist_cancellation"
+  ],
+  "file": "lean/Sheaf/Paper/PurityTwistCancellation.lean",
+  "statement": "theorem purity_twist_cancellation (P : WeilConjectures.PurityFiniteSetting.{u}) {Z X : Scheme.{u}} [Z.Over (Spec (.of P.field.k))] [X.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (Z ↘ Spec (.of P.field.k))] [QuasiCompact (Z ↘ Spec (.of P.field.k))] [IsSeparated (Z ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [IsSeparated (X ↘ Spec (.of P.field.k))] (i : Z ⟶ X) [i.IsOver (Spec (.of P.field.k))] [IsClosedImmersion i] (N m c : ℕ) (_hN : N = m + c) (omegaX : PurityCancellationCategory P X) (omegaZ : PurityCancellationCategory P Z) (_hX : purityCoprojectionConstructible P X omegaX) (_hZ : purityCoprojectionConstructible P Z omegaZ) (piX : omegaX ≅ purityCancellationTate P X N) (piZ : omegaZ ≅ purityCancellationTate P Z m) (b : omegaZ ≅ (rightDerivedUpperShriek (ModuleCat.{u + 1} P.Coefficient) i).obj omegaX) : Nonempty (PurityCancellationComparisons P i (X ↘ Spec (.of P.field.k)) N m c) ∧ (∀ D : PurityCancellationComparisons P i (X ↘ Spec (.of P.field.k)) N m c, IsIso (purityTwistCancellationComposite P i (X ↘ Spec (.of P.field.k)) N m c D omegaX omegaZ piX piZ b)) ∧ Nonempty ((rightDerivedUpperShriek (ModuleCat.{u + 1} P.Coefficient) i).obj (purityCancellationUnit P X) ≅ purityCancellationTate P Z (-(c : ℤ))) ∧ Nonempty ((DerivedCategory.homologyFunctor _ 0).obj ((rightDerivedUpperShriek (ModuleCat.{u + 1} P.Coefficient) i).obj (purityCancellationTate P X c)) ≅ P.constant Z) ∧ (∀ q : ℤ, q ≠ 0 → IsZero ((DerivedCategory.homologyFunctor _ q).obj ((rightDerivedUpperShriek (ModuleCat.{u + 1} P.Coefficient) i).obj (purityCancellationTate P X c))))",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Repair of 03e2c2053bd7: local-section equations determine signed products. The actual derived product is pinned to a constructed single/even-shift map by purityCancellationProductNormalized; its same-site HEq only bridges definitionally equal tensor presentations. Unit cancellation is defined on Z and addition on X separately. Pullback is defined from root-normalized SpSignedComparison via the determining realization-adjunct equation and exact single/shift comparisons. Coprojection pinning, theorem signature, and one sorry are preserved."
  }
 }

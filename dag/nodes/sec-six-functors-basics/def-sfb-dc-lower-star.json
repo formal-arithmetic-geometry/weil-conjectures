@@ -128,5 +128,29 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ab383c04",
+  "group": "NX",
+  "result": "pass",
+  "note": "Re-delivery after return L (name collision with NH's landed unit module Sheaf.Paper.BoundedConstructiblePushforwardRestriction). Decls renamed to boundedConstructibleLowerStarAtMorphism{,Compatibility}; no collision remains (rg over side lean, lean_names_upstream, slopmaster2). Ambient Rf_* is the stmt_dep's moduleObjectDerivedPushforward. Per-f hypothesis h matches the node; NH's global PreservesBoundedConstructiblePushforwards would add an assumption, so a separate def is justified. Probe: AtMorphism with h := H f = OfPreserves by rfl. GlobalIso is the canonical fully faithful preimage of the two liftCompιIso's, real data. Record: only lean differs from live; statement verbatim; lines <=100; universes bound; docstrings with source/blueprint; no sorry/axiom/hollow data. nt_compile --json: item 2.5 s exit 0 with no warnings; probe 2.6 s exit 0. Advisory: item module imports its parent unit's module (reverse of the DAG edge), acyclic today; the unit could later cite this item's definition."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleBoundedConstructibleLowerStar",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleLowerStarAtMorphism",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleLowerStarAtMorphism",
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleLowerStarAtMorphismCompatibility",
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleLowerStarAtMorphismGlobalIso"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleBoundedConstructibleLowerStar.lean",
+  "statement": "def boundedConstructibleLowerStarAtMorphism (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ] (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (f : X ⟶ Y) (h : ∀ K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1}) (condensedRingObj Λ X.left)), boundedConstructible (condensedRingObj Λ X.left) K → boundedConstructible (condensedRingObj Λ Y.left) ((moduleObjectDerivedPushforward Λ f.left).obj K)) : BoundedConstructible (condensedRingObj Λ X.left) ⥤ BoundedConstructible (condensedRingObj Λ Y.left)",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Repair of return L at a8c3b9f43f59: import the existing global-preservation restriction and compatibility from Sheaf.Paper.BoundedConstructiblePushforwardRestriction; neither existing name is redeclared. Their H requires preservation for every morphism over k, whereas this node assumes preservation only for its given f. The AtMorphism interface therefore has a genuinely weaker hypothesis; replacing it by existing:true would add an assumption (identity pushforward with F_p coefficients is included here despite failure on A1_k). The canonical GlobalIso reuses both existing declarations to identify the local and global interfaces whenever H is supplied. Uses the current recorded moduleObjectDerivedPushforward, definitionally the same ambient total right derived functor. Statement and all non-lean fields are unchanged."
  }
 }

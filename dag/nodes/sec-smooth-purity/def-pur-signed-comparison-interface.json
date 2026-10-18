@@ -1,0 +1,105 @@
+{
+ "id": "def-pur-signed-comparison-interface",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-thm-regular",
+   "place": "Step 2 statement: the normalized signed coefficient comparison used in the pullback and twist-cancellation maps",
+   "via": [
+    "lem-pur-twist-cancellation"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Signed coefficient comparison interface",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes and use the canonical pro-etale inverse image [def-weil-proetale-inverse-image]. Let $R$ and $S$ be commutative ring sheaves on $Y$ and $X$, respectively, let $c:f^{-1}R\\simeq S$, and let $L$ and $M$ be module sheaves over $R$ and $S$. Use the signed tensor and dual powers $L(d)$ and $M(d)$ [sk-def-sp-tate-twist]. The signed comparison structure consists of isomorphisms $f^*L(d)\\simeq M(d)$ for every $d\\in\\mathbf Z$, with the coefficient-map equation in degree zero, the pure-tensor multiplication equation for positive powers, and the evaluation equation for negative powers, all on inverse-image generators through the pullback adjunction unit. It also carries, for every signed degree, a natural isomorphism between first twisting then applying derived pullback and first applying derived pullback then twisting. These are precisely the signed, zero, positive, negative and derived fields of SpSignedComparison.",
+ "stmt_deps": [
+  "def-weil-proetale-inverse-image",
+  "sk-def-sp-tate-twist"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "signed coefficient comparison structure for pullback of all Tate twist degrees",
+   "results": "No exact LeanSearch declaration.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "signed coefficient comparison for pro-etale Tate twists",
+   "results": "No exact match; only generic comparison and tensor declarations.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SpSignedComparison",
+   "results": "0 hits; unknown identifier in Mathlib.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "SpSignedComparison in Mathlib, WeilConjectures and lean/Sheaf",
+   "results": "No Mathlib or WeilConjectures declaration; lean/Sheaf locates the structure in Sheaf.Paper.CartesianCoefficientTwists.",
+   "date": "2026-10-18",
+   "verdict": "existing project declaration matches; no duplicate definition"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-twist-cancellation",
+  "date": "2026-10-18",
+  "group": "NK"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-regular",
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CartesianCoefficientTwists",
+  "declaration": "AlgebraicGeometry.ProEtale.SpSignedComparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpSignedComparison"
+  ],
+  "statement": "structure SpSignedComparison\n    (R : Sheaf (Scheme.ProEt.topology Y) CommRingCat.{u + 1})\n    (S : Sheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1})\n    (c : (Scheme.proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)\n    (L : Scheme.proEtaleRingModules Y R) (M : Scheme.proEtaleRingModules X S)",
+  "branch": "newtargets-dag",
+  "by": "NK",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "The exact canonical signed comparison structure already exists in Sheaf.Paper.CartesianCoefficientTwists. It carries all signed-degree isomorphisms and zero, positive, negative, and derived normalization fields; no copy or choice of spFiniteTwists_cartesian is introduced."
+ },
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-regular/sk-thm-regular.proof.md",
+  "place": "Step 2: pullback of signed twists; normalized coefficient, tensor, evaluation and derived comparisons from sk-prop-sfb-cartesian-coefficients-twists"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c3b615cad",
+  "group": "NK",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c3b615cad",
+  "group": "NK",
+  "result": "pass",
+  "note": "Re-delivery of 0f2443e44472 (RETURN only for H2/R1). Lean byte-identical (sha 4bce44c3…), substance accepted there; item lean record unchanged; only stmt_deps changed. Theorem stmt_deps det-def-sp-tate-twist-locally-free / det-prop-sfb-cartesian-coefficients-twists replaced by new existing:true def nodes def-pur-finite-tate-line-signed-comparison (TateTwistLocallyFree: tateFiniteCoefficient/Scalar/Line/Tensor, statement verbatim l.50) and def-pur-signed-comparison-interface (CartesianCoefficientTwists: SpSignedComparison, header verbatim l.176-180). Both theorems remain in proof_deps. All owner-module decls used in code (SpSignedComparison, tateFiniteCoefficient/Line/Tensor) are covered; spFiniteTwists_cartesian appears only in docstrings. New-node stmt_deps exist and are definitions. lean.statement verbatim, one sorry, report sections present. nt_compile --json twice: failed before the delivered file, in the side override CoefficientRingedSequenceSite.lean (unknown identifier coefficientFiniteDerivedExtension l.182), not part of this delivery; the identical file compiled clean in 10.7 s in the 0f24 review, and the delivery reports a successful deliver2 dry-run compile. Maintainer note: the landing compile may hit that side-tree failure. Advisory: one new node's title misnames its content; tateFiniteTensor's body uses purScalarSection from a theorem-owned module (base-era)."
+ }
+}
