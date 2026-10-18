@@ -8,6 +8,7 @@ module
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Limits
+import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Subscheme
 
 /-!
 # Componentwise normalization
@@ -40,7 +41,13 @@ The underlying space is the irreducible component, which is nonempty and irreduc
 A reduced irreducible scheme is integral. -/
 theorem isIntegral_reducedNormalizationComponent (X : Scheme.{u})
     (Z : irreducibleComponents X) : IsIntegral (X.reducedNormalizationComponent Z) := by
-  sorry
+  let : IrreducibleSpace (X.reducedNormalizationComponent Z) := by
+    change IrreducibleSpace (Z.1 : Set X)
+    exact Subtype.irreducibleSpace Z.2.1
+  let : IsReduced (X.reducedNormalizationComponent Z) := by
+    unfold reducedNormalizationComponent
+    infer_instance
+  exact isIntegral_of_irreducibleSpace_of_isReduced _
 
 attribute [instance] isIntegral_reducedNormalizationComponent
 
