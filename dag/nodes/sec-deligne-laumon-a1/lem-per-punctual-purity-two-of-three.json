@@ -17,9 +17,140 @@
   "def-weil-pbc-krull-dimension-ring",
   "def-weil-closed-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work separately where $c$ is constant. At each $x=i(z)$ first work in an affine open neighbourhood of $x$, restricting the class by [lem-per-regular-immersion-class-calculus]; the subsequent localization morphism to this affine neighbourhood is affine. For $z\\in Z$, set $x=i(z)$, $T=\\operatorname{Spec}\\mathcal O_{X,x}$, $S=\\operatorname{Spec}\\mathcal O_{Z,z}$, and $d=\\dim\\mathcal O_{Z,z}$. The local closed pair is $i_z:S\\hookrightarrow T$; its closed-point maps are $a:\\operatorname{Spec}\\kappa(z)\\hookrightarrow S$ and $b=i_za:\\operatorname{Spec}\\kappa(z)\\hookrightarrow T$. Localization is Noetherian by [lem-weil-pbc-localization-noetherian], and regular by the local-ring characterization [def-weil-regular-scheme]. The local rings are regular local rings, so their dimensions are finite. By [lem-per-regular-lci-geometric-calculus], these closed immersions are regular; the codimensions of $a,i_z,b$ are $d,c,d+c$, respectively. In particular $\\dim\\mathcal O_{X,x}=d+c$ (apply its displayed dimension formula to the closed immersions, whose residue-field extensions are identities). Localization is locally ind-etale: [lem-weil-pbc-localization-colimit-principal-localizations] expresses its affine ring map as a filtered colimit of principal open localizations, which are etale by [lem-weil-pbc-open-immersion-etale]. Thus [lem-per-ind-etale-closed-support-base-change] identifies the restriction of $i^!A_X$ with $i_z^!A_T$; on these bounded-below objects the exceptional $i^!$ of the class is the derived supported kernel used there, the closed-support adjoint of [def-per-closed-support-plus-adjunction], by the identification written out in Step 3. The class itself restricts to $\\eta_{i_z}$ by [lem-per-regular-immersion-class-calculus].",
+   "uses": [
+    "def-weil-regular-scheme",
+    "lem-weil-pbc-localization-noetherian",
+    "lem-per-regular-lci-geometric-calculus",
+    "lem-weil-pbc-localization-colimit-principal-localizations",
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-per-ind-etale-closed-support-base-change",
+    "lem-per-regular-immersion-class-calculus",
+    "def-per-closed-support-plus-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Proposition 3.2.3, printed p.244, proof"
+   }
+  },
+  {
+   "text": "Put $\\eta=\\eta_{i_z}:A_S\\to i_z^!A_T(c)[2c]$. Under closed exceptional transitivity [lem-cat-right-adjoint-composition], fundamental-class composition [lem-per-regular-immersion-class-calculus], with coefficient exponent $n=1$, gives\n$$\\eta_b=\\bigl(a^!\\eta(d)[2d]\\bigr)\\circ\\eta_a,$$\nwhere\n$$A_{\\kappa(z)}\\xrightarrow{\\eta_a}a^!A_S(d)[2d]\\xrightarrow{a^!\\eta(d)[2d]}b^!A_T(c+d)[2(c+d)].$$\nHere the middle arrow means applying $a^!$ to $\\eta$ and then twisting and shifting. Tate lines pull back and tensor compatibly by [lem-asd-etale-finite-twist-pullback]; commuting a line with $a^!$ follows locally by trivializing that line, where both comparisons are the identity, and then gluing. Consequently $\\eta_a$ and $\\eta_b$ are exactly the two punctual-purity maps in (b) and (c), with no change of normalization or sign. The transitivity is the canonical right-adjoint one, not an arbitrary identification of its objects.",
+   "uses": [
+    "lem-cat-right-adjoint-composition",
+    "lem-per-regular-immersion-class-calculus",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Proposition 3.2.3, printed p.244, proof"
+   }
+  },
+  {
+   "text": "The point functor $a^!$ of [lem-per-regular-immersion-class-calculus] is, on $D^+$, the closed-support adjoint of [def-per-closed-support-plus-adjunction], a triangulated right derived functor. Indeed, for the compactification $(\\mathrm{id},a)$ the compact-support functor of [def-amb-etale-compact-support] is the total derived direct image of the exact $a_*$, which is termwise $a_*$ since exact functors preserve quasi-isomorphisms. Its right adjoint sends $D^+$ to $D^+$ (compute on a bounded-below injective resolution), so by uniqueness of right adjoints its restriction to $D^+$ is the chosen $a^!$ of [def-per-closed-support-plus-adjunction], with the same counit; likewise for $i_z$ and $b$. That node derives the supported inverse image, whose underived adjunction is [lem-pur-etale-supported-kernel-adjunction]. Its abelian-sheaf adjunction restricts to $A$-modules: scalar multiplication acts on the kernel, and the adjunction sends $A$-linear maps to $A$-linear maps by naturality. Module sheaves have enough injectives [lem-weil-pbc-module-sheaves-enough-injectives], and [lem-weil-pbc-dplus-injective-representative] supplies bounded-below K-injective representatives. Thus [lem-pc-right-derived-functor-triangulated] applies to this additive supported functor and shows that it preserves shifts and cone triangles. The cone of $\\eta$ belongs to $D^+(S_{\\mathrm{et}},A)$, since both source and target do. By the long exact cohomology sequence [lem-sf-derived-homology-long-exact], a morphism of derived complexes is an isomorphism precisely when a cone is acyclic, that is, zero in the derived category. In particular, if $a^!\\eta$ is an isomorphism and $C$ is a cone of $\\eta$, then $a^!C=0$.",
+   "uses": [
+    "def-per-closed-support-plus-adjunction",
+    "def-amb-etale-compact-support",
+    "lem-per-regular-immersion-class-calculus",
+    "lem-pur-etale-supported-kernel-adjunction",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Proposition 3.2.3, printed p.244, proof"
+   }
+  },
+  {
+   "text": "Assume (a). Step 1 makes $\\eta_{i_z}$ an isomorphism for every $z$, so the second arrow of Step 2 is an isomorphism: every functor preserves inverses, and twist and shift are equivalences. If (b) also holds, its first arrow $\\eta_a$ is an isomorphism, hence so is $\\eta_b$, proving (c). If instead (c) holds, $\\eta_b$ is an isomorphism; composing it with the inverse of the second arrow proves that $\\eta_a$ is an isomorphism. This proves (b). Both arguments apply at every point of $Z$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Proposition 3.2.3, printed p.244, proof"
+   }
+  },
+  {
+   "text": "Assume (b) and (c). For every local pair of Step 1, the first arrow and the composite in Step 2 are isomorphisms. Thus the second arrow equals $\\eta_b\\eta_a^{-1}$ and is an isomorphism. Undoing the twist and shift gives that $a^!\\eta_{i_z}$ is an isomorphism. If $C_z$ is a cone of $\\eta_{i_z}$, Step 3 therefore gives $a^!C_z=0$. This conclusion uses purity only for the two closed-point maps, not purity of the pair we are proving.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Proposition 3.2.3, printed p.244, proof"
+   }
+  },
+  {
+   "text": "We prove by strong induction on the finite integer $d\\geq0$ that $\\eta_{i_z}$ is an isomorphism for every regular local pair as in Step 1 satisfying (b) and (c), with $\\dim S=d$. The induction ranges over all such pairs, not just one original scheme. Let $U=S\\setminus\\{z\\}$ and let $v:U\\hookrightarrow S$ be its open inclusion. For every point $t\\in U$, localization at $t$ gives a pair of smaller closed-scheme dimension: every chain of primes ending in the prime of $t$ can be extended by the distinct maximal ideal of the local ring of $S$, so $\\dim\\mathcal O_{S,t}<d$. The localizations still satisfy (b) and (c), since their further local rings are the original local rings at those points. Step 1 identifies their class with the restriction of $\\eta_{i_z}$. The induction hypothesis makes that restriction an isomorphism, so $C_z$ has zero stalk at every geometric point over $t$. Inverse image preserves these stalks [lem-weil-pbc-inverse-image-stalk-germ], and derived stalk conservativity [lem-weil-pbc-derived-stalk-conservative], applied to the underlying abelian complexes (forgetting the $A$-structure is exact and commutes with $\\mathcal H^i$), yields $v^*C_z=0$. For $d=0$ there is no proper generization in $S$, hence $U$ is empty and the same vanishing holds without invoking induction.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-weil-pbc-derived-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Proposition 3.2.3, printed p.244, proof"
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-open-closed-recollement] to the closed point $a$ of $S$ and the open complement $v$. Its triangle, together with $v^*C_z=0$, gives\n$$C_z\\xrightarrow{\\sim}a_*a^*C_z.$$\nWrite $E=a^*C_z$. The closed adjunction $a_*\\dashv a^!$ of [lem-exc-closed-ambient], in its bounded-below form [def-per-closed-support-plus-adjunction] (the same $a^!$ as in Steps 3 and 5), and Step 5 imply\n$$\\operatorname{Hom}(C_z,C_z)\\cong\\operatorname{Hom}(a_*E,C_z)\\cong\\operatorname{Hom}(E,a^!C_z)=0.$$\nThe identity of $C_z$ is therefore zero, which makes $C_z$ a zero object. Its cone triangle then shows that $\\eta_{i_z}$ is an isomorphism. This proves the induction step and the base case at once. The argument spells out the source's assertion that extraordinary and ordinary restriction agree on a complex supported at the closed point; it needs neither constructibility nor excellence.",
+   "uses": [
+    "lem-cbc-open-closed-recollement",
+    "lem-exc-closed-ambient",
+    "def-per-closed-support-plus-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Proposition 3.2.3, printed p.244, proof"
+   }
+  },
+  {
+   "text": "For the original pair, Steps 5--7 show that the restriction of $\\eta_i$ to $\\operatorname{Spec}\\mathcal O_{Z,z}$ is an isomorphism for every $z\\in Z$. Its map on the stalk at every geometric point over $z$ is therefore an isomorphism, by [lem-weil-pbc-inverse-image-stalk-germ]. Applying [lem-weil-pbc-derived-stalk-conservative] on $Z$ proves (a). Together with Step 4 this proves all three implications. The same proof starts with any localization of the pair, as Step 1 already works for localizations. No global bound on $\\dim X$ or $\\dim Z$ was used; only finite dimensions of the regular local rings enter the induction. For the empty closed subscheme (a) is the unique isomorphism between zero objects and (b),(c) are vacuous. In codimension zero the class is the open-and-closed restriction class, including the identity class, by [lem-per-regular-immersion-class-calculus].",
+   "uses": [
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-weil-pbc-derived-stalk-conservative",
+    "lem-per-regular-immersion-class-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "Expose XVI, Proposition 3.2.3, printed p.244, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-etale-compact-support",
+  "def-per-closed-support-plus-adjunction",
+  "def-weil-regular-scheme",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-cat-right-adjoint-composition",
+  "lem-cbc-open-closed-recollement",
+  "lem-exc-closed-ambient",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-per-ind-etale-closed-support-base-change",
+  "lem-per-regular-immersion-class-calculus",
+  "lem-per-regular-lci-geometric-calculus",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-sf-derived-homology-long-exact",
+  "lem-weil-pbc-derived-stalk-conservative",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-localization-colimit-principal-localizations",
+  "lem-weil-pbc-localization-noetherian",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-open-immersion-etale"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI, Proposition 3.2.3, printed p.244; complete local-dimension induction, with the closed-point cone argument expanded using recollement and adjunction."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +186,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SSet.Subcomplex.Pairing.IsRegular.mk\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.AnodyneExtensions.Pairing\", \"type\": \"∀ {X : SSet} {A : X.Subcomplex} {P : A.Pairing} [toIsProper : P.IsProper], WellFounded P.AncestralRel → P.IsRegular\", \"doc\": \"If the ancestral relation on the pairing $(X,A)$ is well-founded and the pairing is proper, then it satisfies the regularity condition.\"}\n  {\"name\": \"SSet.Subcomplex.Pairing.IsRegular.rec\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.AnodyneExtensions.Pairing\", \"type\": \"{X : SSet} →\\n  {A : X.Subcomplex} →\\n    {P : A.Pairing} →\\n      {motive : P.IsRegular → Sort u_1} →\\n        ([toIsProper : P.IsProper] → (wf : WellFounded P.AncestralRel) → motive ⋯) → (t : P.IsRegular) → motive t\", \"doc\": \"A recursor for the regularity condition of a simplicial pairing $(X,A)$, which allows proving properties of regular pairings by reducing to the case where the ancestral relation is well-founded and th\"}\n  {\"name\": \"SSet.Subcomplex.PairingCore.IsRegular\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.AnodyneExtensions.PairingCore\", \"type\": \"{X : SSet} → {A : X.Subcomplex} → A.PairingCore → Prop\", \"doc\": \"For a simplicial set $X$ and a subcomplex $A$ of $X$, the predicate $\\\\mathrm{IsRegular}$ on elements of the pairing core of $A$, which is a property associated with each element of $A$'s pairing core.\"}\n  {\"name\": \"SSet.Subcomplex.Pairing.IsRegular\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.AnodyneExtensions.Pairing\", \"type\": \"{X : SSet} → {A : X.Subcomplex} → A.Pairing → Prop\", \"doc\": \"For a simplicial set $X$ and a subcomplex $A$ of $X$, this defines a property (proposition) associated to the pairing structure of $X$ and $A$, serving as a regularity condition in the context of anod\"}\n  {\"name\": \"SSet.Subcomplex.Pairing.IsRegular.recOn\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.AnodyneExtensions.Pairing\", \"type\": \"{X : SSet} →\\n  {A : X.Subcomplex} →\\n    {P : A.Pairing} →\\n      {motive : P.IsRegular → Sort u_1} →\\n        (t : P.IsRegular) → ([toIsProper : P.IsProper] → (wf : WellFounded P.AncestralRel) → motive ⋯) → motive t\", \"doc\": \"A recursor for the regularity condition of a simplicial pairing $(X,A)$, which allows proving properties of regular pairings by reducing to the case where the ancestral relation is well-founded and th\"}\n  {\"name\": \"SSet.Subcomplex.PairingCore.instIsRegularPairingOfIsRegular\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.AnodyneExtensions.PairingCore\", \"type\": \"[h.IsRegular] : h.pairing.IsRegular\", \"doc\": \"For a simplicial set $X$ and a subcomplex $A$ of $X$ with pairing core element $h$, if $h$ satisfies the regularity condition, then the pairing structure constructed from $h$ on $A$ also satisfies the\"}\n  {\"name\": \"SSet.Subcomplex.Pairing.IsRegular.casesOn\", \"module\": \"Mathlib.AlgebraicTopology.SimplicialSet.AnodyneExtensions.Pairing\", \"type\": \"{X : SSet} →\\n  {A : X.Subcomplex} →\\n    {P : A.Pairing} →\\n      {motive : P.IsRegular → Sort u_1} →\\n        (t : P.IsRegular) → ([toIsProper : P.IsProper] → (wf : WellFounded P.AncestralRel) → motive ⋯) → motive t\", \"doc\": \"A case analysis principle for the regularity condition of a simplicial pairing $(X,A)$. Given a property $P$ of regular pairings, if $P$ holds for any pairing where the ancestral relation is well-foun\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalIso.instIsMultiplicativeScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.LocalIso\", \"type\": \": IsMultiplicative @IsLocalIso\", \"doc\": \"The property of being a local isomorphism between schemes is multiplicative. That is, if $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are local isomorphisms of schemes, then their composition $ g \\\\circ f : X \\\\\"}\n",
    "date": "2026-10-19",
    "verdict": "no match: inspected signatures concern general derived-category exact triangles, scheme morphisms, local algebra, or unrelated names; none supplies the stated etale Gysin, punctual-purity, or logarithmic assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A regular closed pair is cohomologically pure if ambient scheme and closed subscheme are punctually pure, two of three using Gysin maps",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.instIsClosedImmersionLiftCoborder\", \"AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.Scheme.IdealSheafData.isClosed_supportSet\", \"AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.Scheme.codisjoint_zeroLocus\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs\"], \"digest\": \"41c5422395ca373d\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: returned scheme morphisms, sheaf topologies, or abstract morphism-property two-out-of-three facts, not ordinary etale cohomological purity or the Gysin criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "punctual.*pur|cohomological.*purity|Gysin|costalk",
+   "results": "{\"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"Mathlib/CategoryTheory/Sites/Canonical.lean\", \"Mathlib/CategoryTheory/Sites/Canonical.lean\"], \"digest\": \"17a4ebe8e1b1193c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: returned scheme morphisms, sheaf topologies, or abstract morphism-property two-out-of-three facts, not ordinary etale cohomological purity or the Gysin criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Punctual cohomological purity and purity of a regular closed immersion satisfy a two out of three criterion",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MorphismProperty.HasTwoOutOfThreeProperty\", \"CategoryTheory.ObjectProperty.instHasTwoOutOfThreePropertyIsLocal\", \"CategoryTheory.MorphismProperty.HasTwoOutOfThreeProperty.casesOn\", \"CategoryTheory.ObjectProperty.instHasTwoOutOfThreePropertyIsoModSerre\", \"AlgebraicGeometry.IsClosedImmersion.comp_iff\", \"AlgebraicGeometry.IsClosedImmersion.of_comp_isClosedImmersion\", \"CategoryTheory.MorphismProperty.instHasTwoOutOfThreePropertyTop\", \"AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono\"], \"digest\": \"082ba67b839ebc56\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: returned scheme morphisms, sheaf topologies, or abstract morphism-property two-out-of-three facts, not ordinary etale cohomological purity or the Gysin criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Gysin\"",
+   "results": "{\"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.finestTopologySingle\"], \"digest\": \"31824d43e9c1a0fd\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: returned scheme morphisms, sheaf topologies, or abstract morphism-property two-out-of-three facts, not ordinary etale cohomological purity or the Gysin criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology purity at points and Gysin isomorphisms for a regular immersion, conservative extraordinary point restrictions",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.liftCoborder_app\", \"AlgebraicGeometry.spread_out_of_isGermInjective'\", \"AlgebraicGeometry.IsImmersion.isPullback_toImage_liftCoborder\", \"Algebra.basicOpen_subset_etaleLocus_iff\", \"AlgebraicGeometry.isGermInjectiveAt_iff_of_isOpenImmersion\", \"AlgebraicGeometry.instIsGermInjectiveAtCoeContinuousMapCarrierCarrierCommRingCatHomTopCatBaseOfIsOpenImmersion\"], \"digest\": \"85e4388ec7e087cd\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: returned scheme morphisms, sheaf topologies, or abstract morphism-property two-out-of-three facts, not ordinary etale cohomological purity or the Gysin criterion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-gabber-regular-pair-purity",
@@ -82,5 +248,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-punctual-purity-two-of-three",
+  "worker": "stage1",
+  "summary": "Q49 checked ILO XVI 3.2.1--3.2.3 against the unchanged statement; supplied localized signed Gysin composition, the two cancellation implications, and the source induction on closed local dimension. The supported-cone step is proved with ordinary etale recollement and closed adjunction. All non-elementary inputs reuse existing nodes; no new node and no statement correction.",
+  "blueprint": "Realizes the punctual-purity two-of-three input in lem-per-gabber-regular-pair-purity (Step 5), below the regular finite-torsion duality input to lem-per-artin-gabber-affine-curve proof Step 3, as recorded in blueprint.from. Does not change the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic Finite Tate lines on the small etale site and their pullback: used only for the ordinary-etale localization, cone, stalk, or closed-support formalism in the displayed proof; it does not replace a unit-level step."
+   },
+   {
+    "node": "lem-cbc-open-closed-recollement",
+    "why": "Generic Open-closed recollement: used only for the ordinary-etale localization, cone, stalk, or closed-support formalism in the displayed proof; it does not replace a unit-level step."
+   },
+   {
+    "node": "lem-exc-closed-ambient",
+    "why": "Generic Closed-immersion right adjoint before restriction: used only for the ordinary-etale localization, cone, stalk, or closed-support formalism in the displayed proof; it does not replace a unit-level step."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic The unbounded right derived functor is triangulated: used only for the ordinary-etale localization, cone, stalk, or closed-support formalism in the displayed proof; it does not replace a unit-level step."
+   },
+   {
+    "node": "lem-pur-etale-supported-kernel-adjunction",
+    "why": "Generic Closed etale support kernel and its exact left adjoint: used only for the ordinary-etale localization, cone, stalk, or closed-support formalism in the displayed proof; it does not replace a unit-level step."
+   },
+   {
+    "node": "lem-weil-pbc-derived-stalk-conservative",
+    "why": "Generic Conservativity of geometric stalks on the derived category: used only for the ordinary-etale localization, cone, stalk, or closed-support formalism in the displayed proof; it does not replace a unit-level step."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Generic Stalk of an inverse image, compatible with germs of pulled-back sections: used only for the ordinary-etale localization, cone, stalk, or closed-support formalism in the displayed proof; it does not replace a unit-level step."
+   },
+   {
+    "node": "lem-weil-pbc-localization-colimit-principal-localizations",
+    "why": "Generic A localization is the filtered colimit of the principal localizations: used only for the ordinary-etale localization, cone, stalk, or closed-support formalism in the displayed proof; it does not replace a unit-level step."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Generic Sheaves of modules on the small etale site have enough injectives: used only for the ordinary-etale localization, cone, stalk, or closed-support formalism in the displayed proof; it does not replace a unit-level step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-cbc-open-closed-recollement",
+  "lem-exc-closed-ambient",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-weil-pbc-derived-stalk-conservative",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-localization-colimit-principal-localizations",
+  "lem-weil-pbc-module-sheaves-enough-injectives"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q49-1db8838d1",
+  "group": "Q49",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-1db8838d1 (reviewer sub-agent of L); spot-checked: I read the item, its parent's Step 5 (lem-per-gabber-regular-pair-purity), and every cited statement against ILO Exposé XVI, Definitions 3.1.4 and 3.2.1–3.2.2 and Proposition 3.2.3 with proof (printed pp. 243–244). The statement matches the source. It is restricted to F_ell coefficients and Noetherian schemes, which is what the parent needs; this is not a target. Small cases check out: a DVR with its closed point gives (a)<=>(c) because (b) is trivial; Z empty, codimension 0, and d=0 (U empty) all hold. No node duplicates the two-of-three statement: the punctual-purity siblings state etale locality, the trait test and degree descent. Steps 1, 2, 4, 5, 6, 7 and 8 follow the source route correctly: localization, the Gysin composition eta_b = a^!(eta)(d)[2d] o eta_a, cancellation, strong induction on dim S over all regular local pairs, recollement, and stalk conservativity. One C4 gap: Step 3 claimed the underived lem-pur-etale-supported-kernel-adjunction identifies the class-calculus a^! (the right adjoint of compact-support Ra_!) with the derived supported-kernel functor, which no cited statement says. Steps 1 and 7 rely on the same identification. Fixed by citing def-per-closed-support-plus-adjunction (same unit, reviewed) and def-amb-etale-compact-support: for the compactification (id,a), Ra_! is a_*, so by uniqueness of right adjoints on D^+ the two functors agree. Step 6 now applies conservativity to the underlying abelian complexes. proof_deps is the union of the uses; every step is under 2000 characters; neither new citation creates a cycle. Batch-5 flag on lem-per-ind-etale-closed-support-base-change -> lem-trf-bounded-below-derived-adjunction: accepted. That node is the general D^+ derived-adjunction lemma, not a step of the trace formula or of Poincare duality. It also adds nothing to the batch-5 closure, because lem-per-regular-immersion-class-calculus is already a stmt_dep and proof_dep of the item and already has the ind-etale node in its proof_deps; the computed closures agree. The two definitions added by the fix add no new trace-formula or Poincare-duality nodes. The 9 declared tool_uses are accepted as generic etale formalism (twists, recollement, closed adjoint, triangulated derived functor, stalks, localization colimit, enough injectives).; 1 file(s) fixed by the reviewer"
  }
 }
