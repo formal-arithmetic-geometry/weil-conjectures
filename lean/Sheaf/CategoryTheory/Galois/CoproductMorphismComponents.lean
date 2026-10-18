@@ -52,6 +52,49 @@ theorem morphism_coproduct_connected_components
     (φ : X ⟶ Y) :
     ∃ (a : α → β) (φᵢ : (i : α) → Xᵢ i ⟶ Yⱼ (a i)),
       ∀ i, ι i ≫ φ = φᵢ i ≫ κ (a i) := by
-  sorry
+  classical
+  have _ := hX
+  have _ := hYconn
+  have : HasFiniteLimits C := hG.hasFiniteLimits
+  have : HasFiniteColimits C := hG.hasFiniteColimits
+  have : PreservesFiniteLimits F := hG.preservesFiniteLimits
+  have : PreservesFiniteColimits F := hG.preservesFiniteColimits
+  have : F.ReflectsIsomorphisms := hG.reflectsIsomorphisms
+  have : ReflectsLimitsOfShape WalkingCospan F :=
+    reflectsLimitsOfShape_of_reflectsIsomorphisms
+  have : ReflectsColimitsOfShape (Discrete PEmpty) F :=
+    reflectsColimitsOfShape_of_reflectsIsomorphisms
+  have initial_iff (Z : C) : Nonempty (IsInitial Z) ↔ IsEmpty (F.obj Z) := by
+    rw [(IsInitial.isInitialIffObj F Z).nonempty_congr]
+    exact Types.initial_iff_empty (F.obj Z)
+  have hFY := isColimitCofanMkObjOfIsColimit F Yⱼ κ hY
+  have hκ (j : β) : Mono (κ j) := by
+    have : Mono (F.map (κ j)) :=
+      (mono_iff_injective _).2 (Cofan.inj_injective_of_isColimit hFY j)
+    exact reflects_mono_of_reflectsLimit F (κ j)
+  have components (i : α) : ∃ (j : β) (f : Xᵢ i ⟶ Yⱼ j),
+      ι i ≫ φ = f ≫ κ j := by
+    have : IsConnected (Xᵢ i) := hXconn i
+    have hne : Nonempty (F.obj (Xᵢ i)) := by
+      by_contra h
+      obtain ⟨hi⟩ := (initial_iff (Xᵢ i)).2 (not_nonempty_iff.mp h)
+      exact IsConnected.notInitial hi
+    obtain ⟨s⟩ := hne
+    obtain ⟨j, t, ht⟩ := Cofan.inj_jointly_surjective_of_isColimit hFY
+      (F.map (ι i ≫ φ) s)
+    have : Mono (κ j) := hκ j
+    let f := ι i ≫ φ
+    have hpb := (IsPullback.of_hasPullback f (κ j)).map F
+    obtain ⟨e, _, _⟩ := Types.exists_of_isPullback hpb s t ht.symm
+    have hnot : IsInitial (pullback f (κ j)) → False := by
+      intro hi
+      exact ((initial_iff _).1 ⟨hi⟩).false e
+    have : IsIso (pullback.fst f (κ j)) :=
+      IsConnected.noTrivialComponent _ _ hnot
+    refine ⟨j, inv (pullback.fst f (κ j)) ≫ pullback.snd f (κ j), ?_⟩
+    change f = _
+    rw [Category.assoc, ← pullback.condition, IsIso.inv_hom_id_assoc]
+  choose a f hf using components
+  exact ⟨a, f, hf⟩
 
 end CategoryTheory

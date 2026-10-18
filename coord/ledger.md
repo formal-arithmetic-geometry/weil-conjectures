@@ -16208,3 +16208,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:29 L: merged deliver/W2/Sheaf.CategoryTheory.DiscreteModulesAbelian (stage 3; reviewer PASS; first push; landing 20261018T062939-L-688389 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:29 L: merged deliver/W2/Sheaf.Topology.SpectralMapConstructibleContinuous (stage 3; reviewer PASS; first push; landing 20261018T062939-L-688544 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:29 L: merged deliver/W3/Sheaf.AlgebraicGeometry.QuasiFiniteShriekConstructible (stage 3; reviewer PASS; first push; landing 20261018T062940-L-688696 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:29 L: merged deliver/W3/Sheaf.CategoryTheory.Galois.CoproductMorphismComponents (stage 3; reviewer PASS; first push; landing 20261018T062941-L-688907 (proof); batch 20261018T062645; modules 1; new nodes 0)
