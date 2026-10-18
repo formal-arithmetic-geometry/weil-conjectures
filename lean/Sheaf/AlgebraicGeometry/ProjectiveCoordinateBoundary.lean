@@ -12,10 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.Projective
 public import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Sheaf.AlgebraicGeometry.ProjectiveFiniteGeometricFibres
-import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveBaseChange
-import Mathlib.RingTheory.Localization.Away.Basic
-import Mathlib.RingTheory.QuasiFinite.Basic
-import Sheaf.AlgebraicGeometry.ReducedInducedClosedSubscheme
+import Sheaf.AlgebraicGeometry.ProjectiveCoordinateBoundaryData
 
 /-!
 # Finiteness of a projective coordinate boundary after shrinking
@@ -92,6 +89,20 @@ theorem exists_isFinite_projective_coordinate_boundary
         IsFinite ((Scheme.IdealSheafData.vanishingIdeal T).subschemeι ≫
           pullback.snd f (Scheme.Opens.ι (X := Spec (CommRingCat.of A))
             (PrimeSpectrum.basicOpen a))) := by
-  sorry
+  obtain ⟨a, ha, T, hT, hp, hloc, hcomp, hf⟩ :=
+    exists_projective_coordinate_boundary_data A f ι U hcover m hm e hover V hV
+  let _ : IsProjective (((Scheme.IdealSheafData.vanishingIdeal T).subschemeι ≫
+    pullback.snd f (Scheme.Opens.ι (X := Spec (CommRingCat.of A))
+      (PrimeSpectrum.basicOpen a)))) := hp
+  let _ : IsLocallyNoetherian ((Scheme.Opens.toScheme (X := Spec (CommRingCat.of A))
+    (PrimeSpectrum.basicOpen a))) := hloc
+  let _ : CompactSpace ((Scheme.Opens.toScheme (X := Spec (CommRingCat.of A))
+    (PrimeSpectrum.basicOpen a))) := hcomp
+  let g := ((Scheme.IdealSheafData.vanishingIdeal T).subschemeι ≫
+    pullback.snd f (Scheme.Opens.ι (X := Spec (CommRingCat.of A))
+      (PrimeSpectrum.basicOpen a)))
+  have hfin : IsFinite g :=
+    isFinite_of_isProjective_of_finite_geometricFibres g hf
+  exact ⟨a, ha, T, hT, hfin⟩
 
 end AlgebraicGeometry
