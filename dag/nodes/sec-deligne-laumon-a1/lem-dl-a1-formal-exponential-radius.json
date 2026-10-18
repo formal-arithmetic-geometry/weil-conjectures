@@ -217,5 +217,23 @@
   "group": "Q83",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-97f7f482e (reviewer sub-agent of L); spot-checked: I read the item, both new leaves, the cited statements (d-real-series, def-weil-power-series-exponential, def-weil-formal-power-series, def-weil-complex-absolute-value), the parent sk-l-dl-a1-energy (step 9 is the only citer) and the last paragraph of main-20261015 sk-l-dl-a1-energy.proof.md. The item statement is unchanged and true; I tested U=0, U=T, U=T/(1-T) and the cases R(U)=0 and R(U)=infinity. I re-derived every step. Step 1 uses clause (i) with F={1..N}; F=empty gives S>=0. Step 2 uses e_0=1 and the N>=1 formula from the definition's statement (not its proof), the triangle inequality and |zw|=|z||w|, including t=0. Step 3: the regrouping identity holds exactly (the r=0 empty tuple gives b_0; tuples with r>N contribute nothing), and the bound by (sum_{j<=N} a_j)^r <= S^r is finite and correct. Step 4: every hypothesis of leaf B and of clauses (i)/(ii) is met, including N=0. Step 5 is inclusion of the admissible-radius sets. The item reads 'converges' in d-real-series as summability of a nonnegative sequence, the same as the existing DAG (lem-rp-nonnegative-summable-comparison, parent step 9). The leaves are valid: I checked Mathlib Real.lean:89 summable_of_sum_range_le, Order.lean:121 to_additive Multipliable.prod_le_tprod giving Summable.sum_le_tsum, and Normed.lean:896 Real.summable_pow_div_factorial for every real x. Both are generic scalar facts strictly smaller than the item, not restated clauses. An rg of the whole DAG finds no duplicate; lem-rp-nonnegative-summable-comparison, lem-wf-summable-finite-subset-products and lem-rp-positive-product-radius state different things. The route is fine: only definitions and Mathlib leaves are cited, tool_uses is empty, there is no SGA and no cycle. One fix: the factorial leaf's mathlib_match.how gave Normed.lean:896–915; I corrected it to 893–909 (declaration at 896) in fixes/dag/nodes/sec-deligne-laumon-a1/lem-dl-a1-real-factorial-series-summable.json. No mathematical change.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-813d034ed",
+  "group": "N4",
+  "result": "pass",
+  "note": "The Lean statement matches every clause of the node: U : PowerSeries ℂ; the only hypothesis is constantCoeff U = 0 (power-series constantCoeff, confirmed by probe); E is the recorded specialization subst U (exp ℂ), finite in each degree under hU; both radii are the recorded d-real-series PowerSeries.radius in ℝ≥0∞; the conclusion U.radius ≤ radius E points the right way. No extra hypotheses or universes. Checked edge cases U=0, R(U)=0, R(U)=∞, t=0, N=0. lean.statement is verbatim in the file; the node differs from the side clone only in lean. Docstrings carry the source place, the blueprint tag and all five proof steps; the body is sorry only; no definitions are introduced; both report sections are present. No duplicate found in the side clone or Mathlib. nt_compile --json (snapshot file at its library path plus a probe) compiled clean in 1.3 s each; axioms are propext, sorryAx, Classical.choice, Quot.sound. Minor: the second-reading section calls itself an author self-check, which is not blocking."
+ },
+ "lean": {
+  "module": "Sheaf.Analysis.FormalExponentialRadius",
+  "declaration": "PowerSeries.radius_le_radius_subst_exp",
+  "file": "lean/Sheaf/Analysis/FormalExponentialRadius.lean",
+  "statement": "theorem radius_le_radius_subst_exp (U : PowerSeries ℂ) (hU : constantCoeff U = 0) : U.radius ≤ PowerSeries.radius (subst U (exp ℂ))",
+  "branch": "newtargets-dag",
+  "by": "N4",
+  "date": "2026-10-18",
+  "existing": false
  }
 }
