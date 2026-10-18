@@ -10,9 +10,111 @@
  "stmt_deps": [
   "def-weil-finitely-generated-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $I=I_H$. Every augmentation-zero sum is $\\sum_h a_h([h]-1)$, so $I^q$ is spanned over $R$ by words $([h_1]-1)\\cdots([h_q]-1)$; the empty word for $q=0$ is $1$. Put $F_qM=\\{m:I^qm=0\\}$. These are increasing $R[H]$-submodules with $F_0M=0$. Conjugating a word by $g\\in G$ replaces its letters by $g^{-1}h_ig\\in H$. Thus $F_qM$ is $G$-stable. Also $I F_{q+1}M\\subset F_qM$, so $H$ acts trivially on $F_{q+1}M/F_qM$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 11.1.2, 11.2.1(vi), and opening paragraph of 11.3, pp. 328-330"
+   }
+  },
+  {
+   "text": "A filtration $0=M_0\\subset\\cdots\\subset M_q=M$ with $H$-trivial quotients satisfies $IM_i\\subset M_{i-1}$; iteration gives $I^qM=0$. Conversely, if $I^qM=0$, Step 1 gives $0=F_0M\\subset\\cdots\\subset F_qM=M$ with $H$-trivial quotients. Submodules inherit open stabilizers; a quotient has open stabilizers since any representative's stabilizer fixes its class. Thus these are filtrations in the discrete continuous category. This proves unipotence equivalent to a uniform augmentation-power bound, including $q=0$ for $M=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 11.2.1(iv),(vi),(vii), and 11.3.1, pp. 328-330"
+   }
+  },
+  {
+   "text": "Call $M$ locally annihilated when each element is killed by some $I^q$. Submodules preserve this condition by restriction, and quotient modules preserve it by lifting an element. Arbitrary direct sums preserve it because each element has finite support: the maximum of its finitely many component exponents kills it. Direct sums remain discrete continuous, since a finite intersection of open stabilizers fixes each finite-support element; quotients remain so because a representative's stabilizer fixes its class.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 11.1, 11.2.1(ii),(x), pp. 327-329; explicit colimit construction"
+   }
+  },
+  {
+   "text": "For a small diagram $(M_i)$, form $D=\\bigoplus_i M_i$ and quotient by the $R$-span $K$ of $\\iota_jf(x)-\\iota_i x$ for all arrows $f:i\\to j$. Equivariance gives $g(\\iota_jf(x)-\\iota_i x)=\\iota_jf(gx)-\\iota_i(gx)$, so $K$ is $G$-stable. An equivariant linear map out of $D$ kills $K$ exactly when its component maps commute with all arrows. Thus $D/K$ has the colimit universal property in the discrete continuous category. Step 3 ensures discreteness and local annihilation of $D/K$ if these hold for the $M_i$; the empty diagram gives zero.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 11.1, 11.2.1(ii),(x), pp. 327-329; explicit colimit construction"
+   }
+  },
+  {
+   "text": "Steps 2 and 4 imply that every filtered colimit of unipotent modules is locally annihilated. Conversely, for locally annihilated $M$, the increasing $G$-stable submodules $F_qM$ of Step 1 exhaust $M$, and Step 2 makes each $F_qM$ unipotent. Their inclusions form a filtered diagram indexed by $\\mathbb N$. Compatible equivariant linear maps on its terms extend uniquely to $M$ by evaluating an element in any term containing it; passing to a larger term proves independence. Thus $M$ is their filtered colimit. This proves the asserted equivalence; Steps 3-4 give submodule, quotient and small-colimit closure.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 11.2.1(vii),(viii),(x),(xi), and 11.3.4, pp. 328-330"
+   }
+  },
+  {
+   "text": "For $M$ finitely generated over $R$ as in [def-weil-finitely-generated-module], choose generators $m_1,\\ldots,m_t$. If $M$ is locally annihilated, choose exponents $q_i$ killing these generators and take $q=\\max_i q_i$, with $q=0$ for $t=0$. Then $I^q$ kills each generator and all their $R$-linear combinations, since the action is $R$-linear. Thus $I^qM=0$; the converse is immediate. Step 2 identifies this with unipotence. No assertion about finite generation of $R$-submodules is used.",
+   "uses": [
+    "def-weil-finitely-generated-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 11.2.1(ix), p. 329, for finite generation over R"
+   }
+  },
+  {
+   "text": "Fix an ambient short exact sequence $0\\to A\\to B\\xrightarrow{\\pi}C\\to0$ with locally annihilated endpoints, and $b\\in B$. By [lem-exc-discrete-continuous-action-finite-orbit-coproduct], the underlying discrete continuous $G$-set is covered by finite invariant subsets. One containing $b$ contains $Gb$, so $S=Gb$ is finite. Let $N=\\mathbb Z S\\subset B$ be the additive subgroup generated by $S$. It is $G$-stable, and its action factors through the finite permutation image $P\\subset\\operatorname{Sym}(S)$, since $S$ generates $N$. Write $Q\\subset P$ for the image of $H$. Choose an exponent $a$ killing every $\\pi(s)$, $s\\in S$, using the maximum of finitely many exponents in $C$. For $J=\\ker(\\mathbb Z[H]\\to\\mathbb Z)$, the word description of Step 1 gives $J^aN\\subset\\ker\\pi=A$.",
+   "uses": [
+    "lem-exc-discrete-continuous-action-finite-orbit-coproduct"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 11.2.1(ii), proof p. 329, and 11.3.4; finite-orbit reduction"
+   }
+  },
+  {
+   "text": "For the objects of Step 7, $J^aN$ is the abelian subgroup generated by the finite list $T=\\{(u_1-1)\\cdots(u_a-1)s:u_i\\in Q,\\ s\\in S\\}$. To check this equality, expand every factor of an augmentation-zero integral sum into integral multiples of $[h]-1$, and write elements of $N$ as integral combinations of $s\\in S$; their actions depend only on the images $u\\in Q$. Conversely, lift each $u_i$ to $H$ to see that every listed word belongs to $J^aN$. For $a=0$ the list is $S$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 11.2.1(ii), proof p. 329, and 11.3.4; explicit finite-word argument replacing the integral Noetherian-subgroup argument"
+   }
+  },
+  {
+   "text": "By Step 7, every $t\\in T$ belongs to $A$, hence is killed by some augmentation power. Take the maximum $c$ of these finitely many exponents (zero if $T$ is empty). Integral words of length $c$ kill every generator in $T$, hence all their integral combinations, giving $J^c(J^aN)=0$. In particular $J^{a+c}b=0$. Step 1 identifies integral and $R$-coefficient annihilation on a vector: both mean that every word of that length kills it. Thus $I_H^{a+c}b=0$ in $B$. Since $b$ was arbitrary, Step 5 proves extension closure. No Noetherian hypothesis on $R$ was used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 11.2.1(ii), proof p. 329, and 11.3.4; explicit finite-word argument replacing the integral Noetherian-subgroup argument"
+   }
+  },
+  {
+   "text": "For an equivariant linear map $f:M\\to N$ between ind-unipotent modules, the ordinary kernel is $G$-stable and inherits open stabilizers, while $N/f(M)$ has open stabilizers by lifting representatives. The usual module universal factorizations are equivariant: use the kernel's injective inclusion and the cokernel's surjective quotient. Thus these are the ambient categorical kernel and cokernel. Submodule and quotient closure from Steps 3 and 5 put them in the ind-unipotent full subcategory, where the same universal properties apply. Its inclusion therefore preserves both. The zero module is killed by $I^0=R[H]$, and is included throughout.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 11.1, 11.2.1(iii), and 11.3.4, pp. 327-330"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finitely-generated-module",
+  "lem-exc-discrete-continuous-action-finite-orbit-coproduct"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XVII 11.1-11.3, pp. 327-330; expands colimits and replaces the integral Noetherian-subgroup argument with an explicit finite word list."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -48,10 +150,45 @@
    "results": "8 hits; top: isHausdorff_iff, IsHausdorff.haus', IsHausdorff.haus, Hausdorffification, IsAdicComplete, AdicCompletion.submodule, IsHausdorff.iInf_pow_smul, IsHausdorff; note: ; digest: fb2f1d538c56c0b2",
    "date": "2026-10-18",
    "verdict": "no match: generic Serre classes, profinite quotients, Lie nilpotence and adic Hausdorffification do not state normal-subgroup ind-unipotence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Discrete continuous representations of profinite groups locally nilpotent for the augmentation ideal of a normal subgroup are closed under extensions",
+   "results": "8 hits; top: ProfiniteGrp.instSmallCategoryOpenNormalSubgroupCarrierToTopTotallyDisconnectedSpaceToProfinite, Rep.coinvariantsShortComplex_shortExact, ProfiniteGrp.toFiniteQuotientFunctor, Condensed.profiniteSolid, ProfiniteAddGrp, ProfiniteAddGrp.ofClosedAddSubgroup, ProfiniteGrp.instIsTopologicalGroupCarrierToTopTotallyDisconnectedSpacePtProfiniteLimitConeCompForget₂, Field.absoluteGaloisGroup.commutator_closure_isNormal; note: ; digest: 419a033191b8871c",
+   "date": "2026-10-18",
+   "verdict": "no match: invariants, coinvariants, adic completion, annihilators and profinite quotients do not state ind-unipotence or its closure properties"
+  },
+  {
+   "tool": "grep",
+   "query": "indUnipotent|ind_unipotent|augmentationIdeal",
+   "results": "0 hits; top: none; note: ; digest: 4f53cda18c2baa0c; subdirectory RepresentationTheory",
+   "date": "2026-10-18",
+   "verdict": "no match: invariants, coinvariants, adic completion, annihilators and profinite quotients do not state ind-unipotence or its closure properties"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Modules locally annihilated by powers of the augmentation ideal of a normal subgroup of a profinite group",
+   "results": "8 hits; top: Module.annihilator, AdicCompletion, IsHausdorff.casesOn, LocalizedModule.Away, Submodule.annihilator, Ideal.adicModuleTopology, WithIdeal.topologicalSpaceModule, Submodule.annihilator_quotient; note: ; digest: 657119f94ad44241",
+   "date": "2026-10-18",
+   "verdict": "no match: invariants, coinvariants, adic completion, annihilators and profinite quotients do not state ind-unipotence or its closure properties"
+  },
+  {
+   "tool": "loogle",
+   "query": "Representation, IsNilpotent",
+   "results": "0 hits; top: none; note: ; digest: 4f53cda18c2baa0c",
+   "date": "2026-10-18",
+   "verdict": "no match: invariants, coinvariants, adic completion, annihilators and profinite quotients do not state ind-unipotence or its closure properties"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Filtered colimits of unipotent representations of a closed normal subgroup and locally nilpotent augmentation ideal action",
+   "results": "8 hits; top: Rep.toCoinvariantsKer, Rep.quotientToInvariantsFunctor_obj_V, localCohomology.ofSelfLERadical, localCohomology.ofDiagram, localCohomology.hasColimitDiagram, Hausdorffification, localCohomology, CategoryTheory.Limits.Concrete.colimit_rep_eq_zero; note: ; digest: 311e997a5a992b1f",
+   "date": "2026-10-18",
+   "verdict": "no match: invariants, coinvariants, adic completion, annihilators and profinite quotients do not state ind-unipotence or its closure properties"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-galois-partition-exact-refinement",
@@ -76,5 +213,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-normal-subgroup-ind-unipotence",
+  "worker": "stage1",
+  "summary": "Ten steps establish the augmentation criterion, all colimit and extension closure and inherited kernels/cokernels. Extension closure uses finite orbits and a finite list of integral augmentation words. No new nodes and no statement change.",
+  "blueprint": "Supports coefficient comparison in Step 1 of lem-per-artin-gabber-affine-curve through the recorded ancestor chain; provides normal-subgroup ind-unipotence for Steps 2-3 of lem-per-galois-partition-exact-refinement.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-discrete-continuous-action-finite-orbit-coproduct",
+    "why": "Only the finite invariant subset covering of a compact-group discrete action is used to bound a vector orbit; the perverse unit has no such generic topological-group tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-discrete-continuous-action-finite-orbit-coproduct"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-20ffec05d",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-20ffec05d (reviewer sub-agent of L); spot-checked: Read the item's ten steps against ILO XVII §11 (pp. 327-330: 11.1.1-11.1.2, 11.2.1(i)-(xi) with proofs, 11.3-11.3.4). The statement matches the source hypothesis by hypothesis: profinite G, closed normal H, arbitrary commutative R. Unipotence is the 11.3.1 G-stable filtration form. Ind-unipotence is the filtered-colimit form, which Step 5 proves equivalent to the (vii)/(xi) definition. Comparing with the live node: statement, stmt_deps and blueprint unchanged; the item is still unsplit live. Steps 1-6 and 10 are correct elementary expansions of (vi), (iv), (vii), (x), (ix) and (iii). In Step 1 normality gives G-stability of Ann(I^q). Step 6 uses the finite spanning list of def-weil-finitely-generated-module correctly. In Steps 7-9, extension closure takes the finite orbit from the statement of lem-exc-discrete-continuous-action-finite-orbit-coproduct (G compact; the middle term is discrete by hypothesis). The H-action factors through the finite permutation image, so J^aN is generated by the finite word list T, and J^{a+c}b=0, then I^{a+c}b=0. This correctly replaces the source's 'N de type fini sur Z' Noetherian step. Edge cases checked: H=1 or G=1; M=0 and R=0; an unbounded infinite direct sum; nontrivial representations of a finite group over Q; non-compact G, where Step 7 fails as it should. No duplicate in the DAG or the blueprint; the unipotent and augmentation hits are other statements. The parent lem-per-galois-partition-exact-refinement Steps 2-3 get every clause they use. Accepted tool use: lem-exc-discrete-continuous-action-finite-orbit-coproduct, a generic finite-orbit fact. No fixes."
  }
 }
