@@ -347,5 +347,32 @@
   "sk-lem-int-tensor",
   "det-cor-int-compactness-ii-extension-zero",
   "det-lem-formal-closed-support-sheaves"
- ]
+ ],
+ "lean": {
+  "module": "Sheaf.SixFunctors.IntegralRestrictionLine",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction.integralRestrictionLine",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction.tateLine",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction.pullTwistShift",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction.restrictedPull",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction.restrictedPush",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction.brownComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.IntegralRestriction.integralRestrictionLine"
+  ],
+  "file": "lean/Sheaf/SixFunctors/IntegralRestrictionLine.lean",
+  "statement": "theorem integralRestrictionLine (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] (Y : Scheme.{u}) [Y.Over (Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (d : ℕ) : ∃ (hq : ∀ K, IntegralCompactSupport.localizing (Profinite.padicIntegersRingObj ℓ E.val) Y K → IntegralCompactSupport.localizing (Profinite.padicIntegersRingObj ℓ E.val) (ProjectiveSpace (ULift.{u} (Fin 2)) Y) ((pullTwistShift ℓ E (ProjectiveSpace (ULift.{u} (Fin 2)) Y ↘ Y) 1).obj K)) (hp : ∀ K, IntegralCompactSupport.localizing (Profinite.padicIntegersRingObj ℓ E.val) Y K → IntegralCompactSupport.localizing (Profinite.padicIntegersRingObj ℓ E.val) (AffineSpace (ULift.{u} (Fin d)) Y) ((pullTwistShift ℓ E (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y) d).obj K)) (hr : ∀ K, IntegralCompactSupport.localizing (Profinite.padicIntegersRingObj ℓ E.val) (ProjectiveSpace (ULift.{u} (Fin 2)) Y) K → IntegralCompactSupport.localizing (Profinite.padicIntegersRingObj ℓ E.val) Y ((IntegralCompactSupport.push (Profinite.padicIntegersRingObj ℓ E.val) (ProjectiveSpace (ULift.{u} (Fin 2)) Y ↘ Y)).obj K)), Nonempty (restrictedPush ℓ E (ProjectiveSpace (ULift.{u} (Fin 2)) Y ↘ Y) hr ⊣ restrictedPull ℓ E (ProjectiveSpace (ULift.{u} (Fin 2)) Y ↘ Y) 1 hq) ∧ brownComparison ℓ E (ProjectiveSpace (ULift.{u} (Fin 2)) Y ↘ Y) (restrictedPull ℓ E (ProjectiveSpace (ULift.{u} (Fin 2)) Y ↘ Y) 1 hq) ∧ brownComparison ℓ E (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y) (restrictedPull ℓ E (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y) d hp) ∧ (∀ K, constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) Y K → constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) (ProjectiveSpace (ULift.{u} (Fin 2)) Y) ((pullTwistShift ℓ E (ProjectiveSpace (ULift.{u} (Fin 2)) Y ↘ Y) 1).obj K)) ∧ (∀ K, constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) Y K → constantModelBoundedConstructible (Profinite.padicIntegersRingObj ℓ E.val) (AffineSpace (ULift.{u} (Fin d)) Y) ((pullTwistShift ℓ E (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y) d).obj K))",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The canonical Tate line is transported through the published sectionModuleEquivalence and tensored using the existing internal-module derived tensor. The functors are actual full-subcategory restrictions to the same Loc(Dbc) as the Brown declaration. Since Brown states existence without choosing a functor, brownComparison quantifies over its right adjoints with their defining adjunctions, for every boundary compactification (including the fixed one); no arbitrary functor is substituted for f^!."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4a4cd8774",
+  "group": "NF",
+  "result": "pass",
+  "note": "nt_compile rc 0 (IntegralRestrictionLine 6.5 s, no non-sorry warnings). Binders match Brown adjoint and sk-def-sfb-dc-setting; P1 = ProjectiveSpace (ULift (Fin 2)) (= upstream ProjectiveLine), A^d = Mathlib AffineSpace; Dbc/Loc are the recorded constantModelBoundedConstructible/IntegralCompactSupport.localizing; tateLine = section-equivalence inverse of published spSignedTwist(spIntegralTwist), pullTwistShift = derived pull, derived tensor with line in deg 0, shift 2d. Clause 1 adjunction on genuine restrictions; brownComparison quantifies over all boundary compactifications and Brown adjoints (true by compactification independence + uniqueness, non-vacuous via brownAdjointAssertions); clauses 2,3 complete; d=0, empty Y, universes ok. Statement verbatim, declarations match file, only lean field changed vs live, docstrings with source/blueprint and 9 steps, sorry only in theorem, no duplicate twist-shift functor on this ambient. Note: tateLine at d=1 is only canonically iso to traceTate's untransported line (stage-3 bookkeeping)."
+ }
 }

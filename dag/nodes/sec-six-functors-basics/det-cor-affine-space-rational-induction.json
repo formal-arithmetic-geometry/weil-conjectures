@@ -21,7 +21,8 @@
   "def-sbc-affine-space",
   "sk-prop-sf-existence",
   "sk-def-sp-tate-twist",
-  "det-def-localizing-closure-ctf-equals-bc"
+  "det-def-localizing-closure-ctf-equals-bc",
+  "def-sfb-rational-localizing-twist"
  ],
  "proof": [
   {
@@ -273,5 +274,31 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.AffineSpaceRationalInduction",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.affineSpace_rational_induction",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.rationalDegreeTwistFunctor",
+   "AlgebraicGeometry.ProEtale.CondensedRing.affineSpaceChosenCompactification",
+   "AlgebraicGeometry.ProEtale.CondensedRing.affineSpaceRationalPullTwistShift",
+   "AlgebraicGeometry.ProEtale.CondensedRing.affineSpaceRationalAssertion",
+   "AlgebraicGeometry.ProEtale.CondensedRing.affineSpace_rational_induction"
+  ],
+  "file": "lean/Sheaf/Paper/AffineSpaceRationalInduction.lean",
+  "statement": "theorem affineSpace_rational_induction (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] (V : Scheme.{u}) [V.Over (Spec (.of k))] [LocallyOfFiniteType (V ↘ Spec (.of k))] [QuasiCompact (V ↘ Spec (.of k))] [IsSeparated (V ↘ Spec (.of k))] (d : ℕ) : (∀ E : PadicAlgCl.FiniteIntermediateField ℓ, affineSpaceRationalAssertion (Profinite.continuousMapRingObj E.1) V d (affineSpaceChosenCompactification k V d) (rationalDegreeTwistFunctor (Profinite.continuousMapRingObj E.1) (𝔸(ULift.{u} (Fin d); V)) (spRationalTwist (𝔸(ULift.{u} (Fin d); V)) ℓ E) d)) ∧ affineSpaceRationalAssertion (Profinite.padicAlgClRingObj ℓ) V d (affineSpaceChosenCompactification k V d) (rationalDegreeTwistFunctor (Profinite.padicAlgClRingObj ℓ) (𝔸(ULift.{u} (Fin d); V)) (spQbarTwist (𝔸(ULift.{u} (Fin d); V)) ℓ) d)",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Uses the three existing definitions rationalLocalizingCategory, rationalLocalizingInclusion and rationalTwistFunctor through def-sfb-rational-localizing-twist. The affine-line theorem remains solely in proof_deps: none of its conclusions occurs in this statement. Degree d uses the existing spSignedTwist transported back along sectionModuleEquivalence. The compactification is the recorded Nagata choice for the affine projection. Ambient natural comparisons characterize both restrictions; the adjunction supplies the exceptional adjoint, with uniqueness of right adjoints. Dbc preservation is stated for every ambient Dbc object, in every natural dimension and for both rational coefficient constructors."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4af250063",
+  "group": "ND",
+  "result": "pass",
+  "note": "Re-delivery after RETURN on 536f0d188ae7 (theorem stmt_dep cited only for plain defs). Lean module byte-identical; item stmt_deps now cite new def node def-sfb-rational-localizing-twist (existing:true on the published plain defs rationalLocalizingCategory, rationalLocalizingInclusion, rationalTwistFunctor in Sheaf.Targets.AffineSpaceRationalLine); det-cor-affine-space-rational-line kept in proof_deps. New node: prose matches the three decls; stmt_deps (pulled-back coefficients, constructible, localizing closure, derived tensor) exist live; lean.statement verbatim; no cycle; blueprint.from is the item. Item H3 re-checked: ℓ prime, char k = p > 0 with p ≠ ℓ, V separated finite type, all finite E and Q̄ℓ, 𝔸(ULift (Fin d); V) with d = 0 included, Nagata compactificationOverField lower shriek, existential F ⊣ P with ambient comparisons and right-adjoint uniqueness, spSignedTwist degree-d line from spRationalTwist/spQbarTwist, shift [2d], Dbc preservation for every ambient K. No hollow defs, sorry only in the theorem, docstrings ok, universes bound. nt_compile --json rc 0, item 7.9 s, clean. Maintainer note: the three decls are listed in both the line node's and the new def node's records (the accepted existing:true shape)."
  }
 }

@@ -519,5 +519,38 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.Paper.MateOpenRestriction",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.mateOpenImmersion",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.mateOpenPullback",
+   "AlgebraicGeometry.ProEtale.CondensedRing.mateOpenExtension",
+   "AlgebraicGeometry.ProEtale.CondensedRing.mateOpenExtensionComp",
+   "AlgebraicGeometry.ProEtale.CondensedRing.mateOpenSourceLowerShriek",
+   "AlgebraicGeometry.ProEtale.CondensedRing.mateOpenProperRestriction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.mateOpenSquareExtension",
+   "AlgebraicGeometry.ProEtale.CondensedRing.mateOpenTargetLowerShriek",
+   "AlgebraicGeometry.ProEtale.CondensedRing.mateOpenTrivialLowerShriek",
+   "AlgebraicGeometry.ProEtale.CondensedRing.mateOpenImmersion",
+   "AlgebraicGeometry.ProEtale.CondensedRing.mateOpenSourceRestriction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.mateOpenTargetRestriction",
+   "AlgebraicGeometry.ProEtale.CondensedRing.mateOpenCover_isIso"
+  ],
+  "file": "lean/Sheaf/Paper/MateOpenRestriction.lean",
+  "statement": "theorem mateOpenImmersion (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] (p : ℕ) [CharP k p] (_hp : 0 < p) (_hpℓ : p ≠ ℓ) (_hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ) {U X : Scheme.{u}} [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] (j : U ⟶ X) [IsOpenImmersion j] [QuasiCompact j] : ∃ (he : ∀ K : (localizingClosureProEtale Λ U).FullSubcategory, localizingClosureProEtale Λ X ((openImmersionLowerShriek Λ j).mapDerivedCategory.obj K.obj)) (hs : ∀ K : (localizingClosureProEtale Λ X).FullSubcategory, localizingClosureProEtale Λ U ((upperStar Λ j).mapDerivedCategory.obj K.obj)) (ht : ∀ K, localizingClosureProEtale Λ U K → localizingClosureProEtale Λ X ((rightDerivedLowerShriekOfCompactification Λ (Compactification.ofIsOpenImmersion j)).obj K)) (adj : mateOpenExtension Λ j he ⊣ mateOpenPullback Λ j hs), (∀ (M : (localizingClosureProEtale Λ U).FullSubcategory) (N : (localizingClosureProEtale Λ X).FullSubcategory) (b : (mateOpenExtension Λ j he).obj M ⟶ N), (adj.homEquiv M N b).hom = (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).homEquiv M.obj N.obj b.hom) ∧ ∀ (G : (localizingClosureProEtale Λ X).FullSubcategory ⥤ (localizingClosureProEtale Λ U).FullSubcategory) (adjG : localizingLowerShriek Λ (Compactification.ofIsOpenImmersion j) ht ⊣ G), ∃! e : G ≅ mateOpenPullback Λ j hs, ∀ N, ((localizingLowerShriek Λ (Compactification.ofIsOpenImmersion j) ht).map (e.hom.app N)).hom ≫ (mateOpenTrivialLowerShriek Λ j).hom.app ((mateOpenPullback Λ j hs).obj N).obj ≫ (adj.counit.app N).hom = (adjG.counit.app N).hom",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "All three clauses are stated by mateOpenImmersion, mateOpenSourceRestriction, mateOpenTargetRestriction and mateOpenCover_isIso. The eight helper definitions construct the actual restricted functors and canonical mates. Open comparison is normalized by the trivial-compactification derived identity and counits; source and target comparisons are uniquely specified by the existing adjunctions and actual open/compactification maps. Brown adjoints range over all choices supplied by the recorded dependency, on precisely its full localizing categories. No additional geometric assumption or ambient exceptional functor is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-313256122",
+  "group": "NA",
+  "result": "pass",
+  "note": "All three clauses match the node with only the standing hypotheses. Clause 1: the restricted adjunction j_! ⊣ j^* has its Hom bijection equal to the existing ambient open adjunction; for every Brown right adjoint at the trivial compactification (j,id) there is a unique counit-compatible iso to j^* through the canonical R(id)_* ≅ id. Clause 2 target side: an arbitrary Cartesian open square with upstream c.ofIsPullback sq; existence of the Brown adjoint J is a conclusion; the pinning equation was checked by hand to hold for the base-change mate, and since the comparison map is invertible it fixes e uniquely. Clause 2 source side: c.precomp j, normalized by the leftAdjointUniq open-extension compositor, with unique counit-compatible comparison. Clause 3: arbitrary covers I : Type w with iSup U = ⊤, including empty and infinite ones; the displayed locality formulas are instances of the clause-2 theorems. Every Compactification is allowed, which is a correct generalization. Only the item's lean field changed, and the statement is verbatim. det-sf-existence-brown is a genuine stmt_dep (localizingLowerShriek is owned by the landed def node def-sf-localizing-lower-shriek, which H2 does not let the item add). The 8 helper defs have real canonical data and are not duplicates; the 4 theorems are sorry-only. Docstrings, line widths and imports conform; non-public imports are proof dependencies. nt_compile --json: 7.9 s, rc 0, clean. Edge cases checked: empty opens and empty cover, identity opens, zero ring, unbounded objects, universes u/u+1/w."
  }
 }

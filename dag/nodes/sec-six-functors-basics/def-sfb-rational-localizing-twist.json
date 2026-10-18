@@ -1,0 +1,100 @@
+{
+ "id": "def-sfb-rational-localizing-twist",
+ "kind": "definition",
+ "title": "Bounded-constructible localizing category, inclusion and fixed-line derived tensor",
+ "status": "split",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring and $X$ a scheme, with pulled-back coefficient ring $\\Lambda_X$ as in [sk-def-sfb-pulled-back-coefficients]. Let $D_X=D(\\mathrm{Mod}_{\\Lambda_X}(X_{\\mathrm{proet}}))$ and let $\\mathrm D^b_c(X,\\Lambda)$ be the bounded constructible object property of [sk-def-sfb-constructible]. Using the localizing closure of [sk-def-localizing-closure], define $\\mathcal T_X=\\operatorname{Loc}(\\mathrm D^b_c(X,\\Lambda))$ as the full subcategory of $D_X$ and $\\iota_X:\\mathcal T_X\\hookrightarrow D_X$ as its full inclusion. For a specified $\\Lambda_X$-module $L$, define $T_L:D_X\\to D_X$ by $T_L(K)=K\\otimes^{\\mathbf L}_{\\Lambda_X}L[0]$, on both objects and morphisms by fixing the second argument of the derived tensor bifunctor [def-sfb-derived-tensor-modules]. No theorem about an exceptional adjoint is used in these definitions.",
+ "stmt_deps": [
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-constructible",
+  "sk-def-localizing-closure",
+  "def-sfb-derived-tensor-modules"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-cor-affine-space-rational/sk-cor-affine-space-rational-induction.md",
+  "place": "The two localizing categories and the Tate tensor in p^*(d)[2d]; construction expanded in proof paragraphs 1 and 2."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Localizing closure of bounded constructible pro etale modules and derived tensor with a sheaf placed in degree zero",
+   "results": "8 hits: IsLocalizedModule.rTensor; IsLocalization.instIsLocalizedModuleTensorProductMap; IsLocalization.tensorProduct_isLocalizedModule; ModuleCat.Tilde.localizationToStalk; ModuleCat.Tilde.instModuleCarrierObjOppositeOpensCarrierTopCommRingCatValStructureSheafLocalizationsValMemUnop; ModuleCat.Tilde.openToLocalization; ModuleCat.Tilde.stalkIso; ModuleCat.tildeInModuleCat",
+   "date": "2026-10-18",
+   "verdict": "No matching specialization; these hits concern localization of ordinary modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.singleFunctor, CategoryTheory.ObjectProperty.FullSubcategory",
+   "results": "0 hits",
+   "date": "2026-10-18",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "rationalLocalizingCategory|rationalLocalizingInclusion|rationalTwistFunctor",
+   "results": "msearch Mathlib: 0 hits. rg of WeilConjectures and dag/lean_names_upstream.json: 0 hits. rg of lean/Sheaf: precisely the three definitions and their uses in Sheaf.Targets.AffineSpaceRationalLine. rg of dag/nodes: only det-cor-affine-space-rational-line records the names. blueprint_refs.py search rationalLocalizingCategory: 0 blueprint nodes. blueprint_refs.py search localizing: generic closure nodes and consumers, no definition node for this triple.",
+   "date": "2026-10-18",
+   "verdict": "Reuse all three landed definitions with existing:true. The theorem node records them as helpers but does not supply a definition node for this notion; the independent return explicitly requests one."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "det-cor-affine-space-rational-induction",
+  "date": "2026-10-18",
+  "group": "ND"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-cor-affine-space-rational-induction",
+   "place": "Loc(Dbc) as domain and codomain and tensoring with the degree-d coefficient line in the induction and preservation paragraphs.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-cor-affine-space-rational",
+ "lean": {
+  "module": "Sheaf.Targets.AffineSpaceRationalLine",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.rationalTwistFunctor",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.rationalLocalizingCategory",
+   "AlgebraicGeometry.ProEtale.CondensedRing.rationalLocalizingInclusion",
+   "AlgebraicGeometry.ProEtale.CondensedRing.rationalTwistFunctor"
+  ],
+  "statement": "def rationalTwistFunctor\n    (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1})\n    [MonObj Λ] [IsCommMonObj Λ] (X : Scheme.{u})\n    (L : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj Λ X)) :\n    DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n      (condensedRingObj Λ X)) ⥤\n      DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})\n        (condensedRingObj Λ X))",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "The independent return on head 536f0d188ae7 requests a definition node owning these three already landed helpers. They are two literal abbreviations for localizingClosure(constantModelBoundedConstructible) and its inclusion, and a def fixing the second derivedTensor argument to singleFunctor at zero. They neither choose data from nor use the conclusion of det_cor_affine_space_rational_line. Reuse the existing declarations in their published module to avoid redeclaration collisions; no new Lean file."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4af250063",
+  "group": "ND",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4af250063",
+  "group": "ND",
+  "result": "pass",
+  "note": "Re-delivery after RETURN on 536f0d188ae7 (theorem stmt_dep cited only for plain defs). Lean module byte-identical; item stmt_deps now cite new def node def-sfb-rational-localizing-twist (existing:true on the published plain defs rationalLocalizingCategory, rationalLocalizingInclusion, rationalTwistFunctor in Sheaf.Targets.AffineSpaceRationalLine); det-cor-affine-space-rational-line kept in proof_deps. New node: prose matches the three decls; stmt_deps (pulled-back coefficients, constructible, localizing closure, derived tensor) exist live; lean.statement verbatim; no cycle; blueprint.from is the item. Item H3 re-checked: ℓ prime, char k = p > 0 with p ≠ ℓ, V separated finite type, all finite E and Q̄ℓ, 𝔸(ULift (Fin d); V) with d = 0 included, Nagata compactificationOverField lower shriek, existential F ⊣ P with ambient comparisons and right-adjoint uniqueness, spSignedTwist degree-d line from spRationalTwist/spQbarTwist, shift [2d], Dbc preservation for every ambient K. No hollow defs, sorry only in the theorem, docstrings ok, universes bound. nt_compile --json rc 0, item 7.9 s, clean. Maintainer note: the three decls are listed in both the line node's and the new def node's records (the accepted existing:true shape)."
+ }
+}
