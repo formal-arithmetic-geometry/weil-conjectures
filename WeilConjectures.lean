@@ -7817,6 +7817,7 @@ public import WeilConjectures.CategoryTheory.Pro.Generating
 public import WeilConjectures.CategoryTheory.Pro.HypercoverColimit
 public import WeilConjectures.CategoryTheory.Pro.PresheafColimit
 public import WeilConjectures.CategoryTheory.PushoutShortExactSequence
+public import WeilConjectures.CategoryTheory.RepleteSheafTopos
 public import WeilConjectures.CategoryTheory.ResolutionDerivedSingleUnitAugmentation
 public import WeilConjectures.CategoryTheory.ResolutionPullbackAugmentation
 public import WeilConjectures.CategoryTheory.ResolutionSectionCohomology
