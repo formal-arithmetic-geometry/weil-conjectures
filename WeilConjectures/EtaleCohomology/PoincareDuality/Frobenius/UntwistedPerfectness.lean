@@ -111,4 +111,65 @@ theorem bijective_comp_untwistedSmoothTrace (hΛ : Function.Surjective (Int.cast
   · beta_reduce
     rw [smul_smul, ← Int.cast_smul_eq_zsmul Λ, hn, one_smul]
 
+/-- **The untwisted derived Poincaré pairing is perfect** over an algebraically closed field,
+read through `Λ_k(-d) ≅ Λ_k`. -/
+theorem isPerfectPairing_untwistedPoincarePairing_comp
+    (hΛ : Function.Surjective (Int.cast : ℤ → Λ)) (γ : TateOrientation Λ a d)
+    (ι : tateObject Λ (Spec (.of k)) (-d) ≅ 𝟙_ (DerivedCategoryModule Λ (Spec (.of k))))
+    (K : DerivedCategoryModule Λ X) :
+    IsPerfectPairing (γ.untwistedPoincarePairing K ≫ ι.hom) := by
+  have h := isPerfectPairing_poincarePairingOfTrace_aux (ModuleCat.{u + 1} Λ) a K (2 * d : ℤ)
+    _ (bijective_comp_untwistedSmoothTrace hΛ γ ι)
+    (fun N ↦ hasProjectionFormula_of_finite Λ a K N)
+  rw [Iso.inv_hom_id_app_assoc] at h
+  rw [untwistedPoincarePairing, poincarePairingOfTrace, Category.assoc]
+  exact h
+
+/-- **Nondegeneracy of the untwisted degreewise Poincaré pairing** over an algebraically closed
+field: for `K ∈ D(X_ét, Λ)` and `i + j = 2d`, the pairing
+`H^i_c(X, K) × H^j(X, K^∨) ⟶ Λ(-d)` is nondegenerate on both sides. -/
+theorem nondegenerate_untwistedDegreewisePoincarePairing
+    (hΛ : Function.Surjective (Int.cast : ℤ → Λ))
+    (hcog : ∀ (M : ModuleCat.{u + 1} Λ) (x : M), x ≠ 0 → ∃ χ : M →ₗ[Λ] Λ, χ x ≠ 0)
+    (γ : TateOrientation Λ a d) (K : DerivedCategoryModule Λ X) (i j : ℤ)
+    (hij : i + j = 2 * d) :
+    (∀ x, (∀ y, γ.untwistedDegreewisePoincarePairing K i j hij x y = 0) → x = 0) ∧
+      (∀ y, (∀ x, γ.untwistedDegreewisePoincarePairing K i j hij x y = 0) → y = 0) := by
+  obtain ⟨ι⟩ := nonempty_tateObject_iso_unit Λ k (-(d : ℤ))
+  obtain ⟨g, hg⟩ :=
+    (isPerfectPairing_untwistedPoincarePairing_comp hΛ γ ι K).exists_addEquiv_degreeZero
+    i (j - 2 * d) (by omega)
+  obtain ⟨h₁, h₂⟩ := nondegenerate_comp_unit_of_isSepClosed_of_injective hcog
+    (((R(a)_![ModuleCat.{u + 1} Λ]).obj K)⟦i⟧)
+  let s := (shiftFunctorAdd' (DerivedCategoryModule Λ (Spec (.of k))) (2 * d : ℤ) (j - 2 * d) j
+    (by omega)).app ((R((a)_*[ModuleCat.{u + 1} Λ])).obj
+      ((DerivedCategory.coefficientDual _ X).obj (Opposite.op K)))
+  have hp (x y) : γ.untwistedDegreewisePoincarePairing K i j hij x y ≫ ι.hom =
+      x ≫ g (y ≫ s.hom) := by
+    rw [untwistedDegreewisePoincarePairing_apply, degreewisePairing_apply, ← hg x]
+    simp only [Functor.map_comp, Category.assoc]
+    rw [NatTrans.naturality]
+    rfl
+  have hp0 (x y) : γ.untwistedDegreewisePoincarePairing K i j hij x y = 0 ↔
+      x ≫ g (y ≫ s.hom) = 0 := by
+    rw [← hp]
+    exact ⟨fun h ↦ by rw [h, zero_comp], fun h ↦ by
+      rw [← Category.comp_id (γ.untwistedDegreewisePoincarePairing K i j hij x y),
+        ← ι.hom_inv_id, ← Category.assoc, h, zero_comp]⟩
+  refine ⟨fun x hx ↦ ?_, fun y hy ↦ ?_⟩
+  · by_contra hx0
+    obtain ⟨f, hf⟩ := h₁ x hx0
+    obtain ⟨z, rfl⟩ := g.surjective f
+    refine hf ?_
+    have := (hp0 x (z ≫ s.inv)).1 (hx _)
+    rw [Category.assoc, s.inv_hom_id] at this
+    erw [Category.comp_id] at this
+    exact this
+  · by_contra hy0
+    have hgy : g (y ≫ s.hom) ≠ 0 := fun h ↦ hy0 (by
+      have h' := g.injective (h.trans (map_zero g).symm)
+      simpa using congrArg (· ≫ s.inv) h')
+    obtain ⟨x, hx⟩ := h₂ _ hgy
+    exact hx ((hp0 x y).1 (hy x))
+
 end AlgebraicGeometry.Etale.TateOrientation
