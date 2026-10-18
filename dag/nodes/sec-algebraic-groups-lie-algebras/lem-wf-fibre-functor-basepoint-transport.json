@@ -17,9 +17,145 @@
   "def-weil-pbc-scheme-conventions",
   "pqf-def-locnoeth"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal C=\\mathrm{FLC}(Y)$. By [thm-galois-fundamental], evaluation at $\\bar y$ is an equivalence $B:\\mathcal C\\simeq\\mathcal C_{\\pi_y}$ whose underlying-set functor is $F_{\\bar y}$. Choose a quasi-inverse $Q$ with counit $\\epsilon:QB\\xrightarrow{\\sim}\\mathrm{id}_{\\mathcal C}$. The functor $F_{\\bar z}$ is finite-valued and exact: [lem-fet-galois-category] says this on finite etale covers by the axioms of [def-galois-category], and [thm-galois-lc-etale] identifies that fibre functor with the one on $\\mathcal C$. Equivalences, including $Q$, preserve finite limits and colimits by [lem-galois-equivalence-preserves-limits]. Thus $H=F_{\\bar z}Q:\\mathcal C_{\\pi_y}\\to\\mathbf{Sets}$ is exact and finite-valued.",
+   "uses": [
+    "thm-galois-fundamental",
+    "lem-fet-galois-category",
+    "def-galois-category",
+    "thm-galois-lc-etale",
+    "lem-galois-equivalence-preserves-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Theorem 0BND (1); Lemma 0BN5, reduction to finite group sets"
+   }
+  },
+  {
+   "text": "Apply [lem-wf-exact-finite-gsets-forgetful] with $G=\\pi_y$ to obtain $s:U\\xrightarrow{\\sim}H$. Define\n$$t_{\\mathcal S}=F_{\\bar z}(\\epsilon_{\\mathcal S})\\circ s_{B\\mathcal S}:F_{\\bar y}(\\mathcal S)\\xrightarrow{\\sim}F_{\\bar z}(\\mathcal S).$$\nThe identification $UB=F_{\\bar y}$ is that in [thm-galois-fundamental]. Naturality of $s$ and $\\epsilon$ proves naturality of $t$, and both factors are bijective. This proves existence without choosing points separately in the different stalks.",
+   "uses": [
+    "lem-wf-exact-finite-gsets-forgetful",
+    "thm-galois-fundamental"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Lemma 0BN5, first sentence of proof, using Lemma 0BMV; Theorem 0BND (2)"
+   }
+  },
+  {
+   "text": "Now fix any natural isomorphism $t$. Composition gives a natural automorphism $c_t(g)=tgt^{-1}$ of $F_{\\bar z}$. It preserves products in the group, and $c_{t^{-1}}$ is its inverse. To check continuity use the topology in [def-galois-fibre-functor] on a common small skeleton of $\\mathcal C$. At an object $\\mathcal S$ the target evaluation is\n$$g\\longmapsto t_{\\mathcal S}g_{\\mathcal S}t_{\\mathcal S}^{-1}.$$\nIt factors through source evaluation into a finite discrete permutation group, followed by conjugation between finite discrete permutation groups. It is continuous, so the map into the product and its induced-subspace factor $c_t$ are continuous. The same calculation with $t^{-1}$ proves continuity of its inverse. Also $a=t't^{-1}$ is a natural automorphism of $F_{\\bar z}$ and\n$$t'gt'^{-1}=(t't^{-1})(tgt^{-1})(tt'^{-1})=a\\,c_t(g)\\,a^{-1}.$$\nThis proves the asserted topological isomorphism and change-of-path formula.",
+   "uses": [
+    "def-galois-fibre-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Lemma 0BN5, transport of structure and inner-conjugation assertions, with topology calculation written out"
+   }
+  },
+  {
+   "text": "Let $\\mathcal F$ be a lisse finite $A$-module sheaf. Its underlying sheaf and its square are finite locally constant. Naturality of $t$ with respect to the two projections forces $t_{\\mathcal F\\times\\mathcal F}=(t_{\\mathcal F},t_{\\mathcal F})$ under the stalk product identifications. Applying naturality to addition and to each set-sheaf map $x\\mapsto ax$ gives\n$$t_{\\mathcal F}(x+x')=t_{\\mathcal F}(x)+t_{\\mathcal F}(x'),\\qquad t_{\\mathcal F}(ax)=a\\,t_{\\mathcal F}(x).$$\nThus $t_{\\mathcal F}$ is an $A$-linear bijection; naturality for module maps follows from naturality for their underlying set maps. The same construction applies to $t^{-1}$. By [cor-galois-lisse-representations](1), evaluating a loop $g$ on this underlying sheaf is precisely its stipulated stalk action. Evaluating an identity or a composite of paths gives the identity or composite linear map, component by component.",
+   "uses": [
+    "cor-galois-lisse-representations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Theorem 0BND (2), extension to module structures by naturality"
+   }
+  },
+  {
+   "text": "For a finite-ring homomorphism $A\\to A'$ put $\\mathcal F'=A'\\otimes_A\\mathcal F$. The lissity and stalk identifications, including their pure-tensor formulas, are [lem-pod-lisse-tensor-and-scalar-extension](3). For each $b\\in A'$ the map of underlying set sheaves $i_b:\\mathcal F\\to\\mathcal F'$, $x\\mapsto b\\otimes x$, is available to naturality of $t$; it need not be $A$-linear. Hence\n$$t_{\\mathcal F'}(b\\otimes x)=b\\otimes t_{\\mathcal F}(x).$$\nAdditivity extends this equality to sums of pure tensors, which generate scalar extension. This is the asserted coefficient compatibility, including noncommutative finite rings. For two successive coefficient maps both composites send $c\\otimes(b\\otimes x)$ to $cb\\otimes t_{\\mathcal F}(x)$, so the coefficient comparisons are coherent. Identity and composite paths satisfy the same equality.",
+   "uses": [
+    "lem-pod-lisse-tensor-and-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Finite scalar extension: naturality and the stalk scalar-extension formula; Stacks sites-modules lemma-tensor-product-pullback"
+   }
+  },
+  {
+   "text": "Assume now the additional Noetherian, separated and invertibility hypotheses, exactly as in [def-pod-lisse-l-adic-sheaves]. For an integral lisse system $\\mathcal F=(\\mathcal F_n)$ put\n$$T_{\\mathcal F}((x_n)_n)=(t_{\\mathcal F_n}(x_n))_n.$$\nThe transition maps are maps of underlying finite locally constant set sheaves, even though their coefficient rings vary. Naturality of $t$ therefore makes the displayed family compatible. The same construction using $t^{-1}$ is inverse to it. Scalar multiplication by $b\\in\\mathcal O_E$ reduces to multiplication by its image in each $A_{E,n}$, so the finite-level linearity proves $\\mathcal O_E$-linearity. For a compatible family $u_n$, naturality is the equality $t_{\\mathcal G_n}(u_nx_n)=u_n(t_{\\mathcal F_n}x_n)$ at every $n$. The integral fibre and its maps are precisely the inverse-limit functor of [def-pod-lisse-adic-fibre-functors](1). Identities and composition of paths hold at every coordinate, hence on the inverse limit.",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves",
+    "def-pod-lisse-adic-fibre-functors"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "Weil II (1.1.1) b), p.146: compatible finite-level systems and their fibres"
+   }
+  },
+  {
+   "text": "For $E\\subset L$ use the scalar extension prescribed in [def-pod-lisse-l-adic-sheaves](3). Its level $m$ is $\\mathcal F_n\\otimes_{A_{E,n}}A_{L,m}$, with $n=\\lceil m/e\\rceil$ and $e$ the ramification index. The finite scalar formula proved above identifies its path map with $1\\otimes t_{\\mathcal F_n}$. The fibre scalar comparisons at both geometric points are the ones supplied by [cor-galois-lisse-representations](2). To check their compatibility with path maps, project the extended integral fibre to its level $m$: on a pure tensor $b\\otimes(x_j)_j$ both routes give $b\\otimes t_{\\mathcal F_n}(x_n)$. Additivity gives equality on the whole scalar-extended module, and equality of every inverse-limit coordinate proves equality of the maps. For successive extensions this calculation again gives the same iterated pure tensor, independently of the reindexing. Thus the integral path maps commute with scalar extension, including ramified extensions.",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves",
+    "cor-galois-lisse-representations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "Weil II (1.1.1) b), d), pp.146-147: finite-level coefficient extensions"
+   }
+  },
+  {
+   "text": "For a lisse $E$-sheaf represented by $\\mathcal F\\otimes E$, define its path map to be $T_{\\mathcal F}\\otimes1_E$. A rational morphism is a finite sum of tensors $a\\otimes u$ in the Hom module of [def-pod-lisse-l-adic-sheaves](2). The fibre functor sends this to the same linear combination of the integral fibre maps by [def-pod-lisse-adic-fibre-functors](2). Integral naturality therefore implies naturality for every rational morphism, including rational isomorphisms between different integral models. This makes the construction independent of any presentation up to its canonical isomorphism. It is an $E$-linear isomorphism, its inverse is the rationalized map for $t^{-1}$, and identities, composition of paths and scalar extension follow by tensoring the already proved equalities.",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves",
+    "def-pod-lisse-adic-fibre-functors"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "Weil II (1.1.1) c), p.147: rationalized Hom spaces"
+   }
+  },
+  {
+   "text": "For a model $(E,\\mathcal F)$ of a lisse $\\overline{\\mathbf Q}_\\ell$-sheaf, define\n$$t_{(E,\\mathcal F)}=t_{\\mathcal F}\\otimes1_{\\overline{\\mathbf Q}_\\ell}.$$\nBy [def-pod-lisse-l-adic-sheaves](4), a morphism of models is represented over a common finite extension $L$; the algebraic fibre functor is scalar extension of the rational one by [def-pod-lisse-adic-fibre-functors](3). The finite-extension compatibility just proved identifies the two model path maps with their extensions to $L$. Rational naturality over $L$ gives the required square. Passing to a larger common field preserves that equality, so it descends to the colimit Hom space. The same argument proves compatibility with scalar extension and composition, and the inverse is induced by $t^{-1}$. This proves all the asserted functorialities at the algebraic coefficient level.",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves",
+    "def-pod-lisse-adic-fibre-functors"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "Weil II (1.1.1) d), p.147: coefficient 2-colimit"
+   }
+  },
+  {
+   "text": "For a finite lisse module sheaf evaluate the equality $c_t(g)=tgt^{-1}$ at its underlying set sheaf. By the evaluation-action description in [cor-galois-lisse-representations](1) this gives\n$$t_{\\mathcal F}\\rho_{\\bar y}(g)t_{\\mathcal F}^{-1}=\\rho_{\\bar z}(c_t(g)).$$\nLikewise $t'=a t$ evaluates to $(t')_{\\mathcal F}=\\rho_{\\bar z}(a)t_{\\mathcal F}$. Part (2) of that node specifies the integral actions by the finite-level actions and the rational and algebraic actions by their coefficient extensions. Apply these finite equalities at every level, then to the inverse-limit tuples, and then tensor with $E$ and $\\overline{\\mathbf Q}_\\ell$. Each operation preserves equality of maps and their composites. The resulting identities are exactly the two displayed adic identities of the statement, with the conjugating element in $\\pi_z$.",
+   "uses": [
+    "cor-galois-lisse-representations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/pione.tex",
+    "place": "Theorem 0BND (2); Weil II (1.1.1) b)-d) and the stipulated stalk actions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "thm-galois-fundamental",
+  "lem-fet-galois-category",
+  "def-galois-category",
+  "thm-galois-lc-etale",
+  "lem-galois-equivalence-preserves-limits",
+  "lem-wf-exact-finite-gsets-forgetful",
+  "def-galois-fibre-functor",
+  "cor-galois-lisse-representations",
+  "lem-pod-lisse-tensor-and-scalar-extension",
+  "def-pod-lisse-l-adic-sheaves",
+  "def-pod-lisse-adic-fibre-functors"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/pione.tex",
+  "place": "Theorem 0BND (2) via Lemmas 0BN5 and 0BMV; explicit module and adic extension following Weil II (1.1.1) b)-d), pp.146-147"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -55,10 +191,80 @@
    "results": "8 hits: CategoryTheory.Grothendieck.transportIso, CategoryTheory.PreGaloisCategory.toAutMulEquiv_apply, CategoryTheory.PreGaloisCategory.autIsoFibers, CategoryTheory.PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat, CategoryTheory.PreGaloisCategory.evaluationEquivOfIsGalois_symm_fiber, FundamentalGroup.mapOfEq, CategoryTheory.PreGaloisCategory.autIsoFibers_inv_app, CategoryTheory.PreGaloisCategory.toAutHomeo_apply",
    "date": "2026-10-18",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Any two fibre functors on a Galois category are naturally isomorphic; transport finite and lisse adic stalks along a path",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.FibreFunctor.end_isIso, CategoryTheory.PreGaloisCategory.instFiberFunctorGetFiberFunctor, CategoryTheory.PreGaloisCategory.autIsoFibers, CategoryTheory.GaloisCategory.hasFiberFunctor, CategoryTheory.PreGaloisCategory.connected_component_unique, CategoryTheory.PreGaloisCategory.GaloisCategory.getFiberFunctor, CategoryTheory.PreGaloisCategory.evaluationEquivOfIsGalois_symm_fiber, CategoryTheory.PreGaloisCategory.instIsFundamentalGroupAutFunctorFintypeCat",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "nonempty_iso_of_fiberFunctor|second.*[Ff]iber|iso.*[Ff]iberFunctor",
+   "results": "0 hits: ; grep scoped to Mathlib/CategoryTheory/Galois",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two fibre functors on a Galois category are naturally isomorphic",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.instFiberFunctorGetFiberFunctor, CategoryTheory.PreGaloisCategory.autIsoFibers, CategoryTheory.PreGaloisCategory.PointedGaloisObject.congr_simp, CategoryTheory.GaloisCategory.hasFiberFunctor, CategoryTheory.PreGaloisCategory.FiberFunctor.reflectsIsos, CategoryTheory.Functor.Fiber.inducedFunctorCompIsoSelf, CategoryTheory.Grothendieck.preNatIso, CategoryTheory.PreGaloisCategory.FiberFunctor",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.PreGaloisCategory.nonempty_iso_of_fiberFunctor",
+   "results": "0 hits: . loogle: unknown identifier 'CategoryTheory.PreGaloisCategory.nonempty_iso_of_fiberFunctor'",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "second.*fundamental|nonempty.*iso|[Ff]iberFunctor|[Ff]orget",
+   "results": "25 hits: Mathlib/CategoryTheory/Galois/Examples.lean, Mathlib/CategoryTheory/Galois/Examples.lean, Mathlib/CategoryTheory/Galois/Examples.lean, Mathlib/CategoryTheory/Galois/Examples.lean, Mathlib/CategoryTheory/Galois/Examples.lean, Mathlib/CategoryTheory/Galois/Decomposition.lean, Mathlib/CategoryTheory/Galois/Decomposition.lean, Mathlib/CategoryTheory/Galois/Decomposition.lean; grep scoped to Mathlib/CategoryTheory/Galois",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact functor from finite continuous group actions to finite sets is isomorphic to the forgetful functor",
+   "results": "8 hits: GrpCat.forget_isCorepresentable, Action.forget, ProfiniteGrp.instReflectsIsomorphismsForget, Action.functorCategoryEquivalenceCompEvaluation, Action.instPreservesFiniteColimitsForgetOfHasFiniteColimits, GrpCat.forget_preservesLimits, CategoryTheory.FintypeCat.instPreservesFiniteLimitsActionFintypeCatForget, GrpCat.forget_reflects_isos",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "ContAction, FintypeCat",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.functorToContAction, CategoryTheory.PreGaloisCategory.instEssSurjContActionFintypeCatFunObjFiniteAutFunctorFunctorToContAction, CategoryTheory.PreGaloisCategory.instEssSurjContActionFintypeCatFunObjFiniteAutFunctorFunctorToContActionOfFiberFunctor, CategoryTheory.PreGaloisCategory.instFaithfulContActionFintypeCatFunObjFiniteAutFunctorFunctorToContAction, CategoryTheory.PreGaloisCategory.instFullContActionFintypeCatFunObjFiniteAutFunctorFunctorToContAction, CategoryTheory.PreGaloisCategory.instIsEquivalenceContActionFintypeCatFunObjFiniteAutFunctorFunctorToContAction, CategoryTheory.PreGaloisCategory.functorToContAction_obj_obj, CategoryTheory.PreGaloisCategory.functorToContAction_map",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact finite-set-valued functor on finite continuous G sets is naturally isomorphic to the forgetful functor",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.functorToContAction_obj_obj, CategoryTheory.PreGaloisCategory.functorToAction_comp_forget₂_eq, CategoryTheory.FintypeCat.instFiberFunctorActionFintypeCatForget, CategoryTheory.FintypeCat.instFiberFunctorActionFintypeCatForget₂, CategoryTheory.PreGaloisCategory.instIsEquivalenceContActionFintypeCatAutFunctorFunctorToContAction, CategoryTheory.PreGaloisCategory.functorToContAction, CategoryTheory.Functor.mapContActionComp, CategoryTheory.PreGaloisCategory.functorToContAction_map",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniqueness up to natural isomorphism of an exact finite valued functor on the category of finite continuous G sets",
+   "results": "8 hits: CategoryTheory.Functor.CorepresentableBy.uniqueUpToIso, CategoryTheory.ExactFunctor.of, CategoryTheory.WithInitial.liftUnique, CategoryTheory.WithTerminal.liftUnique, CategoryTheory.WithTerminal.liftToTerminalUnique, CategoryTheory.Localization.isoUniqFunctor, CategoryTheory.WithInitial.liftToInitialUnique, CategoryTheory.Mat_.ext",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "isomorph.*functor|functor.*isomorph|nonempty.*[Ii]so",
+   "results": "3 hits: Mathlib/CategoryTheory/Galois/Prorepresentability.lean, Mathlib/CategoryTheory/Galois/Prorepresentability.lean, Mathlib/CategoryTheory/Galois/Action.lean; grep scoped to Mathlib/CategoryTheory/Galois",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "def-wf-fundamental-representation",
@@ -75,5 +281,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-wf-fibre-functor-basepoint-transport",
+  "worker": "stage1",
+  "summary": "Constructed the finite-set path through the existing fundamental-group equivalence and the general exact-functor lemma 0BMV. Wrote out continuity, linearity, finite scalar extension, inverse-limit transport, ramified integral scalar compatibility, rationalized morphisms, coefficient-colimit descent and the two action identities. Statement unchanged; one statement-only source lemma, no Mathlib leaves.",
+  "blueprint": "Realizes the finite and adic stalk transport and change-of-base-point assertions of def-wf-fundamental-representation in sk-d-geometry; this auxiliary item does not realize the geometry unit statement. All coefficient constructions use the existing lisse-adic conventions. Whole-DAG and blueprint searches found no duplicate.",
+  "tool_uses": [
+   {
+    "node": "thm-galois-fundamental",
+    "why": "Gives the generic equivalence of finite locally constant sheaves with finite fundamental-group sets needed to construct a path; the affine geometry unit has no Galois-category result."
+   },
+   {
+    "node": "lem-fet-galois-category",
+    "why": "Step 1 takes from its statement that (FEt(Y),F_z) is a Galois category, hence F_z is exact and finite-valued, for the second geometric point; the affine geometry unit has no Galois-category result."
+   },
+   {
+    "node": "thm-galois-lc-etale",
+    "why": "Identifies finite etale covers and finite locally constant sheaves compatibly with their fibres, for exactness of the stalk functor."
+   },
+   {
+    "node": "cor-galois-lisse-representations",
+    "why": "Specifies the finite and adic stalk actions and coefficient comparisons; the item proves compatibility with paths for those fixed actions."
+   },
+   {
+    "node": "lem-pod-lisse-tensor-and-scalar-extension",
+    "why": "Supplies the lissity and explicit stalk formula for finite scalar extension needed for the naturality calculation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "thm-galois-fundamental",
+  "lem-fet-galois-category",
+  "thm-galois-lc-etale",
+  "cor-galois-lisse-representations",
+  "lem-pod-lisse-tensor-and-scalar-extension"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NF-071444256",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-071444256 (reviewer sub-agent of L); spot-checked: Read in full: the item (10 steps), the new node lem-wf-exact-finite-gsets-forgetful, every cited statement, Stacks pione.tex 0BMV (280-349), 0BN5 (672-703), 0BND(2) and Weil II (1.1.1) b)-d) pp.146-147. The new node is exactly 0BMV (any topological group, exact and finite-valued H, no conservativity assumed). It is statement-only, strictly smaller than the item and duplicated nowhere in the DAG. Small cases checked: trivial G, finite G, H=U. All steps check. Step 2 composes the counit correctly: t=F_z(eps) after s_B. Step 3 gives c_{t'}=Int(a)c_t with a in pi_z. Steps 4-5 get linearity from naturality along set maps, which is valid for noncommutative A; finite scalar extension uses lem-pod(3). Steps 6-9 are levelwise, ramified (n=ceil(m/e)), rational and colimit transport with no limit/stalk interchange. Step 10 gives both action identities from cor-galois-lisse-representations. Step 7 cites cor(2) loosely for the canonical comparison map but the argument does not depend on it. Hypotheses: connectedness alone for the finite part; Noetherian, separated and ell invertible only for the adic part. Statement unchanged and not weakened. lem-real-lisse-path-fibres overlaps but is an existing, stronger-hypothesis node of another unit, not a duplicate created here. Batch-5 check: lem-pod-lisse-tensor-and-scalar-extension (closure 68 nodes: stalk, sheafification and tensor lemmas only) and def-pod-lisse-adic-fibre-functors (a definition whose closure is definitions only) reach no trace-formula or Poincare-duality statement, assumption leaf or batch-4 target. Both are general lisse-sheaf infrastructure outside the assumed statements, so both are accepted. FIX: step 1 used lem-fet-galois-category (an sk-prop-h2 statement) without declaring it; I added it to split_report.tool_uses in fixes/dag/nodes/sec-algebraic-groups-lie-algebras/lem-wf-fibre-functor-basepoint-transport.json, with nothing else changed. Accepted tool_uses: thm-galois-fundamental, lem-fet-galois-category, thm-galois-lc-etale, cor-galois-lisse-representations, lem-pod-lisse-tensor-and-scalar-extension.; 1 file(s) fixed by the reviewer"
  }
 }

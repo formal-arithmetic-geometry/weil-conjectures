@@ -2,7 +2,7 @@
  "id": "def-pur-regular-section",
  "kind": "definition",
  "title": "Regular sections and transverse direct sums",
- "statement": "In the finite setting [def-pur-conventions], let $T$ be a separated finite-type $k$-scheme and $F$ a locally free $\\mathcal O_T$-module of constant rank $r\\geq0$ [def-amb-finite-locally-free-module]. Write $E(F)=\\underline{\\operatorname{Spec}}_T\\operatorname{Sym}(F^\\vee)$, with zero section $z$, in the convention [def-pur-vector-bundle-zero-section]. A section $s$ means an element of $\\Gamma(T,F)$, equivalently the $T$-morphism $s:T\\to E(F)$ induced by evaluation $\\operatorname{Sym}(F^\\vee)\\to\\mathcal O_T$. Its zero scheme is $Z(s)=T\\times_{E(F),s,z}T$; its ideal is the image of $F^\\vee\\xrightarrow{s}\\mathcal O_T$. The section is regular if for every $t\\in Z(s)$ there is a local frame of $F$ at $t$ in which its $r$ components form an $\\mathcal O_{T,t}$-regular sequence [def-weil-pbc-regular-sequence]. Thus each component acts injectively modulo its predecessors, and the final quotient at $t$ is nonzero. No smoothness of $T$ or of $Z(s)$ over $k$ is part of this condition. The condition at an empty zero locus is vacuous. In rank zero the empty section has $Z(s)=T$.\n\nFor regular sections $s$ of $F$ and $t$ of $G$, a transverse direct sum means that in local frames at every point of $Z(s)\\cap Z(t)$ the concatenated components of $(s,t)$ form a regular sequence. Its zero scheme is the scheme-theoretic intersection $Z(s)\\times_TZ(t)$.",
+ "statement": "In the finite setting [def-pur-conventions], let $T$ be a separated finite-type $k$-scheme and $F$ a locally free $\\mathcal O_T$-module of constant rank $r\\geq0$ [def-amb-finite-locally-free-module]. Put $F^\\vee=\\mathcal Hom_{\\mathcal O_T}(F,\\mathcal O_T)$, using the ordinary sheaf Hom [def-pur-sheaf-hom] on the Zariski site. Thus over an open $U$ its sections are $\\mathcal O_U$-linear maps $F|_U\\to\\mathcal O_U$. A frame $F|_U\\cong\\mathcal O_U^{\\oplus r}$ gives the dual frame by the coordinate projections, so $F^\\vee|_U\\cong\\mathcal O_U^{\\oplus r}$. Write $E(F)=\\underline{\\operatorname{Spec}}_T\\operatorname{Sym}(F^\\vee)$ with projection $p$ and zero section $z$, by [def-pur-vector-bundle-zero-section] applied to the locally free module $F^\\vee$ (not $F$).\n\nA section $s$ means an element of $\\Gamma(T,F)=F(T)$. Define $\\operatorname{ev}_s:F^\\vee\\to\\mathcal O_T$ on $U$ by $\\lambda\\mapsto\\lambda(s|_U)$. The unique algebra map $\\operatorname{Sym}(F^\\vee)\\to\\mathcal O_T$ extending $\\operatorname{ev}_s$ is given by [lem-weil-pbc-quasi-coherent-symmetric-algebra-core]; under [lem-weil-pbc-affine-morphism-relative-spec](3) it defines a $T$-morphism, also written $s:T\\to E(F)$. Conversely such a morphism gives a linear map $F^\\vee\\to\\mathcal O_T$; in a frame this map has the values $a_1,\\ldots,a_r$ on the dual basis and hence gives the section $\\sum_i a_i e_i$. On overlaps this expression is characterized by $\\lambda(s)=\\operatorname{ev}_s(\\lambda)$ for all dual sections, so it agrees and glues. This identifies sections of $F$ with sections of $p$.\n\nDefine the zero scheme by the fibre product [def-pc-fibre-product]\n$$\nZ(s)=T\\times_{E(F),s,z}T,\n$$\nwith its morphism to $T$. Its ideal sheaf is the image of $\\operatorname{ev}_s$. More explicitly, on an affine frame open $U=\\operatorname{Spec}A$ [def-weil-affine-spectrum], with $s|_U=\\sum_i a_i e_i$, the symmetric algebra has coordinates $A[x_1,\\ldots,x_r]$ by [lem-weil-pbc-quasi-coherent-symmetric-algebra-affine] and [lem-weil-pbc-symmetric-algebra-free-module-polynomial]. The section and zero section send $x_i$ to $a_i$ and $0$, respectively. By [lem-weil-pbc-fibre-product-affine-spectra] their fibre product has ring\n$$\nA\\otimes_{A[x_1,\\ldots,x_r]}A\\cong A/(a_1,\\ldots,a_r).\n$$\nIndeed the tensor relations equate $a_i\\otimes1$ with $1\\otimes0$, and the mutually inverse maps send $a\\otimes b$ to $ab$ modulo $(a_1,\\ldots,a_r)$ and $\\bar a$ to $a\\otimes1$. Its ideal is $(a_1,\\ldots,a_r)$, also the image of evaluation on the dual basis. These quotient charts show that $Z(s)\\to T$ is a closed immersion by [lem-weil-pbc-closed-immersion-affine-cover-criterion](2).\n\nThe section is regular if for every $x\\in Z(s)$ there is a local frame of $F$ at $x$ in which its $r$ component germs form an $\\mathcal O_{T,x}$-regular sequence [def-weil-pbc-regular-sequence]: multiplication by each germ on the quotient by its predecessors is injective, and the final quotient is nonzero. No smoothness of $T$ or of $Z(s)$ over $k$ is part of this condition. The condition at an empty zero locus is vacuous. In rank zero $E(F)=T$, the unique section is zero, and $Z(s)=T$; its empty component sequence is regular at every point since a local ring at a scheme point is nonzero.\n\nLet $G$ also be locally free of constant rank $e\\geq0$, and let $s$ of $F$ and $t$ of $G$ be regular sections. A transverse direct sum means that at every $x\\in Z(s)\\cap Z(t)$ there are local frames of $F$ and $G$ in which the concatenated component germs of $(s,t)$ form an $\\mathcal O_{T,x}$-regular sequence. The direct sum is the sheaf with sections $F(U)\\oplus G(U)$ on each open $U$. Its zero scheme is the scheme-theoretic intersection, meaning the fibre product $Z(s)\\times_TZ(t)$. In simultaneous affine frames the components are $a_1,\\ldots,a_r,b_1,\\ldots,b_e$ and both schemes have ring $A/(a_1,\\ldots,a_r,b_1,\\ldots,b_e)$: by [lem-weil-pbc-fibre-product-affine-spectra] the intersection ring is $A/(a_i)\\otimes_A A/(b_j)$, with the same multiplication and $\\bar a\\mapsto\\bar a\\otimes1$ inverse maps. These identifications are induced by the fibre-product projections and therefore agree on overlaps.",
  "source": {
   "document": "literature/stacks-project/divisors.tex",
   "place": "Tag 067M, section-regular-ideal-sheaves; regular-section convention serving the theorem hypotheses and (L3)"
@@ -10,9 +10,17 @@
  "stmt_deps": [
   "def-pur-conventions",
   "def-amb-finite-locally-free-module",
+  "def-pur-sheaf-hom",
   "def-pur-vector-bundle-zero-section",
-  "def-weil-pbc-regular-sequence",
-  "def-pc-fibre-product"
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra-core",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "def-pc-fibre-product",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra-affine",
+  "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-closed-immersion-affine-cover-criterion",
+  "def-weil-pbc-regular-sequence"
  ],
  "proof": [],
  "proof_deps": [],
@@ -45,10 +53,52 @@
    "results": "{\"t\": \"2026-10-18T02:15:51Z\", \"tool\": \"leansearch\", \"query\": \"A regular vector bundle section has components forming a regular sequence in each local ring at its zero locus\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalFrameOn.coeff_apply_zero_at\", \"Bundle.mdifferentiableAt_zeroSection\", \"Bundle.mdifferentiableOn_zeroSection\", \"AlgebraicGeometry.RingedSpace.zeroLocus\", \"Bundle.mdifferentiableWithinAt_zeroSection\", \"IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal\", \"Bundle.mdifferentiable_zeroSection\", \"Bundle.contMDiffAt_zeroSection\"], \"digest\": \"7cafc9b4e53dcb0e\"}",
    "date": "2026-10-18",
    "verdict": "no match: hits concern different notions; none states this supported-cohomology or scheme-theoretic construction."
+  },
+  {
+   "tool": "grep",
+   "query": "regularSection|regular_section|transvers.*section|section.*regularSequence",
+   "results": "{\"t\": \"2026-10-18T02:35:13Z\", \"tool\": \"grep\", \"query\": \"regularSection|regular_section|transvers.*section|section.*regularSequence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no declarations returned."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Zero scheme of a section of a finite locally free sheaf via the dual evaluation ideal",
+   "results": "{\"t\": \"2026-10-18T02:35:13Z\", \"tool\": \"leansearch\", \"query\": \"Zero scheme of a section of a finite locally free sheaf via the dual evaluation ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.zeroLocus\", \"AlgebraicGeometry.RingedSpace.zeroLocus\", \"AlgebraicGeometry.Scheme.evaluation\", \"AlgebraicGeometry.Scheme.IdealSheafData.coe_support_ofIdealTop\", \"AlgebraicGeometry.Spec_zeroLocus\", \"AlgebraicGeometry.Scheme.zeroLocus_def\", \"AlgebraicGeometry.Scheme.evaluation_ne_zero_iff_mem_basicOpen\", \"AlgebraicGeometry.Scheme.zeroLocus_isClosed\"], \"digest\": \"5e793763a3dbd9aa\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: zeroLocus is a set of points and evaluation evaluates structure-sheaf sections in residue fields; neither is this scheme-theoretic regular-section construction."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRegular\", \"Scheme\"",
+   "results": "{\"t\": \"2026-10-18T02:35:14Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsRegular\\\", \\\"Scheme\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: no declarations returned."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Regular sections of algebraic vector bundles defined by regular sequences in local rings and transverse direct sums",
+   "results": "{\"t\": \"2026-10-18T02:35:14Z\", \"tool\": \"leanfinder\", \"query\": \"Regular sections of algebraic vector bundles defined by regular sequences in local rings and transverse direct sums\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalizedModule_of_mem\", \"ModuleCat.Tilde.exists_const\", \"RingTheory.Sequence.IsWeaklyRegular.isRegular_of_isLocalization_of_mem\", \"RingTheory.Sequence.IsRegular.ndrecIterModByRegularWithRing\", \"ModuleCat.Tilde.const\", \"RingTheory.Sequence.IsRegular.recIterModByRegularWithRing\", \"RingTheory.Sequence.IsWeaklyRegular.regular_mod_prev\", \"IsLocalRing.isRegular_iff_isWeaklyRegular_of_subset_maximalIdeal\"], \"digest\": \"b579ff33f4d55975\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: regular-sequence module lemmas do not define regular sections of locally free sheaves or transverse direct sums."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A section of a finite locally free module defines an evaluation map from its dual and a closed subscheme cut out by the component ideal",
+   "results": "{\"t\": \"2026-10-18T02:35:30Z\", \"tool\": \"leanfinder\", \"query\": \"A section of a finite locally free module defines an evaluation map from its dual and a closed subscheme cut out by the component ideal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal\", \"PrimeSpectrum.exists_image_comap_of_finite_of_free\", \"AlgebraicGeometry.Scheme.IdealSheafData.mkOfMemSupportIff_ideal\", \"AlgebraicGeometry.Scheme.IdealSheafData.glueDataObj\", \"AlgebraicGeometry.specTargetImageIdeal\", \"AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι_ι\", \"AlgebraicGeometry.Scheme.IdealSheafData.ofIdealTop\", \"AlgebraicGeometry.Scheme.IdealSheafData.range_glueDataObjι\"], \"digest\": \"c59e5a7a35d4c87b\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: general ideal-sheaf data and affine quotient charts do not define the vector-bundle section, its evaluation ideal, regularity and transversality."
+  },
+  {
+   "tool": "grep",
+   "query": "IsRegular|zeroLocus|IdealSheafData",
+   "results": "{\"t\": \"2026-10-18T02:35:30Z\", \"tool\": \"grep\", \"query\": \"IsRegular|zeroLocus|IdealSheafData\", \"sub\": \"AlgebraicGeometry/\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean\", \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"Mathlib/AlgebraicGeometry/OpenImmersion.lean\", \"Mathlib/AlgebraicGeometry/Scheme.lean\", \"Mathlib/AlgebraicGeometry/Scheme.lean\", \"Mathlib/AlgebraicGeometry/Scheme.lean\", \"Mathlib/AlgebraicGeometry/Scheme.lean\", \"Mathlib/AlgebraicGeometry/Scheme.lean\"], \"digest\": \"810bf71fe7908cb5\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: general ideal-sheaf data and affine quotient charts do not define the vector-bundle section, its evaluation ideal, regularity and transversality."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-pur-localized-top-chern",
@@ -60,10 +110,25 @@
  "blueprint": {
   "from": {
    "node": "thm-pur-localized-top-chern",
-   "place": "Tag 067M, section-regular-ideal-sheaves; regular-section convention serving the theorem hypotheses and (L3)",
+   "place": "Statement: regular section and zero scheme; property (L3): transverse direct sum; proof Step 3: components in a local trivialization of F (main-20261015 thm-pur-localized-top-chern).",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "def-pur-regular-section",
+  "worker": "stage1",
+  "summary": "Definition split using thirteen existing nodes, no new nodes. Made ordinary sheaf dual, evaluation algebra map, relative-Spec variance and section correspondence explicit. Wrote affine quotient and intersection calculations and cited the affine closed-immersion criterion. Preserved stalkwise regularity, the nonzero final quotient, singular bases, vacuous empty zero loci and rank zero. Six fresh logged Mathlib searches give no complete match; project-source searches give no attachment.",
+  "blueprint": "Makes precise the regular-section and transverse-direct-sum terminology in the current main-20261015 localized-top-Chern statement and L3, and the local component description of its proof Step 3. This is a definition: proof and proof_deps remain empty. The proof route and unit realization are unchanged."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-N8-148e87189",
+  "group": "N8",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-148e87189 (reviewer sub-agent of L); spot-checked: I read all of it: the item, all 13 stmt_deps statements, the parent thm-pur-localized-top-chern (statement and Steps 1-11), the main-20261015 blueprint statement, L3 and proof Step 3, and Stacks divisors.tex 067M (l.4514), 01WY (l.2778) and 02OQ (l.2818). The convention E(F)=Spec Sym(F^dual) is correct and matches parent Step 2. The section-to-T-morphism correspondence correctly uses the symmetric-algebra universal property and the relative-Spec anti-equivalence (3). I checked by hand that A tensored over A[x] with A is A/(a): the map is balanced because p(a) agrees with p(0) modulo (a), and the inverse is well defined. The closed immersion follows from the affine-cover criterion (2). Regularity is stalkwise at points of Z(s) using def-weil-pbc-regular-sequence. It agrees with Stacks 01WY/067M in rank one and needs no smoothness. That fits the parent's Steps 5-8: Z(s)=T x_E z(T), rank-one components are nonzerodivisors, the tautological section is regular, and the direct sum's zero section is the intersection. Transverse sum means (s,t) is regular in a split frame; I checked the ring A/(a) tensor A/(b) = A/(a,b). Small cases: rank 0; (x,y) on A^2; xy e1 + x e2 is rejected; x+y on the node xy=0 is regular with a nonreduced zero scheme; epsilon on k[epsilon] is rejected; empty zero locus; (x),(x) is not transverse. There are no new nodes, so no D1/D2 issue. rg over dag/nodes and a blueprint grep found no duplicate: def-pc-zero-scheme covers invertible sheaves only, and the regular-immersion definitions are about immersions. same_as=[] is correct and there is no cycle. No tool_uses and no fixes. Minor, non-blocking: source.document is still Stacks 067M with the current blueprint place in blueprint.from.place, and lean_audit/merged_into keys are absent, as on the sibling Q80 nodes."
  }
 }

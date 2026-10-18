@@ -15,9 +15,140 @@
   "def-pd-descent-datum",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $a:V\\to X$ for the structure morphism and put $R=V\\times_S X$, $s=\\operatorname{pr}_V:R\\to V$, and $t=\\operatorname{pr}_V\\circ\\varphi:R\\to V$. The map $s$ is the base change of $p$ along $V\\to S$; via $\\varphi$, so is $t$. Since $X$ and $S$ are affine, [lem-weil-pbc-morphism-affine-schemes-affine] makes $p$ affine. Thus [lem-weil-pbc-affine-morphism-permanence](1),(3) and [lem-weil-pbc-flat-morphism-base-change] show that $s,t$ are affine, quasi-compact and flat. By [lem-galois-descent-datum-diagonal-identity], the pullback $\\Delta^*\\varphi:V\\to V$ of $\\varphi$ along the diagonal $\\Delta:X\\to X\\times_S X$ is $\\mathrm{id}_V$ (pulling the cocycle back along $X\\to X\\times_S X\\times_S X$ gives $\\alpha=\\alpha\\circ\\alpha$ for this automorphism $\\alpha$). Under the identifications of that node, $\\varphi\\circ(\\mathrm{id}_V,a)=(a,\\mathrm{id}_V)\\circ\\Delta^*\\varphi$. Consequently the map $e:V\\to R$ given by $(\\mathrm{id}_V,a)$ satisfies $s e=t e=\\mathrm{id}_V$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-pd-descent-datum",
+    "lem-galois-descent-datum-diagonal-identity",
+    "lem-weil-pbc-morphism-affine-schemes-affine",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-flat-morphism-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0APF, lemma-cartesian-equivalent-descent-datum, specialized maps s and t; hypotheses of Tags 0APA and 0APB."
+   }
+  },
+  {
+   "text": "For any subset $A\\subset |V|$ put $\\sigma(A)=t(s^{-1}(A))$. For each $z\\in A$, [lem-pd-descent-orbit-saturated] applied to the transport defined by $\\varphi$ gives $s^{-1}(O_z)=t^{-1}(O_z)$ for $O_z=t(s^{-1}(\\{z\\}))$. Since $\\sigma(A)=\\bigcup_{z\\in A}O_z$ and inverse images commute with unions, $s^{-1}(\\sigma(A))=t^{-1}(\\sigma(A))$. Moreover $A\\subset\\sigma(A)$ by the identity section in step 1. These assertions also hold for $A=\\varnothing$. Here the orbit lemma applies to precisely $R=V\\times_S X$ and the target $t$ defined by universal transport, not to an unrelated action.",
+   "uses": [
+    "lem-pd-descent-orbit-saturated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03LO, lemma-constructing-invariant-opens (1), using the existing singleton-orbit interface and unions."
+   }
+  },
+  {
+   "text": "Choose an affine open $Q\\subset V$ containing the prescribed point $v$ by [lem-weil-pbc-affine-opens-basis]. It is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs], and $s^{-1}(Q)$ is quasi-compact by [lem-weil-pbc-quasi-compact-morphism-preimage-qc-open]. Hence $K=\\sigma(Q)$ is quasi-compact: pull any open cover back along the continuous map $t$, choose a finite subcover of $s^{-1}(Q)$, and take its images. Also $K$ is closed under generalization. Indeed, if $y=t(r)\\in K$ and $y'\\leadsto y$, flatness of $t$ and [lem-weil-pbc-flat-generalizations-lift] give $r'\\leadsto r$ with $t(r')=y'$. The open $s^{-1}(Q)$ contains $r'$ because it contains $r$, so $y'\\in K$. Cover $K$ by affine opens of $V$ using the affine basis and take a finite subcover. Each affine open is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs], so their finite union is a quasi-compact open $H\\subset V$ containing $K$. In particular $Q\\subset K\\subset H$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open",
+    "lem-weil-pbc-flat-generalizations-lift",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0APA, lemma-first-observation, quasi-compactness and generalization stability of the saturation; finite affine covering."
+   }
+  },
+  {
+   "text": "Let $Z=|V|\\setminus H$ and $T=\\sigma(Z)$. Step 2 gives $Z\\subset T$ and $s^{-1}(T)=t^{-1}(T)$. The subsets $K$ and $T$ are disjoint: if $y=t(r)$ were in both with $s(r)\\in Z$, invariance of $K$ would give $s(r)\\in K\\subset H$, a contradiction. The subset $s^{-1}(Z)$ is closed. By [lem-weil-pbc-closed-subset-closed-subscheme] choose a closed immersion $j:C\\to R$ with exactly this image. The morphism $h=t\\circ j:C\\to V$ is affine: for each affine open $L\\subset V$, $t^{-1}(L)$ is affine, and [def-weil-closed-immersion] makes $j^{-1}(t^{-1}(L))$ affine. This is the affine-morphism definition [pqf-def-affine-morphism]. By [lem-weil-pbc-affine-morphism-permanence](3), $h$ is quasi-compact and its image is $T$. Therefore [lem-sc-picard-closure-specialization] gives, for every $y\\in B=\\overline T$, a point $y'\\in T$ with $y'\\leadsto y$. No constructibility or finite-presentation hypothesis on $T$ is needed.",
+   "uses": [
+    "lem-weil-pbc-closed-subset-closed-subscheme",
+    "def-weil-closed-immersion",
+    "pqf-def-affine-morphism",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-sc-picard-closure-specialization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0APB, lemma-second-observation, closed subset image; Tag 02JQ, morphisms-lemma-reach-points-scheme-theoretic-image (closure formulation)."
+   }
+  },
+  {
+   "text": "The closed subset $B$ is invariant. If $s(r)=y\\in B$, choose $y'\\in T$ with $y'\\leadsto y$ by step 4. Flatness of $s$ and [lem-weil-pbc-flat-generalizations-lift] give $r'\\leadsto r$ with $s(r')=y'$. Invariance of $T$ implies $t(r')\\in T$, and continuity gives $t(r')\\leadsto t(r)$, hence $t(r)\\in B$. Conversely, starting with $t(r)\\in B$, use the same specialization assertion and flatness of $t$ to lift a generalization into $t^{-1}(T)=s^{-1}(T)$; its image under $s$ specializes to $s(r)$, proving $s(r)\\in B$. Thus $s^{-1}(B)=t^{-1}(B)$. Further, $K\\cap B=\\varnothing$: if $y\\in K\\cap B$, a generalization $y'\\in T$ supplied by step 4 belongs to $K$ by step 3, contradicting $K\\cap T=\\varnothing$. Put $W=V\\setminus B$. It is an invariant open with $v\\in Q\\subset K\\subset W$, and $W\\subset H$ since $Z\\subset T\\subset B$.",
+   "uses": [
+    "lem-weil-pbc-flat-generalizations-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0APB, lemma-second-observation, closure invariance and the open complement; both inclusions written out."
+   }
+  },
+  {
+   "text": "Now put $E=\\sigma(H)$. It is invariant by step 2, and $W\\subset H\\subset E$. Since $H$ is quasi-compact open, [lem-weil-pbc-quasi-compact-morphism-preimage-qc-open] makes $s^{-1}(H)$ quasi-compact, and pulling back an open cover shows that its continuous image $E$ is quasi-compact. If $y=t(r)\\in E$ and $y'\\leadsto y$, [lem-weil-pbc-flat-generalizations-lift] lifts $y'$ to $r'\\leadsto r$; the open $s^{-1}(H)$ contains $r'$, hence $y'\\in E$. Thus $E$ is closed under generalization. The affine basis [lem-weil-pbc-affine-opens-basis] and compactness give a finite union $H_2$ of affine opens of $V$ containing $E$. Each constituent is quasi-compact by [lem-weil-pbc-affine-scheme-qcqs], so this is a quasi-compact open; neither $W$ nor $E$ is asserted quasi-compact open.",
+   "uses": [
+    "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open",
+    "lem-weil-pbc-flat-generalizations-lift",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0APA, lemma-first-observation, applied to H after the bounded invariant open of Tag 0APB."
+   }
+  },
+  {
+   "text": "The open subscheme $H_2$ is quasi-separated. To check this without assuming that intersections of affines are affine, cover $H_2$ by affine opens of $V$ contained in $H_2$, using [lem-weil-pbc-affine-opens-basis]. Their pairwise intersections are quasi-compact by [lem-weil-pbc-quasi-separated-affine-cover-criterion](1) for the given quasi-separated scheme $V$. Clause (2) of that node applied to this cover of $H_2$ proves the assertion. Hence [lem-weil-pbc-qcqs-scheme-spectral] makes $|H_2|$ spectral. The subset $E$ remains quasi-compact in $H_2$ and is closed under generalization there. Its set of generalizations is therefore itself, so [lem-weil-pbc-spectral-generalizations-of-quasi-compact] identifies $E$ with the intersection of all quasi-compact opens of $H_2$ containing $E$. This family is a set and nonempty, since it contains $H_2$. Each member is also open and quasi-compact in $V$: openness composes for open subspaces, and the induced topology on each member is the same. This gives the required nonempty set-indexed family of quasi-compact opens of $V$.",
+   "uses": [
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+    "lem-weil-pbc-qcqs-scheme-spectral",
+    "lem-weil-pbc-spectral-generalizations-of-quasi-compact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0APA, lemma-first-observation, spectral containing open; Tag 094L and Tag 0A31 (lemma-make-spectral-space)."
+   }
+  },
+  {
+   "text": "Finally $s^{-1}(F)=t^{-1}(F)$ is exactly $\\varphi^{-1}(X\\times_S F)=F\\times_S X$ for any subset $F\\subset |V|$, by the definitions of $s$ and $t$. Apply $\\varphi$ to obtain the two asserted equalities for $F=W$ and $F=E$. For $W$ both inverse images are open subschemes, and equality of their underlying opens is equality of the induced open subschemes [def-weil-open-immersion]. For $E$ only subsets are used. Steps 5--7 provide $v\\in W\\subset E$ and the intersection description, so all clauses hold. If $V$ is empty the assertion quantified over $v$ is vacuous.",
+   "uses": [
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 0APF and Tag 0APK, more-groupoids-lemma-ind-quasi-affine, translation to clauses (a),(b)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "def-pd-descent-datum",
+  "lem-galois-descent-datum-diagonal-identity",
+  "lem-weil-pbc-morphism-affine-schemes-affine",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "lem-weil-pbc-flat-morphism-base-change",
+  "lem-pd-descent-orbit-saturated",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-quasi-compact-morphism-preimage-qc-open",
+  "lem-weil-pbc-flat-generalizations-lift",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-closed-subset-closed-subscheme",
+  "def-weil-closed-immersion",
+  "pqf-def-affine-morphism",
+  "lem-sc-picard-closure-specialization",
+  "lem-weil-pbc-quasi-separated-affine-cover-criterion",
+  "lem-weil-pbc-qcqs-scheme-spectral",
+  "lem-weil-pbc-spectral-generalizations-of-quasi-compact",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tags 03LO (lemma-constructing-invariant-opens), 0APA (lemma-first-observation), 0APB (lemma-second-observation); the inclusion Q⊂W⊂H⊂σ(H) implements the application in More Groupoids Tag 0APK."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +188,50 @@
    "results": "0 hits in AlgebraicGeometry",
    "date": "2026-10-18",
    "verdict": "no match: hits concern qcqs restriction and generic open covers, or invariant measures, not invariant neighbourhoods for flat quasi-compact descent groupoids."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a flat quasi compact descent relation on a quasi separated scheme every point has an invariant open neighbourhood inside an invariant intersection of quasi compact opens",
+   "subdirectory": "",
+   "results": "8 hits: AlgebraicGeometry.IsLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.IsZariskiLocalAtTarget.descendsAlong_inf_quasiCompact, AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected returned signatures; generic affine covers, descent of morphism properties, or invariant measure results do not construct the requested invariant neighbourhoods."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"invariant\", \"IsOpen\"",
+   "subdirectory": "",
+   "results": "12 hits: MeasureTheory.measure_isOpen_pos_of_smulInvariant_of_ne_zero, MeasureTheory.measure_isOpen_pos_of_vaddInvariant_of_ne_zero, MeasureTheory.measure_isOpen_pos_of_smulInvariant_of_compact_ne_zero, MeasureTheory.measure_isOpen_pos_of_vaddInvariant_of_compact_ne_zero, MeasureTheory.isOpenPosMeasure_of_addLeftInvariant_of_innerRegular, MeasureTheory.isOpenPosMeasure_of_addLeftInvariant_of_regular, MeasureTheory.isOpenPosMeasure_of_mulLeftInvariant_of_innerRegular, MeasureTheory.isOpenPosMeasure_of_mulLeftInvariant_of_regular",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected returned signatures; generic affine covers, descent of morphism properties, or invariant measure results do not construct the requested invariant neighbourhoods."
+  },
+  {
+   "tool": "grep",
+   "query": "invariant.*open|open.*invariant|groupoid.*quasi",
+   "subdirectory": "AlgebraicGeometry",
+   "results": "0 hits: ",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected returned signatures; generic affine covers, descent of morphism properties, or invariant measure results do not construct the requested invariant neighbourhoods."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A scheme descent datum along a faithfully flat affine cover has invariant open neighbourhoods bounded by invariant intersections of compact opens",
+   "subdirectory": "",
+   "results": "8 hits: AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover, AlgebraicGeometry.QuasiCompactCover.exists_isAffineOpen_of_isCompact, AlgebraicGeometry.Scheme.Cover.gluedCover, AlgebraicGeometry.Scheme.affineOpenCover, AlgebraicGeometry.Scheme.affineCover, AlgebraicGeometry.descendsAlong_isomorphisms_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.QuasiCompactCover.isCompactOpenCovered_of_isAffineOpen, AlgebraicGeometry.Scheme.directedAffineCover",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected returned signatures; generic affine covers, descent of morphism properties, or invariant measure results do not construct the requested invariant neighbourhoods."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Invariant neighbourhood theorem for faithfully flat descent data using saturation and intersections of compact open subsets of a scheme",
+   "subdirectory": "",
+   "results": "8 hits: AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀, AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S, AlgebraicGeometry.exists_map_preimage_le_map_preimage, AlgebraicGeometry.exists_map_eq_top, AlgebraicGeometry.descendsAlong_isOpenImmersion_surjective_inf_flat_inf_quasicompact', AlgebraicGeometry.descendsAlong_universallyOpen_surjective_inf_flat_inf_quasicompact, AlgebraicGeometry.instDescendsAlongSchemeMinMorphismPropertySurjectiveFlatLocallyOfFinitePresentationOfQuasiCompactOfIsZariskiLocalAtTarget",
+   "date": "2026-10-18",
+   "verdict": "no match: inspected returned signatures; generic affine covers, descent of morphism properties, or invariant measure results do not construct the requested invariant neighbourhoods."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-ind-quasi-affine-fpqc-effective-descent",
@@ -83,5 +254,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-fpqc-invariant-intersection-neighbourhoods",
+  "worker": "stage1",
+  "summary": "Proved the invariant neighbourhood construction through source/target maps, singleton orbit saturation and unions, quasi-compact generalization-stable saturations, the invariant closure of the saturated complement, and a spectral-space intersection description. Reused existing nodes for every geometric and topological input; no new nodes or statement change.",
+  "blueprint": "Gabber fpqc descent input to the Loc_X-to-Cov_X construction in Bhatt–Scholze Lemma 7.3.9, p.67, used through lem-a1-proetale-local-system-representability and lem-a1-space-fpqc-separated-valuative-descent. In the Gabber input: Tag 0APK proof, groupoid paragraph and translation (a),(b): construct v in W in E, with W and E invariant.",
+  "tool_uses": [
+   {
+    "node": "lem-pd-descent-orbit-saturated",
+    "why": "Generic singleton transport-orbit saturation; unions give subset saturation. It supplies no invariant open or intersection neighbourhood, and no node of this unit states this relation fact."
+   },
+   {
+    "node": "lem-weil-pbc-spectral-generalizations-of-quasi-compact",
+    "why": "Generic spectral-space description of generalizations of a quasi-compact subset, applied after constructing E. This unit has no replacement topology interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pd-descent-orbit-saturated",
+  "lem-weil-pbc-spectral-generalizations-of-quasi-compact"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NM-b9bc34ffd",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-b9bc34ffd (reviewer sub-agent of L); spot-checked: I read all of the mathematics: the item, the parent's use of it, the statements of all 22 cited nodes, and the Stacks sources (groupoids.tex 03LO/0APA/0APB, more-groupoids.tex 0APK (a),(b), topology 0A31, morphisms 02JQ). The statement matches the 0APK translation exactly, with affine flat surjective p, V quasi-separated, v in W in E, W an open invariant subscheme, and E an intersection of a nonempty family of quasi-compact opens that is set-theoretically invariant. Nothing is weakened. Steps 2-8 are correct and follow 0APA/0APB. The proof writes out the generalization-stability of sigma(Q) and sigma(H), K disjoint from T, both directions of invariance of the closure of T, and K disjoint from that closure (0APB leaves this implicit). It sets W = V minus that closure, with Q in K in W in H in E = sigma(H), and gets the spectral intersection description on the quasi-compact, quasi-separated H2. I checked the edge cases: V empty, p = id, H = V, and V not quasi-compact. There are no new nodes and no duplicates (rg for 0APA/0APB/03LO/0APK and invariant/saturation wording). I accept the two declared tool_uses, orbit-saturated and spectral-generalizations. picard-closure-specialization is closed in Lean, so it is a tool. Fix (C5/C1): step 1 re-derived inline that the diagonal pullback of phi is the identity, which the existing Lean-closed node lem-galois-descent-datum-diagonal-identity states exactly. I added it to step 1's uses and to proof_deps and cut the inline argument down to a gloss, in fixes/dag/nodes/sec-purity-real-sheaves/lem-a1-fpqc-invariant-intersection-neighbourhoods.json.; 1 file(s) fixed by the reviewer"
  }
 }
