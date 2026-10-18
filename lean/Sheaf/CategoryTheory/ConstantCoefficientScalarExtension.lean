@@ -46,7 +46,10 @@ Proof: the underlying functions and equalizer sieves are unchanged by forgetting
 commutativity; the sheafification unit is locally injective. -/
 theorem constantCoefficientUnit_isLocallyInjective (B : Type u) [CommRing B] :
     Presheaf.IsLocallyInjective J (constantCoefficientUnit J B) := by
-  sorry
+  constructor
+  intro X x y h
+  exact Presheaf.equalizerSieve_mem J
+    (toSheafify J ((Functor.const Cᵒᵖ).obj (CommRingCat.of B))) x y h
 
 /-- Forgetting commutativity preserves local surjectivity of the sheafification unit.
 Source: Stacks, Tag 03DA
@@ -55,7 +58,10 @@ Proof: the underlying functions and image sieves are unchanged by forgetting
 commutativity; the sheafification unit is locally surjective. -/
 theorem constantCoefficientUnit_isLocallySurjective (B : Type u) [CommRing B] :
     Presheaf.IsLocallySurjective J (constantCoefficientUnit J B) := by
-  sorry
+  constructor
+  intro X s
+  exact Presheaf.imageSieve_mem J
+    (toSheafify J ((Functor.const Cᵒᵖ).obj (CommRingCat.of B))) s
 
 attribute [instance] constantCoefficientUnit_isLocallyInjective
   constantCoefficientUnit_isLocallySurjective
