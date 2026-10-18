@@ -35,9 +35,89 @@
   "lem-weil-pbc-localization-universal-property",
   "lem-weil-pbc-exact-functor-bounded-below"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For s = pullback.lift j₁ (id X), the projection identities are s ≫ b = j₁ and s ≫ p = id X. Base change of the open immersion j₂ makes b an open immersion. Rewrite s ≫ b as j₁, then apply Mathlib IsOpenImmersion.of_comp to obtain IsOpenImmersion s.",
+   "uses": [
+    "def-pc-fibre-product",
+    "lem-weil-pbc-open-immersion-base-change",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-pbc-proper-open-comparison.md",
+    "place": "node def-weil-pbc-proper-open-comparison, order 1475"
+   }
+  },
+  {
+   "text": "The projection p is proper by base change of f, hence separated. Rewrite s ≫ p as the identity to obtain a closed immersion. Apply IsClosedImmersion.of_comp to s and p. The closed embedding underlying this closed immersion has closed range. This proves only the closed-image clause needed here; the complementary coproduct assertion of open_section_clopen is unnecessary.",
+   "uses": [
+    "lem-weil-pbc-proper-base-change",
+    "def-weil-proper-morphism",
+    "lem-weil-pbc-closed-immersion-from-composite"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-pbc-proper-open-comparison.md",
+    "place": "node def-weil-pbc-proper-open-comparison, order 1475"
+   }
+  },
+  {
+   "text": "The square (id X, s, j₁, b) commutes by s ≫ b = j₁. The identity is an isomorphism and the open immersion b is a monomorphism, so Mathlib IsPullback.of_horiz_isIso_mono proves it Cartesian.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-pbc-proper-open-comparison.md",
+    "place": "node def-weil-pbc-proper-open-comparison, order 1475"
+   }
+  },
+  {
+   "text": "Keep the specified isomorphism θ: compose the canonical derived open-restriction exchange r, the image under Rp_* of extension-zero base change e followed by identity inverse-image identification, and the uniquely characterized component-restriction isomorphism c for the now-proved clopen section.",
+   "uses": [
+    "lem-weil-pbc-derived-open-restriction",
+    "cor-cbc-derived-extension-zero-base-change",
+    "lem-weil-pbc-clopen-section-direct-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-pbc-proper-open-comparison.md",
+    "place": "node def-weil-pbc-proper-open-comparison, order 1475"
+   }
+  },
+  {
+   "text": "Keep the comparison α as extension by zero applied to θ inverse followed by the counit of the existing derived extension-zero/restriction adjunction. No termwise-adjunction construction or exactness proof is repeated in this module.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-pbc-proper-open-comparison.md",
+    "place": "node def-weil-pbc-proper-open-comparison, order 1475"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-fibre-product",
+  "lem-weil-pbc-open-immersion-base-change",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-proper-base-change",
+  "def-weil-proper-morphism",
+  "lem-weil-pbc-closed-immersion-from-composite",
+  "lem-weil-pbc-derived-open-restriction",
+  "cor-cbc-derived-extension-zero-base-change",
+  "lem-weil-pbc-clopen-section-direct-image",
+  "lem-weil-pbc-extension-by-zero-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "F1",
+  "date": "2026-10-18",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-pbc-proper-open-comparison.md",
+  "place": "Geometry of the defining section and the specified three-isomorphism composite; closed-image subargument via Mathlib IsClosedImmersion.of_comp (Stacks Tag 01KT)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -151,5 +231,15 @@
   "group": "NB",
   "result": "pass",
   "note": "Wrote review.md. Checked all 21 dependencies, source, canonical constructions, universes, edge cases, docstrings, report sections and verbatim signature. Immutable module compiled cleanly through scompile.py. No findings or repairs; no branch changes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261018T062742-L-647138",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

@@ -8,11 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedOpenRestriction
 public import Sheaf.AlgebraicGeometry.Etale.DerivedExtensionZeroBaseChange
 public import Sheaf.AlgebraicGeometry.ClopenSectionDirectImage
-public import Sheaf.AlgebraicGeometry.OpenSectionClopen
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
-import Sheaf.AlgebraicGeometry.EtaleInverseImageModulesExact
-import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Mathlib.AlgebraicGeometry.Morphisms.Separated
 
 /-!
 # The comparison for a proper morphism fixing an open
@@ -47,7 +44,8 @@ lem-weil-pbc-open-immersion-base-change. Its composite with the section is `j₁
 so the section is an open immersion (uniqueness of maps into an open subscheme).
 The second projection is proper by lem-weil-pbc-proper-base-change and the section
 composes with it to the identity by the pullback projection formula.
-Apply lem-weil-pbc-open-section-clopen to obtain its closed image.
+The identity is a closed immersion, so `IsClosedImmersion.of_comp` makes the
+section a closed immersion and hence gives its closed image.
 Finally, if `j₁ t = b v`, then `b s t = b v`; since `b` is a monomorphism,
 `v = s t`. This gives the pullback universal property for the displayed square. -/
 theorem properOpenSectionGeometry {T₁ T₂ X : Scheme.{u}}
@@ -56,7 +54,24 @@ theorem properOpenSectionGeometry {T₁ T₂ X : Scheme.{u}}
     IsOpenImmersion (properOpenSection f j₁ j₂ h) ∧
       IsClosed (Set.range (properOpenSection f j₁ j₂ h).base) ∧
       IsPullback (𝟙 X) (properOpenSection f j₁ j₂ h) j₁ (pullback.fst f j₂) := by
-  sorry
+  have hs_fst : properOpenSection f j₁ j₂ h ≫ pullback.fst f j₂ = j₁ :=
+    pullback.lift_fst _ _ _
+  have hs_snd : properOpenSection f j₁ j₂ h ≫ pullback.snd f j₂ = 𝟙 X :=
+    pullback.lift_snd _ _ _
+  have : IsOpenImmersion (properOpenSection f j₁ j₂ h) := by
+    have : IsOpenImmersion (properOpenSection f j₁ j₂ h ≫ pullback.fst f j₂) := by
+      rw [hs_fst]
+      infer_instance
+    exact IsOpenImmersion.of_comp (properOpenSection f j₁ j₂ h) (pullback.fst f j₂)
+  refine ⟨inferInstance, ?_, ?_⟩
+  · have : IsClosedImmersion (properOpenSection f j₁ j₂ h ≫ pullback.snd f j₂) := by
+      rw [hs_snd]
+      infer_instance
+    have : IsClosedImmersion (properOpenSection f j₁ j₂ h) :=
+      IsClosedImmersion.of_comp _ (pullback.snd f j₂)
+    exact (properOpenSection f j₁ j₂ h).isClosedEmbedding.isClosed_range
+  · exact IsPullback.of_horiz_isIso_mono
+      ⟨by simpa only [Category.id_comp] using hs_fst.symm⟩
 
 /-- The specified restriction isomorphism `θ = c ∘ Rp_*(e) ∘ r`.
 Here `r` is the canonical derived exchange, `e` is extension-by-zero base change
