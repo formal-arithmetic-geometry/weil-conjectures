@@ -26,35 +26,37 @@
  ],
  "proof": [
   {
-   "text": "Fix $n$. For each $q$, choose $k_q\\geq n$ with $H^q(t_{k_q,n})=0$. Since only finitely many degrees $q\\in[a,b]$ can be nonzero, choose $k\\geq n$ dominating all $k_q$. Then every cohomology map $H^q(t_{k,n})$ is zero; outside $[a,b]$ both groups vanish by the boundedness hypothesis.",
-   "uses": [],
-   "elementary": true,
+   "text": "Induct on the natural number (b-a).toNat. In the base case a=b, the vanishing assumptions give IsGE a and IsLE a for every object. By the single-degree identification, source and target are isomorphic to singleFunctor a objects. This functor is full, and its composite with degree-a homology is naturally isomorphic to the identity, hence faithful. Conjugate any transition with zero degree-a homology by these isomorphisms; fullness and faithfulness show it is zero. Apply the pro-zero hypothesis in degree a at each target index.",
+   "uses": [
+    "lem-sf-derived-concentrated-single"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0G3B, hypotheses (1) and (2), specialized to zero-valued systems"
+    "place": "Tag 0G3B (lemma-essentially-constant-cohomology), single-degree base case"
    }
   },
   {
-   "text": "Apply the canonical truncation triangle functorially to each $X_n$ at degree $a$: $\\tau_{\\leq a}X_n \\to X_n \\to \\tau_{\\geq a+1}X_n \\to (\\tau_{\\leq a}X_n)[1]$. Functoriality makes these into inverse systems of distinguished triangles, and under the canonical identification $\\tau_{\\leq a}X_n\\cong H^a(X_n)[-a]$ the lower transition is $H^a(t_{k,n})[-a]$. Because $H^q(X_n)=0$ for $q<a$, the lower truncation is isomorphic to $H^a(X_n)[-a]$, so its transition maps are eventually zero by Step 1. The upper truncations have cohomology in the shorter interval $[a+1,b]$.",
+   "text": "When a<b, apply the functorial truncation triangle at a to X, obtaining a functor from the opposite natural-number category to distinguished triangles. The upper tower Y=truncGE(a+1)(X) has cohomology in [a+1,b]. To transfer pro-zero homology to Y, use the long exact sequence: H^q(X) to H^q(Y) is epic for q>a, because H^(q+1)(truncLE a X)=0. Naturality and cancellation of this epimorphism show that any transition killed on H^q(X) is killed on H^q(Y). For q<a+1, H^q(Y)=0 already. Similarly H^a(truncLE a X) to H^a(X) is monic, because H^(a-1)(Y)=0; naturality transfers degree-a zero maps to the lower tower.",
    "uses": [
     "lem-sf-derived-truncation-triangle"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0G3B, proof: truncation distinguished triangle and induction on $b-a$"
+    "place": "Tag 0G3B proof, functorial canonical truncation triangle and its cohomology sequence"
    }
   },
   {
-   "text": "Induct on $b-a$. The base case $b=a$ identifies each $X_n$ with $H^a(X_n)[-a]$, hence the transition is zero. For the induction step, the lower truncation system is pro-zero and the upper truncation system is pro-zero by induction; the zero-valued two-out-of-three lemma for inverse systems of distinguished triangles then gives a later index $k$ with $t_{k,n}=0$.",
+   "text": "Apply the induction hypothesis to the upper tower Y, since (b-(a+1)).toNat is one smaller. Each lower truncation is concentrated in degree a, since truncLE preserves the lower bound a; the single-degree argument and the degree-a hypothesis make its tower pro-zero. At a fixed target n, choose m>=n killing the lower transition and k>=n killing the upper transition. The transitions from max(m,k) to n factor through the chosen zero transitions by the functor laws, so both outer transitions vanish simultaneously. Apply the pro-zero-middle lemma for this tower of distinguished triangles; its middle transition is exactly the transition of X.",
    "uses": [
-    "lem-weil-pbc-essentially-constant-zero-triangle",
-    "lem-sf-derived-concentrated-single"
+    "lem-sf-derived-concentrated-single",
+    "lem-weil-pbc-essentially-constant-zero-triangle"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0G3B proof together with Tag 0G3A, specialized to essentially zero systems"
+    "place": "Tag 0G3B proof, induction on b-a; Tag 0G3A zero-valued two-out-of-three"
    }
   }
  ],
@@ -66,7 +68,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 0G3B proof, truncation induction, using Tag 0G3A for the two-out-of-three step"
+  "place": "Tag 0G3B proof, truncation induction using Tag 0G3A; realized in Lean by T1, 2026-10-18"
  },
  "mathlib_searches": [
   {
@@ -172,5 +174,15 @@
   "by": "NS",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261018T062914-L-677450",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
