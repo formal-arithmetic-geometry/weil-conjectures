@@ -12,7 +12,8 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Mathlib.Algebra.Category.ModuleCat.EnoughInjectives
+import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Mathlib.Algebra.Homology.SingleHomology
 
 /-!
 # Derived sections over a w-contractible affine pro-etale object
@@ -99,6 +100,58 @@ theorem wContractible_sections_derived
             (SheafOfModules.evaluation.{max u v (t + 1)} R (op (ProEt.mk f)))
             (moduleQuasiIsoKInjectiveResolutions X R)).obj
                 ((DerivedCategory.singleFunctor _ 0).obj F))) := by
-  sorry
+  let E := SheafOfModules.evaluation.{max u v (t + 1)} R (op (ProEt.mk f))
+  let h := moduleQuasiIsoKInjectiveResolutions.{t, u, v} X R
+  let η := E.rightDerivedFunctorOfQuasiIsoResolutionsUnit h
+  let RF := E.rightDerivedFunctorOfQuasiIsoResolutions h
+  let A := ringedSiteModules.{max u v (t + 1)} R
+  let B := ModuleCat.{max u v (t + 1)} (R.obj.obj (op (ProEt.mk f)))
+  obtain ⟨_, _, hlim, hcolim⟩ := wContractible_sections_exact.{t, u, max u v} X D f R
+  let : PreservesFiniteLimits E := hlim
+  let : PreservesFiniteColimits E := hcolim
+  have hη (K : CochainComplex A ℤ) :
+      IsIso (η.app ((HomotopyCategory.quotient A (.up ℤ)).obj K)) := by
+    obtain ⟨I, s, hI, hs⟩ := h K
+    let := hI
+    let := hs
+    let π := HomotopyCategory.quotient A (.up ℤ)
+    have hQs : IsIso (DerivedCategory.Qh.map (π.map s)) := by
+      change IsIso ((π ⋙ DerivedCategory.Qh).map s)
+      rw [NatIso.isIso_map_iff (DerivedCategory.quotientCompQhIso A)]
+      infer_instance
+    have hEs : IsIso ((E.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh).map
+        (π.map s)) := by
+      rw [← NatIso.isIso_map_iff E.mapDerivedCategoryFactorsh]
+      change IsIso (E.mapDerivedCategory.map (DerivedCategory.Qh.map (π.map s)))
+      infer_instance
+    have hηI : IsIso (η.app (π.obj I)) :=
+      E.rightDerivedFunctorOfQuasiIsoResolutionsUnit_isIso h I
+    have hRFs : IsIso ((DerivedCategory.Qh ⋙ RF).map (π.map s)) := by
+      change IsIso (RF.map (DerivedCategory.Qh.map (π.map s)))
+      infer_instance
+    have hcomp : IsIso (η.app (π.obj K) ≫ (DerivedCategory.Qh ⋙ RF).map (π.map s)) := by
+      rw [← η.naturality (π.map s)]
+      infer_instance
+    exact IsIso.of_isIso_comp_right _ ((DerivedCategory.Qh ⋙ RF).map (π.map s))
+  refine ⟨hη, ?_⟩
+  intro F q hq
+  let K := (HomologicalComplex.single A (.up ℤ) 0).obj F
+  let := hη K
+  let e : RF.obj (DerivedCategory.Q.obj K) ≅
+      DerivedCategory.Q.obj ((E.mapHomologicalComplex (.up ℤ)).obj K) :=
+    RF.mapIso ((DerivedCategory.quotientCompQhIso A).app K).symm ≪≫
+      (asIso (η.app ((HomotopyCategory.quotient A (.up ℤ)).obj K))).symm ≪≫
+      DerivedCategory.Qh.mapIso ((E.mapHomotopyCategoryFactors (.up ℤ)).app K) ≪≫
+      (DerivedCategory.quotientCompQhIso B).app _
+  let S := (HomologicalComplex.single B (.up ℤ) 0).obj (E.obj F)
+  let eS : DerivedCategory.Q.obj ((E.mapHomologicalComplex (.up ℤ)).obj K) ≅
+      DerivedCategory.Q.obj S :=
+    DerivedCategory.Q.mapIso ((HomologicalComplex.singleMapHomologicalComplex E
+      (.up ℤ) 0).app F)
+  change IsZero ((DerivedCategory.homologyFunctor B q).obj (RF.obj (DerivedCategory.Q.obj K)))
+  exact (HomologicalComplex.isZero_single_obj_homology (.up ℤ) 0 (E.obj F) q
+    (ne_of_gt hq)).of_iso
+      ((DerivedCategory.homologyFunctor B q).mapIso (e ≪≫ eS) ≪≫
+        (DerivedCategory.homologyFunctorFactors B q).app S)
 
 end AlgebraicGeometry.Scheme.ProEt
