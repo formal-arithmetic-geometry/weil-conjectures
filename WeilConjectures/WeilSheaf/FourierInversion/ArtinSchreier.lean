@@ -6,6 +6,7 @@ Authors: Claude
 module
 
 public import WeilConjectures.WeilSheaf.ArtinSchreierFunctions
+public import WeilConjectures.WeilSheaf.ArtinSchreierPullback
 public import WeilConjectures.WeilSheaf.UpperStarId
 
 /-!
@@ -43,8 +44,13 @@ theorem nonempty_iso_artinSchreierOf_inv (ψ : AddChar k₀ (PadicAlgCl l)) (a :
 /-- Blueprint `lem-fd-as-characters` (`ℒ_{ψ,0}` is the constant sheaf, the Artin–Schreier
 cover of the zero function being the trivial torsor): `ℒ_{ψ,0} ≅ ℚ̄_ℓ`. -/
 theorem nonempty_iso_artinSchreierOf_zero (ψ : AddChar k₀ (PadicAlgCl l)) :
-    Nonempty (artinSchreierOf ψ (0 : Γ(X, ⊤)) ≅ WeilSheaf.adicConstant k₀ l X) :=
-  sorry
+    Nonempty (artinSchreierOf ψ (0 : Γ(X, ⊤)) ≅ WeilSheaf.adicConstant k₀ l X) := by
+  rw [artinSchreierOf_eq, artinSchreier, WeilSheaf.image_artinSchreierIdempotent_eq]
+  exact WeilSheaf.nonempty_iso_upperStar_upperStar_of_comp_artinSchreierMap _ _
+    (affineLine.homOfSection k₀ (0 : Γ(X, ⊤)))
+    (by rw [affineLine.smul_one, Category.comp_id])
+    (by rw [affineLine.homOfSection_comp_artinSchreierMap]; simp [Fintype.card_ne_zero])
+    _ (WeilSheaf.upperStarArtinSchreierMapImageIso ψ)
 
 /-- Pullback of Artin–Schreier sheaves of functions: `φ^* ℒ_{ψ,a} ≅ ℒ_{ψ,φ^* a}`, from
 `φ ≫ a = φ^* a` as morphisms to `𝔸¹` and the composition of pullbacks of Weil sheaves. -/

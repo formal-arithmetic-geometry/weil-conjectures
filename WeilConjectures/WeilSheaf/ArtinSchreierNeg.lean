@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.WeilSheaf.Fourier
+public import WeilConjectures.WeilSheaf.ArtinSchreierPullback
 public import WeilConjectures.WeilSheaf.LowerStarComp
 public import WeilConjectures.WeilSheaf.LowerStarId
 public import WeilConjectures.WeilSheaf.UpperStarId
@@ -88,6 +88,54 @@ lemma lowerStar_map_lowerStarDeckAction_comp_lowerStarExchangeStr {X Y : Scheme.
       MorphismProperty.Over.mk, hσa]
 
 
+/-- `AlgebraicGeometry.ProEtale.pullbackLeftPullbackSndIso_inv_fst` with the base change of an
+object of the pro-étale site written as such. -/
+@[reassoc]
+lemma pullbackLeftPullbackSndIso_inv_fst_fst_over {X Y Z : Scheme.{u}} (b : Z ⟶ Y) (V : Y.ProEt)
+    (g : X ⟶ Z) :
+    (pullbackLeftPullbackSndIso V.hom b g).inv ≫
+        pullback.fst ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ b).obj V).hom g ≫
+          pullback.fst V.hom b = pullback.fst _ _ :=
+  pullbackLeftPullbackSndIso_inv_fst _ _ _
+
+/-- `pullbackLeftPullbackSndIso_hom_fst` with the base change of an object of the pro-étale site
+written as such. -/
+@[reassoc]
+lemma pullbackLeftPullbackSndIso_hom_fst_over {Y Z W : Scheme.{u}} (b : Z ⟶ Y) (V : Y.ProEt)
+    (c : W ⟶ Z) :
+    (pullbackLeftPullbackSndIso V.hom b c).hom ≫ pullback.fst V.hom (c ≫ b) =
+      pullback.fst ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ b).obj V).hom c ≫
+        pullback.fst V.hom b :=
+  pullbackLeftPullbackSndIso_hom_fst _ _ _
+
+/-- A variant of `AlgebraicGeometry.ProEtale.pullbackLeftPullbackSndIso_inv_fst_fst_over` with an
+identity morphism. -/
+lemma pullbackLeftPullbackSndIso_inv_id_fst_fst_over {X Y Z : Scheme.{u}} (b : Z ⟶ Y)
+    (V : Y.ProEt) (g : X ⟶ Z) :
+    (pullbackLeftPullbackSndIso V.hom b g).inv ≫
+      𝟙 ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).obj
+          ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ b).obj V)).left ≫
+        pullback.fst ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ b).obj V).hom g ≫
+          pullback.fst V.hom b = pullback.fst _ _ := by
+  erw [Category.id_comp]
+  exact pullbackLeftPullbackSndIso_inv_fst _ _ _
+
+/-- `pullback.lift_fst` with the base change of an object of the pro-étale site written as such. -/
+@[reassoc]
+lemma pullback_lift_fst_over {X Y Z T : Scheme.{u}} (g : X ⟶ Y) (V : Y.ProEt) (a : Z ⟶ X)
+    (h : T ⟶ ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).obj V).left) (k : T ⟶ Z)
+    (w : h ≫ ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).obj V).hom = k ≫ a) :
+    pullback.lift h k w ≫ pullback.fst (pullback.snd V.hom g) a = h :=
+  pullback.lift_fst _ _ _
+
+/-- `pullback.lift_snd` with the base change of an object of the pro-étale site written as such. -/
+@[reassoc]
+lemma pullback_lift_snd_over {X Y Z T : Scheme.{u}} (g : X ⟶ Y) (V : Y.ProEt) (a : Z ⟶ X)
+    (h : T ⟶ ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).obj V).left) (k : T ⟶ Z)
+    (w : h ≫ ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ g).obj V).hom = k ≫ a) :
+    pullback.lift h k w ≫ pullback.snd (pullback.snd V.hom g) a = k :=
+  pullback.lift_snd _ _ _
+
 /-- Exchange morphisms of commuting pairs of automorphisms commute. -/
 lemma lowerStarExchangeStr_comm {X Y : Scheme.{u}} (g : X ⟶ Y) (a : X ≅ X) (b : Y ≅ Y)
     (a' : X ≅ X) (b' : Y ≅ Y)
@@ -100,16 +148,39 @@ lemma lowerStarExchangeStr_comm {X Y : Scheme.{u}} (g : X ⟶ Y) (a : X ≅ X) (
         (b.inv)_*[WeilCoefficients.{u} l].map (lowerStarExchangeStr g a' b' hg') ≫
         lowerStarExchangeStr g a b hg := by
   ext V : 3
+  have e₁ := @lowerStar_map_hom_app' (WeilCoefficients.{u} l) _
+  have e₂ := @lowerStar_obj_obj_map' (WeilCoefficients.{u} l) _
   simp only [lowerStarExchangeStr, Iso.trans_hom, Iso.app_hom, Iso.symm_hom,
     Functor.mapIso_hom, Functor.map_comp,
-    ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, lowerStar_map_hom_app',
+    ObjectProperty.FullSubcategory.comp_hom, NatTrans.comp_app, e₁,
     Quiver.Hom.unop_op, unop_op, lowerStarComp_hom_app_hom_app, lowerStarComp_inv_app_hom_app,
     lowerStarCongr_hom_app_hom_app, adicConstantSheafLowerStarIso_inv_hom_app,
-    adicConstantSheafLowerStarIso_hom_hom_app, adicConstantSheaf_obj_map]
+    adicConstantSheafLowerStarIso_hom_hom_app, adicConstantSheaf_obj_map, e₂]
   simp only [← Functor.map_comp, ← op_comp]
   congr 2
-  trace_state
-  sorry
+  have h₁ : a'.hom ≫ a.hom = a.hom ≫ a'.hom := by
+    rw [← cancel_epi a'.inv, ← cancel_epi a.inv]
+    simp [reassoc_of% haa']
+  have h₂ : a'.hom ≫ a.inv = a.inv ≫ a'.hom := by
+    calc a'.hom ≫ a.inv = a.inv ≫ (a.hom ≫ a'.hom) ≫ a.inv := by simp
+      _ = a.inv ≫ (a'.hom ≫ a.hom) ≫ a.inv := by rw [h₁]
+      _ = a.inv ≫ a'.hom := by simp
+  apply pullback.hom_ext
+  · apply pullback.hom_ext
+    · apply pullback.hom_ext
+      · simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.mk]
+        simp [-pullbackLeftPullbackSndIso_hom_fst, -pullbackLeftPullbackSndIso_hom_fst_assoc,
+          pullbackLeftPullbackSndIso_inv_fst_fst_over_assoc, pullback_lift_fst_over_assoc,
+          pullbackLeftPullbackSndIso_inv_id_fst_fst_over,
+          pullbackLeftPullbackSndIso_inv_fst_fst_over, pullback_lift_fst_over,
+          pullbackLeftPullbackSndIso_hom_fst_over_assoc, pullbackLeftPullbackSndIso_hom_fst_over,
+          pullback_lift_snd_over_assoc]
+      · simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullback,
+          MorphismProperty.Over.mk, hg, reassoc_of% hg, reassoc_of% h₂]
+    · simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullback,
+        MorphismProperty.Over.mk, reassoc_of% h₁]
+  · simp [MorphismProperty.Over.pullbackCongr, MorphismProperty.Over.pullback,
+      MorphismProperty.Over.mk, h₁]
 
 end AlgebraicGeometry.ProEtale
 
@@ -120,20 +191,6 @@ open scoped ProEtale
 section AffineLine
 
 variable (k₀ : Type u) [Field k₀]
-
-/-- The scaling by `1` of the affine line is the identity. -/
-lemma affineLine.smul_one : affineLine.smul k₀ 1 = 𝟙 _ :=
-  AffineSpace.hom_ext (by simp [affineLine.smul]) fun _ ↦ by simp [affineLine.smul]
-
-/-- Scaling by `a b` is scaling by `a` followed by scaling by `b`. -/
-lemma affineLine.smul_mul (a b : k₀) :
-    affineLine.smul k₀ (a * b) = affineLine.smul k₀ a ≫ affineLine.smul k₀ b := by
-  refine AffineSpace.hom_ext (by simp [affineLine.smul]) fun _ ↦ ?_
-  simp only [affineLine.smul, Scheme.Hom.comp_appTop, CommRingCat.comp_apply,
-    AffineSpace.smul_appTop_coord, map_mul]
-  rw [← CommRingCat.comp_apply (affineLine k₀ ↘ Spec (.of k₀)).appTop, ← Scheme.Hom.comp_appTop,
-    AffineSpace.smul_over]
-  ring
 
 /-- The scaling by `-1` is an involution. -/
 @[reassoc]

@@ -20,10 +20,12 @@ For a morphism `φ : X ⟶ Y` of `k₀`-schemes, the pullback `φ̄^*` along its
 geometric fibres is strong monoidal, and the exchange isomorphism `φ̄^* ⋙ Fr_X^* ≅ Fr_Y^* ⋙ φ̄^*`
 defining the Weil structure of `φ^* F` is monoidal. Hence a pairing of Weil sheaves compatible
 with the Weil structures pulls back to a compatible pairing
-(`AlgebraicGeometry.ProEtaleWeilSheaf.upperStar_pairing_str`). Applied to the evaluation, this
+(`AlgebraicGeometry.ProEtale.upperStarStr_pairing`). Applied to the evaluation, this
 shows that the comparison `φ^* [A, B] ⟶ [φ^* A, φ^* B]`
 (`AlgebraicGeometry.ProEtale.adicUpperStarIhomComparison`) is a morphism of pro-étale Weil
-sheaves; it is an isomorphism for `A` lisse, which gives
+sheaves (`AlgebraicGeometry.ProEtaleWeilSheaf.upperStarIhomComparison_comm`). All computations
+are done for an arbitrary exchange square `a ≫ j = j ≫ b`, so that the kernel never has to
+unfold the geometric Frobenius. The comparison is an isomorphism for `A` lisse, which gives
 `AlgebraicGeometry.ProEtaleWeilSheaf.ihomFunctorCompUpperStarIso`.
 -/
 
@@ -32,17 +34,6 @@ sheaves; it is an isomorphism for `A` lisse, which gives
 universe u
 
 open CategoryTheory MonoidalCategory Functor.LaxMonoidal Endofunctor
-
-namespace AlgebraicGeometry.ProEtaleWeilSheaf
-
-open ProEtale
-
-variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
-variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
-  [Y.Over (Spec (CommRingCat.of k₀))]
-variable (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
-
-end AlgebraicGeometry.ProEtaleWeilSheaf
 
 namespace CategoryTheory.NatTrans
 
@@ -207,5 +198,150 @@ theorem upperStarStr_pairing {P Q R : AdicSheaf l Y} (sP : (b.inv)_*ᵃ[l].obj P
   simp only [Functor.map_comp, Category.assoc]
   rw [← reassoc_of% hψ, reassoc_of% nψ]
 
+/-- A morphism `κ : M ⟶ 𝓗om(D, N)` whose uncurried form `M ⊗ D ⟶ N` is compatible with
+structure isomorphisms `(b⁻¹)_* M ≅ M`, `(b⁻¹)_* D ≅ D`, `(b⁻¹)_* N ≅ N` intertwines the
+structure isomorphism of `M` with the one of the internal hom (`ihomStr`). For the geometric
+Frobenius this is `AlgebraicGeometry.ProEtaleWeilSheaf.homToIhom_comm`. -/
+theorem ihomStr_comm_of_pairing {Z : Scheme.{u}} (b : Z ≅ Z) {M D N : AdicSheaf l Z}
+    (sM : (b.inv)_*ᵃ[l].obj M ≅ M) (sD : (b.inv)_*ᵃ[l].obj D ≅ D)
+    (sN : (b.inv)_*ᵃ[l].obj N ≅ N) (κ : M ⟶ (AdicSheaf.ihom D).obj N)
+    (hκ : (sM.hom.hom ⊗ₘ sD.hom.hom) ≫ (κ.hom ▷ D.X ≫ Mod.evaluation D N) =
+      μ (b.inv)_*[WeilCoefficients.{u} l] M.X D.X ≫
+        (b.inv)_*[_].map (κ.hom ▷ D.X ≫ Mod.evaluation D N) ≫ sN.hom.hom) :
+    (b.inv)_*ᵃ[l].map κ ≫ (ihomStr l b sD sN).hom = sM.hom ≫ κ := by
+  set Fr := (b.inv)_*[WeilCoefficients.{u} l]
+  have : IsIso sD.hom.hom := inferInstanceAs (IsIso ((Mod.forget _).map sD.hom))
+  have he := ihomStr_evaluation b sD sN
+  apply Mod.hom_ext
+  rw [Mod.comp_hom', Mod.comp_hom', adicLowerStar_map_hom]
+  apply Mod.hom_ext_of_evaluation (D := D)
+  rw [← cancel_epi (Fr.obj M.X ◁ sD.hom.hom), comp_whiskerRight_assoc,
+    whisker_exchange_assoc, ← tensorHom_def'_assoc, he, comp_whiskerRight_assoc,
+    ← tensorHom_def'_assoc]
+  erw [hκ]
+  rw [Fr.map_comp_assoc, ← reassoc_of% (μ_natural_left Fr κ.hom D.X)]
+  rfl
+
+variable (c)
+
+/-- **The comparison `j^* 𝓗om(A, B) ⟶ 𝓗om(j^* A, j^* B)` is compatible with the structure
+isomorphisms** transported along an exchange square `a ≫ j = j ≫ b`. -/
+theorem upperStarStr_ihomComparison {A B : AdicSheaf l Y} (sA : (b.inv)_*ᵃ[l].obj A ≅ A)
+    (sB : (b.inv)_*ᵃ[l].obj B ≅ B) :
+    (a.inv)_*ᵃ[l].map (adicUpperStarIhomComparison l j A B) ≫
+        (ihomStr l a (upperStarStr l c sA) (upperStarStr l c sB)).hom =
+      (upperStarStr l c (ihomStr l b sA sB)).hom ≫ adicUpperStarIhomComparison l j A B := by
+  apply ihomStr_comm_of_pairing
+  have h3 := uncurryHom_adicUpperStarIhomComparison j A B
+  rw [Mod.uncurryHom] at h3
+  rw [h3]
+  exact upperStarStr_pairing (c := c) (ihomStr l b sA sB) sA sB (Mod.evaluation A B)
+    (ihomStr_evaluation b sA sB)
+
+/-- `AlgebraicGeometry.ProEtale.upperStarStr_ihomComparison` with the structure isomorphisms
+given as variables equal to the transported ones; this form applies to pro-étale Weil sheaves
+without the kernel having to unfold their constructions. -/
+theorem upperStarStr_ihomComparison_of_eq {A B : AdicSheaf l Y} (sA : (b.inv)_*ᵃ[l].obj A ≅ A)
+    (sB : (b.inv)_*ᵃ[l].obj B ≅ B) (sM : (b.inv)_*ᵃ[l].obj ((AdicSheaf.ihom A).obj B) ≅
+      (AdicSheaf.ihom A).obj B)
+    (tA : (a.inv)_*ᵃ[l].obj ((j)^*ᵃ[l].obj A) ≅ (j)^*ᵃ[l].obj A)
+    (tB : (a.inv)_*ᵃ[l].obj ((j)^*ᵃ[l].obj B) ≅ (j)^*ᵃ[l].obj B)
+    (tH : (a.inv)_*ᵃ[l].obj ((AdicSheaf.ihom ((j)^*ᵃ[l].obj A)).obj ((j)^*ᵃ[l].obj B)) ≅
+      (AdicSheaf.ihom ((j)^*ᵃ[l].obj A)).obj ((j)^*ᵃ[l].obj B))
+    (tM : (a.inv)_*ᵃ[l].obj ((j)^*ᵃ[l].obj ((AdicSheaf.ihom A).obj B)) ≅
+      (j)^*ᵃ[l].obj ((AdicSheaf.ihom A).obj B))
+    (htA : tA = upperStarStr l c sA) (htB : tB = upperStarStr l c sB)
+    (hsM : sM = ihomStr l b sA sB) (htH : tH = ihomStr l a tA tB)
+    (htM : tM = upperStarStr l c sM) :
+    (a.inv)_*ᵃ[l].map (adicUpperStarIhomComparison l j A B) ≫ tH.hom =
+      tM.hom ≫ adicUpperStarIhomComparison l j A B := by
+  subst htA htB hsM htH htM
+  exact upperStarStr_ihomComparison c sA sB
+
+variable {k : Type u} [Field k] [Finite k] {X₀ Y₀ : Scheme.{u}} {f : X₀ ⟶ Spec (.of k)}
+  {g : Y₀ ⟶ Spec (.of k)} (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f)
+
+/-- The exchange isomorphism of the Weil structure of a pullback is an instance of
+`AlgebraicGeometry.ProEtale.adicUpperStarExchangeIso`. -/
+lemma adicUpperStarGeometricFiberMapCompFrobeniusIso_eq :
+    adicUpperStarGeometricFiberMapCompFrobeniusIso l φ h =
+      adicUpperStarExchangeIso l (Scheme.Hom.geometricFiberMap φ h) f.geometricGaloisFrobenius
+        g.geometricGaloisFrobenius
+        (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ h).symm :=
+  rfl
 
 end AlgebraicGeometry.ProEtale
+
+namespace AlgebraicGeometry.ProEtaleWeilSheaf
+
+open ProEtale
+
+variable {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime]
+variable {X Y : Scheme.{u}} [X.Over (Spec (CommRingCat.of k₀))]
+  [Y.Over (Spec (CommRingCat.of k₀))]
+variable (φ : X ⟶ Y) [φ.IsOver (Spec (CommRingCat.of k₀))]
+
+/-- The Weil structure of the internal hom, as the structure isomorphism `ihomStr`. -/
+lemma ihom_str_hom (A B : ProEtaleWeilSheaf k₀ l X) :
+    (ihom k₀ l X A B).str.hom =
+      (ihomStr l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius A.str B.str).hom :=
+  rfl
+
+/-- The Weil structure of the internal hom is `ihomStr`. -/
+lemma ihom_str (A B : ProEtaleWeilSheaf k₀ l X) :
+    (ihom k₀ l X A B).str =
+      ihomStr l (X ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius A.str B.str :=
+  IsoAlgebra.mk_str _ _
+
+/-- The Weil structure of a pullback, as the structure isomorphism `upperStarStr`. -/
+lemma upperStar_obj_str_hom (A : ProEtaleWeilSheaf k₀ l Y) :
+    ((upperStar k₀ l φ).obj A).str.hom =
+      (upperStarStr l (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ
+        (comp_over φ (Spec (CommRingCat.of k₀)))).symm A.str).hom := by
+  unfold ProEtaleWeilSheaf.upperStar
+  rw [IsoAlgebra.mapOfNatIso_obj_str, adicUpperStarGeometricFiberMapCompFrobeniusIso_eq]
+
+/-- The Weil structure of a pullback is `upperStarStr`. -/
+lemma upperStar_obj_str (A : ProEtaleWeilSheaf k₀ l Y) :
+    ((upperStar k₀ l φ).obj A).str =
+      upperStarStr l (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ
+        (comp_over φ (Spec (CommRingCat.of k₀)))).symm A.str :=
+  Iso.ext (upperStar_obj_str_hom φ A)
+
+/-- The internal hom functor on objects. -/
+lemma ihomFunctor_obj (A B : ProEtaleWeilSheaf k₀ l X) :
+    (ihomFunctor k₀ l X A).obj B = ihom k₀ l X A B :=
+  rfl
+
+/-- The comparison `φ^* [A, B] ⟶ [φ^* A, φ^* B]` is compatible with the Weil structures. -/
+lemma upperStarIhomComparison_comm (A B : ProEtaleWeilSheaf k₀ l Y) :
+    (WeilSheaf.frobeniusPullback k₀ l X).map (adicUpperStarIhomComparison l
+        (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))
+        A.carrier B.carrier) ≫
+      ((ihomFunctor k₀ l X ((upperStar k₀ l φ).obj A)).obj ((upperStar k₀ l φ).obj B)).obj.str =
+    ((upperStar k₀ l φ).obj ((ihomFunctor k₀ l Y A).obj B)).obj.str ≫
+      adicUpperStarIhomComparison l
+        (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))
+        A.carrier B.carrier := by
+  rw [← IsoAlgebra.str_hom, ← IsoAlgebra.str_hom]
+  exact upperStarStr_ihomComparison_of_eq _ A.str B.str _ _ _ _ _ (upperStar_obj_str φ A)
+    (upperStar_obj_str φ B) (ihom_str A B) (ihom_str _ _) (upperStar_obj_str φ _)
+
+variable [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
+  [LocallyOfFiniteType (Y ↘ Spec (CommRingCat.of k₀))]
+
+/-- **Pullback commutes with the internal hom out of a lisse pro-étale Weil sheaf**:
+`φ^* [A, -] ≅ [φ^* A, φ^* -]`. -/
+noncomputable def ihomFunctorCompUpperStarIso (A : ProEtaleWeilSheaf k₀ l Y)
+    (hA : IsAdicLisseSheaf A.carrier) :
+    ihomFunctor k₀ l Y A ⋙ upperStar k₀ l φ ≅
+      upperStar k₀ l φ ⋙ ihomFunctor k₀ l X ((upperStar k₀ l φ).obj A) :=
+  NatIso.ofComponents (fun B ↦
+    have := hA.isIso_adicUpperStarIhomComparison
+      (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀)))) B.carrier
+    IsoAlgebra.isoMk (asIso (adicUpperStarIhomComparison l
+      (Scheme.Hom.geometricFiberMap φ (comp_over φ (Spec (CommRingCat.of k₀))))
+      A.carrier B.carrier)) (upperStarIhomComparison_comm φ A B))
+    fun f ↦ IsoAlgebra.hom_ext (adicUpperStarIhomComparison_naturality _ _ f.hom.f)
+
+end AlgebraicGeometry.ProEtaleWeilSheaf
