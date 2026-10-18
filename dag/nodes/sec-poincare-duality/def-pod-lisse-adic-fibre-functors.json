@@ -11,9 +11,53 @@
   "def-pod-lisse-l-adic-sheaves",
   "def-weil-pbc-geometric-stalks"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Keep the existing limit construction of the integral fibre functor, the rationalized Hom construction and pure-tensor formula, and the existing fixed-model localization functors.",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the proved integral scalar fibre map, quotient comparisons and completeness to obtain an integral scalar isomorphism. Rationalize it and clear denominators on rational arrows to obtain natural scalar comparisons over K.",
+   "uses": [
+    "lem-pod-lisse-rational-scalar-fiber-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport these comparisons to the coefficient diagram and normalize them coherently using its least coefficient field and detection of natural endomorphisms. Both laws refer to the actual diagram constraints.",
+   "uses": [
+    "lem-pod-lisse-coefficient-fiber-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define the functor on the Grothendieck construction on arrows by the base comparison followed by the fibre map. Its identity and composition laws are exactly the comparison coherence laws. Cocartesian arrows have invertible fibre parts and hence invertible images. Lift through the explicit localization; it keeps the prescribed object values.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Restrict to each rational model and cancel the category transports. The resulting natural isomorphism has inverse the object-equality transport; evaluation on a pure tensor gives the exact required formula.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-pbc-geometric-stalks",
+  "lem-pod-lisse-rational-scalar-fiber-comparison",
+  "lem-pod-lisse-coefficient-fiber-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "F3",
+  "date": "2026-10-18",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Weil II (1.1.1) b)-d), pp. 146-147; extends the existing J1 proofs by explicit scalar comparison, coherence normalization and localization descent"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -110,23 +154,11 @@
  "reviewed_proof": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "J1",
+  "reviewer": "COMPILER",
+  "group": "F3",
   "result": "pass",
-  "landing": "20261018T062811-L-656636",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.lisseAlgebraicFiberFunctor_exists",
-   "AlgebraicGeometry.Scheme.lisseAlgebraicFiberFunctor_obj",
-   "AlgebraicGeometry.Scheme.lisseAlgebraicFiber_ofModel",
-   "AlgebraicGeometry.Scheme.lisseAlgebraicModelMap_comp",
-   "AlgebraicGeometry.Scheme.lisseAlgebraicModelMap_id",
-   "AlgebraicGeometry.Scheme.lisseRationalFiberFunctor_exists",
-   "AlgebraicGeometry.Scheme.lisseRationalFiberFunctor_obj"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.lisseAlgebraicFiberFunctor_exists"
-  ]
+  "landing": "20261018T091401-L-3254458",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

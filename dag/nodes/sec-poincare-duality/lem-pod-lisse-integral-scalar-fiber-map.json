@@ -1,0 +1,145 @@
+{
+ "id": "lem-pod-lisse-integral-scalar-fiber-map",
+ "kind": "statement",
+ "title": "Canonical scalar map of integral geometric fibres",
+ "statement": "Let l be prime, Y a Noetherian separated scheme on which l is invertible, y a geometric point, E and L finite extensions of Q_l and i:E→L a Q_l-algebra embedding. Use the coefficient rings and scalar-extension systems of [def-pod-lisse-l-adic-sheaves]. The integral geometric fibre M of a lisse integral E-sheaf is finite over O_E and its projection to level n is surjective with kernel (pi_E)^(n+1)M. There is a unique O_L-linear comparison O_L tensor_O_E M → (i_*F)_y whose level-n image of 1 tensor z, after the specified level isomorphism, is the germ of 1 tensor s whenever the source projection of z is the germ of s. This comparison is natural in the integral sheaf.",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Weil II (1.1.1) b)-d), pp. 146-147; finite-level scalar stalk comparison; adic reconstruction as in Stacks Tag 09B8"
+ },
+ "stmt_deps": [
+  "def-pod-lisse-l-adic-sheaves",
+  "def-weil-pbc-geometric-stalks"
+ ],
+ "proof": [
+  {
+   "text": "Apply the stated adic reconstruction theorem to the stalk tower. Finite lisse sheaf stalks are finite modules; the annihilation property follows by representing a stalk element by a section. Identify the categorical limit with the sections submodule to transfer finite generation and the surjective quotient projection formulas.",
+   "uses": [
+    "lem-pod-adic-limit-finite-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At target level n apply the adjunction unit to the source stalk at the ramification ceiling index. Compose scalar/stalk comparison, restriction of coefficients, and the inverse of the recorded finite-level isomorphism. The pure-germ formula identifies the result with the germ of 1 tensor s.",
+   "uses": [
+    "lem-pod-etale-stalk-tensor-scalar",
+    "def-pod-lisse-l-adic-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The scalar system transition and map equations give compatibility and naturality: on pure section generators both composites agree, hence they agree by adjunction and stalk coprojection extensionality. The compatible maps form a cone, whose limit map is the adjoint of the comparison.",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Uniqueness follows by adjunction, limit extensionality and representation of every stalk element by a germ. Define the public map from this proved unique existence; its specification and naturality follow from uniqueness.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pod-adic-limit-finite-modules",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "def-pod-lisse-l-adic-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "F3",
+  "date": "2026-10-18",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Weil II (1.1.1) b)-d), pp. 146-147; finite-level scalar stalk comparison; adic reconstruction as in Stacks Tag 09B8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "a geometric stalk commutes with finite coefficient extension and inverse limits of adic finite modules",
+   "results": "8 hits, concerning ordinary scheme module stalks (restrictStalkNatIso, ModuleCat.Tilde.stalkIso, and related germ formulas); no adic geometric fibre/scalar comparison.",
+   "verdict": "no specialized match",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse limit of an adic system of finite modules and extension of scalars between finite p-adic coefficient fields",
+   "results": "8 hits on adic completion, including ofTensorProductEquivNoetherian; reuse adic completeness and quotient tensor APIs, no lisse geometric fibre comparison.",
+   "verdict": "generic tools only",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsAdicComplete",
+   "results": "12 hits on completeness and Hausdorffness. Used IsAdicComplete.StrictMono.lift and mk_lift to reconstruct an inverse from quotient comparisons.",
+   "verdict": "generic tools only",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsComp|ringExtensionComp|quotTensorEquivQuotSMul",
+   "results": "20 launcher hits, including tensor quotient and scalar-composition APIs. Direct rg in both library roots and the DAG finds no existing lisseIntegralScalarFiberComparison, lisseCoefficientFiberComparisons or lisseRationalScalarFiberIso. Blueprint searches for fibre scalar extension, adic limit scalar and stalk scalar return no duplicate.",
+   "verdict": "reuse generic tensor/adjunction tools; new specialized statements needed",
+   "date": "2026-10-18"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseAdicFiberFunctors",
+  "date": "2026-10-18",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-galois-lisse-representations",
+   "place": "Part (2), proof steps 7-9: scalar extension of integral geometric fibres, rationalization and the algebraic-coefficient fibre functor",
+   "via": [
+    "def-pod-lisse-adic-fibre-functors"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LisseScalarFiberMaps",
+  "file": "lean/Sheaf/Paper/LisseScalarFiberMaps.lean",
+  "declaration": "AlgebraicGeometry.Scheme.lisseIntegralScalarFiberComparison_exists",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.lisseIntegralFiber_finite",
+   "AlgebraicGeometry.Scheme.lisseIntegralFiber_projection",
+   "AlgebraicGeometry.Scheme.IsLisseIntegralScalarFiberComparison",
+   "AlgebraicGeometry.Scheme.lisseIntegralScalarFiberComparison_exists",
+   "AlgebraicGeometry.Scheme.lisseIntegralScalarFiberComparison",
+   "AlgebraicGeometry.Scheme.lisseIntegralScalarFiberComparison_spec",
+   "AlgebraicGeometry.Scheme.lisseIntegralScalarFiberComparison_naturality"
+  ],
+  "statement": "theorem lisseIntegralScalarFiberComparison_exists (F : LisseIntegralSheaf l E Y) :\n    ∃! c : (ModuleCat.ringExtendScalars.{d + 1, d + 1}\n        (lisseIntegerInclusion l E L ι)).obj (lisseIntegralFiber l E Y y F) ⟶\n      lisseIntegralFiber l L Y y\n        ((lisseIntegralScalarExtensionData l E Y L ι).functor.obj F),\n      IsLisseIntegralScalarFiberComparison Y y l E L ι F c",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261018T091401-L-3254458",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261018T091401-L-3254458",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

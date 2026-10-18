@@ -1,0 +1,129 @@
+{
+ "id": "lem-pod-lisse-coefficient-fiber-comparisons",
+ "kind": "statement",
+ "title": "Coherent comparisons on the coefficient diagram",
+ "statement": "In the geometric and coefficient setting of [lem-pod-lisse-coefficient-fiber-endomorphisms], suppose a natural comparison J_E≅P(E→L) followed by J_L is supplied for each coefficient inclusion. Then comparisons can be chosen to satisfy the unit and composition laws of the actual recorded pseudofunctor P. A rational scalar comparison of [lem-pod-lisse-rational-scalar-fiber-comparison] transports through the diagram category equalities and arrow equality to supply the required initial comparison.",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Weil II (1.1.1) b)-d), especially (d)(i), pp. 146-147"
+ },
+ "stmt_deps": [
+  "def-pod-lisse-l-adic-sheaves",
+  "lem-pod-lisse-rational-scalar-fiber-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Transport a supplied rational comparison through the category equalities of the coefficient diagram. Its map_eq identifies the scalar-extension arrow; the two inverse category transports cancel, giving a comparison for the recorded diagram arrow.",
+   "uses": [
+    "def-pod-lisse-l-adic-sheaves",
+    "lem-pod-lisse-rational-scalar-fiber-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the least finite coefficient field and the bijection on endomorphisms induced by its transition to every field.",
+   "uses": [
+    "lem-pod-lisse-coefficient-fiber-endomorphisms"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply coherence normalization to the supplied comparisons and those bijections. This proves both equations for P actual constraints, without assuming a formula for them.",
+   "uses": [
+    "lem-pod-lisse-fiber-coherence-normalization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pod-lisse-l-adic-sheaves",
+  "lem-pod-lisse-rational-scalar-fiber-comparison",
+  "lem-pod-lisse-coefficient-fiber-endomorphisms",
+  "lem-pod-lisse-fiber-coherence-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "F3",
+  "date": "2026-10-18",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Weil II (1.1.1) b)-d), especially (d)(i), pp. 146-147"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "natural isomorphisms for a pseudofunctor over a preorder with a least object can be made coherent if precomposition is fully faithful",
+   "results": "8 generic hits including WithInitial.pseudofunctor, Pseudofunctor.ObjectProperty.mapComp and FullyFaithful.preimageIso; no specialized normalization theorem.",
+   "verdict": "generic tools only",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.FullyFaithful",
+   "results": "12 hits on fully faithful functors and preimageIso; no coefficient-restriction density result.",
+   "verdict": "generic tools only",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "grep",
+   "query": "coheren.*[Ff]iber|[Ee]ndomorphism.*whisker|whisker.*[Ee]ndomorphism",
+   "results": "0 launcher Mathlib hits. Direct searches of the source library and Sheaf find no adic coefficient restriction or natural-endomorphism density statement. Blueprint search coherent comparison finds only prop-weil-pbc-scalar-extension (derived completed coefficients), a different statement.",
+   "verdict": "no duplicate specialized statement",
+   "date": "2026-10-18"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseAdicFiberFunctors",
+  "date": "2026-10-18",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-galois-lisse-representations",
+   "place": "Part (2), proof steps 7-9: scalar extension of integral geometric fibres, rationalization and the algebraic-coefficient fibre functor",
+   "via": [
+    "def-pod-lisse-adic-fibre-functors"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LisseCoefficientFiberComparisons",
+  "file": "lean/Sheaf/Paper/LisseCoefficientFiberComparisons.lean",
+  "declaration": "AlgebraicGeometry.Scheme.lisseCoefficientFiberComparisons_exists",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.lisseCoefficientFiberRawComparison",
+   "AlgebraicGeometry.Scheme.lisseCoefficientFiberComparisons_exists"
+  ],
+  "statement": "theorem lisseCoefficientFiberComparisons_exists\n    (S : ∀ E₀ : Padic.FiniteCoefficientFields l K,\n      LisseRationalSheaf l E₀.val Y ⥤ ModuleCat.{d + 1} E₀.val)\n    (hS : ∀ (E₀ : Padic.FiniteCoefficientFields l K)\n      (F : LisseRationalSheaf l E₀.val Y), (S E₀).obj F = lisseRationalFiber l E₀.val Y y F)\n    (hmap : ∀ E₀ : Padic.FiniteCoefficientFields l K,\n      IsLisseRationalFiberFunctor Y y l E₀.val (S E₀) (hS E₀))\n    (hcomparison :\n      let P := (lisseCoefficientDiagramData l Y K).diagram\n      let J := fun E₀ : Padic.FiniteCoefficientFields l K ↦\n        (eqToHom ((lisseCoefficientDiagramData l Y K).obj_eq E₀)).toFunctor ⋙\n          S E₀ ⋙ ModuleCat.extendScalars (algebraMap E₀.val K)\n      ∀ (E₀ L₀ : Padic.FiniteCoefficientFields l K) (f : E₀ ⟶ L₀),\n        J E₀ ≅ (P.map f.toLoc).toFunctor ⋙ J L₀) :\n    let P := (lisseCoefficientDiagramData l Y K).diagram\n    let J := fun E₀ : Padic.FiniteCoefficientFields l K ↦\n      (eqToHom ((lisseCoefficientDiagramData l Y K).obj_eq E₀)).toFunctor ⋙\n        S E₀ ⋙ ModuleCat.extendScalars (algebraMap E₀.val K)\n    ∃ e : ∀ {E₀ L₀ : Padic.FiniteCoefficientFields l K} (f : E₀ ⟶ L₀),\n        J E₀ ≅ (P.map f.toLoc).toFunctor ⋙ J L₀,\n      (∀ (E₀ : Padic.FiniteCoefficientFields l K) (X : P.obj ⟨E₀⟩),\n        (e (𝟙 E₀)).hom.app X ≫\n          (J E₀).map ((P.mapId ⟨E₀⟩).hom.toNatTrans.app X) = 𝟙 _) ∧\n      (∀ {E₀ L₀ M₀ : Padic.FiniteCoefficientFields l K}\n        (f : E₀ ⟶ L₀) (g : L₀ ⟶ M₀) (X : P.obj ⟨E₀⟩),\n        (e (f ≫ g)).hom.app X ≫\n            (J M₀).map ((P.mapComp f.toLoc g.toLoc).hom.toNatTrans.app X) =\n          (e f).hom.app X ≫ (e g).hom.app ((P.map f.toLoc).toFunctor.obj X))",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261018T091401-L-3254458",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261018T091401-L-3254458",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

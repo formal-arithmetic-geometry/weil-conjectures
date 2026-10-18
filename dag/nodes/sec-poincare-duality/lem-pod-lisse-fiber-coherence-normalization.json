@@ -1,0 +1,113 @@
+{
+ "id": "lem-pod-lisse-fiber-coherence-normalization",
+ "kind": "statement",
+ "title": "Coherence normalization from endomorphism detection",
+ "statement": "Let B be a preorder with a least element b0, P a Cat-valued pseudofunctor on its locally discrete bicategory, A a category, and J_b:P(b)→A functors. Suppose each arrow f:b→c has a supplied natural isomorphism J_b≅P(f)J_c, and precomposition by P(b0→b) is bijective on natural endomorphisms of J_b. Then one can choose comparisons e_f satisfying the unit and composition equations for the actual pseudofunctor constraints: e_id followed by J(mapId) is identity, and e_fg followed by J(mapComp) equals e_f followed by e_g on P(f).",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Weil II (1.1.1) d), pp. 146-147, categorical coherence implicit in coefficient extension; agent proof using Mathlib pseudofunctor unit and associativity axioms"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Divide a desired isomorphism after precomposition by any supplied comparison. Lift the resulting endomorphism and its inverse using bijectivity, and use injectivity to show they are inverse. This also proves injectivity on isomorphisms with a fixed comparison target.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Choose comparisons b_c from the least fibre to each c. Define the required precomposition of e_f as b_c inverse, b_d, the composition constraint of P, and the functor associator; lift it by the preceding construction.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For identity arrows compare with the inverse of the mapped unit constraint. Whiskering reduces equality to the right unit law of P. For composition substitute the lifted comparisons, use naturality, cancel adjacent b maps, and apply the associativity coherence axiom of P. Thinness makes the composites from b0 the same arrow.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "F3",
+  "date": "2026-10-18",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Weil II (1.1.1) d), pp. 146-147, categorical coherence implicit in coefficient extension; agent proof using Mathlib pseudofunctor unit and associativity axioms"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "natural isomorphisms for a pseudofunctor over a preorder with a least object can be made coherent if precomposition is fully faithful",
+   "results": "8 generic hits including WithInitial.pseudofunctor, Pseudofunctor.ObjectProperty.mapComp and FullyFaithful.preimageIso; no specialized normalization theorem.",
+   "verdict": "generic tools only",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.FullyFaithful",
+   "results": "12 hits on fully faithful functors and preimageIso; no coefficient-restriction density result.",
+   "verdict": "generic tools only",
+   "date": "2026-10-18"
+  },
+  {
+   "tool": "grep",
+   "query": "coheren.*[Ff]iber|[Ee]ndomorphism.*whisker|whisker.*[Ee]ndomorphism",
+   "results": "0 launcher Mathlib hits. Direct searches of the source library and Sheaf find no adic coefficient restriction or natural-endomorphism density statement. Blueprint search coherent comparison finds only prop-weil-pbc-scalar-extension (derived completed coefficients), a different statement.",
+   "verdict": "no duplicate specialized statement",
+   "date": "2026-10-18"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.LisseAdicFiberFunctors",
+  "date": "2026-10-18",
+  "group": "F3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "cor-galois-lisse-representations",
+   "place": "Part (2), proof steps 7-9: scalar extension of integral geometric fibres, rationalization and the algebraic-coefficient fibre functor",
+   "via": [
+    "def-pod-lisse-adic-fibre-functors"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.LisseFiberCoherenceNormalization",
+  "file": "lean/Sheaf/Paper/LisseFiberCoherenceNormalization.lean",
+  "declaration": "CategoryTheory.Pseudofunctor.coherentFiberComparisons_of_endWhisker",
+  "declarations": [
+   "CategoryTheory.Pseudofunctor.coherentFiberComparisons_of_endWhisker"
+  ],
+  "statement": "theorem Pseudofunctor.coherentFiberComparisons_of_endWhisker {B : Type*} [Preorder B]\n    (b₀ : B) (hb : ∀ b : B, b₀ ≤ b)\n    (P : Pseudofunctor (LocallyDiscrete B) Cat.{d + 1, d + 2})\n    {A : Type*} [Category A] (J : ∀ b : B, P.obj ⟨b⟩ ⥤ A)\n    (a : ∀ {b c : B} (f : b ⟶ c), J b ≅ (P.map f.toLoc).toFunctor ⋙ J c)\n    (h : ∀ b : B, Function.Bijective (fun u : J b ⟶ J b ↦\n      whiskerLeft (P.map (homOfLE (hb b)).toLoc).toFunctor u)) :\n    ∃ e : ∀ {b c : B} (f : b ⟶ c), J b ≅ (P.map f.toLoc).toFunctor ⋙ J c,\n      (∀ (b : B) (X : P.obj ⟨b⟩),\n        (e (𝟙 b)).hom.app X ≫ (J b).map ((P.mapId ⟨b⟩).hom.toNatTrans.app X) = 𝟙 _) ∧\n      (∀ {b c d : B} (f : b ⟶ c) (g : c ⟶ d) (X : P.obj ⟨b⟩),\n        (e (f ≫ g)).hom.app X ≫\n            (J d).map ((P.mapComp f.toLoc g.toLoc).hom.toNatTrans.app X) =\n          (e f).hom.app X ≫ (e g).hom.app ((P.map f.toLoc).toFunctor.obj X))",
+  "branch": "sheaf-dag",
+  "by": "F3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261018T091401-L-3254458",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F3",
+  "result": "pass",
+  "landing": "20261018T091401-L-3254458",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
