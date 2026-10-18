@@ -1,0 +1,84 @@
+{
+ "id": "lem-zl-normalized-coefficient-unit-realization",
+ "kind": "statement",
+ "title": "Normalized coefficient-unit realization and derived pullback",
+ "statement": "Fix the finite-field datum $k=\\overline{\\mathbf F}_q$ of characteristic $p$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$ inside $\\Omega=\\overline{\\mathbf Q}_\\ell$, its valuation ring $R$, and uniformizer $t$ [def-weil-l-adic-coefficient-extension]. For every separated finite-type $k$-scheme $T$, put $B_{n,T}=(R/t^n)_T$, $\\widehat R_T=\\lim_nB_{n,T}$, and let $M_T=\\widehat R_T[0]$ be its derived-complete integral coefficient unit [def-weil-completed-integral-coefficients, def-weil-derived-complete-integral-detailed]. Write $q_T$ for rationalization, $\\mathcal R_T$ for the strict reduction functor and $\\mathcal L_T=R\\lim\\operatorname{Res}$ for normalized reconstruction [lem-pur-normalized-reconstruction-adjunction-calculus]. Use $J_T$ and its pullback comparison from [lem-weil-pbc-condensed-e-realization], $U_T=p_T^*\\underline\\Omega$ [sk-def-sfb-pulled-back-coefficients] with exactly the coefficient ring of [sk-def-sfb-qlbar-condensed], and $T^T_{E,\\Omega}=U_T\\otimes^L_{E_T^c}-$, the derived extension [def-sfb-derived-extend-to-qlbar] along [def-sfb-subfield-to-qlbar-coefficient-map]; extension of scalars along $E_T^c\\to U_T$ is exact on every such $T$, whose underlying space is noetherian [lem-weil-pbc-condensed-flat-coefficient-calculus], so the comparison (Pull) below is defined. Put $F_T=T^T_{E,\\Omega}J_Tq_T$.\n\nFor a $k$-morphism $h:T\\to V$ between such schemes, let $P_h$ be inverse image of strict normalized finite coefficient systems. The finite unit maps $d_{h,n}:Lh_n^*B_{n,V}\\xrightarrow{\\sim}B_{n,T}$ are multiplication maps; they constitute the canonical actual system morphism $d_{h,\\bullet}:P_h\\mathcal R_VM_V\\to\\mathcal R_TM_T$ with coefficient-quotient transitions. Transport this morphism through $\\mathcal L_T$, using the normalized reconstruction units/counits, to obtain $\\widehat d_h:\\widehat Lh^*M_V\\xrightarrow{\\sim}M_T$, where $\\widehat Lh^*$ is completed integral pullback [def-weil-pbc-completed-pullback]. There are canonical unit identifications\n$$j_T:J_Tq_TM_T\\xrightarrow{\\sim}E_T^c,\\qquad u_T:F_TM_T\\xrightarrow{\\sim}U_T.$$\nIf $c_h:F_T\\widehat Lh^*\\xrightarrow{\\sim}Lh_\\Omega^*F_V$ is the composite of the rationalized integral pullback comparison, the specified $J$ pullback comparison, and the inverse of the derived coefficient/pullback comparison (Pull) [def-sfb-derived-pull-iso], then\n$$u_T\\circ F_T(\\widehat d_h)=e_h\\circ Lh_\\Omega^*(u_V)\\circ c_{h,M_V},$$\nwhere $e_h:Lh_\\Omega^*U_V\\xrightarrow{\\sim}U_T$ is the canonical module-unit pullback. The analogous equation before $T_{E,\\Omega}$ holds with $j_T$ and the $E^c$ unit pullback. These equalities hold for the actual reconstructed system map, not merely after finite-level evaluation. They commute with identity morphisms and composition: the finite-level unit multiplications, their reconstructed maps and their images use the canonical derived pullback compositors, and satisfy $e_f\\,Lf^*(e_g)\\,c_{f,g}=e_{gf}$ for composable morphisms, with the identity comparison giving $e_{\\mathrm{id}}=1$.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Sections 6.7 and 6.8, especially 6.8.14(2) and 6.8.15, motivate rational coefficient realization. Agent-formulated additional normalization obligation: these passages do not state preservation of the actual Rlim coefficient-unit maps under the specified J and condensed scalar extension."
+ },
+ "stmt_deps": [
+  "def-sfb-derived-extend-to-qlbar",
+  "def-sfb-derived-pull-iso",
+  "def-sfb-subfield-to-qlbar-coefficient-map",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-completed-pullback",
+  "lem-pur-normalized-reconstruction-adjunction-calculus",
+  "lem-weil-pbc-condensed-e-realization",
+  "lem-weil-pbc-condensed-flat-coefficient-calculus",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-qlbar-condensed"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Normalized completed coefficient-unit pullback maps reconstructed by Rlim agree with canonical unit pullback after rational adic realization and condensed coefficient extension",
+   "results": "8 hits; AdicCompletion.factorₐ_evalₐ_one; AdicCompletion.factor_evalₐ_eq_eval; PreTilt.mk_comp_untilt_eq_coeff_zero; IsAdicComplete.of_liftRingHom; IsAdicComplete.StrictMono.of_lift; IsAdicComplete.ofAlgEquiv_comp_liftRingHom; IsAdicComplete.StrictMono.mk_liftRingHom; IsAdicComplete.of_lift. Read the hits: none supplies the completed-adic/continuous-condensed comparison stated here. Underived sheaf free-pullback and discrete condensed module results do not compare Rlim, rationalization and the specified realization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, \"pullback\", \"iso\"",
+   "results": "10 hits; CategoryTheory.GrothendieckTopology.overMapPullbackCongr_eq_eqToIso; SheafOfModules.pullbackIso; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; SheafOfModules.pullbackObjFreeIso; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc. Read the hits: none supplies the completed-adic/continuous-condensed comparison stated here. Underived sheaf free-pullback and discrete condensed module results do not compare Rlim, rationalization and the specified realization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(unit|regular).*([Pp]ullback|[Rr]ealization)|([Pp]ullback|[Rr]ealization).*(unit|regular)",
+   "results": "25 hits; Mathlib/CategoryTheory/Topos/Sheaf.lean; Mathlib/CategoryTheory/Topos/Sheaf.lean; Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/CategoryTheory/RegularCategory/Basic.lean; Mathlib/Algebra/Ring/InjSurj.lean. Read the hits: none supplies the completed-adic/continuous-condensed comparison stated here. Underived sheaf free-pullback and discrete condensed module results do not compare Rlim, rationalization and the specified realization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A completed l adic coefficient unit and its canonical derived pullback maps are preserved by rational condensed realization",
+   "results": "8 hits; AdicCompletion.map_ext''_iff; Padic.adicCompletionEquiv; CondensedSet.LocallyConstant.functorFullyFaithful; Rat.HeightOneSpectrum.adicCompletion.padicEquiv; profiniteToCondensed; IsAdicComplete.of_comp_lift; AdicCompletion.of; CondensedMod.LocallyConstant.fullyFaithfulFunctor. Read the hits: none supplies the completed-adic/continuous-condensed comparison stated here. Underived sheaf free-pullback and discrete condensed module results do not compare Rlim, rationalization and the specified realization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherent derived inverse image of a regular coefficient module preserves canonical unit maps under extension of scalars",
+   "results": "8 hits; ModuleCat.extendScalarsId_inv_app_apply; ModuleCat.ExtendRestrictScalarsAdj.unit_app; ModuleCat.extendRestrictScalarsAdj_unit_app_apply; ModuleCat.ExtendRestrictScalarsAdj.Unit.map; ModuleCat.RestrictionCoextensionAdj.unit'_app; ModuleCat.ExtendRestrictScalarsAdj.unit; ModuleCat.RestrictionCoextensionAdj.unit'; ModuleCat.homEquiv_extendScalarsId. Read the hits: none supplies the completed-adic/continuous-condensed comparison stated here. Underived sheaf free-pullback and discrete condensed module results do not compare Rlim, rationalization and the specified realization.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-zl-assumed-trace-determinant-bridge",
+  "date": "2026-10-18",
+  "group": "NI"
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-thm-rationality",
+ "blueprint": {
+  "from": {
+   "node": "sk-thm-rationality",
+   "place": "First sentence of the rationality proof: generic coefficient-unit normalization needed to realize the constant model Weil map",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}
