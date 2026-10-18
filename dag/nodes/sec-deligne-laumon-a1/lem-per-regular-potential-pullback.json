@@ -15,9 +15,116 @@
   "def-per-potential-dualizing",
   "def-weil-pbc-inverse-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a geometric specialization $t'\\rightsquigarrow t$, put $x'=r(t')$, $x=r(t)$ and $b(v)=\\dim\\mathcal O_{P_{r(v)},v}$. By [lem-per-regular-specialization-geometry],\n$$c_P(t',t)=c_X(x',x)+b(t)-b(t').$$\nFactor $x'\\rightsquigarrow x$ into immediate specializations, as allowed by [lem-per-general-costalk-transitions]. The definition of a dimension function in [def-per-potential-dualizing] gives $\\delta_X(x')-\\delta_X(x)=c_X(x',x)$ by summing its drop of one along that chain (and gives zero for a codimension-zero geometric isomorphism). Substituting in the displayed identity yields\n$$\\delta_r(t')-\\delta_r(t)=c_P(t',t).$$\nIn particular it is one for an immediate specialization upstairs, proving that $\\delta_r$ is a dimension function.",
+   "uses": [
+    "lem-per-regular-specialization-geometry",
+    "lem-per-general-costalk-transitions",
+    "def-per-potential-dualizing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XIV, Proposition 2.5.4, expressed using the generic-fibre specialization geometry; XVII, Lemmas 4.3.2.4–4.3.2.6"
+   }
+  },
+  {
+   "text": "Fix $x\\in X$ and put $X_x=\\operatorname{Spec}\\mathcal O_{X,x}$, $P_x=P\\times_XX_x$, and $F=P\\times_X\\operatorname{Spec}\\kappa(x)$. Write $i:F\\hookrightarrow P_x$, $q:F\\to\\operatorname{Spec}\\kappa(x)$ and $j:P_x\\to P$. Apply [lem-per-regular-closed-support-base-change] after localization of the regular map $r$ to the closed point of $X_x$. It gives the canonical isomorphism $q^*R\\Gamma_xK\\cong i^!j^*r^*K$. The given $p_x$ therefore identifies this last object with $\\Lambda_F(\\delta_X(x))[2\\delta_X(x)]$. The fibre $F$ is regular by the regular-morphism hypothesis. Its affine coordinate rings are localizations of quotients of affine coordinate rings of $P$: on affine charts with ring map $A\\to B$ and $x$ represented by $\\mathfrak p$, they are localizations of $B/\\mathfrak p B$ by the image of $A\\setminus\\mathfrak p$. Thus they and their local rings are excellent by [lem-exc-finite-type-localization-excellent], applied to the finite-type quotient and its multiplicative localization. These are Noetherian as part of excellence. Ordinary inverse image preserves the bounded-below condition by the exactness theorem [lem-trf-geometric-inverse-image-exact].",
+   "uses": [
+    "lem-per-regular-closed-support-base-change",
+    "def-per-potential-dualizing",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-trf-geometric-inverse-image-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 4.3.1.1, first half; Corollary 4.2.3; excellence stability as in Stacks Tag 07QU, more-algebra.tex lemma-finite-type-over-excellent"
+   }
+  },
+  {
+   "text": "For $t\\in F$ put $c=\\dim\\mathcal O_{F,t}$ and $a=\\delta_X(x)$. Work on the local scheme $\\operatorname{Spec}\\mathcal O_{F,t}$, which is Noetherian, excellent and regular by step 2. The closed-point inclusion $t\\hookrightarrow\\operatorname{Spec}\\mathcal O_{F,t}$ is a closed immersion between regular affine Noetherian excellent schemes, so [lem-per-regular-gysin-calculus] gives the absolute-purity isomorphism $\\operatorname{Cl}_{t\\hookrightarrow F}:\\Lambda(-c)[-2c]\\xrightarrow{\\sim}R\\Gamma_t\\Lambda_F$. By [lem-per-regular-constant-gysin-potential] with $m=a$, the inverses of these classes, tensored by $(a)[2a]$, are the pinnings of the pinned potential complex $\\Lambda_F(a)[2a]$ for $a-\\dim\\mathcal O_{F,-}$ in degree $a-c$ at $t$. Define the desired pinning by the composite\n$$R\\Gamma_t(r^*K)\\cong R\\Gamma_t(i^!j^*r^*K)\\cong R\\Gamma_t(q^*R\\Gamma_xK)\\xrightarrow{R\\Gamma_t(q^*p_x)}R\\Gamma_t\\Lambda_F(a)[2a]\\xrightarrow{\\operatorname{Cl}_{t\\hookrightarrow F}^{-1}(a)[2a]}\\Lambda(a-c)[2a-2c].$$\nHere the first identification is supported composition after localization; all identifications and their coherence are included in [lem-per-regular-closed-support-base-change]. Since $a-c=\\delta_r(t)$, these are putative pinnings. Each point lies on its specified fibre, so this defines a pinning at every point with no gluing choice. Naturality in pinning-preserving maps follows by applying the natural comparison and the fixed inverse Gysin map to those maps.",
+   "uses": [
+    "lem-per-regular-constant-gysin-potential",
+    "lem-per-regular-gysin-calculus",
+    "lem-per-regular-closed-support-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 4.3.1.1, second half; Proposition 2.4.1.1 (inverse Gysin convention), and Proposition 2.4.4.1"
+   }
+  },
+  {
+   "text": "Check regular normalization locally at $t\\in P$ and $x=r(t)$ when $X$ and $P$ are regular and the input pinnings are inverse Gysin pinnings on $\\Lambda_X$. Let $c=\\operatorname{codim}_X(x)$ and $d=\\operatorname{codim}_{F}(t)$. The Gysin base-change assertion of [lem-per-regular-gysin-calculus] identifies $r^*\\operatorname{Cl}_{x\\hookrightarrow X}$ with $\\operatorname{Cl}_{F\\hookrightarrow P_x}$ under the supported comparison. Its composition assertion then identifies the product of this class and $\\operatorname{Cl}_{t\\hookrightarrow F}$ with $\\operatorname{Cl}_{t\\hookrightarrow P}$; the codimensions add in this composition. Taking inverses, the composite in step 3 is exactly $\\operatorname{Cl}_{t\\hookrightarrow P}^{-1}$. All class morphisms here are closed immersions between regular affine local schemes, or their localization restrictions, as allowed by that node. The change-of-base map is regular, which is all its base-change clause requires; it need not be finite type. This gives the asserted normalization for the constant sheaf, with dimension function $-\\operatorname{codim}_P$.",
+   "uses": [
+    "lem-per-regular-gysin-calculus",
+    "lem-per-regular-closed-support-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 4.3.1.2, including the product of the two Gysin classes; XVI, Theorem 2.5.12"
+   }
+  },
+  {
+   "text": "Assume now that $K$ is potential, and fix a geometric specialization $t'\\rightsquigarrow t$ over $x'\\rightsquigarrow x$. Use [lem-per-regular-specialization-geometry] to choose the commutative square with fibre-generic points $\\eta'$ over $x'$ and $\\eta$ over $x$. For the vertical edges $\\eta'\\rightsquigarrow t'$ and $\\eta\\rightsquigarrow t$, step 2 identifies the fibre-supported complex with the constant twist-shift determined by $p_{x'}$ and $p_x$, respectively. With exactly these inverse-Gysin pinnings that fibre complex is potential by [lem-per-regular-constant-gysin-potential], applied to the regular Noetherian excellent fibre (step 2) with $m=\\delta_X(x)$, respectively $m=\\delta_X(x')$. The closed-support and localization compatibility of [lem-per-general-costalk-transitions] identifies its transitions with the transitions on $r^*K$. Factoring a vertical edge into immediate specializations and composing therefore shows that its transition, under the pinnings of step 3, is the identity of $\\Lambda$ with the required twist. [lem-per-regular-constant-gysin-potential] imposes no connectedness, so none is required of a fibre.",
+   "uses": [
+    "lem-per-regular-specialization-geometry",
+    "lem-per-regular-constant-gysin-potential",
+    "lem-per-general-costalk-transitions",
+    "lem-per-regular-closed-support-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Section 4.3.3, the two vertical sides of the square; Lemma 4.3.1.1 and Theorem 3.1.2"
+   }
+  },
+  {
+   "text": "Factor $x'\\rightsquigarrow x$ into immediate specializations. The lifting assertion of [lem-per-regular-specialization-geometry] factors the top edge $\\eta'\\rightsquigarrow\\eta$ through fibre-generic points over that chain. Apply [lem-per-regular-pinnings-low-base-codimension] to each lifted edge, since its image has codimension one; a codimension-zero image is also covered by that lemma. Compose using [lem-per-general-costalk-transitions]. The top edge therefore also becomes the identity under the pinnings. Transitivity applied to the commutative square says that its two composite transition maps agree. Both vertical maps and the top map have just become identities, so the bottom transition $t'\\rightsquigarrow t$ becomes the identity too. In particular every immediate bottom specialization respects the specified pinnings. These costalks are isomorphic to a shifted one-dimensional $\\mathbf F_\\ell$-space by step 3. Maps between the matching shifts of such objects are determined by their map on the single nonzero cohomology group (a complex with one cohomology object is its shift). Hence the cohomological identity is the equality in $D^+(\\mathbf F_\\ell)$ required by [def-per-potential-dualizing]. This proves potentiality, including when the image of an immediate specialization has higher codimension.",
+   "uses": [
+    "lem-per-regular-specialization-geometry",
+    "lem-per-regular-pinnings-low-base-codimension",
+    "lem-per-general-costalk-transitions",
+    "def-per-potential-dualizing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Section 4.3.3, the top edge and the commutative-square argument, using Lemmas 4.3.2.1 and 4.3.2.5 and Theorem 3.1.2"
+   }
+  },
+  {
+   "text": "For regular maps $Q\\xrightarrow{s}P\\xrightarrow{r}X$, check the two constructions at a point $u\\in Q$ over $x\\in X$. The pasting and supported-composition clauses of [lem-per-regular-closed-support-base-change] identify both constructions with the ones on $Q_x\\xrightarrow{s_x}P_x\\to x$ after applying the same input pinning $p_x$. Thus on these fibres the input is the same constant complex $\\Lambda(\\delta_X(x))[2\\delta_X(x)]$. Each fibre scheme over $x$ is regular. Step 4 says that pulling its inverse Gysin pinnings along the regular $s_x$ gives its inverse Gysin pinnings again. Applying the common twist and shift therefore makes the iterated pinnings equal the direct pinnings, under $s^*r^*K\\cong(rs)^*K$. This argument uses only the individual input $p_x$, so applies to putative $K$ as well as potential $K$. Finally localization of source or target restricts the same supported comparison, $p_x$, and Gysin class; localization compatibility in [lem-per-regular-closed-support-base-change] and [lem-per-regular-gysin-calculus] makes the displayed composites equal after restriction. This proves the localization clause for the specified maps.",
+   "uses": [
+    "lem-per-regular-closed-support-base-change",
+    "lem-per-regular-gysin-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Remark 4.3.1.3 and Remark 4.1.3; Lemma 4.3.1.1, fibrewise locality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-regular-specialization-geometry",
+  "lem-per-general-costalk-transitions",
+  "def-per-potential-dualizing",
+  "lem-per-regular-closed-support-base-change",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-per-regular-constant-gysin-potential",
+  "lem-per-regular-gysin-calculus",
+  "lem-per-regular-pinnings-low-base-codimension"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "XIV, Proposition 2.5.4; XVII, Lemmas 4.3.1.1–4.3.1.2, Remark 4.3.1.3 and Section 4.3.3 (specialization square)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,7 +163,7 @@
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-potential-extraordinary-pullback",
@@ -77,5 +184,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-regular-potential-pullback",
+  "worker": "stage1",
+  "summary": "Retained the earlier item, source text and recorded searches. Added four source-level inputs: general supported base change, coefficient-free specialization geometry, general cohomological transitions, and the base-codimension-at-most-one comparison. Constructed the arbitrary putative pinnings, computed regular normalization, and proved potentiality by the source specialization square. No statement correction or Lean attachment; avoided the stronger arbitrary-field-extension wording of the overlapping existing potential-input node.",
+  "blueprint": "lem-per-artin-gabber-affine-curve proof step 3, dimension-normalized arbitrary-field Verdier duality via finite-residue duality and extraordinary pullback. Step 1 proves the dimension clause; steps 2–3 realize XVII 4.3.1.1; step 4 realizes 4.3.1.2; steps 5–6 realize 4.3.3; step 7 realizes Remark 4.3.1.3 and localization.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Excellence of local fibre rings, which are multiplicative localizations of finite-type quotients of affine coordinate rings of P; this is an algebraic permanence tool, not an alternative unit route."
+   },
+   {
+    "node": "lem-trf-geometric-inverse-image-exact",
+    "why": "General exactness of inverse image for a geometric morphism of sites, applied to ordinary small-etale module sheaves with constant coefficients to preserve D+; no same-unit node supplies this general sheaf fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-finite-type-localization-excellent",
+  "lem-trf-geometric-inverse-image-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-dd897f51b",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-dd897f51b (reviewer sub-agent of L); spot-checked: I read the item, the 4 new nodes, every cited statement and ILO at each cited place (XVII 2.4.1.1, 2.4.4.1, Thm 3.1.2, Prop 3.5.4, 4.1.1, 4.1.3, 4.2.1, 4.2.3, 4.3.1.1-4.3.1.2, 4.3.1.3, 4.3.2.1-4.3.2.6, 4.3.3; XIV 2.5.4). The item statement is unchanged and matches 4.1.1/4.1.3: ordinary r^* with F_ell etale D^+ coefficients, not finite type. Steps 1, 2, 4, 6 and 7 are correct. Checks: the codimension identity on A^1 over a field and over a DVR (vertical and horizontal cases); excellence of the fibre rings via a multiplicative localization of B/pB; Gysin base change and composition for 4.3.1.2; the square algebra and the passage from cohomology to D(F_ell) in step 6; pasting to fibres for composition. The 4 new nodes are faithful source statements: closed-support base change = 4.2.3 (no excellence needed); specialization geometry = 4.3.2.3-4.3.2.6 (I checked uniqueness of the fibre-generic lift via normalization of A/p); transitions = Thm 3.1.2 + 3.5.4; low-base-codimension = 4.3.2.1. None restates a clause of the item, and none cites SGA. FIX, one fault (C3/C4): steps 3 and 5 used the Z/ell^n node lem-per-potential-dualizing-regular-unit with n=1, which rests on the separate definition def-per-potential-dualizing-complex. Its statement also never says that its pinnings are the inverse Gysin classes; only its proof does. I added the F_ell statement-only node lem-per-regular-constant-gysin-potential (ILO XVII 2.4.1.1 + 2.4.4.1, Cl from lem-per-regular-gysin-calculus, no connectedness assumption; blueprint.from = lem-per-artin-gabber-affine-curve, same_as []; Mathlib grep recorded with 0 hits). Steps 3 and 5 now cite it, and proof_deps was recomputed. Batch-5 flags, all accepted: def-per-potential-dualizing and the regular-unit node reach sec-trace-formula only through lem-trf-integral-component-henselian-permanence, which is pure henselian algebra; lem-trf-geometric-inverse-image-exact is a general topos exactness fact. Neither belongs to the trace formula, Poincare duality or their proofs. The regular-unit citation is removed anyway. Tool uses accepted: lem-exc-finite-type-localization-excellent and lem-trf-geometric-inverse-image-exact. Maintainer notes: the new node is the F_ell counterpart of the NK Z/ell^n regular-unit node. lem-per-regular-pullback-pinnings (N8) requires regular fibres after every field extension, which is ill-posed (L tensor_k L is non-Noetherian for L=k(t_1,t_2,...)); it should use the finite-extension criterion.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
  }
 }
