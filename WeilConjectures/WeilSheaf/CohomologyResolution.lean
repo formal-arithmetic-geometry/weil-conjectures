@@ -41,14 +41,15 @@ namespace ProEtaleWeilSheaf
 variable (k₀ l) (Y : Scheme.{u}) [Y.Over (Spec (CommRingCat.of k₀))]
 
 /-- The global sections of a pro-étale Weil sheaf, as a functor to `ℚ̄_ℓ`-modules. -/
-noncomputable abbrev globalSectionsFunctor : ProEtaleWeilSheaf k₀ l Y ⥤ WeilCoefficients.{u} l :=
+noncomputable abbrev globalSectionsWeilFunctor :
+    ProEtaleWeilSheaf k₀ l Y ⥤ WeilCoefficients.{u} l :=
   IsoAlgebra.forget _ ⋙ AdicSheaf.forget _ ⋙ Sheaf.Γ _ _
 
 /-- The Frobenius `Γ(Ȳ, M) ≅ Γ(Ȳ, Fr^* M) --Γ(φ)--> Γ(Ȳ, M)` of the global sections of a
 pro-étale Weil sheaf `(M, φ)`. -/
 @[simps]
-noncomputable def globalSectionsFrobenius :
-    globalSectionsFunctor k₀ l Y ⟶ globalSectionsFunctor k₀ l Y where
+noncomputable def globalSectionsFrobeniusNatTrans :
+    globalSectionsWeilFunctor k₀ l Y ⟶ globalSectionsWeilFunctor k₀ l Y where
   app X := (globalSectionsLowerStarIso _
       (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).inv.app X.carrier.X ≫
     (Sheaf.Γ _ _).map ((AdicSheaf.forget _).map X.str.hom)
@@ -93,8 +94,8 @@ omit [Fact (ringChar k₀ ≠ l)] [QuasiCompact (Y ↘ Spec (CommRingCat.of k₀
 variable (k₀ l Y) in
 /-- The Frobenius of the global sections of the terms of a resolution, in the form of
 `CategoryTheory.Endofunctor.IsoAlgebra.frobeniusNatTrans`, is
-`AlgebraicGeometry.ProEtaleWeilSheaf.globalSectionsFrobenius`. -/
-lemma frobeniusNatTrans_eq_globalSectionsFrobenius :
+`AlgebraicGeometry.ProEtaleWeilSheaf.globalSectionsFrobeniusNatTrans`. -/
+lemma frobeniusNatTrans_eq_globalSectionsFrobeniusNatTrans :
     IsoAlgebra.frobeniusNatTrans (adicLowerStarGeometricFiberMapCompFrobeniusIso l
         (Y ↘ Spec (CommRingCat.of k₀)) (comp_over (Y ↘ Spec (CommRingCat.of k₀)) _))
       (AdicSheaf.forget _ ⋙ Sheaf.Γ _ (WeilCoefficients.{u} l))
@@ -104,7 +105,7 @@ lemma frobeniusNatTrans_eq_globalSectionsFrobenius :
           (comp_over (Y ↘ Spec (CommRingCat.of k₀)) _))))
       (Functor.whiskerLeft (AdicSheaf.forget _) (globalSectionsLowerStarIso _
         (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).inv) =
-      ProEtaleWeilSheaf.globalSectionsFrobenius k₀ l Y := by
+      ProEtaleWeilSheaf.globalSectionsFrobeniusNatTrans k₀ l Y := by
   refine NatTrans.ext (funext fun X ↦ ?_)
   have h := globalSectionsLowerStarIso_comm_map (WeilCoefficients.{u} l)
     (Scheme.Hom.geometricFiberMap (Y ↘ Spec (CommRingCat.of k₀))
@@ -115,7 +116,8 @@ lemma frobeniusNatTrans_eq_globalSectionsFrobenius :
     (Y ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv
     (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius_inv _ _).symm X.carrier.X
     ((AdicSheaf.forget _).map X.str.hom)
-  simp only [IsoAlgebra.frobeniusNatTrans_app, ProEtaleWeilSheaf.globalSectionsFrobenius_app,
+  simp only [IsoAlgebra.frobeniusNatTrans_app,
+    ProEtaleWeilSheaf.globalSectionsFrobeniusNatTrans_app,
     Functor.isoWhiskerLeft_inv, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
     Functor.comp_map, Functor.map_comp, Category.assoc]
   simp only [Mod.forget_map, adicLowerStar_map_hom]
@@ -133,10 +135,10 @@ complex `Γ(Ȳ, I)`, and its geometric Frobenius is induced by the Frobenius
 theorem exists_linearEquiv_cohomology_resolution (F : WeilSheaf k₀ l Y)
     (I : InjectiveResolution F.obj) (r : ℕ) :
     ∃ Θ : (F.cohomology r).carrier ≃ₗ[PadicAlgCl l] (WeilCoefficients.toModuleCat l).obj
-        ((I.cocomplex.sc r).map (ProEtaleWeilSheaf.globalSectionsFunctor k₀ l Y)).homology,
+        ((I.cocomplex.sc r).map (ProEtaleWeilSheaf.globalSectionsWeilFunctor k₀ l Y)).homology,
       ∀ x, Θ ((F.cohomology r).frobenius x) = ((WeilCoefficients.toModuleCat l).map
         (ShortComplex.homologyMap ((I.cocomplex.sc r).mapNatTrans
-          (ProEtaleWeilSheaf.globalSectionsFrobenius k₀ l Y)))).hom (Θ x) := by
+          (ProEtaleWeilSheaf.globalSectionsFrobeniusNatTrans k₀ l Y)))).hom (Θ x) := by
   have h := IsoAlgebra.frobenius_globalSectionsHomologyIso
     (adicLowerStarGeometricFiberMapCompFrobeniusIso l
         (Y ↘ Spec (CommRingCat.of k₀)) (comp_over (Y ↘ Spec (CommRingCat.of k₀)) _))
@@ -148,7 +150,7 @@ theorem exists_linearEquiv_cohomology_resolution (F : WeilSheaf k₀ l Y)
       (Functor.whiskerLeft (AdicSheaf.forget _) (globalSectionsLowerStarIso _
         (Spec (CommRingCat.of k₀) ↘ Spec (CommRingCat.of k₀)).geometricGaloisFrobenius.inv).inv)
       I r
-  rw [frobeniusNatTrans_eq_globalSectionsFrobenius] at h
+  rw [frobeniusNatTrans_eq_globalSectionsFrobeniusNatTrans] at h
   refine ⟨WeilCoefficients.linearEquivOfIso (IsoAlgebra.globalSectionsHomologyIso
     (adicLowerStarGeometricFiberMapCompFrobeniusIso l
         (Y ↘ Spec (CommRingCat.of k₀)) (comp_over (Y ↘ Spec (CommRingCat.of k₀)) _))
