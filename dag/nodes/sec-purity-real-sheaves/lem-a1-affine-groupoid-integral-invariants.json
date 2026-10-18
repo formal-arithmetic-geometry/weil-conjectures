@@ -11,11 +11,84 @@
   "def-pc-scheme",
   "def-weil-affine-spectrum",
   "def-pc-fibre-product",
-  "def-pc-finite-locally-free"
+  "def-pc-finite-locally-free",
+  "def-weil-polynomial-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "If $U$ is empty then $A$ is the zero ring and its unique element is annihilated by $T\\in C[T]$. Otherwise apply [lem-a1-affine-groupoid-invariant-rank-strata]. It gives a nonempty finite set $I$ of positive ranks and affine invariant pieces $U_r,R_r$ with both restricted projections of degree $r$. Put $A_r=\\Gamma(U_r,\\mathcal O)$ and $B_r=\\Gamma(R_r,\\mathcal O)$, and write $\\sigma_r,\\tau_r:A_r\\to B_r$ for their source and target maps. The restricted identity is still a section of both projections. We will construct a monic annihilator separately on each such piece, then combine them.",
+   "uses": [
+    "lem-a1-affine-groupoid-invariant-rank-strata"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BJ (groupoids-lemma-integral-over-invariants), proof, first paragraph"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-sheaf-disjoint-union-product] repeatedly to the structure sheaves and these finite disjoint open decompositions. Restriction gives $A\\cong\\prod_{r\\in I}A_r$ and $B\\cong\\prod_{r\\in I}B_r$. Because $s^{-1}(U_r)=t^{-1}(U_r)=R_r$, the maps $\\sigma,\\tau$ have components $\\sigma_r,\\tau_r$ under these identifications. Thus an element $(a_r)_r$ is in $C$ exactly when $\\sigma_r(a_r)=\\tau_r(a_r)$ for every $r$. Hence $C\\cong\\prod_{r\\in I}C_r$, where $C_r=\\{a_r\\in A_r:\\sigma_r(a_r)=\\tau_r(a_r)\\}$. This last assertion is just equality in a product, not a claim that invariants commute with an arbitrary base change.",
+   "uses": [
+    "lem-weil-pbc-sheaf-disjoint-union-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BJ (groupoids-lemma-integral-over-invariants), proof, first paragraph: componentwise reduction"
+   }
+  },
+  {
+   "text": "Fix $a\\in A$, and let $a_r$ be its component on $U_r$. Apply [lem-a1-finite-locally-free-norm-characteristic-polynomial] to $\\varphi=\\sigma_r$ and $b=\\tau_r(a_r)$. Its hypothesis is precisely the degree-$r$ finite local freeness of $s_r$. It gives $P_r(T)=N_{\\sigma_r[T]}(T-\\tau_r(a_r))\\in A_r[T]$, of the form $T^r+\\sum_{j<r}p_{r,j}T^j$, and the equality $\\bigl(\\sigma_r[T](P_r)\\bigr)(\\tau_r(a_r))=0$ in $B_r$. This does not assume $B_r$ is globally free over $A_r$.",
+   "uses": [
+    "lem-a1-finite-locally-free-norm-characteristic-polynomial"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BJ (groupoids-lemma-integral-over-invariants), proof, second paragraph: norm polynomial and Cayley-Hamilton"
+   }
+  },
+  {
+   "text": "Apply [lem-a1-affine-groupoid-polynomial-norm-invariant] to the restricted groupoid $(U_r,R_r)$ and $F=T-a_r\\in A_r[T]$. Since $\\tau_r[T]$ fixes $T$, its norm $Q_F$ is exactly the $P_r$ just constructed. That lemma gives $P_r\\in C_r[T]$. Explicitly, for every coefficient $p_{r,j}$ we have $\\sigma_r(p_{r,j})=\\tau_r(p_{r,j})$. This supplies invariant coefficients rather than assuming that the norm itself descends without a theorem.",
+   "uses": [
+    "lem-a1-affine-groupoid-polynomial-norm-invariant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BJ (groupoids-lemma-integral-over-invariants), proof, second paragraph: determinant trick after adjoining x"
+   }
+  },
+  {
+   "text": "The equality of the two images of each coefficient gives $\\bigl(\\sigma_r[T](P_r)\\bigr)(\\tau_r(a_r))=\\sum_j\\tau_r(p_{r,j})\\tau_r(a_r)^j=\\tau_r(P_r(a_r))$. Step 3 therefore gives $\\tau_r(P_r(a_r))=0$. The ring map $e_r^\\sharp:B_r\\to A_r$ satisfies $e_r^\\sharp\\circ\\tau_r=\\operatorname{id}_{A_r}$ because $t_r\\circ e_r=\\operatorname{id}_{U_r}$. Apply it to obtain $P_r(a_r)=0$. This is the explicit injectivity needed for the final descent of the annihilation equation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BJ (groupoids-lemma-integral-over-invariants), proof, final sentences; the identity section supplies the injectivity there obtained from faithful flatness"
+   }
+  },
+  {
+   "text": "Let $d=\\max I$. For each $r\\in I$, set $Q_r(T)=T^{d-r}P_r(T)\\in C_r[T]$. Every $Q_r$ has the form $T^d+\\sum_{j<d}q_{r,j}T^j$ and vanishes at $a_r$. For each $j<d$, the finite tuple $(q_{r,j})_r$ is a single coefficient $q_j\\in C$ by step 2. Then $Q(T)=T^d+\\sum_{j<d}q_jT^j\\in C[T]$ is monic, and the components of $Q(a)$ in $A\\cong\\prod_rA_r$ are exactly $Q_r(a_r)=0$. Hence $Q(a)=0$. Since $a$ was arbitrary, $A$ is integral over $C$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/groupoids.tex",
+    "place": "Tag 03BJ (groupoids-lemma-integral-over-invariants), proof, first paragraph: explicit recombination of the constant-rank pieces"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-a1-affine-groupoid-invariant-rank-strata",
+  "lem-weil-pbc-sheaf-disjoint-union-product",
+  "lem-a1-finite-locally-free-norm-characteristic-polynomial",
+  "lem-a1-affine-groupoid-polynomial-norm-invariant"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/groupoids.tex",
+  "place": "Tag 03BJ (groupoids-lemma-integral-over-invariants), proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,10 +117,38 @@
    "results": "[grep] OK 0 hit(s)",
    "date": "2026-10-18",
    "verdict": "no match: the hits do not state this affine groupoid result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The coordinate ring of an affine groupoid with finite locally free source and target is integral over the equalizer of the source and target ring homomorphisms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.hasAffineProperty\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"AlgebraicGeometry.HasAffineProperty @AlgebraicGeometry.IsIntegralHom fun X x f x_1 =>\\n  AlgebraicGeometry.IsAffine X ∧ (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f ⊤)).IsIntegral\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is integral if the target scheme $ Y $ is affine, the source scheme $ X $ is affine, and the induced ring homomorphism between their coordinate rings is integral (i\"}\n  {\"name\": \"AlgebraicGeometry.affine_isIntegral_iff\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (R : CommRingCat), AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Spec R) ↔ IsDomain ↑R\", \"doc\": \"The affine scheme $\\\\operatorname{Spec}(R)$ is integral if and only if the commutative ring $R$ is a domain (i.e., has no zero divisors).\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ (X : AlgebraicGeometry.Scheme) [AlgebraicGeometry.IsAffine X] [Nonempty ↥X]\\n  [IsDomain ↑(X.presheaf.obj (Opposite.op ⊤))], AlgebraicGeometry.IsIntegral X\", \"doc\": \"If $X$ is a non-empty affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is an integral domain, then $X$ is an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.not_isIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme) [Nonempty ↥S] [Nonempty n],\\n  ¬AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S)\", \"doc\": \"For any nonempty scheme $ S $ and nonempty type $ n $, the canonical morphism from the affine $ n $-space $ \\\\mathbb{A}^n_S $ to $ S $ is not an integral morphism of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.instIsIntegralSpecOfIsDomainCarrier\", \"module\": \"Mathlib/AlgebraicGeometry/Properties\", \"type\": \"∀ {R : CommRingCat} [IsDomain ↑R], AlgebraicGeometry.IsIntegral (AlgebraicGeometry.Spec R)\", \"doc\": \"For any commutative ring $ R $ that is a domain (i.e., has no zero divisors), the scheme $ \\\\operatorname{Spec}(R) $ constructed from the prime spectrum of $ R $ is an integral scheme. This means $ \\\\op\"}\n  {\"name\": \"AlgebraicGeometry.AffineSpace.isIntegralHom_over_iff_isEmpty\", \"module\": \"Mathlib/AlgebraicGeometry/AffineSpace\", \"type\": \"∀ {n : Type v} (S : AlgebraicGeometry.Scheme),\\n  AlgebraicGeometry.IsIntegralHom (AlgebraicGeometry.AffineSpace n S ↘ S) ↔ IsEmpty ↥S ∨ IsEmpty n\", \"doc\": \"The structure morphism of the affine space $\\\\mathbb{A}^n_S$ over a scheme $S$ is an integral morphism if and only if the base scheme $S$ is empty or the type $n$ is empty.\"}\n  {\"name\": \"AlgebraicGeometry.IsIntegralHom.integral_app\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Integral\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [self : AlgebraicGeometry.IsIntegralHom f] (U : Y.Opens),\\n  AlgebraicGeometry.IsAffineOpen U → (CommRingCat.Hom.hom (AlgebraicGeometry.Scheme.Hom.app f U)).IsIntegral\", \"doc\": \"For any integral morphism $ f: X \\\\to Y $ of schemes and any affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism on the sections $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is integral.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Finite\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsFinite f], AlgebraicGeometry.IsIntegralHom f\", \"doc\": \"Every finite morphism of schemes is an integral morphism. In algebraic geometry, this means that if a morphism $ f: X \\to Y $ is finite (i.e., affine and inducing finite ring extensions on stalks), the\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: affine/integral scheme results do not prove integrality over a groupoid invariant ring"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsIntegral\", \"invariant\"",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"Algebra.IsInvariant.isIntegral\", \"module\": \"Mathlib.RingTheory.Invariant.Basic\", \"type\": \" (A : Type u_1) (B : Type u_2) (G : Type u_3) [CommRing A] [CommRing B] [Algebra A B] [Group G] [MulSemiringAction G B] [Algebra.IsInvariant A B G] [Finite G] : Algebra.IsIntegral A B\", \"doc\": \"\"}\n  {\"name\": \"IsFractionRing.isInvariant_of_isIntegral\", \"module\": \"Mathlib.RingTheory.Invariant.Basic\", \"type\": \" (G : Type u_1) (A : Type u_2) (B : Type u_3) (K : Type u_4) (L : Type u_5) [Group G] [CommRing A] [CommRing B] [Algebra A B] [Field K] [Field L] [Algebra K L] [Algebra A K] [Algebra B L] [Algebra A L] [IsFractionRing A K] [IsFractionRing B L] [IsScalarTower A K L] [IsScalarTower A B L] [MulSemiring\", \"doc\": \"If `G` acts on `B/A` with `A` as the fixed subring, then `G` also acts on `L/K` with `K` as\\nthe fixed subfield, where `K` and `L` are the fraction fields of `A` and `B` respectively.\"}\n  {\"name\": \"Algebra.IsInvariant.isIntegral_of_profinite\", \"module\": \"Mathlib.RingTheory.Invariant.Profinite\", \"type\": \" {A : Type u_1} {B : Type u_2} [CommRing A] [CommRing B] [Algebra A B] {G : Type u} [Group G] [MulSemiringAction G B] [SMulCommClass G A B] [TopologicalSpace G] [CompactSpace G] [TotallyDisconnectedSpace G] [IsTopologicalGroup G] [TopologicalSpace B] [DiscreteTopology B] [ContinuousSMul G B] [Algebr\", \"doc\": \"\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: finite or profinite abstract group actions do not cover finite locally free groupoid schemes"
+  },
+  {
+   "tool": "grep",
+   "query": "groupoid.*integral|integral.*invariant|invariant.*integral",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/NumberTheory/RamificationInertia/Galois.lean\", \"line\": \"246\", \"text\": \"  have : Algebra.IsIntegral A C := isInvariant.isIntegral A C GAC\"}\n  {\"file\": \"Mathlib/RingTheory/Frobenius.lean\", \"line\": \"223\", \"text\": \"  have := Algebra.IsInvariant.isIntegral R S G\"}\n  {\"file\": \"Mathlib/RingTheory/IsGaloisGroup/Basic.lean\", \"line\": \"76\", \"text\": \"  isInvariant := IsFractionRing.isInvariant_of_isIntegral G A B K L\"}\n  {\"file\": \"Mathlib/RingTheory/IsGaloisGroup/Basic.lean\", \"line\": \"81\", \"text\": \"  have := hGAB.isInvariant.isIntegral\"}\n  {\"file\": \"Mathlib/RingTheory/IsGaloisGroup/Basic.lean\", \"line\": \"108\", \"text\": \"  ⟨fun h ↦ ⟨h.isInvariant.isIntegral, h.to_isFractionRing G A B K L⟩,\"}\n  {\"file\": \"Mathlib/RingTheory/Invariant/Profinite.lean\", \"line\": \"24\", \"text\": \"* `Algebra.IsInvariant.isIntegral_of_profinite`: `B/A` is an integral extension.\"}\n  {\"file\": \"Mathlib/RingTheory/Invariant/Profinite.lean\", \"line\": \"49\", \"text\": \"lemma Algebra.IsInvariant.isIntegral_of_profinite\"}\n  {\"file\": \"Mathlib/RingTheory/Invariant/Profinite.lean\", \"line\": \"50\", \"text\": \"    [Algebra.IsInvariant A B G] : Algebra.IsIntegral A B := by\"}\n  {\"file\": \"Mathlib/RingTheory/Invariant/Profinite.lean\", \"line\": \"55\", \"text\": \"  have := (Algebra.IsInvariant.isIntegral A (FixedPoints.subalgebra A B N.1.1) (G ⧸ N.1.1)).1\"}\n  {\"file\": \"Mathlib/RingTheory/Invariant/Basic.lean\", \"line\": \"27\", \"text\": \"* `Algebra.IsInvariant.isIntegral`: `B/A` is an integral extension.\"}\n  {\"file\": \"Mathlib/RingTheory/Invariant/Basic.lean\", \"line\": \"335\", \"text\": \"  have : Algebra.IsIntegral A B := Algebra.IsInvariant.isIntegral A B G\"}\n  {\"file\": \"Mathlib/RingTheory/Invariant/Basic.lean\", \"line\": \"488\", \"text\": \"theorem isInvariant_of_isIntegral [Algebra.IsIntegral A B] : Algebra.IsInvariant K L G := by\"}\n  {\"file\": \"Mathlib/RingTheory/Invariant/Basic.lean\", \"line\": \"512\", \"text\": \"  isInvariant_of_isIntegral G A B K L\"}\n  {\"file\": \"Mathlib/RingTheory/Invariant/Galois.lean\", \"line\": \"86\", \"text\": \"  have := Algebra.IsInvariant.isIntegral A B G\"}\n  {\"file\": \"Mathlib/MeasureTheory/Integral/CircleIntegral.lean\", \"line\": \"459\", \"text\": \"/-- Circle integrals are invariant when functions change along discrete sets. -/\"}\n  {\"file\": \"Mathlib/MeasureTheory/Group/Integral.lean\", \"line\": \"41\", \"text\": \"theorem integral_inv_eq_self (f : G → E) (μ : Measure G) [IsInvInvariant μ] :\"}\n  {\"file\": \"Mathlib/MeasureTheory/Group/Integral.lean\", \"line\": \"92\", \"text\": \"theorem integral_mul_left_eq_self [IsMulLeftInvariant μ] (f : G → E) (g : G) :\"}\n  {\"file\": \"Mathlib/MeasureTheory/Group/Integral.lean\", \"line\": \"102\", \"text\": \"theorem integral_mul_right_eq_self [IsMulRightInvariant μ] (f : G → E) (g : G) :\"}\n  {\"file\": \"Mathlib/MeasureTheory/Group/Integral.lean\", \"line\": \"109\", \"text\": \"theorem integral_div_right_eq_self [IsMulRightInvariant μ] (f : G → E) (g : G) :\"}\n  {\"file\": \"Mathlib/MeasureTheory/Group/Integral.lean\", \"line\": \"118\", \"text\": \"theorem integral_eq_zero_of_mul_left_eq_neg [IsMulLeftInvariant μ] (hf' : ∀ x, f (g * x) = -f x) :\"}\n  {\"file\": \"Mathlib/MeasureTheory/Group/Prod.lean\", \"line\": \"183\", \"text\": \"theorem lintegral_lintegral_mul_inv [IsMulLeftInvariant ν] (f : G → G → ℝ≥0∞)\"}\n  {\"file\": \"Mathlib/MeasureTheory/Group/Prod.lean\", \"line\": \"224\", \"text\": \"theorem measure_mul_lintegral_eq [IsMulLeftInvariant ν] (sm : MeasurableSet s) (f : G → ℝ≥0∞)\"}\n  {\"file\": \"Mathlib/MeasureTheory/Group/LIntegral.lean\", \"line\": \"33\", \"text\": \"/-- The Lebesgue integral of a function with respect to an inverse invariant measure is\"}\n  {\"file\": \"Mathlib/MeasureTheory/Group/LIntegral.lean\", \"line\": \"36\", \"text\": \"      /-- The Lebesgue integral of a function with respect to an inverse invariant measure is\"}\n  {\"file\": \"Mathlib/MeasureTheory/Group/LIntegral.lean\", \"line\": \"38\", \"text\": \"theorem lintegral_inv_eq_self [IsInvInvariant μ] (f : G → ℝ≥0∞) :\"}",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite locally free groupoid of affine schemes has integral invariant ring extension",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Algebra.IsInvariant.isIntegral\", \"module\": \"Mathlib.RingTheory.Invariant.Basic\", \"type\": \"[Finite G] : Algebra.IsIntegral A B\", \"doc\": \"If $ G $ is a finite group acting invariantly on the algebra $ A $ over $ B $, then $ A $ is integral over $ B $. In other words, every element of $ A $ satisfies a monic polynomial equation with coef\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.recOn\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} →\\n  {f : X ⟶ Y} →\\n    {motive : AlgebraicGeometry.IsFinite f → Sort u} →\\n      (t : AlgebraicGeometry.IsFinite f) →\\n        ([toIsAffineHom : AlgebraicGeometry.IsAffineHom f] →\\n            (finite_app :\\n                ∀ (U : Y.Opens),\\n                  AlgebraicGeom\", \"doc\": \"A morphism $ f : X \\\\to Y $ of schemes is finite if it is affine and for every affine open subset $ U \\\\subseteq Y $, the induced ring homomorphism $ \\\\Gamma(Y, U) \\\\to \\\\Gamma(X, f^{-1}(U)) $ is finite, m\"}\n  {\"name\": \"RingHom.Finite.to_isIntegral\", \"module\": \"Mathlib.RingTheory.IntegralClosure.Algebra.Basic\", \"type\": \"(h : f.Finite) : f.IsIntegral\", \"doc\": \"If a ring homomorphism $ f : A \\\\to B $ is finite (i.e., $ B $ is finitely generated as an $ A $-module), then $ f $ is integral (i.e., every element of $ B $ is integral over $ A $).\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.iff_isIntegralHom_and_locallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": IsFinite f ↔ IsIntegralHom f ∧ LocallyOfFiniteType f\", \"doc\": \"For a morphism $ f: X \\\\to Y $ of schemes, $ f $ is finite if and only if $ f $ is integral and locally of finite type.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instIsIntegralHom\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"[IsFinite f] : IsIntegralHom f\", \"doc\": \"Every finite morphism of schemes is an integral morphism. In algebraic geometry, this means that if a morphism $ f: X \\to Y $ is finite (i.e., affine and inducing finite ring extensions on stalks), the\"}\n  {\"name\": \"AlgebraicGeometry.isIntegral_of_isAffine_of_isDomain\", \"module\": \"Mathlib.AlgebraicGeometry.Properties\", \"type\": \"[IsAffine X] [Nonempty X] [IsDomain Γ(X, ⊤)] : IsIntegral X\", \"doc\": \"If $X$ is a non-empty affine scheme and the ring of global sections $\\\\Gamma(X, \\\\mathcal{O}_X)$ is an integral domain, then $X$ is an integral scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsFinite.instLocallyOfFiniteType\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \"[IsFinite f] : LocallyOfFiniteType f\", \"doc\": \"Every finite morphism of schemes is locally of finite type.\"}\n  {\"name\": \"Algebra.IsInvariant.isIntegral_of_profinite\", \"module\": \"Mathlib.RingTheory.Invariant.Profinite\", \"type\": \"[Algebra.IsInvariant A B G] : Algebra.IsIntegral A B\", \"doc\": \"If the algebra $ A $ over $ B $ is invariant under the action of a group $ G $, then every element of $ A $ is integral over $ B $.\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: finite group invariant results do not cover finite locally free groupoid schemes"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-a1-finite-flat-affine-relation-quotient",
@@ -68,5 +169,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-a1-affine-groupoid-integral-invariants",
+  "worker": "stage1",
+  "summary": "Followed Stacks 03BJ via invariant positive-rank pieces, determinant norm invariance and the locally free norm characteristic polynomial. Wrote the product equalizer and common-degree recombination explicitly. Used the identity section to justify injectivity of the target map. Preserved the statement, including nonreduced and disconnected cases; added the polynomial-ring statement dependency. No exact project attachment or Mathlib match was found. Three strictly smaller statement-only nodes were created.",
+  "blueprint": "Realizes the supporting integrality argument (groupoids-lemma-integral-over-invariants) in the affine quotient used in the fourth paragraph of the proof of 03XX, which supports the ancestor lem-a1-affine-hc0. The existing ancestry and unit binding are preserved.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-aa729ff4a",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-aa729ff4a (reviewer sub-agent of L); spot-checked: I read the item, the 3 new nodes and the cited statements in full, and checked them against Stacks groupoids.tex 03BH/03BI/03BJ (lines 4242-4368), exercises 02DU/02DV(1),(3) and algebra 00DX; all tag-to-label pairs were checked in tags/tags. The item statement still matches 03BJ, with no hypothesis added or dropped. Step 1: the rank-strata node covers the empty-U case and gives finite, positive-rank, affine, invariant pieces. Step 2: the Mathlib leaf for disjoint unions gives A, B and C as products, because s^{-1}(U_r)=t^{-1}(U_r). Step 3: the norm characteristic polynomial for sigma_r at tau_r(a_r) is annihilated by Cayley-Hamilton on local free charts. Step 4: the determinant trick for T-a_r makes P_r lie in C_r[T]. Step 5: e^sharp composed with tau is the identity because t∘e=id, so P_r(a_r)=0; this replaces the source's faithful-flatness argument and is valid. Step 6: padding by T^{d-r} glues the monic polynomials, which is correct. All new nodes are true and strictly smaller than the item; none restates one of its clauses. Rank strata: tested on the empty case, the identity case and a mixed-rank case; it is distinct from lem-weil-pbc-finite-locally-free-degree-locally-constant. Polynomial norm invariance: tested on the identity groupoid and a constant group action; it is distinct from lem-pd-finite-locally-free-norm-charts. Norm characteristic polynomial: tested on r=0, A=0 and a nilpotent element of k[eps]; Mathlib's charpoly needs Module.Free and the pinned Mathlib has no projective version, so this is not a one-line case of lem-weil-cayley-hamilton-free-module. B1-B9 pass: statement only, inline norm definition, tag+label sources, three kinds of search recorded, blueprint.from=lem-a1-affine-hc0 with the correct via. Route: the only off-unit citation is a Mathlib leaf, no tool_uses, no SGA. The item is not a target, so the base-change/coefficient check does not apply. No fixes."
  }
 }

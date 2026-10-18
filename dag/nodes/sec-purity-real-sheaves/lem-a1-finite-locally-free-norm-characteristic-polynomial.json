@@ -1,0 +1,72 @@
+{
+ "id": "lem-a1-finite-locally-free-norm-characteristic-polynomial",
+ "kind": "statement",
+ "title": "The norm characteristic polynomial for a finite locally free affine algebra",
+ "statement": "Let $A,B$ be commutative rings, let $\\varphi:A\\to B$ be a unital ring homomorphism, and suppose the affine morphism $\\operatorname{Spec}B\\to\\operatorname{Spec}A$ [def-weil-affine-spectrum] is finite locally free of degree $r\\ge0$ [def-pc-finite-locally-free]. Let $N_\\varphi:B\\to A$ denote the canonical determinant norm, characterized by the determinant of the multiplication matrix on every local finite free chart. Write $\\varphi[T]:A[T]\\to B[T]$ for its coefficientwise polynomial extension [def-weil-polynomial-ring]. The latter map is finite locally free of degree $r$ as well. For $b\\in B$, put\n$$\nP_b(T)=N_{\\varphi[T]}(T-b)\\in A[T].\n$$\nThis polynomial has the form $T^r+\\sum_{j<r}a_jT^j$ with $a_j\\in A$ and satisfies $\\bigl(\\varphi[T](P_b)\\bigr)(b)=0$ in $B$. In particular it is monic of degree $r$ when $A\\ne0$. If $A$ is the zero ring, the displayed form and annihilation assertion still hold. The norm and polynomial are defined by the local determinant characterization, independent of choices of local bases. No global freeness or Noetherian hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/exercises.tex; literature/stacks-project/algebra.tex",
+  "place": "Tags 02DU (exercises-exercise-trace-det)(1), 02DV (exercises-exercise-trace-det-rings)(1),(3), and 00DX (algebra-lemma-charpoly), applied on local finite free charts; the same norm polynomial is used in groupoids-lemma-integral-over-invariants."
+ },
+ "stmt_deps": [
+  "def-weil-affine-spectrum",
+  "def-pc-finite-locally-free",
+  "def-weil-polynomial-ring"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a finite locally free algebra of constant rank the norm of T minus an element is a monic polynomial annihilating that element and norms commute with base change",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"Algebra.algebraMap_intNorm\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"∀ {A : Type u_1} {K : Type u_2} {L : Type u_3} {B : Type u_6} [inst : CommRing A] [inst_1 : CommRing B]\\n  [inst_2 : Algebra A B] [inst_3 : Field K] [inst_4 : Field L] [inst_5 : Algebra A K] [IsFractionRing A K]\\n  [inst_7 : Algebra K L] [inst_8 : Algebra A L] [IsScalarTower A K L] [inst_10 : Algebra \", \"doc\": \"For any element $ x $ in the integral closure $ B $ of a commutative ring $ A $ in a field extension $ L/K $, the image of the integral norm $ \\\\mathrm{N}_{B/A}(x) $ under the canonical algebra homomor\"}\n  {\"name\": \"Algebra.norm_one_add_smul\", \"module\": \"Mathlib/RingTheory/NormTrace\", \"type\": \"∀ {A : Type u_1} {B : Type u_2} [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B] [Module.Free A B]\\n  [Module.Finite A B] (a : A) (x : B), ∃ r, (Algebra.norm A) (1 + a • x) = 1 + (Algebra.trace A B) x * a + r * a ^ 2\", \"doc\": \"For any commutative rings $A$ and $B$, where $B$ is a finite free $A$-algebra, and for any $a \\\\in A$ and $x \\\\in B$, there exists an element $r \\\\in A$ such that the norm of $1 + a \\\\cdot x$ in $B$ over \"}\n  {\"name\": \"Algebra.norm_norm\", \"module\": \"Mathlib/RingTheory/Norm/Transitivity\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] [Module.Free R S]\\n  {A : Type u_6} [inst_4 : Ring A] [inst_5 : Algebra R A] [inst_6 : Algebra S A] [IsScalarTower R S A] [Module.Free S A]\\n  {a : A}, (Algebra.norm R) ((Algebra.norm S) a) = (Algebra.norm\", \"doc\": \"For a ring $A$ equipped with compatible $R$-algebra and $S$-algebra structures forming a scalar tower $R \\\\to S \\\\to A$, and assuming $A$ is a free $S$-module, the norm from $S$ to $R$ of the norm of an\"}\n  {\"name\": \"Algebra.intNorm_intNorm\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"∀ (A : Type u_1) (B : Type u_6) [inst : CommRing A] [inst_1 : CommRing B] [inst_2 : Algebra A B]\\n  [inst_3 : IsIntegrallyClosed A] [inst_4 : IsDomain A] [inst_5 : IsDomain B] [inst_6 : IsIntegrallyClosed B]\\n  [inst_7 : Algebra.IsIntegral A B] [inst_8 : Module.IsTorsionFree A B] {C : Type u_9} [inst_\", \"doc\": \"For commutative rings $A \\\\subseteq B \\\\subseteq C$ where $C$ is an integrally closed domain, and for any element $x \\\\in C$ integral over $A$, the composition of integral norms satisfies $\\\\mathrm{N}_{A \"}\n  {\"name\": \"Algebra.isIntegral_norm\", \"module\": \"Mathlib/RingTheory/Norm/Transitivity\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {L : Type u_6} (K : Type u_7) [inst_1 : Field K] [inst_2 : Field L]\\n  [inst_3 : Algebra K L] [inst_4 : Algebra R L] [inst_5 : Algebra R K] [IsScalarTower R K L] {x : L},\\n  IsIntegral R x → IsIntegral R ((Algebra.norm K) x)\", \"doc\": \"If $ x $ is an element of $ L $ that is integral over $ R $, then the norm of $ x $ from $ L $ to $ K $, denoted $ \\\\mathrm{N}_{L/K}(x) $, is also integral over $ R $. This holds under the scalar tower\"}\n  {\"name\": \"Algebra.map_intNormAux\", \"module\": \"Mathlib/RingTheory/IntegralClosure/IntegralRestrict\", \"type\": \"∀ {A : Type u_1} {K : Type u_2} {L : Type u_3} {B : Type u_6} [inst : CommRing A] [inst_1 : CommRing B]\\n  [inst_2 : Algebra A B] [inst_3 : Field K] [inst_4 : Field L] [inst_5 : Algebra A K] [inst_6 : IsFractionRing A K]\\n  [inst_7 : Algebra K L] [inst_8 : Algebra A L] [inst_9 : IsScalarTower A K L] [\", \"doc\": \"For every element $ x $ in the integral closure $ B $ of a commutative ring $ A $ in a field extension $ L/K $, the canonical ring homomorphism $ A \\\\to K $ applied to the field norm $ \\\\mathrm{N}_{L/K}\"}\n  {\"name\": \"FiniteField.algebraMap_norm_eq_prod_pow\", \"module\": \"Mathlib/FieldTheory/Finite/Trace\", \"type\": \"∀ (K : Type u_1) (L : Type u_2) [inst : Field K] [inst_1 : Field L] [Finite L] [inst_3 : Algebra K L] (x : L),\\n  (algebraMap K L) ((Algebra.norm K) x) = ∏ i ∈ Finset.range (Module.finrank K L), x ^ Nat.card K ^ i\", \"doc\": \"For a finite field extension $ L/K $, the canonical embedding of the norm $ \\\\text{Norm}_{L/K}(x) $ into $ L $ satisfies $ \\\\text{algebraMap}(K,L)(\\\\text{Norm}_{L/K}(x)) = \\\\prod_{i=0}^{[L:K]-1} x^{\\\\#K^i}\"}\n  {\"name\": \"Algebra.norm_algebraMap\", \"module\": \"Mathlib/RingTheory/Norm/Defs\", \"type\": \"∀ {K : Type u_3} [inst : Field K] {L : Type u_4} [inst_1 : Ring L] [inst_2 : Algebra K L] (x : K),\\n  (Algebra.norm K) ((algebraMap K L) x) = x ^ Module.finrank K L\", \"doc\": \"For any element $ x \\\\in K $, the norm of $ \\\\text{algebraMap}(K, L)(x) $ in the algebra $ L $ over $ K $ is equal to $ x $ raised to the power of the finite rank of $ L $ as a $ K $-module, i.e., $ N_{\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: norm transitivity and field norms do not state the finite locally free characteristic polynomial theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Algebra.norm\", \"Polynomial\"",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "norm.*(baseChange|base_change|charpoly)|charpoly.*(baseChange|base_change)|charpoly.*(Projective|projective)",
+   "results": "[grep] OK 13 hit(s)\n  {\"file\": \"Mathlib/Algebra/Module/LinearMap/Polynomial.lean\", \"line\": \"245\", \"text\": \"lemma polyCharpolyAux_baseChange (A : Type*) [CommRing A] [Algebra R A] :\"}\n  {\"file\": \"Mathlib/Algebra/Module/LinearMap/Polynomial.lean\", \"line\": \"246\", \"text\": \"    polyCharpolyAux (tensorProduct _ _ _ _ ∘ₗ φ.baseChange A) (basis A b) (basis A bₘ) =\"}\n  {\"file\": \"Mathlib/Algebra/Module/LinearMap/Polynomial.lean\", \"line\": \"319\", \"text\": \"      LinearMap.charpoly ((tensorProduct R A M M).comp (baseChange A φ)\"}\n  {\"file\": \"Mathlib/Algebra/Module/LinearMap/Polynomial.lean\", \"line\": \"321\", \"text\": \"  rw [← polyCharpolyAux_map_eval (tensorProduct R A M M ∘ₗ baseChange A φ) _ (basis A bₘ),\"}\n  {\"file\": \"Mathlib/Algebra/Module/LinearMap/Polynomial.lean\", \"line\": \"322\", \"text\": \"    polyCharpolyAux_baseChange, Polynomial.map_map]\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Eigenspace/Charpoly.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.LinearAlgebra.Charpoly.BaseChange\"}\n  {\"file\": \"Mathlib/LinearAlgebra/SpecialLinearGroup.lean\", \"line\": \"12\", \"text\": \"public import Mathlib.LinearAlgebra.Charpoly.BaseChange\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.LinearAlgebra.Charpoly.BaseChange\"}\n  {\"file\": \"Mathlib/RingTheory/Spectrum/Prime/Polynomial.lean\", \"line\": \"54\", \"text\": \"    LinearMap.isNilpotent_iff_charpoly, ← Algebra.baseChange_lmul, LinearMap.charpoly_baseChange,\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Charpoly/BaseChange.lean\", \"line\": \"23\", \"text\": \"lemma LinearMap.charpoly_baseChange :\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Charpoly/BaseChange.lean\", \"line\": \"29\", \"text\": \"  rw [← f.charpoly_toMatrix b, ← (f.baseChange A).charpoly_toMatrix (b.baseChange A),\"}\n  {\"file\": \"Mathlib/LinearAlgebra/Transvection/Basic.lean\", \"line\": \"10\", \"text\": \"public import Mathlib.LinearAlgebra.Charpoly.BaseChange\"}\n  {\"file\": \"Mathlib/RingTheory/Norm/Basic.lean\", \"line\": \"67\", \"text\": \"  rw [norm_eq_matrix_det pb.basis, det_eq_sign_charpoly_coeff, charpoly_leftMulMatrix,\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the characteristic polynomial base change results assume Module.Free; finite locally free algebras need not be globally free"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite projective algebra of constant rank has a monic norm polynomial satisfying Cayley Hamilton",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"LinearMap.charpoly_monic\", \"module\": \"Mathlib.LinearAlgebra.Charpoly.Basic\", \"type\": \": f.charpoly.Monic\", \"doc\": \"For a linear map $ f $ on a finite-dimensional module $ M $ over a commutative ring $ R $, the characteristic polynomial of $ f $ is monic, i.e., its leading coefficient is 1.\"}\n  {\"name\": \"LinearMap.polyCharpoly_monic\", \"module\": \"Mathlib.Algebra.Module.LinearMap.Polynomial\", \"type\": \": (polyCharpoly φ b).Monic\", \"doc\": \"The characteristic polynomial of a linear map $\\\\varphi$ with respect to a basis $b$ is monic, i.e., its leading coefficient is 1. This holds for an $R$-module endomorphism $\\\\varphi$ where $R$ is a com\"}\n  {\"name\": \"Matrix.charpoly_monic\", \"module\": \"Mathlib.LinearAlgebra.Matrix.Charpoly.Coeff\", \"type\": \"(M : Matrix n n R) : M.charpoly.Monic\", \"doc\": \"For any square matrix $ M $ with entries in a commutative ring $ R $, the characteristic polynomial of $ M $ is monic, meaning its leading coefficient is 1.\"}\n  {\"name\": \"Matrix.charpoly.univ_monic\", \"module\": \"Mathlib.LinearAlgebra.Matrix.Charpoly.Univ\", \"type\": \": (univ R n).Monic\", \"doc\": \"For any commutative ring $ R $ and natural number $ n $, the universal characteristic polynomial of an $ n \\times n $ matrix (defined as the determinant of $ tI - X $ in the multivariate polynomial rin\"}\n  {\"name\": \"Matrix.charpoly\", \"module\": \"Mathlib.LinearAlgebra.Matrix.Charpoly.Basic\", \"type\": \"(M : Matrix n n R) : R[X]\", \"doc\": \"The characteristic polynomial of an $ n \\\\times n $ matrix $ M $ with entries in a commutative ring $ R $ is defined as the determinant of the matrix $ tI - M $, where $ t $ is the indeterminate in the\"}\n  {\"name\": \"LinearMap.det_eq_sign_charpoly_coeff\", \"module\": \"Mathlib.LinearAlgebra.Charpoly.BaseChange\", \"type\": \": LinearMap.det f = (-1) ^ Module.finrank R M * f.charpoly.coeff 0\", \"doc\": \"For a linear map $ f $ on a finite-rank module $ M $ over a commutative ring $ R $, the determinant of $ f $ satisfies $ \\\\det(f) = (-1)^{\\\\operatorname{rank}(M)} \\\\cdot \\\\operatorname{coeff}_{t^0}(\\\\chi_f\"}\n  {\"name\": \"LieAlgebra.engel_isBot_of_isMin.lieCharpoly_monic\", \"module\": \"Mathlib.Algebra.Lie.CartanExists\", \"type\": \": (lieCharpoly R M x y).Monic\", \"doc\": \"The characteristic polynomial of the Lie algebra homomorphism, computed using a chosen basis and with coefficients substituted as linear expressions in the indeterminate $X$, is monic, i.e., its leadi\"}\n  {\"name\": \"LinearMap.charpoly_natDegree\", \"module\": \"Mathlib.LinearAlgebra.Charpoly.Basic\", \"type\": \"[Nontrivial R] [StrongRankCondition R] : natDegree (charpoly f) = finrank R M\", \"doc\": \"Under the assumptions that $ R $ is a nontrivial ring satisfying the strong rank condition, the natural degree of the characteristic polynomial of a linear map $ f $ on a finite-dimensional module $ M\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: LinearMap.charpoly_monic and related results assume a finite free module, not an arbitrary finite locally free one"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-a1-affine-groupoid-integral-invariants",
+  "date": "2026-10-18",
+  "group": "Q01"
+ },
+ "chapter": "sec-purity-real-sheaves",
+ "unit": "sk-p-real-rankin",
+ "blueprint": {
+  "from": {
+   "node": "lem-a1-affine-hc0",
+   "place": "Fourth paragraph of the ancestor proof, affine quotient by groupoids-proposition-finite-flat-equivalence: monicity and Cayley-Hamilton for the norm polynomial in the supporting integrality proof, groupoids-lemma-integral-over-invariants, second paragraph.",
+   "via": [
+    "lem-a1-affine-groupoid-integral-invariants",
+    "lem-a1-finite-flat-affine-relation-quotient",
+    "lem-a1-separated-locally-qf-space-representable",
+    "lem-a1-separated-etale-space-scheme"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
