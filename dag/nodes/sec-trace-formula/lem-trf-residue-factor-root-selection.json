@@ -223,20 +223,20 @@
  },
  "lean": {
   "module": "Sheaf.FieldTheory.ResidueFactorRootSelection",
-  "declaration": "Polynomial.exists_residue_factor_root_selection",
+  "declaration": "Polynomial.exists_index_eval₂_eq_zero_and_ne_zero",
   "file": "lean/Sheaf/FieldTheory/ResidueFactorRootSelection.lean",
-  "statement": "theorem exists_residue_factor_root_selection {k : Type u} [Field k] {L : Type v} [Field L] [Algebra k L] (f g : k[X]) (hf : f.Monic) {I : Type w} [Fintype I] (α : I → L) (hfactor : f.map (algebraMap k L) = ∏ i : I, (X - C (α i))) (f₁ : k[X]) (hirr : Irreducible f₁) (hdiv : f₁ ∣ f) (havoid : ¬ f₁ ∣ g) : ∃ i : I, f₁.eval₂ (algebraMap k L) (α i) = 0 ∧ g.eval₂ (algebraMap k L) (α i) ≠ 0",
+  "statement": "theorem exists_index_eval₂_eq_zero_and_ne_zero {k : Type u} {L : Type v} [Field k] [Field L] [Algebra k L] (f g : k[X]) (hf : f.Monic) {I : Type w} [Fintype I] (α : I → L) (hfactor : f.map (algebraMap k L) = ∏ i : I, (X - C (α i))) (f₁ : k[X]) (hf₁ : Irreducible f₁) (hdiv : f₁ ∣ f) (hnotdiv : ¬ f₁ ∣ g) : ∃ i : I, f₁.eval₂ (algebraMap k L) (α i) = 0 ∧ g.eval₂ (algebraMap k L) (α i) ≠ 0",
   "branch": "newtargets-dag",
-  "by": "Q06",
+  "by": "N8",
   "date": "2026-10-17",
   "existing": false
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-6df582892",
-  "group": "Q06",
+  "reviewer": "NT-stage2-cc-4381db9c3",
+  "group": "N8",
   "result": "pass",
-  "note": "Clause-by-clause match of Polynomial.exists_residue_factor_root_selection with the node: Field k, Algebra k L (recorded match of def-pc-field-extension), f.Monic, Fintype I with no Nonempty, f.map algebraMap = ∏ (X - C (α i)), Mathlib Irreducible (nonzero follows in k[X]), f₁ ∣ f, ¬ f₁ ∣ g, ∃ i with eval₂ f₁ = 0 ∧ eval₂ g ≠ 0 at the same index. No extra hypotheses; universes u v w independent and bound. Source Stacks 00UF final paragraph checked. Edge cases (empty I, f=0, g=0, constant f₁, inseparable, any characteristic) covered. Mathematics is true and the five-step docstring proof is sound. No definitions; sorry-only; source and blueprint docstrings present; lean.statement verbatim; node differs from the repository only in lean; no name collision. Report has a Worker report and the standard 2026-10-17 Second reading note. nt_compile.py --json on the snapshot content: clean, no errors, 1.2 s; error injection confirmed the tool reports diagnostics. No findings."
+  "note": "Every node clause matches the Lean (Field k, Field L, Algebra k L; f,g : k[X]; f.Monic; finite family I : Type w with [Fintype I], empty allowed; f.map (algebraMap k L) = ∏ (X - C (α i)); Irreducible f₁ over k only; f₁ ∣ f and ¬ f₁ ∣ g in k[X]; ∃ i with f₁ and g evaluated by eval₂ along algebraMap: f₁ vanishes, g does not). Nothing stronger, nothing missing; universes u v w independent and bound. Source Stacks algebra.tex 40070-40126 (Tag 00UF, last paragraph) matches; the citer lem-trf-standard-etale-finite-free-prime-lifts uses the same form. Edge cases (empty I, L=k, repeated/inseparable factors, any characteristic) covered. No duplicate in the side clone or Mathlib. lean.statement verbatim in the file; docstrings carry source, blueprint and the 5 proof steps; sorry-only proof (#print axioms shows sorryAx), no definitions. Report has Worker report and Second reading by N8 (the worker's own brief re-check). nt_compile.py --json: 1.5 s, exit 0, no errors; a scratch copy with checks added confirmed the compiler elaborates the file. No findings."
  }
 }

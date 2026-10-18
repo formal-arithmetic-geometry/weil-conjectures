@@ -198,5 +198,25 @@
   "group": "Q77",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q77-28234640d (reviewer sub-agent of L); spot-checked: Read all required instructions, packet/report, item, cited nodes, unit/chapter route, and Stacks Tags 0AUM and 00DF. The quotient-pushout proof is correct; hypotheses, tensor order, base-change leg, edge cases, duplicates, searches, and route restrictions check out. No new nodes or repairs are needed. Full review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.DominationPushoutUniversalInjective",
+  "declaration": "LinearMap.domination_iff_pushout_universally_injective",
+  "file": "lean/Sheaf/TraceFormula/DominationPushoutUniversalInjective.lean",
+  "statement": "theorem domination_iff_pushout_universally_injective (R : Type u) [CommRing R] (P Q Q' : Type w) [AddCommGroup P] [AddCommGroup Q] [AddCommGroup Q'] [Module R P] [Module R Q] [Module R Q'] (a : P →ₗ[R] Q) (b : P →ₗ[R] Q') : ((∀ (L : Type v) [AddCommGroup L] [Module R L], LinearMap.ker (a.rTensor L) ≤ LinearMap.ker (b.rTensor L)) ↔ ∀ (L : Type v) [AddCommGroup L] [Module R L], Function.Injective (LinearMap.lTensor L (pushout.inr (ModuleCat.ofHom a) (ModuleCat.ofHom b)).hom))",
+  "branch": "newtargets-dag",
+  "by": "Q132",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Second review (cc, 2026-10-18): the modules P, Q, Q' were placed in the universe u of R; generalized to an independent universe w (one common universe, as ModuleCat.{w} R requires for the categorical pushout), matching the separate module universes of the dependency LinearMap.universally_injective_tensor_iff.",
+  "fixed_by": "NT-stage2-cc-6ab74091c"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6ab74091c",
+  "group": "Q132",
+  "result": "fix",
+  "note": "Statement checked clause by clause against node and Stacks 0AUM. Correct: CommRing R; a:P→Q, b:P→Q'; categorical ModuleCat pushout with b' = pushout.inr (out of Q', i.e. Stacks f'); domination as ker(a.rTensor L) ≤ ker(b.rTensor L) for all L; universal injectivity as injectivity of lTensor L of the leg; iff; edge cases (zero modules/maps) covered; no hollow defs, sorry only, docstrings with source and blueprint, report sections present, deps consistent, no duplicate in Mathlib or the project. Finding (H3, universe too small): P Q Q' : Type u tied the modules to R's universe, which the node and the dependency universally_injective_tensor_iff do not require. Fixed in fixes/DominationPushoutUniversalInjective.lean (universe u v w; P Q Q' : Type w) and fixes/lem-trf-domination-pushout-universal-injective.lean-record.json (verbatim statement updated). nt_compile.py --json: delivered and fixed texts both compile with no errors (~2 s); the tool's diagnostics were confirmed with a probe."
  }
 }

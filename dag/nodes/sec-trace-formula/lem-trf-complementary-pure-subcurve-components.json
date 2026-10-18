@@ -256,18 +256,18 @@
   "module": "Sheaf.AlgebraicGeometry.ComplementaryPureSubcurveComponents",
   "declaration": "AlgebraicGeometry.complementary_pure_subcurve_components",
   "file": "lean/Sheaf/AlgebraicGeometry/ComplementaryPureSubcurveComponents.lean",
-  "statement": "theorem complementary_pure_subcurve_components (X Y Z : Scheme.{u}) [IsReduced X] [IsNoetherian X] (hX : X.IsPureDimension 1) (iY : Y ⟶ X) [IsClosedImmersion iY] [IsReduced Y] (hY : Y.IsPureDimension 1) (iZ : Z ⟶ X) [IsClosedImmersion iZ] [IsReduced Z] (hZ : Set.range iZ = closure (Set.range iY)ᶜ) : (irreducibleComponents X).Finite ∧ (∃ I : Set (Set X), I ⊆ irreducibleComponents X ∧ Set.range iY = ⋃₀ I ∧ Set.range iZ = ⋃₀ (irreducibleComponents X \\ I)) ∧ Z.IsPureDimension 1 ∧ ∃ φ : Y ≅ (Scheme.IdealSheafData.vanishingIdeal (Closeds.closure (Set.range iZ)ᶜ)).subscheme, φ.hom ≫ (Scheme.IdealSheafData.vanishingIdeal (Closeds.closure (Set.range iZ)ᶜ)).subschemeι = iY",
+  "statement": "theorem complementary_pure_subcurve_components {X Y Z : Scheme.{u}} [IsReduced X] [IsNoetherian X] (hX : ∀ C ∈ irreducibleComponents X, topologicalKrullDim C = 1) (i : Y ⟶ X) [IsClosedImmersion i] [IsReduced Y] (hY : ∀ C ∈ irreducibleComponents Y, topologicalKrullDim C = 1) (j : Z ⟶ X) [IsClosedImmersion j] [IsReduced Z] (hZ : Set.range j = closure ((Set.range i)ᶜ)) : ∃ I : Set (Set X), I ⊆ irreducibleComponents X ∧ Set.range i = ⋃₀ I ∧ Set.range j = ⋃₀ (irreducibleComponents X \\ I) ∧ (∀ C ∈ irreducibleComponents Z, topologicalKrullDim C = 1) ∧ ∃ e : Y ≅ (Scheme.IdealSheafData.vanishingIdeal (Closeds.closure ((Set.range j)ᶜ))).subscheme, e.hom ≫ (Scheme.IdealSheafData.vanishingIdeal (Closeds.closure ((Set.range j)ᶜ))).subschemeι = i",
   "branch": "newtargets-dag",
-  "by": "Q119",
+  "by": "NG",
   "date": "2026-10-17",
   "existing": false
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-22bcf7535",
-  "group": "Q119",
+  "reviewer": "NT-stage2-cc-832f4fa41",
+  "group": "NG",
   "result": "pass",
-  "note": "Lean statement matches the node clause by clause: IsReduced, IsNoetherian (exactly locally Noetherian + compact), IsPureDimension 1 for X/Y/Z, reduced closed immersions; Z given by its image, which is equivalent by the reduced-induced uniqueness clause; component finiteness, I with range iY = ⋃₀I and range iZ = ⋃₀(components \\ I), and the double complement as an iso over X with the canonical vanishingIdeal subscheme. No stronger assumptions; universe u bound; empty cases covered; checked against Stacks Tag 0E38. Only node change: lean record plus added stmt_dep def-weil-pure-dimension (existing landed node); lean.statement verbatim. No definitions, only sorry, docstrings with source and blueprint, no pro-etale content. Report has a Worker report and a short but substantive Second reading by Q119. nt_compile clean in 1.7 s, with the parse confirmed by #check. No findings requiring change."
+  "note": "Node diff touches only the lean record; lean.statement appears verbatim in the file; one sorry, no definitions. Clauses match the node: IsReduced plus IsNoetherian (= locally Noetherian and quasi-compact, as the node defines it); dimension 1 for components of X and of Y via topologicalKrullDim on the subspace; Y is a reduced closed immersion; Z is any reduced closed immersion with range = closure of the complement, which is equivalent by the uniqueness clause of reduced_induced_closed_subscheme; ∃ I ⊆ irreducibleComponents with range i = ⋃₀I and range j = ⋃₀(comps \\ I); components of Z have dimension 1; double complement is an isomorphism over X with the canonical vanishingIdeal subscheme. Edge cases checked: X, Y or Z empty, meeting components, single universe u. Docstrings carry Stacks 0E38/01J3/01J4, the blueprint tag and the 6-step proof. Duplicate search (rg on side lean, dag nodes, slopmaster2) found nothing. nt_compile.py --json: rc 0, no errors or warnings, 2.6 s; a probe confirmed real elaboration (deliberate error caught, axioms include only sorryAx beyond the standard three). Report has a Worker report and the standard post-2026-10-17 Second reading line. No findings."
  }
 }

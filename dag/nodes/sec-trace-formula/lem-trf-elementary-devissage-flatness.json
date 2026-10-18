@@ -266,5 +266,23 @@
   "group": "Q107",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q107-55ff486da (reviewer sub-agent of L); spot-checked: Reviewed item and both new nodes against Stacks Tags 057U, 05BA, and 05B8, including hypotheses, scalar actions, neighbourhood and stalk arguments, edge cases, Mathlib searches, duplicates, route, and SGA/route-pivot restrictions. All six steps are explicit and under 2000 characters; no mathematical or structural faults found. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ElementaryDevissageFlatness",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.elementary_devissage_flatness",
+  "file": "lean/Sheaf/TraceFormula/ElementaryDevissageFlatness.lean",
+  "statement": "theorem elementary_devissage_flatness {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] (F : X.Modules) (_hF : F.IsQuasiCoherentFiniteType) (x : X) (hx : ¬ Subsingleton (((tensorPullback (f.fiberι (f x))).obj F).presheaf.stalk (f.asFiber x))) (n : ℕ) (_hn : topologicalKrullDimAt (⟨f.asFiber x, hx⟩ : {q : f.fiber (f x) | ¬ Subsingleton (((tensorPullback (f.fiberι (f x))).obj F).presheaf.stalk q)}) = (n : WithBot ℕ∞)) (X' Z' Y' S' : Scheme.{u}) (g : X' ⟶ X) (e : S' ⟶ S) (f' : X' ⟶ S') (i : Z' ⟶ X') (π : Z' ⟶ Y') (h : Y' ⟶ S') (x' : X') (s' : S') (z' : Z') (G : Z'.Modules) [Etale g] [Etale e] (_hg : g x' = x) (_he : e s' = f x) [IsIso (g.residueFieldMap x')] [IsIso (e.residueFieldMap s')] (_hfg : g ≫ f = f' ≫ e) (_hπ : i ≫ f' = π ≫ h) [IsAffine X'] [IsAffine Z'] [IsAffine Y'] [IsAffine S'] [IsClosedImmersion i] [LocallyOfFinitePresentation i] [QuasiCompact i] [QuasiSeparated i] [IsFinite π] (_hG : G.IsQuasiCoherentFiniteType) (_hiso : Nonempty ((pushforward i).obj G ≅ (tensorPullback g).obj F)) [SmoothOfRelativeDimension n h] [GeometricallyIntegral h] (_hi : i z' = x') (_hs : h (π z') = s') (_hfibre : (π ⁻¹' ({π z'} : Set Y')) = {z'}) (_hpure : @Algebra.IsPurelyTranscendentalExtension (S'.residueField (h (π z'))) (Y'.residueField (π z')) inferInstance inferInstance (h.residueFieldMap (π z')).hom.toAlgebra) : ((∃ U : X.Opens, x ∈ U ∧ ((tensorPullback U.ι).obj F).IsFlatOver (U.ι ≫ f)) ↔ (∃ U : Z'.Opens, z' ∈ U ∧ ((tensorPullback U.ι).obj G).IsFlatOver (U.ι ≫ π ≫ h))) ∧ ((∃ U : Z'.Opens, z' ∈ U ∧ ((tensorPullback U.ι).obj G).IsFlatOver (U.ι ≫ π ≫ h)) ↔ (∃ U : Y'.Opens, π z' ∈ U ∧ ((tensorPullback U.ι).obj ((pushforward π).obj G)).IsFlatOver (U.ι ≫ h))) ∧ (Module.Flat (S.presheaf.stalk (f x)) ((ModuleCat.restrictScalars (f.stalkMap x).hom).obj ((RingedSpace.moduleStalkFunctor X.toRingedSpace x).obj F)) ↔ Module.Flat (S'.presheaf.stalk ((π ≫ h) z')) ((ModuleCat.restrictScalars ((π ≫ h).stalkMap z').hom).obj ((RingedSpace.moduleStalkFunctor Z'.toRingedSpace z').obj G))) ∧ (Module.Flat (S'.presheaf.stalk ((π ≫ h) z')) ((ModuleCat.restrictScalars ((π ≫ h).stalkMap z').hom).obj ((RingedSpace.moduleStalkFunctor Z'.toRingedSpace z').obj G)) ↔ Module.Flat (S'.presheaf.stalk (h (π z'))) ((ModuleCat.restrictScalars (h.stalkMap (π z')).hom).obj ((RingedSpace.moduleStalkFunctor Y'.toRingedSpace (π z')).obj ((pushforward π).obj G))))",
+  "branch": "newtargets-dag",
+  "by": "Q133",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1b1afb491",
+  "group": "Q133",
+  "result": "pass",
+  "note": "Read Stacks 057U and its proof, the node and its 057S dependency declaration. Every hypothesis matches the recorded 057S dependency exactly: finite-type quasi-coherent module, fibre support, topological Krull dimension at x, étale maps with canonical residue isomorphisms, both commuting squares, four affine schemes, closed immersion of finite presentation, finite π, smooth of relative dimension n and geometrically integral h, singleton fibre, purely transcendental residue extension. Quasi-compact and quasi-separated on i are implied by the closed immersion, so nothing stronger is assumed. The neighbourhood chain (1)<->(2)<->(3) uses IsFlatOver, the node's affine-pair definition, through U.ι≫f, U.ι≫π≫h and U.ι≫h. The stalk chain (a)<->(b)<->(c) is separate and tests flatness over the base local ring. Edge cases n=0, trivial residue extension, single universe u, no Noetherian assumption: OK. The node changes only lean; lean.statement is verbatim in the file. Docstrings carry the source, blueprint id and all six proof steps; no definitions; only sorry. The Second reading section holds the standard 2026-10-17 note. nt_compile: rc 0, 3.4 s, no warnings; #check shows every variable bound; #print axioms gives sorryAx plus the standard three. No findings."
  }
 }

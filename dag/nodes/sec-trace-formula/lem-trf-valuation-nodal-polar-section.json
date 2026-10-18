@@ -24,7 +24,10 @@
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-multivariate-power-series",
   "def-weil-pbc-normal-ring",
-  "def-weil-proper-morphism"
+  "def-weil-proper-morphism",
+  "def-weil-pure-dimension",
+  "def-weil-pbc-module-residue-fiber",
+  "def-pc-zero-scheme"
  ],
  "proof": [
   {
@@ -294,5 +297,27 @@
   "group": "Q70",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q70-a21b18a2c (reviewer sub-agent of L); spot-checked: Read the full item, all three new nodes, unit route, cited DAG statements, Temkin Proposition 4.4.6, and Stacks Tags 0H74, 067R, and 0C6T. Verified every proof step, hypotheses, base change, coefficient category, edge cases, searches, duplicates, and route-pivot compliance. Wrote review.md; no repairs or dropped nodes are needed."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ValuationNodalPolarSection",
+  "declaration": "AlgebraicGeometry.exists_valuation_nodal_polar_section",
+  "declarations": [
+   "AlgebraicGeometry.polarDivisorCanonicalSection",
+   "AlgebraicGeometry.exists_valuation_nodal_polar_section"
+  ],
+  "file": "lean/Sheaf/TraceFormula/ValuationNodalPolarSection.lean",
+  "statement": "theorem exists_valuation_nodal_polar_section (K : Type u) [Field K] [IsSepClosed K] (V : ValuationSubring K) [Finite (PrimeSpectrum V)] (Y : Scheme.{u}) (f : Y ⟶ Spec (.of V)) [IsProper f] [Flat f] [LocallyOfFinitePresentation f] (hnormal : ∀ y : Y, IsDomain (Y.presheaf.stalk y) ∧ IsIntegrallyClosed (Y.presheaf.stalk y)) (hpure : ∀ t : Spec (.of V), (f.fiber t).IsPureDimension 1) (hred : ∀ t : Spec (.of V), GeometricallyReduced (f.fiberToSpecResidueField t)) (s : Spec (.of V)) (hs : IsClosed ({s} : Set (Spec (.of V)))) (Z : Scheme.{u}) [IsReduced Z] (z : Z ⟶ f.fiber s) [IsClosedImmersion z] (hZ : Set.range z ∈ irreducibleComponents (f.fiber s)) (hgeom : Nonempty (Over.mk (pullback.snd (z ≫ f.fiberToSpecResidueField s) (Spec.map (CommRingCat.ofHom (algebraMap ((Spec (.of V)).residueField s) (AlgebraicClosure ((Spec (.of V)).residueField s)))))) ≅ Over.mk (ProjectiveSpace (ULift.{u} (Fin 2)) (Spec (.of (AlgebraicClosure ((Spec (.of V)).residueField s)))) ↘ Spec (.of (AlgebraicClosure ((Spec (.of V)).residueField s)))))) (hnodal : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec (.of ((Spec (.of V)).residueField s))) (x : pullback (C := Scheme.{u}) (f.fiberToSpecResidueField s) g), pullback.fst (f.fiberToSpecResidueField s) g x ∈ Set.range z → x ∉ (pullback.snd (f.fiberToSpecResidueField s) g).smoothLocus → Nonempty (AdicCompletion (IsLocalRing.maximalIdeal ((pullback (f.fiberToSpecResidueField s) g).presheaf.stalk x)) ((pullback (f.fiberToSpecResidueField s) g).presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) Ω ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) Ω) * (MvPowerSeries.X 1 : MvPowerSeries (Fin 2) Ω)}))) (hboundary : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec (.of ((Spec (.of V)).residueField s))), {x : pullback (C := Scheme.{u}) (f.fiberToSpecResidueField s) g | pullback.fst (f.fiberToSpecResidueField s) g x ∈ Set.range z ∧ ∃ W ∈ irreducibleComponents (f.fiber s), W ≠ Set.range z ∧ pullback.fst (f.fiberToSpecResidueField s) g x ∈ W}.encard ≤ 2) : Nonempty (Over.mk (z ≫ f.fiberToSpecResidueField s) ≅ Over.mk (ProjectiveSpace (ULift.{u} (Fin 2)) (Spec (.of ((Spec (.of V)).residueField s))) ↘ Spec (.of ((Spec (.of V)).residueField s)))) ∧ ∃ (n : ℕ) (Zi : Fin n → Set (f.fiber s)), Function.Injective Zi ∧ Set.range Zi = {W ∈ irreducibleComponents (f.fiber s) | W ≠ Set.range z} ∧ ∃ (p : Fin n → f.fiber s) (σ : Fin n → (Spec (.of V) ⟶ Y)), (∀ i, σ i ≫ f = 𝟙 _) ∧ (∀ i, IsClosedImmersion (σ i) ∧ (σ i).ker.IsInvertible) ∧ (∀ i, Set.range (σ i) ⊆ (f.smoothLocus : Set Y)) ∧ (∀ i j, i ≠ j → Disjoint (Set.range (σ i)) (Set.range (σ j))) ∧ (∀ i, σ i s = f.fiberι s (p i)) ∧ (∀ i, p i ∈ Zi i ∧ p i ∉ Set.range z ∧ ∀ W ∈ irreducibleComponents (f.fiber s), p i ∈ W → W = Zi i) ∧ (∀ i, p i ∈ (f.fiberToSpecResidueField s).smoothLocus ∧ IsIso ((f.fiberToSpecResidueField s).residueFieldMap (p i))) ∧ ∃ (m : ℕ), 0 < m ∧ ∃ J : Y.IdealSheafData, J = (∏ i, (σ i).ker) ^ m ∧ J.IsInvertible ∧ J.toModulesᵛ.IsInvertible ∧ ∃ a : Γ(J.toModulesᵛ, ⊤), (∀ i, Scheme.Modules.residueValue a (f.fiberι s (p i)) trivial ≠ 0) ∧ (∀ i, Module.rank (Y.residueField (f.fiberι s (p i))) (Scheme.Modules.residueFiber J.toModulesᵛ (f.fiberι s (p i))) = 1) ∧ (Scheme.Modules.homOfGlobalSection J.toModulesᵛ (polarDivisorCanonicalSection J)).zeroLocus = J ∧ (∀ i, ∃ (U : Y.affineOpens) (hx : f.fiberι s (p i) ∈ U.1) (t : Γ(Y, U.1)) (q : Γ(J.toModules, U.1)), t ∈ nonZeroDivisors Γ(Y, U.1) ∧ (σ i).ker.ideal U = Ideal.span {t} ∧ J.toModulesι.app U.1 q = t ^ m ∧ IsLocalRing.maximalIdeal ((f.fiber s).presheaf.stalk (p i)) = Ideal.span {((f.fiber s).presheaf.germ ((f.fiberι s) ⁻¹ᵁ U.1) (p i) hx) ((f.fiberι s).app U.1 t)} ∧ ((f.fiber s).presheaf.germ ((f.fiberι s) ⁻¹ᵁ U.1) (p i) hx) ((f.fiberι s).app U.1 t) ∈ nonZeroDivisors ((f.fiber s).presheaf.stalk (p i)) ∧ IsUnit (((f.fiber s).presheaf.germ ((f.fiberι s) ⁻¹ᵁ U.1) (p i) hx) ((f.fiberι s).app U.1 ((Scheme.Modules.ΓHomObjAddEquiv J.toModules (Scheme.Modules.unit Y) a).app U.1 q)))) ∧ (∀ x : Y, x ∉ J.support → ∃ (U : Y.affineOpens), x ∈ U.1 ∧ ∃ b : Γ(Y, U.1), ∀ q : Γ(J.toModules, U.1), (Scheme.Modules.ΓHomObjAddEquiv J.toModules (Scheme.Modules.unit Y) a).app U.1 q = b * @id Γ(Y, U.1) (J.toModulesι.app U.1 q))",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9e1501ae0",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause matches the node, verified against the dependency declarations (residueFiber/residueValue, IdealSheafData.IsInvertible, Mathlib IdealSheafData Mul/Pow, toModulesᵛ, Hom.zeroLocus, homOfGlobalSection/ΓHomObjAddEquiv, ProjectiveSpace with ULift (Fin 2) = P^1, IsPureDimension, smoothLocus). Quantifying hnodal/hboundary over all algebraically closed Omega in universe u is equivalent to the node's algebraic closure (the closure is included; nodes are stable under extension of algebraically closed fields; kappa(s) separably closed makes points equal branches). Edge cases covered: n=0 (empty product is top), V a field, non-Noetherian V, singularities away from Z. Helper polarDivisorCanonicalSection is real data with axioms propext/choice/Quot.sound; theorem proof is sorry only. Docstrings carry source, blueprint tag and all ten proof steps. lean.statement matches the file signature verbatim; no duplicate found. nt_compile --json on the snapshot: rc 0, no errors or warnings, 3.5 s. Second-reading section is the accepted 2026-10-17 direct-delivery text. No findings."
  }
 }

@@ -264,5 +264,27 @@
   "group": "Q64",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q64-743386ef8 (reviewer sub-agent of L); spot-checked: Read the item, all cited node statements, unit/chapter route, Stacks Tags 0BZK, 0BZI, 0BZW, 066E, 064K, 0A66, 00FN, and 00IK. Verified every proof step, hypotheses, coefficient category, base-change model, shift bounds, edge cases, duplicate/cycle checks, route-pivot compliance, and long-step rule. No new nodes or repairs are needed. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.UpperShriekBoundedCoherent",
+  "declaration": "AlgebraicGeometry.AlgebraicShriekCalculus.shriek_bounded_finite_homology",
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicShriekCalculus.shriek_bounded_finite_homology",
+   "AlgebraicGeometry.AlgebraicShriekCalculus.shriek_unit_bounded_finite_homology"
+  ],
+  "file": "lean/Sheaf/TraceFormula/UpperShriekBoundedCoherent.lean",
+  "statement": "theorem shriek_bounded_finite_homology (S : AlgebraicGeometry.AlgebraicShriekCalculus.{u}) {R A : CommRingCat.{u}} [IsNoetherianRing R] [IsNoetherianRing A] (φ : R →+* A) (hφ : RingHom.FiniteType φ) (n : ℕ) (p : MvPolynomial (Fin n) R →+* A) (_hp : Function.Surjective p) (_hc : p.comp (MvPolynomial.C : R →+* MvPolynomial (Fin n) R) = φ) (_hperfect : DerivedCategory.IsPerfectRingComplex ((DerivedCategory.singleFunctor (ModuleCat.{u} (MvPolynomial (Fin n) R)) 0).obj ((ModuleCat.restrictScalars p).obj (ModuleCat.of A A)))) (K : AlgebraicGeometry.algebraicShriekD R) (_hbounded : ∃ a b : ℤ, K.IsGE a ∧ K.IsLE b) (_hfinite : ∀ i : ℤ, Module.Finite R ((DerivedCategory.homologyFunctor (ModuleCat.{u} R) i).obj K)) : (∃ a b : ℤ, ((S.shriek φ hφ).obj K).IsGE a ∧ ((S.shriek φ hφ).obj K).IsLE b) ∧ ∀ i : ℤ, Module.Finite A ((DerivedCategory.homologyFunctor (ModuleCat.{u} A) i).obj ((S.shriek φ hφ).obj K))",
+  "branch": "newtargets-dag",
+  "by": "Q22",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e340b30b",
+  "group": "Q22",
+  "result": "pass",
+  "note": "Read node, Stacks 0BZK (dualizing.tex 4411-4445), all 8 stmt-dep records and declarations (AlgebraicShriekCalculus structure incl. shriek/polynomialModel, IsPerfectRingComplex, IsNoetherianRing, RingHom.FiniteType, MvPolynomial, Module.Finite, DerivedCategory). Every hypothesis matches the node and none is stronger: Noetherian R,A; finite type; presentation n,p surjective with p∘C=φ (n=0 allowed); A restricted along p perfect over P; K with IsGE/IsLE bounds and finite H^i. Conclusion is D^b_Coh(A); the R[0] corollary is a second theorem. The perfectness instance (Mathlib's ofIsGrothendieckAbelian) differs from the calculus's u+1 instance but the predicate does not depend on the localization. No universe restriction; vars bound; axioms standard + sorryAx. Bodies are sorry only; docstrings carry source and blueprint; proof steps transcribed; no duplicate found; only the item's lean record changed (deps byte-identical to live); statement verbatim. Second-reading section holds the 2026-10-17 policy note, accepted. nt_compile --json: exit 0, 3.0 s, no diagnostics."
  }
 }

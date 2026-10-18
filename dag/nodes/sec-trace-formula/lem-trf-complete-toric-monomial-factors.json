@@ -132,5 +132,23 @@
   "group": "Q39",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-ddd56bbf7 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, the new node lem-trf-complete-toric-kato-recognition, the three statement deps, the neighbours (divisorial-structure, which cites the item in step 5; saturation-normality; regular-local-ufd; support-projection; monoidal-ideal-contraction; free-characteristic-regular-boundary; sharp-chart), unit sk-i-curve-zero, the previous return (returns/Q39.md, 19:27) and ILO VI 1.1-1.8 (PDF pp. 75-76). VI 1.4 states M_X = O_X ∩ j_*O_U^* citing Nizioł 2.6. VI 1.6 gives the models k[[P]][[t]] and C(k)[[P]][[t]]/(f) with f ≡ p mod (P−0, t) via Kato 3.2; these match rings (i) and (ii) exactly. The new statement (a function invertible on S^-1 R is u·z^a) is true. By Kato 3.2's converse, R is log regular with stalk P ⊕ R^× at the closed point, U = Spec S^-1 R, and Kato 11.6 applies at the closed point. I tested it on P={0}, k[[x,y]], the A1 cone (exponents only in P, so the false full-orthant claim is gone), C[[x]]/(p−x), C[[x]]/(p−x^2), C[[x,y]]/(p−xy) and n=0. No duplicate exists in the DAG or the blueprint: the divisorial-structure node is global and citing it would be circular, and the regular-local UFD node does not cover singular cones. The new node is equivalent to the item, but the 19:27 return explicitly allowed one honest Kato/Nizioł literature-interface node with WANTED, and this node states that theorem in its natural form, so I accept it under D1/D2. Steps: step 1 is a one-line localization inverse; step 2 applies the interface with exactly the item's hypotheses, using its statement, not its proof; step 3 covers edge cases. proof_deps equals the uses, there is no cycle, the route stays in the unit, no SGA is cited and no tool_uses are needed. One fault, repaired: the new node had no lean_audit, although the report claims it does and return point (2) asked for it. Grepping slopmaster2 and the upstream-master archive found no Lean for it, so I wrote the corrected whole file in fixes/ with lean_audit master/slopmaster2 = none and nothing else changed. For the maintainer: the item's maintainer-owned source.place and blueprint.from.place still mention the nonexistent 'Algebraic sublemma for VI 1.4' and should be corrected to ILO VI 1.4/1.6 with Kato 11.6 / Nizioł 2.6 WANTED.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.CompleteToricMonomialFactors",
+  "declaration": "complete_toric_monomial_factors",
+  "file": "lean/Sheaf/TraceFormula/CompleteToricMonomialFactors.lean",
+  "statement": "theorem complete_toric_monomial_factors (P : Type u) [AddCommMonoid P] (hP : IsFineSaturatedMonoid (Multiplicative P)) (hsharp : ∀ q : P, IsAddUnit q → q = 0) (n : ℕ) : (∀ (k : Type v) [Field k] (q : P) (b c : CompletedLocalModel k P n), b * c = completeToricChart k P n q → ∃ (r : P) (u : CompletedLocalModel k P n), IsUnit u ∧ b = u * completeToricChart k P n r) ∧ (∀ (C : Type v) [CommRing C] [IsLocalRing C] (p : ℕ), IsCohenRing p C → ∀ θ : CompletedLocalModel C P n, θ - (p : CompletedLocalModel C P n) ∈ completedLocalModelBoundaryIdeal C P n → ∀ (q : P) (b c : cohenCompleteToricRing C P n θ), b * c = cohenCompleteToricChart C P n θ q → ∃ (r : P) (u : cohenCompleteToricRing C P n θ), IsUnit u ∧ b = u * cohenCompleteToricChart C P n θ r)",
+  "branch": "newtargets-dag",
+  "by": "Q120",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cf6079e2b",
+  "group": "Q120",
+  "result": "pass",
+  "note": "Clause-by-clause match with the node: fs+sharp P, n, B_L(P,n) as the published CompletedLocalModel (adic completion at m_L + monomials q≠0 + variables), field case (i), Cohen case (ii) via IsCohenRing (includes Nat.Prime p, no perfectness), θ−p in completedLocalModelBoundaryIdeal, R=B_C/(θ), chart z^q from the published completeToricChart/cohenCompleteToricChart, conclusion ∀q b c, bc=z^q → ∃ r u, IsUnit u ∧ b=u z^r, same quantifier order. No new or hollow definitions; encoding consistent with the landed complete_toric_kato_recognition. Node copy differs from the clone only in lean; lean.statement verbatim in the file. Edge cases q=0, P={0}, n=0 and universes (P:u; k,C:v, polymorphic) ok. Docstrings carry source ILO VI 1.4/1.6 pp. 69-70 and blueprint tag; proof is sorry only; report has Worker report and the standard Second reading section. nt_compile.py --json on the snapshot file: clean in 3.0 s; a probe confirmed the tool reports diagnostics and the elaborated type. No findings; note a parallel Q149 delivery of the same item exists."
  }
 }

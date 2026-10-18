@@ -14,7 +14,8 @@
   "def-weil-regular-scheme",
   "def-weil-pbc-regular-sequence",
   "def-weil-pbc-essentially-finite-type-algebra",
-  "def-weil-pbc-localization-at-prime"
+  "def-weil-pbc-localization-at-prime",
+  "def-trf-complete-intersection-local-algebra"
  ],
  "proof": [
   {
@@ -293,5 +294,27 @@
   "group": "Q97",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q97-e1576574f (reviewer sub-agent of L); spot-checked: Read the item, new node, cited DAG statements, Stacks Tags 00S9, 00SC, 00SD, 00SF, 00SG, 00SH, and 01UG, plus the required guidance and report. All nine steps are mathematically supported with hypotheses checked; edge cases, duplicate candidates, route restrictions, and Mathlib searches were reviewed. No repairs are needed. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.LciPointwiseCriterion",
+  "declaration": "AlgebraicGeometry.lci_pointwise_criterion",
+  "file": "lean/Sheaf/TraceFormula/LciPointwiseCriterion.lean",
+  "statement": "theorem lci_pointwise_criterion (k : Type u) [Field k] (X : Scheme.{u}) (s : X ⟶ Spec (.of k)) [LocallyOfFiniteType s] : List.TFAE [ (∃ (I : Type u) (U : I → X.affineOpens), (∀ x : X, ∃ i, x ∈ (U i).1) ∧ ∀ i, ∃ ft : @Algebra.FiniteType k Γ(X, (U i).1) _ _ (((Scheme.ΓSpecIso (.of k)).inv ≫ s.appLE ⊤ (U i).1 le_top).hom.toAlgebra), @Algebra.IsLocalCompleteIntersection k Γ(X, (U i).1) _ _ (((Scheme.ΓSpecIso (.of k)).inv ≫ s.appLE ⊤ (U i).1 le_top).hom.toAlgebra) ft), (∀ x : X, ∃ U : X.affineOpens, x ∈ U.1 ∧ @Algebra.IsGlobalCompleteIntersection k Γ(X, U.1) _ _ (((Scheme.ΓSpecIso (.of k)).inv ≫ s.appLE ⊤ U.1 le_top).hom.toAlgebra)), (∀ x : X, @Algebra.IsCompleteIntersectionLocalAlgebra k (X.presheaf.stalk x) _ _ (((Scheme.ΓSpecIso (.of k)).inv ≫ s.appLE ⊤ ⊤ le_top ≫ X.presheaf.germ ⊤ x trivial).hom.toAlgebra))]",
+  "branch": "newtargets-dag",
+  "by": "Q90",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "Algebra.isLocalCompleteIntersection_iff_localizations",
+   "AlgebraicGeometry.lci_pointwise_criterion"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a2ad176d1",
+  "group": "Q90",
+  "result": "pass",
+  "note": "Read the item node, all 8 statement dependencies, Stacks 01UG/00SD/00SH, both delivered modules, the new node and the report. The item node changes only in lean plus the permitted (A) stmt_deps addition; lean.statement strings match the files word for word; the new definition node has exactly the §5 fields. IsCompleteIntersectionLocalAlgebra covers every 00SD clause (local, essentially finite type, regular local presenting ring, list regular sequence in m_R, k-algebra isomorphism); the max u v universe for R loses no case. lci_pointwise_criterion: field, explicit s with LocallyOfFiniteType, conditions (1)/(2)/(3) with the structure-map scalars and stalk germ, as TFAE. The algebra iff is stated for every prime with FiniteType S. Edge cases (empty scheme, zero ring, empty sequence, any characteristic) are covered. No hollow definition, only sorry proofs, docstrings carry the source, blueprint id and proof steps, imports correct. nt_compile --json on both files in dependency order is clean (3.1 s, 2.9 s, rc 0). The second reading is by the author (direct-delivery mode); not a return fault."
  }
 }

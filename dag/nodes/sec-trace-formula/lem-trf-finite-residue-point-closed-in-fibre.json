@@ -167,5 +167,23 @@
   "group": "ND",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-ND-e21189705 (reviewer sub-agent of L); spot-checked: Mathematics and citations check out against Stacks Tags 01TE/01TF and all cited DAG statements. Repair required: the node’s created.item incorrectly names lem-trf-relative-completion-etale-approximation instead of the delivered item, violating delivery-errors A.4. Corrected full JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-finite-residue-point-closed-in-fibre.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.FiniteResiduePointClosedInFibre",
+  "file": "lean/Sheaf/TraceFormula/FiniteResiduePointClosedInFibre.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.isClosed_singleton_asFiber_of_finiteDimensional",
+  "statement": "theorem isClosed_singleton_asFiber_of_finiteDimensional {X S : Scheme.{u}} (f : X ⟶ S) [LocallyOfFiniteType f] (x : X) (hfinite : @FiniteDimensional (S.residueField (f x)) (X.residueField x) _ _ (f.residueFieldMap x).hom.toAlgebra.toModule) : IsClosed ({f.asFiber x} : Set (f.fiber (f x)))",
+  "branch": "newtargets-dag",
+  "by": "Q144",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-86cde454b",
+  "group": "Q144",
+  "result": "pass",
+  "note": "Lean statement matches node clause by clause: f : X ⟶ S [LocallyOfFiniteType f], fibre f.fiber (f x), induced point f.asFiber x, FiniteDimensional via the algebra from (f.residueFieldMap x).hom.toAlgebra, conclusion IsClosed {f.asFiber x}; no extra hypotheses or universe restriction. Mathlib grep: only quasi-finite / Jacobson criteria, not this statement, so the new module is justified. Gates: only sorry, source+blueprint docstrings with the proof steps, both report sections, lean.statement verbatim, only the lean field changed. nt_compile --json clean in 3.4 s (warn.sorry=false in lakefile; a deliberate-error copy confirmed diagnostics surface). Stale stage-1 created.item is outside stage 2."
  }
 }

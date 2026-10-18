@@ -13,7 +13,8 @@
   "def-weil-pbc-noetherian-ring",
   "def-weil-abstract-derived-category",
   "def-pc-ring-pseudo-coherent-complex",
-  "def-pur-derived-internal-hom"
+  "def-pur-derived-internal-hom",
+  "lem-trf-affine-relative-dualizing-comparison"
  ],
  "proof": [
   {
@@ -174,5 +175,24 @@
   "group": "Q44",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q44-a085c7408 (reviewer sub-agent of L); spot-checked: Reviewed item and both new nodes against Tags 0E2D/0E2C, 0BZW, 068X, 07VI, 0A65, 0A6A, 0BFR, 0A7C, and all cited DAG statements. Checked hypotheses, p1 base-change orientation, ordinary derived coefficient categories, edge cases, duplicates, route lock, and long-step rule. No faults or repairs needed. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AlgebraicRelativeDualizingIsomorphism",
+  "declaration": "AlgebraicGeometry.algebraic_relativeDualizing_isomorphic",
+  "file": "lean/Sheaf/RingTheory/AlgebraicRelativeDualizingIsomorphism.lean",
+  "statement": "theorem algebraic_relativeDualizing_isomorphic (R A : Type u) [CommRing R] [CommRing A] [Algebra R A] [IsNoetherianRing R] [IsNoetherianRing A] (hflat : RingHom.Flat (algebraMap R A)) [Algebra.FinitePresentation R A] [HasDerivedCategory.{u} (ModuleCat.{u} R)] [HasDerivedCategory.{u} (ModuleCat.{u} A)] [HasDerivedCategory.{u} (ModuleCat.{u} (A ⊗[R] A))] (M N : DerivedCategory (ModuleCat.{u} A)) (hM : DerivedCategory.IsPseudoCoherent M) (hN : DerivedCategory.IsPseudoCoherent N) (hMTor : ∃ a b : ℤ, a ≤ b ∧ ∀ (Q : ModuleCat.{u} R) (i : ℤ), i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} R) i).obj (((ModuleCat.restrictScalars (algebraMap R A)).mapDerivedCategory.obj M) ⊗ DerivedCategory.Q.obj ((CochainComplex.singleFunctor _ 0).obj Q)))) (hNTor : ∃ a b : ℤ, a ≤ b ∧ ∀ (Q : ModuleCat.{u} R) (i : ℤ), i < a ∨ b < i → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} R) i).obj (((ModuleCat.restrictScalars (algebraMap R A)).mapDerivedCategory.obj N) ⊗ DerivedCategory.Q.obj ((CochainComplex.singleFunctor _ 0).obj Q)))) (hMHom : Nonempty (relativeDualizingModuleHom R A M ≅ relativeDualizingModuleDiagonal R A)) (hNHom : Nonempty (relativeDualizingModuleHom R A N ≅ relativeDualizingModuleDiagonal R A)) : Nonempty (M ≅ N)",
+  "branch": "newtargets-dag",
+  "by": "Q103",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Reuses the landed affine-comparison definitions of the multiplication diagonal A[0], K-flat extension along the first coprojection, and K-injective-derived internal Hom; the added landed statement dependency owns these helpers. The conclusion is only Nonempty (M ≅ N), without any chosen class or normalization. Tor intervals are imposed after restriction to R, not over A or B."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d817b6acc",
+  "group": "Q103",
+  "result": "pass",
+  "note": "Checked every clause against the node and Stacks 0E2C/0E2D: R-to-A flat, finitely presented, Noetherian; first coprojection is includeLeft; diagonal is A[0] via lmul'; derived Hom is the total right-derived ihom over K-flat derived extension; separate R-only Tor intervals for every R-module Q (same encoding as the landed affine comparison); Nonempty Hom isomorphisms and conclusion Nonempty (M ≅ N) with no generator data. Universes and HasDerivedCategory.{u} binders match the landed helpers. Edge cases A=0, R=A, zero-length or negative intervals covered. Only change to the node record is the lean field plus the landed affine-comparison stmt_dep that owns the helpers; no DAG cycle (747-node DFS). No new definitions, only sorry, source and blueprint docstrings with all five proof steps, lean.statement verbatim. Report has Worker report and Second reading by Q103. nt_compile rc 0 twice (item 4.6 s and 4.0 s), clean. No findings beyond the cosmetic namespace placement."
  }
 }

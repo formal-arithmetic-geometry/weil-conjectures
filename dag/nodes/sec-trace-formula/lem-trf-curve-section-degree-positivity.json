@@ -220,20 +220,20 @@
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.CurveSectionDegreePositivity",
-  "declaration": "AlgebraicGeometry.Scheme.Modules.curve_section_degree_nonneg_and_pos_of_nonvanishingLocus_ne_univ",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.curve_section_degree_nonneg_and_pos",
   "file": "lean/Sheaf/AlgebraicGeometry/CurveSectionDegreePositivity.lean",
-  "statement": "theorem curve_section_degree_nonneg_and_pos_of_nonvanishingLocus_ne_univ {k : Type u} [Field k] {C : Scheme.{u}} [C.Over (Spec (.of k))] [IsIntegral C] [IsProper (C ↘ Spec (.of k))] (hdim : topologicalKrullDim C = (1 : WithBot ℕ∞)) (L : C.Modules) [L.IsInvertible] (s : Γ(L, ⊤)) (hs : s ≠ 0) : 0 ≤ degree k L ∧ (nonvanishingLocus L s ≠ Set.univ → 0 < degree k L)",
+  "statement": "theorem curve_section_degree_nonneg_and_pos (k : Type u) [Field k] (C : Scheme.{u}) [C.Over (Spec (.of k))] [IsIntegral C] [IsProper (C ↘ Spec (.of k))] (hC : topologicalKrullDim C = 1) (L : C.Modules) [L.IsInvertible] (s : Γ(L, ⊤)) (hs : s ≠ 0) : 0 ≤ L.degree k ∧ (nonvanishingLocus L s ≠ Set.univ → 0 < L.degree k)",
   "branch": "newtargets-dag",
-  "by": "Q127",
+  "by": "Q85",
   "date": "2026-10-17",
   "existing": false
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-e67b81036",
-  "group": "Q127",
+  "reviewer": "NT-stage2-cc-96dc62ac9",
+  "group": "Q85",
   "result": "pass",
-  "note": "Checked the Lean statement clause by clause against the node and Stacks 0B40 (1),(2) (varieties.tex 9934-9963). Every object is the recorded dependency declaration: Field, IsIntegral, IsProper (C ↘ Spec k), topologicalKrullDim C = 1, IsInvertible, Γ(L,⊤) with s≠0, Modules.degree = χ(L)-χ(O), nonvanishingLocus. Conclusion is 0≤deg ∧ (C_s≠univ → 0<deg), same quantifiers and no extra assumptions. Edge cases: empty scheme excluded by integrality, s=0 excluded, nowhere-vanishing trivial case consistent, non-rational points covered, the shared universe u is forced by the degree interface. No definitions, sorry only, source and blueprint docstrings with the 4-step proof, lean.statement verbatim, imports correct. nt_compile.py --json compiled clean in 2.4 s, and an injected-error control run confirms the tool reports errors. The Second reading section only states the 2026-10-17 policy; accepted. No findings."
+  "note": "Lean statement matches node and Stacks 0B40 (1)-(2) clause by clause: field k, integral C proper over k, topologicalKrullDim C = 1, invertible L, s : Γ(L,⊤) with s ≠ 0; conclusion 0 ≤ L.degree k ∧ (nonvanishingLocus L s ≠ univ → 0 < L.degree k) uses the recorded degree (χ(L)-χ(O)) and nonvanishingLocus (X_s of def-weil-pbc-ample-invertible-module). No stronger assumptions; the shared universe is forced by the degree/Spec interfaces. Γ(L,⊤) is rfl-equal to the presheaf type nonvanishingLocus takes. lean.statement verbatim in file; node and report match packet; proof-dep imports match the recorded modules exactly; source and blueprint docstrings and the 4-step proof docstring present; sorry-only; lines ≤ 100. nt_compile.py --json: clean in 3.0 s; axioms propext/sorryAx/Classical.choice/Quot.sound. No findings."
  }
 }

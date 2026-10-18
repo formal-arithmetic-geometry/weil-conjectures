@@ -278,5 +278,23 @@
   "group": "Q88",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q88-308199201 (reviewer sub-agent of L); spot-checked: Read the required guidance, packet, item, report, unit route, cited node statements, and Stacks sources 0B5U, 0B5P, and 01J3. The eight-step split correctly supplies the reduced-ideal construction, tensor exactness, quotient-section gluing, H¹ lift, affine principal open, and closed-point covering argument. Hypotheses and edge cases check; no duplicate, circular, long hidden lemma, route-pivot, or citation fault found. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.IdealTwistVanishingImpliesAmple",
+  "declaration": "AlgebraicGeometry.idealTwistVanishing_implies_isAmple",
+  "file": "lean/Sheaf/TraceFormula/IdealTwistVanishingImpliesAmple.lean",
+  "statement": "theorem idealTwistVanishing_implies_isAmple {R : Type u} [CommRing R] [IsNoetherianRing R] {X : Scheme.{u}} (f : X ⟶ AlgebraicGeometry.Spec (.of R)) [IsProper f] (L : X.Modules) [L.IsInvertible] (h : ∀ (I : X.IdealSheafData), I.toModules.IsQuasicoherent → ∃ n : ℕ, 0 < n ∧ Subsingleton ((RingedSpace.moduleCohomology X.toRingedSpace 1).obj (Scheme.Modules.tensorObj I.toModules (L.tensorPow n)))) : Scheme.Modules.IsAmple X L",
+  "branch": "newtargets-dag",
+  "by": "Q160",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-31c6b7e93",
+  "group": "Q160",
+  "result": "pass",
+  "note": "Statement matches Stacks 0B5U (3)=>(1) and the node clause by clause: IsNoetherianRing R, f : X ⟶ Spec(.of R) [IsProper f], L.IsInvertible, ∀ I : IdealSheafData with toModules quasi-coherent (Mathlib SheafOfModules.IsQuasicoherent, as in pqf-def-coherent; the antecedent only weakens h), ∃ n>0 with Subsingleton of RingedSpace.moduleCohomology 1 of tensorObj I.toModules (L.tensorPow n), conclusion Scheme.Modules.IsAmple. IdealSheafData.toModules is a real kernel construction. Edge cases n=0, empty X, single universe u are fine. No new definitions, sorry-only proof, source and blueprint docstrings present, node changed only in lean, lean.statement verbatim. nt_compile clean in 3.7 s. Observation, no change needed: tensorPow and positiveTensorPower are canonically isomorphic, and tensorPow is consistent with IsAmple."
  }
 }

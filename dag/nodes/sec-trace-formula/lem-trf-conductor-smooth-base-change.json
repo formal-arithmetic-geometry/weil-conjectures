@@ -177,5 +177,29 @@
   "group": "N3",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N3-63f4d7cf0 (reviewer sub-agent of L); spot-checked: Mathematics and cited sources check out, including Tag 07T8, normalization/support/coherence arguments, smooth base-change morphism, edge cases, and route compliance. Repair required: item node created metadata incorrectly names item lem-trf-toric-normalized-desingularization and group Q45; corrected whole JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-conductor-smooth-base-change.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ConductorSmoothBaseChange",
+  "declaration": "AlgebraicGeometry.Scheme.conductor_smooth_base_change",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.reducedNormalizationStructureMap",
+   "AlgebraicGeometry.Scheme.reducedNormalizationCokernel",
+   "AlgebraicGeometry.Scheme.IsReducedNormalizationConductor",
+   "AlgebraicGeometry.Scheme.conductor_smooth_base_change"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ConductorSmoothBaseChange.lean",
+  "statement": "theorem conductor_smooth_base_change (S : Scheme.{u}) (q : S ⟶ Spec (.of (ULift.{u} ℚ))) [IsReduced S] [LocallyOfFiniteType q] [QuasiCompact q] : IsFinite S.fromReducedNormalization ∧ (∀ U : S.Opens, Function.Injective (S.fromReducedNormalization.app U)) ∧ RingedSpace.IsCoherent S.toRingedSpace S.reducedNormalizationCokernel ∧ ∃ D : S.IdealSheafData, S.IsReducedNormalizationConductor D ∧ RingedSpace.IsCoherent S.toRingedSpace D.toModules ∧ (D.support : Set S) = {x : S | ¬ (IsDomain (S.presheaf.stalk x) ∧ IsIntegrallyClosed (S.presheaf.stalk x))} ∧ interior (closure (D.support : Set S)) = ∅ ∧ (D = ⊤ ↔ ∀ x : S, IsDomain (S.presheaf.stalk x) ∧ IsIntegrallyClosed (S.presheaf.stalk x)) ∧ D.comap (𝟙 S) = D ∧ (∀ (T : Scheme.{u}) (h : T ⟶ S) [Smooth h] [QuasiCompact h], (∀ E : T.IdealSheafData, T.IsReducedNormalizationConductor E ↔ E = D.comap h) ∧ ∀ (R : Scheme.{u}) (g : R ⟶ T) [Smooth g] [QuasiCompact g], (∀ F : R.IdealSheafData, R.IsReducedNormalizationConductor F ↔ F = (D.comap h).comap g) ∧ (D.comap h).comap g = D.comap (g ≫ h))",
+  "branch": "newtargets-dag",
+  "by": "Q125",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f177af75b",
+  "group": "Q125",
+  "result": "pass",
+  "note": "Every clause of the node is rendered by the Lean with no extra hypotheses. Hypotheses: IsReduced, LocallyOfFiniteType+QuasiCompact over Spec(ULift ℚ), a universe-general form of Q. Conclusions: finite ν; injective on all opens; the cokernel of the canonical unitToPushforwardObjUnit is coherent; a conductor D characterized by the sectionwise annihilator, which fixes it uniquely and uses the same form as the existing schemeTheoreticSupport; D coherent via toModules; D.support = non-normal locus; nowhere dense; D=⊤ iff normal; for qc smooth h every conductor of T equals D.comap h (Mathlib comap = ideal of the fibre product = D·O_T); identity, and composition in the correct order. Mathematics checked against Stacks 07T8 and 07TD. Edge cases (empty S, normal S, intersecting components) checked. Node copy differs from the side clone only by the lean field; lean.statement matches the file verbatim. No hollow definitions, docstrings carry source and blueprint, the only proof is sorry, no name clashes. nt_compile.py --json on the snapshot: rc 0, 3.3 s, no errors or warnings; a control run with a deliberate error confirmed diagnostics are reported; only sorryAx beyond the standard axioms. Minor, not blocking: stage-1 created metadata and the Tag 07TD chapter name in proof_origin."
  }
 }

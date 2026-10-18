@@ -273,5 +273,23 @@
   "group": "Q15",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q15-31003e7dd (reviewer sub-agent of L); spot-checked: Reviewed the complete item, new algebra node, cited statements, Stacks Tags 05B8 and 00EA, unit/chapter route, edge cases, searches, tool uses, and DAG duplication/cycle risks. The hypotheses and canonical base/module maps are correct; no hidden long-step lemma, route-pivot machinery, forbidden SGA citation, or batch-5 issue was found. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteSingletonFibreLocalization",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finite_singleton_fibre_neighbourhoods_and_module_stalk",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteSingletonFibreLocalization.lean",
+  "statement": "theorem finite_singleton_fibre_neighbourhoods_and_module_stalk {Z Y : Scheme.{u}} (π : Z ⟶ Y) [IsFinite π] (z : Z) (_hfibre : π ⁻¹' ({π z} : Set Y) = ({z} : Set Z)) : (∀ U : Z.Opens, z ∈ U → ∃ V : Y.Opens, π z ∈ V ∧ π ⁻¹ᵁ V ≤ U) ∧ (∀ G : Z.Modules, G.IsQuasicoherent → IsIso (TopCat.Presheaf.stalkPushforward AddCommGrpCat.{u} π.base G.presheaf z) ∧ ∀ (r : Y.presheaf.stalk (π z)) (m : (RingedSpace.moduleStalkFunctor Y.toRingedSpace (π z)).obj ((pushforward π).obj G)), TopCat.Presheaf.stalkPushforward AddCommGrpCat.{u} π.base G.presheaf z (r • m) = (π.stalkMap z).hom r • (TopCat.Presheaf.stalkPushforward AddCommGrpCat.{u} π.base G.presheaf z m : (RingedSpace.moduleStalkFunctor Z.toRingedSpace z).obj G))",
+  "branch": "newtargets-dag",
+  "by": "Q146",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aaf57bdfa",
+  "group": "Q146",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 05B8 (1),(4): IsFinite, full point-fibre singleton, neighbourhood clause with same quantifier order, only IsQuasicoherent, canonical Mathlib stalkPushforward with IsIso and linearity along π.stalkMap z (stalk module instances agree). No extra hypotheses, single universe u, edge cases covered, no existing equivalent found. Single sorry theorem, source and blueprint docstrings with proof steps, lean.statement verbatim, node changed only in lean, report has Worker report and Second reading sections. nt_compile --json rc=0 in 3.3 s, no warnings; #check confirms the elaborated type. No findings."
  }
 }

@@ -178,5 +178,23 @@
   "group": "NZ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-58707c9d6 (reviewer sub-agent of L); spot-checked: I read the whole delivery and found no mathematical fault; I made three small record repairs. Every step checks against its cited statement. Step 2 uses Stacks 066E(2) (the Noetherian pseudo-coherence criterion) and 0DJE (closure of pseudo-coherence under derived tensor), checked at more-algebra.tex 16487-16514. Step 3 cancels split top terms of a finite free complex; I verified the direct-sum splitting, that the kernel is free by 0593, and that the process stops because U is nonzero with cohomology bounded above. Step 4 uses 064K (bounded-above flat complexes are K-flat). Step 5: the top-degree formula H^{a+b}=H^a(P)⊗H^b(Q) follows from right exactness of tensor, and the two-module lemma follows from Nakayama 00DV. Tested cases: k⊗^L k over a local ring, Z/2⊗^L Z/3 over Z (shows the local hypothesis is needed), Q⊗^L Z/p over Z_(p) (shows finite generation is needed). The item's statement is unchanged and matches how the parent lem-trf-semidualizing-rhom-conservative uses it in its steps 3-4. No target, base-change morphism or coefficient category is involved. Route: the 066E node (sk-thm-properbasechange) and the 064K node (sk-thm-picard-semicon) are inside the unit closure of sk-i-curve-zero. The declared tool_use lem-trf-projective-over-local-free is in sk-i-curve-zero itself, so it is not needed; I did not accept it and removed it. Duplicates: no existing node states 0DJE, the top-degree formula or the two-module lemma. IsLocalRing.subsingleton_tensorProduct (Mathlib/RingTheory/LocalRing/Module.lean:96) covers only one module tensored with the residue field. No new node restates the item. Repairs: (1) lem-trf-pseudocoherent-tensor-closure used ⊗^L with no definition; I added an inline definition through def-pc-module-kflat-complex and def-pc-tensor-complex-sheaves, and added both to stmt_deps. (2) lem-trf-local-top-degree-tensor cited two definitions but had empty stmt_deps; I filled them. (3) The blueprint.from.place of the item and of the three new nodes was an invented phrase ('Auxiliary algebraic input'); I replaced it with the ancestor chain convention and corrected the item's split_report.blueprint.; 4 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.LocalDerivedTensorNonvanishing",
+  "declaration": "DerivedCategory.local_derivedTensor_boundedAbove_finite_nonvanishing",
+  "file": "lean/Sheaf/Algebra/Homology/LocalDerivedTensorNonvanishing.lean",
+  "statement": "theorem local_derivedTensor_boundedAbove_finite_nonvanishing (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R] [HasDerivedCategory.{w} (ModuleCat.{u} R)] (U V : DerivedCategory (ModuleCat.{u} R)) (hU : ∃ a : ℤ, ∀ i : ℤ, a < i → IsZero ((homologyFunctor (ModuleCat.{u} R) i).obj U)) (hV : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero ((homologyFunctor (ModuleCat.{u} R) i).obj V)) (hUfg : ∀ i : ℤ, Module.Finite R ((homologyFunctor (ModuleCat.{u} R) i).obj U)) (hVfg : ∀ i : ℤ, Module.Finite R ((homologyFunctor (ModuleCat.{u} R) i).obj V)) : (∃ c : ℤ, ∀ i : ℤ, c < i → IsZero ((homologyFunctor (ModuleCat.{u} R) i).obj (U ⊗ V))) ∧ (∀ i : ℤ, Module.Finite R ((homologyFunctor (ModuleCat.{u} R) i).obj (U ⊗ V))) ∧ (IsZero (U ⊗ V) ↔ IsZero U ∨ IsZero V)",
+  "branch": "newtargets-dag",
+  "by": "NF",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c072f2d38",
+  "group": "NF",
+  "result": "pass",
+  "note": "Each clause matches: commutative Noetherian local R, D(ModuleCat.{u} R) with bound universes u and w, cohomology bounded above and finitely generated in every degree for U and V, all three conclusions (bounded above, finite in every degree, IsZero(U⊗V) iff IsZero U or IsZero V), and no extra assumption. A pp.explicit probe shows U⊗V is the upstream flat-resolution derived tensor (hasDerivedMonoidalCategory over ModuleCat.monoidalCategory), as the node describes. The node copy changes only lean, and lean.statement matches the file verbatim. The four proof deps with Lean modules are imported without public; the three without Lean records have no import. Docstrings carry source, blueprint and the six proof steps; proof is sorry only; no definitions, no long lines. Edge cases checked: zero factors, complexes unbounded below, integer bounds, fields; zero ring excluded by locality. nt_compile --json: rc 0, 4.8 s, no errors or warnings, matching the worker's evidence. Minor note: the NF second-reading section is brief and done in the same session; not a defect."
  }
 }

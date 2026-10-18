@@ -17,7 +17,8 @@
   "def-weil-pbc-multivariate-power-series",
   "def-weil-irreducible-components",
   "def-sc-normalization",
-  "def-pc-euler-characteristic"
+  "def-pc-euler-characteristic",
+  "def-weil-pbc-reduced-normalization"
  ],
  "proof": [
   {
@@ -182,5 +183,24 @@
   "group": "Q84",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q84-6da2177e0 (reviewer sub-agent of L); spot-checked: Read both nodes and all five steps in full; checked Stacks 0C1R, 0C3V, 0C4A, 0CBW, power-series normality and zero-dimensional cohomology. Local computations, hypotheses and edge cases hold; no duplicate or restated split found. Both tool uses accepted. No long non-elementary steps or fixes. Full findings recorded in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalNormalizationQuotient",
+  "declaration": "AlgebraicGeometry.Scheme.nodal_normalization_quotient",
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalNormalizationQuotient.lean",
+  "statement": "theorem nodal_normalization_quotient (k : Type u) [Field k] [IsAlgClosed k] (B : Scheme.{u}) [B.Over (Spec (.of k))] [IsProper (B ↘ Spec (.of k))] [IsReduced B] [ConnectedSpace B] (hpure : ∀ Z : Set B, Z ∈ irreducibleComponents B → topologicalKrullDim Z = 1) (hnodal : ∀ x : B, x ∉ (B ↘ Spec (.of k)).smoothLocus → Nonempty (AdicCompletion (IsLocalRing.maximalIdeal (B.presheaf.stalk x)) (B.presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1}))) (N : Set B) (hN : N = {x : B | x ∉ (B ↘ Spec (.of k)).smoothLocus}) : N.Finite ∧ IsFinite B.fromReducedNormalization ∧ RingedSpace.IsCoherent B.toRingedSpace (Modules.unit B) ∧ RingedSpace.IsCoherent B.toRingedSpace ((Modules.pushforward B.fromReducedNormalization).obj (Modules.unit B.reducedNormalization)) ∧ ∃ (Q : B.Modules) (q : (Modules.pushforward B.fromReducedNormalization).obj (Modules.unit B.reducedNormalization) ⟶ Q) (hq : SheafOfModules.unitToPushforwardObjUnit B.fromReducedNormalization.toRingCatSheafHom ≫ q = 0), (ShortComplex.mk (SheafOfModules.unitToPushforwardObjUnit B.fromReducedNormalization.toRingCatSheafHom) q hq).ShortExact ∧ RingedSpace.IsCoherent B.toRingedSpace Q ∧ (∃ i : N → (Spec (.of k) ⟶ B), (∀ x : N, IsClosedImmersion (i x) ∧ i x ≫ (B ↘ Spec (.of k)) = 𝟙 (Spec (.of k)) ∧ Set.range (i x) = {x.val}) ∧ Nonempty (Q ≅ ∐ (fun x : N ↦ (Modules.pushforward (i x)).obj (Modules.unit (Spec (.of k)))))) ∧ {x : B | ¬ Subsingleton (Q.presheaf.stalk x)} ⊆ N ∧ Q.eulerChar k = (N.ncard : ℤ)",
+  "branch": "newtargets-dag",
+  "by": "Q93",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the landed componentwise normalization construction, indexed by all irreducible components with their reduced induced structures. The closed k-point inclusions in the skyscraper description are characterized by their singleton images and their structure-map identities; no arbitrary map is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6d650eb5b",
+  "group": "Q93",
+  "result": "pass",
+  "note": "Delivery 6d650eb5be changes only the module, the item node (lean record; stmt_deps gains the landed def-weil-pbc-reduced-normalization) and the report; statement field unchanged; lean.statement verbatim. Every hypothesis and conclusion matches: IsAlgClosed k, IsProper, IsReduced, ConnectedSpace, pure dim 1 via topologicalKrullDim of irreducible components, nodal completion as a ring iso (no stronger than the node), componentwise normalization via reducedNormalization/fromReducedNormalization, N.Finite, IsFinite nu, coherence of O_B, nu_*O and Q, ShortExact with the canonical unitToPushforwardObjUnit arrow, Q iso to the coproduct of pushforwards of O_{Spec k} along closed k-points i x characterized uniquely, support contained in N, eulerChar k = N.ncard. LocallyOfFinitePresentation for smoothLocus is inferred from IsProper; Abelian B.Modules and HasCoproduct checked by inferInstance. Edge cases: empty N, empty B excluded by connectedness, self-node vs crossing, all characteristics. No definitions, proof sorry only (#print axioms), docstrings carry the source place, blueprint and all five proof steps, lines <=100, no unbound variables. nt_compile.py --json: clean, 3.2-3.5 s; the tool was verified to report errors and warnings. No blocking findings."
  }
 }

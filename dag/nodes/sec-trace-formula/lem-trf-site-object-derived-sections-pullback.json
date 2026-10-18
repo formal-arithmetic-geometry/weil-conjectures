@@ -217,5 +217,36 @@
   "group": "Q71",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q71-1776876ba (reviewer sub-agent of L); spot-checked: Read the item, new node, unit/chapter route, cited DAG statements, Stacks Tags 0D6X/0DD8, Sites 00XR/00YV, and Derived Categories 015E/05TI. Verified hypotheses, coefficient category, variance, canonical comparison direction, edge cases, Mathlib searches, duplicate/cycle absence, and ordinary derived route compliance. All proof steps are under 2000 characters and contain no hidden lemma requiring extraction. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Sites.ObjectDerivedSectionsPullback",
+  "declaration": "CategoryTheory.SiteObjectDerivedSections.comparison_exists",
+  "declarations": [
+   "CategoryTheory.SiteObjectDerivedSections.continuous",
+   "CategoryTheory.SiteObjectDerivedSections.inverseImage",
+   "CategoryTheory.SiteObjectDerivedSections.inverseImage_exact",
+   "CategoryTheory.SiteObjectDerivedSections.inverseImageAdditive",
+   "CategoryTheory.SiteObjectDerivedSections.inverseImagePreservesFiniteLimits",
+   "CategoryTheory.SiteObjectDerivedSections.inverseImagePreservesFiniteColimits",
+   "CategoryTheory.SiteObjectDerivedSections.sectionsIdentity",
+   "CategoryTheory.SiteObjectDerivedSections.sectionsAdditive",
+   "CategoryTheory.SiteObjectDerivedSections.pullback",
+   "CategoryTheory.SiteObjectDerivedSections.comparison_exists"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Sites/ObjectDerivedSectionsPullback.lean",
+  "statement": "theorem comparison_exists {C D : Type u} [SmallCategory C] [SmallCategory D] (J : Precoverage C) (K : Precoverage D) (hJ : J.IsSiteForCoverings) (hK : K.IsSiteForCoverings) (f : C ⥤ D) (hcover : ∀ (X : C) (S : Presieve X), S ∈ J X → S.map f ∈ K (f.obj X)) (hpullback : ∀ (X Y Z : C) (S : Presieve X), S ∈ J X → ∀ (a : Y ⟶ X) (b : Z ⟶ X), S a → PreservesLimit (cospan a b) f) [f.IsCocontinuous J.toGrothendieck K.toGrothendieck] [HasDerivedCategory.{w} (Sheaf J.toGrothendieck AddCommGrpCat.{u})] [HasDerivedCategory.{w} (Sheaf K.toGrothendieck AddCommGrpCat.{u})] [HasDerivedCategory.{w} AddCommGrpCat.{u}] (U : C) : ∃ e : (inverseImage J K hJ hK f hcover hpullback).mapDerivedCategoryPlus ⋙ ((sheafSections J.toGrothendieck AddCommGrpCat.{u}).obj (op U)).rightDerivedFunctorPlus ≅ ((sheafSections K.toGrothendieck AddCommGrpCat.{u}).obj (op (f.obj U))).rightDerivedFunctorPlus, e.inv = pullback J K hJ hK f hcover hpullback U",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The inverse image is the existing Mathlib precomposition functor with its sheaf proof supplied from the stated covering-site axioms. The canonical derived pullback is constructed from the literal section identity using rightDerivedFunctorPlusBaseChange; the natural isomorphism is specified as its inverse. Auxiliary continuity and exactness theorems are named proof obligations for this concrete construction, not data placeholders or additional assumptions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0a770e521",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Every hypothesis and clause matches Stacks 0DD8(1), bounded-below case: IsSiteForCoverings sites in common universe u; continuity is exactly hcover and hpullback (00WV), with no global finite-limit assumption; Mathlib IsCocontinuous (dependency part 1 only); g^-1 is Mathlib sheafPushforwardContinuous precomposition on Ab(D)->Ab(C), lifted to D+ by mapDerivedCategoryPlus; RGamma is the rightDerivedFunctorPlus of sheafSections; result is a natural iso of functors on DerivedCategory.Plus in the stated direction, with e.inv = pullback, the canonical rightDerivedFunctorPlusBaseChange of the literal identity on sections. No hollow data: sorryAx enters only through the named Prop helpers continuous (00WW) and inverseImage_exact (H5 pattern); the recorded siteContinuous_pushforward_isSheaf uses the old strict-composition site convention and is unusable here. Statement field verbatim, all 10 declarations present, node diff adds only the lean record, docstrings carry source, blueprint and proof steps, lines <=100, autoImplicit off. nt_compile --json on the snapshot module: clean, 4.6 s; an error probe confirmed the tool reports errors. Second reading is a worker self-check that matches each clause (information only)."
  }
 }

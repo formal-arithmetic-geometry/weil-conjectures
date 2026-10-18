@@ -25,7 +25,12 @@
   "def-weil-irreducible-components",
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-multivariate-power-series",
-  "def-weil-proper-morphism"
+  "def-weil-proper-morphism",
+  "def-weil-pure-dimension",
+  "def-trf-orgogozo-induction-data",
+  "def-trf-strict-semistable-curve",
+  "def-nagata-global-blowup",
+  "def-pc-reduced-scheme"
  ],
  "proof": [
   {
@@ -440,5 +445,35 @@
   "group": "Q89",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q89-8c25ba77d (reviewer sub-agent of L); spot-checked: Read the full item, all new nodes, cited statements, exact source locations, unit route, and Temkin’s cited PDF sections. Checked all 15 proof steps, hypotheses, chart computations, base-change maps, coefficient categories, edge cases, duplicate/generalization candidates, long-step rule, route-pivot restrictions, and recorded searches. No mathematical or structural fault found; review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ValuationSymmetricNodalBlowup",
+  "declaration": "AlgebraicGeometry.exists_valuation_symmetric_nodal_blowup",
+  "declarations": [
+   "AlgebraicGeometry.symmetricNodalConstant",
+   "AlgebraicGeometry.symmetricNodalCoordinate",
+   "AlgebraicGeometry.symmetricNodalSingularIdeal",
+   "AlgebraicGeometry.symmetricNodalCentre",
+   "AlgebraicGeometry.symmetricNodalAffineIdeal",
+   "AlgebraicGeometry.symmetricNodalComplement",
+   "AlgebraicGeometry.SymmetricNodalChartRings",
+   "AlgebraicGeometry.SymmetricNodalLocalChart",
+   "AlgebraicGeometry.exists_valuation_symmetric_nodal_blowup"
+  ],
+  "file": "lean/Sheaf/TraceFormula/ValuationSymmetricNodalBlowup.lean",
+  "statement": "theorem exists_valuation_symmetric_nodal_blowup (K : Type u) [Field K] [IsSepClosed K] (V : ValuationSubring K) [Finite (PrimeSpectrum V)] {X : Scheme.{u}} (f : X ⟶ Spec (.of V)) [Flat f] [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (hpure : ∀ s : Spec (.of V), (f.fiber s).IsPureDimension 1) (hnodal : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec (.of V)) (x : ↥(pullback (C := Scheme) f g)), (∃ U : (pullback f g).Opens, x ∈ U ∧ Smooth (U.ι ≫ pullback.snd f g)) ∨ Orgogozo.IsOrdinaryDoublePoint (pullback.snd f g) x) (hgeneric : Smooth (pullback.snd f (Spec.map (CommRingCat.ofHom V.subtype)))) (hfinite : (Set.range (Scheme.firstFittingSingularSubscheme f)).Finite) (z : X) (hz : z ∈ Set.range (Scheme.firstFittingSingularSubscheme f)) : closure ({z} : Set X) ⊆ Set.range (Scheme.firstFittingSingularSubscheme f) ∧ ∃ (π : V) (W : X.Opens) (n : ℕ) (U : Fin n → X.Opens) (I : X.IdealSheafData), π ≠ 0 ∧ closure ({z} : Set X) ⊆ W ∧ (⨆ i, U i) = W ∧ PrimeSpectrum.zeroLocus ({π} : Set V) = closure ({f z} : Set (Spec (.of V))) ∧ Set.range (Scheme.firstFittingSingularSubscheme f) ∩ (W : Set X) ∩ f ⁻¹' PrimeSpectrum.zeroLocus ({π} : Set V) = closure ({z} : Set X) ∧ (∀ i, Nonempty (SymmetricNodalLocalChart V f π I (U i))) ∧ I.comap W.ι = (Scheme.firstFittingIdealSheaf f ⊔ (symmetricNodalAffineIdeal (.of V) (Ideal.span {π})).comap f).comap W.ι ∧ I.comap (symmetricNodalComplement X z).ι = ⊤ ∧ (∀ A : X.affineOpens, (I.ideal A).FG) ∧ IsProper I.blowupMap ∧ IsIso (pullback.snd I.blowupMap (symmetricNodalComplement X z).ι) ∧ IsIso (pullback.snd I.blowupMap (pullback.fst f (Spec.map (CommRingCat.ofHom V.subtype)))) ∧ IsReduced I.blowup ∧ Flat (I.blowupMap ≫ f) ∧ LocallyOfFinitePresentation (I.blowupMap ≫ f) ∧ QuasiCompact (I.blowupMap ≫ f) ∧ QuasiSeparated (I.blowupMap ≫ f) ∧ (∀ s : Spec (.of V), ((I.blowupMap ≫ f).fiber s).IsPureDimension 1) ∧ (∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ Spec (.of V)) (x : ↥(pullback (C := Scheme) (I.blowupMap ≫ f) g)), (∃ B : (pullback (I.blowupMap ≫ f) g).Opens, x ∈ B ∧ Smooth (B.ι ≫ pullback.snd (I.blowupMap ≫ f) g)) ∨ Orgogozo.IsOrdinaryDoublePoint (pullback.snd (I.blowupMap ≫ f) g) x) ∧ (∀ (A : X.affineOpens) (m : ℕ) (g : Fin m → Γ(X, A)) (_ : ∀ j, g j ∈ I.ideal A) (_ : Ideal.span (Set.range g) = I.ideal A), ∃ c : ∀ j, Spec (.of (AffineBlowup.chartRing (I.ideal A) (g j))) ⟶ I.blowup, (∀ j, IsOpenImmersion (c j) ∧ c j ≫ I.blowupMap = Spec.map (CommRingCat.ofHom (algebraMap Γ(X, A) (AffineBlowup.chartRing (I.ideal A) (g j)))) ≫ A.2.fromSpec) ∧ (⋃ j, Set.range (c j)) = I.blowupMap ⁻¹' (A.1 : Set X)) ∧ (∀ (s : Spec (.of V)) (Z : TopologicalSpace.Closeds ((I.blowupMap ≫ f).fiber s)), (Z : Set ((I.blowupMap ≫ f).fiber s)) ∈ irreducibleComponents ((I.blowupMap ≫ f).fiber s) → ∀ x : (Scheme.IdealSheafData.vanishingIdeal Z).subscheme, I.blowupMap ((I.blowupMap ≫ f).fiberι s ((Scheme.IdealSheafData.vanishingIdeal Z).subschemeι x)) ∈ closure ({z} : Set X) → ∃ B : (Scheme.IdealSheafData.vanishingIdeal Z).subscheme.Opens, x ∈ B ∧ Smooth (B.ι ≫ (Scheme.IdealSheafData.vanishingIdeal Z).subschemeι ≫ (I.blowupMap ≫ f).fiberToSpecResidueField s)) ∧ (∀ (E : Scheme.{u}) (i : E ⟶ X) [IsClosedImmersion i], Disjoint (Set.range i) (closure ({z} : Set X)) → IsIso (pullback.snd I.blowupMap i))",
+  "branch": "newtargets-dag",
+  "by": "Q32",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "All clauses are retained. The helpers package only the nodal model coordinates, its actual chart subalgebras, and the local comparison data of this node; no separate semistability predicate is introduced. The added stmt_deps cite already recorded canonical definitions used in the signature."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0d111e24f",
+  "group": "Q32",
+  "result": "pass",
+  "note": "Read the node, all 22 statement deps, the module and the report. Checked every hypothesis and conclusion clause against the exact declarations (IsOrdinaryDoublePoint with Ω-scalars, IdealSheafData.comap = extended ideal, ofIdealTop = (π)~, AffineBlowup = Proj of the Rees algebra, chartRing = A[I/g], IsPureDimension, Fitting subscheme). QC+QS is the node's 'finitely presented'. The glued I is determined by its restrictions to W and X\\C. The chart isomorphisms are fully pinned by the u=πr, v=πb·p, u=πb·h equations. No added nonemptiness, connectedness, Noetherian or universe restriction. The node changed only in lean and five recorded stmt_deps. lean.statement is verbatim, there is exactly one sorry, no axioms and no hollow defs, docstrings carry the source, blueprint id and all 15 steps, no line exceeds 100 characters. nt_compile --json: clean in 5.4-6.1 s with no errors or warnings. No findings."
  }
 }

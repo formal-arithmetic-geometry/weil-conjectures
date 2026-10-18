@@ -193,5 +193,24 @@
   "group": "Q72",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q72-5ed1337c6 (reviewer sub-agent of L); spot-checked: Read the full mathematics and checked Stacks 05DM, 05C2, 05E0, 058K and cited statements. Corrected the Krull-node application, clarified detection at Ass(M), added missing definition citations, and recorded accepted algebra tool uses. Whole corrected JSON files are in fixes/; concrete source, edge-case, duplicate and route checks are in review.md.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FlatCompletionUniversallyInjective",
+  "declaration": "RingTheory.flat_completion_universally_injective",
+  "file": "lean/Sheaf/RingTheory/FlatCompletionUniversallyInjective.lean",
+  "statement": "theorem flat_completion_universally_injective (R : Type u) (S : Type v) (P : Type w) [CommRing R] [CommRing S] [Algebra R S] [AddCommGroup P] [Module S P] [Module R P] [IsScalarTower R S P] [IsNoetherianRing R] [IsNoetherianRing S] [Module.Finite S P] [Module.Flat R P] (I : Ideal R) (hassoc : ∀ (p : PrimeSpectrum R) (q : PrimeSpectrum S), q.asIdeal.comap (algebraMap R S) = p.asIdeal → q.asIdeal ∈ annihilatorAssociatedPrimes S (P ⊗[R] p.asIdeal.ResidueField) → Ideal.map (algebraMap R S) I ⊔ q.asIdeal ≠ ⊤) : ∀ (Q : Type (max u v w x)) [AddCommGroup Q] [Module R Q], Function.Injective ((AdicCompletion.of I P).rTensor Q)",
+  "branch": "newtargets-dag",
+  "by": "Q147",
+  "date": "2026-10-17",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-a559ed0dc"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a559ed0dc",
+  "group": "Q147",
+  "result": "fix",
+  "note": "Statement matches node and Stacks 05DM (flat.tex 2102-2131) clause by clause: Noetherian R,S; ideal I unrestricted; P finite over S, Module.Flat R P via IsScalarTower; hassoc over (p,q) with comap equation, annihilatorAssociatedPrimes S (element-annihilator, Stacks 00LA) of P ⊗[R] p.ResidueField (S-action probed = TensorProduct.leftModule by rfl, acts on P), IS+q≠⊤; AdicCompletion I P / AdicCompletion.of (n=0 coordinate trivial); ∀ Q : Type (max u v w x), rTensor injective (x free, no universe restriction). Edge cases P=0, Q=0, zero rings, I=0, I=⊤ covered. Only lean changed in node; statement verbatim; imports = statement deps (public) + proof_deps modules (non-public); no defs; only proof is sorry; no duplicate in Mathlib/project. nt_compile --json clean for delivered and fixed module. FIX: (1) H8 docstrings said 'Stacks Project, Algebra, Tag 05DM' -> 'More on Flatness' (fixes/FlatCompletionUniversallyInjective.lean, docstring only); (2) H11 the '## Second reading by Q147' was a placeholder -> replaced by a full clause-by-clause reading (fixes/lem-trf-flat-completion-universally-injective.report.md, worker report kept verbatim)."
  }
 }

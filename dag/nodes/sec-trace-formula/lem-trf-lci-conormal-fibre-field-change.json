@@ -280,5 +280,32 @@
   "group": "Q92",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q92-db7da3e1c (reviewer sub-agent of L); spot-checked: Read the complete mathematics and wrote review.md. All eight steps check against Stacks 00SI, 00SJ and 0473, including the canonical conormal map, residue-field embedding and finite dimensions. Edge cases, duplicate candidates and dependency closure checked; no repairs, cycles, forbidden machinery or new tool uses."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.ConormalFibreFieldChange",
+  "declaration": "Algebra.Generators.conormal_fibre_field_change",
+  "declarations": [
+   "Algebra.Generators.conormal_fibre_field_change",
+   "Algebra.Generators.conormalCoefficientExtension",
+   "Algebra.Generators.conormalFibreFieldChangeSource",
+   "Algebra.Generators.conormalFibreFieldChangeSourceAddCommGroup",
+   "Algebra.Generators.conormalFibreFieldChangeSourceModule",
+   "Algebra.Generators.conormalFibreFieldChangeTmul"
+  ],
+  "file": "lean/Sheaf/RingTheory/ConormalFibreFieldChange.lean",
+  "statement": "theorem conormal_fibre_field_change {k : Type u} {K : Type v} {C : Type w} [Field k] [Field K] [CommRing C] [Algebra k K] [Algebra k C] [Algebra.FiniteType k C] {n : ℕ} (P : Generators k C (Fin n)) (q : Ideal C) [q.IsPrime] (Q : Ideal (K ⊗[k] C)) [Q.IsPrime] (hq : q = Q.comap Algebra.TensorProduct.includeRight.toRingHom) : ∃ e : P.conormalFibreFieldChangeSource q Q hq ≃ₗ[Q.ResidueField] (Q.ResidueField ⊗[Localization.AtPrime Q] LocalizedModule Q.primeCompl (P.baseChange K).toExtension.Cotangent), (∀ (x : P.toExtension.Cotangent) (a : q.ResidueField) (b : Q.ResidueField), e (P.conormalFibreFieldChangeTmul q Q hq x a b) = (b * Ideal.ResidueField.map q Q Algebra.TensorProduct.includeRight.toRingHom hq a) ⊗ₜ[Localization.AtPrime Q] LocalizedModule.mk (P.conormalCoefficientExtension (K := K) x) 1) ∧ Module.Finite q.ResidueField (q.ResidueField ⊗[Localization.AtPrime q] LocalizedModule q.primeCompl P.toExtension.Cotangent) ∧ Module.Finite Q.ResidueField (Q.ResidueField ⊗[Localization.AtPrime Q] LocalizedModule Q.primeCompl (P.baseChange K).toExtension.Cotangent) ∧ Module.finrank q.ResidueField (q.ResidueField ⊗[Localization.AtPrime q] LocalizedModule q.primeCompl P.toExtension.Cotangent) = Module.finrank Q.ResidueField (Q.ResidueField ⊗[Localization.AtPrime Q] LocalizedModule Q.primeCompl (P.baseChange K).toExtension.Cotangent)",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Generators encodes the chosen finite-variable polynomial surjection; its Mathlib baseChange is the coefficient-extended presentation. The auxiliary definitions construct the canonical coefficient map and the displayed source tensor, with its canonical residue-field scalar structure, entirely from existing Mathlib data. Tensor factors are reversed to put scalars first; no localization or residue-field factor is omitted."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-727d7c613",
+  "group": "NB",
+  "result": "pass",
+  "note": "Read the node, Stacks 00SI (algebra.tex ~36203-36259), the 6 stmt_dep records, the report and the module. Clause by clause: fields with independent universes u/v/w; Algebra.FiniteType plus Generators k C (Fin n) give the presentation; P.baseChange K gives P_K/I_K = K⊗C, per lem-weil-pbc-presentation-base-change; hq states that q is the contraction along includeRight; source κ(Q)⊗_{κ(q)}(κ(q)⊗_{C_q}(I/I²)_q) uses the canonical ResidueField.map; target κ(Q)⊗(I_K/I_K²)_Q; the iso's tmul formula uses conormalCoefficientExtension = Cotangent.map(baseChangeFromBaseChange∘toBaseChange) = coefficient extension γ (checked in Mathlib); elements a⊗x/1 span the source, so the formula determines e; Module.Finite on both fibres and finrank equality. No extra hypotheses; edge cases n=0, I=0, C=0, K=k and inseparable K are covered. The helpers have real data (axioms: propext, choice, Quot.sound only); docstrings with source and blueprint, 8 proof steps; proof is sorry only; lean.statement verbatim; only the lean field changed; Worker report and Second reading sections present. nt_compile: clean in 3.8 s. No findings."
  }
 }

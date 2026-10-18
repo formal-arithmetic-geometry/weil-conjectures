@@ -462,5 +462,23 @@
   "group": "Q67",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q67-2fd9cc6f0 (reviewer sub-agent of L); spot-checked: Read the whole delivery against the master and main-20261015 blueprint proofs; they agree. The item's statement is unchanged. Each of the 14 steps is under 2000 characters, and I checked every one against the statements it cites. Step 3: P = i^*D_TL is constructible by exactness and prop-constructible-pullback. Its Tor bound comes from comparison clauses (i) and (ii) of lem-sf-comparison-tor-amplitude. The costalk lemma is used for existence only, with the ambient closed adjoint from thm-amb-etale-exceptional-adjoint. Step 4 rests on Stacks 06YS, 0A96, 0A90 and 08JA. I recomputed the equations of steps 7-10: the transposes, the naturality of q, the symmetries and the dinaturality of evaluation. They give β_L = D_Z(c_L)δ_P and exactly the δ-compatibility the definition requires. Step 11 checks dim Z ≤ d for thm-sf-ambient-adjoint-class through 0A3V. Step 12 uses the inverse of the named canonical mate b_u. Step 13 checks the hypotheses of the finite-duality site comparison. The four new statements are true. In the alpha lemma, Yoneda in D^b_ctf(Z) applied to id_{GD_TK} gives the F-adjoint ev(μ⊗1)PF^{-1}, which equals the adjoint of r_K. In the dualizing lemma, the right adjoints preserve D^+ because compact support has finite amplitude, and the mate of the D^+ composition then gives i^×ω_T ≅ ω_Z and its unit transport. The projection and q comparisons are formal transports through the class adjunction, the counit-normalized b_u and the monoidal comparison 07A4. Edge cases Z = ∅, i = id and K = 0 hold. None of the four duplicates an existing node: I compared them with lem-sf-mate, fix-prop-adjunctions(3), pur9-def-upper-shriek-composition, lem-weil-closed-costalk-duality, lem-weil-pbc-ringed-projection-mate-exact, lem-sfb-etale-proetale-scalar-mate and lem-weil-finite-duality-site-comparison. None restates a clause of the item, and there is no cycle. Every statement the steps cite is in the unit route or among the 20 declared tool uses, all of which I accept. No SGA source is used. FIX (B3): I added two missing definition citations to two new nodes. lem-weil-boundary-alpha-normalization now cites def-amb-etale-compact-support and def-kun-projection-formula-map. lem-weil-boundary-proetale-q-compatibility now cites def-compact-support-direct-image-detailed and def-kun-projection-formula-map. Both appear inline and in stmt_deps; the corrected files are under fixes/dag/nodes/sec-six-functors/. Full checks are in review.md.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.BoundaryDualityDischarge",
+  "declaration": "AlgebraicGeometry.ProEtale.boundary_duality_input",
+  "file": "lean/Sheaf/SixFunctors/BoundaryDualityDischarge.lean",
+  "statement": "theorem boundary_duality_input (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (Y : Scheme.{u}) (aY : Y ⟶ Spec (CommRingCat.of D.k)) [IsSeparated aY] [LocallyOfFiniteType aY] [QuasiCompact aY] : BoundaryDualityInput D l hl E n Y aY",
+  "branch": "newtargets-dag",
+  "by": "N1",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8c4987fa7",
+  "group": "N1",
+  "result": "pass",
+  "note": "Statement is exactly BoundaryDualityInput D l hl E n Y aY with the def's binders verbatim (single universe u; separated + LocallyOfFiniteType + QuasiCompact = separated finite type; n+1 covers every n>=1); conclusion carries both clauses, the canonical exchange_isIso and the delta compatibility, with operations fixed by CanonicalOperations. Node unchanged except the lean record; lean.statement verbatim; proof is sorry only; docstrings give the source place, the blueprint tag and all 14 proof steps (step 5 differs only in whitespace); lines <=100; no duplicate (the upstream etale existence lemma is weaker). Report has real Worker report and Second reading by N1 sections. nt_compile --json on the snapshot file: rc 0, clean, 6.2 s. Seven proof-plan imports are omitted; I reproduced the upstream duplicate derivedComparisonAdjunctionPlus import failure, so the omission is justified and documented (needs resolving upstream before stage 3)."
  }
 }

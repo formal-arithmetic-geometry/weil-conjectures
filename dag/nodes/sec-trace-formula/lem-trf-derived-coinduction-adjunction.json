@@ -202,5 +202,34 @@
   "group": "Q67",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q67-6f88451ba (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass, but the split report omitted required tool_uses for five off-unit generic lemmas. Added declarations in fixes/dag/nodes/sec-trace-formula/lem-trf-derived-coinduction-adjunction.json and documented all checks in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.DerivedCoinductionAdjunction",
+  "declaration": "ModuleCat.derivedCoinductionAdjunction_spec",
+  "declarations": [
+   "ModuleCat.coinductionComplexFunctor",
+   "ModuleCat.coinductionEvaluation",
+   "ModuleCat.derivedCoinduction",
+   "ModuleCat.derivedCoinductionModel",
+   "ModuleCat.derivedCoinductionUnderlyingHom",
+   "ModuleCat.derivedCoinductionUnderlyingModel",
+   "ModuleCat.derivedCoinductionAdjunction",
+   "ModuleCat.derivedCoinductionAdjunction_spec"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/DerivedCoinductionAdjunction.lean",
+  "statement": "theorem derivedCoinductionAdjunction_spec : ∃ e : derivedCoinduction f ⋙ (restrictScalars f).mapDerivedCategory ≅ derivedCoinductionUnderlyingHom f, (∀ (I : CochainComplex (ModuleCat.{u} R) ℤ) [I.IsKInjective], e.hom.app (DerivedCategory.Q.obj I) ≫ (derivedCoinductionUnderlyingModel f I).hom = (restrictScalars f).mapDerivedCategory.map (derivedCoinductionModel f I).hom ≫ (restrictScalars f).mapDerivedCategoryFactors.hom.app ((coinductionComplexFunctor f).obj I)) ∧ (∀ (I : CochainComplex (ModuleCat.{u} R) ℤ) [I.IsKInjective], (derivedCoinductionAdjunction f).counit.app (DerivedCategory.Q.obj I) = (restrictScalars f).mapDerivedCategory.map (derivedCoinductionModel f I).hom ≫ (restrictScalars f).mapDerivedCategoryFactors.hom.app ((coinductionComplexFunctor f).obj I) ≫ DerivedCategory.Q.map (coinductionEvaluation f I)) ∧ (∀ (I J : CochainComplex (ModuleCat.{u} R) ℤ) [I.IsKInjective] [J.IsKInjective] (t : I ⟶ J), (derivedCoinduction f).map (DerivedCategory.Q.map t) ≫ (derivedCoinductionModel f J).hom = (derivedCoinductionModel f I).hom ≫ DerivedCategory.Q.map ((coinductionComplexFunctor f).map t)) ∧ (restrictScalars f).mapDerivedCategory.ReflectsIsomorphisms",
+  "branch": "newtargets-dag",
+  "by": "Q131",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Canonical total right derived coinduction and its adjunction are constructed from existing upstream APIs. The theorem records the underlying ordinary RHom comparison characterized on every K-injective, the evaluation-at-one counit, representative-comparison naturality, and conservativity. Helper definitions have real data; no arbitrary adjoint or map is chosen."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e0c7cc733",
+  "group": "Q131",
+  "result": "pass",
+  "note": "Read node, both stmt deps, Stacks 0A70/0A71/05RT, module, report (Worker report + Second reading present), upstream RightDerivedFunctor Defs/KInjective/Adjunction and Mathlib coextendScalars. All clauses match: coinduction complex with (b·h)(b')=h(b'b); canonical K-injective derived functor with natural model isos; real adjunction data mapDerivedCategoryRightDerivedAdjunction of restrictCoextendScalarsAdj; natural underlying-RHom iso normalized on every K-injective; counit = Q(evaluation at 1) after canonical comparisons; ReflectsIsomorphisms; no boundedness/flatness binders. Common ring/module universe u matches the project D(R) convention (citer and sibling ring nodes) and the only K-injective instance; wR/wB independent. Ordinary-module RHom_R(B,-) helper is a canonical specialization, since the recorded sheaf derivedInternalHomOfUniverses does not typecheck on ModuleCat; explained in report/note; not hollow. 7 helpers with real data, one sorry, docstrings with source and blueprint, no line >100, node changed only in lean, statement verbatim. nt_compile --json on snapshot: clean, 3.9 s, exit 0; probe confirmed the tool reports errors; axioms standard. No fixes."
  }
 }

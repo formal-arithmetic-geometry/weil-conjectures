@@ -234,5 +234,24 @@
   "group": "Q25",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q25-344b6f490 (reviewer sub-agent of L); spot-checked: Read the required instructions, packet/report, item, unit/chapter route, all five cited node statements, and Stacks Tag 05D3 in full. Steps 1–7 are mathematically valid with hypotheses checked; the omitted surjectivity argument is correctly expanded; quotient maps, compatible splittings, completion exactness, edge cases, searches, duplicate checks, route, and citations all pass. No new nodes or repairs are needed."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.TraceFormula.FlatProjectiveReductionCompletionSplitting",
+  "declaration": "RingTheory.flatProjectiveReductionCompletionSplitting",
+  "file": "lean/Sheaf/SixFunctors/TraceFormula/FlatProjectiveReductionCompletionSplitting.lean",
+  "statement": "theorem flatProjectiveReductionCompletionSplitting (R : Type u) [CommRing R] (I : Ideal R) (K : Type v) [AddCommGroup K] [Module R K] (E : Type w) [AddCommGroup E] [Module R E] (M : Type z) [AddCommGroup M] [Module R M] (u : K →ₗ[R] E) (v : E →ₗ[R] M) (hu : Function.Injective u) (hv : Function.Surjective v) (hₑ : u.range = v.ker) (hflat : Module.Flat R M) (hproj : Module.Projective (R ⧸ I) (M ⧸ (I • ⊤ : Submodule R M))) : Function.Injective (LinearMap.restrictScalars R (AdicCompletion.map I u)) ∧ Function.Surjective (LinearMap.restrictScalars R (AdicCompletion.map I v)) ∧ (LinearMap.restrictScalars R (AdicCompletion.map I u)).range = (LinearMap.restrictScalars R (AdicCompletion.map I v)).ker ∧ ∃ s : AdicCompletion I M →ₗ[R] AdicCompletion I E, (LinearMap.restrictScalars R (AdicCompletion.map I v)).comp s = LinearMap.id",
+  "branch": "newtargets-dag",
+  "by": "Q18",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-7e65889f8"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7e65889f8",
+  "group": "Q18",
+  "result": "fix",
+  "note": "Statement matches node/Stacks 05D3 clause by clause: CommRing R, Ideal I, independent universes for K,E,M, hu/hv/range=ker, Module.Flat R M, Module.Projective (R⧸I) (M⧸I•⊤); conclusions injective/surjective/range=ker/∃ R-linear section of restrictScalars R (AdicCompletion.map I _). No extra hypotheses; edge cases I=⊥, I=⊤, zero modules ok; no Mathlib duplicate (map_exact needs Noetherian+finite and gives no section). Gates: no defs, sorry only, docstrings with source/blueprint, lean.statement verbatim, imports/lines ok; report has Worker report and the policy-standard Second reading section. Delivered file compiles clean (2.6 s, nt_compile). H8: theorem docstring only summarised 'six steps' (node has 7). fixes/FlatProjectiveReductionCompletionSplitting.lean replaces the module with a docstring carrying steps 1-7; signature unchanged byte for byte, compiles clean (2.5 s); no record change needed."
  }
 }

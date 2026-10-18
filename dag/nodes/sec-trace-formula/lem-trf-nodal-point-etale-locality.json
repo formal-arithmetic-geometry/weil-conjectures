@@ -132,5 +132,27 @@
   "group": "N1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N1-3404de256 (reviewer sub-agent of L); spot-checked: I read the item, the new node, every cited node's statement, the parent's steps 7-8, the unit sk-i-curve-zero, and Stacks curves.tex 0C57 (line 4445) with its proof, 0C56, lemma-split-node(iii), etale.tex 039M (line 1110) with the remark after it, varieties.tex 0478, and morphisms.tex 01TE/01TF. The item's statement is a faithful specialization of 0C57 to an algebraically closed field, using the nodal-completion criterion; the closedness at an arbitrary point follows because the residue field is k. Nothing is weakened and the statement is unchanged. The new node is true when read with k-algebra residue fields: 02GL(2) gives the trivial residue extension, 01TE(2) gives closedness, and 0AGX or 039M with rank 1 gives the isomorphism of completions. It is strictly smaller than the item (no nodal ring, no curve). It is not a duplicate: lem-weil-pbc-flat-local-completion-iso (0AGX), lem-trf-finite-residue-point-closed-in-fibre (01TE) and the completion-approximation nodes are ingredients or converses. Small cases checked: identity, the node uv=0 under an open immersion and under C⊔C, a smooth point, the generic point, empty D, and a degree-2 étale cover over F_p (excluded by the hypothesis). Three repairs in fixes/: (1) B2/E6: the new node's 'κ isomorphic to k' now says 'as a k-algebra (structure map an isomorphism)'; the abstract reading would need an unsourced non-algebraic-closedness argument. (2) B5: the new node's source cited 0478 for closedness, but 0478 gives only the converse; it now cites 01TE(2), 02GL(2), 0AGX/039M. (3) E1: the item's steps applied lem-weil-pbc-local-completion-local-ring without its Noetherian hypothesis; they now say O_{C,x} and O_{D,y} are Noetherian and the isomorphisms are of k-algebras. No tool_uses, no SGA, no node dropped.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalPointEtaleLocality",
+  "declaration": "AlgebraicGeometry.nodalPoint_etale_locality",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.completedLocalScalarMap",
+   "AlgebraicGeometry.nodalPoint_etale_locality"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalPointEtaleLocality.lean",
+  "statement": "theorem nodalPoint_etale_locality {k : Type u} [Field k] [IsAlgClosed k] {C D : Scheme.{u}} (f : C ⟶ Spec (.of k)) [LocallyOfFiniteType f] (hpure : C.IsPureDimension 1) (e : D ⟶ C) [Etale e] (y : D) : (Nonempty (@AlgEquiv k (AdicCompletion (IsLocalRing.maximalIdeal (C.presheaf.stalk (e y))) (C.presheaf.stalk (e y))) (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1}) _ _ _ (f.completedLocalScalarMap (e y)).toAlgebra inferInstance) ↔ Nonempty (@AlgEquiv k (AdicCompletion (IsLocalRing.maximalIdeal (D.presheaf.stalk y)) (D.presheaf.stalk y)) (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1}) _ _ _ ((e ≫ f).completedLocalScalarMap y).toAlgebra inferInstance)) ∧ ((Nonempty (@AlgEquiv k (AdicCompletion (IsLocalRing.maximalIdeal (C.presheaf.stalk (e y))) (C.presheaf.stalk (e y))) (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1}) _ _ _ (f.completedLocalScalarMap (e y)).toAlgebra inferInstance) ∨ Nonempty (@AlgEquiv k (AdicCompletion (IsLocalRing.maximalIdeal (D.presheaf.stalk y)) (D.presheaf.stalk y)) (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1}) _ _ _ ((e ≫ f).completedLocalScalarMap y).toAlgebra inferInstance)) → e y ∈ closedPoints C ∧ y ∈ closedPoints D)",
+  "branch": "newtargets-dag",
+  "by": "NS",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d463da188",
+  "group": "NS",
+  "result": "pass",
+  "note": "Clause-by-clause match of nodalPoint_etale_locality against the node and Stacks 0C57 (curves.tex lemma-node-etale-local): alg. closed k, C ->Spec k LocallyOfFiniteType, IsPureDimension 1 (recorded ND def), Etale e (current Mathlib name), arbitrary y, maximal-ideal AdicCompletion with the canonical k-algebra structure via completedLocalScalarMap (f, resp. e≫f), MvPowerSeries (Fin 2) k/(X0*X1); iff conjunct and disjunction→both closed points; no extra hypotheses; universe forced by Spec k. Helper is the canonical composite ΓSpecIso.inv≫appTop≫Γgerm then algebraMap: real data, docstrings, listed in lean.declarations; no named duplicate (IsOrdinaryNode is a different notion with closedness and a ring iso). lean.statement verbatim in file; stmt_deps complete; proof sorry only; report has Worker report and Second reading by NS. nt_compile.py --json: clean 2.9 s; axioms propext/sorryAx/Classical.choice/Quot.sound. Edge cases (empty D, generic point, smooth point, open immersion, char 2) fine. No findings."
  }
 }

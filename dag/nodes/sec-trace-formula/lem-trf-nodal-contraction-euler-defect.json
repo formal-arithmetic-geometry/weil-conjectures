@@ -20,7 +20,10 @@
   "def-weil-irreducible-components",
   "def-sc-normalization",
   "def-sc-genus",
-  "def-pc-euler-characteristic"
+  "def-pc-euler-characteristic",
+  "def-weil-pure-dimension",
+  "def-weil-closed-immersion",
+  "def-pc-integral-scheme"
  ],
  "proof": [
   {
@@ -247,5 +250,23 @@
   "group": "Q111",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q111-f20d70bd9 (reviewer sub-agent of L); spot-checked: Read all mandated files, the item, every new node, cited node statements, unit/chapter route, and local Stacks sources. Verified each proof step, hypotheses, edge cases, searches, duplication, and route restrictions. The repaired seven-step Euler argument is sound; withdrawn false comparison is absent. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalContractionEulerDefect",
+  "declaration": "AlgebraicGeometry.nodal_contraction_euler_defect",
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalContractionEulerDefect.lean",
+  "statement": "theorem nodal_contraction_euler_defect (k : Type u) [Field k] [IsAlgClosed k] {C D : Scheme.{u}} [C.Over (Spec (.of k))] [D.Over (Spec (.of k))] [IsProper (C ↘ Spec (.of k))] [IsProper (D ↘ Spec (.of k))] [IsReduced C] [IsReduced D] (hC : C.IsPureDimension 1) (hD : D.IsPureDimension 1) (f : D ⟶ C) [f.IsOver (Spec (.of k))] [IsProper f] (y : C) (hy : IsClosed ({y} : Set C)) (hysmooth : y ∈ (C ↘ Spec (.of k)).smoothLocus) (B : Scheme.{u}) [IsReduced B] [ConnectedSpace B] (i : B ⟶ D) [IsClosedImmersion i] (hB : Set.range i = f ⁻¹' {y}) (hBpure : B.IsPureDimension 1) (hoff : IsIso (f ∣_ (⟨{y}ᶜ, hy.isOpen_compl⟩ : C.Opens))) (N : D.Opens) (hN : Set.range i ⊆ N) (hnodal : ∀ x : D, x ∈ N → x ∉ (D ↘ Spec (.of k)).smoothLocus → Nonempty (AdicCompletion (IsLocalRing.maximalIdeal (D.presheaf.stalk x)) (D.presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1}))) (v : ℕ) (components : Fin v ≃ irreducibleComponents B) (Z : Fin v → Scheme.{u}) [∀ a : Fin v, IsIntegral (Z a)] (j : ∀ a : Fin v, Z a ⟶ B) [∀ a : Fin v, IsClosedImmersion (j a)] (hcomponents : ∀ a : Fin v, Set.range (j a) = (components a).1) (hnormalizations : ∀ a : Fin v, IsProper ((Z a).fromNormalization ≫ j a ≫ i ≫ D ↘ Spec (.of k)) ∧ Smooth ((Z a).fromNormalization ≫ j a ≫ i ≫ D ↘ Spec (.of k)) ∧ ConnectedSpace (Z a).normalization) : Scheme.Modules.eulerChar k (SheafOfModules.unit D.ringCatSheaf) - Scheme.Modules.eulerChar k (SheafOfModules.unit C.ringCatSheaf) = (v : ℤ) - (Nat.card {b : B // b ∉ (i ≫ D ↘ Spec (.of k)).smoothLocus} : ℤ) - (Nat.card {x : D // x ∈ Set.range i ∩ closure (Set.range i)ᶜ} : ℤ) - ∑ a : Fin v, (((Z a).fromNormalization ≫ j a ≫ i ≫ D ↘ Spec (.of k)).genus : ℤ)",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-77cd72ec1",
+  "group": "NP",
+  "result": "pass",
+  "note": "Statement field verbatim equals the file signature, and node text/proof are unchanged (diff adds only 3 existing stmt_deps and the lean record). Clause-by-clause match through the recorded declarations: IsPureDimension, smoothLocus, Hom.genus (= arithmeticGenus via genus_eq_arithmeticGenus), Modules.eulerChar, Scheme.normalization. e = non-smooth points of the nodal B (internal nodes, self-node once); r = B ∩ closure(D∖B); identity in ℤ. The ring iso to k[[u,v]]/(uv) is equivalent to a k-algebra iso. The normalization smooth/proper/connected hypotheses always hold; f over k is the standard meaning; IsProper f is redundant. Edge cases r=0, disconnected C/D, any characteristic and universe u (forced by Spec k) are fine. No definitions, sorry only, docstrings have source, blueprint tag and 7 steps, report sections present, no duplicate found. nt_compile --json: exit 0, no errors; an injected error was reported; axioms only sorryAx plus standard."
  }
 }

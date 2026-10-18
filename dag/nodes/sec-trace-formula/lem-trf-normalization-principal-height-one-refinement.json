@@ -257,20 +257,20 @@
  },
  "lean": {
   "module": "Sheaf.RingTheory.NormalizationPrincipalHeightOneRefinement",
-  "declaration": "Ideal.exists_heightOne_prime_le_of_mem_integralClosure",
+  "declaration": "RingTheory.normalization_principal_height_one_refinement",
   "file": "lean/Sheaf/RingTheory/NormalizationPrincipalHeightOneRefinement.lean",
-  "statement": "theorem exists_heightOne_prime_le_of_mem_integralClosure (R : Type u) (K : Type v) [CommRing R] [IsDomain R] [IsNoetherianRing R] [IsLocalRing R] [Field K] [Algebra R K] [IsFractionRing R K] (b : integralClosure R K) (_hb : b ≠ 0) (P : Ideal (integralClosure R K)) [P.IsPrime] (_hbP : b ∈ P) : ∃ Q : Ideal (integralClosure R K), Q.IsPrime ∧ Q ≤ P ∧ b ∈ Q ∧ Q ≠ ⊥ ∧ ∀ q : Ideal (integralClosure R K), q.IsPrime → q < Q → q = ⊥",
+  "statement": "theorem normalization_principal_height_one_refinement (R : Type u) [CommRing R] [IsDomain R] [IsNoetherianRing R] [IsLocalRing R] (b : integralClosure R (FractionRing R)) (hb : b ≠ 0) (P : Ideal (integralClosure R (FractionRing R))) [P.IsPrime] (hbP : b ∈ P) : ∃ Q : Ideal (integralClosure R (FractionRing R)), Q.IsPrime ∧ Q ≠ ⊥ ∧ (∀ Q' : Ideal (integralClosure R (FractionRing R)), Q'.IsPrime → Q' < Q → Q' = ⊥) ∧ Q ≤ P ∧ b ∈ Q",
   "branch": "newtargets-dag",
-  "by": "NW",
-  "date": "2026-10-17",
+  "by": "NM",
+  "date": "2026-10-18",
   "existing": false
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-6fb5ca534",
-  "group": "NW",
+  "reviewer": "NT-stage2-cc-3140e77b9",
+  "group": "NM",
   "result": "pass",
-  "note": "The statement matches the node clause by clause: R is a commutative Noetherian local domain; K satisfies IsFractionRing; N = integralClosure R K; b ≠ 0 lies in the prime P; there is Q prime with Q ≤ P, b ∈ Q, Q ≠ ⊥, and every prime below Q is ⊥, which is the node's own height-one definition and the same predicate the citer NormalizationIntegralClosureKrull uses. No Noetherian assumption on N and no extra instances; universes u and v are independent. lean.statement is verbatim and only the node's lean field changed. Docstrings carry the source place, the blueprint reference and the six proof steps; the proof is sorry only; no definitions; imports follow the rules. Swanson–Huneke 4.10.5 subclaim checked. nt_compile --json: rc=0, 2.4 s, no errors. No findings."
+  "note": "Lean statement matches node clause by clause (Noetherian local domain R, N = integralClosure R (FractionRing R), b≠0, prime P∋b ⇒ ∃ prime Q≠⊥ with no prime strictly between Q and ⊥, Q≤P, b∈Q); no Noetherian assumption on N, no extra instances, single universe u. Node JSON differs from repo only in lean field; lean.statement verbatim in file; stmt_deps are recorded Mathlib leaves. Height-one rendering consistent with citer NormalizationIntegralClosureKrull. Edge cases (field, unit b, Q=P) fine. No existing Mathlib/project declaration (Mathlib PIT needs Noetherian N). No defs, docstrings carry source and blueprint tag plus proof steps, sorry only. Report has Worker report and Second reading sections. Swanson–Huneke PDF not held locally; mathematics checked against the node's proof instead. nt_compile per-file compile clean (2.9 s, no errors or warnings). No findings."
  }
 }

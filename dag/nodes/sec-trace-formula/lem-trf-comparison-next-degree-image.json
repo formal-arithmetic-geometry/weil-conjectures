@@ -309,5 +309,29 @@
   "group": "Q96",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q96-1ea536ea0 (reviewer sub-agent of L); spot-checked: Read the item, seven proof steps, unit/chapter route, cited DAG statements, Stacks Tag 0EZC and comparison setup, blueprint ancestry, and required delivery rules. Verified hypotheses, spectral-sequence filtration and edge maps, canonical base-change direction, ordinary abelian-sheaf coefficients, locally-zero image criterion, restriction naturality, edge cases, duplicates, cycles, long-step rule, route lock, and batch-5 constraints. No new nodes or repairs required; review.md records the checks."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ComparisonNextDegreeImage",
+  "declaration": "CategoryTheory.RefinedTopologyComparison.comparisonNextDegreeImage",
+  "declarations": [
+   "CategoryTheory.RefinedTopologyComparison.comparisonSheafHasExt",
+   "CategoryTheory.RefinedTopologyComparison.comparisonCohomology",
+   "CategoryTheory.RefinedTopologyComparison.sliceCohomologyComparison",
+   "CategoryTheory.RefinedTopologyComparison.comparisonNextDegreeImage"
+  ],
+  "file": "lean/Sheaf/TraceFormula/ComparisonNextDegreeImage.lean",
+  "statement": "theorem comparisonNextDegreeImage {C : Type u} [SmallCategory C] (τ τ' : Precoverage C) (hτsite : τ.IsSiteForCoverings) (hτ'site : τ'.IsSiteForCoverings) (hτ : τ' ≤ τ) (P : ∀ ⦃X Y : C⦄, (X ⟶ Y) → Prop) (A' : ∀ X : C, Sheaf (τ'.toGrothendieck.over X) AddCommGrpCat.{u} → Prop) (hzero : ∀ X : C, A' X 0) (hiso : ∀ (X : C) (H K : Sheaf (τ'.toGrothendieck.over X) AddCommGrpCat.{u}), Nonempty (H ≅ K) → A' X H → A' X K) (hkernel : ∀ (X : C) (H K : Sheaf (τ'.toGrothendieck.over X) AddCommGrpCat.{u}) (f : H ⟶ K), A' X H → A' X K → A' X (kernel f)) (hcokernel : ∀ (X : C) (H K : Sheaf (τ'.toGrothendieck.over X) AddCommGrpCat.{u}) (f : H ⟶ K), A' X H → A' X K → A' X (cokernel f)) (hextension : ∀ (X : C) (S : ShortComplex (Sheaf (τ'.toGrothendieck.over X) AddCommGrpCat.{u})), S.ShortExact → A' X S.X₁ → A' X S.X₃ → A' X S.X₂) (hbaseChange : ∀ (X Y Y' : C) (f : X ⟶ Y), P f → ∀ g : Y' ⟶ Y, ∃ h : HasPullback f g, @P _ _ (@pullback.snd C _ X Y' Y f g h)) (hrelocalization : ∀ (X Y : C) (f : X ⟶ Y) (H : Sheaf (τ'.toGrothendieck.over Y) AddCommGrpCat.{u}), A' Y H → A' X ((relocalization τ'.toGrothendieck f).inverse.obj H)) (htauSheaf : ∀ (X : C) (H : Sheaf (τ'.toGrothendieck.over X) AddCommGrpCat.{u}), A' X H → Presheaf.IsSheaf (τ.toGrothendieck.over X) H.obj) (hderivedImage : ∀ (X Y : C) (f : X ⟶ Y), P f → ∀ (H : Sheaf (τ'.toGrothendieck.over X) AddCommGrpCat.{u}), A' X H → ∀ i : ℕ, A' Y (((relocalization τ'.toGrothendieck f).direct.rightDerived i).obj H)) (r : ℕ) (hr : ∀ (X : C) (H : Sheaf (τ.toGrothendieck.over X) AddCommGrpCat.{u}), (∃ H' : Sheaf (τ'.toGrothendieck.over X) AddCommGrpCat.{u}, A' X H' ∧ Nonempty (H ≅ (sliceComparison τ τ' hτ X).inverse.obj H')) → ∀ i : ℕ, 1 ≤ i → i ≤ r → IsZero (((sliceComparison τ τ' hτ X).direct.rightDerived i).obj H)) (X : C) (H : Sheaf (τ.toGrothendieck.over X) AddCommGrpCat.{u}) (hH : ∃ H' : Sheaf (τ'.toGrothendieck.over X) AddCommGrpCat.{u}, A' X H' ∧ Nonempty (H ≅ (sliceComparison τ τ' hτ X).inverse.obj H')) : Function.Injective (sliceCohomologyComparison τ τ' hτ X H (r + 1) (Over.mk (𝟙 X))) ∧ (∀ ξ : Sheaf.H' H (r + 1) (Over.mk (𝟙 X)), (∃ η, sliceCohomologyComparison τ τ' hτ X H (r + 1) (Over.mk (𝟙 X)) η = ξ) ↔ ∃ (I : Type u) (U : I → C) (a : ∀ i, U i ⟶ X), Presieve.ofArrows U a ∈ τ' X ∧ ∀ i, (H.cohomologyPresheaf (r + 1)).map (Over.homMk (a i) : Over.mk (a i) ⟶ Over.mk (𝟙 X)).op ξ = 0) ∧ (∀ (U V : Over X) (f : V ⟶ U) (η : Sheaf.H' ((sliceComparison τ τ' hτ X).direct.obj H) (r + 1) U), (H.cohomologyPresheaf (r + 1)).map f.op (sliceCohomologyComparison τ τ' hτ X H (r + 1) U η) = sliceCohomologyComparison τ τ' hτ X H (r + 1) V ((((sliceComparison τ τ' hτ X).direct.obj H).cohomologyPresheaf (r + 1)).map f.op η))",
+  "branch": "newtargets-dag",
+  "by": "Q115",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e22c5488f",
+  "group": "Q115",
+  "result": "pass",
+  "note": "Read node, 4 stmt deps, Stacks 0EZC setup, reused ComparisonInductionStep constructions and Mathlib H'/cohomologyPresheaf. Every hypothesis (sites, τ'≤τ, slices, ε_X, relocalization, weak Serre closure, (1)-(4), A_X, (V_r)) and all three conclusion clauses match without strengthening; restriction clause covers all arrows of C/X as proof step 7 proves. comparisonCohomology is the canonical Ext pullback (inverse image, sheafified sheafification unit, counit) with no chosen maps; HasExt instance from Mathlib; no generic duplicate. Edge cases r=0, zero, empty families, universes covered. Only lean field changed; statement verbatim; docstrings with source, blueprint tag and 7 proof steps; imports equal the proof-dep modules; lines ≤100; only sorry is the theorem proof. nt_compile --json: rc 0, 11.4 s, no errors or warnings (warn.sorry=false). Second reading is a disclosed author self-pass; this review supplies the independent reading."
  }
 }

@@ -186,5 +186,24 @@
   "group": "Q32",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q32-eda82c5f0 (reviewer sub-agent of L); spot-checked: Read all five steps, nine cited statements, source passages, and unit/chapter route. Made the current determinant lemma’s iteration and reciprocal-polynomial conversion explicit in corrected JSON. Statement unchanged; zero, rank-one, nonsplit-extension and conjugate-eigenvalue cases checked. No new nodes or off-route tools. Full findings in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.EtaleCohomology.Purity.RealSheaves.RealSemisimplification",
+  "declaration": "AlgebraicGeometry.WeilGroup.isReal_semisimplification",
+  "file": "lean/Sheaf/EtaleCohomology/Purity/RealSheaves/RealSemisimplification.lean",
+  "statement": "theorem isReal_semisimplification {K : Type u} [Field K] [Finite K] {C : Scheme.{u}} {p : C ⟶ Spec (.of K)} [IsCurve p] (W : WeilGroup p) {l : ℕ} [Fact l.Prime] [Fact (ringChar K ≠ l)] {n : Type u} [Fintype n] [DecidableEq n] (D : Monodromy.RepresentedDegreeDatum W.carrier n (PadicAlgCl l)) (ι : PadicAlgCl l →+* ℂ) (hLisse : W.IsLisse l D.asRepresentation) (hReal : W.IsReal l D.asRepresentation ι) (s : D.asRepresentation.CompositionSeries) : W.IsLisse l s.semisimplification ∧ W.IsReal l s.semisimplification ι ∧ ∀ x : C.finitePoints, W.localPolynomial l s.semisimplification x = W.localPolynomial l D.asRepresentation x",
+  "branch": "newtargets-dag",
+  "by": "Q81",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the published Weil-representation presentation of lisse Weil sheaves in WeilConjectures.EtaleCohomology.Purity.RealSheaves.Basic/Weights/Operations. D.asRepresentation is exactly the representation of the recorded monodromy datum, and s.semisimplification is the recorded direct sum of its successive quotient representations. Reality and local factors use the existing WeilGroup predicates, with the same coefficientwise condition as WeilSheaf.IsReal in the recorded Stalk module. The theorem covers every composition series, including the zero-dimensional empty series."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7322f1d19",
+  "group": "Q81",
+  "result": "pass",
+  "note": "Clause by clause: D.asRepresentation (recorded def-wf-monodromy-data) with IsLisse; IsReal is the same coefficientwise iota(P_x) real condition at every closed point; holds for every CompositionSeries via the recorded semisimplification; conclusion = lisse, real and equal localPolynomial (charpolyRev, with multiplicities) at every closed point. iota as any ring hom is a weaker hypothesis; the single universe u is forced upstream and covers every finite rank. Edge cases rank 0/1, non-split extensions, repeated eigenvalues and conjugate-pair factors covered. lean.statement verbatim; node differs from side clone only in lean; no duplicate theorem or module-path clash; no definitions, sorry only, source/blueprint docstrings present. nt_compile clean (3.7 s, 4.1 s). Non-blocking: WeilGroup.IsReal used for def-wf-iota-real (same notion, existing upstream); D's own degree map unused; Authors line says Q42."
  }
 }

@@ -335,5 +335,28 @@
   "group": "Q70",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q70-60c44cdf4 (reviewer sub-agent of L); spot-checked: Reviewed the item, auxiliary node, cited statements, source tags, unit route, edge cases, duplicate candidates, Mathlib searches, and route-pivot constraints. No mathematical or structural fault found; review.md records the checks."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.PerfectAlgebraCoinductionTensor",
+  "declaration": "DerivedCategory.perfect_algebra_coinduction_tensor",
+  "declarations": [
+   "ModuleCat.coextendScalars_additive",
+   "ModuleCat.coinductionComplex",
+   "DerivedCategory.perfect_algebra_coinduction_tensor"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/PerfectAlgebraCoinductionTensor.lean",
+  "statement": "theorem perfect_algebra_coinduction_tensor (f : R →+* B) (hB : IsPerfectRingComplex ((singleFunctor (ModuleCat.{u} R) 0).obj ((ModuleCat.restrictScalars f).obj (ModuleCat.of B B)))) (J : CochainComplex (ModuleCat.{u} R) ℤ) [J.IsKInjective] (η : 𝟙_ (CochainComplex (ModuleCat.{u} R) ℤ) ⟶ J) [QuasiIso η] : ∃ (L : DerivedCategory (ModuleCat.{u} R) ⥤ DerivedCategory (ModuleCat.{u} B)) (ε : Q ⋙ L ⟶ ((ModuleCat.mixedTensor f).flip.map₂CochainComplex).flip.obj (ModuleCat.coinductionComplex f J) ⋙ Q), L.IsLeftDerivedFunctor ε (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)) ∧ (∀ F : CochainComplex (ModuleCat.{u} R) ℤ, (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat F → IsIso (ε.app F)) ∧ ∃ θ : L ≅ (ModuleCat.coextendScalars f).rightDerivedFunctor, ∀ F : CochainComplex (ModuleCat.{u} R) ℤ, (HomologicalComplex.quasiIso (ModuleCat.{u} R) (.up ℤ)).kFlat F → ∃ (s : Q.obj F ≅ Q.obj (F ⊗ J)), s.hom = Q.map (ρ_ F).inv ≫ Q.map (F ◁ η) ∧ ∃ e : ((ModuleCat.restrictScalars f).mapHomologicalComplex (.up ℤ)).obj ((((ModuleCat.mixedTensor f).flip.map₂CochainComplex).obj F).obj (ModuleCat.coinductionComplex f J)) ⟶ F ⊗ J, (∀ (p q n : ℤ) (hpq : p + q = n) (x : F.X p) (h : (ModuleCat.coinductionComplex f J).X q) (b : B), (e.f n).hom ((HomologicalComplex.ιMapBifunctor F (ModuleCat.coinductionComplex f J) (ModuleCat.mixedTensor f).flip (.up ℤ) p q n hpq).hom (h ⊗ₜ[B] (b ⊗ₜ[R, f] x))) = (HomologicalComplex.ιTensorObj F J p q n hpq).hom (x ⊗ₜ[R] (ModuleCat.CoextendScalars.equiv f (J.X q) h b))) ∧ (ModuleCat.restrictScalars f).mapDerivedCategory.map (θ.hom.app (Q.obj F)) ≫ (Adjunction.mapDerivedCategoryRightDerivedAdjunction (ModuleCat.restrictCoextendScalarsAdj f)).counit.app (Q.obj F) = (ModuleCat.restrictScalars f).mapDerivedCategory.map (ε.app F) ≫ (ModuleCat.restrictScalars f).mapDerivedCategoryFactors.hom.app _ ≫ Q.map e ≫ s.inv",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ae7ae5aad",
+  "group": "N0",
+  "result": "pass",
+  "note": "Compile reproduced clean (nt_compile.py --json, 6.0 s; probe confirms diagnostics are shown and the only sorryAx is the theorem's). Only the item's lean field changed; lean.statement verbatim; the 4 dependency nodes are unchanged; both report sections present. All node clauses match: ring map in the dependency's shared universe, IsPerfectRingComplex of B[0] as an R-module, C_B = upstream right-derived coextensionScalars with the node's B-action, D_B = coinductionComplex of any K-injective resolution of R[0], tensor via the second-factor dependency interface, θ a natural iso on all of D(R) normalized through the canonical derived adjunction counit, with an evaluation map (x⊗h(b)) checked to be a well-defined chain map, which fixes θ uniquely. Source 0BZE finite-type situation implied by perfectness. Edge cases (identity, B=0, non-flat quotient, unbounded) covered. Helpers have real data and no duplicates; docstrings and imports follow the brief. Non-blocking notes: the scalar-restriction clause is implied rather than a separate conjunct; lem-trf-derived-coinduction-adjunction should later reuse the same upstream declarations."
  }
 }

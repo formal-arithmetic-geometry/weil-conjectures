@@ -11,7 +11,9 @@
   "def-weil-weil-sheaf-complex",
   "def-weil-derived-pullback-tensor-hom",
   "def-weil-local-frobenius-trace",
-  "def-weil-constructible-heart"
+  "def-weil-constructible-heart",
+  "def-zl-weil-ind-sheaf-category",
+  "lem-wf-rational-stalk-exact"
  ],
  "proof": [
   {
@@ -256,5 +258,28 @@
   "group": "Q98",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q98-d93b87b11 (reviewer sub-agent of L); spot-checked: Read the required guidance, packet, report, item, unit, chapter, blueprint source, Deligne source, and every cited node. Verified all eight proof steps, coefficient-category coherence, residue-degree Frobenius calculation, edge cases, route-pivot and SGA restrictions, and absence of duplicate/new nodes. Independent review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.WeilPullbackLocalFrobenius",
+  "declaration": "WeilConjectures.fdWeilPullbackLocalFrobenius",
+  "declarations": [
+   "WeilConjectures.fdWeilLocalEigenvalues",
+   "WeilConjectures.fdWeilPullbackLocalFrobenius"
+  ],
+  "file": "lean/Sheaf/Paper/WeilPullbackLocalFrobenius.lean",
+  "statement": "theorem fdWeilPullbackLocalFrobenius (X₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] [IsSeparated X₀.hom] [IsSeparated Y₀.hom] (f₀ : X₀ ⟶ Y₀) : (∀ F : sfCommonStageWeilSheaf D c.l c.different Y₀ c.Qbar, sfCommonStageHeartProperty c.l (D.geometricFiber X₀).left c.Qbar ((zlPull D c.l c.different c.Qbar f₀).obj F.obj.carrier)) ∧ ∀ z : {z : X₀.left // z ∈ closedPoints X₀.left}, ∃ hx : f₀.left.base z.val ∈ closedPoints Y₀.left, (f₀.left.residueFieldMap z.val).hom.Finite ∧ 1 ≤ f₀.left.residueDegree z.val ∧ Nat.card (X₀.left.residueField z.val) = Nat.card (Y₀.left.residueField (f₀.left.base z.val)) ^ f₀.left.residueDegree z.val ∧ ∀ (ιz : X₀.left.residueField z.val →+* D.k) (hz : ιz.comp (X₀.hom.residueFieldAlgebraMap z.val) = algebraMap D.k₀ D.k) (ιx : Y₀.left.residueField (f₀.left.base z.val) →+* D.k) (hxι : ιx.comp (Y₀.hom.residueFieldAlgebraMap (f₀.left.base z.val)) = algebraMap D.k₀ D.k), localClosedPoint D X₀ z ιz hz ≫ zlFiberMap D f₀ = localClosedPoint D Y₀ ⟨f₀.left.base z.val, hx⟩ ιx hxι → ∃ comparison : zlWeilPull D c.l c.different c.Qbar f₀ ⋙ wfSheafFibre c.l c.Qbar D c.different X₀ (localClosedPoint D X₀ z ιz hz) ≅ wfSheafFibre c.l c.Qbar D c.different Y₀ (localClosedPoint D Y₀ ⟨f₀.left.base z.val, hx⟩ ιx hxι), ∀ F : sfCommonStageWeilSheaf D c.l c.different Y₀ c.Qbar, wfSheafClosedFrobenius c.l c.Qbar D c.different X₀ ((zlWeilPull D c.l c.different c.Qbar f₀).obj F) z ιz hz ≫ comparison.hom.app F = comparison.hom.app F ≫ ModuleCat.ofHom ((wfSheafClosedFrobenius c.l c.Qbar D c.different Y₀ F ⟨f₀.left.base z.val, hx⟩ ιx hxι).hom ^ f₀.left.residueDegree z.val) ∧ fdWeilLocalEigenvalues D c X₀ ((zlWeilPull D c.l c.different c.Qbar f₀).obj F) z ιz hz = (fdWeilLocalEigenvalues D c Y₀ F ⟨f₀.left.base z.val, hx⟩ ιx hxι).map (fun α ↦ α ^ f₀.left.residueDegree z.val)",
+  "branch": "newtargets-dag",
+  "by": "Q40",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the existing canonical common-stage zlWeilPull and the existing rational point-fibre and closed Frobenius constructions from RationalStalkExact. Added those two landed interface nodes to stmt_deps; no statement correction or new notion."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1261d6c98",
+  "group": "Q40",
+  "result": "pass",
+  "note": "Read the item node, all 6 stmt_deps, report and module; checked the exact declarations zlFiberMap/zlPull/zlFrobeniusSquare/zlWeilPull (WeilIndSheafCategory), wfPointFunctor/wfClosedFrobenius/wfSheafFibre/wfSheafClosedFrobenius (RationalStalkExact), localClosedPoint/localClosedPointDegree, coefficientQbarCohomology_finite, IsoAlgebra.mapOfNatIso and Mathlib Scheme.Hom.residueDegree. Every clause matches the node: separated finite type on both models with nothing stronger; heart preservation for all F; closed image point; finite residue extension with 1 <= e and Nat.card equality q_z=q_x^e; for compatible lifts (satisfiable) a NatIso zlWeilPull ⋙ fibre_z ≅ fibre_x with F_z ≫ c = c ≫ F_x^e in the correct order; multiset of charpoly roots mapped by ^e with multiplicity. Edge cases (empty X0, zero sheaf, e=1, eigenvalue collisions, single universe u) are covered. The helper is real data; the only sorry is the theorem; docstrings carry source, blueprint tag and the 8 proof steps; no pro-etale substitute. lean.statement is verbatim; the node changed only in lean plus two landed stmt_deps, both used and acyclic. nt_compile --json exit 0, 31.3 s, no diagnostics. Non-blocking: the 'Second reading by Q40' section is an author self-check, mitigated by the full worker-report clause audit and this independent review."
  }
 }

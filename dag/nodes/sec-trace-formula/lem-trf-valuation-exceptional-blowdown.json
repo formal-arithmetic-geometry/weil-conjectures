@@ -22,7 +22,10 @@
   "def-weil-irreducible-components",
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-multivariate-power-series",
-  "def-weil-proper-morphism"
+  "def-weil-proper-morphism",
+  "def-trf-multipointed-curve",
+  "def-trf-multipointed-curve-modification",
+  "lem-trf-valuation-exceptional-closed-image-criterion"
  ],
  "proof": [
   {
@@ -280,5 +283,23 @@
   "group": "Q80",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q80-f4285e7c7 (reviewer sub-agent of L); spot-checked: Read the full item, four new nodes, cited statements, unit route, required instructions, and Temkin source locations. Verified all eight steps, hypotheses, edge cases, duplicate searches, corrected embedded-point issue, and route restrictions. Review written to review.md; no repairs required."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ValuationExceptionalBlowdown",
+  "declaration": "AlgebraicGeometry.Temkin.valuation_exceptional_blowdown",
+  "file": "lean/Sheaf/AlgebraicGeometry/ValuationExceptionalBlowdown.lean",
+  "statement": "theorem valuation_exceptional_blowdown (K : Type u) [Field K] [IsSepClosed K] (V : ValuationSubring K) [Finite (PrimeSpectrum V)] (X Y : MultipointedCurve (Spec (.of V))) (hX : Smooth (pullback.snd X.x (Spec.map (CommRingCat.ofHom V.toSubring.subtype)))) (hD : Etale (pullback.snd X.d (Spec.map (CommRingCat.ofHom V.toSubring.subtype)))) (f : Y.Hom X) (hf : f.IsEtaModification (Spec.map (CommRingCat.ofHom V.toSubring.subtype))) (hY : Y.IsSemistable) (z : Y.X) (hz : z ∈ f.closedImageFiberGenericPoints) (hze : f.IsExceptionalFiberGenericPoint z) : ∃ (Y₁ : MultipointedCurve (Spec (.of V))) (f₁ : Y₁.Hom X) (h : Y.Hom Y₁), f₁.IsEtaModification (Spec.map (CommRingCat.ofHom V.toSubring.subtype)) ∧ Y₁.IsSemistable ∧ h.IsEtaModification (Spec.map (CommRingCat.ofHom V.toSubring.subtype)) ∧ h.curve ≫ f₁.curve = f.curve ∧ h.marking ≫ f₁.marking = f.marking ∧ (h.curve '' closure ({z} : Set Y.X)).Subsingleton ∧ Set.BijOn h.curve (f.closedImageFiberGenericPoints \\ {z}) f₁.closedImageFiberGenericPoints",
+  "branch": "newtargets-dag",
+  "by": "Q24",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-62fd39b64",
+  "group": "Q24",
+  "result": "pass",
+  "note": "Item node changes only by an added lean record and three landed stmt_deps (multipointed curve, modification, closed-image criterion), which brief l.140 allows; statement, proof and proof_deps unchanged. Every hypothesis and conclusion clause matches the node: Finite PrimeSpectrum is equivalent to a finite chain for a valuation ring; B_f and exceptionality reuse the landed criterion definitions; f1∘h=f is checked on curve and marking; the contraction clause on the closure of z equals C_z because f(z) is closed and f lies over T; Set.BijOn uses the actual point map of h with the same rule against the unchanged X. Edge cases checked: empty marking, height zero, B_f={z}, nonproper curves; single universe u, no extra restriction. One sorry, no new definitions, source and blueprint docstrings with the 8-step plan, imports per brief l.104, lines at most 100, lean.statement verbatim, report has both sections. nt_compile --json is clean (3.1 s, exit 0); a deliberately broken copy errors, so the tool reports failures. Non-blocking stage-3 note: proof step 6 gives only the reduced support of the contracted fibre, while the local-criterion lemma needs the scheme-theoretic fibre, so step 7 must also prove reducedness."
  }
 }

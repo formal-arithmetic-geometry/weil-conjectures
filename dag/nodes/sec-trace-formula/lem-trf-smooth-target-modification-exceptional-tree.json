@@ -24,7 +24,12 @@
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-multivariate-power-series",
   "def-weil-proper-morphism",
-  "def-weil-residue-field"
+  "def-weil-residue-field",
+  "def-trf-modification",
+  "def-trf-projective-line-tree",
+  "def-weil-pure-dimension",
+  "def-trf-orgogozo-induction-data",
+  "def-weil-pbc-scheme-reduction"
  ],
  "proof": [
   {
@@ -303,5 +308,23 @@
   "group": "Q41",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q41-ded579a00 (reviewer sub-agent of L); spot-checked: Read all delivered mathematics and cited interfaces. Temkin 4.4.1–4.4.2 and Appendix B, Stacks 0AY8/0B91, and edge-case calculations support all eight steps and three new nodes. No duplicate, circular split, dropped-route dependency, or target weakening found. Detailed checks and accepted tool_uses are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.SmoothTargetModificationExceptionalTree",
+  "declaration": "AlgebraicGeometry.smoothTargetModificationExceptionalTree",
+  "file": "lean/Sheaf/TraceFormula/SmoothTargetModificationExceptionalTree.lean",
+  "statement": "theorem smoothTargetModificationExceptionalTree (K : Type u) [Field K] [IsSepClosed K] (V : ValuationSubring K) [Finite (PrimeSpectrum V)] {Z W : Scheme.{u}} (w : W ⟶ Spec (.of V)) [Flat w] [LocallyOfFinitePresentation w] [QuasiCompact w] [QuasiSeparated w] (hWdim : ∀ t : Spec (.of V), (w.fiber t).IsPureDimension 1) [Smooth (pullback.snd w (Spec.map (CommRingCat.ofHom V.subtype)))] (f : Z ⟶ W) (hf : EtaModification (Spec.map (CommRingCat.ofHom V.subtype)) f w) [Flat (f ≫ w)] [LocallyOfFinitePresentation (f ≫ w)] [QuasiCompact (f ≫ w)] [QuasiSeparated (f ≫ w)] (hZdim : ∀ t : Spec (.of V), ((f ≫ w).fiber t).IsPureDimension 1) (hnodal : ∀ (Ξ : Type u) [Field Ξ] [IsAlgClosed Ξ] (s : Spec (.of Ξ) ⟶ Spec (.of V)), ∀ z : (pullback (C := Scheme.{u}) (f ≫ w) s), (∃ U : (pullback (f ≫ w) s).Opens, z ∈ U ∧ Smooth (U.ι ≫ pullback.snd (f ≫ w) s)) ∨ Orgogozo.IsOrdinaryDoublePoint (pullback.snd (f ≫ w) s) z) (x : W) (hx : ∃ U : W.Opens, x ∈ U ∧ Smooth (U.ι ≫ w)) (hpositive : 0 < topologicalKrullDim (f.fiber x)) (Ω : Type u) [Field Ω] [Algebra (W.residueField x) Ω] [IsAlgClosed Ω] [Algebra.IsAlgebraic (W.residueField x) Ω] : IsProjectiveLineTree ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap (W.residueField x) Ω)) ≫ W.fromSpecResidueField x)).nilradical.subschemeι ≫ pullback.snd f (Spec.map (CommRingCat.ofHom (algebraMap (W.residueField x) Ω)) ≫ W.fromSpecResidueField x)) ∧ (Set.range ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap (W.residueField x) Ω)) ≫ W.fromSpecResidueField x)).nilradical.subschemeι ≫ pullback.mapDesc f (Spec.map (CommRingCat.ofHom (algebraMap (W.residueField x) Ω)) ≫ W.fromSpecResidueField x) w) ∩ closure ((Set.range ((pullback f (Spec.map (CommRingCat.ofHom (algebraMap (W.residueField x) Ω)) ≫ W.fromSpecResidueField x)).nilradical.subschemeι ≫ pullback.mapDesc f (Spec.map (CommRingCat.ofHom (algebraMap (W.residueField x) Ω)) ≫ W.fromSpecResidueField x) w))ᶜ)).encard ≤ 2",
+  "branch": "newtargets-dag",
+  "by": "Q13",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ebef33fd",
+  "group": "Q13",
+  "result": "pass",
+  "note": "Checked every node clause against the Lean: ValuationSubring K with Finite PrimeSpectrum; Flat+LocallyOfFinitePresentation+QuasiCompact+QuasiSeparated (finite presentation as the dependency node defines it); per-fibre IsPureDimension 1; Smooth generic fibre; EtaModification (proper, schematically dense open iso, canonical generic base-change iso); hnodal over all algebraically closed Xi by smooth neighbourhood or IsOrdinaryDoublePoint; smooth x; positive-dimensional f.fiber x; Omega an algebraic closure. Conclusion: IsProjectiveLineTree on the nilradical subscheme of the geometric fibre, plus boundary encard <= 2 in Z_s via pullback.mapDesc. No stronger assumptions. lean.statement verbatim. Item changed only in lean and stmt_deps (5 landed nodes added). Edge cases V=K, empty fibres, non-nodal fibres and universes ok. sorry-only proof (axioms checked); source and blueprint docstrings present with all 8 proof steps. Second-reading placeholder accepted as in landed reports. nt_compile --json: rc 0, no diagnostics; error reporting confirmed with a probe. No findings."
  }
 }

@@ -224,18 +224,19 @@
   "module": "Sheaf.SecTraceFormula.FlatMittagLefflerCriterion",
   "declaration": "Module.flat_mittag_leffler_criterion",
   "file": "lean/Sheaf/SecTraceFormula/FlatMittagLefflerCriterion.lean",
-  "statement": "theorem flat_mittag_leffler_criterion (R : Type u) [CommRing R] (M : Type v) [AddCommGroup M] [Module R M] [Module.Flat R M] : Module.IsMittagLeffler.{u, v, max u w, t} R M ↔ ∀ (F : Type (max u z)) [AddCommGroup F] [Module R F], (∃ n : ℕ, Nonempty (F ≃ₗ[R] (Fin n → R))) → ∀ x : F ⊗[R] M, ∃ G₀ : Submodule R F, x ∈ Set.range (LinearMap.rTensor M G₀.subtype) ∧ ∀ G : Submodule R F, x ∈ Set.range (LinearMap.rTensor M G.subtype) → G₀ ≤ G",
+  "statement": "theorem flat_mittag_leffler_criterion {R : Type u} [CommRing R] {M : Type v} [AddCommGroup M] [Module R M] [Module.Flat R M] : Module.IsMittagLeffler.{u, v, max u s, t} R M ↔ ∀ (F : Type (max u w)) [AddCommGroup F] [Module R F], (∃ n : ℕ, Nonempty (F ≃ₗ[R] (Fin n → R))) → ∀ (x : TensorProduct R F M), ∃ G₀ : Submodule R F, x ∈ Set.range (LinearMap.rTensor M G₀.subtype) ∧ ∀ G : Submodule R F, x ∈ Set.range (LinearMap.rTensor M G.subtype) → G₀ ≤ G",
   "branch": "newtargets-dag",
-  "by": "Q148",
-  "date": "2026-10-17",
-  "existing": false
+  "by": "Q17",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-c9a19adde"
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "NT-stage2-cc-8571fa57d",
-  "group": "Q148",
-  "result": "pass",
-  "note": "Every clause matches Stacks 059S and the node: flatness via Module.Flat, Module.IsMittagLeffler, F ≃ₗ Fin n → R with n=0 allowed, rTensor of G.subtype, least (not minimal) submodule. Universes w,t,z are bound and the iff holds at every level (0AS6 index/quotients and the Hom duals transport into the allowed universes). Edge cases n=0, x=0, M=0 and the zero ring pass; no extra assumptions. No definitions, sorry-only proof, docstrings carry the source place, blueprint tag and six proof steps. lean.statement matches the file verbatim and only the lean field changed. No duplicate in Mathlib or the side Sheaf tree. nt_compile (side overlay) is clean; #print axioms shows only sorryAx beyond the standard axioms. The Second-reading section is the standard post-10-17 note. No findings."
+  "reviewer": "NT-stage2-cc-c9a19adde",
+  "group": "Q17",
+  "result": "fix",
+  "note": "Read the node, the three statement dependencies, Stacks 059M/0AS6/059S, Module.IsMittagLeffler (universes u v w t) and the delivered module and report (both report sections present). The clauses match the node, but two free universes made the statement false at some instantiations (H3). (1) IsMittagLeffler's index universe was auto-bound and free: below R's universe the predicate is weaker, and the forward direction fails (the fraction field of a valuation domain whose value group has cofinality at least |Type 0| passes it with no least support for 1). Pinned to IsMittagLeffler.{u, v, max u s, t}. (2) F : Type w with w free: below R's universe only n = 0 occurs, so the reverse direction would make every flat module ML. Pinned to F : Type (max u w). No generality is lost (ULift transfers to smaller universes; the finite-free condition is invariant under transport). The docstring now gives the node's six proof steps. Fixes: fixes/FlatMittagLefflerCriterion.lean and fixes/lem-trf-flat-mittag-leffler-criterion.report.md; the record's statement is refit from the file. nt_compile: delivered file clean in 2.3 s (#check showed the free universes), fixed file clean in 1.9 s. No duplicates; citers use the item only as a proof dependency; gates pass (sorry only, no hollow definitions, docstrings, imports, no build)."
  }
 }

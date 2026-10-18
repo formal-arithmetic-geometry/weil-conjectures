@@ -16,7 +16,9 @@
   "def-sbc-smooth-morphisms",
   "def-weil-pbc-adic-completion",
   "def-weil-pbc-multivariate-power-series",
-  "def-weil-affine-spectrum"
+  "def-weil-affine-spectrum",
+  "def-weil-pure-dimension",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
  ],
  "proof": [
   {
@@ -224,5 +226,29 @@
   "group": "Q51",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q51-e8c66b497 (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass. The item JSON still records created.item=lem-trf-nodal-contraction-euler-defect and created.group=Q111; corrected whole file is in fixes/dag/nodes/sec-trace-formula/lem-trf-nodal-subcurve-boundary.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.NodalSubcurveBoundary",
+  "declaration": "AlgebraicGeometry.nodal_subcurve_boundary",
+  "declarations": [
+   "AlgebraicGeometry.reducedComplement",
+   "AlgebraicGeometry.reducedComplementι",
+   "AlgebraicGeometry.reducedBoundaryι",
+   "AlgebraicGeometry.nodal_subcurve_boundary"
+  ],
+  "file": "lean/Sheaf/TraceFormula/NodalSubcurveBoundary.lean",
+  "statement": "theorem nodal_subcurve_boundary {k : Type u} [Field k] [IsAlgClosed k] {X Y : Scheme.{u}} (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] [QuasiCompact f] [IsReduced X] (hpureX : X.IsPureDimension 1) (i : Y ⟶ X) [IsClosedImmersion i] [IsReduced Y] (hpureY : Y.IsPureDimension 1) (N : X.Opens) (hN : ∀ y : Y, i y ∈ N) (hnodal : ∀ (x : X), x ∈ N → x ∈ closedPoints X → ¬(f.stalkMap x).hom.FormallySmooth → Nonempty (AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1}))) : (∀ (x : Y), x ∈ closedPoints Y → ¬((i ≫ f).stalkMap x).hom.FormallySmooth → Nonempty (AdicCompletion (IsLocalRing.maximalIdeal (Y.presheaf.stalk x)) (Y.presheaf.stalk x) ≃+* (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1}))) ∧ (∃ n : ℕ, Nonempty (pullback (C := Scheme.{u}) i (reducedComplementι i) ≅ ∐ fun _ : Fin n => Spec (.of k))) ∧ (∀ t : pullback (C := Scheme.{u}) i (reducedComplementι i), reducedBoundaryι i t ∈ closedPoints X ∧ ¬(f.stalkMap (reducedBoundaryι i t)).hom.FormallySmooth ∧ Nonempty (AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk (reducedBoundaryι i t))) (X.presheaf.stalk (reducedBoundaryι i t)) ≃+* (MvPowerSeries (Fin 2) k ⧸ Ideal.span {(MvPowerSeries.X 0 : MvPowerSeries (Fin 2) k) * MvPowerSeries.X 1}))) ∧ (∀ t : pullback (C := Scheme.{u}) i (reducedComplementι i), ((i ≫ f).stalkMap ((pullback.fst i (reducedComplementι i)) t)).hom.FormallySmooth ∧ ((reducedComplementι i ≫ f).stalkMap ((pullback.snd i (reducedComplementι i)) t)).hom.FormallySmooth)",
+  "branch": "newtargets-dag",
+  "by": "NU",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-102b37e33",
+  "group": "NU",
+  "result": "pass",
+  "note": "Read the node, the 11 statement dependencies, Stacks 0E38 (statement and proof), the report and the module. Every hypothesis and conclusion clause matches the node. Z is the reduced structure on the closure of the complement of Y and T is the fibre product, both real constructions. Nodality is assumed only on N, smoothness on Z is kept, and n=0 and empty cases are covered. One universe u, all bound. Ring iso and plain-scheme iso equal the k-relative versions here; no stronger assumptions. lean.statement verbatim; added deps correct; helpers non-hollow with source/blueprint docstrings; proof only sorry. No duplicate notion: the inline condition equals IsOrdinaryNode, a lemma-module helper, not a definition node. nt_compile --json: clean, 3.8 s. Probe confirmed real elaboration; axioms are sorryAx plus the standard three. No findings."
  }
 }

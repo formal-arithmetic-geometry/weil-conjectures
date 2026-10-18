@@ -16,7 +16,8 @@
   "def-weil-pure-dimension",
   "def-sbc-smooth-morphisms",
   "def-weil-pbc-adic-completion",
-  "def-weil-pbc-multivariate-power-series"
+  "def-weil-pbc-multivariate-power-series",
+  "def-trf-orgogozo-induction-data"
  ],
  "proof": [
   {
@@ -287,5 +288,23 @@
   "group": "Q111",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q111-05bbd964e (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, cited statements and sources in full. Stacks 0C5D/036N/0C57 support the split; dimension, completion, empty-case and route checks pass. Repaired B3 missing definition citations for algebraically closed fields and closed points in the new point lemma. Corrected JSON is under fixes/; detailed checks are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NodalFamilyEtaleSourceLocality",
+  "declaration": "AlgebraicGeometry.nodal_family_etale_source_locality",
+  "file": "lean/Sheaf/AlgebraicGeometry/NodalFamilyEtaleSourceLocality.lean",
+  "statement": "theorem nodal_family_etale_source_locality {X S : Scheme.{u}} (f : X ⟶ S) (I : Type v) (U : I → Scheme.{u}) (h : ∀ i : I, U i ⟶ X) (het : ∀ i : I, Etale (h i)) (hcover : ∀ x : X, ∃ (i : I) (y : U i), h i y = x) : (Flat f ∧ LocallyOfFinitePresentation f ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ S), (pullback f g).IsPureDimension 1 ∧ ∀ x : ↥(pullback (C := Scheme.{u}) f g), (¬ ∃ V : (pullback f g).Opens, x ∈ V ∧ Smooth (V.ι ≫ pullback.snd f g)) → Orgogozo.IsOrdinaryDoublePoint (pullback.snd f g) x) ↔ ∀ i : I, Flat (h i ≫ f) ∧ LocallyOfFinitePresentation (h i ≫ f) ∧ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (g : Spec (.of Ω) ⟶ S), (pullback (h i ≫ f) g).IsPureDimension 1 ∧ ∀ x : ↥(pullback (C := Scheme.{u}) (h i ≫ f) g), (¬ ∃ V : (pullback (h i ≫ f) g).Opens, x ∈ V ∧ Smooth (V.ι ≫ pullback.snd (h i ≫ f) g)) → Orgogozo.IsOrdinaryDoublePoint (pullback.snd (h i ≫ f) g) x",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ac7c8447d",
+  "group": "NR",
+  "result": "fix",
+  "note": "Lean statement matches node and Stacks 0C5D on every clause; conditions on both sides are identical. Flat/LFP/Etale/Smooth are the recorded Mathlib declarations; IsPureDimension (vacuous on empty) and Orgogozo.IsOrdinaryDoublePoint (Omega-algebra iso of maximal-ideal AdicCompletion with MvPowerSeries (Fin 2) Omega / (X0*X1)) were read. Geometric fibres over all alg. closed Omega : Type u are equivalent to the node's under flat+LFP. All-points node clause agrees with Stacks' closed-point definition. stmt_deps gains only the landed def-trf-orgogozo-induction-data (allowed). Edge cases (empty I, empty X/U_i, smooth, disconnected, char 2) are fine; no extra hypotheses; universes bound; lean.statement verbatim. nt_compile clean in 5.2 s, axioms only sorryAx plus standard. Single finding H11: the delivered 'Second reading by NR' was the first worker's self-reading; replaced by fixes/lem-trf-nodal-family-etale-source-locality.report.md (Worker report kept verbatim, independent clause-by-clause second reading). Module and node land unchanged."
  }
 }

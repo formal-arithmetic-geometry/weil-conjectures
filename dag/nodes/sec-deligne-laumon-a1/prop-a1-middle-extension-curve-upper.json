@@ -126,5 +126,23 @@
   "group": "Q29",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q29-fc71aba05 (reviewer sub-agent of L); spot-checked: The boundary semicontinuity lemma requires lisse rank ≥1, but the delivered proof applies it without handling rank-zero sheaves. Added a corrected full DAG JSON under fixes/dag/nodes/sec-deligne-laumon-a1/prop-a1-middle-extension-curve-upper.json, splitting off the zero-sheaf case before invoking the lemma.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CurveMiddleExtensionUpper",
+  "declaration": "AlgebraicGeometry.WeilSheaf.hasWeightsAtMost_compactlySupportedCohomology_curveMiddleExtension",
+  "file": "lean/Sheaf/Paper/CurveMiddleExtensionUpper.lean",
+  "statement": "theorem hasWeightsAtMost_compactlySupportedCohomology_curveMiddleExtension {k₀ : Type u} [Field k₀] [Finite k₀] {l : ℕ} [Fact l.Prime] [Fact (ringChar k₀ ≠ l)] {U C : Scheme.{u}} [U.Over (Spec (.of k₀))] [C.Over (Spec (.of k₀))] [IsCurve (U ↘ Spec (.of k₀))] [IsCurve (C ↘ Spec (.of k₀))] [SmoothOfRelativeDimension 1 (U ↘ Spec (.of k₀))] [SmoothOfRelativeDimension 1 (C ↘ Spec (.of k₀))] [GeometricallyConnected (U ↘ Spec (.of k₀))] [GeometricallyConnected (C ↘ Spec (.of k₀))] (j : U ⟶ C) [IsOpenImmersion j] [j.IsOver (Spec (.of k₀))] (hj : DenseRange j.base) (ι : PadicAlgCl l ≃+* ℂ) (F : WeilSheaf k₀ l U) (hF : F.IsLisse) (w : ℝ) (hw : F.IsPunctuallyPureOfWeight (ι : PadicAlgCl l →+* ℂ) w) (r : ℤ) : FrobeniusModule.HasWeightsAtMostOver k₀ (ι : PadicAlgCl l →+* ℂ) (ordinaryCompactWeilSheafCohomology ((curveWeilMiddleExtension j).obj F) r).2 (w + (r : ℝ))",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e00e13ce9",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Read node, 3 stmt_deps, all 3 modules, report (Worker report + Second reading by Q43 + Dependency modules) and the upstream WeilSheaf/directImage/lowerStar/cohomology/compactlySupportedCohomology/IsPunctuallyPureOfWeight/HasWeightsAtMostOver/IsCurve declarations in the side clone. Every clause matches: smooth geometrically connected curves (IsCurve+SmoothOfRelativeDimension 1+GeometricallyConnected), dense open immersion over k0, iota an isomorphism, lisse F punctually iota-pure of weight w, ordinary j_* (directImage = lowerStar, no shift), H_c^r = .2 component (Ra_!, geometric Frobenius), weights <= w+r over #k0 for all r : Z. No extra hypotheses; edge cases (r<0, r>2, rank 0, j=id, proper/affine C) covered; universes bound; lean.statement verbatim; node diffs only in lean. Dependency repairs (curveWeilMiddleExtension, ordinaryCompactWeilSheafCohomology) are real-data wrappers of existing upstream operations with justified notes; old interfaces stay publicly imported. Only the theorem's proof is sorry. nt_compile.py --json on snapshot: rc 0, no errors or warnings (2.9 s / 5.0 s / 9.4 s). Observation only: landing replaces the lean records of the widely cited dependency nodes (the prescribed dependency-repair form)."
  }
 }

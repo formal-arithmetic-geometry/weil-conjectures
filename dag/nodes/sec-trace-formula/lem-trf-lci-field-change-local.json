@@ -12,7 +12,8 @@
   "def-weil-pbc-localization-at-prime",
   "def-weil-regular-scheme",
   "def-weil-pbc-essentially-finite-type-algebra",
-  "def-weil-pbc-regular-sequence"
+  "def-weil-pbc-regular-sequence",
+  "def-trf-complete-intersection-local"
  ],
  "proof": [
   {
@@ -202,5 +203,23 @@
   "group": "Q72",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q72-92efaf6e6 (reviewer sub-agent of L); spot-checked: Read the item, new conormal node, all cited statements, blueprint/unit route, and Stacks Tags 00SI/00SD with edge-case checks. The seven-step proof and new statement are mathematically correct, non-duplicative, fully cited, and under the long-step threshold. No SGA or dropped route machinery appears. Accepted generic algebra tools are listed in review.md for maintainer recording; packaging must preserve maintainer-owned lean_audit metadata."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.LciFieldChangeLocal",
+  "declaration": "Algebra.isCompleteIntersectionLocal_fieldChange",
+  "file": "lean/Sheaf/TraceFormula/LciFieldChangeLocal.lean",
+  "statement": "theorem isCompleteIntersectionLocal_fieldChange (k : Type u) (K : Type v) (C : Type w) [Field k] [Field K] [CommRing C] [Algebra k K] [Algebra k C] [FiniteType k C] (qK : Ideal (K ⊗[k] C)) [qK.IsPrime] : IsCompleteIntersectionLocal k (Localization.AtPrime (qK.comap (Algebra.TensorProduct.includeRight (R := k) (A := K)).toRingHom)) ↔ IsCompleteIntersectionLocal K (Localization.AtPrime qK)",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-05fa1d2e4",
+  "group": "ND",
+  "result": "pass",
+  "note": "Read the item, the new def node and all stmt_deps against Stacks 00SD (lines 36013-36028) and 00SI (36199-36259). Definition matches 00SD clause by clause: local and essentially finite type A; regular local, essentially finite type R in Type (max u v), which restricts nothing; RingTheory.Sequence.IsRegular list in maximal ideal; k-algebra isomorphism; empty sequence allowed. Not hollow: IsCompleteIntersectionLocal k k elaborates with R = ULift k and the empty list. Item: arbitrary field extension, Algebra.FiniteType C, prime qK of K ⊗[k] C, contraction via includeRight (c ↦ 1⊗c checked by rfl), full iff; EssFiniteType instances of both localizations are Mathlib's standard ones; node statements match the files verbatim; no statement_change. Edge cases fine (K = k, inseparable or transcendental K, empty sequence, zero algebra, independent universes u v w). No duplicate local complete-intersection predicate in Mathlib or the side clone. Docstrings have source place, blueprint tag and the 7-step proof; single sorry. nt_compile --json on both files: rc=0, no diagnostics; axioms are propext, sorryAx, Classical.choice, Quot.sound. The report's second-reading section is the standard 2026-10-17 note. No findings."
  }
 }

@@ -226,5 +226,27 @@
   "group": "Q90",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q90-3502b30e1 (reviewer sub-agent of L); spot-checked: Step 2 incorrectly claimed that clause (2) of pqf-lem-limit-qc-open-descends directly yields inclusions; that clause only compares quasi-compact opens with equal inverse images. Corrected DAG JSON explicitly descends intersections via clause (1), compares them via clause (2), then stabilizes finite unions. Full review and fix are in review.md and fixes/dag/nodes/sec-trace-formula/lem-trf-fp-modules-affine-limit-descent.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FinitePresentationAffineLimitDescent",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finitePresentation_descent_affineLimit",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.affineLimitTensorPullbackComparison",
+   "AlgebraicGeometry.Scheme.Modules.finitePresentation_descent_affineLimit"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FinitePresentationAffineLimitDescent.lean",
+  "statement": "theorem finitePresentation_descent_affineLimit {I : Type u} [Preorder I] [Nonempty I] [IsDirected I (· ≤ ·)] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)] [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)] (c : Cone D) (hc : IsLimit c) : (∀ F : c.pt.Modules, F.IsFinitePresentation → ∃ (i : I) (F_i : (D.obj (op i)).Modules), F_i.IsFinitePresentation ∧ Nonempty ((tensorPullback (c.π.app (op i))).obj F_i ≅ F)) ∧ (∀ (i : I) (F_i G_i : (D.obj (op i)).Modules), F_i.IsFinitePresentation → G_i.IsFinitePresentation → ∀ u : (tensorPullback (c.π.app (op i))).obj F_i ⟶ (tensorPullback (c.π.app (op i))).obj G_i, ∃ (j : I) (hij : i ≤ j) (u_j : (tensorPullback (D.map (homOfLE hij).op)).obj F_i ⟶ (tensorPullback (D.map (homOfLE hij).op)).obj G_i), (affineLimitTensorPullbackComparison D c hij F_i).inv ≫ (tensorPullback (c.π.app (op j))).map u_j ≫ (affineLimitTensorPullbackComparison D c hij G_i).hom = u) ∧ (∀ (i : I) (F_i G_i : (D.obj (op i)).Modules), F_i.IsFinitePresentation → G_i.IsFinitePresentation → ∀ u_i v_i : F_i ⟶ G_i, (tensorPullback (c.π.app (op i))).map u_i = (tensorPullback (c.π.app (op i))).map v_i → ∃ (j : I) (hij : i ≤ j), (tensorPullback (D.map (homOfLE hij).op)).map u_i = (tensorPullback (D.map (homOfLE hij).op)).map v_i)",
+  "branch": "newtargets-dag",
+  "by": "Q153",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-75eaa1f37",
+  "group": "Q153",
+  "result": "pass",
+  "note": "Each hypothesis and clause (1)-(3) matches the node and Stacks Tag 01ZR: directed nonempty preorder in the scheme universe, D : Iᵒᵖ ⥤ Scheme with IsAffineHom transitions, CompactSpace/QuasiSeparatedSpace stages, Cone+IsLimit, SheafOfModules.IsFinitePresentation, tensorPullback throughout. affineLimitTensorPullbackComparison is built from the recorded canonical tensorPullbackSectionComp and eqToIso of the cone equation; it is real data, not a choice. No extra assumptions. Edge cases checked. lean.statement equals the file signature exactly; only the node's lean field changed. Docstrings carry the source place, blueprint id and nine-step proof; the only proof is sorry. Independent searches found no existing equivalent. nt_compile --json: clean, 5.8 s. sorryAx in the comparison comes from the reviewed upstream normalized adjunction. The Second reading section is the standard post-2026-10-17 placeholder. No findings."
  }
 }

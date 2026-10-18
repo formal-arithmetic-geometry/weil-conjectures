@@ -149,5 +149,23 @@
   "group": "NJ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NJ-9f0588118 (reviewer sub-agent of L); spot-checked: The coordinatewise inverse-limit proof is correct and fully checked. Repair the delivery metadata (`created.item`/group), replace the incorrect Stacks 00MA(3) citation with exact Tag 00M9, and state commutative rings to match the completion dependency. Corrected JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-adic-inverse-limit-iso.json; review.md records all checks.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.AdicInverseLimitIso",
+  "declaration": "AdicCompletion.exists_ringEquiv_of_compatible_quotients",
+  "file": "lean/Sheaf/RingTheory/AdicInverseLimitIso.lean",
+  "statement": "theorem exists_ringEquiv_of_compatible_quotients {A : Type u} {B : Type v} [CommRing A] [CommRing B] (I : Ideal A) (J : Ideal B) (e : ∀ n : ℕ, (A ⧸ I ^ (n + 1)) ≃+* (B ⧸ J ^ (n + 1))) (he : ∀ (m n : ℕ) (h : m ≤ n) (x : A ⧸ I ^ (n + 1)), Ideal.Quotient.factorPow J (Nat.add_le_add_right h 1) (e n x) = e m (Ideal.Quotient.factorPow I (Nat.add_le_add_right h 1) x)) : ∃ E : AdicCompletion I A ≃+* AdicCompletion J B, (∀ (n : ℕ) (x : AdicCompletion I A), evalₐ J (n + 1) (E x) = e n (evalₐ I (n + 1) x)) ∧ ∀ F : AdicCompletion I A → AdicCompletion J B, (∀ (n : ℕ) (x : AdicCompletion I A), evalₐ J (n + 1) (F x) = e n (evalₐ I (n + 1) x)) → F = ⇑E",
+  "branch": "newtargets-dag",
+  "by": "Q101",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-98f321b86",
+  "group": "Q101",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: commutative rings and ideals in independent universes; e : ∀ n, A⧸I^(n+1) ≃+* B⧸J^(n+1) covers all n≥1; he is the transition compatibility via Ideal.Quotient.factorPow (direction checked); conclusion ∃ E ring equiv with evalₐ (n+1) projections, unique among all functions (node step 3). Edge cases (unit/zero ideal, zero ring, Mathlib's forced zeroth coordinate) are fine; no extra hypotheses. Duplicate search: project AdicCompletion.exists_ringEquiv, pair_henselization_completion_data and the private completion_equiv_of_ringEquiv are special cases built from a single ring map; Mathlib congr/ofAlgEquiv/liftRingHom do not take an arbitrary compatible family. Only the lean field changed; statement verbatim in the file; Tag 00M9 and blueprint docstrings carry the proof steps; sole proof is sorry; report sections present. nt_compile.py --json clean (rc 0, 2.1 s), checked with a positive control. Note outside the stage-2 delta: the node's source.place still says 00MA(3) where 00M9 is correct."
  }
 }

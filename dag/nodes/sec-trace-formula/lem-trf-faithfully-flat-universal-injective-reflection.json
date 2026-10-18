@@ -142,5 +142,23 @@
   "group": "Q79",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q79-aeb64a778 (reviewer sub-agent of L); spot-checked: Mathematics and sources check out, including all three Mathlib leaves, hypotheses, tensor conventions, edge cases, route, and duplicate checks. The item’s created.item incorrectly names lem-trf-mittag-leffler-faithfully-flat-descent; corrected full JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-faithfully-flat-universal-injective-reflection.json. Review written to review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.FaithfullyFlatUniversalInjectiveReflection",
+  "declaration": "LinearMap.faithfullyFlat_universal_injective_iff",
+  "file": "lean/Sheaf/TraceFormula/FaithfullyFlatUniversalInjectiveReflection.lean",
+  "statement": "theorem faithfullyFlat_universal_injective_iff {R : Type u} {S : Type v} [CommRing R] [CommRing S] [Algebra R S] (hS : (algebraMap R S).FaithfullyFlat) {P : Type w} {Q : Type x} [AddCommGroup P] [AddCommGroup Q] [Module R P] [Module R Q] (u : P →ₗ[R] Q) : ((∀ (L : Type (max u v w x t)) [AddCommGroup L] [Module R L], Function.Injective (u.lTensor L)) ↔ ∀ (T : Type (max u v w x t)) [AddCommGroup T] [Module S T], Function.Injective ((LinearMap.baseChange S u).lTensor T))",
+  "by": "Q138",
+  "date": "2026-10-18",
+  "branch": "newtargets-dag",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9a64f5b32",
+  "group": "Q138",
+  "result": "pass",
+  "note": "Lean statement LinearMap.faithfullyFlat_universal_injective_iff matches the node clause by clause: CommRing R,S with (algebraMap R S).FaithfullyFlat (= Module.FaithfullyFlat R S via faithfullyFlat_algebraMap_iff), u : P →ₗ[R] Q, S⊗u = LinearMap.baseChange S u, both universal-injectivity clauses via lTensor, ↔ with no extra assumptions. All universes bound; tests in Type (max u v w x t) with t free, so no hidden restriction. Edge cases (zero modules, zero maps, zero ring) are covered. nt_compile (--json, recorded path) is clean in 2.5 s. A scratch proof via cancelBaseChange, distribBaseChange and FaithfullyFlat.lTensor_injective_iff_injective compiles, so the statement is true as typed. No duplicate notion in Mathlib or the project (only the scheme-level UniversallyInjective). The source supports it (Stacks 05A5 proof, 05CK). The node diff only adds the lean record, whose statement matches the file verbatim. Docstrings carry the source, blueprint and both proof directions; no definitions; sorry only. Report sections are present; the second-reading section is the 2026-10-17 policy placeholder, which I accept."
  }
 }

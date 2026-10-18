@@ -156,5 +156,23 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NN-ceee4cef5 (reviewer sub-agent of L); spot-checked: Verified all four proof steps, three new nodes, cited statements, Swanson–Huneke p. 89, Stacks, Mathlib sources, and edge cases. Reused the existing localization-dimension leaf, expanded the elementary radical calculation inline, and corrected the retained contraction node’s source and ancestry. Corrected JSON files and detailed checks are in fixes/ and review.md.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.KrullPrincipalPrimaryDecomposition",
+  "declaration": "RingTheory.krull_principal_primary_decomposition",
+  "file": "lean/Sheaf/RingTheory/KrullPrincipalPrimaryDecomposition.lean",
+  "statement": "theorem krull_principal_primary_decomposition (D : Type u) [CommRing D] [IsDomain D] (hlocal : ∀ P : PrimeSpectrum D, P.asIdeal ≠ ⊥ → (∀ Q : Ideal D, Q.IsPrime → Q < P.asIdeal → Q = ⊥) → IsNoetherianRing (Localization.AtPrime P.asIdeal) ∧ IsDomain (Localization.AtPrime P.asIdeal) ∧ IsIntegrallyClosed (Localization.AtPrime P.asIdeal)) (hintersection : Set.range (algebraMap D (FractionRing D)) = ⋂ (P : PrimeSpectrum D) (_ : P.asIdeal ≠ ⊥) (_ : ∀ Q : Ideal D, Q.IsPrime → Q < P.asIdeal → Q = ⊥), (Localization.subalgebra.ofField (FractionRing D) P.asIdeal.primeCompl P.asIdeal.primeCompl_le_nonZeroDivisors : Set (FractionRing D))) (hfinite : ∀ x : D, x ≠ 0 → Set.Finite {P : PrimeSpectrum D | P.asIdeal ≠ ⊥ ∧ (∀ Q : Ideal D, Q.IsPrime → Q < P.asIdeal → Q = ⊥) ∧ x ∈ P.asIdeal}) (b : D) (hb : b ≠ 0) : ∃ (t : ℕ) (P : Fin t → PrimeSpectrum D), Function.Injective P ∧ (∀ Q : PrimeSpectrum D, (∃ i : Fin t, P i = Q) ↔ Q.asIdeal ≠ ⊥ ∧ (∀ I : Ideal D, I.IsPrime → I < Q.asIdeal → I = ⊥) ∧ b ∈ Q.asIdeal) ∧ Ideal.span ({b} : Set D) = ⨅ i : Fin t, Ideal.comap (algebraMap D (Localization.AtPrime (P i).asIdeal)) (Ideal.span ({algebraMap D (Localization.AtPrime (P i).asIdeal) b} : Set (Localization.AtPrime (P i).asIdeal))) ∧ ∀ i : Fin t, (Ideal.comap (algebraMap D (Localization.AtPrime (P i).asIdeal)) (Ideal.span ({algebraMap D (Localization.AtPrime (P i).asIdeal) b} : Set (Localization.AtPrime (P i).asIdeal)))).radical = (P i).asIdeal",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5683a91c3",
+  "group": "NA",
+  "result": "pass",
+  "note": "All clauses match node and S-H Def 4.10.1/Prop 4.10.3 (p.89): the 3 Krull hypotheses (height-one = nonzero prime with only ⊥ below; hlocal Noetherian+domain+integrally closed; hintersection via Mathlib ofField subalgebras in FractionRing, empty iInter = univ; hfinite), nonzero b, exact injective Fin-t enumeration of height-one primes containing b, span{b} = ⨅ comap span{b/1}, radical = P i (exponent-0 convention equivalent). No extra assumptions, universe u free. Edge cases t=0, D a field, zero ring, b=0 checked. Sorry-only single theorem, docstrings with source/blueprint/4 proof steps, imports = stated or mathlib-matched proof-dep modules, max line 95, autoImplicit false. Node differs from side clone only in lean; record complete; statement verbatim in file. No name collision, no Krull notion in Mathlib. nt_compile --json clean in 2.5 s, exit 0; control error was detected. Observation: sibling krull node phrases the same conditions with Ideal indexing and local helpers; equivalent, not H4."
  }
 }

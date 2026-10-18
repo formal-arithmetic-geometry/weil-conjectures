@@ -14,7 +14,8 @@
   "def-weil-pbc-cohen-ring",
   "def-weil-pbc-module-tensor-product",
   "def-weil-pbc-localization-at-prime",
-  "def-weil-regular-scheme"
+  "def-weil-regular-scheme",
+  "lem-trf-log-regular-saturation-normality"
  ],
  "proof": [
   {
@@ -334,5 +335,37 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NG-187dfd328 (reviewer sub-agent of L); spot-checked: Reviewed the complete item, all fourteen proof steps, cited dependency statements, unit/chapter route, ILO VI 1.6 and VIII 3.1.1–3.1.5 context, Stacks interfaces, edge cases, duplicate search, route-pivot exclusions, and prior repair points. The corrected character twist, face splitting, tensor/localization comparisons, completion constructions, mixed-characteristic parameter argument, and ideal comparison are valid. Review written to review.md; no fixes needed."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FormalMonoidExtensionModel",
+  "declaration": "Algebra.formalMonoidExtension_model",
+  "declarations": [
+   "Algebra.monoidChartTensor",
+   "Algebra.monoidChartTensorBase",
+   "Algebra.monoidChartTensorMonomial",
+   "Algebra.chartSharpMonoid",
+   "Algebra.localizedUnitChart",
+   "Algebra.unitChartGroupMap",
+   "AddMonoidAlgebra.IsAdicPairEquiv",
+   "AddMonoidAlgebra.HasExtendedFormalMonoidModel",
+   "Algebra.localizedTensorMonomial",
+   "Algebra.localizedTensorBoundary",
+   "Algebra.formalMonoidExtension_model"
+  ],
+  "file": "lean/Sheaf/RingTheory/FormalMonoidExtensionModel.lean",
+  "statement": "theorem formalMonoidExtension_model (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] (R : Type v) [CommMonoid R] (Q : Type w) [CommMonoid Q] (_hR : AlgebraicGeometry.IsFineSaturatedMonoid R) (_hQ : AlgebraicGeometry.IsFineSaturatedMonoid Q) (h : R →* Q) (_hgp : Function.Bijective (GrothendieckGroup.lift ((GrothendieckGroup.of (M := Q)).comp h))) (α : R →* A) (a : Multiplicative (chartSharpMonoid α) →* A) (ε : GrothendieckGroup R →* Aˣ) (_hα : ∀ r : Localization ((IsUnit.submonoid A).comap α), localizedUnitChart α r = (ε (unitChartGroupMap α r) : A) * a (Multiplicative.ofAdd (Additive.ofMul (Associates.mk r)))) (q : Ideal (monoidChartTensor α h)) [q.IsPrime] (_hq : Ideal.comap (monoidChartTensorBase α h) q = IsLocalRing.maximalIdeal A) : ((∃ (n : ℕ) (e : AddMonoidAlgebra.CompletedLocalModel (IsLocalRing.ResidueField A) (chartSharpMonoid α) n ≃+* AdicCompletion (IsLocalRing.maximalIdeal A) A), ∀ s : chartSharpMonoid α, e (algebraMap (MvPolynomial (Fin n) (AddMonoidAlgebra (IsLocalRing.ResidueField A) (chartSharpMonoid α))) _ (MvPolynomial.C (AddMonoidAlgebra.single s (1 : IsLocalRing.ResidueField A)))) = algebraMap A _ (a (Multiplicative.ofAdd s))) → AddMonoidAlgebra.HasExtendedFormalMonoidModel (Localization.AtPrime q) (chartSharpMonoid (localizedTensorMonomial α h q)) (localizedTensorBoundary α h q) false) ∧ ((∃ (V : Type (max u v w)) (_ : CommRing V) (_ : IsLocalRing V) (p : ℕ), IsCohenRing p V ∧ Nonempty (IsLocalRing.ResidueField V ≃+* IsLocalRing.ResidueField A) ∧ ∃ (n : ℕ) (θ : AddMonoidAlgebra.CompletedLocalModel V (chartSharpMonoid α) n), θ - (p : AddMonoidAlgebra.CompletedLocalModel V (chartSharpMonoid α) n) ∈ AddMonoidAlgebra.completedLocalModelBoundaryIdeal V (chartSharpMonoid α) n ∧ ∃ e : (AddMonoidAlgebra.CompletedLocalModel V (chartSharpMonoid α) n ⧸ Ideal.span {θ}) ≃+* AdicCompletion (IsLocalRing.maximalIdeal A) A, ∀ s : chartSharpMonoid α, e (Ideal.Quotient.mk (Ideal.span {θ}) (algebraMap (MvPolynomial (Fin n) (AddMonoidAlgebra V (chartSharpMonoid α))) _ (MvPolynomial.C (AddMonoidAlgebra.single s (1 : V))))) = algebraMap A _ (a (Multiplicative.ofAdd s))) → AddMonoidAlgebra.HasExtendedFormalMonoidModel (Localization.AtPrime q) (chartSharpMonoid (localizedTensorMonomial α h q)) (localizedTensorBoundary α h q) true)",
+  "branch": "newtargets-dag",
+  "by": "Q151",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Both formal models are implications in one conjunction, with the same chart data, tensor ring and selected prime. Canonical helpers construct that tensor ring and its maps, the sharp localized monoids, and the ideal of nonunit chart monomials; the two conclusion helpers expand the requested topological ring-isomorphisms of pairs. Reuses CompletedLocalModel and its ideals from the added already-landed dependency lem-trf-log-regular-saturation-normality. Mathlib Localization identifies canonically with the fraction submonoid for these integral fs monoids, and Associates is exactly the quotient by the face group of units. No extra node or statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a7cff2d35",
+  "group": "Q151",
+  "result": "pass",
+  "note": "Clause-by-clause match of Algebra.formalMonoidExtension_model with the node: A Noetherian local; R,Q IsFineSaturatedMonoid; h bijective on GrothendieckGroup; G, S=Associates(Localization G), a, ε with the relation over all of R_G; case (a) CompletedLocalModel k S n ≃ Â sending each monomial to a(s); case (b) IsCohenRing p V, residue-field iso, θ-p in the boundary ideal (monomials and t), quotient iso compatible with monomials; C is the canonical tensor A⊗_{Z[R]}Z[Q]; q a prime over m; B=Localization.AtPrime q; F, T, J canonical; conclusion: nonzero complete regular local D with residue field κ(q), ring iso of pairs with continuity both ways, and in case (b) η̄ in m_D but not in m_D^2. No extra assumptions; universes u,v,w independent and bound; the existential universes are harmless. Edge cases n=0, trivial S/T, D a field, θ=p-t all covered. Reuses the landed CompletedLocalModel; toricChartRing is a narrower construction, not a duplicate. stmt_deps gains only the landed owning node (allowed, no cycle, not route-pivot dropped). lean.statement verbatim. Gates: no hollow definitions, docstrings with source and blueprint, the theorem's own proof is the only sorry and carries the 14-step plan, proof imports present, no pro-etale content. Report has Worker report and Second reading by Q151. nt_compile.py local overlay: rc 0, 4.0 s, no diagnostics; a deliberately false appended line showed the wrapper reports errors; axioms are the standard ones plus sorryAx. No findings that need a fix."
  }
 }

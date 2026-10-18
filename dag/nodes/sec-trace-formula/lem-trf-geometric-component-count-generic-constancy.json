@@ -290,5 +290,23 @@
   "group": "Q104",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q104-c1ccc5b60 (reviewer sub-agent of L); spot-checked: Read the full item, both new nodes, cited statements, unit route, and Stacks sources 055A, 0556, and 0554. All hypotheses, component-count comparisons, base changes, edge cases, duplicate checks, and route constraints pass; no long-step or repair issue found. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.GeometricComponentCountGenericConstancy",
+  "declaration": "AlgebraicGeometry.geometricFibreComponentCount_genericConstancy",
+  "file": "lean/Sheaf/TraceFormula/GeometricComponentCountGenericConstancy.lean",
+  "statement": "theorem geometricFibreComponentCount_genericConstancy {X Y : Scheme.{u}} (f : X ⟶ Y) [LocallyOfFiniteType f] [QuasiCompact f] (y : Y) : ∃ V : TopologicalSpace.Opens ↥(closure ({y} : Set Y)), (V : Set ↥(closure ({y} : Set Y))).Nonempty ∧ ∃ n : ℕ, ∀ (t : ↥(closure ({y} : Set Y))), t ∈ V → ∀ (K : Type u) [Field K] [Algebra (Y.residueField t.val) K] [IsSepClosure (Y.residueField t.val) K], ENat.card (irreducibleComponents ↥(pullback (f.fiberToSpecResidueField t.val) (Spec.map (CommRingCat.ofHom (algebraMap (Y.residueField t.val) K))))) = (n : ℕ∞)",
+  "branch": "newtargets-dag",
+  "by": "Q154",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ce2797673",
+  "group": "Q154",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 055A clause by clause: f finite type = LocallyOfFiniteType+QuasiCompact (no stronger), V is a nonempty open of the closure-of-y subtype, ∃ n : ℕ, then ∀ t ∈ V and ∀ separable closure K : Type u, ENat.card of the irreducible components of X_t ×_{Spec κ(t)} Spec K equals n. Quantifier order gives choice-independence; Type u loses no separable closure up to isomorphism; edge cases (empty source, fibre, base; non-Noetherian base; Spec ℂ/ℝ) all handled. Same ENat.card convention as the 0556 sibling. Only proof is one sorry; docstrings carry source, blueprint tag and 7-step proof; lean.statement verbatim; node changed only in lean; no duplicate found. nt_compile.py --json against the side overlay: rc=0, no diagnostics. No findings."
  }
 }

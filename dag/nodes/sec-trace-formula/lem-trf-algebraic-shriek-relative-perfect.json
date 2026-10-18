@@ -12,7 +12,12 @@
   "def-pur-derived-internal-hom",
   "def-weil-pbc-noetherian-ring",
   "def-weil-flat-morphism",
-  "def-pc-ring-pseudo-coherent-complex"
+  "def-pc-ring-pseudo-coherent-complex",
+  "lem-trf-algebraic-shriek-calculus",
+  "def-sc-module-total-hom-complex",
+  "def-weil-pbc-flat-ring-map",
+  "def-weil-pbc-finite-type-algebra",
+  "def-weil-pbc-mv-polynomial-ring"
  ],
  "proof": [
   {
@@ -161,5 +166,28 @@
   "group": "Q102",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q102-186f985d9 (reviewer sub-agent of L); spot-checked: Read all mandated coordination files, the item, four new nodes, cited statements, unit/chapter route, blueprint, and Stacks sources. Verified every proof step, hypotheses, shifts, scalar/evaluation comparison, edge cases, searches, duplicates, route-pivot compliance, and ordinary derived coefficient categories. Wrote review.md; JSON syntax checks pass. No repairs needed."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.AlgebraicShriekRelativePerfect",
+  "declaration": "AlgebraicGeometry.algebraicShriek_relative_perfect",
+  "declarations": [
+   "AlgebraicGeometry.algebraicShriekRelativeComplex",
+   "AlgebraicGeometry.algebraicShriek_relative_perfect"
+  ],
+  "file": "lean/Sheaf/TraceFormula/AlgebraicShriekRelativePerfect.lean",
+  "statement": "theorem algebraicShriek_relative_perfect (S : AlgebraicShriekCalculus.{u}) {R A : CommRingCat.{u}} [IsNoetherianRing R] [IsNoetherianRing A] (φ : R →+* A) (hφflat : RingHom.Flat φ) (hφfinite : RingHom.FiniteType φ) (n : ℕ) (p : MvPolynomial (Fin n) R →+* A) (hp : Function.Surjective p) (hc : p.comp (MvPolynomial.C : R →+* MvPolynomial (Fin n) R) = φ) : DerivedCategory.IsPseudoCoherent (algebraicShriekRelativeComplex S n p) ∧ ((∃ c d : ℤ, c ≤ d ∧ ∀ i : ℤ, i < c ∨ d < i → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} A) i).obj (algebraicShriekRelativeComplex S n p))) ∧ ∀ i : ℤ, Module.Finite A ((DerivedCategory.homologyFunctor (ModuleCat.{u} A) i).obj (algebraicShriekRelativeComplex S n p))) ∧ (∃ a b : ℤ, a ≤ b ∧ DerivedCategory.torAmplitudeIn (ModuleCat.{u} R) a b ((algebraicShriekRestriction φ).obj (algebraicShriekRelativeComplex S n p))) ∧ (∀ E I : CochainComplex (ModuleCat.{u} A) ℤ, Nonempty (DerivedCategory.Q.obj E ≅ algebraicShriekRelativeComplex S n p) → I.IsKInjective → ∀ η : E ⟶ I, QuasiIso η → ∃ α : (CochainComplex.singleFunctor (ModuleCat.{u} A) 0).obj (ModuleCat.of A A) ⟶ CochainComplex.moduleHomComplex E I, (HomologicalComplex.singleObjXSelf (.up ℤ) (0 : ℤ) (ModuleCat.of A A)).inv ≫ α.f 0 = ModuleCat.ofHom ((LinearMap.id : A →ₗ[A] A).smulRight (CochainComplex.HomComplex.Cochain.ofHom η)) ∧ QuasiIso α)",
+  "branch": "newtargets-dag",
+  "by": "Q105",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Every normalized calculus and every polynomial presentation are covered. The scalar isomorphism is expressed on every K-injective ordinary-module Hom-complex model: the unique scalar chain map sends 1 to the resolution cocycle. This avoids the upstream closed-derived-Hom localization-size specialization while specifying the actual scalar map, not mere isomorphism of objects. No data are chosen from a postponed existence theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9a7b7433d",
+  "group": "Q105",
+  "result": "pass",
+  "note": "Statement matches node and Stacks 0BZW (1)(a)-(c),(2)(a): Noetherian R and A, RingHom.Flat/FiniteType, arbitrary surjective polynomial presentation with p∘C=φ; K = coinduction_p(P[0])[n] via the calculus (right adjoint of exact restriction, so unique up to iso; every clause is iso-invariant, so the S parameter adds no assumption); IsPseudoCoherent; bounded and finite cohomology as separate clauses; ∃a≤b torAmplitudeIn over R after restriction along φ (derived tensor, all degree-0 modules); scalar map pinned on every K-injective Hom-complex model with 1↦η, and α quasi-iso, equivalent to A→RHom_A(K,K) iso. lean.statement verbatim. Edge cases n=0, zero rings, identity presentation, non-lci covered; single universe u as in the calculus. No ring-level Tor node exists (upstream generic torAmplitudeIn matches the inline notion); RHom via existing moduleHomComplex plus K-injective, as the def-pur node text defines it. Added stmt_deps all used and acyclic; all proof_deps exist. Real definition, source and blueprint docstrings, 4-step proof docstring, proof sorry only. nt_compile --json rc 0, no messages; probe: #print axioms has sorryAx only, rfl confirms the same HasDerivedCategory instance as the calculus."
  }
 }

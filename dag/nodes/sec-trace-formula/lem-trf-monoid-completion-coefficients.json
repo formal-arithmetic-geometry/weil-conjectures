@@ -168,5 +168,23 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NH-80bb69fe9 (reviewer sub-agent of L); spot-checked: Read the complete item, auxiliary node, cited statements, unit/chapter route, Illusie–Laszlo–Orgogozo VI §1.6, and Stacks Tag 05GG. Checked every proof step, hypotheses, non-elementary steps, completion/kernel argument, finite-pattern factorization, duplicates, route restrictions, and edge cases P={0}, P=N, n=1, and field coefficients. The auxiliary node is a genuine reusable lemma and not a restatement. No repairs are needed; review.md records the detailed checks."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.MonoidCompletionCoefficients",
+  "declaration": "AddMonoidAlgebra.monoidCompletion_coefficients",
+  "file": "lean/Sheaf/RingTheory/MonoidCompletionCoefficients.lean",
+  "statement": "theorem monoidCompletion_coefficients (A : Type u) [CommRing A] [IsNoetherianRing A] [IsLocalRing A] [IsAdicComplete (IsLocalRing.maximalIdeal A) A] (P : Type v) [AddCommMonoid P] [AddMonoid.FG P] (G : Type w) [AddCommGroup G] (ι : P →+ G) (hι : Function.Injective ι) (wgt : G →+ ℤ) (hpos : ∀ p : P, p ≠ 0 → 0 < wgt (ι p)) (hfree : ∃ r : ℕ, Nonempty (G ≃+ (Fin r → ℤ))) : ∃ (ν : P → ℕ), ν 0 = 0 ∧ (∀ p : P, IsGreatest {q : ℕ | ∃ p₁ : Fin q → P, (∀ i : Fin q, p₁ i ≠ 0) ∧ (∑ i, p₁ i) = p} (ν p)) ∧ ∃ (b : Ideal (AddMonoidAlgebra A P)), b = Ideal.map (algebraMap A (AddMonoidAlgebra A P)) (IsLocalRing.maximalIdeal A) ⊔ Ideal.span {x | ∃ p : P, p ≠ 0 ∧ x = AddMonoidAlgebra.single p (1 : A)} ∧ ∃ (ring : CommRing (P → A)) (alg : @Algebra A (P → A) _ ring.toSemiring) (c : @AlgEquiv A (AdicCompletion b (AddMonoidAlgebra A P)) (P → A) _ _ ring.toSemiring _ alg), (∀ (a f : P → A) (p : P), (@Add.add (P → A) ring.toAdd a f) p = a p + f p) ∧ (∀ (a f : P → A) (p : P), (@Mul.mul (P → A) ring.toMul a f) p = ∑ᶠ q : {q : P × P // q.1 + q.2 = p}, a q.1.1 * f q.1.2) ∧ (∀ p : P, Set.Finite {q : P × P | q.1 + q.2 = p}) ∧ (∀ (a : A) (p q : P), c (AdicCompletion.of b (AddMonoidAlgebra A P) (AddMonoidAlgebra.single p a)) q = if q = p then a else 0) ∧ (∀ n : ℕ, 1 ≤ n → Set.Finite {p : P | ν p < n} ∧ Function.Surjective (AdicCompletion.evalₐ b n) ∧ RingHom.ker (AdicCompletion.evalₐ b n) = Ideal.map (algebraMap (AddMonoidAlgebra A P) (AdicCompletion b (AddMonoidAlgebra A P))) (b ^ n) ∧ (∀ x : AdicCompletion b (AddMonoidAlgebra A P), x ∈ RingHom.ker (AdicCompletion.evalₐ b n) ↔ ∀ p : P, c x p ∈ (IsLocalRing.maximalIdeal A) ^ (n - ν p)) ∧ Nonempty ((AdicCompletion b (AddMonoidAlgebra A P) ⧸ Ideal.map (algebraMap (AddMonoidAlgebra A P) (AdicCompletion b (AddMonoidAlgebra A P))) (b ^ n)) ≃ₗ[A] ⨁ p : {p : P // ν p < n}, A ⧸ (IsLocalRing.maximalIdeal A) ^ (n - ν p.1)))",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-41105b6b3",
+  "group": "NO",
+  "result": "pass",
+  "note": "Node record changed only in lean; lean.statement verbatim; single commit with 3 files. Every hypothesis matches (Noetherian, local, IsAdicComplete m, AddMonoid.FG P, injective P→+G, G≃+Z^r, positive weight) with no extra assumptions and independent universes u v w. b is pinned by equality; nu by IsGreatest with nu 0=0; the CommRing on P→A has pointwise add and finsum convolution with a finiteness clause; the AlgEquiv c is pinned by the monomial clause, with alg forced via algebraMap A B a = of(single 0 a) (checked by compile) and c forced to be the natural coefficient map via the kernel criterion and separatedness. Surjectivity of eval_n, ker = map(b^n), kernel membership with truncated n - nu p, finiteness of {nu<n} and Nonempty A-linear equiv to the finite direct sum all match the node. Edge cases P={0}, P=N, n=1, A a field are fine. No duplicate in Mathlib or side Sheaf (CompleteToricModel ideals use MvPolynomial with extra variables). Gates: no defs, sorry only, source/blueprint docstrings with proof plan, Mathlib-only imports, no line over 100 chars. nt_compile: exit 0, clean. Minor: the second reading is the author's own pass, accepted precedent."
  }
 }

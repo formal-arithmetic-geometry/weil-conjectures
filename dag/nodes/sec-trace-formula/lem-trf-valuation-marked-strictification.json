@@ -181,5 +181,24 @@
   "group": "Q95",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q95-97c508c0c (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass, including all five steps, both unsplit auxiliary nodes, edge cases, and route constraints. I supplied a metadata-only repair correcting stale created.item/group values in the item JSON; apply fixes/dag/nodes/sec-trace-formula/lem-trf-valuation-marked-strictification.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Curve.ValuationMarkedStrictification",
+  "declaration": "AlgebraicGeometry.exists_valuation_marked_strictification",
+  "statement": "theorem exists_valuation_marked_strictification (K : Type u) [Field K] [IsSepClosed K] (V : ValuationSubring K) [Finite (PrimeSpectrum V)] (Y : MultipointedCurve (Spec (.of V))) (hY : Y.IsSemistable) (hgeneric : Smooth (pullback.snd Y.x (Spec.map (CommRingCat.ofHom V.subtype)))) (hmarking : Etale (pullback.snd Y.d (Spec.map (CommRingCat.ofHom V.subtype)))) : ∃ (Z : MultipointedCurve (Spec (.of V))) (f : Z.Hom Y), IsStrictlySemistableCurve Z.x ∧ Z.IsSemistable ∧ f.IsEtaModification (Spec.map (CommRingCat.ofHom V.subtype))",
+  "branch": "newtargets-dag",
+  "by": "Q26",
+  "date": "2026-10-18",
+  "existing": false,
+  "file": "lean/Sheaf/AlgebraicGeometry/Curve/ValuationMarkedStrictification.lean",
+  "fixed_by": "NT-stage2-cc-35cf7479c"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-35cf7479c",
+  "group": "Q26",
+  "result": "fix",
+  "note": "Statement matches node and Temkin Rem. 4.5.2: K sep-closed, V ValuationSubring with finite PrimeSpectrum, landed MultipointedCurve/IsSemistable/IsEtaModification; strict pair semistability = IsStrictlySemistableCurve Z.x ∧ Z.IsSemistable (checked equivalent: etale marking in smooth locus is locally V(t) with t etale; same encoding as landed sibling); generic identity = generic base-change isos; no extra hypotheses, universes fine, edge cases (V=K, empty marking/curve, d=0) covered; only change to the node is the lean record, verbatim signature; sorry only; compiles clean via nt_compile. F1 fixed: module imported sibling theorem module ValuationCommonStrictSemistableRefinement, whose proof_deps contain this item (import cycle once proved); fixes/lean/Sheaf/AlgebraicGeometry/Curve/ValuationMarkedStrictification.lean imports MultipointedCurveModification and StrictlySemistableCurve directly, expands docstring with the 5 proof steps; signature identical, compiles clean."
  }
 }

@@ -173,5 +173,31 @@
   "group": "NB",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NB-4069f0840 (reviewer sub-agent of L); spot-checked: Read the item, both new nodes, all cited DAG statements, unit/blueprint route, and Stacks sources 01JT, 00MA, 05GI, 0GDX. The repaired split correctly isolates finite-level quotient comparison and inverse-limit passage; hypotheses, point uniqueness, canonical base-change map, edge cases, duplicate searches, and route restrictions check out. Tag 0GDX was verified to assume the completed-local isomorphism, and is used only as contextual source. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CompletedLocalBaseChange",
+  "declaration": "AlgebraicGeometry.Scheme.completedLocalBaseChange",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.completionBaseMap",
+   "AlgebraicGeometry.Scheme.Hom.completionBaseChange",
+   "AlgebraicGeometry.Scheme.Hom.completionBaseChangeLocalMap",
+   "AlgebraicGeometry.Scheme.Hom.completionBaseChangeScalarMap",
+   "AlgebraicGeometry.Scheme.completedLocalBaseChange"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CompletedLocalBaseChange.lean",
+  "statement": "theorem completedLocalBaseChange {X S : Scheme.{u}} [IsLocallyNoetherian S] (f : X ⟶ S) [LocallyOfFiniteType f] (s : S) (x : X) (hxs : f x = s) : ∃ z : f.completionBaseChange s, ∃ hx : pullback.fst f (S.completionBaseMap s) z = x, pullback.snd f (S.completionBaseMap s) z = IsLocalRing.closedPoint (AdicCompletion (IsLocalRing.maximalIdeal (S.presheaf.stalk s)) (S.presheaf.stalk s)) ∧ (∀ w : f.completionBaseChange s, pullback.fst f (S.completionBaseMap s) w = x → pullback.snd f (S.completionBaseMap s) w = IsLocalRing.closedPoint (AdicCompletion (IsLocalRing.maximalIdeal (S.presheaf.stalk s)) (S.presheaf.stalk s)) → w = z) ∧ ∃ e : AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x) ≃+* AdicCompletion (IsLocalRing.maximalIdeal ((f.completionBaseChange s).presheaf.stalk z)) ((f.completionBaseChange s).presheaf.stalk z), (∀ (n : ℕ) (t : AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x)) (a : X.presheaf.stalk x), AdicCompletion.evalₐ (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) n t = Ideal.Quotient.mk _ a → AdicCompletion.evalₐ (IsLocalRing.maximalIdeal ((f.completionBaseChange s).presheaf.stalk z)) n (e t) = Ideal.Quotient.mk _ (f.completionBaseChangeLocalMap s x z hx a)) ∧ ∃ α : AdicCompletion (IsLocalRing.maximalIdeal (S.presheaf.stalk s)) (S.presheaf.stalk s) →+* AdicCompletion (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) (X.presheaf.stalk x), (∀ (n : ℕ) (t : AdicCompletion (IsLocalRing.maximalIdeal (S.presheaf.stalk s)) (S.presheaf.stalk s)) (a : S.presheaf.stalk s), AdicCompletion.evalₐ (IsLocalRing.maximalIdeal (S.presheaf.stalk s)) n t = Ideal.Quotient.mk _ a → AdicCompletion.evalₐ (IsLocalRing.maximalIdeal (X.presheaf.stalk x)) n (α t) = Ideal.Quotient.mk _ (((S.presheaf.stalkCongr (.of_eq hxs.symm)).hom ≫ f.stalkMap x).hom a)) ∧ ∀ t : AdicCompletion (IsLocalRing.maximalIdeal (S.presheaf.stalk s)) (S.presheaf.stalk s), e (α t) = algebraMap ((f.completionBaseChange s).presheaf.stalk z) (AdicCompletion (IsLocalRing.maximalIdeal ((f.completionBaseChange s).presheaf.stalk z)) ((f.completionBaseChange s).presheaf.stalk z)) (f.completionBaseChangeScalarMap s z t)",
+  "branch": "newtargets-dag",
+  "by": "Q124",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Auxiliary canonical maps have real data. The theorem characterizes both completion maps on every adic quotient. Its final scalar equation expresses an isomorphism of completed-base algebras without choosing unrelated algebra instances."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d09638a95",
+  "group": "Q124",
+  "result": "pass",
+  "note": "Every clause matches: IsLocallyNoetherian S, LocallyOfFiniteType f, x over s, the real pullback along Spec(A->Ahat) then fromSpecStalk, a unique point over (x, closed point), the ring iso fixed at every adic level by the canonical local map, and Ahat-linearity via the completion of the base stalk map plus the scalar map; verified true by hand and not stronger than the node. No extra assumptions, one universe, edge cases covered. Helpers are real Mathlib composites; one sorry; source/blueprint docstrings with the 4 proof steps; lean.statement verbatim; node changes only in lean; commit has 3 files. nt_compile.py --json on the snapshot: clean, 6.1 s, exit 0. Info: N0 delivered the same item at b0a194acc (passed, not yet landed); only one can land."
  }
 }

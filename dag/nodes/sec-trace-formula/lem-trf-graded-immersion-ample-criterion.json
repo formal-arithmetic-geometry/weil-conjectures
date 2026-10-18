@@ -18,7 +18,8 @@
   "lem-trf-space-line-module-proj-map",
   "def-nagata-relative-proj",
   "def-weil-closed-immersion",
-  "def-weil-pbc-ample-invertible-module"
+  "def-weil-pbc-ample-invertible-module",
+  "def-trf-space-line-module-proj-input"
  ],
  "proof": [
   {
@@ -229,5 +230,28 @@
   "group": "Q19",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-4491472ee (reviewer sub-agent of L); spot-checked: Read in full: the item, both new nodes, the unit record, the statements of all cited nodes, and Stacks 01VJ (statement and whole proof, especially '(6) implies (1)') and Properties 01PU. The statement matches 01VJ (6)⇒(1) hypothesis by hypothesis. Its conclusion is relative ampleness over every affine open (01VH), not weakened, with no degree-one or A_0 condition. The proof steps follow the source. Fixes: (1) Dropped the new node lem-trf-qc-immersion-proj-open-factor as a duplicate (C5). It is the special case Y=Proj(A) of the existing node lemma-nagata-immersion-shrink-to-closed-exists, which is Lean-closed (AlgebraicGeometry.Scheme.Hom.exists_isCompact_isClosedImmersion, sorry-free). Step 2 now cites that node, and every citation of the dropped node is removed (stmt_deps, step 2 uses, proof_deps, unit realized.steps[1]). (2) Rewrote Step 4. It asserted O_P(e)^{⊗d}≅O_P(ed) on all of P, which is false for non-degree-one A: for A=k[x,y] with deg y=2, the map O(1)^{⊗2}→O(2) fails to be surjective on D_+(y) where x²/y=0. The step now uses the identification on Y given by lem-trf-proj-qc-open-twist-ample (added to its uses): r^*O_P(ed)=i^*O_Y(ed)≅(i^*O_Y(e))^{⊗d}, which is ample. (3) Corrected the blueprint.from.place of lem-trf-ample-restrict-closed-immersion, which had been copied from the factorization node. (4) Removed the two proof-only nodes from the item's stmt_deps. lem-trf-ample-restrict-closed-immersion is kept: it is exactly 01PU, true, self-contained, and not a duplicate (only special cases exist in the DAG, and the blueprint has no node for it). Accepted the four declared tool_uses as generic black-box uses. No SGA, no cycles, not a target node. The unit record's step texts 2 and 4 still show the old wording; the maintainer should re-sync them. I counted three substantive repairable faults plus a dependency-list nit, so FIX rather than RETURN.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.GradedImmersionAmpleCriterion",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.isAmple_of_graded_canonical_immersion",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.schemeLineTestFamily",
+   "AlgebraicGeometry.Scheme.Modules.isAmple_of_graded_canonical_immersion"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/GradedImmersionAmpleCriterion.lean",
+  "statement": "theorem isAmple_of_graded_canonical_immersion {S : Scheme.{u}} (Z : Over S) [QuasiCompact Z.hom] (L : Z.left.Modules) [L.IsInvertible] (A : S.GradedAlgebraData) (ψ : AlgebraicSpace.GradedLineMap (yoneda.map (Over.homMk Z.hom (Category.comp_id Z.hom) : Z ⟶ Over.mk (𝟙 S))) A (schemeLineTestFamily Z L)) (hgen : ψ.IsGenerationOpen ⊤) (r : Z ⟶ AlgebraicSpace.projOver (Over.mk (𝟙 S)) A) (hr : ψ.IsCanonicalMap ⊤ ((⊤ : Subfunctor (yoneda.obj Z)).ι ≫ yoneda.map r)) [IsImmersion r.left] : ∀ V : S.Opens, IsAffineOpen V → ∃ hL : ((tensorPullback (Z.hom ⁻¹ᵁ V).ι).obj L).IsInvertible, @IsAmple (Z.hom ⁻¹ᵁ V).toScheme ((tensorPullback (Z.hom ⁻¹ᵁ V).ι).obj L) hL",
+  "branch": "newtargets-dag",
+  "by": "Q157",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The scheme specialization reuses the recorded GradedLineMap, IsGenerationOpen and IsCanonicalMap predicates. schemeLineTestFamily is an explicit adapter using actual tensor pullbacks of the given invertible module and their existing composition comparisons. The morphism h is bundled as Z : Over S; r is a morphism over S. No extra line module, arbitrary canonical comparison, degree-one generation or degree-zero identification is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-065b1222e",
+  "group": "Q157",
+  "result": "pass",
+  "note": "Read the item node, all 12 stmt_deps records, report, module and the reused SpaceLineModuleProjInput interface (TestLineFamily, GradedLineMap, generationSet/IsGenerationOpen, projOver, IsCanonicalMap), TensorPullbackSectionAdjunction (section-normalized comp), exists_tensorPullbackAdjunction (section-normalized unit), IsAmple (01PS) and GradedAlgebraData. Statement matches 01VJ (6)=>(1) clause by clause: QuasiCompact Z.hom only; arbitrary GradedAlgebraData (no degree-one generation, A_0 free); psi as GradedLineMap on actual tensor pullbacks of L; IsGenerationOpen top = U(psi)=Z; IsCanonicalMap fixes r (unique per dependency); IsImmersion r.left; conclusion for every affine V via tensorPullback along the inclusion of h^-1 V, with the exists-hL only supplying the instance. schemeLineTestFamily is real canonical data (no sorry or arbitrary choice) and not a duplicate. Single universe u; edge cases (empty schemes, weighted gradings) covered. lean.statement verbatim; stmt_deps gains only the landed def-trf-space-line-module-proj-input (allowed); docstrings with source, blueprint and the 5 proof steps; one sorry; lines <=100. nt_compile.py --json on the snapshot file: rc=0, 2.8 s, no errors or warnings. No findings."
  }
 }

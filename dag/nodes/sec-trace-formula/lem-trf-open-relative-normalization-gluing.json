@@ -2,7 +2,7 @@
  "id": "lem-trf-open-relative-normalization-gluing",
  "kind": "statement",
  "title": "Localization-compatible affine charts for an arbitrary-open integral map",
- "statement": "Let $S$ be a scheme [def-pc-scheme], let $j:U\\hookrightarrow S$ be an arbitrary open immersion [def-weil-open-immersion], and let $g:V\\to U$ be an integral morphism [def-weil-finite-integral-morphism]. For every affine open $W=\\operatorname{Spec}(A)\\subseteq S$, after refining $W\\cap U$ by a principal affine open cover $W_i=D(f_i)$ with $V_i=g^{-1}(W_i)=\\operatorname{Spec}(B_i)$, let $C_i$ be the integral closure of $A$ in $B_i$. The canonical localization identifications $(C_i)_{f_i f_j}\\cong(C_j)_{f_i f_j}$ on every affine overlap are induced by localization of integral closure. They satisfy the cocycle condition, so the affine schemes $\\operatorname{Spec}(C_i)$ glue compatibly as $W$ and the affine cover vary; the resulting glued scheme is integral over $S$ and restricts over $U$ to $V$.",
+ "statement": "Let $S,U,V$ be schemes [def-pc-scheme], let $j:U\\hookrightarrow S$ be an open immersion [def-weil-open-immersion], and let $g:V\\to U$ be an integral morphism [def-weil-finite-integral-morphism]. Assume that $f=j\\circ g$ is quasi-compact [def-weil-finite-type-morphism]; it is separated, hence quasi-separated. Form the relative normalization $\\nu:N\\to S$ of $S$ in $V$ [lem-weil-pbc-relative-normalization]. For every affine open $W\\subseteq S$, put $A_W=\\Gamma(W,\\mathcal O_S)$, $B_W=\\Gamma(f^{-1}(W),\\mathcal O_V)$ and $C_W$ equal to the integral closure of $A_W$ in $B_W$ [def-weil-pbc-integral-closure], using the $A_W$-algebra structure induced by $f$. The canonical restriction diagram $W\\mapsto C_W$ is compatible with localization [def-weil-pbc-module-localization]: for every principal affine restriction $D(a)\\subseteq W$, its natural square with $A_W\\to\\Gamma(D(a),\\mathcal O_S)$ is a pushout of commutative rings, equivalently $C_{D(a)}\\cong(C_W)_a$ via the canonical restriction map. Thus its transition maps satisfy the cocycle condition and the affine schemes $\\operatorname{Spec}(C_W)$ [def-weil-affine-spectrum] glue [lem-weil-pbc-glue-schemes] to $N$. Explicitly, the canonical maps $\\psi_W:\\operatorname{Spec}(C_W)\\to N$ are open immersions and jointly cover $N$, their images are exactly $\\nu^{-1}(W)$, and $\\nu\\circ\\psi_W$ is the spectrum of $A_W\\to C_W$ followed by $\\operatorname{Spec}(A_W)\\cong W\\hookrightarrow S$. The morphism $\\nu$ is integral and there is an isomorphism $e:N\\times_S U\\xrightarrow{\\sim}V$ over $U$ [def-pc-fibre-product], namely $g\\circ e=\\operatorname{pr}_U$.",
  "source": {
   "document": "literature/stacks-project/more-morphisms.tex",
   "place": "Stacks Project, Morphisms Lemma 0CNX (lemma-extend-integral-surjective-morphisms), proof; Morphisms Lemmas 035F and 035K for localization-compatible charts"
@@ -15,60 +15,64 @@
   "def-weil-affine-spectrum",
   "def-weil-pbc-integral-closure",
   "def-weil-pbc-module-localization",
-  "lem-weil-pbc-glue-schemes"
+  "lem-weil-pbc-glue-schemes",
+  "def-weil-finite-type-morphism",
+  "lem-weil-pbc-relative-normalization"
  ],
  "proof": [
   {
-   "text": "Fix an affine open $W=\\operatorname{Spec}(A)$ of $S$ and a principal affine cover $W\\cap U=\\bigcup_iD(f_i)$, with $V_i=V\\times_U D(f_i)=\\operatorname{Spec}(B_i)$. Since $g$ is integral, the induced map $A_{f_i}\\to B_i$ is integral. Regard $A\\to B_i$ through $A\\to A_{f_i}$ and define $C_i\\subseteq B_i$ to be the integral closure of $A$ in $B_i$. This produces an affine chart $\\operatorname{Spec}(C_i)\\to\\operatorname{Spec}(A)$, integral by the definition of integral closure and of an integral affine morphism.",
+   "text": "The composite f=j∘g is separated because integral morphisms and open immersions are separated. With the explicitly assumed quasi-compactness, the relative normalization of S in V is defined as in Tag 035H. For each affine open W of S, its chart ring is C_W, the integral closure of Γ(W,O_S) in Γ(f⁻¹(W),O_V). These are full inverse-image sections, rather than separate rings over a cover of W∩U.",
    "uses": [
     "def-weil-finite-integral-morphism",
-    "def-weil-affine-spectrum",
+    "def-weil-open-immersion",
+    "lem-weil-pbc-relative-normalization",
     "def-weil-pbc-integral-closure"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0CNX proof, affine normalization charts; Morphisms Section 29.54"
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Section 29.54, Definition 035H (definition-normalization-X-in-Y), Lemma 035K (lemma-normalization-localization), Lemma 03GP (lemma-normalization-in-integral); integral-closure localization 035F and Algebra 0307. The normalization step of more-morphisms.tex Tag 0CNX supplies the intended restriction claim."
    }
   },
   {
-   "text": "On the overlap $D(f_if_j)$, the localization theorem for integral closure identifies $(C_i)_{f_if_j}$ with the integral closure of $A_{f_if_j}$ in $(B_i)_{f_if_j}$. Because $A_{f_i}\\to B_i$ is integral, every element of $B_i$ is integral over $A_{f_i}$, so after localizing at $f_j$ this closure is $(B_i)_{f_j}$. The same calculation from the $j$-chart gives $(B_j)_{f_i}$, and the two are canonically identified with the restriction of $V$ to the common principal open. Localization is transitive, so these identifications agree on triple overlaps and obey the cocycle condition.",
+   "text": "Quasi-compactness and quasi-separatedness of f ensure that f_*O_V is quasi-coherent. Its sections localize on principal affine restrictions. Apply integral-closure localization to obtain C_{D(a)}≅(C_W)_a, equivalently the canonical pushout square of base and closure rings. The restrictions form a functor; their compositions are the canonical transition maps and satisfy the triple-overlap cocycle law.",
    "uses": [
     "lem-weil-pbc-integral-closure-commutes-localization",
     "def-weil-pbc-module-localization",
-    "def-weil-finite-integral-morphism"
+    "lem-weil-pbc-relative-normalization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/morphisms.tex",
-    "place": "Morphisms Lemma 035K (normalization-localization), together with Tag 0307; more-morphisms.tex Tag 0CNX proof"
+    "place": "Section 29.54, Definition 035H (definition-normalization-X-in-Y), Lemma 035K (lemma-normalization-localization), Lemma 03GP (lemma-normalization-in-integral); integral-closure localization 035F and Algebra 0307. The normalization step of more-morphisms.tex Tag 0CNX supplies the intended restriction claim."
    }
   },
   {
-   "text": "Apply the scheme-gluing theorem to the schemes $\\operatorname{Spec}(C_i)$, their principal-open overlap subschemes, and the transition isomorphisms from Step 2. The identity, inverse, and triple-overlap equations just checked are precisely its gluing-data hypotheses. The glued scheme $V_W$ has open affine charts mapping to $W$; each chart ring $C_i$ is integral over $A$, hence $V_W\\to W$ is integral, and its restriction over $W\\cap U$ is identified with $V\\times_U(W\\cap U)$ by the localized chart identifications.",
+   "text": "The canonical relative gluing of Spec(C_W) along these principal restrictions gives the relative normalization N, with open chart maps ψ_W. They cover N and their images equal ν⁻¹(W); the chart maps to S are induced by A_W→C_W. Each full affine preimage ν⁻¹(W) is Spec(C_W), whose ring is integral over A_W, so ν is integral.",
    "uses": [
     "lem-weil-pbc-glue-schemes",
+    "def-weil-affine-spectrum",
     "def-weil-finite-integral-morphism",
-    "def-pc-fibre-product"
+    "lem-weil-pbc-relative-normalization"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tags 01JA, 01JB, 01JC, Section 26.14; more-morphisms.tex Tag 0CNX proof"
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Section 29.54, Definition 035H (definition-normalization-X-in-Y), Lemma 035K (lemma-normalization-localization), Lemma 03GP (lemma-normalization-in-integral); integral-closure localization 035F and Algebra 0307. The normalization step of more-morphisms.tex Tag 0CNX supplies the intended restriction claim."
    }
   },
   {
-   "text": "If $W'$ is another affine open of $S$, the constructions on $W$ and $W'$ restrict to the same charts on every affine principal refinement of $W\\cap W'$, by the localization identifications of Step 2. The resulting chart isomorphisms satisfy the same cocycle condition, so the $V_W$ glue over an affine cover of $S$ to a scheme $V'\\to S$. Integrality is affine-local on the target and therefore survives this gluing. On $U$ the localized charts are exactly the given $V_i$, so the base change $V'\\times_SU$ is canonically isomorphic to $V$ over $U$.",
+   "text": "By Tag 035K, relative normalization commutes with restriction to U. The pullback of f along the open immersion j is g, since j is a monomorphism. By Tag 03GP the normalization of the integral morphism g is V itself. Composing these canonical identifications gives e:N×_S U≅V, with e followed by g equal to the second projection.",
    "uses": [
-    "lem-weil-pbc-glue-schemes",
-    "lem-weil-pbc-integral-closure-commutes-localization",
     "def-pc-fibre-product",
-    "def-weil-finite-integral-morphism"
+    "def-weil-open-immersion",
+    "def-weil-finite-integral-morphism",
+    "lem-weil-pbc-relative-normalization"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/more-morphisms.tex",
-    "place": "Tag 0CNX proof, final gluing over affine cover of S and restriction to U"
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Section 29.54, Definition 035H (definition-normalization-X-in-Y), Lemma 035K (lemma-normalization-localization), Lemma 03GP (lemma-normalization-in-integral); integral-closure localization 035F and Algebra 0307. The normalization step of more-morphisms.tex Tag 0CNX supplies the intended restriction claim."
    }
   }
  ],
@@ -79,7 +83,9 @@
   "def-weil-pbc-integral-closure",
   "def-weil-pbc-module-localization",
   "lem-weil-pbc-glue-schemes",
-  "lem-weil-pbc-integral-closure-commutes-localization"
+  "lem-weil-pbc-integral-closure-commutes-localization",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-relative-normalization"
  ],
  "proof_origin": {
   "by": "document",
@@ -152,5 +158,116 @@
   "group": "Q74",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q74-529932cea (reviewer sub-agent of L); spot-checked: Read the item, parent, unit/chapter route, all cited DAG statements, and the cited Stacks passages. Verified the affine integral-closure construction, localization identifications, cocycle, scheme gluing, base-change recovery, integrality, hypotheses, and edge cases including empty opens and non-integral global localization examples. No hidden long-step lemma, duplicate, route-pivot violation, or repair is present. Review written to review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4b8e44dc7",
+  "group": "NY",
+  "result": "pass",
+  "note": "The §1(C) correction is justified: the old principal-cover chart gluing is false (Spec Q[t], cover D(t),D(1-t): both chart rings are Q[t], gluing doubles 0 and 1, so not separated and not integral). The corrected node follows Stacks 035H/035K/03GP, using integral closure over full inverse images and adding only QuasiCompact(g≫j), the hypothesis 035H needs; QuasiSeparated is inferred. The one citer, lem-trf-integral-surjective-open-extension, is correctly marked holds:false and not edited. Only statement/stmt_deps/proof/proof_deps/lean/statement_change changed, with the old fields saved verbatim. Every clause matches Mathlib Normalization: Coequifibered is equivalent to IsLocalization.Away via coequifibered_iff_forall_isLocalizationAway; chart maps are open immersions; ψ_W≫ν = Spec.map(A_W→C_W)≫fromSpec; ν⁻¹W = opensRange; joint cover; IsIntegralHom; e with e.hom≫g = pullback.snd. lean.statement is verbatim equal to the file signature. Edge cases (empty U/V, j=id, single universe) are covered. Gates: no definitions, the proof is sorry, docstrings have source, blueprint and proof steps, no line over 100 characters. nt_compile rc=0 with no warnings; the control run without the qc hypothesis fails as expected. Minor: imports kept only for dependency records; 'Second reading by NY' is a self-check in the direct-delivery lane, and this review is the independent reading.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-17",
+  "by": "NY stage 2",
+  "old_statement": "Let $S$ be a scheme [def-pc-scheme], let $j:U\\hookrightarrow S$ be an arbitrary open immersion [def-weil-open-immersion], and let $g:V\\to U$ be an integral morphism [def-weil-finite-integral-morphism]. For every affine open $W=\\operatorname{Spec}(A)\\subseteq S$, after refining $W\\cap U$ by a principal affine open cover $W_i=D(f_i)$ with $V_i=g^{-1}(W_i)=\\operatorname{Spec}(B_i)$, let $C_i$ be the integral closure of $A$ in $B_i$. The canonical localization identifications $(C_i)_{f_i f_j}\\cong(C_j)_{f_i f_j}$ on every affine overlap are induced by localization of integral closure. They satisfy the cocycle condition, so the affine schemes $\\operatorname{Spec}(C_i)$ glue compatibly as $W$ and the affine cover vary; the resulting glued scheme is integral over $S$ and restricts over $U$ to $V$.",
+  "what": "The proposed charts do not glue to an integral S-scheme, even with U=S, g=id, S=Spec(Q[t]). Take the principal cover D(t),D(1-t). Both C_i are Q[t], because Q[t] is integrally closed in Q(t). Gluing their spectra only along D(t(1-t)) doubles the points 0 and 1; the resulting map is not separated (hence not integral), and its restriction to U=S is not V=S. Also diagonal gluing overlaps must be the whole chart, not merely D(f_i²). The cited source defines relative normalization using sections on full inverse images of affine base opens and assumes its input quasi-compact and quasi-separated. An arbitrary open immersion need not make g≫j quasi-compact. Restore the required quasi-compactness and correct the chart rings and overlaps to the source construction; quasi-separatedness is automatic here. Tag 0CNX invokes normalization outside the hypotheses of its cited definition for an arbitrary open (and says “in U” where its recovery claim needs “in V”); it does not prove the invented principal-cover construction.",
+  "source": {
+   "document": "literature/stacks-project/morphisms.tex",
+   "place": "Section 29.54, Definition 035H (definition-normalization-X-in-Y), Lemma 035K (lemma-normalization-localization), Lemma 03GP (lemma-normalization-in-integral); integral-closure localization 035F and Algebra 0307. The normalization step of more-morphisms.tex Tag 0CNX supplies the intended restriction claim."
+  },
+  "citers": [
+   {
+    "id": "lem-trf-integral-surjective-open-extension",
+    "holds": false,
+    "note": "Its Step 1 invokes the rejected principal-cover gluing for an arbitrary open. The corrected source-defined normalization requires QuasiCompact (g ≫ j), not supplied by that citer. The extension theorem may still be true, but its stated proof is not justified by this corrected node; no citer is edited."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-pc-scheme",
+   "def-weil-open-immersion",
+   "def-weil-finite-integral-morphism",
+   "def-pc-fibre-product",
+   "def-weil-affine-spectrum",
+   "def-weil-pbc-integral-closure",
+   "def-weil-pbc-module-localization",
+   "lem-weil-pbc-glue-schemes"
+  ],
+  "old_proof": [
+   {
+    "text": "Fix an affine open $W=\\operatorname{Spec}(A)$ of $S$ and a principal affine cover $W\\cap U=\\bigcup_iD(f_i)$, with $V_i=V\\times_U D(f_i)=\\operatorname{Spec}(B_i)$. Since $g$ is integral, the induced map $A_{f_i}\\to B_i$ is integral. Regard $A\\to B_i$ through $A\\to A_{f_i}$ and define $C_i\\subseteq B_i$ to be the integral closure of $A$ in $B_i$. This produces an affine chart $\\operatorname{Spec}(C_i)\\to\\operatorname{Spec}(A)$, integral by the definition of integral closure and of an integral affine morphism.",
+    "uses": [
+     "def-weil-finite-integral-morphism",
+     "def-weil-affine-spectrum",
+     "def-weil-pbc-integral-closure"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/more-morphisms.tex",
+     "place": "Tag 0CNX proof, affine normalization charts; Morphisms Section 29.54"
+    }
+   },
+   {
+    "text": "On the overlap $D(f_if_j)$, the localization theorem for integral closure identifies $(C_i)_{f_if_j}$ with the integral closure of $A_{f_if_j}$ in $(B_i)_{f_if_j}$. Because $A_{f_i}\\to B_i$ is integral, every element of $B_i$ is integral over $A_{f_i}$, so after localizing at $f_j$ this closure is $(B_i)_{f_j}$. The same calculation from the $j$-chart gives $(B_j)_{f_i}$, and the two are canonically identified with the restriction of $V$ to the common principal open. Localization is transitive, so these identifications agree on triple overlaps and obey the cocycle condition.",
+    "uses": [
+     "lem-weil-pbc-integral-closure-commutes-localization",
+     "def-weil-pbc-module-localization",
+     "def-weil-finite-integral-morphism"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/morphisms.tex",
+     "place": "Morphisms Lemma 035K (normalization-localization), together with Tag 0307; more-morphisms.tex Tag 0CNX proof"
+    }
+   },
+   {
+    "text": "Apply the scheme-gluing theorem to the schemes $\\operatorname{Spec}(C_i)$, their principal-open overlap subschemes, and the transition isomorphisms from Step 2. The identity, inverse, and triple-overlap equations just checked are precisely its gluing-data hypotheses. The glued scheme $V_W$ has open affine charts mapping to $W$; each chart ring $C_i$ is integral over $A$, hence $V_W\\to W$ is integral, and its restriction over $W\\cap U$ is identified with $V\\times_U(W\\cap U)$ by the localized chart identifications.",
+    "uses": [
+     "lem-weil-pbc-glue-schemes",
+     "def-weil-finite-integral-morphism",
+     "def-pc-fibre-product"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/schemes.tex",
+     "place": "Tags 01JA, 01JB, 01JC, Section 26.14; more-morphisms.tex Tag 0CNX proof"
+    }
+   },
+   {
+    "text": "If $W'$ is another affine open of $S$, the constructions on $W$ and $W'$ restrict to the same charts on every affine principal refinement of $W\\cap W'$, by the localization identifications of Step 2. The resulting chart isomorphisms satisfy the same cocycle condition, so the $V_W$ glue over an affine cover of $S$ to a scheme $V'\\to S$. Integrality is affine-local on the target and therefore survives this gluing. On $U$ the localized charts are exactly the given $V_i$, so the base change $V'\\times_SU$ is canonically isomorphic to $V$ over $U$.",
+    "uses": [
+     "lem-weil-pbc-glue-schemes",
+     "lem-weil-pbc-integral-closure-commutes-localization",
+     "def-pc-fibre-product",
+     "def-weil-finite-integral-morphism"
+    ],
+    "elementary": false,
+    "source": {
+     "document": "literature/stacks-project/more-morphisms.tex",
+     "place": "Tag 0CNX proof, final gluing over affine cover of S and restriction to U"
+    }
+   }
+  ],
+  "old_proof_deps": [
+   "def-pc-fibre-product",
+   "def-weil-affine-spectrum",
+   "def-weil-finite-integral-morphism",
+   "def-weil-pbc-integral-closure",
+   "def-weil-pbc-module-localization",
+   "lem-weil-pbc-glue-schemes",
+   "lem-weil-pbc-integral-closure-commutes-localization"
+  ]
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.Morphisms.OpenRelativeNormalizationGluing",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.open_relative_normalization_gluing",
+  "file": "lean/Sheaf/AlgebraicGeometry/Morphisms/OpenRelativeNormalizationGluing.lean",
+  "statement": "theorem open_relative_normalization_gluing {S U V : Scheme.{u}} (j : U ⟶ S) [IsOpenImmersion j] (g : V ⟶ U) [IsIntegralHom g] [QuasiCompact (g ≫ j)] : ((AffineZariskiSite.toOpensFunctor S).op.whiskerLeft (g ≫ j).normalizationDiagramMap).Coequifibered ∧ (∀ W : S.affineOpens, IsOpenImmersion ((g ≫ j).normalizationOpenCover.f W) ∧ (g ≫ j).normalizationOpenCover.f W ≫ (g ≫ j).fromNormalization = Spec.map ((g ≫ j).normalizationDiagramMap.app (.op W.1)) ≫ W.2.fromSpec ∧ (g ≫ j).fromNormalization ⁻¹ᵁ W.1 = ((g ≫ j).normalizationOpenCover.f W).opensRange) ∧ (∀ x : (g ≫ j).normalization, ∃ (W : S.affineOpens) (y : ((g ≫ j).normalizationOpenCover.X W)), (g ≫ j).normalizationOpenCover.f W y = x) ∧ IsIntegralHom (g ≫ j).fromNormalization ∧ (∃ e : pullback (g ≫ j).fromNormalization j ≅ V, e.hom ≫ g = pullback.snd (g ≫ j).fromNormalization j)",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Source-based correction: replace the false principal-cover chart gluing by the relative-normalization construction of Tag 035H, with its required quasi-compact input; full citer audit in statement_change and report."
  }
 }

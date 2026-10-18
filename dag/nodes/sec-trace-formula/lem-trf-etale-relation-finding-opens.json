@@ -384,5 +384,24 @@
   "group": "Q66",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q66-fe612aff4 (reviewer sub-agent of L); spot-checked: Mathematics and all eight proof steps check against Tags 02WU, 02V8, 045Z, 03N0, 023Q, and 022C; edge cases and route locks pass. Repair the stale source metadata: source.place incorrectly names 02VH/02W2, contradicting the corrected citations. Corrected full DAG JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-etale-relation-finding-opens.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleRelationFindingOpens",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.etale_relation_finding_opens",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleRelationFindingOpens.lean",
+  "statement": "theorem etale_relation_finding_opens {S : Scheme.{u}} {R U U' : Over S} (s t : R ⟶ U) [Mono (prod.lift s t)] (hrel : ∀ T : Over S, Equivalence (fun a b : T ⟶ U ↦ ∃ r : T ⟶ R, r ≫ s = a ∧ r ≫ t = b)) [Surjective s.left] [Flat s.left] [LocallyOfFinitePresentation s.left] [Surjective t.left] [Flat t.left] [LocallyOfFinitePresentation t.left] (g : U' ⟶ U) [Flat g.left] [LocallyOfFinitePresentation g.left] (F : Sheaf (Scheme.fppfTopology.over S) (Type u)) (η : coequalizer (yoneda.map s) (yoneda.map t) ⟶ F.obj) (hη : ∀ G : Sheaf (Scheme.fppfTopology.over S) (Type u), Function.Bijective (fun k : F.obj ⟶ G.obj ↦ η ≫ k)) (F' : Sheaf (Scheme.fppfTopology.over S) (Type u)) (η' : coequalizer (yoneda.map (pullback.fst (pullback.snd g s ≫ t) g ≫ pullback.fst g s)) (yoneda.map (pullback.snd (pullback.snd g s ≫ t) g)) ⟶ F'.obj) (hη' : ∀ G : Sheaf (Scheme.fppfTopology.over S) (Type u), Function.Bijective (fun k : F'.obj ⟶ G.obj ↦ η' ≫ k)) : ∃ α : F'.obj ⟶ F.obj, (coequalizer.π (yoneda.map (pullback.fst (pullback.snd g s ≫ t) g ≫ pullback.fst g s)) (yoneda.map (pullback.snd (pullback.snd g s ≫ t) g)) ≫ η') ≫ α = yoneda.map g ≫ (coequalizer.π (yoneda.map s) (yoneda.map t) ≫ η) ∧ AlgebraicSpace.IsRepresentableWith (fun _ _ p ↦ IsOpenImmersion p.left) α",
+  "branch": "newtargets-dag",
+  "by": "Q136",
+  "date": "2026-10-18",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-4685b0a8a"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4685b0a8a",
+  "group": "Q136",
+  "result": "fix",
+  "note": "Statement matches node and Stacks 02WU clause by clause: Mono(prod.lift s t)+hrel for the equivalence relation; s,t surjective/flat/lfp; g flat/lfp with no surjectivity; R' as iterated pullbacks in the correct order; fppfTopology.over S = Mathlib fppf overGrothendieckTopology; quotients as presheaf coequalizer + sheafification universal property (same as landed kernel-pair lemma); canonical α uniquely determined; IsRepresentableWith (IsOpenImmersion p.left) α. Universes, edge cases, gates and verbatim lean.statement all ok. Delivered and fixed files both compile clean via nt_compile (rc=0). H8 fixed: fixes/EtaleRelationFindingOpens.lean rewrites only the theorem docstring as the node's proof steps 1-8, signature unchanged. Module docstring repeats the node's source.place with stale 02VH/02W2 (stage-1 metadata, not changeable at stage 2)."
  }
 }

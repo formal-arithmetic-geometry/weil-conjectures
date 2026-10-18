@@ -89,5 +89,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceQuasiCoherentModule",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.QCoh",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceQuasiCoherentModule.lean",
+  "statement": "abbrev QCoh {S : Scheme.{u}} (X : AlgebraicSpace S)",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-17",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.AlgebraicSpace.etaleModuleOverHasWeakSheafify",
+   "AlgebraicGeometry.AlgebraicSpace.etaleModuleOverWEqualsLocallyBijective",
+   "AlgebraicGeometry.AlgebraicSpace.QCoh"
+  ],
+  "note": "Section 1(B) interface repair: the general Mathlib match SheafOfModules.IsQuasicoherent is retained and used unchanged, but specialization to Modules on an algebraic space fails because HasWeakSheafify and WEqualsLocallyBijective on the small etale slices are unavailable in section universe u. This module supplies the named slice-instance obligations and defines QCoh(X) as the full subcategory for that same Mathlib predicate; no private replacement predicate, coefficient lift, or extra hypothesis is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8bef157bf",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Read the item, all 5 statement deps, Stacks 03M9 (spaces-morphisms l.1907) and the landed declarations. Each clause matches with no extra hypotheses: hqc/hsep are the recorded predicates, F carries Mathlib IsQuasicoherent, and the conclusion uses the canonical moduleDirectImage. Restricting qcqs to separated is the node's choice. Both lean.statement fields appear verbatim. The section 1(B) dependency module gives true slice HasWeakSheafify/WEqualsLocallyBijective instances (sorry, docstrings, same as the landed scheme instances) and QCoh as a real full subcategory; no duplicate. The node diffs only add lean records and the explicit stmt_dep def-trf-space-etale-module-functors. One universe u (site objects u+1). Empty-space, zero-module and infinite-presentation cases are covered. nt_compile --json on both siblings: clean, rc=0. A probe confirmed the signature, instance resolution, and that sorryAx is the only non-standard axiom. Gates met; the report has both sections (standard second-reading placeholder). No findings."
  }
 }

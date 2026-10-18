@@ -190,5 +190,23 @@
   "group": "Q82",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q82-34b3366e0 (reviewer sub-agent of L); spot-checked: Read the complete item, unit/chapter route, cited DAG statements, Stacks Tags 059E/059M, and delivery records. Verified all seven steps, hypotheses, dependencies, edge cases, searches, repaired non-circular stabilization, and absence of route or duplicate-node faults. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.MittagLefflerEventualDomination",
+  "declaration": "Module.isMittagLeffler_iff_eventual_domination",
+  "file": "lean/Sheaf/RingTheory/MittagLefflerEventualDomination.lean",
+  "statement": "theorem isMittagLeffler_iff_eventual_domination (R : Type u) [CommRing R] {I : Type v} [PartialOrder I] [Nonempty I] [IsDirected I (· ≤ ·)] (F : I ⥤ ModuleCat.{max u v w} R) [∀ i : I, Module.FinitePresentation R (F.obj i)] (c : Cocone F) (hc : IsColimit c) : Module.IsMittagLeffler.{u, max u v w, max u v w t, t} R c.pt ↔ ∀ i : I, ∃ (j : I) (hij : i ≤ j), ∀ (L : Type (max u v w t)) [AddCommGroup L] [Module R L], LinearMap.ker ((c.ι.app i).hom.rTensor L) ≤ LinearMap.ker ((F.map (homOfLE hij)).hom.rTensor L)",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-75854d59f",
+  "group": "Q41",
+  "result": "pass",
+  "note": "The node changes only in its lean field, and lean.statement matches the file verbatim. The statement matches Stacks 059A and 059E (2) clause by clause: R is a CommRing; I is a nonempty directed partial order (the Stacks convention, the same interface as the landed MittagLefflerHomSystems); F : I ⥤ ModuleCat.{max u v w} with finitely presented stages; any colimit cocone (c, hc); Module.IsMittagLeffler.{u, max u v w, max u v w t, t} R c.pt ↔ ∀ i ∃ j ≥ i ∀ L : Type (max u v w t), ker(f_i.rTensor L) ≤ ker(f_ij.rTensor L), so the domination direction is correct and j comes before L. Fixing L's universe is harmless, since Stacks says finitely presented test modules suffice, and both proof directions fit the chosen universes. No new definitions; the proof is sorry; docstrings give the source, the blueprint tag and all 7 proof steps; imports are fine; no line over 100 characters; Worker report and Second reading sections are present. nt_compile.py on the snapshot passed clean twice (2.0 s and 2.6 s, rc=0), and a test copy with a deliberate error confirmed the tool reports diagnostics. Non-blocking: the node text does not cite the tensor-product definition node; this was set in stage 1, which stage 2 may not change."
  }
 }

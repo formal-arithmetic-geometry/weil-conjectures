@@ -138,5 +138,23 @@
   "group": "Q78",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q78-123e28b59 (reviewer sub-agent of L); spot-checked: Mathematics and source checks pass, including all four item steps, three new nodes, Temkin §2.1, Stacks Tags 00IE/00IH, edge cases, duplicate search, and route checks. The delivered item JSON has stale creation metadata: created.item is lem-trf-valuation-height-rank and created.group is Q19. A corrected whole JSON is under fixes/dag/nodes/sec-trace-formula/lem-trf-valuation-prime-convex-correspondence.json. Review written to review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.ValuationPrimeConvexCorrespondence",
+  "declaration": "ValuationSubring.primeSpectrum_orderDualEquiv_convexSubgroup",
+  "file": "lean/Sheaf/TraceFormula/ValuationPrimeConvexCorrespondence.lean",
+  "statement": "theorem primeSpectrum_orderDualEquiv_convexSubgroup {K : Type u} [Field K] (A : ValuationSubring K) : ∃ ord : LinearOrder (Kˣ ⧸ A.unitGroup), (∀ x y : Kˣ, ord.le (QuotientGroup.mk' A.unitGroup x) (QuotientGroup.mk' A.unitGroup y) ↔ (y : K) / (x : K) ∈ A) ∧ (∀ a b c : Kˣ ⧸ A.unitGroup, ord.le a b → ord.le (a * c) (b * c)) ∧ ∃ e : (PrimeSpectrum A)ᵒᵈ ≃o {H : Subgroup (Kˣ ⧸ A.unitGroup) // ∀ ⦃h₁ h₂ g : Kˣ ⧸ A.unitGroup⦄, h₁ ∈ H → h₂ ∈ H → ord.le h₁ g → ord.le g h₂ → g ∈ H}, (∀ (P : PrimeSpectrum A) (x : Kˣ) (hx : (x : K) ∈ A), QuotientGroup.mk' A.unitGroup x ∈ (e (OrderDual.toDual P)).1 ↔ (⟨(x : K), hx⟩ : A) ∉ P.asIdeal) ∧ (∀ (n : ℕ) (p : Fin (n + 1) → PrimeSpectrum A), StrictMono p → StrictAnti (fun i : Fin (n + 1) ↦ e (OrderDual.toDual (p i))))",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c941a493a",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Only the lean field changes; statement verbatim. Clause match: Field K; ValuationSubring = node valuation ring; Γ = Kˣ ⧸ A.unitGroup; order is a conclusion, uniquely fixed by mk' x ≤ mk' y ↔ y/x ∈ A; convexity predicate verbatim; (PrimeSpectrum A)ᵒᵈ ≃o convex subtype, canonical through [x] ∈ e P ↔ x ∉ P, orientation checked via Stacks 00IH/00IE and the Q27 ordered-group dependency (0 ↦ Γ, max ideal ↦ trivial); StrictMono Fin (n+1) ↦ StrictAnti gives n strict inclusions. Edge cases A=K, DVR, higher rank, n=0 covered; one universe, autoImplicit off. No convex-subgroup notion in Mathlib/upstream (primeSpectrumOrderEquiv goes to overrings). Proof-dep import required by brief l.104. No defs, sorry only, docstrings with source/blueprint/4-step plan, lines <=93. nt_compile --json: dependency 1.6 s, item 2.3 s, no errors or warnings shown; tool verified to report errors. Temkin PDF not local, relied on worker's online reading. No findings."
  }
 }

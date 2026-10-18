@@ -226,5 +226,36 @@
   "group": "Q11",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q11-051595779 (reviewer sub-agent of L); spot-checked: Read the complete packet, item, new node, unit route, every cited statement, and cited source locations. The six steps are mathematically sound, hypotheses and edge cases check, the coproduct-topos lemma is correctly statement-only, no duplicates/cycles/route-pivot machinery or SGA misuse occur, and all proof steps are under 2000 characters. Review written to review.md; no fixes needed."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.StratifiedOrientedCover",
+  "declaration": "AlgebraicGeometry.StratifiedOrientedCover.stratified_product_coherent_conservative",
+  "declarations": [
+   "AlgebraicGeometry.StratifiedOrientedCover.Index",
+   "AlgebraicGeometry.StratifiedOrientedCover.ComponentSite",
+   "AlgebraicGeometry.StratifiedOrientedCover.componentTopology",
+   "AlgebraicGeometry.StratifiedOrientedCover.ComponentTopos",
+   "AlgebraicGeometry.StratifiedOrientedCover.Component",
+   "AlgebraicGeometry.StratifiedOrientedCover.componentOrientation",
+   "AlgebraicGeometry.StratifiedOrientedCover.ComponentLift",
+   "AlgebraicGeometry.StratifiedOrientedCover.Data",
+   "AlgebraicGeometry.StratifiedOrientedCover.stratified_product_coherent_conservative"
+  ],
+  "file": "lean/Sheaf/Paper/StratifiedOrientedCover.lean",
+  "statement": "theorem stratified_product_coherent_conservative {X S : Scheme.{u}} [IsLocallyNoetherian S] [CompactSpace S] (f : X ⟶ S) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (A : X.FiniteLocallyClosedStratification) (B : S.FiniteLocallyClosedStratification) (_hA : ∀ a, Topology.IsConstructible (A.stratum a)) (_hB : ∀ b, Topology.IsConstructible (B.stratum b)) : Nonempty (Data.{u, v} f A B) ∧ ∀ d : Data.{u, v} f A B, ∃ hE : CoherentToposRepair.IsCoherentTopos.{max (u + 1) v} (Sheaf d.topology (Type (max (u + 1) v))), ∃ hF : CoherentToposRepair.IsCoherentTopos.{max (u + 1) v} (VanishingTopos.{u, v} f), CoherentToposRepair.IsCoherentGeometricMorphism hE hF d.morphism ∧ CoherentToposRepair.IsConservativeGeometricMorphism hE hF d.morphism",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "The auxiliary declarations unpack only the constructions in this node: actual transported étale triple sites, universal component projections and structural arrows, orientation-compatible lifts to the recorded VanishingTopos, and the full recorded finite-coproduct witness. The theorem asserts construction existence and coherence/conservativity for every compatible choice. No arbitrary replacement map is assumed. Universe (maintainer fix): the set universe is max (u+1) v, as in the recorded VanishingTopos.{u, v}, not fixed to u+1.",
+  "fixed_by": "NT-stage2-cc-87fa300e9"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-87fa300e9",
+  "group": "Q17",
+  "result": "fix",
+  "note": "Read packet, node, report, module and all statement-dependency declarations (FiniteLocallyClosedStratification, OrientedNearbyCycles, OrientedProductUniversal via OrientedProductLargeSites, FiniteCoproductToposCoherent.Witness, CoherentToposRepair/CoherentTopos) plus the citer CoherentSetCriterion. All hypotheses (IsLocallyNoetherian+CompactSpace S; LOFP+QC+QS f; finite locally closed stratifications with IsConstructible strata) and conclusion clauses match the node. Components use the recorded Triples/topology/IsUniversal; u_ab uses the recorded Lift with only canonical transports; the coproduct morphism is pinned by the full Witness, component_iso and inverse_formula; coherent and conservative are the recorded predicates. Existence conjunct plus 'for every d' is sound; empty index covered; no hollow defs; docstrings/blueprint present; statement verbatim. Delivered file compiles clean with nt_compile.py. Finding: silent universe restriction: set universe fixed to u+1 (VanishingTopos.{u,u+1} etc.) while the recorded VanishingTopos.{u,v} and the citer coherent_iff_finite_constructible_strata use arbitrary max (u+1) v. Fixed in fixes/StratifiedOrientedCover.lean (universe u v, max (u+1) v throughout, explicit Index.{u,v}; compiles clean; exactly universes u,v; .{w,w+1} is the old statement), fixes/<item>.lean-record.json (note), fixes/<item>.report.md (universe text + Maintainer review fix section); refit_record, check_lean_text and check_report pass. Orgogozo §8.1 draft not checked locally."
  }
 }

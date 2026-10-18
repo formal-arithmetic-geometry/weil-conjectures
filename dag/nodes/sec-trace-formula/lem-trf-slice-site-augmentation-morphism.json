@@ -2,7 +2,7 @@
  "id": "lem-trf-slice-site-augmentation-morphism",
  "kind": "statement",
  "title": "Equalizer right adjoint for an augmented simplicial topos",
- "statement": "Let $(\\mathcal E_n,f_\\alpha^{-1})$ be a coherent simplicial diagram of sites/topoi indexed by $\\Delta^{op}$ [def-weil-pbc-topos] [def-weil-size-convention], with total site $\\mathcal E_{\\mathrm{tot}}$ constructed by [lem-trf-slice-site-total-pseudofunctor]. Let $\\mathcal D$ be a topos [def-weil-pbc-topos] with inverse-image functors $a_n^{-1}:\\mathcal D\\to\\mathrm{Sh}(\\mathcal E_n)$ and coherent identifications $f_\\alpha^{-1}a_q^{-1}\\cong a_p^{-1}$ for every $\\alpha:[p]\\to[q]$. Use the equivalence of $\\mathrm{Sh}(\\mathcal E_{\\mathrm{tot}})$ with compatible systems $(F_n,t_\\alpha)$ (with arbitrary transition maps) supplied by [lem-trf-slice-site-total-systems]. Then $G\\mapsto(a_n^{-1}G)_n$, with its canonical transitions, defines a geometric morphism [def-trf-geometric-morphism] from $\\mathrm{Sh}(\\mathcal E_{\\mathrm{tot}})$ to $\\mathcal D$. Its right adjoint sends a compatible system $(F_n,t_\\alpha)$ to the equalizer in $\\mathcal D$ of the two maps $a_{0,*}F_0\\rightrightarrows a_{1,*}F_1$ associated to the two maps $[0]\\to[1]$. The equalizer is characterized by the fact that a map into it is exactly a compatible family of maps $a_n^{-1}G\\to F_n$; the identity and cocycle laws follow from the coherence data.",
+ "statement": "Let $(\\mathcal E_n,f_\\alpha^{-1})$ be a coherent simplicial diagram of sites/topoi indexed by $\\Delta^{op}$ [def-weil-pbc-topos] [def-weil-size-convention], with total site $\\mathcal E_{\\mathrm{tot}}$ constructed by [lem-trf-slice-site-total-pseudofunctor]. Let $\\mathcal D$ be a topos [def-weil-pbc-topos] with inverse-image functors $a_n^{-1}:\\mathcal D\\to\\mathrm{Sh}(\\mathcal E_n)$ and coherent identifications $f_\\alpha^{-1}a_p^{-1}\\cong a_q^{-1}$ for every $\\alpha:[p]\\to[q]$, where $f_\\alpha:\\mathrm{Sh}(\\mathcal E_q)\\to\\mathrm{Sh}(\\mathcal E_p)$ is the corresponding component geometric morphism. Use the equivalence of $\\mathrm{Sh}(\\mathcal E_{\\mathrm{tot}})$ with compatible systems $(F_n,t_\\alpha)$ (with arbitrary transition maps) supplied by [lem-trf-slice-site-total-systems]. Then $G\\mapsto(a_n^{-1}G)_n$, with its canonical transitions, defines a geometric morphism [def-trf-geometric-morphism] from $\\mathrm{Sh}(\\mathcal E_{\\mathrm{tot}})$ to $\\mathcal D$. Its right adjoint sends a compatible system $(F_n,t_\\alpha)$ to the equalizer in $\\mathcal D$ of the two maps $a_{0,*}F_0\\rightrightarrows a_{1,*}F_1$ associated to the two maps $[0]\\to[1]$. The equalizer is characterized by the fact that a map into it is exactly a compatible family of maps $a_n^{-1}G\\to F_n$; the identity and cocycle laws follow from the coherence data.",
  "source": {
   "document": "literature/stacks-project/spaces-simplicial.tex",
   "place": "Tag 0D70, lemma-augmentation-site: construction of the component functors, compatible-family inverse image, and equalizer direct image; the vertex/edge argument in its proof"
@@ -194,5 +194,49 @@
   "group": "Q82",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q82-63571dd32 (reviewer sub-agent of L); spot-checked: Mathematics and all five proof steps check against Stacks Tag 0D70; edge cases and cited nodes were reviewed. Repair the incorrect created.item and created.group metadata; corrected DAG JSON is in fixes/dag/nodes/sec-trace-formula/lem-trf-slice-site-augmentation-morphism.json. Review written to review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SimplicialToposAugmentation",
+  "declaration": "CategoryTheory.CoherentSitePseudofunctor.ToposAugmentation.augmentation_morphism",
+  "declarations": [
+   "CategoryTheory.CoherentSitePseudofunctor.ToposAugmentation",
+   "CategoryTheory.CoherentSitePseudofunctor.ToposAugmentation.system",
+   "CategoryTheory.CoherentSitePseudofunctor.ToposAugmentation.systemMap",
+   "CategoryTheory.CoherentSitePseudofunctor.ToposAugmentation.pushTransition",
+   "CategoryTheory.CoherentSitePseudofunctor.ToposAugmentation.Result",
+   "CategoryTheory.CoherentSitePseudofunctor.ToposAugmentation.augmentation_morphism"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SimplicialToposAugmentation.lean",
+  "statement": "theorem augmentation_morphism (h : ∀ (i j : SimplexCategoryᵒᵖ) (α : i ⟶ j), PreservesFiniteLimits (D.inverseImage α)) (hE : IsGrothendieckTopos.{w} E) (P : D.SheafSystemPresentation) : Nonempty (A.Result P)",
+  "branch": "newtargets-dag",
+  "by": "Q41",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9850e64e1",
+  "group": "Q41",
+  "result": "fix",
+  "note": "The Lean statement matches the corrected node clause by clause: the comparison f_α⁻¹a_p⁻¹≅a_q⁻¹ for α:[p]→[q] in the Δᵒᵖ convention; h is exactly totalSite_sheaf_systems' hypothesis; IsGrothendieckTopos.{w} E with u and v free; P is pinned by its restriction and transition formulas; the Result fields fix the inverse image via fibreIso, the equalizer embedding and its IsLimit for the two arrows (δ0).op and (δ1).op, and the familyEquiv components onto all SheafSystemHom families. No hollow definitions, sorry only, docstrings carry the source and blueprint, the statement is verbatim. The §1(C) correction is verified against spaces-simplicial.tex 924-997 and the single citer holds. nt_compile --json: rc 0, clean, 3.5 s. FIX: fixes/lem-trf-slice-site-augmentation-morphism.report.md replaces the stub 'Second reading by Q41' with a real reading. For the lead: node proof step 1 still has the pre-correction direction f_α⁻¹a_q⁻¹G≅a_p⁻¹G; it should read f_α⁻¹a_p⁻¹G≅a_q⁻¹G, which a stage-2 fix cannot edit.",
+  "statement_corrected": true
+ },
+ "statement_change": {
+  "date": "2026-10-17",
+  "by": "Q41 stage 2",
+  "old_statement": "Let $(\\mathcal E_n,f_\\alpha^{-1})$ be a coherent simplicial diagram of sites/topoi indexed by $\\Delta^{op}$ [def-weil-pbc-topos] [def-weil-size-convention], with total site $\\mathcal E_{\\mathrm{tot}}$ constructed by [lem-trf-slice-site-total-pseudofunctor]. Let $\\mathcal D$ be a topos [def-weil-pbc-topos] with inverse-image functors $a_n^{-1}:\\mathcal D\\to\\mathrm{Sh}(\\mathcal E_n)$ and coherent identifications $f_\\alpha^{-1}a_q^{-1}\\cong a_p^{-1}$ for every $\\alpha:[p]\\to[q]$. Use the equivalence of $\\mathrm{Sh}(\\mathcal E_{\\mathrm{tot}})$ with compatible systems $(F_n,t_\\alpha)$ (with arbitrary transition maps) supplied by [lem-trf-slice-site-total-systems]. Then $G\\mapsto(a_n^{-1}G)_n$, with its canonical transitions, defines a geometric morphism [def-trf-geometric-morphism] from $\\mathrm{Sh}(\\mathcal E_{\\mathrm{tot}})$ to $\\mathcal D$. Its right adjoint sends a compatible system $(F_n,t_\\alpha)$ to the equalizer in $\\mathcal D$ of the two maps $a_{0,*}F_0\\rightrightarrows a_{1,*}F_1$ associated to the two maps $[0]\\to[1]$. The equalizer is characterized by the fact that a map into it is exactly a compatible family of maps $a_n^{-1}G\\to F_n$; the identity and cocycle laws follow from the coherence data.",
+  "what": "The inverse-image comparison reverses p and q. For an order map α:[p]→[q], the diagram indexed by Δ^op has f_α:Sh(E_q)→Sh(E_p), so f_α^{-1} takes a_p^{-1}G, not a_q^{-1}G. The old displayed composite is ill-typed for unequal fibres; it also cannot propagate a degree-zero map to degree one. Stacks Tag 0D70 explicitly writes f_φ^{-1} a_m^{-1}G = a_n^{-1}G for φ:[m]→[n].",
+  "source": {
+   "document": "literature/stacks-project/spaces-simplicial.tex",
+   "place": "Tag 0D70, lemma-augmentation-site, clause (1) and the displayed inverse-image transitions in its proof"
+  },
+  "citers": [
+   {
+    "id": "lem-trf-slice-site-simplicial-augmentation",
+    "holds": true,
+    "note": "Its slice operators U_q → U_p induce inverse images from degree p to degree q; this is precisely the corrected augmentation compatibility used in its proof."
+   }
+  ]
  }
 }

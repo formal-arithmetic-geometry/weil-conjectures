@@ -11,7 +11,8 @@
   "def-pc-scheme",
   "def-trf-algebraic-space",
   "lem-trf-space-qc-separated-etale-local",
-  "def-trf-space-quasi-coherent-module"
+  "def-trf-space-quasi-coherent-module",
+  "def-trf-space-etale-module-functors"
  ],
  "proof": [
   {
@@ -161,5 +162,24 @@
   "group": "Q05",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-95bc2156c (reviewer sub-agent of L); spot-checked: I read the item, the new node lem-trf-space-pushforward-atlas-equalizer, every cited node statement, and the sources: spaces-morphisms 03M8/03M9, spaces-properties 03M1, descent 0GNB(3)/06VE. The mathematics follows 03M9. The item assumes separated rather than quasi-separated, which is a stronger hypothesis, so nothing is weakened, and the statement is unchanged. The atlas node is a correct affine-U case of 03M8, does not restate any clause of the item, and has no duplicate in the DAG or the blueprint. I fixed three faults. (1) E1/C4: Step 1 applied lem-trf-space-qc-separated-etale-local to {V->Y, id_Y}, but that lemma needs maps from schemes; it now uses {V, atlas W->Y}. (2) C4: the equivalence node requires a and b to be quasi-compact and separated, but the steps said qcqs; Steps 3-4 now state that a and b are maps of affine schemes, hence separated. (3) C4/E5: Step 4 applied the Zariski kernel lemma lem-weil-pbc-quasi-coherent-module-kernel to étale modules, which needs F->F_et to be exact (06VE(5)). I added the statement-only node lem-trf-scheme-etale-quasi-coherent-kernel (descent 0GNB(3), the scheme case of the 03M1(3) that 03M9 cites) in the same unit, cited it, and withdrew the off-unit tool use, so tool_uses is now []. Its LeanSearch and Loogle searches are recorded as unavailable because the services are not reachable here; only the Mathlib grep ran. Corrected files are under fixes/dag/nodes/sec-trace-formula/. Edge cases checked: identity, affine f, empty X, closed immersion.; 2 file(s) fixed by the reviewer; 1 statement node(s) added by the reviewer (FIX more, RETURN less)"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.AlgebraicSpaceQuasiCoherentPushforward",
+  "declaration": "AlgebraicGeometry.AlgebraicSpace.isQuasicoherent_moduleDirectImage_of_quasiCompact_separated",
+  "file": "lean/Sheaf/AlgebraicGeometry/AlgebraicSpaceQuasiCoherentPushforward.lean",
+  "statement": "theorem isQuasicoherent_moduleDirectImage_of_quasiCompact_separated {S : Scheme.{u}} {X Y : AlgebraicSpace S} (f : X ⟶ Y) (hqc : IsQuasiCompactPresheafMap f.hom.hom) (hsep : IsSeparatedPresheafMap f.hom.hom) (F : X.Modules) [F.IsQuasicoherent] : ((moduleDirectImage f).obj F).IsQuasicoherent",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "Uses the published canonical moduleDirectImage, whose chart projections are linear for pullback of regular functions. The added already-landed definition dependency records this direct image explicitly. No statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8bef157bf",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Read the item, all 5 statement deps, Stacks 03M9 (spaces-morphisms l.1907) and the landed declarations. Each clause matches with no extra hypotheses: hqc/hsep are the recorded predicates, F carries Mathlib IsQuasicoherent, and the conclusion uses the canonical moduleDirectImage. Restricting qcqs to separated is the node's choice. Both lean.statement fields appear verbatim. The section 1(B) dependency module gives true slice HasWeakSheafify/WEqualsLocallyBijective instances (sorry, docstrings, same as the landed scheme instances) and QCoh as a real full subcategory; no duplicate. The node diffs only add lean records and the explicit stmt_dep def-trf-space-etale-module-functors. One universe u (site objects u+1). Empty-space, zero-module and infinite-presentation cases are covered. nt_compile --json on both siblings: clean, rc=0. A probe confirmed the signature, instance resolution, and that sorryAx is the only non-standard axiom. Gates met; the report has both sections (standard second-reading placeholder). No findings."
  }
 }

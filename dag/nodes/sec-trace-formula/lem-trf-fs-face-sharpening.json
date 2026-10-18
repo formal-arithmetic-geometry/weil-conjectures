@@ -8,7 +8,8 @@
   "place": "Expose VIII, 3.1.1--3.1.5, printed pp. 98--99 (localization and sharpening); Expose VI, 1.6 and 3.7(a), printed pp. 70 and 75 (the sharp fs characteristic and its finitely generated torsion-free group). Algebraic input to the sharp-chart step in the monoidal-resolution ancestry of lem-trf-local-term-locality, proof (1)--(2)."
  },
  "stmt_deps": [
-  "def-trf-fs-log-blowup"
+  "def-trf-fs-log-blowup",
+  "lem-trf-face-localization-fs"
  ],
  "proof": [
   {
@@ -172,5 +173,31 @@
   "group": "Q24",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q24-a002d596b (reviewer sub-agent of L); spot-checked: Read in full: the item, the four new nodes, def-trf-fs-log-blowup, the citer lem-trf-log-regular-sharp-chart, ILO VIII 3.1.1-3.1.5 (pp. 98-99, plus Remark 3.1.10(i)), VI 1.6 (p. 70), VI 3.7(a) (p. 75), and Mathlib PID.lean:383 (Module.basisOfFiniteTypeTorsionFree'). The item's statement matches the source and gives the sharp-chart citer exactly what it uses. Every step checks: sharpness, fs of the quotient, injectivity, R^gp = Q^gp/F^gp, torsion-freeness and freeness. All three new statements are true. Proofs checked: F^gp ∩ Q = F; saturation of Q_F via n(x+f) = q+(n-1)f; units of Q_F are F^gp; F^gp is saturated, which needs saturation of Q. Small cases tested: N^2 with a coordinate face, F = Q, F = {0} with Q sharp, and Z/2⊕N. The split is not relabelling: two children each carry one input clause and the rest is argued in the steps. No duplicates found in the DAG, and the Mathlib leaf is valid. No off-unit uses, no tool_uses, no SGA. Three repairs, under fixes/: (1) E3: step 5 called Q^gp torsion-free, which is false for Q = Z/2⊕N; the conclusion survives because F^gp is saturated, so the phrase was removed. (2) B2/B3: the three non-Mathlib new nodes used 'face', 'integral' and 'saturated' without definitions; they are now defined inline, with no change of hypotheses. (3) B3: the Mathlib leaf cited def-trf-fs-log-blowup for torsion-free groups, which that node does not define; the citation was removed. Noted, not changed: the leaf's grep record says 'no match' although the declaration exists, and the report mentions a citations.json that was not delivered.; 5 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.FsFaceSharpening",
+  "declaration": "AlgebraicGeometry.fs_face_sharpening",
+  "declarations": [
+   "Algebra.faceGeneratedSubgroup",
+   "Algebra.faceLocalizationQuotientMap",
+   "Algebra.faceSharpening",
+   "Algebra.faceSharpeningMap",
+   "Algebra.faceSharpeningGroupMap",
+   "AlgebraicGeometry.fs_face_sharpening"
+  ],
+  "file": "lean/Sheaf/TraceFormula/FsFaceSharpening.lean",
+  "statement": "theorem fs_face_sharpening {Q : Type u} [CommMonoid Q] (hQ : IsFineSaturatedMonoid Q) (F : Submonoid Q) (hF : ∀ a b : Q, a * b ∈ F → a ∈ F ∧ b ∈ F) : IsFineSaturatedMonoid (Algebra.faceLocalization Q F) ∧ (IsUnit.submonoid (Algebra.faceLocalization Q F)).map (Algebra.faceLocalization Q F).subtype = (Algebra.faceGeneratedSubgroup F).toSubmonoid ∧ IsFineSaturatedMonoid (Algebra.faceSharpening F) ∧ (∀ r : Algebra.faceSharpening F, IsUnit r → r = 1) ∧ Function.Injective (Algebra.faceSharpeningMap F) ∧ Function.Bijective (Algebra.faceSharpeningGroupMap F) ∧ (∃ r : ℕ, Nonempty (Module.Basis (Fin r) ℤ (Additive (Algebra.GrothendieckGroup (Algebra.faceSharpening F)))))",
+  "branch": "newtargets-dag",
+  "by": "Q88",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d96ee7fc8",
+  "group": "Q88",
+  "result": "pass",
+  "note": "Read the node, both stmt_deps (IsFineSaturatedMonoid at LogRegularPair.lean:141; the landed FaceLocalizationFs), the proof-dep modules, the citer LogRegularSharpChart, the module and the report. The node changed only in lean and stmt_deps; the added stmt_dep lem-trf-face-localization-fs is a landed node, which stage2_delivery.py allows, and it is needed to reuse Algebra.faceLocalization. lean.statement is verbatim in the file. Every clause matches: Q_F fs; units of Q_F = F^gp as an equality of submonoids of Q^gp; R as the real kernel quotient by F^gp; R fs and sharp; the canonical kerLift is injective; its GrothendieckGroup.lift is bijective; a Fin r Z-basis of R^gp. No extra hypotheses, one universe u. The statement is true; edge cases checked: trivial Q, F=Q, Q a group, sharp Q with trivial face, N^2 with a coordinate face, (Z/2)xN with its unit face. Helpers are real constructions; the only sorry is the theorem proof; docstrings give source and blueprint and the six proof steps; no line over 100 characters; proof imports follow the rule-7 plan; no duplicate notion. nt_compile --json on the snapshot file: clean, 3.9 s; a broken control copy reported its error. Report has Worker report and Second reading sections; the second reading is the author's self-check, noted. No fixes."
  }
 }

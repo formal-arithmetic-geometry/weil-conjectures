@@ -266,5 +266,23 @@
   "group": "N5",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-N5-7d9561be4 (reviewer sub-agent of L); spot-checked: Read the complete item, packet, required guidance, unit/chapter route, Stacks 0B67 source, and every cited node statement. The seven-step proof correctly handles unbounded complexes, explicit base-change R_p→A_q, K-flat resolutions, localization, and annihilator detection without extra hypotheses. No new nodes, duplicates, circularity, route-pivot machinery, SGA violation, or batch-5 dependency found. Review written to review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RelativeTorAmplitudeLocalization",
+  "declaration": "CochainComplex.relative_tensor_homology_vanish_iff_prime_localizations",
+  "file": "lean/Sheaf/Algebra/Homology/RelativeTorAmplitudeLocalization.lean",
+  "statement": "theorem relative_tensor_homology_vanish_iff_prime_localizations {R : Type u} {A : Type u} [CommRing R] [CommRing A] (φ : R →+* A) [HasDerivedCategory.{w} (ModuleCat.{u} R)] [∀ q : PrimeSpectrum A, HasDerivedCategory.{w} (ModuleCat.{u} (Localization.AtPrime (q.asIdeal.comap φ)))] (K : CochainComplex (ModuleCat.{u} A) ℤ) (a b : ℤ) (hab : a ≤ b) : (∀ (N : ModuleCat.{u} R) (i : ℤ), (i < a ∨ b < i) → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} R) i).obj (DerivedCategory.Q.obj (((ModuleCat.restrictScalars φ).mapHomologicalComplex (.up ℤ)).obj K) ⊗ (DerivedCategory.singleFunctor (ModuleCat.{u} R) 0).obj N))) ↔ ∀ (q : PrimeSpectrum A) (L : ModuleCat.{u} (Localization.AtPrime (q.asIdeal.comap φ))) (i : ℤ), (i < a ∨ b < i) → IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} (Localization.AtPrime (q.asIdeal.comap φ))) i).obj (DerivedCategory.Q.obj ((((ModuleCat.localizedModuleFunctor.{u} q.asIdeal.primeCompl) ⋙ ModuleCat.restrictScalars (Localization.localRingHom (q.asIdeal.comap φ) q.asIdeal φ rfl)).mapHomologicalComplex (.up ℤ)).obj K) ⊗ (DerivedCategory.singleFunctor (ModuleCat.{u} (Localization.AtPrime (q.asIdeal.comap φ))) 0).obj L))",
+  "branch": "newtargets-dag",
+  "by": "Q05",
+  "date": "2026-10-17",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e2322734c",
+  "group": "Q05",
+  "result": "pass",
+  "note": "Clause-by-clause match with node and Stacks 0B67 (1)<->(2): R→A over CommRing, arbitrary unbounded K, a≤b, tensor over R after restricting along φ, all q : PrimeSpectrum A, p = comap φ q, localizedModuleFunctor then restrictScalars along the canonical Localization.localRingHom, test modules in degree 0, same (i<a ∨ b<i), ↔. Derived ⊗ synthesized as the project's single K-flat derived monoidal instance; (1) is torAmplitudeIn written out, so no duplicate. Common universe u follows the size convention; edge cases (A=0 vacuous, R=0, zero complex, a=b, id) covered. Only node lean field added; statement verbatim; docstrings carry source, blueprint id and 7 proof steps; only sorry; no hollow defs. Report has Worker report and Second reading by Q05 (brief but concrete). nt_compile --json clean in 4.3 s, no warnings. No fixes needed."
  }
 }
