@@ -13,9 +13,84 @@
   "def-sbc-first-order-thickening",
   "def-weil-etale-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $w\\in W$. Choose an affine open $V\\subseteq Z$ containing $c(w)$ and an affine open $U\\subseteq c^{-1}(V)$ containing $w$. Such choices use the affine-open basis of a scheme. Put $R=\\mathcal O_Z(V)$ and $A=\\mathcal O_W(U)$. The given locally finite presentation of $c$ implies that the induced $R$-algebra $A$ is finitely presented by [lem-weil-pbc-lfp-affine-opens-finite-presentation]. We shall show that this affine chart is étale.",
+   "uses": [
+    "def-pc-scheme",
+    "lem-weil-pbc-lfp-affine-opens-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02HM, lemma-etale-formally-etale, converse proof, affine reduction; morphisms.tex Tag 01TQ, lemma-locally-finite-presentation-characterize."
+   }
+  },
+  {
+   "text": "The unique lifting hypothesis passes to $c|_U:U\\to V$. Indeed, given $T_0\\hookrightarrow T$, $a_0:T_0\\to U$, and $b:T\\to V$, compose with the inclusions into $W,Z$ and use the hypothesis to obtain $a:T\\to W$. A first order thickening has the same underlying space by [def-sbc-first-order-thickening], so every point of $a(T)$ already belongs to the image of $a_0$, hence lies in $U$. Restrict the continuous map of $a$ to $U$ and restrict its structure-sheaf map along $\\mathcal O_U=\\mathcal O_W|_U$; this gives a morphism $T\\to U$ by [def-weil-open-immersion]. The equations hold as maps into $U,V$ since the inclusions are injective on points and identify the restricted sheaves. Any two such lifts have identical composites into $W$ by the original uniqueness, and therefore identical continuous and sheaf maps into $U$. Thus the restricted lift is unique.",
+   "uses": [
+    "def-sbc-first-order-thickening",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02HK, lemma-formally-etale-on-opens, proof; expanded directly using the definitions."
+   }
+  },
+  {
+   "text": "Let $D$ be any commutative $R$-algebra, $I\\subseteq D$ an ideal with $I^2=0$, and $u:A\\to D/I$ an $R$-algebra map. Set $T=\\operatorname{Spec}D$ and $T_0=\\operatorname{Spec}(D/I)$. The quotient induces a closed immersion by [def-weil-closed-immersion], and its defining ideal is square zero, so this is a first order thickening [def-sbc-first-order-thickening]. The map $u$ gives $T_0\\to U=\\operatorname{Spec}A$ over $V=\\operatorname{Spec}R$. By the previous step it has a unique lift $T\\to U$ over $V$. By the unique ring-map description of morphisms between spectra [def-weil-affine-spectrum], this is exactly a unique $R$-algebra map $v:A\\to D$ whose composite with $D\\to D/I$ is $u$: functoriality of Spec identifies the two required commutative triangles with these ring equations.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "def-weil-closed-immersion",
+    "def-sbc-first-order-thickening"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02HL, lemma-affine-formally-etale, proof, using algebra.tex Tag 00UQ; affine anti-equivalence expanded."
+   }
+  },
+  {
+   "text": "Apply [lem-per-ring-square-zero-lifts-cotangent-zero] to the unique lifts established in step 3. It gives $\\Omega_{A/R}=0$ and $H_1(L_{A/R})=0$. Together with the finite presentation from step 1, these are exactly the three ring conditions in [lem-weil-pbc-etale-ring-map-iff-etale-affine]. Its reverse implication therefore shows that $U=\\operatorname{Spec}A\\to V=\\operatorname{Spec}R$ is étale.",
+   "uses": [
+    "lem-per-ring-square-zero-lifts-cotangent-zero",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 02HM, lemma-etale-formally-etale, converse proof, ring criterion (algebra.tex Tag 00UR); morphisms.tex Tag 02GJ, lemma-etale-characterize, affine comparison."
+   }
+  },
+  {
+   "text": "For every $w\\in W$ we have produced affine open neighbourhoods $U$ of $w$ and $V$ of $c(w)$ such that $c(U)\\subseteq V$ and the induced affine morphism is étale. The affine-local formulation in [def-weil-etale-morphism] (Stacks Definition 02GI) is precisely that a morphism has such charts at every point. Consequently $c$ is étale. If $W$ is empty the same pointwise criterion is vacuous, so the conclusion also covers this case.",
+   "uses": [
+    "def-weil-etale-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 02GI, definition-etale, clauses (1)-(2), as recorded in def-weil-etale-morphism."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "lem-weil-pbc-lfp-affine-opens-finite-presentation",
+  "def-sbc-first-order-thickening",
+  "def-weil-open-immersion",
+  "def-weil-affine-spectrum",
+  "def-weil-closed-immersion",
+  "lem-per-ring-square-zero-lifts-cotangent-zero",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "def-weil-etale-morphism"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 02HM, lemma-etale-formally-etale, converse; Tags 02HK and 02HL give the affine reduction, with the ring criterion supplied by Mathlib."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -58,10 +133,38 @@
    "results": "Read returned hits: .  Ring-level formal-etaleness results and the definition of scheme etaleness do not state the unique-lifting criterion for arbitrary scheme morphisms.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of schemes locally of finite presentation is etale if all affine square zero lifting problems admit unique solutions",
+   "results": "Read returned hits: AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified, AlgebraicGeometry.IsEtale.instFormallyUnramified, AlgebraicGeometry.IsEtale.instIsSmooth, Algebra.etaleLocus_eq_univ_iff_etale, AlgebraicGeometry.IsEtale.of_comp, RingHom.Etale.propertyIsLocal.  No scheme-level formally-etale lifting criterion; ring-level hits require the affine argument.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A morphism of schemes is etale if locally finitely presented and formally etale",
+   "results": "Read returned hits: AlgebraicGeometry.IsEtale, AlgebraicGeometry.Scheme.Etale, Algebra.Etale.mk, RingHom.FormallyEtale, Algebra.Etale.formallyEtale, RingHom.Etale, Algebra.FormallyEtale, AlgebraicGeometry.FormallyUnramified.  No scheme-level formally-etale lifting criterion; ring-level hits require the affine argument.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.FormallyEtale.iff_comp_bijective",
+   "results": "Read returned hits: Algebra.FormallyEtale.iff_comp_bijective.  No scheme-level formally-etale lifting criterion; ring-level hits require the affine argument.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "FormallyEtale|formallyEtale",
+   "results": "Read returned hits: .  No scheme-level formally-etale lifting criterion; ring-level hits require the affine argument.",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-kato-lattice-chart-realization",
@@ -88,5 +191,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-lfp-unique-infinitesimal-lifts-etale",
+  "worker": "stage1",
+  "summary": "Proved the affine restriction argument and its ring translation explicitly; reused the existing finite-presentation and affine-etaleness nodes. Added one Mathlib leaf for unique square-zero algebra lifts versus vanishing cotangent modules, verified from the pinned source. The item statement is unchanged.",
+  "blueprint": "Realizes the Kato chart-comparison input in the existing from.place: turn unique infinitesimal lifts of the locally finitely presented comparison morphism into etaleness, by the affine ring route of Stacks 02HM."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-2de20db56",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-2de20db56 (reviewer sub-agent of L); spot-checked: I read all five steps and the new leaf in full against Stacks more-morphisms 02HM (converse proof, lines 1723-1742), 02HK and 02HL (confirmed in tags/tags). The item statement is unchanged from live and is exactly 02HM (2)=>(1) with the 02HG affine first-order test; it needs only lfp. Step 1: the affine U in c^-1(V) has a finitely presented section ring map by lem-weil-pbc-lfp-affine-opens-finite-presentation, which covers any affine pair, and no affine-intersection claim is made. Step 2: the thickening is surjective on points, so a(T)=a0(T0) lies in U; the lift factors through the open subscheme and uniqueness descends through the monomorphisms (elementary is fair). Step 3: Spec(D/I) to Spec D is a square-zero closed immersion, and def-weil-affine-spectrum's 'exactly one phi' gives the bijection between lifts over V and R-algebra maps v with q v = u, for arbitrary D. Step 4: the new leaf gives Omega=0 and H1=0, and finite presentation plus lem-weil-pbc-etale-ring-map-iff-etale-affine gives Spec A to Spec R etale. Step 5: def-weil-etale-morphism's statement records the 02GI affine-chart form, and its Mathlib match is affine-local, so this is not a use of a proof (C3 OK). New leaf lem-per-ring-square-zero-lifts-cotangent-zero: an exact match to Mathlib RingTheory/Etale/Basic.lean, FormallyEtale with mk_iff (lines 42-48) and FormallyEtale.iff_comp_bijective (lines 82-95); H1 and Omega are tied to the cited definition nodes, and it has three kinds of search. Tested on A=R, R[x] with dual numbers, and Z to F_p, which shows both modules are needed. Duplicate search (tags 02HM/02HG/02HK/02HL/00UQ/00UR, FormallyEtale matches, unique-lift phrases) found only the localized cotangent criterion, the trf weakly-etale consequence and the converse pbc node: no duplicate and no restated clause. The blueprint from/via are correct. There are no off-unit statements, so no tool_uses, and no SGA citation. No fixes."
  }
 }
