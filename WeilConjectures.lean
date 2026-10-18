@@ -8925,6 +8925,9 @@ public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplex
 public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplexInternalHom
 public import WeilConjectures.SixFunctors.Etale.Derived.WeilComplexTensorHom
 public import WeilConjectures.SixFunctors.Etale.Derived.WeilFrobenius
+public import WeilConjectures.SixFunctors.Etale.FieldBaseChange.Vanishing.Approximation
+public import WeilConjectures.SixFunctors.Etale.FieldBaseChange.Vanishing.ConstantSheaf
+public import WeilConjectures.SixFunctors.Etale.FieldBaseChange.Vanishing.Limit
 public import WeilConjectures.SixFunctors.Etale.Gabber
 public import WeilConjectures.SixFunctors.Etale.GeometricFrobenius
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.BaseChange
