@@ -11,6 +11,7 @@ public import Mathlib.CategoryTheory.Functor.OfSequence
 public import Mathlib.Algebra.Homology.Functor
 
 import WeilConjectures.Algebra.Homology.TowerEvaluationKInjective
+import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 
 /-!
 # Levelwise K-injective towers compute additive functors
@@ -64,6 +65,53 @@ noncomputable def strictTowerDerivedComparison
       ((HomotopyCategory.quotient (ℕᵒᵖ ⥤ A) (.up ℤ)).obj X) ≫
     (G.onStrictTowers.rightDerivedFunctorOfQuasiIsoResolutions h).map
       ((DerivedCategory.quotientCompQhIso (ℕᵒᵖ ⥤ A)).hom.app X)
+
+private theorem map_sequence_composite
+    {C : Type uA} {D : Type uB} [Category.{vA} C] [Category.{vB} D]
+    (F : C ⥤ D) {Z : ℕ → C} (f : ∀ n, Z n ⟶ Z (n + 1))
+    (i j : ℕ) (hij : i ≤ j) :
+    F.map (OfSequence.map f i j hij) =
+      OfSequence.map (fun n ↦ F.map (f n)) i j hij := by
+  induction i generalizing Z j with
+  | zero =>
+      induction j generalizing Z with
+      | zero => exact F.map_id _
+      | succ j hj =>
+          cases j with
+          | zero => rfl
+          | succ j =>
+              simp only [OfSequence.map]
+              rw [F.map_comp, hj]
+  | succ i hi =>
+      cases j with
+      | zero => omega
+      | succ j => exact hi (fun n ↦ f (n + 1)) j (by omega)
+
+private theorem strictTowerComparison_naturality
+    {A : Type uA} {B : Type uB} [Category.{vA} A] [Category.{vB} B]
+    [Abelian A] [Abelian B]
+    [HasDerivedCategory.{wA} (ℕᵒᵖ ⥤ A)] [HasDerivedCategory.{wB} (ℕᵒᵖ ⥤ B)]
+    (G : A ⥤ B) [G.Additive]
+    (h : ∀ K : CochainComplex (ℕᵒᵖ ⥤ A) ℤ,
+      ∃ (I : CochainComplex (ℕᵒᵖ ⥤ A) ℤ) (q : K ⟶ I), I.IsKInjective ∧ QuasiIso q)
+    {X Y : CochainComplex (ℕᵒᵖ ⥤ A) ℤ} (a : X ⟶ Y) :
+    DerivedCategory.Q.map ((G.onStrictTowers.mapHomologicalComplex (.up ℤ)).map a) ≫
+        G.strictTowerDerivedComparison h Y =
+      G.strictTowerDerivedComparison h X ≫
+        (G.onStrictTowers.rightDerivedFunctorOfQuasiIsoResolutions h).map
+          (DerivedCategory.Q.map a) := by
+  dsimp only [strictTowerDerivedComparison]
+  rw [DerivedCategory.quotientCompQhIso_inv_naturality_assoc,
+    ← Functor.mapHomotopyCategory_map]
+  rw [← Category.assoc _ _
+    ((G.onStrictTowers.rightDerivedFunctorOfQuasiIsoResolutions h).map _)]
+  have hn := (G.onStrictTowers.rightDerivedFunctorOfQuasiIsoResolutionsUnit h).naturality
+    ((HomotopyCategory.quotient _ _).map a)
+  dsimp only [Functor.comp_map] at hn
+  rw [hn]
+  simp only [Category.assoc]
+  rw [← Functor.map_comp, DerivedCategory.quotientCompQhIso_hom_naturality,
+    Functor.map_comp]
 
 /-- Levelwise K-injective strict towers compute the total derived levelwise image.
 
@@ -151,6 +199,72 @@ theorem levelwiseKInjectiveTowerImage
         Functor.ofOpSequence
           (X := fun _ : ℕ ↦ (G.mapHomologicalComplex (.up ℤ)).obj J)
           (fun _ : ℕ ↦ (G.mapHomologicalComplex (.up ℤ)).map e)) := by
-  sorry
+  have hres (Q : CochainComplex
+      (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r, max uC vC r, vC, uC} R) ℤ)
+      (q : X ⟶ Q) (hQ : Q.IsKInjective) (hq : QuasiIso q) :
+      (∀ n : ℕᵒᵖ, CochainComplex.IsKInjective (Q.asFunctor.obj n)) ∧
+      (∀ n : ℕᵒᵖ, QuasiIso ((G.mapHomologicalComplex (.up ℤ)).map
+        ((HomologicalComplex.complexOfFunctorsToFunctorToComplex.map q).app n))) ∧
+      QuasiIso ((G.onStrictTowers.mapHomologicalComplex (.up ℤ)).map q) := by
+    have hQn := tower_evaluation_isKInjective _ Q
+    have hqn (n : ℕᵒᵖ) : QuasiIso ((G.mapHomologicalComplex (.up ℤ)).map
+        ((HomologicalComplex.complexOfFunctorsToFunctorToComplex.map q).app n)) := by
+      have : CochainComplex.IsKInjective
+          ((HomologicalComplex.complexOfFunctorsToFunctorToComplex.obj X).obj n) := by
+        change CochainComplex.IsKInjective (X.asFunctor.obj n)
+        exact hX n
+      have : CochainComplex.IsKInjective
+          ((HomologicalComplex.complexOfFunctorsToFunctorToComplex.obj Q).obj n) := by
+        change CochainComplex.IsKInjective (Q.asFunctor.obj n)
+        exact hQn n
+      have heval : QuasiIso
+          ((HomologicalComplex.complexOfFunctorsToFunctorToComplex.map q).app n) :=
+        (HomologicalComplex.quasiIso_iff_evaluation q).mp hq n
+      obtain ⟨e, he⟩ := (CochainComplex.IsKInjective.quasiIso_iff _).mp heval
+      rw [← he]
+      exact (G.mapHomotopyEquiv e).quasiIso_hom
+    exact ⟨hQn, hqn,
+      (HomologicalComplex.quasiIso_iff_evaluation _).mpr hqn⟩
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · intro Q q hQ hq
+    obtain ⟨hQn, hqn, hGq⟩ := hres Q q hQ hq
+    refine ⟨hQn, hqn, hGq, ?_⟩
+    intro n m t
+    simpa only [HomologicalComplex.complexOfFunctorsToFunctorToComplex,
+      Functor.map_comp] using congrArg
+      (fun f ↦ (G.mapHomologicalComplex (.up ℤ)).map f)
+      ((HomologicalComplex.complexOfFunctorsToFunctorToComplex.map q).naturality t)
+  · obtain ⟨Q, q, hQ, hq⟩ := h X
+    have hGq := (hres Q q hQ hq).2.2
+    have := G.onStrictTowers.rightDerivedFunctorOfQuasiIsoResolutionsUnit_isIso h Q
+    have hi : IsIso (G.strictTowerDerivedComparison h Q) := by
+      dsimp only [strictTowerDerivedComparison]
+      infer_instance
+    have hn := strictTowerComparison_naturality G h q
+    have hr : IsIso
+        ((G.onStrictTowers.rightDerivedFunctorOfQuasiIsoResolutions h).map
+          (DerivedCategory.Q.map q)) := by infer_instance
+    have hc : IsIso
+        (G.strictTowerDerivedComparison h X ≫
+          (G.onStrictTowers.rightDerivedFunctorOfQuasiIsoResolutions h).map
+            (DerivedCategory.Q.map q)) := by
+      rw [← hn]
+      infer_instance
+    exact IsIso.of_isIso_comp_right _
+      ((G.onStrictTowers.rightDerivedFunctorOfQuasiIsoResolutions h).map
+        (DerivedCategory.Q.map q))
+  · intro Y _ a
+    exact strictTowerComparison_naturality G h a
+  · intro J e _ he
+    change X.asFunctor ⋙ G.mapHomologicalComplex (.up ℤ) = _
+    rw [he]
+    refine Functor.ext (fun n ↦ rfl) ?_
+    intro n m t
+    simpa only [Functor.ofOpSequence, Functor.ofSequence, Functor.leftOp, Functor.op,
+      Functor.comp_map, Quiver.Hom.unop_op, eqToHom_refl,
+      Category.id_comp, Category.comp_id] using
+      congrArg Quiver.Hom.unop
+        (map_sequence_composite (G.mapHomologicalComplex (.up ℤ)).op
+          (fun _ : ℕ ↦ e.op) m.unop n.unop (leOfHom t.unop))
 
 end CategoryTheory.Functor
