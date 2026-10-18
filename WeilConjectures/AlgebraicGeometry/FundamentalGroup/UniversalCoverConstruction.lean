@@ -390,52 +390,57 @@ end Transport
 
 section Map
 
-variable (f : Y ⟶ Y)
+variable {Y' : Scheme.{u}} [ConnectedSpace Y'] [CompactSpace Y'] [QuasiSeparatedSpace Y']
+  (f : Y' ⟶ Y)
 
 /-- The point `(x, y)` of `f^* P` over `y` corresponding to a point `x` of `P` over `y ≫ f`. -/
-noncomputable abbrev pullbackPoint (y : Spec (.of K) ⟶ Y) (P : Y.FiniteEtale)
+noncomputable abbrev pullbackPoint (y : Spec (.of K) ⟶ Y') (P : Y.FiniteEtale)
     (x : (fiber (y ≫ f)).obj P) : (fiber y).obj ((FiniteEtale.pullback f).obj P) :=
   (pullbackFiberIso f y).inv.app P x
 
-/-- The projection `f^* P = P ×_{Y,f} Y ⟶ P`. -/
+/-- The projection `f^* P = P ×_{Y,f} Y' ⟶ P`. -/
 noncomputable abbrev pullbackFst (P : Y.FiniteEtale) :
     ((FiniteEtale.pullback f).obj P).obj.left ⟶ P.obj.left :=
   Limits.pullback.fst P.obj.hom f
 
-omit [ConnectedSpace Y] [CompactSpace Y] [QuasiSeparatedSpace Y] in
+omit [ConnectedSpace Y] [CompactSpace Y] [QuasiSeparatedSpace Y] [ConnectedSpace Y']
+  [CompactSpace Y'] [QuasiSeparatedSpace Y'] in
 /-- Base change of morphisms is compatible with the projections `f^* P ⟶ P`. -/
 @[reassoc]
 lemma pullback_map_pullbackFst {P Q : Y.FiniteEtale} (g : P ⟶ Q) :
     ((FiniteEtale.pullback f).map g).hom.left ≫ pullbackFst f Q = pullbackFst f P ≫ g.hom.left :=
   by simp [pullbackFst]
 
-omit [ConnectedSpace Y] [CompactSpace Y] [QuasiSeparatedSpace Y] in
+omit [ConnectedSpace Y] [CompactSpace Y] [QuasiSeparatedSpace Y] [ConnectedSpace Y']
+  [CompactSpace Y'] [QuasiSeparatedSpace Y'] in
 /-- The projection `f^* P ⟶ P` lies over `f`. -/
 @[reassoc]
 lemma pullbackFst_hom (P : Y.FiniteEtale) :
     pullbackFst f P ≫ P.obj.hom = ((FiniteEtale.pullback f).obj P).obj.hom ≫ f :=
   Limits.pullback.condition
 
-omit [ConnectedSpace Y] [CompactSpace Y] [QuasiSeparatedSpace Y] in
+omit [ConnectedSpace Y] [CompactSpace Y] [QuasiSeparatedSpace Y] [ConnectedSpace Y']
+  [CompactSpace Y'] [QuasiSeparatedSpace Y'] in
 /-- The point `(x, y)` of `f^* P` projects to `x`. -/
 @[reassoc (attr := simp)]
-lemma pullbackPoint_left_pullbackFst (y : Spec (.of K) ⟶ Y) (P : Y.FiniteEtale)
+lemma pullbackPoint_left_pullbackFst (y : Spec (.of K) ⟶ Y') (P : Y.FiniteEtale)
     (x : (fiber (y ≫ f)).obj P) : (pullbackPoint f y P x).left ≫ pullbackFst f P = x.left := by
   rw [pullbackPoint, pullbackFiberIso_inv_app_left]
   exact Limits.pullback.lift_fst _ _ _
 
-omit [ConnectedSpace Y] [CompactSpace Y] [QuasiSeparatedSpace Y] in
+omit [ConnectedSpace Y] [CompactSpace Y] [QuasiSeparatedSpace Y] [ConnectedSpace Y']
+  [CompactSpace Y'] [QuasiSeparatedSpace Y'] in
 /-- The points `(x, y)` are natural in `P`. -/
-lemma pullbackPoint_naturality (y : Spec (.of K) ⟶ Y) {P Q : Y.FiniteEtale} (g : P ⟶ Q)
+lemma pullbackPoint_naturality (y : Spec (.of K) ⟶ Y') {P Q : Y.FiniteEtale} (g : P ⟶ Q)
     (x : (fiber (y ≫ f)).obj P) :
     (fiber y).map ((FiniteEtale.pullback f).map g) (pullbackPoint f y P x) =
       pullbackPoint f y Q ((fiber (y ≫ f)).map g x) :=
   (ConcreteCategory.congr_hom ((pullbackFiberIso f y).inv.naturality g) x).symm
 
-/-- The morphism `Ỹ_y ⟶ Ỹ_{y ≫ f}` over an endomorphism `f` of `Y`: its component at
-`(A, a)` is the `Y`-morphism `Ỹ_y ⟶ f^* A` corresponding to `(a, y)`, followed by
+/-- The morphism `Ỹ_y ⟶ Ỹ_{y ≫ f}` over a morphism `f : Y' ⟶ Y`: its component at
+`(A, a)` is the `Y'`-morphism `Ỹ_y ⟶ f^* A` corresponding to `(a, y)`, followed by
 `f^* A ⟶ A`. -/
-noncomputable def map (y : Spec (.of K) ⟶ Y) : cover y ⟶ cover (y ≫ f) :=
+noncomputable def map (y : Spec (.of K) ⟶ Y') : cover y ⟶ cover (y ≫ f) :=
   limit.lift (diagram (y ≫ f))
     { pt := cover y
       π :=
@@ -446,28 +451,29 @@ noncomputable def map (y : Spec (.of K) ⟶ Y) : cover y ⟶ cover (y ≫ f) :=
               pullbackPoint_naturality, map_point]) } }
 
 /-- `map f y` followed by the `Y`-morphism corresponding to `x ∈ F_{y ≫ f}(P)` is the
-`Y`-morphism `Ỹ_y ⟶ f^* P` corresponding to `(x, y)`, followed by `f^* P ⟶ P`. -/
+`Y'`-morphism `Ỹ_y ⟶ f^* P` corresponding to `(x, y)`, followed by `f^* P ⟶ P`. -/
 @[reassoc (attr := simp)]
-lemma map_toObj (y : Spec (.of K) ⟶ Y) (P : Y.FiniteEtale) (x : (fiber (y ≫ f)).obj P) :
+lemma map_toObj (y : Spec (.of K) ⟶ Y') (P : Y.FiniteEtale) (x : (fiber (y ≫ f)).obj P) :
     map f y ≫ toObj (y ≫ f) P x = toObj y _ (pullbackPoint f y P x) ≫ pullbackFst f P := by
   obtain ⟨j, g, rfl⟩ := exists_hom_point (y ≫ f) P x
   rw [← π_comp_eq_toObj (y ≫ f) j g, ← Category.assoc, map, limit.lift_π]
   change (toObj y _ _ ≫ pullbackFst f _) ≫ g.hom.left = _
   rw [Category.assoc, ← pullback_map_pullbackFst, toObj_comp_assoc, pullbackPoint_naturality]
 
+omit [CompactSpace Y] [QuasiSeparatedSpace Y] in
 /-- `map f y` lies over `f`. -/
-lemma map_proj (y : Spec (.of K) ⟶ Y) : map f y ≫ proj (y ≫ f) = proj y ≫ f := by
+lemma map_proj (y : Spec (.of K) ⟶ Y') : map f y ≫ proj (y ≫ f) = proj y ≫ f := by
   rw [proj, ← Category.assoc, map, limit.lift_π]
   change (toObj y _ _ ≫ pullbackFst f _) ≫ p (y ≫ f) _ = _
   rw [Category.assoc, pullbackFst_hom, toObj_hom_assoc]
 
 /-- `map f y` sends `ỹ` to the base point over `y ≫ f`. -/
-lemma pt_map (y : Spec (.of K) ⟶ Y) : pt y ≫ map f y = pt (y ≫ f) :=
+lemma pt_map (y : Spec (.of K) ⟶ Y') : pt y ≫ map f y = pt (y ≫ f) :=
   hom_ext (y ≫ f) fun P x ↦ by
     rw [Category.assoc, map_toObj, pt_toObj_assoc, pullbackPoint_left_pullbackFst, pt_toObj]
 
 /-- `map f` is compatible with the transports along `τ` and along the induced path. -/
-lemma map_transport {y z : Spec (.of K) ⟶ Y} (τ : fiber y ≅ fiber z) :
+lemma map_transport {y z : Spec (.of K) ⟶ Y'} (τ : fiber y ≅ fiber z) :
     map f y ≫ (transport (pullbackPathIso f τ)).hom = (transport τ).hom ≫ map f z :=
   hom_ext (z ≫ f) fun P x ↦ by
     rw [Category.assoc, transport_hom, transportHom_toObj, map_toObj, Category.assoc,

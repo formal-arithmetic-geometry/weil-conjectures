@@ -165,7 +165,7 @@ instance (n : ℤ) : (shiftFunctor (ConstructibleTwoColimit l X) n).Additive := 
 /-- The common-stage category `D^b_c(X, ℚ̄_ℓ)` is pretriangulated, the distinguished triangles
 being the triangles isomorphic to the images of distinguished triangles of a finite stage. -/
 noncomputable instance : Pretriangulated (ConstructibleTwoColimit l X) :=
-  StageSystem.PairCategory.pretriangulated _
+  StageSystem.PairCategory.pretriangulated (S := boundedFieldConstructibleStageSystem l X)
 
 /-- The common-stage category `D^b_c(X, ℚ̄_ℓ)` is triangulated. -/
 instance : IsTriangulated (ConstructibleTwoColimit l X) :=

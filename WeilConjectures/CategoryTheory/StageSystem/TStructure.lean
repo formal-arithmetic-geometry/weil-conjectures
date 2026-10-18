@@ -69,7 +69,7 @@ noncomputable def tStructure : TStructure S.PairCategory where
   zero' {X Y} f := by
     rintro ⟨m, hm, hX⟩ ⟨m', hm', hY⟩
     obtain ⟨n, hn, hX', hY', u, rfl⟩ := exists_le_mkHom_eq f (commonStage m m')
-    rw [zero_eq_mkHom n hX' hY']
+    rw [← mkHom_zero hX' hY']
     congr 1
     exact (t n).zero' u
       (prop_toStage_of_le (fun h ↦ hle h 0) hX ((le_commonStage_left m m').trans hn))

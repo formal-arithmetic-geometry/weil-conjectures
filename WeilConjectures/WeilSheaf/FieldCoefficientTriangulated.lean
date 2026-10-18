@@ -8,7 +8,7 @@ module
 public import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryCocycle
 public import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
 public import WeilConjectures.CategoryTheory.Idempotents.Pretriangulated
-public import WeilConjectures.CategoryTheory.StageSystem.Pretriangulated
+public import WeilConjectures.CategoryTheory.StageSystem.Triangulated
 public import WeilConjectures.Mathlib.CategoryTheory.Shift.CommShift
 public import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Subcategory
 public import WeilConjectures.WeilSheaf.FieldCoefficientKaroubian
@@ -155,7 +155,7 @@ variable [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))]
 a pretriangulated category, the distinguished triangles being the triangles isomorphic to the
 images of distinguished triangles of a finite stage `D^b_{c,W}(X, E)`. -/
 noncomputable instance pretriangulated : Pretriangulated (WeilComplexTwoColimit k₀ l X) :=
-  StageSystem.PairCategory.pretriangulated _
+  StageSystem.PairCategory.pretriangulated (S := FieldWeilComplex.stageSystem (l := l) k₀ X)
 
 /-- Blueprint `def-weil-weil-sheaf-complex`: `D^b_{c,W}(X, ℚ̄_ℓ)` is a triangulated category. -/
 instance isTriangulated : IsTriangulated (WeilComplexTwoColimit k₀ l X) :=
@@ -173,7 +173,7 @@ common-stage Weil category.
 idempotent complete, and the canonical functor into its Karoubi envelope is an exact
 equivalence: every stage `D^b_{c,W}(X, E)` is idempotent complete, an idempotent of the
 `2`-colimit is represented, and splits, at a finite stage
-(`CategoryTheory.StageSystem.isIdempotentComplete_pairCategory`), and the canonical functor of a
+(`CategoryTheory.StageSystem.PairCategory.isIdempotentComplete`), and the canonical functor of a
 pretriangulated category into its Karoubi envelope is triangulated
 (`CategoryTheory.Idempotents.toKaroubi.isTriangulated`). -/
 theorem isIdempotentComplete_and_isEquivalence_toKaroubi_and_isTriangulated :

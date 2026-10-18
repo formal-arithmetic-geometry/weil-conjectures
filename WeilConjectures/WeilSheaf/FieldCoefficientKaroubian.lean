@@ -7,7 +7,7 @@ module
 
 public import Mathlib.CategoryTheory.Triangulated.TStructure.Induced
 public import WeilConjectures.CategoryTheory.Idempotents.TStructure
-public import WeilConjectures.CategoryTheory.StageSystem.Idempotents
+public import WeilConjectures.CategoryTheory.StageSystem.IdempotentComplete
 public import WeilConjectures.WeilSheaf.FieldCoefficientTwoColimit
 
 /-!
@@ -21,7 +21,7 @@ an exact equivalence, by the Karoubian bounded-t theorem (`thm-weil-karoubian-bo
 The common-stage category `D^b_{c,W}(X, ℚ̄_ℓ) = 2-colim_E D^b_{c,W}(X, E)` of blueprint
 `def-weil-weil-sheaf-complex` (`AlgebraicGeometry.WeilComplexTwoColimit`) is then idempotent
 complete as well, a filtered `2`-colimit of idempotent complete categories being idempotent
-complete (`CategoryTheory.StageSystem.isIdempotentComplete_pairCategory`); hence its canonical
+complete (`CategoryTheory.StageSystem.PairCategory.isIdempotentComplete`); hence its canonical
 functor into its Karoubi envelope is an equivalence (blueprint
 `lem-weil-weil-complex-qbar-idempotent-complete`, for the `2`-colimit model).
 
@@ -92,17 +92,16 @@ idempotent complete, and the canonical functor into its Karoubi envelope is an e
 stage `D^b_{c,W}(X, E)` is idempotent complete
 (`AlgebraicGeometry.FieldWeilComplex.isIdempotentComplete`), and an idempotent of the
 `2`-colimit is represented, and splits, at a finite stage
-(`CategoryTheory.StageSystem.isIdempotentComplete_pairCategory`). The exactness of this
+(`CategoryTheory.StageSystem.PairCategory.isIdempotentComplete`). The exactness of this
 equivalence, for the triangulated structure of the `2`-colimit, is
 `WeilComplexTwoColimit.isIdempotentComplete_and_isEquivalence_toKaroubi_and_isTriangulated`
 (in `WeilConjectures.WeilSheaf.FieldCoefficientTriangulated`). -/
 theorem isIdempotentComplete_and_isEquivalence_toKaroubi
     [LocallyOfFiniteType (X ↘ Spec (CommRingCat.of k₀))] :
     IsIdempotentComplete (WeilComplexTwoColimit k₀ l X) ∧
-      (Idempotents.toKaroubi (WeilComplexTwoColimit k₀ l X)).IsEquivalence := by
-  have : IsIdempotentComplete (WeilComplexTwoColimit k₀ l X) :=
-    StageSystem.isIdempotentComplete_pairCategory _
-  exact ⟨this, inferInstance⟩
+      (Idempotents.toKaroubi (WeilComplexTwoColimit k₀ l X)).IsEquivalence :=
+  StageSystem.PairCategory.isIdempotentComplete_and_isEquivalence_toKaroubi
+    (S := FieldWeilComplex.stageSystem (l := l) k₀ X)
 
 variable [Fact (ringChar k₀ ≠ l)] {k₀ l X}
 
