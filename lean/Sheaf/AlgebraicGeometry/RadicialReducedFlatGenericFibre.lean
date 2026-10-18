@@ -34,7 +34,7 @@ private theorem geometricallyReduced_spec_of_isSeparablyGenerated
     Algebra.isReduced_tensorProduct_of_isSeparablyGenerated k F K hF
   exact isReduced_of_isOpenImmersion (pullbackSpecIso k F K).hom
 
-private theorem geometricallyReduced_of_schemeTheoreticallyDominant
+theorem geometricallyReduced_of_schemeTheoreticallyDominant
     {k : Type u} [Field k] {W X : Scheme.{u}}
     (h : W ⟶ X) (p : X ⟶ Spec (.of k))
     [IsSchemeTheoreticallyDominant h] [QuasiCompact h]
