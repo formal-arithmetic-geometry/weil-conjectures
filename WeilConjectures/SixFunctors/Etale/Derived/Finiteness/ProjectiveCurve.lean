@@ -7,23 +7,15 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.GeometricFibreRank
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
+public import WeilConjectures.AlgebraicGeometry.Curve.GenericModel
 public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
-public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BoundedConstructible
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Noetherian
-import WeilConjectures.AlgebraicGeometry.Curve.GenericModel
-import WeilConjectures.AlgebraicGeometry.InvertibleExponentBase
-import WeilConjectures.ConstructibleSheaf.FiniteMorphism
-import WeilConjectures.ConstructibleSheaf.IntegralGenericCriterion
-import WeilConjectures.ConstructibleSheaf.Noetherian
-import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.ConstantCoefficients
-import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.DirectImageSigma
-import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteComparison
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Surjective
-import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.BettiCardinalities
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CoefficientDevissage
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.CurveModel
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FiniteComparison
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.GenericConstructibility
+public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.GeometricFibreStalk
 
 /-!
 # Constant coefficients on projective families of curves
@@ -45,7 +37,6 @@ The general case is reduced to it by a generic curve model
 
 - `AlgebraicGeometry.Etale.natCard_sheafH_constantZMod_geometricFibre`
 - `AlgebraicGeometry.Etale.isConstructibleSheaf_homology_rightDerivedLowerStar_of_smooth`
-- `AlgebraicGeometry.Etale.exists_isConstructibleSheaf_upperStar_rightDerivedLowerStar_zmod`
 - `AlgebraicGeometry.Etale.isConstructibleSheaf_homology_rightDerivedLowerStar_zmod`
 - `AlgebraicGeometry.Etale.isConstructibleSheaf_homology_rightDerivedLowerStar_constantSheaf`
 -/
@@ -65,6 +56,34 @@ open Scheme
 namespace Etale
 
 variable {X S : Scheme.{u}}
+
+/-- If a function `φ : S → ℕ` has constructible fibres, then for `a ≥ 2` every level set of
+`s ↦ a ^ φ s` is constructible: it is the finite union of the fibres of `φ` over the exponents
+`m` with `a ^ m = n`. -/
+lemma isConstructible_setOf_pow_eq {T : Type*} [TopologicalSpace T] (φ : T → ℕ)
+    (hφ : ∀ m : ℕ, Topology.IsConstructible (φ ⁻¹' {m})) {a : ℕ} (ha : 2 ≤ a) (n : ℕ) :
+    Topology.IsConstructible {s | a ^ φ s = n} := by
+  have h : {s | a ^ φ s = n} = ⋃ m ∈ {m : ℕ | a ^ m = n}, φ ⁻¹' {m} := by
+    ext s
+    simp
+  rw [h]
+  refine Topology.IsConstructible.biUnion ((Set.finite_Iic n).subset fun m hm ↦ ?_)
+    fun m _ ↦ hφ m
+  rw [Set.mem_ofPred_eq] at hm
+  rw [Set.mem_Iic, ← hm]
+  exact (Nat.lt_pow_self (by lia)).le
+
+/-- A prime `ℓ` with `ℤ/ℓ` of invertible exponent on `S` is invertible on `S`. -/
+lemma isUnit_natCast_of_hasInvertibleExponent_zmod (ℓ : ℕ)
+    [HasInvertibleExponent (ULift.{u + 1} (ZMod ℓ)) S] : IsUnit (ℓ : Γ(S, ⊤)) := by
+  obtain ⟨N, -, hN, hu⟩ :=
+    HasInvertibleExponent.exists_isUnit_natCast (Λ := ULift.{u + 1} (ZMod ℓ)) (X := S)
+  have hdvd : ℓ ∣ N := by
+    rw [← ZMod.natCast_eq_zero_iff]
+    simpa using congrArg ULift.down hN
+  obtain ⟨d, rfl⟩ := hdvd
+  rw [Nat.cast_mul] at hu
+  exact isUnit_of_mul_isUnit_left hu
 
 /-- Blueprint `lem-fin-projective-curve-betti-cardinalities`: Betti cardinalities in a smooth
 projective curve family.
@@ -94,7 +113,7 @@ theorem natCard_sheafH_constantZMod_geometricFibre [IsNoetherian S] (f : X ⟶ S
       ∀ r, 2 < r → Nat.card (Sheaf.H ((Xs s).constantZMod ℓ) r) = 1) ∧
     ((Set.range c).Finite ∧ ∀ m : ℕ, Topology.IsConstructible (c ⁻¹' {m})) ∧
     ((Set.range g).Finite ∧ ∀ m : ℕ, Topology.IsConstructible (g ⁻¹' {m})) := by
-  sorry
+  exact natCard_sheafH_constantZMod_geometricFibre_of_smooth f i hi ℓ hℓ
 
 /-- Blueprint `thm-fin-projective-smooth-curve-finiteness`: Constant-coefficient finiteness for
 projective smooth curves.
@@ -110,127 +129,161 @@ theorem isConstructibleSheaf_homology_rightDerivedLowerStar_of_smooth [IsNoether
         ((_root_.DerivedCategory.singleFunctor _ 0).obj
           ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj
             (ModuleCat.of _ (ULift.{u + 1} (ZMod ℓ))))))) := by
-  sorry
+  subst hi
+  have hℓ := isUnit_natCast_of_hasInvertibleExponent_zmod (S := S) ℓ
+  have hℓ2 : 2 ≤ ℓ := (Fact.out : ℓ.Prime).two_le
+  obtain ⟨hcard, ⟨-, hc⟩, ⟨-, hg⟩⟩ :=
+    natCard_sheafH_constantZMod_geometricFibre (i ≫ ℙ(n; S) ↘ S) i rfl ℓ hℓ
+  -- the cardinality of `Hʳ` of the geometric fibres, as a function of the point
+  have key (r' : ℕ) : (∀ s : S, Nat.card (Sheaf.H ((Limits.pullback (i ≫ ℙ(n; S) ↘ S)
+      (S.geometricPointAt s)).constantZMod ℓ) r') ≠ 0) ∧ ∀ m : ℕ,
+      Topology.IsConstructible {s : S | Nat.card (Sheaf.H ((Limits.pullback (i ≫ ℙ(n; S) ↘ S)
+        (S.geometricPointAt s)).constantZMod ℓ) r') = m} := by
+    rcases lt_trichotomy r' 2 with hr | rfl | hr
+    · interval_cases r'
+      · refine ⟨fun s ↦ by rw [(hcard s).1]; positivity, fun m ↦ ?_⟩
+        simp only [fun s ↦ (hcard s).1]
+        exact isConstructible_setOf_pow_eq _ hc hℓ2 m
+      · refine ⟨fun s ↦ by rw [(hcard s).2.1]; positivity, fun m ↦ ?_⟩
+        simp only [fun s ↦ (hcard s).2.1, pow_mul]
+        exact isConstructible_setOf_pow_eq _ hg (by nlinarith) m
+    · refine ⟨fun s ↦ by rw [(hcard s).2.2.1]; positivity, fun m ↦ ?_⟩
+      simp only [fun s ↦ (hcard s).2.2.1]
+      exact isConstructible_setOf_pow_eq _ hc hℓ2 m
+    · refine ⟨fun s ↦ by simp [(hcard s).2.2.2 r' hr], fun m ↦ ?_⟩
+      simp only [fun s ↦ (hcard s).2.2.2 r' hr]
+      by_cases hm : 1 = m
+      · simp [hm, Topology.IsConstructible.univ]
+      · simp [hm, Topology.IsConstructible.empty]
+  exact isConstructibleSheaf_homology_rightDerivedLowerStar_of_sheafH_geometricFibre _ ℓ r
+    (fun s ↦ Nat.finite_of_card_ne_zero ((key r.toNat).1 s)) fun m _ ↦ (key r.toNat).2 m
 
 variable {k : Type u} [Field k]
 
-/-- `IsConstructibleSheaf.of_iso` with the constructibility hypothesis as an explicit argument. -/
-private lemma isConstructibleSheaf_of_iso {Y : Scheme.{u}} {Λ : Type (u + 1)} [CommRing Λ]
-    {F F' : Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ)} (e : F ≅ F')
-    (h : IsConstructibleSheaf F) : IsConstructibleSheaf F' :=
-  IsConstructibleSheaf.of_iso e
-
-/-- The generic case of `thm-fin-projective-curve-constant`, the dense-open assertion of its
-blueprint proof: over an integral base `S`, every higher direct image `Rᵠf_* 𝔽_ℓ` is constructible
-on some nonempty open `U ⊆ S`.
-
-The generic curve model (`lem-fin-generic-curve-model`) gives `U`, a finite surjection
-`p : S' ⟶ U`, the reduction `t : T ⟶ X_{S'}` and a finite modification `ν : ∐ₐ Yₐ ⟶ T` by smooth
-projective curve families and finite étale families. The direct images of `𝔽_ℓ` along
-`∐ₐ Yₐ ⟶ S'` are constructible (`thm-fin-projective-smooth-curve-finiteness`,
-`lem-fin-finite-morphism`), hence so are those along `T ⟶ S'`
-(`lem-finrepair-constant-finite-comparison`) and along `X_{S'} ⟶ S'`, the pullback along the
-surjective closed immersion `t` being an equivalence
-(`thm-weil-pbc-universal-homeomorphism-invariance`). By proper base change these are the
-pullbacks `p^* Rᵠf_* 𝔽_ℓ`, so `Rᵠf_* 𝔽_ℓ |_U` embeds into the constructible sheaf
-`p_* p^* Rᵠf_* 𝔽_ℓ` and is constructible (`lem-weil-pbc-constructible-subobjects-noetherian`). -/
-theorem exists_isConstructibleSheaf_upperStar_rightDerivedLowerStar_zmod [IsIntegral S]
-    (aS : S ⟶ Spec (.of k)) [LocallyOfFiniteType aS] [QuasiCompact aS] (f : X ⟶ S)
-    {n : Type u} [Finite n] (i : X ⟶ ℙ(n; S)) [IsClosedImmersion i] (hi : i ≫ ℙ(n; S) ↘ S = f)
-    (hf : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ S),
+/-- The generic step of `thm-fin-projective-curve-constant`: over an integral base `T` of finite
+type over `k`, the higher direct images of `𝔽_ℓ` along a projective family of dimension at most
+one are constructible over a nonempty open `U` of `T`. A generic curve model
+(`lem-fin-generic-curve-model`) gives a finite surjection `p : S' ⟶ U` and a finite comparison
+`ν : ∐ₐ Yₐ ⟶ T₀` onto the reduction `T₀` of `X_{S'}`, isomorphic off a closed subscheme finite
+over `S'`. The direct images from the `Yₐ` are constructible (smooth curves, or finite
+morphisms), hence so are those from `T₀` (`lem-finrepair-constant-finite-comparison`) and from
+`X_{S'}`; they are the pullbacks along `p` of those over `U` (proper base change), which embed
+into their finite pushforwards along `p`. -/
+theorem exists_isConstructibleSheaf_homology_rightDerivedLowerStar_zmod_of_isIntegral
+    {T : Scheme.{u}} [IsIntegral T] (aT : T ⟶ Spec (.of k)) [LocallyOfFiniteType aT]
+    [QuasiCompact aT] (f : X ⟶ T) {n : Type u} [Finite n] (i : X ⟶ ℙ(n; T))
+    [IsClosedImmersion i] (hi : i ≫ ℙ(n; T) ↘ T = f)
+    (hf : ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (s : Spec (.of Ω) ⟶ T),
       topologicalKrullDim (pullback f s : Scheme.{u}) ≤ 1)
-    (ℓ : ℕ) [Fact ℓ.Prime] [HasInvertibleExponent (ULift.{u + 1} (ZMod ℓ)) S] :
-    ∃ U : S.Opens, U ≠ ⊥ ∧ ∀ q : ℤ, IsConstructibleSheaf
-      ((U.ι)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))].obj
-        ((_root_.DerivedCategory.homologyFunctor _ q).obj
-          ((R((f)_*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))])).obj
-            ((_root_.DerivedCategory.singleFunctor _ 0).obj
-              ((constantSheaf X.smallEtaleTopology
-                (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj
-                  (ModuleCat.of _ (ULift.{u + 1} (ZMod ℓ)))))))) := by
-  obtain ⟨U, hU, S', _, p, _, _, T, t, _, _, _, ι, _, Y, ν, _, _, D, d, _, hD, hν, hY⟩ :=
-    exists_isFinite_sigmaDesc_genericCurveModel aS f i hi hf
-  refine ⟨U, hU, fun q ↦ ?_⟩
-  let A := ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))
-  let M : A := ModuleCat.of _ (ULift.{u + 1} (ZMod ℓ))
-  have : IsLocallyNoetherian S := LocallyOfFiniteType.isLocallyNoetherian aS
-  have : CompactSpace S := QuasiCompact.compactSpace_of_compactSpace aS
-  have : IsNoetherian S := {}
-  have : IsProper f := hi ▸ inferInstance
-  have : CompactSpace U := isCompact_iff_compactSpace.mp
-    (TopologicalSpace.NoetherianSpace.isCompact _)
+    (ℓ : ℕ) [Fact ℓ.Prime] [HasInvertibleExponent (ULift.{u + 1} (ZMod ℓ)) T] (q : ℤ) :
+    ∃ U : T.Opens, U ≠ ⊥ ∧ IsConstructibleSheaf ((_root_.DerivedCategory.homologyFunctor _ q).obj
+      ((R((f ∣_ U)_*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))])).obj
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj
+          ((constantSheaf (f ⁻¹ᵁ U).toScheme.smallEtaleTopology
+            (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj
+            (ModuleCat.of _ (ULift.{u + 1} (ZMod ℓ))))))) := by
+  have : IsProper f := by
+    subst hi
+    infer_instance
+  obtain ⟨U, hU, S', _, p, _, _, T₀, t, _, _, _, ι, _, Y, ν, _, _, D, d, _, hdfin, hνiso, hY⟩ :=
+    exists_isFinite_sigmaDesc_genericCurveModel aT f i hi hf
+  refine ⟨U, hU, ?_⟩
+  have : IsLocallyNoetherian T := LocallyOfFiniteType.isLocallyNoetherian aT
+  have : CompactSpace T := QuasiCompact.compactSpace_of_compactSpace aT
+  have : IsNoetherian T := {}
+  let F' := pullback.snd (f ∣_ U) p
+  have : IsLocallyNoetherian U := LocallyOfFiniteType.isLocallyNoetherian (U.ι ≫ aT)
+  have : CompactSpace U := QuasiCompact.compactSpace_of_compactSpace (U.ι ≫ aT)
   have : IsNoetherian U := {}
-  have : CompactSpace S' := QuasiCompact.compactSpace_of_compactSpace p
-  have : QuasiCompact (p ≫ U.ι ≫ aS) := inferInstance
-  have : IsLocallyNoetherian S' := LocallyOfFiniteType.isLocallyNoetherian (p ≫ U.ι ≫ aS)
+  have : IsLocallyNoetherian S' := LocallyOfFiniteType.isLocallyNoetherian (p ≫ U.ι ≫ aT)
+  have : CompactSpace S' := QuasiCompact.compactSpace_of_compactSpace (p ≫ U.ι ≫ aT)
   have : IsNoetherian S' := {}
   have : HasInvertibleExponent (ULift.{u + 1} (ZMod ℓ)) S' := .of_hom (p ≫ U.ι)
-  have : IsProper (f ∣_ U) := inferInstance
-  have : IsProper (pullback.snd (f ∣_ U) p) := inferInstance
-  have : Module.Finite (ULift.{u + 1} (ZMod ℓ)) M := Module.Finite.of_finite
-  -- the direct images along `∐ₐ Yₐ ⟶ S'`
-  have h₁ (q : ℤ) : IsConstructibleSheaf ((_root_.DerivedCategory.homologyFunctor _ q).obj
-      ((R((ν ≫ t ≫ pullback.snd (f ∣_ U) p)_*[A])).obj
+  have : IsProper F' := inferInstance
+  -- the direct images from the pieces `Yₐ` of the model are constructible
+  have hpieces (a : ι) : Etale.DerivedCategory.constructibleHomology
+      (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) S'
+      ((R((Sigma.ι Y a ≫ ν ≫ t ≫ F')_*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))])).obj
         ((_root_.DerivedCategory.singleFunctor _ 0).obj
-          ((ν)^*[A].obj ((constantSheaf T.smallEtaleTopology A).obj M))))) := by
-    refine isConstructibleSheaf_of_iso ((_root_.DerivedCategory.homologyFunctor _ q).mapIso
-      ((R((ν ≫ t ≫ pullback.snd (f ∣_ U) p)_*[A])).mapIso
+          ((constantSheaf (Y a).smallEtaleTopology
+            (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj
+            (ModuleCat.of _ (ULift.{u + 1} (ZMod ℓ)))))) := by
+    rcases hY a with ⟨⟨m, _, j, _, hj⟩, _⟩ | ⟨_, _⟩
+    · exact fun r ↦ isConstructibleSheaf_homology_rightDerivedLowerStar_of_smooth _ j hj ℓ r
+    · have : IsConstructibleSheaf ((constantSheaf (Y a).smallEtaleTopology
+          (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj
+            (ModuleCat.of _ (ULift.{u + 1} (ZMod ℓ)))) :=
+        ⟨Stratification.trivial _, fun _ ↦ IsFiniteLocallyConstantSheaf.upperStar (𝟙 _)
+          ((constantSheaf (Y a).smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj
+            (ModuleCat.of _ (ULift.{u + 1} (ZMod ℓ))))⟩
+      exact (boundedConstructible_rightDerivedLowerStar_of_isFinite _ _
+        (DerivedCategory.boundedConstructible_singleFunctor_obj _ 0)).2
+  -- hence those from `∐ₐ Yₐ`
+  have hsum : ∀ r : ℤ, IsConstructibleSheaf ((_root_.DerivedCategory.homologyFunctor _ r).obj
+      ((R((ν ≫ t ≫ F')_*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))])).obj
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj
+          ((ν)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))].obj
+            ((constantSheaf T₀.smallEtaleTopology
+              (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj
+              (ModuleCat.of _ (ULift.{u + 1} (ZMod ℓ)))))))) := by
+    refine (Etale.DerivedCategory.constructibleHomology _ S').prop_of_iso
+      ((R((ν ≫ t ≫ F')_*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))])).mapIso
         ((_root_.DerivedCategory.singleFunctor _ 0).mapIso
-          ((upperStarConstantSheafIso A ν).app M).symm))) ?_
-    refine isConstructibleSheaf_homology_rightDerivedLowerStar_sigma _ _ q fun a ↦ ?_
-    refine isConstructibleSheaf_of_iso ((_root_.DerivedCategory.homologyFunctor _ q).mapIso
-      ((R((Sigma.ι Y a ≫ ν ≫ t ≫ pullback.snd (f ∣_ U) p)_*[A])).mapIso
+          ((upperStarConstantSheafIso _ ν).app _).symm))
+      (constructibleHomology_rightDerivedLowerStar_sigma Y _ _ fun a ↦ ?_)
+    exact (Etale.DerivedCategory.constructibleHomology _ S').prop_of_iso
+      ((R((Sigma.ι Y a ≫ ν ≫ t ≫ F')_*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))])).mapIso
         ((_root_.DerivedCategory.singleFunctor _ 0).mapIso
-          ((upperStarConstantSheafIso A (Sigma.ι Y a)).app M).symm))) ?_
-    rcases hY a with ⟨⟨m, _, j, hj, hjv⟩, hsm⟩ | ⟨hfin, -⟩
-    · exact isConstructibleSheaf_homology_rightDerivedLowerStar_of_smooth _ j hjv ℓ q
-    · have : IsConstructibleSheaf ((constantSheaf (Y a).smallEtaleTopology A).obj M) :=
-        (isFiniteLocallyConstantSheaf_constantSheaf M).isConstructibleSheaf
-      exact (boundedConstructible_rightDerivedLowerStar_of_isFinite _
-        (Sigma.ι Y a ≫ ν ≫ t ≫ pullback.snd (f ∣_ U) p)
-        (DerivedCategory.boundedConstructible_singleFunctor_obj _ 0)).2 q
-  -- the direct images along `T ⟶ S'`, by the finite modification `ν`
-  let V : T.Opens := ⟨(Set.range d.base)ᶜ, d.isClosedEmbedding.isClosed_range.isOpen_compl⟩
-  have : IsIso (pullback.snd ν V.ι) := by
-    rw [← pullbackRestrictIsoRestrict_hom_morphismRestrict]
+          ((upperStarConstantSheafIso _ (Sigma.ι Y a)).app _).symm)) (hpieces a)
+  -- the comparison along `ν`, an isomorphism off `D`
+  let W : T₀.Opens := ⟨(Set.range d.base)ᶜ, d.isClosedEmbedding.isClosed_range.isOpen_compl⟩
+  have hνW : IsIso (pullback.snd ν W.ι) := by
+    have h := (isPullback_morphismRestrict ν W).flip.isoPullback_hom_snd
+    have h' : pullback.snd ν W.ι = (isPullback_morphismRestrict ν W).flip.isoPullback.inv ≫
+        (ν ∣_ W) := by
+      refine (cancel_epi (isPullback_morphismRestrict ν W).flip.isoPullback.hom).1 ?_
+      rw [Iso.hom_inv_id_assoc]
+      exact h
+    rw [h']
     infer_instance
-  have h₂ := (constructible_and_isIso_rightDerivedLowerStarUnitComparison (p ≫ U.ι ≫ aS)
-    (t ≫ pullback.snd (f ∣_ U) p) ν d V.ι (by simp [V]) inferInstance M h₁).1
-  -- the direct images along `X_{S'} ⟶ S'`: `t^*` is an equivalence
-  have h₃ (q : ℤ) : IsConstructibleSheaf ((_root_.DerivedCategory.homologyFunctor _ q).obj
-      ((R((pullback.snd (f ∣_ U) p)_*[A])).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj
-        ((constantSheaf (pullback (f ∣_ U) p).smallEtaleTopology A).obj M)))) := by
-    have := isEquivalence_upperStar_of_thickening A t t.surjective
-    let G := (constantSheaf (pullback (f ∣_ U) p).smallEtaleTopology A).obj M
-    have : IsIso ((upperStarLowerStarAdjunction A t).unit.app G) := inferInstance
-    refine isConstructibleSheaf_of_iso ((_root_.DerivedCategory.homologyFunctor _ q).mapIso
-      ((R((pullback.snd (f ∣_ U) p)_*[A])).mapIso ((_root_.DerivedCategory.singleFunctor _ 0).mapIso
-        (asIso ((upperStarLowerStarAdjunction A t).unit.app G))) ≪≫
-        rightDerivedLowerStarSingleLowerStarIso t _ _ ≪≫
-        (R((t ≫ pullback.snd (f ∣_ U) p)_*[A])).mapIso
+  have hT₀ := (constructible_and_isIso_rightDerivedLowerStarUnitComparison (p ≫ U.ι ≫ aT)
+    (t ≫ F') ν d W.ι (by rw [Opens.range_ι]; rfl) hνW
+    (ModuleCat.of _ (ULift.{u + 1} (ZMod ℓ))) hsum).1
+  -- from `T₀` to `X_{S'}`, then to `U` by proper base change and finite descent along `p`
+  have hP : IsConstructibleSheaf ((_root_.DerivedCategory.homologyFunctor _ q).obj
+      ((R((F')_*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))])).obj
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj
+          ((constantSheaf (pullback (f ∣_ U) p).smallEtaleTopology
+            (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj
+            (ModuleCat.of _ (ULift.{u + 1} (ZMod ℓ))))))) :=
+    IsConstructibleSheaf.of_iso (F := (_root_.DerivedCategory.homologyFunctor _ q).obj
+      ((R((t ≫ F')_*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))])).obj
+        ((_root_.DerivedCategory.singleFunctor _ 0).obj
+          ((constantSheaf T₀.smallEtaleTopology
+            (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj
+            (ModuleCat.of _ (ULift.{u + 1} (ZMod ℓ)))))))
+      ((_root_.DerivedCategory.homologyFunctor _ q).mapIso
+        ((R((t ≫ F')_*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))])).mapIso
           ((_root_.DerivedCategory.singleFunctor _ 0).mapIso
-            ((upperStarConstantSheafIso A t).app M))).symm) (h₂ q)
-  -- proper base change along `S' ⟶ S`
-  have sq : IsPullback (pullback.fst (f ∣_ U) p ≫ (f ⁻¹ᵁ U).ι) (pullback.snd (f ∣_ U) p) f
-      (p ≫ U.ι) :=
-    (IsPullback.of_hasPullback (f ∣_ U) p).paste_horiz (isPullback_morphismRestrict f U).flip
+            ((upperStarConstantSheafIso _ t).app _).symm) ≪≫
+        (rightDerivedLowerStarSingleIsoOfSurjective t F' _).symm))
   let E := (_root_.DerivedCategory.homologyFunctor _ q).obj
-    ((R((f)_*[A])).obj ((_root_.DerivedCategory.singleFunctor _ 0).obj
-      ((constantSheaf X.smallEtaleTopology A).obj M)))
-  have h₄ : IsConstructibleSheaf ((p)^*[A].obj ((U.ι)^*[A].obj E)) :=
-    isConstructibleSheaf_of_iso (((upperStarComp A p U.ι).app E).symm ≪≫
-      upperStarHomologyRightDerivedLowerStarIsoOfIsProper sq _ q ≪≫
-      (_root_.DerivedCategory.homologyFunctor _ q).mapIso
-        ((R((pullback.snd (f ∣_ U) p)_*[A])).mapIso
-          ((_root_.DerivedCategory.singleFunctor _ 0).mapIso
-            ((upperStarConstantSheafIso A _).app M)))).symm (h₃ q)
-  -- `E |_U` embeds into the constructible sheaf `p_* p^* (E |_U)`
-  have : IsConstructibleSheaf (((p)^*[A] ⋙ (p)_*[A]).obj ((U.ι)^*[A].obj E)) :=
-    Scheme.IsConstructibleSheaf.lowerStar_of_isFinite p ((p)^*[A].obj ((U.ι)^*[A].obj E))
-  have := Etale.mono_unit_app_of_surjective (ULift.{u + 1} (ZMod ℓ)) p p.surjective
-    ((U.ι)^*[A].obj E)
+    ((R((f ∣_ U)_*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))])).obj
+      ((_root_.DerivedCategory.singleFunctor _ 0).obj
+        ((constantSheaf (f ⁻¹ᵁ U).toScheme.smallEtaleTopology
+          (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))).obj
+          (ModuleCat.of _ (ULift.{u + 1} (ZMod ℓ))))))
+  have : IsConstructibleSheaf ((p)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))].obj E) :=
+    IsConstructibleSheaf.of_iso (upperStarHomologyRightDerivedLowerStarConstantSheafIso
+      (Λ := ULift.{u + 1} (ZMod ℓ)) (IsPullback.of_hasPullback (f ∣_ U) p)
+      (ModuleCat.of _ (ULift.{u + 1} (ZMod ℓ))) q).symm
+  have : IsConstructibleSheaf (((p)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))] ⋙
+      (p)_*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))]).obj E) :=
+    Scheme.IsConstructibleSheaf.lowerStar_of_isFinite p
+    ((p)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))].obj E)
+  have := mono_unit_app_of_surjective (ULift.{u + 1} (ZMod ℓ)) p p.surjective E
   exact Scheme.IsConstructibleSheaf.of_mono
-    ((upperStarLowerStarAdjunction A p).unit.app ((U.ι)^*[A].obj E))
+    ((upperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) p).unit.app E)
 
 /-- Blueprint `thm-fin-projective-curve-constant`: Constant coefficients on projective families
 of dimension at most one.
@@ -238,14 +291,7 @@ of dimension at most one.
 Let `f : X ⟶ S` be projective (`f = π ∘ i` for a closed immersion `i : X ⟶ ℙ(n; S)`), with `S`
 of finite type over a field `k`, such that every geometric fibre `X ×_S Spec Ω` has dimension at
 most one, and let `ℓ` be a prime invertible on `S`. Every higher direct image `Rᵠf_* 𝔽_ℓ` is
-constructible.
-
-By Noetherian induction (`AlgebraicGeometry.Scheme.isConstructibleSheaf_of_forall_isIntegral`)
-it suffices that the pullback of `Rᵠf_* 𝔽_ℓ` to every integral `W` immersed in `S` is
-constructible on a nonempty open of `W`. By proper base change this pullback is the direct image
-along the projective family `X ×_S W ⟶ W`, and the generic case
-`AlgebraicGeometry.Etale.exists_isConstructibleSheaf_upperStar_rightDerivedLowerStar_zmod`
-applies. -/
+constructible. -/
 theorem isConstructibleSheaf_homology_rightDerivedLowerStar_zmod (aS : S ⟶ Spec (.of k))
     [LocallyOfFiniteType aS] [QuasiCompact aS] (f : X ⟶ S) {n : Type u} [Finite n]
     (i : X ⟶ ℙ(n; S)) [IsClosedImmersion i] (hi : i ≫ ℙ(n; S) ↘ S = f)
@@ -260,34 +306,34 @@ theorem isConstructibleSheaf_homology_rightDerivedLowerStar_zmod (aS : S ⟶ Spe
   have : IsLocallyNoetherian S := LocallyOfFiniteType.isLocallyNoetherian aS
   have : CompactSpace S := QuasiCompact.compactSpace_of_compactSpace aS
   have : IsNoetherian S := {}
-  have : IsProper f := hi ▸ inferInstance
-  refine Scheme.isConstructibleSheaf_of_forall_isIntegral _ fun W _ _ g _ ↦ ?_
-  -- the base change `f_W : X ×_S W ⟶ W`, again projective with fibres of dimension `≤ 1`
-  have hsq : IsPullback (pullback.fst f g) (pullback.snd f g) (i ≫ ℙ(n; S) ↘ S) g := by
-    rw [hi]
-    exact IsPullback.of_hasPullback f g
-  have w : pullback.snd f g ≫ g = (pullback.fst f g ≫ i) ≫ ℙ(n; S) ↘ S := by
+  have : IsProper f := by
+    subst hi
+    infer_instance
+  refine Scheme.isConstructibleSheaf_of_forall_isIntegral _ fun T g _ _ ↦ ?_
+  have : HasInvertibleExponent (ULift.{u + 1} (ZMod ℓ)) T := .of_hom g
+  -- the base change of `f` to `T` is projective with fibres of dimension at most one
+  have hw : pullback.snd f g ≫ g = (pullback.fst f g ≫ i) ≫ ℙ(n; S) ↘ S := by
     rw [Category.assoc, hi, pullback.condition]
-  have : IsClosedImmersion (ProjectiveSpace.liftBaseChange _ _ w) :=
-    MorphismProperty.of_isPullback
-      (ProjectiveSpace.isPullback_liftBaseChange (pullback.snd f g) hsq w)
-      inferInstance
-  have : QuasiCompact (g ≫ aS) := inferInstance
-  have : HasInvertibleExponent (ULift.{u + 1} (ZMod ℓ)) W := .of_hom g
-  obtain ⟨V, hV, hc⟩ := exists_isConstructibleSheaf_upperStar_rightDerivedLowerStar_zmod
-    (g ≫ aS) (pullback.snd f g) (ProjectiveSpace.liftBaseChange _ _ w)
-    (ProjectiveSpace.liftBaseChange_over _ _ w) (fun Ω _ _ s ↦ by
-      rw [← IsHomeomorph.topologicalKrullDim_eq _
-        (pullbackLeftPullbackSndIso f g s).inv.homeomorph.isHomeomorph]
-      exact hf Ω (s ≫ g)) ℓ
-  refine ⟨V, (TopologicalSpace.Opens.ne_bot_iff_nonempty V).mp hV, ?_⟩
-  -- proper base change along `g`
-  exact isConstructibleSheaf_of_iso ((V.ι)^*[_].mapIso
-    (upperStarHomologyRightDerivedLowerStarIsoOfIsProper (IsPullback.of_hasPullback f g) _ q ≪≫
-      (_root_.DerivedCategory.homologyFunctor _ q).mapIso
-        ((R((pullback.snd f g)_*[_])).mapIso ((_root_.DerivedCategory.singleFunctor _ 0).mapIso
-          ((upperStarConstantSheafIso _ _).app _)))).symm ≪≫
-    ((upperStarComp _ V.ι g).app _).symm) (hc q)
+  obtain ⟨U, hU, hc⟩ :=
+    exists_isConstructibleSheaf_homology_rightDerivedLowerStar_zmod_of_isIntegral
+      (g ≫ aS) (pullback.snd f g) (ProjectiveSpace.liftBaseChange _ _ hw)
+      (ProjectiveSpace.liftBaseChange_over _ _ hw) (fun Ω _ _ s ↦ by
+        rw [IsHomeomorph.topologicalKrullDim_eq _
+          (pullbackLeftPullbackSndIso f g s).hom.homeomorph.isHomeomorph]
+        exact hf Ω (s ≫ g)) ℓ q
+  refine ⟨U, Set.nonempty_iff_ne_empty.2 fun h ↦
+    hU (TopologicalSpace.Opens.ext (h.trans TopologicalSpace.Opens.coe_bot.symm)), ?_⟩
+  -- `(U ⟶ S)^* Rᵠf_* 𝔽_ℓ` is `Rᵠ` of the restriction to `U` of the base change of `f`
+  exact IsConstructibleSheaf.of_iso ((_root_.DerivedCategory.homologyFunctor _ q).mapIso
+      ((R((pullback.snd f g ∣_ U)_*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))])).mapIso
+        ((_root_.DerivedCategory.singleFunctor _ 0).mapIso
+          ((upperStarConstantSheafIso _ (pullback.snd f g ⁻¹ᵁ U).ι).app _).symm)) ≪≫
+    (upperStarHomologyRightDerivedLowerStarIso
+      (isPullback_morphismRestrict (pullback.snd f g) U).flip _ q).symm ≪≫
+    (U.ι)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))].mapIso
+      (upperStarHomologyRightDerivedLowerStarConstantSheafIso (Λ := ULift.{u + 1} (ZMod ℓ))
+        (IsPullback.of_hasPullback f g) (ModuleCat.of _ (ULift.{u + 1} (ZMod ℓ))) q).symm ≪≫
+    ((upperStarComp _ U.ι g).app _).symm)
 
 /-- Blueprint `cor-fin-projective-curve-finite-group`: Finite constant groups on projective
 curve families.
@@ -311,15 +357,9 @@ theorem isConstructibleSheaf_homology_rightDerivedLowerStar_constantSheaf
       ((R((f)_*[ModuleCat.{u + 1} Λ])).obj
         ((_root_.DerivedCategory.singleFunctor _ 0).obj
           ((constantSheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)).obj M)))) := by
-  refine constructibleHomology_rightDerivedLowerStar_constantSheaf_of_zmod f
-    (fun ℓ _ hℓ q' ↦ ?_) M q
-  -- `ℓ` divides the characteristic of `Λ`, which is invertible on `S`
-  have : HasInvertibleExponent (ULift.{u + 1} (ZMod ℓ)) S := by
-    obtain ⟨c, hc⟩ := hℓ
-    have hu := isUnit_ringChar_of_hasInvertibleExponent (Λ := Λ) S
-    rw [hc, Nat.cast_mul] at hu
-    exact ⟨ℓ, (Fact.out : ℓ.Prime).pos, by ext; simp, isUnit_of_mul_isUnit_left hu⟩
-  exact isConstructibleSheaf_homology_rightDerivedLowerStar_zmod aS f i hi hf ℓ q'
+  refine isConstructibleSheaf_homology_rightDerivedLowerStar_constantSheaf_of_zmod Λ f
+    (fun ℓ _ _ q ↦ ?_) M q
+  exact isConstructibleSheaf_homology_rightDerivedLowerStar_zmod aS f i hi hf ℓ q
 
 end Etale
 

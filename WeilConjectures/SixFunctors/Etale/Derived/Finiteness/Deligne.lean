@@ -73,7 +73,12 @@ For a separated smooth morphism of finite type `a : X ⟶ S` to an integral sche
 over a field on which the exponent of `Λ` is invertible, and a finite locally constant sheaf `F`
 on `X`, there is a nonempty open `U ⊆ S` over which `Ra_* F` is bounded constructible and
 commutes with every base change from a noetherian scheme
-(`AlgebraicGeometry.Etale.SmoothGenericDirectImage`). -/
+(`AlgebraicGeometry.Etale.SmoothGenericDirectImage`).
+
+This records the form of the node used by the induction for `thm-fin-deligne-generic-open`: the
+blueprint asks for `𝔽_ℓ`-coefficients and finite locally constant cohomology sheaves of
+`Rf_{U,*} L`, whereas this states bounded constructibility (with base change) over any finite
+ring `Λ` whose exponent is invertible on `S`. -/
 theorem smoothGenericDirectImage : SmoothGenericDirectImage Λ :=
   sorry
 
