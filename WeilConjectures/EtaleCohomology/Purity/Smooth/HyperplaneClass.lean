@@ -97,6 +97,126 @@ noncomputable def hyperplaneFrame (i : n) : (hyperplane n S).EtaleFrame 1 where
   toZ := hyperplaneFrameToZ n S i
   isPullback := isPullback_hyperplaneFrame n S i
 
+/-- The zero scheme of the coordinate section `[x] ↦ [x : x_∗]` of `𝒪(1)` on `ℙ(Option m; S)` is
+the hyperplane `ℙ(m; S)`: the square formed with the hyperplane `ℙ(Option m; S) ⊆
+ℙ(Option (Option m); S)` is cartesian.
+
+Proof: `AlgebraicGeometry.isPullback_of_iSup_opensRange_eq_top` over the cover of
+`ℙ(Option m; S)` by the `D₊(a)`, with `hchart` from `isPullback_morphismRestrict`. For
+`a = some k`, factor `D₊(some k) ⟶ ℙ(Option (Option m); S)` through `D₊(some (some k))`, paste
+the frame square `hyperplaneFrame (Option m) S (some k)` with the pull-back of its zero locus
+(`isPullback_zeroLocusSubschemeι`), whose function is `x_∗ / x_k`, and identify that zero locus
+with `ℙ(m) ∩ D₊(k)` using `hyperplaneFrame m S k`. For `a = none` both sides are empty
+(`hyperplane_preimage_standardOpen_none`, and `D₊(∗)` maps into `D₊(∗)`). -/
+lemma isPullback_hyperplane_twistBundleSectionAux {m : Type u} :
+    IsPullback (hyperplane m S) (hyperplane m S) (twistBundleSectionAux (Option m) S none)
+      (hyperplane (Option m) S) := by
+  refine isPullback_of_iSup_opensRange_eq_top (hyperplane_comp_twistBundleSectionAux_none S)
+    (m := fun a ↦ (standardOpen (Option m) S a).ι)
+    (n := fun a ↦ (hyperplane m S ⁻¹ᵁ standardOpen (Option m) S a).ι)
+    (k := fun a ↦ hyperplane m S ∣_ standardOpen (Option m) S a) ?_
+    (fun a ↦ isPullback_morphismRestrict _ _) fun a ↦ ?_
+  · simp only [Scheme.Opens.opensRange_ι]
+    exact iSup_standardOpen (Option m) S
+  cases a with
+  | none =>
+    have hX : IsEmpty (hyperplane m S ⁻¹ᵁ standardOpen (Option m) S none).toScheme :=
+      ⟨fun x ↦ by
+        have h : x.1 ∈ (⊥ : ℙ(m; S).Opens) := by
+          rw [← hyperplane_preimage_standardOpen_none m S]
+          exact x.2
+        exact h⟩
+    have hσ : twistBundleSectionAux (Option m) S none ⁻¹ᵁ
+        standardOpen (Option (Option m)) S none = standardOpen (Option m) S none := by
+      rw [twistBundleSectionAux, Scheme.CoordinateCover.preimage_hom_standardOpen]
+      exact nonvanishing_coord _ _
+    let σ' : (standardOpen (Option m) S none).toScheme ⟶ ℙ(Option (Option m); S) :=
+      (standardOpen (Option m) S none).ι ≫ twistBundleSectionAux (Option m) S none
+    let ι' : ℙ(Option m; S) ⟶ ℙ(Option (Option m); S) := hyperplane (Option m) S
+    have hP : IsEmpty (Limits.pullback σ' ι' : Scheme.{u}) :=
+      ⟨fun (z : (Limits.pullback σ' ι' : Scheme.{u})) ↦ by
+        have hy : (standardOpen (Option m) S none).ι.base (Limits.pullback.fst σ' ι' z) ∈
+            twistBundleSectionAux (Option m) S none ⁻¹ᵁ
+              standardOpen (Option (Option m)) S none := by
+          rw [hσ]
+          exact (Limits.pullback.fst σ' ι' z).2
+        have h2 : Limits.pullback.snd σ' ι' z ∈
+            hyperplane (Option m) S ⁻¹ᵁ standardOpen (Option (Option m)) S none := by
+          change ((Limits.pullback.snd σ' ι' ≫ ι').base z) ∈ standardOpen (Option (Option m)) S none
+          rw [← Limits.pullback.condition, Scheme.Hom.comp_apply]
+          exact hy
+        rw [hyperplane_preimage_standardOpen_none] at h2
+        exact h2⟩
+    exact IsPullback.of_iso_pullback ⟨isInitialOfIsEmpty.hom_ext _ _⟩
+      (isInitialOfIsEmpty.uniqueUpToIso isInitialOfIsEmpty) (isInitialOfIsEmpty.hom_ext _ _)
+      (isInitialOfIsEmpty.hom_ext _ _)
+  | some k =>
+    have hb₀ : Set.range ((standardOpen (Option m) S (some k)).ι ≫
+        twistBundleSectionAux (Option m) S none).base ⊆
+        Set.range (standardOpen (Option (Option m)) S (some (some k))).ι.base := by
+      rintro _ ⟨x, rfl⟩
+      rw [Scheme.Opens.range_ι]
+      have hx : x.1 ∈ twistBundleSectionAux (Option m) S none ⁻¹ᵁ
+          standardOpen (Option (Option m)) S (some (some k)) := by
+        rw [twistBundleSectionAux_preimage_standardOpen_some]
+        exact x.2
+      exact hx
+    let b := IsOpenImmersion.lift _ _ hb₀
+    have hbι : b ≫ (standardOpen (Option (Option m)) S (some (some k))).ι =
+        (standardOpen (Option m) S (some k)).ι ≫ twistBundleSectionAux (Option m) S none :=
+      IsOpenImmersion.lift_fac _ _ _
+    have hv : b.appTop ((standardOpenIso (Option (Option m)) S (some (some k))).hom.appTop
+        (extraCoord (Option m) S (some k))) =
+        (standardOpenIso (Option m) S (some k)).hom.appTop (extraCoord m S k) := by
+      change b.appTop ((standardOpenIso _ S _).hom.appTop (AffineSpace.coord S ⟨none, by simp⟩)) =
+        (standardOpenIso _ S _).hom.appTop (AffineSpace.coord S ⟨none, by simp⟩)
+      rw [standardOpenIso_hom_appTop_coord, standardOpenIso_hom_appTop_coord]
+      have e₀ : (standardOpen (Option (Option m)) S (some (some k))).topIso.inv =
+          (standardOpen (Option (Option m)) S (some (some k))).ι.appLE
+            (standardOpen (Option (Option m)) S (some (some k))) ⊤
+            (Scheme.Opens.ι_preimage_self _).ge := by
+        rw [Scheme.Opens.ι_appLE]
+        rfl
+      have e₂ : b.appTop = b.appLE ⊤ ⊤ le_top := by
+        rw [Scheme.Hom.appTop, Scheme.Hom.app_eq_appLE]
+        rfl
+      have hh : (standardOpen (Option m) S (some k)).ι ≫ twistBundleSectionAux (Option m) S none =
+          homOfSections ((standardOpen (Option m) S (some k)).ι ≫ ℙ(Option m; S) ↘ S)
+            (fun a ↦ (standardOpen (Option m) S (some k)).topIso.inv
+              ((twistBundleSectionSections (Option m) S none a).s (some k)))
+            (Scheme.CoordinateCover.span_topIso_inv _
+              (span_twistBundleSectionSections (Option m) S none) (some k)) :=
+        Scheme.CoordinateCover.ι_hom (𝒟 := standardCoordinateCover (Option m) S) _ _ _ _
+      rw [e₀, e₂, ← CommRingCat.comp_apply, Scheme.Hom.appLE_comp_appLE, appLE_eq_of_eq hbι,
+        appLE_eq_of_eq hh]
+      exact (homOfSections_appLE_coordRatio (S := S) _
+        (fun a ↦ (standardOpen (Option m) S (some k)).topIso.inv
+          ((twistBundleSectionSections (Option m) S none a).s (some k)))
+        (Scheme.CoordinateCover.span_topIso_inv _
+          (span_twistBundleSectionSections (Option m) S none) (some k))
+        (twistBundleSectionSections_some_s_self (Option m) S none (some k)) none _).trans rfl
+    have hz := isPullback_zeroLocusSubschemeι b
+      (Set.range fun _ : Fin 1 ↦ (standardOpenIso (Option (Option m)) S (some (some k))).hom.appTop
+        (extraCoord (Option m) S (some k)))
+      (Set.range fun _ : Fin 1 ↦ (standardOpenIso (Option m) S (some k)).hom.appTop
+        (extraCoord m S k))
+      (by rw [← Set.range_comp]; exact congrArg Set.range (funext fun _ ↦ hv))
+    have P₁ := hz.paste_horiz (isPullback_hyperplaneFrame (Option m) S (some k))
+    have hG := isPullback_hyperplaneFrame m S k
+    let e := hG.isoIsPullback _ _
+      (isPullback_morphismRestrict (hyperplane m S) (standardOpen (Option m) S (some k))).flip
+    refine P₁.flip.of_iso e (Iso.refl _) (Iso.refl _) (Iso.refl _) ?_ ?_ ?_ ?_
+    · simp [e]
+    · have h₁ := (isPullback_hyperplaneFrame (Option m) S (some k)).w
+      have h₂ := hz.w
+      have h₃ := hG.w
+      rw [Iso.refl_hom, Category.comp_id, ← Category.assoc, IsPullback.isoIsPullback_hom_fst,
+        ← cancel_mono (hyperplane (Option m) S)]
+      simp only [Category.assoc]
+      rw [h₁, ← hyperplane_comp_twistBundleSectionAux_none, reassoc_of% h₃, reassoc_of% h₂, hbι]
+    · simp [hbι]
+    · simp
+
 end ProjectiveSpace
 
 namespace Etale
@@ -881,6 +1001,80 @@ of the pull-back `x_∗ / xᵢ` of `T_∗∗ / Tᵢ` (`restrictSupportedClass_ku
 theorem topChernClass_twistBundle_eq_hyperplaneChernClass {m : Type u} [Finite m] :
     (twistBundle (Option m) S).topChernClass Λ (ℙ(Option m; S) ↘ S ≫ aS) =
       hyperplaneChernClass (hyperplaneClass Λ m aS) := by
+  have hsq := (isPullback_hyperplane_twistBundleSectionAux S (m := m)).flip
+  let δ := restrictSupportedClass (ModuleCat.{u + 1} Λ) (twistBundleSectionAux (Option m) S none)
+    (hyperplane (Option m) S) (hyperplane m S) (hyperplane m S) hsq
+    (leftDerivedUpperStarConstantComplexIso Λ _).inv
+    (leftDerivedUpperStarTateShiftIso Λ _ ((1 : ℕ) : ℤ)) (hyperplaneClass Λ (Option m) aS)
+  have hframe : ∀ k : m, frameRestriction Λ (hyperplaneFrame m S k) δ =
+      frameClass Λ (hyperplaneFrame m S k) := by
+    intro k
+    have hb₀ : Set.range ((standardOpen (Option m) S (some k)).ι ≫
+        twistBundleSectionAux (Option m) S none).base ⊆
+        Set.range (standardOpen (Option (Option m)) S (some (some k))).ι.base := by
+      rintro _ ⟨x, rfl⟩
+      rw [Scheme.Opens.range_ι]
+      have hx : x.1 ∈ twistBundleSectionAux (Option m) S none ⁻¹ᵁ
+          standardOpen (Option (Option m)) S (some (some k)) := by
+        rw [twistBundleSectionAux_preimage_standardOpen_some]
+        exact x.2
+      exact hx
+    let b := IsOpenImmersion.lift _ _ hb₀
+    have hbι : b ≫ (standardOpen (Option (Option m)) S (some (some k))).ι =
+        (standardOpen (Option m) S (some k)).ι ≫ twistBundleSectionAux (Option m) S none :=
+      IsOpenImmersion.lift_fac _ _ _
+    have hv : b.appTop ((standardOpenIso (Option (Option m)) S (some (some k))).hom.appTop
+        (extraCoord (Option m) S (some k))) =
+        (standardOpenIso (Option m) S (some k)).hom.appTop (extraCoord m S k) := by
+      change b.appTop ((standardOpenIso _ S _).hom.appTop (AffineSpace.coord S ⟨none, by simp⟩)) =
+        (standardOpenIso _ S _).hom.appTop (AffineSpace.coord S ⟨none, by simp⟩)
+      rw [standardOpenIso_hom_appTop_coord, standardOpenIso_hom_appTop_coord]
+      have e₀ : (standardOpen (Option (Option m)) S (some (some k))).topIso.inv =
+          (standardOpen (Option (Option m)) S (some (some k))).ι.appLE
+            (standardOpen (Option (Option m)) S (some (some k))) ⊤
+            (Scheme.Opens.ι_preimage_self _).ge := by
+        rw [Scheme.Opens.ι_appLE]
+        rfl
+      have e₂ : b.appTop = b.appLE ⊤ ⊤ le_top := by
+        rw [Scheme.Hom.appTop, Scheme.Hom.app_eq_appLE]
+        rfl
+      have hh : (standardOpen (Option m) S (some k)).ι ≫ twistBundleSectionAux (Option m) S none =
+          homOfSections ((standardOpen (Option m) S (some k)).ι ≫ ℙ(Option m; S) ↘ S)
+            (fun a ↦ (standardOpen (Option m) S (some k)).topIso.inv
+              ((twistBundleSectionSections (Option m) S none a).s (some k)))
+            (Scheme.CoordinateCover.span_topIso_inv _
+              (span_twistBundleSectionSections (Option m) S none) (some k)) :=
+        Scheme.CoordinateCover.ι_hom (𝒟 := standardCoordinateCover (Option m) S) _ _ _ _
+      rw [e₀, e₂, ← CommRingCat.comp_apply, Scheme.Hom.appLE_comp_appLE, appLE_eq_of_eq hbι,
+        appLE_eq_of_eq hh]
+      exact (homOfSections_appLE_coordRatio (S := S) _
+        (fun a ↦ (standardOpen (Option m) S (some k)).topIso.inv
+          ((twistBundleSectionSections (Option m) S none a).s (some k)))
+        (Scheme.CoordinateCover.span_topIso_inv _
+          (span_twistBundleSectionSections (Option m) S none) (some k))
+        (twistBundleSectionSections_some_s_self (Option m) S none (some k)) none _).trans rfl
+    have hz := isPullback_zeroLocusSubschemeι b
+      (Set.range fun _ : Fin 1 ↦ (standardOpenIso (Option (Option m)) S (some (some k))).hom.appTop
+        (extraCoord (Option m) S (some k)))
+      (Set.range fun _ : Fin 1 ↦ (standardOpenIso (Option m) S (some k)).hom.appTop
+        (extraCoord m S k))
+      (by rw [← Set.range_comp]; exact congrArg Set.range (funext fun _ ↦ hv))
+    have : HasInvertibleExponent Λ (hyperplaneFrame m S k).U := .of_hom (hyperplaneFrame m S k).e
+    have : HasInvertibleExponent Λ (hyperplaneFrame (Option m) S (some k)).U :=
+      .of_hom (hyperplaneFrame (Option m) S (some k)).e
+    have hp := (hyperplaneFrame m S k).isPullback.paste_horiz hsq
+    rw [frameRestriction, ← restrictSupportedClass_comp_tateShift Λ (hyperplaneFrame m S k).e
+      (twistBundleSectionAux (Option m) S none) _ rfl (hyperplane (Option m) S) (hyperplane m S) _
+      (hyperplane m S) hsq (hyperplaneFrame m S k).toZ (hyperplaneFrame m S k).isPullback _ hp]
+    refine (restrictSupportedClass_comp_tateShift Λ b (hyperplaneFrame (Option m) S (some k)).e
+      ((hyperplaneFrame m S k).e ≫ twistBundleSectionAux (Option m) S none)
+      hbι.symm (hyperplane (Option m) S) _ _ (hyperplaneFrame (Option m) S (some k)).toZ
+      (hyperplaneFrame (Option m) S (some k)).isPullback _ hz _ hp).trans ?_
+    have hH := isHyperplaneClass_hyperplaneClass (Λ := Λ) aS (some k)
+    rw [frameRestriction] at hH
+    rw [hH, frameClass, frameClass]
+    exact restrictSupportedClass_kummerBoundaryProduct Λ b _ _ (fun _ ↦ hv) _ hz
+  have hδ : δ = hyperplaneClass Λ m aS := eq_hyperplaneClass aS hframe
   sorry
 
 include aS in

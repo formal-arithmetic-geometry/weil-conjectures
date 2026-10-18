@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Canonical
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Hyperplane
 public import WeilConjectures.AlgebraicGeometry.VectorBundle
+public import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 
 /-!
 # The total space of `𝒪(1)` on projective space
@@ -852,7 +853,28 @@ lemma hyperplane_comp_twistBundleSectionAux_none {m : Type u} :
   | none =>
     simp only [twistBundleSectionSections, hyperplaneSections,
       Scheme.CoordinateCover.zeroSection, map_zero]
-    sorry
+    rw [Scheme.CoordinateCover.coord_s, standardCoordinateCover_ratio]
+    have e₀ : (standardOpen (Option m) S (some k)).topIso.inv =
+        (standardOpen (Option m) S (some k)).ι.appLE (standardOpen (Option m) S (some k)) ⊤
+          (Scheme.Opens.ι_preimage_self _).ge := by
+      rw [Scheme.Opens.ι_appLE]
+      rfl
+    have e₂ : c.appTop = c.appLE ⊤ ⊤ le_top := by
+      rw [Scheme.Hom.appTop, Scheme.Hom.app_eq_appLE]
+      rfl
+    have hh' : (standardOpen m S k).ι ≫ hyperplane m S = homOfSections
+        ((standardOpen m S k).ι ≫ ℙ(m; S) ↘ S)
+        (fun a ↦ (standardOpen m S k).topIso.inv ((hyperplaneSections m S a).s k))
+        (Scheme.CoordinateCover.span_topIso_inv _ (span_hyperplaneSections m S) k) :=
+      Scheme.CoordinateCover.ι_hom (𝒟 := standardCoordinateCover m S) _ _ _ _
+    rw [e₀, e₂, ← CommRingCat.comp_apply, Scheme.Hom.appLE_comp_appLE, appLE_eq_of_eq hc,
+      appLE_eq_of_eq hh']
+    refine (homOfSections_appLE_coordRatio (S := S) ((standardOpen m S k).ι ≫ ℙ(m; S) ↘ S)
+      (fun a ↦ (standardOpen m S k).topIso.inv ((hyperplaneSections m S a).s k))
+      (Scheme.CoordinateCover.span_topIso_inv _ (span_hyperplaneSections m S) k)
+      (hyperplaneSections_some_s_self m S k) none _).trans ?_
+    simp [hyperplaneSections, Scheme.CoordinateCover.zeroSection]
+
 
 end ProjectiveSpace
 
