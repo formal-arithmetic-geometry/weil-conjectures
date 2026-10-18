@@ -244,5 +244,23 @@
   "group": "Q69",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-fa56b0fc5 (reviewer sub-agent of L); spot-checked: I read the item, all six steps and all 16 cited statements. The statement is unchanged and has no new nodes or SGA citations. It is true; I tested B=0 (empty fibre, conclusion vacuous), B=R^n, the generic point, a ramified DVR algebra (excluded), R/(t) (excluded by torsion-freeness) and an inseparable residue extension (excluded). Step 1: the localization criterion plus the DVR freeness lemma (0AUW(3), more-algebra.tex:4954) give B_p finite free. Step 2: 00FP finite presentation plus 0GWM freeness at one prime give g with B_g finite free. Step 3: lfp, flat (via the 00HT(6) tool) and finite (via the 01PB clause of the finite-morphism definition). Step 4: κ(pR_g)=κ(p) and the fibre ring is the actual tensor product ≅ F. The finite-étale algebra criterion covers both (i) and (ii), and its notion of étale is def-weil-etale-morphism (checked in the conventions node; 00U3 at algebra.tex:39394). Step 5: the flat-fibre étale-neighbourhood tool (02GU (1)⇔(2), morphisms.tex:8318) is used only through its statement, and empty fibres are allowed. Step 6: a finite map is closed, f∈I∖p gives D(f)⊆W⊆D(g), and h⁻¹(D(f))=Spec B_f because g is a unit in R_f. No duplicates: the codim-one étale-neighbourhood and trace-discriminant nodes state different things. I accept the two tool_uses (00HT localization and the flat-fibre étale criterion). Maintainer note: the source tags on the 0517 and 02GM dependency nodes are imprecise; this was reported by the worker and the nodes were left unedited."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteAlgebraEtaleNearFieldOrDvr",
+  "declaration": "Algebra.exists_etale_away_of_finite_torsionFree_of_field_or_dvr",
+  "file": "lean/Sheaf/RingTheory/FiniteAlgebraEtaleNearFieldOrDvr.lean",
+  "statement": "theorem exists_etale_away_of_finite_torsionFree_of_field_or_dvr (R : Type u) (B : Type v) [CommRing R] [IsDomain R] [IsNoetherianRing R] [CommRing B] [Algebra R B] [Module.Finite R B] (htorsion : ∀ (r : R) (b : B), r ≠ 0 → r • b = 0 → b = 0) (p : Ideal R) [p.IsPrime] (hbase : IsField (Localization.AtPrime p) ∨ IsDiscreteValuationRing (Localization.AtPrime p)) (hfibre : Subsingleton (KaehlerDifferential p.ResidueField (p.Fiber B)) ∨ ∃ (I : Type (max u v)) (_ : Finite I) (L : I → Type (max u v)) (_ : ∀ i, Field (L i)) (_ : ∀ i, Algebra p.ResidueField (L i)) (_ : p.Fiber B ≃ₐ[p.ResidueField] Π i, L i), ∀ i, Module.Finite p.ResidueField (L i) ∧ Algebra.IsSeparable p.ResidueField (L i)) : ∃ f : R, f ∉ p ∧ (IsLocalization.Away.map (S := Localization.Away f) (Q := Localization.Away (algebraMap R B f)) (algebraMap R B) f).Etale",
+  "branch": "newtargets-dag",
+  "by": "NG",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f01509d93",
+  "group": "NG",
+  "result": "pass",
+  "note": "I read the node (unchanged except for the added lean record), the 8 Mathlib dependency records, the module and the report. Hypotheses match: domain plus IsNoetherianRing; Module.Finite; htorsion exact; IsField ∨ IsDiscreteValuationRing on Localization.AtPrime p; fibre p.Fiber B over p.ResidueField; Subsingleton Ω ∨ an algebra iso to a finite product of finite separable fields in Type (max u v), the fibre's universe, so no restriction. Conclusion: ∃ f ∉ p with the canonical IsLocalization.Away.map R_f→B_f RingHom.Etale. No extra assumptions; two universes. Edge cases B=0, p=0, ramified/inseparable/torsion all behave correctly. No duplicate in live Sheaf/WeilConjectures (only the parent Cohen–Gabber lemma cites it). Imports are statement or proof-dependency modules. lean.statement verbatim. nt_compile --json clean (2.1 s, EXIT 0; #check signature printed). Advisory: the second reading was by the author, but it is a substantive reading."
  }
 }
