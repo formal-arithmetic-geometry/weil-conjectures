@@ -367,5 +367,23 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-121df5741 (reviewer sub-agent of L); spot-checked: I read all seven steps and the full statement of every one of the 26 cited nodes. Sources checked: Stacks 05K0 (more-morphisms.tex l.12457) against thm-pqf-zmt-factorization, and 056B (morphisms.tex l.977) against lem-trf-reduced-scheme-image. Step 1 checks every ZMT hypothesis: i is a quasi-compact open immersion because open subsets of Noetherian C are quasi-compact (01OW); C is quasi-separated (01OY); f has finite type and finite fibres, so it is quasi-finite (02NH); f is separated because i is a monomorphism, so T×_C T=T×_U T. Step 3 is correct: j_U is finite by 035D(1), so T is closed, open and dense in Z∩P_U, hence equal to it and r^{-1}(U)=T. Step 4 applies the generic-fibre density lemma with c=id_U and needs no normality. In Steps 5–6 the generic fibre is discrete, so each H_a meets r^{-1}(η) only in t_a, and the finite closed map r removes the pairwise intersections. Step 7 identifies V_a with the clopen open subscheme of Z_W by 01J3(3) uniqueness, so the comparison covers the whole inverse image. The statement is unchanged and the citer lem-per-constructible-finite-open-constant-generation uses it consistently. Edge cases checked: U=C, C the spectrum of a field, components meeting in Z, non-normal C. There are no new nodes and no duplicate (rg for 05K0, integral models, finite étale/integral/shrink; the r1 compactification node is only for curves over k=k̄, and lem-trf-finite-base-splits-etale is a different statement). Batch 5: lem-trf-reduced-scheme-image is the generic Stacks lemma 056B, not part of the trace-formula or Poincaré-duality proofs. Its 20-node closure contains no other sec-trace-formula or sec-poincare-duality node, and the proof does not really need it, so it is accepted. I accept all 20 declared tool_uses as generic scheme and topology lemmas."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleIntegralModelsAfterShrinking",
+  "declaration": "AlgebraicGeometry.exists_finite_etale_integral_models_after_shrinking",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleIntegralModelsAfterShrinking.lean",
+  "statement": "theorem exists_finite_etale_integral_models_after_shrinking (C : Scheme.{u}) [IsIntegral C] [IsNoetherian C] (U : C.Opens) (hU : IsAffineOpen U) (hUne : Nonempty U) {T : Scheme.{u}} (g : T ⟶ U.toScheme) [IsFinite g] [Etale g] [Surjective g] : ∃ W : U.toScheme.Opens, IsAffineOpen W ∧ Nonempty W ∧ ∃ (A : Type u) (_ : Finite A) (_ : Nonempty A) (Y : A → Scheme.{u}) (q : ∀ a : A, Y a ⟶ C), (∀ a : A, IsIntegral (Y a) ∧ IsFinite (q a) ∧ Nonempty ↥(pullback (q a) (W.ι ≫ U.ι)) ∧ IsOpenImmersion (pullback.fst (q a) (W.ι ≫ U.ι))) ∧ ∃ e : pullback g W.ι ≅ ∐ (fun a : A ↦ pullback (q a) (W.ι ≫ U.ι)), e.hom ≫ Sigma.desc (fun a : A ↦ pullback.snd (q a) (W.ι ≫ U.ι)) = pullback.snd g W.ι",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e96de8054",
+  "group": "N6",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: IsIntegral+IsNoetherian C (equivalent to the node's finite affine Noetherian cover), nonempty affine U, finite etale surjective g; conclusion has nonempty affine W in U, finite nonempty A : Type u, integral Y_a, finite q_a, canonical pullbacks V_a=Y_a×_C W nonempty with IsOpenImmersion fst, and an iso T×_U W ≅ ∐V_a compatible with pullback.snd (whole inverse image). Edge cases (empty C/U, |A|=1, W=U, no normality) and universes ok. Only the lean record changed vs the live node; lean.statement verbatim; stmt_dep records used as recorded; no defs, sorry only, docstrings carry source, blueprint id and 7 steps. No duplicate in side lean/Sheaf; citer usage consistent. nt_compile --json clean (2.6 s, exit 0). Advisory: the second-reading section is an admitted author self-check."
  }
 }
