@@ -13,7 +13,12 @@
   "def-weil-constructible-heart",
   "def-weil-ordinary-compact-cohomology",
   "def-weil-pbc-closed-subset-proper-over-base",
-  "lem-a1-degree-zero-compact-support-sections"
+  "lem-a1-degree-zero-compact-support-sections",
+  "def-coef-ringed-sequence-site",
+  "def-a1-constructible-pullback-residue-units",
+  "def-a1-common-stage-coefficient-unit",
+  "def-a1-intrinsic-adic-fibre-specification",
+  "def-weil-derived-pullback-tensor-hom"
  ],
  "proof": [
   {
@@ -281,5 +286,55 @@
   "group": "NS",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-f5a81822b (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full, with Milne LEC Def 18.1 and Prop 18.3(b) (pp.118–119) and Bhatt–Scholze Prop 6.8.14 and Rem 6.8.15 (pp.61–62) open. All six steps are correct. (1) Nagata compactification over a qcqs base; density is not needed because Comp(f) in def-weil-compactifications-refinements does not require it. (2) Ra_! = Rr_* j_! with r proper, and H^0 Fib_s = Hom(1_X̄, j_!G) by a^* ⊣ Ra_*; the compact-to-ordinary map is restriction via j_! → Rj_*. (3) Injectivity holds because fibres of im t vanish (exactness) and fibres are jointly conservative. (4) The support S of t lies in X because the boundary fibres of j_!G vanish. (5) Clauses (1) and (2) of lem-weil-pbc-closed-subset-proper-over-base-properties make S proper, and its reduced structure in X̄ is the same as in X. (6) The lisse normalization uses only the H^0 identification of lem-a1-degree-zero-compact-support-sections, with no circularity. New node lem-a1-adic-section-closed-support is true: S(t) is a union of connected lisse strata, so it is constructible; it is closed under specialization by cospecialization; it is therefore closed, and t vanishes off it by conservativity. I tested it on a skyscraper, on j_!Q̄_ℓ for 𝔾_m ⊂ 𝔸¹, and on a disconnected T. New node lem-a1-adic-compactification-section-realization is true; I tested U=T, U=∅ and 𝔸¹ ⊂ ℙ¹. Neither new node is a duplicate (checked lem-zl-extension-by-zero-punctual, lem-trf-compactification-cohomology, lem-cbc-proetale-extension-zero-comparison, lem-sfb-etale-geometric-fibre-compact-sections and lem-a1-degree-zero-compact-support-sections), and neither restates a clause of the item. Repaired one B3 fault: adic j_! cited no definition, so it now cites def-weil-integral-rational-qbar-compact-support in the statement and stmt_deps of lem-a1-adic-compactification-section-realization (whole file under fixes/). Batch-5 check: (a) lem-per-adic-heart-pullback-fibres -> def-pod-lisse-l-adic-sheaves is accepted because the target is the general Weil II lisse-sheaf definition and not part of Poincaré duality. (b) lem-tw-lisse-rational-realization -> lem-trf-integral-pullback-comparison-realization is accepted because that node is coherence of completed pullbacks with composition and scalar extension, which the trace-identity assumption does not give, and step 6 uses no trace content. All four nodes were already in the batch-5 closure through existing citers (4 and 6 of them respectively). tool_uses accepted as declared. No SGA, no target weakened.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstructibleDegreeZeroProperSupport",
+  "declaration": "WeilConjectures.a1ConstructibleDegreeZeroProperSupport",
+  "declarations": [
+   "WeilConjectures.a1ConstructibleOpenUnit_isIso",
+   "WeilConjectures.a1ConstructibleCompletedOpenComparison",
+   "WeilConjectures.a1ConstructibleCompletedPushComp",
+   "WeilConjectures.a1ConstructibleCompletedComparison",
+   "WeilConjectures.a1ConstructibleIntegerEmbedding",
+   "WeilConjectures.a1ConstructiblePointH0",
+   "WeilConjectures.a1ConstructibleNoetherian",
+   "WeilConjectures.a1ConstructibleUnit",
+   "WeilConjectures.A1ConstructibleSections",
+   "WeilConjectures.a1ConstructibleRestriction",
+   "WeilConjectures.a1ConstructibleOpenUnit",
+   "WeilConjectures.A1ConstructibleRestrictionUnitSpec",
+   "WeilConjectures.a1ConstructibleModelOrdinary",
+   "WeilConjectures.a1ConstructibleModelCompact",
+   "WeilConjectures.a1ConstructibleModelComparison",
+   "WeilConjectures.a1ConstructibleModelOpenOrdinary",
+   "WeilConjectures.a1ConstructibleCompletedRestriction",
+   "WeilConjectures.a1ConstructibleModelRestriction",
+   "WeilConjectures.a1ConstructibleModelInclusion",
+   "WeilConjectures.a1ConstructibleRestrictionUnit_spec",
+   "WeilConjectures.a1ConstructibleRestrictionUnit",
+   "WeilConjectures.a1ConstructibleSectionRestriction",
+   "WeilConjectures.a1ConstructibleOrdinaryValue",
+   "WeilConjectures.a1ConstructibleCompactValue",
+   "WeilConjectures.A1ConstructibleDegreeZeroComparison",
+   "WeilConjectures.a1ConstructibleCompactSection",
+   "WeilConjectures.a1ConstructibleDegreeZeroProperSupport",
+   "WeilConjectures.A1ConstructibleLisseCompatibility",
+   "WeilConjectures.a1ConstructibleDegreeZeroProperSupport_lisse"
+  ],
+  "file": "lean/Sheaf/Paper/ConstructibleDegreeZeroProperSupport.lean",
+  "statement": "theorem a1ConstructibleDegreeZeroProperSupport (c : Compactification (X ↘ Spec (.of D.k))) : Nonempty (A1ConstructibleDegreeZeroComparison l D hl Ω X c)",
+  "branch": "newtargets-dag",
+  "by": "Q75",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "The general natural comparison, its actual completed compact-to-ordinary and ordinary restriction maps, and the lisse normalization are stated together in this module. Comparison data use the recorded sf common-stage heart and actual finite-model operations; independent site/coefficient universes are retained. Additional canonical map helpers are owned by this node. No mathematical statement correction."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b92c94b99",
+  "group": "Q75",
+  "result": "pass",
+  "note": "Re-delivery after RETURN H2 at 777f546ea33b; Lean byte-identical (sha 0fc71f20…). stmt_deps now cite existing:true def-a1-constructible-pullback-residue-units, def-a1-common-stage-coefficient-unit (25 DerivedPullbackTensorIso unit decls), def-a1-intrinsic-adic-fibre-specification and def-weil-derived-pullback-tensor-hom in place of the three theorem nodes. Every owner-module decl used is listed; statements verbatim; new-node deps exist (prop-constructible-truncations genuine, residue units are .choose of constructibleTruncations_exists); no theorem stmt_dep added vs live; no cycle. Substance re-read: hypotheses exact, comparison pinned to the j_!→j_* mate on integral models, injective/proper support/open restriction/lisse clauses present, no hollow defs, edge cases covered. nt_compile --json clean 27.2 s/60 s. Maintainer note: stage 3 needs lem-pur-derived-pullback-tensor-iso in proof_deps for helper a1ConstructibleRestrictionUnit_spec."
  }
 }
