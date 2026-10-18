@@ -5,7 +5,7 @@ Authors: Claude
 -/
 module
 
-public import WeilConjectures.CategoryTheory.Monoidal.Mod.TensorExchange
+public import WeilConjectures.CategoryTheory.Monoidal.Mod.IsoAlgebraTensor
 public import WeilConjectures.SixFunctors.ProEtale.Adic.ForgetCoherence
 public import WeilConjectures.SixFunctors.ProEtale.Adic.LisseInternalHom
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.MonoidalIso
@@ -13,7 +13,14 @@ public import WeilConjectures.WeilSheaf.TensorHomAdjunction
 public import WeilConjectures.WeilSheaf.UpperStarComp
 
 /-!
-# Pullback of pro-étale Weil sheaves is compatible with tensor products
+# The Frobenius exchange isomorphism of `ℓ`-adic pullbacks is monoidal
+
+The exchange isomorphism `j^* ⋙ (a⁻¹)_* ≅ (b⁻¹)_* ⋙ j^*` of sheaves of `ℚ̄_ℓ`-modules attached to
+a morphism `j` intertwining automorphisms `a` and `b` is a monoidal natural isomorphism
+(`AlgebraicGeometry.ProEtale.isMonoidal_upperStarExchange_hom`), and it is the underlying
+isomorphism of the exchange isomorphism of `ℓ`-adic sheaves
+(`AlgebraicGeometry.ProEtale.adicUpperStarExchange_hom_app_hom`). These are the inputs of the
+compatibility of pullbacks of pro-étale Weil sheaves with tensor products.
 
 -/
 
@@ -27,7 +34,6 @@ namespace AlgebraicGeometry.ProEtale
 
 variable {l : ℕ} [Fact l.Prime] {T₁ T₂ : Scheme.{u}}
 
-attribute [local instance] Sheaf.symmetricCategory
 
 variable (l) in
 /-- The exchange isomorphism `j^* ⋙ (a⁻¹)_* ≅ (b⁻¹)_* ⋙ j^*` of sheaves of `ℚ̄_ℓ`-modules
@@ -92,5 +98,44 @@ lemma adicUpperStarExchange_hom_app_hom (j : T₁ ⟶ T₂) (a : T₁ ≅ T₁) 
       (upperStarExchange l j a b c).hom.app M.X := by
   rw [adicUpperStarExchange_hom_app_hom', upperStarExchange_hom_app]
   congr 1
+
+instance preservesColimitsOfShape_mapModComap_adicConstantSheafToLowerStar (g : T₁ ⟶ T₁)
+    [IsIso g] : PreservesColimitsOfShape WalkingParallelPair
+      (Mod.mapModComap (G := (g)_*[WeilCoefficients.{u} l]) (adicConstantSheafToLowerStar l g)) :=
+  have : (Mod.mapModComap (G := (g)_*[WeilCoefficients.{u} l])
+      (adicConstantSheafToLowerStar l g)).IsEquivalence :=
+    isEquivalence_adicLowerStar l g
+  inferInstance
+
+instance preservesColimitsOfShape_mapModComap_adicUpperStarRingHom (j : T₁ ⟶ T₂) :
+    PreservesColimitsOfShape WalkingParallelPair
+      (Mod.mapModComap (G := (j)^*[WeilCoefficients.{u} l]) (adicUpperStarRingHom l j)) :=
+  inferInstanceAs (PreservesColimitsOfShape WalkingParallelPair (j)^*ᵃ[l])
+
+/-- The exchange isomorphism of `ℓ`-adic pullbacks along a base change with the Frobenius
+pullbacks is that of the underlying sheaves. -/
+lemma adicUpperStarGeometricFiberMapCompFrobeniusIso_hom_app_hom' {k : Type u} [Field k]
+    [Finite k] {X₀ Y₀ : Scheme.{u}} {f : X₀ ⟶ Spec (.of k)} {g : Y₀ ⟶ Spec (.of k)}
+    (φ : X₀ ⟶ Y₀) (h : φ ≫ g = f) (M : AdicSheaf l g.geometricFiber) :
+    ((adicUpperStarGeometricFiberMapCompFrobeniusIso l φ h).hom.app M).hom =
+      (upperStarExchange l (Scheme.Hom.geometricFiberMap φ h) f.geometricGaloisFrobenius
+        g.geometricGaloisFrobenius
+        (Scheme.Hom.geometricFiberMap_comp_geometricGaloisFrobenius φ h).symm).hom.app M.X := by
+  rw [adicUpperStarGeometricFiberMapCompFrobeniusIso_hom_app_hom, upperStarExchange_hom_app]
+  congr 1
+
+/-- The pullback of sheaves of `ℚ̄_ℓ`-modules is braided. -/
+lemma upperStar_μ_comp_map_braiding (j : T₁ ⟶ T₂)
+    (X Y : Sheaf (Scheme.ProEt.topology T₂) (WeilCoefficients.{u} l)) :
+    μ (j)^*[WeilCoefficients.{u} l] X Y ≫ (j)^*[WeilCoefficients.{u} l].map (β_ X Y).hom =
+      (β_ _ _).hom ≫ μ (j)^*[WeilCoefficients.{u} l] Y X :=
+  Adjunction.μ_comp_map_braiding (upperStarLowerStarAdjunction _ j) _ _
+
+/-- The pushforward of sheaves of `ℚ̄_ℓ`-modules is lax braided. -/
+lemma lowerStar_μ_comp_map_braiding (g : T₁ ⟶ T₁)
+    (X Y : Sheaf (Scheme.ProEt.topology T₁) (WeilCoefficients.{u} l)) :
+    μ (g)_*[WeilCoefficients.{u} l] X Y ≫ (g)_*[WeilCoefficients.{u} l].map (β_ X Y).hom =
+      (β_ _ _).hom ≫ μ (g)_*[WeilCoefficients.{u} l] Y X :=
+  Functor.LaxBraided.braided _ _
 
 end AlgebraicGeometry.ProEtale

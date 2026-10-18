@@ -25,14 +25,14 @@ shows that it is an isomorphism: the derived projection formula for the extensio
 
 ## Main definitions
 
-- `ProEtale.CondensedRing.derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction`: the
+- `ProEtale.CondensedRing.derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction'`: the
   adjunction `Dj_! ⊣ Lj^*`.
-- `ProEtale.CondensedRing.openImmersionProjectionComparison`: the projection map `q_j`, as a
+- `ProEtale.CondensedRing.openImmersionProjectionComparison'`: the projection map `q_j`, as a
   natural transformation of bifunctors.
 
 ## Main results
 
-- `ProEtale.CondensedRing.isIso_openImmersionProjectionComparison`: `q_j` is an isomorphism.
+- `ProEtale.CondensedRing.isIso_openImmersionProjectionComparison'`: `q_j` is an isomorphism.
 
 ## The argument
 
@@ -67,7 +67,7 @@ variable (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [I
 
 /-- The derived adjunction `Dj_! ⊣ Lj^*` along an open immersion `j`, with the derived pullback
 `L((j)^*⟦Λ⟧)` (rather than the levelwise `D((j)^*⟦Λ⟧)`) as right adjoint. -/
-noncomputable def derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction :
+noncomputable def derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction' :
     D((j)_!open⟦Λ⟧) ⊣ L((j)^*⟦Λ⟧) :=
   (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).ofNatIsoRight
     (leftDerivedUpperStarIsoMapDerivedCategory_of_isOpenImmersion Λ j).symm
@@ -80,21 +80,21 @@ M ⊗ᴸ Lj^* N --(η ⊗ᴸ 1)--> Lj^* Dj_! M ⊗ᴸ Lj^* N --μ--> Lj^* (Dj_! 
 ```
 where `η` is the unit of `Dj_! ⊣ Lj^*` and `μ` the lax monoidal structure of `Lj^*`
 (`CategoryTheory.Adjunction.projectionMap`). -/
-noncomputable def openImmersionProjectionComparison :
+noncomputable def openImmersionProjectionComparison' :
     (Functor.postcompose₂.obj D((j)_!open⟦Λ⟧)).obj
         ((((Functor.whiskeringLeft₂ _).obj (𝟭 _)).obj L((j)^*⟦Λ⟧)).obj (curriedTensor _)) ⟶
       (((Functor.whiskeringLeft₂ _).obj D((j)_!open⟦Λ⟧)).obj (𝟭 _)).obj (curriedTensor _) :=
-  (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction Λ j).projectionMap
+  (derivedOpenImmersionLowerShriekLeftDerivedUpperStarAdjunction' Λ j).projectionMap
     L((j)^*⟦Λ⟧) (curriedTensor _) (curriedTensor _)
     (Functor.LaxMonoidal.μNatTrans L((j)^*⟦Λ⟧))
 
 /-- **The derived projection formula for the extension by zero**: the projection map
 `q_{j,M,N} : Dj_! (M ⊗ᴸ Lj^* N) ⟶ Dj_! M ⊗ᴸ N` along an open immersion is an isomorphism. -/
-instance isIso_openImmersionProjectionComparison_app_app
+instance isIso_openImmersionProjectionComparison'_app_app
     (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1}) (condensedRingObj Λ U)))
     (N : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1})
       (condensedRingObj Λ X))) :
-    IsIso (((openImmersionProjectionComparison Λ j).app M).app N) := by
+    IsIso (((openImmersionProjectionComparison' Λ j).app M).app N) := by
   have : IsIso (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).unit :=
     Adjunction.isIso_mapDerivedCategoryAdjunction_unit _
   have := (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).fullyFaithfulLOfIsIsoUnit.full
@@ -112,14 +112,14 @@ instance isIso_openImmersionProjectionComparison_app_app
   obtain ⟨Z, ⟨e⟩⟩ := tensorObj_mem_essImage_mapDerivedCategory_openImmersionLowerShriek Λ j M N
   exact Adjunction.isIso_projectionMap_app_app_of_iso _ _ _ _ _ M N Z e.symm
 
-instance isIso_openImmersionProjectionComparison_app
+instance isIso_openImmersionProjectionComparison'_app
     (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U) Ab.{u + 1})
       (condensedRingObj Λ U))) :
-    IsIso ((openImmersionProjectionComparison Λ j).app M) :=
+    IsIso ((openImmersionProjectionComparison' Λ j).app M) :=
   NatIso.isIso_of_isIso_app _
 
-instance isIso_openImmersionProjectionComparison :
-    IsIso (openImmersionProjectionComparison Λ j) :=
+instance isIso_openImmersionProjectionComparison' :
+    IsIso (openImmersionProjectionComparison' Λ j) :=
   NatIso.isIso_of_isIso_app _
 
 end AlgebraicGeometry.ProEtale.CondensedRing
