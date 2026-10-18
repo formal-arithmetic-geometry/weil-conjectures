@@ -310,5 +310,23 @@
   "group": "NP",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-61f590ef3 (reviewer sub-agent of L); spot-checked: I read the full proof of Stacks 07PI (more-algebra.tex), definition 07P7 and the statements of all 16 cited nodes. The item's statement is exactly 07PI with J-0 expanded and is unchanged; the parent lem-per-complete-local-excellence uses exactly this statement. Proof steps: (1) 032D gives a regular complete subring A_0, all of Spec A_0 is a regular open, and the fraction-field extension K/K_0 is finite. (2-3) The models B(M) = A ∩ M are finite over A_0 and have fraction field M, by the integral-equation inverse formula. (4) The separable part M_0 is handled by 07PB, with every hypothesis checked; finite separable algebraic meets the 030O definition with an empty transcendence basis. (5) The 09HI p-th-root tower gives an explicit induction with its base and claim stated. (6) z = sα_i makes B[T]/(T^p - b) ≅ C (the map is injective by the degree-p argument), and b is not a p-th power. (7-8) 07PH gives D, the principal open D(h) is chosen, the derivation is extended to B_g by 07PE(2), and 07PG with n = p makes C_g regular. (9) A common denominator c gives E_c = C_c. (10) The localization is regular and D_E(gc) is a nonempty regular open. The induction ends at B_n = A. Each step is correct and uses only what the cited statements say. There are no new nodes and no duplicates: only the item and its parent mention 07PI. The 8 tool uses are generic algebra used as black boxes and are accepted; no SGA source is cited. Batch-5: lem-trf-finite-domain-fraction-degree is a Mathlib leaf (instFiniteDimensionalFractionRingOfFinite, Mathlib/RingTheory/Algebraic/Integral.lean:696) with no proof_deps. It is general domain/fraction-field algebra, neither stated by nor a step of the trace formula or Poincare duality, so it is outside the assumed statements and accepted; I found no non-trf node with the same statement to repoint to. Small cases checked: R a field, k[[t^p]] ⊂ k[[t]], and characteristic 0."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.CompleteLocalDomainRegularOpen",
+  "declaration": "IsLocalRing.exists_nonempty_open_regular_of_complete_domain",
+  "file": "lean/Sheaf/RingTheory/CompleteLocalDomainRegularOpen.lean",
+  "statement": "theorem IsLocalRing.exists_nonempty_open_regular_of_complete_domain (R : Type u) [CommRing R] [IsNoetherianRing R] [IsLocalRing R] [IsDomain R] [IsAdicComplete (IsLocalRing.maximalIdeal R) R] : ∃ U : Set (PrimeSpectrum R), IsOpen U ∧ U.Nonempty ∧ ∀ p ∈ U, IsRegularLocalRing (Localization.AtPrime p.asIdeal)",
+  "branch": "newtargets-dag",
+  "by": "Q90",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7eaac350d",
+  "group": "Q90",
+  "result": "fix",
+  "note": "Statement matches node and Stacks 07PI/07P7 clause by clause, using the recorded dependency declarations (Noetherian, local, domain, maximalIdeal-adic complete; ∃ open nonempty U with IsRegularLocalRing at each prime). No added hypotheses or universe restriction. Proof is sorry only; no definitions; no duplicate found. Imports are the stmt_dep and proof_dep record modules and the named declarations exist. Delivered file compiles clean (nt_compile --json, 2.0 s). H8: the proof docstring omitted node steps 2-3, 6 and 9; fixes/CompleteLocalDomainRegularOpen.lean replaces it with a ten-step docstring, signature byte-identical, compiles clean (5.5 s)."
  }
 }
