@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.CategoryTheory.Adjunction.ExchangeMate
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.LowerShriek.Coherence
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
+public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.PullbackSquareComparison
 
 /-!
 
@@ -166,7 +166,8 @@ lemma map_unit_app_comp_boundedConstructibleLowerShriekBaseChange_padicAlgCl_app
     Functor.map_comp, Category.assoc]
   rw [← cancel_mono ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f').hom.app _)]
   simp only [Category.assoc]
-  rw [hP, ← Functor.map_comp_assoc (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)
+  rw [hP, ← Functor.map_comp_assoc
+    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ g)
     ((boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ f).inv.app _), Iso.inv_hom_id_app]
   erw [CategoryTheory.Functor.map_id, Category.id_comp]
   rw [hU]
@@ -176,12 +177,25 @@ lemma map_unit_app_comp_boundedConstructibleLowerShriekBaseChange_padicAlgCl_app
 lemma boundedConstructibleLowerShriekBaseChange_padicAlgCl_congr_app
     {g'₁ g'₂ : X' ⟶ X} {f'₁ f'₂ : X' ⟶ Y'} {f₁ f₂ : X ⟶ Y} {g₁ g₂ : Y' ⟶ Y}
     (sq₁ : IsPullback g'₁ f'₁ f₁ g₁) (sq₂ : IsPullback g'₂ f'₂ f₂ g₂) (h₁ : g'₁ = g'₂)
-    (h₂ : f'₁ = f'₂) (h₃ : f₁ = f₂) (h₄ : g₁ = g₂) (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (h₂ : f'₁ = f'₂) (h₃ : f₁ = f₂) (h₄ : g₁ = g₂)
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
     (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq₁).app K =
       eqToHom (by subst h₃ h₄; rfl) ≫
         (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq₂).app K ≫
         eqToHom (by subst h₁ h₂; rfl) := by
   subst h₁ h₂ h₃ h₄
+  simp
+
+
+/-- The compact-support base changes of squares differing only in the bottom map agree up to
+the cast. -/
+lemma boundedConstructibleLowerShriekBaseChange_padicAlgCl_congr_app_bottom
+    {g₁ g₂ : Y' ⟶ Y} (sq₁ : IsPullback g' f' f g₁) (sq₂ : IsPullback g' f' f g₂) (h : g₁ = g₂)
+    (K : Dᵇc(X.left)⟦Profinite.padicAlgClRingObj ℓ⟧) :
+    (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq₁).app K =
+      eqToHom (by subst h; rfl) ≫
+        (boundedConstructibleLowerShriekBaseChange_padicAlgCl ℓ sq₂).app K := by
+  subst h
   simp
 end Proper
 
