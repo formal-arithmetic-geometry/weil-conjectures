@@ -12,9 +12,78 @@
   "def-weil-ring-localization-away",
   "def-weil-open-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\lambda:A\\to\\bigoplus_i A_{f_i}$ for the localization map and $\\mu:A\\to A^{\\oplus n}$ for multiplication by the tuple. Finite direct sums and products have the same coordinates. By the fraction equality in [def-weil-ring-localization-away], $\\lambda(a)=0$ precisely when for every $i$ there is $e_i\\geq1$ with $f_i^{e_i}a=0$ (increase an exponent zero to one if necessary). If $\\lambda$ is injective and $\\mu(a)=0$, take all $e_i=1$ to obtain $a=0$. Thus $\\mu$ is injective. For these additive maps, zero kernel is equivalent to injectivity, by applying the zero-kernel assertion to a difference.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/morphisms.tex; literature/stacks-project/schemes.tex",
+    "place": "Algebra Tag 0565 (lemma-when-injective-covering), first paragraph of proof"
+   }
+  },
+  {
+   "text": "Conversely assume $\\mu$ injective. Prove, simultaneously for all $a\\in A$ and tuples $e_i\\geq1$, that $f_i^{e_i}a=0$ for all $i$ implies $a=0$, by strong induction on $E=\\sum_i(e_i-1)$. If $E=0$, all exponents are one, so this is $\\ker\\mu=0$. If $E>0$, choose $j$ with $e_j>1$ and put $b=f_ja$. The exponents $e_i$ for $i\\ne j$ and $e_j-1$ for $j$ annihilate $b$, by commutativity, and have excess sum $E-1$. Induction gives $f_ja=0$. Now the original $a$ satisfies the equations with the $j$th exponent replaced by one; that excess sum is strictly smaller than $E$, so induction gives $a=0$. The fraction relation in [def-weil-ring-localization-away], as expanded in Step 1, identifies this assertion with $\\ker\\lambda=0$. When $n=0$, the base case asserts that the map $A\\to0$ has zero kernel, exactly the injectivity hypothesis on $\\mu$; both maps are the zero map and the same conclusion holds.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/morphisms.tex; literature/stacks-project/schemes.tex",
+    "place": "Algebra Tag 0565 (lemma-when-injective-covering), exponent induction in proof"
+   }
+  },
+  {
+   "text": "Put $X=\\operatorname{Spec}A$. The global-section identification in [def-weil-affine-spectrum] gives $\\mathcal O_X(X)=A$. By clause (b) of [lem-weil-pbc-affine-open-section-vanishing-prime], $D(f_i)$ is affine and $\\mathcal O_X(D(f_i))=A_{f_i}$ through the restriction map. By [def-weil-open-immersion], $\\mathcal O_U$ is the restriction of $\\mathcal O_X$. Hence a global section vanishes on $U$ if and only if it vanishes on each $D(f_i)$: one implication is restriction and the other is uniqueness in the sheaf axiom for this cover. Thus $\\ker(A\\to\\mathcal O_U(U))=\\ker\\lambda$. In particular injectivity of the sheaf restriction implies injectivity of $\\lambda$ by evaluation on $X$.",
+   "uses": [
+    "def-weil-affine-spectrum",
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "def-weil-open-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/morphisms.tex; literature/stacks-project/schemes.tex",
+    "place": "Morphisms Tags 056C (example-scheme-theoretic-closure), 01RE (lemma-characterize-scheme-theoretically-dense); Schemes Tag 01HV (lemma-spec-sheaves)"
+   }
+  },
+  {
+   "text": "Assume $\\lambda$ injective, hence $\\mu$ injective by Step 1. Fix $g\\in A$. Multiplication by the tuple $f_i/1$ is injective on $A_g$: if $f_i a/g^r=0$ for every $i$, the localization definition gives exponents $k_i$ with $g^{k_i}f_i a=0$. Take $k=\\max_i k_i$ (take $k=0$ for the empty family). Then $\\mu(g^ka)=0$, so $g^ka=0$, and $a/g^r=0$. Applying the already proved ring-algebra equivalence of Steps 1--2 to $A_g$ shows that $A_g\\to\\bigoplus_i(A_g)_{f_i/1}$ is injective.",
+   "uses": [
+    "def-weil-ring-localization-away"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/morphisms.tex; literature/stacks-project/schemes.tex",
+    "place": "Morphisms Tag 056C and Tag 01RE, principal-open verification; fraction argument written out"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-affine-open-section-vanishing-prime](b), $D(g)$ is affine with section ring $A_g$, and its principal open for $f_i/1$ is $D(g)\\cap D(f_i)$, since the prime-ideal description in (a) tests the same element $f_i$. Its section ring is therefore $(A_g)_{f_i/1}$ via restriction. The injectivity from Step 4 says that a section on $D(g)$ vanishing on $D(g)\\cap U$ is zero. The principal opens form a basis by [lem-weil-pbc-spec-localization-away-basic-open](i). For any open $V\\subseteq X$, cover $V$ by these $D(g)\\subseteq V$. A section of $\\mathcal O_X(V)$ vanishing on $V\\cap U$ vanishes on each basis member and hence is zero by the sheaf axiom. Therefore $\\mathcal O_X\\to j_*\\mathcal O_U$ is injective. This also handles the empty family: the assumed injectivity forces $A=0$, so all these section rings are zero.",
+   "uses": [
+    "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "lem-weil-pbc-spec-localization-away-basic-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex; literature/stacks-project/morphisms.tex; literature/stacks-project/schemes.tex",
+    "place": "Morphisms Tags 056C (example-scheme-theoretic-closure), 01RE (lemma-characterize-scheme-theoretically-dense); Schemes Tag 01HV (lemma-spec-sheaves)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-ring-localization-away",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-affine-open-section-vanishing-prime",
+  "def-weil-open-immersion",
+  "lem-weil-pbc-spec-localization-away-basic-open"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex; literature/stacks-project/morphisms.tex",
+  "place": "Tag 0565 (lemma-when-injective-covering), with the principal-open proof of Tags 056C (example-scheme-theoretic-closure) and 01RE (lemma-characterize-scheme-theoretically-dense) written out."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -50,10 +119,45 @@
    "results": "{\"t\": \"2026-10-18T22:07:57Z\", \"tool\": \"leanfinder\", \"query\": \"For a finite family g of elements of a commutative ring R, the union of principal open sets D(g) is schematically dense in Spec R if and only if r maps to (g_i r) injectively\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.iSup_basicOpen_eq_top_iff\", \"AlgebraicGeometry.StructureSheaf.toBasicOpen_injective\", \"AlgebraicGeometry.Scheme.IsGermInjective.Spec\", \"PrimeSpectrum.iSup_basicOpen_eq_top_iff'\", \"AlgebraicGeometry.Scheme.AffineZariskiSite.instIsCoverDenseOpensToOpensFunctorGrothendieckTopologyCarrierCarrierCommRingCat\", \"AlgebraicGeometry.isDominant_of_of_appTop_injective\", \"AlgebraicGeometry.Scheme.Hom.denseRange\", \"AlgebraicGeometry.Scheme.PartialMap.Opens.isDominant_ι\"], \"digest\": \"82271438a1481b9a\"} Read the returned statements: basic-open cover criteria assert coverage of the whole spectrum, not schematic density; toBasicOpen_injective has source A_f, not A; spreading-out and topological dominance results do not give the annihilator criterion. No exact match or one-line specialization.",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsLocalization.Away, Function.Injective",
+   "results": "{\"t\": \"2026-10-18T22:35:49Z\", \"tool\": \"loogle\", \"query\": \"IsLocalization.Away, Function.Injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"IsLocalization.Away.map_injective_iff\", \"IsLocalization.Away.mapₐ_injective_of_injective\", \"injective_of_isLocalization_of_span_eq_top\", \"Polynomial.jacobson_bot_of_integral_localization\", \"Algebra.Generators.liftBaseChange_injective_of_isLocalizationAway\"], \"digest\": \"c9c92f6098f961fc\"} Read candidates: Away.map_injective_iff concerns a map between two localizations; injective_of_isLocalized_span and injective_of_isLocalization_of_span_eq_top assume a unit-ideal cover; toPiLocalization_injective uses all prime local rings; basicOpen_eq_top criteria assert full coverage. None asserts the finite-family common-annihilator and sheaf-injection equivalence.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "injective.*[Aa]way|[Aa]way.*injective|localization.*injective",
+   "results": "{\"t\": \"2026-10-18T22:35:49Z\", \"tool\": \"grep\", \"query\": \"injective.*[Aa]way|[Aa]way.*injective|localization.*injective\", \"sub\": \"RingTheory/Localization\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Localization/Integral.lean\", \"Mathlib/RingTheory/Localization/Integral.lean\", \"Mathlib/RingTheory/Localization/FractionRing.lean\", \"Mathlib/RingTheory/Localization/FractionRing.lean\", \"Mathlib/RingTheory/Localization/FractionRing.lean\", \"Mathlib/RingTheory/Localization/Basic.lean\", \"Mathlib/RingTheory/Localization/Basic.lean\", \"Mathlib/RingTheory/Localization/Basic.lean\"], \"digest\": \"9182dc7b355a1f61\"} Read candidates: Away.map_injective_iff concerns a map between two localizations; injective_of_isLocalized_span and injective_of_isLocalization_of_span_eq_top assume a unit-ideal cover; toPiLocalization_injective uses all prime local rings; basicOpen_eq_top criteria assert full coverage. None asserts the finite-family common-annihilator and sheaf-injection equivalence.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finitely many elements f_i of a commutative ring, injectivity into the product of localizations away from f_i is equivalent to injectivity of a maps to (f_i times a), and to sheaf restriction injectivity on their principal open union",
+   "results": "{\"t\": \"2026-10-18T22:35:50Z\", \"tool\": \"leanfinder\", \"query\": \"For finitely many elements f_i of a commutative ring, injectivity into the product of localizations away from f_i is equivalent to injectivity of a maps to (f_i times a), and to sheaf restriction injectivity on their principal open union\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.StructureSheaf.toBasicOpen_injective\", \"IsLocalization.Away.mapₐ_injective_of_injective\", \"Localization.awayMap_injective_iff\", \"injective_of_isLocalized_span\", \"PrimeSpectrum.toPiLocalization_injective\", \"injective_of_isLocalization_of_span_eq_top\", \"IsLocalization.mapₐ_injective_of_injective\", \"IsLocalization.Away.map_injective_iff\"], \"digest\": \"ea71deb5cc7c9dbe\"} Read candidates: Away.map_injective_iff concerns a map between two localizations; injective_of_isLocalized_span and injective_of_isLocalization_of_span_eq_top assume a unit-ideal cover; toPiLocalization_injective uses all prime local rings; basicOpen_eq_top criteria assert full coverage. None asserts the finite-family common-annihilator and sheaf-injection equivalence.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite family of ring elements has zero common annihilator if and only if the diagonal map into their principal localizations is injective",
+   "results": "{\"t\": \"2026-10-18T22:39:33Z\", \"tool\": \"leansearch\", \"query\": \"A finite family of ring elements has zero common annihilator if and only if the diagonal map into their principal localizations is injective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsLocalization.injective\", \"injective_of_isLocalization_of_span_eq_top\", \"Module.mem_annihilator\", \"IsLocalization.injective_of_map_algebraMap_zero\", \"IsLocalization.Away.map_injective_iff\", \"IsLocalization.map_injective_of_injective'\", \"Module.annihilator\", \"Localization.awayMap_injective_iff\"], \"digest\": \"e5bfee3debcfe3e2\"} Read candidates: Away.map_injective_iff concerns a map between two localizations; injective_of_isLocalized_span and injective_of_isLocalization_of_span_eq_top assume a unit-ideal cover; toPiLocalization_injective uses all prime local rings; basicOpen_eq_top criteria assert full coverage. None asserts the finite-family common-annihilator and sheaf-injection equivalence.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a commutative ring, a finite union of principal opens is schematically dense if and only if the ideal generated by their defining elements has zero annihilator",
+   "results": "{\"t\": \"2026-10-18T22:39:35Z\", \"tool\": \"leanfinder\", \"query\": \"For a commutative ring, a finite union of principal opens is schematically dense if and only if the ideal generated by their defining elements has zero annihilator\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PrimeSpectrum.iSup_basicOpen_eq_top_iff\", \"PrimeSpectrum.iSup_basicOpen_eq_top_iff'\", \"AlgebraicGeometry.Proj.iSup_basicOpen_eq_top\", \"AlgebraicGeometry.IsAffineOpen.basicOpen_union_eq_self_iff\", \"AlgebraicGeometry.iSup_basicOpen_of_span_eq_top\", \"AlgebraicGeometry.IsAffineOpen.iSup_basicOpen_eq_self_iff\", \"AlgebraicGeometry.IsAffineOpen.self_le_basicOpen_union_iff\", \"AlgebraicGeometry.IsAffineOpen.self_le_iSup_basicOpen_iff\"], \"digest\": \"83732844a4a1ae2c\"} Read candidates: Away.map_injective_iff concerns a map between two localizations; injective_of_isLocalized_span and injective_of_isLocalization_of_span_eq_top assume a unit-ideal cover; toPiLocalization_injective uses all prime local rings; basicOpen_eq_top criteria assert full coverage. None asserts the finite-family common-annihilator and sheaf-injection equivalence.",
+   "date": "2026-10-19",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-schematic-density-generic-fibre-open",
@@ -88,5 +192,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-trf-affine-schematic-density-criterion",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Proved the algebra equivalence by explicit strong induction on excess exponents and proved the sheaf equivalence on a principal-open basis using existing section-localization and basis nodes. No new nodes. Checked the empty family, zero ring, nilpotents and reducible rings; recorded actual Mathlib searches.",
+  "blueprint": "Realizes the affine algebra calculation of Tag 0573 in the Tag 0578 generic-fibre input below lem-trf-local-term-locality, retaining the inherited blueprint ancestor and via chain.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-affine-open-section-vanishing-prime",
+    "why": "Uses only its generic clauses (a),(b): the prime description, affineness and principal-open localization of structure-sheaf sections. The trace unit contains no substitute for this affine geometry tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-affine-open-section-vanishing-prime"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q27-dcadbdfeb",
+  "group": "Q27",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-dcadbdfeb (reviewer sub-agent of L); spot-checked: I read the full item (statement, 5 steps, dependencies, blueprint, split_report) and the statements of all five cited nodes. The statement is unchanged and matches its sources: Stacks Tag 0565 (algebra.tex:4405, applied to M=A), Tag 056C and Tag 01RE (morphisms.tex). It has no extra hypothesis, and the finite direct sum is the same as the finite product in 056C. Steps 1-2 follow 0565 exactly. The power-annihilator test comes from the fraction relation of def-weil-ring-localization-away. Step 2 is a properly set-up strong induction on the excess sum E=sum(e_i-1): both recursive calls strictly decrease E, and n=0 is the base case. Step 3 identifies O(X)=A and O(D(f_i))=A_{f_i} through restriction (section-vanishing clause (b), and (a) for the prime description of D(f_i)), so ker(A->O(U))=ker(lambda). This gives sheaf injectivity => lambda injective. Step 4 is an elementary few-line calculation: injectivity of mu passes to every A_g by taking the maximum exponent. Step 5 identifies D(g) intersect D(f_i) as the principal open of f_i/1 in D(g)=Spec A_g with ring (A_g)_{f_i/1}, then uses the basis lemma (i) and the sheaf axiom to get injectivity of O_X -> j_*O_U on every open; only principal opens of one affine scheme are involved. Together the steps prove all directions. All cited nodes are definitions or Mathlib leaves, so the unit route is fine and the declared tool_use is harmless and accepted. Small cases checked: n=0 (all three conditions hold exactly when A=0); k[e]/(e^2) with f=e (all fail); k[x,y]/(xy) with (x,y) (all hold with no individual nonzerodivisor); k[t] with f=t (all hold, so this is not the unit-ideal cover criterion). Duplicate search (0565, 056C, 01RE, scheme-theoretic density): only the parent lem-trf-schematic-density-generic-fibre-open cites it, and the parent uses the item as stated. The other candidates are the n=1 nonzerodivisor node and the Nagata definition, so there is no duplicate. No new nodes and no SGA. No fixes."
  }
 }
