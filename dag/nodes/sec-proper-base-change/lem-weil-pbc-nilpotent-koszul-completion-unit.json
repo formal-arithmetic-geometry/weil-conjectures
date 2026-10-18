@@ -1,0 +1,126 @@
+{
+ "id": "lem-weil-pbc-nilpotent-koszul-completion-unit",
+ "kind": "statement",
+ "title": "The specified Koszul completion unit at nilpotent generators is invertible",
+ "statement": "For any scheme X, commutative ring B, finite list b:Fin r→B, positive a with b_j^a=0 for every j, and arbitrary unbounded complex C of B-module sheaves on X.ProEt, localization of the specified map koszulCompletionUnitComplex is an isomorphism. The construction is that of def-weil-pbc-intrinsic-koszul-completion. No K-flatness or Noetherian hypothesis is needed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.proof.md",
+  "place": "Proof, order 1328, sentences three through seven"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-intrinsic-koszul-completion"
+ ],
+ "proof": [
+  {
+   "text": "Use the graded split-proconstant calculation: the tensor units have degreewise retractions natural in the tower, and each a-step transition factors through them. This identifies the constant cone C with the degreewise limit.",
+   "uses": [
+    "lem-weil-pbc-nilpotent-koszul-graded-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.proof.md",
+    "place": "Proof, order 1328, sentences three through seven"
+   }
+  },
+  {
+   "text": "On each graded product split off the constant part. The shift on its complement has a-th power zero. A finite geometric sum gives a section for one-minus-shift there, while finite partial sums give a section on the constant product. Thus one-minus-shift is degreewise epic, and its kernel is C. The kernel-to-shifted-cone quasi-isomorphism has exactly the components of koszulCompletionUnitComplex; localize it.",
+   "uses": [
+    "lem-weil-degreewise-epi-kernel-cocone-qis",
+    "def-weil-pbc-intrinsic-koszul-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.proof.md",
+    "place": "Proof, order 1328, sentences three through seven"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-nilpotent-koszul-graded-tower",
+  "lem-weil-degreewise-epi-kernel-cocone-qis",
+  "def-weil-pbc-intrinsic-koszul-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.proof.md",
+  "place": "B3: sentences three through seven; concrete interfaces and compiled categorical glue."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The Koszul completion unit is an isomorphism for nilpotent generators",
+   "results": "8 unrelated smooth cotangent and algebra retraction results; no Koszul completion result.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\", \"IsNilpotent\"",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "koszul.*nilpotent|nilpotent.*koszul",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The Koszul completion unit is an isomorphism for nilpotent generators",
+   "results": "8 hits, including IsNilpotent.isUnit_one_sub and isUnit_one_add in Mathlib.RingTheory.Nilpotent.Basic, plus unrelated lifting, exponential and quotient-unit statements. None states nilpotent Koszul completion.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicCompletionReduction",
+  "date": "2026-10-18",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-adic-completion-reduction",
+   "place": "Proof, sentences three through seven",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NilpotentKoszulCompletionUnit",
+  "file": "lean/Sheaf/Paper/NilpotentKoszulCompletionUnit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.nilpotentKoszulCompletionUnit_isIso",
+  "statement": "theorem nilpotentKoszulCompletionUnit_isIso (X : Scheme.{t}) (B : Type t) [CommRing B]\n    (r : ℕ) (b : Fin r → B) (a : ℕ) (ha : 0 < a) (hb : ∀ j, b j ^ a = 0)\n    (C : CochainComplex (SheafOfModules.{t + 1} (adicModuleRing X B)) ℤ) :\n    IsIso ((adicLocalization X B).map (koszulCompletionUnitComplex X B r b C))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-41df4",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261018T134652-L-2769636",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-41df4",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261018T134652-L-2769636",
+  "kind": "interface",
+  "note": "independent cc review: restricted_isIso proof and the koszulCompletionScalarComparison stub (true: Λ/I^(n+1) is perfect, finite-free Koszul base change) against node lem-weil-pbc-adic-completion-reduction-restricted and the new nodes; the 8 relocated declarations byte-identical to live, re-exported via public import; compile clean, axioms checked, no importers"
+ }
+}

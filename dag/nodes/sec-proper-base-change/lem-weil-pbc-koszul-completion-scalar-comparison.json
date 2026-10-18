@@ -1,0 +1,134 @@
+{
+ "id": "lem-weil-pbc-koszul-completion-scalar-comparison",
+ "kind": "statement",
+ "title": "Perfect scalar extension commutes with the specified Koszul completion cone",
+ "statement": "For a complete coefficient datum d over Λ, a finite list f of scalars, a K-flat model M of any derived sheaf K, a K-flat model P of its intrinsic Koszul completion, and n≥0, the reduction of P at Λ/d.ideal^(n+1) is isomorphic to the intrinsic Koszul completion over this quotient of the termwise reduction of M. The isomorphism carries the derived reduction of the original Koszul unit to the specified quotient Koszul unit. The list need not generate the ideal. All complexes, units and transitions are those of def-weil-pbc-intrinsic-koszul-completion; reduction on derived morphisms is that of lem-weil-pbc-adic-reduction-adjunction-hom-equiv.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.proof.md",
+  "place": "Proof, order 1328, first three sentences"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-complete-coefficient-datum",
+  "def-weil-pbc-intrinsic-koszul-completion",
+  "lem-weil-pbc-adic-reduction-adjunction-hom-equiv"
+ ],
+ "proof": [
+  {
+   "text": "Represent the perfect quotient by a bounded finite-projective complex. Its degreewise finite-free retract presentation makes tensor commute with arbitrary products, and bounded totalization uses only finitely many summands per degree. Exact countable products compute derived products. Hence tensor with the perfect quotient commutes with both products in the specified shifted Koszul cone.",
+   "uses": [
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-limit-products-core"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.proof.md",
+    "place": "Proof, order 1328, first three sentences"
+   }
+  },
+  {
+   "text": "Base change of exterior powers identifies the coefficient Koszul complexes, their diagonal transitions and their degree-zero units with those over the quotient. The tensor-cone comparison preserves the unit by its local formula c tensor 1. K-flat realization and the canonical scalar Hom equivalence transport this comparison to P. Use the already proved nonempty_koszulBaseChangeIso for coefficient base change, with its exterior-basis construction to check transition and unit compatibility.",
+   "uses": [
+    "def-weil-pbc-intrinsic-koszul-completion",
+    "lem-weil-pbc-adic-reduction-adjunction-hom-equiv",
+    "lem-sc-koszul-base-change-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.proof.md",
+    "place": "Proof, order 1328, first three sentences"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-limit-products-core",
+  "def-weil-pbc-intrinsic-koszul-completion",
+  "lem-weil-pbc-adic-reduction-adjunction-hom-equiv",
+  "lem-sc-koszul-base-change-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.proof.md",
+  "place": "B3: first three sentences; concrete interfaces and compiled categorical glue."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Perfect derived scalar extension commutes with countable products of complexes and Koszul completion",
+   "results": "8 ordinary AdicCompletion and finite product results; no derived sheaf Koszul comparison.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"PreservesLimits\"",
+   "results": "0 hits.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "perfect.*product|product.*perfect|koszul.*completion",
+   "results": "1 unrelated hit in Mathlib/Topology/Separation/PerfectlyNormal.lean.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect derived scalar extension commutes with countable products of complexes and Koszul completion",
+   "results": "8 hits: CountableAB4Star and instCountableAB4StarOfAB4StarOfSize in Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic; ordinary AdicCompletion, comonadicExtendScalars and a perfect-pairing result. None is the derived sheaf Koszul comparison.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicCompletionReduction",
+  "date": "2026-10-18",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-adic-completion-reduction",
+   "place": "Proof, first three sentences",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.KoszulCompletionScalarComparison",
+  "file": "lean/Sheaf/Paper/KoszulCompletionScalarComparison.lean",
+  "declaration": "AlgebraicGeometry.Scheme.koszulCompletionScalarComparison",
+  "statement": "theorem koszulCompletionScalarComparison (X : Scheme.{t}) {Λ : Type t} [CommRing Λ]\n    (d : CompleteCoefficientDatum Λ) (r : ℕ) (f : Fin r → Λ)\n    {K : proEtaleDerivedCategory X Λ} (M : AdicKFlatModel X Λ K)\n    (P : AdicKFlatModel X Λ\n      ((adicLocalization X Λ).obj (koszulCompletionComplex X Λ r f M.complex))) (n : ℕ) :\n    ∃ e : adicReduction X d P ⟨n + 1, Nat.succ_pos n⟩ ≅\n        (adicLocalization X (Λ ⧸ d.ideal ^ (n + 1))).obj\n          (koszulCompletionComplex X (Λ ⧸ d.ideal ^ (n + 1)) r\n            (fun j ↦ Ideal.Quotient.mk (d.ideal ^ (n + 1)) (f j))\n            (adicChange X (Ideal.Quotient.mk (d.ideal ^ (n + 1))) M.complex)),\n      adicReductionMap X d M P n\n          (M.realization.inv ≫ (adicLocalization X Λ).map\n            (koszulCompletionUnitComplex X Λ r f M.complex)) ≫ e.hom =\n        (adicLocalization X (Λ ⧸ d.ideal ^ (n + 1))).map\n          (koszulCompletionUnitComplex X (Λ ⧸ d.ideal ^ (n + 1)) r\n            (fun j ↦ Ideal.Quotient.mk (d.ideal ^ (n + 1)) (f j))\n            (adicChange X (Ideal.Quotient.mk (d.ideal ^ (n + 1))) M.complex))",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-41df4",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261018T134652-L-2769636",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-41df4",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261018T134652-L-2769636",
+  "kind": "interface",
+  "note": "independent cc review: restricted_isIso proof and the koszulCompletionScalarComparison stub (true: Λ/I^(n+1) is perfect, finite-free Koszul base change) against node lem-weil-pbc-adic-completion-reduction-restricted and the new nodes; the 8 relocated declarations byte-identical to live, re-exported via public import; compile clean, axioms checked, no importers"
+ }
+}

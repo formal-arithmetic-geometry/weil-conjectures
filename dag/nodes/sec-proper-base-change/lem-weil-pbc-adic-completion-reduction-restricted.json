@@ -44,38 +44,57 @@
   }
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.md",
-  "place": "Proof step 6"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.proof.md",
+  "place": "B3: the canonical completion/reduction unit retraction combines scalar comparison and nilpotent Koszul completion; no tail removal or abstract strict-tower limit is used.",
+  "by": "agent"
  },
  "id": "lem-weil-pbc-adic-completion-reduction-restricted",
  "title": "Restricted completion reduction is an isomorphism",
  "statement": "After applying adicDerivedRestrict to the quotient coefficient ring, the morphism adicCompletionReduction is an isomorphism.",
  "proof": [
   {
-   "text": "Use the K-flat model, replace the quotient tower by the intrinsic Koszul tower, and tensor a bounded finite-projective resolution of the perfect quotient. Exact countable products commute with these finite projective tensors. On the tail all Koszul differentials vanish; negative degree towers are pro-zero and the degree-zero tower is constant, whose product-cone fibre is the diagonal object. The resulting evaluation adjoint is an isomorphism after restriction of scalars.",
+   "text": "Choose finite generators and apply koszulQuotientLimit with its unit compatibility. Choose a K-flat model of the Koszul completion and apply the perfect scalar comparison. The images of the generators in Λ/I^(n+1) have (n+1)-st powers zero, by membership in the ideal power.",
    "uses": [
     "lemma-weil-pbc-koszul-quotient-limit",
-    "def-weil-pbc-intrinsic-koszul-completion",
-    "def-weil-pbc-strict-perfect-coefficient-package",
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-derived-limit-products-core",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+    "lem-weil-pbc-koszul-completion-scalar-comparison"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.md",
-    "place": "Proof, order 1260"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.proof.md",
+    "place": "Proof, order 1328"
+   }
+  },
+  {
+   "text": "The nilpotent Koszul unit is an isomorphism. Its scalar comparison square shows that reduction of the original Koszul unit is an isomorphism. Reduction respects composition and carries the Koszul-to-quotient-completion comparison isomorphism to an isomorphism. Consequently reduction of adicCompletionMap is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-nilpotent-koszul-completion-unit",
+    "lem-weil-pbc-adic-reduction-adjunction-hom-equiv"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.proof.md",
+    "place": "Proof, order 1328"
+   }
+  },
+  {
+   "text": "Apply the scalar Hom equivalence to the composite of reduction of the completion map and the evaluation adjoint. Its unit formula and adicCompletionMap_projection identify this composite with identity. Since its first factor is invertible, the evaluation adjoint is invertible; exact restriction preserves this isomorphism.",
+   "uses": [
+    "lem-weil-pbc-adic-reduction-adjunction-hom-equiv",
+    "def-weil-pbc-completion-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.proof.md",
+    "place": "Proof, order 1328"
    }
   }
  ],
  "proof_deps": [
   "lemma-weil-pbc-koszul-quotient-limit",
-  "def-weil-pbc-intrinsic-koszul-completion",
-  "def-weil-pbc-strict-perfect-coefficient-package",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-derived-limit-products-core",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+  "lem-weil-pbc-koszul-completion-scalar-comparison",
+  "lem-weil-pbc-nilpotent-koszul-completion-unit",
+  "lem-weil-pbc-adic-reduction-adjunction-hom-equiv",
+  "def-weil-pbc-completion-map"
  ],
  "lean": {
   "existing": false,
@@ -111,18 +130,11 @@
  "reviewed_proof": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D4",
+  "reviewer": "C-41df4",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261018T102313-L-4076185",
+  "landing": "20261018T134652-L-2769636",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.adicCompletionReduction_restricted_isIso",
-   "AlgebraicGeometry.Scheme.adicReductionAdjunction_homEquiv_exists"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.adicCompletionReduction_restricted_isIso"
-  ]
+  "note": "independent cc review: restricted_isIso proof and the koszulCompletionScalarComparison stub (true: Λ/I^(n+1) is perfect, finite-free Koszul base change) against node lem-weil-pbc-adic-completion-reduction-restricted and the new nodes; the 8 relocated declarations byte-identical to live, re-exported via public import; compile clean, axioms checked, no importers"
  }
 }

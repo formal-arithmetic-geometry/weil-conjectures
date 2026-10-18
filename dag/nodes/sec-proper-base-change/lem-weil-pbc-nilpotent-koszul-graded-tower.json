@@ -1,0 +1,125 @@
+{
+ "id": "lem-weil-pbc-nilpotent-koszul-graded-tower",
+ "kind": "statement",
+ "title": "The nilpotent Koszul tensor tower is graded split proconstant",
+ "statement": "For any scheme X, commutative ring B, finite list b:Fin r→B, positive a with b_j^a=0, and complex C, let T be the tower of complexes koszulTensor X B r b C with its specified transitions (def-weil-pbc-intrinsic-koszul-completion). For every cochain degree p there is a natural transformation β_p from the evaluated tower T^p to the constant object C^p, such that the tensor-unit component followed by β_p is identity and every a-step transition T_(n+a)^p→T_n^p equals β_(n+a),p followed by the tensor-unit component at n. These are graded retractions and need not be chain maps.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.proof.md",
+  "place": "Proof, order 1328, sentences three through five"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-intrinsic-koszul-completion"
+ ],
+ "proof": [
+  {
+   "text": "Project the total tensor onto its summand with exterior degree zero. The coefficient unit identifies this summand with C^p. Exterior degree zero is the coefficient ring and its transition is identity; this gives the splitting and naturality.",
+   "uses": [
+    "def-weil-pbc-intrinsic-koszul-completion",
+    "lemma-weil-pbc-koszul-quotient-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.proof.md",
+    "place": "Proof, order 1328, sentences three through five"
+   }
+  },
+  {
+   "text": "On the generator module the diagonal map e_j↦b_j e_j has a-th power zero, by evaluation on Finsupp.single. Functoriality of exterior powers shows that the composite of a transitions vanishes in each positive exterior degree, while the zeroth exterior power is identity. Reindex to the cochain complex, apply constant sheafification and tensor with C. The coproduct inclusions characterize total-degree maps, giving exactly the asserted factorization.",
+   "uses": [
+    "def-weil-pbc-intrinsic-koszul-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.proof.md",
+    "place": "Proof, order 1328, sentences three through five"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-intrinsic-koszul-completion",
+  "lemma-weil-pbc-koszul-quotient-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.proof.md",
+  "place": "B3: sentences three through five; concrete interfaces and compiled categorical glue."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exterior powers of a nilpotent diagonal map vanish after a uniform number of transitions",
+   "results": "8 nilpotence and exterior-algebra results, none the graded Koszul tower assertion.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"exteriorPower.map\"",
+   "results": "12 hits including exteriorPower.map_id, map_comp and map_comp_ιMulti, used in the proof.",
+   "date": "2026-10-18",
+   "verdict": "partial ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "exteriorPower.map|linearCombination_single",
+   "results": "25 hits including Finsupp.linearCombination_single and exteriorPower functoriality; these give elementary ingredients, not the full statement.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exterior powers of a nilpotent diagonal map vanish after a uniform number of transitions",
+   "results": "8 hits including exteriorPower.map and map_comp in Mathlib.LinearAlgebra.ExteriorPower.Basic, and ModuleCat exterior-power functors and iso₀. These are ingredients already used, not the graded tower assertion.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicCompletionReduction",
+  "date": "2026-10-18",
+  "group": "B3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-adic-completion-reduction",
+   "place": "Proof, sentences three through five",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.NilpotentKoszulGradedTower",
+  "file": "lean/Sheaf/Paper/NilpotentKoszulGradedTower.lean",
+  "declaration": "AlgebraicGeometry.Scheme.nilpotentKoszulGradedTower",
+  "statement": "theorem nilpotentKoszulGradedTower (X : Scheme.{t}) (B : Type t) [CommRing B]\n    (r : ℕ) (b : Fin r → B) (a : ℕ) (_ha : 0 < a) (hb : ∀ j, b j ^ a = 0)\n    (C : CochainComplex (SheafOfModules.{t + 1} (adicModuleRing X B)) ℤ) :\n    let T := Functor.ofOpSequence (koszulTensorTransition X B r b C)\n    ∃ β : ∀ p : ℤ,\n        (T ⋙ HomologicalComplex.eval _ (.up ℤ) p) ⟶\n          (Functor.const ℕᵒᵖ).obj (C.X p),\n      (∀ n p, (koszulTensorUnit X B r b C n).f p ≫ (β p).app (op n) = 𝟙 (C.X p)) ∧\n      (∀ n p, (T.map (homOfLE (Nat.le_add_right n a)).op).f p =\n        (β p).app (op (n + a)) ≫ (koszulTensorUnit X B r b C n).f p)",
+  "branch": "sheaf-dag",
+  "by": "B3",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-41df4",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261018T134652-L-2769636",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "C-41df4",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261018T134652-L-2769636",
+  "kind": "interface",
+  "note": "independent cc review: restricted_isIso proof and the koszulCompletionScalarComparison stub (true: Λ/I^(n+1) is perfect, finite-free Koszul base change) against node lem-weil-pbc-adic-completion-reduction-restricted and the new nodes; the 8 relocated declarations byte-identical to live, re-exported via public import; compile clean, axioms checked, no importers"
+ }
+}

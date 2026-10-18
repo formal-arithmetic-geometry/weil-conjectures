@@ -44,9 +44,9 @@
   }
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.md",
-  "place": "Proof step 6; D4 reuses the proved generic scalar-adjunction helpers and proves the localization-unit comparison in Lean."
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.proof.md",
+  "place": "D4 adjunction proof preserved; B3 relocates the API unchanged and proves its morphism laws.",
+  "by": "agent"
  },
  "id": "lem-weil-pbc-adic-reduction-adjunction-hom-equiv",
  "title": "Canonical derived scalar Hom equivalence",
@@ -75,6 +75,15 @@
     "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.md",
     "place": "Proof step 6, identification of the specified tensor unit and adjoint"
    }
+  },
+  {
+   "text": "Define the reduction of an arbitrary derived morphism by the inverse canonical Hom equivalence applied to postcomposition with the target unit. Injectivity proves the unit square, identity and composition laws, and reduction preserves isomorphisms by reducing an inverse.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.proof.md",
+    "place": "Proof, order 1328"
+   }
   }
  ],
  "proof_deps": [
@@ -85,13 +94,27 @@
  ],
  "lean": {
   "existing": false,
-  "module": "Sheaf.Paper.AdicCompletionReduction",
-  "file": "lean/Sheaf/Paper/AdicCompletionReduction.lean",
+  "module": "Sheaf.Paper.AdicReductionAdjunction",
+  "file": "lean/Sheaf/Paper/AdicReductionAdjunction.lean",
   "declaration": "AlgebraicGeometry.Scheme.adicReductionAdjunction_homEquiv_exists",
   "statement": "theorem adicReductionAdjunction_homEquiv_exists (X : Scheme.{t}) {Λ : Type t} [CommRing Λ] (d : CompleteCoefficientDatum Λ) {L : proEtaleDerivedCategory X Λ} (N : AdicKFlatModel X Λ L) (n : ℕ) (H : proEtaleDerivedCategory X (Λ ⧸ d.ideal ^ (n + 1))) : ∃ e : (adicReduction X d N ⟨n + 1, Nat.succ_pos n⟩ ⟶ H) ≃ (L ⟶ (adicDerivedRestrict X (Ideal.Quotient.mk (d.ideal ^ (n + 1)))).obj H), ∀ f, e f = adicReductionDerivedUnit X d N n ≫ (adicDerivedRestrict X (Ideal.Quotient.mk (d.ideal ^ (n + 1)))).map f",
   "branch": "sheaf-dag",
-  "by": "E3",
-  "date": "2026-10-18"
+  "by": "B3",
+  "date": "2026-10-18",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.adicRestrictScalars_exact",
+   "AlgebraicGeometry.Scheme.adicDerivedRestrict",
+   "AlgebraicGeometry.Scheme.adicDerivedRestrictFactors",
+   "AlgebraicGeometry.Scheme.adicReductionDerivedUnit",
+   "AlgebraicGeometry.Scheme.adicReductionAdjunction_homEquiv_exists",
+   "AlgebraicGeometry.Scheme.adicReductionAdjunction_bijective",
+   "AlgebraicGeometry.Scheme.adicReductionHomEquiv",
+   "AlgebraicGeometry.Scheme.adicReductionMap",
+   "AlgebraicGeometry.Scheme.adicReductionMap_unit",
+   "AlgebraicGeometry.Scheme.adicReductionMap_comp",
+   "AlgebraicGeometry.Scheme.adicReductionMap_id",
+   "AlgebraicGeometry.Scheme.adicReductionMap_isIso"
+  ]
  },
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
@@ -117,11 +140,11 @@
  "reviewed_proof": {
   "date": "2026-10-18",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D4",
+  "reviewer": "C-41df4",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261018T102313-L-4076185",
+  "landing": "20261018T134652-L-2769636",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: restricted_isIso proof and the koszulCompletionScalarComparison stub (true: Λ/I^(n+1) is perfect, finite-free Koszul base change) against node lem-weil-pbc-adic-completion-reduction-restricted and the new nodes; the 8 relocated declarations byte-identical to live, re-exported via public import; compile clean, axioms checked, no importers"
  }
 }
