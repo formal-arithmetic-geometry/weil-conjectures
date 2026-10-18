@@ -1,0 +1,129 @@
+{
+ "id": "lem-etale-upper-shriek-quasicompact-bounded-below",
+ "kind": "statement",
+ "title": "Bounded-below exceptional pullback over a quasi-compact target",
+ "statement": "Let X and Y be schemes [def-weil-scheme-morphism-properties], f : X → Y a morphism admitting a compactification, Y quasi-compact, and Λ a finite commutative ring. For the chosen ordinary étale lower shriek on unbounded derived categories [def-weil-pbc-derived-categories], Rf_! is a left adjoint and its chosen right adjoint Rf^! preserves globally bounded-below objects. This is the proposition HasBoundedBelowUpperShriek (ModuleCat Λ) f. The quasi-compactness hypothesis is essential.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "lemma-proper-mod-n-direct-sums and lemma-cohomological-dimension-proper; morphisms.tex lemma-morphism-finite-type-bounded-dimension; derived.tex Tag 07K7, lemma-unbounded-right-derived (4)(c); SGA 4 XVIII 3.1.7 adjunction argument"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-derived-categories"
+ ],
+ "proof": [
+  {
+   "text": "Take the chosen compactification X → Z → Y, with proper map g. The finite-type fibre-dimension bound supplies d with all fibres of g of dimension ≤ d, since Y is quasi-compact. Base extension of a finite-type scheme over a field preserves its dimension, so every geometric fibre also has dimension ≤ d.",
+   "uses": [
+    "lem-fin-finite-type-fibre-dimension-bound"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a sheaf G and q>2d, proper base change identifies the geometric-point pullback of R^q g_* G with the higher direct image of its restriction to the geometric fibre. Apply the relative torsion direct-image dimension bound to this proper scheme over the algebraic closure of the residue field. The resulting sheaf is zero. Geometric points detect zero sheaves, so R^q g_* G=0 globally, uniformly in G.",
+   "uses": [
+    "thm-weil-pbc-bounded-below",
+    "lem-kun-relative-torsion-direct-image-dimension-bound"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The upper-amplitude theorem for unbounded derived functors now puts Rg_* L in D^(≤ n+2d) whenever L lies in D^(≤n). Exact extension by zero preserves D^(≤n), so the chosen Rf_! = D(i_!) ⋙ Rg_* has the same upper-amplitude bound.",
+   "uses": [
+    "lem-etale-derived-functor-upper-amplitude"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite coefficients give the ordinary left-adjoint instance. Apply the already proved amplitude-to-adjoint theorem with N=2d. Orthogonality and adjunction put Rf^! K in D^(≥ n-2d) whenever K lies in D^(≥n). This supplies the bounded-below instance without changing its statement.",
+   "uses": [
+    "lem-etale-upper-shriek-bounded-below-from-amplitude"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-fin-finite-type-fibre-dimension-bound",
+  "thm-weil-pbc-bounded-below",
+  "lem-kun-relative-torsion-direct-image-dimension-bound",
+  "lem-etale-derived-functor-upper-amplitude",
+  "lem-etale-upper-shriek-bounded-below-from-amplitude"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "lemma-proper-mod-n-direct-sums and lemma-cohomological-dimension-proper; morphisms.tex lemma-morphism-finite-type-bounded-dimension; derived.tex Tag 07K7, lemma-unbounded-right-derived (4)(c); SGA 4 XVIII 3.1.7 adjunction argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A left exact additive functor of finite cohomological dimension d has unbounded right derived functor of upper cohomological amplitude d",
+   "results": "8 hits, including Functor.rightDerived and leftExactFunctor; none states the unbounded amplitude theorem.",
+   "date": "2026-10-18",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"IsLE\"",
+   "results": "3 Kan-extension and right-derived-functor hits; no amplitude theorem.",
+   "date": "2026-10-18",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "isLE.*rightDerivedFunctor|rightDerivedFunctor.*isLE|HasFiniteCohomologicalDimension",
+   "results": "No unbounded amplitude theorem in Mathlib; project FiniteCohomologicalDimension provides the cycle-sequence and K-injective comparison APIs.",
+   "date": "2026-10-18",
+   "verdict": "Build the amplitude argument from the existing APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.Derived.UpperShriek",
+  "date": "2026-10-18",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-amb-etale-exceptional-adjoint",
+   "place": "Bounded-below preservation variant in the source UpperShriek module: the finite upper-amplitude argument.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.UpperShriek",
+  "file": "lean/WeilConjectures/SixFunctors/Etale/Derived/UpperShriek.lean",
+  "declaration": "AlgebraicGeometry.Etale.hasBoundedBelowUpperShriek",
+  "statement": "instance hasBoundedBelowUpperShriek [CompactSpace Y] (Λ : Type (u + 1)) [CommRing Λ]\n    [Finite Λ] : HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261018T062708-L-634121",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261018T062708-L-634121",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

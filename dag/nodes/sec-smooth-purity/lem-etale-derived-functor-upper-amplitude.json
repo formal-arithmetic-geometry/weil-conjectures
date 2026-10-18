@@ -1,0 +1,121 @@
+{
+ "id": "lem-etale-derived-functor-upper-amplitude",
+ "kind": "statement",
+ "title": "Upper amplitude from finite classical cohomological dimension",
+ "statement": "Let C be a Grothendieck abelian category [def-sp-grothendieck-abelian] and D an abelian category [def-sp-abelian], with chosen unbounded derived categories [def-weil-abstract-derived-category], injective resolutions and K-injective resolutions [def-sp-kinjective-bridge] in C. Let F : C → D be additive and left exact [def-sp-left-exact-additive]. Suppose d is a natural number and R^q F(M) = 0 for every object M and every q > d. For every integer b and L in D(C) whose cohomology vanishes above b, the cohomology of RF(L) vanishes above b+d. No lower bound on L is assumed.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 07K7, lemma-unbounded-right-derived, part (4)(c), lines 9977-10105; dimension-shifting proof on cycles"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category",
+  "def-sp-left-exact-additive",
+  "def-sp-grothendieck-abelian",
+  "def-sp-kinjective-bridge"
+ ],
+ "proof": [
+  {
+   "text": "Represent L by a K-injective complex I with injective components, using the functorial K-injective resolution. The representing isomorphism transports the upper bound b to I.",
+   "uses": [
+    "lem-weil-pbc-kinjective-functorial-existence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For k ≥ 0 prove that R^(q+1) F(Z^n I) vanishes if n ≥ b+k and d ≤ q+k. At k=0 use the cohomological-dimension bound. For the successor, exactness of I at n gives the short exact sequence 0 → Z^(n-1) I → I^(n-1) → Z^n I → 0. Since the middle term is F-acyclic, the connecting map injects R^(q+1) F(Z^n I) into R^(q+2) F(Z^(n-1) I). Apply induction. At k=d every cycle in degree n ≥ b+d is F-acyclic.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "For m>b+d put n=m-1. The cycles sequence is short exact and Z^n I is F-acyclic; left exactness and the derived connecting sequence show that F preserves this short exact sequence. Preservation of the kernel of I^m → I^(m+1) identifies its image with the kernel, so F(I) is exact at m. Thus F(I) is bounded above by b+d.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The existing K-injective comparison RF(QI) ≅ Q(FI) and the representing isomorphism for L transport this bound to RF(L). The proof includes d=0, negative b, and zero complexes.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-kinjective-functorial-existence"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 07K7, lemma-unbounded-right-derived, part (4)(c), lines 9977-10105; dimension-shifting proof on cycles"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A left exact additive functor of finite cohomological dimension d has unbounded right derived functor of upper cohomological amplitude d",
+   "results": "8 hits, including Functor.rightDerived and leftExactFunctor; none states the unbounded amplitude theorem.",
+   "date": "2026-10-18",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"IsLE\"",
+   "results": "3 Kan-extension and right-derived-functor hits; no amplitude theorem.",
+   "date": "2026-10-18",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "isLE.*rightDerivedFunctor|rightDerivedFunctor.*isLE|HasFiniteCohomologicalDimension",
+   "results": "No unbounded amplitude theorem in Mathlib; project FiniteCohomologicalDimension provides the cycle-sequence and K-injective comparison APIs.",
+   "date": "2026-10-18",
+   "verdict": "Build the amplitude argument from the existing APIs."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "WeilConjectures.SixFunctors.Etale.Derived.UpperShriek",
+  "date": "2026-10-18",
+  "group": "C1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-amb-etale-exceptional-adjoint",
+   "place": "Bounded-below preservation variant in the source UpperShriek module: the finite upper-amplitude argument.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RightDerivedFunctorUpperBound",
+  "file": "lean/Sheaf/CategoryTheory/RightDerivedFunctorUpperBound.lean",
+  "declaration": "CategoryTheory.Functor.isLE_rightDerivedFunctor_obj_of_dimension",
+  "statement": "theorem isLE_rightDerivedFunctor_obj_of_dimension\n    (d : ℕ) (hF : ∀ (X : C) (q : ℕ), d < q → IsZero ((F.rightDerived q).obj X))\n    (L : DerivedCategory C) (b : ℤ) (hL : DerivedCategory.TStructure.t.IsLE L b) :\n    DerivedCategory.TStructure.t.IsLE (F.rightDerivedFunctor.obj L) (b + d)",
+  "branch": "sheaf-dag",
+  "by": "C1",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261018T062708-L-634121",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C1",
+  "result": "pass",
+  "landing": "20261018T062708-L-634121",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
