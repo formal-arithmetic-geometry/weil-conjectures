@@ -1,0 +1,153 @@
+{
+ "id": "lem-sfb-dc-tensor-single",
+ "kind": "statement",
+ "title": "Tensor of constructible single-sheaf complexes",
+ "statement": "In [sk-def-sfb-dc-setting], let Λ satisfy IsEllAdicFinitenessCoefficient ell Λ. If F and G are constructible Λ_X-module objects, then F[0] tensor-derived G[0] is bounded constructible. Constructibility here is stratified local finite presentation for the given pulled-back condensed coefficient ring.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definitions 6.8.6, 6.8.10 and Proposition 6.8.11(3); lem-sfb-dc-tensor-preserves, steps 1--9"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "sk-def-sfb-bounded-constructible"
+ ],
+ "proof": [
+  {
+   "text": "The finite-type scheme over a field is noetherian: infer local noetherianity from locally finite type and compactness from quasi-compactness of the structure map. Refine the two constructible finite stratifications by common_lfp_stratification. Each stratum has noetherian underlying space because its immersion is a topological embedding.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-condensed-constructible-serre",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the local presentation hypotheses from raw inverse-image coefficients to normalized condensed coefficients on each stratum by localFinitePresentation_comap and Mod.extendScalarsIsoComapInv. Exact monoidal inverse image commutes with single sheaves, tensor and homology. The local tensor calculation gives lower bound minus one and locally finitely presented homology on each stratum.",
+   "uses": [
+    "lem-sfb-lfp-tensor-single",
+    "lem-weil-pbc-module-constructible-pullback",
+    "sk-prop-sfb-cartesian-coefficients",
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "DerivedCategory.isLE_tensor gives the tensor of two degree-zero sheaves upper bound zero. Below minus one the normalized pullbacks of homology vanish by the local calculation. Transport through coefficient equivalences and forget to abelian sheaves. The proved abDetectMaps helper detects maps along a finite jointly surjective family of quasi-compact strata, so the global homology identity is zero. The local tensor lemma has already descended its bound from its own pro-etale covers.",
+   "uses": [
+    "sk-def-sfb-derived-tensor-hom",
+    "lem-weil-pbc-proetale-abelian-closed-support"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport each homology presentation back to the raw inverse-image coefficient ring. The common finite stratification witnesses constructibility of every global homology module. The interval [-1,0] gives boundedness. Apply mem_boundedConstructible_iff to combine these with the unchanged constructibility predicate.",
+   "uses": [
+    "lem-weil-pbc-module-constructible-pullback",
+    "sk-def-sfb-constructible",
+    "sk-def-sfb-bounded-constructible"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-condensed-constructible-serre",
+  "sk-def-sfb-constructible",
+  "lem-sfb-lfp-tensor-single",
+  "lem-weil-pbc-module-constructible-pullback",
+  "sk-prop-sfb-cartesian-coefficients",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-derived-tensor-hom",
+  "lem-weil-pbc-proetale-abelian-closed-support",
+  "sk-def-sfb-bounded-constructible"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "C4",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.10 and Proposition 6.8.11(3), local finite projective resolution and tensor calculation",
+  "note": "The scalar constant-model/Smith-form route is replaced by the existing locally finite free integral resolution and weak Serre homology argument. Both new local tensor lemmas are completely proved. Raw/normalized coefficient comparisons and finite-stratum detection are explicit in Lean. The theorem statement and unit route are unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor of constructible sheaves over ell-adic coefficient rings is bounded constructible",
+   "date": "2026-10-18",
+   "results": "Hits: Condensed.instAB4CondensedMod, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, PiTensorProduct.dualSeminorms_bounded, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, SheafOfModules.hasLimitsOfSize, Condensed.instAB4StarCondensedMod, LightCondensed.instCountableAB4StarLightCondMod, SheafOfModules.hasLimit",
+   "verdict": "No exact theorem for this constructible module-object assertion; use the general derived-category APIs and the stated project lemmas."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor of two bounded constructible complexes of sheaves with field or discrete valuation ring coefficients",
+   "date": "2026-10-18",
+   "results": "Hits: LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.HasTensor, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategoryLightCondMod, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, HomologicalComplex.HasGoodTensor₂₃, LightCondensed.instMonoidalLightCondSetLightCondModFree",
+   "verdict": "No exact theorem for this constructible module-object assertion; use the general derived-category APIs and the stated project lemmas."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"IsTriangulated\"",
+   "date": "2026-10-18",
+   "results": "Hits: DerivedCategory.instIsTriangulated, DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh, DerivedCategory.Plus.instIsTriangulatedPlusQh, CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory",
+   "verdict": "No exact theorem for this constructible module-object assertion; use the general derived-category APIs and the stated project lemmas."
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(tensor|pushforward|homology)|isGE.*adjunction|isTriangulated.*bounded",
+   "date": "2026-10-18",
+   "results": "No hits.",
+   "verdict": "No exact theorem for this constructible module-object assertion; use the general derived-category APIs and the stated project lemmas."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BoundedConstructibleTensorSingle",
+  "date": "2026-10-18",
+  "group": "C4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-def-sfb-dc-restricted-functors",
+   "place": "Tensor of constructible single-sheaf complexes",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BoundedConstructibleTensorSingle",
+  "file": "lean/Sheaf/AlgebraicGeometry/BoundedConstructibleTensorSingle.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_tensor_single",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructible_tensor_single"
+  ],
+  "statement": "theorem boundedConstructible_tensor_single\n    {ℓ : ℕ} [IsEllAdicFinitenessCoefficient ℓ Λ] [Fact (ringChar k ≠ ℓ)]\n    (F G : Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1})\n      (condensedRingObj Λ X.left))\n    (hF : IsConstructibleModuleObject (condensedRingObj Λ X.left) F)\n    (hG : IsConstructibleModuleObject (condensedRingObj Λ X.left) G) :\n    boundedConstructible (condensedRingObj Λ X.left)\n      ((DerivedCategory.singleFunctor _ 0).obj F ⊗\n        (DerivedCategory.singleFunctor _ 0).obj G)",
+  "branch": "sheaf-dag",
+  "by": "C4",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261018T112413-L-631415",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C4",
+  "result": "pass",
+  "landing": "20261018T112413-L-631415",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
