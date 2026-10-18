@@ -1,6 +1,6 @@
 # Work queue
 
-20 items; claim with `tools/claim.py next <group> [--stage N]`.
+19 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,11 +8,10 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (20)
+## Stage 3: modules to prove (19)
 
 | module | distance to a target | sorry | kind |
 |---|---|---|---|
-| `WeilConjectures.PoincareDuality.Poincare` | 0 | 1 | disputed |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 3 | proof |
 | `WeilConjectures.WeilSheaf.PoincareDuality` | 3 | 1 | proof |
 | `Sheaf.WeilSheaf.AdicFiniteCoefficientBound` | 4 | 1 | proof |
@@ -54,4 +53,4 @@ Not items: a node in the proof dependencies has no Lean statement yet (the human
 | `WeilConjectures.DeligneLaumon.AffineLine.Exactness` | 7 | 1 | `lem-dl-a1-constructible-fibres-exact` |
 | `WeilConjectures.DeligneLaumon.AffineLine.MiddleExtension` | 8 | 4 | `lem-a1-qbar-open-closed-cohomology` |
 | `WeilConjectures.DeligneLaumon.AffineLine.Perverse` | 9 | 4 | `lem-a1-qbar-open-closed-cohomology` |
-| `WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension` | 9 | 3 | `lem-a1-finite-map-lisse` |
+| `WeilConjectures.DeligneLaumon.AffineLine.ZeroExtension` | 9 | 3 | `lem-trf-rational-local-frobenius-powers` |
