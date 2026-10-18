@@ -13,11 +13,212 @@
   "def-pc-integral-scheme",
   "def-weil-residue-field",
   "def-per-potential-dualizing-complex",
-  "def-weil-pbc-derived-categories"
+  "def-weil-pbc-derived-categories",
+  "def-sbc-standard-tstructure-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Prepare the strict-local reduction. For a geometric point $\\bar x$ of $X$, choose a normal affine neighbourhood $\\operatorname{Spec}A$ and put $S=X_{(\\bar x)}=\\operatorname{Spec}(\\mathcal O_{X,x}^{sh})$. Localization preserves Noetherianity and excellence. The strict-henselization triples give a local filtered colimit of etale $A$-algebras, hence a normal domain with injective map from $A$. Its Noetherianity follows from that of $\\mathcal O_{X,x}$. It is excellent because an ind-etale map is weakly etale and a Noetherian weakly etale algebra over an excellent ring is excellent. Thus $S$ is again Noetherian excellent normal integral, its generic point maps to $\\eta$, and $\\ell$ remains invertible. All these arguments also apply to strict localizations of $S$ and of its open subschemes.",
+   "uses": [
+    "lem-weil-pbc-localization-noetherian",
+    "lem-exc-finite-type-localization-excellent",
+    "lem-weil-pbc-strict-henselization-triples",
+    "lem-weil-pbc-etale-colimit-normal-local-domain",
+    "lem-sc-strict-henselization-noetherian",
+    "lem-weil-pbc-ind-etale-stability",
+    "lem-exc-weakly-etale-excellent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Lemma 3.6.4, first reduction; 2.2.1 and following paragraph (strict localization)."
+   }
+  },
+  {
+   "text": "Record the local data the induction uses, without asserting that a restriction of $K$ carries pinnings on residue-field sites. For a geometric point $\\bar x$ over $x\\in X$ put $S=X_{(\\bar x)}$, $u:S\\to X$ and $K_S=u^*K$, which lies in $D^+(S_{\\mathrm{et}},\\Lambda)$ because inverse image is exact and preserves the constant ring. (i) Generic pinning: the generic point $\\eta_S$ lies over $\\eta$ (step 1), and pulling $p_\\eta$ back along $\\eta_S\\to\\eta$ gives $p_{\\eta_S}:K_S|_{\\eta_S}\\simeq\\Lambda_{\\eta_S}$. (ii) Closed costalk: the closed point $s$ has separably closed residue field, so sheaves on $s_{\\mathrm{et}}$ are $\\Lambda$-modules and $R\\Gamma_sK_S=i_s^!K_S$; the prime-power costalk reduction identifies it with the geometric fibre $C_{\\bar x}(K)$, and the geometric fibre of $p_x$ gives $q_{\\bar x}:i_s^!K_S\\simeq\\Lambda(\\delta(x))[2\\delta(x)]$. (iii) Transitivity: $u$ is ind-etale, being on an affine chart the filtered colimit of etale algebras of the triples, and so is an open immersion of $S$ or a localization (a colimit of principal opens). For a geometric point $\\bar z$ of $S$, or of an open $U\\subset S$, strict-local invariance gives an $X$-isomorphism $U_{(\\bar z)}\\simeq S_{(\\bar z)}\\simeq X_{(u\\bar z)}$; under it the restriction of $K_S$ is that of $K$, and by functoriality of inverse image along $\\eta_{X_{(u\\bar z)}}\\to\\eta_S\\to\\eta$ the pulled-back generic pinnings agree. The transition equalities of the definition and pinnings at non-closed points of $S$ are not used below.",
+   "uses": [
+    "lem-trf-ind-etale-strict-local-invariance",
+    "lem-per-prime-power-costalk-reduction",
+    "def-per-potential-dualizing-complex",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Proposition 2.2.1 and its following paragraph; Definitions 1.4.1 and 2.1.2."
+   }
+  },
+  {
+   "text": "Fix the canonical comparison before proving it is invertible. Write $a:\\eta\\to X$ and let $p_\\eta:a^*K\\simeq\\Lambda_\\eta$ be the generic pinning. Exact inverse image and its compatibility with cohomology give $a^*\\mathcal H^0K\\simeq\\Lambda_\\eta$. By the sheaf adjunction define $b_X:\\mathcal H^0K\\to a_*\\Lambda_\\eta$ to be the map adjoint to this isomorphism, and set $\\beta_X=c_a^{-1}b_X:\\mathcal H^0K\\to\\Lambda_X$, where $c_a:\\Lambda_X\\simeq a_*\\Lambda_\\eta$ is the normal-constant-generic isomorphism. This construction does not assume nonnegativity. It commutes with restriction to a normal integral localization or strict localization: the comparison $u^*a_*\\Lambda_\\eta\\to a'_*\\Lambda_{\\eta'}$ sends the pullback of the constant section $\\lambda$ to the same section $\\lambda$, so under $c_a,c_{a'}$ it is the identity of $\\Lambda_Y$; adjunction then identifies $u^*\\beta_X$ with $\\beta_Y$.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-normal-constant-generic"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 3.6.4, generic pinning and final sentence; Stacks 09Z5, lemma-push-constant-sheaf-from-open."
+   }
+  },
+  {
+   "text": "Compute $\\delta$ on $X$ and set up the induction. For $x\\in X$ the Noetherian local domain $\\mathcal O_{X,x}$ has finite dimension $r$; choose a chain $0=\\mathfrak p_0\\subsetneq\\cdots\\subsetneq\\mathfrak p_r=\\mathfrak m_x$ of maximal length, with points $y_0=\\eta,\\dots,y_r=x$. Each link is saturated, so the closure $Z_k$ of $y_k$ has $\\dim\\mathcal O_{Z_k,y_{k+1}}=1$. As $\\mathcal O_{X,y_{k+1}}\\to\\mathcal O^{sh}_{X,y_{k+1}}$ is faithfully flat, some point of $X_{(\\bar y_{k+1})}$ lies over $y_k$; by part (a) of the criterion its closure has dimension one, so a geometric point over it gives an immediate geometric specialization. Thus $\\delta(y_k)=\\delta(y_{k+1})+1$, and telescoping from $\\delta(\\eta)=0$ gives $\\delta(x)=-\\dim\\mathcal O_{X,x}$. Let $P(d)$ say: for every geometric point $\\bar x$ over $x$ with $\\dim\\mathcal O_{X,x}=d$, with $S=X_{(\\bar x)}$ as in step 2, $\\mathcal H^q(K_S)=0$ for $q<0$ and $\\beta_S$ is an isomorphism. We prove $P(d)$ by strong induction on $d$; finiteness of local dimensions makes this cover every point. Here $\\dim S=d$ by strict-henselization dimension. If $z\\in S$ is not the closed point $s$, any chain ending at $\\mathfrak p_z$ extends by $\\mathfrak p_z\\subsetneq\\mathfrak m_s$, so $\\dim\\mathcal O_{S,z}<d$, and by step 2(iii) and strict-henselization dimension $\\dim\\mathcal O_{X,u(z)}=\\dim\\mathcal O^{sh}_{X,u(z)}=\\dim\\mathcal O^{sh}_{S,z}=\\dim\\mathcal O_{S,z}<d$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+    "lem-per-immediate-specialization-criterion",
+    "def-per-potential-dualizing-complex",
+    "lem-sc-strict-henselization-dimension",
+    "lem-sc-strict-henselization-faithfully-flat",
+    "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+    "lem-trf-ind-etale-strict-local-invariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Lemma 3.6.4: induction on d; XIV, Proposition 2.1.4 for immediate specializations."
+   }
+  },
+  {
+   "text": "For $d=0$, the local domain is a field and its generic point is all of $S$. The generic pinning is then $K_S\\simeq\\Lambda_S$ in degree zero, proving both the vanishing and invertibility of $\\beta_S$. For $d\\geq1$, let $j:U=S-\\{s\\}\\hookrightarrow S$. The open $U$ is Noetherian; excellence, normality and integrality hold by restriction. At each $z\\in U$, step 2(iii) identifies $U_{(\\bar z)}$ with $X_{(u\\bar z)}$, compatibly with $K$ and the generic pinnings, and step 4 gives $\\dim\\mathcal O_{X,u(z)}<d$, so the induction hypothesis $P(\\dim\\mathcal O_{X,u(z)})$ applies there. Exact inverse image commutes with cohomology, and step 3 identifies the restriction of $\\beta_U$ with that comparison. The conservative geometric stalks now give $\\mathcal H^q(K_S|_U)=0$ for $q<0$ and the canonical isomorphism $\\beta_U:\\mathcal H^0(K_S|_U)\\simeq\\Lambda_U$. Thus the induction is applied only at smaller strict-local dimensions, not to the possibly nonlocal open $U$ as though it were local.",
+   "uses": [
+    "def-per-potential-dualizing-complex",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Lemma 3.6.4: base case and hypothesis on U."
+   }
+  },
+  {
+   "text": "Let $i:s\\hookrightarrow S$. By step 4, $\\delta(x)=-d$, so step 2(ii) gives $i^!K_S\\simeq\\Lambda(-d)[-2d]$, which has cohomology only in degree $2d\\geq2$. Closed direct image is exact (the support-kernel adjunction), so $\\mathcal H^q(i_*i^!K_S)=0$ for $q\\leq1$. The supported-kernel adjunction and the bounded-below derived adjunction identify this $i^!$ with the right adjoint used in the closed-support triangle. Indeed, represent $K_S$ by a bounded-below injective complex $I$, which is K-injective; $i^!_0$ is right adjoint to the exact $i_*$, so it preserves injectives, and both derived Hom groups out of $i_*G$ are the homotopy classes $\\operatorname{Hom}(i_*G,I)=\\operatorname{Hom}(G,i^!_0I)$, with the same counit. Consequently that triangle is\n$$i_*i^!K_S\\longrightarrow K_S\\longrightarrow Rj_*(K_S|_U)\\longrightarrow i_*i^!K_S[1].$$\nThe support adjunction is $\\Lambda$-linear: the kernel and inverse-image constructions preserve the scalar action, so its abelian-sheaf bijection restricts to the bijection on $\\Lambda$-linear maps. Exactness of closed direct image on module sheaves follows by the exact faithful forgetful functor.",
+   "uses": [
+    "def-per-potential-dualizing-complex",
+    "lem-pur-etale-supported-kernel-adjunction",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-trf-bounded-below-derived-adjunction",
+    "lem-exc-closed-support-triangle",
+    "lem-weil-pbc-dplus-injective-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Lemma 3.6.4: localization triangle and pinning at the closed point."
+   }
+  },
+  {
+   "text": "Compute the two lowest ranges of the last term. Put $L=K_S|_U$. Since $L$ is nonnegative, choose an injective representative $I$ zero in degrees below zero. It computes $Rj_*L$ by termwise $j_*$. Thus $Rj_*L$ has no negative cohomology, and left exactness gives\n$$\\mathcal H^0(Rj_*L)=\\ker(j_*I^0\\to j_*I^1)=j_*\\ker(I^0\\to I^1)=j_*\\mathcal H^0L.$$\nThis identification respects the adjunction map, since it is induced by kernels of the termwise map. There is no appeal to exactness of $j_*$ in positive degrees.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-dplus-injective-representative",
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-weil-pbc-module-direct-image-left-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Lemma 3.6.4: inference from the triangle; Stacks derived.tex 05TI/05TH and the kernel calculation."
+   }
+  },
+  {
+   "text": "Apply the cohomology long exact sequence to step 6. For $q<0$, both adjacent cohomology objects of $i_*i^!K_S$ vanish and the middle comparison identifies $\\mathcal H^qK_S$ with the zero object $\\mathcal H^qRj_*L$. For $q=0$, the same reasoning uses precisely degrees $0$ and $1$ of the supported term, yielding\n$$\\mathcal H^0K_S\\xrightarrow{\\sim}j_*\\mathcal H^0L\\xrightarrow{j_*\\beta_U}\\ j_*\\Lambda_U.$$\nThe open $U$ is nonempty, as $d\\geq1$ and it contains the generic point. Normality and integrality of $S$ therefore give $c_j:\\Lambda_S\\xrightarrow{\\sim}j_*\\Lambda_U$. Composing with $c_j^{-1}$ gives an isomorphism $\\mathcal H^0K_S\\simeq\\Lambda_S$. Its generic restriction is $p_{\\eta_S}$, since all comparison maps came from the adjunction unit and $\\beta_U$. By adjunction into $a_*\\Lambda_{\\eta_S}\\simeq\\Lambda_S$, a map to this target is uniquely determined by its generic restriction. Thus this isomorphism is exactly $\\beta_S$ of step 3, completing the induction.",
+   "uses": [
+    "lem-sf-derived-homology-long-exact",
+    "lem-weil-pbc-normal-constant-generic",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, last three sentences of the proof of Lemma 3.6.4; Stacks 09Z5 for the open and generic units."
+   }
+  },
+  {
+   "text": "Return to arbitrary $X$. By step 4, $P(d)$ holds for every $d$, so it applies to every $X_{(\\bar x)}$. Steps 2 and 3 identify its negative cohomology and canonical comparison with the inverse images of those of $K$. Exactness of geometric stalks and commutation of exact functors with cohomology show that all negative cohomology stalks vanish and that every stalk of $\\beta_X$ is invertible. Conservative geometric stalks give $\\mathcal H^qK=0$ for $q<0$ and $\\beta_X:\\mathcal H^0K\\xrightarrow{\\sim}\\Lambda_X$. No global finite-dimensional bound on $X$ has been used.",
+   "uses": [
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, proof of Lemma 3.6.4, first sentence and strict-local induction."
+   }
+  },
+  {
+   "text": "The extension is unique: any map $\\mathcal H^0K\\to\\Lambda_X$ extending $p_\\eta$ becomes, after $c_a$, a map to $a_*\\Lambda_\\eta$ with fixed adjoint, and so equals $b_X$. A pinning-preserving $v:K\\to K'$ satisfies $p'_\\eta a^*v=p_\\eta$; hence $\\beta_{K'}\\mathcal H^0(v)=\\beta_K$ by the same adjunction. For etale restriction, work locally on each normal integral component supplied by the normal-component lemma. A nonempty etale component has open image, since an etale morphism is flat and locally of finite presentation, so its generic point lies above $\\eta$; its generic pinning is the pullback of $p_\\eta$. As in step 3 the comparison of the two generic direct images sends $\\lambda$ to $\\lambda$, so the pulled-back isomorphism extends that pinning and uniqueness identifies it with $\\beta_{u^*K}$. This also proves compatibility for localizations and strict localizations by step 3. The empty etale scheme has a unique comparison. Since these assertions are local on the etale source, no quasi-compactness of that source is needed.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-normal-constant-generic",
+    "lem-fin-etale-normal-components",
+    "lem-weil-pbc-flat-lfp-open",
+    "def-weil-etale-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 3.6.4 and Proposition 2.2.1: uniqueness and restriction functoriality of the generic extension."
+   }
+  },
+  {
+   "text": "Finally use ordinary smart truncation. In a representing cochain complex, $\\tau_{\\leq0}K$ has the terms below degree zero unchanged and cycles in degree zero. Its canonical projection onto the single complex $\\mathcal H^0K[0]$ is a quasi-isomorphism because all negative cohomology vanishes. Inverting that projection and composing with $\\beta_X^{-1}$ gives\n$$\\Lambda_X\\xrightarrow{\\sim}\\tau^{\\mathrm{ord}}_{\\leq0}K\\longrightarrow K.$$\nExact inverse image preserves kernels, images and their quotients, so termwise pullback commutes with this smart truncation, its projection onto $\\mathcal H^0$, and its inclusion into $K$. These maps are also natural in complex maps; on the derived category the same equalities hold by localization. The uniqueness and functorialities established in step 10 therefore give all asserted compatibilities of the truncation isomorphism and of the map to $K$.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII, Lemma 3.6.4, statement after Autrement dit; explicit ordinary truncation construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-noetherian",
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-etale-colimit-normal-local-domain",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-exc-weakly-etale-excellent",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-per-prime-power-costalk-reduction",
+  "def-per-potential-dualizing-complex",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-normal-constant-generic",
+  "lem-weil-pbc-noetherian-local-finite-krull-dimension",
+  "lem-per-immediate-specialization-criterion",
+  "lem-sc-strict-henselization-dimension",
+  "lem-sc-strict-henselization-faithfully-flat",
+  "lem-weil-pbc-faithfully-flat-surjective-spectrum",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-trf-bounded-below-derived-adjunction",
+  "lem-exc-closed-support-triangle",
+  "lem-weil-pbc-dplus-injective-representative",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lem-sf-derived-homology-long-exact",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-fin-etale-normal-components",
+  "lem-weil-pbc-flat-lfp-open",
+  "def-weil-etale-morphism",
+  "def-sbc-standard-tstructure-derived-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, Lemma 3.6.4 and its proof, printed p. 279; Proposition 2.2.1 and paragraph following, printed pp. 263–264. Low-degree derived and strict-local comparisons expanded using the cited existing DAG statements."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -46,10 +247,38 @@
    "results": "[grep] OK 0 hit(s)\n",
    "date": "2026-10-18",
    "verdict": "no match: the hits concern ordinary derived truncation, scheme stalks, ring-theoretic local cohomology, or unrelated uses of the words; none gives this etale perverse/potential-dualizing statement"
+  },
+  {
+   "tool": "grep",
+   "query": "potential.?dualizing|pinned.?potential|normal.*potential",
+   "results": "Logged hits: Mathlib/Util/AtomM/Recurse.lean, Mathlib/Util/AtomM/Recurse.lean",
+   "date": "2026-10-18",
+   "verdict": "no match: read the logged hits; ordinary derived-category degree criteria, unrelated scheme/ring declarations and generic constant-sheaf definitions do not assert the normalized potential-dualizing theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "etale potential dualizing complex normal integral scheme zeroth cohomology constant sheaf",
+   "results": "Logged hits: CategoryTheory.Sheaf.IsConstant.mk, AlgebraicGeometry.IsEtale, AlgebraicGeometry.StructureSheaf.const_zero, CondensedMod.LocallyConstant.instFullModuleCatSheafCompHausCoherentTopologyConstantSheaf, ContinuousCohomology.MultiInd.d_zero, Algebra.formallyEtale_iff, AlgebraicGeometry.Scheme.empty_presheaf, AlgebraicGeometry.Scheme.Etale",
+   "date": "2026-10-18",
+   "verdict": "no match: read the logged hits; ordinary derived-category degree criteria, unrelated scheme/ring declarations and generic constant-sheaf definitions do not assert the normalized potential-dualizing theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A pinned potential dualizing complex on a normal excellent integral scheme with generic dimension zero has vanishing negative cohomology and constant zeroth cohomology",
+   "results": "Logged hits: AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.Scheme.zero_of_zero_cover, Algebra.IsStandardSmooth.subsingleton_h1Cotangent, Algebra.FormallyEtale.subsingleton_h1Cotangent, Algebra.Extension.subsingleton_h1Cotangent",
+   "date": "2026-10-18",
+   "verdict": "no match: read the logged hits; ordinary derived-category degree criteria, unrelated scheme/ring declarations and generic constant-sheaf definitions do not assert the normalized potential-dualizing theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The normalized dualizing complex on a normal scheme is connective with degree zero the constant etale sheaf",
+   "results": "Logged hits: AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, AlgebraicGeometry.Scheme.Hom.instIsReducedNormalization, DerivedCategory.isGE_iff, DerivedCategory.isGE_Q_obj_iff, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, DerivedCategory.isLE_iff, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE",
+   "date": "2026-10-18",
+   "verdict": "no match: read the logged hits; ordinary derived-category degree criteria, unrelated scheme/ring declarations and generic constant-sheaf definitions do not assert the normalized potential-dualizing theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-normal-pinned-extension",
@@ -72,5 +301,94 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-normal-potential-low-degrees",
+  "worker": "stage1",
+  "summary": "Expanded the ILO XVII 3.6.4 strict-local dimension induction, defining the canonical generic comparison before using stalks and writing its uniqueness, restriction and truncation compatibilities. All non-elementary inputs are existing nodes; no new nodes or Mathlib leaves. The source needs neither bounded constructibility nor potential-dualizing uniqueness, and neither is used.",
+  "blueprint": "Realizes the finite-coefficient low-degree input to dimension-normalized Verdier duality in lem-per-artin-gabber-affine-curve, proof Step 1, through the recorded ancestry normal-pinned-extension -> potential-dualizing-uniqueness -> finite-regular-reduction-dualizing -> qbar-generic-duality-model -> qbar-middle-tstructure. The actual lemma is ILO XVII 3.6.4; no imported blueprint node states it.",
+  "tool_uses": [
+   {
+    "node": "lem-exc-finite-type-localization-excellent",
+    "why": "Generic Excellence is preserved by finite type algebras and localization interface used in the strict-local ILO XVII 3.6.4 argument; this unit has no replacement for that algebra, sheaf or derived-category tool. It supplies only the stated input and does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-strict-henselization-triples",
+    "why": "Generic The colimit over etale algebras with a point and a residue embedding is strictly henselian interface used in the strict-local ILO XVII 3.6.4 argument; this unit has no replacement for that algebra, sheaf or derived-category tool. It supplies only the stated input and does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-etale-colimit-normal-local-domain",
+    "why": "Generic A local filtered colimit of etale algebras over a normal domain is a normal domain interface used in the strict-local ILO XVII 3.6.4 argument; this unit has no replacement for that algebra, sheaf or derived-category tool. It supplies only the stated input and does not replace a unit step."
+   },
+   {
+    "node": "lem-sc-strict-henselization-noetherian",
+    "why": "Generic Strict henselization preserves Noetherianity of local rings interface used in the strict-local ILO XVII 3.6.4 argument; this unit has no replacement for that algebra, sheaf or derived-category tool. It supplies only the stated input and does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-ind-etale-stability",
+    "why": "Generic Stability and diagonal of an ind-etale algebra interface used in the strict-local ILO XVII 3.6.4 argument; this unit has no replacement for that algebra, sheaf or derived-category tool. It supplies only the stated input and does not replace a unit step."
+   },
+   {
+    "node": "lem-exc-weakly-etale-excellent",
+    "why": "Generic Excellence ascends along weakly etale maps of Noetherian rings interface used in the strict-local ILO XVII 3.6.4 argument; this unit has no replacement for that algebra, sheaf or derived-category tool. It supplies only the stated input and does not replace a unit step."
+   },
+   {
+    "node": "lem-trf-ind-etale-strict-local-invariance",
+    "why": "Generic Strict localizations are invariant under ind-etale morphisms interface used in the strict-local ILO XVII 3.6.4 argument; this unit has no replacement for that algebra, sheaf or derived-category tool. It supplies only the stated input and does not replace a unit step."
+   },
+   {
+    "node": "lem-sc-strict-henselization-dimension",
+    "why": "Generic Strict henselization preserves local Krull dimension interface used in the strict-local ILO XVII 3.6.4 argument; this unit has no replacement for that algebra, sheaf or derived-category tool. It supplies only the stated input and does not replace a unit step."
+   },
+   {
+    "node": "lem-pur-etale-supported-kernel-adjunction",
+    "why": "Generic Closed etale support kernel and its exact left adjoint interface used in the strict-local ILO XVII 3.6.4 argument; this unit has no replacement for that algebra, sheaf or derived-category tool. It supplies only the stated input and does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Generic Sheaves of modules on the small etale site have enough injectives interface used in the strict-local ILO XVII 3.6.4 argument; this unit has no replacement for that algebra, sheaf or derived-category tool. It supplies only the stated input and does not replace a unit step."
+   },
+   {
+    "node": "lem-exc-closed-support-triangle",
+    "why": "Generic Closed-support triangle before restriction interface used in the strict-local ILO XVII 3.6.4 argument; this unit has no replacement for that algebra, sheaf or derived-category tool. It supplies only the stated input and does not replace a unit step."
+   },
+   {
+    "node": "lem-weil-pbc-module-direct-image-left-exact",
+    "why": "Generic Direct image of etale sheaves of modules over a constant ring: module structure, additive and left exact interface used in the strict-local ILO XVII 3.6.4 argument; this unit has no replacement for that algebra, sheaf or derived-category tool. It supplies only the stated input and does not replace a unit step."
+   },
+   {
+    "node": "lem-fin-etale-normal-components",
+    "why": "Generic Normal components after etale pullback interface used in the strict-local ILO XVII 3.6.4 argument; this unit has no replacement for that algebra, sheaf or derived-category tool. It supplies only the stated input and does not replace a unit step."
+   },
+   {
+    "node": "lem-sc-strict-henselization-faithfully-flat",
+    "why": "Generic Strict henselization is faithfully flat over the local ring; step 4 uses it (with the Mathlib surjectivity leaf) only to find a point of the strict localization over a generization, so that a saturated link is an immediate geometric specialization. No node of this unit gives it; it replaces no unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-exc-finite-type-localization-excellent",
+  "lem-weil-pbc-strict-henselization-triples",
+  "lem-weil-pbc-etale-colimit-normal-local-domain",
+  "lem-sc-strict-henselization-noetherian",
+  "lem-weil-pbc-ind-etale-stability",
+  "lem-exc-weakly-etale-excellent",
+  "lem-trf-ind-etale-strict-local-invariance",
+  "lem-sc-strict-henselization-dimension",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-exc-closed-support-triangle",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lem-fin-etale-normal-components",
+  "lem-sc-strict-henselization-faithfully-flat"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-0aa18eaf9",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-0aa18eaf9 (reviewer sub-agent of L); spot-checked: FIX, with two repairable faults; the statement is unchanged and no node is dropped. Source read: ILO XVII Lemma 3.6.4 and its proof (printed p. 279), Definitions 2.1.1–2.1.2 and Proposition 2.2.1 with the paragraph after it (pp. 263–264). The item keeps every ILO hypothesis with Λ=Z/ℓ^n; the added uniqueness, canonical map Λ→K and restriction compatibilities are true (adjunction into a_*Λ_η≅Λ_X, Stacks 09Z5). Checked d=0, d=1, the strictly henselian trait, empty and disconnected étale sources, and absence of a global dimension bound. Fault 1 (C4/E1, steps 2, 4, 5): step 2 claimed u^*K is a pinned potential after étale or strict localization, citing only the costalk reduction and strict-local invariance. Those give geometric-fibre comparisons only, but the definition pins on κ(y)_et, which needs ILO 2.2.1's g^*RΓ_xK≅RΓ_y(f^*K) and no cited node gives it. The induction then assumed this restricted data. Repaired: step 2 now records only what 3.6.4 uses (the generic pinning, the closed costalk via costalk reduction plus the geometric fibre of p_x, and U_(z̄)≅S_(z̄)≅X_(uz̄)). Step 4 computes δ=-dim O_{X,x} on X and states P(d) explicitly over X_(x̄). It adds lem-sc-strict-henselization-faithfully-flat and the Mathlib leaf lem-weil-pbc-faithfully-flat-surjective-spectrum, so a point over the generization exists. Step 6 now gives the K-injective argument that the definition's i^! and the triangle's Ri^! agree, citing lem-weil-pbc-dplus-injective-representative. Fault 2 (step 10): lem-a1-etale-scheme-map-open-image, an algebraic-space lemma that drags in the def-trf-algebraic-space chain, is replaced by the Mathlib leaf lem-weil-pbc-flat-lfp-open with def-weil-etale-morphism. Batch-5 flags: lem-trf-ind-etale-strict-local-invariance (generic strict-local invariance), lem-per-prime-power-costalk-reduction (same unit, reaches the trace chapter only through that invariance lemma) and lem-trf-bounded-below-derived-adjunction (generic homological algebra) are accepted; none is a step of the trace formula or Poincaré duality. The a1 citation is removed. No duplicate in the DAG (3.6.4 appears only here and in the parent 5.3.1 node), no cycle, no SGA source, unit and chapter unchanged. Tool uses accepted except the a1 entry, which is removed; lem-sc-strict-henselization-faithfully-flat is added. Fix file: fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-normal-potential-low-degrees.json (proof steps 2, 4, 5, 6, 9, 10; proof_deps; split_report.tool_uses).; 1 file(s) fixed by the reviewer"
  }
 }
