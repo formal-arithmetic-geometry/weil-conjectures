@@ -23,12 +23,12 @@
  ],
  "proof": [
   {
-   "text": "Put $F=Lf^*$, $R=Rf_*$, $B=Lg^*$, $C=L(f')^*$, $S=Rf'_*$, and $H=L(g')^*$. Write $t_U:U(V\\otimes W)\\to UV\\otimes UW$ for the canonical comparisons; all tensors in this proof are derived. Construct the natural isomorphism $\\theta:CB\\to HF$ on K-flat representatives with flat terms: choose such a representative by [lem-pc-kflat-resolution]; successive ordinary module pullbacks compute successive derived pullbacks by [lem-weil-pbc-ringed-topoi-derived-pullback] and remain K-flat with flat terms by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Ordinary composition is scalar-extension associativity: $S_2\\otimes_{u^{-1}S_1}u^{-1}(S_1\\otimes_{v^{-1}R}v^{-1}P)\\cong S_2\\otimes_{(vu)^{-1}R}(vu)^{-1}P$, sending $s\\otimes(a\\otimes p)$ to $s\\,u^{-1}(a)\\otimes p$, with inverse $s\\otimes p\\mapsto s\\otimes(1\\otimes p)$. Apply this to the two composites and the given ringed commutation isomorphism. The resulting complex isomorphisms are natural, preserve degrees and commute with differentials. Localization on the resolving subcategory is equivalent to the derived category by [lem-weil-pbc-site-derived-tensor-descent], so these isomorphisms define $\\theta$ for every derived object, independently of the chosen representative. This is the explicit representative construction of Tag 0D6D; it requires no coefficient-ring isomorphism on the individual edges.",
+   "text": "Construct the unique derived square by localization on the full homotopy subcategory of flat K-flat complexes. The equivalence in [lem-weil-pbc-site-derived-tensor-descent] makes its inclusion followed by Qh a localization. For each edge the specified left-derived counit is invertible on that subcategory: compare it with the computation theorem [lem-weil-pbc-ringed-topoi-derived-pullback] by uniqueness of left derived functors. Pullback remains flat K-flat by [lem-weil-pbc-ringed-pullback-preserves-kflat]; bridge the two flatness conventions using the tensor-right identification from [lem-weil-pbc-independent-sheaf-tensor-colimits]. Compose the two counits on each route and the termwise module square. Full faithfulness of precomposition along localization gives a unique isomorphism between the derived composites. Transport its equation from Qh to the complex functor Q using quotientCompQhIso; naturality and cancellation give exactly the stated characterization. No individual resolution is chosen.",
    "uses": [
-    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-site-derived-tensor-descent",
     "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-site-derived-tensor-descent"
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
    "elementary": false,
    "source": {
@@ -37,10 +37,9 @@
    }
   },
   {
-   "text": "The comparison $\\theta$ respects tensor in the following precise form, for $V,W\\in D(\\mathcal O_Y)$:\n$$t_H\\,H(t_F)\\,\\theta_{V\\otimes W}=(\\theta_V\\otimes\\theta_W)\\,t_C\\,C(t_B).$$\nTo check this, use flat K-flat representatives for $V,W$. The canonical module comparison of [lem-weil-pbc-ringed-topoi-module-pullback-tensor] is the balanced map $s\\otimes(v\\otimes w)\\mapsto(s\\otimes v)\\otimes(1\\otimes w)$; its inverse multiplies the two scalars. The composition comparison of Step 1 multiplies nested scalars. Thus splitting a tensor before or after composing pullbacks gives the same map: each outer scalar goes to the first factor, each second-factor scalar is moved across the balanced tensor relation, and both routes multiply the same scalar images. The ringed commutation isomorphism identifies those scalar images, and its inverse-image comparison sends a pair of sections to the pair of their images. Hence both routes agree on pure tensors and, by additivity and the balanced relations, on module sheaves. In the total tensor complexes they preserve the bidegrees, so no permutation or extra sign occurs. The derived comparison is the class of precisely these module comparisons [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]; natural transformations extend uniquely in the two K-flat variables by [lem-weil-pbc-site-derived-tensor-descent]. This proves the displayed equality on arbitrary $V,W$.",
+   "text": "The representative tensor calculation is [lem-weil-pbc-ringed-square-tensor-compatibility]. Build the two natural transformations from Y.tensor followed by G and K to the tensor of the two F,H composites. Their restrictions agree on pairs of flat K-flat complexes by that lemma and the characterization just constructed. Move from Q of a complex to Qh of its homotopy class using quotientCompQhIso and naturality. Injectivity of two-variable restriction in [lem-weil-pbc-site-derived-tensor-descent] proves equality on all pairs of derived objects.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-ringed-square-tensor-compatibility",
     "lem-weil-pbc-site-derived-tensor-descent"
    ],
    "elementary": false,
@@ -62,10 +61,8 @@
   },
   {
    "text": "Write $U=RE$ and $N=E\\otimes FQ$. Identify the final object on $X'$ with $HE\\otimes CBQ$ using $t_H$ and $1\\otimes\\theta_Q^{-1}$. The transpose of the first composite is\n$$a=(1\\otimes\\theta_Q^{-1})\\,t_H\\,H(\\varepsilon_N)\\,\\theta_{RN}\\,CB(\\pi_{f,E,Q}).$$\nNaturality of $\\theta$ for $\\pi_{f,E,Q}:U\\otimes Q\\to RN$ replaces the last two factors by $HF(\\pi_{f,E,Q})\\theta_{U\\otimes Q}$. The projection transpose identity of Step 3 and naturality of $t_H$ then give\n$$a=(H\\varepsilon_E\\otimes\\theta_Q^{-1})\\,t_H\\,H(t_F)\\,\\theta_{U\\otimes Q}.$$\nEvery factor here has source $CB(U\\otimes Q)$ and final target $HE\\otimes CBQ$; no projection-formula isomorphism is assumed.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-   ],
-   "elementary": false,
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Tag 0E48, remark-compatible-with-diagram (verification omitted); Tags 07A4, lemma-pullback-tensor-product, and 07A7, remark-base-change"
@@ -74,7 +71,6 @@
   {
    "text": "The transpose of the second composite is, by the defining projection transpose at $f'$ and the naturality of $t_C$,\n$$b=(\\varepsilon'_{HE}\\otimes1)\\,t_C\\,C(\\operatorname{Ex}_E\\otimes1)\\,C(t_B)\n=(\\delta_E\\otimes1)\\,t_C\\,C(t_B).$$\nInsert Step 2 with $(V,W)=(U,Q)$ in the expression for $a$. Functoriality of tensor and $\\theta_Q^{-1}\\theta_Q=1$ yield\n$$a=(H\\varepsilon_E\\,\\theta_U\\otimes1)\\,t_C\\,C(t_B)\n=(\\delta_E\\otimes1)\\,t_C\\,C(t_B)=b.$$\nSince transposition is bijective (Step 3), the two original composites are equal. Their naturality in $E,Q$ follows directly from naturality of $t$, $\\theta$, counits and adjuncts; alternatively the same transpose identities for morphisms in each variable prove the naturality squares. Only the ringed commutation isomorphism has been used, so no cartesianness, flatness, properness, boundedness, or perfectness hypothesis enters.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
     "def-weil-pbc-adjunction-mate"
    ],
    "elementary": false,
@@ -85,17 +81,17 @@
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-ringed-square-tensor-compatibility",
   "def-weil-pbc-adjunction-mate"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Explicit verification of Tag 0E48, whose source says \"We omit the verification\"; representative constructions follow Tags 0D6D and 07A4"
+  "place": "M3, 2026-10-18: Steps 1 and 3–5 are Lean proofs via localization, naturality, and mate transposition. Step 2 is reduced to a flat K-flat representative calculation, followed by a proved two-variable descent argument. Sources: Tags 0D6D, 07A4, 0E48."
  },
  "mathlib_searches": [
   {
@@ -198,9 +194,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pc-kflat-resolution"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-13",
   "by": "L",
@@ -248,5 +242,15 @@
   "by": "NY",
   "date": "2026-10-15",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261018T071202-L-1671754",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
