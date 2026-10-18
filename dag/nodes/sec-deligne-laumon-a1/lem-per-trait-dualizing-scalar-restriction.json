@@ -13,16 +13,105 @@
   "thm-amb-etale-exceptional-adjoint",
   "def-weil-regular-scheme",
   "def-weil-finite-type-morphism",
-  "def-weil-proper-morphism",
   "def-pc-integral-scheme",
   "def-weil-closed-immersion",
   "def-weil-pbc-regular-sequence",
   "def-sbc-smooth-morphisms",
   "def-weil-open-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $Q=p_T^!A_S$ before the normalization by $e_T$. Apply constructible trait biduality with $X=T$ and $M=A_T$. Its base hypotheses are exactly those of the item; quasi-projectivity supplies the required compactifiable finite-type structure map. The sheaf $A_T$ is constructible: the single stratum $T$ carries the constant finite rank-one module. The unit isomorphism $R\\mathcal Hom_A(A_T,Q)=Q$ identifies $\\eta_{A_T}$ with\n$$s_Q:A_T\\xrightarrow{\\sim}R\\mathcal Hom_A(Q,Q).$$\nIndeed, on sections the evaluation $R\\mathcal Hom_A(A_T,Q)\\otimes_A^L A_T\\to Q$ is $q\\otimes a\\mapsto aq$; transposing after symmetry sends $a$ to $q\\mapsto aq$. Thus this is the scalar-action map, rather than an unspecified isomorphism of objects. This application uses no pinnings or purity assertion about $T$.",
+   "uses": [
+    "lem-per-complete-trait-constructible-biduality",
+    "def-weil-pbc-constructible-complexes",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVI, Lemma 3.5.9 proof, p.250, local-biduality sentence; explicit evaluation-transpose calculation"
+   }
+  },
+  {
+   "text": "Put $L=A_T(-e_T)[-2e_T]$, so $K_T=Q\\otimes_A^L L$. The signed finite twists are locally free of rank one with evaluation identifications. Consequently $L$ has tensor inverse $L^{-1}=A_T(e_T)[2e_T]$: locally the line and its dual evaluate to $A_T$, and the opposite shifts cancel. Tensoring by $L$ is therefore an equivalence with inverse tensoring by $L^{-1}$. For every test object $P$, tensor--Hom adjunction and this inverse give\n$$\\operatorname{Hom}(P,R\\mathcal Hom_A(Q\\otimes L,Q\\otimes L))\\cong\\operatorname{Hom}(P\\otimes Q,Q)\\cong\\operatorname{Hom}(P,R\\mathcal Hom_A(Q,Q)).$$\nThe Yoneda full-faithfulness bijection turns this natural Hom isomorphism and its inverse into inverse morphisms of the two internal-Hom objects (their composites are identities by faithfulness). It sends $s_{K_T}$ to $s_Q$, since tensoring carries $a\\,1_Q$ to $a\\,1_{Q\\otimes L}$. Thus $s_{K_T}:A_T\\to R\\mathcal Hom_A(K_T,K_T)$ is an isomorphism. The even shifts introduce no scalar sign.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-galois-yoneda-fully-faithful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9, lemma-internal-hom; cancellation of the finite rank-one twist and opposite shifts"
+   }
+  },
+  {
+   "text": "An open immersion $j:U\\hookrightarrow T$ is an etale object of $T_{\\mathrm{et}}$, and its slice site is $U_{\\mathrm{et}}$. Restriction of derived internal Hom to this slice gives\n$$j^*R\\mathcal Hom_A(K_T,K_T)\\cong R\\mathcal Hom_A(j^*K_T,j^*K_T).$$\nRestrict $s_{K_T}$ through this isomorphism. The result is exactly $s_{j^*K_T}$: evaluation and tensor restriction send multiplication by a local coefficient section to multiplication by its restriction. In particular it is an isomorphism $A_U\\xrightarrow{\\sim}R\\mathcal Hom_A(j^*K_T,j^*K_T)$. This argument concerns restriction on the source scheme and does not assume a base-change isomorphism for $p_T^!$.",
+   "uses": [
+    "lem-weil-pbc-open-immersion-etale",
+    "lem-weil-pbc-etale-site-localization-open",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JB, lemma-restriction-RHom-to-U; topologies.tex small-etale slice localization"
+   }
+  },
+  {
+   "text": "For $V=T$ with $C=K_T$, and for $V=U$ with $C=j^*K_T$, take degree-zero derived global sections of $s_C$. The global internal-Hom formula identifies\n$$\\operatorname{End}_{D(V_{\\mathrm{et}},A)}(C)=H^0(V,R\\mathcal Hom_A(C,C))\\cong H^0(V,A_V)=\\Gamma(V,A_V).$$\nFor the last equality, the category of module sheaves is Grothendieck, hence has enough injectives. Take an injective resolution of $A_V$ zero in negative degrees. It is K-injective; global sections is left exact because it is $\\operatorname{Hom}(A_V,-)$. The degree-zero injective-resolution comparison therefore identifies $H^0(V,A_V)$ with $\\Gamma(V,A_V)$. Under the displayed map a section acts on $C$ by multiplication, by the evaluation description in Step 1. Thus this is a bijection induced by scalar action; it preserves identity, addition and composition since multiplication of coefficients does. The bounded-below derived categories are full subcategories of these ambient derived categories, so the displayed endomorphisms are the requested ones.",
+   "uses": [
+    "lem-pur-rhom-global-sections",
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "def-weil-pbc-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JA, lemma-section-RHom-over-U; derived.tex Tags 013K, 05TD and 070J for the degree-zero calculation"
+   }
+  },
+  {
+   "text": "The underlying space of the integral scheme $T$ is nonempty and irreducible. Every nonempty open $U$ of an irreducible space is irreducible: two nonempty relatively open subsets are nonempty opens of $T$ and therefore intersect. Both $T$ and $U$ are consequently connected. The constant-module locally-constant model identifies $\\Gamma(V,A_V)$ with locally constant functions $|V|\\to A$. Such a function on a nonempty connected space is constant: each fibre is open and its complement is the union of the other open fibres, so two inhabited fibres would disconnect the space. Its constant value is unique by nonemptiness. For both $V=T,U$, Step 4 therefore identifies the actual map $a\\mapsto a\\,1_C$ with an isomorphism from $A$. Finally $j^*(a\\,1_{K_T})=a\\,1_{j^*K_T}$, since module inverse image restricts the scalar action. Thus open restriction is the identity of $A$ under these two scalar-action isomorphisms, and is injective.",
+   "uses": [
+    "def-pc-integral-scheme",
+    "lem-weil-pbc-constant-module-locally-constant"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03P5, remark-constant-locally-constant-maps; connectedness argument and restriction of scalar action"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-per-complete-trait-constructible-biduality",
+  "def-weil-pbc-constructible-complexes",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-galois-yoneda-fully-faithful",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-rhom-global-sections",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "def-weil-pbc-derived-categories",
+  "def-pc-integral-scheme",
+  "lem-weil-pbc-constant-module-locally-constant"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVI, proof of Lemma 3.5.9, printed p.250: expand the local-biduality/scalar argument, with Stacks Tags 08J9, 08JA, 08JB and 03P5 for the derived and section comparisons."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -65,10 +154,67 @@
    "results": "Actual recorded hits: ",
    "date": "2026-10-18",
    "verdict": "no match: no relevant declaration; any finestTopologySingle hit is a substring collision"
+  },
+  {
+   "tool": "grep",
+   "query": "dualizing|biduality|verdierDual",
+   "results": "Actual recorded result: 10 hits; Mathlib/Algebra/Homology/HomotopyFiber.lean, Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean, Mathlib/Data/Set/Defs.lean, Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean, Mathlib/CategoryTheory/Category/Cat/Op.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean, Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean; digest a79de9b761669550",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations concern etale algebras, condensed modules, order duality or textual uses of dualizing; none states trait-based etale constructible biduality or the scalar-endomorphism assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale biduality over a complete strictly henselian discrete valuation ring",
+   "results": "Actual recorded result: 8 hits; Algebra.Etale.formallyEtale, RingHom.Etale, Algebra.Etale.finitePresentation, Algebra.FormallyEtale.iff_comp_bijective, Algebra.FormallyEtale.of_unramified_and_smooth, RingHom.Etale.propertyIsLocal, RingHom.Etale.ofLocalizationSpanTarget, Algebra.FormallyEtale.of_equiv; digest 8fa23e3f75e685e1",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations concern etale algebras, condensed modules, order duality or textual uses of dualizing; none states trait-based etale constructible biduality or the scalar-endomorphism assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dualizing\"",
+   "results": "Actual recorded result: 0 hits; ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations concern etale algebras, condensed modules, order duality or textual uses of dualizing; none states trait-based etale constructible biduality or the scalar-endomorphism assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Endomorphisms of the etale relative dualizing complex over a strictly henselian trait are scalars",
+   "results": "Actual recorded result: 8 hits; Algebra.FormallyEtale.subsingleton_h1Cotangent, StandardEtalePair.homEquiv_symm_apply, StandardEtalePair.homEquiv_apply_coe, Algebra.FormallyEtale.subsingleton_kaehlerDifferential, StandardEtalePair.homEquiv, StandardEtalePair.instFormallyEtaleRing, Algebra.Etale.formallyEtale, Algebra.Etale; digest 5b3347a80e7f0f19",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations concern etale algebras, condensed modules, order duality or textual uses of dualizing; none states trait-based etale constructible biduality or the scalar-endomorphism assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "Verdier|[Bb]idual|dualizingComplex",
+   "results": "Actual recorded result: 0 hits; ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations concern etale algebras, condensed modules, order duality or textual uses of dualizing; none states trait-based etale constructible biduality or the scalar-endomorphism assertion.",
+   "sub": "AlgebraicGeometry"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"bidual\"",
+   "results": "Actual recorded result: 0 hits; ; digest 4f53cda18c2baa0c",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations concern etale algebras, condensed modules, order duality or textual uses of dualizing; none states trait-based etale constructible biduality or the scalar-endomorphism assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Verdier duality on bounded constructible etale sheaves on finite type schemes over a complete discrete valuation ring",
+   "results": "Actual recorded result: 8 hits; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instIsGrothendieckAbelianLightCondMod, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, Condensed.lanSheafProfinite, CondensedMod.ofSheafCompHaus, CompHausLike.LocallyConstantModule.functor; digest b30a9e704b1cfc64",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations concern etale algebras, condensed modules, order duality or textual uses of dualizing; none states trait-based etale constructible biduality or the scalar-endomorphism assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The relative dualizing complex induces an involutive duality on bounded constructible etale complexes over a henselian trait",
+   "results": "Actual recorded result: 8 hits; FractionalIdeal.dual_involutive, Matroid.dual_involutive, BddOrd.dualEquiv_inverse, FinBddDistLat.dualEquiv_inverse, Lat.dualEquiv_inverse, BddLat.dualEquiv_inverse, PartOrd.dualEquiv_inverse, LinearMap.BilinForm.dualBasis_involutive; digest 41e84da92c8e421e",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations concern etale algebras, condensed modules, order duality or textual uses of dualizing; none states trait-based etale constructible biduality or the scalar-endomorphism assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-punctual-purity-proper-degree-descent",
@@ -80,7 +226,7 @@
  "blueprint": {
   "from": {
    "node": "lem-per-artin-gabber-affine-curve",
-   "place": "Proof Step 3, regular finite-torsion duality input, via the proper-degree descent argument: Expose XVI, Lemma 3.5.9 proof, printed p.250: scalar endomorphism identification for K_Y before assuming purity of Y, and detection on a nonempty open. Restrict to the complete mixed-characteristic traits of section 3.7.",
+   "place": "Proof Step 1, dimension-normalized Verdier duality, through the regular finite-torsion duality input and its proper-degree descent: ILO Expose XVI, Lemma 3.5.9 proof, p.250, scalar endomorphisms of the relative dualizing complex and detection on a nonempty open.",
    "via": [
     "lem-per-punctual-purity-proper-degree-descent",
     "lem-per-gabber-regular-pair-purity",
@@ -93,5 +239,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-trait-dualizing-scalar-restriction",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Isolated general constructible trait biduality as a statement-only input, rather than using the later potential-dualizing/purity package circularly. Proved scalar internal endomorphisms by applying biduality to the constant sheaf, cancelled the twist and shift, restricted internal Hom, and computed global sections and the actual scalar restriction map. Removed the unused proper-morphism statement dependency. One new node, no Mathlib leaves.",
+  "blueprint": "Ancestor lem-per-artin-gabber-affine-curve, current Proof Step 1 dimension-normalized Verdier duality, via the regular finite-coefficient dualizing input; specifically the local-biduality sentence in ILO XVI Lemma 3.5.9 used by proper-degree descent. No chapter or unit route change.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Generic ringed-site derived, finite-twist, slice, or constant-module comparison used exactly as stated; the current unit has no theorem for this foundational operation."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic ringed-site derived, finite-twist, slice, or constant-module comparison used exactly as stated; the current unit has no theorem for this foundational operation."
+   },
+   {
+    "node": "lem-weil-pbc-etale-site-localization-open",
+    "why": "Generic ringed-site derived, finite-twist, slice, or constant-module comparison used exactly as stated; the current unit has no theorem for this foundational operation."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic ringed-site derived, finite-twist, slice, or constant-module comparison used exactly as stated; the current unit has no theorem for this foundational operation."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Generic ringed-site derived, finite-twist, slice, or constant-module comparison used exactly as stated; the current unit has no theorem for this foundational operation."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "why": "Generic ringed-site derived, finite-twist, slice, or constant-module comparison used exactly as stated; the current unit has no theorem for this foundational operation."
+   },
+   {
+    "node": "lem-weil-pbc-constant-module-locally-constant",
+    "why": "Generic ringed-site derived, finite-twist, slice, or constant-module comparison used exactly as stated; the current unit has no theorem for this foundational operation."
+   },
+   {
+    "node": "lem-galois-yoneda-fully-faithful",
+    "why": "The ordinary Yoneda full-faithfulness bijection converts the natural representable-Hom isomorphism in Step 2 into an isomorphism of internal-Hom objects; this is a generic categorical tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-weil-pbc-etale-site-localization-open",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-rhom-global-sections",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-weil-pbc-constant-module-locally-constant",
+  "lem-galois-yoneda-fully-faithful"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q93-7c828637d",
+  "group": "Q93",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q93-7c828637d (reviewer sub-agent of L); spot-checked: I read the source: ILO XVI 3.5.4–3.5.10, pp.248–250. Lemma 3.5.9 gets Λ≅End(K_Y) from 'bidualité locale', which it cites to SGA 4½ Th. finitude 4.3, and then detects the claim on a nonempty open. The item states exactly that sentence; its statement is byte-identical to the base copy, and only the unused def-weil-proper-morphism stmt_dep was dropped, which is correct. The new node lem-per-complete-trait-constructible-biduality is unsplit, statement-only and self-contained. It is a true special case of Deligne's biduality over a regular base of dimension ≤1, checked on X=S, X=s (Q=A(−1)[−2]) and X=η. Quasi-projectivity gives the compactification that thm-amb-etale-exceptional-adjoint needs. It does not duplicate an existing node. The gabber-local-duality-general, potential-local-duality, potential-dualizing-finite-pullback, potential-dualizing-regular-unit and absolute-gysin-purity nodes all already contain this item in their dependency closure, so citing them would be circular (C6). The finite-residue, etale-geometric and fix-general biduality nodes work over field bases, and lem-per-coefficient-change-dualizing assumes a dualizing complex. The new node is also not a restated clause of the item: it says nothing about End or open restriction. All five steps are correct against the cited statements, which I read. Step 1 is biduality for A_T, whose evaluation transpose is the scalar map. Step 2 cancels the twist using the signed rank-one twists, closed adjunction and Yoneda, with even shifts. Step 3 restricts RHom to the slice, as in Stacks 08JB. Step 4 passes to global sections with Stacks 08JA and the degree-0 injective resolution. Step 5 uses that U is connected because T is irreducible, together with the locally constant model of A_V (Stacks 03P5). The 8 tool_uses are generic and I accept them. Advisory: identifying j^* with restriction to the slice follows the DAG's standing convention. Maintainer note: the split of the new node must avoid both SGA 4½, because of the route lock, and the potential-dualizing package, because of the cycle."
  }
 }
