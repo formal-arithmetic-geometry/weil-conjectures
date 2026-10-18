@@ -11,9 +11,51 @@
   "def-weil-pbc-noetherian-ring",
   "def-exc-excellent-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $R=A/I$ and let $\\pi:A\\to R$ be the quotient map. To verify that $R$ is Noetherian using [def-weil-pbc-noetherian-ring], let $J$ be an arbitrary ideal of $R$. Its inverse image $K=\\{a\\in A:\\pi(a)\\in J\\}$ is an ideal of $A$, hence has finitely many generators $a_1,\\ldots,a_r$. Their images generate $J$: each $y\\in J$ lifts to some $a\\in K$ by surjectivity of $\\pi$, and an expression $a=\\sum b_i a_i$ gives $y=\\sum\\pi(b_i)\\pi(a_i)$. Conversely all these generators lie in $J$. Thus every ideal of $R$ is finitely generated, so $R$ is Noetherian. This writes out the quotient argument in Stacks Tag 00FN, proof of lemma-Noetherian-permanence.",
+   "uses": [
+    "def-weil-pbc-noetherian-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00FN, lemma-Noetherian-permanence, proof: quotient paragraph"
+   }
+  },
+  {
+   "text": "Let $B$ be any finite type $R$-algebra. By [def-weil-pbc-finite-type-algebra], choose generators $b_1,\\ldots,b_n$ such that every element of $B$ is a polynomial in them with coefficients in $R$. Give $B$ its $A$-algebra structure by composing $A\\xrightarrow{\\pi}R\\to B$. For any such polynomial expression, lift each of its finitely many coefficients from $R$ to $A$ along $\\pi$. Evaluating the lifted polynomial at the same $b_i$ gives the same element of $B$. Therefore the same finite set generates $B$ as an $A$-algebra, and $B$ is of finite type over $A$. This is the finite-type composition argument in lemma-universally-catenary, written out for a quotient base; it does not require $I$ to be prime or proper.",
+   "uses": [
+    "def-weil-pbc-finite-type-algebra"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NK, lemma-quotient-catenary, second assertion; Tag 0ECE, proof of lemma-universally-catenary, finite-type case; Tag 00F3, definition-finite-type (1)"
+   }
+  },
+  {
+   "text": "By the universally catenary clause of [def-exc-excellent-ring], the hypothesis on $A$ says that every finite type $A$-algebra is catenary. Apply it to the $A$-algebra $B$ of Step 2. Thus every finite type $R$-algebra $B$ is catenary. Together with the Noetherian property proved in Step 1, this is exactly universal catenarity of $R=A/I$ under the same definition (Stacks Tag 00NL). The ring $B$ and its prime chains are unchanged on restricting scalars, so both the bound on finite chain lengths and equality of saturated-chain lengths hold for the required ring.",
+   "uses": [
+    "def-exc-excellent-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00NK, lemma-quotient-catenary, second assertion; Tag 00NL, definition-universally-catenary; Tag 0ECE, lemma-universally-catenary, finite-type case"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-noetherian-ring",
+  "def-weil-pbc-finite-type-algebra",
+  "def-exc-excellent-ring"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebra.tex",
+  "place": "Tag 00NK, lemma-quotient-catenary, second assertion, through the finite-type case of Tag 0ECE, lemma-universally-catenary; Noetherian quotient argument from Tag 00FN"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -42,10 +84,45 @@
    "results": "{\"t\": \"2026-10-18T19:38:42Z\", \"tool\": \"leansearch\", \"query\": \"Universal catenarity is preserved by quotients of Noetherian rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ideal.Quotient.isNoetherianRing\", \"QuotientMapQuotient.isNoetherian\", \"isNoetherian_quotient\", \"isNoetherian_of_liesOver\", \"Algebra.IsIntegral.quotient\", \"instIsIntegralQuotientIdeal\", \"LieSubmodule.Quotient.isNoetherian\", \"isJacobsonRing_quotient\"], \"digest\": \"eb22bacd36fc0743\"}",
    "date": "2026-10-19",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Catenary\"",
+   "results": "{\"t\": \"2026-10-18T21:05:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"Catenary\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: returned declarations do not state universal catenarity of a quotient"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Universal catenarity is preserved by quotient rings",
+   "results": "{\"t\": \"2026-10-18T21:05:27Z\", \"tool\": \"leansearch\", \"query\": \"Universal catenarity is preserved by quotient rings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsIntegral.quotient\", \"QuotientMapQuotient.isNoetherian\", \"Ideal.Quotient.isNoetherianRing\", \"isNoetherian_quotient\", \"instIsIntegralQuotientIdeal\", \"isNoetherian_of_liesOver\", \"instIsArtinianRingQuotientIdeal\", \"Ideal.Quotient.isDomain\"], \"digest\": \"f6297c73df588f40\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: returned declarations do not state universal catenarity of a quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quotient of a Noetherian universally catenary ring is universally catenary",
+   "results": "{\"t\": \"2026-10-18T21:05:31Z\", \"tool\": \"leanfinder\", \"query\": \"A quotient of a Noetherian universally catenary ring is universally catenary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"QuotientMapQuotient.isNoetherian\", \"isNoetherian_of_liesOver\", \"Ideal.Quotient.isNoetherianRing\", \"Algebra.EssFiniteType.isNoetherianRing\", \"Ideal.instIsNoetherianCotangentOfSubtypeMem\", \"Algebra.QuasiFinite.instQuotientIdeal\", \"Algebra.FiniteType.isNoetherianRing\", \"instIsNoetherianRingSubtypePolynomialMemSubalgebraReesAlgebra\"], \"digest\": \"6d72c8b30899ad10\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: returned declarations do not state universal catenarity of a quotient"
+  },
+  {
+   "tool": "grep",
+   "query": "catenary|catenarity|IsUniversallyCatenary",
+   "results": "{\"t\": \"2026-10-18T21:05:37Z\", \"tool\": \"grep\", \"query\": \"catenary|catenarity|IsUniversallyCatenary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: returned declarations do not state universal catenarity of a quotient"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every finitely generated algebra over a quotient of a universally catenary ring is catenary",
+   "results": "{\"t\": \"2026-10-18T21:06:52Z\", \"tool\": \"leanfinder\", \"query\": \"Every finitely generated algebra over a quotient of a universally catenary ring is catenary\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.instEssFiniteTypeQuotientIdeal\", \"algebra_finiteType_of_liesOver\", \"QuotientMapQuotient.isNoetherian\", \"Algebra.QuasiFinite.instQuotientIdeal\", \"isNoetherian_of_liesOver\", \"Algebra.HasGoingDown\", \"Algebra.QuasiFinite.finite_primeSpectrum\", \"Algebra.QuasiFiniteAt\"], \"digest\": \"695ac10967287d34\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: returned declarations do not state universal catenarity of a quotient"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-ratliff-formal-catenarity",
@@ -69,5 +146,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-universal-catenarity-quotient",
+  "worker": "stage1",
+  "summary": "Read Stacks 00NK and its cited universally-catenary lemma. Expanded the finite-type case directly: images of generators of an inverse-image ideal establish Noetherianity; lifting coefficients shows any finite type A/I-algebra is finite type over A; the universal-catenarity definition finishes. All three steps are elementary arguments from cited definitions. No new nodes, no statement change, no attachment, and fresh logged searches found no full Mathlib match.",
+  "blueprint": "Supplies the quotient-stability input to lem-per-ratliff-formal-catenarity in the existing ancestry of proof Step 3 of lem-per-artin-gabber-affine-curve (the ILO XIV 2.1.6 reverse-completion argument), as recorded in blueprint.from. The current main-20261015 ancestor has a statement only. No unit or chapter route is changed; whole-blueprint searches for catenary, universally catenary and catenarity gave no equivalent blueprint node."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q122-50b880ff2",
+  "group": "Q122",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q122-50b880ff2 (reviewer sub-agent of L); spot-checked: I read the item, all three steps and the three cited definition statements (def-weil-pbc-noetherian-ring, def-weil-pbc-finite-type-algebra, def-exc-excellent-ring), and checked them against algebra.tex. Tag 00NK lemma-quotient-catenary, second assertion: the statement matches it verbatim in substance, and the source proves it as a special case of 0ECE lemma-universally-catenary. Tag 00NL makes universal catenarity a notion for Noetherian rings only. Step 1 proves A/I is Noetherian from the ideal-finite-generation definition by taking preimages; it is correct and elementary. lem-weil-pbc-finite-type-algebra-noetherian could have been cited instead, but that is advisory only. Step 2 lifts coefficients along the surjection, so a finite type A/I-algebra is finite type over A; it is correct, including n=0 and I=A. Step 3 uses only the universal-catenarity clause of def-exc-excellent-ring; catenarity depends on the ring B alone, so the conclusion follows. Edge cases checked: I=0, I=A (zero ring, vacuous), A=0, nonprime I such as (x^2) and (xy); no hidden prime or domain hypothesis is used. There are no new nodes. The statement is unchanged and there are no SGA citations. The DAG grep finds no duplicate: lem-per-universal-catenarity-minimal-quotients is a different iff statement. The only citer is lem-per-ratliff-formal-catenarity, so there is no cycle. No fixes."
  }
 }
