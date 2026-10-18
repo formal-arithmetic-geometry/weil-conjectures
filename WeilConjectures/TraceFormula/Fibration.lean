@@ -389,6 +389,58 @@ lemma trace_compactFrobenius_weilPushforward (K : WeilBoundedConstructible ℓ �
     (IsPullback.of_hasPullback f ΦY) (relativeFrobenius_fst f hf) (relativeFrobenius_snd f hf) K
   exact trace_frobenius_eq_of_iso e (hS := hL) (hT := hK)
 
+variable (y : RationalPoint Y) (hy : y ≫ ΦY = y)
+  [IsFinite (fibreFrobenius f hf y hy).left]
+  [IsUniversalHomeomorphism (fibreFrobenius f hf y hy).left]
+
+/-- The stalk Frobenius of the Weil `!`-pushforward at a point `y` fixed by `Φ_Y` is the
+compactly supported Frobenius of the restriction of `K` to the fibre `X_y`, by proper base
+change; by the degree one trace formula on the fibre, its trace is the sum of the traces of the
+stalk Frobenii of `K` at the points of `X_y` fixed by `Φ_y`. -/
+lemma trace_weilStalkFrobenius_weilPushforward [IsSepClosed k] (K : WeilBoundedConstructible ℓ Φ)
+    [Fintype {z : RationalPoint (fibre f y) // z ≫ fibreFrobenius f hf y hy = z}]
+    (h : ((weilUpperStar ℓ (fibreFrobenius f hf y hy) Φ (fibreι f y)
+      (fibreFrobenius_ι f hf y hy)).obj K).TraceFormulaOne)
+    [hL : HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ y).obj
+      ((weilLowerShriekOfFrobenius ℓ Φ ΦY f (IsPullback.of_hasPullback f ΦY)
+        (relativeFrobenius f hf) (relativeFrobenius_fst f hf)
+        (relativeFrobenius_snd f hf)).obj K).carrier)]
+    [∀ x : RationalPoint X, HasRightDual
+      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K.carrier)] :
+    trace (((weilLowerShriekOfFrobenius ℓ Φ ΦY f (IsPullback.of_hasPullback f ΦY)
+        (relativeFrobenius f hf) (relativeFrobenius_fst f hf)
+        (relativeFrobenius_snd f hf)).obj K).weilStalkFrobenius y hy) =
+      ∑ z : {z : RationalPoint (fibre f y) // z ≫ fibreFrobenius f hf y hy = z},
+        trace (K.weilStalkFrobenius (z.1 ≫ fibreι f y) (by
+          rw [Category.assoc, ← fibreFrobenius_ι f hf y hy, ← Category.assoc, z.2])) := by
+  obtain ⟨e⟩ := nonempty_weilStalk_weilLowerShriekOfFrobenius_iso ℓ
+    (IsPullback.of_hasPullback f ΦY) (relativeFrobenius_fst f hf) (relativeFrobenius_snd f hf)
+    (fibreFrobenius_ι f hf y hy) hy (isPullback_fibre f y) K
+  let hKZ : HasRightDual
+      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ
+        (toPoint (fibre f y))).obj ((weilUpperStar ℓ (fibreFrobenius f hf y hy) Φ (fibreι f y)
+          (fibreFrobenius_ι f hf y hy)).obj K).carrier) :=
+    (WeilBoundedConstructible.nonempty_hasRightDual_compactCohomology _).some
+  let _ : ∀ z : RationalPoint (fibre f y), HasRightDual
+      ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ z).obj
+        ((weilUpperStar ℓ (fibreFrobenius f hf y hy) Φ (fibreι f y)
+          (fibreFrobenius_ι f hf y hy)).obj K).carrier) :=
+    fun z ↦ (WeilBoundedConstructible.nonempty_hasRightDual_stalk _ z).some
+  have hZ : trace ((weilUpperStar ℓ (fibreFrobenius f hf y hy) Φ (fibreι f y)
+      (fibreFrobenius_ι f hf y hy)).obj K).compactFrobenius =
+      ∑ z : {z : RationalPoint (fibre f y) // z ≫ fibreFrobenius f hf y hy = z},
+        trace (((weilUpperStar ℓ (fibreFrobenius f hf y hy) Φ (fibreι f y)
+          (fibreFrobenius_ι f hf y hy)).obj K).weilStalkFrobenius z.1 z.2) := h
+  rw [WeilBoundedConstructible.weilStalkFrobenius,
+    trace_frobenius_eq_of_iso e (hS := hL) (hT := hKZ)]
+  refine hZ.trans (Finset.sum_congr rfl fun z _ ↦ ?_)
+  have hz1 : z.1 ≫ frobeniusIterate (fibreFrobenius f hf y hy) 1 = z.1 := by
+    rw [frobeniusIterate_one]
+    exact z.2
+  rw [← WeilBoundedConstructible.trace_stalkFrobenius_one _ z.1 hz1 z.2,
+    WeilBoundedConstructible.trace_stalkFrobenius_weilUpperStar,
+    WeilBoundedConstructible.trace_stalkFrobenius_one]
+
 end Pushforward
 
 end AlgebraicGeometry.ProEtale.CondensedRing
