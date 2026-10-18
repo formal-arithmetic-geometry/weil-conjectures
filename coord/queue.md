@@ -1,6 +1,6 @@
 # Work queue
 
-952 items; claim with `tools/claim.py next <group> [--stage N]`.
+950 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Stage 1: nodes to split (0)
 
@@ -8,7 +8,7 @@
 ## Stage 2: nodes to state (0)
 
 
-## Stage 3: modules to prove (952)
+## Stage 3: modules to prove (950)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -213,7 +213,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.BoundedConstructibleTower` | - | 8 | proof | 2 |
 | `Sheaf.Paper.BrownHypothesesGeneration` | - | 1 | proof | 2 |
 | `Sheaf.Paper.CartesianCoefficientsFiniteFree` | - | 1 | proof | 2 |
-| `Sheaf.Paper.CoefficientCohomologyModules` | - | 6 | proof | 2 |
 | `Sheaf.Paper.CoefficientFiniteDescentHom` | - | 1 | proof | 2 |
 | `Sheaf.Paper.CoefficientFiniteDescentLisse` | - | 1 | proof | 2 |
 | `Sheaf.Paper.CoefficientHeartCommonStratification` | - | 1 | proof | 2 |
@@ -252,7 +251,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.IntegralHomReductionComparison` | - | 1 | proof | 2 |
 | `Sheaf.Paper.IntegralModelsOperations` | - | 1 | proof | 2 |
 | `Sheaf.Paper.IntegralOperationsWellDefined` | - | 8 | proof | 2 |
-| `Sheaf.Paper.IntegralReductionTowerCanonical` | - | 1 | proof | 2 |
 | `Sheaf.Paper.IntegralReductionTowerWellDefinedUnrestricted` | - | 3 | proof | 2 |
 | `Sheaf.Paper.IntegralResidueTor` | - | 1 | proof | 2 |
 | `Sheaf.Paper.IntegralScalarExtensionConstructibleIntrinsic` | - | 2 | proof | 2 |
