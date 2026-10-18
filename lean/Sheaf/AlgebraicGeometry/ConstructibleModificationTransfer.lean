@@ -8,17 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.ConstructibleHigherDirectImages
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Properties
-import WeilConjectures.ConstructibleSheaf.Pullback
-import WeilConjectures.SixFunctors.OpenClosed.Exact
-import WeilConjectures.ConstructibleSheaf.OpenClosed
-import Sheaf.AlgebraicGeometry.ModificationExtensionZero
-import Sheaf.AlgebraicGeometry.EtaleGrothendieckSpectralSequence
-import Sheaf.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
-import Sheaf.AlgebraicGeometry.EtaleModuleEnoughInjectives
-import Sheaf.AlgebraicGeometry.EtaleConstantModuleDirectImageLeftExact
-import WeilConjectures.ConstructibleSheaf.KernelCokernel
-import WeilConjectures.CategoryTheory.Abelian.RightDerived.FullLongExactSequence
-import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.LeraySpectralSequence
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Modification
 
 /-!
 # Constructibility transfers across a proper modification
@@ -37,6 +28,44 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Etale
+
+-- Total and bounded-below direct images agree on sheaves in degree zero.
+-- The extra negative degrees in the source property C vanish.
+private theorem constructibleDirectImages_iff_nonnegative
+    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {T Q : Scheme.{u}} (g : T ⟶ Q) :
+    HasConstructibleDirectImages Λ g ↔
+      ∀ (q : ℕ) (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ)),
+        Scheme.IsConstructibleEtaleModuleSheaf F →
+          Scheme.IsConstructibleEtaleModuleSheaf (higherDirectImage Λ g (q : ℤ) F) := by
+  constructor
+  · intro h q F hF
+    have hF' := (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf F).mp hF
+    have : Scheme.IsConstructibleSheaf
+        ((_root_.DerivedCategory.homologyFunctor _ (q : ℤ)).obj
+          ((g)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctor.obj
+            ((_root_.DerivedCategory.singleFunctor _ 0).obj F))) := h F hF' q
+    exact (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr
+      (Scheme.IsConstructibleSheaf.of_iso
+        (F := (_root_.DerivedCategory.homologyFunctor _ (q : ℤ)).obj
+          ((g)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctor.obj
+            ((_root_.DerivedCategory.singleFunctor _ 0).obj F)))
+        ((_root_.DerivedCategory.homologyFunctor _ (q : ℤ)).mapIso
+          ((g)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusCompatibility.app
+            ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj F)).symm))
+  · intro h F hF q
+    by_cases hq : 0 ≤ q
+    · lift q to ℕ using hq
+      have : Scheme.IsConstructibleSheaf (higherDirectImage Λ g (q : ℤ) F) :=
+        (Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp
+          (h q F ((Scheme.isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf F).mpr hF))
+      exact Scheme.IsConstructibleSheaf.of_iso
+        (F := higherDirectImage Λ g (q : ℤ) F)
+        ((_root_.DerivedCategory.homologyFunctor _ (q : ℤ)).mapIso
+          ((g)_*[ModuleCat.{u + 1} Λ].rightDerivedFunctorPlusCompatibility.app
+            ((_root_.DerivedCategory.Plus.singleFunctor _ 0).obj F)))
+    · have := (g)_*[ModuleCat.{u + 1} Λ].isGE_rightDerivedFunctor_obj_singleFunctor F
+      exact Scheme.IsConstructibleSheaf.of_isZero
+        (_root_.DerivedCategory.isZero_of_isGE _ 0 q (lt_of_not_ge hq))
 
 /-- Property `C` transfers from a proper modification and the reduced closed complement
 of the open where it is an isomorphism. The reduced closed complement is represented by
@@ -91,6 +120,15 @@ theorem hasConstructibleHigherDirectImages_of_modification
     (hπ : HasConstructibleHigherDirectImages k N Λ hY hS (π ≫ f))
     (hi : HasConstructibleHigherDirectImages k N Λ hZ hS (i ≫ f)) :
     HasConstructibleHigherDirectImages k N Λ hX hS f := by
-  sorry
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+  have : CompactSpace X :=
+    QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  have : IsNoetherian X := {}
+  apply (constructibleDirectImages_iff_nonnegative Λ f).mp
+  exact HasConstructibleDirectImages.of_modification f π U.ι i
+    (by simpa only [Scheme.Opens.range_ι] using _hi) inferInstance
+    ((constructibleDirectImages_iff_nonnegative Λ (π ≫ f)).mpr hπ)
+    ((constructibleDirectImages_iff_nonnegative Λ (i ≫ f)).mpr hi)
 
 end AlgebraicGeometry.Etale

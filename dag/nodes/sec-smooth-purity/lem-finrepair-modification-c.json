@@ -18,108 +18,40 @@
  ],
  "proof": [
   {
-   "text": "Work throughout with the fixed finite ring $\\Lambda$ and small etale module sheaves of [def-finrepair-property-c]. The inherited coefficient convention fixes a positive integer $N$ annihilating $\\Lambda$ and invertible on the schemes; inverse images to $U$, $Z$ and $U'$  preserve invertibility. The ring $\\Lambda$ is Noetherian because its finite set of ideals admits no infinite strictly ascending chain. Fix a constructible $F$ on $X$ and put $G=j^{-1}F$, $H=i^{-1}F$, where $j:U\\hookrightarrow X$. By [prop-constructible-pullback], $G$ and $H$ are constructible. The field $k$ and the finite-type $k$-structures on $X,Y,S$ are explicit hypotheses of the corrected item, not consequences of the definition of $\\mathcal C$. Apply [lem-weil-pbc-open-closed-short-exact], including its module-sheaf clause, to obtain $0\\to j_!G\\to F\\to i_*H\\to0$.",
+   "text": "Convert the finite-value constructibility predicate to Scheme.IsConstructibleSheaf with isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf. For every nonnegative q, applying homology to rightDerivedFunctorPlusCompatibility identifies higherDirectImage with the homology of the total derived direct image of F[0]. For negative q, isGE_rightDerivedFunctor_obj_singleFunctor from the same source module and DerivedCategory.isZero_of_isGE make this homology zero; a zero sheaf is constructible. This proves the private constructibleDirectImages_iff_nonnegative equivalence without any geometric or coefficient-invertibility assumptions beyond the fixed finite commutative ring.",
    "uses": [
     "def-finrepair-property-c",
-    "prop-constructible-pullback",
-    "lem-weil-pbc-open-closed-short-exact"
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "src-right-derived-functor-plus-compatibility"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-modification-c.md",
-    "place": "Proof, first paragraph; Stacks 095G (lemma-pullback-constructible), 095L (lemma-ses-associated-to-open)"
-   }
+   "elementary": false
   },
   {
-   "text": "Put $U'=Y\\times_XU=\\pi^{-1}(U)$, let $j':U'\\hookrightarrow Y$ and $h:U'\\to U$ be the projections, and put $G'=h^{-1}G$. The hypothesis that $\\pi$ is an isomorphism over $U$ says exactly that $h$ is an isomorphism. By [prop-constructible-pullback] $G'$ is constructible; [lem-fin-extension-by-zero] makes $E=j'_!G'$ constructible on the finite-type $k$-scheme $Y$. The current statement of [lem-finrepair-modification-extension-zero] applies to the finite commutative coefficient ring $\\Lambda$, the proper morphism $\\pi$, the open immersion $j$ and this cartesian square. Its canonical adjunction map $a:j_!G\\xrightarrow{\\sim}\\pi_*E$ is an isomorphism and $R^b\\pi_*E=0$ for every $b>0$. Use $a^{-1}$ for the identification $\\pi_*E\\simeq j_!G$ in the next step. This application needs no finiteness of the stalks of $G$ and no invertibility assumption beyond the inherited coefficient conventions fixed in step 1.",
-   "uses": [
-    "prop-constructible-pullback",
-    "lem-fin-extension-by-zero",
-    "lem-finrepair-modification-extension-zero"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-modification-c.md",
-    "place": "Proof, second paragraph"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-grothendieck-spectral-sequence] to $Y\\xrightarrow{\\pi}X\\xrightarrow f S$ and $E$. Its $E_2^{a,b}=R^af_*(R^b\\pi_*E)$ is zero for $b>0$, and its bottom row is $A_a=R^af_*j_!G$. Since each next-page entry is a kernel modulo an image in the current entry, the positive rows remain zero by induction on the page. All differentials from page 2 onward meeting the bottom row vanish: outgoing targets have second degree $1-r<0$, incoming sources have positive second degree $r-1$. In total degree $q$ the finite abutment filtration therefore has just one nonzero graded piece, at $(q,0)$; all earlier graded pieces vanish, so $F^0=\\cdots=F^q$, and $F^{q+1}=0$. Thus $R^q(f\\pi)_*E\\simeq A_q$. Since $E$ is constructible, $\\mathcal C(f\\pi)$ in [def-finrepair-property-c] proves that $A_q$ is constructible for every $q\\ge0$.",
-   "uses": [
-    "lem-weil-pbc-grothendieck-spectral-sequence",
-    "def-finrepair-property-c"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-modification-c.md",
-    "place": "Proof, second paragraph, displayed identification and third paragraph"
-   }
-  },
-  {
-   "text": "The explicit hypothesis that $X$ is of finite type over $k$ permits applying [lem-fin-closed-immersion] to constructible $H=i^{-1}F$ on $Z$. It gives $R^bi_*H=0$ for $b>0$; in degree zero the right derived functor is $i_*$. Use [lem-weil-pbc-grothendieck-spectral-sequence] for $Z\\xrightarrow i X\\xrightarrow f S$: again only the bottom row survives. For total degree $q$, outgoing differentials have negative second degree, incoming ones positive second degree, and all positive-second-degree entries stay zero on every page. The filtration therefore has zero quotients at indices $p<q$, giving $F^0=\\cdots=F^q$, while $F^{q+1}=0$ and $F^q/F^{q+1}$ is the bottom-row term. Hence $B_q:=R^qf_*i_*H\\simeq R^q(fi)_*H$. The hypothesis $\\mathcal C(fi)$, applied to constructible $H$, makes every $B_q$ constructible by [def-finrepair-property-c]. This uses the stated vanishing of the closed-immersion node, not an unstated exactness clause.",
-   "uses": [
-    "lem-fin-closed-immersion",
-    "lem-weil-pbc-grothendieck-spectral-sequence",
-    "def-finrepair-property-c"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-modification-c.md",
-    "place": "Proof, third paragraph, closed-complement identification"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-derived-functor-long-exact] to the short exact sequence of step 1 and $f_*$. Its source and target are abelian module-sheaf categories, its source has enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives], and $f_*$ is additive and left exact by [lem-weil-pbc-module-direct-image-left-exact]. Thus for $q>0$ there is an exact segment $B_{q-1}\\to A_q\\to R^qf_*F\\to B_q\\to A_{q+1}$. For $q=0$ the sequence starts $0\\to A_0\\to f_*F\\to B_0\\to A_1$.",
-   "uses": [
-    "lem-weil-pbc-derived-functor-long-exact",
-    "lem-weil-pbc-module-sheaves-enough-injectives",
-    "lem-weil-pbc-module-direct-image-left-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Stacks Tag 015B (derived-lemma-higher-derived-functors), parts (1)-(2); blueprint Proof, third paragraph"
-   }
-  },
-  {
-   "text": "Set $B_{-1}=0$. Exactness in step 5 identifies the image of $A_q\\to R^qf_*F$ with $C_q=\\operatorname{coker}(B_{q-1}\\to A_q)$ and the image of $R^qf_*F\\to B_q$ with $K_q=\\ker(B_q\\to A_{q+1})$. Factoring through these images gives $0\\to C_q\\to R^qf_*F\\to K_q\\to0$. For $q=0$ this reads $C_0=A_0$, using the initial injectivity, so no negative derived functor is required.",
+   "text": "The finite-type structure map X to Spec k makes X locally Noetherian, and its quasi-compactness makes X compact. Thus X is Noetherian, so the open inclusion U.ι is quasi-compact. Rewrite its range as U. These are the Mathlib instances LocallyOfFiniteType.isLocallyNoetherian, QuasiCompact.compactSpace_of_compactSpace and IsNoetherian.noetherianSpace.",
    "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the already-proved source-library realization of this very blueprint node, AlgebraicGeometry.Etale.HasConstructibleDirectImages.of_modification, in WeilConjectures.SixFunctors.Etale.Derived.Finiteness.Modification, to f, π, U.ι and i. Its properness, open-isomorphism and complementary-range hypotheses are exactly the corresponding hypotheses here. Convert hπ and hi with the equivalence of step 1, and convert the conclusion back. The source theorem uses the same open-closed localization and proper-modification argument, expressed with its triangulated constructible-homology predicate. This is reuse of the existing proof of this node, not a self-dependency or a new assumed lemma.",
+   "uses": [
+    "def-finrepair-property-c"
+   ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-modification-c.md",
-    "place": "Proof, third paragraph, displayed short exact sequence"
-   }
-  },
-  {
-   "text": "The terms $A_q$, $A_{q+1}$, $B_q$ and, for $q>0$, $B_{q-1}$ are constructible by steps 3-4. By the kernel and cokernel clauses of [thm-constructible-serre], $C_q$ and $K_q$ are constructible (for $q=0$, $C_0=A_0$). Its extension clause applied to step 6 proves $R^qf_*F$ constructible. Since $F$ and $q\\ge0$ were arbitrary, this is $\\mathcal C(f)$ by [def-finrepair-property-c]. No uniform bound on $q$ or vanishing assertion has been used.",
-   "uses": [
-    "thm-constructible-serre",
-    "def-finrepair-property-c"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-modification-c.md",
-    "place": "Proof, last paragraph; Stacks 03RZ (lemma-constructible-abelian)"
+    "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/Finiteness/Modification.lean",
+    "place": "HasConstructibleDirectImages.of_modification, lines 153-179"
    }
   }
  ],
  "proof_deps": [
   "def-finrepair-property-c",
-  "prop-constructible-pullback",
-  "lem-weil-pbc-open-closed-short-exact",
-  "lem-fin-extension-by-zero",
-  "lem-finrepair-modification-extension-zero",
-  "lem-weil-pbc-grothendieck-spectral-sequence",
-  "lem-fin-closed-immersion",
-  "lem-weil-pbc-derived-functor-long-exact",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "lem-weil-pbc-module-direct-image-left-exact",
-  "thm-constructible-serre"
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "src-right-derived-functor-plus-compatibility"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-finrepair-modification-c.md",
-  "place": "Proof, all four paragraphs, expanded using Stacks 095G, 095L, 015B and 03RZ"
+  "document": "lean/WeilConjectures/SixFunctors/Etale/Derived/Finiteness/Modification.lean",
+  "place": "Reuse HasConstructibleDirectImages.of_modification after the proved finite-value/finite-stalk and bounded-below/total-derived comparisons; preserves the blueprint open-closed modification argument."
  },
  "mathlib_searches": [
   {
@@ -235,15 +167,7 @@
    }
   ]
  },
- "tool_uses": [
-  "prop-constructible-pullback",
-  "lem-weil-pbc-open-closed-short-exact",
-  "lem-weil-pbc-grothendieck-spectral-sequence",
-  "lem-weil-pbc-derived-functor-long-exact",
-  "lem-weil-pbc-module-sheaves-enough-injectives",
-  "lem-weil-pbc-module-direct-image-left-exact",
-  "thm-constructible-serre"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-14",
   "by": "L",
@@ -269,5 +193,15 @@
   "group": "NC",
   "result": "pass",
   "note": "Wrote review.md. Checked immutable statements, dependencies, sources, exact signatures, docstrings, report sections, universes and edge cases. Per-file scompile.py reproduced cleanly. No delivery errors found; branch unchanged."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261018T062827-L-661480",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
