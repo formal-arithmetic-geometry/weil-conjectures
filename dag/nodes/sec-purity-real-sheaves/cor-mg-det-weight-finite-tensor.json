@@ -188,5 +188,16 @@
   "group": "Q135",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-89c3a32f1 (reviewer sub-agent of L); spot-checked: Read in full: the item, the main-20261015 and master statement and proof (identical, order 2638), the unit sk-d-real-detweights (a definition sketch with no steps), and the statement of every cited node. The statement is unchanged and matches the source: one multiset entry per occurrence of a simple factor, normal geometrically connected curve, and geometric semisimplicity kept in stmt_deps (the blueprint says the proof does not use it). I tested it on k=1, a rank-one sheaf, A(rank 2, weight 0)+B(rank 1, weight 1) with k=2 (sums {0,1,2}, max 2β) and a nonsplit extension; all agree. Step 1 (reindexing by Jordan–Hölder and lem-rp-determinant-weights-agree, which gives finite geometric determinant and dw_ι=dw_{λι}), step 2 (base case) and step 4 (converse and kβ max) are correct. In step 3 I checked every hypothesis of prop-ag-det-weight-two-factor-tensor: nonzeroness (dual-functional argument), the same curve, composition series exist, and the finite determinants come from step 1. The induction is set up explicitly and nothing is relabelled. One fault (C1): steps 1 and 3 treat Weil representations (constituents and the tensor power F^{⊗(k-1)}) as lisse Weil sheaves, which lem-rp and the two-factor proposition need, but cite nothing for it. Fixed by citing the existing Lean-closed node prop-wf-weil-sheaf-representation-equivalence (exact tensor equivalence that matches subquotients; its unit sk-i-real-sheaves is on the route) in the text and uses of steps 1 and 3, with proof_deps recomputed. Accepted tool use: lem-mg-jordan-holder (generic Jordan–Hölder, Lean closed_part via Representation.CompositionSeries.jordanHolder, off-route in sk-r-linear-library). prop-ag-det-weight-two-factor-tensor and lem-mg-composition-series-exists are Lean-closed tools. The only other DAG hit is lem-rp-upper-bound, which uses this item, so there is no duplicate. No new nodes, no SGA.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "branch": "master",
+  "existing": true,
+  "module": "WeilConjectures.EtaleCohomology.Purity.RealSheaves.DetWeightOperations",
+  "declaration": "AlgebraicGeometry.WeilGroup.detWeight_subquotient_tensorPower",
+  "declarations": [
+   "AlgebraicGeometry.WeilGroup.detWeight_subquotient_tensorPower",
+   "AlgebraicGeometry.WeilGroup.isGreatest_detWeight_subquotient_tensorPower"
+  ],
+  "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:19 UTC (L, propagation 2026-10-18), live declaration stated, proof open in WeilConjectures.EtaleCohomology.Purity.RealSheaves.DetWeightOperations: the blueprint item cor-mg-det-weight-finite-tensor's upstream Lean declarations as live states them; their proofs are still `sorry` in live (stage-3 route work)"
  }
 }

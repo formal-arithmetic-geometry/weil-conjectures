@@ -208,5 +208,17 @@
   "group": "Q150",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q150-b65bb342d (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item node and report only, no new nodes, no unit changes, no Lean attached. Statement: the correction from A to Λ is right. def-pod-conventions defines A as the point's coefficient ring, and a literal A_{E,n} target is impossible at the field stages (there is no unital ring map Z/ℓ^n -> Q_ℓ). At Λ=A the statement is unchanged, it matches def-pod-derived-poincare-pairing and thm-pod-derived-poincare-duality, and nothing is weakened; all five citers stay valid. 'Over a field' means the field stages E and Q̄_ℓ, as in the unit, the blueprint proof and the degreewise theorem. Step 1: clause (b) of the Mathlib leaf lem-weil-pbc-proper-fp-permanence (Stacks 01W4, morphisms-lemma-base-change-proper) gives properness of a_X after base change, which is enough. Step 2: cor-cbc-proper-coincidence supplies the identity-compactification identification at finite level and prop-weil-proper-compact-coincidence gives it at all stages; applying Fib_s and H^i gives e and e_i. Minor looseness: the prop's statement says only '≅'; its main-20261015 proof shows the map is the levelwise canonical one, and perfectness holds for any isomorphism anyway. Step 3: the elementary definition b=β_K∘(e^{-1}⊗1). Step 4: by naturality in the first variable of the adjunction in sk-def-sf-operations (i), α_b=(e^{-1})^∨∘α with inverse θ∘e^∨; I checked both composites by hand, and Q≅C gives the perfect point-complex domain that def-pod-perfect-derived-pairing requires. Steps 5–6: the degreewise theorem's adjoint isomorphism, the degree-zero identification and the twist isomorphism in prop-pod-degree-of-the-pairing, then precomposition by e_i^{-1} and tensoring with T^{-1}; the steps are explicit and choose no trivialization of the Tate line. proof_deps equals the union of the uses, and all steps are under 2000 characters. Route: cor-cbc is Lean-closed, so it is a tool. I accept both declared tool uses: lem-weil-pbc-proper-fp-permanence (Mathlib leaf, clause (b) only) and prop-weil-proper-compact-coincidence (all-stage coincidence used as a black box). No SGA is cited. The duplicate search found no other node stating this item. The slopmaster2 Lean is finite-Λ only, and its degreewise result is an abstract isomorphism, so not attaching it is correct. Small cases checked: Spec k, K=0, P^1, shifted K, and A_{E,n} with n≥2 (derived clause only). No fixes."
+ },
+ "lean": {
+  "branch": "master",
+  "existing": true,
+  "module": "WeilConjectures.EtaleCohomology.PoincareDuality.Degreewise",
+  "declaration": "AlgebraicGeometry.Etale.TateOrientation.isPerfectPairing_properPoincarePairing",
+  "declarations": [
+   "AlgebraicGeometry.Etale.TateOrientation.isPerfectPairing_properPoincarePairing",
+   "AlgebraicGeometry.Etale.TateOrientation.degreewise_duality_of_isProper",
+   "AlgebraicGeometry.Etale.isPerfectPairing_properPoincarePairing"
+  ],
+  "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:19 UTC (L, propagation 2026-10-18), live declaration stated, proof open in WeilConjectures.EtaleCohomology.PoincareDuality.Degreewise: the blueprint item thm-pod-proper-poincare-duality's upstream Lean declarations as live states them; their proofs are still `sorry` in live (stage-3 route work)"
  }
 }

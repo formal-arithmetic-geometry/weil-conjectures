@@ -193,5 +193,16 @@
   "group": "Q156",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q156-71d8aeb96 (reviewer sub-agent of L); spot-checked: I read the item and every cited node in full, against both blueprint snapshots (master and main-20261015) and unit sk-input-weights. The statement is identical in both snapshots and nothing is weakened. There are no new nodes. Assertion (1) of thm-weil-deligne-purity is the right step, but the theorem has an explicit hypothesis that all displayed cohomology groups are finite-dimensional. The item does not assume this, and the report wrongly claimed there was no unstated hypothesis (E1). The repair adds a Step 1 that uses clause (3) of lem-weil-smooth-proper-purity-hypotheses (same unit, reviewed PASS) to supply finite-dimensional H^j and H^j_c over Qlb with the Frobenius action. It also adds def-weil-complex-weights to stmt_deps (B3): the statement and the blueprint proof both use that weight notion. Step 2 now checks each hypothesis and applies the theorem at i=0, which is allowed since d>=0. It identifies the theorem's H^i(Ra_*) and H^i(Ra_!) with the item's RΓ and RΓ_c through def-weil-ordinary-compact-cohomology. proof_origin is set to agent, since the route is blueprint-only, and proof_deps is the union of the uses. The coefficient category is the same on both sides: def-weil-weil-sheaf-complex at Qlb, built on def-weil-algebraically-closed-coefficients. The Frobenius g_X and the canonical lift on ω_X are also the same. All cited statements are in the same unit or are definitions, so there are no tool_uses. There is no cycle and no SGA citation. The d=0 case checks out. Corrected file: fixes/dag/nodes/sec-zeta-weil/prop-weight-purity.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "branch": "master",
+  "existing": true,
+  "module": "WeilConjectures.ZetaFunction.Weights",
+  "declaration": "AlgebraicGeometry.WeilSheaf.isMixedOfWeightsAtMost_toComplex_adicConstant",
+  "declarations": [
+   "AlgebraicGeometry.WeilSheaf.isMixedOfWeightsAtMost_toComplex_adicConstant",
+   "AlgebraicGeometry.WeilSheaf.weightPurity_adicConstant"
+  ],
+  "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:19 UTC (L, propagation 2026-10-18), live declaration stated, proof open in WeilConjectures.ZetaFunction.Weights: the blueprint item prop-weight-purity's upstream Lean declarations as live states them; their proofs are still `sorry` in live (stage-3 route work)"
  }
 }

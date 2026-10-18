@@ -186,5 +186,17 @@
   "group": "Q53",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-7a767d503 (reviewer sub-agent of L); spot-checked: I read the whole delivery and every cited statement; review.md has the details. The statement is word for word the main-20261015 blueprint statement and is not weakened. The only statement-dependency change adds def-wf-iota-real, which the hypothesis uses. Step 1: the tensor action from def-real-weil-representation-operations, the conjugation-stable eigenvalues from def-wf-iota-real and the tensor-product eigenvalues from p-linear-spectra, applied k times, give B(t). A permutation σ with conj z_i = z_{σ(i)} permutes the factors of B(t), so its coefficients are real, which proves (i). Step 2: applying ι entrywise to the matrix commutes with determinants and with the tensor-product matrix. p-linear-triangular is applied over C, which is algebraically closed; its proof, unit and Lean (IsAlgClosed) all carry that hypothesis. This gives Tr(M^n)=s_n^k, with s_n real, so the trace is ≥0 when k is even. Reading the diagonal off det(1-tM) misses zero eigenvalues, but this is harmless: F_x is invertible, and zero entries add nothing to the traces. Step 3: lem-weil-exp-trace-determinant needs a characteristic-zero field, finite dimension and an endomorphism; C and M_C satisfy all three, and the inverse is unique because B(0)=1. Step 4 is elementary: it is the coefficient formula of def-weil-power-series-exponential with R=C. Edge cases tested: V=0, the empty scheme, k=1 (eigenvalue -1 shows parity is needed), a conjugate pair ±i, and a Jordan block. There are no new nodes, no duplicate (searched for 'nonnegative coefficients' and 'even tensor') and no cycle. Accepted tool use: lem-weil-exp-trace-determinant (sec-zeta-weil), a generic identity that is exactly the one the unit's step 1 uses; it cites no trace-formula or Poincaré-duality node. Batch-5 flag on p-linear-triangular (sec-trace-formula): it is genuinely outside both assumptions. It is generic Schur triangularization with no dependencies and closed, sorry-free Lean. It is already in the item's closure through p-linear-spectra, and this unit lists it in its uses and its step 1. It is not a step of the trace-formula or Poincaré-duality proof, so no assumption leaf is needed. Separate observation, not a fault here: the imported statement text of p-linear-triangular omits 'algebraically closed' and should be aligned later. No changes made."
+ },
+ "lean": {
+  "branch": "master",
+  "existing": true,
+  "module": "WeilConjectures.EtaleCohomology.Purity.RealSheaves.DetWeightOperations",
+  "declaration": "AlgebraicGeometry.WeilGroup.IsReal.tensorPower",
+  "declarations": [
+   "AlgebraicGeometry.WeilGroup.IsReal.tensorPower",
+   "AlgebraicGeometry.WeilGroup.IsReal.hasNonnegCoeffs_eulerFactor_tensorPower",
+   "AlgebraicGeometry.WeilGroup.IsReal.hasNonnegCoeffs_eulerFactor_tprod_self"
+  ],
+  "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:19 UTC (L, propagation 2026-10-18), live declaration stated, proof open in WeilConjectures.EtaleCohomology.Purity.RealSheaves.DetWeightOperations: the blueprint item lem-rp-even-tensor-positivity's upstream Lean declarations as live states them; their proofs are still `sorry` in live (stage-3 route work)"
  }
 }

@@ -151,5 +151,21 @@
   "group": "Q153",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q153-93b689302 (reviewer sub-agent of L); spot-checked: Read in full: the item; the main-20261015 statement and proof (order 2777; same text as master order 2433); unit sk-lem-finite; the cited nodes def-pod-derived-poincare-pairing and def-coefficient-twists-detailed; and def-pod-conventions, where k is algebraically closed. The statement is true and agrees with the source, hypothesis by hypothesis. Small cases checked: d=0, i out of range, and X=s. The twist identification is false over F_q (X=A^1, Lambda=Z/l, l not dividing q-1: H^1(mu_l)=0 but H^1(Z/l) tensor mu_l = Z/l), but it holds because k is algebraically closed. There are no new nodes. One fault, C4/E5: the single step cited def-coefficient-twists-detailed for 'the twist of a complex commutes with the global sections', which that definition does not state, and it hid why Lambda_X(d) is constant. Repaired in fixes/dag/nodes/sec-poincare-duality/prop-pod-degree-of-the-pairing.json (only proof, proof_deps and split_report changed) by splitting the step into three. (1) Degree zero: the explicit Kunneth map and the shift H^{-i}(D[2d])=H^{2d-i}. (2) Over algebraically closed k, mu_{l^r,X} is the constant sheaf (Chinese remainder argument, l invertible), so Z_l(1)_X = Z_l-hat tensor T_l(k), and Lambda(m)_X = Lambda_X tensor Lambda(m) with Lambda(m) free of rank one. This uses clause 3 of lem-pur-twist-sheaf-locally-free, which is on the unit route (sk-def-sf-admissible) and makes no cycle. (3) RGamma(X,K(d)) = RGamma(X,K) tensor Lambda(d), then tensor-Hom adjunction into Lambda(-d)=Hom(Lambda(d),Lambda). This matches how cor-pod-untwisted-similitude and thm-pod-equivariance use the item. No existing DAG node states the global-sections identification. No SGA source and no tool_uses. For the maintainer: the report says source was updated to order 2777, but the source field (a maintainer field) still names master order 2433; please re-point it at merge.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "branch": "master",
+  "existing": true,
+  "module": "WeilConjectures.EtaleCohomology.PoincareDuality.Degreewise",
+  "declaration": "AlgebraicGeometry.Etale.TateOrientation.degreeZeroPairing",
+  "declarations": [
+   "AlgebraicGeometry.Etale.TateOrientation.degreeZeroPairing",
+   "AlgebraicGeometry.Etale.TateOrientation.degreewisePairing",
+   "AlgebraicGeometry.Etale.TateOrientation.degreewisePairing_apply",
+   "AlgebraicGeometry.Etale.TateOrientation.untwistedDegreewisePairing",
+   "AlgebraicGeometry.Etale.TateOrientation.degreewisePoincarePairing",
+   "AlgebraicGeometry.Etale.TateOrientation.untwistedPoincarePairing",
+   "AlgebraicGeometry.Etale.TateOrientation.untwistedDegreewisePoincarePairing"
+  ],
+  "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:19 UTC (L, propagation 2026-10-18), live declaration stated, proof open in WeilConjectures.EtaleCohomology.PoincareDuality.Degreewise: the blueprint item prop-pod-degree-of-the-pairing's upstream Lean declarations as live states them; their proofs are still `sorry` in live (stage-3 route work)"
  }
 }
