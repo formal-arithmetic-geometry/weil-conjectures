@@ -82,11 +82,11 @@
    }
   },
   {
-   "text": "Take $g=\\mathrm{id}_A$ in the preceding step to compare any two resolutions. Any two lifts are homotopic, by applying uniqueness of lifts to the quasi-isomorphism $A[0]\\to I^\\bullet$. If $v-w=d k+k d$, the induced total maps are homotopic via $K|_{(t,r)}=(-1)^t\\check C^t(k^r)$. Indeed the two horizontal contributions cancel, while the two vertical contributions are $d_Ik+kd_I$ because the two signs $(-1)^t$ multiply to $1$. On global sections the homotopy is $\\Gamma(k)$. Therefore all induced cohomology maps agree. Comparisons for identities and compositions agree by the same uniqueness, giving resolution independence of the specified edge under the canonical cohomology identifications.",
+   "text": "Compare the chosen injective resolution with any other one using InjectiveResolution.desc of the identity. The two augmentation squares and isoRightDerivedObj_hom_naturality identify the two normalized edge maps. Normalization at the chosen resolution determines any edge uniquely, since its resolution comparison and H(alpha) are invertible. Thus all choices and all lifts give the same edge, without constructing a total homotopy.",
    "uses": [
-    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
-    "def-sp-double-complex-total",
-    "def-weil-pbc-sites-and-cohomology"
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "lem-weil-pbc-derived-functor-map-via-lift",
+    "def-sp-double-complex-total"
    ],
    "elementary": false,
    "source": {
@@ -95,14 +95,9 @@
    }
   },
   {
-   "text": "For site change choose $B\\to J^\\bullet$ injective on $\\mathcal D$. Exactness of $f^{-1}$ makes $f^{-1}A[0]\\to f^{-1}I^\\bullet$ a degreewise monomorphic quasi-isomorphism. Lift the map $f^{-1}A[0]\\to B[0]\\to J^\\bullet$, whose first arrow is adjoint to $h$, along this augmentation to $j:f^{-1}I^\\bullet\\to J^\\bullet$, strictly over the augmentations. Adjunction gives $v:I^\\bullet\\to f_*J^\\bullet$. Its section maps are $I^r(V)\\to J^r(uV)$, compatible with every restriction. Their global map $w:\\Gamma_{\\mathcal C}I\\to\\Gamma_{\\mathcal D}J$ computes $h_H$. To check the last assertion against the canonical pullback, insert an injective resolution $L$ of $f^{-1}A$, a lift $f^{-1}I\\to L$, and a coefficient lift $L\\to J$; the canonical pullback and coefficient formulas compute their composite on sections. Its composite is homotopic to $j$ by lift uniqueness, so it has the same cohomology map.",
+   "text": "Exactness of the abelian inverse image sends the source injective resolution to an augmented quasi-isomorphic resolution. Apply InjectiveResolution.descOfQuasiIso to the adjoint of h and the target injective resolution. Compose its pushforward with the adjunction unit to obtain v. Naturality of the unit and the degree-zero augmentation identity prove the required strict equation. The site-change statement specifies the cohomology map directly by the resulting section map w; no separately constructed site-cohomology pullback is needed.",
    "uses": [
-    "lem-weil-pbc-site-pullback-abelian-exact",
-    "lem-weil-pbc-lift-along-injective-quasi-iso",
-    "lem-weil-pbc-site-cohomology-pullback",
-    "lem-weil-pbc-injective-resolution-lift-exists",
-    "lem-weil-pbc-derived-functor-map-via-lift",
-    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+    "lem-weil-pbc-site-pullback-abelian-exact"
    ],
    "elementary": false,
    "source": {
@@ -124,15 +119,12 @@
    }
   },
   {
-   "text": "The category of sheaves of left $\\mathcal O$-modules on the small site $\\mathcal C$ is Grothendieck abelian by [lem-weil-pbc-ring-sheaves-grothendieck], in a universe containing the site and coefficient values. Hence it has enough injectives by [lem-sp-grothendieck-enough-injectives]. For modules choose a nonnegative injective module resolution $M\\to P^\\bullet$, as in the statement's convention for module cohomology. After forgetting scalars it remains an exact augmented resolution: kernels are sectionwise and the underlying sheaf of a cokernel is the sheafification of the sectionwise abelian cokernel, so forgetting preserves kernels and cokernels. Every $P^r_{ab}$ is acyclic for abelian evaluation at every object by the ringed-site injective-module acyclicity theorem; it is not asserted to be an injective abelian sheaf. The acyclic-resolution theorem therefore identifies $H^q(\\Gamma(P_{ab}))$ with $H^q(\\mathcal C,M_{ab})$, by any augmentation-preserving map $P_{ab}\\to J$ to an abelian injective resolution. Such a strict map exists by the monomorphic quasi-isomorphism lifting lemma. Denote it by $k$.",
+   "text": "The upstream equal-universe theorem SheafOfModules.isGrothendieckAbelian and Mathlib give enough injectives for module sheaves; no separate universe-enlargement theorem is needed. Apply the existing module_abelian_evaluation_comparison: it gives a natural isomorphism c between derived module evaluation and derived abelian evaluation after forgetting, its identity-on-sections normalization, and its formula for every augmentation-preserving map from a forgotten module resolution to an abelian injective resolution. Exact forgetting sends the module resolution to a resolution, so descOfQuasiIso supplies such a map k.",
    "uses": [
     "def-weil-sheaf-of-modules-category",
-    "lem-sc-injective-module-abelian-acyclic-zariski",
-    "lemma-weil-pbc-leray-acyclicity",
-    "lem-weil-pbc-lift-along-injective-quasi-iso",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "lem-weil-pbc-ring-sheaves-grothendieck",
-    "lem-sp-grothendieck-enough-injectives"
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
    ],
    "elementary": false,
    "source": {
@@ -141,12 +133,10 @@
    }
   },
   {
-   "text": "The canonical module-to-abelian identification is the resolution map $H^q(\\Gamma(k))$ just obtained. Here is its normalization: the module right-derived delta-functor is universal, while abelian cohomology precomposed with exact forgetting is a delta-functor and vanishes in positive degrees on module injectives. Hence it is effaceable and universal as well, and the unique delta-functor morphism inducing the identity on sections is an isomorphism. Its value on $M\\to P^\\bullet$ is the acyclic-resolution comparison: successively put $M_0=M$, $M_{r+1}=\\operatorname{coker}(M_r\\to P^r)$ and use $0\\to M_r\\to P^r\\to M_{r+1}\\to0$. In degree one both comparisons are induced by the identity on sections modulo the image of $\\Gamma(P^0)$; in higher degrees the connecting isomorphisms reduce degree by one, since the positive cohomology of each $P^r$ vanishes in both theories. Induction therefore identifies the universal comparison with $H^q(\\Gamma(k))$ in every degree, with the same connecting-map convention.",
+   "text": "Take the universal right-derived delta-functor G for module evaluation. Its degreewise identifications g with derived module evaluation, composed with c, represent the second family of functors as the same universal delta-functor. Its identity morphism realizes c through these identifications. Cancel the identifications in degree zero and use universality to prove uniqueness. The all-resolution formula for c is the evaluation-comparison theorem followed by the inverse target resolution identification.",
    "uses": [
     "lem-weil-pbc-right-derived-universal-delta-functor",
-    "lem-sc-injective-module-abelian-acyclic-zariski",
-    "lemma-weil-pbc-leray-acyclicity",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
    ],
    "elementary": false,
    "source": {
@@ -155,12 +145,13 @@
    }
   },
   {
-   "text": "For $P$ the module restriction augmentation $\\alpha_P:\\Gamma(P)\\to\\operatorname{Tot}\\check C(\\mathcal U,P)$ is a quasi-isomorphism by injective-module Cech acyclicity, the degree-zero sheaf equalizer, and the same augmentation lemma used in step 2. The module coefficient augmentation $\\beta_M$ is a quasi-isomorphism by step 3 applied to module evaluation and the assumed module acyclicity on every tuple. Underlying section Cech complexes and both axis maps are unchanged on forgetting scalars. Applying $\\check C$ termwise to $k:P_{ab}\\to J$ gives $K$ between the two totals with $K\\alpha_P=\\alpha_J\\Gamma(k)$ and $K\\beta_M=\\beta_{M_{ab}}$, component by component. Consequently $H(\\Gamma(k))H(\\alpha_P)^{-1}H(\\beta_M)=H(\\alpha_J)^{-1}H(\\beta_{M_{ab}})$, the required compatibility with the canonical identification of step 9. No claim that forgetting preserves injectives or that tensoring with the ring sheaf is exact occurs.",
+   "text": "Define eM as eA followed by c inverse. For a module injective resolution P, injective-module Cech acyclicity and the degree-zero sheaf gluing condition make its restriction augmentation alphaP a quasi-isomorphism by the first-quadrant augmentation criterion. Choose an augmentation-preserving k from the forgotten P to an abelian injective resolution. Applying Cech to k gives a total map V satisfying both augmentation squares. The resolution formula for c makes H(sections(k)) invertible. The alpha square makes H(V) invertible; cancelling it and substituting normalization of eA in the beta square proves normalization of eM. Abelian tuple acyclicity gives invertibility of eA by the first declaration, hence of eM. Normalization at a chosen resolution proves uniqueness. A separate proof that the module beta is a quasi-isomorphism is unnecessary.",
    "uses": [
     "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
-    "def-weil-pbc-sites-and-cohomology",
     "lem-sc-first-quadrant-column-augmentation",
-    "def-weil-pbc-site-cech-complex"
+    "def-weil-pbc-site-cech-complex",
+    "def-sp-double-complex-total",
+    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
    ],
    "elementary": false,
    "source": {
@@ -175,26 +166,21 @@
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-sheaf-of-modules-category",
   "lem-sc-first-quadrant-column-augmentation",
-  "lem-sc-injective-module-abelian-acyclic-zariski",
   "lem-sp-grothendieck-enough-injectives",
   "lem-weil-pbc-derived-functor-map-via-lift",
   "lem-weil-pbc-injective-resolution-lift-exists",
-  "lem-weil-pbc-lift-along-injective-quasi-iso",
-  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
   "lem-weil-pbc-module-sheaves-colimits-forgetful",
   "lem-weil-pbc-right-derived-universal-delta-functor",
-  "lem-weil-pbc-ring-sheaves-grothendieck",
   "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
-  "lem-weil-pbc-site-cohomology-pullback",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
   "lem-weil-pbc-site-injective-cech-acyclic",
   "lem-weil-pbc-site-pullback-abelian-exact",
-  "lem-weil-pbc-site-sheaves-enough-injectives",
-  "lemma-weil-pbc-leray-acyclicity"
+  "lem-weil-pbc-site-sheaves-enough-injectives"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "S3 stage 3",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 03AX and 03F7 for the specified Cech augmentations and their quasi-isomorphisms; Tag 03FD for module comparison. The omitted coefficient functoriality, site-change square and forgetting square are verified explicitly here."
+  "place": "Tags 03AX, 03F7, 03FD. Explicit componentwise augmentations and comparison squares; chosen-resolution uniqueness replaces the total homotopy argument. The existing ringed-site module/abelian evaluation comparison supplies the scalar comparison and its resolution formula."
  },
  "mathlib_searches": [
   {
@@ -340,11 +326,8 @@
  },
  "tool_uses": [
   "lem-sc-first-quadrant-column-augmentation",
-  "lem-sc-injective-module-abelian-acyclic-zariski",
   "lem-weil-pbc-ringed-site-injective-module-cech-acyclic",
-  "lemma-weil-pbc-leray-acyclicity",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
-  "lem-weil-pbc-ring-sheaves-grothendieck"
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
  ],
  "reviewed": {
   "date": "2026-10-14",
@@ -389,5 +372,15 @@
   "group": "ND",
   "result": "pass",
   "note": "Wrote review.md. Checked immutable files, source passages, dependencies, signatures, normalization, compatibility clauses, and edge cases. Server compiles reproduced cleanly. No delivery errors found; contextual clone HEAD moved externally, as recorded."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261018T071222-L-1677272",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
