@@ -16005,3 +16005,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:27 L: merged deliver/F2/Sheaf.AlgebraicGeometry.ProEtaleModuleDirectImageLeftExact (stage 3; reviewer PASS; first push; landing 20261018T062744-L-647651 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:27 L: merged deliver/F2/Sheaf.CategoryTheory.RingedSiteLocalization (stage 3; reviewer PASS; first push; landing 20261018T062745-L-647871 (proof); batch 20261018T062645; modules 1; new nodes 0)
 - 06:27 L: merged deliver/F3/Sheaf.AlgebraicGeometry.ProperConstructibleHigherDirectImages (stage 3; reviewer PASS; first push; landing 20261018T062745-L-648087 (proof); batch 20261018T062645; modules 1; new nodes 0)
+- 06:27 L: merged deliver/F3/Sheaf.AlgebraicGeometry.ProperOpenComparisonIso (stage 3; reviewer PASS; first push; landing 20261018T062746-L-648234 (proof); batch 20261018T062645; modules 1; new nodes 0)
