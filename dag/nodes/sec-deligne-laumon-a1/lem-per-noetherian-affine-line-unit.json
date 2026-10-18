@@ -15,9 +15,126 @@
   "prop-weil-pbc-inverse-image-modules-exact",
   "def-weil-pbc-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $m=\\ell^n$ and $P=\\mathbf P(\\{0,1\\};B)$, with projection $q$. The standard charts [lem-weil-pbc-projective-space-standard-charts] are $D(x_0)=\\operatorname{Spec}R[t]$ and $D(x_1)=\\operatorname{Spec}R[s]$ over each $\\operatorname{Spec}R\\subset B$, with $s=t^{-1}$ on the intersection. The closed locus $x_0=0$ is empty in the first chart and is $s=0$ in the second; these equations agree on the overlap and identify this closed subscheme with $B$. Write $i:B\\hookrightarrow P$ for it. Its complementary open $j:U\\hookrightarrow P$ is $D(x_0)=\\mathbf A^1_B$, with $qj=p$ and $qi=\\operatorname{id}_B$. By [lemma-nagata-projective-space-base-change-proper], $q$ is proper, hence of finite type; [lem-weil-pbc-finite-type-over-noetherian] makes $P$ Noetherian. Thus all Noetherian hypotheses of the proper projection formula below hold, without requiring $B$ to be regular or over a field.",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "lemma-nagata-projective-space-base-change-proper",
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01ND, 01NG: the two projective-line charts; Morphisms Tag 01T6 for the Noetherian hypothesis."
+   }
+  },
+  {
+   "text": "Use [lem-asd-etale-finite-twist-pullback] with $A=\\Lambda$ and $m=\\ell^n$. Set $T_B=\\Lambda_B(1)[2]$, $T_P=\\Lambda_P(1)[2]=q^{-1}T_B$, and $K=\\Lambda_B(-1)[-2]$. Evaluation gives $K\\otimes^L T_B\\cong\\Lambda_B$ and $q^{-1}K\\otimes^L T_P\\cong\\Lambda_P$: the finite Tate line is locally free of rank one, so its dual evaluations are isomorphisms, and the shifts cancel. Write $F=Rq_*$ and $G(L)=q^{-1}L\\otimes^L T_P$. The entire ordinary-etale adjunction $F\\dashv G$ and the decomposition $b:T_B\\oplus\\Lambda_B\\xrightarrow{\\sim}FT_P$ are [lem-asd-ordinary-finite-p1-adjunction]. Its trace is $t=\\operatorname{pr}_2b^{-1}$ and its actual counit at $L$ is $(1_L\\otimes t)\\pi_{L,T_P}^{-1}$. Here $\\pi$ is the canonical proper projection isomorphism [lem-amb-proper-coproducts-projection]. In particular $GK\\cong\\Lambda_P$.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback",
+    "lem-asd-ordinary-finite-p1-adjunction",
+    "lem-amb-proper-coproducts-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-adjunction.md",
+    "place": "Full projective-line adjunction, together with its normalized decomposition; specialize the coefficient ring to Z/ell^n and the input to Lambda(-1)[-2]."
+   }
+  },
+  {
+   "text": "Tensor $b$ with $K$ and use the same canonical projection isomorphism to obtain\n$$d:\\Lambda_B\\oplus K=(K\\otimes^L T_B)\\oplus K\\xrightarrow{1_K\\otimes b}K\\otimes^L FT_P\\xrightarrow{\\pi_{K,T_P}}F\\Lambda_P.$$\nIts first component is the ordinary $q^{-1}\\dashv F$ unit $\\eta_q:\\Lambda_B\\to F\\Lambda_P$. Indeed the first component of $b$ is the unit at $T_B$. The map $\\pi$ of [lem-amb-proper-coproducts-projection] is $Rq_*(\\sigma)\\,\\mathrm{PF}_q\\,\\sigma$, where $\\mathrm{PF}_q$ is by definition the morphism adjoint to $(\\varepsilon^{\\mathrm{ord}}\\otimes1)$ composed with the inverse-image tensor comparison [def-kun-projection-formula-map] (the same adjoint-of-counit construction as [lem-weil-pbc-ringed-projection-mate-exact]); the symmetries $\\sigma$ commute with the units by naturality. By this adjoint-of-counit description of $\\pi$, the transpose of the first component of $d$ is $1_{q^{-1}K}$ tensored with $\\varepsilon^{\\mathrm{ord}}_{T_P}\\,q^{-1}(\\eta_{q,T_B})$, followed by evaluation. This is the identity of $\\Lambda_P$ by the ordinary triangle identity. The counit $\\epsilon_K:FGK=F\\Lambda_P\\to K$ of the different adjunction $F\\dashv G$ satisfies $\\epsilon_Kd=\\operatorname{pr}_2$, since its formula in Step 2 cancels $\\pi$ and $t b=\\operatorname{pr}_2$. Thus both the unit and trace have specified coordinates.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "def-kun-projection-formula-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 and 0B56: derived adjunction and the adjoint-of-counit projection map; elementary substitution of the two normalized maps from Step 2."
+   }
+  },
+  {
+   "text": "Let $i^!$ denote the ordinary right adjoint of $i_*$ provided by [lem-exc-closed-support-triangle], and write $c:i_*i^!\\to\\operatorname{id}$ for its counit. The termwise $i_*$ is exact [lem-per-etale-closed-sheaf-internal-adjunction], so it computes the derived direct image $Ri_*$. Since $qi=\\operatorname{id}_B$, [lem-weil-derived-direct-image-composition](5) therefore identifies $Fi_*$ canonically with the identity. Composing $i_*\\dashv i^!$ and $F\\dashv G$ gives $Fi_*\\dashv i^!G$, whose counit at $L$ is\n$$Fi_*i^!GL\\xrightarrow{F(c_{GL})}FGL\\xrightarrow{\\epsilon_L}L$$\nby [def-weil-pbc-composite-adjunction]. Compare this with the identity adjunction by [det-sp-unique-right-adjoint]. It follows that this displayed counit, regarded as $i^!GL\\to L$, is an isomorphism. Let $\\theta:K\\xrightarrow{\\sim}i^!GK$ be its inverse at $K$. After $GK=\\Lambda_P$, the map $f=F(c_{\\Lambda_P})\\,\\theta:K\\to F\\Lambda_P$ therefore satisfies $\\epsilon_K f=1_K$. This obtains the needed closed-support value from the two adjunctions, without an absolute-purity assertion about $B$.",
+   "uses": [
+    "lem-exc-closed-support-triangle",
+    "lem-weil-derived-direct-image-composition",
+    "def-weil-pbc-composite-adjunction",
+    "det-sp-unique-right-adjoint",
+    "lem-per-etale-closed-sheaf-internal-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-adjunction.md",
+    "place": "Full projective-line adjunction and its counit; Stacks categories.tex Tag 0DV0 (lemma-compose-counits) and uniqueness of adjoints for the section at infinity."
+   }
+  },
+  {
+   "text": "Apply [lem-exc-closed-support-triangle] to $\\Lambda_P$ and apply $F=Rq_*$. This preserves distinguished triangles by [lem-pc-right-derived-functor-triangulated]. The direct-image composition comparison [lem-weil-derived-direct-image-composition](5) identifies the third term with $R(qj)_*\\Lambda_U=Rp_*\\Lambda_U$. Identify the first term with $K$ using $Fi_*=\\operatorname{id}$ and $\\theta$, and identify the middle term using $d$. We get a distinguished triangle\n$$K\\xrightarrow{u}\\Lambda_B\\oplus K\\xrightarrow{v}C\\xrightarrow{\\partial}K[1],\\qquad C=Rp_*\\Lambda_U.$$\nThe second arrow before these identifications is $F$ of the ordinary open adjunction unit. By Steps 3 and 4, $\\operatorname{pr}_2u=\\epsilon_Kf=1_K$. Hence $u=(a,1_K)$, where $a=\\operatorname{pr}_1d^{-1}f$. No identification of $a$ with a Chern class is needed.",
+   "uses": [
+    "lem-exc-closed-support-triangle",
+    "lem-pc-right-derived-functor-triangulated",
+    "lem-weil-derived-direct-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-existence/lem-exc-closed-support-triangle.md",
+    "place": "Support triangle with its actual counit and open unit; Stacks etale-cohomology.tex Tag 0A45, lemma-cohomology-with-support-triangle."
+   }
+  },
+  {
+   "text": "Here is the split-triangle calculation with all arrows retained. By [lem-weil-pbc-hom-into-triangle-exact](i), also on rotated triangles, $vu=0$ and $u[1]\\partial=0$. Applying the left inverse $\\operatorname{pr}_2[1]$ gives $\\partial=0$. Put $z=\\operatorname{pr}_1-a\\operatorname{pr}_2:\\Lambda_B\\oplus K\\to\\Lambda_B$. Since $zu=0$, [lem-weil-pbc-hom-out-of-triangle-exact](i) gives $w:C\\to\\Lambda_B$ with $wv=z$. Therefore $w(v\\operatorname{in}_1)=1$. Also\n$$((v\\operatorname{in}_1)w-1_C)v=v(\\operatorname{in}_1z-1)=-vu\\operatorname{pr}_2=0.$$\nPart (ii) of the same Hom-out exactness says this difference factors through $\\partial$, so it is zero. Thus $v\\operatorname{in}_1:\\Lambda_B\\to C$ is an isomorphism with inverse $w$.",
+   "uses": [
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "lem-weil-pbc-hom-out-of-triangle-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0146 (lemma-composition-zero), 0149 (lemma-representable-homological): explicit split-triangle calculation."
+   }
+  },
+  {
+   "text": "It remains to identify the isomorphism, rather than just its endpoints. Step 3 identifies $d\\operatorname{in}_1$ with $\\eta_q$. Step 5 therefore identifies $v\\operatorname{in}_1$ with $\\Lambda_B\\xrightarrow{\\eta_q}Rq_*\\Lambda_P\\xrightarrow{Rq_*(\\eta_j)}Rq_*Rj_*\\Lambda_U$. Under the canonical composition comparison this is the unit for $p=qj$. More explicitly the ordinary inverse images are exact by [prop-weil-pbc-inverse-image-modules-exact], and the small-etale module-sheaf categories are Grothendieck abelian [lem-weil-pbc-module-sheaves-grothendieck-abelian], so [lem-sfb-derived-composition-adjunction-normalization] applies to $q^{-1},j^{-1},p^{-1}$ and their specified direct-image right adjoints. Its normalized derived comparison is the degreewise direct-image composition on injective representatives, and its unit is exactly $Rq_*(\\eta_j)\\eta_q$ by [def-weil-pbc-composite-adjunction]. Thus Step 6 proves that the canonical unit in the statement is invertible. All operations used are on ordinary small-etale module derived categories.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-sfb-derived-composition-adjunction-normalization",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; derived.tex Tag 09T5, lemma-derived-adjoint-functors; identify the actual composite unit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-amb-proper-coproducts-projection",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-exc-closed-support-triangle",
+  "lem-weil-derived-direct-image-composition",
+  "def-weil-pbc-composite-adjunction",
+  "det-sp-unique-right-adjoint",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "def-kun-projection-formula-map",
+  "lem-per-etale-closed-sheaf-internal-adjunction",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-adjunction.md",
+  "place": "Projective-line duality and closed-support argument proving the homotopy-invariance input of ILO Expose XVI, Proposition 1.5, printed p. 227. This is an explicit below-node argument using existing ordinary-etale tools, not the reference route cited there."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -60,10 +177,45 @@
    "results": "{\"t\": \"2026-10-18T20:17:30Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.AffineSpace, CategoryTheory.IsIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.instIsIsoSchemeOverInferInstanceOverClassOfIsEmpty\"], \"digest\": \"8eb53a3511dda754\"}",
    "date": "2026-10-19",
    "verdict": "no match: the sole hit makes zero-dimensional affine space isomorphic to the base; no etale derived-unit theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyInvariant|homotopy_invariant|affineLine.*[Cc]ohomology|[Cc]ohomology.*affineLine|[Hh]omotopy.*[Ee]tale|[Ee]tale.*[Hh]omotopy",
+   "results": "{\"t\": \"2026-10-18T20:46:41Z\", \"tool\": \"grep\", \"query\": \"homotopyInvariant|homotopy_invariant|affineLine.*[Cc]ohomology|[Cc]ohomology.*affineLine|[Hh]omotopy.*[Ee]tale|[Ee]tale.*[Hh]omotopy\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicTopology/EilenbergSteenrod.lean\", \"Mathlib/AlgebraicTopology/EilenbergSteenrod.lean\", \"Mathlib/AlgebraicTopology/EilenbergSteenrod.lean\", \"Mathlib/AlgebraicTopology/EilenbergSteenrod.lean\", \"Mathlib/AlgebraicTopology/EilenbergSteenrod.lean\"], \"digest\": \"5bc0eadf025862f4\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations do not assert ordinary etale affine-line homotopy invariance"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale cohomology homotopy invariance affine line over a Noetherian scheme with finite invertible torsion coefficients",
+   "results": "{\"t\": \"2026-10-18T20:46:41Z\", \"tool\": \"leansearch\", \"query\": \"Etale cohomology homotopy invariance affine line over a Noetherian scheme with finite invertible torsion coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"RingHom.Etale.respectsIso\", \"RingHom.Etale\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.Etale.formallyEtale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\"], \"digest\": \"c49900d0d4f9e19a\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations do not assert ordinary etale affine-line homotopy invariance"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.AffineSpace, CategoryTheory.IsIso",
+   "results": "{\"t\": \"2026-10-18T20:46:41Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.AffineSpace, CategoryTheory.IsIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.instIsIsoSchemeOverInferInstanceOverClassOfIsEmpty\"], \"digest\": \"8eb53a3511dda754\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the sole hit concerns zero-dimensional affine space"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective line duality and the closed support localization triangle imply homotopy invariance of etale cohomology for finite coefficients",
+   "results": "{\"t\": \"2026-10-18T20:46:42Z\", \"tool\": \"leanfinder\", \"query\": \"Projective line duality and the closed support localization triangle imply homotopy invariance of etale cohomology for finite coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopyCategory.subcategoryAcyclic\", \"ComplexShape.QFactorsThroughHomotopy.areEqualizedByLocalization\", \"DerivedCategory.instHasRightCalculusOfFractionsHomotopyCategoryIntUpQuasiIso\", \"instIsLocalizationHomologicalComplexIntUpHomotopyCategoryQuotientHomotopyEquivalences\", \"HomotopyEquiv.isKProjective\", \"HomotopyEquiv.isKInjective\", \"instIsLocalizationHomologicalComplexDownHomotopyCategoryQuotientHomotopyEquivalences\", \"CochainComplex.IsKProjective.nonempty_homotopy_zero\"], \"digest\": \"bb6a42af668f44b3\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations do not assert ordinary etale affine-line homotopy invariance"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a Noetherian scheme with an invertible prime ell the ordinary etale derived adjunction unit along the affine line projection with Z modulo ell power coefficients is an isomorphism",
+   "results": "{\"t\": \"2026-10-18T20:46:43Z\", \"tool\": \"leanfinder\", \"query\": \"For a Noetherian scheme with an invertible prime ell the ordinary etale derived adjunction unit along the affine line projection with Z modulo ell power coefficients is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.hasMap_X\", \"StandardEtalePair.homEquiv_symm_apply\", \"StandardEtalePair\", \"Algebra.instIsStandardEtale\", \"StandardEtalePair.homEquiv\", \"StandardEtalePresentation.lift_bijective\", \"StandardEtalePresentation\", \"StandardEtalePair.instEtaleRing\"], \"digest\": \"25085fd7c0d22a20\"}",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned declarations do not assert ordinary etale affine-line homotopy invariance"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-vector-extension-splitting-cohomology",
@@ -89,5 +241,99 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-19",
+  "item": "lem-per-noetherian-affine-line-unit",
+  "worker": "stage1",
+  "summary": "Statement unchanged. The ILO homotopy-invariance input is proved from existing ordinary finite-coefficient projective-line duality and the closed-support triangle. The support map has trace coordinate one, so its graph quotient is the coefficient unit, and canonical composite-adjunction normalization identifies the quotient map with the affine-line unit. No new nodes and no forbidden SGA source.",
+  "blueprint": "Realizes the ordinary-etale affine-space-chart homotopy-invariance input for the vector-extension splitting tool, at the precise ancestor place recorded in blueprint.from.place; does not change the perverse-unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "Generic geometry or categorical/derived normalization used as a black box in the displayed argument; no node of the perverse unit supplies this ambient ordinary-etale tool."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Generic geometry or categorical/derived normalization used as a black box in the displayed argument; no node of the perverse unit supplies this ambient ordinary-etale tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic geometry or categorical/derived normalization used as a black box in the displayed argument; no node of the perverse unit supplies this ambient ordinary-etale tool."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Finite ordinary roots-of-unity lines and their dual evaluations are a coefficient tool over arbitrary bases, without a field hypothesis."
+   },
+   {
+    "node": "lem-asd-ordinary-finite-p1-adjunction",
+    "why": "The normalized projective-line duality adjunction over arbitrary Noetherian bases is a generic geometric tool; the perverse unit contains no ordinary arithmetic-base P1 calculation."
+   },
+   {
+    "node": "lem-amb-proper-coproducts-projection",
+    "why": "The canonical ordinary etale proper tensor projection is used only on P1 to cancel an invertible finite Tate line."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic geometry or categorical/derived normalization used as a black box in the displayed argument; no node of the perverse unit supplies this ambient ordinary-etale tool."
+   },
+   {
+    "node": "lem-exc-closed-support-triangle",
+    "why": "Ordinary etale closed/open localization on an arbitrary scheme is the ambient support tool for the infinity section, not a replacement for a perverse-unit step."
+   },
+   {
+    "node": "lem-weil-derived-direct-image-composition",
+    "why": "Generic geometry or categorical/derived normalization used as a black box in the displayed argument; no node of the perverse unit supplies this ambient ordinary-etale tool."
+   },
+   {
+    "node": "det-sp-unique-right-adjoint",
+    "why": "Generic geometry or categorical/derived normalization used as a black box in the displayed argument; no node of the perverse unit supplies this ambient ordinary-etale tool."
+   },
+   {
+    "node": "lem-pc-right-derived-functor-triangulated",
+    "why": "Generic geometry or categorical/derived normalization used as a black box in the displayed argument; no node of the perverse unit supplies this ambient ordinary-etale tool."
+   },
+   {
+    "node": "lem-weil-pbc-hom-into-triangle-exact",
+    "why": "Generic geometry or categorical/derived normalization used as a black box in the displayed argument; no node of the perverse unit supplies this ambient ordinary-etale tool."
+   },
+   {
+    "node": "lem-weil-pbc-hom-out-of-triangle-exact",
+    "why": "Generic geometry or categorical/derived normalization used as a black box in the displayed argument; no node of the perverse unit supplies this ambient ordinary-etale tool."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic geometry or categorical/derived normalization used as a black box in the displayed argument; no node of the perverse unit supplies this ambient ordinary-etale tool."
+   },
+   {
+    "node": "lem-sfb-derived-composition-adjunction-normalization",
+    "why": "Generic geometry or categorical/derived normalization used as a black box in the displayed argument; no node of the perverse unit supplies this ambient ordinary-etale tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-asd-ordinary-finite-p1-adjunction",
+  "lem-amb-proper-coproducts-projection",
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-exc-closed-support-triangle",
+  "lem-weil-derived-direct-image-composition",
+  "det-sp-unique-right-adjoint",
+  "lem-pc-right-derived-functor-triangulated",
+  "lem-weil-pbc-hom-into-triangle-exact",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-sfb-derived-composition-adjunction-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-Q100-7837477ce",
+  "group": "Q100",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-7837477ce (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is unchanged; the source is ILO Exposé XVI, Prop. 1.5, printed p. 227, where homotopy invariance comes from SGA 4 XV 2.2. The split replaces that with the P^1 duality argument and cites no SGA. The steps are correct: lem-asd-ordinary-finite-p1-adjunction (N=ℓ^n, A=Z/ℓ^n, B Noetherian) gives b, the trace t and the counit (1⊗t)π^{-1}. Then ε_K d = pr_2 and the first component of d is η_q (triangle identity). The composite counit of Fi_* ⊣ i^!G is invertible by uniqueness of right adjoints, so pr_2 u = 1. I redid the split-triangle algebra (∂=0, w(v in_1)=1, ((v in_1)w−1)v = −vu pr_2 = 0), and κ^D identifies the result with the canonical unit for p=qj. There is no cycle: the item is not in its own 10,564-node closure. There is no duplicate: lem-pur-affine-line-ordinary-invariance is over k-schemes only, and lem-per-geometric-affine-space-acyclicity is over an algebraically closed field. The citer lem-per-vector-extension-splitting-cohomology uses exactly this statement. I repaired three citation faults: (1) C4, Step 3: the π of lem-amb-proper-coproducts-projection is defined through def-kun-projection-formula-map, not the ringed-topoi node, so the text is corrected and that node is cited; (2) C1/E1, Step 4: clause (5) of the composition lemma needs termwise i_* to be exact, now cited from lem-per-etale-closed-sheaf-internal-adjunction (same unit); (3) E1, Step 7: the Grothendieck-abelian hypothesis of lem-sfb-derived-composition-adjunction-normalization is now cited from lem-weil-pbc-module-sheaves-grothendieck-abelian. proof_deps is updated to match. The worker wrote the generic tool_uses entries themselves (C8); I accept them as recorded.; 1 file(s) fixed by the reviewer"
  }
 }
