@@ -220,5 +220,23 @@
   "group": "Q53",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q53-6073fcc7f (reviewer sub-agent of L); spot-checked: Read in full: the item's 7 steps and the 3 new Mathlib leaves. The item statement matches ILO XVII Lemma 7.4.7 (printed pp. 307-308) with Lambda=F_ell, and it was not changed. The route is the source's radical, Wedderburn and finite-field reduction, written out explicitly. The radical-power filtration J^rM replaces Noetherian induction. Central idempotents and matrix units replace 'Morita'. The separability idempotent from the first algebraic clause of lem-pur-finite-field-derived-tensor-summand replaces the SGA 1 descent, so no SGA is cited. I checked every identity: psi.phi and phi.psi, matrix equivariance, simplicity of E^d over B through the surjection B->Mat_d(E), sigma being E-linear for the second factor (from (z⊗1)e=(1⊗z)e), beta.sigma=mu(e)=1, the C-linearity of the retracts, and that the refined quotients are isomorphic to the components (s=0 forces M=0). Mathlib leaves read at the cited lines: IsArtinianRing.instIsSemiprimaryRing (Artinian/Module.lean:653, noncommutative Ring section; fields at Semiprimary.lean:57-58), IsSemisimpleRing.exists_algEquiv_pi_matrix_divisionRing_finite (WedderburnArtin.lean:201-205; algebra map into the centre, NeZero sizes), littleWedderburn (LittleWedderburn.lean:166). Searching the DAG for Wedderburn, Jacobson radical, division ring, semiprimary and separability idempotent found only commutative or unrelated nodes, so there are no duplicates. No new node restates a clause of the item, and the dependency closure has no cycle. Small cases: B=F_ell[eps]/eps^2, B=F_4 over F_2, B=Mat_2(F_2), A of positive dimension or with nilpotents. Accepted tool_use: the diagonal-idempotent clause of lem-pur-finite-field-derived-tensor-summand. Minor, not a fault: def-weil-pbc-simple-module is a Stacks definition with the commutative convention, but the nodes citing it define simple left modules inline. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.FiniteAlgebraExternalTensorFiltration",
+  "declaration": "Module.exists_finiteAlgebra_externalTensor_filtration",
+  "file": "lean/Sheaf/RingTheory/FiniteAlgebraExternalTensorFiltration.lean",
+  "statement": "theorem exists_finiteAlgebra_externalTensor_filtration (ℓ : ℕ) [Fact ℓ.Prime] (A : Type u) [CommRing A] [Algebra (ZMod ℓ) A] [IsNoetherianRing A] (B : Type v) [Ring B] [Algebra (ZMod ℓ) B] [Module.Finite (ZMod ℓ) B] (M : Type w) [AddCommGroup M] [Module (A ⊗[ZMod ℓ] B) M] [Module.Finite (A ⊗[ZMod ℓ] B) M] : ∃ (t : ℕ) (F : Fin (t + 1) → Submodule (A ⊗[ZMod ℓ] B) M), F 0 = ⊥ ∧ F (Fin.last t) = ⊤ ∧ Monotone F ∧ ∀ i : Fin t, ∃ (N : ModuleCat.{max u v w} A) (L : ModuleCat.{max u v w} B) (_ : Module (ZMod ℓ) N) (_ : Module (ZMod ℓ) L) (_ : IsScalarTower (ZMod ℓ) A N) (_ : IsScalarTower (ZMod ℓ) B L), Module.Finite A N ∧ IsSimpleModule B L ∧ ∃ _ : Module (A ⊗[ZMod ℓ] B) (N ⊗[ZMod ℓ] L), (∀ (a : A) (b : B) (n : N) (l : L), (a ⊗ₜ[ZMod ℓ] b) • (n ⊗ₜ[ZMod ℓ] l) = (a • n) ⊗ₜ[ZMod ℓ] (b • l)) ∧ ∃ (s : (↥(F i.succ) ⧸ (F i.castSucc).comap (F i.succ).subtype) →ₗ[A ⊗[ZMod ℓ] B] (N ⊗[ZMod ℓ] L)) (p : (N ⊗[ZMod ℓ] L) →ₗ[A ⊗[ZMod ℓ] B] (↥(F i.succ) ⧸ (F i.castSucc).comap (F i.succ).subtype)), p.comp s = LinearMap.id",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-18",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ecc320003",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Every node clause is matched in the Lean (prime ℓ, ZMod ℓ; CommRing/Noetherian A; noncommutative finite B; finite M over the Mathlib tensor algebra A⊗B; F : Fin (t+1) → Submodule with F 0 = ⊥, F last = ⊤, Monotone; quotient by comap; finite A-module N, IsSimpleModule L; existential ZMod-module structures pinned by IsScalarTower; tensor action pinned on all pure tensors; C-linear s, p with p∘s = id). Probe: there is no global Module (ZMod ℓ) on a ModuleCat carrier, so the tensor uses the pinned binders. Universes are independent; witnesses in max u v w is not a restriction. t = 0 covers M = 0, A = 0, B = 0. lean.statement verbatim; only the lean record differs from the live node; stmt deps are IsNoetherianRing / Module.Finite / TensorProduct; docstrings carry the source place, blueprint tag and 7 steps; one sorry theorem, no definitions. nt_compile --json clean in 2.1 s. The report's second reading is an openly declared self-reading; not a fault."
  }
 }
