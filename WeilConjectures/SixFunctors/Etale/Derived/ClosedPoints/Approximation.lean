@@ -118,7 +118,7 @@ noncomputable def supportedSectionsFunctor :
     (supportedSectionsι_comp_unit_of_le F (leOfHom h))
   map_id S := by
     refine (cancel_mono (supportedSectionsι F (openCompl S))).1 ?_
-    simp [supportedSectionsι]
+    simp only [Functor.id_obj, Functor.comp_obj, Category.id_comp]
     exact Category.id_comp _
   map_comp {S T R} f g := by
     refine (cancel_mono (supportedSectionsι F (openCompl R))).1 ?_

@@ -38,6 +38,7 @@ namespace CochainComplex
 variable {C : Type u} [Category.{v} C] [Abelian C] [IsGrothendieckAbelian.{v} C]
   [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
 
+omit [IsGrothendieckAbelian.{v} C] in
 /-- If `P` is a complex of flat objects such that `P ⊗ F` is exact in degree `a - 1` for every
 object `F`, then the canonical truncation `τ^{≥ a} P` is a complex of flat objects: its term in
 degree `a` is the cokernel of `P^{a-1} ⟶ P^a`. -/
@@ -56,6 +57,7 @@ noncomputable abbrev shortComplexTruncGE (P : CochainComplex C ℤ) (a : ℤ) :
     ShortComplex (CochainComplex C ℤ) :=
   ShortComplex.mk (kernel.ι (P.πTruncGE a)) (P.πTruncGE a) (kernel.condition _)
 
+omit [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C] in
 lemma shortExact_shortComplexTruncGE (P : CochainComplex C ℤ) (a : ℤ) :
     (P.shortComplexTruncGE a).ShortExact :=
   ShortComplex.ShortExact.mk' (ShortComplex.exact_of_f_is_kernel _ (kernelIsKernel _))
@@ -140,7 +142,7 @@ lemma torAmplitudeGE_iff (a : ℤ) (M : DerivedCategory C) :
 lemma torAmplitudeGE_iff_forall_isZero (a : ℤ) (M : DerivedCategory C) :
     torAmplitudeGE C a M ↔ ∀ (F : C) (q : ℤ), q < a →
       IsZero ((homologyFunctor C q).obj (M ⊗ (singleFunctor C 0).obj F)) :=
-  forall_congr' fun F ↦ isGE_iff _ a
+  forall_congr' fun _ ↦ isGE_iff _ a
 
 /-- Tor amplitude is invariant under isomorphism. -/
 instance (a : ℤ) : (torAmplitudeGE C a).IsClosedUnderIsomorphisms where

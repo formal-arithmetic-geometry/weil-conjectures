@@ -52,7 +52,7 @@ lemma overLowerStarTransition_id (g : T ⟶ S) {T₁ : Scheme.{u}} (π : T₁ �
     simp
   rw [Etale.overLowerStarTransition, Etale.lowerStarPlusTransition_eq_baseChange Λ (𝟙 T₁)
     (π ≫ g) (π ≫ g) (by simp) ⟨by simp⟩, hbc]
-  simp only [Category.assoc, Iso.inv_hom_id_app_assoc]
+  simp only [Iso.inv_hom_id_app_assoc]
   rw [← Functor.map_comp, Etale.upperStarCompDerivedPlus_id_left_inv_app,
     CategoryTheory.Functor.map_id]
 
@@ -181,11 +181,11 @@ theorem isStalkColimit_fixedBaseSystem [IsCofiltered I]
     (fun i ↦ ?_) (fun f ↦ ?_) (isElementwiseColimit_sheafFiber_of_isColimit hcol x)
   · simp only [Functor.mapIso_hom, fixedBaseSystem_π_eq,
       stalkHomology, Functor.comp_map, transition_fixedBaseHom, Functor.mapCocone_ι_app,
-      fixedBaseCocone_ι_app, fixedBaseDiagram_map, Quiver.Hom.unop_op]
+      fixedBaseCocone_ι_app]
     exact (Etale.sheafFiber_map_sourceStageIso_naturality Λ p k G q (c.π.app i) x).symm
   · simp only [Functor.mapIso_hom, fixedBaseSystem_map_eq, stalkHomology,
-      Functor.comp_map, transition_fixedBaseHom, Functor.mapCocone_ι_app,
-      fixedBaseCocone_ι_app, fixedBaseDiagram_map, Quiver.Hom.unop_op]
+      Functor.comp_map, transition_fixedBaseHom, fixedBaseDiagram_map,
+      Quiver.Hom.unop_op]
     exact (Etale.sheafFiber_map_sourceStageIso_naturality Λ p k G q (D.map f) x).symm
 
 end FixedBase

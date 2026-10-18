@@ -171,6 +171,7 @@ lemma connecting_comp_eq_zero (α : LimitStage B W) (n₀ n₁ : ℤ) (h : n₀ 
     ((functor Λ α).map_distinguished _ hT) n₀ n₁ h
 
 set_option maxHeartbeats 4000000 in
+-- the derived-category computation unfolds large terms
 /-- The transition maps commute with the connecting maps. -/
 lemma connecting_naturality {α β : LimitStage B W} (φ : Hom α β) (n₀ n₁ : ℤ)
     (h : n₀ + 1 = n₁) :
@@ -302,6 +303,7 @@ variable (hz : ∀ (J : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Inje
   (h0 : ∀ (J : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) [Injective J],
     𝒮.IsStalkColimit Λ ((DerivedCategory.Plus.singleFunctor _ 0).obj J) 0)
 
+omit [IsCofiltered I] in
 include h0 in
 /-- Degree zero: a stalkwise colimit in degree `0` at all injective sheaves is one at all
 sheaves, by left exactness. -/

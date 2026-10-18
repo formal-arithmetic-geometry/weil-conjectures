@@ -66,6 +66,7 @@ noncomputable def rightDerivedGlobalSectionsObjQIso (X : Scheme.{u})
       DerivedCategory.Q.obj (((Sheaf.Γ X.smallEtaleTopology A).mapHomologicalComplex _).obj I) :=
   (Sheaf.Γ X.smallEtaleTopology A).rightDerivedFunctorObjQIso I
 
+omit [HasSmallSiteSheafify A] in
 /-- Blueprint `lem-kun-rgamma-unbounded-well-defined`: if `I` and `J` are K-injective complexes
 of étale sheaves and `φ : I ⟶ J` is a quasi-isomorphism (for instance a comparison of two
 K-injective resolutions of the same complex), then `Γ(X, φ) : Γ(X, I) ⟶ Γ(X, J)` is an
@@ -100,6 +101,7 @@ noncomputable def rightDerivedGlobalSectionsPlusCompatibility (X : Scheme.{u}) :
       DerivedCategory.Plus.ι ⋙ rightDerivedGlobalSections A X :=
   (Sheaf.Γ X.smallEtaleTopology A).rightDerivedFunctorPlusCompatibility
 
+omit [HasSmallSiteSheafify A] in
 /-- Blueprint `lem-kun-tensor-t-est`: the derived direct image is left t-exact: for a morphism
 of schemes `f : X ⟶ Y` and `E ∈ D(X_ét)` with `H^i(E) = 0` for `i < b`, also
 `H^i(Rf_* E) = 0` for `i < b`. (No boundedness of `E` is needed.) -/

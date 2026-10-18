@@ -161,7 +161,7 @@ lemma isStalkColimit_comapB [IsCofiltered I] (𝒮 : LimitStageSystem B W I)
     ((B'.uliftPointSmallEtale x).sheafFiber.mapIso (e 𝒮.pt)).symm (fun i ↦ ?_) (fun f ↦ ?_)
     (isElementwiseColimit_sheafFiber_of_isColimit hcol x)
   · simp only [Iso.symm_hom, Functor.mapIso_inv, Functor.mapCocone_ι_app, cocone_ι_app,
-      Quiver.Hom.unop_op, stalkHomology, Functor.comp_map, ← Functor.map_comp]
+      stalkHomology, Functor.comp_map, ← Functor.map_comp]
     exact congrArg (B'.uliftPointSmallEtale x).sheafFiber.map (he' (𝒮.π i))
   · simp only [Iso.symm_hom, Functor.mapIso_inv, Functor.comp_map, diagram_map,
       Quiver.Hom.unop_op, stalkHomology, ← Functor.map_comp]

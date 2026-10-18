@@ -292,7 +292,7 @@ lemma boundedConstructibleUpperStarId_hom_app_hom (K : Dᵇc(X.left)⟦Λ⟧) :
 complexes of module objects over `Λ`: the conjugate of
 `ProEtale.CondensedRing.boundedConstructibleUpperStarId` under the adjunctions
 `L(𝟙 X)^* ⊣ R(𝟙 X)_*` and `𝟭 ⊣ 𝟭`. -/
-noncomputable def boundedConstructibleLowerStarId :
+noncomputable def boundedConstructibleLowerStarId [IsFinitenessCoefficient ℓ Λ] :
     boundedConstructibleLowerStar Λ ℓ (𝟙 X) ≅ 𝟭 (Dᵇc(X.left)⟦Λ⟧) :=
   conjugateIsoEquiv (boundedConstructibleUpperStarLowerStarAdjunction Λ ℓ (𝟙 X)) Adjunction.id
     (boundedConstructibleUpperStarId Λ ℓ X).symm

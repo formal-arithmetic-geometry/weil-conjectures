@@ -58,9 +58,9 @@ set_option backward.isDefEq.respectTransparency.types false in
 the inverse of the cancellation `P ⊗_S (S ⊗_R M) ≃ P ⊗_R M`. -/
 lemma bijective_tensorRestrictScalarsHom (M : ModuleCat.{u} R) (P : ModuleCat.{u} S) :
     Function.Bijective (tensorRestrictScalarsHom f M P) := by
-  letI := f.toAlgebra
-  letI : Module R P := Module.compHom P f
-  haveI : IsScalarTower R S P := IsScalarTower.of_algebraMap_smul fun _ _ ↦ rfl
+  let := f.toAlgebra
+  let : Module R P := Module.compHom P f
+  have : IsScalarTower R S P := IsScalarTower.of_algebraMap_smul fun _ _ ↦ rfl
   let e : M ⊗[R] P ≃+ (S ⊗[R] M) ⊗[S] P :=
     ((TensorProduct.comm R M P).toAddEquiv.trans
       (AlgebraTensorModule.cancelBaseChange R S S P M).symm.toAddEquiv).trans

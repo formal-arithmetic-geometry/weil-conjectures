@@ -289,7 +289,9 @@ theorem homComplex_exists :
 Source: Stacks Project, sites-cohomology.tex, Section 0A8X
 (section-hom-complexes) (blueprint: def-pur-hom-complex).
 Its projections, differential and componentwise action are specified together
-by `homComplex_exists`, from which this definition selects its data. -/
+by `homComplex_exists`, from which this definition selects its data. The comparison with the
+internal hom complex `CochainComplex.internalHomObj` is `homComplexIsoInternalHomObj`
+(`homComplexFunctorObjIsoInternalHom`). -/
 noncomputable def homComplexFunctor :
     (CochainComplex (SheafOfModules.{w}
       ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ)ᵒᵖ ⥤ CochainComplex

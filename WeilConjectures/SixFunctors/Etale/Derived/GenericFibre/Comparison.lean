@@ -5,6 +5,7 @@ Authors: Claude
 -/
 module
 
+public import WeilConjectures.CategoryTheory.Monoidal.Closed.IhomComparison
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Comparison
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.OfEquivalence
 public import Mathlib.CategoryTheory.Triangulated.Pretriangulated
@@ -163,30 +164,6 @@ lemma isIso_ihomComparison_app_iff_of_iso {F F' : C ⥤ D} [F.LaxMonoidal] [F'.L
     have : IsIso ((ihomComparison F A).natTrans.app B ≫ (ihom (F.obj A)).map (τ.hom.app B)) := by
       rw [h]; infer_instance
     exact IsIso.of_isIso_comp_right _ ((ihom (F.obj A)).map (τ.hom.app B))
-
-/-- The comparison map `F [A, B] ⟶ [F A, F B]` is an isomorphism at `B` if and only if it is one
-at any `B'` isomorphic to `B`. -/
-lemma isIso_ihomComparison_app_iff_of_iso_right (F : C ⥤ D) [F.LaxMonoidal] (A : C) {B B' : C}
-    (e : B ≅ B') :
-    IsIso ((ihomComparison F A).natTrans.app B) ↔ IsIso ((ihomComparison F A).natTrans.app B') :=
-  NatTrans.isIso_app_iff_of_iso _ e
-
-/-- The comparison map `F [A, B] ⟶ [F A, F B]` is an isomorphism at `A` if and only if it is one
-at any `A'` isomorphic to `A`
-(`CategoryTheory.Functor.LaxMonoidal.map_pre_app_comp_ihomComparison_app`). -/
-lemma isIso_ihomComparison_app_iff_of_iso_left (F : C ⥤ D) [F.LaxMonoidal] {A A' : C}
-    (e : A ≅ A') (B : C) :
-    IsIso ((ihomComparison F A).natTrans.app B) ↔ IsIso ((ihomComparison F A').natTrans.app B) := by
-  have h := map_pre_app_comp_ihomComparison_app F e.hom B
-  constructor
-  · intro _
-    have : IsIso ((ihomComparison F A').natTrans.app B ≫ (pre (F.map e.hom)).app (F.obj B)) := by
-      rw [← h]; infer_instance
-    exact IsIso.of_isIso_comp_right _ ((pre (F.map e.hom)).app (F.obj B))
-  · intro _
-    have : IsIso (F.map ((pre e.hom).app B) ≫ (ihomComparison F A).natTrans.app B) := by
-      rw [h]; infer_instance
-    exact IsIso.of_isIso_comp_left (F.map ((pre e.hom).app B)) _
 
 end CategoryTheory.Functor.LaxMonoidal
 

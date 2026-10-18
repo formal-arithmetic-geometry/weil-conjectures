@@ -143,8 +143,9 @@ theorem isIso_app_of_rightExact {C : Type*} [Category C] [Abelian C] (Φ₁ Φ�
   obtain ⟨P, π, hP, _⟩ := hepi X
   have := hG P hP
   let S := ShortComplex.mk (kernel.ι π) π (kernel.condition π)
-  have hS : S.ShortExact := ShortComplex.ShortExact.mk' (ShortComplex.exact_of_f_is_kernel _ (kernelIsKernel π))
-    inferInstance inferInstance
+  have hS : S.ShortExact :=
+    ShortComplex.ShortExact.mk' (ShortComplex.exact_of_f_is_kernel _ (kernelIsKernel π))
+      inferInstance inferInstance
   obtain ⟨h₁e, h₁⟩ := hR₁ S hS
   obtain ⟨-, h₂⟩ := hR₂ S hS
   have := hep (kernel π)

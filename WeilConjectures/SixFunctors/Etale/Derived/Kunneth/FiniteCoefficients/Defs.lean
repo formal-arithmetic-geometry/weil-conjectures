@@ -6,7 +6,6 @@ Authors: Claude
 module
 
 public import WeilConjectures.AlgebraicGeometry.Sites.TorsionCohomologicalDimension
-public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.Kunneth.KunnethMap
 
 /-!
@@ -115,13 +114,15 @@ noncomputable abbrev rightDerivedLowerStarModule {X Y : Scheme.{u}} (f : X ⟶ Y
 
 For schemes `X`, `Y` over a base `S` (in the blueprint `S = Spec k`), with `Z = X ×_S Y` and
 projections `p_X`, `p_Y`, and for `K ∈ D(X_ét, Λ)`, `L ∈ D(Y_ét, Λ)`,
-`K ⊠ᴸ_Λ L := Lp_X^* K ⊗ᴸ_Λ Lp_Y^* L ∈ D(Z_ét, Λ)`. It is the external product
-`AlgebraicGeometry.Etale.externalProduct` for the coefficients `ModuleCat Λ`. -/
+`K ⊠ᴸ_Λ L := Lp_X^* K ⊗ᴸ_Λ Lp_Y^* L ∈ D(Z_ét, Λ)`, with the derived inverse images of étale
+sheaves of `Λ`-modules and their derived tensor product. -/
 noncomputable abbrev exteriorProduct {S X Y : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S)
     (K : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
     (L : DerivedCategory (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} Λ))) :
     DerivedCategory (Sheaf (pullback f g).smallEtaleTopology (ModuleCat.{u + 1} Λ)) :=
-  externalProduct (ModuleCat.{u + 1} Λ) f g K L
+  ((-⊗ᴸ-(pullback f g)[ModuleCat.{u + 1} Λ]).obj
+    (L((pullback.fst f g)^*[ModuleCat.{u + 1} Λ]).obj K)).obj
+      (L((pullback.snd f g)^*[ModuleCat.{u + 1} Λ]).obj L)
 
 /-- The exterior product is `Lp_X^* K ⊗ᴸ Lp_Y^* L`. -/
 lemma exteriorProduct_eq {S X Y : Scheme.{u}} (f : X ⟶ S) (g : Y ⟶ S)

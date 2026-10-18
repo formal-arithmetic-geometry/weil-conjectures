@@ -101,6 +101,12 @@ theorem isIso_tensorBaseChangeMap_lowerStar_unit {K : Type u} [Field K]
     (isIso_derivedBaseChangeMap_app_upperStar_singleFunctor Λ a b p f' h e g sq₁ sq₂ π _ _ sqπ
       _ _ sq 𝓕)
 
+section
+
+-- Use the instance paths of the constructions for a general coefficient category, see
+-- `WeilConjectures.SixFunctors.Etale.Derived.Kunneth.FlatSingle.Degreewise`.
+attribute [local instance 10000] Abelian.toPreadditive SymmetricCategory.toBraidedCategory
+
 /-- **Dévissage of the flat sheaf**, for coefficient sheaves killed by the Jacobson radical `J` of
 `Λ`: for `X` of finite type over a field and `h` quasi-compact and quasi-separated, if the base
 change map `Lp^* 𝓔 ⊗ᴸ Lf'^* Rg_* 𝓕 ⟶ Rh_* (Lh^* Lp^* 𝓔 ⊗ᴸ Le^* 𝓕)` is an isomorphism for the
@@ -126,14 +132,20 @@ theorem isIso_tensorBaseChangeMap_singleFunctor_of_flat_of_lowerStar_of_smul_eq_
     IsIso (tensorBaseChangeMap (ModuleCat.{u + 1} Λ) h e f' g w
       (L((p)^*[ModuleCat.{u + 1} Λ]).obj ((DerivedCategory.singleFunctor _ 0).obj 𝓔))
       ((DerivedCategory.singleFunctor _ 0).obj 𝓕)) := by
-  rw [isIso_tensorBaseChangeMap_iff_forall_isIso_tensorBaseChangeHomologyMap Λ p h e f' g w 𝓕 𝓔
-    h𝓔]
+  rw [isIso_tensorBaseChangeMap_iff_forall_isIso_tensorBaseChangeHomologyMap
+    (ModuleCat.{u + 1} Λ) p h e f' g w 𝓕 𝓔 h𝓔]
   intro q
   refine isIso_tensorBaseChangeHomologyMap_app_of_cokernel_lowerStar Λ p h e f' g w 𝓕 a h𝓕
     (fun π _ q ↦ ?_) q 𝓔
   rw [← isIso_tensorBaseChangeHomologyMap_app_iff_cokernel_smulDesc Λ p h e f' g w 𝓕 h𝓕]
-  exact (isIso_tensorBaseChangeMap_iff_forall_isIso_tensorBaseChangeHomologyMap Λ p h e f' g w 𝓕
-    _ (flat_lowerStar_obj_tensorUnit_of_isFinite Λ π)).1 (hgood π 𝓕) q
+  have hU : ObjectProperty.flat ((π)_*[ModuleCat.{u + 1} Λ].obj (𝟙_ _)) :=
+    flat_lowerStar_obj_tensorUnit_of_isFinite Λ π
+  have h₁ := hgood π 𝓕
+  have h₂ := (isIso_tensorBaseChangeMap_iff_forall_isIso_tensorBaseChangeHomologyMap
+    (ModuleCat.{u + 1} Λ) p h e f' g w 𝓕 _ hU).1
+  exact h₂ h₁ q
+
+end
 
 /-- **Dévissage of the flat sheaf** in the proof of blueprint `lem-kun-0f1j`: for `X` of finite
 type over a field, `h` quasi-compact and quasi-separated, if the base change map

@@ -165,7 +165,7 @@ lemma transition_comp {α β γ : LimitStage B W} (φ : Hom α β) (ψ : Hom β 
   have n3 := congrArg (fun x ↦ D+((α.π)^*[ModuleCat.{u + 1} Λ]).map
     (R+((α.g)_*[ModuleCat.{u + 1} Λ]).map x)) hW'
   simp only [Functor.comp_map, Functor.map_comp] at n1 n2 n3
-  simp only [Functor.comp_map, Functor.map_comp, Category.assoc]
+  simp only [Functor.map_comp, Category.assoc]
   rw [reassoc_of% n1, ← reassoc_of% hS]
   rw [reassoc_of% n2, n3]
 
@@ -195,7 +195,7 @@ lemma transition_id (α : LimitStage B W) : transition Λ (Hom.id α) = 𝟙 _ :
     simp
   rw [transition_app, h3]
   simp only [Category.assoc, ← Functor.map_comp, h2, CategoryTheory.Functor.map_id,
-    Category.comp_id, NatTrans.id_app]
+    NatTrans.id_app]
   refine Eq.trans ?_ h1
   congr 2
   exact Category.comp_id _
@@ -246,7 +246,7 @@ noncomputable def cocone : Cocone (𝒮.diagram Λ K q) where
     { app i := (DerivedCategory.Plus.homologyFunctor _ q).map
         ((LimitStage.transition Λ (𝒮.π i.unop)).app K)
       naturality i j f := by
-        simp only [diagram_obj, diagram_map, Functor.const_obj_obj, Functor.const_obj_map,
+        simp only [diagram_map, Functor.const_obj_obj, Functor.const_obj_map,
           Category.comp_id, ← Functor.map_comp, ← NatTrans.comp_app, LimitStage.transition_comp,
           𝒮.w] }
 

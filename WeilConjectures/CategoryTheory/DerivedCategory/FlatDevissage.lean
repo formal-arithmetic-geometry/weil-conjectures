@@ -27,9 +27,9 @@ to simpler objects.
 * `DerivedCategory.isIso_app_of_isGE`: if `F` and `G` do not lower the cohomological degree and
   `τ` is an isomorphism at the objects of `C` placed in degree `0`, then `τ` is an isomorphism at
   every bounded below object.
-* `DerivedCategory.isIso_app_Q_obj_of_isStrictlyGE_of_isStrictlyLE_of_prop`: if `τ` is an isomorphism at
-  the objects of `C` satisfying `P`, placed in degree `0`, then it is an isomorphism at every
-  strictly bounded complex whose terms satisfy `P` (by the stupid truncations).
+* `DerivedCategory.isIso_app_Q_obj_of_isStrictlyGE_of_isStrictlyLE_of_prop`: if `τ` is an
+  isomorphism at the objects of `C` satisfying `P`, placed in degree `0`, then it is an
+  isomorphism at every strictly bounded complex whose terms satisfy `P` (by the stupid truncations).
 * `CochainComplex.kFlat_mapHomologicalComplex_obj_stupidTruncGE`: if a functor `G` preserving
   flat objects sends a complex `K` of flat objects to a K-flat complex, it also sends the stupid
   truncations `σ^{≥ n} K` to K-flat complexes.
