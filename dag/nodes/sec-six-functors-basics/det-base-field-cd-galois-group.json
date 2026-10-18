@@ -57,36 +57,34 @@
    }
   },
   {
-   "text": "The arithmetic Frobenius $\\phi$ on $K^{\\rm sep}$ is the automorphism $x\\mapsto x^q$ [def-weil-frobenius-substitution], applicable because step 1 identified this closure as an algebraic closure. It preserves $K_n$: if $x^{q^n}=x$, then $(x^q)^{q^n}=(x^{q^n})^q=x^q$; its restriction is the automorphism $\\phi_n$ of step 3. If $d\\mid n$, writing $n=dm$, iteration of $x^{q^d}=x$ gives $x^{q^n}=x$, so $K_d\\subseteq K_n$. Conversely, if $K_d\\subseteq K_n$, the restriction of $\\phi^n$ to $K_d$ is the identity, since every $x\\in K_n$ satisfies $x^{q^n}=x$. Divide $n=ad+r$ with $0\\leq r<d$: then $\\phi_d^r=1$, and order $d$ from step 3 forces $r=0$. Thus inclusion is exactly divisibility. In particular $K_{dn}$ contains $K_d$ and $K_n$. Every finite subextension $E/K$ has positive degree, since its vector space contains $1\\neq0$; it is therefore one of the $K_n$ by step 2, hence Galois by step 3. Every element of $K^{\\rm sep}$ lies in a finite separable subextension by [def-pd-separable-closure], so $K^{\\rm sep}=\\bigcup_{n\\geq1}K_n$.",
+   "text": "Let phi be the arithmetic Frobenius [def-weil-frobenius-substitution]. Its powers are dense in Gal(Ks/K). Indeed, let H be their closed subgroup closure. Every H-fixed element is fixed by phi, hence lies in K by FiniteField.frobeniusAlgEquivOfAlgebraic_apply_eq_self_iff (WeilConjectures.Mathlib.FieldTheory.Finite.Basic). Thus the fixed field of H is K. InfiniteGalois.fixingSubgroup_fixedField (Mathlib.FieldTheory.Galois.Infinite:146) gives H=Gal(Ks/K). The extension is Galois by [lem-weil-pbc-separable-closure-exists-galois]. Its Galois group is compact by the profinite Krull-limit identification [lem-exc-galois-krull-finite-limit], as supplied by the Mathlib CompactSpace instance.",
    "uses": [
     "def-weil-frobenius-substitution",
-    "def-pd-separable-closure"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-galois-group.proof.md",
-    "place": "Paragraph 2, directedness by divisibility and the union of the finite subextensions; explicit reverse inclusion test and restriction formula."
-   }
-  },
-  {
-   "text": "The extension $K^{\\rm sep}/K$ is Galois by [lem-weil-pbc-separable-closure-exists-galois], part (2) with $k'=K$. Apply [lem-exc-galois-krull-finite-limit] to this extension. Its index set is all finite Galois intermediate fields. Step 4 identifies this set, with its inclusion ordering, with the positive integers ordered by divisibility, via $n\\mapsto K_n$. Consequently restriction gives an isomorphism of profinite groups\n$$\\operatorname{Gal}(K^{\\rm sep}/K)\\xrightarrow{\\sim}\\varprojlim_{n\\geq1}\\operatorname{Gal}(K_n/K).$$\nNo smallness or cofinality theorem is being assumed: the intermediate fields are a set of subfields of the fixed field, and step 4 identifies every object and every inclusion in that set.",
-   "uses": [
     "lem-weil-pbc-separable-closure-exists-galois",
     "lem-exc-galois-krull-finite-limit"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/fields.tex",
-    "place": "Tag 0BU2, label lemma-infinite-galois-limit, assertion (3) and its proof. This supplies the theorem invoked as “Galois theory gives” in blueprint proof paragraph 2."
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-galois-group.proof.md",
+    "place": "Paragraph 2: Frobenius and the inverse limit; density proved with Mathlib infinite Galois correspondence and the existing fixed-Frobenius lemma."
    }
   },
   {
-   "text": "For $d\\mid n$ and $x\\in K_d$, the restriction of $\\phi_n$ satisfies $\\phi_n(x)=x^q=\\phi_d(x)$. Thus restriction sends $\\theta_n([j])$ to $\\theta_d([j]\\bmod d)$. The isomorphisms $\\theta_n$ of step 3 therefore identify compatible automorphism tuples with compatible residue tuples, in both directions. These coordinate maps and their inverses are continuous because their source and target finite groups are discrete; the induced maps between the subspaces of the products are continuous by the definition of the product topology. Combining this coordinatewise homeomorphism with step 5 gives\n$$\\operatorname{Gal}(K^{\\rm sep}/K)\\cong\\varprojlim_{n\\geq1}\\mathbf Z/n=\\widehat{\\mathbf Z},$$\nwhere $\\widehat{\\mathbf Z}$ denotes the compatible residues, with their product-subspace topology and coordinatewise addition. The image of $\\phi$ is $(1\\bmod n)_n$ by step 4 and $\\theta_n(1)=\\phi_n$. This is the element $1$ of $\\widehat{\\mathbf Z}$.",
+   "text": "For each finite-index normal subgroup H of multiplicative Z, put Q=Z/H and let g be the image of 1. Q is finite, so n=orderOf(g)>0, including n=1 for the trivial quotient. Take the degree-n root field Kn from steps 1-3. Restriction Gal(Ks/K) -> Gal(Kn/K) is continuous by InfiniteGalois.restrictNormalHom_continuous. Follow it with monoidHomOfForallMemZpowers, sending the generating Frobenius phi_n to g, whose order is n. This last map is continuous since the finite Galois group is discrete. Restriction sends phi to phi_n by its power formula and AlgEquiv.restrictNormalHom_apply. The resulting continuous homomorphism f_H therefore sends phi to the image of 1.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-galois-group.proof.md",
-    "place": "Paragraph 2, restriction maps are reductions; coordinatewise limit identification and Frobenius corresponds to 1."
+    "place": "Paragraph 2: finite cyclic quotients and their Frobenius generators; direct construction for every quotient of Z."
+   }
+  },
+  {
+   "text": "Two continuous homomorphisms out of Gal(Ks/K) agreeing on phi agree on all its integer powers and hence everywhere by density. Consequently the maps f_H are compatible under quotient transition maps. The tuple F(x)=(f_H(x))_H is a continuous homomorphism to ProfiniteCompletion.completion(Multiplicative Z), with F(phi)=etaFn(1). Its image contains etaFn(Z), which is dense by ProfiniteGrp.ProfiniteCompletion.denseRange. Compactness of the source makes the image closed, proving surjectivity. To prove injectivity, take an open normal subgroup U of the Galois group P and its finite quotient pi:P -> P/U. Set H=ker(pi composed with the Frobenius-power homomorphism Z -> P); this has finite index. QuotientGroup.lift factors that composite through Z/H. The continuous maps pi and this factor composed with f_H agree at phi, hence everywhere. If F(x)=1, its H coordinate gives pi(x)=1. This holds for every U, so ProfiniteGrp.toLimit_injective gives x=1. The continuous bijection F between compact Hausdorff spaces is a homeomorphism by Continuous.homeoOfEquivCompactToT2; its multiplicativity and value on phi are already established. This uses the compatible-quotient construction directly without classifying subgroups of Z or reindexing an inverse limit.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-galois-group.proof.md",
+    "place": "Paragraph 2: compatible tuples, topology, and Frobenius corresponds to 1; fully proved coordinatewise in completion_equiv."
    }
   }
  ],
@@ -98,14 +96,13 @@
   "def-weil-finite-dimensional-subspace",
   "lem-sfb-finite-field-galois-frobenius",
   "def-weil-frobenius-substitution",
-  "def-pd-separable-closure",
   "lem-weil-pbc-separable-closure-exists-galois",
   "lem-exc-galois-krull-finite-limit"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-galois-group.proof.md",
-  "place": "Paragraphs 1-2, with the existence gap supplied by lem-weil-unique-subfield-of-closure and the profinite step by Stacks Tag 0BU2."
+  "place": "Paragraphs 1-2; S7 Lean proof retains the finite root fields and cyclic quotients, and constructs the completion coordinates directly. Density uses the proved Frobenius fixed-element lemma and Mathlib infinite Galois correspondence; compactness uses the existing Krull-limit theorem."
  },
  "mathlib_searches": [
   {
@@ -222,5 +219,15 @@
    "decls": [],
    "missing": []
   }
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S7",
+  "result": "pass",
+  "landing": "20261018T145114-L-3644473",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
