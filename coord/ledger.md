@@ -16372,3 +16372,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:14 L: merged deliver/Q9/Sheaf.AlgebraicGeometry.ProjectiveSmoothCurveFiniteness (stage 3; reviewer PASS; after a return; landing 20261018T091411-L-3258382 (proof); batch 20261018T091351; modules 1; new nodes 0)
 - 09:14 L: merged deliver/R1/Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage (stage 3; reviewer PASS; after a return; landing 20261018T091411-L-3258605 (interface); batch 20261018T091351; modules 5; new nodes 4)
 - 09:14 L: merged deliver/T8/Sheaf.AlgebraicGeometry.ProperSmoothCurvesPrimeCoefficients (stage 3; reviewer PASS; first push; landing 20261018T091412-L-3259045 (interface); batch 20261018T091351; modules 7; new nodes 6)
+- 09:14 L: merged deliver/U2/Sheaf.AlgebraicGeometry.EtaleAffineLineShriekSheafConstructible (stage 3; reviewer PASS; after a return; landing 20261018T091413-L-3259206 (interface); batch 20261018T091351; modules 4; new nodes 3)

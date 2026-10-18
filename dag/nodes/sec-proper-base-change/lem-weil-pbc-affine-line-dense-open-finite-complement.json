@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-pbc-affine-line-dense-open-finite-complement",
+ "kind": "statement",
+ "title": "Dense affine shrinking makes the boundary of a relative affine line finite",
+ "statement": "Let Y be an affine scheme [def-pc-scheme] with coordinate ring finite type over the integers, and let U be a dense open of its relative affine line [def-nagata-relative-affine-space]. There exist a commutative ring R finite type over the integers, an open immersion g:Spec R→Y with dense image, and a closed immersion i:Z→A¹_(Spec R) whose image is the complement of the inverse image of U, such that the composite Z→Spec R is finite [def-weil-finite-integral-morphism].",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKZ, dense-open boundary paragraph; Tag 02NW"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-nagata-relative-affine-space",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [
+  {
+   "text": "Finite type over the integers makes Y and its relative line Noetherian. The projection is open, continuous and surjective, so the image of U is dense open. A dense open contains every component generic point: isolate its component from the other finitely many components and use density, then specialization.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Each generic fibre is an irreducible affine line over a residue field and meets U. Its nonempty open has finite complement by the dimension-one bound; injectivity of the closed immersion gives finite generic fibres for the boundary.",
+   "uses": [
+    "lem-sc-nonempty-open-complement-finite-dim-le-one"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the generic-finiteness neighborhood theorem to the reduced closed complement of U, obtaining a dense open V of Y where that complement is finite.",
+   "uses": [
+    "lem-weil-pbc-closed-subset-closed-subscheme",
+    "lem-weil-pbc-generic-finite-morphism-open-neighborhood"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "In Spec Γ(Y,top), finite prime avoidance finds an element of the vanishing ideal of the complement of V avoiding every minimal prime. Its principal open W is contained in V and dense. Its coordinate ring remains finite type over the integers. Identify W with its affine spectrum and pull back the original closed complement using the affine-space cartesian square; finiteness follows by base change. Empty and nonreduced schemes are included.",
+   "uses": [
+    "lem-weil-pbc-finite-morphism-permanence"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-nonempty-open-complement-finite-dim-le-one",
+  "lem-weil-pbc-closed-subset-closed-subscheme",
+  "lem-weil-pbc-generic-finite-morphism-open-neighborhood",
+  "lem-weil-pbc-finite-morphism-permanence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GKZ, dense-open boundary paragraph; Tag 02NW; same route, implemented using existing library APIs"
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleAffineLineShriekSheafConstructible",
+  "group": "U2",
+  "date": "2026-10-18"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+   "place": "Tag 0GKZ, dense-open boundary paragraph; Tag 02NW"
+  },
+  "same_as": []
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.AffineLineDenseOpenFiniteComplement",
+  "file": "lean/Sheaf/AlgebraicGeometry/AffineLineDenseOpenFiniteComplement.lean",
+  "declaration": "AlgebraicGeometry.AffineSpace.exists_dense_affine_open_isFinite_closedComplement",
+  "statement": "theorem exists_dense_affine_open_isFinite_closedComplement\n    (Y : Scheme.{u}) [IsAffine Y] [Algebra.FiniteType ℤ Γ(Y, ⊤)]\n    (U : (AffineSpace (ULift.{u} (Fin 1)) Y).Opens)\n    (hU : Dense (U : Set (AffineSpace (ULift.{u} (Fin 1)) Y))) :\n    ∃ (R : Type u) (_ : CommRing R) (_ : Algebra.FiniteType ℤ R)\n      (g : Spec (.of R) ⟶ Y) (_ : IsOpenImmersion g),\n      Dense (Set.range g.base) ∧\n      ∃ (Z : Scheme.{u}) (i : Z ⟶ AffineSpace (ULift.{u} (Fin 1)) (Spec (.of R)))\n        (_ : IsClosedImmersion i),\n        Set.range i.base =\n          ((AffineSpace.map (ULift.{u} (Fin 1)) g ⁻¹ᵁ U :\n            (AffineSpace (ULift.{u} (Fin 1)) (Spec (.of R))).Opens) : Set _)ᶜ ∧\n        IsFinite (i ≫\n          (AffineSpace (ULift.{u} (Fin 1)) (Spec (.of R)) ↘ Spec (.of R)))",
+  "branch": "sheaf-dag",
+  "by": "U2",
+  "date": "2026-10-18"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Dense open in an affine finite-type integer scheme contains a dense principal open; a relative affine line dense-open complement is generically finite",
+   "results": "Read returned signatures: affineOpens, affineBasicOpen, dense affine Zariski subsite, PartialMap.Opens.isDominant_ι, isCompact_and_isOpen_iff_finite_and_eq_biUnion_basicOpen. None states the needed shrinking theorem.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A dense open of a relative affine line has finite complement after shrinking to a dense affine open of the Noetherian affine base",
+   "results": "Returned signatures concern basicOpen constructibility, affine Zariski cover density and equality of restricted sections. No compact-support or shrinking match.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"dense\", \"basicOpen\"",
+   "results": "No hits.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "dense.*basicOpen|basicOpen.*dense|affineLine.*shriek|finite_compl_of_topologicalKrullDim_le_one",
+   "results": "Read Mathlib prime avoidance and minimal-prime topology, and source AffineSpace.Fiber, ConstructibleSheaf.GenericConstancy and Mathlib.Topology.KrullDimension. Reused the dimension-one finite-boundary theorem and generic constancy; no duplicate of these three new statements.",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261018T091413-L-3259206",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U2",
+  "result": "pass",
+  "landing": "20261018T091413-L-3259206",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
