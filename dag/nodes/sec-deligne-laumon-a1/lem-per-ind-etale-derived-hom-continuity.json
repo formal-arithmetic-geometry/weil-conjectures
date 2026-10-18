@@ -15,9 +15,172 @@
   "def-weil-pbc-constructible-complexes",
   "def-weil-pbc-site-comparison-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [det-sf-comparison-affine-continuity] to the given presentation and $L$: its equivalence of filtered derived section complexes is exactly the first displayed comparison, with the same restriction maps and the pro-etale slice interpretation. Its hypotheses are precisely affineness of the stages, cofiltered smallness, affine transitions, discrete coefficients, and bounded-below $L$. This already proves the sections assertion, without a dimension bound.",
+   "uses": [
+    "det-sf-comparison-affine-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Corollary 5.1.6, second assertion"
+   }
+  },
+  {
+   "text": "For the Hom assertion, apply [lem-weil-pbc-filtered-category-directed-cofinal] to $I^{\\mathrm{op}}$ and take opposites on the scheme diagram. It preserves its limit and all the filtered colimits in question. We may thus assume a nonempty directed index set. Fix a stage $0$ and restrict to $i\\geq0$: a representative at $i$ moves to any common upper bound of $i,0$, and equality of two representatives is still witnessed at a common later stage. The same common-upper-bound construction extends cones uniquely, so this tail also preserves the limit. Put $S=U_0$, $L_0=j_0^*L$, $K_0=j_0^*K$, and denote later and limit pullbacks by subscripts $i$ and $U$. The functor of [prop-weil-pbc-inverse-image-modules-exact] preserves cohomology and lower bounds, and its derived functor preserves triangles [lem-sf-exact-functor-derived-triangulated]. The cohomology sheaves of $K_0$ are $h^{-1}\\mathcal H^q(K)$, $h=j_0$, so $K_0$ is bounded in the same range; we check each is constructible [def-weil-pbc-etale-constructible-sheaf]. Take a stratification $(\\iota_k:Z_k\\to X)$ witnessing constructibility of $\\mathcal H^q(K)$. The base changes $\\iota'_k:Z'_k=Z_k\\times_XS\\to S$ form a stratification with strata $h^{-1}(X_k)$ [lemma-constructible-pullback-stratification], which are constructible subsets [lem-pur-scheme-constructible-preimage]. With $g_k:Z'_k\\to Z_k$ the projection, $\\iota_k'^{-1}h^{-1}\\cong g_k^{-1}\\iota_k^{-1}$, both being inverse image along $\\iota_kg_k=h\\iota'_k$. If $\\{W_m\\to Z_k\\}$ is an etale covering with $(\\iota_k^{-1}\\mathcal H^q(K))|_{W_m}\\cong\\underline{M_m}$, $M_m$ finite, its base change to $Z'_k$ is an etale covering on whose members the pullback is $\\cong\\underline{M_m}$ [lemma-constructible-pullback-constant]. Fix $b$ with $L_0\\in D^{\\geq b}$; every $L_i,L_U$ has this same bound.",
+   "uses": [
+    "lem-weil-pbc-filtered-category-directed-cofinal",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lemma-constructible-pullback-stratification",
+    "lemma-constructible-pullback-constant",
+    "def-weil-pbc-etale-constructible-sheaf",
+    "lem-pur-scheme-constructible-preimage"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 0032 (directed cofinal replacement), 03Q1 (inverse image), 03RZ (constructibility); elementary tail argument written here"
+   }
+  },
+  {
+   "text": "For any scheme $T$ and etale object $v:V\\to T$, put $P_V=v_!A_V$. By [lem-weil-pbc-module-sheaves-grothendieck-abelian], this is the sheafification of the free module presheaf $A_T[h_V]$, with coefficients in the constant ring sheaf $A_T$. The adjunction of [def-weil-presheaf-modules-sheafification] and [lem-weil-pbc-free-yoneda-presheaf-module] give $\\operatorname{Hom}(P_V,M)=M(V)$: the map sends $f$ to $f(e_{1_V})$, with inverse sending $e_\\varphi$ to the restriction of that section along $\\varphi$. Choose a bounded-below injective representative $J$ of any $N\\in D^+(T_{\\mathrm{et}},A)$ by [lem-sc-bounded-below-injective-resolution]. By [lem-pe-injective-complex-slice-section-model], $J(V)$ computes $R\\Gamma(V,N|_V)$ and its restriction maps. Apply the preceding ordinary Hom formula degree by degree. By [lem-sc-kinjective-quasi-iso-comparison], cohomology of $\\operatorname{Hom}^{\\bullet}(P_V,J)$ computes $\\operatorname{Hom}_{D(T_{\\mathrm{et}},A)}(P_V,N[n])$: cocycles are maps $P_V\\to J[n]$, and boundaries are null homotopies. We obtain the natural identification with $H^nR\\Gamma(V,N|_V)$ for every integer $n$.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-free-yoneda-presheaf-module",
+    "lem-sc-bounded-below-injective-resolution",
+    "lem-pe-injective-complex-slice-section-model",
+    "lem-sc-kinjective-quasi-iso-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03DI, equation-map-lower-shriek-OU-into-module; bounded-injective evaluation on localized sites"
+   }
+  },
+  {
+   "text": "Define $\\theta_C^n:\\varinjlim_i\\operatorname{Hom}(C_i,L_i[n])\\to\\operatorname{Hom}(C_U,L_U[n])$ by inverse image, for $C\\in D(S_{\\mathrm{et}},A)$. For an affine etale $V\\to S$ take $C=P_V$. The sheaf base-change isomorphism [lem-weil-pbc-etale-shriek-base-change-modules], together with pullback of constants [lemma-constructible-pullback-constant], identifies $C_i$ with $P_{V_i}$ for $V_i=V\\times_SU_i$, and likewise at $U$. All $V_i$ are affine by [lem-weil-pbc-fibre-product-affine-spectra], hence qcqs by [lem-weil-pbc-affine-scheme-qcqs]. Their transitions are affine by [lem-weil-pbc-fibre-product-affine-transition], applied to the identity on $V,S$ and $U_{i'}\\to U_i$. The universal property of fibre products [def-pc-fibre-product] identifies $V_U$ with $\\varprojlim_iV_i$: a map to either side is a map to $V$ and a compatible cone to $U_i$ agreeing over $S$. Apply [lem-weil-pbc-derived-cohomology-continuity] to the pullbacks of $L_0|_V$ on this system (with initial stage $V$). Step 3 identifies its restriction comparison in degree $n$ with $\\theta_{P_V}^n$. Thus this map is an isomorphism for every $n$. The identification is of the actual map: pulling back $e_\\varphi\\mapsto s|_\\varphi$ gives $e_{\\varphi'}\\mapsto (s|_{V_i})|_{\\varphi'}$ on the fibre product, which is the section restriction formula.",
+   "uses": [
+    "lem-weil-pbc-etale-shriek-base-change-modules",
+    "lemma-constructible-pullback-constant",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-fibre-product-affine-transition",
+    "def-pc-fibre-product",
+    "lem-weil-pbc-derived-cohomology-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03S6 (shriek base change), 01JO (affine fibre products), 0GIT (lemma-colimit-complexes)"
+   }
+  },
+  {
+   "text": "Let $\\mathcal E$ consist of the $C$ for which all $\\theta_C^n$ are isomorphisms. It contains the generators of step 4 and their finite sums and shifts. It is closed under taking the third object of a triangle when it contains the other two. Indeed inverse image gives triangles and their commuting comparison ladders [lem-sf-exact-functor-derived-triangulated]. Apply [lem-weil-pbc-hom-out-of-triangle-exact], and its rotations and shifts, to get the two long exact Hom sequences. Their filtered colimit remains exact by [lem-weil-pbc-filtered-colimit-abelian-groups-exact]. The five consecutive terms around any degree have four comparison isomorphisms, so [lem-weil-pbc-five-lemma] gives the fifth. In particular every finite complex with terms finite sums of the generators belongs to $\\mathcal E$: induct on its number of nonzero terms using its brutal filtration. Adding its lowest term expresses it as a cone of the differential to the already constructed higher-degree subcomplex (with the appropriate shift). These are the cone triangles defining the derived triangulation [def-weil-abstract-derived-category].",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-hom-out-of-triangle-exact",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "lem-weil-pbc-five-lemma",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0149 (lemma-representable-homological), Tag 05RR (derived cone triangulation); finite brutal-filtration induction"
+   }
+  },
+  {
+   "text": "Let $F$ be a constructible sheaf on the affine scheme $S$. For a positive integer $r$, use the exact sequence provided by [lem-trf-constructible-etale-finite-affine-syzygy]: $0\\to K_r\\to E_{r-1}\\to\\cdots\\to E_0\\to F\\to0$, each $E_a$ a finite sum of affine etale generators. Form the finite complex $P_r=(E_{r-1}\\to\\cdots\\to E_0)$ in degrees $1-r,\\ldots,0$ and its augmentation $P_r\\to F[0]$. The cone $C_r$ has $K_r$ as its sole cohomology, in degree $-r$: this follows directly by computing the kernels and images in the displayed exact sequence. Thus $C_r\\in D^{\\leq-r}$, and $P_r\\in\\mathcal E$ by step 5. Exact inverse image [prop-weil-pbc-inverse-image-modules-exact] preserves this sequence, the cone calculation, and the bound $C_{r,i},C_{r,U}\\in D^{\\leq-r}$. No infinite resolution or projectivity of $E_a$ is being assumed.",
+   "uses": [
+    "lem-trf-constructible-etale-finite-affine-syzygy",
+    "def-weil-abstract-derived-category",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 095N (finite affine presentations), 03RZ (constructible kernels), 03S8 (constructible generators); finite cone computation"
+   }
+  },
+  {
+   "text": "Fix $n\\in\\mathbf Z$ and choose $r\\geq1$ with $r>n+1-b$. The bounds of step 6 and standard t-structure orthogonality [def-sbc-standard-tstructure-derived-category, def-weil-t-structure] imply $\\operatorname{Hom}(C_{r,i},L_i[n])=\\operatorname{Hom}(C_{r,i},L_i[n+1])=0$, and the same at $U$: indeed $-r<b-n-1\\leq b-n$. Apply [lem-weil-pbc-hom-out-of-triangle-exact] to $P_{r,i}\\to F_i\\to C_{r,i}\\to P_{r,i}[1]$. The exact segment with those two zero end terms gives $\\operatorname{Hom}(F_i,L_i[n])\\simeq\\operatorname{Hom}(P_{r,i},L_i[n])$, and similarly on $U$. These are precomposition by the pulled-back augmentation; they therefore commute with further pullback. Their colimits identify $\\theta_F^n$ with $\\theta_{P_r}^n$, already an isomorphism by step 5. Since $n$ was arbitrary, every constructible sheaf $F$ lies in $\\mathcal E$. The choice of $r$ depends on $n,b$, not on $i$ and not on a cohomological-dimension bound.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-t-structure",
+    "lem-weil-pbc-hom-out-of-triangle-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Standard derived t-structure orthogonality and Tag 0149; finite-resolution cutoff argument written here"
+   }
+  },
+  {
+   "text": "Apply finite Postnikov induction to the bounded constructible complex $K_0$. The successive triangles of [lem-weil-pbc-truncation-triangle] are $\\tau_{\\leq q-1}K_0\\to\\tau_{\\leq q}K_0\\to\\mathcal H^q(K_0)[-q]\\to\\tau_{\\leq q-1}K_0[1]$. Each shifted cohomology sheaf belongs to $\\mathcal E$ by step 7 and shift closure. Below the lowest nonzero cohomology the truncation is zero; induction up to the highest degree, using triangle closure from step 5, proves $K_0\\in\\mathcal E$. Consequently the second displayed comparison is an isomorphism on every cohomology group.",
+   "uses": [
+    "lem-weil-pbc-truncation-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 08J5, canonical truncation triangles; finite Postnikov induction"
+   }
+  },
+  {
+   "text": "Finally, the group comparisons just proved are the cohomology of the specified comparison of global derived Hom complexes: [lem-sfb-derived-internal-hom-sections-model] computes global derived Hom by the ordinary Hom complex into a K-injective representative and identifies its $H^n$ with $\\operatorname{Hom}(K,L[n])$. The representative relations for a filtered module colimit are those of the underlying group colimit, with scalar multiplication induced on representatives. Exactness of filtered group colimits [lem-weil-pbc-filtered-colimit-abelian-groups-exact] and [src-weil-homology-preserves-exact-colimits] therefore identify cohomology of the filtered Hom-complex colimit with the colimit of these groups. A map inducing isomorphisms on all cohomology is inverted in the derived category [def-weil-abstract-derived-category]. All maps used are inverse-image maps on morphisms or restrictions on sections, so the comparisons are natural in both variables. More explicitly, for a derived morphism $f:C\\to L[n]$ and a pullback $h^*$ the map used is $f\\mapsto h^*f$; for a section $s$ it is $s\\mapsto s|$. Evaluation commutes with these maps because $h^*(f\\circ a)=h^*f\\circ h^*a$, and in the free models its formula is the basis-element calculation in steps 3-4. Homotopies, being equations $f-g=dh+hd$, obey the same restriction identity. Hence these are the evaluation-compatible canonical comparisons, independent of resolution choices.",
+   "uses": [
+    "lem-sfb-derived-internal-hom-sections-model",
+    "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "src-weil-homology-preserves-exact-colimits",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 08J9 (derived internal Hom), Tag 03DI (evaluation), exact filtered-colimit cohomology; canonical pullback compatibility"
+   }
+  }
+ ],
+ "proof_deps": [
+  "det-sf-comparison-affine-continuity",
+  "lem-weil-pbc-filtered-category-directed-cofinal",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lemma-constructible-pullback-stratification",
+  "lemma-constructible-pullback-constant",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "lem-pur-scheme-constructible-preimage",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-free-yoneda-presheaf-module",
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-pe-injective-complex-slice-section-model",
+  "lem-sc-kinjective-quasi-iso-comparison",
+  "lem-weil-pbc-etale-shriek-base-change-modules",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-fibre-product-affine-transition",
+  "def-pc-fibre-product",
+  "lem-weil-pbc-derived-cohomology-continuity",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-five-lemma",
+  "def-weil-abstract-derived-category",
+  "lem-trf-constructible-etale-finite-affine-syzygy",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-weil-t-structure",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-sfb-derived-internal-hom-sections-model",
+  "src-weil-homology-preserves-exact-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Corollary 5.1.6 and Lemmas 6.3.14-6.3.16; agent finite affine-syzygy proof of the Hom limit calculation, using Stacks 095N, 03RZ, 03S8, 03DI, 03S6 and 0GIT rather than an uncited coproduct-to-filtered-colimit implication."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -53,10 +216,45 @@
    "results": "[loogle] OK 0 hit(s)\n",
    "date": "2026-10-18",
    "verdict": "no match: hits concern ordinary scheme morphisms, structure sheaves, linear duals or inverse limits of schemes; none states this etale derived-sheaf assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*(derivedHom|Ext|continuity)|proetale.*(colimit|Hom)",
+   "results": "{\"t\": \"2026-10-18T11:18:25Z\", \"tool\": \"grep\", \"query\": \"etale.*(derivedHom|Ext|continuity)|proetale.*(colimit|Hom)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/RingTheory/Etale/StandardEtale.lean\", \"Mathlib/RingTheory/Etale/StandardEtale.lean\"], \"digest\": \"62bd192dc8c416da\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern affine limits of schemes, structure-sheaf sections, general exact functors or condensed sheaf definitions; none states constructible etale derived Hom continuity."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale constructible derived Hom continuity inverse limits affine schemes",
+   "results": "{\"t\": \"2026-10-18T11:18:25Z\", \"tool\": \"leansearch\", \"query\": \"Etale constructible derived Hom continuity inverse limits affine schemes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineScheme.hasLimits\", \"AlgebraicGeometry.Scheme.isAffine_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"AlgebraicGeometry.Scheme.exists_isAffine_of_isLimit\", \"AlgebraicGeometry.isAffineHom_π_app\", \"AlgebraicGeometry.AffineScheme.hasColimits\", \"AlgebraicGeometry.exists_appTop_π_eq_of_isLimit\", \"ProfiniteGrp.toLimit_fun_continuous\"], \"digest\": \"badf731ef31765a8\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern affine limits of schemes, structure-sheaf sections, general exact functors or condensed sheaf definitions; none states constructible etale derived Hom continuity."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Etale\", \"colimit\"",
+   "results": "{\"t\": \"2026-10-18T11:18:26Z\", \"tool\": \"loogle\", \"query\": \"\\\"Etale\\\", \\\"colimit\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern affine limits of schemes, structure-sheaf sections, general exact functors or condensed sheaf definitions; none states constructible etale derived Hom continuity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom from bounded constructible etale complexes commutes with affine etale inverse limits for bounded below targets",
+   "results": "{\"t\": \"2026-10-18T11:18:26Z\", \"tool\": \"leanfinder\", \"query\": \"Derived Hom from bounded constructible etale complexes commutes with affine etale inverse limits for bounded below targets\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_app_map_eq_map_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.instLiftingHomotopyCategoryIntUpDerivedCategoryQhQuasiIsoCompMapHomotopyCategoryMapDerivedCategory\"], \"digest\": \"3f4a5fe143603fa4\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern affine limits of schemes, structure-sheaf sections, general exact functors or condensed sheaf definitions; none states constructible etale derived Hom continuity."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded below etale sheaf hypercohomology and Ext from constructible sheaves are continuous along inverse limits",
+   "results": "{\"t\": \"2026-10-18T11:18:35Z\", \"tool\": \"leanfinder\", \"query\": \"Bounded below etale sheaf hypercohomology and Ext from constructible sheaves are continuous along inverse limits\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"LightCondensed\", \"Condensed.profiniteSolid\", \"Condensed.lanSheafProfinite\", \"CondensedMod.ofSheafCompHaus\", \"CondensedMod.ofSheafProfinite\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"Condensed.ofSheafForgetProfinite\"], \"digest\": \"ecb3853247cc4d97\"}",
+   "date": "2026-10-18",
+   "verdict": "no match: the returned declarations concern affine limits of schemes, structure-sheaf sections, general exact functors or condensed sheaf definitions; none states constructible etale derived Hom continuity."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-per-finite-residue-dualizing",
@@ -76,5 +274,139 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-18",
+  "item": "lem-per-ind-etale-derived-hom-continuity",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Proved section continuity using the existing comparison node; supplied a finite affine-etale syzygy and cutoff proof of derived Hom continuity for arbitrary bounded-below targets, avoiding a hidden compactness or cohomological-dimension premise. Reused existing general lemmas throughout; no new nodes. Audited all cited statements, coefficient categories, transition maps, and cutoff signs. Repeated and logged Mathlib searches with two semantic phrasings and retained the inherited searches.",
+  "blueprint": "Serves lem-per-artin-gabber-affine-curve proof Step 3, via lem-per-qbar-arbitrary-field-duality and lem-per-finite-residue-dualizing: finite-residue etale/pro-etale Hom comparison underlying the duality identification. Fills the affine-limit calculation implicit in Bhatt-Scholze Lemma 6.3.16; no change to the perverse unit route.",
+  "tool_uses": [
+   {
+    "node": "det-sf-comparison-affine-continuity",
+    "why": "Discrete bounded-below section comparison already states the first clause, for exactly this affine etale presentation. No node of the perverse unit supplies this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-category-directed-cofinal",
+    "why": "Generic small filtered-category reindexing, preserving both inverse scheme limits and colimits of groups or complexes. No node of the perverse unit supplies this foundational tool."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exact ordinary discrete-coefficient etale inverse image preserves the common cohomology bound and the finite resolution. No node of the perverse unit supplies this foundational tool."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic exact-functor passage to triangulated derived categories gives natural triangle comparison ladders. No node of the perverse unit supplies this foundational tool."
+   },
+   {
+    "node": "lemma-constructible-pullback-stratification",
+    "why": "Generic pullback of finite strata keeps constructibility when replacing the base by one affine stage. No node of the perverse unit supplies this foundational tool."
+   },
+   {
+    "node": "lemma-constructible-pullback-constant",
+    "why": "Generic pullback of constant sheaves preserves the finite local models and the units of free generators. No node of the perverse unit supplies this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-free-yoneda-presheaf-module",
+    "why": "Full free-module Yoneda evaluation formula, including its explicit inverse and naturality. No node of the perverse unit supplies this foundational tool."
+   },
+   {
+    "node": "lem-sc-bounded-below-injective-resolution",
+    "why": "Generic bounded-below injective representative in a small ringed site, with no geometric dimension hypothesis. No node of the perverse unit supplies this foundational tool."
+   },
+   {
+    "node": "lem-pe-injective-complex-slice-section-model",
+    "why": "Generic module injective restriction and canonical section complexes on slices compute generator derived sections. No node of the perverse unit supplies this foundational tool."
+   },
+   {
+    "node": "lem-sc-kinjective-quasi-iso-comparison",
+    "why": "Generic localization bijection into a K-injective complex identifies Hom-complex cohomology with derived morphisms. No node of the perverse unit supplies this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-shriek-base-change-modules",
+    "why": "Generic etale sum-extension base change identifies inverse images of free generators. No node of the perverse unit supplies this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic affine tensor-product fibre product makes the generator testing systems affine. No node of the perverse unit supplies this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic affineness implies qcqs, checking the precise hypothesis of cohomology continuity. No node of the perverse unit supplies this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-transition",
+    "why": "Generic affine stability for induced fibre-product maps checks the transition hypothesis. No node of the perverse unit supplies this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-derived-cohomology-continuity",
+    "why": "Generic bounded-below etale hypercohomology continuity on affine-transition qcqs limits handles free generators. No node of the perverse unit supplies this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-hom-out-of-triangle-exact",
+    "why": "Generic contravariant Hom exactness, used only on the finite resolution and truncation triangles. No node of the perverse unit supplies this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+    "why": "Generic exactness preserves the long exact Hom rows under filtered colimit. No node of the perverse unit supplies this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-five-lemma",
+    "why": "Generic five-lemma transfer proves closure of the comparison property under finite triangles. No node of the perverse unit supplies this foundational tool."
+   },
+   {
+    "node": "lem-trf-constructible-etale-finite-affine-syzygy",
+    "why": "Generic finite affine-etale syzygies on qcqs schemes; its statement supplies the entire finite exact sequence without assuming Noetherianity. No node of the perverse unit supplies this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Generic canonical truncation triangles allow finite Postnikov induction on the source complex. No node of the perverse unit supplies this foundational tool."
+   },
+   {
+    "node": "lem-sfb-derived-internal-hom-sections-model",
+    "why": "Generic small ringed-site Hom-complex model identifies global derived Hom cohomology and evaluation. No node of the perverse unit supplies this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "why": "Its explicit generator formula identifies etale sum-extension of the unit with the sheafification of the free constant-ring-sheaf module presheaf. No node of the perverse unit supplies this foundational tool."
+   },
+   {
+    "node": "src-weil-homology-preserves-exact-colimits",
+    "why": "Generic exact-colimit homology interchange; it recovers the complex-level statement from all degree comparisons. No node of the perverse unit supplies this foundational tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "det-sf-comparison-affine-continuity",
+  "lem-weil-pbc-filtered-category-directed-cofinal",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lemma-constructible-pullback-stratification",
+  "lemma-constructible-pullback-constant",
+  "lem-weil-pbc-free-yoneda-presheaf-module",
+  "lem-sc-bounded-below-injective-resolution",
+  "lem-pe-injective-complex-slice-section-model",
+  "lem-sc-kinjective-quasi-iso-comparison",
+  "lem-weil-pbc-etale-shriek-base-change-modules",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-fibre-product-affine-transition",
+  "lem-weil-pbc-derived-cohomology-continuity",
+  "lem-weil-pbc-hom-out-of-triangle-exact",
+  "lem-weil-pbc-filtered-colimit-abelian-groups-exact",
+  "lem-weil-pbc-five-lemma",
+  "lem-trf-constructible-etale-finite-affine-syzygy",
+  "lem-weil-pbc-truncation-triangle",
+  "lem-sfb-derived-internal-hom-sections-model",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "src-weil-homology-preserves-exact-colimits"
+ ],
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-N5-db05f6aa6",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-db05f6aa6 (reviewer sub-agent of L); spot-checked: I read the item, all 9 steps, every one of the 28 proof_deps and 6 stmt_deps statements, parent lem-per-finite-residue-dualizing step 5, unit sk-p-dl-a1-perverse, and Bhatt–Scholze Cor. 5.1.6 and Lemmas 6.3.14–6.3.16 with Rem. 6.3.15 (pp. 33, 47–48). The statement is unchanged and true: it is BS 6.3.16's affine reduction with the ordinary constant-A coefficient and nu_X^*. The worker's finite-syzygy cutoff proof replaces BS's compressed step from direct sums to filtered colimits. Checks: I recomputed the cone degree (K_r sits in degree -r) and the cutoff r>n+1-b, which makes both Hom(C_r,L[n]) and Hom(C_r,L[n+1]) vanish; tested n<b and large n. Step 3 (generator Hom = sections via K-injective), step 4 (03S6 base change, affine fibre products with affine transitions, continuity node) and steps 5/8/9 (2-of-3 closure via precomposition only, Postnikov induction, H^n of the colimit) are correct. No new nodes. Duplicate search: lem-trf-bounded-constructible-derived-hom-continuity needs Noetherian stages and a D^b_c target, so it is not a duplicate. Batch-5: lem-trf-constructible-etale-finite-affine-syzygy is generic Stacks 095N/03RZ/03S8 iteration. Its 846-node closure contains no other trace-formula or Poincare-duality node and no nt-assume leaf, and neither assumption gives such a resolution, so I accept it under the escape clause. The 23 tool_uses are generic and accepted. One fault, C1/C4 in step 2: K_0=j_0^*K was said to be bounded constructible citing only the stratification and constant pullbacks. Nothing covered constructibility of the pulled-back strata, which is condition (a) of def-weil-pbc-etale-constructible-sheaf, and the finite-locally-constant pullback was not written out. No ordinary-etale module node states that pullback preserves constructibility: prop-constructible-pullback uses the master definition, which lacks the strata condition. FIX: step 2 now cites lem-pur-scheme-constructible-preimage (a Mathlib leaf) and def-weil-pbc-etale-constructible-sheaf, and writes out the composed inverse image and the base-changed etale covering. proof_deps is updated; no other field changed. Corrected file: fixes/dag/nodes/sec-deligne-laumon-a1/lem-per-ind-etale-derived-hom-continuity.json; full checks in review.md.; 1 file(s) fixed by the reviewer"
  }
 }
