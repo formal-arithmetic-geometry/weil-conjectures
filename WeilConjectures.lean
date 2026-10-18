@@ -4036,6 +4036,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.AffineDirectImageVanishi
 public import WeilConjectures.SixFunctors.Etale.Derived.AlgClosedField
 public import WeilConjectures.SixFunctors.Etale.Derived.BidualitySupport
 public import WeilConjectures.SixFunctors.Etale.Derived.BoundaryDuality
+public import WeilConjectures.SixFunctors.Etale.Derived.BoundedConstructibleUpperShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.ClosedPointSupport
 public import WeilConjectures.SixFunctors.Etale.Derived.ClosedSupportAmplitude
 public import WeilConjectures.SixFunctors.Etale.Derived.ClosedSupportAssembly
