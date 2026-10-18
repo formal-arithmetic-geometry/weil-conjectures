@@ -4795,6 +4795,7 @@ public import WeilConjectures.WeilSheaf.GeometricallyConstant
 public import WeilConjectures.WeilSheaf.GrothendieckLefschetz
 public import WeilConjectures.WeilSheaf.HomologySequence
 public import WeilConjectures.WeilSheaf.HomologyShift
+public import WeilConjectures.WeilSheaf.IntegralCoefficientCohomology
 public import WeilConjectures.WeilSheaf.Karoubian
 public import WeilConjectures.WeilSheaf.KaroubianPointer
 public import WeilConjectures.WeilSheaf.LFunction
