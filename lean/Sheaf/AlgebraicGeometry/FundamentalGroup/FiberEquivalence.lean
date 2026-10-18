@@ -9,13 +9,6 @@ public import Sheaf.AlgebraicGeometry.FundamentalGroup.LocallyConstantEquivalenc
 public import Sheaf.CategoryTheory.Galois.AutProfinite
 public import Mathlib.GroupTheory.Index
 import Sheaf.AlgebraicGeometry.FundamentalGroup.ImageStabilizer
-import Sheaf.AlgebraicGeometry.GaloisCategories
-import Sheaf.CategoryTheory.Galois.AbstractEquivalence
-import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Basic
-import WeilConjectures.AlgebraicGeometry.FundamentalGroup.FiniteEtale
-import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Functoriality
-import WeilConjectures.AlgebraicGeometry.FundamentalGroup.Restriction
-import WeilConjectures.AlgebraicGeometry.GaloisCategories
 
 /-!
 # The fundamental-group equivalence and base change
@@ -65,7 +58,66 @@ theorem exists_fiber_flc_equivalence {Y : Scheme.{w}} [ConnectedSpace Y]
       PreservesFiniteLimits (equivalenceContAction s G).functor ∧
       PreservesFiniteColimits (equivalenceContAction s G).functor ∧
       PreservesFiniteLimits E.functor ∧ PreservesFiniteColimits E.functor := by
-  sorry
+  classical
+  obtain ⟨Φ, hΦ, hβ, _⟩ := exists_finiteEtale_flc_equivalence_sheaf Y
+  obtain ⟨β⟩ := hβ Ω s
+  let E := Φ.symm.trans (equivalenceContAction s G)
+  let K : Y.FLC ⥤ Type (w + 1) :=
+    ObjectProperty.ι _ ⋙ (pointSmallEtale s).sheafFiber (A := Type (w + 1))
+  let B := CategoryTheory.forget FintypeCat.{w} ⋙ uliftFunctor.{w + 1, w}
+  let τ : E.functor ⋙ forget₂ (ContAction FintypeCat.{w} G) FintypeCat.{w} ⋙
+      CategoryTheory.forget FintypeCat.{w} ⋙ uliftFunctor.{w + 1, w} ≅ K :=
+    Functor.isoWhiskerLeft Φ.inverse β.symm ≪≫ Φ.invFunIdAssoc K
+  let a : Aut (fiber s) ≃* Aut (fiber s ⋙ B) :=
+    let ha := (Functor.FullyFaithful.ofFullyFaithful B).whiskeringRight Y.FiniteEtale
+    ha.autMulEquivOfFullyFaithful (fiber s)
+  let b : Aut (fiber s ⋙ B) ≃* Aut (Φ.inverse ⋙ fiber s ⋙ B) :=
+    (Functor.FullyFaithful.ofFullyFaithful
+      ((Functor.whiskeringLeft _ _ _).obj Φ.inverse)).autMulEquivOfFullyFaithful _
+  let γ₀ : G ≃* Aut K :=
+    (toAutMulEquiv (fiber s) G).trans (a.trans (b.trans (Aut.autMulEquivOfIso τ)))
+  have hact (F : Y.FLC) (g : G)
+      (z : ULift.{w + 1} (E.functor.obj F).obj.V) :
+      τ.hom.app F ⟨((E.functor.obj F).obj.ρ g).hom z.down⟩ =
+        (γ₀ g).hom.app F (τ.hom.app F z) := by
+    change τ.hom.app F ⟨g • (show (fiber s).obj (Φ.inverse.obj F) from z.down)⟩ =
+      τ.hom.app F ⟨g • (show (fiber s).obj (Φ.inverse.obj F) from
+        (τ.inv.app F (τ.hom.app F z)).down)⟩
+    rw [show τ.inv.app F (τ.hom.app F z) = z from
+      ConcreteCategory.congr_hom (τ.hom_inv_id_app F) z]
+  have hcont : Continuous γ₀ := by
+    change @Continuous G (Aut K) _
+      (TopologicalSpace.induced (SetFunctorAut.evaluation K) _) γ₀
+    apply continuous_induced_rng.mpr
+    apply continuous_pi
+    intro F
+    let : TopologicalSpace (K.obj F) := ⊥
+    change @Continuous G (Aut (K.obj F)) _ (TopologicalSpace.induced
+      (fun σ : Aut (K.obj F) ↦ (σ.hom : K.obj F → K.obj F)) _) _
+    apply continuous_induced_rng.mpr
+    apply continuous_pi
+    intro x
+    change Continuous fun g : G ↦ τ.hom.app F
+      ⟨g • (show (fiber s).obj (Φ.inverse.obj F) from (τ.inv.app F x).down)⟩
+    let : ContinuousSMul G ((fiber s).obj (Φ.inverse.obj F)) :=
+      IsFundamentalGroup.continuous_smul _
+    have hc : Continuous (fun y : (fiber s).obj (Φ.inverse.obj F) ↦
+        τ.hom.app F ⟨y⟩) := continuous_of_discreteTopology
+    exact hc.comp (continuous_id.smul continuous_const)
+  have (F : Y.FLC) : Finite (K.obj F) := by
+    let i : K.obj F → ULift.{w + 1} ((fiber s).obj (Φ.inverse.obj F)) := τ.inv.app F
+    exact Finite.of_injective i
+      ((ConcreteCategory.isIso_iff_bijective (τ.inv.app F)).mp inferInstance).1
+  have : T2Space (Aut K) :=
+    ((SetFunctorAut.evaluation_isClosedEmbedding_and_profinite K).2
+      (fun F ↦ inferInstance)).2.1
+  let γ : G ≃ₜ* Aut K :=
+    { γ₀ with
+      continuous_toFun := hcont
+      continuous_invFun := hcont.continuous_symm_of_equiv_compact_to_t2 }
+  refine ⟨Φ, E, γ, hΦ, ?_, ⟨τ, hact⟩, inferInstance, inferInstance,
+    inferInstance, inferInstance⟩
+  exact ⟨Functor.isoWhiskerRight Φ.unitIso.symm (equivalenceContAction s G).functor⟩
 
 /-- Base change corresponds to restriction of the action along the continuous map on π₁.
 Source: Stacks Project, Theorem 0BND (3)
@@ -90,7 +142,23 @@ theorem fiber_equivalence_baseChange
           (equivalenceContAction (s ≫ f) GY).functor ⋙ ContAction.res FintypeCat.{w} h,
         ∀ (P : Y.FiniteEtale) (z : (fiber s).obj ((pullback f).obj P)),
           (η.hom.app P).hom.hom z = (pullbackFiberIso f s).hom.app P z := by
-  sorry
+  let (Q : X.FiniteEtale) : ContinuousSMul GX ((fiber s).obj Q) :=
+    IsFundamentalGroup.continuous_smul Q
+  let h : GX →ₜ* GY :=
+    ⟨fundamentalGroupMap (pullbackFiberIso f s) GX GY,
+      continuous_fundamentalGroupMap (pullbackFiberIso f s) GX GY⟩
+  refine ⟨h, rfl, ?_⟩
+  let η : pullback f ⋙ (equivalenceContAction s GX).functor ≅
+      (equivalenceContAction (s ≫ f) GY).functor ⋙ ContAction.res FintypeCat h :=
+    NatIso.ofComponents (fun P ↦ ObjectProperty.isoMk _
+      (Action.mkIso ((pullbackFiberIso f s).app P) (fun g ↦ by
+        ext z
+        exact (fundamentalGroupMap_smul (pullbackFiberIso f s) GX GY g P z).symm)))
+      (fun {P Q} φ ↦ by
+        apply ObjectProperty.hom_ext
+        apply Action.Hom.ext
+        exact (pullbackFiberIso f s).hom.naturality φ)
+  exact ⟨η, fun _ _ ↦ rfl⟩
 
 /-- For finite étale base change the map is injective with open finite-index stabilizer image.
 Source: SGA 1, Exposé V, Proposition 6.13 and §7, p. 116

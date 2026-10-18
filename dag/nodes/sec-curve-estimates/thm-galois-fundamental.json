@@ -19,10 +19,9 @@
  ],
  "proof": [
   {
-   "text": "*The equivalence on $\\mathrm{F\\acute Et}(Y)$.* By [lem-fet-galois-category] the pair $(\\mathrm{F\\acute Et}(Y),F_{\\bar y})$, $F_{\\bar y}(P)=|P_{\\bar y}|$, is a Galois category. By [thm-galois-abstract-equivalence], with $G=\\operatorname{Aut}(F_{\\bar y}|_{\\mathrm{F\\acute Et}(Y)})$, the functor $P\\mapsto|P_{\\bar y}|$ with its $G$-action is an equivalence of $\\mathrm{F\\acute Et}(Y)$ with the finite sets with continuous $G$-action, $G$ being profinite by [lem-galois-aut-profinite]. The group $\\pi_1(Y,\\bar y)$ of [def-galois-fibre-functor] is the automorphism group of the fibre functor on $\\mathrm{FLC}(Y)$; the equivalence $\\Phi:\\mathrm{F\\acute Et}(Y)\\to\\mathrm{FLC}(Y)$ of [thm-galois-lc-etale] comes with an isomorphism $F_{\\bar y}\\circ\\Phi\\cong F_{\\bar y}$, and conjugation by $\\Phi$ and this isomorphism is an isomorphism $\\pi_1(Y,\\bar y)\\cong G$ of groups compatible with the evaluation embeddings into $\\prod\\operatorname{Aut}(F_{\\bar y}(-))$ (the factors indexed by $P$ and by $\\Phi(P)$ are identified, and every object of $\\mathrm{FLC}(Y)$ is isomorphic to some $\\Phi(P)$), hence a homeomorphism. So $F_{\\bar y}:\\mathrm{F\\acute Et}(Y)\\to\\pi_1(Y,\\bar y)\\text{-}\\mathbf{Set}$ is an equivalence.",
+   "text": "The existing equivalenceContAction of [lem-fet-galois-category] supplies the finite-etale equivalence with continuous finite G-actions. Apply [thm-galois-lc-etale] to obtain the Yoneda equivalence Phi and its fibre comparison beta. Put E = Phi.inverse followed by equivalenceContAction, and let K be the FLC geometric-stalk functor of [def-galois-fibre-functor]. Whiskering beta inverse by Phi.inverse and composing with the counit gives tau from the underlying lifted finite-set functor of E to K. The fully faithful inclusion of finite sets into lifted sets identifies the corresponding automorphism groups. Precomposition by Phi.inverse is fully faithful on functor categories and therefore also identifies automorphism groups; conjugation by tau then gives an algebraic isomorphism gamma from G to Aut(K), starting with the existing toAutMulEquiv of the finite-etale fibre functor. Its component at F sends x to tau_F(g acting on the down-component of tau_F inverse(x)).",
    "uses": [
     "lem-fet-galois-category",
-    "thm-galois-abstract-equivalence",
     "lem-galois-aut-profinite",
     "def-galois-fibre-functor",
     "thm-galois-lc-etale"
@@ -34,11 +33,12 @@
    }
   },
   {
-   "text": "*The equivalence on $\\mathrm{FLC}(Y)$.* By [thm-galois-lc-etale] the functor $\\Phi:P\\mapsto\\underline{\\operatorname{Hom}}_Y(-,P)$ is an equivalence $\\mathrm{F\\acute Et}(Y)\\to\\mathrm{FLC}(Y)$ compatible with the fibre functors, $\\Phi(P)_{\\bar y}\\cong|P_{\\bar y}|$ naturally in $P$; by [def-galois-fibre-functor] $\\pi_1(Y,\\bar y)$ acts on $\\mathcal F_{\\bar y}$ by evaluation, and the isomorphism $\\Phi(P)_{\\bar y}\\cong|P_{\\bar y}|$ is $\\pi_1$-equivariant by the definition of the identification in step 1. Hence $\\mathcal F\\mapsto\\mathcal F_{\\bar y}$ on $\\mathrm{FLC}(Y)$ is isomorphic to the composite of a quasi-inverse of $\\Phi$ with the equivalence of step 1, and is an equivalence $\\mathrm{FLC}(Y)\\to\\pi_1(Y,\\bar y)\\text{-}\\mathbf{Set}$.",
+   "text": "For every F and lifted point z, the formula from step 1 gives gamma(g)_F(tau_F(z)) = tau_F(g acting on z), using tau_F inverse(tau_F(z)) = z. Each evaluation coordinate g -> gamma(g)_F(x) is continuous, since it is the given continuous action on the finite-etale fibre at Phi.inverse(F), followed by a map out of a discrete finite set. The two induced-topology universal properties (first pointwise permutations, then their product) prove continuity of gamma for the evaluation topology of [lem-galois-aut-profinite]. Each K(F) is finite because tau_F is a bijection from a lifted finite fibre; the same lemma makes Aut(K) Hausdorff. A continuous equivalence from compact G to Hausdorff Aut(K) has continuous inverse, so gamma is a topological group isomorphism. The unit of Phi supplies Phi.functor followed by E.functor isomorphic to equivalenceContAction. This proves the FLC clause with its required evaluation action.",
    "uses": [
     "thm-galois-lc-etale",
     "def-galois-fibre-functor",
-    "def-galois-categories"
+    "def-galois-categories",
+    "lem-galois-aut-profinite"
    ],
    "elementary": true,
    "source": {
@@ -47,9 +47,8 @@
    }
   },
   {
-   "text": "*Finite limits and colimits.* $\\mathrm{F\\acute Et}(Y)$ has finite limits and finite colimits (axiom 1 of a Galois category, [lem-fet-galois-category]), and so has $\\mathrm{FLC}(Y)$, being equivalent to it. The equivalences of steps 1 and 2 preserve all limits and colimits that exist, by [lem-galois-equivalence-preserves-limits]; in particular a finite limit or colimit of finite etale covers (fibre products, finite coproducts, quotients by finite groups) is sent to the corresponding limit or colimit of finite continuous $\\pi_1(Y,\\bar y)$-sets.",
+   "text": "Both equivalenceContAction and E are equivalences. By [lem-galois-equivalence-preserves-limits], their functors preserve all limits and colimits, hence finite limits and finite colimits. Lean obtains the four required preservation instances directly from these equivalences.",
    "uses": [
-    "lem-fet-galois-category",
     "lem-galois-equivalence-preserves-limits"
    ],
    "elementary": true,
@@ -59,7 +58,7 @@
    }
   },
   {
-   "text": "*Base change.* Let $f:Y'\\to Y$ with $Y'$ connected, $\\bar y'$ a geometric point of $Y'$ and $\\bar y=f\\circ\\bar y'$. By [lem-galois-pi1-functoriality] there is a continuous homomorphism $f_*:\\pi_1(Y',\\bar y')\\to\\pi_1(Y,\\bar y)$ and bijections $\\tau_P:|(P\\times_YY')_{\\bar y'}|\\to|P_{\\bar y}|$, natural in $P$, with $f_*(g)\\tau_P(z)=\\tau_P(gz)$; this is the asserted isomorphism of $\\pi_1(Y',\\bar y')$-sets. (By the same lemma the equivalence of step 1 for $Y'$, composed with base change, is the equivalence of step 1 for $Y$ followed by restriction of the action along $f_*$.)",
+   "text": "Bundle fundamentalGroupMap from [lem-galois-pi1-functoriality] with continuous_fundamentalGroupMap into the continuous homomorphism h. For each cover P, lift the component of pullbackFiberIso to an isomorphism of continuous actions: the commutation equation is exactly fundamentalGroupMap_smul, with the two sides reversed. Naturality is the naturality of pullbackFiberIso after forgetting the action. NatIso.ofComponents assembles these isomorphisms. Its underlying maps are definitionally the required components of pullbackFiberIso.",
    "uses": [
     "lem-galois-pi1-functoriality"
    ],
@@ -87,7 +86,6 @@
  ],
  "proof_deps": [
   "lem-fet-galois-category",
-  "thm-galois-abstract-equivalence",
   "lem-galois-aut-profinite",
   "def-galois-fibre-functor",
   "thm-galois-lc-etale",
@@ -194,22 +192,13 @@
   "note": "Y connected + geometric point (IsAlgClosed); G model per FUNDAMENTAL GROUP tied to Aut of the FLC stalk functor by γ (G1 topology); FEt equivalence = equivalenceContAction; FLC equivalence E tied via Φ (Yoneda) and τ/γ action equation; finite limits/colimits; base change h = fundamentalGroupMap with η components = pullbackFiberIso; finite etale: injective, range = stabilizer of fiberMk, open, finite index; reverted the delivery's change of existing node(s) def-galois-fibre-functor (--revert-nodes; kept as on sheaf-dag)"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-18",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "H1",
+  "reviewer": "COMPILER",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261012T053934-L-2636313",
+  "landing": "20261018T062700-L-631028",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.FiniteEtale.exists_fiber_flc_equivalence",
-   "AlgebraicGeometry.Scheme.FiniteEtale.fiber_equivalence_baseChange",
-   "AlgebraicGeometry.Scheme.FiniteEtale.fiber_equivalence_finiteEtale_baseChange"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.FiniteEtale.exists_fiber_flc_equivalence",
-   "AlgebraicGeometry.Scheme.FiniteEtale.fiber_equivalence_baseChange"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
