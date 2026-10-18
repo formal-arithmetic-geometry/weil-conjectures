@@ -1,0 +1,109 @@
+{
+ "id": "def-sf-etale-support-compositor",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-rational-operations",
+   "place": "Step 15: canonical trace and evaluation normalization of the integral scalar transpose",
+   "via": [
+    "lem-coef-dual-formula-scalar-transpose"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Canonical unbounded etale compact-support compositor",
+ "statement": "Let $A$ be a finite commutative ring and let $f:X\\to Y$ and $g:Y\\to Z$ be morphisms of schemes [def-weil-scheme-morphism-properties]. Fix the compactifications selected by the compactifiability structures on $f$, $g$, and $g\\circ f$ [def-asd-compactifiable] [def-weil-compactifications-refinements], and suppose $f$ and $g\\circ f$ are quasi-compact [def-weil-scheme-morphism-properties]. Use the constant-$A$ etale module derived categories [def-weil-pbc-derived-categories] [def-weil-abstract-derived-category] and the compact-support candidates $F_h^c=Rp_*Dj_!$ [def-amb-etale-compact-support]. Define the canonical compositor $F_fF_g\\xrightarrow{\\sim}F_{g\\circ f}$, with functor products written in left-to-right order, by the proper/open tower construction of Stacks 0F7J and 0F7B(b): writing $d$ for the selected compactification of $g$ and $e$ for that of $g\\circ f$, form $a=e.\\operatorname{ofComp}(d)$ and its restricted compactification $a.\\operatorname{restrict}$ of $f$. First use the inverse canonical compactification comparison $F_f\\cong F_f^{a.\\operatorname{restrict}}$ whiskered by $F_g$; then use the proper/open tower isomorphism $F_f^{a.\\operatorname{restrict}}F_g^d\\cong F_{g\\circ f}^{d.\\operatorname{comp}(a)}$; finally use the canonical comparison $F_{g\\circ f}^{d.\\operatorname{comp}(a)}\\cong F_{g\\circ f}$. The tower isomorphism is assembled from the proper/open interchange, direct-image composition and open-extension composition; its map is the specified canonical construction, not an arbitrary isomorphism of these functors. This node introduces that composite, without asserting its further associativity, unit or refinement coherence equations.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0F7J (lemma-shriek-composition), the proper/open tower in the proof; Tag 0F7B (lemma-shriek-proper-and-open), case (b)"
+ },
+ "stmt_deps": [
+  "def-weil-scheme-morphism-properties",
+  "def-asd-compactifiable",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-derived-categories",
+  "def-weil-abstract-derived-category",
+  "def-amb-etale-compact-support"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical proper open compact support composition and etale proetale comparison natural isomorphism",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"TopologicalSpace.Opens.mapComp\", \"module\": \"Mathlib.Topology.Category.TopCat.Opens\", \"type\": \"(f : X ⟶ Y) (g : Y ⟶ Z) : map (f ≫ g) ≅ map g ⋙ map f\", \"doc\": \"For continuous maps `f : X → Y` and `g : Y → Z`, this provides the natural isomorphism `map(g ∘ f) ≅ (map f) ∘ (map g)`. This identity shows that the `Opens.map` construction, which sends a continuous\"}\n  {\"name\": \"HasCompactSupport.comp_isClosedEmbedding\", \"module\": \"Mathlib.Topology.Algebra.Support\", \"type\": \"∀ {α : Type u_2} {α' : Type u_3} {β : Type u_4} [inst : TopologicalSpace α] [inst_1 : TopologicalSpace α']\\n  [inst_2 : Zero β] {f : α → β},\\n  HasCompactSupport f → ∀ {g : α' → α}, Topology.IsClosedEmbedding g → HasCompactSupport (f ∘ g)\", \"doc\": \"If $ f : X \\\\to \\\\beta $ has compact support and $ g : X' \\\\to X $ is a closed embedding of topological spaces, then the composition $ f \\\\circ g : X' \\\\to \\\\beta $ also has compact support. This follows be\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.comp_iff\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"{f : X ⟶ Y} {g : Y ⟶ Z} [IsProper g] : IsProper (f ≫ g) ↔ IsProper f\", \"doc\": \"If $ g: Y \\\\to Z $ is a proper morphism of schemes, then the composition $ f \\\\circ g: X \\\\to Z $ is proper if and only if $ f: X \\\\to Y $ is proper.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.instCompScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \"[IsProper f] [IsProper g] : IsProper (f ≫ g)\", \"doc\": \"The composition of two proper morphisms of schemes is again a proper morphism.\"}\n  {\"name\": \"AlgebraicGeometry.IsProper.stableUnderComposition\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Proper\", \"type\": \": MorphismProperty.IsStableUnderComposition @IsProper\", \"doc\": \"The property of being a proper morphism of schemes is stable under composition. That is, if $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ are proper morphisms of schemes, then their composition $ g \\\\circ f: X \\\\to\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"[IsOpenImmersion f] [IsOpenImmersion g] : restrictFunctor (f ≫ g) ≅ restrictFunctor g ⋙ restrictFunctor f\", \"doc\": \"For two open immersions $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ between schemes, the restriction functor for the composition $ g \\\\circ f $ is naturally isomorphic to the composition of the restriction fun\"}\n  {\"name\": \"IsProperMap.comp\", \"module\": \"Mathlib.Topology.Maps.Proper.Basic\", \"type\": \"(hg : IsProperMap g) (hf : IsProperMap f) : IsProperMap (g ∘ f)\", \"doc\": \"If $ f : X \\\\to Y $ and $ g : Y \\\\to Z $ are proper maps between topological spaces, then their composition $ g \\\\circ f : X \\\\to Z $ is also a proper map. This follows because for any compact subset $ K \"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.comp_appIso\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"{X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z) [IsOpenImmersion f] [IsOpenImmersion g] (U : X.Opens) :\\n  (f ≫ g).appIso U = Z.presheaf.mapIso (eqToIso (by simp)).op ≪≫ g.appIso _ ≪≫ f.appIso U\", \"doc\": \"For schemes $X, Y, Z$ with open immersions $f: X \\\\to Y$ and $g: Y \\\\to Z$, the isomorphism induced by the composition $f \\\\circ g$ on an open subset $U \\\\subseteq X$ is equal to the composition of the is\"}\n",
+   "date": "2026-10-18",
+   "verdict": "Generic category or geometric comparisons only; no exact Mathlib construction. Reuse existing published Sheaf definitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.isoWhiskerRight, CategoryTheory.Functor.associator",
+   "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CategoryTheory.Functor.triangleIso\", \"module\": \"Mathlib.CategoryTheory.Whiskering\", \"type\": \" {A : Type u₁} [CategoryTheory.Category.{v₁, u₁} A] {B : Type u₂} [CategoryTheory.Category.{v₂, u₂} B] {C : Type u₃} [CategoryTheory.Category.{v₃, u₃} C] (F : CategoryTheory.Functor A B) (G : CategoryTheory.Functor B C) : F.associator (CategoryTheory.Functor.id B) G ≪≫ F.isoWhiskerLeft G.leftUnitor \", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.triangleIso_assoc\", \"module\": \"Mathlib.CategoryTheory.Whiskering\", \"type\": \" {A : Type u₁} [CategoryTheory.Category.{v₁, u₁} A] {B : Type u₂} [CategoryTheory.Category.{v₂, u₂} B] {C : Type u₃} [CategoryTheory.Category.{v₃, u₃} C] (F : CategoryTheory.Functor A B) (G : CategoryTheory.Functor B C) {Z : CategoryTheory.Functor A C} (h : F.comp G ≅ Z) : F.associator (CategoryTheo\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.isoWhiskerRight_twice\", \"module\": \"Mathlib.CategoryTheory.Whiskering\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] {B : Type u₄} [CategoryTheory.Category.{v₄, u₄} B] {H K : CategoryTheory.Functor B C} (F : CategoryTheory.Functor C D) (G : CategoryTheory.Functor\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.isoWhiskerLeft_right\", \"module\": \"Mathlib.CategoryTheory.Whiskering\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] {B : Type u₄} [CategoryTheory.Category.{v₄, u₄} B] (F : CategoryTheory.Functor B C) {G H : CategoryTheory.Functor C D} (α : G ≅ H) (K : CategoryTh\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.isoWhiskerRight_left\", \"module\": \"Mathlib.CategoryTheory.Whiskering\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] {B : Type u₄} [CategoryTheory.Category.{v₄, u₄} B] (F : CategoryTheory.Functor B C) {G H : CategoryTheory.Functor C D} (α : G ≅ H) (K : CategoryTh\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.isoWhiskerRight_twice_assoc\", \"module\": \"Mathlib.CategoryTheory.Whiskering\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] {B : Type u₄} [CategoryTheory.Category.{v₄, u₄} B] {H K : CategoryTheory.Functor B C} (F : CategoryTheory.Functor C D) (G : CategoryTheory.Functor\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.isoWhiskerLeft_right_assoc\", \"module\": \"Mathlib.CategoryTheory.Whiskering\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] {B : Type u₄} [CategoryTheory.Category.{v₄, u₄} B] (F : CategoryTheory.Functor B C) {G H : CategoryTheory.Functor C D} (α : G ≅ H) (K : CategoryTh\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.isoWhiskerRight_left_assoc\", \"module\": \"Mathlib.CategoryTheory.Whiskering\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] {B : Type u₄} [CategoryTheory.Category.{v₄, u₄} B] (F : CategoryTheory.Functor B C) {G H : CategoryTheory.Functor C D} (α : G ≅ H) (K : CategoryTh\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.pentagonIso\", \"module\": \"Mathlib.CategoryTheory.Whiskering\", \"type\": \" {A : Type u₁} [CategoryTheory.Category.{v₁, u₁} A] {B : Type u₂} [CategoryTheory.Category.{v₂, u₂} B] {C : Type u₃} [CategoryTheory.Category.{v₃, u₃} C] {D : Type u₄} [CategoryTheory.Category.{v₄, u₄} D] {E : Type u₅} [CategoryTheory.Category.{v₅, u₅} E] (F : CategoryTheory.Functor A B) (G : Catego\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Functor.pentagonIso_assoc\", \"module\": \"Mathlib.CategoryTheory.Whiskering\", \"type\": \" {A : Type u₁} [CategoryTheory.Category.{v₁, u₁} A] {B : Type u₂} [CategoryTheory.Category.{v₂, u₂} B] {C : Type u₃} [CategoryTheory.Category.{v₃, u₃} C] {D : Type u₄} [CategoryTheory.Category.{v₄, u₄} D] {E : Type u₅} [CategoryTheory.Category.{v₅, u₅} E] (F : CategoryTheory.Functor A B) (G : Catego\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Equivalence.trans_counitIso\", \"module\": \"Mathlib.CategoryTheory.Equivalence\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] (e : C ≌ D) (f : D ≌ E) : (e.trans f).counitIso = ((f.inverse.comp e.inverse).associator e.functor f.functor).symm ≪≫ CategoryTheory.Functor.isoWh\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Equivalence.trans_unitIso\", \"module\": \"Mathlib.CategoryTheory.Equivalence\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {E : Type u₃} [CategoryTheory.Category.{v₃, u₃} E] (e : C ≌ D) (f : D ≌ E) : (e.trans f).unitIso = e.unitIso ≪≫ CategoryTheory.Functor.isoWhiskerRight (e.functor.rightUnitor.symm ≪≫ e.functor.isoWh\", \"doc\": \"\"}\n",
+   "date": "2026-10-18",
+   "verdict": "Generic category or geometric comparisons only; no exact Mathlib construction. Reuse existing published Sheaf definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "unboundedEtaleLowerShriekCompIso|compactSupportSiteComparison",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-18",
+   "verdict": "Generic category or geometric comparisons only; no exact Mathlib construction. Reuse existing published Sheaf definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "DAG definition ownership, upstream source and Sheaf declarations; blueprint_refs.py search",
+   "results": "rg -l unboundedEtaleLowerShriekCompIso|compactSupportSiteComparison /home/ubuntu/weil-newtargets-shared/dag/nodes\n/home/ubuntu/weil-newtargets-shared/dag/nodes/sec-smooth-purity/thm-sf-comp-composition.json\n/home/ubuntu/weil-newtargets-shared/dag/nodes/sec-smooth-purity/lem-amb-compact-support-site-comparison-open.json\n/home/ubuntu/weil-newtargets-shared/dag/nodes/sec-smooth-purity/def-sf-refinement-comparison-isomorphism.json\n/home/ubuntu/weil-newtargets-shared/dag/nodes/sec-six-functors-basics/lem-sfb-quasifinite-compact-support-exact.json\n/home/ubuntu/weil-newtargets-shared/dag/nodes/sec-smooth-purity/cor-cbc-proper-coincidence.json\n/home/ubuntu/weil-newtargets-shared/dag/nodes/sec-smooth-purity/det-sp-et-proet-adjunction-transfer.json\n/home/ubuntu/weil-newtargets-shared/dag/nodes/sec-smooth-purity/def-pur-finite-exceptional-composition.json\n/home/ubuntu/weil-newtargets-shared/dag/nodes/sec-smooth-purity/lem-pur-projection-comparison-etale-origin.json\n/home/ubuntu/weil-newtargets-shared/dag/nodes/sec-smooth-purity/def-smooth-purity-projection-comparison-equation.json\n/home/ubuntu/weil-newtargets-shared/dag/nodes/sec-smooth-purity/lem-sf-class-compact-support-comparison.json\n/home/ubuntu/weil-newtargets-shared/dag/nodes/sec-smooth-purity/lem-pur-exceptional-mate-site-comparison.json\n/home/ubuntu/weil-newtargets-shared/dag/nodes/sec-six-functors/lem-coef-site-closed-counit-transport.json\n/home/ubuntu/weil-newtargets-shared/dag/nodes/sec-smooth-purity/lem-pur-co-smooth-exchange-transport.json\n/home/ubuntu/weil-newtargets-shared/dag/nodes/sec-smooth-purity/lem-pur-finite-coefficient-adjoint-comparisons.json\n/home/ubuntu/weil-newtargets-shared/dag/nodes/sec-smooth-purity/lem-pur-bounded-site-adjunction-transpose.json\n/home/ubuntu/weil-newtargets-shared/dag/nodes/sec-trace-formula/lem-trf-proetale-composition-tower-normalization.json\n/home/ubuntu/weil-newtargets-shared/dag/nodes/sec-smooth-purity/lem-amb-shriek-tensor-composition.json\n/home/ubuntu/weil-newtargets-shared/dag/nodes/sec-smooth-purity/lem-pur-composite-integration-counit.json\n/home/ubuntu/weil-newtargets-shared/dag/nodes/sec-smooth-purity/lem-weil-derived-direct-image-composition.json\n/home/ubuntu/weil-newtargets-shared/dag/nodes/sec-smooth-purity/lem-amb-unbounded-compact-support-comparisons.json\n/home/ubuntu/weil-newtargets-shared/dag/nodes/sec-smooth-purity/lem-pur-compact-support-site-coherence.json\n/home/ubuntu/weil-newtargets-shared/dag/nodes/sec-trace-formula/lem-trf-proper-composition-site-transport.json\n(exit 0)\nrg -l unboundedEtaleLowerShriekCompIso|compactSupportSiteComparison /home/ubuntu/weil-src-slopmaster2/WeilConjectures\n(exit 1)\nrg -l unboundedEtaleLowerShriekCompIso|compactSupportSiteComparison /home/ubuntu/weil-newtargets-shared/lean/Sheaf\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/SecSmoothPurity/FiniteEtaleDualizingNormalization.lean\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Targets/VectorBundlePurity.lean\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/SixFunctors/BoundaryDualityInput.lean\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/CompactSupportSiteCoherence.lean\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/ExceptionalMateSiteComparison.lean\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/FiniteCoefficientAdjointComparisons.lean\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/BoundedSiteAdjunctionTranspose.lean\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/GlobalFiniteLevelCompactSupportBaseChange.lean\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/CanonicalOriginCompactSupportComposition.lean\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/TraceExceptionalAdmissibility.lean\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/FiniteForwardProductSymmetry.lean\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/SiteClosedCounitTransport.lean\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/CompactSupportExchangeTransport.lean\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/ProEtaleCompositionTowerNormalization.lean\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/EtaleProEtaleAdjunctionTransfer.lean\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/PurityFiniteExceptionalComposition.lean\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/Paper/CompositeIntegrationCounit.lean\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/EtaleHorizontalSupportMate.lean\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/UnboundedEtaleCompactSupportComparisons.lean\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/ProperCompositionSiteTransport.lean\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/ProjectionComparisonEtaleOriginEquation.lean\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/ShriekTensorComposition.lean\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/CanonicalCompactSupportSiteComparison.lean\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/CompactSupportSiteComparisonOpen.lean\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/EtaleShriekOpenExchangeAdjoint.lean\n/home/ubuntu/weil-newtargets-shared/lean/Sheaf/AlgebraicGeometry/QuasiFiniteCompactSupportExact.lean\n(exit 0)\npython3 tools/blueprint_refs.py search compact support composition\n0 blueprint nodes match 'compact support composition'\n(exit 0)\npython3 tools/blueprint_refs.py search compact support site comparison\n0 blueprint nodes match 'compact support site comparison'\n(exit 0)",
+   "date": "2026-10-18",
+   "verdict": "No dedicated definition node owns either exact construction. Existing theorem modules expose the definitions; finiteExceptionalComposition is the right-adjoint conjugate, refinementComparisonIsomorphism compares refinements, and fixed-derived-comparisons concern inverse image, so none defines these objects."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-coef-dual-formula-scalar-transpose",
+  "date": "2026-10-18",
+  "group": "Q69"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.UnboundedEtaleCompactSupportComparisons",
+  "declaration": "AlgebraicGeometry.Etale.unboundedEtaleLowerShriekCompIso",
+  "declarations": [
+   "AlgebraicGeometry.Etale.unboundedEtaleLowerShriekCompIso"
+  ],
+  "statement": "def unboundedEtaleLowerShriekCompIso\n    (A : Type (u + 1)) [CommRing A] [Finite A]\n    {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)\n    [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]\n    [QuasiCompact f] [QuasiCompact (f ≫ g)] :\n    rightDerivedLowerShriek (ModuleCat.{u + 1} A) f ⋙\n        rightDerivedLowerShriek (ModuleCat.{u + 1} A) g ≅\n      rightDerivedLowerShriek (ModuleCat.{u + 1} A) (f ≫ g)",
+  "branch": "newtargets-dag",
+  "by": "Q69",
+  "date": "2026-10-18",
+  "existing": true,
+  "note": "Repair of H2/H12 at immutable head 810a9f9ed786: bind exact published definition data, without importing the owning theorem node as a statement prerequisite. No new Lean declaration or theorem is introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-586eb8a1c",
+  "group": "Q69",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-586eb8a1c",
+  "group": "Q69",
+  "result": "fix",
+  "note": "Re-push after the landing-timeout return of 43c8fcc9f615: Lean module byte-identical to the c42114 (PASS) and 43c8 versions; item and 4 new def nodes identical to 43c8; only report and blueprint index differ, so the 43c8 FIX is missing. Statement re-checked on the snapshot: ell != p, E->L inclusion, separated finite type X/Y/f, fixed compactification, actual adjunctions; kappa = exists-unique evaluation/trace normalization; beta = IntegralFiniteExtension.beta, c = scalarPullbackCompleted, alpha = canonical PurCompactSupport.comparison mate T_Y F_R -> F_S T_X; d_M and b' in node order; conclusion exactly eps_S F_S(b') = T_Y(eps_R) alpha^-1 via naturality of the realization and faithful inclusion; lean.statement verbatim; edge cases E=L, ramified, empty, M=0 retained; gates OK. F1 (H12) fixed again: fixes/def-sf-compact-support-site-comparison-construction.json adds lem-weil-pbc-comparison-direct-image-canonical-mate (isIso_fixedComparisonDirectImageMatePlus, used for asIso) to stmt_deps with inline citation, identical to the 43c8 fix that landing PREPARED. Compile: nt_compile --json rc 0, no warnings, 41.8 s at load ~115 and 28-33 s at load ~100; profiler shows 12-17 s kernel time in dualValue (extracting one clause of integral_verdier_biduality); obtain/separate-theorem variants and linter.all false gave no gain, so no Lean change; the earlier 60 s landing timeout was load, retry at lower load."
+ }
+}
