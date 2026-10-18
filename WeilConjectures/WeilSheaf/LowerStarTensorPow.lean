@@ -238,9 +238,6 @@ lemma germ_lowerStar_toIhomDualSection
     rfl
   exact (congrArg (fun f ↦ f.hom (σ ⊗ₜ τ)) e).symm
 
-set_option maxRecDepth 10000 in
-set_option maxHeartbeats 1000000 in
--- unifying the stalks of `φ_* (F^{⊗ (k + 1)})` and of `φ̄_* 𝓗om(F^∨, F^{⊗ k})` unfolds deeply
 /-- **Powers of eigenvalues on stalks of pushforwards of tensor powers.** If `α` is an eigenvalue
 of the local Frobenius on the stalk `(φ_* F)_s` of the pushforward of a lisse Weil sheaf `F`, then
 `α ^ k` is an eigenvalue of the local Frobenius on `(φ_* (F^{⊗ k}))_s`. -/
