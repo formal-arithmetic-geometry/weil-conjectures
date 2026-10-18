@@ -35,7 +35,7 @@
  ],
  "proof": [
   {
-   "text": "The setting supplies separated finite-type $k$-schemes, with $\\ell$ invertible in $k$. They are Noetherian by [lem-weil-pbc-finite-type-over-noetherian] applied to $\\operatorname{Spec}k$ (a field is Noetherian), and finite-dimensional by [lem-kun-dimension-finite-type]. They are qcqs by [lem-weil-pbc-qcqs-over-affine], and $f$ is qcqs by [lem-weil-pbc-qcqs-morphism-permanence](1). Fix a finite $E/\\mathbf Q_\\ell$, put $A=\\mathcal O_E$, choose a uniformizer $\\varpi$, and put $P_n=A/\\varpi^n$. By [lem-weil-l-adic-extension-integers-dvr], $A$ is a DVR with finite residue field. In particular $A$ is Noetherian: every ideal is principal. Since $|\\ell|_E=\\ell^{-1}<1$, clause (5) of that DVR statement writes $\\ell=u\\varpi^e$ with $e>0$ and $u\\in A^\\times$. Thus a sufficiently large power of $\\ell$ kills $P_n$. Each $P_n$ is finite by [lem-weil-valued-dvr-finite-quotients]. Thus $0\\to A\\xrightarrow{\\varpi^n}A\\to P_n\\to0$ is a finite free resolution, for every $n\\ge1$; this is the perfectness needed below. The coefficient identifications [sk-prop-sfb-qlbar-colimit-x] identify the pulled-back integral ring with $A_T=\\varprojlim_n(P_n)_T$ for $T=X,Y$. Its inverse-image identifications are [sk-prop-sfb-cartesian-coefficients](1), so the ordinary ringed-topos direct image for $A_T$ is the functor in the item.",
+   "text": "The setting supplies separated finite-type $k$-schemes, with $\\ell$ invertible in $k$. They are Noetherian by [lem-weil-pbc-finite-type-over-noetherian] applied to $\\operatorname{Spec}k$ (a field is Noetherian), and finite-dimensional by [lem-kun-dimension-finite-type]. They are qcqs by [lem-weil-pbc-qcqs-over-affine], and $f$ is qcqs by [lem-weil-pbc-qcqs-morphism-permanence](1). Fix a finite $E/\\mathbf Q_\\ell$, put $A=\\mathcal O_E$, choose a uniformizer $\\varpi$, and put $P_n=A/\\varpi^n$. By [lem-weil-l-adic-extension-integers-dvr], $A$ is a DVR with finite residue field. In particular $A$ is Noetherian: every ideal is principal. Since $|\\ell|_E=\\ell^{-1}<1$, clause (5) of that DVR statement writes $\\ell=u\\varpi^e$ with $e>0$ and $u\\in A^\\times$. Thus a sufficiently large power of $\\ell$ kills $P_n$. Each $P_n$ is finite by [lem-weil-valued-dvr-finite-quotients]. When $E$ is given abstractly, as a finite normed extension of $\\mathbf Q_\\ell$ whose closed unit ball $\\{x\\in E:\\|x\\|\\le1\\}$ is the listed $\\mathcal O_E$ (or for $\\underline E$ with $E$ such a field), we first reduce to a subfield of $\\Qlb$. A finite extension is algebraic, so [lem-weil-pbc-algebraic-extension-embeds-algebraically-closed] gives a $\\mathbf Q_\\ell$-embedding $\\sigma\\colon E\\to\\Qlb$, with image a finite subextension $E'$. The norm of $E$ is multiplicative (a normed field) and restricts to $|\\cdot|_\\ell$ on $\\mathbf Q_\\ell$ (normed algebra: $\\|c\\cdot1\\|=|c|_\\ell$); so does $x\\mapsto|\\sigma(x)|$, and the uniqueness in [lem-weil-l-adic-extension-absolute-value] makes them equal. Thus $\\sigma\\colon E\\to E'$ is an isometric ring isomorphism, a homeomorphism carrying the closed unit ball onto $\\mathcal O_{E'}$. By the functoriality of $T\\mapsto\\underline T$ in [sk-def-sfb-condensed-ring], $\\sigma$ and $\\sigma^{-1}$ give mutually inverse isomorphisms of condensed rings $\\underline{\\mathcal O}_E\\cong\\underline{\\mathcal O}_{E'}$ and $\\underline E\\cong\\underline{E'}$. Their pullbacks along $p_T$ are ring-sheaf isomorphisms natural in $T$, hence compatible with the coefficient maps of every $f$; scalar transport along them is an isomorphism of module categories commuting with the pushforward and pullback of [sk-def-sfb-module-derived-pushpull] and their derived functors, and it carries finite presentations to finite presentations, so it preserves bounded constructibility. We may therefore assume $E\\subseteq\\Qlb$. In either form the DVR statement applies, since its only hypothesis is an absolute value on $E$ extending $|\\cdot|_\\ell$. Thus $0\\to A\\xrightarrow{\\varpi^n}A\\to P_n\\to0$ is a finite free resolution, for every $n\\ge1$; this is the perfectness needed below. The coefficient identifications [sk-prop-sfb-qlbar-colimit-x] identify the pulled-back integral ring with $A_T=\\varprojlim_n(P_n)_T$ for $T=X,Y$. Its inverse-image identifications are [sk-prop-sfb-cartesian-coefficients](1), so the ordinary ringed-topos direct image for $A_T$ is the functor in the item.",
    "uses": [
     "sk-def-sfb-dc-setting",
     "lem-weil-pbc-finite-type-over-noetherian",
@@ -46,7 +46,10 @@
     "sk-prop-sfb-qlbar-colimit-x",
     "sk-prop-sfb-cartesian-coefficients",
     "sk-def-sfb-module-derived-pushpull",
-    "lem-weil-valued-dvr-finite-quotients"
+    "lem-weil-valued-dvr-finite-quotients",
+    "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+    "lem-weil-l-adic-extension-absolute-value",
+    "sk-def-sfb-condensed-ring"
    ],
    "elementary": false,
    "source": {
@@ -55,11 +58,13 @@
    }
   },
   {
-   "text": "Suppose first $K$ is bounded constructible over $A_X$. Its cohomology has the stratified finite constant local models of [sk-def-sfb-constructible], so condition (iii) applies. The characterization [lem-weil-pbc-integral-stratified-perfect-characterization] identifies this bounded-constructible object with the derived-complete integral category [def-weil-derived-complete-integral-detailed], and its condition (i) supplies compatible etale-origin witnesses for the reductions. Thus $K$ is derived $\\varpi$-complete, each $K_n=K\\otimes^L_{A_X}(P_n)_X$ has bounded constructible classical cohomology and an etale-origin representative, and all $K_n$ have cohomology in one interval $[a,b]$. This supplies completeness and the uniform reduction bounds from a theorem; they are not added to the hypotheses on $K$.",
+   "text": "Suppose first $K$ is bounded constructible over $A_X$. Its cohomology sheaves are constructible in the ring-object sense used by [sk-def-sfb-bounded-constructible]: on the strata of a finite stratification they are pro-étale locally finitely presented over $A_X$, with matrix entries arbitrary sections of $A_X$. Since $X$ is Noetherian (step 1) and $A_X=p_X^*\\underline{\\mathcal O_E}$ for the valuation topology, the implication (i)$\\Rightarrow$(ii) of [lem-sfb-integral-lfp-constant-model-comparison] gives, after changing the stratification, finite constant local models $A_V\\otimes_AP$ with $P$ finitely presented over $A$ [sk-def-sfb-constructible]. So condition (iii) applies. The characterization [lem-weil-pbc-integral-stratified-perfect-characterization] identifies this bounded-constructible object with the derived-complete integral category [def-weil-derived-complete-integral-detailed], and its condition (i) supplies compatible etale-origin witnesses for the reductions. Thus $K$ is derived $\\varpi$-complete, each $K_n=K\\otimes^L_{A_X}(P_n)_X$ has bounded constructible classical cohomology and an etale-origin representative, and all $K_n$ have cohomology in one interval $[a,b]$. This supplies completeness and the uniform reduction bounds from a theorem; they are not added to the hypotheses on $K$.",
    "uses": [
     "lem-weil-pbc-integral-stratified-perfect-characterization",
     "def-weil-derived-complete-integral-detailed",
-    "sk-def-sfb-constructible"
+    "sk-def-sfb-constructible",
+    "lem-sfb-integral-lfp-constant-model-comparison",
+    "sk-def-sfb-bounded-constructible"
    ],
    "elementary": false,
    "source": {
@@ -95,11 +100,12 @@
    }
   },
   {
-   "text": "Steps 3 and 4 say exactly that $M$ is in [def-weil-derived-complete-integral-detailed]: it is derived complete and its reductions are bounded constructible with one common interval. Apply [lem-weil-pbc-integral-stratified-perfect-characterization] on $Y$ in the reverse direction, using its explicit clause identifying that category with condition (iii). The result is bounded cohomology with stratified finite constant local models over $A_Y$, which is bounded constructibility as defined in [sk-def-sfb-bounded-constructible]. This proves the integral case for the ambient $Rf_*$.",
+   "text": "Steps 3 and 4 say exactly that $M$ is in [def-weil-derived-complete-integral-detailed]: it is derived complete and its reductions are bounded constructible with one common interval. Apply [lem-weil-pbc-integral-stratified-perfect-characterization] on $Y$ in the reverse direction, using its explicit clause identifying that category with condition (iii). The result is bounded cohomology with stratified finite constant local models over $A_Y$. By (ii)$\\Rightarrow$(i) of [lem-sfb-integral-lfp-constant-model-comparison] ($Y$ is Noetherian) each cohomology sheaf is constructible in the ring-object sense, which is bounded constructibility as defined in [sk-def-sfb-bounded-constructible]. This proves the integral case for the ambient $Rf_*$.",
    "uses": [
     "def-weil-derived-complete-integral-detailed",
     "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "sk-def-sfb-bounded-constructible"
+    "sk-def-sfb-bounded-constructible",
+    "lem-sfb-integral-lfp-constant-model-comparison"
    ],
    "elementary": false,
    "source": {
@@ -153,6 +159,26 @@
     "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
     "place": "Lemma 5.3(1); Bhatt–Scholze Proposition 6.8.14 and Remark 6.8.15"
    }
+  },
+  {
+   "text": "Finally suppose $\\Lambda=\\underline T$ for a finite discrete commutative ring $T$ with $\\ell^nT=0$. The ring $T$ is Noetherian, being finite, and is annihilated by $\\ell^n$, which is invertible in $k$ (for $n=0$, $T=0$ and every module is zero). For $Z=X,Y$ use the encoding equivalence $E_Z$ of [def-weil-pbc-common-finite-discrete-encoding] with $B=T$, from ordinary module sheaves over the constant ring $T_Z$ to module objects over $T^c_Z=p_Z^*\\underline T$. It is exact, and it sends the regular module $T_Z$ to the regular module $T^c_Z$, because it transports scalars along the ring isomorphism. Put $K'=E_X^{-1}K$ termwise. By [lem-weil-pbc-finite-discrete-constructible-local-piece], every cohomology sheaf of $K'$ is finite locally constant on the strata of a finite stratification, because its image under $E_X$ is locally finitely presented there. So $K'$ is bounded with constructible cohomology in the sense of [sk-thm-pe-constructible-comparison]. Since $X$ is qcqs, that comparison gives $L\\in D^b_c(X_{\\mathrm{et}},T)$ with $K'\\simeq\\nu_X^*L$. Next, [prop-weil-pbc-comparison-direct-image] gives $Rf_{\\mathrm{proét},*}K'\\simeq\\nu_Y^*Rf_{\\mathrm{et},*}L$. By [thm-dg-finite-type-constructibility], applied to the finite ring $T$ and the integer $\\ell^n$ invertible in $k$, $Rf_{\\mathrm{et},*}L$ is bounded constructible. Its cohomology sheaves have finite partitions on each member of a finite affine cover of the Noetherian scheme $Y$, and [lem-weil-pbc-etale-stratification-local-gluing-core] refines them to one finite stratification of $Y$. On each stratum the restriction is locally the constant sheaf of a finite $T$-module. By [lem-weil-pbc-finite-discrete-coefficient-direct-image-conjugation] ($f$ is qcqs by step 1, and $K'$ is bounded below), $Rf_*K$ in module objects over $T^c_Y$ is isomorphic to $E_Y(Rf_{\\mathrm{proét},*}K')\\simeq E_Y\\nu_Y^*Rf_{\\mathrm{et},*}L$. By [lem-weil-pbc-finite-discrete-derived-coefficient-data], $E\\circ\\nu^*$ commutes with restriction to strata and covers. Suppose a sheaf is constant with finite value $P$ on such a piece $V$. Write $P=\\operatorname{coker}(T^m\\to T^n)$, which is possible since $T$ is Noetherian. Exactness of $E_V$ and $E_V(T_V)\\cong T^c_V$ make its image a cokernel of a map $(T^c_V)^m\\to(T^c_V)^n$, so it is finitely presented. Hence $Rf_*K$ is bounded constructible over $T^c_Y$ as in [sk-def-sfb-bounded-constructible]. The coefficient action is the prescribed one because [sk-prop-sfb-cartesian-coefficients](1) identifies $f^{-1}T^c_Y$ with $T^c_X$.",
+   "uses": [
+    "def-weil-pbc-common-finite-discrete-encoding",
+    "lem-weil-pbc-finite-discrete-constructible-local-piece",
+    "sk-thm-pe-constructible-comparison",
+    "prop-weil-pbc-comparison-direct-image",
+    "thm-dg-finite-type-constructibility",
+    "lem-weil-pbc-etale-stratification-local-gluing-core",
+    "lem-weil-pbc-finite-discrete-coefficient-direct-image-conjugation",
+    "lem-weil-pbc-finite-discrete-derived-coefficient-data",
+    "sk-def-sfb-bounded-constructible",
+    "sk-prop-sfb-cartesian-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "§6.8; Stacks Tags 09AI and 09A6"
+   }
   }
  ],
  "proof_deps": [
@@ -166,16 +192,20 @@
   "sk-prop-sfb-cartesian-coefficients",
   "sk-def-sfb-module-derived-pushpull",
   "lem-weil-valued-dvr-finite-quotients",
+  "lem-weil-pbc-algebraic-extension-embeds-algebraically-closed",
+  "lem-weil-l-adic-extension-absolute-value",
+  "sk-def-sfb-condensed-ring",
   "lem-weil-pbc-integral-stratified-perfect-characterization",
   "def-weil-derived-complete-integral-detailed",
   "sk-def-sfb-constructible",
+  "lem-sfb-integral-lfp-constant-model-comparison",
+  "sk-def-sfb-bounded-constructible",
   "prop-weil-pbc-direct-image-limits",
   "lemma-weil-pbc-perfect-projection-formula",
   "lem-weil-pbc-ring-sheaf-change-adjunction",
   "prop-weil-pbc-comparison-direct-image",
   "thm-dg-finite-type-constructibility",
   "lem-sf-integral-direct-image-constructible",
-  "sk-def-sfb-bounded-constructible",
   "def-sfb-rationalization-equivalence",
   "sk-def-sfb-rationalization",
   "det-prop-sfb-qlbar-colimit-x-invert-ell",
@@ -185,7 +215,13 @@
   "lem-pc-right-derived-functor-triangulated",
   "sk-thm-sfb-qlbar-two-colimit",
   "lem-sfb-qlbar-flat",
-  "lem-sfb-extend-to-qlbar-constructible"
+  "lem-sfb-extend-to-qlbar-constructible",
+  "def-weil-pbc-common-finite-discrete-encoding",
+  "lem-weil-pbc-finite-discrete-constructible-local-piece",
+  "sk-thm-pe-constructible-comparison",
+  "lem-weil-pbc-etale-stratification-local-gluing-core",
+  "lem-weil-pbc-finite-discrete-coefficient-direct-image-conjugation",
+  "lem-weil-pbc-finite-discrete-derived-coefficient-data"
  ],
  "proof_origin": {
   "by": "agent",
@@ -234,6 +270,34 @@
    "results": "AlgebraicGeometry.instFiniteCarrierCarrierCommRingCatFiberOfIsFinite; SheafOfModules.LocalGeneratorsData.IsFiniteType.isFiniteType; AlgebraicGeometry.Scheme.Hom.finite_app; AlgebraicGeometry.Scheme.Hom.isConstructible_image; SheafOfModules.LocalGeneratorsData.IsFiniteType; AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit; AlgebraicGeometry.Scheme.Hom.isLocallyConstructible_image; AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit",
    "date": "2026-10-16",
    "verdict": "no match: hits concern general sheaf pushforwards, condensed modules, constructible subsets, or the coefficient sheaf, not constructibility of derived l-adic direct images"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived direct image preserves bounded constructible complexes for finite torsion and adic condensed coefficients",
+   "results": "Condensed.profiniteSolid; CondensedMod.LocallyConstant.functor; CondensedMod.IsSolid; generic condensed-module infrastructure only",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.boundedConstructible, rightDerivedLowerStar, IsFinitenessCoefficient",
+   "results": "0 hits; unknown identifier DerivedCategory.boundedConstructible",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructible.*rightDerivedLowerStar|constructible.*pushforward [Mathlib/]",
+   "results": "none",
+   "date": "2026-10-18",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived pushforward preserves bounded constructible finite torsion sheaves",
+   "results": "TopCat.Sheaf.pushforward; SheafOfModules.pushforward; generic sheaf pushforward only",
+   "date": "2026-10-18",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
@@ -258,11 +322,11 @@
  "chapter": "sec-six-functors-basics",
  "unit": "sk-prop-open-coefficients",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-18",
   "item": "lem-sfb-dc-lower-star-preserves",
   "worker": "stage1",
-  "summary": "Kept the statement and all three coefficient cases. Replaced uncited completeness, reduction, finiteness and scalar-change assertions with existing theorem interfaces; distinguished ambient completed-ring modules from constant finite coefficients; supplied the uniform bound and canonical finite-extension comparisons. No new nodes. Avoided the circular integral-models citation and the absent rationalization-comparison parent.",
-  "blueprint": "Realizes both paragraphs of lem-sfb-dc-lower-star-preserves.proof.md: integral direct image by completeness, finite reductions and finite-coefficient finiteness, then rationalization and finite-field descent. The open-immersion unit uses the same route; the item additionally treats arbitrary morphisms of the stated setting.",
+  "summary": "Retained the existing eight-step adic/rational/Qbar proof and repaired it for the statement extension: the DVR step now explicitly covers rings of integers given as closed unit balls of finite normed extensions, and a final step treats finite discrete rings killed by a power of ell via pro-etale/etale constructible comparison and finite-coefficient finiteness. No new DAG nodes were needed.",
+  "blueprint": "Realizes the imported adic direct-image route in lem-sfb-dc-lower-star-preserves.proof.md, with the added finite-torsion coefficient case supplied by the existing constructible comparison and finite-coefficient finiteness nodes.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-finite-type-over-noetherian",
@@ -372,5 +436,13 @@
    "sk-def-sfb-dc-restricted-functors"
   ]
  },
- "lead_note": "2026-10-17 (L): statement extended to the coefficient cases of IsFinitenessCoefficient (torsion, unit ball); review withdrawn for re-review; the proof steps still treat only O_E, E, Qlbar. Previous review: {\"date\": \"2026-10-16\", \"by\": \"L\", \"reviewer\": \"NT-Codex-Q37-d9be3c030\", \"group\": \"Q37\", \"result\": \"pass\", \"note\": \"mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q37-d9be3c030 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, s"
+ "lead_note": "2026-10-17 (L): statement extended to the coefficient cases of IsFinitenessCoefficient (torsion, unit ball); review withdrawn for re-review; the proof steps still treat only O_E, E, Qlbar. Previous review: {\"date\": \"2026-10-16\", \"by\": \"L\", \"reviewer\": \"NT-Codex-Q37-d9be3c030\", \"group\": \"Q37\", \"result\": \"pass\", \"note\": \"mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q37-d9be3c030 (reviewer sub-agent of L); spot-checked: Read the full item, all cited statements, s",
+ "reviewed": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-cc-NC-af14ec232",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-af14ec232 (reviewer sub-agent of L); spot-checked: I read all of the mathematics. That covers the item, the statement of every cited node, the blueprint main-20261015 lemma and proof, the unit and chapter records, Lean IsFinitenessCoefficient (5 constructors) and boundedConstructible_rightDerivedLowerStar_obj, and Bhatt–Scholze 6.5.9, 6.7.1–6.7.3 and 6.8.11–6.8.14. The statement agrees with the Lean cases and is not weakened. Steps 3, 4 and 6–8 are correct. There are no new nodes, no cycle and no SGA citation in any step. Every citation is on the route, or is one of the already accepted tool_uses, or is a Mathlib leaf. I repaired three faults in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-dc-lower-star-preserves.json. (1) C4/E1, step 1: the coefficient nodes sk-prop-sfb-qlbar-colimit-x, sk-prop-sfb-cartesian-coefficients and the rationalization/flatness nodes are stated only for E inside Qlbar. The unit-ball case and Lean's abstract normed E case were covered only by 'the same argument applies'. I added the transport: an embedding into Qlbar by IsAlgClosed.lift (lem-weil-pbc-algebraic-extension-embeds-algebraically-closed); the uniqueness of the extended absolute value (lem-weil-l-adic-extension-absolute-value) makes it isometric; the functoriality in sk-def-sfb-condensed-ring then gives isomorphic condensed rings. (2) C4, steps 2 and 5: sk-def-sfb-bounded-constructible uses stratified local finite presentation, not finite constant local models, and det-def-sfb-constructible-local-model says the converse fails in general. I now cite lem-sfb-integral-lfp-constant-model-comparison, (i)=>(ii) in step 2 and (ii)=>(i) in step 5. (3) C4/E6, step 9: sk-thm-pe-constructible-comparison concerns ordinary modules over the constant sheaf with classical constructibility, but the step applied it to module objects over p^*T with the lfp notion. I rewrote the step with existing route nodes: def-weil-pbc-common-finite-discrete-encoding, lem-weil-pbc-finite-discrete-constructible-local-piece, lem-weil-pbc-finite-discrete-coefficient-direct-image-conjugation, lem-weil-pbc-finite-discrete-derived-coefficient-data, and lem-weil-pbc-etale-stratification-local-gluing-core to turn affine-local partitions into one stratification. I regenerated proof_deps (40 ids). The unit realized fields are still empty; I left them for the maintainer.; 1 file(s) fixed by the reviewer"
+ }
 }
